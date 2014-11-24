@@ -10,9 +10,9 @@ comments: true
 
 ## STEP 1:
 
-Choose disk with the most optimal ratio IOPS/price. Check out the list of disks in order of IOPS (Input/Output Operations Per Second)  performance: [en.wikipedia.org/wiki/IOPS](http://en.wikipedia.org/wiki/IOPS#Examples).
+Choose a disk with the most optimal ratio IOPS/price. Check out the list of disks in order of IOPS (Input/Output Operations Per Second)  performance: [en.wikipedia.org/wiki/IOPS](http://en.wikipedia.org/wiki/IOPS#Examples).
 
-Quite often SSD disks are released with firmware bugs or with non-optimal configurations, so before putting the system in production checkout the latest.
+Quite often SSD disks are released with firmware bugs or with non-optimal configurations, so before putting the system in production checkout the latest version.
 
 ## STEP 2:
 
@@ -29,7 +29,6 @@ $ sudo dmesg | grep -i ahci
     scsi2 : ahci
 {% endhighlight %}
 
-Quite often by default the `AHCI` is disabled in BIOS, in this case reboot and enable it. 
 Check whether your controller supports `AHCI`:
 
 {% highlight bash %}
@@ -39,7 +38,9 @@ $ sudo lshw | grep -i ahci
     configuration: driver=ahci latency=0
 {% endhighlight %}
 
-I observed without unstable behavior of disks without `AHCI` enabled or even inability to make `TRIM` correctly.
+Quite often the `AHCI` is disabled in BIOS, in this case reboot and enable it.
+
+I observed unstable behavior of disks without `AHCI` enabled and even the inability to execute `TRIM` correctly.
 
 Identify the type of SATA modes available (for ex. SATA-II: 3Gbps gives the theoretical limit of speed 375MB/s)
 
@@ -49,14 +50,14 @@ $ sudo dmesg | grep SATA
     ata1: SATA max UDMA/133 abar m1024@0xfddffc00 port 0xfddffd00 irq 43
 {% endhighlight %}
 
-Check what the disk is supporting
+Check what is supported by disk
 
 {% highlight bash %}
 $ sudo hdparm -I /dev/sda | grep SATA
     Transport:          Serial, ATA8-AST, SATA 1.0a, SATA II Extensions, SATA Rev 2.5, SATA Rev 2.6, SATA Rev 3.0
 {% endhighlight %}
 
-The ideal would be any higher of `SATA Rev 3.0` which gives the 6Gbps or higher speeds.
+The ideal would be any revision higher than `SATA Rev 3.0` which guaranties the 6Gbps or higher speeds.
 
 ## STEP 3:
 
@@ -67,7 +68,7 @@ $ sudo hdparm -I /dev/sda | grep -i trim
        *    Data Set Management TRIM supported (limit 8 blocks)
 {% endhighlight %}
 
-It is very important to have `TRIM` functioning since without it the disk speed will degrade with time due to the fact that the SSD will have to erase the cell before every write operation.
+It is very important to have `TRIM` functioning. Without `TRIM` the disk speed will degrade with time due to the fact that the SSD will have to erase the cell before every write operation.
 
 Let's test it simply by executing `fstrim`
 
@@ -76,7 +77,7 @@ $ sudo fstrim -v /
 /: 98147174400 bytes were trimmed
 {% endhighlight %}
 
-Yes by lets try that `TRIM` is really working
+Lets test whether the `TRIM` is really doing what it should
 
 {% highlight bash %}
 $ sudo wget -O /tmp/test_trim.sh "https://sites.google.com/site/lightrush/random-1/checkiftrimonext4isenabledandworking/test_trim.sh?attredirects=0&d=1"
@@ -93,7 +94,7 @@ or any other from this list [File systems optimized for flash memory](http://en.
 
 If not, you'll better migrate it to `EXT4` at least with the help of this manual
 [Migrating a live system from ext3 to ext4 filesystem](http://www.debian-administration.org/article/643/Migrating_a_live_system_from_ext3_to_ext4_filesystem) or consider the complete
-re-installation of the operatin system.
+re-installation of the operating system.
 
 ## STEP 5:
 
