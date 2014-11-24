@@ -5,6 +5,7 @@ description: "The definitive guide for solid state drive configuratio in linux; 
 date:   2014-11-20 18:05:45
 categories: hardware
 keywords: hardware,ssd,solid-state-drive,linux,configuration,guide
+comments: true
 ---
 
 ## STEP 1:
