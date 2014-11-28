@@ -29,3 +29,6 @@ version:             1.0.0
 
 # social
 googleplus:			+IgorMoiseevAdventurer
+
+# Gems
+#gems: ['jekyll-lunr-js-search']
