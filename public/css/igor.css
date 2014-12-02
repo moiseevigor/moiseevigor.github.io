@@ -1,0 +1,45 @@
+/* http://codepen.io/asawilliams/pen/jFieq */
+.container-4{
+  overflow: hidden;
+  width: 100%;
+  vertical-align: middle;
+  white-space: nowrap;
+  margin-top: -5px;
+  margin-bottom: -5px;
+  margin-left: 3.2rem;
+}
+
+.container-4 input#search{
+  width: 80%;
+  height: 41px;
+  background: white;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid lightgray;
+  font-size: 10pt;
+  color: #65737e;
+  padding-left: 15px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  outline: none;
+}
+
+button.icon{
+  border: none;
+  background: white;
+  color: #505050;
+  opacity: 0;
+  font-size: 125%;
+  outline: none;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.box {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+

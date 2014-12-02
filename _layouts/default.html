@@ -5,94 +5,6 @@
 
   <body>
 
-<!-- http://codepen.io/asawilliams/pen/jFieq -->
-
-    <style>
-.container-4{
-  display: none;
-  overflow: hidden;
-  width: 100%;
-  vertical-align: middle;
-  white-space: nowrap;
-  margin-top: -5px;
-  margin-bottom: -5px;
-}
-/*
-@media (min-width: 38em) {
-  .container-4 {
-    text-align: center;
-    max-width: 26rem;
-    margin-left: 0px;
-  }
-}
-*/
-.container-4 input#search{
-  width: 100%;
-  height: 50px;
-  background: #2b303b;
-  border: none;
-  font-size: 10pt;
-  color: #fff;
-  padding-left: 15px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
-
-.container-4 input#search::-webkit-input-placeholder {
-   color: #65737e;
-}
-
-.container-4 input#search:-moz-placeholder { /* Firefox 18- */
-   color: #65737e;
-}
-
-.container-4 input#search::-moz-placeholder {  /* Firefox 19+ */
-   color: #65737e;
-}
-
-.container-4 input#search:-ms-input-placeholder {
-   color: #65737e;
-}
-
-button.icon{
-  border: none;
-  background: white;
-  color: #4f5b66;
-  opacity: 0;
-  font-size: 125%;
-
-  outline: none;
-  opacity: 1;
-  cursor: pointer;
-
-/*
-  font-size: 10pt;
-  -webkit-transition: all .55s ease;
-  -moz-transition: all .55s ease;
-  -ms-transition: all .55s ease;
-  -o-transition: all .55s ease;
-  transition: all .55s ease;
-*/
-}
-
-.box {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-}
-
-button.icon, button.icon, button.icon{
-  outline: none;
-  opacity: 1;
-  /*margin-left: -50px;*/
-}
-
-button.iconn:hover{
-  background: #505050;
-}
-    </style>
-
     {% include sidebar.html %}
 
     <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
@@ -104,19 +16,29 @@ button.iconn:hover{
             <a href="/" title="Home">{{ site.title }}</a>
             <small>{{ site.tagline }}</small>
           </h3>
-          <div class="container-4">
-            <input type="search" id="search" placeholder="Search..." />
+          <div class="container-4" style="display: none;">
+            <input type="search" id="search" placeholder="Search..." autocomplete="off" name="q"/>
           </div>
       </div>
 
     <div class="box">
-      <button class="icon" onclick="search()"><i class="fa fa-search"></i></button>
+      <button class="icon" onclick="search()"><i id="icon-search-button" class="fa fa-search"></i></button>
     </div>
 
 <script>
 function search() {
-  document.getElementsByClassName('masthead-title')[0].style.display = 'none';
-  document.getElementsByClassName('container-4')[0].style.display = 'block';
+  var mastheadTitle = document.getElementsByClassName('masthead-title')[0],
+      container = document.getElementsByClassName('container-4')[0],
+      iconSearchButton = document.getElementById('icon-search-button');
+
+  mastheadTitle.style.display = (mastheadTitle.style.display === 'none' ? '' : 'none' );
+  container.style.display = (container.style.display === 'none' ? '' : 'none' );
+
+  if(container.style.display === '')
+    document.getElementById('search').focus();
+
+  iconSearchButton.classList.toggle("fa-search");
+  iconSearchButton.classList.toggle("fa-times");
 
 }
 </script>
