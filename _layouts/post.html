@@ -8,6 +8,32 @@ layout: default
   {{ content }}
 </div>
 
+
+<div class="social-share">
+    <a
+      class="social-share-element"
+      id="social-linkedin"
+      href="http://www.linkedin.com/shareArticle?mini=true&title={{ page.title }}&url={{ site.url }}{{ page.url }}&source=http%3a%2f%2fzhangwenli.com"
+      target="_blank"
+      title="Share this post on LinkedIn"><i id="icon-search-button" class="fa fa-linkedin-square"></i></a>
+
+    <a
+      class="social-share-element"
+      id="social-twitter"
+      href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ site.url }}{{ page.url }}&via=moiseev_igor&hashtags={{ page.keywords }}"
+      target="_blank"
+      title="Share this post on Twitter"><i id="icon-search-button" class="fa fa-twitter-square"></i></a>
+
+    <a
+      class="social-share-element"
+      id="social-facebook"
+      href="https://www.facebook.com/sharer/sharer.php?t={{ page.title }}&u={{ site.url }}{{ page.url }}"
+      target="_blank"
+      title="Share this post on Facebook"><i id="icon-search-button" class="fa fa-facebook-square"></i></a>
+
+</div>
+
+
 <div class="related">
   <h2>Related Posts</h2>
   <ul class="related-posts">

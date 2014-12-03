@@ -1,5 +1,5 @@
 /* http://codepen.io/asawilliams/pen/jFieq */
-.container-4{
+.container-4 {
   overflow: hidden;
   width: 100%;
   vertical-align: middle;
@@ -43,3 +43,14 @@ button.icon{
   right: 1rem;
 }
 
+
+.social-share {
+  font-size: 25pt;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2em;
+}
+.social-share a {
+  font-size: 55pt;
+  color: #65737e;
+}
