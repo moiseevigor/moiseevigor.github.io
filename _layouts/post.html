@@ -9,29 +9,110 @@ layout: default
 </div>
 
 
+<style>
+.arrow_box {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid lightgray;
+  height: 40px;
+  width: 63px;
+  border-radius: 5px;
+  margin-top: 3px;
+  font-size: 75%;
+  line-height: 35px;
+}
+.arrow_box:after, .arrow_box:before {
+  bottom: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.arrow_box:after {
+  border-color: rgba(136, 183, 213, 0);
+  border-bottom-color: lightgray;
+  border-width: 5px;
+  margin-left: -5px;
+}
+.arrow_box:before {
+  border-color: rgba(194, 225, 245, 0);
+  border-bottom-color: lightgray;
+  border-width: 8px;
+  margin-left: -8px;
+}
+.tw {
+    line-height: 0;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    float: left;
+}
+</style>
+
+<script>
+function get_counters(requrl, url, callb) {
+  var script = document.createElement('script');
+
+  url = encodeURIComponent(url);
+  script.src = requrl + url + '&callback=' + callb;
+  document.getElementsByTagName('head')[0].appendChild(script);
+}
+
+function callback_twitter(data) {
+  document.getElementById('social-twitter-counter').innerHTML = data.count;
+}
+
+function callback_linkedin(data) {
+  document.getElementById('social-linkedin-counter').innerHTML = data.count;
+  document.getElementById('social-facebook-counter').innerHTML = data.count;
+}
+
+function callback_facebook(data) {
+  console.log(data);
+  //document.getElementById('social-facebook-counter').innerHTML = data.shares;
+}
+
+get_counters('http://urls.api.twitter.com/1/urls/count.json?url=', '{{ site.url }}{{ page.url }}', 'callback_twitter');
+//get_counters('http://graph.facebook.com/', '{{ site.url }}{{ page.url }}', 'callback_facebook');
+get_counters('http://www.linkedin.com/countserv/count/share?url=', '{{ site.url }}{{ page.url }}', 'callback_linkedin');
+
+</script>
+
 <div class="social-share">
-    <a
-      class="social-share-element"
-      id="social-linkedin"
-      href="http://www.linkedin.com/shareArticle?mini=true&title={{ page.title }}&url={{ site.url }}{{ page.url }}&source=http%3a%2f%2fzhangwenli.com"
-      target="_blank"
-      title="Share this post on LinkedIn"><i id="icon-search-button" class="fa fa-linkedin-square"></i></a>
+    <div class="tw">
+      <a
+        class="social-share-element"
+        id="social-linkedin"
+        href="http://www.linkedin.com/shareArticle?mini=true&title={{ page.title }}&url={{ site.url }}{{ page.url }}&source=http%3a%2f%2fzhangwenli.com"
+        target="_blank"
+        title="Share this post on LinkedIn"><i id="icon-search-button" class="fa fa-linkedin-square"></i></a>
+        <div id="social-linkedin-counter" class="arrow_box"></div>
+    </div>
 
-    <a
-      class="social-share-element"
-      id="social-twitter"
-      href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ site.url }}{{ page.url }}&via=moiseev_igor&hashtags={{ page.keywords }}"
-      target="_blank"
-      title="Share this post on Twitter"><i id="icon-search-button" class="fa fa-twitter-square"></i></a>
+    <div class="tw">
+      <a
+        class="social-share-element"
+        id="social-twitter"
+        href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ site.url }}{{ page.url }}&via=moiseev_igor&hashtags={{ page.keywords }}"
+        target="_blank"
+        title="Share this post on Twitter"><i id="icon-search-button" class="fa fa-twitter-square"></i></a>
+        <div id="social-twitter-counter" class="arrow_box"></div>
+    </div>
 
-    <a
-      class="social-share-element"
-      id="social-facebook"
-      href="https://www.facebook.com/sharer/sharer.php?t={{ page.title }}&u={{ site.url }}{{ page.url }}"
-      target="_blank"
-      title="Share this post on Facebook"><i id="icon-search-button" class="fa fa-facebook-square"></i></a>
-
+    <div class="tw">
+      <a
+        class="social-share-element"
+        id="social-facebook"
+        href="https://www.facebook.com/sharer/sharer.php?t={{ page.title }}&u={{ site.url }}{{ page.url }}"
+        target="_blank"
+        title="Share this post on Facebook"><i id="icon-search-button" class="fa fa-facebook-square"></i></a>
+        <div id="social-facebook-counter" class="arrow_box"></div>
+    </div>
 </div>
+<div style="clear: both;"></div>
 
 
 <div class="related">
