@@ -3,8 +3,7 @@ layout: default
 title: Search
 ---
 
-<div id="div-articles">
-</div>
+<div id="div-articles"></div>
 
 <script>
 
@@ -43,24 +42,6 @@ if(q) {
       li.appendChild(desc);
       ul.appendChild(li);
       div_articles.appendChild(ul);
-
-
-/*
-  <ul class="related-posts">
-    {% for post in site.related_posts limit:3 %}
-      {% if post.title !=  page.title %}
-        <li>
-          <h3>
-            <a href="{{ post.url }}">
-              {{ post.title }}
-              <small>{{ post.date | date_to_string }}</small>
-            </a>
-          </h3>
-        </li>
-      {% endif %}
-    {% endfor %}
-  </ul>
-*/
     });
   }
 }
