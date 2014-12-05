@@ -1,0 +1,6 @@
+{
+  "id"    : "{{ site.url }}{{ post.url }}",
+  "title"   : "{{ post.title }}",
+  "date"   : "{{ post.date | date_to_string }}",
+  "content" : "{{ post.content | strip_html | strip_newlines | remove:'\"'  }}"
+}

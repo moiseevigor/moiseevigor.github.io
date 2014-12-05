@@ -8,50 +8,6 @@ layout: default
   {{ content }}
 </div>
 
-
-<style>
-.arrow_box {
-  position: relative;
-  background-color: #fff;
-  border: 1px solid lightgray;
-  height: 40px;
-  width: 63px;
-  border-radius: 5px;
-  margin-top: 3px;
-  font-size: 75%;
-  line-height: 35px;
-}
-.arrow_box:after, .arrow_box:before {
-  bottom: 100%;
-  left: 50%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-}
-
-.arrow_box:after {
-  border-color: rgba(136, 183, 213, 0);
-  border-bottom-color: lightgray;
-  border-width: 5px;
-  margin-left: -5px;
-}
-.arrow_box:before {
-  border-color: rgba(194, 225, 245, 0);
-  border-bottom-color: lightgray;
-  border-width: 8px;
-  margin-left: -8px;
-}
-.tw {
-    line-height: 0;
-    margin-bottom: 20px;
-    margin-right: 20px;
-    float: left;
-}
-</style>
-
 <script>
 function get_counters(requrl, url, callb) {
   var script = document.createElement('script');
@@ -72,6 +28,8 @@ function callback_linkedin(data) {
 function callback_facebook(data) {
   if(data.shares)
     document.getElementById('social-facebook-counter').innerHTML = data.shares;
+  else
+    document.getElementById('social-facebook-counter').innerHTML = 0;
 }
 
 get_counters('http://urls.api.twitter.com/1/urls/count.json?url=', '{{ site.url }}{{ page.url }}', 'callback_twitter');

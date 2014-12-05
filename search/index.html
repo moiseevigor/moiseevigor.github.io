@@ -3,12 +3,66 @@ layout: default
 title: Search
 ---
 
-      <div class="container-4">
-        <input type="search" id="search" placeholder="Search..." />
-        <button class="icon" onclick="location.href='/search'"><i class="fa fa-search"></i></button>
-      </div>
+<div id="div-articles">
+</div>
+
+<script>
+
+if(q) {
+  var result = idx.search(q);
+
+  if(result && result.length > 0) {
+
+    var div_articles = document.getElementById('div-articles');
 
 
+    result.forEach(function(element, index) {
+
+      var article = (docs.filter(function (question) {
+        return (question.id == element.ref)
+      })[0]);
+
+      var ul = document.createElement('ul'),
+          li = document.createElement('li'),
+          h3 = document.createElement('h3'),
+          a = document.createElement('a'),
+          data = document.createElement('span'),
+          desc = document.createElement('div');
+
+      ul.className = 'related-posts';
+
+      a.innerHTML = article.title;
+      a.href = article.id;
+
+      data.innerHTML = ' <small>' + article.date + '</small>';
+      desc.innerHTML = article.content.substring(0, 250) + '...';
+
+      a.appendChild(data);
+      h3.appendChild(a);
+      li.appendChild(h3);
+      li.appendChild(desc);
+      ul.appendChild(li);
+      div_articles.appendChild(ul);
 
 
+/*
+  <ul class="related-posts">
+    {% for post in site.related_posts limit:3 %}
+      {% if post.title !=  page.title %}
+        <li>
+          <h3>
+            <a href="{{ post.url }}">
+              {{ post.title }}
+              <small>{{ post.date | date_to_string }}</small>
+            </a>
+          </h3>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+*/
+    });
+  }
+}
 
+</script>
