@@ -45,9 +45,11 @@ button.icon{
 
 
 .social-share {
-  font-size: 25pt;
+  font-size: 20pt;
   text-align: center;
   margin-bottom: 2em;
+  padding-left: 50%;
+  margin-left: -100px;
 }
 .social-share a {
   font-size: 55pt;

@@ -67,16 +67,15 @@ function callback_twitter(data) {
 
 function callback_linkedin(data) {
   document.getElementById('social-linkedin-counter').innerHTML = data.count;
-  document.getElementById('social-facebook-counter').innerHTML = data.count;
 }
 
 function callback_facebook(data) {
-  console.log(data);
-  //document.getElementById('social-facebook-counter').innerHTML = data.shares;
+  if(data.shares)
+    document.getElementById('social-facebook-counter').innerHTML = data.shares;
 }
 
 get_counters('http://urls.api.twitter.com/1/urls/count.json?url=', '{{ site.url }}{{ page.url }}', 'callback_twitter');
-//get_counters('http://graph.facebook.com/', '{{ site.url }}{{ page.url }}', 'callback_facebook');
+get_counters('https://graph.facebook.com/?id=', '{{ site.url }}{{ page.url }}', 'callback_facebook');
 get_counters('http://www.linkedin.com/countserv/count/share?url=', '{{ site.url }}{{ page.url }}', 'callback_linkedin');
 
 </script>
