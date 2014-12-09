@@ -15,8 +15,6 @@ description:         'Some notes about MySQL and PostgreSQL. Ceph''s Storage clu
 url:                 http://moiseevigor.github.io
 baseurl:             '/'
 paginate:            5
-# http://jekyllrb.com/docs/variables/
-lsi: 			     true
 
 # About/contact
 author:
@@ -32,3 +30,17 @@ googleplus:			+IgorMoiseevAdventurer
 
 # Gems
 #gems: ['jekyll-lunr-js-search']
+
+
+# http://jekyllrb.com/docs/variables/
+# https://github.com/jekyll/jekyll/issues/2516
+lsi: 			     true
+
+exclude:
+  - "*.json"
+  - "*.log"
+  - "*.md"
+  - "bower_components"
+  - "Gemfile*"
+  - "LICENSE"
+  - "node_modules"

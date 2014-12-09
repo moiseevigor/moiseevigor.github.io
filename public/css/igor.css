@@ -49,13 +49,24 @@ button.icon{
   text-align: center;
   margin-bottom: 2em;
   padding-left: 50%;
-  margin-left: -100px;
+  margin-left: -150px;
 }
 .social-share a {
   font-size: 55pt;
   color: #65737e;
 }
-
+.social-share .fa-linkedin-square:hover {
+  color: #1884bb;
+}
+.social-share .fa-twitter-square:hover {
+  color: #55acee;
+}
+.social-share .fa-facebook-square:hover {
+  color: #425f9c;
+}
+.social-share .fa-google-plus-square:hover {
+  color: #dd4b39;
+}
 .arrow_box {
   position: relative;
   background-color: #fff;
@@ -96,3 +107,4 @@ button.icon{
     margin-right: 20px;
     float: left;
 }
+

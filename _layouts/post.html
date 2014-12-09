@@ -32,9 +32,18 @@ function callback_facebook(data) {
     document.getElementById('social-facebook-counter').innerHTML = 0;
 }
 
+var services = {
+  gplus: {
+      cb: function (data) {
+      document.getElementById('social-google-plus-counter').innerHTML = data;
+    }
+  }
+}
+
 get_counters('http://urls.api.twitter.com/1/urls/count.json?url=', '{{ site.url }}{{ page.url }}', 'callback_twitter');
 get_counters('https://graph.facebook.com/?id=', '{{ site.url }}{{ page.url }}', 'callback_facebook');
 get_counters('http://www.linkedin.com/countserv/count/share?url=', '{{ site.url }}{{ page.url }}', 'callback_linkedin');
+get_counters('http://share.yandex.ru/gpp.xml?url=', '{{ site.url }}{{ page.url }}', 'services.gplus.cb');
 
 </script>
 
@@ -67,6 +76,16 @@ get_counters('http://www.linkedin.com/countserv/count/share?url=', '{{ site.url 
         target="_blank"
         title="Share this post on Facebook"><i id="icon-search-button" class="fa fa-facebook-square"></i></a>
         <div id="social-facebook-counter" class="arrow_box"></div>
+    </div>
+
+    <div class="tw">
+      <a
+        class="social-share-element"
+        id="social-google-plus"
+        href="https://plus.google.com/share?url={{ site.url }}{{ page.url }}"
+        target="_blank"
+        title="Share this post on Google+"><i id="icon-search-button" class="fa fa-google-plus-square"></i></a>
+        <div id="social-google-plus-counter" class="arrow_box"></div>
     </div>
 </div>
 <div style="clear: both;"></div>
