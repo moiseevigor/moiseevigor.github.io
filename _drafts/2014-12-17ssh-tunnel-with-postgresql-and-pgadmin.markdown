@@ -7,3 +7,7 @@ categories: hardware
 keywords: hardware,ssd,solid-state-drive,linux,configuration,guide
 comments: true
 ---
+ssh -fNg -L 5555:localhost:5432
+
+http://www.ur-ban.com/blog/2010/10/25/ssh-tunnels-with-postgres-pgadmin/
+http://dustindavis.me/ssh-tunnel-in-pgadmin3-for-postgresql.html
