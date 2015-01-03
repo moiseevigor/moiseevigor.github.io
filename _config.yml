@@ -30,7 +30,8 @@ googleplus:			+IgorMoiseevAdventurer
 
 # Gems
 #gems: ['jekyll-lunr-js-search']
-
+gems:
+  - jekyll-sitemap
 
 # http://jekyllrb.com/docs/variables/
 # https://github.com/jekyll/jekyll/issues/2516
@@ -43,3 +44,8 @@ exclude:
   - "Gemfile*"
   - "LICENSE"
   - "node_modules"
+
+# https://github.com/kinnetica/jekyll-plugins
+#sitemap:
+    #filename: "/sitemap.xml"
+    #destination_folder: "/"
