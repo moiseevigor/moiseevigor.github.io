@@ -39,7 +39,6 @@ lsi: 			     true
 exclude:
   - "*.json"
   - "*.log"
-  - "*.md"
   - "bower_components"
   - "Gemfile*"
   - "LICENSE"
