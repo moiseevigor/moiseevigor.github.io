@@ -32,6 +32,7 @@ googleplus:			+IgorMoiseevAdventurer
 #gems: ['jekyll-lunr-js-search']
 gems:
   - jekyll-sitemap
+  - jekyll-mentions
 
 # http://jekyllrb.com/docs/variables/
 # https://github.com/jekyll/jekyll/issues/2516
