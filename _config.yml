@@ -13,8 +13,8 @@ title:               Igor Moiseev
 tagline:             'ApplMath, Developer'
 description:         'Some notes about MySQL and PostgreSQL. Ceph''s Storage clustering and KVM virtualization. Programming with NodeJS and PHP. Hacking with RaspberryPI and Arduino.'
 url:                 http://moiseevigor.github.io
-baseurl:             '/'
-paginate:            5
+baseurl:             ""
+paginate:            3
 
 # About/contact
 author:

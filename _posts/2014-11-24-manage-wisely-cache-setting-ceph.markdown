@@ -5,6 +5,13 @@ description: "Notes on cache setting in Ceph and how to avoid the pitfalls"
 date:   2014-11-24 15:05:45
 categories: virtualization
 keywords: virtualization,cache,ceph,configuration,tips,clustering
+tags: 
+- virtualization
+- cache
+- ceph
+- configuration
+- tips
+- clustering
 comments: true
 ---
 
