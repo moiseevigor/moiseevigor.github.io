@@ -3,8 +3,14 @@ layout: post
 title:  "Speedup your KVM migration in Proxmox"
 description: "Notes on cache setting in Ceph and how to avoid the pitfalls"
 date:   2014-11-26 17:05:45
-categories: virtualization
+categories:
+- virtualization
 keywords: virtualization,proxmox,configuration,tips
+tags:
+- virtualization
+- proxmox
+- configuration
+- tips
 comments: true
 ---
 

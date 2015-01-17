@@ -3,8 +3,16 @@ layout: post
 title:  "Encoding hell, grep and iconv salvage!"
 description: "Howto extract records from dump, when database encoding is different with respect to the connection."
 date:   2014-12-16 18:05:45
-categories: programming
+categories:
+- programming
 keywords: programming,mysql,database, encoding,iconv,tip
+tags:
+- programming
+- mysql
+- database
+- encoding
+- iconv
+- tip
 comments: true
 ---
 

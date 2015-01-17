@@ -10,7 +10,7 @@ relative_permalinks: true
 
 # Setup
 title:               Igor Moiseev
-tagline:             'ApplMath, Developer'
+tagline:             'Applied mathematician, Web Developer'
 description:         'Some notes about MySQL and PostgreSQL. Ceph''s Storage clustering and KVM virtualization. Programming with NodeJS and PHP. Hacking with RaspberryPI and Arduino.'
 url:                 http://moiseevigor.github.io
 baseurl:             ""

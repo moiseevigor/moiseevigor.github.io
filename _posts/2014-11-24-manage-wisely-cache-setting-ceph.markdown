@@ -3,7 +3,8 @@ layout: post
 title:  "Manage wisely your cache setting in Ceph"
 description: "Notes on cache setting in Ceph and how to avoid the pitfalls"
 date:   2014-11-24 15:05:45
-categories: virtualization
+categories:
+- virtualization
 keywords: virtualization,cache,ceph,configuration,tips,clustering
 tags: 
 - virtualization
