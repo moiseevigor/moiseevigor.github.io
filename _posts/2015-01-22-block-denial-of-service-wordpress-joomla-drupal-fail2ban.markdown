@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Block denial-of-service on Wordpress and Joomla with Fail2Ban in ISPConfig"
-description: "Block denial-of-service on Wordpress and Joomla with Fail2Ban in ISPConfig"
+title:  "Block denial-of-service attacks on Wordpress and Joomla with Fail2Ban in ISPConfig"
+description: "Block denial-of-service attacks on Wordpress and Joomla with Fail2Ban in ISPConfig"
 date:   2015-01-22 18:05:45
 categories:
 - software
