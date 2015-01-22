@@ -5,14 +5,13 @@ description: "Howto extract records from dump, when database encoding is differe
 date:   2014-12-16 18:05:45
 categories:
 - programming
-keywords: programming,mysql,database, encoding,iconv,tip
 tags:
 - programming
 - mysql
 - database
 - encoding
 - iconv
-- tip
+- tips
 comments: true
 ---
 

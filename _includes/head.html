@@ -22,10 +22,9 @@
     <meta name="description" content="{{ page.description }}">
   {% endif %}
 
-  {% if page.keywords %}
-    <meta name="keywords" content="{{ page.keywords }}">
+  {% if page.tags %}
+    <meta name="keywords" content="{{ page.tags| join:',' }}">
   {% endif %}
-
 
   {% if page.title and page.title != "Home" %}
     <!-- Schema.org markup for Google+ -->
@@ -34,7 +33,6 @@
       <meta itemprop="description" content="{{ page.description }}">
     {% endif %}
   {% endif %}
-
 
   <!-- CSS -->
   <link rel="stylesheet" href="{{ site.baseurl }}/public/css/poole.css">
