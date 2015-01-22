@@ -52,23 +52,23 @@ Install [`Fail2ban`](http://www.fail2ban.org):
 Now lets configure `Fail2ban` to ban the attacker.
 
 {% highlight bash %}
-sudo vim /etc/fail2ban/jail.local
+sudo vim /etc/fail2ban/jail.conf
 {% endhighlight %}
 
 add the following to the end of the file
 
 {% highlight bash %}
 [framework-ddos]
-    enabled = true
-    port = 80,443
-    protocol = tcp
-    filter = framework-ddos
-    logpath = /var/log/apache2/other_vhosts_access.log
-    maxretry = 10
-    # findtime: 10 mins
-    findtime = 600
-    # bantime: 1 week
-    bantime  = 604800
+enabled = true
+port = 80,443
+protocol = tcp
+filter = framework-ddos
+logpath = /var/log/apache2/other_vhosts_access.log
+maxretry = 10
+# findtime: 10 mins
+findtime = 600
+# bantime: 1 week
+bantime  = 604800
 {% endhighlight %}
 
 The default installation of [ISPConfig](http://www.ispconfig.org) writes into log file loceted in `/var/log/apache2/other_vhosts_access.log` in the following format
@@ -88,11 +88,11 @@ and put the following regular expressions
 {% highlight bash %}
 [Definition]
 
-    # Wordress
-    failregex = .*:(80|443) <HOST> .*(GET|POST) /xmlrpc.php
-                .*:(80|443) <HOST> .*(GET|POST) /wp-login.php
-    # Joomla
-    failregex = .*:(80|443) <HOST> .*(GET|POST) /administrator/index.php
+# Wordress
+failregex = .*:(80|443) <HOST> .*(GET|POST) /xmlrpc.php
+            .*:(80|443) <HOST> .*(GET|POST) /wp-login.php
+# Joomla
+failregex = .*:(80|443) <HOST> .*(GET|POST) /administrator/index.php
 {% endhighlight %}
 
 Restart `Fail2ban` 
