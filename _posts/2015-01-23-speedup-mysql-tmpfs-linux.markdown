@@ -12,6 +12,11 @@ tags:
 - tmpfs
 - linux
 - slow query
+technologies:
+- linux
+- mysql
+- mysqltuner
+- iwatch
 comments: true
 ---
 

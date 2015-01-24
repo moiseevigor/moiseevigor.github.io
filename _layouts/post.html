@@ -97,6 +97,27 @@ get_counters('http://share.yandex.ru/gpp.xml?url=', '{{ site.url }}{{ page.url }
 </div>
 <div style="clear: both;"></div>
 
+{% if page.technologies %}
+<div class="related">
+  <div style="float: left; margin: 1rem;">
+    <img src="/public/images/mysql.svg" style="max-width: 10rem;">    
+  </div>
+  <div style="float: left; margin: 1rem;">
+    <img src="/public/images/mysqltuner.jpg" style="max-width: 10rem;">    
+  </div>
+  <div style="float: left; margin: 1rem;">
+    <img src="/public/images/iwatch.jpg" style="max-width: 10rem;">    
+  </div>
+  <div style="float: left; margin: 1rem;">
+    <img src="/public/images/ubuntu.svg" style="max-width: 10rem;">    
+  </div>
+  <div style="float: left; margin: 1rem;">
+    <img src="/public/images/linux.svg" style="max-width: 10rem;">    
+  </div>
+</div>
+<div style="clear: both;"></div>
+{% endif %}
+
 <div class="related">
   <h2>Related Posts</h2>
   <ul class="related-posts">
