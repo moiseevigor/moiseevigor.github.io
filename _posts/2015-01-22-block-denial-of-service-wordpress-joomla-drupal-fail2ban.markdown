@@ -6,15 +6,13 @@ date:   2015-01-22 18:05:45
 categories:
 - software
 tags:
-- software
-- ispconfig
-- fail2ban
 - wordpress
 - joomla
-- ddos
+- ispconfig
+- fail2ban
 - denial-of-service
-- attack
-- tips
+- linux
+- ubuntu
 comments: true
 ---
 

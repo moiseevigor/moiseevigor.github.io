@@ -6,10 +6,9 @@ date:   2014-11-26 17:05:45
 categories:
 - virtualization
 tags:
-- virtualization
+- kvm
 - proxmox
-- configuration
-- tips
+- linux
 comments: true
 ---
 

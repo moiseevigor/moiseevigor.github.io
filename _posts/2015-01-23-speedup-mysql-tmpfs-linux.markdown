@@ -6,14 +6,8 @@ date:   2015-01-23 10:05:45
 categories:
 - software
 tags:
-- software
-- mysql
-- database
-- tmpfs
 - linux
-- slow query
-technologies:
-- linux
+- ubuntu
 - mysql
 - mysqltuner
 - iwatch

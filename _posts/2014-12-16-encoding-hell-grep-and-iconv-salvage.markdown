@@ -6,12 +6,12 @@ date:   2014-12-16 18:05:45
 categories:
 - programming
 tags:
-- programming
 - mysql
 - database
 - encoding
-- iconv
-- tips
+- unicode
+- ubuntu
+- linux
 comments: true
 ---
 

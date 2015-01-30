@@ -6,12 +6,9 @@ date:   2014-11-20 18:05:45
 categories:
 - hardware
 tags:
-- hardware
 - ssd
-- solid-state-drive
 - linux
-- configuration
-- guide
+- ubuntu
 comments: true
 ---
 
