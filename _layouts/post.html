@@ -8,6 +8,115 @@ layout: default
   {{ content }}
 </div>
 
+
+<style>
+.article-footer.fixed {
+    position: absolute;
+    top: 236px;
+    right: 50%;
+    margin-right: -30rem;
+    font-weight: 500;
+}
+.article-footer {
+    float: right;
+    max-width: 200px;
+    padding-bottom: 80px;
+}
+.article-footer-item {
+    padding-bottom: 40px;
+    width: 150px;
+}
+.article-footer {
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+    font-family: "PT Sans",Helvetica,Arial,sans-serif;
+} 
+.article-footer-title {
+    color: #C3C3C3;
+}
+.essb_links_list {
+  list-style-type: none;
+  margin-left: 0px;
+}
+</style>
+
+<footer class="article-footer fixed">
+  <div class="article-footer-item">
+    <a title="24 Comments" class="link-comments" href="#disqus_thread">
+      <span class="disqus-comment-count" data-disqus-url="{{ site.url }}{{ page.url }}">&nbsp;&nbsp;&nbsp;Comments</span>
+    </a>
+  </div>
+  <div class="article-footer-item">
+    <div class="tags-title article-footer-title">
+      Categories
+    </div>
+    <a title="{{ page.categories }}" href="/categories/#{{ page.categories }}" rel="category tag">
+      {{ page.categories }}
+    </a>
+  </div>
+  <div class="article-footer-item">
+    <div class="tags-title article-footer-title">
+      Tags
+    </div>
+    {% include page_tags_list_comma %}
+  </div>
+
+<div class="social-share">
+  <div>
+    <div style="float: left;">
+      <a
+        class="social-share-element"
+        id="social-linkedin"
+        href="http://www.linkedin.com/shareArticle?mini=true&title={{ page.title }}&url={{ site.url }}{{ page.url }}&source=http%3a%2f%2fzhangwenli.com"
+        target="_blank"
+        title="Share this post on LinkedIn"><i id="icon-search-button" class="fa fa-linkedin-square"></i></a>
+    </div>
+    <div id="social-linkedin-counter" class="social-counter"></div>
+  </div>
+
+  <div style="clear: both;"></div> 
+
+  <div>
+    <div style="float: left;">
+      <a
+        class="social-share-element"
+        id="social-twitter"
+        href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ site.url }}{{ page.url }}&via=moiseev_igor&hashtags={{ page.keywords }}"
+        target="_blank"
+        title="Share this post on Twitter"><i id="icon-search-button" class="fa fa-twitter-square"></i></a>
+    </div>
+    <div id="social-twitter-counter" class="social-counter"></div>
+  </div>
+
+  <div style="clear: both;"></div> 
+
+  <div>
+    <div style="float: left;">
+      <a
+          id="social-facebook"
+          href="https://www.facebook.com/sharer/sharer.php?t={{ page.title }}&u={{ site.url }}{{ page.url }}"
+          target="_blank"
+          title="Share this post on Facebook"><i id="icon-search-button" class="fa fa-facebook-square"></i></a>
+    </div>
+    <div id="social-facebook-counter" class="social-counter"></div>
+  </div>
+
+  <div style="clear: both;"></div> 
+
+  <div>
+    <div style="float: left;">
+      <a
+        class="social-share-element"
+        id="social-google-plus"
+        href="https://plus.google.com/share?url={{ site.url }}{{ page.url }}"
+        target="_blank"
+        title="Share this post on Google+"><i id="icon-search-button" class="fa fa-google-plus-square"></i></a>
+    </div>
+    <div id="social-google-plus-counter" class="social-counter"></div>
+  </div>
+</div>
+</footer>
+
 <script>
 function get_counters(requrl, url, callb) {
   var script = document.createElement('script');
@@ -40,14 +149,20 @@ var services = {
   }
 }
 
+//get_counters('http://urls.api.twitter.com/1/urls/count.json?url=', '{{ site.url }}{{ page.url }}', 'callback_twitter');
+
 get_counters('http://urls.api.twitter.com/1/urls/count.json?url=', '{{ site.url }}{{ page.url }}', 'callback_twitter');
 get_counters('https://graph.facebook.com/?id=', '{{ site.url }}{{ page.url }}', 'callback_facebook');
 get_counters('http://www.linkedin.com/countserv/count/share?url=', '{{ site.url }}{{ page.url }}', 'callback_linkedin');
 get_counters('http://share.yandex.ru/gpp.xml?url=', '{{ site.url }}{{ page.url }}', 'services.gplus.cb');
 
+
+//ltuThhaJYcomcyUUx69kY4vB3zvKlq6g8SgbTMs77nhPd4HZVTou07rXFxEUZfmN
+
+
 </script>
 
-<div class="social-share">
+<!-- div class="social-share">
     <div class="tw">
       <a
         class="social-share-element"
@@ -88,7 +203,7 @@ get_counters('http://share.yandex.ru/gpp.xml?url=', '{{ site.url }}{{ page.url }
         <div id="social-google-plus-counter" class="arrow_box"></div>
     </div>
 </div>
-<div style="clear: both;"></div>
+<div style="clear: both;"></div -->
 
 
 <div class="related" align="center" style="text-align:center">
@@ -121,6 +236,13 @@ get_counters('http://share.yandex.ru/gpp.xml?url=', '{{ site.url }}{{ page.url }
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'moiseevigor-github'; // required: replace example with your forum shortname
+
+        (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {
