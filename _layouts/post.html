@@ -10,17 +10,30 @@ layout: default
 
 
 <style>
-.article-footer.fixed {
+.article-footer {
+    display: none;
+}
+@media (min-width: 56em) {
+  .article-footer {
+    float: right;
+    max-width: 200px;
+    padding-bottom: 80px;
+    display: inline;
+  }
+}
+.article-footer.absolute {
     position: absolute;
     top: 236px;
     right: 50%;
     margin-right: -30rem;
     font-weight: 500;
 }
-.article-footer {
-    float: right;
-    max-width: 200px;
-    padding-bottom: 80px;
+.article-footer.fixed {
+    position: fixed;
+    top: 40px;
+    right: 50%;
+    margin-right: -30rem;
+    font-weight: 500;
 }
 .article-footer-item {
     padding-bottom: 40px;
@@ -40,7 +53,25 @@ layout: default
 }
 </style>
 
-<footer class="article-footer fixed">
+<script type="text/javascript">
+window.addEventListener("scroll",navbar_reset_top,false);
+
+var navbar_top = 196;
+
+function navbar_reset_top() {
+  var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  var navbar = document.getElementById("navbar");
+
+  if(scrollTop>navbar_top && navbar.className==="article-footer absolute") {
+    navbar.className="article-footer fixed";
+  }
+  else if(scrollTop<navbar_top && navbar.className==="article-footer fixed") {
+    navbar.className="article-footer absolute";
+  }
+}
+</script>
+
+<footer id="navbar" class="article-footer absolute">
   <div class="article-footer-item">
     <a title="24 Comments" class="link-comments" href="#disqus_thread">
       <span class="disqus-comment-count" data-disqus-url="{{ site.url }}{{ page.url }}">&nbsp;&nbsp;&nbsp;Comments</span>
