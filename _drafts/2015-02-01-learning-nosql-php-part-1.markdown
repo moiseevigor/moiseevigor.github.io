@@ -15,6 +15,15 @@ tags:
 comments: true
 ---
 
+Fullscreen sildes: <a href="https://slides.com/igormoiseev/nosql-vs-sql" target="_blank">slides.com/igormoiseev/nosql-vs-sql</a>
+
+<iframe src="//slides.com/igormoiseev/nosql-vs-sql/embed" width="760" height="520" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 In the first lesson we will see how to create simple PHP application with the help of [Composer](https://getcomposer.org/).
 
+
 git clone https://github.com/moiseevigor/learning-nosql-php.git 
+
+what - data consistent C
+where - available A
+when - network is partitioned
