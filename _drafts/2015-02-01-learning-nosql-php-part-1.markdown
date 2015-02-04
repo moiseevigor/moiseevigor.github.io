@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Learning NoSQL and PHP, Part 1"
-description: "Short lessons that gives you the basic ideas about PHP and NoSQL databases; Practical exercises; Scalability of the application."
+description: "Short lessons that gives you the basic ideas NoSQL databases; CAP Theorem - Consistency, Availability and Partitioning tolerance; Some Practical exercises; Scalability of the application."
 # date:   2015-02-01 18:05:45
 categories:
 - programming
@@ -13,6 +13,8 @@ tags:
 - linux
 - nosql
 comments: true
+group: learning-nosql-php
+permalink: /learning-nosql-php/part-1
 ---
 
 Fullscreen sildes: <a href="https://slides.com/igormoiseev/nosql-vs-sql" target="_blank">slides.com/igormoiseev/nosql-vs-sql</a>
@@ -21,9 +23,8 @@ Fullscreen sildes: <a href="https://slides.com/igormoiseev/nosql-vs-sql" target=
 
 In the first lesson we will see how to create simple PHP application with the help of [Composer](https://getcomposer.org/).
 
-
+{% highlight bash %}
 git clone https://github.com/moiseevigor/learning-nosql-php.git 
+{% endhighlight %}
 
-what - data consistent C
-where - available A
-when - network is partitioned
+

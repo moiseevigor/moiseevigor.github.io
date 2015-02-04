@@ -46,7 +46,7 @@ button.icon{
 
 /* lateral block*/
 .social-share {
-  margin-bottom: 2em;
+  padding-bottom: 40px;
 }
 .social-share a {
   font-size: 2rem;
@@ -117,7 +117,7 @@ button.icon{
 @media (min-width: 56em) {
   .article-footer {
     float: right;
-    max-width: 200px;
+    max-width: 170px;
     padding-bottom: 80px;
     opacity: 0.8;
     display: inline;
