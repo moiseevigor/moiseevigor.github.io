@@ -47,7 +47,5 @@ exclude:
   - "LICENSE"
   - "node_modules"
 
-# https://github.com/kinnetica/jekyll-plugins
-#sitemap:
-    #filename: "/sitemap.xml"
-    #destination_folder: "/"
+webmention:
+  username: moiseevigor.github.io
