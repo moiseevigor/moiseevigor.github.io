@@ -4,7 +4,7 @@ title: About
 ---
 
 <div style="float: left; margin-right: 100px;">
-  <img src="/public/igor.jpg">
+  <img src="/public/images/igor.jpg">
 </div>
 
 

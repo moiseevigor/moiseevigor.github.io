@@ -5,7 +5,7 @@
 <!-- Toggleable sidebar -->
 <div class="sidebar" id="sidebar">
   <div class="sidebar-item">
-    <p><img src="/public/igor-220.jpg"></p>
+    <p><img src="/public/images/igor-220.jpg"></p>
     <p>{{ site.description }}</p>
   </div>
 
@@ -20,13 +20,60 @@
     {% assign pages_list = site.pages | sort:"url" %}
     {% for node in pages_list %}
       {% if node.title != null %}
-        {% if node.layout == "page" %}
+        {% if node.layout == "page" and node.group == "navigation" %}
           <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}" href="{{ node.url }}">{{ node.title }}</a>
         {% endif %}
       {% endif %}
     {% endfor %}
 
   </nav>
+
+  <div class="sidebar-item">
+    <div class="social-share" style="padding-bottom: 0;">
+      <div style="float: left; margin-right: 5px;">
+        <a
+          rel="me"
+          class="social-share-element"
+          href="https://www.linkedin.com/in/moiseevigor"
+          target="_blank"
+          title="Igor on LinkedIn"><i id="icon-search-button" class="fa fa-linkedin-square"></i></a>
+      </div>
+      <div style="float: left; margin-right: 5px;">
+        <a
+          rel="me"
+          class="social-share-element"
+          href="http://twitter.com/moiseev_igor"
+          target="_blank"
+          title="Igor on Twitter"><i id="icon-search-button" class="fa fa-twitter-square"></i></a>
+      </div>
+
+      <div style="float: left; margin-right: 5px;">
+        <a
+          rel="me"
+          href="http://github.com/moiseevigor/"
+          target="_blank"
+          title="Igor on Github"><i id="icon-search-button" class="fa fa-github-square"></i></a>
+      </div>
+
+      <div style="float: left; margin-right: 5px;">
+        <a
+          rel="me"
+          href="https://www.facebook.com/moiseev.igor"
+          target="_blank"
+          title="Igor on Facebook"><i id="icon-search-button" class="fa fa-facebook-square"></i></a>
+      </div>
+
+      <div style="float: left; margin-right: 5px;">
+        <a
+          rel="me"
+          class="social-share-element"
+          href="https://plus.google.com/+IgorMoiseevAdventurer"
+          target="_blank"
+          title="Igor on Google+"><i id="icon-search-button" class="fa fa-google-plus-square"></i></a>
+      </div>
+      <div style="clear: both;"></div> 
+    </div>
+  </div>  
 
   <div class="sidebar-item">
     <p>

@@ -17,7 +17,7 @@ Today we discuss how to manage wisely your cache setting in Ceph ([ceph.com/docs
 Suddenly after migration to Ceph we start observing the doubling of memory usage by every virtual machine.
 
 
-![Ceph memory consumption is doubling](/public/manage-wisely-cache-setting-ceph-1.png)
+![Ceph memory consumption is doubling](/public/images/manage-wisely-cache-setting-ceph-1.png)
 
 After some research we found the configuration error in `ceph.conf`. The option `rbd cache size` describes the amount of cache reserved for **every virtual disk**, so the total amount of RAM reserved for cache is given by
 

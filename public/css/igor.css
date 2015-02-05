@@ -58,6 +58,9 @@ button.icon{
 .social-share .fa-twitter-square:hover {
   color: #55acee;
 }
+.social-share .fa-github-square:hover {
+  color: lightgray;
+}
 .social-share .fa-facebook-square:hover {
   color: #425f9c;
 }
