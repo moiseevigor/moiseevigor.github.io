@@ -1,6 +1,8 @@
 ---
 layout: page
 title: About
+group: navigation
+
 ---
 
 <div style="float: left; margin-right: 100px;">
