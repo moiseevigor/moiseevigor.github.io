@@ -31,6 +31,7 @@ function navbar_reset_top() {
     <a title="Comments" class="link-comments" href="#disqus_thread">
       <span class="disqus-comment-count" data-disqus-url="{{ site.url }}{{ page.url }}">&nbsp;&nbsp;&nbsp;Comments</span>
     </a>
+    <span id="mentions-count" data-indieweb-comment-count data-url="{{ site.url }}{{ page.url }}"></span>
   </div>
   <div class="article-footer-item">
     <div class="tags-title article-footer-title">
@@ -109,7 +110,7 @@ function navbar_reset_top() {
   <div id="mc_embed_signup">
   <form action="//onelife.us6.list-manage.com/subscribe/post?u=4df5150fe2bb36aa89ae39c5f&amp;id=ffc1233bb6" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
       <div id="mc_embed_signup_scroll">
-    
+
   <div class="mc-field-group">
     <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email Address">
   </div>
@@ -128,6 +129,21 @@ function navbar_reset_top() {
 </footer>
 
 <script>
+function getJSON(path, callback) {
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.overrideMimeType('application/json');
+
+    xmlhttp.onreadystatechange = function() {
+        ready = (xmlhttp.readyState == 4 && xmlhttp.status == 200);
+        callback(ready ? JSON.parse(xmlhttp.responseText) : false);
+    };
+
+    xmlhttp.open('GET', path, true);
+    xmlhttp.send();
+
+};
+
 function get_counters(requrl, url, callb) {
   var script = document.createElement('script');
 
@@ -158,6 +174,11 @@ var services = {
     }
   }
 }
+
+getJSON('http://webmention.io/api/count?target=' + '{{ site.url }}{{ page.url }}', function (data) {
+  if(data.count > 0)
+    document.getElementById('mentions-count').innerHTML = data.count + '&nbsp;Mentions';
+});
 
 get_counters('http://urls.api.twitter.com/1/urls/count.json?url=', '{{ site.url }}{{ page.url }}', 'callback_twitter');
 get_counters('https://graph.facebook.com/?id=', '{{ site.url }}{{ page.url }}', 'callback_facebook');
