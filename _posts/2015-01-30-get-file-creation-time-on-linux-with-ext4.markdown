@@ -82,16 +82,34 @@ EXTENTS:
 (0): 4229445, (1-7): 4261097-4261103, ...
 {% endhighlight %}
 
-So lets write the [`xstat` utility](https://gist.github.com/moiseevigor/8c496f632137605b322e) before the consensus will come down :)
+So lets write the [`xstat` utility](https://gist.github.com/moiseevigor/8c496f632137605b322e) before the consensus will come :)
 
 <script src="https://gist.github.com/moiseevigor/8c496f632137605b322e.js"></script>
 
-and voilà
+now put it in `~/.bashrc` or `~/.profile` and voilà:
 
 {% highlight bash %}
-$ xstat README.md LICENSE.md search/
-README.md	Fri Nov 21 16:31:30 2014
-LICENSE.md	Fri Nov 21 16:31:30 2014
-search/	Thu Nov 27 19:12:39 2014
+$ xstat *
+Tue Jan 13 17:41:05 2015	404.html
+Thu Feb  5 23:19:19 2015	about.md
+Sun Jan 18 01:28:51 2015	archives.html
+Tue Jan 13 17:41:05 2015	atom.xml
+Thu Feb  5 22:32:52 2015	categories.html
+Thu Feb  5 23:24:40 2015	_config.yml
+Tue Jan 13 17:41:05 2015	_drafts
+Thu Feb  5 21:50:47 2015	Gemfile
+Thu Feb  5 21:50:47 2015	Gemfile.lock
+Tue Jan 13 17:41:05 2015	_includes
+Tue Jan 13 17:41:05 2015	index.html
+Tue Jan 13 17:41:05 2015	_layouts
+Tue Feb  3 22:42:06 2015	learning-nosql-php.html
+Tue Jan 13 17:41:05 2015	LICENSE.md
+Thu Feb  5 20:36:30 2015	plugins
+Tue Jan 13 17:41:05 2015	_posts
+Tue Jan 13 17:41:05 2015	public
+Tue Jan 13 17:41:05 2015	README.md
+Tue Jan 13 17:41:05 2015	search
+Wed Jan 14 20:08:17 2015	_site
+Thu Feb  5 22:51:27 2015	tags.html
 {% endhighlight %}
 
