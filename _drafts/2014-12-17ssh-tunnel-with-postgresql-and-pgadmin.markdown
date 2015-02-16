@@ -11,3 +11,13 @@ ssh -fNg -L 5555:localhost:5432
 
 http://www.ur-ban.com/blog/2010/10/25/ssh-tunnels-with-postgres-pgadmin/
 http://dustindavis.me/ssh-tunnel-in-pgadmin3-for-postgresql.html
+
+https://bugs.launchpad.net/ubuntu/+source/mysql-workbench/+bug/1385147
+
+```
+Host mysql.tunnel
+  HostName some-ssh-server.com
+  User ssh_username
+  IdentityFile ~/.ssh/config/id_rsa
+  LocalForward 3307 127.0.0.1:3306
+```
