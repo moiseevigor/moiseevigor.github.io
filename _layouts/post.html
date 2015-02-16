@@ -2,8 +2,22 @@
 layout: default
 ---
 
+<style>
+.edit {
+  font: 0.5em FontAwesome;
+  margin: 10px;
+  color: #9A9A9A;
+}
+.edit a {
+  color: #9A9A9A;
+}
+.edit:before {
+  content: "\f044"
+}
+</style>
+
 <div class="post">
-  <h1 class="post-title">{{ page.title }}</h1>
+  <h1 class="post-title">{{ page.title }}<sup class="edit">{% include edit.html %}</sup></h1>
   <span class="post-date">{{ page.date | date_to_string }}</span>
   {{ content }}
 </div>
