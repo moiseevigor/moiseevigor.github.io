@@ -7,7 +7,7 @@ categories:
 - software
 tags:
 - linux
-- ssh
+- openssh
 - clusterssh
 comments: true
 ---
