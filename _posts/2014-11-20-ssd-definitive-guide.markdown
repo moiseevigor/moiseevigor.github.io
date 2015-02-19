@@ -63,6 +63,15 @@ $ sudo hdparm -I /dev/sda | grep SATA
 
 The ideal would be any revision higher than `SATA Rev 3.0` which guaranties the 6Gbps or higher speeds.
 
+<br>
+
+## STEP 2.5: Pause
+
+<iframe scrolling="no" frameborder="0" allowTransparency="true" src="http://www.deezer.com/plugins/player?autoplay=false&playlist=true&width=700&height=240&cover=true&type=playlist&id=30595446&title=&app_id=undefined" width="700" height="240"></iframe>
+
+
+<br>
+
 ## STEP 3:
 
 Check that disk `TRIM` ([wikipedia.org/wiki/Trim](http://en.wikipedia.org/wiki/Trim_%28computing%29)) works fine
