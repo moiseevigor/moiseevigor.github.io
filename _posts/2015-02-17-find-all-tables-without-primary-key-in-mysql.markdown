@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Find all tables without primary key in MySQL"
-description: "Simple TIP"
+description: "Query that helps to find tables without primary key, simple and efficient way to find performance bottlenecks"
 date:   2017-02-17 19:05:45
 categories:
 - programming
@@ -32,4 +32,6 @@ AND TABLES.table_schema <> 'mysql'
 AND c.constraint_name IS NULL;
 {% endhighlight %} 
 
-A friend advise: "The result list of this query should be `Empty set`". Happy querying!
+A friend advise: "The result list of this query should be `Empty set`". 
+
+Happy querying!

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Encoding hell, grep and iconv salvage!"
-description: "Howto extract records from dump, when database encoding is different with respect to the connection."
+description: "Howto extract records from dump, when database encoding is different to one set on the connection"
 date:   2014-12-16 18:05:45
 categories:
 - programming

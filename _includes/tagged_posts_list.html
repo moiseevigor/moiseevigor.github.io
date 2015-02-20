@@ -1,0 +1,31 @@
+{% comment %}<!--
+The tagged posts list
+
+  example:
+
+      {% include tagged_posts_list.html %}
+
+-->{% endcomment %}
+
+
+<div class="related">
+  <h2>{{ page.title }}</h2>
+  <ul class="related-posts">
+    {% for post in site.posts %}
+      {% if post.tags contains page.tag %}
+        <li style="margin-bottom: 1.5rem;">
+          <h3>
+            <a href="{{ post.url }}">
+              {{ post.title }}
+              <small>{{ post.date | date_to_string }}</small>
+              <br>
+              <small>{{ post.description }}</small>
+            </a>
+          </h3>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+
+

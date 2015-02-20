@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Speedup MySQL with tmpfs"
-description: "This posts deals with speeding up of the temporary table optimization, by putting the temp dir in ram"
+description: "Speeding up of the temporary table creation by putting the temp dir in RAM"
 date:   2015-01-23 10:05:45
 categories:
 - software
