@@ -31,7 +31,13 @@ Which end up with [the Linus final quote](https://lkml.org/lkml/2010/7/22/249)
 
 > Let's wait five years and see if there is actually any consensus on it being needed and used at all, rather than rush into something just because "we can".
 
-So how would you extract this information? We end up with the `STAT`
+So what to do? Let's chill out
+
+<iframe scrolling="no" frameborder="0" allowTransparency="true" src="http://www.deezer.com/plugins/player?autoplay=false&playlist=true&width=720&height=240&cover=true&type=playlist&id=1157085741&title=&app_id=undefined" width="720" height="240"></iframe>
+
+<br>
+
+Now let's question yourself how would you extract this information? We end up with the `STAT` utility
 
 {% highlight bash %}
 NAME
