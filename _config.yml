@@ -4,8 +4,8 @@ highlighter:         pygments
 
 # Permalinks
 #
-# Use of `relative_permalinks` ensures post links from the index work properly.
 permalink:           pretty
+# Use of `relative_permalinks` ensures post links from the index work properly.
 relative_permalinks: true
 
 # Setup
@@ -18,6 +18,8 @@ paginate:            3
 
 github_repo_url:     https://github.com/moiseevigor/moiseevigor.github.io
 
+disqus_shortname:    moiseevigor-github
+
 # About/contact
 author:
   name:              Igor Moiseev
@@ -28,10 +30,9 @@ author:
 version:             1.0.0
 
 # social
-googleplus:			+IgorMoiseevAdventurer
+googleplus:			     +IgorMoiseevAdventurer
 
 # Gems
-#gems: ['jekyll-lunr-js-search']
 gems:
   - jekyll-sitemap
   - jekyll-mentions
@@ -39,7 +40,7 @@ gems:
 
 # http://jekyllrb.com/docs/variables/
 # https://github.com/jekyll/jekyll/issues/2516
-lsi: 			     true
+lsi: true
 
 exclude:
   - "*.json"

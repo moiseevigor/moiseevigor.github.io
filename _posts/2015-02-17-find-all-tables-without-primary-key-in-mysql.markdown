@@ -7,8 +7,8 @@ categories:
 - programming
 tags:
 - mysql
+- database
 - ubuntu
-- linux
 comments: true
 ---
 

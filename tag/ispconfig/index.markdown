@@ -1,16 +1,16 @@
 ---
 layout: default
-title: Ceph tagged articles
-tag: ceph
+title: ISPconfig tagged articles
+tag: ispconfig
 ---
 
 <div style="float: left; margin: 2.0rem;">
 	<img src="/public/images/{{ page.tag }}.png" style="max-width: 10rem;" alt="{{ page.tag }}" />
 </div>
 
-[Ceph](http://ceph.com/) is a free software storage platform designed to present object, block, and file storage from a single distributed computer cluster. Ceph's main goals are to be completely distributed without a single point of failure, scalable to the exabyte level, and freely-available. The data is replicated, making it fault tolerant.
+[ISPConfig](http://www.ispconfig.org) is open source, hosting control panel for Linux, designed to manage [Apache](/tag/apache), BIND, FTP, and [databases](/tag/database), supporting many [Linux](/tag/linux) distributions.
 
-[Ceph](http://ceph.com/) software runs on commodity hardware. The system is designed to be both self-healing and self-managing and strives to reduce both administrator and budget overhead.
+ISPConfig allows administrators to manage websites, email addresses and DNS records through a web-based interface. The software has 4 login levels: administrator, reseller, client and email-user.
 
 {% include tagged_posts_list.html %}
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "The rmagic gem trouble on linux"
-description: "Simple TIP"
+description: "Howto solve installation problems with rmagic gem on ruby"
 date:   2017-02-17 18:05:45
 categories:
 - programming
