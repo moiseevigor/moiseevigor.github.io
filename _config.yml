@@ -20,6 +20,9 @@ github_repo_url:     https://github.com/moiseevigor/moiseevigor.github.io
 
 disqus_shortname:    moiseevigor-github
 
+webmention:
+  username: moiseevigor.github.io
+
 # About/contact
 author:
   name:              Igor Moiseev
@@ -49,6 +52,9 @@ exclude:
   - "Gemfile*"
   - "LICENSE"
   - "node_modules"
+  - [vendor]
 
-webmention:
-  username: moiseevigor.github.io
+# Build settings
+markdown: redcarpet
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript"]
