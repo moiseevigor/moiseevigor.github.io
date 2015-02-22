@@ -52,7 +52,7 @@ exclude:
   - "Gemfile*"
   - "LICENSE"
   - "node_modules"
-  - [vendor]
+  - "vendor"
 
 # Build settings
 markdown: redcarpet
