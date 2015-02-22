@@ -2,7 +2,7 @@
 layout: post
 title:  "Find all tables without primary key in MySQL"
 description: "Query that helps to find tables without primary key, simple and efficient way to find performance bottlenecks"
-date:   2017-02-17 19:05:45
+date:   2015-02-17 19:05:45
 categories:
 - programming
 tags:

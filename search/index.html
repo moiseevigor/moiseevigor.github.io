@@ -26,15 +26,21 @@ if(q) {
           h3 = document.createElement('h3'),
           a = document.createElement('a'),
           data = document.createElement('span'),
-          desc = document.createElement('div');
+          dataSmall = document.createElement('small'),
+          desc = document.createElement('div'),
+          descSmall = document.createElement('small');
 
       ul.className = 'related-posts';
 
       a.innerHTML = article.title;
       a.href = article.id;
 
-      data.innerHTML = '&nbsp;&nbsp;&nbsp;<small>' + article.date + '</small>';
-      desc.innerHTML = '<small>' + article.description + '</small><br>';
+      data.innerHTML = '&nbsp;&nbsp;&nbsp;'; 
+      dataSmall.innerHTML = article.date;
+      data.appendChild(dataSmall);
+
+      descSmall.innerHTML = article.description;
+      desc.appendChild(descSmall);
 
       a.appendChild(data);
       h3.appendChild(a);

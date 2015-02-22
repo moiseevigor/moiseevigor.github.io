@@ -67,7 +67,7 @@ The ideal would be any revision higher than `SATA Rev 3.0` which guaranties the 
 
 ## STEP 2.5: Pause
 
-<iframe scrolling="no" frameborder="0" allowTransparency="true" src="http://www.deezer.com/plugins/player?autoplay=false&playlist=true&width=700&height=240&cover=true&type=playlist&id=30595446&title=&app_id=undefined" width="700" height="240"></iframe>
+<iframe scrolling="no" frameborder="0" allowTransparency="true" src="http://www.deezer.com/plugins/player?autoplay=false&amp;playlist=true&amp;width=700&amp;height=240&amp;cover=true&amp;type=playlist&amp;id=30595446&amp;title=&amp;app_id=undefined" width="700" height="240"></iframe>
 
 
 <br>
