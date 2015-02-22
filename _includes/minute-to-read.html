@@ -1,0 +1,6 @@
+{% assign minutes = content | number_of_words | divided_by: 90 %}
+{% if minutes == 0 %}{% assign minutes = 1 %}{% endif %}
+
+<div style="float: right;">
+<small>{% if minutes == 1 %}{{ minutes }} minute read{% else %}{{ minutes }} minutes read{% endif %}</small>
+</div>
