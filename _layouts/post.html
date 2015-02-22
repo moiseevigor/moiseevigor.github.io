@@ -59,7 +59,7 @@ function navbar_reset_top() {
     <div class="tags-title article-footer-title">
       Tags
     </div>
-    {% include page_tags_list_comma %}
+    {% include page_tags_list_comma.html %}
   </div>
 
   <div class="social-share">
@@ -203,7 +203,7 @@ get_counters('http://share.yandex.ru/gpp.xml?url=', '{{ site.url }}{{ page.url }
 
 
 <div class="related" align="center" style="text-align:center">
-    {% include page_tags_list %}
+    {% include page_tags_list.html %}
 </div>
 <div style="clear: both;"></div>
 

@@ -1,0 +1,15 @@
+{% comment %}<!--
+The page_tags_list_comma include lists the tags for a given page, with hyperlinks back to the list of all site tags. It expects an array, like page.tags, not a hash, like site.tags.
+Usage:
+  example:
+      {% include page_tags_list_comma.html %}
+-->{% endcomment %}
+
+{% for tag in page.tags %}
+  <a href="/tag/{{ tag }}" rel="tag" title="{{ tag }}">
+	{{ tag }}
+  </a>
+  {% unless forloop.last %}
+    &middot;
+  {% endunless %}
+{% endfor %}

@@ -2,14 +2,14 @@
 The page_tags_list include lists the tags for a given page, with hyperlinks back to the list of all site tags. It expects an array, like page.tags, not a hash, like site.tags.
 Usage:
   example:
-      {% include page_tags_list_comma %}
+      {% include page_tags_list.html %}
 -->{% endcomment %}
 
 {% for tag in page.tags %}
-  <a href="/tags/#{{ tag }}" rel="tag" title="{{ tag }}">
-	{{ tag }}
+  <a href="/tag/{{ tag }}">
+      <div style="float: left; margin: 1.0rem;">
+        <img src="/public/images/{{ tag }}.png" style="max-width: 10rem;" alt="{{ tag }}" />
+      </div>
   </a>
-  {% unless forloop.last %}
-    &middot;
-  {% endunless %}
 {% endfor %}
+{% assign page_tags = nil %}
