@@ -1,4 +1,7 @@
+source 'https://rubygems.org'
 gem 'jekyll'
 gem 'jekyll-sitemap'
 gem 'jekyll-mentions'
+gem 'github-pages'
+gem 'html-proofer'
 # gem 'jekyll-time-to-read'
