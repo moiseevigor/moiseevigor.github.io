@@ -2,5 +2,5 @@
 {% if minutes == 0 %}{% assign minutes = 1 %}{% endif %}
 
 <div style="float: right;">
-<small>{% if minutes == 1 %}{{ minutes }} minute read{% else %}{{ minutes }} minutes read{% endif %}</small>
+<i class="fa fa-clock-o"></i> {% if minutes == 1 %}{{ minutes }} min{% else %}{{ minutes }} mins{% endif %}
 </div>
