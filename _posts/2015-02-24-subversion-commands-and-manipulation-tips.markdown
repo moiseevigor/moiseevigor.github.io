@@ -12,13 +12,13 @@ tags:
 comments: true
 ---
 
-Recursively delete `.svn` directories
+Delete recursively the `.svn` directories
 
 {% highlight bash %}
 $ rm -rf `find . -type d -name .svn`
 {% endhighlight %}
 
-Find files not under subversion control
+Find files not under the version control
 
 {% highlight bash %}
 $ svn status | grep -e ^?
@@ -30,7 +30,7 @@ How to remove all deleted files from repository
 $ svn st | grep '^!' | awk '{print $2}' | xargs svn delete --force
 {% endhighlight %}
 
-`grep` with excluding of `.svn` dirs
+`grep` on folder with excluding of `.svn` dirs
 
 {% highlight bash %}
 $ grep -r 'content_graphic' assets/js --exclude=*\.svn*
