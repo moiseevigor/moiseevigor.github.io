@@ -4,7 +4,7 @@ title:  "Subversion commands"
 description: "Simple tips to manipulate subversion `.svn` folder and useful commands"
 date:   2015-02-24 10:05:45
 categories:
-- programming
+- software
 tags:
 - subversion
 - linux

@@ -13,4 +13,6 @@ tags:
 comments: true
 ---
 
+Clone repository from SVN into GIT
+
 http://gitlab.newentity.it/newentity-sas/wikis/wikis/svn2git

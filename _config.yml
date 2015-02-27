@@ -14,7 +14,7 @@ tagline:             'Applied mathematician, Web Developer'
 description:         'Some notes about MySQL and PostgreSQL. Ceph''s Storage clustering and KVM virtualization. Programming with NodeJS and PHP. Hacking with RaspberryPI and Arduino.'
 url:                 http://moiseevigor.github.io
 baseurl:             ""
-paginate:            3
+paginate:            5
 
 github_repo_url:     https://github.com/moiseevigor/moiseevigor.github.io
 
