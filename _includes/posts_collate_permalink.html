@@ -17,9 +17,10 @@ Usage:
         
 -->{% endcomment %}
 
-{% for post in site.posts %}{% if(post.group == page.group ) %}
-  <div>
-    <h2><a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></h2>
-    <span class="post-date">{{ post.description }}</span>
-  </div>
+{% for post in site.posts reversed %}{% if(post.group == page.group ) %}
+<div>
+  <h2><a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></h2>
+  <span>{{ post.description }}</span>
+</div>
+<br />
 {% endif %}{% endfor %}
