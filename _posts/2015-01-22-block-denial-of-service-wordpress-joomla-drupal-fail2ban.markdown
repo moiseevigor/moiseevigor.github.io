@@ -86,12 +86,9 @@ and put the following regular expressions
 
 {% highlight bash %}
 [Definition]
-
-# Wordress
-failregex = .*:(80|443) <HOST> .*(GET|POST) /xmlrpc.php
-            .*:(80|443) <HOST> .*(GET|POST) /wp-login.php
-# Joomla
-failregex = .*:(80|443) <HOST> .*(GET|POST) /administrator/index.php
+failregex = .*:(80|443) <HOST> .*(GET|POST) .*/xmlrpc.php
+            .*:(80|443) <HOST> .*(GET|POST) .*/wp-login.php
+            .*:(80|443) <HOST> .*(GET|POST) /administrator/index.php
 {% endhighlight %}
 
 Restart `Fail2ban` 
