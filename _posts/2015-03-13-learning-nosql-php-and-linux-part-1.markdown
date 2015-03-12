@@ -204,3 +204,7 @@ $ sudo vim /etc/apache2/sites-enabled/000-default.conf
 ### Exercise 6 (advanced, requires knowledge of basics of NodeJS e NPM)
 Install Ghost Blogging platfowm https://github.com/TryGhost/Ghost and create one post
 
+#### Hints
+
+ - installation for all platforms http://support.ghost.org/installation/
+
