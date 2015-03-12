@@ -170,4 +170,37 @@ Please install MySQL server, MySQL PHPMyAdmin and MySQL Workbench. Create test d
 ### Exercise 5
 Clone repository https://github.com/ccoenraets/wine-cellar-php and configure Apache and MySQL to run application.
 
+####Hints
+
+ - install apache2 and mysql
+ - enable `rewrite` module with `a2enmon rewrite`
+ - permit path rewrite 
+
+{% highlight bash %}
+$ sudo vim /etc/apache2/sites-enabled/000-default.conf
+
+<VirtualHost *:80>
+
+...
+
+    <Directory /var/www/html>
+            Options FollowSymLinks
+            AllowOverride All
+            Order allow,deny
+            Allow from all
+    </Directory>
+
+...
+
+</VirtualHost>
+{% endhighlight %}
+
+ - clone repository into cellar folder 
+
+{% highlight bash %}
+/var/www/html$ sudo git clone https://github.com/ccoenraets/wine-cellar-php.git cellar`
+{% endhighlight %}
+
+### Exercise 6 (advanced, requires knowledge of basics of NodeJS e NPM)
+Install Ghost Blogging platfowm https://github.com/TryGhost/Ghost and create one post
 
