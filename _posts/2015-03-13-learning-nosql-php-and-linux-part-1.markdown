@@ -172,12 +172,18 @@ Clone repository https://github.com/ccoenraets/wine-cellar-php and configure Apa
 
 ####Hints
 
- - install apache2 and mysql
- - enable `rewrite` module with `a2enmon rewrite`
+ - Create new Droplet Ubuntu 14.04 x64 on [DigitalOcean](http://digitalocean.com)
+ - install apache2 and mysql: [digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-14-04](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-14-04)
+ - enable `rewrite` module with
+
+{% highlight bash %}
+$ sudo a2enmon rewrite
+{% endhighlight %}
+
  - permit path rewrite 
 
 {% highlight bash %}
-$ sudo vim /etc/apache2/sites-enabled/000-default.conf
+$ sudo nano /etc/apache2/sites-enabled/000-default.conf
 
 <VirtualHost *:80>
 
@@ -206,5 +212,6 @@ Install Ghost Blogging platfowm https://github.com/TryGhost/Ghost and create one
 
 #### Hints
 
- - installation for all platforms http://support.ghost.org/installation/
+ - Installation for all platforms http://support.ghost.org/installation/
+ - Or alternatively, cofigure with DigitalOcean (create new Droplet Ubuntu 12.04.5 x64) [digitalocean.com/community/tutorials/how-to-host-ghost-with-nginx-on-digitalocean](https://www.digitalocean.com/community/tutorials/how-to-host-ghost-with-nginx-on-digitalocean) 
 
