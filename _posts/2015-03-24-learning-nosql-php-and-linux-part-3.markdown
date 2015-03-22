@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Learning NoSQL, PHP and Linux, Part-3
-description: Short notes on basics of databases (MongoDB) and web servers (Apache), PHP and Composer to start develping your first Web Application
+description: Short notes on basics of NoSQL and Scalability of the web application
 header: Categories
 group: navigation
 permalink: /learning-nosql-php-linux/part-3
