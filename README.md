@@ -1,5 +1,7 @@
 # Tech Blog http://moiseevigor.github.io/ 
 
+[![Join the chat at https://gitter.im/moiseevigor/moiseevigor.github.io](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/moiseevigor/moiseevigor.github.io?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/moiseevigor/moiseevigor.github.io.svg?branch=master)](https://travis-ci.org/moiseevigor/moiseevigor.github.io)
 
 Lanyon is an unassuming [Jekyll](http://jekyllrb.com) theme that places content first by tucking away navigation in a hidden drawer. It's based on [Poole](http://getpoole.com), the Jekyll butler.
