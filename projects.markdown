@@ -5,9 +5,12 @@ header: Projects
 group: navigation
 permalink: /projects/
 comments: true
+tags:
+- mysql
+- postgresql
 ---
 
-## [Elliptic functions for Matlab and Octave](/elliptic)
+## [Elliptic functions for Matlab and Octave]({{ site.url }}/elliptic)
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/moiseevigor/elliptic?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
@@ -18,7 +21,7 @@ The main *GOAL* of the project is to provide the natural Matlab scripts *WITHOUT
 
 <hr />
 
-## [Email2DB for PHP](/email2db-php)
+## [Email2DB for PHP]({{ site.url }}/email2db-php)
 
 [![Build Status](https://travis-ci.org/moiseevigor/email2db-php.svg?branch=master)](https://travis-ci.org/moiseevigor/email2db-php)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/moiseevigor/email2db-php?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
