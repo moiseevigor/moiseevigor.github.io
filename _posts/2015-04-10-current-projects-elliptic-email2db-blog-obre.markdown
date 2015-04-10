@@ -1,16 +1,20 @@
 ---
-layout: page
-title: Projects
-header: Projects
-group: navigation
-permalink: /projects/
-comments: false
+layout: post
+title:  "My current projects"
+description: "My list of weekend projects: Elliptic functions for Matlab and Octave, Email2DB for PHP, Tech Blog"
+date:   2015-04-10 18:05:45
+categories:
+- programming
 tags:
-- mysql
-- postgresql
-redirect_from: 
-- /programming/2015/04/10/current-projects-elliptic-email2db-blog-obre/
+- linux
+- ubuntu
+- javascript
+- php
+- database
+- matlab
+comments: false
 ---
+
 
 <style>
 a > img {
@@ -57,4 +61,3 @@ This is a public space for thoughts on [MySQL](/tag/mysql) and [PostgreSQL](/tag
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/moiseevigor/moiseevigor.github.io?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
-

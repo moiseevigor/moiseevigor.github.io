@@ -15,7 +15,7 @@ tags:
 - mongodb
 - mysql
 - php
-comments: true
+comments: false
 redirect_from: 
 - /learning-nosql-php-linux/part-1/
 - /learning-nosql-php-linux/part-2/
