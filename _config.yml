@@ -39,7 +39,7 @@ googleplus:			     +IgorMoiseevAdventurer
 gems:
   - jekyll-sitemap
   - jekyll-mentions
-#  - jekyll-time-to-read
+  - jekyll-redirect-from
 
 # http://jekyllrb.com/docs/variables/
 # https://github.com/jekyll/jekyll/issues/2516
