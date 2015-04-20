@@ -26,9 +26,11 @@ most likely you have spotted the character length limitation on the chain name.
 I've discovered that the limit is `16` for the chain name length, but [Fail2Ban](/tag/fail2ban) prefixes it with `fail2ban-` string 
 which eats so precious `9` characters so the only `7` remaining. 
 
-To solve this issue you need to rename iptables action to something like `name=HONEY`  
+To solve this issue you need to rename the `iptables` action to something like `name=HONEY`  
 
 {% highlight bash %}
+$ cat /etc/fail2ban/jail.conf
+
 [apache-honeypot]
 enabled  = enable
 filter   = apache-honeypot
