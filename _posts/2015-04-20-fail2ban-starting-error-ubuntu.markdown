@@ -23,8 +23,8 @@ iptables -I INPUT -p tcp -m multiport --dports apache-honeypot -j fail2ban-apach
 
 most likely you have spotted the character length limitation on the chain name. 
 
-I've discovered that the limit is `16` for the chain length, but [Fail2Ban](/tag/fail2ban) prefix it with `fail2ban-` string 
-which eats the `9` characters so only `7` remaining. 
+I've discovered that the limit is `16` for the chain name length, but [Fail2Ban](/tag/fail2ban) prefixes it with `fail2ban-` string 
+which eats so precious `9` characters so the only `7` remaining. 
 
 To solve this issue you need to rename iptables action to something like `name=HONEY`  
 
