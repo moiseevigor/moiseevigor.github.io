@@ -18,7 +18,7 @@ paginate:            5
 
 github_repo_url:     https://github.com/moiseevigor/moiseevigor.github.io
 
-disqus_shortname:    moiseevigor-github
+disqus_shortname:    'moiseevigor-github'
 
 webmention:
   username: moiseevigor.github.io
