@@ -88,7 +88,7 @@ and put the following regular expressions
 [Definition]
 failregex = .*:(80|443) <HOST> .*(GET|POST) .*/xmlrpc.php
             .*:(80|443) <HOST> .*(GET|POST) .*/wp-login.php
-            .*:(80|443) <HOST> .*(GET|POST) /administrator/index.php
+            .*:(80|443) <HOST> .*(GET|POST) /administrator/index.php HTTP
 {% endhighlight %}
 
 Restart `Fail2ban` 
