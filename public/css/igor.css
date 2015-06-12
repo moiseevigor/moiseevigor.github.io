@@ -165,7 +165,7 @@ button.icon{
   float: left;
   margin: 1.0rem;
   opacity: 0.5;
-  width: 25%;
+  /*width: 27%;*/
 }
 .page-tag:hover {
   opacity: 1;
@@ -222,16 +222,22 @@ button.icon{
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.26), 0 1px 0 rgba(255, 255, 255, 0.4) inset;
     box-sizing: border-box;
     color: #fff;
-    font-size: 0.8rem;
+    font-size: 2.7vw;
     height: 40px;
     position: absolute;
     right: 0;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
     top: 0;
-    width: 280px;
     z-index: 10;
     cursor: pointer;
 }
+@media (min-width: 56em) {
+  .email-box-form button {
+    width: 280px;
+    font-size: 0.8rem;
+  }
+}
+
 .email-box-description {
     color: #999;
     font-size: 0.8rem;
