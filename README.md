@@ -121,3 +121,19 @@ Lanyon has two branches, but only one is used for active development.
 Open sourced under the [MIT license](LICENSE.md).
 
 <3
+
+
+## INSTALL Blog
+
+
+
+```
+sudo apt-get install build-essential zlib1g-dev ruby1.9.1-dev
+sudo gem install jekyll jekyll-sitemap jekyll-mentions github-pages html-proofer
+```
+
+Serve blog
+
+```
+jekyll serve
+```

@@ -117,12 +117,15 @@ button.icon{
 .article-footer {
     display: none;
 }
+.article-footer:hover {
+  opacity: 1;
+}
 @media (min-width: 56em) {
   .article-footer {
     float: right;
     max-width: 170px;
     padding-bottom: 80px;
-    opacity: 0.8;
+    opacity: 0.5;
     display: inline;
   }
 }
@@ -155,4 +158,93 @@ button.icon{
 .essb_links_list {
   list-style-type: none;
   margin-left: 0px;
+}
+
+/* images tag cloud */
+.page-tag {
+  float: left;
+  margin: 1.0rem;
+  opacity: 0.5;
+  width: 25%;
+}
+.page-tag:hover {
+  opacity: 1;
+}
+.page-tag > img {
+  max-width: 8rem;
+}
+
+/* email subscribe box */
+.email-box {
+    background: #f7fafb none repeat scroll 0 0;
+    border: 1px solid #dcecf4;
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 1) inset;
+    margin: 50px 0 0 0;
+    padding: 40px 50px 50px;
+    text-align: center;
+}
+.email-box-heading {
+    font-size: 1.4rem;
+    margin: 0;
+}
+.email-box-subheading {
+    color: #999;
+    font-size: 1.2rem;
+    font-weight: 200;
+    margin: 0;
+}
+.email-box-form {
+    margin: 3rem 0;
+    position: relative;
+}
+*::-moz-selection {
+    background: #d6edff none repeat scroll 0 0;
+}
+.email-box {
+    text-align: center;
+}
+.email-box-form input {
+    -moz-appearance: none;
+    border: 1px solid #bbc7cc !important;
+    border-radius: 4px 0 0 4px;
+    box-shadow: none;
+    box-sizing: border-box;
+    height: 40px;
+    margin: 0 280px 0 0;
+    padding: 0 1rem;
+    width: 100%;
+    font-size: 75%;
+}
+.email-box-form button {
+    background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #5bbee5 0%, #5294ce 100%) repeat scroll 0 0;
+    border: 1px solid #5294ce;
+    border-radius: 0 4px 4px 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.26), 0 1px 0 rgba(255, 255, 255, 0.4) inset;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 0.8rem;
+    height: 40px;
+    position: absolute;
+    right: 0;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+    top: 0;
+    width: 280px;
+    z-index: 10;
+    cursor: pointer;
+}
+.email-box-description {
+    color: #999;
+    font-size: 0.8rem;
+    font-family: "PT Sans",Helvetica,Arial,sans-serif;
+    margin: 0;
+}
+#mc_embed_signup form {
+    padding: 0 !important;
+} 
+#mc_embed_signup .mc-field-group {
+    width: 100% !important;
+}
+#mc_embed_signup div.response {
+    font-size: 0.8rem !important;
+    font-family: "PT Sans",Helvetica,Arial,sans-serif;
 }

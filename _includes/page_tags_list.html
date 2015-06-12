@@ -6,9 +6,9 @@ Usage:
 -->{% endcomment %}
 
 {% for tag in page.tags %}
-  <a href="/tag/{{ tag }}">
-      <div style="float: left; margin: 1.0rem;">
-        <img src="/public/images/{{ tag }}.png" style="max-width: 10rem;" alt="{{ tag }}" />
+  <a href="/tag/{{ tag }}" title="Tag {{ tag }}">
+      <div class="page-tag">
+        <img src="/public/images/{{ tag }}.png" alt="{{ tag }}" />
       </div>
   </a>
 {% endfor %}

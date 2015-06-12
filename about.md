@@ -21,3 +21,8 @@ I'm maintaining the [Elliptic functions for Matlab](https://code.google.com/p/el
 Please find the rest of my activity on [Codewall](https://coderwall.com/moiseevigor) or [StackOverflow](http://careers.stackoverflow.com/moiseev-igor).
 
 Let's stay connected on [linkedin.com/in/moiseevigor/](http://it.linkedin.com/in/moiseevigor/)
+
+<br />
+<br />
+
+{% include email_box.html %}
