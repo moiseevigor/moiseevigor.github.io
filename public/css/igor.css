@@ -115,7 +115,8 @@ button.icon{
     margin-top: 6px;
 }
 .article-footer {
-    display: none;
+  display: none;
+  transition: all 0.3s ease-in-out 0s;
 }
 .article-footer:hover {
   opacity: 1;
@@ -165,7 +166,7 @@ button.icon{
   float: left;
   margin: 1.0rem;
   opacity: 0.5;
-  /*width: 27%;*/
+  transition: all 0.3s ease-in-out 0s;
 }
 .page-tag:hover {
   opacity: 1;

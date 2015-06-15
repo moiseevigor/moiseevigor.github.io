@@ -1,5 +1,14 @@
 <aside class="email-box">
-  <h3 class="email-box-heading">Thoughts on open source and technology</h3>
+  <h3 class="email-box-heading">
+    {% if email_subscription_message_heading %}
+      {{ email_subscription_message_heading }}
+    {% else %}
+      Thoughts on open source and technology
+    {% endif %}
+  </h3>
+  {% if email_subscription_message_caption %}
+    <h4>{{ email_subscription_message_caption }}</h4>
+  {% endif %}
   <link href="//cdn-images.mailchimp.com/embedcode/classic-081711.css" rel="stylesheet" type="text/css">
   <div id="mc_embed_signup">
   <form action="//onelife.us6.list-manage.com/subscribe/post?u=4df5150fe2bb36aa89ae39c5f&amp;id=ffc1233bb6" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate email-box-form" target="_blank" novalidate>
@@ -17,5 +26,5 @@
   </div>
   <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
 
-  <p class="email-box-description">If I write shit, unsubscribe, No Hesitation!</p>
+  <p class="email-box-description">If I write crap, unsubscribe, no fuss!</p>
 </aside>
