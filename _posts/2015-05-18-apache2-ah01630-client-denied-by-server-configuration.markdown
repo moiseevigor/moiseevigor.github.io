@@ -12,10 +12,10 @@ tags:
 comments: true
 ---
 
-The Apache web server of the version `2.4` introduces the new style for `<VirtualHost>` configuration, 
-in particular the `<Directory>` syntax modifications is not compatible anymore with the previous one `2.2`. 
+The Apache web server of the version `2.4` introduces a new style for `<VirtualHost>` configuration, 
+in particular the `<Directory>` syntax is not compatible anymore with the previous one `2.2`. 
 
-Here below is the Apache <= 2.2 version of `<VirtualHost>`, note 
+The old style configuration valid in the Apache <= `2.2` version of `<VirtualHost>` 
 
 {% highlight bash %}
 <VirtualHost *:80>
@@ -34,14 +34,14 @@ Here below is the Apache <= 2.2 version of `<VirtualHost>`, note
 </VirtualHost>
 {% endhighlight %}
 
-the part to substitute is 
+the modification is introduced the the part 
 
 {% highlight bash %}
 Order allow,deny
 Allow from all
 {% endhighlight %}
 
-on the following
+the new way of describing the access permitions is reduced to one line
 
 {% highlight bash %}
 Require all granted
@@ -68,7 +68,7 @@ finally the correct `<VirtualHost>` configuration will look like the following
     CustomLog /var/log/apache2/example.com/access.log combined
 </VirtualHost>
 {% endhighlight %}
-        
+
 
 
 
