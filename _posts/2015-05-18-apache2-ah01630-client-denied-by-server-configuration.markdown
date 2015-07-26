@@ -41,7 +41,7 @@ Order allow,deny
 Allow from all
 {% endhighlight %}
 
-the new way of describing the access permitions is reduced to one line
+the new way to describe the access permitions is reduced to just one line
 
 {% highlight bash %}
 Require all granted
