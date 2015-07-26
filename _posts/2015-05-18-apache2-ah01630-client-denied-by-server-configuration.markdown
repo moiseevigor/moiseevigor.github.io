@@ -15,7 +15,7 @@ comments: true
 The Apache web server of the version `2.4` introduces a new style for `<VirtualHost>` configuration, 
 in particular the `<Directory>` syntax is not compatible anymore with the previous one `2.2`. 
 
-The old style configuration valid in the Apache <= `2.2` version of `<VirtualHost>` 
+The old styled configuration valid in the Apache <= `2.2` version 
 
 {% highlight bash %}
 <VirtualHost *:80>
@@ -34,7 +34,7 @@ The old style configuration valid in the Apache <= `2.2` version of `<VirtualHos
 </VirtualHost>
 {% endhighlight %}
 
-the modification is introduced the the part 
+the modification is introduced in the part 
 
 {% highlight bash %}
 Order allow,deny
