@@ -1,0 +1,32 @@
+---
+layout: post
+title:  "Muni kvm_io problem"
+description: ""
+date:   2015-01-23 10:05:45
+categories:
+- software
+tags:
+- linux
+- openssh
+- clusterssh
+comments: true
+---
+
+http://serverfault.com/questions/342412/bash-scripting-munin-plugin-dont-work
+
+/etc/munin/plugin-conf.d/munin-node
+[kvm_*]
+user root
+
+
+# munin-run kvm_io
+Traceback (most recent call last):
+  File "/etc/munin/plugins/kvm_io", line 110, in <module>
+    fetch(find_vm_names(list_pids()))
+  File "/etc/munin/plugins/kvm_io", line 63, in fetch
+    f = open("/proc/%s/io" % pid, "r")
+IOError: [Errno 13] Permission denied: '/proc/929760/io'
+
+
+2015/11/12 06:30:11 [WARNING] Service kvm_io on nodo4.proxmoxcluster/178.250.66.154:4949 returned no data for label demoAbileneAprile2015_write
+

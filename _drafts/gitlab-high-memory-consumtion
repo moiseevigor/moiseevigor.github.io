@@ -1,0 +1,18 @@
+---
+layout: post
+title:  "Gitlab high memory consumtion by Sidekiq problem"
+description: ""
+date:   2015-01-23 10:05:45
+categories:
+- software
+tags:
+- linux
+- openssh
+- clusterssh
+comments: true
+---
+
+http://doc.gitlab.com/ce/operations/sidekiq_memory_killer.html
+https://github.com/gitlabhq/gitlabhq/issues/2780
+http://stackoverflow.com/questions/24403843/optimising-sidekiq-redis-heroku-and-rails
+https://github.com/mperham/sidekiq/blob/master/examples/config.yml
