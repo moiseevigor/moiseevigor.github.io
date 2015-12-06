@@ -1,0 +1,17 @@
+---
+layout: post
+title:  "Remove old kernels"
+description: ""
+date:   2015-01-23 10:05:45
+categories:
+- software
+tags:
+- linux
+- openssh
+- clusterssh
+comments: true
+---
+
+dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | xargs sudo apt-get -y purge
+
+
