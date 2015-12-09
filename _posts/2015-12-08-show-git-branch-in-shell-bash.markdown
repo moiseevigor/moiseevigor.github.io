@@ -14,7 +14,7 @@ comments: true
 
 When you install `git` on your computer, you may find new variables available in the environment, it is `$(__git_ps1)`.
 This variable contains the branch name of the current repository. The only thing you need to edit `~/.bashrc`
-file and add `$(__git_ps1)` to the `PS1` definition in this way
+and add `$(__git_ps1)` to the `PS1` definition in this way
 
 ```
 if [ "$color_prompt" = yes ]; then

@@ -145,7 +145,10 @@ function get_counters(requrl, url, callb) {
 }
 
 function callback_twitter(data) {
-  document.getElementById('social-twitter-counter').innerHTML = data.count;
+  if(data)
+    document.getElementById('social-twitter-counter').innerHTML = data.count;
+  else
+    document.getElementById('social-twitter-counter').innerHTML = 0;
 }
 
 function callback_linkedin(data) {
@@ -172,7 +175,7 @@ getJSON('http://webmention.io/api/count?target=' + '{{ site.url }}{{ page.url }}
     document.getElementById('mentions-count').innerHTML = data.count + '&nbsp;Mentions';
 });
 
-get_counters('http://urls.api.twitter.com/1/urls/count.json?url=', '{{ site.url }}{{ page.url }}', 'callback_twitter');
+//get_counters('http://urls.api.twitter.com/1/urls/count.json?url=', '{{ site.url }}{{ page.url }}', 'callback_twitter');
 get_counters('https://graph.facebook.com/?id=', '{{ site.url }}{{ page.url }}', 'callback_facebook');
 get_counters('http://www.linkedin.com/countserv/count/share?url=', '{{ site.url }}{{ page.url }}', 'callback_linkedin');
 get_counters('http://share.yandex.ru/gpp.xml?url=', '{{ site.url }}{{ page.url }}', 'services.gplus.cb');

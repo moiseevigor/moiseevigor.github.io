@@ -3,5 +3,4 @@
   "title"   : "{{ post.title }}",
   "date"   : "{{ post.date | date_to_string }}",
   "description" : "{{ post.description | strip_html | strip_newlines | remove:'\"'  }}",
-  "content" : "{{ post.content | strip_html | strip_newlines | remove:'\"'  }}"
 }
