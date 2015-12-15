@@ -1,0 +1,33 @@
+---
+layout: post
+title:  "enable-asterisk-manager-interface-ami-the-right-way"
+description: ""
+date:   2015-12-23 10:05:45
+categories:
+- software
+tags:
+- linux
+- asterisk
+comments: true
+---
+ http://the-asterisk-book.com/1.6/asterisk-manager-api.html
+
+
+-rw-r----- 1 asterisk asterisk  378 dic 12  2014 /etc/asterisk/manager.conf
+
+root@term01:~# la /etc/asterisk/manager.d/
+totale 12K
+drwxr-xr-x 2 asterisk asterisk 4,0K dic 15 14:33 .
+drwxr-xr-x 4 asterisk asterisk 4,0K dic 15 14:36 ..
+-rw------- 1 asterisk asterisk  442 dic 15 11:55 amiusers.conf
+
+
+# cat /etc/asterisk/manager.d/amiusers.conf 
+[admin]
+secret = <VerySecret>
+deny = 0.0.0.0/0.0.0.0
+permit = 192.168.1.0/255.255.255.0
+permit = 127.0.0.1/255.255.255.0
+read = system,call,log,verbose,command,agent,user,originate
+write = system,call,log,verbose,command,agent,user,originate
+
