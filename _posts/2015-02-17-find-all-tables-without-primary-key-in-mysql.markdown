@@ -12,7 +12,7 @@ tags:
 comments: true
 ---
 
-The following query seems to get the list of tables without primary key, those who destroys the database performance
+The following query obtains the list of tables without primary key, those who destroys the database performance
 
 {% highlight mysql %}
 USE INFORMATION_SCHEMA;
