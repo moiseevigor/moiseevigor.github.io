@@ -6,7 +6,7 @@ highlighter:         pygments
 #
 permalink:           pretty
 # Use of `relative_permalinks` ensures post links from the index work properly.
-relative_permalinks: true
+#relative_permalinks: true
 
 # Setup
 title:               Igor Moiseev
@@ -40,6 +40,7 @@ gems:
   - jekyll-sitemap
   - jekyll-mentions
   - jekyll-redirect-from
+  - jekyll-paginate
 
 # http://jekyllrb.com/docs/variables/
 # https://github.com/jekyll/jekyll/issues/2516

@@ -95,6 +95,6 @@ Vagrant.configure(2) do |config|
     # simple start jekyll on testsite
     cd /vagrant/
     bundle install
-    jekyll serve -P 8080 -H 0.0.0.0 --detach
+    jekyll server --watch --incremental -P 8080 -H 0.0.0.0 --detach
   SHELL
 end
