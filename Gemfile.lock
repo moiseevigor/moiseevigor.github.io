@@ -151,6 +151,3 @@ DEPENDENCIES
   jekyll-paginate
   jekyll-sitemap
   pygments.rb
-
-BUNDLED WITH
-   1.11.2
