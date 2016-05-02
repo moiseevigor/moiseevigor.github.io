@@ -52,7 +52,7 @@ class CharFieldPadding(models.CharField):
 class Product(models.Model):
     type_product = models.CharField(max_length=3)
     code_product = CharFieldPadding(max_length=15)
-    description = models.CharField(max_length=120, blank=True, null=True)
+    price = models.DecimalField(max_digits=8, decimal_places=2)
 
     class Meta:
         unique_together = (('type_product', 'code_product'),)
