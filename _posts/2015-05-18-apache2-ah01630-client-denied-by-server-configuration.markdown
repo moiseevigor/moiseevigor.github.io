@@ -12,7 +12,7 @@ tags:
 comments: true
 ---
 
-The Apache web server of the version `2.4` introduces a new style for `<VirtualHost>` configuration, 
+The Apache web server of the version `2.4` [introduces a new style](http://httpd.apache.org/docs/2.4/upgrading.html#access) for `<VirtualHost>` configuration, 
 in particular the `<Directory>` syntax is not compatible anymore with the previous one `2.2`. 
 
 The old styled configuration valid in the Apache <= `2.2` version 
