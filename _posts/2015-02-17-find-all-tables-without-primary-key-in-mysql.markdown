@@ -14,7 +14,7 @@ comments: true
 
 The following query obtains the list of tables without primary key, those who destroys the database performance
 
-{% highlight mysql %}
+{% highlight sql %}
 USE INFORMATION_SCHEMA;
 SELECT 
     TABLES.table_name
