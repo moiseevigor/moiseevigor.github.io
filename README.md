@@ -135,5 +135,5 @@ sudo gem install jekyll jekyll-sitemap jekyll-mentions github-pages html-proofer
 Serve blog
 
 ```
-jekyll serve
+bundle exec jekyll server --watch -P 8080 -H 0.0.0.0 --incremental
 ```
