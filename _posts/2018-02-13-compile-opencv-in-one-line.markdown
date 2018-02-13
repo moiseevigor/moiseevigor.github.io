@@ -59,3 +59,4 @@ sh -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf'; \
 ldconfig
 ```
 
+The handy `Dockerfile` with Tensorflow 1.5 + OpenCV 3.3.1 + Python 3 at your disposal https://gist.github.com/moiseevigor/3e9b00066842c20229be47bd5429f6b1 
