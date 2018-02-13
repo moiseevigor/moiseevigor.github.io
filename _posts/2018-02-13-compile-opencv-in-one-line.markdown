@@ -13,7 +13,7 @@ comments: true
 
 At first you may need to install the dependancy packages
 
-```
+```bash
 apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     cmake \
@@ -38,7 +38,7 @@ apt-get update && apt-get install -y --no-install-recommends \
 
 And here is the shothand command to run in the shell
 
-```
+```bash
 git clone https://github.com/opencv/opencv.git; \
 cd opencv; git checkout 3.3.1; cd ..; \
 git clone https://github.com/opencv/opencv_contrib.git; \
