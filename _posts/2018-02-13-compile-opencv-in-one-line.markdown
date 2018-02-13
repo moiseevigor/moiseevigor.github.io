@@ -36,7 +36,7 @@ apt-get update && apt-get install -y --no-install-recommends \
     python3-tk
 ```
 
-And here is the shothand command to run in the shell
+And here is the shorthand command to run in the shell
 
 ```bash
 git clone https://github.com/opencv/opencv.git; \
