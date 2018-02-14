@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Compile OpenCV in one line"
+title:  "Compile OpenCV 3.3.1 in one line"
 description: "Just fast short one line command to compile the OpenCV 3.3.1"
 date:   2018-02-13 10:05:45
 categories:
