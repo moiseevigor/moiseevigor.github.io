@@ -11,7 +11,7 @@ tags:
 comments: true
 ---
 
-At first you may need to install the dependancy packages
+At first you may need to install the dependency packages
 
 ```bash
 apt-get update && apt-get install -y --no-install-recommends \
