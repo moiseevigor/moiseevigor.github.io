@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Compile OpenCV 3.3.1 in one line"
-description: "Just fast short one line command to compile the OpenCV 3.3.1"
+title:  "Compile OpenCV 3.4.1 in one line"
+description: "Just fast short one line command to compile the OpenCV 3.4.1"
 date:   2018-02-13 10:05:45
 categories:
 - software
@@ -39,11 +39,11 @@ apt-get update && apt-get install -y --no-install-recommends \
 And here is the shorthand command to run in the shell
 
 ```bash
-git clone https://github.com/opencv/opencv.git; \
-cd opencv; git checkout 3.3.1; cd ..; \
-git clone https://github.com/opencv/opencv_contrib.git; \
-cd opencv_contrib; git checkout 3.3.1; cd ..; \
-cd opencv; mkdir build; cd build; \
+git clone https://github.com/opencv/opencv.git && \
+cd opencv; git checkout 3.4.1; cd .. && \
+git clone https://github.com/opencv/opencv_contrib.git && \
+cd opencv_contrib; git checkout 3.4.1; cd .. && \
+cd opencv; mkdir build; cd build && \
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
   -D CMAKE_INSTALL_PREFIX=/usr/local \
   -D WITH_CUDA=OFF \
@@ -51,12 +51,12 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
   -D WITH_V4L=ON \
   -D WITH_QT=ON \
   -D WITH_OPENGL=ON \
-  -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
-  ..; \
-make -j8; \
-make install; \
-sh -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf'; \
-ldconfig
+  -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules .. && \
+make -j`nproc` && \
+make install && \
+sh -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf' && \
+ldconfig && \
+cd / && rm -rf opencv*
 ```
 
-The handy `Dockerfile` with Tensorflow 1.5 + OpenCV 3.3.1 + Python 3 at your disposal [https://gist.github.com/moiseevigor/3e9b00066842c20229be47bd5429f6b1](https://gist.github.com/moiseevigor/3e9b00066842c20229be47bd5429f6b1)
+The handy `Dockerfile` with Tensorflow 1.5 + OpenCV 3.4.1 + Python 3 at your disposal [https://gist.github.com/moiseevigor/3e9b00066842c20229be47bd5429f6b1](https://gist.github.com/moiseevigor/3e9b00066842c20229be47bd5429f6b1)
