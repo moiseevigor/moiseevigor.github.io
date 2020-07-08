@@ -19,5 +19,5 @@ and the invention of the specific metrics that is capable to measure the accurac
 
 
 
-<iframe width="720" src="https://www.youtube.com/embed/glpcIJLvyjY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="720" height="380" src="https://www.youtube.com/embed/glpcIJLvyjY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
