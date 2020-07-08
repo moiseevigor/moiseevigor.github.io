@@ -11,7 +11,7 @@ tags:
 comments: true
 ---
 
-In this talk we’ll present the technology behind the Fully Automated Store by Checkout Technologies. 
+In this talk I presented the technology behind the Fully Automated Store by Checkout Technologies. 
 The actual version of the store is a result of the work of 12 engineers that spans the areas from hardware 
 and design to the ultimate deep learning architectures. Will be also discussed the challenges and lessons learnt during 
 this adventure and what it means to deploy the system which has an AI engine in its core. Creation of the dataset
