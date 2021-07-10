@@ -1,6 +1,6 @@
-# Tech Blog http://moiseevigor.github.io
+# [Tech Blog](http://moiseevigor.github.io)
 
-[![Build Status](https://travis-ci.org/moiseevigor/moiseevigor.github.io.svg?branch=master)](https://travis-ci.org/moiseevigor/moiseevigor.github.io)  [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/moiseevigor/moiseevigor.github.io?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Build Status](https://travis-ci.org/moiseevigor/moiseevigor.github.io.svg?branch=master)](https://travis-ci.org/moiseevigor/moiseevigor.github.io)
 
 
 ## INSTALL Blog
@@ -22,5 +22,3 @@ Open browser at http://localhost:4000/
 ## License
 
 Open sourced under the [MIT license](LICENSE.md).
-
-<3
