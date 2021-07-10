@@ -1,5 +1,5 @@
 # Dependencies
-markdown:            redcarpet
+markdown:            kramdown
 highlighter:         pygments
 
 # Permalinks
@@ -11,7 +11,7 @@ permalink:           pretty
 # Setup
 title:               Igor Moiseev
 tagline:             'Applied mathematician, Web Developer'
-description:         'Some notes about MySQL and PostgreSQL. Ceph''s Storage clustering and KVM virtualization. Programming with NodeJS and PHP. Hacking with RaspberryPI and Arduino.'
+description:         'Some notes on technology and intelligence.'
 url:                 http://moiseevigor.github.io
 baseurl:             ""
 paginate:            5
@@ -36,7 +36,7 @@ version:             1.0.0
 googleplus:			     +IgorMoiseevAdventurer
 
 # Gems
-gems:
+plugins:
   - jekyll-sitemap
   - jekyll-mentions
   - jekyll-redirect-from
@@ -57,5 +57,5 @@ exclude:
 
 # Build settings
 #markdown: redcarpet
-redcarpet:
-  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript"]
+# redcarpet:
+#   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript"]
