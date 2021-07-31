@@ -17,7 +17,7 @@ in particular the `<Directory>` syntax is not compatible anymore with the previo
 
 The old styled configuration valid in the Apache <= `2.2` version 
 
-{% highlight bash %}
+```bash
 <VirtualHost *:80>
 
     ...
@@ -32,24 +32,24 @@ The old styled configuration valid in the Apache <= `2.2` version
     ...
 
 </VirtualHost>
-{% endhighlight %}
+```
 
 the modification is introduced in the part 
 
-{% highlight bash %}
+```bash
 Order allow,deny
 Allow from all
-{% endhighlight %}
+```
 
 the new way to describe the access permitions is reduced to just one line
 
-{% highlight bash %}
+```bash
 Require all granted
-{% endhighlight %}
+```
 
 finally the correct `<VirtualHost>` configuration will look like the following
 
-{% highlight bash %}
+```bash
 <VirtualHost *:80>
     ServerName  www.example.com
     ServerAlias example.com
@@ -67,8 +67,7 @@ finally the correct `<VirtualHost>` configuration will look like the following
     ErrorLog  /var/log/apache2/example.com/error.log
     CustomLog /var/log/apache2/example.com/access.log combined
 </VirtualHost>
-{% endhighlight %}
-
+```
 
 
 

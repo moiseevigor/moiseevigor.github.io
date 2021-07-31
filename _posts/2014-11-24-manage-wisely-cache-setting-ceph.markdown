@@ -12,7 +12,7 @@ tags:
 comments: true
 ---
 
-Today we discuss how to manage wisely your cache setting in Ceph ([ceph.com/docs/master/rbd/rbd-config-ref/](http://ceph.com/docs/master/rbd/rbd-config-ref/)). The type of cache discussed below is the user space implementation of the Ceph block device (i.e., `librbd`).
+Today we discuss how to manage wisely your cache setting in Ceph ([docs.ceph.com/en/latest/rbd/index.html](https://docs.ceph.com/en/latest/rbd/index.html)). The type of cache discussed below is the user space implementation of the Ceph block device (i.e., `librbd`).
 
 Suddenly after migration to Ceph we start observing the doubling of memory usage by every virtual machine.
 

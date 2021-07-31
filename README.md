@@ -19,6 +19,13 @@ docker run --rm --volume="$PWD:/srv/jekyll" -p 4000:4000 -it blog jekyll serve -
 
 Open browser at http://localhost:4000/
 
+## Testing
+
+```
+docker run --rm --volume="$PWD:/srv/jekyll" -p 4000:4000 -it blog bundle exec htmlproofer ./_site --only-4xx --check-html --url-ignore "/example.com/"
+```
+
+
 ## License
 
 Open sourced under the [MIT license](LICENSE.md).
