@@ -31,7 +31,8 @@ jobs:
               --only-4xx \
               --check-html \
               --check-favicon  \
-              --url-ignore "/example.com/"
+              --url-ignore "/example.com/" \
+              --http-status-ignore "403"
       - persist_to_workspace:
           root: ./
           paths:
