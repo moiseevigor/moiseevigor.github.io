@@ -22,33 +22,33 @@ Suddenly after migration to Ceph we start observing the doubling of memory usage
 After some research we found the configuration error in `ceph.conf`. The option `rbd cache size` describes the amount of cache reserved for **every virtual disk**, so the total amount of RAM reserved for cache is given by
 
 
-{% highlight bash %}
+```bash
 total amount of ram = (number of virtual disks)  X  (rbd cache size)
-{% endhighlight %}
+```
 
 After some rational reasoning of the kind - the standard hard drive usually possess `64M` of cache - the final version of configuration will be the following
 
-{% highlight bash %}
+```bash
 rbd cache = true
 rbd cache size = 67108864 # (64MB)
 rbd cache max dirty = 50331648 # (48MB)
 rbd cache target dirty = 33554432 # (32MB)
 rbd cache max dirty age = 2
 rbd cache writethrough until flush = true
-{% endhighlight %}
+```
 
 
 Now push the configuration to the virtual hosts
 
-{% highlight bash %}
+```bash
 $ ceph-deploy --overwrite-conf config push host1 host2
-{% endhighlight %}
+```
 
 To apply settings without virtual machine restart use `KVM` live migration. After the virtual machine is migrated from `host1` to `host2` the new process will start taking into account the modification to the ceph configuration.
 
 If not sure about setting leave Ceph's default values for amount of cache, simply enable it
 
-{% highlight bash %}
+```bash
 rbd cache = true
 rbd cache writethrough until flush = true
-{% endhighlight %}
+```

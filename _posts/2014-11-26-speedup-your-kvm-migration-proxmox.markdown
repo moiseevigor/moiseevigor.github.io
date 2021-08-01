@@ -17,7 +17,7 @@ If you ever woundered why your 10Gbit link on [Proxmox](https://www.proxmox.com/
 The main reason is the **security measures** taken to protect virtual machine memory during the migration. All volume of memory will be transmitted via secure tunnel and that penalizes the speed:
 
 
-{% highlight bash %}
+```bash
 Nov 24 12:26:41 starting migration of VM 123 to node 'proxmox1' (10.0.1.1)
 Nov 24 12:26:41 copying disk images
 Nov 24 12:26:41 starting VM 123 on remote node 'proxmox1'
@@ -36,20 +36,20 @@ Nov 24 12:26:59 migration speed: 64.00 MB/s - downtime 54 ms
 Nov 24 12:26:59 migration status: completed
 Nov 24 12:27:02 migration finished successfuly (duration 00:00:21)
 TASK OK
-{% endhighlight %}
+```
 
 
 If your configured your Proxmox cluster to use the dedicated network isolated from the public one so you may low down the security level
 
-{% highlight bash %}
+```bash
 $ cat /etc/pve/datacenter.cfg
   ....
   migration_unsecure: 1
-{% endhighlight %}
+```
 
 This is it:
 
-{% highlight bash %}
+```bash
 Nov 24 12:42:19 starting migration of VM 100 to node 'proxmox2' (10.0.1.2)
 Nov 24 12:42:19 copying disk images
 Nov 24 12:42:19 starting VM 100 on remote node 'proxmox2'
@@ -67,7 +67,7 @@ Nov 24 12:42:55 migration speed: 323.37 MB/s - downtime 262 ms
 Nov 24 12:42:55 migration status: completed
 Nov 24 12:42:58 migration finished successfuly (duration 00:00:39)
 TASK OK
-{% endhighlight %}
+```
 
 now you're using all available bandwidth for migration, that also is very useful during migration heavy loaded instances.
 

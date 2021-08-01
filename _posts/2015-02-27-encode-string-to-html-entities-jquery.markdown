@@ -14,26 +14,26 @@ comments: true
 
 The follwoing will encode your string to `HTML` entities 
 
-{% highlight javascript %}
+```sql
 jQuery('<div />').text('Some text with <div>html</div>').html()
-{% endhighlight %}
+```
 
 and the output will look like
 
-{% highlight javascript %}
+```sql
 "Some text with &lt;div&gt;html&lt;/div&gt;"
-{% endhighlight %}
+```
 
 To decode we just switch methods
 
-{% highlight javascript %}
+```sql
 jQuery('<div />').html('Some text with &lt;div&gt;html&lt;/div&gt;').text()
-{% endhighlight %}
+```
 
 produces
 
-{% highlight html %}
+```sql
 "Some text with <div>html</div>"
-{% endhighlight %}
+```
 
 The [jQuery](/tag/jquery) magic!

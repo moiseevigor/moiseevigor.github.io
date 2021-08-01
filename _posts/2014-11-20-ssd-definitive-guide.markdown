@@ -22,7 +22,7 @@ Quite often SSD disks are released with firmware bugs or with non-optimal config
 
 Check that `AHCI` - [Advanced Host Controller Interface](http://en.wikipedia.org/wiki/Advanced_Host_Controller_Interface) is enabled and working:
 
-{% highlight bash %}
+```bash
 $ sudo dmesg | grep -i ahci
     ahci 0000:00:11.0: version 3.0
     ahci 0000:00:11.0: irq 43 for MSI/MSI-X
@@ -31,16 +31,16 @@ $ sudo dmesg | grep -i ahci
     scsi0 : ahci
     scsi1 : ahci
     scsi2 : ahci
-{% endhighlight %}
+```
 
 Check whether your controller supports `AHCI`:
 
-{% highlight bash %}
+```bash
 $ sudo lshw | grep -i ahci
     product: 82801JI (ICH10 Family) SATA AHCI Controller
     capabilities: storage msi pm ahci_1.0 bus_master cap_list emulated
     configuration: driver=ahci latency=0
-{% endhighlight %}
+```
 
 Quite often the `AHCI` is disabled in BIOS, in this case reboot and enable it.
 
@@ -48,18 +48,18 @@ I observed unstable behavior of disks without `AHCI` enabled and even the inabil
 
 Identify the type of SATA modes available (for ex. SATA-II: 3Gbps gives the theoretical limit of speed 375MB/s)
 
-{% highlight bash %}
+```bash
 $ sudo dmesg | grep SATA
     ahci 0000:00:11.0: AHCI 0001.0200 32 slots 6 ports 3 Gbps 0x3f impl SATA mode
     ata1: SATA max UDMA/133 abar m1024@0xfddffc00 port 0xfddffd00 irq 43
-{% endhighlight %}
+```
 
 Check what is supported by disk
 
-{% highlight bash %}
+```bash
 $ sudo hdparm -I /dev/sda | grep SATA
     Transport:          Serial, ATA8-AST, SATA 1.0a, SATA II Extensions, SATA Rev 2.5, SATA Rev 2.6, SATA Rev 3.0
-{% endhighlight %}
+```
 
 The ideal would be any revision higher than `SATA Rev 3.0` which guaranties the 6Gbps or higher speeds.
 
@@ -76,27 +76,27 @@ The ideal would be any revision higher than `SATA Rev 3.0` which guaranties the 
 
 Check that disk `TRIM` ([wikipedia.org/wiki/Trim](http://en.wikipedia.org/wiki/Trim_%28computing%29)) works fine
 
-{% highlight bash %}
+```bash
 $ sudo hdparm -I /dev/sda | grep -i trim
        *    Data Set Management TRIM supported (limit 8 blocks)
-{% endhighlight %}
+```
 
 It is very important to have `TRIM` functioning. Without `TRIM` the disk speed will degrade with time due to the fact that the SSD will have to erase the cell before every write operation.
 
 Let's test it simply by executing `fstrim`
 
-{% highlight bash %}
+```bash
 $ sudo fstrim -v /
 /: 98147174400 bytes were trimmed
-{% endhighlight %}
+```
 
 Lets test whether the `TRIM` is really doing what it should
 
-{% highlight bash %}
+```bash
 $ sudo wget -O /tmp/test_trim.sh "https://sites.google.com/site/lightrush/random-1/checkiftrimonext4isenabledandworking/test_trim.sh?attredirects=0&d=1"
 $ sudo chmod +x /tmp/test_trim.sh
 $ sudo /tmp/test_trim.sh <tempfile> 50 /dev/sdX
-{% endhighlight %}
+```
 
 If `TRIM` is properly working the result of the last command should be a bunch of zeros, thanks to [Nicolay Doytchev](https://sites.google.com/site/lightrush/random-1/checkiftrimonext4isenabledandworking/) for this script.
 
@@ -113,32 +113,32 @@ re-installation of the operating system.
 
 Mount disk with correct parameters
 
-{% highlight bash %}
+```bash
 $ cat /etc/fstab
 /dev/pve/data /var/lib/vz ext4 discard,noatime,commit=600,defaults 0 1
-{% endhighlight %}
+```
 
 Check whether the disk is identified as non `rotational`
 
-{% highlight bash %}
+```bash
 $ sudo for f in /sys/block/sd?/queue/rotational; do printf "$f is "; cat $f; done
 /sys/block/sda/queue/rotational is 0
-{% endhighlight %}
+```
 
 If you see `1` on SSD, that means there are some problem with kernel or `AHCI`
 
 The next is to check that the  scheduler option is selected on `deadline` for our brand new SSD drive
 
-{% highlight bash %}
+```bash
 $ sudo for f in /sys/block/sd?/queue/scheduler; do printf "$f is "; cat $f; done
 /sys/block/sda/queue/scheduler is noop [deadline] cfq
-{% endhighlight %}
+```
 
 If not execute the following
 
-{% highlight bash %}
+```bash
 $ sudo echo deadline > /sys/block/sda/queue/scheduler
-{% endhighlight %}
+```
 
 
 ## References

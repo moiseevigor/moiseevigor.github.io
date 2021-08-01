@@ -14,7 +14,7 @@ comments: true
 
 The following query obtains the list of tables without primary key, those who destroys the database performance
 
-{% highlight sql %}
+```sql
 USE INFORMATION_SCHEMA;
 SELECT 
     TABLES.table_name
@@ -30,7 +30,7 @@ WHERE
 AND TABLES.table_schema <> 'performance_schema'
 AND TABLES.table_schema <> 'mysql'
 AND c.constraint_name IS NULL;
-{% endhighlight %} 
+``` 
 
 A friend advise: "The result list of this query should be `Empty set`". 
 

@@ -17,23 +17,23 @@ Apache's handy [`mod_rewrite`](http://httpd.apache.org/docs/current/mod/mod_rewr
 At first let's check whether the Apache's `mod_rewrite` is enabled. 
 
 
-{% highlight bash %}
+```bash
 # a2enmod rewrite
 Module rewrite already enabled
-{% endhighlight %}
+```
 
 If it was not, then reload configuration 
 
-{% highlight bash %}
+```bash
 # service apache2 reload
  * Reloading web server config apache2                      [OK]
-{% endhighlight %}
+```
 
 
 to assure that the rewrite will work you need to assure the one more thing, it is `AllowOverride` 
 option in the `VirtualHost` configuration
 
-{% highlight bash %}
+```bash
 <VirtualHost *:80>
 
 ...
@@ -48,12 +48,12 @@ option in the `VirtualHost` configuration
 ....
 
 </VirtualHost>
-{% endhighlight %}
+```
 
 
 Now put the following snippet into `.htaccess` located in the folder of your website (`/var/www/example.com/htdocs`)
 
-{% highlight bash %}
+```bash
 RewriteEngine On
 
 # remove trailing slash
@@ -61,7 +61,7 @@ RewriteCond %{HTTPS} off
 RewriteRule ^(.+[^/])/$ http://%{HTTP_HOST}/$1 [R=301,L]
 RewriteCond %{HTTPS} on
 RewriteRule ^(.+[^/])/$ https://%{HTTP_HOST}/$1 [R=301,L]
-{% endhighlight %}
+```
 
 
 That's it, happy re-writing! 

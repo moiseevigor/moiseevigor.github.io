@@ -14,12 +14,12 @@ comments: true
 
 If you get this sudden error in the `fail2ban.log`
 
-{% highlight bash %}
+```bash
 2015-04-20 11:13:17,722 fail2ban.jail   : INFO   Jail 'apache-honeypot' started
 2015-04-20 11:13:17,739 fail2ban.actions.action: ERROR  iptables -N fail2ban-apache-honeypot
 iptables -A fail2ban-apache-honeypot -j RETURN
 iptables -I INPUT -p tcp -m multiport --dports apache-honeypot -j fail2ban-apache-honeypot returned 200
-{% endhighlight %}
+```
 
 most likely you have spotted the character length limitation on the chain name. 
 
@@ -28,7 +28,7 @@ which eats so precious `9` characters so the only `7` remaining.
 
 To solve this issue you need to rename the `iptables` action to something like `name=HONEY`  
 
-{% highlight bash %}
+```bash
 $ cat /etc/fail2ban/jail.conf
 
 [apache-honeypot]
@@ -38,6 +38,6 @@ action   = iptables-allports[name=HONEY, protocol=all]
 logpath  = /var/log/asterisk/full
 maxretry = 3
 bantime  = 600
-{% endhighlight %}
+```
 
 Thas it! The issue is observed on [Fail2Ban](/tag/fail2ban) ver. `0.8` or older. 

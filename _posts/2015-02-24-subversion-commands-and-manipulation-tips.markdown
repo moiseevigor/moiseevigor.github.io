@@ -14,24 +14,24 @@ comments: true
 
 Delete recursively the `.svn` directories
 
-{% highlight bash %}
+```bash
 $ rm -rf `find . -type d -name .svn`
-{% endhighlight %}
+```
 
 Find files not under the version control
 
-{% highlight bash %}
+```bash
 $ svn status | grep -e ^?
-{% endhighlight %}
+```
 
 How to remove all deleted files from repository
 
-{% highlight bash %}
+```bash
 $ svn st | grep '^!' | awk '{print $2}' | xargs svn delete --force
-{% endhighlight %}
+```
 
 `grep` on folder with excluding of `.svn` dirs
 
-{% highlight bash %}
+```bash
 $ grep -r 'content_graphic' assets/js --exclude=*\.svn*
-{% endhighlight %}
+```

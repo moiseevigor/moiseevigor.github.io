@@ -39,7 +39,7 @@ So what to do? Let's chill out
 
 Now let's question yourself how would you extract this information? We end up with the `STAT` utility
 
-{% highlight bash %}
+```bash
 NAME
       stat - display file or file system status
 
@@ -48,11 +48,11 @@ SYNOPSIS
 
 DESCRIPTION
        Display file or file system status.
-{% endhighlight %}
+```
 
 and `DEBUGFS` utilities
 
-{% highlight bash %}
+```bash
 NAME
        debugfs - ext2/ext3/ext4 file system debugger
 
@@ -62,17 +62,17 @@ SYNOPSIS
 DESCRIPTION
        The debugfs program is an interactive file system debugger. It can be used to examine and change the state of an ext2, ext3, or ext4 file system.
        device is the special file corresponding to the device containing the file system (e.g /dev/hdXX).
-{% endhighlight %}
+```
 
 So we compound both command in one
 
-{% highlight bash %}
+```bash
 $ debugfs -R 'stat <filename>' </dev/sdXX - partition name>
-{% endhighlight %}
+```
 
 to finally get the `crtime` - creation time:
 
-{% highlight bash %}
+```bash
 Inode: 1071162   Type: regular    Mode:  0644   Flags: 0x80000
 Generation: 1324300925    Version: 0x00000000:00000001
 User:   105   Group:   114   Size: 1831803
@@ -86,7 +86,7 @@ Fragment:  Address: 0    Number: 0    Size: 0
 Size of extra inode fields: 28
 EXTENTS:
 (0): 4229445, (1-7): 4261097-4261103, ...
-{% endhighlight %}
+```
 
 So lets write the [`xstat` utility](https://gist.github.com/moiseevigor/8c496f632137605b322e) before the consensus will come :)
 
@@ -94,7 +94,7 @@ So lets write the [`xstat` utility](https://gist.github.com/moiseevigor/8c496f63
 
 now put it in `~/.bashrc` or `~/.profile` and voilà:
 
-{% highlight bash %}
+```bash
 $ xstat *
 Tue Jan 13 17:41:05 2015	404.html
 Thu Feb  5 23:19:19 2015	about.md
@@ -117,5 +117,5 @@ Tue Jan 13 17:41:05 2015	README.md
 Tue Jan 13 17:41:05 2015	search
 Wed Jan 14 20:08:17 2015	_site
 Thu Feb  5 22:51:27 2015	tags.html
-{% endhighlight %}
+```
 

@@ -19,7 +19,7 @@ comments: true
 
 Are you tired to see these lines in Apache log
 
-{% highlight bash %}
+```bash
 cat /var/log/apache2/other_vhosts_access.log | grep "wp-login.php"
 
 example.com:80 95.211.131.148 - - [20/Jan/2015:12:40:14 +0100] "POST /wp-login.php HTTP/1.0" 200 211 "-" "-"
@@ -31,7 +31,7 @@ example.com:80 95.211.131.148 - - [20/Jan/2015:12:40:15 +0100] "POST /wp-login.p
 example.com:80 95.211.131.148 - - [20/Jan/2015:12:40:15 +0100] "POST /wp-login.php HTTP/1.0" 200 211 "-" "-"
 example.com:80 95.211.131.148 - - [20/Jan/2015:12:40:15 +0100] "POST /wp-login.php HTTP/1.0" 200 211 "-" "-"
 example.com:80 95.211.131.148 - - [20/Jan/2015:12:40:15 +0100] "POST /wp-login.php HTTP/1.0" 200 211 "-" "-"
-{% endhighlight %}
+```
 
 Actually your server is working hard managing multiple attempts to login, especially in such frameworks like 
 Wordpress and Joomla. The saturation of database connections results in Denial-of-Service and the website downtimes!
@@ -50,13 +50,13 @@ Install [`Fail2ban`](http://www.fail2ban.org):
 
 Now lets configure `Fail2ban` to ban the attacker.
 
-{% highlight bash %}
+```bash
 sudo vim /etc/fail2ban/jail.conf
-{% endhighlight %}
+```
 
 add the following to the end of the file
 
-{% highlight bash %}
+```bash
 [framework-ddos]
 enabled = true
 port = 80,443
@@ -68,56 +68,56 @@ maxretry = 10
 findtime = 600
 # bantime: 1 week
 bantime  = 604800
-{% endhighlight %}
+```
 
 The default installation of [ISPConfig](http://www.ispconfig.org) writes into log file loceted in `/var/log/apache2/other_vhosts_access.log` in the following format
 
-{% highlight bash %}
+```bash
 example.com:80 95.211.131.148 - - [22/Jan/2015:17:10:52 +0100] "GET /wp-login.php HTTP/1.1" 200 22457 "-" "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
-{% endhighlight %}
+```
 
 The next is the most important part, the filter configuration
 
-{% highlight bash %}
+```bash
 vim /etc/fail2ban/filter.d/framework-ddos.conf 
-{% endhighlight %}
+```
 
 and put the following regular expressions
 
-{% highlight bash %}
+```bash
 [Definition]
 failregex = .*:(80|443) <HOST> .*(GET|POST) .*/xmlrpc.php
             .*:(80|443) <HOST> .*(GET|POST) .*/wp-login.php
             .*:(80|443) <HOST> .*(GET|POST) /administrator/index.php HTTP
-{% endhighlight %}
+```
 
 Restart `Fail2ban` 
 
-{% highlight bash %}
+```bash
 sudo /etc/init.d/fail2ban restart
-{% endhighlight %}
+```
 
 ## STEP 3: Testing and monitoring
 
 Start monitoring the log file 
 
-{% highlight bash %}
+```bash
 sudo tail -f /var/log/fail2ban.log 
-{% endhighlight %}
+```
 
 once you've seen the first attacker
 
-{% highlight bash %}
+```bash
 2015-01-20 12:40:35,205 fail2ban.actions: WARNING [framework-ddos] Ban 95.211.131.148
-{% endhighlight %}
+```
 
 Check out the `iptables` for the action applied correct firewall rules
 
-{% highlight bash %}
+```bash
 Chain fail2ban-framework-ddos (1 references)
 target     prot opt source               destination         
 DROP       all  --  95.211.131.148       0.0.0.0/0           
-{% endhighlight %}
+```
 
 This is it!
 

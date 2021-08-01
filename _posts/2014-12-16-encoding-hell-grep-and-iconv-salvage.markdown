@@ -25,35 +25,35 @@ when dumped and migrated.
 
 Lets get workaround this problem. At first find non `ASCII` characters in the dump file 
 
-{% highlight bash %}
+```bash
 grep --color='auto' -P "[\x80-\xFF]" FILENAME
-{% endhighlight %}
+```
 
 Now let's work it out with `iconv`
 
-{% highlight bash %}
+```bash
 iconv --verbose -f LATIN1 -t UTF8//TRANSLIT FILENAME_latin1 > FILENAME_utf8
-{% endhighlight %}
+```
 
 If you get the followinf message
 
-{% highlight bash %}
+```bash
 iconv: illegal input sequence at position <NUMBER>
-{% endhighlight %}
+```
 
 this is a good sign of badly encoded character, you may correct it with vim, just type in command mode
 
-{% highlight bash %}
+```bash
 :goto <NUMBER>
-{% endhighlight %}
+```
 
 Taking into account that you're working with `UTF8` locale session in terminal
 
-{% highlight bash %}
+```bash
 user@host:~$ locale 
 LANG=en_US.UTF-8
 LANGUAGE=en_US:
 LC_CTYPE="en_US.UTF-8"
-{% endhighlight %}
+```
 
 After you're finished, just save the file and import it into `UTF8` encoded fields of the database!
