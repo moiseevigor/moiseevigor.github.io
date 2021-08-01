@@ -57,7 +57,6 @@ Email2DB parses the email schema into the relational schema. It supports major S
 
 This is a public space for thoughts on [MySQL](/tag/mysql) and [PostgreSQL](/tag/postgresql). [Ceph](/tag/ceph)'s Storage clustering and KVM virtualization. Programming with NodeJS and [PHP](/tag/php). Hacking with RaspberryPI and Arduino. Please feel free to modify any text in it.
 
-[![Build Status](https://travis-ci.org/moiseevigor/moiseevigor.github.io.svg?branch=master)](https://travis-ci.org/moiseevigor/moiseevigor.github.io)&nbsp;
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/moiseevigor/moiseevigor.github.io?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![CircleCI](https://circleci.com/gh/moiseevigor/moiseevigor.github.io/tree/master.svg?style=svg)](https://circleci.com/gh/moiseevigor/moiseevigor.github.io/tree/master)
 
 <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>

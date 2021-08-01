@@ -51,10 +51,9 @@ Email2DB parses the email schema into the relational schema. It supports major S
 <a aria-label="Fork moiseevigor/moiseevigor.github.io on GitHub" data-count-aria-label="# forks on GitHub" data-count-api="/repos/moiseevigor/moiseevigor.github.io#forks_count" data-count-href="/moiseevigor/moiseevigor.github.io/network" data-style="mega" data-icon="octicon-git-branch" href="https://github.com/moiseevigor/moiseevigor.github.io/fork" class="github-button">Fork</a>
 
 
-This is a public space for thoughts on [MySQL](/tag/mysql) and [PostgreSQL](/tag/postgresql). [Ceph](/tag/ceph)'s Storage clustering and KVM virtualization. Programming with NodeJS and [PHP](/tag/php). Hacking with RaspberryPI and Arduino. Please feel free to modify any text in it.
+This is a public space for thoughts on Machine learning and buman intelligence. Also it includes some random thought on tech and retaled topics.
 
-[![Build Status](https://travis-ci.org/moiseevigor/moiseevigor.github.io.svg?branch=master)](https://travis-ci.org/moiseevigor/moiseevigor.github.io)&nbsp;
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/moiseevigor/moiseevigor.github.io?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![CircleCI](https://circleci.com/gh/moiseevigor/moiseevigor.github.io/tree/master.svg?style=svg)](https://circleci.com/gh/moiseevigor/moiseevigor.github.io/tree/master)
 
 <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
 
