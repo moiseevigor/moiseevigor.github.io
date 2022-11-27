@@ -10,4 +10,4 @@ tags:
 comments: true
 ---
 
-http://webkay.robinlinus.com/scripts/ip.js
+https://webkay.robinlinus.com/scripts/ip.js

@@ -9,8 +9,8 @@ comments: true
 ---
 ssh -fNg -L 5555:localhost:5432
 
-http://www.ur-ban.com/blog/2010/10/25/ssh-tunnels-with-postgres-pgadmin/
-http://dustindavis.me/ssh-tunnel-in-pgadmin3-for-postgresql.html
+https://www.ur-ban.com/blog/2010/10/25/ssh-tunnels-with-postgres-pgadmin/
+https://dustindavis.me/ssh-tunnel-in-pgadmin3-for-postgresql.html
 
 https://bugs.launchpad.net/ubuntu/+source/mysql-workbench/+bug/1385147
 

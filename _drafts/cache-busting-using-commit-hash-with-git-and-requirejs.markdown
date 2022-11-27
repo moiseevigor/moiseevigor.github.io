@@ -12,7 +12,7 @@ tags:
 comments: true
 ---
 
-http://stackoverflow.com/questions/8315088/prevent-requirejs-from-caching-required-scripts
+https://stackoverflow.com/questions/8315088/prevent-requirejs-from-caching-required-scripts
 
 ```
 # cat .git/hooks/post-commit

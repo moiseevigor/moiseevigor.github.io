@@ -12,7 +12,7 @@ permalink:           pretty
 title:               Igor Moiseev
 tagline:             'Applied mathematician, Web Developer'
 description:         'Some notes on technology and intelligence.'
-url:                 http://moiseevigor.github.io
+url:                 https://moiseevigor.github.io
 baseurl:             ""
 paginate:            5
 
@@ -42,7 +42,7 @@ plugins:
   - jekyll-redirect-from
   - jekyll-paginate
 
-# http://jekyllrb.com/docs/variables/
+# https://jekyllrb.com/docs/variables/
 # https://github.com/jekyll/jekyll/issues/2516
 lsi: true
 

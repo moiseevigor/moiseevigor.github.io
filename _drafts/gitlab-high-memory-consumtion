@@ -12,7 +12,7 @@ tags:
 comments: true
 ---
 
-http://doc.gitlab.com/ce/operations/sidekiq_memory_killer.html
+https://doc.gitlab.com/ce/operations/sidekiq_memory_killer.html
 https://github.com/gitlabhq/gitlabhq/issues/2780
-http://stackoverflow.com/questions/24403843/optimising-sidekiq-redis-heroku-and-rails
+https://stackoverflow.com/questions/24403843/optimising-sidekiq-redis-heroku-and-rails
 https://github.com/mperham/sidekiq/blob/master/examples/config.yml

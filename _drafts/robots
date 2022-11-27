@@ -1,4 +1,4 @@
-http://stackoverflow.com/questions/19869004/robots-txt-to-disallow-all-pages-except-one-do-they-override-and-cascade
+https://stackoverflow.com/questions/19869004/robots-txt-to-disallow-all-pages-except-one-do-they-override-and-cascade
 
 User-agent: *
 Allow: /$

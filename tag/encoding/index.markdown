@@ -8,7 +8,7 @@ tag: encoding
 	<img src="/public/images/{{ page.tag }}.png" style="max-width: 10rem;" alt="{{ page.tag }}" />
 </div>
 
-[A character encoding](http://en.wikipedia.org/wiki/Character_encoding) is used to represent a repertoire of characters by some kind of an encoding system.
+[A character encoding](https://en.wikipedia.org/wiki/Character_encoding) is used to represent a repertoire of characters by some kind of an encoding system.
 
 Common examples of character encoding systems include Morse code, the Baudot code, the American Standard Code for Information Interchange (ASCII) and [Unicode](/tag/unicode).
 

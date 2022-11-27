@@ -12,7 +12,7 @@ tags:
 comments: true
 ---
 
-Apache's handy [`mod_rewrite`](http://httpd.apache.org/docs/current/mod/mod_rewrite.html) module is helping to correct this unfortunate human typos.
+Apache's handy [`mod_rewrite`](https://httpd.apache.org/docs/current/mod/mod_rewrite.html) module is helping to correct this unfortunate human typos.
 
 At first let's check whether the Apache's `mod_rewrite` is enabled. 
 
@@ -58,7 +58,7 @@ RewriteEngine On
 
 # remove trailing slash
 RewriteCond %{HTTPS} off
-RewriteRule ^(.+[^/])/$ http://%{HTTP_HOST}/$1 [R=301,L]
+RewriteRule ^(.+[^/])/$ https://%{HTTP_HOST}/$1 [R=301,L]
 RewriteCond %{HTTPS} on
 RewriteRule ^(.+[^/])/$ https://%{HTTP_HOST}/$1 [R=301,L]
 ```

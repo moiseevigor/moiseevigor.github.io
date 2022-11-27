@@ -31,9 +31,9 @@ Series of lessons on [Linux](/tag/linux), [Apache](/tag/apache), [Databases](/ta
 
 ## Configuring Linux
 
-Now we see how to setup the development environment. First download Linux (for ex. Linux Mint [www.linuxmint.com/download.php](http://www.linuxmint.com/download.php)) and install on Pen Drive following this tutorial [www.ubuntu.com/download/desktop/create-a-usb-stick-on-windows](http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-windows). 
+Now we see how to setup the development environment. First download Linux (for ex. Linux Mint [www.linuxmint.com/download.php](https://www.linuxmint.com/download.php)) and install on Pen Drive following this tutorial [www.ubuntu.com/download/desktop/create-a-usb-stick-on-windows](https://www.ubuntu.com/download/desktop/create-a-usb-stick-on-windows). 
 
-You may wish to install it as the second OS on your PC, see the manual [www.everydaylinuxuser.com/2014/07/how-to-install-linux-mint-alongside.html](http://www.everydaylinuxuser.com/2014/07/how-to-install-linux-mint-alongside.html).
+You may wish to install it as the second OS on your PC, see the manual [www.everydaylinuxuser.com/2014/07/how-to-install-linux-mint-alongside.html](https://www.everydaylinuxuser.com/2014/07/how-to-install-linux-mint-alongside.html).
 
 
 When the Linux is up and running, 
@@ -155,7 +155,7 @@ For Web development there is a big choice of editors and IDE-s available. Let's 
 
 ### Sublime Text
 
-[Sublime Text](http://www.sublimetext.com/) is a sophisticated text editor for code, markup and prose. You'll love the slick user interface, extraordinary features and amazing performance.
+[Sublime Text](https://www.sublimetext.com/) is a sophisticated text editor for code, markup and prose. You'll love the slick user interface, extraordinary features and amazing performance.
 
 ![Sublime Text](/public/images/learning-nosql-php-linux-05.png)
 
@@ -182,7 +182,7 @@ Clone repository https://github.com/ccoenraets/wine-cellar-php and configure Apa
 
 ####Hints
 
- - Create new Droplet Ubuntu 14.04 x64 on [DigitalOcean](http://digitalocean.com)
+ - Create new Droplet Ubuntu 14.04 x64 on [DigitalOcean](https://digitalocean.com)
  - install apache2 and mysql: [digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-14-04](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-14-04)
  - enable `rewrite` module with
 
@@ -222,7 +222,7 @@ Install Ghost Blogging platfowm https://github.com/TryGhost/Ghost and create one
 
 #### Hints
 
- - Installation for all platforms http://support.ghost.org/installation/
+ - Installation for all platforms https://support.ghost.org/installation/
  - Or alternatively, cofigure with DigitalOcean (create new Droplet Ubuntu 12.04.5 x64) [digitalocean.com/community/tutorials/how-to-host-ghost-with-nginx-on-digitalocean](https://www.digitalocean.com/community/tutorials/how-to-host-ghost-with-nginx-on-digitalocean) 
 
 
@@ -349,7 +349,7 @@ $ php -S localhost:8080
 
 Note, the built-in web server is available only for version of `PHP` >5.4.
 
-Now open browser on  `http://localhost:8080/hello/world` or try it via `telnet`
+Now open browser on  `https://localhost:8080/hello/world` or try it via `telnet`
 
 
 ```bash

@@ -13,11 +13,11 @@ tags:
 comments: true
 ---
 
-Despite the common opinion [unix.stackexchange.com/get-file-created-creation-time](http://unix.stackexchange.com/a/24442/13721)
+Despite the common opinion [unix.stackexchange.com/get-file-created-creation-time](https://unix.stackexchange.com/a/24442/13721)
 
 > Linux offers three timestamps for files: time of last access of contents (atime), time of last modification of contents (mtime), and time of last modification of the inode (metadata, ctime).
 
-You may recover the file creation date if you deal with capble filesystem like [EXT4 - journaling file system for Linux](http://en.wikipedia.org/wiki/Ext4):
+You may recover the file creation date if you deal with capble filesystem like [EXT4 - journaling file system for Linux](https://en.wikipedia.org/wiki/Ext4):
 
 > **Improved timestamps**
 
@@ -33,7 +33,7 @@ Which end up with [the Linus final quote](https://lkml.org/lkml/2010/7/22/249)
 
 So what to do? Let's chill out
 
-<iframe scrolling="no" frameborder="0" allowTransparency="true" src="http://www.deezer.com/plugins/player?autoplay=false&amp;playlist=true&amp;width=720&amp;height=240&amp;cover=true&amp;type=playlist&amp;id=1157085741&amp;title=&amp;app_id=undefined" width="720" height="240"></iframe>
+<iframe scrolling="no" frameborder="0" allowTransparency="true" src="https://www.deezer.com/plugins/player?autoplay=false&amp;playlist=true&amp;width=720&amp;height=240&amp;cover=true&amp;type=playlist&amp;id=1157085741&amp;title=&amp;app_id=undefined" width="720" height="240"></iframe>
 
 <br>
 

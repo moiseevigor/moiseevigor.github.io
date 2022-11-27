@@ -59,6 +59,6 @@ class Product(models.Model):
 
 ```
 
-Everything works smoothly in [Django Rest Framework](http://www.django-rest-framework.org/) and you have nice looking URLs.
+Everything works smoothly in [Django Rest Framework](https://www.django-rest-framework.org/) and you have nice looking URLs.
 
 Happy coding!

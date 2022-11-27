@@ -26,6 +26,6 @@ in "/etc/sysctl.conf".
 
 Afterwards you should be able to sync your time via ntp.
 
-http://serverfault.com/questions/39356/why-is-the-time-messed-up-on-my-ubuntu-server-vps
+https://serverfault.com/questions/39356/why-is-the-time-messed-up-on-my-ubuntu-server-vps
 
 https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Virtualization_Administration_Guide/sect-Virtualization-Tips_and_tricks-Libvirt_Managed_Timers.html

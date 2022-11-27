@@ -8,7 +8,7 @@ tag: database
 	<img src="/public/images/{{ page.tag }}.png" style="max-width: 10rem;" alt="{{ page.tag }}" />
 </div>
 
-[Database management systems](http://en.wikipedia.org/wiki/Database) are computer software applications that interact with the user, other applications, and the database itself to capture and analyze data. 
+[Database management systems](https://en.wikipedia.org/wiki/Database) are computer software applications that interact with the user, other applications, and the database itself to capture and analyze data. 
 
 A general-purpose DBMS is designed to allow the definition, creation, querying, update, and administration of databases. 
 

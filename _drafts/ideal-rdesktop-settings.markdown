@@ -10,5 +10,5 @@ tags:
 comments: true
 ---
 
-http://superuser.com/questions/655433/what-is-ideal-internet-speed-for-remote-desktop-connection
-http://serverfault.com/questions/200417/ideal-settings-for-rdesktop
+https://superuser.com/questions/655433/what-is-ideal-internet-speed-for-remote-desktop-connection
+https://serverfault.com/questions/200417/ideal-settings-for-rdesktop

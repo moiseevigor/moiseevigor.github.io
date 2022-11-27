@@ -17,10 +17,10 @@ comments: true
 Here we discus how to migrate the Subversion repository into a new Git repository. 
 We'll do it with a handy `git svn` utility. We will refer Gitlab/Github as the destination Git server.
 
-Create a new project on Gitlab: `http://\<gitlab-address\>/projects/new` and clone it into your local machine
+Create a new project on Gitlab: `https://\<gitlab-address\>/projects/new` and clone it into your local machine
 
 ```bash
-git svn clone http://<svn-address>/<projectname>
+git svn clone https://<svn-address>/<projectname>
 cd <projectname>
 git remote add origin git@gitlab.newentity.it:newentity-sas/<projectname>.git
 git push -u origin master

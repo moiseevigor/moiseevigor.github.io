@@ -12,7 +12,7 @@ tags:
 comments: true
 ---
 
-I've wrote before the small post on how to [find and substitute the string in all files with `sed` command in GNU/Linux](http://moiseevigor.github.io/software/2016/05/24/find-and-substitute-string-sed-linux/).
+I've wrote before the small post on how to [find and substitute the string in all files with `sed` command in GNU/Linux](https://moiseevigor.github.io/software/2016/05/24/find-and-substitute-string-sed-linux/).
 Now I'd like to show the real use case.
 
 You've bought a new SSL certificate and configured your web server.
@@ -30,7 +30,7 @@ all files and directories recursively - it is `sed` command on GNU/Linux
 find . -type f -print0 | xargs -0 sed -i 's/old_phrase/new_phrase/g'
 ```
 
-Attention! The previous command finds files also in the hidden folders and if you're working with [Subversion](/tag/subversion) or [GIT](/tag/git) you'd like to skip them. The [following keys](http://askubuntu.com/a/318211/7484) `-not -path '*/\.*'` makes the trick
+Attention! The previous command finds files also in the hidden folders and if you're working with [Subversion](/tag/subversion) or [GIT](/tag/git) you'd like to skip them. The [following keys](https://askubuntu.com/a/318211/7484) `-not -path '*/\.*'` makes the trick
 
 ```bash
 find . -not -path '*/\.*' -type f -print0 | xargs -0 sed -i 's/http:\/\//https:\/\//g'
@@ -39,7 +39,7 @@ find . -not -path '*/\.*' -type f -print0 | xargs -0 sed -i 's/http:\/\//https:\
 After this command your links like
 
 ```html
-<img src="http://example.com/dot.png">
+<img src="https://example.com/dot.png">
 ```
 
 will be converted to

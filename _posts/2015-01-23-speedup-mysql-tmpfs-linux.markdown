@@ -16,7 +16,7 @@ comments: true
 
 Today we will deal with temporary tables and files. 
 
-At first lets examine the MySQL whether it actually uses temporary tables writings with [`mysqltuner`](http://mysqltuner.com/)
+At first lets examine the MySQL whether it actually uses temporary tables writings with [`mysqltuner`](https://mysqltuner.com/)
 
 ```bash
 :~$ sudo mysqltuner
@@ -46,7 +46,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'tmpdir';
 1 row in set (0.00 sec)
 ```
 
-Let's make sure that MySQL intensively writing in this folder using great [`iwatch`](http://iwatch.sourceforge.net/index.html) command
+Let's make sure that MySQL intensively writing in this folder using great [`iwatch`](https://iwatch.sourceforge.net/index.html) command
 
 ```bash
 :~$ sudo iwatch /tmp/

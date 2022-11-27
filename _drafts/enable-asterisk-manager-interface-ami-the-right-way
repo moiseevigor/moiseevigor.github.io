@@ -10,7 +10,7 @@ tags:
 - asterisk
 comments: true
 ---
- http://the-asterisk-book.com/1.6/asterisk-manager-api.html
+ https://the-asterisk-book.com/1.6/asterisk-manager-api.html
 
 
 -rw-r----- 1 asterisk asterisk  378 dic 12  2014 /etc/asterisk/manager.conf

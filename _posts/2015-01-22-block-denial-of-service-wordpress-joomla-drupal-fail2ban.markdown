@@ -40,7 +40,7 @@ To block the unsolicited requests and avoid website downtimes we just need to fo
 
 ## STEP 1: Fail2ban installation
 
-Install [`Fail2ban`](http://www.fail2ban.org):
+Install [`Fail2ban`](https://www.fail2ban.org):
 
  - On Ubuntu: [How To Install and Use Fail2ban on Ubuntu 14.04](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-fail2ban-on-ubuntu-14-04)
  - On Debian: [How To Protect SSH with fail2ban on Debian 7](https://www.digitalocean.com/community/tutorials/how-to-protect-ssh-with-fail2ban-on-debian-7)
@@ -70,10 +70,10 @@ findtime = 600
 bantime  = 604800
 ```
 
-The default installation of [ISPConfig](http://www.ispconfig.org) writes into log file loceted in `/var/log/apache2/other_vhosts_access.log` in the following format
+The default installation of [ISPConfig](https://www.ispconfig.org) writes into log file loceted in `/var/log/apache2/other_vhosts_access.log` in the following format
 
 ```bash
-example.com:80 95.211.131.148 - - [22/Jan/2015:17:10:52 +0100] "GET /wp-login.php HTTP/1.1" 200 22457 "-" "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+example.com:80 95.211.131.148 - - [22/Jan/2015:17:10:52 +0100] "GET /wp-login.php HTTP/1.1" 200 22457 "-" "Mozilla/5.0 (compatible; Googlebot/2.1; +https://www.google.com/bot.html)"
 ```
 
 The next is the most important part, the filter configuration

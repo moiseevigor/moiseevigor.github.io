@@ -68,7 +68,7 @@ function navbar_reset_top() {
         <a
           class="social-share-element"
           id="social-linkedin"
-          href="http://www.linkedin.com/shareArticle?mini=true&amp;title={{ page.title }}&amp;url={{ site.url }}{{ page.url }}&amp;source={{ site.url }}"
+          href="https://www.linkedin.com/shareArticle?mini=true&amp;title={{ page.title }}&amp;url={{ site.url }}{{ page.url }}&amp;source={{ site.url }}"
           target="_blank"
           title="Share this post on LinkedIn"><i class="fa fa-linkedin-square"></i></a>
       </div>
@@ -170,15 +170,15 @@ var services = {
   }
 }
 
-getJSON('http://webmention.io/api/count?target=' + '{{ site.url }}{{ page.url }}', function (data) {
+getJSON('https://webmention.io/api/count?target=' + '{{ site.url }}{{ page.url }}', function (data) {
   if(data.count > 0)
     document.getElementById('mentions-count').innerHTML = data.count + '&nbsp;Mentions';
 });
 
-//get_counters('http://urls.api.twitter.com/1/urls/count.json?url=', '{{ site.url }}{{ page.url }}', 'callback_twitter');
+//get_counters('https://urls.api.twitter.com/1/urls/count.json?url=', '{{ site.url }}{{ page.url }}', 'callback_twitter');
 get_counters('https://graph.facebook.com/?id=', '{{ site.url }}{{ page.url }}', 'callback_facebook');
-get_counters('http://www.linkedin.com/countserv/count/share?url=', '{{ site.url }}{{ page.url }}', 'callback_linkedin');
-get_counters('http://share.yandex.ru/gpp.xml?url=', '{{ site.url }}{{ page.url }}', 'services.gplus.cb');
+get_counters('https://www.linkedin.com/countserv/count/share?url=', '{{ site.url }}{{ page.url }}', 'callback_linkedin');
+get_counters('https://share.yandex.ru/gpp.xml?url=', '{{ site.url }}{{ page.url }}', 'services.gplus.cb');
 
 </script>
 

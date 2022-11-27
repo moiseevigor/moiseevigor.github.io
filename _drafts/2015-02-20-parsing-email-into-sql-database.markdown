@@ -16,4 +16,4 @@ comments: true
 ---
 Parsing email into SQL database
 
-http://stuporglue.org/mailreader-php-parse-e-mail-and-save-attachments-php-version-2/
+https://stuporglue.org/mailreader-php-parse-e-mail-and-save-attachments-php-version-2/

@@ -14,13 +14,13 @@ comments: true
 
 ## STEP 1:
 
-Choose a disk with the most optimal ratio IOPS/price. Check out the list of disks in order of IOPS (Input/Output Operations Per Second)  performance: [en.wikipedia.org/wiki/IOPS](http://en.wikipedia.org/wiki/IOPS#Examples).
+Choose a disk with the most optimal ratio IOPS/price. Check out the list of disks in order of IOPS (Input/Output Operations Per Second)  performance: [en.wikipedia.org/wiki/IOPS](https://en.wikipedia.org/wiki/IOPS#Examples).
 
 Quite often SSD disks are released with firmware bugs or with non-optimal configurations, so before putting the system in production checkout the latest version.
 
 ## STEP 2:
 
-Check that `AHCI` - [Advanced Host Controller Interface](http://en.wikipedia.org/wiki/Advanced_Host_Controller_Interface) is enabled and working:
+Check that `AHCI` - [Advanced Host Controller Interface](https://en.wikipedia.org/wiki/Advanced_Host_Controller_Interface) is enabled and working:
 
 ```bash
 $ sudo dmesg | grep -i ahci
@@ -67,14 +67,14 @@ The ideal would be any revision higher than `SATA Rev 3.0` which guaranties the 
 
 ## STEP 2.5: Pause
 
-<iframe scrolling="no" frameborder="0" allowTransparency="true" src="http://www.deezer.com/plugins/player?autoplay=false&amp;playlist=true&amp;width=700&amp;height=240&amp;cover=true&amp;type=playlist&amp;id=30595446&amp;title=&amp;app_id=undefined" width="700" height="240"></iframe>
+<iframe scrolling="no" frameborder="0" allowTransparency="true" src="https://www.deezer.com/plugins/player?autoplay=false&amp;playlist=true&amp;width=700&amp;height=240&amp;cover=true&amp;type=playlist&amp;id=30595446&amp;title=&amp;app_id=undefined" width="700" height="240"></iframe>
 
 
 <br>
 
 ## STEP 3:
 
-Check that disk `TRIM` ([wikipedia.org/wiki/Trim](http://en.wikipedia.org/wiki/Trim_%28computing%29)) works fine
+Check that disk `TRIM` ([wikipedia.org/wiki/Trim](https://en.wikipedia.org/wiki/Trim_%28computing%29)) works fine
 
 ```bash
 $ sudo hdparm -I /dev/sda | grep -i trim
@@ -103,10 +103,10 @@ If `TRIM` is properly working the result of the last command should be a bunch o
 ## STEP 4:
 
 Be sure to format disk in the SSD friendly file system: `EXT4`, `F2FS`, `BTRFS`, `XFS`
-or any other from this list [File systems optimized for flash memory](http://en.wikipedia.org/wiki/List_of_file_systems#File_systems_optimized_for_flash_memory.2C_solid_state_media).
+or any other from this list [File systems optimized for flash memory](https://en.wikipedia.org/wiki/List_of_file_systems#File_systems_optimized_for_flash_memory.2C_solid_state_media).
 
 If not, you'll better migrate it to `EXT4` at least with the help of this manual
-[Migrating a live system from ext3 to ext4 filesystem](http://www.debian-administration.org/article/643/Migrating_a_live_system_from_ext3_to_ext4_filesystem) or consider the complete
+[Migrating a live system from ext3 to ext4 filesystem](https://www.debian-administration.org/article/643/Migrating_a_live_system_from_ext3_to_ext4_filesystem) or consider the complete
 re-installation of the operating system.
 
 ## STEP 5:
@@ -143,7 +143,7 @@ $ sudo echo deadline > /sys/block/sda/queue/scheduler
 
 ## References
  - [wiki.debian.org/SSDOptimization](https://wiki.debian.org/SSDOptimization)
- - [zoomingin.net/come-abilitare-funzione-trim-ssd-linux/](http://www.zoomingin.net/come-abilitare-funzione-trim-ssd-linux/)
+ - [zoomingin.net/come-abilitare-funzione-trim-ssd-linux/](https://www.zoomingin.net/come-abilitare-funzione-trim-ssd-linux/)
  - [sites.google.com/site/lightrush/random-1/checkiftrimonext4isenabledandworking](https://sites.google.com/site/lightrush/random-1/checkiftrimonext4isenabledandworking)
- - [superuser.com/questions/417857/how-to-find-sata-controller-version-on-ubuntu-laptop-do-i-have-sata-1-2-or-3](http://superuser.com/questions/417857/how-to-find-sata-controller-version-on-ubuntu-laptop-do-i-have-sata-1-2-or-3)
- - [cyberciti.biz/faq/linux-change-io-scheduler-for-harddisk](http://www.cyberciti.biz/faq/linux-change-io-scheduler-for-harddisk/)
+ - [superuser.com/questions/417857/how-to-find-sata-controller-version-on-ubuntu-laptop-do-i-have-sata-1-2-or-3](https://superuser.com/questions/417857/how-to-find-sata-controller-version-on-ubuntu-laptop-do-i-have-sata-1-2-or-3)
+ - [cyberciti.biz/faq/linux-change-io-scheduler-for-harddisk](https://www.cyberciti.biz/faq/linux-change-io-scheduler-for-harddisk/)

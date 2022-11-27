@@ -12,7 +12,7 @@ tags:
 comments: true
 ---
 
-http://serverfault.com/questions/342412/bash-scripting-munin-plugin-dont-work
+https://serverfault.com/questions/342412/bash-scripting-munin-plugin-dont-work
 
 /etc/munin/plugin-conf.d/munin-node
 [kvm_*]

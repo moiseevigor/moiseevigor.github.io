@@ -16,8 +16,8 @@ When you install `git` on your computer, you may find new variables available in
 This variable contains the branch name of the current repository. The only thing you need to edit `~/.bashrc`
 and add `$(__git_ps1)` to the `PS1` definition in this way
 
-http://giantdorks.org/alain/fix-for-postfix-untrusted-certificate-tls-error/
-http://wiki.lenux.org/configure-postfix-with-tls/
+https://giantdorks.org/alain/fix-for-postfix-untrusted-certificate-tls-error/
+https://wiki.lenux.org/configure-postfix-with-tls/
 https://support.google.com/mail/answer/6330403?p=tls&hl=en&rd=1
 https://www.google.com/transparencyreport/saferemail/tls/?hl=en
 

@@ -11,4 +11,4 @@ tags:
 comments: true
 ---
 
-http://gitlab.newentity.it/newentity-sas/cloudpbx/blob/version-2-2/sbc/etc/iptables.up.rules
+https://gitlab.newentity.it/newentity-sas/cloudpbx/blob/version-2-2/sbc/etc/iptables.up.rules
