@@ -30,7 +30,7 @@ For MacOS users the command would be, note the `sed -i ''`
 find . -not -path '*/\.*' -type f -print0 | xargs -0 sed -i '' 's/old_phrase/new_phrase/g'
 ```
 
-Note. MacOS ships the BSD sed. In linux you run the GNU sed. More around it https://stackoverflow.com/questions/7573368/in-place-edits-with-sed-on-os-x
+Note. MacOS ships the BSD sed. In GNU/Linux you run the GNU `sed`. More around it [https://stackoverflow.com/questions/7573368/in-place-edits-with-sed-on-os-x](https://stackoverflow.com/questions/7573368/in-place-edits-with-sed-on-os-x).
 
-Beautiful visual explanation of shell commands https://explainshell.com/explain?cmd=find+.+-not+-path+%27*%2F%5C.*%27+-type+f+-print0+%7C+xargs+-0+sed+-i+%27s%2Fold_phrase%2Fnew_phrase%2Fg%27
+And checkout a [beautiful visual explanation of shell commands](https://explainshell.com/explain?cmd=find+.+-not+-path+%27*%2F%5C.*%27+-type+f+-print0+%7C+xargs+-0+sed+-i+%27s%2Fold_phrase%2Fnew_phrase%2Fg%27).
 
