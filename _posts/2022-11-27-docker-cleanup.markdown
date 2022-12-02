@@ -11,9 +11,9 @@ tags:
 comments: true
 ---
 
-Reguarly cleaning your dangling contianers and images. 
+Regularly cleaning your dangling containers and images. 
 
-**Step 1**: cleaning containers, don't worry it destroyes only stopped containers
+**Step 1**: cleaning containers, don't worry it destroys only stopped containers
 
 ```
 docker ps -aq| xargs docker rm
@@ -29,7 +29,7 @@ docker rmi $(docker images -q --filter "dangling=true")
 Docker itself offers a number of tools to prune and clean up space 
 
 1. Inspecting docker filesystem: `docker system df` 
-2. Pruning stopped comtainers: `docker container prune` 
+2. Pruning stopped containers: `docker container prune` 
 3. Removing all local volumes: `docker volume prune` 
 4. `docker system prune` will remove   
     - all stopped containers
