@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Fifing `Matplotlib is currently using agg` error"
-description: ""
+title:  "Fixing error `Matplotlib is currently using agg`"
+description: "Plotting graphics with python and matplotlib from Docker container"
 date:   2022-12-03 10:05:45
 categories:
 - software
