@@ -82,7 +82,7 @@ function navbar_reset_top() {
         <a
           class="social-share-element"
           id="social-twitter"
-          href="https://twitter.com/intent/tweet?text={{ page.title }}&amp;url={{ site.url }}{{ page.url }}&amp;via=moiseev_igor&amp;hashtags={{ page.keywords }}"
+          href="https://twitter.com/intent/tweet?text={{ page.title }}&amp;url={{ site.url }}{{ page.url }}&amp;via=moiseev_igor&amp;hashtags={{ page.tags | join: ',' }}"
           target="_blank"
           title="Share this post on Twitter"><i class="fa fa-twitter-square"></i></a>
       </div>
@@ -101,8 +101,6 @@ function navbar_reset_top() {
       </div>
       <div id="social-facebook-counter" class="social-counter"></div>
     </div>
-
-    <div style="clear: both;"></div> 
 
     <div style="clear: both;"></div> 
   </div>
@@ -163,7 +161,6 @@ getJSON('https://webmention.io/api/count?target=' + '{{ site.url }}{{ page.url }
   if(data.count > 0)
     document.getElementById('mentions-count').innerHTML = data.count + '&nbsp;Mentions';
 });
-
 // get_counters('https://urls.api.twitter.com/1/urls/count.json?url=', '{{ site.url }}{{ page.url }}', 'callback_twitter');
 // get_counters('https://graph.facebook.com/?id=', '{{ site.url }}{{ page.url }}', 'callback_facebook');
 // get_counters('https://www.linkedin.com/countserv/count/share?url=', '{{ site.url }}{{ page.url }}', 'callback_linkedin');
