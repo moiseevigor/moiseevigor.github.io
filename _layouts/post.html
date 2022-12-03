@@ -175,10 +175,10 @@ getJSON('https://webmention.io/api/count?target=' + '{{ site.url }}{{ page.url }
     document.getElementById('mentions-count').innerHTML = data.count + '&nbsp;Mentions';
 });
 
-//get_counters('https://urls.api.twitter.com/1/urls/count.json?url=', '{{ site.url }}{{ page.url }}', 'callback_twitter');
-get_counters('https://graph.facebook.com/?id=', '{{ site.url }}{{ page.url }}', 'callback_facebook');
-get_counters('https://www.linkedin.com/countserv/count/share?url=', '{{ site.url }}{{ page.url }}', 'callback_linkedin');
-get_counters('https://share.yandex.ru/gpp.xml?url=', '{{ site.url }}{{ page.url }}', 'services.gplus.cb');
+// get_counters('https://urls.api.twitter.com/1/urls/count.json?url=', '{{ site.url }}{{ page.url }}', 'callback_twitter');
+// get_counters('https://graph.facebook.com/?id=', '{{ site.url }}{{ page.url }}', 'callback_facebook');
+// get_counters('https://www.linkedin.com/countserv/count/share?url=', '{{ site.url }}{{ page.url }}', 'callback_linkedin');
+// get_counters('https://share.yandex.ru/gpp.xml?url=', '{{ site.url }}{{ page.url }}', 'services.gplus.cb');
 
 </script>
 
