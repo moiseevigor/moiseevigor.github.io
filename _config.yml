@@ -32,9 +32,6 @@ author:
 # Custom vars
 version:             1.0.0
 
-# social
-googleplus:			     +IgorMoiseevAdventurer
-
 # Gems
 plugins:
   - jekyll-sitemap
