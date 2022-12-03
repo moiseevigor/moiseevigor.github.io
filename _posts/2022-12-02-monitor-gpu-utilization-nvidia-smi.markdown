@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Monitor GPU utilization with `nvidia-smi`"
+title:  "Monitor GPU utilization with nvidia-smi"
 description: ""
 date:   2022-11-27 10:05:45
 categories:
