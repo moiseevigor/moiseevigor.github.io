@@ -20,7 +20,7 @@ After you fire it, you can make an unfortunate discover when you open the browse
 on your brand new `https://example.com`, that it says “Some parts of this page are not secure”.
 
 So what is insecure? Simply you may have used the insecure contents
-like images or extenal JS libraries loaded from CDN.
+like images or external JS libraries loaded from CDN.
 
 
 To help with this, Linux has a small and powerful command to find and substitute the `old_phrase` with the `new_phrase` in
