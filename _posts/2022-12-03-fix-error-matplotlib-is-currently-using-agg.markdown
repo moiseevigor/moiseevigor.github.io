@@ -72,7 +72,7 @@ et voilà, we have perfectly running minimalist docker container that is able to
 docker build -t python-container .
 ```
 
-**Note 2**. What is the `--env="DISPLAY"` stands for? `--env` propagates `$DISPLAY` environment variable into the container.
+**Note 2**. What does `--env="DISPLAY"` stand for? `--env` propagates `$DISPLAY` environment variable into the container.
 
  **Note 3**. What `-v "/tmp/.X11-unix:/tmp/.X11-unix:rw"` does? It mounts X11 socket into the `/tmp` folder inside the container 
  that will be used by GUI applications to render GUI elements.
