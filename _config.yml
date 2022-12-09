@@ -40,6 +40,9 @@ plugins:
   - jekyll-paginate
   - jekyll-feed
 
+feed:
+  posts_limit: 20
+
 # https://jekyllrb.com/docs/variables/
 # https://github.com/jekyll/jekyll/issues/2516
 lsi: true
