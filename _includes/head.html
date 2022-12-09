@@ -56,7 +56,7 @@
   <link rel="shortcut icon" href="{{ site.baseurl }}/public/images/favicon.ico">
 
   <!-- RSS -->
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  {% feed_meta %}
 
   <!-- SEARCH -->
   <script src="/public/js/lunr.min.js"></script>
@@ -97,7 +97,7 @@
 
   <noscript>Cookie Consent by <a href="https://www.freeprivacypolicy.com/" rel="noopener">Free Privacy Policy Generator</a></noscript>
   <!-- End Cookie Consent by FreePrivacyPolicy.com https://www.FreePrivacyPolicy.com -->
-  <a href="#" id="open_preferences_center">Update cookies preferences</a>
+  <a href="#" id="open_preferences_center" style="display: none;">Update cookies preferences</a>
 
   <!-- Google tag (gtag.js) -->
   <script type="text/plain" cookie-consent="tracking">

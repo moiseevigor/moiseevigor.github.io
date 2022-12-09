@@ -38,6 +38,7 @@ plugins:
   - jekyll-mentions
   - jekyll-redirect-from
   - jekyll-paginate
+  - jekyll-feed
 
 # https://jekyllrb.com/docs/variables/
 # https://github.com/jekyll/jekyll/issues/2516
