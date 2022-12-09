@@ -42,6 +42,7 @@ plugins:
 
 feed:
   posts_limit: 20
+  path: /atom.xml
 
 # https://jekyllrb.com/docs/variables/
 # https://github.com/jekyll/jekyll/issues/2516
