@@ -38,11 +38,11 @@ plugins:
   - jekyll-mentions
   - jekyll-redirect-from
   - jekyll-paginate
-  - jekyll-feed
+  # - jekyll-feed
 
-feed:
-  posts_limit: 20
-  path: /atom.xml
+# feed:
+#   posts_limit: 20
+#   path: /atom.xml
 
 # https://jekyllrb.com/docs/variables/
 # https://github.com/jekyll/jekyll/issues/2516
