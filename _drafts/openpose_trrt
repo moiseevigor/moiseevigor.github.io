@@ -1,0 +1,24 @@
+what operations in implementation of OpenPose are not supported in TensorRT?
+
+OpenPose is a real-time multi-person pose estimation framework, which uses deep learning algorithms to detect and track human body keypoints in images and videos. The OpenPose implementation uses a variety of operations and layers, including convolutional, pooling, and concatenation layers, as well as non-linear activation functions such as ReLU and Softmax.
+
+Not all of these operations and layers are supported in TensorRT. Some operations, such as those that use custom or non-standard implementation in OpenPose, may not be supported and must be replaced with compatible operations in TensorRT.
+
+For example, the OpenPose implementation uses the cv2.dnn.NMSBoxes() function for non-maximum suppression (NMS) of keypoint detections. This function is not supported in TensorRT, and must be replaced with a compatible NMS function such as torchvision.ops.nms() from the PyTorch library, which is supported in TensorRT.
+
+Similarly, the OpenPose implementation uses the cv2.dnn.blobFromImage() function for preprocessing the input image. This function is not supported in TensorRT, and must be replaced with a compatible image preprocessing function such as torchvision.transforms.ToTensor() from the PyTorch library, which is supported in TensorRT.
+
+To ensure compatibility with TensorRT, it is important to carefully review the operations used in the OpenPose implementation, and replace any unsupported operations with compatible ones. This will allow the model to be optimized and run on Nvidia hardware using TensorRT.
+
+------------
+
+
+ist all operations in implementation of OpenPose by CMU labs that are not supported in TensorRT?
+The OpenPose implementation by CMU labs uses a number of operations that are not supported in TensorRT. Some of these operations include:
+
+The split operation, which is used to split the input tensor into multiple tensors along a specified axis. TensorRT does not support this operation, and it must be replaced with the split_v operation from the tensorrt.common module.
+The concat operation, which is used to concatenate multiple tensors along a specified axis. TensorRT does not support this operation, and it must be replaced with the concatenation operation from the tensorrt.parsers.onnxparser module.
+The BatchNorm operation, which is used to normalize the input tensor using batch statistics. TensorRT does not support this operation, and it must be replaced with the BatchNormalization operation from the tensorrt.parsers.onnxparser module.
+The add operation, which is used to add two tensors element-wise. TensorRT does not support this operation, and it must be replaced with the add operation from the tensorrt.parsers.onnxparser module.
+The relu operation, which is used to apply the rectified linear unit (ReLU) activation function element-wise to the input tensor. TensorRT does not support this operation, and it must be replaced with the ReLU operation from the tensorrt.parsers.onnxparser module.
+These are just some examples of the operations used in the OpenPose implementation by CMU labs that are not supported in TensorRT. To ensure compatibility with TensorRT, it is important to carefully review the operations used in the implementation, and replace any unsupported operations with compatible ones. This will allow the model to be optimized and run on Nvidia hardware using TensorRT.
