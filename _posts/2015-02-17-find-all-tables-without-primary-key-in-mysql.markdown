@@ -15,23 +15,24 @@ comments: true
 The following query obtains the list of tables without primary key, those who destroys the database performance
 
 ```sql
-USE INFORMATION_SCHEMA;
 SELECT 
-    TABLES.table_name
-FROM TABLES
-LEFT JOIN KEY_COLUMN_USAGE AS c 
+    t.TABLE_NAME
+FROM INFORMATION_SCHEMA.TABLES AS t
+LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS k
 ON (
-       TABLES.TABLE_NAME = c.TABLE_NAME
-   AND c.CONSTRAINT_SCHEMA = TABLES.TABLE_SCHEMA
-   AND c.constraint_name = 'PRIMARY'
+       t.TABLE_NAME = k.TABLE_NAME
+   AND k.CONSTRAINT_SCHEMA = t.TABLE_SCHEMA
+   AND k.constraint_name = 'PRIMARY'
 )
 WHERE 
-    TABLES.table_schema <> 'information_schema'
-AND TABLES.table_schema <> 'performance_schema'
-AND TABLES.table_schema <> 'mysql'
-AND c.constraint_name IS NULL;
-``` 
+    t.TABLE_SCHEMA NOT IN ('information_schema', 'performance_schema', 'mysql', 'sys')
+AND k.constraint_name IS NULL;
+```
 
-A friend advise: "The result list of this query should be `Empty set`". 
+In this example, the `INFORMATION_SCHEMA.TABLES` table is used to find all t. The `TABLE_NAME` column is selected, and the `WHERE` clause is used to filter system related databases.
+
+`LEFT JOIN` is used to join with table `KEY_COLUMN_USAGE` and filter the tables that do not have a primary key.
+
+A friendly advise: "The result list of this query should be an `Empty set`". 
 
 Happy querying!
