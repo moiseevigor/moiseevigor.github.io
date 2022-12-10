@@ -38,11 +38,7 @@ plugins:
   - jekyll-mentions
   - jekyll-redirect-from
   - jekyll-paginate
-  # - jekyll-feed
-
-# feed:
-#   posts_limit: 20
-#   path: /atom.xml
+  - jekyll-seo-tag
 
 # https://jekyllrb.com/docs/variables/
 # https://github.com/jekyll/jekyll/issues/2516
@@ -57,7 +53,13 @@ exclude:
   - "node_modules"
   - "vendor"
 
-# Build settings
-#markdown: redcarpet
-# redcarpet:
-#   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript"]
+twitter:
+  username: moiseev_igor
+  card: summary
+
+social:
+  name: Igor Moiseev
+  links:
+    - https://twitter.com/moiseev_igor
+    - https://www.linkedin.com/in/moiseevigor
+    - https://github.com/moiseevigor
