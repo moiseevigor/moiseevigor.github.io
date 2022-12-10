@@ -18,10 +18,12 @@ The following query obtains the list of tables without primary key, those who de
 SELECT
 	t.table_name
 FROM information_schema.tables as t
-LEFT JOIN information_schema.table_constraints as tc on 
-	t.table_schema = t.table_schema
-AND t.table_name = tc.table_name 
-AND tc.constraint_type = 'PRIMARY KEY'
+LEFT JOIN information_schema.table_constraints as tc 
+ON (
+        t.table_schema = t.table_schema
+    AND t.table_name = tc.table_name 
+    AND tc.constraint_type = 'PRIMARY KEY'
+)
 WHERE 
 	t.table_type = 'BASE TABLE'
 AND t.table_schema not in ('pg_catalog', 'information_schema')
