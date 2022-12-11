@@ -45,7 +45,6 @@ function navbar_reset_top() {
     <a title="Comments" class="link-comments" href="#disqus_thread">
       <span class="disqus-comment-count" data-disqus-url="{{ site.url }}{{ page.url }}">&nbsp;&nbsp;&nbsp;Comments</span>
     </a>
-    <span id="mentions-count" data-indieweb-comment-count data-url="{{ site.url }}{{ page.url }}"></span>
   </div>
   <div class="article-footer-item">
     <div class="tags-title article-footer-title">
@@ -106,68 +105,6 @@ function navbar_reset_top() {
   </div>
 
 </footer>
-
-<script>
-function getJSON(path, callback) {
-
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.overrideMimeType('application/json');
-
-    xmlhttp.onreadystatechange = function() {
-        ready = (xmlhttp.readyState == 4 && xmlhttp.status == 200);
-        callback(ready ? JSON.parse(xmlhttp.responseText) : false);
-    };
-
-    xmlhttp.open('GET', path, true);
-    xmlhttp.send();
-
-};
-
-function get_counters(requrl, url, callb) {
-  var script = document.createElement('script');
-
-  url = encodeURIComponent(url);
-  script.src = requrl + url + '&callback=' + callb;
-  document.getElementsByTagName('head')[0].appendChild(script);
-}
-
-function callback_twitter(data) {
-  if(data)
-    document.getElementById('social-twitter-counter').innerHTML = data.count;
-  else
-    document.getElementById('social-twitter-counter').innerHTML = 0;
-}
-
-function callback_linkedin(data) {
-  document.getElementById('social-linkedin-counter').innerHTML = data.count;
-}
-
-function callback_facebook(data) {
-  if(data.shares)
-    document.getElementById('social-facebook-counter').innerHTML = data.shares;
-  else
-    document.getElementById('social-facebook-counter').innerHTML = 0;
-}
-
-var services = {
-  gplus: {
-      cb: function (data) {
-      document.getElementById('social-google-plus-counter').innerHTML = data;
-    }
-  }
-}
-
-getJSON('https://webmention.io/api/count?target=' + '{{ site.url }}{{ page.url }}', function (data) {
-  if(data.count > 0)
-    document.getElementById('mentions-count').innerHTML = data.count + '&nbsp;Mentions';
-});
-// get_counters('https://urls.api.twitter.com/1/urls/count.json?url=', '{{ site.url }}{{ page.url }}', 'callback_twitter');
-// get_counters('https://graph.facebook.com/?id=', '{{ site.url }}{{ page.url }}', 'callback_facebook');
-// get_counters('https://www.linkedin.com/countserv/count/share?url=', '{{ site.url }}{{ page.url }}', 'callback_linkedin');
-// get_counters('https://share.yandex.ru/gpp.xml?url=', '{{ site.url }}{{ page.url }}', 'services.gplus.cb');
-
-</script>
-
 
 {% assign email_subscription_message_heading = 'Hope I helped you a bit!' %}
 {% assign email_subscription_message_caption = 'Please support my effort.' %}
