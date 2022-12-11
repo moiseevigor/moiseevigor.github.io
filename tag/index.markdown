@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Tags list
-redirect_from: /tags/
 ---
 
 <h2 class="post_title">{{page.title}}</h2>

@@ -4,7 +4,6 @@ title: Learning NoSQL, PHP and Linux
 header: Categories
 group: navigation
 permalink: /learning-nosql-php-linux/
-redirect_from: /learning-nosql-php-linux/
 group: learning-nosql-php-linux
 categories:
 - programming
@@ -16,10 +15,6 @@ tags:
 - mysql
 - php
 comments: false
-redirect_from: 
-- /learning-nosql-php-linux/part-1/
-- /learning-nosql-php-linux/part-2/
-- /learning-nosql-php-linux/part-3/
 ---
 
 Series of lessons on [Linux](/tag/linux), [Apache](/tag/apache), [Databases](/tag/database), Git, NoSQL, [PHP](/tag/php) and scalability of the application. 

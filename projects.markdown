@@ -8,8 +8,6 @@ comments: false
 tags:
 - mysql
 - postgresql
-redirect_from: 
-- /programming/2015/04/10/current-projects-elliptic-email2db-blog-obre/
 ---
 
 <style>
