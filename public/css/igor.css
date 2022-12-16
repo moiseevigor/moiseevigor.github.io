@@ -128,7 +128,7 @@ button.icon{
     float: right;
     max-width: 170px;
     padding-bottom: 80px;
-    opacity: 0.5;
+    opacity: 0.75;
     display: inline;
   }
 }

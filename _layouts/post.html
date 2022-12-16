@@ -46,7 +46,7 @@ function navbar_reset_top() {
       <span class="disqus-comment-count" data-disqus-url="{{ site.url }}{{ page.url }}">&nbsp;&nbsp;&nbsp;Comments</span>
     </a>
   </div>
-  <div class="article-footer-item">
+  <!-- div class="article-footer-item">
     <div class="tags-title article-footer-title">
       Categories
     </div>
@@ -101,8 +101,25 @@ function navbar_reset_top() {
       <div id="social-facebook-counter" class="social-counter"></div>
     </div>
 
+  </div -->
+
+    <div style="float: left; margin-right: 5px;">
+      <a href="https://www.amazon.com/PostgreSQL-Running-Practical-Advanced-Database-ebook/dp/B076C4WLBP?crid=3H5XJZ8NEZQ6C&keywords=postgresql&qid=1671227074&sprefix=postgresql%2Caps%2C302&sr=8-1&linkCode=li3&tag=moiseevigorbl-20&linkId=6fb3f760525b8a969723532d1324b846&language=en_US&ref_=as_li_ss_il"
+        target="_blank"><img border="0"
+          src="https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B076C4WLBP&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=moiseevigorbl-20&language=en_US"></a><img
+        src="https://ir-na.amazon-adsystem.com/e/ir?t=moiseevigorbl-20&language=en_US&l=li3&o=1&a=B076C4WLBP" width="1"
+        height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+    </div>
+
     <div style="clear: both;"></div> 
-  </div>
+
+    <div style="float: left; margin-right: 5px;">
+      <iframe sandbox="allow-popups allow-scripts allow-modals allow-forms allow-same-origin"
+        style="width:200px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0"
+        src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_top&bc1=FFFFFF&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=moiseevigorbl-20&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=1119578884&linkId=ebd2f802a1d9a369dba6f342b0637d63"></iframe>
+    </div>
+    
+    <div style="clear: both;"></div>
 
 </footer>
 
@@ -134,6 +151,11 @@ function navbar_reset_top() {
     {% endfor %}
   </ul>
 </div>
+
+<div style="font-size: 0.75em; color: gray;">
+  {% include amazon_affiliate.html %}
+</div>
+
 
 {% if page.comments %}
   {% include discus.html %}
