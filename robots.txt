@@ -1,0 +1,4 @@
+Sitemap: https://moiseevigor.github.io/sitemap.xml
+User-agent: *
+Disallow: /search/
+Disallow: /404.html
