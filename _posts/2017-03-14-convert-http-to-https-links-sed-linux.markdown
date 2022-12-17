@@ -6,9 +6,8 @@ date:   2017-03-14 10:05:45
 categories:
 - software
 tags:
-- https
-- ubuntu
 - linux
+- unix
 comments: true
 ---
 

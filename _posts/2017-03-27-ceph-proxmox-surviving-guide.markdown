@@ -6,10 +6,9 @@ date:   2017-03-27 10:05:45
 categories:
 - software
 tags:
-- linux
-- debian
 - ceph
 - proxmox
+- linux
 comments: true
 ---
 

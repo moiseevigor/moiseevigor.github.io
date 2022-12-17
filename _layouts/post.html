@@ -17,8 +17,8 @@ layout: default
 </style>
 
 <div class="post">
-  <h1 class="post-title">{{ page.title }}<sup class="edit">{% include edit.html %}</sup></h1>
-  <span class="post-date">{{ page.date | date_to_string }} {% include minute-to-read.html %}</span>
+  <h1 class="post-title">{{ page.title }}<sup class="edit">{% include edit.html -%}</sup></h1>
+  <span class="post-date">{{ page.date | date_to_string }} {% include minute-to-read.html -%}</span>
   {{ content }}
 </div>
 
@@ -41,7 +41,8 @@ function navbar_reset_top() {
 </script>
 
 <footer id="navbar" class="article-footer absolute">
-  <!-- div class="article-footer-item">
+  {% comment -%}
+  <div class="article-footer-item">
     <a title="Comments" class="link-comments" href="#disqus_thread">
       <span class="disqus-comment-count" data-disqus-url="{{ site.url }}{{ page.url }}">&nbsp;&nbsp;&nbsp;Comments</span>
     </a>
@@ -58,7 +59,7 @@ function navbar_reset_top() {
     <div class="tags-title article-footer-title">
       Tags
     </div>
-    {% include page_tags_list_comma.html %}
+    {% include page_tags_list_comma.html -%}
   </div>
 
   <div class="social-share">
@@ -101,37 +102,23 @@ function navbar_reset_top() {
       <div id="social-facebook-counter" class="social-counter"></div>
     </div>
 
-  </div -->
+  </div>
+  {% endcomment -%}
 
-    <div style="float: left; margin-right: 5px;">
-      <a href="https://www.amazon.com/PostgreSQL-Running-Practical-Advanced-Database-ebook/dp/B076C4WLBP?crid=3H5XJZ8NEZQ6C&keywords=postgresql&qid=1671227074&sprefix=postgresql%2Caps%2C302&sr=8-1&linkCode=li3&tag=moiseevigorbl-20&linkId=6fb3f760525b8a969723532d1324b846&language=en_US&ref_=as_li_ss_il"
-        target="_blank"><img border="0"
-          src="https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B076C4WLBP&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=moiseevigorbl-20&language=en_US"></a><img
-        src="https://ir-na.amazon-adsystem.com/e/ir?t=moiseevigorbl-20&language=en_US&l=li3&o=1&a=B076C4WLBP" width="1"
-        height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-    </div>
-
-    <div style="clear: both;"></div> 
-
-    <div style="float: left; margin-right: 5px;">
-      <a href="https://www.amazon.com/Linux-Bible-Christopher-Negus/dp/1119578884?crid=1CSMTCKO82YHX&keywords=linux+bible&qid=1671268222&sprefix=linux+bibl%2Caps%2C245&sr=8-1&linkCode=li3&tag=moiseevigorbl-20&linkId=4088c6bec896fcc97a6cdb490210239e&language=en_US&ref_=as_li_ss_il"
-        target="_blank"><img border="0"
-          src="//ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=1119578884&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=moiseevigorbl-20&language=en_US"></a><img
-        src="https://ir-na.amazon-adsystem.com/e/ir?t=moiseevigorbl-20&language=en_US&l=li3&o=1&a=1119578884" width="1"
-        height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+    <div class="article-footer-item">
+      {% include page_tags_list_books.html -%}
     </div>
     
     <div style="clear: both;"></div>
-
 </footer>
 
-{% assign email_subscription_message_heading = 'Hope I helped you a bit!' %}
-{% assign email_subscription_message_caption = 'Please support my effort.' %}
-{% include email_box.html %}
+
+{% assign email_subscription_message_heading = 'Find this helpful? Please subscribe!' -%}
+{% include email_box.html -%}
 
 
 <div class="related" align="center" style="text-align:center">
-    {% include page_tags_list.html %}
+    {% include page_tags_list.html -%}
 </div>
 <div style="clear: both;"></div>
 
@@ -139,8 +126,8 @@ function navbar_reset_top() {
 <div class="related">
   <h2>Related Posts</h2>
   <ul class="related-posts">
-    {% for post in site.related_posts limit:3 %}
-      {% if post.title !=  page.title %}
+    {% for post in site.related_posts limit:3 -%}
+      {% if post.title !=  page.title -%}
         <li>
           <h3>
             <a href="{{ post.url }}">
@@ -149,16 +136,15 @@ function navbar_reset_top() {
             </a>
           </h3>
         </li>
-      {% endif %}
-    {% endfor %}
+      {% endif -%}
+    {% endfor -%}
   </ul>
 </div>
 
-<div style="font-size: 0.75em; color: gray;">
-  {% include amazon_affiliate.html %}
+{% if page.comments -%}
+  {% include discus.html -%}
+{% endif -%}
+
+<div style="margin-top:1em; font-size: 0.75em; color: #999;">
+  {% include amazon_affiliate.html -%}
 </div>
-
-
-{% if page.comments %}
-  {% include discus.html %}
-{% endif %}

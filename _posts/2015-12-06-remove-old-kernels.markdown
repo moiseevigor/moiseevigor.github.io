@@ -7,7 +7,7 @@ categories:
 - software
 tags:
 - linux
-- ubuntu
+- unix
 comments: true
 ---
 

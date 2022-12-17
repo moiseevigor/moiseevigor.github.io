@@ -9,7 +9,6 @@ tags:
 - django
 - oracle
 - python
-- ubuntu
 comments: true
 ---
 

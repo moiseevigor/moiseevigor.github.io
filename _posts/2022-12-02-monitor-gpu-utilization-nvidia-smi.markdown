@@ -6,6 +6,7 @@ date:   2022-11-27 10:05:45
 categories:
 - software
 tags:
+- datascience
 - docker
 - linux
 comments: true

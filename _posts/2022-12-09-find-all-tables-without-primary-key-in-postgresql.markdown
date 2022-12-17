@@ -8,7 +8,7 @@ categories:
 tags:
 - postgresql
 - database
-- ubuntu
+- linux
 comments: true
 ---
 

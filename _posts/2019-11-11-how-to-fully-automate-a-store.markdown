@@ -6,8 +6,8 @@ date:   2019-11-11 10:05:45
 categories:
 - software
 tags:
-- opencv
-- linux
+- machinelearning
+- deeplearning
 comments: true
 ---
 

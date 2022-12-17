@@ -6,10 +6,9 @@ date:   2015-01-30 18:05:45
 categories:
 - software
 tags:
-- ubuntu
+- ext4
 - linux
 - unix
-- ext4
 comments: true
 ---
 

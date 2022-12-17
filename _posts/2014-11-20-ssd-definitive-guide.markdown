@@ -8,7 +8,7 @@ categories:
 tags:
 - ssd
 - linux
-- ubuntu
+- unix
 comments: true
 ---
 

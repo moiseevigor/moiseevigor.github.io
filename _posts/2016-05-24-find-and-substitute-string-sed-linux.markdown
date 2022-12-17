@@ -6,8 +6,8 @@ date:   2016-05-24 10:05:45
 categories:
 - software
 tags:
-- ubuntu
 - linux
+- unix
 comments: true
 ---
 

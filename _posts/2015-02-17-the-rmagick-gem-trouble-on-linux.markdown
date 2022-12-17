@@ -6,9 +6,9 @@ date:   2015-02-17 18:05:45
 categories:
 - programming
 tags:
+- ruby
 - imagemagick
 - ubuntu
-- rubygems
 - linux
 comments: true
 ---

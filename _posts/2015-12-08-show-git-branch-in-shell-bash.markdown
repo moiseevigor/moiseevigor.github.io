@@ -6,9 +6,8 @@ date:   2015-12-08 10:05:45
 categories:
 - software
 tags:
-- linux
-- ubuntu
 - git
+- linux
 comments: true
 ---
 

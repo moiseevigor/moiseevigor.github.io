@@ -14,28 +14,28 @@
   <link rel="webmention" href="https://webmention.io/{{ site.webmention.username }}/webmention" data-proofer-ignore />
 
   <title>
-    {% if page.title == "Home" %}
+    {% if page.title == "Home" -%}
       {{ site.title }} &middot; {{ site.tagline }}
-    {% else %}
+    {% else -%}
       {{ page.title }} &middot; {{ site.title }}
-    {% endif %}
+    {% endif -%}
   </title>
 
-  {% if page.description %}
+  {% if page.description -%}
     <meta name="description" content="{{ page.description }}">
-  {% endif %}
+  {% endif -%}
 
-  {% if page.tags %}
+  {% if page.tags -%}
     <meta name="keywords" content="{{ page.tags| join:',' }}">
-  {% endif %}
+  {% endif -%}
 
-  {% if page.title and page.title != "Home" %}
+  {% if page.title and page.title != "Home" -%}
     <!-- Schema.org markup for Google+ -->
     <meta itemprop="name" content="{{ page.title }}">
-    {% if page.description %}
+    {% if page.description -%}
       <meta itemprop="description" content="{{ page.description }}">
-    {% endif %}
-  {% endif %}
+    {% endif -%}
+  {% endif -%}
 
   <!-- CSS -->
   <link rel="stylesheet" href="{{ site.baseurl }}/public/css/poole.css">
@@ -68,7 +68,7 @@
   </script>
   <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
-{% if jekyll.environment == "production" %}
+{% if jekyll.environment == "production" -%}
 
   <!-- Cookie Consent by FreePrivacyPolicy.com https://www.FreePrivacyPolicy.com -->
   <script type="text/javascript" src="https://www.freeprivacypolicy.com/public/cookie-consent/4.0.0/cookie-consent.js" charset="UTF-8"></script>
@@ -105,8 +105,8 @@
     gtag('config', 'G-5QEQZR22Y2');
   </script>
 
-  {% seo %}
+  {% seo -%}
 
-{% endif %}
+{% endif -%}
 
 </head>
