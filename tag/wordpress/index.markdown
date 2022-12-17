@@ -14,4 +14,4 @@ WordPress was used by more than 23.3% of the top 10 million websites as of Janua
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

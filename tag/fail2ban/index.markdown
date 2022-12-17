@@ -14,4 +14,4 @@ Fail2Ban scans log files like /var/log/auth.log and bans IP that makes too many 
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

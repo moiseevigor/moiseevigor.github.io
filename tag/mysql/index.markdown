@@ -17,4 +17,4 @@ Applications which use MySQL databases include: TYPO3, MODx, [Joomla](/tag/jooml
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

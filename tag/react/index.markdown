@@ -21,4 +21,4 @@ Since component logic is written in JavaScript instead of templates, you can eas
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

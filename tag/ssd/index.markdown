@@ -15,4 +15,4 @@ SSD technology uses electronic interfaces compatible with traditional block inpu
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

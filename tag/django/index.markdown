@@ -14,4 +14,4 @@ Built by experienced developers, it takes care of much of the hassle of Web deve
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

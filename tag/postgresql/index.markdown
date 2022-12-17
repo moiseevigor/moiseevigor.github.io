@@ -2,6 +2,8 @@
 layout: default
 title: PostgreSQL tagged articles
 tag: postgresql
+tags:
+- database
 ---
 
 <div style="float: left; margin: 2.0rem;">
@@ -15,4 +17,4 @@ PostgreSQL can handle workloads ranging from small single-machine applications t
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

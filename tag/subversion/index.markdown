@@ -15,4 +15,4 @@ Developers use Subversion to maintain current and historical versions of files s
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

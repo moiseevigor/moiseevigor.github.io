@@ -15,4 +15,4 @@ Unlike Git, which is strictly a command-line tool, GitHub provides a web-based g
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

@@ -17,4 +17,4 @@ Apache supports a variety of features, many implemented as compiled modules whic
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

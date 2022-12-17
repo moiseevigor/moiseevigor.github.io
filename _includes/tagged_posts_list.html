@@ -1,12 +1,11 @@
-{% comment %}<!--
-The tagged posts list
+<div class="related">
+  <img id="ads_logo" alt="ads" src="/public/images/ads.png" style="max-width: 20px;" />
+  <div class="image-grid">
+    {% include page_tags_list_books.html %}
+  </div>
 
-  example:
-
-      {% include tagged_posts_list.html %}
-
--->{% endcomment %}
-
+  {% include amazon_affiliate.html -%}
+</div>
 
 <div class="related">
   <h2>{{ page.title }}</h2>
@@ -26,13 +25,4 @@ The tagged posts list
       {% endif %}
     {% endfor %}
   </ul>
-</div>
-
-
-<img id="ads_logo" alt="ads" src="/public/images/ads.png" style="max-width: 20px;" />
-<div class="image-grid">
-  {% include page_tags_list_books.html %}
-</div>
-<div style="margin-top:1em; font-size: 0.75em; color: #999;">
-  {% include amazon_affiliate.html -%}
 </div>

@@ -15,4 +15,4 @@ Joomla is written in [PHP](/tag/php), uses object-oriented programming (OOP) tec
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

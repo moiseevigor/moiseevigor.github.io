@@ -14,4 +14,4 @@ ISPConfig allows administrators to manage websites, email addresses and DNS reco
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

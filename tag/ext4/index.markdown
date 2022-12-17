@@ -15,4 +15,4 @@ The main features includes: Large file system; Extents; Backward compatibility w
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

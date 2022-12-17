@@ -2,6 +2,9 @@
 layout: default
 title: Deep Learning tagged articles
 tag: deeplearning
+tags:
+- machinelearning
+- datascience
 ---
 
 <div style="float: left; margin: 2.0rem;">

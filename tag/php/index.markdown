@@ -15,4 +15,4 @@ The LAMP architecture has become popular in the web industry as a way of deployi
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

@@ -14,4 +14,4 @@ tag: jquery
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

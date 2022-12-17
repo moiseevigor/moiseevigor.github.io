@@ -14,4 +14,4 @@ The Debian Project was first announced in 1993 by Ian Murdock, Debian 0.01 was r
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

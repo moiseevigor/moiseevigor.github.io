@@ -15,4 +15,4 @@ Web browsers can read `HTML` files and compose them into visible or audible web 
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

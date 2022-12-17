@@ -14,4 +14,4 @@ OpenSSH was designed as a free and open source alternative to the proprietary SS
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

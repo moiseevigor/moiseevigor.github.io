@@ -14,4 +14,4 @@ It is also used in server-side network programming with runtime environments suc
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

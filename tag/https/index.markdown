@@ -13,4 +13,4 @@ Hypertext Transfer Protocol Secure (HTTPS) is an extension of the Hypertext Tran
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

@@ -16,4 +16,4 @@ The software mainly consists of a number of command-line interface utilities for
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

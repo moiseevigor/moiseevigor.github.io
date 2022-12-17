@@ -15,4 +15,4 @@ Git was initially designed and developed by Linus Torvalds for [Linux](/tag/linu
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

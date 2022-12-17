@@ -15,4 +15,4 @@ Many clones of Unix have arisen over the years, of which [Linux](/tag/linux) is 
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

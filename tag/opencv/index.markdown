@@ -12,4 +12,4 @@ OpenCV (Open Source Computer Vision Library) is a library of programming functio
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

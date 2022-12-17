@@ -14,4 +14,4 @@ The most commonly used encodings are UTF-8, UTF-16 and the now-obsolete UCS-2. U
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

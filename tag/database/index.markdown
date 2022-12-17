@@ -17,4 +17,4 @@ Well-known DBMSs include [MySQL](/tag/mysql), PostgreSQL, Microsoft SQL Server, 
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

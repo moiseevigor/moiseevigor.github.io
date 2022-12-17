@@ -15,4 +15,4 @@ Originally, the product was named GitLab and was full free and open source softw
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

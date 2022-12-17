@@ -14,4 +14,4 @@ Ubuntu's goal is to be secure "out-of-the box". By default user's programs run w
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

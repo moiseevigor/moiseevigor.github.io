@@ -14,4 +14,4 @@ Typically, Linux is packaged in a form known as a Linux distribution, for both d
 
 {% include tagged_posts_list.html %}
 
-{% include discus.html %}
+

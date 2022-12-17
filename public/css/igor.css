@@ -308,13 +308,12 @@ button.copy:active {
   color: #0366d6;
 }
 
-
+/* styling Ads grid in tags */
 .image-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-
 .image-grid a > img {
   width: 100%;
 }
