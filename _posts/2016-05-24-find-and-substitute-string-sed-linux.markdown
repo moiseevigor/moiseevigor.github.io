@@ -34,3 +34,9 @@ Note. MacOS ships the BSD sed. In GNU/Linux you run the GNU `sed`. More around i
 
 And checkout a [beautiful visual explanation of shell commands](https://explainshell.com/explain?cmd=find+.+-not+-path+%27*%2F%5C.*%27+-type+f+-print0+%7C+xargs+-0+sed+-i+%27s%2Fold_phrase%2Fnew_phrase%2Fg%27).
 
+<div>
+  <img id="ads_logo" alt="ads" src="/public/images/ads.png" style="max-width: 20px;" />
+  <div class="image-grid">
+    {% include page_tags_list_books.html %}
+  </div>
+</div>

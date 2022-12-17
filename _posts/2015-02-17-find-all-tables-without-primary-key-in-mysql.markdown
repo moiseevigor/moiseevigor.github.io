@@ -36,3 +36,10 @@ In this example, the `INFORMATION_SCHEMA.TABLES` table is used to find all t. Th
 A friendly advise: "The result list of this query should be an `Empty set`". 
 
 Happy querying!
+
+<div>
+  <img id="ads_logo" alt="ads" src="/public/images/ads.png" style="max-width: 20px;" />
+  <div class="image-grid">
+    {% include page_tags_list_books.html %}
+  </div>
+</div>

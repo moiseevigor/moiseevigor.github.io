@@ -21,3 +21,9 @@ and the invention of the specific metrics that is capable to measure the accurac
 
 <iframe width="720" height="380" src="https://www.youtube.com/embed/glpcIJLvyjY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
+<div>
+  <img id="ads_logo" alt="ads" src="/public/images/ads.png" style="max-width: 20px;" />
+  <div class="image-grid">
+    {% include page_tags_list_books.html %}
+  </div>
+</div>

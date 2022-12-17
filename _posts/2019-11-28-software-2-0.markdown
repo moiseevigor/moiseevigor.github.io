@@ -15,3 +15,9 @@ Humans are continuing the endeavor of understanding human intelligence and on th
 
 <iframe width="720" height="380" src="https://www.youtube.com/embed/he1yelshNc4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
+<div>
+  <img id="ads_logo" alt="ads" src="/public/images/ads.png" style="max-width: 20px;" />
+  <div class="image-grid">
+    {% include page_tags_list_books.html %}
+  </div>
+</div>

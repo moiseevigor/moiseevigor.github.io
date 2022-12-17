@@ -76,3 +76,10 @@ docker build -t python-container .
 
  **Note 3**. What `-v "/tmp/.X11-unix:/tmp/.X11-unix:rw"` does? It mounts X11 socket into the `/tmp` folder inside the container 
  that will be used by GUI applications to render GUI elements.
+
+<div>
+  <img id="ads_logo" alt="ads" src="/public/images/ads.png" style="max-width: 20px;" />
+  <div class="image-grid">
+    {% include page_tags_list_books.html %}
+  </div>
+</div>

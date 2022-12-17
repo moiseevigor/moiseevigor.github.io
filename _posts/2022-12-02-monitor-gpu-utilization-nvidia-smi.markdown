@@ -65,3 +65,10 @@ the parameters to watch
 * m - Frame Buffer and Bar1 memory usage (in MB)
 * e - ECC (Number of aggregated single bit, double bit ecc errors) and PCIe Replay errors
 * **t - PCIe Rx and Tx Throughput in MB/s (Maxwell and above)**
+
+<div>
+  <img id="ads_logo" alt="ads" src="/public/images/ads.png" style="max-width: 20px;" />
+  <div class="image-grid">
+    {% include page_tags_list_books.html %}
+  </div>
+</div>

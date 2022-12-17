@@ -50,20 +50,9 @@ And here is the full slides
 <script async class="speakerdeck-embed" data-id="a097f66bb8c74a3a8da129896f1940cd" data-ratio="1.77777777777778" src="https://speakerdeck.com/assets/embed.js"></script>
 
 
-
-<!-- Links
-
-https://twitter.com/hashtag/jsDay?src=hash
-
-Matteo Ronchi
-https://twitter.com/cef62
-https://speakerdeck.com/cef62/frontend-automation-bring-it-to-the-next-level-at-jsday-italy-2017
-
-
-massimiliano mantione
-https://massimiliano-mantione.github.io/talks/JsDay2017/OO
-https://twitter.com/m_a_s_s_i
-
-Fatos Hoti
-https://speakerdeck.com/tosfa/what-the-hell-is-fiber-and-why-should-i-care
--->
+<div>
+  <img id="ads_logo" alt="ads" src="/public/images/ads.png" style="max-width: 20px;" />
+  <div class="image-grid">
+    {% include page_tags_list_books.html %}
+  </div>
+</div>
