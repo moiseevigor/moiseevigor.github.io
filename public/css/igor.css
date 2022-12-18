@@ -310,9 +310,9 @@ button.copy:active {
 
 /* styling Ads grid in tags */
 .image-grid {
-  display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
+  display: flex;
+  overflow-x: scroll;
 }
 .image-grid a > img {
   width: 100%;
