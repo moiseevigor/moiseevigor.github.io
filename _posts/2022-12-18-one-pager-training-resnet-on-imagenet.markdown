@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "One Pager Version of How Train a Resnet50 on Imagenet"
-description: ""
+title:  "How Train a Resnet50 on Imagenet"
+description: "One pager version of training code for ResNet50 on ImageNet dataset"
 date:   2022-12-18 10:05:45
 categories:
 - software
