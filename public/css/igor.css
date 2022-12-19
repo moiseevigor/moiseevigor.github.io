@@ -315,7 +315,7 @@ button.copy:active {
   overflow-x: scroll;
 }
 .image-grid a > img {
-  width: 100%;
+  width: 90%;
 }
 .image-grid > #ads_logo {
   display: none;
