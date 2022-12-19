@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "How Train a Resnet50 on Imagenet"
+title:  "How to Train a Resnet50 on ImageNet"
 description: "One pager version of training code for ResNet50 on ImageNet dataset"
 date:   2022-12-18 10:05:45
 categories:
