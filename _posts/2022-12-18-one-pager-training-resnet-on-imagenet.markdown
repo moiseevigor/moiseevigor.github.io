@@ -247,7 +247,7 @@ The `Dockerfile` installs `wget` and `unzip` utilities, which are needed to down
 
 Next, the Dockerfile copies `resnet50.py` file, which should contain the code for training the ResNet50 model, to the `/app` directory. It then sets the working directory to /app and specifies that the python `resnet50.py` command should be run when the container is started.
 
-It is important to note that you have to provide your own secret in `kaggle.json` file to be able to download locally the data from [ImageNet Object Localization Challenge on Kaggle](https://www.kaggle.com/competitions/imagenet-object-localization-challenge/data). Here is the local directory structure 
+It is important to note that you have to provide your own secret in `kaggle.json` file to be able to download locally the data from [ImageNet Object Localization Challenge on Kaggle](https://www.kaggle.com/competitions/imagenet-object-localization-challenge/data). Here is the [local directory structure](https://github.com/moiseevigor/moiseevigor.github.io/tree/master/_code_examples/2022-12-18-one-pager-training-resnet-on-imagenet)
 
 ```
 ➜  2022-12-18-one-pager-training-resnet-on-imagenet git:(master) ✗ tree

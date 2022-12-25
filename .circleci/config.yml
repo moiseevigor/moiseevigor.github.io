@@ -31,6 +31,7 @@ jobs:
               --only-4xx \
               --ignore_urls "/example.com/" \
               --ignore_urls "/ws-na.amazon-adsystem.com/" \
+              --ignore_urls "/molpharm.aspetjournals.org/" \
               --ignore-status-codes "403"
       - persist_to_workspace:
           root: ./
