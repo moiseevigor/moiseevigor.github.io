@@ -56,17 +56,21 @@
   <script src="/public/js/lunr.min.js"></script>
   <script src="/public/js/search.js"></script>
 
-  <script type="text/javascript">
-    window.MathJax = {
-      tex: {
-        packages: ['base', 'ams']
+  <!-- LaTeX formulas in the browser -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [ ['$', '$'], ["\\(", "\\)"] ],
+        displayMath: [ ['$$', '$$'], ["\\[", "\\]"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
       },
-      loader: {
-        load: ['ui/menu', '[tex]/ams']
-      }
-    };
+      displayAlign: "left",
+      displayIndent: "2em"
+    });
   </script>
-  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 
 {% if jekyll.environment == "production" -%}
 

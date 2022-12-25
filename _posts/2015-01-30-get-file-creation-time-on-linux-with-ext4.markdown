@@ -118,3 +118,9 @@ Wed Jan 14 20:08:17 2015	_site
 Thu Feb  5 22:51:27 2015	tags.html
 ```
 
+<div>
+  <img id="ads_logo" alt="ads" src="/public/images/ads.png" style="max-width: 20px;" />
+  <div class="image-grid">
+    {% include page_tags_list_books.html %}
+  </div>
+</div>
