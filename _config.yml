@@ -11,7 +11,7 @@ permalink:           pretty
 # Setup
 title:               Igor Moiseev
 tagline:             'Applied mathematician, Web Developer'
-description:         'Some notes on technology and intelligence.'
+description:         'Notes on technology and intelligence.'
 url:                 https://moiseevigor.github.io
 baseurl:             ""
 paginate:            5

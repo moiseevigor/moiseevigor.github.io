@@ -24,7 +24,7 @@ Open browser at https://localhost:4000/
 docker run --rm --volume="$PWD:/srv/jekyll" -it blog \
     bundle exec htmlproofer ./_site \
         --only-4xx \
-        --ignore_urls "/example.com/" \
+        --ignore_urls "/example.com/,/ws-na.amazon-adsystem.com/,/molpharm.aspetjournals.org/" \
         --ignore-status-codes "403"
 ```
 
