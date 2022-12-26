@@ -29,9 +29,7 @@ jobs:
           command: |
             bundle exec htmlproofer ./_site \
               --only-4xx \
-              --ignore_urls "/example.com/" \
-              --ignore_urls "/ws-na.amazon-adsystem.com/" \
-              --ignore_urls "/molpharm.aspetjournals.org/" \
+              --ignore_urls "/example.com/,/ws-na.amazon-adsystem.com/,/molpharm.aspetjournals.org/" \
               --ignore-status-codes "403"
       - persist_to_workspace:
           root: ./
