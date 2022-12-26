@@ -211,7 +211,7 @@ Next, the model performs a forward pass on the inputs, producing output logits. 
 ## Training environment with Docker
 
 ```dockerfile
-FROM pytorch-cpu
+FROM pytorch/pytorch
 
 # Install additional dependencies
 RUN apt-get update && apt-get install -y \
