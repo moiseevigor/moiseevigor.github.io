@@ -1,6 +1,7 @@
 import torch
 import torchvision
 import torchvision.transforms as transforms
+from torchvision.transforms.autoaugment import AutoAugmentPolicy
 
 # Set device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -21,6 +22,13 @@ transform = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 ])
+
+# policy = transforms.Compose([
+#     transforms.AutoAugment(AutoAugmentPolicy.CIFAR10),
+#     transforms.ToTensor(),
+#     transforms.Normalize(mean=[0.485, 0.456, 0.406],
+#                             std=[0.229, 0.224, 0.225])
+# ])
 
 # Load the ImageNet Object Localization Challenge dataset
 train_dataset = torchvision.datasets.ImageFolder(

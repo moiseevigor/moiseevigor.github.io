@@ -12,6 +12,8 @@ tags:
 comments: true
 ---
 
+## Search across all databases (schemas) for tables without primary key
+
 The following query obtains the list of tables without primary key, those who destroys the database performance
 
 ```sql
@@ -33,7 +35,25 @@ In this example, the `INFORMATION_SCHEMA.TABLES` table is used to find all t. Th
 
 `LEFT JOIN` is used to join with table `KEY_COLUMN_USAGE` and filter the tables that do not have a primary key.
 
-A friendly advise: "The result list of this query should be an `Empty set`". 
+## Restrict search for tables without primary key to a specific databases (schema)
+
+```sql
+SELECT 
+    t.TABLE_NAME
+FROM INFORMATION_SCHEMA.TABLES AS t
+LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS k
+ON (
+       t.TABLE_NAME = k.TABLE_NAME
+   AND k.CONSTRAINT_SCHEMA = t.TABLE_SCHEMA
+   AND k.constraint_name = 'PRIMARY'
+)
+WHERE 
+    t.TABLE_SCHEMA NOT IN ('information_schema', 'performance_schema', 'mysql', 'sys')
+AND t.TABLE_SCHEMA = '<database name>' -- put database name here
+AND k.constraint_name IS NULL;
+```
+
+A friendly advise, the result list of these queries should be an `Empty set`. 
 
 Happy querying!
 
