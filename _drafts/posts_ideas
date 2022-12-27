@@ -1,0 +1,58 @@
+
+----------------
+POST 1
+
+opt/conda/envs/pytorch-py37/lib/python3.7/site-packages/torchvision/models/_utils.py:209: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and will be removed in 0.15, please use 'weights' instead.
+  f"The parameter '{pretrained_param}' is deprecated since 0.13 and will be removed in 0.15, "
+/opt/conda/envs/pytorch-py37/lib/python3.7/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and will be removed in 0.15. The current behavior is equivalent to passing `weights=ResNet50_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet50_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Downloading: "https://download.pytorch.org/models/resnet50-0676ba61.pth" to /root/.cache/torch/hub/checkpoints/resnet50-0676ba61.pth
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 97.8M/97.8M [00:48<00:00, 2.12MB/s]
+Initializing training cycle
+
+Torchvision 0.13 added an upgrade that allows to use pre-trained models on different weigths (e.g. different data-sets or their versions).
+So this
+
+from torchvision import models
+model = models.resnet50(pretrained=True)
+should now change to something like this
+
+from torchvision import models
+model = models.resnet50(weights='ResNet50_Weights.DEFAULT')
+You can also disable specific warnings like so
+
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning) 
+
+
+-------------- 
+post testing on Kaggle dataset
+
+print("Initializing testing cycle")
+val_dataset = torchvision.datasets.ImageFolder(
+    root='/kaggle/input/imagenet-object-localization-challenge/ILSVRC/Data/CLS-LOC/val', 
+    transform=transform
+)
+val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=True)
+# Test the model
+with torch.no_grad():
+    correct = 0
+    total = 0
+    for inputs, labels in val_loader:
+        # Move input and label tensors to the device
+        inputs = inputs.to(device)
+        labels = labels.to(device)
+
+        outputs = model(inputs)
+        _, predicted = torch.max(outputs.data, 1)
+        total += labels.size(0)
+        correct += (predicted == labels).sum().item()
+
+    print(f'Accuracy: {correct / total:.4f}')
+
+-----------
+post 3
+
+use kaggle util to download data
+chmod 600 /Users/igor/.kaggle/kaggle.json
+

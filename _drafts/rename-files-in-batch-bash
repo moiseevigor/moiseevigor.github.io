@@ -1,0 +1,35 @@
+```
+for i in `ls *.markdown` ; do mv $i `basename $i .markdown` ; done
+```
+
+```
+for i in `ls *.markdown` ; do echo $i `basename $i .markdown` ; done
+2014-12-17-ssh-tunnel-with-postgresql-and-pgadmin.markdown 2014-12-17-ssh-tunnel-with-postgresql-and-pgadmin
+2015-01-19-backup-kvm-virtual-machines-proxmox-ceph-storage.markdown 2015-01-19-backup-kvm-virtual-machines-proxmox-ceph-storage
+2015-01-19-google-calendar-api-v3-custom-sync.markdown 2015-01-19-google-calendar-api-v3-custom-sync
+2015-02-20-how-to-setup-nginx-virtual-hosts-with-ssl-certificates-on-ubuntu.markdown 2015-02-20-how-to-setup-nginx-virtual-hosts-with-ssl-certificates-on-ubuntu
+2015-02-20-parsing-email-into-sql-database.markdown 2015-02-20-parsing-email-into-sql-database
+2015-02-21-block-infinite-loop-in-asterisk-dialplan.markdown 2015-02-21-block-infinite-loop-in-asterisk-dialplan
+2015-02-21-linux-proc-file-system-utilities.markdown 2015-02-21-linux-proc-file-system-utilities
+2015-03-20-find-cracked-email-account-with-mailq-postfix.markdown 2015-03-20-find-cracked-email-account-with-mailq-postfix
+2015-04-27-manipulate-array-javascript.markdown 2015-04-27-manipulate-array-javascript
+2015-09-17-time-out-of-sync-virtual-machine.markdown 2015-09-17-time-out-of-sync-virtual-machine
+2016-02-11-configure-tls-postfix-email-encryption-in-transit.markdown 2016-02-11-configure-tls-postfix-email-encryption-in-transit
+2016-06-18-create-ssl-certificate-https-apache-nginx-certbot-letsencrypt.markdown 2016-06-18-create-ssl-certificate-https-apache-nginx-certbot-letsencrypt
+2022-10-10-advanced-features-of-pandas.markdown 2022-10-10-advanced-features-of-pandas
+cache-busting-using-commit-hash-with-git-and-requirejs.markdown cache-busting-using-commit-hash-with-git-and-requirejs
+ceph-surviving-guide-on-linux.markdown ceph-surviving-guide-on-linux
+data-model-with-composite-key-in-django-erst-framework.markdown data-model-with-composite-key-in-django-erst-framework
+empirical-btree-index-speed-on-timestamp-column.markdown empirical-btree-index-speed-on-timestamp-column
+ideal-rdesktop-settings.markdown ideal-rdesktop-settings
+iptables-custom-chain-allowed-ips-forward-nat.markdown iptables-custom-chain-allowed-ips-forward-nat
+linux-history-with-dates.markdown linux-history-with-dates
+one-pager-resnet-on-imagenet-fastai.markdown one-pager-resnet-on-imagenet-fastai
+one-pager-resnet-on-imagenet-jax.markdown one-pager-resnet-on-imagenet-jax
+one-pager-resnet-on-imagenet-pytorch-lightning.markdown one-pager-resnet-on-imagenet-pytorch-lightning
+one-pager-resnet-on-imagenet-tensorflow.markdown one-pager-resnet-on-imagenet-tensorflow
+pyspark-check-table-exists.markdown pyspark-check-table-exists
+scan-network-from-browser.markdown scan-network-from-browser
+speedup-work-with-clusterssh.markdown speedup-work-with-clusterssh
+understanding_adam.markdown understanding_adam
+```
