@@ -44,10 +44,13 @@ train_dataset = torchvision.datasets.ImageFolder(
     transform=transform
 )
 
-train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=4)
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=2)
 
 # Load the ResNet50 model
 model = torchvision.models.resnet50(pretrained=True)
+
+# Parallelize training across multiple GPUs
+model = torch.nn.DataParallel(model)
 
 # Set the model to run on the device
 model = model.to(device)
@@ -140,7 +143,7 @@ This line loads ImageNet dataset in Kaggle's format and applies all transformati
 
 ### Create a dataloader for the dataset:
 ```python
-train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=4)
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=2)
 ```
 The `torch.utils.data.DataLoader` function creates a dataloader for the dataset. The `batch_size` parameter specifies the number of samples per batch, the `shuffle` parameter specifies whether to shuffle the data at each epoch, and the `num_workers` parameter specifies the number of worker threads to use for loading the data
 
@@ -153,6 +156,13 @@ model = torchvision.models.resnet50(pretrained=True)
 
 This line uses the `torchvision.models.resnet50` function to load the Resnet50 model, with the pretrained parameter set to `True` to use the pretrained weights.
 
+### Parallelize training across multiple GPUs
+
+```
+model = torch.nn.DataParallel(model)
+```
+
+`torch.nn.DataParallel` wraps a model and splits the input across available GPUs, then it replicates the model on each GPU. The model is then run in parallel on each GPU, with the results from each GPU being collected and concatenated together. Normally this significantly speeds up training process, especially for large models on GPUs with a high number of parallel processing cores.
 
 ### Move the model to the device:
 
