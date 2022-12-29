@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/moiseevigor/moiseevigor.github.io/tree/master.svg?style=svg)](https://circleci.com/gh/moiseevigor/moiseevigor.github.io/tree/master)
 
-## Install Blog
+## Run Blog
 
 Building image
 
@@ -17,6 +17,14 @@ docker run --rm --volume="$PWD:/srv/jekyll" -p 4000:4000 -it blog jekyll serve -
 ```
 
 Open browser at https://localhost:4000/
+
+## Run Blog with `_drafts`
+
+Adding `--drafts` it will serve `*.markdown` files from `_drafts` folder.
+
+```
+docker run --rm --volume="$PWD:/srv/jekyll" -p 4000:4000 -it blog jekyll serve --drafts --incremental
+```
 
 ## Testing
 

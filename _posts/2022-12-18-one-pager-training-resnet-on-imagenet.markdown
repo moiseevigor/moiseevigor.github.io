@@ -236,6 +236,7 @@ ADD kaggle.json /root/.kaggle
 # Rememeber to join competition https://www.kaggle.com/c/imagenet-object-localization-challenge
 RUN pip install -q kaggle
 RUN kaggle competitions download -c imagenet-object-localization-challenge
+RUN unzip imagenet-object-localization-challenge.zip
 
 # Download pretrained model and store in the image layer 
 # Available at the path /root/.cache/torch/
@@ -265,9 +266,9 @@ It is important to note that you have to provide your own secret in `kaggle.json
 ├── .gitignore
 ├── Dockerfile
 ├── kaggle.json
-└── resnet50.py
+├── resnet50.py
+└── README.md
 ```
-
 
 To build the Docker container, you can run the following command:
 

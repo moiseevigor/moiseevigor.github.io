@@ -13,6 +13,7 @@ ADD kaggle.json /root/.kaggle
 # Rememeber to join competition https://www.kaggle.com/c/imagenet-object-localization-challenge
 RUN pip install -q kaggle
 RUN kaggle competitions download -c imagenet-object-localization-challenge
+RUN unzip imagenet-object-localization-challenge.zip
 
 # Download pretrained model and store in the image layer 
 # Available at the path /root/.cache/torch/
