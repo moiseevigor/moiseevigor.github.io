@@ -4,6 +4,10 @@ Code for the blog post [Train Resnet50 on ImageNet with PyTorch](https://moiseev
 
 ## Run locally with Docker 
 
+To be able to use this image you have to 
+- Download `kaggle.json` from kaggle.com > Account > API > Create New API Token, more in https://github.com/Kaggle/kaggle-api
+- Join competition https://www.kaggle.com/c/imagenet-object-localization-challenge
+
 To build the Docker container, you can run the following command:
 
 ```bash
