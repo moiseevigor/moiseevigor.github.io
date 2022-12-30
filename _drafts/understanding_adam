@@ -1,3 +1,11 @@
+Links
+- https://github.com/sgugger/Adam-experiments
+- https://www.fast.ai/posts/2018-07-02-adam-weight-decay.html
+- https://sgugger.github.io/sgd-variants.html
+
+Discrete and continuous version
+
+
 How ADAM algorithm is compared to SGD
 
 ADAM (Adaptive Moment Estimation) is a variant of stochastic gradient descent (SGD) that is particularly well-suited for training deep learning models. It is a popular optimization algorithm that is used in many machine learning models.
