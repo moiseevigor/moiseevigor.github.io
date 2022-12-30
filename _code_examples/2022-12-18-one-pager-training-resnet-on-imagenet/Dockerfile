@@ -19,6 +19,8 @@ RUN pip install -q kaggle
 # Available at the path /root/.cache/torch/
 RUN python -c "import torchvision; model = torchvision.models.resnet50(pretrained=True)"
 
+RUN pip install -q tensorboard tensorboardx
+
 # Copy the code
 COPY resnet50.py /app/
 
