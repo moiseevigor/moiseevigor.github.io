@@ -36,7 +36,7 @@ train_dataset = torchvision.datasets.ImageFolder(
     transform=transform
 )
 
-train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=2)
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=6)
 
 # Load the ResNet50 model
 model = torchvision.models.resnet50(pretrained=True)

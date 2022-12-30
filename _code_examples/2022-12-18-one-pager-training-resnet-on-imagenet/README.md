@@ -21,3 +21,9 @@ To run the container, you can use the following command:
 ```bash
 docker run --gpus all -it resnet50
 ```
+
+## Run with locally cached imagenet-object-localization-challenge
+
+```bash
+docker run --gpus all --ipc=host -it -v $PWD:/kaggle/input resnet50
+```
