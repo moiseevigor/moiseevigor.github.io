@@ -1,0 +1,37 @@
+mean and std for CIFAR10 dataset to use in transforms.Normalize
+The CIFAR-10 dataset is a widely used dataset for image classification that consists of 60000 32x32 color training images and 10000 test images. The images in the dataset are normalized by subtracting the mean image from every image and dividing by the standard deviation of every image.
+
+The mean and standard deviation of the CIFAR-10 dataset can be computed using the following code:
+
+Copy code
+import numpy as np
+from torchvision.datasets import CIFAR10
+
+# Load the CIFAR-10 dataset
+dataset = CIFAR10(root='./data', download=True)
+
+# Compute the mean and std of the dataset
+mean = np.mean(dataset.data, axis=(0, 1, 2)) / 255  # mean image
+std = np.std(dataset.data, axis=(0, 1, 2)) / 255  # std image
+
+print(mean)
+print(std)
+The mean and standard deviation of the CIFAR-10 dataset are approximately:
+
+Copy code
+[0.49139968 0.48215841 0.44653091]
+[0.24703223 0.24348513 0.26158784]
+You can then use these values to normalize the images in the dataset using the torchvision.transforms.Normalize transformation:
+
+Copy code
+import torch
+from torchvision import transforms
+
+# Define the normalization transform
+normalize = transforms.Normalize(mean=mean, std=std)
+
+# Normalize a sample image
+image = dataset[0][0]  # get the first image in the dataset
+image_normalized = normalize(image)
+
+print(image_normalized)
