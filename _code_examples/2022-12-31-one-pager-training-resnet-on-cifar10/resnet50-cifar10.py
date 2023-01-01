@@ -6,7 +6,7 @@ from torchvision.transforms.autoaugment import AutoAugmentPolicy
 from tensorboardX import SummaryWriter
 
 # Create a SummaryWriter object
-writer = SummaryWriter('/app/tensorboard/exp8')
+writer = SummaryWriter('/app/tensorboard/exp7')
 
 # Set device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -75,15 +75,16 @@ min_momentum = 0.85
 optimizer = torch.optim.SGD(model.parameters(), lr=initial_lr, momentum=min_momentum)
 scheduler = torch.optim.lr_scheduler.OneCycleLR(
     optimizer,
-    max_lr=0.004,
+    max_lr=0.01,
+    # total_steps=batch_size*num_epochs,
     epochs=num_epochs,
     steps_per_epoch=len(train_loader),
-    pct_start=0.1,
+    pct_start=0.45,
     anneal_strategy='linear',
     cycle_momentum=True,
     base_momentum=0.85,
     max_momentum=0.95,
-    div_factor=1.0,
+    div_factor=10.0,
     final_div_factor=10.0,
     three_phase=True
 )
