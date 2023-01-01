@@ -6,15 +6,16 @@ from torchvision.transforms.autoaugment import AutoAugmentPolicy
 from tensorboardX import SummaryWriter
 
 # Create a SummaryWriter object
-writer = SummaryWriter('/app/tensorboard')
+writer = SummaryWriter('/app/tensorboard/exp2')
 
 # Set device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Set hyperparameters
-num_epochs = 200
+num_epochs = 100
 batch_size = 64
 learning_rate = 0.0008
+momentum = 0.88
 
 transform = transforms.Compose([
     transforms.RandomHorizontalFlip(),
@@ -65,7 +66,8 @@ model = model.to(device)
 
 # Define the loss function and optimizer
 criterion = torch.nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+# optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate, momentum=momentum)
 
 # Train the model...
 train_iteration_counter = -1
