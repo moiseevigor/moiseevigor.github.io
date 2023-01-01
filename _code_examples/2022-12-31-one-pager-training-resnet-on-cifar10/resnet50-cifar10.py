@@ -6,16 +6,18 @@ from torchvision.transforms.autoaugment import AutoAugmentPolicy
 from tensorboardX import SummaryWriter
 
 # Create a SummaryWriter object
-writer = SummaryWriter('/app/tensorboard/exp3')
+writer = SummaryWriter('/app/tensorboard/exp4')
 
 # Set device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Set hyperparameters
-num_epochs = 50
+num_epochs = 100
 batch_size = 64
-learning_rate = 0.008
-momentum = 0.88
+
+# The triangular schedule and cool-down schedule
+triangular_schedule_epochs = 40
+cool_down_epochs = 10
 
 transform = transforms.Compose([
     transforms.RandomHorizontalFlip(),
@@ -66,8 +68,30 @@ model = model.to(device)
 
 # Define the loss function and optimizer
 criterion = torch.nn.CrossEntropyLoss()
-# optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate, momentum=momentum)
+
+# Define the learning rate scheduler
+initial_lr = 0.001
+# max_lr = 0.01
+# final_lr = 0.0001
+# max_momentum = 1
+# min_momentum = 0.85
+optimizer = torch.optim.Adam(model.parameters(), lr=initial_lr)
+# optimizer = torch.optim.SGD(model.parameters(), lr=initial_lr, momentum=min_momentum)
+scheduler = torch.optim.lr_scheduler.OneCycleLR(
+    optimizer,
+    max_lr=0.01,
+    # total_steps=batch_size*num_epochs,
+    epochs=num_epochs,
+    steps_per_epoch=len(train_loader),
+    pct_start=0.45,
+    anneal_strategy='linear',
+    cycle_momentum=True,
+    base_momentum=0.85,
+    max_momentum=0.95,
+    div_factor=10.0,
+    final_div_factor=10.0,
+    three_phase=True
+)
 
 # Train the model...
 train_iteration_counter = -1
@@ -100,6 +124,17 @@ for epoch in range(num_epochs):
         progress_bar.set_postfix(train_loss=loss.item())
         writer.add_scalar('Loss/train', loss.item(), train_iteration_counter)
         progress_bar.update()
+    
+        # Step the learning rate scheduler
+        scheduler.step()
+
+        # Get the learning rate
+        lr = scheduler.get_last_lr()
+        # # import pdb; pdb.set_trace()
+        # momentum = optimizer.param_groups[0]['momentum']
+        # print('lr', lr)
+        writer.add_scalar('LR', lr, train_iteration_counter)
+        # writer.add_scalar('Momentum', momentum, train_iteration_counter)
 
     # Validation
     with torch.no_grad():
