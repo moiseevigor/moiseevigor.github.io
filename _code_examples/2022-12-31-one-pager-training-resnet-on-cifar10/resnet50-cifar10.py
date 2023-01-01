@@ -15,10 +15,6 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 num_epochs = 100
 batch_size = 64
 
-# The triangular schedule and cool-down schedule
-triangular_schedule_epochs = 40
-cool_down_epochs = 10
-
 transform = transforms.Compose([
     transforms.RandomHorizontalFlip(),
     # transforms.RandomCrop(32, 4),
@@ -79,7 +75,7 @@ optimizer = torch.optim.Adam(model.parameters(), lr=initial_lr)
 # optimizer = torch.optim.SGD(model.parameters(), lr=initial_lr, momentum=min_momentum)
 scheduler = torch.optim.lr_scheduler.OneCycleLR(
     optimizer,
-    max_lr=0.005,
+    max_lr=0.0024,
     # total_steps=batch_size*num_epochs,
     epochs=num_epochs,
     steps_per_epoch=len(train_loader),
@@ -88,7 +84,7 @@ scheduler = torch.optim.lr_scheduler.OneCycleLR(
     cycle_momentum=True,
     base_momentum=0.85,
     max_momentum=0.95,
-    div_factor=5.0,
+    div_factor=2.4,
     final_div_factor=10.0,
     three_phase=True
 )
