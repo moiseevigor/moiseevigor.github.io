@@ -6,7 +6,7 @@ from torchvision.transforms.autoaugment import AutoAugmentPolicy
 from tensorboardX import SummaryWriter
 
 # Create a SummaryWriter object
-writer = SummaryWriter('/app/tensorboard/exp4')
+writer = SummaryWriter('/app/tensorboard/exp5')
 
 # Set device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -79,7 +79,7 @@ optimizer = torch.optim.Adam(model.parameters(), lr=initial_lr)
 # optimizer = torch.optim.SGD(model.parameters(), lr=initial_lr, momentum=min_momentum)
 scheduler = torch.optim.lr_scheduler.OneCycleLR(
     optimizer,
-    max_lr=0.01,
+    max_lr=0.005,
     # total_steps=batch_size*num_epochs,
     epochs=num_epochs,
     steps_per_epoch=len(train_loader),
@@ -88,7 +88,7 @@ scheduler = torch.optim.lr_scheduler.OneCycleLR(
     cycle_momentum=True,
     base_momentum=0.85,
     max_momentum=0.95,
-    div_factor=10.0,
+    div_factor=5.0,
     final_div_factor=10.0,
     three_phase=True
 )
@@ -120,19 +120,16 @@ for epoch in range(num_epochs):
         loss.backward()
         optimizer.step()
 
-        # Update the progress bar and tensorboard summary
-        progress_bar.set_postfix(train_loss=loss.item())
-        writer.add_scalar('Loss/train', loss.item(), train_iteration_counter)
-        progress_bar.update()
-    
         # Step the learning rate scheduler
         scheduler.step()
-
-        # Get the learning rate
         lr = scheduler.get_last_lr()
-        # # import pdb; pdb.set_trace()
         # momentum = optimizer.param_groups[0]['momentum']
-        # print('lr', lr)
+
+        # Update the progress bar and tensorboard summary
+        progress_bar.set_postfix(train_loss=loss.item(), lr=lr)
+        progress_bar.update()
+
+        writer.add_scalar('Loss/train', loss.item(), train_iteration_counter)
         writer.add_scalar('LR', lr, train_iteration_counter)
         # writer.add_scalar('Momentum', momentum, train_iteration_counter)
 
