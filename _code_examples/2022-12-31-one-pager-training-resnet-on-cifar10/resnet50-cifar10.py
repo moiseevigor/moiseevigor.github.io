@@ -6,15 +6,15 @@ from torchvision.transforms.autoaugment import AutoAugmentPolicy
 from tensorboardX import SummaryWriter
 
 # Create a SummaryWriter object
-writer = SummaryWriter('/app/tensorboard/exp2')
+writer = SummaryWriter('/app/tensorboard/exp3')
 
 # Set device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Set hyperparameters
-num_epochs = 100
+num_epochs = 50
 batch_size = 64
-learning_rate = 0.0008
+learning_rate = 0.008
 momentum = 0.88
 
 transform = transforms.Compose([
