@@ -6,7 +6,7 @@ from torchvision.transforms.autoaugment import AutoAugmentPolicy
 from tensorboardX import SummaryWriter
 
 # Create a SummaryWriter object
-writer = SummaryWriter('/app/tensorboard/exp5')
+writer = SummaryWriter('/app/tensorboard/exp6')
 
 # Set device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -21,7 +21,7 @@ cool_down_epochs = 10
 
 transform = transforms.Compose([
     transforms.RandomHorizontalFlip(),
-    transforms.RandomCrop(32, 4),
+    # transforms.RandomCrop(32, 4),
     transforms.AutoAugment(AutoAugmentPolicy.CIFAR10),
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.491, 0.482, 0.447], std=[0.247, 0.243, 0.262])
@@ -42,7 +42,7 @@ val_dataset = torchvision.datasets.CIFAR10(
     train=False, 
     download=True, 
     transform=transforms.Compose([
-        transforms.RandomCrop(32, 4),
+        # transforms.RandomCrop(32, 4),
         transforms.ToTensor(),
         transforms.Normalize(mean=[0.491, 0.482, 0.447], std=[0.247, 0.243, 0.262])
     ])
@@ -126,7 +126,7 @@ for epoch in range(num_epochs):
         # momentum = optimizer.param_groups[0]['momentum']
 
         # Update the progress bar and tensorboard summary
-        progress_bar.set_postfix(train_loss=loss.item(), lr=lr)
+        progress_bar.set_postfix(lr=lr[0], train_loss=loss.item())
         progress_bar.update()
 
         writer.add_scalar('Loss/train', loss.item(), train_iteration_counter)
@@ -168,7 +168,7 @@ for epoch in range(num_epochs):
         val_acc /= len(val_loader)
 
         # Update the progress bar and tensorboard summary
-        progress_bar.set_postfix(train_loss=loss.item(), val_loss=val_loss, val_acc=val_acc)
+        progress_bar.set_postfix(lr=lr[0], train_loss=loss.item(), val_loss=val_loss, val_acc=val_acc)
         writer.add_scalar('Loss/val', val_loss, epoch)
         writer.add_scalar('Accuracy/val', val_acc, epoch)
 
