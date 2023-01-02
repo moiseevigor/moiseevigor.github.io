@@ -6,14 +6,14 @@ from torchvision.transforms.autoaugment import AutoAugmentPolicy
 from tensorboardX import SummaryWriter
 
 # Create a SummaryWriter object
-writer = SummaryWriter('/app/tensorboard/exp15-adamw')
+writer = SummaryWriter('/app/tensorboard/exp16-adamw')
 
 # Set device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Set hyperparameters
-num_epochs = 40
-batch_size = 64
+num_epochs = 8
+batch_size = 400
 
 transform = transforms.Compose([
     transforms.RandomHorizontalFlip(),
@@ -72,22 +72,22 @@ lr = [0.0008]
 # max_momentum = 1
 min_momentum = 0.85
 # optimizer = torch.optim.Adam(model.parameters(), lr=lr)
-optimizer = torch.optim.AdamW(model.parameters(), lr=lr[0])
+optimizer = torch.optim.AdamW(model.parameters(), lr=lr[0], weight_decay=0.0001)
 # optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=min_momentum)
 scheduler = torch.optim.lr_scheduler.OneCycleLR(
     optimizer,
-    max_lr=0.004,
+    max_lr=0.01,
     # total_steps=batch_size*num_epochs,
     epochs=num_epochs,
     steps_per_epoch=len(train_loader),
-    pct_start=0.125,
-    anneal_strategy='linear',
-    cycle_momentum=True,
-    base_momentum=0.85,
-    max_momentum=0.95,
-    div_factor=1.0,
-    final_div_factor=10.0,
-    three_phase=True
+    # pct_start=0.125,
+    # anneal_strategy='linear',
+    # cycle_momentum=True,
+    # base_momentum=0.85,
+    # max_momentum=0.95,
+    # div_factor=1.0,
+    # final_div_factor=10.0,
+    # three_phase=True
 )
 
 # Train the model...

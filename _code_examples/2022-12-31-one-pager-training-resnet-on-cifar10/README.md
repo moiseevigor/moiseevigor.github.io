@@ -28,3 +28,6 @@ docker run --gpus all -it resnet50-cifar10
 docker run --gpus all --ipc=host -it -v $PWD:/app resnet50-cifar10 python /app/resnet50-cifar10.py
 ```
 
+
+## Links
+- https://www.kaggle.com/code/kmldas/cifar10-resnet-90-accuracy-less-than-5-min
