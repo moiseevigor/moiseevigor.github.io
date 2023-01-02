@@ -6,7 +6,7 @@ from torchvision.transforms.autoaugment import AutoAugmentPolicy
 from tensorboardX import SummaryWriter
 
 # Create a SummaryWriter object
-writer = SummaryWriter('/app/tensorboard/exp12-adamw')
+writer = SummaryWriter('/app/tensorboard/exp13-adamw')
 
 # Set device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -30,7 +30,7 @@ train_dataset = torchvision.datasets.CIFAR10(
     download=True, 
     transform=transform
 )
-train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=2)
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=6)
 
 # Load the CIFAR-10 dataset for validation
 val_dataset = torchvision.datasets.CIFAR10(
@@ -43,7 +43,7 @@ val_dataset = torchvision.datasets.CIFAR10(
         transforms.Normalize(mean=[0.491, 0.482, 0.447], std=[0.247, 0.243, 0.262])
     ])
 )
-val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=2)
+val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=6)
 
 # Load the ResNet50 model and initialize 1000 classes
 model = torchvision.models.resnet50(num_classes=1000)
@@ -76,11 +76,11 @@ optimizer = torch.optim.AdamW(model.parameters(), lr=lr[0])
 # optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=min_momentum)
 scheduler = torch.optim.lr_scheduler.OneCycleLR(
     optimizer,
-    max_lr=0.004,
+    max_lr=0.006,
     # total_steps=batch_size*num_epochs,
     epochs=num_epochs,
     steps_per_epoch=len(train_loader),
-    pct_start=0.05,
+    pct_start=0.1,
     anneal_strategy='linear',
     cycle_momentum=True,
     base_momentum=0.85,
