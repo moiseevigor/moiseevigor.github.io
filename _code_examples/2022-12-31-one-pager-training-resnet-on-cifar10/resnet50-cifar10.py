@@ -46,7 +46,7 @@ val_dataset = torchvision.datasets.CIFAR10(
 val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=6)
 
 # Load the ResNet50 model and initialize 1000 classes
-model = torchvision.models.resnet50(num_classes=1000)
+model = torchvision.models.resnet18(num_classes=1000)
 
 # Initialize the weights of the model using Kaiming normal initialization
 for m in model.modules():
