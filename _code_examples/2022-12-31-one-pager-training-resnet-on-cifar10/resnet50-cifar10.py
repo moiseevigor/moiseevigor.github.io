@@ -6,7 +6,7 @@ from torchvision.transforms.autoaugment import AutoAugmentPolicy
 from tensorboardX import SummaryWriter
 
 # Create a SummaryWriter object
-writer = SummaryWriter('/app/tensorboard/exp14-adamw')
+writer = SummaryWriter('/app/tensorboard/exp15-adamw')
 
 # Set device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -76,11 +76,11 @@ optimizer = torch.optim.AdamW(model.parameters(), lr=lr[0])
 # optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=min_momentum)
 scheduler = torch.optim.lr_scheduler.OneCycleLR(
     optimizer,
-    max_lr=0.01,
+    max_lr=0.004,
     # total_steps=batch_size*num_epochs,
     epochs=num_epochs,
     steps_per_epoch=len(train_loader),
-    pct_start=0.1,
+    pct_start=0.125,
     anneal_strategy='linear',
     cycle_momentum=True,
     base_momentum=0.85,
