@@ -6,7 +6,7 @@ from torchvision.transforms.autoaugment import AutoAugmentPolicy
 from tensorboardX import SummaryWriter
 
 # Create a SummaryWriter object
-writer = SummaryWriter('/app/tensorboard/exp10-adamw')
+writer = SummaryWriter('/app/tensorboard/exp11-adamw')
 
 # Set device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -76,16 +76,16 @@ optimizer = torch.optim.AdamW(model.parameters(), lr=lr[0])
 # optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=min_momentum)
 scheduler = torch.optim.lr_scheduler.OneCycleLR(
     optimizer,
-    max_lr=0.01,
+    max_lr=0.004,
     # total_steps=batch_size*num_epochs,
     epochs=num_epochs,
     steps_per_epoch=len(train_loader),
-    pct_start=0.45,
+    pct_start=0.125,
     anneal_strategy='linear',
     cycle_momentum=True,
     base_momentum=0.85,
     max_momentum=0.95,
-    div_factor=10.0,
+    div_factor=4.0,
     final_div_factor=10.0,
     three_phase=True
 )
@@ -98,6 +98,11 @@ img = torch.zeros(3, num_epochs, len(val_dataset))
 for epoch in range(num_epochs):
     # Initialize a progress bar
     progress_bar = tqdm(total=len(train_loader), desc=f'Epoch {epoch+1}/{num_epochs}')
+
+    train_loss = 0
+    train_acc = 0
+    true_labels = []
+    pred_labels = []
 
     for inputs, labels in train_loader:
         train_iteration_counter += 1
@@ -120,15 +125,27 @@ for epoch in range(num_epochs):
         # Step the learning rate scheduler
         scheduler.step()
         lr = scheduler.get_last_lr()
-        # momentum = optimizer.param_groups[0]['momentum']
+
+        # Calculate the accuracy
+        _, preds = torch.max(outputs, dim=1)
+        acc = (preds == labels).float().mean()
+        true_labels.append(labels)
+        pred_labels.append(preds)
+
+        train_loss += loss.item()
+        train_acc += acc.item()
 
         # Update the progress bar and tensorboard summary
-        progress_bar.set_postfix(lr=lr[0], train_loss=loss.item())
+        progress_bar.set_postfix(lr=lr[0], train_loss=loss.item(), train_acc=acc.item())
         progress_bar.update()
 
         writer.add_scalar('Loss/train', loss.item(), train_iteration_counter)
+        writer.add_scalar('Accuracy/train/iter', acc.item(), train_iteration_counter)
         writer.add_scalar('LR', lr, train_iteration_counter)
-        # writer.add_scalar('Momentum', momentum, train_iteration_counter)
+
+    # Calculate the average train loss and accuracy
+    train_loss /= len(train_loader)
+    train_acc /= len(train_loader)
 
     # Validation
     with torch.no_grad():
@@ -165,7 +182,7 @@ for epoch in range(num_epochs):
         val_acc /= len(val_loader)
 
         # Update the progress bar and tensorboard summary
-        progress_bar.set_postfix(lr=lr[0], train_loss=loss.item(), val_loss=val_loss, val_acc=val_acc)
+        progress_bar.set_postfix(lr=lr[0], train_loss=train_loss, train_acc=train_acc, val_loss=val_loss, val_acc=val_acc)
         writer.add_scalar('Loss/val', val_loss, epoch)
         writer.add_scalar('Accuracy/val', val_acc, epoch)
 
