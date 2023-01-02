@@ -6,7 +6,7 @@ from torchvision.transforms.autoaugment import AutoAugmentPolicy
 from tensorboardX import SummaryWriter
 
 # Create a SummaryWriter object
-writer = SummaryWriter('/app/tensorboard/exp9')
+writer = SummaryWriter('/app/tensorboard/exp10-adamw')
 
 # Set device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -74,21 +74,21 @@ min_momentum = 0.85
 # optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 optimizer = torch.optim.AdamW(model.parameters(), lr=lr[0])
 # optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=min_momentum)
-# scheduler = torch.optim.lr_scheduler.OneCycleLR(
-#     optimizer,
-#     max_lr=0.01,
-#     # total_steps=batch_size*num_epochs,
-#     epochs=num_epochs,
-#     steps_per_epoch=len(train_loader),
-#     pct_start=0.45,
-#     anneal_strategy='linear',
-#     cycle_momentum=True,
-#     base_momentum=0.85,
-#     max_momentum=0.95,
-#     div_factor=10.0,
-#     final_div_factor=10.0,
-#     three_phase=True
-# )
+scheduler = torch.optim.lr_scheduler.OneCycleLR(
+    optimizer,
+    max_lr=0.01,
+    # total_steps=batch_size*num_epochs,
+    epochs=num_epochs,
+    steps_per_epoch=len(train_loader),
+    pct_start=0.45,
+    anneal_strategy='linear',
+    cycle_momentum=True,
+    base_momentum=0.85,
+    max_momentum=0.95,
+    div_factor=10.0,
+    final_div_factor=10.0,
+    three_phase=True
+)
 
 # Train the model...
 train_iteration_counter = -1
@@ -118,8 +118,8 @@ for epoch in range(num_epochs):
         optimizer.step()
 
         # Step the learning rate scheduler
-        # scheduler.step()
-        # lr = scheduler.get_last_lr()
+        scheduler.step()
+        lr = scheduler.get_last_lr()
         # momentum = optimizer.param_groups[0]['momentum']
 
         # Update the progress bar and tensorboard summary
@@ -127,7 +127,7 @@ for epoch in range(num_epochs):
         progress_bar.update()
 
         writer.add_scalar('Loss/train', loss.item(), train_iteration_counter)
-        # writer.add_scalar('LR', lr, train_iteration_counter)
+        writer.add_scalar('LR', lr, train_iteration_counter)
         # writer.add_scalar('Momentum', momentum, train_iteration_counter)
 
     # Validation
