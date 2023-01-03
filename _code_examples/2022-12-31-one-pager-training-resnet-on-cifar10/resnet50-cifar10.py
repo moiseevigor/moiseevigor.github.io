@@ -62,11 +62,11 @@ model = model.to(device)
 # Define the loss function and optimizer
 criterion = torch.nn.CrossEntropyLoss()
 
-for lr in [0.0001, 0.0002, 0.0005, 0.0010, 0.0015, 0.002, 0.003, 0.005, 0.01, 0.02]:
+for lr in reversed([0.0001, 0.0002, 0.0005, 0.0010, 0.0015, 0.002, 0.003, 0.005, 0.01, 0.02]):
     print(f'SGD Experiment for lr:{lr}')
 
     # Create a SummaryWriter object
-    writer = SummaryWriter(f'/app/experiments/sgd-lr/exp-{lr}')
+    writer = SummaryWriter(f'/app/experiments/sgd-desc-lr/exp-{lr}')
 
     lr = [lr]
     # max_lr = 0.01
