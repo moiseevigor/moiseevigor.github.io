@@ -5,14 +5,11 @@ from tqdm import tqdm
 from torchvision.transforms.autoaugment import AutoAugmentPolicy
 from tensorboardX import SummaryWriter
 
-# Create a SummaryWriter object
-writer = SummaryWriter('/app/tensorboard/exp18-adamw')
-
 # Set device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Set hyperparameters
-num_epochs = 10
+num_epochs = 100
 batch_size = 400
 
 transform = transforms.Compose([
@@ -65,105 +62,73 @@ model = model.to(device)
 # Define the loss function and optimizer
 criterion = torch.nn.CrossEntropyLoss()
 
-# Define the learning rate scheduler
-lr = [0.0008]
-# max_lr = 0.01
-# final_lr = 0.0001
-# max_momentum = 1
-min_momentum = 0.85
-# optimizer = torch.optim.Adam(model.parameters(), lr=lr)
-optimizer = torch.optim.AdamW(model.parameters(), lr=lr[0], weight_decay=0.0001)
-# optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=min_momentum)
-scheduler = torch.optim.lr_scheduler.OneCycleLR(
-    optimizer,
-    max_lr=0.01,
-    # total_steps=batch_size*num_epochs,
-    epochs=num_epochs,
-    steps_per_epoch=len(train_loader),
-    # pct_start=0.125,
-    # anneal_strategy='linear',
-    # cycle_momentum=True,
-    # base_momentum=0.85,
-    # max_momentum=0.95,
-    # div_factor=1.0,
-    # final_div_factor=10.0,
-    # three_phase=True
-)
+for lr in [0.0001, 0.0002, 0.0005, 0.0010, 0.0015, 0.002, 0.003, 0.005, 0.01, 0.02]:
+    print(f'SGD Experiment for lr:{lr}')
 
-# Train the model...
-train_iteration_counter = -1
-val_iteration_counter = -1
-img = torch.zeros(3, num_epochs, len(val_dataset))
+    # Create a SummaryWriter object
+    writer = SummaryWriter(f'/app/experiments/sgd-lr/exp-{lr}')
 
-for epoch in range(num_epochs):
-    # Initialize a progress bar
-    progress_bar = tqdm(total=len(train_loader), desc=f'Epoch {epoch+1}/{num_epochs}')
+    lr = [lr]
+    # max_lr = 0.01
+    # final_lr = 0.0001
+    # max_momentum = 1
+    # min_momentum = 0.85
+    # optimizer = torch.optim.Adam(model.parameters(), lr=lr[0])
+    # optimizer = torch.optim.AdamW(model.parameters(), lr=lr[0], weight_decay=0.0001)
+    optimizer = torch.optim.SGD(model.parameters(), lr=lr[0])
 
-    train_loss = 0
-    train_acc = 0
-    true_labels = []
-    pred_labels = []
+    # Define the learning rate scheduler
+    # scheduler = torch.optim.lr_scheduler.OneCycleLR(
+    #     optimizer,
+    #     max_lr=0.01,
+    #     # total_steps=batch_size*num_epochs,
+    #     epochs=num_epochs,
+    #     steps_per_epoch=len(train_loader),
+    #     # pct_start=0.125,
+    #     # anneal_strategy='linear',
+    #     # cycle_momentum=True,
+    #     # base_momentum=0.85,
+    #     # max_momentum=0.95,
+    #     # div_factor=1.0,
+    #     # final_div_factor=10.0,
+    #     # three_phase=True
+    # )
 
-    for inputs, labels in train_loader:
-        train_iteration_counter += 1
+    # Train the model...
+    train_iteration_counter = -1
+    val_iteration_counter = -1
+    img = torch.zeros(3, num_epochs, len(val_dataset))
 
-        # Move input and label tensors to the device
-        inputs = inputs.to(device)
-        labels = labels.to(device)
+    for epoch in range(num_epochs):
+        # Initialize a progress bar
+        progress_bar = tqdm(total=len(train_loader), desc=f'Epoch {epoch+1}/{num_epochs}')
 
-        # Zero out the optimizer
-        optimizer.zero_grad()
-
-        # Forward pass
-        outputs = model(inputs)
-        loss = criterion(outputs, labels)
-
-        # Backward pass
-        loss.backward()
-        optimizer.step()
-
-        # Step the learning rate scheduler
-        scheduler.step()
-        lr = scheduler.get_last_lr()
-
-        # Calculate the accuracy
-        _, preds = torch.max(outputs, dim=1)
-        acc = (preds == labels).float().mean()
-        true_labels.append(labels)
-        pred_labels.append(preds)
-
-        train_loss += loss.item()
-        train_acc += acc.item()
-
-        # Update the progress bar and tensorboard summary
-        progress_bar.set_postfix(lr=lr[0], train_loss=loss.item(), train_acc=acc.item())
-        progress_bar.update()
-
-        writer.add_scalar('Loss/train', loss.item(), train_iteration_counter)
-        writer.add_scalar('Accuracy/train/iter', acc.item(), train_iteration_counter)
-        writer.add_scalar('LR', lr, train_iteration_counter)
-
-    # Calculate the average train loss and accuracy
-    train_loss /= len(train_loader)
-    train_acc /= len(train_loader)
-
-    # Validation
-    with torch.no_grad():
-        val_loss = 0
-        val_acc = 0
+        train_loss = 0
+        train_acc = 0
         true_labels = []
         pred_labels = []
 
-        for inputs, labels in val_loader:
-            val_iteration_counter += 1
+        for inputs, labels in train_loader:
+            train_iteration_counter += 1
 
             # Move input and label tensors to the device
             inputs = inputs.to(device)
             labels = labels.to(device)
 
+            # Zero out the optimizer
+            optimizer.zero_grad()
+
             # Forward pass
             outputs = model(inputs)
             loss = criterion(outputs, labels)
+
+            # Backward pass
+            loss.backward()
+            optimizer.step()
+
+            # Step the learning rate scheduler
+            # scheduler.step()
+            # lr = scheduler.get_last_lr()
 
             # Calculate the accuracy
             _, preds = torch.max(outputs, dim=1)
@@ -171,31 +136,70 @@ for epoch in range(num_epochs):
             true_labels.append(labels)
             pred_labels.append(preds)
 
-            val_loss += loss.item()
-            val_acc += acc.item()
+            train_loss += loss.item()
+            train_acc += acc.item()
 
-            writer.add_scalar('Loss/val/iter', loss.item(), val_iteration_counter)
-            writer.add_scalar('Accuracy/val/iter', acc.item(), val_iteration_counter)
+            # Update the progress bar and tensorboard summary
+            progress_bar.set_postfix(lr=lr[0], train_loss=loss.item(), train_acc=acc.item())
+            progress_bar.update()
 
-        # Calculate the average validation loss and accuracy
-        val_loss /= len(val_loader)
-        val_acc /= len(val_loader)
+            writer.add_scalar('Loss/train', loss.item(), train_iteration_counter)
+            writer.add_scalar('Accuracy/train/iter', acc.item(), train_iteration_counter)
+            writer.add_scalar('LR', lr, train_iteration_counter)
 
-        # Update the progress bar and tensorboard summary
-        progress_bar.set_postfix(lr=lr[0], train_loss=train_loss, train_acc=train_acc, val_loss=val_loss, val_acc=val_acc)
-        writer.add_scalar('Loss/val', val_loss, epoch)
-        writer.add_scalar('Accuracy/val', val_acc, epoch)
+        # Calculate the average train loss and accuracy
+        train_loss /= len(train_loader)
+        train_acc /= len(train_loader)
 
-        # Concatenate the true labels and predicted labels
-        true_labels = torch.cat(true_labels)
-        pred_labels = torch.cat(pred_labels)
+        # Validation
+        with torch.no_grad():
+            val_loss = 0
+            val_acc = 0
+            true_labels = []
+            pred_labels = []
 
-        # Set the pixel value to [0, 1, 0] (green) if the prediction is correct, and [1, 0, 0] (red) if the prediction is incorrect
-        img[0, epoch, :] = (pred_labels != true_labels).float()
-        img[1, epoch, :] = (pred_labels == true_labels).float()
+            for inputs, labels in val_loader:
+                val_iteration_counter += 1
 
-# Write the prediction image to tensorboard
-writer.add_image('Prediction image', img)
-writer.close()
+                # Move input and label tensors to the device
+                inputs = inputs.to(device)
+                labels = labels.to(device)
 
-print(f'Finished Training, Loss: {loss.item():.4f}')
+                # Forward pass
+                outputs = model(inputs)
+                loss = criterion(outputs, labels)
+
+                # Calculate the accuracy
+                _, preds = torch.max(outputs, dim=1)
+                acc = (preds == labels).float().mean()
+                true_labels.append(labels)
+                pred_labels.append(preds)
+
+                val_loss += loss.item()
+                val_acc += acc.item()
+
+                writer.add_scalar('Loss/val/iter', loss.item(), val_iteration_counter)
+                writer.add_scalar('Accuracy/val/iter', acc.item(), val_iteration_counter)
+
+            # Calculate the average validation loss and accuracy
+            val_loss /= len(val_loader)
+            val_acc /= len(val_loader)
+
+            # Update the progress bar and tensorboard summary
+            progress_bar.set_postfix(lr=lr[0], train_loss=train_loss, train_acc=train_acc, val_loss=val_loss, val_acc=val_acc)
+            writer.add_scalar('Loss/val', val_loss, epoch)
+            writer.add_scalar('Accuracy/val', val_acc, epoch)
+
+            # Concatenate the true labels and predicted labels
+            true_labels = torch.cat(true_labels)
+            pred_labels = torch.cat(pred_labels)
+
+            # Set the pixel value to [0, 1, 0] (green) if the prediction is correct, and [1, 0, 0] (red) if the prediction is incorrect
+            img[0, epoch, :] = (pred_labels != true_labels).float()
+            img[1, epoch, :] = (pred_labels == true_labels).float()
+
+    # Write the prediction image to tensorboard
+    writer.add_image('Prediction image', img)
+    writer.close()
+
+    print(f'Finished Training for lr:{lr}, Loss: {loss.item():.4f}')
