@@ -62,11 +62,19 @@ model = model.to(device)
 # Define the loss function and optimizer
 criterion = torch.nn.CrossEntropyLoss()
 
-for lr in reversed([0.0001, 0.0002, 0.0005, 0.0010, 0.0015, 0.002, 0.003, 0.005, 0.01, 0.02]):
+for lr in [0.0001, 0.0002, 0.0005, 0.0010, 0.0015, 0.002, 0.003, 0.005, 0.01, 0.02]:
     print(f'SGD Experiment for lr:{lr}')
 
+    # Initialize the weights of the model using Kaiming normal initialization
+    for m in model.modules():
+        if isinstance(m, torch.nn.Conv2d):
+            torch.nn.init.kaiming_normal_(m.weight, mode='fan_in', nonlinearity='relu')
+        elif isinstance(m, torch.nn.BatchNorm2d):
+            m.weight.data.fill_(1)
+            m.bias.data.zero_()
+
     # Create a SummaryWriter object
-    writer = SummaryWriter(f'/app/experiments/sgd-desc-lr/exp-{lr}')
+    writer = SummaryWriter(f'/app/experiments/sgd-restart-lr/exp-{lr}')
 
     lr = [lr]
     # max_lr = 0.01
