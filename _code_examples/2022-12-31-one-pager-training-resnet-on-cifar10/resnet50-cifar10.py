@@ -74,14 +74,14 @@ val_dataset = torchvision.datasets.CIFAR10(
 val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=6)
 
 # Load the ResNet50 model and initialize 10 classes
-model = torchvision.models.resnet18(num_classes=10)
+model = torchvision.models.resnet50(num_classes=10)
 
 # Add dropout after the fully connected layer
 num_ftrs = model.fc.in_features
 model.fc = torch.nn.Sequential(
     torch.nn.Linear(num_ftrs, num_ftrs),
     torch.nn.ReLU(),
-    torch.nn.Dropout(p=0.5),  # Dropout with probability 0.5
+    torch.nn.Dropout(p=0.2),  # Dropout with probability 0.2
     torch.nn.Linear(num_ftrs, 10)
 )
 
@@ -117,16 +117,16 @@ for m in model.modules():
         m.bias.data.zero_()
 
 # Create a SummaryWriter object
-writer = SummaryWriter(f'/app/experiments/sgd-interactive-lr-momentum/exp-3-resnet18-actual-clippedgrad')
+writer = SummaryWriter(f'/app/experiments/adamw-constant-lr/exp-1-resnet18-dropout-clippedgrad')
 
 lr = [0.35]
 # max_lr = 0.01
 # final_lr = 0.0001
 # max_momentum = 1
-min_momentum = 0.85
+# min_momentum = 0.85
 # optimizer = torch.optim.Adam(model.parameters(), lr=lr[0])
-# optimizer = torch.optim.AdamW(model.parameters(), lr=lr[0], weight_decay=0.0001)
-optimizer = torch.optim.SGD(model.parameters(), lr=lr[0], momentum=min_momentum)
+optimizer = torch.optim.AdamW(model.parameters(), lr=lr[0], weight_decay=1.2e-6)
+# optimizer = torch.optim.SGD(model.parameters(), lr=lr[0], momentum=min_momentum)
 
 # Define the learning rate scheduler
 # scheduler = torch.optim.lr_scheduler.OneCycleLR(
