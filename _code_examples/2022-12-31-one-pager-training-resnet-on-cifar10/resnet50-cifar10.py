@@ -93,6 +93,9 @@ for m in model.modules():
         m.weight.data.fill_(1)
         m.bias.data.zero_()
 
+# Define the maximum gradient norm
+max_norm = 1.0
+
 # Parallelize training across multiple GPUs
 model = torch.nn.DataParallel(model)
 
@@ -114,16 +117,16 @@ for m in model.modules():
         m.bias.data.zero_()
 
 # Create a SummaryWriter object
-writer = SummaryWriter(f'/app/experiments/sgd-interactive-lr/exp-6-resnet18-dropout-adamw')
+writer = SummaryWriter(f'/app/experiments/sgd-interactive-lr-momentum/exp-3-resnet18-actual-clippedgrad')
 
-lr = [0.01]
+lr = [0.35]
 # max_lr = 0.01
 # final_lr = 0.0001
 # max_momentum = 1
-# min_momentum = 0.85
+min_momentum = 0.85
 # optimizer = torch.optim.Adam(model.parameters(), lr=lr[0])
-optimizer = torch.optim.AdamW(model.parameters(), lr=lr[0], weight_decay=0.0001)
-# optimizer = torch.optim.SGD(model.parameters(), lr=lr[0])
+# optimizer = torch.optim.AdamW(model.parameters(), lr=lr[0], weight_decay=0.0001)
+optimizer = torch.optim.SGD(model.parameters(), lr=lr[0], momentum=min_momentum)
 
 # Define the learning rate scheduler
 # scheduler = torch.optim.lr_scheduler.OneCycleLR(
@@ -173,6 +176,8 @@ for epoch in range(num_epochs):
 
         # Backward pass
         loss.backward()
+
+        gradients = torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm)
         optimizer.step()
 
         # Step the learning rate scheduler

@@ -35,3 +35,5 @@ docker run --gpus all --ipc=host -it -v $PWD:/app resnet50-cifar10 python /app/r
 - https://paperswithcode.com/sota/image-classification-on-cifar-10?tag_filter=93%2C3
 - https://benchopt.github.io/
 - AutoFormer https://arxiv.org/abs/2107.00651v1
+- https://www.kaggle.com/code/kmldas/cifar10-resnet-90-accuracy-less-than-5-min
+- pretrained on CIFAR-10 https://github.com/huyvnphan/PyTorch_CIFAR10
