@@ -116,7 +116,7 @@ for m in model.modules():
         m.weight.data.fill_(1)
         m.bias.data.zero_()
 
-lr = [0.1]
+lr = [0.06]
 min_momentum = 0.85
 # optimizer = torch.optim.Adam(model.parameters(), lr=lr[0])
 # optimizer = torch.optim.AdamW(model.parameters(), lr=lr[0], weight_decay=0.0001)
@@ -136,12 +136,12 @@ def find_lr(model, optimizer, criterion, device, train_loader):
 # exit()
 
 # Create a SummaryWriter object
-writer = SummaryWriter(f'/app/experiments/sgd-lrfind-fast/exp-1-resnet18')
+writer = SummaryWriter(f'/app/experiments/sgd-lrfind-slow/exp-1-resnet18')
 
 # Define the learning rate scheduler
 scheduler = torch.optim.lr_scheduler.OneCycleLR(
     optimizer,
-    max_lr=0.7,
+    max_lr=0.06,
     # total_steps=batch_size*num_epochs,
     epochs=num_epochs,
     steps_per_epoch=len(train_loader),
@@ -150,7 +150,7 @@ scheduler = torch.optim.lr_scheduler.OneCycleLR(
     cycle_momentum=True,
     base_momentum=0.85,
     max_momentum=0.95,
-    div_factor=7.0,
+    div_factor=6.0,
     final_div_factor=2.0,
     three_phase=True
 )
