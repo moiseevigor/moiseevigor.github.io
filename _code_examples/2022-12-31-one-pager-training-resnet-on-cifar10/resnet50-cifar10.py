@@ -81,7 +81,7 @@ num_ftrs = model.fc.in_features
 model.fc = torch.nn.Sequential(
     torch.nn.Linear(num_ftrs, num_ftrs),
     torch.nn.ReLU(),
-    torch.nn.Dropout(p=0.2),  # Dropout with probability 0.2
+    torch.nn.Dropout(p=0.5),  # Dropout with probability 0.5
     torch.nn.Linear(num_ftrs, 10)
 )
 
@@ -117,33 +117,33 @@ for m in model.modules():
         m.bias.data.zero_()
 
 # Create a SummaryWriter object
-writer = SummaryWriter(f'/app/experiments/adamw-constant-lr/exp-1-resnet18-dropout-clippedgrad')
+writer = SummaryWriter(f'/app/experiments/sgd-interactive-lr-momentum/exp-4-resnet18-actual-clippedgrad')
 
 lr = [0.35]
 # max_lr = 0.01
 # final_lr = 0.0001
 # max_momentum = 1
-# min_momentum = 0.85
+min_momentum = 0.95
 # optimizer = torch.optim.Adam(model.parameters(), lr=lr[0])
-optimizer = torch.optim.AdamW(model.parameters(), lr=lr[0], weight_decay=1.2e-6)
-# optimizer = torch.optim.SGD(model.parameters(), lr=lr[0], momentum=min_momentum)
+# optimizer = torch.optim.AdamW(model.parameters(), lr=lr[0], weight_decay=0.0001)
+optimizer = torch.optim.SGD(model.parameters(), lr=lr[0], momentum=min_momentum)
 
 # Define the learning rate scheduler
-# scheduler = torch.optim.lr_scheduler.OneCycleLR(
-#     optimizer,
-#     max_lr=0.01,
-#     # total_steps=batch_size*num_epochs,
-#     epochs=num_epochs,
-#     steps_per_epoch=len(train_loader),
-#     # pct_start=0.125,
-#     # anneal_strategy='linear',
-#     # cycle_momentum=True,
-#     # base_momentum=0.85,
-#     # max_momentum=0.95,
-#     # div_factor=1.0,
-#     # final_div_factor=10.0,
-#     # three_phase=True
-# )
+scheduler = torch.optim.lr_scheduler.OneCycleLR(
+    optimizer,
+    max_lr=0.35,
+    # total_steps=batch_size*num_epochs,
+    epochs=num_epochs,
+    steps_per_epoch=len(train_loader),
+    pct_start=0.125,
+    anneal_strategy='linear',
+    cycle_momentum=True,
+    base_momentum=0.85,
+    max_momentum=0.95,
+    div_factor=3.0,
+    final_div_factor=10.0,
+    three_phase=True
+)
 
 # Train the model...
 train_iteration_counter = -1
@@ -181,8 +181,8 @@ for epoch in range(num_epochs):
         optimizer.step()
 
         # Step the learning rate scheduler
-        # scheduler.step()
-        # lr = scheduler.get_last_lr()
+        scheduler.step()
+        lr = scheduler.get_last_lr()
 
         # Calculate the accuracy
         _, preds = torch.max(outputs, dim=1)
