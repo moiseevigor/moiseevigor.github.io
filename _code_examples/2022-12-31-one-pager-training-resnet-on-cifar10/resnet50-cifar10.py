@@ -77,13 +77,13 @@ val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shu
 model = torchvision.models.resnet18(num_classes=10)
 
 # Add dropout after the fully connected layer
-num_ftrs = model.fc.in_features
-model.fc = torch.nn.Sequential(
-    torch.nn.Linear(num_ftrs, num_ftrs),
-    torch.nn.ReLU(),
-    torch.nn.Dropout(p=0.5),  # Dropout with probability 0.5
-    torch.nn.Linear(num_ftrs, 10)
-)
+# num_ftrs = model.fc.in_features
+# model.fc = torch.nn.Sequential(
+#     torch.nn.Linear(num_ftrs, num_ftrs),
+#     torch.nn.ReLU(),
+#     torch.nn.Dropout(p=0.5),  # Dropout with probability 0.5
+#     torch.nn.Linear(num_ftrs, 10)
+# )
 
 # Initialize the weights of the model using Kaiming normal initialization
 for m in model.modules():
@@ -104,9 +104,6 @@ model = model.to(device)
 
 # Define the loss function and optimizer
 criterion = torch.nn.CrossEntropyLoss()
-
-# for lr in [0.0001, 0.0002, 0.0005, 0.0010, 0.0015, 0.002, 0.003, 0.005, 0.01, 0.02]:
-#     print(f'SGD Experiment for lr:{lr}')
 
 # Initialize the weights of the model using Kaiming normal initialization
 for m in model.modules():
@@ -130,13 +127,13 @@ def find_lr(model, optimizer, criterion, device, train_loader):
     lr_finder.range_test(train_loader, end_lr=1, num_iter=1000)
     lr_finder.plot()
     plt.pyplot.grid()
-    plt.pyplot.savefig("LRvsLoss-AdamW-resnet18-pretrained.png", dpi=300)
+    plt.pyplot.savefig("LRvsLoss-Adam-resnet50.png", dpi=300)
 
 # find_lr(model, optimizer, criterion, device, train_loader)
 # exit()
 
 # Create a SummaryWriter object
-writer = SummaryWriter(f'/app/experiments/adam-lrfind-slow/exp-1-resnet18')
+writer = SummaryWriter(f'/app/experiments/adamw-lrfind-slow/exp-2-resnet18-nodropout')
 
 # Define the learning rate scheduler
 scheduler = torch.optim.lr_scheduler.OneCycleLR(
