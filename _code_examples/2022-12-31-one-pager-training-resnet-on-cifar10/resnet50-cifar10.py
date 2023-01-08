@@ -30,10 +30,10 @@ def input_thread():
             print("Invalid value for LR. Try again.")
 
 # Create a separate thread to run the input function
-input_thread = threading.Thread(target=input_thread)
+# input_thread = threading.Thread(target=input_thread)
 
-# Start the input thread
-input_thread.start()
+# # Start the input thread
+# input_thread.start()
 
 
 # Set device
@@ -74,7 +74,7 @@ val_dataset = torchvision.datasets.CIFAR10(
 val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=6)
 
 # Load the ResNet50 model and initialize 10 classes
-model = torchvision.models.resnet50(num_classes=10)
+model = torchvision.models.resnet18(num_classes=10)
 
 # Add dropout after the fully connected layer
 num_ftrs = model.fc.in_features
@@ -116,22 +116,32 @@ for m in model.modules():
         m.weight.data.fill_(1)
         m.bias.data.zero_()
 
-# Create a SummaryWriter object
-writer = SummaryWriter(f'/app/experiments/sgd-interactive-lr-momentum/exp-4-resnet18-actual-clippedgrad')
-
-lr = [0.35]
-# max_lr = 0.01
-# final_lr = 0.0001
-# max_momentum = 1
-min_momentum = 0.95
+lr = [0.1]
+min_momentum = 0.85
 # optimizer = torch.optim.Adam(model.parameters(), lr=lr[0])
 # optimizer = torch.optim.AdamW(model.parameters(), lr=lr[0], weight_decay=0.0001)
 optimizer = torch.optim.SGD(model.parameters(), lr=lr[0], momentum=min_momentum)
 
+def find_lr(model, optimizer, criterion, device, train_loader):
+    from torch_lr_finder import LRFinder
+    import matplotlib as plt
+
+    lr_finder = LRFinder(model, optimizer, criterion, device)
+    lr_finder.range_test(train_loader, end_lr=1, num_iter=1000)
+    lr_finder.plot()
+    plt.pyplot.grid()
+    plt.pyplot.savefig("LRvsLoss-SGD-resnet18.png", dpi=300)
+
+# find_lr(model, optimizer, criterion, device, train_loader)
+# exit()
+
+# Create a SummaryWriter object
+writer = SummaryWriter(f'/app/experiments/sgd-lrfind-fast/exp-1-resnet18')
+
 # Define the learning rate scheduler
 scheduler = torch.optim.lr_scheduler.OneCycleLR(
     optimizer,
-    max_lr=0.35,
+    max_lr=0.7,
     # total_steps=batch_size*num_epochs,
     epochs=num_epochs,
     steps_per_epoch=len(train_loader),
@@ -140,8 +150,8 @@ scheduler = torch.optim.lr_scheduler.OneCycleLR(
     cycle_momentum=True,
     base_momentum=0.85,
     max_momentum=0.95,
-    div_factor=3.0,
-    final_div_factor=10.0,
+    div_factor=7.0,
+    final_div_factor=2.0,
     three_phase=True
 )
 
@@ -177,7 +187,7 @@ for epoch in range(num_epochs):
         # Backward pass
         loss.backward()
 
-        gradients = torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm)
+        # gradients = torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm)
         optimizer.step()
 
         # Step the learning rate scheduler

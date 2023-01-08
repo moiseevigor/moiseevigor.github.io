@@ -24,6 +24,10 @@ You can also disable specific warnings like so
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning) 
 
+Links
+- https://pytorch.org/vision/main/models/generated/torchvision.models.resnet50.html
+- https://github.com/pytorch/vision/tree/main/references/classification#resnet
+- pretrained weights https://pytorch.org/vision/main/models.html
 
 -------------- 
 post testing on Kaggle dataset
@@ -56,3 +60,4 @@ post 3
 use kaggle util to download data
 chmod 600 /Users/igor/.kaggle/kaggle.json
 
+https://www.kaggle.com/general/74235

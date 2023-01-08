@@ -20,7 +20,7 @@ RUN python -c "import torchvision; train_dataset = torchvision.datasets.CIFAR10(
     download=True, \
 )"
 
-RUN pip install -q tensorboard tensorboardx tqdm
+RUN pip install -q tensorboard tensorboardx tqdm torch-lr-finder
 
 # Copy the code
 COPY resnet50-cifar10.py /app/
