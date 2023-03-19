@@ -25,21 +25,8 @@ The [Matlab](https://www.mathworks.com/) script implementations of [Elliptic int
 
 The main *GOAL* of the project is to provide the natural Matlab scripts *WITHOUT* external library calls like Maple and others. All scripts are developed to accept tensors as arguments and almost all of them have their complex versions. Performance and complete control on the execution are the main features.
 
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/moiseevigor/elliptic/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/moiseevigor/elliptic/tree/master) [![DOI](https://zenodo.org/badge/5762/moiseevigor/elliptic.svg)](https://zenodo.org/badge/latestdoi/5762/moiseevigor/elliptic)
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/moiseevigor/elliptic?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
-<hr />
-
-## [Email2DB for PHP]({{ site.url }}/email2db-php)
-
-<a aria-label="Star moiseevigor/email2db-php on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/moiseevigor/email2db-php#stargazers_count" data-count-href="/moiseevigor/email2db-php/stargazers" data-style="mega" data-icon="octicon-star" href="https://github.com/moiseevigor/email2db-php" class="github-button">Star</a>&nbsp;
-<a aria-label="Fork moiseevigor/email2db-php on GitHub" data-count-aria-label="# forks on GitHub" data-count-api="/repos/moiseevigor/email2db-php#forks_count" data-count-href="/moiseevigor/email2db-php/network" data-style="mega" data-icon="octicon-git-branch" href="https://github.com/moiseevigor/email2db-php/fork" class="github-button">Fork</a>
-
-Email2DB parses the email schema into the relational schema. It supports major SQL engines: [MySQL](/tag/mysql), [PostgreSQL](/tag/postgresql), Microsoft SQL server and [MongoDB](/tag/mongodb) support will be rolled down latter.
-
-
-[![Build Status](https://travis-ci.org/moiseevigor/email2db-php.svg?branch=master)](https://travis-ci.org/moiseevigor/email2db-php)&nbsp;
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/moiseevigor/email2db-php?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 <hr />
 

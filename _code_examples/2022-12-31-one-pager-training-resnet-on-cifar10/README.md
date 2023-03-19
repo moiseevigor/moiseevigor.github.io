@@ -37,3 +37,5 @@ docker run --gpus all --ipc=host -it -v $PWD:/app resnet50-cifar10 python /app/r
 - AutoFormer https://arxiv.org/abs/2107.00651v1
 - https://www.kaggle.com/code/kmldas/cifar10-resnet-90-accuracy-less-than-5-min
 - pretrained on CIFAR-10 https://github.com/huyvnphan/PyTorch_CIFAR10
+- optimal LR https://github.com/kuangliu/pytorch-cifar/issues/29
+- try RetinaNet with Focal loss to train on harder examples
