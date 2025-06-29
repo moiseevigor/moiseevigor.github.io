@@ -57,9 +57,4 @@ A friendly advise, the result list of these queries should be an `Empty set`.
 
 Happy querying!
 
-<div>
-  <img id="ads_logo" alt="ads" src="/public/images/ads.png" style="max-width: 20px;" />
-  <div class="image-grid">
-    {% include page_tags_list_books.html %}
-  </div>
-</div>
+

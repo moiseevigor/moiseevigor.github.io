@@ -76,9 +76,4 @@ Now let's apply it without reboot
 Now check how faster is scrolling the listing in `iwatch /tmp`. 
 This optimization will be useful also for many other services such as anti-viruses, PHP and web servers, Java and so on. 
 
-<div>
-  <img id="ads_logo" alt="ads" src="/public/images/ads.png" style="max-width: 20px;" />
-  <div class="image-grid">
-    {% include page_tags_list_books.html %}
-  </div>
-</div>
+

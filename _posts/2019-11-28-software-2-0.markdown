@@ -14,10 +14,3 @@ comments: true
 Humans are continuing the endeavor of understanding human intelligence and on the way, the new technologies are born, one of them is information technology. Nowadays the development in the area of artificial intelligence is bringing new ideas to software engineering and enrich it with some powerful tools like deep learning. During the talk, we'll discuss these tools, the pros, and cons of the implementation and how deep learning and symbolic representation of the problem are related. It will be touched the development and debugging cycle of the deep learning architectures with some examples.
 
 <iframe width="720" height="380" src="https://www.youtube.com/embed/he1yelshNc4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
-<div>
-  <img id="ads_logo" alt="ads" src="/public/images/ads.png" style="max-width: 20px;" />
-  <div class="image-grid">
-    {% include page_tags_list_books.html %}
-  </div>
-</div>

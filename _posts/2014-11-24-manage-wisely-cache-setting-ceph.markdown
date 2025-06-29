@@ -53,9 +53,4 @@ rbd cache = true
 rbd cache writethrough until flush = true
 ```
 
-<div>
-  <img id="ads_logo" alt="ads" src="/public/images/ads.png" style="max-width: 20px;" />
-  <div class="image-grid">
-    {% include page_tags_list_books.html %}
-  </div>
-</div>
+

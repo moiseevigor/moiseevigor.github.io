@@ -36,9 +36,4 @@ $ svn st | grep '^!' | awk '{print $2}' | xargs svn delete --force
 $ grep -r 'content_graphic' assets/js --exclude=*\.svn*
 ```
 
-<div>
-  <img id="ads_logo" alt="ads" src="/public/images/ads.png" style="max-width: 20px;" />
-  <div class="image-grid">
-    {% include page_tags_list_books.html %}
-  </div>
-</div>
+

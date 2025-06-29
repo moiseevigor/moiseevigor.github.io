@@ -290,9 +290,4 @@ This will start the training of the ResNet50 model on the ImageNet dataset. You 
 
 I hope this helps! Let me know if you have any questions.
 
-<div>
-  <img id="ads_logo" alt="ads" src="/public/images/ads.png" style="max-width: 20px;" />
-  <div class="image-grid">
-    {% include page_tags_list_books.html %}
-  </div>
-</div>
+

@@ -61,9 +61,4 @@ cd / && rm -rf opencv*
 
 The handy `Dockerfile` with Tensorflow 1.5 + OpenCV 3.4.1 + Python 3 at your disposal [https://gist.github.com/moiseevigor/3e9b00066842c20229be47bd5429f6b1](https://gist.github.com/moiseevigor/3e9b00066842c20229be47bd5429f6b1)
 
-<div>
-  <img id="ads_logo" alt="ads" src="/public/images/ads.png" style="max-width: 20px;" />
-  <div class="image-grid">
-    {% include page_tags_list_books.html %}
-  </div>
-</div>
+

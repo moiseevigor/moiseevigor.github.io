@@ -50,9 +50,4 @@ And here is the full slides
 <script async class="speakerdeck-embed" data-id="a097f66bb8c74a3a8da129896f1940cd" data-ratio="1.77777777777778" src="https://speakerdeck.com/assets/embed.js"></script>
 
 
-<div>
-  <img id="ads_logo" alt="ads" src="/public/images/ads.png" style="max-width: 20px;" />
-  <div class="image-grid">
-    {% include page_tags_list_books.html %}
-  </div>
-</div>
+
