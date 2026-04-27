@@ -1,0 +1,23 @@
+- id: geometry-of-seeing
+  title: "Geometry of Seeing"
+  subtitle: >
+    A series on the mathematics of visual perception, sub-Riemannian geometry on SE(2),
+    and the role of elliptic integrals in the exact analysis of optimal curves —
+    from Petitot's V1 model to an open problem on the cut locus.
+  posts:
+    - part: 1
+      title: "The Visual Cortex as a Contact Manifold"
+      url: /mathematics/2026/04/25/geometry-of-seeing-visual-cortex-se2/
+      status: draft
+    - part: 2
+      title: "Euler's Elastica and Jacobi Elliptic Functions"
+      url: /mathematics/2026/04/28/geometry-of-seeing-elastica-jacobi/
+      status: draft
+    - part: 3
+      title: "Maxwell Strata: When Optimal Paths Fork"
+      url: /2026/05/05/geometry-of-seeing-maxwell-strata/
+      status: upcoming
+    - part: 4
+      title: "The Open Problem: Exact Cut Time on SE(2)"
+      url: /2026/05/15/geometry-of-seeing-cut-time-open-problem/
+      status: upcoming
