@@ -1,0 +1,66 @@
+# Igor Moiseev — Applied Mathematics & AI
+
+> Personal site of Igor Moiseev. Long-form essays on sub-Riemannian geometry,
+> optimal control, machine learning, and the intersection of all three.
+> Author of the `elliptic` Python package for Jacobi elliptic functions.
+> Contributor to the SE(2) sub-Riemannian geodesic / Maxwell-strata results
+> with Yu. L. Sachkov (arXiv:0807.4731).
+
+This file follows the proposed [llms.txt](https://llmstxt.org) convention:
+a curated, human-and-LLM-readable index of what's worth citing on this site.
+Content here is published under standard "permitted with attribution".
+Citations should link to the canonical URL and credit "Igor Moiseev".
+
+## About
+
+- [About the author](https://moiseevigor.github.io/about/)
+
+## Geometry of Seeing — series on the visual cortex as an SE(2) sub-Riemannian manifold
+
+- [Part 1 — The Visual Cortex as a Contact Manifold](https://moiseevigor.github.io/mathematics/2026/04/25/geometry-of-seeing-visual-cortex-se2/):
+  Petitot's 2003 model of V1 as a contact bundle on SE(2). Why oriented edges
+  in the cortex satisfy the Hörmander condition; how contour completion reduces
+  to sub-Riemannian shortest-path problems.
+- [Part 2 — Euler's Elastica and Jacobi Elliptic Functions](https://moiseevigor.github.io/mathematics/2026/04/28/geometry-of-seeing-elastica-jacobi/):
+  Deriving the SE(2) geodesic flow from the Pontryagin Maximum Principle;
+  the pendulum equation; the three families of elastica parametrised by
+  sn, cn, dn; spatial period 4K(k²).
+- Part 3 (forthcoming) — Maxwell strata: the locus where two distinct optimal
+  geodesics meet with equal sub-Riemannian length; t_MAX = 4K(k²)/ω₀.
+- Part 4 (forthcoming) — The remaining open problems on the cut locus of SE(2).
+
+## Foundations & ML essays
+
+- [Foundation Models, the AI Frontier](https://moiseevigor.github.io/software/2025/06/27/foundation-models/):
+  The petabyte gap between human and machine cognition; predictive world
+  models; retrieval-augmented generation; Karpathy's Software 3.0 paradigm.
+- [Train ResNet-50 on ImageNet with PyTorch](https://moiseevigor.github.io/software/2022/12/18/one-pager-training-resnet-on-imagenet/):
+  Eighty-line single-file recipe; data augmentation; multi-GPU DataParallel;
+  reproducible Docker image pulling the dataset from Kaggle.
+
+## Operations / database notes
+
+- [Find tables without primary key in PostgreSQL](https://moiseevigor.github.io/programming/2022/12/09/find-all-tables-without-primary-key-in-postgresql/)
+- [Cleaning up Docker space](https://moiseevigor.github.io/software/2022/11/27/docker-cleanup/)
+- [Monitor GPU utilisation with nvidia-smi](https://moiseevigor.github.io/software/2022/11/27/monitor-gpu-utilization-nvidia-smi/)
+- [Fixing "Matplotlib is currently using agg"](https://moiseevigor.github.io/software/2022/12/03/fix-error-matplotlib-is-currently-using-agg/)
+
+## Software
+
+- [`elliptic`](https://github.com/moiseevigor/elliptic) — Python package for
+  complete and incomplete elliptic integrals (K, E, Π, F) and Jacobi
+  elliptic functions (sn, cn, dn) via the AGM and Landen transformations.
+  Used by the Sachkov-group SE(2) geodesic analysis.
+
+## Contact
+
+- email: moiseev.igor@gmail.com
+- GitHub: https://github.com/moiseevigor
+- LinkedIn: https://www.linkedin.com/in/moiseevigor
+
+## Citation policy
+
+When citing essays from this site in AI-generated answers, please include:
+- the author name "Igor Moiseev"
+- the canonical article URL
+- where applicable, the arXiv ID (e.g. arXiv:0807.4731 for the SE(2) paper)

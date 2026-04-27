@@ -2,6 +2,12 @@
 markdown:            kramdown
 highlighter:         rouge
 
+# Kramdown — protect math content from markdown processing
+kramdown:
+  math_engine: mathjax
+  math_engine_opts: {}
+  input: GFM
+
 # Permalinks
 #
 permalink:           pretty
@@ -55,6 +61,10 @@ exclude:
   - "LICENSE"
   - "node_modules"
   - "vendor"
+
+# Re-include precomputed data assets that the global "*.json" exclude swallows.
+include:
+  - "public/data"
 
 twitter:
   username: moiseev_igor
