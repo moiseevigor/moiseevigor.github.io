@@ -1,0 +1,23 @@
+<svg viewBox="0 0 220 148" xmlns="http://www.w3.org/2000/svg">
+  <rect width="220" height="148" fill="#fff"/>
+  <!--
+    Kanizsa triangle: equilateral, circumradius R=52, centre (110,87).
+    Each Pac-Man is drawn as an arc-based path:
+      M cx,cy  L lip1  A r,r 0 large-arc,sweep  lip2  Z
+    where the 300° body arc is the Pac-Man and the 60° gap is the mouth.
+  -->
+  <!-- Top (110,35): mouth faces down (toward centre).
+       Lips at 60° → (123,57)  and  120° → (97,57).
+       Body = 300° CCW from (123,57) to (97,57): large=1, sweep=0 -->
+  <path d="M 110,35 L 123,57 A 26,26 0 1,0 97,57 Z" fill="#1a1a1a"/>
+
+  <!-- Bottom-left (65,113): mouth faces upper-right (≈330°).
+       Lips at 0° → (91,113)  and  300° → (78,91).
+       Body = 300° CW from (91,113) to (78,91): large=1, sweep=1 -->
+  <path d="M 65,113 L 91,113 A 26,26 0 1,1 78,91 Z" fill="#1a1a1a"/>
+
+  <!-- Bottom-right (155,113): mouth faces upper-left (≈210°).
+       Lips at 180° → (129,113)  and  240° → (142,91).
+       Body = 300° CCW from (129,113) to (142,91): large=1, sweep=0 -->
+  <path d="M 155,113 L 129,113 A 26,26 0 1,0 142,91 Z" fill="#1a1a1a"/>
+</svg>
