@@ -16,6 +16,16 @@ a > img {
 }
 </style>
 
+## [Geometry of Seeing]({{ site.url }}/projects/geometry-of-seeing/)
+
+A four-part series on the mathematics of visual perception: why the primary visual cortex
+computes contour completion as shortest paths on the Lie group SE(2), how those paths are
+parametrised by Jacobi elliptic functions, and what remains open about the exact cut time.
+
+[Read the project overview →](/projects/geometry-of-seeing/)
+
+<hr />
+
 ## [Elliptic functions for Matlab and Octave]({{ site.url }}/elliptic)
 
 <a aria-label="Star moiseevigor/elliptic on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/moiseevigor/elliptic#stargazers_count" data-count-href="/moiseevigor/elliptic/stargazers" data-style="mega" data-icon="octicon-star" href="https://github.com/moiseevigor/elliptic" class="github-button">Star</a>&nbsp;
