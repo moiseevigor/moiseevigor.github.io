@@ -1,0 +1,644 @@
+/**
+ * site.css — Distill-inspired unified styles for the main blog.
+ * Covers: nav, pages, regular posts, home, archives, categories, footer.
+ * Distill article posts use _layouts/distill.html + distill.css only.
+ *
+ * Design tokens match distill.css exactly so both files share the same
+ * visual language and can evolve together.
+ */
+
+/* ── Design tokens ────────────────────────────────────────────────────────── */
+:root {
+  --accent:       #1565c0;
+  --accent-light: #e8f0fe;
+  --accent-warm:  #e65100;
+  --text:         #1a1a1a;
+  --text-light:   #444;
+  --text-muted:   #777;
+  --border:       #e0e0e0;
+  --fig-bg:       #f8f9fb;
+  --code-bg:      #1e2228;
+
+  --serif:  'Merriweather', Georgia, serif;
+  --sans:   'Source Sans 3', 'Helvetica Neue', sans-serif;
+  --mono:   'JetBrains Mono', 'Fira Code', monospace;
+
+  --content-w: 680px;
+}
+
+/* ── Reset ────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; padding: 0; background: #fff; color: var(--text); overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+img { max-width: 100%; display: block; border-radius: 4px; }
+
+/* ── Site navigation ──────────────────────────────────────────────────────── */
+.site-nav {
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 100;
+  font-family: var(--sans);
+}
+.site-nav-brand {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--text);
+  text-decoration: none;
+}
+.site-nav-brand:hover { color: var(--accent); text-decoration: none; }
+
+.site-nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 28px;
+}
+.site-nav-links a {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 400;
+  transition: color 0.1s;
+}
+.site-nav-links a:hover,
+.site-nav-links a.active { color: var(--text); text-decoration: none; }
+
+/*
+ * Removed: the old `.site-main { max-width: 680px }` wrapper.
+ * Every layout (post, page, distill) now provides its own .d-header and
+ * .d-article — both centred at calc(--body-w + 32 + --gutter-w) (= 932px)
+ * — so width is the layout's responsibility, not the shell's.
+ * The home page still uses .site-main with body.home overrides; that rule
+ * lives further down in this file.
+ */
+
+/* ── Global typography ────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--sans);
+  color: var(--text);
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: clamp(1.55rem, 3.5vw, 2rem);
+  letter-spacing: -0.025em;
+  margin: 0 0 0.4em;
+}
+h2 {
+  font-size: 1.25rem;
+  letter-spacing: -0.015em;
+  margin: 2.4em 0 0.6em;
+  padding-top: 0.5em;
+  border-top: 1px solid var(--border);
+}
+h3 { font-size: 1.05rem; margin: 1.8em 0 0.4em; }
+h4 { font-size: 0.95rem; margin: 1.2em 0 0.3em; }
+
+/* Remove top border from first h2 inside page content */
+.site-main > h2:first-child,
+.page-body > h2:first-child,
+.post-body > h2:first-child { border-top: none; padding-top: 0; margin-top: 1em; }
+
+p {
+  font-family: var(--serif);
+  font-size: 0.975rem;
+  line-height: 1.9;
+  color: var(--text);
+  margin: 0 0 1.2em;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+strong { font-weight: 700; }
+em { font-style: italic; }
+
+ul, ol {
+  font-family: var(--serif);
+  font-size: 0.975rem;
+  line-height: 1.85;
+  padding-left: 1.6em;
+  margin-bottom: 1.2em;
+}
+li { margin-bottom: 0.3em; }
+
+blockquote {
+  border-left: 3px solid var(--accent);
+  margin: 1.5em 0;
+  padding: 0.6em 1.2em;
+  background: var(--accent-light);
+  font-style: italic;
+  color: var(--text-light);
+  font-family: var(--serif);
+  font-size: 0.95rem;
+}
+blockquote p:last-child { margin-bottom: 0; }
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2em 0;
+}
+
+/* ── Code ─────────────────────────────────────────────────────────────────── */
+code {
+  font-family: var(--mono);
+  font-size: 0.84em;
+  background: var(--fig-bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 5px;
+  color: var(--text);
+}
+
+pre {
+  background: var(--code-bg);
+  color: #abb2bf;
+  border-radius: 6px;
+  padding: 18px 20px;
+  overflow-x: auto;
+  margin: 1.5em 0;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  position: relative;
+}
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* Copy button */
+pre:hover button.copy { display: inline-block; }
+button.copy {
+  position: absolute;
+  top: 0.75em;
+  right: 0.75em;
+  display: none;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 1px 7px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #888;
+  border-radius: 3px;
+  cursor: pointer;
+}
+button.copy:hover { background: rgba(255,255,255,0.15); color: #ddd; }
+
+/* ── Tables (scoped to site-main to avoid conflicting with distill.css) ─── */
+table { border-collapse: collapse; width: 100%; margin: 1.5em 0; }
+.site-main table { display: block; overflow-x: auto; font-family: var(--sans); font-size: 0.9rem; }
+.site-main thead { border-bottom: 2px solid var(--border); }
+.site-main th {
+  text-align: left;
+  padding: 8px 12px;
+  font-weight: 700;
+  color: var(--text);
+}
+.site-main td {
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-light);
+  font-family: var(--serif);
+  font-size: 0.9rem;
+  vertical-align: top;
+}
+.site-main tbody tr:last-child td { border-bottom: none; }
+
+/* ── Math rendering ───────────────────────────────────────────────────────── */
+.katex-display, .MathJax_Display {
+  overflow-x: auto;
+  margin: 1.4em 0;
+}
+
+/* ── Site footer ──────────────────────────────────────────────────────────── */
+.site-footer {
+  border-top: 1px solid var(--border);
+  margin-top: 0;
+  padding: 20px 32px;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: var(--content-w);
+  margin: 0 auto;
+}
+.site-footer a { color: var(--text-muted); text-decoration: underline; }
+.site-footer a:hover { color: var(--text); }
+.site-footer-social { display: flex; gap: 18px; }
+.site-footer-social a { text-decoration: none; font-weight: 600; }
+
+/* ── Page layout ──────────────────────────────────────────────────────────── */
+.page-title {
+  font-family: var(--sans);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: 0 0 0.4em;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+.page-body p,
+.page-body li { /* inherits global */ }
+
+/* ── Regular post layout ──────────────────────────────────────────────────── */
+.post-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.post-header h1 { margin-bottom: 0.3em; }
+.post-meta {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  margin-top: 0.5em;
+}
+.post-meta a { color: var(--text-muted); text-decoration: underline; }
+.post-meta-dot { opacity: 0.4; }
+.post-read-time { font-size: 12px; }
+
+.post-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.post-tag {
+  background: var(--fig-bg);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 3px;
+  padding: 1px 7px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.post-body { }
+.post-body h2 { border-top: 1px solid var(--border); }
+
+/* ── Related posts ────────────────────────────────────────────────────────── */
+.related {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  font-family: var(--sans);
+}
+.related h2 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+.related-posts { list-style: none; padding: 0; margin: 0; }
+.related-posts li { margin-bottom: 0.6em; display: flex; align-items: baseline; gap: 8px; }
+.related-posts a { font-size: 0.9rem; color: var(--text); text-decoration: none; }
+.related-posts a:hover { color: var(--accent); }
+.related-posts small { font-size: 0.75rem; color: var(--text-muted); white-space: nowrap; }
+
+/* ── Archive / tag listing (used by tag_index.html and similar) ──────────── */
+.archive-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: var(--sans);
+}
+.archive-list li {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.archive-list li:last-child { border-bottom: none; }
+.archive-list a {
+  font-size: 0.95rem;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+}
+.archive-list a:hover { color: var(--accent); }
+.archive-list small {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.archive-tags {
+  display: inline-flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+/* ── Home page — 3-column distill-style listing ──────────────────────────── */
+
+/*
+ * meta (120px) | content (1fr ≈ 680px at 1100px wide) | media (220px)
+ * 1100px = --body-w × φ.  Card padding 28px → ~56px gap between cards.
+ * Separators: single hairline only, lighter than --border.
+ */
+body.home .site-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 52px 48px 88px;
+}
+body.home .site-footer { max-width: 1100px; }
+
+.home-card {
+  position: relative;        /* anchor for the stretched-link ::after */
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  column-gap: 44px;
+  padding: 28px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+  cursor: pointer;
+}
+.home-card.has-media { grid-template-columns: 120px 1fr 220px; }
+.home-card:last-child { border-bottom: none; }
+.home-card:hover .home-card-title a { color: var(--accent); }
+
+/*
+ * Stretched link: the title's <a> is the semantic destination, but its
+ * ::after pseudo-element covers the whole card so any click on the card
+ * triggers navigation. Spans inside the card aren't links, so no conflict.
+ */
+.home-card-title a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+/*
+ * 24px baseline grid for the card body.
+ * Title, subtitle, description and every meta item share line-height: 24px,
+ * and inter-block spacing is exactly 7px (title → subtitle, date → first meta).
+ * So Date ↔ Title, Series-name ↔ Subtitle line 1, Series-part ↔ Subtitle line 2,
+ * Read-time ↔ Subtitle line 3 — every meta item lines up with a content line.
+ */
+
+/* ── Meta column ── */
+.home-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0;            /* spacing comes from line-height + the date's margin-bottom */
+}
+
+/* "Apr'26" — same 7px gap below as title's margin-bottom */
+.home-card-date {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--text);
+  white-space: nowrap;
+  line-height: 24px;
+  margin: 0 0 7px;
+}
+
+/* Series components flow as direct flex children of meta (no wrapper) */
+.home-card-series-name {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  line-height: 24px;
+}
+.home-card-series-part {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 24px;
+}
+.home-card-cat {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  line-height: 24px;
+}
+.home-card-cat-inline {
+  font-family: var(--sans);
+  font-size: 0.69rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.home-card-readtime {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 24px;
+}
+
+/* ── Content column ── */
+.home-card-body { min-width: 0; }
+
+.home-card-title {
+  font-family: var(--sans);
+  font-size: 1.18rem;        /* ≈18.9px */
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 24px;         /* matches meta baseline */
+  color: var(--text);
+  margin: 0 0 7px;           /* matches .home-card-date margin-bottom */
+  border-top: none;
+  padding-top: 0;
+}
+.home-card-title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.1s;
+}
+.home-card-title a:hover { color: var(--accent); }
+
+.home-card-subtitle {
+  font-family: var(--serif);
+  font-size: 0.9rem;         /* ≈14.4px */
+  font-style: italic;
+  color: var(--text-light);
+  line-height: 24px;         /* matches meta baseline */
+  margin: 0 0 7px;           /* keep rhythm into description */
+}
+.home-card-desc {
+  font-family: var(--sans);
+  font-size: 0.84rem;        /* ≈13.4px */
+  color: var(--text-muted);
+  line-height: 24px;         /* keep rhythm — 3-line clamp fits cleanly */
+  margin: 0 0 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.home-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.home-card-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+.home-card-tag {
+  font-family: var(--sans);
+  font-size: 0.69rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  background: var(--accent-light);
+  color: var(--accent);
+  border-radius: 3px;
+  padding: 2px 7px;
+}
+/* ── Media column ── */
+.home-card-media { align-self: start; }
+.home-card-media img {
+  width: 100%;
+  height: 140px;
+  object-fit: contain;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  body.home .site-main { padding: 44px 32px 72px; }
+  .home-card { grid-template-columns: 96px 1fr; column-gap: 28px; }
+  .home-card.has-media { grid-template-columns: 96px 1fr 140px; column-gap: 24px; }
+  .home-card-media img { height: 110px; }
+}
+@media (max-width: 640px) {
+  /*
+   * Tight mobile layout — keep images visible.
+   * Grid: meta row on top (full-width inline), then [body | media] below.
+   * Media is small (96px) on the right of the body so cards stay compact.
+   */
+  body.home .site-main { padding: 28px 18px 52px; }
+  .home-card,
+  .home-card.has-media {
+    grid-template-columns: 1fr 96px;
+    grid-template-areas:
+      "meta meta"
+      "body media";
+    column-gap: 14px;
+    row-gap: 8px;
+  }
+  .home-card:not(.has-media) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "meta"
+      "body";
+  }
+  .home-card-meta {
+    grid-area: meta;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 0;
+  }
+  .home-card-body { grid-area: body; }
+  .home-card-media {
+    grid-area: media;
+    align-self: start;
+  }
+  .home-card-media img { height: 96px; object-fit: contain; }
+  .home-card-date { margin-bottom: 0; }
+  .home-card-readtime { display: none; }
+  .home-card-title { font-size: 1.05rem; }
+}
+
+/* ── Pagination ───────────────────────────────────────────────────────────── */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  font-family: var(--sans);
+  font-size: 13px;
+}
+.pagination-item {
+  color: var(--accent);
+  text-decoration: none;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.pagination-item:hover { background: var(--accent-light); border-color: var(--accent); text-decoration: none; }
+span.pagination-item { color: var(--text-muted); cursor: default; }
+span.pagination-item:hover { background: none; border-color: var(--border); }
+
+/* ── Archives & Categories ────────────────────────────────────────────────── */
+.tag_box {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 2.5rem;
+}
+.tag_box li { display: inline; }
+.tag_box a {
+  display: inline-block;
+  background: var(--fig-bg);
+  border: 1px solid var(--border);
+  color: var(--text-light);
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  padding: 3px 10px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+.tag_box a:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent-light); text-decoration: none; }
+.tag_box span { font-size: 0.7rem; color: var(--text-muted); margin-left: 2px; }
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .site-nav { padding: 0 20px; }
+  body:not(.home) .site-main { padding: 32px 20px 60px; }
+  .site-footer { padding: 16px 20px; }
+}
+@media (max-width: 520px) {
+  .site-nav-links { gap: 16px; }
+  .site-nav-links a { font-size: 12px; }
+}
