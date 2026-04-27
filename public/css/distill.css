@@ -330,11 +330,16 @@ body.layout-distill .d-article h2::before {
  * Math display blocks. KaTeX over-reports width by a sub-pixel, which makes
  * `overflow-x: auto` create a scroll container even when the formula clearly
  * fits. `clip` prevents the scroll container without rendering a scrollbar.
+ *
+ * max-width tracks the body column so the formula centres on the same axis as
+ * the paragraph text. Without this, the more-specific `.d-article .katex-display`
+ * selector would override `.l-body > *` and the span would expand into the
+ * margin-note gutter, pulling the centred formula visibly to the right.
  */
 .d-article .MathJax_Display, .d-article .katex-display {
   margin: 1.4em 0;
   overflow-x: clip;
-  max-width: 100%;
+  max-width: var(--body-w);
 }
 
 /* ── Figures ─────────────────────────────────────────────────────────────── */
