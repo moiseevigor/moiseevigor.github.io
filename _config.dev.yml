@@ -1,0 +1,17 @@
+# Overrides for local development — merged on top of _config.yml
+# by: bundle exec jekyll serve --config _config.yml,_config.dev.yml
+
+# Disable related-posts LSI (slow; needs classifier-reborn + GSL build)
+lsi: false
+
+# Show future-dated posts
+future: true
+
+# Skip building tags/archives in dev (saves ~30s on large sites)
+# Uncomment if tag generation slows the build noticeably:
+# exclude:
+#   - tag/
+
+# Suppress external pings during local work
+webmention:
+  username: ""
