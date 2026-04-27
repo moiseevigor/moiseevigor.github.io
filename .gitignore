@@ -43,4 +43,14 @@ bower_components
 
 .vagrant
 .jekyll-metadata
+.jekyll-cache
+vendor
 
+# Python
+__pycache__
+*.pyc
+*.pyo
+
+# Backups + local notes
+*.bak
+keywords
