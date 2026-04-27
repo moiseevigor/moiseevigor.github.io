@@ -81,10 +81,17 @@ layout: default
       <span></span>
       {% endif %}
       {% if next_post %}
-      <a href="{{ next_post.url | default: '#' }}" style="align-items:flex-end; {% unless next_post.status == 'published' or next_post.status == 'draft' %}opacity:0.5;pointer-events:none;{% endunless %}">
+        {% if next_post.status == 'published' or next_post.status == 'draft' %}
+      <a href="{{ next_post.url }}" style="align-items:flex-end;">
         <span class="d-nav-label">Next →</span>
-        <span class="d-nav-title">{{ next_post.title }}{% if next_post.status == 'upcoming' %} (coming soon){% endif %}</span>
+        <span class="d-nav-title">{{ next_post.title }}</span>
       </a>
+        {% else %}
+      <span style="align-items:flex-end;opacity:0.5;">
+        <span class="d-nav-label">Next →</span>
+        <span class="d-nav-title">{{ next_post.title }} (coming soon)</span>
+      </span>
+        {% endif %}
       {% endif %}
     </div>
   </div>

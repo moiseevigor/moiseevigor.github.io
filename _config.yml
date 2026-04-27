@@ -14,6 +14,10 @@ permalink:           pretty
 # Use of `relative_permalinks` ensures post links from the index work properly.
 #relative_permalinks: true
 
+# Publish posts whose date is in the future (matches _config.dev.yml; keeps
+# scheduled posts in `_posts/` from being silently dropped by the build).
+future:              true
+
 # Setup
 title:               Igor Moiseev
 tagline:             'Applied mathematician, AI Enthusiast'

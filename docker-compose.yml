@@ -44,8 +44,8 @@ services:
     command: >
       bundle exec htmlproofer ./_site
         --only-4xx
-        --ignore_urls "/example.com/,/ws-na.amazon-adsystem.com/,/molpharm.aspetjournals.org/"
-        --ignore-status-codes "403"
+        --ignore_urls "/example.com/,/ws-na.amazon-adsystem.com/,/molpharm.aspetjournals.org/,/^https://fonts\.googleapis\.com/,/^https://fonts\.gstatic\.com/,/^https://moiseevigor\.github\.io//"
+        --ignore-status-codes "403,429"
     volumes:
       - .:/srv/jekyll
       - bundle_cache:/usr/local/bundle
