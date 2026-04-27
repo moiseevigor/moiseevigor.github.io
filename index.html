@@ -1,21 +1,68 @@
 ---
 layout: default
 title: Home
+page_class: home
 ---
 
-<div class="posts">
+<main class="site-main">
+<div class="home-list">
   {% for post in paginator.posts %}
-  <div class="post">
-    <h1 class="post-title">
-      <a href="{{ post.url }}">
-        {{ post.title }}
-      </a>
-    </h1>
+  {%- assign wc = post.content | number_of_words -%}
+  {%- assign mins = wc | divided_by: 90 -%}
+  {%- if mins == 0 %}{%- assign mins = 1 %}{%- endif -%}
 
-    <span class="post-date">{{ post.date | date_to_string }}</span>
+  <article class="home-card{% if post.image %} has-media{% endif %}">
 
-    {{ post.content }}
-  </div>
+    <!-- ── Col 1: meta (24px baseline grid — each item aligns with one content line) ── -->
+    <div class="home-card-meta">
+      <time class="home-card-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b'%y" }}</time>
+      {% if post.series %}
+      <span class="home-card-series-name">{{ post.series_title }}</span>
+      <span class="home-card-series-part">Part {{ post.series_part }}</span>
+      {% elsif post.categories.size > 0 %}
+      <span class="home-card-cat">{{ post.categories | first | capitalize }}</span>
+      {% endif %}
+      <span class="home-card-readtime">{{ mins }}&thinsp;min</span>
+    </div>
+
+    <!-- ── Col 2: content ── -->
+    <div class="home-card-body">
+      <h2 class="home-card-title">
+        <a href="{{ post.url }}">{{ post.title }}</a>
+      </h2>
+
+      {% if post.subtitle %}
+      <p class="home-card-subtitle">{{ post.subtitle }}</p>
+      {% endif %}
+
+      {% if post.description and post.description != "" %}
+      <p class="home-card-desc">{{ post.description }}</p>
+      {% elsif post.excerpt %}
+      <p class="home-card-desc">{{ post.excerpt | strip_html | truncatewords: 42 }}</p>
+      {% endif %}
+
+      <div class="home-card-footer">
+        {% if post.series and post.categories.size > 0 %}
+        <span class="home-card-cat-inline">{{ post.categories | first | capitalize }}</span>
+        {% endif %}
+        {% if post.tags.size > 0 %}
+        <div class="home-card-tags">
+          {% for tag in post.tags limit:4 %}
+          <span class="home-card-tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- ── Col 3: media (only when post.image set) ── -->
+    {% if post.image %}
+    <div class="home-card-media">
+      <img src="{{ post.image }}" alt="{{ post.title }}" loading="lazy">
+    </div>
+    {% endif %}
+
+  </article>
   {% endfor %}
 </div>
 
@@ -35,4 +82,4 @@ title: Home
     <span class="pagination-item newer">Newer</span>
   {% endif %}
 </div>
-
+</main>
