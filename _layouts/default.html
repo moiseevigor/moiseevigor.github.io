@@ -1,108 +1,39 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
 
-  {% include head.html -%}
+{% include head.html %}
 
-  <body>
+<body class="layout-{{ page.layout | default: 'page' }}{% if page.page_class %} {{ page.page_class }}{% endif %}">
 
-    {% include sidebar.html -%}
+<!-- ── Top navigation (shared by every page) ── -->
+<nav class="site-nav">
+  <a class="site-nav-brand" href="/">{{ site.title }}</a>
+  <ul class="site-nav-links">
+    <li><a href="/"          {% if page.url == '/'             %}class="active"{% endif %}>Home</a></li>
+    <li><a href="/about/"    {% if page.url contains 'about'    %}class="active"{% endif %}>About</a></li>
+    <li><a href="/projects/" {% if page.url contains 'projects' %}class="active"{% endif %}>Projects</a></li>
+    <li><a href="/archives/" {% if page.url contains 'archives' %}class="active"{% endif %}>Archives</a></li>
+  </ul>
+</nav>
 
-    <div class="wrap">
-      <div class="masthead">
-        <div class="container">
-          <h3 class="masthead-title">
-            <a href="/" title="Home">{{ site.title }}</a>
-            <small>{{ site.tagline }}</small>
-          </h3>
-          <div class="container-4" style="display: none;">
-            <form id="search-form">
-              <input type="search" id="search" placeholder="Search..." autocomplete="off" name="q"/>
-            </form>
-          </div>
-        </div>
+<!-- ── Page content (each layout is responsible for its own d-header / d-article) ── -->
+{{ content }}
 
-        <div class="box">
-          <button class="icon" onclick="toggle_search()"><i id="icon-search-button" class="fa fa-search"></i></button>
-        </div>
+<!-- ── Unified footer (the distill d-footer style, with social links) ── -->
+<footer class="d-footer">
+  <span>&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}</span>
+  <span class="d-dot">·</span>
+  <a href="{{ site.url }}">{{ site.url | remove: 'https://' }}</a>
+  <span class="d-dot">·</span>
+  <a href="https://github.com/{{ site.github_username | default: 'moiseevigor' }}" rel="me">GitHub</a>
+  <a href="https://twitter.com/moiseev_igor" rel="me">Twitter</a>
+  <a href="https://www.linkedin.com/in/moiseevigor" rel="me">LinkedIn</a>
+  {% if page.path %}
+  <span class="d-dot">·</span>
+  <a href="https://github.com/{{ site.github_username | default: 'moiseevigor' }}/{{ site.github_repo | default: 'moiseevigor.github.io' }}/edit/master/{{ page.path }}">Edit&nbsp;on&nbsp;GitHub</a>
+  {% endif %}
+</footer>
 
-        <script>
-        function toggle_search() {
-          var mastheadTitle = document.getElementsByClassName('masthead-title')[0],
-              container = document.getElementsByClassName('container-4')[0],
-              iconSearchButton = document.getElementById('icon-search-button');
-
-          mastheadTitle.style.display = (mastheadTitle.style.display === 'none' ? '' : 'none' );
-          container.style.display = (container.style.display === 'none' ? '' : 'none' );
-
-          if(container.style.display === '')
-            document.getElementById('search').focus();
-
-          iconSearchButton.classList.toggle("fa-search");
-          iconSearchButton.classList.toggle("fa-times");
-        }
-
-        function processForm(e) {
-            if (e.preventDefault) e.preventDefault();
-
-            window.location.replace('/search/?q=' + encodeURIComponent(document.getElementById('search').value));
-
-            return false;
-        }
-
-        var form = document.getElementById('search-form');
-        if (form.attachEvent) {
-            form.attachEvent("submit", processForm);
-        } else {
-            form.addEventListener("submit", processForm);
-        }
-
-        function getQueryVariable(variable) {
-          var query = window.location.search.substring(1);
-          var vars = query.split("&");
-          for (var i=0;i<vars.length;i++) {
-                var pair = vars[i].split("=");
-
-                if(pair[0] == variable)
-                  return pair[1];
-          }
-
-          return false;
-        }
-
-        {% if page.url == '/search/' -%}
-          toggle_search();
-          var q = decodeURIComponent(getQueryVariable('q'));
-          document.getElementById('search').value = q;
-        {% endif -%}
-
-        </script>
-      </div>
-
-      <div class="container content">
-        {{ content }}
-      </div>
-    </div>
-
-    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
-
-    <script>
-      (function(document) {
-        var toggle = document.querySelector('.sidebar-toggle');
-        var sidebar = document.querySelector('#sidebar');
-        var checkbox = document.querySelector('#sidebar-checkbox');
-
-        document.addEventListener('click', function(e) {
-          var target = e.target;
-
-          if(!checkbox.checked ||
-             sidebar.contains(target) ||
-             (target === checkbox || target === toggle)) return;
-
-          checkbox.checked = false;
-        }, false);
-      })(document);
-    </script>
-
-    <script src="/public/js/codeblock.js"></script>
-  </body>
+<script src="/public/js/codeblock.js"></script>
+</body>
 </html>

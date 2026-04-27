@@ -2,145 +2,58 @@
 layout: default
 ---
 
-<style>
-.edit {
-  font: 0.5em FontAwesome;
-  margin: 10px;
-  color: #9A9A9A;
-}
-.edit a {
-  color: #9A9A9A;
-}
-.edit:before {
-  content: "\f044"
-}
-</style>
+{%- assign wc = content | number_of_words -%}
+{%- assign mins = wc | divided_by: 90 -%}
+{%- if mins == 0 %}{%- assign mins = 1 %}{%- endif -%}
 
-<div class="post">
-  <h1 class="post-title">{{ page.title }}<sup class="edit">{% include edit.html -%}</sup></h1>
-  <span class="post-date">{{ page.date | date_to_string }} {% include minute-to-read.html -%}</span>
-  {{ content }}
+<!-- ── Article header (same d-header used by distill articles) ── -->
+<div class="d-header">
+  {% if page.categories.size > 0 %}
+  <div class="d-eyebrow">{{ page.categories | first | capitalize }}</div>
+  {% endif %}
+  <h1 class="d-title">{{ page.title }}</h1>
+  {% if page.subtitle %}
+  <p class="d-subtitle">{{ page.subtitle }}</p>
+  {% endif %}
+  <div class="d-byline">
+    <span>By <a href="https://moiseevigor.github.io">{{ site.author.name }}</a></span>
+    <span class="d-dot">·</span>
+    <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %B %Y" }}</time>
+    <span class="d-dot">·</span>
+    <span>{{ mins }}&thinsp;min read</span>
+    {% if page.tags.size > 0 %}
+    <span class="d-dot">·</span>
+    <span class="d-byline-tags">
+      {% for tag in page.tags limit:6 %}<span class="post-tag">{{ tag }}</span>{% endfor %}
+    </span>
+    {% endif %}
+  </div>
 </div>
 
-<script type="text/javascript">
-window.addEventListener("scroll",navbar_reset_top,false);
-
-var navbar_top = 196;
-
-function navbar_reset_top() {
-  var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-  var navbar = document.getElementById("navbar");
-
-  if(scrollTop>navbar_top && navbar.className==="article-footer absolute") {
-    navbar.className="article-footer fixed";
-  }
-  else if(scrollTop<navbar_top && navbar.className==="article-footer fixed") {
-    navbar.className="article-footer absolute";
-  }
-}
-</script>
-
-<footer id="navbar" class="article-footer absolute">
-  {% comment -%}
-  <div class="article-footer-item">
-    <a title="Comments" class="link-comments" href="#disqus_thread">
-      <span class="disqus-comment-count" data-disqus-url="{{ site.url }}{{ page.url }}">&nbsp;&nbsp;&nbsp;Comments</span>
-    </a>
+<!-- ── Body — single l-body column; old posts have no asides so the gutter is empty ── -->
+<article class="d-article">
+  <div class="l-body">
+    {{ content }}
   </div>
-  <div class="article-footer-item">
-    <div class="tags-title article-footer-title">
-      Categories
-    </div>
-    <a title="{{ page.categories }}" href="/categories/#{{ page.categories }}" rel="category tag">
-      {{ page.categories }}
-    </a>
-  </div>
-  <div class="article-footer-item">
-    <div class="tags-title article-footer-title">
-      Tags
-    </div>
-    {% include page_tags_list_comma.html -%}
-  </div>
+</article>
 
-  <div class="social-share">
-    <div>
-      <div style="float: left;">
-        <a
-          class="social-share-element"
-          id="social-linkedin"
-          href="https://www.linkedin.com/shareArticle?mini=true&amp;title={{ page.title }}&amp;url={{ site.url }}{{ page.url }}&amp;source={{ site.url }}"
-          target="_blank"
-          title="Share this post on LinkedIn"><i class="fa fa-linkedin-square"></i></a>
-      </div>
-      <div id="social-linkedin-counter" class="social-counter"></div>
-    </div>
-
-    <div style="clear: both;"></div> 
-
-    <div>
-      <div style="float: left;">
-        <a
-          class="social-share-element"
-          id="social-twitter"
-          href="https://twitter.com/intent/tweet?text={{ page.title }}&amp;url={{ site.url }}{{ page.url }}&amp;via=moiseev_igor&amp;hashtags={{ page.tags | join: ',' }}"
-          target="_blank"
-          title="Share this post on Twitter"><i class="fa fa-twitter-square"></i></a>
-      </div>
-      <div id="social-twitter-counter" class="social-counter"></div>
-    </div>
-
-    <div style="clear: both;"></div> 
-
-    <div>
-      <div style="float: left;">
-        <a
-            id="social-facebook"
-            href="https://www.facebook.com/sharer/sharer.php?t={{ page.title }}&amp;u={{ site.url }}{{ page.url }}"
-            target="_blank"
-            title="Share this post on Facebook"><i class="fa fa-facebook-square"></i></a>
-      </div>
-      <div id="social-facebook-counter" class="social-counter"></div>
-    </div>
-
-  </div>
-  {% endcomment -%}
-
-    <!-- <div class="article-footer-item">
-      {% include page_tags_list_books.html -%}
-    </div> -->
-    
-    <div style="clear: both;"></div>
-</footer>
-
-
-{% assign email_subscription_message_heading = 'Find this helpful? Please subscribe!' -%}
-{% include email_box.html -%}
-
-
-<div class="related" align="center" style="text-align:center">
-    {% include page_tags_list.html -%}
-</div>
-<div style="clear: both;"></div>
-
-
-<div class="related">
-  <h2>Related Posts</h2>
-  <ul class="related-posts">
-    {% for post in site.related_posts limit:3 -%}
-      {% if post.title !=  page.title -%}
+<!-- ── Related posts (rendered inside another l-body so they share the column width) ── -->
+{% if site.related_posts.size > 0 %}
+<div class="d-article" style="padding-top:0;">
+  <div class="l-body">
+    <section class="related">
+      <h2>Related posts</h2>
+      <ul class="related-posts">
+        {% for post in site.related_posts limit:4 %}
+        {% unless post.title == page.title %}
         <li>
-          <h3>
-            <a href="{{ post.url }}">
-              {{ post.title }}
-              <small>{{ post.date | date_to_string }}</small>
-            </a>
-          </h3>
+          <a href="{{ post.url }}">{{ post.title }}</a>
+          <small>{{ post.date | date: "%-d %b %Y" }}</small>
         </li>
-      {% endif -%}
-    {% endfor -%}
-  </ul>
+        {% endunless %}
+        {% endfor %}
+      </ul>
+    </section>
+  </div>
 </div>
-
-<!-- {% if page.comments -%}
-  {% include discus.html -%}
-{% endif -%} -->
+{% endif %}

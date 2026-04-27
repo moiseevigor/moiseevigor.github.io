@@ -1,80 +1,224 @@
 <head>
-  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-  <!-- Enable responsiveness on mobile devices-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  {%- comment -%}
+  ── SEO + AI-answer-engine metadata block ───────────────────────────────────
+  Builds canonical/OG/Twitter/JSON-LD tags from page front-matter so:
+    • search engines (Google, Bing) get rich previews and understand authorship
+    • social cards (Twitter, LinkedIn, Slack, Mastodon) render with image+blurb
+    • AI answer engines (Perplexity, Claude, ChatGPT, Gemini) can correctly
+      attribute and cite the article via schema.org structured data + author URL
+  See also: /llms.txt for an AI-targeted site index.
+  {%- endcomment -%}
 
-  <!-- AUTHOR DATAS -->
-  <meta name="author" content="Igor Moiseev">
+  {%- assign page_title = page.title | default: site.title -%}
+  {%- if page.title and page.title != "Home" -%}
+    {%- assign full_title = page.title | append: " · " | append: site.title -%}
+  {%- else -%}
+    {%- assign full_title = site.title | append: " · " | append: site.tagline -%}
+  {%- endif -%}
 
-  <!-- WEBMENTION -->
-  <link rel="pingback" href="https://webmention.io/{{ site.webmention.username }}/xmlrpc" data-proofer-ignore />
-  <link rel="webmention" href="https://webmention.io/{{ site.webmention.username }}/webmention" data-proofer-ignore />
+  {%- assign page_desc_raw = page.description | default: page.subtitle | default: site.description -%}
+  {%- assign page_desc = page_desc_raw | strip_html | strip_newlines | normalize_whitespace | truncate: 200 -%}
 
-  <title>
-    {% if page.title == "Home" -%}
-      {{ site.title }} &middot; {{ site.tagline }}
-    {% else -%}
-      {{ page.title }} &middot; {{ site.title }}
-    {% endif -%}
-  </title>
+  {%- assign canonical_url = site.url | append: page.url -%}
+  {%- if page.image -%}
+    {%- assign social_image = site.url | append: page.image -%}
+  {%- endif -%}
 
-  {% if page.description -%}
-    <meta name="description" content="{{ page.description }}">
-  {% endif -%}
+  <title>{{ full_title }}</title>
+  <meta name="description"            content="{{ page_desc | escape }}">
+  <link rel="canonical"              href="{{ canonical_url }}">
+  <meta name="author"                content="{{ site.author.name }}">
+  {% if page.tags %}<meta name="keywords" content="{{ page.tags | join: ', ' }}">{% endif %}
 
-  {% if page.tags -%}
-    <meta name="keywords" content="{{ page.tags| join:',' }}">
-  {% endif -%}
+  <!-- Open Graph (Facebook, LinkedIn, Slack, generic crawlers) -->
+  <meta property="og:title"          content="{{ page_title | escape }}">
+  <meta property="og:description"    content="{{ page_desc | escape }}">
+  <meta property="og:url"            content="{{ canonical_url }}">
+  <meta property="og:site_name"      content="{{ site.title }}">
+  {% if social_image %}<meta property="og:image" content="{{ social_image }}">{% endif %}
+  <meta property="og:locale"         content="en_US">
+  {% if page.layout == 'distill' or page.layout == 'post' %}
+  <meta property="og:type"           content="article">
+  <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+  <meta property="article:author"    content="{{ site.url }}/about/">
+  {% if page.categories %}{% for c in page.categories %}<meta property="article:section" content="{{ c | capitalize }}">{% endfor %}{% endif %}
+  {% if page.tags       %}{% for t in page.tags       %}<meta property="article:tag"     content="{{ t }}">{% endfor %}{% endif %}
+  {% else %}
+  <meta property="og:type"           content="website">
+  {% endif %}
 
-  {% if page.title and page.title != "Home" -%}
-    <!-- Schema.org markup for Google+ -->
-    <meta itemprop="name" content="{{ page.title }}">
-    {% if page.description -%}
-      <meta itemprop="description" content="{{ page.description }}">
-    {% endif -%}
-  {% endif -%}
+  <!-- Twitter Card -->
+  <meta name="twitter:card"          content="summary_large_image">
+  <meta name="twitter:site"          content="@moiseev_igor">
+  <meta name="twitter:creator"       content="@moiseev_igor">
+  <meta name="twitter:title"         content="{{ page_title | escape }}">
+  <meta name="twitter:description"   content="{{ page_desc | escape }}">
+  {% if social_image %}<meta name="twitter:image" content="{{ social_image }}">{% endif %}
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="{{ site.baseurl }}/public/css/poole.css">
-  <link rel="stylesheet" href="{{ site.baseurl }}/public/css/syntax.css">
-  <link rel="stylesheet" href="{{ site.baseurl }}/public/css/lanyon.css">
-  <link rel="stylesheet" href="{{ site.baseurl }}/public/css/igor.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Webmention -->
+  <link rel="pingback"   href="https://webmention.io/{{ site.webmention.username }}/xmlrpc"    data-proofer-ignore>
+  <link rel="webmention" href="https://webmention.io/{{ site.webmention.username }}/webmention" data-proofer-ignore>
 
   <!-- Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ site.baseurl }}/public/images/apple-touch-icon-precomposed.png">
-  <link rel="shortcut icon" href="{{ site.baseurl }}/public/images/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/images/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/images/favicon.ico">
 
   <!-- RSS -->
-  <link type="application/atom+xml" rel="alternate" href="/atom.xml" title="Igor Moiseev" />
+  <link type="application/atom+xml" rel="alternate" href="/atom.xml" title="{{ site.title }}">
 
-  <!-- SEARCH -->
-  <script src="/public/js/lunr.min.js"></script>
-  <script src="/public/js/search.js"></script>
+  <!-- Fonts: Merriweather (body) · Source Sans 3 (UI) · JetBrains Mono (code) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Source+Sans+3:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <!-- LaTeX formulas in the browser -->
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      jax: ["input/TeX", "output/HTML-CSS"],
-      tex2jax: {
-        inlineMath: [ ['$', '$'], ["\\(", "\\)"] ],
-        displayMath: [ ['$$', '$$'], ["\\[", "\\]"] ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      },
-      displayAlign: "left",
-      displayIndent: "2em"
-    });
+  <!-- CSS — distill.css is loaded for ALL pages so the same d-header / d-article / l-body
+       typography applies everywhere (posts, pages, archives, home cards). -->
+  <link rel="stylesheet" href="/public/css/site.css">
+  <link rel="stylesheet" href="/public/css/distill.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+
+  <!-- KaTeX math rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{
+      delimiters:[
+        {left:'$$', right:'$$', display:true},
+        {left:'\\[', right:'\\]', display:true},
+        {left:'$',  right:'$',  display:false},
+        {left:'\\(', right:'\\)', display:false}
+      ],
+      throwOnError: false
+    })"></script>
+
+  <!-- ── schema.org structured data (JSON-LD) ──
+       Two slots:
+         1. Person / WebSite at the root, telling crawlers who runs the site.
+         2. Per-article TechArticle / BlogPosting on post pages, with
+            author / datePublished / image / keywords — all the fields
+            AI answer engines (Perplexity, Claude, Bing Copilot) consume
+            when deciding whom to attribute. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "{{ site.url }}",
+    "name": "{{ site.title }}",
+    "description": "{{ site.description }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ site.author.name }}",
+      "url": "{{ site.url }}/about/",
+      "sameAs": [
+        "{{ site.author.url }}",
+        "https://github.com/{{ site.github_username | default: 'moiseevigor' }}",
+        "https://www.linkedin.com/in/moiseevigor"
+      ]
+    }
+  }
   </script>
-  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 
-{% if jekyll.environment == "production" -%}
+  {% if page.layout == 'distill' or page.layout == 'post' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "{% if page.layout == 'distill' %}TechArticle{% else %}BlogPosting{% endif %}",
+    "headline": "{{ page_title | escape }}",
+    "description": "{{ page_desc | escape }}",
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+    "inLanguage": "en",
+    "url": "{{ canonical_url }}",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ canonical_url }}"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "{{ site.author.name }}",
+      "url": "{{ site.url }}/about/",
+      "email": "{{ site.author.email }}"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "{{ site.author.name }}",
+      "url": "{{ site.url }}"
+    }
+    {% if social_image %},
+    "image": "{{ social_image }}"
+    {% endif %}
+    {% if page.tags %},
+    "keywords": "{{ page.tags | join: ', ' }}"
+    {% endif %}
+    {% if page.categories %},
+    "articleSection": "{{ page.categories | join: ', ' | capitalize }}"
+    {% endif %}
+    {% if page.subtitle %},
+    "alternativeHeadline": "{{ page.subtitle | strip_html | strip_newlines | normalize_whitespace | escape }}"
+    {% endif %}
+    {% if page.arxiv %},
+    "citation": "https://arxiv.org/abs/{{ page.arxiv }}"
+    {% endif %}
+    {%- comment -%} word-count helps quality classifiers rank long-form content {%- endcomment -%}
+    {%- assign wc = content | number_of_words -%}
+    {% if wc > 0 %},
+    "wordCount": {{ wc }}
+    {% endif %}
+  }
+  </script>
 
-  <!-- Cookie Consent by FreePrivacyPolicy.com https://www.FreePrivacyPolicy.com -->
+  {% if page.series %}
+  {%- comment -%} Mark series posts as part of a CreativeWorkSeries — helps AI answer engines understand multi-part essays. {%- endcomment -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWorkSeries",
+    "name": "{{ page.series_title | default: page.series }}",
+    "url": "{{ site.url }}/series/{{ page.series }}/",
+    "hasPart": {
+      "@type": "TechArticle",
+      "headline": "{{ page_title | escape }}",
+      "url": "{{ canonical_url }}",
+      "position": {{ page.series_part | default: 1 }}
+    }
+  }
+  </script>
+  {% endif %}
+  {% endif %}
+
+  {% if page.url == '/about/' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "{{ site.author.name }}",
+    "url": "{{ site.url }}/about/",
+    "email": "{{ site.author.email }}",
+    "image": "{{ site.url }}/public/images/apple-touch-icon-precomposed.png",
+    "sameAs": [
+      "{{ site.author.url }}",
+      "https://github.com/{{ site.github_username | default: 'moiseevigor' }}",
+      "https://www.linkedin.com/in/moiseevigor"
+    ],
+    "jobTitle": "Applied Mathematician, AI Engineer",
+    "knowsAbout": [
+      "Sub-Riemannian Geometry",
+      "Optimal Control",
+      "Machine Learning",
+      "Foundation Models",
+      "Elliptic Functions",
+      "Differential Geometry"
+    ]
+  }
+  </script>
+  {% endif %}
+
+  {% if jekyll.environment == "production" %}
+  <!-- Cookie Consent -->
   <script type="text/javascript" src="https://www.freeprivacypolicy.com/public/cookie-consent/4.0.0/cookie-consent.js" charset="UTF-8"></script>
   <script type="text/javascript" charset="UTF-8">
     document.addEventListener('DOMContentLoaded', function () {
@@ -83,34 +227,28 @@
         "consent_type":"express",
         "palette":"light",
         "language":"en",
-        "page_load_consent_levels":["strictly-necessary", "tracking"],
+        "page_load_consent_levels":["strictly-necessary","tracking"],
         "notice_banner_reject_button_hide":false,
         "preferences_center_close_button_hide":false,
         "page_refresh_confirmation_buttons":false
       });
     });
   </script>
-
   <noscript>Cookie Consent by <a href="https://www.freeprivacypolicy.com/" rel="noopener">Free Privacy Policy Generator</a></noscript>
-  <!-- End Cookie Consent by FreePrivacyPolicy.com https://www.FreePrivacyPolicy.com -->
-  <a href="#" id="open_preferences_center" style="display: none;">Update cookies preferences</a>
+  <a href="#" id="open_preferences_center" style="display:none;">Update cookies preferences</a>
 
-  <!-- Google tag (gtag.js) -->
+  <!-- Google Analytics -->
   <script type="text/plain" cookie-consent="tracking">
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.googletagmanager.com/gtag/js?id=G-5QEQZR22Y2','ga');
-
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.googletagmanager.com/gtag/js?id=G-5QEQZR22Y2','ga');
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-5QEQZR22Y2');
   </script>
 
-  {% seo -%}
-
-{% endif -%}
-
+  {% seo %}
+  {% endif %}
 </head>
