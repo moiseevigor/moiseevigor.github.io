@@ -1,6 +1,11 @@
 ---
 layout: post
 title:  "Fixing error 'Matplotlib is currently using agg'"
+subtitle: >
+  Matplotlib falls back to its non-interactive Agg backend whenever there's no
+  X11 display — which is the default state inside almost every container.
+  The fix is two parts: install the GUI toolkit dependencies in the image, then
+  forward the host's X socket into the container at run time.
 description: "Plotting graphics with python and matplotlib from Docker container"
 date:   2022-12-03 10:05:45
 categories:

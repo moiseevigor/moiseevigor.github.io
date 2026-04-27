@@ -1,7 +1,12 @@
 ---
 layout: post
 title:  "Cleaning up Docker space"
-description: ""
+subtitle: >
+  Docker accumulates state silently — stopped containers, dangling image layers,
+  unattached volumes, orphaned networks. Four short commands, run in the right
+  order, reclaim gigabytes safely without touching anything that's currently
+  running or in use.
+description: "Reclaim gigabytes in seconds: remove dangling containers, images, volumes and networks with a handful of Docker commands."
 date:   2022-11-27 10:05:45
 categories:
 - software

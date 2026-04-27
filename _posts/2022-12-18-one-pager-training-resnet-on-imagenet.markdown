@@ -1,7 +1,14 @@
 ---
 layout: post
+image: /public/img/posts/resnet50.svg
 title:  "Train Resnet50 on ImageNet with PyTorch"
-description: "One pager version of training code in PyTorch for ResNet50 on ImageNet dataset"
+subtitle: >
+  Eighty lines of PyTorch — RandomCrop and ColorJitter for augmentation,
+  DataParallel for multi-GPU, cross-entropy with Adam — fine-tune a pretrained
+  ResNet-50 on the ImageNet Object Localization Challenge. Wrap it in a
+  Dockerfile that pulls the dataset from Kaggle and you have a self-contained,
+  reproducible 1000-class training pipeline.
+description: "A complete single-file training script for ResNet-50 on ImageNet using PyTorch — covering data loading, mixed-precision training, learning-rate scheduling, and top-1/top-5 accuracy tracking."
 date:   2022-12-18 10:05:45
 categories:
 - software

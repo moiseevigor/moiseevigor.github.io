@@ -1,7 +1,12 @@
 ---
 layout: post
 title:  "Monitor GPU utilization with nvidia-smi"
-description: ""
+subtitle: >
+  When a training run is GPU-bound, the bottleneck is rarely the model — it's
+  the data pipeline starving the device. nvidia-smi, with the right flags
+  (--query-gpu, --format=csv, -l 1), turns into a live dashboard for utilisation,
+  memory, power draw and temperature, parseable from any shell loop.
+description: "Live GPU dashboard from the command line: utilisation, memory, power and temperature with nvidia-smi --query-gpu and -l for continuous polling."
 date:   2022-11-27 10:05:45
 categories:
 - software

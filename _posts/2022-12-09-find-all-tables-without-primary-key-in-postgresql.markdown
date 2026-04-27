@@ -1,6 +1,11 @@
 ---
 layout: post
 title:  "Find all tables without primary key in PostgreSQL"
+subtitle: >
+  A single LEFT JOIN against information_schema.table_constraints exposes every
+  BASE TABLE missing a PRIMARY KEY — the silent latency tax that creeps in
+  through schema migrations and ad-hoc DDL. Audit the whole cluster, then narrow
+  to a single schema with one extra WHERE clause.
 description: "Query that helps to find tables without primary key, simple and efficient way to find performance bottlenecks"
 date:   2022-12-09 06:05:45
 categories:
