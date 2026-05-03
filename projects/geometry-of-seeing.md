@@ -73,6 +73,64 @@ culminating in an open problem on the exact cut time.
 
 <div class="l-body" markdown="1">
 
+## Appendices — Theory Background
+
+The five appendices below build, from first principles, the mathematics
+the main parts use without proof.  Each is self-contained, with derivations
+and 2–3 interactive figures, and re-uses code from the
+[moiseevigor/elliptic](https://github.com/moiseevigor/elliptic)
+package.  Read in the order **A1 → A2 → A3 → A4 → A5** — or as needed
+from the main parts.
+
+</div>
+
+<div class="l-body">
+<table style="width:100%; border-collapse:collapse; font-family:var(--sans,sans-serif); font-size:0.9rem; margin:1.5em 0 2em;">
+  <thead>
+    <tr style="border-bottom:2px solid var(--border,#e0e0e0);">
+      <th style="text-align:left; padding:8px 12px; width:3em;">Part</th>
+      <th style="text-align:left; padding:8px 12px;">Title</th>
+      <th style="text-align:left; padding:8px 12px; width:11em;">Builds toward</th>
+      <th style="text-align:center; padding:8px 12px; width:6em;">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
+      <td style="padding:8px 12px; color:var(--text-muted,#777);font-family:var(--mono);">A1</td>
+      <td style="padding:8px 12px;"><a href="/mathematics/2026/05/01/geometry-of-seeing-A1-lie-groups/">Lie Groups, Lie Algebras, and the Exponential Map of SE(2)</a></td>
+      <td style="padding:8px 12px; color:var(--text-muted,#777);">$\mathfrak{se}(2)$, brackets, $\exp$</td>
+      <td style="padding:8px 12px; text-align:center;"><span style="background:#fff3e0;color:#e65100;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">DRAFT</span></td>
+    </tr>
+    <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
+      <td style="padding:8px 12px; color:var(--text-muted,#777);font-family:var(--mono);">A2</td>
+      <td style="padding:8px 12px;"><a href="/mathematics/2026/05/02/geometry-of-seeing-A2-distributions-contact/">Distributions, Frobenius, and Contact Geometry</a></td>
+      <td style="padding:8px 12px; color:var(--text-muted,#777);">Chow, contact, V1 horizontality</td>
+      <td style="padding:8px 12px; text-align:center;"><span style="background:#fff3e0;color:#e65100;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">DRAFT</span></td>
+    </tr>
+    <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
+      <td style="padding:8px 12px; color:var(--text-muted,#777);font-family:var(--mono);">A3</td>
+      <td style="padding:8px 12px;"><a href="/mathematics/2026/05/03/geometry-of-seeing-A3-pmp/">Calculus of Variations and the Pontryagin Maximum Principle</a></td>
+      <td style="padding:8px 12px; color:var(--text-muted,#777);">Lie–Poisson on $\mathfrak{se}(2)^*$</td>
+      <td style="padding:8px 12px; text-align:center;"><span style="background:#fff3e0;color:#e65100;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">DRAFT</span></td>
+    </tr>
+    <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
+      <td style="padding:8px 12px; color:var(--text-muted,#777);font-family:var(--mono);">A4</td>
+      <td style="padding:8px 12px;"><a href="/mathematics/2026/05/04/geometry-of-seeing-A4-jacobi-elliptic/">Jacobi Elliptic Functions, Elliptic Integrals, and the AGM</a></td>
+      <td style="padding:8px 12px; color:var(--text-muted,#777);">$\mathrm{sn}, \mathrm{cn}, \mathrm{dn}, K(m)$</td>
+      <td style="padding:8px 12px; text-align:center;"><span style="background:#fff3e0;color:#e65100;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">DRAFT</span></td>
+    </tr>
+    <tr>
+      <td style="padding:8px 12px; color:var(--text-muted,#777);font-family:var(--mono);">A5</td>
+      <td style="padding:8px 12px;"><a href="/mathematics/2026/05/05/geometry-of-seeing-A5-sr-exponential/">The Sub-Riemannian Exponential Map of SE(2)</a></td>
+      <td style="padding:8px 12px; color:var(--text-muted,#777);">conjugate / cut / Maxwell</td>
+      <td style="padding:8px 12px; text-align:center;"><span style="background:#fff3e0;color:#e65100;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">DRAFT</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="l-body" markdown="1">
+
 ## Mathematical Setting
 
 The model rests on three ingredients.

@@ -51,6 +51,25 @@ layout: default
       </li>
       {% endfor %}
     </ol>
+    {% if series_data.appendices %}
+    <div class="d-series-title" style="margin-top:14px;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#888;">Appendices — Theory Background</div>
+    <ol style="list-style:none;padding-left:0;">
+      {% for item in series_data.appendices %}
+      <li class="{% if item.part == page.series_part %}current{% elsif item.status == 'upcoming' %}upcoming{% endif %}" style="padding-left:1em;">
+        <span style="font-family:var(--mono);font-size:11px;color:#888;">{{ item.part }}.</span>
+        {% if item.status == 'published' and item.part != page.series_part %}
+          <a href="{{ item.url }}">{{ item.title }}</a>
+        {% elsif item.status == 'draft' and item.part != page.series_part %}
+          <a href="{{ item.url }}">{{ item.title }}</a> <span style="font-size:10px;opacity:0.55;">(draft)</span>
+        {% elsif item.part == page.series_part %}
+          {{ item.title }} ← you are here
+        {% else %}
+          {{ item.title }}
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ol>
+    {% endif %}
   </div>
   {% endif %}
   {% endif %}
@@ -65,13 +84,37 @@ layout: default
 {% if page.series %}
 {% assign series_data = site.data.series | where: "id", page.series | first %}
 {% if series_data %}
+{% assign part_str = page.series_part | append: '' %}
+{% assign is_appendix = false %}
+{% if part_str contains 'A' %}{% assign is_appendix = true %}{% endif %}
+
+{% if is_appendix %}
+  {% assign part_no = part_str | remove_first: 'A' | plus: 0 %}
+  {% assign prev_part_n = part_no | minus: 1 %}
+  {% assign next_part_n = part_no | plus: 1 %}
+  {% if prev_part_n == 0 %}
+    {% assign prev_post = series_data.posts | last %}
+  {% else %}
+    {% assign prev_part_str = prev_part_n | prepend: 'A' %}
+    {% assign prev_post = series_data.appendices | where: "part", prev_part_str | first %}
+  {% endif %}
+  {% assign next_part_str = next_part_n | prepend: 'A' %}
+  {% assign next_post = series_data.appendices | where: "part", next_part_str | first %}
+{% else %}
+  {% assign prev_part = page.series_part | minus: 1 %}
+  {% assign next_part = page.series_part | plus: 1 %}
+  {% assign prev_post = series_data.posts | where: "part", prev_part | first %}
+  {% assign next_post = series_data.posts | where: "part", next_part | first %}
+  {% unless next_post %}
+    {% if series_data.appendices %}
+      {% assign next_post = series_data.appendices | first %}
+    {% endif %}
+  {% endunless %}
+{% endif %}
+
 <div class="d-article" style="padding-top:0;padding-bottom:0;">
   <div class="l-body">
     <div class="d-series-nav">
-      {% assign prev_part = page.series_part | minus: 1 %}
-      {% assign next_part = page.series_part | plus: 1 %}
-      {% assign prev_post = series_data.posts | where: "part", prev_part | first %}
-      {% assign next_post = series_data.posts | where: "part", next_part | first %}
       {% if prev_post and prev_post.status == 'published' or prev_post and prev_post.status == 'draft' %}
       <a href="{{ prev_post.url }}">
         <span class="d-nav-label">← Previous</span>

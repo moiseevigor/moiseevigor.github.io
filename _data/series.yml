@@ -21,3 +21,24 @@
       title: "The Open Problem: Exact Cut Time on SE(2)"
       url: /2026/05/15/geometry-of-seeing-cut-time-open-problem/
       status: upcoming
+  appendices:
+    - part: A1
+      title: "Lie Groups, Lie Algebras, and the Exponential Map of SE(2)"
+      url: /mathematics/2026/05/01/geometry-of-seeing-A1-lie-groups/
+      status: draft
+    - part: A2
+      title: "Distributions, Frobenius, and Contact Geometry"
+      url: /mathematics/2026/05/02/geometry-of-seeing-A2-distributions-contact/
+      status: draft
+    - part: A3
+      title: "Calculus of Variations and the Pontryagin Maximum Principle"
+      url: /mathematics/2026/05/03/geometry-of-seeing-A3-pmp/
+      status: draft
+    - part: A4
+      title: "Jacobi Elliptic Functions, Elliptic Integrals, and the AGM"
+      url: /mathematics/2026/05/04/geometry-of-seeing-A4-jacobi-elliptic/
+      status: draft
+    - part: A5
+      title: "The Sub-Riemannian Exponential Map of SE(2)"
+      url: /mathematics/2026/05/05/geometry-of-seeing-A5-sr-exponential/
+      status: draft
