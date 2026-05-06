@@ -7,6 +7,11 @@ lsi: false
 # Show future-dated posts
 future: true
 
+# Render posts marked `published: false` as if they were published —
+# only takes effect via the dev-config overlay, so production stays clean.
+# Combined with --drafts on the CLI, dev sees everything.
+unpublished: true
+
 # Skip building tags/archives in dev (saves ~30s on large sites)
 # Uncomment if tag generation slows the build noticeably:
 # exclude:

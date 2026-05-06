@@ -42,7 +42,11 @@ layout: default
         {% if item.status == 'published' and item.part != page.series_part %}
           <a href="{{ item.url }}">{{ item.title }}</a>
         {% elsif item.status == 'draft' and item.part != page.series_part %}
-          {{ item.title }} <span style="font-size:10px;opacity:0.55;">(draft)</span>
+          {% if jekyll.environment == 'development' %}
+            <a href="{{ item.url }}">{{ item.title }}</a> <span style="font-size:10px;opacity:0.55;">(draft)</span>
+          {% else %}
+            {{ item.title }} <span style="font-size:10px;opacity:0.55;">(draft)</span>
+          {% endif %}
         {% elsif item.part == page.series_part %}
           {{ item.title }} ← you are here
         {% else %}
@@ -60,7 +64,11 @@ layout: default
         {% if item.status == 'published' and item.part != page.series_part %}
           <a href="{{ item.url }}">{{ item.title }}</a>
         {% elsif item.status == 'draft' and item.part != page.series_part %}
-          {{ item.title }} <span style="font-size:10px;opacity:0.55;">(draft)</span>
+          {% if jekyll.environment == 'development' %}
+            <a href="{{ item.url }}">{{ item.title }}</a> <span style="font-size:10px;opacity:0.55;">(draft)</span>
+          {% else %}
+            {{ item.title }} <span style="font-size:10px;opacity:0.55;">(draft)</span>
+          {% endif %}
         {% elsif item.part == page.series_part %}
           {{ item.title }} ← you are here
         {% else %}
@@ -144,10 +152,17 @@ layout: default
         <span class="d-nav-title">{{ prev_post.title }}</span>
       </a>
       {% elsif prev_post and prev_post.status == 'draft' %}
+        {% if jekyll.environment == 'development' %}
+      <a href="{{ prev_post.url }}">
+        <span class="d-nav-label">← Previous</span>
+        <span class="d-nav-title">{{ prev_post.title }} (draft)</span>
+      </a>
+        {% else %}
       <span style="opacity:0.5;">
         <span class="d-nav-label">← Previous</span>
         <span class="d-nav-title">{{ prev_post.title }} (draft)</span>
       </span>
+        {% endif %}
       {% else %}
       <span></span>
       {% endif %}
@@ -158,10 +173,17 @@ layout: default
         <span class="d-nav-title">{{ next_post.title }}</span>
       </a>
         {% elsif next_post.status == 'draft' %}
+          {% if jekyll.environment == 'development' %}
+      <a href="{{ next_post.url }}" style="align-items:flex-end;">
+        <span class="d-nav-label">Next →</span>
+        <span class="d-nav-title">{{ next_post.title }} (draft)</span>
+      </a>
+          {% else %}
       <span style="align-items:flex-end;opacity:0.5;">
         <span class="d-nav-label">Next →</span>
         <span class="d-nav-title">{{ next_post.title }} (draft)</span>
       </span>
+          {% endif %}
         {% else %}
       <span style="align-items:flex-end;opacity:0.5;">
         <span class="d-nav-label">Next →</span>
