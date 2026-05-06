@@ -63,10 +63,10 @@ function integrateElastica(kappaFn, sMin, sMax, N, theta0 = 0) {
   return pts;
 }
 
-// Inflectional elastica: κ(s) = 2k·sn(s|k²), k ∈ (0,1).
+// Inflectional elastica: κ(s) = 2k·cn(s|k²), k ∈ (0,1).
 function elasticaInflectional(k, N = 600) {
   const m = k * k, Km = ellipticK(m);
-  return integrateElastica(s => 2 * k * ellipj(s, m).sn, -2*Km, 2*Km, N);
+  return integrateElastica(s => 2 * k * ellipj(s, m).cn, -2*Km, 2*Km, N);
 }
 
 // Euler/Cornu spiral (separatrix): κ(s) = 2·sech(s).

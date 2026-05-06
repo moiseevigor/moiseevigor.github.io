@@ -185,7 +185,7 @@ Colours encode the orientation angle on a $[0, \pi)$ hue wheel.
     in pixels.
     The four families exhaust the regimes of the SE(2) geodesic flow:
     <strong>inflectional</strong> ($-1\!&lt;\!E\!&lt;\!1$) —
-    $\kappa(s) = 2k\,\mathrm{sn}(s\mid k^{2})$, generic S-shaped curve;
+    $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^{2})$, generic S-shaped curve;
     <strong>non-inflectional</strong> ($E\!&gt;\!1$) —
     $\kappa(s) = 2\,\mathrm{dn}(s\mid m)$, one-signed curvature, wavy-circle shape;
     <strong>Euler spiral</strong> ($E = 1$) —
@@ -506,7 +506,7 @@ projected curve.
     Family of SE(2) geodesics starting from the same position with the same
     initial heading. The single control parameter $k$ traverses all three
     elastica regimes:
-    $k \in (0, 1)$ — <strong>inflectional</strong>, $\kappa(s) = 2k\,\mathrm{sn}(s\mid k^{2})$;
+    $k \in (0, 1)$ — <strong>inflectional</strong>, $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^{2})$;
     $k = 1$ — the <strong>Euler / Cornu spiral</strong>, the separatrix
     $\kappa(s) = 2\,\mathrm{sech}\,s$;
     $k > 1$ — <strong>non-inflectional</strong>, parametrised by
@@ -991,7 +991,7 @@ function drawV1() {
 // ── Figure 3: Geodesic family ─────────────────────────────────────────────
 /*
  * Continuous SE(2) geodesic family parametrised by a single k ∈ (0, K_HI].
- *   k ∈ (0, 1)        inflectional   κ(s) = 2k·sn(s|k²)
+ *   k ∈ (0, 1)        inflectional   κ(s) = 2k·cn(s|k²)
  *   k ≈ 1             Euler spiral   κ(s) = 2·sech(s)
  *   k ∈ (1, K_HI]     non-inflectional with m = 2 − k ∈ (0, 1)
  *                                    κ(s) = 2·dn(s|m)

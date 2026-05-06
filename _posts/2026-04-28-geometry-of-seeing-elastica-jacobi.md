@@ -33,7 +33,7 @@ The result is a pendulum equation whose general solution involves the three clas
 families of Jacobi elliptic functions.
 The <strong>key formula</strong>: for the inflectional family,
 
-$$\kappa(s) = 2k\,\mathrm{sn}(s \mid k^{2}),$$
+$$\kappa(s) = 2k\,\mathrm{cn}(s \mid k^{2}),$$
 
 and the spatial period of the curvature oscillation is exactly
 $T_{\kappa} = 4K(k^{2})$, the complete elliptic integral of the first kind.
@@ -101,51 +101,56 @@ The Hamiltonian equations on $\mathfrak{se}(2)^{*}$, via the <span class="annota
 
 <aside id="note-lie-poisson">
 $\{\cdot,\cdot\}$ is the <strong>Lie–Poisson bracket</strong> on $\mathfrak{se}(2)^*$,
-the natural Poisson structure on the dual of any Lie algebra.
-For $\mathrm{se}(2)^*$ the non-zero brackets between basis functionals are
-$\{h_1, h_3\} = h_2$ and $\{h_2, h_3\} = -h_1$, which is precisely what the
-right-hand sides above encode.
+the natural Poisson structure on the dual of any Lie algebra. With
+$[X_1, X_2] = -X_3$, $[X_2, X_3] = -X_1$, $[X_1, X_3] = 0$ in our body frame,
+the brackets between coordinate functionals are
+$\{h_1, h_2\} = h_3$, $\{h_2, h_3\} = h_1$, $\{h_1, h_3\} = 0$.
 </aside>
 
-$$\dot h_1 = \{h_1, \mathcal{H}_n\} = h_2 h_3, \qquad
-  \dot h_2 = \{h_2, \mathcal{H}_n\} = -h_1 h_3, \qquad
-  \dot h_3 = \{h_3, \mathcal{H}_n\} = 0.$$
+$$\dot h_1 = \{h_1, \mathcal{H}_n\} = h_2 h_3, \quad
+  \dot h_2 = \{h_2, \mathcal{H}_n\} = -h_1 h_3, \quad
+  \dot h_3 = \{h_3, \mathcal{H}_n\} = -h_1 h_2.$$
 
-Thus $h_3 = \omega_0 = \text{const}$. Setting $c = h_1^2 + h_2^2$ (also
-constant, since $\mathcal{H}_n = \tfrac{1}{2}c$), we may write
+Two integrals reduce this 3D system to a 1D motion. The Hamiltonian itself,
+$\mathcal{H}_n = \tfrac{1}{2}(h_1^{2} + h_2^{2})$, is conserved because the
+flow is Hamiltonian. The second is the **Casimir** of $\mathfrak{se}(2)^{*}$,
 
-$$h_1 = \sqrt{c}\,\cos\phi, \qquad h_2 = \sqrt{c}\,\sin\phi,$$
+$$C \;=\; h_1^{2} + h_3^{2},$$
 
-and the angular variable $\phi$ evolves as
+which Poisson-commutes with every smooth function and is therefore
+*automatically* preserved by any Hamiltonian flow on the dual algebra.
 
-$$\dot\phi = -h_3 = -\omega_0.$$
+<aside>
+A Casimir labels the symplectic leaves of the Lie–Poisson bracket — the
+coadjoint orbits. For $\mathfrak{se}(2)^{*}$ the orbits are the cylinders
+$\{h_1^{2} + h_3^{2} = C\}$, on which the Hamiltonian dynamics is genuinely
+symplectic.
+</aside>
 
-The **optimal control** from the PMP is then
+Fix the unit-speed normalisation $\mathcal{H}_n = 1/2$, so $h_1^{2} + h_2^{2} = 1$.
+The angle $\alpha$ defined by
 
-$$u_1 = h_1/\sqrt{c} = \cos\phi, \qquad u_2 = h_2/\sqrt{c} = \sin\phi.$$
+$$h_1 = \sin\alpha, \qquad h_2 = \cos\alpha$$
 
-Since $\dot\theta = u_2 = \sin\phi$ and $\phi$ evolves as $\dot\phi = -\omega_0$,
-we obtain a second-order ODE for the curvature $\kappa = \dot\theta$:
+then evolves as $\dot\alpha = h_3$ (from $\dot h_1 = h_2 h_3$).
+Using $h_3^{2} = C - h_1^{2} = C - \sin^{2}\alpha$, set
+$\varphi = 2\alpha$:
 
-$$\ddot\kappa + \tfrac{\omega_0^{2}}{4}\bigl(\kappa^{2} - \lambda\bigr)\kappa = 0,$$
+$$\dot\varphi^{2} \;=\; 4 h_3^{2} \;=\; (4C - 2) \,+\, 2\cos\varphi.$$
 
-where $\lambda = 2c/\omega_0^{2}$ is a dimensionless parameter.
+Differentiating once more in time gives the **pendulum equation**.
 
 ## The Pendulum Equation
 
-The ODE above is exactly the equation for a **nonlinear pendulum**.
-Setting $s = \omega_0 t / 2$ (rescaling arc length) and $\varphi = \kappa / \omega_0$:
-
 <div class="callout theorem">
-<div class="callout-title">Pendulum ODE for the curvature</div>
+<div class="callout-title">Pendulum ODE for the doubled costate angle</div>
 
-$$\frac{d^{2}\varphi}{ds^{2}} + \sin\varphi = 0,$$
+$$\ddot\varphi + \sin\varphi \;=\; 0,
+\qquad E \;=\; \tfrac{1}{2}\dot\varphi^{2} - \cos\varphi \;=\; 2C - 1,$$
 
-where $\varphi$ is identified with twice the angle of the pendulum from its
-equilibrium, and $s$ is the rescaled arc length.
-The first integral (energy) is
-
-$$E = \tfrac{1}{2}\dot\varphi^{2} - \cos\varphi = \text{const}.$$
+where $\varphi = 2\alpha$ and $\alpha = \arctan(h_1 / h_2)$ is the phase of
+$(h_1, h_2)$ on the unit circle. The pendulum energy $E$ is fixed by the
+Casimir $C$ on the coadjoint orbit.
 
 </div>
 
@@ -160,10 +165,30 @@ The three dynamically distinct regimes of the pendulum correspond directly to th
 
 <aside>
 The term <em>elastica</em> goes back to Euler (1744), who classified all
-shapes of a thin elastic rod in equilibrium under end loads.
-What he found — but could not fully solve — is that the curvature satisfies
-precisely this pendulum equation.
+shapes of a thin elastic rod in equilibrium under end loads. What he showed
+is that the heading angle of the rod's centreline satisfies precisely this
+pendulum equation in arc length — the same equation our reduction has just
+delivered for the SR-on-SE(2) costate phase.
 </aside>
+
+### From the pendulum to the curve
+
+The pendulum equation lives on the costate, but the figures below plot the
+**curvature $\kappa(s)$ of the projected plane curve in its own Euclidean
+arc length $s$**. These two are tied together by a quick computation.
+
+In unit-speed parametrisation $h_1^{2}+h_2^{2}=1$, the projected speed is
+$|h_1| = |\sin(\varphi/2)|$ and the heading derivative is $\dot\theta = h_2 = \cos(\varphi/2)$.
+Reparametrising by Euclidean arc length $s$ with $ds = |h_1|\,dt$, and using
+$\dot\varphi = \pm 2 h_3$, a short calculation gives an explicit closed-form
+$\kappa(s)$ in each regime — the three Jacobi-elliptic curvature profiles
+below. They satisfy the **elastica curvature ODE** (the Duffing form
+equivalent to the pendulum)
+
+$$\kappa''(s) + \tfrac{1}{2}\kappa(s)^{3} - \mu\,\kappa(s) \;=\; 0,$$
+
+with the integration constant $\mu$ fixed by the Casimir $C$ — one ODE, three
+qualitatively different solution branches.
 
 ## Three Families via Jacobi Elliptic Functions
 
@@ -175,15 +200,15 @@ with **inflection points**.
 
 Setting the energy $E = 2k^{2} - 1$ with $k \in (0, 1)$, the curvature is
 
-$$\boxed{\;\kappa(s) = 2k\,\mathrm{sn}(s \mid k^{2})\;}$$
+$$\boxed{\;\kappa(s) = 2k\,\mathrm{cn}(s \mid k^{2})\;}$$
 
-The Jacobi function $\mathrm{sn}(s \mid k^{2})$ has period $4K(k^{2})$ in $s$,
+The Jacobi function $\mathrm{cn}(s \mid k^{2})$ has period $4K(k^{2})$ in $s$,
 so the curvature — and hence the curve shape — repeats with spatial period
 
 $$T_{\kappa} = 4K(k^{2}).$$
 
-As $k \to 0$: $\mathrm{sn}(s\mid 0) = \sin s$ and the elastica approximates a
-sine-curvature curve (nearly straight).
+As $k \to 0$: $\mathrm{cn}(s\mid 0) = \cos s$ and the elastica approximates a
+cosine-curvature curve (nearly straight).
 As $k \to 1$: $K(1) = \infty$ and the period diverges — the curve spirals inward
 without repeating (the Euler spiral limit).
 
@@ -206,19 +231,21 @@ geodesic in SE(2).
 ### Non-Inflectional Elastica ($E > 1$)
 
 The pendulum rotates without stopping; $\varphi(s)$ is monotone.
-Setting $m = 1/(1 + E/2) \in (0, 1)$ (here $m$ parametrises this family):
+Setting $m = 2/(E + 1) \in (0, 1)$ (here $m$ parametrises this family — at
+$E=1$ the separatrix gives $m=1$, and as $E\to\infty$ we have $m\to 0$):
 
-$$\kappa(s) = \frac{2}{\sqrt{m}}\,\mathrm{dn}\!\bigl(s/\sqrt{m} \mid m\bigr).$$
+$$\kappa(s) = 2\,\mathrm{dn}(s \mid m).$$
 
 These curves have **no inflection points** — the curvature never changes sign.
-Their spatial period is
+The Jacobi function $\mathrm{dn}(s\mid m)$ has period $2K(m)$ in $s$, so the
+spatial period is
 
-$$T_{\kappa} = 2\sqrt{m}\,K(m).$$
+$$T_{\kappa} = 2K(m).$$
 
 As $m \to 1$: $\mathrm{dn}(s\mid 1) = \mathrm{sech}(s)$ — the non-inflectional family
 approaches the Euler spiral from the other side.
-As $m \to 0$: $\mathrm{dn}(s\mid 0) = 1$ and $\kappa \to 2/\sqrt{m} \to \infty$ —
-degenerate circles.
+As $m \to 0$: $\mathrm{dn}(s\mid 0) = 1$ and $\kappa \to 2$ — the curves
+degenerate into circles of radius $1/2$ (high-energy uniform rotation).
 
 </div><!-- /.l-body -->
 
@@ -229,9 +256,9 @@ degenerate circles.
       <label>
         Family
         <select id="elastica-type">
-          <option value="inflectional">Inflectional   κ = 2k sn(s|k²)</option>
+          <option value="inflectional">Inflectional   κ = 2k cn(s|k²)</option>
           <option value="euler">Euler spiral   κ = 2/cosh(s)</option>
-          <option value="noninflectional">Non-inflectional   κ = 2 dn(s|m)/√m</option>
+          <option value="noninflectional">Non-inflectional   κ = 2 dn(s|m)</option>
         </select>
       </label>
       <label id="k-label">
@@ -250,7 +277,7 @@ degenerate circles.
     Left panel: the curvature $\kappa(s)$ as a function of arc length.
     Right panel: the corresponding plane curve $(x(s), y(s))$, the spatial projection
     of the SE(2) geodesic.
-    For the inflectional family, zeros of $\kappa(s) = 2k\,\mathrm{sn}(s\mid k^2)$
+    For the inflectional family, zeros of $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$
     coincide with inflection points of the curve; the period is $T_\kappa = 4K(k^2)$.
     Drag the slider to vary $k$ (or $m$); switch families with the dropdown.
   </figcaption>
@@ -264,7 +291,7 @@ degenerate circles.
   <figcaption>
     <strong class="figure-label"></strong>
     <strong>The period $T_\kappa(k) = 4K(k^2)$ diverges as $k \to 1$.</strong>
-    Blue: inflectional period $4K(k^2)$; green: non-inflectional period $2\sqrt{m}\,K(m)$
+    Blue: inflectional period $4K(k^2)$; green: non-inflectional period $2K(m)$
     (plotted vs $k = \sqrt{m}$ for comparison).
     The vertical asymptote at $k = 1$ corresponds to the Euler spiral — infinite period,
     infinite total curvature.
@@ -326,7 +353,7 @@ from elliptic import ellipj
 
 s = np.linspace(-2*K, 2*K, 800)
 sn, cn, dn = ellipj(s, k**2)
-kappa = 2 * k * sn             # curvature of inflectional elastica
+kappa = 2 * k * cn             # curvature of inflectional elastica
 ```
 
 The three functions satisfy the differential equations
@@ -341,7 +368,7 @@ $$\mathrm{sn}^{2} + \mathrm{cn}^{2} = 1, \qquad \mathrm{dn}^{2} + m\,\mathrm{sn}
 
 These let us differentiate $\kappa(s)$ analytically:
 
-$$\kappa'(s) = 2k\,\mathrm{cn}(s)\,\mathrm{dn}(s),$$
+$$\kappa'(s) = -2k\,\mathrm{sn}(s)\,\mathrm{dn}(s),$$
 
 which will be essential in Part 3 for locating Maxwell strata.
 
@@ -428,7 +455,7 @@ A few landmarks worth noting:
 
 We have shown that every normal SR geodesic on SE(2) has curvature belonging to
 one of three Jacobi-elliptic families, with the inflectional case
-$\kappa(s) = 2k\,\mathrm{sn}(s\mid k^2)$ being the generic one.
+$\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$ being the generic one.
 The complete elliptic integral $K(k^2)$ controls the spatial period of the
 curvature, and the closed-form $x(s), y(s)$ involve elliptic integrals of the
 second kind.
@@ -545,15 +572,15 @@ function drawElastica() {
       const m = k * k;
       const Km = ellipticK(m);
       sMin = -2 * Km; sMax = 2 * Km;
-      kappaFn = s => 2 * k * ellipj(s, m).sn;
+      kappaFn = s => 2 * k * ellipj(s, m).cn;
     } else if (type === 'euler') {
       sMin = -7; sMax = 7;
       kappaFn = s => 2 / Math.cosh(s);
     } else {
       const m = Math.max(0.02, Math.min(0.98, param * param));
       const Km = ellipticK(m);
-      sMin = -2 * Km; sMax = 2 * Km;
-      kappaFn = s => 2 * ellipj(s, m).dn / Math.sqrt(m);
+      sMin = -Km; sMax = Km;
+      kappaFn = s => 2 * ellipj(s, m).dn;
     }
 
     const sArr = d3.range(N + 1).map(i => sMin + i * (sMax - sMin) / N);
@@ -666,7 +693,7 @@ function drawPeriodPlot() {
   const T_infl = kArr.map(k => 4 * ellipticK(k * k));
   const T_noninfl = kArr.map(k => {
     const m = k * k;
-    return 2 * Math.sqrt(m) * ellipticK(m);
+    return 2 * ellipticK(m);
   });
 
   const yMax = 24;
@@ -734,7 +761,7 @@ function drawPeriodPlot() {
     .text('2π');
 
   // Legend
-  const leg = [['– 4K(k²)', '#1565c0'], ['- - 2√m K(m)', '#388e3c']];
+  const leg = [['– 4K(k²)', '#1565c0'], ['- - 2K(m)', '#388e3c']];
   leg.forEach(([label, col], i) => {
     const lx = pad.l + iW - 130, ly = pad.t + 18 + i * 18;
     g.append('line').attr('x1', lx).attr('x2', lx + 24)
@@ -892,7 +919,7 @@ function drawFamilies() {
   const mVals = [0.3, 0.6, 0.9];
   mVals.forEach(m => {
     const Km = ellipticK(m);
-    const pts = integrateElastica(s => 2 * ellipj(s, m).dn / Math.sqrt(m), -2*Km, 2*Km, 500);
+    const pts = integrateElastica(s => 2 * ellipj(s, m).dn, -Km, Km, 500);
     const x0 = pts[0].x, y0 = pts[0].y;
     const col = d3.interpolateGreens(0.4 + m * 0.4);
     g.append('path')
@@ -904,7 +931,7 @@ function drawFamilies() {
   const kVals = [0.3, 0.6, 0.9];
   kVals.forEach(k => {
     const m = k * k, Km = ellipticK(m);
-    const pts = integrateElastica(s => 2 * k * ellipj(s, m).sn, -2*Km, 2*Km, 500);
+    const pts = integrateElastica(s => 2 * k * ellipj(s, m).cn, -2*Km, 2*Km, 500);
     const x0 = pts[0].x, y0 = pts[0].y;
     const col = d3.interpolateBlues(0.4 + k * 0.4);
     g.append('path')
