@@ -249,11 +249,20 @@ is SE(2) — the Lie group of orientation-preserving rigid motions of the plane.
 
 ### What SE(2) is, concretely
 
-A point of $\mathrm{SE}(2)$ is a triple $(x, y, \theta)$: a *position*
+A point of <span class="annotated-term" data-note="note-se2-group">$\mathrm{SE}(2)$</span> is a triple $(x, y, \theta)$: a *position*
 $(x, y) \in \mathbb{R}^2$ together with an *orientation* $\theta \in S^1$.
 This is exactly the data describing one V1 neuron in Figure 2 — its retinal
 position and its preferred edge orientation. As a $3\times3$ matrix the
 configuration $g$ acts on the plane as a rotation followed by a translation:
+
+<aside id="note-se2-group">
+$\mathrm{SE}(2)$ — the <strong>Special Euclidean group</strong> in two
+dimensions — is the set of orientation-preserving rigid motions of the
+plane, equipped with composition as its group law. Concretely it is
+$\mathbb{R}^2 \rtimes \mathrm{SO}(2)$: a translation paired with a
+rotation. It is the simplest non-commutative Lie group worth knowing.
+See Appendix A1 for the full Lie-group setup.
+</aside>
 
 $$g \;=\; \begin{pmatrix} \cos\theta & -\sin\theta & x \\
                           \sin\theta &  \cos\theta & y \\
@@ -305,8 +314,17 @@ $\varepsilon^2$ in the **perpendicular** direction:
 $$\Phi^{X_2}_{-\varepsilon} \!\circ\! \Phi^{X_1}_{-\varepsilon} \!\circ\! \Phi^{X_2}_{\varepsilon} \!\circ\! \Phi^{X_1}_{\varepsilon}\;(g_0)
 \;=\; g_0 \,+\, \varepsilon^2\, X_3 \,+\, O(\varepsilon^3).$$
 
-The infinitesimal limit of this loop is exactly the Lie bracket of $X_1$ and
+The infinitesimal limit of this loop is exactly the <span class="annotated-term" data-note="note-lie-bracket">Lie bracket</span> of $X_1$ and
 $X_2$:
+
+<aside id="note-lie-bracket">
+The <strong>Lie bracket</strong> $[X, Y]$ measures the failure of two
+flows to commute. For vector fields it acts on smooth functions as
+$[X, Y]f = X(Yf) - Y(Xf)$; for matrix Lie algebras it equals $XY - YX$;
+geometrically it is the leading $\varepsilon^2$ residual of the four-step
+loop above. All three definitions agree — see Appendix A1 for the full
+side-by-side derivation.
+</aside>
 
 $$[X_1, X_2] \;=\; X_3 \;=\; -\sin\theta\,\partial_x + \cos\theta\,\partial_y.$$
 
@@ -548,7 +566,16 @@ $L_{\mathrm{SR}}$:
 - **The conjugate locus**: points beyond which a geodesic is no longer
   *locally* length-minimising. These correspond to where two infinitesimally
   nearby geodesics with the same initial conditions reconverge in the phase
-  space — i.e. the SR exponential map ceases to be a local diffeomorphism.
+  space — i.e. the <span class="annotated-term" data-note="note-sr-exp">SR exponential map</span> ceases to be a local diffeomorphism.
+
+<aside id="note-sr-exp">
+The <strong>sub-Riemannian exponential map</strong> sends an initial costate
+$\mu_0 \in \mathfrak{se}(2)^{\ast}$ and a time $T$ to the geodesic endpoint
+$g(T)$. It is <em>different from</em> the matrix exponential of Appendix A1
+— different domain, different image, different geometry. Appendix A5 builds
+it carefully and explains why it is the right object for the cut-locus
+question.
+</aside>
 
 - **The cut locus** (or **Maxwell locus**): points beyond which the geodesic
   is no longer *globally* length-minimising — because at least one other

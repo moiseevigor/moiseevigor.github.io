@@ -88,10 +88,9 @@ $\sin(\varphi_0/2) = k\,\mathrm{sn}(s\mid k^2)$ — the substitution that
 A4 §3 derived from the half-angle.  Then Sachkov (2011) showed that the
 plane projection $(x(s), y(s))$ of the SR geodesic is
 
-$$\boxed{\; x(s) \;=\; 2\bigl(E(\mathrm{am}(s)\mid k^2) - \tfrac12 F(\mathrm{am}(s)\mid k^2)\bigr),\;}$$
+$$\boxed{\;x(s) \;=\; 2\bigl(E(\mathrm{am}(s\mid k^2)\mid k^2) - \tfrac12 F(\mathrm{am}(s\mid k^2)\mid k^2)\bigr),\;}$$
 
-$$\boxed{\;y(s) \;=\; -\frac{2k}{1}\bigl(\mathrm{cn}(s\mid k^2) - 1\bigr)
-                     - \tfrac{1}{1} \cdot 0 \;=\; 2k\bigl(1 - \mathrm{cn}(s\mid k^2)\bigr).\;}$$
+$$\boxed{\;y(s) \;=\; 2k\bigl(1 - \mathrm{cn}(s\mid k^2)\bigr).\;}$$
 
 (Sachkov writes these in a slightly different normalisation; the exact
 form depends on the chosen sign of the curvature and the position of $s = 0$
@@ -159,12 +158,22 @@ Three takeaways:
 
 ## Conjugate points and Jacobi fields
 
-A **Jacobi field** along a geodesic $\gamma : [0, T] \to G$ is a
+A <span class="annotated-term" data-note="note-jacobi-field">**Jacobi field**</span> along a geodesic $\gamma : [0, T] \to G$ is a
 variational vector field $J(s) \in T_{\gamma(s)} G$ obtained by varying
 $\gamma$ through nearby geodesics with the same $\gamma(0)$.
 Equivalently, $J = \partial_\varepsilon|_{0} \gamma_\varepsilon$, where
 $\gamma_\varepsilon$ is a 1-parameter family of geodesics with $\gamma_0 =
 \gamma$.
+
+<aside id="note-jacobi-field">
+A <strong>Jacobi field</strong> is the linearised version of "wiggle the
+geodesic and see what happens." It satisfies a second-order linear ODE
+along $\gamma$ — the Jacobi equation — whose solutions form a
+$2\dim G$-dimensional vector space. The Jacobi fields starting from
+$J(0) = 0$ describe geodesics through the same starting point with nearby
+initial directions. A <em>conjugate point</em> is where one of these
+fans-out family members closes up again.
+</aside>
 
 A point $\gamma(t^{\ast})$ is a **conjugate point** to $\gamma(0)$ if a
 non-trivial Jacobi field with $J(0) = 0$ also has $J(t^{\ast}) = 0$.

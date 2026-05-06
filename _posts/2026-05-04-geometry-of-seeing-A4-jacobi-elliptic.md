@@ -95,10 +95,20 @@ $m \to 1^-$: $F(\phi\mid 1) = \mathrm{atanh}(\sin\phi)$, so
 $\mathrm{sn}(u\mid 1) = \tanh u$, $\mathrm{cn}(u\mid 1) = \mathrm{dn}(u\mid 1) = \mathrm{sech}\,u$.
 At intermediate $m$ they interpolate.
 
-The functions are **doubly-periodic** when extended to the complex plane:
+The functions are <span class="annotated-term" data-note="note-doubly-periodic">**doubly-periodic**</span> when extended to the complex plane:
 $\mathrm{sn}$ has real period $4K(m)$ and imaginary period $2iK(1 - m)$.
 This makes them functions on the elliptic curve $y^2 = (1 - x^2)(1 - mx^2)$
 — from which much of the theory's algebraic structure comes.
+
+<aside id="note-doubly-periodic">
+A function $f : \mathbb{C} \to \mathbb{C}$ is <strong>doubly-periodic</strong>
+if there exist two periods $\omega_1, \omega_2$ with non-real ratio such
+that $f(z + \omega_1) = f(z + \omega_2) = f(z)$. The fundamental domain
+is then a parallelogram in the complex plane, and the function descends
+to a well-defined map on the corresponding torus
+$\mathbb{C} / (\mathbb{Z}\omega_1 + \mathbb{Z}\omega_2)$ — the "elliptic
+curve" referenced above.
+</aside>
 
 </div><!-- /.l-body -->
 
@@ -171,8 +181,10 @@ so $\ddot\varphi + \sin\varphi = 0$. ✓
 This is **the** identity behind the elastica: the pendulum solution is
 literally the Jacobi-am function, and the curvature
 $\kappa(s) = \dot\varphi(s) = 2k\,\mathrm{cn}(s)$ is one Jacobi function's
-worth.  (Different conventions place sn or cn here; Part 2 uses
-$\kappa = 2k\,\mathrm{sn}$, which corresponds to a half-period shift.)
+worth — exactly the formula Part 2 uses. (An alternative convention takes
+$\kappa = 2k\,\mathrm{sn}$, related by a quarter-period shift $s \to s + K$;
+either describes the same family of geodesics, just starting at a different
+arc-length offset.)
 
 ## The complete elliptic integrals
 

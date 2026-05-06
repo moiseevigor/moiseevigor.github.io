@@ -113,7 +113,17 @@ $$\dot h_1 = \{h_1, \mathcal{H}_n\} = h_2 h_3, \quad
 
 Two integrals reduce this 3D system to a 1D motion. The Hamiltonian itself,
 $\mathcal{H}_n = \tfrac{1}{2}(h_1^{2} + h_2^{2})$, is conserved because the
-flow is Hamiltonian. The second is the **Casimir** of $\mathfrak{se}(2)^{*}$,
+flow is Hamiltonian. The second is the <span class="annotated-term" data-note="note-casimir">**Casimir**</span> of $\mathfrak{se}(2)^{*}$,
+
+<aside id="note-casimir">
+A <strong>Casimir function</strong> on the dual of a Lie algebra is one
+that Poisson-commutes with <em>every</em> coordinate function — it is
+preserved by every Hamiltonian flow, regardless of which Hamiltonian you
+choose. Casimirs come from the structure of the algebra itself, not from
+any particular dynamics. They label the <em>symplectic leaves</em> on which
+genuine Hamiltonian motion takes place. Appendix A1 derives the SE(2)
+Casimir from the structure constants directly.
+</aside>
 
 $$C \;=\; h_1^{2} + h_3^{2},$$
 
@@ -121,10 +131,18 @@ which Poisson-commutes with every smooth function and is therefore
 *automatically* preserved by any Hamiltonian flow on the dual algebra.
 
 <aside>
-A Casimir labels the symplectic leaves of the Lie–Poisson bracket — the
-coadjoint orbits. For $\mathfrak{se}(2)^{*}$ the orbits are the cylinders
-$\{h_1^{2} + h_3^{2} = C\}$, on which the Hamiltonian dynamics is genuinely
-symplectic.
+The Casimir labels the <span class="annotated-term" data-note="note-coadjoint">symplectic leaves</span> of
+the Lie–Poisson bracket — the coadjoint orbits. For $\mathfrak{se}(2)^{*}$
+the orbits are the cylinders $\{h_1^{2} + h_3^{2} = C\}$, on which the
+Hamiltonian dynamics is genuinely symplectic.
+</aside>
+
+<aside id="note-coadjoint">
+The <strong>coadjoint orbits</strong> of a Lie group $G$ partition
+$\mathfrak{g}^{*}$ into Kirillov–Kostant–Souriau symplectic manifolds.
+For SE(2) they are vertical cylinders in $(h_1, h_2, h_3)$-space (plus
+degenerate points along an axis). Appendix A1 §6 derives this directly
+from the adjoint action.
 </aside>
 
 Fix the unit-speed normalisation $\mathcal{H}_n = 1/2$, so $h_1^{2} + h_2^{2} = 1$.
@@ -324,7 +342,16 @@ degenerate into circles of radius $1/2$ (high-energy uniform rotation).
 The period formula $T_\kappa = 4K(k^{2})$ is not incidental — $K(k^{2})$ is the
 **exact** half-period of $\mathrm{sn}(s\mid k^{2})$ by definition.
 This makes the elastica period computable to arbitrary precision via the
-arithmetic–geometric mean (AGM):
+<span class="annotated-term" data-note="note-agm">arithmetic–geometric mean (AGM)</span>:
+
+<aside id="note-agm">
+The <strong>arithmetic–geometric mean</strong> $\mathrm{AGM}(a, b)$ is the
+common limit of the simultaneous iterations $a_{n+1} = \tfrac12(a_n + b_n)$
+and $b_{n+1} = \sqrt{a_n b_n}$. It converges <em>quadratically</em>: each
+step roughly doubles the number of correct digits. Gauss discovered in 1799
+that it computes $K(m)$ exactly. Appendix A4 derives the AGM from the
+Landen transform and proves the $K$-formula.
+</aside>
 
 $$K(m) = \frac{\pi}{2\,\mathrm{AGM}\!\bigl(1,\;\sqrt{1 - m}\bigr)}, \qquad m = k^{2}.$$
 

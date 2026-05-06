@@ -120,11 +120,20 @@ $g \in G$ define
 
 $$X_i(g) \;:=\; (dL_g)_e (E_i),$$
 
-where $L_g(h) = gh$ is left-multiplication.  $X_i(g)$ is the pushforward of
+where $L_g(h) = gh$ is left-multiplication.  $X_i(g)$ is the <span class="annotated-term" data-note="note-pushforward">pushforward</span> of
 the abstract algebra element $E_i$ to the tangent space at $g$ along the
 left-translation.  These are the **left-invariant vector fields**.  They
 satisfy $X_i(gh) = (dL_g)_h X_i(h)$, i.e. they look the same in every
 left-translated frame.
+
+<aside id="note-pushforward">
+The <strong>pushforward</strong> $df_p : T_p M \to T_{f(p)} N$ of a smooth
+map $f : M \to N$ at $p$ sends a tangent vector $v$ at $p$ to the velocity
+at $t = 0$ of the curve $f(\gamma(t))$, where $\gamma$ is any curve through
+$p$ with $\gamma'(0) = v$. Here $f = L_g$ and the rule is: pick a curve in
+$G$ tangent to $E_i$ at the identity, multiply it on the left by $g$, and
+read off its velocity at $g$.
+</aside>
 
 Computing them in the chart $(x, y, \theta)$ is mechanical:
 $L_g(x', y', \theta') = (\,x + x'\cos\theta - y'\sin\theta,\;\;
@@ -393,7 +402,17 @@ The **coadjoint action** is the dual: $\mathrm{Ad}^{\ast}_g : \mathfrak g^{\ast}
 \mathfrak g^{\ast}$, $\langle \mathrm{Ad}^{\ast}_g(\mu), Y\rangle :=
 \langle \mu, \mathrm{Ad}_{g^{-1}}(Y)\rangle$.  The orbits of $\mathrm{Ad}^{\ast}$
 on $\mathfrak g^{\ast}$ are called **coadjoint orbits**, and they are *symplectic
-manifolds* (Kirillov-Kostant-Souriau).
+manifolds* — the <span class="annotated-term" data-note="note-kks">Kirillov–Kostant–Souriau theorem</span>.
+
+<aside id="note-kks">
+The <strong>Kirillov–Kostant–Souriau theorem</strong> (1962–1970) says
+every coadjoint orbit of a Lie group carries a canonical symplectic
+structure, given by $\omega_\mu(\mathrm{ad}^{\ast}_X \mu, \mathrm{ad}^{\ast}_Y \mu)
+= \langle\mu, [X, Y]\rangle$.  This is why the Lie–Poisson bracket on
+$\mathfrak g^{\ast}$ has the dynamics it does: it restricts on each orbit to
+ordinary symplectic Hamilton equations.  Part 2's pendulum reduction lives
+on one such orbit.
+</aside>
 
 For $\mathrm{SE}(2)$, parametrise $\mathfrak{se}(2)^{\ast}$ by $(h_1, h_2, h_3)$
 in the basis dual to $\{E_1, E_2, E_3\}$.  The coadjoint orbits are
@@ -445,7 +464,18 @@ Appendix A3 will derive that flow from the PMP.
 
 ## The Baker–Campbell–Hausdorff series
 
-For two non-commuting algebra elements,
+For two non-commuting algebra elements, the <span class="annotated-term" data-note="note-bch">Baker–Campbell–Hausdorff (BCH) formula</span>
+expresses $\log(\exp X \cdot \exp Y)$ as a series in iterated brackets:
+
+<aside id="note-bch">
+The <strong>BCH series</strong> is the universal answer to "what is the
+log of a product of exponentials?". For commuting $X, Y$ it collapses to
+$X + Y$ — the abelian case. For non-commuting elements it picks up a
+$\tfrac12[X, Y]$ correction, then progressively higher iterated brackets.
+The series is what BCH-type closed forms in numerical Lie-group integrators
+truncate at finite order; for SE(2) the truncation closes quickly because
+the algebra has a simple bracket structure.
+</aside>
 
 $$\exp X \cdot \exp Y \;=\; \exp\!\Bigl(X + Y + \tfrac12 [X, Y]
                                     + \tfrac{1}{12}[X, [X, Y]]

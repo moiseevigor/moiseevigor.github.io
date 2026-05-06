@@ -163,11 +163,20 @@ and $(g^{\ast}, \lambda^{\ast})$ obey the Hamilton equations of $\mathcal H$ in 
 $\nu = 0$.
 </div>
 
-The key new object is the **costate** $\lambda \in T^{\ast}M$.  Heuristically, it
+The key new object is the <span class="annotated-term" data-note="note-costate">**costate**</span> $\lambda \in T^{\ast}M$.  Heuristically, it
 is the Lagrange multiplier enforcing the dynamic constraint $\dot g = f$.
 In a coordinate chart $\lambda = \lambda_i \,dq^i$ and Hamilton's equations
 read $\dot q^i = \partial \mathcal H / \partial \lambda_i$,
 $\dot \lambda_i = -\partial \mathcal H / \partial q^i$.
+
+<aside id="note-costate">
+The <strong>costate</strong> is the optimal-control name for the conjugate
+momentum. In classical mechanics, momentum is paired with position; in
+optimal control, the costate is paired with the state and tracks how the
+optimal cost varies with shifts in the trajectory. In our setting it lives
+in $T^{*}\mathrm{SE}(2)$, and via left-trivialisation collapses to three
+numbers $(h_1, h_2, h_3) \in \mathfrak{se}(2)^{*}$ (Appendix A1).
+</aside>
 
 ### Maximising over $u$ for the SR problem
 
@@ -231,46 +240,64 @@ reads
 $$\dot h_i \;=\; -\sum_{j, k} c^k_{ij}\,h_k\,\frac{\partial H}{\partial h_j},$$
 
 where $c^k_{ij}$ are the structure constants $[E_i, E_j] = c^k_{ij} E_k$.
-For $\mathfrak{se}(2)$ in the basis we computed in A1,
-
-$$[E_1, E_2] = 0, \quad [E_3, E_1] = E_2, \quad [E_3, E_2] = -E_1,$$
-
-and (with the LI-vector-field bracket sign convention used in Part 1,
-$[X_3, X_1] = X_2$) one obtains
+For $\mathfrak{se}(2)$ in the body-frame basis $\{X_1, X_2, X_3\}$ used in
+Part 1 (forward / rotation / sideways), the brackets are
+$[X_1, X_2] = -X_3$, $[X_2, X_3] = -X_1$, $[X_1, X_3] = 0$, giving the
+non-zero coordinate brackets $\{h_1, h_2\} = h_3$ and $\{h_2, h_3\} = h_1$.
+With $H_n = \tfrac12(h_1^2 + h_2^2)$ this yields
 
 $$\dot h_1 \;=\; h_2\,h_3, \qquad
   \dot h_2 \;=\; -h_1\,h_3, \qquad
-  \dot h_3 \;=\; 0.$$
+  \dot h_3 \;=\; -h_1\,h_2.$$
 
-These are exactly the equations Part 2 §1 wrote down.  Note $h_3$ is a
-**Casimir** — constant on every coadjoint orbit.
+These are the equations Part 2 §1 uses. The conserved quantities are the
+Hamiltonian $\mathcal H_n = \tfrac12(h_1^2 + h_2^2)$ and the
+**Casimir** of $\mathfrak{se}(2)^{*}$,
 
-### What the equations *are*
+$$C \;=\; h_1^{2} + h_3^{2}$$
 
-Set $\omega_0 := h_3$ (constant) and $c := h_1^2 + h_2^2$ (also constant
-since $\dot c = 2(h_1 \dot h_1 + h_2 \dot h_2) = 2(h_1 h_2 h_3 - h_2 h_1
-h_3) = 0$).  Parametrise
+— the squared translation momentum, which Poisson-commutes with every
+coordinate function and so is preserved by any Hamiltonian flow on the
+dual algebra (not just our particular $\mathcal H_n$). $h_3$ alone is not
+conserved: the third equation above shows it evolves whenever the geodesic
+is mid-cusp.
 
-$$h_1 = \sqrt c \cos\phi, \qquad h_2 = \sqrt c \sin\phi.$$
+### Reduction to the pendulum
 
-Then $\dot h_1 = -\sqrt c \sin\phi \dot\phi = h_2 h_3 = \sqrt c \sin\phi
-\cdot \omega_0$, giving $\dot\phi = -\omega_0$.  So $\phi(t) = \phi_0
-- \omega_0 t$ — a uniform rotation on the cylinder.  Translating to the
-$\theta$-coordinate of the SE(2) trajectory:
+The two integrals $\mathcal H_n = \tfrac12$ (unit-speed normalisation) and
+$C = h_1^2 + h_3^2$ cut the 3D dynamics down to a 1D motion. Set
+$h_1 = \sin\alpha$, $h_2 = \cos\alpha$, so that $\mathcal H_n = 1/2$ is
+automatic. From $\dot h_1 = h_2 h_3$ we read off $\dot\alpha = h_3$, and
+the Casimir gives $h_3^2 = C - \sin^2\alpha$. With $\varphi = 2\alpha$:
 
-- $u_1^{\ast} = \cos\phi$ (forward), $u_2^{\ast} = \sin\phi$ (rotation rate).
-- $\dot \theta = u_2^{\ast} = \sin\phi$.
+$$\dot\varphi^{2} \;=\; 4 h_3^{2} \;=\; (4C - 2) \,+\, 2\cos\varphi.$$
 
-Differentiating once more gives the **pendulum equation** for the curvature
-(after rescaling),
+Differentiating once in $t$:
 
-$$\ddot\theta + \omega_0\,\dot\theta\,\cos(\,\cdot\,) + \cdots \;\to\;
-\frac{d^2 \varphi}{ds^2} + \sin\varphi = 0,$$
+$$\boxed{\;\ddot\varphi + \sin\varphi \;=\; 0,
+        \qquad E \;=\; \tfrac12\dot\varphi^{2} - \cos\varphi \;=\; 2C - 1.\;}$$
 
-with $\varphi$ a rescaled pendulum angle and $s$ a rescaled arc length.
-This is the same nonlinear-pendulum ODE that Part 2 §2 announced as
-"the equation for a nonlinear pendulum" — but now it is *derived*, not
-postulated.
+That is the **pendulum equation** — derived, not postulated, from the
+Lie–Poisson flow on $\mathfrak{se}(2)^{*}$. The pendulum angle
+$\varphi = 2\alpha$ is twice the phase of $(h_1, h_2)$ on the unit circle;
+the pendulum energy $E$ is fixed by the Casimir on the coadjoint orbit.
+
+The reconstruction equation then ties the planar curve's heading $\theta$
+back to the costate. With $u_1^{\ast} = h_1 = \sin(\varphi/2)$ and
+$u_2^{\ast} = h_2 = \cos(\varphi/2)$, the SE(2) ODE
+$(\dot x, \dot y, \dot\theta) = (u_1^{\ast}\cos\theta, u_1^{\ast}\sin\theta, u_2^{\ast})$
+gets reparametrised by Euclidean arc length $s$ (with $ds = |u_1^{\ast}|\,dt$);
+the resulting projected curve has curvature
+
+$$\kappa(s) = \frac{u_2^{\ast}}{u_1^{\ast}} = \cot(\varphi/2).$$
+
+Tracking $\kappa$ through the three pendulum regimes recovers the three
+elastica families of Part 2 §3 — inflectional ($E < 1$, $\kappa = 2k\,\mathrm{cn}$),
+separatrix ($E = 1$, $\kappa = 2\,\mathrm{sech}$), non-inflectional
+($E > 1$, $\kappa = 2\,\mathrm{dn}$). Appendix A4 §3 tracks that
+substitution in detail; the **elastica curvature ODE**
+$\kappa''(s) + \tfrac12\kappa^3 - \mu\kappa = 0$ is the Duffing form
+equivalent to the pendulum and is what the figures in Part 2 actually plot.
 
 </div><!-- /.l-body -->
 
