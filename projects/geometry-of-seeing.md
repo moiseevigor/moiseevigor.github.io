@@ -97,31 +97,31 @@ from the main parts.
   <tbody>
     <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
       <td style="padding:8px 12px; color:var(--text-muted,#777);font-family:var(--mono);">A1</td>
-      <td style="padding:8px 12px;"><a href="/mathematics/2026/05/01/geometry-of-seeing-A1-lie-groups/">Lie Groups, Lie Algebras, and the Exponential Map of SE(2)</a></td>
+      <td style="padding:8px 12px; color:var(--text-muted,#777);">Lie Groups, Lie Algebras, and the Exponential Map of SE(2)</td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">$\mathfrak{se}(2)$, brackets, $\exp$</td>
       <td style="padding:8px 12px; text-align:center;"><span style="background:#fff3e0;color:#e65100;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">DRAFT</span></td>
     </tr>
     <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
       <td style="padding:8px 12px; color:var(--text-muted,#777);font-family:var(--mono);">A2</td>
-      <td style="padding:8px 12px;"><a href="/mathematics/2026/05/02/geometry-of-seeing-A2-distributions-contact/">Distributions, Frobenius, and Contact Geometry</a></td>
+      <td style="padding:8px 12px; color:var(--text-muted,#777);">Distributions, Frobenius, and Contact Geometry</td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">Chow, contact, V1 horizontality</td>
       <td style="padding:8px 12px; text-align:center;"><span style="background:#fff3e0;color:#e65100;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">DRAFT</span></td>
     </tr>
     <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
       <td style="padding:8px 12px; color:var(--text-muted,#777);font-family:var(--mono);">A3</td>
-      <td style="padding:8px 12px;"><a href="/mathematics/2026/05/03/geometry-of-seeing-A3-pmp/">Calculus of Variations and the Pontryagin Maximum Principle</a></td>
+      <td style="padding:8px 12px; color:var(--text-muted,#777);">Calculus of Variations and the Pontryagin Maximum Principle</td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">Lie–Poisson on $\mathfrak{se}(2)^*$</td>
       <td style="padding:8px 12px; text-align:center;"><span style="background:#fff3e0;color:#e65100;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">DRAFT</span></td>
     </tr>
     <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
       <td style="padding:8px 12px; color:var(--text-muted,#777);font-family:var(--mono);">A4</td>
-      <td style="padding:8px 12px;"><a href="/mathematics/2026/05/04/geometry-of-seeing-A4-jacobi-elliptic/">Jacobi Elliptic Functions, Elliptic Integrals, and the AGM</a></td>
+      <td style="padding:8px 12px; color:var(--text-muted,#777);">Jacobi Elliptic Functions, Elliptic Integrals, and the AGM</td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">$\mathrm{sn}, \mathrm{cn}, \mathrm{dn}, K(m)$</td>
       <td style="padding:8px 12px; text-align:center;"><span style="background:#fff3e0;color:#e65100;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">DRAFT</span></td>
     </tr>
     <tr>
       <td style="padding:8px 12px; color:var(--text-muted,#777);font-family:var(--mono);">A5</td>
-      <td style="padding:8px 12px;"><a href="/mathematics/2026/05/05/geometry-of-seeing-A5-sr-exponential/">The Sub-Riemannian Exponential Map of SE(2)</a></td>
+      <td style="padding:8px 12px; color:var(--text-muted,#777);">The Sub-Riemannian Exponential Map of SE(2)</td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">conjugate / cut / Maxwell</td>
       <td style="padding:8px 12px; text-align:center;"><span style="background:#fff3e0;color:#e65100;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">DRAFT</span></td>
     </tr>
@@ -152,8 +152,8 @@ $$H = \frac{1}{2}(p_x \cos\theta + p_y \sin\theta)^2 + \frac{1}{2} p_\theta^2.$$
 **Geodesics are Euler's elastica.** The projection of SE(2) geodesics onto the
 $(x,y)$-plane satisfies the elastica ODE — the same curves Euler studied in 1744 when
 minimising the integral of squared curvature. The curvature along these curves is
-$\kappa(s) = 2k\,\mathrm{sn}(s \mid k^2)$, directly expressed through Jacobi's
-elliptic sine, with spatial period $T = 4K(k^2)$.
+$\kappa(s) = 2k\,\mathrm{cn}(s \mid k^2)$, directly expressed through Jacobi's
+elliptic cosine, with spatial period $T = 4K(k^2)$.
 
 ## Key Results Covered
 
