@@ -172,8 +172,27 @@
   color: var(--text-muted);
   border-left: 2px solid var(--border);
   padding-left: 14px;
+  transition: border-left-color 0.18s, background 0.18s, color 0.18s;
 }
 .l-body > aside a, .l-body > .marginnote a { color: var(--accent); }
+
+/* Annotated terms — dashed underline, highlights paired note on hover */
+.annotated-term {
+  border-bottom: 1px dashed var(--text-muted);
+  cursor: help;
+  transition: border-bottom-color 0.18s, color 0.18s;
+}
+.annotated-term.is-active {
+  border-bottom-color: var(--accent);
+  color: var(--accent);
+}
+.l-body > aside.is-highlighted {
+  border-left-color: var(--accent);
+  background: var(--accent-light);
+  border-radius: 0 4px 4px 0;
+  padding-right: 10px;
+  color: var(--text);
+}
 
 /* Narrow screen: collapse back into the flow below the paragraph */
 @media (max-width: 900px) {

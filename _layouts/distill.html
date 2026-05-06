@@ -80,6 +80,29 @@ layout: default
 {{ content }}
 </article>
 
+<script>
+(function () {
+  function wire() {
+    document.querySelectorAll('.annotated-term[data-note]').forEach(function (term) {
+      var note = document.getElementById(term.dataset.note);
+      if (!note) return;
+      term.addEventListener('mouseenter', function () {
+        note.classList.add('is-highlighted');
+        term.classList.add('is-active');
+      });
+      term.addEventListener('mouseleave', function () {
+        note.classList.remove('is-highlighted');
+        term.classList.remove('is-active');
+      });
+      note.addEventListener('mouseenter', function () { term.classList.add('is-active'); });
+      note.addEventListener('mouseleave', function () { term.classList.remove('is-active'); });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wire);
+  else wire();
+}());
+</script>
+
 <!-- ── Series navigation (prev / next) ── -->
 {% if page.series %}
 {% assign series_data = site.data.series | where: "id", page.series | first %}
