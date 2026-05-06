@@ -275,6 +275,14 @@ fields
 $$X_1 \;=\; \cos\theta\,\partial_x + \sin\theta\,\partial_y, \qquad
   X_2 \;=\; \partial_\theta.$$
 
+<aside>
+A vector field $X$ on a Lie group is <strong>left-invariant</strong> if it is unchanged
+by every left-translation: $(L_g)_* X = X$ for all $g$.
+Left-invariant fields are determined entirely by their value at the identity, so
+the space of all of them is isomorphic to the Lie algebra $\mathfrak{g}$.
+For SE(2) this yields the global frame $\{X_1, X_2, X_3\}$.  See Appendix A1.
+</aside>
+
 The third direction — sliding the locus *perpendicular* to the current
 orientation — is **forbidden**:
 
@@ -428,6 +436,16 @@ whose velocity lies in $\mathcal{H}$ at every point. Geometrically,
 $\mathcal{H}$ is a **contact structure** on $\mathrm{SE}(2)$, and Petitot's
 key insight is that the V1 cortex *is* this contact manifold.
 
+<aside>
+The <strong>Hörmander condition</strong> (1967): the vector fields and all their iterated
+Lie brackets together span the full tangent space at every point.
+It is the key criterion for hypoellipticity and, via Chow–Rashevskii, for the
+existence of horizontal paths between any two points.
+For SE(2): $\{X_1, X_2, [X_1,X_2]\} = \{X_1, X_2, X_3\}$ already spans
+$\mathbb{R}^3$, so depth-1 brackets suffice.
+See Appendix A2 for the full statement.
+</aside>
+
 ## The Sub-Riemannian Metric and the Minimisation Problem
 
 We equip the horizontal distribution $\mathcal{H}$ with the left-invariant
@@ -437,6 +455,15 @@ $$\langle u_1 X_1 + u_2 X_2,\; u_1 X_1 + u_2 X_2 \rangle = u_1^2 + u_2^2.$$
 This defines a **sub-Riemannian (SR) metric** on SE(2): the length of a horizontal
 curve is $\int_0^T \sqrt{u_1^2 + u_2^2}\,dt$, and the SR distance between two points
 is the infimum of lengths over all horizontal paths.
+
+<aside>
+A <strong>sub-Riemannian metric</strong> is like a Riemannian metric, but an inner
+product is defined only on a sub-bundle $\mathcal{H}\subsetneq TM$, not on all of $TM$.
+Motion <em>outside</em> $\mathcal{H}$ is forbidden, not merely costly — there is no
+finite-length "shortcut" through the forbidden directions.
+SR geometry arises naturally wherever there are non-holonomic constraints
+(rolling wheels, robot arms, the visual cortex).
+</aside>
 
 The **visual completion problem** now takes a precise form:
 

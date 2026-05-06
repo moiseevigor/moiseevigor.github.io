@@ -56,9 +56,26 @@ cotangent bundle, evolving alongside the state:
 
 $$\lambda \in T^{*}_{g}\,\mathrm{SE}(2).$$
 
+<aside>
+A <strong>covector</strong> at $g$ is a linear map $T_g\,\mathrm{SE}(2)\!\to\!\mathbb{R}$ — it
+"prices" each velocity direction.  The cotangent bundle $T^*\mathrm{SE}(2)$ collects all
+such maps over every base point; it is the natural phase space for Hamiltonian mechanics
+on a Lie group.  See Appendix A3 for the PMP derivation.
+</aside>
+
 In the left-trivialisation provided by the Lie algebra,
 
 $$T^{*}\mathrm{SE}(2) \;\cong\; \mathrm{SE}(2) \times \mathfrak{se}(2)^{*},$$
+
+<aside>
+Because SE(2) is a Lie group it is <em>parallelisable</em>: the basis
+$\{X_1, X_2, X_3\}$ of the Lie algebra $\mathfrak{se}(2)$ extends to a global frame
+via left-multiplication, giving a global identification
+$T^*\mathrm{SE}(2) \cong \mathrm{SE}(2)\times\mathfrak{se}(2)^*$.
+This <strong>left-trivialisation</strong> converts the costate $\lambda$ — a priori a
+section of an abstract bundle — into three ordinary numbers $(h_1, h_2, h_3)$
+evolving by ODEs.  See Appendix A1.
+</aside>
 
 the costate becomes a triple of components $(h_1, h_2, h_3)$ defined by
 
@@ -85,6 +102,14 @@ The Hamiltonian equations on $\mathfrak{se}(2)^{*}$ read
 $$\dot h_1 = \{h_1, \mathcal{H}_n\} = h_2 h_3, \qquad
   \dot h_2 = \{h_2, \mathcal{H}_n\} = -h_1 h_3, \qquad
   \dot h_3 = \{h_3, \mathcal{H}_n\} = 0.$$
+
+<aside>
+$\{\cdot,\cdot\}$ is the <strong>Lie–Poisson bracket</strong> on $\mathfrak{se}(2)^*$,
+the natural Poisson structure on the dual of any Lie algebra.
+For $\mathrm{se}(2)^*$ the non-zero brackets between basis functionals are
+$\{h_1, h_3\} = h_2$ and $\{h_2, h_3\} = -h_1$, which is precisely what the
+right-hand sides above encode.
+</aside>
 
 Thus $h_3 = \omega_0 = \text{const}$. Setting $c = h_1^2 + h_2^2$ (also
 constant, since $\mathcal{H}_n = \tfrac{1}{2}c$), we may write
