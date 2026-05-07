@@ -51,9 +51,6 @@ $$\min \int_0^T \sqrt{u_1^2 + u_2^2}\,dt, \qquad \dot g = u_1 X_1(g) + u_2 X_2(g
 We use the standard normalisation $u_1^2 + u_2^2 = 1$ (unit-speed parametrisation),
 which reduces the problem to minimising $T$ — the total arc length.
 
-The **Pontryagin Maximum Principle** (PMP) introduces a <span class="annotated-term" data-note="note-covector">covector</span> $\lambda$ in the
-cotangent bundle, evolving alongside the state:
-
 <aside id="note-covector">
 A <strong>covector</strong> at $g$ is a linear map $T_g\,\mathrm{SE}(2)\!\to\!\mathbb{R}$ — it
 "prices" each velocity direction.  The cotangent bundle $T^*\mathrm{SE}(2)$ collects all
@@ -61,9 +58,10 @@ such maps over every base point; it is the natural phase space for Hamiltonian m
 on a Lie group.  See Appendix A3 for the PMP derivation.
 </aside>
 
-$$\lambda \in T^{*}_{g}\,\mathrm{SE}(2).$$
+The **Pontryagin Maximum Principle** (PMP) introduces a <span class="annotated-term" data-note="note-covector">covector</span> $\lambda$ in the
+cotangent bundle, evolving alongside the state:
 
-In the <span class="annotated-term" data-note="note-left-triv">left-trivialisation</span> provided by the Lie algebra,
+$$\lambda \in T^{*}_{g}\,\mathrm{SE}(2).$$
 
 <aside id="note-left-triv">
 Because SE(2) is a Lie group it is <em>parallelisable</em>: the basis
@@ -74,6 +72,8 @@ This <strong>left-trivialisation</strong> converts the costate $\lambda$ — a p
 section of an abstract bundle — into three ordinary numbers $(h_1, h_2, h_3)$
 evolving by ODEs.  See Appendix A1.
 </aside>
+
+In the <span class="annotated-term" data-note="note-left-triv">left-trivialisation</span> provided by the Lie algebra,
 
 $$T^{*}\mathrm{SE}(2) \;\cong\; \mathrm{SE}(2) \times \mathfrak{se}(2)^{*},$$
 
@@ -97,8 +97,6 @@ For $\mathrm{SE}(2)$ they exist but are never strictly optimal (Sachkov 2004).
 We focus on normal extremals throughout.
 </aside>
 
-The Hamiltonian equations on $\mathfrak{se}(2)^{*}$, via the <span class="annotated-term" data-note="note-lie-poisson">Lie–Poisson bracket</span>, read
-
 <aside id="note-lie-poisson">
 $\{\cdot,\cdot\}$ is the <strong>Lie–Poisson bracket</strong> on $\mathfrak{se}(2)^*$,
 the natural Poisson structure on the dual of any Lie algebra. With
@@ -106,6 +104,8 @@ $[X_1, X_2] = -X_3$, $[X_2, X_3] = -X_1$, $[X_1, X_3] = 0$ in our body frame,
 the brackets between coordinate functionals are
 $\{h_1, h_2\} = h_3$, $\{h_2, h_3\} = h_1$, $\{h_1, h_3\} = 0$.
 </aside>
+
+The Hamiltonian equations on $\mathfrak{se}(2)^{*}$, via the <span class="annotated-term" data-note="note-lie-poisson">Lie–Poisson bracket</span>, read
 
 $$\dot h_1 = \{h_1, \mathcal{H}_n\} = h_2 h_3, \quad
   \dot h_2 = \{h_2, \mathcal{H}_n\} = -h_1 h_3, \quad

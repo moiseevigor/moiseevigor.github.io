@@ -278,9 +278,6 @@ its neural locus in only two ways:
 - $X_2$ — *rotate the preferred orientation* in place: the position stays
   the same, the orientation changes.
 
-In $(x, y, \theta)$ coordinates these are the two <span class="annotated-term" data-note="note-left-inv">left-invariant</span> vector
-fields
-
 <aside id="note-left-inv">
 A vector field $X$ on a Lie group is <strong>left-invariant</strong> if it is unchanged
 by every left-translation: $(L_g)_* X = X$ for all $g$.
@@ -288,6 +285,9 @@ Left-invariant fields are determined entirely by their value at the identity, so
 the space of all of them is isomorphic to the Lie algebra $\mathfrak{g}$.
 For SE(2) this yields the global frame $\{X_1, X_2, X_3\}$.  See Appendix A1.
 </aside>
+
+In $(x, y, \theta)$ coordinates these are the two <span class="annotated-term" data-note="note-left-inv">left-invariant</span> vector
+fields
 
 $$X_1 \;=\; \cos\theta\,\partial_x + \sin\theta\,\partial_y, \qquad
   X_2 \;=\; \partial_\theta.$$
@@ -447,13 +447,6 @@ $T_g\,\mathrm{SE}(2) \cong \mathbb{R}^3$ at every $g$, the 2-plane field
 
 $$\mathcal{H} \;:=\; \mathrm{span}\{X_1, X_2\}$$
 
-satisfies the <span class="annotated-term" data-note="note-hormander"><strong>Hörmander (bracket-generating) condition</strong></span>. By the
-**Chow–Rashevskii theorem** (1938, 1938) any two configurations in
-$\mathrm{SE}(2)$ can therefore be joined by a *horizontal* path — a curve
-whose velocity lies in $\mathcal{H}$ at every point. Geometrically,
-$\mathcal{H}$ is a **contact structure** on $\mathrm{SE}(2)$, and Petitot's
-key insight is that the V1 cortex *is* this contact manifold.
-
 <aside id="note-hormander">
 The <strong>Hörmander condition</strong> (1967): the vector fields and all their iterated
 Lie brackets together span the full tangent space at every point.
@@ -464,15 +457,18 @@ $\mathbb{R}^3$, so depth-1 brackets suffice.
 See Appendix A2 for the full statement.
 </aside>
 
+satisfies the <span class="annotated-term" data-note="note-hormander"><strong>Hörmander (bracket-generating) condition</strong></span>. By the
+**Chow–Rashevskii theorem** (1938, 1938) any two configurations in
+$\mathrm{SE}(2)$ can therefore be joined by a *horizontal* path — a curve
+whose velocity lies in $\mathcal{H}$ at every point. Geometrically,
+$\mathcal{H}$ is a **contact structure** on $\mathrm{SE}(2)$, and Petitot's
+key insight is that the V1 cortex *is* this contact manifold.
+
 ## The Sub-Riemannian Metric and the Minimisation Problem
 
 We equip the horizontal distribution $\mathcal{H}$ with the left-invariant
 inner product:
 $$\langle u_1 X_1 + u_2 X_2,\; u_1 X_1 + u_2 X_2 \rangle = u_1^2 + u_2^2.$$
-
-This defines a <span class="annotated-term" data-note="note-sr-metric"><strong>sub-Riemannian (SR) metric</strong></span> on SE(2): the length of a horizontal
-curve is $\int_0^T \sqrt{u_1^2 + u_2^2}\,dt$, and the SR distance between two points
-is the infimum of lengths over all horizontal paths.
 
 <aside id="note-sr-metric">
 A <strong>sub-Riemannian metric</strong> is like a Riemannian metric, but an inner
@@ -482,6 +478,10 @@ finite-length "shortcut" through the forbidden directions.
 SR geometry arises naturally wherever there are non-holonomic constraints
 (rolling wheels, robot arms, the visual cortex).
 </aside>
+
+This defines a <span class="annotated-term" data-note="note-sr-metric"><strong>sub-Riemannian (SR) metric</strong></span> on SE(2): the length of a horizontal
+curve is $\int_0^T \sqrt{u_1^2 + u_2^2}\,dt$, and the SR distance between two points
+is the infimum of lengths over all horizontal paths.
 
 The **visual completion problem** now takes a precise form:
 
