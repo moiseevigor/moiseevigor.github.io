@@ -158,13 +158,6 @@ Three takeaways:
 
 ## Conjugate points and Jacobi fields
 
-A <span class="annotated-term" data-note="note-jacobi-field">**Jacobi field**</span> along a geodesic $\gamma : [0, T] \to G$ is a
-variational vector field $J(s) \in T_{\gamma(s)} G$ obtained by varying
-$\gamma$ through nearby geodesics with the same $\gamma(0)$.
-Equivalently, $J = \partial_\varepsilon|_{0} \gamma_\varepsilon$, where
-$\gamma_\varepsilon$ is a 1-parameter family of geodesics with $\gamma_0 =
-\gamma$.
-
 <aside id="note-jacobi-field">
 A <strong>Jacobi field</strong> is the linearised version of "wiggle the
 geodesic and see what happens." It satisfies a second-order linear ODE
@@ -175,10 +168,20 @@ initial directions. A <em>conjugate point</em> is where one of these
 fans-out family members closes up again.
 </aside>
 
+A <span class="annotated-term" data-note="note-jacobi-field">**Jacobi field**</span> along a geodesic $\gamma : [0, T] \to G$ is a
+variational vector field $J(s) \in T_{\gamma(s)} G$ obtained by varying
+$\gamma$ through nearby geodesics with the same $\gamma(0)$:
+
+$$J(s) \;=\; \tfrac{\partial}{\partial\varepsilon}\Big|_{\varepsilon=0} \gamma_\varepsilon(s),$$
+
+where $\gamma_\varepsilon$ is a 1-parameter family of geodesics with $\gamma_0 = \gamma$.
+
 A point $\gamma(t^{\ast})$ is a **conjugate point** to $\gamma(0)$ if a
 non-trivial Jacobi field with $J(0) = 0$ also has $J(t^{\ast}) = 0$.
-Equivalently, $t^{\ast}$ is the first time the differential
-$d_{\mu_0}\mathrm{Exp}_t$ becomes singular: $\det d_{\mu_0}\mathrm{Exp}_{t^{\ast}} = 0$.
+Equivalently, $t^{\ast}$ is the first time the differential of the SR
+exponential map becomes singular:
+
+$$\det d_{\mu_0}\!\mathrm{Exp}_{t^{\ast}} \;=\; 0.$$
 
 **The relevance:** past the first conjugate point, the geodesic stops being
 a *local* length-minimiser.  Any sufficiently small perturbation produces

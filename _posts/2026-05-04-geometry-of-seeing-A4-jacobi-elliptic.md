@@ -95,11 +95,6 @@ $m \to 1^-$: $F(\phi\mid 1) = \mathrm{atanh}(\sin\phi)$, so
 $\mathrm{sn}(u\mid 1) = \tanh u$, $\mathrm{cn}(u\mid 1) = \mathrm{dn}(u\mid 1) = \mathrm{sech}\,u$.
 At intermediate $m$ they interpolate.
 
-The functions are <span class="annotated-term" data-note="note-doubly-periodic">**doubly-periodic**</span> when extended to the complex plane:
-$\mathrm{sn}$ has real period $4K(m)$ and imaginary period $2iK(1 - m)$.
-This makes them functions on the elliptic curve $y^2 = (1 - x^2)(1 - mx^2)$
-— from which much of the theory's algebraic structure comes.
-
 <aside id="note-doubly-periodic">
 A function $f : \mathbb{C} \to \mathbb{C}$ is <strong>doubly-periodic</strong>
 if there exist two periods $\omega_1, \omega_2$ with non-real ratio such
@@ -109,6 +104,11 @@ to a well-defined map on the corresponding torus
 $\mathbb{C} / (\mathbb{Z}\omega_1 + \mathbb{Z}\omega_2)$ — the "elliptic
 curve" referenced above.
 </aside>
+
+The functions are <span class="annotated-term" data-note="note-doubly-periodic">**doubly-periodic**</span> when extended to the complex plane:
+$\mathrm{sn}$ has real period $4K(m)$ and imaginary period $2iK(1 - m)$.
+This makes them functions on the elliptic curve $y^2 = (1 - x^2)(1 - mx^2)$
+— from which much of the theory's algebraic structure comes.
 
 </div><!-- /.l-body -->
 

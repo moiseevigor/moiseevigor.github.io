@@ -71,12 +71,6 @@ Two extreme examples we will keep in mind:
   amount $y$.  Curves tangent to $\Delta$ can change $z$ — but only via
   a precise interplay between $x$- and $y$-motion.
 
-A curve $\gamma : [0, T] \to M$ is <span class="annotated-term" data-note="note-horizontal">**horizontal**</span> (or **admissible**) if
-$\dot\gamma(t) \in \Delta_{\gamma(t)}$ for all $t$.  Horizontal curves are
-the only legal trajectories in the V1 model: at every moment the curve's
-velocity must lie in the 2-plane the cortex *can* move through (forward +
-rotate).
-
 <aside id="note-horizontal">
 "Horizontal" here is a borrowed mechanical word — nothing to do with
 gravity. A horizontal curve is one whose velocity always lies in the
@@ -85,6 +79,12 @@ can undergo "for free" are forward along its preferred orientation and
 rotation in place — anything else is forbidden, and a horizontal curve is
 one that never tries the forbidden moves.
 </aside>
+
+A curve $\gamma : [0, T] \to M$ is <span class="annotated-term" data-note="note-horizontal">**horizontal**</span> (or **admissible**) if
+$\dot\gamma(t) \in \Delta_{\gamma(t)}$ for all $t$.  Horizontal curves are
+the only legal trajectories in the V1 model: at every moment the curve's
+velocity must lie in the 2-plane the cortex *can* move through (forward +
+rotate).
 
 ## Frobenius's theorem: when is $\Delta$ integrable?
 
@@ -302,15 +302,6 @@ makes this computation well-posed.
 
 ## Carnot–Carathéodory distance
 
-Once a sub-Riemannian metric $\langle\cdot,\cdot\rangle_p$ on $\Delta_p$ is
-fixed, the **horizontal length** of an admissible curve is
-
-$$L_{\mathrm{SR}}(\gamma) \;:=\; \int_0^T \sqrt{\langle\dot\gamma, \dot\gamma\rangle_{\gamma(t)}}\,dt,$$
-
-and the <span class="annotated-term" data-note="note-cc">**sub-Riemannian distance**</span> $d_{\mathrm{SR}}(p, q)$ is the infimum
-over all admissible curves from $p$ to $q$.  Chow's theorem ensures this
-infimum is finite (the set of admissible curves is non-empty).
-
 <aside id="note-cc">
 $d_{\mathrm{SR}}$ is also called the <strong>Carnot–Carathéodory
 distance</strong>, after the 1909 thermodynamics paper that first used it
@@ -319,6 +310,15 @@ triangle inequality. But the topology it generates can be very different
 from the ambient Riemannian topology — small SR balls are anisotropic
 "pancakes", flat in the bracket direction.
 </aside>
+
+Once a sub-Riemannian metric $\langle\cdot,\cdot\rangle_p$ on $\Delta_p$ is
+fixed, the **horizontal length** of an admissible curve is
+
+$$L_{\mathrm{SR}}(\gamma) \;:=\; \int_0^T \sqrt{\langle\dot\gamma, \dot\gamma\rangle_{\gamma(t)}}\,dt,$$
+
+and the <span class="annotated-term" data-note="note-cc">**sub-Riemannian distance**</span> $d_{\mathrm{SR}}(p, q)$ is the infimum
+over all admissible curves from $p$ to $q$.  Chow's theorem ensures this
+infimum is finite (the set of admissible curves is non-empty).
 
 For the V1 metric of Part 1 with frame $\{X_1, X_2\}$ orthonormal, an
 admissible $\gamma$ writes as $\dot\gamma = u_1(t) X_1 + u_2(t) X_2$ and

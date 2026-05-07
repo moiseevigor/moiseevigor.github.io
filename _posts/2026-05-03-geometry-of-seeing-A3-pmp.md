@@ -163,12 +163,6 @@ and $(g^{\ast}, \lambda^{\ast})$ obey the Hamilton equations of $\mathcal H$ in 
 $\nu = 0$.
 </div>
 
-The key new object is the <span class="annotated-term" data-note="note-costate">**costate**</span> $\lambda \in T^{\ast}M$.  Heuristically, it
-is the Lagrange multiplier enforcing the dynamic constraint $\dot g = f$.
-In a coordinate chart $\lambda = \lambda_i \,dq^i$ and Hamilton's equations
-read $\dot q^i = \partial \mathcal H / \partial \lambda_i$,
-$\dot \lambda_i = -\partial \mathcal H / \partial q^i$.
-
 <aside id="note-costate">
 The <strong>costate</strong> is the optimal-control name for the conjugate
 momentum. In classical mechanics, momentum is paired with position; in
@@ -177,6 +171,12 @@ optimal cost varies with shifts in the trajectory. In our setting it lives
 in $T^{*}\mathrm{SE}(2)$, and via left-trivialisation collapses to three
 numbers $(h_1, h_2, h_3) \in \mathfrak{se}(2)^{*}$ (Appendix A1).
 </aside>
+
+The key new object is the <span class="annotated-term" data-note="note-costate">**costate**</span> $\lambda \in T^{\ast}M$.  Heuristically, it
+is the Lagrange multiplier enforcing the dynamic constraint $\dot g = f$.
+In a coordinate chart $\lambda = \lambda_i \,dq^i$ and Hamilton's equations
+read $\dot q^i = \partial \mathcal H / \partial \lambda_i$,
+$\dot \lambda_i = -\partial \mathcal H / \partial q^i$.
 
 ### Maximising over $u$ for the SR problem
 

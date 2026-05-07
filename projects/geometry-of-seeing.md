@@ -101,34 +101,33 @@ from the main parts.
       links; in development we re-enable the link so locally-rendered drafts
       are reachable from the project index.
     {% endcomment %}
-    {% assign a_dev = jekyll.environment == 'development' %}
     <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
       <td style="padding:8px 12px; color:var(--text-muted,#777);font-family:var(--mono);">A1</td>
-      <td style="padding:8px 12px; color:var(--text-muted,#777);">{% if a_dev %}<a href="/mathematics/2026/05/01/geometry-of-seeing-A1-lie-groups/">Lie Groups, Lie Algebras, and the Exponential Map of SE(2)</a>{% else %}Lie Groups, Lie Algebras, and the Exponential Map of SE(2){% endif %}</td>
+      <td style="padding:8px 12px; color:var(--text-muted,#777);">{% if jekyll.environment == 'development' %}<a href="/mathematics/2026/05/01/geometry-of-seeing-A1-lie-groups/">Lie Groups, Lie Algebras, and the Exponential Map of SE(2)</a>{% else %}Lie Groups, Lie Algebras, and the Exponential Map of SE(2){% endif %}</td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">$\mathfrak{se}(2)$, brackets, $\exp$</td>
       <td style="padding:8px 12px; text-align:center;"><span style="background:#fff3e0;color:#e65100;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">DRAFT</span></td>
     </tr>
     <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
       <td style="padding:8px 12px; color:var(--text-muted,#777);font-family:var(--mono);">A2</td>
-      <td style="padding:8px 12px; color:var(--text-muted,#777);">{% if a_dev %}<a href="/mathematics/2026/05/02/geometry-of-seeing-A2-distributions-contact/">Distributions, Frobenius, and Contact Geometry</a>{% else %}Distributions, Frobenius, and Contact Geometry{% endif %}</td>
+      <td style="padding:8px 12px; color:var(--text-muted,#777);">{% if jekyll.environment == 'development' %}<a href="/mathematics/2026/05/02/geometry-of-seeing-A2-distributions-contact/">Distributions, Frobenius, and Contact Geometry</a>{% else %}Distributions, Frobenius, and Contact Geometry{% endif %}</td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">Chow, contact, V1 horizontality</td>
       <td style="padding:8px 12px; text-align:center;"><span style="background:#fff3e0;color:#e65100;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">DRAFT</span></td>
     </tr>
     <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
       <td style="padding:8px 12px; color:var(--text-muted,#777);font-family:var(--mono);">A3</td>
-      <td style="padding:8px 12px; color:var(--text-muted,#777);">{% if a_dev %}<a href="/mathematics/2026/05/03/geometry-of-seeing-A3-pmp/">Calculus of Variations and the Pontryagin Maximum Principle</a>{% else %}Calculus of Variations and the Pontryagin Maximum Principle{% endif %}</td>
+      <td style="padding:8px 12px; color:var(--text-muted,#777);">{% if jekyll.environment == 'development' %}<a href="/mathematics/2026/05/03/geometry-of-seeing-A3-pmp/">Calculus of Variations and the Pontryagin Maximum Principle</a>{% else %}Calculus of Variations and the Pontryagin Maximum Principle{% endif %}</td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">Lie–Poisson on $\mathfrak{se}(2)^*$</td>
       <td style="padding:8px 12px; text-align:center;"><span style="background:#fff3e0;color:#e65100;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">DRAFT</span></td>
     </tr>
     <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
       <td style="padding:8px 12px; color:var(--text-muted,#777);font-family:var(--mono);">A4</td>
-      <td style="padding:8px 12px; color:var(--text-muted,#777);">{% if a_dev %}<a href="/mathematics/2026/05/04/geometry-of-seeing-A4-jacobi-elliptic/">Jacobi Elliptic Functions, Elliptic Integrals, and the AGM</a>{% else %}Jacobi Elliptic Functions, Elliptic Integrals, and the AGM{% endif %}</td>
+      <td style="padding:8px 12px; color:var(--text-muted,#777);">{% if jekyll.environment == 'development' %}<a href="/mathematics/2026/05/04/geometry-of-seeing-A4-jacobi-elliptic/">Jacobi Elliptic Functions, Elliptic Integrals, and the AGM</a>{% else %}Jacobi Elliptic Functions, Elliptic Integrals, and the AGM{% endif %}</td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">$\mathrm{sn}, \mathrm{cn}, \mathrm{dn}, K(m)$</td>
       <td style="padding:8px 12px; text-align:center;"><span style="background:#fff3e0;color:#e65100;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">DRAFT</span></td>
     </tr>
     <tr>
       <td style="padding:8px 12px; color:var(--text-muted,#777);font-family:var(--mono);">A5</td>
-      <td style="padding:8px 12px; color:var(--text-muted,#777);">{% if a_dev %}<a href="/mathematics/2026/05/05/geometry-of-seeing-A5-sr-exponential/">The Sub-Riemannian Exponential Map of SE(2)</a>{% else %}The Sub-Riemannian Exponential Map of SE(2){% endif %}</td>
+      <td style="padding:8px 12px; color:var(--text-muted,#777);">{% if jekyll.environment == 'development' %}<a href="/mathematics/2026/05/05/geometry-of-seeing-A5-sr-exponential/">The Sub-Riemannian Exponential Map of SE(2)</a>{% else %}The Sub-Riemannian Exponential Map of SE(2){% endif %}</td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">conjugate / cut / Maxwell</td>
       <td style="padding:8px 12px; text-align:center;"><span style="background:#fff3e0;color:#e65100;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">DRAFT</span></td>
     </tr>
