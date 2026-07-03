@@ -44,8 +44,8 @@ BETAS = [0.0, 1.0, 2.0]
 _AXES = lift.hemisphere_axes(42)
 
 
-def lifted_ridgeness_weighted(field, e3, beta):
-    U = lift.orientation_score(field, _AXES, 6.0, 1.5)
+def lifted_ridgeness_weighted(field, e3, beta, sig_par=6.0):
+    U = lift.orientation_score(field, _AXES, sig_par, 1.5)
     if beta:
         for a, n in enumerate(_AXES):
             dot2 = (e3 @ n) ** 2

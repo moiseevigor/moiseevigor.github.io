@@ -23,6 +23,22 @@ published: false
 <div class="l-body" markdown="1">
 
 <div class="callout">
+<div class="callout-title">Status — updated 2026-07-03, after E0–E2</div>
+The program below has been executed through its locally-runnable
+experiments (E0, E0b, E1, E1b, E2 — <code>research/cosmic-web/docs/</code>
+in the repo). Outcome in brief: <strong>H1</strong> holds on exact-truth
+sparse tubular networks (+0.07 completeness, p ≈ 10⁻¹⁴) but does <em>not</em>
+transfer to gravity-shaped webs under method-neutral mass criteria;
+<strong>H2</strong> is refuted (tidal weighting hurts even with a clean
+frame); <strong>H4</strong> is refuted in the bulk — filament assembly is
+transverse pancake infall, not along-axis geodesic transport, with only a
+weak longitudinal residual inside formed filaments. The lifted geometry
+survives as a static descriptor (spine–tidal-frame alignment 0.73–0.76 vs
+0.67 Hessian) rather than a mechanism. E3/H3 (real survey data) remains
+open. Full chain: <code>research/cosmic-web/docs/SYNTHESIS.md</code>.
+</div>
+
+<div class="callout">
 <div class="callout-title">What this document is</div>
 A <strong>scoping document</strong>, not a result. It defines a research program:
 the question, what the literature already says, the candidate edge, the caveats,

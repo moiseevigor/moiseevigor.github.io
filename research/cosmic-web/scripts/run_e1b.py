@@ -46,9 +46,18 @@ def mass_coverage(spine_pts, pos, r0=R0):
     return float((d < r0).mean())
 
 
+def band_mask(rho, pos, lo=2.0, hi=20.0):
+    """Particles in filament-band environments: cell density in (lo, hi),
+    excluding voids and cluster cores."""
+    idx = (np.floor(pos).astype(int)) % N
+    rp = rho[idx[:, 0], idx[:, 1], idx[:, 2]]
+    return (rp > lo) & (rp < hi)
+
+
 def run_seed(seed):
     rng = np.random.default_rng(seed)
     rho, pos = fields.zeldovich_box(N, L, D, rng, trunc=TRUNC)
+    band = band_mask(rho, pos)
     clean = gaussian_filter(np.log1p(rho), 1.0, mode="wrap")
     e3_clean = fields.tidal_frame(clean)
 
@@ -58,16 +67,17 @@ def run_seed(seed):
         e3_sparse = fields.tidal_frame(gal_field)
         ests = {
             "hessian": spines.hessian_ridgeness(gal_field, 1.5),
+            "lift_s3": lifted_ridgeness_weighted(gal_field, None, 0.0, 3.0),
+            "lift_s45": lifted_ridgeness_weighted(gal_field, None, 0.0, 4.5),
             "lift_b0": lifted_ridgeness_weighted(gal_field, None, 0.0),
-            "lift_b1_sparse": lifted_ridgeness_weighted(gal_field, e3_sparse, 1.0),
-            "lift_b1_clean": lifted_ridgeness_weighted(gal_field, e3_clean, 1.0),
         }
         for mname, R in ests.items():
             skel = spines.extract_matched(R, N_TARGET, lo_frac=1.0)
             pts = spines.skeleton_points(skel)
             recs.append({"seed": seed, "n_gal": n_gal, "method": mname,
                          "n_spine": len(pts),
-                         "mass_cov": mass_coverage(pts, pos)})
+                         "mass_cov": mass_coverage(pts, pos),
+                         "band_cov": mass_coverage(pts, pos[band])})
     return recs
 
 
@@ -76,14 +86,14 @@ def main():
     with Pool(6) as pool:
         recs = [r for rs in pool.map(run_seed, SEEDS) for r in rs]
     print(f"{len(SEEDS)} seeds in {time.time()-t0:.0f}s")
-    (ROOT / "artifacts" / "e1b_results.json").write_text(
+    (ROOT / "artifacts" / "e1b_sigpar_results.json").write_text(
         json.dumps(recs, indent=1))
     report(recs)
 
 
 def report(recs):
     from scipy.stats import wilcoxon
-    methods = ["hessian", "lift_b0", "lift_b1_sparse", "lift_b1_clean"]
+    methods = ["hessian", "lift_s3", "lift_s45", "lift_b0"]
     md = ["# E1b — method-neutral H1 on gravity fields: mass coverage at "
           "matched spine length\n",
           f"Setup: {len(SEEDS)} truncated-ZA boxes as in E1. Criterion "
@@ -93,25 +103,28 @@ def report(recs):
           f"{N_TARGET * 4 * np.pi * R0 ** 2 / 3 / N ** 3 * 100:.0f}% of the "
           "volume if spread randomly — differences measure how well spines "
           "sit on mass.\n"]
-    md.append("| n_gal | method | mass coverage | Δ vs hessian (p) "
-              "| Δ vs lift_b0 (p) |")
-    md.append("|---|---|---|---|---|")
+    md.append("| n_gal | method | mass coverage | band coverage (2<ρ<20) "
+              "| Δband vs hessian (p) | Δband vs lift_b0 (p) |")
+    md.append("|---|---|---|---|---|---|")
     for n_gal in LEVELS:
-        by = {m: {r["seed"]: r["mass_cov"] for r in recs
+        by = {m: {r["seed"]: r for r in recs
                   if r["n_gal"] == n_gal and r["method"] == m}
               for m in methods}
         for m in methods:
-            c = np.array([by[m][s] for s in SEEDS])
+            c = np.array([by[m][s]["mass_cov"] for s in SEEDS])
+            b = np.array([by[m][s]["band_cov"] for s in SEEDS])
             cells = []
             for refm in ("hessian", "lift_b0"):
                 if m == refm:
                     cells.append("—")
                     continue
-                d = np.array([by[m][s] - by[refm][s] for s in SEEDS])
+                d = np.array([by[m][s]["band_cov"] - by[refm][s]["band_cov"]
+                              for s in SEEDS])
                 cells.append(f"{d.mean():+.4f} ({wilcoxon(d).pvalue:.2g})")
             md.append(f"| {n_gal} | {m} | {c.mean():.4f} ± {c.std():.4f} "
+                      f"| {b.mean():.4f} ± {b.std():.4f} "
                       f"| {cells[0]} | {cells[1]} |")
-    out = ROOT / "docs" / "E1b-report.md"
+    out = ROOT / "docs" / "E1b-sigpar-report.md"
     out.write_text("\n".join(md) + "\n")
     print(f"wrote {out}")
     print("\n".join(md[4:]))
