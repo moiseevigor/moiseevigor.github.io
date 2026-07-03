@@ -28,21 +28,77 @@ def paired_delta(results, sub, key, level):
 def table(data):
     res = data["results"]
     levels = sorted({r["n_gal"] for r in res})
-    lines = ["| n_gal | method | completeness | purity | junction F1 | Δ(lift−hess) C |",
+    lines = ["| n_gal | method | completeness mean ± sd | median (p10–p90) "
+             "| purity | junction F1 |",
              "|---|---|---|---|---|---|"]
     for L in levels:
-        dC = paired_delta(res, "M1", "completeness", L)
         for name in ("se3_lift", "hessian"):
-            c = agg(res, name, "M1", "completeness", L)
+            c = np.array(agg(res, name, "M1", "completeness", L))
             p = agg(res, name, "M1", "purity", L)
             f = agg(res, name, "M2", "f1", L)
-            delta = (f"**{np.mean(dC):+.3f}** ({sum(d > 0 for d in dC)}/{len(dC)} seeds +)"
-                     if name == "se3_lift" else "")
             lines.append(
-                f"| {L} | {name} | {np.mean(c):.3f} ± {np.std(c):.3f} "
+                f"| {L} | {name} | {c.mean():.3f} ± {c.std():.3f} "
+                f"| {np.median(c):.3f} ({np.percentile(c, 10):.3f}–"
+                f"{np.percentile(c, 90):.3f}) "
                 f"| {np.mean(p):.3f} ± {np.std(p):.3f} "
-                f"| {np.mean(f):.3f} ± {np.std(f):.3f} | {delta} |")
+                f"| {np.mean(f):.3f} ± {np.std(f):.3f} |")
     return "\n".join(lines)
+
+
+def delta_table(data):
+    """Paired per-seed differences (se3_lift - hessian), the H1 evidence."""
+    from scipy.stats import wilcoxon
+    res = data["results"]
+    levels = sorted({r["n_gal"] for r in res})
+    lines = ["| n_gal | n seeds | ΔC mean | ΔC median (p10–p90) | lift wins "
+             "| Wilcoxon p (ΔC) | ΔjF1 mean | Wilcoxon p (ΔjF1) |",
+             "|---|---|---|---|---|---|---|---|"]
+    for L in levels:
+        dC = np.array(paired_delta(res, "M1", "completeness", L))
+        dF = np.array(paired_delta(res, "M2", "f1", L))
+        pC = wilcoxon(dC).pvalue if np.any(dC) else 1.0
+        pF = wilcoxon(dF).pvalue if np.any(dF) else 1.0
+        lines.append(
+            f"| {L} | {len(dC)} | **{dC.mean():+.3f}** "
+            f"| {np.median(dC):+.3f} ({np.percentile(dC, 10):+.3f}–"
+            f"{np.percentile(dC, 90):+.3f}) "
+            f"| {int((dC > 0).sum())}/{len(dC)} | {pC:.2g} "
+            f"| {dF.mean():+.3f} | {pF:.2g} |")
+    return "\n".join(lines)
+
+
+def delta_figure(data, tag):
+    """Box + jittered scatter of paired deltas per level: the key plot."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    res = data["results"]
+    levels = sorted({r["n_gal"] for r in res})
+    rng = np.random.default_rng(0)
+    fig, axs = plt.subplots(1, 2, figsize=(12, 4.6))
+    for ax, sub, key, title in [
+            (axs[0], "M1", "completeness",
+             "Δ completeness (SE(3) lift − Hessian), paired per seed"),
+            (axs[1], "M2", "f1",
+             "Δ junction F1 (SE(3) lift − Hessian), paired per seed")]:
+        ds = [paired_delta(res, sub, key, L) for L in levels]
+        ax.axhline(0, color="k", lw=0.8)
+        ax.boxplot(ds, positions=range(len(levels)), widths=0.5,
+                   showfliers=False)
+        for i, d in enumerate(ds):
+            ax.plot(i + rng.uniform(-0.15, 0.15, len(d)), d, ".",
+                    ms=3, color="tab:blue", alpha=0.4)
+        ax.set_xticks(range(len(levels)), [str(L) for L in levels])
+        ax.set_xlabel("n_gal (galaxies per $128^3$ box)")
+        ax.set_ylabel("Δ (dimensionless, + favours lift)")
+        ax.set_title(title, fontsize=10)
+        ax.grid(alpha=0.3, axis="y")
+    fig.suptitle(f"E0a-{tag}: paired per-seed differences over "
+                 f"{max(len(d) for d in ds)} held-out seeds "
+                 "(box = quartiles, dots = individual seeds)")
+    fig.tight_layout()
+    fig.savefig(ROOT / "docs" / "figures" / f"e0_delta_{tag}.png", dpi=130)
+    plt.close(fig)
 
 
 def spark(vals, lo=0.0, hi=1.0):
@@ -97,8 +153,16 @@ def main():
         md.append(f"\n## {tag.capitalize()} filaments\n")
         md.append(f"Chosen configs — lift: `{data['chosen_params']['se3_lift']}`, "
                   f"hessian: `{data['chosen_params']['hessian']}`.\n")
+        md.append("\n### Per-method summary\n")
         md.append(table(data))
-        md.append(f"\n![E0a {tag}: completeness, purity, junction F1 vs "
+        md.append("\n### Paired differences (the H1 evidence)\n")
+        md.append(delta_table(data))
+        delta_figure(data, tag)
+        md.append(f"\n![E0a {tag}: box plots with per-seed points of paired "
+                  f"delta completeness and delta junction F1 vs galaxy "
+                  f"count; positive favours the lift]"
+                  f"(figures/e0_delta_{tag}.png)\n")
+        md.append(f"![E0a {tag}: completeness, purity, junction F1 vs "
                   f"galaxy count, both methods, mean ± sd over held-out "
                   f"seeds](figures/e0_curves_{tag}.png)\n")
         md.append(f"![E0a {tag}: 6-voxel slab of the galaxy field with truth "
@@ -130,9 +194,12 @@ def main():
         "\n**Supported (partially):** the orientation lift consistently "
         "improves spine completeness in the sparse-sampling regime (the "
         "survey-realistic one), at a small purity cost and matched skeleton "
-        "length; the Hessian baseline is marginally better when sampling is "
-        "dense. **Not supported:** (i) the junction sub-claim — M2 is "
-        "statistically tied; (ii) the hypoelliptic-diffusion component — "
+        "length; the Hessian baseline is marginally but significantly "
+        "better when sampling is dense — a crossover, not a uniform win. "
+        "At n=50 seeds the junction sub-claim resolves the same way: "
+        "junction F1 significantly favours the lift at the sparsest level "
+        "and the Hessian at dense levels (see the paired-difference "
+        "tables). **Not supported:** the hypoelliptic-diffusion component — "
         "calibration rejected it (diff_iter=0 won) on BOTH straight and "
         "curved filaments, so all observed gains come from the elongated "
         "oriented filters alone.\n")
