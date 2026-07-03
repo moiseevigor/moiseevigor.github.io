@@ -85,9 +85,13 @@ The **Hamiltonian** for the PMP maximisation condition is
 
 $$H = h_1 u_1 + h_2 u_2 - \nu \sqrt{u_1^2 + u_2^2},$$
 
-where $\nu \in \{0, \tfrac{1}{2}\}$ is the abnormality constant.
-For **normal extremals** ($\nu = \tfrac{1}{2}$), maximising over $u_1, u_2$
-gives the **normal Hamiltonian**
+where $\nu \in \{0, 1\}$ is the abnormality constant ($\nu = 1$ for
+**normal** extremals, $\nu = 0$ for abnormal; Appendix A3 carries out the
+maximisation in full).
+Minimising length is equivalent to minimising the energy
+$\tfrac12\!\int(u_1^2 + u_2^2)\,dt$ over a fixed interval (Cauchy–Schwarz),
+and for normal extremals the PMP maximisation then
+delivers the **normal (sub-Riemannian) Hamiltonian**
 
 $$\mathcal{H}_n = \tfrac{1}{2}\bigl(h_1^2 + h_2^2\bigr).$$
 
@@ -191,15 +195,14 @@ delivered for the SR-on-SE(2) costate phase.
 
 The pendulum equation lives on the costate, but the figures below plot the
 **curvature $\kappa(s)$ of the projected plane curve in its own Euclidean
-arc length $s$**. These two are tied together by a quick computation.
+arc length $s$** — and $s$ is not the costate time $t$: the two are tied
+together by $ds = |h_1|\,dt$.
 
-In unit-speed parametrisation $h_1^{2}+h_2^{2}=1$, the projected speed is
-$|h_1| = |\sin(\varphi/2)|$ and the heading derivative is $\dot\theta = h_2 = \cos(\varphi/2)$.
-Reparametrising by Euclidean arc length $s$ with $ds = |h_1|\,dt$, and using
-$\dot\varphi = \pm 2 h_3$, a short calculation gives an explicit closed-form
-$\kappa(s)$ in each regime — the three Jacobi-elliptic curvature profiles
-below. They satisfy the **elastica curvature ODE** (the Duffing form
-equivalent to the pendulum)
+Pushing the pendulum solution through that reparametrisation is the technical
+heart of the reduction, and it is carried out in full in Appendix A3. The
+outcome is what matters here: in each regime $\kappa(s)$ comes out in closed
+form as one of the three Jacobi-elliptic profiles below, and each one solves
+the **elastica curvature ODE** — the Duffing form equivalent to the pendulum,
 
 $$\kappa''(s) + \tfrac{1}{2}\kappa(s)^{3} - \mu\,\kappa(s) \;=\; 0,$$
 
@@ -374,8 +377,9 @@ The browser figures on this page use the same AGM algorithm implemented in
 For the Jacobi functions themselves:
 
 ```python
-from elliptic import ellipj
+from elliptic import ellipj, ellipticK
 
+K = ellipticK(k**2)            # quarter-period of sn, cn
 s = np.linspace(-2*K, 2*K, 800)
 sn, cn, dn = ellipj(s, k**2)
 kappa = 2 * k * cn             # curvature of inflectional elastica
@@ -417,9 +421,9 @@ In the `elliptic` package:
 ```python
 from elliptic import elliptic12
 
-phi = np.arcsin(k * sn)
-E_vals, F_vals = elliptic12(phi, k**2)   # E(φ|k²) and F(φ|k²)
-x = 2 * (E_vals - F_vals / 2)            # exact formula from Sachkov (2011)
+am = np.arcsin(sn)                       # Jacobi amplitude am(s | k²)
+F_vals, E_vals = elliptic12(am, k**2)    # F(am | k²) = s  and  E(am | k²)
+x = 2 * E_vals - F_vals                  # x(s) = 2 E(am(s)|k²) − s  (Sachkov 2011)
 ```
 
 The full closed-form expressions — due to Sachkov (2011) — express every
@@ -435,8 +439,9 @@ A few landmarks worth noting:
 - **$k = 0.1$** (inflectional): nearly straight, very gentle curvature oscillation.
   The curve barely bends before straightening again.
 
-- **$k \approx 0.71$** (inflectional): the "figure-eight" lemniscate — the curve
-  crosses itself once per period and the endpoints of one period coincide.
+- **$k \approx 0.909$** (inflectional): the "figure-eight" lemniscate — at the
+  modulus where $2E(k^2) = K(k^2)$, the curve crosses itself once per period and
+  the endpoints of one period coincide.
   This is the **Maxwell stratum** for the symmetric geodesics (Part 3).
 
 - **$k \to 1^-$** (inflectional → Euler spiral): the period $4K(k^2)$ diverges and
