@@ -23,18 +23,21 @@ published: false
 <div class="l-body" markdown="1">
 
 <div class="callout">
-<div class="callout-title">Status — updated 2026-07-03, after E0–E2</div>
+<div class="callout-title">Status — updated 2026-07-04, after E0–E2 + correction</div>
 The program below has been executed through its locally-runnable
-experiments (E0, E0b, E1, E1b, E2 — <code>research/cosmic-web/docs/</code>
-in the repo). Outcome in brief: <strong>H1</strong> holds on exact-truth
-sparse tubular networks (+0.07 completeness, p ≈ 10⁻¹⁴) but does <em>not</em>
-transfer to gravity-shaped webs under method-neutral mass criteria;
-<strong>H2</strong> is refuted (tidal weighting hurts even with a clean
-frame); <strong>H4</strong> is refuted in the bulk — filament assembly is
-transverse pancake infall, not along-axis geodesic transport, with only a
-weak longitudinal residual inside formed filaments. The lifted geometry
-survives as a static descriptor (spine–tidal-frame alignment 0.73–0.76 vs
-0.67 Hessian) rather than a mechanism. E3/H3 (real survey data) remains
+experiments (E0–E2 and follow-ups — <code>research/cosmic-web/docs/</code>
+in the repo), including a <strong>correction pass</strong>: the initial
+sparse-regime H1 win (+0.07 completeness, p ≈ 10⁻¹⁴) was an evaluation
+artifact (skeleton length matched on a proxy, not the skeleton itself) and
+does not survive the fixed extractor. Corrected outcome: <strong>H1</strong>
+refuted — the Hessian matches or beats the lift at every sampling density on
+exact-truth toys and on gravity-shaped webs (ZA, N-body, 256³), with a tie
+only at ultra-sparse sampling; <strong>H2</strong> refuted (tidal weighting
+hurts even with a clean frame); <strong>H4</strong> refuted in the bulk —
+filament assembly is transverse pancake infall, not along-axis geodesic
+transport. Survivors: the lift as anisotropy descriptor (spine–tidal-frame
+alignment 0.73–0.76 vs 0.67), a hybrid score improving purity/junctions,
+and the methodological lesson itself. E3/H3 (real survey data) remains
 open. Full chain: <code>research/cosmic-web/docs/SYNTHESIS.md</code>.
 </div>
 

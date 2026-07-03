@@ -18,30 +18,33 @@
 
 ## Straight filaments
 
-Chosen configs — lift: `{'sig_par': 6.0, 'sig_perp': 1.5, 'diff_iter': 0}`, hessian: `{'sigma': 1.5}`.
+Chosen configs — lift: `{'sig_par': 6.0, 'sig_perp': 1.5, 'diff_iter': 2}`, hessian: `{'sigma': 2.0}`.
 
 
 ### Per-method summary
 
 | n_gal | method | completeness mean ± sd | median (p10–p90) | purity | junction F1 |
 |---|---|---|---|---|---|
-| 2500 | se3_lift | 0.819 ± 0.047 | 0.813 (0.762–0.883) | 0.957 ± 0.011 | 0.568 ± 0.051 |
-| 2500 | hessian | 0.749 ± 0.037 | 0.748 (0.704–0.793) | 0.975 ± 0.006 | 0.536 ± 0.060 |
-| 5000 | se3_lift | 0.933 ± 0.022 | 0.936 (0.898–0.959) | 0.980 ± 0.007 | 0.610 ± 0.054 |
-| 5000 | hessian | 0.886 ± 0.026 | 0.882 (0.849–0.922) | 0.991 ± 0.004 | 0.612 ± 0.053 |
-| 20000 | se3_lift | 0.964 ± 0.013 | 0.966 (0.944–0.982) | 0.986 ± 0.006 | 0.619 ± 0.054 |
-| 20000 | hessian | 0.984 ± 0.008 | 0.985 (0.974–0.993) | 0.997 ± 0.002 | 0.652 ± 0.049 |
-| 80000 | se3_lift | 0.960 ± 0.016 | 0.962 (0.935–0.976) | 0.983 ± 0.006 | 0.608 ± 0.054 |
-| 80000 | hessian | 0.984 ± 0.008 | 0.986 (0.976–0.992) | 0.998 ± 0.002 | 0.657 ± 0.054 |
+| 1200 | se3_lift | 0.813 ± 0.032 | 0.812 (0.780–0.852) | 0.685 ± 0.059 | 0.383 ± 0.056 |
+| 1200 | hessian | 0.811 ± 0.029 | 0.812 (0.777–0.843) | 0.695 ± 0.034 | 0.455 ± 0.051 |
+| 2500 | se3_lift | 0.867 ± 0.037 | 0.871 (0.823–0.904) | 0.847 ± 0.052 | 0.464 ± 0.065 |
+| 2500 | hessian | 0.912 ± 0.023 | 0.908 (0.887–0.945) | 0.758 ± 0.054 | 0.469 ± 0.057 |
+| 5000 | se3_lift | 0.886 ± 0.038 | 0.892 (0.837–0.929) | 0.919 ± 0.029 | 0.512 ± 0.060 |
+| 5000 | hessian | 0.938 ± 0.018 | 0.939 (0.913–0.960) | 0.913 ± 0.049 | 0.541 ± 0.066 |
+| 20000 | se3_lift | 0.890 ± 0.038 | 0.896 (0.838–0.930) | 0.937 ± 0.022 | 0.530 ± 0.076 |
+| 20000 | hessian | 0.943 ± 0.025 | 0.949 (0.910–0.973) | 0.974 ± 0.012 | 0.592 ± 0.057 |
+| 80000 | se3_lift | 0.882 ± 0.037 | 0.886 (0.829–0.930) | 0.932 ± 0.023 | 0.523 ± 0.073 |
+| 80000 | hessian | 0.939 ± 0.024 | 0.943 (0.906–0.968) | 0.973 ± 0.012 | 0.591 ± 0.054 |
 
 ### Paired differences (the H1 evidence)
 
 | n_gal | n seeds | ΔC mean | ΔC median (p10–p90) | lift wins | Wilcoxon p (ΔC) | ΔjF1 mean | Wilcoxon p (ΔjF1) |
 |---|---|---|---|---|---|---|---|
-| 2500 | 50 | **+0.070** | +0.074 (+0.026–+0.116) | 48/50 | 5.9e-14 | +0.031 | 0.0015 |
-| 5000 | 50 | **+0.048** | +0.044 (+0.016–+0.088) | 48/50 | 1.2e-14 | -0.002 | 0.5 |
-| 20000 | 50 | **-0.020** | -0.019 (-0.032–-0.009) | 1/50 | 3.6e-15 | -0.033 | 1.3e-07 |
-| 80000 | 50 | **-0.024** | -0.022 (-0.037–-0.010) | 1/50 | 3.6e-15 | -0.049 | 5e-11 |
+| 1200 | 50 | **+0.003** | +0.002 (-0.029–+0.035) | 27/50 | 0.47 | -0.071 | 5.9e-10 |
+| 2500 | 50 | **-0.045** | -0.041 (-0.083–-0.018) | 3/50 | 2.5e-14 | -0.005 | 0.5 |
+| 5000 | 50 | **-0.053** | -0.050 (-0.096–-0.016) | 0/50 | 1.8e-15 | -0.028 | 0.00065 |
+| 20000 | 50 | **-0.053** | -0.050 (-0.087–-0.028) | 0/50 | 1.8e-15 | -0.062 | 5e-11 |
+| 80000 | 50 | **-0.057** | -0.054 (-0.083–-0.036) | 0/50 | 1.8e-15 | -0.068 | 5.6e-11 |
 
 ![E0a straight: box plots with per-seed points of paired delta completeness and delta junction F1 vs galaxy count; positive favours the lift](figures/e0_delta_straight.png)
 
@@ -52,30 +55,33 @@ Chosen configs — lift: `{'sig_par': 6.0, 'sig_perp': 1.5, 'diff_iter': 0}`, he
 
 ## Curved filaments
 
-Chosen configs — lift: `{'sig_par': 6.0, 'sig_perp': 1.5, 'diff_iter': 0}`, hessian: `{'sigma': 1.5}`.
+Chosen configs — lift: `{'sig_par': 6.0, 'sig_perp': 1.5, 'diff_iter': 2}`, hessian: `{'sigma': 1.5}`.
 
 
 ### Per-method summary
 
 | n_gal | method | completeness mean ± sd | median (p10–p90) | purity | junction F1 |
 |---|---|---|---|---|---|
-| 2500 | se3_lift | 0.816 ± 0.038 | 0.816 (0.771–0.863) | 0.951 ± 0.015 | 0.559 ± 0.053 |
-| 2500 | hessian | 0.747 ± 0.033 | 0.747 (0.711–0.780) | 0.974 ± 0.007 | 0.515 ± 0.043 |
-| 5000 | se3_lift | 0.931 ± 0.022 | 0.930 (0.906–0.960) | 0.974 ± 0.009 | 0.600 ± 0.056 |
-| 5000 | hessian | 0.887 ± 0.025 | 0.883 (0.861–0.923) | 0.990 ± 0.004 | 0.599 ± 0.050 |
-| 20000 | se3_lift | 0.965 ± 0.014 | 0.966 (0.949–0.983) | 0.983 ± 0.006 | 0.611 ± 0.050 |
-| 20000 | hessian | 0.985 ± 0.007 | 0.985 (0.977–0.993) | 0.997 ± 0.002 | 0.652 ± 0.047 |
-| 80000 | se3_lift | 0.959 ± 0.015 | 0.960 (0.942–0.975) | 0.980 ± 0.008 | 0.604 ± 0.055 |
-| 80000 | hessian | 0.984 ± 0.008 | 0.985 (0.976–0.993) | 0.997 ± 0.002 | 0.658 ± 0.052 |
+| 1200 | se3_lift | 0.813 ± 0.030 | 0.815 (0.775–0.849) | 0.677 ± 0.050 | 0.376 ± 0.047 |
+| 1200 | hessian | 0.810 ± 0.024 | 0.806 (0.784–0.841) | 0.707 ± 0.036 | 0.435 ± 0.039 |
+| 2500 | se3_lift | 0.869 ± 0.032 | 0.874 (0.835–0.895) | 0.828 ± 0.055 | 0.459 ± 0.061 |
+| 2500 | hessian | 0.919 ± 0.017 | 0.921 (0.899–0.936) | 0.778 ± 0.034 | 0.484 ± 0.042 |
+| 5000 | se3_lift | 0.891 ± 0.036 | 0.899 (0.846–0.930) | 0.909 ± 0.029 | 0.508 ± 0.053 |
+| 5000 | hessian | 0.956 ± 0.013 | 0.953 (0.944–0.975) | 0.866 ± 0.050 | 0.510 ± 0.052 |
+| 20000 | se3_lift | 0.892 ± 0.043 | 0.902 (0.834–0.941) | 0.933 ± 0.026 | 0.520 ± 0.071 |
+| 20000 | hessian | 0.956 ± 0.021 | 0.960 (0.932–0.982) | 0.971 ± 0.017 | 0.593 ± 0.058 |
+| 80000 | se3_lift | 0.884 ± 0.046 | 0.888 (0.817–0.931) | 0.927 ± 0.028 | 0.519 ± 0.069 |
+| 80000 | hessian | 0.950 ± 0.024 | 0.951 (0.919–0.977) | 0.974 ± 0.013 | 0.600 ± 0.053 |
 
 ### Paired differences (the H1 evidence)
 
 | n_gal | n seeds | ΔC mean | ΔC median (p10–p90) | lift wins | Wilcoxon p (ΔC) | ΔjF1 mean | Wilcoxon p (ΔjF1) |
 |---|---|---|---|---|---|---|---|
-| 2500 | 50 | **+0.069** | +0.068 (+0.020–+0.116) | 49/50 | 1.2e-14 | +0.044 | 7.7e-07 |
-| 5000 | 50 | **+0.044** | +0.050 (+0.010–+0.073) | 48/50 | 1.6e-13 | +0.001 | 0.69 |
-| 20000 | 50 | **-0.019** | -0.018 (-0.032–-0.009) | 1/50 | 8.9e-15 | -0.041 | 2.5e-10 |
-| 80000 | 50 | **-0.025** | -0.023 (-0.042–-0.012) | 0/50 | 1.8e-15 | -0.054 | 3.4e-14 |
+| 1200 | 50 | **+0.004** | +0.010 (-0.037–+0.044) | 30/50 | 0.36 | -0.059 | 8.9e-10 |
+| 2500 | 50 | **-0.050** | -0.049 (-0.074–-0.016) | 0/50 | 1.8e-15 | -0.025 | 0.0054 |
+| 5000 | 50 | **-0.064** | -0.062 (-0.104–-0.029) | 0/50 | 7.6e-10 | -0.003 | 0.75 |
+| 20000 | 50 | **-0.064** | -0.059 (-0.101–-0.028) | 0/50 | 1.8e-15 | -0.073 | 3.1e-12 |
+| 80000 | 50 | **-0.066** | -0.062 (-0.104–-0.033) | 0/50 | 1.8e-15 | -0.081 | 1.8e-15 |
 
 ![E0a curved: box plots with per-seed points of paired delta completeness and delta junction F1 vs galaxy count; positive favours the lift](figures/e0_delta_curved.png)
 
@@ -86,10 +92,10 @@ Chosen configs — lift: `{'sig_par': 6.0, 'sig_perp': 1.5, 'diff_iter': 0}`, he
 
 ## Verdict on H1 (toy-level)
 
-- **straight**: at the sparsest level (n_gal=2500) the lift wins completeness on 48/50 held-out seeds, mean Δ = +0.070 (Wilcoxon signed-rank p = 5.9e-14); at the densest level Δ = -0.024 (p = 3.6e-15).
-- **curved**: at the sparsest level (n_gal=2500) the lift wins completeness on 49/50 held-out seeds, mean Δ = +0.069 (Wilcoxon signed-rank p = 1.2e-14); at the densest level Δ = -0.025 (p = 1.8e-15).
+- **straight**: at the sparsest level (n_gal=1200) the lift wins completeness on 27/50 held-out seeds, mean Δ = +0.003 (Wilcoxon signed-rank p = 0.47); at the densest level Δ = -0.057 (p = 1.8e-15).
+- **curved**: at the sparsest level (n_gal=1200) the lift wins completeness on 30/50 held-out seeds, mean Δ = +0.004 (Wilcoxon signed-rank p = 0.36); at the densest level Δ = -0.066 (p = 1.8e-15).
 
-**Supported (partially):** the orientation lift consistently improves spine completeness in the sparse-sampling regime (the survey-realistic one), at a small purity cost and matched skeleton length; the Hessian baseline is marginally but significantly better when sampling is dense — a crossover, not a uniform win. At n=50 seeds the junction sub-claim resolves the same way: junction F1 significantly favours the lift at the sparsest level and the Hessian at dense levels (see the paired-difference tables). **Not supported:** the hypoelliptic-diffusion component — calibration rejected it (diff_iter=0 won) on BOTH straight and curved filaments, so all observed gains come from the elongated oriented filters alone.
+**Not supported (CORRECTED result).** An earlier version of this report claimed a sparse-regime lift win (+0.07 completeness at n_gal=2500). That was an evaluation artifact: the original extractor targeted mask volume, and realized skeleton lengths differed systematically between methods (lift ~19% longer at sparse levels) — longer skeletons buy completeness mechanically. With skeleton length enforced (iterative correction to the target), the Hessian matches or beats the lift at every sampling level on both variants; the lift's best case is a statistical tie at the ultra-sparse level (n_gal=1200, p≈0.4). Junction F1 favours the Hessian at essentially all levels. The diffusion component remains rejected by calibration (weak diffusion shows a small positive only at n_gal=1200 in the E0b sweep, +0.01). Detection of the artifact: an instrument change made for E1 (connected-web extraction) retroactively changed E0 parent scores; the n_est fields in the archived E0 results confirmed the length mismatch.
 
 
 ## Open questions / next tests

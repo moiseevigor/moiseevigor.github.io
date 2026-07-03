@@ -41,7 +41,7 @@ CFG = dict(
     sigma_perp_gal=0.8,          # transverse galaxy scatter (voxels)
     bg_frac=0.25,
     bend_frac=BEND,              # 0 = straight Voronoi edges, >0 = Bezier bend
-    n_gal_levels=[8000] if SMOKE else [2500, 5000, 20000, 80000],
+    n_gal_levels=[8000] if SMOKE else [1200, 2500, 5000, 20000, 80000],
     cal_seed=1,
     eval_seeds=[2] if SMOKE else list(range(2, 2 + N_EVAL)),
     r0_spine=2.0,

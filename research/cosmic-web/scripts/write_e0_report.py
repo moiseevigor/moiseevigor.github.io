@@ -191,18 +191,23 @@ def main():
             f"Δ = {np.mean(dd):+.3f} (p = {p_dense:.2g}).")
     md.append("\n".join(verdict))
     md.append(
-        "\n**Supported (partially):** the orientation lift consistently "
-        "improves spine completeness in the sparse-sampling regime (the "
-        "survey-realistic one), at a small purity cost and matched skeleton "
-        "length; the Hessian baseline is marginally but significantly "
-        "better when sampling is dense — a crossover, not a uniform win. "
-        "At n=50 seeds the junction sub-claim resolves the same way: "
-        "junction F1 significantly favours the lift at the sparsest level "
-        "and the Hessian at dense levels (see the paired-difference "
-        "tables). **Not supported:** the hypoelliptic-diffusion component — "
-        "calibration rejected it (diff_iter=0 won) on BOTH straight and "
-        "curved filaments, so all observed gains come from the elongated "
-        "oriented filters alone.\n")
+        "\n**Not supported (CORRECTED result).** An earlier version of this "
+        "report claimed a sparse-regime lift win (+0.07 completeness at "
+        "n_gal=2500). That was an evaluation artifact: the original "
+        "extractor targeted mask volume, and realized skeleton lengths "
+        "differed systematically between methods (lift ~19% longer at "
+        "sparse levels) — longer skeletons buy completeness mechanically. "
+        "With skeleton length enforced (iterative correction to the "
+        "target), the Hessian matches or beats the lift at every sampling "
+        "level on both variants; the lift's best case is a statistical tie "
+        "at the ultra-sparse level (n_gal=1200, p≈0.4). Junction F1 "
+        "favours the Hessian at essentially all levels. The diffusion "
+        "component remains rejected by calibration (weak diffusion shows a "
+        "small positive only at n_gal=1200 in the E0b sweep, +0.01). "
+        "Detection of the artifact: an instrument change made for E1 "
+        "(connected-web extraction) retroactively changed E0 parent "
+        "scores; the n_est fields in the archived E0 results confirmed the "
+        "length mismatch.\n")
 
     md.append(
         "\n## Open questions / next tests\n\n"

@@ -26,7 +26,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
 N, SEED = 128, 2
-LEVELS = [2500, 5000, 20000, 80000]
+LEVELS = [1200, 2500, 5000, 20000, 80000]
 _AXES = lift.hemisphere_axes(42)
 
 

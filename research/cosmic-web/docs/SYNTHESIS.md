@@ -1,30 +1,45 @@
 # Program synthesis — geometry of the cosmic web (E0–E2)
 
-One-line summary: **the orientation lift is a real instrument win on sparse
-tubular networks with exact ground truth, but on gravity-shaped webs every
-strong form of the geometric thesis tested so far fails — and the failures
-are informative.**
+One-line summary: **under correctly length-matched evaluation the simple
+Hessian baseline matches or beats the orientation lift essentially
+everywhere as a filament finder; the lift survives as an anisotropy
+descriptor, a hybrid ingredient, and the program's physics probes produced
+clean refutations of the geometric transport thesis.**
 
-All experiments: 128³ boxes, matched spine length, calibrate/held-out
-discipline, paired Wilcoxon statistics. Chain of hypotheses, in the order
-they were tested and what each result forced next:
+> **Correction (2026-07-04).** The first E0 verdict ("lift wins sparse-regime
+> completeness +0.07, p≈10⁻¹⁴") was an evaluation artifact. Length matching
+> was enforced on a proxy (hysteresis-mask volume); realized skeleton lengths
+> differed systematically (lift ~19% longer at sparse levels), and length
+> buys completeness. The corrected extractor (iterative correction until the
+> skeleton itself hits the target) flips the sign. Detected when an
+> instrument change made for E1 retroactively shifted E0 parent scores; the
+> archived n_est fields confirmed the mismatch. All numbers below are from
+> the corrected reruns.
+
+All experiments: 128³ boxes (256³ resolution check), matched spine length,
+calibrate/held-out discipline, paired Wilcoxon statistics. Chain of
+hypotheses, in the order they were tested and what each result forced next:
 
 ## H1 — the lift is a better filament finder
 
-- **Exact-truth toys (E0, 50 seeds × 2 curvature variants): crossover,
-  strongly significant.** At sparse sampling the lift wins spine
-  completeness (+0.070, 48–49/50 seeds, p ≈ 10⁻¹⁴) and junction F1
-  (+0.03–0.04); at dense sampling the Hessian wins both by ~0.02–0.05.
-  The lift is specifically a *sparse-data* instrument.
-- **Gravity-shaped webs (E1, E1b): the toy advantage does not transfer.**
+- **Exact-truth toys (E0 corrected, 50 seeds × 2 curvature variants):
+  refuted.** The Hessian wins completeness at every level from n_gal=2500 up
+  (−0.045 to −0.066, 50/50 seeds, p ≈ 10⁻¹⁵) and junction F1 with it; at
+  ultra-sparse n_gal=1200 the methods are statistically tied (Δ ≈ +0.004,
+  p ≈ 0.4). The pre-correction "sparse-regime crossover" does not survive
+  honest length matching.
+- **Gravity-shaped webs (E1, E1b): consistent with the corrected toys.**
   Skeleton-vs-skeleton scoring first collapsed to reference circularity
   (each method wins against its own clean reference — E1's 2×2 design
   caught this). The method-neutral criterion (mass coverage at matched
-  length, E1b) then gave the Hessian a significant win at *all* sampling
-  levels, in total mass AND in filament-band mass (2<ρ<20), at *all*
-  filter scales σ∥ ∈ {3, 4.5, 6} (p ≤ 0.001). ZA filaments are winding,
-  anisotropic ribbons, not straight Gaussian tubes; pointwise curvature
-  tracks their crests better than any elongated window tried.
+  length, E1b) gave the Hessian a significant win at *all* sampling
+  levels, in total mass AND in filament-band mass (2<ρ<20), on truncated-ZA
+  and PM N-body fields and at 256³ resolution; the short-cigar lift's best
+  case is a statistical tie at sparse sampling on N-body fields (p = 0.55).
+- **Hybrid (E0c):** summing the two percentile-normalised scores ties the
+  Hessian's completeness at 2500 and beats it on purity (+0.05) and
+  junction F1 (+0.040, p = 1.3×10⁻⁴) at 5000, at a −0.02 completeness cost
+  — the two responses carry complementary information.
 
 ## H2 — physics-informed (tidal) coefficients help
 
@@ -51,21 +66,26 @@ filaments.
 1. **E1-M3:** unweighted lift spines align with the tidal eigenframe at
    0.73–0.76 vs Hessian 0.67 (null 0.5) — the lifted geometry is a better
    *static descriptor* of web anisotropy even where it loses on mass.
-2. **E0b:** hypoelliptic diffusion (splitting scheme) is strictly harmful
-   at every curvature × sparsity tested — all of the lift's toy gains come
-   from the angularly-sharp elongated filters, none from evidence
-   propagation. (Caveat: crude numerical scheme, not the exact SE(3)
-   kernel.)
-3. **E2's instrument recovered known Zel'dovich pancake physics** from
+2. **E0b (corrected rerun):** strong hypoelliptic diffusion (splitting
+   scheme) is harmful at every curvature × sparsity tested including the
+   most-curved tercile; weak diffusion is neutral-to-harmful except a small
+   positive (+0.01, p=0.03) at the ultra-sparse level. (Caveat: crude
+   numerical scheme, not the exact SE(3) kernel.)
+3. **E0c hybrid:** the sum of normalised scores improves purity and
+   junction F1 over the Hessian at moderate sparsity — a practical recipe.
+4. **E2's instrument recovered known Zel'dovich pancake physics** from
    scratch — the perpendicular-infall signature — which validates the PM +
    tracking pipeline.
+5. **The length-matching lesson:** matched comparisons must enforce the
+   match on the score-buying quantity itself (realized skeleton length),
+   not a proxy (mask volume). The proxy manufactured a p≈10⁻¹⁴ phantom win.
 
 ## Status of the program's claims
 
-- **C1 (methodological)** survives only in restricted form: orientation
-  lifting is the better spine-geometry estimator for *sparse samples of
-  thin, tube-like networks* (the CLAMATO-like regime), not a general
-  cosmic-web improvement.
+- **C1 (methodological)** is refuted as a general claim: at honest matched
+  length the Hessian is at least as good everywhere tested, with the lift
+  tying only at ultra-sparse sampling. What survives of C1: the anisotropy
+  description (M3) and the hybrid's purity/junction gains.
 - **C2 (physical)** is refuted as stated: the intrinsic-manifold geodesics
   do not drive filament assembly; assembly is transverse collapse in the
   tidal eigenframe, with the lifted geometry emerging as a *description* of

@@ -6,8 +6,9 @@ subtitle: >
   sparse galaxy data is a geometry problem. We race two models — a local
   curvature test against an orientation-lifted measurement borrowed from the
   visual cortex — on thousands of synthetic universes with exact ground truth.
-  The interactive plots below show precisely when each one wins, and where each
-  one fails.
+  The interactive plots below show what each model can and cannot do — and how
+  a subtle evaluation bug manufactured a spectacular "win" that a correct
+  benchmark then took away.
 date: 2026-07-04 09:00:00
 categories: [mathematics]
 tags: [cosmic-web, sub-riemannian, SE3, filaments, data-analysis]
@@ -30,8 +31,9 @@ sub-Riemannian machinery from the
 of Seeing</a> series find <em>cosmic filaments</em>? Two models are defined
 with all their mathematics, then raced under strict fairness rules on
 synthetic universes where the truth is known exactly. Interactive figures let
-you explore the results yourself: a <strong>crossover</strong> in sampling
-density, a junction weakness, a surprising rejection of diffusion, and a
+you explore the results yourself — including the <strong>evaluation
+artifact</strong> that briefly made the fancier model look seven points
+better, the corrected verdict, a surprising rejection of diffusion, and a
 dynamical test that refutes the prettiest version of the theory. Every number
 comes from the actual experiment data in the repo
 (<code>research/cosmic-web/</code>).
@@ -137,7 +139,7 @@ truth; blue is each model's recovered skeleton.
     </span>
     <span class="cw-ctl" style="margin-left:1.2em;">
       galaxies:
-      <button class="cw-btn cw-lvl active" data-n="2500">2.5k</button><button class="cw-btn cw-lvl" data-n="5000">5k</button><button class="cw-btn cw-lvl" data-n="20000">20k</button><button class="cw-btn cw-lvl" data-n="80000">80k</button>
+      <button class="cw-btn cw-lvl" data-n="1200">1.2k</button><button class="cw-btn cw-lvl active" data-n="2500">2.5k</button><button class="cw-btn cw-lvl" data-n="5000">5k</button><button class="cw-btn cw-lvl" data-n="20000">20k</button><button class="cw-btn cw-lvl" data-n="80000">80k</button>
     </span>
   </div>
   <img id="cw-slice-img" src="/public/img/posts/cosmic-web/slice_curved_2500.png"
@@ -146,21 +148,41 @@ truth; blue is each model's recovered skeleton.
   <figcaption>
     <strong>Interactive.</strong> One 6-voxel slab of a 128³ test box (1 voxel
     = 1 h⁻¹Mpc). Left: input galaxy field with the exact truth (red). Middle:
-    SE(3)-lift skeleton (blue). Right: Hessian skeleton (blue). At 2.5k
-    galaxies the lift bridges gaps the Hessian leaves broken; at 80k both are
+    SE(3)-lift skeleton (blue). Right: Hessian skeleton (blue). At 1.2–2.5k
+    galaxies both struggle in different ways — the lift draws smoother,
+    longer strands, the Hessian hugs density clumps; at 80k both are
     near-perfect. Buttons switch the precomputed result images.
   </figcaption>
 </figure>
 
 <div class="l-body" markdown="1">
 
-## When which model wins — the crossover
+## The result — and the bug that almost fooled us
 
-Fifty held-out random universes per variant, four sampling densities, three
+Fifty held-out random universes per variant, five sampling densities, three
 scores: **completeness** (fraction of the true network within 2 voxels of the
 estimate), **purity** (the converse), **junction F1** (branch-point recovery).
-The story is not "one model is better" — it is a clean **crossover** in
-sampling density.
+
+Before showing the verdict, a confession that is the most instructive part of
+this article. The first version of this benchmark reported a spectacular
+result: the lift beating the Hessian by **+7 points of completeness** at
+sparse sampling, on 48 of 50 seeds, p ≈ 10⁻¹⁴. It was wrong — not the
+arithmetic, the *evaluation*. Our "matched skeleton length" rule was enforced
+indirectly, by matching the *volume* of a thresholded mask before
+skeletonising. The two models' masks skeletonise differently: at sparse
+sampling the lift's realized skeletons came out **19% longer** than the
+Hessian's (1,468 vs 1,239 voxels against a 3,300 target). A longer curve
+network mechanically covers more truth — completeness was being bought with
+unaccounted length. The bug surfaced only because a later experiment forced
+an extractor improvement (iterative correction until the *skeleton itself*
+hits the target length), and re-running the old benchmark under the fixed
+instrument flipped its sign. Every figure below uses the corrected
+extractor.
+
+The corrected verdict: **the Hessian matches or beats the lift at every
+sampling density**. At the ultra-sparse end (1,200 galaxies) the two are
+statistically tied (Δ = +0.004, p = 0.36); everywhere else the Hessian wins
+completeness by 4–7 points on 50 of 50 seeds, and junction F1 with it.
 
 </div><!-- /.l-body -->
 
@@ -176,10 +198,11 @@ sampling density.
   <div id="cw-crossover"></div>
   <figcaption>
     <strong>Interactive.</strong> Mean score vs. galaxies per box (log axis),
-    50 held-out seeds, matched skeleton length. Blue: SE(3) lift; orange:
-    Hessian. Hover for values. The completeness curves cross between 5k and
-    20k galaxies: the lift is a <em>sparse-data</em> instrument. Junction F1
-    shows the same crossover — and is where both models are weakest overall.
+    50 held-out seeds, skeleton length now genuinely matched. Blue: SE(3)
+    lift; orange: Hessian. Hover for values. The Hessian curve sits on or
+    above the lift's at every density; the gap closes to a tie only at the
+    ultra-sparse end. Junction F1 (third toggle) is where both models are
+    weakest overall.
   </figcaption>
 </figure>
 
@@ -187,7 +210,11 @@ sampling density.
 
 Averages can hide seed luck, so the next figure shows every seed: each dot is
 one universe, plotted by the *paired difference* (lift − Hessian) on that
-exact realization. Above the zero line, the lift won that universe.
+exact realization. Above the zero line, the lift won that universe. Under the
+corrected extractor the clouds sit at zero for 1.2k galaxies and below zero
+everywhere else — compare this with the phantom +0.07 cloud the buggy
+benchmark produced, which looked exactly this decisive in the other
+direction.
 
 </div><!-- /.l-body -->
 
@@ -204,42 +231,47 @@ exact realization. Above the zero line, the lift won that universe.
   <figcaption>
     <strong>Interactive.</strong> Per-seed paired differences (positive =
     lift wins), 50 dots per column, with the per-column mean (bar) and win
-    count. At 2.5k galaxies the lift wins completeness on 48–49 of 50 seeds
-    (Wilcoxon p ≈ 10⁻¹⁴); at 20k–80k the entire cloud sits below zero —
-    a small but equally significant Hessian win. Junction F1 shows the same
-    sign flip.
+    count. At 1.2k galaxies the cloud straddles zero (statistical tie,
+    p ≈ 0.4); from 2.5k upward it sits entirely below zero — the Hessian
+    wins on 50/50 seeds, Wilcoxon p ≈ 10⁻¹⁵. Junction F1 favours the
+    Hessian at essentially all levels.
   </figcaption>
 </figure>
 
 <div class="l-body" markdown="1">
 
-**Why the crossover exists.** With sparse data, the density at any single
-point is statistically worthless — a pointwise quadratic test has nothing to
-grip. The elongated filter integrates along a whole hypothesised stretch of
-curve, so individually insignificant, collinear galaxies become jointly
-significant — the dashed-line effect. With dense data, local information
-suffices, and the long window becomes a liability: it rounds corners,
-overshoots endpoints, and blurs junctions. Which brings us to the failures.
+**Why the intuition failed.** The dashed-line argument — that integrating
+along a hypothesised curve pools evidence sparse data cannot supply locally —
+is real, and it is why the *unmatched* benchmark looked so good. But the
+elongated window pays for that pooling: it rounds corners, overshoots
+endpoints, displaces spines from winding crests, and blurs junctions. Once
+skeleton length is genuinely equal, those costs eat the pooling gain almost
+exactly; the residue is a tie in the one regime (ultra-sparse) where pooling
+matters most. A useful way to say it: the lift buys *smoothness and
+connectivity*, the Hessian buys *positional accuracy* — and on these
+benchmarks, positional accuracy is what the scores reward.
 
-## Where the lift fails
+## Where each model fails
 
-**Failure 1 — junctions.** Orientation-selective measurement is weakest
-exactly where direction is ill-defined: at branch points the cigar averages
-across the corner. With node clumps removed from the toy (junctions implied
-only by filament continuity), the Hessian wins junction F1 outright
-(−0.03, p = 0.014) even while losing completeness by 5 points. If your
-science is about *nodes*, the lift is the wrong tool.
+**Failure 1 — the lift at junctions.** Orientation-selective measurement is
+weakest exactly where direction is ill-defined: at branch points the cigar
+averages across the corner. With node clumps removed from the toy (junctions
+implied only by filament continuity), the Hessian wins junction F1 by
+0.04–0.05 (p ≈ 10⁻⁴). If your science is about *nodes*, the lift is the
+wrong tool.
 
 **Failure 2 — the diffusion surprise.** The vision theory's second ingredient,
 hypoelliptic diffusion (smooth strongly along $\mathbf{n}$, weakly across and
-in orientation — the contour-completion flow), was given every chance: three
-bend levels up to 50% sag, two sparsity levels, weak and strong settings, and
-scoring binned by local curve curvature. It **lost every single comparison**,
-monotonically in strength (−0.05 to −0.25 completeness, p ≈ 2×10⁻⁶), *even in
-the most-curved third of the network* where it was most expected to help. All
-of the lift's gains come from the angularly-sharp measurement; none from
-evidence propagation. (Caveat: our splitting-scheme implementation is crude —
-a proper SE(3) kernel remains untested.)
+in orientation — the contour-completion flow), was swept over three bend
+levels up to 50% sag, three sparsity levels, weak and strong settings, with
+scoring binned by local curve curvature. Strong diffusion **loses
+everywhere** (−0.06 to −0.12, p ≈ 2×10⁻⁶), including the most-curved third of
+the network where it was most expected to help; weak diffusion is neutral to
+harmful at ordinary sparsity and buys a whisper (+0.01, p = 0.03) only at the
+ultra-sparse level. Essentially all of the lift's power is in the
+angularly-sharp measurement, not in evidence propagation. (Caveat: our
+splitting-scheme implementation is crude — a proper SE(3) kernel remains
+untested.)
 
 **Failure 3 — gravity-shaped webs (with one nuance).** Real filaments are
 not tubes. On gravity-evolved boxes, scored by a method-neutral criterion —
@@ -312,19 +344,26 @@ filament tubes.
 
 | Your situation | Use | Why |
 |---|---|---|
-| Sparse sampling (≲ 1 galaxy per filament-Mpc), tube-like structures | **SE(3) lift** | +7 points completeness, 48–49/50 seeds, p ≈ 10⁻¹⁴ |
-| Dense sampling, or purity-critical work | **Hessian** | small but significant edge everywhere the data are rich |
+| Finding filament spines, any sampling density | **Hessian** | matches or beats the lift at every level tested (50/50 seeds from 2.5k up); simpler and cheaper |
+| Ultra-sparse tube-like data (≲ 0.5 galaxies per filament-Mpc) | either | statistical tie (p ≈ 0.4); the lift's smoother strands may still be preferable downstream |
 | Junctions / nodes are the science | **Hessian** | orientation selectivity fails where direction is ill-defined |
-| Gravity-realistic ribbons, mass-tracing | **Hessian** | wins band mass coverage at all scales tried (p ≤ 0.001) |
-| Describing web *anisotropy* (tangent statistics) | **SE(3) lift** | tidal-frame alignment 0.73–0.76 vs 0.67 |
+| Gravity-realistic ribbons, mass-tracing | **Hessian** | wins band mass coverage on ZA, N-body, and at 0.5 Mpc resolution |
+| Purity- or junction-critical at moderate sparsity | **hybrid (sum of both scores)** | +0.05 purity and +0.04 junction F1 over the Hessian at 5k (p ≈ 10⁻⁴), at a small completeness cost |
+| Describing web *anisotropy* (tangent statistics) | **SE(3) lift** | tidal-frame alignment 0.73–0.76 vs 0.67 — the one job it does better |
 | Modelling filament *formation* | **neither as geodesics** | assembly is transverse infall; E2 refutes along-axis transport |
 
-The honest arc of the program: a clean instrument win in one regime, and a
-cascade of informative refutations everywhere the theory was most romantic.
-The refutations did real work — each one (junctions, diffusion, gravity
-ribbons, transport) redirected the next experiment, and the dynamical
-instrument independently rediscovered textbook Zel'dovich pancake physics,
-which is what lets us trust the negatives.
+The honest arc of the program: a beautiful theory, a benchmark that
+appeared to confirm it spectacularly, an instrument bug found *because* a
+later experiment changed the extractor, and a corrected verdict in which the
+simple model wins nearly everything — with the lifted geometry surviving as
+an anisotropy descriptor, a hybrid ingredient, and a physics probe. Each
+refutation (length artifact, junctions, diffusion, gravity ribbons,
+transport) redirected the next experiment, and the dynamical instrument
+independently rediscovered textbook Zel'dovich pancake physics, which is what
+lets us trust the negatives. If the article leaves one lesson, it is not
+about cosmology: it is that **"matched" comparisons must enforce the match on
+the quantity that buys score** — we matched a proxy (mask volume), and the
+proxy lied for exactly as long as nobody re-measured it.
 
 Full protocols, per-experiment reports with all tables and p-values, and
 one-command reproduction live in
@@ -350,8 +389,10 @@ scoped in the
 - **Hypoelliptic diffusion** — degenerate smoothing on the lifted space,
   strong along $\mathbf{n}$; the contour-completion flow. Rejected by every
   calibration in these experiments.
-- **Matched spine length** — both models' skeletons are pruned to equal
-  total length before scoring, so completeness/purity trade on equal terms.
+- **Matched spine length** — both models' skeletons must have equal total
+  length before scoring, so completeness/purity trade on equal terms.
+  Enforced on the realized skeleton itself (iterative correction), not on a
+  proxy — the difference between the two was this article's headline bug.
 - **Zel'dovich approximation / pancake infall** — ballistic displacement
   model of structure formation; collapse proceeds sheet → filament → node,
   with motion *transverse* to the forming structure.
