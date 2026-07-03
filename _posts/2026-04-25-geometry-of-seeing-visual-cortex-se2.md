@@ -119,7 +119,8 @@ Mapped over a patch of cortex, the preferred orientations rotate continuously �
 completing a full $\pi$-rotation over a distance of about 1&thinsp;mm.
 The resulting pattern of orientation preferences is called an *orientation map*,
 and it exhibits a characteristic structure of *pinwheels*: point singularities
-around which the preferred orientation rotates by $\pm\pi/2$.
+of topological charge $\pm\tfrac12$ — encircle one and the preferred orientation
+sweeps through a full half-turn, $\pm\pi$.
 
 <aside>
 The pinwheel structure was first measured in the cat striate cortex using
@@ -312,7 +313,7 @@ Each leg is small (length $\varepsilon$). The net effect is to leave the
 $\varepsilon^2$ in the **perpendicular** direction:
 
 $$\Phi^{X_2}_{-\varepsilon} \!\circ\! \Phi^{X_1}_{-\varepsilon} \!\circ\! \Phi^{X_2}_{\varepsilon} \!\circ\! \Phi^{X_1}_{\varepsilon}\;(g_0)
-\;=\; g_0 \,+\, \varepsilon^2\, X_3 \,+\, O(\varepsilon^3).$$
+\;=\; g_0 \,-\, \varepsilon^2\, X_3 \,+\, O(\varepsilon^3).$$
 
 <aside id="note-lie-bracket">
 The <strong>Lie bracket</strong> $[X, Y]$ measures the failure of two
@@ -324,9 +325,13 @@ side-by-side derivation.
 </aside>
 
 The infinitesimal limit of this loop is exactly the <span class="annotated-term" data-note="note-lie-bracket">Lie bracket</span> of $X_1$ and
-$X_2$:
+$X_2$. With $X_3$ fixed as above, a direct computation gives
 
-$$[X_1, X_2] \;=\; X_3 \;=\; -\sin\theta\,\partial_x + \cos\theta\,\partial_y.$$
+$$[X_1, X_2] \;=\; -X_3 \;=\; \sin\theta\,\partial_x - \cos\theta\,\partial_y.$$
+
+The sign is a convention artefact — $[X_2, X_1] = X_3$ — and changes nothing
+that follows: what matters is that the bracket points along $X_3$, the
+direction the two horizontal moves cannot reach on their own.
 
 </div><!-- /.l-body -->
 
@@ -441,7 +446,7 @@ $$[X_1, X_2] \;=\; X_3 \;=\; -\sin\theta\,\partial_x + \cos\theta\,\partial_y.$$
 
 ### Hörmander condition ⇒ V1 is a contact manifold
 
-Because $X_3 = [X_1, X_2]$ is *not* in $\mathrm{span}\{X_1, X_2\}$ but the
+Because $[X_1, X_2] = -X_3$ is *not* in $\mathrm{span}\{X_1, X_2\}$ but the
 three together $\{X_1,\, X_2,\, [X_1, X_2]\}$ span the full tangent space
 $T_g\,\mathrm{SE}(2) \cong \mathbb{R}^3$ at every $g$, the 2-plane field
 
@@ -452,13 +457,13 @@ The <strong>Hörmander condition</strong> (1967): the vector fields and all thei
 Lie brackets together span the full tangent space at every point.
 It is the key criterion for hypoellipticity and, via Chow–Rashevskii, for the
 existence of horizontal paths between any two points.
-For SE(2): $\{X_1, X_2, [X_1,X_2]\} = \{X_1, X_2, X_3\}$ already spans
-$\mathbb{R}^3$, so depth-1 brackets suffice.
+For SE(2): $\{X_1, X_2, [X_1,X_2]\}$ spans the same space as $\{X_1, X_2, X_3\}$ —
+all of $\mathbb{R}^3$ — so depth-1 brackets suffice.
 See Appendix A2 for the full statement.
 </aside>
 
 satisfies the <span class="annotated-term" data-note="note-hormander"><strong>Hörmander (bracket-generating) condition</strong></span>. By the
-**Chow–Rashevskii theorem** (1938, 1938) any two configurations in
+**Chow–Rashevskii theorem** (Rashevskii 1938, Chow 1939) any two configurations in
 $\mathrm{SE}(2)$ can therefore be joined by a *horizontal* path — a curve
 whose velocity lies in $\mathcal{H}$ at every point. Geometrically,
 $\mathcal{H}$ is a **contact structure** on $\mathrm{SE}(2)$, and Petitot's
@@ -496,11 +501,12 @@ The spatial projection $(x(t), y(t))$ of the solution is the **perceptually comp
 contour** that the visual system infers between two oriented line elements
 $(x_0,\theta_0)$ and $(x_1,\theta_1)$.
 
-The simplification $u_1 = 1$ (unit forward speed) reduces the problem to minimising
-$$\int_0^L \kappa^2(s)\,ds$$
-where $L$ is arc length and $\kappa = u_2/u_1 = \dot\theta$ is the signed curvature.
-This is the **Euler elastica functional**: the total squared bending energy of the
-projected curve.
+With the normalisation $u_1 = 1$ (unit forward speed), $s$ becomes arc length and
+$\kappa = u_2/u_1 = \dot\theta$ is the signed curvature. The sub-Riemannian extremals
+then project onto the critical curves of the **Euler elastica functional**
+$$\int_0^L \kappa^2(s)\,ds,$$
+the total squared bending energy of the projected curve — the classical bridge,
+made precise in Part&nbsp;2, between geodesics on SE(2) and Euler's elastica.
 
 </div><!-- /.l-body -->
 
@@ -527,9 +533,9 @@ projected curve.
     $k \in (0, 1)$ — <strong>inflectional</strong>, $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^{2})$;
     $k = 1$ — the <strong>Euler / Cornu spiral</strong>, the separatrix
     $\kappa(s) = 2\,\mathrm{sech}\,s$;
-    $k > 1$ — <strong>non-inflectional</strong>, parametrised by
-    $m = 2 - k \in (0, 1)$ with $\kappa(s) = 2\,\mathrm{dn}(s\mid m)$
-    (closed-loop curves with one-signed curvature).
+    $k > 1$ — <strong>non-inflectional</strong>, $\kappa(s) = 2\,\mathrm{dn}(s\mid m)$
+    with its own modulus $m \in (0, 1)$ (closed-loop curves with one-signed
+    curvature); the slider just sweeps $m$ downward as $k$ runs past&nbsp;1.
     Drag the slider to set the maximum $k$ rendered; the vertical bar on the
     right is the colour scale, with the red tick marking the separatrix
     $k = 1$. As $k \to 1$ the period $4K(k^{2})$ diverges and the inflectional
@@ -583,8 +589,10 @@ $L_{\mathrm{SR}}$:
   equal or smaller $L_{\mathrm{SR}}$. At a Maxwell point, two distinct
   globally-optimal geodesics meet with *exactly* the same SR length.
 
-For a sub-Riemannian manifold as symmetric as SE(2), the cut and Maxwell loci coincide
-(this is part of what Sachkov and I proved in arXiv:0807.4731).
+For a sub-Riemannian manifold as symmetric as SE(2), the cut and Maxwell loci are
+tightly linked: characterising the Maxwell strata is the main result of
+arXiv:0807.4731 (Sachkov and I), and pinning the cut locus down exactly is the
+subject of arXiv:0903.0727.
 The first point on the cut locus along a given geodesic is the **cut time**
 $t_\mathrm{cut}$, and it equals the first time the exponential map is no longer
 injective.
