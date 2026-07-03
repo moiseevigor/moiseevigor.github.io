@@ -45,31 +45,48 @@ def _mask(R, hi_val, lo_frac=0.5):
 
 
 def extract_matched(R, n_target, tube_area=9.0, lo_frac=0.5, min_component=4):
-    """Matched-length skeleton: bisect the hi threshold VALUE so the
-    hysteresis mask volume ~ n_target * tube_area voxels (mask volume is
-    strictly monotone in the threshold, unlike skeleton length), then
-    skeletonize once and drop connected components < min_component voxels.
-    Same tube_area for every method keeps the comparison fair."""
+    """Matched-length skeleton. Bisect the hi threshold VALUE so the mask
+    volume ~ n_target * tube_area voxels (mask volume is strictly monotone
+    in the threshold, unlike skeleton length), skeletonize, then correct
+    tube_area from the measured skeleton length and repeat (<=3 rounds) so
+    the SKELETON length itself lands near n_target. Components smaller than
+    min_component voxels are dropped. Same procedure for every method keeps
+    the comparison fair. lo_frac=1.0 disables hysteresis (plain threshold)
+    — required on fully-connected webs where hysteresis floods."""
+
+    def _bisect_mask(v_target):
+        lo_v, hi_v = float(np.percentile(R, 50)), float(R.max())
+        best_mid, best_err = lo_v, np.inf
+        for _ in range(24):
+            mid = 0.5 * (lo_v + hi_v)
+            v = int(_mask(R, mid, lo_frac).sum())
+            err = abs(v - v_target)
+            if err < best_err:
+                best_mid, best_err = mid, err
+            if err <= 0.05 * v_target:
+                break
+            if v > v_target:
+                lo_v = mid
+            else:
+                hi_v = mid
+        return best_mid
+
+    def _skel_at(v_target):
+        skel = skeletonize(_mask(R, _bisect_mask(v_target), lo_frac))
+        lab, nlab = label(skel, structure=np.ones((3, 3, 3)))
+        if nlab:
+            sizes = np.bincount(lab.ravel())
+            skel &= (sizes[lab] >= min_component) & (lab > 0)
+        return skel
+
     v_target = n_target * tube_area
-    lo_v, hi_v = float(np.percentile(R, 50)), float(R.max())
-    best_mid, best_err = lo_v, np.inf
-    for _ in range(24):
-        mid = 0.5 * (lo_v + hi_v)
-        v = int(_mask(R, mid, lo_frac).sum())
-        err = abs(v - v_target)
-        if err < best_err:
-            best_mid, best_err = mid, err
-        if err <= 0.05 * v_target:
+    skel = _skel_at(v_target)
+    for _ in range(3):
+        n = int(skel.sum())
+        if n == 0 or abs(n - n_target) <= 0.15 * n_target:
             break
-        if v > v_target:
-            lo_v = mid
-        else:
-            hi_v = mid
-    skel = skeletonize(_mask(R, best_mid, lo_frac))
-    lab, nlab = label(skel, structure=np.ones((3, 3, 3)))
-    if nlab:
-        sizes = np.bincount(lab.ravel())
-        skel &= (sizes[lab] >= min_component) & (lab > 0)
+        v_target *= n_target / n
+        skel = _skel_at(v_target)
     return skel
 
 

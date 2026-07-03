@@ -150,10 +150,12 @@ def _bbks_pk(k, gamma=0.21):
     return k * T ** 2
 
 
-def zeldovich_box(N, L, D, rng):
+def zeldovich_box(N, L, D, rng, trunc=0.0):
     """Zel'dovich-evolved density: delta_lin normalised to sigma(R=8)=0.8,
-    particles displaced by D * psi, CIC-deposited. Returns density/mean and
-    particle positions (voxel coords)."""
+    particles displaced by D * psi, CIC-deposited. trunc > 0 (Mpc/h) applies
+    Gaussian truncation to the displacement field (truncated ZA; avoids
+    post-shell-crossing washout). Returns density/mean and particle
+    positions (voxel coords)."""
     kf = 2 * np.pi / L
     k1 = np.fft.fftfreq(N, d=1.0 / N) * kf
     kx, ky, kz = np.meshgrid(k1, k1, k1[: N // 2 + 1], indexing="ij")
@@ -170,8 +172,9 @@ def zeldovich_box(N, L, D, rng):
     delta_s = np.fft.irfftn(dk_s, s=(N, N, N))
     dk *= 0.8 / delta_s.std()
 
+    tk = np.exp(-0.5 * k2 * trunc ** 2) if trunc else 1.0
     with np.errstate(divide="ignore", invalid="ignore"):
-        psi_kx, psi_ky, psi_kz = (1j * kj / np.where(k2 == 0, 1, k2) * dk
+        psi_kx, psi_ky, psi_kz = (1j * kj / np.where(k2 == 0, 1, k2) * dk * tk
                                   for kj in (kx, ky, kz))
     # displacement in Mpc/h -> voxels
     to_vox = N / L
@@ -203,10 +206,14 @@ def cic_deposit(pos, N):
     return grid / grid.mean()
 
 
-def galaxy_field(pos, N, n_gal, rng, smooth_sigma=1.0):
+def galaxy_field(pos, N, n_gal, rng, smooth_sigma=1.0, adaptive=False):
     """Poisson-subsample positions to n_gal 'galaxies', CIC-deposit, and apply
-    log transform + light Gaussian smoothing (survey-like reconstruction)."""
+    log transform + Gaussian smoothing. adaptive=True sets the smoothing to
+    ~0.35x the mean galaxy separation (floor smooth_sigma) — necessary for
+    volume-filling samples where fixed light smoothing leaves shot noise."""
     from scipy.ndimage import gaussian_filter
+    if adaptive:
+        smooth_sigma = max(smooth_sigma, 0.35 * (N ** 3 / n_gal) ** (1 / 3))
     sel = rng.choice(len(pos), size=min(n_gal, len(pos)), replace=False)
     field = cic_deposit(pos[sel], N)
     return gaussian_filter(np.log1p(field), smooth_sigma, mode="wrap")
