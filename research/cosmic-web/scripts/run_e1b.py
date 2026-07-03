@@ -28,15 +28,17 @@ from scipy.spatial import cKDTree
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-import fields, spines  # noqa: E402
+import fields, pm, spines  # noqa: E402
 sys.path.insert(0, str(ROOT / "scripts"))
 from run_e1 import lifted_ridgeness_weighted  # noqa: E402
 
 N, L, D, TRUNC = 128, 128.0, 1.0, 2.0
 N_TARGET = 2400
 R0 = 3.0
-SEEDS = list(range(1, 13))
+PM = "--pm" in sys.argv          # real N-body fields instead of truncated ZA
+SEEDS = list(range(1, 9)) if PM else list(range(1, 13))
 LEVELS = [5000, 20000]
+TAG = "pm" if PM else "sigpar"
 
 
 def mass_coverage(spine_pts, pos, r0=R0):
@@ -56,7 +58,11 @@ def band_mask(rho, pos, lo=2.0, hi=20.0):
 
 def run_seed(seed):
     rng = np.random.default_rng(seed)
-    rho, pos = fields.zeldovich_box(N, L, D, rng, trunc=TRUNC)
+    if PM:
+        pos, _, _, _, _ = pm.pm_sim(N, L, rng, n_steps=90, track=1)
+        rho = fields.cic_deposit(pos, N)
+    else:
+        rho, pos = fields.zeldovich_box(N, L, D, rng, trunc=TRUNC)
     band = band_mask(rho, pos)
     clean = gaussian_filter(np.log1p(rho), 1.0, mode="wrap")
     e3_clean = fields.tidal_frame(clean)
@@ -83,10 +89,10 @@ def run_seed(seed):
 
 def main():
     t0 = time.time()
-    with Pool(6) as pool:
+    with Pool(4 if PM else 6) as pool:
         recs = [r for rs in pool.map(run_seed, SEEDS) for r in rs]
     print(f"{len(SEEDS)} seeds in {time.time()-t0:.0f}s")
-    (ROOT / "artifacts" / "e1b_sigpar_results.json").write_text(
+    (ROOT / "artifacts" / f"e1b_{TAG}_results.json").write_text(
         json.dumps(recs, indent=1))
     report(recs)
 
@@ -94,9 +100,9 @@ def main():
 def report(recs):
     from scipy.stats import wilcoxon
     methods = ["hessian", "lift_s3", "lift_s45", "lift_b0"]
-    md = ["# E1b — method-neutral H1 on gravity fields: mass coverage at "
-          "matched spine length\n",
-          f"Setup: {len(SEEDS)} truncated-ZA boxes as in E1. Criterion "
+    md = [f"# E1b-{TAG} — method-neutral H1 on gravity fields "
+          f"({'PM N-body' if PM else 'truncated ZA'}): mass coverage at matched spine length\n",
+          f"Setup: {len(SEEDS)} {'PM N-body' if PM else 'truncated-ZA'} boxes. Criterion "
           f"needs no reference skeleton: fraction of all {N}³ particles "
           f"within r₀={R0} vox of the spine set, spine length matched at "
           f"{N_TARGET} vox. Note the spine budget covers only ~"
@@ -124,7 +130,7 @@ def report(recs):
             md.append(f"| {n_gal} | {m} | {c.mean():.4f} ± {c.std():.4f} "
                       f"| {b.mean():.4f} ± {b.std():.4f} "
                       f"| {cells[0]} | {cells[1]} |")
-    out = ROOT / "docs" / "E1b-sigpar-report.md"
+    out = ROOT / "docs" / f"E1b-{TAG}-report.md"
     out.write_text("\n".join(md) + "\n")
     print(f"wrote {out}")
     print("\n".join(md[4:]))

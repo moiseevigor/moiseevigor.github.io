@@ -58,3 +58,4 @@ keywords
 # research/cosmic-web
 research/cosmic-web/.venv/
 research/cosmic-web/artifacts/
+.claude/launch.json
