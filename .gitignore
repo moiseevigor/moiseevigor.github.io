@@ -54,3 +54,7 @@ __pycache__
 # Backups + local notes
 *.bak
 keywords
+
+# research/cosmic-web
+research/cosmic-web/.venv/
+research/cosmic-web/artifacts/
