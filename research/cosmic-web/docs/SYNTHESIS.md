@@ -103,3 +103,21 @@ filaments.
 - Junction-specialised hybrid (Hessian near direction-degenerate points,
   lift along spines) — motivated by the consistent junction/spine split in
   E0/E0b.
+
+## E0d addendum (post-correction follow-ups, 2026-07-04)
+
+1. **Splitting convergence:** 8-step Trotter splitting at equal total
+   diffusion reproduces the coarse-splitting result at both sparsity levels
+   (fine −0.017 vs coarse −0.020 at n_gal=2500; both ≈ +0.01 at 1200). The
+   diffusion verdict is operator-level, not numerical. Caveat closed.
+2. **Sparsity limit:** no honest lift-win regime exists anywhere: at
+   n_gal=400–600 the Hessian wins again (−0.017/−0.021, p ≈ 0.003); the
+   800–1200 tie is a narrow band, not a trend. The pooling advantage never
+   exceeds the positional-accuracy cost at any tested density.
+3. **Hybrid on gravity:** hyb_sum halves the lift's band-coverage deficit
+   but still trails the Hessian (−0.009, p = 0.04 at 5k; −0.016 at 20k).
+   The hybrid's niche remains toy purity/junctions.
+
+With these, every locally executable hypothesis and caveat of the program
+has a replicated verdict. Remaining: E3/H3 on real survey data (blocked on
+data download approval).

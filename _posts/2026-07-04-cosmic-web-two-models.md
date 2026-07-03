@@ -246,10 +246,12 @@ is real, and it is why the *unmatched* benchmark looked so good. But the
 elongated window pays for that pooling: it rounds corners, overshoots
 endpoints, displaces spines from winding crests, and blurs junctions. Once
 skeleton length is genuinely equal, those costs eat the pooling gain almost
-exactly; the residue is a tie in the one regime (ultra-sparse) where pooling
-matters most. A useful way to say it: the lift buys *smoothness and
-connectivity*, the Hessian buys *positional accuracy* — and on these
-benchmarks, positional accuracy is what the scores reward.
+exactly; the residue is a tie in a narrow ultra-sparse band (800–1,200
+galaxies) — and pushing sparser still (400–600), the Hessian wins *again*
+(−0.02, p ≈ 0.003): below a floor, the long window mostly integrates noise.
+A useful way to say it: the lift buys *smoothness and connectivity*, the
+Hessian buys *positional accuracy* — and on these benchmarks, positional
+accuracy is what the scores reward at every density.
 
 ## Where each model fails
 
@@ -269,9 +271,11 @@ everywhere** (−0.06 to −0.12, p ≈ 2×10⁻⁶), including the most-curved 
 the network where it was most expected to help; weak diffusion is neutral to
 harmful at ordinary sparsity and buys a whisper (+0.01, p = 0.03) only at the
 ultra-sparse level. Essentially all of the lift's power is in the
-angularly-sharp measurement, not in evidence propagation. (Caveat: our
-splitting-scheme implementation is crude — a proper SE(3) kernel remains
-untested.)
+angularly-sharp measurement, not in evidence propagation. (The "crude
+numerics" objection was tested and closed: an 8-step Trotter splitting at
+equal total diffusion — which converges to the true left-invariant
+semigroup — reproduces the coarse result at both sparsity levels. The
+verdict is about the operator.)
 
 **Failure 3 — gravity-shaped webs (with one nuance).** Real filaments are
 not tubes. On gravity-evolved boxes, scored by a method-neutral criterion —
@@ -345,7 +349,7 @@ filament tubes.
 | Your situation | Use | Why |
 |---|---|---|
 | Finding filament spines, any sampling density | **Hessian** | matches or beats the lift at every level tested (50/50 seeds from 2.5k up); simpler and cheaper |
-| Ultra-sparse tube-like data (≲ 0.5 galaxies per filament-Mpc) | either | statistical tie (p ≈ 0.4); the lift's smoother strands may still be preferable downstream |
+| Ultra-sparse tube-like data (a narrow 800–1,200-galaxy band) | either | statistical tie (p ≈ 0.4); sparser still, the Hessian wins again |
 | Junctions / nodes are the science | **Hessian** | orientation selectivity fails where direction is ill-defined |
 | Gravity-realistic ribbons, mass-tracing | **Hessian** | wins band mass coverage on ZA, N-body, and at 0.5 Mpc resolution |
 | Purity- or junction-critical at moderate sparsity | **hybrid (sum of both scores)** | +0.05 purity and +0.04 junction F1 over the Hessian at 5k (p ≈ 10⁻⁴), at a small completeness cost |
