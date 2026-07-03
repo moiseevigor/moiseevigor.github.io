@@ -44,26 +44,6 @@ BETAS = [0.0, 1.0, 2.0]
 _AXES = lift.hemisphere_axes(42)
 
 
-def tidal_frame(field, smooth=4.0):
-    """e3 (min-eigenvalue eigenvector of T = Hess phi) per voxel, from a
-    density field via FFT Poisson solve; T_ij(k) = k_i k_j delta_k / k^2."""
-    delta = field / field.mean() - 1 if field.min() >= 0 else field
-    dk = np.fft.rfftn(delta)
-    k1 = np.fft.fftfreq(N) * 2 * np.pi
-    kx, ky, kz = np.meshgrid(k1, k1, k1[: N // 2 + 1], indexing="ij")
-    k2 = kx ** 2 + ky ** 2 + kz ** 2
-    k2[0, 0, 0] = 1.0
-    sm = np.exp(-0.5 * k2 * smooth ** 2)
-    ks = [kx, ky, kz]
-    T = np.empty((N, N, N, 3, 3), dtype=np.float32)
-    for i in range(3):
-        for j in range(i, 3):
-            tij = np.fft.irfftn(ks[i] * ks[j] / k2 * dk * sm, s=(N, N, N))
-            T[..., i, j] = T[..., j, i] = tij
-    vals, vecs = np.linalg.eigh(T)      # ascending eigenvalues
-    return vecs[..., :, 0]              # e3: min-eigenvalue eigenvector
-
-
 def lifted_ridgeness_weighted(field, e3, beta):
     U = lift.orientation_score(field, _AXES, 6.0, 1.5)
     if beta:
@@ -98,7 +78,7 @@ def run_seed(seed):
     rng = np.random.default_rng(seed)
     rho, pos = fields.zeldovich_box(N, L, D, rng, trunc=TRUNC)
     clean = gaussian_filter(np.log1p(rho), 1.0, mode="wrap")
-    e3_clean = tidal_frame(clean)
+    e3_clean = fields.tidal_frame(clean)
 
     refs = {
         "ref_hessian": spines.skeleton_points(spines.extract_matched(
@@ -111,7 +91,7 @@ def run_seed(seed):
     recs = []
     for n_gal in LEVELS:
         gal_field = fields.galaxy_field(pos, N, n_gal, rng, adaptive=True)
-        e3_sparse = tidal_frame(gal_field)
+        e3_sparse = fields.tidal_frame(gal_field)
         ests = {"hessian": spines.hessian_ridgeness(gal_field, 1.5)}
         for beta in BETAS:
             ests[f"lift_b{beta:g}"] = lifted_ridgeness_weighted(
