@@ -110,17 +110,21 @@ def main():
     res = straight["results"]
     levels = sorted({r["n_gal"] for r in res})
     verdict = []
+    from scipy.stats import wilcoxon
     for tag, data in [("straight", straight), ("curved", curved)]:
         if data is None:
             continue
         r = data["results"]
         d = paired_delta(r, "M1", "completeness", levels[0])
+        dd = paired_delta(r, "M1", "completeness", levels[-1])
+        p_sparse = wilcoxon(d).pvalue if len(d) > 5 else float("nan")
+        p_dense = wilcoxon(dd).pvalue if len(dd) > 5 else float("nan")
         verdict.append(
             f"- **{tag}**: at the sparsest level (n_gal={levels[0]}) the "
             f"lift wins completeness on {sum(x > 0 for x in d)}/{len(d)} "
-            f"held-out seeds, mean Δ = {np.mean(d):+.3f}; at the densest "
-            f"level Δ = "
-            f"{np.mean(paired_delta(r, 'M1', 'completeness', levels[-1])):+.3f}.")
+            f"held-out seeds, mean Δ = {np.mean(d):+.3f} (Wilcoxon "
+            f"signed-rank p = {p_sparse:.2g}); at the densest level "
+            f"Δ = {np.mean(dd):+.3f} (p = {p_dense:.2g}).")
     md.append("\n".join(verdict))
     md.append(
         "\n**Supported (partially):** the orientation lift consistently "

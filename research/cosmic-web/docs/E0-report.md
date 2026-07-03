@@ -22,14 +22,14 @@ Chosen configs — lift: `{'sig_par': 6.0, 'sig_perp': 1.5, 'diff_iter': 0}`, he
 
 | n_gal | method | completeness | purity | junction F1 | Δ(lift−hess) C |
 |---|---|---|---|---|---|
-| 2500 | se3_lift | 0.809 ± 0.045 | 0.954 ± 0.010 | 0.575 ± 0.030 | **+0.067** (5/5 seeds +) |
-| 2500 | hessian | 0.741 ± 0.022 | 0.977 ± 0.005 | 0.557 ± 0.067 |  |
-| 5000 | se3_lift | 0.931 ± 0.026 | 0.983 ± 0.006 | 0.595 ± 0.038 | **+0.039** (5/5 seeds +) |
-| 5000 | hessian | 0.892 ± 0.014 | 0.994 ± 0.001 | 0.620 ± 0.045 |  |
-| 20000 | se3_lift | 0.966 ± 0.008 | 0.987 ± 0.007 | 0.609 ± 0.049 | **-0.020** (0/5 seeds +) |
-| 20000 | hessian | 0.987 ± 0.004 | 0.997 ± 0.002 | 0.641 ± 0.032 |  |
-| 80000 | se3_lift | 0.958 ± 0.006 | 0.980 ± 0.007 | 0.579 ± 0.049 | **-0.029** (0/5 seeds +) |
-| 80000 | hessian | 0.987 ± 0.004 | 0.999 ± 0.002 | 0.659 ± 0.033 |  |
+| 2500 | se3_lift | 0.819 ± 0.047 | 0.957 ± 0.011 | 0.568 ± 0.051 | **+0.070** (48/50 seeds +) |
+| 2500 | hessian | 0.749 ± 0.037 | 0.975 ± 0.006 | 0.536 ± 0.060 |  |
+| 5000 | se3_lift | 0.933 ± 0.022 | 0.980 ± 0.007 | 0.610 ± 0.054 | **+0.048** (48/50 seeds +) |
+| 5000 | hessian | 0.886 ± 0.026 | 0.991 ± 0.004 | 0.612 ± 0.053 |  |
+| 20000 | se3_lift | 0.964 ± 0.013 | 0.986 ± 0.006 | 0.619 ± 0.054 | **-0.020** (1/50 seeds +) |
+| 20000 | hessian | 0.984 ± 0.008 | 0.997 ± 0.002 | 0.652 ± 0.049 |  |
+| 80000 | se3_lift | 0.960 ± 0.016 | 0.983 ± 0.006 | 0.608 ± 0.054 | **-0.024** (1/50 seeds +) |
+| 80000 | hessian | 0.984 ± 0.008 | 0.998 ± 0.002 | 0.657 ± 0.054 |  |
 
 ![E0a straight: completeness, purity, junction F1 vs galaxy count, both methods, mean ± sd over held-out seeds](figures/e0_curves_straight.png)
 
@@ -42,14 +42,14 @@ Chosen configs — lift: `{'sig_par': 6.0, 'sig_perp': 1.5, 'diff_iter': 0}`, he
 
 | n_gal | method | completeness | purity | junction F1 | Δ(lift−hess) C |
 |---|---|---|---|---|---|
-| 2500 | se3_lift | 0.821 ± 0.051 | 0.952 ± 0.013 | 0.561 ± 0.034 | **+0.064** (5/5 seeds +) |
-| 2500 | hessian | 0.757 ± 0.009 | 0.976 ± 0.007 | 0.538 ± 0.034 |  |
-| 5000 | se3_lift | 0.922 ± 0.015 | 0.975 ± 0.008 | 0.582 ± 0.042 | **+0.019** (4/5 seeds +) |
-| 5000 | hessian | 0.903 ± 0.017 | 0.992 ± 0.002 | 0.579 ± 0.055 |  |
-| 20000 | se3_lift | 0.955 ± 0.007 | 0.983 ± 0.006 | 0.593 ± 0.041 | **-0.026** (0/5 seeds +) |
-| 20000 | hessian | 0.981 ± 0.006 | 0.996 ± 0.002 | 0.642 ± 0.023 |  |
-| 80000 | se3_lift | 0.952 ± 0.012 | 0.975 ± 0.011 | 0.604 ± 0.040 | **-0.033** (0/5 seeds +) |
-| 80000 | hessian | 0.985 ± 0.005 | 0.997 ± 0.001 | 0.655 ± 0.020 |  |
+| 2500 | se3_lift | 0.816 ± 0.038 | 0.951 ± 0.015 | 0.559 ± 0.053 | **+0.069** (49/50 seeds +) |
+| 2500 | hessian | 0.747 ± 0.033 | 0.974 ± 0.007 | 0.515 ± 0.043 |  |
+| 5000 | se3_lift | 0.931 ± 0.022 | 0.974 ± 0.009 | 0.600 ± 0.056 | **+0.044** (48/50 seeds +) |
+| 5000 | hessian | 0.887 ± 0.025 | 0.990 ± 0.004 | 0.599 ± 0.050 |  |
+| 20000 | se3_lift | 0.965 ± 0.014 | 0.983 ± 0.006 | 0.611 ± 0.050 | **-0.019** (1/50 seeds +) |
+| 20000 | hessian | 0.985 ± 0.007 | 0.997 ± 0.002 | 0.652 ± 0.047 |  |
+| 80000 | se3_lift | 0.959 ± 0.015 | 0.980 ± 0.008 | 0.604 ± 0.055 | **-0.025** (0/50 seeds +) |
+| 80000 | hessian | 0.984 ± 0.008 | 0.997 ± 0.002 | 0.658 ± 0.052 |  |
 
 ![E0a curved: completeness, purity, junction F1 vs galaxy count, both methods, mean ± sd over held-out seeds](figures/e0_curves_curved.png)
 
@@ -58,8 +58,8 @@ Chosen configs — lift: `{'sig_par': 6.0, 'sig_perp': 1.5, 'diff_iter': 0}`, he
 
 ## Verdict on H1 (toy-level)
 
-- **straight**: at the sparsest level (n_gal=2500) the lift wins completeness on 5/5 held-out seeds, mean Δ = +0.067; at the densest level Δ = -0.029.
-- **curved**: at the sparsest level (n_gal=2500) the lift wins completeness on 5/5 held-out seeds, mean Δ = +0.064; at the densest level Δ = -0.033.
+- **straight**: at the sparsest level (n_gal=2500) the lift wins completeness on 48/50 held-out seeds, mean Δ = +0.070 (Wilcoxon signed-rank p = 5.9e-14); at the densest level Δ = -0.024 (p = 3.6e-15).
+- **curved**: at the sparsest level (n_gal=2500) the lift wins completeness on 49/50 held-out seeds, mean Δ = +0.069 (Wilcoxon signed-rank p = 1.2e-14); at the densest level Δ = -0.025 (p = 1.8e-15).
 
 **Supported (partially):** the orientation lift consistently improves spine completeness in the sparse-sampling regime (the survey-realistic one), at a small purity cost and matched skeleton length; the Hessian baseline is marginally better when sampling is dense. **Not supported:** (i) the junction sub-claim — M2 is statistically tied; (ii) the hypoelliptic-diffusion component — calibration rejected it (diff_iter=0 won) on BOTH straight and curved filaments, so all observed gains come from the elongated oriented filters alone.
 

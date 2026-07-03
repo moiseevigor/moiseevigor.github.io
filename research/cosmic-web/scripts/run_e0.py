@@ -30,6 +30,9 @@ import fields, lift, spines, metrics  # noqa: E402
 SMOKE = "--smoke" in sys.argv
 BEND = 0.15 if "--curved" in sys.argv else 0.0
 TAG = "curved" if BEND else "straight"
+N_EVAL = (int(sys.argv[sys.argv.index("--eval-seeds") + 1])
+          if "--eval-seeds" in sys.argv else 5)
+N_WORKERS = 8
 
 CFG = dict(
     N=64 if SMOKE else 128,
@@ -40,7 +43,7 @@ CFG = dict(
     bend_frac=BEND,              # 0 = straight Voronoi edges, >0 = Bezier bend
     n_gal_levels=[8000] if SMOKE else [2500, 5000, 20000, 80000],
     cal_seed=1,
-    eval_seeds=[2] if SMOKE else [2, 3, 4, 5, 6],
+    eval_seeds=[2] if SMOKE else list(range(2, 2 + N_EVAL)),
     r0_spine=2.0,
     r0_junction=3.0,
 )
@@ -109,27 +112,41 @@ def calibrate():
     return chosen
 
 
+def _init_worker(cfg):
+    CFG.clear()
+    CFG.update(cfg)
+
+
+def eval_one(args):
+    seed, n_gal, chosen = args
+    field, truth_pts, truth_j, n_target = make_realization(seed, n_gal)
+    sc = {m: evaluate(field, m, chosen[m], truth_pts, truth_j, n_target)
+          for m in ("se3_lift", "hessian")}
+    for v in sc.values():
+        v.pop("skel")
+    return {"seed": seed, "n_gal": n_gal, "scores": sc}
+
+
 def main():
+    from multiprocessing import Pool
+
     print("calibration (seed 1)")
     chosen = calibrate()
 
-    results = []
-    for seed in CFG["eval_seeds"]:
-        for n_gal in CFG["n_gal_levels"]:
-            t0 = time.time()
-            field, truth_pts, truth_j, n_target = make_realization(seed, n_gal)
-            sc = {m: evaluate(field, m, chosen[m], truth_pts, truth_j, n_target)
-                  for m in ("se3_lift", "hessian")}
-            if seed == CFG["eval_seeds"][0] and n_gal == CFG["n_gal_levels"][1]:
-                save_slice_figure(field, truth_pts, sc, seed, n_gal)
-            for v in sc.values():
-                v.pop("skel")
-            results.append({"seed": seed, "n_gal": n_gal, "scores": sc})
-            print(f"seed={seed} n_gal={n_gal:6d} "
-                  f"[{time.time()-t0:5.1f}s] " + " | ".join(
-                      f"{k}: C={v['M1']['completeness']:.2f} "
-                      f"P={v['M1']['purity']:.2f} "
-                      f"jF1={v['M2']['f1']:.2f}" for k, v in sc.items()))
+    # one serial realization for the slice figure
+    seed0, ngal0 = CFG["eval_seeds"][0], CFG["n_gal_levels"][min(1, len(CFG["n_gal_levels"]) - 1)]
+    field, truth_pts, truth_j, n_target = make_realization(seed0, ngal0)
+    sc0 = {m: evaluate(field, m, chosen[m], truth_pts, truth_j, n_target)
+           for m in ("se3_lift", "hessian")}
+    save_slice_figure(field, truth_pts, sc0, seed0, ngal0)
+
+    jobs = [(s, n, chosen) for s in CFG["eval_seeds"]
+            for n in CFG["n_gal_levels"]]
+    t0 = time.time()
+    with Pool(N_WORKERS, initializer=_init_worker, initargs=(dict(CFG),)) as pool:
+        results = pool.map(eval_one, jobs)
+    print(f"{len(jobs)} realizations on {N_WORKERS} workers "
+          f"in {time.time()-t0:.0f}s")
 
     out = ROOT / "artifacts" / f"e0_results_{TAG}.json"
     out.write_text(json.dumps({
