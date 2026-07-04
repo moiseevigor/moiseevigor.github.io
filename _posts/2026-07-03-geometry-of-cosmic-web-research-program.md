@@ -67,7 +67,7 @@ not merely *places* — each carries a **local direction** (its tangent). The
 [Geometry of Seeing]({% post_url 2026-04-25-geometry-of-seeing-visual-cortex-se2 %})
 series developed the mathematics of exactly this situation in 2D: the visual cortex
 lifts an image from $$\mathbb{R}^2$$ to the position–orientation space $$\mathbb{R}^2 \times S^1 \cong \mathrm{SE}(2)$$, and completes contours along
-sub-Riemannian geodesics. The 3D analogue is the homogeneous space
+sub-Riemannian geodesics[^subriemannian]. The 3D analogue is the homogeneous space[^homogeneous]
 
 $$
 \mathbb{R}^3 \times S^2 \;\cong\; \mathrm{SE}(3)/\mathrm{SO}(2),
@@ -93,18 +93,18 @@ scoping below keeps it honest by demanding a dynamical test in simulations, not
 just skeleton overlap. Conflating the two is the main failure mode this document
 is designed to avoid.
 
-## 1. What the literature already says
+## What the literature already says
 
-**Consensus physics.** In $$\Lambda$$CDM, small Gaussian density perturbations grow
-by gravitational instability in an expanding FLRW background. Collapse is
+**Consensus physics.** In $$\Lambda$$CDM[^lcdm], small Gaussian density perturbations[^gaussian-perturbations] grow
+by gravitational instability in an expanding FLRW[^flrw] background. Collapse is
 **anisotropic**: the tidal tensor $$T_{ij} = \partial_i \partial_j \Phi$$ (Hessian of
 the peculiar gravitational potential) has an eigenframe, and matter collapses
 first along the eigenvector with the largest eigenvalue (forming sheets or
 "pancakes"), then along the second (filaments), then the third (halos/nodes). The
 **Zel'dovich approximation** (Zel'dovich 1970) captures this with the Lagrangian
 map $$\mathbf{x}(\mathbf{q},t) = \mathbf{q} - D(t)\,\nabla_q \Phi(\mathbf{q})$$,
-where $$D(t)$$ is the linear growth factor; the **adhesion model** (Gurbatov,
-Saichev &amp; Shandarin 1989) adds an infinitesimal viscosity (Burgers equation)
+where $$D(t)$$ is the linear growth factor[^growth-factor]; the **adhesion model** (Gurbatov,
+Saichev &amp; Shandarin 1989) adds an infinitesimal viscosity (Burgers equation[^burgers])
 so matter *sticks* to sheets and filaments after shell-crossing. Bond, Kofman
 &amp; Pogosyan (1996) showed the filamentary pattern is already encoded in the
 initial tidal field around proto-clusters — hence "cosmic web".
@@ -115,6 +115,20 @@ others, and the blob gives way one axis at a time — first flattening into a
 sheet, then draining into a filament, finally pooling into a node. The
 animation below plays this sequence; the three arrows are the tidal
 directions, ordered by how hard each squeezes.
+
+[^subriemannian]: A geometry in which movement is allowed only along certain directions at each point, and path length is measured under that restriction; its shortest paths trade distance travelled against turning (see Glossary).
+
+[^homogeneous]: A space that looks the same from every point: a family of symmetries can carry any point to any other, so no location is special.
+
+[^lcdm]: The standard cosmological model: most matter is "cold dark matter" — slow-moving and invisible — and $$\Lambda$$ (Lambda) is the constant energy of empty space that accelerates the expansion (see Glossary).
+
+[^gaussian-perturbations]: Tiny random ripples in the early distribution of matter whose statistics follow the bell curve: fully described by the typical ripple strength at each size, with no preferred shapes or directions.
+
+[^flrw]: Friedmann–Lemaître–Robertson–Walker: the solution of Einstein's equations describing a universe that is on average the same everywhere and expands uniformly in time.
+
+[^growth-factor]: The overall factor by which small density ripples have grown by time $$t$$: multiply the initial ripple pattern by $$D(t)$$ to get its strength at that time.
+
+[^burgers]: The simplest equation of motion for a fluid with no pressure; adding a vanishingly small viscosity makes particles stop streaming through one another and instead pile up where they meet.
 
 </div><!-- /.l-body -->
 
@@ -150,7 +164,7 @@ scalar or tensor fields in $$\mathbb{R}^3$$:
   (Cautun, van de Weygaert &amp; Jones 2013) — Hessian-based morphology filters
   over a scale-space, a direct cousin of Frangi vesselness in medical imaging.
 - **Topological skeletons**: DisPerSE (Sousbie 2011) extracts the filamentary
-  skeleton via discrete Morse theory and persistent homology; T-ReX (Bonnaire et
+  skeleton via discrete Morse theory and persistent homology[^persistent-homology]; T-ReX (Bonnaire et
   al. 2020) uses regularised minimum spanning trees.
 
 Libeskind et al. (2018) compared twelve such web finders on the same simulation:
@@ -158,10 +172,10 @@ they disagree substantially on filament boundaries and junctions — evidence th
 the *instrument* question (C1) is genuinely open.
 
 **Observational anchors.** Filaments are detected as mass and gas, not just as
-galaxy overdensities: weak-lensing detections of inter-cluster filaments (Epps
-&amp; Hudson 2017), stacked thermal Sunyaev–Zel'dovich (tSZ) signal from the warm–hot
+galaxy overdensities: weak-lensing[^weak-lensing] detections of inter-cluster filaments (Epps
+&amp; Hudson 2017), stacked thermal Sunyaev–Zel'dovich (tSZ)[^tsz] signal from the warm–hot
 intergalactic medium between luminous-red-galaxy pairs (de Graaff et al. 2019;
-Tanimura et al. 2019), and 3D Lyman-$$\alpha$$ forest tomography of the web at $$z \sim 2.3$$ (CLAMATO; Lee et al. 2018). Galaxy spins align with filament axes in
+Tanimura et al. 2019), and 3D Lyman-$$\alpha$$ forest tomography[^lyman-tomography] of the web at $$z \sim 2.3$$ (CLAMATO; Lee et al. 2018). Galaxy spins align with filament axes in
 a mass-dependent way (Tempel &amp; Libeskind 2013; Codis et al. 2012). These give
 us **independent channels** to validate any new skeleton: lensing mass, tSZ gas,
 and spin alignment.
@@ -169,7 +183,7 @@ and spin alignment.
 **The vision-side toolbox** (developed in the series and its appendices): build an
 **orientation score** $$U(\mathbf{x},\mathbf{n})$$ by correlating the data with
 rotated anisotropic wavelets; evolve it with **left-invariant (hypoelliptic)
-diffusion** that smooths strongly along the direction $$\mathbf{n}$$ and weakly
+diffusion**[^hypoelliptic] that smooths strongly along the direction $$\mathbf{n}$$ and weakly
 across and in orientation, which enhances elongated coherent structures while
 keeping crossings separated; extract curves as **sub-Riemannian geodesics** that
 penalise bending. In 2D this reproduces the psychophysical association field
@@ -183,14 +197,14 @@ methods at crossings in imaging — on cosmic-web fields, and the physics itself
 (anisotropic tidal collapse) supplies a natural drift and anisotropy for the
 lifted generator.*
 
-## 2. From GR to an effective geometry — and its honest limits
+## From GR to an effective geometry — and its honest limits
 
 Cold dark matter is pressureless dust following geodesics of spacetime. In the
-weak-field, sub-horizon limit the dynamics reduce to Vlasov–Poisson in comoving
-coordinates; anisotropy enters through the tidal eigenframe. Two geometric
+weak-field, sub-horizon limit the dynamics reduce to Vlasov–Poisson[^vlasov-poisson] in comoving
+coordinates[^comoving]; anisotropy enters through the tidal eigenframe. Two geometric
 observations motivate the lift:
 
-**Jacobi/Maupertuis metric.** For a test particle with conserved energy $$E$$ in a
+**Jacobi/Maupertuis metric.**[^jacobi] For a test particle with conserved energy $$E$$ in a
 static potential $$\Phi$$, trajectories are geodesics of the conformally flat
 Riemannian metric $$g^{\mathrm{J}} = 2m\,(E - \Phi)\, g_{\mathrm{Euclid}}$$. Paths
 are "cheap" where $$\Phi$$ is deep — along potential valleys, i.e. filaments.
@@ -216,7 +230,7 @@ $$
 + \mu\, \mathcal{A}_3\, U,
 $$
 
-where $$\mathcal{A}_i$$ are the left-invariant vector fields on $$\mathrm{SE}(3)/\mathrm{SO}(2)$$ ($$\mathcal{A}_3$$ = transport along $$\mathbf{n}$$), $$\Delta_{S^2}$$ is the spherical Laplacian in the orientation variable, $$D_\parallel \gg D_\perp$$, and the drift $$\mu$$ and the ratios $$D_\parallel : D_\perp : D_S$$ are functions of $$(\lambda_1, \lambda_2, \lambda_3)$$
+where $$\mathcal{A}_i$$ are the left-invariant vector fields[^left-invariant] on $$\mathrm{SE}(3)/\mathrm{SO}(2)$$ ($$\mathcal{A}_3$$ = transport along $$\mathbf{n}$$), $$\Delta_{S^2}$$ is the spherical Laplacian in the orientation variable, $$D_\parallel \gg D_\perp$$, and the drift $$\mu$$ and the ratios $$D_\parallel : D_\perp : D_S$$ are functions of $$(\lambda_1, \lambda_2, \lambda_3)$$
 to be calibrated (see H2/E1). This is the direct 3D analogue of the $$\mathrm{SE}(2)$$ hypoelliptic evolution in
 [Part 1]({% post_url 2026-04-25-geometry-of-seeing-visual-cortex-se2 %}), with the
 physics entering through the coefficients instead of being bolted on afterwards.
@@ -229,11 +243,11 @@ direction glow; everything else washes out. The equation above is that
 heat-flow rule, with the local gravity field (the $$\lambda_i$$) deciding how
 eager the flow is in each direction.
 
-## 3. Hypotheses
+## Hypotheses
 
 Conventions used throughout: tidal eigenvalues ordered $$\lambda_1 \ge \lambda_2 \ge \lambda_3$$ with eigenvectors $$e_1, e_2, e_3$$;
 filament axis along $$e_3$$. "Spine" = 1D curve set output by a filament finder.
-All metrics are defined in §5.
+All metrics are defined in the data-analysis plan below.
 
 **H1 (instrument).** *Orientation-lifted extraction recovers filament spines more
 faithfully than density-only methods, with the largest gains at
@@ -258,14 +272,14 @@ A materially lower stack SNR kills H3.
 
 **H4 (formation, the strong claim).** *Matter transport during web assembly
 follows sub-Riemannian geodesics of the effective metric.*
-Falsifiable prediction: in an N-body simulation, lift particle trajectories $$(\mathbf{x}(t), \hat{\mathbf{v}}(t))$$ to $$\mathbb{R}^3 \times S^2$$ and compare
+Falsifiable prediction: in an N-body simulation[^nbody], lift particle trajectories $$(\mathbf{x}(t), \hat{\mathbf{v}}(t))$$ to $$\mathbb{R}^3 \times S^2$$ and compare
 them, between fixed snapshots, to SR geodesics of the calibrated metric with the
 same endpoints. H4 requires the geodesic prediction to beat the straight-line
 (Zel'dovich ballistic) baseline on transport error by a pre-registered margin
-(§5, M4). If SR geodesics do not beat Zel'dovich, H4 is dead and C2 with it —
+(metric M4 in the data-analysis plan). If SR geodesics do not beat Zel'dovich, H4 is dead and C2 with it —
 and the program remains a methods paper (C1).
 
-## 4. Experiments, in order
+## Experiments, in order
 
 Each experiment gates the next; a kill criterion at any stage stops the branch,
 and the analysis of each stage sets the coefficients or priors of the following
@@ -278,7 +292,7 @@ model is the zero-viscosity limit of Burgers flow, whose characteristics *are*
 extremals of an action; recast that action on $$\mathbb{R}^3 \times S^2$$ and read
 off the metric and the correct $$\lambda_i$$-dependence of $$D_\parallel, D_\perp, D_S, \mu$$. Also connects to optimal-transport
 reconstruction of the early Universe (Brenier, Frisch et al. 2002), which is
-Monge–Ampère — i.e. already a geodesic statement in a Wasserstein geometry.
+Monge–Ampère[^optimal-transport] — i.e. already a geodesic statement in a Wasserstein geometry.
 Deliverable: a note fixing the functional form of the coefficients used in E1–E3
 instead of leaving them free parameters.
 
@@ -286,7 +300,7 @@ instead of leaving them free parameters.
 Generate Gaussian random fields with a $$\Lambda$$CDM-like power spectrum in a $$256^3$$ box, displace particles with the Zel'dovich map at several growth factors,
 deposit density with cloud-in-cell. Ground-truth spines and junctions are known
 from the deformation-tensor eigenstructure of the initial field. Build the
-orientation score with 3D steerable ridge filters over $$\sim 3$$ scales and $$\sim 60{-}160$$ orientations (a $$256^3 \times 60$$ float32 score is $$\sim 4$$ GB —
+orientation score with 3D steerable ridge filters[^steerable] over $$\sim 3$$ scales and $$\sim 60{-}160$$ orientations (a $$256^3 \times 60$$ float32 score is $$\sim 4$$ GB —
 workstation-feasible), run the lifted diffusion, trace SR geodesics, project to $$\mathbb{R}^3$$. Benchmark against DisPerSE on the same fields across noise levels
 and sampling densities. **Tests H1. Kill criterion: no significant gain at any
 noise level.**
@@ -307,12 +321,12 @@ Between consecutive Quijote/TNG snapshots, select particles ending on filament
 spines; compare their lifted trajectories to (a) SR geodesics of the calibrated
 metric, (b) Zel'dovich straight-line transport, (c) geodesics of the isotropic
 Jacobi metric with no orientation lift. **Tests H4 — the only experiment that can
-support C2.** Pre-register the margin before running (§5, M4).
+support C2.** Pre-register the margin before running (metric M4).
 
 **E3 (observations; after E1 passes).**
 SDSS DR17 spectroscopic sample (selection-corrected density field, redshift-space
-distortions treated at least by anisotropic smoothing along the line of sight —
-a known caveat, §6), spines extracted with coefficients frozen from E1. Stack the
+distortions[^rsd] treated at least by anisotropic smoothing along the line of sight —
+a known caveat — see the caveats section), spines extracted with coefficients frozen from E1. Stack the
 public Planck 2018 lensing convergence map and Compton-$$y$$ map along spines vs.
 (i) DisPerSE spines on the identical catalogue and (ii) randomised control
 spines. Optional extension at $$z \sim 2.3$$ with CLAMATO tomography, where sparse
@@ -320,7 +334,7 @@ sampling should favour the orientation lift. Also re-measure the spin–filament
 alignment trend with the new spines (a sharper mass transition supports H3).
 **Tests H3.**
 
-## 5. Data-analysis plan: the metrics, defined
+## Data-analysis plan: the metrics, defined
 
 - **M1 — spine distance.** Sample both skeletons at $$0.1\,h^{-1}$$Mpc; report the
   two directed median point-to-curve distances
@@ -347,7 +361,7 @@ alignment trend with the new spines (a sharper mass transition supports H3).
   spines; $$\mathrm{SNR} = (\Delta\kappa - \langle \Delta\kappa_{\mathrm{ctrl}} \rangle)/\sigma_{\mathrm{ctrl}}$$
   over $$\ge 1000$$ control realisations
   (randomly rotated/translated spines respecting the survey mask).
-- **M6 — topology.** Betti curves $$\beta_0, \beta_1$$ of the skeleton vs.
+- **M6 — topology.** Betti curves[^betti] $$\beta_0, \beta_1$$ of the skeleton vs.
   persistence threshold; compared to the reference skeleton's, on the same field.
 
 Calibration discipline: all free parameters ($$D_\parallel, D_\perp, D_S, \mu$$ and
@@ -355,7 +369,7 @@ their $$\lambda_i$$-dependence, wavelet scales, persistence thresholds) are set 
 designated calibration volumes only; every reported number comes from held-out
 volumes or sky areas. Parameter count is part of the model comparison (H2).
 
-## 6. Caveats and failure modes, catalogued now
+## Caveats and failure modes, catalogued now
 
 1. **Analogy ≠ mechanism.** Success of $$\mathrm{SE}(3)$$ methods in imaging says
    nothing about cosmology by itself; only E2 speaks to mechanism. The write-up
@@ -381,7 +395,7 @@ volumes or sky areas. Parameter count is part of the model comparison (H2).
    with fast separable kernel approximations (Portegies et al. 2015). Resolution
    sensitivity must be reported.
 
-## 7. Success criteria and outcomes
+## Success criteria and outcomes
 
 - **Minimum publishable outcome (C1):** E0+E1 show significant junction-recovery
   and spine-distance gains → methods paper: "orientation-score filament finding
@@ -394,7 +408,7 @@ volumes or sky areas. Parameter count is part of the model comparison (H2).
   benchmark suite; the comparison framework itself (twelve finders vs. a lifted
   one on common metrics) is a useful contribution.
 
-## 8. Open questions / next tests
+## Open questions / next tests
 
 - T1: does the adhesion action admit a clean $$\mathbb{R}^3 \times S^2$$
   reformulation, and what $$\lambda_i$$-dependence does it force on the
@@ -404,7 +418,7 @@ volumes or sky areas. Parameter count is part of the model comparison (H2).
 - Branching: handled by persistence pruning, or does the lifted space admit a
   principled branching prior (junctions are crossings in $$\mathbb{R}^3$$ but
   *separated* points in $$\mathbb{R}^3 \times S^2$$)?
-- Curvature diagnostics: do Ollivier–Ricci/Forman curvatures of the spine graph
+- Curvature diagnostics: do Ollivier–Ricci/Forman curvatures[^network-curvature] of the spine graph
   correlate with tSZ brightness along filaments?
 - High-$$z$$: does the orientation lift stabilise CLAMATO skeletons at sparse
   sampling, where density-only methods degrade fastest?
@@ -444,9 +458,39 @@ volumes or sky areas. Parameter count is part of the model comparison (H2).
 - **Jacobi/Maupertuis metric** — conformal metric $$2m(E-\Phi)\,g_{\mathrm{Euclid}}$$
   whose geodesics are fixed-energy mechanical trajectories.
 - **Spine** — the 1D curve network a filament finder outputs.
-- **M1–M6** — the six evaluation metrics defined in §5.
+- **M1–M6** — the six evaluation metrics defined in the data-analysis plan.
 - **C1/C2, H1–H4, E0–E3, T1** — the two claims, four hypotheses, four
-  experiments, and one theory work-item defined in §§0–4.
+  experiments, and one theory work-item defined in the sections above.
+
+[^persistent-homology]: A topology tool that tracks how connected pieces, loops, and voids appear and merge as a detection threshold is swept; features that survive over a wide range of the sweep are treated as real, short-lived ones as noise.
+
+[^weak-lensing]: The gravity of matter lying between us and distant galaxies slightly bends their light and distorts their apparent shapes; averaging the shapes of many background galaxies maps the intervening mass, visible or dark.
+
+[^tsz]: Hot electrons in cosmic gas give a small energy kick to photons of the cosmic microwave background passing through them; the resulting distortion on the sky traces the pressure of hot gas (see Glossary).
+
+[^lyman-tomography]: Light from many background galaxies picks up absorption dips from the hydrogen gas it crosses; combining the dips along many neighbouring sightlines yields a 3D map of that gas. CLAMATO is the survey that produced such a map (see Glossary).
+
+[^hypoelliptic]: A diffusion that spreads directly only along a few allowed directions, yet ends up smoothing in every direction because combinations of the allowed moves can reach them all (see Glossary).
+
+[^vlasov-poisson]: The paired equations for a vast crowd of particles interacting only through the gravity of their combined mass: one equation moves the crowd, the other recomputes the gravity that the crowd itself generates.
+
+[^comoving]: Coordinates that stretch together with the expanding Universe, so the overall expansion is factored out and only motion relative to it remains.
+
+[^jacobi]: A rescaling of ordinary distance by how fast a particle of fixed energy would move at each point; after the rescaling, the particle's possible trajectories become the shortest paths of the new geometry (see Glossary).
+
+[^left-invariant]: Direction fields written in each point's own frame — "forward along my axis", "sideways", "turn" — the same recipe at every point, so the smoothing rule does not depend on where you stand.
+
+[^nbody]: A computer simulation that follows millions of mass points evolving under their mutual gravity — the standard tool for computing how cosmic structure grows once the density ripples are no longer small.
+
+[^optimal-transport]: Optimal transport asks for the cheapest way to rearrange one pile of mass into another; the Monge–Ampère equation is the condition the cheapest rearrangement must satisfy, and "Wasserstein geometry" measures the distance between two mass distributions by that cheapest cost.
+
+[^steerable]: Oriented template patterns designed so that the response at any angle can be computed exactly by combining a small fixed set of measured responses — every orientation for the price of a few.
+
+[^rsd]: A galaxy's distance is inferred from the stretching of its light, but the galaxy's own motion adds to that stretch, so the inferred 3D map is squashed or smeared along the line of sight (see Glossary).
+
+[^betti]: Counts of topological features: $$\beta_0$$ is the number of separate connected pieces, $$\beta_1$$ the number of independent loops.
+
+[^network-curvature]: Two recipes for assigning a curvature number to the nodes and edges of a network: roughly, positive where the network is densely interlinked, negative where it branches out like a tree.
 
 </div><!-- /.l-body -->
 
@@ -481,15 +525,19 @@ volumes or sky areas. Parameter count is part of the model comparison (H2).
 </div>
 </div><!-- /.l-body -->
 
+<style>
+figure.l-middle { padding: 0 14px; box-sizing: border-box; max-width: 100%; overflow-x: hidden; }
+figure.l-middle svg { max-width: 100%; height: auto; }
+</style>
 <script>
 (function () {
   const host = document.getElementById("cw-collapse");
   if (!host) return;
   const ns = "http://www.w3.org/2000/svg";
-  const W = 620, H = 300, cx = 310, cy = 158;
+  const W = 540, H = 300, cx = 250, cy = 155;
   const svg = document.createElementNS(ns, "svg");
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
-  svg.style.maxWidth = "620px"; svg.style.width = "100%";
+  svg.style.maxWidth = "540px"; svg.style.width = "100%";
   host.appendChild(svg);
 
   // axonometric projection of 3D -> 2D

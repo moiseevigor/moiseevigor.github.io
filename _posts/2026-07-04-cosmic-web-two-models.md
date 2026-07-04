@@ -2,21 +2,23 @@
 layout: distill
 title: "Two Ways to See a Cosmic Filament"
 subtitle: >
-  Matter in the Universe collects along a web of filaments, and finding them in
-  sparse galaxy data is a geometry problem. We race two models — a local
-  curvature test against an orientation-lifted measurement borrowed from the
-  visual cortex — on thousands of synthetic universes with exact ground truth.
-  The interactive plots below show what each model can and cannot do — and
-  tell the story of how our own benchmark quietly handed one contestant a
-  head start, and what happened when we levelled the race.
+  We compare two methods for finding cosmic filaments in sparse galaxy data:
+  a standard local-curvature (Hessian) detector and an orientation-lifted
+  detector adapted from models of the visual cortex. Both are benchmarked on
+  synthetic data with exact ground truth and on real survey data. The
+  interactive plots below show where each method works, where each fails,
+  and how a flaw in our own evaluation initially produced a wrong conclusion
+  that stricter controls reversed.
 date: 2026-07-04 09:00:00
 categories: [mathematics]
 tags: [cosmic-web, sub-riemannian, SE3, filaments, data-analysis]
 description: >
-  Introductory tour of the cosmic-web filament experiments: the Hessian
-  baseline vs the R³×S² orientation lift, with interactive result explorers
-  built from the actual benchmark data (E0–E2), including the failure modes —
-  junctions, dense sampling, gravity-shaped webs, and the transport test.
+  A benchmark study of two filament detectors — the Hessian baseline and the
+  R³×S² orientation lift — with interactive figures built from the actual
+  experiment data: accuracy on exact-truth synthetic webs, failure modes at
+  junctions and on gravity-evolved fields, a dynamical test of the
+  geodesic-transport hypothesis, and validation against Planck and ACT
+  gas maps.
 comments: true
 published: false
 ---
@@ -25,18 +27,16 @@ published: false
 
 <div class="callout">
 <div class="callout-title">What this article covers</div>
-An introductory, self-contained account of a small research program: can the
-sub-Riemannian machinery from the
+A self-contained account of a research program: can the sub-Riemannian
+machinery from the
 <a href="{% post_url 2026-04-25-geometry-of-seeing-visual-cortex-se2 %}">Geometry
-of Seeing</a> series find <em>cosmic filaments</em>? Two models are defined
-with all their mathematics, then raced under strict fairness rules on
-synthetic universes where the truth is known exactly. Interactive figures let
-you explore the results yourself — including the moment we discovered the
-race had been <strong>quietly unfair</strong> in the fancier model's favour,
-the verdict once it was levelled, a surprising rejection of diffusion, and a
-dynamical test that refutes the prettiest version of the theory. Every number
-comes from the actual experiment data in the repo
-(<code>research/cosmic-web/</code>).
+of Seeing</a> series find <em>cosmic filaments</em>? Both methods are defined
+with full mathematics, then compared under controlled conditions on synthetic
+data with exact ground truth. Interactive figures present the results,
+including an evaluation flaw that initially favoured the more complex method,
+the corrected comparison, the rejection of the diffusion component, and a
+dynamical test of the transport hypothesis. Every number comes from the
+experiment data in the repository (<code>research/cosmic-web/</code>).
 </div>
 
 ## The problem
@@ -45,7 +45,7 @@ You are handed a box of points — galaxies — and told that most of them
 scatter around an invisible network of curves with branch points, while the
 rest are clutter. Recover the network. This is the observational situation in
 cosmology: gravity organises matter into **filaments** of width a few
-megaparsecs, and galaxy surveys sample this web sparsely and noisily.
+megaparsecs[^megaparsec], and galaxy surveys sample this web sparsely and noisily.
 
 Your visual system solves a two-dimensional version of this instantly: a
 dashed line reads as *one line*, because the cortex pools evidence from
@@ -69,7 +69,7 @@ this point?"
 
 **Model 1 — the Hessian baseline (local, quadratic).** On a bright ridge the
 density falls off steeply in two directions and stays flat along the third.
-So compute the Hessian $$H = D^2 f$$ at every point, take eigenvalues $$\lambda_1 \ge \lambda_2 \ge \lambda_3$$ of $$H$$, and score
+So compute the Hessian[^hessian] $$H = D^2 f$$ at every point, take eigenvalues $$\lambda_1 \ge \lambda_2 \ge \lambda_3$$ of $$H$$, and score
 
 $$
 R_{\mathrm{hess}}(\mathbf{x}) = -\tfrac{1}{2}\left(\lambda_2 + \lambda_3\right)_+ ,
@@ -78,7 +78,7 @@ $$
 with the filament direction given by the top eigenvector. This is the
 workhorse of the field (the MMF and NEXUS filament finders are multiscale
 versions of it). Its structural limit: everything it knows about direction at $$\mathbf{x}$$ sits in one quadratic form — as a function on the sphere of
-directions, it has angular bandwidth 2 and *cannot be made sharper*.
+directions, it has angular bandwidth 2[^angular-bandwidth] and *cannot be made sharper*.
 
 **Model 2 — the SE(3) orientation lift.** Measure the data separately for
 every direction: for each point $$\mathbf{x}$$ and unit vector $$\mathbf{n}$$,
@@ -96,17 +96,24 @@ minus the transverse Laplacian of an $$\mathbf{n}$$-elongated Gaussian: large
 exactly on ridges aligned with $$\mathbf{n}$$. The function $$U$$ lives on $$\mathbb{R}^3 \times S^2$$ (we sample 42 axes on the hemisphere), and its
 angular sharpness grows with the aspect ratio $$\sigma_\parallel/\sigma_\perp$$
 — a free parameter, unlike the Hessian's fixed bluntness. The final score is $$\max_{\mathbf{n}} U$$. The theory also offers a second ingredient — a
-**hypoelliptic diffusion** on the lifted space that propagates evidence along
+**hypoelliptic diffusion**[^hypoelliptic] on the lifted space that propagates evidence along
 curves (the contour-completion flow of the visual cortex) — remember this
 one; its fate below is an honest surprise.
 
-The difference between the two models is easier to *feel* than to read.
-Below, a dashed curve of galaxies hides in clutter. A single oriented filter
-(the ellipse) sits on the curve and sweeps through all directions; the dial
-on the right records how strongly it responds at each angle. Stretch the
-filter and watch its sense of direction sharpen — then compare with the
-grey lobe, which is the best any Hessian-type quadratic response can ever
-do, no matter the data.
+The figure below demonstrates the difference directly. A dashed curve of
+points sits in uniform clutter. One oriented filter (the ellipse) is placed
+on the curve and rotated through all directions; the panel on the right
+records its response at each angle. Increasing the filter length sharpens
+its directional selectivity; the grey lobe shows the sharpest response a
+quadratic (Hessian-type) model can express regardless of the data.
+
+[^megaparsec]: One megaparsec (Mpc) is about 3.26 million light-years. Cosmologists often quote distances in h⁻¹Mpc, where $$h \approx 0.7$$ encodes the measured expansion rate of the Universe; 1 h⁻¹Mpc is roughly 1.4 Mpc.
+
+[^hessian]: The matrix of second derivatives of the density, recording how the density curves in every direction around a point; its eigenvalues are the curvatures along the three principal axes, and its eigenvectors are those axes.
+
+[^angular-bandwidth]: A limit on how finely the response can vary as the probe direction rotates: bandwidth 2 means the response traces one broad bump around the circle of directions (like $$\cos^2$$) and can never form a narrower peak, however clean the data.
+
+[^hypoelliptic]: A smoothing process that acts directly only along a few allowed directions — here, along the current orientation — yet eventually reaches all directions through combinations of the allowed moves (see Glossary).
 
 </div><!-- /.l-body -->
 
@@ -138,10 +145,10 @@ do, no matter the data.
 <div class="l-body" markdown="1">
 
 **Fairness rules.** Everything downstream of the score is *identical*:
-thresholding, skeletonisation at **matched total spine length** (so neither
+thresholding, skeletonisation[^skeletonisation] at **matched total spine length** (so neither
 model can win by drawing more curve), junction detection. Each model gets the
 same budget of three tuning configurations, chosen on one calibration
-realization and *frozen* before scoring on 50 fresh ones. Both models reduce
+realization[^realization] and *frozen* before scoring on 50 fresh ones. Both models reduce
 to "a scalar ridge score, then the same pipeline" — the race isolates exactly
 one variable: quadratic local curvature vs. angularly-sharp oriented
 measurement.
@@ -150,16 +157,24 @@ measurement.
 
 You cannot score a filament finder on the real Universe — nobody knows the
 true network. So the first battery (experiment E0) manufactures truth: seeds
-dropped in a box, their **Voronoi diagram** computed, and the *edges* of the
+dropped in a box, their **Voronoi diagram**[^voronoi] computed, and the *edges* of the
 Voronoi cells — where three cell walls meet — taken as the filament network
 (a classic cartoon of the cosmic web, geometrically honest about branching).
-One variant keeps the edges straight; a second bends each into a Bézier arc.
+One variant keeps the edges straight; a second bends each into a Bézier arc[^bezier].
 Galaxies are sprinkled along the network with transverse scatter, node
 clumps, and 25% uniform clutter; both models get the identical blurred field.
 
 Explore the raw material below — the same box, at four sampling densities
 from "starved" (2,500 galaxies) to "saturated" (80,000). Red is the exact
 truth; blue is each model's recovered skeleton.
+
+[^skeletonisation]: Reducing a thick detected region to a centreline one grid cell wide — the "skeleton" of curves on which all scores are computed.
+
+[^realization]: One random draw of a synthetic universe; the "seed" is the number that initialises the random generator, so each seed labels one reproducible test universe.
+
+[^voronoi]: A division of space into cells, one per seed point, each cell containing everything closer to its own seed than to any other; the cells' walls and edges form a natural web-like network.
+
+[^bezier]: A smooth curve steered by a few control points — the standard way computer graphics draws curved strokes.
 
 </div><!-- /.l-body -->
 
@@ -189,37 +204,37 @@ truth; blue is each model's recovered skeleton.
 
 <div class="l-body" markdown="1">
 
-## The result — and the race that wasn't fair at first
+## The result — and the evaluation flaw that preceded it
 
 Fifty held-out random universes per variant, five sampling densities, three
-scores: **completeness** (fraction of the true network within 2 voxels of the
+scores: **completeness** (fraction of the true network within 2 voxels[^voxel] of the
 estimate), **purity** (the converse), **junction F1** (branch-point recovery).
 
-Before showing the verdict, the most instructive part of this article — a
-story about fairness. The first version of this benchmark produced a
-spectacular result: the lift beating the Hessian by **+7 points of
-completeness** at sparse sampling, on 48 of 50 seeds, p ≈ 10⁻¹⁴. It looked
-airtight. It wasn't — and the reason is worth understanding even if you
-never touch a cosmic filament.
+Before the verdict, the most instructive result of this study. The first
+version of this benchmark showed the lift beating the Hessian by **+7
+points of completeness** at sparse sampling, on 48 of 50 seeds, p ≈ 10⁻¹⁴[^pvalue].
+That result was wrong, and the mechanism matters beyond this application.
 
-Think of the comparison as two fishermen, each allowed the same total length
-of net: whoever's net catches more of the river's fish is the better
-fisherman. Our rule for "same length of net" was enforced *one step early* —
-we matched an intermediate quantity from which each model then produced its
-final curve network, assuming both would end up with equal length. They
-didn't. At sparse sampling the lift consistently ended up drawing about
-**19% more curve** than the Hessian (1,468 vs 1,239 voxels). And a longer
-net catches more fish no matter who holds it: the lift's celebrated
-completeness win was substantially the extra length, not extra skill. The
-imbalance came to light months of experiments later, when a different test
-required tightening the procedure so that the *final drawn length itself*
-is held equal — and re-running the original race under the level rule
-flipped the outcome. Every figure below uses the level rule.
+The comparison requires both methods to output skeletons of **equal total
+length**, because a longer skeleton covers more of the true network
+regardless of quality. We enforced that constraint one step too early — on
+an intermediate quantity from which each method then produced its final
+skeleton — assuming the final lengths would match. They did not: at sparse
+sampling the lift's skeletons came out about **19% longer** than the
+Hessian's (1,468 vs 1,239 voxels). Most of its apparent advantage was extra
+length, not extra accuracy. The flaw surfaced only when a later experiment
+required enforcing the constraint on the final skeleton itself; re-running
+the benchmark under the corrected procedure reversed the outcome. Every
+figure below uses the corrected procedure.
 
-The levelled verdict: **the Hessian matches or beats the lift at every
+The corrected verdict: **the Hessian matches or beats the lift at every
 sampling density**. At the ultra-sparse end (1,200 galaxies) the two are
 statistically tied (Δ = +0.004, p = 0.36); everywhere else the Hessian wins
 completeness by 4–7 points on 50 of 50 seeds, and junction F1 with it.
+
+[^voxel]: One cell of the 3D grid a box is divided into — the three-dimensional analogue of a pixel. In these experiments one voxel corresponds to one h⁻¹Mpc.
+
+[^pvalue]: The probability of seeing a difference at least this large by pure chance if the two methods were in fact equally good; smaller means less likely to be luck. Throughout, p comes from the Wilcoxon signed-rank test, which uses only the per-universe paired differences (see Glossary).
 
 </div><!-- /.l-body -->
 
@@ -245,13 +260,14 @@ completeness by 4–7 points on 50 of 50 seeds, and junction F1 with it.
 
 <div class="l-body" markdown="1">
 
-Averages can hide seed luck, so the next figure shows every seed: each dot is
-one universe, plotted by the *paired difference* (lift − Hessian) on that
-exact realization. Above the zero line, the lift won that universe. With the
-race levelled, the clouds sit at zero for 1.2k galaxies and below zero
-everywhere else. Worth remembering: the uneven race produced a +0.07 cloud
-that looked exactly this decisive in the other direction — decisiveness
-alone tells you nothing about whether the comparison was fair.
+Averages can hide variation between realizations, so the next figure shows
+every seed: each dot is one test universe, plotted by the *paired
+difference* (lift − Hessian) on that realization. Above the zero line, the
+lift won that universe. Under the corrected procedure the clouds sit at
+zero for 1.2k galaxies and below zero everywhere else. Note that the flawed
+procedure produced a +0.07 cloud that looked equally decisive in the other
+direction — statistical strength does not certify that a comparison was
+constructed correctly.
 
 </div><!-- /.l-body -->
 
@@ -317,14 +333,18 @@ verdict is about the operator.)
 **Failure 3 — gravity-shaped webs (with one nuance).** Real filaments are
 not tubes. On gravity-evolved boxes, scored by a method-neutral criterion —
 *which model's spines capture more mass at equal length* — the toy advantage
-does not transfer. On Zel'dovich fields (winding, ribbon-like structures)
+does not transfer. On Zel'dovich fields[^zeldovich] (winding, ribbon-like structures)
 the Hessian wins at every sampling density and every filter scale tried
-(p ≤ 0.001). On full N-body fields the verdict softens but does not flip:
+(p ≤ 0.001). On full N-body fields[^nbody] the verdict softens but does not flip:
 long cigars still lose badly (−0.05), while the *shortest* filter
 (σ∥ = 3 vox) closes to a statistical tie at sparse sampling (−0.005,
 p = 0.55) and a small deficit when dense. Toggle the figure below between
 the two field types: the lift never actually leads on gravity-shaped mass,
 and its best case is "as good as the simpler model".
+
+[^zeldovich]: Density fields evolved with the Zel'dovich approximation: matter coasts along straight lines set by the initial gravity field. It captures the first stage of collapse, when matter flattens into sheet-like "pancakes" (see Glossary).
+
+[^nbody]: Fields from a simulation that follows many mass points evolving under their mutual gravity; "PM" (particle-mesh) means the gravity is computed on a grid at each step for speed.
 
 </div><!-- /.l-body -->
 
@@ -375,7 +395,7 @@ predicts trajectories' deviations from straight-line motion should point
 
 The verdict is blunt: **filaments are built by matter falling across them,
 not flowing along them.** The lifted geometry survives only as a *static
-descriptor* — spine tangents from the lift align with the tidal eigenframe at
+descriptor* — spine tangents from the lift align with the tidal eigenframe[^tidal-eigenframe] at
 0.73–0.76 versus the Hessian's 0.67 (isotropic null 0.5), without ever being
 shown the tidal field — but the geodesic *transport* story is refuted in the
 bulk, with a weak, sign-correct residual for matter already captured inside
@@ -384,17 +404,17 @@ filament tubes.
 ## A real-Universe coda
 
 The program's final experiment left simulations behind: 274,000 real BOSS
-CMASS galaxies (z = 0.45–0.55) tiled into eighteen 512 h⁻¹Mpc cubes, spines
+CMASS galaxies[^boss] (z = 0.45–0.55)[^redshift] tiled into eighteen 512 h⁻¹Mpc cubes, spines
 extracted by both methods at matched length, and the networks stacked
-against Planck maps with footprint-matched rotated controls. Three things
-happened. First, a **Compton-y detection** — rising to **~9σ** under the
+against Planck maps[^planck-act] with footprint-matched rotated controls. Three things
+happened. First, a **Compton-y detection**[^compton-y] — rising to **~9σ** under the
 strictest controls (nulls matched to the spine points' galactic-latitude
 distribution): the extracted spine networks sit on measurably hot gas, so
 the web the methods draw is physically real. Follow-up tests showed that
 signal is carried mostly by the gas of the survey galaxies' own halos —
 but a closing experiment — stacking 876,000 close galaxy *pairs* with an
 estimator that cancels any symmetric halo by construction, then holding
-it to jackknife errors and physically-unconnected control pairs — found
+it to jackknife errors[^jackknife] and physically-unconnected control pairs — found
 the gas **between** the halos at an amplitude of ~1.2–1.4×10⁻⁸,
 consistent between ACT and Planck and with published measurements,
 at ≈2σ per instrument: honest evidence for the filament bridges,
@@ -418,20 +438,19 @@ the simpler model finds its mass better.
 | Describing web *anisotropy* (tangent statistics) | **SE(3) lift** | tidal-frame alignment 0.73–0.76 vs 0.67 — the one job it does better |
 | Modelling filament *formation* | **neither as geodesics** | assembly is transverse infall; E2 refutes along-axis transport |
 
-The honest arc of the program: a beautiful theory, a benchmark that
-appeared to confirm it spectacularly, a hidden head start discovered
-*because* a later experiment tightened the measuring stick, and a levelled
-verdict in which the simple model wins nearly everything — with the lifted
-geometry surviving as an anisotropy descriptor, a hybrid ingredient, and a
-physics probe. Each refutation (the uneven race, junctions, diffusion,
-gravity ribbons, transport) redirected the next experiment, and the
-dynamical instrument independently rediscovered textbook Zel'dovich pancake
-physics, which is what lets us trust the negatives. If the article leaves
-one lesson, it is not about cosmology: **when you promise a fair
-comparison, measure the thing that actually wins races.** We held equal a
-stand-in quantity and assumed the final one would follow; it drifted 19%,
-and the drift wore the costume of a discovery for exactly as long as nobody
-re-measured it.
+Summary of the program: a theoretically motivated method, a benchmark that
+initially appeared to confirm it, an evaluation flaw exposed when a later
+experiment tightened the procedure, and a corrected comparison in which the
+simple model wins nearly everywhere — with the lifted geometry retaining
+value as an anisotropy descriptor, a hybrid component, and a physics probe.
+Each negative result (the evaluation flaw, junctions, diffusion,
+gravity-evolved fields, transport) determined the design of the next
+experiment, and the dynamical pipeline independently reproduced known
+Zel'dovich collapse behaviour, which supports trusting the negative
+results. The general lesson: **a matched comparison must enforce the match
+on the quantity that determines the score.** We held an intermediate
+quantity equal and assumed the final one would follow; it deviated by 19%,
+and that deviation read as a discovery until it was re-measured.
 
 Full protocols, per-experiment reports with all tables and p-values, and
 one-command reproduction live in
@@ -469,9 +488,23 @@ scoped in the
 - **P2 statistic (E2)** — squared projection of a trajectory's mid-path
   deviation-from-chord onto the local filament axis; isotropic null 1/3.
 
+[^tidal-eigenframe]: At each point the gravity of surrounding matter stretches and squeezes along three natural perpendicular axes; this local set of axes is the tidal eigenframe. Filaments tend to point along the axis of weakest squeezing.
+
+[^boss]: BOSS (the Baryon Oscillation Spectroscopic Survey, part of the Sloan Digital Sky Survey) mapped millions of galaxy positions; CMASS is its catalogue of massive galaxies selected to have roughly constant stellar mass.
+
+[^redshift]: z is redshift: the expansion of the Universe stretches light from distant galaxies toward longer wavelengths, and z measures that stretch. It doubles as a distance and look-back-time label — at z ≈ 0.5 the light left its galaxy about five billion years ago.
+
+[^planck-act]: Planck is a space telescope and ACT (the Atacama Cosmology Telescope) a ground-based one; both mapped the cosmic microwave background — the relic light of the early Universe — over large areas of sky, giving two independent maps to check the same signal.
+
+[^compton-y]: Hot electrons along the line of sight give a small energy kick to the relic microwave photons passing through them; the Compton-y map records the size of that kick across the sky, so a bright y signal means hot gas.
+
+[^jackknife]: Error bars estimated by removing one chunk of the data at a time and remeasuring; the spread across the remeasurements gives the uncertainty.
+
 </div><!-- /.l-body -->
 
 <style>
+figure.l-middle { padding: 0 14px; box-sizing: border-box; max-width: 100%; overflow-x: hidden; }
+figure.l-middle svg, figure.l-middle img { max-width: 100%; height: auto; }
 .cw-ctl { font-size: 0.85rem; color: #555; }
 .cw-btn {
   font-size: 0.8rem; padding: 2px 10px; margin: 0 1px; cursor: pointer;
