@@ -50,8 +50,8 @@ megaparsecs, and galaxy surveys sample this web sparsely and noisily.
 Your visual system solves a two-dimensional version of this instantly: a
 dashed line reads as *one line*, because the cortex pools evidence from
 collinear fragments. The mathematical mechanism, developed in the series, is
-a **lift**: instead of working on the image plane $\mathbb{R}^2$, the cortex
-represents position *and* orientation, $\mathbb{R}^2 \times S^1$. The
+a **lift**: instead of working on the image plane $$\mathbb{R}^2$$, the cortex
+represents position *and* orientation, $$\mathbb{R}^2 \times S^1$$. The
 question here is whether the 3D version of that trick,
 
 $$
@@ -64,14 +64,14 @@ geometry is not just a detector but part of the *physics*.
 ## The two models
 
 Both start identically: blur the galaxy points into a smooth density
-$f:\mathbb{R}^3 \to \mathbb{R}$ (cloud-in-cell deposit, log transform, light
+$$f:\mathbb{R}^3 \to \mathbb{R}$$ (cloud-in-cell deposit, log transform, light
 Gaussian smoothing). They differ in how they ask "is there a filament through
 this point?"
 
 **Model 1 — the Hessian baseline (local, quadratic).** On a bright ridge the
 density falls off steeply in two directions and stays flat along the third.
-So compute the Hessian $H = D^2 f$ at every point, take eigenvalues
-$\lambda_1 \ge \lambda_2 \ge \lambda_3$ of $H$, and score
+So compute the Hessian $$H = D^2 f$$ at every point, take eigenvalues
+$$\lambda_1 \ge \lambda_2 \ge \lambda_3$$ of $$H$$, and score
 
 $$
 R_{\mathrm{hess}}(\mathbf{x}) = -\tfrac{1}{2}\left(\lambda_2 + \lambda_3\right)_+ ,
@@ -80,12 +80,12 @@ $$
 with the filament direction given by the top eigenvector. This is the
 workhorse of the field (the MMF and NEXUS filament finders are multiscale
 versions of it). Its structural limit: everything it knows about direction at
-$\mathbf{x}$ sits in one quadratic form — as a function on the sphere of
+$$\mathbf{x}$$ sits in one quadratic form — as a function on the sphere of
 directions, it has angular bandwidth 2 and *cannot be made sharper*.
 
 **Model 2 — the SE(3) orientation lift.** Measure the data separately for
-every direction: for each point $\mathbf{x}$ and unit vector $\mathbf{n}$,
-correlate the density with a long thin "cigar" aligned with $\mathbf{n}$ —
+every direction: for each point $$\mathbf{x}$$ and unit vector $$\mathbf{n}$$,
+correlate the density with a long thin "cigar" aligned with $$\mathbf{n}$$ —
 concretely, in Fourier space,
 
 $$
@@ -95,15 +95,52 @@ e^{-\frac{1}{2}\left(\sigma_\parallel^2 k_\parallel^2 + \sigma_\perp^2 |\mathbf{
 \hat{f}(\mathbf{k})\right],
 $$
 
-minus the transverse Laplacian of an $\mathbf{n}$-elongated Gaussian: large
-exactly on ridges aligned with $\mathbf{n}$. The function $U$ lives on
-$\mathbb{R}^3 \times S^2$ (we sample 42 axes on the hemisphere), and its
-angular sharpness grows with the aspect ratio $\sigma_\parallel/\sigma_\perp$
+minus the transverse Laplacian of an $$\mathbf{n}$$-elongated Gaussian: large
+exactly on ridges aligned with $$\mathbf{n}$$. The function $$U$$ lives on
+$$\mathbb{R}^3 \times S^2$$ (we sample 42 axes on the hemisphere), and its
+angular sharpness grows with the aspect ratio $$\sigma_\parallel/\sigma_\perp$$
 — a free parameter, unlike the Hessian's fixed bluntness. The final score is
-$\max_{\mathbf{n}} U$. The theory also offers a second ingredient — a
+$$\max_{\mathbf{n}} U$$. The theory also offers a second ingredient — a
 **hypoelliptic diffusion** on the lifted space that propagates evidence along
 curves (the contour-completion flow of the visual cortex) — remember this
 one; its fate below is an honest surprise.
+
+The difference between the two models is easier to *feel* than to read.
+Below, a dashed curve of galaxies hides in clutter. A single oriented filter
+(the ellipse) sits on the curve and sweeps through all directions; the dial
+on the right records how strongly it responds at each angle. Stretch the
+filter and watch its sense of direction sharpen — then compare with the
+grey lobe, which is the best any Hessian-type quadratic response can ever
+do, no matter the data.
+
+</div><!-- /.l-body -->
+
+<figure class="l-middle" id="fig-cigar">
+  <div style="text-align:center; margin-bottom:0.4em;">
+    <span class="cw-ctl">
+      <button class="cw-btn" id="cig-play">pause</button>
+      &nbsp; filter length:
+      <input type="range" id="cig-aspect" min="1" max="6" step="0.25" value="1.5"
+             style="vertical-align:middle; width:130px;">
+      <span id="cig-aspect-val" style="display:inline-block; width:2.5em;">1.5×</span>
+    </span>
+  </div>
+  <div id="cw-cigar"></div>
+  <figcaption>
+    <strong>Interactive.</strong> Left: a dashed curve of points (dark) in
+    uniform clutter (light), with one oriented ridge filter (blue ellipse)
+    rotating on the curve. Right: its response at every angle (blue lobe;
+    live) against the sharpest response any quadratic/Hessian model can
+    express (grey lobe — angular bandwidth 2, fixed by algebra, not by
+    data). At filter length 1–1.5× the two are similar; stretch to 4–6× and
+    the blue lobe narrows onto the true tangent while the grey one cannot.
+    This extra angular sharpness is the entire advantage — and, as the
+    benchmarks show, also the source of the lift's weaknesses at corners
+    and junctions.
+  </figcaption>
+</figure>
+
+<div class="l-body" markdown="1">
 
 **Fairness rules.** Everything downstream of the score is *identical*:
 thresholding, skeletonisation at **matched total spine length** (so neither
@@ -268,7 +305,7 @@ implied only by filament continuity), the Hessian wins junction F1 by
 wrong tool.
 
 **Failure 2 — the diffusion surprise.** The vision theory's second ingredient,
-hypoelliptic diffusion (smooth strongly along $\mathbf{n}$, weakly across and
+hypoelliptic diffusion (smooth strongly along $$\mathbf{n}$$, weakly across and
 in orientation — the contour-completion flow), was swept over three bend
 levels up to 50% sag, three sparsity levels, weak and strong settings, with
 scoring binned by local curve curvature. Strong diffusion **loses
@@ -412,13 +449,13 @@ scoped in the
   skeleton length.
 - **Junction F1** — harmonic mean of precision and recall of branch-point
   recovery within 3 vox.
-- **Hessian ridgeness** — $-(\lambda_2+\lambda_3)/2$ of the smoothed
+- **Hessian ridgeness** — $$-(\lambda_2+\lambda_3)/2$$ of the smoothed
   density's second-derivative matrix; angular bandwidth 2 in direction.
-- **Orientation score $U(\mathbf{x},\mathbf{n})$** — response of an
-  $\mathbf{n}$-elongated anisotropic ridge filter; a function on
-  $\mathbb{R}^3\times S^2$.
+- **Orientation score $$U(\mathbf{x},\mathbf{n})$$** — response of an
+  $$\mathbf{n}$$-elongated anisotropic ridge filter; a function on
+  $$\mathbb{R}^3\times S^2$$.
 - **Hypoelliptic diffusion** — degenerate smoothing on the lifted space,
-  strong along $\mathbf{n}$; the contour-completion flow. Rejected by every
+  strong along $$\mathbf{n}$$; the contour-completion flow. Rejected by every
   calibration in these experiments.
 - **Matched spine length** — both models' skeletons must have equal total
   length before scoring, so completeness/purity trade on equal terms.
@@ -447,10 +484,132 @@ scoped in the
 }
 </style>
 
+<script src="/public/data/cosmic-web/post_data.js"></script>
 <script>
 (function () {
   const IMG = "/public/img/posts/cosmic-web/";
   const BLUE = "#2b6cb0", ORANGE = "#dd6b20", GREY = "#888";
+
+  // ---- figure 0: rotating-cigar concept widget (no data needed) ----
+  (function cigar() {
+    const host = document.getElementById("cw-cigar");
+    if (!host) return;
+    const W = 680, H = 300, cx = 170, cy = 150;
+    const ns = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    svg.style.width = "100%";
+    host.appendChild(svg);
+
+    // deterministic pseudo-random
+    let s = 42;
+    const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
+
+    // dashed curve through (cx,cy) with tangent ~ -25 deg, plus clutter
+    const TRUE_ANGLE = -25 * Math.PI / 180;
+    const pts = [];
+    for (let t = -130; t <= 130; t += 4) {
+      if (Math.floor((t + 130) / 26) % 2 === 1) continue;   // gaps
+      const x = cx + t * Math.cos(TRUE_ANGLE) - 18 * Math.sin(3 * t / 130) * Math.sin(TRUE_ANGLE);
+      const y = cy + t * Math.sin(TRUE_ANGLE) + 18 * Math.sin(3 * t / 130) * Math.cos(TRUE_ANGLE);
+      pts.push([x + (rnd() - 0.5) * 5, y + (rnd() - 0.5) * 5, true]);
+    }
+    for (let i = 0; i < 60; i++)
+      pts.push([20 + rnd() * 300, 15 + rnd() * 270, false]);
+    pts.forEach(([x, y, on]) => {
+      const c = document.createElementNS(ns, "circle");
+      c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", on ? 2.6 : 2);
+      c.setAttribute("fill", on ? "#333" : "#bbb");
+      svg.appendChild(c);
+    });
+
+    const ell = document.createElementNS(ns, "ellipse");
+    ell.setAttribute("cx", cx); ell.setAttribute("cy", cy);
+    ell.setAttribute("fill", "rgba(43,108,176,0.18)");
+    ell.setAttribute("stroke", "#2b6cb0"); ell.setAttribute("stroke-width", 1.5);
+    svg.appendChild(ell);
+
+    // response dial (right panel)
+    const dx = 500, dy = 150, R = 105;
+    const axis = document.createElementNS(ns, "circle");
+    axis.setAttribute("cx", dx); axis.setAttribute("cy", dy); axis.setAttribute("r", R);
+    axis.setAttribute("fill", "none"); axis.setAttribute("stroke", "#ddd");
+    svg.appendChild(axis);
+    const lbl = document.createElementNS(ns, "text");
+    lbl.setAttribute("x", dx); lbl.setAttribute("y", dy + R + 22);
+    lbl.setAttribute("text-anchor", "middle"); lbl.setAttribute("font-size", 12);
+    lbl.textContent = "response vs filter angle";
+    svg.appendChild(lbl);
+    const quadPath = document.createElementNS(ns, "path");
+    quadPath.setAttribute("fill", "rgba(120,120,120,0.25)");
+    quadPath.setAttribute("stroke", "#888");
+    svg.appendChild(quadPath);
+    const lobePath = document.createElementNS(ns, "path");
+    lobePath.setAttribute("fill", "rgba(43,108,176,0.3)");
+    lobePath.setAttribute("stroke", "#2b6cb0"); lobePath.setAttribute("stroke-width", 1.5);
+    svg.appendChild(lobePath);
+    const needle = document.createElementNS(ns, "line");
+    needle.setAttribute("x1", dx); needle.setAttribute("y1", dy);
+    needle.setAttribute("stroke", "#c53030"); needle.setAttribute("stroke-width", 2);
+    svg.appendChild(needle);
+
+    const sigP = 9;   // perpendicular width of the filter (px)
+    function response(theta, aspect) {
+      const ct = Math.cos(theta), st = Math.sin(theta), sl = sigP * aspect;
+      let acc = 0;
+      for (const [x, y] of pts) {
+        const ddx = x - cx, ddy = y - cy;
+        const u = ddx * ct + ddy * st, v = -ddx * st + ddy * ct;
+        acc += Math.exp(-0.5 * (u * u / (sl * sl) + v * v / (sigP * sigP)));
+      }
+      return acc / aspect;   // normalise by filter area
+    }
+    function lobe(fn, nmax) {
+      let d = "";
+      for (let a = 0; a <= 360; a += 3) {
+        const th = a * Math.PI / 180;
+        const r = R * fn(th) / nmax;
+        const px = dx + r * Math.cos(th), py = dy + r * Math.sin(th);
+        d += (a ? "L" : "M") + px.toFixed(1) + "," + py.toFixed(1);
+      }
+      return d + "Z";
+    }
+
+    let theta = 0, playing = true, aspect = 1.5;
+    function redraw() {
+      const resp = [];
+      let m = 0;
+      for (let a = 0; a < 360; a += 3) {
+        const v = response(a * Math.PI / 180, aspect);
+        resp[a / 3] = v; if (v > m) m = v;
+      }
+      lobePath.setAttribute("d", lobe(th => resp[Math.round(((th * 180 / Math.PI) % 360) / 3) % 120], m));
+      // quadratic reference: best-fit bandwidth-2 lobe around the true angle
+      const qmax = 1, qmin = 0.45;
+      quadPath.setAttribute("d", lobe(th =>
+        (qmin + (qmax - qmin) * Math.pow(Math.cos(th - TRUE_ANGLE), 2)) * m, m));
+      ell.setAttribute("rx", sigP * aspect * 1.8); ell.setAttribute("ry", sigP * 1.8);
+    }
+    function tick() {
+      if (playing) {
+        theta += 0.02;
+        ell.setAttribute("transform", `rotate(${theta * 180 / Math.PI} ${cx} ${cy})`);
+        needle.setAttribute("x2", dx + R * Math.cos(theta));
+        needle.setAttribute("y2", dy + R * Math.sin(theta));
+      }
+      requestAnimationFrame(tick);
+    }
+    redraw(); tick();
+
+    document.getElementById("cig-play").onclick = function () {
+      playing = !playing; this.textContent = playing ? "pause" : "play";
+    };
+    document.getElementById("cig-aspect").oninput = function () {
+      aspect = +this.value;
+      document.getElementById("cig-aspect-val").textContent = aspect + "×";
+      redraw();
+    };
+  })();
 
   // ---- figure 1: slice explorer (image swap) ----
   const state = { v: "curved", n: "2500" };
@@ -467,15 +626,16 @@ scoped in the
     b.classList.add("active"); state.n = b.dataset.n; swap();
   });
 
-  fetch(IMG + "post_data.json").then(r => r.json()).then(DATA => {
+  (function (DATA) {
+    if (!DATA) return;
     if (typeof d3 === "undefined") return;
     const tip = d3.select("body").append("div").attr("class", "cw-tip");
 
     function frame(sel, w, h, m) {
       d3.select(sel).selectAll("*").remove();
       const svg = d3.select(sel).append("svg")
-        .attr("viewBox", `0 0 ${w} ${h}`).style("width", "100%");
-      return { svg, g: svg.append("g").attr("transform", `translate(${m.l},${m.t})`),
+        .attr("viewBox", `0 0 $${w} $${h}`).style("width", "100%");
+      return { svg, g: svg.append("g").attr("transform", `translate($${m.l},$${m.t})`),
                iw: w - m.l - m.r, ih: h - m.t - m.b };
     }
 
@@ -504,7 +664,7 @@ scoped in the
           .attr("fill", col)
           .on("mousemove", (ev, v) => tip.style("opacity", 1)
             .style("left", (ev.pageX + 12) + "px").style("top", (ev.pageY - 10) + "px")
-            .text(`${lab}: ${v.toFixed(3)}`))
+            .text(`$${lab}: $${v.toFixed(3)}`))
           .on("mouseout", () => tip.style("opacity", 0));
         g.append("text").attr("x", x(levels[levels.length - 1]) - 4)
           .attr("y", Math.max(12, y(d.agg[mth][cState.m][levels.length - 1])
@@ -554,7 +714,7 @@ scoped in the
           .attr("stroke", "#c53030").attr("stroke-width", 2.5);
         g.append("text").attr("x", cx).attr("y", 10).attr("text-anchor", "middle")
           .attr("font-size", 11).attr("fill", "#555")
-          .text(`${wins}/${vals.length} +`);
+          .text(`$${wins}/$${vals.length} +`);
       });
     }
     document.querySelectorAll(".cw-dmet").forEach(b => b.onclick = () => {
@@ -602,7 +762,7 @@ scoped in the
             .attr("opacity", m === "hessian" ? 0.95 : 0.55 + 0.15 * methods.indexOf(m))
             .on("mousemove", ev => tip.style("opacity", 1)
               .style("left", (ev.pageX + 12) + "px").style("top", (ev.pageY - 10) + "px")
-              .text(`${E1B_LABELS[m] || m}: ${v.toFixed(3)}`))
+              .text(`$${E1B_LABELS[m] || m}: $${v.toFixed(3)}`))
             .on("mouseout", () => tip.style("opacity", 0));
         });
       });
@@ -668,6 +828,6 @@ scoped in the
         .attr("font-size", 11).attr("fill", "#c53030").text("perpendicular infall far away");
     }
     drawE2();
-  }).catch(() => { /* static figures in the repo remain the fallback */ });
+  })(window.CW_DATA);
 })();
 </script>

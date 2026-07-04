@@ -115,8 +115,9 @@ def bake_data():
                 if r["method"] == m and r["n_gal"] == L])), 4) for L in levels]
             for m in methods}}
 
-    out = IMG / "post_data.json"
-    out.write_text(json.dumps(data))
+    out = SITE / "public" / "data" / "cosmic-web" / "post_data.js"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text("window.CW_DATA = " + json.dumps(data) + ";")
     print("wrote", out.name, f"({out.stat().st_size/1024:.0f} KB)")
 
 
