@@ -390,11 +390,14 @@ against Planck maps with footprint-matched rotated controls. Three things
 happened. First, a **Compton-y detection** — rising to **~9σ** under the
 strictest controls (nulls matched to the spine points' galactic-latitude
 distribution): the extracted spine networks sit on measurably hot gas, so
-the web the methods draw is physically real. Follow-up tests showed the
+the web the methods draw is physically real. Follow-up tests showed that
 signal is carried mostly by the gas of the survey galaxies' own halos —
-gas *between* the halos stays a ~2σ hint at Planck's depth. Second, the
-Hessian's spines carry more of the signal than the lift's on every
-statistic, consistent with everything above. Third — and this is the
+but a closing experiment, stacking 876,000 close galaxy *pairs* with an
+estimator that cancels any symmetric halo by construction, detected the
+gas **between** the halos too: the filament bridge, at **5.2σ** on the
+high-resolution ACT map (amplitude ~2.3×10⁻⁸, with Planck concurring at
+19σ). Second, the Hessian's spines carry more of the spine-stack signal
+than the lift's on every statistic, consistent with everything above. Third — and this is the
 lift's one clean win, replicated from simulation to sky — its spine
 tangents align with the tidal eigenframe at 0.677 ± 0.016 vs the Hessian's
 0.617 ± 0.016 across all eighteen tiles (isotropic null 0.5). The lifted

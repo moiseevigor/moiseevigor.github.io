@@ -38,10 +38,13 @@ filament assembly is transverse pancake infall, not along-axis geodesic
 transport. Survivors: the lift as anisotropy descriptor (spine–tidal-frame
 alignment 0.73–0.76 vs 0.67), a hybrid score improving purity/junctions,
 and the methodological lesson itself. <strong>E3/H3 executed</strong> (BOSS
-CMASS × Planck, first pass): spine networks show a ~4–5σ Compton-y excess
-(H3 supported; Hessian ≥ lift on the cross-signal), and the lift's
-tidal-alignment advantage replicates on real data (0.68 vs 0.62 over 18
-tiles). Every hypothesis of the program now has an empirical verdict.
+CMASS × Planck × ACT): spine networks show a Compton-y excess reaching 9σ
+under latitude-matched nulls (H3 supported; Hessian ≥ lift on the
+cross-signal), the lift's tidal-alignment advantage replicates on real
+data (0.68 vs 0.62 over 18 tiles), and the campaign closed with a
+<strong>5.2σ detection of inter-halo bridge gas</strong> on ACT DR6 via a
+pair-stacking design that nulls symmetric halos by construction. Every
+hypothesis of the program now has an empirical verdict.
 Full chain: <code>research/cosmic-web/docs/SYNTHESIS.md</code>.
 </div>
 
