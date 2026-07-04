@@ -17,7 +17,8 @@ Usage:
         
 -->{% endcomment %}
 
-{% for post in site.posts reversed %}{% if(post.group == page.group ) %}
+{% assign visible_posts = site.posts | where_exp: "p", "p.listed != false" %}
+{% for post in visible_posts reversed %}{% if(post.group == page.group ) %}
 <div>
   <h2><a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></h2>
   <span>{{ post.description }}</span>

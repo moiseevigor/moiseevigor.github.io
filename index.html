@@ -6,7 +6,7 @@ page_class: home
 
 <main class="site-main">
 <div class="home-list">
-  {% for post in paginator.posts %}
+  {% for post in paginator.posts %}{% unless post.listed == false %}
   {%- assign wc = post.content | number_of_words -%}
   {%- assign mins = wc | divided_by: 90 -%}
   {%- if mins == 0 %}{%- assign mins = 1 %}{%- endif -%}
@@ -63,6 +63,7 @@ page_class: home
     {% endif %}
 
   </article>
+  {% endunless %}
   {% endfor %}
 </div>
 

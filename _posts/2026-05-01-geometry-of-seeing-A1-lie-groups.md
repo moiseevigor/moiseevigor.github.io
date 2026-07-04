@@ -22,6 +22,7 @@ arxiv: "0807.4731"
 coauthors: "Yu. L. Sachkov"
 comments: true
 published: false
+listed: false   # appendix: reachable via series nav only, never listed standalone
 ---
 
 <div class="l-body" markdown="1">
@@ -240,7 +241,7 @@ Two warnings worth absorbing.
   the left-invariant frame $\{X_1, X_2, X_3\}$ used in Part 1.  At the
   identity $X_1(e) = E_1$, $X_2(e) = E_3$, $X_3(e) = E_2$ (the index
   shuffle above); and at a generic $g \in \mathrm{SE}(2)$ the $X_i(g)$ are
-  no longer the constant matrices $E_j$ — the LI vector fields vary in
+  no longer the constant matrices $E_j$ — the left-invariant vector fields vary in
   coordinates.
 - For left-invariant fields the vector-field commutator and the matrix
   commutator *agree*: $[X_i, X_j]_{\text{v.f.}}(e) = [\,X_i(e), X_j(e)\,]$

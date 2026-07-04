@@ -22,6 +22,7 @@ arxiv: "0807.4731"
 coauthors: "Yu. L. Sachkov"
 comments: true
 published: false
+listed: false   # appendix: reachable via series nav only, never listed standalone
 ---
 
 <div class="l-body" markdown="1">
@@ -191,7 +192,7 @@ $u_1 X_1 + u_2 X_2$ is
 $$\mathcal H = u_1 \langle \lambda, X_1\rangle + u_2 \langle \lambda, X_2\rangle - \nu.$$
 
 Define $h_i := \langle \lambda, X_i\rangle$ (this is the contraction of the
-covector $\lambda$ with the LI vector field $X_i$).  Then
+covector $\lambda$ with the left-invariant vector field $X_i$).  Then
 $\mathcal H = u_1 h_1 + u_2 h_2 - \nu$ (the last term is constant in $u$).
 
 Maximising $u_1 h_1 + u_2 h_2$ over $u_1^2 + u_2^2 \leq 1$:
@@ -217,7 +218,7 @@ This is the "normal Hamiltonian" of Part 2 §1.
 ## Lie–Poisson reduction on $\mathfrak{se}(2)^{\ast}$
 
 Hamilton's equations for $\mathcal H_n$ on $T^{\ast}\mathrm{SE}(2)$ are coupled
-equations in $(g, \lambda)$.  But the LI vector fields make
+equations in $(g, \lambda)$.  But the left-invariant vector fields make
 $T^{\ast}\mathrm{SE}(2)$ trivialise:
 
 $$T^{\ast}\mathrm{SE}(2) \;\xrightarrow{\sim}\; \mathrm{SE}(2) \times \mathfrak{se}(2)^{\ast},

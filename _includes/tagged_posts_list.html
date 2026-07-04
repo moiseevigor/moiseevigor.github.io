@@ -10,7 +10,8 @@
 <div class="related">
   <h2>{{ page.title }}</h2>
   <ul class="related-posts">
-    {% for post in site.posts %}
+    {% assign visible_posts = site.posts | where_exp: "p", "p.listed != false" %}
+    {% for post in visible_posts %}
       {% if post.tags contains page.tag %}
         <li style="margin-bottom: 1.5rem;">
           <h3>
