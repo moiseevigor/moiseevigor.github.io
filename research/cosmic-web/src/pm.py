@@ -46,7 +46,7 @@ def _forces(pos, N, a, kx, ky, kz, k2):
 
 
 def pm_sim(N, L, rng_master, a_init=0.1, a_final=1.0, n_steps=90, trunc=0.0,
-           track=50000, track_from=0.5):
+           track=50000, track_from=0.5, sigma8=0.8):
     """Run the PM simulation.
 
     ICs: the same linear field the Zel'dovich generator draws (obtained by
@@ -58,8 +58,8 @@ def pm_sim(N, L, rng_master, a_init=0.1, a_final=1.0, n_steps=90, trunc=0.0,
     seedseq = rng_master.integers(0, 2 ** 32)
     r1 = np.random.default_rng(seedseq)
     r2 = np.random.default_rng(seedseq)
-    _, pos_q = fields.zeldovich_box(N, L, D=0.0, rng=r1, trunc=trunc)
-    _, pos_d = fields.zeldovich_box(N, L, D=1.0, rng=r2, trunc=trunc)
+    _, pos_q = fields.zeldovich_box(N, L, D=0.0, rng=r1, trunc=trunc, sigma8=sigma8)
+    _, pos_d = fields.zeldovich_box(N, L, D=1.0, rng=r2, trunc=trunc, sigma8=sigma8)
     psi = pos_d - pos_q
     psi -= N * np.round(psi / N)                    # unwrap periodicity
 

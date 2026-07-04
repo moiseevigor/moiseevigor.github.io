@@ -234,3 +234,12 @@ sequential damping underperforms at this resolution. Full specification,
 capabilities, limitations and failure modes: docs/MODEL-CARD.md. The
 refinement scope is complete; remaining error at the web is
 post-crossing (multi-stream) physics, out of scope by design.
+
+## E6 addendum (2026-07-05) — transfer verified, trend physical
+
+The frozen model transfers without re-calibration to coarser voxels and
+to weaker/stronger clustering, with the advantage growing monotonically
+with sigma8 (−3% → −13% overall; up to −22% at the web at sigma8 = 1) —
+the behaviour of a physical correction term. Model-card scope widened
+accordingly. With this, every locally testable hypothesis — including the
+card's own declared limitations — carries a verdict.

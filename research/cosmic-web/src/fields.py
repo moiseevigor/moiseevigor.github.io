@@ -150,7 +150,7 @@ def _bbks_pk(k, gamma=0.21):
     return k * T ** 2
 
 
-def zeldovich_box(N, L, D, rng, trunc=0.0):
+def zeldovich_box(N, L, D, rng, trunc=0.0, sigma8=0.8):
     """Zel'dovich-evolved density: delta_lin normalised to sigma(R=8)=0.8,
     particles displaced by D * psi, CIC-deposited. trunc > 0 (Mpc/h) applies
     Gaussian truncation to the displacement field (truncated ZA; avoids
@@ -170,7 +170,7 @@ def zeldovich_box(N, L, D, rng, trunc=0.0):
     # normalise: sigma(delta smoothed with Gaussian R = 8 Mpc/h) = 0.8
     dk_s = dk * np.exp(-0.5 * k2 * 8.0 ** 2)  # k in h/Mpc
     delta_s = np.fft.irfftn(dk_s, s=(N, N, N))
-    dk *= 0.8 / delta_s.std()
+    dk *= sigma8 / delta_s.std()
 
     tk = np.exp(-0.5 * k2 * trunc ** 2) if trunc else 1.0
     with np.errstate(divide="ignore", invalid="ignore"):
