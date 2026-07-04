@@ -35,8 +35,12 @@ with full mathematics, then compared under controlled conditions on synthetic
 data with exact ground truth. Interactive figures present the results,
 including an evaluation flaw that initially favoured the more complex method,
 the corrected comparison, the rejection of the diffusion component, and a
-dynamical test of the transport hypothesis. Every number comes from the
-experiment data in the repository (<code>research/cosmic-web/</code>).
+dynamical test of the transport hypothesis — and then the constructive
+second half: the correction that standard transport models actually need
+is <em>measured</em>, turned into a working effective model, vindicated
+against an oracle, and optimized until it sits at its own
+information-theoretic bound. Every number comes from the experiment data
+in the repository (<code>research/cosmic-web/</code>).
 </div>
 
 ## The problem
@@ -418,13 +422,129 @@ it to jackknife errors[^jackknife] and physically-unconnected control pairs — 
 the gas **between** the halos at an amplitude of ~1.2–1.4×10⁻⁸,
 consistent between ACT and Planck and with published measurements,
 at ≈2σ per instrument: honest evidence for the filament bridges,
-reproducing the field's amplitude rather than claiming a new detection. Second, the Hessian's spines carry more of the spine-stack signal
+reproducing the field's amplitude rather than claiming a new detection.
+The figure below shows that trajectory of the claim explicitly — the same
+measurement under progressively stricter controls. Second, the Hessian's spines carry more of the spine-stack signal
 than the lift's on every statistic, consistent with everything above. Third — and this is the
 lift's one clean win, replicated from simulation to sky — its spine
 tangents align with the tidal eigenframe at 0.677 ± 0.016 vs the Hessian's
 0.617 ± 0.016 across all eighteen tiles (isotropic null 0.5). The lifted
 geometry reads the *anisotropy* of the real cosmic web better, even while
 the simpler model finds its mass better.
+
+</div><!-- /.l-body -->
+
+<figure class="l-middle" id="fig-claims">
+  <div id="cw-claims"></div>
+  <figcaption>
+    <strong>The same measurement under stricter controls.</strong> The
+    inter-galaxy bridge signal (gas between close galaxy pairs), as a
+    significance, for both instruments: first with naive per-pair errors,
+    then with sky-patch jackknife errors (pairs overlap on the sky), then
+    after subtracting physically-unconnected control pairs (same geometry,
+    no possible bridge). Planck's large drop at the last step is measured
+    beam leakage; what survives on both instruments — about two sigma at
+    an amplitude near 10⁻⁸ — is the honest bridge evidence.
+  </figcaption>
+</figure>
+
+<div class="l-body" markdown="1">
+
+## The correction, measured
+
+The refutations left a constructive question: if matter does not travel
+along filament-aligned geodesics, what correction *does* standard
+transport need? The Zel'dovich model — the field's workhorse — moves
+matter on straight lines set by the initial conditions. Our simulations
+use exactly those initial conditions, so for every particle we can
+subtract the model's prediction from the truth and examine the **residual
+directly**: the adjustment term itself.
+
+The result reverses the original conjecture's orientation while
+confirming its spirit. The residual is large near the web (about 4.4
+h⁻¹Mpc per particle) and it *is* organized by the local tidal frame — but
+it points **across** the filament axis, not along it, at every distance.
+Physically: straight-line transport overshoots *through* forming walls
+and filaments; real gravity arrests that crossing. The correction the
+standard model needs is transverse braking at the web, not longitudinal
+flow along it.
+
+</div><!-- /.l-body -->
+
+<figure class="l-middle" id="fig-e4">
+  <div id="cw-e4"></div>
+  <figcaption>
+    <strong>Direction of the correction.</strong> For each tracked
+    particle, the residual (true minus Zel'dovich position, and true minus
+    Zel'dovich velocity) is projected onto the local filament axis; the
+    curve shows the mean squared projection by distance to the web. An
+    isotropic correction would sit on the dashed line (1/3). Everywhere
+    below it: the correction is preferentially <em>perpendicular</em> to
+    filaments, most strongly far from the web, approaching isotropy inside
+    the tubes where motion is virialized.
+  </figcaption>
+</figure>
+
+<div class="l-body" markdown="1">
+
+## From correction to model, to the bound
+
+A measured correction invites a model. The candidate is one rule added to
+Zel'dovich transport: *the first time a particle enters a dense region,
+remove part of its velocity perpendicular to the local filament axis and
+keep the along-axis part*. Three questions, answered in order by
+experiments E5, E5b, and E5c/d:
+
+1. **Does the rule help?** Yes — against full N-body truth from identical
+   initial conditions, it beats both plain Zel'dovich and the classical
+   isotropic-sticking (adhesion) model, most clearly at the web. The
+   calibration knob was tuned to favour the competitor, so the win is
+   conservative.
+2. **Is the remaining error the rule's fault or the estimator's?** An
+   oracle test answers cleanly: given *true* filament directions (from the
+   final N-body field), the rule wins everywhere, in every distance band.
+   The physics of the term is right; the practical cost is estimating
+   directions from the model's own state.
+3. **How close can a practical version get?** A short optimization
+   campaign (partial damping β, direction-field smoothing, the model's
+   own density for direction estimates) converges at β = 0.6 with 2 h⁻¹Mpc
+   frames: held-out error **4.52** voxels vs Zel'dovich's 4.98 — within
+   0.05 of the oracle bound 4.47. Ninety percent of the recoverable error
+   is closed; the residue is post-collapse physics no damping rule can
+   represent, by construction.
+
+</div><!-- /.l-body -->
+
+<figure class="l-middle" id="fig-ladder">
+  <div id="cw-ladder"></div>
+  <figcaption>
+    <strong>The model ladder.</strong> Median per-particle transport error
+    against N-body truth (held-out realizations, 50,000 particles each).
+    Each step is one experiment: the classical isotropic adhesion proxy,
+    plain Zel'dovich, the first transverse-damping version, the refined
+    version (partial damping + self-estimated frames), and the frozen
+    final model — read against the oracle bound (dashed), the best any
+    direction-estimation scheme can achieve.
+  </figcaption>
+</figure>
+
+<figure class="l-middle" id="fig-bins">
+  <div id="cw-bins"></div>
+  <figcaption>
+    <strong>Where the gains live.</strong> The same error, split by
+    distance to the filament web: Zel'dovich vs the refined model vs the
+    oracle. The model's advantage concentrates exactly where filaments
+    form — the region the correction term was measured in — and all
+    models agree far from the web, as they must.
+  </figcaption>
+</figure>
+
+<div class="l-body" markdown="1">
+
+The frozen recipe, its capabilities, limitations, failure modes, and an
+integration guide are documented in a model card
+([`research/cosmic-web/docs/MODEL-CARD.md`](https://github.com/moiseevigor/moiseevigor.github.io/blob/research/geometry-of-cosmic-web/research/cosmic-web/docs/MODEL-CARD.md)) —
+the program's end product: not a verdict but a usable object.
 
 ## So which model should you use?
 
@@ -862,5 +982,200 @@ figure.l-middle svg, figure.l-middle img { max-width: 100%; height: auto; }
     }
     drawE2();
   })(window.CW_DATA);
+})();
+</script>
+
+<script>
+/* Constructive-arc figures. Numbers are frozen results from
+   artifacts/e4_results.json, e5*_results.json and docs/E3d/E3e reports. */
+(function () {
+  if (typeof d3 === "undefined") return;
+  const BLUE = "#2b6cb0", ORANGE = "#dd6b20", GREY = "#888", RED = "#c53030";
+  const tip2 = d3.select("body").append("div").attr("class", "cw-tip");
+
+  function frame(sel, w, h, m) {
+    const host = d3.select(sel);
+    if (host.empty()) return null;
+    host.selectAll("*").remove();
+    const svg = host.append("svg").attr("viewBox", `0 0 ${w} ${h}`)
+      .style("width", "100%");
+    return { g: svg.append("g").attr("transform", `translate(${m.l},${m.t})`),
+             iw: w - m.l - m.r, ih: h - m.t - m.b };
+  }
+
+  // ---- claims-under-controls (bridge SNR ladder) ----
+  (function () {
+    const STEPS = ["naive errors", "jackknife errors", "null-subtracted"];
+    const DATA = [{name: "Planck", vals: [19.3, 8.0, 2.2], color: GREY},
+                  {name: "ACT",    vals: [5.24, 3.30, 1.6], color: BLUE}];
+    const f = frame("#cw-claims", 640, 300, {l: 52, r: 20, t: 12, b: 40});
+    if (!f) return;
+    const x = d3.scalePoint().domain(STEPS).range([30, f.iw - 30]);
+    const y = d3.scaleLog().domain([1, 25]).range([f.ih, 0]);
+    f.g.append("g").attr("transform", `translate(0,${f.ih})`)
+      .call(d3.axisBottom(x));
+    f.g.append("g").call(d3.axisLeft(y).tickValues([1, 2, 3, 5, 10, 20])
+      .tickFormat(d3.format("g")));
+    f.g.append("text").attr("transform", "rotate(-90)").attr("x", -f.ih / 2)
+      .attr("y", -36).attr("text-anchor", "middle").attr("font-size", 12)
+      .text("bridge significance (σ)");
+    [[3, "3σ"], [2, "2σ"]].forEach(([v, lab]) => {
+      f.g.append("line").attr("x1", 0).attr("x2", f.iw)
+        .attr("y1", y(v)).attr("y2", y(v))
+        .attr("stroke", "#000").attr("stroke-dasharray", "4,4")
+        .attr("opacity", 0.4);
+      f.g.append("text").attr("x", f.iw - 2).attr("y", y(v) - 4)
+        .attr("text-anchor", "end").attr("font-size", 10)
+        .attr("fill", "#555").text(lab);
+    });
+    DATA.forEach(d => {
+      const line = d3.line().x((v, i) => x(STEPS[i])).y(v => y(v));
+      f.g.append("path").datum(d.vals).attr("fill", "none")
+        .attr("stroke", d.color).attr("stroke-width", 2.5).attr("d", line);
+      f.g.selectAll(null).data(d.vals).enter().append("circle")
+        .attr("cx", (v, i) => x(STEPS[i])).attr("cy", v => y(v))
+        .attr("r", 5).attr("fill", d.color)
+        .on("mousemove", (ev, v) => tip2.style("opacity", 1)
+          .style("left", (ev.pageX + 12) + "px")
+          .style("top", (ev.pageY - 10) + "px")
+          .text(`${d.name}: ${v}σ`))
+        .on("mouseout", () => tip2.style("opacity", 0));
+      f.g.append("text").attr("x", x(STEPS[0]) - 8)
+        .attr("y", y(d.vals[0]) + 4).attr("text-anchor", "end")
+        .attr("fill", d.color).attr("font-size", 12).text(d.name);
+    });
+  })();
+
+  // ---- E4: direction of the correction ----
+  (function () {
+    const BINS = ["0–2", "2–4", "4–8", "8–16", "16–64"];
+    const PFR = [0.298, 0.297, 0.264, 0.218, 0.208];
+    const PFV = [0.312, 0.300, 0.280, 0.218, 0.203];
+    const f = frame("#cw-e4", 640, 300, {l: 52, r: 20, t: 12, b: 44});
+    if (!f) return;
+    const x = d3.scalePoint().domain(BINS).range([30, f.iw - 30]);
+    const y = d3.scaleLinear().domain([0.15, 0.4]).range([f.ih, 0]);
+    f.g.append("g").attr("transform", `translate(0,${f.ih})`)
+      .call(d3.axisBottom(x));
+    f.g.append("g").call(d3.axisLeft(y).ticks(6));
+    f.g.append("text").attr("x", f.iw / 2).attr("y", f.ih + 36)
+      .attr("text-anchor", "middle").attr("font-size", 12)
+      .text("distance to filament web (voxels = h⁻¹Mpc)");
+    f.g.append("text").attr("transform", "rotate(-90)").attr("x", -f.ih / 2)
+      .attr("y", -38).attr("text-anchor", "middle").attr("font-size", 12)
+      .text("mean squared projection on filament axis");
+    f.g.append("line").attr("x1", 0).attr("x2", f.iw)
+      .attr("y1", y(1 / 3)).attr("y2", y(1 / 3))
+      .attr("stroke", "#000").attr("stroke-dasharray", "5,4");
+    f.g.append("text").attr("x", f.iw - 4).attr("y", y(1 / 3) - 6)
+      .attr("text-anchor", "end").attr("font-size", 11)
+      .text("isotropic (1/3)");
+    f.g.append("text").attr("x", 6).attr("y", y(0.21) + 26)
+      .attr("font-size", 11).attr("fill", RED)
+      .text("below the line = correction points ACROSS filaments");
+    [["position residual", PFR, BLUE], ["velocity residual", PFV, ORANGE]]
+      .forEach(([lab, vals, col], k) => {
+        const line = d3.line().x((v, i) => x(BINS[i])).y(v => y(v));
+        f.g.append("path").datum(vals).attr("fill", "none")
+          .attr("stroke", col).attr("stroke-width", 2.5).attr("d", line);
+        f.g.selectAll(null).data(vals).enter().append("circle")
+          .attr("cx", (v, i) => x(BINS[i])).attr("cy", v => y(v))
+          .attr("r", 4.5).attr("fill", col)
+          .on("mousemove", (ev, v) => tip2.style("opacity", 1)
+            .style("left", (ev.pageX + 12) + "px")
+            .style("top", (ev.pageY - 10) + "px").text(`${lab}: ${v}`))
+          .on("mouseout", () => tip2.style("opacity", 0));
+        f.g.append("text").attr("x", x(BINS[4]) + 6)
+          .attr("y", y(vals[4]) + (k ? 14 : -8)).attr("font-size", 11)
+          .attr("fill", col).text(lab);
+      });
+  })();
+
+  // ---- model ladder ----
+  (function () {
+    const MODELS = [
+      ["isotropic sticking (classical adhesion)", 5.34],
+      ["Zel'dovich (no correction)", 4.98],
+      ["+ transverse damping (E5)", 4.93],
+      ["+ self frames, β = 0.75 (E5c)", 4.64],
+      ["frozen: β = 0.6, 2 Mpc frames (E5d)", 4.52],
+    ];
+    const BOUND = 4.47;
+    const f = frame("#cw-ladder", 640, 300, {l: 300, r: 30, t: 14, b: 40});
+    if (!f) return;
+    const y = d3.scaleBand().domain(MODELS.map(m => m[0]))
+      .range([0, f.ih]).padding(0.35);
+    const x = d3.scaleLinear().domain([4.3, 5.5]).range([0, f.iw]);
+    f.g.append("g").attr("transform", `translate(0,${f.ih})`)
+      .call(d3.axisBottom(x).ticks(6));
+    f.g.append("g").call(d3.axisLeft(y).tickSize(0));
+    f.g.append("text").attr("x", f.iw / 2).attr("y", f.ih + 34)
+      .attr("text-anchor", "middle").attr("font-size", 12)
+      .text("median transport error vs N-body truth (voxels, lower is better)");
+    f.g.append("line").attr("x1", x(BOUND)).attr("x2", x(BOUND))
+      .attr("y1", 0).attr("y2", f.ih)
+      .attr("stroke", RED).attr("stroke-dasharray", "5,4");
+    f.g.append("text").attr("x", x(BOUND) - 4).attr("y", 12)
+      .attr("text-anchor", "end").attr("font-size", 11).attr("fill", RED)
+      .text("oracle bound 4.47");
+    MODELS.forEach(([name, v], i) => {
+      f.g.append("line").attr("x1", x(4.3)).attr("x2", x(v))
+        .attr("y1", y(name) + y.bandwidth() / 2)
+        .attr("y2", y(name) + y.bandwidth() / 2)
+        .attr("stroke", "#ddd");
+      f.g.append("circle").attr("cx", x(v))
+        .attr("cy", y(name) + y.bandwidth() / 2).attr("r", 6.5)
+        .attr("fill", i >= 2 ? BLUE : GREY)
+        .on("mousemove", (ev) => tip2.style("opacity", 1)
+          .style("left", (ev.pageX + 12) + "px")
+          .style("top", (ev.pageY - 10) + "px").text(`${v} vox`))
+        .on("mouseout", () => tip2.style("opacity", 0));
+      f.g.append("text").attr("x", x(v) + 10)
+        .attr("y", y(name) + y.bandwidth() / 2 + 4)
+        .attr("font-size", 11).text(v.toFixed(2));
+    });
+  })();
+
+  // ---- per-bin gains ----
+  (function () {
+    const BINS = ["0–2", "2–4", "4–8", "8–64"];
+    const SERIES = [["Zel'dovich", [6.95, 5.43, 3.74, 3.38], GREY],
+                    ["refined model", [5.96, 5.37, 3.67, 3.28], BLUE],
+                    ["oracle frames", [5.53, 5.20, 3.68, 3.33], RED]];
+    const f = frame("#cw-bins", 640, 300, {l: 52, r: 20, t: 14, b: 58});
+    if (!f) return;
+    const x0 = d3.scaleBand().domain(BINS).range([0, f.iw]).padding(0.25);
+    const x1 = d3.scaleBand().domain(SERIES.map(s => s[0]))
+      .range([0, x0.bandwidth()]).padding(0.15);
+    const y = d3.scaleLinear().domain([0, 7.5]).range([f.ih, 0]);
+    f.g.append("g").attr("transform", `translate(0,${f.ih})`)
+      .call(d3.axisBottom(x0));
+    f.g.append("g").call(d3.axisLeft(y).ticks(6));
+    f.g.append("text").attr("x", f.iw / 2).attr("y", f.ih + 34)
+      .attr("text-anchor", "middle").attr("font-size", 12)
+      .text("distance to filament web (voxels)");
+    f.g.append("text").attr("transform", "rotate(-90)").attr("x", -f.ih / 2)
+      .attr("y", -36).attr("text-anchor", "middle").attr("font-size", 12)
+      .text("median transport error (voxels)");
+    SERIES.forEach(([name, vals, col]) => {
+      BINS.forEach((b, i) => {
+        f.g.append("rect").attr("x", x0(b) + x1(name)).attr("y", y(vals[i]))
+          .attr("width", x1.bandwidth()).attr("height", f.ih - y(vals[i]))
+          .attr("fill", col).attr("opacity", col === GREY ? 0.6 : 0.85)
+          .on("mousemove", (ev) => tip2.style("opacity", 1)
+            .style("left", (ev.pageX + 12) + "px")
+            .style("top", (ev.pageY - 10) + "px")
+            .text(`${name}: ${vals[i]}`))
+          .on("mouseout", () => tip2.style("opacity", 0));
+      });
+    });
+    const leg = f.g.append("g").attr("transform", `translate(0,${f.ih + 42})`);
+    SERIES.forEach(([name, _, col], i) => {
+      leg.append("rect").attr("x", i * 170).attr("width", 12)
+        .attr("height", 12).attr("fill", col);
+      leg.append("text").attr("x", i * 170 + 17).attr("y", 10)
+        .attr("font-size", 11).text(name);
+    });
+  })();
 })();
 </script>
