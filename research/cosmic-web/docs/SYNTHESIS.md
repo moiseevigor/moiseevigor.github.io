@@ -144,3 +144,16 @@ not a result (H3b). The radial profile is extended to ≥60′ but cannot
 discriminate filament gas from clustered halo gas at Planck resolution
 (H3c). Program closed: pushing H3b further needs deeper tSZ data (e.g.,
 ACT/SPT), not more analysis of this set.
+
+## E3c addendum (ACT DR6, 2026-07-04) — program close
+
+The decisive WHIM test at ACT depth returns a null: masked residual 1.77σ
+(3′) / 1.11σ (7′) — the halo-only model survives; between-halo gas along
+CMASS spines is bounded, not detected. Diagnosis: shell-projection places
+the signal at degree scales that ACT's map filters (unmasked stack 2.95σ
+vs Planck's 9σ on the overlap); ACT-depth WHIM work needs a small-scale
+analysis design. With the pre-registered gate failed, the program is now
+closed end to end: every hypothesis (H1–H4, H3a–c) carries a replicated
+verdict, and the two guaranteed outputs stand — the methods/benchmark
+contribution and a measured 9σ web-gas detection with an honest
+halo-vs-filament decomposition.
