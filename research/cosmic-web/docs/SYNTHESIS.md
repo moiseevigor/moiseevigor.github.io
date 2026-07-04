@@ -134,3 +134,13 @@ lift's anisotropy-descriptor advantage replicates on the real Universe
 placement does not preserve galactic latitude; tracer-halo gas not masked;
 single shell, no systematics weights. With E3 executed, every hypothesis
 of the program — H1–H4 — now has an empirical verdict.
+
+## E3b addendum (second pass, 2026-07-04)
+
+Latitude-matched nulls STRENGTHEN the y-detection (9.0σ Hessian / 6.9σ
+lift) — H3a supported. Tracer-halo masking leaves 1.95σ / 0.07σ — the
+signal is dominantly halo gas; a between-halos (WHIM) component is a hint,
+not a result (H3b). The radial profile is extended to ≥60′ but cannot
+discriminate filament gas from clustered halo gas at Planck resolution
+(H3c). Program closed: pushing H3b further needs deeper tSZ data (e.g.,
+ACT/SPT), not more analysis of this set.

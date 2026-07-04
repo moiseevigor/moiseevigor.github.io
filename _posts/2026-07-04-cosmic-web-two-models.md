@@ -355,10 +355,14 @@ The program's final experiment left simulations behind: 274,000 real BOSS
 CMASS galaxies (z = 0.45–0.55) tiled into eighteen 512 h⁻¹Mpc cubes, spines
 extracted by both methods at matched length, and the networks stacked
 against Planck maps with footprint-matched rotated controls. Three things
-happened. First, a **~4–5σ Compton-y detection**: the extracted spine
-networks sit on measurably hot gas — the web the methods draw is physically
-real. Second, the Hessian's spines carry slightly more of that signal
-(4.8σ vs 4.1σ), consistent with everything above. Third — and this is the
+happened. First, a **Compton-y detection** — rising to **~9σ** under the
+strictest controls (nulls matched to the spine points' galactic-latitude
+distribution): the extracted spine networks sit on measurably hot gas, so
+the web the methods draw is physically real. Follow-up tests showed the
+signal is carried mostly by the gas of the survey galaxies' own halos —
+gas *between* the halos stays a ~2σ hint at Planck's depth. Second, the
+Hessian's spines carry more of the signal than the lift's on every
+statistic, consistent with everything above. Third — and this is the
 lift's one clean win, replicated from simulation to sky — its spine
 tangents align with the tidal eigenframe at 0.677 ± 0.016 vs the Hessian's
 0.617 ± 0.016 across all eighteen tiles (isotropic null 0.5). The lifted
