@@ -623,7 +623,7 @@ scoped in the
 </div><!-- /.l-body -->
 
 <style>
-figure.l-middle { padding: 0 14px; box-sizing: border-box; max-width: 100%; overflow-x: hidden; }
+figure.l-middle { max-width: calc(var(--body-w) + 32px + var(--gutter-w)); padding: 0 14px; box-sizing: border-box; overflow-x: hidden; }
 figure.l-middle svg, figure.l-middle img { max-width: 100%; height: auto; }
 .cw-ctl { font-size: 0.85rem; color: #555; }
 .cw-btn {
@@ -1085,9 +1085,10 @@ figure.l-middle svg, figure.l-middle img { max-width: 100%; height: auto; }
             .style("left", (ev.pageX + 12) + "px")
             .style("top", (ev.pageY - 10) + "px").text(`${lab}: ${v}`))
           .on("mouseout", () => tip2.style("opacity", 0));
-        f.g.append("text").attr("x", x(BINS[4]) + 6)
-          .attr("y", y(vals[4]) + (k ? 14 : -8)).attr("font-size", 11)
-          .attr("fill", col).text(lab);
+        f.g.append("circle").attr("cx", 14).attr("cy", 14 + k * 18)
+          .attr("r", 5).attr("fill", col);
+        f.g.append("text").attr("x", 24).attr("y", 18 + k * 18)
+          .attr("font-size", 11).attr("fill", col).text(lab);
       });
   })();
 

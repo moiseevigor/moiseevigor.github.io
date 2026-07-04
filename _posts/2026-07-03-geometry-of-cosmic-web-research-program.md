@@ -531,7 +531,7 @@ volumes or sky areas. Parameter count is part of the model comparison (H2).
 </div><!-- /.l-body -->
 
 <style>
-figure.l-middle { padding: 0 14px; box-sizing: border-box; max-width: 100%; overflow-x: hidden; }
+figure.l-middle { max-width: calc(var(--body-w) + 32px + var(--gutter-w)); padding: 0 14px; box-sizing: border-box; overflow-x: hidden; }
 figure.l-middle svg { max-width: 100%; height: auto; }
 </style>
 <script>
