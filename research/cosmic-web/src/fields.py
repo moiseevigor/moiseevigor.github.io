@@ -240,3 +240,24 @@ def tidal_frame(field, smooth=4.0):
             T[..., i, j] = T[..., j, i] = tij
     vals, vecs = np.linalg.eigh(T)      # ascending eigenvalues
     return vecs[..., :, 0]              # e3: min-eigenvalue eigenvector
+
+
+def tidal_frame_full(field, smooth=4.0):
+    """(e1, e3): max- and min-eigenvalue eigenvectors of the tidal tensor
+    per voxel — e1 is the first-collapse direction, e3 the filament axis."""
+    delta = field / field.mean() - 1 if field.min() >= 0 else field
+    N = field.shape[0]
+    dk = np.fft.rfftn(delta)
+    k1 = np.fft.fftfreq(N) * 2 * np.pi
+    kx, ky, kz = np.meshgrid(k1, k1, k1[: N // 2 + 1], indexing="ij")
+    k2 = kx ** 2 + ky ** 2 + kz ** 2
+    k2[0, 0, 0] = 1.0
+    sm = np.exp(-0.5 * k2 * smooth ** 2)
+    ks = [kx, ky, kz]
+    T = np.empty((N, N, N, 3, 3), dtype=np.float32)
+    for i in range(3):
+        for j in range(i, 3):
+            tij = np.fft.irfftn(ks[i] * ks[j] / k2 * dk * sm, s=(N, N, N))
+            T[..., i, j] = T[..., j, i] = tij
+    vals, vecs = np.linalg.eigh(T)
+    return vecs[..., :, 2], vecs[..., :, 0]
