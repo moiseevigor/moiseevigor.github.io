@@ -59,7 +59,7 @@ def band_mask(rho, pos, lo=2.0, hi=20.0):
 def run_seed(seed):
     rng = np.random.default_rng(seed)
     if PM:
-        pos, _, _, _, _ = pm.pm_sim(N, L, rng, n_steps=90, track=1)
+        pos, _, _, _, _, _, _ = pm.pm_sim(N, L, rng, n_steps=90, track=1)
         rho = fields.cic_deposit(pos, N)
     else:
         rho, pos = fields.zeldovich_box(N, L, D, rng, trunc=TRUNC)

@@ -195,3 +195,16 @@ both E2 signatures (transverse arrival, weak in-tube streaming) and
 explains why the lift works as a descriptor (M3) but not as a transport
 model. With T1 closed, every item of the original program — T1, E0–E3,
 H1–H4 — carries an executed verdict. The program is complete.
+
+## E4 addendum (H4', 2026-07-04) — the adjustment-term reframing, tested
+
+Reframed hypothesis (the program owner's original intent): the lifted
+geometry is not the mechanism but an adjustment term on top of standard
+models. E4 measured that term directly — the residual between true PM
+transport and each particle's own Zel'dovich prediction. Result: the
+adjustment is real and tidal-frame-anisotropic, but TRANSVERSE
+(⟨(R̂·e₃)²⟩ = 0.21–0.30 < 1/3; R∥/R⊥ = 0.63–0.89 everywhere): the
+correction current models need is anisotropic damping of motion across
+walls/filaments (adhesion-like), not enhanced transport along them.
+H4' refuted as stated; the constructive product is the measured form and
+amplitude of the true adjustment term. Consistent with T1 and E2.

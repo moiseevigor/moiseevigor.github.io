@@ -58,7 +58,7 @@ def e3_at(e3, pts):
 def run_seed(seed):
     t0 = time.time()
     rng = np.random.default_rng(seed)
-    x, v, tidx, ta, tpos = pm.pm_sim(N, L, rng, n_steps=90, track=50000)
+    x, v, tidx, ta, tpos, _, _ = pm.pm_sim(N, L, rng, n_steps=90, track=50000)
     rho = fields.cic_deposit(x, N)
     clean = gaussian_filter(np.log1p(rho), 1.0, mode="wrap")
     e3 = fields.tidal_frame(clean)

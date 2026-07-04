@@ -75,6 +75,8 @@ def pm_sim(N, L, rng_master, a_init=0.1, a_final=1.0, n_steps=90, trunc=0.0,
     dtau = (tau_f - tau_i) / n_steps
     track_idx = np.random.default_rng(0).choice(len(x), track, replace=False)
     track_a, track_pos = [], []
+    q_track = pos_q[track_idx].copy()      # Lagrangian positions
+    psi_track = psi[track_idx].copy()      # ZA displacement field at D=1
 
     tau = tau_i
     F = _forces(x, N, a_init, kx, ky, kz, k2)
@@ -91,4 +93,5 @@ def pm_sim(N, L, rng_master, a_init=0.1, a_final=1.0, n_steps=90, trunc=0.0,
             track_a.append(a_new)
             track_pos.append(x[track_idx].astype(np.float32))
     vel = p / a_new
-    return x, vel, track_idx, np.array(track_a), np.array(track_pos)
+    return (x, vel, track_idx, np.array(track_a), np.array(track_pos),
+            q_track, psi_track)
