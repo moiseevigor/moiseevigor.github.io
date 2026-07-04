@@ -63,15 +63,13 @@ geometry is not just a detector but part of the *physics*.
 
 ## The two models
 
-Both start identically: blur the galaxy points into a smooth density
-$$f:\mathbb{R}^3 \to \mathbb{R}$$ (cloud-in-cell deposit, log transform, light
+Both start identically: blur the galaxy points into a smooth density $$f:\mathbb{R}^3 \to \mathbb{R}$$ (cloud-in-cell deposit, log transform, light
 Gaussian smoothing). They differ in how they ask "is there a filament through
 this point?"
 
 **Model 1 — the Hessian baseline (local, quadratic).** On a bright ridge the
 density falls off steeply in two directions and stays flat along the third.
-So compute the Hessian $$H = D^2 f$$ at every point, take eigenvalues
-$$\lambda_1 \ge \lambda_2 \ge \lambda_3$$ of $$H$$, and score
+So compute the Hessian $$H = D^2 f$$ at every point, take eigenvalues $$\lambda_1 \ge \lambda_2 \ge \lambda_3$$ of $$H$$, and score
 
 $$
 R_{\mathrm{hess}}(\mathbf{x}) = -\tfrac{1}{2}\left(\lambda_2 + \lambda_3\right)_+ ,
@@ -79,8 +77,7 @@ $$
 
 with the filament direction given by the top eigenvector. This is the
 workhorse of the field (the MMF and NEXUS filament finders are multiscale
-versions of it). Its structural limit: everything it knows about direction at
-$$\mathbf{x}$$ sits in one quadratic form — as a function on the sphere of
+versions of it). Its structural limit: everything it knows about direction at $$\mathbf{x}$$ sits in one quadratic form — as a function on the sphere of
 directions, it has angular bandwidth 2 and *cannot be made sharper*.
 
 **Model 2 — the SE(3) orientation lift.** Measure the data separately for
@@ -96,11 +93,9 @@ e^{-\frac{1}{2}\left(\sigma_\parallel^2 k_\parallel^2 + \sigma_\perp^2 |\mathbf{
 $$
 
 minus the transverse Laplacian of an $$\mathbf{n}$$-elongated Gaussian: large
-exactly on ridges aligned with $$\mathbf{n}$$. The function $$U$$ lives on
-$$\mathbb{R}^3 \times S^2$$ (we sample 42 axes on the hemisphere), and its
+exactly on ridges aligned with $$\mathbf{n}$$. The function $$U$$ lives on $$\mathbb{R}^3 \times S^2$$ (we sample 42 axes on the hemisphere), and its
 angular sharpness grows with the aspect ratio $$\sigma_\parallel/\sigma_\perp$$
-— a free parameter, unlike the Hessian's fixed bluntness. The final score is
-$$\max_{\mathbf{n}} U$$. The theory also offers a second ingredient — a
+— a free parameter, unlike the Hessian's fixed bluntness. The final score is $$\max_{\mathbf{n}} U$$. The theory also offers a second ingredient — a
 **hypoelliptic diffusion** on the lifted space that propagates evidence along
 curves (the contour-completion flow of the visual cortex) — remember this
 one; its fate below is an honest surprise.
@@ -634,8 +629,8 @@ scoped in the
     function frame(sel, w, h, m) {
       d3.select(sel).selectAll("*").remove();
       const svg = d3.select(sel).append("svg")
-        .attr("viewBox", `0 0 $${w} $${h}`).style("width", "100%");
-      return { svg, g: svg.append("g").attr("transform", `translate($${m.l},$${m.t})`),
+        .attr("viewBox", `0 0 ${w} ${h}`).style("width", "100%");
+      return { svg, g: svg.append("g").attr("transform", `translate(${m.l},${m.t})`),
                iw: w - m.l - m.r, ih: h - m.t - m.b };
     }
 
@@ -664,7 +659,7 @@ scoped in the
           .attr("fill", col)
           .on("mousemove", (ev, v) => tip.style("opacity", 1)
             .style("left", (ev.pageX + 12) + "px").style("top", (ev.pageY - 10) + "px")
-            .text(`$${lab}: $${v.toFixed(3)}`))
+            .text(`${lab}: ${v.toFixed(3)}`))
           .on("mouseout", () => tip.style("opacity", 0));
         g.append("text").attr("x", x(levels[levels.length - 1]) - 4)
           .attr("y", Math.max(12, y(d.agg[mth][cState.m][levels.length - 1])
@@ -714,7 +709,7 @@ scoped in the
           .attr("stroke", "#c53030").attr("stroke-width", 2.5);
         g.append("text").attr("x", cx).attr("y", 10).attr("text-anchor", "middle")
           .attr("font-size", 11).attr("fill", "#555")
-          .text(`$${wins}/$${vals.length} +`);
+          .text(`${wins}/${vals.length} +`);
       });
     }
     document.querySelectorAll(".cw-dmet").forEach(b => b.onclick = () => {
@@ -762,7 +757,7 @@ scoped in the
             .attr("opacity", m === "hessian" ? 0.95 : 0.55 + 0.15 * methods.indexOf(m))
             .on("mousemove", ev => tip.style("opacity", 1)
               .style("left", (ev.pageX + 12) + "px").style("top", (ev.pageY - 10) + "px")
-              .text(`$${E1B_LABELS[m] || m}: $${v.toFixed(3)}`))
+              .text(`${E1B_LABELS[m] || m}: ${v.toFixed(3)}`))
             .on("mouseout", () => tip.style("opacity", 0));
         });
       });

@@ -58,13 +58,11 @@ hypothesis</em>, and each hypothesis states in advance what result would kill it
 
 ## The question
 
-Gravity organises matter into a **cosmic web**: sheets, filaments of width
-$$\sim 1{-}3\,h^{-1}\mathrm{Mpc}$$, and nodes, surrounding vast voids. Filaments are
+Gravity organises matter into a **cosmic web**: sheets, filaments of width $$\sim 1{-}3\,h^{-1}\mathrm{Mpc}$$, and nodes, surrounding vast voids. Filaments are
 not merely *places* — each carries a **local direction** (its tangent). The
 [Geometry of Seeing]({% post_url 2026-04-25-geometry-of-seeing-visual-cortex-se2 %})
 series developed the mathematics of exactly this situation in 2D: the visual cortex
-lifts an image from $$\mathbb{R}^2$$ to the position–orientation space
-$$\mathbb{R}^2 \times S^1 \cong \mathrm{SE}(2)$$, and completes contours along
+lifts an image from $$\mathbb{R}^2$$ to the position–orientation space $$\mathbb{R}^2 \times S^1 \cong \mathrm{SE}(2)$$, and completes contours along
 sub-Riemannian geodesics. The 3D analogue is the homogeneous space
 
 $$
@@ -159,8 +157,7 @@ the *instrument* question (C1) is genuinely open.
 galaxy overdensities: weak-lensing detections of inter-cluster filaments (Epps
 &amp; Hudson 2017), stacked thermal Sunyaev–Zel'dovich (tSZ) signal from the warm–hot
 intergalactic medium between luminous-red-galaxy pairs (de Graaff et al. 2019;
-Tanimura et al. 2019), and 3D Lyman-$$\alpha$$ forest tomography of the web at
-$$z \sim 2.3$$ (CLAMATO; Lee et al. 2018). Galaxy spins align with filament axes in
+Tanimura et al. 2019), and 3D Lyman-$$\alpha$$ forest tomography of the web at $$z \sim 2.3$$ (CLAMATO; Lee et al. 2018). Galaxy spins align with filament axes in
 a mass-dependent way (Tempel &amp; Libeskind 2013; Codis et al. 2012). These give
 us **independent channels** to validate any new skeleton: lensing mass, tSZ gas,
 and spin alignment.
@@ -172,8 +169,7 @@ diffusion** that smooths strongly along the direction $$\mathbf{n}$$ and weakly
 across and in orientation, which enhances elongated coherent structures while
 keeping crossings separated; extract curves as **sub-Riemannian geodesics** that
 penalise bending. In 2D this reproduces the psychophysical association field
-(Duits, Boscain, Rossi &amp; Sachkov 2014); in 3D on
-$$\mathrm{SE}(3)/\mathrm{SO}(2)$$ it underlies crossing-preserving enhancement of
+(Duits, Boscain, Rossi &amp; Sachkov 2014); in 3D on $$\mathrm{SE}(3)/\mathrm{SO}(2)$$ it underlies crossing-preserving enhancement of
 diffusion-MRI fibre fields (Duits &amp; Franken 2011; Portegies et al. 2015).
 
 **The candidate edge**, in one sentence: *filament finders in cosmology are still
@@ -203,8 +199,7 @@ does not literally apply. Making the argument respectable in comoving coordinate
 (where the Zel'dovich flow is potential, $$\mathbf{v} \propto \nabla_q \Phi$$) is
 itself a theory work-item (T1 below), not an assumption we grant ourselves.
 
-**Orientation is physical here.** The tidal tensor gives every point a *frame*
-$$(e_1, e_2, e_3)$$ with $$\lambda_1 \ge \lambda_2 \ge \lambda_3$$, and filaments
+**Orientation is physical here.** The tidal tensor gives every point a *frame* $$(e_1, e_2, e_3)$$ with $$\lambda_1 \ge \lambda_2 \ge \lambda_3$$, and filaments
 extend along $$e_3$$. So the natural generator on $$\mathbb{R}^3 \times S^2$$ is not
 isotropic: diffusion should be strong along the local tangent, weak across it and
 in orientation, with coefficients tied to the tidal eigenvalues:
@@ -217,13 +212,8 @@ $$
 + \mu\, \mathcal{A}_3\, U,
 $$
 
-where $$\mathcal{A}_i$$ are the left-invariant vector fields on
-$$\mathrm{SE}(3)/\mathrm{SO}(2)$$ ($$\mathcal{A}_3$$ = transport along $$\mathbf{n}$$),
-$$\Delta_{S^2}$$ is the spherical Laplacian in the orientation variable,
-$$D_\parallel \gg D_\perp$$, and the drift $$\mu$$ and the ratios
-$$D_\parallel : D_\perp : D_S$$ are functions of $$(\lambda_1, \lambda_2, \lambda_3)$$
-to be calibrated (see H2/E1). This is the direct 3D analogue of the
-$$\mathrm{SE}(2)$$ hypoelliptic evolution in
+where $$\mathcal{A}_i$$ are the left-invariant vector fields on $$\mathrm{SE}(3)/\mathrm{SO}(2)$$ ($$\mathcal{A}_3$$ = transport along $$\mathbf{n}$$), $$\Delta_{S^2}$$ is the spherical Laplacian in the orientation variable, $$D_\parallel \gg D_\perp$$, and the drift $$\mu$$ and the ratios $$D_\parallel : D_\perp : D_S$$ are functions of $$(\lambda_1, \lambda_2, \lambda_3)$$
+to be calibrated (see H2/E1). This is the direct 3D analogue of the $$\mathrm{SE}(2)$$ hypoelliptic evolution in
 [Part 1]({% post_url 2026-04-25-geometry-of-seeing-visual-cortex-se2 %}), with the
 physics entering through the coefficients instead of being bolted on afterwards.
 
@@ -237,16 +227,14 @@ eager the flow is in each direction.
 
 ## 3. Hypotheses
 
-Conventions used throughout: tidal eigenvalues ordered
-$$\lambda_1 \ge \lambda_2 \ge \lambda_3$$ with eigenvectors $$e_1, e_2, e_3$$;
+Conventions used throughout: tidal eigenvalues ordered $$\lambda_1 \ge \lambda_2 \ge \lambda_3$$ with eigenvectors $$e_1, e_2, e_3$$;
 filament axis along $$e_3$$. "Spine" = 1D curve set output by a filament finder.
 All metrics are defined in §5.
 
 **H1 (instrument).** *Orientation-lifted extraction recovers filament spines more
 faithfully than density-only methods, with the largest gains at
 crossings/junctions.*
-Falsifiable prediction: on simulations with known structure (E0, E1), the
-$$\mathrm{SE}(3)$$ spines beat DisPerSE and NEXUS spines on spine-distance and
+Falsifiable prediction: on simulations with known structure (E0, E1), the $$\mathrm{SE}(3)$$ spines beat DisPerSE and NEXUS spines on spine-distance and
 junction recovery at matched total spine length; if the gain at junctions is not
 statistically significant, H1 fails.
 
@@ -260,15 +248,13 @@ adds nothing — H2 fails even if H1 holds.
 
 **H3 (mass follows the geodesic spines).** *The sub-Riemannian spine network
 traces real mass and gas at least as well as standard skeletons.*
-Falsifiable prediction: stacking weak-lensing convergence and tSZ maps along
-$$\mathrm{SE}(3)$$ spines (E3) yields stack significance at least matching DisPerSE
+Falsifiable prediction: stacking weak-lensing convergence and tSZ maps along $$\mathrm{SE}(3)$$ spines (E3) yields stack significance at least matching DisPerSE
 spines on the same footprint, at matched spine length and after identical masking.
 A materially lower stack SNR kills H3.
 
 **H4 (formation, the strong claim).** *Matter transport during web assembly
 follows sub-Riemannian geodesics of the effective metric.*
-Falsifiable prediction: in an N-body simulation, lift particle trajectories
-$$(\mathbf{x}(t), \hat{\mathbf{v}}(t))$$ to $$\mathbb{R}^3 \times S^2$$ and compare
+Falsifiable prediction: in an N-body simulation, lift particle trajectories $$(\mathbf{x}(t), \hat{\mathbf{v}}(t))$$ to $$\mathbb{R}^3 \times S^2$$ and compare
 them, between fixed snapshots, to SR geodesics of the calibrated metric with the
 same endpoints. H4 requires the geodesic prediction to beat the straight-line
 (Zel'dovich ballistic) baseline on transport error by a pre-registered margin
@@ -286,22 +272,18 @@ principle for the Zel'dovich/adhesion flow in comoving coordinates, giving the
 effective metric whose geodesics the flow follows. Candidate route: the adhesion
 model is the zero-viscosity limit of Burgers flow, whose characteristics *are*
 extremals of an action; recast that action on $$\mathbb{R}^3 \times S^2$$ and read
-off the metric and the correct $$\lambda_i$$-dependence of
-$$D_\parallel, D_\perp, D_S, \mu$$. Also connects to optimal-transport
+off the metric and the correct $$\lambda_i$$-dependence of $$D_\parallel, D_\perp, D_S, \mu$$. Also connects to optimal-transport
 reconstruction of the early Universe (Brenier, Frisch et al. 2002), which is
 Monge–Ampère — i.e. already a geodesic statement in a Wasserstein geometry.
 Deliverable: a note fixing the functional form of the coefficients used in E1–E3
 instead of leaving them free parameters.
 
 **E0 (synthetic ground truth; days, laptop).**
-Generate Gaussian random fields with a $$\Lambda$$CDM-like power spectrum in a
-$$256^3$$ box, displace particles with the Zel'dovich map at several growth factors,
+Generate Gaussian random fields with a $$\Lambda$$CDM-like power spectrum in a $$256^3$$ box, displace particles with the Zel'dovich map at several growth factors,
 deposit density with cloud-in-cell. Ground-truth spines and junctions are known
 from the deformation-tensor eigenstructure of the initial field. Build the
-orientation score with 3D steerable ridge filters over $$\sim 3$$ scales and
-$$\sim 60{-}160$$ orientations (a $$256^3 \times 60$$ float32 score is $$\sim 4$$ GB —
-workstation-feasible), run the lifted diffusion, trace SR geodesics, project to
-$$\mathbb{R}^3$$. Benchmark against DisPerSE on the same fields across noise levels
+orientation score with 3D steerable ridge filters over $$\sim 3$$ scales and $$\sim 60{-}160$$ orientations (a $$256^3 \times 60$$ float32 score is $$\sim 4$$ GB —
+workstation-feasible), run the lifted diffusion, trace SR geodesics, project to $$\mathbb{R}^3$$. Benchmark against DisPerSE on the same fields across noise levels
 and sampling densities. **Tests H1. Kill criterion: no significant gain at any
 noise level.**
 
@@ -350,16 +332,16 @@ alignment trend with the new spines (a sharper mass transition supports H3).
   $$\mathbb{E}[A] = 1/2$$; significance by permutation over randomly rotated
   spines. Same statistic against normalised DM velocities.
 - **M4 — transport error (E2).** For particle $$p$$ over snapshot interval
-  $$[t_1, t_2]$$, $\varepsilon_p = \tfrac{1}{L_p} \int \lVert x_p(t) -
-  \gamma_p(t) \rVert \, dt$$, path-length-normalised, where $$\gamma_p$ is the
+  $$[t_1, t_2]$$, $$\varepsilon_p = \tfrac{1}{L_p} \int \lVert x_p(t) - \gamma_p(t) \rVert \, dt$$,
+  path-length-normalised, where $$\gamma_p$$ is the
   candidate curve with matched endpoints. Compare distributions of
   $$\varepsilon_p$$ (SR geodesic vs. Zel'dovich vs. isotropic Jacobi) with a paired
   test; pre-registered success margin: median error reduction $$\ge 10\%$$ over
   Zel'dovich. Below that, H4 is rejected regardless of p-values.
 - **M5 — stack SNR (E3).** Mean excess convergence
   $$\Delta\kappa$$ (or Compton-$$y$$) in tubes of radius $$1\,h^{-1}$$Mpc around
-  spines; $\mathrm{SNR} = (\Delta\kappa - \langle \Delta\kappa_{\mathrm{ctrl}}
-  \rangle)/\sigma_{\mathrm{ctrl}}$$ over $$\ge 1000$ control realisations
+  spines; $$\mathrm{SNR} = (\Delta\kappa - \langle \Delta\kappa_{\mathrm{ctrl}} \rangle)/\sigma_{\mathrm{ctrl}}$$
+  over $$\ge 1000$$ control realisations
   (randomly rotated/translated spines respecting the survey mask).
 - **M6 — topology.** Betti curves $$\beta_0, \beta_1$$ of the skeleton vs.
   persistence threshold; compared to the reference skeleton's, on the same field.
@@ -428,11 +410,10 @@ volumes or sky areas. Parameter count is part of the model comparison (H2).
 - **$$\Lambda$$CDM** — standard cosmological model: cold dark matter plus a
   cosmological constant in an expanding FLRW spacetime.
 - **Tidal tensor $$T_{ij}$$** — Hessian $$\partial_i \partial_j \Phi$$ of the peculiar
-  gravitational potential; its eigenframe ($\lambda_1 \ge \lambda_2 \ge
-  \lambda_3$$) sets the anisotropy of collapse; filament axis $$\parallel e_3$.
+  gravitational potential; its eigenframe ($$\lambda_1 \ge \lambda_2 \ge \lambda_3$$)
+  sets the anisotropy of collapse; filament axis $$\parallel e_3$$.
 - **Zel'dovich approximation** — first-order Lagrangian perturbation theory:
-  ballistic comoving displacement $\mathbf{x} = \mathbf{q} -
-  D(t)\nabla_q\Phi(\mathbf{q})$.
+  ballistic comoving displacement $$\mathbf{x} = \mathbf{q} - D(t)\nabla_q\Phi(\mathbf{q})$$.
 - **Adhesion model** — Zel'dovich flow regularised by infinitesimal Burgers
   viscosity so matter sticks at shell-crossing, producing persistent
   sheets/filaments.
