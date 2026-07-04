@@ -157,3 +157,15 @@ closed end to end: every hypothesis (H1–H4, H3a–c) carries a replicated
 verdict, and the two guaranteed outputs stand — the methods/benchmark
 contribution and a measured 9σ web-gas detection with an honest
 halo-vs-filament decomposition.
+
+## E3d addendum (2026-07-04) — terminal result: bridge gas detected
+
+E3c's null carried the diagnosis (wrong angular scales for ACT), and the
+design it prescribed delivered: the galaxy-pair bridge stack (876k CMASS
+pairs, disc-averaged sampling, six-angle ring controls that null any
+circularly-symmetric halo by construction) detects inter-halo gas at
+**5.24σ on ACT DR6** (2.28×10⁻⁸) with Planck concurring at 19σ
+(2.97×10⁻⁸). Model A (halo-only baryons) is rejected; Model B (gas along
+the bridges between halos) is established at both instruments. The
+program therefore closes on a positive terminal measurement, reached by
+following its own negative result's diagnosis.
