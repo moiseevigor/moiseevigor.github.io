@@ -37,8 +37,12 @@ hurts even with a clean frame); <strong>H4</strong> refuted in the bulk —
 filament assembly is transverse pancake infall, not along-axis geodesic
 transport. Survivors: the lift as anisotropy descriptor (spine–tidal-frame
 alignment 0.73–0.76 vs 0.67), a hybrid score improving purity/junctions,
-and the methodological lesson itself. E3/H3 (real survey data) remains
-open. Full chain: <code>research/cosmic-web/docs/SYNTHESIS.md</code>.
+and the methodological lesson itself. <strong>E3/H3 executed</strong> (BOSS
+CMASS × Planck, first pass): spine networks show a ~4–5σ Compton-y excess
+(H3 supported; Hessian ≥ lift on the cross-signal), and the lift's
+tidal-alignment advantage replicates on real data (0.68 vs 0.62 over 18
+tiles). Every hypothesis of the program now has an empirical verdict.
+Full chain: <code>research/cosmic-web/docs/SYNTHESIS.md</code>.
 </div>
 
 <div class="callout">

@@ -121,3 +121,16 @@ filaments.
 With these, every locally executable hypothesis and caveat of the program
 has a replicated verdict. Remaining: E3/H3 on real survey data (blocked on
 data download approval).
+
+## E3 addendum (real data, 2026-07-04)
+
+BOSS CMASS-North (z 0.45–0.55, 274k galaxies in 18 tiles) × Planck:
+**H3 supported** — spine networks carry a ~4–5σ Compton-y excess over
+footprint-matched controls (lensing null, noise-dominated); the Hessian's
+spines carry slightly more signal than the lift's at matched length
+(4.8σ vs 4.1σ), consistent with the corrected H1/E1b. **M3-real:** the
+lift's anisotropy-descriptor advantage replicates on the real Universe
+(0.677 ± 0.016 vs 0.617 ± 0.016 over tiles, null 0.5). Caveats: control
+placement does not preserve galactic latitude; tracer-halo gas not masked;
+single shell, no systematics weights. With E3 executed, every hypothesis
+of the program — H1–H4 — now has an empirical verdict.

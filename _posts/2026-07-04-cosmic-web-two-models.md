@@ -344,6 +344,22 @@ shown the tidal field — but the geodesic *transport* story is refuted in the
 bulk, with a weak, sign-correct residual for matter already captured inside
 filament tubes.
 
+## A real-Universe coda
+
+The program's final experiment left simulations behind: 274,000 real BOSS
+CMASS galaxies (z = 0.45–0.55) tiled into eighteen 512 h⁻¹Mpc cubes, spines
+extracted by both methods at matched length, and the networks stacked
+against Planck maps with footprint-matched rotated controls. Three things
+happened. First, a **~4–5σ Compton-y detection**: the extracted spine
+networks sit on measurably hot gas — the web the methods draw is physically
+real. Second, the Hessian's spines carry slightly more of that signal
+(4.8σ vs 4.1σ), consistent with everything above. Third — and this is the
+lift's one clean win, replicated from simulation to sky — its spine
+tangents align with the tidal eigenframe at 0.677 ± 0.016 vs the Hessian's
+0.617 ± 0.016 across all eighteen tiles (isotropic null 0.5). The lifted
+geometry reads the *anisotropy* of the real cosmic web better, even while
+the simpler model finds its mass better.
+
 ## So which model should you use?
 
 | Your situation | Use | Why |
