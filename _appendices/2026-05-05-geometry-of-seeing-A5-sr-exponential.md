@@ -22,8 +22,8 @@ series_part: A5
 arxiv: "0807.4731"
 coauthors: "Yu. L. Sachkov"
 comments: true
+permalink: /mathematics/2026/05/05/geometry-of-seeing-A5-sr-exponential/
 published: false
-listed: false   # appendix: reachable via series nav only, never listed standalone
 ---
 
 <div class="l-body" markdown="1">
@@ -39,8 +39,8 @@ Appendix A1 and this SR exponential — they are <em>different functions</em>
 on the same manifold.  The interactive figures borrow the geodesic-family
 visualisation directly from the
 <a href="https://moiseevigor.github.io/elliptic/examples/dubins-visual-cortex/">elliptic
-project's Dubins–visual-cortex example</a>; the Maxwell-pair and conjugate-
-locus figures formalise what that figure was already showing.
+project's Dubins–visual-cortex example</a>; the Maxwell-pair and
+conjugate-locus figures formalise what that figure was already showing.
 
 </div>
 
@@ -51,10 +51,12 @@ Lie-group $\exp$ (Appendix A1):
 $$\exp_{\mathrm{group}}: \mathfrak{se}(2) \to \mathrm{SE}(2), \qquad
   X \mapsto \exp(X) \cdot e.$$
 
-The 1-parameter subgroups $t \mapsto \exp(tX) \cdot e$ are the geodesics
-of any **bi-invariant** Riemannian metric on $\mathrm{SE}(2)$ — and
-$\mathrm{SE}(2)$ does carry such a metric.  But that is *not* the V1
-sub-Riemannian metric of Part 1.
+The 1-parameter subgroups $t \mapsto \exp(tX) \cdot e$ would be the
+geodesics of a **bi-invariant** Riemannian metric — but Appendix A1 showed
+$\mathrm{SE}(2)$ carries *no* such metric (its adjoint action is
+non-compact).  They remain the natural "group-straight" curves on
+$\mathrm{SE}(2)$; they are certainly not the geodesics of the
+sub-Riemannian (SR) metric of Part 1's primary-visual-cortex (V1) model.
 
 Sub-Riemannian $\mathrm{Exp}$:
 
@@ -85,7 +87,7 @@ whole story of cut/conjugate analysis.
 ## Closed-form geodesic endpoints
 
 For the inflectional family, parametrise by $k \in (0, 1)$ via
-$\sin(\varphi_0/2) = k\,\mathrm{sn}(s\mid k^2)$ — the substitution that
+$\sin(\varphi/2) = k\,\mathrm{sn}(s\mid k^2)$ — the substitution that
 A4 §3 derived from the half-angle.  Then Sachkov (2011) showed that the
 plane projection $(x(s), y(s))$ of the SR geodesic is
 
@@ -97,7 +99,8 @@ $$\boxed{\;y(s) \;=\; 2k\bigl(1 - \mathrm{cn}(s\mid k^2)\bigr).\;}$$
 form depends on the chosen sign of the curvature and the position of $s = 0$
 relative to the inflection.  The point is: each component is a
 combination of $\mathrm{sn}, \mathrm{cn}$ and incomplete elliptic
-integrals $E, F$.  No numerical ODE integration is needed.  Appendix A4 §7
+integrals $E, F$.  No numerical integration of an ordinary differential
+equation (ODE) is needed.  Appendix A4 §7
 gives the precise relations.)
 
 Three takeaways:
@@ -123,9 +126,9 @@ Three takeaways:
     <div class="fig-controls">
       <label>family
         <select id="exp-family">
-          <option value="inflectional" selected>inflectional ($k < 1$)</option>
-          <option value="separatrix">separatrix ($k = 1$, Euler spiral)</option>
-          <option value="noninflectional">non-inflectional ($k > 1$)</option>
+          <option value="inflectional" selected>inflectional (k &lt; 1)</option>
+          <option value="separatrix">separatrix (k = 1, Euler spiral)</option>
+          <option value="noninflectional">non-inflectional (k &gt; 1)</option>
         </select>
       </label>
       <label>$k$ (or $m = 2 - k$ for non-infl.)
@@ -166,16 +169,16 @@ along $\gamma$ — the Jacobi equation — whose solutions form a
 $2\dim G$-dimensional vector space. The Jacobi fields starting from
 $J(0) = 0$ describe geodesics through the same starting point with nearby
 initial directions. A <em>conjugate point</em> is where one of these
-fans-out family members closes up again.
+fanned-out family members closes up again.
 </aside>
 
 A <span class="annotated-term" data-note="note-jacobi-field">**Jacobi field**</span> along a geodesic $\gamma : [0, T] \to G$ is a
-variational vector field $J(s) \in T_{\gamma(s)} G$ obtained by varying
+variational vector field $$J(s) \in T_{\gamma(s)} G$$ obtained by varying
 $\gamma$ through nearby geodesics with the same $\gamma(0)$:
 
 $$J(s) \;=\; \tfrac{\partial}{\partial\varepsilon}\Big|_{\varepsilon=0} \gamma_\varepsilon(s),$$
 
-where $\gamma_\varepsilon$ is a 1-parameter family of geodesics with $\gamma_0 = \gamma$.
+where $$\gamma_\varepsilon$$ is a 1-parameter family of geodesics with $\gamma_0 = \gamma$.
 
 A point $\gamma(t^{\ast})$ is a **conjugate point** to $\gamma(0)$ if a
 non-trivial Jacobi field with $J(0) = 0$ also has $J(t^{\ast}) = 0$.
@@ -192,7 +195,8 @@ classical Riemannian Morse-theoretic statement.
 For SE(2), Sachkov's analysis shows:
 
 - For the inflectional family, the first conjugate time satisfies
-  $t_{\mathrm{conj}}(k) \leq 4K(k^2)/\omega_0$.
+  $t_{\mathrm{conj}}(k) \geq 4K(k^2)/\omega_0$ — it comes at or after the
+  first Maxwell time.
 - For non-inflectional and separatrix families, similar bounds hold with
   the relevant period.
 - The conjugate locus, as a set in $\mathrm{SE}(2)$, has a beautiful
@@ -203,7 +207,7 @@ For SE(2), Sachkov's analysis shows:
 A **cut point** is the first $t$ at which $\gamma$ stops being *globally*
 length-minimising — i.e. there is some other horizontal curve from
 $\gamma(0)$ to $\gamma(t)$ with strictly smaller SR length.  By
-definition, the cut time satisfies $t_{\mathrm{cut}} \leq t_{\mathrm{conj}}$
+definition, the cut time satisfies $$t_{\mathrm{cut}} \leq t_{\mathrm{conj}}$$
 (losing local optimality is at least as hard as losing global).
 
 A **Maxwell point** is a point where two *distinct* geodesics from
@@ -265,7 +269,7 @@ Part 3.
     <strong>first Maxwell time of this pair</strong>.
     Because $y_A(s) = 2k\bigl(1 - \mathrm{cn}(s\mid k^2)\bigr) \ge 0$ returns to
     zero only at $s = 4K(k^2)$ (and its multiples), the pair first re-coincides
-    in full — position <em>and</em> heading — at $s = 4K(k^2)$, independent of
+    in full — position <em>and</em> heading — at $s = 4K(k^2)$, for every
     $k$: exactly the first Maxwell time $t_{\mathrm{Maxwell}}^{(1)} = 4K(k^2)/\omega_0$
     boxed above.  At the special "figure-eight" modulus
     $k_c \approx 0.909$ (root of $2E(k^2) = K(k^2)$) that shared endpoint sits
@@ -279,13 +283,13 @@ Part 3.
 
 ## How a wavefront forms from a family of geodesics
 
-Fix $T$ and vary the initial costate over a 1-parameter slice of the unit-
-energy surface — concretely, signed initial curvature $k \in [-0.95, 0.95]$
+Fix $T$ and vary the initial costate over a 1-parameter slice of the
+unit-energy surface — concretely, signed initial curvature $k \in [-0.95, 0.95]$
 in $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$.  Each $k$ launches a distinct
 geodesic from the origin.  The set of *positions* reached at exact arc
 length $T$ — one position per geodesic — is the **wavefront** at time $T$:
 
-$$\mathcal W_T \;:=\; \bigl\{\,(x(T;k),\; y(T;k)) : k \in [-1, 1]\,\bigr\} \;\subset\; \mathbb R^2.$$
+$$\mathcal W_T \;:=\; \bigl\{\,(x(T;k),\; y(T;k)) : k \in [-0.95, 0.95]\,\bigr\} \;\subset\; \mathbb R^2.$$
 
 It is a *continuous curve* in the plane (because $k \mapsto $ trajectory is
 continuous), and as $T$ grows it sweeps outward.  At small $T$ — since every
@@ -326,7 +330,7 @@ be locally surjective along a critical curve.
     <svg id="fig-conjugate" style="width:100%;height:440px;"></svg>
   </div>
   <figcaption>
-    <strong>Figure A5.3.</strong> A wavefront forming.  41 trajectories,
+    <strong>Figure A5.3.</strong> A wavefront forming.  39 trajectories,
     one per signed modulus $k$, are drawn in faint blue (forward-curving,
     $k > 0$) and faint red ($k < 0$) up to the current arc length $T$.
     The thick coloured curve passing through their endpoints is the
@@ -369,8 +373,8 @@ The Dubins-back-wheel cuspidal trajectories of the elliptic project
 parking-style curves with cusps</a>) are also relevant here: they are
 projections of SE(2) geodesics in the regime where the rear-axle
 forward velocity changes sign.  The cusps in those trajectories are the
-geometric analogue of the wavefront cusps in Figure A5.3 — only the rear-
-axle parametrisation makes them visible.
+geometric analogue of the wavefront cusps in Figure A5.3 — only the
+rear-axle parametrisation makes them visible.
 
 ## Code
 
@@ -443,7 +447,7 @@ that controls curvature period.
 What remains for Parts 3 and 4 of the blog series:
 
 - **Part 3** will give the proof that, for the inflectional family,
-  $t_{\mathrm{cut}} = t_{\mathrm{Maxwell}}^{(1)} = 4K(k^2)/\omega_0$,
+  $$t_{\mathrm{cut}} = t_{\mathrm{Maxwell}}^{(1)} = 4K(k^2)/\omega_0$$,
   and characterise the full Maxwell stratum via the
   $\mathbb Z_2 \times \mathbb Z_2$ symmetries.
 - **Part 4** will discuss the open question: extending this to the
@@ -451,9 +455,9 @@ What remains for Parts 3 and 4 of the blog series:
   on the global structure of the cut locus.
 
 The five appendices A1–A5 supply every prerequisite: Lie groups (A1),
-distributions and contact structures (A2), the PMP and Lie–Poisson
-reduction (A3), Jacobi elliptic functions and the AGM (A4), and the SR
-exponential map (A5).  With them in hand, Parts 1 and 2 should read
+distributions and contact structures (A2), the Pontryagin Maximum
+Principle and Lie–Poisson reduction (A3), Jacobi elliptic functions and
+the arithmetic–geometric mean (A4), and the SR exponential map (A5).  With them in hand, Parts 1 and 2 should read
 fluently, and Parts 3 and 4 will be approachable when they ship.
 
 </div><!-- /.l-body -->
@@ -823,7 +827,7 @@ function drawMaxwell() {
 
 // ── Figure A5.3 — Wavefront formation ──────────────────────────────────
 //
-// 41 trajectories sweep signed k ∈ [-0.95, 0.95].  Each trajectory is
+// 39 trajectories sweep signed k ∈ [-0.95, 0.95].  Each trajectory is
 // integrated up to a fixed maximum arc length sMax (≥ the slider's max T).
 // The wavefront W_T is the curve through {(x(T;k), y(T;k)) : k ∈ [-1, 1]}.
 const conjState = {

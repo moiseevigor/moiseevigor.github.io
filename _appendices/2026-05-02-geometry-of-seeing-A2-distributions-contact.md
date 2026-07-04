@@ -22,8 +22,8 @@ series_part: A2
 arxiv: "0807.4731"
 coauthors: "Yu. L. Sachkov"
 comments: true
+permalink: /mathematics/2026/05/02/geometry-of-seeing-A2-distributions-contact/
 published: false
-listed: false   # appendix: reachable via series nav only, never listed standalone
 ---
 
 <div class="l-body" markdown="1">
@@ -35,8 +35,9 @@ Part 1 §3 introduces a horizontal *distribution* $\mathcal H = \mathrm{span}\{X
 on $\mathrm{SE}(2)$, calls it "completely non-integrable", invokes the
 *Hörmander* (bracket-generating) condition, and applies the
 *Chow–Rashevskii* reachability theorem.  These are not metaphors —
-they are precise theorems with one-paragraph proofs that bind the V1
-horizontal connectivity to the contact-geometric backbone of the elastica
+they are precise theorems with one-paragraph proofs that bind the
+primary visual cortex's (V1) horizontal connectivity to the
+contact-geometric backbone of the elastica
 problem.  This appendix unpacks them.
 
 The interactive figures borrow the cuspidal-trajectory machinery from the
@@ -154,16 +155,15 @@ span $T_p M$.  Concatenating short flows along a frame field $X_i$ for
 times $\pm \varepsilon$ in the pattern of Appendix A1's Figure A1.2 produces a net
 displacement of order $\varepsilon^2$ in the bracket direction, of order
 $\varepsilon^3$ in iterated-bracket directions, etc.  Show that the smooth
-map $\mathbb R^n \to M$, $(t_1, \ldots, t_n) \mapsto \Phi^{X_{i_1}}_{t_1}
-\circ \cdots \circ \Phi^{X_{i_n}}_{t_n}$, has surjective differential at the
+map $\mathbb R^n \to M$, $$(t_1, \ldots, t_n) \mapsto \Phi^{X_{i_1}}_{t_1} \circ \cdots \circ \Phi^{X_{i_n}}_{t_n}$$, has surjective differential at the
 origin under bracket-generation, hence is locally surjective by the inverse
 function theorem.  Compose enough hops and you can reach any point.
 
 **For SE(2) the Hörmander condition is satisfied at depth 1.**  We computed
 $[X_1, X_2] = -X_3$, and $X_1, X_2, X_3$ already span $T_g\mathrm{SE}(2)$
 (three linearly independent fields).  No deeper brackets are needed.  This
-is the *minimal* possible depth and is what makes the SR Carnot–Carathéodory
-distance well-behaved on $\mathrm{SE}(2)$.
+is the *minimal* possible depth and is what makes the sub-Riemannian (SR)
+Carnot–Carathéodory distance well-behaved on $\mathrm{SE}(2)$.
 
 </div><!-- /.l-body -->
 
@@ -173,8 +173,8 @@ distance well-behaved on $\mathrm{SE}(2)$.
     <div class="fig-controls">
       <label>distribution
         <select id="dist-type">
-          <option value="integrable" selected>integrable: $\mathrm{span}(\partial_x, \partial_y)$ — horizontal slabs</option>
-          <option value="contact">contact / SE(2): $\xi = \ker(\sin\theta\,dx - \cos\theta\,dy)$</option>
+          <option value="integrable" selected>integrable: span(∂x, ∂y) — horizontal slabs</option>
+          <option value="contact">contact / SE(2): ξ = ker(sin θ dx − cos θ dy)</option>
         </select>
       </label>
       <label>height $\theta$ slice
@@ -234,8 +234,8 @@ $$\quad
        - \cos^2\theta\,dy \wedge d\theta \wedge dx
   \;=\; -dx \wedge dy \wedge d\theta \;\neq\; 0.$$
 
-Contact.  The kernel $\xi = \mathrm{span}\{X_1, X_2\}$ is the V1 horizontal
-distribution.
+Contact.  The kernel $\xi = \mathrm{span}\{X_1, X_2\}$ is exactly the V1
+horizontal distribution $\mathcal H$ of the Frobenius test above.
 
 **Darboux's theorem** (contact version): every contact structure on a
 3-manifold is *locally* isomorphic to the standard one $(\mathbb R^3,
@@ -283,8 +283,8 @@ makes this computation well-posed.
     <svg id="fig-reach" style="width:100%;height:380px;"></svg>
   </div>
   <figcaption>
-    <strong>Figure A2.2.</strong> Chow–Rashevskii in action.  A piecewise-
-    horizontal path made of $\pm\varepsilon$ flows along $X_1$ (forward)
+    <strong>Figure A2.2.</strong> Chow–Rashevskii in action.
+    A piecewise-horizontal path made of $\pm\varepsilon$ flows along $X_1$ (forward)
     and $X_2$ (rotate) connects the origin to the chosen target.  The
     "sideways" target needs a 4-leg bracket loop with each loop
     contributing an $\varepsilon^2$ sideways nudge — many loops to make
@@ -346,7 +346,8 @@ the dubins-back-wheel example</a>: a piecewise concatenation of
 $X_1$ ("forward + reverse") and $X_2$ ("steer") flows.  The parking
 trajectory is what Chow's theorem looks like with finite $\varepsilon$;
 the elastica geodesic is what it converges to as $\varepsilon \to 0$.
-Both are computed by the same SE(2) ODE integrator that lives in
+Both are computed by the same SE(2) ordinary-differential-equation (ODE)
+integrator that lives in
 `elliptic-core.js` on the elliptic site and is reused here.
 
 ## Code

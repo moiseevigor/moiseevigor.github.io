@@ -21,8 +21,8 @@ series_part: A1
 arxiv: "0807.4731"
 coauthors: "Yu. L. Sachkov"
 comments: true
+permalink: /mathematics/2026/05/01/geometry-of-seeing-A1-lie-groups/
 published: false
-listed: false   # appendix: reachable via series nav only, never listed standalone
 ---
 
 <div class="l-body" markdown="1">
@@ -283,7 +283,7 @@ doesn't, and the residual is
 $$\Phi^Y_{-\varepsilon} \circ \Phi^X_{-\varepsilon} \circ \Phi^Y_{\varepsilon}
    \circ \Phi^X_{\varepsilon}\,(g) \;=\; g + \varepsilon^2 [X, Y]_g + O(\varepsilon^3).$$
 
-For the V1 cortex this is the four-step manoeuvre Part 1 §3.4 illustrated:
+For the primary visual cortex (V1) this is the four-step manoeuvre Part 1 §3.4 illustrated:
 two hops of "slide along your orientation" interleaved with two hops of
 "rotate the orientation" produce a sideways nudge of order $\varepsilon^2$.
 The Lie bracket is exactly the leading coefficient of that nudge.
@@ -338,7 +338,7 @@ The Lie bracket is exactly the leading coefficient of that nudge.
     universal.  Toggle the $O(\varepsilon^3)$ residuals: after
     subtracting the predicted $\varepsilon^2 [X, Y]$ term, the orange
     (SE(2)) and pink (SO(3)) residuals fall on slope $\approx 3$ — the
-    next BCH contribution, also universal.  Two grey reference lines
+    next Baker–Campbell–Hausdorff (BCH) contribution, also universal.  Two grey reference lines
     have slopes 2 and 3 exactly; the four data traces all track them.
 
     Punchline: the <em>algebra</em> determines the leading order; the
@@ -367,8 +367,8 @@ It does two things at once:
    so $\exp$ is a local diffeomorphism near the origin.  It is *not* a
    global diffeomorphism: for SE(2) the exponential map is surjective but
    not injective, and we will need to be careful in Appendix A5 when we
-   talk about the *sub-Riemannian* exponential map (which is a different
-   beast — see A5).
+   talk about the *sub-Riemannian* (SR) exponential map (which is a
+   different beast).
 
 For SE(2), $\exp(t(a_1 E_1 + a_2 E_2 + a_3 E_3))$ has a closed form.  Write
 $X = T + \omega E_3$ with $T = a_1 E_1 + a_2 E_2$ (translation part) and
@@ -410,7 +410,7 @@ $$\mathrm{Ad}_g : \mathfrak g \to \mathfrak g, \qquad
   \mathrm{Ad}_g(X) \;:=\; g X g^{-1}.$$
 
 Differentiating at $g = e$ recovers the bracket:
-$\frac{d}{dt}\bigr|_{t=0} \mathrm{Ad}_{\exp(tX)}(Y) = [X, Y] =: \mathrm{ad}_X(Y)$.
+$$\frac{d}{dt}\bigr|_{t=0} \mathrm{Ad}_{\exp(tX)}(Y) = [X, Y] =: \mathrm{ad}_X(Y)$$.
 
 <aside id="note-kks">
 The <strong>Kirillov–Kostant–Souriau theorem</strong> (1962–1970) says
@@ -441,7 +441,7 @@ $(h_1, h_2, h_3)$ are this appendix's $(h_1, h_3, h_2)$.  In the $E$-basis
 the costate stays on a fixed coadjoint cylinder $h_1^2 + h_2^2 = c$ — the
 Casimir is conserved — while the SR Hamiltonian
 $\mathcal H = \tfrac12(h_1^2 + h_3^2)$ drives it around that cylinder.
-Appendix A3 derives the flow from the PMP.
+Appendix A3 derives the flow from the Pontryagin Maximum Principle (PMP).
 
 </div><!-- /.l-body -->
 
@@ -511,7 +511,8 @@ points to remember:
 
 ## Connection to the elliptic project
 
-Every figure on this page integrates the SE(2) ODE $\dot g = g \cdot \xi(t)$
+Every figure on this page integrates the SE(2) ordinary differential
+equation (ODE) $\dot g = g \cdot \xi(t)$
 using the exact same midpoint-rule helper that the
 <a href="https://moiseevigor.github.io/elliptic/">moiseevigor/elliptic</a>
 project ships in `examples/dubins-back-wheel/app.js`.  When $\xi(t) =
@@ -560,8 +561,8 @@ assert np.allclose(comm(E3, E2), -E1)
 
 A Lie group is a manifold-with-group-law.  Its Lie algebra is the tangent
 space at the identity, encoded either as matrices in $\mathrm{Mat}_n$ or as
-left-invariant vector fields on $G$.  The **bracket** measures non-
-commutativity in three equivalent ways (matrix commutator, vector-field
+left-invariant vector fields on $G$.  The **bracket** measures
+non-commutativity in three equivalent ways (matrix commutator, vector-field
 commutator, infinitesimal closing-defect of a 4-leg loop).  The **exponential
 map** turns algebra elements into 1-parameter subgroups.  The **coadjoint
 orbits** of $\mathrm{SE}(2)$ are cylinders, and the SR Hamiltonian flow lives

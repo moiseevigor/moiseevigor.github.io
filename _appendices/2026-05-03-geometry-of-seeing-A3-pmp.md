@@ -21,8 +21,8 @@ series_part: A3
 arxiv: "0807.4731"
 coauthors: "Yu. L. Sachkov"
 comments: true
+permalink: /mathematics/2026/05/03/geometry-of-seeing-A3-pmp/
 published: false
-listed: false   # appendix: reachable via series nav only, never listed standalone
 ---
 
 <div class="l-body" markdown="1">
@@ -71,7 +71,7 @@ $$\delta S = \int_{t_0}^{t_1} \Bigl(\frac{\partial L}{\partial q^i}\delta q^i
            + \Bigl[\frac{\partial L}{\partial \dot q^i}\delta q^i\Bigr]_{t_0}^{t_1}.$$
 
 The boundary term vanishes; for $\delta S = 0$ for all $\delta q$, the
-integrand has to vanish, giving E-L.
+integrand has to vanish, giving the Euler–Lagrange (E-L) equations.
 
 ## Legendre transform → Hamiltonian
 
@@ -181,7 +181,7 @@ $\dot \lambda_i = -\partial \mathcal H / \partial q^i$.
 
 ### Maximising over $u$ for the SR problem
 
-Sub-Riemannian length functional has $L = \sqrt{u_1^2 + u_2^2}$.  A standard
+The sub-Riemannian (SR) length functional has $L = \sqrt{u_1^2 + u_2^2}$.  A standard
 trick: parametrise by arc length, so $u_1^2 + u_2^2 = 1$ throughout.  The
 controls live on the unit circle, and the cost becomes simply $T$ (the
 total time = total arc length).
@@ -225,7 +225,7 @@ $$T^{\ast}\mathrm{SE}(2) \;\xrightarrow{\sim}\; \mathrm{SE}(2) \times \mathfrak{
   \qquad \lambda \mapsto (g, \mu)$$
 
 where $\mu = (h_1, h_2, h_3) := (\langle\lambda, X_1\rangle, \langle\lambda, X_2\rangle, \langle\lambda, X_3\rangle)$
-in the basis dual to $\{E_1, E_2, E_3\}$.  In this trivialisation the
+in the basis dual to the left-invariant frame $\{X_1, X_2, X_3\}$.  In this trivialisation the
 Hamiltonian flow on $T^{\ast}G$ for a *left-invariant* Hamiltonian (depending
 only on $\mu$) decouples:
 
@@ -240,7 +240,7 @@ reads
 
 $$\dot h_i \;=\; -\sum_{j, k} c^k_{ij}\,h_k\,\frac{\partial H}{\partial h_j},$$
 
-where $c^k_{ij}$ are the structure constants $[E_i, E_j] = c^k_{ij} E_k$.
+where $$c^k_{ij}$$ are the structure constants $$[X_i, X_j] = c^k_{ij} X_k$$.
 For $\mathfrak{se}(2)$ in the body-frame basis $\{X_1, X_2, X_3\}$ used in
 Part 1 (forward / rotation / sideways), the brackets are
 $[X_1, X_2] = -X_3$, $[X_2, X_3] = -X_1$, $[X_1, X_3] = 0$, giving the
@@ -260,8 +260,9 @@ $$C \;=\; h_1^{2} + h_3^{2}$$
 — the squared translation momentum, which Poisson-commutes with every
 coordinate function and so is preserved by any Hamiltonian flow on the
 dual algebra (not just our particular $\mathcal H_n$). $h_3$ alone is not
-conserved: the third equation above shows it evolves whenever the geodesic
-is mid-cusp.
+conserved: by the third equation above it drifts wherever $h_1 h_2 \neq 0$
+— generically along the geodesic ($\dot h_3$ pauses exactly where
+$h_1 = 0$, i.e. at the cusps, or where $h_2 = 0$).
 
 ### Reduction to the pendulum
 
@@ -358,7 +359,8 @@ is obtained from
 
 $$\dot g(t) \;=\; g(t)\,\xi(t), \qquad \xi(t) := u_1^{\ast}(t) E_1 + u_2^{\ast}(t) E_2,$$
 
-with $u^{\ast}(t) = (h_1(t), h_2(t)) / \sqrt c$ from the maximisation.  In the
+with $u^{\ast}(t) = (h_1(t), h_2(t)) / \sqrt c$ from the maximisation, where
+$c := h_1^2 + h_2^2 = 2\mathcal H_n$ is constant along the flow.  In the
 $(x, y, \theta)$ chart this is exactly Part 1's Frenet–Serret integration:
 
 $$\dot x = u_1^{\ast} \cos\theta, \qquad \dot y = u_1^{\ast} \sin\theta,
@@ -394,7 +396,10 @@ $\kappa = 2k\,\mathrm{cn}(s\mid k^2)$ family of Part 2 §2.
   <figcaption>
     <strong>Figure A3.3.</strong> A schematic of the reconstruction step,
     drawn in the constant-$h_3$ approximation.  Left: a curve on the
-    cylinder $h_1^2 + h_2^2 = c$, with $(h_1, h_2)$ circling at rate
+    cylinder $h_1^2 + h_2^2 = c$ — in the left-invariant frame used here
+    this is the <em>energy</em> cylinder $2\mathcal H_n = c$, not the
+    coadjoint/Casimir cylinder of Appendix A1's Figure A1.3 — with
+    $(h_1, h_2)$ circling at rate
     $-h_3$.  Right: the plane curve obtained by feeding that costate into
     the reconstruction equation $\dot g = g\cdot\xi(t)$.  Vary $h_3$ and the
     curve interpolates between near-circular (small $h_3$) and the elastica
@@ -415,7 +420,8 @@ in
 elliptic project's physical-pendulum example</a> — both compute level sets
 of $E = \tfrac12\dot\varphi^2 - \cos\varphi$ and trace closed orbits with
 period $4K(k^2)$.  The SE(2) elastica problem is, structurally, the *same
-ODE* as a nonlinear pendulum: this appendix's job has been to make that
+ordinary differential equation (ODE)* as a nonlinear pendulum: this
+appendix's job has been to make that
 equivalence inevitable, by deriving the pendulum equation from the PMP on
 $\mathrm{SE}(2)$ rather than postulating it.
 
@@ -486,7 +492,8 @@ on the unit Hamiltonian level and differentiating $\varphi = 2\alpha$ once
 more gives the nonlinear pendulum equation $\ddot\varphi + \sin\varphi = 0$.
 
 Appendix A4 will solve the pendulum equation in closed form using Jacobi
-elliptic functions and the AGM, recovering the period $4K(k^2)$ and the
+elliptic functions and the arithmetic–geometric mean (AGM), recovering the
+period $4K(k^2)$ and the
 explicit $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$ formula of Part 2.
 
 </div><!-- /.l-body -->

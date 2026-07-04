@@ -66,6 +66,13 @@ exclude:
   - "node_modules"
   - "vendor"
 
+# Appendix pages: rendered at pinned permalinks but never part of site.posts,
+# so they stay out of pagination, archives, and feeds; reachable via the
+# series navigation inside the posts.
+collections:
+  appendices:
+    output: true
+
 # Re-include precomputed data assets that the global "*.json" exclude swallows.
 include:
   - "public/data"
