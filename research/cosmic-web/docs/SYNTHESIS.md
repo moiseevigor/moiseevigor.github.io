@@ -208,3 +208,16 @@ correction current models need is anisotropic damping of motion across
 walls/filaments (adhesion-like), not enhanced transport along them.
 H4' refuted as stated; the constructive product is the measured form and
 amplitude of the true adjustment term. Consistent with T1 and E2.
+
+## E5 addendum (H-T2, 2026-07-04) — the adjustment term becomes a model
+
+The E4-corrected form of the adjustment conjecture was built into an
+effective transport model: ZA rays + transverse-only momentum damping in
+the local tidal frame at shell-crossing. Against PM truth from identical
+initial conditions (competitor-favouring calibration, 5 held-out seeds):
+best model overall (4.91 vs ZA 5.00 vs isotropic stick 5.34 median voxel
+error), with the clearest win exactly at the web (−7% vs ZA, −14% vs
+stick at 0–2 vox) and a small deficit vs ZA in the 2–4 vox outskirts.
+The program therefore ends constructively: from conjecture → refutation
+of the strong form → measurement of the true correction → a working
+anisotropic-adhesion term that improves the classical proxy.
