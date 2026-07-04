@@ -392,11 +392,13 @@ strictest controls (nulls matched to the spine points' galactic-latitude
 distribution): the extracted spine networks sit on measurably hot gas, so
 the web the methods draw is physically real. Follow-up tests showed that
 signal is carried mostly by the gas of the survey galaxies' own halos —
-but a closing experiment, stacking 876,000 close galaxy *pairs* with an
-estimator that cancels any symmetric halo by construction, detected the
-gas **between** the halos too: the filament bridge, at **5.2σ** on the
-high-resolution ACT map (amplitude ~2.3×10⁻⁸, with Planck concurring at
-19σ). Second, the Hessian's spines carry more of the spine-stack signal
+but a closing experiment — stacking 876,000 close galaxy *pairs* with an
+estimator that cancels any symmetric halo by construction, then holding
+it to jackknife errors and physically-unconnected control pairs — found
+the gas **between** the halos at an amplitude of ~1.2–1.4×10⁻⁸,
+consistent between ACT and Planck and with published measurements,
+at ≈2σ per instrument: honest evidence for the filament bridges,
+reproducing the field's amplitude rather than claiming a new detection. Second, the Hessian's spines carry more of the spine-stack signal
 than the lift's on every statistic, consistent with everything above. Third — and this is the
 lift's one clean win, replicated from simulation to sky — its spine
 tangents align with the tidal eigenframe at 0.677 ± 0.016 vs the Hessian's

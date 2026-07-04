@@ -42,8 +42,9 @@ CMASS × Planck × ACT): spine networks show a Compton-y excess reaching 9σ
 under latitude-matched nulls (H3 supported; Hessian ≥ lift on the
 cross-signal), the lift's tidal-alignment advantage replicates on real
 data (0.68 vs 0.62 over 18 tiles), and the campaign closed with a
-<strong>5.2σ detection of inter-halo bridge gas</strong> on ACT DR6 via a
-pair-stacking design that nulls symmetric halos by construction. Every
+pair-stacking measurement of inter-halo bridge gas (≈1.3×10⁻⁸,
+≈2σ per instrument after jackknife errors and unconnected-pair nulls —
+reproducing the published amplitude on ACT DR6 and Planck). Every
 hypothesis of the program now has an empirical verdict.
 Full chain: <code>research/cosmic-web/docs/SYNTHESIS.md</code>.
 </div>

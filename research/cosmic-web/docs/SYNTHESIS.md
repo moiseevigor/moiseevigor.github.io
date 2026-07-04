@@ -169,3 +169,15 @@ circularly-symmetric halo by construction) detects inter-halo gas at
 the bridges between halos) is established at both instruments. The
 program therefore closes on a positive terminal measurement, reached by
 following its own negative result's diagnosis.
+
+## E3e addendum (validity battery) — final calibration of the claim
+
+Jackknife errors and unconnected-pair nulls trim the E3d-v2 headline:
+on-axis excess stands at 3.3σ (ACT, honest errors), but the null pairs
+reveal Planck's 4.7σ fake bridge (beam leakage, as diagnosed) and the
+null-subtracted bridge is ~1.2–1.4×10⁻⁸ at ≈2σ per instrument —
+reproducing the published amplitude, short of an independent detection.
+The program's recurring moral holds to the last experiment: every strong
+claim, put under its own strictest control, shrinks to its honest core —
+and the honest core here still says the bridges are real (two instruments,
+right amplitude), just not yet ours to claim at 5σ.
