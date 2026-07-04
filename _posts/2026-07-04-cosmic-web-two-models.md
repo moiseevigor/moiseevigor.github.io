@@ -6,9 +6,9 @@ subtitle: >
   sparse galaxy data is a geometry problem. We race two models — a local
   curvature test against an orientation-lifted measurement borrowed from the
   visual cortex — on thousands of synthetic universes with exact ground truth.
-  The interactive plots below show what each model can and cannot do — and how
-  a subtle evaluation bug manufactured a spectacular "win" that a correct
-  benchmark then took away.
+  The interactive plots below show what each model can and cannot do — and
+  tell the story of how our own benchmark quietly handed one contestant a
+  head start, and what happened when we levelled the race.
 date: 2026-07-04 09:00:00
 categories: [mathematics]
 tags: [cosmic-web, sub-riemannian, SE3, filaments, data-analysis]
@@ -31,9 +31,9 @@ sub-Riemannian machinery from the
 of Seeing</a> series find <em>cosmic filaments</em>? Two models are defined
 with all their mathematics, then raced under strict fairness rules on
 synthetic universes where the truth is known exactly. Interactive figures let
-you explore the results yourself — including the <strong>evaluation
-artifact</strong> that briefly made the fancier model look seven points
-better, the corrected verdict, a surprising rejection of diffusion, and a
+you explore the results yourself — including the moment we discovered the
+race had been <strong>quietly unfair</strong> in the fancier model's favour,
+the verdict once it was levelled, a surprising rejection of diffusion, and a
 dynamical test that refutes the prettiest version of the theory. Every number
 comes from the actual experiment data in the repo
 (<code>research/cosmic-web/</code>).
@@ -157,29 +157,34 @@ truth; blue is each model's recovered skeleton.
 
 <div class="l-body" markdown="1">
 
-## The result — and the bug that almost fooled us
+## The result — and the race that wasn't fair at first
 
 Fifty held-out random universes per variant, five sampling densities, three
 scores: **completeness** (fraction of the true network within 2 voxels of the
 estimate), **purity** (the converse), **junction F1** (branch-point recovery).
 
-Before showing the verdict, a confession that is the most instructive part of
-this article. The first version of this benchmark reported a spectacular
-result: the lift beating the Hessian by **+7 points of completeness** at
-sparse sampling, on 48 of 50 seeds, p ≈ 10⁻¹⁴. It was wrong — not the
-arithmetic, the *evaluation*. Our "matched skeleton length" rule was enforced
-indirectly, by matching the *volume* of a thresholded mask before
-skeletonising. The two models' masks skeletonise differently: at sparse
-sampling the lift's realized skeletons came out **19% longer** than the
-Hessian's (1,468 vs 1,239 voxels against a 3,300 target). A longer curve
-network mechanically covers more truth — completeness was being bought with
-unaccounted length. The bug surfaced only because a later experiment forced
-an extractor improvement (iterative correction until the *skeleton itself*
-hits the target length), and re-running the old benchmark under the fixed
-instrument flipped its sign. Every figure below uses the corrected
-extractor.
+Before showing the verdict, the most instructive part of this article — a
+story about fairness. The first version of this benchmark produced a
+spectacular result: the lift beating the Hessian by **+7 points of
+completeness** at sparse sampling, on 48 of 50 seeds, p ≈ 10⁻¹⁴. It looked
+airtight. It wasn't — and the reason is worth understanding even if you
+never touch a cosmic filament.
 
-The corrected verdict: **the Hessian matches or beats the lift at every
+Think of the comparison as two fishermen, each allowed the same total length
+of net: whoever's net catches more of the river's fish is the better
+fisherman. Our rule for "same length of net" was enforced *one step early* —
+we matched an intermediate quantity from which each model then produced its
+final curve network, assuming both would end up with equal length. They
+didn't. At sparse sampling the lift consistently ended up drawing about
+**19% more curve** than the Hessian (1,468 vs 1,239 voxels). And a longer
+net catches more fish no matter who holds it: the lift's celebrated
+completeness win was substantially the extra length, not extra skill. The
+imbalance came to light months of experiments later, when a different test
+required tightening the procedure so that the *final drawn length itself*
+is held equal — and re-running the original race under the level rule
+flipped the outcome. Every figure below uses the level rule.
+
+The levelled verdict: **the Hessian matches or beats the lift at every
 sampling density**. At the ultra-sparse end (1,200 galaxies) the two are
 statistically tied (Δ = +0.004, p = 0.36); everywhere else the Hessian wins
 completeness by 4–7 points on 50 of 50 seeds, and junction F1 with it.
@@ -210,11 +215,11 @@ completeness by 4–7 points on 50 of 50 seeds, and junction F1 with it.
 
 Averages can hide seed luck, so the next figure shows every seed: each dot is
 one universe, plotted by the *paired difference* (lift − Hessian) on that
-exact realization. Above the zero line, the lift won that universe. Under the
-corrected extractor the clouds sit at zero for 1.2k galaxies and below zero
-everywhere else — compare this with the phantom +0.07 cloud the buggy
-benchmark produced, which looked exactly this decisive in the other
-direction.
+exact realization. Above the zero line, the lift won that universe. With the
+race levelled, the clouds sit at zero for 1.2k galaxies and below zero
+everywhere else. Worth remembering: the uneven race produced a +0.07 cloud
+that looked exactly this decisive in the other direction — decisiveness
+alone tells you nothing about whether the comparison was fair.
 
 </div><!-- /.l-body -->
 
@@ -373,17 +378,19 @@ the simpler model finds its mass better.
 | Modelling filament *formation* | **neither as geodesics** | assembly is transverse infall; E2 refutes along-axis transport |
 
 The honest arc of the program: a beautiful theory, a benchmark that
-appeared to confirm it spectacularly, an instrument bug found *because* a
-later experiment changed the extractor, and a corrected verdict in which the
-simple model wins nearly everything — with the lifted geometry surviving as
-an anisotropy descriptor, a hybrid ingredient, and a physics probe. Each
-refutation (length artifact, junctions, diffusion, gravity ribbons,
-transport) redirected the next experiment, and the dynamical instrument
-independently rediscovered textbook Zel'dovich pancake physics, which is what
-lets us trust the negatives. If the article leaves one lesson, it is not
-about cosmology: it is that **"matched" comparisons must enforce the match on
-the quantity that buys score** — we matched a proxy (mask volume), and the
-proxy lied for exactly as long as nobody re-measured it.
+appeared to confirm it spectacularly, a hidden head start discovered
+*because* a later experiment tightened the measuring stick, and a levelled
+verdict in which the simple model wins nearly everything — with the lifted
+geometry surviving as an anisotropy descriptor, a hybrid ingredient, and a
+physics probe. Each refutation (the uneven race, junctions, diffusion,
+gravity ribbons, transport) redirected the next experiment, and the
+dynamical instrument independently rediscovered textbook Zel'dovich pancake
+physics, which is what lets us trust the negatives. If the article leaves
+one lesson, it is not about cosmology: **when you promise a fair
+comparison, measure the thing that actually wins races.** We held equal a
+stand-in quantity and assumed the final one would follow; it drifted 19%,
+and the drift wore the costume of a discovery for exactly as long as nobody
+re-measured it.
 
 Full protocols, per-experiment reports with all tables and p-values, and
 one-command reproduction live in
@@ -411,8 +418,9 @@ scoped in the
   calibration in these experiments.
 - **Matched spine length** — both models' skeletons must have equal total
   length before scoring, so completeness/purity trade on equal terms.
-  Enforced on the realized skeleton itself (iterative correction), not on a
-  proxy — the difference between the two was this article's headline bug.
+  Enforced on the final drawn skeleton itself, not on an intermediate
+  quantity — the difference between the two is the "uneven race" this
+  article is built around.
 - **Zel'dovich approximation / pancake infall** — ballistic displacement
   model of structure formation; collapse proceeds sheet → filament → node,
   with motion *transverse* to the forming structure.
