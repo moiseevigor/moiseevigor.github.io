@@ -243,3 +243,12 @@ with sigma8 (−3% → −13% overall; up to −22% at the web at sigma8 = 1) �
 the behaviour of a physical correction term. Model-card scope widened
 accordingly. With this, every locally testable hypothesis — including the
 card's own declared limitations — carries a verdict.
+
+## E7 addendum (2026-07-05) — scope table complete
+
+The last two unverified rows close: under flat ΛCDM (Ωm = 0.31) the frozen
+model keeps −10%/−17% (overall/web), and at 0.5 Mpc/h voxels −10%/−15%
+(one seed), with physical-unit errors nearly identical across all regimes
+— the signature of a geometric, growth-parametrized correction. Every
+scope row of the model card testable on this machine is now verified.
+The program has no remaining executable hypothesis of any kind.

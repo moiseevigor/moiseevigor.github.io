@@ -34,7 +34,7 @@ every 3rd step); keep the along-filament component intact.
 | limitation | magnitude |
 |---|---|
 | One-shot damping (first crossing only) — no multi-stream hierarchy | untested beyond first crossing; likely underdamps cluster cores |
-| Transfer verified (E6, frozen knobs): 2 h⁻¹Mpc voxels and σ₈ ∈ [0.6, 1.0]; advantage grows with clustering (−3%→−13% overall) | ΛCDM time-stepping and sub-Mpc grids remain unverified |
+| Transfer verified with frozen knobs (E6, E7): voxels 0.5–2 h⁻¹Mpc, σ₈ ∈ [0.6, 1.0], EdS and flat ΛCDM (Ωm = 0.31); advantage grows with clustering and is cosmology/resolution-invariant in physical units | high-res verified at n = 1 seed (indicative); multi-stream interiors remain out of scope |
 | Sequential (pancake-ordered) damping variant underperforms here | −4% worse than both-perp at this resolution (E5c) — may differ at higher resolution |
 | Gains are modest far from the web | −2% at 8–64 vox: the model is a web-region correction, not a global one |
 | β, ρ_c calibrated on this box size / tracer density | re-calibrate for other setups; β optimum may sit slightly below 0.6 (flat minimum) |
