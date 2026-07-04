@@ -181,3 +181,17 @@ The program's recurring moral holds to the last experiment: every strong
 claim, put under its own strictest control, shrinks to its honest core —
 and the honest core here still says the bridges are real (two instruments,
 right amplitude), just not yet ours to claim at 5σ.
+
+## T1 addendum (2026-07-04) — the theory box closes the table
+
+T1 executed (docs/T1-note.md): the Jacobi-type variational principle is
+refuted constructively. In growth-factor time the Zel'dovich flow is free
+motion (straight lines; the potential is absorbed into initial velocities,
+leaving no force to conformalize), and the adhesion model's exact
+variational principle is Hopf–Lax — quadratic-cost optimal transport on a
+FLAT metric. Filaments are singularities (shocks/caustics) of the
+transport map, not geodesics of a lifted metric; the derivation predicts
+both E2 signatures (transverse arrival, weak in-tube streaming) and
+explains why the lift works as a descriptor (M3) but not as a transport
+model. With T1 closed, every item of the original program — T1, E0–E3,
+H1–H4 — carries an executed verdict. The program is complete.

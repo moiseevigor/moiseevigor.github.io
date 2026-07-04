@@ -44,8 +44,13 @@ cross-signal), the lift's tidal-alignment advantage replicates on real
 data (0.68 vs 0.62 over 18 tiles), and the campaign closed with a
 pair-stacking measurement of inter-halo bridge gas (≈1.3×10⁻⁸,
 ≈2σ per instrument after jackknife errors and unconnected-pair nulls —
-reproducing the published amplitude on ACT DR6 and Planck). Every
-hypothesis of the program now has an empirical verdict.
+reproducing the published amplitude on ACT DR6 and Planck). Finally, <strong>T1
+resolved</strong>: the Jacobi-type variational principle is refuted
+constructively — in growth-factor time the flow is free motion, the
+adhesion model's exact variational principle is Hopf–Lax optimal transport
+on a flat metric, and filaments are shocks of the transport map rather
+than geodesics (<code>docs/T1-note.md</code>), in agreement with E2. Every
+item of the program — T1, E0–E3, H1–H4 — now carries an executed verdict.
 Full chain: <code>research/cosmic-web/docs/SYNTHESIS.md</code>.
 </div>
 
