@@ -221,3 +221,16 @@ stick at 0–2 vox) and a small deficit vs ZA in the 2–4 vox outskirts.
 The program therefore ends constructively: from conjecture → refutation
 of the strong form → measurement of the true correction → a working
 anisotropic-adhesion term that improves the classical proxy.
+
+## E5c/E5d addendum (2026-07-05) — refinement converged at the frame bound
+
+The declared optimization campaign froze the model: ZA rays + 60%
+transverse damping in self-density tidal frames (2 h⁻¹Mpc smoothing) at
+first crossing (ρ_c = 5). Held-out: 4.52 vs ZA 4.98 (−9%), 0.05 vox from
+the oracle frame-information bound (4.47) — 89% of the recoverable gap
+closed. Structural findings: partial damping is required for self-density
+frames to pay (full damping self-amplifies crossings); pancake-ordered
+sequential damping underperforms at this resolution. Full specification,
+capabilities, limitations and failure modes: docs/MODEL-CARD.md. The
+refinement scope is complete; remaining error at the web is
+post-crossing (multi-stream) physics, out of scope by design.
