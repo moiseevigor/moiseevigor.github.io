@@ -26,7 +26,7 @@ Our contributions, in order:
 
 Truth throughout is a particle-mesh (PM) N-body integrator: 128³ grid and 128³ particles in a periodic box of L = 128 h⁻¹Mpc (1 voxel = 1 h⁻¹Mpc), FFT Poisson solver, kick–drift–kick leapfrog with 90 steps from a = 0.1 to a = 1, Einstein–de Sitter (EdS) expansion in the primary runs and flat ΛCDM (Ωm = 0.31) in the transfer test. Initial conditions are Gaussian fields with a BBKS spectrum normalised to σ₈ = 0.8 (varied in Section 3.3), displaced by ZA to a = 0.1. Each approximation under test is evolved from the *same* initial field, so residuals are per-particle and exact.
 
-Time convergence of the truth (E10): doubling to 180 steps shifts the median final position by 0.008 voxels — three orders of magnitude below the effects measured — and leaves the model-versus-ZA comparison invariant (advantage −6.8% against both the 90-step and 180-step truths). Grid convergence is covered by the 256³ runs of Section 3.3. An external cross-check against a public simulation suite (Quijote; Villaescusa-Navarro et al. 2020) remains pending.
+Time convergence of the truth (E10): doubling to 180 steps shifts the median final position by 0.008 voxels — three orders of magnitude below the effects measured — and leaves the model-versus-ZA comparison invariant (advantage −6.8% against both the 90-step and 180-step truths). Grid convergence is covered by the 256³ runs of Section 3.3. An external cross-check (E12) validates the integrator against a production code: evolved from the CAMELS CV_0 initial conditions (2LPT, Ωm = 0.3, 256³ particles, 25 h⁻¹Mpc box; Villaescusa-Navarro et al. 2021), our PM reproduces the official Arepo z = 0 particle positions to a median matched-ID offset of 0.41 h⁻¹Mpc, with field cross-correlation r = 0.999, 0.984, 0.937 at k = 0.35, 0.66, 1.26 h Mpc⁻¹ — near-perfect agreement over the full range of scales used in this work, degrading only at k ≳ 4 h Mpc⁻¹ where PM force softening is expected to bite.
 
 ### 2.2 The residual measurement (E4)
 
@@ -157,7 +157,7 @@ The between-halo component was instead measured with a pair-bridge estimator: y 
 
 ## 6. Limitations
 
-- **PM-only truth.** All transport truths come from our own particle-mesh integrator. It is time-converged (0.008-voxel shift under step doubling, E10) and grid-checked at 256³, but a cross-check against an external high-resolution simulation (e.g. a Quijote snapshot) is pending and would guard against force-softening biases shared by truth and models.
+- **PM-only truth, externally checked at one configuration.** All transport truths come from our own particle-mesh integrator: time-converged (0.008-voxel shift under step doubling, E10), grid-checked at 256³, and validated against Arepo on the CAMELS CV_0 box (median matched-ID offset 0.41 h⁻¹Mpc; r ≥ 0.94 for k ≤ 1.3 h Mpc⁻¹, E12). Residual caveat: the external check covers one box size and cosmology; PM force softening still suppresses small-scale amplitudes (T ≈ 0.86–0.92 at the checked scales), a bias partially shared between truth and models.
 - **EdS-primary.** The primary calibration and most experiments use Einstein–de Sitter expansion; ΛCDM is verified at one configuration (Ωm = 0.31, 3 seeds) with matching numbers, consistent with a growth-factor-parametrised term, but no broader cosmology scan was run.
 - **One-shot damping.** The model damps at *first* shell-crossing only; multi-stream interiors are out of scope by design. The residual error at the web (5.5–6 voxels even at the oracle bound) is post-crossing physics that no first-crossing rule can represent; do not interpret model positions within ~2 voxels of density peaks as resolved halo structure.
 - **BBKS spectrum.** Initial conditions use the BBKS transfer function rather than a Boltzmann-code spectrum; the mechanism measurement should be insensitive to this, but absolute numbers may shift.
@@ -202,5 +202,6 @@ All code, per-experiment reports with full tables and p-values, per-seed result 
 - Sousbie, T. (2011). "The persistent structure of the Universe — I. Theory and implementation." *MNRAS* 414, 350–383.
 - Tanimura, H., et al. (2019). "A search for warm/hot gas filaments between pairs of SDSS luminous red galaxies." *MNRAS* 483, 223–234.
 - Tassev, S., Zaldarriaga, M., & Eisenstein, D. J. (2013). "Solving large scale structure in ten easy steps with COLA." *JCAP*.
+- Villaescusa-Navarro, F., et al. (2021). "The CAMELS project." *ApJ* 915, 71.
 - Villaescusa-Navarro, F., et al. (2020). "The Quijote simulations." *ApJS* 250, 2.
 - Zel'dovich, Ya. B. (1970). "Gravitational instability: an approximate theory for large density perturbations." *A&A* 5, 84–89.

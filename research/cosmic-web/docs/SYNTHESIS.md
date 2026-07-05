@@ -266,3 +266,16 @@ explaining WHY shell-crossing corrections of the MUSCLE class work. E10:
 truth converged in time (0.008 vox under step doubling); comparison
 invariant. Referee points 1–3 are now executed; the optional external
 cross-check (Quijote) awaits download approval.
+
+## E11/E12 addendum (2026-07-05) — hybrid refuted; truth externally validated
+
+E11: the naive hybrid (MUSCLE's Lagrangian collapse trigger + directional
+damping) underperforms both parents (4.67 vs 4.49/4.52) — the evolving
+Eulerian trigger carries real information; field-level combination is the
+remaining (unpursued) hybrid route. E12: our PM truth, evolved from
+CAMELS CV_0's own ICs, matches Arepo to 0.41 Mpc/h median per particle
+(r ≥ 0.94 for k ≤ 1.3 h/Mpc) — the referee's external-validation item is
+closed; at a 10× resolution extrapolation the frozen model still does not
+harm (1.127 vs ZA 1.140). The three referee must-fix points (baselines,
+truth validation, field-level metrics) are all executed; the paper draft
+(docs/PAPER-DRAFT.md) carries the results.
