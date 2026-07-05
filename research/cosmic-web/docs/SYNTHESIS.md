@@ -279,3 +279,13 @@ closed; at a 10× resolution extrapolation the frozen model still does not
 harm (1.127 vs ZA 1.140). The three referee must-fix points (baselines,
 truth validation, field-level metrics) are all executed; the paper draft
 (docs/PAPER-DRAFT.md) carries the results.
+
+## E12-astrid addendum (2026-07-05) — two-code truth validation closed
+
+The second external code (MP-Gadget, Astrid_DM CV_0; shared ICs verified
+by per-ID prediction at z=15 to 0.068 vox) reproduces the Arepo verdict
+identically, and the codes agree with each other to 0.029 Mpc/h median
+per particle. Hierarchy: code consensus 0.03 << our PM offset 0.41 <<
+measured effects 4-5 Mpc/h. The referee's truth item is closed at two
+independent production codes. All three follow-up points (two-code
+external check, paper audit, posts publication-ready) are complete.

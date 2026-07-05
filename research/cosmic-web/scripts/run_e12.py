@@ -28,12 +28,13 @@ VOX = 25.0 / 256.0     # Mpc/h per voxel
 import os
 TAG = os.environ.get("E12_TAG", "camels")
 DATA = ROOT / "data" / TAG
+ICS_DIR = ROOT / "data" / os.environ.get("E12_ICS", TAG)
 
 
 def read_ics():
     xs, ids = [], []
     for i in range(8):
-        with h5py.File(DATA / "ICs" / f"ics.{i}.hdf5") as g:
+        with h5py.File(ICS_DIR / "ICs" / f"ics.{i}.hdf5") as g:
             xs.append(np.asarray(g["PartType1"]["Coordinates"]))
             ids.append(np.asarray(g["PartType1"]["ParticleIDs"]))
     x = np.concatenate(xs) / (25000.0 / N)          # kpc -> voxels
