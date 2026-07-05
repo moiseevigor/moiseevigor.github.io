@@ -25,7 +25,9 @@ OM = 0.3
 A_I, A_F, STEPS = 1.0 / 128.0, 1.0, 180
 BETA, SMOOTH_MPC, RHO_C = 0.6, 2.0, 5.0
 VOX = 25.0 / 256.0     # Mpc/h per voxel
-DATA = ROOT / "data" / "camels"
+import os
+TAG = os.environ.get("E12_TAG", "camels")
+DATA = ROOT / "data" / TAG
 
 
 def read_ics():
@@ -145,10 +147,10 @@ def main():
             fields.cic_deposit(xm, N) - 1.0, d_truth)
         print(f"  {name}: median {results[f'{name}_median_mpc']:.3f} Mpc/h")
 
-    (ROOT / "artifacts" / "e12_results.json").write_text(
+    (ROOT / "artifacts" / f"e12_{TAG}_results.json").write_text(
         json.dumps(results, indent=1))
     kc = np.sqrt(KB[:-1] * KB[1:])
-    md = ["# E12 — external validation vs CAMELS CV_0 (Arepo, LCDM)\n",
+    md = [f"# E12 ({TAG}) — external validation, LCDM CV_0\n",
           f"Our PM evolved from CAMELS' own 2LPT ICs (z=127→0, Ωm=0.3, "
           f"256³, 25 Mpc/h box). Node-rounding sanity: fraction of IC "
           f"displacements beyond 0.45 voxels = {frac_far:.3f}.\n",
@@ -165,7 +167,7 @@ def main():
                   f"| {results['pm_spectra'][i][1]:.3f} "
                   f"| {results['za_spectra'][i][0]:.3f} "
                   f"| {results['damp_spectra'][i][0]:.3f} |")
-    (ROOT / "docs" / "E12-report.md").write_text("\n".join(md) + "\n")
+    (ROOT / "docs" / f"E12-{TAG}-report.md").write_text("\n".join(md) + "\n")
     print(f"total {time.time()-t0:.0f}s")
 
 if __name__ == "__main__":

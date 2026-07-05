@@ -20,7 +20,7 @@ description: >
   geodesic-transport hypothesis, and validation against Planck and ACT
   gas maps.
 comments: true
-published: false
+published: true
 ---
 
 <div class="l-body" markdown="1">

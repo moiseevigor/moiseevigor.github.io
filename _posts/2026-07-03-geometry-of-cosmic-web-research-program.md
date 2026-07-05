@@ -17,7 +17,7 @@ description: >
   hypotheses with falsifiable predictions, ordered experiments on public data,
   and the analysis plan with defined metrics.
 comments: true
-published: false
+published: true
 ---
 
 <div class="l-body" markdown="1">
