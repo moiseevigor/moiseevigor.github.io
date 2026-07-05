@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+title: "The correction beyond Zel'dovich is transverse: code and experiments"
+message: "If you use this code or the experiment suite, please cite it."
+type: software
+authors:
+  - family-names: Moiseev
+    given-names: Igor
+repository-code: "https://github.com/moiseevigor/moiseevigor.github.io"
+url: "https://github.com/moiseevigor/moiseevigor.github.io/tree/research/geometry-of-cosmic-web/research/cosmic-web"
+license: MIT
