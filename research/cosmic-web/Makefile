@@ -31,5 +31,8 @@ truth-validation:         ## Sec 2.1 (E10 convergence; E12 external, needs data/
 figures:                  ## regenerate docs/paper-figures/*
 	$(PY) scripts/make_paper_figures.py
 
-all: toy-benchmark residual model-ladder baselines transfer field-level truth-validation figures
-.PHONY: all toy-benchmark residual model-ladder baselines transfer field-level truth-validation figures
+paper: figures            ## compile paper/main.pdf (needs tectonic: brew install tectonic)
+	cd paper && tectonic main.tex
+
+all: toy-benchmark residual model-ladder baselines transfer field-level truth-validation figures paper
+.PHONY: all toy-benchmark residual model-ladder baselines transfer field-level truth-validation figures paper
