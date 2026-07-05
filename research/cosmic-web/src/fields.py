@@ -261,3 +261,80 @@ def tidal_frame_full(field, smooth=4.0):
             T[..., i, j] = T[..., j, i] = tij
     vals, vecs = np.linalg.eigh(T)
     return vecs[..., :, 2], vecs[..., :, 0]
+
+
+# ------------------------------------------------- literature baselines
+
+def _delta_k_of(N, L, rng, sigma8=0.8):
+    """The same normalized linear delta_k that zeldovich_box draws."""
+    kf = 2 * np.pi / L
+    k1 = np.fft.fftfreq(N, d=1.0 / N) * kf
+    kx, ky, kz = np.meshgrid(k1, k1, k1[: N // 2 + 1], indexing="ij")
+    k2 = kx ** 2 + ky ** 2 + kz ** 2
+    amp = np.sqrt(_bbks_pk(np.sqrt(k2)))
+    noise = rng.normal(size=k2.shape) + 1j * rng.normal(size=k2.shape)
+    dk = amp * noise
+    dk[0, 0, 0] = 0
+    dk_s = dk * np.exp(-0.5 * k2 * 8.0 ** 2)
+    delta_s = np.fft.irfftn(dk_s, s=(N, N, N))
+    dk *= sigma8 / delta_s.std()
+    return dk, (kx, ky, kz), k2
+
+
+def lpt2_positions(N, L, rng, D=1.0, sigma8=0.8):
+    """Second-order LPT positions at growth factor D (EdS coefficient).
+    x = q - D grad(phi1) + (3/7) D^2 grad(phi2),
+    lap(phi1) = delta,  lap(phi2) = sum_{i<j}[phi1,ii phi1,jj - phi1,ij^2].
+    Same random draw as zeldovich_box for a given rng state."""
+    dk, ks, k2 = _delta_k_of(N, L, rng, sigma8)
+    k2s = np.where(k2 == 0, 1, k2)
+    to_vox = N / L
+    # phi1_k = -delta_k / k^2 ; second derivatives phi1,ij_k = k_i k_j delta_k/k^2
+    dij = {}
+    for i in range(3):
+        for j in range(i, 3):
+            dij[(i, j)] = np.fft.irfftn(ks[i] * ks[j] * dk / k2s, s=(N, N, N))
+    src = (dij[(0, 0)] * dij[(1, 1)] - dij[(0, 1)] ** 2 +
+           dij[(0, 0)] * dij[(2, 2)] - dij[(0, 2)] ** 2 +
+           dij[(1, 1)] * dij[(2, 2)] - dij[(1, 2)] ** 2)
+    src_k = np.fft.rfftn(src)
+    q = np.arange(N) + 0.5
+    qx, qy, qz = np.meshgrid(q, q, q, indexing="ij")
+    grid = [qx, qy, qz]
+    pos = []
+    for i, kk in enumerate(ks):
+        psi1 = np.fft.irfftn(1j * kk * dk / k2s, s=(N, N, N))
+        # grad(phi2)_k = i k phi2_k = -i k src_k / k^2
+        gphi2 = np.fft.irfftn(-1j * kk * src_k / k2s, s=(N, N, N))
+        pos.append(grid[i] + (D * psi1 + (3.0 / 7.0) * D ** 2 * gphi2) * to_vox)
+    return np.stack(pos, axis=-1).reshape(-1, 3) % N
+
+
+def muscle_positions(N, L, rng, D=1.0, sigma8=0.8,
+                     scales_mpc=(0.0, 1.0, 2.0, 4.0, 8.0)):
+    """MUSCLE (Neyrinck 2016): multiscale spherical-collapse displacement.
+    Divergence field: theta = 3[sqrt(1 - (2/3) D delta) - 1] where the
+    argument is positive AND the point has not collapsed (D delta_R >= 3/2)
+    at any smoothing scale R; collapsed points get theta = -3.
+    Psi = grad(invlap(theta)); x = q + Psi."""
+    from scipy.ndimage import gaussian_filter
+    dk, ks, k2 = _delta_k_of(N, L, rng, sigma8)
+    k2s = np.where(k2 == 0, 1, k2)
+    to_vox = N / L
+    delta = np.fft.irfftn(dk, s=(N, N, N))
+    collapsed = np.zeros(delta.shape, bool)
+    for R in scales_mpc:
+        dR = gaussian_filter(delta, R * to_vox, mode="wrap") if R > 0 else delta
+        collapsed |= (D * dR >= 1.5)
+    arg = np.maximum(1.0 - (2.0 / 3.0) * D * delta, 0.0)
+    theta = 3.0 * (np.sqrt(arg) - 1.0)
+    theta[collapsed] = -3.0
+    th_k = np.fft.rfftn(theta)
+    q = np.arange(N) + 0.5
+    qx, qy, qz = np.meshgrid(q, q, q, indexing="ij")
+    grid = [qx, qy, qz]
+    pos = []
+    for i, kk in enumerate(ks):
+        psi_i = np.fft.irfftn(-1j * kk * th_k / k2s, s=(N, N, N))
+        pos.append(grid[i] + psi_i * to_vox)
+    return np.stack(pos, axis=-1).reshape(-1, 3) % N

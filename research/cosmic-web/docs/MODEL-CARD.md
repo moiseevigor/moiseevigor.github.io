@@ -25,6 +25,7 @@ every 3rd step); keep the along-filament component intact.
 |---|---|
 | Better global transport than Zel'dovich | 4.52 vs 4.98 vox (−9%), 3 held-out seeds × 50k particles |
 | Better than classical isotropic adhesion proxy | isotropic sticking scores 5.34 (E5); this model 4.52 |
+| Matches MUSCLE on transport; complementary field strengths | MUSCLE 4.49 ± 0.12 vs 4.52 ± 0.18 (tie); MUSCLE wins small-scale r(k), this model wins mid-scale T(k); 2LPT degrades to 8.07 (E9) |
 | Near the frame-information optimum | oracle-frame bound 4.47; model reaches 4.52 (89% of the recoverable gap closed) |
 | Largest gains where structure forms | at the web (0–2 vox from spines): −14% vs ZA already at the E5c stage; oracle shows −20% available |
 | Preserves along-filament flow | by construction (e₃ component undamped); isotropic sticking destroys it |

@@ -252,3 +252,17 @@ model keeps −10%/−17% (overall/web), and at 0.5 Mpc/h voxels −10%/−15%
 — the signature of a geometric, growth-parametrized correction. Every
 scope row of the model card testable on this machine is now verified.
 The program has no remaining executable hypothesis of any kind.
+
+## E9/E10 addendum (2026-07-05) — referee battery: the framing settles
+
+Literature baselines implemented and run on identical ICs: 2LPT degrades
+transport at these scales (8.07; known shell-crossing overshoot); MUSCLE
+ties the frozen model (4.49 vs 4.52) and wins small-scale phases, while
+the damping model wins mid-scale amplitudes. The paper's contribution is
+therefore the mechanism, not the engine: E4's measurement (the beyond-ZA
+correction is transverse in the tidal frame) plus the demonstration that
+this single directional ingredient reproduces MUSCLE-level accuracy —
+explaining WHY shell-crossing corrections of the MUSCLE class work. E10:
+truth converged in time (0.008 vox under step doubling); comparison
+invariant. Referee points 1–3 are now executed; the optional external
+cross-check (Quijote) awaits download approval.
