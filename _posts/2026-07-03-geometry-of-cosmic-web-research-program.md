@@ -263,6 +263,15 @@ eager the flow is in each direction.
 
 ## Hypotheses
 
+In plain words, the four bets, from safest to boldest: **H1** — the
+orientation-aware eye traces filaments better than the standard one.
+**H2** — telling that eye about the local gravity field improves it
+further. **H3** — the webs it draws sit on real mass and gas, not just on
+galaxy counts. **H4** — the boldest — matter itself *travels* along the
+geometry's preferred paths, so the lift is part of the physics, not just
+a detector. Each bet comes with a pre-registered way to lose, stated
+below.
+
 Conventions used throughout: tidal eigenvalues ordered $$\lambda_1 \ge \lambda_2 \ge \lambda_3$$ with eigenvectors $$e_1, e_2, e_3$$;
 filament axis along $$e_3$$. "Spine" = 1D curve set output by a filament finder.
 All metrics are defined in the data-analysis plan below.
@@ -299,9 +308,14 @@ and the program remains a methods paper (C1).
 
 ## Experiments, in order
 
-Each experiment gates the next; a kill criterion at any stage stops the branch,
-and the analysis of each stage sets the coefficients or priors of the following
-one.
+In plain words, the campaign: first settle whether the theory even
+permits the boldest claim (T1); race the two methods on toy universes
+where the answer is known (E0); repeat on real simulated gravity (E1);
+watch matter actually move and ask whose paths it follows (E2); and only
+then take the surviving method to the real sky and check its webs
+against maps of mass and hot gas (E3). Each experiment gates the next; a
+kill criterion at any stage stops the branch, and the analysis of each
+stage sets the coefficients or priors of the following one.
 
 **T1 (theory, parallel track).** Derive — or refute — a Jacobi-type variational
 principle for the Zel'dovich/adhesion flow in comoving coordinates, giving the
