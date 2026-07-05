@@ -15,3 +15,11 @@ Our PM evolved from CAMELS' own 2LPT ICs (z=127→0, Ωm=0.3, 256³, 25 Mpc/h bo
 | 2.40 | 0.837 | 0.864 | 0.144 | 0.202 |
 | 4.57 | 0.574 | 0.795 | 0.017 | 0.012 |
 | 8.69 | 0.295 | 0.709 | -0.001 | -0.002 |
+
+## Note on suite selection for the second-code check
+
+SIMBA_DM CV_0 was downloaded first but found to be byte-identical to
+IllustrisTNG_DM CV_0 on the CAMELS server (range-request hash check):
+the DM-only CV "twins" of those two suites are one shared simulation.
+Astrid_DM CV_0 (MP-Gadget) is a genuinely distinct run (different bytes
+and size) and is used as the independent second code in E12-astrid.
