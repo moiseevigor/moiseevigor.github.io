@@ -21,6 +21,7 @@ series_part: A1
 arxiv: "0807.4731"
 coauthors: "Yu. L. Sachkov"
 comments: true
+permalink: /mathematics/2026/05/01/geometry-of-seeing-A1-lie-groups/
 published: false
 ---
 
@@ -32,7 +33,7 @@ published: false
 Part 1 of the series uses the language of Lie groups and Lie algebras as if it
 were standard furniture: $\mathrm{SE}(2)$, $\mathfrak{se}(2)$,
 left-invariant vector fields $X_1 = \cos\theta\,\partial_x +
-\sin\theta\,\partial_y$, the bracket $[X_1, X_2] = X_3$, the exponential map.
+\sin\theta\,\partial_y$, the bracket $[X_1, X_2] = -X_3$, the exponential map.
 This appendix builds those objects from scratch.  Read it once and Part 1
 becomes a calmer text.  All three figures below are powered by the same
 $\mathrm{SE}(2)$ matrix exponential routine that the
@@ -124,31 +125,40 @@ $G$ tangent to $E_i$ at the identity, multiply it on the left by $g$, and
 read off its velocity at $g$.
 </aside>
 
-There is a canonical way to push the Lie algebra around the group: at any
-$g \in G$ define
+There is a canonical way to push any algebra element $E \in \mathfrak g$
+around the group: at any $g \in G$ define
 
-$$X_i(g) \;:=\; (dL_g)_e (E_i),$$
+$$\widetilde E(g) \;:=\; (dL_g)_e (E),$$
 
-where $L_g(h) = gh$ is left-multiplication.  $X_i(g)$ is the <span class="annotated-term" data-note="note-pushforward">pushforward</span> of
-the abstract algebra element $E_i$ to the tangent space at $g$ along the
-left-translation.  These are the **left-invariant vector fields**.  They
-satisfy $X_i(gh) = (dL_g)_h X_i(h)$, i.e. they look the same in every
-left-translated frame.
+where $L_g(h) = gh$ is left-multiplication.  $\widetilde E(g)$ is the
+<span class="annotated-term" data-note="note-pushforward">pushforward</span> of
+$E$ to the tangent space at $g$ along the left-translation.  The vector
+fields obtained this way are the **left-invariant vector fields**; they
+satisfy $\widetilde E(gh) = (dL_g)_h \widetilde E(h)$, i.e. they look the
+same in every left-translated frame.
 
-Computing them in the chart $(x, y, \theta)$ is mechanical:
+Computing the pushforwards in the chart $(x, y, \theta)$ is mechanical:
 $L_g(x', y', \theta') = (\,x + x'\cos\theta - y'\sin\theta,\;\;
                             y + x'\sin\theta + y'\cos\theta,\;\;
-                            \theta + \theta')$, so
+                            \theta + \theta')$.  Following Part 1's index
+convention — $X_1$ forward, $X_2$ rotation, $X_3$ sideways — the three
+basis fields are
 
 $$\boxed{\;
-  X_1 \;=\; \cos\theta\,\partial_x + \sin\theta\,\partial_y, \qquad
-  X_2 \;=\; \partial_\theta, \qquad
-  X_3 \;=\; -\sin\theta\,\partial_x + \cos\theta\,\partial_y .\;}$$
+  X_1 = (dL_g)_e E_1 = \cos\theta\,\partial_x + \sin\theta\,\partial_y, \quad
+  X_2 = (dL_g)_e E_3 = \partial_\theta, \quad
+  X_3 = (dL_g)_e E_2 = -\sin\theta\,\partial_x + \cos\theta\,\partial_y .\;}$$
+
+Note the index shuffle: $X_2$ comes from the *rotation* generator $E_3$ and
+$X_3$ from the *translation* generator $E_2$, because Part 1 numbers the
+frame (forward, rotation, sideways) while the $E$-basis is numbered
+(translate-$x$, translate-$y$, rotate).
 
 These are the same three vector fields Part 1 §3 introduced.  Now you know
-where they come from: they are the basis of $\mathfrak{se}(2)$, parallel-
-transported across the group by left-multiplication.  They form an
-orthonormal frame for the *Cartan-Killing geometry* on $\mathrm{SE}(2)$.
+where they come from: they are the basis of $\mathfrak{se}(2)$,
+parallel-transported across the group by left-multiplication.  Declaring
+them orthonormal is exactly how Part 1 puts its left-invariant metric on
+$\mathrm{SE}(2)$.
 
 </div><!-- /.l-body -->
 
@@ -229,14 +239,16 @@ Two warnings worth absorbing.
 
 - This basis $\{E_1, E_2, E_3\}$ of $\mathfrak{se}(2)$ is *different* from
   the left-invariant frame $\{X_1, X_2, X_3\}$ used in Part 1.  At the
-  identity $X_i(e) = E_i$, but at a generic $g \in \mathrm{SE}(2)$,
-  $X_i(g) \neq E_i$ — the LI vector fields are not constant in
+  identity $X_1(e) = E_1$, $X_2(e) = E_3$, $X_3(e) = E_2$ (the index
+  shuffle above); and at a generic $g \in \mathrm{SE}(2)$ the $X_i(g)$ are
+  no longer the constant matrices $E_j$ — the left-invariant vector fields vary in
   coordinates.
-- For the LI vector fields the relevant bracket is the **vector-field
-  commutator** below, *not* the matrix commutator of their constant
-  identity-values.  The vector-field bracket of $X_1$ with $X_2$ produces
-  $\pm X_3$ — the missing sideways direction — even though the matrix
-  bracket of $E_1$ with $E_2$ vanishes.
+- For left-invariant fields the vector-field commutator and the matrix
+  commutator *agree*: $[X_i, X_j]_{\text{v.f.}}(e) = [\,X_i(e), X_j(e)\,]$
+  in $\mathrm{Mat}_3$.  What you must *not* do is take the matrix commutator
+  of the coordinate expressions $X_i(g)$ as if they were constant — they
+  are not.  Done correctly, $[X_1, X_2] = -X_3$ picks out the missing
+  sideways direction, matching the matrix bracket $[E_1, E_3] = -E_2$.
 
 **(ii) Vector-field commutator.**  For two vector fields acting on smooth
 functions $f$,
@@ -257,10 +269,10 @@ $$[X_1, X_2] f \;=\; -(\partial_\theta\cos\theta)\partial_x f
                   \;=\; \sin\theta\,\partial_x f - \cos\theta\,\partial_y f
                   \;=\; -X_3 f.$$
 
-So $[X_1, X_2] = -X_3$ as left-invariant vector fields.  The sign is a
-convention: Part 1 used the opposite sign convention to land at
-$[X_1, X_2] = +X_3$, and we will switch to that in §4 below where it matters.
-Either way, the bracket is $\pm X_3$ — non-zero, in the missing sideways
+So $[X_1, X_2] = -X_3$ as left-invariant vector fields — the same sign
+Part 1 carries.  (Writing it the other way round, $[X_2, X_1] = +X_3$, is
+the only freedom here; it is a bookkeeping choice, not a real one.)  Either
+way the bracket is non-zero and points along $X_3$, the missing sideways
 direction.
 
 **(iii) Closing-defect interpretation.**  Flow along $X$ for time
@@ -271,7 +283,7 @@ doesn't, and the residual is
 $$\Phi^Y_{-\varepsilon} \circ \Phi^X_{-\varepsilon} \circ \Phi^Y_{\varepsilon}
    \circ \Phi^X_{\varepsilon}\,(g) \;=\; g + \varepsilon^2 [X, Y]_g + O(\varepsilon^3).$$
 
-For the V1 cortex this is the four-step manoeuvre Part 1 §3.4 illustrated:
+For the primary visual cortex (V1) this is the four-step manoeuvre Part 1 §3.4 illustrated:
 two hops of "slide along your orientation" interleaved with two hops of
 "rotate the orientation" produce a sideways nudge of order $\varepsilon^2$.
 The Lie bracket is exactly the leading coefficient of that nudge.
@@ -326,7 +338,7 @@ The Lie bracket is exactly the leading coefficient of that nudge.
     universal.  Toggle the $O(\varepsilon^3)$ residuals: after
     subtracting the predicted $\varepsilon^2 [X, Y]$ term, the orange
     (SE(2)) and pink (SO(3)) residuals fall on slope $\approx 3$ — the
-    next BCH contribution, also universal.  Two grey reference lines
+    next Baker–Campbell–Hausdorff (BCH) contribution, also universal.  Two grey reference lines
     have slopes 2 and 3 exactly; the four data traces all track them.
 
     Punchline: the <em>algebra</em> determines the leading order; the
@@ -355,8 +367,8 @@ It does two things at once:
    so $\exp$ is a local diffeomorphism near the origin.  It is *not* a
    global diffeomorphism: for SE(2) the exponential map is surjective but
    not injective, and we will need to be careful in Appendix A5 when we
-   talk about the *sub-Riemannian* exponential map (which is a different
-   beast — see A5).
+   talk about the *sub-Riemannian* (SR) exponential map (which is a
+   different beast).
 
 For SE(2), $\exp(t(a_1 E_1 + a_2 E_2 + a_3 E_3))$ has a closed form.  Write
 $X = T + \omega E_3$ with $T = a_1 E_1 + a_2 E_2$ (translation part) and
@@ -377,16 +389,18 @@ through Figure A1.1: $\omega = 0$ gives a straight line, $\omega \neq 0$ gives
 a circle whose centre is offset from the origin by the screw "axis"
 $a / \omega$.
 
-### The 1-parameter subgroups *are* the geodesics of the Cartan-Killing metric
+### 1-parameter subgroups and bi-invariant geodesics
 
-If you put a left-invariant Riemannian metric on $G$ that is also right-
-invariant (a "bi-invariant" metric, which on $\mathrm{SE}(2)$ exists), then
-the geodesics through $e$ are exactly the 1-parameter subgroups
-$t \mapsto \exp(tX)$.  This is **not** the situation in Part 1: Part 1 uses
-a *sub-Riemannian* metric that is left-invariant but not right-invariant,
-and in that geometry the geodesics are **not** generally
-$\exp(tX)$ — they are Euler's elastica.  Appendix A5 explains how the SR
-exponential map differs from this group exponential.
+On a group that carries a *bi-invariant* metric — one invariant under both
+left and right translation — the geodesics through $e$ are exactly the
+1-parameter subgroups $t \mapsto \exp(tX)$.  Compact groups and $\mathbb R^n$
+have such metrics; $\mathrm{SE}(2)$ does **not** — its adjoint action is
+non-compact, which is the standard obstruction.  So even a Riemannian story
+on $\mathrm{SE}(2)$ would not make $\exp(tX)$ geodesic.  Part 1 goes further
+still: its metric is *sub-Riemannian*, left-invariant but not
+right-invariant, and its geodesics are not $\exp(tX)$ at all — they are
+Euler's elastica.  Appendix A5 explains how the SR exponential map differs
+from this group exponential.
 
 ## Adjoint and coadjoint actions
 
@@ -396,7 +410,7 @@ $$\mathrm{Ad}_g : \mathfrak g \to \mathfrak g, \qquad
   \mathrm{Ad}_g(X) \;:=\; g X g^{-1}.$$
 
 Differentiating at $g = e$ recovers the bracket:
-$\frac{d}{dt}\bigr|_{t=0} \mathrm{Ad}_{\exp(tX)}(Y) = [X, Y] =: \mathrm{ad}_X(Y)$.
+$$\frac{d}{dt}\bigr|_{t=0} \mathrm{Ad}_{\exp(tX)}(Y) = [X, Y] =: \mathrm{ad}_X(Y)$$.
 
 <aside id="note-kks">
 The <strong>Kirillov–Kostant–Souriau theorem</strong> (1962–1970) says
@@ -421,10 +435,13 @@ $$\mathcal O_c \;:=\; \{(h_1, h_2, h_3) : h_1^2 + h_2^2 = c\},$$
 
 i.e. **vertical cylinders** in $(h_1, h_2, h_3)$-space (plus a degenerate
 1-point orbit at $h_1 = h_2 = 0$ for each value of $h_3$).  Part 2 §1
-discovered this structure organically: the costate of the SR geodesic
-problem evolves on the cylinder $h_1^2 + h_2^2 = 2\mathcal H$, with $h_3 =
-\omega_0$ constant — exactly Lie–Poisson dynamics on $\mathfrak{se}(2)^{\ast}$.
-Appendix A3 will derive that flow from the PMP.
+discovered this structure organically.  A caution on indices: Part 2 labels
+the costate in the left-invariant frame $\{X_1, X_2, X_3\}$, so its
+$(h_1, h_2, h_3)$ are this appendix's $(h_1, h_3, h_2)$.  In the $E$-basis
+the costate stays on a fixed coadjoint cylinder $h_1^2 + h_2^2 = c$ — the
+Casimir is conserved — while the SR Hamiltonian
+$\mathcal H = \tfrac12(h_1^2 + h_3^2)$ drives it around that cylinder.
+Appendix A3 derives the flow from the Pontryagin Maximum Principle (PMP).
 
 </div><!-- /.l-body -->
 
@@ -449,14 +466,13 @@ Appendix A3 will derive that flow from the PMP.
   <figcaption>
     <strong>Figure A1.3.</strong> The coadjoint orbits of $\mathrm{SE}(2)$ are
     cylinders $h_1^2 + h_2^2 = c$ in the dual space $\mathfrak{se}(2)^{\ast}$.
-    The blue curve is the trajectory of the costate $(h_1(t), h_2(t),
-    h_3(t))$ under the Lie–Poisson flow generated by the SR Hamiltonian
-    $\mathcal H = \tfrac12 (h_1^2 + h_2^2)$ — derived in Appendix A3, used
-    without proof in Part 2 §1.  The trajectory winds around the cylinder
-    at constant $h_3$, with angular rate $-h_3$ (slide $h_3$ to vary).  This
-    is a symplectic structure visualised: cylinders for non-trivial orbits,
-    pinched-off points along the axis $h_1 = h_2 = 0$ for the degenerate
-    orbits.
+    The slider $c$ sets the cylinder radius; $h_3$ runs along its axis.
+    Every Lie–Poisson flow — in particular the SR Hamiltonian flow of
+    Part 2, derived in Appendix A3 — is confined to one such cylinder,
+    because the Casimir $h_1^2 + h_2^2$ is conserved.  The blue curve shows
+    a sample trajectory riding the chosen orbit.  This is a symplectic
+    structure visualised: cylinders for the non-trivial orbits, pinched-off
+    points along the axis $h_1 = h_2 = 0$ for the degenerate ones.
   </figcaption>
 </figure>
 
@@ -488,14 +504,15 @@ points to remember:
   $X + Y$ pieces cancel, leaving $\varepsilon^2 [X, Y]$ at the leading
   surviving order.  See Figure A1.2.
 - Even when $[X, Y] \neq 0$, the higher commutators
-  $[X, [X, Y]], [Y, [X, Y]]$ may vanish — and for $\mathrm{SE}(2)$, the
-  algebra is "step-2 nilpotent at infinity" in a sense, meaning many
-  identities truncate quickly.  This is what makes the Sachkov closed forms
-  in Part 2 manageable.
+  $[X, [X, Y]], [Y, [X, Y]]$ are forced back into a small set of
+  directions.  $\mathfrak{se}(2)$ is not nilpotent, but its bracket table is
+  simple enough that many BCH-type expansions truncate quickly in practice
+  — this is what keeps the Sachkov closed forms in Part 2 manageable.
 
 ## Connection to the elliptic project
 
-Every figure on this page integrates the SE(2) ODE $\dot g = g \cdot \xi(t)$
+Every figure on this page integrates the SE(2) ordinary differential
+equation (ODE) $\dot g = g \cdot \xi(t)$
 using the exact same midpoint-rule helper that the
 <a href="https://moiseevigor.github.io/elliptic/">moiseevigor/elliptic</a>
 project ships in `examples/dubins-back-wheel/app.js`.  When $\xi(t) =
@@ -544,8 +561,8 @@ assert np.allclose(comm(E3, E2), -E1)
 
 A Lie group is a manifold-with-group-law.  Its Lie algebra is the tangent
 space at the identity, encoded either as matrices in $\mathrm{Mat}_n$ or as
-left-invariant vector fields on $G$.  The **bracket** measures non-
-commutativity in three equivalent ways (matrix commutator, vector-field
+left-invariant vector fields on $G$.  The **bracket** measures
+non-commutativity in three equivalent ways (matrix commutator, vector-field
 commutator, infinitesimal closing-defect of a 4-leg loop).  The **exponential
 map** turns algebra elements into 1-parameter subgroups.  The **coadjoint
 orbits** of $\mathrm{SE}(2)$ are cylinders, and the SR Hamiltonian flow lives
@@ -554,7 +571,7 @@ on them.
 Appendix A2 will use this language to give *the right* definition of a
 contact structure and prove Chow–Rashevskii.  Appendix A3 will derive the
 Lie–Poisson equations $\dot h_1 = h_2 h_3, \dot h_2 = -h_1 h_3, \dot h_3 =
-0$ — the equations Part 2 §1 asserts without proof — directly from the
+-h_1 h_2$ — the equations Part 2 §1 asserts without proof — directly from the
 Pontryagin Maximum Principle.
 
 </div><!-- /.l-body -->

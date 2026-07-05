@@ -20,6 +20,7 @@ series_part: A4
 arxiv: "0807.4731"
 coauthors: "Yu. L. Sachkov"
 comments: true
+permalink: /mathematics/2026/05/04/geometry-of-seeing-A4-jacobi-elliptic/
 published: false
 ---
 
@@ -102,7 +103,7 @@ that $f(z + \omega_1) = f(z + \omega_2) = f(z)$. The fundamental domain
 is then a parallelogram in the complex plane, and the function descends
 to a well-defined map on the corresponding torus
 $\mathbb{C} / (\mathbb{Z}\omega_1 + \mathbb{Z}\omega_2)$ — the "elliptic
-curve" referenced above.
+curve" referenced in the main text below.
 </aside>
 
 The functions are <span class="annotated-term" data-note="note-doubly-periodic">**doubly-periodic**</span> when extended to the complex plane:
@@ -158,7 +159,7 @@ $$\boxed{\;\mathrm{sn}'(u) = \mathrm{cn}(u)\,\mathrm{dn}(u), \quad
 
 Squaring the first identity and using the Pythagorean relations
 $\mathrm{sn}^2 + \mathrm{cn}^2 = 1$ and $m\,\mathrm{sn}^2 + \mathrm{dn}^2 = 1$
-yields the cleanest single ODE:
+yields the cleanest single ordinary differential equation (ODE):
 
 $$(\mathrm{sn}')^2 \;=\; (1 - \mathrm{sn}^2)(1 - m\,\mathrm{sn}^2),$$
 
@@ -180,11 +181,8 @@ so $\ddot\varphi + \sin\varphi = 0$. ✓
 
 This is **the** identity behind the elastica: the pendulum solution is
 literally the Jacobi-am function, and the curvature
-$\kappa(s) = \dot\varphi(s) = 2k\,\mathrm{cn}(s)$ is one Jacobi function's
-worth — exactly the formula Part 2 uses. (An alternative convention takes
-$\kappa = 2k\,\mathrm{sn}$, related by a quarter-period shift $s \to s + K$;
-either describes the same family of geodesics, just starting at a different
-arc-length offset.)
+$\kappa(s) = \dot\varphi(s) = 2k\,\mathrm{cn}(s\mid k^2)$ is one Jacobi
+function's worth — exactly the formula Part 2 uses.
 
 ## The complete elliptic integrals
 
@@ -217,9 +215,9 @@ $$a_{n+1} \;=\; \tfrac12 (a_n + b_n), \qquad b_{n+1} \;=\; \sqrt{a_n b_n}.$$
 The two sequences converge — quadratically — to a common limit, the
 **arithmetic–geometric mean** $\mathrm{AGM}(a_0, b_0)$.  Quadratic
 convergence means each iteration *roughly doubles the number of correct
-digits*: starting from a $10^{-1}$-precision pair, six iterations land at
-$\sim 10^{-32}$ precision — hence the elliptic package's "16-digit accuracy
-in 6 iterations" claim.
+digits*: starting from a $10^{-1}$-precision pair, five iterations land at
+$\sim 10^{-32}$ precision — comfortably past the elliptic package's
+"16-digit accuracy in 6 iterations" claim.
 
 Gauss (1799, unpublished) proved the miracle:
 
@@ -228,8 +226,7 @@ Gauss (1799, unpublished) proved the miracle:
 
 $$K(m) \;=\; \frac{\pi}{2\,\mathrm{AGM}\!\bigl(1,\;\sqrt{1 - m}\bigr)}.$$
 
-Equivalently $K(m) = \pi / (2\,\mathrm{AGM}(\sqrt{1+\sqrt{1-m}},
-\sqrt{1-\sqrt{1-m}}))/\sqrt 2$ via the descending Landen transformation.
+Six AGM steps from $(1, \sqrt{1-m})$ pin $K(m)$ down to full double precision.
 </div>
 
 This is what `ellipticK` in the Python `elliptic` package computes — and
@@ -302,7 +299,7 @@ under the rescaling.
     energy $E$, blue solid; logarithmic divergence at $E \to 1^-$ (red
     dashed).  At small amplitude $E \to -1$, $T \to 2\pi$ (the harmonic
     limit); at $E = 0$, $T \approx 7.42$, already noticeably longer than
-    $2\pi$.  Asymptotic prediction $T \sim 2\log(16/(1-E))$ near
+    $2\pi$.  Asymptotic prediction $T \sim 2\log(32/(1-E))$ near
     separatrix overlaid (grey dotted).  This is the same plot drawn by the
     <a href="https://moiseevigor.github.io/elliptic/examples/physical-pendulum/">elliptic
     project's physical-pendulum example</a> — modulo axis labels, the
@@ -314,20 +311,20 @@ under the rescaling.
 
 ## Identities used in Part 2 §4
 
-Part 2 uses the closed-form integral
+Part 2 uses the closed-form heading integral
 
 $$\theta(s) \;=\; \theta_0 + 2\arcsin\bigl(k\,\mathrm{sn}(s\mid k^2)\bigr).$$
 
-Differentiating with respect to $s$:
-$\dot\theta = 2k\,\mathrm{cn}\,\mathrm{dn} / \sqrt{1 - k^2 \mathrm{sn}^2}
-           = 2k\,\mathrm{cn}\,\mathrm{dn} / \mathrm{dn}
-           = 2k\,\mathrm{cn}$.
-But Part 2 writes $\kappa = 2k\,\mathrm{sn}$.  The reconciliation: there
-are *two* parametrisations of the inflectional family by Jacobi functions,
-related by a quarter-period shift $s \to s + K(k^2)$.  Under that shift
-$\mathrm{sn}(s + K) = \mathrm{cn}(s) / \mathrm{dn}(s)$ and the two
-conventions translate.  Both the Sachkov closed form (with sn) and the
-"angle-of-pendulum" form (with cn) are used in the literature.
+Differentiating with respect to $s$, and using
+$\sqrt{1 - k^2\,\mathrm{sn}^2} = \mathrm{dn}$,
+
+$$\kappa = \dot\theta
+   = \frac{2k\,\mathrm{cn}\,\mathrm{dn}}{\sqrt{1 - k^2\,\mathrm{sn}^2}}
+   = \frac{2k\,\mathrm{cn}\,\mathrm{dn}}{\mathrm{dn}}
+   = 2k\,\mathrm{cn}(s\mid k^2),$$
+
+exactly the boxed curvature of Part 2 §3 — the heading integral and the
+curvature formula are one statement, differentiated once.
 
 The plane curve integration uses the **second-kind incomplete integral**
 
@@ -349,15 +346,15 @@ Every formula in this appendix is implemented in
 
 | Formula here | Function in `elliptic` |
 |---|---|
-| $K(m)$ via AGM (§4) | `ellipticK(m)` |
-| sn/cn/dn via descending Landen (§3) | `ellipj(u, m)` |
+| $K(m)$ via AGM (§5) | `ellipticK(m)` |
+| sn/cn/dn via descending Landen (Fig. A4.1) | `ellipj(u, m)` |
 | $E(\phi\mid m), F(\phi\mid m)$ (§7) | `elliptic12(phi, m)` |
-| Pendulum period $4K((E+1)/2)$ (§5) | `ellipticK((E+1)/2) * 4` |
-| Carlson form $R_F$, $R_D$ (§ omitted) | `carlsonRF`, `carlsonRD` |
+| Pendulum period $4K((E+1)/2)$ (§6) | `ellipticK((E+1)/2) * 4` |
+| Carlson form $R_F$, $R_D$ (not covered here) | `carlsonRF`, `carlsonRD` |
 
 The browser figures on this page use `elliptic-core.js`, which is a
-hand-port of the AGM and Landen routines from the Python package.  Line
-13–20 of `elliptic-core.js` is identical (modulo language) to the AGM
+hand-port of the AGM and Landen routines from the Python package.  Lines
+13–20 of `elliptic-core.js` are identical (modulo language) to the AGM
 loop in `elliptic/_AGM.py`.
 
 ## Code
@@ -377,15 +374,17 @@ from scipy.integrate import solve_ivp
 def pend(t, y):
     return [y[1], -np.sin(y[0])]
 
+def downcross(t, y):
+    return y[0]              # phi passing through 0 ...
+downcross.direction = -1     # ... going downward: happens at t = T/2
+
 T_numeric = []
 for E in E_vals:
     phi0 = 0.0
-    phidot0 = np.sqrt(2 * (E - np.cos(phi0)))   # initial velocity from E
+    phidot0 = np.sqrt(2 * (E + np.cos(phi0)))   # from E = ½φ̇² − cos φ
     sol = solve_ivp(pend, [0, 30], [phi0, phidot0], rtol=1e-12, atol=1e-14,
-                    dense_output=True)
-    # Find first return to phi = 0 with phidot > 0
-    # ... (implementation omitted)
-    T_numeric.append(...)   # matches T_closed to 1e-10
+                    events=downcross)
+    T_numeric.append(2 * sol.t_events[0][0])    # matches T_closed to ~1e-10
 ```
 
 ```python
@@ -644,8 +643,8 @@ function drawPeriod() {
     .attr('font-family', 'Source Sans 3').attr('font-size', 11).attr('fill', '#888')
     .text('T = 2π (harmonic)');
 
-  // Asymptotic prediction T ~ 2 log(16/(1-E)) at E ~ 1
-  const asy = Earr.filter(E => E > 0).map(E => ({ E, T: 2 * Math.log(16 / Math.max(1e-3, 1 - E)) }));
+  // Asymptotic prediction T ~ 2 log(32/(1-E)) at E ~ 1
+  const asy = Earr.filter(E => E > 0).map(E => ({ E, T: 2 * Math.log(32 / Math.max(1e-3, 1 - E)) }));
   g.append('path')
     .attr('d', d3.line().x(p => xS(p.E)).y(p => yS(Math.min(p.T, 60)))(asy))
     .attr('fill', 'none').attr('stroke', '#888').attr('stroke-width', 1).attr('stroke-dasharray', '2,3');

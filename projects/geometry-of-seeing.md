@@ -165,11 +165,11 @@ elliptic cosine, with spatial period $T = 4K(k^2)$.
 
 - **Petitot's contact model** (Part 1): why V1 lifts the image to SE(2) and why
   modal completion is a geodesic problem.
-- **Complete parametrisation** (Part 2): all three inflectional families, the
-  Euler separatrix, and the non-inflectional family, written in closed form using
-  $\mathrm{sn}, \mathrm{cn}, \mathrm{dn}$.
+- **Complete parametrisation** (Part 2): all three families — the inflectional
+  family, the Euler separatrix, and the non-inflectional family — written in
+  closed form using $\mathrm{sn}, \mathrm{cn}, \mathrm{dn}$.
 - **Maxwell strata** (Part 3): discrete symmetry group $$\mathbb{Z}_2 \times \mathbb{Z}_2$$,
-  the first Maxwell time $$t_{\max}^1 = 2\pi/\sqrt{H}$$, loss of optimality.
+  the first Maxwell time $$t_{\max}^1 = 4K(k^2)/\omega_0$$, loss of optimality.
 - **The open problem** (Part 4): the cut time is bounded above by $$t_{\max}^1$$ but
   the exact value for $k \in (0,1)$ remains unproved.
 

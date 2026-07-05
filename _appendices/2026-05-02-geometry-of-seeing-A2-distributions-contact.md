@@ -22,6 +22,7 @@ series_part: A2
 arxiv: "0807.4731"
 coauthors: "Yu. L. Sachkov"
 comments: true
+permalink: /mathematics/2026/05/02/geometry-of-seeing-A2-distributions-contact/
 published: false
 ---
 
@@ -34,8 +35,9 @@ Part 1 §3 introduces a horizontal *distribution* $\mathcal H = \mathrm{span}\{X
 on $\mathrm{SE}(2)$, calls it "completely non-integrable", invokes the
 *Hörmander* (bracket-generating) condition, and applies the
 *Chow–Rashevskii* reachability theorem.  These are not metaphors —
-they are precise theorems with one-paragraph proofs that bind the V1
-horizontal connectivity to the contact-geometric backbone of the elastica
+they are precise theorems with one-paragraph proofs that bind the
+primary visual cortex's (V1) horizontal connectivity to the
+contact-geometric backbone of the elastica
 problem.  This appendix unpacks them.
 
 The interactive figures borrow the cuspidal-trajectory machinery from the
@@ -150,19 +152,18 @@ then any two points of $M$ can be joined by a piecewise-horizontal curve.
 
 **Sketch.**  Bracket-generating means iterated brackets of the frame fields
 span $T_p M$.  Concatenating short flows along a frame field $X_i$ for
-times $\pm \varepsilon$ in the pattern of A1 Figure 1.2 produces a net
+times $\pm \varepsilon$ in the pattern of Appendix A1's Figure A1.2 produces a net
 displacement of order $\varepsilon^2$ in the bracket direction, of order
 $\varepsilon^3$ in iterated-bracket directions, etc.  Show that the smooth
-map $\mathbb R^n \to M$, $(t_1, \ldots, t_n) \mapsto \Phi^{X_{i_1}}_{t_1}
-\circ \cdots \circ \Phi^{X_{i_n}}_{t_n}$, has surjective differential at the
+map $\mathbb R^n \to M$, $$(t_1, \ldots, t_n) \mapsto \Phi^{X_{i_1}}_{t_1} \circ \cdots \circ \Phi^{X_{i_n}}_{t_n}$$, has surjective differential at the
 origin under bracket-generation, hence is locally surjective by the inverse
 function theorem.  Compose enough hops and you can reach any point.
 
 **For SE(2) the Hörmander condition is satisfied at depth 1.**  We computed
-$[X_1, X_2] = \pm X_3$, and $X_1, X_2, X_3$ already span $T_g\mathrm{SE}(2)$
+$[X_1, X_2] = -X_3$, and $X_1, X_2, X_3$ already span $T_g\mathrm{SE}(2)$
 (three linearly independent fields).  No deeper brackets are needed.  This
-is the *minimal* possible depth and is what makes the SR Carnot–Carathéodory
-distance well-behaved on $\mathrm{SE}(2)$.
+is the *minimal* possible depth and is what makes the sub-Riemannian (SR)
+Carnot–Carathéodory distance well-behaved on $\mathrm{SE}(2)$.
 
 </div><!-- /.l-body -->
 
@@ -172,8 +173,8 @@ distance well-behaved on $\mathrm{SE}(2)$.
     <div class="fig-controls">
       <label>distribution
         <select id="dist-type">
-          <option value="integrable" selected>integrable: $\mathrm{span}(\partial_x, \partial_y)$ — horizontal slabs</option>
-          <option value="contact">contact / SE(2): $\xi = \ker(\sin\theta\,dx - \cos\theta\,dy)$</option>
+          <option value="integrable" selected>integrable: span(∂x, ∂y) — horizontal slabs</option>
+          <option value="contact">contact / SE(2): ξ = ker(sin θ dx − cos θ dy)</option>
         </select>
       </label>
       <label>height $\theta$ slice
@@ -229,12 +230,12 @@ $$\alpha \wedge d\alpha
   \;=\; (\sin\theta\,dx - \cos\theta\,dy) \wedge (\cos\theta\,d\theta \wedge dx
                                                   + \sin\theta\,d\theta \wedge dy)$$
 $$\quad
-  \;=\; -\sin^2\theta\,dx \wedge d\theta \wedge dy
+  \;=\; \sin^2\theta\,dx \wedge d\theta \wedge dy
        - \cos^2\theta\,dy \wedge d\theta \wedge dx
   \;=\; -dx \wedge dy \wedge d\theta \;\neq\; 0.$$
 
-Contact.  The kernel $\xi = \mathrm{span}\{X_1, X_2\}$ is the V1 horizontal
-distribution.
+Contact.  The kernel $\xi = \mathrm{span}\{X_1, X_2\}$ is exactly the V1
+horizontal distribution $\mathcal H$ of the Frobenius test above.
 
 **Darboux's theorem** (contact version): every contact structure on a
 3-manifold is *locally* isomorphic to the standard one $(\mathbb R^3,
@@ -282,8 +283,8 @@ makes this computation well-posed.
     <svg id="fig-reach" style="width:100%;height:380px;"></svg>
   </div>
   <figcaption>
-    <strong>Figure A2.2.</strong> Chow–Rashevskii in action.  A piecewise-
-    horizontal path made of $\pm\varepsilon$ flows along $X_1$ (forward)
+    <strong>Figure A2.2.</strong> Chow–Rashevskii in action.
+    A piecewise-horizontal path made of $\pm\varepsilon$ flows along $X_1$ (forward)
     and $X_2$ (rotate) connects the origin to the chosen target.  The
     "sideways" target needs a 4-leg bracket loop with each loop
     contributing an $\varepsilon^2$ sideways nudge — many loops to make
@@ -325,16 +326,16 @@ admissible $\gamma$ writes as $\dot\gamma = u_1(t) X_1 + u_2(t) X_2$ and
 
 $$L_{\mathrm{SR}}(\gamma) \;=\; \int_0^T \sqrt{u_1^2 + u_2^2}\,dt.$$
 
-After the $u_1 = 1$ unit-speed reduction, this collapses to the elastica
+After the $u_1 = 1$ reduction, $s$ is arc length and $\kappa = \dot\theta$,
+and the SR extremals project onto the critical curves of the elastica
 functional $\int \kappa^2(s)\,ds$ — exactly the integrand Euler minimised.
 Appendix A3 takes this and runs it through the Pontryagin Maximum Principle.
 
-**Mitchell's compactness theorem** (1985) shows that on a connected
-bracket-generating SR manifold the infimum is attained: a length-minimising
-geodesic exists between any two points.  This is the SR analogue of
-Hopf–Rinow.  For $\mathrm{SE}(2)$ it means every pair of V1 neurons is
-connected by an *actual* shortest horizontal curve — not just an
-approachable one.
+The **sub-Riemannian Hopf–Rinow theorem** shows that on a connected,
+complete bracket-generating SR manifold the infimum is attained: a
+length-minimising geodesic exists between any two points.  For
+$\mathrm{SE}(2)$ it means every pair of V1 neurons is connected by an
+*actual* shortest horizontal curve — not just an approachable one.
 
 ## Connection to the elliptic project
 
@@ -345,7 +346,8 @@ the dubins-back-wheel example</a>: a piecewise concatenation of
 $X_1$ ("forward + reverse") and $X_2$ ("steer") flows.  The parking
 trajectory is what Chow's theorem looks like with finite $\varepsilon$;
 the elastica geodesic is what it converges to as $\varepsilon \to 0$.
-Both are computed by the same SE(2) ODE integrator that lives in
+Both are computed by the same SE(2) ordinary-differential-equation (ODE)
+integrator that lives in
 `elliptic-core.js` on the elliptic site and is reused here.
 
 ## Code
@@ -369,28 +371,30 @@ def vf_bracket(X, Y, vars_):
         out[i] = sp.simplify(s)
     return out
 
-X3 = vf_bracket(X1, X2, [x, y, th])
-print("[X1, X2] =", X3.T)
-# → [-sin(θ), cos(θ), 0]   (this is -X3 from the text; sign convention)
+br12 = vf_bracket(X1, X2, [x, y, th])
+print("[X1, X2] =", br12.T)
+# → [sin(θ), -cos(θ), 0]   (this is -X3 from the text)
 
-# In span{X1, X2}? Solve a·X1 + b·X2 = X3 for constants a, b
+# In span{X1, X2}?  Solve a·X1 + b·X2 = [X1, X2] for constants a, b
 a, b = sp.symbols('a b')
-sol = sp.solve(a * X1 + b * X2 - X3, [a, b], dict=True)
-print("solution (None means not in span):", sol)
+sol = sp.solve(a * X1 + b * X2 - br12, [a, b], dict=True)
+print("solution ([] means not in span):", sol)
 # → [] — no solution; distribution is NOT integrable
 ```
 
 ```python
-# Contact-form check: α ∧ dα ≠ 0  for SE(2)
-alpha = [sp.sin(th), -sp.cos(th), 0]   # α = sin θ dx - cos θ dy as coefficients
-# d α: coefficients of dx∧dy, dx∧dθ, dy∧dθ
-# dα = cos θ dθ ∧ dx + sin θ dθ ∧ dy   (verify by direct exterior diff)
-# α ∧ dα picks out the volume form coefficient on dx ∧ dy ∧ dθ:
-vol_coeff = sp.simplify(
-    alpha[0] * sp.cos(th) * (-1)   # sin θ · cos θ · (dx ∧ dθ ∧ dx) - vanishes; only the dy∧dθ term survives ↘
-    + (-alpha[1]) * sp.sin(th)
-)
-# → 1, i.e. α ∧ dα = -dx ∧ dy ∧ dθ ≠ 0   (SE(2) is contact)
+# Contact-form check: α ∧ dα ≠ 0  for SE(2).
+# For a 1-form α = αx dx + αy dy + αθ dθ on a 3-manifold,
+#   α ∧ dα = (α · curl α) · dx ∧ dy ∧ dθ,
+# so the manifold is contact iff α · curl α never vanishes.
+ax, ay, ath = sp.sin(th), -sp.cos(th), 0          # α = sin θ dx − cos θ dy
+
+curl = (sp.diff(ath, y) - sp.diff(ay, th),         # ∂y αθ − ∂θ αy
+        sp.diff(ax, th) - sp.diff(ath, x),         # ∂θ αx − ∂x αθ
+        sp.diff(ay, x) - sp.diff(ax, y))           # ∂x αy − ∂y αx
+vol_coeff = sp.simplify(ax * curl[0] + ay * curl[1] + ath * curl[2])
+print("α ∧ dα coefficient:", vol_coeff)
+# → -1, i.e. α ∧ dα = −dx ∧ dy ∧ dθ ≠ 0   (SE(2) is contact)
 ```
 
 ## What we covered, and what comes next

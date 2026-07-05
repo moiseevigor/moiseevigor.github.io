@@ -22,6 +22,7 @@ series_part: A5
 arxiv: "0807.4731"
 coauthors: "Yu. L. Sachkov"
 comments: true
+permalink: /mathematics/2026/05/05/geometry-of-seeing-A5-sr-exponential/
 published: false
 ---
 
@@ -38,8 +39,8 @@ Appendix A1 and this SR exponential — they are <em>different functions</em>
 on the same manifold.  The interactive figures borrow the geodesic-family
 visualisation directly from the
 <a href="https://moiseevigor.github.io/elliptic/examples/dubins-visual-cortex/">elliptic
-project's Dubins–visual-cortex example</a>; the Maxwell-pair and conjugate-
-locus figures formalise what that figure was already showing.
+project's Dubins–visual-cortex example</a>; the Maxwell-pair and
+conjugate-locus figures formalise what that figure was already showing.
 
 </div>
 
@@ -50,10 +51,12 @@ Lie-group $\exp$ (Appendix A1):
 $$\exp_{\mathrm{group}}: \mathfrak{se}(2) \to \mathrm{SE}(2), \qquad
   X \mapsto \exp(X) \cdot e.$$
 
-The 1-parameter subgroups $t \mapsto \exp(tX) \cdot e$ are the geodesics
-of any **bi-invariant** Riemannian metric on $\mathrm{SE}(2)$ — and
-$\mathrm{SE}(2)$ does carry such a metric.  But that is *not* the V1
-sub-Riemannian metric of Part 1.
+The 1-parameter subgroups $t \mapsto \exp(tX) \cdot e$ would be the
+geodesics of a **bi-invariant** Riemannian metric — but Appendix A1 showed
+$\mathrm{SE}(2)$ carries *no* such metric (its adjoint action is
+non-compact).  They remain the natural "group-straight" curves on
+$\mathrm{SE}(2)$; they are certainly not the geodesics of the
+sub-Riemannian (SR) metric of Part 1's primary-visual-cortex (V1) model.
 
 Sub-Riemannian $\mathrm{Exp}$:
 
@@ -71,8 +74,8 @@ Two parametrisations of the same costate space are convenient:
 - **Cylinder coordinates** $(c, \omega_0, \phi_0)$: $h_1 = \sqrt c \cos\phi_0,
   h_2 = \sqrt c \sin\phi_0, h_3 = \omega_0$.  By rescaling, set $c = 1$ on
   the energy surface.
-- **Pendulum-energy coordinates** $(E, \phi_0)$: $E = \tfrac12 \omega_0^2 -
-  \cos\phi_0$ (with the rescaling of A3 §6).  Here $E < 1$ is libration
+- **Pendulum-energy coordinates** $(E, \phi_0)$: $E = 2C - 1$ with the
+  Casimir $C = h_1^2 + h_3^2$ (Appendix A3).  Here $E < 1$ is libration
   (inflectional), $E = 1$ is the separatrix (Euler spiral), $E > 1$ is
   rotation (non-inflectional).
 
@@ -84,7 +87,7 @@ whole story of cut/conjugate analysis.
 ## Closed-form geodesic endpoints
 
 For the inflectional family, parametrise by $k \in (0, 1)$ via
-$\sin(\varphi_0/2) = k\,\mathrm{sn}(s\mid k^2)$ — the substitution that
+$\sin(\varphi/2) = k\,\mathrm{sn}(s\mid k^2)$ — the substitution that
 A4 §3 derived from the half-angle.  Then Sachkov (2011) showed that the
 plane projection $(x(s), y(s))$ of the SR geodesic is
 
@@ -96,7 +99,8 @@ $$\boxed{\;y(s) \;=\; 2k\bigl(1 - \mathrm{cn}(s\mid k^2)\bigr).\;}$$
 form depends on the chosen sign of the curvature and the position of $s = 0$
 relative to the inflection.  The point is: each component is a
 combination of $\mathrm{sn}, \mathrm{cn}$ and incomplete elliptic
-integrals $E, F$.  No numerical ODE integration is needed.  Appendix A4 §7
+integrals $E, F$.  No numerical integration of an ordinary differential
+equation (ODE) is needed.  Appendix A4 §7
 gives the precise relations.)
 
 Three takeaways:
@@ -122,9 +126,9 @@ Three takeaways:
     <div class="fig-controls">
       <label>family
         <select id="exp-family">
-          <option value="inflectional" selected>inflectional ($k < 1$)</option>
-          <option value="separatrix">separatrix ($k = 1$, Euler spiral)</option>
-          <option value="noninflectional">non-inflectional ($k > 1$)</option>
+          <option value="inflectional" selected>inflectional (k &lt; 1)</option>
+          <option value="separatrix">separatrix (k = 1, Euler spiral)</option>
+          <option value="noninflectional">non-inflectional (k &gt; 1)</option>
         </select>
       </label>
       <label>$k$ (or $m = 2 - k$ for non-infl.)
@@ -148,8 +152,8 @@ Three takeaways:
     Figure 4 — and indeed this figure is the same one, lifted to a
     more controllable form.  As $k \to 1^-$ the inflectional family's
     period $4K(k^2)$ diverges (Appendix A4) and the curve spirals; for
-    $k > 1$ (non-inflectional) the curve is a deformed circle that
-    closes after $T = 2\sqrt{m}\,K(m)$.  The endpoint dot is
+    $k > 1$ (non-inflectional) the curvature is one-signed with spatial
+    period $T = 2K(m)$ (a closed circle only in the $m \to 0$ limit).  The endpoint dot is
     $\mathrm{Exp}_T(\mu_0)$ for the specified $\mu_0$ and $T$.
   </figcaption>
 </figure>
@@ -165,16 +169,16 @@ along $\gamma$ — the Jacobi equation — whose solutions form a
 $2\dim G$-dimensional vector space. The Jacobi fields starting from
 $J(0) = 0$ describe geodesics through the same starting point with nearby
 initial directions. A <em>conjugate point</em> is where one of these
-fans-out family members closes up again.
+fanned-out family members closes up again.
 </aside>
 
 A <span class="annotated-term" data-note="note-jacobi-field">**Jacobi field**</span> along a geodesic $\gamma : [0, T] \to G$ is a
-variational vector field $J(s) \in T_{\gamma(s)} G$ obtained by varying
+variational vector field $$J(s) \in T_{\gamma(s)} G$$ obtained by varying
 $\gamma$ through nearby geodesics with the same $\gamma(0)$:
 
 $$J(s) \;=\; \tfrac{\partial}{\partial\varepsilon}\Big|_{\varepsilon=0} \gamma_\varepsilon(s),$$
 
-where $\gamma_\varepsilon$ is a 1-parameter family of geodesics with $\gamma_0 = \gamma$.
+where $$\gamma_\varepsilon$$ is a 1-parameter family of geodesics with $\gamma_0 = \gamma$.
 
 A point $\gamma(t^{\ast})$ is a **conjugate point** to $\gamma(0)$ if a
 non-trivial Jacobi field with $J(0) = 0$ also has $J(t^{\ast}) = 0$.
@@ -191,7 +195,8 @@ classical Riemannian Morse-theoretic statement.
 For SE(2), Sachkov's analysis shows:
 
 - For the inflectional family, the first conjugate time satisfies
-  $t_{\mathrm{conj}}(k) \leq 4K(k^2)/\omega_0$.
+  $t_{\mathrm{conj}}(k) \geq 4K(k^2)/\omega_0$ — it comes at or after the
+  first Maxwell time.
 - For non-inflectional and separatrix families, similar bounds hold with
   the relevant period.
 - The conjugate locus, as a set in $\mathrm{SE}(2)$, has a beautiful
@@ -202,7 +207,7 @@ For SE(2), Sachkov's analysis shows:
 A **cut point** is the first $t$ at which $\gamma$ stops being *globally*
 length-minimising — i.e. there is some other horizontal curve from
 $\gamma(0)$ to $\gamma(t)$ with strictly smaller SR length.  By
-definition, the cut time satisfies $t_{\mathrm{cut}} \leq t_{\mathrm{conj}}$
+definition, the cut time satisfies $$t_{\mathrm{cut}} \leq t_{\mathrm{conj}}$$
 (losing local optimality is at least as hard as losing global).
 
 A **Maxwell point** is a point where two *distinct* geodesics from
@@ -216,8 +221,10 @@ For sufficiently symmetric SR problems (and SE(2) is one of them),
 
 $$\boxed{\;t_{\mathrm{cut}} \;=\; t_{\mathrm{Maxwell}}^{(1)},\;}$$
 
-i.e. the cut locus equals the closure of the Maxwell locus.  This is the
-content of Moiseev–Sachkov (2010, arXiv:0807.4731) for $\mathrm{SE}(2)$.
+i.e. the cut locus equals the closure of the Maxwell locus.  Characterising
+the Maxwell strata for $\mathrm{SE}(2)$ is the work of Moiseev–Sachkov
+(2010, arXiv:0807.4731); pinning the cut locus down exactly is Sachkov
+(2011, arXiv:0903.0727).
 
 For the inflectional family with modulus $k$, the first Maxwell time is
 exactly
@@ -244,7 +251,7 @@ Part 3.
         <span class="ctrl-val" id="mx-T-val">5.00</span>
       </label>
       <span style="margin-left:auto;font-size:12px;color:#888;">
-        γ_A: κ = +2k·sn — γ_B: κ = −2k·sn — coincidence requires y_A(s) = 0
+        γ_A: κ = +2k·cn — γ_B: κ = −2k·cn — coincidence requires y_A(s) = 0
       </span>
     </div>
     <svg id="fig-maxwell" style="width:100%;height:400px;"></svg>
@@ -252,7 +259,7 @@ Part 3.
   <figcaption>
     <strong>Figure A5.2.</strong> The <strong>σ-symmetric pair</strong>:
     two geodesics $\gamma_A, \gamma_B$ leaving the origin with curvatures
-    $\pm 2k\,\mathrm{sn}(s\mid k^2)$ respectively.  By the
+    $\pm 2k\,\mathrm{cn}(s\mid k^2)$ respectively.  By the
     $y \to -y$ reflection symmetry of the pendulum equation,
     $\gamma_B(s) = (x_A(s),\, -y_A(s),\, -\theta_A(s))$ — they trace
     mirror-image curves.  As SE(2) configurations, they coincide exactly
@@ -260,11 +267,15 @@ Part 3.
     The right panel plots $|\gamma_A(s) - \gamma_B(s)|$ over $s \in [0,
     T]$; its first zero crossing (red marker, if any) is the
     <strong>first Maxwell time of this pair</strong>.
-    For "lemniscate" values of $k$ (where the elastica closes into a
-    figure-eight — numerically $k_c \approx 0.84$) this first zero
-    coincides with the curvature period $4K(k^2)$.  For generic $k$ the
-    Maxwell time is k-dependent and given by Sachkov's transcendental
-    equation in the modulus.  Slide $k$ to find lemniscate values.
+    Because $y_A(s) = 2k\bigl(1 - \mathrm{cn}(s\mid k^2)\bigr) \ge 0$ returns to
+    zero only at $s = 4K(k^2)$ (and its multiples), the pair first re-coincides
+    in full — position <em>and</em> heading — at $s = 4K(k^2)$, for every
+    $k$: exactly the first Maxwell time $t_{\mathrm{Maxwell}}^{(1)} = 4K(k^2)/\omega_0$
+    boxed above.  At the special "figure-eight" modulus
+    $k_c \approx 0.909$ (root of $2E(k^2) = K(k^2)$) that shared endpoint sits
+    back at the origin, so the closed curve is itself a single self-crossing
+    lemniscate; for other $k$ the two curves still meet at $s = 4K(k^2)$, just
+    away from the origin.
   </figcaption>
 </figure>
 
@@ -272,18 +283,19 @@ Part 3.
 
 ## How a wavefront forms from a family of geodesics
 
-Fix $T$ and vary the initial costate over a 1-parameter slice of the unit-
-energy surface — concretely, signed initial curvature $k \in [-0.95, 0.95]$
-in $\kappa(s) = 2k\,\mathrm{sn}(s\mid k^2)$.  Each $k$ launches a distinct
+Fix $T$ and vary the initial costate over a 1-parameter slice of the
+unit-energy surface — concretely, signed initial curvature $k \in [-0.95, 0.95]$
+in $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$.  Each $k$ launches a distinct
 geodesic from the origin.  The set of *positions* reached at exact arc
 length $T$ — one position per geodesic — is the **wavefront** at time $T$:
 
-$$\mathcal W_T \;:=\; \bigl\{\,(x(T;k),\; y(T;k)) : k \in [-1, 1]\,\bigr\} \;\subset\; \mathbb R^2.$$
+$$\mathcal W_T \;:=\; \bigl\{\,(x(T;k),\; y(T;k)) : k \in [-0.95, 0.95]\,\bigr\} \;\subset\; \mathbb R^2.$$
 
 It is a *continuous curve* in the plane (because $k \mapsto $ trajectory is
-continuous), and as $T$ grows it sweeps outward.  At small $T$ the
-wavefront is approximately a circle of radius $T$ around the origin
-(everything moves at unit speed in approximately straight lines).  As $T$
+continuous), and as $T$ grows it sweeps outward.  At small $T$ — since every
+geodesic leaves the origin heading the same way and curves only gently —
+the wavefront is a short, almost-straight arc near $(T, 0)$, transverse to
+the launch direction.  As $T$
 approaches the first Maxwell time $T_{\mathrm M} = 4K(k^2)/\omega_0$,
 neighbouring trajectories begin to converge and the wavefront develops
 **cusps** — these are the projections of conjugate points, where
@@ -318,7 +330,7 @@ be locally surjective along a critical curve.
     <svg id="fig-conjugate" style="width:100%;height:440px;"></svg>
   </div>
   <figcaption>
-    <strong>Figure A5.3.</strong> A wavefront forming.  41 trajectories,
+    <strong>Figure A5.3.</strong> A wavefront forming.  39 trajectories,
     one per signed modulus $k$, are drawn in faint blue (forward-curving,
     $k > 0$) and faint red ($k < 0$) up to the current arc length $T$.
     The thick coloured curve passing through their endpoints is the
@@ -327,12 +339,13 @@ be locally surjective along a critical curve.
     $\mathcal W_T$ moves outward and reshapes as time grows.  Slide $T$
     forward and watch:
     <ol style="margin:6px 0 6px 18px;font-family:inherit;font-size:inherit;">
-      <li>at small $T$ the wavefront is nearly a circle;</li>
+      <li>at small $T$ the wavefront is a short arc near $(T, 0)$;</li>
       <li>at $T \approx \pi$ it lengthens and starts to flatten;</li>
-      <li>at $T \approx 4K(k_c^2) \approx 6.5$–$7$ <em>cusps appear</em> at
-        the four corners of the wavefront — these are the first conjugate
-        points (marked with red rings);</li>
-      <li>past the cusps, the wavefront self-intersects: those crossings
+      <li>around $T \approx 2\pi$ — the smallest period $4K(0)$ in the swept
+        family (the near-straight $k \to 0$ geodesics) — the first
+        <em>cusps appear</em> at the corners of the wavefront: these are the
+        first conjugate points (marked with red rings);</li>
+      <li>as $T$ grows the wavefront self-intersects: those crossings
         are the Maxwell stratum drawn in Figure A5.2.</li>
     </ol>
     Press <em>play</em> to animate $T$ continuously.  The four-fold
@@ -360,8 +373,8 @@ The Dubins-back-wheel cuspidal trajectories of the elliptic project
 parking-style curves with cusps</a>) are also relevant here: they are
 projections of SE(2) geodesics in the regime where the rear-axle
 forward velocity changes sign.  The cusps in those trajectories are the
-geometric analogue of the wavefront cusps in Figure A5.3 — only the rear-
-axle parametrisation makes them visible.
+geometric analogue of the wavefront cusps in Figure A5.3 — only the
+rear-axle parametrisation makes them visible.
 
 ## Code
 
@@ -378,10 +391,8 @@ def inflectional_geodesic(k, omega0, phi0, T, N=1500):
     m = k * k
     s = np.linspace(0, T, N)
     sn, cn, dn = ellipj(s, m)   # vectorised
-    # Pendulum: sin(φ/2) = k·sn(s|m), so:
-    half_phi = np.arcsin(k * sn)
-    phi = 2 * half_phi
-    # Curvature κ = dθ/ds = ω0 sin(φ) — but normalise
+    # Heading half-angle: sin(θ/2) = k·sn(s|m), so θ = 2·arcsin(k·sn).
+    # Curvature κ = dθ/ds = 2k·cn·dn / sqrt(1 − k²sn²) = 2k·cn  (since dn = sqrt).
     kappa = 2 * k * cn * dn / np.sqrt(1 - k * k * sn * sn)
     theta = np.zeros_like(s)
     x = np.zeros_like(s)
@@ -436,7 +447,7 @@ that controls curvature period.
 What remains for Parts 3 and 4 of the blog series:
 
 - **Part 3** will give the proof that, for the inflectional family,
-  $t_{\mathrm{cut}} = t_{\mathrm{Maxwell}}^{(1)} = 4K(k^2)/\omega_0$,
+  $$t_{\mathrm{cut}} = t_{\mathrm{Maxwell}}^{(1)} = 4K(k^2)/\omega_0$$,
   and characterise the full Maxwell stratum via the
   $\mathbb Z_2 \times \mathbb Z_2$ symmetries.
 - **Part 4** will discuss the open question: extending this to the
@@ -444,9 +455,9 @@ What remains for Parts 3 and 4 of the blog series:
   on the global structure of the cut locus.
 
 The five appendices A1–A5 supply every prerequisite: Lie groups (A1),
-distributions and contact structures (A2), the PMP and Lie–Poisson
-reduction (A3), Jacobi elliptic functions and the AGM (A4), and the SR
-exponential map (A5).  With them in hand, Parts 1 and 2 should read
+distributions and contact structures (A2), the Pontryagin Maximum
+Principle and Lie–Poisson reduction (A3), Jacobi elliptic functions and
+the arithmetic–geometric mean (A4), and the SR exponential map (A5).  With them in hand, Parts 1 and 2 should read
 fluently, and Parts 3 and 4 will be approachable when they ship.
 
 </div><!-- /.l-body -->
@@ -508,7 +519,7 @@ fluently, and Parts 3 and 4 will be approachable when they ship.
 
 // ── shared helpers ─────────────────────────────────────────────────────
 function inflectionalGeodesic(k, T, N) {
-  // Curvature κ(s) = 2k·sn(s|k²) (Part 2 convention)
+  // Curvature κ(s) = 2k·cn(s|k²) (Part 2 convention)
   // dθ/ds = κ, dx/ds = cos θ, dy/ds = sin θ
   const m = k * k;
   const ds = T / N;
@@ -517,7 +528,7 @@ function inflectionalGeodesic(k, T, N) {
   for (let i = 0; i < N; i++) {
     const s = i * ds;
     const j = ellipj(s + ds / 2, m);
-    const k1 = 2 * k * j.sn;
+    const k1 = 2 * k * j.cn;
     const tmid = theta + 0.5 * k1 * ds;
     x += Math.cos(tmid) * ds;
     y += Math.sin(tmid) * ds;
@@ -633,7 +644,7 @@ function drawExpMap() {
   } else {
     const m = Math.max(0.01, Math.min(0.99, 2 - kVal));
     const Km = ellipticK(m);
-    info = `non-inflectional m = ${m.toFixed(2)}    period 2√m·K = ${(2*Math.sqrt(m)*Km).toFixed(2)}    T = ${T.toFixed(2)}`;
+    info = `non-inflectional m = ${m.toFixed(2)}    period 2K(m) = ${(2*Km).toFixed(2)}    T = ${T.toFixed(2)}`;
   }
   g.append('text').attr('x', margin.l).attr('y', margin.t + 12)
     .attr('font-family', 'JetBrains Mono').attr('font-size', 11).attr('fill', '#555')
@@ -674,7 +685,7 @@ function drawMaxwell() {
     for (let i = 0; i < N; i++) {
       const s = i * ds;
       const j = ellipj(s + ds / 2, m);
-      const k1 = 2 * k * j.sn;
+      const k1 = 2 * k * j.cn;
       const tMid = theta + 0.5 * k1 * ds;
       x += Math.cos(tMid) * ds;
       y += Math.sin(tMid) * ds;
@@ -691,17 +702,11 @@ function drawMaxwell() {
   // Per-s separation: |γA(s) − γB(s)| = 2|y_A(s)|
   const sep = ptsA.map(p => ({ s: p.s, d: 2 * Math.abs(p.y) }));
 
-  // Find first zero crossing of y_A after s = ds (skip the initial s = 0)
-  let firstZero = null;
-  for (let i = 8; i < ptsA.length; i++) {
-    if ((ptsA[i - 1].y > 0) !== (ptsA[i].y > 0)) {
-      // Linear interpolation
-      const y0 = ptsA[i - 1].y, y1 = ptsA[i].y;
-      const t0 = ptsA[i - 1].s, t1 = ptsA[i].s;
-      firstZero = t0 + (t1 - t0) * (-y0) / (y1 - y0);
-      break;
-    }
-  }
+  // The pair coincides in full (position AND heading) at s = 4K(k²): there
+  // y_A = 2k(1 − cn) returns to 0 and θ_A returns to 0 (mod 2π).  Since
+  // y_A ≥ 0 only *touches* zero (never crosses), a sign-change search would
+  // miss it — use the analytic first Maxwell time directly.
+  const firstZero = (4 * Km <= T_full) ? 4 * Km : null;
 
   // Layout: left panel = trajectories up to T; right panel = sep(s) plot
   const split = W * 0.55;
@@ -822,7 +827,7 @@ function drawMaxwell() {
 
 // ── Figure A5.3 — Wavefront formation ──────────────────────────────────
 //
-// 41 trajectories sweep signed k ∈ [-0.95, 0.95].  Each trajectory is
+// 39 trajectories sweep signed k ∈ [-0.95, 0.95].  Each trajectory is
 // integrated up to a fixed maximum arc length sMax (≥ the slider's max T).
 // The wavefront W_T is the curve through {(x(T;k), y(T;k)) : k ∈ [-1, 1]}.
 const conjState = {
@@ -850,7 +855,7 @@ function buildConjTrajectories() {
     for (let i = 0; i < conjState.N; i++) {
       const s = i * ds;
       const j = ellipj(s + ds / 2, m);
-      const kappaMid = sign * 2 * ka * j.sn;
+      const kappaMid = sign * 2 * ka * j.cn;
       const tMid = theta + 0.5 * kappaMid * ds;
       x += Math.cos(tMid) * ds;
       y += Math.sin(tMid) * ds;
@@ -994,11 +999,11 @@ function drawConjugate() {
   g.append('circle').attr('cx', xS(0)).attr('cy', yS(0)).attr('r', 4).attr('fill', '#222');
 
   // Status text + scale legend
-  // Use k ≈ 0.85 as a reference for "first Maxwell time"
-  const Tmax_ref = 4 * ellipticK(0.85 * 0.85);
+  // Reference: the figure-eight modulus k_c ≈ 0.909 (root of 2E(k²) = K(k²)).
+  const Tmax_ref = 4 * ellipticK(0.9089 * 0.9089);
   g.append('text').attr('x', margin.l).attr('y', margin.t + 12)
     .attr('font-family', 'JetBrains Mono').attr('font-size', 11).attr('fill', '#555')
-    .text(`T = ${conjState.T.toFixed(2)}    (1st Maxwell @ k = 0.85: T₁ = ${Tmax_ref.toFixed(2)})`);
+    .text(`T = ${conjState.T.toFixed(2)}    (1st Maxwell @ k = 0.909: T₁ = ${Tmax_ref.toFixed(2)})`);
 
   // Colour-bar mini-legend
   const lx = margin.l + 4, ly = H - margin.b - 14;

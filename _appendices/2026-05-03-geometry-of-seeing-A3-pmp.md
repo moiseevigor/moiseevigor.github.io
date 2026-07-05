@@ -5,9 +5,9 @@ title: "Appendix A3 — Calculus of Variations and the Pontryagin Maximum Princi
 subtitle: >
   From Euler–Lagrange to the PMP, then Lie–Poisson reduction on
   $\mathfrak{se}(2)^{\ast}$.  Why the equations $\dot h_1 = h_2 h_3$,
-  $\dot h_2 = -h_1 h_3$, $\dot h_3 = 0$ that Part 2 §1 used as a starting
-  point are exactly what you get when you do the optimal-control problem
-  carefully on a Lie group.
+  $\dot h_2 = -h_1 h_3$, $\dot h_3 = -h_1 h_2$ that Part 2 §1 used as a
+  starting point are exactly what you get when you do the optimal-control
+  problem carefully on a Lie group.
 date: 2026-05-03 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, SE2, optimal-control, pmp, hamiltonian, lie-groups]
@@ -21,6 +21,7 @@ series_part: A3
 arxiv: "0807.4731"
 coauthors: "Yu. L. Sachkov"
 comments: true
+permalink: /mathematics/2026/05/03/geometry-of-seeing-A3-pmp/
 published: false
 ---
 
@@ -35,7 +36,7 @@ Part 2 §1 begins:
 "The Pontryagin Maximum Principle introduces a covector $\lambda$ in the
 cotangent bundle... <em>(After several lines of unjustified algebra)</em>...
 the Hamiltonian equations on $\mathfrak{se}(2)^{\ast}$ read
-$\dot h_1 = h_2 h_3, \dot h_2 = -h_1 h_3, \dot h_3 = 0$."
+$\dot h_1 = h_2 h_3, \dot h_2 = -h_1 h_3, \dot h_3 = -h_1 h_2$."
 </blockquote>
 
 This appendix supplies the missing derivation.  It assumes Appendix A1
@@ -70,7 +71,7 @@ $$\delta S = \int_{t_0}^{t_1} \Bigl(\frac{\partial L}{\partial q^i}\delta q^i
            + \Bigl[\frac{\partial L}{\partial \dot q^i}\delta q^i\Bigr]_{t_0}^{t_1}.$$
 
 The boundary term vanishes; for $\delta S = 0$ for all $\delta q$, the
-integrand has to vanish, giving E-L.
+integrand has to vanish, giving the Euler–Lagrange (E-L) equations.
 
 ## Legendre transform → Hamiltonian
 
@@ -180,7 +181,7 @@ $\dot \lambda_i = -\partial \mathcal H / \partial q^i$.
 
 ### Maximising over $u$ for the SR problem
 
-Sub-Riemannian length functional has $L = \sqrt{u_1^2 + u_2^2}$.  A standard
+The sub-Riemannian (SR) length functional has $L = \sqrt{u_1^2 + u_2^2}$.  A standard
 trick: parametrise by arc length, so $u_1^2 + u_2^2 = 1$ throughout.  The
 controls live on the unit circle, and the cost becomes simply $T$ (the
 total time = total arc length).
@@ -191,7 +192,7 @@ $u_1 X_1 + u_2 X_2$ is
 $$\mathcal H = u_1 \langle \lambda, X_1\rangle + u_2 \langle \lambda, X_2\rangle - \nu.$$
 
 Define $h_i := \langle \lambda, X_i\rangle$ (this is the contraction of the
-covector $\lambda$ with the LI vector field $X_i$).  Then
+covector $\lambda$ with the left-invariant vector field $X_i$).  Then
 $\mathcal H = u_1 h_1 + u_2 h_2 - \nu$ (the last term is constant in $u$).
 
 Maximising $u_1 h_1 + u_2 h_2$ over $u_1^2 + u_2^2 \leq 1$:
@@ -217,14 +218,14 @@ This is the "normal Hamiltonian" of Part 2 §1.
 ## Lie–Poisson reduction on $\mathfrak{se}(2)^{\ast}$
 
 Hamilton's equations for $\mathcal H_n$ on $T^{\ast}\mathrm{SE}(2)$ are coupled
-equations in $(g, \lambda)$.  But the LI vector fields make
+equations in $(g, \lambda)$.  But the left-invariant vector fields make
 $T^{\ast}\mathrm{SE}(2)$ trivialise:
 
 $$T^{\ast}\mathrm{SE}(2) \;\xrightarrow{\sim}\; \mathrm{SE}(2) \times \mathfrak{se}(2)^{\ast},
   \qquad \lambda \mapsto (g, \mu)$$
 
 where $\mu = (h_1, h_2, h_3) := (\langle\lambda, X_1\rangle, \langle\lambda, X_2\rangle, \langle\lambda, X_3\rangle)$
-in the basis dual to $\{E_1, E_2, E_3\}$.  In this trivialisation the
+in the basis dual to the left-invariant frame $\{X_1, X_2, X_3\}$.  In this trivialisation the
 Hamiltonian flow on $T^{\ast}G$ for a *left-invariant* Hamiltonian (depending
 only on $\mu$) decouples:
 
@@ -239,7 +240,7 @@ reads
 
 $$\dot h_i \;=\; -\sum_{j, k} c^k_{ij}\,h_k\,\frac{\partial H}{\partial h_j},$$
 
-where $c^k_{ij}$ are the structure constants $[E_i, E_j] = c^k_{ij} E_k$.
+where $$c^k_{ij}$$ are the structure constants $$[X_i, X_j] = c^k_{ij} X_k$$.
 For $\mathfrak{se}(2)$ in the body-frame basis $\{X_1, X_2, X_3\}$ used in
 Part 1 (forward / rotation / sideways), the brackets are
 $[X_1, X_2] = -X_3$, $[X_2, X_3] = -X_1$, $[X_1, X_3] = 0$, giving the
@@ -259,8 +260,9 @@ $$C \;=\; h_1^{2} + h_3^{2}$$
 — the squared translation momentum, which Poisson-commutes with every
 coordinate function and so is preserved by any Hamiltonian flow on the
 dual algebra (not just our particular $\mathcal H_n$). $h_3$ alone is not
-conserved: the third equation above shows it evolves whenever the geodesic
-is mid-cusp.
+conserved: by the third equation above it drifts wherever $h_1 h_2 \neq 0$
+— generically along the geodesic ($\dot h_3$ pauses exactly where
+$h_1 = 0$, i.e. at the cusps, or where $h_2 = 0$).
 
 ### Reduction to the pendulum
 
@@ -282,22 +284,30 @@ Lie–Poisson flow on $\mathfrak{se}(2)^{*}$. The pendulum angle
 $\varphi = 2\alpha$ is twice the phase of $(h_1, h_2)$ on the unit circle;
 the pendulum energy $E$ is fixed by the Casimir on the coadjoint orbit.
 
-The reconstruction equation then ties the planar curve's heading $\theta$
-back to the costate. With $u_1^{\ast} = h_1 = \sin(\varphi/2)$ and
+The reconstruction equation ties the planar curve's heading $\theta$ back to
+the costate. With $u_1^{\ast} = h_1 = \sin(\varphi/2)$ and
 $u_2^{\ast} = h_2 = \cos(\varphi/2)$, the SE(2) ODE
 $(\dot x, \dot y, \dot\theta) = (u_1^{\ast}\cos\theta, u_1^{\ast}\sin\theta, u_2^{\ast})$
-gets reparametrised by Euclidean arc length $s$ (with $ds = |u_1^{\ast}|\,dt$);
-the resulting projected curve has curvature
+reparametrised by Euclidean arc length $s$ (with $ds = |u_1^{\ast}|\,dt$)
+gives the projected curve the curvature
 
-$$\kappa(s) = \frac{u_2^{\ast}}{u_1^{\ast}} = \cot(\varphi/2).$$
+$$\kappa_{\mathrm{SR}}(s) = \frac{u_2^{\ast}}{u_1^{\ast}} = \cot(\varphi/2).$$
 
-Tracking $\kappa$ through the three pendulum regimes recovers the three
-elastica families of Part 2 §3 — inflectional ($E < 1$, $\kappa = 2k\,\mathrm{cn}$),
-separatrix ($E = 1$, $\kappa = 2\,\mathrm{sech}$), non-inflectional
-($E > 1$, $\kappa = 2\,\mathrm{dn}$). Appendix A4 §3 tracks that
-substitution in detail; the **elastica curvature ODE**
+This blows up wherever $u_1^{\ast} = 0$: the sub-Riemannian projections are
+allowed to have **cusps** — the reversal points of the parallel-parking
+trajectories of Appendix A2.
+
+The smooth elastica that Part 2 plots — $\kappa = 2k\,\mathrm{cn}$,
+$2\,\mathrm{sech}$, $2\,\mathrm{dn}$ — are the **Euler elastic problem**: the
+sister problem in which the curve carries *unit forward speed* and the
+*heading* $\theta$ itself is the pendulum variable, so $\kappa = \dot\theta$
+stays bounded. Both problems are driven by the *same* pendulum equation
+$\ddot\varphi + \sin\varphi = 0$ — that shared vertical subsystem is the real
+content of the reduction — but their projected curves differ, and it is the
+elastic representatives the figures draw. Appendix A4 §3 carries the elliptic
+substitution through; the **elastica curvature ODE**
 $\kappa''(s) + \tfrac12\kappa^3 - \mu\kappa = 0$ is the Duffing form
-equivalent to the pendulum and is what the figures in Part 2 actually plot.
+equivalent to the pendulum.
 
 </div><!-- /.l-body -->
 
@@ -349,17 +359,19 @@ is obtained from
 
 $$\dot g(t) \;=\; g(t)\,\xi(t), \qquad \xi(t) := u_1^{\ast}(t) E_1 + u_2^{\ast}(t) E_2,$$
 
-with $u^{\ast}(t) = (h_1(t), h_2(t)) / \sqrt c$ from the maximisation.  In the
+with $u^{\ast}(t) = (h_1(t), h_2(t)) / \sqrt c$ from the maximisation, where
+$c := h_1^2 + h_2^2 = 2\mathcal H_n$ is constant along the flow.  In the
 $(x, y, \theta)$ chart this is exactly Part 1's Frenet–Serret integration:
 
 $$\dot x = u_1^{\ast} \cos\theta, \qquad \dot y = u_1^{\ast} \sin\theta,
   \qquad \dot \theta = u_2^{\ast}.$$
 
-Setting $u_1^{\ast} = 1$ (unit-speed normalisation), we get $u_2^{\ast} = \dot\theta =
-\kappa$, which is the **curvature** of the projected plane curve.  The
-relation $\kappa = h_2 / \sqrt c$ ties the costate to the curvature
-directly: $\kappa$ inherits the $h_2$-pendulum dynamics and so becomes a
-Jacobi sn (libration), sech (separatrix), or dn (rotation) — Part 2 §2.
+In the Euler elastic problem one instead fixes $u_1^{\ast} = 1$ (unit forward
+speed); then $s = t$, and $u_2^{\ast} = \dot\theta = \kappa$ is the
+**curvature** of the projected plane curve.  Here the heading $\theta$ is
+itself the pendulum, so its curvature is the pendulum velocity — a Jacobi
+cn (libration), sech (separatrix), or dn (rotation), i.e. the
+$\kappa = 2k\,\mathrm{cn}(s\mid k^2)$ family of Part 2 §2.
 
 </div><!-- /.l-body -->
 
@@ -382,15 +394,19 @@ Jacobi sn (libration), sech (separatrix), or dn (rotation) — Part 2 §2.
     <svg id="fig-costate" style="width:100%;height:380px;"></svg>
   </div>
   <figcaption>
-    <strong>Figure A3.3.</strong> Left: the costate $(h_1, h_2, h_3)$ winds
-    on a cylinder $h_1^2 + h_2^2 = c$ at the constant rate
-    $\dot\phi = -h_3$.  Right: the plane projection of the resulting
-    SE(2) geodesic, integrated by the reconstruction equation $\dot g =
-    g\cdot\xi(t)$.  Vary $h_3$ and the curve interpolates between
-    near-circular (small $h_3$) and the elastica regime; vary $\sqrt c$
-    and the curve scales without changing shape — confirming Part 2's
-    observation that only the dimensionless ratio $h_3 / \sqrt c$
-    determines which elastica family you land in.
+    <strong>Figure A3.3.</strong> A schematic of the reconstruction step,
+    drawn in the constant-$h_3$ approximation.  Left: a curve on the
+    cylinder $h_1^2 + h_2^2 = c$ — in the left-invariant frame used here
+    this is the <em>energy</em> cylinder $2\mathcal H_n = c$, not the
+    coadjoint/Casimir cylinder of Appendix A1's Figure A1.3 — with
+    $(h_1, h_2)$ circling at rate
+    $-h_3$.  Right: the plane curve obtained by feeding that costate into
+    the reconstruction equation $\dot g = g\cdot\xi(t)$.  Vary $h_3$ and the
+    curve interpolates between near-circular (small $h_3$) and the elastica
+    regime; vary $\sqrt c$ and it scales without changing shape — the curve
+    family depends only on the dimensionless ratio $h_3 / \sqrt c$.  (In the
+    full flow $h_3$ varies too, by $\dot h_3 = -h_1 h_2$; freezing it keeps
+    this picture readable.)
   </figcaption>
 </figure>
 
@@ -404,7 +420,8 @@ in
 elliptic project's physical-pendulum example</a> — both compute level sets
 of $E = \tfrac12\dot\varphi^2 - \cos\varphi$ and trace closed orbits with
 period $4K(k^2)$.  The SE(2) elastica problem is, structurally, the *same
-ODE* as a nonlinear pendulum: this appendix's job has been to make that
+ordinary differential equation (ODE)* as a nonlinear pendulum: this
+appendix's job has been to make that
 equivalence inevitable, by deriving the pendulum equation from the PMP on
 $\mathrm{SE}(2)$ rather than postulating it.
 
@@ -416,32 +433,28 @@ map).
 ## Code
 
 ```python
-# Verify the Lie–Poisson equations on se(2)* numerically
-# from a random initial costate (h1, h2, h3) and check that:
-#   - h3(t) is constant
-#   - h1²+h2² is constant
-#   - h1(t) = sqrt(c) cos(-h3 t + φ0)
+# Verify the Lie–Poisson equations on se(2)* numerically.
+# Conserved quantities:  H = ½(h1²+h2²)  and  Casimir C = h1²+h3².
+# Note: h3 is NOT conserved — the third equation is dh3/dt = -h1·h2.
 import numpy as np
 from scipy.integrate import solve_ivp
 
 def lie_poisson_se2(t, h):
     h1, h2, h3 = h
-    return [h2*h3, -h1*h3, 0.0]
+    return [h2*h3, -h1*h3, -h1*h2]
 
 h0 = [0.6, 0.4, 0.7]
 sol = solve_ivp(lie_poisson_se2, [0, 8], h0, rtol=1e-10, atol=1e-12,
                 t_eval=np.linspace(0, 8, 400))
 
-# Check Casimirs
-c = sol.y[0]**2 + sol.y[1]**2
-print(f"max |c - c0| / |c0| = {np.max(np.abs(c - c[0]))/c[0]:.2e}")  # ~ 1e-10
-print(f"max |h3 - h30|       = {np.max(np.abs(sol.y[2] - h0[2])):.2e}")  # ~ 1e-12
+h1, h2, h3 = sol.y
+H = 0.5 * (h1**2 + h2**2)          # Hamiltonian
+C = h1**2 + h3**2                  # Casimir
+print(f"max |H - H0| / H0 = {np.max(np.abs(H - H[0]))/H[0]:.2e}")  # ~ 1e-10
+print(f"max |C - C0| / C0 = {np.max(np.abs(C - C[0]))/C[0]:.2e}")  # ~ 1e-10
 
-# Match the closed form
-phi0 = np.arctan2(h0[1], h0[0])
-phi_t = phi0 - h0[2] * sol.t
-h1_pred = np.sqrt(c[0]) * np.cos(phi_t)
-print(f"max |h1 - prediction| = {np.max(np.abs(sol.y[0] - h1_pred)):.2e}")  # ~ 1e-10
+# h3 itself drifts — confirm it is genuinely not conserved
+print(f"h3 range = [{h3.min():.3f}, {h3.max():.3f}]   h3(0) = {h0[2]}")
 ```
 
 ```python
@@ -473,15 +486,15 @@ length problem, maximisation over $u_1, u_2$ on the unit circle gives the
 normal Hamiltonian $\mathcal H_n = \tfrac12(h_1^2 + h_2^2)$.
 Lie–Poisson reduction on $\mathfrak{se}(2)^{\ast}$ collapses the
 $T^{\ast}\mathrm{SE}(2)$ flow to the costate equations
-$\dot h_1 = h_2 h_3, \dot h_2 = -h_1 h_3, \dot h_3 = 0$ — exactly the
-equations Part 2 §1 wrote down.  The substitution $h_1 = \sqrt c \cos\phi,
-h_2 = \sqrt c \sin\phi$ turns the costate into a uniformly-rotating phase,
-and differentiating once more gives the nonlinear pendulum equation for
-the curvature.
+$\dot h_1 = h_2 h_3, \dot h_2 = -h_1 h_3, \dot h_3 = -h_1 h_2$ — exactly the
+equations Part 2 §1 wrote down.  Writing $h_1 = \sin\alpha$, $h_2 = \cos\alpha$
+on the unit Hamiltonian level and differentiating $\varphi = 2\alpha$ once
+more gives the nonlinear pendulum equation $\ddot\varphi + \sin\varphi = 0$.
 
 Appendix A4 will solve the pendulum equation in closed form using Jacobi
-elliptic functions and the AGM, recovering the period $4K(k^2)$ and the
-explicit $\kappa(s) = 2k\,\mathrm{sn}(s\mid k^2)$ formula of Part 2.
+elliptic functions and the arithmetic–geometric mean (AGM), recovering the
+period $4K(k^2)$ and the
+explicit $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$ formula of Part 2.
 
 </div><!-- /.l-body -->
 
