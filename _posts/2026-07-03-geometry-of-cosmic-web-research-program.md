@@ -16,6 +16,9 @@ description: >
   the "Geometry of Seeing" series to cosmic-web filaments: literature review,
   hypotheses with falsifiable predictions, ordered experiments on public data,
   and the analysis plan with defined metrics.
+series: geometry-of-cosmic-web
+series_title: "Geometry of the Cosmic Web"
+series_part: 1
 comments: true
 published: true
 ---
@@ -23,35 +26,39 @@ published: true
 <div class="l-body" markdown="1">
 
 <div class="callout">
-<div class="callout-title">Status — updated 2026-07-04, after E0–E2 + correction</div>
-The program below has been executed through its locally-runnable
-experiments (E0–E2 and follow-ups — <code>research/cosmic-web/docs/</code>
-in the repo), including a <strong>correction pass</strong>: the initial
-sparse-regime H1 win (+0.07 completeness, p ≈ 10⁻¹⁴) was an evaluation
-artifact (skeleton length matched on a proxy, not the skeleton itself) and
-does not survive the fixed extractor. Corrected outcome: <strong>H1</strong>
-refuted — the Hessian matches or beats the lift at every sampling density on
-exact-truth toys and on gravity-shaped webs (ZA, N-body, 256³), with a tie
-only at ultra-sparse sampling; <strong>H2</strong> refuted (tidal weighting
-hurts even with a clean frame); <strong>H4</strong> refuted in the bulk —
-filament assembly is transverse pancake infall, not along-axis geodesic
-transport. Survivors: the lift as anisotropy descriptor (spine–tidal-frame
-alignment 0.73–0.76 vs 0.67), a hybrid score improving purity/junctions,
-and the methodological lesson itself. <strong>E3/H3 executed</strong> (BOSS
-CMASS × Planck × ACT): spine networks show a Compton-y excess reaching 9σ
-under latitude-matched nulls (H3 supported; Hessian ≥ lift on the
-cross-signal), the lift's tidal-alignment advantage replicates on real
-data (0.68 vs 0.62 over 18 tiles), and the campaign closed with a
-pair-stacking measurement of inter-halo bridge gas (≈1.3×10⁻⁸,
-≈2σ per instrument after jackknife errors and unconnected-pair nulls —
-reproducing the published amplitude on ACT DR6 and Planck). Finally, <strong>T1
-resolved</strong>: the Jacobi-type variational principle is refuted
-constructively — in growth-factor time the flow is free motion, the
-adhesion model's exact variational principle is Hopf–Lax optimal transport
-on a flat metric, and filaments are shocks of the transport map rather
-than geodesics (<code>docs/T1-note.md</code>), in agreement with E2. Every
-item of the program — T1, E0–E3, H1–H4 — now carries an executed verdict.
-Full chain: <code>research/cosmic-web/docs/SYNTHESIS.md</code>.
+<div class="callout-title">Status — the program has been run to completion</div>
+<p>This document is the <em>plan</em>, written before the experiments. The
+plan was then executed in full, and every hypothesis below now carries a
+verdict. The story of what happened — with interactive figures built from
+the experiment data — is
+<a href="{% post_url 2026-07-04-cosmic-web-two-models %}">Part 2: Two Ways
+to See a Cosmic Filament</a>. In brief:</p>
+<ul>
+<li><strong>The detector claim (H1) died</strong> — and the way it died is
+the best part. It first appeared to win with spectacular statistics; a
+flaw in our own scoring was manufacturing the win, and the corrected race
+reversed the verdict. The simpler standard method matches or beats the
+lifted one nearly everywhere.</li>
+<li><strong>The physics claim (H4) died in the bulk</strong> — matter
+builds filaments by falling <em>across</em> them, not by flowing along
+them. The companion theory question (T1) resolved the same way:
+filaments are pile-ups (shocks) of the matter flow, not shortest
+paths.</li>
+<li><strong>The real-sky test (H3) succeeded</strong> — the webs both
+methods draw on 274,000 real galaxies sit on measurably hot gas (up to
+9σ under the strictest controls), so the extracted networks are
+physically real.</li>
+<li><strong>One clean survivor:</strong> the lifted geometry reads the
+web's <em>directions</em> better than the standard method, in
+simulations and on the real sky alike.</li>
+<li><strong>An unplanned product:</strong> chasing "what correction does
+the standard transport model actually need?" produced a one-rule model —
+brake sideways at the web — that performs within a hair of its
+theoretical best (see Part 2 and
+<a href="/mathematics/2026/07/09/cosmic-web-B4-transverse-damping/">Appendix B4</a>).</li>
+</ul>
+<p>Full experiment reports: <code>research/cosmic-web/docs/</code> in the
+repository, entry point <code>SYNTHESIS.md</code>.</p>
 </div>
 
 <div class="callout">
@@ -119,7 +126,11 @@ surrounding matter stretches it more strongly along some directions than
 others, and the blob gives way one axis at a time — first flattening into a
 sheet, then draining into a filament, finally pooling into a node. The
 animation below plays this sequence; the three arrows are the tidal
-directions, ordered by how hard each squeezes.
+directions, ordered by how hard each squeezes. (The transport models are
+developed from scratch in
+[Appendix B1](/mathematics/2026/07/06/cosmic-web-B1-transport-models/); the
+tidal frame in
+[Appendix B2](/mathematics/2026/07/07/cosmic-web-B2-tidal-frame/).)
 
 [^subriemannian]: A geometry in which movement is allowed only along certain directions at each point, and path length is measured under that restriction; its shortest paths trade distance travelled against turning (see Glossary).
 
@@ -183,7 +194,9 @@ intergalactic medium between luminous-red-galaxy pairs (de Graaff et al. 2019;
 Tanimura et al. 2019), and 3D Lyman-$$\alpha$$ forest tomography[^lyman-tomography] of the web at $$z \sim 2.3$$ (CLAMATO; Lee et al. 2018). Galaxy spins align with filament axes in
 a mass-dependent way (Tempel &amp; Libeskind 2013; Codis et al. 2012). These give
 us **independent channels** to validate any new skeleton: lensing mass, tSZ gas,
-and spin alignment.
+and spin alignment. (How gas maps are made, stacked, and defended against
+false positives is
+[Appendix B5](/mathematics/2026/07/10/cosmic-web-B5-reading-gas-maps/).)
 
 **The vision-side toolbox** (developed in the series and its appendices): build an
 **orientation score** $$U(\mathbf{x},\mathbf{n})$$ by correlating the data with
@@ -340,6 +353,12 @@ alignment trend with the new spines (a sharper mass transition supports H3).
 **Tests H3.**
 
 ## Data-analysis plan: the metrics, defined
+
+Every claim in the program is judged by one of the six metrics below, all
+frozen before any experiment ran. (Why benchmarks need this discipline —
+matched budgets, held-out scoring, and the one rule whose violation later
+became the program's central lesson — is
+[Appendix B3](/mathematics/2026/07/08/cosmic-web-B3-honest-benchmarks/).)
 
 - **M1 — spine distance.** Sample both skeletons at $$0.1\,h^{-1}$$Mpc; report the
   two directed median point-to-curve distances

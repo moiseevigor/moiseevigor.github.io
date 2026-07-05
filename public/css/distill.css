@@ -110,7 +110,10 @@
 .d-article {
   padding-bottom: 80px;
 }
-.d-article { counter-reset: section figure; }
+/* Reset counters on the real <article> only — a nested <div class="d-article">
+ * (used as a references wrapper on some posts) must NOT restart the section
+ * count, or its "References" heading renders as "1." instead of continuing. */
+article.d-article { counter-reset: section figure; }
 
 /* ── Layout layers ───────────────────────────────────────────────────────── */
 
@@ -460,6 +463,46 @@ figcaption strong { color: var(--text-light); }
 .d-references li { margin-bottom: 0.5em; }
 .d-references a { color: var(--accent); }
 
+/* ── Footnotes / endnotes ────────────────────────────────────────────────── */
+/*
+ * kramdown appends <div class="footnotes"> as a bare child of .d-article,
+ * OUTSIDE the .l-body wrappers the markdown uses — so with no rule here it
+ * spans the full viewport while every other block stays capped at the body
+ * column. Center + cap it on the same axis as .l-body, and give it the muted
+ * scholarly treatment of .d-references (its sibling apparatus). A "Notes"
+ * label orients the reader, who otherwise meets a numbered list with no title.
+ */
+.d-article .footnotes {
+  max-width: calc(var(--body-w) + 32px + var(--gutter-w));
+  margin: 60px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.d-article .footnotes::before {
+  content: "Notes";
+  display: block; max-width: var(--body-w);
+  font-family: var(--sans); font-size: 1rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 12px;
+}
+.d-article .footnotes ol {
+  max-width: var(--body-w);
+  font-family: var(--sans); font-size: 0.875rem; line-height: 1.7;
+  color: var(--text-muted); padding-left: 1.4em; margin: 0;
+}
+.d-article .footnotes li { margin-bottom: 0.5em; }
+.d-article .footnotes p {
+  font-family: var(--sans); font-size: 0.875rem; line-height: 1.7;
+  color: var(--text-muted); margin: 0;
+}
+.d-article .footnotes a { color: var(--accent); }
+/* Back-reference arrow (↩) — quieten it so it doesn't compete with the note */
+.d-article .footnotes a.reversefootnote {
+  font-family: var(--mono); text-decoration: none;
+  color: var(--text-muted); opacity: 0.45; margin-left: 6px;
+}
+.d-article .footnotes a.reversefootnote:hover { opacity: 1; color: var(--accent); }
+
 /* ── Series navigation ───────────────────────────────────────────────────── */
 .d-series-nav {
   display: flex; justify-content: space-between; align-items: flex-start;
@@ -492,6 +535,7 @@ figcaption strong { color: var(--text-light); }
   .d-header { padding: 40px 20px 36px; }
   .d-footer { padding: 20px; }
   .l-body, .l-middle, .l-page { padding: 0 20px; }
+  .d-article .footnotes { padding: 24px 20px 0; }
 }
 @media (max-width: 560px) {
   .d-title { font-size: 1.6rem; }

@@ -2,23 +2,26 @@
 layout: distill
 title: "Two Ways to See a Cosmic Filament"
 subtitle: >
-  We compare two methods for finding cosmic filaments in sparse galaxy data:
-  a standard local-curvature (Hessian) detector and an orientation-lifted
-  detector adapted from models of the visual cortex. Both are benchmarked on
-  synthetic data with exact ground truth and on real survey data. The
-  interactive plots below show where each method works, where each fails,
-  and how a flaw in our own evaluation initially produced a wrong conclusion
-  that stricter controls reversed.
+  Galaxies trace an invisible web of filaments across the Universe. We taught
+  a computer two ways of seeing it — one borrowed from how your own visual
+  cortex completes broken contours — and raced them on worlds where the answer
+  is known. The race had a surprise winner, a flaw in our own scoring that
+  briefly crowned the wrong one, and an ending nobody planned: a small new
+  physics rule that predicts where matter goes nearly as well as theoretically
+  possible.
 date: 2026-07-04 09:00:00
 categories: [mathematics]
 tags: [cosmic-web, sub-riemannian, SE3, filaments, data-analysis]
 description: >
-  A benchmark study of two filament detectors — the Hessian baseline and the
-  R³×S² orientation lift — with interactive figures built from the actual
-  experiment data: accuracy on exact-truth synthetic webs, failure modes at
-  junctions and on gravity-evolved fields, a dynamical test of the
-  geodesic-transport hypothesis, and validation against Planck and ACT
-  gas maps.
+  A benchmark study of two filament detectors — the standard curvature
+  (Hessian) detector and an orientation lift adapted from models of the visual
+  cortex — told for a general reader, with interactive figures built from the
+  actual experiment data: the three levels of reality the tests run on, where
+  each method works and fails, a scoring flaw and its correction, and the
+  transverse-damping transport rule the program distilled at the end.
+series: geometry-of-cosmic-web
+series_title: "Geometry of the Cosmic Web"
+series_part: 2
 comments: true
 published: true
 ---
@@ -26,21 +29,25 @@ published: true
 <div class="l-body" markdown="1">
 
 <div class="callout">
-<div class="callout-title">What this article covers</div>
-A self-contained account of a research program: can the sub-Riemannian
-machinery from the
+<div class="callout-title">How to read this article</div>
+This is the story of a research program: can the mathematics your visual
+cortex uses to complete broken contours — developed in the
 <a href="{% post_url 2026-04-25-geometry-of-seeing-visual-cortex-se2 %}">Geometry
-of Seeing</a> series find <em>cosmic filaments</em>? Both methods are defined
-with full mathematics, then compared under controlled conditions on synthetic
-data with exact ground truth. Interactive figures present the results,
-including an evaluation flaw that initially favoured the more complex method,
-the corrected comparison, the rejection of the diffusion component, and a
-dynamical test of the transport hypothesis — and then the constructive
-second half: the correction that standard transport models actually need
-is <em>measured</em>, turned into a working effective model, vindicated
-against an oracle, and optimized until it sits at its own
-information-theoretic bound. Every number comes from the experiment data
-in the repository (<code>research/cosmic-web/</code>).
+of Seeing</a> series — find the <em>filaments of the cosmic web</em>? The main
+text tells that story in plain language. Every technical term gets a short
+margin note the first time it appears, and the full machinery lives in five
+appendices linked where relevant: the transport models of cosmology
+(<a href="/mathematics/2026/07/06/cosmic-web-B1-transport-models/">B1</a>),
+the tidal frame that gives the web its directions
+(<a href="/mathematics/2026/07/07/cosmic-web-B2-tidal-frame/">B2</a>),
+how to race two methods without rigging the race
+(<a href="/mathematics/2026/07/08/cosmic-web-B3-honest-benchmarks/">B3</a>),
+the transport rule this program produced
+(<a href="/mathematics/2026/07/09/cosmic-web-B4-transverse-damping/">B4</a>),
+and how to read hot-gas maps of the sky
+(<a href="/mathematics/2026/07/10/cosmic-web-B5-reading-gas-maps/">B5</a>).
+Every number comes from the experiment data in the repository
+(<code>research/cosmic-web/</code>); nothing is illustrative.
 </div>
 
 ## The problem
@@ -65,44 +72,88 @@ $$
 buys anything for cosmic filaments — and, more ambitiously, whether the
 geometry is not just a detector but part of the *physics*.
 
+## Three levels of reality
+
+There is a problem with testing anything on the real sky: nobody has the
+answer key. No catalogue says where the true filaments are — the true
+network is exactly what everyone is trying to find. So this study, like most
+of cosmology, works on a ladder of three worlds, each one a controlled model
+of the one above it.
+
+At the top sits the **real sky**: a slice of the BOSS galaxy survey, every
+dot a real galaxy, out to billions of light-years. You can already see the
+clumps and strands by eye — but you cannot grade a method here, only check
+that what it finds is physically real (we do that at the end, with maps of
+hot gas).
+
+One level down is a **gravity simulation**: start from the smooth infant
+Universe, let gravity act on a couple of million mass points, and the same
+web pattern emerges on its own. Here we know every particle's full history —
+where it started, where it ended — so questions about *motion* have exact
+answers, even though the filaments themselves are still nobody-said-so.
+
+At the bottom is a **toy universe with the answers printed on it**: an
+invented network of curves, with fake galaxies sprinkled along it and
+clutter added. It is the least realistic world and the only one where
+"completely right" is a checkable statement — so this is where the race
+between the two methods is scored.
+
+Every claim in this article was tested at the bottom of this ladder first,
+then walked upward as far as it survived.
+
+</div><!-- /.l-body -->
+
+<figure class="l-middle">
+  <img src="/public/img/posts/cosmic-web/three_universes.png"
+       alt="Three panels: top, a fan-shaped slice of the BOSS galaxy survey with each dot a real galaxy; bottom left, the web-like density field of a 2.1-million-particle gravity simulation; bottom right, a synthetic Voronoi web with the exact true filaments drawn in red"
+       style="width:100%; border:1px solid #ddd; border-radius:4px;">
+  <figcaption>
+    <strong>The three worlds the experiments run on.</strong> Top: one thin
+    slice of the real sky (BOSS survey; Earth sits at the bottom tip of the
+    fan) — real, but with no answer key. Bottom left: a gravity simulation —
+    the web emerges by itself, and every particle's history is known.
+    Bottom right: a synthetic toy where the true filament network (red) is
+    known exactly, so methods can be graded. Realism decreases downward;
+    control increases.
+  </figcaption>
+</figure>
+
+<div class="l-body" markdown="1">
+
 ## The two models
 
-Both start identically: blur the galaxy points into a smooth density $$f:\mathbb{R}^3 \to \mathbb{R}$$ (cloud-in-cell deposit, log transform, light
-Gaussian smoothing). They differ in how they ask "is there a filament through
-this point?"
+Both start identically: blur the galaxy points into a smooth density map, so
+that instead of isolated dots there is a landscape with hills where galaxies
+crowd and plains where they don't. They differ in how they ask "is there a
+filament through this point?"
 
-**Model 1 — the Hessian baseline (local, quadratic).** On a bright ridge the
-density falls off steeply in two directions and stays flat along the third.
-So compute the Hessian[^hessian] $$H = D^2 f$$ at every point, take eigenvalues $$\lambda_1 \ge \lambda_2 \ge \lambda_3$$ of $$H$$, and score
+**Model 1 — the mountain-ridge reading (the Hessian baseline).** Walking
+along a mountain ridge, the ground falls away steeply to both sides and
+stays level ahead. A filament is the same shape in the density landscape.
+Model 1 measures, at every point, how the density curves in each direction —
+the mathematical object holding those curvatures is the **Hessian
+matrix**[^hessian] — and calls "filament" wherever the landscape drops
+steeply in two directions and stays flat along the third[^hessian-score].
+This is the workhorse of the field (the standard MMF and NEXUS filament
+finders are refinements of it). It has one structural limit: its direction
+reading comes from a single quadratic form, which is like judging direction
+through permanently blurred glasses — the response has angular
+bandwidth 2[^angular-bandwidth] and *cannot be made sharper*, no matter how
+clean the data.
 
-$$
-R_{\mathrm{hess}}(\mathbf{x}) = -\tfrac{1}{2}\left(\lambda_2 + \lambda_3\right)_+ ,
-$$
-
-with the filament direction given by the top eigenvector. This is the
-workhorse of the field (the MMF and NEXUS filament finders are multiscale
-versions of it). Its structural limit: everything it knows about direction at $$\mathbf{x}$$ sits in one quadratic form — as a function on the sphere of
-directions, it has angular bandwidth 2[^angular-bandwidth] and *cannot be made sharper*.
-
-**Model 2 — the SE(3) orientation lift.** Measure the data separately for
-every direction: for each point $$\mathbf{x}$$ and unit vector $$\mathbf{n}$$,
-correlate the density with a long thin "cigar" aligned with $$\mathbf{n}$$ —
-concretely, in Fourier space,
-
-$$
-U(\mathbf{x},\mathbf{n}) = \mathcal{F}^{-1}\!\left[\,
-\sigma_\perp^2\,|\mathbf{k}_\perp|^2\,
-e^{-\frac{1}{2}\left(\sigma_\parallel^2 k_\parallel^2 + \sigma_\perp^2 |\mathbf{k}_\perp|^2\right)}
-\hat{f}(\mathbf{k})\right],
-$$
-
-minus the transverse Laplacian of an $$\mathbf{n}$$-elongated Gaussian: large
-exactly on ridges aligned with $$\mathbf{n}$$. The function $$U$$ lives on $$\mathbb{R}^3 \times S^2$$ (we sample 42 axes on the hemisphere), and its
-angular sharpness grows with the aspect ratio $$\sigma_\parallel/\sigma_\perp$$
-— a free parameter, unlike the Hessian's fixed bluntness. The final score is $$\max_{\mathbf{n}} U$$. The theory also offers a second ingredient — a
-**hypoelliptic diffusion**[^hypoelliptic] on the lifted space that propagates evidence along
-curves (the contour-completion flow of the visual cortex) — remember this
-one; its fate below is an honest surprise.
+**Model 2 — the searchlight reading (the SE(3) orientation lift).** Instead
+of one blurred direction estimate per point, measure every direction
+separately: slide a long, thin, cigar-shaped filter over the data and record
+how strongly it responds when aligned this way, that way, every way (we
+sample 42 axes)[^lift-formula]. The result no longer lives in ordinary space
+but on $$\mathbb{R}^3 \times S^2$$ — position *and* direction — and its
+directional sharpness grows with the cigar's length: a knob the Hessian
+simply does not have. This is the 3D version of what the visual cortex does
+with contours. The theory also offers a second ingredient — a
+**hypoelliptic diffusion**[^hypoelliptic] on the lifted space that lets
+evidence flow along hypothesised curves (the contour-completion mechanism
+of the visual cortex) — remember this one; its fate below is an honest
+surprise.
 
 The figure below demonstrates the difference directly. A dashed curve of
 points sits in uniform clutter. One oriented filter (the ellipse) is placed
@@ -114,6 +165,10 @@ quadratic (Hessian-type) model can express regardless of the data.
 [^megaparsec]: One megaparsec (Mpc) is about 3.26 million light-years. Cosmologists often quote distances in h⁻¹Mpc, where $$h \approx 0.7$$ encodes the measured expansion rate of the Universe; 1 h⁻¹Mpc is roughly 1.4 Mpc.
 
 [^hessian]: The matrix of second derivatives of the density, recording how the density curves in every direction around a point; its eigenvalues are the curvatures along the three principal axes, and its eigenvectors are those axes.
+
+[^hessian-score]: Precisely: with Hessian eigenvalues $$\lambda_1 \ge \lambda_2 \ge \lambda_3$$, the ridge score is $$R_{\mathrm{hess}} = -\tfrac{1}{2}(\lambda_2+\lambda_3)_+$$ and the filament direction is the top eigenvector.
+
+[^lift-formula]: Precisely, in Fourier space: $$U(\mathbf{x},\mathbf{n}) = \mathcal{F}^{-1}[\,\sigma_\perp^2 \vert\mathbf{k}_\perp\vert^2 e^{-\frac{1}{2}(\sigma_\parallel^2 k_\parallel^2 + \sigma_\perp^2 \vert\mathbf{k}_\perp\vert^2)} \hat{f}(\mathbf{k})]$$ — the transverse Laplacian of an $$\mathbf{n}$$-elongated Gaussian correlated with the density: large exactly on ridges aligned with $$\mathbf{n}$$. Sharpness grows with the aspect ratio $$\sigma_\parallel/\sigma_\perp$$; the final score at a point is $$\max_{\mathbf{n}} U$$.
 
 [^angular-bandwidth]: A limit on how finely the response can vary as the probe direction rotates: bandwidth 2 means the response traces one broad bump around the circle of directions (like $$\cos^2$$) and can never form a narrower peak, however clean the data.
 
@@ -148,25 +203,30 @@ quadratic (Hessian-type) model can express regardless of the data.
 
 <div class="l-body" markdown="1">
 
-**Fairness rules.** Everything downstream of the score is *identical*:
-thresholding, skeletonisation[^skeletonisation] at **matched total spine length** (so neither
-model can win by drawing more curve), junction detection. Each model gets the
-same budget of three tuning configurations, chosen on one calibration
-realization[^realization] and *frozen* before scoring on 50 fresh ones. Both models reduce
-to "a scalar ridge score, then the same pipeline" — the race isolates exactly
-one variable: quadratic local curvature vs. angularly-sharp oriented
-measurement.
+**Fairness rules.** A race between methods is only as good as its rules.
+Here, everything after the scoring step is *identical* for both models:
+the same thresholding, the same skeletonisation[^skeletonisation], and —
+crucially — both must draw the **same total length of curve**, so neither
+can win just by drawing more. Each model gets the same small budget of
+tuning attempts, locked in on one practice universe[^realization] before
+the real scoring begins on 50 fresh ones. The race isolates exactly one
+variable: blurred local curvature versus sharp oriented measurement. (Why
+each of these rules exists, and what goes wrong without them, is
+[Appendix B3](/mathematics/2026/07/08/cosmic-web-B3-honest-benchmarks/) —
+one of them turns out to carry this whole article.)
 
 ## The test bed: universes with exact answers
 
-You cannot score a filament finder on the real Universe — nobody knows the
-true network. So the first battery (experiment E0) manufactures truth: seeds
-dropped in a box, their **Voronoi diagram**[^voronoi] computed, and the *edges* of the
-Voronoi cells — where three cell walls meet — taken as the filament network
-(a classic cartoon of the cosmic web, geometrically honest about branching).
-One variant keeps the edges straight; a second bends each into a Bézier arc[^bezier].
-Galaxies are sprinkled along the network with transverse scatter, node
-clumps, and 25% uniform clutter; both models get the identical blurred field.
+The race is scored on the bottom rung of the ladder — the toy with the
+answer key. The first experiment battery (E0) manufactures that truth:
+seed points dropped in a box, their **Voronoi diagram**[^voronoi] computed,
+and the *edges* of the Voronoi cells — the lines where three cell walls
+meet — taken as the filament network. It is a classic cartoon of the cosmic
+web, and geometrically honest about the thing filaments do that trips up
+detectors: branch. One variant keeps the edges straight; a second bends
+each into a smooth arc[^bezier]. Fake galaxies are then sprinkled along the
+network with sideways scatter, extra clumps at the junctions, and 25% pure
+clutter; both models get the identical blurred field.
 
 Explore the raw material below — the same box, at four sampling densities
 from "starved" (2,500 galaxies) to "saturated" (80,000). Red is the exact
@@ -235,6 +295,19 @@ The corrected verdict: **the Hessian matches or beats the lift at every
 sampling density**. At the ultra-sparse end (1,200 galaxies) the two are
 statistically tied (Δ = +0.004, p = 0.36); everywhere else the Hessian wins
 completeness by 4–7 points on 50 of 50 seeds, and junction F1 with it.
+
+<div class="callout">
+<div class="callout-title">In plain words</div>
+Imagine grading two students who each trace a river network on a map, where
+the score is "how much of the true river did your tracing cover?" — and one
+student was quietly allowed to draw a 19% longer line. On sparse data, more
+line means more coverage, skill or not. Our scoring made exactly that
+mistake, and the extra length masqueraded as a discovery with spectacular
+statistics. Equalise the pencil, and the simpler method wins the race
+almost everywhere. The full anatomy of this mistake — and the other ways a
+method comparison can quietly rig itself — is
+<a href="/mathematics/2026/07/08/cosmic-web-B3-honest-benchmarks/">Appendix B3</a>.
+</div>
 
 [^voxel]: One cell of the 3D grid a box is divided into — the three-dimensional analogue of a pixel. In these experiments one voxel corresponds to one h⁻¹Mpc.
 
@@ -328,11 +401,10 @@ everywhere** (−0.06 to −0.12, p ≈ 2×10⁻⁶), including the most-curved 
 the network where it was most expected to help; weak diffusion is neutral to
 harmful at ordinary sparsity and buys a whisper (+0.01, p = 0.03) only at the
 ultra-sparse level. Essentially all of the lift's power is in the
-angularly-sharp measurement, not in evidence propagation. (The "crude
-numerics" objection was tested and closed: an 8-step Trotter splitting at
-equal total diffusion — which converges to the true left-invariant
-semigroup — reproduces the coarse result at both sparsity levels. The
-verdict is about the operator.)
+sharp oriented measurement, not in evidence propagation. (The "your
+numerics were too crude" objection was tested and closed: a finer,
+provably convergent implementation[^trotter] reproduces the result. The
+verdict is about the idea, not the code.)
 
 **Failure 3 — gravity-shaped webs (with one nuance).** Real filaments are
 not tubes. On gravity-evolved boxes, scored by a method-neutral criterion —
@@ -345,6 +417,8 @@ long cigars still lose badly (−0.05), while the *shortest* filter
 p = 0.55) and a small deficit when dense. Toggle the figure below between
 the two field types: the lift never actually leads on gravity-shaped mass,
 and its best case is "as good as the simpler model".
+
+[^trotter]: An 8-step Trotter splitting at equal total diffusion, which converges to the true left-invariant semigroup on the lifted space; it reproduces the coarse result at both sparsity levels.
 
 [^zeldovich]: Density fields evolved with the Zel'dovich approximation: matter coasts along straight lines set by the initial gravity field. It captures the first stage of collapse, when matter flattens into sheet-like "pancakes" (see Glossary).
 
@@ -398,16 +472,28 @@ predicts trajectories' deviations from straight-line motion should point
 <div class="l-body" markdown="1">
 
 The verdict is blunt: **filaments are built by matter falling across them,
-not flowing along them.** The lifted geometry survives only as a *static
-descriptor* — spine tangents from the lift align with the tidal eigenframe[^tidal-eigenframe] at
-0.73–0.76 versus the Hessian's 0.67 (isotropic null 0.5), without ever being
-shown the tidal field — but the geodesic *transport* story is refuted in the
-bulk, with a weak, sign-correct residual for matter already captured inside
-filament tubes.
+not flowing along them.** A filament is not a river channelling flow; it is
+a wall being built by things crashing into it from both sides. The lifted
+geometry survives only as a *static descriptor* — spine tangents from the
+lift align with the tidal eigenframe[^tidal-eigenframe] (the local set of
+axes gravity itself defines — [Appendix B2](/mathematics/2026/07/07/cosmic-web-B2-tidal-frame/))
+at 0.73–0.76 versus the Hessian's 0.67 (isotropic null 0.5), without ever
+being shown the tidal field — but the geodesic *transport* story is refuted
+in the bulk, with a weak, sign-correct residual for matter already captured
+inside filament tubes.
 
 ## A real-Universe coda
 
-The program's final experiment left simulations behind: 274,000 real BOSS
+One rung of the ladder remains: the real sky. There is still no answer key
+there — but there is something almost as good. Filaments should contain hot
+gas, and hot gas leaves a faint, measurable imprint on the relic light of
+the Big Bang as it passes through. So if the webs our methods draw are real,
+the sky should be slightly "hotter" along them than elsewhere. That imprint
+is measured in **Compton-y maps** (how such maps are made and what can fake
+a signal in them is
+[Appendix B5](/mathematics/2026/07/10/cosmic-web-B5-reading-gas-maps/)).
+
+The final experiment left simulations behind: 274,000 real BOSS
 CMASS galaxies[^boss] (z = 0.45–0.55)[^redshift] tiled into eighteen 512 h⁻¹Mpc cubes, spines
 extracted by both methods at matched length, and the networks stacked
 against Planck maps[^planck-act] with footprint-matched rotated controls. Three things
@@ -454,9 +540,15 @@ the simpler model finds its mass better.
 
 The refutations left a constructive question: if matter does not travel
 along filament-aligned geodesics, what correction *does* standard
-transport need? The Zel'dovich model — the field's workhorse — moves
-matter on straight lines set by the initial conditions. Our simulations
-use exactly those initial conditions, so for every particle we can
+transport need? Cosmology's workhorse shortcut — the **Zel'dovich
+model** — predicts where matter ends up by sending every parcel along a
+straight line set by the initial conditions, no further gravity computed.
+It is startlingly good for something so simple, and it fails in a specific
+way: it lets matter coast *through* the walls and filaments that real
+gravity would have stopped it at. (The full family of these fast transport
+models, from 1970 to the modern ones, is
+[Appendix B1](/mathematics/2026/07/06/cosmic-web-B1-transport-models/).)
+Our simulations use exactly the same initial conditions, so for every particle we can
 subtract the model's prediction from the truth and examine the **residual
 directly**: the adjustment term itself.
 
@@ -490,52 +582,69 @@ flow along it.
 ## From correction to model, to the bound
 
 A measured correction invites a model. The candidate is one rule added to
-Zel'dovich transport: *the first time a particle enters a dense region,
-remove part of its velocity perpendicular to the local filament axis and
-keep the along-axis part*. Three questions, answered in order by
-experiments E5, E5b, and E5c/d:
+Zel'dovich's straight lines: *the first time a particle crashes into a
+dense region, take away most of its sideways speed — the part carrying it
+across the local filament — and let it keep the part moving along the
+filament*. A brake that only acts sideways, and only at the web. Three
+questions, answered in order:
 
-1. **Does the rule help?** Yes — against full N-body truth from identical
-   initial conditions, it beats both plain Zel'dovich and the classical
-   isotropic-sticking (adhesion) model, most clearly at the web. The
-   calibration knob was tuned to favour the competitor, so the win is
-   conservative.
-2. **Is the remaining error the rule's fault or the estimator's?** An
-   oracle test answers cleanly: given *true* filament directions (from the
-   final N-body field), the rule wins everywhere, in every distance band.
-   The physics of the term is right; the practical cost is estimating
-   directions from the model's own state.
-3. **How close can a practical version get?** A short optimization
-   campaign (partial damping β, direction-field smoothing, the model's
-   own density for direction estimates) converges at β = 0.6 with 2 h⁻¹Mpc
-   frames: held-out error **4.52** voxels vs Zel'dovich's 4.98 — within
-   0.05 of the oracle bound 4.47. Ninety percent of the recoverable error
-   is closed; the residue is post-collapse physics no damping rule can
-   represent, by construction.
+1. **Does the rule help?** Yes — against full simulation truth from
+   identical starting conditions, it beats both plain Zel'dovich and the
+   classical "stick at walls" model (adhesion, 1989), most clearly right
+   at the web. The one tuning knob was deliberately set to favour the
+   *competitor*, so the win is conservative.
+2. **Is the remaining error the rule's fault, or its steering's?** The
+   rule needs to know each filament's direction, and must estimate it
+   from its own imperfect matter map. So run an **oracle test**: hand the
+   rule the *true* directions (read from the finished simulation — pure
+   cheating, impossible in practice) and see how good it could ever be.
+   With perfect steering the rule wins everywhere, in every distance
+   band. The physics of the brake is right; the practical cost is the
+   steering.
+3. **How close can an honest version get?** After a short tuning campaign
+   (brake strength, how coarsely directions are estimated), the frozen
+   final recipe scores **4.52** on held-out worlds against Zel'dovich's
+   4.98 — within 0.05 of the oracle's 4.47. Ninety percent of the error
+   that *could* be recovered, is. The exact recipe, every parameter
+   frozen, is [Appendix B4](/mathematics/2026/07/09/cosmic-web-B4-transverse-damping/).
+
+The ladder below shows where that leaves the model among its neighbours —
+including MUSCLE (2016), the best published recipe in this class, which
+our one-rule model statistically ties. The frozen recipe was then
+stress-tested without any re-tuning on universes with different clumpiness,
+different resolution, and a different cosmology — it kept beating plain
+Zel'dovich in every condition, cutting the error by 3–17% — and its truth
+reference was cross-checked against two independent professional
+simulation codes.
 
 </div><!-- /.l-body -->
 
 <figure class="l-middle" id="fig-ladder">
   <div id="cw-ladder"></div>
   <figcaption>
-    <strong>The model ladder.</strong> Median per-particle transport error
-    against N-body truth (held-out realizations, 50,000 particles each).
-    Each step is one experiment: the classical isotropic adhesion proxy,
-    plain Zel'dovich, the first transverse-damping version, the refined
-    version (partial damping + self-estimated frames), and the frozen
-    final model — read against the oracle bound (dashed), the best any
-    direction-estimation scheme can achieve.
+    <strong>The model ladder.</strong> Each row is one recipe for predicting
+    where matter ends up; the score is how far its predictions land from
+    the true simulated positions (median, in grid cells of about 1.4
+    million light-years — lower is better; held-out test worlds). Grey:
+    the two classical recipes — straight-line motion, and sticking at
+    walls in all directions equally. Blue: this program's rule, in three
+    stages of refinement — a brake that acts only <em>sideways</em>, only
+    at the web. Green: the best published recipe of this kind, which the
+    final one-rule model statistically ties. The dashed red line is the
+    limit no version of the rule can beat: the score it gets when handed
+    the true filament directions instead of estimating them.
   </figcaption>
 </figure>
 
 <figure class="l-middle" id="fig-bins">
   <div id="cw-bins"></div>
   <figcaption>
-    <strong>Where the gains live.</strong> The same error, split by
-    distance to the filament web: Zel'dovich vs the refined model vs the
-    oracle. The model's advantage concentrates exactly where filaments
-    form — the region the correction term was measured in — and all
-    models agree far from the web, as they must.
+    <strong>Where the gains live.</strong> The same prediction error, split
+    by how close a particle ends up to the filament web. The sideways brake
+    earns its keep exactly where filaments form (left bars), which is where
+    the correction was measured in the first place; far from the web (right
+    bars) all three recipes agree, as they must — there is nothing there to
+    brake against.
   </figcaption>
 </figure>
 
@@ -1095,14 +1204,15 @@ figure.l-middle svg, figure.l-middle img { max-width: 100%; height: auto; }
   // ---- model ladder ----
   (function () {
     const MODELS = [
-      ["isotropic sticking (classical adhesion)", 5.34],
-      ["Zel'dovich (no correction)", 4.98],
-      ["+ transverse damping (E5)", 4.93],
-      ["+ self frames, β = 0.75 (E5c)", 4.64],
-      ["frozen: β = 0.6, 2 Mpc frames (E5d)", 4.52],
+      ["stick at walls — adhesion (1989)", 5.34, GREY],
+      ["straight lines — Zel'dovich (1970)", 4.98, GREY],
+      ["+ sideways brake, first version (ours)", 4.93, BLUE],
+      ["+ better steering (ours)", 4.64, BLUE],
+      ["final frozen recipe (ours)", 4.52, BLUE],
+      ["best published recipe — MUSCLE (2016)", 4.49, "#2f855a"],
     ];
     const BOUND = 4.47;
-    const f = frame("#cw-ladder", 640, 300, {l: 300, r: 30, t: 14, b: 40});
+    const f = frame("#cw-ladder", 640, 330, {l: 300, r: 30, t: 14, b: 40});
     if (!f) return;
     const y = d3.scaleBand().domain(MODELS.map(m => m[0]))
       .range([0, f.ih]).padding(0.35);
@@ -1112,21 +1222,21 @@ figure.l-middle svg, figure.l-middle img { max-width: 100%; height: auto; }
     f.g.append("g").call(d3.axisLeft(y).tickSize(0));
     f.g.append("text").attr("x", f.iw / 2).attr("y", f.ih + 34)
       .attr("text-anchor", "middle").attr("font-size", 12)
-      .text("median transport error vs N-body truth (voxels, lower is better)");
+      .text("median prediction error vs simulation truth (grid cells, lower is better)");
     f.g.append("line").attr("x1", x(BOUND)).attr("x2", x(BOUND))
       .attr("y1", 0).attr("y2", f.ih)
       .attr("stroke", RED).attr("stroke-dasharray", "5,4");
     f.g.append("text").attr("x", x(BOUND) - 4).attr("y", 12)
       .attr("text-anchor", "end").attr("font-size", 11).attr("fill", RED)
-      .text("oracle bound 4.47");
-    MODELS.forEach(([name, v], i) => {
+      .text("perfect-steering limit 4.47");
+    MODELS.forEach(([name, v, col]) => {
       f.g.append("line").attr("x1", x(4.3)).attr("x2", x(v))
         .attr("y1", y(name) + y.bandwidth() / 2)
         .attr("y2", y(name) + y.bandwidth() / 2)
         .attr("stroke", "#ddd");
       f.g.append("circle").attr("cx", x(v))
         .attr("cy", y(name) + y.bandwidth() / 2).attr("r", 6.5)
-        .attr("fill", i >= 2 ? BLUE : GREY)
+        .attr("fill", col)
         .on("mousemove", (ev) => tip2.style("opacity", 1)
           .style("left", (ev.pageX + 12) + "px")
           .style("top", (ev.pageY - 10) + "px").text(`${v} vox`))
@@ -1140,9 +1250,9 @@ figure.l-middle svg, figure.l-middle img { max-width: 100%; height: auto; }
   // ---- per-bin gains ----
   (function () {
     const BINS = ["0–2", "2–4", "4–8", "8–64"];
-    const SERIES = [["Zel'dovich", [6.95, 5.43, 3.74, 3.38], GREY],
-                    ["refined model", [5.96, 5.37, 3.67, 3.28], BLUE],
-                    ["oracle frames", [5.53, 5.20, 3.68, 3.33], RED]];
+    const SERIES = [["Zel'dovich (straight lines)", [6.95, 5.43, 3.74, 3.38], GREY],
+                    ["our model (frozen recipe)", [5.96, 5.37, 3.67, 3.28], BLUE],
+                    ["perfect steering (cheating)", [5.53, 5.20, 3.68, 3.33], RED]];
     const f = frame("#cw-bins", 640, 300, {l: 52, r: 20, t: 14, b: 58});
     if (!f) return;
     const x0 = d3.scaleBand().domain(BINS).range([0, f.iw]).padding(0.25);
