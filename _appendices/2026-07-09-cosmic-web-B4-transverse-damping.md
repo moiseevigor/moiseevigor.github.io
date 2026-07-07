@@ -52,15 +52,24 @@ run's cost (~18 cheap steps versus 90 force-solving steps). The rule
 - At each step, deposit the model's own particles to a density grid.
 - The first time a particle's local density exceeds $$\rho_c = 5$$, remove
   $$\beta = 60\%$$ of its velocity components perpendicular to the local
-  filament axis $$e_3$$ — the minor eigenvector of the tidal tensor of the
-  model's own density, smoothed at 2 h⁻¹Mpc and refreshed every third
-  step. The along-axis component is never touched.
+  filament axis $$e_3$$ — the minor eigenvector of the tidal tensor computed
+  *from the model's own density via the Poisson equation*, smoothed at
+  2 h⁻¹Mpc and refreshed every third step. Damping is applied in the
+  simulation box frame: the implicit assumption is that a structure's bulk
+  transverse motion is small against the infall being arrested (adequate
+  here; a momentum-conserving, relative-velocity version would be the
+  Galilean-invariant refinement). The along-axis component is never touched.
 
 Three fixed numbers ($$\beta$$, $$\rho_c$$, the smoothing scale). Two
 structural findings (E5c): partial damping ($$\beta < 1$$) is *required*
 for self-estimated frames to pay — at full damping the model's own density
 feedback over-triggers crossings and cancels the frame gain — and
-pancake-ordered sequential damping underperforms both-perpendicular damping.
+pancake-ordered sequential damping (arrest along $$e_1$$ first, as B2's
+collapse ordering would suggest) *underperforms* both-perpendicular damping.
+That last result cuts against the tidy ordering story and deserves the honest
+gloss: with self-estimated frames and one density trigger, the estimator
+cannot reliably tell "which axis has collapsed so far", and damping both
+transverse components hedges that frame noise better than trusting it.
 
 ## The evidence chain, experiment by experiment
 
@@ -82,7 +91,8 @@ pancake-ordered sequential damping underperforms both-perpendicular damping.
   amplitude and cosmology: the advantage persists everywhere and grows
   with clustering.
 - **E8 — field level.** Extends the usable wavenumber range of a ZA-based
-  mock on both phases and amplitudes; isotropic sticking destroys phases.
+  mock on both phases and amplitudes at intermediate and small scales
+  (r(k) trails plain ZA at k ≲ 0.14); isotropic sticking destroys phases.
 - **E9 — baselines.** On identical initial conditions: statistical tie
   with MUSCLE, 2LPT degrades badly. The contribution is the mechanism,
   not a better engine.
@@ -103,9 +113,9 @@ held-out seeds — ZA reference 4.98 ± 0.27 on seeds {4, 5, 6} (E5–E5d, E9):
 | MUSCLE (E9) | multiscale spherical collapse | 4.49 ± 0.12 | tie with frozen recipe |
 | 2LPT (E9) | second-order perturbation theory | 8.07 ± 0.39 | +62% |
 
-The frozen recipe closes 89% of the recoverable gap to the oracle. The
+The frozen recipe closes 90% of the recoverable gap to the oracle. The
 largest gains sit where the correction was measured: at 0–2 voxels from
-spines the model reaches 5.77 ± 0.16 against ZA's 6.92 ± 0.31 (−17%), with
+spines the model reaches 5.78 ± 0.16 against ZA's 6.93 ± 0.31 (−17%), with
 the oracle showing −20% available (E5b, E9). MUSCLE is slightly ahead at
 the web (5.57 ± 0.07); the reading of the tie is the mechanism result —
 a model with *only* the measured directional ingredient reproduces
@@ -127,7 +137,7 @@ implement transverse arrest.
     mark the achievable window: the Zel'dovich baseline (no correction) and the
     <em>oracle bound</em> (the same model handed the true final-field frames). The
     <strong>frozen recipe</strong> — Zel'dovich rays plus a single transverse-damping knob
-    <em>β</em> = 0.6 — lands at 4.52, closing 89% of the recoverable gap and tying MUSCLE,
+    <em>β</em> = 0.6 — lands at 4.52, closing 90% of the recoverable gap and tying MUSCLE,
     a far more elaborate scheme. Second-order perturbation theory (2LPT) is +62% worse;
     switch to <em>full range</em> to see it. Every value is from the E5–E9 experiment
     artifacts in <code>research/cosmic-web/</code>.
@@ -200,13 +210,14 @@ implement transverse arrest.
 
 ## Transfer with frozen knobs
 
-No re-calibration anywhere; resolution rows in physical h⁻¹Mpc (E6, E7,
-E7b):
+No re-calibration anywhere; every error below is quoted in physical h⁻¹Mpc
+(the coarse run is converted from its native 2 h⁻¹Mpc voxels — compare
+*relative* advantages across rows, as E6 itself cautions):
 
 | condition | seeds | ZA all | model all | Δ all | ZA web | model web | Δ web |
-|---|---|---|---|---|---|---|---|
+|:---|:---|:---|:---|:---|:---|:---|:---|
 | base (EdS, σ₈ = 0.8, 1 h⁻¹Mpc vox) | 3 | 4.98 | 4.52 | −9% | 6.93 | 5.78 | −17% |
-| coarse (2 h⁻¹Mpc voxels) | 3 | 2.09 | 2.04 | −2% | 3.37 | 3.08 | −9% |
+| coarse (2 h⁻¹Mpc voxels, ≈ physical) | 3 | 4.18 | 4.08 | −2% | 6.74 | 6.16 | −9% |
 | σ₈ = 0.6 | 3 | 2.98 | 2.89 | −3% | 4.73 | 4.26 | −10% |
 | σ₈ = 1.0 | 3 | 7.20 | 6.23 | −13% | 9.36 | 7.33 | −22% |
 | flat ΛCDM, Ωm = 0.31 | 3 | 4.93 | 4.45 | −10% | 6.90 | 5.73 | −17% |
@@ -218,8 +229,9 @@ network. The advantage grows monotonically with clustering (−3% → −9% →
 −13% overall) — the behaviour of a physical shell-crossing correction,
 since higher σ₈ means more crossings — and is nearly identical between EdS
 and ΛCDM, as expected for a growth-factor-parametrised geometric term;
-physical-unit errors at 0.5 and 1 h⁻¹Mpc voxels match, so the error scale
-is set by the physics, not the grid.
+physical-unit errors at 0.5 and 1 h⁻¹Mpc voxels match (4.45 vs 4.52), so the
+error scale is set by the physics, not the grid — the coarse 2 h⁻¹Mpc run's
+smaller native-voxel numbers are a unit artifact, converted above.
 
 ## Field-level fidelity
 
@@ -267,8 +279,9 @@ From the model card (MODEL-CARD), quantified:
   small PM truth, optimising the competitor first (Appendix B3); the β
   optimum is a flat minimum possibly slightly below 0.6.
 - **Web-region correction, not global.** Gains far from the web are −2%.
-- **Large-scale amplitude.** ~7% T(k) deficit in the largest-scale bin;
-  rescale before use in mocks.
+- **Large-scale amplitude.** ~7% T(k) deficit vs plain ZA in the largest
+  bin measured (k = 0.06 h Mpc⁻¹: 0.849 vs 0.920; the deficit vs truth is
+  larger); rescale before use in mocks.
 
 ## Reproduce
 
@@ -280,7 +293,7 @@ cd research/cosmic-web
 make residual           # E4: the measured correction (Appendix B2 table)
 make model-ladder       # E5, E5b, E5c, E5d: the ladder and the oracle
 make baselines          # E9: 2LPT and MUSCLE on identical ICs
-make transfer           # E6, E7, E7b: frozen-knob transfer matrix
+make transfer           # E6, E7 (E7b lives inside the E8 report): frozen-knob transfer matrix
 make field-level        # E8: r(k) and T(k)
 make truth-validation   # E10 convergence; E12 external checks
 ```

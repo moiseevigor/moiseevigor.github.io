@@ -675,8 +675,9 @@ completely — the geometry of a black-hole horizon. Each corner, gauged by the 
     In the middle (finite <em>c</em>) it is the 45° Minkowski cone of special relativity,
     symmetry group Poincaré. At right (<em>c</em> → 0) it closes onto the time axis — the
     <em>Carroll</em> limit, the intrinsic geometry of a black-hole horizon. Gauging each
-    corner gives a theory of gravity: Newton–Cartan, Einstein(–Cartan), and Carrollian
-    respectively. Your Euclidean symmetries are the <em>c</em> → ∞ face of the same object
+    corner gives a theory of gravity: Newton–Cartan (strictly, one gauges the
+    <em>Bargmann</em> central extension of the Galilei group), Einstein(–Cartan), and
+    Carrollian respectively. Your Euclidean symmetries are the <em>c</em> → ∞ face of the same object
     that curves into gravity.
   </figcaption>
 </figure>
@@ -748,11 +749,14 @@ matter sources torsion through a *second* equation. Because that equation is alg
 torsion does not propagate on its own — it vanishes wherever spin density vanishes, so
 ordinary space, the Solar System, and all current tests are untouched. Corrections switch
 on only at colossal spin density — the early Universe, neutron-star cores — where they act
-as an effective repulsion that can replace the Big-Bang singularity with a **bounce**.
+as an effective repulsion that can replace the Big-Bang singularity with a **bounce**
+(Popławski's scenario).
 
-**The honest status.** Torsion has never been detected; no experiment is yet precise
-enough to bound it meaningfully. Versions in which torsion *propagates* are disfavoured —
-the absence of extra gravitational-wave polarisations rules most of them out. The
+**The honest status.** Torsion has never been detected; laboratory and astrophysical
+searches (spin-polarised matter, Lorentz/torsion-coupling constraint tables) bound
+specific couplings without seeing anything. Versions in which torsion *propagates* are
+further constrained — among other things by the absence of extra gravitational-wave
+polarisations in current observations. The
 unification here is therefore **conceptual and classical**: it says gravity and the
 geometry of this series are the same kind of object, and it extends Einstein's equations
 by a term that is, so far, a whisper — loud only where the cosmic web itself was born.
@@ -767,10 +771,10 @@ The synthesis the series has been building, in one table:
 | Symmetry group | $$\mathrm{SE}(2)$$ | $$\mathrm{SE}(3)$$ | Poincaré $$\mathrm{ISO}(3,1)$$ |
 | Lifted / bundle space | $$\mathrm{SE}(2)$$ itself | $$\mathbb{R}^3{\times}S^2 = \mathrm{SE}(3)/\mathrm{SO}(2)$$ | frame bundle, connection $$(e, \hat\omega)$$ |
 | Frame field from data | orientation columns of V1 | tidal eigenframe $$\{e_1,e_2,e_3\}$$ | tetrad $$e^a$$ |
-| "Straightest" curves | sub-Riemannian geodesics (elastica) | Zel'dovich rays (free fall, frozen tide) | geodesics |
-| Governing tensor | curvature $$\kappa = 2k\,\mathrm{cn}$$ | tidal tensor $$T_{ij} = \partial_i\partial_j\Phi$$ | Riemann; electric part $$E_{ij}$$ |
+| "Straightest" curves | SR geodesics (cuspidal; smooth face: elastica) | Zel'dovich rays (free fall, frozen tide) | geodesics |
+| Governing tensor | pendulum curvature (elastica face: $$2k\,\mathrm{cn}$$) | tidal tensor $$T_{ij} = \partial_i\partial_j\Phi$$ | Riemann; electric part $$E_{ij}$$ |
 | Where smoothness fails | Maxwell strata, conjugate caustics | pancake caustics, multi-stream folds | conjugate points, horizons |
-| Singularity bookkeeping | Jacobi elliptic functions, $$4K(k^2)$$ | catastrophes $$A_2, A_3, A_4, D_4$$ | focusing theorems |
+| Singularity bookkeeping | Jacobi elliptic clock $$K(k^2)$$ (ties at $$4K$$, SR cut at $$2K$$) | catastrophes $$A_2, A_3, A_4, D_4$$ | focusing theorems |
 
 Same blueprint each time: a homogeneous model, a frame at every point, a variational
 flow along it, and the interesting physics concentrated on the *singular set* where the

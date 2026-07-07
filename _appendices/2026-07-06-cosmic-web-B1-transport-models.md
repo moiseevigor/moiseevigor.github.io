@@ -105,7 +105,11 @@ shell-crossing the second-order term keeps accelerating parcels into and
 through the caustic — the known 2LPT overshoot in collapsed regions. Measured
 on identical initial conditions and identical PM truth, 2LPT's median
 transport error is **8.07 ± 0.39 voxels** against the plain ZA's 4.97 ± 0.27
-(E9) — the "better" perturbative term makes transport *worse* by 62%. The
+(E9; 4.98–5.00 in the transfer runs — seed-to-seed rounding) — the "better"
+perturbative term makes transport *worse* by 62%. The direction of this
+failure is the known 2LPT overshoot in collapsed regions; its magnitude here
+is amplified by our late-time, strongly-clustered EdS setup and a
+particle-median metric that weights collapsed regions heavily. The
 pattern — arresting particles beats perturbing them — is the empirical thread
 of the whole series.
 
@@ -119,9 +123,13 @@ $$
 \partial_D \mathbf{v} + (\mathbf{v}\cdot\nabla)\,\mathbf{v} \;=\; \nu\,\Delta \mathbf{v}, \qquad \nu \to 0^{+}, \qquad \mathbf{v} = \nabla\psi ,
 $$
 
-with $$\psi$$ the velocity potential; the Hopf–Cole transformation solves it
-exactly, and the vanishing-viscosity limit is the **Hopf–Lax formula** (Hopf
-1950; Lax 1957):
+with $$\psi$$ the velocity potential — for the ZA initial data,
+$$\psi_0 = -\Phi^{(1)}$$, minus the displacement potential of the opening
+section (one symbol, two hats: this $$\psi$$ is a potential for *velocity*;
+the $$\psi_{\mathrm{div}}$$ of the MUSCLE section below is the *divergence*
+of the displacement — kept distinct on purpose); the Hopf–Cole transformation
+solves it exactly, and the vanishing-viscosity limit is the **Hopf–Lax
+formula** (Hopf 1950; Lax 1957):
 
 $$
 \psi(\mathbf{x}, D) \;=\; \min_{\mathbf{q}} \left[ \psi_0(\mathbf{q}) + \frac{|\mathbf{x}-\mathbf{q}|^{2}}{2D} \right].
@@ -230,10 +238,11 @@ metric: structure lives in the singularities of the map, not in curved paths.
 
 This derivation predicts the two dynamical signatures the simulations found
 (E2, E4): matter arrives at a filament along straight rays that terminate *on*
-the shock set — generically **transverse** to it (direction statistic
-0.21–0.30 versus the isotropic 1/3) — and after absorption only the tangential
-pre-shock velocity survives: weak along-filament streaming inside the tube
-(0.364 ± 0.010 within ~4 voxels of spines).
+the shock set — generically **transverse** to it (chord-deviation direction
+statistic P2 = ⟨(d̂·e₃)²⟩ of 0.21–0.30 versus the isotropic null ⅓) — and
+after absorption a weak along-filament stream survives inside the tube: the
+same P2 statistic rises to 0.364 ± 0.010 within ~4 voxels of spines, and the
+velocity alignment ⟨\|v̂·e₃\|⟩ ≈ 0.56 sits above its 0.5 null (E2).
 
 ## MUSCLE: spherical collapse as the sticking rule
 
@@ -268,8 +277,9 @@ frozen by the declared optimisation campaign (E5c, E5d; model card: <code>docs/M
   $$\rho_c = 5$$ (in units of the mean).
 - **Damping.** At first crossing, remove $$\beta = 0.6$$ (60%) of the velocity
   components perpendicular to the local filament axis $$e_3$$ (minor
-  eigenvector of the tidal tensor of the model's own density, smoothed at
-  2 h⁻¹Mpc, refreshed every third step); never touch the along-axis component.
+  eigenvector of the tidal tensor computed from the model's own density via
+  the Poisson equation, smoothed at 2 h⁻¹Mpc, refreshed every third step);
+  never touch the along-axis component.
 
 Three fixed numbers ($$\beta$$, $$\rho_c$$, the smoothing scale). Held-out:
 4.52 ± 0.18 voxels against the ZA's 4.98 ± 0.27 (−9%), within 0.05 of the

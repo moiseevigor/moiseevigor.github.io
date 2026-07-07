@@ -43,8 +43,8 @@ the narrative version, with interactive figures built from that data, is
 |---|---|---|
 | **H1** · the orientation lift finds filaments better than the standard curvature detector | no gain on known-truth toys | **✗ Refuted.** Under honest, length-matched scoring the plain detector matches or beats the lift almost everywhere; they only tie at the sparsest sampling. An early, spectacular "win" was a flaw in *our own* scoring. |
 | **H2** · feeding the detector the local gravity (tidal) frame sharpens it | tidal tuning ≤ plain tuning | **✗ Dead.** Tidal weighting *hurts* — even handed a perfect tidal frame. |
-| **H3** · the webs sit on real mass and hot gas | stack signal below the standard skeleton | **✓ Confirmed.** Webs drawn on 274,000 SDSS galaxies sit on measurably hot gas — up to 9σ. |
-| **H4** · matter *travels* along the geometry's shortest paths | geodesics can't beat a straight line | **✗ Refuted in the bulk.** Filaments grow by matter falling *across* them; only a faint along-axis residual survives *inside* a spine. |
+| **H3** · the webs sit on real mass and hot gas | stack signal below the standard skeleton | **△ Split verdict.** Both webs, drawn on 274,000 SDSS galaxies, sit on real hot gas (a 9σ stack — dominated by the tracer galaxies' own halos; the inter-halo *bridge* component is ≈2σ per instrument, matching published amplitudes). But by this bet's own comparative criterion the lift **loses**: the standard skeleton carries more of the gas signal on every statistic, and after halo masking the lift's spines retain essentially none. |
+| **H4** · matter *travels* along the geometry's shortest paths | geodesics can't beat a straight line | **✗ Refuted in the bulk.** Filaments *grow* by matter falling across them; the along-spine drainage toward nodes is real but weak in our measurements (⟨\|v̂·e₃\|⟩ ≈ 0.54–0.57, and our 1 h⁻¹Mpc grid under-resolves it). |
 
 **What survived the refutations** — and it's the interesting part. The lift reads the
 web's *directions* more faithfully than the standard detector (spine–tidal alignment
@@ -65,6 +65,18 @@ the question, the literature, four hypotheses, and — fixed in advance — the 
 result that would kill each one. That pre-registration is <em>why</em> the
 refutations are trustworthy: the program was built to be able to lose, and it did.
 Every experiment runs on a single workstation with public data.
+<p><strong>Deviations from this plan</strong> (an honest pre-registration names its
+own drift): the external comparators DisPerSE/NEXUS were replaced by an in-house
+Hessian ridge baseline (conservative for H1 — the lift lost to a <em>weaker</em>
+opponent — but H3's "at least match DisPerSE" clause was never literally run);
+the E0 testbed became Voronoi-skeleton toys rather than GRF+Zel'dovich
+deformation-tensor truth; M1's match tolerance widened from 0.5 to 2 voxels
+(junctions 3); orientation sampling settled at 42 directions; M5 used 200
+sky-matched controls rather than ≥1000; and H4's verdict came from a
+direction-statistic protocol on transport residuals instead of the original M4
+three-arm race (the isotropic-Jacobi arm was dropped as moot once H4 died in the
+bulk). None of these change a verdict's direction; all are listed so the reader
+can audit them.</p>
 </div>
 
 ## The question
@@ -109,8 +121,10 @@ the peculiar gravitational potential) has an eigenframe, and matter collapses
 first along the eigenvector with the largest eigenvalue (forming sheets or
 "pancakes"), then along the second (filaments), then the third (halos/nodes). The
 **Zel'dovich approximation** (Zel'dovich 1970) captures this with the Lagrangian
-map $$\mathbf{x}(\mathbf{q},t) = \mathbf{q} - D(t)\,\nabla_q \Phi(\mathbf{q})$$,
-where $$D(t)$$ is the linear growth factor[^growth-factor]; the **adhesion model** (Gurbatov,
+map $$\mathbf{x}(\mathbf{q},t) = \mathbf{q} - D(t)\,\nabla_q \Phi^{(1)}(\mathbf{q})$$,
+where $$D(t)$$ is the linear growth factor[^growth-factor] and $$\Phi^{(1)}$$ the
+initial potential rescaled to a displacement potential ($$\nabla^2 \Phi^{(1)} \propto \delta_0$$;
+Appendix B1); the **adhesion model** (Gurbatov,
 Saichev &amp; Shandarin 1989) adds an infinitesimal viscosity (Burgers equation[^burgers])
 so matter *sticks* to sheets and filaments after shell-crossing. Bond, Kofman
 &amp; Pogosyan (1996) showed the filamentary pattern is already encoded in the

@@ -297,7 +297,8 @@ figure below uses the corrected procedure.
 
 The corrected verdict: **the Hessian matches or beats the lift at every
 sampling density**. At the ultra-sparse end (1,200 galaxies) the two are
-statistically tied (Δ = +0.004, p = 0.36); everywhere else the Hessian wins
+indistinguishable at our power (Δ = +0.004, p = 0.36 — a null result, not
+proven equivalence); everywhere else the Hessian wins
 completeness by 4–7 points on 50 of 50 seeds, and junction F1 with it.
 
 <div class="callout">
@@ -441,9 +442,10 @@ and its best case is "as good as the simpler model".
     <strong>Interactive.</strong> Filament-band mass coverage (fraction of
     particles in intermediate-density environments within 3 voxels of the
     spine network) at matched spine length, on gravity-shaped fields.
-    σ∥ = 3, 4.5, 6 are the lift at three cigar lengths. The Hessian leads at
-    both sampling densities regardless of scale — the honest negative that
-    keeps the toy result in its lane.
+    σ∥ = 3, 4.5, 6 are the lift at three cigar lengths. The Hessian leads or
+    ties at both sampling densities and every scale (the σ∥ = 3, 5k case is a
+    statistical tie) — the honest negative that keeps the toy result in its
+    lane.
   </figcaption>
 </figure>
 
@@ -475,9 +477,12 @@ predicts trajectories' deviations from straight-line motion should point
 
 <div class="l-body" markdown="1">
 
-The verdict is blunt: **filaments are built by matter falling across them,
-not flowing along them.** A filament is not a river channelling flow; it is
-a wall being built by things crashing into it from both sides. The lifted
+The verdict is blunt: **filaments are *built* by matter falling across them.**
+The along-filament drainage toward nodes — the standard picture's "highway"
+role — is real and shows in our own numbers (⟨\|v̂·e₃\|⟩ ≈ 0.54–0.57 against a
+0.5 null, and P2 = 0.364 against ⅓ inside spines), but it is weak at our
+1 h⁻¹Mpc resolution and it is not what *builds* the wall: that is transverse
+infall, from both sides. The lifted
 geometry survives only as a *static descriptor* — spine tangents from the
 lift align with the tidal eigenframe[^tidal-eigenframe] (the local set of
 axes gravity itself defines — [Appendix B2](/mathematics/2026/07/07/cosmic-web-B2-tidal-frame/))
@@ -498,7 +503,8 @@ a signal in them is
 [Appendix B5](/mathematics/2026/07/10/cosmic-web-B5-reading-gas-maps/)).
 
 The final experiment left simulations behind: 274,000 real BOSS
-CMASS galaxies[^boss] (z = 0.45–0.55)[^redshift] tiled into eighteen 512 h⁻¹Mpc cubes, spines
+CMASS galaxies[^boss] (z = 0.45–0.55)[^redshift] tiled into eighteen 512 h⁻¹Mpc tiles (the
+redshift shell is ~250 h⁻¹Mpc deep, so radially they are slabs, not cubes), spines
 extracted by both methods at matched length, and the networks stacked
 against Planck maps[^planck-act] with footprint-matched rotated controls. Three things
 happened. First, a **Compton-y detection**[^compton-y] — rising to **~9σ** under the
@@ -557,8 +563,9 @@ subtract the model's prediction from the truth and examine the **residual
 directly**: the adjustment term itself.
 
 The result reverses the original conjecture's orientation while
-confirming its spirit. The residual is large near the web (about 4.4
-h⁻¹Mpc per particle) and it *is* organized by the local tidal frame — but
+confirming its spirit. The residual is large near the web (RMS ≈ 4.4
+h⁻¹Mpc per particle along the filament axis alone; ≈ 8 h⁻¹Mpc in full 3D)
+and it *is* organized by the local tidal frame — but
 it points **across** the filament axis, not along it, at every distance.
 Physically: straight-line transport overshoots *through* forming walls
 and filaments; real gravity arrests that crossing. The correction the
@@ -594,8 +601,10 @@ questions, answered in order:
 
 1. **Does the rule help?** Yes — against full simulation truth from
    identical starting conditions, it beats both plain Zel'dovich and the
-   classical "stick at walls" model (adhesion, 1989), most clearly right
-   at the web. The one tuning knob was deliberately set to favour the
+   isotropic "stick at walls" proxy we built for comparison (inspired by,
+   but much cruder than, the 1989 adhesion model — true adhesion solves a
+   Burgers equation and is <em>not</em> beaten here; Appendix B1), most
+   clearly right at the web. The one tuning knob was deliberately set to favour the
    *competitor*, so the win is conservative.
 2. **Is the remaining error the rule's fault, or its steering's?** The
    rule needs to know each filament's direction, and must estimate it
@@ -617,9 +626,9 @@ including MUSCLE (2016), the best published recipe in this class, which
 our one-rule model statistically ties. The frozen recipe was then
 stress-tested without any re-tuning on universes with different clumpiness,
 different resolution, and a different cosmology — it kept beating plain
-Zel'dovich in every condition, cutting the error by 3–17% — and its truth
-reference was cross-checked against two independent professional
-simulation codes.
+Zel'dovich in every condition — by 2–13% over whole boxes and 9–22% in the
+web-masked regions that matter most — and its truth reference was
+cross-checked against two independent professional simulation codes.
 
 </div><!-- /.l-body -->
 
@@ -628,7 +637,7 @@ simulation codes.
   <figcaption>
     <strong>The model ladder.</strong> Each row is one recipe for predicting
     where matter ends up; the score is how far its predictions land from
-    the true simulated positions (median, in grid cells of about 1.4
+    the true simulated positions (median, in grid cells of 1 h⁻¹Mpc ≈ 4.7
     million light-years — lower is better; held-out test worlds). Grey:
     the two classical recipes — straight-line motion, and sticking at
     walls in all directions equally. Blue: this program's rule, in three
@@ -1206,9 +1215,9 @@ scoped in the
   // ---- model ladder ----
   (function () {
     const MODELS = [
-      ["stick at walls — adhesion (1989)", 5.34, GREY],
+      ["stick at walls — isotropic proxy", 5.34, GREY],
       ["straight lines — Zel'dovich (1970)", 4.98, GREY],
-      ["+ sideways brake, first version (ours)", 4.93, BLUE],
+      ["+ sideways brake, first version (ours)", 4.91, BLUE],
       ["+ better steering (ours)", 4.64, BLUE],
       ["final frozen recipe (ours)", 4.52, BLUE],
       ["best published recipe — MUSCLE (2016)", 4.49, "#2f855a"],

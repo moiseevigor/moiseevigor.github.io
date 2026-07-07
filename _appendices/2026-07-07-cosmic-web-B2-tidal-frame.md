@@ -55,7 +55,13 @@ symmetric, it has an orthonormal **eigenframe**: eigenvectors $$e_1, e_2, e_3$$
 with eigenvalues ordered $$\lambda_1 \ge \lambda_2 \ge \lambda_3$$.
 A positive eigenvalue means
 matter is being compressed along that eigenvector; the ordering says the
-squeeze is strongest along $$e_1$$ and weakest along $$e_3$$.
+squeeze is strongest along $$e_1$$ and weakest along $$e_3$$ — so the
+**filament axis is $$e_3$$**, the *bottom* eigenvector. One convention trap,
+flagged once for the whole series: the results post's ridge detector uses the
+Hessian of the *density*, where — under the same $$\lambda_1 \ge \lambda_2
+\ge \lambda_3$$ ordering — the filament axis is the *top* eigenvector. Same
+symbol, opposite end of the spectrum; potential-Hessian $$e_3$$ here, density-Hessian
+$$e_1$$ there.
 
 ## Collapse happens one axis at a time
 
@@ -226,7 +232,10 @@ the unit position and velocity residuals on the filament axis (isotropic
 null 1/3); RMS R∥ is the root-mean-square residual component along e₃;
 RMS R⊥ per axis is the same for each perpendicular axis; R∥/R⊥ is their
 ratio (1 = isotropic correction, above 1 = along-filament, below 1 =
-across-filament).
+across-filament). One interpretive caveat: in the outermost bin (16–64
+voxels) "the nearest spine" is tens of h⁻¹Mpc away, so its $$e_3$$ is no
+longer a physically meaningful local frame — the residual anisotropy there
+reflects sheet-and-void kinematics, not filament-relative infall.
 
 Three facts follow. **The correction is large where structure forms** —
 RMS ≈ 4.4 voxels within 2 voxels of spines. **It is organised by the tidal

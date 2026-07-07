@@ -59,9 +59,13 @@ with $$\sigma_{\mathrm{T}}$$ the Thomson cross-section, $$m_e c^2$$ the
 electron rest energy, $$n_e$$ the electron density and $$T_e$$ the electron
 temperature. y is dimensionless and, usefully, independent of redshift: a
 parcel of hot gas contributes the same y whether nearby or distant. Galaxy
-clusters reach y ~ 10⁻⁴–10⁻⁵; the warm–hot intergalactic medium (WHIM)
-expected in filaments sits near y ~ 10⁻⁸ — a hundred times below the noise
-per pixel of the all-sky Planck y map. Both maps used in the series are
+clusters reach y ~ 10⁻⁴–10⁻⁵; the warm–hot intergalactic medium (WHIM,
+gas at 10⁵–10⁷ K) sits near y ~ 10⁻⁸ for the *stacked LRG-pair bridges*
+targeted here (prominent individual intercluster bridges reach
+10⁻⁷–10⁻⁶) — around a hundred times below the noise per pixel of the
+all-sky Planck y map. tSZ is the filament probe of choice because y scales
+with gas density $$n_e$$ to the first power, where X-ray emission scales as
+$$n_e^2$$ and so collapses in diffuse gas. Both maps used in the series are
 component-separated y maps: Planck (10′ beam) and the Atacama Cosmology
 Telescope's ACT DR6 (1.6′ beam), where the beam is the instrument's
 angular resolution.
@@ -94,7 +98,10 @@ foregrounds (dust, and the residual it leaves in a y map) vary with
 latitude, so signal and controls sampled different foreground exposure.
 The second pass (E3b) drew 200 control sets rejection-matched to the spine
 points' galactic-latitude histogram in 2° bins, so no latitude-dependent
-foreground can contribute. The detection **strengthened**: 8.99σ (Hessian)
+foreground can contribute. The detection **strengthened**: 8.99σ (Hessian; per-bin SNRs can exceed
+the overall figure because neighbouring bins are correlated — and, with 200
+empirical controls, σ's this large are Gaussian-tail extrapolations of the
+measured null, not counted exceedances)
 and 6.86σ (lift). A stricter control does not necessarily shrink a real
 signal — it removes a variance term that was diluting it.
 
@@ -123,7 +130,7 @@ physically real (they trace hot gas at high significance), and isolating
   <figcaption>
     <strong>Hot gas sits on the extracted web — experiment E3.</strong> Stacked Planck
     Compton-<em>y</em> (a hot-gas thermometer) around the filament spines drawn on 274,075
-    BOSS galaxies, as excess over 70+ sky-matched control stacks, versus angular distance
+    BOSS galaxies, as excess over 200 sky-matched control stacks, versus angular distance
     from the spine. Both detectors show gas strongly concentrated on the spine and falling
     outward; the overall stacks reach <strong>9.0σ</strong> (Hessian) and <strong>6.9σ</strong>
     (orientation lift), so the networks are physically real. A halo-mask test showed the
@@ -201,11 +208,13 @@ physically real (they trace hot gas at high significance), and isolating
 The obvious sharper instrument, ACT DR6 at 1.6′, at first made things
 *worse*: the same spine stack dropped to 2.95σ unmasked (versus Planck's
 9σ on the overlapping footprint), and the masked residual stayed below the
-pre-registered 3σ gate (1.77σ at 3′ masking; E3c). The diagnosis, not a
-mere excuse, is a scale mismatch: the spines are projected through a
-~250 h⁻¹Mpc redshift shell, so their stacked signal is coherent on
-*degree* scales — exactly the scales a ground-based map's filtering
-suppresses, while it excels at arcminutes. The lesson: an analysis design
+pre-registered 3σ gate (1.77σ at 3′ masking; E3c). The working diagnosis is
+a scale mismatch: the spines are projected through a ~250 h⁻¹Mpc redshift
+shell, so their stacked signal is coherent on *degree* scales, where a
+ground-based map is least reliable while excelling at arcminutes. (A caveat
+belongs here: ACT DR6's y-map co-adds Planck information at large scales,
+so pure filtering cannot be the whole story — transfer-function and
+footprint effects on degree scales remain to be pinned down.) The lesson: an analysis design
 must place its signal at the angular scales its instrument preserves.
 E3c's prescription — go small-scale, individual structures instead of
 shell projections — became the pair-bridge design.
@@ -242,7 +251,7 @@ ring controls (which sit farther from it), manufacturing a fake bridge —
 |---|---|---|
 | pair bootstrap errors (E3d-v2) | 5.24σ (2.28×10⁻⁸) | 19.3σ (2.97×10⁻⁸) |
 | sky-patch jackknife (E3e) | 3.30σ | 7.99σ |
-| null-pair subtracted (E3e) | ≈1.6σ (1.4×10⁻⁸ ± 0.9) | ≈2.2σ (1.2×10⁻⁸ ± 0.5) |
+| null-pair subtracted (E3e) | ≈1.6σ (1.4×10⁻⁸ ± 0.9) | ≈2.4σ (1.2×10⁻⁸ ± 0.5) |
 
 The bottom row is the physically meaningful bridge amplitude:
 **~1.2–1.4×10⁻⁸, at ≈2σ per instrument**, mutually consistent between two
