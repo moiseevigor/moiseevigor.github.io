@@ -19,7 +19,7 @@ series: geometry-of-cosmic-web
 series_title: "Geometry of the Cosmic Web"
 series_part: B1
 permalink: /mathematics/2026/07/06/cosmic-web-B1-transport-models/
-published: true
+published: false
 comments: true
 ---
 
@@ -133,6 +133,84 @@ particle-form proxy is **isotropic sticking**: at shell-crossing, damp *all*
 velocity components. Measured, it overcorrects — 5.34 ± 0.15 voxels, worse
 than the plain ZA's 5.00 (E5) — and destroys small-scale phase fidelity,
 because it kills the along-filament motion real gravity preserves (E8).
+
+</div><!-- /.l-body -->
+
+<figure class="l-middle" id="fig-transport">
+  <div style="text-align:center; margin-bottom:0.5em;">
+    <button class="fig-toggle active" id="tr-adh">adhesion (sticks)</button>
+    <button class="fig-toggle" id="tr-za">Zel'dovich (sails through)</button>
+  </div>
+  <div style="text-align:center; font-family:'Source Sans 3',sans-serif; font-size:12.5px; color:#555; margin-bottom:0.3em;">
+    early&nbsp;<input type="range" id="tr-D" min="0" max="120" value="88" style="width:210px; vertical-align:middle; accent-color:#1565c0;">&nbsp;collapsed &nbsp;<span style="color:#888;">(growth factor)</span>
+  </div>
+  <div id="cw-transport" style="text-align:center;"></div>
+  <figcaption>
+    <strong>Two transport models, one collapse.</strong> 600 matter parcels, initially
+    uniform, displaced by a fixed initial push; the curve is density (parcels per bin).
+    Drag from early times to late. Under <strong>Zel'dovich</strong> matter moves on
+    straight rays at constant speed, so where a wall forms the parcels <em>sail straight
+    through</em> and the peak smears (multi-streaming). Under <strong>adhesion</strong> an
+    infinitesimal viscosity makes colliding streams <em>stick</em>, so the same walls
+    sharpen into persistent structures — the sheets, filaments and nodes of the web (here
+    the 1-D shock solution, a monotone pool-adjacent-violators rearrangement). The faint
+    line shows the other model for comparison. This streaming-versus-sticking split is
+    exactly why filaments are the <em>shocks</em> of the flat transport map (next section).
+  </figcaption>
+</figure>
+
+<script>
+(function () {
+  const host = document.getElementById("cw-transport");
+  if (!host) return;
+  const ns = "http://www.w3.org/2000/svg";
+  const SANS = "'Source Sans 3', system-ui, sans-serif";
+  const N = 600, AMP = 0.13, NB = 64;
+  const q = [], v = [];
+  for (let i = 0; i < N; i++) { const Q = (i + 0.5) / N; q.push(Q); v.push(Math.sin(4 * Math.PI * Q)); }
+  function pava(x) {                       // monotone rearrangement = 1-D adhesion shock solution
+    const st = [];
+    for (let i = 0; i < x.length; i++) {
+      let cur = { s: x[i], n: 1, val: x[i] };
+      while (st.length && st[st.length - 1].val >= cur.val) { const p = st.pop(); cur.s += p.s; cur.n += p.n; cur.val = cur.s / cur.n; }
+      st.push(cur);
+    }
+    const out = []; for (const b of st) for (let k = 0; k < b.n; k++) out.push(b.val); return out;
+  }
+  function hist(x) { const h = new Array(NB).fill(0); for (const xi of x) { let b = Math.floor(xi * NB); if (b < 0) b = 0; if (b >= NB) b = NB - 1; h[b]++; } return h; }
+  const W = 560, H = 300, xL = 40, xR = 540, yT = 24, yB = 236;
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.style.maxWidth = "560px"; svg.style.width = "100%";
+  host.appendChild(svg);
+  const el = (t, a, txt) => { const e = document.createElementNS(ns, t); for (const k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; return e; };
+  const slider = document.getElementById("tr-D");
+  let mode = "adhesion";
+  function render() {
+    const D = (+slider.value) / 100;
+    const z = q.map((Q, i) => Q + D * AMP * v[i]);
+    const hz = hist(z), ha = hist(pava(z));
+    const mx = Math.max(...hz, ...ha, 1);
+    const sel = mode === "adhesion" ? ha : hz, oth = mode === "adhesion" ? hz : ha;
+    const col = mode === "adhesion" ? "#2f855a" : "#2b6cb0";
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    svg.appendChild(el("line", { x1: xL, y1: yB, x2: xR, y2: yB, stroke: "#333", "stroke-width": 1 }));
+    const bw = (xR - xL) / NB, Yb = c => yB - (c / mx) * (yB - yT);
+    sel.forEach((c, b) => { if (c === 0) return; svg.appendChild(el("rect", { x: xL + b * bw + 0.4, y: Yb(c), width: bw - 0.8, height: yB - Yb(c), fill: col, "fill-opacity": 0.82 })); });
+    svg.appendChild(el("polyline", { points: oth.map((c, b) => `${xL + (b + 0.5) * bw},${Yb(c)}`).join(" "), fill: "none", stroke: "#bbb", "stroke-width": 1.2 }));
+    svg.appendChild(el("text", { x: (xL + xR) / 2, y: yB + 22, "text-anchor": "middle", "font-size": 11, fill: "#333", "font-family": SANS }, "position along the box"));
+    svg.appendChild(el("text", { x: xL, y: yT - 10, "text-anchor": "start", "font-size": 10.5, fill: "#555", "font-family": SANS }, "density of matter"));
+    const msg = mode === "adhesion" ? "streams stick → sharp, persistent structures" : "straight rays sail through → the peak smears";
+    svg.appendChild(el("text", { x: xR, y: yT - 10, "text-anchor": "end", "font-size": 11, fill: col, "font-weight": 600, "font-family": SANS }, msg));
+  }
+  slider.addEventListener("input", render);
+  const bA = document.getElementById("tr-adh"), bZ = document.getElementById("tr-za");
+  bA.onclick = () => { mode = "adhesion"; bA.classList.add("active"); bZ.classList.remove("active"); render(); };
+  bZ.onclick = () => { mode = "zeldovich"; bZ.classList.add("active"); bA.classList.remove("active"); render(); };
+  render();
+})();
+</script>
+
+<div class="l-body" markdown="1">
 
 ## The theorem chain: flat optimal transport, filaments as shocks
 

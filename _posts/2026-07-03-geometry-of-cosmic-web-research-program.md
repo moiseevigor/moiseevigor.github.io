@@ -11,6 +11,7 @@ subtitle: >
 date: 2026-07-03 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, SE3, cosmic-web, filaments, cosmology, optimal-control]
+image: /public/img/posts/cosmic-web-1.svg
 description: >
   Scoping document for a research program connecting the sub-Riemannian geometry of
   the "Geometry of Seeing" series to cosmic-web filaments: literature review,
@@ -20,56 +21,50 @@ series: geometry-of-cosmic-web
 series_title: "Geometry of the Cosmic Web"
 series_part: 1
 comments: true
-published: true
+published: false
 ---
 
 <div class="l-body" markdown="1">
 
-<div class="callout">
-<div class="callout-title">Status — the program has been run to completion</div>
-<p>This document is the <em>plan</em>, written before the experiments. The
-plan was then executed in full, and every hypothesis below now carries a
-verdict. The story of what happened — with interactive figures built from
-the experiment data — is
-<a href="{% post_url 2026-07-04-cosmic-web-two-models %}">Part 2: Two Ways
-to See a Cosmic Filament</a>. In brief:</p>
-<ul>
-<li><strong>The detector claim (H1) died</strong> — and the way it died is
-the best part. It first appeared to win with spectacular statistics; a
-flaw in our own scoring was manufacturing the win, and the corrected race
-reversed the verdict. The simpler standard method matches or beats the
-lifted one nearly everywhere.</li>
-<li><strong>The physics claim (H4) died in the bulk</strong> — matter
-builds filaments by falling <em>across</em> them, not by flowing along
-them. The companion theory question (T1) resolved the same way:
-filaments are pile-ups (shocks) of the matter flow, not shortest
-paths.</li>
-<li><strong>The real-sky test (H3) succeeded</strong> — the webs both
-methods draw on 274,000 real galaxies sit on measurably hot gas (up to
-9σ under the strictest controls), so the extracted networks are
-physically real.</li>
-<li><strong>One clean survivor:</strong> the lifted geometry reads the
-web's <em>directions</em> better than the standard method, in
-simulations and on the real sky alike.</li>
-<li><strong>An unplanned product:</strong> chasing "what correction does
-the standard transport model actually need?" produced a one-rule model —
-brake sideways at the web — that performs within a hair of its
-theoretical best (see Part 2 and
-<a href="/mathematics/2026/07/09/cosmic-web-B4-transverse-damping/">Appendix B4</a>).</li>
-</ul>
-<p>Full experiment reports: <code>research/cosmic-web/docs/</code> in the
-repository, entry point <code>SYNTHESIS.md</code>.</p>
-</div>
+**The question, in one breath.** Your visual cortex completes a broken contour by
+lifting the image into a space of *positions and orientations* and tracing the
+straightest-possible path there. A cosmic filament is also a broken, oriented
+curve buried in a noisy cloud of points. So: is that same geometry a better
+**instrument** for finding filaments — or even part of the **physics** that builds
+them? We ran the whole program end to end. It mostly answered *no* — in the most
+useful way a program can.
+
+**The four bets, and how they landed.** Every verdict is drawn from the experiment
+data in `research/cosmic-web/` (full reports in `docs/`, start at `SYNTHESIS.md`);
+the narrative version, with interactive figures built from that data, is
+[Part 2]({% post_url 2026-07-04-cosmic-web-two-models %}).
+
+| The bet | What would kill it | Verdict |
+|---|---|---|
+| **H1** · the orientation lift finds filaments better than the standard curvature detector | no gain on known-truth toys | **✗ Refuted.** Under honest, length-matched scoring the plain detector matches or beats the lift almost everywhere; they only tie at the sparsest sampling. An early, spectacular "win" was a flaw in *our own* scoring. |
+| **H2** · feeding the detector the local gravity (tidal) frame sharpens it | tidal tuning ≤ plain tuning | **✗ Dead.** Tidal weighting *hurts* — even handed a perfect tidal frame. |
+| **H3** · the webs sit on real mass and hot gas | stack signal below the standard skeleton | **✓ Confirmed.** Webs drawn on 274,000 SDSS galaxies sit on measurably hot gas — up to 9σ. |
+| **H4** · matter *travels* along the geometry's shortest paths | geodesics can't beat a straight line | **✗ Refuted in the bulk.** Filaments grow by matter falling *across* them; only a faint along-axis residual survives *inside* a spine. |
+
+**What survived the refutations** — and it's the interesting part. The lift reads the
+web's *directions* more faithfully than the standard detector (spine–tidal alignment
+0.73–0.76 vs 0.67; a cleaner **anisotropy descriptor**). A hybrid of the two gains
+purity at junctions. And — unplanned — chasing *"what does the standard transport
+model actually need?"* produced a one-rule model, **brake sideways at the web**, that
+lands within a hair of its theoretical best ([Part 2]({% post_url 2026-07-04-cosmic-web-two-models %}); [Appendix B4](/mathematics/2026/07/09/cosmic-web-B4-transverse-damping/)).
+
+**The full series.**
+
+- **The story** — **Part 1** *(this page)* the program and its verdicts · **[Part 2](/mathematics/2026/07/04/cosmic-web-two-models/)** the results for a general reader, with interactive figures from the real data · **Part 3** *(upcoming)* *From Cosmic Filaments to Curved Spacetime* — the same geometry, carried up to gravity itself.
+- **The machinery** — **[B1](/mathematics/2026/07/06/cosmic-web-B1-transport-models/)** transport models · **[B2](/mathematics/2026/07/07/cosmic-web-B2-tidal-frame/)** the tidal frame · **[B3](/mathematics/2026/07/08/cosmic-web-B3-honest-benchmarks/)** honest benchmarks · **[B4](/mathematics/2026/07/09/cosmic-web-B4-transverse-damping/)** the transverse-damping model · **[B5](/mathematics/2026/07/10/cosmic-web-B5-reading-gas-maps/)** reading the sky's hot gas.
 
 <div class="callout">
-<div class="callout-title">What this document is</div>
-A <strong>scoping document</strong>, not a result. It defines a research program:
-the question, what the literature already says, the candidate edge, the caveats,
-four hypotheses with falsifiable predictions and the metrics that will judge them,
-and an ordered sequence of experiments on public data. Every experiment below can
-be run on a single workstation with public datasets. The program follows the loop
-<em>literature → edge &amp; caveats → hypothesis → test → analysis → next
-hypothesis</em>, and each hypothesis states in advance what result would kill it.
+<div class="callout-title">What this page is — and why the verdicts above can be trusted</div>
+What follows is the <strong>original plan, written before any experiment ran</strong>:
+the question, the literature, four hypotheses, and — fixed in advance — the exact
+result that would kill each one. That pre-registration is <em>why</em> the
+refutations are trustworthy: the program was built to be able to lose, and it did.
+Every experiment runs on a single workstation with public data.
 </div>
 
 ## The question
@@ -121,16 +116,13 @@ so matter *sticks* to sheets and filaments after shell-crossing. Bond, Kofman
 &amp; Pogosyan (1996) showed the filamentary pattern is already encoded in the
 initial tidal field around proto-clusters — hence "cosmic web".
 
-In plain words: gravity does not crush a blob of matter evenly. The
-surrounding matter stretches it more strongly along some directions than
-others, and the blob gives way one axis at a time — first flattening into a
-sheet, then draining into a filament, finally pooling into a node. The
-animation below plays this sequence; the three arrows are the tidal
-directions, ordered by how hard each squeezes. (The transport models are
-developed from scratch in
-[Appendix B1](/mathematics/2026/07/06/cosmic-web-B1-transport-models/); the
-tidal frame in
-[Appendix B2](/mathematics/2026/07/07/cosmic-web-B2-tidal-frame/).)
+Gravity doesn't crush a blob evenly: it pulls hardest along one axis, so the blob
+gives way one axis at a time — flattening into a sheet, draining into a filament,
+finally pooling into a node. The animation below plays that sequence; the three
+arrows are the tidal directions, ordered by how hard each squeezes. (Transport
+models built from scratch in
+[Appendix B1](/mathematics/2026/07/06/cosmic-web-B1-transport-models/); the tidal
+frame in [Appendix B2](/mathematics/2026/07/07/cosmic-web-B2-tidal-frame/).)
 
 [^subriemannian]: A geometry in which movement is allowed only along certain directions at each point, and path length is measured under that restriction; its shortest paths trade distance travelled against turning (see Glossary).
 
@@ -164,6 +156,92 @@ tidal frame in
     axis gravity squeezes <em>last</em>.
   </figcaption>
 </figure>
+
+<figure class="l-middle" id="fig-infall">
+  <div style="text-align:center; margin-bottom:0.6em;">
+    <button class="fig-toggle active" id="e2-btn-p2">deviation direction</button>
+    <button class="fig-toggle" id="e2-btn-p1">velocity alignment</button>
+  </div>
+  <div id="cw-infall" style="text-align:center;"></div>
+  <figcaption>
+    <strong>What matter actually does — experiment E2.</strong> In four N-body
+    simulations (50,000 tracked particles each), the bars show how a particle's path
+    bends relative to the filament axis <em>e₃</em>, binned by distance to the nearest
+    filament spine (1 voxel ≈ 1&thinsp;<em>h</em>⁻¹Mpc). The dashed line is the
+    isotropic null — no preferred direction. Far from a filament the signal sits
+    <em>well below</em> the null: infall is <strong>transverse</strong>, matter falling
+    <em>across</em> the forming filament rather than sliding along it; only within a few
+    voxels of the spine does it tip weakly parallel. This is the measured refutation of
+    the boldest hypothesis (H4): filaments are built by sideways collapse, so a
+    "shortest path along the axis" is not the formation mechanism. Toggle to
+    <em>velocity alignment</em> ⟨|<em>v</em>·<em>e₃</em>|⟩ (null 0.5): a flat, weak
+    ≈0.56 everywhere. Full analysis in
+    <a href="{% post_url 2026-07-04-cosmic-web-two-models %}">Part 2</a>; every number is
+    from <code>research/cosmic-web/artifacts/e2_results.json</code>.
+  </figcaption>
+</figure>
+
+<script>
+(function () {
+  const host = document.getElementById("cw-infall");
+  if (!host) return;
+  const ns = "http://www.w3.org/2000/svg";
+  const SANS = "'Source Sans 3', system-ui, sans-serif";
+  const MONO = "'JetBrains Mono', monospace";
+  const BINS = ["0–2", "2–4", "4–8", "8–16", "16–64"];
+  const DATA = {
+    p2: { vals: [0.364, 0.349, 0.327, 0.233, 0.208],
+          sd:   [0.010, 0.004, 0.005, 0.005, 0.014],
+          nul: 1/3, ymax: 0.46,
+          ylab: "⟨(dev·e₃)²⟩   direction of the path deviation",
+          nlab: "isotropic null (1/3)" },
+    p1: { vals: [0.559, 0.537, 0.544, 0.572, 0.564],
+          sd:   [0.013, 0.008, 0.011, 0.009, 0.020],
+          nul: 0.5, ymax: 0.70,
+          ylab: "⟨|v·e₃|⟩   velocity alignment with the axis",
+          nlab: "null (0.5)" }
+  };
+  const W = 560, H = 330, mL = 46, mR = 14, mT = 20, mB = 64;
+  const x0 = mL, x1 = W - mR, y0 = mT, y1 = H - mB;
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  svg.style.maxWidth = "560px"; svg.style.width = "100%";
+  host.appendChild(svg);
+  const el = (tag, a, txt) => { const e = document.createElementNS(ns, tag);
+    for (const k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; return e; };
+
+  function render(key) {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    const d = DATA[key], Y = v => y1 - (v / d.ymax) * (y1 - y0);
+    const bw = (x1 - x0) / BINS.length;
+    svg.appendChild(el("line", { x1: x0, y1: Y(0), x2: x1, y2: Y(0), stroke: "#e0e0e0", "stroke-width": 1 }));
+    // null line
+    const yn = Y(d.nul);
+    svg.appendChild(el("line", { x1: x0, y1: yn, x2: x1, y2: yn, stroke: "#888", "stroke-width": 1.5, "stroke-dasharray": "5 4" }));
+    svg.appendChild(el("text", { x: x1 - 2, y: yn - 5, "text-anchor": "end", "font-size": 11, fill: "#888", "font-family": SANS }, d.nlab));
+    svg.appendChild(el("text", { x: x0 - 3, y: y0 - 6, "text-anchor": "start", "font-size": 11, fill: "#555", "font-family": SANS }, d.ylab));
+    d.vals.forEach((v, i) => {
+      const cx = x0 + bw * (i + 0.5), bwid = bw * 0.5, bx = cx - bwid / 2;
+      const col = key === "p1" ? "#2b6cb0" : (v < d.nul ? "#2b6cb0" : "#dd6b20");
+      svg.appendChild(el("rect", { x: bx, y: Y(v), width: bwid, height: y1 - Y(v), fill: col, "fill-opacity": 0.82, rx: 1.5 }));
+      const eT = Y(v + d.sd[i]), eB = Y(v - d.sd[i]);
+      svg.appendChild(el("line", { x1: cx, y1: eT, x2: cx, y2: eB, stroke: "#333", "stroke-width": 1 }));
+      svg.appendChild(el("line", { x1: cx - 3, y1: eT, x2: cx + 3, y2: eT, stroke: "#333", "stroke-width": 1 }));
+      svg.appendChild(el("line", { x1: cx - 3, y1: eB, x2: cx + 3, y2: eB, stroke: "#333", "stroke-width": 1 }));
+      svg.appendChild(el("text", { x: cx, y: Y(v) - 7, "text-anchor": "middle", "font-size": 11, fill: "#333", "font-family": MONO }, v.toFixed(3)));
+      svg.appendChild(el("text", { x: cx, y: y1 + 16, "text-anchor": "middle", "font-size": 11, fill: "#555", "font-family": SANS }, BINS[i]));
+    });
+    svg.appendChild(el("line", { x1: x0, y1: y1, x2: x1, y2: y1, stroke: "#333", "stroke-width": 1 }));
+    svg.appendChild(el("text", { x: (x0 + x1) / 2, y: y1 + 40, "text-anchor": "middle", "font-size": 11.5, fill: "#333", "font-family": SANS }, "distance to filament spine  (voxels ≈ h⁻¹Mpc)"));
+    if (key === "p2")
+      svg.appendChild(el("text", { x: x0 + 4, y: yn + 15, "text-anchor": "start", "font-size": 10.5, fill: "#2b6cb0", "font-family": SANS }, "below = transverse infall (across the axis)"));
+  }
+  const bP2 = document.getElementById("e2-btn-p2"), bP1 = document.getElementById("e2-btn-p1");
+  bP2.onclick = () => { render("p2"); bP2.classList.add("active"); bP1.classList.remove("active"); };
+  bP1.onclick = () => { render("p1"); bP1.classList.add("active"); bP2.classList.remove("active"); };
+  render("p2");
+})();
+</script>
 
 <div class="l-body" markdown="1">
 
@@ -225,10 +303,9 @@ observations motivate the lift:
 **Jacobi/Maupertuis metric.**[^jacobi] For a test particle with conserved energy $$E$$ in a
 static potential $$\Phi$$, trajectories are geodesics of the conformally flat
 Riemannian metric $$g^{\mathrm{J}} = 2m\,(E - \Phi)\, g_{\mathrm{Euclid}}$$. Paths
-are "cheap" where $$\Phi$$ is deep — along potential valleys, i.e. filaments.
-In plain words: matter should prefer routes through gravity's valleys the
-way light bends toward denser glass — and the valleys of the cosmic
-potential *are* the filaments.
+are "cheap" where $$\Phi$$ is deep — along potential valleys, i.e. filaments:
+matter should prefer gravity's valleys the way light bends toward denser glass,
+and those valleys *are* the filaments.
 **Caveat, stated up front:** in an expanding universe with a growing potential,
 energy is *not* conserved along comoving trajectories, so the Jacobi construction
 does not literally apply. Making the argument respectable in comoving coordinates
@@ -253,24 +330,17 @@ to be calibrated (see H2/E1). This is the direct 3D analogue of the $$\mathrm{SE
 [Part 1]({% post_url 2026-04-25-geometry-of-seeing-visual-cortex-se2 %}), with the
 physics entering through the coefficients instead of being bolted on afterwards.
 
-In plain words: imagine the box of galaxies copied once for every possible
-direction, and heat spreading through this stack of copies — flowing easily
-*along* each copy's own direction, reluctantly sideways, and only slowly
-leaking between copies of nearby directions. Structures aligned with a copy's
-direction glow; everything else washes out. The equation above is that
-heat-flow rule, with the local gravity field (the $$\lambda_i$$) deciding how
-eager the flow is in each direction.
+Picture the box of galaxies copied once for every direction, with heat spreading
+through the stack — easily *along* each copy's own direction, reluctantly
+sideways, and only slowly between copies of nearby directions. Structures aligned
+with a copy's direction glow; the rest washes out. The equation above is that
+rule, with the local gravity field (the $$\lambda_i$$) setting how eager the flow
+is in each direction.
 
 ## Hypotheses
 
-In plain words, the four bets, from safest to boldest: **H1** — the
-orientation-aware eye traces filaments better than the standard one.
-**H2** — telling that eye about the local gravity field improves it
-further. **H3** — the webs it draws sit on real mass and gas, not just on
-galaxy counts. **H4** — the boldest — matter itself *travels* along the
-geometry's preferred paths, so the lift is part of the physics, not just
-a detector. Each bet comes with a pre-registered way to lose, stated
-below.
+The four bets and their verdicts are tabled at the top of this page; here is each
+one in full, with the pre-registered result fixed in advance that would kill it.
 
 Conventions used throughout: tidal eigenvalues ordered $$\lambda_1 \ge \lambda_2 \ge \lambda_3$$ with eigenvectors $$e_1, e_2, e_3$$;
 filament axis along $$e_3$$. "Spine" = 1D curve set output by a filament finder.
@@ -308,14 +378,13 @@ and the program remains a methods paper (C1).
 
 ## Experiments, in order
 
-In plain words, the campaign: first settle whether the theory even
-permits the boldest claim (T1); race the two methods on toy universes
-where the answer is known (E0); repeat on real simulated gravity (E1);
-watch matter actually move and ask whose paths it follows (E2); and only
-then take the surviving method to the real sky and check its webs
-against maps of mass and hot gas (E3). Each experiment gates the next; a
-kill criterion at any stage stops the branch, and the analysis of each
-stage sets the coefficients or priors of the following one.
+The campaign, end to end: first settle whether the theory even permits the
+boldest claim (T1); race the two methods on toy universes where the answer is
+known (E0); repeat on real simulated gravity (E1); watch matter actually move and
+ask whose paths it follows (E2); and only then take the surviving method to the
+real sky, checking its webs against maps of mass and hot gas (E3). Each experiment
+gates the next; a kill criterion stops a branch, and each stage's analysis sets
+the next stage's coefficients.
 
 **T1 (theory, parallel track).** Derive — or refute — a Jacobi-type variational
 principle for the Zel'dovich/adhesion flow in comoving coordinates, giving the
@@ -563,10 +632,6 @@ volumes or sky areas. Parameter count is part of the model comparison (H2).
 </div>
 </div><!-- /.l-body -->
 
-<style>
-figure.l-middle { max-width: calc(var(--body-w) + 32px + var(--gutter-w)); padding: 0 14px; box-sizing: border-box; overflow-x: hidden; }
-figure.l-middle svg { max-width: 100%; height: auto; }
-</style>
 <script>
 (function () {
   const host = document.getElementById("cw-collapse");

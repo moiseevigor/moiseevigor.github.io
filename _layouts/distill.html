@@ -91,23 +91,207 @@ layout: default
 <script>
 (function () {
   function wire() {
-    document.querySelectorAll('.annotated-term[data-note]').forEach(function (term) {
+    document.querySelectorAll('.annotated-term[data-note]').forEach(function (term, i) {
       var note = document.getElementById(term.dataset.note);
       if (!note) return;
-      term.addEventListener('mouseenter', function () {
-        note.classList.add('is-highlighted');
-        term.classList.add('is-active');
+      var n = i + 1;
+
+      // Number the hand-authored notes the same way relocated footnotes are
+      // numbered, so every distill page reads consistently. Superscript after
+      // the term, matching number prepended to the margin note.
+      var sup = term.nextElementSibling;
+      if (!sup || !sup.classList.contains('sidenote-ref')) {
+        sup = document.createElement('sup');
+        sup.className = 'sidenote-ref';
+        sup.textContent = n;
+        term.parentNode.insertBefore(sup, term.nextSibling);
+      }
+      if (!note.querySelector('.sidenote-fn-num')) {
+        var num = document.createElement('sup');
+        num.className = 'sidenote-fn-num';
+        num.textContent = n;
+        note.insertBefore(document.createTextNode(' '), note.firstChild);
+        note.insertBefore(num, note.firstChild);
+      }
+
+      var mark = function (on) {
+        note.classList.toggle('is-highlighted', on);
+        term.classList.toggle('is-active', on);
+        sup.classList.toggle('is-active', on);
+      };
+      [term, sup, note].forEach(function (el) {
+        el.addEventListener('mouseenter', function () { mark(true); });
+        el.addEventListener('mouseleave', function () { mark(false); });
       });
-      term.addEventListener('mouseleave', function () {
-        note.classList.remove('is-highlighted');
-        term.classList.remove('is-active');
-      });
-      note.addEventListener('mouseenter', function () { term.classList.add('is-active'); });
-      note.addEventListener('mouseleave', function () { term.classList.remove('is-active'); });
     });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wire);
   else wire();
+}());
+</script>
+
+<script>
+/*
+ * Relocate kramdown's bottom footnotes into margin sidenotes, so every distill
+ * post reads like the hand-authored <aside> notes in the visual-cortex article
+ * instead of piling references at the page bottom. Progressive enhancement:
+ * with JS off, the kramdown .footnotes block stays as a working fallback.
+ * Runs on window.load so KaTeX (defer + onload) has already rendered the math
+ * inside the source .footnotes block we clone from.
+ */
+(function () {
+  var GAP = 12;              // px between two stacked notes
+  var pairs = [];            // {aside, sup} in document order
+
+  function relocateFootnotes() {
+    var article = document.querySelector('.d-article');
+    if (!article) return;
+    var block = article.querySelector('.footnotes');
+    if (!block) return;
+
+    var items = {};
+    block.querySelectorAll('li[id^="fn:"]').forEach(function (li) { items[li.id] = li; });
+
+    var placed = [];
+    article.querySelectorAll('sup[id^="fnref:"]').forEach(function (sup) {
+      var link = sup.querySelector('a.footnote');
+      if (!link) return;
+      var fnId = (link.getAttribute('href') || '').replace(/^#/, '');   // "fn:foo"
+      var li = items[fnId];
+      if (!li) return;
+
+      // Climb to the element that is a direct child of an .l-body wrapper, so
+      // the aside we insert next to it becomes a `.l-body > aside` sidenote.
+      var host = sup;
+      while (host.parentElement &&
+             !(host.parentElement.classList && host.parentElement.classList.contains('l-body'))) {
+        host = host.parentElement;
+      }
+      if (!host.parentElement) return;   // ref not inside an .l-body → leave it in the bottom list
+
+      var num = link.textContent.trim();
+      var aside = document.createElement('aside');
+      aside.className = 'marginnote sidenote-fn';
+      aside.id = 'sn:' + fnId.slice(3);
+
+      var clone = li.cloneNode(true);
+      var back = clone.querySelector('a.reversefootnote');
+      if (back) back.remove();
+      var numHtml = '<sup class="sidenote-fn-num">' + num + '</sup> ';
+      var firstP = clone.querySelector('p');
+      if (firstP) firstP.innerHTML = numHtml + firstP.innerHTML;
+      else clone.innerHTML = numHtml + clone.innerHTML;
+      aside.innerHTML = clone.innerHTML;
+
+      // Insert after any sidenotes already placed on this host, preserving order.
+      var anchor = host;
+      while (anchor.nextSibling && anchor.nextSibling.classList &&
+             anchor.nextSibling.classList.contains('sidenote-fn')) {
+        anchor = anchor.nextSibling;
+      }
+      host.parentElement.insertBefore(aside, anchor.nextSibling);
+
+      link.setAttribute('href', '#' + aside.id);
+      sup.classList.add('sidenote-ref');
+
+      // Dashed-underline the word the footnote annotates (reusing .annotated-term,
+      // the same treatment as hand-authored margin notes) so the reader sees which
+      // phrase the sidenote explains — not just a bare superscript number.
+      var term = null, prev = sup.previousSibling;
+      if (prev && prev.nodeType === 3) {                  // text node → wrap its last word
+        var txt = prev.nodeValue, m = txt.match(/(\S+)\s*$/);
+        if (m) {
+          var start = m.index;
+          // A bare number / punctuation token ("bandwidth 2") isn't a meaningful
+          // phrase on its own — pull in the preceding word so the underline lands
+          // on "bandwidth 2" rather than a lone "2".
+          if (!/[A-Za-z]/.test(m[1])) {
+            var m2 = txt.slice(0, start).match(/\S+\s*$/);
+            if (m2) start = m2.index;
+          }
+          var candidate = txt.slice(start);
+          // Only underline a real word-phrase; skip markers on pure math/values
+          // ("≈ 10⁻¹⁴") — those keep just their superscript.
+          if (/[A-Za-z]/.test(candidate)) {
+            term = document.createElement('span');
+            term.textContent = candidate;
+            prev.nodeValue = txt.slice(0, start);
+            sup.parentNode.insertBefore(term, sup);
+          }
+        }
+      } else if (prev && prev.nodeType === 1 &&           // inline element → mark it whole
+                 !prev.classList.contains('katex') && !prev.querySelector('.katex')) {
+        term = prev;
+      }
+      if (term) term.classList.add('annotated-term', 'fn-term');
+
+      var mark = function (on) {
+        aside.classList.toggle('is-highlighted', on);
+        sup.classList.toggle('is-active', on);
+        if (term) term.classList.toggle('is-active', on);
+      };
+      [sup, term, aside].forEach(function (el) {
+        if (!el) return;
+        el.addEventListener('mouseenter', function () { mark(true); });
+        el.addEventListener('mouseleave', function () { mark(false); });
+      });
+
+      pairs.push({ aside: aside, sup: sup });
+      placed.push(li);
+    });
+
+    placed.forEach(function (li) { li.remove(); });
+    var ol = block.querySelector('ol');
+    if (!ol || ol.children.length === 0) block.remove();
+  }
+
+  /*
+   * Align each sidenote to the vertical level of its reference within its own
+   * .l-body container, pushing a note down only enough to clear the previous
+   * one (collision avoidance). Below 900px the CSS lays notes out inline, so we
+   * clear the inline tops and let the flow handle it.
+   */
+  function layoutSidenotes() {
+    if (!pairs.length) return;
+    var narrow = window.innerWidth < 1000;   // matches the CSS gutter breakpoint
+
+    // Group by containing .l-body so notes in different sections never collide.
+    var groups = new Map();
+    pairs.forEach(function (p) {
+      var lb = p.aside.parentElement;
+      if (narrow) { p.aside.style.top = ''; lb.style.minHeight = ''; return; }
+      if (!groups.has(lb)) groups.set(lb, []);
+      groups.get(lb).push(p);
+    });
+    if (narrow) return;
+
+    groups.forEach(function (list, lb) {
+      lb.style.minHeight = '';                       // reset before measuring natural height
+      var lbTop = lb.getBoundingClientRect().top;
+      list.forEach(function (p) { p.target = p.sup.getBoundingClientRect().top - lbTop; });
+      list.sort(function (a, b) { return a.target - b.target; });
+      var cursor = 0;
+      list.forEach(function (p) {
+        var top = Math.max(p.target, cursor);
+        p.aside.style.top = top + 'px';
+        cursor = top + p.aside.offsetHeight + GAP;
+      });
+      if (cursor > lb.getBoundingClientRect().height) lb.style.minHeight = Math.ceil(cursor) + 'px';
+    });
+  }
+
+  function init() {
+    relocateFootnotes();
+    layoutSidenotes();
+    var t;
+    window.addEventListener('resize', function () {
+      clearTimeout(t);
+      t = setTimeout(layoutSidenotes, 150);
+    });
+  }
+
+  if (document.readyState === 'complete') init();
+  else window.addEventListener('load', init);
 }());
 </script>
 

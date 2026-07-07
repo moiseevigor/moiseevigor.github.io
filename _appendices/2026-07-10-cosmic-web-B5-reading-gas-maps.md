@@ -20,7 +20,7 @@ series: geometry-of-cosmic-web
 series_title: "Geometry of the Cosmic Web"
 series_part: B5
 permalink: /mathematics/2026/07/10/cosmic-web-B5-reading-gas-maps/
-published: true
+published: false
 comments: true
 ---
 
@@ -110,6 +110,91 @@ cannot discriminate extended filament gas from clustered halo
 contributions at a 10′ beam (E3b). Two conclusions: the spine networks are
 physically real (they trace hot gas at high significance), and isolating
 *filament* gas needs a sharper instrument and a different estimator.
+
+</div><!-- /.l-body -->
+
+<figure class="l-middle" id="fig-gas">
+  <div style="text-align:center; margin-bottom:0.5em;">
+    <button class="fig-toggle active" id="gas-both">both methods</button>
+    <button class="fig-toggle" id="gas-hess">Hessian</button>
+    <button class="fig-toggle" id="gas-lift">orientation lift</button>
+  </div>
+  <div id="cw-gas" style="text-align:center;"></div>
+  <figcaption>
+    <strong>Hot gas sits on the extracted web — experiment E3.</strong> Stacked Planck
+    Compton-<em>y</em> (a hot-gas thermometer) around the filament spines drawn on 274,075
+    BOSS galaxies, as excess over 70+ sky-matched control stacks, versus angular distance
+    from the spine. Both detectors show gas strongly concentrated on the spine and falling
+    outward; the overall stacks reach <strong>9.0σ</strong> (Hessian) and <strong>6.9σ</strong>
+    (orientation lift), so the networks are physically real. A halo-mask test showed the
+    signal is dominantly the tracer galaxies' own halo gas — isolating true inter-filament
+    gas needs a sharper beam (next section). <em>Hover a point for its per-bin
+    significance.</em> Numbers from <code>research/cosmic-web/artifacts/e3b_results.json</code>.
+  </figcaption>
+</figure>
+
+<script>
+(function () {
+  const host = document.getElementById("cw-gas");
+  if (!host) return;
+  const ns = "http://www.w3.org/2000/svg";
+  const SANS = "'Source Sans 3', system-ui, sans-serif", MONO = "'JetBrains Mono', monospace";
+  const TH = [2.5, 7.5, 15, 30, 60];
+  const S = [
+    { key: "hessian", y: [8.04, 7.06, 4.94, 2.74, 2.70], e: [0.79, 0.69, 0.81, 0.81, 0.82], snr: [10.1, 10.2, 6.1, 3.4, 3.3], col: "#2b6cb0", lab: "Hessian (9.0σ)" },
+    { key: "lift",    y: [6.63, 6.02, 5.63, 1.59, 2.34], e: [1.01, 0.85, 0.95, 0.92, 0.81], snr: [6.6, 7.1, 5.9, 1.7, 2.9], col: "#2f855a", lab: "orientation lift (6.9σ)" }
+  ];
+  const W = 580, H = 336, xL = 54, xR = 452, yT = 30, yB = 250;
+  const lx0 = Math.log(2), lx1 = Math.log(74);
+  const X = t => xL + (Math.log(t) - lx0) / (lx1 - lx0) * (xR - xL);
+  const ymin = -1.2, ymax = 9.2, Y = v => yB - (v - ymin) / (ymax - ymin) * (yB - yT);
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.style.maxWidth = "580px"; svg.style.width = "100%";
+  host.appendChild(svg);
+  const el = (t, a, txt) => { const e = document.createElementNS(ns, t); for (const k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; return e; };
+  let tip;
+  function hideTip() { if (tip) while (tip.firstChild) tip.removeChild(tip.firstChild); }
+  function showTip(x, y, txt) { hideTip(); const w = txt.length * 5.7 + 12, tx = Math.min(Math.max(x - w / 2, 2), W - w - 2);
+    tip.appendChild(el("rect", { x: tx, y: y - 27, width: w, height: 17, rx: 3, fill: "#111", "fill-opacity": 0.88 }));
+    tip.appendChild(el("text", { x: tx + w / 2, y: y - 15, "text-anchor": "middle", "font-size": 10.5, fill: "#fff", "font-family": MONO }, txt)); }
+  function render(mode) {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    svg.appendChild(el("line", { x1: xL, y1: Y(0), x2: xR, y2: Y(0), stroke: "#999", "stroke-width": 1, "stroke-dasharray": "4 3" }));
+    svg.appendChild(el("text", { x: xR + 3, y: Y(0) + 3, "font-size": 10, fill: "#999", "font-family": SANS }, "control"));
+    svg.appendChild(el("line", { x1: xL, y1: yB, x2: xR, y2: yB, stroke: "#333", "stroke-width": 1 }));
+    svg.appendChild(el("line", { x1: xL, y1: yT, x2: xL, y2: yB, stroke: "#333", "stroke-width": 1 }));
+    TH.forEach(t => { svg.appendChild(el("line", { x1: X(t), y1: yB, x2: X(t), y2: yB + 4, stroke: "#333", "stroke-width": 1 }));
+      svg.appendChild(el("text", { x: X(t), y: yB + 16, "text-anchor": "middle", "font-size": 10, fill: "#555", "font-family": SANS }, t)); });
+    svg.appendChild(el("text", { x: (xL + xR) / 2, y: yB + 34, "text-anchor": "middle", "font-size": 11, fill: "#333", "font-family": SANS }, "angular radius from spine (arcmin, log)"));
+    [0, 2, 4, 6, 8].forEach(v => { svg.appendChild(el("line", { x1: xL - 4, y1: Y(v), x2: xL, y2: Y(v), stroke: "#333", "stroke-width": 1 }));
+      svg.appendChild(el("text", { x: xL - 7, y: Y(v) + 3, "text-anchor": "end", "font-size": 10, fill: "#555", "font-family": SANS }, v)); });
+    svg.appendChild(el("text", { x: xL - 6, y: yT - 10, "text-anchor": "start", "font-size": 10.5, fill: "#555", "font-family": SANS }, "excess Compton-y (×10⁻⁸)"));
+    S.forEach(s => {
+      if (mode !== "both" && mode !== s.key) return;
+      svg.appendChild(el("polyline", { points: TH.map((t, i) => `${X(t)},${Y(s.y[i])}`).join(" "), fill: "none", stroke: s.col, "stroke-width": 2, "stroke-opacity": 0.85 }));
+      TH.forEach((t, i) => {
+        svg.appendChild(el("line", { x1: X(t), y1: Y(s.y[i] - s.e[i]), x2: X(t), y2: Y(s.y[i] + s.e[i]), stroke: s.col, "stroke-width": 1.3 }));
+        const c = el("circle", { cx: X(t), cy: Y(s.y[i]), r: 4, fill: s.col, cursor: "pointer" });
+        c.addEventListener("mouseenter", () => showTip(X(t), Y(s.y[i]), `${t}′ · ${s.y[i].toFixed(1)}×10⁻⁸ · ${s.snr[i].toFixed(1)}σ`));
+        c.addEventListener("mouseleave", hideTip);
+        svg.appendChild(c);
+      });
+    });
+    S.forEach((s, i) => { const lx = xL + 10, ly = yT + 4 + i * 15, on = (mode === "both" || mode === s.key);
+      svg.appendChild(el("line", { x1: lx, y1: ly, x2: lx + 16, y2: ly, stroke: s.col, "stroke-width": 2, "stroke-opacity": on ? 1 : 0.3 }));
+      svg.appendChild(el("circle", { cx: lx + 8, cy: ly, r: 3.5, fill: s.col, "fill-opacity": on ? 1 : 0.3 }));
+      svg.appendChild(el("text", { x: lx + 22, y: ly + 3.5, "font-size": 10.5, fill: on ? "#333" : "#aaa", "font-family": SANS }, s.lab)); });
+    tip = el("g", {}); svg.appendChild(tip);
+  }
+  render("both");
+  [["gas-both", "both"], ["gas-hess", "hessian"], ["gas-lift", "lift"]].forEach(([id, mode]) => {
+    const b = document.getElementById(id); if (!b) return;
+    b.onclick = () => { render(mode); ["gas-both", "gas-hess", "gas-lift"].forEach(x => document.getElementById(x).classList.remove("active")); b.classList.add("active"); };
+  });
+})();
+</script>
+
+<div class="l-body" markdown="1">
 
 ## The beam sets what you can see
 

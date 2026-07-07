@@ -20,7 +20,7 @@ series: geometry-of-cosmic-web
 series_title: "Geometry of the Cosmic Web"
 series_part: B4
 permalink: /mathematics/2026/07/09/cosmic-web-B4-transverse-damping/
-published: true
+published: false
 comments: true
 ---
 
@@ -111,6 +111,92 @@ the web (5.57 ± 0.07); the reading of the tie is the mechanism result —
 a model with *only* the measured directional ingredient reproduces
 MUSCLE-class transport, so shell-crossing prescriptions work because they
 implement transverse arrest.
+
+</div><!-- /.l-body -->
+
+<figure class="l-middle" id="fig-ladder">
+  <div style="text-align:center; margin-bottom:0.5em;">
+    <button class="fig-toggle active" id="lad-detail">ladder detail</button>
+    <button class="fig-toggle" id="lad-full">full range (incl. 2LPT)</button>
+  </div>
+  <div id="cw-ladder" style="text-align:center;"></div>
+  <figcaption>
+    <strong>The model ladder — one ingredient, near the ceiling.</strong> Median
+    per-particle transport error against particle-mesh truth (voxels = <em>h</em>⁻¹Mpc;
+    <em>lower is better</em>; bars are ±1 s.d. over held-out seeds). The two dashed lines
+    mark the achievable window: the Zel'dovich baseline (no correction) and the
+    <em>oracle bound</em> (the same model handed the true final-field frames). The
+    <strong>frozen recipe</strong> — Zel'dovich rays plus a single transverse-damping knob
+    <em>β</em> = 0.6 — lands at 4.52, closing 89% of the recoverable gap and tying MUSCLE,
+    a far more elaborate scheme. Second-order perturbation theory (2LPT) is +62% worse;
+    switch to <em>full range</em> to see it. Every value is from the E5–E9 experiment
+    artifacts in <code>research/cosmic-web/</code>.
+  </figcaption>
+</figure>
+
+<script>
+(function () {
+  const host = document.getElementById("cw-ladder");
+  if (!host) return;
+  const ns = "http://www.w3.org/2000/svg";
+  const SANS = "'Source Sans 3', system-ui, sans-serif", MONO = "'JetBrains Mono', monospace";
+  const M = [
+    { n: "oracle bound (E5b)",      e: 4.47, s: 0.12, ref: 1 },
+    { n: "MUSCLE (E9)",             e: 4.49, s: 0.12 },
+    { n: "frozen recipe (E5d)",     e: 4.52, s: 0.18, hero: 1 },
+    { n: "refined (E5c)",           e: 4.64, s: 0.18 },
+    { n: "first transverse (E5)",   e: 4.91, s: 0.14 },
+    { n: "ZA baseline",             e: 4.98, s: 0.27, za: 1 },
+    { n: "isotropic sticking",      e: 5.34, s: 0.15 },
+    { n: "2LPT (E9)",               e: 8.07, s: 0.39 }
+  ];
+  const ZA = 4.98, OR = 4.47;
+  const W = 620, H = 300, xL = 188, xR = 602, yT = 16, yB = 250;
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  svg.style.maxWidth = "620px"; svg.style.width = "100%";
+  host.appendChild(svg);
+  const el = (t, a, txt) => { const e = document.createElementNS(ns, t);
+    for (const k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; return e; };
+  const rowY = i => yT + (yB - yT) * (i + 0.5) / M.length;
+
+  function render(mode) {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    const xmin = mode === "full" ? 4.3 : 4.35, xmax = mode === "full" ? 8.3 : 5.5;
+    const X = v => xL + (v - xmin) / (xmax - xmin) * (xR - xL);
+    // recoverable-gap band between oracle and ZA
+    svg.appendChild(el("rect", { x: X(OR), y: yT, width: X(ZA) - X(OR), height: yB - yT, fill: "#eef3e9" }));
+    // reference lines
+    [[OR, "#2f855a", "oracle bound"], [ZA, "#999", "Zel'dovich baseline"]].forEach(([v, c, lab]) => {
+      svg.appendChild(el("line", { x1: X(v), y1: yT - 2, x2: X(v), y2: yB, stroke: c, "stroke-width": 1.3, "stroke-dasharray": "4 3" }));
+      svg.appendChild(el("text", { x: X(v), y: yB + 30, "text-anchor": "middle", "font-size": 10, fill: c, "font-family": SANS }, lab));
+    });
+    // x axis
+    svg.appendChild(el("line", { x1: xL, y1: yB, x2: xR, y2: yB, stroke: "#333", "stroke-width": 1 }));
+    svg.appendChild(el("text", { x: (xL + xR) / 2, y: yB + 46, "text-anchor": "middle", "font-size": 11, fill: "#333", "font-family": SANS }, "median transport error  (voxels = h⁻¹Mpc, lower is better)"));
+    M.forEach((m, i) => {
+      const y = rowY(i);
+      const col = m.hero ? "#2f855a" : (m.ref || m.za) ? "#666" : (m.e < ZA ? "#2b6cb0" : "#dd6b20");
+      svg.appendChild(el("text", { x: xL - 10, y: y + 3.5, "text-anchor": "end", "font-size": 11.5,
+        "font-weight": m.hero ? 700 : 400, fill: m.hero ? "#2f855a" : "#333", "font-family": SANS }, m.n));
+      if (m.e > xmax) {  // off-scale (2LPT in detail mode)
+        svg.appendChild(el("text", { x: xR - 2, y: y + 3.5, "text-anchor": "end", "font-size": 11, fill: col, "font-family": MONO }, m.e.toFixed(2) + " →"));
+        return;
+      }
+      svg.appendChild(el("line", { x1: X(m.e - m.s), y1: y, x2: X(m.e + m.s), y2: y, stroke: col, "stroke-width": 1.5 }));
+      svg.appendChild(el("circle", { cx: X(m.e), cy: y, r: m.hero ? 6 : 4.2, fill: col }));
+      svg.appendChild(el("text", { x: X(m.e), y: y - 9, "text-anchor": "middle", "font-size": 10.5,
+        "font-weight": m.hero ? 700 : 400, fill: col, "font-family": MONO }, m.e.toFixed(2)));
+    });
+  }
+  const bD = document.getElementById("lad-detail"), bF = document.getElementById("lad-full");
+  bD.onclick = () => { render("detail"); bD.classList.add("active"); bF.classList.remove("active"); };
+  bF.onclick = () => { render("full"); bF.classList.add("active"); bD.classList.remove("active"); };
+  render("detail");
+})();
+</script>
+
+<div class="l-body" markdown="1">
 
 ## Transfer with frozen knobs
 

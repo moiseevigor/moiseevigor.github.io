@@ -20,7 +20,7 @@ series: geometry-of-cosmic-web
 series_title: "Geometry of the Cosmic Web"
 series_part: B3
 permalink: /mathematics/2026/07/08/cosmic-web-B3-honest-benchmarks/
-published: true
+published: false
 comments: true
 ---
 
@@ -68,6 +68,73 @@ The lesson generalises beyond skeletons: *a matched comparison must
 enforce the match on the quantity that determines the score, not on a
 proxy upstream of it — and statistical strength (p ≈ 10⁻¹⁴) certifies
 nothing about whether the comparison was constructed correctly.*
+
+</div><!-- /.l-body -->
+
+<figure class="l-middle" id="fig-match">
+  <div style="text-align:center; margin-bottom:0.5em;">
+    <button class="fig-toggle active" id="match-proxy">matched on mask-volume proxy</button>
+    <button class="fig-toggle" id="match-corr">matched on realised length</button>
+  </div>
+  <div id="cw-match" style="text-align:center;"></div>
+  <figcaption>
+    <strong>The same race, two ways to "match length" — experiment E0.</strong>
+    Completeness advantage of the orientation lift over the Hessian
+    (Δ = lift − Hessian; <em>above zero the lift wins, below the Hessian wins</em>),
+    versus galaxy count. Both skeletons were pruned to equal length before scoring — but
+    equal <em>on what?</em> Matched on a <strong>proxy</strong> (the hysteresis-mask
+    volume), the lift's realised skeleton ran ~19% longer at sparse sampling, and length
+    buys completeness: the lift <em>appears</em> to win by up to +0.06 (p ≈ 10⁻¹⁴). Flip
+    the match to the <strong>realised skeleton length</strong> — the quantity that actually
+    determines the score — and the sparse "win" inverts to a clean Hessian lead at every
+    level. The phantom was in the matching, not the method. Proxy numbers from
+    <code>e0_results.json</code>; corrected from the 50-seed E0a reruns.
+  </figcaption>
+</figure>
+
+<script>
+(function () {
+  const host = document.getElementById("cw-match");
+  if (!host) return;
+  const ns = "http://www.w3.org/2000/svg";
+  const SANS = "'Source Sans 3', system-ui, sans-serif", MONO = "'JetBrains Mono', monospace";
+  const NG = ["2,500", "5,000", "20,000", "80,000"];
+  const D = { proxy: [0.064, 0.044, -0.016, -0.025], corrected: [-0.045, -0.052, -0.053, -0.057] };
+  const W = 560, H = 328, xL = 92, xR = 540, yT = 26, yB = 250;
+  const ymin = -0.085, ymax = 0.085, Y = v => yB - (v - ymin) / (ymax - ymin) * (yB - yT);
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.style.maxWidth = "560px"; svg.style.width = "100%";
+  host.appendChild(svg);
+  const el = (t, a, txt) => { const e = document.createElementNS(ns, t); for (const k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; return e; };
+  function render(mode) {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    const d = D[mode], bw = (xR - xL) / NG.length, y0 = Y(0);
+    [-0.05, 0.05].forEach(v => svg.appendChild(el("line", { x1: xL, y1: Y(v), x2: xR, y2: Y(v), stroke: "#eee", "stroke-width": 1 })));
+    [-0.05, 0.05].forEach(v => svg.appendChild(el("text", { x: xL - 8, y: Y(v) + 3, "text-anchor": "end", "font-size": 10, fill: "#aaa", "font-family": SANS }, (v > 0 ? "+" : "") + v.toFixed(2))));
+    // zone labels
+    svg.appendChild(el("text", { x: xL + 3, y: yT + 4, "text-anchor": "start", "font-size": 10.5, fill: "#2f855a", "font-family": SANS }, "▲ lift wins"));
+    svg.appendChild(el("text", { x: xL + 3, y: yB - 3, "text-anchor": "start", "font-size": 10.5, fill: "#2b6cb0", "font-family": SANS }, "▼ Hessian wins"));
+    d.forEach((v, i) => {
+      const cx = xL + bw * (i + 0.5), wid = bw * 0.46, bx = cx - wid / 2;
+      const up = v > 0, col = up ? "#2f855a" : "#2b6cb0";
+      svg.appendChild(el("rect", { x: bx, y: up ? Y(v) : y0, width: wid, height: Math.abs(Y(v) - y0), fill: col, "fill-opacity": 0.85, rx: 1 }));
+      svg.appendChild(el("text", { x: cx, y: up ? Y(v) - 6 : Y(v) + 14, "text-anchor": "middle", "font-size": 11, fill: col, "font-family": MONO }, (v > 0 ? "+" : "") + v.toFixed(3)));
+      svg.appendChild(el("text", { x: cx, y: yB + 17, "text-anchor": "middle", "font-size": 10.5, fill: "#555", "font-family": SANS }, NG[i]));
+    });
+    svg.appendChild(el("line", { x1: xL, y1: y0, x2: xR, y2: y0, stroke: "#333", "stroke-width": 1.5 }));
+    svg.appendChild(el("text", { x: xR, y: y0 - 5, "text-anchor": "end", "font-size": 10, fill: "#333", "font-family": SANS }, "Δ = 0 (tie)"));
+    svg.appendChild(el("text", { x: (xL + xR) / 2, y: yB + 36, "text-anchor": "middle", "font-size": 11, fill: "#333", "font-family": SANS }, "galaxies in the box (sampling density)"));
+    svg.appendChild(el("text", { x: xL - 8, y: yT - 12, "text-anchor": "end", "font-size": 10.5, fill: "#555", "font-family": SANS }, "ΔC = lift − Hessian"));
+  }
+  render("proxy");
+  [["match-proxy", "proxy"], ["match-corr", "corrected"]].forEach(([id, mode]) => {
+    const b = document.getElementById(id); if (!b) return;
+    b.onclick = () => { render(mode); ["match-proxy", "match-corr"].forEach(x => document.getElementById(x).classList.remove("active")); b.classList.add("active"); };
+  });
+})();
+</script>
+
+<div class="l-body" markdown="1">
 
 ## Reference circularity
 

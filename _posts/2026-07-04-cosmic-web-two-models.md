@@ -12,6 +12,7 @@ subtitle: >
 date: 2026-07-04 09:00:00
 categories: [mathematics]
 tags: [cosmic-web, sub-riemannian, SE3, filaments, data-analysis]
+image: /public/img/posts/cosmic-web-2.svg
 description: >
   A benchmark study of two filament detectors — the standard curvature
   (Hessian) detector and an orientation lift adapted from models of the visual
@@ -23,19 +24,22 @@ series: geometry-of-cosmic-web
 series_title: "Geometry of the Cosmic Web"
 series_part: 2
 comments: true
-published: true
+published: false
 ---
 
 <div class="l-body" markdown="1">
 
 <div class="callout">
 <div class="callout-title">How to read this article</div>
-This is the story of a research program: can the mathematics your visual
-cortex uses to complete broken contours — developed in the
+This is the <em>results</em> half of a research program — its plan, hypotheses,
+and pre-registered kill-criteria are in
+<a href="{% post_url 2026-07-03-geometry-of-cosmic-web-research-program %}">Part 1</a>;
+this post is what happened when it ran. The question: can the mathematics your
+visual cortex uses to complete broken contours — developed in the
 <a href="{% post_url 2026-04-25-geometry-of-seeing-visual-cortex-se2 %}">Geometry
 of Seeing</a> series — find the <em>filaments of the cosmic web</em>? The main
 text tells that story in plain language. Every technical term gets a short
-margin note the first time it appears, and the full machinery lives in five
+footnote the first time it appears, and the full machinery lives in five
 appendices linked where relevant: the transport models of cosmology
 (<a href="/mathematics/2026/07/06/cosmic-web-B1-transport-models/">B1</a>),
 the tidal frame that gives the web its directions
@@ -732,8 +736,6 @@ scoped in the
 </div><!-- /.l-body -->
 
 <style>
-figure.l-middle { max-width: calc(var(--body-w) + 32px + var(--gutter-w)); padding: 0 14px; box-sizing: border-box; overflow-x: hidden; }
-figure.l-middle svg, figure.l-middle img { max-width: 100%; height: auto; }
 .cw-ctl { font-size: 0.85rem; color: #555; }
 .cw-btn {
   font-size: 0.8rem; padding: 2px 10px; margin: 0 1px; cursor: pointer;

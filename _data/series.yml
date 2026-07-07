@@ -55,29 +55,33 @@
     - part: 1
       title: "The Geometry of the Cosmic Web: A Research Program"
       url: /mathematics/2026/07/03/geometry-of-cosmic-web-research-program/
-      status: published
+      status: draft
     - part: 2
       title: "Two Ways to See a Cosmic Filament"
       url: /mathematics/2026/07/04/cosmic-web-two-models/
-      status: published
+      status: draft
+    - part: 3
+      title: "From Cosmic Filaments to Curved Spacetime"
+      url: /mathematics/2026/07/11/cosmic-web-spacetime-geometry/
+      status: draft
   appendices:
     - part: B1
       title: "How the Universe Moves Its Matter: Transport Models"
       url: /mathematics/2026/07/06/cosmic-web-B1-transport-models/
-      status: published
+      status: draft
     - part: B2
       title: "The Tidal Frame: How Collapse Chooses Directions"
       url: /mathematics/2026/07/07/cosmic-web-B2-tidal-frame/
-      status: published
+      status: draft
     - part: B3
       title: "How to Grade a Model Honestly"
       url: /mathematics/2026/07/08/cosmic-web-B3-honest-benchmarks/
-      status: published
+      status: draft
     - part: B4
       title: "The Transverse-Damping Model, in Full"
       url: /mathematics/2026/07/09/cosmic-web-B4-transverse-damping/
-      status: published
+      status: draft
     - part: B5
       title: "Reading the Sky's Hot Gas"
       url: /mathematics/2026/07/10/cosmic-web-B5-reading-gas-maps/
-      status: published
+      status: draft

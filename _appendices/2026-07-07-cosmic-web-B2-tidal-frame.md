@@ -19,7 +19,7 @@ series: geometry-of-cosmic-web
 series_title: "Geometry of the Cosmic Web"
 series_part: B2
 permalink: /mathematics/2026/07/07/cosmic-web-B2-tidal-frame/
-published: true
+published: false
 comments: true
 ---
 
@@ -103,6 +103,88 @@ tides. Libeskind et al. (2018) compared twelve web finders on one
 simulation and found substantial disagreement at filament boundaries and
 junctions — the observation that motivated the series' benchmark in the
 first place.
+
+</div><!-- /.l-body -->
+
+<figure class="l-middle" id="fig-tweb">
+  <div style="text-align:center; margin-bottom:0.45em; font-family:'Source Sans 3',sans-serif; font-size:12px; color:#777;">pick a point:&nbsp;
+    <button class="fig-toggle" id="tw-void">void</button>
+    <button class="fig-toggle" id="tw-sheet">sheet</button>
+    <button class="fig-toggle active" id="tw-fil">filament</button>
+    <button class="fig-toggle" id="tw-node">node</button>
+  </div>
+  <div style="text-align:center; font-family:'Source Sans 3',sans-serif; font-size:12.5px; color:#555; margin-bottom:0.3em;">
+    detection threshold λ<sub>th</sub>&nbsp;<input type="range" id="tw-th" min="-60" max="120" value="0" style="width:200px; accent-color:#1565c0; vertical-align:middle;">
+  </div>
+  <div id="cw-tweb" style="text-align:center;"></div>
+  <figcaption>
+    <strong>The T-web classifier — how a point becomes void, sheet, filament or node.</strong>
+    At each point the tidal tensor has three eigenvalues λ₁ ≥ λ₂ ≥ λ₃ — the rate gravity
+    squeezes along each principal axis. Count how many exceed a threshold: 0 → void,
+    1 → sheet, 2 → <strong>filament</strong>, 3 → node (Hahn et al. 2007;
+    Forero-Romero et al. 2009). Pick a point and drag the threshold: a filament at
+    threshold zero turns into a sheet once the bar rises past its second eigenvalue. That
+    threshold-sensitivity is exactly why twelve web finders disagreed at filament
+    boundaries (Libeskind et al. 2018) — and why the program had to match methods so
+    carefully (<a href="/mathematics/2026/07/08/cosmic-web-B3-honest-benchmarks/">B3</a>).
+  </figcaption>
+</figure>
+
+<script>
+(function () {
+  const host = document.getElementById("cw-tweb");
+  if (!host) return;
+  const ns = "http://www.w3.org/2000/svg";
+  const SANS = "'Source Sans 3', system-ui, sans-serif";
+  const PRE = { void: [-0.15, -0.45, -0.85], sheet: [0.68, -0.25, -0.60], filament: [1.05, 0.45, -0.35], node: [1.35, 0.85, 0.50] };
+  const TYPES = [
+    { n: "void", d: "no axis collapsing — a region draining empty" },
+    { n: "sheet", d: "one axis collapsing (normal ∥ e₁) — a Zel'dovich pancake" },
+    { n: "filament", d: "two axes collapsed — a filament, spine ∥ e₃" },
+    { n: "node", d: "all three collapsing — a cluster / node" }
+  ];
+  const COL = ["#888", "#dd6b20", "#2f855a", "#c53030"];
+  let lam = PRE.filament.slice();
+  const W = 560, H = 250, xL = 42, xR = 518, yA = 104;
+  const vmin = -1.1, vmax = 1.65, X = v => xL + (v - vmin) / (vmax - vmin) * (xR - xL);
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.style.maxWidth = "560px"; svg.style.width = "100%";
+  host.appendChild(svg);
+  const el = (t, a, txt) => { const e = document.createElementNS(ns, t); for (const k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; return e; };
+  const th = document.getElementById("tw-th");
+  function render() {
+    const t = (+th.value) / 100;
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    svg.appendChild(el("rect", { x: X(t), y: yA - 42, width: xR - X(t), height: 84, fill: "#eef3e9" }));
+    svg.appendChild(el("text", { x: xR - 3, y: yA - 30, "text-anchor": "end", "font-size": 10, fill: "#6b8e5a", "font-family": SANS }, "collapsing (λ > threshold)"));
+    svg.appendChild(el("line", { x1: xL, y1: yA, x2: xR, y2: yA, stroke: "#333", "stroke-width": 1 }));
+    [-1, 0, 1].forEach(v => { svg.appendChild(el("line", { x1: X(v), y1: yA, x2: X(v), y2: yA + 4, stroke: "#333", "stroke-width": 1 }));
+      svg.appendChild(el("text", { x: X(v), y: yA + 16, "text-anchor": "middle", "font-size": 10, fill: "#888", "font-family": SANS }, v)); });
+    svg.appendChild(el("line", { x1: X(t), y1: yA - 48, x2: X(t), y2: yA + 22, stroke: "#1565c0", "stroke-width": 1.6, "stroke-dasharray": "5 3" }));
+    svg.appendChild(el("text", { x: X(t), y: yA - 52, "text-anchor": "middle", "font-size": 10.5, fill: "#1565c0", "font-family": SANS }, "threshold " + (t >= 0 ? "+" : "") + t.toFixed(2)));
+    const labels = ["λ₁", "λ₂", "λ₃"];
+    let above = 0;
+    lam.forEach((v, i) => {
+      const on = v > t; if (on) above++;
+      svg.appendChild(el("circle", { cx: X(v), cy: yA, r: 6.5, fill: on ? "#2f855a" : "#fff", stroke: on ? "#2f855a" : "#999", "stroke-width": 1.6 }));
+      svg.appendChild(el("text", { x: X(v), y: yA - 13, "text-anchor": "middle", "font-size": 11, "font-weight": 600, fill: on ? "#2f855a" : "#999", "font-family": SANS }, labels[i]));
+    });
+    svg.appendChild(el("text", { x: (xL + xR) / 2, y: yA + 34, "text-anchor": "middle", "font-size": 10.5, fill: "#777", "font-family": SANS }, "tidal eigenvalue  →  squeeze rate along each axis"));
+    const T = TYPES[above];
+    svg.appendChild(el("text", { x: W / 2, y: 196, "text-anchor": "middle", "font-size": 17, "font-weight": 700, fill: COL[above], "font-family": SANS }, `${above} axis${above === 1 ? "" : "es"} collapsing  →  ${T.n.toUpperCase()}`));
+    svg.appendChild(el("text", { x: W / 2, y: 218, "text-anchor": "middle", "font-size": 12, fill: "#555", "font-family": SANS }, T.d));
+  }
+  th.addEventListener("input", render);
+  const btns = { "tw-void": "void", "tw-sheet": "sheet", "tw-fil": "filament", "tw-node": "node" };
+  Object.entries(btns).forEach(([id, key]) => {
+    const b = document.getElementById(id); if (!b) return;
+    b.onclick = () => { lam = PRE[key].slice(); Object.keys(btns).forEach(x => document.getElementById(x).classList.remove("active")); b.classList.add("active"); render(); };
+  });
+  render();
+})();
+</script>
+
+<div class="l-body" markdown="1">
 
 ## Why the measurement had to be made in this frame
 
