@@ -29,10 +29,10 @@ published: false
 <div class="callout">
 <div class="callout-title">What this appendix is for</div>
 
-Part 2 invokes Jacobi's $\mathrm{sn}, \mathrm{cn}, \mathrm{dn}$ and the
+Part&nbsp;2 invokes Jacobi's $\mathrm{sn}, \mathrm{cn}, \mathrm{dn}$ and the
 complete elliptic integral $K(k^2)$ as if they were as ordinary as
 $\sin, \cos, \tan$.  This appendix derives them from the pendulum equation
-Appendix A3 finishes on, lays out the identities used in Part 2 §4 (the
+Appendix A3 finishes on, lays out the identities used in Part&nbsp;2 §4 (the
 Frenet–Serret integration), and explains Gauss's <strong>arithmetic–geometric
 mean</strong> — the iteration that the
 <a href="https://github.com/moiseevigor/elliptic">moiseevigor/elliptic</a>
@@ -67,7 +67,7 @@ $$K(m) \;:=\; \int_0^{\pi/2}\frac{dt}{\sqrt{1 - m \sin^2 t}},$$
 and the **third kind** $\Pi(n; m)$ involving an extra rational factor.
 $K$ is what governs the pendulum's period; $E$ is what governs the
 elastica's plane-curve integration; both appear in the Sachkov closed forms
-of Part 2 §4.
+of Part&nbsp;2 §4.
 
 The two come together in **Legendre's relation**:
 
@@ -182,7 +182,7 @@ so $\ddot\varphi + \sin\varphi = 0$. ✓
 This is **the** identity behind the elastica: the pendulum solution is
 literally the Jacobi-am function, and the curvature
 $\kappa(s) = \dot\varphi(s) = 2k\,\mathrm{cn}(s\mid k^2)$ is one Jacobi
-function's worth — exactly the formula Part 2 uses.
+function's worth — exactly the formula Part&nbsp;2 uses.
 
 ## The complete elliptic integrals
 
@@ -202,7 +202,7 @@ The asymptotics near $m = 1$ are
 $$K(m) \;\sim\; \tfrac12 \log\!\Bigl(\tfrac{16}{1 - m}\Bigr), \qquad
   E(m) \;\to\; 1.$$
 
-This is the logarithmic divergence Part 2 §3 announces for the pendulum
+This is the logarithmic divergence Part&nbsp;2 §3 announces for the pendulum
 period at the separatrix — the same divergence governs the spatial period
 of inflectional elastica as $k \to 1$.
 
@@ -283,7 +283,7 @@ For the SE(2) elastica with rescaled arc length $s$, the same $K(k^2)$
 governs the spatial period of curvature oscillation, $T_\kappa = 4K(k^2)$.
 This double role — as a **temporal** period for the pendulum, as a
 **spatial** period for the elastica — is the heart of why Sachkov's
-Maxwell-strata results in Part 3 read as if there were *two* periods that
+Maxwell-strata results in Part&nbsp;3 read as if there were *two* periods that
 happen to coincide.  There aren't; it's the same $K(k^2)$, identified
 under the rescaling.
 
@@ -309,9 +309,9 @@ under the rescaling.
 
 <div class="l-body" markdown="1">
 
-## Identities used in Part 2 §4
+## Identities used in Part&nbsp;2 §4
 
-Part 2 uses the closed-form heading integral
+Part&nbsp;2 uses the closed-form heading integral
 
 $$\theta(s) \;=\; \theta_0 + 2\arcsin\bigl(k\,\mathrm{sn}(s\mid k^2)\bigr).$$
 
@@ -323,7 +323,7 @@ $$\kappa = \dot\theta
    = \frac{2k\,\mathrm{cn}\,\mathrm{dn}}{\mathrm{dn}}
    = 2k\,\mathrm{cn}(s\mid k^2),$$
 
-exactly the boxed curvature of Part 2 §3 — the heading integral and the
+exactly the boxed curvature of Part&nbsp;2 §3 — the heading integral and the
 curvature formula are one statement, differentiated once.
 
 The plane curve integration uses the **second-kind incomplete integral**
@@ -437,7 +437,7 @@ Maxwell pairs by chasing the $4K(k^2)$ period through the reconstruction.
   <li>
     P. F. Byrd, M. D. Friedman (1971).  <em>Handbook of Elliptic Integrals
     for Engineers and Scientists.</em> Springer.  All identities used in
-    Part 2 §4.
+    Part&nbsp;2 §4.
   </li>
   <li>
     L. M. Milne-Thomson, in <em>Handbook of Mathematical Functions</em>

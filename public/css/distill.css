@@ -436,7 +436,11 @@ figure.l-middle {
   max-width: calc(var(--body-w) + 32px + var(--gutter-w));
   padding: 0 14px;
   box-sizing: border-box;
-  overflow-x: hidden;
+  /* NOT `hidden`: overflow-x:hidden forces overflow-y to compute to `auto`,
+   * turning every figure into a scroll container — one sub-pixel of vertical
+   * overflow shows a phantom scrollbar (same gotcha as .katex-display above).
+   * `clip` clips without creating a scroll container. */
+  overflow-x: clip;
 }
 figure.l-middle svg, figure.l-middle img { max-width: 100%; height: auto; }
 

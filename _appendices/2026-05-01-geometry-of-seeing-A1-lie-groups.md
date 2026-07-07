@@ -30,11 +30,11 @@ published: false
 <div class="callout">
 <div class="callout-title">What this appendix is for</div>
 
-Part 1 of the series uses the language of Lie groups and Lie algebras as if it
+Part&nbsp;1 of the series uses the language of Lie groups and Lie algebras as if it
 were standard furniture: $\mathrm{SE}(2)$, $\mathfrak{se}(2)$,
 left-invariant vector fields $X_1 = \cos\theta\,\partial_x +
 \sin\theta\,\partial_y$, the bracket $[X_1, X_2] = -X_3$, the exponential map.
-This appendix builds those objects from scratch.  Read it once and Part 1
+This appendix builds those objects from scratch.  Read it once and Part&nbsp;1
 becomes a calmer text.  All three figures below are powered by the same
 $\mathrm{SE}(2)$ matrix exponential routine that the
 <a href="https://moiseevigor.github.io/elliptic/">elliptic</a> project uses to
@@ -140,7 +140,7 @@ same in every left-translated frame.
 Computing the pushforwards in the chart $(x, y, \theta)$ is mechanical:
 $L_g(x', y', \theta') = (\,x + x'\cos\theta - y'\sin\theta,\;\;
                             y + x'\sin\theta + y'\cos\theta,\;\;
-                            \theta + \theta')$.  Following Part 1's index
+                            \theta + \theta')$.  Following Part&nbsp;1's index
 convention — $X_1$ forward, $X_2$ rotation, $X_3$ sideways — the three
 basis fields are
 
@@ -150,14 +150,14 @@ $$\boxed{\;
   X_3 = (dL_g)_e E_2 = -\sin\theta\,\partial_x + \cos\theta\,\partial_y .\;}$$
 
 Note the index shuffle: $X_2$ comes from the *rotation* generator $E_3$ and
-$X_3$ from the *translation* generator $E_2$, because Part 1 numbers the
+$X_3$ from the *translation* generator $E_2$, because Part&nbsp;1 numbers the
 frame (forward, rotation, sideways) while the $E$-basis is numbered
 (translate-$x$, translate-$y$, rotate).
 
-These are the same three vector fields Part 1 §3 introduced.  Now you know
+These are the same three vector fields Part&nbsp;1 §3 introduced.  Now you know
 where they come from: they are the basis of $\mathfrak{se}(2)$,
 parallel-transported across the group by left-multiplication.  Declaring
-them orthonormal is exactly how Part 1 puts its left-invariant metric on
+them orthonormal is exactly how Part&nbsp;1 puts its left-invariant metric on
 $\mathrm{SE}(2)$.
 
 </div><!-- /.l-body -->
@@ -238,7 +238,7 @@ non-triviality of $\mathrm{SE}(2)$.
 Two warnings worth absorbing.
 
 - This basis $\{E_1, E_2, E_3\}$ of $\mathfrak{se}(2)$ is *different* from
-  the left-invariant frame $\{X_1, X_2, X_3\}$ used in Part 1.  At the
+  the left-invariant frame $\{X_1, X_2, X_3\}$ used in Part&nbsp;1.  At the
   identity $X_1(e) = E_1$, $X_2(e) = E_3$, $X_3(e) = E_2$ (the index
   shuffle above); and at a generic $g \in \mathrm{SE}(2)$ the $X_i(g)$ are
   no longer the constant matrices $E_j$ — the left-invariant vector fields vary in
@@ -270,7 +270,7 @@ $$[X_1, X_2] f \;=\; -(\partial_\theta\cos\theta)\partial_x f
                   \;=\; -X_3 f.$$
 
 So $[X_1, X_2] = -X_3$ as left-invariant vector fields — the same sign
-Part 1 carries.  (Writing it the other way round, $[X_2, X_1] = +X_3$, is
+Part&nbsp;1 carries.  (Writing it the other way round, $[X_2, X_1] = +X_3$, is
 the only freedom here; it is a bookkeeping choice, not a real one.)  Either
 way the bracket is non-zero and points along $X_3$, the missing sideways
 direction.
@@ -283,7 +283,7 @@ doesn't, and the residual is
 $$\Phi^Y_{-\varepsilon} \circ \Phi^X_{-\varepsilon} \circ \Phi^Y_{\varepsilon}
    \circ \Phi^X_{\varepsilon}\,(g) \;=\; g + \varepsilon^2 [X, Y]_g + O(\varepsilon^3).$$
 
-For the primary visual cortex (V1) this is the four-step manoeuvre Part 1 §3.4 illustrated:
+For the primary visual cortex (V1) this is the four-step manoeuvre Part&nbsp;1 §3.4 illustrated:
 two hops of "slide along your orientation" interleaved with two hops of
 "rotate the orientation" produce a sideways nudge of order $\varepsilon^2$.
 The Lie bracket is exactly the leading coefficient of that nudge.
@@ -320,7 +320,7 @@ The Lie bracket is exactly the leading coefficient of that nudge.
     $-\varepsilon X_1$, $-\varepsilon X_2$.  In a commutative world the
     loop returns to the origin; here it lands at a tiny offset of order
     $\varepsilon^2$ in the $X_3$ direction (the missing sideways
-    direction of the V1 cortex story in Part 1).  The dashed grey arrow
+    direction of the V1 cortex story in Part&nbsp;1).  The dashed grey arrow
     shows the actual gap; the orange arrow is the prediction
     $\varepsilon^2 \cdot [X_1, X_2]_e = -\varepsilon^2 X_3$.
 
@@ -396,7 +396,7 @@ left and right translation — the geodesics through $e$ are exactly the
 1-parameter subgroups $t \mapsto \exp(tX)$.  Compact groups and $\mathbb R^n$
 have such metrics; $\mathrm{SE}(2)$ does **not** — its adjoint action is
 non-compact, which is the standard obstruction.  So even a Riemannian story
-on $\mathrm{SE}(2)$ would not make $\exp(tX)$ geodesic.  Part 1 goes further
+on $\mathrm{SE}(2)$ would not make $\exp(tX)$ geodesic.  Part&nbsp;1 goes further
 still: its metric is *sub-Riemannian*, left-invariant but not
 right-invariant, and its geodesics are not $\exp(tX)$ at all — they are
 Euler's elastica.  Appendix A5 explains how the SR exponential map differs
@@ -418,7 +418,7 @@ every coadjoint orbit of a Lie group carries a canonical symplectic
 structure, given by $\omega_\mu(\mathrm{ad}^{\ast}_X \mu, \mathrm{ad}^{\ast}_Y \mu)
 = \langle\mu, [X, Y]\rangle$.  This is why the Lie–Poisson bracket on
 $\mathfrak g^{\ast}$ has the dynamics it does: it restricts on each orbit to
-ordinary symplectic Hamilton equations.  Part 2's pendulum reduction lives
+ordinary symplectic Hamilton equations.  Part&nbsp;2's pendulum reduction lives
 on one such orbit.
 </aside>
 
@@ -434,8 +434,8 @@ in the basis dual to $\{E_1, E_2, E_3\}$.  The coadjoint orbits are
 $$\mathcal O_c \;:=\; \{(h_1, h_2, h_3) : h_1^2 + h_2^2 = c\},$$
 
 i.e. **vertical cylinders** in $(h_1, h_2, h_3)$-space (plus a degenerate
-1-point orbit at $h_1 = h_2 = 0$ for each value of $h_3$).  Part 2 §1
-discovered this structure organically.  A caution on indices: Part 2 labels
+1-point orbit at $h_1 = h_2 = 0$ for each value of $h_3$).  Part&nbsp;2 §1
+discovered this structure organically.  A caution on indices: Part&nbsp;2 labels
 the costate in the left-invariant frame $\{X_1, X_2, X_3\}$, so its
 $(h_1, h_2, h_3)$ are this appendix's $(h_1, h_3, h_2)$.  In the $E$-basis
 the costate stays on a fixed coadjoint cylinder $h_1^2 + h_2^2 = c$ — the
@@ -468,7 +468,7 @@ Appendix A3 derives the flow from the Pontryagin Maximum Principle (PMP).
     cylinders $h_1^2 + h_2^2 = c$ in the dual space $\mathfrak{se}(2)^{\ast}$.
     The slider $c$ sets the cylinder radius; $h_3$ runs along its axis.
     Every Lie–Poisson flow — in particular the SR Hamiltonian flow of
-    Part 2, derived in Appendix A3 — is confined to one such cylinder,
+    Part&nbsp;2, derived in Appendix A3 — is confined to one such cylinder,
     because the Casimir $h_1^2 + h_2^2$ is conserved.  The blue curve shows
     a sample trajectory riding the chosen orbit.  This is a symplectic
     structure visualised: cylinders for the non-trivial orbits, pinched-off
@@ -507,7 +507,7 @@ points to remember:
   $[X, [X, Y]], [Y, [X, Y]]$ are forced back into a small set of
   directions.  $\mathfrak{se}(2)$ is not nilpotent, but its bracket table is
   simple enough that many BCH-type expansions truncate quickly in practice
-  — this is what keeps the Sachkov closed forms in Part 2 manageable.
+  — this is what keeps the Sachkov closed forms in Part&nbsp;2 manageable.
 
 ## Connection to the elliptic project
 
@@ -517,7 +517,7 @@ using the exact same midpoint-rule helper that the
 <a href="https://moiseevigor.github.io/elliptic/">moiseevigor/elliptic</a>
 project ships in `examples/dubins-back-wheel/app.js`.  When $\xi(t) =
 (a_1, a_2, a_3)$ is *constant* you get the 1-parameter subgroups of
-Figure A1.1; when $\xi(t)$ is the *Pontryagin extremal* control of Part 2
+Figure A1.1; when $\xi(t)$ is the *Pontryagin extremal* control of Part&nbsp;2
 you get Euler's elastica; when $\xi(t)$ has its forward component
 $\cos\varphi(t)$ change sign you get the cuspidal parking trajectory shown
 in
@@ -571,7 +571,7 @@ on them.
 Appendix A2 will use this language to give *the right* definition of a
 contact structure and prove Chow–Rashevskii.  Appendix A3 will derive the
 Lie–Poisson equations $\dot h_1 = h_2 h_3, \dot h_2 = -h_1 h_3, \dot h_3 =
--h_1 h_2$ — the equations Part 2 §1 asserts without proof — directly from the
+-h_1 h_2$ — the equations Part&nbsp;2 §1 asserts without proof — directly from the
 Pontryagin Maximum Principle.
 
 </div><!-- /.l-body -->

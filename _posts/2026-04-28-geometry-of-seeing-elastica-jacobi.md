@@ -43,7 +43,7 @@ All three families are interactive in the figures below.
 
 ## Hamiltonian Formulation via the PMP
 
-Recall from Part 1 that we want to minimise arc length among horizontal curves
+Recall from Part&nbsp;1 that we want to minimise arc length among horizontal curves
 in $\mathrm{SE}(2)$:
 
 $$\min \int_0^T \sqrt{u_1^2 + u_2^2}\,dt, \qquad \dot g = u_1 X_1(g) + u_2 X_2(g).$$
@@ -268,7 +268,7 @@ degenerate into circles of radius $1/2$ (high-energy uniform rotation).
 
 </div><!-- /.l-body -->
 
-<!-- Figure 1: Elastica explorer (κ(s) + curve) -->
+<!-- Figure&nbsp;1: Elastica explorer (κ(s) + curve) -->
 <figure class="l-middle">
   <div class="fig-box">
     <div class="fig-controls">
@@ -302,7 +302,7 @@ degenerate into circles of radius $1/2$ (high-energy uniform rotation).
   </figcaption>
 </figure>
 
-<!-- Figure 2: Period T = 4K(k²) vs k -->
+<!-- Figure&nbsp;2: Period T = 4K(k²) vs k -->
 <figure class="l-middle">
   <div class="fig-box">
     <svg id="fig-period" style="width:100%;height:320px;"></svg>
@@ -319,7 +319,7 @@ degenerate into circles of radius $1/2$ (high-energy uniform rotation).
   </figcaption>
 </figure>
 
-<!-- Figure 3: Phase portrait of the pendulum -->
+<!-- Figure&nbsp;3: Phase portrait of the pendulum -->
 <figure class="l-middle">
   <div class="fig-box">
     <svg id="fig-phase" style="width:100%;height:360px;"></svg>
@@ -399,7 +399,7 @@ These let us differentiate $\kappa(s)$ analytically:
 
 $$\kappa'(s) = -2k\,\mathrm{sn}(s)\,\mathrm{dn}(s),$$
 
-which will be essential in Part 3 for locating Maxwell strata.
+which will be essential in Part&nbsp;3 for locating Maxwell strata.
 
 ## Integrating the Elastica
 
@@ -442,7 +442,7 @@ A few landmarks worth noting:
 - **$k \approx 0.909$** (inflectional): the "figure-eight" lemniscate — at the
   modulus where $2E(k^2) = K(k^2)$, the curve crosses itself once per period and
   the endpoints of one period coincide.
-  This is the **Maxwell stratum** for the symmetric geodesics (Part 3).
+  This is the **Maxwell stratum** for the symmetric geodesics (Part&nbsp;3).
 
 - **$k \to 1^-$** (inflectional → Euler spiral): the period $4K(k^2)$ diverges and
   the curve spirals inward, winding around two limiting points.
@@ -455,7 +455,7 @@ A few landmarks worth noting:
 
 </div><!-- /.l-body -->
 
-<!-- Figure 4: All three families side by side -->
+<!-- Figure&nbsp;4: All three families side by side -->
 <figure class="l-middle">
   <div class="fig-box">
     <div class="fig-controls">
@@ -481,7 +481,7 @@ A few landmarks worth noting:
 
 <div class="l-body" markdown="1">
 
-## Summary and Preview of Part 3
+## Summary and Preview of Part&nbsp;3
 
 We have shown that every normal SR geodesic on SE(2) has curvature belonging to
 one of three Jacobi-elliptic families, with the inflectional case
@@ -496,7 +496,7 @@ while a completely different geodesic of the same length exists.
 The locus where this happens — where two distinct geodesics of equal length
 *meet* — is the **Maxwell stratum**.
 
-In Part 3 we will show that the Maxwell stratum is governed by the discrete
+In Part&nbsp;3 we will show that the Maxwell stratum is governed by the discrete
 symmetry group of $\mathrm{SE}(2)$, and that the first Maxwell time for an
 inflectional geodesic with modulus $k$ is exactly
 

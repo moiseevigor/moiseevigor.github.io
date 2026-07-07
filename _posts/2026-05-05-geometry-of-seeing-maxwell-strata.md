@@ -29,7 +29,7 @@ published: false
 
 <div class="callout">
 <div class="callout-title">What this article covers</div>
-Part 2 handed us <em>every</em> geodesic of the visual-cortex geometry — the three
+Part&nbsp;2 handed us <em>every</em> geodesic of the visual-cortex geometry — the three
 families of Euler's elastica, written in closed form with Jacobi elliptic functions.
 This part asks the next question: <em>which of them are actually the shortest path?</em>
 A curve can be perfectly taut locally and still be beaten by a completely different
@@ -37,15 +37,15 @@ curve of the same length. The set of endpoints where that happens — where two 
 shortest geodesics <em>tie</em> — is the <strong>Maxwell stratum</strong>. We show it is
 forced by a four-element symmetry group hiding inside the pendulum equation, and we
 compute the first tie exactly: it happens at arc length $4K(k^2)$, the very period that
-controlled the curvature in Part 2.
+controlled the curvature in Part&nbsp;2.
 </div>
 
 ## Two ways to stop being optimal
 
-Recall the problem from Part 1. The visual cortex completes a broken contour by finding
+Recall the problem from Part&nbsp;1. The visual cortex completes a broken contour by finding
 the **shortest** horizontal path in $\mathrm{SE}(2)$ between two oriented points — where
 "shortest" always means the sub-Riemannian length, the only length the contact geometry
-defines. Part 2 solved the *local* equations: every candidate path (every **geodesic**)
+defines. Part&nbsp;2 solved the *local* equations: every candidate path (every **geodesic**)
 is an Euler elastica, and its curvature is $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$ for
 the generic inflectional family.
 
@@ -103,11 +103,12 @@ hope for a coincidence. But $\mathrm{SE}(2)$ is not generic. It is loaded with s
 and symmetry manufactures coincidences on purpose.
 
 <aside id="note-maxwell">
-A <strong>Maxwell point</strong> (after J. C. Maxwell, who met them studying caustics of
-light) is a point reached by two <em>distinct</em> length-minimising geodesics from the
-same origin, with <em>equal</em> length. The set of all such points is the
-<strong>Maxwell stratum</strong>. The name and the mechanism are shared with optics: a
-Maxwell set is where two rays of equal optical path length cross.
+A <strong>Maxwell point</strong> is a point reached by two <em>distinct</em>
+length-minimising geodesics from the same origin, with <em>equal</em> length. The set of
+all such points is the <strong>Maxwell stratum</strong>. The name entered optimal control
+from catastrophe theory's <em>Maxwell convention</em> — an echo of J. C. Maxwell's
+equal-area rule in thermodynamics: a system sits in its global minimum, and where two
+minima <em>tie</em>, the choice jumps.
 </aside>
 
 Here is the mechanism. Suppose the problem has a symmetry — a transformation $\varepsilon$
@@ -124,7 +125,7 @@ find where a geodesic first meets its own symmetric image.**
 
 ## The four symmetries of the pendulum
 
-The symmetries live not in the plane but in the **pendulum** that Part 2 derived. Recall
+The symmetries live not in the plane but in the **pendulum** that Part&nbsp;2 derived. Recall
 the reduction: the costate angle obeys
 
 $$\ddot\varphi + \sin\varphi = 0, \qquad E = \tfrac12\dot\varphi^2 - \cos\varphi,$$
@@ -155,47 +156,59 @@ undoes itself, and any two of them compose to the third. That is precisely the
 <span class="annotated-term" data-note="note-klein">Klein four-group</span> $\mathbb{Z}_2 \times \mathbb{Z}_2$ — the exact discrete
 symmetry group Moiseev–Sachkov (2010) identified for this problem.
 
-| Element | Action on pendulum | Action on plane curve | Fixes |
-|:-------:|:-------------------|:----------------------|:------|
+| Element | Action on pendulum | Action on plane curve | Fixed set in the phase plane $(\varphi, \dot\varphi)$ |
+|:--------|:-------------------|:----------------------|:------------------------------------------------------|
 | $e$ | identity | identity | everything |
-| $\varepsilon^1$ | $s \mapsto -s$ (time reversal) | reverse traversal | turning points $\dot\varphi = 0$ |
-| $\varepsilon^2$ | $\varphi \mapsto -\varphi$ (reflection) | $\kappa \mapsto -\kappa$, mirror $y\mapsto -y$ | rest points $\varphi = 0$ |
-| $\varepsilon^3$ | both | half-turn | centres of symmetry |
+| $\varepsilon^1$ | $s \mapsto -s$ (time reversal) | reverse traversal | the axis $\dot\varphi = 0$ — the turning points |
+| $\varepsilon^2$ | $\varphi \mapsto -\varphi$ (mirror) | mirror $y \mapsto -y$, $\kappa \mapsto -\kappa$ | the origin alone — it pairs instants, pins none |
+| $\varepsilon^3$ | both | mirrored, traversed backwards | the axis $\varphi = 0$ — the bottom crossings |
 
-Each non-identity element has a **fixed-point set** — the instants along a geodesic where
-that symmetry pins the curve to itself. Those fixed instants are candidate Maxwell times.
-The one that fires first is what we want.
+(In the phase plane, $\varepsilon^1$ is the reflection across the horizontal axis;
+$\varepsilon^3$ — which flips $\varphi$ but, reversing time too, preserves $\dot\varphi$ —
+is the reflection across the vertical axis; and $\varepsilon^2$, flipping both, is the
+half-turn about the origin.)
+
+What makes a symmetry *useful* is its fixed set downstairs, in $\mathrm{SE}(2)$ itself. If
+the geodesic $\gamma$ crosses a configuration that $\varepsilon$ leaves fixed, then at that
+instant its partner $\varepsilon(\gamma)$ passes through the *same* configuration — a tie,
+provided the partner is a genuinely different curve. For the mirror $\varepsilon^2$, acting
+downstairs by $(x, y, \theta) \mapsto (x, -y, -\theta)$, that fixed set is the launch axis
+with heading along it: $\{\,y = 0,\ \theta \in \{0, \pi\}\,\}$. The instants where a
+geodesic crosses this set are its candidate Maxwell times — and the next section computes
+the first one exactly.
 
 </div><!-- /.l-body -->
 
-<!-- Figure 1: pendulum phase portrait with the ℤ₂×ℤ₂ reflection axes -->
+<!-- Figure&nbsp;1: pendulum phase portrait with the ℤ₂×ℤ₂ reflection axes -->
 <figure class="l-middle">
   <div class="fig-box">
     <div class="fig-controls">
       <label>highlight symmetry
         <select id="sym-pick">
           <option value="none" selected>— none —</option>
-          <option value="e1">ε¹ : time reversal (φ̇ → −φ̇)</option>
-          <option value="e2">ε² : reflection (φ → −φ)</option>
-          <option value="e3">ε³ : composite half-turn</option>
+          <option value="e1">ε¹ : time reversal (s → −s)</option>
+          <option value="e2">ε² : mirror (φ → −φ)</option>
+          <option value="e3">ε³ : both composed</option>
         </select>
       </label>
       <span style="margin-left:auto;font-size:12px;color:#888;">
-        one libration orbit (blue) and its image under the chosen symmetry
+        one libration orbit (blue) and the chosen symmetry's geometry (orange)
       </span>
     </div>
     <svg id="fig-sym" style="width:100%;height:360px;"></svg>
   </div>
   <figcaption>
-    <strong>Figure 1. The Klein four-group acting on the pendulum.</strong>
+    <strong>Figure&nbsp;1. The Klein four-group acting on the pendulum.</strong>
     Phase plane of $\ddot\varphi + \sin\varphi = 0$: horizontal axis is the pendulum angle
     $\varphi$ (radians), vertical axis its rate $\dot\varphi$. The bold blue closed loop is
-    one libration orbit (one inflectional geodesic, energy $E = 2k^2 - 1$). Choose a group
-    element to see its symmetry axis (dashed) and the image orbit (orange): $\varepsilon^1$
-    reflects across $\dot\varphi = 0$, $\varepsilon^2$ across $\varphi = 0$, and
-    $\varepsilon^3$ is the half-turn about the origin. Because the orbit is symmetric, each
-    image is the *same* orbit traced differently — and the instants where the geodesic sits
-    on a symmetry axis (marked) are its candidate Maxwell times.
+    one libration orbit (one inflectional geodesic, energy $E = 2k^2 - 1$); faint loops are
+    neighbouring orbits. Choose a group element to see its geometry (orange): $\varepsilon^1$
+    reflects the phase plane across the horizontal axis $\dot\varphi = 0$, pinning the two
+    turning points; $\varepsilon^3$ reflects across the vertical axis $\varphi = 0$, pinning
+    the two bottom-crossings; $\varepsilon^2$ flips both signs — the half-turn about the
+    origin — pinning no instant but pairing every phase point with its antipode (an example
+    pair is marked). The libration orbit is carried to itself by all three: that is what
+    makes them symmetries of the geodesic family.
   </figcaption>
 </figure>
 
@@ -203,7 +216,7 @@ The one that fires first is what we want.
 
 ## The first fork, computed exactly
 
-Take the symmetry that turns out to bind first: the reflection $\varepsilon^2$. Apply it to
+Take the symmetry that turns out to bind first: the mirror $\varepsilon^2$. Apply it to
 an inflectional geodesic $\gamma_A$ with curvature $\kappa_A(s) = +2k\,\mathrm{cn}(s\mid
 k^2)$. The image $\gamma_B = \varepsilon^2(\gamma_A)$ is the geodesic with the opposite
 curvature, $\kappa_B(s) = -2k\,\mathrm{cn}(s\mid k^2)$ — a *different* geodesic (it bends
@@ -216,14 +229,14 @@ of $\mathrm{SE}(2)$ — position **and** heading — the two coincide exactly wh
 
 $$y_A(s) = 0 \quad\text{and}\quad \theta_A(s) \equiv 0 \pmod{2\pi}.$$
 
-Part 2 gave the closed form (via Appendix A5) for the inflectional geodesic:
+Part&nbsp;2 gave the closed form (via Appendix A5) for the inflectional geodesic:
 
 $$y_A(s) = 2k\bigl(1 - \mathrm{cn}(s\mid k^2)\bigr) \;\ge\; 0.$$
 
 <aside>
-Because $y_A(s) = 2k(1-\mathrm{cn})$ is a sum of non-negative terms, it never dips below
-zero — it only *touches* zero. So the pair does not cross and re-cross; it kisses the
-symmetry axis at isolated instants. The first touch is the first Maxwell time.
+Since $\mathrm{cn} \le 1$, the height $y_A(s) = 2k(1-\mathrm{cn})$ never dips below zero —
+it only *touches* it. The two curves do not cross and re-cross; they kiss the mirror axis
+at isolated instants, and the first kiss with matching heading is the first Maxwell time.
 </aside>
 
 This is the whole calculation in one line. Since $\mathrm{cn}(s\mid k^2) \le 1$ with
@@ -232,10 +245,13 @@ equality only at $s = 0, 4K(k^2), 8K(k^2), \dots$, the height $y_A(s)$ returns t
 
 $$s = 4K(k^2),$$
 
-exactly one spatial period of the curvature. At that same instant the heading $\theta_A$
-has wound through a full multiple of $2\pi$ and returns to $0$. So the mirror pair
-re-coincides — in position and heading together — for the first time at $s = 4K(k^2)$, for
-**every** modulus $k$.
+exactly one spatial period of the curvature. The heading returns with it: Part&nbsp;2 gave
+$\theta_A(s) = 2\arcsin\!\bigl(k\,\mathrm{sn}(s\mid k^2)\bigr)$, which vanishes wherever
+$\mathrm{sn}$ does — at $s = 0,\, 2K,\, 4K, \dots$ (it never winds; the heading just
+oscillates within $\pm 2\arcsin k$). At $s = 2K(k^2)$ the heading is zero but the height is
+*maximal*, $y_A = 4k$; the first instant both conditions hold together is $s = 4K(k^2)$. So
+the mirror pair re-coincides — position and heading at once — for the first time at
+$s = 4K(k^2)$, for **every** modulus $k$.
 
 <div class="callout theorem">
 <div class="callout-title">First Maxwell time (inflectional family)</div>
@@ -245,11 +261,11 @@ $$\boxed{\; t_{\mathrm{MAX}}^{1}(k) \;=\; \frac{4K(k^2)}{\omega_0}, \;}$$
 where $K(k^2)$ is the complete elliptic integral of the first kind and $\omega_0$ is the
 linearised pendulum frequency (equal to $1$ in the unit-energy normalisation, so
 $t_{\mathrm{MAX}}^1 = 4K(k^2)$ in arc length). This is the <em>same</em> $4K(k^2)$ that set
-the curvature's spatial period in Part 2 — now reappearing as a <em>time</em>: the first
+the curvature's spatial period in Part&nbsp;2 — now reappearing as a <em>time</em>: the first
 instant a geodesic ties with its mirror twin.
 </div>
 
-The identity is worth pausing on. In Part 2, $4K(k^2)$ was a fact about one curve — how far
+The identity is worth pausing on. In Part&nbsp;2, $4K(k^2)$ was a fact about one curve — how far
 you travel before its curvature pattern repeats. Here it is a fact about *two* curves — how
 far you travel before a geodesic and its symmetric partner arrive at the same place at the
 same time. The two roles of the elliptic period coincide, and that coincidence is the
@@ -257,7 +273,7 @@ technical heart of the Maxwell-strata theorem.
 
 </div><!-- /.l-body -->
 
-<!-- Figure 2: the σ-pair fork, meeting at s = 4K(k²) -->
+<!-- Figure&nbsp;2: the σ-pair fork, meeting at s = 4K(k²) -->
 <figure class="l-middle">
   <div class="fig-box">
     <div class="fig-controls">
@@ -276,7 +292,7 @@ technical heart of the Maxwell-strata theorem.
     <svg id="fig-fork" style="width:100%;height:380px;"></svg>
   </div>
   <figcaption>
-    <strong>Figure 2. The σ-symmetric pair forks and re-meets.</strong>
+    <strong>Figure&nbsp;2. The σ-symmetric pair forks and re-meets.</strong>
     The blue geodesic ($\kappa = +2k\,\mathrm{cn}$) and its mirror image (red, dashed,
     $\kappa = -2k\,\mathrm{cn}$) leave the origin (black dot) together. Drag $s$ to extend
     them. The vertical guide on the height plot (right) shows $y_A(s) = 2k(1-\mathrm{cn})$,
@@ -292,7 +308,7 @@ technical heart of the Maxwell-strata theorem.
 
 ## From the first tie to the cut time
 
-The reflection $\varepsilon^2$ gave one family of ties, at $4K(k^2)$. The other group
+The mirror $\varepsilon^2$ gave one family of ties, at $4K(k^2)$. The other group
 elements give their own Maxwell strata — $\varepsilon^1$ and $\varepsilon^3$ contribute
 further coincidences — but a direct check (Moiseev–Sachkov 2010) shows none of them fires
 earlier than the $\varepsilon^2$ tie for the inflectional family. So the *first* Maxwell
@@ -309,7 +325,7 @@ Moiseev–Sachkov (2010) prove the full description of the Maxwell strata for th
 $\mathrm{SE}(2)$ sub-Riemannian problem via this $\mathbb{Z}_2\times\mathbb{Z}_2$ action.
 </div>
 
-That inequality is the punchline of Part 3 — and a cliffhanger. It says the geodesic
+That inequality is the punchline of Part&nbsp;3 — and a cliffhanger. It says the geodesic
 *cannot* remain globally shortest past $4K(k^2)$; the mirror twin catches it there at the
 latest. What it does **not** say is whether the cut happens *exactly* there or strictly
 earlier — whether the bound is tight.
@@ -318,7 +334,7 @@ For the inflectional family it turns out to be tight: $t_{\mathrm{cut}} = t_{\ma
 exactly, so the elliptic period $4K(k^2)$ *is* the cut time. Proving that — pinning the cut
 locus down precisely, handling the non-inflectional and separatrix families, and confronting
 what remains genuinely open near the degenerate boundary — is
-[Part 4](/mathematics/2026/05/15/geometry-of-seeing-cut-time-open-problem/).
+[Part&nbsp;4](/mathematics/2026/05/15/geometry-of-seeing-cut-time-open-problem/).
 
 ## Summary
 
@@ -331,7 +347,7 @@ what remains genuinely open near the degenerate boundary — is
 - The reflection's $\sigma$-symmetric pair first re-meets at $s = 4K(k^2)$, giving the exact
   **first Maxwell time** $t_{\mathrm{MAX}}^1 = 4K(k^2)/\omega_0$ — the same elliptic period
   as the curvature.
-- Hence $t_{\mathrm{cut}} \le 4K(k^2)/\omega_0$. Whether equality holds is Part 4.
+- Hence $t_{\mathrm{cut}} \le 4K(k^2)/\omega_0$. Whether equality holds is Part&nbsp;4.
 
 </div><!-- /.l-body -->
 
@@ -360,8 +376,9 @@ what remains genuinely open near the degenerate boundary — is
     strata.
   </li>
   <li>
-    J. C. Maxwell (1868). "On the cyclide." <em>Quarterly J. Pure Appl. Math.</em> 9 —
-    the optical Maxwell set that gives these points their name.
+    Yu. L. Sachkov (2008). "Maxwell strata in the Euler elastic problem."
+    <em>Journal of Dynamical and Control Systems</em> 14(2): 169–234 — the same
+    reflection-symmetry method applied to Euler's elastica.
   </li>
 </ol>
 </div>
@@ -373,7 +390,7 @@ what remains genuinely open near the degenerate boundary — is
 (function () {
 'use strict';
 
-// ── Figure 1: pendulum phase portrait + ℤ₂×ℤ₂ symmetry axes ───────────────
+// ── Figure&nbsp;1: pendulum phase portrait + ℤ₂×ℤ₂ symmetry axes ───────────────
 function drawSym() {
   const svg = document.getElementById('fig-sym');
   if (!svg) return;
@@ -459,28 +476,33 @@ function drawSym() {
       .attr('fill', '#e65100').attr('stroke', '#fff').attr('stroke-width', 1.2);
   }
 
-  let caption = 'pick a symmetry to see its axis and fixed points';
-  if (pick === 'e1') {          // time reversal: φ̇ → −φ̇, axis φ̇ = 0; fixes turning points
+  let caption = 'pick a symmetry to see its geometry in the phase plane';
+  if (pick === 'e1') {          // time reversal: (φ, φ̇) → (φ, −φ̇); axis φ̇ = 0
     drawAxisH(0);
     mark(-pm, 0); mark(pm, 0);
-    caption = 'ε¹ reflects across φ̇ = 0 — fixed at the two turning points (φ̇ = 0)';
-  } else if (pick === 'e2') {   // reflection: φ → −φ, axis φ = 0; fixes rest crossings
+    caption = 'ε¹ reflects across φ̇ = 0 — the orbit meets the axis at its two turning points';
+  } else if (pick === 'e2') {   // mirror at fixed time: (φ, φ̇) → (−φ, −φ̇) = half-turn
+    const phiStar = pm * 0.55;
+    const vStar = Math.sqrt(Math.max(2 * (E + Math.cos(phiStar)), 0));
+    g.append('line').attr('x1', xSc(phiStar)).attr('y1', ySc(vStar))
+      .attr('x2', xSc(-phiStar)).attr('y2', ySc(-vStar))
+      .attr('stroke', axis.color).attr('stroke-width', 1.2).attr('stroke-dasharray', axis.dash).attr('opacity', 0.8);
+    g.append('circle').attr('cx', xSc(0)).attr('cy', ySc(0)).attr('r', 5)
+      .attr('fill', 'none').attr('stroke', '#e65100').attr('stroke-width', 1.6);
+    mark(phiStar, vStar); mark(-phiStar, -vStar);
+    caption = 'ε² is the half-turn about the origin — it pairs each phase point with its antipode';
+  } else if (pick === 'e3') {   // mirror + reversal: (φ, φ̇) → (−φ, φ̇); axis φ = 0
     drawAxisV(0);
     const vTop = Math.sqrt(2 * (E + 1));
     mark(0, vTop); mark(0, -vTop);
-    caption = 'ε² reflects across φ = 0 — fixed where the pendulum is upright (φ = 0)';
-  } else if (pick === 'e3') {   // half-turn about origin
-    drawAxisV(0); drawAxisH(0);
-    g.append('circle').attr('cx', xSc(0)).attr('cy', ySc(0)).attr('r', 5)
-      .attr('fill', 'none').attr('stroke', '#e65100').attr('stroke-width', 1.6);
-    caption = 'ε³ is the half-turn about the origin — the composite ε¹∘ε²';
+    caption = 'ε³ reflects across φ = 0 — the orbit crosses the axis at the swing bottom (max speed)';
   }
 
   g.append('text').attr('x', pad.l).attr('y', pad.t + 12)
     .attr('style', 'font-family:var(--sans,sans-serif);font-size:11px;fill:#666').text(caption);
 }
 
-// ── Figure 2: σ-symmetric pair fork, meeting at s = 4K(k²) ─────────────────
+// ── Figure&nbsp;2: σ-symmetric pair fork, meeting at s = 4K(k²) ─────────────────
 function forkGeodesic(k, sMax, N) {
   // κ(s) = 2k·cn(s|k²);  dθ = κ ds, dx = cosθ ds, dy = sinθ ds  (midpoint rule)
   const m = k * k, ds = sMax / N;
@@ -572,16 +594,22 @@ function drawFork() {
   g.append('path').attr('d', d3.line().x(p => xR2(p.s)).y(p => yR2(p.h))(hCurve))
     .attr('fill', 'none').attr('stroke', '#0d3a78').attr('stroke-width', 2);
 
-  // first-Maxwell marker at s = 4K
-  g.append('line').attr('x1', xR2(sMax1)).attr('x2', xR2(sMax1)).attr('y1', m.t + 10).attr('y2', H - m.b)
+  // first-Maxwell marker at s = 4K — label sits at the bottom, flipping to the
+  // left of its guide near the right edge, so it never collides with the
+  // panel title in the top band.
+  g.append('line').attr('x1', xR2(sMax1)).attr('x2', xR2(sMax1)).attr('y1', m.t + 22).attr('y2', H - m.b)
     .attr('stroke', '#e65100').attr('stroke-width', 1.5).attr('stroke-dasharray', '4,3');
   g.append('circle').attr('cx', xR2(sMax1)).attr('cy', yR2(0)).attr('r', 4).attr('fill', '#e65100');
-  g.append('text').attr('x', xR2(sMax1)).attr('y', m.t + 8).attr('text-anchor', 'middle')
+  const lblRight = xR2(sMax1) < W - m.r - 110;
+  g.append('text')
+    .attr('x', xR2(sMax1) + (lblRight ? 6 : -6))
+    .attr('y', H - m.b - 10)
+    .attr('text-anchor', lblRight ? 'start' : 'end')
     .attr('style', 'font-family:var(--mono,monospace);font-size:10px;fill:#e65100')
     .text(`4K(k²) = ${sMax1.toFixed(2)}`);
 
   // current-s guide
-  g.append('line').attr('x1', xR2(s)).attr('x2', xR2(s)).attr('y1', m.t + 10).attr('y2', H - m.b)
+  g.append('line').attr('x1', xR2(s)).attr('x2', xR2(s)).attr('y1', m.t + 22).attr('y2', H - m.b)
     .attr('stroke', '#1565c0').attr('stroke-width', 1).attr('stroke-dasharray', '2,3').attr('opacity', 0.7);
   g.append('text').attr('x', split + m.l).attr('y', m.t + 6)
     .attr('style', 'font-family:var(--sans,sans-serif);font-size:11px;fill:#444')

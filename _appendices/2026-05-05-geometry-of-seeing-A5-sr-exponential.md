@@ -31,7 +31,7 @@ published: false
 <div class="callout">
 <div class="callout-title">What this appendix is for</div>
 
-Parts 3 and 4 of the series will discuss the <strong>cut locus</strong> and
+Parts&nbsp;3 and 4 of the series will discuss the <strong>cut locus</strong> and
 the <strong>Maxwell strata</strong> of the SE(2) sub-Riemannian problem.
 This appendix builds the object both rest on: the SR exponential map.
 It also makes precise the difference between the matrix exponential of
@@ -56,7 +56,7 @@ geodesics of a **bi-invariant** Riemannian metric — but Appendix A1 showed
 $\mathrm{SE}(2)$ carries *no* such metric (its adjoint action is
 non-compact).  They remain the natural "group-straight" curves on
 $\mathrm{SE}(2)$; they are certainly not the geodesics of the
-sub-Riemannian (SR) metric of Part 1's primary-visual-cortex (V1) model.
+sub-Riemannian (SR) metric of Part&nbsp;1's primary-visual-cortex (V1) model.
 
 Sub-Riemannian $\mathrm{Exp}$:
 
@@ -67,7 +67,7 @@ where $g(t)$ is the SR geodesic with initial costate $\mu_0 = (h_1^0, h_2^0,
 h_3^0) \in \mathfrak{se}(2)^{\ast}$ on the unit-Hamiltonian surface
 $h_1^2 + h_2^2 = 1$.  This is the map that generates "Petitot's family of
 candidate completion paths" from a fixed neuron.  When we say "exponential
-map" in Parts 3–4 we always mean *this* one.
+map" in Parts&nbsp;3–4 we always mean *this* one.
 
 Two parametrisations of the same costate space are convenient:
 
@@ -148,8 +148,8 @@ Three takeaways:
   <figcaption>
     <strong>Figure A5.1.</strong> Plane projection of the SR geodesic
     $g(s)$ for $s \in [0, T]$, drawn from a single initial costate
-    parametrised by $k$.  The blue, red, green colour scheme matches Part 1
-    Figure 4 — and indeed this figure is the same one, lifted to a
+    parametrised by $k$.  The blue, red, green colour scheme matches Part&nbsp;1
+    Figure&nbsp;4 — and indeed this figure is the same one, lifted to a
     more controllable form.  As $k \to 1^-$ the inflectional family's
     period $4K(k^2)$ diverges (Appendix A4) and the curve spirals; for
     $k > 1$ (non-inflectional) the curvature is one-signed with spatial
@@ -232,9 +232,9 @@ exactly
 $$t_{\mathrm{Maxwell}}^{(1)}(k) \;=\; \frac{4K(k^2)}{\omega_0},$$
 
 the **same** $4K(k^2)$ that controls the spatial period of the curvature
-(Appendix A4, Part 2).  Identifying these two roles of $K(k^2)$ — period
+(Appendix A4, Part&nbsp;2).  Identifying these two roles of $K(k^2)$ — period
 of curvature and time of first Maxwell coincidence — is the heart of
-Part 3.
+Part&nbsp;3.
 
 </div><!-- /.l-body -->
 
@@ -365,7 +365,7 @@ Dubins-visual-cortex page.  The two visualisations share the same
 integration routine (`integrateElastica` in `elliptic-core.js`) and the
 same colour palette.  The difference is that this appendix interprets
 the curves as the SR exponential map, isolates the Maxwell pair, and
-draws the conjugate locus as a wavefront — the structures Parts 3 and 4
+draws the conjugate locus as a wavefront — the structures Parts&nbsp;3 and 4
 of the blog series develop.
 
 The Dubins-back-wheel cuspidal trajectories of the elliptic project
@@ -433,7 +433,7 @@ for k in (0.1, 0.3, 0.5, 0.7, 0.9, 0.95):
     print(f"k = {k:4.2f}:  T_conj = {conjugate_time_inflectional(k):.4f}")
 ```
 
-## What we covered, and what is left for Parts 3–4
+## What we covered, and what is left for Parts&nbsp;3–4
 
 The SR exponential map of $\mathrm{SE}(2)$ takes initial costates to
 group endpoints; its closed form involves Jacobi elliptic functions and
@@ -444,21 +444,22 @@ distinct geodesics meeting with the same SR length.  For the inflectional
 family, the first Maxwell time is $4K(k^2)/\omega_0$ — the *same* $K(k^2)$
 that controls curvature period.
 
-What remains for Parts 3 and 4 of the blog series:
+What remains for Parts&nbsp;3 and 4 of the blog series:
 
-- **Part 3** will give the proof that, for the inflectional family,
-  $$t_{\mathrm{cut}} = t_{\mathrm{Maxwell}}^{(1)} = 4K(k^2)/\omega_0$$,
-  and characterise the full Maxwell stratum via the
-  $\mathbb Z_2 \times \mathbb Z_2$ symmetries.
-- **Part 4** will discuss the open question: extending this to the
-  non-inflectional and separatrix families, and the related conjecture
-  on the global structure of the cut locus.
+- **Part&nbsp;3** will characterise the Maxwell stratum via the
+  $\mathbb Z_2 \times \mathbb Z_2$ symmetries and derive the first
+  Maxwell time $$t_{\mathrm{Maxwell}}^{(1)} = 4K(k^2)/\omega_0$$ exactly —
+  the upper bound $t_{\mathrm{cut}} \leq t_{\mathrm{Maxwell}}^{(1)}$.
+- **Part&nbsp;4** will show the bound is exact for the inflectional family
+  ($t_{\mathrm{cut}} = t_{\mathrm{Maxwell}}^{(1)}$), and lay out what stays
+  open: the non-inflectional and separatrix seams, and the general
+  Maxwell-equals-cut conjecture beyond $\mathrm{SE}(2)$.
 
 The five appendices A1–A5 supply every prerequisite: Lie groups (A1),
 distributions and contact structures (A2), the Pontryagin Maximum
 Principle and Lie–Poisson reduction (A3), Jacobi elliptic functions and
-the arithmetic–geometric mean (A4), and the SR exponential map (A5).  With them in hand, Parts 1 and 2 should read
-fluently, and Parts 3 and 4 will be approachable when they ship.
+the arithmetic–geometric mean (A4), and the SR exponential map (A5).  With them in hand, Parts&nbsp;1 and 2 should read
+fluently, and Parts&nbsp;3 and 4 will be approachable when they ship.
 
 </div><!-- /.l-body -->
 

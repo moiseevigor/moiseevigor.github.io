@@ -30,7 +30,7 @@ published: false
 <div class="callout">
 <div class="callout-title">What this appendix is for</div>
 
-Part 2 §1 begins:
+Part&nbsp;2 §1 begins:
 
 <blockquote>
 "The Pontryagin Maximum Principle introduces a covector $\lambda$ in the
@@ -213,7 +213,7 @@ solutions).  We use the squared form:
 
 $$\boxed{\;\mathcal H_n \;=\; \tfrac12 (h_1^2 + h_2^2).\;}$$
 
-This is the "normal Hamiltonian" of Part 2 §1.
+This is the "normal Hamiltonian" of Part&nbsp;2 §1.
 
 ## Lie–Poisson reduction on $\mathfrak{se}(2)^{\ast}$
 
@@ -242,7 +242,7 @@ $$\dot h_i \;=\; -\sum_{j, k} c^k_{ij}\,h_k\,\frac{\partial H}{\partial h_j},$$
 
 where $$c^k_{ij}$$ are the structure constants $$[X_i, X_j] = c^k_{ij} X_k$$.
 For $\mathfrak{se}(2)$ in the body-frame basis $\{X_1, X_2, X_3\}$ used in
-Part 1 (forward / rotation / sideways), the brackets are
+Part&nbsp;1 (forward / rotation / sideways), the brackets are
 $[X_1, X_2] = -X_3$, $[X_2, X_3] = -X_1$, $[X_1, X_3] = 0$, giving the
 non-zero coordinate brackets $\{h_1, h_2\} = h_3$ and $\{h_2, h_3\} = h_1$.
 With $H_n = \tfrac12(h_1^2 + h_2^2)$ this yields
@@ -251,7 +251,7 @@ $$\dot h_1 \;=\; h_2\,h_3, \qquad
   \dot h_2 \;=\; -h_1\,h_3, \qquad
   \dot h_3 \;=\; -h_1\,h_2.$$
 
-These are the equations Part 2 §1 uses. The conserved quantities are the
+These are the equations Part&nbsp;2 §1 uses. The conserved quantities are the
 Hamiltonian $\mathcal H_n = \tfrac12(h_1^2 + h_2^2)$ and the
 **Casimir** of $\mathfrak{se}(2)^{*}$,
 
@@ -297,7 +297,7 @@ This blows up wherever $u_1^{\ast} = 0$: the sub-Riemannian projections are
 allowed to have **cusps** — the reversal points of the parallel-parking
 trajectories of Appendix A2.
 
-The smooth elastica that Part 2 plots — $\kappa = 2k\,\mathrm{cn}$,
+The smooth elastica that Part&nbsp;2 plots — $\kappa = 2k\,\mathrm{cn}$,
 $2\,\mathrm{sech}$, $2\,\mathrm{dn}$ — are the **Euler elastic problem**: the
 sister problem in which the curve carries *unit forward speed* and the
 *heading* $\theta$ itself is the pendulum variable, so $\kappa = \dot\theta$
@@ -337,7 +337,7 @@ equivalent to the pendulum.
     <a href="https://moiseevigor.github.io/elliptic/examples/physical-pendulum/">elliptic project's
     physical-pendulum example</a>.
     Three regimes correspond exactly to the three SE(2) elastica families
-    of Part 2:
+    of Part&nbsp;2:
     <strong>libration</strong> ($-1 < E < 1$, blue closed orbits) —
     inflectional elastica;
     <strong>separatrix</strong> ($E = 1$, red curve) — Euler spiral;
@@ -361,7 +361,7 @@ $$\dot g(t) \;=\; g(t)\,\xi(t), \qquad \xi(t) := u_1^{\ast}(t) E_1 + u_2^{\ast}(
 
 with $u^{\ast}(t) = (h_1(t), h_2(t)) / \sqrt c$ from the maximisation, where
 $c := h_1^2 + h_2^2 = 2\mathcal H_n$ is constant along the flow.  In the
-$(x, y, \theta)$ chart this is exactly Part 1's Frenet–Serret integration:
+$(x, y, \theta)$ chart this is exactly Part&nbsp;1's Frenet–Serret integration:
 
 $$\dot x = u_1^{\ast} \cos\theta, \qquad \dot y = u_1^{\ast} \sin\theta,
   \qquad \dot \theta = u_2^{\ast}.$$
@@ -371,7 +371,7 @@ speed); then $s = t$, and $u_2^{\ast} = \dot\theta = \kappa$ is the
 **curvature** of the projected plane curve.  Here the heading $\theta$ is
 itself the pendulum, so its curvature is the pendulum velocity — a Jacobi
 cn (libration), sech (separatrix), or dn (rotation), i.e. the
-$\kappa = 2k\,\mathrm{cn}(s\mid k^2)$ family of Part 2 §2.
+$\kappa = 2k\,\mathrm{cn}(s\mid k^2)$ family of Part&nbsp;2 §2.
 
 </div><!-- /.l-body -->
 
@@ -487,14 +487,14 @@ normal Hamiltonian $\mathcal H_n = \tfrac12(h_1^2 + h_2^2)$.
 Lie–Poisson reduction on $\mathfrak{se}(2)^{\ast}$ collapses the
 $T^{\ast}\mathrm{SE}(2)$ flow to the costate equations
 $\dot h_1 = h_2 h_3, \dot h_2 = -h_1 h_3, \dot h_3 = -h_1 h_2$ — exactly the
-equations Part 2 §1 wrote down.  Writing $h_1 = \sin\alpha$, $h_2 = \cos\alpha$
+equations Part&nbsp;2 §1 wrote down.  Writing $h_1 = \sin\alpha$, $h_2 = \cos\alpha$
 on the unit Hamiltonian level and differentiating $\varphi = 2\alpha$ once
 more gives the nonlinear pendulum equation $\ddot\varphi + \sin\varphi = 0$.
 
 Appendix A4 will solve the pendulum equation in closed form using Jacobi
 elliptic functions and the arithmetic–geometric mean (AGM), recovering the
 period $4K(k^2)$ and the
-explicit $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$ formula of Part 2.
+explicit $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$ formula of Part&nbsp;2.
 
 </div><!-- /.l-body -->
 

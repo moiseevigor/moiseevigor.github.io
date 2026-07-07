@@ -31,7 +31,7 @@ published: false
 <div class="callout">
 <div class="callout-title">What this appendix is for</div>
 
-Part 1 §3 introduces a horizontal *distribution* $\mathcal H = \mathrm{span}\{X_1, X_2\}$
+Part&nbsp;1 §3 introduces a horizontal *distribution* $\mathcal H = \mathrm{span}\{X_1, X_2\}$
 on $\mathrm{SE}(2)$, calls it "completely non-integrable", invokes the
 *Hörmander* (bracket-generating) condition, and applies the
 *Chow–Rashevskii* reachability theorem.  These are not metaphors —
@@ -295,7 +295,7 @@ makes this computation well-posed.
     elliptic project</a>: forward, steer, reverse, steer.  Drop $\varepsilon$
     and the path becomes a finer-grained zigzag; the SR-shortest path is the
     $\varepsilon \to 0$ limit, which is one of the elastica geodesics of
-    Part 2.
+    Part&nbsp;2.
   </figcaption>
 </figure>
 
@@ -321,7 +321,7 @@ and the <span class="annotated-term" data-note="note-cc">**sub-Riemannian distan
 over all admissible curves from $p$ to $q$.  Chow's theorem ensures this
 infimum is finite (the set of admissible curves is non-empty).
 
-For the V1 metric of Part 1 with frame $\{X_1, X_2\}$ orthonormal, an
+For the V1 metric of Part&nbsp;1 with frame $\{X_1, X_2\}$ orthonormal, an
 admissible $\gamma$ writes as $\dot\gamma = u_1(t) X_1 + u_2(t) X_2$ and
 
 $$L_{\mathrm{SR}}(\gamma) \;=\; \int_0^T \sqrt{u_1^2 + u_2^2}\,dt.$$
@@ -408,7 +408,7 @@ guarantees any two V1 neurons can be linked by a horizontal curve.
 
 Appendix A3 will turn the SR-length minimisation problem into a Hamiltonian
 system on $\mathfrak{se}(2)^{\ast}$ via the Pontryagin Maximum Principle —
-recovering the equations $\dot h_1 = h_2 h_3$ etc. that Part 2 §1 uses
+recovering the equations $\dot h_1 = h_2 h_3$ etc. that Part&nbsp;2 §1 uses
 without proof.
 
 </div><!-- /.l-body -->
@@ -446,7 +446,7 @@ without proof.
     <a href="https://moiseevigor.github.io/elliptic/examples/dubins-back-wheel/">
     Elliptic project — Dubins back wheel</a>.  Shows parking-style horizontal
     paths whose $\varepsilon \to 0$ limit is exactly the SR geodesic of
-    Part 2.
+    Part&nbsp;2.
   </li>
 </ol>
 </div>

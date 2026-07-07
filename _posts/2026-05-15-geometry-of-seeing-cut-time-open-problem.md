@@ -4,7 +4,7 @@ image: /public/img/posts/geometry-seeing-4.svg
 title: "The Open Problem: Exact Cut Time on SE(2)"
 subtitle: >
   For the visual cortex's geometry, when does a completed contour stop being the unique
-  shortest one? Part 3 bounded that moment by the first Maxwell time. Here we ask whether
+  shortest one? Part&nbsp;3 bounded that moment by the first Maxwell time. Here we ask whether
   the bound is exact — separating what Sachkov proved, what is verified only numerically,
   and what remains genuinely open at the degenerate boundary.
 date: 2026-05-15 09:00:00
@@ -29,7 +29,7 @@ published: false
 
 <div class="callout">
 <div class="callout-title">What this article covers</div>
-This is where the series arrives at the edge of what is known. Part 3 proved an
+This is where the series arrives at the edge of what is known. Part&nbsp;3 proved an
 <em>inequality</em>: a geodesic cannot stay globally shortest past the first Maxwell time
 $4K(k^2)/\omega_0$. The natural question — is that bound <em>exact</em>? — is where
 rigour, numerics, and open conjecture part ways. We give the honest map: the cut time and
@@ -39,11 +39,11 @@ separatrix limit, and the general "Maxwell equals cut" conjecture that $\mathrm{
 the headline example of. No hand-waving about what is settled and what is not.
 </div>
 
-## Where Part 3 left us
+## Where Part&nbsp;3 left us
 
 The story so far, in one line: the visual cortex completes a contour by the **globally
 shortest** horizontal path in $\mathrm{SE}(2)$, and such a path stays uniquely shortest
-only up to its **cut time** $t_{\mathrm{cut}}$. Part 3 gave two facts about it.
+only up to its **cut time** $t_{\mathrm{cut}}$. Part&nbsp;3 gave two facts about it.
 
 $$t_{\mathrm{cut}}(k) \;\le\; t_{\mathrm{conj}}(k), \qquad
   t_{\mathrm{cut}}(k) \;\le\; t_{\mathrm{MAX}}^1(k) = \frac{4K(k^2)}{\omega_0}.$$
@@ -73,18 +73,18 @@ $$t_{\mathrm{conj}}(k) \;\ge\; t_{\mathrm{MAX}}^1(k) = \frac{4K(k^2)}{\omega_0}.
 So of the two upper bounds, the **Maxwell** one is always the tighter. The geodesic loses
 *global* optimality (ties with its twin) before it ever loses *local* optimality (folds).
 That is exactly what you expect from a highly symmetric space: symmetry ends optimality
-early, well before the geometry would have folded on its own. Figure 1 puts the two curves
+early, well before the geometry would have folded on its own. Figure&nbsp;1 puts the two curves
 on the same axes.
 
 </div><!-- /.l-body -->
 
-<!-- Figure 1: the two clocks — Maxwell vs conjugate time vs k -->
+<!-- Figure&nbsp;1: the two clocks — Maxwell vs conjugate time vs k -->
 <figure class="l-middle">
   <div class="fig-box">
     <svg id="fig-clocks" style="width:100%;height:340px;"></svg>
   </div>
   <figcaption>
-    <strong>Figure 1. The Maxwell time binds before the conjugate time.</strong>
+    <strong>Figure&nbsp;1. The Maxwell time binds before the conjugate time.</strong>
     Horizontal axis: modulus $k \in (0, 1)$ of the inflectional geodesic (dimensionless).
     Vertical axis: arc length (units $\omega_0 = 1$). Blue: the first Maxwell time
     $t_{\mathrm{MAX}}^1 = 4K(k^2)$, plotted exactly — and proven to equal the cut time.
@@ -111,7 +111,7 @@ inflectional family is known exactly.
 $$\boxed{\; t_{\mathrm{cut}}(k) \;=\; t_{\mathrm{MAX}}^1(k) \;=\; \frac{4K(k^2)}{\omega_0}. \;}$$
 
 The first Maxwell tie is not merely an upper bound — it is where global optimality actually
-ends. The elliptic period $4K(k^2)$, which began life in Part 2 as the spatial period of the
+ends. The elliptic period $4K(k^2)$, which began life in Part&nbsp;2 as the spatial period of the
 curvature, is therefore the exact cut time of the visual-cortex geodesics.
 </div>
 
@@ -125,14 +125,18 @@ you when the shortest path stops being unique.
 
 More than the number, Sachkov (2011) determined the whole <span class="annotated-term" data-note="note-cut-locus">cut locus</span> — the set of *all* cut points in
 $\mathrm{SE}(2)$ — and with it the **optimal synthesis**: for any target configuration, which
-geodesic is the minimiser and up to what length. Projected to the plane, the cut points
-swept out as $k$ varies trace a sharp caustic-like curve; Figure 2 draws it. This is a
-complete solution for the principal family — the visual-cortex completion problem is, for
-generic inputs, *solved*.
+geodesic is the minimiser and up to what length. And the inflectional cut points land
+somewhere satisfying: at $s = 4K(k^2)$ the height is $y = 2k(1 - \mathrm{cn}(4K)) = 0$, so
+every cut point projects back onto the **launch axis** — the mirror plane of the
+$\sigma$-symmetry. Where else could a curve first tie with its own mirror image?
+Figure&nbsp;2 draws the whole fan of geodesics closing back onto that axis; at the
+figure-eight modulus $k \approx 0.909$ (Part&nbsp;2's landmark, where $2E = K$) the cut
+point is the origin itself. This is a complete solution for the principal family — the
+visual-cortex completion problem is, for generic inputs, *solved*.
 
 </div><!-- /.l-body -->
 
-<!-- Figure 2: the projected cut locus, traced by first-Maxwell endpoints -->
+<!-- Figure&nbsp;2: the projected cut locus, traced by first-Maxwell endpoints -->
 <figure class="l-middle">
   <div class="fig-box">
     <div class="fig-controls">
@@ -150,15 +154,19 @@ generic inputs, *solved*.
     <svg id="fig-cut" style="width:100%;height:420px;"></svg>
   </div>
   <figcaption>
-    <strong>Figure 2. The cut locus, drawn in the plane.</strong>
+    <strong>Figure&nbsp;2. Every cut point lands on the mirror axis.</strong>
     Faint curves: inflectional geodesics leaving the origin (black dot), one per signed
-    modulus $k$ — blue for $k>0$ (curving one way), red for $k<0$ (the mirror). Each is drawn
-    up to its own cut time $s = 4K(k^2)$, and its endpoint (dot) is a projected cut point.
-    The bold orange curve threading those endpoints is the <strong>projected cut locus</strong>
-    — the set of planar positions where the sub-Riemannian shortest path first stops being
-    unique. Its cusps are where the cut locus meets the conjugate caustic. Axes: plane $x, y$
-    in the geodesic's natural units. Drag $|k|$ to grow the family; toggle the geodesics to
-    see the locus alone.
+    modulus $k$ — blue for $k>0$, red for the mirror twins $k<0$. Each is drawn exactly up
+    to its own cut time $s = 4K(k^2)$, and each endpoint (orange dot) is a cut point: it
+    sits on the horizontal <strong>launch axis</strong>, the fixed plane of the mirror
+    symmetry — the only place a geodesic can first tie with its own mirror image. The
+    thick orange segment on the axis is the <strong>projected cut locus</strong> swept out
+    as $|k|$ grows: it starts near $x = 2\pi$ (the $k \to 0$ limit, $4K(0) = 2\pi$), moves
+    inward, passes <em>through the origin</em> at the figure-eight modulus
+    $k \approx 0.909$ (ring marker — the geodesic closes into Part&nbsp;2's lemniscate),
+    and continues to negative $x$ beyond it. Axes: plane $x, y$ in the geodesic's natural
+    units ($\omega_0 = 1$). Drag $|k|$ to grow the family; toggle the geodesics to see the
+    locus alone.
   </figcaption>
 </figure>
 
@@ -176,12 +184,13 @@ full extremal set also contains the **non-inflectional** family (rotating pendul
 **separatrix** (the Euler spiral, $k \to 1$), plus the **abnormal** extremals. For these,
 the Maxwell-stratum bookkeeping is more delicate: the symmetry group acts with degeneracies,
 some strata collide, and the tidy "first tie at $4K(k^2)$" argument needs case-by-case care.
-Sachkov's papers handle them, but the analysis is intricate and not reducible to the
-one-line calculation that works for the generic case.
+Sachkov's papers handle them family by family, but the analysis is intricate and not
+reducible to the one-line calculation that works for the generic case — and what stays
+delicate is making the treatment *uniform* across the seams where the families meet.
 
 <aside id="note-abnormal">
 An <strong>abnormal extremal</strong> is a candidate geodesic on which the Pontryagin
-Hamiltonian degenerates (the multiplier $\nu = 0$ of Part 2). On $\mathrm{SE}(2)$ they exist
+Hamiltonian degenerates (the multiplier $\nu = 0$ of Part&nbsp;2). On $\mathrm{SE}(2)$ they exist
 but are never strictly optimal — yet ruling them out rigorously, uniformly, is part of what
 makes a complete proof hard, and it is the standard sticking point in higher-dimensional
 sub-Riemannian problems.
@@ -194,7 +203,7 @@ inflectional geodesic degenerates into the Euler spiral. Statements that are uni
 on $(0,1)$ can fail to extend cleanly to the closed endpoint. The behaviour of the cut locus
 *at* the <span class="annotated-term" data-note="note-abnormal">abnormal</span>/separatrix boundary — the seam between families — is where numerical
 confidence outruns fully uniform proof, and it is the concrete residue behind the "complete
-proof in all degenerate cases remains open" caveat we flagged back in Part 1.
+proof in all degenerate cases remains open" caveat we flagged back in Part&nbsp;1.
 
 ### 3. The general conjecture
 
@@ -221,22 +230,18 @@ worked example, not the general answer.
 
 ## Status of the problem, honestly
 
-<div class="l-body" markdown="1">
-
 | Claim | Status |
 |:------|:-------|
 | $t_{\mathrm{cut}} = 4K(k^2)/\omega_0$ for the inflectional family | **Proved** (Sachkov 2010–2011) |
 | $t_{\mathrm{conj}} \ge t_{\mathrm{MAX}}^1$, so Maxwell binds first | **Proved** |
 | Full cut locus & optimal synthesis on $\mathrm{SE}(2)$ | **Proved**, all families |
 | Uniformity of the synthesis into the separatrix limit $k\to 1$ | Numerically solid; delicate to state uniformly |
-| Complete rigour on all abnormal/degenerate strata | Established for $\mathrm{SE}(2)$; the general pattern is hard |
+| Complete rigour across the degenerate/abnormal seams | The Part&nbsp;1 caveat: verified numerically; a fully uniform proof at the seams remains open |
 | General "Maxwell $=$ cut" theorem for left-invariant SR problems | **Open** — proved only case-by-case |
-
-</div>
 
 The line to hold onto: **$\mathrm{SE}(2)$ itself is solved.** For the visual cortex's
 geometry, we know exactly when a completed contour stops being the unique shortest one — at
-arc length $4K(k^2)$, the elliptic period that has followed us since Part 2. What remains
+arc length $4K(k^2)$, the elliptic period that has followed us since Part&nbsp;2. What remains
 open is not this space but the *general theory* it is the flagship example of: why symmetry
 so reliably sets the cut time, and whether that can be made a theorem rather than a growing
 list of triumphant special cases.
@@ -244,10 +249,10 @@ list of triumphant special cases.
 ## Where the series ends
 
 Four parts ago we started with an illusion — the mind completing a contour that is not
-there. It became a shortest-path problem on $\mathrm{SE}(2)$ (Part 1), whose geodesics are
-Euler's elastica in Jacobi elliptic functions (Part 2), whose global optimality is broken by
-a four-element symmetry group at the first Maxwell time (Part 3), which is the exact cut time
-$4K(k^2)/\omega_0$ — with a clean general theory still waiting to be written (Part 4).
+there. It became a shortest-path problem on $\mathrm{SE}(2)$ (Part&nbsp;1), whose geodesics are
+Euler's elastica in Jacobi elliptic functions (Part&nbsp;2), whose global optimality is broken by
+a four-element symmetry group at the first Maxwell time (Part&nbsp;3), which is the exact cut time
+$4K(k^2)/\omega_0$ — with a clean general theory still waiting to be written (Part&nbsp;4).
 
 The elliptic integral $K(k^2)$ has been the thread throughout: period of the curvature,
 first Maxwell time, cut time. That a single classical special function — the same one Gauss
@@ -277,9 +282,9 @@ is the quiet punchline of the whole series.
     <a href="https://arxiv.org/abs/0807.4731">arXiv:0807.4731</a>
   </li>
   <li>
-    A. A. Ardentov &amp; Yu. L. Sachkov (2011). "Solution to Euler's elastic problem."
-    <em>Automation and Remote Control</em> 72(11): 2298–2312 — the same Maxwell-strata method
-    applied to the elastica.
+    Yu. L. Sachkov (2008). "Maxwell strata in the Euler elastic problem."
+    <em>Journal of Dynamical and Control Systems</em> 14(2): 169–234 — the same
+    reflection-symmetry method on Euler's elastica.
   </li>
   <li>
     D. Barilari, U. Boscain &amp; R. Neel (2012). "Small-time heat-kernel asymptotics at the
@@ -301,7 +306,7 @@ is the quiet punchline of the whole series.
 (function () {
 'use strict';
 
-// ── Figure 1: Maxwell time vs conjugate time vs k ─────────────────────────
+// ── Figure&nbsp;1: Maxwell time vs conjugate time vs k ─────────────────────────
 function drawClocks() {
   const svg = document.getElementById('fig-clocks');
   if (!svg) return;
@@ -367,7 +372,7 @@ function drawClocks() {
     .attr('style', 'font-family:var(--sans,sans-serif);font-size:10px;fill:#c62828').text('k→1: both → ∞');
 }
 
-// ── Figure 2: projected cut locus from first-Maxwell endpoints ─────────────
+// ── Figure&nbsp;2: projected cut locus from first-Maxwell endpoints ─────────────
 function inflGeo(k, sMax, N) {
   // signed k allowed: κ = 2k·cn (k<0 mirrors)
   const m = k * k, ds = sMax / N;
@@ -434,21 +439,38 @@ function drawCut() {
     });
   }
 
-  // the cut locus: order endpoints by k (which sweeps a connected curve)
-  const ordered = geos.slice().sort((a, b) => a.k - b.k).map(x => x.end);
-  g.append('path').attr('d', d3.line().x(p => xS(p.x)).y(p => yS(p.y))(ordered))
-    .attr('fill', 'none').attr('stroke', '#e65100').attr('stroke-width', 2.6);
-  ordered.forEach(p => g.append('circle').attr('cx', xS(p.x)).attr('cy', yS(p.y)).attr('r', 2.3).attr('fill', '#e65100'));
+  // The projected cut locus: every endpoint has y(4K) = 2k(1 − cn(4K)) = 0, so
+  // the locus is the swept segment of the LAUNCH AXIS between the extreme
+  // endpoint abscissae — drawn on y = 0 (endpoints snap there; the tiny
+  // integrator residue in y is not meaningful).
+  const xEnds = geos.map(gd => gd.end.x);
+  const xLo = Math.min(...xEnds), xHi = Math.max(...xEnds);
+  g.append('line')
+    .attr('x1', xS(xLo)).attr('x2', xS(xHi)).attr('y1', yS(0)).attr('y2', yS(0))
+    .attr('stroke', '#e65100').attr('stroke-width', 3.2).attr('opacity', 0.85)
+    .attr('stroke-linecap', 'round');
+  geos.forEach(gd => g.append('circle')
+    .attr('cx', xS(gd.end.x)).attr('cy', yS(0)).attr('r', 2.6).attr('fill', '#e65100'));
+
+  // figure-eight landmark: at k ≈ 0.909 (2E = K) the cut point is the origin
+  if (kMax >= 0.909) {
+    g.append('circle').attr('cx', xS(0)).attr('cy', yS(0)).attr('r', 9)
+      .attr('fill', 'none').attr('stroke', '#e65100').attr('stroke-width', 1.6);
+    g.append('text').attr('x', xS(0)).attr('y', yS(0) - 14).attr('text-anchor', 'middle')
+      .attr('style', 'font-family:var(--sans,sans-serif);font-size:10px;fill:#e65100')
+      .text('k ≈ 0.909: cut point = origin');
+  }
 
   // origin
   g.append('circle').attr('cx', xS(0)).attr('cy', yS(0)).attr('r', 4).attr('fill', '#222');
 
   // labels
   g.append('text').attr('x', m.l + 2).attr('y', m.t + 12)
-    .attr('style', 'font-family:var(--sans,sans-serif);font-size:11px;fill:#e65100').text('projected cut locus');
+    .attr('style', 'font-family:var(--sans,sans-serif);font-size:11px;fill:#e65100')
+    .text('projected cut locus — the swept stretch of the launch axis');
   g.append('text').attr('x', W - m.r).attr('y', H - m.b - 4).attr('text-anchor', 'end')
     .attr('style', 'font-family:var(--mono,monospace);font-size:10px;fill:#888')
-    .text(`|k| ≤ ${kMax.toFixed(2)}`);
+    .text(`|k| ≤ ${kMax.toFixed(2)}   locus x ∈ [${xLo.toFixed(2)}, ${xHi.toFixed(2)}]`);
 }
 
 // ── boot ──────────────────────────────────────────────────────────────────
