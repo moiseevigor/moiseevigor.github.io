@@ -4,17 +4,17 @@ image: /public/img/posts/geometry-seeing-4.svg
 title: "The Open Problem: Exact Cut Time on SE(2)"
 subtitle: >
   For the visual cortex's geometry, when does a completed contour stop being the unique
-  shortest one? Part&nbsp;3 bounded that moment by the first Maxwell time. Here we ask whether
-  the bound is exact — separating what Sachkov proved, what is verified only numerically,
-  and what remains genuinely open at the degenerate boundary.
+  shortest one? Sachkov's answer is exact — half a pendulum period, 2K(k²), with no
+  conjugate points anywhere along the way. Here we lay out the theorem, the surprise, and
+  what genuinely remains open beyond SE(2).
 date: 2026-05-15 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, SE2, cut-locus, conjugate-time, open-problem, optimal-control]
 description: >
-  The cut time of the SE(2) sub-Riemannian problem: why it equals the first Maxwell time
-  4K(k²)/ω₀ for inflectional geodesics, the structure of the cut locus, and the open
-  frontier — degenerate strata, the separatrix limit, and the general Maxwell-equals-cut
-  conjecture for left-invariant sub-Riemannian problems.
+  The cut time of the SE(2) sub-Riemannian problem: Sachkov's theorem t_cut = t(λ) —
+  2K(k²) on the inflectional family, 2kp₁(k) on the rotating one, infinite on the
+  separatrix — the absence of conjugate points on the generic family, and the open
+  frontier: the general Maxwell-equals-cut question for left-invariant SR problems.
 series: geometry-of-seeing
 series_title: "Geometry of Seeing"
 series_part: 4
@@ -29,14 +29,15 @@ published: false
 
 <div class="callout">
 <div class="callout-title">What this article covers</div>
-This is where the series arrives at the edge of what is known. Part&nbsp;3 proved an
-<em>inequality</em>: a geodesic cannot stay globally shortest past the first Maxwell time
-$4K(k^2)/\omega_0$. The natural question — is that bound <em>exact</em>? — is where
-rigour, numerics, and open conjecture part ways. We give the honest map: the cut time and
-cut locus of $\mathrm{SE}(2)$ that Sachkov <em>proved</em> (2010–2011), the parts confirmed
-only by computation, and the frontier that stays open — the degenerate strata, the
-separatrix limit, and the general "Maxwell equals cut" conjecture that $\mathrm{SE}(2)$ is
-the headline example of. No hand-waving about what is settled and what is not.
+This is where the series arrives at the edge of what is known. Part&nbsp;3 ended with an
+<em>inequality</em>: the reflection strata forbid a free geodesic from staying globally
+shortest past the first Maxwell time $\mathfrak t(\lambda)$ — $2K(k^2)$ on the generic
+family. The natural question — is that bound <em>exact</em>? — has a proven answer for
+$\mathrm{SE}(2)$: yes, everywhere, with a bonus no one would guess — the generic
+geodesics never develop conjugate points at all. We give the honest map: Sachkov's
+theorems (2010–2011) in full, the elastica sister picture beside them, and the frontier
+that stays open — the general "Maxwell equals cut" question that $\mathrm{SE}(2)$ is the
+headline example of. No hand-waving about what is settled and what is not.
 </div>
 
 ## Where Part&nbsp;3 left us
@@ -45,18 +46,19 @@ The story so far, in one line: the visual cortex completes a contour by the **gl
 shortest** horizontal path in $\mathrm{SE}(2)$, and such a path stays uniquely shortest
 only up to its **cut time** $t_{\mathrm{cut}}$. Part&nbsp;3 gave two facts about it.
 
-$$t_{\mathrm{cut}}(k) \;\le\; t_{\mathrm{conj}}(k), \qquad
-  t_{\mathrm{cut}}(k) \;\le\; t_{\mathrm{MAX}}^1(k) = \frac{4K(k^2)}{\omega_0}.$$
+$$t_{\mathrm{cut}}(\lambda) \;\le\; t_{\mathrm{conj}}(\lambda), \qquad
+  t_{\mathrm{cut}}(\lambda) \;\le\; \mathfrak t(\lambda) \;\bigl(= 2K(k^2) \text{ on the inflectional family}\bigr).$$
 
 The first is general (global failure precedes local). The second came from symmetry: the
-$\sigma$-mirror twin ties the geodesic at $4K(k^2)$ at the latest. Two upper bounds. The
-whole question of this article is whether either is achieved — and if so, which one binds.
+reflection strata tie the geodesic by half a pendulum period at the latest. Two upper
+bounds. The whole question of this article is whether either is achieved — and which one
+binds.
 
-## The conjugate time never binds first
+## The conjugate clock never rings
 
 Start with the two clocks side by side. For the inflectional family, Sachkov's Jacobi-field
 analysis (Appendix [A5](/mathematics/2026/05/05/geometry-of-seeing-A5-sr-exponential/))
-gives the first conjugate time, and comparing it to the Maxwell time settles their order.
+delivers a result far cleaner than a bound.
 
 <aside id="note-conj-time">
 The <strong>conjugate time</strong> is the first arc length at which the sub-Riemannian
@@ -65,16 +67,20 @@ origin first folds. It marks loss of <em>local</em> optimality. For SE(2) it is 
 from the second variation of the length functional along the geodesic.
 </aside>
 
-The result is clean: the <span class="annotated-term" data-note="note-conj-time">conjugate time</span> comes at or after the Maxwell
-time, uniformly in $k$,
+The result (Sachkov 2011, Thm 2.1): along every inflectional geodesic — and every
+critical-energy one — **there are no <span class="annotated-term" data-note="note-conj-time">conjugate points</span> at all**,
 
-$$t_{\mathrm{conj}}(k) \;\ge\; t_{\mathrm{MAX}}^1(k) = \frac{4K(k^2)}{\omega_0}.$$
+$$t_{\mathrm{conj}}(\lambda) \;=\; +\infty
+\qquad (\lambda \in C_1 \cup C_3 \cup C_4 \cup C_5).$$
 
-So of the two upper bounds, the **Maxwell** one is always the tighter. The geodesic loses
-*global* optimality (ties with its twin) before it ever loses *local* optimality (folds).
-That is exactly what you expect from a highly symmetric space: symmetry ends optimality
-early, well before the geometry would have folded on its own. Figure&nbsp;1 puts the two curves
-on the same axes.
+Local optimality never fails on the generic family; the *only* way these geodesics stop
+being shortest is the symmetric tie. (Conjugate points do exist for the *rotating* family,
+pinched between elliptic quantities $2kp_1^1(k) \le t_{\mathrm{conj}} \le
+\min(4kK(k), 2kp_1^{\alpha_1}(k))$ — with the binding branch switching exactly at the
+figure-eight modulus $k_0 \approx 0.909$ of Part&nbsp;2 — and, in all cases,
+$t_{\mathrm{conj}} \ge \mathfrak t$.) So of the two clocks, **Maxwell is not merely
+first: on the generic family it is the only one that ever rings.** Symmetry ends
+optimality; the geometry never folds. Figure&nbsp;1 draws it.
 
 </div><!-- /.l-body -->
 
@@ -84,17 +90,16 @@ on the same axes.
     <svg id="fig-clocks" style="width:100%;height:340px;"></svg>
   </div>
   <figcaption>
-    <strong>Figure&nbsp;1. The Maxwell time binds before the conjugate time.</strong>
+    <strong>Figure&nbsp;1. On the generic family, only the Maxwell clock rings.</strong>
     Horizontal axis: modulus $k \in (0, 1)$ of the inflectional geodesic (dimensionless).
-    Vertical axis: arc length (units $\omega_0 = 1$). Blue: the first Maxwell time
-    $t_{\mathrm{MAX}}^1 = 4K(k^2)$, plotted exactly — and proven to equal the cut time.
-    Green (dashed): the first conjugate time, drawn <em>schematically</em> to show the one
-    fact that matters here — it lies at or above the Maxwell curve everywhere (Sachkov's
-    bound $t_{\mathrm{conj}} \ge t_{\mathrm{MAX}}^1$), so it never determines the cut; the
-    green curve is an indicative envelope, not its exact closed form. Both diverge as
-    $k \to 1$ (the separatrix / Euler-spiral limit), where the elliptic period $K(k^2) \to
-    \infty$. The shaded region below the blue curve is where the geodesic is <em>the</em>
-    unique shortest path; crossing blue is the cut.
+    Vertical axis: SR arc length. Blue: the cut time $t_{\mathrm{cut}} = \mathfrak t =
+    2K(k^2)$, plotted exactly — half a pendulum period, proven equal to the first Maxwell
+    time (Sachkov 2011). There is no conjugate curve to draw at all: for the whole
+    inflectional family $t_{\mathrm{conj}} = +\infty$ (Thm 2.1), so local optimality never
+    fails — the annotation marks it. The cut curve diverges as $k \to 1$ (the separatrix
+    limit, where the geodesic stays optimal forever), and starts at $2K(0) = \pi$ for the
+    near-straight $k \to 0$ curves. The shaded region below the blue curve is where the
+    geodesic is <em>the</em> unique shortest path; crossing blue is the cut.
   </figcaption>
 </figure>
 
@@ -102,17 +107,23 @@ on the same axes.
 
 ## What is proved: the cut time and the cut locus
 
-Because the Maxwell bound is the binding one and it is *achieved*, the cut time of the
-inflectional family is known exactly.
+Because the Maxwell bound is the only finite one and it is *achieved*, the cut time is
+known exactly — family by family.
 
 <div class="callout theorem">
-<div class="callout-title">Cut time, inflectional family (Sachkov 2010–2011)</div>
+<div class="callout-title">Cut time (Sachkov 2010–2011)</div>
 
-$$\boxed{\; t_{\mathrm{cut}}(k) \;=\; t_{\mathrm{MAX}}^1(k) \;=\; \frac{4K(k^2)}{\omega_0}. \;}$$
+$$\boxed{\; t_{\mathrm{cut}}(\lambda) \;=\; \mathfrak t(\lambda) \;}
+\qquad\text{with}\qquad
+\mathfrak t = \begin{cases} 2K(k^2) & \text{inflectional (oscillating pendulum)},\\[2pt]
+2k\,p_1^1(k) & \text{non-inflectional (rotating)},\\[2pt]
++\infty & \text{separatrix}, \end{cases}$$
 
-The first Maxwell tie is not merely an upper bound — it is where global optimality actually
-ends. The elliptic period $4K(k^2)$, which began life in Part&nbsp;2 as the spatial period of the
-curvature, is therefore the exact cut time of the visual-cortex geodesics.
+where $p_1^1(k)$ is the first positive root of $f_1(p) = \mathrm{cn}\,p\,(E(p)-p) -
+\mathrm{dn}\,p\,\mathrm{sn}\,p$. The first Maxwell tie is not merely an upper bound —
+it is exactly where global optimality ends. Half a pendulum period, $2K(k^2)$: the
+elliptic clock that set the curvature period in Part&nbsp;2 also stops the free geodesic,
+at half a turn of its dial. And the separatrix geodesics never stop being optimal at all.
 </div>
 
 <aside id="note-cut-locus">
@@ -124,19 +135,22 @@ you when the shortest path stops being unique.
 </aside>
 
 More than the number, Sachkov (2011) determined the whole <span class="annotated-term" data-note="note-cut-locus">cut locus</span> — the set of *all* cut points in
-$\mathrm{SE}(2)$ — and with it the **optimal synthesis**: for any target configuration, which
-geodesic is the minimiser and up to what length. And the inflectional cut points land
-somewhere satisfying: at $s = 4K(k^2)$ the height is $y = 2k(1 - \mathrm{cn}(4K)) = 0$, so
-every cut point projects back onto the **launch axis** — the mirror plane of the
+$\mathrm{SE}(2)$ — and with it the **optimal synthesis**: for any target configuration,
+which geodesic is the minimiser and up to what length. The visual-cortex completion
+problem is, for generic inputs, *solved*.
+
+The mirror-symmetry picture of Part&nbsp;3 still deserves its portrait — on the elastica
+sister family, where everything is smooth and visible. There the tie has a geometric
+signature: at $s = 4K(k^2)$ the height is $y = 2k(1 - \mathrm{cn}(4K)) = 0$, so every
+mirror-pair coincidence lands back on the **launch axis** — the mirror plane of the
 $\sigma$-symmetry. Where else could a curve first tie with its own mirror image?
-Figure&nbsp;2 draws the whole fan of geodesics closing back onto that axis; at the
-figure-eight modulus $k \approx 0.909$ (Part&nbsp;2's landmark, where $2E = K$) the cut
-point is the origin itself. This is a complete solution for the principal family — the
-visual-cortex completion problem is, for generic inputs, *solved*.
+Figure&nbsp;2 draws the whole elastica fan closing back onto that axis; at the
+figure-eight modulus $k \approx 0.909$ (Part&nbsp;2's landmark, where $2E = K$) the tie
+point is the origin itself.
 
 </div><!-- /.l-body -->
 
-<!-- Figure&nbsp;2: the projected cut locus, traced by first-Maxwell endpoints -->
+<!-- Figure&nbsp;2: the elastica mirror-tie fan, closing onto the launch axis -->
 <figure class="l-middle">
   <div class="fig-box">
     <div class="fig-controls">
@@ -148,25 +162,26 @@ visual-cortex completion problem is, for generic inputs, *solved*.
         <input type="checkbox" id="cut-geo" checked>
       </label>
       <span style="margin-left:auto;font-size:12px;color:#888;">
-        each curve ends at its cut point $s = 4K(k^2)$
+        each elastica ends at its mirror tie $s = 4K(k^2)$
       </span>
     </div>
     <svg id="fig-cut" style="width:100%;height:420px;"></svg>
   </div>
   <figcaption>
-    <strong>Figure&nbsp;2. Every cut point lands on the mirror axis.</strong>
-    Faint curves: inflectional geodesics leaving the origin (black dot), one per signed
-    modulus $k$ — blue for $k>0$, red for the mirror twins $k<0$. Each is drawn exactly up
-    to its own cut time $s = 4K(k^2)$, and each endpoint (orange dot) is a cut point: it
-    sits on the horizontal <strong>launch axis</strong>, the fixed plane of the mirror
-    symmetry — the only place a geodesic can first tie with its own mirror image. The
-    thick orange segment on the axis is the <strong>projected cut locus</strong> swept out
-    as $|k|$ grows: it starts near $x = 2\pi$ (the $k \to 0$ limit, $4K(0) = 2\pi$), moves
-    inward, passes <em>through the origin</em> at the figure-eight modulus
-    $k \approx 0.909$ (ring marker — the geodesic closes into Part&nbsp;2's lemniscate),
-    and continues to negative $x$ beyond it. Axes: plane $x, y$ in the geodesic's natural
-    units ($\omega_0 = 1$). Drag $|k|$ to grow the family; toggle the geodesics to see the
-    locus alone.
+    <strong>Figure&nbsp;2. Every elastica mirror tie lands on the launch axis.</strong>
+    Faint curves: inflectional <em>elastica</em> leaving the origin (black dot), one per
+    signed modulus $k$ — blue for $k>0$, red for the mirror twins $k<0$. Each is drawn
+    exactly up to its mirror-tie time $s = 4K(k^2)$ (Part&nbsp;3), and each endpoint
+    (orange dot) sits on the horizontal <strong>launch axis</strong>, the fixed plane of
+    the mirror symmetry — the only place a curve can first tie with its own mirror image.
+    The thick orange segment is the swept tie locus: it starts near $x = 2\pi$ (the
+    $k \to 0$ limit, $4K(0) = 2\pi$), moves inward, passes <em>through the origin</em>
+    at the figure-eight modulus $k \approx 0.909$ (ring marker — the curve closes into
+    Part&nbsp;2's lemniscate), and continues to negative $x$ beyond it. The free SR cut
+    happens at half this clock ($2K(k^2)$) in costate coordinates — this figure is the
+    smooth family's portrait of the same reflection mechanism. Axes: plane $x, y$
+    (elastica arc-length units). Drag $|k|$ to grow the family; toggle the geodesics to
+    see the locus alone.
   </figcaption>
 </figure>
 
@@ -179,11 +194,13 @@ three places, and honesty requires naming them precisely rather than gesturing a
 
 ### 1. The degenerate strata
 
-The clean derivation used the *inflectional* family and the reflection $\varepsilon^2$. The
-full extremal set also contains the **non-inflectional** family (rotating pendulum) and the
-**separatrix** (the Euler spiral, $k \to 1$), plus the **abnormal** extremals. For these,
-the Maxwell-stratum bookkeeping is more delicate: the symmetry group acts with degeneracies,
-some strata collide, and the tidy "first tie at $4K(k^2)$" argument needs case-by-case care.
+The clean derivation used the *inflectional* family and one mirror. The full extremal
+set also contains the **non-inflectional** family (rotating pendulum, cut at
+$2kp_1^1(k)$ — a transcendental root, not a complete integral) and the **separatrix**
+(the borderline family, $k \to 1$, optimal forever), plus the **abnormal** extremals.
+For these, the Maxwell-stratum bookkeeping is more delicate: the symmetry group acts with
+degeneracies, some strata collide, and the tidy half-period answer of the generic family
+needs case-by-case care.
 Sachkov's papers handle them family by family, but the analysis is intricate and not
 reducible to the one-line calculation that works for the generic case — and what stays
 delicate is making the treatment *uniform* across the seams where the families meet.
@@ -198,8 +215,9 @@ sub-Riemannian problems.
 
 ### 2. The separatrix limit
 
-As $k \to 1^-$, the period $4K(k^2) \to \infty$: the cut time runs off to infinity and the
-inflectional geodesic degenerates into the Euler spiral. Statements that are uniform in $k$
+As $k \to 1^-$, $2K(k^2) \to \infty$: the cut time runs off to infinity and the
+inflectional geodesic degenerates into the borderline family, which stays optimal forever.
+Statements that are uniform in $k$
 on $(0,1)$ can fail to extend cleanly to the closed endpoint. The behaviour of the cut locus
 *at* the <span class="annotated-term" data-note="note-abnormal">abnormal</span>/separatrix boundary — the seam between families — is where numerical
 confidence outruns fully uniform proof, and it is the concrete residue behind the "complete
@@ -232,8 +250,8 @@ worked example, not the general answer.
 
 | Claim | Status |
 |:------|:-------|
-| $t_{\mathrm{cut}} = 4K(k^2)/\omega_0$ for the inflectional family | **Proved** (Sachkov 2010–2011) |
-| $t_{\mathrm{conj}} \ge t_{\mathrm{MAX}}^1$, so Maxwell binds first | **Proved** |
+| $t_{\mathrm{cut}} = \mathfrak t(\lambda)$; on the inflectional family $2K(k^2)$ | **Proved** (Sachkov 2010–2011) |
+| No conjugate points on the inflectional & critical families ($t_{\mathrm{conj}} = \infty$); rotating family pinched in $[2kp_1^1, \min(4kK, 2kp_1^{\alpha_1})]$ | **Proved** |
 | Full cut locus & optimal synthesis on $\mathrm{SE}(2)$ | **Proved**, all families |
 | Uniformity of the synthesis into the separatrix limit $k\to 1$ | Numerically solid; delicate to state uniformly |
 | Complete rigour across the degenerate/abnormal seams | The Part&nbsp;1 caveat: verified numerically; a fully uniform proof at the seams remains open |
@@ -241,7 +259,8 @@ worked example, not the general answer.
 
 The line to hold onto: **$\mathrm{SE}(2)$ itself is solved.** For the visual cortex's
 geometry, we know exactly when a completed contour stops being the unique shortest one — at
-arc length $4K(k^2)$, the elliptic period that has followed us since Part&nbsp;2. What remains
+half a pendulum period, $2K(k^2)$, on the elliptic clock that has run since Part&nbsp;2 —
+and that no fold of the geometry ever pre-empts it. What remains
 open is not this space but the *general theory* it is the flagship example of: why symmetry
 so reliably sets the cut time, and whether that can be made a theorem rather than a growing
 list of triumphant special cases.
@@ -249,13 +268,15 @@ list of triumphant special cases.
 ## Where the series ends
 
 Four parts ago we started with an illusion — the mind completing a contour that is not
-there. It became a shortest-path problem on $\mathrm{SE}(2)$ (Part&nbsp;1), whose geodesics are
-Euler's elastica in Jacobi elliptic functions (Part&nbsp;2), whose global optimality is broken by
-a four-element symmetry group at the first Maxwell time (Part&nbsp;3), which is the exact cut time
-$4K(k^2)/\omega_0$ — with a clean general theory still waiting to be written (Part&nbsp;4).
+there. It became a shortest-path problem on $\mathrm{SE}(2)$ (Part&nbsp;1), governed by one
+pendulum whose smooth face is Euler's elastica in Jacobi elliptic functions and whose free
+face is their cuspidal siblings (Part&nbsp;2); global optimality is broken by the pendulum's
+reflection group (Part&nbsp;3), at exactly half a pendulum period, $2K(k^2)$, with no
+conjugate point ever intervening — and a clean general theory still waiting to be written
+(Part&nbsp;4).
 
 The elliptic integral $K(k^2)$ has been the thread throughout: period of the curvature,
-first Maxwell time, cut time. That a single classical special function — the same one Gauss
+mirror-tie clock, cut time. That a single classical special function — the same one Gauss
 computed with the arithmetic–geometric mean, the same one in the `elliptic` package that
 draws these figures — governs when your visual system's inferred contour stops being unique
 is the quiet punchline of the whole series.
@@ -269,7 +290,7 @@ is the quiet punchline of the whole series.
 <ol>
   <li>
     Yu. L. Sachkov (2011). "Cut locus and optimal synthesis in the sub-Riemannian problem
-    on the group of motions of a plane." <em>ESAIM: COCV</em> 17(4): 293–321.
+    on the group of motions of a plane." <em>ESAIM: COCV</em> 17(2): 293–321.
     <a href="https://arxiv.org/abs/0903.0727">arXiv:0903.0727</a>
   </li>
   <li>
@@ -340,36 +361,30 @@ function drawClocks() {
 
   const N = 300;
   const kArr = d3.range(N).map(i => 0.01 + i * 0.975 / N);
-  // first Maxwell time = 4K(k²); first conjugate time modelled as its known
-  // upper envelope (≥ Maxwell), here 4K(k²)·(1 + small gap) — schematic but
-  // order-correct: conjugate never dips below Maxwell.
-  const tMax = kArr.map(k => 4 * ellipticK(k * k));
-  const tConj = kArr.map(k => {
-    const Km = ellipticK(k * k);
-    return 4 * Km + 1.2 * Math.sqrt(1 - k * k);   // ≥ 4K, gap shrinks as k→1
-  });
+  // cut time = first Maxwell time = 2K(k²) (Sachkov 2011); no conjugate curve
+  // exists for the inflectional family (t_conj = +∞, Thm 2.1).
+  const tCut = kArr.map(k => 2 * ellipticK(k * k));
 
   const clip = v => Math.min(v, yMax);
-  g.append('path').attr('d', d3.line().x((_, i) => xSc(kArr[i])).y(v => ySc(clip(v)))(tConj))
-    .attr('fill', 'none').attr('stroke', '#2e7d32').attr('stroke-width', 2).attr('stroke-dasharray', '6,3');
-  g.append('path').attr('d', d3.line().x((_, i) => xSc(kArr[i])).y(v => ySc(clip(v)))(tMax))
+  g.append('path').attr('d', d3.line().x((_, i) => xSc(kArr[i])).y(v => ySc(clip(v)))(tCut))
     .attr('fill', 'none').attr('stroke', '#1565c0').attr('stroke-width', 2.4);
 
-  // shade the "uniquely shortest" region below the Maxwell curve
+  // shade the "uniquely shortest" region below the cut curve
   const area = d3.area().x((_, i) => xSc(kArr[i])).y0(ySc(0)).y1(v => ySc(clip(v)));
-  g.append('path').attr('d', area(tMax)).attr('fill', '#1565c0').attr('opacity', 0.06);
+  g.append('path').attr('d', area(tCut)).attr('fill', '#1565c0').attr('opacity', 0.06);
 
-  // legend
-  const leg = [['t_cut = 4K(k²)  (Maxwell)', '#1565c0', false], ['t_conj  (conjugate)', '#2e7d32', true]];
-  leg.forEach(([label, col, dash], i) => {
-    const lx = pad.l + 10, ly = pad.t + 12 + i * 18;
-    g.append('line').attr('x1', lx).attr('x2', lx + 22).attr('y1', ly).attr('y2', ly)
-      .attr('stroke', col).attr('stroke-width', 2.2).attr('stroke-dasharray', dash ? '6,3' : null);
-    g.append('text').attr('x', lx + 28).attr('y', ly + 4)
-      .attr('style', 'font-family:var(--sans,sans-serif);font-size:11px;fill:#555').text(label);
-  });
+  // legend + the no-conjugate annotation
+  const lx = pad.l + 10, ly = pad.t + 12;
+  g.append('line').attr('x1', lx).attr('x2', lx + 22).attr('y1', ly).attr('y2', ly)
+    .attr('stroke', '#1565c0').attr('stroke-width', 2.2);
+  g.append('text').attr('x', lx + 28).attr('y', ly + 4)
+    .attr('style', 'font-family:var(--sans,sans-serif);font-size:11px;fill:#555')
+    .text('t_cut = t_Maxwell = 2K(k²)  — half a pendulum period');
+  g.append('text').attr('x', lx).attr('y', ly + 22)
+    .attr('style', 'font-family:var(--sans,sans-serif);font-size:11px;fill:#2e7d32')
+    .text('t_conj = +∞ on this whole family (no conjugate points — Sachkov 2011, Thm 2.1)');
   g.append('text').attr('x', xSc(0.93)).attr('y', pad.t + 12).attr('text-anchor', 'end')
-    .attr('style', 'font-family:var(--sans,sans-serif);font-size:10px;fill:#c62828').text('k→1: both → ∞');
+    .attr('style', 'font-family:var(--sans,sans-serif);font-size:10px;fill:#c62828').text('k→1: cut → ∞');
 }
 
 // ── Figure&nbsp;2: projected cut locus from first-Maxwell endpoints ─────────────
@@ -401,7 +416,7 @@ function drawCut() {
   g.append('rect').attr('width', W).attr('height', H).attr('fill', '#fafafa');
   const m = { l: 28, r: 24, t: 18, b: 30 };
 
-  // one geodesic per signed k, each cut at its own s = 4K(k²)
+  // one elastica per signed k, each stopped at its mirror tie s = 4K(k²)
   const kVals = [];
   for (let kk = 0.06; kk <= kMax + 1e-9; kk += 0.045) { kVals.push(kk); kVals.push(-kk); }
   const geos = kVals.map(k => {
@@ -458,7 +473,7 @@ function drawCut() {
       .attr('fill', 'none').attr('stroke', '#e65100').attr('stroke-width', 1.6);
     g.append('text').attr('x', xS(0)).attr('y', yS(0) - 14).attr('text-anchor', 'middle')
       .attr('style', 'font-family:var(--sans,sans-serif);font-size:10px;fill:#e65100')
-      .text('k ≈ 0.909: cut point = origin');
+      .text('k ≈ 0.909: tie point = origin');
   }
 
   // origin
@@ -467,7 +482,7 @@ function drawCut() {
   // labels
   g.append('text').attr('x', m.l + 2).attr('y', m.t + 12)
     .attr('style', 'font-family:var(--sans,sans-serif);font-size:11px;fill:#e65100')
-    .text('projected cut locus — the swept stretch of the launch axis');
+    .text('elastica mirror ties — the swept stretch of the launch axis');
   g.append('text').attr('x', W - m.r).attr('y', H - m.b - 4).attr('text-anchor', 'end')
     .attr('style', 'font-family:var(--mono,monospace);font-size:10px;fill:#888')
     .text(`|k| ≤ ${kMax.toFixed(2)}   locus x ∈ [${xLo.toFixed(2)}, ${xHi.toFixed(2)}]`);

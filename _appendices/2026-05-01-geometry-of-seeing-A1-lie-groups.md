@@ -194,9 +194,9 @@ $\mathrm{SE}(2)$.
     <strong>Left panel (blue tint) — $\mathrm{SE}(2)$</strong>, the group
     of rigid motions of the plane.  $X = a_1 X_1 + a_2 X_2 + a_3 X_3$
     where $X_1 = $ forward translation, $X_2 = $ rotation, $X_3 = $
-    sideways translation.  Pure $a_2$ → circle through the origin;
-    pure $a_1$ → straight line; combined → screw motion projecting to a
-    circle.  The 3-D state $(x, y, \theta)$ is shown by the planar trace
+    sideways translation.  Pure $a_2$ → rotation in place (the trace is a
+    point at the origin); pure $a_1$ → straight line; combined → screw
+    motion projecting to a circle.  The 3-D state $(x, y, \theta)$ is shown by the planar trace
     plus a frame at $t = 0$.  The "missing" $X_3$ direction is rendered as
     a thin orange line — non-horizontal in the contact-bundle sense.
 
@@ -398,9 +398,10 @@ have such metrics; $\mathrm{SE}(2)$ does **not** — its adjoint action is
 non-compact, which is the standard obstruction.  So even a Riemannian story
 on $\mathrm{SE}(2)$ would not make $\exp(tX)$ geodesic.  Part&nbsp;1 goes further
 still: its metric is *sub-Riemannian*, left-invariant but not
-right-invariant, and its geodesics are not $\exp(tX)$ at all — they are
-Euler's elastica.  Appendix A5 explains how the SR exponential map differs
-from this group exponential.
+right-invariant, and its geodesics are not $\exp(tX)$ at all — their plane
+projections are generically cuspidal curves, siblings of Euler's elastica
+(Part&nbsp;2 and Appendix A3 keep the two families apart).  Appendix A5
+explains how the SR exponential map differs from this group exponential.
 
 ## Adjoint and coadjoint actions
 
@@ -517,9 +518,10 @@ using the exact same midpoint-rule helper that the
 <a href="https://moiseevigor.github.io/elliptic/">moiseevigor/elliptic</a>
 project ships in `examples/dubins-back-wheel/app.js`.  When $\xi(t) =
 (a_1, a_2, a_3)$ is *constant* you get the 1-parameter subgroups of
-Figure A1.1; when $\xi(t)$ is the *Pontryagin extremal* control of Part&nbsp;2
-you get Euler's elastica; when $\xi(t)$ has its forward component
-$\cos\varphi(t)$ change sign you get the cuspidal parking trajectory shown
+Figure A1.1; when $\xi(t)$ is the heading-driven control of the pinned
+($u_1 \equiv 1$) problem of Part&nbsp;2 you get Euler's elastica; when
+$\xi(t)$ is the free *Pontryagin extremal* control and its forward component
+changes sign you get exactly the cuspidal parking trajectory shown
 in
 <a href="https://moiseevigor.github.io/elliptic/examples/dubins-back-wheel/">that example</a>.
 The same matrix exponential drives all three.
@@ -603,7 +605,7 @@ Pontryagin Maximum Principle.
   <li>
     Yu. L. Sachkov (2011). "Cut locus and optimal synthesis in the
     sub-Riemannian problem on the group of motions of a plane."
-    <em>ESAIM: COCV</em> 17(4): 293–321.
+    <em>ESAIM: COCV</em> 17(2): 293–321.
     <a href="https://arxiv.org/abs/0903.0727">arXiv:0903.0727</a>.
     Uses every concept of this appendix.
   </li>

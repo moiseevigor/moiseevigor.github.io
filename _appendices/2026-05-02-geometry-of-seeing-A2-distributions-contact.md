@@ -154,10 +154,13 @@ then any two points of $M$ can be joined by a piecewise-horizontal curve.
 span $T_p M$.  Concatenating short flows along a frame field $X_i$ for
 times $\pm \varepsilon$ in the pattern of Appendix A1's Figure A1.2 produces a net
 displacement of order $\varepsilon^2$ in the bracket direction, of order
-$\varepsilon^3$ in iterated-bracket directions, etc.  Show that the smooth
-map $\mathbb R^n \to M$, $$(t_1, \ldots, t_n) \mapsto \Phi^{X_{i_1}}_{t_1} \circ \cdots \circ \Phi^{X_{i_n}}_{t_n}$$, has surjective differential at the
-origin under bracket-generation, hence is locally surjective by the inverse
-function theorem.  Compose enough hops and you can reach any point.
+$\varepsilon^3$ in iterated-bracket directions, etc.  The subtlety a careful
+proof must face: the endpoint map $$(t_1, \ldots, t_n) \mapsto \Phi^{X_{i_1}}_{t_1} \circ \cdots \circ \Phi^{X_{i_n}}_{t_n}(p)$$ is *degenerate at the origin* — its
+differential there only spans the distribution itself, and the bracket
+directions appear at second order.  One therefore applies the inverse/rank
+argument at suitable *nonzero* parameter values (or invokes the Orbit
+Theorem); see Montgomery §2 or Agrachev–Barilari–Boscain Ch. 3 for the
+full proof.  Compose enough hops and you can reach any point.
 
 **For SE(2) the Hörmander condition is satisfied at depth 1.**  We computed
 $[X_1, X_2] = -X_3$, and $X_1, X_2, X_3$ already span $T_g\mathrm{SE}(2)$
@@ -326,10 +329,11 @@ admissible $\gamma$ writes as $\dot\gamma = u_1(t) X_1 + u_2(t) X_2$ and
 
 $$L_{\mathrm{SR}}(\gamma) \;=\; \int_0^T \sqrt{u_1^2 + u_2^2}\,dt.$$
 
-After the $u_1 = 1$ reduction, $s$ is arc length and $\kappa = \dot\theta$,
-and the SR extremals project onto the critical curves of the elastica
-functional $\int \kappa^2(s)\,ds$ — exactly the integrand Euler minimised.
-Appendix A3 takes this and runs it through the Pontryagin Maximum Principle.
+*Pinning* $u_1 = 1$ makes $s$ arc length and $\kappa = \dot\theta$, and turns
+the problem into Euler's elastica — critical curves of $\int \kappa^2(s)\,ds$,
+exactly the integrand Euler minimised.  The free SR extremals are a different
+(cuspidal) family sharing the same pendulum core.  Appendix A3 runs both
+through the Pontryagin Maximum Principle and keeps them apart.
 
 The **sub-Riemannian Hopf–Rinow theorem** shows that on a connected,
 complete bracket-generating SR manifold the infimum is attained: a

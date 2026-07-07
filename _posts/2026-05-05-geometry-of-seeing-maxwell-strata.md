@@ -5,16 +5,17 @@ title: "Maxwell Strata: When Optimal Paths Fork"
 subtitle: >
   A geodesic can stop being the shortest path long before it stops being locally
   taut. The place where two equal-length geodesics meet is a Maxwell point — and on
-  SE(2) those points are forced by a hidden four-element symmetry group. We derive the
-  first Maxwell time exactly: it is 4K(k²), the same elliptic period that governs the
-  curvature.
+  SE(2) those points are forced by the hidden reflection group of the pendulum. We
+  compute the mirror-pair tie exactly on the elastica family — one full curvature period,
+  4K(k²) — and meet the sharper answer of the free problem, where the cut fires at half
+  a period.
 date: 2026-05-05 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, SE2, maxwell-strata, symmetry, optimal-control, elliptic-functions]
 description: >
-  How discrete symmetries of the pendulum force Maxwell points on the SE(2)
-  sub-Riemannian problem: the Klein four-group ℤ₂×ℤ₂, the σ-symmetric geodesic pair,
-  and the exact first Maxwell time t¹_MAX = 4K(k²)/ω₀ — the upper bound on the cut time.
+  How the pendulum's reflection group (ℤ₂)³ of Moiseev–Sachkov forces Maxwell points
+  on SE(2): the σ-symmetric mirror pair computed exactly on the elastica family (tie at
+  4K(k²), one curvature period) and the strata that bound the free problem's cut time.
 series: geometry-of-seeing
 series_title: "Geometry of Seeing"
 series_part: 3
@@ -35,9 +36,10 @@ This part asks the next question: <em>which of them are actually the shortest pa
 A curve can be perfectly taut locally and still be beaten by a completely different
 curve of the same length. The set of endpoints where that happens — where two distinct
 shortest geodesics <em>tie</em> — is the <strong>Maxwell stratum</strong>. We show it is
-forced by a four-element symmetry group hiding inside the pendulum equation, and we
-compute the first tie exactly: it happens at arc length $4K(k^2)$, the very period that
-controlled the curvature in Part&nbsp;2.
+forced by the reflection group hiding inside the pendulum equation. We compute the
+mirror-pair tie exactly on the smooth elastica family — it lands at arc length $4K(k^2)$,
+the very period that controlled the curvature in Part&nbsp;2 — and set up the sharper
+result of the free sub-Riemannian problem, whose cut fires at *half* that (Part&nbsp;4).
 </div>
 
 ## Two ways to stop being optimal
@@ -45,9 +47,10 @@ controlled the curvature in Part&nbsp;2.
 Recall the problem from Part&nbsp;1. The visual cortex completes a broken contour by finding
 the **shortest** horizontal path in $\mathrm{SE}(2)$ between two oriented points — where
 "shortest" always means the sub-Riemannian length, the only length the contact geometry
-defines. Part&nbsp;2 solved the *local* equations: every candidate path (every **geodesic**)
-is an Euler elastica, and its curvature is $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$ for
-the generic inflectional family.
+defines. Part&nbsp;2 solved the *local* equations: one pendulum governs every candidate,
+and its smooth face — the **elastica family**, curvature $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$
+for the generic inflectional case — is the family we compute with below (the free SR
+geodesics are its cuspidal siblings; Part&nbsp;2, Appendix A3).
 
 But solving the geodesic equation only gives *candidates*. A geodesic is guaranteed to be
 the shortest path **only for a while**. As you extend it, one of two things eventually
@@ -145,16 +148,19 @@ they generate a third.
 
 <aside id="note-klein">
 The <strong>Klein four-group</strong> $\mathbb{Z}_2 \times \mathbb{Z}_2 = \{e,
-\varepsilon^1, \varepsilon^2, \varepsilon^3\}$ is the smallest non-cyclic group. Every
-non-identity element is its own inverse ($(\varepsilon^i)^2 = e$), and the product of any
-two distinct ones is the third. It is exactly the symmetry group of a non-square rectangle
-— two independent reflections and their composite half-turn.
+\varepsilon^1, \varepsilon^2, \varepsilon^3\}$ is the smallest non-cyclic group: every
+non-identity element is its own inverse, and any two distinct ones compose to the third —
+the symmetries of a non-square rectangle. In the source paper the full reflection group is
+larger, $\{\mathrm{Id}, \varepsilon^1, \dots, \varepsilon^7\} \cong (\mathbb{Z}_2)^3$
+(a third generator shifts the pendulum phase by $2\pi$); the four elements here are the
+core that acts on a single libration orbit.
 </aside>
 
 Together with the identity, these close up into a group under composition: each element
 undoes itself, and any two of them compose to the third. That is precisely the
-<span class="annotated-term" data-note="note-klein">Klein four-group</span> $\mathbb{Z}_2 \times \mathbb{Z}_2$ — the exact discrete
-symmetry group Moiseev–Sachkov (2010) identified for this problem.
+<span class="annotated-term" data-note="note-klein">Klein four-group</span> $\mathbb{Z}_2 \times \mathbb{Z}_2$ — the working core of
+the full reflection group $(\mathbb{Z}_2)^3$ that Moiseev–Sachkov (2010) identified for
+this problem.
 
 | Element | Action on pendulum | Action on plane curve | Fixed set in the phase plane $(\varphi, \dot\varphi)$ |
 |:--------|:-------------------|:----------------------|:------------------------------------------------------|
@@ -198,7 +204,7 @@ the first one exactly.
     <svg id="fig-sym" style="width:100%;height:360px;"></svg>
   </div>
   <figcaption>
-    <strong>Figure&nbsp;1. The Klein four-group acting on the pendulum.</strong>
+    <strong>Figure&nbsp;1. The reflection core acting on the pendulum.</strong>
     Phase plane of $\ddot\varphi + \sin\varphi = 0$: horizontal axis is the pendulum angle
     $\varphi$ (radians), vertical axis its rate $\dot\varphi$. The bold blue closed loop is
     one libration orbit (one inflectional geodesic, energy $E = 2k^2 - 1$); faint loops are
@@ -216,11 +222,13 @@ the first one exactly.
 
 ## The first fork, computed exactly
 
-Take the symmetry that turns out to bind first: the mirror $\varepsilon^2$. Apply it to
-an inflectional geodesic $\gamma_A$ with curvature $\kappa_A(s) = +2k\,\mathrm{cn}(s\mid
-k^2)$. The image $\gamma_B = \varepsilon^2(\gamma_A)$ is the geodesic with the opposite
-curvature, $\kappa_B(s) = -2k\,\mathrm{cn}(s\mid k^2)$ — a *different* geodesic (it bends
-the other way) but with identical length at every arc length $s$. This is the
+Take the mirror $\varepsilon^2$ and run the mechanism where everything is smooth and
+explicit: on the **elastica family** (Part&nbsp;2's curves; the free SR strata work the
+same way but in costate coordinates — Part&nbsp;4). Apply it to an inflectional elastica
+$\gamma_A$ with curvature $\kappa_A(s) = +2k\,\mathrm{cn}(s\mid k^2)$. The image
+$\gamma_B = \varepsilon^2(\gamma_A)$ is the curve with the opposite curvature,
+$\kappa_B(s) = -2k\,\mathrm{cn}(s\mid k^2)$ — a *different* curve (it bends the other
+way) but with identical length at every arc length $s$. This is the
 **$\sigma$-symmetric pair**: two mirror-image curves leaving the origin.
 
 They start together. When do they first meet again? In the plane, the reflection acts by
@@ -236,7 +244,8 @@ $$y_A(s) = 2k\bigl(1 - \mathrm{cn}(s\mid k^2)\bigr) \;\ge\; 0.$$
 <aside>
 Since $\mathrm{cn} \le 1$, the height $y_A(s) = 2k(1-\mathrm{cn})$ never dips below zero —
 it only *touches* it. The two curves do not cross and re-cross; they kiss the mirror axis
-at isolated instants, and the first kiss with matching heading is the first Maxwell time.
+at isolated instants, and the first kiss with matching heading is the pair's first
+Maxwell coincidence.
 </aside>
 
 This is the whole calculation in one line. Since $\mathrm{cn}(s\mid k^2) \le 1$ with
@@ -254,22 +263,23 @@ the mirror pair re-coincides — position and heading at once — for the first 
 $s = 4K(k^2)$, for **every** modulus $k$.
 
 <div class="callout theorem">
-<div class="callout-title">First Maxwell time (inflectional family)</div>
+<div class="callout-title">Mirror-pair tie (inflectional elastica)</div>
 
-$$\boxed{\; t_{\mathrm{MAX}}^{1}(k) \;=\; \frac{4K(k^2)}{\omega_0}, \;}$$
+$$\boxed{\; s^{\ast}(k) \;=\; 4K(k^2), \;}$$
 
-where $K(k^2)$ is the complete elliptic integral of the first kind and $\omega_0$ is the
-linearised pendulum frequency (equal to $1$ in the unit-energy normalisation, so
-$t_{\mathrm{MAX}}^1 = 4K(k^2)$ in arc length). This is the <em>same</em> $4K(k^2)$ that set
-the curvature's spatial period in Part&nbsp;2 — now reappearing as a <em>time</em>: the first
-instant a geodesic ties with its mirror twin.
+one full curvature period, with $K$ the complete elliptic integral of the first kind.
+This is the <em>same</em> $4K(k^2)$ that set the curvature's spatial period in
+Part&nbsp;2 — now reappearing as a <em>meeting time</em>: the first instant an elastica
+ties with its mirror twin. (For the free SR problem the reflection strata fire earlier —
+at <em>half</em> a pendulum period — which is exactly the cut-time story of Part&nbsp;4.)
 </div>
 
 The identity is worth pausing on. In Part&nbsp;2, $4K(k^2)$ was a fact about one curve — how far
 you travel before its curvature pattern repeats. Here it is a fact about *two* curves — how
-far you travel before a geodesic and its symmetric partner arrive at the same place at the
-same time. The two roles of the elliptic period coincide, and that coincidence is the
-technical heart of the Maxwell-strata theorem.
+far you travel before an elastica and its mirror partner arrive at the same place at the
+same time. The two roles of the elliptic period coincide on the elastica family; the same
+reflection machinery, run in the costate coordinates of the free problem, is the technical
+heart of the Maxwell-strata theorem of Moiseev–Sachkov (2010).
 
 </div><!-- /.l-body -->
 
@@ -297,10 +307,10 @@ technical heart of the Maxwell-strata theorem.
     $\kappa = -2k\,\mathrm{cn}$) leave the origin (black dot) together. Drag $s$ to extend
     them. The vertical guide on the height plot (right) shows $y_A(s) = 2k(1-\mathrm{cn})$,
     the gap to the mirror axis; its first return to zero — marked, at $s = 4K(k^2)$ — is the
-    <strong>first Maxwell time</strong>, where the two equal-length curves arrive at the same
-    $\mathrm{SE}(2)$ point (orange). The slider's arc-length readout turns orange once you
-    pass it. Horizontal axis of the left panel: plane $x$; right panel: arc length $s$
-    against height $y_A$ (both in the geodesic's natural units, $\omega_0 = 1$).
+    pair's <strong>Maxwell coincidence</strong>, where the two equal-length curves arrive at
+    the same $\mathrm{SE}(2)$ point (orange). The slider's arc-length readout turns orange
+    once you pass it. Horizontal axis of the left panel: plane $x$; right panel: arc length
+    $s$ against height $y_A$ (elastica arc-length units).
   </figcaption>
 </figure>
 
@@ -308,32 +318,31 @@ technical heart of the Maxwell-strata theorem.
 
 ## From the first tie to the cut time
 
-The mirror $\varepsilon^2$ gave one family of ties, at $4K(k^2)$. The other group
-elements give their own Maxwell strata — $\varepsilon^1$ and $\varepsilon^3$ contribute
-further coincidences — but a direct check (Moiseev–Sachkov 2010) shows none of them fires
-earlier than the $\varepsilon^2$ tie for the inflectional family. So the *first* Maxwell
-time, across the whole group, is the one we computed.
+The mirror pair showed the mechanism in its cleanest form. Now the honest accounting.
+For the *free* sub-Riemannian problem, Moiseev–Sachkov (2010) run this same reflection
+machinery through all seven $\varepsilon$'s, in the costate's elliptic coordinates, and
+collect the earliest coincidence of each stratum into one function on the cotangent space —
+the **first Maxwell time** $\mathfrak t(\lambda)$.
 
 <div class="callout theorem">
-<div class="callout-title">Maxwell strata bound the cut time</div>
-The cut time is at most the first Maxwell time, because a tie destroys uniqueness of the
-minimiser:
+<div class="callout-title">Maxwell strata bound the cut time (Moiseev–Sachkov 2010)</div>
+A tie destroys uniqueness of the minimiser, so along every SR geodesic
 
-$$t_{\mathrm{cut}}(k) \;\le\; t_{\mathrm{MAX}}^{1}(k) \;=\; \frac{4K(k^2)}{\omega_0}.$$
+$$t_{\mathrm{cut}}(\lambda) \;\le\; \mathfrak t(\lambda),$$
 
-Moiseev–Sachkov (2010) prove the full description of the Maxwell strata for the
-$\mathrm{SE}(2)$ sub-Riemannian problem via this $\mathbb{Z}_2\times\mathbb{Z}_2$ action.
+and for the inflectional family the strata fire strikingly early:
+$\mathfrak t = 2K(k^2)$ — <em>half</em> a pendulum period, half the elastica
+mirror-tie value computed above.
 </div>
 
-That inequality is the punchline of Part&nbsp;3 — and a cliffhanger. It says the geodesic
-*cannot* remain globally shortest past $4K(k^2)$; the mirror twin catches it there at the
-latest. What it does **not** say is whether the cut happens *exactly* there or strictly
-earlier — whether the bound is tight.
+That inequality is the punchline of Part&nbsp;3 — and a cliffhanger. The reflection strata
+say the free geodesic *cannot* remain globally shortest past $2K(k^2)$. What this part does
+**not** settle is whether the cut happens exactly there or strictly earlier — whether the
+bound is tight.
 
-For the inflectional family it turns out to be tight: $t_{\mathrm{cut}} = t_{\mathrm{MAX}}^1$
-exactly, so the elliptic period $4K(k^2)$ *is* the cut time. Proving that — pinning the cut
-locus down precisely, handling the non-inflectional and separatrix families, and confronting
-what remains genuinely open near the degenerate boundary — is
+It is: $t_{\mathrm{cut}} = \mathfrak t(\lambda)$ exactly, for every family — with the
+extra surprise that along the whole inflectional family *local* optimality never fails at
+all. Proving that, and confronting what remains genuinely open beyond $\mathrm{SE}(2)$, is
 [Part&nbsp;4](/mathematics/2026/05/15/geometry-of-seeing-cut-time-open-problem/).
 
 ## Summary
@@ -342,12 +351,14 @@ what remains genuinely open near the degenerate boundary — is
   its cut point, with $t_{\mathrm{cut}} \le t_{\mathrm{conj}}$.
 - Global optimality dies at a **Maxwell point** — where two distinct equal-length geodesics
   tie — and ties are *forced* by symmetry, not luck.
-- The inflectional pendulum carries a **Klein four-group** $\mathbb{Z}_2 \times \mathbb{Z}_2$
-  of symmetries (time reversal, reflection, composite).
-- The reflection's $\sigma$-symmetric pair first re-meets at $s = 4K(k^2)$, giving the exact
-  **first Maxwell time** $t_{\mathrm{MAX}}^1 = 4K(k^2)/\omega_0$ — the same elliptic period
-  as the curvature.
-- Hence $t_{\mathrm{cut}} \le 4K(k^2)/\omega_0$. Whether equality holds is Part&nbsp;4.
+- The pendulum carries the reflection group $(\mathbb{Z}_2)^3$ of Moiseev–Sachkov; the
+  working core on one orbit is a **Klein four-group** (time reversal, mirror, composite).
+- The mirror's $\sigma$-symmetric pair, computed on the smooth elastica family, first
+  re-meets at $s = 4K(k^2)$ — one full curvature period, the same elliptic clock as
+  Part&nbsp;2.
+- For the free SR problem the collected strata give the first Maxwell time
+  $\mathfrak t(\lambda)$, with $t_{\mathrm{cut}} \le \mathfrak t = 2K(k^2)$ on the
+  inflectional family — half a pendulum period. Whether equality holds is Part&nbsp;4.
 
 </div><!-- /.l-body -->
 
@@ -367,7 +378,7 @@ what remains genuinely open near the degenerate boundary — is
   </li>
   <li>
     Yu. L. Sachkov (2011). "Cut locus and optimal synthesis in the sub-Riemannian problem
-    on the group of motions of a plane." <em>ESAIM: COCV</em> 17(4): 293–321.
+    on the group of motions of a plane." <em>ESAIM: COCV</em> 17(2): 293–321.
     <a href="https://arxiv.org/abs/0903.0727">arXiv:0903.0727</a>
   </li>
   <li>

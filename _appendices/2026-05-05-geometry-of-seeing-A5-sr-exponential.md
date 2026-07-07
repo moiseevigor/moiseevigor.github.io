@@ -5,9 +5,9 @@ title: "Appendix A5 — The Sub-Riemannian Exponential Map of SE(2)"
 subtitle: >
   How initial-costate parameters $(c, \omega_0, \phi_0)$ generate every
   SE(2) geodesic from the origin; what conjugate, cut, and Maxwell points
-  are; and why the first Maxwell time on an inflectional geodesic is
-  exactly $4K(k^2)/\omega_0$ — the same period that controls the
-  curvature.  Bridges Parts 1–2 to Parts 3–4.
+  are; why the elastica mirror pair first ties after one curvature period
+  $4K(k^2)$ while the free SR cut fires at half a pendulum period,
+  $2K(k^2)$.  Bridges Parts 1–2 to Parts 3–4.
 date: 2026-05-05 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, SE2, optimal-control, jacobi-elliptic, elliptic-integrals, lie-groups]
@@ -76,7 +76,7 @@ Two parametrisations of the same costate space are convenient:
   the energy surface.
 - **Pendulum-energy coordinates** $(E, \phi_0)$: $E = 2C - 1$ with the
   Casimir $C = h_1^2 + h_3^2$ (Appendix A3).  Here $E < 1$ is libration
-  (inflectional), $E = 1$ is the separatrix (Euler spiral), $E > 1$ is
+  (inflectional), $E = 1$ is the separatrix (borderline elastica), $E > 1$ is
   rotation (non-inflectional).
 
 The exponential map is a **smooth map** $\mathrm{Exp}_T :
@@ -86,22 +86,26 @@ whole story of cut/conjugate analysis.
 
 ## Closed-form geodesic endpoints
 
-For the inflectional family, parametrise by $k \in (0, 1)$ via
-$\sin(\varphi/2) = k\,\mathrm{sn}(s\mid k^2)$ — the substitution that
-A4 §3 derived from the half-angle.  Then Sachkov (2011) showed that the
-plane projection $(x(s), y(s))$ of the SR geodesic is
+Two closed forms live here, one per horizontal problem — and this appendix keeps
+them apart (Part&nbsp;2, Appendix A3).
 
-$$\boxed{\;x(s) \;=\; 2\bigl(E(\mathrm{am}(s\mid k^2)\mid k^2) - \tfrac12 F(\mathrm{am}(s\mid k^2)\mid k^2)\bigr),\;}$$
+**The elastica sister curve** (pinned $u_1 \equiv 1$; the smooth family every figure
+in this series integrates).  With heading $\theta(s) = 2\arcsin(k\,\mathrm{sn}(s\mid k^2))$,
+
+$$\boxed{\;x(s) \;=\; 2E(\mathrm{am}(s\mid k^2)\mid k^2) - s,\;}$$
 
 $$\boxed{\;y(s) \;=\; 2k\bigl(1 - \mathrm{cn}(s\mid k^2)\bigr).\;}$$
 
-(Sachkov writes these in a slightly different normalisation; the exact
-form depends on the chosen sign of the curvature and the position of $s = 0$
-relative to the inflection.  The point is: each component is a
-combination of $\mathrm{sn}, \mathrm{cn}$ and incomplete elliptic
-integrals $E, F$.  No numerical integration of an ordinary differential
-equation (ODE) is needed.  Appendix A4 §7
-gives the precise relations.)
+**The free SR geodesics** (Moiseev–Sachkov 2010, §3; Sachkov 2011, eqs. 24–28).  In
+elliptic coordinates $(\varphi, k)$ on $C_1$ with $\varphi_t = \varphi + t$, e.g.
+
+$$y_t \;=\; \tfrac{1}{k}\bigl[\,\mathrm{sn}\,\varphi\,(\mathrm{dn}\,\varphi - \mathrm{dn}\,\varphi_t) - \mathrm{cn}\,\varphi\,\bigl(t + E(\varphi) - E(\varphi_t)\bigr)\bigr],$$
+
+with matching expressions for $x_t$ and $\sin\theta_t$ — still nothing but
+$\mathrm{sn}, \mathrm{cn}, \mathrm{dn}$ and incomplete elliptic integrals, but a
+*different* curve: its plane projection has curvature $-\cot(\gamma_t/2)$ and
+generic **cusps** wherever the forward speed changes sign.  No numerical ODE
+integration is needed for either family.
 
 Three takeaways:
 
@@ -127,7 +131,7 @@ Three takeaways:
       <label>family
         <select id="exp-family">
           <option value="inflectional" selected>inflectional (k &lt; 1)</option>
-          <option value="separatrix">separatrix (k = 1, Euler spiral)</option>
+          <option value="separatrix">separatrix (k = 1, borderline elastica)</option>
           <option value="noninflectional">non-inflectional (k &gt; 1)</option>
         </select>
       </label>
@@ -146,11 +150,12 @@ Three takeaways:
     <svg id="fig-expmap" style="width:100%;height:380px;"></svg>
   </div>
   <figcaption>
-    <strong>Figure A5.1.</strong> Plane projection of the SR geodesic
-    $g(s)$ for $s \in [0, T]$, drawn from a single initial costate
-    parametrised by $k$.  The blue, red, green colour scheme matches Part&nbsp;1
-    Figure&nbsp;4 — and indeed this figure is the same one, lifted to a
-    more controllable form.  As $k \to 1^-$ the inflectional family's
+    <strong>Figure A5.1.</strong> The elastica sister curve for $s \in [0, T]$
+    — the smooth family ($\kappa = 2k\,\mathrm{cn}$) that stands in for the free
+    SR geodesics throughout the series' figures (the true SR projections are their
+    cuspidal cousins; §Closed-form above).  The blue, red, green colour scheme
+    matches Part&nbsp;1 Figure&nbsp;4 — and indeed this figure is the same one,
+    lifted to a more controllable form.  As $k \to 1^-$ the inflectional family's
     period $4K(k^2)$ diverges (Appendix A4) and the curve spirals; for
     $k > 1$ (non-inflectional) the curvature is one-signed with spatial
     period $T = 2K(m)$ (a closed circle only in the $m \to 0$ limit).  The endpoint dot is
@@ -192,15 +197,21 @@ a *local* length-minimiser.  Any sufficiently small perturbation produces
 a strictly shorter horizontal curve.  This is the SR analogue of the
 classical Riemannian Morse-theoretic statement.
 
-For SE(2), Sachkov's analysis shows:
+For SE(2), Sachkov's analysis (2011, Thms 2.1–2.6) shows something stronger and
+cleaner than a bound:
 
-- For the inflectional family, the first conjugate time satisfies
-  $t_{\mathrm{conj}}(k) \geq 4K(k^2)/\omega_0$ — it comes at or after the
-  first Maxwell time.
-- For non-inflectional and separatrix families, similar bounds hold with
-  the relevant period.
-- The conjugate locus, as a set in $\mathrm{SE}(2)$, has a beautiful
-  astroidal structure visible in Figure A5.3.
+- **Inflectional and separatrix families: no conjugate points at all.** Along every
+  oscillating-pendulum geodesic (and the critical-energy ones) local optimality
+  *never* fails — $t_{\mathrm{conj}} = +\infty$.
+- **Rotating family only:** the first conjugate time is finite, pinched between
+  elliptic quantities, $2k\,p_1^1(k) \le t_{\mathrm{conj}} \le \min\bigl(4kK(k),\,
+  2k\,p_1^{\alpha_1}(k)\bigr)$, where $p_1^1$ is the first positive root of
+  $f_1(p) = \mathrm{cn}\,p\,(E(p)-p) - \mathrm{dn}\,p\,\mathrm{sn}\,p$ — and the
+  binding branch switches exactly at the figure-eight modulus $k_0 \approx 0.909$
+  (the root of $2E = K$ from Part&nbsp;2).
+- The astroidal caustic visible in Figure A5.3 is the conjugate structure of the
+  smooth **elastica sister family** the figure integrates — Euler's elastic problem
+  does have conjugate points; the free SR inflectional geodesics do not.
 
 ## Cut and Maxwell points
 
@@ -212,29 +223,31 @@ definition, the cut time satisfies $$t_{\mathrm{cut}} \leq t_{\mathrm{conj}}$$
 
 A **Maxwell point** is a point where two *distinct* geodesics from
 $\gamma(0)$ meet with **equal** SR length.  These come from discrete
-symmetries of the problem: the inflectional pendulum has a
-$\mathbb Z_2 \times \mathbb Z_2$ symmetry group (time reversal $s \to -s$,
-reflection $\varphi \to -\varphi$), and the fixed-point set of these
-symmetries on the exponential map is a Maxwell stratum.
+symmetries of the problem: the pendulum carries the reflection group
+$\{\mathrm{Id}, \varepsilon^1, \dots, \varepsilon^7\} \cong (\mathbb Z_2)^3$
+of Moiseev–Sachkov (2010) — generated by time reversal, the sign flip
+$\varphi \to -\varphi$, and the shift $\varphi \to \varphi + 2\pi$ — and the
+fixed-point sets of these reflections on the exponential map are the Maxwell
+strata.
 
 For sufficiently symmetric SR problems (and SE(2) is one of them),
 
 $$\boxed{\;t_{\mathrm{cut}} \;=\; t_{\mathrm{Maxwell}}^{(1)},\;}$$
 
-i.e. the cut locus equals the closure of the Maxwell locus.  Characterising
-the Maxwell strata for $\mathrm{SE}(2)$ is the work of Moiseev–Sachkov
-(2010, arXiv:0807.4731); pinning the cut locus down exactly is Sachkov
-(2011, arXiv:0903.0727).
+i.e. the cut time equals the first Maxwell time $\mathfrak t(\lambda)$ of this
+group.  Characterising the Maxwell strata is the work of Moiseev–Sachkov
+(2010, arXiv:0807.4731); the equality — and with it the full optimal
+synthesis — is Sachkov (2011, arXiv:0903.0727).
 
-For the inflectional family with modulus $k$, the first Maxwell time is
-exactly
+For the inflectional family with modulus $k$ the value is strikingly simple:
 
-$$t_{\mathrm{Maxwell}}^{(1)}(k) \;=\; \frac{4K(k^2)}{\omega_0},$$
+$$t_{\mathrm{cut}}(k) \;=\; \mathfrak t(\lambda) \;=\; 2K(k^2),$$
 
-the **same** $4K(k^2)$ that controls the spatial period of the curvature
-(Appendix A4, Part&nbsp;2).  Identifying these two roles of $K(k^2)$ — period
-of curvature and time of first Maxwell coincidence — is the heart of
-Part&nbsp;3.
+**half a pendulum period** — while the smooth elastica *sister* family first
+ties with its own mirror image only after a full curvature period,
+$s = 4K(k^2)$ (the coincidence Figure A5.2 plays with).  The elliptic clock
+$K(k^2)$ runs both problems; how the half-versus-full period split arises is
+the heart of Parts&nbsp;3–4.
 
 </div><!-- /.l-body -->
 
@@ -270,8 +283,10 @@ Part&nbsp;3.
     Because $y_A(s) = 2k\bigl(1 - \mathrm{cn}(s\mid k^2)\bigr) \ge 0$ returns to
     zero only at $s = 4K(k^2)$ (and its multiples), the pair first re-coincides
     in full — position <em>and</em> heading — at $s = 4K(k^2)$, for every
-    $k$: exactly the first Maxwell time $t_{\mathrm{Maxwell}}^{(1)} = 4K(k^2)/\omega_0$
-    boxed above.  At the special "figure-eight" modulus
+    $k$: the first Maxwell coincidence of the <em>elastica sister family</em> —
+    the smooth curves this figure integrates.  (For the free SR problem the same
+    symmetry machinery gives a cut at $2K(k^2)$, half this value; §Cut above.)
+    At the special "figure-eight" modulus
     $k_c \approx 0.909$ (root of $2E(k^2) = K(k^2)$) that shared endpoint sits
     back at the origin, so the closed curve is itself a single self-crossing
     lemniscate; for other $k$ the two curves still meet at $s = 4K(k^2)$, just
@@ -296,7 +311,7 @@ continuous), and as $T$ grows it sweeps outward.  At small $T$ — since every
 geodesic leaves the origin heading the same way and curves only gently —
 the wavefront is a short, almost-straight arc near $(T, 0)$, transverse to
 the launch direction.  As $T$
-approaches the first Maxwell time $T_{\mathrm M} = 4K(k^2)/\omega_0$,
+approaches the elastica mirror-tie time $T_{\mathrm M} = 4K(k^2)$,
 neighbouring trajectories begin to converge and the wavefront develops
 **cusps** — these are the projections of conjugate points, where
 $d\mathrm{Exp}_T$ becomes singular.
@@ -342,15 +357,17 @@ be locally surjective along a critical curve.
       <li>at small $T$ the wavefront is a short arc near $(T, 0)$;</li>
       <li>at $T \approx \pi$ it lengthens and starts to flatten;</li>
       <li>around $T \approx 2\pi$ — the smallest period $4K(0)$ in the swept
-        family (the near-straight $k \to 0$ geodesics) — the first
-        <em>cusps appear</em> at the corners of the wavefront: these are the
-        first conjugate points (marked with red rings);</li>
+        family (the near-straight $k \to 0$ curves) — the first
+        <em>cusps appear</em> at the corners of the wavefront: the first
+        conjugate points <em>of the elastica problem</em> (red rings) — the free
+        SR inflectional geodesics have none (Sachkov 2011, Thm 2.1);</li>
       <li>as $T$ grows the wavefront self-intersects: those crossings
         are the Maxwell stratum drawn in Figure A5.2.</li>
     </ol>
     Press <em>play</em> to animate $T$ continuously.  The four-fold
-    astroid-like cusp pattern is the projection of the SR conjugate
-    locus to the plane.
+    astroid-like cusp pattern is the plane caustic of the elastica family —
+    Euler's elastic problem does develop conjugate points, even though the free
+    SR inflectional geodesics never do.
   </figcaption>
 </figure>
 
@@ -408,8 +425,8 @@ def inflectional_geodesic(k, omega0, phi0, T, N=1500):
 
 k = 0.55
 omega0 = 1.0
-T_maxwell = 4 * ellipticK(k * k) / omega0
-print(f"first Maxwell time T₁ = 4K(k²)/ω₀ = {T_maxwell:.4f}")
+T_maxwell = 4 * ellipticK(k * k) / omega0   # elastica mirror-pair tie (SR cut is 2K)
+print(f"elastica mirror-tie time T₁ = 4K(k²)/ω₀ = {T_maxwell:.4f}")
 
 # Two geodesics: φ0 = +0.3 vs φ0 = -0.3
 xA, yA, thA = inflectional_geodesic(k, omega0,  0.3, T_maxwell)
@@ -420,17 +437,16 @@ print(f"|γA(T₁) − γB(T₁)|  =  {err:.2e}")     # should be ≲ 1e-6
 ```
 
 ```python
-# First conjugate time as a function of k
-# (Sachkov 2010 closed form)
-def conjugate_time_inflectional(k):
-    """Approximation: first conjugate time for inflectional family."""
-    m = k * k
-    Km = ellipticK(m)
-    # Sachkov's bound: equals 4K(k²)/ω₀ when ω₀ → 0
-    return 4 * Km   # in normalised arc-length units (ω₀ = 1)
+# Conjugate time of the ELASTICA family (schematic scale, one curvature period).
+# NB: the free SR inflectional geodesics have NO conjugate points at all
+# (Sachkov 2011, Thm 2.1) — this heuristic applies to the elastica sister
+# problem, where conjugate points do occur on the 4K scale.
+def conjugate_scale_elastica(k):
+    """Heuristic scale (one curvature period), not a closed form."""
+    return 4 * ellipticK(k * k)
 
 for k in (0.1, 0.3, 0.5, 0.7, 0.9, 0.95):
-    print(f"k = {k:4.2f}:  T_conj = {conjugate_time_inflectional(k):.4f}")
+    print(f"k = {k:4.2f}:  ~T_conj(elastica) = {conjugate_scale_elastica(k):.4f}")
 ```
 
 ## What we covered, and what is left for Parts&nbsp;3–4
@@ -441,19 +457,21 @@ incomplete elliptic integrals.  Conjugate points mark the loss of local
 optimality; cut points mark the loss of global optimality.  Maxwell
 points are the symmetric mechanism by which optimality fails — two
 distinct geodesics meeting with the same SR length.  For the inflectional
-family, the first Maxwell time is $4K(k^2)/\omega_0$ — the *same* $K(k^2)$
-that controls curvature period.
+family the free SR cut fires at $2K(k^2)$ — half a pendulum period — while
+the smooth elastica sister pair first ties at $4K(k^2)$, one full curvature
+period: the same elliptic clock, two problems.
 
 What remains for Parts&nbsp;3 and 4 of the blog series:
 
-- **Part&nbsp;3** will characterise the Maxwell stratum via the
-  $\mathbb Z_2 \times \mathbb Z_2$ symmetries and derive the first
-  Maxwell time $$t_{\mathrm{Maxwell}}^{(1)} = 4K(k^2)/\omega_0$$ exactly —
-  the upper bound $t_{\mathrm{cut}} \leq t_{\mathrm{Maxwell}}^{(1)}$.
-- **Part&nbsp;4** will show the bound is exact for the inflectional family
-  ($t_{\mathrm{cut}} = t_{\mathrm{Maxwell}}^{(1)}$), and lay out what stays
-  open: the non-inflectional and separatrix seams, and the general
-  Maxwell-equals-cut conjecture beyond $\mathrm{SE}(2)$.
+- **Part&nbsp;3** will develop the Maxwell mechanism via the pendulum's
+  reflection group $(\mathbb Z_2)^3$, compute the mirror-pair tie exactly on
+  the elastica family ($s = 4K(k^2)$, one curvature period), and state the
+  SR result it bounds: $t_{\mathrm{cut}} \le \mathfrak t(\lambda)$.
+- **Part&nbsp;4** will present Sachkov's theorem $t_{\mathrm{cut}} = \mathfrak
+  t(\lambda)$ — for the inflectional family $2K(k^2)$, half a pendulum
+  period, with <em>no conjugate points at all</em> along the way — and lay
+  out what stays genuinely open: the general Maxwell-equals-cut question
+  beyond $\mathrm{SE}(2)$.
 
 The five appendices A1–A5 supply every prerequisite: Lie groups (A1),
 distributions and contact structures (A2), the Pontryagin Maximum
@@ -476,7 +494,7 @@ fluently, and Parts&nbsp;3 and 4 will be approachable when they ship.
   <li>
     Yu. L. Sachkov (2011).  "Cut locus and optimal synthesis in the
     sub-Riemannian problem on the group of motions of a plane."
-    <em>ESAIM: COCV</em> 17(4): 293–321.
+    <em>ESAIM: COCV</em> 17(2): 293–321.
     <a href="https://arxiv.org/abs/0903.0727">arXiv:0903.0727</a>.
     Closed-form geodesic endpoints — eqs. (24)–(28).
   </li>
@@ -795,12 +813,12 @@ function drawMaxwell() {
       .attr('fill', '#b71c1c');
     g.append('text').attr('x', xR2(firstZero) + 6).attr('y', margin.t + 22)
       .attr('font-family', 'JetBrains Mono').attr('font-size', 11).attr('fill', '#b71c1c')
-      .text(`1st Maxwell @ s = ${firstZero.toFixed(3)}`);
+      .text(`mirror tie @ s = ${firstZero.toFixed(3)}`);
   } else {
     g.append('text').attr('x', xR2(T_full / 2)).attr('y', margin.t + 22)
       .attr('text-anchor', 'middle')
       .attr('font-family', 'Source Sans 3').attr('font-size', 11).attr('fill', '#888')
-      .text('no Maxwell coincidence in this range');
+      .text('no mirror coincidence in this range');
   }
 
   // Mark current T on right plot too
@@ -1004,7 +1022,7 @@ function drawConjugate() {
   const Tmax_ref = 4 * ellipticK(0.9089 * 0.9089);
   g.append('text').attr('x', margin.l).attr('y', margin.t + 12)
     .attr('font-family', 'JetBrains Mono').attr('font-size', 11).attr('fill', '#555')
-    .text(`T = ${conjState.T.toFixed(2)}    (1st Maxwell @ k = 0.909: T₁ = ${Tmax_ref.toFixed(2)})`);
+    .text(`T = ${conjState.T.toFixed(2)}    (mirror tie @ k = 0.909: T₁ = ${Tmax_ref.toFixed(2)})`);
 
   // Colour-bar mini-legend
   const lx = margin.l + 4, ly = H - margin.b - 14;

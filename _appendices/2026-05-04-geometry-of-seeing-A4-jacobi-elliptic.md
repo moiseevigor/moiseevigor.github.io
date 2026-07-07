@@ -181,8 +181,11 @@ so $\ddot\varphi + \sin\varphi = 0$. ✓
 
 This is **the** identity behind the elastica: the pendulum solution is
 literally the Jacobi-am function, and the curvature
-$\kappa(s) = \dot\varphi(s) = 2k\,\mathrm{cn}(s\mid k^2)$ is one Jacobi
-function's worth — exactly the formula Part&nbsp;2 uses.
+$\kappa(s) = \dot\theta(s) = 2k\,\mathrm{cn}(s\mid k^2)$ — the turning rate
+of the elastica heading $\theta(s) = 2\arcsin(k\,\mathrm{sn}\,s)$, which
+itself solves the pendulum equation — is one Jacobi function's worth, exactly
+the formula Part&nbsp;2 uses.  (We write $\theta$ for the heading to keep it
+distinct from Appendix A3's costate angle $\varphi$.)
 
 ## The complete elliptic integrals
 
@@ -279,13 +282,13 @@ This is the celebrated formula
 
 $$\boxed{\;T_{\mathrm{pendulum}}(E) \;=\; 4 K\!\bigl((E+1)/2\bigr).\;}$$
 
-For the SE(2) elastica with rescaled arc length $s$, the same $K(k^2)$
-governs the spatial period of curvature oscillation, $T_\kappa = 4K(k^2)$.
-This double role — as a **temporal** period for the pendulum, as a
-**spatial** period for the elastica — is the heart of why Sachkov's
-Maxwell-strata results in Part&nbsp;3 read as if there were *two* periods that
-happen to coincide.  There aren't; it's the same $K(k^2)$, identified
-under the rescaling.
+For Euler's elastica — the pinned ($u_1 \equiv 1$) problem, where the pendulum
+parameter *is* arc length — the same $K(k^2)$ governs the spatial period of
+curvature oscillation, $T_\kappa = 4K(k^2)$.  This double role — temporal
+period for the pendulum, spatial period for the elastica — is no coincidence
+and needs no rescaling: in the elastica problem the two clocks are the same
+variable.  (In the free SR problem the pendulum runs in SR arc length instead,
+and the cut fires at *half* a period, $2K(k^2)$ — Parts&nbsp;3–4.)
 
 </div><!-- /.l-body -->
 
@@ -546,6 +549,10 @@ function drawSnCnDn() {
 const agmState = { m: 0.5, hist: [{ a: 1, b: Math.sqrt(0.5) }] };
 
 function agmReset() {
+  // read the slider FIRST so a fresh iteration is seeded with the new m,
+  // not the previous one (drawAGM also reads it, but only after seeding)
+  const el = document.getElementById('agm-m');
+  if (el) agmState.m = parseFloat(el.value) / 100;
   agmState.hist = [{ a: 1, b: Math.sqrt(1 - agmState.m) }];
   drawAGM();
 }

@@ -23,9 +23,11 @@ Your brain constructs edges and surfaces that are not physically present in the 
 hitting your retina. Jean Petitot's 2003 neurogeometry model shows this
 <em>modal completion</em> is mathematically equivalent to finding shortest paths on
 the Lie group SE(2) — the group of rigid motions of the plane — under a
-sub-Riemannian metric. The geodesics of that metric are Euler's elastica, parametrised
-by Jacobi elliptic functions. This series develops the full theory from first principles,
-culminating in an open problem on the exact cut time.
+sub-Riemannian metric. One pendulum governs all its extremals: the smooth completion
+curves are Euler's elastica, parametrised by Jacobi elliptic functions, while the free
+geodesics project to their cuspidal siblings. This series develops the full theory from
+first principles, up to Sachkov's exact cut time and the question that remains open
+beyond SE(2).
 </div>
 
 ## The Series
@@ -155,11 +157,11 @@ with the Pontryagin Hamiltonian
 
 $$H = \frac{1}{2}(p_x \cos\theta + p_y \sin\theta)^2 + \frac{1}{2} p_\theta^2.$$
 
-**Geodesics are Euler's elastica.** The projection of SE(2) geodesics onto the
-$(x,y)$-plane satisfies the elastica ODE — the same curves Euler studied in 1744 when
-minimising the integral of squared curvature. The curvature along these curves is
-$\kappa(s) = 2k\,\mathrm{cn}(s \mid k^2)$, directly expressed through Jacobi's
-elliptic cosine, with spatial period $T = 4K(k^2)$.
+**One pendulum, two curve families.** Pinning the forward speed turns the problem into
+Euler's elastica — the same curves Euler studied in 1744 when minimising the integral of
+squared curvature, with $\kappa(s) = 2k\,\mathrm{cn}(s \mid k^2)$ and spatial period
+$T = 4K(k^2)$. The free SE(2) geodesics share the pendulum but project to cuspidal
+curves; their cut time is $2K(k^2)$ — half the elastica clock (Sachkov 2010–2011).
 
 ## Key Results Covered
 
@@ -168,10 +170,13 @@ elliptic cosine, with spatial period $T = 4K(k^2)$.
 - **Complete parametrisation** (Part 2): all three families — the inflectional
   family, the Euler separatrix, and the non-inflectional family — written in
   closed form using $\mathrm{sn}, \mathrm{cn}, \mathrm{dn}$.
-- **Maxwell strata** (Part 3): discrete symmetry group $$\mathbb{Z}_2 \times \mathbb{Z}_2$$,
-  the first Maxwell time $$t_{\max}^1 = 4K(k^2)/\omega_0$$, loss of optimality.
-- **The open problem** (Part 4): the cut time is bounded above by $$t_{\max}^1$$ but
-  the exact value for $k \in (0,1)$ remains unproved.
+- **Maxwell strata** (Part 3): the pendulum's reflection group $$(\mathbb{Z}_2)^3$$,
+  the mirror-pair tie at one curvature period $$4K(k^2)$$ on the elastica family,
+  and the strata bounding the free problem's cut time.
+- **The theorem and the open problem** (Part 4): Sachkov's exact cut time
+  $$t_{\mathrm{cut}} = 2K(k^2)$$ on the inflectional family — with no conjugate
+  points anywhere along it — and the general Maxwell-equals-cut question that
+  remains open beyond SE(2).
 
 ## Code and Data
 
@@ -187,7 +192,7 @@ complete/incomplete integrals implemented without Maple calls, accepting tensors
 <ol>
   <li>J. Petitot (2003). "The neurogeometry of pinwheels as a sub-Riemannian contact structure." <em>J. Physiology–Paris</em> 97(2–3): 265–309.</li>
   <li>I. Moiseev &amp; Yu. L. Sachkov (2010). "Maxwell strata in sub-Riemannian problem on the group of motions of a plane." <em>ESAIM: COCV</em> 16(2): 380–399. <a href="https://arxiv.org/abs/0807.4731">arXiv:0807.4731</a></li>
-  <li>Yu. L. Sachkov (2011). "Cut locus and optimal synthesis in the sub-Riemannian problem on the group of motions of a plane." <em>ESAIM: COCV</em> 17(4): 293–321. <a href="https://arxiv.org/abs/0903.0727">arXiv:0903.0727</a></li>
+  <li>Yu. L. Sachkov (2011). "Cut locus and optimal synthesis in the sub-Riemannian problem on the group of motions of a plane." <em>ESAIM: COCV</em> 17(2): 293–321. <a href="https://arxiv.org/abs/0903.0727">arXiv:0903.0727</a></li>
   <li>G. Citti &amp; A. Sarti (2006). "A cortical based model of perceptual completion in the roto-translation space." <em>J. Math. Imaging Vision</em> 24(3): 307–326.</li>
 </ol>
 </div>

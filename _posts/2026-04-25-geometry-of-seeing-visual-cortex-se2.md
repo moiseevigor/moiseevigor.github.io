@@ -501,12 +501,17 @@ The spatial projection $(x(t), y(t))$ of the solution is the **perceptually comp
 contour** that the visual system infers between two oriented line elements
 $(x_0,\theta_0)$ and $(x_1,\theta_1)$.
 
-With the normalisation $u_1 = 1$ (unit forward speed), $s$ becomes arc length and
-$\kappa = u_2/u_1 = \dot\theta$ is the signed curvature. The sub-Riemannian extremals
-then project onto the critical curves of the **Euler elastica functional**
+Two closely related problems share this setup, and the series will keep them
+carefully apart. *Pinning* $u_1 = 1$ (unit forward speed, so $s$ is arc length and
+$\kappa = u_2$ the signed curvature) turns length-minimisation into the classical
+**Euler elastica problem** — critical curves of the bending energy
 $$\int_0^L \kappa^2(s)\,ds,$$
-the total squared bending energy of the projected curve — the classical bridge,
-made precise in Part&nbsp;2, between geodesics on SE(2) and Euler's elastica.
+whose smooth solutions Part&nbsp;2 parametrises with elliptic functions. The *free*
+sub-Riemannian problem ($u_1$ unconstrained) shares the same pendulum core but its
+plane projections are different curves — generically with **cusps** where the forward
+speed changes sign (Part&nbsp;2 and Appendix&nbsp;A3 make the relation precise). Both
+matter for vision: elastica for smooth completion, the cuspidal geodesics wherever the
+percept must turn on the spot.
 
 </div><!-- /.l-body -->
 
@@ -527,11 +532,12 @@ made precise in Part&nbsp;2, between geodesics on SE(2) and Euler's elastica.
   </div>
   <figcaption>
     <strong>Figure&nbsp;4.</strong>
-    Family of SE(2) geodesics starting from the same position with the same
-    initial heading. The single control parameter $k$ traverses all three
-    elastica regimes:
+    Family of candidate completion curves — Euler's elastica, the smooth solutions of
+    the pinned ($u_1 = 1$) problem that Part&nbsp;2 derives from the shared pendulum
+    (the free SR geodesics project to cuspidal cousins of these curves; Appendix&nbsp;A3).
+    The single parameter $k$ traverses all three regimes:
     $k \in (0, 1)$ — <strong>inflectional</strong>, $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^{2})$;
-    $k = 1$ — the <strong>Euler / Cornu spiral</strong>, the separatrix
+    $k = 1$ — the <strong>borderline (solitary) elastica</strong>, the separatrix
     $\kappa(s) = 2\,\mathrm{sech}\,s$;
     $k > 1$ — <strong>non-inflectional</strong>, $\kappa(s) = 2\,\mathrm{dn}(s\mid m)$
     with its own modulus $m \in (0, 1)$ (closed-loop curves with one-signed
@@ -594,22 +600,22 @@ tightly linked: characterising the Maxwell strata is the main result of
 arXiv:0807.4731 (Sachkov and I), and pinning the cut locus down exactly is the
 subject of arXiv:0903.0727.
 The first point on the cut locus along a given geodesic is the **cut time**
-$t_\mathrm{cut}$, and it equals the first time the exponential map is no longer
-injective.
+$t_\mathrm{cut}$.
 
-The beautiful — and still incomplete — result is:
+The remarkable — and, for SE(2) itself, now settled — result is:
 
-<div class="callout open-problem">
-<div class="callout-title">Open Problem</div>
-For the SR problem on SE(2), the first Maxwell time along an extremal with
-modulus $k$ is
-$$t_{\mathrm{MAX}} = \frac{4K(k^2)}{\omega_0(k)},$$
-where $K(k^2)$ is the complete elliptic integral of the first kind and $\omega_0$
-is the linearised oscillation frequency.
-It is <em>conjectured</em> — and verified numerically — that $t_\mathrm{cut} = t_\mathrm{MAX}$
-for all extremals.
-A complete proof in all degenerate cases (the boundary of the abnormal locus) remains
-open.
+<div class="callout theorem">
+<div class="callout-title">Theorem (Moiseev–Sachkov 2010; Sachkov 2010, 2011)</div>
+For the SR problem on SE(2) the cut time <em>equals</em> the first Maxwell time of the
+discrete symmetry group of the exponential map: $t_\mathrm{cut} = \mathfrak{t}(\lambda)$.
+For the generic (inflectional) family with modulus $k$ this is
+$$t_{\mathrm{cut}} \;=\; 2K(k^2),$$
+half the pendulum period, with $K$ the complete elliptic integral of the first kind —
+and along this whole family there are <em>no conjugate points at all</em>: local
+optimality never fails, only the global tie does. What remains <strong>open</strong> is
+the general theory this exact solution exemplifies: a structural theorem making
+"cut&nbsp;=&nbsp;first Maxwell" checkable for left-invariant SR problems at large,
+rather than proved group by group (Part&nbsp;4).
 </div>
 
 The four parts of this series develop the full story:
@@ -619,10 +625,10 @@ The four parts of this series develop the full story:
    Jacobi elliptic functions $\mathrm{sn}(s\mid k^2)$, $\mathrm{cn}(s\mid k^2)$,
    $\mathrm{dn}(s\mid k^2)$.
 3. **Part&nbsp;3** (Maxwell Strata): characterising the locus where two geodesics of equal
-   length meet; the role of the discrete symmetry group of SE(2); proof that the
-   first Maxwell time is $4K(k^2)/\omega_0$.
-4. **Part&nbsp;4** (The Open Problem): what is proved, what is conjectured, and the
-   remaining analytic difficulty near the boundary of the abnormal set.
+   length meet; the reflection group $(\mathbb{Z}_2)^3$ of the pendulum; the mirror-pair
+   tie computed exactly on the elastica family, and the SR cut value $2K(k^2)$.
+4. **Part&nbsp;4** (The Open Problem): Sachkov's cut-time theorem — what is proved for
+   SE(2) — and the general Maxwell-equals-cut question that remains open beyond it.
 
 </div><!-- /.l-body -->
 
@@ -666,7 +672,7 @@ The four parts of this series develop the full story:
   <li>
     Yu. L. Sachkov (2011). "Cut locus and optimal synthesis in the sub-Riemannian
     problem on the group of motions of a plane."
-    <em>ESAIM: COCV</em> 17(4): 293–321.
+    <em>ESAIM: COCV</em> 17(2): 293–321.
     <a href="https://arxiv.org/abs/0903.0727">arXiv:0903.0727</a>
   </li>
 </ol>

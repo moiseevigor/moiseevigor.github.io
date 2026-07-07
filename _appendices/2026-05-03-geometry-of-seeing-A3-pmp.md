@@ -30,14 +30,10 @@ published: false
 <div class="callout">
 <div class="callout-title">What this appendix is for</div>
 
-Part&nbsp;2 §1 begins:
-
-<blockquote>
-"The Pontryagin Maximum Principle introduces a covector $\lambda$ in the
-cotangent bundle... <em>(After several lines of unjustified algebra)</em>...
-the Hamiltonian equations on $\mathfrak{se}(2)^{\ast}$ read
-$\dot h_1 = h_2 h_3, \dot h_2 = -h_1 h_3, \dot h_3 = -h_1 h_2$."
-</blockquote>
+Part&nbsp;2 §1, paraphrased: <em>the Pontryagin Maximum Principle introduces a
+covector $\lambda$ in the cotangent bundle, and — after several steps taken
+there on faith — the Hamiltonian equations on $\mathfrak{se}(2)^{\ast}$ read
+$\dot h_1 = h_2 h_3$, $\dot h_2 = -h_1 h_3$, $\dot h_3 = -h_1 h_2$.</em>
 
 This appendix supplies the missing derivation.  It assumes Appendix A1
 (Lie groups + $\mathfrak{se}(2)$) and A2 (distributions + Chow's theorem).
@@ -162,6 +158,12 @@ and $(g^{\ast}, \lambda^{\ast})$ obey the Hamilton equations of $\mathcal H$ in 
 
 <strong>Normal extremals</strong>: $\nu = 1$.  <strong>Abnormal</strong>:
 $\nu = 0$.
+
+Because the terminal time $T$ is <em>free</em> here, the maximised Hamiltonian
+also vanishes along the extremal, $\mathcal H \equiv 0$ — this is what pins
+$\sqrt{h_1^2 + h_2^2} = \nu$ and justifies the unit level set used below.
+(For our contact distribution the abnormal case forces $h_1 \equiv h_2 \equiv 0$,
+i.e. constant curves, so all the geometry lives in the normal case.)
 </div>
 
 <aside id="note-costate">
@@ -340,7 +342,7 @@ equivalent to the pendulum.
     of Part&nbsp;2:
     <strong>libration</strong> ($-1 < E < 1$, blue closed orbits) —
     inflectional elastica;
-    <strong>separatrix</strong> ($E = 1$, red curve) — Euler spiral;
+    <strong>separatrix</strong> ($E = 1$, red curve) — borderline elastica;
     <strong>rotation</strong> ($E > 1$, green orbits) — non-inflectional
     elastica.  The energy $E$ slider also controls the modulus
     $k = \sqrt{(E+1)/2}$ for libration; $k = 1$ at the separatrix; $k > 1$
@@ -357,7 +359,7 @@ equivalent to the pendulum.
 Once $\mu(t) = (h_1(t), h_2(t), h_3)$ is known, the SE(2) trajectory itself
 is obtained from
 
-$$\dot g(t) \;=\; g(t)\,\xi(t), \qquad \xi(t) := u_1^{\ast}(t) E_1 + u_2^{\ast}(t) E_2,$$
+$$\dot g(t) \;=\; g(t)\,\xi(t), \qquad \xi(t) := u_1^{\ast}(t) E_1 + u_2^{\ast}(t) E_3,$$
 
 with $u^{\ast}(t) = (h_1(t), h_2(t)) / \sqrt c$ from the maximisation, where
 $c := h_1^2 + h_2^2 = 2\mathcal H_n$ is constant along the flow.  In the
@@ -401,10 +403,11 @@ $\kappa = 2k\,\mathrm{cn}(s\mid k^2)$ family of Part&nbsp;2 §2.
     coadjoint/Casimir cylinder of Appendix A1's Figure A1.3 — with
     $(h_1, h_2)$ circling at rate
     $-h_3$.  Right: the plane curve obtained by feeding that costate into
-    the reconstruction equation $\dot g = g\cdot\xi(t)$.  Vary $h_3$ and the
+    the reconstruction equation $\dot g = g\cdot\xi(t)$, drawn at unit speed
+    ($c = 1$: the shape depends only on the dimensionless ratio $h_3/\sqrt c$,
+    so varying $c$ would rescale, not reshape).  Vary $h_3$ and the
     curve interpolates between near-circular (small $h_3$) and the elastica
-    regime; vary $\sqrt c$ and it scales without changing shape — the curve
-    family depends only on the dimensionless ratio $h_3 / \sqrt c$.  (In the
+    regime.  (In the
     full flow $h_3$ varies too, by $\dot h_3 = -h_1 h_2$; freezing it keeps
     this picture readable.)
   </figcaption>
