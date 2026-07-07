@@ -1,0 +1,18 @@
+<svg viewBox="0 0 220 148" xmlns="http://www.w3.org/2000/svg">
+  <rect width="220" height="148" fill="#fff"/>
+  <!-- A Maxwell pair: two mirror-image geodesics leaving one point and
+       re-meeting at the first Maxwell point (the "fork" that closes). -->
+  <!-- axis of the mirror symmetry (φ → −φ) -->
+  <line x1="30" y1="74" x2="190" y2="74" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4,3"/>
+  <!-- geodesic A (curves up, κ = +2k cn) -->
+  <path d="M 30,74 C 70,24 150,24 190,74"
+        fill="none" stroke="#1565c0" stroke-width="2.2" stroke-linecap="round"/>
+  <!-- geodesic B (mirror image, κ = −2k cn) -->
+  <path d="M 30,74 C 70,124 150,124 190,74"
+        fill="none" stroke="#b71c1c" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="6,3"/>
+  <!-- common start (origin) -->
+  <circle cx="30" cy="74" r="4" fill="#333"/>
+  <!-- first Maxwell point: where the two equal-length geodesics meet again -->
+  <circle cx="190" cy="74" r="5" fill="#e65100"/>
+  <circle cx="190" cy="74" r="9" fill="none" stroke="#e65100" stroke-width="1.2" opacity="0.55"/>
+</svg>

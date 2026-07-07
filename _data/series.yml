@@ -15,12 +15,12 @@
       status: draft
     - part: 3
       title: "Maxwell Strata: When Optimal Paths Fork"
-      url: /2026/05/05/geometry-of-seeing-maxwell-strata/
-      status: upcoming
+      url: /mathematics/2026/05/05/geometry-of-seeing-maxwell-strata/
+      status: draft
     - part: 4
       title: "The Open Problem: Exact Cut Time on SE(2)"
-      url: /2026/05/15/geometry-of-seeing-cut-time-open-problem/
-      status: upcoming
+      url: /mathematics/2026/05/15/geometry-of-seeing-cut-time-open-problem/
+      status: draft
   appendices:
     - part: A1
       title: "Lie Groups, Lie Algebras, and the Exponential Map of SE(2)"

@@ -57,15 +57,15 @@ culminating in an open problem on the exact cut time.
     </tr>
     <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
       <td style="padding:8px 12px; color:var(--text-muted,#777);">3</td>
-      <td style="padding:8px 12px; color:var(--text-muted,#777);">Maxwell Strata: When Optimal Paths Fork</td>
+      <td style="padding:8px 12px; color:var(--text-muted,#777);">{% if jekyll.environment == 'development' %}<a href="/mathematics/2026/05/05/geometry-of-seeing-maxwell-strata/">Maxwell Strata: When Optimal Paths Fork</a>{% else %}Maxwell Strata: When Optimal Paths Fork{% endif %}</td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">discrete symmetries, first Maxwell time</td>
-      <td style="padding:8px 12px; text-align:center;"><span style="background:#f5f5f5;color:#999;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">SOON</span></td>
+      <td style="padding:8px 12px; text-align:center;"><span style="background:#fff3e0;color:#e65100;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">DRAFT</span></td>
     </tr>
     <tr>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">4</td>
-      <td style="padding:8px 12px; color:var(--text-muted,#777);">The Open Problem: Exact Cut Time on SE(2)</td>
+      <td style="padding:8px 12px; color:var(--text-muted,#777);">{% if jekyll.environment == 'development' %}<a href="/mathematics/2026/05/15/geometry-of-seeing-cut-time-open-problem/">The Open Problem: Exact Cut Time on SE(2)</a>{% else %}The Open Problem: Exact Cut Time on SE(2){% endif %}</td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">cut locus, conjugate time, conjecture</td>
-      <td style="padding:8px 12px; text-align:center;"><span style="background:#f5f5f5;color:#999;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">SOON</span></td>
+      <td style="padding:8px 12px; text-align:center;"><span style="background:#fff3e0;color:#e65100;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">DRAFT</span></td>
     </tr>
   </tbody>
 </table>

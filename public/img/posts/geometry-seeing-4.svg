@@ -1,0 +1,30 @@
+<svg viewBox="0 0 220 148" xmlns="http://www.w3.org/2000/svg">
+  <rect width="220" height="148" fill="#fff"/>
+  <!-- The cut locus / conjugate caustic: a four-cusped astroid, the set of
+       points where SE(2) geodesics stop being globally shortest. -->
+  <!-- astroid x = a cos^3 t, y = a sin^3 t, centred at (110,74), a = 52 -->
+  <path d="M 162,74
+           C 158,95 143,110 122,114
+           C 110,116 110,116 110,116
+           C 110,116 110,116 98,114
+           C 77,110 62,95 58,74
+           C 56,53 71,38 92,34
+           C 110,32 110,32 110,32
+           C 110,32 110,32 128,34
+           C 149,38 164,53 162,74 Z"
+        fill="none" stroke="#c62828" stroke-width="1.4" opacity="0.28"/>
+  <!-- crisp astroid arcs (the caustic proper) -->
+  <path d="M 162,74 Q 150,50 110,32" fill="none" stroke="#c62828" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 110,32 Q 70,50 58,74"   fill="none" stroke="#c62828" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 58,74  Q 70,98 110,116" fill="none" stroke="#c62828" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 110,116 Q 150,98 162,74" fill="none" stroke="#c62828" stroke-width="2" stroke-linecap="round"/>
+  <!-- cusps -->
+  <circle cx="162" cy="74" r="3" fill="#c62828"/>
+  <circle cx="58"  cy="74" r="3" fill="#c62828"/>
+  <circle cx="110" cy="32" r="3" fill="#c62828"/>
+  <circle cx="110" cy="116" r="3" fill="#c62828"/>
+  <!-- a geodesic from the centre reaching its cut point on the caustic -->
+  <path d="M 110,74 C 128,66 146,70 158,86" fill="none" stroke="#1565c0" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="110" cy="74" r="4" fill="#333"/>
+  <circle cx="158" cy="86" r="4" fill="#e65100"/>
+</svg>
