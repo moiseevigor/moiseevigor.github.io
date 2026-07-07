@@ -245,3 +245,22 @@ A2 (rewrite P1's Open-Problem box to match P4), A4 (re-grade H3; reframe 9σ), B
 statistics upgrades; the remaining B-list.
 **Then:** the series is publishable — the cosmic-web methodology/damping-model material arguably in
 a journal, not only a blog.
+
+---
+
+## Addendum (2026-07-08) — fixes applied
+
+All text-applicable findings above were applied in commits `f50633b` (Seeing) and
+`fa44cbc` (cosmic web), with one upgrade: the source papers were fetched and read
+(arXiv:0807.4731; 0903.0727 §§2–3), which sharpened three items beyond the review's
+"verify" requests — the reflection group is (ℤ₂)³; the SR cut time on the inflectional
+family is **2K(k²)** (half the series' previous 4K claim, which is the *elastica*
+mirror-tie value); and Sachkov Thm 2.1 shows the inflectional/critical SR families have
+**no conjugate points at all** (finite conjugate bounds exist only for the rotating
+family, switching branches at k₀ ≈ 0.909). P1's box, P2's preview, P3, P4 (text and both
+figures), A5, and the project page were rewritten around the verified statements.
+
+Not applied (analysis-level, not text fixes): error propagation for the B5 null
+subtraction; a completeness-vs-length curve for B3; verifying the "Fig. 34" pointer in
+P1's caption; independent re-derivation of the CAMELS twin claim. These remain open in
+Part C / B-list.
