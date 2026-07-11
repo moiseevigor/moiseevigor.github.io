@@ -189,15 +189,21 @@ extrapolation, the Newton null finder, and *every* interior null kept — no che
 
 <div class="l-body" markdown="1">
 
-Two findings ride along, and the first is a small physics lesson the data taught us. **All
-five real nulls are radial — necessarily.** A potential extrapolation is current-free, so
-$\nabla\times\mathbf B = 0$ makes $\nabla\mathbf B$ symmetric and its eigenvalues real: *a
-potential field cannot contain a spiral null at all*. Our real gallery therefore grounds
-only the radial half of the classification problem; the spiral half needs a
-current-carrying coronal model (NLFFF or MHD), which is the program's one remaining
-real-data gap. Second: the noise-fragile flow classifier goes five-for-five here because
-real potential-field nulls sit far from the radial/spiral boundary — exactly the regime
-the R2 curves say is easy for everyone. Consistency, not contradiction.
+Two findings ride along, and the first arrived as a caveat and left as a theorem. **All
+five real nulls are radial — necessarily, and not just for potential fields.** In any
+force-free field $\nabla\times\mathbf B = \alpha\mathbf B$ with bounded $\alpha$, the
+current vanishes wherever $\mathbf B$ does; the antisymmetric part of
+$\nabla\mathbf B$ is the dual of $\nabla\times\mathbf B$, so at a null the Jacobian is
+symmetric, its eigenvalues real — *no force-free extrapolation, potential, linear
+force-free, or NLFFF alike, can host a spiral null at all*. (Our Part-4 dynamo field can,
+precisely because it is not force-free: all eight of its spiral nulls carry
+$\lVert\nabla\times\mathbf B\rVert = \sqrt3 \neq 0$ where $\mathbf B = 0$.) So the
+radial-only gallery is not half the problem — it is the *whole* problem the
+extrapolation-based catalogues of solar physics can pose; genuinely spiral nulls live in
+dynamic MHD and in-situ magnetospheric data. Second: the noise-fragile flow classifier
+goes five-for-five here because real force-free nulls sit far from the radial/spiral
+boundary — exactly the regime the R2 curves say is easy for everyone. Consistency, not
+contradiction.
 
 ## The division of labour
 

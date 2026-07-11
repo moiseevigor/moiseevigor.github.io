@@ -32,11 +32,20 @@ including sign.
 
 ## The honest caveats — what this does and does not test
 
-1. **All-radial is forced by the physics, not observed luck.** A potential extrapolation
-   is current-free; `∇×B = 0` makes `∇B` symmetric, its eigenvalues real — a potential
-   field *cannot contain a spiral null*. The gallery therefore grounds only the **radial
-   half** of the classification problem. The spiral half on real data needs a
-   current-carrying model (NLFFF or MHD) — recorded as the program's next data need.
+1. **All-radial is forced by the physics — and more strongly than we first stated.**
+   *No-spiral theorem (force-free fields):* if `J = ∇×B = αB` with `α` locally bounded,
+   then at any null `∇×B = αB = 0`; the antisymmetric part of `M = ∇B` is the dual of
+   `∇×B`, so `M` is symmetric there, its eigenvalues real — **the null is radial**. This
+   covers not just our potential extrapolation (`α = 0`) but *any* force-free model:
+   linear force-free and NLFFF with bounded `α` alike. Spiral nulls require genuinely
+   non-force-free current *at the null* — dynamic MHD or in-situ (magnetospheric) fields.
+   Premise checked on our own P2 field `(cos y, cos z, cos x)`: all 8 of its spiral nulls
+   carry `|∇×B| = √3 ≠ 0` where `|B| = 0` — it is not force-free, which is exactly *why*
+   it can host them. Consequence: for extrapolation-based coronal null catalogues (the
+   field's standard tools) radial is the only class, so this gallery grounds not half the
+   problem but the **whole force-free-accessible problem**. (Numerical NLFFF
+   reconstructions can still exhibit spiral nulls where they locally violate
+   force-freeness — a solver artefact to filter, not a physical class to expect.)
 2. **Why the flow classifier succeeds here despite R2's noise fragility:** these real
    nulls sit *far from the radial/spiral boundary* (discriminants are large), exactly the
    regime R2 showed is easy for every method. Consistency, not contradiction.
@@ -61,7 +70,8 @@ including sign.
 
 ## Open / next
 
-- Spiral nulls on real data → NLFFF or MHD snapshot (the one remaining real-data gap).
+- Spiral nulls on real data → dynamic MHD or in-situ magnetospheric data (Cluster/MMS);
+  force-free extrapolations of any kind are excluded by the no-spiral theorem above.
 - Off-centre linear fits under realistic null-localisation error (R2 open question #1) —
   the real-data agreement here suggests the effect is small far from the boundary.
 - The moduli-vs-null-type frontier (program task #22) stays the deepest open question.
