@@ -639,11 +639,18 @@ def aia_overlay():
     acx, acy = float(ahdr["CRPIX1"]) - 1, float(ahdr["CRPIX2"]) - 1
     arsun = float(ahdr["RSUN_OBS"]) / float(ahdr["CDELT1"])   # px per R_sun
 
-    # HMI disk geometry (as in skeleton): centre + radius of the 1024 magnetogram
+    # HMI disk geometry from the FITS HEADER (exact; the data-driven limb estimate
+    # overshoots the radius by ~2.5% -- off-limb noise -- enough to shift the AR by
+    # ~15 AIA px), scaled 4096 -> 1024
+    hmi_f = sorted((ROOT / "artifacts" / "hmi").glob("hmi.m_45s.2012*"))[0]
+    hh = fits.open(hmi_f); hh.verify("silentfix")
+    hhdr = next(x.header for x in hh if getattr(x, "data", None) is not None
+                and x.data.ndim == 2)
+    s4 = 1024.0 / hhdr["NAXIS1"]
+    hcx = (hhdr["CRPIX1"] - 1) * s4
+    hcy = (hhdr["CRPIX2"] - 1) * s4
+    hR = hhdr["RSUN_OBS"] / hhdr["CDELT1"] * s4
     bz = dict(load_magnetograms())["2012-03-07"]
-    ys, xs = np.where(np.abs(bz) > 0)
-    hcy, hcx = (ys.min() + ys.max()) / 2, (xs.min() + xs.max()) / 2
-    hR = ((ys.max() - ys.min()) + (xs.max() - xs.min())) / 4
 
     def hmi_to_aia(xh, yh):
         """HMI 1024-px coords -> AIA px via normalised disk coordinates.
@@ -656,18 +663,27 @@ def aia_overlay():
         return (acx - (np.asarray(xh) - hcx) / hR * arsun,
                 acy - (np.asarray(yh) - hcy) / hR * arsun)
 
-    # null-recentered survey extrapolation (same volume the skeleton uses)
+    # TWO volumes of the same magnetogram: the null and its fan live in the
+    # null-recentered window (room in every direction); the arcade is traced in the
+    # flux-centred window, which fully contains the AR loop system the EUV shows.
+    from scipy.ndimage import zoom as _zoom
     cut, B, nulls, p0, (cy, cx) = _ar11429_volume()
     ny, nx, nz, _ = B.shape
+    cyf, cxf = 640, 640
+    cutf = _zoom(bz[cyf - WIN // 2:cyf + WIN // 2, cxf - WIN // 2:cxf + WIN // 2],
+                 CUT / WIN, order=1)
+    Bf, _Af = solar.potential_field(cutf, NZ, dz=1.0)
     rng = np.random.default_rng(2)
-    thr = np.percentile(np.abs(cut), 93.0)
-    iy, ix = np.where(np.abs(cut) >= thr)
-    w = np.abs(cut)[iy, ix]
-    sel = rng.choice(len(ix), size=min(120, len(ix)), replace=False, p=w / w.sum())
+    # PHYSICAL seed threshold (250 G): roots the arcade in real plage/spot flux --
+    # a percentile threshold on the null-centred window scatters seeds across weak
+    # network field and draws arcs over quiet regions the EUV does not light up
+    iy, ix = np.where(np.abs(cutf) >= 250.0)
+    w = np.abs(cutf)[iy, ix]
+    sel = rng.choice(len(ix), size=min(140, len(ix)), replace=False, p=w / w.sum())
     arcade = []
     for j in sel:
-        sgn = +1.0 if cut[iy[j], ix[j]] > 0 else -1.0
-        ln = _trace(B, np.array([ix[j], iy[j], 1.5]), sgn, ds=0.35, steps=1600)
+        sgn = +1.0 if cutf[iy[j], ix[j]] > 0 else -1.0
+        ln = _trace(Bf, np.array([ix[j], iy[j], 1.5]), sgn, ds=0.35, steps=1600)
         if len(ln) > 10:
             arcade.append((ln, w[j] / w.max()))
     skel = []
@@ -678,10 +694,12 @@ def aia_overlay():
             if len(ln) > 8:
                 skel.append(ln)
 
-    def box_to_aia(ln):
+    def box_to_aia(ln, cyw=None, cxw=None):
         """Box coords (cut px + height) -> AIA px, incl. line-of-sight parallax."""
-        xh = cx - WIN / 2 + ln[:, 0] * (WIN / CUT)
-        yh = cy - WIN / 2 + ln[:, 1] * (WIN / CUT)
+        cyw = cy if cyw is None else cyw
+        cxw = cx if cxw is None else cxw
+        xh = cxw - WIN / 2 + ln[:, 0] * (WIN / CUT)
+        yh = cyw - WIN / 2 + ln[:, 1] * (WIN / CUT)
         ax_, ay_ = hmi_to_aia(xh, yh)
         # apparent shift of height h toward the limb, in the AIA frame's orientation
         rx = (ax_ - acx) / arsun; ry = (ay_ - acy) / arsun
@@ -699,7 +717,7 @@ def aia_overlay():
     ax.imshow(np.clip(crop, 0, vmax) ** 0.5, origin="lower", cmap="sdoaia171")
     ax.set_xticks([]); ax.set_yticks([])
     for ln, wgt in arcade:
-        xa, ya = box_to_aia(ln)
+        xa, ya = box_to_aia(ln, cyf, cxf)
         ax.plot(xa - x_lo, ya - y_lo, color="#a9cdf0", lw=1.3,
                 alpha=0.30 + 0.40 * wgt)
     for ln in skel:
@@ -708,6 +726,7 @@ def aia_overlay():
     xn, yn = box_to_aia(p0[None, :])
     ax.plot(xn - x_lo, yn - y_lo, marker="*", ms=15, mfc="#ffd34d",
             mec="#442200", mew=0.9)
+    ax.set_xlim(0, crop.shape[1]); ax.set_ylim(0, crop.shape[0])   # clamp to image
     ax.set_title("AR11429, 2012-03-07 00:00 UT — our potential-field lines (blue: "
                  "arcade; orange: null) over the real SDO/AIA 171 Å corona",
                  fontsize=9.5, fontweight="bold")

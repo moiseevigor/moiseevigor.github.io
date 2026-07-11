@@ -82,7 +82,11 @@ numerical zero test with no scale attached. The growth vector has a *law* for it
     arcade; orange: the null's spine and fan, ★ the null). The two datasets are
     independent: AIA sees plasma, HMI measured the surface field the extrapolation grew
     from — and cross-registering them required correcting HMI's 180° camera rotation
-    (CROTA2) against AIA's upright frame. Departures are expected and honest: a potential
+    (CROTA2) against AIA's upright frame, with the disk geometry taken from the FITS
+    headers. The arcade is traced in the flux-centred extrapolation window (which
+    contains the full loop system) and the null's fan in the null-centred window
+    (which gives its lines room) — two potential-field volumes of the same
+    magnetogram. Departures are expected and honest: a potential
     field carries no currents, and this region was anything but current-free (it flared
     X5.4 the same day).
   </figcaption>
