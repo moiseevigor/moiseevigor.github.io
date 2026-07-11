@@ -42,6 +42,12 @@ real data: the field must be resolved below the null's linear scale, finer than 
 potential-field extrapolation naturally provides. A higher-resolution NLFFF extrapolation or
 an analytic local fit (used here) supplies it.
 
+*Repair (S2, Phase 4):* the failure was the probe window, not the grid. This experiment
+probed at sub-pixel radii (0.02–0.2 px), inside the trilinear-flattened zone; probing the
+same real field at super-pixel radii (1.5–10 px — above the cell, below the structure
+scale) returns the null flux weight $w_4 \approx 3$ **directly off the raw grid** (with
+the S1 gauge adaptation). See [`S2-solar-pairs.md`](S2-solar-pairs.md).
+
 ## What this establishes, honestly
 
 - The full chain **real magnetogram → coronal field → null → SR detection**, validated

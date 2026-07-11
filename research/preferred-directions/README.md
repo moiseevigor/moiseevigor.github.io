@@ -36,6 +36,9 @@ Shared math core is **imported, never copied**, from `../caustics-to-groups/src/
 | **R2** | Does integrated-flow classification beat $\nabla B$ under noise? | ✓ vs pointwise differences, ✗ vs least-squares fit — SR's edge stays detection+order |
 | **R3** | Real gallery: 3 HMI days (2011/2012/2014), all interior nulls | ✓ 5/5 detected (Q=6) & classified, all methods agree |
 | **R5 theorem** | Can any force-free extrapolation host a spiral null? | ✗ never: $J=\alpha B$ vanishes at nulls ⇒ $\nabla B$ symmetric ⇒ radial — the real gallery covers the whole force-free-accessible class |
+| **S1 fold** | $Q=7$ at a degenerate (fold) null? Pair separation readable? | ✓ $Q=7$, weights $(1,1,1,4)$ — the law's first $k{=}2$ point in 3D; ✓ midpoint $w_4(r)$: $2\to4$ crossover at $r\sim\sqrt\mu$, universal dilation collapse |
+| **S2 solar pairs** | Real pairs? The crossover on the real Sun? | ✓ 4 real pairs (closest 23 px); crossover rising edge yes, fold plateau no (needs a merging pair). Repair: raw-grid null weight $w_4\approx3$ reads directly in the cell-to-structure scale window |
+| **S3 magnetosphere** | Do spiral nulls exist in real physics? | ✓ IGRF+T96 (real-data-fitted): 149 nulls, **79 spiral** — exactly where non-force-free currents flow; $Q=6$ at all |
 
 **The law (E9).** With base dimension $d$ and curvature vanishing to order $k$,
 $Q = d + k + 2$. Physically: acquiring holonomy $\Phi$ near a curvature zero of order $k$

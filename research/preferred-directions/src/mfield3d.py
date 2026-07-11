@@ -82,16 +82,33 @@ class MagneticStructure3D:
                 t += dt
         return s
 
+    def gauge_terms(self, q0, h=1e-5):
+        """(A0, S): value and SYMMETRIC gradient of A at q0.
+
+        Both are curl-free gauge junk -- together they are grad chi for
+        chi(d) = A0.d + d.S.d/2, an exact form, so their flux contribution is a pure
+        endpoint term chi(endpoint) that can be subtracted after integration. The
+        antisymmetric gradient is B/2 (physics) and is kept. Without the S term the
+        flux reach at a null is masked at weight 2 by the gauge (adapt-before-measure).
+        """
+        q0 = np.asarray(q0, dtype=float)[:3]
+        A0 = self.A(q0[None])[0]
+        e = np.eye(3)
+        G = np.stack([(self.A(q0[None] + h * e[j]) - self.A(q0[None] - h * e[j]))[0]
+                      / (2 * h) for j in range(3)], axis=1)   # G[i,j] = dA_i/dx_j
+        return A0, (G + G.T) / 2
+
     def weights_Q(self, q0, radii, n, rng):
         """(weights[4], Q) at base point q0 via reach-exponent scaling."""
         import growth  # shared core (../caustics-to-groups/src on sys.path)
         q0 = np.asarray(q0, dtype=float)
-        A0 = self.A(q0[None, :3])[0]
+        A0, S = self.gauge_terms(q0[:3])
         reach = np.empty((len(radii), 4))
         for i, r in enumerate(radii):
             ends = self._horizontal_curves(q0, float(r), n, rng)
             d = ends - q0
-            d[:, 3] -= A0 @ d[:, :3].T                       # gauge-fix phi at q0
+            d[:, 3] -= d[:, :3] @ A0 + 0.5 * np.einsum("ni,ij,nj->n",
+                                                       d[:, :3], S, d[:, :3])
             reach[i] = np.quantile(np.abs(d), 0.98, axis=0)
         w = growth.estimate_weights(reach, np.asarray(radii), w_max=8.0)
         return w, int(np.rint(w).sum())

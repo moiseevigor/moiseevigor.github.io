@@ -188,13 +188,14 @@ $Q=5$ in the surrounding strong field — the same null jump, now on the real Su
 <div class="l-body" markdown="1">
 
 One honest wrinkle, and it is a real methodological point. Resolving $Q=6$ *directly* from the
-raw gridded extrapolation fails: the null's linear zone is about one grid cell across, so the
-$r\to0$ flux-scaling the estimator needs is unresolved, and it returns $Q=5$. The detection above
-therefore reads the null's *measured Jacobian* — its tangent-cone structure, which is exactly what
-the growth vector is defined to see — but it means the raw-field detector wants the coronal field
-resolved below the null's linear scale, finer than a potential-field extrapolation naturally
-provides. That resolution requirement, not any failure of principle, is what real magnetic-field
-data will demand of this method.
+raw gridded extrapolation fails **when probed at sub-pixel radii**: there the interpolation has
+flattened the field, the $r\to0$ flux-scaling is gone, and the estimator returns $Q=5$. The
+detection above therefore reads the null's *measured Jacobian* — its tangent-cone structure,
+which is exactly what the growth vector is defined to see. A follow-up (Part 5's program)
+located the actual rule: probed in the right **scale window** — above the grid cell, below the
+surrounding structure — the raw real field returns the null flux weight $w_4\approx3$ directly,
+no substitution needed. On gridded data the detector is not resolution-*limited* so much as
+scale-*windowed*, and real magnetic-field data demands you choose that window consciously.
 
 ## The one place it might yet win
 
