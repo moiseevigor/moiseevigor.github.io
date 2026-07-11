@@ -125,6 +125,14 @@ point contributes curl-free junk at $r^2$ that masks the physics. It is the grad
 an exact form, so it subtracts off cleanly at the endpoint; the estimator now does this
 in general, and every earlier result was re-verified unchanged.
 
+*No analogue*, however, *does not mean no competitor* — and we raced it, pre-registered,
+against the obvious statistical rival: fit a divergence-free quadratic field model to the
+same noisy grid and root-find it. The fit wins every cell, by one to four orders of
+magnitude, in a clean and a contaminated leg alike — so for *quantitative* pair
+metrology, fit and root-find; the crossover stands as the concept (and $Q=7$ at the fold
+as intrinsic geometry), not the estimator. That is the same division of labour Part 5
+found for classification, now measured twice.
+
 ## On the real Sun: a census, a partial, and a repair
 
 Do real coronal fields carry such pairs? Scanning twelve active-region volumes across the

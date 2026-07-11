@@ -40,6 +40,8 @@ Shared math core is **imported, never copied**, from `../caustics-to-groups/src/
 | **S2 solar pairs** | Real pairs? The crossover on the real Sun? | ✓ 4 real pairs (closest 23 px); crossover rising edge yes, fold plateau no (needs a merging pair). Repair: raw-grid null weight $w_4\approx3$ reads directly in the cell-to-structure scale window |
 | **S3 magnetosphere** | Do spiral nulls exist in real physics? | ✓ IGRF+T96 (real-data-fitted): 149 nulls, **79 spiral** — exactly where non-force-free currents flow; $Q=6$ at all |
 | **T2 closed form** | Is there an exact law behind $\delta(\varepsilon)$? | ✓ $\delta = 1-\tfrac2\pi K(2\varepsilon)$, verified to $10^{-10}$; refocusing stops at $\varepsilon=1/2$ |
+| **T1 race** | Is the crossover a practical pair-metrology tool? | ✗ the div-free quadratic fit wins every cell by 1–4 orders — crossover demoted to conceptual observable (pre-registered rule) |
+| **T3 emergence** | Can we catch a fold forming on the real Sun? | ~ census: arcade 0-null → post-flare pair; the pair is same-signed ⇒ not a fold birth; hourly co-moving tracking specified |
 
 **The law (E9).** With base dimension $d$ and curvature vanishing to order $k$,
 $Q = d + k + 2$. Physically: acquiring holonomy $\Phi$ near a curvature zero of order $k$
