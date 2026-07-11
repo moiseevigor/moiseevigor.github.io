@@ -144,8 +144,13 @@ def _plot_culled(ax, P, d, **kw):
             ax.plot(P[run, 0], P[run, 1], P[run, 2], **kw)
 
 
-def _plot_faded(ax, P, d, color, lw, alpha, zorder, fade=0.22):
-    """Occlusion-culled polyline whose ends FADE OUT instead of cutting hard."""
+def _plot_faded(ax, P, d, color, lw, alpha, zorder, fade=0.22, wpt=None):
+    """Occlusion-culled polyline whose ends FADE OUT instead of cutting hard.
+
+    wpt (optional, len(P)): per-POINT alpha weights in [0,1] -- e.g. proximity to an
+    artificial domain wall. Bundles of lines all hitting the same wall stack their
+    faded ends back to opacity unless the whole bundle dims coherently; wpt is how.
+    """
     from mpl_toolkits.mplot3d.art3d import Line3DCollection
     vis = _visible(P, d)
     cut = np.flatnonzero(np.diff(vis.astype(int))) + 1
@@ -158,11 +163,25 @@ def _plot_faded(ax, P, d, color, lw, alpha, zorder, fade=0.22):
         idx = np.arange(n)
         nf = max(2, int(fade * n))
         a = np.minimum(np.minimum(idx + 1, n - idx) / nf, 1.0) * alpha
+        if wpt is not None:
+            wr = wpt[run]
+            a = a * 0.5 * (wr[:-1] + wr[1:])
         rgba = np.tile(np.asarray(matplotlib.colors.to_rgba(color)), (n, 1))
-        rgba[:, 3] = a
+        rgba[:, 3] = np.clip(a, 0, 1)
         lc = Line3DCollection(segs, colors=rgba, linewidths=lw, zorder=zorder,
                               capstyle="round")
         ax.add_collection3d(lc)
+
+
+def _edge_weight(P_box, nx, ny, nz, w_px=9.0):
+    """Per-point fade weight ~ distance to the ARTIFICIAL box walls (sides + top).
+
+    The bottom (photosphere) is a physical boundary -- lines may end there crisply.
+    """
+    dx = np.minimum(P_box[:, 0] - 1, nx - 2 - P_box[:, 0])
+    dy = np.minimum(P_box[:, 1] - 1, ny - 2 - P_box[:, 1])
+    dz = nz - 2 - P_box[:, 2]
+    return np.clip(np.minimum(np.minimum(dx, dy), dz) / w_px, 0.0, 1.0)
 
 def skeleton(fast=False):
     """The stage as the actual Sun: full-disk magnetogram on a sphere, the AR11429
@@ -291,13 +310,15 @@ def skeleton(fast=False):
                          zorder=2)
     s2.set_clip_on(False)
 
-    # field lines (occlusion-culled against the sphere, ends fading out)
+    # field lines (occlusion-culled, ends fading out, bundles dimming toward the
+    # artificial box walls so shared exits cannot stack back into a hard cut)
     for ln, wgt in arcade:
         _plot_faded(ax, embed(ln), d, color=ARC, lw=0.8 + 1.0 * wgt,
-                    alpha=0.38 + 0.35 * wgt, zorder=3)
+                    alpha=0.38 + 0.35 * wgt, zorder=3,
+                    wpt=_edge_weight(ln, nx, ny, nz))
     for ln in skel:
-        _plot_faded(ax, embed(ln), d, color=NUL, lw=1.8, alpha=0.95, zorder=4,
-                    fade=0.30)
+        _plot_faded(ax, embed(ln), d, color=NUL, lw=1.6, alpha=0.95, zorder=4,
+                    fade=0.30, wpt=_edge_weight(ln, nx, ny, nz, w_px=12.0))
     star = embed(np.array([p0]))[0]
     for s_, a_ in ((1500, 0.06), (650, 0.16)):    # soft glow behind the star
         ax.scatter(*star, s=s_, c=STAR, marker="o", alpha=a_, linewidth=0,
@@ -335,13 +356,26 @@ def skeleton(fast=False):
                      shade=False, antialiased=False, linewidth=0, zorder=1)
     inl = lambda q: ((np.abs(q[:, 0] - p0[0]) < L) & (np.abs(q[:, 1] - p0[1]) < L)
                      & (q[:, 2] < ZT))
+    from mpl_toolkits.mplot3d.art3d import Line3DCollection
     for ln in skel:
         ok = inl(ln)
+        # fade toward the CROP boundary (and box walls) instead of hard-clipping;
+        # bundles that leave the crop together dim together
+        wcrop = np.clip(np.minimum.reduce([
+            (L - np.abs(ln[:, 0] - p0[0])), (L - np.abs(ln[:, 1] - p0[1])),
+            (ZT - ln[:, 2])]) / 3.5, 0.0, 1.0)
+        wcrop *= _edge_weight(ln, nx, ny, nz, w_px=6.0)
         cutpts = np.flatnonzero(np.diff(ok.astype(int))) + 1
         for run in np.split(np.arange(len(ln)), cutpts):
-            if ok[run[0]] and len(run) > 2:
-                axi.plot(ln[run, 0], ln[run, 1], ln[run, 2], color=NUL, lw=1.4,
-                         alpha=0.9, zorder=3)
+            if not ok[run[0]] or len(run) < 3:
+                continue
+            Q = ln[run]
+            segs = np.stack([Q[:-1], Q[1:]], axis=1)
+            a = 0.9 * 0.5 * (wcrop[run][:-1] + wcrop[run][1:])
+            rgba = np.tile(np.asarray(matplotlib.colors.to_rgba(NUL)), (len(segs), 1))
+            rgba[:, 3] = np.clip(a, 0, 1)
+            axi.add_collection3d(Line3DCollection(segs, colors=rgba, linewidths=1.4,
+                                                  zorder=3, capstyle="round"))
     axi.plot([p0[0]] * 2, [p0[1]] * 2, [0, p0[2]], color="#777f8c", lw=0.8,
              ls=(0, (2, 2)), zorder=2)
     for s_, a_ in ((1300, 0.07), (550, 0.16)):
