@@ -190,11 +190,15 @@ def skeleton(fast=False):
     from scipy.ndimage import zoom, map_coordinates, gaussian_filter
     bz = dict(load_magnetograms())["2012-03-07"]
     cy, cx = 640, 640
+    # the SURVEY volume (the null of this pipeline lives here; a window-sensitivity
+    # scan showed low potential-field nulls do NOT persist under domain enlargement --
+    # documented in docs/R3-real-gallery.md -- so we render the survey field itself
+    # and let lines that genuinely leave it fade)
     cut = zoom(bz[cy - WIN // 2:cy + WIN // 2, cx - WIN // 2:cx + WIN // 2],
                CUT / WIN, order=1)
     B, _A = solar.potential_field(cut, NZ, dz=1.0)
     ny, nx, nz, _ = B.shape
-    nulls = [nl for nl in solar.find_nulls(B, seeds_per_axis=10)
+    nulls = [nl for nl in solar.find_nulls(B, seeds_per_axis=12)
              if 6 < nl["p"][0] < nx - 6 and 6 < nl["p"][1] < ny - 6
              and 3 < nl["p"][2] < nz - 3]
     nulls.sort(key=lambda nl: nl["p"][2])
@@ -210,14 +214,14 @@ def skeleton(fast=False):
     arcade = []
     for j in sel:
         sgn = +1.0 if cut[iy[j], ix[j]] > 0 else -1.0
-        ln = _trace(B, np.array([ix[j], iy[j], 1.5]), sgn)
+        ln = _trace(B, np.array([ix[j], iy[j], 1.5]), sgn, ds=0.35, steps=1600)
         if len(ln) > 10:
             arcade.append((ln, w[j] / w.max()))
     skel = []
     for _ in range(26):
         u = rng.standard_normal(3); u /= np.linalg.norm(u)
         for sgn in (+1.0, -1.0):
-            ln = _trace(B, p0 + 1.2 * u, sgn, ds=0.3, steps=700)
+            ln = _trace(B, p0 + 1.2 * u, sgn, ds=0.3, steps=2600)
             if len(ln) > 8:
                 skel.append(ln)
 

@@ -56,6 +56,29 @@ including sign.
    asserted numerically). This builds the SR structure of an arbitrary real null in one
    line — `nullfields.py`'s block construction is now a special case.
 
+## Window-sensitivity of low potential-field nulls (post-P5 check)
+
+Attempting to render the AR11429 null's field lines to closure exposed a caveat that
+belongs in the record. Scanning the extrapolation window around the survey's 160 px:
+
+| window [disk px] | null nearest the AR target |
+|---|---|
+| 160 (survey) | present, dist 0.0 px (h = 4.9 px) |
+| 180 | 18 px away, at h = 1.8 px |
+| 200–224 | **no nulls found at all** |
+| 256–280 | unrelated nulls, 40–47 px away |
+
+**Low-lying nulls of windowed potential extrapolations are features of the model
+domain** (flux balancing + periodic FFT boundaries), not established coronal
+structures: this one does not persist under domain enlargement. Two consequences,
+stated precisely: (1) the *detector validation* of R1–R3 is untouched — the SR
+detector correctly finds and grades the nulls of whatever field it is given, which is
+what was claimed; (2) any *physical* claim about a specific coronal null from a single
+windowed potential extrapolation is weaker than it looks — persistent identification
+needs NLFFF or global extrapolations, and the rendered field lines of such a null
+cannot be traced "to closure", because their connectivity leaves the volume in which
+the null exists. Figure captions now say so.
+
 ## Where the program stands after R1–R3
 
 - **Detection**: grounded. Q = 6 at every null across the full synthetic type battery
