@@ -3,8 +3,9 @@ layout: distill
 title: "Appendix D5 — The Nilpotent-Deviation Gradient Formula"
 subtitle: >
   Why δ = −ε². The dilation symmetry that makes the deviation a function of one variable, the
-  perturbation argument that fixes the leading power, the parity that kills the odd terms, and the
-  open theory question — is the next coefficient exactly 5/2?
+  perturbation argument that fixes the leading power, the parity that kills the odd terms — and
+  the precision measurement that pins the next coefficient at exactly 9/4 (refuting the 5/2 a
+  coarser fit once suggested).
 date: 2026-08-21 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, conjugate-locus, perturbation, dilation, moduli, magnetic-fields]
@@ -89,8 +90,8 @@ $$
 \delta(\varepsilon) = -c_2\,\varepsilon^2 - c_4\,\varepsilon^4 - c_6\,\varepsilon^6 - \cdots
 $$
 
-Measured: $c_2 = 0.9996$, $c_4 = 2.524$, and the fitted exponent of $|\delta|$ vs $\varepsilon$ is
-$2.014$ — even powers, confirmed. The odd (directional) information about the gradient is exactly
+Measured: $c_2 = 1.0000$, $c_4 = 2.2497 \pm 0.0009$ (the precision experiment below), and the
+fitted exponent of $|\delta|$ vs $\varepsilon$ is $2.014$ — even powers, confirmed. The odd (directional) information about the gradient is exactly
 what the average discards; recovering it from the $\theta_0$-*dependence* of $t_c$ (rather than its
 mean) would read the gradient's *direction*, a readout the series leaves on the table.
 
@@ -106,16 +107,35 @@ Given the conjugate locus of the magnetic geometry at a point, you recover the f
 gradient. This is the sense in which the caustic *reads* the field, and it is the first
 demonstration of the nilpotent-deviation statistic against a physical ground truth.
 
-## The open question
+## The quartic coefficient: $9/4$, not $5/2$
 
-Both measured coefficients look like exact rationals: $c_2 = 1$ (clean) and $c_4 = 2.524 \approx
-5/2$. An analytic solution of the rescaled system — perturbation of the pendulum-like
-$\theta$-equation $\ddot\theta = \varepsilon\,\dot X\,e^{\varepsilon X}$ around the circular orbit
-— should yield $F(\varepsilon)$ in closed form and settle whether $c_4 = 5/2$ exactly. That is not
-a two-line dimensional argument (it requires solving the geodesic flow), which is precisely why it
-matters: a closed form for $F$ would be a genuine non-elementary consequence of the sub-Riemannian
-framing, the kind of result the program's honesty criterion demands before claiming the geometry
-is a *tool* and not just a *language*. It remains open.
+The first fit of this series (a two-term model over a wide $\varepsilon$ window) gave
+$c_4 = 2.524$, temptingly close to $5/2$. A dedicated precision measurement
+(`scripts/run_c4_precision.py`) settles it — and teaches a small lesson about reading
+asymptotic series off finite windows. Measuring $z(\varepsilon) = (-\delta/\varepsilon^2 - 1)/
+\varepsilon^2 = c_4 + c_6\varepsilon^2 + \cdots$ on a grid reaching down to $\varepsilon = 0.03$
+(conjugate times converged to $10^{-6}$, verified across scan resolutions):
+
+$$
+c_4 \;=\; 2.2497 \pm 0.0009 \;=\; \tfrac94 \text{ to a part in } 2500,
+\qquad c_6 \approx 6.4.
+$$
+
+The hypothesis $c_4 = 5/2$ is **refuted** (it sits $280\sigma$ away); the wide-window
+$2.52$ was the *local slope* of $z$ at $\varepsilon \approx 0.2$ — the $c_6$ term folded in —
+not the intercept. So
+
+$$
+\delta(\varepsilon) \;=\; -\varepsilon^2 - \tfrac94\,\varepsilon^4 - O(\varepsilon^6),
+$$
+
+with $9/4$ now a sharp target for the analytic derivation: a perturbation of the
+pendulum-like $\theta$-equation $\ddot\theta = \varepsilon\,\dot X\,e^{\varepsilon X}$ around
+the circular orbit should produce it in closed form ($c_6$, measured $\approx 6.4$, is the
+next check — note $25/4 = 6.25$ sits inside the measurement's model spread, suggesting the
+odd-square pattern $c_{2m} = (2m-1)^2/4$ for $m \ge 2$; that is a conjecture the derivation
+must confirm or kill, not a claim). The derivation itself remains open — but it now has a
+number to hit.
 
 ## References
 

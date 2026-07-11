@@ -121,7 +121,7 @@ survives — then this is a rebranding and the program should be stopped. Say so
 
 ### Phase 1 — **do the moduli measure $\nabla B$?** — DONE, CONFIRMED
 
-*Result: $\delta=-\varepsilon^2-2.52\varepsilon^4+O(\varepsilon^6)$ with $\varepsilon=|\nabla\ln B|\,r_L$; leading coefficient measured 0.99960, parity exponent 2.014, only even powers. Inverts: $|\nabla\ln B|=\sqrt{|\delta|}/r_L$. A field gradient delays refocusing. The 'collapse' turned out to be a dilation **theorem**, not evidence — logged. See [`P1-moduli-read-grad-B.md`](P1-moduli-read-grad-B.md).*
+*Result: $\delta=-\varepsilon^2-2.52\varepsilon^4+O(\varepsilon^6)$ with $\varepsilon=|\nabla\ln B|\,r_L$; leading coefficient measured 0.99960, parity exponent 2.014, only even powers. Inverts: $|\nabla\ln B|=\sqrt{|\delta|}/r_L$. A field gradient delays refocusing. The 'collapse' turned out to be a dilation **theorem**, not evidence — logged. Quartic coefficient later pinned by the precision follow-up at $c_4 = 9/4$ (the 2.52 here was a wide-window truncation artefact; $5/2$ refuted). See [`P1-moduli-read-grad-B.md`](P1-moduli-read-grad-B.md).*
 The single most decision-relevant experiment in this program: it is the first setting in
 which the nilpotent-deviation statistic has a *physical ground truth* to be checked against.
 

@@ -120,6 +120,12 @@ the first-order effect is purely directional and averages away.
 4. **$c_4 = 2.5236$ is suspiciously close to $5/2$.** Both $c_2=1$ and $c_4$ look like exact
    rationals. An analytic derivation of $F(\varepsilon)$ is the natural theory follow-up,
    and would be a genuine non-elementary result of the kind §5 of the charter demands.
+   *Correction (precision follow-up, `run_c4_precision.py` / `c4_precision.json`):* the
+   suspicion was right that $c_4$ is rational, wrong about which one. This report's
+   two-term fit over a wide $\varepsilon$ window read the local slope, not the intercept;
+   the small-$\varepsilon$ extrapolation gives $c_4 = 2.2497 \pm 0.0009 = \mathbf{9/4}$
+   ($5/2$ refuted at $\sim280\sigma$), with $c_6 \approx 6.4$. Caveat 3's warning about the
+   next coefficient was exactly the trap this report fell into.
 5. Synthetic field with analytic truth. No real data yet — that is Phase 2.
 
 ## What this settles for the charter

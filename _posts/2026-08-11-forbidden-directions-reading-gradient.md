@@ -72,11 +72,13 @@ function, and its symmetry.
 Measured across sixteen $(g, w)$ pairs spanning a decade in $\varepsilon$:
 
 $$
-\boxed{\;\delta(\varepsilon) \;=\; -\,\varepsilon^{2} \;-\; 2.52\,\varepsilon^{4} \;+\; O(\varepsilon^{6})\;}
+\boxed{\;\delta(\varepsilon) \;=\; -\,\varepsilon^{2} \;-\; \tfrac{9}{4}\,\varepsilon^{4} \;+\; O(\varepsilon^{6})\;}
 $$
 
-with leading coefficient measured $0.9996$ and **only even powers**. The figure shows $|\delta|$
-against $\varepsilon$ on log–log: a clean line of slope 2.
+with leading coefficient measured $1.0000$ and **only even powers**; a follow-up precision
+measurement pins the quartic coefficient at $c_4 = 2.2497 \pm 0.0009$ — the exact rational
+$9/4$ to a part in $2500$ (and *not* the $5/2$ a coarser wide-window fit once suggested).
+The figure shows $|\delta|$ against $\varepsilon$ on log–log: a clean line of slope 2.
 
 </div><!-- /.l-body -->
 
@@ -91,10 +93,12 @@ against $\varepsilon$ on log–log: a clean line of slope 2.
     magnitude of the nilpotent deviation $|\delta|$ versus the dimensionless gradient
     $\varepsilon = |\nabla\ln B|\,r_L$, log–log; the measured points (dots) lie on the dashed
     slope-2 guide, so $|\delta|\propto\varepsilon^{2}$. <em>Right view:</em> $\delta/\varepsilon^{2}$
-    against $\varepsilon^{2}$ is a straight line hitting $-1$ at the origin — the series
-    $\delta = -\varepsilon^{2} - 2.52\,\varepsilon^{4}$, with only even powers. The relation
-    inverts: $|\nabla\ln B| = \sqrt{|\delta|}/r_L$. Data:
-    <code>research/preferred-directions/artifacts/p1_results.json</code>.
+    against $\varepsilon^{2}$ hits $-1$ at the origin with initial slope $-9/4$ (dashed
+    tangent) and bends below it as the $\varepsilon^{6}$ term wakes up (dotted curve) — the
+    series $\delta = -\varepsilon^{2} - \tfrac94\varepsilon^{4} - O(\varepsilon^{6})$, only
+    even powers. The relation inverts: $|\nabla\ln B| = \sqrt{|\delta|}/r_L$. Data:
+    <code>research/preferred-directions/artifacts/p1_results.json</code>,
+    <code>c4_precision.json</code>.
   </figcaption>
 </figure>
 
@@ -144,7 +148,7 @@ against $\varepsilon$ on log–log: a clean line of slope 2.
 
   function series() {
     while (svg.firstChild) svg.removeChild(svg.firstChild);
-    // delta/eps^2 vs eps^2 : line from -1 (at 0) with slope -2.52
+    // delta/eps^2 vs eps^2 : tangent at 0 has slope -c4 = -9/4; the eps^6 term bends below
     const xs = EPS.map(e => e * e);
     const ys = EPS.map((e, i) => -ADEL[i] / (e * e));      // = delta/eps^2 (negative)
     const xmax = 0.045, ymin = -1.16, ymax = -0.98;
@@ -154,13 +158,18 @@ against $\varepsilon$ on log–log: a clean line of slope 2.
       svg.appendChild(el("line", { x1: x0, y1: Y(gy), x2: x1, y2: Y(gy), stroke: "#eee" }));
       svg.appendChild(el("text", { x: x0 - 6, y: Y(gy) + 3, "text-anchor": "end", "font-size": 10, fill: "#999", "font-family": MONO }, gy.toFixed(2)));
     });
-    // fit line delta/eps^2 = -(1 + 2.52 eps^2)
-    svg.appendChild(el("line", { x1: X(0), y1: Y(-1.0), x2: X(xmax), y2: Y(-(1 + 2.5236 * xmax)),
+    // tangent delta/eps^2 = -(1 + 9/4 eps^2), and the measured series with c6 = 6.4
+    svg.appendChild(el("line", { x1: X(0), y1: Y(-1.0), x2: X(xmax), y2: Y(-(1 + 2.25 * xmax)),
       stroke: "#dd6b20", "stroke-width": 1.5, "stroke-dasharray": "5 4", opacity: 0.7 }));
+    let d6 = "";
+    for (let u = 0; u <= xmax + 1e-9; u += xmax / 40)
+      d6 += (d6 ? " L" : "M") + ` ${X(u).toFixed(1)} ${Y(-(1 + 2.25 * u + 6.4 * u * u)).toFixed(1)}`;
+    svg.appendChild(el("path", { d: d6, fill: "none", stroke: "#dd6b20", "stroke-width": 1,
+      "stroke-dasharray": "1.5 3", opacity: 0.8 }));
     xs.forEach((xx, i) => { if (xx <= xmax) svg.appendChild(el("circle", { cx: X(xx), cy: Y(ys[i]), r: 3.2, fill: "#2b6cb0" })); });
     svg.appendChild(el("circle", { cx: X(0), cy: Y(-1.0), r: 3, fill: "none", stroke: "#dd6b20", "stroke-width": 1.5 }));
     svg.appendChild(el("text", { x: X(0) + 6, y: Y(-1.0) - 6, "font-size": 11, fill: "#dd6b20", "font-family": MONO }, "→ −1 (c₂=1)"));
-    svg.appendChild(el("text", { x: X(xmax) - 4, y: Y(-(1 + 2.5236 * xmax)) - 6, "text-anchor": "end", "font-size": 10.5, fill: "#dd6b20", "font-family": MONO }, "slope −2.52 (c₄)"));
+    svg.appendChild(el("text", { x: X(xmax) - 4, y: Y(-(1 + 2.25 * xmax)) + 14, "text-anchor": "end", "font-size": 10.5, fill: "#dd6b20", "font-family": MONO }, "tangent −9/4 (c₄)"));
     svg.appendChild(el("text", { x: (x0 + x1) / 2, y: H - 6, "text-anchor": "middle", "font-size": 12, fill: "#333", "font-family": SANS }, "ε²"));
     svg.appendChild(el("text", { x: 15, y: (y0 + y1) / 2, "text-anchor": "middle", "font-size": 12, fill: "#333", "font-family": SANS, transform: `rotate(-90 15 ${(y0 + y1) / 2})` }, "δ / ε²"));
   }
