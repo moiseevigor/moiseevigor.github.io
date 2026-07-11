@@ -169,6 +169,21 @@ extrapolation, the Newton null finder, and *every* interior null kept — no che
 
 </div><!-- /.l-body -->
 
+<figure class="l-middle" id="fig-hmi-triptych">
+  <div style="text-align:center;">
+    <img src="/public/img/posts/forbidden-directions-hmi-triptych.png"
+      alt="Three full-disk SDO/HMI magnetograms — 2011-06-07, 2012-03-07 with AR11429, and 2014-10-22 with the huge AR12192 — with dashed boxes marking the analysed active regions"
+      style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
+  </div>
+  <figcaption>
+    <strong>The raw material.</strong> The three full-disk line-of-sight magnetograms as
+    SDO/HMI recorded them (red / blue = field out of / into the photosphere; peak
+    $\lvert B\rvert$ labelled per disk — up to 4777 G on the AR12192 day). Dashed boxes:
+    the active-region windows the pipeline extrapolates and searches. Everything below is
+    computed from these three images and nothing else.
+  </figcaption>
+</figure>
+
 <figure class="l-middle" id="fig-real-gallery">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-real-gallery.png"
