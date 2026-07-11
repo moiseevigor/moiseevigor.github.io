@@ -82,9 +82,10 @@ coarser fit once suggested) and then derived: the angular dynamics integrates in
 the per-angle refocusing time is a pendulum-like period, and its launch-angle average is
 $\tfrac{2}{\pi}K(2\varepsilon)$, verified against the geodesic code to $10^{-10}$. The
 coefficients are squared normalised central binomials, only even powers — and $K$'s
-singularity is physics: refocusing *stops* at the critical gradient $\varepsilon = 1/2$
-(appendix D5). The figure shows $|\delta|$ against $\varepsilon$ on log–log: a clean line
-of slope 2.
+singularity is physics: at the critical gradient $\varepsilon = 1/2$ the *mean*
+refocusing time diverges and the slowest launch direction stops refocusing entirely
+(appendix D5, and Part 7 for the full referee-grade chain). The figure shows $\lvert\delta\rvert$
+against $\varepsilon$ on log–log: a clean line of slope 2.
 
 </div><!-- /.l-body -->
 
@@ -96,13 +97,13 @@ of slope 2.
   <div id="fd-delta" style="text-align:center;"></div>
   <figcaption>
     <strong>The caustic reads the gradient (experiment P1).</strong> <em>Left view:</em> the
-    magnitude of the nilpotent deviation $|\delta|$ versus the dimensionless gradient
-    $\varepsilon = |\nabla\ln B|\,r_L$, log–log; the measured points (dots) lie on the dashed
-    slope-2 guide, so $|\delta|\propto\varepsilon^{2}$. <em>Right view:</em> $\delta/\varepsilon^{2}$
+    magnitude of the nilpotent deviation $\lvert\delta\rvert$ versus the dimensionless gradient
+    $\varepsilon = \lvert\nabla\ln B\rvert\,r_L$, log–log; the measured points (dots) lie on the dashed
+    slope-2 guide, so $\lvert\delta\rvert\propto\varepsilon^{2}$. <em>Right view:</em> $\delta/\varepsilon^{2}$
     against $\varepsilon^{2}$ hits $-1$ at the origin with initial slope $-9/4$ (dashed
     tangent) and bends below it as the $\varepsilon^{6}$ term wakes up (dotted curve) — the
     series $\delta = -\varepsilon^{2} - \tfrac94\varepsilon^{4} - O(\varepsilon^{6})$, only
-    even powers. The relation inverts: $|\nabla\ln B| = \sqrt{|\delta|}/r_L$. Data:
+    even powers. The relation inverts: $\lvert\nabla\ln B\rvert = \sqrt{\lvert\delta\rvert}/r_L$. Data:
     <code>research/preferred-directions/artifacts/p1_results.json</code>,
     <code>c4_precision.json</code>.
   </figcaption>
@@ -194,7 +195,7 @@ of slope 2.
 Three things, each checkable and each a little surprising.
 
 **The caustic measures the gradient, invertibly.** From the deviation of the refocusing pattern
-you recover the field gradient: $|\nabla\ln B| = \sqrt{|\delta|}/r_L$ to leading order. The
+you recover the field gradient: $\lvert\nabla\ln B\rvert = \sqrt{\lvert\delta\rvert}/r_L$ to leading order. The
 shape of a caustic is not decoration — it is a readout.
 
 **A gradient delays refocusing.** $\delta<0$ means $t_c$ exceeds the Larmor period: orbits in a
@@ -204,7 +205,7 @@ orbits apart, and they need more time to come back together — at second order 
 **Only even powers appear.** The odd terms vanish because we averaged over the launch direction
 $\theta_0$: a gradient points *somewhere*, and that directional (odd) part cancels when you
 average over all starting directions, leaving a signal that depends only on the gradient's
-*magnitude*. Which is also the honest limitation: this averaged $\delta$ reads $|\nabla B|$, not
+*magnitude*. Which is also the honest limitation: this averaged $\delta$ reads $\lvert\nabla B\rvert$, not
 its direction. The direction is in the $\theta_0$-*dependence* we averaged away — a readout still
 on the table.
 
@@ -232,7 +233,7 @@ does not oversell the answer.
 - **Nilpotent deviation $\delta$** — the fractional departure of the real refocusing time from the
   flat-model (Larmor) period, averaged over launch direction; zero for a uniform field.
 - **Larmor radius $r_L = 1/(B_0\lvert w\rvert)$** — the size of a Larmor orbit; the geometry's one length scale.
-- **Dimensionless gradient $\varepsilon = |\nabla\ln B|\,r_L$** — the fractional change of the field
+- **Dimensionless gradient $\varepsilon = \lvert\nabla\ln B\rvert\,r_L$** — the fractional change of the field
   across one orbit; the only knob $\delta$ can depend on.
 - **Parity** — $\delta$ is even in $\varepsilon$ because averaging over launch direction cancels the
   odd (directional) part.

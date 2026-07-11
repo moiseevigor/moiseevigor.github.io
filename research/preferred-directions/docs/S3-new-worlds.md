@@ -23,7 +23,7 @@ spiral nulls of the entire program on a field with observational pedigree, exact
 the theorem said they must live: in the non-force-free current regions. The SR
 growth-vector detector returns $\mathbf{Q = 6}$ at every null (tangent-cone
 measurement), radial and spiral alike — the fourth world (after the synthetic battery,
-the ABC dynamo, and the solar corona) in which the detector is grounded.
+the ABC-like dynamo field, and the solar corona) in which the detector is grounded.
 
 ## Honest caveats
 

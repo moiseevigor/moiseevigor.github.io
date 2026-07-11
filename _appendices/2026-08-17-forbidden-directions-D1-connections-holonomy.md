@@ -79,7 +79,7 @@ drives the vanishing-order $k$ in the law $Q = d + k + 2$.
 
 | Geometry | Magnetism | Rotation (Coriolis) | Quantum (Berry) |
 |---|---|---|---|
-| connection $\alpha$ | vector potential $\mathbf A$ | angular-velocity potential | Berry connection $\langle\psi|\,d\,|\psi\rangle$ |
+| connection $\alpha$ | vector potential $\mathbf A$ | angular-velocity potential | Berry connection $\langle\psi\rvert\,d\,\lvert\psi\rangle$ |
 | holonomy $\varphi$ | magnetic flux | Coriolis circulation | Berry phase |
 | curvature $F$ | field $\mathbf B$ | vorticity $2\boldsymbol\omega$ | Berry curvature |
 

@@ -36,7 +36,7 @@ growth-vector estimator needs is unresolved. The detection above therefore reads
 **measured Jacobian** — its tangent-cone structure, which is precisely what the growth
 vector is defined to see, and the leading-order truth of the real field there.
 
-This is not a failure of principle (the analytic ABC field, exact at all scales, gives
+This is not a failure of principle (the analytic ABC-like field, exact at all scales, gives
 $Q=6$ directly — see `run_p2_nulls.py`); it is a genuine requirement the method places on
 real data: the field must be resolved below the null's linear scale, finer than a
 potential-field extrapolation naturally provides. A higher-resolution NLFFF extrapolation or
@@ -61,6 +61,6 @@ the S1 gauge adaptation). See [`S2-solar-pairs.md`](S2-solar-pairs.md).
 ## Status
 
 Preferred-directions now has a real-observational-data result (this) alongside the analytic
-ABC validation. The decisive open question is unchanged and unaddressed here: do the *moduli*
+ABC-like-field validation. The decisive open question is unchanged and unaddressed here: do the *moduli*
 (not the growth vector) distinguish the null *type* the eigenvalue finder assigns — the one
 place the framework could *refine* rather than merely agree with the standard tool.

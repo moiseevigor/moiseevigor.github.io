@@ -91,7 +91,7 @@ $$
 $$
 
 Measured: $c_2 = 1.0000$, $c_4 = 2.2497 \pm 0.0009$ (the precision experiment below), and the
-fitted exponent of $|\delta|$ vs $\varepsilon$ is $2.014$ — even powers, confirmed. The odd (directional) information about the gradient is exactly
+fitted exponent of $\lvert\delta\rvert$ vs $\varepsilon$ is $2.014$ — even powers, confirmed. The odd (directional) information about the gradient is exactly
 what the average discards; recovering it from the $\theta_0$-*dependence* of $t_c$ (rather than its
 mean) would read the gradient's *direction*, a readout the series leaves on the table.
 
@@ -140,7 +140,9 @@ $\dot\theta = 1 + \varepsilon(\sin\theta - \sin\theta_0)$ — the system is inte
 per-angle refocusing time is the $\theta$-period,
 $t_c(\theta_0) = 2\pi\big[(1-\varepsilon\sin\theta_0)^2 - \varepsilon^2\big]^{-1/2}$
 (verified against the Jacobian-zero conjugate times to $10^{-8}$), and its launch-angle
-average is a complete elliptic integral:
+average is a complete elliptic integral of the first kind (modulus convention,
+$K(k)=\int_0^{\pi/2} d\phi/\sqrt{1-k^2\sin^2\phi}$; identity verified symbolically
+through $O(\varepsilon^{12})$ and numerically to $10^{-10}$):
 
 $$
 \boxed{\;\delta(\varepsilon) \;=\; 1 - \frac{2}{\pi}\,K(2\varepsilon)\;}

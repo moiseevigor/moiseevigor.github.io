@@ -100,7 +100,7 @@ has slope 2. The figure shows the real measurement.
   <div id="fd-reach2d" style="text-align:center;"></div>
   <figcaption>
     <strong>The law $Q = d + k + 2$, measured.</strong> Each line is a coordinate's reach (98th
-    percentile of $|\cdot|$ across a fan of geodesics) versus path length $r$, both axes
+    percentile of $\lvert\cdot\rvert$ across a fan of geodesics) versus path length $r$, both axes
     logarithmic; slope = weight. The two spatial coordinates (slope&nbsp;1) are drivable
     directly. The <em>flux</em> coordinate has slope&nbsp;2 in an ordinary field ($k=0$) — it is
     area-like — giving $Q = 2 + 2 = 4$. Where the field vanishes to order $k$, the flux slope

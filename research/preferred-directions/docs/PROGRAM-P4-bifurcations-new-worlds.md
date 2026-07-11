@@ -20,7 +20,9 @@ leaves the SR side genuinely ahead, and expands the data beyond the Sun.
      radii below the pair half-separation see the local structure (uniform: flux weight
      2; at a member null: 3), radii above it see the parent degenerate structure (weight
      4). The SR detector, uniquely, reads the **separation of an unresolved pair** off
-     one scaling curve. Nothing pointwise can do that.
+     one scaling curve. Nothing pointwise can do that. *(Post-hoc, P5-T1: a polynomial
+     fit + root-finding CAN, and does it better — the crossover was later demoted to a
+     conceptual observable by the pre-registered race; see `T1-race.md`.)*
 
 2. **New worlds.** The R5 theorem says spiral nulls need genuinely non-force-free
    currents — which solar extrapolations cannot supply but **planetary magnetospheres**

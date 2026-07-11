@@ -36,8 +36,11 @@ $K(k) = \int_0^{\pi/2} d\phi/\sqrt{1-k^2\sin^2\phi}$).
 3. **The angle average is elliptic.**
    $$\frac{\langle t_c\rangle}{2\pi} = \frac{1}{2\pi}\oint
    \frac{d\phi}{\sqrt{(1-\varepsilon\sin\phi)^2-\varepsilon^2}} = \frac{2}{\pi}K(2\varepsilon).$$
-   *Verified: $\delta$ measured by the full pipeline matches $1-(2/\pi)K(2\varepsilon)$
-   to $10^{-10}$–$10^{-9}$ absolute across ε = 0.05 … 0.45.*
+   *Verified two ways: symbolically, term by term through $O(\varepsilon^{12})$
+   (sympy — every coefficient $\binom{2m}{m}^2 4^{-m}$ matches, difference exactly 0);
+   and numerically, $\delta$ from the full pipeline matches $1-(2/\pi)K(2\varepsilon)$ to
+   $10^{-10}$–$10^{-9}$ absolute across ε = 0.05 … 0.45. The formal reduction of the
+   integral is a standard elliptic substitution, not yet written out here.*
 
 ## Corollaries
 

@@ -6,9 +6,12 @@
                           analysed active-region windows outlined.
   2. null-constellation-- the 149 magnetospheric nulls of the IGRF+T96 census
                           (artifacts/p4_magnetosphere.json) in 3D GSM, radial vs spiral.
-  3. coronal-skeleton  -- 3D field lines of the real 2012-03-07 extrapolation threading
-                          the detected coronal null: spine, fan, and the arcade above
-                          the active region.
+  3. coronal-skeleton  -- the real Sun as a sphere: the full-disk 2012-03-07 magnetogram
+                          textured on it (classic HMI grey), the AR11429 potential-field
+                          extrapolation embedded at its true disk position (tangent map,
+                          true height scale), arcade + null-threading field lines drawn
+                          with sphere occlusion, and a close-up inset of the null's
+                          spine and fan.
 
 Usage: render_real_assets.py     Output: public/img/posts/forbidden-directions-{...}.png
 """
@@ -122,10 +125,30 @@ def _trace(B, p0, direction, ds=0.35, steps=900):
     return np.array(pts)
 
 
-def skeleton():
-    from scipy.ndimage import zoom
-    mags = dict(load_magnetograms())
-    bz = mags["2012-03-07"]
+def _cam_dir(elev, azim):
+    """Unit vector pointing from the scene toward the (orthographic) camera."""
+    e, a = np.radians(elev), np.radians(azim)
+    return np.array([np.cos(e) * np.cos(a), np.cos(e) * np.sin(a), np.sin(e)])
+
+def _visible(P, d, R=1.0):
+    """True where points P (n,3) are NOT occluded by the sphere |p|<R, camera dir d."""
+    b = P @ d
+    return ~((b < 0) & ((P * P).sum(1) - b * b < R * R))
+
+def _plot_culled(ax, P, d, **kw):
+    """Plot a polyline, split into its sphere-visible runs."""
+    vis = _visible(P, d)
+    cut = np.flatnonzero(np.diff(vis.astype(int))) + 1
+    for run in np.split(np.arange(len(P)), cut):
+        if vis[run[0]] and len(run) > 2:
+            ax.plot(P[run, 0], P[run, 1], P[run, 2], **kw)
+
+def skeleton(fast=False):
+    """The stage as the actual Sun: full-disk magnetogram on a sphere, the AR11429
+    extrapolation patch embedded at its true disk position (tangent/exponential map,
+    true height scale), field lines occlusion-culled, null close-up inset."""
+    from scipy.ndimage import zoom, map_coordinates
+    bz = dict(load_magnetograms())["2012-03-07"]
     cy, cx = 640, 640
     cut = zoom(bz[cy - WIN // 2:cy + WIN // 2, cx - WIN // 2:cx + WIN // 2],
                CUT / WIN, order=1)
@@ -138,50 +161,161 @@ def skeleton():
     p0 = nulls[0]["p"]
     print(f"skeleton null at {np.round(p0, 1)} of {len(nulls)} in the volume")
 
-    fig = plt.figure(figsize=(9.4, 6.6), dpi=150)
-    ax = fig.add_subplot(111, projection="3d")
-    # photospheric magnetogram as the floor
-    Xg, Yg = np.meshgrid(np.arange(nx), np.arange(ny))
-    v = np.percentile(np.abs(cut), 99)
-    ax.plot_surface(Xg, Yg, np.zeros_like(Xg), rstride=1, cstride=1,
-                    facecolors=plt.cm.RdBu_r(np.clip(cut.T / (2 * v) + 0.5, 0, 1)),
-                    shade=False, alpha=0.9, linewidth=0)
-    # arcade field lines from strong-flux footpoints
-    iy, ix = np.where(np.abs(cut.T) > np.percentile(np.abs(cut), 96.5))
-    sel = np.linspace(0, len(ix) - 1, 70).astype(int)
-    for j in sel:
-        seed = np.array([ix[j], iy[j], 1.5])
-        sgn = +1.0 if cut.T[iy[j], ix[j]] > 0 else -1.0
-        ln = _trace(B, seed, sgn)
-        if len(ln) > 8:
-            ax.plot(ln[:, 0], ln[:, 1], ln[:, 2], color="0.45", lw=0.5, alpha=0.7)
-    # spine & fan through the null (seeded on a small sphere around it)
+    # ---- traces in box coords (x, y in CUT px; z in CUT px of height) ------------
     rng = np.random.default_rng(2)
+    thr = np.percentile(np.abs(cut), 93.0)
+    iy, ix = np.where(np.abs(cut) >= thr)
+    w = np.abs(cut)[iy, ix]
+    sel = rng.choice(len(ix), size=min(170, len(ix)), replace=False, p=w / w.sum())
+    arcade = []
+    for j in sel:
+        sgn = +1.0 if cut[iy[j], ix[j]] > 0 else -1.0
+        ln = _trace(B, np.array([ix[j], iy[j], 1.5]), sgn)
+        if len(ln) > 10:
+            arcade.append((ln, w[j] / w.max()))
+    skel = []
     for _ in range(26):
-        d = rng.standard_normal(3); d /= np.linalg.norm(d)
+        u = rng.standard_normal(3); u /= np.linalg.norm(u)
         for sgn in (+1.0, -1.0):
-            ln = _trace(B, p0 + 1.2 * d, sgn, ds=0.3, steps=700)
+            ln = _trace(B, p0 + 1.2 * u, sgn, ds=0.3, steps=700)
             if len(ln) > 8:
-                ax.plot(ln[:, 0], ln[:, 1], ln[:, 2], color=ORANGE, lw=0.75, alpha=0.85)
-    ax.scatter([p0[0]], [p0[1]], [p0[2]], s=140, c="#ffd000", marker="*",
-               edgecolor="k", linewidth=1.0, zorder=10)
-    ax.set_xlim(0, nx); ax.set_ylim(0, ny); ax.set_zlim(0, nz * 0.85)
-    ax.set_xlabel("x [px]", fontsize=8); ax.set_ylabel("y [px]", fontsize=8)
-    ax.set_zlabel("height [px]", fontsize=8)
-    ax.tick_params(labelsize=6.5)
-    ax.set_box_aspect((1, 1, 0.55))
-    ax.view_init(elev=24, azim=-63)
-    ax.set_title("The real coronal skeleton (SDO/HMI 2012-03-07, AR11429, potential "
-                 "extrapolation):\ngrey — the active-region arcade; orange — field lines "
-                 "threading the detected null (★): its spine and fan",
-                 fontsize=9)
-    fig.tight_layout()
+                skel.append(ln)
+
+    # ---- disk geometry & tangent-map embedding (units of R_sun) ------------------
+    ys, xs = np.where(np.abs(bz) > 0)
+    cy0, cx0 = (ys.min() + ys.max()) / 2, (xs.min() + xs.max()) / 2
+    Rpx = ((ys.max() - ys.min()) + (xs.max() - xs.min())) / 4
+    n0 = np.array([(cx - cx0) / Rpx, (cy - cy0) / Rpx, 0.0])
+    n0[2] = np.sqrt(1 - n0[0] ** 2 - n0[1] ** 2)
+    e1 = np.array([1.0, 0, 0]) - n0[0] * n0; e1 /= np.linalg.norm(e1)
+    e2 = np.array([0, 1.0, 0]) - n0[1] * n0 - (e1[1]) * e1; e2 /= np.linalg.norm(e2)
+    sig = (WIN / CUT) / Rpx                       # radians (=R units) per CUT px
+
+    def embed(P):
+        """Box points (n,3) -> sphere frame via the exponential map at n0."""
+        P = np.atleast_2d(P)
+        a = (P[:, 0] - (nx - 1) / 2) * sig
+        b = (P[:, 1] - (ny - 1) / 2) * sig
+        rho = np.hypot(a, b)
+        s = np.where(rho > 1e-12, np.sin(rho) / np.maximum(rho, 1e-12), 1.0)
+        nhat = (np.cos(rho)[:, None] * n0 +
+                s[:, None] * (a[:, None] * e1 + b[:, None] * e2))
+        return (1.0 + P[:, 2] * sig)[:, None] * nhat
+
+    # ---- figure -------------------------------------------------------------------
+    BG, FAR, INK = "#0b0e14", "#161a22", "#c7cdd8"
+    ARC, NUL, STAR = "#7aa8dc", "#ff8b2e", "#ffd34d"
+    VDISP = 600.0                                  # grey display range [G]
+    grey = lambda val: plt.cm.gray(np.clip(val / (2 * VDISP) + 0.5, 0.04, 0.96))
+    ELEV, AZIM = 17, -38
+    d = _cam_dir(ELEV, AZIM)
+
+    fig = plt.figure(figsize=(10.2, 7.0), dpi=110 if fast else 165)
+    fig.patch.set_facecolor(BG)
+    ax = fig.add_axes([0, 0, 1, 1], projection="3d", computed_zorder=False)
+    ax.set_facecolor(BG); ax.set_axis_off(); ax.set_proj_type("ortho")
+
+    # base sphere textured with the real full-disk magnetogram (far side dark)
+    nlat, nlon = (110, 220) if fast else (230, 460)
+    th = np.linspace(0, np.pi, nlat)[:, None]     # colatitude from +z (observer axis)
+    ph = np.linspace(0, 2 * np.pi, nlon)[None, :]
+    N = np.stack([np.sin(th) * np.cos(ph) + 0 * ph,
+                  np.sin(th) * np.sin(ph) + 0 * ph,
+                  np.cos(th) + 0 * ph], axis=-1)
+    U = cx0 + N[..., 0] * Rpx
+    V = cy0 + N[..., 1] * Rpx
+    tex = map_coordinates(bz, [V.ravel(), U.ravel()], order=1,
+                          mode="nearest").reshape(V.shape)
+    C = grey(tex)
+    t = np.clip(N[..., 2] / 0.12, 0, 1)[..., None]          # fade near the terminator
+    C = t * C + (1 - t) * np.array(matplotlib.colors.to_rgba(FAR))
+    ax.plot_surface(N[..., 0], N[..., 1], N[..., 2], rstride=1, cstride=1,
+                    facecolors=C, shade=False, antialiased=False, linewidth=0, zorder=1)
+
+    # crisp overlay patch around the AR (same true texture mapping, tiny radial lift)
+    npq = 130 if fast else 220
+    g = np.linspace(-88, 92, npq)                 # CUT px around the patch centre
+    GX, GY = np.meshgrid(g + (nx - 1) / 2, g + (ny - 1) / 2)
+    Pg = embed(np.column_stack([GX.ravel(), GY.ravel(), np.zeros(GX.size)]))
+    S = 1.0015 * Pg.reshape(npq, npq, 3)
+    Uo = cx0 + Pg[:, 0].reshape(npq, npq) * Rpx
+    Vo = cy0 + Pg[:, 1].reshape(npq, npq) * Rpx
+    texo = map_coordinates(bz, [Vo.ravel(), Uo.ravel()], order=1,
+                           mode="nearest").reshape(npq, npq)
+    Co = grey(texo)
+    Co[~_visible(Pg, d).reshape(npq, npq)] = (0, 0, 0, 0)   # hide beyond the horizon
+    ax.plot_surface(S[..., 0], S[..., 1], S[..., 2], rstride=1, cstride=1,
+                    facecolors=Co, shade=False, antialiased=False, linewidth=0, zorder=2)
+
+    # field lines (occlusion-culled against the sphere)
+    for ln, wgt in arcade:
+        _plot_culled(ax, embed(ln), d, color=ARC, lw=0.5 + 0.9 * wgt,
+                     alpha=0.28 + 0.34 * wgt, zorder=3, solid_capstyle="round")
+    for ln in skel:
+        _plot_culled(ax, embed(ln), d, color=NUL, lw=1.5, alpha=0.9, zorder=4,
+                     solid_capstyle="round")
+    star = embed(np.array([p0]))[0]
+    ax.scatter(*star, s=170, c=STAR, marker="*", edgecolor="#442200",
+               linewidth=0.8, zorder=6, depthshade=False)
+
+    # framing: zoom on the AR with the limb in view
+    c = 0.86 * n0
+    h = 0.52
+    ax.set_xlim(c[0] - h, c[0] + h); ax.set_ylim(c[1] - h, c[1] + h)
+    ax.set_zlim(c[2] - h, c[2] + h)
+    ax.set_box_aspect((1, 1, 1))
+    ax.view_init(elev=ELEV, azim=AZIM)
+
+    # ---- inset: the null close up (local box coords, true data) -------------------
+    axi = fig.add_axes([0.005, 0.015, 0.30, 0.42], projection="3d",
+                       computed_zorder=False)
+    axi.set_facecolor(BG); axi.set_axis_off(); axi.set_proj_type("ortho")
+    fig.add_artist(matplotlib.patches.FancyBboxPatch(
+        (0.008, 0.02), 0.292, 0.435, boxstyle="round,pad=0.004,rounding_size=0.01",
+        transform=fig.transFigure, facecolor=BG, edgecolor="#2a3242",
+        linewidth=1.0, zorder=1.5))
+    axi.set_zorder(2)                              # inset content above its card
+    L, ZT = 15.0, 24.0
+    gi = np.linspace(-L, L, 40)
+    GXi, GYi = np.meshgrid(gi + p0[0], gi + p0[1])
+    txi = map_coordinates(cut, [GYi.ravel(), GXi.ravel()], order=1,
+                          mode="nearest").reshape(GXi.shape)
+    axi.plot_surface(GXi, GYi, 0 * GXi, rstride=1, cstride=1,
+                     facecolors=grey(txi) * [1, 1, 1, 0.55], shade=False,
+                     antialiased=False, linewidth=0, zorder=1)
+    inl = lambda q: ((np.abs(q[:, 0] - p0[0]) < L) & (np.abs(q[:, 1] - p0[1]) < L)
+                     & (q[:, 2] < ZT))
+    for ln in skel:
+        ok = inl(ln)
+        cutpts = np.flatnonzero(np.diff(ok.astype(int))) + 1
+        for run in np.split(np.arange(len(ln)), cutpts):
+            if ok[run[0]] and len(run) > 2:
+                axi.plot(ln[run, 0], ln[run, 1], ln[run, 2], color=NUL, lw=1.3,
+                         alpha=0.9, zorder=3)
+    axi.plot([p0[0]] * 2, [p0[1]] * 2, [0, p0[2]], color="#777f8c", lw=0.7,
+             ls=(0, (2, 2)), zorder=2)
+    axi.scatter(*p0, s=150, c=STAR, marker="*", edgecolor="#442200", linewidth=0.8,
+                zorder=5, depthshade=False)
+    axi.set_xlim(p0[0] - L, p0[0] + L); axi.set_ylim(p0[1] - L, p0[1] + L)
+    axi.set_zlim(0, ZT)
+    axi.set_box_aspect((1, 1, 0.8))
+    axi.view_init(elev=16, azim=-55)
+
+    fig.text(0.017, 0.965, "The real coronal skeleton — AR11429 on the actual Sun",
+             color=INK, fontsize=11.5, fontweight="bold")
+    fig.text(0.017, 0.938, "SDO/HMI full-disk magnetogram, 2012-03-07 00:01 UT (X5.4-"
+             "flare day) · potential-field extrapolation · every curve is a field line",
+             color="#8a93a3", fontsize=8.2)
+    fig.text(0.155, 0.435, "the null, close up — spine & fan", color=INK, fontsize=8.4,
+             ha="center")
     out = REPO / "public/img/posts/forbidden-directions-coronal-skeleton.png"
-    fig.savefig(out, bbox_inches="tight", dpi=150)
+    fig.savefig(out, facecolor=BG)
     print("rendered", out.name)
 
 
 if __name__ == "__main__":
-    triptych()
-    constellation()
-    skeleton()
+    fast = "--fast" in sys.argv
+    if not fast:
+        triptych()
+        constellation()
+    skeleton(fast=fast)

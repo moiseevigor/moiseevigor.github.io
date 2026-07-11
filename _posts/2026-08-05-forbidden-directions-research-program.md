@@ -213,7 +213,7 @@ reproducible code in `research/preferred-directions/` and the shared toolkit it 
 | Result | Question | Verdict |
 |---|---|---|
 | **The law (2D)** | Is $Q = d+k+2$ real? | ✓ confirmed, orders $k=0,1,2,3$: exponents $2,3,4,5$ |
-| **The moduli** | Does the caustic read $\nabla B$? | ✓ confirmed: $\delta = -\varepsilon^2 + O(\varepsilon^4)$, $\varepsilon = |\nabla\ln B|\,r_L$ |
+| **The moduli** | Does the caustic read $\nabla B$? | ✓ confirmed: $\delta = -\varepsilon^2 + O(\varepsilon^4)$, $\varepsilon = \lvert\nabla\ln B\rvert\,r_L$ |
 | **The law (3D)** | Does $Q = k+5$ hold in 3D? | ✓ confirmed; the growth vector jumps $5\to6$ at a null |
 | **Null detection** | Does it agree with the standard finder? | ✓ on an MHD field, agrees on location and order |
 
@@ -246,7 +246,7 @@ program's frontier, and Part 4 ends there honestly.
   the law measured.
 - **Part 3** *(upcoming)* — *Reading the field gradient from the caustic*: the deviation
   statistic and $\delta = -\varepsilon^2$.
-- **Part 4** *(upcoming)* — *Finding magnetic nulls*: 3D, the ABC field, and the external
+- **Part 4** *(upcoming)* — *Finding magnetic nulls*: 3D, an ABC-like dynamo field, and the external
   validation.
 - Appendices **D1–D5** — connections and holonomy, the selection rule, the law derived, the
   magnetic geodesic flow, and the gradient formula.

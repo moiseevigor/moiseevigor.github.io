@@ -8,11 +8,11 @@ subtitle: >
   exactly where it agrees and where it stops.
 date: 2026-08-14 09:00:00
 categories: [mathematics]
-tags: [sub-riemannian, magnetic-nulls, reconnection, abc-flow, growth-vector, validation]
+tags: [sub-riemannian, magnetic-nulls, reconnection, dynamo-fields, growth-vector, validation]
 image: /public/img/posts/forbidden-directions-4.svg
 description: >
   Part 4 of the Forbidden Directions series: the growth vector as a magnetic-null detector, the
-  3D law Q = k+5, external validation against the eigenvalue null-finder on the ABC field, and an
+  3D law Q = k+5, external validation against the eigenvalue null-finder on an ABC-like dynamo test field, and an
   honest account of agreement (location, order) versus the open question (null type).
 series: preferred-directions
 series_title: "The Geometry of Forbidden Directions"
@@ -52,10 +52,15 @@ quantity about how a small sub-Riemannian ball grows — find the same nulls?
 
 ## A real dynamo field, and two independent finders
 
-The test field is the **ABC flow** $\mathbf B = (\cos y,\, \cos z,\, \cos x)$, a canonical
-divergence-free field from magnetohydrodynamics and dynamo theory. It has eight isolated nulls in
-a periodic box, sitting at the vertices of a cube, and — conveniently — they come in two spiral
-sub-types arranged like a 3-colouring. We run two genuinely independent computations on it:
+The test field is the **ABC-like trigonometric field** $\mathbf B = (\cos y,\, \cos z,\, \cos x)$
+— one of the two curl-partners whose sum is the classic Arnold–Beltrami–Childress field. The
+distinction matters, and Part 5's theorem is why: the true ABC field is Beltrami
+($\nabla\times\mathbf B = \mathbf B$, force-free) and therefore *cannot host a spiral null at
+all*; this field is divergence-free but genuinely **non-force-free** — its current at the nulls
+is $\lVert\nabla\times\mathbf B\rVert = \sqrt3 \neq 0$ — which is exactly what permits the spiral
+types below. It has eight isolated nulls in a periodic box, sitting at the vertices of a cube,
+their two spiral sub-types alternating like a checkerboard. We run two genuinely independent
+computations on it:
 
 - the **standard finder** — Newton's method on $\mathbf B = 0$ for the locations, eigenvalues of
   $\nabla\mathbf B$ for the types;
@@ -66,10 +71,10 @@ sub-types arranged like a 3-colouring. We run two genuinely independent computat
 <figure class="l-body" id="fig-nulls">
   <div id="fd-nulls" style="text-align:center;"></div>
   <figcaption>
-    <strong>Two finders on the ABC field (experiment P2).</strong> The eight magnetic nulls, at
+    <strong>Two finders on the ABC-like field (experiment P2).</strong> The eight magnetic nulls, at
     the vertices of a cube in the periodic box. The <strong>standard finder</strong> colours each
     by the eigenvalue type it computes — spiral-A (blue) and spiral-B (orange), alternating like a
-    3-colouring. The <strong>sub-Riemannian detector</strong> labels each with the homogeneous
+    checkerboard. The <strong>sub-Riemannian detector</strong> labels each with the homogeneous
     dimension it measures: <code>Q=6</code> at every null (it detects all eight), against
     <code>Q=5</code> at the generic sample points (grey). The two methods <em>agree on location and
     order</em>; the growth vector does <em>not</em> distinguish blue from orange — that type is in
@@ -154,7 +159,7 @@ and stops where the standard tool keeps going.
 
 ## On a real Sun
 
-The ABC field is a genuine magnetohydrodynamic field, but an analytic one. Does the detector
+The ABC-like field is a genuine divergence-free dynamo-style field, but an analytic one. Does the detector
 survive contact with observation? We took a real **SDO/HMI magnetogram** — the line-of-sight
 photospheric field of a solar active region imaged on 2011 June 7 — potential-field extrapolated
 it into a three-dimensional coronal field, and searched. The standard finder locates a coronal
@@ -175,7 +180,7 @@ $Q=5$ in the surrounding strong field — the same null jump, now on the real Su
     <em>Left (A):</em> a line-of-sight <strong>SDO/HMI</strong> magnetogram of a solar active
     region (2011 June 7; red / blue = field out of / into the photosphere, up to $\sim\!10^3$ G).
     The dashed line marks the vertical plane drawn at right; the star is the null's footpoint.
-    <em>Right (B):</em> the potential-field–extrapolated coronal $|\mathbf B|$ on that plane
+    <em>Right (B):</em> the potential-field–extrapolated coronal $\lvert\mathbf B\rvert$ on that plane
     (log scale, bright = strong), with in-plane field lines in white. The field
     <strong>collapses to zero</strong> at the null $\sim\!40$ px up (cyan star) and the streamlines
     fan through it in the characteristic X-type topology — a <em>radial</em> null by its
@@ -231,8 +236,9 @@ which case you are in, and not confusing them, is the result worth keeping.
 - **Magnetic null** — a point where $\mathbf B = 0$; a reconnection site.
 - **Radial / spiral null** — the type set by the eigenvalues of $\nabla\mathbf B$: three real (radial)
   or a complex pair (spiral).
-- **ABC flow** — the Arnold–Beltrami–Childress field $(\cos y,\cos z,\cos x)$; a canonical
-  divergence-free MHD/dynamo field with eight lattice nulls.
+- **ABC-like field** — the trigonometric field $(\cos y,\cos z,\cos x)$: a curl-partner of the
+  classic Arnold–Beltrami–Childress field, divergence-free but non-force-free (unlike true ABC,
+  which is Beltrami and hence — Part 5 — spiral-free); eight lattice nulls.
 - **Null jump** — the rise of $Q$ from $d+2$ to $d+k+2$ at a null of order $k$; in 3D, $5\to6$.
 - **Refine vs agree** — a detector *agrees* if it reproduces the standard result, *refines* if it
   adds information the standard method lacks.

@@ -37,6 +37,12 @@ individually. This is the first observable in the program that the standard tool
 *no analogue of*, and it is precisely the transition state of magnetic reconnection
 (null creation/annihilation) that it measures.
 
+*Post-hoc note (T1):* "no analogue" does not mean "no competitor". The pre-registered
+race of P5 pitted this knee estimator against a divergence-free quadratic fit +
+root-finding on shared noisy grids; **the fit won every cell** and the crossover is
+demoted to a conceptual observable — see [`T1-race.md`](T1-race.md). The plateau
+dictionary and $Q=7$ at the fold stand; the separation *estimator* does not.
+
 ## The gauge lesson (caught and fixed)
 
 The first run measured flux weight 2 at the split null — a **gauge artefact**: the

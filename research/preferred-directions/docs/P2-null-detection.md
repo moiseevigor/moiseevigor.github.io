@@ -28,9 +28,9 @@ Q along x through the null:   5 5 5 [6] 5 5 5
 The charter's one untested prediction is confirmed. The growth vector locates the null
 (Q jumps) and reads its vanishing order ($k=1\Rightarrow Q=6$).
 
-## Part 2 — external validation on the ABC field
+## Part 2 — external validation on the ABC-like field
 
-The **ABC field** $B=(\cos y,\cos z,\cos x)$ (from $A=(\sin z,\sin x,\sin y)$) is a
+The **ABC-like field** $B=(\cos y,\cos z,\cos x)$ (from $A=(\sin z,\sin x,\sin y)$; a curl-partner of the classic Beltrami ABC field, itself NOT force-free — which is what permits its spiral nulls, see the R5 theorem) is a
 canonical divergence-free MHD/dynamo flow with eight isolated linear nulls in
 $[0,2\pi)^3$. Two independent computations:
 
@@ -68,7 +68,7 @@ eigenvalue type that the growth vector discards. That is the decisive next exper
 
 ## What is real here, and what is not
 
-- **Real:** the ABC field is a genuine divergence-free magnetic field used across MHD and
+- **Real:** the ABC-like field is a genuine divergence-free magnetic field used across MHD and
   dynamo theory; its nulls and their eigenvalue types are exactly what solar/space-physics
   null-finders classify; the SR detector and the eigenvalue finder are truly independent.
 - **Not yet:** this is an analytic field, not an observational magnetogram or an MHD

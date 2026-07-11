@@ -53,16 +53,19 @@ numerical zero test with no scale attached. The growth vector has a *law* for it
 <figure class="l-middle" id="fig-coronal-skeleton">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-coronal-skeleton.png"
-      alt="3D rendering of the real 2012-03-07 active region: grey arcade field lines rising from the photospheric magnetogram floor, and orange field lines threading the detected coronal null, showing its spine and fan"
-      style="max-width:min(100%,700px);width:100%;height:auto;border-radius:3px;">
+      alt="The real Sun rendered as a sphere textured with the full-disk SDO/HMI magnetogram of 2012-03-07, sunspot groups visible; above AR11429 a blue arcade of extrapolated field lines and orange field lines threading the detected coronal null marked by a star, with an inset close-up of the null's spine and fan"
+      style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
-    <strong>The stage, rendered from real data.</strong> The 2012-03-07 active region
-    (AR11429, the X5.4-flare day), potential-field extrapolated from the real SDO/HMI
-    magnetogram (the floor). Grey: the arcade over the strong flux. Orange: field lines
-    threading the detected coronal null (★) — its spine rising, its fan sweeping away.
-    Every curve is a field line of the real extrapolation; nothing is drawn by hand.
-    Pipeline: <code>research/preferred-directions/scripts/render_real_assets.py</code>.
+    <strong>The stage, rendered from real data.</strong> The actual Sun of 2012-03-07
+    (the X5.4-flare day): the full-disk SDO/HMI magnetogram textured on the solar
+    sphere — the dark and bright specks are real sunspot groups — with the AR11429
+    potential-field extrapolation embedded at its true disk position and height scale.
+    Blue: the arcade over the strong flux. Orange: field lines threading the detected
+    coronal null (★); the inset card is the close-up — its spine rising, its fan
+    sweeping away. Every curve is a field line of the real extrapolation; nothing is
+    drawn by hand. Pipeline:
+    <code>research/preferred-directions/scripts/render_real_assets.py</code>.
   </figcaption>
 </figure>
 
@@ -236,8 +239,8 @@ an afternoon.
 |---|---|---|
 | Is one here? | $Q\colon 5\to6$ | grounded on 3 worlds: battery, Sun, magnetosphere |
 | What order? Is it a **transition state**? | $Q = k+5$: generic 6, **fold 7** | law tested at $k = 0,1,2$ |
-| An unresolved **pair**'s separation? | the $w_4(r)$ knee | confirmed synthetically; rising edge on the real Sun |
-| How is the field changing nearby? | caustic: $\delta = -\varepsilon^2 - \tfrac94\varepsilon^4$ | confirmed, coefficient pinned |
+| An unresolved **pair**'s separation? | concept: the $w_4(r)$ knee · tool: a polynomial fit + roots | knee confirmed synthetically; the fit won the pre-registered race (Part 7) |
+| How is the field changing nearby? | caustic: $\delta = 1-\tfrac2\pi K(2\varepsilon)$ | exact law (Part 7) |
 | Radial or spiral, which sign? | the local linear fit | stays with the standard toolkit (Part 5) |
 
 ## Glossary
