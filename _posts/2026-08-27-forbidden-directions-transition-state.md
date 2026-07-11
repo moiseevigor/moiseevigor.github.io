@@ -69,6 +69,42 @@ numerical zero test with no scale attached. The growth vector has a *law* for it
   </figcaption>
 </figure>
 
+<figure class="l-middle" id="fig-aia-overlay">
+  <div style="text-align:center;">
+    <img src="/public/img/posts/forbidden-directions-aia-overlay.png"
+      alt="Side by side: the real SDO/AIA 171 angstrom EUV corona of AR11429 with its glowing loop systems, and the same frame with our extrapolated potential-field lines overlaid, the computed arcade draping over the observed loops and the null marked by a star"
+      style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
+  </div>
+  <figcaption>
+    <strong>The corona seen, and the corona computed.</strong> <em>Left:</em> the real
+    EUV corona of AR11429 at the same hour — SDO/AIA 171 Å, where million-kelvin plasma
+    lights up the true field lines. <em>Right:</em> the same frame with <em>our</em>
+    potential-field extrapolation overlaid (blue: the arcade; orange: the null-threading
+    lines, ★ the null): the computed arcade drapes over the observed loop fan. The two
+    datasets are independent — AIA sees plasma, HMI measured the surface field the
+    extrapolation grew from — and cross-registering them required correcting HMI's
+    180° camera rotation (CROTA2) against AIA's upright frame. Departures are expected
+    and honest: a potential field carries no currents, and this region was anything but
+    current-free (it flared X5.4 the same day).
+  </figcaption>
+</figure>
+
+<figure class="l-body" id="fig-aia-video">
+  <div style="position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:4px;">
+    <iframe src="https://www.youtube-nocookie.com/embed/4qIV1iPUOxY"
+      title="AR11429 2012-03-07 SDO/AIA 171 Å"
+      style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+      loading="lazy" allowfullscreen></iframe>
+  </div>
+  <figcaption>
+    <strong>The same region, alive.</strong> SDO/AIA 171 Å footage of AR11429 on
+    2012-03-07 — the day of the frames above. Watch the loop systems writhe and
+    brighten: every filament is a field line rendered in plasma, and the topology those
+    posts compute is the skeleton this movie moves on. Footage: NASA SDO/AIA
+    (video compilation by sscardigli).
+  </figcaption>
+</figure>
+
 <figure class="l-middle" id="fig-anatomy-sun">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-null-anatomy-sun.png"

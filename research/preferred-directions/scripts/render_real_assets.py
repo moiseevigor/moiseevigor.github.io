@@ -601,6 +601,117 @@ def null_anatomy_earth():
     print("rendered", out.name)
 
 
+def aia_overlay():
+    """The corona seen vs the corona computed: real SDO/AIA 171 A EUV emission of
+    AR11429 (the plasma lighting up the true field lines) with OUR potential-field
+    extrapolation's lines overlaid at the correct plate position -- the classic
+    loops-vs-extrapolation comparison, on the skeleton's exact day and region."""
+    from astropy.io import fits
+    from scipy.ndimage import zoom
+    import sunpy.visualization.colormaps  # registers 'sdoaia171'  # noqa: F401
+
+    aia_files = sorted((ROOT / "artifacts" / "hmi").glob("*aia*171*"))
+    assert aia_files, "no AIA 171 file -- run scripts/fetch_aia.py"
+    hdul = fits.open(aia_files[0])
+    hdul.verify("silentfix")
+    h = next(h for h in hdul if getattr(h, "data", None) is not None
+             and h.data.ndim == 2)
+    aia, ahdr = np.nan_to_num(np.asarray(h.data, float)), h.header
+    # AIA plate geometry from its own header
+    acx, acy = float(ahdr["CRPIX1"]) - 1, float(ahdr["CRPIX2"]) - 1
+    arsun = float(ahdr["RSUN_OBS"]) / float(ahdr["CDELT1"])   # px per R_sun
+
+    # HMI disk geometry (as in skeleton): centre + radius of the 1024 magnetogram
+    bz = dict(load_magnetograms())["2012-03-07"]
+    ys, xs = np.where(np.abs(bz) > 0)
+    hcy, hcx = (ys.min() + ys.max()) / 2, (xs.min() + xs.max()) / 2
+    hR = ((ys.max() - ys.min()) + (xs.max() - xs.min())) / 4
+    cy, cx = 640, 640                                  # the AR window (HMI px)
+
+    def hmi_to_aia(xh, yh):
+        """HMI 1024-px coords -> AIA px via normalised disk coordinates.
+
+        HMI level-1 frames are camera-rotated 180 deg (CROTA2 ~ 179.93) while AIA is
+        upright (CROTA2 ~ 0.02), so disk-relative coordinates NEGATE across
+        instruments. (Our survey pipeline works in raw HMI array coords throughout,
+        which is self-consistent; only this cross-instrument overlay must correct.)
+        """
+        return (acx - (np.asarray(xh) - hcx) / hR * arsun,
+                acy - (np.asarray(yh) - hcy) / hR * arsun)
+
+    # rebuild the survey extrapolation + traces (same as the skeleton)
+    cut = zoom(bz[cy - WIN // 2:cy + WIN // 2, cx - WIN // 2:cx + WIN // 2],
+               CUT / WIN, order=1)
+    B, _A = solar.potential_field(cut, NZ, dz=1.0)
+    ny, nx, nz, _ = B.shape
+    nulls = [nl for nl in solar.find_nulls(B, seeds_per_axis=12)
+             if 6 < nl["p"][0] < nx - 6 and 6 < nl["p"][1] < ny - 6
+             and 3 < nl["p"][2] < nz - 3]
+    nulls.sort(key=lambda nl: nl["p"][2])
+    p0 = nulls[0]["p"]
+    rng = np.random.default_rng(2)
+    thr = np.percentile(np.abs(cut), 93.0)
+    iy, ix = np.where(np.abs(cut) >= thr)
+    w = np.abs(cut)[iy, ix]
+    sel = rng.choice(len(ix), size=min(120, len(ix)), replace=False, p=w / w.sum())
+    arcade = []
+    for j in sel:
+        sgn = +1.0 if cut[iy[j], ix[j]] > 0 else -1.0
+        ln = _trace(B, np.array([ix[j], iy[j], 1.5]), sgn, ds=0.35, steps=1600)
+        if len(ln) > 10:
+            arcade.append((ln, w[j] / w.max()))
+    skel = []
+    for _ in range(22):
+        u = rng.standard_normal(3); u /= np.linalg.norm(u)
+        for sgn in (+1.0, -1.0):
+            ln = _trace(B, p0 + 1.2 * u, sgn, ds=0.3, steps=2600)
+            if len(ln) > 8:
+                skel.append(ln)
+
+    def box_to_aia(ln):
+        """Box coords (cut px + height) -> AIA px, incl. line-of-sight parallax."""
+        xh = cx - WIN / 2 + ln[:, 0] * (WIN / CUT)
+        yh = cy - WIN / 2 + ln[:, 1] * (WIN / CUT)
+        ax_, ay_ = hmi_to_aia(xh, yh)
+        # apparent shift of height h toward the limb, in the AIA frame's orientation
+        rx = (ax_ - acx) / arsun; ry = (ay_ - acy) / arsun
+        hpx = ln[:, 2] * (WIN / CUT) / hR * arsun
+        return ax_ + hpx * rx, ay_ + hpx * ry
+
+    # crop the AIA frame around the AR (in AIA px)
+    ax0, ay0 = hmi_to_aia(cx, cy)
+    half = int(1.35 * WIN / hR * arsun / 2) + 40
+    x_lo, y_lo = int(ax0 - half), int(ay0 - half)
+    crop = aia[y_lo:y_lo + 2 * half, x_lo:x_lo + 2 * half]
+
+    fig, axes = plt.subplots(1, 2, figsize=(11.6, 5.9), dpi=150)
+    vmax = np.percentile(crop, 99.85)
+    for ax in axes:
+        ax.imshow(np.clip(crop, 0, vmax) ** 0.5, origin="lower", cmap="sdoaia171")
+        ax.set_xticks([]); ax.set_yticks([])
+    axes[0].set_title("A · the corona SEEN — SDO/AIA 171 Å (1 MK plasma lights up "
+                      "the true field lines)", fontsize=9)
+    axes[1].set_title("B · the corona COMPUTED — our potential-field lines over the "
+                      "same frame", fontsize=9)
+    for ln, wgt in arcade:
+        xa, ya = box_to_aia(ln)
+        axes[1].plot(xa - x_lo, ya - y_lo, color="#9ec5e8", lw=0.55,
+                     alpha=0.20 + 0.35 * wgt)
+    for ln in skel:
+        xa, ya = box_to_aia(ln)
+        axes[1].plot(xa - x_lo, ya - y_lo, color="#ff8b2e", lw=1.1, alpha=0.75)
+    xn, yn = box_to_aia(p0[None, :])
+    axes[1].plot(xn - x_lo, yn - y_lo, marker="*", ms=14, mfc="#ffd34d",
+                 mec="#442200", mew=0.9)
+    fig.suptitle("AR11429, 2012-03-07 00:00 UT — the EUV corona against the "
+                 "extrapolated skeleton (independent data: AIA sees plasma, "
+                 "HMI measured the surface field)", fontsize=10, fontweight="bold")
+    fig.tight_layout(rect=[0, 0, 1, 0.94])
+    out = REPO / "public/img/posts/forbidden-directions-aia-overlay.png"
+    fig.savefig(out, bbox_inches="tight", dpi=150)
+    print("rendered", out.name)
+
+
 if __name__ == "__main__":
     fast = "--fast" in sys.argv
     if not fast:
