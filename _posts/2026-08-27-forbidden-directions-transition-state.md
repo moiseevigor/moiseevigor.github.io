@@ -92,6 +92,24 @@ numerical zero test with no scale attached. The growth vector has a *law* for it
   </figcaption>
 </figure>
 
+<figure class="l-middle" id="fig-aia-flare">
+  <div style="text-align:center;">
+    <img src="/public/img/posts/forbidden-directions-aia-flare.gif"
+      alt="Animated sequence of sixteen real SDO/AIA 171 angstrom frames spanning ninety minutes: the X5.4 flare of 2012-03-07 erupting and reorganizing the coronal loops of AR11429 around the static overlay of our pre-flare extrapolated skeleton"
+      style="max-width:min(100%,640px);width:100%;height:auto;border-radius:3px;">
+  </div>
+  <figcaption>
+    <strong>The skeleton, then the detonation.</strong> Sixteen real AIA 171 Å frames
+    spanning 00:00–01:30 UT with our <em>pre-flare</em> skeleton (computed from the
+    00:01 magnetogram) frozen on top: the <strong>X5.4 flare</strong> erupts at 00:02
+    and peaks near 00:24, followed by an X1.3 near 01:14 — the loop systems brighten,
+    writhe, and reconnect around the topology computed minutes earlier. Frames are
+    exposure-normalised (AIA shortens its exposure during flares); each frame is
+    registered through its own FITS header. Pipeline:
+    <code>scripts/fetch_aia_seq.py</code> + <code>render_aia_gif</code>.
+  </figcaption>
+</figure>
+
 <figure class="l-body" id="fig-aia-video">
   <div style="position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:4px;">
     <iframe src="https://www.youtube-nocookie.com/embed/4qIV1iPUOxY"

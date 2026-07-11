@@ -706,9 +706,12 @@ def aia_overlay():
         hpx = ln[:, 2] * (WIN / CUT) / hR * arsun
         return ax_ + hpx * rx, ay_ + hpx * ry
 
-    # crop the AIA frame around the AR (in AIA px)
-    ax0, ay0 = hmi_to_aia(cx, cy)
-    half = int(1.35 * WIN / hR * arsun / 2) + 40
+    # crop the AIA frame around BOTH structures: centre on the midpoint of the
+    # null window and the flux window, so neither the arcade nor the fan clips
+    axn, ayn = hmi_to_aia(cx, cy)
+    axf, ayf = hmi_to_aia(cxf, cyf)
+    ax0, ay0 = (axn + axf) / 2, (ayn + ayf) / 2
+    half = int(1.35 * WIN / hR * arsun / 2) + 100
     x_lo, y_lo = int(ax0 - half), int(ay0 - half)
     crop = aia[y_lo:y_lo + 2 * half, x_lo:x_lo + 2 * half]
 
@@ -734,6 +737,128 @@ def aia_overlay():
     out = REPO / "public/img/posts/forbidden-directions-aia-overlay.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)
     print("rendered", out.name)
+
+
+def render_aia_gif():
+    """The flare GIF: 16 real AIA 171 A frames across the X5.4 flare of 2012-03-07
+    (onset 00:02, peak ~00:24, X1.3 at ~01:14) with the static pre-flare skeleton
+    (computed from the 00:01 magnetogram) overlaid. Per-frame header registration;
+    counts normalised by EXPTIME (AIA shortens exposure during flares)."""
+    from astropy.io import fits
+    from scipy.ndimage import zoom as _zoom
+    from PIL import Image
+    import io
+    import sunpy.visualization.colormaps  # noqa: F401
+
+    frames_f = sorted((ROOT / "artifacts" / "hmi" / "aia_seq").glob("*.fits"))
+    assert len(frames_f) >= 8, "run scripts/fetch_aia_seq.py first"
+
+    # HMI geometry + the two volumes + lines (same construction as aia_overlay)
+    hmi_f = sorted((ROOT / "artifacts" / "hmi").glob("hmi.m_45s.2012*"))[0]
+    hh = fits.open(hmi_f); hh.verify("silentfix")
+    hhdr = next(x.header for x in hh if getattr(x, "data", None) is not None
+                and x.data.ndim == 2)
+    s4 = 1024.0 / hhdr["NAXIS1"]
+    hcx = (hhdr["CRPIX1"] - 1) * s4
+    hcy = (hhdr["CRPIX2"] - 1) * s4
+    hR = hhdr["RSUN_OBS"] / hhdr["CDELT1"] * s4
+    bz = dict(load_magnetograms())["2012-03-07"]
+    cut, B, nulls, p0, (cy, cx) = _ar11429_volume()
+    cyf, cxf = 640, 640
+    cutf = _zoom(bz[cyf - WIN // 2:cyf + WIN // 2, cxf - WIN // 2:cxf + WIN // 2],
+                 CUT / WIN, order=1)
+    Bf, _Af = solar.potential_field(cutf, NZ, dz=1.0)
+    rng = np.random.default_rng(2)
+    iy, ix = np.where(np.abs(cutf) >= 250.0)
+    w = np.abs(cutf)[iy, ix]
+    sel = rng.choice(len(ix), size=min(140, len(ix)), replace=False, p=w / w.sum())
+    arcade = []
+    for j in sel:
+        sgn = +1.0 if cutf[iy[j], ix[j]] > 0 else -1.0
+        ln = _trace(Bf, np.array([ix[j], iy[j], 1.5]), sgn, ds=0.35, steps=1600)
+        if len(ln) > 10:
+            arcade.append((ln, w[j] / w.max()))
+    skel = []
+    for _ in range(22):
+        u = rng.standard_normal(3); u /= np.linalg.norm(u)
+        for sgn in (+1.0, -1.0):
+            ln = _trace(B, p0 + 1.2 * u, sgn, ds=0.3, steps=2600)
+            if len(ln) > 8:
+                skel.append(ln)
+
+    vmax = None
+    ims = []
+    for k, f in enumerate(frames_f):
+        hdul = fits.open(f); hdul.verify("silentfix")
+        h = next(h for h in hdul if getattr(h, "data", None) is not None
+                 and h.data.ndim == 2)
+        aia = np.nan_to_num(np.asarray(h.data, float)) / max(
+            float(h.header.get("EXPTIME", 2.9)), 0.1)
+        ahdr = h.header
+        acx, acy = ahdr["CRPIX1"] - 1, ahdr["CRPIX2"] - 1
+        arsun = ahdr["RSUN_OBS"] / ahdr["CDELT1"]
+        tstamp = str(ahdr.get("T_OBS") or ahdr.get("DATE-OBS"))[11:16]
+
+        def h2a(xh, yh):
+            return (acx - (np.asarray(xh) - hcx) / hR * arsun,
+                    acy - (np.asarray(yh) - hcy) / hR * arsun)
+
+        def b2a(ln, cyw, cxw):
+            xh = cxw - WIN / 2 + ln[:, 0] * (WIN / CUT)
+            yh = cyw - WIN / 2 + ln[:, 1] * (WIN / CUT)
+            xa, ya = h2a(xh, yh)
+            rx = (xa - acx) / arsun; ry = (ya - acy) / arsun
+            hpx = ln[:, 2] * (WIN / CUT) / hR * arsun
+            return xa + hpx * rx, ya + hpx * ry
+
+        axn, ayn = h2a(cx, cy)
+        axf_, ayf_ = h2a(cxf, cyf)
+        ax0, ay0 = (axn + axf_) / 2, (ayn + ayf_) / 2
+        half = int(1.35 * WIN / hR * arsun / 2) + 100
+        x_lo, y_lo = int(ax0 - half), int(ay0 - half)
+        crop = aia[y_lo:y_lo + 2 * half, x_lo:x_lo + 2 * half]
+        if vmax is None:
+            vmax = 1.6 * np.percentile(crop, 99.85)   # headroom for the flare
+
+        fig, ax = plt.subplots(figsize=(6.4, 6.55), dpi=100)
+        ax.imshow(np.clip(crop, 0, vmax) ** 0.5, origin="lower", cmap="sdoaia171",
+                  vmin=0, vmax=vmax ** 0.5)
+        for ln, wgt in arcade:
+            xa, ya = b2a(ln, cyf, cxf)
+            ax.plot(xa - x_lo, ya - y_lo, color="#a9cdf0", lw=1.0,
+                    alpha=0.25 + 0.35 * wgt)
+        for ln in skel:
+            xa, ya = b2a(ln, cy, cx)
+            ax.plot(xa - x_lo, ya - y_lo, color="#ff8b2e", lw=1.4, alpha=0.8)
+        xn, yn = b2a(p0[None, :], cy, cx)
+        ax.plot(xn - x_lo, yn - y_lo, marker="*", ms=13, mfc="#ffd34d",
+                mec="#442200", mew=0.9)
+        ax.set_xlim(0, crop.shape[1]); ax.set_ylim(0, crop.shape[0])
+        ax.set_xticks([]); ax.set_yticks([])
+        ax.text(0.02, 0.975, f"2012-03-07  {tstamp} UT", transform=ax.transAxes,
+                color="white", fontsize=10, va="top", fontweight="bold")
+        mins = int(tstamp[:2]) * 60 + int(tstamp[3:5])
+        if 20 <= mins <= 34:
+            ax.text(0.02, 0.925, "X5.4 flare", transform=ax.transAxes,
+                    color="#ff6644", fontsize=11, va="top", fontweight="bold")
+        elif 70 <= mins <= 80:
+            ax.text(0.02, 0.925, "X1.3 flare", transform=ax.transAxes,
+                    color="#ff6644", fontsize=11, va="top", fontweight="bold")
+        ax.set_title("the pre-flare skeleton (00:01 extrapolation) as the region "
+                     "detonates", fontsize=8.6)
+        fig.tight_layout(pad=0.4)
+        buf = io.BytesIO()
+        fig.savefig(buf, format="png", dpi=100)
+        plt.close(fig)
+        buf.seek(0)
+        ims.append(Image.open(buf).convert("P", palette=Image.ADAPTIVE, colors=160))
+        print(f"frame {k+1}/{len(frames_f)}  {tstamp}")
+
+    out = REPO / "public/img/posts/forbidden-directions-aia-flare.gif"
+    ims[0].save(out, save_all=True, append_images=ims[1:], duration=260, loop=0,
+                optimize=True)
+    print(f"rendered {out.relative_to(REPO)} "
+          f"({out.stat().st_size / 1e6:.1f} MB, {len(ims)} frames)")
 
 
 if __name__ == "__main__":
