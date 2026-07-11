@@ -1,0 +1,30 @@
+<svg viewBox="0 0 220 148" xmlns="http://www.w3.org/2000/svg">
+  <rect width="220" height="148" fill="#fff"/>
+  <!-- The litmus tests: the K-curve rising to its critical asymptote (the claim that
+       survived review), a verdict checklist beside it. -->
+  <!-- axes -->
+  <path d="M 26,120 L 26,24 M 26,120 L 128,120" stroke="#5f6368" stroke-width="1"/>
+  <!-- the exact curve, diverging at the dotted critical gradient -->
+  <line x1="112" y1="118" x2="112" y2="26" stroke="#5f6368" stroke-width="0.9" stroke-dasharray="2.5 2.5"/>
+  <path d="M 28,116 C 60,112 84,104 96,88 C 104,77 108,58 110.5,30"
+        fill="none" stroke="#e65100" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- measured dots on the curve -->
+  <g fill="#fff" stroke="#1565c0" stroke-width="1.4">
+    <circle cx="40" cy="114.5" r="2.6"/><circle cx="62" cy="110" r="2.6"/>
+    <circle cx="82" cy="101" r="2.6"/><circle cx="96" cy="87" r="2.6"/>
+    <circle cx="105" cy="63" r="2.6"/>
+  </g>
+  <text x="70" y="135" text-anchor="middle" font-family="monospace" font-size="9" fill="#e65100">&#948; = 1 &#8722; (2/&#960;)K(2&#949;)</text>
+  <text x="116" y="35" font-family="'Source Sans 3',sans-serif" font-size="7" fill="#5f6368" transform="rotate(90 116 35)">&#949; = 1/2</text>
+  <!-- the verdict list -->
+  <g font-family="'Source Sans 3',sans-serif" font-size="8">
+    <text x="146" y="42" fill="#2e7d32" font-weight="bold">&#10003;</text>
+    <text x="156" y="42" fill="#333">exact law</text>
+    <text x="146" y="62" fill="#2e7d32" font-weight="bold">&#10003;</text>
+    <text x="156" y="62" fill="#333">Q = 7 fold</text>
+    <text x="146" y="82" fill="#c62828" font-weight="bold">&#10007;</text>
+    <text x="156" y="82" fill="#333">crossover tool</text>
+    <text x="146" y="102" fill="#b8860b" font-weight="bold">~</text>
+    <text x="156" y="102" fill="#333">fold on Sun</text>
+  </g>
+</svg>
