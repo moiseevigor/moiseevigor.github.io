@@ -72,13 +72,19 @@ function, and its symmetry.
 Measured across sixteen $(g, w)$ pairs spanning a decade in $\varepsilon$:
 
 $$
-\boxed{\;\delta(\varepsilon) \;=\; -\,\varepsilon^{2} \;-\; \tfrac{9}{4}\,\varepsilon^{4} \;+\; O(\varepsilon^{6})\;}
+\boxed{\;\delta(\varepsilon) \;=\; 1 - \tfrac{2}{\pi}\,K(2\varepsilon)
+\;=\; -\,\varepsilon^{2} \;-\; \tfrac{9}{4}\,\varepsilon^{4} \;-\; \tfrac{25}{4}\,\varepsilon^{6} \;-\;\cdots\;}
 $$
 
-with leading coefficient measured $1.0000$ and **only even powers**; a follow-up precision
-measurement pins the quartic coefficient at $c_4 = 2.2497 \pm 0.0009$ — the exact rational
-$9/4$ to a part in $2500$ (and *not* the $5/2$ a coarser wide-window fit once suggested).
-The figure shows $|\delta|$ against $\varepsilon$ on log–log: a clean line of slope 2.
+with $K$ the complete elliptic integral of the first kind — an **exact law**, found by a
+precision measurement (which pinned $c_4 = 2.2497 \pm 0.0009 = 9/4$, refuting the $5/2$ a
+coarser fit once suggested) and then derived: the angular dynamics integrates in one line,
+the per-angle refocusing time is a pendulum-like period, and its launch-angle average is
+$\tfrac{2}{\pi}K(2\varepsilon)$, verified against the geodesic code to $10^{-10}$. The
+coefficients are squared normalised central binomials, only even powers — and $K$'s
+singularity is physics: refocusing *stops* at the critical gradient $\varepsilon = 1/2$
+(appendix D5). The figure shows $|\delta|$ against $\varepsilon$ on log–log: a clean line
+of slope 2.
 
 </div><!-- /.l-body -->
 

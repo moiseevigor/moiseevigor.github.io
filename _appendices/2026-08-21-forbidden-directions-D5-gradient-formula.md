@@ -129,13 +129,35 @@ $$
 \delta(\varepsilon) \;=\; -\varepsilon^2 - \tfrac94\,\varepsilon^4 - O(\varepsilon^6),
 $$
 
-with $9/4$ now a sharp target for the analytic derivation: a perturbation of the
-pendulum-like $\theta$-equation $\ddot\theta = \varepsilon\,\dot X\,e^{\varepsilon X}$ around
-the circular orbit should produce it in closed form ($c_6$, measured $\approx 6.4$, is the
-next check — note $25/4 = 6.25$ sits inside the measurement's model spread, suggesting the
-odd-square pattern $c_{2m} = (2m-1)^2/4$ for $m \ge 2$; that is a conjecture the derivation
-must confirm or kill, not a claim). The derivation itself remains open — but it now has a
-number to hit.
+with $9/4$ a sharp target for the analytic derivation — which then landed, and turned the
+whole series into two symbols.
+
+## The closed form
+
+The angular equation integrates in one line: $\dot\theta = e^{\varepsilon x}$ and
+$\dot x = \cos\theta$ give $d\dot\theta/d\theta = \varepsilon\cos\theta$, so
+$\dot\theta = 1 + \varepsilon(\sin\theta - \sin\theta_0)$ — the system is integrable. The
+per-angle refocusing time is the $\theta$-period,
+$t_c(\theta_0) = 2\pi\big[(1-\varepsilon\sin\theta_0)^2 - \varepsilon^2\big]^{-1/2}$
+(verified against the Jacobian-zero conjugate times to $10^{-8}$), and its launch-angle
+average is a complete elliptic integral:
+
+$$
+\boxed{\;\delta(\varepsilon) \;=\; 1 - \frac{2}{\pi}\,K(2\varepsilon)\;}
+\qquad
+-\delta = \sum_{m\ge1}\Big[\tbinom{2m}{m}2^{-m}\Big]^2 \varepsilon^{2m}
+= \varepsilon^2 + \tfrac94\varepsilon^4 + \tfrac{25}{4}\varepsilon^6 + \cdots
+$$
+
+verified against the full pipeline to $10^{-10}$ across $\varepsilon = 0.05\ldots0.45$.
+The coefficients are squared normalised central binomials — $c_4 = 9/4$ and the
+measured $c_6 \approx 6.25$ are corollaries. And $K$'s singularity at unit modulus is
+physics: the mean refocusing time diverges as $\varepsilon \to 1/2$, and the slowest
+launch angle loses its conjugate point at exactly $\varepsilon = 1/2$ (verified:
+$t_c \propto 1/\sqrt{1-2\varepsilon}$; none found at $\varepsilon = 0.52$). **A
+charged-particle beam stops refocusing once the field changes by more than half across a
+Larmor radius** — the caustic opens at a critical gradient. See
+`docs/T2-closed-form.md` and `scripts/run_p5_series.py`.
 
 ## References
 

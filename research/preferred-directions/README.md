@@ -39,6 +39,7 @@ Shared math core is **imported, never copied**, from `../caustics-to-groups/src/
 | **S1 fold** | $Q=7$ at a degenerate (fold) null? Pair separation readable? | ✓ $Q=7$, weights $(1,1,1,4)$ — the law's first $k{=}2$ point in 3D; ✓ midpoint $w_4(r)$: $2\to4$ crossover at $r\sim\sqrt\mu$, universal dilation collapse |
 | **S2 solar pairs** | Real pairs? The crossover on the real Sun? | ✓ 4 real pairs (closest 23 px); crossover rising edge yes, fold plateau no (needs a merging pair). Repair: raw-grid null weight $w_4\approx3$ reads directly in the cell-to-structure scale window |
 | **S3 magnetosphere** | Do spiral nulls exist in real physics? | ✓ IGRF+T96 (real-data-fitted): 149 nulls, **79 spiral** — exactly where non-force-free currents flow; $Q=6$ at all |
+| **T2 closed form** | Is there an exact law behind $\delta(\varepsilon)$? | ✓ $\delta = 1-\tfrac2\pi K(2\varepsilon)$, verified to $10^{-10}$; refocusing stops at $\varepsilon=1/2$ |
 
 **The law (E9).** With base dimension $d$ and curvature vanishing to order $k$,
 $Q = d + k + 2$. Physically: acquiring holonomy $\Phi$ near a curvature zero of order $k$
@@ -49,12 +50,14 @@ curvature $B(x,y)\,w$ — Larmor motion. Its tangent cone at $q_0$ is Heisenberg
 constant field $B_0=B(q_0)$, conjugate time $t_c=2\pi/(B_0|w|)$. The nilpotent deviation
 obeys
 
-$$\delta \;=\; -\varepsilon^2 \;-\; \tfrac94\,\varepsilon^4 \;+\; O(\varepsilon^6),
+$$\delta \;=\; 1 - \tfrac{2}{\pi}K(2\varepsilon) \;=\; -\varepsilon^2 - \tfrac94\varepsilon^4 - \tfrac{25}4\varepsilon^6 - \cdots,
 \qquad \varepsilon = |\nabla\ln B|\cdot r_L,\quad r_L = 1/(B_0|w|)$$
 
-with the leading coefficient measured $1.0000$, the quartic pinned at $c_4 = 2.2497\pm0.0009 =
-9/4$ (`run_c4_precision.py`; the earlier wide-window $2.52$ was a truncation artefact and $5/2$
-is refuted), and **only even powers** (the pre-registered
+an **exact law** ($K$ = complete elliptic integral; `run_p5_series.py`, verified to
+$10^{-10}$; coefficients are squared normalised central binomials; refocusing stops at the
+critical gradient $\varepsilon = 1/2$). Found via the precision chain: $c_4$ pinned at
+$2.2497\pm0.0009 = 9/4$ (`run_c4_precision.py`; the earlier wide-window $2.52$ was a
+truncation artefact and $5/2$ refuted), and **only even powers** (the pre-registered
 parity prediction). It inverts: $|\nabla\ln B| = \sqrt{|\delta|}/r_L$. A field gradient
 *delays* refocusing. See [`docs/P1-moduli-read-grad-B.md`](docs/P1-moduli-read-grad-B.md).
 
