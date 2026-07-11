@@ -82,7 +82,9 @@ numerical zero test with no scale attached. The growth vector has a *law* for it
     <em>fan plane</em> (blue dashed ellipse) — with the type schematic and the measured
     $\nabla\mathbf B$ eigenvalues at right. Note $J_\parallel = 0.00$ on both: a
     potential field is current-free, exactly as the force-free theorem demands of its
-    radial-only nulls.
+    radial-only nulls. (These are nulls <em>of the survey window's extrapolation</em>;
+    low potential-field nulls are window-sensitive — see the R3 report's
+    window-sensitivity check.)
   </figcaption>
 </figure>
 
