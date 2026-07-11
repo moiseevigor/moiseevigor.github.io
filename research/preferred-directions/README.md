@@ -32,6 +32,9 @@ Shared math core is **imported, never copied**, from `../caustics-to-groups/src/
 | **P2 law** | $Q=k+5$ in 3D? | ✓ confirmed; growth vector jumps $5\to6$ at a null |
 | **P2 nulls** | SR vs standard null-finder (ABC field) | ✓ agrees on location & order; type open |
 | **P2 solar** | SR detector on a REAL SDO/HMI coronal field | ✓ detects a real null (Q=6); raw-grid resolution-limited |
+| **R1** | Does $Q=6$ fire at every null type (Parnell battery + real)? | ✓ 5/5, radial & spiral — valid detector, type-agnostic |
+| **R2** | Does integrated-flow classification beat $\nabla B$ under noise? | ✓ vs pointwise differences, ✗ vs least-squares fit — SR's edge stays detection+order |
+| **R3** | Real gallery: 3 HMI days (2011/2012/2014), all interior nulls | ✓ 5/5 detected (Q=6) & classified, all methods agree; potential fields ⇒ radial-only (spiral half needs NLFFF) |
 
 **The law (E9).** With base dimension $d$ and curvature vanishing to order $k$,
 $Q = d + k + 2$. Physically: acquiring holonomy $\Phi$ near a curvature zero of order $k$
