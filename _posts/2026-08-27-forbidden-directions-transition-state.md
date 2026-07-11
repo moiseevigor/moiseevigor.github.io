@@ -72,20 +72,19 @@ numerical zero test with no scale attached. The growth vector has a *law* for it
 <figure class="l-middle" id="fig-aia-overlay">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-aia-overlay.png"
-      alt="Side by side: the real SDO/AIA 171 angstrom EUV corona of AR11429 with its glowing loop systems, and the same frame with our extrapolated potential-field lines overlaid, the computed arcade draping over the observed loops and the null marked by a star"
-      style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
+      alt="The real SDO/AIA 171 angstrom EUV corona of AR11429, glowing loop systems in gold, with our extrapolated potential-field lines overlaid: the blue arcade draping over the observed loops and the long orange fan of the null sweeping across the frame from the starred null"
+      style="max-width:min(100%,820px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
-    <strong>The corona seen, and the corona computed.</strong> <em>Left:</em> the real
-    EUV corona of AR11429 at the same hour — SDO/AIA 171 Å, where million-kelvin plasma
-    lights up the true field lines. <em>Right:</em> the same frame with <em>our</em>
-    potential-field extrapolation overlaid (blue: the arcade; orange: the null-threading
-    lines, ★ the null): the computed arcade drapes over the observed loop fan. The two
-    datasets are independent — AIA sees plasma, HMI measured the surface field the
-    extrapolation grew from — and cross-registering them required correcting HMI's
-    180° camera rotation (CROTA2) against AIA's upright frame. Departures are expected
-    and honest: a potential field carries no currents, and this region was anything but
-    current-free (it flared X5.4 the same day).
+    <strong>The corona computed, over the corona seen.</strong> The real EUV corona of
+    AR11429 at the same hour — SDO/AIA 171 Å, million-kelvin plasma lighting up the true
+    field lines — with <em>our</em> potential-field extrapolation drawn on top (blue: the
+    arcade; orange: the null's spine and fan, ★ the null). The two datasets are
+    independent: AIA sees plasma, HMI measured the surface field the extrapolation grew
+    from — and cross-registering them required correcting HMI's 180° camera rotation
+    (CROTA2) against AIA's upright frame. Departures are expected and honest: a potential
+    field carries no currents, and this region was anything but current-free (it flared
+    X5.4 the same day).
   </figcaption>
 </figure>
 

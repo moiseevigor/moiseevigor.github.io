@@ -183,26 +183,53 @@ def _edge_weight(P_box, nx, ny, nz, w_px=9.0):
     dz = nz - 2 - P_box[:, 2]
     return np.clip(np.minimum(np.minimum(dx, dy), dz) / w_px, 0.0, 1.0)
 
+
+def _ar11429_volume():
+    """The AR11429 survey volume, RECENTERED on its null so traced lines have room
+    in every direction (the flux-centred window put the null 14 px from a wall).
+    Verifies the null survives the shifted window (window-sensitivity is real --
+    see R3); falls back to the flux-centred window if not.
+    Returns (cut, B, nulls_sorted_by_height, p0, (cy, cx))."""
+    from scipy.ndimage import zoom
+    bz = dict(load_magnetograms())["2012-03-07"]
+
+    def build(cy, cx):
+        cut = zoom(bz[cy - WIN // 2:cy + WIN // 2, cx - WIN // 2:cx + WIN // 2],
+                   CUT / WIN, order=1)
+        B, _A = solar.potential_field(cut, NZ, dz=1.0)
+        ny, nx, nz, _ = B.shape
+        nulls = [nl for nl in solar.find_nulls(B, seeds_per_axis=12)
+                 if 6 < nl["p"][0] < nx - 6 and 6 < nl["p"][1] < ny - 6
+                 and 3 < nl["p"][2] < nz - 3]
+        nulls.sort(key=lambda nl: nl["p"][2])
+        return cut, B, nulls
+
+    cy0, cx0 = 640, 640
+    cut, B, nulls = build(cy0, cx0)
+    p_ref = nulls[0]["p"]
+    # shift the window so the null lands mid-box
+    cxn = int(round(cx0 + (p_ref[0] - (CUT - 1) / 2) * (WIN / CUT)))
+    cyn = int(round(cy0 + (p_ref[1] - (CUT - 1) / 2) * (WIN / CUT)))
+    cut2, B2, nulls2 = build(cyn, cxn)
+    c = (CUT - 1) / 2
+    if nulls2 and np.linalg.norm(nulls2[0]["p"][:2] - c) < 25:
+        print(f"AR volume recentered on null: window ({cyn},{cxn}), "
+              f"null at {np.round(nulls2[0]['p'],1)}")
+        return cut2, B2, nulls2, nulls2[0]["p"], (cyn, cxn)
+    print("recentering lost the null -- falling back to the flux-centred window")
+    return cut, B, nulls, p_ref, (cy0, cx0)
+
+
 def skeleton(fast=False):
     """The stage as the actual Sun: full-disk magnetogram on a sphere, the AR11429
     extrapolation patch embedded at its true disk position (tangent/exponential map,
     true height scale), field lines occlusion-culled, null close-up inset."""
     from scipy.ndimage import zoom, map_coordinates, gaussian_filter
     bz = dict(load_magnetograms())["2012-03-07"]
-    cy, cx = 640, 640
-    # the SURVEY volume (the null of this pipeline lives here; a window-sensitivity
-    # scan showed low potential-field nulls do NOT persist under domain enlargement --
-    # documented in docs/R3-real-gallery.md -- so we render the survey field itself
-    # and let lines that genuinely leave it fade)
-    cut = zoom(bz[cy - WIN // 2:cy + WIN // 2, cx - WIN // 2:cx + WIN // 2],
-               CUT / WIN, order=1)
-    B, _A = solar.potential_field(cut, NZ, dz=1.0)
+    # null-recentered survey volume: the null sits mid-box, so its lines have room
+    # in every direction before the honest wall fade (see _ar11429_volume)
+    cut, B, nulls, p0, (cy, cx) = _ar11429_volume()
     ny, nx, nz, _ = B.shape
-    nulls = [nl for nl in solar.find_nulls(B, seeds_per_axis=12)
-             if 6 < nl["p"][0] < nx - 6 and 6 < nl["p"][1] < ny - 6
-             and 3 < nl["p"][2] < nz - 3]
-    nulls.sort(key=lambda nl: nl["p"][2])
-    p0 = nulls[0]["p"]
     print(f"skeleton null at {np.round(p0, 1)} of {len(nulls)} in the volume")
 
     # ---- traces in box coords (x, y in CUT px; z in CUT px of height) ------------
@@ -317,11 +344,11 @@ def skeleton(fast=False):
     # field lines (occlusion-culled, ends fading out, bundles dimming toward the
     # artificial box walls so shared exits cannot stack back into a hard cut)
     for ln, wgt in arcade:
-        _plot_faded(ax, embed(ln), d, color=ARC, lw=0.8 + 1.0 * wgt,
-                    alpha=0.38 + 0.35 * wgt, zorder=3,
+        _plot_faded(ax, embed(ln), d, color=ARC, lw=1.0 + 1.2 * wgt,
+                    alpha=0.40 + 0.35 * wgt, zorder=3,
                     wpt=_edge_weight(ln, nx, ny, nz))
     for ln in skel:
-        _plot_faded(ax, embed(ln), d, color=NUL, lw=1.6, alpha=0.95, zorder=4,
+        _plot_faded(ax, embed(ln), d, color=NUL, lw=1.7, alpha=0.95, zorder=4,
                     fade=0.30, wpt=_edge_weight(ln, nx, ny, nz, w_px=12.0))
     star = embed(np.array([p0]))[0]
     for s_, a_ in ((1500, 0.06), (650, 0.16)):    # soft glow behind the star
@@ -502,17 +529,8 @@ def _anatomy_rows(fig, axesrow, lines, p0, M, L, unit, row_title):
 
 def null_anatomy_sun():
     """Anatomy crops of the AR11429 coronal nulls: projections + principal axes."""
-    from scipy.ndimage import zoom
-    mags = dict(load_magnetograms())
-    bz = mags["2012-03-07"]
-    cut = zoom(bz[640 - WIN // 2:640 + WIN // 2, 640 - WIN // 2:640 + WIN // 2],
-               CUT / WIN, order=1)
-    B, _A = solar.potential_field(cut, NZ, dz=1.0)
+    cut, B, nulls, _p0, _cyx = _ar11429_volume()
     ny, nx, nz, _ = B.shape
-    nulls = [nl for nl in solar.find_nulls(B, seeds_per_axis=10)
-             if 6 < nl["p"][0] < nx - 6 and 6 < nl["p"][1] < ny - 6
-             and 3 < nl["p"][2] < nz - 3]
-    nulls.sort(key=lambda nl: nl["p"][2])
     rng = np.random.default_rng(4)
     fig, axes = plt.subplots(len(nulls), 4, figsize=(11.4, 3.1 * len(nulls)), dpi=150)
     axes = np.atleast_2d(axes)
@@ -626,7 +644,6 @@ def aia_overlay():
     ys, xs = np.where(np.abs(bz) > 0)
     hcy, hcx = (ys.min() + ys.max()) / 2, (xs.min() + xs.max()) / 2
     hR = ((ys.max() - ys.min()) + (xs.max() - xs.min())) / 4
-    cy, cx = 640, 640                                  # the AR window (HMI px)
 
     def hmi_to_aia(xh, yh):
         """HMI 1024-px coords -> AIA px via normalised disk coordinates.
@@ -639,16 +656,9 @@ def aia_overlay():
         return (acx - (np.asarray(xh) - hcx) / hR * arsun,
                 acy - (np.asarray(yh) - hcy) / hR * arsun)
 
-    # rebuild the survey extrapolation + traces (same as the skeleton)
-    cut = zoom(bz[cy - WIN // 2:cy + WIN // 2, cx - WIN // 2:cx + WIN // 2],
-               CUT / WIN, order=1)
-    B, _A = solar.potential_field(cut, NZ, dz=1.0)
+    # null-recentered survey extrapolation (same volume the skeleton uses)
+    cut, B, nulls, p0, (cy, cx) = _ar11429_volume()
     ny, nx, nz, _ = B.shape
-    nulls = [nl for nl in solar.find_nulls(B, seeds_per_axis=12)
-             if 6 < nl["p"][0] < nx - 6 and 6 < nl["p"][1] < ny - 6
-             and 3 < nl["p"][2] < nz - 3]
-    nulls.sort(key=lambda nl: nl["p"][2])
-    p0 = nulls[0]["p"]
     rng = np.random.default_rng(2)
     thr = np.percentile(np.abs(cut), 93.0)
     iy, ix = np.where(np.abs(cut) >= thr)
@@ -684,29 +694,24 @@ def aia_overlay():
     x_lo, y_lo = int(ax0 - half), int(ay0 - half)
     crop = aia[y_lo:y_lo + 2 * half, x_lo:x_lo + 2 * half]
 
-    fig, axes = plt.subplots(1, 2, figsize=(11.6, 5.9), dpi=150)
+    fig, ax = plt.subplots(figsize=(8.6, 8.2), dpi=150)
     vmax = np.percentile(crop, 99.85)
-    for ax in axes:
-        ax.imshow(np.clip(crop, 0, vmax) ** 0.5, origin="lower", cmap="sdoaia171")
-        ax.set_xticks([]); ax.set_yticks([])
-    axes[0].set_title("A · the corona SEEN — SDO/AIA 171 Å (1 MK plasma lights up "
-                      "the true field lines)", fontsize=9)
-    axes[1].set_title("B · the corona COMPUTED — our potential-field lines over the "
-                      "same frame", fontsize=9)
+    ax.imshow(np.clip(crop, 0, vmax) ** 0.5, origin="lower", cmap="sdoaia171")
+    ax.set_xticks([]); ax.set_yticks([])
     for ln, wgt in arcade:
         xa, ya = box_to_aia(ln)
-        axes[1].plot(xa - x_lo, ya - y_lo, color="#9ec5e8", lw=0.55,
-                     alpha=0.20 + 0.35 * wgt)
+        ax.plot(xa - x_lo, ya - y_lo, color="#a9cdf0", lw=1.3,
+                alpha=0.30 + 0.40 * wgt)
     for ln in skel:
         xa, ya = box_to_aia(ln)
-        axes[1].plot(xa - x_lo, ya - y_lo, color="#ff8b2e", lw=1.1, alpha=0.75)
+        ax.plot(xa - x_lo, ya - y_lo, color="#ff8b2e", lw=1.7, alpha=0.8)
     xn, yn = box_to_aia(p0[None, :])
-    axes[1].plot(xn - x_lo, yn - y_lo, marker="*", ms=14, mfc="#ffd34d",
-                 mec="#442200", mew=0.9)
-    fig.suptitle("AR11429, 2012-03-07 00:00 UT — the EUV corona against the "
-                 "extrapolated skeleton (independent data: AIA sees plasma, "
-                 "HMI measured the surface field)", fontsize=10, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.94])
+    ax.plot(xn - x_lo, yn - y_lo, marker="*", ms=15, mfc="#ffd34d",
+            mec="#442200", mew=0.9)
+    ax.set_title("AR11429, 2012-03-07 00:00 UT — our potential-field lines (blue: "
+                 "arcade; orange: null) over the real SDO/AIA 171 Å corona",
+                 fontsize=9.5, fontweight="bold")
+    fig.tight_layout()
     out = REPO / "public/img/posts/forbidden-directions-aia-overlay.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)
     print("rendered", out.name)
