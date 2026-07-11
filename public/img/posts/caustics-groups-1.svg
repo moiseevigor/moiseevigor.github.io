@@ -1,0 +1,43 @@
+<svg viewBox="0 0 220 148" xmlns="http://www.w3.org/2000/svg">
+  <rect width="220" height="148" fill="#fff"/>
+  <!-- The reverse map: a caustic (focusing astroid) on the left, an arrow, a group
+       lattice on the right. One geodesic and one cusp are highlighted. -->
+  <!-- faint family of focusing geodesics converging toward the astroid cusps -->
+  <g fill="none" stroke="#1565c0" stroke-linecap="round" opacity="0.28">
+    <path d="M 18,20 Q 60,60 74,74" stroke-width="0.9"/>
+    <path d="M 18,128 Q 60,88 74,74" stroke-width="0.9"/>
+    <path d="M 12,74 Q 48,74 74,74" stroke-width="0.9"/>
+    <path d="M 30,14 Q 62,52 74,74" stroke-width="0.8"/>
+    <path d="M 30,134 Q 62,96 74,74" stroke-width="0.8"/>
+  </g>
+  <!-- the caustic: a four-cusp sub-Riemannian astroid, centre ~ (74,74) -->
+  <path d="M 108,74 C 96,86 86,96 74,108 C 62,96 52,86 40,74 C 52,62 62,52 74,40 C 86,52 96,62 108,74 Z"
+        fill="#1565c0" fill-opacity="0.08" stroke="#1565c0" stroke-width="1.4"/>
+  <!-- four cusp points -->
+  <g fill="#1565c0">
+    <circle cx="108" cy="74" r="2"/><circle cx="40" cy="74" r="2"/>
+    <circle cx="74" cy="40" r="2"/><circle cx="74" cy="108" r="2"/>
+  </g>
+  <!-- highlighted geodesic + its cusp -->
+  <path d="M 18,74 Q 50,72 74,40" fill="none" stroke="#e65100" stroke-width="1.6" stroke-linecap="round" opacity="0.9"/>
+  <circle cx="74" cy="40" r="2.6" fill="#e65100"/>
+  <!-- reverse-map arrow -->
+  <path d="M 122,74 L 150,74" stroke="#e65100" stroke-width="1.4" stroke-linecap="round"/>
+  <path d="M 150,74 l -5,-3 M 150,74 l -5,3" stroke="#e65100" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+  <text x="136" y="66" text-anchor="middle" font-family="monospace" font-size="7" fill="#e65100">?</text>
+  <!-- group lattice: a Carnot-group glyph (nodes on a stepped lattice) -->
+  <g stroke="#1565c0" stroke-width="1" opacity="0.55">
+    <line x1="164" y1="104" x2="164" y2="44"/>
+    <line x1="164" y1="44" x2="196" y2="44"/>
+    <line x1="164" y1="74" x2="196" y2="74"/>
+    <line x1="164" y1="104" x2="196" y2="104"/>
+    <line x1="196" y1="104" x2="196" y2="44"/>
+    <line x1="164" y1="104" x2="196" y2="74"/>
+    <line x1="164" y1="74" x2="196" y2="44"/>
+  </g>
+  <g fill="#1565c0">
+    <circle cx="164" cy="44" r="2.4"/><circle cx="196" cy="44" r="2.4"/>
+    <circle cx="164" cy="74" r="2.4"/><circle cx="196" cy="74" r="2.4"/>
+    <circle cx="164" cy="104" r="2.4"/><circle cx="196" cy="104" r="2.4"/>
+  </g>
+</svg>

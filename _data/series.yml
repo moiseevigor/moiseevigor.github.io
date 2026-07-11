@@ -85,3 +85,100 @@
       title: "Reading the Sky's Hot Gas"
       url: /mathematics/2026/07/10/cosmic-web-B5-reading-gas-maps/
       status: draft
+
+- id: caustics-to-groups
+  title: "From Caustics to Groups"
+  subtitle: >
+    The reverse map: given an observed field of caustics — focusing edges, cusps,
+    shell-crossing walls — infer the sub-Riemannian Lie-group geometry that produced
+    it. Built around the ADE group-blindness obstruction and the three structure-specific
+    observables that escape it: the tangent-cone growth vector, the moduli of the
+    conjugate locus at the pole, and the abnormal-geodesic stratum.
+  posts:
+    - part: 1
+      title: "From Caustics to Groups: A Research Program"
+      url: /mathematics/2026/07/15/caustics-to-groups-research-program/
+      status: draft
+    - part: 2
+      title: "The Forward Map: Caustics of the Model Groups"
+      url: /mathematics/2026/07/18/caustics-to-groups-forward-map/
+      status: draft
+    - part: 3
+      title: "The Inverse Map: Reading the Fingerprint"
+      url: /mathematics/2026/07/22/caustics-to-groups-inverse-map/
+      status: draft
+    - part: 4
+      title: "In the Wild: DW-MRI, and Where the Method Stays Silent"
+      url: /mathematics/2026/07/26/caustics-to-groups-in-the-wild/
+      status: draft
+  appendices:
+    - part: C1
+      title: "The Model Groups, by Example: Real-World Sub-Riemannian Systems"
+      url: /mathematics/2026/07/28/caustics-to-groups-C1-model-groups-by-example/
+      status: draft
+    - part: C2
+      title: "Caustics as Lagrangian Singularities (Arnol'd's ADE List)"
+      url: /mathematics/2026/07/29/caustics-to-groups-C2-lagrangian-singularities/
+      status: draft
+    - part: C3
+      title: "The Tangent Cone: Carnot Groups and Growth Vectors"
+      url: /mathematics/2026/07/30/caustics-to-groups-C3-tangent-cone-growth-vectors/
+      status: draft
+    - part: C4
+      title: "The Conjugate Locus at the Pole: Astroids and Their Moduli"
+      url: /mathematics/2026/07/31/caustics-to-groups-C4-conjugate-locus-moduli/
+      status: draft
+    - part: C5
+      title: "Abnormal Geodesics: The Yes/No Fingerprint"
+      url: /mathematics/2026/08/01/caustics-to-groups-C5-abnormal-geodesics/
+      status: draft
+    - part: C6
+      title: "The Nilpotent-Deviation Statistic"
+      url: /mathematics/2026/08/02/caustics-to-groups-C6-nilpotent-deviation/
+      status: draft
+
+- id: preferred-directions
+  title: "The Geometry of Forbidden Directions"
+  subtitle: >
+    When a physical field forbids a direction of motion — not merely slows it — the
+    configuration space becomes sub-Riemannian, and its geometry reads the field. This
+    series develops that idea for magnetic fields: the law Q = d + k + 2, a caustic that
+    measures the field gradient, and a growth vector that detects magnetic nulls.
+  posts:
+    - part: 1
+      title: "The Geometry of Forbidden Directions: A Research Program"
+      url: /mathematics/2026/08/05/forbidden-directions-research-program/
+      status: draft
+    - part: 2
+      title: "The Magnetic Contact Geometry: Larmor Motion Is Heisenberg"
+      url: /mathematics/2026/08/08/forbidden-directions-magnetic-contact/
+      status: draft
+    - part: 3
+      title: "Reading the Field Gradient from the Caustic"
+      url: /mathematics/2026/08/11/forbidden-directions-reading-gradient/
+      status: draft
+    - part: 4
+      title: "Finding Magnetic Nulls with a Growth Vector"
+      url: /mathematics/2026/08/14/forbidden-directions-finding-nulls/
+      status: draft
+  appendices:
+    - part: D1
+      title: "Connections, Holonomy, and Curvature"
+      url: /mathematics/2026/08/17/forbidden-directions-D1-connections-holonomy/
+      status: draft
+    - part: D2
+      title: "The Selection Rule: Why Anisotropic Transport Isn't Sub-Riemannian"
+      url: /mathematics/2026/08/18/forbidden-directions-D2-selection-rule/
+      status: draft
+    - part: D3
+      title: "The Law Q = d + k + 2, Derived"
+      url: /mathematics/2026/08/19/forbidden-directions-D3-the-law-derived/
+      status: draft
+    - part: D4
+      title: "The Magnetic Geodesic Flow and Its Conjugate Locus"
+      url: /mathematics/2026/08/20/forbidden-directions-D4-geodesic-flow/
+      status: draft
+    - part: D5
+      title: "The Nilpotent-Deviation Gradient Formula"
+      url: /mathematics/2026/08/21/forbidden-directions-D5-gradient-formula/
+      status: draft
