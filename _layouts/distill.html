@@ -265,18 +265,32 @@ layout: default
     });
     if (narrow) return;
 
+    // Split into read/write phases so we never interleave a style write with a
+    // layout read. The old single loop wrote `aside.style.top` and then read
+    // `aside.offsetHeight` on every note, forcing a synchronous reflow per note —
+    // on window.load that stalled the main thread and scrolling for ~1s. Now:
+    //   1. reset all min-heights (writes)   2. read all geometry (one batched reflow)
+    //   3. position every note (writes only, no reads) — the browser coalesces them.
+    groups.forEach(function (list, lb) { lb.style.minHeight = ''; });
+
     groups.forEach(function (list, lb) {
-      lb.style.minHeight = '';                       // reset before measuring natural height
-      var lbTop = lb.getBoundingClientRect().top;
-      list.forEach(function (p) { p.target = p.sup.getBoundingClientRect().top - lbTop; });
+      var lbBox = lb.getBoundingClientRect();
+      list.lbHeight = lbBox.height;
+      list.forEach(function (p) {
+        p.target = p.sup.getBoundingClientRect().top - lbBox.top;
+        p.h = p.aside.offsetHeight;
+      });
+    });
+
+    groups.forEach(function (list, lb) {
       list.sort(function (a, b) { return a.target - b.target; });
       var cursor = 0;
       list.forEach(function (p) {
         var top = Math.max(p.target, cursor);
         p.aside.style.top = top + 'px';
-        cursor = top + p.aside.offsetHeight + GAP;
+        cursor = top + p.h + GAP;
       });
-      if (cursor > lb.getBoundingClientRect().height) lb.style.minHeight = Math.ceil(cursor) + 'px';
+      if (cursor > list.lbHeight) lb.style.minHeight = Math.ceil(cursor) + 'px';
     });
   }
 
