@@ -97,6 +97,28 @@ used for fibre tracking in diffusion MRI and vessel tracking in retinal imaging
 (Duits &amp; Franken 2011; Portegies et al. 2015; Duits, Boscain, Rossi &amp;
 Sachkov 2014).
 
+</div><!-- /.l-body -->
+
+<figure class="l-middle" id="fig-real-camels">
+  <div style="text-align:center;">
+    <img src="/public/img/posts/cosmic-web-real-camels-slice.png"
+      alt="Real z=0 dark-matter cosmic web from a CAMELS N-body simulation: bright filaments and cluster nodes threading dark voids, in a 25 h⁻¹Mpc slice"
+      style="max-width:min(100%,470px);width:100%;height:auto;border-radius:3px;">
+  </div>
+  <figcaption>
+    <strong>A real cosmic web.</strong> The $z=0$ dark-matter density of a
+    <strong>CAMELS</strong> N-body simulation ($256^3$ particles, $25\,h^{-1}$Mpc box,
+    $\Lambda$CDM), projected through a $\sim\!1.5\,h^{-1}$Mpc slab; colour is
+    $\log_{10}(1+\delta)$. Filaments carrying a local direction, compact cluster nodes at
+    their junctions, and the vast voids between — the very structure this program proposes to
+    lift onto $\mathbb{R}^3\times S^2$ and trace. Loaded and rendered from the real snapshot
+    in <code>research/cosmic-web/data</code>; the same field is used for the quantitative
+    tidal-eigenvalue test below.
+  </figcaption>
+</figure>
+
+<div class="l-body" markdown="1">
+
 The program asks two **separate** questions, in increasing order of ambition:
 
 1. **Methodological (C1).** Is the orientation-lifted manifold a *better
@@ -129,6 +151,82 @@ Saichev &amp; Shandarin 1989) adds an infinitesimal viscosity (Burgers equation[
 so matter *sticks* to sheets and filaments after shell-crossing. Bond, Kofman
 &amp; Pogosyan (1996) showed the filamentary pattern is already encoded in the
 initial tidal field around proto-clusters — hence "cosmic web".
+
+The eigenvalues of that tidal tensor are not independent: at any point they **repel**,
+rarely coinciding, because coincidence would mean a locally isotropic (spherical) squeeze,
+which is measure-zero. Doroshkevich (1970) derived the exact law for a Gaussian field —
+the gap density vanishes linearly, $p(\text{gap})\sim\text{gap}^{1}$. The figure tests it on
+the *real* CAMELS field above, and finds the repulsion is a **quasi-linear** signature:
+washed out at small, non-linear, halo-dominated scales, and recovering toward Doroshkevich's
+prediction as one coarse-grains toward the Gaussian regime.
+
+</div><!-- /.l-body -->
+
+<figure class="l-body" id="fig-repulsion">
+  <div id="cw-repulsion" style="text-align:center;"></div>
+  <figcaption>
+    <strong>Tidal-eigenvalue repulsion in the real cosmic web.</strong> The repulsion exponent
+    $\alpha$ (from $p(\text{gap})\sim\text{gap}^{\alpha}$, where "gap" is the smallest spacing
+    between the three tidal eigenvalues at a point) versus the tidal smoothing scale, measured on
+    the CAMELS field above. A synthetic Gaussian field run through the identical pipeline gives
+    $\alpha = 0.98$ (dashed, Doroshkevich's prediction of 1). On the real non-linear field
+    $\alpha$ is suppressed at small scales — collapsed halos make the tidal field violently
+    non-Gaussian — and climbs back toward the Gaussian value as the field is smoothed into the
+    quasi-linear regime. Repulsion is a property of the near-Gaussian regime, exactly as its
+    Jacobian origin predicts. Data:
+    <code>research/caustics-to-groups/artifacts/e6_real_results.json</code>.
+  </figcaption>
+</figure>
+
+<script>
+(function () {
+  const host = document.getElementById("cw-repulsion");
+  if (!host) return;
+  const ns = "http://www.w3.org/2000/svg";
+  const SANS = "'Source Sans 3', system-ui, sans-serif";
+  const MONO = "'JetBrains Mono', monospace";
+  const S = [0.293, 0.488, 0.781, 1.172];        // smoothing scale, Mpc/h
+  const A = [0.258, 0.668, 0.848, 0.872];        // measured repulsion exponent
+  const CTRL = 0.984;                             // synthetic-Gaussian control
+  const W = 560, H = 320, mL = 52, mR = 20, mT = 20, mB = 48;
+  const x0 = mL, x1 = W - mR, y0 = mT, y1 = H - mB;
+  const lxmin = Math.log10(0.24), lxmax = Math.log10(1.45);
+  const X = v => x0 + (Math.log10(v) - lxmin) / (lxmax - lxmin) * (x1 - x0);
+  const Y = v => y1 - (v - 0) / (1.15 - 0) * (y1 - y0);
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  svg.style.maxWidth = "560px"; svg.style.width = "100%";
+  host.appendChild(svg);
+  const el = (t, a, tx) => { const e = document.createElementNS(ns, t);
+    for (const k in a) e.setAttribute(k, a[k]); if (tx != null) e.textContent = tx; return e; };
+  [0, 0.25, 0.5, 0.75, 1.0].forEach(g => {
+    svg.appendChild(el("line", { x1: x0, y1: Y(g), x2: x1, y2: Y(g), stroke: "#eee" }));
+    svg.appendChild(el("text", { x: x0 - 6, y: Y(g) + 3, "text-anchor": "end", "font-size": 10, fill: "#999", "font-family": MONO }, g.toFixed(2)));
+  });
+  [0.3, 0.5, 0.8, 1.2].forEach(g => {
+    svg.appendChild(el("text", { x: X(g), y: y1 + 15, "text-anchor": "middle", "font-size": 10, fill: "#999", "font-family": MONO }, g));
+  });
+  // Doroshkevich / Gaussian line at alpha = 1
+  svg.appendChild(el("line", { x1: x0, y1: Y(1.0), x2: x1, y2: Y(1.0), stroke: "#c53030", "stroke-width": 1.5, "stroke-dasharray": "5 4" }));
+  svg.appendChild(el("text", { x: x1 - 2, y: Y(1.0) - 5, "text-anchor": "end", "font-size": 11, fill: "#c53030", "font-family": SANS }, "Doroshkevich (Gaussian): α = 1"));
+  svg.appendChild(el("circle", { cx: x0 + 8, cy: Y(CTRL), r: 3.5, fill: "none", stroke: "#c53030", "stroke-width": 1.5 }));
+  svg.appendChild(el("text", { x: x0 + 15, y: Y(CTRL) + 3, "font-size": 10, fill: "#c53030", "font-family": SANS }, "synthetic control 0.98"));
+  // measured curve
+  const pts = S.map((s, i) => `${X(s).toFixed(1)},${Y(A[i]).toFixed(1)}`).join(" ");
+  svg.appendChild(el("polyline", { points: pts, fill: "none", stroke: "#2b6cb0", "stroke-width": 2 }));
+  S.forEach((s, i) => {
+    svg.appendChild(el("circle", { cx: X(s), cy: Y(A[i]), r: 3.4, fill: "#2b6cb0" }));
+    svg.appendChild(el("text", { x: X(s), y: Y(A[i]) - 8, "text-anchor": "middle", "font-size": 10, fill: "#2b6cb0", "font-family": MONO }, A[i].toFixed(2)));
+  });
+  svg.appendChild(el("text", { x: X(0.3) + 6, y: Y(0.258) + 16, "font-size": 10.5, fill: "#888", "font-family": SANS }, "non-linear: repulsion washed out"));
+  svg.appendChild(el("line", { x1: x0, y1: y1, x2: x1, y2: y1, stroke: "#333", "stroke-width": 1 }));
+  svg.appendChild(el("line", { x1: x0, y1: y0, x2: x0, y2: y1, stroke: "#333", "stroke-width": 1 }));
+  svg.appendChild(el("text", { x: (x0 + x1) / 2, y: H - 6, "text-anchor": "middle", "font-size": 12, fill: "#333", "font-family": SANS }, "tidal smoothing scale  [h⁻¹Mpc]  (log)"));
+  svg.appendChild(el("text", { x: 14, y: (y0 + y1) / 2, "text-anchor": "middle", "font-size": 12, fill: "#333", "font-family": SANS, transform: `rotate(-90 14 ${(y0 + y1) / 2})` }, "repulsion exponent α"));
+})();
+</script>
+
+<div class="l-body" markdown="1">
 
 Gravity doesn't crush a blob evenly: it pulls hardest along one axis, so the blob
 gives way one axis at a time — flattening into a sheet, draining into a filament,
