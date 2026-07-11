@@ -62,3 +62,11 @@ research/cosmic-web/artifacts/
 research/cosmic-web/data/
 research/cosmic-web/paper/main.pdf
 .serena/
+
+# research/caustics-to-groups
+research/caustics-to-groups/.venv/
+research/caustics-to-groups/artifacts/
+
+# research/preferred-directions
+research/preferred-directions/artifacts/
+research/preferred-directions/.venv/
