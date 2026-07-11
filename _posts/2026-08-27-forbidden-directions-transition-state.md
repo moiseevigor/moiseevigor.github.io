@@ -69,6 +69,23 @@ numerical zero test with no scale attached. The growth vector has a *law* for it
   </figcaption>
 </figure>
 
+<figure class="l-middle" id="fig-anatomy-sun">
+  <div style="text-align:center;">
+    <img src="/public/img/posts/forbidden-directions-null-anatomy-sun.png"
+      alt="Two rows of null-anatomy panels for the AR11429 coronal nulls: three orthogonal projections of real field lines with the spine drawn as orange arrows and the fan plane as a blue dashed ellipse, plus a type schematic with eigenvalues"
+      style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
+  </div>
+  <figcaption>
+    <strong>The anatomy of the two real nulls.</strong> Each row is one coronal null of
+    the AR11429 volume; the three panels are its orthogonal projections — real traced
+    field lines (blue), the <em>spine</em> (orange arrows, the principal axis), the
+    <em>fan plane</em> (blue dashed ellipse) — with the type schematic and the measured
+    $\nabla\mathbf B$ eigenvalues at right. Note $J_\parallel = 0.00$ on both: a
+    potential field is current-free, exactly as the force-free theorem demands of its
+    radial-only nulls.
+  </figcaption>
+</figure>
+
 <div class="l-body" markdown="1">
 
 ## The fold, and the law's third point
@@ -221,6 +238,23 @@ The growth vector returns $Q = 6$ at every one, radial and spiral alike.
     current closure is least constrained, and no dayside cusp nulls converge in T96's
     soft magnetopause. Cross-matching against in-situ Cluster/MMS null catalogues is the
     recorded next step.
+  </figcaption>
+</figure>
+
+<figure class="l-middle" id="fig-anatomy-earth">
+  <div style="text-align:center;">
+    <img src="/public/img/posts/forbidden-directions-null-anatomy-earth.png"
+      alt="Two rows of null-anatomy panels for magnetospheric nulls: the radial null shows a clean X of field lines about its spine and fan; the spiral null shows a tightly wound bundle, with complex eigenvalues and strong field-aligned current"
+      style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
+  </div>
+  <figcaption>
+    <strong>The two species, dissected.</strong> The same anatomy for two core-census
+    magnetospheric nulls. <em>Top:</em> a radial null — straight fan, real eigenvalues,
+    $J_\parallel \approx 0$. <em>Bottom:</em> a spiral null — complex fan pair and
+    $J_\parallel = -7$: the field-aligned current the force-free theorem requires. Its
+    winding is so rapid ($\lvert\mathrm{Im}/\mathrm{Re}\rvert \approx 20$ — many turns
+    per e-fold of radius) that the fan renders as a tight bundle rather than a visible
+    corkscrew — the dense tube <em>is</em> the visual signature of a fast spiral.
   </figcaption>
 </figure>
 
