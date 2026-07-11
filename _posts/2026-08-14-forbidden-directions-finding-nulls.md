@@ -9,7 +9,7 @@ subtitle: >
 date: 2026-08-14 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, magnetic-nulls, reconnection, abc-flow, growth-vector, validation]
-image: /public/img/posts/forbidden-directions-1.svg
+image: /public/img/posts/forbidden-directions-4.svg
 description: >
   Part 4 of the Forbidden Directions series: the growth vector as a magnetic-null detector, the
   3D law Q = k+5, external validation against the eigenvalue null-finder on the ABC field, and an
@@ -167,17 +167,21 @@ $Q=5$ in the surrounding strong field — the same null jump, now on the real Su
 <figure class="l-middle" id="fig-solar-null">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-solar-null.png"
-      alt="A real SDO/HMI magnetogram of a solar active region with a detected coronal magnetic null marked by a star"
-      style="max-width:min(100%,460px);width:100%;height:auto;border-radius:3px;">
+      alt="Two panels: left, a real SDO/HMI magnetogram of a solar active region; right, a vertical slice of the extrapolated coronal field magnitude showing it collapse to zero at the null, with field-line streamlines fanning through it"
+      style="max-width:min(100%,760px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
-    <strong>The detector on the real Sun.</strong> A line-of-sight <strong>SDO/HMI</strong>
-    magnetogram of a solar active region (2011 June 7; red / blue = field out of / into the
-    photosphere, up to $\sim\!10^3$ G), potential-field extrapolated to a 3D coronal field. The
-    standard finder locates a coronal magnetic null $\sim\!40$ px above the surface (gold star) —
-    radial, by its $\nabla\mathbf B$ eigenvalues — and the sub-Riemannian growth vector, read from
-    the null's local structure, returns $Q=6$, the null jump, against $Q=5$ in the strong bipolar
-    field. Pipeline: <code>research/preferred-directions/scripts/run_p2_solar.py</code>.
+    <strong>A real solar magnetic null, end to end.</strong>
+    <em>Left (A):</em> a line-of-sight <strong>SDO/HMI</strong> magnetogram of a solar active
+    region (2011 June 7; red / blue = field out of / into the photosphere, up to $\sim\!10^3$ G).
+    The dashed line marks the vertical plane drawn at right; the star is the null's footpoint.
+    <em>Right (B):</em> the potential-field–extrapolated coronal $|\mathbf B|$ on that plane
+    (log scale, bright = strong), with in-plane field lines in white. The field
+    <strong>collapses to zero</strong> at the null $\sim\!40$ px up (cyan star) and the streamlines
+    fan through it in the characteristic X-type topology — a <em>radial</em> null by its
+    $\nabla\mathbf B$ eigenvalues $(-0.76,\,-0.24,\,+1.00)$. There the sub-Riemannian growth vector
+    returns $Q=6$ against $Q=5$ in the strong bipolar field: the null jump, on the real Sun.
+    Pipeline: <code>research/preferred-directions/scripts/run_p2_solar.py</code>.
   </figcaption>
 </figure>
 

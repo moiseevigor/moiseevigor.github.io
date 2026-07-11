@@ -47,7 +47,7 @@ is a **theorem**, not a fit.
 
 ## The dilation theorem
 
-Rescale lengths by the Larmor radius $r_L = 1/(B_0|w|)$: set $X = x/r_L$, $\tau = t/r_L$. The
+Rescale lengths by the Larmor radius $r_L = 1/(B_0\lvert w\rvert)$: set $X = x/r_L$, $\tau = t/r_L$. The
 geodesic system of Appendix D4 becomes
 
 $$

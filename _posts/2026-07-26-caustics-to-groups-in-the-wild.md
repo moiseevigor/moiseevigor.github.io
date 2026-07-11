@@ -10,7 +10,7 @@ subtitle: >
 date: 2026-07-26 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, caustics, SE3, DW-MRI, cosmic-web, inverse-problems]
-image: /public/img/posts/caustics-groups-1.svg
+image: /public/img/posts/caustics-groups-4.svg
 description: >
   Part 4 (final) of the caustics-to-groups series: the SE(3) structure of DW-MRI and vision
   as the real-world target, the (3,6) rank-3 fingerprint, confident recovery on homogeneous

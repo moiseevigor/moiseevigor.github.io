@@ -10,7 +10,7 @@ subtitle: >
 date: 2026-07-22 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, caustics, lie-groups, inverse-problems, classification, optimal-control]
-image: /public/img/posts/caustics-groups-1.svg
+image: /public/img/posts/caustics-groups-3.svg
 description: >
   Part 3 of the caustics-to-groups series: the inverse estimator. Splitting the
   Heisenberg/SE(2) alias with the nilpotent-deviation moduli; the confusion matrix over

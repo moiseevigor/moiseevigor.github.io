@@ -9,7 +9,7 @@ subtitle: >
 date: 2026-08-08 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, magnetic-fields, heisenberg, larmor, holonomy, ball-box]
-image: /public/img/posts/forbidden-directions-1.svg
+image: /public/img/posts/forbidden-directions-2.svg
 description: >
   Part 2 of the Forbidden Directions series: the magnetic contact structure, the identity
   between Larmor orbits and Heisenberg geodesics, the flux coordinate as an area-like weight-2

@@ -11,7 +11,7 @@ subtitle: >
 date: 2026-07-18 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, caustics, lie-groups, carnot-groups, growth-vector, optimal-control]
-image: /public/img/posts/caustics-groups-1.svg
+image: /public/img/posts/caustics-groups-2.svg
 description: >
   Part 2 of the caustics-to-groups series: the forward model. The Heisenberg, SE(2),
   Engel and Cartan sub-Riemannian geodesic flows from one Lie-Poisson engine; the

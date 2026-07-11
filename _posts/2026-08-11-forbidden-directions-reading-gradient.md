@@ -10,7 +10,7 @@ subtitle: >
 date: 2026-08-11 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, magnetic-fields, caustics, conjugate-locus, gradient, moduli]
-image: /public/img/posts/forbidden-directions-1.svg
+image: /public/img/posts/forbidden-directions-3.svg
 description: >
   Part 3 of the Forbidden Directions series: the nilpotent-deviation statistic of the
   magnetic contact structure, the dimensionless gradient ε = |grad ln B| r_L, the measured
@@ -40,7 +40,7 @@ with the constant field $B_0 = B(q_0)$ — that is the tangent cone (Part 2). Bu
 little and the real field *varies*, and the geometry departs from Heisenberg. The **caustic**
 — the pattern where a family of Larmor orbits refocuses — captures that departure precisely.
 
-For the flat model the orbits refocus at exactly the Larmor period $t_c = 2\pi/(B_0|w|)$. For
+For the flat model the orbits refocus at exactly the Larmor period $t_c = 2\pi/(B_0\lvert w\rvert)$. For
 the real, varying field they refocus a little differently, and the **nilpotent deviation**
 
 $$
@@ -55,7 +55,7 @@ gradient.
 
 Put a clean, constant gradient on the field: $B = B_0\,e^{g x}$, the unique family with
 *exactly* constant $\nabla\ln B = g$. A Larmor orbit has one length scale, its radius
-$r_L = 1/(B_0|w|)$, so there is exactly one dimensionless combination the deviation can depend
+$r_L = 1/(B_0\lvert w\rvert)$, so there is exactly one dimensionless combination the deviation can depend
 on:
 
 $$
@@ -216,7 +216,7 @@ does not oversell the answer.
 
 - **Nilpotent deviation $\delta$** — the fractional departure of the real refocusing time from the
   flat-model (Larmor) period, averaged over launch direction; zero for a uniform field.
-- **Larmor radius $r_L = 1/(B_0|w|)$** — the size of a Larmor orbit; the geometry's one length scale.
+- **Larmor radius $r_L = 1/(B_0\lvert w\rvert)$** — the size of a Larmor orbit; the geometry's one length scale.
 - **Dimensionless gradient $\varepsilon = |\nabla\ln B|\,r_L$** — the fractional change of the field
   across one orbit; the only knob $\delta$ can depend on.
 - **Parity** — $\delta$ is even in $\varepsilon$ because averaging over launch direction cancels the

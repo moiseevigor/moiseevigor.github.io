@@ -45,6 +45,76 @@ def local_null_structure(a, b, c):
     return m3.MagneticStructure3D(A, f"null({a:.3f},{b:.3f},{c:.3f})")
 
 
+def render_figure(cut, B, nx, nz, p, ev, Qn):
+    """Two-panel figure that shows the physics, not just a starred pixel map:
+    (A) the real photospheric magnetogram that hosts the null; (B) a vertical
+    slice of the extrapolated coronal |B| through the null -- the field collapses
+    to zero there and the in-plane streamlines trace the X-type null topology.
+    """
+    try:
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        from matplotlib.colors import LogNorm
+    except Exception as e:                                    # pragma: no cover
+        print("figure skipped (no matplotlib):", e)
+        return
+
+    ix0, iy0, iz0 = float(p[0]), float(p[1]), float(p[2])
+    jy = int(round(iy0))
+    sl = B[jy, :, :, :]                       # (nx, nz, 3): the vertical plane y = y_null
+    mag = np.sqrt((sl ** 2).sum(-1)).T        # (nz, nx): rows = height, cols = x
+    U = sl[:, :, 0].T                         # in-plane B_x
+    Wv = sl[:, :, 2].T                        # in-plane B_z (vertical)
+    Xg = np.arange(nx); Zg = np.arange(nz)
+
+    fig, (axA, axB) = plt.subplots(1, 2, figsize=(9.8, 4.5), dpi=150,
+                                   gridspec_kw={"width_ratios": [1, 1.18]})
+
+    # (A) photospheric magnetogram + the null's footpoint / slice line
+    v = np.percentile(np.abs(cut), 99)
+    imA = axA.imshow(cut.T, origin="lower", cmap="RdBu_r", vmin=-v, vmax=v)
+    axA.axhline(iy0, color="k", lw=0.7, ls=(0, (4, 3)), alpha=0.55)
+    axA.plot(ix0, iy0, marker="*", ms=16, mfc="#ffd000", mec="k", mew=1.1, zorder=5)
+    axA.set_title("A · photosphere: line-of-sight $B$  (SDO/HMI, 2011-06-07)", fontsize=8.6)
+    axA.set_xlabel("x [px]", fontsize=8); axA.set_ylabel("y [px]", fontsize=8)
+    axA.tick_params(labelsize=7)
+    cbA = fig.colorbar(imA, ax=axA, fraction=0.046, pad=0.03)
+    cbA.set_label("$B_\\parallel$ [G]", fontsize=7.5); cbA.ax.tick_params(labelsize=6.5)
+    axA.text(0.035, 0.035, "opposite polarities (red / blue)\nanchor the null's field lines;\ndashed line = slice in panel B",
+             transform=axA.transAxes, fontsize=6.8, va="bottom",
+             bbox=dict(boxstyle="round,pad=0.28", fc="white", ec="0.6", alpha=0.82))
+
+    # (B) vertical slice of |B|: the field vanishes at the null; streamlines = topology
+    pos = mag[mag > 0]
+    floor = pos.min() if pos.size else 1.0
+    imB = axB.imshow(np.maximum(mag, floor), origin="lower", aspect="auto",
+                     extent=[0, nx, 0, nz], cmap="magma",
+                     norm=LogNorm(vmin=floor * 3, vmax=np.percentile(mag, 99.5)))
+    axB.streamplot(Xg, Zg, U, Wv, color="white", density=1.25, linewidth=0.6,
+                   arrowsize=0.7, arrowstyle="-|>")
+    axB.plot(ix0, iz0, marker="*", ms=18, mfc="#25d0ff", mec="k", mew=1.2, zorder=6)
+    axB.set_title("B · coronal $|B|$ through the null — the field vanishes here", fontsize=8.6)
+    axB.set_xlabel("x [px]", fontsize=8); axB.set_ylabel("height above surface [px]", fontsize=8)
+    axB.set_xlim(0, nx); axB.set_ylim(0, nz); axB.tick_params(labelsize=7)
+    cbB = fig.colorbar(imB, ax=axB, fraction=0.046, pad=0.03)
+    cbB.set_label("$|B|$ [G, log]", fontsize=7.5); cbB.ax.tick_params(labelsize=6.5)
+    axB.annotate(f"null · h = {iz0:.0f} px · radial\n"
+                 f"$\\nabla B$ eigs ({ev[0]:+.2f}, {ev[1]:+.2f}, {ev[2]:+.2f})\n"
+                 f"SR growth vector  Q = {Qn}",
+                 (ix0, iz0), (min(ix0, nx - 4), iz0 + 10), fontsize=7.4, color="k",
+                 ha="center", fontweight="bold",
+                 bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="k", alpha=0.92),
+                 arrowprops=dict(arrowstyle="->", color="k"))
+
+    fig.suptitle("A real solar magnetic null: magnetogram → coronal field → sub-Riemannian detection",
+                 fontsize=9.6, fontweight="bold")
+    fig.tight_layout(rect=[0, 0, 1, 0.96])
+    out = REPO / "public/img/posts/forbidden-directions-solar-null.png"
+    fig.savefig(out, bbox_inches="tight", dpi=150)
+    print(f"rendered {out.relative_to(REPO)}")
+
+
 def main():
     from sunpy.data.sample import HMI_LOS_IMAGE
     from astropy.io import fits
@@ -105,30 +175,7 @@ def main():
     (ROOT / "artifacts").mkdir(exist_ok=True)
     (ROOT / "artifacts" / "p2_solar_results.json").write_text(json.dumps(res, indent=2) + "\n")
 
-    # figure
-    try:
-        import matplotlib
-        matplotlib.use("Agg")
-        import matplotlib.pyplot as plt
-        fig, ax = plt.subplots(figsize=(5.4, 5.2), dpi=150)
-        v = np.percentile(np.abs(cut), 99)
-        ax.imshow(cut.T, origin="lower", cmap="RdBu_r", vmin=-v, vmax=v)
-        ax.plot(p[0], p[1], marker="*", ms=20, mfc="#ffd000", mec="k", mew=1.2)
-        ax.annotate(f"coronal null  (h={p[2]:.0f} px)\nradial · SR growth vector Q=6",
-                    (p[0], p[1]), (p[0] + 6, p[1] + 8), fontsize=8.5,
-                    color="k", fontweight="bold",
-                    bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="k", alpha=0.85),
-                    arrowprops=dict(arrowstyle="->", color="k"))
-        ax.set_title("Real SDO/HMI active region (2011-06-07) — magnetic null detected",
-                     fontsize=8.5)
-        ax.set_xlabel("x [px]", fontsize=8); ax.set_ylabel("y [px]", fontsize=8)
-        ax.tick_params(labelsize=7)
-        fig.tight_layout()
-        fig.savefig(REPO / "public/img/posts/forbidden-directions-solar-null.png",
-                    bbox_inches="tight", dpi=150)
-        print("rendered public/img/posts/forbidden-directions-solar-null.png")
-    except Exception as e:
-        print("figure skipped:", e)
+    render_figure(cut, B, nx, nz, p, ev, Qn)
 
     print("\nDONE: SR framework detects a REAL solar coronal magnetic null, agreeing with the"
           " standard eigenvalue finder on presence and order.")

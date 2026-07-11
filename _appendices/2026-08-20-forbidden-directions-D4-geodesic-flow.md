@@ -53,7 +53,7 @@ $$
 ## Larmor motion is the geodesic flow
 
 Read the last equation: the velocity direction $\theta$ turns at rate $B\,w$. A unit-speed curve
-whose direction turns at a constant rate is a **circle** of radius $r_L = 1/(B|w|)$ — exactly the
+whose direction turns at a constant rate is a **circle** of radius $r_L = 1/(B\lvert w\rvert)$ — exactly the
 **Larmor orbit** of a charged particle of the corresponding charge-to-mass ratio in the field
 $B$. The sub-Riemannian shortest paths are not an analogy for cyclotron motion; they *are*
 cyclotron motion, with the sub-Riemannian momentum $w$ playing the role set by the particle's
@@ -74,7 +74,7 @@ structure is the flat model of 3D contact sub-Riemannian geometry. The abstract 
 and the first system in a plasma course are the same object, and the identification is exact, not
 approximate.
 
-The code reproduces $t_c = 2\pi/(B_0|w|)$ to one part in $10^{11}$ across a range of $B_0$ and $w$,
+The code reproduces $t_c = 2\pi/(B_0\lvert w\rvert)$ to one part in $10^{11}$ across a range of $B_0$ and $w$,
 and the deviation for a *varying* field (Part 3) is measured against this exact baseline.
 
 ## Computing the conjugate locus for a general field
