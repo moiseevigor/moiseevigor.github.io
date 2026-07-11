@@ -1,0 +1,74 @@
+<!-- Click-to-expand lightbox for article images: dependency-free, keyboard-closable.
+     Wires every <img> inside the article body (skipping images that are links or
+     explicitly opted out with data-no-lightbox). Click / Esc / scroll closes. -->
+<style>
+  .d-article img, .post img { cursor: zoom-in; }
+  #lb-overlay {
+    position: fixed; inset: 0; z-index: 9999; display: none;
+    background: rgba(8, 10, 16, 0.92); cursor: zoom-out;
+    align-items: center; justify-content: center; padding: 2vmin;
+  }
+  #lb-overlay.open { display: flex; }
+  #lb-overlay img {
+    max-width: 96vw; max-height: 96vh; width: auto; height: auto;
+    border-radius: 4px; box-shadow: 0 8px 48px rgba(0,0,0,0.55);
+    cursor: zoom-out; background: #fff;
+  }
+  #lb-overlay figcaption {
+    position: absolute; left: 0; right: 0; bottom: 0.6rem; text-align: center;
+    color: #c7cdd8; font-size: 0.8rem; padding: 0 8vw;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    #lb-overlay img { animation: lb-in 140ms ease-out; }
+    @keyframes lb-in { from { transform: scale(0.965); opacity: 0.4; } }
+  }
+</style>
+<script>
+(function () {
+  var overlay, big, cap;
+  function ensure() {
+    if (overlay) return;
+    overlay = document.createElement("div");
+    overlay.id = "lb-overlay";
+    big = document.createElement("img");
+    cap = document.createElement("figcaption");
+    overlay.appendChild(big); overlay.appendChild(cap);
+    document.body.appendChild(overlay);
+    var close = function () {
+      overlay.classList.remove("open");
+      big.removeAttribute("src");
+      document.documentElement.style.overflow = "";
+    };
+    overlay.addEventListener("click", close);
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && overlay.classList.contains("open")) close();
+    });
+    window.addEventListener("scroll", function () {
+      if (overlay.classList.contains("open")) close();
+    }, { passive: true });
+  }
+  function open(img) {
+    ensure();
+    big.src = img.currentSrc || img.src;
+    big.alt = img.alt || "";
+    cap.textContent = img.alt || "";
+    overlay.classList.add("open");
+    document.documentElement.style.overflow = "hidden";
+  }
+  function wire() {
+    document.querySelectorAll(".d-article img, .post img").forEach(function (img) {
+      if (img.closest("a") || img.hasAttribute("data-no-lightbox")) return;
+      if (img.dataset.lbWired) return;
+      img.dataset.lbWired = "1";
+      img.addEventListener("click", function (e) {
+        e.preventDefault();
+        open(img);
+      });
+    });
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", wire);
+  } else { wire(); }
+}());
+</script>
