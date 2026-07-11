@@ -480,8 +480,8 @@ def _anatomy_rows(fig, axesrow, lines, p0, M, L, unit, row_title):
                 tip = p0 + sgn * 0.62 * L * u
                 ax.plot([p0[i], tip[i]], [p0[j], tip[j]], color="#1565c0", lw=1.0,
                         ls=":", zorder=3)
-        ax.plot(p0[i], p0[j], marker="*", ms=15, mfc="#ffd34d", mec="#442200",
-                mew=0.9, zorder=6)
+        # no marker at the null: the centre stays clean so the singularity itself
+        # (the field lines' X) is visible; spine arrows + fan ellipse locate it
         ax.set_xlim(p0[i] - L, p0[i] + L); ax.set_ylim(p0[j] - L, p0[j] + L)
         ax.set_aspect("equal"); ax.tick_params(labelsize=6.5)
         ax.set_title(pt, fontsize=8)
