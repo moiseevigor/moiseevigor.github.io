@@ -226,22 +226,27 @@ def skeleton(fast=False):
     true height scale), field lines occlusion-culled, null close-up inset."""
     from scipy.ndimage import zoom, map_coordinates, gaussian_filter
     bz = dict(load_magnetograms())["2012-03-07"]
-    # null-recentered survey volume: the null sits mid-box, so its lines have room
-    # in every direction before the honest wall fade (see _ar11429_volume)
+    # TWO volumes, like the AIA overlay: the null and its fan live in the
+    # null-recentred window; the arcade is traced in the FLUX-centred window so its
+    # loops root on the sunspot group itself (seeding the arcade in the null window
+    # put the core flux at the window edge and displaced the loops)
     cut, B, nulls, p0, (cy, cx) = _ar11429_volume()
     ny, nx, nz, _ = B.shape
+    cyf, cxf = 640, 640
+    cutf = zoom(bz[cyf - WIN // 2:cyf + WIN // 2, cxf - WIN // 2:cxf + WIN // 2],
+                CUT / WIN, order=1)
+    Bf, _Af = solar.potential_field(cutf, NZ, dz=1.0)
     print(f"skeleton null at {np.round(p0, 1)} of {len(nulls)} in the volume")
 
     # ---- traces in box coords (x, y in CUT px; z in CUT px of height) ------------
     rng = np.random.default_rng(2)
-    thr = np.percentile(np.abs(cut), 93.0)
-    iy, ix = np.where(np.abs(cut) >= thr)
-    w = np.abs(cut)[iy, ix]
+    iy, ix = np.where(np.abs(cutf) >= 250.0)
+    w = np.abs(cutf)[iy, ix]
     sel = rng.choice(len(ix), size=min(170, len(ix)), replace=False, p=w / w.sum())
     arcade = []
     for j in sel:
-        sgn = +1.0 if cut[iy[j], ix[j]] > 0 else -1.0
-        ln = _trace(B, np.array([ix[j], iy[j], 1.5]), sgn, ds=0.35, steps=1600)
+        sgn = +1.0 if cutf[iy[j], ix[j]] > 0 else -1.0
+        ln = _trace(Bf, np.array([ix[j], iy[j], 1.5]), sgn, ds=0.35, steps=1600)
         if len(ln) > 10:
             arcade.append((ln, w[j] / w.max()))
     skel = []
@@ -256,22 +261,29 @@ def skeleton(fast=False):
     ys, xs = np.where(np.abs(bz) > 0)
     cy0, cx0 = (ys.min() + ys.max()) / 2, (xs.min() + xs.max()) / 2
     Rpx = ((ys.max() - ys.min()) + (xs.max() - xs.min())) / 4
-    n0 = np.array([(cx - cx0) / Rpx, (cy - cy0) / Rpx, 0.0])
-    n0[2] = np.sqrt(1 - n0[0] ** 2 - n0[1] ** 2)
-    e1 = np.array([1.0, 0, 0]) - n0[0] * n0; e1 /= np.linalg.norm(e1)
-    e2 = np.array([0, 1.0, 0]) - n0[1] * n0 - (e1[1]) * e1; e2 /= np.linalg.norm(e2)
     sig = (WIN / CUT) / Rpx                       # radians (=R units) per CUT px
 
-    def embed(P):
-        """Box points (n,3) -> sphere frame via the exponential map at n0."""
-        P = np.atleast_2d(P)
-        a = (P[:, 0] - (nx - 1) / 2) * sig
-        b = (P[:, 1] - (ny - 1) / 2) * sig
-        rho = np.hypot(a, b)
-        s = np.where(rho > 1e-12, np.sin(rho) / np.maximum(rho, 1e-12), 1.0)
-        nhat = (np.cos(rho)[:, None] * n0 +
-                s[:, None] * (a[:, None] * e1 + b[:, None] * e2))
-        return (1.0 + P[:, 2] * sig)[:, None] * nhat
+    def make_embed(cxw, cyw):
+        """Tangent/exponential-map embed anchored at window (cxw, cyw)."""
+        nw = np.array([(cxw - cx0) / Rpx, (cyw - cy0) / Rpx, 0.0])
+        nw[2] = np.sqrt(1 - nw[0] ** 2 - nw[1] ** 2)
+        ew1 = np.array([1.0, 0, 0]) - nw[0] * nw; ew1 /= np.linalg.norm(ew1)
+        ew2 = np.array([0, 1.0, 0]) - nw[1] * nw - ew1[1] * ew1
+        ew2 /= np.linalg.norm(ew2)
+
+        def emb(P):
+            P = np.atleast_2d(P)
+            a = (P[:, 0] - (CUT - 1) / 2) * sig
+            b = (P[:, 1] - (CUT - 1) / 2) * sig
+            rho = np.hypot(a, b)
+            s = np.where(rho > 1e-12, np.sin(rho) / np.maximum(rho, 1e-12), 1.0)
+            nhat = (np.cos(rho)[:, None] * nw +
+                    s[:, None] * (a[:, None] * ew1 + b[:, None] * ew2))
+            return (1.0 + P[:, 2] * sig)[:, None] * nhat
+        return emb, nw
+
+    embed, n0 = make_embed(cx, cy)                # null window (fan, star, inset)
+    embedF, _n0f = make_embed(cxf, cyf)           # flux window (arcade)
 
     # ---- figure -------------------------------------------------------------------
     # NB (matplotlib 3.11): Axes3D clips artists to its centred square viewport, and
@@ -344,7 +356,7 @@ def skeleton(fast=False):
     # field lines (occlusion-culled, ends fading out, bundles dimming toward the
     # artificial box walls so shared exits cannot stack back into a hard cut)
     for ln, wgt in arcade:
-        _plot_faded(ax, embed(ln), d, color=ARC, lw=1.0 + 1.2 * wgt,
+        _plot_faded(ax, embedF(ln), d, color=ARC, lw=1.0 + 1.2 * wgt,
                     alpha=0.40 + 0.35 * wgt, zorder=3,
                     wpt=_edge_weight(ln, nx, ny, nz))
     for ln in skel:
@@ -685,14 +697,14 @@ def aia_overlay():
         sgn = +1.0 if cutf[iy[j], ix[j]] > 0 else -1.0
         ln = _trace(Bf, np.array([ix[j], iy[j], 1.5]), sgn, ds=0.35, steps=1600)
         if len(ln) > 10:
-            arcade.append((ln, w[j] / w.max()))
+            arcade.append((ln, w[j] / w.max(), sgn))
     skel = []
     for _ in range(22):
         u = rng.standard_normal(3); u /= np.linalg.norm(u)
         for sgn in (+1.0, -1.0):
             ln = _trace(B, p0 + 1.2 * u, sgn, ds=0.3, steps=2600)
             if len(ln) > 8:
-                skel.append(ln)
+                skel.append((ln, sgn))
 
     def box_to_aia(ln, cyw=None, cxw=None):
         """Box coords (cut px + height) -> AIA px, incl. line-of-sight parallax."""
@@ -715,24 +727,85 @@ def aia_overlay():
     x_lo, y_lo = int(ax0 - half), int(ay0 - half)
     crop = aia[y_lo:y_lo + 2 * half, x_lo:x_lo + 2 * half]
 
-    fig, ax = plt.subplots(figsize=(8.6, 8.2), dpi=150)
+    import matplotlib.patheffects as pe
+    OUTLINE = [pe.withStroke(linewidth=2.4, foreground="#100a02")]
+
+    fig, ax = plt.subplots(figsize=(8.6, 8.35), dpi=150)
     vmax = np.percentile(crop, 99.85)
     ax.imshow(np.clip(crop, 0, vmax) ** 0.5, origin="lower", cmap="sdoaia171")
     ax.set_xticks([]); ax.set_yticks([])
-    for ln, wgt in arcade:
+
+    def field_arrow(xs, ys, sgn, color, idx_frac=0.45):
+        """A small arrowhead ON the line, oriented along the FIELD direction."""
+        i = int(idx_frac * (len(xs) - 4)) + 2
+        i2 = i + 3 if sgn > 0 else i - 3
+        if not (0 <= i2 < len(xs)):
+            return
+        ax.annotate("", xy=(xs[i2], ys[i2]), xytext=(xs[i], ys[i]),
+                    arrowprops=dict(arrowstyle="-|>", color=color, lw=0.1,
+                                    mutation_scale=13), zorder=5)
+
+    for q, (ln, wgt, sgn) in enumerate(arcade):
         xa, ya = box_to_aia(ln, cyf, cxf)
-        ax.plot(xa - x_lo, ya - y_lo, color="#a9cdf0", lw=1.3,
-                alpha=0.30 + 0.40 * wgt)
-    for ln in skel:
+        xs, ys = xa - x_lo, ya - y_lo
+        ax.plot(xs, ys, color="#a9cdf0", lw=1.3, alpha=0.30 + 0.40 * wgt)
+        if q % 18 == 3:                                # a few field-direction arrows
+            field_arrow(xs, ys, sgn, "#d8ecff")
+    for q, (ln, sgn) in enumerate(skel):
         xa, ya = box_to_aia(ln)
-        ax.plot(xa - x_lo, ya - y_lo, color="#ff8b2e", lw=1.7, alpha=0.8)
+        xs, ys = xa - x_lo, ya - y_lo
+        ax.plot(xs, ys, color="#ff8b2e", lw=1.7, alpha=0.8)
+        if q % 14 == 5:
+            field_arrow(xs, ys, sgn, "#ffc07a")
     xn, yn = box_to_aia(p0[None, :])
     ax.plot(xn - x_lo, yn - y_lo, marker="*", ms=15, mfc="#ffd34d",
-            mec="#442200", mew=0.9)
+            mec="#442200", mew=0.9, zorder=6)
+
+    # the bipole's magnetic poles: flux-weighted centroids of the strong field
+    def pole_centroid(mask):
+        yy, xx = np.nonzero(mask)
+        ww = np.abs(cutf)[yy, xx]
+        pts = np.column_stack([xx.astype(float), yy.astype(float),
+                               np.zeros(len(xx))])
+        xa, ya = box_to_aia(pts, cyf, cxf)
+        return (float(np.average(xa, weights=ww)) - x_lo,
+                float(np.average(ya, weights=ww)) - y_lo)
+    px_, py_ = pole_centroid(cutf > 800)
+    nx_, ny_ = pole_centroid(cutf < -800)
+    for (qx, qy, s_) in ((px_, py_, "+"), (nx_, ny_, "−")):
+        ax.plot(qx, qy, marker="o", ms=13, mfc="none", mec="white", mew=1.6, zorder=7)
+        ax.text(qx, qy, s_, color="white", fontsize=11, fontweight="bold",
+                ha="center", va="center", zorder=8, path_effects=OUTLINE)
+
+    # annotations
+    ann = dict(color="white", fontsize=8.6, path_effects=OUTLINE, zorder=9,
+               arrowprops=dict(arrowstyle="->", color="white", lw=1.0))
+    ax.annotate("AR11429 — the bipole's two magnetic poles\n(+ field out of the Sun, "
+                "− into it)", xy=(px_, py_ + 18), xytext=(0.03, 0.965),
+                textcoords="axes fraction", va="top", **ann)
+    ax.annotate("computed arcade: field lines run + → −,\ndraping over the "
+                "observed EUV loops", xy=((px_ + nx_) / 2, (py_ + ny_) / 2 - 120),
+                xytext=(0.60, 0.585), textcoords="axes fraction", **ann)
+    ax.annotate("coronal null (★) and its fan:\nwhere reconnection can start",
+                xy=(float(xn[0] - x_lo) + 8, float(yn[0] - y_lo) - 8),
+                xytext=(0.035, 0.295), textcoords="axes fraction", **ann)
+    ax.text(0.985, 0.015, "arrowheads = direction of B · background: real "
+            "SDO/AIA 171 Å, 2012-03-07 00:00 UT",
+            transform=ax.transAxes, color="white", fontsize=7.2, ha="right",
+            va="bottom", path_effects=OUTLINE)
     ax.set_xlim(0, crop.shape[1]); ax.set_ylim(0, crop.shape[0])   # clamp to image
-    ax.set_title("AR11429, 2012-03-07 00:00 UT — our potential-field lines (blue: "
-                 "arcade; orange: null) over the real SDO/AIA 171 Å corona",
-                 fontsize=9.5, fontweight="bold")
+
+    # full-disk locator: where on the Sun we are
+    axl = fig.add_axes([0.012, 0.012, 0.205, 0.205])
+    disk = aia[::8, ::8]
+    axl.imshow(np.clip(disk, 0, vmax) ** 0.5, origin="lower", cmap="sdoaia171")
+    axl.add_patch(plt.Rectangle((x_lo / 8, y_lo / 8), crop.shape[1] / 8,
+                                crop.shape[0] / 8, fill=False, ec="white", lw=1.1))
+    axl.annotate("N", xy=(0.5, 0.97), xycoords="axes fraction", color="white",
+                 fontsize=7.5, ha="center", va="top", path_effects=OUTLINE)
+    axl.set_xticks([]); axl.set_yticks([])
+    for s_ in axl.spines.values():
+        s_.set_edgecolor("white"); s_.set_linewidth(0.8)
     fig.tight_layout()
     out = REPO / "public/img/posts/forbidden-directions-aia-overlay.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)
@@ -875,10 +948,10 @@ def render_aia_gif():
             b = cutl[sy, sx]
             if abs(b) < 120.0:
                 continue
-            ln = _trace(Bl, np.array([sx, sy, 1.5]), +1.0 if b > 0 else -1.0,
-                        ds=0.4, steps=2000)
+            sgn_a = +1.0 if b > 0 else -1.0
+            ln = _trace(Bl, np.array([sx, sy, 1.5]), sgn_a, ds=0.4, steps=2000)
             if len(ln) > 10:
-                arcade.append((ln, min(abs(b) / 1200.0, 1.0), ln[-1, 2] < 1.2))
+                arcade.append((ln, min(abs(b) / 1200.0, 1.0), ln[-1, 2] < 1.2, sgn_a))
 
         # null: re-detect near the window centre, track identity
         nulls = [nl for nl in solar.find_nulls(Bn, seeds_per_axis=12)
@@ -908,7 +981,7 @@ def render_aia_gif():
                             if len(ln2) > 4:
                                 lnL = np.vstack([lnL, ln2])
                         closed = lnL[-1, 2] < 1.2      # reached the photosphere
-                        skel.append((lnL, closed))
+                        skel.append((lnL, closed, sgn))
         track.append({"t": tstamp, "found": null_ok,
                       "h_px": round(float(p0[2]), 1) if null_ok else None})
         print(f"frame {k+1}/{n_fr} {tstamp}  arcade {len(arcade)}  "
@@ -940,14 +1013,44 @@ def render_aia_gif():
         fig, ax = plt.subplots(figsize=(6.4, 6.55), dpi=100)
         ax.imshow(np.clip(crop, 0, vmax) ** 0.5, origin="lower", cmap="sdoaia171",
                   vmin=0, vmax=vmax ** 0.5)
-        for ln, wgt, closed in arcade:
+        def field_arrow(xs, ys, sgn_, color):
+            i = int(0.45 * (len(xs) - 4)) + 2
+            i2 = i + 3 if sgn_ > 0 else i - 3
+            if 0 <= i2 < len(xs):
+                ax.annotate("", xy=(xs[i2], ys[i2]), xytext=(xs[i], ys[i]),
+                            arrowprops=dict(arrowstyle="-|>", color=color, lw=0.1,
+                                            mutation_scale=10), zorder=5)
+
+        for q, (ln, wgt, closed, sgn_a) in enumerate(arcade):
             xa, ya = b2a(ln, cyl, cxl, winw=WINL)
-            _plot2d_faded(ax, xa - x_lo, ya - y_lo, "#a9cdf0", 1.0,
+            xs, ys = xa - x_lo, ya - y_lo
+            _plot2d_faded(ax, xs, ys, "#a9cdf0", 1.0,
                           0.25 + 0.35 * wgt, fade_end=not closed, zorder=2)
-        for lnL, closed in skel:
+            if q % 40 == 7:                          # sparse arrows (lighter than static)
+                field_arrow(xs, ys, sgn_a, "#d8ecff")
+        for q, (lnL, closed, sgn_f) in enumerate(skel):
             xa, ya = b2a(lnL, cyl, cxl, winw=WINL)
-            _plot2d_faded(ax, xa - x_lo, ya - y_lo, "#ff8b2e", 1.4, 0.8,
+            xs, ys = xa - x_lo, ya - y_lo
+            _plot2d_faded(ax, xs, ys, "#ff8b2e", 1.4, 0.8,
                           fade_end=not closed, zorder=3)
+            if q % 20 == 9:
+                field_arrow(xs, ys, sgn_f, "#ffc07a")
+
+        # the bipole's poles, lightly marked
+        for msk, s_ in ((cutl > 800, "+"), (cutl < -800, "−")):
+            yy, xx = np.nonzero(msk)
+            if len(xx) < 5:
+                continue
+            ww = np.abs(cutl)[yy, xx]
+            pts = np.column_stack([xx.astype(float), yy.astype(float),
+                                   np.zeros(len(xx))])
+            xa, ya = b2a(pts, cyl, cxl, winw=WINL)
+            qx = float(np.average(xa, weights=ww)) - x_lo
+            qy = float(np.average(ya, weights=ww)) - y_lo
+            ax.plot(qx, qy, marker="o", ms=9, mfc="none", mec="white", mew=1.1,
+                    zorder=6)
+            ax.text(qx, qy, s_, color="white", fontsize=8, fontweight="bold",
+                    ha="center", va="center", zorder=7)
         if null_ok:
             xn_, yn_ = b2a(p0[None, :], cyn, cxn)
             ax.plot(xn_ - x_lo, yn_ - y_lo, marker="*", ms=13, mfc="#ffd34d",
@@ -963,8 +1066,6 @@ def render_aia_gif():
         elif 70 <= mins <= 80:
             ax.text(0.02, 0.925, "X1.3 flare", transform=ax.transAxes,
                     color="#ff6644", fontsize=11, va="top", fontweight="bold")
-        ax.set_title("skeleton re-extrapolated from each frame's own HMI magnetogram",
-                     fontsize=8.6)
         fig.tight_layout(pad=0.4)
         buf = io.BytesIO()
         fig.savefig(buf, format="png", dpi=100)

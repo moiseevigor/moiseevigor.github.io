@@ -79,7 +79,10 @@ numerical zero test with no scale attached. The growth vector has a *law* for it
     <strong>The corona computed, over the corona seen.</strong> The real EUV corona of
     AR11429 at the same hour — SDO/AIA 171 Å, million-kelvin plasma lighting up the true
     field lines — with <em>our</em> potential-field extrapolation drawn on top (blue: the
-    arcade; orange: the null's spine and fan, ★ the null). The two datasets are
+    arcade; orange: the null's spine and fan, ★ the null). The circled <strong>+/−</strong>
+    mark the bipole's two magnetic poles (flux-weighted centroids of the measured surface
+    field); arrowheads give the direction of $\mathbf B$, running + → −; the inset shows
+    where on the full solar disk this frame sits (N up). The two datasets are
     independent: AIA sees plasma, HMI measured the surface field the extrapolation grew
     from — and cross-registering them required correcting HMI's 180° camera rotation
     (CROTA2) against AIA's upright frame, with the disk geometry taken from the FITS
@@ -117,24 +120,11 @@ numerical zero test with no scale attached. The growth vector has a *law* for it
     reach the photosphere (crisp) or the edge of the modelled region (fading). Frames
     exposure-normalised, per-frame FITS registration. Pipeline: <code>fetch_aia_seq.py</code> + <code>fetch_hmi_seq.py</code>
     + <code>render_aia_gif</code>; null track in
-    <code>artifacts/aia_gif_null_track.json</code>. Pipeline:
+    <code>artifacts/aia_gif_null_track.json</code>. <em>Footnote:</em> the full
+    cinematic sequence of this region is on YouTube —
+    <a href="https://www.youtube.com/watch?v=4qIV1iPUOxY">AR11429 2012-03-07,
+    SDO/AIA 171 Å</a> (NASA SDO footage). Pipeline:
     <code>scripts/fetch_aia_seq.py</code> + <code>render_aia_gif</code>.
-  </figcaption>
-</figure>
-
-<figure class="l-body" id="fig-aia-video">
-  <div style="position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:4px;">
-    <iframe src="https://www.youtube-nocookie.com/embed/4qIV1iPUOxY"
-      title="AR11429 2012-03-07 SDO/AIA 171 Å"
-      style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
-      loading="lazy" allowfullscreen></iframe>
-  </div>
-  <figcaption>
-    <strong>The same region, alive.</strong> SDO/AIA 171 Å footage of AR11429 on
-    2012-03-07 — the day of the frames above. Watch the loop systems writhe and
-    brighten: every filament is a field line rendered in plasma, and the topology those
-    posts compute is the skeleton this movie moves on. Footage: NASA SDO/AIA
-    (video compilation by sscardigli).
   </figcaption>
 </figure>
 
