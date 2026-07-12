@@ -99,15 +99,21 @@ numerical zero test with no scale attached. The growth vector has a *law* for it
       style="max-width:min(100%,640px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
-    <strong>The skeleton, then the detonation.</strong> Sixteen real AIA 171 Å frames
-    spanning 00:00–01:30 UT with our <em>pre-flare</em> skeleton (computed from the
-    00:01 magnetogram) frozen on top: the <strong>X5.4 flare</strong> erupts at 00:02
-    and peaks near 00:24, followed by an X1.3 near 01:14 — the loop systems brighten,
-    writhe, and reconnect around the topology computed minutes earlier. Frames are
-    exposure-normalised (AIA shortens its exposure during flares); each frame is
-    registered through its own FITS header, and the skeleton <em>co-rotates</em> with
-    the plasma (rigid solar rotation applied per frame — the field belongs to the Sun,
-    not to the camera). Pipeline:
+    <strong>The skeleton evolving through the detonation.</strong> Sixteen real AIA
+    171 Å frames spanning 00:00–01:30 UT, and the skeleton now <em>evolves with the
+    Sun</em>: each frame's overlay is re-extrapolated from its own HMI magnetogram
+    (measured at the matching minute), the arcade re-traced from the same physical
+    footpoints in co-rotating windows, and the null re-detected and identity-tracked in
+    a stable co-rotating domain. Watch the measured track: the null <strong>descends
+    from 3.9 px toward the surface exactly through the X5.4 flare</strong> (h = 1.5 px
+    at the 00:24 peak), skims the boundary until ~00:48, and is lost after the X1.3 —
+    within this windowed potential model, at survey resolution. And the deeper honest
+    point stands: a potential field holds <em>no free energy</em>, so the skeleton can
+    only breathe with the boundary data while the EUV corona reorganises violently —
+    that difference <em>is</em> the flare. Frames exposure-normalised, per-frame FITS
+    registration. Pipeline: <code>fetch_aia_seq.py</code> + <code>fetch_hmi_seq.py</code>
+    + <code>render_aia_gif</code>; null track in
+    <code>artifacts/aia_gif_null_track.json</code>. Pipeline:
     <code>scripts/fetch_aia_seq.py</code> + <code>render_aia_gif</code>.
   </figcaption>
 </figure>

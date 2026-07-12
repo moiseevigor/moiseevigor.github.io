@@ -740,134 +740,199 @@ def aia_overlay():
 
 
 def render_aia_gif():
-    """The flare GIF: 16 real AIA 171 A frames across the X5.4 flare of 2012-03-07
-    (onset 00:02, peak ~00:24, X1.3 at ~01:14) with the static pre-flare skeleton
-    (computed from the 00:01 magnetogram) overlaid. Per-frame header registration;
-    counts normalised by EXPTIME (AIA shortens exposure during flares)."""
+    """The flare GIF with a TIME-EVOLVING skeleton: for each of the 16 AIA frames the
+    matching HMI magnetogram (45 s cadence, fetched at the same times) is extrapolated
+    afresh, the arcade re-traced from the SAME physical footpoints (co-rotating
+    windows, fixed window-relative seeds -> temporally coherent lines), and the null
+    RE-DETECTED and tracked frame to frame. What the movie shows honestly: the
+    potential skeleton breathes with the measured surface field, while the EUV corona
+    reorganises far more violently -- a potential field holds no free energy, and the
+    difference IS the flare. The null track (position, height, persistence through the
+    X5.4) is printed and saved to artifacts/aia_gif_null_track.json."""
     from astropy.io import fits
     from scipy.ndimage import zoom as _zoom
     from PIL import Image
     import io
     import sunpy.visualization.colormaps  # noqa: F401
 
-    frames_f = sorted((ROOT / "artifacts" / "hmi" / "aia_seq").glob("*.fits"))
-    assert len(frames_f) >= 8, "run scripts/fetch_aia_seq.py first"
+    aia_files = sorted((ROOT / "artifacts" / "hmi" / "aia_seq").glob("*.fits"))
+    hmi_files = sorted((ROOT / "artifacts" / "hmi" / "hmi_seq").glob("*.fits"))
+    assert len(aia_files) >= 8 and len(hmi_files) >= 8, "fetch aia_seq + hmi_seq first"
+    n_fr = min(len(aia_files), len(hmi_files))
 
-    # HMI geometry + the two volumes + lines (same construction as aia_overlay)
-    hmi_f = sorted((ROOT / "artifacts" / "hmi").glob("hmi.m_45s.2012*"))[0]
-    hh = fits.open(hmi_f); hh.verify("silentfix")
-    hhdr = next(x.header for x in hh if getattr(x, "data", None) is not None
-                and x.data.ndim == 2)
-    s4 = 1024.0 / hhdr["NAXIS1"]
-    hcx = (hhdr["CRPIX1"] - 1) * s4
-    hcy = (hhdr["CRPIX2"] - 1) * s4
-    hR = hhdr["RSUN_OBS"] / hhdr["CDELT1"] * s4
-    bz = dict(load_magnetograms())["2012-03-07"]
-    cut, B, nulls, p0, (cy, cx) = _ar11429_volume()
-    cyf, cxf = 640, 640
-    cutf = _zoom(bz[cyf - WIN // 2:cyf + WIN // 2, cxf - WIN // 2:cxf + WIN // 2],
-                 CUT / WIN, order=1)
-    Bf, _Af = solar.potential_field(cutf, NZ, dz=1.0)
-    rng = np.random.default_rng(2)
-    iy, ix = np.where(np.abs(cutf) >= 250.0)
-    w = np.abs(cutf)[iy, ix]
-    sel = rng.choice(len(ix), size=min(140, len(ix)), replace=False, p=w / w.sum())
-    arcade = []
-    for j in sel:
-        sgn = +1.0 if cutf[iy[j], ix[j]] > 0 else -1.0
-        ln = _trace(Bf, np.array([ix[j], iy[j], 1.5]), sgn, ds=0.35, steps=1600)
-        if len(ln) > 10:
-            arcade.append((ln, w[j] / w.max()))
-    skel = []
-    for _ in range(22):
-        u = rng.standard_normal(3); u /= np.linalg.norm(u)
-        for sgn in (+1.0, -1.0):
-            ln = _trace(B, p0 + 1.2 * u, sgn, ds=0.3, steps=2600)
-            if len(ln) > 8:
-                skel.append(ln)
-
-    vmax = None
-    ims = []
-    for k, f in enumerate(frames_f):
+    def read2d(f):
         hdul = fits.open(f); hdul.verify("silentfix")
         h = next(h for h in hdul if getattr(h, "data", None) is not None
                  and h.data.ndim == 2)
-        aia = np.nan_to_num(np.asarray(h.data, float)) / max(
-            float(h.header.get("EXPTIME", 2.9)), 0.1)
-        ahdr = h.header
+        return np.nan_to_num(np.asarray(h.data, float)), h.header
+
+    def hmi_geom(hdr):
+        s4 = 1024.0 / hdr["NAXIS1"]
+        return ((hdr["CRPIX1"] - 1) * s4, (hdr["CRPIX2"] - 1) * s4,
+                hdr["RSUN_OBS"] / hdr["CDELT1"] * s4)
+
+    OMEGA = np.radians(13.3 / 1440.0)                  # synodic, rad/min
+
+    def rotate_hmi_pt(p0_xy, g0, gk, dmin):
+        """HMI_0 px -> HMI_k px: to upright disk coords, rigid-rotate, back."""
+        (hcx0, hcy0, hR0), (hcxk, hcyk, hRk) = g0, gk
+        rx = -(p0_xy[0] - hcx0) / hR0                  # upright = negated (CROTA2~180)
+        ry = -(p0_xy[1] - hcy0) / hR0
+        rz = np.sqrt(max(1 - rx * rx - ry * ry, 0.0))
+        a = OMEGA * dmin
+        rx2 = rx * np.cos(a) + rz * np.sin(a)
+        return (hcxk - rx2 * hRk, hcyk - ry * hRk)
+
+    # ---- frame 0 setup: windows, seeds, fan directions ---------------------------
+    bz0_full, hh0 = read2d(hmi_files[0])
+    if bz0_full.shape[0] > 2048:
+        bz0_full = _zoom(bz0_full, 1024 / bz0_full.shape[0], order=1)
+    g0 = hmi_geom(hh0)
+    flux_c0 = (647.0, 698.0)                           # (cx, cy) flux window, HMI_0
+    cut0 = None
+    rng = np.random.default_rng(2)
+    fan_dirs = []
+    for _ in range(22):
+        u = rng.standard_normal(3); u /= np.linalg.norm(u)
+        fan_dirs.append(u)
+    # flux window & fixed seeds from frame 0 (window-relative CUT coords)
+    cxf0, cyf0 = 640, 640
+    cutf0 = _zoom(bz0_full[cyf0 - WIN // 2:cyf0 + WIN // 2,
+                           cxf0 - WIN // 2:cxf0 + WIN // 2], CUT / WIN, order=1)
+    iy, ix = np.where(np.abs(cutf0) >= 250.0)
+    w0 = np.abs(cutf0)[iy, ix]
+    sel = rng.choice(len(ix), size=min(140, len(ix)), replace=False, p=w0 / w0.sum())
+    seed_xy = [(int(ix[j]), int(iy[j])) for j in sel]
+    # null window: co-rotates RIGIDLY from frame 0 (a stable patch of Sun -- if the
+    # window followed the tracked null, the extrapolation domain itself would jitter
+    # and window-sensitivity would masquerade as field evolution). The null is then
+    # tracked WITHIN the stable window by nearest-neighbour to its previous position.
+    null_win0 = (647.0, 698.0)
+    p_prev = np.array([(CUT - 1) / 2, (CUT - 1) / 2])   # window coords, init centre
+
+    vmax = None
+    ims, track = [], []
+    for k in range(n_fr):
+        bzk, hhk = read2d(hmi_files[k])
+        if bzk.shape[0] > 2048:
+            bzk = _zoom(bzk, 1024 / bzk.shape[0], order=1)
+        gk = hmi_geom(hhk)
+        aia, ahdr = read2d(aia_files[k])
+        aia = aia / max(float(ahdr.get("EXPTIME", 2.9)), 0.1)
         acx, acy = ahdr["CRPIX1"] - 1, ahdr["CRPIX2"] - 1
         arsun = ahdr["RSUN_OBS"] / ahdr["CDELT1"]
         tstamp = str(ahdr.get("T_OBS") or ahdr.get("DATE-OBS"))[11:16]
+        dmin = 6.0 * k
+
+        # co-rotating windows in HMI_k coordinates
+        cxf, cyf = rotate_hmi_pt((cxf0, cyf0), g0, gk, dmin)
+        cxf, cyf = int(round(cxf)), int(round(cyf))
+        cxn, cyn = rotate_hmi_pt(null_win0, g0, gk, dmin)
+        cxn, cyn = int(round(cxn)), int(round(cyn))
+
+        cutf = _zoom(bzk[cyf - WIN // 2:cyf + WIN // 2,
+                         cxf - WIN // 2:cxf + WIN // 2], CUT / WIN, order=1)
+        Bf, _ = solar.potential_field(cutf, NZ, dz=1.0)
+        cutn = _zoom(bzk[cyn - WIN // 2:cyn + WIN // 2,
+                         cxn - WIN // 2:cxn + WIN // 2], CUT / WIN, order=1)
+        Bn, _ = solar.potential_field(cutn, NZ, dz=1.0)
+        ny, nx, nz, _ = Bn.shape
+
+        # arcade: SAME physical footpoints every frame (temporal coherence)
+        arcade = []
+        for (sx, sy) in seed_xy:
+            b = cutf[sy, sx]
+            if abs(b) < 120.0:
+                continue
+            ln = _trace(Bf, np.array([sx, sy, 1.5]), +1.0 if b > 0 else -1.0,
+                        ds=0.35, steps=1600)
+            if len(ln) > 10:
+                arcade.append((ln, min(abs(b) / 1200.0, 1.0)))
+
+        # null: re-detect near the window centre, track identity
+        nulls = [nl for nl in solar.find_nulls(Bn, seeds_per_axis=12)
+                 if 6 < nl["p"][0] < nx - 6 and 6 < nl["p"][1] < ny - 6
+                 and 1.4 < nl["p"][2] < nz - 4]
+        skel, null_ok, p0 = [], False, None
+        if nulls:
+            nulls.sort(key=lambda nl: np.linalg.norm(nl["p"][:2] - p_prev))
+            if np.linalg.norm(nulls[0]["p"][:2] - p_prev) < 18:
+                p0 = nulls[0]["p"]
+                p_prev = p0[:2].copy()
+                null_ok = True
+                for u in fan_dirs:
+                    for sgn in (+1.0, -1.0):
+                        ln = _trace(Bn, p0 + 1.2 * u, sgn, ds=0.3, steps=2600)
+                        if len(ln) > 8:
+                            skel.append(ln)
+        track.append({"t": tstamp, "found": null_ok,
+                      "h_px": round(float(p0[2]), 1) if null_ok else None})
+        print(f"frame {k+1}/{n_fr} {tstamp}  arcade {len(arcade)}  "
+              f"null {'h=%.1f' % p0[2] if null_ok else 'LOST'}")
 
         def h2a(xh, yh):
-            return (acx - (np.asarray(xh) - hcx) / hR * arsun,
-                    acy - (np.asarray(yh) - hcy) / hR * arsun)
+            hcxk, hcyk, hRk = gk
+            return (acx - (np.asarray(xh) - hcxk) / hRk * arsun,
+                    acy - (np.asarray(yh) - hcyk) / hRk * arsun)
 
         def b2a(ln, cyw, cxw):
+            hcxk, hcyk, hRk = gk
             xh = cxw - WIN / 2 + ln[:, 0] * (WIN / CUT)
             yh = cyw - WIN / 2 + ln[:, 1] * (WIN / CUT)
             xa, ya = h2a(xh, yh)
             rx = (xa - acx) / arsun; ry = (ya - acy) / arsun
-            hpx = ln[:, 2] * (WIN / CUT) / hR * arsun
+            hpx = ln[:, 2] * (WIN / CUT) / hRk * arsun
             return xa + hpx * rx, ya + hpx * ry
 
-        # SOLAR ROTATION: the magnetic skeleton co-rotates with the plasma. Rigid
-        # rotation about the solar y-axis (AIA CROTA2 ~ 0 => rotation axis ~ image
-        # y up to the small B0/P angles; differential rotation over 90 min is
-        # negligible). Applied to every overlay point AND the crop centre, so the
-        # region and its skeleton stay locked together in frame.
-        mins_k = int(tstamp[:2]) * 60 + int(tstamp[3:5])
-        ang = np.radians(13.3 / 1440.0) * mins_k       # synodic ~13.3 deg/day
-
-        def corot(xa, ya):
-            xr = np.asarray(xa) - acx
-            yr = np.asarray(ya) - acy
-            zr = np.sqrt(np.maximum(arsun ** 2 - xr ** 2 - yr ** 2, 0.0))
-            return acx + xr * np.cos(ang) + zr * np.sin(ang), ya
-
-        axn, ayn = corot(*h2a(cx, cy))
-        axf_, ayf_ = corot(*h2a(cxf, cyf))
+        axn, ayn = h2a(cxn, cyn)
+        axf_, ayf_ = h2a(cxf, cyf)
         ax0, ay0 = (axn + axf_) / 2, (ayn + ayf_) / 2
-        half = int(1.35 * WIN / hR * arsun / 2) + 100
+        half = int(1.35 * WIN / gk[2] * arsun / 2) + 100
         x_lo, y_lo = int(ax0 - half), int(ay0 - half)
         crop = aia[y_lo:y_lo + 2 * half, x_lo:x_lo + 2 * half]
         if vmax is None:
-            vmax = 1.6 * np.percentile(crop, 99.85)   # headroom for the flare
+            vmax = 1.6 * np.percentile(crop, 99.85)
 
         fig, ax = plt.subplots(figsize=(6.4, 6.55), dpi=100)
         ax.imshow(np.clip(crop, 0, vmax) ** 0.5, origin="lower", cmap="sdoaia171",
                   vmin=0, vmax=vmax ** 0.5)
         for ln, wgt in arcade:
-            xa, ya = corot(*b2a(ln, cyf, cxf))
+            xa, ya = b2a(ln, cyf, cxf)
             ax.plot(xa - x_lo, ya - y_lo, color="#a9cdf0", lw=1.0,
                     alpha=0.25 + 0.35 * wgt)
         for ln in skel:
-            xa, ya = corot(*b2a(ln, cy, cx))
+            xa, ya = b2a(ln, cyn, cxn)
             ax.plot(xa - x_lo, ya - y_lo, color="#ff8b2e", lw=1.4, alpha=0.8)
-        xn, yn = corot(*b2a(p0[None, :], cy, cx))
-        ax.plot(xn - x_lo, yn - y_lo, marker="*", ms=13, mfc="#ffd34d",
-                mec="#442200", mew=0.9)
+        if null_ok:
+            xn_, yn_ = b2a(p0[None, :], cyn, cxn)
+            ax.plot(xn_ - x_lo, yn_ - y_lo, marker="*", ms=13, mfc="#ffd34d",
+                    mec="#442200", mew=0.9)
         ax.set_xlim(0, crop.shape[1]); ax.set_ylim(0, crop.shape[0])
         ax.set_xticks([]); ax.set_yticks([])
         ax.text(0.02, 0.975, f"2012-03-07  {tstamp} UT", transform=ax.transAxes,
                 color="white", fontsize=10, va="top", fontweight="bold")
-        mins = mins_k
+        mins = int(tstamp[:2]) * 60 + int(tstamp[3:5])
         if 20 <= mins <= 34:
             ax.text(0.02, 0.925, "X5.4 flare", transform=ax.transAxes,
                     color="#ff6644", fontsize=11, va="top", fontweight="bold")
         elif 70 <= mins <= 80:
             ax.text(0.02, 0.925, "X1.3 flare", transform=ax.transAxes,
                     color="#ff6644", fontsize=11, va="top", fontweight="bold")
-        ax.set_title("the pre-flare skeleton (00:01 extrapolation) as the region "
-                     "detonates", fontsize=8.6)
+        ax.set_title("skeleton re-extrapolated from each frame's own HMI magnetogram",
+                     fontsize=8.6)
         fig.tight_layout(pad=0.4)
         buf = io.BytesIO()
         fig.savefig(buf, format="png", dpi=100)
         plt.close(fig)
         buf.seek(0)
         ims.append(Image.open(buf).convert("P", palette=Image.ADAPTIVE, colors=160))
-        print(f"frame {k+1}/{len(frames_f)}  {tstamp}")
 
+    import json as _json
+    (ROOT / "artifacts" / "aia_gif_null_track.json").write_text(
+        _json.dumps(track, indent=2) + "\n")
+    found = sum(1 for r in track if r["found"])
+    print(f"null persistence: {found}/{n_fr} frames; track -> "
+          "artifacts/aia_gif_null_track.json")
     out = REPO / "public/img/posts/forbidden-directions-aia-flare.gif"
     ims[0].save(out, save_all=True, append_images=ims[1:], duration=260, loop=0,
                 optimize=True)
