@@ -105,7 +105,9 @@ numerical zero test with no scale attached. The growth vector has a *law* for it
     and peaks near 00:24, followed by an X1.3 near 01:14 — the loop systems brighten,
     writhe, and reconnect around the topology computed minutes earlier. Frames are
     exposure-normalised (AIA shortens its exposure during flares); each frame is
-    registered through its own FITS header. Pipeline:
+    registered through its own FITS header, and the skeleton <em>co-rotates</em> with
+    the plasma (rigid solar rotation applied per frame — the field belongs to the Sun,
+    not to the camera). Pipeline:
     <code>scripts/fetch_aia_seq.py</code> + <code>render_aia_gif</code>.
   </figcaption>
 </figure>

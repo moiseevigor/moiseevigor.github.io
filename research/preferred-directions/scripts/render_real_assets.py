@@ -811,8 +811,22 @@ def render_aia_gif():
             hpx = ln[:, 2] * (WIN / CUT) / hR * arsun
             return xa + hpx * rx, ya + hpx * ry
 
-        axn, ayn = h2a(cx, cy)
-        axf_, ayf_ = h2a(cxf, cyf)
+        # SOLAR ROTATION: the magnetic skeleton co-rotates with the plasma. Rigid
+        # rotation about the solar y-axis (AIA CROTA2 ~ 0 => rotation axis ~ image
+        # y up to the small B0/P angles; differential rotation over 90 min is
+        # negligible). Applied to every overlay point AND the crop centre, so the
+        # region and its skeleton stay locked together in frame.
+        mins_k = int(tstamp[:2]) * 60 + int(tstamp[3:5])
+        ang = np.radians(13.3 / 1440.0) * mins_k       # synodic ~13.3 deg/day
+
+        def corot(xa, ya):
+            xr = np.asarray(xa) - acx
+            yr = np.asarray(ya) - acy
+            zr = np.sqrt(np.maximum(arsun ** 2 - xr ** 2 - yr ** 2, 0.0))
+            return acx + xr * np.cos(ang) + zr * np.sin(ang), ya
+
+        axn, ayn = corot(*h2a(cx, cy))
+        axf_, ayf_ = corot(*h2a(cxf, cyf))
         ax0, ay0 = (axn + axf_) / 2, (ayn + ayf_) / 2
         half = int(1.35 * WIN / hR * arsun / 2) + 100
         x_lo, y_lo = int(ax0 - half), int(ay0 - half)
@@ -824,20 +838,20 @@ def render_aia_gif():
         ax.imshow(np.clip(crop, 0, vmax) ** 0.5, origin="lower", cmap="sdoaia171",
                   vmin=0, vmax=vmax ** 0.5)
         for ln, wgt in arcade:
-            xa, ya = b2a(ln, cyf, cxf)
+            xa, ya = corot(*b2a(ln, cyf, cxf))
             ax.plot(xa - x_lo, ya - y_lo, color="#a9cdf0", lw=1.0,
                     alpha=0.25 + 0.35 * wgt)
         for ln in skel:
-            xa, ya = b2a(ln, cy, cx)
+            xa, ya = corot(*b2a(ln, cy, cx))
             ax.plot(xa - x_lo, ya - y_lo, color="#ff8b2e", lw=1.4, alpha=0.8)
-        xn, yn = b2a(p0[None, :], cy, cx)
+        xn, yn = corot(*b2a(p0[None, :], cy, cx))
         ax.plot(xn - x_lo, yn - y_lo, marker="*", ms=13, mfc="#ffd34d",
                 mec="#442200", mew=0.9)
         ax.set_xlim(0, crop.shape[1]); ax.set_ylim(0, crop.shape[0])
         ax.set_xticks([]); ax.set_yticks([])
         ax.text(0.02, 0.975, f"2012-03-07  {tstamp} UT", transform=ax.transAxes,
                 color="white", fontsize=10, va="top", fontweight="bold")
-        mins = int(tstamp[:2]) * 60 + int(tstamp[3:5])
+        mins = mins_k
         if 20 <= mins <= 34:
             ax.text(0.02, 0.925, "X5.4 flare", transform=ax.transAxes,
                     color="#ff6644", fontsize=11, va="top", fontweight="bold")
