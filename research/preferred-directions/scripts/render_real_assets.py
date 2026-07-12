@@ -814,20 +814,26 @@ def render_aia_gif():
     for _ in range(22):
         u = rng.standard_normal(3); u /= np.linalg.norm(u)
         fan_dirs.append(u)
-    # flux window & fixed seeds from frame 0 (window-relative CUT coords)
-    cxf0, cyf0 = 640, 640
-    cutf0 = _zoom(bz0_full[cyf0 - WIN // 2:cyf0 + WIN // 2,
-                           cxf0 - WIN // 2:cxf0 + WIN // 2], CUT / WIN, order=1)
-    iy, ix = np.where(np.abs(cutf0) >= 250.0)
-    w0 = np.abs(cutf0)[iy, ix]
-    sel = rng.choice(len(ix), size=min(140, len(ix)), replace=False, p=w0 / w0.sum())
-    seed_xy = [(int(ix[j]), int(iy[j])) for j in sel]
     # null window: co-rotates RIGIDLY from frame 0 (a stable patch of Sun -- if the
     # window followed the tracked null, the extrapolation domain itself would jitter
     # and window-sensitivity would masquerade as field evolution). The null is then
     # tracked WITHIN the stable window by nearest-neighbour to its previous position.
     null_win0 = (647.0, 698.0)
     p_prev = np.array([(CUT - 1) / 2, (CUT - 1) / 2])   # window coords, init centre
+
+    # arcade seeds from the WIDE window (covers the whole displayed crop, so the
+    # northern bipoles and neighbouring loop systems get lines too, not just the
+    # core's 160-px surroundings); fixed frame-0 positions for temporal coherence
+    cxf0, cyf0 = 640, 640
+    WINL, CUTL, NZL = 360, 225, 64
+    cxl0 = int(round((cxf0 + null_win0[0]) / 2))
+    cyl0 = int(round((cyf0 + null_win0[1]) / 2))
+    cutl0 = _zoom(bz0_full[cyl0 - WINL // 2:cyl0 + WINL // 2,
+                           cxl0 - WINL // 2:cxl0 + WINL // 2], CUTL / WINL, order=1)
+    iy, ix = np.where(np.abs(cutl0) >= 250.0)
+    w0 = np.abs(cutl0)[iy, ix]
+    sel = rng.choice(len(ix), size=min(220, len(ix)), replace=False, p=w0 / w0.sum())
+    seed_xy = [(int(ix[j]), int(iy[j])) for j in sel]
 
     vmax = None
     ims, track = [], []
@@ -849,17 +855,12 @@ def render_aia_gif():
         cxn, cyn = rotate_hmi_pt(null_win0, g0, gk, dmin)
         cxn, cyn = int(round(cxn)), int(round(cyn))
 
-        cutf = _zoom(bzk[cyf - WIN // 2:cyf + WIN // 2,
-                         cxf - WIN // 2:cxf + WIN // 2], CUT / WIN, order=1)
-        Bf, _ = solar.potential_field(cutf, NZ, dz=1.0)
         cutn = _zoom(bzk[cyn - WIN // 2:cyn + WIN // 2,
                          cxn - WIN // 2:cxn + WIN // 2], CUT / WIN, order=1)
         Bn, _ = solar.potential_field(cutn, NZ, dz=1.0)
         ny, nx, nz, _ = Bn.shape
-        # WIDE continuation volume spanning the whole displayed crop: fan lines that
-        # exit the null volume's walls are ordinary field lines out there, and are
-        # CONTINUED in this wider extrapolation of the same magnetogram
-        WINL, CUTL, NZL = 360, 225, 64
+        # WIDE volume spanning the whole displayed crop: hosts the arcade AND the
+        # continuation of fan lines that exit the null volume's walls
         cxl = int(round((cxf + cxn) / 2)); cyl = int(round((cyf + cyn) / 2))
         cutl = _zoom(bzk[cyl - WINL // 2:cyl + WINL // 2,
                          cxl - WINL // 2:cxl + WINL // 2], CUTL / WINL, order=1)
@@ -867,16 +868,17 @@ def render_aia_gif():
         offx = ((cxn - WIN / 2) - (cxl - WINL / 2)) / (WIN / CUT)
         offy = ((cyn - WIN / 2) - (cyl - WINL / 2)) / (WIN / CUT)
 
-        # arcade: SAME physical footpoints every frame (temporal coherence)
+        # arcade: SAME physical footpoints every frame (temporal coherence), traced
+        # in the wide volume so every loop system in frame gets its lines
         arcade = []
         for (sx, sy) in seed_xy:
-            b = cutf[sy, sx]
+            b = cutl[sy, sx]
             if abs(b) < 120.0:
                 continue
-            ln = _trace(Bf, np.array([sx, sy, 1.5]), +1.0 if b > 0 else -1.0,
-                        ds=0.35, steps=1600)
+            ln = _trace(Bl, np.array([sx, sy, 1.5]), +1.0 if b > 0 else -1.0,
+                        ds=0.4, steps=2000)
             if len(ln) > 10:
-                arcade.append((ln, min(abs(b) / 1200.0, 1.0)))
+                arcade.append((ln, min(abs(b) / 1200.0, 1.0), ln[-1, 2] < 1.2))
 
         # null: re-detect near the window centre, track identity
         nulls = [nl for nl in solar.find_nulls(Bn, seeds_per_axis=12)
@@ -938,10 +940,10 @@ def render_aia_gif():
         fig, ax = plt.subplots(figsize=(6.4, 6.55), dpi=100)
         ax.imshow(np.clip(crop, 0, vmax) ** 0.5, origin="lower", cmap="sdoaia171",
                   vmin=0, vmax=vmax ** 0.5)
-        for ln, wgt in arcade:
-            xa, ya = b2a(ln, cyf, cxf)
-            ax.plot(xa - x_lo, ya - y_lo, color="#a9cdf0", lw=1.0,
-                    alpha=0.25 + 0.35 * wgt)
+        for ln, wgt, closed in arcade:
+            xa, ya = b2a(ln, cyl, cxl, winw=WINL)
+            _plot2d_faded(ax, xa - x_lo, ya - y_lo, "#a9cdf0", 1.0,
+                          0.25 + 0.35 * wgt, fade_end=not closed, zorder=2)
         for lnL, closed in skel:
             xa, ya = b2a(lnL, cyl, cxl, winw=WINL)
             _plot2d_faded(ax, xa - x_lo, ya - y_lo, "#ff8b2e", 1.4, 0.8,

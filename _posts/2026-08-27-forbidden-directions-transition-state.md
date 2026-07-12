@@ -103,7 +103,8 @@ numerical zero test with no scale attached. The growth vector has a *law* for it
     171 Å frames spanning 00:00–01:30 UT, and the skeleton now <em>evolves with the
     Sun</em>: each frame's overlay is re-extrapolated from its own HMI magnetogram
     (measured at the matching minute), the arcade re-traced from the same physical
-    footpoints in co-rotating windows, and the null re-detected and identity-tracked in
+    footpoints across the full field of view (every loop system in frame gets its
+    lines, both poles included), and the null re-detected and identity-tracked in
     a stable co-rotating domain. Watch the measured track: the null <strong>descends
     from 3.9 px toward the surface exactly through the X5.4 flare</strong> (h = 1.5 px
     at the 00:24 peak), skims the boundary until ~00:48, and is lost after the X1.3 —
