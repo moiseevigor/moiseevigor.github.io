@@ -110,8 +110,11 @@ numerical zero test with no scale attached. The growth vector has a *law* for it
     within this windowed potential model, at survey resolution. And the deeper honest
     point stands: a potential field holds <em>no free energy</em>, so the skeleton can
     only breathe with the boundary data while the EUV corona reorganises violently —
-    that difference <em>is</em> the flare. Frames exposure-normalised, per-frame FITS
-    registration. Pipeline: <code>fetch_aia_seq.py</code> + <code>fetch_hmi_seq.py</code>
+    that difference <em>is</em> the flare. The null's fan lines are traced to
+    their full extent: born at the null in its survey volume and <em>continued past
+    its walls in a wider extrapolation of the same magnetogram</em>, ending where they
+    reach the photosphere (crisp) or the edge of the modelled region (fading). Frames
+    exposure-normalised, per-frame FITS registration. Pipeline: <code>fetch_aia_seq.py</code> + <code>fetch_hmi_seq.py</code>
     + <code>render_aia_gif</code>; null track in
     <code>artifacts/aia_gif_null_track.json</code>. Pipeline:
     <code>scripts/fetch_aia_seq.py</code> + <code>render_aia_gif</code>.

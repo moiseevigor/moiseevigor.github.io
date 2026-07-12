@@ -739,6 +739,25 @@ def aia_overlay():
     print("rendered", out.name)
 
 
+def _plot2d_faded(ax, xs, ys, color, lw, alpha, fade_end=False, zorder=2):
+    """2D polyline; if fade_end, the last ~22% of segments taper to transparent."""
+    from matplotlib.collections import LineCollection
+    P = np.column_stack([xs, ys])
+    segs = np.stack([P[:-1], P[1:]], axis=1)
+    n = len(segs)
+    if n < 1:
+        return
+    a = np.full(n, alpha, float)
+    if fade_end and n > 4:
+        nf = max(2, int(0.22 * n))
+        ramp = np.linspace(alpha, 0.0, nf)
+        a[-nf:] = ramp
+    rgba = np.tile(np.asarray(matplotlib.colors.to_rgba(color)), (n, 1))
+    rgba[:, 3] = a
+    ax.add_collection(LineCollection(segs, colors=rgba, linewidths=lw,
+                                     capstyle="round", zorder=zorder))
+
+
 def render_aia_gif():
     """The flare GIF with a TIME-EVOLVING skeleton: for each of the 16 AIA frames the
     matching HMI magnetogram (45 s cadence, fetched at the same times) is extrapolated
@@ -837,6 +856,16 @@ def render_aia_gif():
                          cxn - WIN // 2:cxn + WIN // 2], CUT / WIN, order=1)
         Bn, _ = solar.potential_field(cutn, NZ, dz=1.0)
         ny, nx, nz, _ = Bn.shape
+        # WIDE continuation volume spanning the whole displayed crop: fan lines that
+        # exit the null volume's walls are ordinary field lines out there, and are
+        # CONTINUED in this wider extrapolation of the same magnetogram
+        WINL, CUTL, NZL = 360, 225, 64
+        cxl = int(round((cxf + cxn) / 2)); cyl = int(round((cyf + cyn) / 2))
+        cutl = _zoom(bzk[cyl - WINL // 2:cyl + WINL // 2,
+                         cxl - WINL // 2:cxl + WINL // 2], CUTL / WINL, order=1)
+        Bl, _ = solar.potential_field(cutl, NZL, dz=1.0)
+        offx = ((cxn - WIN / 2) - (cxl - WINL / 2)) / (WIN / CUT)
+        offy = ((cyn - WIN / 2) - (cyl - WINL / 2)) / (WIN / CUT)
 
         # arcade: SAME physical footpoints every frame (temporal coherence)
         arcade = []
@@ -863,8 +892,21 @@ def render_aia_gif():
                 for u in fan_dirs:
                     for sgn in (+1.0, -1.0):
                         ln = _trace(Bn, p0 + 1.2 * u, sgn, ds=0.3, steps=2600)
-                        if len(ln) > 8:
-                            skel.append(ln)
+                        if len(ln) <= 8:
+                            continue
+                        # stitch: continue past the null volume's wall in the wide
+                        # volume until the photosphere or the wide volume's edge
+                        lnL = ln + np.array([offx, offy, 0.0])
+                        endz = ln[-1, 2]
+                        hit_wall = (ln[-1, 0] < 3 or ln[-1, 0] > nx - 4 or
+                                    ln[-1, 1] < 3 or ln[-1, 1] > ny - 4 or
+                                    endz > nz - 4)
+                        if hit_wall:
+                            ln2 = _trace(Bl, lnL[-1], sgn, ds=0.35, steps=2400)
+                            if len(ln2) > 4:
+                                lnL = np.vstack([lnL, ln2])
+                        closed = lnL[-1, 2] < 1.2      # reached the photosphere
+                        skel.append((lnL, closed))
         track.append({"t": tstamp, "found": null_ok,
                       "h_px": round(float(p0[2]), 1) if null_ok else None})
         print(f"frame {k+1}/{n_fr} {tstamp}  arcade {len(arcade)}  "
@@ -875,10 +917,10 @@ def render_aia_gif():
             return (acx - (np.asarray(xh) - hcxk) / hRk * arsun,
                     acy - (np.asarray(yh) - hcyk) / hRk * arsun)
 
-        def b2a(ln, cyw, cxw):
+        def b2a(ln, cyw, cxw, winw=WIN):
             hcxk, hcyk, hRk = gk
-            xh = cxw - WIN / 2 + ln[:, 0] * (WIN / CUT)
-            yh = cyw - WIN / 2 + ln[:, 1] * (WIN / CUT)
+            xh = cxw - winw / 2 + ln[:, 0] * (WIN / CUT)
+            yh = cyw - winw / 2 + ln[:, 1] * (WIN / CUT)
             xa, ya = h2a(xh, yh)
             rx = (xa - acx) / arsun; ry = (ya - acy) / arsun
             hpx = ln[:, 2] * (WIN / CUT) / hRk * arsun
@@ -900,9 +942,10 @@ def render_aia_gif():
             xa, ya = b2a(ln, cyf, cxf)
             ax.plot(xa - x_lo, ya - y_lo, color="#a9cdf0", lw=1.0,
                     alpha=0.25 + 0.35 * wgt)
-        for ln in skel:
-            xa, ya = b2a(ln, cyn, cxn)
-            ax.plot(xa - x_lo, ya - y_lo, color="#ff8b2e", lw=1.4, alpha=0.8)
+        for lnL, closed in skel:
+            xa, ya = b2a(lnL, cyl, cxl, winw=WINL)
+            _plot2d_faded(ax, xa - x_lo, ya - y_lo, "#ff8b2e", 1.4, 0.8,
+                          fade_end=not closed, zorder=3)
         if null_ok:
             xn_, yn_ = b2a(p0[None, :], cyn, cxn)
             ax.plot(xn_ - x_lo, yn_ - y_lo, marker="*", ms=13, mfc="#ffd34d",
