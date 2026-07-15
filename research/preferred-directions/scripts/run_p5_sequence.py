@@ -126,10 +126,7 @@ def main():
             ax.plot(p[0], p[1], marker="*", ms=11, mfc="#ffd000", mec="k", mew=0.9)
         ax.set_title(f"{t[5:]}\nnulls: {rec['n_nulls']}", fontsize=7.6)
         ax.set_xticks([]); ax.set_yticks([])
-    fig.suptitle("AR11158 emerging (real SDO/HMI, 2011-02-13 → 02-15, through the X2.2 "
-                 "flare) — the coronal null census as the region builds its topology",
-                 fontsize=9.2, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.90])
+    fig.tight_layout()
     out = REPO / "public/img/posts/forbidden-directions-emergence.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)
     print(f"rendered {out.relative_to(REPO)}")

@@ -4,6 +4,7 @@ RUN apt-get update -qq && \
     apt-get install -y --no-install-recommends \
       build-essential \
       git \
+      libcurl4 \
       libgsl-dev \
       zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*

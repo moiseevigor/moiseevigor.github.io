@@ -127,10 +127,8 @@ def main():
     ax.set_title("C · null-centred: 3 → 4 · degenerate control: flat 4", fontsize=8.8)
     ax.set_ylim(1.5, 4.6); ax.tick_params(labelsize=7.5); ax.legend(fontsize=6.6)
 
-    fig.suptitle("The magnetic fold: a null pair read as one scale crossover "
-                 f"(fold point: Q = {Q0}; split null: Q = {Qn})",
-                 fontsize=10.5, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.93])
+    print(f"fold figure: fold point Q = {Q0}; split null Q = {Qn}")
+    fig.tight_layout()
     out = REPO / "public/img/posts/forbidden-directions-fold-crossover.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)
     print(f"rendered {out.relative_to(REPO)}")

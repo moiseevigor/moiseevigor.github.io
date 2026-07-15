@@ -97,6 +97,14 @@ $$
 X_i = \partial_{x_i} + A_i\,\partial_\varphi .
 $$
 
+(Standing hypothesis, used everywhere and worth saying once: the potential depends on
+position only, $A_i = A_i(x)$, never on the fibre coordinate $\varphi$ — that is what
+makes the bracket below close on $\partial_\varphi$ and, in D4, what conserves
+$w = p_\varphi$. This "adjoin the holonomy as a coordinate" construction is itself
+classical: it is the central extension of Kostant–Souriau prequantization and the
+magnetic/isoperimetric model of Montgomery's book — the series builds on it, it did not
+invent it.)
+
 Their Lie bracket is a direct computation:
 
 $$
@@ -107,8 +115,9 @@ $$
 direction.** So wherever the curvature is nonzero the distribution is bracket-generating (Chow's
 condition holds, Appendix D2) and the geometry is genuinely sub-Riemannian; wherever it vanishes,
 you must go to higher brackets, and the geometry degenerates (Martinet and beyond). Every
-quantitative result in the series — the law, the null jump, the caustic gradient — is a
-consequence of this one identity.
+quantitative result in the series — the law, the null jump, the caustic gradient — is
+downstream of this one identity (a genealogy, not a claim that the identity does the
+work by itself).
 
 ## Gauge freedom, and what survives it
 
@@ -130,4 +139,8 @@ and measuring an artefact.
   Lond. A</em> 392, 45–57.
 - R. Montgomery (2002). <em>A Tour of Subriemannian Geometries</em>. AMS. (The bracket-generating
   condition and holonomy.)
+- R. Montgomery (1995). "Hearing the zero locus of a magnetic field." <em>Comm. Math.
+  Phys.</em> 168, 651–675. (The magnetic lift itself, a decade earlier and in this exact
+  setting: the extra bracket at a nondegenerate zero and the zero locus as a strictly
+  abnormal minimizer — the closest prior work; companion article §6.)
 </div><!-- /.l-body -->

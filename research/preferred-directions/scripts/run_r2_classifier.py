@@ -198,9 +198,7 @@ def main(fast=False):
             ax.text(j, i, f"{C[i, j]:.2f}", ha="center", va="center", fontsize=7,
                     color="white" if C[i, j] > 0.6 else "#123")
     fig.colorbar(im, ax=ax, fraction=0.046).ax.tick_params(labelsize=6.5)
-    fig.suptitle("R2 — classifying magnetic nulls under noise: integrate or differentiate?",
-                 fontsize=10.5, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.95])
+    fig.tight_layout()
     out = REPO / "public/img/posts/forbidden-directions-r2-noise.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)
     print(f"rendered {out.relative_to(REPO)}")

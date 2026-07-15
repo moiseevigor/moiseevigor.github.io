@@ -62,6 +62,27 @@ img { max-width: 100%; display: block; border-radius: 4px; }
 }
 .site-nav-brand:hover { color: var(--accent); text-decoration: none; }
 
+/* Article title in the sticky nav; JS drives opacity/transform from scroll
+   progress as the h1 slides under the bar (crossfade — never both titles).
+   Absolutely positioned so its left edge sits on the article column's left
+   edge (the centered body-w + 32px + gutter-w container), clamped clear of
+   the brand when the viewport is too narrow for true alignment. */
+.site-nav-title {
+  position: absolute;
+  left: max(140px, calc((100% - (var(--body-w) + 32px + var(--gutter-w))) / 2));
+  right: 340px;
+  line-height: 48px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0;
+  transform: translateY(4px);
+  pointer-events: none;
+}
+
 .site-nav-links {
   list-style: none;
   margin: 0;
@@ -637,6 +658,7 @@ span.pagination-item:hover { background: none; border-color: var(--border); }
 /* ── Responsive ───────────────────────────────────────────────────────────── */
 @media (max-width: 720px) {
   .site-nav { padding: 0 20px; }
+  .site-nav-title { left: 150px; right: 240px; }
   body:not(.home) .site-main { padding: 32px 20px 60px; }
   .site-footer { padding: 16px 20px; }
 }

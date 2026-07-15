@@ -82,11 +82,7 @@ def main():
     axB.tick_params(labelsize=7.5)
     axB.legend(fontsize=7.5)
 
-    fig.suptitle("The magnetic caustic in closed form:  "
-                 r"$\delta(\varepsilon) = 1 - \frac{2}{\pi}K(2\varepsilon)$"
-                 "   (curves = formula, dots = geodesic integration)",
-                 fontsize=10, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.91])
+    fig.tight_layout()
     out = REPO / "public/img/posts/forbidden-directions-closed-form.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)
     print(f"rendered {out.relative_to(REPO)}")

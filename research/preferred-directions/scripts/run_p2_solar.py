@@ -107,9 +107,7 @@ def render_figure(cut, B, nx, nz, p, ev, Qn):
                  bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="k", alpha=0.92),
                  arrowprops=dict(arrowstyle="->", color="k"))
 
-    fig.suptitle("A real solar magnetic null: magnetogram → coronal field → sub-Riemannian detection",
-                 fontsize=9.6, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.96])
+    fig.tight_layout()
     out = REPO / "public/img/posts/forbidden-directions-solar-null.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)
     print(f"rendered {out.relative_to(REPO)}")

@@ -78,8 +78,9 @@ $$
 
 and the caustic — the set where a family of orbits refocuses — is the Heisenberg group's
 central axis. The abstract flat model of sub-Riemannian geometry and the first system in every
-plasma-physics course are the same object. (Details in
-[Appendix D4](#); the code reproduces $t_c$ to one part in $10^{11}$ and confirms it is
+plasma-physics course are the same object — a statement about this *planar* lift; the
+three-dimensional field's lift is quasi-contact with a different flat model (Part 4). (Details in
+[Appendix D4](/mathematics/2026/08/20/forbidden-directions-D4-geodesic-flow/); the code reproduces $t_c$ to one part in $10^{11}$ and confirms it is
 gauge-independent.)
 
 ## The flux is area-like — so it is weight two
@@ -106,8 +107,8 @@ has slope 2. The figure shows the real measurement.
     area-like — giving $Q = 2 + 2 = 4$. Where the field vanishes to order $k$, the flux slope
     rises to $k+2$: slope&nbsp;3 at a simple null ($k=1$, $Q=5$), slope&nbsp;4 at a double null
     ($k=2$, $Q=6$). Points are measured; dashed guides are the exact integer slopes. Data:
-    <code>research/preferred-directions</code> (the sibling <code>run_e9.py</code> confirms
-    $k=0..3$).
+    <code>research/preferred-directions</code> (<code>scripts/run_p2_law.py</code> confirms
+    $k=0..3$; an equivalent 2D check lives in the sibling caustics-to-groups program).
   </figcaption>
 </figure>
 
@@ -186,13 +187,16 @@ $Q$ goes $4 \to 5$ at a simple null; in 3D (Part 4) it goes $5 \to 6$.
 
 So the homogeneous dimension is a **curvature-degeneracy meter**. It sits at its floor value
 everywhere the field is healthy, and rises by exactly the vanishing order on the measure-zero set
-where the field fails. A sub-Riemannian invariant, computed from how a small ball grows, locates
-the magnetic nulls — the reconnection sites — and reads how degenerate each one is. Part 4 turns
-that into an actual detector and checks it against the standard tool.
+where the field fails. A sub-Riemannian invariant, read off how far a small ball reaches in each
+direction, locates the magnetic nulls — the *candidate* reconnection sites (a null alone does not
+reconnect anything: that takes localized non-ideal evolution, and 3D reconnection can also happen
+with no null — Pontin & Priest 2022) — and reads how degenerate each one is. Part 4 turns
+that into a working estimator and checks it against the standard null finder — a consistency
+check on known nulls, not a blind-detection claim.
 
 What the growth vector does **not** yet tell you is the *shape* of the field near the null — how
-it curves, which way it leans. That information is not in how big the ball is; it is in the shape
-of the caustic. Reading the field's gradient off that caustic is [Part 3](#).
+it curves, which way it leans. That information is not in the ball's reach exponents; it is in the shape
+of the caustic. Reading the field's gradient off that caustic is [Part 3](/mathematics/2026/08/11/forbidden-directions-reading-gradient/).
 
 ## Glossary
 
@@ -212,8 +216,15 @@ of the caustic. Reading the field's gradient off that caustic is [Part 3](#).
 
 - L. D. Landau &amp; E. M. Lifshitz. <em>The Classical Theory of Fields</em> — Larmor motion.
 - A. Bellaïche (1996). "The tangent space in sub-Riemannian geometry." In <em>Sub-Riemannian
-  Geometry</em>, Progr. Math. 144, Birkhäuser. (Ball–Box, weights.)
+  Geometry</em>, Progr. Math. 144, Birkhäuser. (Ball–Box, weights — at equiregular points;
+  the null, where the growth vector jumps, is a singular point, and what the exponents mean
+  there is spelled out in Appendix D3's fine print, with F. Jean's monograph and
+  Ghezzi–Jean's non-equiregular volume paper as the governing references.)
 - A. Agrachev, D. Barilari &amp; U. Boscain (2019). <em>A Comprehensive Introduction to
   Sub-Riemannian Geometry</em>. Cambridge University Press. (Heisenberg, Martinet.)
+- D. I. Pontin &amp; E. R. Priest (2022). "Magnetic reconnection: MHD theory and modelling."
+  <em>Living Rev. Solar Phys.</em> 19, 1.
+  <a href="https://doi.org/10.1007/s41116-022-00032-9">doi:10.1007/s41116-022-00032-9</a>.
+  (Why the nulls are only <em>candidate</em> reconnection sites.)
 
 </div><!-- /.l-body -->

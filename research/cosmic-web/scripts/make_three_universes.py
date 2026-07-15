@@ -96,9 +96,6 @@ def main():
     real_panel(fig.add_subplot(gs[0, :]))
     sim_panel(fig.add_subplot(gs[1, 0]))
     toy_panel(fig.add_subplot(gs[1, 1]))
-    fig.suptitle("One question, three levels of reality — "
-                 "each level a controlled model of the one above it",
-                 fontsize=13.5, y=0.985)
     fig.savefig(OUT / "three_universes.png", dpi=150, bbox_inches="tight", pad_inches=0.25)
     print("wrote three_universes.png")
 

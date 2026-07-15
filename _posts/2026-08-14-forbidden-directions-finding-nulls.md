@@ -2,17 +2,19 @@
 layout: distill
 title: "Finding Magnetic Nulls with a Growth Vector"
 subtitle: >
-  A magnetic null — where the field vanishes and reconnection happens — announces itself as a
-  jump in a sub-Riemannian invariant. This closing post takes the growth-vector null detector to
-  a real dynamo field, checks it against the standard eigenvalue finder, and is honest about
-  exactly where it agrees and where it stops.
+  A magnetic null — where the field vanishes, and a candidate site for reconnection —
+  announces itself as a jump in a sub-Riemannian invariant. This post (the fourth of eight)
+  takes the growth-vector estimator to a real dynamo field, checks it against the standard
+  eigenvalue finder as a tangent-cone consistency check, and is honest about exactly where
+  it agrees and where it stops.
 date: 2026-08-14 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, magnetic-nulls, reconnection, dynamo-fields, growth-vector, validation]
 image: /public/img/posts/forbidden-directions-4.svg
 description: >
-  Part 4 of the Forbidden Directions series: the growth vector as a magnetic-null detector, the
-  3D law Q = k+5, external validation against the eigenvalue null-finder on an ABC-like dynamo test field, and an
+  Part 4 of the Forbidden Directions series: the growth vector as a directional-reach
+  estimator at magnetic nulls, the 3D law Q = k+5, a tangent-cone consistency check against
+  the eigenvalue null-finder on an ABC-like dynamo test field, and an
   honest account of agreement (location, order) versus the open question (null type).
 series: preferred-directions
 series_title: "The Geometry of Forbidden Directions"
@@ -43,8 +45,11 @@ $$
 Q = 5 \ \text{almost everywhere},\qquad Q = 6 \ \text{at a generic (linear) null}.
 $$
 
-A magnetic null is a **reconnection site** — where field lines break and reconnect, releasing the
-energy behind solar flares and magnetospheric substorms. Finding and classifying nulls is a
+A magnetic null is a **candidate site for reconnection** — where the field direction is
+undefined and field lines can most easily break and reconnect, releasing the energy behind solar
+flares and magnetospheric substorms. (A null does not by itself make reconnection happen:
+three-dimensional reconnection requires *non-ideal* evolution in a localized region, and can
+also occur with no null at all — see Pontin & Priest 2022.) Finding and classifying nulls is a
 standard task, done by locating the zeros of $\mathbf B$ and reading the eigenvalues of the
 Jacobian $\nabla\mathbf B$: three real eigenvalues make a *radial* null, a complex pair makes a
 *spiral* null, and the signs fix its orientation. The question here: does the growth vector — a
@@ -146,12 +151,14 @@ computations on it:
 **It agrees, exactly, on what it can see.** The growth vector reads $Q=6$ at all eight nulls and
 $Q=5$ at every generic point. As an independent detector it reproduces the standard finder's null
 set and their order — from a completely different computation, one that never looks for a zero of
-$\mathbf B$ but instead watches how a small ball fails to fill out.
+$\mathbf B$ but instead watches how a small ball's directional reach collapses (the reach
+exponents of the article's Prop. 2.7 — not a ball-volume exponent, which at the null itself
+remains unproved).
 
 **It does not refine what it cannot see.** Every one of these nulls is linear ($k=1$), so every one
 gives $Q=6$; the growth vector cannot tell spiral-A from spiral-B. That distinction lives in the
 eigenvalues of $\nabla\mathbf B$ — and there the standard method simply has more information than a
-single number about ball growth can carry.
+single number read from the ball's directional reach can carry.
 
 This is the program's kill criterion met head-on and answered without spin. The sub-Riemannian
 detector is **valid but not, on this leg, superior**: it finds the right nulls to the right order,
@@ -160,12 +167,17 @@ and stops where the standard tool keeps going.
 ## On a real Sun
 
 The ABC-like field is a genuine divergence-free dynamo-style field, but an analytic one. Does the detector
-survive contact with observation? We took a real **SDO/HMI magnetogram** — the line-of-sight
-photospheric field of a solar active region imaged on 2011 June 7 — potential-field extrapolated
+survive contact with observation? We took a real **SDO/HMI magnetogram** — the 45-s
+line-of-sight product (sunpy's sample file <code>HMI20110607_063211_los_lowres.fits</code>,
+T_OBS 2011.06.07 06:33:07 TAI), a solar active region imaged on 2011 June 7 —
+potential-field extrapolated
 it into a three-dimensional coronal field, and searched. The standard finder locates a coronal
 magnetic null some 40 pixels above the surface, a *radial* null by its $\nabla\mathbf B$
 eigenvalues. The growth vector, read from that null's local structure, returns $Q=6$ against
-$Q=5$ in the surrounding strong field — the same null jump, now on the real Sun.
+$Q=5$ in the surrounding strong field — the same null jump, now computed from a real
+solar extrapolation. Said precisely: this is the law's *consistency* on real data, not an
+independent detection — the paragraph below spells out what the raw grid does and does not
+give, and Part 5 races the honest version.
 
 </div><!-- /.l-body -->
 
@@ -198,20 +210,44 @@ flattened the field, the $r\to0$ flux-scaling is gone, and the estimator returns
 detection above therefore reads the null's *measured Jacobian* — its tangent-cone structure,
 which is exactly what the growth vector is defined to see. A follow-up (Part 5's program)
 located the actual rule: probed in the right **scale window** — above the grid cell, below the
-surrounding structure — the raw real field returns the null flux weight $w_4\approx3$ directly,
-no substitution needed. On gridded data the detector is not resolution-*limited* so much as
-scale-*windowed*, and real magnetic-field data demands you choose that window consciously.
+surrounding structure — the raw real field returns the null flux weight $w_4\approx3$
+directly (here $w_4$ is the scale-resolved reach exponent of the flux coordinate — the
+local log–log slope of holonomy reach versus probe radius, i.e. the fourth coordinate's
+weight), no substitution needed. On gridded data the detector is not resolution-*limited*
+so much as scale-*windowed*, and real magnetic-field data demands you choose that window
+consciously.
+
+That wrinkle earns a vocabulary the whole series now uses. **Blind detection**: a
+candidate location produced by the sub-Riemannian statistic alone, with no root-finder
+or Jacobian input — *not* what this post does. **Independent local confirmation**: the
+statistic evaluated on the full field at a location another method found — the
+scale-windowed $w_4 \approx 3$ reading above. **Tangent-cone consistency check**: the
+structure built from the measured Jacobian, whose answer the law then fixes — the
+$Q = 6$ values above. Every solar, magnetospheric and Jovian $Q$ in this series is of
+the second or third kind; none is blind detection.
+
+*Estimator parameters, for the record: reach measured from $n = 5000$ horizontal curves
+per radius (a quarter straight, the rest with log-uniform turning rates $w \in [0.4,
+40]/r$; 300 integration steps), endpoint spread read at the 98th percentile after
+subtracting the exact gauge terms $A_0\!\cdot\!d + \tfrac12 d\!\cdot\!S\,d$; radii
+log-spaced, 7 per window. The scale-window rule on gridded data: lower edge $\ge 1.5$
+grid cells, upper edge $\le$ half the distance to the nearest neighbouring structure —
+stated in advance, so the $Q = 5 \to 6$ change of verdict with window choice is a
+recorded parameter decision, not a post-hoc tunable.*
 
 ## The one place it might yet win
 
 There is a leg we have not used here. Part 3 showed the *caustic* — not the growth vector — reads
-the field *gradient*, invertibly. A null's type is precisely a statement about $\nabla\mathbf B$,
+the profile-calibrated gradient combination $(1-\tfrac34\beta)\lvert\nabla\ln B\rvert^2$
+(with unit calibration on the exponential profile). A null's type is precisely a statement about $\nabla\mathbf B$,
 the very thing the caustic is sensitive to. So the decisive, still-open question is whether a
 caustic invariant like the nilpotent deviation $\delta$ distinguishes spiral-A from spiral-B where
 the growth vector cannot. If it does, the framing genuinely *refines* the standard null classifier;
 if it does not, the honest conclusion is that this is a beautiful re-description of magnetic
-topology rather than a new instrument. That experiment is the program's frontier, and this series
-ends by naming it rather than pretending it is already done.
+topology rather than a new instrument. That experiment is the program's frontier; this post —
+originally the roadmap's last — names it rather than pretending it is already done, and
+Parts 5–8 (the null gallery, the transition state, the litmus tests, Jupiter) carry the
+program on from here.
 
 ## The series, in one arc
 
@@ -220,9 +256,11 @@ ends by naming it rather than pretending it is already done.
 - **[Part 2](/mathematics/2026/08/08/forbidden-directions-magnetic-contact/)** — the geometry:
   Larmor motion is Heisenberg, and the flux is an area-like weight-2 coordinate, so $Q=d+k+2$.
 - **[Part 3](/mathematics/2026/08/11/forbidden-directions-reading-gradient/)** — the caustic reads
-  the field gradient, $\delta=-\varepsilon^2$, invertibly.
-- **Part 4** *(this page)* — the growth vector finds magnetic nulls, agreeing with the standard
-  finder on location and order, with type left open.
+  the field gradient: $\delta=-\varepsilon^2$ on the exponential profile, the calibrated
+  combination $(1-\tfrac34\beta)\lvert\nabla\ln B\rvert^2$ in general.
+- **Part 4** *(this page)* — the growth vector locates magnetic nulls, agreeing with the standard
+  finder on location and order (a consistency check, not blind detection), with type left
+  open. *(Parts 5–8 continue the series beyond this original roadmap.)*
 
 The whole program rests on one distinction that most "preferred direction" intuitions miss:
 geometry only becomes sub-Riemannian when a direction is **forbidden and bracket-reachable**, and
@@ -233,7 +271,9 @@ which case you are in, and not confusing them, is the result worth keeping.
 
 ## Glossary
 
-- **Magnetic null** — a point where $\mathbf B = 0$; a reconnection site.
+- **Magnetic null** — a point where $\mathbf B = 0$; a *candidate* reconnection site
+  (reconnection itself requires localized non-ideal evolution, and can occur without
+  a null — Pontin & Priest 2022).
 - **Radial / spiral null** — the type set by the eigenvalues of $\nabla\mathbf B$: three real (radial)
   or a complex pair (spiral).
 - **ABC-like field** — the trigonometric field $(\cos y,\cos z,\cos x)$: a curl-partner of the
@@ -251,5 +291,17 @@ which case you are in, and not confusing them, is the result worth keeping.
   <em>Living Rev. Solar Phys.</em> 2, 7. (Coronal nulls, magnetic charge topology.)
 - C. E. Parnell, J. M. Smith, T. Neukirch &amp; E. R. Priest (1996). "The structure of
   three-dimensional magnetic neutral points." <em>Phys. Plasmas</em> 3, 759. (Null classification.)
+- E. R. Priest &amp; T. Forbes (2000). <em>Magnetic Reconnection: MHD Theory and
+  Applications</em>. Cambridge UP. (The reconnection physics this post's "where reconnection
+  happens" language points at.)
+- D. I. Pontin &amp; E. R. Priest (2022). "Magnetic reconnection: MHD theory and modelling."
+  <em>Living Rev. Solar Phys.</em> 19, 1.
+  <a href="https://doi.org/10.1007/s41116-022-00032-9">doi:10.1007/s41116-022-00032-9</a>.
+  (Why a null is only a <em>candidate</em> site: 3D reconnection requires localized non-ideal
+  evolution — $\int E_\parallel\,ds \neq 0$ through a diffusion region — and can occur at
+  separators and quasi-separatrix layers with no null at all.)
+- D. W. Longcope &amp; C. E. Parnell (2009). "The number of magnetic null points in the quiet
+  Sun corona." <em>Solar Phys.</em> 254, 51. (Null-finding methodology and statistics — the
+  "standard finder" tradition the growth vector is compared against.)
 
 </div><!-- /.l-body -->

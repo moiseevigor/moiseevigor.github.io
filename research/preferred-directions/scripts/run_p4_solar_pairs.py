@@ -136,8 +136,6 @@ def main():
                 fontsize=6.6, color="0.45")
     ax.set_xlabel("probe radius / half-separation", fontsize=9)
     ax.set_ylabel("local flux exponent $w_4(r)$", fontsize=9)
-    ax.set_title("The S1 crossover on the REAL Sun:\na coronal null pair read from one point",
-                 fontsize=9.2)
     ax.set_ylim(1.5, 4.6); ax.tick_params(labelsize=7.5); ax.legend(fontsize=7)
     fig.tight_layout()
     out = REPO / "public/img/posts/forbidden-directions-solar-pair.png"

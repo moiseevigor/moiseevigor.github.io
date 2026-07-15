@@ -42,6 +42,48 @@ def fold_structure(mu, name=None):
     return m3.MagneticStructure3D(A, name or f"fold(mu={mu:g})")
 
 
+def jet_structure(B0, M, T, name="2-jet"):
+    """Poincare-gauge SR structure of a divergence-corrected 2-jet of B.
+
+    For a homogeneous degree-m solenoidal field v_m, A_m(d) = v_m(d) x d/(m+2)
+    satisfies curl A_m = v_m; summing the constant, linear and quadratic parts
+    of the measured jet gives an EXACT vector potential for the local model.
+    Solenoidality is enforced: M is made traceless; the quadratic part
+    v2(d) = T[d,d]/2 gets the correction -(D.d)d/4, D_k = sum_i T[i,i,k].
+    """
+    B0 = np.asarray(B0, float)
+    M = np.asarray(M, float)
+    M = M - np.eye(3) * np.trace(M) / 3
+    T = np.asarray(T, float)
+    D = np.einsum("iik->k", T)
+
+    def A(P):
+        P = np.atleast_2d(np.asarray(P, float))
+        a0 = np.cross(np.tile(B0, (len(P), 1)), P) / 2.0
+        a1 = np.cross(P @ M.T, P) / 3.0
+        v2 = 0.5 * np.einsum("ijk,nj,nk->ni", T, P, P)
+        v2 = v2 - 0.25 * (P @ D)[:, None] * P
+        a2 = np.cross(v2, P) / 4.0
+        return a0 + a1 + a2
+    return m3.MagneticStructure3D(A, name)
+
+
+def jet_model_B(B0, M, T):
+    """The divergence-corrected 2-jet field itself (for golden checks)."""
+    B0 = np.asarray(B0, float)
+    M = np.asarray(M, float)
+    Mt = M - np.eye(3) * np.trace(M) / 3
+    T = np.asarray(T, float)
+    D = np.einsum("iik->k", T)
+
+    def B(P):
+        P = np.atleast_2d(np.asarray(P, float))
+        v2 = 0.5 * np.einsum("ijk,nj,nk->ni", T, P, P)
+        return (np.tile(B0, (len(P), 1)) + P @ Mt.T
+                + v2 - 0.25 * (P @ D)[:, None] * P)
+    return B
+
+
 def flux_exponent_curve(struct, q0, radii, n, rng, pairs=4):
     """Local flux-reach exponent w4(r): d log(reach_4) / d log(r) by centered pairs.
 

@@ -1,6 +1,13 @@
 # Program — Preferred Directions: sub-Riemannian geometry of physical connections
 
-**Status:** active. Laws confirmed: E9 (2D), P1 (moduli read grad B), P2 (3D, Q=k+5 & null jump). Phase 2 real-data validation next.
+**Status:** active; this charter is the *original* program document, kept as the record.
+Laws confirmed at time of writing: E9 (2D), P1 (moduli read grad B), P2 (3D, Q=k+5 & null
+jump). Since written, the real-data phases ran: solar HMI (P2-solar, R1–R3), the fold
+program (S1–S5c, with the generic rank-2 correction: $Q=6$, not 7), the magnetosphere
+audit (S4: all T96 census nulls sit outside the model's own magnetopause — the
+"79 spiral" claim is retracted), Jupiter (J1), the closed form (T2, period average
+proven), and the profile law (T4/V1). Current state: `README.md` and the companion
+article's status ledger.
 **Relationship:** an independent program that *depends on* the caustics-to-groups toolkit.
 Neither supersedes the other (see §9).
 
@@ -8,12 +15,16 @@ Neither supersedes the other (see §9).
 
 ## 1. The thesis
 
-> A physical environment carries genuine sub-Riemannian geometry **iff there is a
-> connection whose curvature is a physical field.** On the total space
+> The class of environments studied here carries genuine sub-Riemannian geometry
+> **because a connection's curvature is a physical field** (one-way: sub-Riemannian
+> structures also arise without any field; the selection rule below is the filter). On the total space
 > (configuration × holonomy), the sub-Riemannian invariants read off that curvature:
 > the growth vector gives its **vanishing order**, the ball–box exponents give the
-> **cost of accumulating holonomy**, and the conjugate locus / moduli should give its
-> **gradient**.
+> **cost of accumulating holonomy**, and the conjugate locus / moduli give a
+> **profile-calibrated combination of its gradient and profile curvature** —
+> $(1-\tfrac34\beta)\,|\nabla\ln B|^2$ at leading order, blind at $\beta = 4/3$.
+> (The thesis originally said "its gradient"; that hypothesis was sharpened by
+> V1/O6/F2 — article §4 — into the calibrated combination stated here.)
 
 This is earned, not assumed. It is the generalisation of E8, and its central law is
 already confirmed (§4).
@@ -121,7 +132,7 @@ survives — then this is a rebranding and the program should be stopped. Say so
 
 ### Phase 1 — **do the moduli measure $\nabla B$?** — DONE, CONFIRMED
 
-*Result: $\delta=-\varepsilon^2-2.52\varepsilon^4+O(\varepsilon^6)$ with $\varepsilon=|\nabla\ln B|\,r_L$; leading coefficient measured 0.99960, parity exponent 2.014, only even powers. Inverts: $|\nabla\ln B|=\sqrt{|\delta|}/r_L$. A field gradient delays refocusing. The 'collapse' turned out to be a dilation **theorem**, not evidence — logged. Quartic coefficient later pinned by the precision follow-up at $c_4 = 9/4$ (the 2.52 here was a wide-window truncation artefact; $5/2$ refuted). See [`P1-moduli-read-grad-B.md`](P1-moduli-read-grad-B.md).*
+*Result: $\delta=-\varepsilon^2-2.52\varepsilon^4+O(\varepsilon^6)$ with $\varepsilon=|\nabla\ln B|\,r_L$; leading coefficient measured 0.99960, parity exponent 2.014, only even powers. Inverts as a leading-order estimator on this exponential profile: $|\nabla\ln B|\approx\sqrt{|\delta|}/r_L$ (general 1D profiles carry the $|1-\tfrac34\beta|^{-1/2}$ calibration). A field gradient delays refocusing on this profile (flips past $\beta = 4/3$). The 'collapse' turned out to be a dilation **theorem**, not evidence — logged. Quartic coefficient later pinned by the precision follow-up at $c_4 = 9/4$ (the 2.52 here was a wide-window truncation artefact; $5/2$ refuted). See [`P1-moduli-read-grad-B.md`](P1-moduli-read-grad-B.md).*
 The single most decision-relevant experiment in this program: it is the first setting in
 which the nilpotent-deviation statistic has a *physical ground truth* to be checked against.
 
@@ -246,8 +257,10 @@ old.
    particle transport, which stays Riemannian. Conflating them would repeat the error the
    last three experiments were spent avoiding.
 4. **2D is a toy.** Real nulls are 3D and the structure differs. Phase 2 is not optional.
-5. **No real data yet.** Every result so far is synthetic-with-analytic-truth. The MHD /
-   solar-corona step (Phase 2) is the first genuine external test.
+5. **No real data yet** *(status at time of writing; superseded — the solar,
+   magnetospheric and Jovian phases have since run, with their own honesty boxes)*.
+   Every Phase-1 result was synthetic-with-analytic-truth. The MHD / solar-corona step
+   (Phase 2) was the first genuine external test.
 
 ## 11. What success looks like
 

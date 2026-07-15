@@ -1,5 +1,12 @@
 # S1 — the magnetic fold: Q = 7, and a null pair read as one scale crossover
 
+> **CORRECTED (S5c certified collision, Part 6; article Cor. 5.1).** This family's
+> degenerate point has $\nabla\mathbf B \equiv 0$ — the fully *symmetric* normal form.
+> A **generic** rank-2 fold keeps a nonzero 1-jet and reads $Q = 6$, not 7; $Q = 7$
+> below is correct for this constructed symmetric family only. The scale-crossover
+> tool was also later demoted by the pre-registered race (T1). Preserved as the
+> original record.
+
 Reproduce: `../cosmic-web/.venv/bin/python scripts/run_p4_fold.py` (~6 min).
 Results → `artifacts/p4_fold.json`, figure →
 `public/img/posts/forbidden-directions-fold-crossover.png`.

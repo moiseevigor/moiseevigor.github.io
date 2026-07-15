@@ -14,7 +14,12 @@ figure → `public/img/posts/forbidden-directions-real-gallery.png`.
 | 2014-10-22 | SDO/HMI `m_45s` (VSO, 4096²→1024²) | AR12192 — largest AR of cycle 24 |
 
 Per day: the two most bipolar-balanced active-region windows → potential-field
-extrapolation (`src/solar.py`) → Newton null finder → every interior null classified.
+extrapolation (`src/solar.py`) → Newton null finder → the **strongest interior nulls
+per region classified, capped at `MAX_NULLS_PER_REGION = 2`** (ranked by
+$\lvert\prod\lambda_i(\nabla\mathbf B)\rvert$). This is a gallery, deliberately not a
+completeness census — the Newton seeding is not an exhaustive trilinear/degree-based
+cell census (Haynes & Parnell 2007 is the standard for that), so no recall claim is
+made or implied.
 
 ## Result — the per-null agreement table (H-R3)
 

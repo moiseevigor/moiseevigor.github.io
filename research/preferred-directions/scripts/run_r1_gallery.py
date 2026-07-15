@@ -131,9 +131,7 @@ def main():
         ax.text(0.02, 0.06, "fan-plane field lines; ★ = null",
                 fontsize=7.2, va="bottom", transform=ax.transAxes, color="0.4")
 
-        fig.suptitle("A gallery of magnetic nulls: the sub-Riemannian detector fires at every type",
-                     fontsize=11.5, fontweight="bold")
-        fig.tight_layout(rect=[0, 0, 1, 0.96])
+        fig.tight_layout()
         out = REPO / "public/img/posts/forbidden-directions-null-gallery.png"
         fig.savefig(out, bbox_inches="tight", dpi=150)
         print(f"rendered {out.relative_to(REPO)}")

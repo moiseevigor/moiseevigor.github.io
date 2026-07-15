@@ -1,3 +1,11 @@
+> **TERMINOLOGY CORRECTED (final re-review, 2026-07-14).** Where this report
+> says "detector"/"detection", the article's taxonomy (article §0, Part 4)
+> applies: Q = 6 evaluated at standard-finder locations is a TANGENT-CONE
+> CONSISTENCY CHECK (or an independent local confirmation where the structure
+> is built from the raw field), not blind detection. The δ = −ε² gradient
+> claim inherited here is the exponential-profile calibration; the general
+> one-dimensional law is (1 − (3/4)β)|∇ln B|² (article §4).
+
 # P2 — the 3D law, and null detection validated against the standard finder
 
 Phase 2 of [`PROGRAM.md`](PROGRAM.md). Two parts, both passing:

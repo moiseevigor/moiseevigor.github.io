@@ -130,8 +130,6 @@ def main():
     ax.set_xlabel("$x_{GSM}$ [$R_E$]  (Sun →)", fontsize=9)
     ax.set_ylabel("$z_{GSM}$ [$R_E$]", fontsize=9)
     ax.tick_params(labelsize=7.5)
-    ax.set_title("Earth's magnetosphere (IGRF + Tsyganenko T96, 2012-03-07, storm conditions) — "
-                 "detected magnetic nulls", fontsize=9.5)
     fig.tight_layout()
     out = REPO / "public/img/posts/forbidden-directions-magnetosphere.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)

@@ -149,10 +149,7 @@ def main():
         ax.grid(alpha=0.25, lw=0.5)
     axes[0].set_ylabel("median relative separation error", fontsize=8.5)
     axes[1].legend(fontsize=5.8, ncol=2, loc="upper left")
-    fig.suptitle("The race: reading an unresolved null pair's separation — "
-                 "scale crossover vs divergence-free quadratic fit",
-                 fontsize=10, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.92])
+    fig.tight_layout()
     out = REPO / "public/img/posts/forbidden-directions-race.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)
     print(f"rendered {out.relative_to(REPO)}")

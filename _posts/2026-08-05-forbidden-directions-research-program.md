@@ -4,8 +4,8 @@ title: "The Geometry of Forbidden Directions: A Research Program"
 subtitle: >
   When a physical field <em>forbids</em> a direction of motion — not merely slows it — the
   configuration space stops being ordinary and becomes sub-Riemannian. This post scopes a
-  program built on that distinction, states the one law it has already confirmed
-  (Q = d + k + 2), and draws the sharp line between the physics that qualifies (magnetic
+  program built on that distinction, states the identity it is organised around
+  (Q = d + k + 2 — a dimensional count, verified numerically), and draws the sharp line between the physics that qualifies (magnetic
   fields, rotation) and the physics that only looks like it does (anisotropic transport,
   gravity).
 date: 2026-08-05 09:00:00
@@ -49,10 +49,16 @@ subject of the [selection rule](#the-selection-rule) below.
 
 **The thesis, in one sentence.**
 
-> A physical environment carries genuine sub-Riemannian geometry **if and only if there is a
-> connection whose curvature is a physical field** — and then the geometry *reads that field
+> If a physical environment carries **a connection whose curvature is a physical field**,
+> it carries genuine sub-Riemannian geometry — and then the geometry *reads that field
 > off*: the growth vector gives the field's vanishing order, the ball–box exponents give the
-> cost of accumulating holonomy, and the caustic gives the field's gradient.
+> cost of accumulating holonomy, and the caustic gives a profile-calibrated combination
+> of the field's gradient and profile curvature — $(1-\tfrac34\beta)|\nabla\ln B|^2$
+> at leading order for one-dimensional profiles (Part 3, article §4).
+
+(One direction only: sub-Riemannian geometry also arises without any field — rolling,
+parking, the falling cat — so the field-curvature environments are a *class* of SR
+geometries, not the definition of them.)
 
 A **connection**[^connection] is a rule for carrying a quantity along a path; its
 **curvature** is the mismatch you accumulate around a loop — the **holonomy**. For a magnetic
@@ -77,16 +83,21 @@ Here is the filter, and it is strict. Most "preferred direction" phenomena fail 
 | **Berry connection** | Berry curvature | ✓ — but degeneracies diverge, a distinct regime |
 
 The diagnostic that separates the rows is the **homogeneous dimension** $Q$, the exponent in
-how a small ball grows, $\mathrm{vol}\,B(r)\sim r^{Q}$. A Riemannian space (however anisotropic)
+how a small ball grows, $\mathrm{vol}\,B(r)\sim r^{Q}$ — that formula holds where the structure
+is regular; at the singular points themselves (the nulls) $Q$ is defined through the dilation
+weights, and whether the ball volume obeys the same exponent there is an open question
+([Appendix D2](/mathematics/2026/08/18/forbidden-directions-D2-selection-rule/)). A Riemannian space (however anisotropic)
 has $Q$ equal to its ordinary dimension $n$. A genuinely sub-Riemannian space has $Q > n$ —
 it is "bigger than it looks" because the forbidden direction is expensive to reach. **Slow
 directions do not raise $Q$; forbidden directions do.** Why this matters so much — and why a
 gravitational caustic can *counterfeit* $Q > n$ at a single point without being sub-Riemannian
-— is the subject of [Appendix D2](#).
+— is the subject of [Appendix D2](/mathematics/2026/08/18/forbidden-directions-D2-selection-rule/).
 
 ## The law: Q = d + k + 2
 
-The program's central result, already confirmed. Adjoin the holonomy $\varphi$ to a
+The program's central organising identity — a two-line dimensional count (its own
+kill criterion below says so), verified numerically wherever the program has probed
+it. Adjoin the holonomy $\varphi$ to a
 $d$-dimensional space; then wherever the curvature (field) vanishes to order $k$,
 
 $$
@@ -213,17 +224,23 @@ reproducible code in `research/preferred-directions/` and the shared toolkit it 
 | Result | Question | Verdict |
 |---|---|---|
 | **The law (2D)** | Is $Q = d+k+2$ real? | ✓ confirmed, orders $k=0,1,2,3$: exponents $2,3,4,5$ |
-| **The moduli** | Does the caustic read $\nabla B$? | ✓ confirmed: $\delta = -\varepsilon^2 + O(\varepsilon^4)$, $\varepsilon = \lvert\nabla\ln B\rvert\,r_L$ |
+| **The moduli** | Does the caustic read $\nabla B$? | ✓ confirmed on the exponential profile: $\delta = -\varepsilon^2 + O(\varepsilon^4)$, $\varepsilon = \lvert\nabla\ln B\rvert\,r_L$ — with a later-derived qualifier: the leading coefficient is profile-dependent, $c_2 = 1-\tfrac34\beta$ in general (Part 3, article §4) |
 | **The law (3D)** | Does $Q = k+5$ hold in 3D? | ✓ confirmed; the growth vector jumps $5\to6$ at a null |
-| **Null detection** | Does it agree with the standard finder? | ✓ on an MHD field, agrees on location and order |
+| **Null detection** | Does it agree with the standard finder? | ✓ on an analytic solenoidal test field (location + order); on real extrapolations the raw-grid read needs the super-pixel scale window, and the tangent-cone $Q$ is a consistency check, not an independent detection (Part 4) |
 
 Three of these are worth stating plainly. **Uniform magnetic motion is exactly the Heisenberg
-group** — the Larmor orbit of a charged particle *is* a sub-Riemannian geodesic, and the flux
-it sweeps is the Heisenberg group's third coordinate. **The caustic measures the field
+group** — a classical identification (it is the isoperimetric/magnetic model in Montgomery's
+book), stated here because the whole program leans on it: the Larmor orbit of a charged
+particle *is* a sub-Riemannian geodesic, and the flux it sweeps is the Heisenberg group's
+third coordinate. **The caustic measures the field
 gradient**: the deviation of the refocusing pattern from the flat model scales as the square
-of the dimensionless gradient, invertibly. And **the growth vector is a magnetic-null detector**:
+of the dimensionless gradient — with unit coefficient on the exponential profile, and with
+the calibration $(1-\tfrac34\beta)$ for general one-dimensional profiles — invertible as a
+leading-order estimator once that profile factor is supplied (Part 3, and the companion
+article's §4). And **the growth vector indexes magnetic nulls**:
 it sits at $Q = d+2$ almost everywhere and pops up by exactly $k$ on the measure-zero set where
-the field vanishes to order $k$ — a curvature-degeneracy meter.
+the field vanishes to order $k$ — a curvature-degeneracy meter in principle; what "detection"
+costs on real data is Part 4's and Part 5's story, told there without cosmetics.
 
 ## The honest open question
 
@@ -235,18 +252,23 @@ standard magnetic-null finder — it detects the same nulls to the same order, b
 distinguish their *type* (radial vs spiral), which lives in the eigenvalues of $\nabla B$.
 
 The one place the framing might genuinely *refine* the standard tools is the **moduli**: the
-caustic already reads the field gradient (Part 3), so the decisive experiment is whether a
+caustic already reads the profile-calibrated gradient combination (Part 3), so the decisive experiment is whether a
 finer caustic invariant recovers the null *type* the growth vector discards. That is the
 program's frontier, and Part 4 ends there honestly.
 
 ## The series
 
+*(The list below is the program's original four-part roadmap, kept as written when this
+post was drafted; the program since grew to eight parts — Part 5 the null gallery, Part 6
+the transition state, Part 7 the litmus tests, Part 8 Jupiter — all reachable from the
+series navigation.)*
+
 - **Part 1** *(this page)* — the program, the selection rule, the law.
-- **Part 2** *(upcoming)* — *The magnetic contact geometry*: Larmor motion is Heisenberg, and
+- **Part 2** — *The magnetic contact geometry*: Larmor motion is Heisenberg, and
   the law measured.
-- **Part 3** *(upcoming)* — *Reading the field gradient from the caustic*: the deviation
-  statistic and $\delta = -\varepsilon^2$.
-- **Part 4** *(upcoming)* — *Finding magnetic nulls*: 3D, an ABC-like dynamo field, and the external
+- **Part 3** — *Reading the field gradient from the caustic*: the deviation
+  statistic and $\delta = -\varepsilon^2$ on the exponential profile.
+- **Part 4** — *Finding magnetic nulls*: 3D, an ABC-like dynamo field, and the external
   validation.
 - Appendices **D1–D5** — connections and holonomy, the selection rule, the law derived, the
   magnetic geodesic flow, and the gradient formula.
@@ -256,15 +278,19 @@ program's frontier, and Part 4 ends there honestly.
 - **Connection / holonomy / curvature** — a rule for transporting a quantity along a path; the
   net change around a loop; the field that causes it. For magnetism: $\mathbf A$, the flux
   $\varphi$, and $\mathbf B$.
-- **Homogeneous dimension $Q$** — the exponent in ball-volume growth $\mathrm{vol}\,B(r)\sim r^Q$;
-  equals the ordinary dimension for a Riemannian space, exceeds it for a sub-Riemannian one.
+- **Homogeneous dimension $Q$** — the exponent in ball-volume growth $\mathrm{vol}\,B(r)\sim r^Q$
+  at regular points; at a singular point (a null) $Q$ is read from the dilation weights, and
+  whether ball volume obeys the same exponent there is open. Equals the ordinary dimension for a
+  Riemannian space, exceeds it for a sub-Riemannian one.
 - **Forbidden vs slow direction** — a forbidden direction is reachable only by a bracket of
   allowed moves (it raises $Q$); a slow direction is still directly drivable (it does not).
 - **Vanishing order $k$** — the order to which the field vanishes at a point; $k=0$ where
   $\mathbf B\neq0$, $k=1$ at a generic null.
 - **Larmor orbit** — the circular path of a charged particle in a magnetic field; here, a
   sub-Riemannian geodesic.
-- **Magnetic null** — a point where $\mathbf B = 0$; a reconnection site in plasma physics.
+- **Magnetic null** — a point where $\mathbf B = 0$; a *candidate* reconnection site in plasma
+  physics (reconnection itself requires localized non-ideal evolution, and can occur without a
+  null — Pontin & Priest 2022).
 
 ## References
 
@@ -274,6 +300,10 @@ program's frontier, and Part 4 ends there honestly.
   Sub-Riemannian Geometry</em>. Cambridge University Press.
 - V. I. Arnold, B. A. Khesin (1998). <em>Topological Methods in Hydrodynamics</em>. Springer.
   (ABC / Beltrami fields.)
+- D. I. Pontin &amp; E. R. Priest (2022). "Magnetic reconnection: MHD theory and modelling."
+  <em>Living Rev. Solar Phys.</em> 19, 1.
+  <a href="https://doi.org/10.1007/s41116-022-00032-9">doi:10.1007/s41116-022-00032-9</a>.
+  (Nulls vs reconnection: non-ideal evolution required; reconnection possible without nulls.)
 - D. W. Longcope (2005). "Topological methods for the analysis of solar magnetic fields."
   <em>Living Rev. Solar Phys.</em> 2, 7. (Magnetic charge topology and coronal nulls.)
 

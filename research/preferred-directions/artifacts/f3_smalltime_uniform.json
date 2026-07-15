@@ -1,0 +1,11 @@
+{
+ "claim": "J(t) = t^4 (a + t R): t^0..t^3 coefficients vanish IDENTICALLY in (l1,l2,l3,h,theta0)",
+ "coeff_t0_zero": true,
+ "coeff_t1_zero": true,
+ "coeff_t2_zero": true,
+ "coeff_t3_zero": true,
+ "a_coefficient": "1/12",
+ "a_at_zero": "1/12",
+ "a_at_zero_is_one_twelfth": true,
+ "verdict": "PASS"
+}

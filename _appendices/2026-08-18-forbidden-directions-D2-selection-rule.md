@@ -96,15 +96,22 @@ produces a false discovery.
 **$Q > n$ at a single point is not sufficient.** A Lagrangian **fold** — the generic caustic of
 *any* smooth map, including gravitational structure formation, which has no sub-Riemannian
 structure at all — compresses one direction so that the image of a small ball extends like $r^2$
-there. Measured pointwise, that fold reports $Q = n+1$, numerically identical to a genuine
-contact structure. The ADE-universality of caustics resurfaces at the level of the homogeneous
-dimension.
+there. Measured pointwise, the reach *estimator* then returns an exponent sum of $n+1$ —
+numerically identical to a genuine contact structure's $Q$, even though no sub-Riemannian
+homogeneous dimension exists there at all. Stated precisely, this is **estimator
+confounding**: a coincidence of measured scaling exponents, not an equality of geometric
+invariants — a Lagrangian caustic does not *acquire* a homogeneous dimension at its fold.
+The ADE-universality of caustics resurfaces at the level of the measured exponent.
 
-The fix is **measure-theoretic**:
+The fix this program uses is **measure-theoretic** — stated for what it is:
 
-> Genuine sub-Riemannian structure has $Q > n$ on a set of **full measure** — it is a property of
-> the distribution, present everywhere. A Lagrangian catastrophe has $Q > n$ only on the caustic,
-> a codimension-1 **null set**.
+> **The program's operational screen (a working rule, not a standard theorem).** A
+> bracket-generating distribution has $Q > n$ on a set of **full measure** — the weights are
+> a property of the distribution, present almost everywhere — while a Lagrangian catastrophe
+> inflates the *estimator's* exponent only on its caustic, a codimension-1 **null set**. The
+> screen therefore demands full-measure prevalence before reading $Q > n$ as sub-Riemannian.
+> No converse is claimed: full-measure $Q > n$ is used as a screen against caustic
+> counterfeits, not as a characterisation of sub-Riemannian geometry.
 
 The program confirmed both sides: a Zel'dovich gravitational flow gives $Q > n$ at $0\%$ of sampled
 points (folds are measure-zero), while a genuine magnetic contact structure gives $Q > n$ at

@@ -62,11 +62,13 @@ def potential_field(bz, nz, dz=1.0):
     return B, A
 
 
-def find_nulls(B, dz=1.0, seeds_per_axis=8, tol=1e-3, max_iter=40):
+def find_nulls(B, dz=1.0, seeds_per_axis=8, tol=1e-3, max_iter=40, seeds=None,
+               dedup=1.5):
     """Newton descent to B=0 in the extrapolated volume. Returns list of null dicts.
 
     Field magnitude is normalised by its box RMS; a null is |B| < tol * rms. Coordinates
     are in grid units (ix, iy, iz), iz in units of dz. Skips the z=0 boundary layer.
+    Explicit `seeds` (n,3) run BEFORE the regular grid -- warm starts for tracking.
     """
     ny, nx, nz, _ = B.shape
     rms = np.sqrt((B ** 2).sum(-1)).mean()
@@ -85,24 +87,25 @@ def find_nulls(B, dz=1.0, seeds_per_axis=8, tol=1e-3, max_iter=40):
     zs = np.linspace(2, nz - 2, seeds_per_axis)
     xs = np.linspace(2, nx - 3, seeds_per_axis)
     ys = np.linspace(2, ny - 3, seeds_per_axis)
-    for iz in zs:
-        for iy in ys:
-            for ix in xs:
-                p = np.array([ix, iy, iz], float)
-                ok = True
-                for _ in range(max_iter):
-                    b = field(p)
-                    if np.linalg.norm(b) < tol * rms:
-                        break
-                    try:
-                        p = p - np.linalg.solve(jac(p), b)
-                    except np.linalg.LinAlgError:
-                        ok = False; break
-                    if not (1 < p[0] < nx - 2 and 1 < p[1] < ny - 2 and 1 < p[2] < nz - 2):
-                        ok = False; break
-                if ok and np.linalg.norm(field(p)) < 5 * tol * rms:
-                    if not any(np.linalg.norm(p - f["p"]) < 1.5 for f in found):
-                        found.append({"p": p.copy(), "gradB": jac(p)})
+    seed_list = ([np.asarray(s, float).copy() for s in seeds]
+                 if seeds is not None else [])
+    seed_list += [np.array([ix, iy, iz], float)
+                  for iz in zs for iy in ys for ix in xs]
+    for p in seed_list:
+        ok = True
+        for _ in range(max_iter):
+            b = field(p)
+            if np.linalg.norm(b) < tol * rms:
+                break
+            try:
+                p = p - np.linalg.solve(jac(p), b)
+            except np.linalg.LinAlgError:
+                ok = False; break
+            if not (1 < p[0] < nx - 2 and 1 < p[1] < ny - 2 and 1 < p[2] < nz - 2):
+                ok = False; break
+        if ok and np.linalg.norm(field(p)) < 5 * tol * rms:
+            if not any(np.linalg.norm(p - f["p"]) < dedup for f in found):
+                found.append({"p": p.copy(), "gradB": jac(p)})
     for f in found:
         ev = np.linalg.eigvals(f["gradB"])
         f["eigs"] = ev

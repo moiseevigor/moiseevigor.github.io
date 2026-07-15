@@ -1,21 +1,23 @@
 ---
 layout: distill
-title: "The Null Gallery: Grounding the Detector in the Real Sun"
+title: "The Null Gallery: Grounding the Estimator in the Real Sun"
 subtitle: >
   One detection is an anecdote. This post turns it into a program: a ground-truth battery of
   every null type, a classification method built from the sub-Riemannian flow, a fair race
   against the standard eigenvalue scheme under noise — and a gallery of five real coronal
-  nulls on three different days of the real Sun. The verdict is honest: detection is the
-  framework's to keep; classification belongs to the linear fit.
+  nulls on three different days of the real Sun — independent local confirmations at
+  root-finder locations, not blind discovery. The verdict is honest: location and order
+  are the framework's to keep; classification belongs to the linear fit.
 date: 2026-08-24 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, magnetic-nulls, solar-corona, sdo-hmi, classification, real-data]
 image: /public/img/posts/forbidden-directions-5.svg
 description: >
-  Part 5 of the Forbidden Directions series: the R1 type battery (the detector is
-  type-agnostic), the R2 integrate-vs-differentiate classification race under noise (wins
+  Part 5 of the Forbidden Directions series: the R1 type battery (the tangent-cone
+  consistency check is type-agnostic), the R2 integrate-vs-differentiate classification race under noise (wins
   against pointwise differences, loses honestly to the least-squares fit), and the R3 real
-  gallery — five coronal nulls detected and classified across three SDO/HMI days.
+  gallery — five independent local confirmations at root-finder locations, classified,
+  across three SDO/HMI days.
 series: preferred-directions
 series_title: "The Geometry of Forbidden Directions"
 series_part: 5
@@ -196,8 +198,14 @@ extrapolation, the Newton null finder, and *every* interior null kept — no che
     extrapolated coronal $\lvert\mathbf B\rvert$ on the vertical plane through the null
     (log scale, dark = weak), in-plane field lines in white, ★ the detected null with its
     height. Every null: standard classification and the SR growth vector agree — $Q=6$ at
-    5/5 — and the R2 flow classifier, run on the raw resampled grid, matches type
-    <em>and sign</em> on all five. Pipeline:
+    5/5, with $Q$ computed on each null's measured tangent cone (a consistency check of
+    the law, not an independent detection; the raw-grid reading needs Part 6's
+    super-pixel scale window) — and the R2 flow classifier, run on the raw resampled
+    grid, matches type <em>and sign</em> on all five. Finder, for the record: Newton
+    descent from a $9^3$ seed grid per cube, interior-margin cut, keeping the strongest
+    two nulls per region by $\lvert\prod\lambda_i(\nabla\mathbf B)\rvert$ — a
+    <em>gallery</em>, deliberately not a completeness census (exhaustive cell-census
+    counting entered the program later, at Jupiter in Part 8). Pipeline:
     <code>research/preferred-directions/scripts/run_r3_real_gallery.py</code>.
   </figcaption>
 </figure>
@@ -212,11 +220,17 @@ $\nabla\mathbf B$ is the dual of $\nabla\times\mathbf B$, so at a null the Jacob
 symmetric, its eigenvalues real — *no force-free extrapolation, potential, linear
 force-free, or NLFFF alike, can host a spiral null at all*. (Our Part-4 dynamo field can,
 precisely because it is not force-free: all eight of its spiral nulls carry
-$\lVert\nabla\times\mathbf B\rVert = \sqrt3 \neq 0$ where $\mathbf B = 0$.) So the
-radial-only gallery is not half the problem — it is the *whole* problem the
-extrapolation-based catalogues of solar physics can pose; genuinely spiral nulls live in
-dynamic MHD and in-situ magnetospheric data. Second: the noise-fragile flow classifier
-goes five-for-five here because real force-free nulls sit far from the radial/spiral
+$\lVert\nabla\times\mathbf B\rVert = \sqrt3 \neq 0$ where $\mathbf B = 0$. The
+theorem's linear-algebra core — a symmetric $\nabla\mathbf B$ has only real
+eigenvalues, so no spiral pair — is machine-checked in Lean:
+<code>FDFormal.forcefree_null_no_spiral</code>,
+<code>research/preferred-directions/lean/FORMAL.md</code>.) So the
+radial-only gallery is not half the problem — it is the *whole* problem that
+**smooth force-free (bounded-α) extrapolations** can pose; non-force-free and
+data-driven MHD extrapolations are outside the theorem, and genuinely spiral nulls live
+there and in in-situ magnetospheric data. Second: the noise-fragile flow classifier
+goes five-for-five here because the nulls in these force-free extrapolations (model
+fields from real magnetograms, not in-situ measurements) sit far from the radial/spiral
 boundary — exactly the regime the R2 curves say is easy for everyone. Consistency, not
 contradiction.
 
@@ -228,7 +242,7 @@ After R1–R3 the ledger is clean enough to state as a table:
 |---|---|---|
 | **Is one here?** | SR growth vector: $Q\colon 5\to6$, scale-covariant, defined before any Jacobian is estimable | grounded: full type battery + five real nulls, 10/10 |
 | **What order?** | SR law $Q=k+5$ | confirmed (Part 4) |
-| **How is the field changing nearby?** | SR caustic: $\delta=-\varepsilon^2$ reads $\lvert\nabla\ln B\rvert$ | confirmed (Part 3) |
+| **How is the field changing nearby?** | SR caustic: $\delta=-\varepsilon^2$ on the exponential profile; general 1D profiles read $(1-\tfrac34\beta)\lvert\nabla\ln B\rvert^2$ | confirmed (Part 3, article §4) |
 | **Radial or spiral, which sign?** | the local least-squares fit of $\nabla\mathbf B$ | the standard scheme keeps it — R2 |
 
 That last row is the honest one. We built the classification method the request called

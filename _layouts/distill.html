@@ -2,9 +2,13 @@
 layout: default
 ---
 
-<!-- D3 and shared elliptic functions (only loaded for distill articles) -->
+<!-- D3 and shared elliptic functions — only for articles whose content uses
+     d3 (inline interactive widgets need it synchronously before their own
+     <script> blocks run); every other distill post skips the CDN download. -->
+{% if content contains 'd3.' %}
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="/public/js/elliptic-core.js"></script>
+{% endif %}
 
 <!-- ── Article header ── -->
 <div class="d-header">

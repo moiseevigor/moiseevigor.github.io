@@ -91,6 +91,14 @@ The base geodesic and its perturbations in $(\theta_0, w)$ are integrated togeth
 $J(t)$ is formed along the trajectory, and its first sign change is bracketed. This is the routine
 that produces the nilpotent-deviation $\delta$ of Part 3.
 
+(A scope note the criterion needs: this Jacobian test finds conjugate points of *normal*
+geodesics. It is exhaustive here only because wherever $B \neq 0$ the structure is contact,
+and contact structures have no nontrivial abnormal geodesics; approaching a null,
+$B \to 0$, contact fails and abnormals appear — not hypothetically: the horizontal lift
+of a nondegenerate zero curve is Montgomery's strictly abnormal *minimizer* (1995) —
+which is one more reason everything
+near nulls in this series is handled through the tangent cone rather than this routine.)
+
 ## Gauge invariance of the caustic
 
 A gauge change $\mathbf A \to \mathbf A + \nabla\chi$ shifts the flux coordinate

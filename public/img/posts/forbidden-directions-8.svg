@@ -1,0 +1,42 @@
+<svg viewBox="0 0 220 148" xmlns="http://www.w3.org/2000/svg">
+  <rect width="220" height="148" fill="#fff"/>
+  <!-- Jupiter: the banded disk in cutaway; a reversed-flux patch on the buried
+       dynamo surface, covered by a separatrix dome with its null star and spine —
+       the hidden skeleton beneath the clouds. -->
+  <defs><clipPath id="disk8"><circle cx="88" cy="76" r="58"/></clipPath></defs>
+  <!-- the planet disk (1-bar surface) -->
+  <circle cx="88" cy="76" r="58" fill="#f7ead6"/>
+  <!-- cloud bands -->
+  <g stroke-width="0" opacity="0.85" clip-path="url(#disk8)">
+    <path d="M 33,52 A 58,58 0 0 1 143,52 L 143,60 A 58,58 0 0 0 33,60 Z" fill="#e5c9a3"/>
+    <path d="M 30,72 L 146,72 L 146,82 L 30,82 Z" fill="#dba97a" opacity="0.7"/>
+    <path d="M 33,98 A 58,58 0 0 0 143,98 L 143,106 A 58,58 0 0 1 33,106 Z" fill="#e5c9a3"/>
+  </g>
+  <circle cx="88" cy="76" r="58" fill="none" stroke="#b98d5e" stroke-width="1.2"/>
+  <!-- the buried dynamo surface (dashed) -->
+  <circle cx="88" cy="76" r="46" fill="none" stroke="#5f6368" stroke-width="0.9" stroke-dasharray="3 3" opacity="0.8"/>
+  <!-- reversed-flux patch on the dynamo surface, near the top -->
+  <path d="M 70,35 A 46,46 0 0 1 106,35 A 24,10 0 0 1 70,35 Z" fill="#1565c0" opacity="0.75"/>
+  <!-- the separatrix dome over the patch, inside the envelope -->
+  <path d="M 66,37 Q 88,8 110,37" fill="none" stroke="#e65100" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- the null on the dome -->
+  <path d="M 88,20 l 2.4,4.9 5.4,0.5 -4,3.7 1.2,5.3 -5,-2.7 -5,2.7 1.2,-5.3 -4,-3.7 5.4,-0.5 Z"
+        fill="#ffd34d" stroke="#442200" stroke-width="0.8"/>
+  <!-- spine escaping upward through the cloud surface -->
+  <path d="M 88,19 L 88,4" stroke="#e65100" stroke-width="1.4" stroke-linecap="round"/>
+  <path d="M 88,4 l -3,5 M 88,4 l 3,5" stroke="#e65100" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <!-- a few envelope field lines closing from patch edge to the dominant cap -->
+  <g stroke="#1565c0" stroke-width="0.9" fill="none" opacity="0.55">
+    <path d="M 68,36 Q 55,22 45,36"/>
+    <path d="M 108,36 Q 121,22 131,36"/>
+    <path d="M 73,33 Q 60,12 41,30"/>
+  </g>
+  <!-- legend text -->
+  <text x="178" y="34" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="7.5" fill="#e65100">dome +</text>
+  <text x="178" y="43" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="7.5" fill="#e65100">spine</text>
+  <path d="M 165,47 Q 172,56 163,62" stroke="#5f6368" stroke-width="0.8" fill="none"/>
+  <text x="180" y="76" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="7.5" fill="#1565c0">reversed</text>
+  <text x="180" y="85" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="7.5" fill="#1565c0">patch</text>
+  <text x="180" y="108" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="7.5" fill="#5f6368">skeleton under</text>
+  <text x="180" y="117" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="7.5" fill="#5f6368">the clouds</text>
+</svg>

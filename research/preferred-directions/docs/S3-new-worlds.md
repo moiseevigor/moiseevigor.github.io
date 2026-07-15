@@ -1,5 +1,16 @@
 # S3 — new worlds: the Earth's magnetosphere, and the first real spiral nulls
 
+> **SUPERSEDED (S4b boundary audit, Part 6).** Every null in the census below sits
+> **outside the T96 model's own magnetopause** (geopack `t96_mgnp` id = −1, typically
+> 0.7–0.8 $R_E$ beyond it), where the empirical model is extrapolated, not fitted; the
+> valid interior is null-free across the tested driving range. The headline
+> "the spiral class exists in real physics" is **retracted** — what stands is the
+> force-free theorem, the methodology, and the lesson that census claims need a
+> model-domain audit. Per the independent review, any future magnetospheric null claim
+> must be tested against event-conditioned in-situ data (Cluster/MMS) or a validated
+> reconstruction inside the model domain — that gate is recorded here; no such claim
+> is currently made. This report is preserved unedited below as the original record.
+
 Reproduce: `../cosmic-web/.venv/bin/python scripts/run_p4_magnetosphere.py` (~3 min;
 needs `geopack`, pip). Results → `artifacts/p4_magnetosphere.json`, figure →
 `public/img/posts/forbidden-directions-magnetosphere.png`.
@@ -50,3 +61,14 @@ the ABC-like dynamo field, and the solar corona) in which the detector is ground
   inferred scalars, and black-hole magnetospheres are GR objects whose sub-Riemannian
   treatment needs the flux lift rebuilt on curved spacetime. Recorded as a genuine
   frontier, not attempted with toy stand-ins here.
+
+## Correction (2026-07-12, from the S4 boundary audit)
+
+Testing every census null against T96's own magnetopause (`t96_mgnp`):
+the entire null population sits in a shell < 1 R_E OUTSIDE the model
+boundary, and inside its valid domain the model is null-free at every IMF
+Bz probed ([-9, +3] nT). The shell nulls barely respond to Dst
+(|dB| <= 0.03 nT per 30 nT) because the ring/tail currents are interior.
+The census stands as anatomy of null structure in a realistically shaped
+non-force-free field — NOT as standing nulls of the valid model interior.
+Blog Part 6 and `S4-null-collider.md` carry the full statement.

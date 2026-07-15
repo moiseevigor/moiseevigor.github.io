@@ -1,3 +1,12 @@
+> **SCOPE CORRECTED (final re-review, 2026-07-14).** This report describes the
+> EXPONENTIAL-profile experiment. Its "invertible gradient meter, coefficient
+> one, even series" conclusions hold for that profile; the current result
+> (article §4, V1/O6/F2) is that the caustic statistic reads the calibrated
+> combination (1 − (3/4)β)|∇ln B|² at leading order for one-dimensional
+> profiles, is blind at β = 4/3 (tested), and general-profile even parity is
+> proven only at first order. Read every unqualified claim below through that
+> lens.
+
 # P1 — Do the conjugate-locus moduli measure ∇B?
 
 Phase 1 of [`PROGRAM.md`](PROGRAM.md), the program's decisive experiment.
@@ -6,7 +15,7 @@ Reproduce: `../caustics-to-groups/.venv/bin/python scripts/run_p1_moduli.py`
 
 **Verdict: yes, and exactly.** $\delta = -\varepsilon^2 + O(\varepsilon^4)$ with leading
 coefficient 1, where $\varepsilon = |\nabla\ln B|\cdot r_L$. The nilpotent-deviation
-statistic reads a physical curvature gradient, invertibly.
+statistic reads a physical curvature gradient, invertibly — on this exponential profile; see the banner above for the general-profile scope.
 
 ## Why this experiment is the decisive one
 
@@ -101,7 +110,9 @@ $$\boxed{\;\delta(\varepsilon) \;=\; -\varepsilon^{2} \;-\; 2.52\,\varepsilon^{4
    conjugate locus, you recover the curvature gradient.
 
 **Physical reading.** $\delta<0$ means $t_c > t_c^{\text{nilpotent}}$: **a magnetic-field
-gradient delays refocusing**, by a fractional amount $\varepsilon^2 = (\nabla\ln B\cdot r_L)^2$.
+gradient delays refocusing on this exponential profile** (general 1D profiles: the
+effect scales as $(1-\tfrac34\beta)\varepsilon^2$ and flips past $\beta = 4/3$), by a
+fractional amount $\varepsilon^2 = (\nabla\ln B\cdot r_L)^2$.
 Gradient-driven drift defocuses the geodesic family, and it does so at second order because
 the first-order effect is purely directional and averages away.
 
@@ -114,9 +125,12 @@ the first-order effect is purely directional and averages away.
    *direction* of $\nabla B$ — untested, and the obvious next step.
 2. **$\delta$ is a proxy, not the Agrachev–Barilari invariants.** Whether $\delta$ maps
    analytically onto $(\chi,\kappa)$ is a separate question, not settled here.
-3. **At this order $\delta$ is blind to $\nabla^2 B$.** The family $B=B_0e^{gx}$ has
-   constant $\nabla\ln B$ by construction; a family with $\nabla\ln B = 0$ but
-   $\nabla^2 B\neq0$ would test the next coefficient.
+3. **This experiment alone cannot identify profile-curvature dependence.** The family
+   $B=B_0e^{gx}$ has $\beta = (\ln B)''/[(\ln B)']^2 = 0$ by construction, so profile
+   curvature is never varied here; V1/O6 later showed the leading coefficient *does*
+   depend on it — $c_2 = 1-\tfrac34\beta$ at the same $O(\varepsilon^2)$ order (article
+   Prop. 4.2). *(This caveat originally claimed $\delta$ is "blind to $\nabla^2B$ at
+   this order" — false in general; superseded by the calibrated-combination result.)*
 4. **$c_4 = 2.5236$ is suspiciously close to $5/2$.** Both $c_2=1$ and $c_4$ look like exact
    rationals. An analytic derivation of $F(\varepsilon)$ is the natural theory follow-up,
    and would be a genuine non-elementary result of the kind §5 of the charter demands.
@@ -124,7 +138,8 @@ the first-order effect is purely directional and averages away.
    suspicion was right that $c_4$ is rational, wrong about which one. This report's
    two-term fit over a wide $\varepsilon$ window read the local slope, not the intercept;
    the small-$\varepsilon$ extrapolation gives $c_4 = 2.2497 \pm 0.0009 = \mathbf{9/4}$
-   ($5/2$ refuted at $\sim280\sigma$), with $c_6 \approx 6.4$. Caveat 3's warning about the
+   ($5/2$ refuted at $\sim$280× the numerical band — a fit/convergence sensitivity,
+   not a sampling σ), with $c_6 \approx 6.4$. Caveat 3's warning about the
    next coefficient was exactly the trap this report fell into.
 5. Synthetic field with analytic truth. No real data yet — that is Phase 2.
 

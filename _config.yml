@@ -65,12 +65,23 @@ exclude:
   - "LICENSE"
   - "node_modules"
   - "vendor"
+  # Lean formalization build artifacts (mathlib checkout + oleans): never part
+  # of the site, and watching them stalls regeneration.
+  - "research/preferred-directions/lean/.lake"
+  - "research/preferred-directions/lean/.github"
+  # Production build output (docker compose 'build' service): must not be
+  # re-ingested or watched by the dev server.
+  - "_site_production"
 
 # Appendix pages: rendered at pinned permalinks but never part of site.posts,
 # so they stay out of pagination, archives, and feeds; reachable via the
 # series navigation inside the posts.
 collections:
   appendices:
+    output: true
+  # Long-form mathematical articles (the "Articles" nav section): complete
+  # statements and proofs behind the blog series, at pinned permalinks.
+  articles:
     output: true
 
 # Re-include precomputed data assets that the global "*.json" exclude swallows.

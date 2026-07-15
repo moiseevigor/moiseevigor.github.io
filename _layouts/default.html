@@ -8,10 +8,12 @@
 <!-- ── Top navigation (shared by every page) ── -->
 <nav class="site-nav">
   <a class="site-nav-brand" href="/">{{ site.title }}</a>
+  {% if page.title and page.page_class != 'home' %}<span class="site-nav-title" aria-hidden="true">{{ page.title }}</span>{% endif %}
   <ul class="site-nav-links">
     <li><a href="/"          {% if page.url == '/'             %}class="active"{% endif %}>Home</a></li>
     <li><a href="/about/"    {% if page.url contains 'about'    %}class="active"{% endif %}>About</a></li>
     <li><a href="/projects/" {% if page.url contains 'projects' %}class="active"{% endif %}>Projects</a></li>
+    <li><a href="/articles/" {% if page.url contains 'articles' %}class="active"{% endif %}>Articles</a></li>
     <li><a href="/archives/" {% if page.url contains 'archives' %}class="active"{% endif %}>Archives</a></li>
   </ul>
 </nav>
@@ -35,5 +37,23 @@
 </footer>
 
 <script src="/public/js/codeblock.js"></script>
+<script>
+/* Crossfade the article title into the sticky nav as the h1 slides under the
+   48px bar: opacity tracks scroll progress, so it's never "both big and small". */
+(function () {
+  var t = document.querySelector('.site-nav-title');
+  var h = document.querySelector('.d-title');
+  if (!t || !h) return;
+  var update = function () {
+    var r = h.getBoundingClientRect();
+    var p = Math.min(1, Math.max(0, (48 - r.top) / r.height));
+    t.style.opacity = p;
+    t.style.transform = 'translateY(' + 4 * (1 - p) + 'px)';
+  };
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
+  update();
+}());
+</script>
 </body>
 </html>

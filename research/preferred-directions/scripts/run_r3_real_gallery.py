@@ -42,6 +42,10 @@ WIN = 160                 # active-region window (px at 1024-scale)
 CUT = 100                 # extrapolation base resolution
 NZ = 56
 K_REGIONS = 2             # windows per magnetogram
+# Gallery cap: keep the strongest nulls per region (by |prod eig(grad B)|).
+# Deliberately NOT a completeness census -- Newton seeding is not an exhaustive
+# trilinear cell census (Haynes & Parnell 2007); prose must not claim "every
+# interior null" (referee fix R9).
 MAX_NULLS_PER_REGION = 2
 
 
@@ -215,10 +219,8 @@ def main():
             s.set_edgecolor(col); s.set_linewidth(1.3)
         ax.text(0.03, 0.04, f"h = {p[2]:.0f} px", transform=ax.transAxes,
                 color="white", fontsize=7)
-    fig.suptitle(f"A real gallery: {n_nulls} coronal magnetic nulls on three days of the "
-                 f"real Sun — SR detector Q=6 at {q_ok}/{n_nulls}",
-                 fontsize=10.5, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.94])
+    print(f"gallery: {n_nulls} nulls, Q=6 at {q_ok}/{n_nulls}")
+    fig.tight_layout()
     out = REPO / "public/img/posts/forbidden-directions-real-gallery.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)
     print(f"rendered {out.relative_to(REPO)}")
