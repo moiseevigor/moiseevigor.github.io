@@ -12,10 +12,10 @@ tags:
 comments: true
 ---
 
-The Apache web server of the version `2.4` [introduces a new style](https://httpd.apache.org/docs/2.4/upgrading.html#access) for `<VirtualHost>` configuration, 
+The Apache web server version `2.4` [introduces a new style](https://httpd.apache.org/docs/2.4/upgrading.html#access) for `<VirtualHost>` configuration, 
 in particular the `<Directory>` syntax is not compatible anymore with the previous one `2.2`. 
 
-The old styled configuration valid in the Apache <= `2.2` version 
+The old-style configuration valid in Apache <= `2.2` 
 
 ```bash
 <VirtualHost *:80>
@@ -41,7 +41,7 @@ Order allow,deny
 Allow from all
 ```
 
-the new way to describe the access permitions is reduced to just one line
+the new way to describe the access permissions is reduced to just one line
 
 ```bash
 Require all granted

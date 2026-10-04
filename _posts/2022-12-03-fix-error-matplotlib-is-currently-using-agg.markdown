@@ -6,7 +6,7 @@ subtitle: >
   X11 display — which is the default state inside almost every container.
   The fix is two parts: install the GUI toolkit dependencies in the image, then
   forward the host's X socket into the container at run time.
-description: "Plotting graphics with python and matplotlib from Docker container"
+description: "Plotting graphics with python and matplotlib from a Docker container"
 date:   2022-12-03 10:05:45
 categories:
 - software
@@ -20,7 +20,7 @@ comments: true
 Have you ever built graphs in `matplotlib` or any other GUI running in docker? You will have to overcome some obstacles
 
 1. missing X11 server inside docker
-2. missing X11-related libraries to able to render your GUI elements
+2. missing X11-related libraries to be able to render your GUI elements
 
 For example, I'm writing this simple python program
 
@@ -36,13 +36,13 @@ plt.plot(t, t, 'r--', t, t**2, 'bs', t, t**3, 'g^')
 plt.show()
 ```
 
-First allow to connect to X11 server by 
+First allow connections to the X11 server with 
 
 ```
 xhost local:root
 ```
 
-And I want to run it in the docker container, by emitting the command
+And I want to run it in the docker container, by issuing the command
 
 ```
 docker run -it --rm --env="DISPLAY" -v "/tmp/.X11-unix:/tmp/.X11-unix:rw" -v $PWD:/app python-container python /app/example.py
@@ -69,7 +69,7 @@ RUN pip3 install numpy matplotlib
 WORKDIR /app
 ```
 
-et voilà, we have perfectly running minimalist docker container that is able to connect to a local X11 server and create GUI elements!
+et voilà, we have a perfectly running minimalist docker container that is able to connect to a local X11 server and create GUI elements!
 
 **Note 1**. To build an image run 
 
@@ -77,9 +77,9 @@ et voilà, we have perfectly running minimalist docker container that is able to
 docker build -t python-container .
 ```
 
-**Note 2**. What does `--env="DISPLAY"` stand for? `--env` propagates `$DISPLAY` environment variable into the container.
+**Note 2**. What does `--env="DISPLAY"` stand for? `--env` propagates the `$DISPLAY` environment variable into the container.
 
- **Note 3**. What `-v "/tmp/.X11-unix:/tmp/.X11-unix:rw"` does? It mounts X11 socket into the `/tmp` folder inside the container 
+ **Note 3**. What does `-v "/tmp/.X11-unix:/tmp/.X11-unix:rw"` do? It mounts the X11 socket into the `/tmp` folder inside the container 
  that will be used by GUI applications to render GUI elements.
 
 

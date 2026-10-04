@@ -37,21 +37,32 @@ layout: default
   </div>
 </article>
 
-<!-- ── Related posts (rendered inside another l-body so they share the column width) ── -->
-{% if site.related_posts.size > 0 %}
+<!-- ── Related posts: posts sharing at least one tag with this one, newest first.
+     (site.related_posts without LSI is just "the latest posts", which put solar
+     physics under a PostgreSQL how-to.) Hidden when nothing shares a tag. ── -->
+{% assign rel_count = 0 %}
+{% capture rel_items %}
+  {% for post in site.posts %}
+    {% if rel_count >= 4 %}{% break %}{% endif %}
+    {% if post.url == page.url or post.hidden or post.listed == false %}{% continue %}{% endif %}
+    {% assign shared = false %}
+    {% for t in post.tags %}{% if page.tags contains t %}{% assign shared = true %}{% break %}{% endif %}{% endfor %}
+    {% if shared %}
+    {% assign rel_count = rel_count | plus: 1 %}
+        <li>
+          <a href="{{ post.url }}">{{ post.title }}</a>
+          <small>{{ post.date | date: "%-d %b %Y" }}</small>
+        </li>
+    {% endif %}
+  {% endfor %}
+{% endcapture %}
+{% if rel_count > 0 %}
 <div class="d-article" style="padding-top:0;">
   <div class="l-body">
     <section class="related">
       <h2>Related posts</h2>
       <ul class="related-posts">
-        {% for post in site.related_posts limit:4 %}
-        {% unless post.title == page.title %}
-        <li>
-          <a href="{{ post.url }}">{{ post.title }}</a>
-          <small>{{ post.date | date: "%-d %b %Y" }}</small>
-        </li>
-        {% endunless %}
-        {% endfor %}
+        {{ rel_items }}
       </ul>
     </section>
   </div>

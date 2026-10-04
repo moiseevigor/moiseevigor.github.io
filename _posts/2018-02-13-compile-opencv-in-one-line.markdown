@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Compile OpenCV 3.4.1 in one line"
-description: "Just fast short one line command to compile the OpenCV 3.4.1"
+description: "Just a fast, short one-line command to compile OpenCV 3.4.1"
 date:   2018-02-13 10:05:45
 categories:
 - software
@@ -11,7 +11,7 @@ tags:
 comments: true
 ---
 
-At first you may need to install the dependency packages
+First you may need to install the dependency packages
 
 ```bash
 apt-get update && apt-get install -y --no-install-recommends \
@@ -19,7 +19,7 @@ apt-get update && apt-get install -y --no-install-recommends \
     cmake \
     git \
     ssl-cert \
-    ca-certificates\
+    ca-certificates \
     yasm \
     pkg-config \
     libswscale-dev \
@@ -59,6 +59,6 @@ ldconfig && \
 cd / && rm -rf opencv*
 ```
 
-The handy `Dockerfile` with Tensorflow 1.5 + OpenCV 3.4.1 + Python 3 at your disposal [https://gist.github.com/moiseevigor/3e9b00066842c20229be47bd5429f6b1](https://gist.github.com/moiseevigor/3e9b00066842c20229be47bd5429f6b1)
+The handy `Dockerfile` with Tensorflow 1.5 + OpenCV 3.4.1 + Python 3 is at your disposal: [https://gist.github.com/moiseevigor/3e9b00066842c20229be47bd5429f6b1](https://gist.github.com/moiseevigor/3e9b00066842c20229be47bd5429f6b1)
 
 

@@ -55,6 +55,8 @@
   border-bottom: 1px solid var(--border);
 }
 .d-header > * { max-width: var(--body-w); }
+/* Pages without a title block (hide_title) start flush under the nav. */
+.d-article--untitled { padding-top: 48px; }
 .d-eyebrow {
   font-family: var(--sans); font-size: 12px; font-weight: 700;
   letter-spacing: 0.13em; text-transform: uppercase;
@@ -101,8 +103,15 @@
   font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
   text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px;
 }
-.d-series-toc ol { margin: 0; padding: 0 0 0 20px; list-style: decimal; }
+/* font + size restated: the global `ul, ol` rule (serif, ~16px) otherwise wins */
+.d-series-toc ol { margin: 0; padding: 0 0 0 20px; list-style: decimal; font-family: var(--sans); font-size: 13px; line-height: 1.5; }
 .d-series-toc li { padding: 2px 0; }
+.d-series-toc details { margin-top: 12px; }
+.d-series-toc summary {
+  cursor: pointer; font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--text-muted);
+}
+.d-series-toc details[open] summary { margin-bottom: 8px; }
 .d-series-toc li.current { font-weight: 700; color: var(--accent); }
 .d-series-toc li.upcoming { color: var(--text-muted); font-style: italic; }
 .d-series-toc a { color: var(--accent); text-decoration: none; }
@@ -282,7 +291,10 @@ article.d-article { counter-reset: section figure; }
 /* The .d-header already draws a divider below the byline; the first h2
  * of the article body would otherwise repeat it, producing a double rule
  * with a tall empty band between the two lines. */
-.d-article .l-body > h2:first-child {
+/* (Also when a page-scoped <style> or <script> block precedes that h2.) */
+.d-article .l-body > h2:first-child,
+.d-article .l-body > style:first-child + h2,
+.d-article .l-body > script:first-child + h2 {
   border-top: none;
   padding-top: 0;
   margin-top: 28px;

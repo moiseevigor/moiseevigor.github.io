@@ -23,8 +23,8 @@ iptables -I INPUT -p tcp -m multiport --dports apache-honeypot -j fail2ban-apach
 
 most likely you have spotted the character length limitation on the chain name. 
 
-I've discovered that the limit is `16` for the chain name length, but [Fail2Ban](/tag/fail2ban) prefixes it with `fail2ban-` string 
-which eats so precious `9` characters so the only `7` remaining. 
+I've discovered that the limit is `16` for the chain name length, but [Fail2Ban](/tag/fail2ban) prefixes it with the `fail2ban-` string 
+which eats `9` precious characters, so only `7` remain. 
 
 To solve this issue you need to rename the `iptables` action to something like `name=HONEY`  
 
@@ -32,7 +32,7 @@ To solve this issue you need to rename the `iptables` action to something like `
 $ cat /etc/fail2ban/jail.conf
 
 [apache-honeypot]
-enabled  = enable
+enabled  = true
 filter   = apache-honeypot
 action   = iptables-allports[name=HONEY, protocol=all]
 logpath  = /var/log/asterisk/full
@@ -40,4 +40,4 @@ maxretry = 3
 bantime  = 600
 ```
 
-Thas it! The issue is observed on [Fail2Ban](/tag/fail2ban) ver. `0.8` or older. 
+That's it! The issue is observed on [Fail2Ban](/tag/fail2ban) ver. `0.8` or older. 

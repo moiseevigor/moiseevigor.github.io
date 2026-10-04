@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Show git branch in the bash command prompt"
-description: "Handy command how to show the current branch in the command prompt of your bash shell"
+description: "Handy way to show the current branch in the command prompt of your bash shell"
 date:   2015-12-08 10:05:45
 categories:
 - software
@@ -11,8 +11,8 @@ tags:
 comments: true
 ---
 
-When you install `git` on your computer, you may find new variables available in the environment, it is `$(__git_ps1)`.
-This variable contains the branch name of the current repository. The only thing you need to edit `~/.bashrc`
+When you install `git` on your computer, you may find a new variable available in the environment: `$(__git_ps1)`.
+This variable contains the branch name of the current repository. The only thing you need is to edit `~/.bashrc`
 and add `$(__git_ps1)` to the `PS1` definition in this way
 
 ```
@@ -24,14 +24,14 @@ fi
 ```
 
 *N.B.* the `$(__git_ps1)` is available by default for Ubuntu >= 14.04, you may check if it works by just going to any git
-repository and run `echo $(__git_ps1)`
+repository and running `echo $(__git_ps1)`
 
 ```
 ~/Work/moiseevigor.github.io $ echo $(__git_ps1);
 (master)
-``` 
+```
 
-If you see an empty string, so just source it from `/etc/bash_completion.d/git`, and in this case the `~/.bashrc` will look like 
+If you see an empty string, just source it from `/etc/bash_completion.d/git`, and in this case the `~/.bashrc` will look like 
 
 
 ```
@@ -50,4 +50,4 @@ This is it, now you have a gorgeous prompt
 :~/moiseevigor.github.io (master)$ 
 ```
 
-Have a nice branching!
+Happy branching!

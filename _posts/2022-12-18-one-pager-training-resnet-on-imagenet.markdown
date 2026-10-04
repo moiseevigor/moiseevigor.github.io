@@ -18,7 +18,7 @@ tags:
 comments: true
 ---
 
-Without further due, here is a one pager code for training Resnet50 on ImageNet in PyTorch:
+Without further ado, here is a one-pager code for training Resnet50 on ImageNet in PyTorch:
 
 ```python
 import torch
@@ -90,7 +90,7 @@ for epoch in range(num_epochs):
 print(f'Finished Training, Loss: {loss.item():.4f}')
 ```
 
-This code will train Resnet50 model on the ImageNet dataset for 10 epochs using ADAM optimizer with a learning rate of `0.001`. The model is trained on GPU if available, otherwise it is trained on CPU.
+This code will train the Resnet50 model on the ImageNet dataset for 10 epochs using the ADAM optimizer with a learning rate of `0.001`. The model is trained on GPU if available, otherwise it is trained on CPU.
 
 Note that the code is adjusted to run with [ImageNet Object Localization Challenge on Kaggle](https://www.kaggle.com/competitions/imagenet-object-localization-challenge/overview). You may check some results in the notebook [Train Resnet50 on Imagenet with PyTorch](https://www.kaggle.com/code/moiseevigor/train-resnet50-on-imagenet-with-pytorch).
 
@@ -136,7 +136,7 @@ This block of code makes up the set of transformations that will be applied duri
 - `[0.485, 0.456, 0.406]` - the mean of the data along each channel (i.e., the red, green, and blue channels for an image).
 - `[0.229, 0.224, 0.225]` - the standard deviation of the data along each channel.
 
-These exact values are used for normalizing data that has been pre-trained on the ImageNet dataset. They are based on the statistics of the ImageNet dataset, which consists of a large number of natural images.
+These exact values are used for normalizing data for models that have been pre-trained on the ImageNet dataset. They are based on the statistics of the ImageNet dataset, which consists of a large number of natural images.
 
 ### Load the ImageNet dataset:
 
@@ -146,15 +146,15 @@ train_dataset = torchvision.datasets.ImageFolder(
     transform=transform
 )
 ```
-This line loads ImageNet dataset in Kaggle's format and applies all transformations defined above.
+This line loads the ImageNet dataset in Kaggle's format and applies all transformations defined above.
 
 ### Create a dataloader for the dataset:
 ```python
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=2)
 ```
-The `torch.utils.data.DataLoader` function creates a dataloader for the dataset. The `batch_size` parameter specifies the number of samples per batch, the `shuffle` parameter specifies whether to shuffle the data at each epoch, and the `num_workers` parameter specifies the number of worker threads to use for loading the data
+The `torch.utils.data.DataLoader` function creates a dataloader for the dataset. The `batch_size` parameter specifies the number of samples per batch, the `shuffle` parameter specifies whether to shuffle the data at each epoch, and the `num_workers` parameter specifies the number of worker threads to use for loading the data.
 
-> A rule of thumb for the number of workers is the number of CPU cores minus 1 for controlling processes `os.cpu_count()` or `multiprocessing.cpu_count()` can help with this.
+> A rule of thumb for the number of workers is the number of CPU cores minus 1 for controlling processes; `os.cpu_count()` or `multiprocessing.cpu_count()` can help with this.
 
 ### Load the Resnet50 model:
 ```python
@@ -165,11 +165,11 @@ This line uses the `torchvision.models.resnet50` function to load the Resnet50 m
 
 ### Parallelize training across multiple GPUs
 
-```
+```python
 model = torch.nn.DataParallel(model)
 ```
 
-`torch.nn.DataParallel` wraps a model and splits the input across available GPUs, then it replicates the model on each GPU. The model is then run in parallel on each GPU, with the results from each GPU being collected and concatenated together. Normally this significantly speeds up training process, especially for large models on GPUs with a high number of parallel processing cores.
+`torch.nn.DataParallel` wraps a model and splits the input across available GPUs, then it replicates the model on each GPU. The model is then run in parallel on each GPU, with the results from each GPU being collected and concatenated together. Normally this significantly speeds up the training process, especially for large models on GPUs with a high number of parallel processing cores.
 
 ### Move the model to the device:
 
@@ -216,7 +216,7 @@ This block of code trains the model for 10 epochs. An epoch is a complete pass t
 In each epoch, the code iterates over the dataloader, which yields batches of inputs and labels. The inputs and labels are moved to the device, and the gradients are zeroed using the `optimizer.zero_grad()` method. 
 
 <blockquote>
-During training process, gradients of the model's parameters are computed using backpropagation, which involves propagating the loss gradient back through the model's layers to compute the gradients of the model's parameters. These gradients are used to update model's parameters using the optimizer's update rule. <br/><br/>
+During the training process, gradients of the model's parameters are computed using backpropagation, which involves propagating the loss gradient back through the model's layers to compute the gradients of the model's parameters. These gradients are used to update the model's parameters using the optimizer's update rule. <br/><br/>
 
 However, if you don't zero gradients before each training step, gradients will accumulate and the update rule will be based on the sum of the gradients over all previous training steps. This can cause the model's parameters to oscillate or diverge, leading to poor convergence and potentially poor model performance. <br/><br/>
 
@@ -240,7 +240,7 @@ RUN mkdir -p /root/.kaggle
 ADD kaggle.json /root/.kaggle
 
 # Install Kaggle toolchain and download imagenet 
-# Rememeber to join competition https://www.kaggle.com/c/imagenet-object-localization-challenge
+# Remember to join competition https://www.kaggle.com/c/imagenet-object-localization-challenge
 RUN pip install -q kaggle
 RUN kaggle competitions download -c imagenet-object-localization-challenge
 RUN unzip imagenet-object-localization-challenge.zip -d imagenet-object-localization-challenge
@@ -259,13 +259,13 @@ WORKDIR /app
 CMD ["python", "resnet50.py"]
 ```
 
-This `Dockerfile` is based on `pytorch/pytorch` image, which provides all necessary dependencies for running PyTorch programs with GPU acceleration.
+This `Dockerfile` is based on the `pytorch/pytorch` image, which provides all necessary dependencies for running PyTorch programs with GPU acceleration.
 
 The `Dockerfile` installs `wget` and `unzip` utilities, which are needed to download the ImageNet dataset. It then downloads the dataset and extracts images to the `imagenet-object-localization-challenge` directory.
 
-Next, the Dockerfile copies `resnet50.py` file, which should contain the code for training the ResNet50 model, to the `/app` directory. It then sets the working directory to /app and specifies that the python `resnet50.py` command should be run when the container is started.
+Next, the Dockerfile copies the `resnet50.py` file, which should contain the code for training the ResNet50 model, to the `/app` directory. It then sets the working directory to /app and specifies that the `python resnet50.py` command should be run when the container is started.
 
-It is important to note that you have to provide your own secret in `kaggle.json` file to be able to download locally the data from [ImageNet Object Localization Challenge on Kaggle](https://www.kaggle.com/competitions/imagenet-object-localization-challenge/data). Here is the [local directory structure](https://github.com/moiseevigor/moiseevigor.github.io/tree/master/_code_examples/2022-12-18-one-pager-training-resnet-on-imagenet)
+It is important to note that you have to provide your own secret in the `kaggle.json` file to be able to download the data locally from [ImageNet Object Localization Challenge on Kaggle](https://www.kaggle.com/competitions/imagenet-object-localization-challenge/data). Here is the [local directory structure](https://github.com/moiseevigor/moiseevigor.github.io/tree/master/_code_examples/2022-12-18-one-pager-training-resnet-on-imagenet)
 
 ```
 ➜  2022-12-18-one-pager-training-resnet-on-imagenet git:(master) ✗ tree

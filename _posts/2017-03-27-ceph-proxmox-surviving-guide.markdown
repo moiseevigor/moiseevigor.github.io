@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Surviving guide with Ceph and Proxmox"
-description: "Small surviving guide for managing Proxmox cluster with Ceph storage"
+title:  "Survival guide with Ceph and Proxmox"
+description: "Small survival guide for managing a Proxmox cluster with Ceph storage"
 date:   2017-03-27 10:05:45
 categories:
 - software
@@ -13,14 +13,14 @@ comments: true
 ---
 
 After you've followed the familiar [Proxmox Ceph Server](https://pve.proxmox.com/wiki/Ceph_Server)
-manual youl'll have the brand new Ceph clutser up and running, here I'm collecting the basic tasks
-and command you'll need to manage Ceph cluster.
+manual you'll have a brand new Ceph cluster up and running. Here I'm collecting the basic tasks
+and commands you'll need to manage a Ceph cluster.
 
 ## Ceph structure info
 
 ### Disk structure
 
-[Ceph](/tag/ceph) automatically configure and creates the block device in `/dev/rbd/<pool-name>/`
+[Ceph](/tag/ceph) automatically configures and creates the block device in `/dev/rbd/<pool-name>/`
 
 ```bash
 root@node1:~# ls -la /dev/rbd/<pool-name>/

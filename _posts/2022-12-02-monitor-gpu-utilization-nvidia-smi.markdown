@@ -17,10 +17,10 @@ tags:
 comments: true
 ---
 
-When training you'd love to know how efficiently GPU is utilized. Nvidia provides 
-a tool `nvidia-smi` with a driver.
+When training you'd love to know how efficiently the GPU is utilized. Nvidia provides 
+a tool `nvidia-smi` with the driver.
 
-Just invoking it without any parameters it gives you a matrix with basic GPU parameters
+Just invoking it without any parameters gives you a matrix with basic GPU parameters
 
 ```
 $ nvidia-smi
@@ -48,7 +48,7 @@ Fri Dec  2 23:13:41 2022
 +-----------------------------------------------------------------------------+
 ```
 
-but how to monitor continuously the GPU usage, we have to use keys 
+But to monitor the GPU usage continuously, we have to use keys 
 
 ```
 $ nvidia-smi dmon -s pucvmet
@@ -61,7 +61,7 @@ $ nvidia-smi dmon -s pucvmet
     0    19    45     -     9    10     0     0   810  1151     0     0   821     6     -     -     0     0     0
 ```
 
-the parameters to watch
+The parameters to watch:
 
 * p - Power Usage (in Watts) and Gpu/Memory Temperature (in C) if supported
 * **u - Utilization (SM, Memory, Encoder and Decoder Utilization in %)**

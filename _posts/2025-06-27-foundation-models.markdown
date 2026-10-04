@@ -25,7 +25,7 @@ how we interact with technology. Central to this evolution are
 **Foundation Models** — advanced AI systems trained on vast datasets, capable of
 adapting to numerous tasks without extensive retraining. In this article we
 dive into the heart of Foundation Models, examining their current limitations,
-future potentials, and the transformative concept of *Software 3.0*.
+future potential, and the transformative concept of *Software 3.0*.
 
 </div><!-- /.l-body -->
 

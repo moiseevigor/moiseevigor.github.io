@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Get file creation time on Linux with EXT4"
-description: "How to extract the file created/creation time on Linux with EXT4 filesystem"
+description: "How to extract the file creation time on Linux with the EXT4 filesystem"
 date:   2015-01-30 18:05:45
 categories:
 - software
@@ -16,17 +16,17 @@ Despite the common opinion [unix.stackexchange.com/get-file-created-creation-tim
 
 > Linux offers three timestamps for files: time of last access of contents (atime), time of last modification of contents (mtime), and time of last modification of the inode (metadata, ctime).
 
-You may recover the file creation date if you deal with capble filesystem like [EXT4 - journaling file system for Linux](https://en.wikipedia.org/wiki/Ext4):
+You may recover the file creation date if you deal with a capable filesystem like [EXT4 - journaling file system for Linux](https://en.wikipedia.org/wiki/Ext4):
 
 > **Improved timestamps**
 
 > ... Ext4 provides timestamps measured in nanoseconds. In addition, ext4 also adds support for date-created timestamps.
 
-But there no consensus in the community on that so
+But there is no consensus in the community on that so
 
 > ... as [Theodore Ts'o points out](https://www.redhat.com/archives/ext3-users/2006-October/msg00015.html), while it is easy to add an extra creation-date field in the inode (thus technically enabling support for date-created timestamps in ext4), it is more difficult to modify or add the necessary system calls, like stat() (which would probably require a new version) and the various libraries that depend on them (like glibc). These changes would require coordination of many projects. So even if ext4 developers implement initial support for creation-date timestamps, this feature will not be available to user programs for now.
 
-Which end up with [the Linus final quote](https://lkml.org/lkml/2010/7/22/249)
+Which ends up with [the Linus final quote](https://lkml.org/lkml/2010/7/22/249)
 
 > Let's wait five years and see if there is actually any consensus on it being needed and used at all, rather than rush into something just because "we can".
 
@@ -36,7 +36,7 @@ So what to do? Let's chill out
 
 <br>
 
-Now let's question yourself how would you extract this information? We end up with the `STAT` utility
+Now ask yourself how you would extract this information. We end up with the `STAT` utility
 
 ```bash
 NAME
@@ -49,7 +49,7 @@ DESCRIPTION
        Display file or file system status.
 ```
 
-and `DEBUGFS` utilities
+and `DEBUGFS` utility
 
 ```bash
 NAME
@@ -63,7 +63,7 @@ DESCRIPTION
        device is the special file corresponding to the device containing the file system (e.g /dev/hdXX).
 ```
 
-So we compound both command in one
+So we combine both commands into one
 
 ```bash
 $ debugfs -R 'stat <filename>' </dev/sdXX - partition name>
@@ -87,7 +87,7 @@ EXTENTS:
 (0): 4229445, (1-7): 4261097-4261103, ...
 ```
 
-So lets write the [`xstat` utility](https://gist.github.com/moiseevigor/8c496f632137605b322e) before the consensus will come :)
+So let's write the [`xstat` utility](https://gist.github.com/moiseevigor/8c496f632137605b322e) before the consensus comes :)
 
 <script src="https://gist.github.com/moiseevigor/8c496f632137605b322e.js"></script>
 
