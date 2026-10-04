@@ -76,14 +76,11 @@ def render_figure(cut, B, nx, nz, p, ev, Qn):
     imA = axA.imshow(cut.T, origin="lower", cmap="RdBu_r", vmin=-v, vmax=v)
     axA.axhline(iy0, color="k", lw=0.7, ls=(0, (4, 3)), alpha=0.55)
     axA.plot(ix0, iy0, marker="*", ms=16, mfc="#ffd000", mec="k", mew=1.1, zorder=5)
-    axA.set_title("A · photosphere: line-of-sight $B$  (SDO/HMI, 2011-06-07)", fontsize=8.6)
-    axA.set_xlabel("x [px]", fontsize=8); axA.set_ylabel("y [px]", fontsize=8)
-    axA.tick_params(labelsize=7)
+    axA.set_title("A", loc="left", fontsize=11, fontweight="bold")
+    axA.set_xlabel("x [px, linear]", fontsize=9.5); axA.set_ylabel("y [px, linear]", fontsize=9.5)
+    axA.tick_params(labelsize=9)
     cbA = fig.colorbar(imA, ax=axA, fraction=0.046, pad=0.03)
-    cbA.set_label("$B_\\parallel$ [G]", fontsize=7.5); cbA.ax.tick_params(labelsize=6.5)
-    axA.text(0.035, 0.035, "opposite polarities (red / blue)\nanchor the null's field lines;\ndashed line = slice in panel B",
-             transform=axA.transAxes, fontsize=6.8, va="bottom",
-             bbox=dict(boxstyle="round,pad=0.28", fc="white", ec="0.6", alpha=0.82))
+    cbA.set_label("line-of-sight $B$ [G, linear]", fontsize=9.5); cbA.ax.tick_params(labelsize=9)
 
     # (B) vertical slice of |B|: the field vanishes at the null; streamlines = topology
     pos = mag[mag > 0]
@@ -94,19 +91,15 @@ def render_figure(cut, B, nx, nz, p, ev, Qn):
     axB.streamplot(Xg, Zg, U, Wv, color="white", density=1.25, linewidth=0.6,
                    arrowsize=0.7, arrowstyle="-|>")
     axB.plot(ix0, iz0, marker="*", ms=18, mfc="#25d0ff", mec="k", mew=1.2, zorder=6)
-    axB.set_title("B · coronal $|B|$ through the null — the field vanishes here", fontsize=8.6)
-    axB.set_xlabel("x [px]", fontsize=8); axB.set_ylabel("height above surface [px]", fontsize=8)
-    axB.set_xlim(0, nx); axB.set_ylim(0, nz); axB.tick_params(labelsize=7)
+    axB.set_title("B", loc="left", fontsize=11, fontweight="bold")
+    axB.set_xlabel("x [px, linear]", fontsize=9.5)
+    axB.set_ylabel("height above surface [px, linear]", fontsize=9.5)
+    axB.set_xlim(0, nx); axB.set_ylim(0, nz); axB.tick_params(labelsize=9)
     cbB = fig.colorbar(imB, ax=axB, fraction=0.046, pad=0.03)
-    cbB.set_label("$|B|$ [G, log]", fontsize=7.5); cbB.ax.tick_params(labelsize=6.5)
-    axB.annotate(f"null · h = {iz0:.0f} px · radial\n"
-                 f"$\\nabla B$ eigs ({ev[0]:+.2f}, {ev[1]:+.2f}, {ev[2]:+.2f})\n"
-                 f"SR growth vector  Q = {Qn}",
-                 (ix0, iz0), (min(ix0, nx - 4), iz0 + 10), fontsize=7.4, color="k",
-                 ha="center", fontweight="bold",
-                 bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="k", alpha=0.92),
-                 arrowprops=dict(arrowstyle="->", color="k"))
-
+    cbB.set_label("$|B|$ [G, log scale]", fontsize=9.5); cbB.ax.tick_params(labelsize=9)
+    # null facts (height, eigenvalues, Q) are stated in the caption, not in the plot
+    print(f"caption facts: h = {iz0:.0f} px, eigs ({ev[0]:+.2f}, {ev[1]:+.2f}, "
+          f"{ev[2]:+.2f}), Q = {Qn}")
     fig.tight_layout()
     out = REPO / "public/img/posts/forbidden-directions-solar-null.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)
@@ -179,5 +172,28 @@ def main():
           " standard eigenvalue finder on presence and order.")
 
 
+def render_from_artifact():
+    """Figure only: window, null position, eigenvalues and Q are read from
+    artifacts/p2_solar_results.json; only the deterministic FFT extrapolation of the
+    recorded window is redone (no null search, no SR detector)."""
+    from sunpy.data.sample import HMI_LOS_IMAGE
+    from astropy.io import fits
+    from scipy.ndimage import zoom
+    res = json.loads((ROOT / "artifacts" / "p2_solar_results.json").read_text())
+    hdul = fits.open(HMI_LOS_IMAGE)
+    hdul.verify("silentfix")
+    bz_full = np.nan_to_num([h.data for h in hdul
+                             if getattr(h, "data", None) is not None and h.data.ndim == 2][0])
+    cy, cx = res["cutout_center_yx"]
+    cut = zoom(bz_full[cy - 80:cy + 80, cx - 80:cx + 80], 100 / 160, order=1)
+    B, _A = solar.potential_field(cut, 56, dz=1.0)
+    ny, nx, nz, _ = B.shape
+    render_figure(cut, B, nx, nz, res["null"]["xyh_px"], res["null"]["gradB_eigs"],
+                  res["Q_at_null"])
+
+
 if __name__ == "__main__":
-    main()
+    if "--render" in sys.argv:
+        render_from_artifact()
+    else:
+        main()

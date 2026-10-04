@@ -79,8 +79,11 @@ def main():
         {"epoch": "2012-03-07T00:00Z", "parmod": PARMOD, "n_nulls": len(records),
          "n_spiral": n_spiral, "nulls": records}, indent=2) + "\n")
     print("wrote artifacts/p4_magnetosphere.json")
+    render(field, records)
 
-    # ---- meridional figure ---------------------------------------------------------------
+
+def render(field, records):
+    """Meridional figure. No in-figure prose: the census numbers live in the caption."""
     try:
         import matplotlib
         matplotlib.use("Agg")
@@ -118,18 +121,13 @@ def main():
                                              ec="k", alpha=0.9),
                         arrowprops=dict(arrowstyle="->", color="k"))
     ax.set_xlim(xs[0], xs[-1]); ax.set_ylim(zs[0], zs[-1])
-    ax.text(0.015, 0.03,
-            f"census: {len(records)} nulls, {n_spiral} spiral — the population sits "
-            f"off-plane at $|y|\\approx17\\!-\\!25\\,R_E$ (nightside flank / lobe "
-            f"boundary);\nspirals are possible here because the tail current is "
-            f"genuinely non-force-free — exactly what the force-free theorem forbids "
-            f"on the Sun's extrapolations",
-            transform=ax.transAxes, fontsize=6.8, va="bottom", color="white")
+    n_spiral = sum(r["type"] == "spiral" for r in records)
+    print(f"census (for the caption): {len(records)} nulls, {n_spiral} spiral")
     cb = fig.colorbar(im, ax=ax, fraction=0.03, pad=0.02)
-    cb.set_label("$|B|$ [nT, log]", fontsize=8); cb.ax.tick_params(labelsize=7)
-    ax.set_xlabel("$x_{GSM}$ [$R_E$]  (Sun →)", fontsize=9)
-    ax.set_ylabel("$z_{GSM}$ [$R_E$]", fontsize=9)
-    ax.tick_params(labelsize=7.5)
+    cb.set_label("$|B|$ [nT, log scale]", fontsize=10); cb.ax.tick_params(labelsize=9)
+    ax.set_xlabel("$x_{GSM}$ [$R_E$, linear]  (Sun →)", fontsize=10.5)
+    ax.set_ylabel("$z_{GSM}$ [$R_E$, linear]", fontsize=10.5)
+    ax.tick_params(labelsize=9)
     fig.tight_layout()
     out = REPO / "public/img/posts/forbidden-directions-magnetosphere.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)
@@ -137,4 +135,9 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if "--render" in sys.argv:          # figure only, census read from the artifact
+        _d = json.loads((ROOT / "artifacts" / "p4_magnetosphere.json").read_text())
+        _ut = datetime(2012, 3, 7, 0, 0, tzinfo=timezone.utc).timestamp()
+        render(ms.Magnetosphere(_ut, _d["parmod"]), _d["nulls"])
+    else:
+        main()

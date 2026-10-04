@@ -109,28 +109,64 @@ def main():
         json.dumps(census, indent=2) + "\n")
     print("wrote artifacts/p5_sequence.json")
 
-    # ---- figure -------------------------------------------------------------------------
-    try:
-        import matplotlib
-        matplotlib.use("Agg")
-        import matplotlib.pyplot as plt
-    except Exception as e:                              # pragma: no cover
-        print("figure skipped:", e)
-        return
-    n = len(panels)
-    fig, axes = plt.subplots(1, n, figsize=(2.55 * n, 3.3), dpi=150)
-    for ax, (t, cut, ps), rec in zip(np.atleast_1d(axes), panels, census):
-        v = np.percentile(np.abs(cut), 99)
-        ax.imshow(cut.T, origin="lower", cmap="RdBu_r", vmin=-v, vmax=v)
+    render(panels, census)
+
+
+def render_from_artifact():
+    """Figure only. Windows come from artifacts/p5_sequence.json; null (x, y) positions
+    are not stored there, so the (seconds-long, deterministic) null search is repeated
+    for the star markers and CHECKED against the stored census -- nothing is rewritten."""
+    from scipy.ndimage import zoom
+    census = json.loads((ROOT / "artifacts" / "p5_sequence.json").read_text())
+    panels = []
+    for (t, bz), rec in zip(load_frames(), census):
+        assert t == rec["t"], (t, rec["t"])
+        cy, cx = rec["window_yx"]
+        cut = zoom(bz[cy - WIN // 2:cy + WIN // 2, cx - WIN // 2:cx + WIN // 2],
+                   CUT / WIN, order=1)
+        B, _A = solar.potential_field(cut, NZ, dz=1.0)
+        ny, nx, nz, _ = B.shape
+        nulls = [nl for nl in solar.find_nulls(B, seeds_per_axis=10)
+                 if 6 < nl["p"][0] < nx - 6 and 6 < nl["p"][1] < ny - 6
+                 and 3 < nl["p"][2] < nz - 3]
+        assert [round(float(nl["p"][2]), 1) for nl in nulls] == rec["heights_px"], \
+            f"{t}: recomputed nulls differ from the artifact"
+        panels.append((t, cut, [nl["p"] for nl in nulls]))
+    render(panels, census)
+
+
+def render(panels, census):
+    """2 x 4 sheet, one shared symmetric colour scale, axes in px. Panels carry a
+    letter and the frame time only; null counts go to the caption."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    v = float(np.round(np.median([np.percentile(np.abs(c), 99) for _, c, _ in panels]), -1))
+    print(f"shared colour limits: +/-{v:.0f} G")
+    fig, axes = plt.subplots(2, 4, figsize=(12.4, 6.6), dpi=150, sharex=True,
+                             sharey=True, layout="constrained")
+    for k, (ax, (t, cut, ps), rec) in enumerate(zip(axes.ravel(), panels, census)):
+        im = ax.imshow(cut.T, origin="lower", cmap="RdBu_r", vmin=-v, vmax=v)
         for p in ps:
-            ax.plot(p[0], p[1], marker="*", ms=11, mfc="#ffd000", mec="k", mew=0.9)
-        ax.set_title(f"{t[5:]}\nnulls: {rec['n_nulls']}", fontsize=7.6)
-        ax.set_xticks([]); ax.set_yticks([])
-    fig.tight_layout()
+            ax.plot(p[0], p[1], marker="*", ms=14, mfc="#ffd000", mec="k", mew=0.9)
+        ax.set_title("ABCDEFGH"[k], loc="left", fontsize=11, fontweight="bold")
+        ax.set_title(f"{t[5:10]} {t[11:16]} UT", loc="right", fontsize=10)
+        ax.tick_params(labelsize=9)
+        print(f"  panel {'ABCDEFGH'[k]}: {t}  nulls {rec['n_nulls']}")
+    for ax in axes[-1]:
+        ax.set_xlabel("x [px, linear]", fontsize=10)
+    for ax in axes[:, 0]:
+        ax.set_ylabel("y [px, linear]", fontsize=10)
+    cb = fig.colorbar(im, ax=axes, fraction=0.025, pad=0.015, extend="both")
+    cb.set_label("line-of-sight $B$ [G, linear]", fontsize=10)
+    cb.ax.tick_params(labelsize=9)
     out = REPO / "public/img/posts/forbidden-directions-emergence.png"
-    fig.savefig(out, bbox_inches="tight", dpi=150)
+    fig.savefig(out, dpi=150)
     print(f"rendered {out.relative_to(REPO)}")
 
 
 if __name__ == "__main__":
-    main()
+    if "--render" in sys.argv:
+        render_from_artifact()
+    else:
+        main()

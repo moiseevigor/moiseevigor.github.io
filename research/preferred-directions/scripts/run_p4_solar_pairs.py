@@ -117,14 +117,20 @@ def main():
          "crossover_detected": bool(verdict)}, indent=2) + "\n")
     print("wrote artifacts/p4_solar_pairs.json")
 
-    # ---- figure -------------------------------------------------------------------------
+    render_figure(pair, radii, half, w4)
+
+
+def render_figure(pair, radii, half, w4):
+    """Presentation only; callable on artifacts/p4_solar_pairs.json without recomputing."""
     try:
         import matplotlib
         matplotlib.use("Agg")
         import matplotlib.pyplot as plt
+        from matplotlib.ticker import NullFormatter, ScalarFormatter
     except Exception as e:                              # pragma: no cover
         print("figure skipped:", e)
         return
+    radii, w4 = np.asarray(radii), np.asarray(w4)
     fig, ax = plt.subplots(figsize=(5.6, 4.0), dpi=150)
     ax.semilogx(radii / half, w4, "o-", color="#e65100", ms=4.5, lw=1.5,
                 label=f"real pair, sep = {pair['sep_px']:.1f} px\n({pair['vol'].split('@')[0]})")
@@ -132,9 +138,12 @@ def main():
     ax.text(1.03, 1.62, "half-separation", rotation=90, fontsize=7, color="0.3")
     for yv, t in ((2, "uniform (w=2)"), (3, "single null (w=3)"), (4, "degenerate (w=4)")):
         ax.axhline(yv, color="0.85", lw=0.8, ls="--")
-        ax.text(ax.get_xlim()[0] * 1.1 if False else radii[0] / half, yv + 0.05, t,
-                fontsize=6.6, color="0.45")
-    ax.set_xlabel("probe radius / half-separation", fontsize=9)
+        ax.text(radii[0] / half, yv + 0.05 if yv > 2 else yv - 0.13, t,
+                fontsize=6.6, color="0.45")             # w=2 label below its line: clear of the data
+    ax.set_xticks([0.2, 0.5, 1, 2])                     # plain decade-free ticks: no overlapping minor labels
+    ax.xaxis.set_major_formatter(ScalarFormatter())
+    ax.xaxis.set_minor_formatter(NullFormatter())
+    ax.set_xlabel("probe radius / half-separation (log scale)", fontsize=9)
     ax.set_ylabel("local flux exponent $w_4(r)$", fontsize=9)
     ax.set_ylim(1.5, 4.6); ax.tick_params(labelsize=7.5); ax.legend(fontsize=7)
     fig.tight_layout()

@@ -86,10 +86,10 @@ def constellation():
                     arrowprops=dict(arrowstyle="->", color="0.55"))
         ax.text(12.6, 0, "Sun", fontsize=7.5, color="0.4", va="center")
         ax.set_xlabel(xl, fontsize=8.5); ax.set_ylabel(yl, fontsize=8.5)
-        ax.set_title(ttl, fontsize=9)
+        ax.set_title(ttl.split(" · ")[0], loc="left", fontsize=9, fontweight="bold")
         ax.set_aspect("equal"); ax.tick_params(labelsize=7.5)
         ax.grid(alpha=0.25, lw=0.5)
-        ax.legend(fontsize=7.5, loc="lower left")
+        ax.legend(fontsize=7.5, loc="upper right")      # the only data-free corner
     print(f"constellation: {n_drop} far-tail nulls beyond |x|=40 RE omitted")
     fig.tight_layout()
     out = REPO / "public/img/posts/forbidden-directions-null-constellation.png"
@@ -455,31 +455,6 @@ def _fan_basis(M, cls):
     return u1, u2
 
 
-def _draw_glyph(ax, cls):
-    """Type schematic (X-type radial / O-type spiral) in axes coords."""
-    ax.set_xlim(0, 1); ax.set_ylim(0, 1)
-    c, r = np.array([0.5, 0.62]), 0.17
-    if cls["type"] == "radial":
-        for sgn in (+1, -1):
-            ax.annotate("", xy=c + [0, sgn * r * 1.45], xytext=c,
-                        arrowprops=dict(arrowstyle="-|>", color="#e65100", lw=2.0))
-        th = np.linspace(0, 2 * np.pi, 60)
-        ax.plot(c[0] + r * 1.25 * np.cos(th), c[1] + r * 0.45 * np.sin(th),
-                color="#1565c0", lw=1.6, ls="--")
-        for sgn in (+1, -1):
-            ax.annotate("", xy=c + [sgn * r * 1.7, 0], xytext=c + [sgn * r * 0.6, 0],
-                        arrowprops=dict(arrowstyle="-|>", color="#1565c0", lw=1.4))
-    else:
-        th = np.linspace(0, 3.6 * np.pi, 200)
-        rr = 0.03 + 0.045 * th
-        ax.plot(c[0] + rr * np.cos(th) * 1.15, c[1] + rr * np.sin(th) * 0.55,
-                color="#1565c0", lw=1.7)
-        for sgn in (+1, -1):
-            ax.annotate("", xy=c + [0, sgn * r * 1.5], xytext=c,
-                        arrowprops=dict(arrowstyle="-|>", color="#e65100", lw=2.0))
-    ax.plot(*c, marker="*", ms=15, mfc="#ffd34d", mec="#442200", mew=0.8)
-
-
 def _line_role(ln, p0, sp, L):
     """Topological role of a traced line near the null: fan / spine / ambient.
 
@@ -508,10 +483,15 @@ ROLE_STYLE = {   # colour = topological role (P&P-style clarity)
 }
 
 
-def _anatomy_rows(fig, axesrow, lines, p0, M, L, unit, row_title, tracer=None):
+def _anatomy_rows(fig, axesrow, lines, p0, M, L, unit, row_title, tracer=None,
+                  letters=("A", "B", "C")):
     """One null's row, in null-adapted views (Pontin & Priest 2022, conceptually):
 
-      [ 3D skeleton | view down the spine | side view, spine vertical | info ]
+      [ 3D skeleton | view down the spine | side view, spine vertical ]
+
+    House rule: no in-figure titles or prose. Panels carry only a bold letter;
+    the per-null facts (type, degree, eigenvalues, J_par) are PRINTED so the
+    markdown caption can state them.
 
     Colour = topological role: orange spine lines/axis, blue fan lines,
     gray ambient; open circle at the null coloured by sign (blue positive =
@@ -615,14 +595,15 @@ def _anatomy_rows(fig, axesrow, lines, p0, M, L, unit, row_title, tracer=None):
                 color="#e65100", zorder=5)
     ax.plot([0], [0], [0], marker="o", ms=8, mfc="none", mec=sign_col, mew=1.8,
             zorder=6)
-    ax.text(0, 0, 1.02 * L, "spine", color="#e65100", fontsize=7.5,
+    ax.text(0, 0, 1.02 * L, "spine", color="#e65100", fontsize=10,
             fontweight="bold", ha="center")
-    ax.text(0.72 * L, 0.35 * L, 0, "fan", color="#1565c0", fontsize=7.5,
+    ax.text(0.72 * L, 0.35 * L, 0, "fan", color="#1565c0", fontsize=10,
             fontweight="bold")
     ax.set_xlim(-L, L); ax.set_ylim(-L, L); ax.set_zlim(-L, L)
     ax.set_box_aspect((1, 1, 1))
     ax.set_axis_off()
-    ax.set_title("3D skeleton (null frame)", fontsize=8)
+    ax.text2D(0.02, 0.98, letters[0], transform=ax.transAxes, fontsize=11,
+              fontweight="bold", va="top")
     ax.view_init(elev=16, azim=-58)
     try:
         ax.set_proj_type("ortho")
@@ -652,29 +633,22 @@ def _anatomy_rows(fig, axesrow, lines, p0, M, L, unit, row_title, tracer=None):
         ax2.plot(0, 0, marker="o", ms=7, mfc="none", mec=sign_col, mew=1.6,
                  zorder=5)
         ax2.set_xlim(-L, L); ax2.set_ylim(-L, L)
-        ax2.set_aspect("equal"); ax2.tick_params(labelsize=6.5)
-        ax2.set_title(pt, fontsize=8)
-        ax2.set_xlabel(f"fan $e_1$ [{unit}]", fontsize=7)
-        ax2.set_ylabel(f"fan $e_2$ [{unit}]" if j == 1 else f"spine [{unit}]",
-                       fontsize=7)
+        ax2.set_aspect("equal"); ax2.tick_params(labelsize=9)
+        ax2.set_title(letters[k + 1], loc="left", fontsize=11, fontweight="bold")
+        ax2.set_xlabel(f"fan-plane axis $e_1$ [{unit}, linear]", fontsize=10)
+        ax2.set_ylabel(f"fan-plane axis $e_2$ [{unit}, linear]" if j == 1
+                       else f"spine axis [{unit}, linear]", fontsize=10)
 
-    # ---- panel 4: glyph + facts ---------------------------------------------
-    ax4 = axesrow[3]; ax4.set_axis_off()
-    _draw_glyph(ax4, cls)
+    # ---- facts go to stdout (-> markdown caption), not into the figure -------
+    for extra in axesrow[3:]:
+        extra.set_axis_off()
     ev = np.array2string(np.round(np.real_if_close(cls["eigs"], tol=1e6), 2),
                          separator=", ")
-    ax4.text(0.5, 0.985, row_title, transform=ax4.transAxes, ha="center",
-             va="top", fontsize=8.6, fontweight="bold")
     kind = "spiral" if cls["type"] == "spiral" else "radial"
-    info = (f"{kind} · degree {index:+d} · "
-            f"{'fan-out' if fan_out else 'fan-in'}\n"
-            f"$\\nabla B$ eigs (norm.): {ev}\n"
-            f"$J_\\parallel$ = {cls['J_parallel']:+.2f} · SR growth vector Q = 6\n"
-            "orange = spine · blue = fan lines · gray = ambient\n"
-            "translucent disc / dashes = ideal fan plane\n"
-            "circle at the null: blue degree +1, red degree −1")
-    ax4.text(0.5, 0.34, info, transform=ax4.transAxes, ha="center", va="top",
-             fontsize=6.6)
+    print(f"anatomy {letters}: {row_title} | {kind} | degree {index:+d} | "
+          f"{'fan-out' if fan_out else 'fan-in'} | gradB eigs (norm.) {ev} | "
+          f"J_par = {cls['J_parallel']:+.2f} | lines fan/spine/ambient = "
+          f"{len(fan_lines)}/{len(spine_lines)}/{len(ambient)}")
 
 
 def null_anatomy_sun():
@@ -682,9 +656,10 @@ def null_anatomy_sun():
     cut, B, nulls, _p0, _cyx = _ar11429_volume()
     ny, nx, nz, _ = B.shape
     rng = np.random.default_rng(4)
-    fig, axes = plt.subplots(len(nulls), 4, figsize=(11.4, 3.1 * len(nulls)), dpi=150)
+    print(f"AR11429 anatomy: {len(nulls)} interior null(s) in the volume")
+    fig, axes = plt.subplots(len(nulls), 3, figsize=(11.4, 3.9 * len(nulls)), dpi=150)
     axes = np.atleast_2d(axes)
-    for row, nl in zip(axes, nulls):
+    for r_i, (row, nl) in enumerate(zip(axes, nulls)):
         p0 = nl["p"]
         lines = []
         for _ in range(30):
@@ -696,7 +671,8 @@ def null_anatomy_sun():
         _anatomy_rows(fig, row, lines, p0, nl["gradB"], 12.0, "px",
                       f"coronal null · h = {p0[2]:.0f} px  (AR11429, real)",
                       tracer=lambda s, sgn, _B=B: _trace(_B, s, sgn, ds=0.25,
-                                                         steps=260))
+                                                         steps=260),
+                      letters="ABCDEFGHI"[3 * r_i:3 * r_i + 3])
     fig.tight_layout()
     out = REPO / "public/img/posts/forbidden-directions-null-anatomy-sun.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)
@@ -733,8 +709,9 @@ def null_anatomy_earth():
         return np.array(pts)
 
     rng = np.random.default_rng(6)
-    fig, axes = plt.subplots(2, 4, figsize=(11.4, 6.2), dpi=150)
-    for row, rec, tag in ((axes[0], radial, "radial"), (axes[1], spiral, "spiral")):
+    fig, axes = plt.subplots(2, 3, figsize=(11.4, 7.8), dpi=150)
+    for row, rec, tag, letters in ((axes[0], radial, "radial", "ABC"),
+                                   (axes[1], spiral, "spiral", "DEF")):
         p0 = np.array(rec["p_gsm_re"], float)
         M = field.jac(p0)
         # fan-adapted seeding: a ring in the fan plane (shows the straight fan of a
@@ -760,7 +737,8 @@ def null_anatomy_earth():
                       f"magnetospheric {tag} null · GSM ({p0[0]:.0f}, {p0[1]:.0f}, "
                       f"{p0[2]:.0f}) $R_E$",
                       tracer=lambda s, sgn, _p0=p0: trace_cb(
-                          s, sgn, ds=0.028, steps=900, p_ref=_p0))
+                          s, sgn, ds=0.028, steps=900, p_ref=_p0),
+                      letters=letters)
     fig.tight_layout()
     out = REPO / "public/img/posts/forbidden-directions-null-anatomy-earth.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)

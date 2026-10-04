@@ -147,62 +147,67 @@ def main(fast=False):
     (ROOT / "artifacts" / "r2_results.json").write_text(json.dumps(res, indent=2) + "\n")
     print("wrote artifacts/r2_results.json")
 
-    # ---- figure -----------------------------------------------------------------------
-    try:
-        import matplotlib
-        matplotlib.use("Agg")
-        import matplotlib.pyplot as plt
-    except Exception as e:                                    # pragma: no cover
-        print("figure skipped:", e)
-        return
+    render(res)
+
+
+def render(res):
+    """Figure from the results dict (= artifacts/r2_results.json). Panel letters only."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
     BLUE, ORANGE, GREY, GREEN = "#1565c0", "#e65100", "#5f6368", "#2e7d32"
     names = {"flow": ("integrated flow (SR)", ORANGE, "o-"),
              "fd_plain": ("finite difference", BLUE, "s--"),
-             "fd_lsq": ("linear fit $\\rho$=0.5 (strong)", GREY, "d-."),
-             "fd_lsq_small": ("linear fit $\\rho$=0.25", GREEN, "^:")}
-    err = lambda a: 1.96 * np.sqrt(np.maximum(a * (1 - a), 1e-9) / (len(test) * N))
+             "fd_lsq": ("linear fit, ball radius $\\rho$ = 0.5", GREY, "d-."),
+             "fd_lsq_small": ("linear fit, ball radius $\\rho$ = 0.25", GREEN, "^:")}
+    sig, n_tot = res["sigmas"], res["n_configs"] * res["N"]
+    err = lambda a: 1.96 * np.sqrt(np.maximum(a * (1 - a), 1e-9) / n_tot)
 
-    fig, axes = plt.subplots(2, 2, figsize=(9.4, 7.4), dpi=150)
-    panels = ((axes[0, 0], "clean", "accuracy", "A · exactly linear field — all nulls"),
-              (axes[0, 1], "curved", "accuracy", "B · curved field (30% quadratic) — all nulls"),
-              (axes[1, 0], "curved", "accuracy_boundary",
-               "C · curved field, near the radial/spiral boundary"))
+    fig, axes = plt.subplots(2, 2, figsize=(9.4, 7.6), dpi=150)
+    panels = ((axes[0, 0], "clean", "accuracy", "A"),
+              (axes[0, 1], "curved", "accuracy", "B"),
+              (axes[1, 0], "curved", "accuracy_boundary", "C"))
     for ax, leg, key, ttl in panels:
-        for m in METHODS:
+        for m in names:
             a = np.array(res["legs"][leg][key][m])
             lab, col, st = names[m]
-            ax.errorbar(SIGMAS, a, yerr=err(a), fmt=st, color=col, label=lab,
+            ax.errorbar(sig, a, yerr=err(a), fmt=st, color=col, label=lab,
                         ms=4, lw=1.3, capsize=2.2)
-        ax.axhline(0.25, color="0.75", lw=0.8, ls=":")
-        ax.text(SIGMAS[-1], 0.26, "chance", fontsize=6.5, ha="right",
-                va="bottom", color="0.5")
-        ax.set_xlabel("field noise $\\sigma$ (rel. RMS $|B|$, info ball)", fontsize=8.5)
-        ax.set_ylabel("4-class accuracy", fontsize=8.5)
-        ax.set_title(ttl, fontsize=8.8)
+        ax.axhline(0.25, color="0.6", lw=0.9, ls=":", label="chance (0.25)")
+        ax.set_xlabel("field noise $\\sigma$ [fraction of RMS $|B|$, linear]", fontsize=9.5)
+        ax.set_ylabel("4-class accuracy [fraction, linear]", fontsize=9.5)
+        ax.set_title(ttl, loc="left", fontsize=11, fontweight="bold")
         ax.set_ylim(0.0, 1.04)
-        ax.tick_params(labelsize=7.5)
-        ax.legend(fontsize=6.6, loc="lower left")
+        ax.tick_params(labelsize=9)
+    h, l = axes[0, 0].get_legend_handles_labels()
+    fig.legend(h, l, loc="upper center", ncol=3, fontsize=9, frameon=False,
+               bbox_to_anchor=(0.5, 1.0))            # outside the axes: covers no data
 
     ax = axes[1, 1]
     sK = 0.2
+    labels4 = res["labels4"]
     C = np.array(res["legs"]["curved"]["confusion"][str(sK)]["flow"], float)
     C = C / np.maximum(C.sum(1, keepdims=True), 1)
     im = ax.imshow(C, cmap="Blues", vmin=0, vmax=1)
-    ax.set_xticks(range(4), LABELS4, fontsize=7, rotation=45)
-    ax.set_yticks(range(4), LABELS4, fontsize=7)
-    ax.set_xlabel("flow classifier says", fontsize=8.5)
-    ax.set_ylabel("truth", fontsize=8.5)
-    ax.set_title(f"D · flow confusion, curved field, $\\sigma$ = {sK}", fontsize=8.8)
+    ax.set_xticks(range(4), labels4, fontsize=9, rotation=45)
+    ax.set_yticks(range(4), labels4, fontsize=9)
+    ax.set_xlabel("flow classifier output", fontsize=9.5)
+    ax.set_ylabel("true type", fontsize=9.5)
+    ax.set_title("D", loc="left", fontsize=11, fontweight="bold")
     for i in range(4):
         for j in range(4):
-            ax.text(j, i, f"{C[i, j]:.2f}", ha="center", va="center", fontsize=7,
+            ax.text(j, i, f"{C[i, j]:.2f}", ha="center", va="center", fontsize=9,
                     color="white" if C[i, j] > 0.6 else "#123")
-    fig.colorbar(im, ax=ax, fraction=0.046).ax.tick_params(labelsize=6.5)
-    fig.tight_layout()
+    cb = fig.colorbar(im, ax=ax, fraction=0.046)
+    cb.set_label("row-normalised fraction", fontsize=9.5); cb.ax.tick_params(labelsize=9)
+    fig.tight_layout(rect=(0, 0, 1, 0.93))
     out = REPO / "public/img/posts/forbidden-directions-r2-noise.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)
     print(f"rendered {out.relative_to(REPO)}")
 
 
 if __name__ == "__main__":
-    main(fast="--fast" in sys.argv)
+    if "--render" in sys.argv:
+        render(json.loads((ROOT / "artifacts" / "r2_results.json").read_text()))
+    else:
+        main(fast="--fast" in sys.argv)

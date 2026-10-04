@@ -120,40 +120,54 @@ def main():
         indent=2) + "\n")
     print("wrote artifacts/p5_race.json")
 
-    # ---- figure ----------------------------------------------------------------------
-    try:
-        import matplotlib
-        matplotlib.use("Agg")
-        import matplotlib.pyplot as plt
-    except Exception as e:                              # pragma: no cover
-        print("figure skipped:", e)
-        return
+    render(results)
+
+
+def render(results):
+    """Figure from the results list (= artifacts/p5_race.json["results"]). Colour and
+    marker = method, line style = fold parameter mu; true separations per leg are
+    printed for the caption (they differ between legs, so they are not legend keys)."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.lines import Line2D
+
+    def cell(leg, mu, sig):
+        return next(r for r in results
+                    if r["leg"] == leg and r["mu"] == mu and r["sigma"] == sig)
     BLUE, ORANGE = "#1565c0", "#e65100"
-    fig, axes = plt.subplots(1, 2, figsize=(9.6, 3.9), dpi=150, sharey=True)
-    for ax, leg, ttl in ((axes[0], "pure", "A · pure fold (the fit's exact model)"),
-                         (axes[1], "contam",
-                          "B · contaminated (25% non-polynomial background)")):
-        for mi, mu in enumerate(MUS):
-            sep = cell(leg, mu, 0.0)["sep_true"]
-            alpha = 1.0 - 0.3 * mi
-            for key, col, mk, lab in (("err_crossover", ORANGE, "o", "crossover"),
-                                      ("err_quadfit", BLUE, "s", "quad fit")):
+    styles = ["-", "--", ":"]
+    fig, axes = plt.subplots(1, 2, figsize=(9.6, 4.4), dpi=150, sharey=True)
+    for ax, leg, letter in ((axes[0], "pure", "A"), (axes[1], "contam", "B")):
+        for mu, ls in zip(MUS, styles):
+            print(f"  [{leg}] mu={mu:g}: true separation {cell(leg, mu, 0.0)['sep_true']:.3f}")
+            for key, col, mk in (("err_crossover", ORANGE, "o"),
+                                 ("err_quadfit", BLUE, "s")):
                 ys = [cell(leg, mu, s)[key] for s in SIGMAS]
                 ys = [np.nan if v is None else v for v in ys]
-                ax.plot(SIGMAS, ys, mk + "-", color=col, alpha=alpha, ms=4, lw=1.2,
-                        label=(f"{lab}, sep={sep:.2f}" if True else None))
-        ax.set_xlabel("noise $\\sigma$ (rel. ball RMS)", fontsize=8.5)
-        ax.set_title(ttl, fontsize=9)
+                ax.plot(SIGMAS, ys, marker=mk, ls=ls, color=col, ms=4.5, lw=1.4)
+        ax.set_xlabel("noise $\\sigma$ [fraction of ball RMS $|B|$, linear]", fontsize=9.5)
+        ax.set_title(letter, loc="left", fontsize=11, fontweight="bold")
         ax.set_yscale("log")
-        ax.tick_params(labelsize=7.5)
+        ax.tick_params(labelsize=9)
         ax.grid(alpha=0.25, lw=0.5)
-    axes[0].set_ylabel("median relative separation error", fontsize=8.5)
-    axes[1].legend(fontsize=5.8, ncol=2, loc="upper left")
-    fig.tight_layout()
+    axes[0].set_ylabel("median relative separation error [log scale]", fontsize=9.5)
+    handles = [Line2D([], [], color=ORANGE, marker="o", ms=4.5, lw=1.4,
+                      label="scale crossover"),
+               Line2D([], [], color=BLUE, marker="s", ms=4.5, lw=1.4,
+                      label="quadratic fit")]
+    handles += [Line2D([], [], color="0.3", ls=ls, lw=1.4, label=f"$\\mu$ = {mu:g}")
+                for mu, ls in zip(MUS, styles)]
+    fig.legend(handles=handles, loc="upper center", ncol=5, fontsize=9, frameon=False,
+               bbox_to_anchor=(0.5, 1.0))               # outside the axes: covers no data
+    fig.tight_layout(rect=(0, 0, 1, 0.93))
     out = REPO / "public/img/posts/forbidden-directions-race.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)
     print(f"rendered {out.relative_to(REPO)}")
 
 
 if __name__ == "__main__":
-    main()
+    if "--render" in sys.argv:
+        render(json.loads((ROOT / "artifacts" / "p5_race.json").read_text())["results"])
+    else:
+        main()

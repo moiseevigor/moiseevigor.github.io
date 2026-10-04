@@ -62,8 +62,8 @@ def main():
     axA.text(0.492, 3e-3, "critical gradient  $\\varepsilon = 1/2$", rotation=90,
              fontsize=7.5, color=GREY, ha="right")
     axA.set_xlabel(r"$\varepsilon = |\nabla \ln B|\, r_L$", fontsize=9)
-    axA.set_ylabel(r"$-\delta$  (mean refocusing delay)", fontsize=9)
-    axA.set_title("A · the exact law, against the measurement", fontsize=9)
+    axA.set_ylabel(r"$-\delta$  (mean refocusing delay, dimensionless, log scale)", fontsize=9)
+    axA.set_title("A", loc="left", fontsize=9, fontweight="bold")
     axA.tick_params(labelsize=7.5)
     axA.legend(fontsize=7.5, loc="upper left")
     axA.set_xlim(0, 0.52)
@@ -76,7 +76,7 @@ def main():
                  label=f"$\\varepsilon = {e}$")
     axB.set_xlabel(r"launch angle $\theta_0$", fontsize=9)
     axB.set_ylabel(r"$t_c(\theta_0) / 2\pi$", fontsize=9)
-    axB.set_title("B · per-angle refocusing = the pendulum period", fontsize=9)
+    axB.set_title("B", loc="left", fontsize=9, fontweight="bold")
     axB.set_xticks([0, np.pi / 2, np.pi, 3 * np.pi / 2, 2 * np.pi],
                    ["0", "$\\pi/2$", "$\\pi$", "$3\\pi/2$", "$2\\pi$"])
     axB.tick_params(labelsize=7.5)

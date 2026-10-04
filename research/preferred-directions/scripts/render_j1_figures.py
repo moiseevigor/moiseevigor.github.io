@@ -48,7 +48,7 @@ def fig_field(fld):
     th1, ph1, Br1 = sph_grid(fld, 1.0)
     th085, ph085, Br085 = sph_grid(fld, R_SURF)
     fig = plt.figure(figsize=(11.6, 4.4), dpi=150)
-    gs = GridSpec(1, 3, width_ratios=[1.9, 1, 1], wspace=0.25)
+    gs = GridSpec(1, 3, width_ratios=[1.9, 1, 1], wspace=0.42)   # room for the colourbar label
 
     ax = fig.add_subplot(gs[0])
     v = 18
@@ -57,13 +57,13 @@ def fig_field(fld):
     ax.contour(np.degrees(ph1), 90 - np.degrees(th1), Br1, levels=[0],
                colors="k", linewidths=0.5)
     ax.annotate("Great Blue Spot", xy=(275, 2), xytext=(210, -35),
-                fontsize=7.5, arrowprops=dict(arrowstyle="->", lw=0.8))
-    ax.set_xlabel("System III longitude [deg]", fontsize=8.5)
-    ax.set_ylabel("latitude [deg]", fontsize=8.5)
-    ax.set_title("A · the 1-bar surface (r = 1 $R_J$)", fontsize=9)
-    ax.tick_params(labelsize=7.5)
+                fontsize=9, arrowprops=dict(arrowstyle="->", lw=0.8))
+    ax.set_xlabel("System III longitude [deg, linear]", fontsize=9.5)
+    ax.set_ylabel("latitude [deg, linear]", fontsize=9.5)
+    ax.set_title("A", loc="left", fontsize=11, fontweight="bold")
+    ax.tick_params(labelsize=9)
     cb = fig.colorbar(im, ax=ax, fraction=0.03, pad=0.02)
-    cb.set_label("$B_r$ [G]", fontsize=7.5); cb.ax.tick_params(labelsize=6.5)
+    cb.set_label("$B_r$ [G, linear]", fontsize=9.5); cb.ax.tick_params(labelsize=8.5)
 
     for col, (rr, thx, phx, Brx, ttl) in enumerate(
             [(1.0, th1, ph1, Br1, "B · north pole, r = 1: one polarity"),
@@ -73,14 +73,20 @@ def fig_field(fld):
         sel = thx < np.radians(45)
         P, R = np.meshgrid(phx, np.degrees(thx[sel]))
         v2 = 12 if rr == 1.0 else 22
-        ax.pcolormesh(P, R, Brx[sel], cmap="RdBu_r", vmin=-v2, vmax=v2,
-                      shading="auto")
+        imp = ax.pcolormesh(P, R, Brx[sel], cmap="RdBu_r", vmin=-v2, vmax=v2,
+                            shading="auto")
         ax.contour(P, R, Brx[sel], levels=[0], colors="k", linewidths=0.7)
-        ax.set_title(ttl, fontsize=8.6, pad=12)
+        ax.set_title(ttl.split(" · ")[0], loc="left", fontsize=11, fontweight="bold", pad=12)
         ax.set_yticks([15, 30, 45])
-        ax.set_yticklabels(["75°N", "60°N", "45°N"], fontsize=5.5)
-        ax.tick_params(labelsize=5.5)
+        ax.set_yticklabels(["75°N", "60°N", "45°N"], fontsize=8.5)
+        ax.set_rlabel_position(22)
+        ax.tick_params(labelsize=8.5)
         ax.grid(alpha=0.3, lw=0.4)
+        cbp = fig.colorbar(imp, ax=ax, orientation="horizontal", fraction=0.05,
+                           pad=0.12, extend="both")
+        cbp.set_label("$B_r$ [G, linear]", fontsize=9.5)
+        cbp.ax.tick_params(labelsize=8.5)
+        print(f"polar panel r = {rr}: colour limits +/-{v2} G")
     out = REPO / "public/img/posts/forbidden-directions-jupiter-field.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)
     print("rendered", out.name)
@@ -118,7 +124,7 @@ def fig_dome(fld, db, npz):
                 ax.plot(np.radians(se["lon"]), se["colat"], marker="P",
                         ms=8, mfc="#2e7d32", mec="#0f3311", mew=0.6,
                         ls="none", label="inner spine footpoint")
-        ax.set_title(ttl, fontsize=8.8, pad=13)
+        ax.set_title(ttl.split(" · ")[0], loc="left", fontsize=9, fontweight="bold", pad=13)
         ax.set_ylim(0, colat_max)
         ticks = [15, 30] if colat_max == 40 else [30, 60, 90]
         ax.set_yticks(ticks)
@@ -177,17 +183,19 @@ def fig_skeleton(fld, npz):
     for ln in spines[sid == 1]:
         ln = np.asarray(ln, float)
         rr = np.linalg.norm(ln, axis=1)
-        ln = ln[rr < 1.32]                          # fade out, never hard-cut
-        if len(ln) < 4:
+        keep = (rr < 1.32) & visible(ln)            # fade out, never hard-cut
+        idx = np.where(keep)[0]
+        if len(idx) < 4:
             continue
-        m = visible(ln)
-        idx = np.where(m)[0]
-        rr = np.linalg.norm(ln, axis=1)
-        for a in range(0, len(idx) - 6, 6):
-            seg = idx[a:a + 7]
-            fade = float(np.clip((1.30 - rr[seg].max()) / 0.22, 0.05, 1.0))
-            ax.plot(ln[seg, 0], ln[seg, 1], ln[seg, 2], color="#ffd34d",
-                    lw=1.7, alpha=0.95 * fade, zorder=6)
+        # contiguous runs only: never bridge the gap where the line leaves the
+        # r < 1.32 window (or goes behind the planet) with a straight chord
+        for run in np.split(idx, np.where(np.diff(idx) > 1)[0] + 1):
+            for a in range(0, len(run) - 1, 6):
+                seg = run[a:a + 7]
+                fade = float(np.clip((1.30 - rr[seg].max()) / 0.22, 0.0, 1.0))
+                if fade > 0:
+                    ax.plot(ln[seg, 0], ln[seg, 1], ln[seg, 2], color="#ffd34d",
+                            lw=1.7, alpha=0.95 * fade, zorder=6)
     p1 = np.array(nulls[1]["p"])
     ax.scatter(*p1, s=200, c="#ffd34d", marker="*", edgecolor="#442200",
                linewidth=0.9, zorder=7, depthshade=False)
@@ -208,13 +216,11 @@ def fig_skeleton(fld, npz):
     ax.plot(rim[:, 0], rim[:, 1], rim[:, 2], color="#c9d4e8", lw=0.7,
             alpha=0.5, zorder=3)
 
-    ax.set_box_aspect((1, 1, 1))
+    ax.set_box_aspect((1, 1, 1), zoom=1.55)         # fill the frame, no dead margin
     lim = 1.12
     ax.set_xlim(-lim, lim); ax.set_ylim(-lim, lim); ax.set_zlim(-lim, lim)
     ax.view_init(elev=35, azim=-60)
-    fig.text(0.035, 0.05, "dynamo surface r = 0.85 $R_J$ (data: JRM33 $B_r$) · "
-             "orange = fan separatrix dome · gold = spine · faint shell = the "
-             "1-bar cloud surface", color="#8a93a3", fontsize=7.4)
+    # no baked-in caption line: encodings are explained in the markdown caption
     out = REPO / "public/img/posts/forbidden-directions-jupiter-skeleton.png"
     fig.savefig(out, facecolor="#06080f", dpi=150)
     print("rendered", out.name)
@@ -226,8 +232,8 @@ def fig_anatomy(fld, npz):
     d = json.loads((ROOT / "artifacts" / "j1_jupiter.json").read_text())
     nulls = d["models"]["jrm33_l18"]["nulls"]
     rng = np.random.default_rng(4)
-    fig, axes = plt.subplots(2, 4, figsize=(11.4, 6.2), dpi=150)
-    for row, k in zip(axes, (1, 0)):
+    fig, axes = plt.subplots(2, 3, figsize=(11.4, 7.8), dpi=150)
+    for row, k, letters in zip(axes, (1, 0), ("ABC", "DEF")):
         nl = nulls[k]
         p0 = np.array(nl["p"])
         M = fld.jac(p0)
@@ -255,7 +261,8 @@ def fig_anatomy(fld, npz):
         tag = "polar null" if k == 1 else "low-latitude null"
         rra._anatomy_rows(fig, row, lines, p0, M, 0.045, "$R_J$",
                           f"{tag} · r = {nl['r']:.3f} $R_J$, "
-                          f"lat {nl['lat']:+.0f}°", tracer=trace_cb)
+                          f"lat {nl['lat']:+.0f}°", tracer=trace_cb,
+                          letters=letters)
     fig.tight_layout()
     out = REPO / "public/img/posts/forbidden-directions-jupiter-anatomy.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)
@@ -266,6 +273,10 @@ def fig_anatomy(fld, npz):
 if __name__ == "__main__":
     d, db, npz = load_all()
     fld = jupfield.JupiterField("jrm33", lmax=18)
+    if "--field-skeleton" in sys.argv:      # only these two sheets
+        fig_field(fld)
+        fig_skeleton(fld, npz)
+        sys.exit(0)
     if "--anatomy" not in sys.argv:
         fig_field(fld)
         fig_dome(fld, db, npz)

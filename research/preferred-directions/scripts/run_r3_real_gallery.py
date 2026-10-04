@@ -181,50 +181,85 @@ def main():
                     "lsq_type_ok": lsq_ok, "nulls": records}, indent=2) + "\n")
     print("wrote artifacts/r3_real_gallery.json")
 
-    # ---- the gallery figure -------------------------------------------------------------
-    try:
-        import matplotlib
-        matplotlib.use("Agg")
-        import matplotlib.pyplot as plt
-        from matplotlib.colors import LogNorm
-    except Exception as e:                                # pragma: no cover
-        print("figure skipped:", e)
-        return
+    render(cards)
+
+
+def render_from_artifact():
+    """Figure only: null positions/labels from artifacts/r3_real_gallery.json; the
+    potential field of each recorded window is re-extrapolated (deterministic FFT),
+    no null search and no classification is re-run."""
+    from scipy.ndimage import zoom
+    recs = json.loads((ROOT / "artifacts" / "r3_real_gallery.json").read_text())["nulls"]
+    mags = dict(load_magnetograms())
+    cards, cache = [], {}
+    for r in recs:
+        cy, cx = r["region_yx"]
+        key = (r["date"], cy, cx)
+        if key not in cache:
+            cut = zoom(mags[r["date"]][cy - WIN // 2:cy + WIN // 2,
+                                       cx - WIN // 2:cx + WIN // 2], CUT / WIN, order=1)
+            cache[key] = solar.potential_field(cut, NZ, dz=1.0)[0]
+        cards.append({"date": r["date"], "B": cache[key],
+                      "p": np.array(r["null_xyh_px"]),
+                      "std": {"label": r["standard"],
+                              "type": r["standard"].rstrip("+-")}, "Q": r["Q"]})
+    render(cards)
+
+
+def render(cards):
+    """Gallery: one vertical slice per null. No in-figure titles -- panel letters
+    only; date / type / height / Q go to the markdown caption (printed below)."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.colors import LogNorm
     cards = cards[:8]
-    ncol = 4
-    nrow = int(np.ceil(len(cards) / ncol))
-    fig, axes = plt.subplots(nrow, ncol, figsize=(3.1 * ncol, 3.4 * nrow), dpi=150)
+    slices = []
+    for c in cards:
+        sl = c["B"][int(round(c["p"][1]))]                # (nx, nz, 3) plane y = y_null
+        slices.append((sl, np.sqrt((sl ** 2).sum(-1)).T))
+    allmag = np.concatenate([m.ravel() for _, m in slices])
+    norm = LogNorm(vmin=np.percentile(allmag, 0.5), vmax=np.percentile(allmag, 99.5))
+    ncol = 3
+    nrow = int(np.ceil((len(cards) + 1) / ncol))          # +1: a cell for the colourbar
+    fig, axes = plt.subplots(nrow, ncol, figsize=(4.1 * ncol, 3.35 * nrow), dpi=150)
     axes = np.atleast_1d(axes).ravel()
     for ax in axes[len(cards):]:
         ax.axis("off")
-    for ax, c in zip(axes, cards):
-        B, p = c["B"], c["p"]
-        ny, nx, nz, _ = B.shape
-        jy = int(round(p[1]))
-        sl = B[jy]                                        # (nx, nz, 3)
-        mag = np.sqrt((sl ** 2).sum(-1)).T
-        pos = mag[mag > 0]
-        ax.imshow(np.maximum(mag, pos.min()), origin="lower", aspect="auto",
-                  extent=[0, nx, 0, nz], cmap="magma",
-                  norm=LogNorm(vmin=pos.min() * 3, vmax=np.percentile(mag, 99.5)))
+    im = None
+    for k, (ax, c, (sl, mag)) in enumerate(zip(axes, cards, slices)):
+        p = c["p"]
+        nx, nz = sl.shape[0], sl.shape[1]
+        im = ax.imshow(np.clip(mag, norm.vmin, None), origin="lower", aspect="auto",
+                       extent=[0, nx, 0, nz], cmap="magma", norm=norm)
         ax.streamplot(np.arange(nx), np.arange(nz), sl[:, :, 0].T, sl[:, :, 2].T,
-                      color="white", density=0.85, linewidth=0.45, arrowsize=0.5)
-        ax.plot(p[0], p[2], marker="*", ms=13, mfc="#25d0ff", mec="k", mew=1.0)
-        spiral = c["std"]["type"] == "spiral"
-        col = "#e65100" if spiral else "#1565c0"
-        ax.set_title(f"{c['date']} · {c['std']['label']} · Q={c['Q']}",
-                     fontsize=8.4, color=col, fontweight="bold")
-        ax.set_xticks([]); ax.set_yticks([])
-        for s in ax.spines.values():
-            s.set_edgecolor(col); s.set_linewidth(1.3)
-        ax.text(0.03, 0.04, f"h = {p[2]:.0f} px", transform=ax.transAxes,
-                color="white", fontsize=7)
-    print(f"gallery: {n_nulls} nulls, Q=6 at {q_ok}/{n_nulls}")
+                      color="white", density=0.85, linewidth=0.5, arrowsize=0.6)
+        ax.plot(p[0], p[2], marker="*", ms=14, mfc="#25d0ff", mec="k", mew=1.0)
+        ax.set_xlim(0, nx); ax.set_ylim(0, nz)            # no streamplot overhang
+        ax.set_title("ABCDEFGH"[k], loc="left", fontsize=11, fontweight="bold")
+        ax.set_xlabel("x [px, linear]", fontsize=10)
+        ax.set_ylabel("height [px, linear]", fontsize=10)
+        ax.tick_params(labelsize=9)
+        print(f"  panel {'ABCDEFGH'[k]}: {c['date']} {c['std']['label']} "
+              f"Q={c['Q']} null (x, h) = ({p[0]:.1f}, {p[2]:.1f}) px")
+    # shared colourbar in the first free cell
+    box = axes[len(cards)].get_position()
+    cax = fig.add_axes([box.x0 + 0.02, box.y0 + 0.55 * box.height,
+                        0.8 * box.width, 0.07 * box.height])
+    cb = fig.colorbar(im, cax=cax, orientation="horizontal")
+    cb.set_label("$|B|$ in the slice [G, log scale]", fontsize=10)
+    cb.ax.tick_params(labelsize=9)
     fig.tight_layout()
+    box = axes[len(cards)].get_position()
+    cax.set_position([box.x0 + 0.1 * box.width, box.y0 + 0.55 * box.height,
+                      0.8 * box.width, 0.07 * box.height])
     out = REPO / "public/img/posts/forbidden-directions-real-gallery.png"
-    fig.savefig(out, bbox_inches="tight", dpi=150)
+    fig.savefig(out, dpi=150)
     print(f"rendered {out.relative_to(REPO)}")
 
 
 if __name__ == "__main__":
-    main()
+    if "--render" in sys.argv:
+        render_from_artifact()
+    else:
+        main()
