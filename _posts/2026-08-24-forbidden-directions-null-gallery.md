@@ -41,9 +41,13 @@ the framework loses.
 The standard theory of coronal nulls is not a strawman. Since Parnell, Smith, Neukirch &
 Priest (1996), a null is classified by the eigenvalues of the field Jacobian
 $M=\nabla\mathbf B$ at the point where $\mathbf B=0$: three real eigenvalues make a
-**radial** null (an X in its fan plane), a complex-conjugate pair makes a **spiral** null
-(an O), the odd-sign-out eigenvector is the **spine**, and the sign of its eigenvalue is
-the null's **sign**. Detection on gridded fields is likewise settled practice — trilinear
+**radial** null (field lines radiate from a node in its fan plane; the familiar X appears
+in any plane containing the spine), a complex-conjugate pair makes a **spiral** null
+(a focus in the fan plane), the odd-sign-out eigenvector is the **spine**, and the sign of
+its eigenvalue is — in this series' convention — the null's **sign** (for a radial null it
+equals $\mathrm{sign}\det\nabla\mathbf B$; note that the solar literature's "positive
+null", fan directed away from the null, is the opposite one, with a *negative* spine
+eigenvalue). Detection on gridded fields is likewise settled practice — trilinear
 and first-order-Taylor methods, applied routinely to potential and NLFFF extrapolations of
 SDO/HMI magnetograms.
 
@@ -71,14 +75,18 @@ genuine sub-Riemannian structure in every case, spiral nulls included.
 <figure class="l-middle" id="fig-null-gallery">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-null-gallery.png"
-      alt="Gallery of five magnetic nulls: two radial X-type fan topologies in blue, two spiral O-type in orange, and the real SDO/HMI null, each labelled with its Parnell class and the measured growth vector Q=6"
+      alt="Gallery of five magnetic nulls drawn as fan-plane streamlines, axes fan-plane coordinates u and v in model units (linear, minus 1 to 1): A and B, synthetic radial nulls (nodes) in blue; C and D, synthetic spiral nulls (foci) in orange; E, the real SDO/HMI null, a radial node; each labelled with its Parnell class, node or focus, and the measured growth vector Q=6"
       style="max-width:min(100%,760px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
     <strong>The type battery.</strong> Fan-plane field lines of five nulls — synthetic
     radial$\pm$ and spiral$\pm$ with ground-truth labels by construction, plus the real
-    Part-4 null (its measured Jacobian). X-type topologies in blue, O-type in orange; ★
-    marks the null. The sub-Riemannian growth vector returns $Q=6$ at <em>all five</em> —
+    Part-4 null (its measured Jacobian); arrows give the direction of $\mathbf B$. Radial
+    nulls in blue (in the fan plane they are <em>nodes</em>), spiral nulls in orange
+    (<em>foci</em>); ★ marks the null. <em>A–D:</em> the synthetic battery; <em>E:</em>
+    the real SDO/HMI null of 2011-06-07. Axes: fan-plane coordinates $u, v$ in model
+    units, linear. Radial versus spiral lives in whether the fan eigenvalues of
+    $\nabla\mathbf B$ are real or complex. The sub-Riemannian growth vector returns $Q=6$ at <em>all five</em> —
     detection recall 5/5 — but the same $Q=6$ for every type: the jump says "a null is
     here", not which kind. Pipeline:
     <code>research/preferred-directions/scripts/run_r1_gallery.py</code>.
@@ -117,17 +125,20 @@ current-free quadratic term the linear model cannot represent.
 <figure class="l-middle" id="fig-r2-noise">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-r2-noise.png"
-      alt="Four panels: accuracy versus noise for four classifiers on linear and curved fields, showing the integrated flow beating finite differences everywhere but the least-squares fit staying near perfect; and the flow classifier's confusion matrix showing radial nulls misread as spiral under noise while the sign column stays correct"
+      alt="Four panels; A to C plot four-class accuracy (fraction, linear, 0 to 1) against field noise sigma (fraction of RMS field strength, linear, 0 to 0.5) for four classifiers on linear and curved fields, with chance at 0.25 dotted; D is a row-normalised confusion matrix of true type against flow-classifier output; showing the integrated flow beating finite differences everywhere but the least-squares fit staying near perfect; and the flow classifier's confusion matrix showing radial nulls misread as spiral under noise while the sign column stays correct"
       style="max-width:min(100%,760px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
     <strong>The race.</strong> Four-class accuracy (radial$\pm$/spiral$\pm$) versus field
     noise $\sigma$ (relative to the RMS $\lvert\mathbf B\rvert$ over the information ball;
-    600 trials per point, 95% error bars). <em>A:</em> exactly linear field. <em>B, C:</em>
-    the curved leg, all nulls and the near-boundary subset. The integrated flow (orange)
-    beats pointwise finite differences (blue) at every noise level — but the least-squares
-    fit (grey, and green at half radius) is essentially unbeaten everywhere. <em>D:</em> the
-    flow classifier's failure anatomy at $\sigma=0.2$: the <em>sign</em> columns stay nearly
+    600 trials per point, 95% error bars). <em>A:</em> exactly linear field, all nulls. <em>B, C:</em>
+    the curved leg (30% quadratic admixture), all nulls and the subset near the
+    radial/spiral boundary. Dotted grey line: chance, 0.25. The integrated flow (orange)
+    beats pointwise finite differences (blue) at every nonzero noise level (one tie, at
+    $\sigma = 0.2$ on the curved leg; at $\sigma = 0$ finite differences are exact) — but the least-squares
+    fit (grey: ball radius $\rho = 0.5$; green: $\rho = 0.25$) is essentially unbeaten everywhere. <em>D:</em> the
+    flow classifier's failure anatomy on the curved field at $\sigma=0.2$ (confusion
+    matrix, rows = truth, row-normalised): the <em>sign</em> columns stay nearly
     perfect (escape asymmetry is noise-robust) while noise-induced wander inflates winding,
     so radial nulls are misread as spiral. Pipeline:
     <code>research/preferred-directions/scripts/run_r2_classifier.py</code>.
@@ -141,7 +152,9 @@ label at 0.958, missing only configurations parked next to the radial/spiral bou
 where the types genuinely merge. An SR classification method exists.
 
 **H-R2 splits, and the interesting half is negative.** Against the field's *standard
-practice* — pointwise differences — integration wins at every noise level, in both legs.
+practice* — pointwise differences — integration wins at every nonzero noise level in the
+linear leg and at all but one in the curved leg (a tie at $\sigma = 0.2$; at zero noise
+finite differences are exact and the flow's 0.958 trails).
 The mechanism is real. But against the least-squares fit it loses everywhere, and the
 anatomy of that loss is worth stating plainly:
 
@@ -179,7 +192,9 @@ extrapolation, the Newton null finder, and *every* interior null kept — no che
   </div>
   <figcaption>
     <strong>The raw material.</strong> The three full-disk line-of-sight magnetograms as
-    SDO/HMI recorded them (red / blue = field out of / into the photosphere; peak
+    SDO/HMI recorded them (red / blue = line-of-sight field toward / away from the
+    observer, i.e. roughly out of / into the photosphere near disk centre; the pipeline
+    uses it as the normal boundary field without a radial correction; peak
     $\lvert B\rvert$ labelled per disk — up to 4777 G on the AR12192 day). Dashed boxes:
     the active-region windows the pipeline extrapolates and searches. Everything below is
     computed from these three images and nothing else.
@@ -189,15 +204,18 @@ extrapolation, the Newton null finder, and *every* interior null kept — no che
 <figure class="l-middle" id="fig-real-gallery">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-real-gallery.png"
-      alt="Gallery of five real coronal nulls across three SDO/HMI days: each card shows the coronal field magnitude on a vertical slice collapsing to zero at the starred null with white streamlines tracing the topology, labelled with date, radial type, and Q=6"
+      alt="Gallery of five real coronal nulls across three SDO/HMI days, panels A to E: each shows the coronal field magnitude in gauss (shared log colour scale) on a vertical slice, x axis horizontal position 0 to 100 pixels and y axis height 0 to 56 pixels (both linear), collapsing to zero at the cyan-starred null, with white streamlines tracing the topology"
       style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
     <strong>The real gallery.</strong> Five coronal magnetic nulls on three days of the
     real Sun (2011-06-07; 2012-03-07, X5.4-flare day; 2014-10-22, AR12192). Each card: the
     extrapolated coronal $\lvert\mathbf B\rvert$ on the vertical plane through the null
-    (log scale, dark = weak), in-plane field lines in white, ★ the detected null with its
-    height. Every null: standard classification and the SR growth vector agree — $Q=6$ at
+    (one shared log colour scale in gauss, dark = weak; axes in extrapolation-grid
+    pixels, linear), in-plane field lines in white, cyan ★ the detected null.
+    <em>A:</em> 2011-06-07, radial−, $h = 14$ px. <em>B, C:</em> 2012-03-07, radial+,
+    $h = 20$ and $26$ px. <em>D, E:</em> 2014-10-22, radial+, $h = 45$ and $40$ px.
+    Every null: standard classification and the SR growth vector agree — $Q=6$ at
     5/5, with $Q$ computed on each null's measured tangent cone (a consistency check of
     the law, not an independent detection; the raw-grid reading needs Part 6's
     super-pixel scale window) — and the R2 flow classifier, run on the raw resampled
@@ -256,7 +274,8 @@ keeps.
 - **Null / radial / spiral / spine / fan / sign** — a point with $\mathbf B=0$; its Parnell
   class from the eigenvalues of $M=\nabla\mathbf B$: all real = radial (X), a complex pair
   = spiral (O); the spine is the odd-sign-out eigenvector, the fan its complementary
-  plane, and the sign is the spine eigenvalue's sign.
+  plane, and the sign is the spine eigenvalue's sign (this series' convention — opposite
+  to the solar literature's "positive null = fan directed away").
 - **$Q$ (homogeneous dimension)** — sum of the growth-vector weights of the flux lift;
   $Q=5$ where $\mathbf B\neq0$, $Q=6$ at a generic null.
 - **Winding $W$** — median unwrapped angle swept by integrated field-line trajectories

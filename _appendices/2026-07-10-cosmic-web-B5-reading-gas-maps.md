@@ -229,7 +229,7 @@ each galaxy, at identical angular distance from that galaxy. Any
 circularly symmetric halo profile contributes *exactly zero* by
 construction — the control points sit at the same distance from the halo
 as the midpoint does. What survives is gas that lives preferentially *on*
-the inter-pair axis: the bridge. Over 876,639 CMASS pairs this gave
+the inter-pair axis: the bridge. Over 876,639 CMASS pairs (361,057 of them inside the ACT footprint) this gave
 2.28×10⁻⁸ at 5.24σ on ACT and 2.97×10⁻⁸ at 19.3σ on Planck with
 per-pair bootstrap errors (E3d-v2).
 
@@ -250,7 +250,7 @@ ring controls (which sit farther from it), manufacturing a fake bridge —
 |---|---|---|
 | pair bootstrap errors (E3d-v2) | 5.24σ (2.28×10⁻⁸) | 19.3σ (2.97×10⁻⁸) |
 | sky-patch jackknife (E3e) | 3.30σ | 7.99σ |
-| null-pair subtracted (E3e) | ≈1.6σ (1.4×10⁻⁸ ± 0.9) | ≈2.4σ (1.2×10⁻⁸ ± 0.5) |
+| null-pair subtracted (E3e) | ≈1.6σ (1.4×10⁻⁸ ± 0.9) | ≈2.2σ (1.2×10⁻⁸ ± 0.5) |
 
 The bottom row is the physically meaningful bridge amplitude:
 **~1.2–1.4×10⁻⁸, at ≈2σ per instrument**, mutually consistent between two

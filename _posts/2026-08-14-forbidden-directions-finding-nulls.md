@@ -55,7 +55,7 @@ Jacobian $\nabla\mathbf B$: three real eigenvalues make a *radial* null, a compl
 *spiral* null, and the signs fix its orientation. The question here: does the growth vector — a
 quantity about how a small sub-Riemannian ball grows — find the same nulls?
 
-## A real dynamo field, and two independent finders
+## A real dynamo field, and two independent computations
 
 The test field is the **ABC-like trigonometric field** $\mathbf B = (\cos y,\, \cos z,\, \cos x)$
 — one of the two curl-partners whose sum is the classic Arnold–Beltrami–Childress field. The
@@ -69,7 +69,8 @@ computations on it:
 
 - the **standard finder** — Newton's method on $\mathbf B = 0$ for the locations, eigenvalues of
   $\nabla\mathbf B$ for the types;
-- the **sub-Riemannian detector** — the growth vector / $Q$, measured from geodesic reach.
+- the **sub-Riemannian detector** — the growth vector / $Q$, measured from geodesic reach,
+  evaluated at the eight locations the standard finder supplies and at ten generic points.
 
 </div><!-- /.l-body -->
 
@@ -80,7 +81,7 @@ computations on it:
     the vertices of a cube in the periodic box. The <strong>standard finder</strong> colours each
     by the eigenvalue type it computes — spiral-A (blue) and spiral-B (orange), alternating like a
     checkerboard. The <strong>sub-Riemannian detector</strong> labels each with the homogeneous
-    dimension it measures: <code>Q=6</code> at every null (it detects all eight), against
+    dimension it measures: <code>Q=6</code> at every null (it confirms all eight), against
     <code>Q=5</code> at the generic sample points (grey). The two methods <em>agree on location and
     order</em>; the growth vector does <em>not</em> distinguish blue from orange — that type is in
     the eigenvalues. Data: <code>research/preferred-directions/artifacts/p2_nulls_results.json</code>.
@@ -140,7 +141,7 @@ computations on it:
   svg.appendChild(el("text", { x: lx, y: ly + 52, "font-size": 11.5, fill: "#333", "font-family": SANS, "font-weight": 600 }, "SR detector:"));
   svg.appendChild(el("text", { x: lx, y: ly + 70, "font-size": 11, fill: "#555", "font-family": MONO }, "6 = null (all)"));
   svg.appendChild(el("text", { x: lx, y: ly + 86, "font-size": 11, fill: "#999", "font-family": MONO }, "5 = generic"));
-  svg.appendChild(el("text", { x: ox, y: H - 10, "text-anchor": "middle", "font-size": 11, fill: "#888", "font-family": SANS }, "8 nulls detected · location & order agree · type not resolved"));
+  svg.appendChild(el("text", { x: ox, y: H - 10, "text-anchor": "middle", "font-size": 11, fill: "#888", "font-family": SANS }, "8 nulls confirmed · location & order agree · type not resolved"));
 })();
 </script>
 
@@ -149,9 +150,10 @@ computations on it:
 ## The verdict, read honestly
 
 **It agrees, exactly, on what it can see.** The growth vector reads $Q=6$ at all eight nulls and
-$Q=5$ at every generic point. As an independent detector it reproduces the standard finder's null
-set and their order — from a completely different computation, one that never looks for a zero of
-$\mathbf B$ but instead watches how a small ball's directional reach collapses (the reach
+$Q=5$ at every generic point. As an independent *local confirmation* (in the vocabulary fixed
+below: the statistic is evaluated at the locations the standard finder supplied, not searched
+blind) it reproduces the standard finder's null set and their order — from a completely different
+computation, one that never solves $\mathbf B = 0$ but instead watches how a small ball's directional reach collapses (the reach
 exponents of the article's Prop. 2.7 — not a ball-volume exponent, which at the null itself
 remains unproved).
 
@@ -184,17 +186,18 @@ give, and Part 5 races the honest version.
 <figure class="l-middle" id="fig-solar-null">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-solar-null.png"
-      alt="Two panels: left, a real SDO/HMI magnetogram of a solar active region; right, a vertical slice of the extrapolated coronal field magnitude showing it collapse to zero at the null, with field-line streamlines fanning through it"
+      alt="Two panels: A, a real SDO/HMI line-of-sight magnetogram of a solar active region, axes x and y in pixels (linear, 0 to 100), colour field in gauss (linear red-blue scale), a dashed line and gold star marking the null's footpoint; B, a vertical slice of the extrapolated coronal field magnitude in gauss (log colour scale), x axis position 0 to 100 pixels and y axis height above the surface 0 to 56 pixels, showing it collapse to zero at the cyan-starred null, with white field-line streamlines fanning through it"
       style="max-width:min(100%,760px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
     <strong>A real solar magnetic null, end to end.</strong>
     <em>Left (A):</em> a line-of-sight <strong>SDO/HMI</strong> magnetogram of a solar active
-    region (2011 June 7; red / blue = field out of / into the photosphere, up to $\sim\!10^3$ G).
-    The dashed line marks the vertical plane drawn at right; the star is the null's footpoint.
+    region (2011 June 7; red / blue = field out of / into the photosphere, up to $\sim\!10^3$ G;
+    the opposite polarities anchor the null's field lines).
+    The dashed line marks the vertical plane drawn at right; the gold star is the null's footpoint.
     <em>Right (B):</em> the potential-field–extrapolated coronal $\lvert\mathbf B\rvert$ on that plane
     (log scale, bright = strong), with in-plane field lines in white. The field
-    <strong>collapses to zero</strong> at the null $\sim\!40$ px up (cyan star) and the streamlines
+    <strong>collapses to zero</strong> at the null $h = 38$ px up (cyan star) and the streamlines
     fan through it in the characteristic X-type topology — a <em>radial</em> null by its
     $\nabla\mathbf B$ eigenvalues $(-0.76,\,-0.24,\,+1.00)$. There the sub-Riemannian growth vector
     returns $Q=6$ against $Q=5$ in the strong bipolar field: the null jump, on the real Sun.
@@ -292,8 +295,8 @@ which case you are in, and not confusing them, is the result worth keeping.
 - C. E. Parnell, J. M. Smith, T. Neukirch &amp; E. R. Priest (1996). "The structure of
   three-dimensional magnetic neutral points." <em>Phys. Plasmas</em> 3, 759. (Null classification.)
 - E. R. Priest &amp; T. Forbes (2000). <em>Magnetic Reconnection: MHD Theory and
-  Applications</em>. Cambridge UP. (The reconnection physics this post's "where reconnection
-  happens" language points at.)
+  Applications</em>. Cambridge UP. (The reconnection physics this post's "candidate site for
+  reconnection" language points at.)
 - D. I. Pontin &amp; E. R. Priest (2022). "Magnetic reconnection: MHD theory and modelling."
   <em>Living Rev. Solar Phys.</em> 19, 1.
   <a href="https://doi.org/10.1007/s41116-022-00032-9">doi:10.1007/s41116-022-00032-9</a>.

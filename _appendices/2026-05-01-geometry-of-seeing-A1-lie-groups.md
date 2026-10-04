@@ -153,7 +153,7 @@ $X_3$ from the *translation* generator $E_2$, because Part&nbsp;1 numbers the
 frame (forward, rotation, sideways) while the $E$-basis is numbered
 (translate-$x$, translate-$y$, rotate).
 
-These are the same three vector fields Part&nbsp;1 §3 introduced. Now you know
+These are the same three vector fields Part&nbsp;1 ("The Lie Group SE(2)") introduced. Now you know
 where they come from: they are the basis of $\mathfrak{se}(2)$,
 translated across the group by the differential of left-multiplication. This
 is not connection-dependent parallel transport. Declaring
@@ -304,7 +304,7 @@ doesn't, and the residual is
 $$\Phi^Y_{-\varepsilon} \circ \Phi^X_{-\varepsilon} \circ \Phi^Y_{\varepsilon}
    \circ \Phi^X_{\varepsilon}\,(g) \;=\; g + \varepsilon^2 [X, Y]_g + O(\varepsilon^3).$$
 
-For the primary visual cortex (V1) this is the four-step manoeuvre Part&nbsp;1 §3.4 illustrated:
+For the primary visual cortex (V1) this is the four-step manoeuvre Part&nbsp;1 ("How sideways motion still happens — the Lie bracket") illustrated:
 two hops of "slide along your orientation" interleaved with two hops of
 "rotate the orientation" produce a sideways nudge of order $\varepsilon^2$.
 The Lie bracket is exactly the leading coefficient of that nudge.
@@ -465,7 +465,7 @@ in the basis dual to $\{E_1, E_2, E_3\}$.  The coadjoint orbits are
 $$\mathcal O_c \;:=\; \{(h_1, h_2, h_3) : h_1^2 + h_2^2 = c\},$$
 
 i.e. **vertical cylinders** in $(h_1, h_2, h_3)$-space (plus a degenerate
-1-point orbit at $h_1 = h_2 = 0$ for each value of $h_3$).  Part&nbsp;2 §1
+1-point orbit at $h_1 = h_2 = 0$ for each value of $h_3$).  Part&nbsp;2
 discovered this structure organically.  A caution on indices: Part&nbsp;2 labels
 the costate in the left-invariant frame $\{X_1, X_2, X_3\}$, so its
 $(h_1, h_2, h_3)$ are this appendix's $(h_1, h_3, h_2)$.  In the $E$-basis
@@ -531,14 +531,14 @@ $$\exp X \cdot \exp Y \;=\; \exp\!\Bigl(X + Y + \tfrac12 [X, Y]
 The leading non-commutative correction is exactly $\tfrac12 [X, Y]$.  Two
 points to remember:
 
-- The 4-step closing-defect of §3 is BCH applied twice and subtracted.  The
+- The 4-step closing-defect of definition (iii) above is BCH applied twice and subtracted.  The
   $X + Y$ pieces cancel, leaving $\varepsilon^2 [X, Y]$ at the leading
   surviving order.  See Figure A1.2.
 - Even when $[X, Y] \neq 0$, the higher commutators
   $[X, [X, Y]], [Y, [X, Y]]$ are forced back into a small set of
-  directions.  $\mathfrak{se}(2)$ is not nilpotent, but its bracket table is
-  simple enough that many BCH-type expansions truncate quickly in practice
-  — this is what keeps the Sachkov closed forms in Part&nbsp;2 manageable.
+  directions.  $\mathfrak{se}(2)$ is not nilpotent, but it is solvable — every
+  bracket lands in the abelian translation ideal $\mathrm{span}\{E_1, E_2\}$ —
+  so BCH-type expansions stay tractable in practice.
 
 ## Connection to the elliptic project
 
@@ -603,7 +603,7 @@ on them.
 Appendix A2 will use this language to give *the right* definition of a
 contact structure and prove Chow–Rashevskii.  Appendix A3 will derive the
 Lie–Poisson equations $\dot h_1 = h_2 h_3, \dot h_2 = -h_1 h_3, \dot h_3 =
--h_1 h_2$ — the equations Part&nbsp;2 §1 asserts without proof — directly from the
+-h_1 h_2$ — the equations Part&nbsp;2 asserts without proof — directly from the
 Pontryagin Maximum Principle.
 
 </div><!-- /.l-body -->
@@ -614,8 +614,8 @@ Pontryagin Maximum Principle.
 <ol>
   <li>
     M. Spivak (1979). <em>A Comprehensive Introduction to Differential
-    Geometry, Vol. 1.</em> Publish or Perish.  Chapters 5–6 for manifolds
-    and Lie groups.
+    Geometry, Vol. 1.</em> Publish or Perish.  Chapters 5–6 for vector fields,
+    brackets and integral manifolds; Chapter 10 for Lie groups.
   </li>
   <li>
     B. C. Hall (2015). <em>Lie Groups, Lie Algebras, and Representations:

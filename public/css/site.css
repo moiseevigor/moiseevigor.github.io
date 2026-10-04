@@ -665,6 +665,10 @@ span.pagination-item:hover { background: none; border-color: var(--border); }
   .site-footer { padding: 16px 20px; }
 }
 @media (max-width: 520px) {
-  .site-nav-links { gap: 16px; }
-  .site-nav-links a { font-size: 12px; }
+  /* Six links + the brand don't fit a phone: the brand already links home,
+     so drop "Home", tighten the gap, and let the row scroll as a last resort. */
+  .site-nav-brand { white-space: nowrap; font-size: 14px; }
+  .site-nav-links { gap: 12px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+  .site-nav-links li:first-child { display: none; }
+  .site-nav-links a { font-size: 12px; white-space: nowrap; }
 }

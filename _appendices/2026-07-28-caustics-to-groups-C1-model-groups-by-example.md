@@ -53,12 +53,12 @@ moves; engineers call the whole situation **nonholonomic**.
   <figcaption>
     <strong>Why a car parks sideways — the bracket made visible.</strong> The car may
     only <em>drive</em> (forward/back) and <em>steer</em>, never slide sideways. It
-    executes four moves — forward, steer-left arc, back, steer-right arc — trying to
-    return to where it started. It doesn't: it ends up displaced <em>sideways</em> (the
+    executes four moves — drive forward, turn left on the spot, drive back the same
+    distance, turn right by the same angle — trying to return to where it started. It doesn't: it ends up displaced <em>sideways</em> (the
     orange arrow). That leftover gap is the bracket [drive, steer] = sideways, and its
     size grows like the <em>square</em> of the maneuver, which is exactly why sideways is
-    a "weight-2" direction — twice as hard to reach as a direction you can drive along
-    directly. Stack another indirection (a trailer angle) and you get weight 3.
+    a "weight-2" direction — an order harder to reach than a direction you can drive along
+    directly. (The blue path shows the two drives; the turns happen in place.) Stack another indirection (a trailer angle) and you get weight 3.
   </figcaption>
 </figure>
 
@@ -75,7 +75,7 @@ moves; engineers call the whole situation **nonholonomic**.
   host.appendChild(svg);
   const el = (t, a, tx) => { const e = document.createElementNS(ns, t);
     for (const k in a) e.setAttribute(k, a[k]); if (tx != null) e.textContent = tx; return e; };
-  // the (x,y) trace of a car doing a forward / steer / back / unsteer commutator wiggle.
+  // the (x,y) trace of a car doing a forward / turn / back / unturn commutator wiggle.
   // integrate: heading th, drive u1 (+/-), steer u2 (+/-); dz sideways accumulates.
   const seg = 60, dt = 1 / seg, L = 78;
   let x = cx, y = cy, th = -Math.PI / 2; // pointing up
@@ -88,7 +88,7 @@ moves; engineers call the whole situation **nonholonomic**.
       pts.push([x, y]);
     }
   }
-  run(1, 0.9); run(0, 0); run(-1, -0.9); // forward+left, (straighten), back+right
+  run(1, 0); run(0, -0.9); run(-1, 0); run(0, 0.9); // forward, turn left in place, back, turn right in place
   const path = pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" ");
   // start & end markers
   svg.appendChild(el("path", { d: path, fill: "none", stroke: "#2b6cb0", "stroke-width": 2.2, "stroke-linecap": "round" }));
@@ -177,17 +177,18 @@ key coordinate is buried one indirection deeper than the car's sideways slide.
 their optimality to the *shape* of the constraints, not the metric. That yes/no bit is a
 robust fingerprint (Part 3, Appendix C5).
 
-## Cartan $(2,3,5)$ — two trailers, and rolling spheres
+## Cartan $(2,3,5)$ — rolling spheres
 
-**The everyday version.** Add a *second* trailer and the deepest coordinate sinks one level
-further, giving the growth vector $(2,3,5)$.
+**Not a second trailer.** A car with *two* trailers has growth vector $(2,3,4,5)$ — each
+trailer buries one more coordinate one level deeper. The Cartan case is different: it has
+*two* coordinates at weight 3, growth vector $(2,3,5)$, and its natural machine is a rolling one.
 
 **The beautiful version.** Take two spheres, one rolling on the other **without slipping and
 without twisting**. The allowed motions (two independent rolling directions) generate a
 $(2,3,5)$ distribution — and when the radius ratio is exactly **1 : 3**, this humble system
-has the *exceptional Lie group* $G_2$ as its symmetry. This is the system Élie Cartan
+has the (split real form of the) *exceptional Lie group* $G_2$ as its local symmetry. This is the system Élie Cartan
 singled out in his 1910 "five variables" paper; the rolling-sphere realization is one of the
-few places the largest of the exceptional groups shows up in something you could build on a
+few places the smallest of the exceptional groups shows up in something you could build on a
 desk.
 
 **Growth vector $(2,3,5)$; abnormals present.** Its deepest coordinate is the most
@@ -197,8 +198,8 @@ four to pin down under noise (Part 3).
 ## SE(3) — the MRI scanner and the drone
 
 **The system.** Move through 3D space *and* carry an orientation: position in
-$\mathbb{R}^3$ plus a direction on the sphere $S^2$, the group $\mathrm{SE}(3)$ (modulo
-roll). You may go **forward** along your axis and **reorient** that axis two ways, but not
+$\mathbb{R}^3$ plus a full orientation (a pointing direction on the sphere $S^2$ together
+with the roll about it), the six-dimensional group $\mathrm{SE}(3)$. You may go **forward** along your axis and **reorient** that axis two ways, but not
 slide sideways — a rank-**three** structure, the first in the series with three drivable
 directions.
 
@@ -227,7 +228,7 @@ vector (Part 4).
 | **Heisenberg** | charged particle in a magnetic field; the shortest-fence (Dido) problem; quantum phase space | move in the plane | enclosed area / flux (2) | $(2,3)$ |
 | **SE(2)** | parking car (Dubins); visual-cortex contour completion | drive + steer | sideways slip (2) | $(2,3)$ |
 | **Engel** | car with **one** trailer | drive + steer | trailer angle (3) | $(2,3,4)$ |
-| **Cartan** | car with **two** trailers; two spheres rolling ($G_2$ at 1:3) | two rolling directions | deepest trailer/roll angle (3) | $(2,3,5)$ |
+| **Cartan** | two spheres rolling without slip or twist ($G_2$ at 1:3) | two rolling directions | two deepest contact/orientation coordinates (3) | $(2,3,5)$ |
 | **SE(3)** | diffusion-MRI fibre tracking; drone/aircraft; steerable needle | drive forward + reorient axis (×2) | sideways + roll (2) | $(3,6)$ |
 
 The pattern to carry into the rest of the appendices: **the growth vector is nonholonomic

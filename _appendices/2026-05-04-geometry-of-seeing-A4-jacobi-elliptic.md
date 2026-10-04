@@ -31,14 +31,14 @@ permalink: /mathematics/2026/05/04/geometry-of-seeing-A4-jacobi-elliptic/
 Part&nbsp;2 invokes Jacobi's $\mathrm{sn}, \mathrm{cn}, \mathrm{dn}$ and the
 complete elliptic integral $K(k^2)$ as if they were as ordinary as
 $\sin, \cos, \tan$.  This appendix derives them from the pendulum equation
-Appendix A3 finishes on, lays out the identities used in Part&nbsp;2 §4 (the
+Appendix A3 finishes on, lays out the identities used in Part&nbsp;2's "Integrating the Elastica" section (the
 Frenet–Serret integration), and explains Gauss's <strong>arithmetic–geometric
 mean</strong> — the iteration that the
 <a href="https://github.com/moiseevigor/elliptic">moiseevigor/elliptic</a>
 package uses to evaluate $K(m)$.  Every formula in this appendix is
-implemented (often line-for-line) in
-<code>public/js/elliptic-core.js</code> and in the Python <code>elliptic</code>
-package.
+implemented in the Python <code>elliptic</code> package; its $K(m)$ and
+$\mathrm{sn}/\mathrm{cn}/\mathrm{dn}$ routines are ported (often line-for-line) to
+<code>public/js/elliptic-core.js</code>.
 
 </div>
 
@@ -65,8 +65,8 @@ $$K(m) \;:=\; \int_0^{\pi/2}\frac{dt}{\sqrt{1 - m \sin^2 t}},$$
 
 and the **third kind** $\Pi(n; m)$ involving an extra rational factor.
 $K$ is what governs the pendulum's period; $E$ is what governs the
-elastica's plane-curve integration; both appear in the Sachkov closed forms
-of Part&nbsp;2 §4.
+elastica's plane-curve integration; both appear in the closed forms
+of Part&nbsp;2 ("Integrating the Elastica").
 
 The two come together in **Legendre's relation**:
 
@@ -162,7 +162,7 @@ yields the cleanest single ordinary differential equation (ODE):
 
 $$(\mathrm{sn}')^2 \;=\; (1 - \mathrm{sn}^2)(1 - m\,\mathrm{sn}^2),$$
 
-a cubic-in-the-square ODE — exactly what falls out of the pendulum
+a first-order ODE whose right-hand side is a quartic in $\mathrm{sn}$ — exactly what falls out of the pendulum
 equation $\ddot\varphi + \sin\varphi = 0$ after the substitution
 $\sin(\varphi/2) = k\,\mathrm{sn}(s\mid k^2)$.  Tracing this:
 
@@ -204,7 +204,7 @@ The asymptotics near $m = 1$ are
 $$K(m) \;\sim\; \tfrac12 \log\!\Bigl(\tfrac{16}{1 - m}\Bigr), \qquad
   E(m) \;\to\; 1.$$
 
-This is the logarithmic divergence Part&nbsp;2 §3 announces for the pendulum
+This is the logarithmic divergence Part&nbsp;2 ("Three Families via Jacobi Elliptic Functions") announces for the pendulum
 period at the separatrix — the same divergence governs the spatial period
 of inflectional elastica as $k \to 1$.
 
@@ -257,8 +257,10 @@ sn/cn/dn values.
     <strong>Figure A4.2.</strong> Live AGM iteration.  Starting from
     $a_0 = 1, b_0 = \sqrt{1 - m}$, each click of <em>step</em> applies one
     AGM iteration $a_{n+1} = (a_n + b_n)/2, b_{n+1} = \sqrt{a_n b_n}$ and
-    plots $|a_n - b_n|$ on a log axis on the right.  The slope is roughly
-    $-2$ in $\log(|a_n - b_n|)$ vs iteration $n$ — quadratic convergence.
+    plots $|a_n - b_n|$ (log scale) against the iteration number $n$ on the right.
+    The curve is not a straight line: each drop in $\log|a_n - b_n|$ is about twice
+    the previous one (the gap is roughly squared at every step) — quadratic
+    convergence.
     The current $K(m) \approx \pi / (2 a_n)$ is computed as you step;
     compare against the closed-form value (also shown).  Same algorithm,
     line-for-line, as <code>elliptic.ellipticK</code> in the Python package.
@@ -298,8 +300,9 @@ and the cut fires at *half* a period, $2K(k^2)$ — Parts&nbsp;3–4.)
   </div>
   <figcaption>
     <strong>Figure A4.3.</strong> Pendulum period $T(E) = 4K((E+1)/2)$ vs
-    energy $E$, blue solid; logarithmic divergence at $E \to 1^-$ (red
-    dashed).  At small amplitude $E \to -1$, $T \to 2\pi$ (the harmonic
+    energy $E$, blue solid (vertical axis logarithmic, ticks in multiples of
+    $\pi$); logarithmic divergence at the separatrix $E \to 1^-$ (red
+    dashed vertical line).  At small amplitude $E \to -1$, $T \to 2\pi$ (the harmonic
     limit); at $E = 0$, $T \approx 7.42$, already noticeably longer than
     $2\pi$.  Asymptotic prediction $T \sim 2\log(32/(1-E))$ near
     separatrix overlaid (grey dotted).  This is the same plot drawn by the
@@ -311,7 +314,7 @@ and the cut fires at *half* a period, $2K(k^2)$ — Parts&nbsp;3–4.)
 
 <div class="l-body" markdown="1">
 
-## Identities used in Part&nbsp;2 §4
+## Identities used in Part&nbsp;2's elastica integration
 
 Part&nbsp;2 uses the closed-form heading integral
 
@@ -325,7 +328,7 @@ $$\kappa = \dot\theta
    = \frac{2k\,\mathrm{cn}\,\mathrm{dn}}{\mathrm{dn}}
    = 2k\,\mathrm{cn}(s\mid k^2),$$
 
-exactly the boxed curvature of Part&nbsp;2 §3 — the heading integral and the
+exactly the boxed curvature of Part&nbsp;2 — the heading integral and the
 curvature formula are one statement, differentiated once.
 
 The plane curve integration uses the **second-kind incomplete integral**
@@ -334,7 +337,7 @@ $$E(\phi \mid m) \;=\; \int_0^\phi \sqrt{1 - m\sin^2 t}\,dt.$$
 
 Setting $\phi = \mathrm{am}(s\mid m)$ allows the $\int \cos\theta\,ds$
 integral to telescope into a difference of $E$- and $F$-values, giving
-Sachkov's
+the classical
 
 $$x(s) \;=\; 2\bigl(E(\mathrm{am}(s)\mid k^2) - \tfrac12 F(\mathrm{am}(s)\mid k^2)\bigr).$$
 
@@ -348,10 +351,10 @@ Every formula in this appendix is implemented in
 
 | Formula here | Function in `elliptic` |
 |---|---|
-| $K(m)$ via AGM (§5) | `ellipticK(m)` |
+| $K(m)$ via AGM | `ellipticK(m)` |
 | sn/cn/dn via descending Landen (Fig. A4.1) | `ellipj(u, m)` |
-| $E(\phi\mid m), F(\phi\mid m)$ (§7) | `elliptic12(phi, m)` |
-| Pendulum period $4K((E+1)/2)$ (§6) | `ellipticK((E+1)/2) * 4` |
+| $E(\phi\mid m), F(\phi\mid m)$ | `elliptic12(phi, m)` |
+| Pendulum period $4K((E+1)/2)$ | `ellipticK((E+1)/2) * 4` |
 | Carlson form $R_F$, $R_D$ (not covered here) | `carlsonRF`, `carlsonRD` |
 
 The browser figures on this page use `elliptic-core.js`, which is a
@@ -370,7 +373,7 @@ E_vals = np.linspace(-0.99, 0.99, 200)
 k2 = (E_vals + 1) / 2
 T_closed = 4 * ellipticK(k2)
 
-# Sanity-check against numerical RK4 integration of phi'' + sin(phi) = 0
+# Sanity-check against numerical Runge–Kutta integration of phi'' + sin(phi) = 0
 from scipy.integrate import solve_ivp
 
 def pend(t, y):
@@ -409,8 +412,8 @@ for m in [0.1, 0.5, 0.9, 0.99]:
 ## What we covered, and what comes next
 
 Elliptic integrals come from arc length; their inverses are the Jacobi
-$\mathrm{sn}, \mathrm{cn}, \mathrm{dn}$.  These satisfy the cubic-square
-ODE that the pendulum equation reduces to under the half-angle
+$\mathrm{sn}, \mathrm{cn}, \mathrm{dn}$.  These satisfy the first-order
+quartic ODE that the pendulum equation reduces to under the half-angle
 substitution.  The complete integrals $K(m), E(m)$ govern the pendulum's
 period and the elastica's plane curve integration; Gauss's AGM evaluates
 them to 16 digits in 6 iterations.
@@ -439,7 +442,7 @@ Maxwell pairs by chasing the $4K(k^2)$ period through the reconstruction.
   <li>
     P. F. Byrd, M. D. Friedman (1971).  <em>Handbook of Elliptic Integrals
     for Engineers and Scientists.</em> Springer.  All identities used in
-    Part&nbsp;2 §4.
+    Part&nbsp;2.
   </li>
   <li>
     L. M. Milne-Thomson, in <em>Handbook of Mathematical Functions</em>

@@ -73,7 +73,7 @@ somewhere) and therefore **cancels under the $\theta_0$-average**. The surviving
 second order:
 
 $$
-\delta = -\,c_2\,\varepsilon^2 + O(\varepsilon^4),\qquad c_2 = 1 \ \text{(measured } 0.9996).
+\delta = -\,c_2\,\varepsilon^2 + O(\varepsilon^4),\qquad c_2 = 1 \ \text{(measured } 0.9996 \text{ by the first two-term fit)}.
 $$
 
 The sign is negative — a gradient *delays* refocusing on this exponential profile
@@ -91,7 +91,8 @@ $$
 \delta(\varepsilon) = -c_2\,\varepsilon^2 - c_4\,\varepsilon^4 - c_6\,\varepsilon^6 - \cdots
 $$
 
-Measured: $c_2 = 1.0000$, $c_4 = 2.2497 \pm 0.0009$ (the precision experiment below), and the
+Measured: $c_2 = 0.9996$ in the first two-term fit ($1.00005$ when left free in the precision
+experiment below), $c_4 = 2.2497 \pm 0.0009$ (that experiment, with $c_2$ fixed at $1$), and the
 fitted exponent of $\lvert\delta\rvert$ vs $\varepsilon$ is $2.014$ — even powers, confirmed. The odd (directional) information about the gradient is exactly
 what the average discards; recovering it from the $\theta_0$-*dependence* of $t_c$ (rather than its
 mean) would read the gradient's *direction*, a readout the series leaves on the table.
@@ -117,8 +118,9 @@ arbitrary **one-dimensional** profiles at leading order) and *measured* (linear 
 measured $1.7466 \pm 0.0074$; quadratic-profile point $1.3741 \pm 0.0019$ against
 $\tfrac{11}{8}$) — while the *proven* period-average law is $c_2 = 1 - \tfrac12\beta$.
 The two differ because the conjugate-time = period identification is *refuted off* the
-exponential profile (measured, V1) — on the exponential itself it remains Conjecture A,
-supported to $10^{-8}$ but unproven (see the note in Step 1 below); the
+exponential profile (measured — V1, the article's pre-registered linear-profile experiment,
+§4) — on the exponential itself it remains Conjecture A (the article's name for this
+identification, §3.4), supported to $6\times10^{-8}$ but unproven (see the note in Step 1 below); the
 $-\tfrac14\beta$ gap is an exact symbolic result at this order (computer-assisted). The inversion above therefore carries a profile-calibration factor
 $\lvert 1-\tfrac34\beta\rvert^{-1/2}$ (absolute value: past $\beta = \tfrac43$ the
 combination flips sign and $\delta$ becomes *positive* — the $\beta = 2$ example lives
@@ -154,7 +156,7 @@ directly against $\delta$ instead.)
 The hypothesis $c_4 = 5/2$ is **refuted** decisively — the measured value sits $0.25$
 below it, roughly $280$ times the quoted band, which is a numerical/fit sensitivity
 (convergence and fit-model spread), not a sampling error; the wide-window
-$2.52$ was the *local slope* of $z$ at $\varepsilon \approx 0.2$ — the $c_6$ term folded in —
+$2.52$ was the *value* of $z$ near $\varepsilon \approx 0.2$ — the $c_6$ term folded in —
 not the intercept. So
 
 $$
@@ -174,8 +176,8 @@ $\dot\theta = 1 + \varepsilon(\sin\theta - \sin\theta_0)$ — the system is inte
 refocusing time is taken to be the $\theta$-period,
 $t_c(\theta_0) = 2\pi\big[(1-\varepsilon\sin\theta_0)^2 - \varepsilon^2\big]^{-1/2}$.
 This identification of the *conjugate time* (the Jacobian zero of D4) with the
-*velocity-rotation period* is verified against the Jacobian-zero times to $10^{-8}$
-across the tested $\varepsilon$ range, and it has structural support — along a period the
+*velocity-rotation period* is verified against the Jacobian-zero times to $6\times10^{-8}$ (worst relative gap,
+$\varepsilon \le 0.4$; $5\times10^{-7}$ at $\varepsilon = 0.48$), and it has structural support — along a period the
 reduced $(x,\theta)$ orbit closes exactly (since $e^{\varepsilon x} = E + \varepsilon\sin\theta$
 pins $x$ to $\theta$), so the endpoint at the period depends on the launch data only
 through the first integral $E$, collapsing the $\theta_0$-variation onto a single
@@ -214,7 +216,7 @@ $k^2 = 1 - p^2q^2 = 1-(1-2\varepsilon)(1+2\varepsilon) = 4\varepsilon^2$, i.e.
 $k = 2\varepsilon$, while the prefactor $(4/q)\cdot q = 4$. Hence the average is
 $\tfrac{2}{\pi}K(2\varepsilon)$ exactly (modulus convention,
 $K(k)=\int_0^{\pi/2} d\phi/\sqrt{1-k^2\sin^2\phi}$) — the earlier
-$O(\varepsilon^{12})$/$10^{-10}$ checks are now confirmations of a derived identity,
+$O(\varepsilon^{12})$/$10^{-9}$ checks are now confirmations of a derived identity,
 and the derivation chain itself is verified numerically to machine precision at each
 tested $\varepsilon$ (`scripts/run_t2_reduction_check.py`). The domain is visible in the
 factorisation: $p^2 = 1-2\varepsilon > 0$ requires $\varepsilon < 1/2$, and at
@@ -228,7 +230,8 @@ $$
 = \varepsilon^2 + \tfrac94\varepsilon^4 + \tfrac{25}{4}\varepsilon^6 + \cdots
 $$
 
-verified against the full pipeline to $10^{-10}$ across $\varepsilon = 0.05\ldots0.45$.
+verified against the full pipeline to $4\times10^{-9}$ or better across
+$\varepsilon = 0.05\ldots0.45$ ($\le 10^{-10}$ for $\varepsilon \le 0.25$).
 The coefficients are squared normalised central binomials — the measured
 $c_4 = 9/4$ and the fitted-range $c_6$ (6.2–6.6, model-dependent) are now
 corollaries of the exact $c_6 = 25/4$. And $K$'s singularity at unit modulus is

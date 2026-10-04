@@ -142,13 +142,17 @@ noise levels.
 <figure class="l-body" id="fig-race">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-race.png"
-      alt="Two panels of median separation error versus noise: the quadratic-fit baseline lies one to four orders of magnitude below the crossover estimator in both the pure and contaminated legs"
+      alt="Two panels sharing the y axis, median relative separation error (log scale, 1e-11 to 1), against noise sigma as a fraction of ball RMS field (linear, 0 to 0.25): A the pure fold, B the contaminated leg; the blue quadratic-fit baseline lies one to four orders of magnitude below the orange crossover estimator in both; line style encodes the fold parameter mu"
       style="max-width:min(100%,700px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
     <strong>The race, lost.</strong> Median relative error of the estimated pair
     separation (log scale) versus noise, for the scale crossover (orange) and the
-    divergence-free quadratic fit + root-finding (blue). The fit wins every cell by one
+    divergence-free quadratic fit + root-finding (blue). <em>A:</em> the pure fold —
+    the fit's exact model. <em>B:</em> contaminated with a 25% non-polynomial
+    background. Line style = fold parameter: solid $\mu = 0.04$, dashed $0.01$,
+    dotted $0.0025$; the true pair separations are $0.400$, $0.200$, $0.100$ in A and
+    $0.564$, $0.549$, $0.560$ in B (the background moves the nulls). The fit wins every cell by one
     to four orders of magnitude — even in the contaminated leg, because a smooth
     background is precisely what a polynomial fit absorbs. Per the pre-registered rule,
     the crossover is <strong>demoted from candidate tool to conceptual observable</strong>.
@@ -171,7 +175,8 @@ has measured this moral — classification fell to the linear fit in Part 5 the 
 
 The transition state's cleanest real-data signature would be a null pair being born in a
 flux-emergence region. We fetched eight real HMI frames tracking AR11158 — the textbook
-emergence region — from its birth through its X2.2 flare (2011-02-13 → 02-15), and ran
+emergence region — from its early emergence to ten hours past its X2.2 flare
+(2011-02-13 00:00 → 02-15 12:00 UT), and ran
 the census on every frame.
 
 </div><!-- /.l-body -->
@@ -179,12 +184,15 @@ the census on every frame.
 <figure class="l-middle" id="fig-emergence">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-emergence.png"
-      alt="Eight frames of the emerging active region AR11158 across two and a half days, growing from a simple bipole into a multipolar flaring complex, with detected coronal nulls starred: none at first, a pair by twelve hours after the X-class flare"
+      alt="Eight magnetogram frames, A to H in two rows of four, of the emerging active region AR11158 across two and a half days; axes x and y in pixels (linear, 0 to 100), colour line-of-sight field in gauss on one shared linear red-blue scale of plus or minus 850; the region grows from a simple bipole into a multipolar flaring complex, with detected coronal nulls starred: none at first, a pair by ten hours after the X-class flare"
       style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
     <strong>A region builds its topology.</strong> AR11158 emerging (real SDO/HMI,
-    2011-02-13 → 02-15 through the X2.2 flare; red/blue = photospheric polarity; ★ =
+    2011-02-13 → 02-15 through the X2.2 flare; frames A–H at 02-13 00:00, 06:00, 12:00,
+    18:00, 02-14 00:00, 12:00, 02-15 00:00, 12:00 UT; red/blue = line-of-sight field
+    out of/into the photosphere, one shared linear scale saturating at ±850 G; axes in
+    extrapolation-grid pixels; ★ =
     detected coronal nulls of the potential extrapolation). The census reads
     0,0,0,(1),0,1,0,<strong>2</strong>: a young bipole is a simple arcade with no coronal
     nulls at all, and nulls appear as the region builds the multipolar structure that
@@ -202,8 +210,9 @@ these two nulls arose independently as the region's complexity grew. What the ce
 null count as a topological complexity indicator of an emerging region, zero while it
 is a simple arcade. Candidate, not established — eight frames of a window-sensitive
 extrapolation are too sparse and too model-dependent to establish an index or any
-relation to flare capability; the G1 protocol (hourly cadence, tracked windows,
-census-grade counts, ensembles) is the test it must pass.
+relation to flare capability; the G1 protocol (the chartered, not-yet-run
+gold-standard solar pipeline, `docs/PROGRAM-G1-solar-gold-standard.md`: hourly cadence,
+tracked windows, census-grade counts, ensembles) is the test it must pass.
 Catching a birth needs hourly cadence, a co-moving window, and null identity tracking —
 specified for the follow-up, not claimed. (One methodological save worth confessing: the
 first tracking pass left the region in the window's corner, and its quiet-Sun nulls
@@ -216,7 +225,7 @@ fixed by recentring, discarded.)
 |---|---|
 | $Q = d+k+2$, tested $k = 0,1,2$ in 3D; **$Q=7$ at the symmetric fold, $Q=6$ at a generic rank-2 fold** | stands as corrected by Part 6's certified collision — intrinsic geometry, no estimation rival |
 | $\delta = 1 - \tfrac2\pi K(2\varepsilon)$ (period average); **critical gradient $\varepsilon = 1/2$** | proven as a period-average identity; its caustic reading verified at $10^{-8}$–$10^{-10}$, formal step still open |
-| Force-free ⇒ radial-only; magnetotail ⇒ 79 spirals | theorem stands; the census half is **retracted** — Part 6's boundary audit puts all 149 T96 nulls outside the model's own magnetopause, so no valid interior spiral example survives |
+| Force-free ⇒ radial-only; magnetotail ⇒ 79 spirals | theorem stands; the census half is **retracted** — Part 6's boundary audit puts every T96 census null it tested outside the model's own magnetopause and finds none inside, so no valid interior spiral example survives |
 | Crossover as pair-metrology tool | **demoted** by pre-registered race; survives as concept |
 | Type classification, pair metrology | belong to statistical fits — measured twice |
 | Fold birth on the real Sun | not caught; requirements specified |

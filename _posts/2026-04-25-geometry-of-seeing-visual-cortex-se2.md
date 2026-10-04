@@ -188,9 +188,10 @@ Colours encode the orientation angle on a $[0, \pi)$ hue wheel.
     $\kappa(s) = 2\,\mathrm{dn}(s\mid m)$, one-signed curvature, wavy-circle shape;
     <strong>borderline elastica</strong> ($E = 1$) —
     $\kappa(s) = 2\,\mathrm{sech}\,s$, the separatrix between the two regimes;
-    <strong>elastica mirror pair</strong> — two pinned extremals with curvatures
-    $\kappa$ and $-\kappa$. Their tie after $4K(k^2)$ illustrates the reflection
-    mechanism, but it is not the free-SR cut event at $2K(k^2)$.
+    <strong>elastica mirror pair</strong> — two closed figure-eight extremals that
+    leave the source in opposite directions along the same line (curve&nbsp;B is the
+    mirror image of curve&nbsp;A, traversed in reverse). Their equal-length return after
+    $4K(k^2)$ illustrates the reflection mechanism, but it is not the free-SR cut event at $2K(k^2)$.
   </figcaption>
 </figure>
 
@@ -442,8 +443,8 @@ direction the two horizontal moves cannot reach on their own.
     <em>reversed-heading</em> partners — they leave the source in opposite
     directions and traverse $\sigma$-mirrored figure-8 loops.
     Because the model's preferred orientation is a <em>line</em>,
-    identified mod&nbsp;$\pi$, both endpoint headings $+\theta_{\mathrm{src}}$
-    and $-\theta_{\mathrm{src}}$ represent the same projective orientation state.
+    identified mod&nbsp;$\pi$, both endpoint headings $\theta_{\mathrm{src}}$
+    and $\theta_{\mathrm{src}}+\pi$ represent the same projective orientation state.
     The pair therefore gives two distinct pinned extremals with the same projected
     line-element endpoint and equal arc length. It visualises an elastica Maxwell
     symmetry (Sachkov, J. Dyn. Control Syst. 2008); it does <em>not</em> assert that
@@ -601,18 +602,17 @@ $L_{\mathrm{SR}}$:
 
 - **The conjugate locus**: points beyond which a geodesic is no longer
   *locally* length-minimising. These correspond to where two infinitesimally
-  nearby geodesics with the same initial conditions reconverge in the phase
-  space — i.e. the <span class="annotated-term" data-note="note-sr-exp">SR exponential map</span> ceases to be a local diffeomorphism.
+  nearby geodesics from the same initial point reconverge — i.e. the <span class="annotated-term" data-note="note-sr-exp">SR exponential map</span> ceases to be a local diffeomorphism.
 
-- **The cut locus** (or **Maxwell locus**): points beyond which the geodesic
+- **The cut locus**: points beyond which the geodesic
   is no longer *globally* length-minimising — because at least one other
   *horizontal* curve from the same start point reaches the same end point with
-  equal or smaller $L_{\mathrm{SR}}$. At a Maxwell point, two distinct
-  globally-optimal geodesics meet with *exactly* the same SR length.
+  equal or smaller $L_{\mathrm{SR}}$. Closely related is the **Maxwell set**: at a
+  Maxwell point, two distinct geodesics meet with *exactly* the same SR length.
 
 For a sub-Riemannian manifold as symmetric as SE(2), the cut and Maxwell loci are
 tightly linked: characterising the Maxwell strata is the main result of
-arXiv:0807.4731 (Sachkov and I), and pinning the cut locus down exactly is the
+arXiv:0807.4731 (joint work with Yu. L. Sachkov), and pinning the cut locus down exactly is the
 subject of arXiv:0903.0727.
 The first point on the cut locus along a given geodesic is the **cut time**
 $t_\mathrm{cut}$.
@@ -825,10 +825,11 @@ function drawV1() {
    *
    * The Maxwell pair is built by Sachkov's σ-symmetric construction
    * ("Maxwell strata in Euler's elastic problem", J. Dyn. Control Syst. 2008, Fig. 34):
-   * two inflectional elastica with κ(s) = ±2k·ω·cn(ω·s | k²) integrated
-   * over N · 4K(k²)/ω.  By the SE(2) σ-symmetry that negates curvature,
-   * both end at the IDENTICAL group element on the source-tangent axis,
-   * with IDENTICAL arc length.  k > 1/√2 ≈ 0.707 puts each curve into the
+   * two closed figure-8 inflectional elastica κ(s) = 2k·ω·cn(ω·s | k²),
+   * launched with headings θ_src and θ_src + π and integrated over
+   * N · 4K(k²)/ω.  Curve B is the σ-mirror image of curve A traversed in
+   * reverse; both return to the source with IDENTICAL arc length (final
+   * headings differ by π: the same line element, not the same SE(2) point).  k > 1/√2 ≈ 0.707 puts each curve into the
    * looped/self-intersecting regime; N=2 yields repeated lobes.
    */
 

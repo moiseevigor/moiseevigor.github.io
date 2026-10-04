@@ -109,14 +109,17 @@ then walked upward as far as it survived.
 
 <figure class="l-middle">
   <img src="/public/img/posts/cosmic-web/three_universes.png"
-       alt="Three panels: top, a fan-shaped slice of the BOSS galaxy survey with each dot a real galaxy; bottom left, the web-like density field of a 2.1-million-particle gravity simulation; bottom right, a synthetic Voronoi web with the exact true filaments drawn in red"
+       alt="Three panels: A, top, a fan-shaped slice of the BOSS galaxy survey with each dot a real galaxy and a 500 h⁻¹Mpc comoving scale bar; B, bottom left, the web-like density field of a 2.1-million-particle gravity simulation; C, bottom right, a synthetic Voronoi web with the exact true filaments drawn in red; B and C have x and y axes in h⁻¹Mpc (linear, 0 to 128)"
        style="width:100%; border:1px solid #ddd; border-radius:4px;">
   <figcaption>
-    <strong>The three worlds the experiments run on.</strong> Top: one thin
-    slice of the real sky (BOSS survey; Earth sits at the bottom tip of the
-    fan) — real, but with no answer key. Bottom left: a gravity simulation —
-    the web emerges by itself, and every particle's history is known.
-    Bottom right: a synthetic toy where the true filament network (red) is
+    <strong>The three worlds the experiments run on.</strong> A (top): the real
+    sky — one thin slice of the BOSS survey (declination 25–28°; Earth sits at the
+    bottom tip of the fan; every dot is a real galaxy, out to billions of
+    light-years; scale bar 500 h⁻¹Mpc comoving) — real, but with no answer key.
+    B (bottom left): a gravity simulation — 2.1 million particles moved by gravity
+    alone in a 128 h⁻¹Mpc box (darker blue = denser); the web emerges by itself,
+    and every particle's history is known.
+    C (bottom right): a synthetic toy, same box size, where the true filament network (red) is
     known exactly, so methods can be graded. Realism decreases downward;
     control increases.
   </figcaption>
@@ -170,7 +173,7 @@ quadratic (Hessian-type) model can express regardless of the data.
 
 [^hessian]: The matrix of second derivatives of the density, recording how the density curves in every direction around a point; its eigenvalues are the curvatures along the three principal axes, and its eigenvectors are those axes.
 
-[^hessian-score]: Precisely: with Hessian eigenvalues $$\lambda_1 \ge \lambda_2 \ge \lambda_3$$, the ridge score is $$R_{\mathrm{hess}} = -\tfrac{1}{2}(\lambda_2+\lambda_3)_+$$ and the filament direction is the top eigenvector.
+[^hessian-score]: Precisely: with Hessian eigenvalues $$\lambda_1 \ge \lambda_2 \ge \lambda_3$$, the ridge score is $$R_{\mathrm{hess}} = \bigl[-\tfrac{1}{2}(\lambda_2+\lambda_3)\bigr]_+$$ (positive part) and the filament direction is the top eigenvector.
 
 [^lift-formula]: Precisely, in Fourier space: $$U(\mathbf{x},\mathbf{n}) = \mathcal{F}^{-1}[\,\sigma_\perp^2 \vert\mathbf{k}_\perp\vert^2 e^{-\frac{1}{2}(\sigma_\parallel^2 k_\parallel^2 + \sigma_\perp^2 \vert\mathbf{k}_\perp\vert^2)} \hat{f}(\mathbf{k})]$$ — the transverse Laplacian of an $$\mathbf{n}$$-elongated Gaussian correlated with the density: large exactly on ridges aligned with $$\mathbf{n}$$. Sharpness grows with the aspect ratio $$\sigma_\parallel/\sigma_\perp$$; the final score at a point is $$\max_{\mathbf{n}} U$$.
 
@@ -232,8 +235,8 @@ each into a smooth arc[^bezier]. Fake galaxies are then sprinkled along the
 network with sideways scatter, extra clumps at the junctions, and 25% pure
 clutter; both models get the identical blurred field.
 
-Explore the raw material below — the same box, at four sampling densities
-from "starved" (2,500 galaxies) to "saturated" (80,000). Red is the exact
+Explore the raw material below — the same box, at five sampling densities
+from "starved" (1,200 galaxies) to "saturated" (80,000). Red is the exact
 truth; blue is each model's recovered skeleton.
 
 [^skeletonisation]: Reducing a thick detected region to a centreline one grid cell wide — the "skeleton" of curves on which all scores are computed.
@@ -258,12 +261,14 @@ truth; blue is each model's recovered skeleton.
     </span>
   </div>
   <img id="cw-slice-img" src="/public/img/posts/cosmic-web/slice_curved_2500.png"
-       alt="6-voxel slab of a Voronoi-web galaxy field with exact truth curves in red and the skeletons recovered by the SE(3) lift and the Hessian baseline in blue, at the selected variant and sampling density"
+       alt="Three panels, each a 6-voxel slab of a Voronoi-web galaxy field in grey with x and y axes in h⁻¹Mpc (linear, 0 to 128): A, the field with exact truth curves in red; B and C, the skeletons recovered by the SE(3) lift and the Hessian baseline in blue over the truth in red, at the selected variant and sampling density"
        style="width:100%; border:1px solid #ddd; border-radius:4px;">
   <figcaption>
     <strong>Interactive.</strong> One 6-voxel slab of a 128³ test box (1 voxel
-    = 1 h⁻¹Mpc). Left: input galaxy field with the exact truth (red). Middle:
-    SE(3)-lift skeleton (blue). Right: Hessian skeleton (blue). At 1.2–2.5k
+    = 1 h⁻¹Mpc, so each panel is 128 × 128 h⁻¹Mpc and the slab 6 h⁻¹Mpc thick).
+    A: input galaxy field (grey, darker = denser) with the exact truth (red). B:
+    SE(3)-orientation-lift skeleton (blue, truth in faint red). C: Hessian-baseline
+    skeleton (blue). At 1.2–2.5k
     galaxies both struggle in different ways — the lift draws smoother,
     longer strands, the Hessian hugs density clumps; at 80k both are
     near-perfect. Buttons switch the precomputed result images.
@@ -299,7 +304,8 @@ The corrected verdict: **the Hessian matches or beats the lift at every
 sampling density**. At the ultra-sparse end (1,200 galaxies) the two are
 indistinguishable at our power (Δ = +0.004, p = 0.36 — a null result, not
 proven equivalence); everywhere else the Hessian wins
-completeness by 4–7 points on 50 of 50 seeds, and junction F1 with it.
+completeness by 4–7 points on at least 47 of 50 seeds (50 of 50 at all
+but one variant–density combination), and junction F1 with it.
 
 <div class="callout">
 <div class="callout-title">In plain words</div>
@@ -367,8 +373,9 @@ constructed correctly.
     <strong>Interactive.</strong> Per-seed paired differences (positive =
     lift wins), 50 dots per column, with the per-column mean (bar) and win
     count. At 1.2k galaxies the cloud straddles zero (statistical tie,
-    p ≈ 0.4); from 2.5k upward it sits entirely below zero — the Hessian
-    wins on 50/50 seeds, Wilcoxon p ≈ 10⁻¹⁵. Junction F1 favours the
+    p ≈ 0.4); from 2.5k upward it sits below zero — the Hessian
+    wins on 50/50 seeds (47/50 at 2.5k on the straight variant), Wilcoxon
+    p ≤ 10⁻⁹ throughout. Junction F1 favours the
     Hessian at essentially all levels.
   </figcaption>
 </figure>
@@ -400,7 +407,7 @@ wrong tool.
 **Failure 2 — the diffusion surprise.** The vision theory's second ingredient,
 hypoelliptic diffusion (smooth strongly along $$\mathbf{n}$$, weakly across and
 in orientation — the contour-completion flow), was swept over three bend
-levels up to 50% sag, three sparsity levels, weak and strong settings, with
+levels up to 50% sag, two sparsity levels, weak and strong settings, with
 scoring binned by local curve curvature. Strong diffusion **loses
 everywhere** (−0.06 to −0.12, p ≈ 2×10⁻⁶), including the most-curved third of
 the network where it was most expected to help; weak diffusion is neutral to
@@ -416,7 +423,7 @@ not tubes. On gravity-evolved boxes, scored by a method-neutral criterion —
 *which model's spines capture more mass at equal length* — the toy advantage
 does not transfer. On Zel'dovich fields[^zeldovich] (winding, ribbon-like structures)
 the Hessian wins at every sampling density and every filter scale tried
-(p ≤ 0.001). On full N-body fields[^nbody] the verdict softens but does not flip:
+(p ≤ 0.002). On full N-body fields[^nbody] the verdict softens but does not flip:
 long cigars still lose badly (−0.05), while the *shortest* filter
 (σ∥ = 3 vox) closes to a statistical tie at sparse sampling (−0.005,
 p = 0.55) and a small deficit when dense. Toggle the figure below between
@@ -443,7 +450,7 @@ and its best case is "as good as the simpler model".
     particles in intermediate-density environments within 3 voxels of the
     spine network) at matched spine length, on gravity-shaped fields.
     σ∥ = 3, 4.5, 6 are the lift at three cigar lengths. The Hessian leads or
-    ties at both sampling densities and every scale (the σ∥ = 3, 5k case is a
+    ties at both sampling densities and every scale (on N-body fields the σ∥ = 3, 5k case is a
     statistical tie) — the honest negative that keeps the toy result in its
     lane.
   </figcaption>
@@ -617,8 +624,9 @@ questions, answered in order:
 3. **How close can an honest version get?** After a short tuning campaign
    (brake strength, how coarsely directions are estimated), the frozen
    final recipe scores **4.52** on held-out worlds against Zel'dovich's
-   4.98 — within 0.05 of the oracle's 4.47. Ninety percent of the error
-   that *could* be recovered, is. The exact recipe, every parameter
+   4.98 — within 0.05 of the oracle's 4.47. Close to ninety percent of the error
+   that *could* be recovered, is (86–90%, depending on which held-out
+   worlds price the bound). The exact recipe, every parameter
    frozen, is [Appendix B4](/mathematics/2026/07/09/cosmic-web-B4-transverse-damping/).
 
 The ladder below shows where that leaves the model among its neighbours —
@@ -672,7 +680,7 @@ the program's end product: not a verdict but a usable object.
 
 | Your situation | Use | Why |
 |---|---|---|
-| Finding filament spines, any sampling density | **Hessian** | matches or beats the lift at every level tested (50/50 seeds from 2.5k up); simpler and cheaper |
+| Finding filament spines, any sampling density | **Hessian** | matches or beats the lift at every level tested (≥47/50 seeds from 2.5k up); simpler and cheaper |
 | Ultra-sparse tube-like data (a narrow 800–1,200-galaxy band) | either | statistical tie (p ≈ 0.4); sparser still, the Hessian wins again |
 | Junctions / nodes are the science | **Hessian** | orientation selectivity fails where direction is ill-defined |
 | Gravity-realistic ribbons, mass-tracing | **Hessian** | wins band mass coverage on Zel'dovich, N-body, and at 0.5 Mpc resolution |
@@ -1262,7 +1270,7 @@ scoped in the
   (function () {
     const BINS = ["0–2", "2–4", "4–8", "8–64"];
     const SERIES = [["Zel'dovich (straight lines)", [6.95, 5.43, 3.74, 3.38], GREY],
-                    ["our model (frozen recipe)", [5.96, 5.37, 3.67, 3.28], BLUE],
+                    ["our model (β = 0.75 stage, E5c)", [5.96, 5.37, 3.67, 3.28], BLUE],
                     ["perfect steering (cheating)", [5.53, 5.20, 3.68, 3.33], RED]];
     const f = frame("#cw-bins", 640, 300, {l: 52, r: 20, t: 14, b: 58});
     if (!f) return;

@@ -47,7 +47,7 @@ def detector_Q(struct, rng, n=4000):
     return int(Q)
 
 
-def main():
+def main(render_only=False):
     rng = np.random.default_rng(1)
     R1 = nf.rot_from_axis_angle([0.3, 1.0, 0.5], 0.6)
     R2 = nf.rot_from_axis_angle([1.0, 0.2, 0.7], 1.1)
@@ -64,9 +64,13 @@ def main():
     ]
 
     rows = []
+    stored = None
+    if render_only:        # Q read from the artifact; detector not re-run
+        stored = {n["tag"]: n["Q"] for n in json.loads(
+            (ROOT / "artifacts" / "r1_gallery.json").read_text())["nulls"]}
     for tag, origin, d in battery:
         cls = nulltopo.classify_null(d["M"])
-        Q = detector_Q(d["struct"], rng)
+        Q = stored[tag] if stored else detector_Q(d["struct"], rng)
         rows.append({"tag": tag, "origin": origin, "d": d, "cls": cls, "Q": Q})
         ev = np.round(np.real_if_close(cls["eigs"], tol=1e6), 3)
         print(f"  {tag:8s} [{origin:20s}]  standard={cls['label']:8s}  "
@@ -76,65 +80,55 @@ def main():
     print(f"\ndetection recall (Q=6 at the null): {detected}/{len(rows)}")
 
     # --- gallery figure -----------------------------------------------------------------
-    try:
-        import matplotlib
-        matplotlib.use("Agg")
-        import matplotlib.pyplot as plt
-    except Exception as e:                              # pragma: no cover
-        print("figure skipped (no matplotlib):", e)
-    else:
-        BLUE, ORANGE = "#1565c0", "#e65100"
-        fig, axes = plt.subplots(2, 3, figsize=(10.5, 7.0), dpi=150)
-        axes = axes.ravel()
-        g = np.linspace(-1.0, 1.0, 26)
-        AA, BB = np.meshgrid(g, g)                      # AA = fan-u coord, BB = fan-v coord
-        for ax, r in zip(axes, rows):
-            cls, M = r["cls"], r["d"]["M"]
-            u, v = fan_basis(cls["spine"])
-            P = AA[..., None] * u + BB[..., None] * v   # (n,n,3) points in the fan plane
-            Bvec = P.reshape(-1, 3) @ M.T
-            Bu = (Bvec @ u).reshape(AA.shape)
-            Bv = (Bvec @ v).reshape(AA.shape)
-            spd = np.hypot(Bu, Bv)
-            spiral = cls["type"] == "spiral"
-            col = ORANGE if spiral else BLUE
-            ax.streamplot(g, g, Bu, Bv, color=col, density=1.1, linewidth=0.7,
-                          arrowsize=0.8)
-            ax.plot(0, 0, marker="*", ms=17, mfc="#ffd000", mec="k", mew=1.1, zorder=5)
-            ax.set_xlim(-1, 1); ax.set_ylim(-1, 1); ax.set_aspect("equal")
-            ax.set_xticks([]); ax.set_yticks([])
-            shape = "O-type (spiral)" if spiral else "X-type (radial)"
-            ax.set_title(f"{cls['label']}   ·   Q = {r['Q']}", fontsize=10,
-                         color=col, fontweight="bold")
-            ax.text(0.5, -0.10, f"{r['origin']} — {shape}", transform=ax.transAxes,
-                    ha="center", va="top", fontsize=7.6, color="0.25")
-            for s in ax.spines.values():
-                s.set_edgecolor(col); s.set_linewidth(1.4)
+    # House rule: no in-figure prose. One label per panel. In the FAN PLANE a radial
+    # null is a NODE and a spiral null a FOCUS (X/O belong to 2D nulls, not to this view).
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.lines import Line2D
+    BLUE, ORANGE = "#1565c0", "#e65100"
+    fig, axes = plt.subplots(2, 3, figsize=(10.5, 7.4), dpi=150)
+    axes = axes.ravel()
+    g = np.linspace(-1.0, 1.0, 26)
+    AA, BB = np.meshgrid(g, g)                      # AA = fan-u coord, BB = fan-v coord
+    for k, (ax, r) in enumerate(zip(axes, rows)):
+        cls, M = r["cls"], r["d"]["M"]
+        u, v = fan_basis(cls["spine"])
+        P = AA[..., None] * u + BB[..., None] * v   # (n,n,3) points in the fan plane
+        Bvec = P.reshape(-1, 3) @ M.T
+        Bu = (Bvec @ u).reshape(AA.shape)
+        Bv = (Bvec @ v).reshape(AA.shape)
+        spiral = cls["type"] == "spiral"
+        col = ORANGE if spiral else BLUE
+        ax.streamplot(g, g, Bu, Bv, color=col, density=1.1, linewidth=0.7,
+                      arrowsize=0.8)
+        ax.plot(0, 0, marker="*", ms=17, mfc="#ffd000", mec="k", mew=1.1, zorder=5)
+        ax.set_xlim(-1, 1); ax.set_ylim(-1, 1); ax.set_aspect("equal")
+        ax.set_xticks([-1, 0, 1]); ax.set_yticks([-1, 0, 1])
+        ax.tick_params(labelsize=9)
+        ax.set_xlabel("fan-plane coordinate $u$ [model units, linear]", fontsize=9.5)
+        ax.set_ylabel("fan-plane coordinate $v$ [model units, linear]", fontsize=9.5)
+        ax.set_title(f"{'ABCDE'[k]}", loc="left", fontsize=11, fontweight="bold")
+        ax.set_title(f"{cls['label']} · {'focus' if spiral else 'node'} · Q = {r['Q']}",
+                     loc="right", fontsize=10, color=col, fontweight="bold")
+        for s in ax.spines.values():
+            s.set_edgecolor(col); s.set_linewidth(1.4)
 
-        # summary cell
-        ax = axes[5]; ax.axis("off")
-        ax.text(0.02, 0.97,
-                "The detector is type-agnostic.", fontsize=10.5, fontweight="bold",
-                va="top", transform=ax.transAxes, color="#111")
-        ax.text(0.02, 0.85,
-                f"Growth vector Q = 6 at every null\n"
-                f"({detected}/{len(rows)} detected), radial and\n"
-                f"spiral alike — the jump 5→6 says\n"
-                f"“a null is here”, not which kind.\n\n"
-                f"Radial vs spiral is in the fan\n"
-                f"topology (X vs O), i.e. whether the\n"
-                f"∇B eigenvalues are real or complex.\n"
-                f"Reading that from the SR flow, and\n"
-                f"testing if it beats a noisy eigenvalue\n"
-                f"estimate, is R2.",
-                fontsize=8.4, va="top", transform=ax.transAxes, color="#222")
-        ax.text(0.02, 0.06, "fan-plane field lines; ★ = null",
-                fontsize=7.2, va="bottom", transform=ax.transAxes, color="0.4")
-
-        fig.tight_layout()
-        out = REPO / "public/img/posts/forbidden-directions-null-gallery.png"
-        fig.savefig(out, bbox_inches="tight", dpi=150)
-        print(f"rendered {out.relative_to(REPO)}")
+    ax = axes[5]; ax.axis("off")                    # legend cell (encodings only)
+    ax.legend(handles=[
+        Line2D([], [], color=BLUE, lw=1.6, label="radial null: fan-plane node"),
+        Line2D([], [], color=ORANGE, lw=1.6, label="spiral null: fan-plane focus"),
+        Line2D([], [], ls="none", marker="*", ms=14, mfc="#ffd000", mec="k",
+               label="the null"),
+        Line2D([], [], ls="none", marker=">", ms=7, color="0.35",
+               label="arrows: field direction")],
+        loc="center", fontsize=10, frameon=False)
+    fig.tight_layout()
+    out = REPO / "public/img/posts/forbidden-directions-null-gallery.png"
+    fig.savefig(out, bbox_inches="tight", dpi=150)
+    print(f"rendered {out.relative_to(REPO)}")
+    if render_only:
+        return
 
     # --- persist ------------------------------------------------------------------------
     res = {"recall": f"{detected}/{len(rows)}",
@@ -147,4 +141,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(render_only="--render" in sys.argv)

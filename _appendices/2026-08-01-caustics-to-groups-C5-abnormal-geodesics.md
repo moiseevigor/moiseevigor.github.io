@@ -28,7 +28,7 @@ comments: true
 <div class="callout-title">What this appendix covers</div>
 The third fingerprint leg is a single bit: does the geometry admit
 <strong>abnormal</strong> shortest paths? This appendix explains what abnormals are,
-why their existence is a topological property of the constraints alone, the corank
+why their existence is a property of the constraints alone, the corank
 criterion that decides it for the series' groups, and why — surprisingly — this coarse
 bit is the most noise-robust piece of the whole detector (experiment E2).
 </div>
@@ -52,8 +52,9 @@ this leg as **lower-confidence** and never lets it hard-gate a verdict.
 ## Existence is topological: the corank criterion
 
 For our purposes the useful fact is coarse and robust: **whether nontrivial abnormals exist at
-all** is a topological property of the distribution, governed by its **corank** = ambient
-dimension − rank:
+all** is a property of the distribution alone, and for the series' candidate list it is decided by
+the **corank** = ambient dimension − rank (not a general theorem: "fat" distributions of
+higher corank also have no nontrivial abnormals, but none is on our list):
 
 - **Rank-2, corank-1 (contact) structures** — Heisenberg, SE(2), and the other 3D contact
   groups — have **no** nontrivial abnormal minimizers. The distribution is "fat" enough that
@@ -62,8 +63,8 @@ dimension − rank:
   **do** admit abnormals. There are directions in which the geometry is constrained enough to
   force particular curves.
 
-So a single yes/no bit cleanly partitions the candidate list: $\{$contact: Heisenberg,
-SE(2)$\}$ versus $\{$Engel, Cartan, SE(3)$\}$. It is orthogonal to the within-class questions
+So a single yes/no bit cleanly partitions the candidate list: {contact: Heisenberg,
+SE(2)} versus {Engel, Cartan, SE(3)}. It is orthogonal to the within-class questions
 the growth vector and the moduli answer.
 
 ## The trailer's straight line

@@ -76,63 +76,65 @@ def main():
     (ROOT / "artifacts" / "p4_fold.json").write_text(json.dumps(res, indent=2) + "\n")
     print("wrote artifacts/p4_fold.json")
 
-    # ---- figure ------------------------------------------------------------------------
-    try:
-        import matplotlib
-        matplotlib.use("Agg")
-        import matplotlib.pyplot as plt
-    except Exception as e:                              # pragma: no cover
-        print("figure skipped:", e)
-        return
-    BLUE, ORANGE, GREY = "#1565c0", "#e65100", "#5f6368"
+    print(f"fold figure: fold point Q = {Q0}; split null Q = {Qn}")
+    render(res)
+
+
+def render(res):
+    """Figure from the results dict (= artifacts/p4_fold.json). Panel letters only;
+    reference levels are labelled on the right margin, clear of the data."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    BLUE, ORANGE = "#1565c0", "#e65100"
+    radii = np.array(res["radii"]); curves = res["curves"]
     cols = plt.cm.viridis(np.linspace(0.15, 0.85, len(MUS)))
-    fig, axes = plt.subplots(1, 3, figsize=(11.6, 3.9), dpi=150)
+    fig, axes = plt.subplots(1, 3, figsize=(11.6, 4.3), dpi=150, sharey=True)
 
     ax = axes[0]
-    ax.semilogx(RADII, curves["mid_mu0"], "-", color=ORANGE, lw=2,
-                label="$\\mu=0$ (degenerate)")
+    ax.semilogx(radii, curves["mid_mu0"], "-", color=ORANGE, lw=2,
+                label="$\\mu=0$ (fold point)")
     for c, m in zip(cols, MUS):
-        ax.semilogx(RADII, curves[f"mid_mu{m:g}"], "o-", color=c, ms=3, lw=1.2,
+        ax.semilogx(radii, curves[f"mid_mu{m:g}"], "o-", color=c, ms=3, lw=1.2,
                     label=f"$\\mu={m}$")
-        ax.axvline(np.sqrt(m), color=c, lw=0.7, ls=":", alpha=0.6)
-    for yv, t in ((2, "uniform (w=2)"), (4, "degenerate (w=4)")):
-        ax.axhline(yv, color="0.8", lw=0.8, ls="--")
-        ax.text(RADII[0] * 1.1, yv + 0.06, t, fontsize=6.8, color="0.45")
-    ax.set_xlabel("probe radius $r$", fontsize=8.5)
-    ax.set_ylabel("local flux exponent $w_4(r)$", fontsize=8.5)
-    ax.set_title("A · at the pair midpoint — dotted lines: $r=\\sqrt{\\mu}$", fontsize=8.8)
-    ax.set_ylim(1.5, 4.6); ax.tick_params(labelsize=7.5); ax.legend(fontsize=6.6)
+        ax.axvline(np.sqrt(m), color=c, lw=0.9, ls=":", alpha=0.7)
+    ax.set_xlabel("probe radius $r$ [model units, log scale]", fontsize=9.5)
+    ax.set_ylabel("local flux exponent $w_4(r)$ [dimensionless, linear]", fontsize=9.5)
 
     ax = axes[1]
     for c, m in zip(cols, MUS):
-        ax.semilogx(RADII / np.sqrt(m), curves[f"mid_mu{m:g}"], "o-", color=c, ms=3,
-                    lw=1.2, label=f"$\\mu={m}$")
-    ax.axvline(1.0, color="k", lw=0.8, ls=":")
-    ax.axhline(2, color="0.8", lw=0.8, ls="--"); ax.axhline(4, color="0.8", lw=0.8, ls="--")
-    ax.set_xlabel("$r/\\sqrt{\\mu}$  (units of half-separation)", fontsize=8.5)
-    ax.set_ylabel("$w_4$", fontsize=8.5)
-    ax.set_title("B · the dilation collapse — one universal crossover", fontsize=8.8)
-    ax.set_ylim(1.5, 4.6); ax.tick_params(labelsize=7.5); ax.legend(fontsize=6.6)
+        ax.semilogx(radii / np.sqrt(m), curves[f"mid_mu{m:g}"], "o-", color=c, ms=3,
+                    lw=1.2)
+    ax.axvline(1.0, color="k", lw=0.9, ls=":")
+    ax.set_xlabel("$r/\\sqrt{\\mu}$ [half-separations, log scale]", fontsize=9.5)
 
     ax = axes[2]
-    ax.semilogx(RADII / 0.3, curves["null_mu0.09"], "s-", color=BLUE, ms=3, lw=1.2,
-                label="at a split null ($\\mu=0.09$)")
-    ax.semilogx(RADII, curves["mid_mu0"], "-", color=ORANGE, lw=1.6, alpha=0.7,
-                label="fold point ($\\mu=0$)")
-    for yv in (2, 3, 4):
-        ax.axhline(yv, color="0.85", lw=0.8, ls="--")
-    ax.text(0.02, 3.04, "single null (w=3)", fontsize=6.8, color="0.45")
-    ax.set_xlabel("$r/\\sqrt{\\mu}$ (blue) · $r$ (orange)", fontsize=8.5)
-    ax.set_ylabel("$w_4$", fontsize=8.5)
-    ax.set_title("C · null-centred: 3 → 4 · degenerate control: flat 4", fontsize=8.8)
-    ax.set_ylim(1.5, 4.6); ax.tick_params(labelsize=7.5); ax.legend(fontsize=6.6)
+    ax.semilogx(radii / 0.3, curves["null_mu0.09"], "s-", color=BLUE, ms=3, lw=1.2,
+                label="centred on a split null ($\\mu=0.09$)")
+    ax.semilogx(radii, curves["mid_mu0"], "-", color=ORANGE, lw=2)
+    ax.set_xlabel("blue: $r/\\sqrt{\\mu}$; orange: $r$ [log scale]", fontsize=9.5)
 
-    print(f"fold figure: fold point Q = {Q0}; split null Q = {Qn}")
-    fig.tight_layout()
+    for ax, letter in zip(axes, "ABC"):
+        for yv in (2, 3, 4):
+            ax.axhline(yv, color="0.8", lw=0.8, ls="--", zorder=0)
+        ax.set_title(letter, loc="left", fontsize=11, fontweight="bold")
+        ax.set_ylim(1.5, 4.6); ax.tick_params(labelsize=9)
+    sec = axes[2].secondary_yaxis("right")               # reference levels, off the data
+    sec.set_yticks([2, 3, 4], ["uniform\n$w_4=2$", "single null\n$w_4=3$",
+                               "fold point\n$w_4=4$"], fontsize=9)
+    sec.tick_params(length=0)
+    h0, l0 = axes[0].get_legend_handles_labels()
+    h2, l2 = axes[2].get_legend_handles_labels()
+    fig.legend(h0 + h2, l0 + l2, loc="upper center", ncol=6, fontsize=9, frameon=False,
+               bbox_to_anchor=(0.5, 1.0))
+    fig.tight_layout(rect=(0, 0, 1, 0.93))
     out = REPO / "public/img/posts/forbidden-directions-fold-crossover.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)
     print(f"rendered {out.relative_to(REPO)}")
 
 
 if __name__ == "__main__":
-    main()
+    if "--render" in sys.argv:
+        render(json.loads((ROOT / "artifacts" / "p4_fold.json").read_text()))
+    else:
+        main()

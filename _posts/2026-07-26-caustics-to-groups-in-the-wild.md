@@ -51,7 +51,9 @@ six dimensions of $\mathrm{SE}(3)$ in one step (tilting two ways generates a rol
 moving generates the two sideways translations), so its growth vector is $(3,6)$: three
 coordinates that fill in fast, three more that fill in as $r^2$. No rank-two group can imitate a
 rank-three one, so SE(3) is set apart from all four earlier groups the instant you measure it —
-and the estimator recovers $(3,6)$ cleanly from the code's synthetic SE(3) fields.
+and the estimator recovers $(3,6)$ cleanly from the code's synthetic SE(3) fields (generated
+from the structure's tangent cone, the free step-2 group on three generators, which is all the
+growth vector sees).
 
 ## The two halves of the real-world test
 

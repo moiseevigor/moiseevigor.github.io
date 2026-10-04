@@ -395,7 +395,7 @@ Kibble 1961; Sciama 1962). The two field strengths are the torsion and curvature
 The dynamics comes from the most economical invariant you can build from these pieces,
 the Einstein–Cartan (Palatini) action
 
-$$S \;=\; \frac{1}{16\pi G}\int \epsilon_{abcd}\; e^a \wedge e^b \wedge R^{cd},$$
+$$S \;=\; \frac{1}{32\pi G}\int \epsilon_{abcd}\; e^a \wedge e^b \wedge R^{cd},$$
 
 read: *sum over spacetime the curvature, measured in the units the frame provides*.
 Varying the frame $$e$$ gives Einstein's equation $$G_{\mu\nu} = 8\pi G\, T_{\mu\nu}$$
@@ -606,9 +606,10 @@ of matter now pass through the same point, and the boundary where
 $$\det(\partial \mathbf{x}/\partial \mathbf{q}) = 0$$ is a **caustic** — the same
 mathematical object as the bright lines of focused light on the bottom of a coffee
 cup.[^caustic-optics] Arnold, Shandarin and Zel'dovich (1982) classified the caustics
-of these gravitational maps with **catastrophe theory**: generic folds ($$A_2$$) making
-the walls, cusps ($$A_3$$) stiffening them into filament-like edges, swallowtails and
-umbilics ($$A_4$$, $$D_4$$) decorating the nodes — a complete local taxonomy of the
+of these gravitational maps with **catastrophe theory**: generic folds ($$A_2$$) bounding
+the multistream regions, cusps ($$A_3$$) tracing the walls, swallowtails and
+umbilics ($$A_4$$, $$D_4$$) the filaments, and butterflies and parabolic umbilics
+($$A_5$$, $$D_5$$) the nodes — a complete local taxonomy of the
 web's skeleton, refined into the modern "caustic skeleton" of large-scale structure
 (Feldbrugge, van de Weygaert et al. 2018).
 
@@ -625,7 +626,7 @@ of Appendix B1 patches this with vanishing viscosity (Burgers' equation), gluing
 streams at the caustics and preserving the skeleton. And this series' own measured
 correction slots in precisely here: the
 [transverse-damping model](/mathematics/2026/07/09/cosmic-web-B4-transverse-damping/)
-found (E4–E5c, [Part&nbsp;2]({% post_url 2026-07-04-cosmic-web-two-models %})) that the
+found (E4–E5d, [Part&nbsp;2]({% post_url 2026-07-04-cosmic-web-two-models %})) that the
 leading error of pure free flight is cured by damping $$\beta \approx 60\%$$ of the
 velocity components **perpendicular to the local filament axis** — that is,
 transversally *in the tidal eigenframe* — while leaving the along-axis flow untouched.
@@ -638,8 +639,9 @@ tidal-tensor term.
 
 One refutation from the program belongs in this picture, because it sharpens it. The
 theory question T1 asked whether filament spines are themselves *shortest paths* —
-geodesics of some effective metric — and the answer was **no**
-([Part&nbsp;1]({% post_url 2026-07-03-geometry-of-cosmic-web-research-program %})):
+geodesics of some effective metric (posed in
+[Part&nbsp;1]({% post_url 2026-07-03-geometry-of-cosmic-web-research-program %})) — and the answer was **no**
+([Appendix B1](/mathematics/2026/07/06/cosmic-web-B1-transport-models/)):
 filaments are *pile-ups* of the flow, not paths of it. The Cartan/gauge reading of this
 post is consistent with that verdict, and states it better: matter follows geodesics;
 **filaments are the caustics of the geodesic flow** — the folds of the free-fall map,

@@ -64,8 +64,9 @@ germs (Appendix C2) — universal — but their *arrangement and proportions* ar
   <figcaption>
     <strong>The sub-Riemannian astroid.</strong> The first conjugate locus of a generic 3D
     contact structure: four cusps ($A_3$) joined by four folds. The symmetric shape (blue) is
-    the flat/nilpotent Heisenberg reference; a curved structure like SE(2) deforms it (orange),
-    and the size and shape of that deformation are the moduli $(\chi, \kappa)$. The germs are
+    the leading-order astroid, whose size is set by $\chi$ (in the flat Heisenberg case it
+    shrinks to a point on the axis); higher-order terms deform it (orange). Size and
+    deformation are governed by the moduli $(\chi, \kappa)$. The germs are
     universal; the deformation is the fingerprint. Shape schematic; axes are dimensionless
     SR-normal coordinates at the pole.
   </figcaption>
@@ -95,11 +96,11 @@ germs (Appendix C2) — universal — but their *arrangement and proportions* ar
     [[a, 0], [-a, 0], [0, b], [0, -b]].forEach(p =>
       svg.appendChild(el("circle", { cx: cx + p[0], cy: cy - p[1], r: 2.6, fill: col, opacity: op })));
   }
-  astroid(100, 100, "#2b6cb0", "0", 0.95);      // symmetric: Heisenberg reference
+  astroid(100, 100, "#2b6cb0", "0", 0.95);      // symmetric: leading-order astroid
   astroid(122, 84, "#e65100", "5 4", 0.9);        // deformed: SE(2)-like
-  svg.appendChild(el("text", { x: cx + 104, y: cy - 6, "font-size": 11.5, fill: "#2b6cb0", "font-family": SANS }, "flat (Heisenberg)"));
-  svg.appendChild(el("text", { x: cx + 6, y: cy - 92, "font-size": 11.5, fill: "#e65100", "font-family": SANS }, "curved (SE(2)):"));
-  svg.appendChild(el("text", { x: cx + 6, y: cy - 78, "font-size": 11, fill: "#e65100", "font-family": SANS }, "deformation = moduli (χ,κ)"));
+  svg.appendChild(el("text", { x: cx + 104, y: cy - 6, "font-size": 11.5, fill: "#2b6cb0", "font-family": SANS }, "leading order"));
+  svg.appendChild(el("text", { x: cx + 6, y: cy - 92, "font-size": 11.5, fill: "#e65100", "font-family": SANS }, "higher order:"));
+  svg.appendChild(el("text", { x: cx + 6, y: cy - 78, "font-size": 11, fill: "#e65100", "font-family": SANS }, "size, shape ↔ moduli (χ,κ)"));
 })();
 </script>
 
@@ -115,9 +116,10 @@ each group in a two-parameter family, with the flat model at the origin:
   degenerate: rather than a non-degenerate astroid, the whole family of geodesics at a given
   momentum collapses to a single point, so the locus is just the central axis (proved in
   [Part 2](/mathematics/2026/07/18/caustics-to-groups-forward-map/), $t_c = 2\pi/|w|$).
-- $\kappa < 0$ — **SE(2)**, the group of motions. It is curved; its conjugate locus is a
+- $\kappa = \chi > 0$ — **SE(2)**, the group of motions. It is curved; its conjugate locus is a
   genuine deformed astroid, and its geodesics are Euler elastica (Sachkov 2010).
-- other signs and magnitudes — SU(2), SL(2), SH(2), the rest of the 3D contact family.
+- other signs and magnitudes — SU(2) ($\chi = 0$, $\kappa > 0$), SL(2), SH(2)
+  ($\kappa = -\chi < 0$), the rest of the 3D contact family.
 
 So the moduli $(\chi, \kappa)$ are the fingerprint that distinguishes structures with the same
 tangent cone: they are precisely what the growth vector throws away.

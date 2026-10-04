@@ -82,7 +82,8 @@ transverse components hedges that frame noise better than trusting it.
   sticking 5.34), clearest at the web, with a small 2–4-voxel deficit.
 - **E5b — the oracle.** Same model with tidal frames from the *true* final
   field: beats ZA in every distance bin (4.47 overall, −20% at the web).
-  The E5 deficit was frame-estimation error; 0.46 voxels of headroom priced.
+  The E5 deficit was frame-estimation error; 0.46 voxels of headroom
+  priced (first model 4.93 → oracle 4.47 on the same five seeds).
 - **E5c/E5d — declared optimisation.** Selection on seeds {2, 3},
   validation on held-out {4, 5, 6}. Winner: self-density frames, β = 0.6,
   2 h⁻¹Mpc smoothing — 4.52 ± 0.18, within 0.05 of the oracle bound.
@@ -91,7 +92,7 @@ transverse components hedges that frame noise better than trusting it.
   with clustering.
 - **E8 — field level.** Extends the usable wavenumber range of a ZA-based
   mock on both phases and amplitudes at intermediate and small scales
-  (r(k) trails plain ZA at k ≲ 0.14); isotropic sticking destroys phases.
+  (r(k) trails plain ZA at k ≲ 0.22); isotropic sticking destroys phases.
 - **E9 — baselines.** On identical initial conditions: statistical tie
   with MUSCLE, 2LPT degrades badly. The contribution is the mechanism,
   not a better engine.
@@ -112,7 +113,9 @@ held-out seeds — ZA reference 4.98 ± 0.27 on seeds {4, 5, 6} (E5–E5d, E9):
 | MUSCLE (E9) | multiscale spherical collapse | 4.49 ± 0.12 | tie with frozen recipe |
 | 2LPT (E9) | second-order perturbation theory | 8.07 ± 0.39 | +62% |
 
-The frozen recipe closes 90% of the recoverable gap to the oracle. The
+The frozen recipe closes roughly 85–90% of the recoverable gap between ZA
+and the oracle (the 4.47 bound is a five-seed mean; on the three matched
+held-out seeds the figure is 86%). The
 largest gains sit where the correction was measured: at 0–2 voxels from
 spines the model reaches 5.78 ± 0.16 against ZA's 6.93 ± 0.31 (−17%), with
 the oracle showing −20% available (E5b, E9). MUSCLE is slightly ahead at
@@ -136,7 +139,7 @@ implement transverse arrest.
     mark the achievable window: the Zel'dovich baseline (no correction) and the
     <em>oracle bound</em> (the same model handed the true final-field frames). The
     <strong>frozen recipe</strong> — Zel'dovich rays plus a single transverse-damping knob
-    <em>β</em> = 0.6 — lands at 4.52, closing 90% of the recoverable gap and tying MUSCLE,
+    <em>β</em> = 0.6 — lands at 4.52, closing roughly 85–90% of the recoverable gap and tying MUSCLE,
     a far more elaborate scheme. Second-order perturbation theory (2LPT) is +62% worse;
     switch to <em>full range</em> to see it. Every value is from the E5–E9 experiment
     artifacts in <code>research/cosmic-web/</code>.
@@ -309,7 +312,7 @@ Back to the series: [The Geometry of the Cosmic Web: A Research Program](/mathem
 <ol>
   <li>Ya. B. Zel'dovich (1970). "Gravitational instability: an approximate theory for large density perturbations." <em>Astron. Astrophys.</em> 5, 84–89.</li>
   <li>S. N. Gurbatov, A. I. Saichev &amp; S. F. Shandarin (1989). "The large-scale structure of the universe in the frame of the model equation of non-linear diffusion." <em>MNRAS</em> 236, 385–402.</li>
-  <li>M. C. Neyrinck (2016). "Truthing the stretch: non-perturbative cosmological realizations with multiscale spherical collapse (MUSCLE)." <em>MNRAS</em> 455, 1204.</li>
+  <li>M. C. Neyrinck (2016). "Truthing the stretch: non-perturbative cosmological realizations with multiscale spherical collapse (MUSCLE)." <em>MNRAS Letters</em> 455, L11.</li>
   <li>F. R. Bouchet, S. Colombi, E. Hivon &amp; R. Juszkiewicz (1995). "Perturbative Lagrangian approach to gravitational instability." <em>A&amp;A</em> 296, 575.</li>
   <li>F. Villaescusa-Navarro et al. (2021). "The CAMELS project." <em>ApJ</em> 915, 71.</li>
   <li>Model card (<code>MODEL-CARD.md</code>), experiment reports E4–E12 and the paper draft, in <code>research/cosmic-web/docs/</code> of <a href="https://github.com/moiseevigor/moiseevigor.github.io/tree/research/geometry-of-cosmic-web/research/cosmic-web">the repository</a>.</li>

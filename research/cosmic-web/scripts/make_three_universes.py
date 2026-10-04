@@ -42,13 +42,25 @@ def real_panel(ax):
     y = chi * np.cos(th)
     ax.scatter(x, y, s=1.3, c="#1a365d", alpha=0.45, lw=0)
     ax.set_aspect("equal")
-    ax.set_title("The real sky", fontsize=13, pad=8)
-    ax.set_xlabel("BOSS survey: one thin slice of the sky, seen from Earth at the bottom tip —\n"
-                  "every dot is a real galaxy, out to billions of light-years",
-                  fontsize=9)
+    ax.set_title("A", loc="left", fontsize=13, fontweight="bold")
+    # scale bar (comoving); no title, no prose -- the caption carries the description
+    x0, y0 = x.min(), y.min() - 110          # below the wedge, clear of the dots
+    ax.plot([x0, x0 + 500], [y0, y0], color="k", lw=2.5, solid_capstyle="butt")
+    ax.text(x0 + 250, y0 + 25, "500 $h^{-1}$Mpc (comoving)", ha="center",
+            va="bottom", fontsize=10)
     ax.set_xticks([]); ax.set_yticks([])
     for s in ax.spines.values():
         s.set_visible(False)
+
+
+def _box_axes(ax, letter):
+    """128 h^-1 Mpc box (1 voxel = 1 h^-1 Mpc): labelled axes, bold panel letter."""
+    ax.set_xlim(0, 128); ax.set_ylim(0, 128)
+    ax.set_xticks([0, 32, 64, 96, 128]); ax.set_yticks([0, 32, 64, 96, 128])
+    ax.set_xlabel("x [$h^{-1}$Mpc, linear]", fontsize=11)
+    ax.set_ylabel("y [$h^{-1}$Mpc, linear]", fontsize=11)
+    ax.tick_params(labelsize=10)
+    ax.set_title(letter, loc="left", fontsize=13, fontweight="bold")
 
 
 def sim_panel(ax):
@@ -57,14 +69,9 @@ def sim_panel(ax):
     x, *_ = pm.pm_sim(128, 128.0, rng, n_steps=90, track=1)
     rho = fields.cic_deposit(x, 128)
     sl = np.log10(1 + rho[:, :, 60:68].mean(axis=2))
-    ax.imshow(sl.T, origin="lower", cmap="Blues", interpolation="bilinear")
-    ax.set_title("A gravity simulation", fontsize=13, pad=8)
-    ax.set_xlabel("2.1 million particles moved by gravity alone —\n"
-                  "the same web pattern emerges by itself",
-                  fontsize=9)
-    ax.set_xticks([]); ax.set_yticks([])
-    for s in ax.spines.values():
-        s.set_visible(False)
+    ax.imshow(sl.T, origin="lower", cmap="Blues", interpolation="bilinear",
+              extent=[0, 128, 0, 128])
+    _box_axes(ax, "B")
 
 
 def toy_panel(ax):
@@ -77,22 +84,17 @@ def toy_panel(ax):
     field = fields.galaxy_field(gal, 128, 5000, rng)
     z0 = 64
     sl = field[:, :, z0 - 4:z0 + 4].mean(axis=2)
-    ax.imshow(sl.T, origin="lower", cmap="Blues", interpolation="bilinear")
+    ax.imshow(sl.T, origin="lower", cmap="Blues", interpolation="bilinear",
+              extent=[0, 128, 0, 128])
     tp = truth[(truth[:, 2] > z0 - 4) & (truth[:, 2] < z0 + 4)]
-    ax.plot(tp[:, 0], tp[:, 1], ".", ms=1.4, color="#c53030", alpha=0.8)
-    ax.set_title("A toy with the answers", fontsize=13, pad=8)
-    ax.set_xlabel("An invented web where the true filaments (red)\n"
-                  "are known exactly — so methods can be graded",
-                  fontsize=9)
-    ax.set_xticks([]); ax.set_yticks([])
-    for s in ax.spines.values():
-        s.set_visible(False)
+    ax.plot(tp[:, 0] + 0.5, tp[:, 1] + 0.5, ".", ms=1.4, color="#c53030", alpha=0.8)
+    _box_axes(ax, "C")
 
 
 def main():
     fig = plt.figure(figsize=(11.5, 9.0))
     gs = fig.add_gridspec(2, 2, height_ratios=[1.0, 1.35],
-                          hspace=0.30, wspace=0.10)
+                          hspace=0.12, wspace=0.22)
     real_panel(fig.add_subplot(gs[0, :]))
     sim_panel(fig.add_subplot(gs[1, 0]))
     toy_panel(fig.add_subplot(gs[1, 1]))

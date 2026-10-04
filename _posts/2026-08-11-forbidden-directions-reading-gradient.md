@@ -87,16 +87,16 @@ $$
 
 with $K$ the complete elliptic integral of the first kind — an **exact period-average
 law** (its reading as the *caustic's* law rides on the period identification below,
-verified to $10^{-8}$ but formally open), found by a
+verified to $6\times10^{-8}$ (worst relative gap) but formally open), found by a
 precision measurement (which pinned $c_4 = 2.2497 \pm 0.0009 = 9/4$ — conditional on
 fixing the proven leading coefficient $c_2 \equiv 1$; released, the fit drifts to
 $2.229$ — refuting the $5/2$ a coarser fit once suggested) and then derived: the angular dynamics integrates in one line,
 the per-angle refocusing time is identified with a pendulum-like period (an identification
-verified to $10^{-8}$; its formal Jacobian step is the one open link — Appendix D5), and
+verified to $6\times10^{-8}$; its formal Jacobian step is the one open link — Appendix D5), and
 its launch-angle average is *proven* to be
 $\tfrac{2}{\pi}K(2\varepsilon)$ — modulus convention $K(k)$, $k = 2\varepsilon$, valid for
 $\varepsilon < \tfrac12$ — by an exact tangent-half-angle factorisation (Appendix D5),
-and verified against the geodesic code to $10^{-10}$. The
+and verified against the geodesic code to $4\times10^{-9}$ or better ($\le 10^{-10}$ for $\varepsilon \le 0.25$). The
 coefficients are squared normalised central binomials, only even powers — and $K$'s
 singularity is physics: at the critical gradient $\varepsilon = 1/2$ the *mean*
 $\theta$-period diverges (that is the theorem; reading it as the mean *refocusing*
@@ -223,7 +223,7 @@ Three things, each checkable and each a little surprising.
 of the refocusing pattern you recover the field gradient:
 $\lvert\nabla\ln B\rvert = \lvert 1-\tfrac34\beta\rvert^{-1/2}\,\sqrt{\lvert\delta\rvert}/r_L$
 to leading order, **valid only for $\beta \ne \tfrac43$** — at $\beta = \tfrac43$ the
-leading statistic is blind (tested: F2) and this estimator is undefined. The profile
+leading statistic is blind (tested — experiment F2 of the companion article's §4, `run_f2_beta43_blind.py`) and this estimator is undefined. The profile
 factor is $1$ exactly on exponential-class jets ($\beta = 0$),
 which is the case this post measures. The
 shape of a caustic is not decoration — it is a readout. One honest qualifier, established
@@ -235,7 +235,7 @@ then *derived* by exact second-order perturbation of the caustic itself — whil
 *proven period-average* law has $\tfrac12$ in place of $\tfrac34$: the two differ
 because the conjugate-time = period identification *fails off* the exponential profile
 (measured — this same experiment discovered it); on the exponential it agrees to
-$10^{-8}$ but remains Conjecture A, not a theorem. So the inversion carries a
+$6\times10^{-8}$ but remains a conjecture (the article's Conjecture A, §3.4), not a theorem. So the inversion carries a
 profile-calibration factor — and only that: at leading order every probe radius reads
 the same single combination $(1-\tfrac34\beta)\lvert\nabla\ln B\rvert^2$, so gradient
 and curvature are not separately recoverable from this statistic alone.
@@ -252,7 +252,7 @@ orbits apart, and they need more time to come back together — at second order 
 order in general.** On the exponential profile the closed form is a series in
 $\varepsilon^2$; for general one-dimensional profiles the *first* odd order provably
 averages away ($\tau_1 = 2\pi\sin\theta_0$ is odd — article Prop. 4.2), while the
-vanishing of higher odd orders remains open (O6). The mechanism: a gradient points
+vanishing of higher odd orders remains open (open problem O6 in the article's ledger, §7). The mechanism: a gradient points
 *somewhere*, and that directional (odd) part cancels when you
 average over all starting directions, leaving a signal that depends only on the gradient's
 *magnitude*. Which is also the honest limitation: this averaged $\delta$ reads the one
@@ -294,7 +294,7 @@ does not oversell the answer.
   beyond leading order, higher jets.
 - **Parity** — on the exponential profile $\delta$ is even in $\varepsilon$ (closed form);
   in general the first odd order provably cancels under the launch average, higher odd
-  orders open (O6).
+  orders open (the article's open problem O6).
 
 ## References
 

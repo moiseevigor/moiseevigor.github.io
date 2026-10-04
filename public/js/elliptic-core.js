@@ -69,7 +69,7 @@ function elasticaInflectional(k, N = 600) {
   return integrateElastica(s => 2 * k * ellipj(s, m).cn, -2*Km, 2*Km, N);
 }
 
-// Euler/Cornu spiral (separatrix): κ(s) = 2·sech(s).
+// Separatrix (borderline) elastica: κ(s) = 2·sech(s). Not the Euler/Cornu spiral.
 function elasticaSeparatrix(halfArc = 8, N = 600) {
   return integrateElastica(s => 2 / Math.cosh(s), -halfArc, halfArc, N);
 }

@@ -61,10 +61,10 @@ Arnol'd's classification of Lagrangian singularities. In low dimension the playe
 |---|---|---|---|
 | $A_2$ | fold | smooth edge | the bright boundary of any caustic |
 | $A_3$ | cusp | $y^2 = x^3$ | the point of the coffee-cup curve; lensing cusps |
-| $A_4$ | swallowtail | quartic section | where a caustic surface self-crosses |
+| $A_4$ | swallowtail | discriminant of $t^4 + a t^2 + b t + c$ | the point on a caustic surface where a cuspidal edge meets a self-intersection line |
 | $D_4$ | umbilic | elliptic/hyperbolic | isolated highly-symmetric focal points |
 
-The labels $A_k, D_k$ are the same ones that classify simple Lie algebras and du Val
+The labels $A_k, D_k$ are the same ones that classify simply-laced simple Lie algebras and du Val
 surface singularities — the "ADE" pattern that recurs across mathematics. The point for us
 is blunt: **the same fold and the same cusp appear in optics, in cosmology, and in the
 conjugate locus of every one of the series' five groups.** They are universal.
@@ -74,8 +74,9 @@ conjugate locus of every one of the series' five groups.** They are universal.
 <figure class="l-body" id="fig-cusp">
   <div id="c2g-cusp" style="text-align:center;"></div>
   <figcaption>
-    <strong>The cusp germ $A_3$.</strong> The generic caustic point: two smooth fold
-    branches ($A_2$) meeting at a cusp along the exact semicubical curve $y^2 = x^3$. This
+    <strong>The cusp germ $A_3$.</strong> The simplest caustic singularity after the
+    fold (a generic caustic point is a smooth fold; cusps are the isolated points where
+    folds end): two smooth fold branches ($A_2$) meeting at a cusp along the exact semicubical curve $y^2 = x^3$. This
     is the shape at the point of the coffee-cup caustic and at a lensing cusp. Crucially, it
     is <em>identical</em> whether the underlying flow came from Heisenberg, SE(2), Engel,
     Cartan, or SE(3): read locally, a cusp names no group. Axes are dimensionless local
@@ -137,8 +138,8 @@ tangent cone's (C6), not the germ type.
 ## Why the exponential map is a Lagrangian map
 
 For completeness: the sub-Riemannian normal geodesics are the projections of the flow of a
-Hamiltonian $H = \tfrac12\sum_i h_i^2$ on the cotangent bundle. The set of covectors of a
-fixed energy, carried by that flow, sweeps out a Lagrangian submanifold; the exponential map
+Hamiltonian $H = \tfrac12\sum_i h_i^2$ on the cotangent bundle. The cotangent fibre over
+$q_0$, carried by that flow for unit time, is a Lagrangian submanifold; the exponential map
 $\exp_{q_0}(p) = \gamma_p(1)$ is its projection to the manifold. So the conjugate
 locus — the critical values of $\exp_{q_0}$ — is a genuine Lagrangian caustic, subject to
 Arnol'd's classification, and everything above applies to it verbatim. The code's caustic

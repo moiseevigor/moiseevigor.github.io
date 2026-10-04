@@ -188,8 +188,8 @@ where $$\gamma_\varepsilon$$ is a 1-parameter family of geodesics with $\gamma_0
 
 A point $\gamma(t^{\ast})$ is a **conjugate point** to $\gamma(0)$ if a
 non-trivial Jacobi field with $J(0) = 0$ also has $J(t^{\ast}) = 0$.
-Equivalently, $t^{\ast}$ is the first time the differential of the SR
-exponential map becomes singular:
+Equivalently, $t^{\ast}$ is a time at which the differential of the SR
+exponential map is singular:
 
 $$\det d_{\mu_0}\!\mathrm{Exp}_{t^{\ast}} \;=\; 0.$$
 
@@ -198,7 +198,8 @@ a *local* length-minimiser.  Any sufficiently small perturbation produces
 a strictly shorter horizontal curve.  This is the SR analogue of the
 classical Riemannian Morse-theoretic statement.
 
-For SE(2), Sachkov's analysis (2011, Thms 2.1–2.6) shows something stronger and
+For SE(2), Sachkov's analysis (2010, Thms 2.1–2.6; theorem numbers as in the
+preprint arXiv:0903.0727) shows something stronger and
 cleaner than a bound:
 
 - **Inflectional and separatrix families: no conjugate points at all.** Along every
@@ -216,10 +217,10 @@ cleaner than a bound:
 
 ## Cut and Maxwell points
 
-A **cut point** is the first $t$ at which $\gamma$ stops being *globally*
-length-minimising — i.e. there is some other horizontal curve from
-$\gamma(0)$ to $\gamma(t)$ with strictly smaller SR length.  By
-definition, the cut time satisfies $$t_{\mathrm{cut}} \leq t_{\mathrm{conj}}$$
+The **cut time** is the last $t$ up to which $\gamma$ is *globally*
+length-minimising — for any later $t$ there is some other horizontal curve from
+$\gamma(0)$ to $\gamma(t)$ with strictly smaller SR length; $\gamma(t_{\mathrm{cut}})$
+is the **cut point**.  In general the cut time satisfies $$t_{\mathrm{cut}} \leq t_{\mathrm{conj}}$$
 (losing local optimality is at least as hard as losing global).
 
 A **Maxwell point** is a point where two *distinct* geodesics from
@@ -231,14 +232,17 @@ $\varphi \to -\varphi$, and the shift $\varphi \to \varphi + 2\pi$ — and the
 fixed-point sets of these reflections on the exponential map are the Maxwell
 strata.
 
-For sufficiently symmetric SR problems (and SE(2) is one of them),
+A Maxwell point always gives the upper bound $t_{\mathrm{cut}} \le
+t_{\mathrm{Maxwell}}^{(1)}$.  For SE(2) the bound is attained (Sachkov 2010, Thm 3.3):
 
 $$\boxed{\;t_{\mathrm{cut}} \;=\; t_{\mathrm{Maxwell}}^{(1)},\;}$$
 
 i.e. the cut time equals the first Maxwell time $\mathfrak t(\lambda)$ of this
-group.  Characterising the Maxwell strata is the work of Moiseev–Sachkov
-(2010, arXiv:0807.4731); the equality — and with it the full optimal
-synthesis — is Sachkov (2011, arXiv:0903.0727).
+group.  The same equality has been proved case by case in several other highly
+symmetric left-invariant problems, but it is not a general theorem (Part&nbsp;4).
+Characterising the Maxwell strata is the work of Moiseev–Sachkov
+(2010, arXiv:0807.4731); the equality is Sachkov (2010) and the full cut locus
+and optimal synthesis Sachkov (2011) — both from the preprint arXiv:0903.0727.
 
 For the inflectional family with modulus $k$ the value is strikingly simple:
 
@@ -277,7 +281,8 @@ the heart of Parts&nbsp;3–4.
     $y \to -y$ reflection symmetry of the pendulum equation,
     $\gamma_B(s) = (x_A(s),\, -y_A(s),\, -\theta_A(s))$ — they trace
     mirror-image curves.  As SE(2) configurations, they coincide exactly
-    when $y_A(s) = 0$ <em>and</em> $\theta_A(s) \equiv 0 \pmod{2\pi}$.
+    when $y_A(s) = 0$ <em>and</em> $\theta_A(s) \in \{0, \pi\} \pmod{2\pi}$
+    (here only $0$ occurs, since $|\theta_A| \le 2\arcsin k < \pi$).
     The right panel plots $|\gamma_A(s) - \gamma_B(s)|$ over $s \in [0,
     T]$; its first zero crossing (red marker, if any) is the
     <strong>first Maxwell time of this pair</strong>.
@@ -290,7 +295,7 @@ the heart of Parts&nbsp;3–4.
     At the special "figure-eight" modulus
     $k_0 \approx 0.909$ (root of $2E(k^2) = K(k^2)$) that shared endpoint sits
     back at the origin, so the closed curve is itself a single self-crossing
-    lemniscate; for other $k$ the two curves still meet at $s = 4K(k^2)$, just
+    figure-eight; for other $k$ the two curves still meet at $s = 4K(k^2)$, just
     away from the origin.
   </figcaption>
 </figure>
@@ -314,8 +319,9 @@ the wavefront is a short, almost-straight arc near $(T, 0)$, transverse to
 the launch direction.  As $T$
 approaches the elastica mirror-tie time $T_{\mathrm M} = 4K(k^2)$,
 neighbouring trajectories begin to converge and the wavefront develops
-**cusps** — these are the projections of conjugate points, where
-$d\mathrm{Exp}_T$ becomes singular.
+**cusps** — points where this one-parameter family folds
+($\partial_k(x, y) = 0$), the planar shadow of the mechanism by which an
+exponential map becomes singular at conjugate points.
 
 Visually, this looks remarkably like the SR analogue of the Riemannian
 *caustic* — the bright curves you see at the bottom of a coffee cup when
@@ -359,11 +365,15 @@ be locally surjective along a critical curve.
       <li>at $T \approx \pi$ it lengthens and starts to flatten;</li>
       <li>around $T \approx 2\pi$ — the smallest period $4K(0)$ in the swept
         family (the near-straight $k \to 0$ curves) — the first
-        <em>cusps appear</em> at the corners of the wavefront: the first
-        conjugate points <em>of the elastica problem</em> (red rings) — the free
-        SR inflectional geodesics have none (Sachkov 2011, Thm 2.1);</li>
-      <li>as $T$ grows the wavefront self-intersects: those crossings
-        are the Maxwell stratum drawn in Figure A5.2.</li>
+        <em>cusps appear</em> at the corners of the wavefront (red rings, found
+        by a turning-angle heuristic): fold points of this slice of the
+        <em>elastica</em> family, the planar shadow of that problem's conjugate
+        points — the free
+        SR inflectional geodesics have none (Sachkov 2010, Thm 2.1);</li>
+      <li>as $T$ grows the wavefront self-intersects: at those crossings two
+        different trajectories reach the same plane point with equal length
+        (a Maxwell point in $\mathrm{SE}(2)$ only if the headings agree too,
+        as for the mirror pair of Figure A5.2).</li>
     </ol>
     Press <em>play</em> to animate $T$ continuously.  The four-fold
     astroid-like cusp pattern is the plane caustic of the elastica family —
@@ -390,9 +400,10 @@ The Dubins-back-wheel cuspidal trajectories of the elliptic project
 (<a href="https://moiseevigor.github.io/elliptic/examples/dubins-back-wheel/">
 parking-style curves with cusps</a>) are also relevant here: they are
 projections of SE(2) geodesics in the regime where the rear-axle
-forward velocity changes sign.  The cusps in those trajectories are the
-geometric analogue of the wavefront cusps in Figure A5.3 — only the
-rear-axle parametrisation makes them visible.
+forward velocity changes sign.  Those cusps belong to a *single trajectory*
+(the forward speed $u_1$ passing through zero) and should not be confused with
+the wavefront cusps of Figure A5.3, which are singularities of a *family* of
+trajectories.
 
 ## Code
 
@@ -432,13 +443,13 @@ xA, yA, thA = inflectional_elastica(k, +1, T_maxwell)
 xB, yB, thB = inflectional_elastica(k, -1, T_maxwell)
 
 err = np.hypot(xA[-1] - xB[-1], yA[-1] - yB[-1])
-print(f"|γA(T₁) − γB(T₁)|  =  {err:.2e}")     # should be ≲ 1e-6
+print(f"|γA(T₁) − γB(T₁)|  =  {err:.2e}")     # ≈ 2e-2 at N = 1500 (first-order stepping); → 0 like 1/N
 ```
 
 ```python
 # Conjugate time of the ELASTICA family (schematic scale, one curvature period).
 # NB: the free SR inflectional geodesics have NO conjugate points at all
-# (Sachkov 2011, Thm 2.1) — this heuristic applies to the elastica sister
+# (Sachkov 2010, Thm 2.1) — this heuristic applies to the elastica sister
 # problem, where conjugate points do occur on the 4K scale.
 def conjugate_scale_elastica(k):
     """Heuristic scale (one curvature period), not a closed form."""
@@ -501,12 +512,15 @@ fluently, and Parts&nbsp;3 and 4 become approachable.
     Yu. L. Sachkov (2010).  "Conjugate and cut time in the sub-Riemannian
     problem on the group of motions of a plane."
     <em>ESAIM: COCV</em> 16(4): 1018–1039.
+    Conjugate-time theorems 2.1–2.6 and $t_{\mathrm{cut}} = \mathfrak t$ (Thm 3.3),
+    numbered as in the preprint arXiv:0903.0727.
   </li>
   <li>
     A. A. Agrachev, Yu. L. Sachkov (2004).
     <em>Control Theory from the Geometric Viewpoint.</em> Springer.
-    Chapter 16 develops the SR exponential map abstractly; SE(2) is the
-    headline worked example.
+    Chapters 12 and 21 develop the Hamiltonian exponential map and the Jacobi
+    equation (conjugate points) in general; the SE(2) computations are in the
+    Sachkov papers listed here.
   </li>
   <li>
     R. Montgomery (2002).
@@ -670,7 +684,7 @@ function drawExpMap() {
   g.append('text').attr('x', W - margin.r).attr('y', margin.t + 12)
     .attr('text-anchor', 'end')
     .attr('font-family', 'JetBrains Mono').attr('font-size', 11).attr('fill', color)
-    .text(`Exp_T = (${end.x.toFixed(2)}, ${end.y.toFixed(2)}, ${(end.theta % (2*Math.PI)).toFixed(2)})`);
+    .text(`endpoint = (${end.x.toFixed(2)}, ${end.y.toFixed(2)}, ${(end.theta % (2*Math.PI)).toFixed(2)})`);
 }
 
 // ── Figure A5.2 — σ-symmetric pair + first-coincidence detection ───────

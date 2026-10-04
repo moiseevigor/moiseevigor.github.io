@@ -140,24 +140,31 @@ numerical zero test with no scale attached. The growth vector has a *law* for it
 <figure class="l-middle" id="fig-anatomy-sun">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-null-anatomy-sun.png"
-      alt="Two rows of null-anatomy panels for the AR11429 coronal nulls: a 3D skeleton view in the null's own frame with a translucent fan disc, a view down the spine showing blue fan field lines radiating from the null, a side view with the orange spine vertical and the fan horizontal, plus a type schematic with eigenvalues"
+      alt="One row of three null-anatomy panels for the single interior coronal null of the AR11429 volume, in the null's own frame: A, a 3D skeleton with a translucent fan disc and the orange spine axis; B, the view down the spine, axes fan-plane coordinates e1 and e2 in pixels (linear, minus 12 to 12), blue fan field lines radiating from the null; C, the side view, x axis fan-plane coordinate e1 and y axis spine coordinate in pixels (linear), orange spine lines vertical and the fan edge-on"
       style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
-    <strong>The anatomy of the two real nulls.</strong> Each row is one coronal null of
-    the AR11429 volume, drawn in the null's <em>own frame</em> (the visual grammar of
-    Pontin &amp; Priest 2022: colour = topological role): a 3D skeleton with the
-    translucent ideal fan disc, a view <em>down the spine</em> where the real traced
-    fan lines (blue) radiate from the null, and a side view with the <em>spine</em>
-    (orange) vertical and the fan edge-on. Gray lines are ambient field; the open
+    <strong>The anatomy of a real null.</strong> The one interior coronal null of
+    the null-recentred AR11429 volume (height $h = 4$ px), drawn in the null's
+    <em>own frame</em> (the visual grammar of
+    Pontin &amp; Priest 2022: colour = topological role). <em>A:</em> a 3D skeleton with the
+    translucent ideal fan disc (dashed rim) and the spine axis (orange arrows).
+    <em>B:</em> the view <em>down the spine</em> — axes are the two fan-plane
+    coordinates $e_1, e_2$ in extrapolation-grid pixels, linear — where the real traced
+    fan lines (blue) radiate from the null; the dashed circle is the rim of the ideal
+    fan disc. <em>C:</em> the side view, with the <em>spine</em>
+    (orange; vertical axis = spine coordinate in px, linear) vertical and the fan
+    edge-on (dashed line). Gray lines are ambient field; the open
     circle at the null is coloured by topological degree (blue $+1$, red $-1$); a line
     that sweeps in along the fan and leaves along the spine is split at the null and
-    carries both colours. The type schematic and the measured
-    $\nabla\mathbf B$ eigenvalues are at right. Note $J_\parallel = 0.00$ on both: a
+    carries both colours. The measured invariants: radial type, degree $+1$, fan-in,
+    normalised $\nabla\mathbf B$ eigenvalues $(1.00,\,-0.30,\,-0.71)$, SR growth vector
+    $Q = 6$. Note $J_\parallel = 0.00$: a
     potential field is current-free, exactly as the force-free theorem demands of its
-    radial-only nulls. (These are nulls <em>of the survey window's extrapolation</em>;
-    low potential-field nulls are window-sensitive — see the R3 report's
-    window-sensitivity check.)
+    radial-only nulls. (This is a null <em>of the survey window's extrapolation</em>;
+    low potential-field nulls are window-sensitive — see the window-sensitivity check in
+    the R3 report, the write-up of Part 5's real-gallery experiment,
+    <code>research/preferred-directions/docs/R3-real-gallery.md</code>.)
   </figcaption>
 </figure>
 
@@ -192,7 +199,7 @@ exponent $w_4(r)$: how the reachable holonomy scales with probe radius $r$.
 <figure class="l-middle" id="fig-fold-crossover">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-fold-crossover.png"
-      alt="Three panels: the local flux exponent at the pair midpoint crossing from 2 to 4 at the half-separation for four values of mu; the same curves collapsing onto one universal crossover when radius is rescaled by sqrt(mu); and the null-centred curve going from 3 to 4 with the degenerate control flat at 4"
+      alt="Three panels sharing the y axis, local flux exponent w4 (dimensionless, linear, 1.5 to 4.6): A, against probe radius r in model units (log scale), the exponent at the pair midpoint crossing from 2 to 4 at the half-separation for four values of mu, with the mu equals zero control flat at 4; B, the same curves against r over sqrt(mu) in half-separations (log scale) collapsing onto one universal crossover; C, the null-centred curve going from 3 to 4 with the fold-point control flat at 4"
       style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
@@ -203,7 +210,12 @@ exponent $w_4(r)$: how the reachable holonomy scales with probe radius $r$.
     decades. <em>B:</em> plotted against $r/\sqrt\mu$, all four separations lie on
     <strong>one universal curve</strong> — the dilation symmetry of the geometry.
     <em>C:</em> centred on a member null: plateau 3 (a single generic null), rising to 4
-    when the probe swallows the partner. Pipeline:
+    when the probe swallows the partner (blue squares, against $r/\sqrt\mu$; the
+    orange fold-point control is plotted against $r$). Colours, shared by all panels:
+    orange = $\mu = 0$ (the fold point); dark purple → light green =
+    $\mu = 0.01, 0.04, 0.09, 0.16$. Dashed horizontals are the reference levels named
+    at the right margin: $w_4 = 2$ uniform field, $3$ single null, $4$ fold point; the
+    dotted vertical in B is $r = \sqrt\mu$. Pipeline:
     <code>research/preferred-directions/scripts/run_p4_fold.py</code>.
   </figcaption>
 </figure>
@@ -230,7 +242,8 @@ found for classification, now measured twice.
 
 ## On the real Sun: a census, a partial, and a repair
 
-Do real coronal fields carry such pairs? Scanning twelve active-region volumes across the
+Do real coronal fields carry such pairs? Scanning twelve active-region volumes (four
+windows per day, a wider net than the two per day of Part 5's gallery) across the
 three real days: **four same-volume pairs**, the closest at 23.4 px (2012-03-07). At its
 midpoint, on the real extrapolation's own vector potential:
 
@@ -239,7 +252,7 @@ midpoint, on the real extrapolation's own vector potential:
 <figure class="l-body" id="fig-solar-pair">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-solar-pair.png"
-      alt="The local flux exponent at the midpoint of the closest real solar null pair: starting at 2, rising through 3 near the half-separation, then relaxing — the rising edge of the crossover without the degenerate plateau"
+      alt="The local flux exponent at the midpoint of the closest real solar null pair: starting at 2, rising through 3 near the half-separation, then relaxing — the rising edge of the crossover without the degenerate plateau; x axis probe radius over half-separation (log scale), y axis flux exponent w4"
       style="max-width:min(100%,460px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
@@ -272,7 +285,7 @@ minutes apart, through two X-class flares**. If a null pair collapsed or was bor
 anywhere in those three hours, a census should catch it — and topology says exactly what
 to demand. Away from the volume's boundaries the total *topological degree* (the sum of
 $\mathrm{sign}\det\nabla\mathbf B$ over all nulls) cannot change smoothly: the only
-interior event a divergence-free family allows is a **fold** — two nulls of *opposite*
+interior event a generic one-parameter divergence-free family allows is a **fold** — two nulls of *opposite*
 degree approaching, merging through one degenerate point, and vanishing (or the mirror,
 a pair born). So the hunt is a bookkeeping protocol: track every null, attribute every
 birth and death (photospheric floor, lateral wall, or interior), and demand of any
@@ -290,7 +303,7 @@ $w_4 \to 4$ plateau at the collision.
   </div>
   <figcaption>
     <strong>The solar hunt, and the impostor it caught.</strong> <em>A:</em> the
-    per-frame census of the AR11429 wide volume (SDO/HMI, 2012-03-07 00:00–03:06 UT,
+    per-frame census of the AR11429 wide volume (SDO/HMI, 2012-03-07 00:01–03:07 UT,
     6-min cadence; shaded bands = the X5.4 and X1.3 flares): 12–21 nulls per frame, and
     a degree sum that swings between $-5$ and $-17$ — the churn of marginal, low-lying
     nulls of a windowed potential extrapolation flickering against the finder, not
@@ -305,7 +318,9 @@ $w_4 \to 4$ plateau at the collision.
     window reproduces it. The pair was never merging; the finder was losing a marginal
     null. (Counts here are Newton-finder censuses — dense seeding, dedup — not
     exhaustive cell censuses; the Haynes–Parnell-grade upgrade is specified in the G1
-    charter.) Pipeline: <code>scripts/run_s5_solar_fold.py</code> +
+    charter — <code>docs/PROGRAM-G1-solar-gold-standard.md</code>, the chartered,
+    not-yet-run gold-standard solar pipeline: vector-magnetogram boundary data,
+    non-periodic extrapolation, window ensembles, exhaustive cell census.) Pipeline: <code>scripts/run_s5_solar_fold.py</code> +
     <code>scripts/run_s5b_pair.py</code>; census and blend in
     <code>artifacts/s5_solar_fold.json</code>, <code>s5b_pair.json</code>.
   </figcaption>
@@ -347,12 +362,13 @@ collision with adaptive continuation.
 <figure class="l-middle" id="fig-collider">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-collider.png"
-      alt="Three panels: the two nulls' paths in the window plane converging onto a star marking the fold; the pair separation against distance-to-fold on log-log axes following a square-root law over seven decades with the determinants falling alongside; and the flux-exponent curves whose knee marches to zero, settling on the generic-null value three at the collision"
+      alt="Three panels: the two nulls' paths in the window plane converging onto a star marking the fold; the pair separation against distance-to-fold on log-log axes following a square-root law over more than four decades with the determinants falling alongside; and the flux-exponent curves whose knee marches to zero, settling on the generic-null value three at the collision"
       style="max-width:min(100%,980px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
-    <strong>Two coronal nulls collapse into one another — three of the four demanded
-    signatures pass; the fourth (window robustness) fails and is reported below.</strong>
+    <strong>Two coronal nulls collapse into one another — the fold signatures pass
+    (the fourth in refined form: a collapsing knee on plateau 3, not the pre-registered
+    plateau 4); the separate window-robustness check fails and is reported below.</strong>
     The certified fold of the AR11429 boundary blend at $s_c = 0.14095804$ (window
     position $x \approx 11.8$, $y \approx 209$, height $z \approx 3.7$ px).
     <em>A:</em> the two nulls' paths (blue: degree $+1$, orange: degree $-1$; colour =
@@ -360,7 +376,7 @@ collision with adaptive continuation.
     <em>B:</em> the pair separation against $\delta = s - s_c$ on log–log axes:
     the fitted slope is <strong>0.4999</strong> against the fold's exact $\tfrac12$,
     holding over more than four decades down to a separation of $10^{-5}$ px —
-    twenty-thousandth of a pixel, courtesy of the spectral microscope; both members'
+    a hundred-thousandth of a pixel, courtesy of the spectral microscope; both members'
     $\det\nabla\mathbf B \to 0$ alongside (orange triangles, scaled). <em>C:</em> the
     SR read: the $w_4(r)$ crossover knee marches to zero with the shrinking pair, and
     at the collision the curve settles on the <em>generic-null</em> plateau 3
@@ -408,8 +424,8 @@ crossover whose elbow marches to zero like $\sqrt{s - s_c}$, visible in panel C 
 The honesty boxes, filled: the two flanking window shifts do <em>not</em> reproduce
 this particular fold ($+16$ px pushes the event region out of frame; $-16$ px has
 different null content at the matching position — window-sensitivity operating at
-event level, on a low null at $z \approx 3.7$ px, exactly the fragile class Part 5
-documented). So the precise claim is: **a fold of the windowed family built from two
+event level, on a low null at $z \approx 3.7$ px, exactly the fragile class the R3
+report's window-sensitivity check documented). So the precise claim is: **a fold of the windowed family built from two
 measured magnetograms, certified to machine precision** — the wall between the 00:01
 and 03:07 topologies is real in that family, and its location is pinned; whether the
 physical corona crossed *this particular* wall needs the global-extrapolation upgrade
@@ -432,9 +448,9 @@ nulls — and 79 of them are spiral**, sitting exactly where the theorem permits
 The growth vector returns $Q = 6$ at every one, radial and spiral alike.
 
 The bifurcation hunt (below) forced a sharper audit of this census, and the result is
-worth stating precisely. Testing every null against the T96 model's *own* magnetopause
-(the boundary function shipped with the model): **the entire population sits in a thin
-shell, under one Earth radius <em>outside</em> the model boundary — and inside its
+worth stating precisely. Testing the census nulls of the core tracking box (70 of them) against the T96
+model's *own* magnetopause (the boundary function shipped with the model): **every one
+sits in a thin shell, under one Earth radius <em>outside</em> the model boundary — and inside its
 valid domain the model has no nulls at all**, at any IMF $B_z$ we probed. The
 smooth *average* magnetosphere of an empirical model is null-free; the shell nulls are
 mathematical structure of the field's continuation past its own edge (which is also why
@@ -452,16 +468,20 @@ stays on the books.
 <figure class="l-middle" id="fig-magnetosphere">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-magnetosphere.png"
-      alt="Meridional map of Earth's magnetosphere field magnitude from IGRF plus Tsyganenko T96: compressed dayside, magnetopause boundary, and the dark tail current sheet, with white field lines"
+      alt="Meridional map of Earth's magnetosphere field magnitude from IGRF plus Tsyganenko T96, colour = field magnitude in nanotesla on a log scale from 1 to 2000, x axis GSM x from minus 35 to 12 Earth radii with the Sun to the right, y axis GSM z from minus 14 to 14 Earth radii (both linear): compressed dayside, magnetopause boundary, and the dark tail current sheet, with white in-plane field lines and Earth as a cyan disc"
       style="max-width:min(100%,760px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
-    <strong>The fourth world.</strong> Noon–midnight cut of $\lvert\mathbf B\rvert$
+    <strong>The third world.</strong> Noon–midnight cut of $\lvert\mathbf B\rvert$
     (log scale) in the IGRF + Tsyganenko T96 field for 2012-03-07 storm conditions: the
     compressed dayside, the magnetopause, and the dark ribbon of the tail current sheet —
-    the genuinely non-force-free structure the Sun's *force-free* extrapolations cannot
-have (non-force-free and data-driven MHD extrapolations are outside that theorem). The null
-    population sits off this plane, at the flank/lobe boundary (next figure).
+    the genuinely non-force-free structure the Sun's <em>force-free</em> extrapolations
+    cannot have (non-force-free and data-driven MHD extrapolations are outside that
+    theorem). White arrowed lines are the in-plane field lines; the cyan disc is
+    Earth (the field inside $2\,R_E$ is masked). The null census of this field counts
+    <strong>149 nulls, 79 of them spiral</strong>; the
+    population sits off this plane, at $\lvert y\rvert \approx 17$–$25\,R_E$ on the
+    nightside flank/lobe boundary (next figure).
     Pipeline: <code>research/preferred-directions/scripts/run_p4_magnetosphere.py</code>.
   </figcaption>
 </figure>
@@ -474,8 +494,8 @@ have (non-force-free and data-driven MHD extrapolations are outside that theorem
   </div>
   <figcaption>
     <strong>The null constellation — continuation-only structure, outside T96's own
-    validity domain</strong> (the boundary audit above places every one of these roots outside
-    the model's magnetopause; they are anatomy of the model's continuation, not standing
+    validity domain</strong> (the boundary audit above places every root it tested outside
+    the model's magnetopause and finds none inside; they are anatomy of the model's continuation, not standing
     magnetospheric nulls). The census in two
     projections (ecliptic and noon–midnight; 24 far-tail nulls beyond
     $\lvert x\rvert = 40\,R_E$ omitted). Spiral nulls (orange) trace the nightside flank
@@ -491,17 +511,21 @@ have (non-force-free and data-driven MHD extrapolations are outside that theorem
 <figure class="l-middle" id="fig-anatomy-earth">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-null-anatomy-earth.png"
-      alt="Two rows of null-anatomy panels for magnetospheric nulls in null-frame views: 3D skeleton with translucent fan disc, view down the spine, and side view with the spine vertical; the radial null shows ambient-dominated field lines, the spiral null a tight in-plane bundle with complex eigenvalues and strong field-aligned current"
+      alt="Two rows of three null-anatomy panels for magnetospheric nulls in null-frame views, radial null on top (A to C) and spiral null below (D to F): 3D skeleton with translucent fan disc; view down the spine with axes fan-plane coordinates e1 and e2 in Earth radii (linear, minus 1.6 to 1.6); side view with x axis fan-plane coordinate e1 and y axis spine coordinate in Earth radii (linear); the radial null shows ambient-dominated gray field lines, the spiral null a tight in-plane bundle of blue fan lines"
       style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
     <strong>The two species, dissected.</strong> The same null-frame anatomy (3D
     skeleton, down-the-spine, side view; colour = topological role as in the coronal
-    sheet) for two core-census magnetospheric nulls. <em>Top:</em> a radial null —
-    real eigenvalues, $J_\parallel \approx 0$; note how much of the local field is
+    sheet: orange = spine, blue = fan lines, gray = ambient, dashed circle/line = ideal
+    fan plane, open circle = the null, blue for degree $+1$; axes in $R_E$, linear)
+    for two core-census magnetospheric nulls. <em>Top (A–C):</em> a radial null at GSM
+    $(-12, 17, 11)\,R_E$ —
+    real normalised eigenvalues $(0.66, -0.33, -0.34)$, $J_\parallel = +0.01$; note how much of the local field is
     honest gray <em>ambient</em>: a T96 null is weak and buried in its surroundings.
-    <em>Bottom:</em> a spiral null — complex fan pair and
-    $J_\parallel = -7$: the field-aligned current the force-free theorem requires. Its
+    <em>Bottom (D–F):</em> a spiral null at GSM $(3, 15, 26)\,R_E$ — complex fan pair
+    (eigenvalues $0.10,\ -0.05 \pm 1.00\,i$) and
+    $J_\parallel = -6.95$: the field-aligned current the force-free theorem requires. Its
     winding is so rapid ($\lvert\mathrm{Im}/\mathrm{Re}\rvert \approx 20$ — many turns
     per e-fold of radius) that the fan renders as a tight in-plane bundle rather than a
     visible corkscrew — the dense tube <em>is</em> the visual signature of a fast
@@ -524,8 +548,10 @@ Could the collision be staged at Earth too? The audit above answers for T96: its
 interior owns no nulls, so there is nothing to collide. But the *classical* outer
 magnetosphere — the Chapman–Ferraro/Dungey vacuum superposition of the planet's real
 internal field (IGRF) and a uniform interplanetary field, here 5 nT — genuinely owns
-the textbook pair: two polar neutral points at $r \approx (2B_0/B_{sw})^{1/3} \approx
-18\text{–}23\,R_E$. Rotating the IMF direction $\theta$ from northward to southward is
+the textbook pair: two neutral points at $r \approx 18\text{–}23\,R_E$ (between
+$(B_0/B_{sw})^{1/3} \approx 18$ for the equatorial, anti-parallel balance and
+$(2B_0/B_{sw})^{1/3} \approx 23$ for the polar one, in $R_E$ with $B_0 \approx 3\times10^4$ nT
+the surface equatorial field). Rotating the IMF direction $\theta$ from northward to southward is
 the natural dial, and the census tells a two-act story. For $125°$ of rotation the two
 nulls just migrate — the configuration is **structurally stable**, the census flat
 (sampled every $5°$ with a fixed seed battery; "stable" here means no event at that
@@ -591,7 +617,7 @@ on.
 | What order? Is it a **transition state**? | $Q = k+5$: generic 6; symmetric fold 7; **generic (rank-2) fold reads 6 + collapsing knee** | law tested at $k = 0,1,2$; refined by the certified collision |
 | An unresolved **pair**'s separation? | concept: the $w_4(r)$ knee · tool: a polynomial fit + roots | knee confirmed synthetically; the fit won the pre-registered race (Part 7) |
 | **When do nulls appear/disappear?** | the fold certificate: opposite degrees + $C\sqrt{\lvert\lambda-\lambda_c\rvert}$ + $\det\to 0$ + knee collapse | one collision certified (boundary blend, slope 0.4999); protocol also *kills* impostors |
-| How is the field changing nearby? | period average: $\delta = 1-\tfrac2\pi K(2\varepsilon)$ exactly (exponential profile); the caustic agrees with it numerically ($10^{-8}$) there, identification formally open | exact period-average law; caustic status separate (Part 7) |
+| How is the field changing nearby? | period average: $\delta = 1-\tfrac2\pi K(2\varepsilon)$ exactly (exponential profile); the caustic agrees with it numerically (to $\lesssim 10^{-7}$) there, identification formally open | exact period-average law; caustic status separate (Part 7) |
 | Radial or spiral, which sign? | the local linear fit | stays with the standard toolkit (Part 5) |
 
 ## Glossary
@@ -618,7 +644,7 @@ on.
   creation/annihilation: opposite degrees; separation $= C\sqrt{\lvert\lambda -
   \lambda_c\rvert}$; $\det\nabla\mathbf B \to 0$ for both members; the $w_4$ knee
   collapsing to zero. Candidates failing any one are impostors (three died that way
-  in this post).
+  during the solar hunt; this post shows one).
 - **Pre-registered (as used in this series)** — the hypothesis and its
   falsification criteria are written into the experiment's docstring and committed
   before the run, in the same repository; there is no external timestamped

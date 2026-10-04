@@ -39,7 +39,7 @@ theory behind
 Take a sub-Riemannian manifold and a point $q_0$, and blow up the metric around $q_0$ by
 larger and larger factors. In the limit (Gromov–Hausdorff) the geometry converges to a
 model space called the **metric tangent cone**. Unlike the Riemannian case — where the
-tangent cone is always flat $\mathbb{R}^n$ — here it is a **Carnot group**: a nilpotent Lie
+tangent cone is always flat $\mathbb{R}^n$ — here it is (at a regular point) a **Carnot group**: a nilpotent Lie
 group carrying a family of anisotropic dilations that stretch different coordinates by
 different powers. The tangent cone is the *simplest* geometry with the same infinitesimal
 bracket structure as the original, and it is the reference against which everything is
@@ -100,8 +100,8 @@ high quantile of $|x_i|$) at a grid of lengths $r$, and fits the exponent of $r$
 exponent is the weight. Counting weights builds the growth vector; summing them gives $Q$.
 Two lessons the experiments forced (documented in `docs/E0-growth-vector.md`):
 
-1. the momenta must span a **wide** band, or a fixed distribution only samples the
-   $wr \to 0$ regime at small $r$ and returns a spurious weight (Heisenberg's weight-2 came
+1. the momenta must span a **wide** band, or a fixed, narrow momentum distribution only
+   samples the regime (vertical momentum $\times\, r$) $\to 0$ at small $r$ and returns a spurious weight (Heisenberg's weight-2 came
    out as 2.8 before the fix);
 2. the exponent fit must be **noise-floor aware**, $m(r) = \sqrt{(a\,r^w)^2 + b^2}$, or
    absolute position noise cliff-collapses the estimate.

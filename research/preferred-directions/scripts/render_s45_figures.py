@@ -54,8 +54,10 @@ def fig_collider(d):
                         vmax=max(la.max(), lb.max()))
         ax.plot(P[:, i], P[:, j], color=c, lw=1.0, alpha=0.7, zorder=2)
         far = P[np.argmax(np.linalg.norm(P - ps0, axis=1))]
+        inward = 1 if ps0[i] > far[i] else -1      # label on the fold side: stays inside the axes
         ax.annotate(f"degree {sgn:+d}", (far[i], far[j]),
-                    textcoords="offset points", xytext=(6, 5),
+                    textcoords="offset points", xytext=(9 * inward, 0),
+                    ha="left" if inward > 0 else "right", va="center",
                     fontsize=7.5, color=c, fontweight="bold")
     ax.plot(ps0[i], ps0[j], marker="*", ms=16, mfc="#ffd34d", mec="#442200",
             mew=1.0, zorder=5)
@@ -64,7 +66,7 @@ def fig_collider(d):
     cb = fig.colorbar(sc, ax=ax, fraction=0.046)
     cb.set_label("blend $s$", fontsize=7.5); cb.ax.tick_params(labelsize=6.5)
     ax.set_xlabel(lbl[i], fontsize=8.5); ax.set_ylabel(lbl[j], fontsize=8.5)
-    ax.set_title("A · the pair, walked into its fold", fontsize=9)
+    ax.set_title("A", loc="left", fontsize=9, fontweight="bold")
     ax.tick_params(labelsize=7.5); ax.grid(alpha=0.25, lw=0.5)
 
     # B - the square-root law + det -> 0
@@ -88,7 +90,7 @@ def fig_collider(d):
     ax.set_xlabel("$\\delta = s - s_c$", fontsize=8.5)
     ax.set_ylabel("separation [px] · scaled $|\\det|$",
                   fontsize=8.5)
-    ax.set_title("B · the square-root law, four decades", fontsize=9)
+    ax.set_title("B", loc="left", fontsize=9, fontweight="bold")
     ax.legend(fontsize=6.4, loc="upper left")
     ax.tick_params(labelsize=7.5); ax.grid(alpha=0.25, lw=0.5, which="both")
 
@@ -106,11 +108,11 @@ def fig_collider(d):
     for yv, ls, lab in ((2, ":", "uniform (2)"), (3, "-.", "generic null (3)"),
                         (4, "--", "fully degenerate (4)")):
         ax.axhline(yv, color="0.62", lw=0.7, ls=ls)
-        ax.text(radii[0] * 1.05, yv + 0.06, lab, fontsize=6.2, color="0.4")
+        ax.text(radii[0] * 1.05, yv + 0.06 if yv > 2 else yv - 0.14, lab,
+                fontsize=6.2, color="0.4")               # "uniform" below its line: clear of the curves
     ax.set_xlabel("probe radius $r$ [px]", fontsize=8.5)
     ax.set_ylabel("local flux exponent $w_4(r)$", fontsize=8.5)
-    ax.set_title(f"C · knee $\\to$ 0; rank-2 collision: Q = {ev['Q_at_c']}",
-                 fontsize=9)
+    ax.set_title("C", loc="left", fontsize=9, fontweight="bold")
     ax.legend(fontsize=6.4, loc="lower right"); ax.set_ylim(1.6, 4.5)
     ax.tick_params(labelsize=7.5); ax.grid(alpha=0.25, lw=0.5)
 
@@ -193,7 +195,7 @@ def fig_anatomy(d):
                 ax.annotate(f"{sgn:+d}", (qu, qv), textcoords="offset points",
                             xytext=(7, 6), fontsize=8, fontweight="bold",
                             color="#333")
-        ax.set_title(ttl, fontsize=8.8)
+        ax.set_title(ttl.split(" · ")[0], loc="left", fontsize=9, fontweight="bold")
         ax.set_xlabel("along the fold axis [px]", fontsize=8)
         ax.set_ylabel("transverse [px]", fontsize=8)
         ax.set_xlim(-R, R); ax.set_ylim(-R, R)
@@ -226,20 +228,20 @@ def fig_walls(d4, d5c):
             ax.plot(P[:, 0], np.clip(P[:, 1], -0.1, 3), "-o", color=c, ms=2.5,
                     lw=1.0, alpha=0.9, label=lab)
         ax.annotate("the certified fold:\nboth dive into det = 0",
-                    xy=(0.012, 0.55), xytext=(0.09, 0.30), fontsize=7.5,
+                    xy=(0.012, 0.55), xytext=(0.03, 0.20), fontsize=7.5,
                     arrowprops=dict(arrowstyle="->", color="0.3"))
     ax.axvline(0, color="#c62828", lw=1.4)
-    ax.text(0.505, 0.985, "fold wall (det = 0: the null count changes)",
+    ax.text(0.495, 0.10, "fold wall (det = 0: the null count changes)",
             fontsize=7, color="#c62828", transform=ax.transAxes,
-            ha="left", va="top", rotation=90)
+            ha="right", va="bottom", rotation=90)    # empty wedge under the wings
     ax.axhline(0, color="#6a1b9a", lw=1.1, ls="--")
-    ax.text(0.02, 0.045, "type wall (disc = 0: radial ↔ spiral)",
-            fontsize=7, color="#6a1b9a", transform=ax.transAxes)
+    ax.text(0.27, 0.012, "type wall (disc = 0: radial ↔ spiral)",
+            fontsize=7, color="#6a1b9a", transform=ax.transAxes, ha="center")
     ax.set_ylim(-0.08, 1.06)
     ax.set_xlabel("normalised $\\det\\nabla B$ (sign = topological degree)",
                   fontsize=8.5)
     ax.set_ylabel("normalised fan discriminant (clipped)", fontsize=8.5)
-    ax.set_title("A · null states and the walls between them", fontsize=9)
+    ax.set_title("A", loc="left", fontsize=9, fontweight="bold")
     ax.legend(fontsize=6.6, loc="upper left")
     ax.tick_params(labelsize=7.5); ax.grid(alpha=0.2, lw=0.5)
 
@@ -256,8 +258,7 @@ def fig_walls(d4, d5c):
             ha="center")
     ax.set_xlabel("IMF angle $\\theta$ from northward [deg]", fontsize=8.5)
     ax.set_ylabel("count · degree sum", fontsize=8.5)
-    ax.set_title("B · Earth's cusp pair vs the anti-parallel cascade",
-                 fontsize=9)
+    ax.set_title("B", loc="left", fontsize=9, fontweight="bold")
     ax.legend(fontsize=7, loc="upper left"); ax.tick_params(labelsize=7.5)
     ax.grid(alpha=0.25, lw=0.5)
     fig.tight_layout()
@@ -282,8 +283,7 @@ def fig_solar(dc, db):
                 ha="center")
     ax.set_xlabel("2012-03-07, minutes after 00:00 UT", fontsize=8.5)
     ax.set_ylabel("count · degree sum", fontsize=8.5)
-    ax.set_title("A · the census churns — no certified pair event",
-                 fontsize=9)
+    ax.set_title("A", loc="left", fontsize=9, fontweight="bold")
     ax.legend(fontsize=7, loc="center right"); ax.tick_params(labelsize=7.5)
     ax.grid(alpha=0.25, lw=0.5)
 
@@ -299,9 +299,9 @@ def fig_solar(dc, db):
               label="what a fold would do ($\\propto\\sqrt{\\delta}$)")
     ax.set_xlabel("$\\delta = s_c - s$  (blend parameter)", fontsize=8.5)
     ax.set_ylabel("pair separation [px]", fontsize=8.5)
-    ax.set_title("B · the impostor: flat separation, $w_4\\approx 2$, Q = 5",
-                 fontsize=9)
-    ax.legend(fontsize=7, loc="lower right"); ax.tick_params(labelsize=7.5)
+    ax.set_title("B", loc="left", fontsize=9, fontweight="bold")
+    ax.legend(fontsize=7, loc="lower right")
+    ax.tick_params(labelsize=7.5, which="both")       # minor log labels too
     ax.grid(alpha=0.25, lw=0.5, which="both")
     fig.tight_layout()
     out = REPO / "public/img/posts/forbidden-directions-solar-hunt.png"

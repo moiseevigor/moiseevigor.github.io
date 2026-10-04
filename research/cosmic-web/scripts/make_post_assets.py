@@ -50,19 +50,23 @@ def slice_fig(variant, bend, n_gal):
     sl = slice(z0 - slab // 2, z0 + slab // 2)
     tp = truth_pts[(truth_pts[:, 2] >= sl.start) & (truth_pts[:, 2] < sl.stop)]
     fig, axs = plt.subplots(1, 3, figsize=(13.5, 4.8))
-    for ax, (title, skel) in zip(axs, [
-            (f"galaxy field (n={n_gal}) + truth", None),
-            ("SE(3) orientation lift", sk_l), ("Hessian baseline", sk_h)]):
+    # no in-figure titles (the caption names the panels); axes in h^-1 Mpc
+    # (1 voxel = 1 h^-1 Mpc; voxel i spans [i, i+1], hence the +0.5 on point overlays)
+    for ax, letter, skel in zip(axs, "ABC", [None, sk_l, sk_h]):
         ax.imshow(field[:, :, sl].mean(axis=2).T, origin="lower",
-                  cmap="Greys", interpolation="nearest")
-        ax.plot(tp[:, 0], tp[:, 1], ".", ms=1.0, color="tab:red",
+                  cmap="Greys", interpolation="nearest", extent=[0, N, 0, N])
+        ax.plot(tp[:, 0] + 0.5, tp[:, 1] + 0.5, ".", ms=1.0, color="tab:red",
                 alpha=0.5 if skel is not None else 1.0)
         if skel is not None:
             p = spines.skeleton_points(skel)
             p = p[(p[:, 2] >= sl.start) & (p[:, 2] < sl.stop)]
-            ax.plot(p[:, 0], p[:, 1], ".", ms=1.7, color="tab:blue")
-        ax.set_title(title, fontsize=11)
-        ax.set_xticks([]); ax.set_yticks([])
+            ax.plot(p[:, 0] + 0.5, p[:, 1] + 0.5, ".", ms=1.7, color="tab:blue")
+        ax.set_xlim(0, N); ax.set_ylim(0, N)
+        ax.set_title(letter, loc="left", fontsize=13, fontweight="bold")
+        ax.set_xticks([0, 32, 64, 96, 128]); ax.set_yticks([0, 32, 64, 96, 128])
+        ax.set_xlabel("x [$h^{-1}$Mpc, linear]", fontsize=12)
+        ax.tick_params(labelsize=11)
+    axs[0].set_ylabel("y [$h^{-1}$Mpc, linear]", fontsize=12)
     fig.tight_layout(pad=0.6)
     out = IMG / f"slice_{variant}_{n_gal}.png"
     fig.savefig(out, dpi=115)
@@ -125,4 +129,5 @@ if __name__ == "__main__":
     for variant, bend in [("straight", 0.0), ("curved", 0.15)]:
         for n_gal in LEVELS:
             slice_fig(variant, bend, n_gal)
-    bake_data()
+    if "--slices-only" not in sys.argv:
+        bake_data()
