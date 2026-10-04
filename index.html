@@ -17,8 +17,9 @@ page_class: home
     <div class="home-card-meta">
       <time class="home-card-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b'%y" }}</time>
       {% if post.series %}
-      <span class="home-card-series-name">{{ post.series_title }}</span>
-      <span class="home-card-series-part">Part {{ post.series_part }}</span>
+      <a class="home-card-series-name" href="/lab/#{{ post.series }}">{{ post.series_title }}</a>
+      {%- assign sdata = site.data.series | where: "id", post.series | first -%}
+      <span class="home-card-series-part">{% if sdata %}{{ sdata.posts.size }}&thinsp;parts{% if sdata.appendices %} · {{ sdata.appendices.size }}&thinsp;appx{% endif %}{% else %}Part {{ post.series_part }}{% endif %}</span>
       {% elsif post.categories.size > 0 %}
       <span class="home-card-cat">{{ post.categories | first | capitalize }}</span>
       {% endif %}

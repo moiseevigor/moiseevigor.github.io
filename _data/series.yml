@@ -4,44 +4,49 @@
     A series on the mathematics of visual perception, sub-Riemannian geometry on SE(2),
     and the role of elliptic integrals in the exact analysis of optimal curves —
     from Petitot's V1 model to an open problem on the cut locus.
+  status: complete
+  question: "How does the visual cortex complete contours that are not there, and what exactly are the optimal curves it draws?"
+  outcome: "Exposition: V1 as a contact bundle on SE(2), elastica via Jacobi elliptic functions, Maxwell strata — ending on the open problem of the exact cut time."
+  frontier: "Exact cut time on SE(2): conjectured, not proven."
+  overview: /projects/geometry-of-seeing/
   posts:
     - part: 1
       title: "The Visual Cortex as a Contact Manifold"
       url: /mathematics/2026/04/25/geometry-of-seeing-visual-cortex-se2/
-      status: draft
+      status: published
     - part: 2
       title: "Euler's Elastica and Jacobi Elliptic Functions"
       url: /mathematics/2026/04/28/geometry-of-seeing-elastica-jacobi/
-      status: draft
+      status: published
     - part: 3
       title: "Maxwell Strata: When Optimal Paths Fork"
       url: /mathematics/2026/05/05/geometry-of-seeing-maxwell-strata/
-      status: draft
+      status: published
     - part: 4
       title: "The Open Problem: Exact Cut Time on SE(2)"
       url: /mathematics/2026/05/15/geometry-of-seeing-cut-time-open-problem/
-      status: draft
+      status: published
   appendices:
     - part: A1
       title: "Lie Groups, Lie Algebras, and the Exponential Map of SE(2)"
       url: /mathematics/2026/05/01/geometry-of-seeing-A1-lie-groups/
-      status: draft
+      status: published
     - part: A2
       title: "Distributions, Frobenius, and Contact Geometry"
       url: /mathematics/2026/05/02/geometry-of-seeing-A2-distributions-contact/
-      status: draft
+      status: published
     - part: A3
       title: "Calculus of Variations and the Pontryagin Maximum Principle"
       url: /mathematics/2026/05/03/geometry-of-seeing-A3-pmp/
-      status: draft
+      status: published
     - part: A4
       title: "Jacobi Elliptic Functions, Elliptic Integrals, and the AGM"
       url: /mathematics/2026/05/04/geometry-of-seeing-A4-jacobi-elliptic/
-      status: draft
+      status: published
     - part: A5
       title: "The Sub-Riemannian Exponential Map of SE(2)"
       url: /mathematics/2026/05/05/geometry-of-seeing-A5-sr-exponential/
-      status: draft
+      status: published
 
 - id: geometry-of-cosmic-web
   title: "Geometry of the Cosmic Web"
@@ -51,40 +56,50 @@
     scoping document, a benchmark whose corrected verdict favours the simple
     model, and the constructive result the refutations left behind, a measured
     transverse correction to Zel'dovich transport.
+  status: complete
+  question: "Is the orientation-lifted geometry of visual completion a better instrument for finding cosmic filaments, or even part of the physics that builds them?"
+  outcome: "Mostly no — and usefully so. What survived: a cleaner anisotropy descriptor and an unplanned one-rule transport model, brake sideways at the web."
+  grew_from: geometry-of-seeing
+  code: research/cosmic-web/
+  verdicts:
+    - { h: H1, v: refuted, label: "lift beats the curvature detector" }
+    - { h: H2, v: refuted, label: "tidal frame sharpens detection" }
+    - { h: H3, v: partial, label: "webs sit on real mass and hot gas" }
+    - { h: H4, v: refuted, label: "matter travels along the geodesics" }
   posts:
     - part: 1
       title: "The Geometry of the Cosmic Web: A Research Program"
       url: /mathematics/2026/07/03/geometry-of-cosmic-web-research-program/
-      status: draft
+      status: published
     - part: 2
       title: "Two Ways to See a Cosmic Filament"
       url: /mathematics/2026/07/04/cosmic-web-two-models/
-      status: draft
+      status: published
     - part: 3
       title: "From Cosmic Filaments to Curved Spacetime"
       url: /mathematics/2026/07/11/cosmic-web-spacetime-geometry/
-      status: draft
+      status: published
   appendices:
     - part: B1
       title: "How the Universe Moves Its Matter: Transport Models"
       url: /mathematics/2026/07/06/cosmic-web-B1-transport-models/
-      status: draft
+      status: published
     - part: B2
       title: "The Tidal Frame: How Collapse Chooses Directions"
       url: /mathematics/2026/07/07/cosmic-web-B2-tidal-frame/
-      status: draft
+      status: published
     - part: B3
       title: "How to Grade a Model Honestly"
       url: /mathematics/2026/07/08/cosmic-web-B3-honest-benchmarks/
-      status: draft
+      status: published
     - part: B4
       title: "The Transverse-Damping Model, in Full"
       url: /mathematics/2026/07/09/cosmic-web-B4-transverse-damping/
-      status: draft
+      status: published
     - part: B5
       title: "Reading the Sky's Hot Gas"
       url: /mathematics/2026/07/10/cosmic-web-B5-reading-gas-maps/
-      status: draft
+      status: published
 
 - id: caustics-to-groups
   title: "From Caustics to Groups"
@@ -94,48 +109,58 @@
     it. Built around the ADE group-blindness obstruction and the three structure-specific
     observables that escape it: the tangent-cone growth vector, the moduli of the
     conjugate locus at the pole, and the abnormal-geodesic stratum.
+  status: complete
+  question: "Given an observed field of caustics, can you infer the sub-Riemannian Lie group that produced it?"
+  outcome: "Yes on synthetic data — identifiable, discriminable, with a mapped aliasing structure — and calibrated silence where no group exists; gravity turns out to carry no sub-Riemannian structure at all."
+  frontier: "Real DW-MRI inference (needs credentialed data)."
+  code: research/caustics-to-groups/
+  verdicts:
+    - { h: H1, v: confirmed, label: "identifiability" }
+    - { h: H2, v: confirmed, label: "discrimination" }
+    - { h: H3, v: confirmed, label: "rigidity / aliasing" }
+    - { h: H4, v: pending, label: "in-the-wild inference (synthetic confirmed, real DW-MRI pending)" }
   posts:
     - part: 1
       title: "From Caustics to Groups: A Research Program"
       url: /mathematics/2026/07/15/caustics-to-groups-research-program/
-      status: draft
+      status: published
     - part: 2
       title: "The Forward Map: Caustics of the Model Groups"
       url: /mathematics/2026/07/18/caustics-to-groups-forward-map/
-      status: draft
+      status: published
     - part: 3
       title: "The Inverse Map: Reading the Fingerprint"
       url: /mathematics/2026/07/22/caustics-to-groups-inverse-map/
-      status: draft
+      status: published
     - part: 4
       title: "In the Wild: DW-MRI, and Where the Method Stays Silent"
       url: /mathematics/2026/07/26/caustics-to-groups-in-the-wild/
-      status: draft
+      status: published
   appendices:
     - part: C1
       title: "The Model Groups, by Example: Real-World Sub-Riemannian Systems"
       url: /mathematics/2026/07/28/caustics-to-groups-C1-model-groups-by-example/
-      status: draft
+      status: published
     - part: C2
       title: "Caustics as Lagrangian Singularities (Arnol'd's ADE List)"
       url: /mathematics/2026/07/29/caustics-to-groups-C2-lagrangian-singularities/
-      status: draft
+      status: published
     - part: C3
       title: "The Tangent Cone: Carnot Groups and Growth Vectors"
       url: /mathematics/2026/07/30/caustics-to-groups-C3-tangent-cone-growth-vectors/
-      status: draft
+      status: published
     - part: C4
       title: "The Conjugate Locus at the Pole: Astroids and Their Moduli"
       url: /mathematics/2026/07/31/caustics-to-groups-C4-conjugate-locus-moduli/
-      status: draft
+      status: published
     - part: C5
       title: "Abnormal Geodesics: The Yes/No Fingerprint"
       url: /mathematics/2026/08/01/caustics-to-groups-C5-abnormal-geodesics/
-      status: draft
+      status: published
     - part: C6
       title: "The Nilpotent-Deviation Statistic"
       url: /mathematics/2026/08/02/caustics-to-groups-C6-nilpotent-deviation/
-      status: draft
+      status: published
 
 - id: preferred-directions
   title: "The Geometry of Forbidden Directions"
@@ -144,57 +169,68 @@
     configuration space becomes sub-Riemannian, and its geometry reads the field. This
     series develops that idea for magnetic fields: the law Q = d + k + 2, a caustic that
     measures the field gradient, and a growth vector that detects magnetic nulls.
+  status: active
+  question: "Where a physical field forbids a direction of motion, can sub-Riemannian geometry read the field's local structure?"
+  outcome: "For magnetic fields, yes: the law Q = d + k + 2 holds in 2D and 3D, and the caustic reads the field gradient — tested on the Sun, Earth's magnetosphere and Jupiter."
+  frontier: "Do finer caustic invariants recover the null type (radial vs spiral) the growth vector discards?"
+  grew_from: caustics-to-groups
+  code: research/preferred-directions/
+  verdicts:
+    - { h: "Law 2D", v: confirmed, label: "Q = d + k + 2" }
+    - { h: "Moduli", v: confirmed, label: "the caustic reads the field gradient" }
+    - { h: "Law 3D", v: confirmed, label: "Q = k + 5" }
+    - { h: "Nulls", v: confirmed, label: "agrees with the standard finder (a consistency check)" }
   posts:
     - part: 1
       title: "The Geometry of Forbidden Directions: A Research Program"
       url: /mathematics/2026/08/05/forbidden-directions-research-program/
-      status: draft
+      status: published
     - part: 2
       title: "The Magnetic Contact Geometry: Larmor Motion Is Heisenberg"
       url: /mathematics/2026/08/08/forbidden-directions-magnetic-contact/
-      status: draft
+      status: published
     - part: 3
       title: "Reading the Field Gradient from the Caustic"
       url: /mathematics/2026/08/11/forbidden-directions-reading-gradient/
-      status: draft
+      status: published
     - part: 4
       title: "Finding Magnetic Nulls with a Growth Vector"
       url: /mathematics/2026/08/14/forbidden-directions-finding-nulls/
-      status: draft
+      status: published
     - part: 5
-      title: "The Null Gallery: Grounding the Detector in the Real Sun"
+      title: "The Null Gallery: Grounding the Estimator in the Real Sun"
       url: /mathematics/2026/08/24/forbidden-directions-null-gallery/
-      status: draft
+      status: published
     - part: 6
       title: "The Transition State: Reading a Null Collision from One Point"
       url: /mathematics/2026/08/27/forbidden-directions-transition-state/
-      status: draft
+      status: published
     - part: 7
       title: "The Litmus Tests: What Survived Our Own Review"
       url: /mathematics/2026/08/30/forbidden-directions-litmus-tests/
-      status: draft
+      status: published
     - part: 8
       title: "Jupiter's Buried Skeleton: The Polar Patch as a Combination of Separatrices"
       url: /mathematics/2026/09/02/forbidden-directions-jupiter/
-      status: draft
+      status: published
   appendices:
     - part: D1
       title: "Connections, Holonomy, and Curvature"
       url: /mathematics/2026/08/17/forbidden-directions-D1-connections-holonomy/
-      status: draft
+      status: published
     - part: D2
       title: "The Selection Rule: Why Anisotropic Transport Isn't Sub-Riemannian"
       url: /mathematics/2026/08/18/forbidden-directions-D2-selection-rule/
-      status: draft
+      status: published
     - part: D3
       title: "The Law Q = d + k + 2, Derived"
       url: /mathematics/2026/08/19/forbidden-directions-D3-the-law-derived/
-      status: draft
+      status: published
     - part: D4
       title: "The Magnetic Geodesic Flow and Its Conjugate Locus"
       url: /mathematics/2026/08/20/forbidden-directions-D4-geodesic-flow/
-      status: draft
+      status: published
     - part: D5
       title: "The Nilpotent-Deviation Gradient Formula"
       url: /mathematics/2026/08/21/forbidden-directions-D5-gradient-formula/
-      status: draft
+      status: published

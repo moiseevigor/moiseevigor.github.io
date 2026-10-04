@@ -12,8 +12,13 @@ layout: default
 
 <!-- ── Article header ── -->
 <div class="d-header">
-  {% if page.series %}
-  <div class="d-eyebrow">Part {{ page.series_part }} of the "{{ page.series_title }}" series</div>
+  {% assign crumb_id = page.series | default: page.program %}
+  {% if crumb_id %}
+  {% assign crumb = site.data.series | where: "id", crumb_id | first %}
+  {% assign crumb_first = crumb.posts | first %}
+  {% assign crumb_part = page.series_part | append: '' | slice: 0 %}
+  <div class="d-eyebrow"><a href="/lab/">Lab</a> › <a href="/lab/#{{ crumb_id }}">{{ crumb.title }}</a> ›
+    {% if page.program %}Formal article{% elsif "ABCDEFGHIJKLMNOPQRSTUVWXYZ" contains crumb_part %}Appendix {{ page.series_part }}{% elsif page.series_part == 1 %}Part 1 · the program{% else %}Part {{ page.series_part }} of {{ crumb.posts.size }} · <a href="{{ crumb_first.url }}">start at Part 1</a>{% endif %}</div>
   {% elsif page.categories.size > 0 %}
   <div class="d-eyebrow">{{ page.categories | first | capitalize }}</div>
   {% endif %}
@@ -319,19 +324,20 @@ layout: default
 {% if series_data %}
 {% assign part_str = page.series_part | append: '' %}
 {% assign is_appendix = false %}
-{% if part_str contains 'A' %}{% assign is_appendix = true %}{% endif %}
+{% assign part_prefix = part_str | slice: 0 %}
+{% if "ABCDEFGHIJKLMNOPQRSTUVWXYZ" contains part_prefix %}{% assign is_appendix = true %}{% endif %}
 
 {% if is_appendix %}
-  {% assign part_no = part_str | remove_first: 'A' | plus: 0 %}
+  {% assign part_no = part_str | remove_first: part_prefix | plus: 0 %}
   {% assign prev_part_n = part_no | minus: 1 %}
   {% assign next_part_n = part_no | plus: 1 %}
   {% if prev_part_n == 0 %}
     {% assign prev_post = series_data.posts | last %}
   {% else %}
-    {% assign prev_part_str = prev_part_n | prepend: 'A' %}
+    {% assign prev_part_str = prev_part_n | prepend: part_prefix %}
     {% assign prev_post = series_data.appendices | where: "part", prev_part_str | first %}
   {% endif %}
-  {% assign next_part_str = next_part_n | prepend: 'A' %}
+  {% assign next_part_str = next_part_n | prepend: part_prefix %}
   {% assign next_post = series_data.appendices | where: "part", next_part_str | first %}
 {% else %}
   {% assign prev_part = page.series_part | minus: 1 %}
