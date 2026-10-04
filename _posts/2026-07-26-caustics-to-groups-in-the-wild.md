@@ -19,8 +19,8 @@ description: >
 series: caustics-to-groups
 series_title: "From Caustics to Groups"
 series_part: 4
+hidden: true
 comments: true
-published: false
 ---
 
 <div class="l-body" markdown="1">
@@ -148,7 +148,7 @@ everywhere.
       style="max-width:min(100%,440px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
-    <strong>The effective flow the detector must stay silent on.</strong> A real $z=0$ cosmic
+    <strong>The effective flow the detector must stay silent on.</strong> A real cosmic
     web — the $z\!=\!0$ dark-matter density of a CAMELS N-body simulation
     ($256^3$ particles, $25\,h^{-1}$Mpc, $\Lambda$CDM). Its caustics show the same universal
     cusps as a group's, but its local structure is not the *same* everywhere: it is a patchwork

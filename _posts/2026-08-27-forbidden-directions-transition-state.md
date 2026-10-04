@@ -17,12 +17,13 @@ description: >
   Part 6 of the Forbidden Directions series: the fold (saddle-node) bifurcation of magnetic
   nulls, Q = 7 at the degenerate point, the pair-separation scale crossover with its dilation
   collapse, a real-Sun pair census with an honest partial verdict, the raw-grid scale-window
-  repair, and the null constellation of Earth's magnetosphere with 79 spiral nulls.
+  repair, and the null constellation of Earth's magnetosphere, whose 79 spiral nulls the
+  boundary audit retracts.
 series: preferred-directions
 series_title: "The Geometry of Forbidden Directions"
 series_part: 6
+hidden: true
 comments: true
-published: false
 ---
 
 <div class="l-body" markdown="1">
@@ -47,7 +48,7 @@ transition state of the field's topology. It is structurally unstable, which is 
 why it matters — it is the configuration the field passes *through* when its topology
 changes. (Whether any *reconnection* — non-ideal evolution with a parallel electric
 field — accompanies that change is a separate, dynamical question; see the section
-below. The definitive statement of that separation — reconnection needs a localized
+below. The definitive statement of that separation — reconnection needs a localised
 non-ideal region and can proceed with no null at all — is Pontin &amp; Priest 2022,
 <em>Living Rev. Solar Phys.</em> 19, 1.)
 
@@ -104,7 +105,7 @@ numerical zero test with no scale attached. The growth vector has a *law* for it
 <figure class="l-middle" id="fig-aia-flare">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-aia-flare.gif"
-      alt="Animated sequence of thirty-two real SDO/AIA 171 angstrom frames spanning three hours: the X5.4 and X1.3 flares of 2012-03-07 erupting and reorganizing the coronal loops of AR11429, with our extrapolated skeleton re-computed frame by frame from the matching magnetograms"
+      alt="Animated sequence of thirty-two real SDO/AIA 171 angstrom frames spanning three hours: the X5.4 and X1.3 flares of 2012-03-07 erupting and reorganising the coronal loops of AR11429, with our extrapolated skeleton re-computed frame by frame from the matching magnetograms"
       style="max-width:min(100%,640px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
@@ -167,7 +168,7 @@ numerical zero test with no scale attached. The growth vector has a *law* for it
 The divergence-free normal form of the collision is one family:
 
 $$
-\mathbf B_\mu = \Big(xz,\;\; yz,\;\; \mu - z^2 + \tfrac{x^2+y^2}{2}\Big),
+\mathbf B_\mu = \Big(xz,\;\; yz,\;\; \mu - z^2 + \tfrac{x^2+y^2}{2}\Big).
 $$
 
 For $\mu > 0$ it has two nulls at $(0,0,\pm\sqrt\mu)$ — a radial pair of opposite sign,
@@ -363,7 +364,7 @@ collision with adaptive continuation.
     $\det\nabla\mathbf B \to 0$ alongside (orange triangles, scaled). <em>C:</em> the
     SR read: the $w_4(r)$ crossover knee marches to zero with the shrinking pair, and
     at the collision the curve settles on the <em>generic-null</em> plateau 3
-    ($Q = 6$) — not the plateau 4 ($Q = 7$) of Part 6's symmetric fold family. That
+    ($Q = 6$) — not the plateau 4 ($Q = 7$) of this post's symmetric fold family. That
     deviation is a finding, not a failure: see below.
     Pipeline: <code>scripts/run_s5c_blend_fold.py</code> →
     <code>artifacts/s5c_blend_fold.json</code>.
@@ -384,13 +385,13 @@ collision with adaptive continuation.
     labelled) sit $\approx 3$ px apart, each with its own X-type line structure.
     <em>B:</em> at $s_c + 0.004$ they nearly touch. <em>C:</em> at $s_c$ one degenerate
     point (gold ★) remains — below $s_c$ the field is null-free here: the pair has
-    annihilated. This is the S1 fold sequence, drawn by measured solar boundary data.
+    annihilated. This is the fold sequence of the normal form above, drawn by measured solar boundary data.
   </figcaption>
 </figure>
 
 <div class="l-body" markdown="1">
 
-The catch also **refined the law it was sent to test**. The S1 fold family predicts
+The catch also **refined the law it was sent to test**. The symmetric fold family $\mathbf B_\mu$ predicts
 plateau-4 and $Q = 7$ at the collision — but that family's degenerate point has
 $\nabla\mathbf B = 0$ entirely, a *symmetric* normal form. A generic fold is milder:
 at the collision the Jacobian keeps rank 2 — exactly one eigenvalue crosses zero (that
@@ -473,7 +474,7 @@ have (non-force-free and data-driven MHD extrapolations are outside that theorem
   </div>
   <figcaption>
     <strong>The null constellation — continuation-only structure, outside T96's own
-    validity domain</strong> (the S4b audit below places every one of these roots outside
+    validity domain</strong> (the boundary audit above places every one of these roots outside
     the model's magnetopause; they are anatomy of the model's continuation, not standing
     magnetospheric nulls). The census in two
     projections (ecliptic and noon–midnight; 24 far-tail nulls beyond
@@ -550,7 +551,7 @@ on.
 <figure class="l-middle" id="fig-stability-walls">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-stability-walls.png"
-      alt="Left: scatter of null states in the plane of normalized Jacobian determinant versus fan discriminant, forming two wings that meet at the origin, with the certified solar pair's two tracks diving into the vertical fold wall at det zero, and the type wall at disc zero marked; right: the Dungey census versus IMF angle, flat at two nulls for 125 degrees then cascading to seventeen near anti-parallel"
+      alt="Left: scatter of null states in the plane of normalised Jacobian determinant versus fan discriminant, forming two wings that meet at the origin, with the certified solar pair's two tracks diving into the vertical fold wall at det zero, and the type wall at disc zero marked; right: the Dungey census versus IMF angle, flat at two nulls for 125 degrees then cascading to seventeen near anti-parallel"
       style="max-width:min(100%,940px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>

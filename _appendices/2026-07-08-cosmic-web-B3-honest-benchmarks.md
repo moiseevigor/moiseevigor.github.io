@@ -20,7 +20,6 @@ series: geometry-of-cosmic-web
 series_title: "Geometry of the Cosmic Web"
 series_part: B3
 permalink: /mathematics/2026/07/08/cosmic-web-B3-honest-benchmarks/
-published: false
 comments: true
 ---
 
@@ -236,9 +235,9 @@ range-request hash comparison — and found **byte-identical** to the first,
 IllustrisTNG_DM CV_0: the dark-matter-only "CV_0" runs of those two suites
 are one shared simulation on the server (E12). Astrid_DM CV_0 (run with
 MP-Gadget) was genuinely distinct and became the second code; the two real
-codes agree with each other to 0.029 Mpc/h median per particle, and the
-program's particle-mesh truth sits 0.41 Mpc/h from that consensus — an
-order of magnitude below the 4–5 Mpc/h effects measured (E12). The lesson:
+codes agree with each other to 0.029 h⁻¹Mpc median per particle, and the
+program's particle-mesh truth sits 0.41 h⁻¹Mpc from that consensus — an
+order of magnitude below the 4–5 h⁻¹Mpc effects measured (E12). The lesson:
 "independent dataset" is a hypothesis, and it is testable for pennies —
 hash before you validate.
 
@@ -258,7 +257,7 @@ hash before you validate.
 
 ## Back to the series
 
-Back to the series: [The Geometry of the Cosmic Web: A Research Program](/mathematics/2026/07/03/geometry-of-cosmic-web-research-program/) · [Two Ways to See a Cosmic Filament](/mathematics/2026/07/04/cosmic-web-two-models/).
+Back to the series: [The Geometry of the Cosmic Web: A Research Program](/mathematics/2026/07/03/geometry-of-cosmic-web-research-program/) · [Two Ways to See a Cosmic Filament](/mathematics/2026/07/04/cosmic-web-two-models/) · [From Cosmic Filaments to Curved Spacetime](/mathematics/2026/07/11/cosmic-web-spacetime-geometry/).
 
 </div><!-- /.l-body -->
 

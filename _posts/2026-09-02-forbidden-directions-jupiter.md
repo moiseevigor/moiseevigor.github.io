@@ -21,8 +21,8 @@ description: >
 series: preferred-directions
 series_title: "The Geometry of Forbidden Directions"
 series_part: 8
+hidden: true
 comments: true
-published: false
 ---
 
 <div class="l-body" markdown="1">
@@ -236,7 +236,7 @@ flux before it can reach daylight**.
 <figure class="l-middle" id="fig-jupiter-anatomy">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-jupiter-anatomy.png"
-      alt="Two anatomy rows, one per Jupiter null, in null-frame views: a 3D skeleton with translucent fan disc, a view down the spine with blue fan field lines radiating from the null, a side view with the orange spine vertical and the fan curving away like a dome, and a schematic panel listing radial type, normalized gradient eigenvalues, zero field-aligned current, and growth vector Q equals six"
+      alt="Two anatomy rows, one per Jupiter null, in null-frame views: a 3D skeleton with translucent fan disc, a view down the spine with blue fan field lines radiating from the null, a side view with the orange spine vertical and the fan curving away like a dome, and a schematic panel listing radial type, normalised gradient eigenvalues, zero field-aligned current, and growth vector Q equals six"
       style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
@@ -319,7 +319,7 @@ before the shell-floor cut: 36/40, reaching down to $r = 0.75$ — the two accep
 sets are stated separately on purpose). The two low-latitude nulls are markedly less
 persistent (15/40 and 19/40): under this chosen stress ensemble the polar root is the
 persistent one. The fractions move monotonically under **paired** amplitude scaling —
-the *same* 40 standardized coefficient draws scaled $\times\tfrac12/\times1/\times2$,
+the *same* 40 standardised coefficient draws scaled $\times\tfrac12/\times1/\times2$,
 so amplitude sensitivity is isolated from finite-ensemble variation: polar
 $35/40 \to 32/40 \to 29/40$, low-latitude $17\to15\to14$ and $28\to19\to15$. Widening
 the recapture radius from $0.10$ to $0.25$ moves 29/40 to 32/40; dropping the shell

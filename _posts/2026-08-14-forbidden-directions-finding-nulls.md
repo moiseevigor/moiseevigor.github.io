@@ -19,8 +19,8 @@ description: >
 series: preferred-directions
 series_title: "The Geometry of Forbidden Directions"
 series_part: 4
+hidden: true
 comments: true
-published: false
 ---
 
 <div class="l-body" markdown="1">

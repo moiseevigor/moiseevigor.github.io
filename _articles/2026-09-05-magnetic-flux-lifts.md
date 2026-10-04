@@ -10,6 +10,7 @@ subtitle: >
   explicit ledger separating theorem, measurement, and conjecture.
 date: 2026-09-05 09:00:00
 categories: [articles]
+program: preferred-directions
 tags: [sub-riemannian, magnetic-fields, growth-vector, conjugate-locus, elliptic-integrals, nilpotentization]
 description: >
   Full derivations for the Forbidden Directions series: the magnetic flux lift as a central
@@ -18,7 +19,6 @@ description: >
   the leading period-average coefficient is 3/2 rather than 1 (the caustic coefficient
   there is 7/4), and the rank-2 fold corollary.
 permalink: /articles/magnetic-flux-lifts/
-published: false
 comments: true
 ---
 
@@ -146,10 +146,10 @@ $$
 $$
 
 (The sign is forced by the convention $F_{ij} = \partial_i A_j - \partial_j A_i$:
-$\partial_j A_i - \partial_i A_j = -F_{ij}$. An earlier draft wrote $+wF_{ij}u_j$ here,
-which is inconsistent with that convention; only the orientation of gyration changes,
+$\partial_j A_i - \partial_i A_j = -F_{ij}$. The opposite sign, $+wF_{ij}u_j$, would be
+inconsistent with that convention; it would change only the orientation of gyration,
 and every launch-averaged quantity in §3–4 is orientation-blind. The identity — sum
-algebra and the trajectory form — is now machine-checked:
+algebra and the trajectory form — is machine-checked:
 `FDFormal.lorentz_force_reduction`.)
 
 The conserved $w$ is the momentum conjugate to holonomy; $\lvert w\rvert$ sets the Larmor
@@ -281,6 +281,21 @@ $\ker\big(d\varphi - \tfrac{y^{k+1}}{k+1}dx\big)$. *Proof:* compute $dA = y\,dy\
 So the series' central law is, for $d=2$, $k=1$, literally the Martinet growth vector
 $(2,2,3)$ — the law's content is the general-$k$, general-$d$ dictionary and the fact that
 the *field's jet* is the only input.
+
+<aside id="note-martinet-worked">
+<strong>Worked Martinet example, without the jargon.</strong> Start at
+$(x,y,\varphi)=(0,0,0)$ with
+$X_1=\partial_x+\tfrac12y^2\partial_\varphi$ and $X_2=\partial_y$.
+A direct $X_1$ move along $y=0$ changes $x$ but not $\varphi$; a direct $X_2$
+move changes only $y$. The usual four-leg commutator has leading fibre shift
+$-y\varepsilon^2$, so precisely at $y=0$ its quadratic contribution vanishes.
+Move slightly off the zero surface, perform the commutator, and return: the
+surviving fibre shift is cubic, $O(\varepsilon^3)$. Algebra records the same
+story as $[X_1,X_2]=-y\partial_\varphi$ and
+$[X_2,[X_1,X_2]]=-\partial_\varphi$. Thus the fibre coordinate costs three
+small motions at the null but only two away from it. That is the concrete
+meaning of growth $(2,2,3)$ and fibre weight 3.
+</aside>
 
 **Remark 2.6 (the zero is a singular point; what $Q$ does and does not assert).** Points
 with $F(q) \ne 0$ are regular; an order-$k$ zero is a singular point of the flag — the
@@ -546,7 +561,7 @@ $$
 = \frac{1}{a}\,K(k), \qquad k^2 = 1-\frac{b^2}{a^2}
 $$
 
-(equivalently $\pi / 2\,\mathrm{AGM}(a,b)$ — this is the arithmetic–geometric mean).
+(equivalently $\pi / \big(2\,\mathrm{AGM}(a,b)\big)$ — this is the arithmetic–geometric mean).
 Here $a = q^{-1}$, $b = p$ — the ordering check: $a^2 - b^2 = \tfrac{1-(1-2\varepsilon)
 (1+2\varepsilon)}{1+2\varepsilon} = \tfrac{4\varepsilon^2}{1+2\varepsilon} \ge 0$. The
 modulus collapses:
@@ -808,7 +823,7 @@ three are machine-checked: `FDFormal.J0_pos`, `J0_two_pi`, `deriv_J0_two_pi`,
 `J0_div_pow_four_tendsto` — see `lean/FORMAL.md` for what those statements do and do
 not cover.) (i) *Short times.* Smooth dependence on $\varepsilon$ alone would **not**
 suffice here: a smooth family like $t^4/12 - \varepsilon t^3$ has the correct
-$\varepsilon = 0$ limit yet a positive root tending to $0$ — the re-review's
+$\varepsilon = 0$ limit yet a positive root tending to $0$ — a
 counterexample. What holds is stronger and structural. The endpoint variations obey,
 in $(x, y, \varphi)$-components,
 
@@ -851,7 +866,7 @@ implicit function theorem gives exactly one root in $(2\pi-\eta,\, 2\pi+\eta)$ �
 constructed series. Compactness of the launch circle makes $\varepsilon_0$ uniform in
 $\theta_0$. $\blacksquare$
 
-*Scope.* Independently of window (i) below, the construction always yields the unique
+*Scope.* Independently of window (i) above, the construction always yields the unique
 simple root continuing from the homogeneous zero at $2\pi$, and every coefficient
 statement holds for that root; window (i) is what upgrades it to the *first* conjugate
 time. The statement is one-dimensional: the field varies along a single direction,
@@ -881,7 +896,8 @@ $L'' = 0$ holds along the whole relevant interval.) That locus is exactly
 where Conjecture A lives. What remains of **O6**: the higher coefficients ($c_4$ off
 the exponential family) and a human-readable proof to replace the computer-assisted
 trace.
-**(c)** The exponential profile is exceptional exactly where Conjecture A says it is
+
+**(c)** (the third measured fact, continuing (a)–(b) above) The exponential profile is exceptional exactly where Conjecture A says it is
 (§3.4, item 4): the linear profile satisfies orbit closure and $E$-collapse yet fails
 the identification, so the exponential's $t_c = T$ must hinge on structure those two
 properties don't capture.
@@ -899,7 +915,7 @@ $\tfrac34$). The series' inversion $\sqrt{\lvert\delta\rvert}/r_L$ is a
 — an exact inversion would invert $K(2\varepsilon)$ itself — and it needs the
 $\lvert 1-\tfrac34\beta\rvert^{-1/2}$ factor otherwise; Part 3's inversion claim now
 carries both qualifiers.
-(ii) A correction to an earlier draft of this section: two Larmor radii do **not**
+(ii) Two Larmor radii do **not**
 separate $L'(0)$ from $L''(0)$. Since $\delta(r_L) = -\big[(1-\tfrac34\beta)
 L'(0)^2\big] r_L^2 + O(r_L^3)$ as a function of the probe radius, every sufficiently
 small radius measures the *same* single combination $(1-\tfrac34\beta)L'(0)^2$;
@@ -924,7 +940,7 @@ $$
 Q(q_\ast) \;=\; 3 + 1 + 2 \;=\; 6
 $$
 
-*— the same value as at a generic (nondegenerate) null. The homogeneous dimension does
+*— the same value as at a generic (nondegenerate) null. The pointwise weight sum does
 not see the fold.*
 
 *Proof.* Order of a zero is a statement about the full 1-jet: $k \ge 2$ would require

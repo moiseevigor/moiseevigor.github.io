@@ -18,7 +18,6 @@ series: preferred-directions
 series_title: "The Geometry of Forbidden Directions"
 series_part: D1
 permalink: /mathematics/2026/08/17/forbidden-directions-D1-connections-holonomy/
-published: false
 comments: true
 ---
 
@@ -143,4 +142,5 @@ and measuring an artefact.
   Phys.</em> 168, 651–675. (The magnetic lift itself, a decade earlier and in this exact
   setting: the extra bracket at a nondegenerate zero and the zero locus as a strictly
   abnormal minimizer — the closest prior work; companion article §6.)
+
 </div><!-- /.l-body -->

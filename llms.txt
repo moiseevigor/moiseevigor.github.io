@@ -25,9 +25,58 @@ Citations should link to the canonical URL and credit "Igor Moiseev".
   Deriving the SE(2) geodesic flow from the Pontryagin Maximum Principle;
   the pendulum equation; the three families of elastica parametrised by
   sn, cn, dn; spatial period 4K(k²).
-- Part 3 (forthcoming) — Maxwell strata: the locus where two distinct optimal
-  geodesics meet with equal sub-Riemannian length; t_MAX = 4K(k²)/ω₀.
-- Part 4 (forthcoming) — The remaining open problems on the cut locus of SE(2).
+- [Part 3 — Maxwell Strata: When Optimal Paths Fork](https://moiseevigor.github.io/mathematics/2026/05/05/geometry-of-seeing-maxwell-strata/):
+  the locus where two distinct optimal geodesics meet with equal sub-Riemannian
+  length; t_MAX = 4K(k²)/ω₀.
+- [Part 4 — The Open Problem: Exact Cut Time on SE(2)](https://moiseevigor.github.io/mathematics/2026/05/15/geometry-of-seeing-cut-time-open-problem/):
+  the remaining open problems on the cut locus of SE(2).
+- Appendices A1–A5 (Lie groups, contact geometry, PMP, Jacobi elliptic functions,
+  the SR exponential map) are linked from every part.
+
+## The Geometry of Forbidden Directions
+
+- [Part 1 — The Geometry of Forbidden Directions: A Research Program](https://moiseevigor.github.io/mathematics/2026/08/05/forbidden-directions-research-program/)
+- [Part 2 — The Magnetic Contact Geometry: Larmor Motion Is Heisenberg](https://moiseevigor.github.io/mathematics/2026/08/08/forbidden-directions-magnetic-contact/)
+- [Part 3 — Reading the Field Gradient from the Caustic](https://moiseevigor.github.io/mathematics/2026/08/11/forbidden-directions-reading-gradient/)
+- [Part 4 — Finding Magnetic Nulls with a Growth Vector](https://moiseevigor.github.io/mathematics/2026/08/14/forbidden-directions-finding-nulls/)
+- [Part 5 — The Null Gallery: Grounding the Estimator in the Real Sun](https://moiseevigor.github.io/mathematics/2026/08/24/forbidden-directions-null-gallery/)
+- [Part 6 — The Transition State: Reading a Null Collision from One Point](https://moiseevigor.github.io/mathematics/2026/08/27/forbidden-directions-transition-state/)
+- [Part 7 — The Litmus Tests: What Survived Our Own Review](https://moiseevigor.github.io/mathematics/2026/08/30/forbidden-directions-litmus-tests/)
+- [Part 8 — Jupiter's Buried Skeleton: The Polar Patch as a Combination of Separatrices](https://moiseevigor.github.io/mathematics/2026/09/02/forbidden-directions-jupiter/)
+- [D1 — Connections, Holonomy, and Curvature](https://moiseevigor.github.io/mathematics/2026/08/17/forbidden-directions-D1-connections-holonomy/)
+- [D2 — The Selection Rule: Why Anisotropic Transport Isn't Sub-Riemannian](https://moiseevigor.github.io/mathematics/2026/08/18/forbidden-directions-D2-selection-rule/)
+- [D3 — The Law Q = d + k + 2, Derived](https://moiseevigor.github.io/mathematics/2026/08/19/forbidden-directions-D3-the-law-derived/)
+- [D4 — The Magnetic Geodesic Flow and Its Conjugate Locus](https://moiseevigor.github.io/mathematics/2026/08/20/forbidden-directions-D4-geodesic-flow/)
+- [D5 — The Nilpotent-Deviation Gradient Formula](https://moiseevigor.github.io/mathematics/2026/08/21/forbidden-directions-D5-gradient-formula/)
+
+## From Caustics to Groups
+
+- [Part 1 — From Caustics to Groups: A Research Program](https://moiseevigor.github.io/mathematics/2026/07/15/caustics-to-groups-research-program/)
+- [Part 2 — The Forward Map: Caustics of the Model Groups](https://moiseevigor.github.io/mathematics/2026/07/18/caustics-to-groups-forward-map/)
+- [Part 3 — The Inverse Map: Reading the Fingerprint](https://moiseevigor.github.io/mathematics/2026/07/22/caustics-to-groups-inverse-map/)
+- [Part 4 — In the Wild: DW-MRI, and Where the Method Stays Silent](https://moiseevigor.github.io/mathematics/2026/07/26/caustics-to-groups-in-the-wild/)
+- [C1 — The Model Groups, by Example: Real-World Sub-Riemannian Systems](https://moiseevigor.github.io/mathematics/2026/07/28/caustics-to-groups-C1-model-groups-by-example/)
+- [C2 — Caustics as Lagrangian Singularities (Arnol'd's ADE List)](https://moiseevigor.github.io/mathematics/2026/07/29/caustics-to-groups-C2-lagrangian-singularities/)
+- [C3 — The Tangent Cone: Carnot Groups and Growth Vectors](https://moiseevigor.github.io/mathematics/2026/07/30/caustics-to-groups-C3-tangent-cone-growth-vectors/)
+- [C4 — The Conjugate Locus at the Pole: Astroids and Their Moduli](https://moiseevigor.github.io/mathematics/2026/07/31/caustics-to-groups-C4-conjugate-locus-moduli/)
+- [C5 — Abnormal Geodesics: The Yes/No Fingerprint](https://moiseevigor.github.io/mathematics/2026/08/01/caustics-to-groups-C5-abnormal-geodesics/)
+- [C6 — The Nilpotent-Deviation Statistic](https://moiseevigor.github.io/mathematics/2026/08/02/caustics-to-groups-C6-nilpotent-deviation/)
+
+## Geometry of the Cosmic Web
+
+- [Part 1 — The Geometry of the Cosmic Web: A Research Program](https://moiseevigor.github.io/mathematics/2026/07/03/geometry-of-cosmic-web-research-program/)
+- [Part 2 — Two Ways to See a Cosmic Filament](https://moiseevigor.github.io/mathematics/2026/07/04/cosmic-web-two-models/)
+- [Part 3 — From Cosmic Filaments to Curved Spacetime](https://moiseevigor.github.io/mathematics/2026/07/11/cosmic-web-spacetime-geometry/)
+- [B1 — How the Universe Moves Its Matter: Transport Models](https://moiseevigor.github.io/mathematics/2026/07/06/cosmic-web-B1-transport-models/)
+- [B2 — The Tidal Frame: How Collapse Chooses Directions](https://moiseevigor.github.io/mathematics/2026/07/07/cosmic-web-B2-tidal-frame/)
+- [B3 — How to Grade a Model Honestly](https://moiseevigor.github.io/mathematics/2026/07/08/cosmic-web-B3-honest-benchmarks/)
+- [B4 — The Transverse-Damping Model, in Full](https://moiseevigor.github.io/mathematics/2026/07/09/cosmic-web-B4-transverse-damping/)
+- [B5 — Reading the Sky's Hot Gas](https://moiseevigor.github.io/mathematics/2026/07/10/cosmic-web-B5-reading-gas-maps/)
+
+## Articles
+
+- [Growth Vectors and Caustics of Magnetic Flux Lifts](https://moiseevigor.github.io/articles/magnetic-flux-lifts/):
+  full statements and proofs behind The Geometry of Forbidden Directions.
 
 ## Foundations & ML essays
 

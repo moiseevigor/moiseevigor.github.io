@@ -21,7 +21,6 @@ arxiv: "0807.4731"
 coauthors: "Yu. L. Sachkov"
 comments: true
 permalink: /mathematics/2026/05/04/geometry-of-seeing-A4-jacobi-elliptic/
-published: false
 ---
 
 <div class="l-body" markdown="1">
@@ -434,7 +433,7 @@ Maxwell pairs by chasing the $4K(k^2)$ period through the reconstruction.
   </li>
   <li>
     M. Abramowitz, I. A. Stegun (1965).  <em>Handbook of Mathematical
-    Functions.</em> Dover.  Chapter 16 (Jacobi) and 17 (integrals) — the
+    Functions.</em> Dover.  Chapters 16 (Jacobi) and 17 (integrals) — the
     look-up tables behind the closed forms used in the elliptic package.
   </li>
   <li>

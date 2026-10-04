@@ -23,8 +23,8 @@ description: >
 series: geometry-of-cosmic-web
 series_title: "Geometry of the Cosmic Web"
 series_part: 2
+hidden: true
 comments: true
-published: false
 ---
 
 <div class="l-body" markdown="1">
@@ -342,9 +342,9 @@ method comparison can quietly rig itself — is
 
 <div class="l-body" markdown="1">
 
-Averages can hide variation between realizations, so the next figure shows
+Averages can hide variation between realisations, so the next figure shows
 every seed: each dot is one test universe, plotted by the *paired
-difference* (lift − Hessian) on that realization. Above the zero line, the
+difference* (lift − Hessian) on that realisation. Above the zero line, the
 lift won that universe. Under the corrected procedure the clouds sit at
 zero for 1.2k galaxies and below zero everywhere else. Note that the flawed
 procedure produced a +0.07 cloud that looked equally decisive in the other
@@ -565,7 +565,7 @@ directly**: the adjustment term itself.
 The result reverses the original conjecture's orientation while
 confirming its spirit. The residual is large near the web (RMS ≈ 4.4
 h⁻¹Mpc per particle along the filament axis alone; ≈ 8 h⁻¹Mpc in full 3D)
-and it *is* organized by the local tidal frame — but
+and it *is* organised by the local tidal frame — but
 it points **across** the filament axis, not along it, at every distance.
 Physically: straight-line transport overshoots *through* forming walls
 and filaments; real gravity arrests that crossing. The correction the
@@ -584,7 +584,7 @@ flow along it.
     isotropic correction would sit on the dashed line (1/3). Everywhere
     below it: the correction is preferentially <em>perpendicular</em> to
     filaments, most strongly far from the web, approaching isotropy inside
-    the tubes where motion is virialized.
+    the tubes where motion is virialised.
   </figcaption>
 </figure>
 
@@ -675,7 +675,7 @@ the program's end product: not a verdict but a usable object.
 | Finding filament spines, any sampling density | **Hessian** | matches or beats the lift at every level tested (50/50 seeds from 2.5k up); simpler and cheaper |
 | Ultra-sparse tube-like data (a narrow 800–1,200-galaxy band) | either | statistical tie (p ≈ 0.4); sparser still, the Hessian wins again |
 | Junctions / nodes are the science | **Hessian** | orientation selectivity fails where direction is ill-defined |
-| Gravity-realistic ribbons, mass-tracing | **Hessian** | wins band mass coverage on ZA, N-body, and at 0.5 Mpc resolution |
+| Gravity-realistic ribbons, mass-tracing | **Hessian** | wins band mass coverage on Zel'dovich, N-body, and at 0.5 Mpc resolution |
 | Purity- or junction-critical at moderate sparsity | **hybrid (sum of both scores)** | +0.05 purity and +0.04 junction F1 over the Hessian at 5k (p ≈ 10⁻⁴), at a small completeness cost |
 | Describing web *anisotropy* (tangent statistics) | **SE(3) lift** | tidal-frame alignment 0.73–0.76 vs 0.67 — the one job it does better |
 | Modelling filament *formation* | **neither as geodesics** | assembly is transverse infall; E2 refutes along-axis transport |

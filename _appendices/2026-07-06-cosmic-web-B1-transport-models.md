@@ -19,7 +19,6 @@ series: geometry-of-cosmic-web
 series_title: "Geometry of the Cosmic Web"
 series_part: B1
 permalink: /mathematics/2026/07/06/cosmic-web-B1-transport-models/
-published: false
 comments: true
 ---
 
@@ -92,7 +91,7 @@ is one grid cell of 1 h⁻¹Mpc ≈ 1.4 megaparsecs (E5, E9).
 
 Second-order Lagrangian perturbation theory (2LPT; Bouchet et al. 1995,
 Scoccimarro 1998) adds the next term of the displacement series, sourced by a
-second-order potential:
+second-order potential (here $$\Phi^{(1)} \equiv \Phi_0$$, the ZA potential above):
 
 $$
 \boldsymbol{\Psi} \;=\; -\,D\,\nabla_q \Phi^{(1)} + D_2\,\nabla_q \Phi^{(2)}, \qquad D_2 \simeq -\tfrac{3}{7} D^{2}, \qquad
@@ -108,7 +107,7 @@ transport error is **8.07 ± 0.39 voxels** against the plain ZA's 4.97 ± 0.27
 (E9; 4.98–5.00 in the transfer runs — seed-to-seed rounding) — the "better"
 perturbative term makes transport *worse* by 62%. The direction of this
 failure is the known 2LPT overshoot in collapsed regions; its magnitude here
-is amplified by our late-time, strongly-clustered EdS setup and a
+is amplified by our late-time, strongly-clustered Einstein–de Sitter (EdS) setup and a
 particle-median metric that weights collapsed regions heavily. The
 pattern — arresting particles beats perturbing them — is the empirical thread
 of the whole series.
@@ -288,7 +287,7 @@ Appendix B2 explains the tidal frame the rule lives in.
 
 ## Back to the series
 
-Back to the series: [The Geometry of the Cosmic Web: A Research Program](/mathematics/2026/07/03/geometry-of-cosmic-web-research-program/) · [Two Ways to See a Cosmic Filament](/mathematics/2026/07/04/cosmic-web-two-models/).
+Back to the series: [The Geometry of the Cosmic Web: A Research Program](/mathematics/2026/07/03/geometry-of-cosmic-web-research-program/) · [Two Ways to See a Cosmic Filament](/mathematics/2026/07/04/cosmic-web-two-models/) · [From Cosmic Filaments to Curved Spacetime](/mathematics/2026/07/11/cosmic-web-spacetime-geometry/).
 
 </div><!-- /.l-body -->
 

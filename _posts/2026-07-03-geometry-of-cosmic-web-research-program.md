@@ -21,7 +21,6 @@ series: geometry-of-cosmic-web
 series_title: "Geometry of the Cosmic Web"
 series_part: 1
 comments: true
-published: false
 ---
 
 <div class="l-body" markdown="1">
@@ -55,7 +54,7 @@ lands within a hair of its theoretical best ([Part 2]({% post_url 2026-07-04-cos
 
 **The full series.**
 
-- **The story** — **Part 1** *(this page)* the program and its verdicts · **[Part 2](/mathematics/2026/07/04/cosmic-web-two-models/)** the results for a general reader, with interactive figures from the real data · **Part 3** *(upcoming)* *From Cosmic Filaments to Curved Spacetime* — the same geometry, carried up to gravity itself.
+- **The story** — **Part 1** *(this page)* the program and its verdicts · **[Part 2](/mathematics/2026/07/04/cosmic-web-two-models/)** the results for a general reader, with interactive figures from the real data · **[Part 3](/mathematics/2026/07/11/cosmic-web-spacetime-geometry/)** *From Cosmic Filaments to Curved Spacetime* — the same geometry, carried up to gravity itself.
 - **The machinery** — **[B1](/mathematics/2026/07/06/cosmic-web-B1-transport-models/)** transport models · **[B2](/mathematics/2026/07/07/cosmic-web-B2-tidal-frame/)** the tidal frame · **[B3](/mathematics/2026/07/08/cosmic-web-B3-honest-benchmarks/)** honest benchmarks · **[B4](/mathematics/2026/07/09/cosmic-web-B4-transverse-damping/)** the transverse-damping model · **[B5](/mathematics/2026/07/10/cosmic-web-B5-reading-gas-maps/)** reading the sky's hot gas.
 
 <div class="callout">
@@ -439,7 +438,7 @@ $$
 
 where $$\mathcal{A}_i$$ are the left-invariant vector fields[^left-invariant] on $$\mathrm{SE}(3)/\mathrm{SO}(2)$$ ($$\mathcal{A}_3$$ = transport along $$\mathbf{n}$$), $$\Delta_{S^2}$$ is the spherical Laplacian in the orientation variable, $$D_\parallel \gg D_\perp$$, and the drift $$\mu$$ and the ratios $$D_\parallel : D_\perp : D_S$$ are functions of $$(\lambda_1, \lambda_2, \lambda_3)$$
 to be calibrated (see H2/E1). This is the direct 3D analogue of the $$\mathrm{SE}(2)$$ hypoelliptic evolution in
-[Part 1]({% post_url 2026-04-25-geometry-of-seeing-visual-cortex-se2 %}), with the
+[Part 1 of the Geometry of Seeing]({% post_url 2026-04-25-geometry-of-seeing-visual-cortex-se2 %}), with the
 physics entering through the coefficients instead of being bolted on afterwards.
 
 Picture the box of galaxies copied once for every direction, with heat spreading
@@ -504,7 +503,7 @@ effective metric whose geodesics the flow follows. Candidate route: the adhesion
 model is the zero-viscosity limit of Burgers flow, whose characteristics *are*
 extremals of an action; recast that action on $$\mathbb{R}^3 \times S^2$$ and read
 off the metric and the correct $$\lambda_i$$-dependence of $$D_\parallel, D_\perp, D_S, \mu$$. Also connects to optimal-transport
-reconstruction of the early Universe (Brenier, Frisch et al. 2002), which is
+reconstruction of the early Universe (Brenier, Frisch et al. 2003), which is
 Monge–Ampère[^optimal-transport] — i.e. already a geodesic statement in a Wasserstein geometry.
 Deliverable: a note fixing the functional form of the coefficients used in E1–E3
 instead of leaving them free parameters.
@@ -650,7 +649,7 @@ volumes or sky areas. Parameter count is part of the model comparison (H2).
   gravitational potential; its eigenframe ($$\lambda_1 \ge \lambda_2 \ge \lambda_3$$)
   sets the anisotropy of collapse; filament axis $$\parallel e_3$$.
 - **Zel'dovich approximation** — first-order Lagrangian perturbation theory:
-  ballistic comoving displacement $$\mathbf{x} = \mathbf{q} - D(t)\nabla_q\Phi(\mathbf{q})$$.
+  ballistic comoving displacement $$\mathbf{x} = \mathbf{q} - D(t)\nabla_q\Phi^{(1)}(\mathbf{q})$$.
 - **Adhesion model** — Zel'dovich flow regularised by infinitesimal Burgers
   viscosity so matter sticks at shell-crossing, producing persistent
   sheets/filaments.

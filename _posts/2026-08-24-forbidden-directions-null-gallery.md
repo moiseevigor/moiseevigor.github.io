@@ -21,8 +21,8 @@ description: >
 series: preferred-directions
 series_title: "The Geometry of Forbidden Directions"
 series_part: 5
+hidden: true
 comments: true
-published: false
 ---
 
 <div class="l-body" markdown="1">
@@ -71,7 +71,7 @@ genuine sub-Riemannian structure in every case, spiral nulls included.
 <figure class="l-middle" id="fig-null-gallery">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-null-gallery.png"
-      alt="Gallery of five magnetic nulls: two radial X-type fan topologies in blue, two spiral O-type in orange, and the real SDO/HMI null, each labeled with its Parnell class and the measured growth vector Q=6"
+      alt="Gallery of five magnetic nulls: two radial X-type fan topologies in blue, two spiral O-type in orange, and the real SDO/HMI null, each labelled with its Parnell class and the measured growth vector Q=6"
       style="max-width:min(100%,760px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
@@ -156,7 +156,7 @@ anatomy of that loss is worth stating plainly:
   rotation, and radial nulls drift into the spiral bin — while the sign read-out barely
   degrades. Under noise the flow classifier decays into a good two-class sign classifier.
 
-The morale, stated without hedging: for *classifying* a null, the community's local linear
+The moral, stated without hedging: for *classifying* a null, the community's local linear
 fit is already the right tool, and the sub-Riemannian flow cannot sharpen it — it can only
 beat the naive practice. Classification is a language the framework speaks, not a tool it
 sharpens.
@@ -189,7 +189,7 @@ extrapolation, the Newton null finder, and *every* interior null kept — no che
 <figure class="l-middle" id="fig-real-gallery">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-real-gallery.png"
-      alt="Gallery of five real coronal nulls across three SDO/HMI days: each card shows the coronal field magnitude on a vertical slice collapsing to zero at the starred null with white streamlines tracing the topology, labeled with date, radial type, and Q=6"
+      alt="Gallery of five real coronal nulls across three SDO/HMI days: each card shows the coronal field magnitude on a vertical slice collapsing to zero at the starred null with white streamlines tracing the topology, labelled with date, radial type, and Q=6"
       style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
@@ -245,7 +245,7 @@ After R1–R3 the ledger is clean enough to state as a table:
 | **How is the field changing nearby?** | SR caustic: $\delta=-\varepsilon^2$ on the exponential profile; general 1D profiles read $(1-\tfrac34\beta)\lvert\nabla\ln B\rvert^2$ | confirmed (Part 3, article §4) |
 | **Radial or spiral, which sign?** | the local least-squares fit of $\nabla\mathbf B$ | the standard scheme keeps it — R2 |
 
-That last row is the honest one. We built the classification method the request called
+That last row is the honest one. We built the classification method the program called
 for; it works (H-R1), it beats the naive practice it was designed to beat, and a properly
 fitted Jacobian still beats it. A framework that wants to be science rather than
 advertising has to be able to report exactly that — and the rows above it are what it

@@ -22,7 +22,6 @@ arxiv: "0807.4731"
 coauthors: "Yu. L. Sachkov"
 comments: true
 permalink: /mathematics/2026/05/01/geometry-of-seeing-A1-lie-groups/
-published: false
 ---
 
 <div class="l-body" markdown="1">
@@ -154,11 +153,23 @@ $X_3$ from the *translation* generator $E_2$, because Part&nbsp;1 numbers the
 frame (forward, rotation, sideways) while the $E$-basis is numbered
 (translate-$x$, translate-$y$, rotate).
 
-These are the same three vector fields Part&nbsp;1 §3 introduced.  Now you know
+These are the same three vector fields Part&nbsp;1 §3 introduced. Now you know
 where they come from: they are the basis of $\mathfrak{se}(2)$,
-parallel-transported across the group by left-multiplication.  Declaring
+translated across the group by the differential of left-multiplication. This
+is not connection-dependent parallel transport. Declaring
 them orthonormal is exactly how Part&nbsp;1 puts its left-invariant metric on
 $\mathrm{SE}(2)$.
+
+<aside id="note-three-levels">
+Keep three levels separate. An algebra element
+$A=a_1E_1+a_2E_2+a_3E_3$ is one tangent vector at the identity. Its
+left-invariant extension $\widetilde A(g)=(dL_g)_eA$ is a vector field on the
+whole group. A curve $g(t)$ is an actual motion and satisfies
+$\dot g(t)=\widetilde{A(t)}(g(t))$ for a possibly time-dependent body velocity
+$A(t)$. Confusing these levels is the usual source of statements such as
+“the exponential curve is every geodesic.” It is only the solution when
+$A(t)$ is constant; SR geodesics generally have time-dependent optimal controls.
+</aside>
 
 </div><!-- /.l-body -->
 
@@ -235,6 +246,16 @@ The two translations commute (translations always do, regardless of axis),
 while rotation does *not* commute with either translation — that is the
 non-triviality of $\mathrm{SE}(2)$.
 
+**One matrix multiplication worth doing.** Since $E_3$ infinitesimally rotates
+the plane and $E_1$ translates along $x$,
+
+$$E_3E_1=E_2,\qquad E_1E_3=0,\qquad [E_3,E_1]=E_2.$$
+
+Read this operationally: “rotate a tiny $x$-translation, then undo the
+operations in the opposite order” leaves a tiny $y$-translation. The bracket
+is not a mysterious new force; it is the first non-cancelling term in changing
+the order of two familiar motions.
+
 Two warnings worth absorbing.
 
 - This basis $\{E_1, E_2, E_3\}$ of $\mathfrak{se}(2)$ is *different* from
@@ -309,8 +330,8 @@ The Lie bracket is exactly the leading coefficient of that nudge.
   </div>
   <figcaption>
     <strong>Figure A1.2 — closing-defect on two different groups.</strong>
-    The same 4-leg loop pattern (a forward step, a sideways step, a
-    forward un-step, a sideways un-step) is applied on
+    The same 4-leg loop pattern (a forward step, a turning step, a
+    forward un-step, a turning un-step) is applied on
     <strong>$\mathrm{SE}(2)$</strong> (top-left, blue tint) and on
     <strong>$\mathrm{SO}(3)$</strong> (bottom-left, purple tint), driven
     by the same $\varepsilon$.
@@ -428,6 +449,15 @@ The **coadjoint action** is the dual: $\mathrm{Ad}^{\ast}_g : \mathfrak g^{\ast}
 \langle \mu, \mathrm{Ad}_{g^{-1}}(Y)\rangle$.  The orbits of $\mathrm{Ad}^{\ast}$
 on $\mathfrak g^{\ast}$ are called **coadjoint orbits**, and they are *symplectic
 manifolds* — the <span class="annotated-term" data-note="note-kks">Kirillov–Kostant–Souriau theorem</span>.
+
+<aside id="note-costate-prices">
+A useful control-theory reading is that a covector assigns an instantaneous
+“price” to each body direction. The adjoint action changes the body frame;
+the coadjoint action is the inverse change required so that the pairing
+$\langle h,X\rangle$ — price times velocity — does not change. A coadjoint orbit is
+therefore the set of price vectors related by changes of body frame. The Casimir
+labels which orbit the Hamiltonian motion can never leave.
+</aside>
 
 For $\mathrm{SE}(2)$, parametrise $\mathfrak{se}(2)^{\ast}$ by $(h_1, h_2, h_3)$
 in the basis dual to $\{E_1, E_2, E_3\}$.  The coadjoint orbits are

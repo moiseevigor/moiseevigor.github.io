@@ -4,7 +4,7 @@ title: "The Litmus Tests: What Survived Our Own Review"
 subtitle: >
   Before claiming new science, attack it yourself. This part — the series' review
   gauntlet, with Part 8 carrying the program on to Jupiter — runs the referee's
-  checks on the series' three novelty candidates — and reports the outcomes without
+  checks on the series' three novelty candidates and reports the outcomes without
   cosmetics: one claim hardened into an exact period-average law with a critical gradient
   (a complete elliptic integral; its caustic reading rides on one verified-but-open
   identification); one was demoted by our own pre-registered race; one was
@@ -22,8 +22,8 @@ description: >
 series: preferred-directions
 series_title: "The Geometry of Forbidden Directions"
 series_part: 7
+hidden: true
 comments: true
-published: false
 ---
 
 <div class="l-body" markdown="1">
@@ -111,7 +111,7 @@ $\theta$-period diverges — that is the theorem — and the measured conjugate 
 it: the slowest launch direction ($\sin\theta_0 = 1$) has period
 $T = 2\pi/\sqrt{1-2\varepsilon}$, and its measured $t_c$ matches at $\varepsilon = 0.45$
 and $0.49$. Above
-the critical gradient the picture is sharper than the retracted blanket
+the critical gradient the picture is sharper than a blanket
 no-refocusing claim (a referee-prompted probe measured it): for exactly the launch band
 $\sin\theta_0 \ge (1-\varepsilon)/\varepsilon$ no conjugate point is detected within
 the integration window of eight reference periods — 9 of 64

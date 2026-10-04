@@ -23,7 +23,6 @@ arxiv: "0807.4731"
 coauthors: "Yu. L. Sachkov"
 comments: true
 permalink: /mathematics/2026/05/05/geometry-of-seeing-A5-sr-exponential/
-published: false
 ---
 
 <div class="l-body" markdown="1">
@@ -31,7 +30,7 @@ published: false
 <div class="callout">
 <div class="callout-title">What this appendix is for</div>
 
-Parts&nbsp;3 and 4 of the series will discuss the <strong>cut locus</strong> and
+Parts&nbsp;3 and 4 of the series discuss the <strong>cut locus</strong> and
 the <strong>Maxwell strata</strong> of the SE(2) sub-Riemannian problem.
 This appendix builds the object both rest on: the SR exponential map.
 It also makes precise the difference between the matrix exponential of
@@ -66,7 +65,7 @@ $$\mathrm{Exp}: \mathfrak{se}(2)^{\ast} \times \mathbb R_{\geq 0} \to \mathrm{SE
 where $g(t)$ is the SR geodesic with initial costate $\mu_0 = (h_1^0, h_2^0,
 h_3^0) \in \mathfrak{se}(2)^{\ast}$ on the unit-Hamiltonian surface
 $h_1^2 + h_2^2 = 1$.  This is the map that generates "Petitot's family of
-candidate completion paths" from a fixed neuron.  When we say "exponential
+candidate completion paths" from a fixed lifted state. When we say "exponential
 map" in Parts&nbsp;3–4 we always mean *this* one.
 
 Two parametrisations of the same costate space are convenient:
@@ -112,11 +111,11 @@ Three takeaways:
 1. **$\mathrm{Exp}_T(\mu_0)$ is a transcendental but explicit function of
    $T$ and the initial costate.**  Compute every entry with two
    `elliptic12` calls and one `ellipj` call.
-2. **Periodicity in $T$.**  Since $\mathrm{cn}, \mathrm{sn}$ are
-   $4K(k^2)$-periodic, the *plane* curve $(x, y)$ closes up in arc length
-   $4K(k^2)$ — but the heading $\theta$ has accumulated a full turn (or
-   not, depending on the family).  That is what produces lemniscate-style
-   self-intersections.
+2. **Periodic curvature is not necessarily a closed curve.** Since
+   $\mathrm{cn},\mathrm{sn}$ are $4K(k^2)$-periodic, the elastica curvature
+   and tangent repeat after $4K(k^2)$, but $(x,y)$ generally acquires a
+   translational drift. Closure requires the additional condition that this
+   net displacement vanish; the figure-eight modulus is a special case.
 3. **The exponential map is *not injective.***  Different $(c, \omega_0,
    \phi_0)$ can land at the same $g(T)$.  When two distinct costates
    produce the same end with the same $T$, that endpoint is a **Maxwell
@@ -144,7 +143,7 @@ Three takeaways:
         <span class="ctrl-val" id="exp-T-val">2.00</span>
       </label>
       <span style="margin-left:auto;font-size:12px;color:#888;">
-        $\mathrm{Exp}_T$ from origin, family selected
+        pinned elastica endpoint from origin
       </span>
     </div>
     <svg id="fig-expmap" style="width:100%;height:380px;"></svg>
@@ -156,10 +155,12 @@ Three takeaways:
     cuspidal cousins; §Closed-form above).  The blue, red, green colour scheme
     matches Part&nbsp;1 Figure&nbsp;4 — and indeed this figure is the same one,
     lifted to a more controllable form.  As $k \to 1^-$ the inflectional family's
-    period $4K(k^2)$ diverges (Appendix A4) and the curve spirals; for
+    period $4K(k^2)$ diverges (Appendix A4) and the curve approaches the
+    borderline elastica on bounded intervals; for
     $k > 1$ (non-inflectional) the curvature is one-signed with spatial
-    period $T = 2K(m)$ (a closed circle only in the $m \to 0$ limit).  The endpoint dot is
-    $\mathrm{Exp}_T(\mu_0)$ for the specified $\mu_0$ and $T$.
+    period $T = 2K(m)$ (a closed circle only in the $m \to 0$ limit).  The endpoint dot is the
+    endpoint of the selected pinned elastica at $T$. It is not the value of
+    the free-SR exponential map unless the free reconstruction is used.
   </figcaption>
 </figure>
 
@@ -271,7 +272,7 @@ the heart of Parts&nbsp;3–4.
   </div>
   <figcaption>
     <strong>Figure A5.2.</strong> The <strong>σ-symmetric pair</strong>:
-    two geodesics $\gamma_A, \gamma_B$ leaving the origin with curvatures
+    two pinned elastica $\gamma_A, \gamma_B$ leaving the origin with curvatures
     $\pm 2k\,\mathrm{cn}(s\mid k^2)$ respectively.  By the
     $y \to -y$ reflection symmetry of the pendulum equation,
     $\gamma_B(s) = (x_A(s),\, -y_A(s),\, -\theta_A(s))$ — they trace
@@ -287,7 +288,7 @@ the heart of Parts&nbsp;3–4.
     the smooth curves this figure integrates.  (For the free SR problem the same
     symmetry machinery gives a cut at $2K(k^2)$, half this value; §Cut above.)
     At the special "figure-eight" modulus
-    $k_c \approx 0.909$ (root of $2E(k^2) = K(k^2)$) that shared endpoint sits
+    $k_0 \approx 0.909$ (root of $2E(k^2) = K(k^2)$) that shared endpoint sits
     back at the origin, so the closed curve is itself a single self-crossing
     lemniscate; for other $k$ the two curves still meet at $s = 4K(k^2)$, just
     away from the origin.
@@ -396,21 +397,19 @@ rear-axle parametrisation makes them visible.
 ## Code
 
 ```python
-# Generate a Maxwell pair for the inflectional SE(2) problem.
-# Both geodesics have the same arc length and same endpoint;
-# they differ in the sign of their initial pendulum phase.
+# Generate the mirror pair for the pinned inflectional elastica problem.
+# This is the 4K elastica tie, not the 2K first Maxwell/cut event of free SR.
 import numpy as np
 from elliptic import ellipj, ellipticK
 
-def inflectional_geodesic(k, omega0, phi0, T, N=1500):
-    """Compute the inflectional geodesic from origin with given (k, ω0, φ0)
-    over arc length T.  Returns (x, y, theta)."""
+def inflectional_elastica(k, sign, T, N=1500):
+    """Compute one member (sign = ±1) of the pinned mirror pair."""
     m = k * k
     s = np.linspace(0, T, N)
     sn, cn, dn = ellipj(s, m)   # vectorised
     # Heading half-angle: sin(θ/2) = k·sn(s|m), so θ = 2·arcsin(k·sn).
     # Curvature κ = dθ/ds = 2k·cn·dn / sqrt(1 − k²sn²) = 2k·cn  (since dn = sqrt).
-    kappa = 2 * k * cn * dn / np.sqrt(1 - k * k * sn * sn)
+    kappa = sign * 2 * k * cn * dn / np.sqrt(1 - k * k * sn * sn)
     theta = np.zeros_like(s)
     x = np.zeros_like(s)
     y = np.zeros_like(s)
@@ -428,9 +427,9 @@ omega0 = 1.0
 T_maxwell = 4 * ellipticK(k * k) / omega0   # elastica mirror-pair tie (SR cut is 2K)
 print(f"elastica mirror-tie time T₁ = 4K(k²)/ω₀ = {T_maxwell:.4f}")
 
-# Two geodesics: φ0 = +0.3 vs φ0 = -0.3
-xA, yA, thA = inflectional_geodesic(k, omega0,  0.3, T_maxwell)
-xB, yB, thB = inflectional_geodesic(k, omega0, -0.3, T_maxwell)
+# Two pinned extremals with opposite curvature.
+xA, yA, thA = inflectional_elastica(k, +1, T_maxwell)
+xB, yB, thB = inflectional_elastica(k, -1, T_maxwell)
 
 err = np.hypot(xA[-1] - xB[-1], yA[-1] - yB[-1])
 print(f"|γA(T₁) − γB(T₁)|  =  {err:.2e}")     # should be ≲ 1e-6
@@ -449,7 +448,7 @@ for k in (0.1, 0.3, 0.5, 0.7, 0.9, 0.95):
     print(f"k = {k:4.2f}:  ~T_conj(elastica) = {conjugate_scale_elastica(k):.4f}")
 ```
 
-## What we covered, and what is left for Parts&nbsp;3–4
+## What we covered, and where Parts&nbsp;3–4 go next
 
 The SR exponential map of $\mathrm{SE}(2)$ takes initial costates to
 group endpoints; its closed form involves Jacobi elliptic functions and
@@ -461,15 +460,15 @@ family the free SR cut fires at $2K(k^2)$ — half a pendulum period — while
 the smooth elastica sister pair first ties at $4K(k^2)$, one full curvature
 period: the same elliptic clock, two problems.
 
-What remains for Parts&nbsp;3 and 4 of the blog series:
+What Parts&nbsp;3 and 4 of the blog series do with it:
 
-- **Part&nbsp;3** will develop the Maxwell mechanism via the pendulum's
-  reflection group $(\mathbb Z_2)^3$, compute the mirror-pair tie exactly on
-  the elastica family ($s = 4K(k^2)$, one curvature period), and state the
+- **Part&nbsp;3** develops the Maxwell mechanism via the pendulum's
+  reflection group $(\mathbb Z_2)^3$, computes the mirror-pair tie exactly on
+  the elastica family ($s = 4K(k^2)$, one curvature period), and states the
   SR result it bounds: $t_{\mathrm{cut}} \le \mathfrak t(\lambda)$.
-- **Part&nbsp;4** will present Sachkov's theorem $t_{\mathrm{cut}} = \mathfrak
+- **Part&nbsp;4** presents Sachkov's theorem $t_{\mathrm{cut}} = \mathfrak
   t(\lambda)$ — for the inflectional family $2K(k^2)$, half a pendulum
-  period, with <em>no conjugate points at all</em> along the way — and lay
+  period, with <em>no conjugate points at all</em> along the way — and lays
   out what stays genuinely open: the general Maxwell-equals-cut question
   beyond $\mathrm{SE}(2)$.
 
@@ -477,7 +476,7 @@ The five appendices A1–A5 supply every prerequisite: Lie groups (A1),
 distributions and contact structures (A2), the Pontryagin Maximum
 Principle and Lie–Poisson reduction (A3), Jacobi elliptic functions and
 the arithmetic–geometric mean (A4), and the SR exponential map (A5).  With them in hand, Parts&nbsp;1 and 2 should read
-fluently, and Parts&nbsp;3 and 4 will be approachable when they ship.
+fluently, and Parts&nbsp;3 and 4 become approachable.
 
 </div><!-- /.l-body -->
 
@@ -659,7 +658,7 @@ function drawExpMap() {
     const Km = ellipticK(kVal * kVal);
     info = `k = ${kVal.toFixed(2)}    period 4K(k²) = ${(4*Km).toFixed(2)}    T = ${T.toFixed(2)}`;
   } else if (family === 'separatrix') {
-    info = `Euler spiral    T = ${T.toFixed(2)}`;
+    info = `borderline elastica    T = ${T.toFixed(2)}`;
   } else {
     const m = Math.max(0.01, Math.min(0.99, 2 - kVal));
     const Km = ellipticK(m);

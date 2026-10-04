@@ -18,7 +18,6 @@ series: caustics-to-groups
 series_title: "From Caustics to Groups"
 series_part: C6
 permalink: /mathematics/2026/08/02/caustics-to-groups-C6-nilpotent-deviation/
-published: false
 comments: true
 ---
 

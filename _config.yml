@@ -72,6 +72,11 @@ exclude:
   # Production build output (docker compose 'build' service): must not be
   # re-ingested or watched by the dev server.
   - "_site_production"
+  # Large gitignored research data/artifacts: never part of the site, and far
+  # over the GitHub Pages 100MB-per-file limit. Without these, every build
+  # copies ~5.6G into _site (and again into _site_production).
+  - "research/cosmic-web/data"
+  - "research/preferred-directions/artifacts"
 
 # Appendix pages: rendered at pinned permalinks but never part of site.posts,
 # so they stay out of pagination, archives, and feeds; reachable via the

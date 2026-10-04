@@ -22,8 +22,8 @@ description: >
 series: preferred-directions
 series_title: "The Geometry of Forbidden Directions"
 series_part: 3
+hidden: true
 comments: true
-published: false
 ---
 
 <div class="l-body" markdown="1">
@@ -102,7 +102,7 @@ singularity is physics: at the critical gradient $\varepsilon = 1/2$ the *mean*
 $\theta$-period diverges (that is the theorem; reading it as the mean *refocusing*
 time rides on the period identification above), and measured above it, the slowest
 launch directions show no conjugate point within the integration window —
-finite-horizon evidence (appendix D5, and Part 7 for the full referee-grade chain). The figure shows $\lvert\delta\rvert$
+finite-horizon evidence (Appendix D5, and Part 7 for the full referee-grade chain). The figure shows $\lvert\delta\rvert$
 against $\varepsilon$ on log–log: a clean line of slope 2. The complete proofs — the
 tangent-half-angle factorisation, the Gauss integral, and the precise statement of what
 remains conjectural — are written out in the companion article
@@ -227,7 +227,7 @@ leading statistic is blind (tested: F2) and this estimator is undefined. The pro
 factor is $1$ exactly on exponential-class jets ($\beta = 0$),
 which is the case this post measures. The
 shape of a caustic is not decoration — it is a readout. One honest qualifier, established
-after this post was first drafted: the leading coefficient is $1$ only for
+by follow-up work: the leading coefficient is $1$ only for
 exponential-class profiles. The caustic law is $c_2 = 1 - \tfrac34\beta$ with
 $\beta = (\ln B)''/\lvert(\ln B)'\rvert^2$ the dimensionless profile curvature at the
 launch point — first measured (linear profile: $\tfrac74$, found $1.7466 \pm 0.0074$),
@@ -263,7 +263,7 @@ on the table.
 ## Why this result matters beyond magnetism
 
 The nilpotent-deviation statistic $\delta$ is not new here (this series uses the
-launch-angle average; the sibling program's appendix C6 introduced it as a $w$-average —
+launch-angle average; the sibling program's Appendix C6 introduced it as a $w$-average —
 same object, different marginal). It is the central object of the
 [caustics-to-groups]({% post_url 2026-07-22-caustics-to-groups-inverse-map %}) program, where it
 separated one abstract group from another. But there it was only ever checked against structures

@@ -23,7 +23,6 @@ arxiv: "0807.4731"
 coauthors: "Yu. L. Sachkov"
 comments: true
 permalink: /mathematics/2026/05/02/geometry-of-seeing-A2-distributions-contact/
-published: false
 ---
 
 <div class="l-body" markdown="1">
@@ -76,7 +75,7 @@ Two extreme examples we will keep in mind:
 <aside id="note-horizontal">
 "Horizontal" here is a borrowed mechanical word — nothing to do with
 gravity. A horizontal curve is one whose velocity always lies in the
-chosen distribution $\Delta$. In the V1 model, the only motions a neuron
+chosen distribution $\Delta$. In the idealised V1 model, the directly available motions a lifted state
 can undergo "for free" are forward along its preferred orientation and
 rotation in place — anything else is forbidden, and a horizontal curve is
 one that never tries the forbidden moves.
@@ -133,7 +132,7 @@ distribution is **not integrable**.
 
 Geometrically: if it *had* integrated, the cortex would foliate into
 2-dimensional sheets, and you could never reach a sideways-displaced
-neuron from your starting one by horizontal motion.  V1 would be a
+state from your starting one by horizontal motion. The model state space would be a
 disconnected stack.  But it is not — and the failure of Frobenius is
 exactly what makes contour completion possible.
 
@@ -162,10 +161,10 @@ argument at suitable *nonzero* parameter values (or invokes the Orbit
 Theorem); see Montgomery §2 or Agrachev–Barilari–Boscain Ch. 3 for the
 full proof.  Compose enough hops and you can reach any point.
 
-**For SE(2) the Hörmander condition is satisfied at depth 1.**  We computed
+**For SE(2) the Hörmander condition is satisfied after one bracket layer (step 2).** We computed
 $[X_1, X_2] = -X_3$, and $X_1, X_2, X_3$ already span $T_g\mathrm{SE}(2)$
-(three linearly independent fields).  No deeper brackets are needed.  This
-is the *minimal* possible depth and is what makes the sub-Riemannian (SR)
+(three linearly independent fields). No iterated brackets beyond $[X_1,X_2]$
+are needed. This is the minimal bracket-generating contact case and is what makes the sub-Riemannian (SR)
 Carnot–Carathéodory distance well-behaved on $\mathrm{SE}(2)$.
 
 </div><!-- /.l-body -->
@@ -246,20 +245,54 @@ horizontal distribution $\mathcal H$ of the Frobenius test above.
 penny" contact structure are the same locally — a fact Petitot exploited
 to import results from the latter into V1 modelling.
 
+### Contact versus Martinet: one vanishing coefficient changes the geometry
+
+The contact condition must hold **everywhere**. The flat Martinet distribution
+shows what happens when it fails on a surface:
+
+$$\alpha_M=dz-\tfrac12y^2\,dx,\qquad
+\Delta_M=\ker\alpha_M
+=\mathrm{span}\!\left\{X=\partial_x+\tfrac12y^2\partial_z,
+Y=\partial_y\right\}.$$
+
+Its brackets are
+
+$$[X,Y]=-y\,\partial_z,\qquad [Y,[X,Y]]=-\partial_z.$$
+
+Away from $y=0$, the first bracket recovers the missing $z$ direction, so the
+growth vector is $(2,3)$ and the distribution is contact. On the
+**Martinet surface** $\Sigma=\{y=0\}$, that bracket vanishes and one more bracket
+is required: the growth vector is $(2,2,3)$. The weights at $\Sigma$ are
+$(1,1,3)$ and their sum is $Q=5$, rather than the contact value $Q=4$.
+
+<aside id="note-martinet-parking">
+Think of $y$ in $[X,Y]=-y\partial_z$ as the effectiveness of a parallel-parking
+manoeuvre. Off $\Sigma$, a four-leg commutator produces a $z$-shift of order
+$\varepsilon^2$. On $\Sigma$, that shift cancels; only a nested manoeuvre produces
+a shift, now of order $\varepsilon^3$. This is why $z$ has weight 3. It is also
+why Martinet geometry admits nonconstant abnormal minimisers along its singular
+surface, whereas a 3D contact structure such as SE(2) does not.
+</aside>
+
+The magnetic-flux article meets this normal form at a transverse zero of a planar
+scalar field: $B=-y$ and $A=\tfrac12y^2dx$ make the fibre coordinate $\varphi$
+play the role of $z$. Thus “the field vanishes” becomes “the contact bracket loses
+rank,” and the first field derivative appears in the next bracket.
+
 ## Why Chow's theorem matters for vision
 
-The Chow theorem is what makes "modal completion is a shortest-path problem
-on $\mathrm{SE}(2)$" not a vacuous statement.  If the V1 distribution were
+The Chow theorem is what makes a shortest-path model of modal completion on
+$\mathrm{SE}(2)$ mathematically well posed. If the model distribution were
 *integrable*, the brain would be unable to bridge two oriented edges that
 do not lie on the same $\theta = \text{const}$ leaf — vision would split
 into orientation strata.  Frobenius would have shut the door, and Petitot's
 model would predict no perception of contour completion.
 
-Bracket-generation says the *opposite*: any source/target neuron pair can
+Bracket-generation says the *opposite*: any source/target state pair can
 be linked by a horizontal path, and the *length* of the shortest such path
-is the SR distance.  Petitot's claim is that the visual system computes
-this distance and renders it as a percept.  The contact structure is what
-makes this computation well-posed.
+is the SR distance. Petitot's programme proposes this geometry as a model of
+association and completion; whether cortical dynamics literally minimises this
+homogeneous distance is a separate empirical question.
 
 </div><!-- /.l-body -->
 
@@ -296,9 +329,10 @@ makes this computation well-posed.
     the
     <a href="https://moiseevigor.github.io/elliptic/examples/dubins-back-wheel/">
     elliptic project</a>: forward, steer, reverse, steer.  Drop $\varepsilon$
-    and the path becomes a finer-grained zigzag; the SR-shortest path is the
-    $\varepsilon \to 0$ limit, which is one of the elastica geodesics of
-    Part&nbsp;2.
+    and the path becomes a finer-grained zigzag approximating displacement in
+    the bracket direction. This proves reachability; it neither selects a
+    shortest curve nor converges, merely by shrinking $\varepsilon$, to the
+    pinned elastica of Part&nbsp;2.
   </figcaption>
 </figure>
 
@@ -329,27 +363,28 @@ admissible $\gamma$ writes as $\dot\gamma = u_1(t) X_1 + u_2(t) X_2$ and
 
 $$L_{\mathrm{SR}}(\gamma) \;=\; \int_0^T \sqrt{u_1^2 + u_2^2}\,dt.$$
 
-*Pinning* $u_1 = 1$ makes $s$ arc length and $\kappa = \dot\theta$, and turns
-the problem into Euler's elastica — critical curves of $\int \kappa^2(s)\,ds$,
-exactly the integrand Euler minimised.  The free SR extremals are a different
+*Pinning* $u_1=1$ makes $s$ plane arc length and $\kappa=\dot\theta$. At fixed
+length, the quadratic control energy $\tfrac12\int(1+\kappa^2)\,ds$ differs by
+a constant from Euler's bending energy $\tfrac12\int\kappa^2\,ds$. The free SR extremals are a different
 (cuspidal) family sharing the same pendulum core.  Appendix A3 runs both
 through the Pontryagin Maximum Principle and keeps them apart.
 
 The **sub-Riemannian Hopf–Rinow theorem** shows that on a connected,
 complete bracket-generating SR manifold the infimum is attained: a
 length-minimising geodesic exists between any two points.  For
-$\mathrm{SE}(2)$ it means every pair of V1 neurons is connected by an
+$\mathrm{SE}(2)$ it means every pair of lifted model states is connected by an
 *actual* shortest horizontal curve — not just an approachable one.
 
 ## Connection to the elliptic project
 
-The reachability figure above is mathematically the same object as the
+The reachability figure above uses the same flow concatenations as the
 parking trajectory in
 <a href="https://moiseevigor.github.io/elliptic/examples/dubins-back-wheel/">
 the dubins-back-wheel example</a>: a piecewise concatenation of
 $X_1$ ("forward + reverse") and $X_2$ ("steer") flows.  The parking
-trajectory is what Chow's theorem looks like with finite $\varepsilon$;
-the elastica geodesic is what it converges to as $\varepsilon \to 0$.
+trajectory is what Chow's theorem looks like with finite $\varepsilon$.
+Shrinking the loop isolates the bracket displacement; it is a local-control
+construction, not an optimisation algorithm and not an elastica limit.
 Both are computed by the same SE(2) ordinary-differential-equation (ODE)
 integrator that lives in
 `elliptic-core.js` on the elliptic site and is reused here.
@@ -448,9 +483,10 @@ without proof.
   </li>
   <li>
     <a href="https://moiseevigor.github.io/elliptic/examples/dubins-back-wheel/">
-    Elliptic project — Dubins back wheel</a>.  Shows parking-style horizontal
-    paths whose $\varepsilon \to 0$ limit is exactly the SR geodesic of
-    Part&nbsp;2.
+    Elliptic project — Dubins back wheel</a>.  Shows parking-style
+    piecewise-horizontal reachability paths. Shrinking their commutator loops
+    isolates the Lie-bracket direction; it does not by itself compute an SR
+    minimiser or a pinned elastica.
   </li>
 </ol>
 </div>

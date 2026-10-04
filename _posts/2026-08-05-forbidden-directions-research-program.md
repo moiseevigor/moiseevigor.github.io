@@ -22,7 +22,6 @@ series: preferred-directions
 series_title: "The Geometry of Forbidden Directions"
 series_part: 1
 comments: true
-published: false
 ---
 
 <div class="l-body" markdown="1">
@@ -86,7 +85,7 @@ The diagnostic that separates the rows is the **homogeneous dimension** $Q$, the
 how a small ball grows, $\mathrm{vol}\,B(r)\sim r^{Q}$ — that formula holds where the structure
 is regular; at the singular points themselves (the nulls) $Q$ is defined through the dilation
 weights, and whether the ball volume obeys the same exponent there is an open question
-([Appendix D2](/mathematics/2026/08/18/forbidden-directions-D2-selection-rule/)). A Riemannian space (however anisotropic)
+([Appendix D3](/mathematics/2026/08/19/forbidden-directions-D3-the-law-derived/)). A Riemannian space (however anisotropic)
 has $Q$ equal to its ordinary dimension $n$. A genuinely sub-Riemannian space has $Q > n$ —
 it is "bigger than it looks" because the forbidden direction is expensive to reach. **Slow
 directions do not raise $Q$; forbidden directions do.** Why this matters so much — and why a

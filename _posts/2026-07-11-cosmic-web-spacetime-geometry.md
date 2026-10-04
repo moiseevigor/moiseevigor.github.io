@@ -20,8 +20,8 @@ description: >
 series: geometry-of-cosmic-web
 series_title: "Geometry of the Cosmic Web"
 series_part: 3
+hidden: true
 comments: true
-published: false
 ---
 
 <div class="l-body" markdown="1">
@@ -208,7 +208,7 @@ below lets you watch it accumulate.
 
 <figure class="l-middle" id="fig-holonomy">
   <div style="text-align:center; margin-bottom:0.5em; font-family:'Source Sans 3', sans-serif; font-size:13px; color:#555;">
-    latitude&nbsp;<input type="range" id="hol-lat" min="15" max="88" value="55" style="width:170px; vertical-align:middle; accent-color:#1565c0;">
+    colatitude&nbsp;θ&nbsp;<input type="range" id="hol-lat" min="15" max="88" value="55" style="width:170px; vertical-align:middle; accent-color:#1565c0;">
     &nbsp;&nbsp;transport progress&nbsp;<input type="range" id="hol-phi" min="0" max="100" value="100" style="width:200px; vertical-align:middle; accent-color:#e65100;">
   </div>
   <div id="cw-holonomy" style="text-align:center;"></div>
@@ -219,7 +219,7 @@ below lets you watch it accumulate.
     as far as the surface can tell. The ghost arrow marks its starting direction. After
     a full loop the vector returns <em>rotated</em> — by the <strong>holonomy angle</strong>
     $$\Delta\psi = 2\pi(1 - \cos\theta)$$, which is exactly the solid angle the loop
-    encloses: curvature integrated over area. Drag the latitude toward the pole and the
+    encloses: curvature integrated over area. Drag the loop toward the pole and the
     loop encloses little area — small rotation; push it toward the equator and the enclosed cap
     approaches a hemisphere — deficit approaching $$2\pi$$, a full turn back to identity,
     as befits the equator being a geodesic. On a flat sheet the
@@ -465,8 +465,9 @@ theory**.
     axis, $$e_3$$, points out of the screen). Positive eigenvalue = compression along
     that eigenvector (arrows). Signs give the morphology of
     <a href="/mathematics/2026/07/07/cosmic-web-B2-tidal-frame/">Appendix&nbsp;B2</a>:
-    both positive → collapsing toward a <em>node</em>; mixed → one axis collapsing, one
-    expanding — a <em>filament</em> cross-section; both negative → a <em>void</em>. Push
+    both positive → a <em>filament</em> cross-section (axis $$e_3$$; a <em>node</em> if $$\lambda_3$$ is
+    positive too); mixed → one axis collapsing, one expanding — a <em>wall</em> seen edge-on;
+    both negative → a <em>void</em>. Push
     $$D\lambda_1 \to 1$$ and the ellipse degenerates to a line: the first caustic — a
     Zel'dovich pancake — forms (§6). The readout tracks the density factor
     $$1/\prod(1-D\lambda_i)$$ in this plane, which diverges exactly at the caustic.
@@ -536,8 +537,8 @@ theory**.
     // morphology by signs (B2 classification, this plane; e3 out of screen)
     let morph;
     if (caustic) morph = "<strong style='color:#c53030'>caustic! an axis has collapsed — a Zel'dovich pancake forms</strong>";
-    else if (lmin > 0) morph = "both axes collapsing → <strong>node-forming</strong> region";
-    else if (lmax > 0) morph = "one axis collapsing, one expanding → <strong>filament</strong> cross-section (axis = e₃, out of screen)";
+    else if (lmin > 0) morph = "both axes collapsing → <strong>filament</strong> cross-section (axis = e₃, out of screen; a node if λ₃ &gt; 0 too)";
+    else if (lmax > 0) morph = "one axis collapsing, one expanding → <strong>wall</strong> (pancake) seen edge-on";
     else morph = "both axes expanding → <strong>void</strong>";
     const dens = 1 / (s1 * s2);
     readout.innerHTML = morph +
@@ -668,7 +669,7 @@ completely — the geometry of a black-hole horizon. Each corner, gauged by the 
   <div id="cw-cone" style="text-align:center;"></div>
   <div id="cone-readout" style="text-align:center; font-family:'Source Sans 3', sans-serif; font-size:13.5px; color:#333; margin-top:10px; min-height:2.6em;"></div>
   <figcaption>
-    <strong>One family, dialed by the speed of light.</strong> The wedge is the set of
+    <strong>One family, dialled by the speed of light.</strong> The wedge is the set of
     events a signal can reach from the centre — the future "light cone". At left
     (<em>c</em> → ∞) it opens flat: you can reach anywhere <em>now</em>, time is absolute,
     and space is the Euclidean group $$\mathrm{SE}(3)$$ — the geometry this series used.

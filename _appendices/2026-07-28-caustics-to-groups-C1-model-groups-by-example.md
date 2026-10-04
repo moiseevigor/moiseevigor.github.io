@@ -21,7 +21,6 @@ series: caustics-to-groups
 series_title: "From Caustics to Groups"
 series_part: C1
 permalink: /mathematics/2026/07/28/caustics-to-groups-C1-model-groups-by-example/
-published: false
 comments: true
 ---
 

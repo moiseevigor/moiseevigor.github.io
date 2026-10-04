@@ -20,7 +20,6 @@ series: geometry-of-cosmic-web
 series_title: "Geometry of the Cosmic Web"
 series_part: B4
 permalink: /mathematics/2026/07/09/cosmic-web-B4-transverse-damping/
-published: false
 comments: true
 ---
 
@@ -75,7 +74,7 @@ transverse components hedges that frame noise better than trusting it.
 
 - **E4 — the measurement.** The residual between true particle-mesh (PM)
   N-body transport and each particle's own Zel'dovich (ZA) prediction is
-  large near the web (RMS ≈ 4.4 voxels within 2 voxels of spines) and
+  large near the web (RMS ≈ 4.4 voxels along $$e_3$$ alone within 2 voxels of spines) and
   points *across* the filament axis at every distance: the needed
   correction is transverse arrest (full table in Appendix B2).
 - **E5 — the first model.** ZA rays + full transverse damping with proxy
@@ -236,7 +235,7 @@ smaller native-voxel numbers are a unit artifact, converted above.
 ## Field-level fidelity
 
 Density fields against PM truth, 3 seeds (E8, E9). The cross-correlation r(k)
-measures phase/structure fidelity at wavenumber k, in h/Mpc (1 = perfect);
+measures phase/structure fidelity at wavenumber k, in h Mpc⁻¹ (1 = perfect);
 the transfer function T(k) measures amplitude fidelity (1 = unbiased).
 
 | k | r: ZA | r: 2LPT | r: MUSCLE | r: damp | T: ZA | T: 2LPT | T: MUSCLE | T: damp |
@@ -260,10 +259,10 @@ the truth itself was audited. Time convergence: doubling to 180 steps
 shifts the median final position by 0.008 voxels and leaves the comparison
 invariant (E10). External validation: evolved from the CAMELS CV_0 initial
 conditions, the PM integrator reproduces the official final particle
-positions to a median matched-ID offset of **0.41 Mpc/h** against both
+positions to a median matched-ID offset of **0.41 h⁻¹Mpc** against both
 Arepo and MP-Gadget — and those two production codes agree with each other
-to **0.029 Mpc/h** median (E12). The hierarchy is what matters: code
-consensus 0.03 ≪ our PM offset 0.41 ≪ measured effects 4–5 Mpc/h.
+to **0.029 h⁻¹Mpc** median (E12). The hierarchy is what matters: code
+consensus 0.03 ≪ our PM offset 0.41 ≪ measured effects 4–5 h⁻¹Mpc.
 
 ## Limitations
 
@@ -300,7 +299,7 @@ make truth-validation   # E10 convergence; E12 external checks
 
 ## Back to the series
 
-Back to the series: [The Geometry of the Cosmic Web: A Research Program](/mathematics/2026/07/03/geometry-of-cosmic-web-research-program/) · [Two Ways to See a Cosmic Filament](/mathematics/2026/07/04/cosmic-web-two-models/).
+Back to the series: [The Geometry of the Cosmic Web: A Research Program](/mathematics/2026/07/03/geometry-of-cosmic-web-research-program/) · [Two Ways to See a Cosmic Filament](/mathematics/2026/07/04/cosmic-web-two-models/) · [From Cosmic Filaments to Curved Spacetime](/mathematics/2026/07/11/cosmic-web-spacetime-geometry/).
 
 </div><!-- /.l-body -->
 

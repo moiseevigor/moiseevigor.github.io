@@ -22,7 +22,6 @@ series: caustics-to-groups
 series_title: "From Caustics to Groups"
 series_part: 1
 comments: true
-published: false
 ---
 
 <div class="l-body" markdown="1">
@@ -57,13 +56,16 @@ what narrow "yes" survives it.* That structure — a sharp obstruction plus a
 three-part escape from it — is the scientific content of the series. The rest of
 this page makes it precise.
 
-**The planned arc.** Part 1 *(this page)* scopes the program. **Part 2** *(upcoming)*
+**The planned arc.** Part 1 *(this page)* scopes the program.
+**[Part 2]({% post_url 2026-07-18-caustics-to-groups-forward-map %})**
 builds the forward model — the caustics of the model groups Heisenberg, $\mathrm{SE}(2)$,
-Engel, and Cartan, with their explicit conjugate loci. **Part 3** *(upcoming)* builds
+Engel, and Cartan, with their explicit conjugate loci.
+**[Part 3]({% post_url 2026-07-22-caustics-to-groups-inverse-map %})** builds
 the inverse map — the three-component fingerprint, the classifier, and the first
-confusion matrix. **Part 4** *(upcoming)* takes the surviving method into the wild:
+confusion matrix. **[Part 4]({% post_url 2026-07-26-caustics-to-groups-in-the-wild %})**
+takes the surviving method into the wild:
 diffusion-MRI orientation fields, and the cosmic web as the stress test that shows
-*where the method must stay silent.* Theory background lands in appendices C1–C5.
+*where the method must stay silent.* Theory background lands in appendices C1–C6.
 
 ## The question, made precise
 

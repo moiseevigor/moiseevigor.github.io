@@ -18,7 +18,6 @@ series: preferred-directions
 series_title: "The Geometry of Forbidden Directions"
 series_part: D2
 permalink: /mathematics/2026/08/18/forbidden-directions-D2-selection-rule/
-published: false
 comments: true
 ---
 
@@ -139,4 +138,5 @@ the refusal to confuse them with the first three.
   Applications</em>. AMS. (Chow–Rashevskii, Frobenius, the Ball–Box theorem.)
 - A. Bellaïche (1996). "The tangent space in sub-Riemannian geometry." Progr. Math. 144,
   Birkhäuser. (Homogeneous dimension.)
+
 </div><!-- /.l-body -->

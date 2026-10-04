@@ -18,7 +18,6 @@ series: caustics-to-groups
 series_title: "From Caustics to Groups"
 series_part: C3
 permalink: /mathematics/2026/07/30/caustics-to-groups-C3-tangent-cone-growth-vectors/
-published: false
 comments: true
 ---
 

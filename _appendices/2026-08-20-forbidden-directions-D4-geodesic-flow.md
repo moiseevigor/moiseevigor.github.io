@@ -18,7 +18,6 @@ series: preferred-directions
 series_title: "The Geometry of Forbidden Directions"
 series_part: D4
 permalink: /mathematics/2026/08/20/forbidden-directions-D4-geodesic-flow/
-published: false
 comments: true
 ---
 
@@ -117,4 +116,5 @@ geometry rather than a gauge artefact — the same gauge discipline flagged in A
   motions of a plane." <em>ESAIM: COCV</em> 16, 1018–1039.
   <a href="https://arxiv.org/abs/0903.0727">arXiv:0903.0727</a>.
 - L. D. Landau &amp; E. M. Lifshitz. <em>The Classical Theory of Fields</em>. (Larmor motion.)
+
 </div><!-- /.l-body -->

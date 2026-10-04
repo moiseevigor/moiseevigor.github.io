@@ -18,11 +18,11 @@ description: >
 series: geometry-of-seeing
 series_title: "Geometry of Seeing"
 series_part: 4
+hidden: true
 arxiv: "0903.0727"
 coauthors: "Yu. L. Sachkov"
 comments: true
 permalink: /mathematics/2026/05/15/geometry-of-seeing-cut-time-open-problem/
-published: false
 ---
 
 <div class="l-body" markdown="1">
@@ -187,63 +187,43 @@ point is the origin itself.
 
 <div class="l-body" markdown="1">
 
-## What is not yet fully settled
+## What remains open — and what does not
 
-So if $\mathrm{SE}(2)$ is solved, where is the "open problem" of the title? It lives in
-three places, and honesty requires naming them precisely rather than gesturing at mystery.
-
-### 1. The degenerate strata
-
-The clean derivation used the *inflectional* family and one mirror. The full extremal
-set also contains the **non-inflectional** family (rotating pendulum, cut at
-$2kp_1^1(k)$ — a transcendental root, not a complete integral) and the **separatrix**
-(the borderline family, $k \to 1$, optimal forever), plus the **abnormal** extremals.
-For these, the Maxwell-stratum bookkeeping is more delicate: the symmetry group acts with
-degeneracies, some strata collide, and the tidy half-period answer of the generic family
-needs case-by-case care.
-Sachkov's papers handle them family by family, but the analysis is intricate and not
-reducible to the one-line calculation that works for the generic case — and what stays
-delicate is making the treatment *uniform* across the seams where the families meet.
+$\mathrm{SE}(2)$ itself is solved. Sachkov's synthesis includes the oscillating,
+rotating, critical, and equilibrium regimes and gives the global cut locus. The
+rotating formula $2kp_1^1(k)$ is less elementary than $2K(k^2)$, but
+"transcendental" does not mean "unproved." Likewise, the divergence
+$2K(k^2)\to\infty$ as $k\to1^-$ is a limiting feature of the proved synthesis,
+not a residual numerical seam.
 
 <aside id="note-abnormal">
-An <strong>abnormal extremal</strong> is a candidate geodesic on which the Pontryagin
-Hamiltonian degenerates (the multiplier $\nu = 0$ of Part&nbsp;2). On $\mathrm{SE}(2)$ they exist
-but are never strictly optimal — yet ruling them out rigorously, uniformly, is part of what
-makes a complete proof hard, and it is the standard sticking point in higher-dimensional
-sub-Riemannian problems.
+An <strong>abnormal extremal</strong> is a Pontryagin extremal with zero cost
+multiplier. In a three-dimensional contact sub-Riemannian structure such as this
+one, there are no nonconstant abnormal horizontal extremals: annihilating
+$X_1$ and $X_2$ and preserving those constraints forces the covector also to
+annihilate $[X_1,X_2]$, hence the whole tangent space. This is different from the
+Martinet distribution discussed in the [magnetic-flux article](/articles/magnetic-flux-lifts/), where the contact
+condition fails on a surface and strictly abnormal minimisers can live there.
 </aside>
 
-### 2. The separatrix limit
+### The broader structural question
 
-As $k \to 1^-$, $2K(k^2) \to \infty$: the cut time runs off to infinity and the
-inflectional geodesic degenerates into the borderline family, which stays optimal forever.
-Statements that are uniform in $k$
-on $(0,1)$ can fail to extend cleanly to the closed endpoint. The behaviour of the cut locus
-*at* the <span class="annotated-term" data-note="note-abnormal">abnormal</span>/separatrix boundary — the seam between families — is where numerical
-confidence outruns fully uniform proof, and it is the concrete residue behind the "complete
-proof in all degenerate cases remains open" caveat we flagged back in Part&nbsp;1.
-
-### 3. The general conjecture
-
-Zoom out from $\mathrm{SE}(2)$ and the real open problem appears. Across left-invariant
-sub-Riemannian problems on Lie groups, the same pattern recurs: **the cut time equals the
-first Maxwell time**, $t_{\mathrm{cut}} = t_{\mathrm{MAX}}^1$. It has been *proved
-case-by-case* — the Heisenberg group, $\mathrm{SO}(3)$, $\mathrm{SL}(2)$, the Engel group,
-and $\mathrm{SE}(2)$ here — each a separate, hard paper. What is missing is a **general
-theorem**: structural conditions on a symmetric sub-Riemannian problem guaranteeing that
-Maxwell strata capture the entire cut locus, with no exotic non-symmetric cut points hiding
-elsewhere. That theorem does not exist. Each new group is still, to date, its own
-project.
+Zoom out from $\mathrm{SE}(2)$ and a defensible open direction appears. In several
+highly symmetric left-invariant sub-Riemannian problems, a first Maxwell time generated
+by an explicit discrete or continuous symmetry turns out to equal the cut time. This is
+not a universal law for arbitrary left-invariant structures: conjugate points or
+non-symmetry-related competitors may intervene. What is missing is a useful theorem with
+checkable hypotheses — on the symmetry action, conjugate-time bounds, properness, and the
+global topology of the exponential map — under which a specified Maxwell family exhausts
+the cut mechanism.
 
 <div class="callout open-problem">
 <div class="callout-title">Open Problem</div>
-Is there a general theorem — a checkable condition on a left-invariant sub-Riemannian
-structure — under which the cut time equals the first Maxwell time
-$t_{\mathrm{cut}} = t_{\mathrm{MAX}}^1$ for <em>every</em> geodesic, with the Maxwell strata
-exhausting the cut locus? It is <em>conjectured</em> and verified numerically for a growing
-list of groups (Heisenberg, $\mathrm{SO}(3)$, $\mathrm{SL}(2)$, $\mathrm{SE}(2)$), but proved
-only one group at a time. $\mathrm{SE}(2)$ — the visual cortex's geometry — is the richest
-worked example, not the general answer.
+Find verifiable sufficient conditions for a symmetric left-invariant sub-Riemannian
+problem under which a named first Maxwell family gives the cut time along every
+geodesic and its strata exhaust the cut locus. The known examples motivate the
+question, but no universality claim is made outside such a precisely specified class.
+$\mathrm{SE}(2)$ is a rich worked example, not the general answer.
 </div>
 
 ## Status of the problem, honestly
@@ -253,8 +233,8 @@ worked example, not the general answer.
 | $t_{\mathrm{cut}} = \mathfrak t(\lambda)$; on the inflectional family $2K(k^2)$ | **Proved** (Sachkov 2010–2011) |
 | No conjugate points on the inflectional & critical families ($t_{\mathrm{conj}} = \infty$); rotating family pinched in $[2kp_1^1, \min(4kK, 2kp_1^{\alpha_1})]$ | **Proved** |
 | Full cut locus & optimal synthesis on $\mathrm{SE}(2)$ | **Proved**, all families |
-| Uniformity of the synthesis into the separatrix limit $k\to 1$ | Numerically solid; delicate to state uniformly |
-| Complete rigour across the degenerate/abnormal seams | The Part&nbsp;1 caveat: verified numerically; a fully uniform proof at the seams remains open |
+| Critical and equilibrium regimes, including the $k\to1$ boundary | **Included in the proved synthesis** |
+| Nonconstant abnormal extremals for this contact structure | **Absent** |
 | General "Maxwell $=$ cut" theorem for left-invariant SR problems | **Open** — proved only case-by-case |
 
 The line to hold onto: **$\mathrm{SE}(2)$ itself is solved.** For the visual cortex's

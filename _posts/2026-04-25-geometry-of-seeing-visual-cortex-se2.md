@@ -3,17 +3,15 @@ layout: distill
 image: /public/img/posts/geometry-seeing-1.svg
 title: "The Visual Cortex as a Contact Manifold"
 subtitle: >
-  Your brain fills in contours that do not exist. Jean Petitot showed in 2003 that
-  this visual completion is equivalent to finding shortest paths on the Lie group
-  SE(2) — the group of rigid motions of the plane — equipped with a sub-Riemannian
-  metric whose geodesics are Euler's elastica, parametrised by Jacobi elliptic functions.
+  Your brain fills in contours that do not exist. Petitot's neurogeometry models
+  oriented cortical states by a contact bundle; this article separates the free
+  sub-Riemannian geodesics from their smooth Euler-elastica siblings.
 date: 2026-04-25 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, SE2, visual-cortex, elliptic-functions, optimal-control]
 description: >
   Petitot's 2003 model of primary visual cortex V1 as a contact manifold on SE(2),
-  the sub-Riemannian metric, and how optimal contour completion reduces to geodesics
-  parametrised by Jacobi elliptic functions.
+  the sub-Riemannian metric, and two related variational models of contour completion.
 series: geometry-of-seeing
 series_title: "Geometry of Seeing"
 series_part: 1
@@ -26,13 +24,12 @@ comments: true
 
 <div class="callout">
 <div class="callout-title">What this article covers</div>
-Why the primary visual cortex computes shortest paths in a non-Euclidean geometry.
-We develop the mathematical model step by step — from the illusion that motivates it,
-through the neuroscience, to the sub-Riemannian structure on SE(2) whose geodesics
-are Euler's elastica.
-The <strong>payoff</strong>: those geodesics are parametrised by Jacobi elliptic functions
-$\mathrm{sn}(s\mid k^2)$, and their spatial period is $4K(k^2)$ — the complete
-elliptic integral of the first kind.
+How a neurogeometric model represents orientation-selective cortical architecture by
+a non-Euclidean contact geometry. We proceed from the illusion that motivates the model
+to the sub-Riemannian structure on SE(2), then separate its free, generically cuspidal
+geodesics from the smooth pinned Euler elastica. The <strong>payoff</strong>: both share
+one pendulum reduction, while the elastica curvature is parametrised by Jacobi elliptic
+functions and has period $4K(k^2)$.
 </div>
 
 ## The Illusion That Started Everything
@@ -109,7 +106,7 @@ in V1 respond selectively to oriented edges: a neuron fires most vigorously when
 bar of light oriented at a particular angle passes through a small region of the
 visual field.
 
-Each V1 neuron can be characterised by three numbers:
+At the resolution of this idealised orientation-column model, a cortical state is characterised by:
 $$\text{position }(x, y) \in \mathbb{R}^2 \quad\text{and}\quad
   \text{preferred orientation }\theta \in [0, \pi).$$
 
@@ -152,7 +149,7 @@ Colours encode the orientation angle on a $[0, \pi)$ hue wheel.
       <label class="v1-type">
         <input type="checkbox" id="v1-show-separatrix">
         <span class="v1-swatch" style="background:#c62828"></span>
-        Euler spiral
+        Borderline elastica
       </label>
       <label class="v1-type">
         <input type="checkbox" id="v1-show-maxwell">
@@ -169,32 +166,31 @@ Colours encode the orientation angle on a $[0, \pi)$ hue wheel.
   <figcaption>
     <strong class="figure-label"></strong>
     Schematic orientation map of a patch of V1.
-    Each line segment represents one neuron at position $(x,y)$, oriented at its
+    Each line segment represents an idealised orientation-selective cortical state at position $(x,y)$, oriented at its
     preferred angle $\theta$ (colour encodes $\theta$ via a hue wheel); the
     orientation field is smooth almost everywhere, with a pinwheel singularity
     near the centre of the patch.
-    Tick the boxes to overlay <strong>true sub-Riemannian geodesics</strong> on
-    $\mathrm{SE}(2)$, integrated from the SR control ODE
-    $(\dot x, \dot y, \dot\theta) = (\cos\theta, \sin\theta, \kappa(s))$ — each
-    curve is a real elastica solving the SR boundary-value problem from the
-    source neuron to the target neuron's $(x, y, \theta)$, with the
+    Tick the boxes to overlay <strong>pinned Euler-elastica candidates</strong>,
+    integrated from $(\dot x, \dot y, \dot\theta) =
+    (\cos\theta, \sin\theta, \kappa(s))$. These smooth curves solve the
+    pinned-forward-speed problem; they are not the generically cuspidal planar
+    projections of free SR geodesics. Each solves a tangent-matching boundary-value
+    problem from the source state to the target state's $(x,y,[\theta])$, with the
     target-tangent residual driven to $0$ (mod $\pi$) by a damped Newton.
-    All four start at the blue source neuron, tangent to the source's preferred
-    orientation, and end exactly tangent to the target neuron's stroke.
+    All four start at the blue source state, tangent to its preferred
+    orientation, and end exactly tangent to the target state's stroke.
     The endpoint of each curve is highlighted with the family's colour, and the
-    label gives the modulus and the SR length $L = \int\!\sqrt{u_1^2 + u_2^2}\,dt$
-    in pixels.
-    The four families exhaust the regimes of the SE(2) geodesic flow:
+    label gives the modulus and plane arc length $L$ in pixels.
+    The first three families display the pendulum regimes of the pinned problem:
     <strong>inflectional</strong> ($-1\!&lt;\!E\!&lt;\!1$) —
     $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^{2})$, generic S-shaped curve;
     <strong>non-inflectional</strong> ($E\!&gt;\!1$) —
     $\kappa(s) = 2\,\mathrm{dn}(s\mid m)$, one-signed curvature, wavy-circle shape;
-    <strong>Euler spiral</strong> ($E = 1$) —
+    <strong>borderline elastica</strong> ($E = 1$) —
     $\kappa(s) = 2\,\mathrm{sech}\,s$, the separatrix between the two regimes;
-    <strong>Maxwell pair</strong> — the two geodesics
-    $\kappa$ and $-\kappa$ related by the SE(2) symmetry $\sigma$, with provably
-    equal SR length, demonstrating the non-uniqueness of optimal completions
-    that Part&nbsp;3 makes precise.
+    <strong>elastica mirror pair</strong> — two pinned extremals with curvatures
+    $\kappa$ and $-\kappa$. Their tie after $4K(k^2)$ illustrates the reflection
+    mechanism, but it is not the free-SR cut event at $2K(k^2)$.
   </figcaption>
 </figure>
 
@@ -221,7 +217,7 @@ is tangent to both elements.
 ## Petitot's Insight: V1 Is a Contact Bundle
 
 Jean Petitot (1999, 2003) made the key observation:
-the data $(x, y, \theta)$ encoding every neuron in V1 — together with the horizontal
+the idealised data $(x,y,[\theta])$ encoding an orientation-selective cortical state — together with the horizontal
 connectivity pattern just described — is not a 2D image map.
 It is a 3-dimensional **contact manifold**.
 
@@ -232,8 +228,11 @@ third direction, so any two points can be connected by a horizontal curve
 (Chow–Rashevskii theorem).
 </aside>
 
-Specifically: the set of triples $(x, y, \theta) \in \mathbb{R}^2 \times S^1$ is
-the total space of a circle bundle over the retinal plane.
+Specifically, unoriented edge elements live in
+$\mathbb{R}^2\times\mathbb P^1$, because $\theta$ and $\theta+\pi$ label the same line.
+For calculation we lift to the oriented double cover
+$(x,y,\theta)\in\mathbb{R}^2\times S^1\cong\mathrm{SE}(2)$, where opposite
+headings remain distinct.
 It carries a **contact structure** $\xi = \ker(\sin\theta\,dx - \cos\theta\,dy)$:
 the constraint that a curve $(x(t), y(t), \theta(t))$ can only move *horizontally*
 (forward in direction $\theta$, or rotate in place) — it cannot slide sideways.
@@ -243,8 +242,17 @@ direction the neuron prefers:
 $$\dot x = u_1 \cos\theta, \quad \dot y = u_1 \sin\theta, \quad \dot\theta = u_2.$$
 
 The bundle $(\mathbb{R}^2 \times S^1, \xi)$ is canonically isomorphic (as a contact
-manifold) to the *unit cotangent bundle* $ST^*\mathbb{R}^2$, and its symmetry group
-is SE(2) — the Lie group of orientation-preserving rigid motions of the plane.
+manifold) to the *unit cotangent bundle* $ST^*\mathbb{R}^2$ and can be identified
+with SE(2), the Lie group of orientation-preserving rigid motions of the plane.
+
+<aside id="note-oriented-cover">
+A <strong>heading</strong> and a <strong>line orientation</strong> are different data.
+SE(2) remembers the arrow: $\theta$ and $\theta+\pi$ are different points. The
+cortical line bundle forgets it: $[\theta]=[\theta+\pi]$. A solver may work on
+SE(2) and compare its final orientation modulo $\pi$, but a Maxwell or cut theorem
+on SE(2) does not automatically descend to the quotient; one must check which lifted
+endpoints the quotient identifies.
+</aside>
 
 ## The Lie Group SE(2)
 
@@ -261,8 +269,8 @@ See Appendix A1 for the full Lie-group setup.
 
 A point of <span class="annotated-term" data-note="note-se2-group">$\mathrm{SE}(2)$</span> is a triple $(x, y, \theta)$: a *position*
 $(x, y) \in \mathbb{R}^2$ together with an *orientation* $\theta \in S^1$.
-This is exactly the data describing one V1 neuron in Figure&nbsp;2 — its retinal
-position and its preferred edge orientation. As a $3\times3$ matrix the
+This is the oriented double-cover data used for one idealised cortical state in
+Figure&nbsp;2. As a $3\times3$ matrix the
 configuration $g$ acts on the plane as a rotation followed by a translation:
 
 $$g \;=\; \begin{pmatrix} \cos\theta & -\sin\theta & x \\
@@ -382,14 +390,14 @@ direction the two horizontal moves cannot reach on their own.
     </div>
   </div>
   <figcaption>
-    <strong>Figure&nbsp;3.</strong> The moving Frenet–Serret frame along an
-    $\mathrm{SE}(2)$ sub-Riemannian geodesic. Drag the slider to advance the
+    <strong>Figure&nbsp;3.</strong> The moving Frenet–Serret frame along a
+    pinned Euler-elastica candidate. Drag the slider to advance the
     arc-length parameter $s \in [0, L]$ along one of the BVP-solved
     trajectories (use the dropdown to switch). At every $s$ the figure shows
     the planar position $(x(s), y(s))$ on the orientation field and the
     moving frame $\{T(s), N(s)\}$ — both arrows always labelled:
     $T = (\cos\theta(s), \sin\theta(s)) = X_1\!\restriction_{\gamma(s)}$,
-    the horizontal direction the SR control law drives along, and
+    the forward horizontal direction, and
     $N = (-\sin\theta(s), \cos\theta(s)) = X_3\!\restriction_{\gamma(s)}$,
     the perpendicular direction that is <em>only</em> reachable through the
     Lie bracket $[X_1, X_2]$.
@@ -397,18 +405,18 @@ direction the two horizontal moves cannot reach on their own.
     <strong>Why the green field stroke is tangent at the endpoints but not
     in between.</strong> The green stroke at the moving point is
     $\theta_{\mathrm{field}}(x(s), y(s))$ — the orientation that the
-    <em>cortex</em> assigns to the neuron sitting at the planar position
+    <em>model orientation field</em> assigns at the planar position
     $(x(s), y(s))$. The blue arrow $T$ is the orientation that the
-    <em>geodesic</em> happens to have at this $s$. These are two different
+        <em>candidate curve</em> happens to have at this $s$. These are two different
     things:
     <ul style="margin:6px 0 6px 18px;font-family:inherit;font-size:inherit;">
       <li>The orientation field $\theta_{\mathrm{field}}$ is a fixed
         scalar function on the $(x, y)$ retinal plane — it labels each
         cortical column with its preferred orientation.</li>
-      <li>The geodesic's tangent $\theta(s)$ is the third coordinate of a
-        curve in the 3-D contact bundle $\mathrm{SE}(2)$. It is determined
-        by Pontryagin's maximum principle (i.e. by the SR Hamiltonian flow,
-        which gives $\kappa(s) = d\theta/ds$ as one of the elastica functions)
+      <li>The candidate's tangent $\theta(s)$ is the third coordinate of a
+        curve in the 3-D contact bundle $\mathrm{SE}(2)$. In this figure it is
+        reconstructed from a pinned elastica curvature profile
+        $\kappa(s)=d\theta/ds$
         — <em>not</em> by what the field happens to read at $(x(s), y(s))$.</li>
     </ul>
     The boundary value problem only forces equality at the two ends:
@@ -416,29 +424,30 @@ direction the two horizontal moves cannot reach on their own.
     $\theta(L) = \theta_{\mathrm{field}}(\text{target})$, because that is
     what "connect these two neurons" means — start and finish on the
     cortical columns the field assigns. In between the two ends, the
-    geodesic is free to leave the field's prescription. Watching $\Delta\theta$
+    candidate is free to leave the field's prescription. Watching $\Delta\theta$
     as you drag the slider, you see it go from $0°$ at $s = 0$ to a non-zero
     excursion in the middle and back to $0°$ at $s = L$ — that excursion is
     the <em>cost of horizontality</em>: the curve has to keep
     $\dot\theta = \kappa$, $\dot x = u\cos\theta$, $\dot y = u\sin\theta$
-    consistent with the SR ODE, and the cortical orientation field plays no
+    consistent with the horizontal reconstruction ODE, and the cortical orientation field plays no
     role in that constraint.
     <br><br>
     <em>Maxwell-pair mode.</em> When the dropdown is set to the
-    <strong>Maxwell pair</strong>, two frames advance in lock-step along the
+    <strong>elastica mirror pair</strong>, two frames advance in lock-step along the
     two members of the pair $\gamma_A, \gamma_B$ (frame labels become
     $T_A, N_A$ and $T_B, N_B$). Both close back to the source after the same
     arc length $L = 4K(k_c^2)/\omega$, but their final tangents differ by
     exactly $\pi$: $\theta_A(L) - \theta_B(L) = \pi \pmod{2\pi}$.
-    That is the whole point of the pair. The two geodesics are
+    The two pinned elastica are
     <em>reversed-heading</em> partners — they leave the source in opposite
     directions and traverse $\sigma$-mirrored figure-8 loops.
-    Because a V1 neuron's preferred orientation is a <em>line</em>,
+    Because the model's preferred orientation is a <em>line</em>,
     identified mod&nbsp;$\pi$, both endpoint headings $+\theta_{\mathrm{src}}$
-    and $-\theta_{\mathrm{src}}$ represent <em>the same neuron</em>.
-    The pair therefore gives two genuinely distinct closed SR-shortest paths
-    from the source neuron to itself, with identical arc length — a Maxwell
-    pair on $\mathrm{SE}(2)$ (Sachkov, J. Dyn. Control Syst. 2008, Fig.&nbsp;34).
+    and $-\theta_{\mathrm{src}}$ represent the same projective orientation state.
+    The pair therefore gives two distinct pinned extremals with the same projected
+    line-element endpoint and equal arc length. It visualises an elastica Maxwell
+    symmetry (Sachkov, J. Dyn. Control Syst. 2008); it does <em>not</em> assert that
+    these curves are free-SR minimizers or that their $4K$ tie is the SR cut time.
   </figcaption>
 </figure>
 
@@ -466,8 +475,9 @@ satisfies the <span class="annotated-term" data-note="note-hormander"><strong>H�
 **Chow–Rashevskii theorem** (Rashevskii 1938, Chow 1939) any two configurations in
 $\mathrm{SE}(2)$ can therefore be joined by a *horizontal* path — a curve
 whose velocity lies in $\mathcal{H}$ at every point. Geometrically,
-$\mathcal{H}$ is a **contact structure** on $\mathrm{SE}(2)$, and Petitot's
-key insight is that the V1 cortex *is* this contact manifold.
+$\mathcal{H}$ is a **contact structure** on $\mathrm{SE}(2)$. Petitot's model
+proposes that orientation-selective V1 connectivity is usefully idealised as a
+discrete realization of this contact geometry.
 
 ## The Sub-Riemannian Metric and the Minimisation Problem
 
@@ -492,26 +502,29 @@ The **visual completion problem** now takes a precise form:
 
 <div class="callout theorem">
 <div class="callout-title">Problem (Petitot 2003)</div>
-Given two neurons $(x_0, y_0, \theta_0)$ and $(x_1, y_1, \theta_1)$ in V1,
+Given two idealised oriented cortical states $(x_0,y_0,[\theta_0])$ and
+$(x_1,y_1,[\theta_1])$,
 find the horizontal curve $(x(t), y(t), \theta(t))$ in SE(2) of minimum length
-connecting them.
+connecting chosen lifts—or minimize over both endpoint lifts when the projective
+line bundle is the intended state space.
 </div>
 
-The spatial projection $(x(t), y(t))$ of the solution is the **perceptually completed
-contour** that the visual system infers between two oriented line elements
-$(x_0,\theta_0)$ and $(x_1,\theta_1)$.
+The spatial projection $(x(t),y(t))$ is the contour predicted by this model for
+the chosen boundary data. This is a mathematical hypothesis about completion,
+not an assertion that V1 literally solves this homogeneous optimization problem.
 
 Two closely related problems share this setup, and the series will keep them
-carefully apart. *Pinning* $u_1 = 1$ (unit forward speed, so $s$ is arc length and
-$\kappa = u_2$ the signed curvature) turns length-minimisation into the classical
+carefully apart. *Pinning* $u_1=1$ makes $s$ plane arc length and
+$\kappa=u_2$ the signed curvature. At fixed length, the quadratic control energy
+$\tfrac12\int(1+\kappa^2)\,ds$ differs by a constant from the classical
 **Euler elastica problem** — critical curves of the bending energy
 $$\int_0^L \kappa^2(s)\,ds,$$
 whose smooth solutions Part&nbsp;2 parametrises with elliptic functions. The *free*
 sub-Riemannian problem ($u_1$ unconstrained) shares the same pendulum core but its
 plane projections are different curves — generically with **cusps** where the forward
 speed changes sign (Part&nbsp;2 and Appendix&nbsp;A3 make the relation precise). Both
-matter for vision: elastica for smooth completion, the cuspidal geodesics wherever the
-percept must turn on the spot.
+are alternative mathematical models of completion; deciding which better describes
+psychophysics or cortical dynamics is an empirical question.
 
 </div><!-- /.l-body -->
 
@@ -525,7 +538,7 @@ percept must turn on the spot.
         <span class="ctrl-val" id="geodesic-kmax-val">1.00</span>
       </label>
       <span style="font-size:12px; color:#888; margin-left:auto;">
-        $k\!&lt;\!1$ inflectional &nbsp;·&nbsp; $k\!=\!1$ Euler spiral &nbsp;·&nbsp; $k\!&gt;\!1$ non-inflectional
+        $k\!&lt;\!1$ inflectional &nbsp;·&nbsp; $k\!=\!1$ borderline &nbsp;·&nbsp; $k\!&gt;\!1$ non-inflectional
       </span>
     </div>
     <svg id="fig-geodesics" style="width:100%;height:420px;"></svg>
@@ -540,13 +553,15 @@ percept must turn on the spot.
     $k = 1$ — the <strong>borderline (solitary) elastica</strong>, the separatrix
     $\kappa(s) = 2\,\mathrm{sech}\,s$;
     $k > 1$ — <strong>non-inflectional</strong>, $\kappa(s) = 2\,\mathrm{dn}(s\mid m)$
-    with its own modulus $m \in (0, 1)$ (closed-loop curves with one-signed
-    curvature); the slider just sweeps $m$ downward as $k$ runs past&nbsp;1.
+    with its own modulus $m \in (0,1)$ (one-signed periodic curvature; plane
+    closure requires a separate zero-displacement condition); the slider just
+    sweeps $m$ downward as $k$ runs past&nbsp;1.
     Drag the slider to set the maximum $k$ rendered; the vertical bar on the
     right is the colour scale, with the red tick marking the separatrix
-    $k = 1$. As $k \to 1$ the period $4K(k^{2})$ diverges and the inflectional
-    curve spirals inward; as $k$ increases past 1 the non-inflectional curves
-    close up into deformed circles (Part&nbsp;2).
+    $k=1$. As $k\to1$ the period $4K(k^2)$ diverges and the family approaches
+    the non-periodic borderline elastica on bounded intervals. Beyond the
+    separatrix the non-inflectional curves resemble deformed circles, but are
+    not generically closed (Part&nbsp;2).
   </figcaption>
 </figure>
 
@@ -790,9 +805,10 @@ function drawV1() {
     .attr('stroke-width', 1.5).attr('stroke-dasharray', '3,2');
 
   /*
-   * ── REAL sub-Riemannian geodesics on SE(2), from a tangent-matching BVP ─
+   * ── PINNED EULER-ELASTICA CANDIDATES from a tangent-matching BVP ─
    *
-   * Every curve drawn from now on is a TRUE projection of an SE(2) geodesic.
+   * Every curve drawn here is a smooth extremal of the pinned-forward-speed
+   * elastica problem, not a projection of the free SR geodesic flow.
    * The polylines come from `scripts/sr_geodesics_v1.py`, which solves the
    * boundary-value problem
    *
@@ -809,11 +825,11 @@ function drawV1() {
    *
    * The Maxwell pair is built by Sachkov's σ-symmetric construction
    * ("Maxwell strata in Euler's elastic problem", J. Dyn. Control Syst. 2008, Fig. 34):
-   * two inflectional geodesics with κ(s) = ±2k·ω·cn(ω·s | k²) integrated
+   * two inflectional elastica with κ(s) = ±2k·ω·cn(ω·s | k²) integrated
    * over N · 4K(k²)/ω.  By the SE(2) σ-symmetry that negates curvature,
    * both end at the IDENTICAL group element on the source-tangent axis,
    * with IDENTICAL arc length.  k > 1/√2 ≈ 0.707 puts each curve into the
-   * looped/cusped regime; N=2 yields four cusps per curve.
+   * looped/self-intersecting regime; N=2 yields repeated lobes.
    */
 
   // Precomputed BVP data from /public/data/v1_geodesics.json.  Loaded once
@@ -983,7 +999,7 @@ function drawV1() {
       // start AND end at the source neuron, tangent to its preferred
       // orientation; one starts in the +heading direction, the other in
       // the -heading direction (same line orientation, mod π).  Identical
-      // arc length L = N · 4K(k_c²)/ω — a true Maxwell pair on SE(2).
+      // arc length L = N · 4K(k_c²)/ω — an elastica mirror tie, not the free-SR cut.
       if (enabled.maxwell && data.maxwell) {
         const mx = data.maxwell;
         const labA = 'figure-8  k=' + mx.k.toFixed(3) +
@@ -1031,9 +1047,9 @@ function drawV1() {
 
 // ── Figure 3: Geodesic family ─────────────────────────────────────────────
 /*
- * Continuous SE(2) geodesic family parametrised by a single k ∈ (0, K_HI].
+ * Continuous pinned-elastica family parametrised by a single k ∈ (0, K_HI].
  *   k ∈ (0, 1)        inflectional   κ(s) = 2k·cn(s|k²)
- *   k ≈ 1             Euler spiral   κ(s) = 2·sech(s)
+ *   k ≈ 1             borderline elastica   κ(s) = 2·sech(s)
  *   k ∈ (1, K_HI]     non-inflectional with m = 2 − k ∈ (0, 1)
  *                                    κ(s) = 2·dn(s|m)
  * The slider sets the maximum k actually rendered; curves are sampled
@@ -1205,7 +1221,7 @@ function drawGeodesicFamily() {
   if (slider) slider.addEventListener('input', render);
 }
 
-// ── Figure 3: moving Frenet–Serret frame on a real SE(2) geodesic ───────
+// ── Figure 3: moving Frenet–Serret frame on a pinned elastica ───────────
 // All quantities are read from window.__v1Data (the BVP-solved polylines
 // from scripts/sr_geodesics_v1.py) — the figure is a faithful rendering of
 // computed data, not a hand-positioned diagram.  At slider value s the

@@ -19,20 +19,20 @@ description: >
 series: geometry-of-seeing
 series_title: "Geometry of Seeing"
 series_part: 3
+hidden: true
 arxiv: "0807.4731"
 coauthors: "Yu. L. Sachkov"
 comments: true
 permalink: /mathematics/2026/05/05/geometry-of-seeing-maxwell-strata/
-published: false
 ---
 
 <div class="l-body" markdown="1">
 
 <div class="callout">
 <div class="callout-title">What this article covers</div>
-Part&nbsp;2 handed us <em>every</em> geodesic of the visual-cortex geometry — the three
-families of Euler's elastica, written in closed form with Jacobi elliptic functions.
-This part asks the next question: <em>which of them are actually the shortest path?</em>
+Part&nbsp;2 handed us one vertical pendulum and two reconstructions: free SR extremals
+with generically cuspidal projections, and smooth pinned Euler elastica in closed
+Jacobi-elliptic form. This part asks when symmetry produces equal-cost competitors.
 A curve can be perfectly taut locally and still be beaten by a completely different
 curve of the same length. The set of endpoints where that happens — where two distinct
 shortest geodesics <em>tie</em> — is the <strong>Maxwell stratum</strong>. We show it is
@@ -44,8 +44,8 @@ result of the free sub-Riemannian problem, whose cut fires at *half* that (Part&
 
 ## Two ways to stop being optimal
 
-Recall the problem from Part&nbsp;1. The visual cortex completes a broken contour by finding
-the **shortest** horizontal path in $\mathrm{SE}(2)$ between two oriented points — where
+Recall the model from Part&nbsp;1. One proposed completion rule selects a
+**shortest** horizontal path in $\mathrm{SE}(2)$ between two oriented points — where
 "shortest" always means the sub-Riemannian length, the only length the contact geometry
 defines. Part&nbsp;2 solved the *local* equations: one pendulum governs every candidate,
 and its smooth face — the **elastica family**, curvature $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$
@@ -222,9 +222,10 @@ the first one exactly.
 
 ## The first fork, computed exactly
 
-Take the mirror $\varepsilon^2$ and run the mechanism where everything is smooth and
-explicit: on the **elastica family** (Part&nbsp;2's curves; the free SR strata work the
-same way but in costate coordinates — Part&nbsp;4). Apply it to an inflectional elastica
+Take the mirror $\varepsilon^2$ and first illustrate the mechanism where everything is smooth and
+explicit: on the **elastica family** of Part&nbsp;2. The free SR problem has a related
+reflection action on its costate cylinder, but different reconstruction equations and
+a different first-event formula. Apply the planar mirror to an inflectional elastica
 $\gamma_A$ with curvature $\kappa_A(s) = +2k\,\mathrm{cn}(s\mid k^2)$. The image
 $\gamma_B = \varepsilon^2(\gamma_A)$ is the curve with the opposite curvature,
 $\kappa_B(s) = -2k\,\mathrm{cn}(s\mid k^2)$ — a *different* curve (it bends the other
@@ -237,7 +238,7 @@ of $\mathrm{SE}(2)$ — position **and** heading — the two coincide exactly wh
 
 $$y_A(s) = 0 \quad\text{and}\quad \theta_A(s) \equiv 0 \pmod{2\pi}.$$
 
-Part&nbsp;2 gave the closed form (via Appendix A5) for the inflectional geodesic:
+Part&nbsp;2 gave the closed form for this inflectional elastica:
 
 $$y_A(s) = 2k\bigl(1 - \mathrm{cn}(s\mid k^2)\bigr) \;\ge\; 0.$$
 
@@ -303,11 +304,11 @@ heart of the Maxwell-strata theorem of Moiseev–Sachkov (2010).
   </div>
   <figcaption>
     <strong>Figure&nbsp;2. The σ-symmetric pair forks and re-meets.</strong>
-    The blue geodesic ($\kappa = +2k\,\mathrm{cn}$) and its mirror image (red, dashed,
+    The blue pinned elastica ($\kappa = +2k\,\mathrm{cn}$) and its mirror image (red, dashed,
     $\kappa = -2k\,\mathrm{cn}$) leave the origin (black dot) together. Drag $s$ to extend
     them. The vertical guide on the height plot (right) shows $y_A(s) = 2k(1-\mathrm{cn})$,
     the gap to the mirror axis; its first return to zero — marked, at $s = 4K(k^2)$ — is the
-    pair's <strong>Maxwell coincidence</strong>, where the two equal-length curves arrive at
+    pair's <strong>elastica Maxwell coincidence</strong>, where the two equal-length extremals arrive at
     the same $\mathrm{SE}(2)$ point (orange). The slider's arc-length readout turns orange
     once you pass it. Horizontal axis of the left panel: plane $x$; right panel: arc length
     $s$ against height $y_A$ (elastica arc-length units).

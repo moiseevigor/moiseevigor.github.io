@@ -17,7 +17,6 @@ series: preferred-directions
 series_title: "The Geometry of Forbidden Directions"
 series_part: D3
 permalink: /mathematics/2026/08/19/forbidden-directions-D3-the-law-derived/
-published: false
 comments: true
 ---
 
@@ -166,4 +165,5 @@ the only license claimed.
 - A. Nagel, E. M. Stein, S. Wainger (1985). "Balls and metrics defined by vector fields I."
   <em>Acta Math.</em> 155. (The origin of the ball–box estimates.)
 - R. Montgomery (2002). <em>A Tour of Subriemannian Geometries</em>. AMS.
+
 </div><!-- /.l-body -->

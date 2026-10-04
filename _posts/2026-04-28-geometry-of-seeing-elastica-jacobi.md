@@ -17,6 +17,7 @@ description: >
 series: geometry-of-seeing
 series_title: "Geometry of Seeing"
 series_part: 2
+hidden: true
 arxiv: "0807.4731"
 coauthors: "Yu. L. Sachkov"
 comments: true
@@ -230,14 +231,16 @@ Setting the energy $E = 2k^{2} - 1$ with $k \in (0, 1)$, the curvature is
 $$\boxed{\;\kappa(s) = 2k\,\mathrm{cn}(s \mid k^{2})\;}$$
 
 The Jacobi function $\mathrm{cn}(s \mid k^{2})$ has period $4K(k^{2})$ in $s$,
-so the curvature — and hence the curve shape — repeats with spatial period
+so the curvature and tangent repeat with period
 
 $$T_{\kappa} = 4K(k^{2}).$$
 
 As $k \to 0$: $\mathrm{cn}(s\mid 0) = \cos s$ and the elastica approximates a
 cosine-curvature curve (nearly straight).
-As $k \to 1$: $K(1) = \infty$ and the period diverges — the curve spirals inward
-without repeating (the borderline-elastica limit).
+As $k \to 1$: $K(1) = \infty$ and the period diverges; on every fixed compact
+$s$-interval the curve approaches the borderline elastica. A repeated curvature
+profile does **not** by itself imply that the plane curve closes: after one period
+the position may have acquired a nonzero translational drift.
 
 ### The Borderline (Solitary) Elastica ($E = 1$, separatrix)
 
@@ -300,8 +303,9 @@ degenerate into circles of radius $1/2$ (high-energy uniform rotation).
     <strong class="figure-label"></strong>
     <strong>Elastica explorer.</strong>
     Left panel: the curvature $\kappa(s)$ as a function of arc length.
-    Right panel: the corresponding plane curve $(x(s), y(s))$, the spatial projection
-    of the SE(2) geodesic.
+    Right panel: the corresponding plane curve $(x(s), y(s))$ of the
+    <em>pinned Euler-elastica problem</em>. It is not the generically cuspidal
+    projection of a free SE(2) sub-Riemannian geodesic.
     For the inflectional family, zeros of $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$
     coincide with inflection points of the curve; the period is $T_\kappa = 4K(k^2)$.
     Drag the slider to vary $k$ (or $m$); switch families with the dropdown.
@@ -318,8 +322,8 @@ degenerate into circles of radius $1/2$ (high-energy uniform rotation).
     <strong>The period $T_\kappa(k) = 4K(k^2)$ diverges as $k \to 1$.</strong>
     Blue: inflectional period $4K(k^2)$; green: non-inflectional period $2K(m)$
     (plotted vs $k = \sqrt{m}$ for comparison).
-    The vertical asymptote at $k = 1$ corresponds to the borderline elastica — infinite period,
-    infinite total curvature.
+    The vertical asymptote at $k = 1$ corresponds to the borderline elastica:
+    infinite period but finite total turning $\int_{-\infty}^{\infty}2\,\mathrm{sech}(s)\,ds=2\pi$.
     For small $k$: $K(k^2) \approx \pi/2 + \pi k^2/8$, so $T_\kappa \approx 2\pi$
     (nearly circular curvature oscillation).
   </figcaption>
@@ -336,9 +340,9 @@ degenerate into circles of radius $1/2$ (high-energy uniform rotation).
     Closed orbits (blue): libration — inflectional elastica.
     The separatrix (red, $E = 1$): borderline elastica.
     Rotation orbits (green): non-inflectional elastica.
-    Each orbit corresponds to a one-parameter family of SE(2) geodesics;
-    the energy $E$ determines the family, and the initial phase on the orbit
-    determines the individual curve.
+    Each orbit supplies the vertical pendulum data shared by two reconstructions:
+    a family of free SE(2) SR extremals and a family of pinned elastica. The energy
+    determines the regime; the initial phase selects an individual extremal.
   </figcaption>
 </figure>
 
@@ -451,14 +455,17 @@ A few landmarks worth noting:
   This is where the mirror-pair **Maxwell point** of the elastica family lands back
   at the origin (Part&nbsp;3).
 
-- **$k \to 1^-$** (inflectional → borderline): the period $4K(k^2)$ diverges and
-  the curve spirals inward, winding around two limiting points.
+- **$k \to 1^-$** (inflectional → borderline): the period $4K(k^2)$ diverges and,
+  on bounded arc-length intervals, the curve converges to the solitary borderline
+  elastica. There is no finite period left at $k=1$.
 
 - **Borderline elastica** ($k = 1$): curvature $2/\cosh(s)$, total turning $2\pi$.
-  The two asymptotic directions are parallel but offset — the curve never closes.
+  In the standard normalization its two tails approach the same asymptotic line;
+  the complete curve is non-periodic and contains one loop.
 
 - **Non-inflectional, $m = 0.3$**: like a wavy circle — curvature oscillates but
-  never changes sign; the curve closes after a finite arc length.
+  never changes sign. Curvature and tangent repeat after $2K(m)$, but the plane
+  curve closes only when the net displacement over a period also vanishes.
 
 </div><!-- /.l-body -->
 
@@ -490,9 +497,11 @@ A few landmarks worth noting:
 
 ## Summary and Preview of Part&nbsp;3
 
-We have shown that every normal SR geodesic on SE(2) has curvature belonging to
-one of three Jacobi-elliptic families, with the inflectional case
-$\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$ being the generic one.
+We have shown that the reduced pendulum has three Jacobi-elliptic regimes.
+For the pinned reconstruction they give the three smooth Euler-elastica families,
+with inflectional curvature $\kappa(s)=2k\,\mathrm{cn}(s\mid k^2)$. For the free
+SR reconstruction the same pendulum produces different, generically cuspidal plane
+curves whose curvature is not this elastica profile.
 The complete elliptic integral $K(k^2)$ controls the spatial period of the
 curvature, and the closed-form $x(s), y(s)$ involve elliptic integrals of the
 second kind.
@@ -978,7 +987,7 @@ function drawFamilies() {
       .attr('fill', 'none').attr('stroke', col).attr('stroke-width', 1.8);
   });
 
-  // Euler spiral (red)
+  // Borderline elastica (red; not an Euler–Cornu clothoid)
   const eulerPts = integrateElastica(s => 2 / Math.cosh(s), -7, 7, 600);
   const ex0 = eulerPts[0].x, ey0 = eulerPts[0].y;
   g.append('path')

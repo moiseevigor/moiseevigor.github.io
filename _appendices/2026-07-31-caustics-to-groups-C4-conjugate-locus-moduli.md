@@ -18,7 +18,6 @@ series: caustics-to-groups
 series_title: "From Caustics to Groups"
 series_part: C4
 permalink: /mathematics/2026/07/31/caustics-to-groups-C4-conjugate-locus-moduli/
-published: false
 comments: true
 ---
 

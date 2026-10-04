@@ -21,8 +21,8 @@ description: >
 series: caustics-to-groups
 series_title: "From Caustics to Groups"
 series_part: 2
+hidden: true
 comments: true
-published: false
 ---
 
 <div class="l-body" markdown="1">
@@ -34,7 +34,7 @@ scoped the reverse map — caustics in, group out — and named the wall in the 
 caustics are <strong>group-blind</strong>. This post builds the <em>forward</em> map for
 four concrete groups, so we have leakage-free ground truth to reverse. Everything below
 is computed by the code in <code>research/caustics-to-groups/</code>; the figure is drawn
-from its output, not hand-placed. Part 3 will run the inverse.
+from its output, not hand-placed. <a href="{% post_url 2026-07-22-caustics-to-groups-inverse-map %}">Part 3</a> runs the inverse.
 </div>
 
 **One engine, four groups.** A sub-Riemannian group is a rule for moving: at each point
@@ -220,7 +220,7 @@ We now have four groups, their caustics, and a measurable coarse fingerprint tha
 into three classes. What remains is the hard and interesting half: telling **Heisenberg from
 SE(2)** — the two the growth vector declares identical — by how far each one's caustic *deviates*
 from the flat model. That deviation is the nilpotent-deviation statistic, and turning it into a
-working classifier with an honest confusion matrix is **Part 3**.
+working classifier with an honest confusion matrix is **[Part 3]({% post_url 2026-07-22-caustics-to-groups-inverse-map %})**.
 
 [^tangentcone]: The shape a sub-Riemannian geometry approaches when you zoom infinitely far in at a point — always a "Carnot group", the model whose growth vector we are measuring. Two different groups can share one tangent cone, which is exactly why the growth vector cannot always tell them apart.
 

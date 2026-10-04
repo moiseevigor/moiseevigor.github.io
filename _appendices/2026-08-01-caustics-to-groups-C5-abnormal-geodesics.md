@@ -19,7 +19,6 @@ series: caustics-to-groups
 series_title: "From Caustics to Groups"
 series_part: C5
 permalink: /mathematics/2026/08/01/caustics-to-groups-C5-abnormal-geodesics/
-published: false
 comments: true
 ---
 

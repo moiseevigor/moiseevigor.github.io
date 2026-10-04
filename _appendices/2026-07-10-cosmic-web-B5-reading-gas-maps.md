@@ -20,7 +20,6 @@ series: geometry-of-cosmic-web
 series_title: "Geometry of the Cosmic Web"
 series_part: B5
 permalink: /mathematics/2026/07/10/cosmic-web-B5-reading-gas-maps/
-published: false
 comments: true
 ---
 
@@ -60,7 +59,7 @@ electron rest energy, $$n_e$$ the electron density and $$T_e$$ the electron
 temperature. y is dimensionless and, usefully, independent of redshift: a
 parcel of hot gas contributes the same y whether nearby or distant. Galaxy
 clusters reach y ~ 10⁻⁴–10⁻⁵; the warm–hot intergalactic medium (WHIM,
-gas at 10⁵–10⁷ K) sits near y ~ 10⁻⁸ for the *stacked LRG-pair bridges*
+gas at 10⁵–10⁷ K) sits near y ~ 10⁻⁸ for the *stacked luminous-red-galaxy (LRG) pair bridges*
 targeted here (prominent individual intercluster bridges reach
 10⁻⁷–10⁻⁶) — around a hundred times below the noise per pixel of the
 all-sky Planck y map. tSZ is the filament probe of choice because y scales
@@ -134,7 +133,7 @@ physically real (they trace hot gas at high significance), and isolating
     from the spine. Both detectors show gas strongly concentrated on the spine and falling
     outward; the overall stacks reach <strong>9.0σ</strong> (Hessian) and <strong>6.9σ</strong>
     (orientation lift), so the networks are physically real. A halo-mask test showed the
-    signal is dominantly the tracer galaxies' own halo gas — isolating true inter-filament
+    signal is dominantly the tracer galaxies' own halo gas — isolating true inter-halo (filament)
     gas needs a sharper beam (next section). <em>Hover a point for its per-bin
     significance.</em> Numbers from <code>research/cosmic-web/artifacts/e3b_results.json</code>.
   </figcaption>
@@ -267,7 +266,7 @@ still says the bridges are real.
 
 ## Back to the series
 
-Back to the series: [The Geometry of the Cosmic Web: A Research Program](/mathematics/2026/07/03/geometry-of-cosmic-web-research-program/) · [Two Ways to See a Cosmic Filament](/mathematics/2026/07/04/cosmic-web-two-models/).
+Back to the series: [The Geometry of the Cosmic Web: A Research Program](/mathematics/2026/07/03/geometry-of-cosmic-web-research-program/) · [Two Ways to See a Cosmic Filament](/mathematics/2026/07/04/cosmic-web-two-models/) · [From Cosmic Filaments to Curved Spacetime](/mathematics/2026/07/11/cosmic-web-spacetime-geometry/).
 
 </div><!-- /.l-body -->
 

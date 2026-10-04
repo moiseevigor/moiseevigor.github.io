@@ -12,13 +12,12 @@ tags: [sub-riemannian, conjugate-locus, perturbation, dilation, moduli, magnetic
 description: >
   Companion appendix to the Forbidden Directions series: the dilation rescaling that reduces the
   nilpotent deviation to a universal function of ε = |grad ln B| r_L, the perturbation expansion
-  giving δ = −ε² + O(ε⁴), the parity argument, the inversion, and the open analytic question about
-  the quartic coefficient.
+  giving δ = −ε² + O(ε⁴), the parity argument, the inversion, the quartic coefficient 9/4, and
+  the closed form with its one open step.
 series: preferred-directions
 series_title: "The Geometry of Forbidden Directions"
 series_part: D5
 permalink: /mathematics/2026/08/21/forbidden-directions-D5-gradient-formula/
-published: false
 comments: true
 ---
 
@@ -110,8 +109,7 @@ gradient. This is the sense in which the caustic *reads* the field, and it is th
 demonstration of the nilpotent-deviation statistic against a physical ground truth.
 
 One profile qualifier, established in the
-[companion article](/articles/magnetic-flux-lifts/) (§4) after this appendix was first
-written: the leading coefficient $c_2 = 1$ is a property of the *exponential* profile,
+[companion article](/articles/magnetic-flux-lifts/) (§4): the leading coefficient $c_2 = 1$ is a property of the *exponential* profile,
 not of the statistic. With $\beta = (\ln B)''/[(\ln B)']^2$ the dimensionless profile
 curvature at the launch point, the caustic law is $c_2 = 1 - \tfrac34\beta$ —
 *derived* by exact second-order perturbation of the Jacobian zero (article Prop. 4.2,
@@ -210,7 +208,7 @@ $$
 $$
 
 Gauss's integral $\int_0^\infty dt/\sqrt{(t^2+a^2)(t^2+b^2)} = K(k)/a$ (with
-$a \ge b$, $k^2 = 1-b^2/a^2$; equivalently $\pi/2\,\mathrm{AGM}(a,b)$) applies with
+$a \ge b$, $k^2 = 1-b^2/a^2$; equivalently $\pi/(2\,\mathrm{AGM}(a,b))$) applies with
 $a = q^{-1} > p$, and the modulus collapses:
 $k^2 = 1 - p^2q^2 = 1-(1-2\varepsilon)(1+2\varepsilon) = 4\varepsilon^2$, i.e.
 $k = 2\varepsilon$, while the prefactor $(4/q)\cdot q = 4$. Hence the average is
@@ -243,7 +241,7 @@ band $\sin\theta_0 \ge (1-\varepsilon)/\varepsilon$ no conjugate point is detect
 within the integration window of eight reference periods ($9/64$ angles
 at $\varepsilon = 0.52$, $13/64$ at $0.55$ — finite-horizon evidence, not a proof those
 orbits never refocus), while every other angle keeps one, still
-equal to its period to $5\times10^{-5}$. So the precise statement separates three
+equal to its period to $5\times10^{-5}$. So the precise statement separates four
 claims: **at $\varepsilon = 1/2$ the launch-averaged period diverges — a theorem; the
 slowest launch directions stop refocusing on the measured horizon — finite-horizon
 evidence; that the launch-averaged *refocusing* time diverges with the period is
@@ -280,4 +278,5 @@ not settled either way. Both caveats bound the novelty claim; neither touches th
   Control Syst.</em> 18, 21–44. <a href="https://arxiv.org/abs/1007.4970">arXiv:1007.4970</a>.
 - El-H. Chakir El-Alaoui, J.-P. Gauthier &amp; I. Kupka (1996). "Small sub-Riemannian balls on
   $\mathbb{R}^3$." <em>J. Dyn. Control Syst.</em> 2, 359–421.
+
 </div><!-- /.l-body -->

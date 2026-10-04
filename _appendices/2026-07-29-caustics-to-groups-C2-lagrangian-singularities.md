@@ -18,7 +18,6 @@ series: caustics-to-groups
 series_title: "From Caustics to Groups"
 series_part: C2
 permalink: /mathematics/2026/07/29/caustics-to-groups-C2-lagrangian-singularities/
-published: false
 comments: true
 ---
 

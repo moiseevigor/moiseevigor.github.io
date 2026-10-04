@@ -19,7 +19,6 @@ series: geometry-of-cosmic-web
 series_title: "Geometry of the Cosmic Web"
 series_part: B2
 permalink: /mathematics/2026/07/07/cosmic-web-B2-tidal-frame/
-published: false
 comments: true
 ---
 
@@ -238,7 +237,7 @@ longer a physically meaningful local frame — the residual anisotropy there
 reflects sheet-and-void kinematics, not filament-relative infall.
 
 Three facts follow. **The correction is large where structure forms** —
-RMS ≈ 4.4 voxels within 2 voxels of spines. **It is organised by the tidal
+RMS ≈ 4.4 voxels along $$e_3$$ alone within 2 voxels of spines. **It is organised by the tidal
 frame** — every entry deviates strongly from isotropy. **And it points
 across the filament axis at every distance**: the direction statistic sits
 at 0.21–0.30, below the 1/3 null everywhere, and R∥/R⊥ = 0.63–0.89 with no
@@ -275,7 +274,7 @@ transport that builds it flows across, not along, the filaments.
 
 ## Back to the series
 
-Back to the series: [The Geometry of the Cosmic Web: A Research Program](/mathematics/2026/07/03/geometry-of-cosmic-web-research-program/) · [Two Ways to See a Cosmic Filament](/mathematics/2026/07/04/cosmic-web-two-models/).
+Back to the series: [The Geometry of the Cosmic Web: A Research Program](/mathematics/2026/07/03/geometry-of-cosmic-web-research-program/) · [Two Ways to See a Cosmic Filament](/mathematics/2026/07/04/cosmic-web-two-models/) · [From Cosmic Filaments to Curved Spacetime](/mathematics/2026/07/11/cosmic-web-spacetime-geometry/).
 
 </div><!-- /.l-body -->
 

@@ -19,8 +19,8 @@ description: >
 series: caustics-to-groups
 series_title: "From Caustics to Groups"
 series_part: 3
+hidden: true
 comments: true
-published: false
 ---
 
 <div class="l-body" markdown="1">
@@ -175,7 +175,7 @@ coarse it survives noise that erases the fine growth-vector detail (at one parti
 the full growth vector fails for Cartan 100% of the time, while the abnormal bit is still right
 100% of the time). So the classifier's exact-group accuracy falls with noise, but its *class-level*
 accuracy barely moves — from 1.00 to 0.96. **It hedges honestly; it does not guess wrong.** For a
-method meant to eventually face real data, failing to "I can only narrow it to two" is exactly the
+method meant to eventually face real data, falling back to "I can only narrow it to two" is exactly the
 right kind of failure.
 
 ## The aliasing map: where a single clue is load-bearing
@@ -217,7 +217,7 @@ group-blindness obstruction of Part 1 is real, and the escape — the *triple* f
 local germ — is what makes the inverse possible.
 
 What remains is the genuine wild: the $\mathrm{SE}(3)$ structure of diffusion-MRI fibre fields, where
-the configuration space really is a group and the data is real and noisy. That is the next frontier —
+the configuration space really is a group and the data is real and noisy. That is the next frontier ([Part 4]({% post_url 2026-07-26-caustics-to-groups-in-the-wild %})) —
 and the calibrated-silence machinery above is exactly what will keep the answer honest when we get
 there. The full, reproducible code, every experiment, and the methods derivation live in
 [`research/caustics-to-groups/`](https://github.com/moiseevigor/moiseevigor.github.io/tree/master/research/caustics-to-groups).

@@ -22,7 +22,6 @@ arxiv: "0807.4731"
 coauthors: "Yu. L. Sachkov"
 comments: true
 permalink: /mathematics/2026/05/03/geometry-of-seeing-A3-pmp/
-published: false
 ---
 
 <div class="l-body" markdown="1">
@@ -66,7 +65,7 @@ $$\delta S = \int_{t_0}^{t_1} \Bigl(\frac{\partial L}{\partial q^i}\delta q^i
                               - \frac{d}{dt}\frac{\partial L}{\partial \dot q^i}\Bigr)\delta q^i \,dt
            + \Bigl[\frac{\partial L}{\partial \dot q^i}\delta q^i\Bigr]_{t_0}^{t_1}.$$
 
-The boundary term vanishes; for $\delta S = 0$ for all $\delta q$, the
+The boundary term vanishes; for $\delta S = 0$ to hold for all $\delta q$, the
 integrand has to vanish, giving the Euler–Lagrange (E-L) equations.
 
 ## Legendre transform → Hamiltonian
