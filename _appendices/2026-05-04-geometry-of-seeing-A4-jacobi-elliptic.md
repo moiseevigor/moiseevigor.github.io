@@ -445,8 +445,8 @@ Maxwell pairs by chasing the $4K(k^2)$ period through the reconstruction.
   </li>
   <li>
     P. F. Byrd, M. D. Friedman (1971).  <em>Handbook of Elliptic Integrals
-    for Engineers and Scientists.</em> Springer.  All identities used in
-    Part&nbsp;2.
+    for Engineers and Scientists.</em> Springer.  A standard table of elliptic-integral and
+    Jacobi-function identities of the kind used in Part&nbsp;2.
   </li>
   <li>
     L. M. Milne-Thomson, in <em>Handbook of Mathematical Functions</em>

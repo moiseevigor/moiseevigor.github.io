@@ -635,7 +635,7 @@ The remarkable — and, for SE(2) itself, now settled — result is:
 <div class="callout-title">Theorem (Moiseev–Sachkov 2010; Sachkov 2010, 2011)</div>
 For the SR problem on SE(2) the cut time <em>equals</em> the first Maxwell time of the
 discrete symmetry group of the exponential map: $t_\mathrm{cut} = \mathfrak{t}(\lambda)$.
-For the generic (inflectional) family with modulus $k$ this is
+For the generic oscillating-pendulum family ($C_1$) with modulus $k$ this is
 $$t_{\mathrm{cut}} \;=\; 2K(k^2),$$
 half the pendulum period, with $K$ the complete elliptic integral of the first kind —
 and along this whole family there are <em>no conjugate points at all</em>: local

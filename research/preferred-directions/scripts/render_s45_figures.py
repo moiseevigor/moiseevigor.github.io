@@ -26,6 +26,8 @@ sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 BLUE, ORANGE = "#1565c0", "#e65100"
+import solar                                   # noqa: E402
+MM = solar.mm_per_px("2012-03-07")             # plane-of-sky Mm per grid px (S5 window)
 
 
 def load(name):
@@ -41,12 +43,12 @@ def fig_collider(d):
 
     # A - the two nulls' paths in the window, coloured by s
     ax = axes[0]
-    pa = np.array(ev["path_a"]["p"]); la = np.array(ev["path_a"]["lam"])
-    pb = np.array(ev["path_b"]["p"]); lb = np.array(ev["path_b"]["lam"])
-    ps0 = np.array(ev["p_star"])
+    pa = MM * np.array(ev["path_a"]["p"]); la = np.array(ev["path_a"]["lam"])
+    pb = MM * np.array(ev["path_b"]["p"]); lb = np.array(ev["path_b"]["lam"])
+    ps0 = MM * np.array(ev["p_star"])
     var = np.vstack([pa, pb]).var(0)
     i, j = sorted(np.argsort(var)[-2:])
-    lbl = ["window x [px]", "window y [px]", "height z [px]"]
+    lbl = ["window x [Mm]", "window y [Mm]", "height z [Mm]"]
     for P, L, sgn, c in ((pa, la, ev["signs"][0], BLUE),
                          (pb, lb, ev["signs"][1], ORANGE)):
         sc = ax.scatter(P[:, i], P[:, j], c=L, cmap="viridis", s=20, zorder=3,
@@ -72,10 +74,10 @@ def fig_collider(d):
     # B - the square-root law + det -> 0
     ax = axes[1]
     dl = np.array(ev["deltas"], float)
-    sp = np.array(ev["seps"], float)
+    sp = MM * np.array(ev["seps"], float)
     ok = (dl > 0) & np.isfinite(sp)
     ax.loglog(dl[ok], sp[ok], "o", color=BLUE, ms=4,
-              label="pair separation [px]")
+              label="pair separation [Mm]")
     C = np.exp(np.mean(np.log(sp[ok]) - 0.5 * np.log(dl[ok])))
     ax.loglog(dl[ok], C * np.sqrt(dl[ok]), "-", color=BLUE, lw=1.0, alpha=0.6,
               label=f"$C\\sqrt{{\\delta}}$ (fit slope {ev['sqrt_slope']:.4f})")
@@ -85,10 +87,10 @@ def fig_collider(d):
         okd = ok & np.isfinite(dets[:, col])
         ax.loglog(dl[okd], dets[okd, col] / dmax * sp[ok].max(), mk,
                   color=ORANGE, ms=3.5, alpha=0.75,
-                  label="$|\\det\\nabla B|\\to 0$ (both, scaled)"
+                  label="$|\\det\\nabla B|\\to 0$ (both nulls; ÷ its max,\n× max separation)"
                   if col == 0 else None)
     ax.set_xlabel("$\\delta = s - s_c$", fontsize=8.5)
-    ax.set_ylabel("separation [px] · scaled $|\\det|$",
+    ax.set_ylabel("separation [Mm] · rescaled $|\\det\\nabla B|$",
                   fontsize=8.5)
     ax.set_title("B", loc="left", fontsize=9, fontweight="bold")
     ax.legend(fontsize=6.4, loc="upper left")
@@ -96,7 +98,7 @@ def fig_collider(d):
 
     # C - the SR read: knee marches to zero; rank-2 collision reads flat 3
     ax = axes[2]
-    radii = np.array(ev["w4_radii"])
+    radii = MM * np.array(ev["w4_radii"])
     keys = sorted(ev["w4"], key=float, reverse=True)
     cmap = plt.cm.plasma(np.linspace(0.12, 0.75, len(keys)))
     for c, k in zip(cmap, keys):
@@ -110,7 +112,7 @@ def fig_collider(d):
         ax.axhline(yv, color="0.62", lw=0.7, ls=ls)
         ax.text(radii[0] * 1.05, yv + 0.06 if yv > 2 else yv - 0.14, lab,
                 fontsize=6.2, color="0.4")               # "uniform" below its line: clear of the curves
-    ax.set_xlabel("probe radius $r$ [px]", fontsize=8.5)
+    ax.set_xlabel("probe radius $r$ [Mm]", fontsize=8.5)
     ax.set_ylabel("local flux exponent $w_4(r)$", fontsize=8.5)
     ax.set_title("C", loc="left", fontsize=9, fontweight="bold")
     ax.legend(fontsize=6.4, loc="lower right"); ax.set_ylim(1.6, 4.5)
@@ -196,10 +198,11 @@ def fig_anatomy(d):
                             xytext=(7, 6), fontsize=8, fontweight="bold",
                             color="#333")
         ax.set_title(ttl.split(" · ")[0], loc="left", fontsize=9, fontweight="bold")
-        ax.set_xlabel("along the fold axis [px]", fontsize=8)
-        ax.set_ylabel("transverse [px]", fontsize=8)
+        ax.set_xlabel("along the fold axis [Mm]", fontsize=8)
+        ax.set_ylabel("transverse [Mm]", fontsize=8)
         ax.set_xlim(-R, R); ax.set_ylim(-R, R)
         ax.set_aspect("equal"); ax.tick_params(labelsize=7)
+        solar.mm_ticks(ax, MM)
     fig.tight_layout()
     out = REPO / "public/img/posts/forbidden-directions-collider-anatomy.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)
@@ -237,10 +240,11 @@ def fig_walls(d4, d5c):
     ax.axhline(0, color="#6a1b9a", lw=1.1, ls="--")
     ax.text(0.27, 0.012, "type wall (disc = 0: radial ↔ spiral)",
             fontsize=7, color="#6a1b9a", transform=ax.transAxes, ha="center")
-    ax.set_ylim(-0.08, 1.06)
-    ax.set_xlabel("normalised $\\det\\nabla B$ (sign = topological degree)",
+    ax.set_ylim(-0.08, 1.30)             # headroom: legend clear of the wings
+    ax.set_xlabel("$\\det\\hat M$,  $\\hat M = \\nabla B\\,/\\max_i|\\lambda_i|$, trace removed"
+                  "  (sign = topological degree)", fontsize=8.5)
+    ax.set_ylabel("fan discriminant $(\\mu_1-\\mu_2)^2$ of $\\hat M$ (clipped)",
                   fontsize=8.5)
-    ax.set_ylabel("normalised fan discriminant (clipped)", fontsize=8.5)
     ax.set_title("A", loc="left", fontsize=9, fontweight="bold")
     ax.legend(fontsize=6.6, loc="upper left")
     ax.tick_params(labelsize=7.5); ax.grid(alpha=0.2, lw=0.5)
@@ -290,7 +294,7 @@ def fig_solar(dc, db):
     ax = axes[1]
     bl = db["blend"]
     dl = np.array(bl["deltas"])
-    sp = np.array([np.nan if v is None else v for v in bl["seps"]])
+    sp = MM * np.array([np.nan if v is None else v for v in bl["seps"]])
     ok = np.isfinite(sp)
     ax.loglog(dl[ok], sp[ok], "o", color=ORANGE, ms=5,
               label=f"candidate pair (slope {bl['sqrt_slope']:.3f})")
@@ -298,7 +302,7 @@ def fig_solar(dc, db):
               color="0.55", lw=1.1,
               label="what a fold would do ($\\propto\\sqrt{\\delta}$)")
     ax.set_xlabel("$\\delta = s_c - s$  (blend parameter)", fontsize=8.5)
-    ax.set_ylabel("pair separation [px]", fontsize=8.5)
+    ax.set_ylabel("pair separation [Mm]", fontsize=8.5)
     ax.set_title("B", loc="left", fontsize=9, fontweight="bold")
     ax.legend(fontsize=7, loc="lower right")
     ax.tick_params(labelsize=7.5, which="both")       # minor log labels too

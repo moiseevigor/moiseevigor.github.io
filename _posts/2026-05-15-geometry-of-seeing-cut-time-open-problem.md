@@ -12,7 +12,7 @@ categories: [mathematics]
 tags: [sub-riemannian, SE2, cut-locus, conjugate-time, open-problem, optimal-control]
 description: >
   The cut time of the SE(2) sub-Riemannian problem: Sachkov's theorem t_cut = t(λ) —
-  2K(k²) on the inflectional family, 2kp₁(k) on the rotating one, infinite on the
+  2K(k²) on the oscillating-pendulum family (C₁), 2kp₁(k) on the rotating-pendulum family (C₂), infinite on the
   separatrix — the absence of conjugate points on the generic family, and the open
   frontier: the general Maxwell-equals-cut question for left-invariant SR problems.
 series: geometry-of-seeing
@@ -47,16 +47,23 @@ shortest** horizontal path in $\mathrm{SE}(2)$, and such a path stays uniquely s
 only up to its **cut time** $t_{\mathrm{cut}}$. Part&nbsp;3 gave two facts about it.
 
 $$t_{\mathrm{cut}}(\lambda) \;\le\; t_{\mathrm{conj}}(\lambda), \qquad
-  t_{\mathrm{cut}}(\lambda) \;\le\; \mathfrak t(\lambda) \;\bigl(= 2K(k^2) \text{ on the inflectional family}\bigr).$$
+  t_{\mathrm{cut}}(\lambda) \;\le\; \mathfrak t(\lambda) \;\bigl(= 2K(k^2) \text{ on the oscillating-pendulum family } C_1\bigr).$$
 
 The first is general (global failure precedes local). The second came from symmetry: the
 reflection strata tie the geodesic by half a pendulum period at the latest. Two upper
 bounds. The whole question of this article is whether either is achieved — and which one
 binds.
 
+(A note on names. Moiseev–Sachkov (2010) call the planar trajectories of the
+oscillating-pendulum family $C_1$ *non-inflexional* and those of the rotating-pendulum
+family $C_2$ *inflexional* — the reverse of the elastica naming used in Part&nbsp;2, where
+the oscillating pendulum gives the *inflectional* elastica. To avoid the clash, this series
+names the free SR families by pendulum regime: oscillating ($C_1$), rotating ($C_2$),
+separatrix ($C_3$).)
+
 ## The conjugate clock never rings
 
-Start with the two clocks side by side. For the inflectional family, Sachkov's Jacobi-field
+Start with the two clocks side by side. For the oscillating-pendulum family ($C_1$), Sachkov's Jacobi-field
 analysis (Appendix [A5](/mathematics/2026/05/05/geometry-of-seeing-A5-sr-exponential/))
 delivers a result far cleaner than a bound.
 
@@ -67,15 +74,15 @@ origin first folds. It marks loss of <em>local</em> optimality. For SE(2) it is 
 from the second variation of the length functional along the geodesic.
 </aside>
 
-The result (Sachkov 2010, Thms 2.1, 2.5 and 2.6; theorem numbers as in the preprint
-arXiv:0903.0727): along every inflectional geodesic — and every
+The result (Sachkov 2010, Thms 2.1, 2.4 and 2.5 of the journal version; Thms 2.1, 2.5 and 2.6
+in the preprint arXiv:0903.0727): along every oscillating-pendulum geodesic — and every
 critical-energy one — **there are no <span class="annotated-term" data-note="note-conj-time">conjugate points</span> at all**,
 
 $$t_{\mathrm{conj}}(\lambda) \;=\; +\infty
 \qquad (\lambda \in C_1 \cup C_3 \cup C_4 \cup C_5).$$
 
 Local optimality never fails on the generic family; the *only* way these geodesics stop
-being shortest is the symmetric tie. (Conjugate points do exist for the *rotating* family,
+being shortest is the symmetric tie. (Conjugate points do exist for the *rotating-pendulum* family $C_2$,
 pinched between elliptic quantities $2kp_1^1(k) \le t_{\mathrm{conj}} \le
 \min(4kK(k), 2kp_1^{\alpha_1}(k))$ — with the binding branch switching exactly at the
 figure-eight modulus $k_0 \approx 0.909$ of Part&nbsp;2 — and, in all cases,
@@ -92,11 +99,11 @@ optimality; the geometry never folds. Figure&nbsp;1 draws it.
   </div>
   <figcaption>
     <strong>Figure&nbsp;1. On the generic family, only the Maxwell clock rings.</strong>
-    Horizontal axis: modulus $k \in (0, 1)$ of the inflectional geodesic (dimensionless).
+    Horizontal axis: modulus $k \in (0, 1)$ of the oscillating-pendulum ($C_1$) geodesic (dimensionless).
     Vertical axis: sub-Riemannian arc length $t$ along the geodesic, in units of the elastica length scale $\ell$ (the unit of arc length in which the inflectional curvature is $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$ and the pendulum equation is $\ddot\varphi + \sin\varphi = 0$), linear scale, clipped at 26. Blue: the cut time $t_{\mathrm{cut}} = \mathfrak t =
     2K(k^2)$, plotted exactly — half a pendulum period, proven equal to the first Maxwell
     time (Sachkov 2010). There is no conjugate curve to draw at all: for the whole
-    inflectional family $t_{\mathrm{conj}} = +\infty$ (Sachkov 2010, Thm 2.1), so local optimality never
+    oscillating-pendulum family $t_{\mathrm{conj}} = +\infty$ (Sachkov 2010, Thm 2.1), so local optimality never
     fails — the annotation marks it. The cut curve diverges as $k \to 1$ (the separatrix
     limit, where the geodesic stays optimal forever), and starts at $2K(0) = \pi$ for the
     near-straight $k \to 0$ curves. The shaded region below the blue curve is where the
@@ -116,9 +123,9 @@ known exactly — family by family.
 
 $$\boxed{\; t_{\mathrm{cut}}(\lambda) \;=\; \mathfrak t(\lambda) \;}
 \qquad\text{with}\qquad
-\mathfrak t = \begin{cases} 2K(k^2) & \text{inflectional (oscillating pendulum)},\\[2pt]
-2k\,p_1^1(k) & \text{non-inflectional (rotating)},\\[2pt]
-+\infty & \text{separatrix}, \end{cases}$$
+\mathfrak t = \begin{cases} 2K(k^2) & \text{oscillating-pendulum family } (C_1),\\[2pt]
+2k\,p_1^1(k) & \text{rotating-pendulum family } (C_2),\\[2pt]
++\infty & \text{separatrix } (C_3), \end{cases}$$
 
 where $p_1^1(k)$ is the first positive root of $f_1(p) = \mathrm{cn}\,p\,(E(p)-p) -
 \mathrm{dn}\,p\,\mathrm{sn}\,p$. The first Maxwell tie is not merely an upper bound —
@@ -233,8 +240,8 @@ $\mathrm{SE}(2)$ is a rich worked example, not the general answer.
 
 | Claim | Status |
 |:------|:-------|
-| $t_{\mathrm{cut}} = \mathfrak t(\lambda)$; on the inflectional family $2K(k^2)$ | **Proved** (Sachkov 2010–2011) |
-| No conjugate points on the inflectional & critical families ($t_{\mathrm{conj}} = \infty$); rotating family pinched in $[2kp_1^1, \min(4kK, 2kp_1^{\alpha_1})]$ | **Proved** |
+| $t_{\mathrm{cut}} = \mathfrak t(\lambda)$; on the oscillating-pendulum family ($C_1$) $2K(k^2)$ | **Proved** (Sachkov 2010–2011) |
+| No conjugate points on the oscillating-pendulum ($C_1$) & critical families ($t_{\mathrm{conj}} = \infty$); rotating-pendulum family ($C_2$) pinched in $[2kp_1^1, \min(4kK, 2kp_1^{\alpha_1})]$ | **Proved** |
 | Full cut locus & optimal synthesis on $\mathrm{SE}(2)$ | **Proved**, all families |
 | Critical and equilibrium regimes, including the $k\to1$ boundary | **Included in the proved synthesis** |
 | Nonconstant abnormal extremals for this contact structure | **Absent** |
@@ -344,7 +351,7 @@ function drawClocks() {
   const N = 300;
   const kArr = d3.range(N).map(i => 0.01 + i * 0.975 / N);
   // cut time = first Maxwell time = 2K(k²) (Sachkov 2010); no conjugate curve
-  // exists for the inflectional family (t_conj = +∞, Thm 2.1).
+  // exists for the oscillating-pendulum family C1 (t_conj = +∞, Thm 2.1).
   const tCut = kArr.map(k => 2 * ellipticK(k * k));
 
   const clip = v => Math.min(v, yMax);

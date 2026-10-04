@@ -143,7 +143,7 @@ numerical zero test with no scale attached. The growth vector has a *law* for it
 <figure class="l-middle" id="fig-anatomy-sun">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-null-anatomy-sun.png"
-      alt="One row of three null-anatomy panels for the single interior coronal null of the AR11429 volume, in the null's own frame: A, a 3D skeleton with a translucent fan disc and the orange spine axis; B, the view down the spine, axes fan-plane coordinates e1 and e2 in extrapolation-grid pixels (linear, minus 12 to 12; one pixel is about 2.3 megametres), blue fan field lines radiating from the null; C, the side view, x axis fan-plane coordinate e1 and y axis spine coordinate in pixels (linear), orange spine lines vertical and the fan edge-on"
+      alt="One row of three null-anatomy panels for the single interior coronal null of the AR11429 volume, in the null's own frame: A, a 3D skeleton with a translucent fan disc and the orange spine axis; B, the view down the spine, axes fan-plane coordinates e1 and e2 in megametres (linear, minus 28 to 28; plane-of-sky scale, one extrapolation-grid pixel is 2.32 megametres), blue fan field lines radiating from the null; C, the side view, x axis fan-plane coordinate e1 and y axis spine coordinate in megametres (linear), orange spine lines vertical and the fan edge-on"
       style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
@@ -154,10 +154,10 @@ numerical zero test with no scale attached. The growth vector has a *law* for it
     Pontin &amp; Priest 2022: colour = topological role). <em>A:</em> a 3D skeleton with the
     translucent ideal fan disc (dashed rim) and the spine axis (orange arrows).
     <em>B:</em> the view <em>down the spine</em> — axes are the two fan-plane
-    coordinates $e_1, e_2$ in extrapolation-grid pixels, linear — where the real traced
+    coordinates $e_1, e_2$ in Mm, linear ($2.32$ Mm per extrapolation-grid px, the plane-of-sky scale, no foreshortening correction) — where the real traced
     fan lines (blue) radiate from the null; the dashed circle is the rim of the ideal
     fan disc. <em>C:</em> the side view, with the <em>spine</em>
-    (orange; vertical axis = spine coordinate in px, linear) vertical and the fan
+    (orange; vertical axis = spine coordinate in Mm, linear) vertical and the fan
     edge-on (dashed line). Gray lines are ambient field; the open
     circle at the null is coloured by topological degree (blue $+1$, red $-1$); a line
     that sweeps in along the fan and leaves along the spine is split at the null and
@@ -265,13 +265,13 @@ midpoint, on the real extrapolation's own vector potential:
 <figure class="l-body" id="fig-solar-pair">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-solar-pair.png"
-      alt="The local flux exponent at the midpoint of the closest real solar null pair: starting at 2, rising through 3 near the half-separation, then relaxing — the rising edge of the crossover without the degenerate plateau; x axis probe radius over half-separation (log scale), y axis flux exponent w4"
+      alt="The local flux exponent at the midpoint of the closest real solar null pair: starting at 2, rising through 3 near the half-separation, then relaxing — the rising edge of the crossover without the degenerate plateau; x axis probe radius over half-separation (log scale), y axis flux exponent w4; the legend gives the pair separation, 23.4 grid pixels or 54 megametres in the plane of the sky"
       style="max-width:min(100%,460px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
     <strong>The crossover on the real Sun — honestly partial.</strong> The rising edge is
     there: $w_4$ starts at 2 and climbs through $\sim3$ as the probe reaches the pair
-    scale. The degenerate plateau at 4 is not — correctly: a 23-px ($\approx 54$ Mm) pair embedded in a busy
+    scale. The degenerate plateau at 4 is not — correctly: a 23-px ($\approx 54$ Mm, plane-of-sky scale) pair embedded in a busy
     active region is two independent nulls, not a fold in progress, and beyond the pair
     scale the background field takes over. The clean signature awaits a genuinely
     <em>merging</em> pair, i.e. a flux-emergence magnetogram sequence. Pipeline:
@@ -311,7 +311,7 @@ $w_4 \to 4$ plateau at the collision.
 <figure class="l-middle" id="fig-solar-hunt">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-solar-hunt.png"
-      alt="Left: null count and topological degree sum of the AR11429 wide volume over three hours, churning between frames with the two X-flare intervals shaded; right: the candidate pair's separation versus the blend parameter on log-log axes, flat at about six pixels while a square-root reference line falls away below it"
+      alt="Left: null count and topological degree sum of the AR11429 wide volume over three hours, churning between frames with the two X-flare intervals shaded; right: the candidate pair's separation versus the blend parameter on log-log axes, flat at about fourteen megametres (y axis in megametres, plane-of-sky scale) while a square-root reference line falls away below it"
       style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
@@ -328,7 +328,7 @@ $w_4 \to 4$ plateau at the collision.
     the two measured magnetograms, $\mathrm{cut}(s) = (1-s)\,\mathrm{cut}_A +
     s\,\mathrm{cut}_B$, and track the pair in $s$. A genuine fold must close like
     $\sqrt{s_c - s}$ (gray dashed); the candidate stays flat at $\approx 6.2$ px
-    ($\approx 14$ Mm; fitted slope $-0.015$), the "collision" point reads $w_4 \approx 2$ and growth
+    ($\approx 14$ Mm — the vertical axis is in Mm at $2.32$ Mm per grid px, plane of sky, no foreshortening correction; fitted slope $-0.015$), the "collision" point reads $w_4 \approx 2$ and growth
     vector $Q = 5$ — a generic point, not even a null — and neither $\pm16$-px ($\approx\pm 37$ Mm) shifted
     window reproduces it. The pair was never merging; the finder was losing a marginal
     null. (Counts here are Newton-finder censuses — dense seeding, dedup — not
@@ -377,7 +377,7 @@ collision with adaptive continuation.
 <figure class="l-middle" id="fig-collider">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-collider.png"
-      alt="Three panels: the two nulls' paths in the window plane converging onto a star marking the fold; the pair separation against distance-to-fold on log-log axes following a square-root law over more than four decades with the determinants falling alongside; and the flux-exponent curves whose knee marches to zero, settling on the generic-null value three at the collision"
+      alt="Three panels with lengths in megametres (plane-of-sky scale, 2.32 megametres per extrapolation-grid pixel): the two nulls' paths in the window plane, window x against height z, converging onto a star marking the fold; the pair separation against distance-to-fold on log-log axes following a square-root law over more than four decades with the determinants falling alongside; and the flux-exponent curves whose knee marches to zero, settling on the generic-null value three at the collision"
       style="max-width:min(100%,980px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
@@ -386,7 +386,7 @@ collision with adaptive continuation.
     plateau 4); the separate window-robustness check fails and is reported below.</strong>
     The certified fold of the AR11429 boundary blend at $s_c = 0.14095804$ (window
     position $x \approx 11.8$, $y \approx 209$, height $z \approx 3.7$ px, i.e.
-    $\approx 8.5$ Mm above the photosphere at $2.3$ Mm per grid pixel).
+    $\approx 8.5$ Mm above the photosphere; all three panels are in Mm at $2.32$ Mm per grid pixel, the plane-of-sky scale with no foreshortening correction).
     <em>A:</em> the two nulls' paths (blue: degree $+1$, orange: degree $-1$; colour =
     blend $s$), walked with predictor–corrector continuation into the collision (★).
     <em>B:</em> the pair separation against $\delta = s - s_c$ on log–log axes:
@@ -395,7 +395,7 @@ collision with adaptive continuation.
     a hundred-thousandth of a pixel (nominally $\sim 20$ m: a statement about the
     analytic blend family, not about anything the $\approx 2.3$-Mm data resolve),
     courtesy of the spectral microscope; both members'
-    $\det\nabla\mathbf B \to 0$ alongside (orange triangles, scaled). <em>C:</em> the
+    $\det\nabla\mathbf B \to 0$ alongside (orange triangles, each divided by its maximum and multiplied by the maximum separation to share the axis). <em>C:</em> the
     SR read: the $w_4(r)$ crossover knee marches to zero with the shrinking pair, and
     at the collision the curve settles on the <em>generic-null</em> plateau 3
     ($Q = 6$) — not the plateau 4 ($Q = 7$) of this post's symmetric fold family. That
@@ -408,13 +408,13 @@ collision with adaptive continuation.
 <figure class="l-middle" id="fig-collider-anatomy">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-collider-anatomy.png"
-      alt="Three field-line panels in the fold plane: two X-type null structures three pixels apart with degree labels; the same two structures almost touching; and the merged degenerate point at the critical blend value, its field lines forming a single cusped pattern"
+      alt="Three field-line panels in the fold plane, axes along the fold axis and transverse in megametres (linear, minus 14 to 14; plane-of-sky scale): two X-type null structures about seven megametres apart with degree labels; the same two structures almost touching; and the merged degenerate point at the critical blend value, its field lines forming a single cusped pattern"
       style="max-width:min(100%,980px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
     <strong>The collision, in field lines.</strong> Field lines of the blended
     extrapolation traced in the fold plane (horizontal axis = the fold axis, the kernel
-    direction of $\nabla\mathbf B$ at the collision; the same real AR11429 volume as
+    direction of $\nabla\mathbf B$ at the collision; axes in Mm, linear, at $2.32$ Mm per grid px, plane of sky with no foreshortening correction; the same real AR11429 volume as
     the flare sequence). <em>A:</em> at $s_c + 0.05$ the two nulls (★, degrees
     labelled) sit $\approx 3$ px ($\approx 7$ Mm) apart, each with its own X-type line structure.
     <em>B:</em> at $s_c + 0.004$ they nearly touch. <em>C:</em> at $s_c$ one degenerate
@@ -607,7 +607,7 @@ on.
 <figure class="l-middle" id="fig-stability-walls">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-stability-walls.png"
-      alt="Left: scatter of null states in the plane of normalised Jacobian determinant versus fan discriminant, forming two wings that meet at the origin, with the certified solar pair's two tracks diving into the vertical fold wall at det zero, and the type wall at disc zero marked; right: the Dungey census versus IMF angle, flat at two nulls for 125 degrees then cascading to seventeen near anti-parallel"
+      alt="Left: scatter of null states in the plane of det M-hat (x axis; M-hat is the field Jacobian divided by its largest eigenvalue modulus, trace removed) versus the fan discriminant, mu-1 minus mu-2 squared, of M-hat (y axis), forming two wings that meet at the origin, with the certified solar pair's two tracks diving into the vertical fold wall at det zero, and the type wall at disc zero marked; right: the Dungey census versus IMF angle, flat at two nulls for 125 degrees then cascading to seventeen near anti-parallel"
       style="max-width:min(100%,940px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
@@ -619,7 +619,7 @@ on.
     (trace removed): $\widehat{\det} = \det\widehat M$ and $\widehat{\mathrm{disc}} =
     (\mu_1-\mu_2)^2$ for the two fan eigenvalues $\mu_{1,2}$ of $\widehat M$ — both
     dimensionless, both axes linear; for a radial null $\lvert\widehat{\det}\rvert \le
-    \tfrac14$, and the vertical axis is clipped to $[-0.1, 3]$ and shown to $1.06$. Pale blue: the
+    \tfrac14$, and the vertical axis is clipped to $[-0.1, 3]$ and shown to $1.3$. Pale blue: the
     135 states of the Dungey $\theta$-census (a vacuum field, so the type wall is
     untouchable — all radial, by Part 5's theorem). Dark blue/orange: the certified
     solar pair of the collider figure, whose two branches dive into the <span

@@ -80,3 +80,7 @@ folds. The detector can say "not a fold", and says it exactly where the theory p
   transversality) and verify the A3 normal form there.
 - Repeat at covectors approaching the abnormal direction to see where the fold
   description breaks down.
+
+Follow-up: the first item and the SE(3) gap are taken up in
+[E11](E11-cusp-germs.md) (cusps located on Engel and Cartan, together with a degenerate
+non-A3 stratum; fold test on SE(3) and its nilpotent cone).

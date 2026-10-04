@@ -133,7 +133,9 @@ def render_figure(pair, radii, half, w4):
     radii, w4 = np.asarray(radii), np.asarray(w4)
     fig, ax = plt.subplots(figsize=(5.6, 4.0), dpi=150)
     ax.semilogx(radii / half, w4, "o-", color="#e65100", ms=4.5, lw=1.5,
-                label=f"real pair, sep = {pair['sep_px']:.1f} px\n({pair['vol'].split('@')[0]})")
+                label=f"real pair, sep = {pair['sep_px']:.1f} grid px"
+                      f" = {pair['sep_px'] * solar.mm_per_px(pair['vol'].split('@')[0]):.0f} Mm"
+                      f"\n({pair['vol'].split('@')[0]}, plane-of-sky scale)")
     ax.axvline(1.0, color="k", lw=0.8, ls=":")
     ax.text(1.03, 1.62, "half-separation", rotation=90, fontsize=7, color="0.3")
     for yv, t in ((2, "uniform (w=2)"), (3, "single null (w=3)"), (4, "degenerate (w=4)")):
@@ -153,4 +155,9 @@ def render_figure(pair, radii, half, w4):
 
 
 if __name__ == "__main__":
-    main()
+    if "--render" in sys.argv:          # figure only, from the artifact
+        d = json.loads((ROOT / "artifacts" / "p4_solar_pairs.json").read_text())
+        render_figure(d["measured_pair"], d["radii_px"],
+                      d["measured_pair"]["sep_px"] / 2, d["w4"])
+    else:
+        main()

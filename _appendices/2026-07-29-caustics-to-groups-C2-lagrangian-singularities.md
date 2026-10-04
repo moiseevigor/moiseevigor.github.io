@@ -88,8 +88,8 @@ given point is a separate question, taken up below.
     folds end): two smooth fold branches ($A_2$) meeting at a cusp along the exact semicubical curve $y^2 = x^3$. This
     is the shape at the point of the coffee-cup caustic and at a lensing cusp. Crucially, it
     is <em>identical</em> whichever flow produced it: read locally, a cusp names no group.
-    (Schematic of the normal form; cusps on the Engel and Cartan conjugate loci were not
-    located numerically.) Axes are dimensionless local
+    (Schematic of the normal form; experiment E11, below, locates such cusps numerically
+    on the SE(2), Engel and Cartan conjugate loci.) Axes are dimensionless local
     coordinates centred on the cusp.
   </figcaption>
 </figure>
@@ -155,7 +155,9 @@ highly symmetric map, and the theorem's genericity is not automatic for it:
 - **Abnormal trajectories** (Engel, Cartan) are not projections of the Hamiltonian flow and
   lie outside the Lagrangian picture (Appendix C5).
 - **Symmetry.** Heisenberg's rotational symmetry collapses its whole first conjugate locus
-  onto a line: no point of it is a fold.
+  onto a line: no point of it is a fold. Experiment E11 (below) finds the same kind of
+  collapse on a thin part of the Engel and Cartan loci and on the whole first conjugate
+  locus of the nilpotent cone of $\mathrm{SE}(3)$.
 - **Dimension.** $\mathrm{SE}(3)$ is 6-dimensional, beyond the finite list.
 
 **What was checked.** For generic 3D contact structures the caustic germs near the pole
@@ -181,8 +183,46 @@ critical hypersurface. A fold is corank 1 with nonzero transversality.
 transversality $10^{-3}$, four orders above the Heisenberg floor.) So at sampled generic
 points the first conjugate locus of SE(2), Engel and Cartan is a fold, and the test
 correctly refuses the Heisenberg axis. This is a sample, not a proof, and it covers folds
-only: cusps and higher germs on Engel and Cartan, later conjugate points, and SE(3) remain
-unverified.
+only.
+
+**Cusps, and dimension 6 (experiment E11).** A cusp is a critical point of corank 1 where
+the kernel $v$ is *tangent* to the critical set — the signed transversality $\tau$ vanishes
+— and the tangency is simple: $\tau$ changes sign along the curve in the critical set that
+leaves $p^\*$ in the direction $v$. The image of that curve is then semicubical,
+$a s^2 + b s^3$. E11 (`scripts/run_e11.py`, `artifacts/e11_results.json`; hypotheses and
+tolerances fixed before the run in `docs/E11-cusp-germs.md`) follows loops of initial
+covectors (96 per loop, vertical momenta fixed), solves for the zeros of $\tau$ along the
+first conjugate locus, and tests each one: $\lvert\tau\rvert \le 10^{-4}$ with a sign
+change across the loop, corank 1, a simple zero, and fitted image exponents within
+$2 \pm 0.2$ and $3 \pm 0.4$.
+
+| Group | covectors searched | tangency points located | pass every cusp test | cusp on a finer scale (post hoc) | degenerate tangency (not a cusp) | undecided |
+|---|---|---|---|---|---|---|
+| SE(2) (calibration) | 384 | 16 | 16 (4 per loop) | — | 0 | 0 |
+| Engel | 576 | 21 | 7 | 10 | 4 | 0 |
+| Cartan | 576 | 38 | 16 | 7 | 10 | 5 |
+
+SE(2) is the calibration: the four cusps per loop of the 3D contact theory are all found,
+so the method is trusted. On Engel and Cartan standard cusps exist (fitted exponents
+1.93–2.10 and 2.99–3.18 on the points that pass). But 4 Engel and 10 Cartan tangency points
+are **not** cusps: $\tau$ keeps its sign along the kernel curve, also at doubled resolution.
+At 10 of these 14 the first conjugate time is a period of the covector's motion and a whole
+one-parameter family of geodesics arrives at one point — Heisenberg's mechanism on a thin
+subset of the locus; at the other 4 the mechanism is not identified. A generic Lagrangian
+map has no such stratum, so this is the symmetry exception at work inside Engel and Cartan.
+Two Cartan loops are the same up to the rotation symmetry, so its distinct counts are 32
+located and 13 passing. Intervals of the loops where the conjugate time jumps were skipped,
+so the search is not exhaustive.
+
+The same fold test as E10, in dimension 6 (24 covectors each): on the nilpotent tangent
+cone of $\mathrm{SE}(3)$ 0 of 24 are folds — the kernel is tangent to the critical set
+everywhere (transversality $\le 8\times10^{-7}$), a collapse like Heisenberg's; on the
+curved group $\mathrm{SE}(3)$ 23 of 24 are folds (transversality median 0.015; the 24th
+is at $1.1\times10^{-4}$, below the $10^{-3}$ threshold). For $n = 6$ Arnol'd's finite list
+no longer guarantees stable germs, so this supports the hypothesis at fold points only.
+
+Still unverified: swallowtails and higher germs, later conjugate points, the normal form
+of the degenerate stratum. All of the above is numerics at sampled points, not proof.
 
 This is not pessimism; it is a **specification**. It tells you precisely where *not* to
 look (single local germs) and forces the design that the rest of the series follows: read
@@ -200,7 +240,7 @@ $q_0$, carried by that flow for unit time, is a Lagrangian submanifold; the expo
 $\exp_{q_0}(p) = \gamma_p(1)$ is its projection to the manifold. So, for normal geodesics and away from $p = 0$, the conjugate
 locus — the critical values of $\exp_{q_0}$ — is a genuine Lagrangian caustic. Arnol'd's
 classification applies to it at every point where this particular map is generic, which is
-what the hypothesis above asserts and experiment E10 samples. The code's caustic
+what the hypothesis above asserts and experiments E10 and E11 sample. The code's caustic
 detector (`src/caustics.py`) finds it as the first zero of the Jacobian determinant of that
 map.
 

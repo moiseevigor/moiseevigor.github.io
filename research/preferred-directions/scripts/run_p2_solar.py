@@ -77,8 +77,9 @@ def render_figure(cut, B, nx, nz, p, ev, Qn):
     axA.axhline(iy0, color="k", lw=0.7, ls=(0, (4, 3)), alpha=0.55)
     axA.plot(ix0, iy0, marker="*", ms=16, mfc="#ffd000", mec="k", mew=1.1, zorder=5)
     axA.set_title("A", loc="left", fontsize=11, fontweight="bold")
-    axA.set_xlabel("x [px, linear]", fontsize=9.5); axA.set_ylabel("y [px, linear]", fontsize=9.5)
-    axA.tick_params(labelsize=9)
+    mm = solar.mm_per_px("2011-06-07")        # plane-of-sky Mm per grid px
+    axA.set_xlabel("x [Mm, linear]", fontsize=9.5); axA.set_ylabel("y [Mm, linear]", fontsize=9.5)
+    axA.tick_params(labelsize=9); solar.mm_ticks(axA, mm)
     cbA = fig.colorbar(imA, ax=axA, fraction=0.046, pad=0.03)
     cbA.set_label("line-of-sight $B$ [G, linear]", fontsize=9.5); cbA.ax.tick_params(labelsize=9)
 
@@ -92,9 +93,10 @@ def render_figure(cut, B, nx, nz, p, ev, Qn):
                    arrowsize=0.7, arrowstyle="-|>")
     axB.plot(ix0, iz0, marker="*", ms=18, mfc="#25d0ff", mec="k", mew=1.2, zorder=6)
     axB.set_title("B", loc="left", fontsize=11, fontweight="bold")
-    axB.set_xlabel("x [px, linear]", fontsize=9.5)
-    axB.set_ylabel("height above surface [px, linear]", fontsize=9.5)
+    axB.set_xlabel("x [Mm, linear]", fontsize=9.5)
+    axB.set_ylabel("height above surface [Mm, linear]", fontsize=9.5)
     axB.set_xlim(0, nx); axB.set_ylim(0, nz); axB.tick_params(labelsize=9)
+    solar.mm_ticks(axB, mm)
     cbB = fig.colorbar(imB, ax=axB, fraction=0.046, pad=0.03)
     cbB.set_label("$|B|$ [G, log scale]", fontsize=9.5); cbB.ax.tick_params(labelsize=9)
     # null facts (height, eigenvalues, Q) are stated in the caption, not in the plot

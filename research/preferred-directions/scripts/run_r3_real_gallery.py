@@ -237,9 +237,10 @@ def render(cards):
         ax.plot(p[0], p[2], marker="*", ms=14, mfc="#25d0ff", mec="k", mew=1.0)
         ax.set_xlim(0, nx); ax.set_ylim(0, nz)            # no streamplot overhang
         ax.set_title("ABCDEFGH"[k], loc="left", fontsize=11, fontweight="bold")
-        ax.set_xlabel("x [px, linear]", fontsize=10)
-        ax.set_ylabel("height [px, linear]", fontsize=10)
+        ax.set_xlabel("x [Mm, linear]", fontsize=10)
+        ax.set_ylabel("height [Mm, linear]", fontsize=10)
         ax.tick_params(labelsize=9)
+        solar.mm_ticks(ax, solar.mm_per_px(c["date"]))    # that day's plane-of-sky scale
         print(f"  panel {'ABCDEFGH'[k]}: {c['date']} {c['std']['label']} "
               f"Q={c['Q']} null (x, h) = ({p[0]:.1f}, {p[2]:.1f}) px")
     # shared colourbar in the first free cell

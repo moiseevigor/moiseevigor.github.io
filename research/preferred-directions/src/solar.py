@@ -126,3 +126,26 @@ def _interp3(F, p):
                 w = (abs(1 - di - fx) * abs(1 - dj - fy) * abs(1 - dk - fz))
                 out += w * F[(j0 + dj), (i0 + di), (k0 + dk)]
     return out
+
+
+# ------------------------------------------------- presentation: px -> Mm axes
+
+def mm_per_px(date):
+    """Plane-of-sky Mm per extrapolation-grid px for an HMI day ('YYYY-MM-DD'),
+    read from artifacts/hmi_scale.json (written by render_real_assets.py --scales).
+    No foreshortening correction, as in the extrapolation itself."""
+    import json
+    from pathlib import Path
+    f = Path(__file__).resolve().parents[1] / "artifacts" / "hmi_scale.json"
+    return json.loads(f.read_text())["days"][date]["Mm_per_grid_px"]
+
+
+def mm_ticks(ax, mm, which="xy"):
+    """Relabel linear px axes in Mm: data stay in grid px, ticks sit at round Mm.
+    Call after the axis limits are final."""
+    from matplotlib.ticker import MaxNLocator
+    for a in which:
+        lo, hi = sorted(getattr(ax, f"get_{a}lim")())
+        t = MaxNLocator(6, steps=[1, 2, 2.5, 5, 10]).tick_values(lo * mm, hi * mm)
+        t = t[(t >= lo * mm - 1e-9) & (t <= hi * mm + 1e-9)]
+        getattr(ax, f"set_{a}ticks")(t / mm, [f"{v:g}".replace("-", "\u2212") for v in t])

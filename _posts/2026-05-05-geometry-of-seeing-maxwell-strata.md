@@ -137,7 +137,8 @@ the reduction: the costate angle obeys
 
 $$\ddot\varphi + \sin\varphi = 0, \qquad E = \tfrac12\dot\varphi^2 - \cos\varphi,$$
 
-and the inflectional family is the librating pendulum, $-1 < E < 1$, oscillating between
+and the oscillating-pendulum family ($C_1$ for the free SR geodesics; the inflectional
+family for the elastica) is the librating pendulum, $-1 < E < 1$, oscillating between
 turning points $\pm\varphi_{\max}$. This pendulum has two obvious discrete symmetries, and
 they generate a third.
 
@@ -155,7 +156,7 @@ The <strong>Klein four-group</strong> $\mathbb{Z}_2 \times \mathbb{Z}_2 = \{e,
 \varepsilon^1, \varepsilon^2, \varepsilon^3\}$ is the smallest non-cyclic group: every
 non-identity element is its own inverse, and any two distinct ones compose to the third —
 the symmetries of a non-square rectangle. In the source paper (Moiseev–Sachkov 2010,
-§5.1) the reflections act on the pendulum's phase cylinder, with coordinates
+§4.1.1 of the journal version; §5.1.1 in the preprint arXiv:0807.4731) the reflections act on the pendulum's phase cylinder, with coordinates
 $(\gamma, c)$ — pendulum angle $\gamma \in \mathbb{R}/4\pi\mathbb{Z}$ and rate
 $c = \dot\gamma$: $\varepsilon^1 : (\gamma, c) \mapsto (\gamma, -c)$,
 $\varepsilon^2 : (\gamma, c) \mapsto (-\gamma, c)$,
@@ -223,7 +224,7 @@ the first one exactly.
     Phase plane of $\ddot\varphi + \sin\varphi = 0$: horizontal axis is the pendulum angle
     $\varphi$ (radians, ticks at $0, \pm\pi$), vertical axis its rate $\dot\varphi$
     (radians per unit arc length, ticks at $\pm1$; arc length in units of the elastica length scale $\ell$ (the unit of arc length in which the inflectional curvature is $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$ and the pendulum equation is $\ddot\varphi + \sin\varphi = 0$)). The bold blue closed loop is
-    one libration orbit (one inflectional geodesic, energy $E = 2k^2 - 1$); faint loops are
+    one libration orbit (one oscillating-pendulum geodesic, energy $E = 2k^2 - 1$); faint loops are
     neighbouring orbits. Choose a group element to see its geometry (orange): $\varepsilon^1$
     reflects the phase plane across the horizontal axis $\dot\varphi = 0$, pinning the two
     turning points; $\varepsilon^3$ reflects across the vertical axis $\varphi = 0$, pinning
@@ -356,7 +357,7 @@ A tie destroys uniqueness of the minimiser, so along every SR geodesic
 
 $$t_{\mathrm{cut}}(\lambda) \;\le\; \mathfrak t(\lambda),$$
 
-and for the inflectional family the strata fire strikingly early:
+and for the oscillating-pendulum family ($C_1$) the strata fire strikingly early:
 $\mathfrak t = 2K(k^2)$ — <em>half</em> a pendulum period, half the elastica
 mirror-tie value computed above.
 </div>
@@ -367,7 +368,7 @@ say the free geodesic *cannot* remain globally shortest past $2K(k^2)$. What thi
 bound is tight.
 
 It is: $t_{\mathrm{cut}} = \mathfrak t(\lambda)$ exactly, for every family — with the
-extra surprise that along the whole inflectional family *local* optimality never fails at
+extra surprise that along the whole oscillating-pendulum family *local* optimality never fails at
 all. Proving that, and confronting what remains genuinely open beyond $\mathrm{SE}(2)$, is
 [Part&nbsp;4](/mathematics/2026/05/15/geometry-of-seeing-cut-time-open-problem/).
 
@@ -384,7 +385,7 @@ all. Proving that, and confronting what remains genuinely open beyond $\mathrm{S
   Part&nbsp;2.
 - For the free SR problem the collected strata give the first Maxwell time
   $\mathfrak t(\lambda)$, with $t_{\mathrm{cut}} \le \mathfrak t = 2K(k^2)$ on the
-  inflectional family — half a pendulum period. Whether equality holds is Part&nbsp;4.
+  oscillating-pendulum family ($C_1$) — half a pendulum period. Whether equality holds is Part&nbsp;4.
 
 </div><!-- /.l-body -->
 

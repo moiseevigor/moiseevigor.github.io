@@ -35,6 +35,9 @@ nilpotent-deviation statistic. Full derivation in [`docs/METHODS.md`](docs/METHO
 - `scripts/run_e10.py` — E10 fold check: singularity type of the exponential map at
   the first conjugate point of random geodesics (evidence behind the "local caustics
   are group-blind" premise; see [`docs/E10-fold-germs.md`](docs/E10-fold-germs.md)).
+- `scripts/run_e11.py` — E11 cusp search on the first conjugate locus of SE(2), Engel and
+  Cartan, plus the E10 fold test on SE(3) and its nilpotent cone (curved SE(3) is integrated
+  as a matrix group inside the script; see [`docs/E11-cusp-germs.md`](docs/E11-cusp-germs.md)).
 - `scripts/smoke_test.py` — assert-based self-checks + golden-file regression.
 - `tests/golden/` — committed reference outputs (e.g. the Heisenberg conjugate
   locus); regenerate with `smoke_test.py --update-golden`.
@@ -96,6 +99,8 @@ nilpotent-deviation statistic. Full derivation in [`docs/METHODS.md`](docs/METHO
 | SE(3) synthetic field | H4 (yes half, mechanism) | confirmed |
 | real DW-MRI acquisition | H4 (yes half, real data) | pending credentialed data |
 | E10 fold check at first conjugate points | group-blindness premise (folds) | confirmed on sample: SE(2), Engel, Cartan 24/24 folds; Heisenberg control 0/24 |
+| E11 cusps on the first conjugate locus | every tangency point on Engel/Cartan is an A3 cusp | calibration passed (SE(2): 16/16, 4 per loop); **partially confirmed, refuted as stated**: Engel 7 of 21 and Cartan 16 of 38 located points pass all pre-registered A3 checks (\|τ\| ≤ 1e-4, corank 1, simple zero, image exponents 2 ± 0.2 and 3 ± 0.4), 10 and 7 more on a finer scale (post hoc); 4 and 10 are degenerate non-A3 tangencies (Heisenberg-type collapse at 10 of 14); 5 Cartan points undecided |
+| E11 fold test in dimension 6 | fold at 24/24 first conjugate points | SE(3) nilpotent cone: **refuted**, 0/24 (collapsed like Heisenberg); curved SE(3): 23/24 (one at transversality 1.1e-4 < 1e-3) |
 | E5 gravity has no SR structure | H-A (astrophysics Phase A) | confirmed; refuted our own `Q>n` criterion |
 
 ## Astrophysics phase
@@ -146,5 +151,6 @@ python3.13 -m venv .venv && .venv/bin/pip install numpy scipy
 .venv/bin/python scripts/run_e6.py         # E6 Doroshkevich validation (~10s)
 .venv/bin/python scripts/run_e8.py         # E8 magnetized plasma (~30s)
 .venv/bin/python scripts/run_e10.py        # E10 fold check at conjugate points (~7 min)
+.venv/bin/python scripts/run_e11.py        # E11 cusp search + SE(3) fold test (~3.5 min; reads e10_results.json for a cross-check)
 # full runs = no flag; --quick is a smoke configuration with different numbers
 ```
