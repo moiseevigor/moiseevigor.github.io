@@ -172,6 +172,19 @@ def main():
             print(f"    null: r={e['r']}, lat={e['lat']:+.1f}, lon={e['lon']:.1f}",
                   flush=True)
     out["census"] = resA
+    # |B| range of the l<=18 field on 1-degree (colat, lon) spheres [nT]; the
+    # minimum is a grid minimum (the field vanishes only at the nulls themselves)
+    th = np.linspace(0, np.pi, 182)[1:-1]
+    ph = np.linspace(0, 2 * np.pi, 360, endpoint=False)
+    TH, PH = np.meshgrid(th, ph, indexing="ij")
+    out["B_range_nT"] = {}
+    for r in (0.85, 1.0):
+        Bm = np.linalg.norm(B_cart_many(jf, sph_to_cart(r, TH, PH).reshape(-1, 3)),
+                            axis=1)
+        out["B_range_nT"][f"r={r}"] = {"min": float(Bm.min()), "max": float(Bm.max()),
+                                      "median": float(np.median(Bm))}
+        print(f"  |B| at r={r} R_J: {Bm.min():.2e} .. {Bm.max():.2e} nT "
+              f"(median {np.median(Bm):.2e})", flush=True)
     counts = [v["confirmed"] for v in resA.values()]
     out["census_converged"] = bool(len(set(counts)) == 1)
     print(f"  confirmed counts across resolutions: {counts} "
@@ -222,13 +235,20 @@ def main():
         patch = brmin < -0.5e4                            # -0.5 G in nT
         surv_patch += patch
         # null survival: warm-started Newton cloud around the reference null
-        found = None
+        # Acceptance rule = run_j2b_sensitivity's nominal one: first root within
+        # 0.15 R_J of the reference with a WIDE Newton floor (0.75), THEN the
+        # shell-floor cut r >= 0.856. (The earlier rule applied the floor inside
+        # Newton, so a member whose polar root had sunk below the floor could be
+        # "rescued" by a DIFFERENT root near the reference: 33/40 instead of 32/40.)
+        global R_IN
+        found, R_IN = None, 0.75
         for dp in cloud:
             p = newton(jf, p_ref + dp)
             if p is not None and np.linalg.norm(p - p_ref) < 0.15:
                 found = p
                 break
-        if found is not None:
+        R_IN = 0.855
+        if found is not None and np.linalg.norm(found) >= 0.856:
             surv_null += 1
             positions.append(null_latlon(found))
     jf.g, jf.h = g0, h0

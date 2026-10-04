@@ -50,8 +50,10 @@ nulls per frame, but the per-frame degree sum swings between −5 and −17:
 births/deaths are dominated by detection-boundary effects (height-floor
 submergence, lateral walls, marginal low nulls flickering against the
 finder), and *no* interior opposite-degree co-death passes the pairing
-criteria. One relaxed candidate (approach 14.5 → 5.3 px, co-death within
-2 frames at 00:55–01:13) motivated S5b-2.
+criteria. One relaxed candidate (tracks 1 and 38 of `s5_solar_fold.json`: approach
+14.5 → 5.3 px between 00:49 and 01:01, last both-alive frame 01:07, one
+member last seen 01:13, both gone by 01:19 — co-death within 2 frames,
+bracketed by the 01:07 and 01:19 magnetograms) motivated S5b-2.
 
 **H-S5b-1: REFUTED.** The fine-dedup (0.6 px) subvolume census does not
 sustain one persistent pair: the closest opposite-degree separation churns

@@ -665,7 +665,14 @@ cross-checked against two independent professional simulation codes.
     earns its keep exactly where filaments form (left bars), which is where
     the correction was measured in the first place; far from the web (right
     bars) all three recipes agree, as they must — there is nothing there to
-    brake against.
+    brake against. Bars are median transport error in voxels
+    (1 voxel = 1 <em>h</em>⁻¹Mpc, linear scale, lower is better), binned by
+    final distance to the filament web; grey = Zel'dovich, blue = the
+    <em>β</em> = 0.75 stage of our model (E5c), red = the same rule handed
+    the true directions (E5b). All three series are means over the same
+    three held-out simulations (seeds 4–6, 50,000 tracked particles each;
+    seed-to-seed standard error ≈ 0.1–0.3), from
+    <code>research/cosmic-web/artifacts/e5_perbin_seeds4-6.json</code>.
   </figcaption>
 </figure>
 
@@ -1269,9 +1276,9 @@ scoped in the
   // ---- per-bin gains ----
   (function () {
     const BINS = ["0–2", "2–4", "4–8", "8–64"];
-    const SERIES = [["Zel'dovich (straight lines)", [6.95, 5.43, 3.74, 3.38], GREY],
+    const SERIES = [["Zel'dovich (straight lines)", [6.93, 5.42, 3.70, 3.35], GREY],
                     ["our model (β = 0.75 stage, E5c)", [5.96, 5.37, 3.67, 3.28], BLUE],
-                    ["perfect steering (cheating)", [5.53, 5.20, 3.68, 3.33], RED]];
+                    ["perfect steering (cheating)", [5.51, 5.17, 3.65, 3.29], RED]];
     const f = frame("#cw-bins", 640, 300, {l: 52, r: 20, t: 14, b: 58});
     if (!f) return;
     const x0 = d3.scaleBand().domain(BINS).range([0, f.iw]).padding(0.25);

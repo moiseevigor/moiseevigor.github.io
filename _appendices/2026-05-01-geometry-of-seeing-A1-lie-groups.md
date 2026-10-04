@@ -35,10 +35,10 @@ left-invariant vector fields $X_1 = \cos\theta\,\partial_x +
 \sin\theta\,\partial_y$, the bracket $[X_1, X_2] = -X_3$, the exponential map.
 This appendix builds those objects from scratch.  Read it once and Part&nbsp;1
 becomes a calmer text.  All three figures below are powered by the same
-$\mathrm{SE}(2)$ matrix exponential routine that the
-<a href="https://moiseevigor.github.io/elliptic/">elliptic</a> project uses to
-draw the Dubins-car
-<a href="https://moiseevigor.github.io/elliptic/examples/dubins-back-wheel/">parking trajectories</a>.
+closed-form $\mathrm{SE}(2)$ matrix exponential — the group law behind the
+<a href="https://moiseevigor.github.io/elliptic/">elliptic</a> project's
+Dubins-car
+<a href="https://moiseevigor.github.io/elliptic/examples/dubins-visual-cortex/">parking trajectories</a>.
 
 </div>
 
@@ -544,23 +544,23 @@ points to remember:
 
 Every figure on this page integrates the SE(2) ordinary differential
 equation (ODE) $\dot g = g \cdot \xi(t)$
-using the exact same midpoint-rule helper that the
+using the same midpoint rule as the `integrateElastica` helper that the
 <a href="https://moiseevigor.github.io/elliptic/">moiseevigor/elliptic</a>
-project ships in `examples/dubins-back-wheel/app.js`.  When $\xi(t) =
+project ships in `examples/dubins-visual-cortex/app.js`.  When $\xi(t) =
 (a_1, a_2, a_3)$ is *constant* you get the 1-parameter subgroups of
 Figure A1.1; when $\xi(t)$ is the heading-driven control of the pinned
 ($u_1 \equiv 1$) problem of Part&nbsp;2 you get Euler's elastica; when
 $\xi(t)$ is the free *Pontryagin extremal* control and its forward component
 changes sign you get exactly the cuspidal parking trajectory shown
 in
-<a href="https://moiseevigor.github.io/elliptic/examples/dubins-back-wheel/">that example</a>.
+<a href="https://moiseevigor.github.io/elliptic/examples/dubins-visual-cortex/">that example</a>.
 The same matrix exponential drives all three.
 
 ## Code
 
 ```python
 # Matrix exponential of an se(2) element — closed form.
-# Identical to the formula used in moiseevigor/elliptic/se2.py.
+# The standard closed form for exp on se(2); the same formula drives the figures below.
 import numpy as np
 
 def exp_se2(a1, a2, a3, t=1.0):
@@ -641,8 +641,9 @@ Pontryagin Maximum Principle.
   </li>
   <li>
     <a href="https://moiseevigor.github.io/elliptic/">moiseevigor/elliptic</a>
-    — Jacobi elliptic functions, complete and incomplete integrals, and the
-    SE(2) exponential routine used in all three figures of this appendix.
+    — Jacobi elliptic functions and complete and incomplete integrals; its
+    Dubins / visual-cortex example integrates SE(2) curves with the same midpoint
+    rule used in the figures of this appendix.
   </li>
 </ol>
 </div>
@@ -654,7 +655,7 @@ Pontryagin Maximum Principle.
 (function () {
 'use strict';
 
-// ── SE(2) matrix exponential, identical to elliptic/se2.py closed form ─
+// ── SE(2) matrix exponential, closed form (same formula as the Python block) ─
 function expSE2(a1, a2, a3, t) {
   const om = a3 * t;
   if (Math.abs(om) < 1e-12) {

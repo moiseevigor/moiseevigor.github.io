@@ -414,10 +414,14 @@ def main():
     # ---- carry the T96 boundary-audit correction over -----------------------------
     try:
         prev = json.loads((ROOT / "artifacts" / "s4_collider.json").read_text())
-        t96_audit = {"census_note": prev.get("census_note"),
-                     "n_inside": prev.get("n_inside"),
-                     "n_outside_boundary": prev.get("n_outside_boundary"),
-                     "bz_census_inside": prev.get("bz_census")}
+        # prev is either run_s4b_drive.py's output (flat keys) or our own
+        # earlier output (audit already nested) -- keep the audit on re-runs.
+        t96_audit = prev.get("t96_boundary_audit") or {
+            "census_note": prev.get("census_note"),
+            "n_inside": prev.get("n_inside"),
+            "n_spiral_inside": prev.get("n_spiral_inside"),
+            "n_outside_boundary": prev.get("n_outside_boundary"),
+            "bz_census_inside": prev.get("bz_census")}
     except FileNotFoundError:
         t96_audit = None
 

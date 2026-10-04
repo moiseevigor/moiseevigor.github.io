@@ -98,8 +98,11 @@ nothing about whether the comparison was constructed correctly.*
     (+0.07, p ≈ 10⁻¹⁴, once scaled to 50 seeds). Flip
     the match to the <strong>realised skeleton length</strong> — the quantity that actually
     determines the score — and the sparse "win" inverts to a clean Hessian lead at every
-    level. The phantom was in the matching, not the method. Proxy numbers from
-    <code>e0_results.json</code>; corrected from the 50-seed reruns
+    level. The phantom was in the matching, not the method. The two series rest on
+    different seed counts: the proxy bars are means over the <strong>3</strong> evaluation
+    seeds (2–4) of the archived run <code>e0_results.json</code>; the corrected bars are
+    means over the <strong>50</strong> held-out seeds (2–51) of the straight-filament rerun
+    <code>e0_results_straight.json</code>
     (E0 report and its E0b sweeps in <code>research/cosmic-web/docs/</code>).
   </figcaption>
 </figure>
@@ -204,7 +207,7 @@ consistent with zero (1.65σ). On Planck they show a **4.7σ "bridge"**
 leakage at Planck's 10′ resolution (E3e; Appendix B5 explains the
 mechanism). Without the null, that leakage would have been booked as
 astrophysics. The physically meaningful number is the null-subtracted one:
-~1.2–1.4×10⁻⁸ at ≈2σ per instrument (2.2σ Planck, 1.6σ ACT).
+~1.2–1.4×10⁻⁸ at ≈2σ per instrument (2.2σ Planck, 1.7σ ACT).
 
 The same discipline applied on the sky in an earlier form: the spine-stack
 controls were rejection-matched to the spine points' galactic-latitude

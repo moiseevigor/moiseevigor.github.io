@@ -166,6 +166,47 @@ def drive_pair(a0, b0, bz_stop, d0):
     return path, bz, step, (merged or lost) and approaching and len(path) > 6
 
 
+def boundary_distances(fld0, census):
+    """t96_mgnp verdict for every core-box census null: signed side (id = +1
+    inside / -1 outside the model magnetopause) and distance to it [R_E]."""
+    from geopack import geopack as gp
+    ids, dists = [], []
+    for rec in census["nulls"]:
+        nl = newton_one(fld0, rec["p_gsm_re"])
+        if nl is None or not interior(nl["p"]):
+            continue
+        p = nl["p"]
+        *_, dist, iid = gp.t96_mgnp(PDYN, -1.0, p[0], p[1], p[2])
+        ids.append(int(iid)); dists.append(float(dist))
+    return {"n_core_box": len(ids), "n_id_outside": int(sum(i == -1 for i in ids)),
+            "n_id_inside": int(sum(i == 1 for i in ids)),
+            "dist_re_min": round(min(dists), 3), "dist_re_max": round(max(dists), 3),
+            "dist_re_median": round(float(np.median(dists)), 3),
+            "n_within_1re": int(sum(d < 1.0 for d in dists))}
+
+
+def census_note(nulls, n_spiral, n_outside):
+    return (f"{len(nulls)} interior nulls inside the model magnetopause at the "
+            f"base state ({n_spiral} spiral); {n_outside} interior nulls of the "
+            f"P4-S3 census sit OUTSIDE the T96 model boundary (t96_mgnp) and "
+            f"are excluded")
+
+
+def bz_path_census(t0):
+    """Inside-only (core box AND inside t96_mgnp + 1 RE) census along the Bz path."""
+    print("\ninside-magnetopause census along the Bz path:")
+    bz_census = []
+    for bz in (-9.0, -7.0, -5.0, -3.0, -1.0, +1.0, +3.0):
+        fld = field_at(bz)
+        found = fld.find_nulls(ms.cusp_and_tail_seeds())
+        core = [n for n in found if interior(n["p"]) and inside_mgnp(n["p"])]
+        dsum = int(sum(np.sign(np.linalg.det(n["gradB"])) for n in core))
+        bz_census.append({"bz": bz, "n_inside": len(core), "degree_sum": dsum})
+        print(f"  Bz {bz:+5.1f}: inside nulls {len(core):3d}, degree sum {dsum:+d}"
+              f"  [{time.time() - t0:.0f} s]")
+    return bz_census
+
+
 def main():
     t0 = time.time()
     fld0 = field_at(BZ0)
@@ -185,6 +226,22 @@ def main():
     print(f"base census (interior, INSIDE model magnetopause): {len(nulls)} "
           f"nulls ({n_spiral} spiral); {n_outside} interior nulls sit outside "
           f"the model boundary  [{time.time() - t0:.0f} s]")
+
+    if "--audit-only" in sys.argv:
+        # Record ONLY the boundary audit, patched into the existing artifact
+        # (whose other keys belong to run_s4c_dungey.py) -- no pair driving.
+        path = ROOT / "artifacts" / "s4_collider.json"
+        res = json.loads(path.read_text())
+        res["t96_boundary_audit"] = {
+            "census_note": census_note(nulls, n_spiral, n_outside),
+            "n_inside": len(nulls), "n_spiral_inside": n_spiral,
+            "n_outside_boundary": n_outside,
+            "boundary_distances": boundary_distances(fld0, census),
+            "bz_census_inside": bz_path_census(t0)}
+        path.write_text(json.dumps(res, indent=1) + "\n")
+        print(f"patched t96_boundary_audit into artifacts/s4_collider.json"
+              f"  [{time.time() - t0:.0f} s]")
+        return
 
     pairs = []
     for i, a in enumerate(nulls):
@@ -302,26 +359,11 @@ def main():
         if event:
             break
 
-    # ---- inside-only census along the Bz path -----------------------------------
-    print("\ninside-magnetopause census along the Bz path:")
-    bz_census = []
-    for bz in (-9.0, -7.0, -5.0, -3.0, -1.0, +1.0, +3.0):
-        fld = field_at(bz)
-        found = fld.find_nulls(ms.cusp_and_tail_seeds())
-        core = [n for n in found if interior(n["p"]) and inside_mgnp(n["p"])]
-        dsum = int(sum(np.sign(np.linalg.det(n["gradB"])) for n in core))
-        bz_census.append({"bz": bz, "n_inside": len(core), "degree_sum": dsum})
-        print(f"  Bz {bz:+5.1f}: inside nulls {len(core):3d}, degree sum {dsum:+d}"
-              f"  [{time.time() - t0:.0f} s]")
-
+    bz_census = bz_path_census(t0)
     results = {
         "base": {"pdyn": PDYN, "dst": DST, "bz0": BZ0,
                  "epoch": "2012-03-07T00:00Z"},
-        "census_note": (f"{len(nulls)} interior nulls inside the model "
-                        f"magnetopause at the base state ({n_spiral} spiral); "
-                        f"{n_outside} interior nulls of the P4-S3 census sit "
-                        f"OUTSIDE the T96 model boundary (t96_mgnp) and are "
-                        f"excluded"),
+        "census_note": census_note(nulls, n_spiral, n_outside),
         "n_inside": len(nulls), "n_spiral_inside": n_spiral,
         "n_outside_boundary": n_outside,
         "bz_census": bz_census,

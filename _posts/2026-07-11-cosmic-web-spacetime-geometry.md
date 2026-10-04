@@ -145,9 +145,9 @@ Read them in words. Rotations compose like rotations. Rotations turn translation
 other translations (that is the semidirect twist again). And — the boxed line —
 **translations commute**: go east then north, or north then east, and you arrive at the
 same point. That innocuous-looking zero *is the flatness of Euclidean space*, written
-algebraically. Hold that thought: in §4 the entire difference between flat space and a
-gravitating universe with a cosmological constant will live in whether
-$$[P, P] = 0$$.[^desitter]
+algebraically. Hold that thought: the entire difference between flat space and a
+universe with a cosmological constant lives in whether
+$$[P, P] = 0$$ — the footnote gives the de Sitter bracket that replaces it.[^desitter]
 
 ## Cartan's move: curve the model
 
@@ -795,7 +795,7 @@ flow's map folds.
   web-finder in the tidal eigenframe — is a live research line (Feldbrugge, van de
   Weygaert et al. 2018). *Sub-Lorentzian* geometry — the sub-Riemannian construction
   with a Lorentzian metric on the allowed directions — is young and moving (Grochowski
-  and others). Carrollian horizons are a live topic (Donnay & Marteau 2019).
+  2002 and others). Carrollian horizons are a live topic (Donnay & Marteau 2019).
 - **Open, and close to home.** The exact $$\mathrm{SE}(2)$$ results of the Geometry of
   Seeing series — Maxwell strata, cut loci via elliptic functions — have sub-Lorentzian
   analogues on the relativistic cousins of $$\mathrm{SE}(2)$$ that, as far as I can
@@ -890,7 +890,7 @@ flow's map folds.
   <li>D. K. Wise (2010). "MacDowell–Mansouri gravity and Cartan geometry." <em>Class. Quantum Grav.</em> 27, 155010. <a href="https://arxiv.org/abs/gr-qc/0611154">arXiv:gr-qc/0611154</a>.</li>
   <li>M. Blagojević &amp; F. W. Hehl, eds. (2013). <em>Gauge Theories of Gravitation: A Reader with Commentaries.</em> Imperial College Press. <a href="https://arxiv.org/abs/1210.3775">arXiv:1210.3775</a>.</li>
   <li>J. Feldbrugge, R. van de Weygaert, J. Hidding &amp; J. Feldbrugge (2018). "Caustic skeleton &amp; cosmic web." <em>JCAP</em> 05, 027. <a href="https://arxiv.org/abs/1703.09598">arXiv:1703.09598</a>.</li>
-  <li>M. Grochowski (2006). "Geodesics in the sub-Lorentzian geometry." <em>Bull. Polish Acad. Sci. Math.</em> 54, 271–287.</li>
+  <li>M. Grochowski (2002). "Geodesics in the sub-Lorentzian geometry." <em>Bull. Polish Acad. Sci. Math.</em> 50(2), 161–178.</li>
   <li>L. Donnay &amp; C. Marteau (2019). "Carrollian physics at the black hole horizon." <em>Class. Quantum Grav.</em> 36, 165002. <a href="https://arxiv.org/abs/1903.09654">arXiv:1903.09654</a>.</li>
 </ol>
 </div>

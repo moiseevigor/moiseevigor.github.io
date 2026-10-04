@@ -226,8 +226,10 @@ No re-calibration anywhere; every error below is quoted in physical h⁻¹Mpc
 | 0.5 h⁻¹Mpc voxels (EdS) | 1 (+2 in E7b) | 4.95 | 4.45 | −10% | 6.76 | 5.72 | −15% |
 
 Here σ₈ is the clustering amplitude of the initial conditions, "EdS" is
-Einstein–de Sitter expansion, and "web" means within 2 h⁻¹Mpc of the spine
-network. The advantage grows monotonically with clustering (−3% → −9% →
+Einstein–de Sitter expansion, and "web" means the nearest-spine bin: within 2 voxels of the spine
+network in the first four rows (E6 — 2 h⁻¹Mpc at 1 h⁻¹Mpc voxels, but
+4 h⁻¹Mpc on the coarse row), and within 2 h⁻¹Mpc in physical units in the
+ΛCDM and 0.5 h⁻¹Mpc rows (E7). The advantage grows monotonically with clustering (−3% → −9% →
 −13% overall) — the behaviour of a physical shell-crossing correction,
 since higher σ₈ means more crossings — and is nearly identical between EdS
 and ΛCDM, as expected for a growth-factor-parametrised geometric term;

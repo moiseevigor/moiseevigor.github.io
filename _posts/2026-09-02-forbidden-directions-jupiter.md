@@ -117,7 +117,7 @@ these two — **and found a third the seeding had missed**, sitting just above t
 floor in the equatorial band of reversed patches. A concrete lesson, banked: *seeds
 are not a census — and this census is not a completeness proof either.*
 
-| null | r [$R_J$] | latitude | longitude | type | degree | $J_\parallel$ | $Q$ |
+| null | r [$R_J$] | latitude | longitude | type | degree | $J_\parallel$ (dimensionless) | $Q$ |
 |---|---|---|---|---|---|---|---|
 | polar | 0.873 | +69.0° | 282.3° | radial+ | $+1$ | $0.00$ | **6** |
 | low-latitude | 0.864 | +9.7° | 157.4° | radial+ | $+1$ | $0.00$ | **6** |
@@ -156,7 +156,9 @@ at a generic control point (<code>scripts/run_j1d_raw_w4.py</code>) — the $k=1
 weight, read raw, on the fourth world. (The tangent-cone $Q = 6$ in the table remains
 what it is everywhere on modelled fields: a consistency check given the measured
 Jacobian.) All three nulls are **radial with
-$J_\parallel = 0.00$**: the envelope field is curl-free, so the force-free theorem of
+$J_\parallel = 0.00$** ($J_\parallel \equiv (\nabla\times\mathbf B)\cdot\hat{\mathbf s}
+/\max_i\lvert\lambda_i(\nabla\mathbf B)\rvert$ — the spine-parallel curl in units of the
+Jacobian's largest eigenvalue modulus, dimensionless, as in Part 6): the envelope field is curl-free, so the force-free theorem of
 Part 5 forbids spiral nulls here — and the census obliges, 0 spirals out of 3.
 
 </div><!-- /.l-body -->
@@ -249,7 +251,7 @@ flux before it can reach daylight**.
     view with the spine (orange) vertical — where the polar null's fan visibly curves
     <em>downward</em>: that bending sheet is the dome of the skeleton figure closing
     onto the dynamo surface. Gray = ambient lines; open circle coloured by topological
-    degree (blue $+1$, red $-1$); dashed circle/line = the ideal fan plane; axes in $R_J$, linear. <em>A–C:</em> the polar null ($r = 0.873\,R_J$, latitude $+69°$; normalised $\nabla\mathbf B$ eigenvalues $(1.00, -0.27, -0.73)$). <em>D–F:</em> the low-latitude null ($r = 0.865\,R_J$, latitude $+10°$; eigenvalues $(1.00, -0.07, -0.93)$). Both are clean radial nulls of degree $+1$ with $J_\parallel = 0.00$ — the
+    degree (blue $+1$, red $-1$); dashed circle/line = the ideal fan plane; axes in $R_J$, linear. <em>A–C:</em> the polar null ($r = 0.873\,R_J$, latitude $+69°$; $\nabla\mathbf B$ eigenvalues normalised by the largest $\lvert\lambda_i\rvert$, dimensionless: $(1.00, -0.27, -0.73)$). <em>D–F:</em> the low-latitude null ($r = 0.865\,R_J$, latitude $+10°$; eigenvalues $(1.00, -0.07, -0.93)$). Both are clean radial nulls of degree $+1$ with $J_\parallel = 0.00$ — the
     vacuum envelope permits nothing else (Part 5's theorem) — and the SR growth vector
     reads $Q = 6$ at both: the law's fourth-world consistency check.
   </figcaption>
@@ -314,7 +316,11 @@ fractions under the chosen stress ensemble* and *sample position ranges*, not
 posterior probabilities or formal uncertainties. Across $N = 40$ members
 (`run_j2b_sensitivity.py`, all three nulls tracked): **the polar reversed patch
 survives in 40/40** — at every tested threshold ($0.25$, $0.5$, $1$ G) — **and the
-polar null in 32/40**, the 32 surviving positions ranging over $r$
+polar null in 32/40** (acceptance: the first root within $0.15\,R_J$ of the nominal null,
+then the shell-floor cut $r \ge 0.856$; an earlier census run that applied the floor
+*inside* the root-finder counted 33/40 with longitudes from $262°$, because in one member
+a different root stood in for the polar one, which had sunk to $r = 0.81$ —
+`run_j2_census.py` now uses the same rule and `j2_census.json` agrees), the 32 surviving positions ranging over $r$
 $0.86$–$0.93\,R_J$, latitude $64$–$73°$, longitude $265$–$301°$ (raw recaptures
 before the shell-floor cut: 36/40, reaching down to $r = 0.75$ — the two acceptance
 sets are stated separately on purpose). The two low-latitude nulls are markedly less
@@ -338,8 +344,11 @@ Two more honesty notes. The potential-field treatment of the envelope neglects a
 currents in the weakly conducting molecular hydrogen (standard practice, but an
 approximation — the same caveat as every solar potential extrapolation in this series);
 and the magnetodisc and magnetopause currents, which dominate Jupiter's *external*
-magnetosphere, are irrelevant here — at $r < 1\,R_J$ the internal field is
-$10^4$–$10^6$ nT against their tens of nT.
+magnetosphere, are irrelevant here — in the shell the $l \le 18$ internal field is of order
+$10^6$ nT (on a $1°$ grid: $1.8\times10^4$–$6.3\times10^6$ nT at $0.85\,R_J$, median
+$1.0\times10^6$; $1.8\times10^5$–$1.9\times10^6$ nT at $1\,R_J$;
+`artifacts/j2_census.json`) against their tens of nT, and it falls below that only in
+the immediate neighbourhood of the three nulls.
 
 ## Where this leaves the program
 
@@ -376,7 +385,8 @@ increasingly, the actual product.
   boundary.
 - **Gauss coefficients $g_l^m, h_l^m$** — Schmidt semi-normalised spherical-harmonic
   coefficients of the internal potential; JRM33's dipole is 4.177 G tilted 10.25°.
-- **Growth vector $Q$** — the series' sub-Riemannian null detector: $Q = 5$ in bulk
+- **Growth vector $Q$** — the series' sub-Riemannian null read-out (here a local
+  confirmation at root-finder locations, not an independent detector): $Q = 5$ in bulk
   field, $6$ at a generic null (Parts 1–4).
 
 ## Reproduce

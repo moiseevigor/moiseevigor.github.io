@@ -40,7 +40,7 @@ contact-geometric backbone of the elastica
 problem.  This appendix unpacks them.
 
 The interactive figures borrow the cuspidal-trajectory machinery from the
-<a href="https://moiseevigor.github.io/elliptic/examples/dubins-back-wheel/">Dubins-back-wheel example</a>
+<a href="https://moiseevigor.github.io/elliptic/examples/dubins-visual-cortex/">Dubins-car example</a>
 in the
 <a href="https://moiseevigor.github.io/elliptic/">elliptic project</a> —
 precisely because Chow's theorem says <em>any</em> two configurations in
@@ -158,7 +158,7 @@ proof must face: the endpoint map $$(t_1, \ldots, t_n) \mapsto \Phi^{X_{i_1}}_{t
 differential there only spans the distribution itself, and the bracket
 directions appear at second order.  One therefore applies the inverse/rank
 argument at suitable *nonzero* parameter values (or invokes the Orbit
-Theorem); see Montgomery §2 or Agrachev–Barilari–Boscain Ch. 3 for the
+Theorem); see Montgomery Ch. 2 or Agrachev–Barilari–Boscain Ch. 3 for the
 full proof.  Compose enough hops and you can reach any point.
 
 **For SE(2) the Hörmander condition is satisfied after one bracket layer (step 2).** We computed
@@ -327,7 +327,7 @@ homogeneous distance is a separate empirical question.
     appreciable progress, hence many short legs.  The "parallel-park"
     target is the same combinatorics as the cuspidal Dubins trajectory in
     the
-    <a href="https://moiseevigor.github.io/elliptic/examples/dubins-back-wheel/">
+    <a href="https://moiseevigor.github.io/elliptic/examples/dubins-visual-cortex/">
     elliptic project</a>: forward, steer, reverse, steer.  Drop $\varepsilon$
     and the path becomes a finer-grained zigzag approximating displacement in
     the bracket direction. This proves reachability; it neither selects a
@@ -379,8 +379,8 @@ $\mathrm{SE}(2)$ it means every pair of lifted model states is connected by an
 
 The reachability figure above uses the same flow concatenations as the
 parking trajectory in
-<a href="https://moiseevigor.github.io/elliptic/examples/dubins-back-wheel/">
-the dubins-back-wheel example</a>: a piecewise concatenation of
+<a href="https://moiseevigor.github.io/elliptic/examples/dubins-visual-cortex/">
+the Dubins-car example</a>: a piecewise concatenation of
 $X_1$ ("forward + reverse") and $X_2$ ("steer") flows.  The parking
 trajectory is what Chow's theorem looks like with finite $\varepsilon$.
 Shrinking the loop isolates the bracket displacement; it is a local-control
@@ -458,13 +458,16 @@ without proof.
 <ol>
   <li>
     R. Montgomery (2002). <em>A Tour of Subriemannian Geometries, Their
-    Geodesics and Applications.</em> AMS Mathematical Surveys 91.
-    The textbook — Chapter 1 develops everything in this appendix.
+    Geodesics and Applications.</em> AMS Mathematical Surveys and Monographs 91.
+    The textbook — Chapter 1 (the Heisenberg example) and Chapter 2 (Chow's theorem)
+    cover the material of this appendix.
   </li>
   <li>
     A. A. Agrachev, D. Barilari, U. Boscain (2019).
     <em>A Comprehensive Introduction to Sub-Riemannian Geometry.</em>
-    Cambridge.  Chapters 2 (distributions) and 3 (Chow's theorem).
+    Cambridge Studies in Advanced Mathematics 181, Cambridge University Press.
+    Chapter 2 (vector fields, flows, Lie brackets) and Chapter 3 (sub-Riemannian
+    structures and the Chow–Rashevskii theorem).
   </li>
   <li>
     H. Geiges (2008). <em>An Introduction to Contact Topology.</em>
@@ -482,8 +485,8 @@ without proof.
     Originator of the contact-geometric V1 model.
   </li>
   <li>
-    <a href="https://moiseevigor.github.io/elliptic/examples/dubins-back-wheel/">
-    Elliptic project — Dubins back wheel</a>.  Shows parking-style
+    <a href="https://moiseevigor.github.io/elliptic/examples/dubins-visual-cortex/">
+    Elliptic project — Dubins car example</a>.  Shows parking-style
     piecewise-horizontal reachability paths. Shrinking their commutator loops
     isolates the Lie-bracket direction; it does not by itself compute an SR
     minimiser or a pinned elastica.

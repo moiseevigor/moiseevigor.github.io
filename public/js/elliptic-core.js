@@ -87,3 +87,26 @@ function centreCurve(pts) {
   const yMid = (Math.min(...yArr) + Math.max(...yArr)) / 2;
   return pts.map(p => ({ ...p, xc: p.x - xMid, yc: p.y - yMid }));
 }
+
+// Scale bar for plane panels drawn without tick axes. `g` is a d3 selection,
+// (x, y) the bar's left end in px, pxPerUnit the plot scale; the bar length is
+// the largest "nice" value that fits in 110 px. `unit` is the label suffix:
+// 'ℓ' (elastica length scale, the default) or e.g. 'px'.
+function drawScaleBar(g, x, y, pxPerUnit, unit = 'ℓ') {
+  const u = [100, 50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1].find(v => v * pxPerUnit <= 110) || 0.1;
+  const w = u * pxPerUnit;
+  const halo = 'paint-order:stroke;stroke:#fafafa;stroke-width:3px;';
+  g.append('path').attr('d', `M${x},${y - 4}V${y}H${x + w}V${y - 4}`)
+    .attr('fill', 'none').attr('stroke', '#666').attr('stroke-width', 1.2);
+  g.append('text').attr('x', x).attr('y', y - 8)
+    .attr('style', 'font-family:var(--sans,sans-serif);font-size:10px;fill:#666;' + halo)
+    .text(`x, y: ${u} ${unit}`);
+}
+
+// Label the ends of the faint x- and y-reference axes of a plane panel:
+// 'x' at the right end (xEnd, y0), 'y' at the top end (x0, yTop), all in px.
+function labelPlaneAxes(g, xEnd, y0, x0, yTop) {
+  const st = 'font-family:var(--sans,sans-serif);font-size:10px;font-style:italic;fill:#888';
+  g.append('text').attr('x', xEnd - 2).attr('y', y0 - 4).attr('text-anchor', 'end').attr('style', st).text('x');
+  g.append('text').attr('x', x0 + 5).attr('y', yTop + 9).attr('style', st).text('y');
+}

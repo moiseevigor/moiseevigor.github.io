@@ -1,8 +1,9 @@
 # E1 — the three-component fingerprint and the first confusion matrix (tests H2)
 
 Reproduce: `.venv/bin/python scripts/run_e1.py` → `artifacts/e1_results.json`.
-Numbers below are from that artifact (25 held-out evaluation seeds per group;
-threshold τ calibrated on 10 disjoint seeds).
+Numbers below are from that artifact, full run (no `--quick`): 25 held-out evaluation
+seeds per group; threshold τ calibrated on 10 disjoint seeds. `--quick` is a smoke run
+(10 evaluation seeds, 2 noise levels) and overwrites the artifact with different counts.
 
 ## Hypothesis and prediction
 
@@ -40,40 +41,51 @@ Heisenberg  [-0.000 -0.000 -0.000 -0.000 -0.000]   (flat model, as it must be)
 SE(2)       [ 0.342  0.207  0.099  0.040  0.015]   (departs at low momentum)
 ```
 
-Mean δ: Heisenberg ≈ 0.002, SE(2) ≈ 0.140; calibrated threshold τ = 0.071 sits
-cleanly between them.
+Mean δ on the 10 calibration seeds: Heisenberg 0.002, SE(2) 0.140; calibrated
+threshold τ = 0.071 sits cleanly between them (`tau`, `tau_calibration` in the artifact).
 
-**Confusion matrices** (rows = truth, columns = prediction; 25 seeds each):
+**Confusion matrices** (rows = truth, columns = prediction; 25 evaluation seeds per
+group, 400 geodesics per realization). Columns `E/C` and `H/S` are the coarse labels
+"Engel/Cartan" and "Heisenberg/SE(2)" that the classifier falls back to (via the corank /
+abnormal bit M4, see E2) when the growth vector matches no candidate. "exact" = diagonal
+mass / 100; "class" = exact plus coarse labels that contain the true group, / 100.
+M1 noise σ = standard deviation of absolute Gaussian jitter on geodesic endpoints.
 
 ```
-M1 noise 1e-3  — accuracy 1.00 (chance 0.25)
-              Heis  SE2  Eng  Car  unk
-Heisenberg     25    0    0    0    0
-SE(2)           0   25    0    0    0
-Engel           0    0   25    0    0
-Cartan          0    0    0   25    0
+M1 noise 1e-3  — exact 0.99, class 1.00 (chance 0.25)
+              Heis  SE2  Eng  Car  E/C  H/S  unk
+Heisenberg     25    0    0    0    0    0    0
+SE(2)           0   25    0    0    0    0    0
+Engel           0    0   25    0    0    0    0
+Cartan          0    0    0   24    1    0    0
 
-M1 noise 1e-2  — accuracy 0.91
-              Heis  SE2  Eng  Car  unk
-Heisenberg     25    0    0    0    0
-SE(2)           0   25    0    0    0
-Engel           0    0   22    0    3
-Cartan          0    0    0   19    6
+M1 noise 5e-3  — exact 0.95, class 1.00
+              Heis  SE2  Eng  Car  E/C  H/S  unk
+Heisenberg     25    0    0    0    0    0    0
+SE(2)           0   25    0    0    0    0    0
+Engel           0    0   24    0    1    0    0
+Cartan          0    0    0   21    4    0    0
 
-M1 noise 3e-2  — accuracy 0.57
-              Heis  SE2  Eng  Car  unk
-Heisenberg     25    0    0    0    0
-SE(2)           0   25    0    0    0
-Engel           0    0    6    0   19
-Cartan          0    0    0    1   24
+M1 noise 1e-2  — exact 0.88, class 1.00
+              Heis  SE2  Eng  Car  E/C  H/S  unk
+Heisenberg     25    0    0    0    0    0    0
+SE(2)           0   25    0    0    0    0    0
+Engel           0    0   20    0    5    0    0
+Cartan          0    0    0   18    7    0    0
+
+M1 noise 3e-2  — exact 0.55, class 0.98
+              Heis  SE2  Eng  Car  E/C  H/S  unk
+Heisenberg     25    0    0    0    0    0    0
+SE(2)           0   25    0    0    0    0    0
+Engel           0    0    4    0   19    2    0
+Cartan          0    0    0    1   24    0    0
 ```
-
-(Full grid, incl. 5e-3 → 0.99, in the artifact.)
 
 ## Analysis and verdict
 
-**H2: confirmed.** Perfect 4-way separation on clean data (1.00 vs 0.25 chance),
-and three features make the result trustworthy rather than lucky:
+**H2: confirmed.** Near-perfect 4-way separation at the lowest noise (0.99 exact vs
+0.25 chance; one Cartan realization hedges to the coarse class), and three features make
+the result trustworthy rather than lucky:
 
 1. **The (2,3) alias is broken decisively and robustly.** Heisenberg and SE(2)
    never confuse each other at any noise level — their δ separation (0.002 vs
@@ -84,30 +96,36 @@ and three features make the result trustworthy rather than lucky:
    first, then Engel; the contact groups stay perfect throughout. The mechanism is
    inherited straight from E0: a step-s group's discriminating coordinate has
    weight s and reaches only ~r^s, so it is the first casualty of noise.
-3. **Failures are abstentions, not confusions.** Degraded Engel/Cartan
-   realizations fall to **"unknown"** (their growth vector is misread and matches
-   no candidate), never to a wrong group. Off-diagonal wrong-group mass is
-   essentially zero at every noise level. The classifier says "I can't tell"
-   rather than guessing — the honest and safe failure mode, and the behaviour the
-   program wants when it moves to real data (E3/E4).
+3. **Failures are hedges, not confusions.** Degraded Engel/Cartan realizations fall
+   to the coarse class "Engel/Cartan" (their growth vector is misread and matches no
+   candidate; the M4 fallback then tags the class from the corank), never to a wrong
+   exact group. The only wrong answers in the whole grid are 2 of 25 Engel
+   realizations at σ = 3e-2 that land in the wrong coarse class "Heisenberg/SE(2)".
 
-## Update — M4 fallback (added after E2)
+## The M4 fallback (added after E2)
 
-Folding the abnormal bit in as a fallback (when the growth vector is unresolved,
-tag the coarse class from corank instead of returning "unknown", per E2's
-complementary-robustness finding) recovers class-level information at moderate
-noise without introducing wrong-group errors:
+The classifier's fallback (when the growth vector is unresolved, tag the coarse class
+from the corank instead of returning "unknown", per E2's complementary-robustness
+finding) is what separates the two accuracy columns. Without it every coarse-labelled
+realization would be "unknown", i.e. accuracy would equal the "exact" column:
 
 ```
 M1 noise    exact acc    class acc   (class = coarse label counts if it contains truth)
 1e-3          0.99         1.00
-1e-2          0.87         1.00
-3e-2          0.52         0.96
+5e-3          0.95         1.00
+1e-2          0.88         1.00
+3e-2          0.55         0.98
 ```
 
 Exact-group accuracy still degrades (step-3 weights are irreducibly noise-fragile),
-but the classifier now falls to the correct *coarse* class ("Engel/Cartan" =
+but the classifier falls to the correct *coarse* class ("Engel/Cartan" =
 non-contact) rather than to "unknown" — graceful degradation, not a cliff.
+
+**Reproducibility note.** Evaluation seeds are `10000 + crc32(group) % 1000 + i`.
+An earlier version used Python's built-in `hash(group)`, which is salted per process,
+so counts at σ ≥ 1e-2 moved by a few realizations from run to run (e.g. exact accuracy
+0.87 / 0.52 in one earlier run vs 0.88 / 0.55 here). The numbers above are the
+deterministic ones.
 
 ## Caveats (logged)
 

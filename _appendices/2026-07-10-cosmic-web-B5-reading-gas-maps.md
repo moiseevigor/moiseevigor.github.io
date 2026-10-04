@@ -250,7 +250,7 @@ ring controls (which sit farther from it), manufacturing a fake bridge —
 |---|---|---|
 | pair bootstrap errors (E3d-v2) | 5.24σ (2.28×10⁻⁸) | 19.3σ (2.97×10⁻⁸) |
 | sky-patch jackknife (E3e) | 3.30σ | 7.99σ |
-| null-pair subtracted (E3e) | ≈1.6σ (1.4×10⁻⁸ ± 0.9) | ≈2.2σ (1.2×10⁻⁸ ± 0.5) |
+| null-pair subtracted (E3e) | ≈1.7σ (1.4×10⁻⁸ ± 0.9) | ≈2.2σ (1.2×10⁻⁸ ± 0.5) |
 
 The bottom row is the physically meaningful bridge amplitude:
 **~1.2–1.4×10⁻⁸, at ≈2σ per instrument**, mutually consistent between two

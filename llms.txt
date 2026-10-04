@@ -29,7 +29,7 @@ Citations should link to the canonical URL and credit "Igor Moiseev".
   where two optimal paths tie; on the smooth elastica the mirror-pair tie lands
   at arc length 4K(k²), while the free SR problem's cut fires at half a
   pendulum period, 2K(k²).
-- [Part 4 — The Open Problem: Exact Cut Time on SE(2)](https://moiseevigor.github.io/mathematics/2026/05/15/geometry-of-seeing-cut-time-open-problem/):
+- [Part 4 — The Exact Cut Time on SE(2) — and the Open Problem Beyond It](https://moiseevigor.github.io/mathematics/2026/05/15/geometry-of-seeing-cut-time-open-problem/):
   Sachkov's exact cut time on SE(2) and the general Maxwell-equals-cut
   question that remains open beyond it.
 - Appendices A1–A5 (Lie groups, contact geometry, PMP, Jacobi elliptic functions,

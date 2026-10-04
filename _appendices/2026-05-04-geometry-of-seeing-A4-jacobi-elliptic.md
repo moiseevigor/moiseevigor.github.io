@@ -36,9 +36,9 @@ Frenet–Serret integration), and explains Gauss's <strong>arithmetic–geometri
 mean</strong> — the iteration that the
 <a href="https://github.com/moiseevigor/elliptic">moiseevigor/elliptic</a>
 package uses to evaluate $K(m)$.  Every formula in this appendix is
-implemented in the Python <code>elliptic</code> package; its $K(m)$ and
-$\mathrm{sn}/\mathrm{cn}/\mathrm{dn}$ routines are ported (often line-for-line) to
-<code>public/js/elliptic-core.js</code>.
+available in the Python <code>elliptic</code> package; this site's
+<code>public/js/elliptic-core.js</code> implements the same AGM and descending-Landen
+algorithms for $K(m)$ and $\mathrm{sn}/\mathrm{cn}/\mathrm{dn}$ in JavaScript.
 
 </div>
 
@@ -231,9 +231,10 @@ $$K(m) \;=\; \frac{\pi}{2\,\mathrm{AGM}\!\bigl(1,\;\sqrt{1 - m}\bigr)}.$$
 Six AGM steps from $(1, \sqrt{1-m})$ pin $K(m)$ down to full double precision.
 </div>
 
-This is what `ellipticK` in the Python `elliptic` package computes — and
-what `ellipj` then uses internally to invert the integral and produce the
-sn/cn/dn values.
+This is the iteration behind `agm(a, b)` in the Python `elliptic` package
+(so $K(m)$ is `pi / (2 * agm(1, sqrt(1 - m)))`) — and the same AGM sequence is what
+`ellipj` uses internally, followed by the descending Landen back-substitution, to
+produce the sn/cn/dn values.
 
 </div><!-- /.l-body -->
 
@@ -262,8 +263,8 @@ sn/cn/dn values.
     the previous one (the gap is roughly squared at every step) — quadratic
     convergence.
     The current $K(m) \approx \pi / (2 a_n)$ is computed as you step;
-    compare against the closed-form value (also shown).  Same algorithm,
-    line-for-line, as <code>elliptic.ellipticK</code> in the Python package.
+    compare against the closed-form value (also shown).  The same algorithm as
+    <code>elliptic.agm</code> in the Python package.
   </figcaption>
 </figure>
 
@@ -342,7 +343,8 @@ the classical
 $$x(s) \;=\; 2\bigl(E(\mathrm{am}(s)\mid k^2) - \tfrac12 F(\mathrm{am}(s)\mid k^2)\bigr).$$
 
 No numerical ODE required, only `elliptic12` calls.  The Python `elliptic`
-package's `elliptic12(phi, m)` returns exactly this pair $(F, E)$.
+package's `elliptic12(phi, m)` returns this pair, as `(F, E, Z)` with $Z$ the Jacobi
+zeta function.
 
 ## Connection to the elliptic project
 
@@ -351,23 +353,25 @@ Every formula in this appendix is implemented in
 
 | Formula here | Function in `elliptic` |
 |---|---|
-| $K(m)$ via AGM | `ellipticK(m)` |
-| sn/cn/dn via descending Landen (Fig. A4.1) | `ellipj(u, m)` |
+| $K(m)$ via AGM | `pi / (2 * agm(1, sqrt(1 - m)))` (also `cel1(sqrt(1 - m))`) |
+| sn/cn/dn (and am) via descending Landen (Fig. A4.1) | `ellipj(u, m)` |
 | $E(\phi\mid m), F(\phi\mid m)$ | `elliptic12(phi, m)` |
-| Pendulum period $4K((E+1)/2)$ | `ellipticK((E+1)/2) * 4` |
+| Pendulum period $4K((E+1)/2)$ | `4 * pi / (2 * agm(1, sqrt((1 - E)/2)))` |
 | Carlson form $R_F$, $R_D$ (not covered here) | `carlsonRF`, `carlsonRD` |
 
-The browser figures on this page use `elliptic-core.js`, which is a
-hand-port of the AGM and Landen routines from the Python package.  Lines
-13–20 of `elliptic-core.js` are identical (modulo language) to the AGM
-loop in `elliptic/_AGM.py`.
+The browser figures on this page use `elliptic-core.js`, which implements the
+same AGM and Landen algorithms in JavaScript.  Its `ellipticK` loop is the same
+algorithm as the AGM iteration in the package's `python/elliptic/_agm.py`
+(which runs a fixed 25 iterations instead of stopping on convergence).
 
 ## Code
 
 ```python
 # Reproduce the closed-form pendulum period numerically
-from elliptic import ellipticK
+from elliptic import agm
 import numpy as np
+
+ellipticK = lambda m: np.pi / (2 * agm(1.0, np.sqrt(1 - m)))   # K(m) = π / (2·AGM(1, √(1−m)))
 
 E_vals = np.linspace(-0.99, 0.99, 200)
 k2 = (E_vals + 1) / 2
@@ -393,7 +397,7 @@ for E in E_vals:
 ```
 
 ```python
-# AGM in 6 lines, matches ellipticK(m) to 1e-15
+# AGM in 6 lines, matches K(m) to 1e-15
 def agm(a, b, max_iter=20):
     for _ in range(max_iter):
         a, b = (a + b) / 2, np.sqrt(a * b)
@@ -456,7 +460,7 @@ Maxwell pairs by chasing the $4K(k^2)$ period through the reconstruction.
   <li>
     <a href="https://github.com/moiseevigor/elliptic">moiseevigor/elliptic</a>
     — Python package implementing every formula here as
-    <code>ellipticK</code>, <code>ellipj</code>, <code>elliptic12</code>;
+    <code>agm</code>, <code>ellipj</code>, <code>elliptic12</code>;
     JavaScript port in
     <a href="https://moiseevigor.github.io/elliptic/">moiseevigor.github.io/elliptic</a>.
   </li>

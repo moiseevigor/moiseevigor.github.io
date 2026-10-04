@@ -30,13 +30,21 @@ nilpotent-deviation statistic. Full derivation in [`docs/METHODS.md`](docs/METHO
   - *(upcoming)* a data-driven abnormal-stratum test (M4); SE(3) forward model.
 - `scripts/run_e0.py` — E0 growth-vector recovery sweeps (noise, sample size).
 - `scripts/run_e1.py` — E1 fingerprint classifier + confusion matrix.
+- `scripts/run_e2.py`, `run_e3e4.py`, `run_e5.py`, `run_e6.py`, `run_e6_real.py`,
+  `run_e8.py`, `run_e9.py` — the remaining experiments (see `docs/E*.md`).
+- `scripts/run_e10.py` — E10 fold check: singularity type of the exponential map at
+  the first conjugate point of random geodesics (evidence behind the "local caustics
+  are group-blind" premise; see [`docs/E10-fold-germs.md`](docs/E10-fold-germs.md)).
 - `scripts/smoke_test.py` — assert-based self-checks + golden-file regression.
 - `tests/golden/` — committed reference outputs (e.g. the Heisenberg conjugate
   locus); regenerate with `smoke_test.py --update-golden`.
 - `docs/METHODS.md` — living derivation of the fingerprint + deviation statistic.
 - `docs/adr/` — architecture/method decision records (ADR-0001: candidate list
   and identifiability target).
-- `artifacts/` — result JSONs (gitignored, regenerable).
+- `artifacts/` — result JSONs (gitignored, regenerable). **Every number quoted in
+  `docs/E*.md` and in the blog posts comes from the full runs** (scripts invoked with no
+  flag). `--quick` runs a reduced smoke configuration and overwrites the same files with
+  different numbers; re-run without the flag before comparing against the text.
 
 ## Status
 
@@ -47,9 +55,9 @@ nilpotent-deviation statistic. Full derivation in [`docs/METHODS.md`](docs/METHO
   (step 3) is the hardest (needs more samples, tolerates less noise); Heisenberg
   and SE(2) alias at (2,3) as pre-registered. See [`docs/E0-growth-vector.md`](docs/E0-growth-vector.md).
 - **E1** (fingerprint + confusion matrix, tests H2): done — **H2 confirmed.**
-  Perfect 4-way separation on clean data (1.00 vs 0.25 chance); δ breaks the
-  Heisenberg/SE(2) alias (δ ≈ 0.002 vs 0.140); noise degrades step-3 groups first
-  and into "unknown" (abstention), never wrong-group confusion. See
+  Near-perfect 4-way separation at the lowest noise (0.99 exact vs 0.25 chance); δ
+  breaks the Heisenberg/SE(2) alias (δ ≈ 0.002 vs 0.140); noise degrades step-3 groups
+  first and into the coarse "Engel/Cartan" class, never a wrong exact group. See
   [`docs/E1-confusion.md`](docs/E1-confusion.md).
 - **E2** (aliasing map + abnormal leg, tests H3): done — **H3 confirmed.** Honest
   aliasing map with two rigidity points (Heisenberg/SE(2) rides on δ alone;
@@ -58,8 +66,9 @@ nilpotent-deviation statistic. Full derivation in [`docs/METHODS.md`](docs/METHO
   Cartan at σ=3e-2 where M1 recovery is 0.00. See [`docs/E2-aliasing.md`](docs/E2-aliasing.md).
 - **Classifier upgrade** (M4 fallback): done — tagging the coarse class from the
   abnormal bit when the growth vector is unresolved lifts class accuracy to 1.00 at
-  σ=1e-2 and 0.96 at σ=3e-2 (from 0.91 / 0.57 strict), with no new wrong-group
-  errors. Degradation is now graceful (falls to correct coarse class, not "unknown").
+  σ=1e-2 and 0.98 at σ=3e-2 (from 0.88 / 0.55 exact), with no wrong exact-group
+  errors (2 of 25 Engel realizations at σ=3e-2 get the wrong coarse class).
+  Degradation is now graceful (falls to correct coarse class, not "unknown").
 - **Blog Parts 2 & 3** drafted from these results:
   [Part 2 "The Forward Map"](../../_posts/2026-07-18-caustics-to-groups-forward-map.md)
   and [Part 3 "The Inverse Map"](../../_posts/2026-07-22-caustics-to-groups-inverse-map.md)
@@ -86,6 +95,7 @@ nilpotent-deviation statistic. Full derivation in [`docs/METHODS.md`](docs/METHO
 | E4 calibrated silence | H4 (no half) | confirmed (right verdict, wrong reason — see E5) |
 | SE(3) synthetic field | H4 (yes half, mechanism) | confirmed |
 | real DW-MRI acquisition | H4 (yes half, real data) | pending credentialed data |
+| E10 fold check at first conjugate points | group-blindness premise (folds) | confirmed on sample: SE(2), Engel, Cartan 24/24 folds; Heisenberg control 0/24 |
 | E5 gravity has no SR structure | H-A (astrophysics Phase A) | confirmed; refuted our own `Q>n` criterion |
 
 ## Astrophysics phase
@@ -130,4 +140,11 @@ python3.13 -m venv .venv && .venv/bin/pip install numpy scipy
 .venv/bin/python scripts/smoke_test.py     # model + detector + M1 + classifier + golden
 .venv/bin/python scripts/run_e0.py         # E0 growth-vector recovery sweeps (~30s)
 .venv/bin/python scripts/run_e1.py         # E1 fingerprint + confusion matrix (~20s)
+.venv/bin/python scripts/run_e2.py         # E2 aliasing map + M4 vs M1 (~30s)
+.venv/bin/python scripts/run_e3e4.py       # E4 calibrated silence + SE(3) (~15s)
+.venv/bin/python scripts/run_e5.py         # E5 gravity has no SR structure (~5s)
+.venv/bin/python scripts/run_e6.py         # E6 Doroshkevich validation (~10s)
+.venv/bin/python scripts/run_e8.py         # E8 magnetized plasma (~30s)
+.venv/bin/python scripts/run_e10.py        # E10 fold check at conjugate points (~7 min)
+# full runs = no flag; --quick is a smoke configuration with different numbers
 ```

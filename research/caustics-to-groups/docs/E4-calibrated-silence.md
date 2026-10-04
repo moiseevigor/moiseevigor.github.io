@@ -1,6 +1,9 @@
 # E4 — the cosmic-web stress test: calibrated silence (tests H4, "no" half)
 
 Reproduce: `.venv/bin/python scripts/run_e3e4.py` → `artifacts/e3e4_results.json`.
+Numbers below are from that artifact, full run (no `--quick`): K = 30 base points, 900
+geodesics each, noise 3e-3. `--quick` is a smoke run (K = 12) and overwrites the artifact
+with different counts.
 
 ## Hypothesis
 

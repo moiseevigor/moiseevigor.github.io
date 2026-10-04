@@ -1,7 +1,11 @@
 # E2 — rigidity / aliasing map and the abnormal-stratum leg (tests H3, exercises M4)
 
 Reproduce: `.venv/bin/python scripts/run_e2.py` → `artifacts/e2_results.json`.
-Numbers below are from that artifact (20 trials per noise level).
+Numbers below are from that artifact, full run (no `--quick`): 20 trials per noise
+level, 400 geodesics per trial. `--quick` is a smoke run (8 trials) and overwrites the
+artifact with different rates. Clean observables use 800 noise-free geodesics; their
+fitted weights and reach curves are stored per group (`observables.*.weights`,
+`.reach`) — Cartan: weights (0.95, 0.94, 1.83, 2.76, 2.76) → (2,3,5).
 
 ## Hypothesis and prediction
 
@@ -78,7 +82,8 @@ recover Cartan's growth vector at all (0.00), the abnormal bit is still perfect
 (the rank of D) against the ambient dimension — a coarse, robust question — whereas
 M1 must resolve the fragile step-3 weights. The fingerprint components therefore
 have **complementary noise profiles**: when M1 collapses a high-step group to
-"unknown" (as in the E1 confusion matrix), M4 can still assign it to the
+"unknown" (as in the E1 confusion matrix before the fallback was added), M4 can
+still assign it to the
 "non-contact / has-abnormals" class.
 
 ## Analysis and next steps

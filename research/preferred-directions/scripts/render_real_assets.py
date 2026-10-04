@@ -37,7 +37,49 @@ from run_r3_real_gallery import load_magnetograms, best_windows, WIN, CUT, NZ  #
 BLUE, ORANGE = "#1565c0", "#e65100"
 
 
+def pixel_scales():
+    """Physical scale of the extrapolation grid, from the FITS headers on disk.
+
+    Every solar volume in the program is built the same way: full-disk HMI
+    (CDELT1 arcsec/px at NAXIS1 px) -> 1024-px disk (linear resample) -> window
+    of WIN px resampled to CUT px (R3/P5: 160 -> 100; S5: 360 -> 225; both a
+    factor 1.6), heights on the same grid (dz = 1). So one grid px is
+        CDELT1 * (NAXIS1 / 1024) * (WIN / CUT)  arcsec
+    and, with the header's own solar radius, RSUN_REF / RSUN_OBS Mm per arcsec
+    (plane of sky; no foreshortening correction, as in the extrapolation).
+    Also records the peak |B| of each 1024-px disk (the triptych labels).
+    Out: artifacts/hmi_scale.json.
+    """
+    from astropy.io import fits
+    from sunpy.data.sample import HMI_LOS_IMAGE
+    files = [Path(HMI_LOS_IMAGE)]
+    files += sorted((ROOT / "artifacts" / "hmi").glob("hmi.m_*.fits"))
+    files += sorted((ROOT / "artifacts" / "hmi" / "seq").glob("hmi.m_*.fits"))[:1]
+    peaks = {date: float(np.abs(bz).max()) for date, bz in load_magnetograms()}
+    out = {"definition": "grid px = CDELT1*(NAXIS1/1024)*(WIN/CUT) arcsec; "
+                         "Mm = arcsec*RSUN_REF/RSUN_OBS (plane of sky)",
+           "win_over_cut": WIN / CUT, "days": {}}
+    for f in files:
+        hdul = fits.open(f); hdul.verify("silentfix")
+        h = [x.header for x in hdul if getattr(x, "data", None) is not None
+             and x.data.ndim == 2][0]
+        date = str(h.get("DATE-OBS") or h.get("T_OBS"))[:10].replace(".", "-")
+        asec = float(h["CDELT1"]) * h["NAXIS1"] / 1024 * WIN / CUT
+        mm = asec * float(h["RSUN_REF"]) / 1e6 / float(h["RSUN_OBS"])
+        out["days"][date] = {"file": f.name, "cdelt1_arcsec": float(h["CDELT1"]),
+                             "naxis1": int(h["NAXIS1"]),
+                             "arcsec_per_grid_px": round(asec, 4),
+                             "Mm_per_grid_px": round(mm, 4),
+                             "peak_absB_G_1024disk": round(peaks[date])
+                             if date in peaks else None}
+        print(f"scale {date}: {asec:.3f} arcsec = {mm:.3f} Mm per grid px; "
+              f"peak |B| {peaks.get(date, float('nan')):.0f} G")
+    (ROOT / "artifacts" / "hmi_scale.json").write_text(
+        json.dumps(out, indent=1) + "\n")
+
+
 def triptych():
+    pixel_scales()
     mags = load_magnetograms()
     fig, axes = plt.subplots(1, 3, figsize=(11.7, 4.3), dpi=150)
     notes = {"2011-06-07": "quiet-ish disk, one AR",
@@ -1219,6 +1261,9 @@ def render_aia_gif():
 
 if __name__ == "__main__":
     fast = "--fast" in sys.argv
+    if "--scales" in sys.argv:        # only the pixel-scale / peak-field artifact
+        pixel_scales()
+        sys.exit(0)
     if "--anatomy" in sys.argv:       # regenerate only the two anatomy sheets
         null_anatomy_sun()
         try:

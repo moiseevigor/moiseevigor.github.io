@@ -4,7 +4,8 @@ title: "Finding Magnetic Nulls with a Growth Vector"
 subtitle: >
   A magnetic null — where the field vanishes, and a candidate site for reconnection —
   announces itself as a jump in a sub-Riemannian invariant. This post (the fourth of eight)
-  takes the growth-vector estimator to a real dynamo field, checks it against the standard
+  takes the growth-vector estimator to an analytic ABC-like test field (a solenoidal
+  dynamo-style model, not data) and then to one real solar magnetogram, checks it against the standard
   eigenvalue finder as a tangent-cone consistency check, and is honest about exactly where
   it agrees and where it stops.
 date: 2026-08-14 09:00:00
@@ -55,7 +56,7 @@ Jacobian $\nabla\mathbf B$: three real eigenvalues make a *radial* null, a compl
 *spiral* null, and the signs fix its orientation. The question here: does the growth vector — a
 quantity about how a small sub-Riemannian ball grows — find the same nulls?
 
-## A real dynamo field, and two independent computations
+## An analytic test field, and two independent computations
 
 The test field is the **ABC-like trigonometric field** $\mathbf B = (\cos y,\, \cos z,\, \cos x)$
 — one of the two curl-partners whose sum is the classic Arnold–Beltrami–Childress field. The
@@ -105,7 +106,7 @@ computations on it:
   // axonometric projection
   const proj = (x, y, z) => [ox + (x - 0.5) * s * 1.9 + (z - 0.5) * s * 0.55,
                              oy - (y - 0.5) * s * 1.9 + (z - 0.5) * s * 0.42];
-  // real null data: coord 1.571 -> 0, 4.712 -> 1 ; type by spine_sign
+  // computed nulls of the analytic test field: coord 1.571 -> 0, 4.712 -> 1 ; type by spine_sign
   const NULLS = [
     [1,1,1,"A"],[1,1,0,"B"],[1,0,1,"B"],[1,0,0,"A"],
     [0,1,1,"B"],[0,1,0,"A"],[0,0,1,"A"],[0,0,0,"B"]];
@@ -174,7 +175,9 @@ line-of-sight product (sunpy's sample file <code>HMI20110607_063211_los_lowres.f
 T_OBS 2011.06.07 06:33:07 TAI), a solar active region imaged on 2011 June 7 —
 potential-field extrapolated
 it into a three-dimensional coronal field, and searched. The standard finder locates a coronal
-magnetic null some 40 pixels above the surface, a *radial* null by its $\nabla\mathbf B$
+magnetic null some 40 grid pixels above the surface (one pixel of the resampled
+extrapolation grid is $\approx 3.23'' \approx 2.4$ Mm in the plane of the sky, so
+$\approx 90$ Mm; Part 5 derives the scale from the FITS headers), a *radial* null by its $\nabla\mathbf B$
 eigenvalues. The growth vector, read from that null's local structure, returns $Q=6$ against
 $Q=5$ in the surrounding strong field — the same null jump, now computed from a real
 solar extrapolation. Said precisely: this is the law's *consistency* on real data, not an
@@ -186,7 +189,7 @@ give, and Part 5 races the honest version.
 <figure class="l-middle" id="fig-solar-null">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-solar-null.png"
-      alt="Two panels: A, a real SDO/HMI line-of-sight magnetogram of a solar active region, axes x and y in pixels (linear, 0 to 100), colour field in gauss (linear red-blue scale), a dashed line and gold star marking the null's footpoint; B, a vertical slice of the extrapolated coronal field magnitude in gauss (log colour scale), x axis position 0 to 100 pixels and y axis height above the surface 0 to 56 pixels, showing it collapse to zero at the cyan-starred null, with white field-line streamlines fanning through it"
+      alt="Two panels: A, a real SDO/HMI line-of-sight magnetogram of a solar active region, axes x and y in extrapolation-grid pixels (linear, 0 to 100; one pixel is about 2.4 megametres), colour field in gauss (linear red-blue scale), a dashed line and gold star marking the null's footpoint; B, a vertical slice of the extrapolated coronal field magnitude in gauss (log colour scale), x axis position 0 to 100 pixels and y axis height above the surface 0 to 56 pixels, showing it collapse to zero at the cyan-starred null, with white field-line streamlines fanning through it"
       style="max-width:min(100%,760px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
@@ -197,9 +200,10 @@ give, and Part 5 races the honest version.
     The dashed line marks the vertical plane drawn at right; the gold star is the null's footpoint.
     <em>Right (B):</em> the potential-field–extrapolated coronal $\lvert\mathbf B\rvert$ on that plane
     (log scale, bright = strong), with in-plane field lines in white. The field
-    <strong>collapses to zero</strong> at the null $h = 38$ px up (cyan star) and the streamlines
+    <strong>collapses to zero</strong> at the null $h = 38$ px up ($\approx 90$ Mm at $2.38$ Mm per grid pixel; cyan star) and the streamlines
     fan through it in the characteristic X-type topology — a <em>radial</em> null by its
-    $\nabla\mathbf B$ eigenvalues $(-0.76,\,-0.24,\,+1.00)$. There the sub-Riemannian growth vector
+    $\nabla\mathbf B$ eigenvalues $(-0.76,\,-0.24,\,+1.00)$ (dimensionless: divided by the
+    largest $\lvert\lambda_i\rvert$). There the sub-Riemannian growth vector
     returns $Q=6$ against $Q=5$ in the strong bipolar field: the null jump, on the real Sun.
     Pipeline: <code>research/preferred-directions/scripts/run_p2_solar.py</code>.
   </figcaption>

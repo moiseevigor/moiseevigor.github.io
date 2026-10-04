@@ -26,9 +26,12 @@ comments: true
 <div class="callout">
 <div class="callout-title">What this appendix covers</div>
 The <a href="{% post_url 2026-07-15-caustics-to-groups-research-program %}">scoping post</a>
-asserts a theorem: local caustics are group-blind. This appendix explains why. It
+states that local caustics are group-blind. This appendix explains why, and separates
+what is a theorem from what is this program's working hypothesis. It
 defines a caustic precisely (the singular set of a Lagrangian map), states Arnol'd's
-classification of the local shapes such singular sets can take, and draws the
+classification of the local shapes a <em>generic</em> such singular set can take, says
+where a sub-Riemannian exponential map is and is not covered by it, reports the numerical
+check made for the series' groups, and draws the
 conclusion that a single local germ carries no information about the group that
 produced it — which is exactly why the detector must read a <em>global</em> triple
 instead.
@@ -55,7 +58,11 @@ map (Appendix C4), and its caustic is the conjugate locus.
 
 Here is the remarkable fact. A generic Lagrangian caustic cannot look like *anything* — up
 to smooth change of coordinates, its local pieces come from a **short universal list**,
-Arnol'd's classification of Lagrangian singularities. In low dimension the players are:
+Arnol'd's classification of Lagrangian singularities. Precisely: Lagrangian maps of
+manifolds of dimension $n \le 5$ that are in general position (an open dense set of maps)
+are stable, and each of their germs is equivalent to one of finitely many normal forms
+$A_k$, $D_k$, $E_6$ determined by $n$ alone; from $n = 6$ on, continuous moduli appear and
+the list is no longer finite. In low dimension the players are:
 
 | Germ | Name | Local model | Where you see it |
 |---|---|---|---|
@@ -66,8 +73,10 @@ Arnol'd's classification of Lagrangian singularities. In low dimension the playe
 
 The labels $A_k, D_k$ are the same ones that classify simply-laced simple Lie algebras and du Val
 surface singularities — the "ADE" pattern that recurs across mathematics. The point for us
-is blunt: **the same fold and the same cusp appear in optics, in cosmology, and in the
-conjugate locus of every one of the series' five groups.** They are universal.
+is blunt: **the same fold and the same cusp appear in optics, in cosmology, and — wherever
+the exponential map is generic in the sense above — in the conjugate loci of the series'
+groups.** They are universal. Whether a given group's exponential map *is* generic at a
+given point is a separate question, taken up below.
 
 </div><!-- /.l-body -->
 
@@ -78,8 +87,9 @@ conjugate locus of every one of the series' five groups.** They are universal.
     fold (a generic caustic point is a smooth fold; cusps are the isolated points where
     folds end): two smooth fold branches ($A_2$) meeting at a cusp along the exact semicubical curve $y^2 = x^3$. This
     is the shape at the point of the coffee-cup caustic and at a lensing cusp. Crucially, it
-    is <em>identical</em> whether the underlying flow came from Heisenberg, SE(2), Engel,
-    Cartan, or SE(3): read locally, a cusp names no group. Axes are dimensionless local
+    is <em>identical</em> whichever flow produced it: read locally, a cusp names no group.
+    (Schematic of the normal form; cusps on the Engel and Cartan conjugate loci were not
+    located numerically.) Axes are dimensionless local
     coordinates centred on the cusp.
   </figcaption>
 </figure>
@@ -119,13 +129,60 @@ conjugate locus of every one of the series' five groups.** They are universal.
 
 ## The obstruction, stated exactly
 
-Combine "caustics are Lagrangian singularities" with "their local germs come from one
-universal list" and you get the wall the whole series is designed around:
+Combine "caustics are Lagrangian singularities" with "their generic local germs come from
+one universal list" and you get the wall the whole series is designed around. It has a
+proved part and a hypothesised part.
 
-> **Local generic caustics are group-blind.** Hand someone a small patch of a caustic — a
-> fold, a cusp — and ask which group produced it. They cannot answer, because that exact
-> patch is produced by *all* of them. Any detector that keys on a local germ is fitting a
-> universal, not a group.
+> **Theorem (Arnol'd).** At a point where a Lagrangian map of dimension $\le 5$ is generic
+> (stable), its caustic germ is one of the ADE normal forms, the same list for every
+> Hamiltonian. Away from the pole and from abnormal trajectories the sub-Riemannian
+> exponential map is a Lagrangian map, so at every such point where it is generic its
+> caustic germ is on that list, whatever the group.
+>
+> **Working hypothesis (this program): local generic caustics are group-blind.** For each
+> candidate group, a generic point of the conjugate locus away from the pole, the abnormal
+> set and symmetry-degenerate pieces is such a point. Hand someone a small patch of caustic
+> there — a fold, a cusp — and ask which group produced it. They cannot answer, because
+> that exact patch is produced by *all* of them. Any detector that keys on a local germ is
+> fitting a universal, not a group.
+
+The gap between the two is real. A left-invariant exponential map is one particular,
+highly symmetric map, and the theorem's genericity is not automatic for it:
+
+- **The pole.** Every sub-Riemannian exponential map is degenerate at the starting point,
+  and the conjugate locus accumulates there; this singularity is never on Arnol'd's list.
+  It is where the group information lives (Appendix C4).
+- **Abnormal trajectories** (Engel, Cartan) are not projections of the Hamiltonian flow and
+  lie outside the Lagrangian picture (Appendix C5).
+- **Symmetry.** Heisenberg's rotational symmetry collapses its whole first conjugate locus
+  onto a line: no point of it is a fold.
+- **Dimension.** $\mathrm{SE}(3)$ is 6-dimensional, beyond the finite list.
+
+**What was checked.** For generic 3D contact structures the caustic germs near the pole
+are classified in the literature (Agrachev, Charlot, Gauthier &amp; Zakalyukin 2000; Bonnet,
+Gauthier &amp; Rossi 2019). For the series' groups, experiment E10
+(`research/caustics-to-groups/scripts/run_e10.py`, results in
+`artifacts/e10_results.json`) tests the fold condition directly. At the first conjugate
+point $p^\*$ of a random normal geodesic it computes the Jacobian $D\exp(p^\*)$ and three
+numbers: the *corank gap* $s_{n-1}/s_1$ (ratio of second-smallest to largest singular
+value; positive means corank exactly 1), the residual $s_n/s_1$ (zero at a critical point),
+and the *transversality* $\lvert\nabla\det D\exp\cdot v\rvert/\lvert\nabla\det D\exp\rvert$ with $v$ the
+kernel direction — the cosine of the angle between the kernel and the normal to the
+critical hypersurface. A fold is corank 1 with nonzero transversality.
+
+| Group | conjugate points found | corank gap (min) | residual (max) | transversality (min / median) | folds |
+|---|---|---|---|---|---|
+| Heisenberg (control) | 24 of 24 | 0.42 | $2\times10^{-8}$ | $5\times10^{-9}$ / $5\times10^{-8}$ | 0 of 24 |
+| SE(2) | 24 of 24 | 0.38 | $2\times10^{-8}$ | 0.10 / 0.28 | 24 of 24 |
+| Engel | 24 of 24 | 0.010 | $1\times10^{-8}$ | 0.0035 / 0.14 | 24 of 24 |
+| Cartan | 24 of 24 | 0.0021 | $1\times10^{-9}$ | 0.0015 / 0.050 | 24 of 24 |
+
+(24 covectors per group, seed 0, vertical momenta of magnitude 1–3; fold threshold on
+transversality $10^{-3}$, four orders above the Heisenberg floor.) So at sampled generic
+points the first conjugate locus of SE(2), Engel and Cartan is a fold, and the test
+correctly refuses the Heisenberg axis. This is a sample, not a proof, and it covers folds
+only: cusps and higher germs on Engel and Cartan, later conjugate points, and SE(3) remain
+unverified.
 
 This is not pessimism; it is a **specification**. It tells you precisely where *not* to
 look (single local germs) and forces the design that the rest of the series follows: read
@@ -140,9 +197,10 @@ tangent cone's (C6), not the germ type.
 For completeness: the sub-Riemannian normal geodesics are the projections of the flow of a
 Hamiltonian $H = \tfrac12\sum_i h_i^2$ on the cotangent bundle. The cotangent fibre over
 $q_0$, carried by that flow for unit time, is a Lagrangian submanifold; the exponential map
-$\exp_{q_0}(p) = \gamma_p(1)$ is its projection to the manifold. So the conjugate
-locus — the critical values of $\exp_{q_0}$ — is a genuine Lagrangian caustic, subject to
-Arnol'd's classification, and everything above applies to it verbatim. The code's caustic
+$\exp_{q_0}(p) = \gamma_p(1)$ is its projection to the manifold. So, for normal geodesics and away from $p = 0$, the conjugate
+locus — the critical values of $\exp_{q_0}$ — is a genuine Lagrangian caustic. Arnol'd's
+classification applies to it at every point where this particular map is generic, which is
+what the hypothesis above asserts and experiment E10 samples. The code's caustic
 detector (`src/caustics.py`) finds it as the first zero of the Jacobian determinant of that
 map.
 
@@ -154,5 +212,8 @@ map.
 - A. Agrachev, G. Charlot, J.-P. Gauthier &amp; V. Zakalyukin (2000). "On sub-Riemannian
   caustics and wave fronts for contact distributions in the three-space." <em>J. Dyn.
   Control Syst.</em> 6, 365–395.
+- B. Bonnet, J.-P. Gauthier &amp; F. Rossi (2019). "Generic singularities of the 3D-contact
+  sub-Riemannian conjugate locus." <em>C. R. Acad. Sci. Paris, Ser. I</em> 357, 542–549.
+  <a href="https://arxiv.org/abs/1812.01508">arXiv:1812.01508</a>.
 - T. Poston &amp; I. Stewart (1978). <em>Catastrophe Theory and Its Applications</em>. Pitman.
 </div><!-- /.l-body -->

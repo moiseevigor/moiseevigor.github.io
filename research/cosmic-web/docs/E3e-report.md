@@ -27,7 +27,7 @@ Jackknife errors over 50 RA patches (pairs overlap on the sky, so pair-bootstrap
    (1.80×10⁻⁸) — direct quantitative confirmation of second-halo beam
    leakage at 10′.
 3. **Null-subtracted bridge** (the physically meaningful number):
-   ACT 1.4×10⁻⁸ ± 0.9 (≈1.6σ), Planck 1.2×10⁻⁸ ± 0.5 (≈2.2σ).
+   ACT 1.4×10⁻⁸ ± 0.9 (≈1.7σ; unrounded 1.67), Planck 1.2×10⁻⁸ ± 0.5 (≈2.2σ).
    Mutually consistent and matching published LRG-pair bridge amplitudes
    (~1×10⁻⁸).
 4. **Final claim**: the pipeline reproduces the literature bridge

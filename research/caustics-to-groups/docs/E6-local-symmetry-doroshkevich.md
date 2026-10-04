@@ -2,6 +2,8 @@
 
 Phase B of [`PLAN-astrophysics-local-groups.md`](PLAN-astrophysics-local-groups.md).
 Reproduce: `.venv/bin/python scripts/run_e6.py` → `artifacts/e6_results.json`.
+Numbers below are from that artifact, full run (no `--quick`): a 96³ grid. `--quick` is
+a smoke run (64³) and overwrites the artifact with different values.
 
 **This is the programme's first external validation.** Every prediction tested here is
 an analytic result from the literature that we did not generate.

@@ -44,6 +44,7 @@ the narrative version, with interactive figures built from that data, is
 | **H2** · feeding the detector the local gravity (tidal) frame sharpens it | tidal tuning ≤ plain tuning | **✗ Dead.** Tidal weighting *hurts* — even handed a perfect tidal frame. |
 | **H3** · the webs sit on real mass and hot gas | stack signal below the standard skeleton | **△ Split verdict.** Both webs, drawn on 274,000 SDSS galaxies, sit on real hot gas (a 9σ stack — dominated by the tracer galaxies' own halos; the inter-halo *bridge* component is ≈2σ per instrument, matching published amplitudes). But by this bet's own comparative criterion the lift **loses**: the standard skeleton carries more of the gas signal on every statistic, and after halo masking the lift's spines retain essentially none. |
 | **H4** · matter *travels* along the geometry's shortest paths | geodesics can't beat a straight line | **✗ Refuted in the bulk.** Filaments *grow* by matter falling across them; the along-spine drainage toward nodes is real but weak in our measurements (⟨\|v̂·e₃\|⟩ ≈ 0.54–0.57, and our 1 h⁻¹Mpc grid under-resolves it). |
+| **T1** · *(theory)* the flow obeys a shortest-path (Jacobi-metric) variational principle | a derivation showing no such metric exists | **✗ Refuted, with a derivation.** In growth-factor time the Zel'dovich flow is free straight-line motion, and the adhesion model's variational principle is optimal transport with quadratic cost (Hopf–Lax), not geodesic flow of a potential-weighted metric: filaments are pile-ups of the flow, not paths of it ([Appendix B1](/mathematics/2026/07/06/cosmic-web-B1-transport-models/)). |
 
 **What survived the refutations** — and it's the interesting part. The lift reads the
 web's *directions* more faithfully than the standard detector (spine–tidal alignment
@@ -74,7 +75,18 @@ deformation-tensor truth; M1's match tolerance widened from 0.5 to 2 voxels
 sky-matched controls rather than ≥1000; and H4's verdict came from a
 direction-statistic protocol on transport residuals instead of the original M4
 three-arm race (the isotropic-Jacobi arm was dropped as moot once H4 died in the
-bulk). None of these change a verdict's direction; all are listed so the reader
+bulk). The <strong>datasets</strong> also changed. The planned Quijote /
+IllustrisTNG-100-Dark snapshots were never used: E1 ran on in-house Zel'dovich
+boxes and E1b, E2 and the transport experiments on in-house particle-mesh (PM)
+N-body runs (128³ particles, 128 <em>h</em>⁻¹Mpc box, 1 <em>h</em>⁻¹Mpc grid),
+with CAMELS CV_0 (Arepo and MP-Gadget, 25 <em>h</em>⁻¹Mpc box) used only to
+validate the PM code (median per-particle offset 0.41 <em>h</em>⁻¹Mpc) — neutral
+for H1/H2, where both detectors see the same fields, but <em>not</em> conservative
+for H4, whose along-spine flow the 1 <em>h</em>⁻¹Mpc grid under-resolves. And E3
+used BOSS DR12 CMASS-North (z = 0.45–0.55, 274,000 galaxies) rather than the full
+SDSS DR17 spectroscopic sample, adding the ACT DR6 + Planck Compton-<em>y</em> map
+to the planned Planck maps — conservative for H3's comparative loss, since the
+plan itself expected sparser sampling to <em>favour</em> the lift. None of these change a verdict's direction; all are listed so the reader
 can audit them.</p>
 </div>
 

@@ -92,7 +92,7 @@ def main():
     frac = hits / NBASE
     print(f"  Q > n at {hits}/{NBASE} = {frac:.0%} of base points  (Q values: "
           f"{sorted(set(Qs))})")
-    res["modulated"] = {"frac_Q_gt_n": frac, "Q_values": sorted(set(Qs))}
+    res["modulated"] = {"frac_Q_gt_n": frac, "n_base": NBASE, "Q_values": sorted(set(Qs))}
     assert frac == 1.0, "contact structure must have Q>n on full measure"
     print("  -> Q > n on a set of FULL MEASURE. This IS a sub-Riemannian geometry.")
 

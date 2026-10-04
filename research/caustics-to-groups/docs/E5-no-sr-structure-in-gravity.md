@@ -2,6 +2,9 @@
 
 Phase A of [`PLAN-astrophysics-local-groups.md`](PLAN-astrophysics-local-groups.md).
 Reproduce: `.venv/bin/python scripts/run_e5.py` → `artifacts/e5_results.json`.
+Numbers below are from that artifact, full run (no `--quick`): 8000 samples per reach
+fit, 120 base points in the measure test. `--quick` is a smoke run (3000 samples, 30 base
+points) and overwrites the artifact with different exponents.
 
 **Verdict: no — and the experiment refuted the plan's own criterion along the way.**
 
@@ -31,9 +34,9 @@ exponents (high quantile of |projection| vs ball radius, fitted in log–log), f
 **Controls — the estimator reads degeneracy order correctly.**
 
 ```
-linear / regular          exponents (1.01, 1.01, 0.99)   Q = 3
-exact fold   x1 = q1^2    exponents (1.99, 1.00, 1.00)   Q = 4
-exact cusp   x1 = q1^3    exponents (3.03, 1.00, 1.03)   Q = 5
+linear / regular          exponents (1.01, 1.00, 1.00)   Q = 3
+exact fold   x1 = q1^2    exponents (2.01, 1.01, 0.99)   Q = 4
+exact cusp   x1 = q1^3    exponents (3.00, 1.00, 1.00)   Q = 5
 ```
 
 **Heisenberg (genuine sub-Riemannian).** Weights $(0.97, 0.98, 2.00)$, growth vector

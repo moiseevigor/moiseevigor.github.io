@@ -102,7 +102,8 @@ Two lessons the experiments forced (documented in `docs/E0-growth-vector.md`):
 
 1. the momenta must span a **wide** band, or a fixed, narrow momentum distribution only
    samples the regime (vertical momentum $\times\, r$) $\to 0$ at small $r$ and returns a spurious weight (Heisenberg's weight-2 came
-   out as 2.8 before the fix);
+   out as 2.8 with that discarded first estimator — a development observation logged in the
+   doc, not part of the stored results);
 2. the exponent fit must be **noise-floor aware**, $m(r) = \sqrt{(a\,r^w)^2 + b^2}$, or
    absolute position noise cliff-collapses the estimate.
 

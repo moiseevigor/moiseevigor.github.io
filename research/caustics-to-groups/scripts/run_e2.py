@@ -45,13 +45,14 @@ def clean_observables():
     obs = {}
     for g in GROUPS:
         spec = liegroup.GROUPS[g]
-        vec, Q, _ = growth.estimate_growth_vector(spec, RADII, 800,
-                                                  np.random.default_rng(0), 0.0)
+        reach = growth.coordinate_reach(spec, RADII, 800, np.random.default_rng(0), 0.0)
+        w = growth.estimate_weights(reach, RADII)
+        vec, Q = growth.growth_vector_from_weights(w)
         corank, abn = growth.estimate_corank_abnormal(spec, RADII, 800,
                                                      np.random.default_rng(0), 0.0)
         delta = float(np.nanmean(curves[g])) if vec == (2, 3) else float("nan")
         obs[g] = {"growth": vec, "Q": Q, "delta": delta, "corank": corank,
-                  "abnormal": abn}
+                  "abnormal": abn, "weights": w.tolist(), "reach": reach.tolist()}
     return obs, curves
 
 
@@ -153,6 +154,7 @@ def main():
         print(f"{g + ' (M4 abnormal)':<26}" + "".join(f"{r:>9.2f}" for r in m4r))
 
     results = {"observables": obs, "aliasing_map": amap, "noises": NOISES,
+               "n_trials": N_TRIALS, "n_geo": N_GEO, "radii": RADII.tolist(),
                "rigidity": rigidity, "m4_vs_m1": m4_vs_m1, "delta_margin": DELTA_MARGIN}
     out = ROOT / "artifacts" / "e2_results.json"
     out.parent.mkdir(parents=True, exist_ok=True)

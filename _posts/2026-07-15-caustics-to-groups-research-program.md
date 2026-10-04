@@ -104,18 +104,42 @@ and the inverse can be graded, not just asserted.
 
 ## The obstruction that shapes everything
 
-Here is the wall the whole design must respect. It is not an engineering
-inconvenience; it is a theorem.
+Here is the wall the whole design must respect. Part of it is a theorem and part of
+it is this program's working hypothesis; the two are stated separately.
 
-**Local generic caustics are group-blind.** Away from special points, a generic
-Lagrangian caustic exhibits only the **universal ADE germs** classified by Arnol'd's
-singularity theory[^arnold]: the **fold** $A_2$, the **cusp** $A_3$, the
-**swallowtail** $A_4$, and the **umbilic** $D_4$. These germs are *universal* — the
-same short list appears in optics, in the cosmic web, in the SR exponential of every
-one of our candidate groups. A single cusp you find in the data carries **no**
-information about which group produced it. The naive detector — *see a cusp, name the
-group* — is provably hopeless, and any pipeline that pretends otherwise is fitting
-noise.
+**The theorem.** A caustic is the set of critical values of a Lagrangian map. By
+Arnol'd's classification[^arnold], a *generic* Lagrangian map of a manifold of
+dimension $n \le 5$ is stable, and each of its germs is equivalent to one of a finite
+list that depends only on $n$: the **fold** $A_2$, the **cusp** $A_3$, the
+**swallowtail** $A_4$, the **umbilic** $D_4$, and a few higher $A$, $D$, $E$ germs.
+The list does not depend on which Hamiltonian produced the map. Away from the pole
+(the starting point) and from abnormal trajectories, a sub-Riemannian exponential map
+*is* a Lagrangian map, so wherever it is generic in Arnol'd's sense its caustic germs
+come from this group-independent list.
+
+**What the theorem does not give.** Genericity is a hypothesis on the map, and the
+exponential map of a left-invariant structure is one particular, symmetric map, not a
+generic one. Three things fall outside the theorem: the pole, where every
+sub-Riemannian exponential map is degenerate and the conjugate locus accumulates;
+abnormal trajectories, which are not part of the Lagrangian picture at all; and
+symmetry, which can make a whole conjugate locus non-generic (Heisenberg's first
+conjugate locus is a line, not a surface of folds). $\mathrm{SE}(3)$ has $n = 6$,
+beyond the range of the finite list.
+
+**The working hypothesis: local generic caustics are group-blind.** Away from those
+three exceptions, a generic point of the conjugate locus of each candidate group is a
+standard ADE germ, and so carries **no** information about which group produced it.
+The evidence is of three kinds. For generic 3D contact structures the germs are
+classified (Agrachev, Charlot, Gauthier &amp; Zakalyukin 2000; Bonnet, Gauthier &amp;
+Rossi 2019). For Engel and Cartan we checked the simplest case numerically
+(experiment E10): at the first conjugate point of 24 random geodesics per group the
+exponential map has corank 1 with its kernel transverse to the critical set — a fold
+— in 24 of 24 cases for SE(2), Engel and Cartan, and in 0 of 24 for the Heisenberg
+control, whose collapsed axis the test correctly rejects (data:
+`research/caustics-to-groups/artifacts/e10_results.json`). Cusps and higher
+germs on Engel and Cartan have not been checked. Under this hypothesis the naive
+detector — *see a cusp, name the group* — cannot work, and a pipeline that pretends
+otherwise is fitting noise.
 
 <figure class="l-body" id="fig-obstruction">
   <div style="text-align:center; margin-bottom:0.6em;">
@@ -196,7 +220,8 @@ around that quantity — defined precisely below — not around raw cusp classif
 
 **The candidate edge**, in one sentence: *the forward map (group → caustic) is
 richly worked out group by group, and the local obstruction (ADE universality) is a
-theorem — but nobody appears to have assembled the three structure-specific
+theorem for generic Lagrangian maps and a numerically supported hypothesis for these
+groups — but nobody appears to have assembled the three structure-specific
 observables into a single graded inverse estimator and asked, quantitatively, which
 groups it can and cannot tell apart from caustic data alone.*
 
@@ -517,7 +542,8 @@ realizations. Parameter count is part of the model comparison.
 - **Lagrangian map** — the base projection of a Lagrangian submanifold under a
   Hamiltonian flow; its singularities are classified by Arnol'd's ADE list.
 - **ADE germs** — the universal local caustic singularities: fold $A_2$, cusp $A_3$,
-  swallowtail $A_4$, umbilic $D_4$ (and higher). *Universal* ⇒ group-blind.
+  swallowtail $A_4$, umbilic $D_4$ (and higher). *Universal* for generic Lagrangian
+  maps of dimension $\le 5$ ⇒ group-blind wherever the exponential map is generic.
 - **Tangent cone / nilpotent approximation** — the Carnot group an SR structure
   converges to under infinite zoom at a point; its caustic is the reference fingerprint.
 - **Carnot group** — a nilpotent Lie group with a dilation structure; the model space
@@ -534,6 +560,10 @@ realizations. Parameter count is part of the model comparison.
 - **Nilpotent-deviation statistic $\delta$** — Hausdorff shape distance from the
   observed conjugate locus to its tangent cone's caustic, minimised over intrinsic
   symmetries; the program's central matching quantity.
+- **E10 (fold check)** — a numerical check added after review: at the first conjugate
+  point of random geodesics, is the exponential map a *fold* (Jacobian of corank 1 whose
+  kernel is transverse to the critical set)? Supports the group-blindness hypothesis for
+  SE(2), Engel and Cartan; Heisenberg is the negative control.
 - **H1–H4, E0–E4, M1–M6** — the four hypotheses, five experiments, and six metrics
   defined above.
 
@@ -543,7 +573,7 @@ realizations. Parameter count is part of the model comparison.
 
 [^conjugate]: Two points are conjugate along a geodesic when a whole family of nearby geodesics leaving the first refocuses at the second; the set of such refocusing points, seen from a fixed start, is the conjugate locus.
 
-[^arnold]: Vladimir Arnol'd's classification showing that the caustics you generically see come from a short universal list labelled by the letters A, D, E — the same list whether the caustic is in optics, mechanics, or cosmology.
+[^arnold]: Vladimir Arnol'd's classification showing that the caustics you generically see come from a short universal list labelled by the letters A, D, E — the same list whether the caustic is in optics, mechanics, or cosmology. "Generically" is part of the statement: the list is finite for Lagrangian maps of manifolds of dimension at most 5 that are in general position (Arnol'd, Gusein-Zade &amp; Varchenko 1985, ch. 21).
 
 [^carnot]: A special kind of curved group with a built-in notion of zoom (dilation), which is exactly the shape any sub-Riemannian geometry takes on when you magnify it infinitely at a point.
 
@@ -558,6 +588,7 @@ realizations. Parameter count is part of the model comparison.
 <h2>References</h2>
 <ol>
   <li>V. I. Arnol'd (1990). <em>Singularities of Caustics and Wave Fronts</em>. Mathematics and Its Applications 62, Kluwer.</li>
+  <li>V. I. Arnol'd, S. M. Gusein-Zade &amp; A. N. Varchenko (1985). <em>Singularities of Differentiable Maps, Vol. I</em>. Birkhäuser.</li>
   <li>A. Agrachev, G. Charlot, J.-P. Gauthier &amp; V. Zakalyukin (2000). "On sub-Riemannian caustics and wave fronts for contact distributions in the three-space." <em>J. Dyn. Control Syst.</em> 6, 365–395.</li>
   <li>El-H. Chakir El-Alaoui, J.-P. Gauthier &amp; I. Kupka (1996). "Small sub-Riemannian balls on $\mathbb{R}^3$." <em>J. Dyn. Control Syst.</em> 2, 359–421.</li>
   <li>A. Agrachev &amp; D. Barilari (2012). "Sub-Riemannian structures on 3D Lie groups." <em>J. Dyn. Control Syst.</em> 18, 21–44. <a href="https://arxiv.org/abs/1007.4970">arXiv:1007.4970</a>.</li>
