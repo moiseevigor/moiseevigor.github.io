@@ -404,9 +404,13 @@ body.layout-distill .d-article h2::before {
 .d-article tbody tr:last-child td { border-bottom: none; }
 
 /*
- * Math display blocks. KaTeX over-reports width by a sub-pixel, which makes
- * `overflow-x: auto` create a scroll container even when the formula clearly
- * fits. `clip` prevents the scroll container without rendering a scrollbar.
+ * Math display blocks. A formula wider than the column SCROLLS horizontally
+ * inside its own box (it used to be clipped, which silently truncated long
+ * equations — on a phone, nearly half of them). overflow-y is pinned to
+ * `hidden` because `overflow-x: auto` alone makes overflow-y compute to
+ * `auto`, and KaTeX's sub-pixel height over-report then paints a phantom
+ * vertical scrollbar; the vertical padding keeps tall delimiters and
+ * fraction bars clear of that clip edge (the margin gives it back).
  *
  * max-width tracks the body column so the formula centres on the same axis as
  * the paragraph text. Without this, the more-specific `.d-article .katex-display`
@@ -414,10 +418,17 @@ body.layout-distill .d-article h2::before {
  * margin-note gutter, pulling the centred formula visibly to the right.
  */
 .d-article .MathJax_Display, .d-article .katex-display {
-  margin: 1.4em 0;
-  overflow-x: clip;
+  margin: calc(1.4em - 6px) 0;
+  padding: 6px 0;
+  overflow-x: auto;
+  overflow-y: hidden;
   max-width: var(--body-w);
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
 }
+/* A scrolling formula must start at its left edge, not be centred with both
+   ends cut off: KaTeX centres via text-align, which is fine while it fits. */
+.d-article .katex-display > .katex { white-space: nowrap; }
 
 /* ── Figures ─────────────────────────────────────────────────────────────── */
 .d-article figure {

@@ -1,42 +1,106 @@
 ---
 layout: page
-title: About Me
+title: About
+permalink: /about/
 group: navigation
 ---
 
-<div style="float: left; margin-right: 1em; max-width: 38.2%;">
-  <img src="/public/images/igor-220.jpg" alt="Igor Moiseev">
+<style>
+.about-hero { display: grid; grid-template-columns: 168px 1fr; gap: 28px; align-items: center; margin: 4px 0 36px; }
+.about-hero img { width: 168px; height: 168px; border-radius: 50%; object-fit: cover; display: block; }
+.about-hero h2 { border: 0; padding: 0; margin: 0 0 6px; font-size: 1.5rem; }
+.about-role { font-family: var(--sans); color: var(--text-light); margin: 0 0 12px; line-height: 1.5; }
+.about-hero .about-links { font-family: var(--sans); font-size: 0.9rem; display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0; padding: 0; list-style: none; }
+.about-links li { margin: 0; }
+.about-section h2 { margin-top: 44px; }
+.about-section .about-pubs { padding-left: 1.2em; }
+.about-pubs li { margin-bottom: 0.7em; }
+.about-talks { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 1.2em 0 0; }
+.about-talks figure { margin: 0; counter-increment: none; }
+.about-talks figcaption { font-family: var(--sans); font-size: 0.85rem; color: var(--text-muted); margin-top: 6px; }
+.about-talks figcaption::before { content: none; }
+.about-talks iframe { width: 100%; aspect-ratio: 16 / 9; height: auto; border: 0; border-radius: 6px; background: var(--fig-bg); display: block; }
+@media (max-width: 600px) {
+  .about-hero { grid-template-columns: 1fr; gap: 18px; justify-items: start; }
+  .about-hero img { width: 128px; height: 128px; }
+  .about-talks { grid-template-columns: 1fr; }
+}
+</style>
+
+<div class="about-hero">
+  <img src="/public/images/igor-220.jpg" alt="Portrait of Igor Moiseev" width="168" height="168">
+  <div>
+    <h2>Igor Moiseev</h2>
+    <p class="about-role">Applied mathematician and AI practitioner.<br>
+    Director of Engineering at <a href="https://standard.ai">Standard&nbsp;AI</a>.</p>
+    <ul class="about-links">
+      <li><a href="https://github.com/moiseevigor" rel="me">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/moiseevigor/" rel="me">LinkedIn</a></li>
+      <li><a href="https://twitter.com/moiseev_igor" rel="me">Twitter</a></li>
+      <li><a href="/atom.xml">RSS</a></li>
+    </ul>
+  </div>
 </div>
 
-<p>Hi there! I'm an applied mathematician and artificial intelligence practitioner with a passion for exploring the
-intersection of human and machine intelligence.</p>
+<div class="about-section">
 
-<p>I hold a MSc in Applied Mathematics and am
-currently working as a Director of Engineering at <a href="https://standard.ai">Standard.AI</a>, where I focus on developing machine learning algorithms for
-various applications.</p>
+<p>I hold an MSc in Applied Mathematics and work where human and machine intelligence
+meet: by day I lead engineering teams building machine-learning systems; on this site
+I write about the mathematics underneath — sub-Riemannian geometry, optimal control,
+elliptic functions — and about machine learning in practice.</p>
 
-<p>In my spare time, I enjoy maintaining the <a href="https://moiseevigor.github.io/elliptic/">Elliptic functions for Matlab</a> package, 
-which is used by researchers and practitioners in various fields to solve mathematical problems that involves elliptic functions and elliptic integrals. 
-I have also contributed to several other open-source projects, which can be found on my GitHub profile (<a href="https://github.com/moiseevigor">github.com/moiseevigor</a>).</p>
+<h2>Research</h2>
 
-<p>My work has been published in leading journals such as <a href="https://www.esaim-cocv.org/articles/cocv/abs/2010/02/cocv0862/cocv0862.html">ESAIM: Control, Optimisation 
-  and Calculus of Variations (ESAIM: COCV)</a> and <a href="https://molpharm.aspetjournals.org/content/70/1/373">Molecular Pharmacology (Mol. Pharmacol.)</a>.</p>
+<p>The <a href="/lab/">Lab</a> collects my research programs. Each one asks a single
+question, fixes its hypotheses and the results that would refute them in advance, and
+publishes the verdict with the code — negative results included. They grew out of
+joint work with Yu.&nbsp;L.&nbsp;Sachkov on the sub-Riemannian geometry of the group of
+motions of the plane.</p>
 
-<p>When I'm not working, you can find me crossing countries on foot or on my bicycle, reading science fiction books.
+<h2>Publications</h2>
 
-<p>In addition, I am also an avid presenter</p>
+<ul class="about-pubs">
+  <li>I. Moiseev and Yu. L. Sachkov, “Maxwell strata in sub-Riemannian problem on the
+  group of motions of a plane,”
+  <a href="https://www.esaim-cocv.org/articles/cocv/abs/2010/02/cocv0862/cocv0862.html"><em>ESAIM:
+  Control, Optimisation and Calculus of Variations</em> 16 (2010)</a>;
+  <a href="https://arxiv.org/abs/0807.4731">arXiv:0807.4731</a>.</li>
+  <li>A paper in <a href="https://molpharm.aspetjournals.org/content/70/1/373"><em>Molecular
+  Pharmacology</em> 70(1), 373 (2006)</a>.</li>
+  <li>Long-form <a href="/articles/">articles</a> with the full statements and proofs
+  behind the Lab programs.</li>
+</ul>
 
-<iframe width="720" height="380" src="https://www.youtube.com/embed/he1yelshNc4" frameborder="0"
-  allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<h2>Software</h2>
 
-<iframe width="720" height="380" src="https://www.youtube.com/embed/glpcIJLvyjY" frameborder="0"
-  allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<p>I maintain <a href="https://moiseevigor.github.io/elliptic/">Elliptic functions for
+Matlab and Octave</a>, a package for elliptic integrals and Jacobi elliptic and theta
+functions used by researchers and practitioners across several fields. More
+open-source work is on <a href="https://github.com/moiseevigor">GitHub</a>, and the
+<a href="/projects/">projects page</a> has the details.</p>
 
-<br /><br />
+<h2>Talks</h2>
 
-Feel free to connect with me on LinkedIn (<a
-  href="https://it.linkedin.com/in/moiseevigor/">linkedin.com/in/moiseevigor</a>)
-or follow my activity on newsletter.</p>
+<div class="about-talks">
+  <figure>
+    <iframe src="https://www.youtube.com/embed/he1yelshNc4" title="Software that crafts itself — talk at Crafted Software"
+      loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>
+    <figcaption>“Software that crafts itself” — Crafted Software.</figcaption>
+  </figure>
+  <figure>
+    <iframe src="https://www.youtube.com/embed/glpcIJLvyjY" title="How to fully automate a store — talk at Machine Learning Milan"
+      loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>
+    <figcaption>“How to fully automate a store” — Machine Learning Milan.</figcaption>
+  </figure>
+</div>
+
+<h2>Elsewhere</h2>
+
+<p>Away from the keyboard I cross countries on foot or by bicycle, and read science
+fiction. To follow new posts, connect on
+<a href="https://www.linkedin.com/in/moiseevigor/">LinkedIn</a> or subscribe to the
+newsletter below.</p>
+
+</div>
 
 {% include email_box.html %}
-
