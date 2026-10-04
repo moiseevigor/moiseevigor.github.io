@@ -4,14 +4,14 @@ title: "Geometry of Seeing"
 subtitle: >
   How the primary visual cortex fills in contours that do not exist —
   a four-part mathematical investigation from Petitot's V1 model to an
-  open problem on the cut locus of SE(2).
+  open problem on the cut locus beyond SE(2).
 date: 2026-04-26 00:00:00
 categories: [projects]
 tags: [sub-riemannian, SE2, visual-cortex, elliptic-functions, optimal-control]
 description: >
   Project page for the "Geometry of Seeing" series: sub-Riemannian geometry on SE(2),
   Euler's elastica parametrised by Jacobi elliptic functions, Maxwell strata,
-  and the open problem of the exact cut time.
+  Sachkov's exact cut time, and the open problem beyond SE(2).
 permalink: /projects/geometry-of-seeing/
 ---
 

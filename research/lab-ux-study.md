@@ -40,8 +40,8 @@ inside posts, and the four programs described in free text on `/projects/`.
    *Lab › Program › Part n*, so a reader deep in appendix C4 can climb back.
 6. **One source of truth.** Program metadata lives in `_data/series.yml`; the Lab
    page, the series table of contents, prev/next navigation and the home-card
-   counts all render from it. `/projects/` keeps software only and points to the
-   Lab.
+   counts all render from it. `/projects/` keeps software (plus the Geometry of
+   Seeing overview page) and points to the Lab.
 
 ## Glossary
 

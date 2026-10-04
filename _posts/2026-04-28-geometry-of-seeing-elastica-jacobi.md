@@ -460,7 +460,7 @@ A few landmarks worth noting:
   elastica. There is no finite period left at $k=1$.
 
 - **Borderline elastica** ($k = 1$): curvature $2/\cosh(s)$, total turning $2\pi$.
-  In the standard normalization its two tails approach the same asymptotic line;
+  In the standard normalisation its two tails approach the same asymptotic line;
   the complete curve is non-periodic and contains one loop.
 
 - **Non-inflectional, $m = 0.3$**: like a wavy circle — curvature oscillates but

@@ -29,11 +29,11 @@ Serve blog from root dir
 docker run --rm --volume="$PWD:/srv/jekyll" -p 4000:4000 -it blog jekyll serve --incremental
 ```
 
-Open browser at https://localhost:4000/
+Open browser at http://localhost:4000/
 
 ## Run Blog with `_drafts`
 
-Adding `--drafts` it will serve `*.markdown` files from `_drafts` folder.
+With `--drafts` it will serve `*.markdown` files from `_drafts` folder.
 
 ```
 docker run --rm --volume="$PWD:/srv/jekyll" -p 4000:4000 -it blog jekyll serve --drafts --incremental

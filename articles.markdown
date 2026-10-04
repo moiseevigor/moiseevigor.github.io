@@ -24,6 +24,5 @@ what is proven, what is measured, and what remains open.
   {% endfor %}
 </ul>
 {% else %}
-<p><em>The first articles are in preparation — they will appear here as the
-companion series leave draft.</em></p>
+<p><em>No articles yet.</em></p>
 {% endif %}

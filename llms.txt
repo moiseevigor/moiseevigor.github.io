@@ -8,7 +8,7 @@
 
 This file follows the proposed [llms.txt](https://llmstxt.org) convention:
 a curated, human-and-LLM-readable index of what's worth citing on this site.
-Content here is published under standard "permitted with attribution".
+Content here may be cited with attribution.
 Citations should link to the canonical URL and credit "Igor Moiseev".
 
 ## About
@@ -26,10 +26,12 @@ Citations should link to the canonical URL and credit "Igor Moiseev".
   the pendulum equation; the three families of elastica parametrised by
   sn, cn, dn; spatial period 4K(k²).
 - [Part 3 — Maxwell Strata: When Optimal Paths Fork](https://moiseevigor.github.io/mathematics/2026/05/05/geometry-of-seeing-maxwell-strata/):
-  the locus where two distinct optimal geodesics meet with equal sub-Riemannian
-  length; t_MAX = 4K(k²)/ω₀.
+  where two optimal paths tie; on the smooth elastica the mirror-pair tie lands
+  at arc length 4K(k²), while the free SR problem's cut fires at half a
+  pendulum period, 2K(k²).
 - [Part 4 — The Open Problem: Exact Cut Time on SE(2)](https://moiseevigor.github.io/mathematics/2026/05/15/geometry-of-seeing-cut-time-open-problem/):
-  the remaining open problems on the cut locus of SE(2).
+  Sachkov's exact cut time on SE(2) and the general Maxwell-equals-cut
+  question that remains open beyond it.
 - Appendices A1–A5 (Lie groups, contact geometry, PMP, Jacobi elliptic functions,
   the SR exponential map) are linked from every part.
 

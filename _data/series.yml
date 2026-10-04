@@ -6,8 +6,8 @@
     from Petitot's V1 model to an open problem on the cut locus.
   status: complete
   question: "How does the visual cortex complete contours that are not there, and what exactly are the optimal curves it draws?"
-  outcome: "Exposition: V1 as a contact bundle on SE(2), elastica via Jacobi elliptic functions, Maxwell strata — ending on the open problem of the exact cut time."
-  frontier: "Exact cut time on SE(2): conjectured, not proven."
+  outcome: "Exposition: V1 as a contact bundle on SE(2), elastica via Jacobi elliptic functions, Maxwell strata — ending on Sachkov's exact cut time and the question it leaves open beyond SE(2)."
+  frontier: "Cut = first Maxwell time is proven for SE(2); a general theorem for left-invariant SR problems remains open."
   overview: /projects/geometry-of-seeing/
   posts:
     - part: 1

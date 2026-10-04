@@ -447,7 +447,7 @@ direction the two horizontal moves cannot reach on their own.
     The pair therefore gives two distinct pinned extremals with the same projected
     line-element endpoint and equal arc length. It visualises an elastica Maxwell
     symmetry (Sachkov, J. Dyn. Control Syst. 2008); it does <em>not</em> assert that
-    these curves are free-SR minimizers or that their $4K$ tie is the SR cut time.
+    these curves are free-SR minimisers or that their $4K$ tie is the SR cut time.
   </figcaption>
 </figure>
 
@@ -477,7 +477,7 @@ $\mathrm{SE}(2)$ can therefore be joined by a *horizontal* path — a curve
 whose velocity lies in $\mathcal{H}$ at every point. Geometrically,
 $\mathcal{H}$ is a **contact structure** on $\mathrm{SE}(2)$. Petitot's model
 proposes that orientation-selective V1 connectivity is usefully idealised as a
-discrete realization of this contact geometry.
+discrete realisation of this contact geometry.
 
 ## The Sub-Riemannian Metric and the Minimisation Problem
 
@@ -505,13 +505,13 @@ The **visual completion problem** now takes a precise form:
 Given two idealised oriented cortical states $(x_0,y_0,[\theta_0])$ and
 $(x_1,y_1,[\theta_1])$,
 find the horizontal curve $(x(t), y(t), \theta(t))$ in SE(2) of minimum length
-connecting chosen lifts—or minimize over both endpoint lifts when the projective
+connecting chosen lifts—or minimise over both endpoint lifts when the projective
 line bundle is the intended state space.
 </div>
 
 The spatial projection $(x(t),y(t))$ is the contour predicted by this model for
 the chosen boundary data. This is a mathematical hypothesis about completion,
-not an assertion that V1 literally solves this homogeneous optimization problem.
+not an assertion that V1 literally solves this homogeneous optimisation problem.
 
 Two closely related problems share this setup, and the series will keep them
 carefully apart. *Pinning* $u_1=1$ makes $s$ plane arc length and
