@@ -629,8 +629,8 @@ Pontryagin Maximum Principle.
   </li>
   <li>
     A. A. Kirillov (2004). <em>Lectures on the Orbit Method.</em> AMS GSM 64.
-    Coadjoint orbits as symplectic leaves; the SE(2) example is worked
-    explicitly.
+    Chapter 1, §2 constructs the symplectic structure on coadjoint orbits
+    (including the Poisson-structure approach).
   </li>
   <li>
     Yu. L. Sachkov (2011). "Cut locus and optimal synthesis in the

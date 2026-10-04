@@ -282,8 +282,8 @@ frozen by the declared optimisation campaign (E5c, E5d; model card: <code>docs/M
   never touch the along-axis component.
 
 Three fixed numbers ($$\beta$$, $$\rho_c$$, the smoothing scale). Held-out:
-4.52 ± 0.18 voxels against the ZA's 4.98 ± 0.27 (−9%), within 0.05 of the
-oracle bound 4.47 (E5d, E5b). Appendix B4 walks the full evidence chain;
+4.52 ± 0.18 voxels against the ZA's 4.98 ± 0.27 (−9%), within 0.07 of the
+oracle bound on the same seeds (4.45; 4.47 over five seeds — E5d, E5b). Appendix B4 walks the full evidence chain;
 Appendix B2 explains the tidal frame the rule lives in.
 
 ## Back to the series

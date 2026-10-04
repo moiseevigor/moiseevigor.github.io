@@ -170,7 +170,7 @@ curves; their cut time is $2K(k^2)$ — half the elastica clock (Sachkov 2010–
   the mirror-pair tie at one curvature period $$4K(k^2)$$ on the elastica family,
   and the strata bounding the free problem's cut time.
 - **The theorem and the open problem** (Part 4): Sachkov's exact cut time
-  $$t_{\mathrm{cut}} = 2K(k^2)$$ on the inflectional family — with no conjugate
+  $$t_{\mathrm{cut}} = 2K(k^2)$$ on the oscillating-pendulum family ($$C_1$$) — with no conjugate
   points anywhere along it — and the general Maxwell-equals-cut question that
   remains open beyond SE(2).
 

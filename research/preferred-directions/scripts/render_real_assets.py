@@ -82,17 +82,22 @@ def triptych():
     pixel_scales()
     mags = load_magnetograms()
     fig, axes = plt.subplots(1, 3, figsize=(11.7, 4.3), dpi=150)
-    notes = {"2011-06-07": "quiet-ish disk, one AR",
-             "2012-03-07": "AR11429 — X5.4 flare day",
-             "2014-10-22": "AR12192 — largest AR of cycle 24"}
-    for ax, (date, bz) in zip(axes, mags):
+    for k, (ax, (date, bz)) in enumerate(zip(axes, mags)):
         v = np.percentile(np.abs(bz), 99.7)
         ax.imshow(bz, origin="lower", cmap="RdBu_r", vmin=-v, vmax=v)
         for (cy, cx) in best_windows(bz, k=4):
             ax.add_patch(plt.Rectangle((cx - WIN // 2, cy - WIN // 2), WIN, WIN,
                                        fill=False, ec="#111", lw=1.0, ls="--"))
-        ax.set_title(f"{date} — {notes.get(date, '')}", fontsize=8.6)
+        # no in-figure titles: letter + date only; the notes live in the caption
+        ax.set_title("ABC"[k], loc="left", fontsize=11, fontweight="bold")
+        ax.set_title(date, loc="right", fontsize=9)
         ax.set_xticks([]); ax.set_yticks([])
+        bar = 200.0 / (solar.mm_per_px(date) / (WIN / CUT))   # 200 Mm in 1024-disk px
+        x1 = bz.shape[1] * 0.97
+        ax.plot([x1 - bar, x1], [bz.shape[0] * 0.035] * 2, color="k", lw=2.2,
+                solid_capstyle="butt")
+        ax.text(x1 - bar / 2, bz.shape[0] * 0.05, "200 Mm", fontsize=7.5,
+                ha="center", va="bottom")
         ax.text(0.02, 0.02, f"peak $|B|$ = {np.abs(bz).max():.0f} G",
                 transform=ax.transAxes, fontsize=7,
                 bbox=dict(boxstyle="round,pad=0.25", fc="white", ec="0.6", alpha=0.85))
@@ -710,11 +715,13 @@ def null_anatomy_sun():
                 ln = _trace(B, p0 + 1.1 * u, sgn, ds=0.25, steps=260)
                 if len(ln) > 8:
                     lines.append(ln)
-        _anatomy_rows(fig, row, lines, p0, nl["gradB"], 12.0, "px",
+        _anatomy_rows(fig, row, lines, p0, nl["gradB"], 12.0, "Mm",
                       f"coronal null · h = {p0[2]:.0f} px  (AR11429, real)",
                       tracer=lambda s, sgn, _B=B: _trace(_B, s, sgn, ds=0.25,
                                                          steps=260),
                       letters="ABCDEFGHI"[3 * r_i:3 * r_i + 3])
+        for ax in row[1:3]:           # data stay in grid px; ticks in plane-of-sky Mm
+            solar.mm_ticks(ax, solar.mm_per_px("2012-03-07"))
     fig.tight_layout()
     out = REPO / "public/img/posts/forbidden-directions-null-anatomy-sun.png"
     fig.savefig(out, bbox_inches="tight", dpi=150)

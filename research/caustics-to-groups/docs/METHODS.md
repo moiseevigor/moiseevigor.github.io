@@ -36,7 +36,14 @@ list independent of the Hamiltonian. That is the theorem. That the SR exponentia
 each candidate group *is* generic at a typical conjugate point (away from the pole, the
 abnormal set, and symmetry-collapsed loci such as the Heisenberg axis) is this program's
 working hypothesis, supported for folds by E10 (`docs/E10-fold-germs.md`: SE(2), Engel,
-Cartan 24/24 folds; Heisenberg control 0/24). Under it, **a single local germ carries no
+Cartan 24/24 folds; Heisenberg control 0/24) and for cusps by E11
+(`docs/E11-cusp-germs.md`, `artifacts/e11_results.json`: tangency points with
+|τ| ≤ 1e-4 located on loops of covectors; SE(2) calibration 16/16 A3; Engel 7 of 21 and
+Cartan 16 of 38 pass all pre-registered A3 checks, 10 and 7 more on a finer scale post
+hoc). E11 also bounds the hypothesis: 4 Engel and 10 Cartan tangency points are
+degenerate, not A3 — a symmetry-collapsed stratum inside those loci — and the SE(3)
+nilpotent cone has no fold at any of 24 first conjugate points (curved SE(3): 23/24).
+Swallowtails and higher germs are unchecked; sampled numerics, not proof. Under it, **a single local germ carries no
 information about the group.**
 The estimator must therefore never key on a local germ; it keys on the *triple*
 of structure-specific observables below (§3–§5), matched by the deviation

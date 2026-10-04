@@ -136,7 +136,7 @@ def render_from_artifact():
 
 
 def render(panels, census):
-    """2 x 4 sheet, one shared symmetric colour scale, axes in px. Panels carry a
+    """2 x 4 sheet, one shared symmetric colour scale, axes in plane-of-sky Mm. Panels carry a
     letter and the frame time only; null counts go to the caption."""
     import matplotlib
     matplotlib.use("Agg")
@@ -154,9 +154,10 @@ def render(panels, census):
         ax.tick_params(labelsize=9)
         print(f"  panel {'ABCDEFGH'[k]}: {t}  nulls {rec['n_nulls']}")
     for ax in axes[-1]:
-        ax.set_xlabel("x [px, linear]", fontsize=10)
+        ax.set_xlabel("x [Mm, linear]", fontsize=10)
     for ax in axes[:, 0]:
-        ax.set_ylabel("y [px, linear]", fontsize=10)
+        ax.set_ylabel("y [Mm, linear]", fontsize=10)
+    solar.mm_ticks(axes[0, 0], solar.mm_per_px("2011-02-13"))   # shared axes: all panels
     cb = fig.colorbar(im, ax=axes, fraction=0.025, pad=0.015, extend="both")
     cb.set_label("line-of-sight $B$ [G, linear]", fontsize=10)
     cb.ax.tick_params(labelsize=9)

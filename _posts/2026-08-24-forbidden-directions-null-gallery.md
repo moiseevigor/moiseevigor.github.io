@@ -199,12 +199,12 @@ $14$–$45$ px are $\approx 33$–$105$ Mm. Source: the FITS headers, recorded i
 <figure class="l-middle" id="fig-hmi-triptych">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-hmi-triptych.png"
-      alt="Three full-disk SDO/HMI magnetograms — 2011-06-07, 2012-03-07 with AR11429, and 2014-10-22 with the huge AR12192 — with dashed boxes marking the analysed active regions"
+      alt="Three full-disk SDO/HMI magnetograms — 2011-06-07, 2012-03-07 with AR11429, and 2014-10-22 with the huge AR12192 — panels A to C, each with its date, a 200-megametre scale bar and its peak field, with dashed boxes marking the analysed active regions"
       style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
     <strong>The raw material.</strong> The three full-disk line-of-sight magnetograms as
-    SDO/HMI recorded them (red / blue = line-of-sight field toward / away from the
+    SDO/HMI recorded them (<em>A:</em> 2011-06-07, a quiet-ish disk with one active region; <em>B:</em> 2012-03-07, AR11429 on its X5.4-flare day; <em>C:</em> 2014-10-22, AR12192, the largest region of cycle 24; scale bar = 200 Mm in the plane of the sky, no foreshortening correction; red / blue = line-of-sight field toward / away from the
     observer, i.e. roughly out of / into the photosphere near disk centre; the pipeline
     uses it as the normal boundary field without a radial correction; peak
     $\lvert B\rvert$ of each 1024-px-resampled disk labelled — 2940, 4042 and 4777 G,
@@ -217,15 +217,15 @@ $14$–$45$ px are $\approx 33$–$105$ Mm. Source: the FITS headers, recorded i
 <figure class="l-middle" id="fig-real-gallery">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-real-gallery.png"
-      alt="Gallery of five real coronal nulls across three SDO/HMI days, panels A to E: each shows the coronal field magnitude in gauss (shared log colour scale) on a vertical slice, x axis horizontal position 0 to 100 grid pixels and y axis height 0 to 56 grid pixels (both linear; one pixel is about 2.3 megametres), collapsing to zero at the cyan-starred null, with white streamlines tracing the topology"
+      alt="Gallery of five real coronal nulls across three SDO/HMI days, panels A to E: each shows the coronal field magnitude in gauss (shared log colour scale) on a vertical slice, x axis horizontal position 0 to about 230 megametres and y axis height 0 to about 130 megametres (both linear; plane-of-sky scale, one extrapolation-grid pixel is about 2.3 megametres), collapsing to zero at the cyan-starred null, with white streamlines tracing the topology"
       style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
     <strong>The real gallery.</strong> Five coronal magnetic nulls on three days of the
     real Sun (2011-06-07; 2012-03-07, X5.4-flare day; 2014-10-22, AR12192). Each card: the
     extrapolated coronal $\lvert\mathbf B\rvert$ on the vertical plane through the null
-    (one shared log colour scale in gauss, dark = weak; axes in extrapolation-grid
-    pixels, linear; $1\ \text{px}\approx 3.23''\approx 2.3$ Mm, so each card spans
+    (one shared log colour scale in gauss, dark = weak; axes in Mm, linear, at each day's plane-of-sky scale with no foreshortening
+    correction: $1$ extrapolation-grid px $\approx 3.23''\approx 2.38 / 2.32 / 2.33$ Mm on the three days, so each card spans
     $\approx 230$ Mm across and $\approx 130$ Mm in height), in-plane field lines in white, cyan ★ the detected null.
     <em>A:</em> 2011-06-07, radial−, $h = 14$ px ($\approx 33$ Mm). <em>B, C:</em>
     2012-03-07, radial+, $h = 20$ and $26$ px ($\approx 47$ and $61$ Mm). <em>D, E:</em>

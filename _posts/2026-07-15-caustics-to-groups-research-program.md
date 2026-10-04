@@ -123,8 +123,10 @@ generic one. Three things fall outside the theorem: the pole, where every
 sub-Riemannian exponential map is degenerate and the conjugate locus accumulates;
 abnormal trajectories, which are not part of the Lagrangian picture at all; and
 symmetry, which can make a whole conjugate locus non-generic (Heisenberg's first
-conjugate locus is a line, not a surface of folds). $\mathrm{SE}(3)$ has $n = 6$,
-beyond the range of the finite list.
+conjugate locus is a line, not a surface of folds; experiment E11, below, finds the
+same kind of collapse on part of the Engel and Cartan loci and on the whole locus of
+the nilpotent cone of $\mathrm{SE}(3)$). $\mathrm{SE}(3)$ has $n = 6$, beyond the
+range of the finite list, so even a generic map there need not have germs from it.
 
 **The working hypothesis: local generic caustics are group-blind.** Away from those
 three exceptions, a generic point of the conjugate locus of each candidate group is a
@@ -136,8 +138,24 @@ Rossi 2019). For Engel and Cartan we checked the simplest case numerically
 exponential map has corank 1 with its kernel transverse to the critical set — a fold
 — in 24 of 24 cases for SE(2), Engel and Cartan, and in 0 of 24 for the Heisenberg
 control, whose collapsed axis the test correctly rejects (data:
-`research/caustics-to-groups/artifacts/e10_results.json`). Cusps and higher
-germs on Engel and Cartan have not been checked. Under this hypothesis the naive
+`research/caustics-to-groups/artifacts/e10_results.json`). Experiment E11 then
+searched for the next germ, the cusp, along loops of initial covectors (pre-registered;
+data: `research/caustics-to-groups/artifacts/e11_results.json`). On SE(2), the
+calibration case, it finds the four cusps per loop that the 3D contact theory predicts:
+16 of 16 located points pass every test. On Engel it locates 21 points where the kernel
+is tangent to the critical set, and on Cartan 38 (tangency $\le 10^{-4}$, corank 1 at
+every one). Of these, 7 and 16 pass all the pre-registered cusp tests — a simple
+tangency and a semicubical image, with fitted exponents 1.93–2.10 and 2.99–3.18 against
+the exact 2 and 3 — and 10 and 7 more pass once the image test is repeated on a finer
+scale chosen after the fact. But 4 Engel points and 10 Cartan points are *not* cusps:
+the tangency is degenerate, and at 10 of those 14 a whole one-parameter family of
+geodesics refocuses at a single point, as on Heisenberg's axis. Five Cartan points
+are undecided. On $\mathrm{SE}(3)$ the fold test gives 23 of 24 on the group itself
+(the 24th falls below the fold threshold) and 0 of 24 on its nilpotent tangent cone,
+which collapses like Heisenberg. So the hypothesis holds at the folds and cusps we
+sampled; the symmetry exception is wider than Heisenberg alone; swallowtails and
+higher germs remain unchecked. All of this is numerics at sampled points, not proof.
+Under this hypothesis the naive
 detector — *see a cusp, name the group* — cannot work, and a pipeline that pretends
 otherwise is fitting noise.
 
@@ -564,6 +582,13 @@ realizations. Parameter count is part of the model comparison.
   point of random geodesics, is the exponential map a *fold* (Jacobian of corank 1 whose
   kernel is transverse to the critical set)? Supports the group-blindness hypothesis for
   SE(2), Engel and Cartan; Heisenberg is the negative control.
+- **E11 (cusp search)** — the follow-up: along loops of initial covectors, find where the
+  kernel of the exponential map's Jacobian becomes *tangent* to the critical set, and test
+  whether that point is a *cusp* (corank 1, simple tangency, semicubical image). Also
+  runs the E10 fold test on $\mathrm{SE}(3)$ and on its nilpotent tangent cone.
+- **Degenerate tangency** — a point where the kernel is tangent to the critical set but
+  the tangency is not simple, so the germ is not a cusp; in E11 most of these are points
+  where a one-parameter family of geodesics refocuses at one point.
 - **H1–H4, E0–E4, M1–M6** — the four hypotheses, five experiments, and six metrics
   defined above.
 

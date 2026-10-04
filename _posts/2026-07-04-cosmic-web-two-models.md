@@ -624,9 +624,9 @@ questions, answered in order:
 3. **How close can an honest version get?** After a short tuning campaign
    (brake strength, how coarsely directions are estimated), the frozen
    final recipe scores **4.52** on held-out worlds against Zel'dovich's
-   4.98 — within 0.05 of the oracle's 4.47. Close to ninety percent of the error
-   that *could* be recovered, is (86–90%, depending on which held-out
-   worlds price the bound). The exact recipe, every parameter
+   4.98 — within 0.07 of the oracle's 4.45 on the same worlds. Close to
+   ninety percent of the error that *could* be recovered, is (86% on those
+   worlds; the oracle averages 4.47 over five). The exact recipe, every parameter
    frozen, is [Appendix B4](/mathematics/2026/07/09/cosmic-web-B4-transverse-damping/).
 
 The ladder below shows where that leaves the model among its neighbours —

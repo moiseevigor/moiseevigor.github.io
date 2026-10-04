@@ -80,7 +80,10 @@ of the caustic of SE(2), Engel or Cartan and you see a fold: at the first conjug
 (experiment E10, `research/caustics-to-groups/artifacts/e10_results.json`). The collapsed
 Heisenberg axis above is the non-generic exception, and the same test rejects it in 24 of 24
 cases. Where folds meet you expect the next shape on the list, the cusp[^cusp] — known for 3D
-contact structures, not yet checked numerically for Engel and Cartan. These are the universal
+contact structures, and located numerically on Engel and Cartan in experiment E11 (7 and 16
+points pass every pre-registered cusp test; the same search also finds 4 and 10 tangency
+points that are not cusps but collapses of the Heisenberg kind;
+`research/caustics-to-groups/artifacts/e11_results.json`). Folds and cusps are the universal
 ADE germs. Hand someone a single cusp and ask which group it came
 from and they cannot answer: the four are **locally identical**. A detector that keys on
 "there is a cusp here" is reading noise. The information that separates the groups is not in
@@ -113,9 +116,6 @@ The figure shows the real measured curves.
 </div><!-- /.l-body -->
 
 <figure class="l-middle" id="fig-reach">
-  <div style="text-align:center; margin-bottom:0.4em;">
-    <span style="font-size:0.85rem; color:#555;">how far each kind of coordinate ranges vs. how far you drive — log–log</span>
-  </div>
   <div id="c2g-reach" style="text-align:center;"></div>
   <figcaption>
     <strong>The growth vector, measured (experiments E0 and E2).</strong> Each line is the

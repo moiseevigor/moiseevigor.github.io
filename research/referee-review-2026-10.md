@@ -65,12 +65,20 @@ now carry everything removed from the images.
 | 9 | Geometry of Seeing Part 4 title contradicted its body | Retitled "The Exact Cut Time on SE(2) — and the Open Problem Beyond It"; Part 3 now says a tie bounds the cut time, with equality as the SE(2) theorem. |
 | 10 | Unchecked citations; unlabelled schematic figures | The free-geodesic formula is from Moiseev–Sachkov (arXiv:0807.4731, §4.3), not "Sachkov 2011, eqs. 24–28"; the symmetry group is (ℤ₂)³ with the 2π shift as printed in that paper; code-identity claims softened to "same algorithm"; snippets fixed to the `elliptic` package's real API. All plane panels carry axis labels or a scale bar. A dead demo link (11 places) and a NaN in the phase-portrait figure were fixed. |
 
+### The four follow-ups — resolved
+
+| Item | Resolution |
+|---|---|
+| Solar figures labelled in px | Ten figures re-rendered with axes in Mm, each at its own day's plane-of-sky scale (`hmi_scale.json`); "normalised" axes now state the normalisation; captions carry the no-foreshortening caveat. |
+| Cusp germs on Engel/Cartan; SE(3) | Experiment E11 (`run_e11.py`, pre-registered in `docs/E11-cusp-germs.md`). Calibration passed: SE(2) gives 4 cusps per loop, 16/16 verified. Engel: 21 tangency points, 7 pass every pre-registered cusp test, 10 more at a finer scale chosen post hoc, 4 are degenerate. Cartan: 38 points, 16 pass, 7 more post hoc, 10 degenerate, 5 undecided. **The hypothesis "every tangency is a standard cusp" is refuted as stated**: at 10 of the 14 degenerate points a one-parameter family of geodesics refocuses at one point, the Heisenberg mechanism. SE(3): 23/24 folds on the group, 0/24 on its nilpotent cone. The posts now say the hypothesis holds at the sampled folds and standard cusps, and that the symmetry exception is wider than Heisenberg alone. |
+| Cosmic Web paper PDF stale | Rebuilt with `tectonic` (14 pages, no unresolved references). The abstract compared a three-seed result with a five-seed bound ("within 0.05"); paper, draft and posts now say within 0.07 on matched seeds. |
+| Journal numbering for the Sachkov papers | The three ESAIM: COCV papers were read as published PDFs (Numdam). Journal section and theorem numbers differ from the preprints; citations now give the journal number with the preprint number in parentheses. The two J. Dyn. Control Syst. papers are paywalled and keep preprint numbering, labelled as such. Found on the way: Moiseev–Sachkov call the oscillating-pendulum SR family *non-inflexional* and the rotating one *inflexional*, the reverse of the elastica naming the posts had applied to both; SR families are now named by pendulum regime (C₁, C₂, C₃) with a note. |
+
 ### Still open
 
-- Figures in the solar posts still label axes in px (captions give the Mm scale); a re-render with a secondary Mm axis would be cleaner.
-- Caustics: cusp germs on Engel/Cartan and anything on SE(3) (n = 6) are untested.
-- Cosmic Web `paper/main.pdf` is stale against `main.tex` (not rebuilt).
-- Journal (as opposed to arXiv) figure and equation numbers for the Sachkov papers were not checked.
+- Caustics: swallowtails and higher germs unsearched; 4 Engel and 5 Cartan tangency points unexplained or undecided; the E11 loop search skipped intervals where the conjugate time jumps, so it is not exhaustive.
+- Figure numbers cited from the paywalled J. Dyn. Control Syst. papers remain preprint numbering.
+- Book-chapter annotations for Montgomery, Marsden–Ratiu, Arnold, Spivak and Whittaker–Watson were not checked against the books.
 
 ## Glossary
 

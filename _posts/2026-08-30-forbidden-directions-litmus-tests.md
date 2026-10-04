@@ -185,7 +185,7 @@ the census on every frame.
 <figure class="l-middle" id="fig-emergence">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-emergence.png"
-      alt="Eight magnetogram frames, A to H in two rows of four, of the emerging active region AR11158 across two and a half days; axes x and y in extrapolation-grid pixels (linear, 0 to 100; one pixel is about 2.3 megametres), colour line-of-sight field in gauss on one shared linear red-blue scale of plus or minus 850; the region grows from a simple bipole into a multipolar flaring complex, with detected coronal nulls starred: none at first, a pair by ten hours after the X-class flare"
+      alt="Eight magnetogram frames, A to H in two rows of four, of the emerging active region AR11158 across two and a half days; axes x and y in megametres (linear, 0 to about 230; plane-of-sky scale, one extrapolation-grid pixel is 2.31 megametres), colour line-of-sight field in gauss on one shared linear red-blue scale of plus or minus 850; the region grows from a simple bipole into a multipolar flaring complex, with detected coronal nulls starred: none at first, a pair by ten hours after the X-class flare"
       style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
@@ -193,8 +193,8 @@ the census on every frame.
     2011-02-13 → 02-15 through the X2.2 flare; frames A–H at 02-13 00:00, 06:00, 12:00,
     18:00, 02-14 00:00, 12:00, 02-15 00:00, 12:00 UT; red/blue = line-of-sight field
     out of/into the photosphere, one shared linear scale saturating at ±850 G; axes in
-    extrapolation-grid pixels, linear — $1\ \text{px} \approx 3.23'' \approx 2.3$ Mm in
-    the plane of the sky ($0.504''$ HMI pixels resampled $\times 4 \times 1.6$; FITS
+    Mm, linear — $1$ extrapolation-grid px $\approx 3.23'' \approx 2.31$ Mm in
+    the plane of the sky, no foreshortening correction ($0.504''$ HMI pixels resampled $\times 4 \times 1.6$; FITS
     headers, <code>artifacts/hmi_scale.json</code>), so each frame is $\approx 230$ Mm
     across; ★ =
     detected coronal nulls of the potential extrapolation). The census reads

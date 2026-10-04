@@ -189,7 +189,7 @@ give, and Part 5 races the honest version.
 <figure class="l-middle" id="fig-solar-null">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-solar-null.png"
-      alt="Two panels: A, a real SDO/HMI line-of-sight magnetogram of a solar active region, axes x and y in extrapolation-grid pixels (linear, 0 to 100; one pixel is about 2.4 megametres), colour field in gauss (linear red-blue scale), a dashed line and gold star marking the null's footpoint; B, a vertical slice of the extrapolated coronal field magnitude in gauss (log colour scale), x axis position 0 to 100 pixels and y axis height above the surface 0 to 56 pixels, showing it collapse to zero at the cyan-starred null, with white field-line streamlines fanning through it"
+      alt="Two panels: A, a real SDO/HMI line-of-sight magnetogram of a solar active region, axes x and y in megametres (linear, 0 to about 235; plane-of-sky scale, one extrapolation-grid pixel is 2.38 megametres), colour field in gauss (linear red-blue scale), a dashed line and gold star marking the null's footpoint; B, a vertical slice of the extrapolated coronal field magnitude in gauss (log colour scale), x axis position 0 to about 235 megametres and y axis height above the surface 0 to about 133 megametres, showing it collapse to zero at the cyan-starred null, with white field-line streamlines fanning through it"
       style="max-width:min(100%,760px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
@@ -200,7 +200,7 @@ give, and Part 5 races the honest version.
     The dashed line marks the vertical plane drawn at right; the gold star is the null's footpoint.
     <em>Right (B):</em> the potential-field–extrapolated coronal $\lvert\mathbf B\rvert$ on that plane
     (log scale, bright = strong), with in-plane field lines in white. The field
-    <strong>collapses to zero</strong> at the null $h = 38$ px up ($\approx 90$ Mm at $2.38$ Mm per grid pixel; cyan star) and the streamlines
+    <strong>collapses to zero</strong> at the null $h = 38$ grid px $\approx 90$ Mm up (cyan star; axes in Mm, linear, at $2.38$ Mm per extrapolation-grid pixel — a plane-of-sky scale with no foreshortening correction) and the streamlines
     fan through it in the characteristic X-type topology — a <em>radial</em> null by its
     $\nabla\mathbf B$ eigenvalues $(-0.76,\,-0.24,\,+1.00)$ (dimensionless: divided by the
     largest $\lvert\lambda_i\rvert$). There the sub-Riemannian growth vector

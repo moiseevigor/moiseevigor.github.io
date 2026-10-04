@@ -86,7 +86,7 @@ transverse components hedges that frame noise better than trusting it.
   priced (first model 4.93 → oracle 4.47 on the same five seeds).
 - **E5c/E5d — declared optimisation.** Selection on seeds {2, 3},
   validation on held-out {4, 5, 6}. Winner: self-density frames, β = 0.6,
-  2 h⁻¹Mpc smoothing — 4.52 ± 0.18, within 0.05 of the oracle bound.
+  2 h⁻¹Mpc smoothing — 4.52 ± 0.18, within 0.07 of the oracle bound on the same seeds (4.45).
 - **E6/E7 — transfer.** Frozen knobs across voxel size, clustering
   amplitude and cosmology: the advantage persists everywhere and grows
   with clustering.
