@@ -47,7 +47,7 @@ And I want to run it in the docker container, by issuing the command
 ```
 docker run -it --rm --env="DISPLAY" -v "/tmp/.X11-unix:/tmp/.X11-unix:rw" -v $PWD:/app python-container python /app/example.py
 
-/app/examples/example.py:9: UserWarning: Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure.
+/app/example.py:9: UserWarning: Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure.
   plt.show()
 ```
 

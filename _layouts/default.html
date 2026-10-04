@@ -31,6 +31,7 @@
   <a href="https://github.com/{{ site.github_username | default: 'moiseevigor' }}" rel="me">GitHub</a>
   <a href="https://twitter.com/moiseev_igor" rel="me">Twitter</a>
   <a href="https://www.linkedin.com/in/moiseevigor" rel="me">LinkedIn</a>
+  {% if jekyll.environment == "production" %}<a href="#" id="cookie-prefs">Cookies</a>{% endif %}
   {% if page.path %}
   <span class="d-dot">·</span>
   <a href="https://github.com/{{ site.github_username | default: 'moiseevigor' }}/{{ site.github_repo | default: 'moiseevigor.github.io' }}/edit/master/{{ page.path }}">Edit&nbsp;on&nbsp;GitHub</a>

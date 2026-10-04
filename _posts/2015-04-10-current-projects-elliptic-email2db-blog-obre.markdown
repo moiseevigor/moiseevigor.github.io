@@ -60,4 +60,3 @@ This is a public space for thoughts on [MySQL](/tag/mysql) and [PostgreSQL](/tag
 [![CircleCI](https://circleci.com/gh/moiseevigor/moiseevigor.github.io/tree/master.svg?style=svg)](https://circleci.com/gh/moiseevigor/moiseevigor.github.io/tree/master)
 
 <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
-<div id="disqus_thread"></div>

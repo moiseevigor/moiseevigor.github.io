@@ -2,7 +2,6 @@
 layout: page
 title: Learning NoSQL, PHP and Linux
 header: Categories
-group: navigation
 permalink: /learning-nosql-php-linux/
 group: learning-nosql-php-linux
 categories:

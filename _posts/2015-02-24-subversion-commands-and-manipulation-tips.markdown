@@ -33,7 +33,7 @@ $ svn st | grep '^!' | awk '{print $2}' | xargs svn delete --force
 `grep` in a folder, excluding `.svn` dirs
 
 ```bash
-$ grep -r 'content_graphic' assets/js --exclude=*\.svn*
+$ grep -r 'content_graphic' assets/js --exclude-dir=.svn
 ```
 
 

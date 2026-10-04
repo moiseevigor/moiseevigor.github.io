@@ -19,6 +19,6 @@ and the invention of specific metrics capable of measuring the accuracy of the e
 
 
 
-<iframe width="720" height="380" src="https://www.youtube.com/embed/glpcIJLvyjY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="720" height="380" src="https://www.youtube-nocookie.com/embed/glpcIJLvyjY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 

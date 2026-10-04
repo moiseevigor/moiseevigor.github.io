@@ -442,6 +442,10 @@ body.layout-distill .d-article h2::before {
    ends cut off: KaTeX centres via text-align, which is fine while it fits. */
 .d-article .katex-display > .katex { white-space: nowrap; }
 
+/* Fixed-size video embeds in older posts: fit the column, keep 16:9. */
+.d-article iframe[src*="youtube"] { max-width: 100%; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 0; }
+.about-talks iframe[src*="youtube"] { width: 100%; }
+
 /* ── Figures ─────────────────────────────────────────────────────────────── */
 .d-article figure {
   margin-top: 40px;

@@ -3,12 +3,12 @@ layout: post
 image: /public/img/posts/resnet50.svg
 title:  "Train Resnet50 on ImageNet with PyTorch"
 subtitle: >
-  Eighty lines of PyTorch — RandomCrop and ColorJitter for augmentation,
+  Eighty lines of PyTorch — flips, rotation and ColorJitter for augmentation,
   DataParallel for multi-GPU, cross-entropy with Adam — fine-tune a pretrained
   ResNet-50 on the ImageNet Object Localization Challenge. Wrap it in a
   Dockerfile that pulls the dataset from Kaggle and you have a self-contained,
   reproducible 1000-class training pipeline.
-description: "A complete single-file training script for ResNet-50 on ImageNet using PyTorch — covering data loading, mixed-precision training, learning-rate scheduling, and top-1/top-5 accuracy tracking."
+description: "A complete single-file training script for ResNet-50 on ImageNet using PyTorch — covering data loading and augmentation, multi-GPU training with DataParallel, the Adam optimizer, and a Dockerfile that pulls the dataset from Kaggle."
 date:   2022-12-18 10:05:45
 categories:
 - software
@@ -243,7 +243,7 @@ ADD kaggle.json /root/.kaggle
 # Remember to join competition https://www.kaggle.com/c/imagenet-object-localization-challenge
 RUN pip install -q kaggle
 RUN kaggle competitions download -c imagenet-object-localization-challenge
-RUN unzip imagenet-object-localization-challenge.zip -d imagenet-object-localization-challenge
+RUN unzip imagenet-object-localization-challenge.zip -d /kaggle/input/imagenet-object-localization-challenge
 
 # Download pretrained model and store in the image layer 
 # Available at the path /root/.cache/torch/
@@ -261,7 +261,7 @@ CMD ["python", "resnet50.py"]
 
 This `Dockerfile` is based on the `pytorch/pytorch` image, which provides all necessary dependencies for running PyTorch programs with GPU acceleration.
 
-The `Dockerfile` installs `wget` and `unzip` utilities, which are needed to download the ImageNet dataset. It then downloads the dataset and extracts images to the `imagenet-object-localization-challenge` directory.
+The `Dockerfile` installs `wget` and `unzip` utilities, which are needed to download the ImageNet dataset. It then downloads the dataset and extracts images to `/kaggle/input/imagenet-object-localization-challenge`, the path the training script reads.
 
 Next, the Dockerfile copies the `resnet50.py` file, which should contain the code for training the ResNet50 model, to the `/app` directory. It then sets the working directory to /app and specifies that the `python resnet50.py` command should be run when the container is started.
 
