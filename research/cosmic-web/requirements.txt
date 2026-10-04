@@ -1,0 +1,8 @@
+astropy==8.0.0
+h5py==3.16.0
+hdf5plugin==7.0.0
+healpy==1.19.0
+matplotlib==3.11.0
+numpy==2.5.0
+scikit-image==0.26.0
+scipy==1.18.0

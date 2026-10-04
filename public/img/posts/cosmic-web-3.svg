@@ -1,0 +1,27 @@
+<svg viewBox="0 0 220 148" xmlns="http://www.w3.org/2000/svg">
+  <rect width="220" height="148" fill="#fff"/>
+  <!-- From filaments to curved spacetime: a light cone rising from an event,
+       over a gently warped (curved) spacetime grid. -->
+  <!-- curved grid -->
+  <g fill="none" stroke="#1565c0" opacity="0.22" stroke-width="1">
+    <path d="M 10,40 Q 110,50 210,40"/>
+    <path d="M 10,64 Q 110,82 210,64"/>
+    <path d="M 10,88 Q 110,112 210,88"/>
+    <path d="M 10,112 Q 110,132 210,112"/>
+    <path d="M 46,28 Q 52,86 46,124"/>
+    <path d="M 92,28 Q 100,88 92,126"/>
+    <path d="M 128,28 Q 120,88 128,126"/>
+    <path d="M 174,28 Q 168,86 174,124"/>
+  </g>
+  <!-- future light-cone fill -->
+  <path d="M 110,86 L 74,24 L 146,24 Z" fill="#1565c0" opacity="0.09"/>
+  <!-- cone edges -->
+  <g stroke="#1565c0" stroke-width="1.9" fill="none" stroke-linecap="round">
+    <path d="M 110,86 L 74,24"/>
+    <path d="M 110,86 L 146,24"/>
+    <path d="M 110,86 L 86,134" opacity="0.4"/>
+    <path d="M 110,86 L 134,134" opacity="0.4"/>
+  </g>
+  <!-- the event -->
+  <circle cx="110" cy="86" r="3.6" fill="#e65100"/>
+</svg>

@@ -10,7 +10,8 @@ layout: default
 <article class="d-article">
   <div class="l-body">
     <ul class="archive-list">
-      {% for post in site.posts %}
+      {% assign visible_posts = site.posts | where_exp: "p", "p.listed != false" %}
+      {% for post in visible_posts %}
         {% for tag in post.tags %}
           {% if tag == page.tag %}
           <li>

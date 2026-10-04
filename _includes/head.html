@@ -77,11 +77,16 @@
 
   <!-- CSS — distill.css is loaded for ALL pages so the same d-header / d-article / l-body
        typography applies everywhere (posts, pages, archives, home cards). -->
-  <link rel="stylesheet" href="/public/css/site.css">
-  <link rel="stylesheet" href="/public/css/distill.css">
-  <link rel="stylesheet" href="/public/css/syntax.css">
+  {%- assign css_v = site.time | date: '%s' %}
+  <link rel="stylesheet" href="/public/css/site.css?v={{ css_v }}">
+  <link rel="stylesheet" href="/public/css/distill.css?v={{ css_v }}">
+  <link rel="stylesheet" href="/public/css/syntax.css?v={{ css_v }}">
 
-  <!-- KaTeX math rendering -->
+  <!-- KaTeX math rendering — only on pages whose content actually contains
+       math delimiters, so math-less pages (home, about, archives) don't pay
+       a render-blocking CDN stylesheet + two script downloads for nothing. -->
+  {% if content contains '$' or content contains '\(' %}
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
@@ -94,6 +99,30 @@
       ],
       throwOnError: false
     })"></script>
+  {% endif %}
+
+  <!-- Native lazy-loading for content images: stamp every <img> as the parser
+       inserts it, before its fetch can start. Heavy posts (multi-MB figures,
+       GIFs) then load below-fold images only as the reader approaches them.
+       Disconnects at DOMContentLoaded so later DOM churn (KaTeX) pays nothing. -->
+  <script>
+    (function () {
+      var mo = new MutationObserver(function (muts) {
+        for (var i = 0; i < muts.length; i++) {
+          var nodes = muts[i].addedNodes;
+          for (var j = 0; j < nodes.length; j++) {
+            var n = nodes[j];
+            if (n.tagName === 'IMG' && !n.hasAttribute('loading')) {
+              n.loading = 'lazy';
+              n.decoding = 'async';
+            }
+          }
+        }
+      });
+      mo.observe(document.documentElement, { childList: true, subtree: true });
+      document.addEventListener('DOMContentLoaded', function () { mo.disconnect(); });
+    }());
+  </script>
 
   <!-- ── schema.org structured data (JSON-LD) ──
        Two slots:

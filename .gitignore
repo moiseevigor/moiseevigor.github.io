@@ -1,6 +1,7 @@
 # Ignore docs files
 _gh_pages
 _site
+_site_production
 .ruby-version
 
 # Numerous always-ignore extensions
@@ -54,3 +55,19 @@ __pycache__
 # Backups + local notes
 *.bak
 keywords
+
+# research/cosmic-web
+research/cosmic-web/.venv/
+research/cosmic-web/artifacts/
+.claude/launch.json
+research/cosmic-web/data/
+research/cosmic-web/paper/main.pdf
+.serena/
+
+# research/caustics-to-groups
+research/caustics-to-groups/.venv/
+research/caustics-to-groups/artifacts/
+
+# research/preferred-directions
+research/preferred-directions/artifacts/
+research/preferred-directions/.venv/

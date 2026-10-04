@@ -1,0 +1,1264 @@
+#!/usr/bin/env python3
+"""Blog enrichment: three renderings built purely from the program's REAL data.
+
+  1. hmi-triptych      -- the three full-disk SDO/HMI magnetograms (2011-06-07 sample;
+                          2012-03-07 and 2014-10-22 fetched from VSO), with the
+                          analysed active-region windows outlined.
+  2. null-constellation-- the 149 magnetospheric nulls of the IGRF+T96 census
+                          (artifacts/p4_magnetosphere.json) in 3D GSM, radial vs spiral.
+  3. coronal-skeleton  -- the real Sun as a sphere: the full-disk 2012-03-07 magnetogram
+                          textured on it (classic HMI grey), the AR11429 potential-field
+                          extrapolation embedded at its true disk position (tangent map,
+                          true height scale), arcade + null-threading field lines drawn
+                          with sphere occlusion, and a close-up inset of the null's
+                          spine and fan.
+
+Usage: render_real_assets.py     Output: public/img/posts/forbidden-directions-{...}.png
+"""
+import json
+import sys
+from pathlib import Path
+
+import numpy as np
+
+ROOT = Path(__file__).resolve().parents[1]
+REPO = ROOT.parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+sys.path.insert(0, str(ROOT / "scripts"))
+sys.path.insert(0, str(ROOT.parent / "caustics-to-groups" / "src"))
+
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt  # noqa: E402
+
+import solar  # noqa: E402
+from run_r3_real_gallery import load_magnetograms, best_windows, WIN, CUT, NZ  # noqa: E402
+
+BLUE, ORANGE = "#1565c0", "#e65100"
+
+
+def triptych():
+    mags = load_magnetograms()
+    fig, axes = plt.subplots(1, 3, figsize=(11.7, 4.3), dpi=150)
+    notes = {"2011-06-07": "quiet-ish disk, one AR",
+             "2012-03-07": "AR11429 — X5.4 flare day",
+             "2014-10-22": "AR12192 — largest AR of cycle 24"}
+    for ax, (date, bz) in zip(axes, mags):
+        v = np.percentile(np.abs(bz), 99.7)
+        ax.imshow(bz, origin="lower", cmap="RdBu_r", vmin=-v, vmax=v)
+        for (cy, cx) in best_windows(bz, k=4):
+            ax.add_patch(plt.Rectangle((cx - WIN // 2, cy - WIN // 2), WIN, WIN,
+                                       fill=False, ec="#111", lw=1.0, ls="--"))
+        ax.set_title(f"{date} — {notes.get(date, '')}", fontsize=8.6)
+        ax.set_xticks([]); ax.set_yticks([])
+        ax.text(0.02, 0.02, f"peak $|B|$ = {np.abs(bz).max():.0f} G",
+                transform=ax.transAxes, fontsize=7,
+                bbox=dict(boxstyle="round,pad=0.25", fc="white", ec="0.6", alpha=0.85))
+    fig.tight_layout()
+    out = REPO / "public/img/posts/forbidden-directions-hmi-triptych.png"
+    fig.savefig(out, bbox_inches="tight", dpi=150)
+    print("rendered", out.name)
+
+
+def constellation():
+    """Two equal-aspect projections read far better than a 3D scatter."""
+    data = json.loads((ROOT / "artifacts" / "p4_magnetosphere.json").read_text())
+    nulls = data["nulls"]
+    P = np.array([n["p_gsm_re"] for n in nulls])
+    spiral = np.array([n["type"] == "spiral" for n in nulls])
+    core = np.abs(P[:, 0]) <= 40                       # drop 4 far-tail model-edge nulls
+    n_drop = int((~core).sum())
+    P, spiral = P[core], spiral[core]
+
+    fig, axes = plt.subplots(1, 2, figsize=(10.6, 4.6), dpi=150)
+    for ax, (i, j, xl, yl, ttl) in zip(axes, [
+            (0, 1, "$x_{GSM}$ [$R_E$]", "$y_{GSM}$ [$R_E$]",
+             "A · from above (ecliptic projection)"),
+            (0, 2, "$x_{GSM}$ [$R_E$]", "$z_{GSM}$ [$R_E$]",
+             "B · from the side (noon–midnight projection)")]):
+        ax.scatter(P[~spiral, i], P[~spiral, j], s=18, c=BLUE, alpha=0.85,
+                   label=f"radial ({int((~spiral).sum())})")
+        ax.scatter(P[spiral, i], P[spiral, j], s=26, c=ORANGE, marker="^", alpha=0.9,
+                   label=f"spiral ({int(spiral.sum())})")
+        ax.add_patch(plt.Circle((0, 0), 1.0, color="#25d0ff", zorder=5))
+        ax.annotate("Earth", (0, 1.2), fontsize=7, ha="center", color="0.3")
+        ax.annotate("", xy=(12, 0), xytext=(5, 0),
+                    arrowprops=dict(arrowstyle="->", color="0.55"))
+        ax.text(12.6, 0, "Sun", fontsize=7.5, color="0.4", va="center")
+        ax.set_xlabel(xl, fontsize=8.5); ax.set_ylabel(yl, fontsize=8.5)
+        ax.set_title(ttl, fontsize=9)
+        ax.set_aspect("equal"); ax.tick_params(labelsize=7.5)
+        ax.grid(alpha=0.25, lw=0.5)
+        ax.legend(fontsize=7.5, loc="lower left")
+    print(f"constellation: {n_drop} far-tail nulls beyond |x|=40 RE omitted")
+    fig.tight_layout()
+    out = REPO / "public/img/posts/forbidden-directions-null-constellation.png"
+    fig.savefig(out, bbox_inches="tight", dpi=150)
+    print("rendered", out.name)
+
+
+def _trace(B, p0, direction, ds=0.35, steps=900):
+    """RK4 field-line trace on the gridded real field (unit-speed, +/- B-hat)."""
+    ny, nx, nz, _ = B.shape
+    pts = [np.asarray(p0, float)]
+    p = pts[0].copy()
+
+    def f(q):
+        b = solar._interp3(B, q)
+        n = np.linalg.norm(b)
+        return direction * b / n if n > 1e-9 else np.zeros(3)
+
+    for _ in range(steps):
+        k1 = f(p); k2 = f(p + 0.5 * ds * k1)
+        k3 = f(p + 0.5 * ds * k2); k4 = f(p + ds * k3)
+        p = p + (ds / 6) * (k1 + 2 * k2 + 2 * k3 + k4)
+        if not (1 < p[0] < nx - 2 and 1 < p[1] < ny - 2 and 0.5 < p[2] < nz - 2):
+            break
+        pts.append(p.copy())
+    return np.array(pts)
+
+
+def _cam_dir(elev, azim):
+    """Unit vector pointing from the scene toward the (orthographic) camera."""
+    e, a = np.radians(elev), np.radians(azim)
+    return np.array([np.cos(e) * np.cos(a), np.cos(e) * np.sin(a), np.sin(e)])
+
+def _visible(P, d, R=1.0):
+    """True where points P (n,3) are NOT occluded by the sphere |p|<R, camera dir d."""
+    b = P @ d
+    return ~((b < 0) & ((P * P).sum(1) - b * b < R * R))
+
+def _plot_culled(ax, P, d, **kw):
+    """Plot a polyline, split into its sphere-visible runs."""
+    vis = _visible(P, d)
+    cut = np.flatnonzero(np.diff(vis.astype(int))) + 1
+    for run in np.split(np.arange(len(P)), cut):
+        if vis[run[0]] and len(run) > 2:
+            ax.plot(P[run, 0], P[run, 1], P[run, 2], **kw)
+
+
+def _plot_faded(ax, P, d, color, lw, alpha, zorder, fade=0.22, wpt=None):
+    """Occlusion-culled polyline whose ends FADE OUT instead of cutting hard.
+
+    wpt (optional, len(P)): per-POINT alpha weights in [0,1] -- e.g. proximity to an
+    artificial domain wall. Bundles of lines all hitting the same wall stack their
+    faded ends back to opacity unless the whole bundle dims coherently; wpt is how.
+    """
+    from mpl_toolkits.mplot3d.art3d import Line3DCollection
+    vis = _visible(P, d)
+    cut = np.flatnonzero(np.diff(vis.astype(int))) + 1
+    for run in np.split(np.arange(len(P)), cut):
+        if not vis[run[0]] or len(run) < 4:
+            continue
+        Q = P[run]
+        segs = np.stack([Q[:-1], Q[1:]], axis=1)
+        n = len(segs)
+        idx = np.arange(n)
+        nf = max(2, int(fade * n))
+        a = np.minimum(np.minimum(idx + 1, n - idx) / nf, 1.0) * alpha
+        if wpt is not None:
+            wr = wpt[run]
+            a = a * 0.5 * (wr[:-1] + wr[1:])
+        rgba = np.tile(np.asarray(matplotlib.colors.to_rgba(color)), (n, 1))
+        rgba[:, 3] = np.clip(a, 0, 1)
+        lc = Line3DCollection(segs, colors=rgba, linewidths=lw, zorder=zorder,
+                              capstyle="round")
+        ax.add_collection3d(lc)
+
+
+def _edge_weight(P_box, nx, ny, nz, w_px=9.0):
+    """Per-point fade weight ~ distance to the ARTIFICIAL box walls (sides + top).
+
+    The bottom (photosphere) is a physical boundary -- lines may end there crisply.
+    """
+    dx = np.minimum(P_box[:, 0] - 1, nx - 2 - P_box[:, 0])
+    dy = np.minimum(P_box[:, 1] - 1, ny - 2 - P_box[:, 1])
+    dz = nz - 2 - P_box[:, 2]
+    return np.clip(np.minimum(np.minimum(dx, dy), dz) / w_px, 0.0, 1.0)
+
+
+def _ar11429_volume():
+    """The AR11429 survey volume, RECENTERED on its null so traced lines have room
+    in every direction (the flux-centred window put the null 14 px from a wall).
+    Verifies the null survives the shifted window (window-sensitivity is real --
+    see R3); falls back to the flux-centred window if not.
+    Returns (cut, B, nulls_sorted_by_height, p0, (cy, cx))."""
+    from scipy.ndimage import zoom
+    bz = dict(load_magnetograms())["2012-03-07"]
+
+    def build(cy, cx):
+        cut = zoom(bz[cy - WIN // 2:cy + WIN // 2, cx - WIN // 2:cx + WIN // 2],
+                   CUT / WIN, order=1)
+        B, _A = solar.potential_field(cut, NZ, dz=1.0)
+        ny, nx, nz, _ = B.shape
+        nulls = [nl for nl in solar.find_nulls(B, seeds_per_axis=12)
+                 if 6 < nl["p"][0] < nx - 6 and 6 < nl["p"][1] < ny - 6
+                 and 3 < nl["p"][2] < nz - 3]
+        nulls.sort(key=lambda nl: nl["p"][2])
+        return cut, B, nulls
+
+    cy0, cx0 = 640, 640
+    cut, B, nulls = build(cy0, cx0)
+    p_ref = nulls[0]["p"]
+    # shift the window so the null lands mid-box
+    cxn = int(round(cx0 + (p_ref[0] - (CUT - 1) / 2) * (WIN / CUT)))
+    cyn = int(round(cy0 + (p_ref[1] - (CUT - 1) / 2) * (WIN / CUT)))
+    cut2, B2, nulls2 = build(cyn, cxn)
+    c = (CUT - 1) / 2
+    if nulls2 and np.linalg.norm(nulls2[0]["p"][:2] - c) < 25:
+        print(f"AR volume recentered on null: window ({cyn},{cxn}), "
+              f"null at {np.round(nulls2[0]['p'],1)}")
+        return cut2, B2, nulls2, nulls2[0]["p"], (cyn, cxn)
+    print("recentering lost the null -- falling back to the flux-centred window")
+    return cut, B, nulls, p_ref, (cy0, cx0)
+
+
+def skeleton(fast=False):
+    """The stage as the actual Sun: full-disk magnetogram on a sphere, the AR11429
+    extrapolation patch embedded at its true disk position (tangent/exponential map,
+    true height scale), field lines occlusion-culled, null close-up inset."""
+    from scipy.ndimage import zoom, map_coordinates, gaussian_filter
+    bz = dict(load_magnetograms())["2012-03-07"]
+    # TWO volumes, like the AIA overlay: the null and its fan live in the
+    # null-recentred window; the arcade is traced in the FLUX-centred window so its
+    # loops root on the sunspot group itself (seeding the arcade in the null window
+    # put the core flux at the window edge and displaced the loops)
+    cut, B, nulls, p0, (cy, cx) = _ar11429_volume()
+    ny, nx, nz, _ = B.shape
+    cyf, cxf = 640, 640
+    cutf = zoom(bz[cyf - WIN // 2:cyf + WIN // 2, cxf - WIN // 2:cxf + WIN // 2],
+                CUT / WIN, order=1)
+    Bf, _Af = solar.potential_field(cutf, NZ, dz=1.0)
+    print(f"skeleton null at {np.round(p0, 1)} of {len(nulls)} in the volume")
+
+    # ---- traces in box coords (x, y in CUT px; z in CUT px of height) ------------
+    rng = np.random.default_rng(2)
+    iy, ix = np.where(np.abs(cutf) >= 250.0)
+    w = np.abs(cutf)[iy, ix]
+    sel = rng.choice(len(ix), size=min(170, len(ix)), replace=False, p=w / w.sum())
+    arcade = []
+    for j in sel:
+        sgn = +1.0 if cutf[iy[j], ix[j]] > 0 else -1.0
+        ln = _trace(Bf, np.array([ix[j], iy[j], 1.5]), sgn, ds=0.35, steps=1600)
+        if len(ln) > 10:
+            arcade.append((ln, w[j] / w.max()))
+    skel = []
+    for _ in range(26):
+        u = rng.standard_normal(3); u /= np.linalg.norm(u)
+        for sgn in (+1.0, -1.0):
+            ln = _trace(B, p0 + 1.2 * u, sgn, ds=0.3, steps=2600)
+            if len(ln) > 8:
+                skel.append(ln)
+
+    # ---- disk geometry & tangent-map embedding (units of R_sun) ------------------
+    ys, xs = np.where(np.abs(bz) > 0)
+    cy0, cx0 = (ys.min() + ys.max()) / 2, (xs.min() + xs.max()) / 2
+    Rpx = ((ys.max() - ys.min()) + (xs.max() - xs.min())) / 4
+    sig = (WIN / CUT) / Rpx                       # radians (=R units) per CUT px
+
+    def make_embed(cxw, cyw):
+        """Tangent/exponential-map embed anchored at window (cxw, cyw)."""
+        nw = np.array([(cxw - cx0) / Rpx, (cyw - cy0) / Rpx, 0.0])
+        nw[2] = np.sqrt(1 - nw[0] ** 2 - nw[1] ** 2)
+        ew1 = np.array([1.0, 0, 0]) - nw[0] * nw; ew1 /= np.linalg.norm(ew1)
+        ew2 = np.array([0, 1.0, 0]) - nw[1] * nw - ew1[1] * ew1
+        ew2 /= np.linalg.norm(ew2)
+
+        def emb(P):
+            P = np.atleast_2d(P)
+            a = (P[:, 0] - (CUT - 1) / 2) * sig
+            b = (P[:, 1] - (CUT - 1) / 2) * sig
+            rho = np.hypot(a, b)
+            s = np.where(rho > 1e-12, np.sin(rho) / np.maximum(rho, 1e-12), 1.0)
+            nhat = (np.cos(rho)[:, None] * nw +
+                    s[:, None] * (a[:, None] * ew1 + b[:, None] * ew2))
+            return (1.0 + P[:, 2] * sig)[:, None] * nhat
+        return emb, nw
+
+    embed, n0 = make_embed(cx, cy)                # null window (fan, star, inset)
+    embedF, _n0f = make_embed(cxf, cyf)           # flux window (arcade)
+
+    # ---- figure -------------------------------------------------------------------
+    # NB (matplotlib 3.11): Axes3D clips artists to its centred square viewport, and
+    # an opaque axes patch draws over sibling-axes content -- hence facecolor "none"
+    # and clip_on=False throughout.
+    BG, FAR, INK = "#0b0e14", "#191308", "#c7cdd8"
+    ARC, NUL, STAR = "#7aa8dc", "#ff8b2e", "#ffd34d"
+    VDISP = 550.0                                  # display range [G]
+    # the Sun we are used to: warm yellow quiet disk, dark-brown negative polarity,
+    # near-white positive; one colormap drives sphere, patch and inset alike
+    _SOLAR = matplotlib.colors.LinearSegmentedColormap.from_list("solar", [
+        (0.00, "#160b00"), (0.26, "#7a4d0e"), (0.42, "#d99e2b"),
+        (0.50, "#f3bf4a"), (0.58, "#ffd97e"), (0.74, "#fff0c3"), (1.00, "#fffdf2")])
+    grey = lambda val: _SOLAR(np.clip(val / (2 * VDISP) + 0.5, 0.02, 0.98))
+    ELEV, AZIM = 17, -38
+    d = _cam_dir(ELEV, AZIM)
+
+    fig = plt.figure(figsize=(10.2, 7.0), dpi=110 if fast else 165)
+    fig.patch.set_facecolor(BG)
+    ax = fig.add_axes([0, 0, 1, 1], projection="3d", computed_zorder=False)
+    ax.set_facecolor("none"); ax.set_axis_off(); ax.set_proj_type("ortho")
+
+    # base sphere textured with the real full-disk magnetogram (smoothed against
+    # mesh aliasing; dark past the limb where HMI has no data)
+    bz_s = gaussian_filter(bz, 2.0)
+    nlat, nlon = (120, 240) if fast else (360, 720)
+    th = np.linspace(0, np.pi, nlat)[:, None]     # colatitude from +z (observer axis)
+    ph = np.linspace(0, 2 * np.pi, nlon)[None, :]
+    N = np.stack([np.sin(th) * np.cos(ph) + 0 * ph,
+                  np.sin(th) * np.sin(ph) + 0 * ph,
+                  np.cos(th) + 0 * ph], axis=-1)
+    U = cx0 + N[..., 0] * Rpx
+    V = cy0 + N[..., 1] * Rpx
+    tex = map_coordinates(bz_s, [V.ravel(), U.ravel()], order=1,
+                          mode="nearest").reshape(V.shape)
+    C = grey(tex)
+    t = np.clip(N[..., 2] / 0.10, 0, 1)[..., None]          # no data past the limb
+    C = t * C + (1 - t) * np.array(matplotlib.colors.to_rgba(FAR))
+    s1 = ax.plot_surface(N[..., 0], N[..., 1], N[..., 2], rstride=1, cstride=1,
+                         facecolors=C, shade=False, antialiased=False, linewidth=0,
+                         zorder=1)
+    s1.set_clip_on(False)
+
+    # crisp overlay over the framed foreground (same true texture mapping, tiny
+    # radial lift), blended to the smoothed texture at its rim
+    npq = 200 if fast else 320
+    HW = 160.0
+    g = np.linspace(-HW, HW, npq)                 # CUT px around the patch centre
+    GX, GY = np.meshgrid(g + (nx - 1) / 2, g + (ny - 1) / 2)
+    Pg = embed(np.column_stack([GX.ravel(), GY.ravel(), np.zeros(GX.size)]))
+    S = 1.0006 * Pg.reshape(npq, npq, 3)
+    Uo = cx0 + Pg[:, 0].reshape(npq, npq) * Rpx
+    Vo = cy0 + Pg[:, 1].reshape(npq, npq) * Rpx
+    texo = map_coordinates(bz_s, [Vo.ravel(), Uo.ravel()], order=1,
+                           mode="nearest").reshape(npq, npq)
+    texf = map_coordinates(bz, [Vo.ravel(), Uo.ravel()], order=1,
+                           mode="nearest").reshape(npq, npq)
+    r_edge = np.maximum(np.abs(GX - (nx - 1) / 2), np.abs(GY - (ny - 1) / 2)) / HW
+    blend = np.clip((r_edge - 0.5) / 0.4, 0, 1)   # crisp core -> smooth rim
+    Co = grey((1 - blend) * texf + blend * texo)
+    to = np.clip(Pg[:, 2].reshape(npq, npq) / 0.10, 0, 1)[..., None]  # same limb fade
+    Co = to * Co + (1 - to) * np.array(matplotlib.colors.to_rgba(FAR))
+    Co[..., 3] = 1.0
+    Co[~_visible(Pg, d).reshape(npq, npq)] = (0, 0, 0, 0)   # hide beyond the horizon
+    s2 = ax.plot_surface(S[..., 0], S[..., 1], S[..., 2], rstride=1, cstride=1,
+                         facecolors=Co, shade=False, antialiased=False, linewidth=0,
+                         zorder=2)
+    s2.set_clip_on(False)
+
+    # field lines (occlusion-culled, ends fading out, bundles dimming toward the
+    # artificial box walls so shared exits cannot stack back into a hard cut)
+    for ln, wgt in arcade:
+        _plot_faded(ax, embedF(ln), d, color=ARC, lw=1.0 + 1.2 * wgt,
+                    alpha=0.40 + 0.35 * wgt, zorder=3,
+                    wpt=_edge_weight(ln, nx, ny, nz))
+    for ln in skel:
+        _plot_faded(ax, embed(ln), d, color=NUL, lw=1.7, alpha=0.95, zorder=4,
+                    fade=0.30, wpt=_edge_weight(ln, nx, ny, nz, w_px=12.0))
+    star = embed(np.array([p0]))[0]
+    for s_, a_ in ((1500, 0.06), (650, 0.16)):    # soft glow behind the star
+        ax.scatter(*star, s=s_, c=STAR, marker="o", alpha=a_, linewidth=0,
+                   zorder=5, depthshade=False, clip_on=False)
+    ax.scatter(*star, s=230, c=STAR, marker="*", edgecolor="#442200",
+               linewidth=0.9, zorder=6, depthshade=False, clip_on=False)
+
+    # framing: tight on the midpoint between the arcade and the null, limb in view
+    c = 0.97 * embed(np.array([[41.0, 60.0, 12.0]]))[0]
+    h = 0.30
+    ax.set_xlim(c[0] - h, c[0] + h); ax.set_ylim(c[1] - h, c[1] + h)
+    ax.set_zlim(c[2] - h, c[2] + h)
+    ax.set_box_aspect((1, 1, 1))
+    ax.view_init(elev=ELEV, azim=AZIM)
+
+    # ---- inset: the null close up, in its own card ---------------------------------
+    fig.add_artist(matplotlib.patches.FancyBboxPatch(
+        (0.018, 0.035), 0.285, 0.40, boxstyle="round,pad=0.008,rounding_size=0.012",
+        transform=fig.transFigure, facecolor="#10141d", edgecolor="#2a3242",
+        linewidth=0.9, zorder=0.5))
+    axi = fig.add_axes([0.018, 0.025, 0.285, 0.375], projection="3d",
+                       computed_zorder=False)
+    axi.set_zorder(1)                              # inset content above its card
+    axi.set_facecolor("none"); axi.set_axis_off(); axi.set_proj_type("ortho")
+    L, ZT = 16.0, 24.0
+    gi = np.linspace(-L, L, 48)
+    GXi, GYi = np.meshgrid(gi + p0[0], gi + p0[1])
+    txi = map_coordinates(cut, [GYi.ravel(), GXi.ravel()], order=1,
+                          mode="nearest").reshape(GXi.shape)
+    re_ = np.maximum(np.abs(GXi - p0[0]), np.abs(GYi - p0[1])) / L
+    fade = (0.88 * np.clip((0.98 - re_) / 0.25, 0, 1))[..., None]
+    Ci = fade * grey(txi) + (1 - fade) * np.array(matplotlib.colors.to_rgba("#10141d"))
+    Ci[..., 3] = 1.0                               # opaque blend: no per-quad seams
+    axi.plot_surface(GXi, GYi, 0 * GXi, rstride=1, cstride=1, facecolors=Ci,
+                     shade=False, antialiased=False, linewidth=0, zorder=1)
+    inl = lambda q: ((np.abs(q[:, 0] - p0[0]) < L) & (np.abs(q[:, 1] - p0[1]) < L)
+                     & (q[:, 2] < ZT))
+    from mpl_toolkits.mplot3d.art3d import Line3DCollection
+    for ln in skel:
+        ok = inl(ln)
+        # fade toward the CROP boundary (and box walls) instead of hard-clipping;
+        # bundles that leave the crop together dim together
+        wcrop = np.clip(np.minimum.reduce([
+            (L - np.abs(ln[:, 0] - p0[0])), (L - np.abs(ln[:, 1] - p0[1])),
+            (ZT - ln[:, 2])]) / 3.5, 0.0, 1.0)
+        wcrop *= _edge_weight(ln, nx, ny, nz, w_px=6.0)
+        cutpts = np.flatnonzero(np.diff(ok.astype(int))) + 1
+        for run in np.split(np.arange(len(ln)), cutpts):
+            if not ok[run[0]] or len(run) < 3:
+                continue
+            Q = ln[run]
+            segs = np.stack([Q[:-1], Q[1:]], axis=1)
+            a = 0.9 * 0.5 * (wcrop[run][:-1] + wcrop[run][1:])
+            rgba = np.tile(np.asarray(matplotlib.colors.to_rgba(NUL)), (len(segs), 1))
+            rgba[:, 3] = np.clip(a, 0, 1)
+            axi.add_collection3d(Line3DCollection(segs, colors=rgba, linewidths=1.4,
+                                                  zorder=3, capstyle="round"))
+    axi.plot([p0[0]] * 2, [p0[1]] * 2, [0, p0[2]], color="#777f8c", lw=0.8,
+             ls=(0, (2, 2)), zorder=2)
+    for s_, a_ in ((1300, 0.07), (550, 0.16)):
+        axi.scatter(*p0, s=s_, c=STAR, marker="o", alpha=a_, linewidth=0,
+                    zorder=4, depthshade=False)
+    axi.scatter(*p0, s=190, c=STAR, marker="*", edgecolor="#442200", linewidth=0.9,
+                zorder=5, depthshade=False)
+    axi.set_xlim(p0[0] - L, p0[0] + L); axi.set_ylim(p0[1] - L, p0[1] + L)
+    axi.set_zlim(0, ZT)
+    axi.set_box_aspect((1, 1, 0.75))
+    axi.view_init(elev=18, azim=-52)
+
+    # ---- annotations ----------------------------------------------------------------
+    from mpl_toolkits.mplot3d import proj3d
+    x2, y2, _ = proj3d.proj_transform(star[0], star[1], star[2], ax.get_proj())
+    sxy = fig.transFigure.inverted().transform(ax.transData.transform((x2, y2)))
+    fig.text(0.161, 0.415, "the null, close up — spine & fan", color=INK, fontsize=8.4,
+             ha="center", zorder=21)
+    fig.add_artist(matplotlib.lines.Line2D(
+        [0.308, sxy[0] - 0.006], [0.43, sxy[1] - 0.010],
+        color="#566070", lw=0.9, zorder=0.6))
+    out = REPO / "public/img/posts/forbidden-directions-coronal-skeleton.png"
+    fig.savefig(out, facecolor=BG, dpi=fig.dpi)
+    print("rendered", out.name)
+
+
+# ---------------------------------------------------------------- null anatomy
+
+def _fan_basis(M, cls):
+    """Orthonormal (u1, u2) spanning the fan plane of a null with Jacobian M."""
+    w, V = np.linalg.eig(M)
+    ri = int(np.argmin(np.abs(w - cls["spine_val"])))
+    fi = [k for k in range(3) if k != ri]
+    if cls["type"] == "spiral":
+        u1, u2 = np.real(V[:, fi[0]]), np.imag(V[:, fi[0]])
+    else:
+        u1, u2 = np.real(V[:, fi[0]]), np.real(V[:, fi[1]])
+    u1 = u1 / np.linalg.norm(u1)
+    u2 = u2 - (u2 @ u1) * u1
+    u2 = u2 / np.linalg.norm(u2)
+    return u1, u2
+
+
+def _draw_glyph(ax, cls):
+    """Type schematic (X-type radial / O-type spiral) in axes coords."""
+    ax.set_xlim(0, 1); ax.set_ylim(0, 1)
+    c, r = np.array([0.5, 0.62]), 0.17
+    if cls["type"] == "radial":
+        for sgn in (+1, -1):
+            ax.annotate("", xy=c + [0, sgn * r * 1.45], xytext=c,
+                        arrowprops=dict(arrowstyle="-|>", color="#e65100", lw=2.0))
+        th = np.linspace(0, 2 * np.pi, 60)
+        ax.plot(c[0] + r * 1.25 * np.cos(th), c[1] + r * 0.45 * np.sin(th),
+                color="#1565c0", lw=1.6, ls="--")
+        for sgn in (+1, -1):
+            ax.annotate("", xy=c + [sgn * r * 1.7, 0], xytext=c + [sgn * r * 0.6, 0],
+                        arrowprops=dict(arrowstyle="-|>", color="#1565c0", lw=1.4))
+    else:
+        th = np.linspace(0, 3.6 * np.pi, 200)
+        rr = 0.03 + 0.045 * th
+        ax.plot(c[0] + rr * np.cos(th) * 1.15, c[1] + rr * np.sin(th) * 0.55,
+                color="#1565c0", lw=1.7)
+        for sgn in (+1, -1):
+            ax.annotate("", xy=c + [0, sgn * r * 1.5], xytext=c,
+                        arrowprops=dict(arrowstyle="-|>", color="#e65100", lw=2.0))
+    ax.plot(*c, marker="*", ms=15, mfc="#ffd34d", mec="#442200", mew=0.8)
+
+
+def _line_role(ln, p0, sp, L):
+    """Topological role of a traced line near the null: fan / spine / ambient.
+
+    Pontin & Priest (2022) convention adopted conceptually: colour encodes the
+    line's role in the null's skeleton, judged from the crop-interior points.
+    """
+    d = ln - p0[None, :]
+    r = np.linalg.norm(d, axis=1)
+    keep = r < 0.9 * L
+    if keep.sum() < 6:
+        return "ambient"
+    s = np.abs(d[keep] @ sp)
+    rho = np.sqrt(np.maximum(np.linalg.norm(d[keep], axis=1) ** 2 - s ** 2, 0))
+    ms_, mr = float(np.median(s)), float(np.median(rho))
+    if ms_ < 0.3 * mr:
+        return "fan"
+    if mr < 0.3 * ms_ and ms_ > 0:
+        return "spine"
+    return "ambient"
+
+
+ROLE_STYLE = {   # colour = topological role (P&P-style clarity)
+    "fan":     dict(color="#1565c0", lw=0.95, alpha=0.9,  zorder=2),
+    "spine":   dict(color="#e65100", lw=1.5,  alpha=0.95, zorder=3),
+    "ambient": dict(color="#9aa7b4", lw=0.45, alpha=0.45, zorder=1),
+}
+
+
+def _anatomy_rows(fig, axesrow, lines, p0, M, L, unit, row_title, tracer=None):
+    """One null's row, in null-adapted views (Pontin & Priest 2022, conceptually):
+
+      [ 3D skeleton | view down the spine | side view, spine vertical | info ]
+
+    Colour = topological role: orange spine lines/axis, blue fan lines,
+    gray ambient; open circle at the null coloured by sign (blue positive =
+    fan-out, red negative = fan-in). If `tracer(seed, direction) -> polyline`
+    is given, fan and spine separatrix lines are traced from adapted seeds so
+    the skeleton is real integrated field, not schematic.
+    """
+    import nulltopo
+    from mpl_toolkits.mplot3d import Axes3D  # noqa: F401
+    from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+    Mn = M / np.abs(np.linalg.eigvals(M)).max()
+    Mn = Mn - np.eye(3) * np.trace(Mn) / 3
+    cls = nulltopo.classify_null(Mn)
+    sp = np.asarray(cls["spine"], float)
+    fan_out = float(np.real(cls["spine_val"])) < 0      # fan eigenvalues > 0
+    index = int(np.sign(np.real(np.linalg.det(Mn))))    # topological degree
+    sign_col = "#1565c0" if index > 0 else "#c62828"    # blue +1, red −1
+    u1, u2 = _fan_basis(Mn, cls)
+
+    # the null's own (generally OBLIQUE) eigenframe: columns fan e1, fan e2,
+    # spine. Dual coordinates put the fan plane at c = 0 and the spine on the
+    # c-axis exactly — the adapted views below are exact by construction.
+    E = np.stack([u1, u2, sp], axis=1)
+    Einv = np.linalg.inv(E)
+
+    def adapted(ln):
+        return (ln - p0[None, :]) @ Einv.T
+
+    # separatrix-adapted seeding (real traced lines)
+    traced = []
+    if tracer is not None:
+        for a in np.linspace(0, 2 * np.pi, 12, endpoint=False):
+            s0 = p0 + 0.08 * L * (np.cos(a) * u1 + np.sin(a) * u2)
+            for sgn in (+1.0, -1.0):
+                ln = tracer(s0, sgn)
+                if ln is not None and len(ln) > 8:
+                    traced.append(np.asarray(ln))
+        for soff in (+0.12, -0.12):
+            for sgn in (+1.0, -1.0):
+                ln = tracer(p0 + soff * L * sp, sgn)
+                if ln is not None and len(ln) > 8:
+                    traced.append(np.asarray(ln))
+
+    # classify by geometry in the dual frame — and a line passing the null is
+    # SPLIT at closest approach: its incoming half can be fan while the
+    # outgoing half rides the spine (that continuous fan->null->spine line IS
+    # the classic X of a null; each half gets its own role colour)
+    fan_lines, spine_lines, ambient = [], [], []
+
+    def _classify_seg(seg):
+        # judge in the NEAR zone: the real fan surface curves away from its
+        # tangent plane at crop scale, which must not disqualify a fan line
+        a = adapted(seg)
+        r = np.linalg.norm(a, axis=1)
+        keep = r < 0.45 * L
+        if keep.sum() < 6:
+            keep = r < 0.95 * L
+        if keep.sum() < 6:
+            ambient.append(seg); return
+        c = np.abs(a[keep, 2])
+        rho = np.hypot(a[keep, 0], a[keep, 1])
+        mc, mr = float(np.median(c)), float(np.median(rho))
+        if mc < 0.30 * mr:
+            fan_lines.append(seg)
+        elif mr < 0.30 * mc:
+            spine_lines.append(seg)
+        else:
+            ambient.append(seg)
+
+    for ln in list(lines) + traced:
+        r = np.linalg.norm(adapted(ln), axis=1)
+        k0 = int(np.argmin(r))
+        if r[k0] < 0.06 * L and 6 < k0 < len(ln) - 6:
+            _classify_seg(ln[: k0 + 1]); _classify_seg(ln[k0:])
+        else:
+            _classify_seg(ln)
+
+    TH = np.linspace(0, 2 * np.pi, 90)
+
+    # ---- panel 1: 3D skeleton in adapted coordinates -----------------------
+    gs = axesrow[0].get_subplotspec()
+    axesrow[0].remove()
+    ax = fig.add_subplot(gs, projection="3d", computed_zorder=False)
+    disc = [np.stack([0.62 * L * np.cos(TH), 0.62 * L * np.sin(TH),
+                      np.zeros_like(TH)], axis=1)]
+    ax.add_collection3d(Poly3DCollection(disc, facecolor="#1565c0", alpha=0.13,
+                                         edgecolor="#1565c0", lw=1.0, ls="--",
+                                         zorder=1))
+    for group, style in ((ambient, ROLE_STYLE["ambient"]),
+                         (fan_lines, ROLE_STYLE["fan"]),
+                         (spine_lines, ROLE_STYLE["spine"])):
+        for ln in group:
+            a = adapted(ln)
+            keep = np.abs(a).max(axis=1) < L
+            if keep.sum() > 3:
+                ax.plot(a[keep, 0], a[keep, 1], a[keep, 2], **style)
+    ax.plot([0, 0], [0, 0], [-0.9 * L, 0.9 * L], color="#e65100", lw=2.4,
+            zorder=4)
+    for zz in (0.9 * L, -0.9 * L):
+        ax.plot([0], [0], [zz], marker="^" if zz > 0 else "v", ms=6,
+                color="#e65100", zorder=5)
+    ax.plot([0], [0], [0], marker="o", ms=8, mfc="none", mec=sign_col, mew=1.8,
+            zorder=6)
+    ax.text(0, 0, 1.02 * L, "spine", color="#e65100", fontsize=7.5,
+            fontweight="bold", ha="center")
+    ax.text(0.72 * L, 0.35 * L, 0, "fan", color="#1565c0", fontsize=7.5,
+            fontweight="bold")
+    ax.set_xlim(-L, L); ax.set_ylim(-L, L); ax.set_zlim(-L, L)
+    ax.set_box_aspect((1, 1, 1))
+    ax.set_axis_off()
+    ax.set_title("3D skeleton (null frame)", fontsize=8)
+    ax.view_init(elev=16, azim=-58)
+    try:
+        ax.set_proj_type("ortho")
+    except Exception:
+        pass
+
+    # ---- panels 2-3: down-the-spine and side-on views ----------------------
+    views = [((0, 1), "down the spine (fan plane)"),
+             ((0, 2), "side view (spine vertical)")]
+    for k, (ax2, ((i, j), pt)) in enumerate(zip(axesrow[1:3], views)):
+        for group, style in ((ambient, ROLE_STYLE["ambient"]),
+                             (fan_lines, ROLE_STYLE["fan"]),
+                             (spine_lines, ROLE_STYLE["spine"])):
+            for ln in group:
+                a = adapted(ln)
+                ax2.plot(a[:, i], a[:, j], **style)
+        if j == 1:      # fan-plane view: the ideal fan circle
+            ax2.plot(0.62 * L * np.cos(TH), 0.62 * L * np.sin(TH),
+                     color="#1565c0", lw=1.1, ls="--", alpha=0.7, zorder=3)
+        else:           # side view: fan edge-on + spine axis vertical
+            ax2.plot([-0.62 * L, 0.62 * L], [0, 0], color="#1565c0", lw=1.1,
+                     ls="--", alpha=0.7, zorder=3)
+            for sgn in (+1, -1):
+                ax2.annotate("", xy=(0, sgn * 0.88 * L), xytext=(0, 0),
+                             arrowprops=dict(arrowstyle="-|>", color="#e65100",
+                                             lw=2.2), zorder=4)
+        ax2.plot(0, 0, marker="o", ms=7, mfc="none", mec=sign_col, mew=1.6,
+                 zorder=5)
+        ax2.set_xlim(-L, L); ax2.set_ylim(-L, L)
+        ax2.set_aspect("equal"); ax2.tick_params(labelsize=6.5)
+        ax2.set_title(pt, fontsize=8)
+        ax2.set_xlabel(f"fan $e_1$ [{unit}]", fontsize=7)
+        ax2.set_ylabel(f"fan $e_2$ [{unit}]" if j == 1 else f"spine [{unit}]",
+                       fontsize=7)
+
+    # ---- panel 4: glyph + facts ---------------------------------------------
+    ax4 = axesrow[3]; ax4.set_axis_off()
+    _draw_glyph(ax4, cls)
+    ev = np.array2string(np.round(np.real_if_close(cls["eigs"], tol=1e6), 2),
+                         separator=", ")
+    ax4.text(0.5, 0.985, row_title, transform=ax4.transAxes, ha="center",
+             va="top", fontsize=8.6, fontweight="bold")
+    kind = "spiral" if cls["type"] == "spiral" else "radial"
+    info = (f"{kind} · degree {index:+d} · "
+            f"{'fan-out' if fan_out else 'fan-in'}\n"
+            f"$\\nabla B$ eigs (norm.): {ev}\n"
+            f"$J_\\parallel$ = {cls['J_parallel']:+.2f} · SR growth vector Q = 6\n"
+            "orange = spine · blue = fan lines · gray = ambient\n"
+            "translucent disc / dashes = ideal fan plane\n"
+            "circle at the null: blue degree +1, red degree −1")
+    ax4.text(0.5, 0.34, info, transform=ax4.transAxes, ha="center", va="top",
+             fontsize=6.6)
+
+
+def null_anatomy_sun():
+    """Anatomy crops of the AR11429 coronal nulls: projections + principal axes."""
+    cut, B, nulls, _p0, _cyx = _ar11429_volume()
+    ny, nx, nz, _ = B.shape
+    rng = np.random.default_rng(4)
+    fig, axes = plt.subplots(len(nulls), 4, figsize=(11.4, 3.1 * len(nulls)), dpi=150)
+    axes = np.atleast_2d(axes)
+    for row, nl in zip(axes, nulls):
+        p0 = nl["p"]
+        lines = []
+        for _ in range(30):
+            u = rng.standard_normal(3); u /= np.linalg.norm(u)
+            for sgn in (+1.0, -1.0):
+                ln = _trace(B, p0 + 1.1 * u, sgn, ds=0.25, steps=260)
+                if len(ln) > 8:
+                    lines.append(ln)
+        _anatomy_rows(fig, row, lines, p0, nl["gradB"], 12.0, "px",
+                      f"coronal null · h = {p0[2]:.0f} px  (AR11429, real)",
+                      tracer=lambda s, sgn, _B=B: _trace(_B, s, sgn, ds=0.25,
+                                                         steps=260))
+    fig.tight_layout()
+    out = REPO / "public/img/posts/forbidden-directions-null-anatomy-sun.png"
+    fig.savefig(out, bbox_inches="tight", dpi=150)
+    print("rendered", out.name)
+
+
+def null_anatomy_earth():
+    """Anatomy crops of two magnetospheric nulls (one radial, one spiral)."""
+    from datetime import datetime, timezone
+    import magnetosphere as ms
+    import nulltopo
+    data = json.loads((ROOT / "artifacts" / "p4_magnetosphere.json").read_text())
+    # core census only (|x| <= 40 RE) -- same trust region as the constellation figure
+    cand = [n for n in data["nulls"]
+            if abs(n["p_gsm_re"][0]) <= 40 and abs(n["p_gsm_re"][1]) < 25]
+    radial = min((n for n in cand if n["type"] == "radial"),
+                 key=lambda n: abs(n["J_parallel"]))
+    spiral = max((n for n in cand if n["type"] == "spiral"),
+                 key=lambda n: min(abs(n["J_parallel"]), 3.0))
+    ut = datetime(2012, 3, 7, 0, 0, tzinfo=timezone.utc).timestamp()
+    field = ms.Magnetosphere(ut, [3.0, -50.0, 0.0, -5.0, 0, 0, 0, 0, 0, 0])
+
+    def trace_cb(p_start, direction, ds=0.06, steps=420, box=3.0, p_ref=None):
+        pts = [np.asarray(p_start, float)]
+        q = pts[0].copy()
+        for _ in range(steps):
+            b = field.B(q); nb = np.linalg.norm(b)
+            if nb < 1e-4:
+                break
+            q = q + direction * ds * b / nb
+            if np.linalg.norm(q - p_ref) > box:
+                break
+            pts.append(q.copy())
+        return np.array(pts)
+
+    rng = np.random.default_rng(6)
+    fig, axes = plt.subplots(2, 4, figsize=(11.4, 6.2), dpi=150)
+    for row, rec, tag in ((axes[0], radial, "radial"), (axes[1], spiral, "spiral")):
+        p0 = np.array(rec["p_gsm_re"], float)
+        M = field.jac(p0)
+        # fan-adapted seeding: a ring in the fan plane (shows the straight fan of a
+        # radial null and the WINDING fan of a spiral one) + a few spine offsets
+        import nulltopo as _nt
+        Mn = M / np.abs(np.linalg.eigvals(M)).max()
+        cls0 = _nt.classify_null(Mn - np.eye(3) * np.trace(Mn) / 3)
+        v1, v2 = _fan_basis(Mn - np.eye(3) * np.trace(Mn) / 3, cls0)
+        lines = []
+        for thseed in np.linspace(0, 2 * np.pi, 14, endpoint=False):
+            s0 = p0 + 0.16 * (np.cos(thseed) * v1 + np.sin(thseed) * v2)
+            for sgn in (+1.0, -1.0):
+                ln = trace_cb(s0, sgn, ds=0.028, steps=900, p_ref=p0)
+                if len(ln) > 8:
+                    lines.append(ln)
+        for soff in (+0.3, -0.3):
+            for sgn in (+1.0, -1.0):
+                ln = trace_cb(p0 + soff * np.asarray(cls0["spine"]), sgn,
+                              ds=0.028, steps=900, p_ref=p0)
+                if len(ln) > 8:
+                    lines.append(ln)
+        _anatomy_rows(fig, row, lines, p0, M, 1.6, "$R_E$",
+                      f"magnetospheric {tag} null · GSM ({p0[0]:.0f}, {p0[1]:.0f}, "
+                      f"{p0[2]:.0f}) $R_E$",
+                      tracer=lambda s, sgn, _p0=p0: trace_cb(
+                          s, sgn, ds=0.028, steps=900, p_ref=_p0))
+    fig.tight_layout()
+    out = REPO / "public/img/posts/forbidden-directions-null-anatomy-earth.png"
+    fig.savefig(out, bbox_inches="tight", dpi=150)
+    print("rendered", out.name)
+
+
+def aia_overlay():
+    """The corona seen vs the corona computed: real SDO/AIA 171 A EUV emission of
+    AR11429 (the plasma lighting up the true field lines) with OUR potential-field
+    extrapolation's lines overlaid at the correct plate position -- the classic
+    loops-vs-extrapolation comparison, on the skeleton's exact day and region."""
+    from astropy.io import fits
+    from scipy.ndimage import zoom
+    import sunpy.visualization.colormaps  # registers 'sdoaia171'  # noqa: F401
+
+    aia_files = sorted((ROOT / "artifacts" / "hmi").glob("*aia*171*"))
+    assert aia_files, "no AIA 171 file -- run scripts/fetch_aia.py"
+    hdul = fits.open(aia_files[0])
+    hdul.verify("silentfix")
+    h = next(h for h in hdul if getattr(h, "data", None) is not None
+             and h.data.ndim == 2)
+    aia, ahdr = np.nan_to_num(np.asarray(h.data, float)), h.header
+    # AIA plate geometry from its own header
+    acx, acy = float(ahdr["CRPIX1"]) - 1, float(ahdr["CRPIX2"]) - 1
+    arsun = float(ahdr["RSUN_OBS"]) / float(ahdr["CDELT1"])   # px per R_sun
+
+    # HMI disk geometry from the FITS HEADER (exact; the data-driven limb estimate
+    # overshoots the radius by ~2.5% -- off-limb noise -- enough to shift the AR by
+    # ~15 AIA px), scaled 4096 -> 1024
+    hmi_f = sorted((ROOT / "artifacts" / "hmi").glob("hmi.m_45s.2012*"))[0]
+    hh = fits.open(hmi_f); hh.verify("silentfix")
+    hhdr = next(x.header for x in hh if getattr(x, "data", None) is not None
+                and x.data.ndim == 2)
+    s4 = 1024.0 / hhdr["NAXIS1"]
+    hcx = (hhdr["CRPIX1"] - 1) * s4
+    hcy = (hhdr["CRPIX2"] - 1) * s4
+    hR = hhdr["RSUN_OBS"] / hhdr["CDELT1"] * s4
+    bz = dict(load_magnetograms())["2012-03-07"]
+
+    def hmi_to_aia(xh, yh):
+        """HMI 1024-px coords -> AIA px via normalised disk coordinates.
+
+        HMI level-1 frames are camera-rotated 180 deg (CROTA2 ~ 179.93) while AIA is
+        upright (CROTA2 ~ 0.02), so disk-relative coordinates NEGATE across
+        instruments. (Our survey pipeline works in raw HMI array coords throughout,
+        which is self-consistent; only this cross-instrument overlay must correct.)
+        """
+        return (acx - (np.asarray(xh) - hcx) / hR * arsun,
+                acy - (np.asarray(yh) - hcy) / hR * arsun)
+
+    # TWO volumes of the same magnetogram: the null and its fan live in the
+    # null-recentered window (room in every direction); the arcade is traced in the
+    # flux-centred window, which fully contains the AR loop system the EUV shows.
+    from scipy.ndimage import zoom as _zoom
+    cut, B, nulls, p0, (cy, cx) = _ar11429_volume()
+    ny, nx, nz, _ = B.shape
+    cyf, cxf = 640, 640
+    cutf = _zoom(bz[cyf - WIN // 2:cyf + WIN // 2, cxf - WIN // 2:cxf + WIN // 2],
+                 CUT / WIN, order=1)
+    Bf, _Af = solar.potential_field(cutf, NZ, dz=1.0)
+    rng = np.random.default_rng(2)
+    # PHYSICAL seed threshold (250 G): roots the arcade in real plage/spot flux --
+    # a percentile threshold on the null-centred window scatters seeds across weak
+    # network field and draws arcs over quiet regions the EUV does not light up
+    iy, ix = np.where(np.abs(cutf) >= 250.0)
+    w = np.abs(cutf)[iy, ix]
+    sel = rng.choice(len(ix), size=min(140, len(ix)), replace=False, p=w / w.sum())
+    arcade = []
+    for j in sel:
+        sgn = +1.0 if cutf[iy[j], ix[j]] > 0 else -1.0
+        ln = _trace(Bf, np.array([ix[j], iy[j], 1.5]), sgn, ds=0.35, steps=1600)
+        if len(ln) > 10:
+            arcade.append((ln, w[j] / w.max(), sgn))
+    skel = []
+    for _ in range(22):
+        u = rng.standard_normal(3); u /= np.linalg.norm(u)
+        for sgn in (+1.0, -1.0):
+            ln = _trace(B, p0 + 1.2 * u, sgn, ds=0.3, steps=2600)
+            if len(ln) > 8:
+                skel.append((ln, sgn))
+
+    def box_to_aia(ln, cyw=None, cxw=None):
+        """Box coords (cut px + height) -> AIA px, incl. line-of-sight parallax."""
+        cyw = cy if cyw is None else cyw
+        cxw = cx if cxw is None else cxw
+        xh = cxw - WIN / 2 + ln[:, 0] * (WIN / CUT)
+        yh = cyw - WIN / 2 + ln[:, 1] * (WIN / CUT)
+        ax_, ay_ = hmi_to_aia(xh, yh)
+        # apparent shift of height h toward the limb, in the AIA frame's orientation
+        rx = (ax_ - acx) / arsun; ry = (ay_ - acy) / arsun
+        hpx = ln[:, 2] * (WIN / CUT) / hR * arsun
+        return ax_ + hpx * rx, ay_ + hpx * ry
+
+    # crop the AIA frame around BOTH structures: centre on the midpoint of the
+    # null window and the flux window, so neither the arcade nor the fan clips
+    axn, ayn = hmi_to_aia(cx, cy)
+    axf, ayf = hmi_to_aia(cxf, cyf)
+    ax0, ay0 = (axn + axf) / 2, (ayn + ayf) / 2
+    half = int(1.35 * WIN / hR * arsun / 2) + 100
+    x_lo, y_lo = int(ax0 - half), int(ay0 - half)
+    crop = aia[y_lo:y_lo + 2 * half, x_lo:x_lo + 2 * half]
+
+    import matplotlib.patheffects as pe
+    OUTLINE = [pe.withStroke(linewidth=2.4, foreground="#100a02")]
+
+    fig, ax = plt.subplots(figsize=(8.6, 8.35), dpi=150)
+    vmax = np.percentile(crop, 99.85)
+    ax.imshow(np.clip(crop, 0, vmax) ** 0.5, origin="lower", cmap="sdoaia171")
+    ax.set_xticks([]); ax.set_yticks([])
+
+    def field_arrow(xs, ys, sgn, color, idx_frac=0.45):
+        """A small arrowhead ON the line, oriented along the FIELD direction."""
+        i = int(idx_frac * (len(xs) - 4)) + 2
+        i2 = i + 3 if sgn > 0 else i - 3
+        if not (0 <= i2 < len(xs)):
+            return
+        ax.annotate("", xy=(xs[i2], ys[i2]), xytext=(xs[i], ys[i]),
+                    arrowprops=dict(arrowstyle="-|>", color=color, lw=0.1,
+                                    mutation_scale=13), zorder=5)
+
+    for q, (ln, wgt, sgn) in enumerate(arcade):
+        xa, ya = box_to_aia(ln, cyf, cxf)
+        xs, ys = xa - x_lo, ya - y_lo
+        ax.plot(xs, ys, color="#a9cdf0", lw=1.3, alpha=0.30 + 0.40 * wgt)
+        if q % 18 == 3:                                # a few field-direction arrows
+            field_arrow(xs, ys, sgn, "#d8ecff")
+    for q, (ln, sgn) in enumerate(skel):
+        xa, ya = box_to_aia(ln)
+        xs, ys = xa - x_lo, ya - y_lo
+        ax.plot(xs, ys, color="#ff8b2e", lw=1.7, alpha=0.8)
+        if q % 14 == 5:
+            field_arrow(xs, ys, sgn, "#ffc07a")
+    xn, yn = box_to_aia(p0[None, :])
+    ax.plot(xn - x_lo, yn - y_lo, marker="*", ms=15, mfc="#ffd34d",
+            mec="#442200", mew=0.9, zorder=6)
+
+    # the bipole's magnetic poles: flux-weighted centroids of the strong field
+    def pole_centroid(mask):
+        yy, xx = np.nonzero(mask)
+        ww = np.abs(cutf)[yy, xx]
+        pts = np.column_stack([xx.astype(float), yy.astype(float),
+                               np.zeros(len(xx))])
+        xa, ya = box_to_aia(pts, cyf, cxf)
+        return (float(np.average(xa, weights=ww)) - x_lo,
+                float(np.average(ya, weights=ww)) - y_lo)
+    px_, py_ = pole_centroid(cutf > 800)
+    nx_, ny_ = pole_centroid(cutf < -800)
+    for (qx, qy, s_) in ((px_, py_, "+"), (nx_, ny_, "−")):
+        ax.plot(qx, qy, marker="o", ms=13, mfc="none", mec="white", mew=1.6, zorder=7)
+        ax.text(qx, qy, s_, color="white", fontsize=11, fontweight="bold",
+                ha="center", va="center", zorder=8, path_effects=OUTLINE)
+
+    # annotations
+    ann = dict(color="white", fontsize=8.6, path_effects=OUTLINE, zorder=9,
+               arrowprops=dict(arrowstyle="->", color="white", lw=1.0))
+    ax.annotate("AR11429 — the bipole's two magnetic poles\n(+ field out of the Sun, "
+                "− into it)", xy=(px_, py_ + 18), xytext=(0.03, 0.965),
+                textcoords="axes fraction", va="top", **ann)
+    ax.annotate("computed arcade: field lines run + → −,\ndraping over the "
+                "observed EUV loops", xy=((px_ + nx_) / 2, (py_ + ny_) / 2 - 120),
+                xytext=(0.60, 0.585), textcoords="axes fraction", **ann)
+    ax.annotate("coronal null (★) and its fan:\nwhere reconnection can start",
+                xy=(float(xn[0] - x_lo) + 8, float(yn[0] - y_lo) - 8),
+                xytext=(0.035, 0.295), textcoords="axes fraction", **ann)
+    ax.text(0.985, 0.015, "arrowheads = direction of B · background: real "
+            "SDO/AIA 171 Å, 2012-03-07 00:00 UT",
+            transform=ax.transAxes, color="white", fontsize=7.2, ha="right",
+            va="bottom", path_effects=OUTLINE)
+    ax.set_xlim(0, crop.shape[1]); ax.set_ylim(0, crop.shape[0])   # clamp to image
+
+    # full-disk locator: where on the Sun we are
+    axl = fig.add_axes([0.012, 0.012, 0.205, 0.205])
+    disk = aia[::8, ::8]
+    axl.imshow(np.clip(disk, 0, vmax) ** 0.5, origin="lower", cmap="sdoaia171")
+    axl.add_patch(plt.Rectangle((x_lo / 8, y_lo / 8), crop.shape[1] / 8,
+                                crop.shape[0] / 8, fill=False, ec="white", lw=1.1))
+    axl.annotate("N", xy=(0.5, 0.97), xycoords="axes fraction", color="white",
+                 fontsize=7.5, ha="center", va="top", path_effects=OUTLINE)
+    axl.set_xticks([]); axl.set_yticks([])
+    for s_ in axl.spines.values():
+        s_.set_edgecolor("white"); s_.set_linewidth(0.8)
+    fig.tight_layout()
+    out = REPO / "public/img/posts/forbidden-directions-aia-overlay.png"
+    fig.savefig(out, bbox_inches="tight", dpi=150)
+    print("rendered", out.name)
+
+
+def _plot2d_faded(ax, xs, ys, color, lw, alpha, fade_end=False, zorder=2):
+    """2D polyline; if fade_end, the last ~22% of segments taper to transparent."""
+    from matplotlib.collections import LineCollection
+    P = np.column_stack([xs, ys])
+    segs = np.stack([P[:-1], P[1:]], axis=1)
+    n = len(segs)
+    if n < 1:
+        return
+    a = np.full(n, alpha, float)
+    if fade_end and n > 4:
+        nf = max(2, int(0.22 * n))
+        ramp = np.linspace(alpha, 0.0, nf)
+        a[-nf:] = ramp
+    rgba = np.tile(np.asarray(matplotlib.colors.to_rgba(color)), (n, 1))
+    rgba[:, 3] = a
+    ax.add_collection(LineCollection(segs, colors=rgba, linewidths=lw,
+                                     capstyle="round", zorder=zorder))
+
+
+def render_aia_gif():
+    """The flare GIF with a TIME-EVOLVING skeleton: for each of the 16 AIA frames the
+    matching HMI magnetogram (45 s cadence, fetched at the same times) is extrapolated
+    afresh, the arcade re-traced from the SAME physical footpoints (co-rotating
+    windows, fixed window-relative seeds -> temporally coherent lines), and the null
+    RE-DETECTED and tracked frame to frame. What the movie shows honestly: the
+    potential skeleton breathes with the measured surface field, while the EUV corona
+    reorganises far more violently -- a potential field holds no free energy, and the
+    difference IS the flare. The null track (position, height, persistence through the
+    X5.4) is printed and saved to artifacts/aia_gif_null_track.json."""
+    from astropy.io import fits
+    from scipy.ndimage import zoom as _zoom
+    from PIL import Image
+    import io
+    import sunpy.visualization.colormaps  # noqa: F401
+
+    import re
+
+    def _min_of(name, pat):
+        m = re.search(pat, name)
+        return int(m.group(1)) * 60 + int(m.group(2))
+
+    aia_all = sorted((ROOT / "artifacts" / "hmi" / "aia_seq").glob("*.fits"))
+    hmi_all = sorted((ROOT / "artifacts" / "hmi" / "hmi_seq").glob("*.fits"))
+    assert len(aia_all) >= 8 and len(hmi_all) >= 8, "fetch aia_seq + hmi_seq first"
+    # pair frames by TIME, not index — one missing magnetogram must not shear the
+    # co-rotation of every later frame
+    hmi_t = [(_min_of(f.name, r"_(\d\d)_(\d\d)_\d\d_TAI"), f) for f in hmi_all]
+    pairs = []
+    for fa in aia_all:
+        ta = _min_of(fa.name, r"T(\d\d)_(\d\d)")
+        th, fh = min(hmi_t, key=lambda r: abs(r[0] - ta))
+        if abs(th - ta) <= 3:
+            pairs.append((ta, fa, fh))
+    n_fr = len(pairs)
+    if len(aia_all) - n_fr:
+        print(f"gif: {len(aia_all) - n_fr} AIA frames without a magnetogram dropped")
+
+    def read2d(f):
+        hdul = fits.open(f); hdul.verify("silentfix")
+        h = next(h for h in hdul if getattr(h, "data", None) is not None
+                 and h.data.ndim == 2)
+        return np.nan_to_num(np.asarray(h.data, float)), h.header
+
+    def hmi_geom(hdr):
+        s4 = 1024.0 / hdr["NAXIS1"]
+        return ((hdr["CRPIX1"] - 1) * s4, (hdr["CRPIX2"] - 1) * s4,
+                hdr["RSUN_OBS"] / hdr["CDELT1"] * s4)
+
+    OMEGA = np.radians(13.3 / 1440.0)                  # synodic, rad/min
+
+    def rotate_hmi_pt(p0_xy, g0, gk, dmin):
+        """HMI_0 px -> HMI_k px: to upright disk coords, rigid-rotate, back."""
+        (hcx0, hcy0, hR0), (hcxk, hcyk, hRk) = g0, gk
+        rx = -(p0_xy[0] - hcx0) / hR0                  # upright = negated (CROTA2~180)
+        ry = -(p0_xy[1] - hcy0) / hR0
+        rz = np.sqrt(max(1 - rx * rx - ry * ry, 0.0))
+        a = OMEGA * dmin
+        rx2 = rx * np.cos(a) + rz * np.sin(a)
+        return (hcxk - rx2 * hRk, hcyk - ry * hRk)
+
+    # ---- frame 0 setup: windows, seeds, fan directions ---------------------------
+    bz0_full, hh0 = read2d(pairs[0][2])
+    if bz0_full.shape[0] > 2048:
+        bz0_full = _zoom(bz0_full, 1024 / bz0_full.shape[0], order=1)
+    g0 = hmi_geom(hh0)
+    flux_c0 = (647.0, 698.0)                           # (cx, cy) flux window, HMI_0
+    cut0 = None
+    rng = np.random.default_rng(2)
+    fan_dirs = []
+    for _ in range(22):
+        u = rng.standard_normal(3); u /= np.linalg.norm(u)
+        fan_dirs.append(u)
+    # null window: co-rotates RIGIDLY from frame 0 (a stable patch of Sun -- if the
+    # window followed the tracked null, the extrapolation domain itself would jitter
+    # and window-sensitivity would masquerade as field evolution). The null is then
+    # tracked WITHIN the stable window by nearest-neighbour to its previous position.
+    null_win0 = (647.0, 698.0)
+    p_prev = np.array([(CUT - 1) / 2, (CUT - 1) / 2])   # window coords, init centre
+
+    # arcade seeds from the WIDE window (covers the whole displayed crop, so the
+    # northern bipoles and neighbouring loop systems get lines too, not just the
+    # core's 160-px surroundings); fixed frame-0 positions for temporal coherence
+    cxf0, cyf0 = 640, 640
+    WINL, CUTL, NZL = 360, 225, 64
+    cxl0 = int(round((cxf0 + null_win0[0]) / 2))
+    cyl0 = int(round((cyf0 + null_win0[1]) / 2))
+    cutl0 = _zoom(bz0_full[cyl0 - WINL // 2:cyl0 + WINL // 2,
+                           cxl0 - WINL // 2:cxl0 + WINL // 2], CUTL / WINL, order=1)
+    iy, ix = np.where(np.abs(cutl0) >= 250.0)
+    w0 = np.abs(cutl0)[iy, ix]
+    sel = rng.choice(len(ix), size=min(220, len(ix)), replace=False, p=w0 / w0.sum())
+    seed_xy = [(int(ix[j]), int(iy[j])) for j in sel]
+
+    vmax = None
+    ims, track = [], []
+    for k, (tmin, fa, fh) in enumerate(pairs):
+        bzk, hhk = read2d(fh)
+        if bzk.shape[0] > 2048:
+            bzk = _zoom(bzk, 1024 / bzk.shape[0], order=1)
+        gk = hmi_geom(hhk)
+        aia, ahdr = read2d(fa)
+        aia = aia / max(float(ahdr.get("EXPTIME", 2.9)), 0.1)
+        acx, acy = ahdr["CRPIX1"] - 1, ahdr["CRPIX2"] - 1
+        arsun = ahdr["RSUN_OBS"] / ahdr["CDELT1"]
+        tstamp = str(ahdr.get("T_OBS") or ahdr.get("DATE-OBS"))[11:16]
+        dmin = float(tmin - pairs[0][0])
+
+        # co-rotating windows in HMI_k coordinates
+        cxf, cyf = rotate_hmi_pt((cxf0, cyf0), g0, gk, dmin)
+        cxf, cyf = int(round(cxf)), int(round(cyf))
+        cxn, cyn = rotate_hmi_pt(null_win0, g0, gk, dmin)
+        cxn, cyn = int(round(cxn)), int(round(cyn))
+
+        cutn = _zoom(bzk[cyn - WIN // 2:cyn + WIN // 2,
+                         cxn - WIN // 2:cxn + WIN // 2], CUT / WIN, order=1)
+        Bn, _ = solar.potential_field(cutn, NZ, dz=1.0)
+        ny, nx, nz, _ = Bn.shape
+        # WIDE volume spanning the whole displayed crop: hosts the arcade AND the
+        # continuation of fan lines that exit the null volume's walls
+        cxl = int(round((cxf + cxn) / 2)); cyl = int(round((cyf + cyn) / 2))
+        cutl = _zoom(bzk[cyl - WINL // 2:cyl + WINL // 2,
+                         cxl - WINL // 2:cxl + WINL // 2], CUTL / WINL, order=1)
+        Bl, _ = solar.potential_field(cutl, NZL, dz=1.0)
+        offx = ((cxn - WIN / 2) - (cxl - WINL / 2)) / (WIN / CUT)
+        offy = ((cyn - WIN / 2) - (cyl - WINL / 2)) / (WIN / CUT)
+
+        # arcade: SAME physical footpoints every frame (temporal coherence), traced
+        # in the wide volume so every loop system in frame gets its lines
+        arcade = []
+        for (sx, sy) in seed_xy:
+            b = cutl[sy, sx]
+            if abs(b) < 120.0:
+                continue
+            sgn_a = +1.0 if b > 0 else -1.0
+            ln = _trace(Bl, np.array([sx, sy, 1.5]), sgn_a, ds=0.4, steps=2000)
+            if len(ln) > 10:
+                arcade.append((ln, min(abs(b) / 1200.0, 1.0), ln[-1, 2] < 1.2, sgn_a))
+
+        # null: re-detect near the window centre, track identity
+        nulls = [nl for nl in solar.find_nulls(Bn, seeds_per_axis=12)
+                 if 6 < nl["p"][0] < nx - 6 and 6 < nl["p"][1] < ny - 6
+                 and 1.4 < nl["p"][2] < nz - 4]
+        skel, null_ok, p0 = [], False, None
+        if nulls:
+            nulls.sort(key=lambda nl: np.linalg.norm(nl["p"][:2] - p_prev))
+            if np.linalg.norm(nulls[0]["p"][:2] - p_prev) < 18:
+                p0 = nulls[0]["p"]
+                p_prev = p0[:2].copy()
+                null_ok = True
+                for u in fan_dirs:
+                    for sgn in (+1.0, -1.0):
+                        ln = _trace(Bn, p0 + 1.2 * u, sgn, ds=0.3, steps=2600)
+                        if len(ln) <= 8:
+                            continue
+                        # stitch: continue past the null volume's wall in the wide
+                        # volume until the photosphere or the wide volume's edge
+                        lnL = ln + np.array([offx, offy, 0.0])
+                        endz = ln[-1, 2]
+                        hit_wall = (ln[-1, 0] < 3 or ln[-1, 0] > nx - 4 or
+                                    ln[-1, 1] < 3 or ln[-1, 1] > ny - 4 or
+                                    endz > nz - 4)
+                        if hit_wall:
+                            ln2 = _trace(Bl, lnL[-1], sgn, ds=0.35, steps=2400)
+                            if len(ln2) > 4:
+                                lnL = np.vstack([lnL, ln2])
+                        closed = lnL[-1, 2] < 1.2      # reached the photosphere
+                        skel.append((lnL, closed, sgn))
+        track.append({"t": tstamp, "found": null_ok,
+                      "h_px": round(float(p0[2]), 1) if null_ok else None})
+        print(f"frame {k+1}/{n_fr} {tstamp}  arcade {len(arcade)}  "
+              f"null {'h=%.1f' % p0[2] if null_ok else 'LOST'}")
+
+        def h2a(xh, yh):
+            hcxk, hcyk, hRk = gk
+            return (acx - (np.asarray(xh) - hcxk) / hRk * arsun,
+                    acy - (np.asarray(yh) - hcyk) / hRk * arsun)
+
+        def b2a(ln, cyw, cxw, winw=WIN):
+            hcxk, hcyk, hRk = gk
+            xh = cxw - winw / 2 + ln[:, 0] * (WIN / CUT)
+            yh = cyw - winw / 2 + ln[:, 1] * (WIN / CUT)
+            xa, ya = h2a(xh, yh)
+            rx = (xa - acx) / arsun; ry = (ya - acy) / arsun
+            hpx = ln[:, 2] * (WIN / CUT) / hRk * arsun
+            return xa + hpx * rx, ya + hpx * ry
+
+        axn, ayn = h2a(cxn, cyn)
+        axf_, ayf_ = h2a(cxf, cyf)
+        ax0, ay0 = (axn + axf_) / 2, (ayn + ayf_) / 2
+        half = int(1.35 * WIN / gk[2] * arsun / 2) + 100
+        x_lo, y_lo = int(ax0 - half), int(ay0 - half)
+        crop = aia[y_lo:y_lo + 2 * half, x_lo:x_lo + 2 * half]
+        if vmax is None:
+            vmax = 1.6 * np.percentile(crop, 99.85)
+
+        fig, ax = plt.subplots(figsize=(6.4, 6.55), dpi=100)
+        ax.imshow(np.clip(crop, 0, vmax) ** 0.5, origin="lower", cmap="sdoaia171",
+                  vmin=0, vmax=vmax ** 0.5)
+        def field_arrow(xs, ys, sgn_, color):
+            i = int(0.45 * (len(xs) - 4)) + 2
+            i2 = i + 3 if sgn_ > 0 else i - 3
+            if 0 <= i2 < len(xs):
+                ax.annotate("", xy=(xs[i2], ys[i2]), xytext=(xs[i], ys[i]),
+                            arrowprops=dict(arrowstyle="-|>", color=color, lw=0.1,
+                                            mutation_scale=10), zorder=5)
+
+        for q, (ln, wgt, closed, sgn_a) in enumerate(arcade):
+            xa, ya = b2a(ln, cyl, cxl, winw=WINL)
+            xs, ys = xa - x_lo, ya - y_lo
+            _plot2d_faded(ax, xs, ys, "#a9cdf0", 1.0,
+                          0.25 + 0.35 * wgt, fade_end=not closed, zorder=2)
+            if q % 40 == 7:                          # sparse arrows (lighter than static)
+                field_arrow(xs, ys, sgn_a, "#d8ecff")
+        for q, (lnL, closed, sgn_f) in enumerate(skel):
+            xa, ya = b2a(lnL, cyl, cxl, winw=WINL)
+            xs, ys = xa - x_lo, ya - y_lo
+            _plot2d_faded(ax, xs, ys, "#ff8b2e", 1.4, 0.8,
+                          fade_end=not closed, zorder=3)
+            if q % 20 == 9:
+                field_arrow(xs, ys, sgn_f, "#ffc07a")
+
+        # the bipole's poles, lightly marked
+        for msk, s_ in ((cutl > 800, "+"), (cutl < -800, "−")):
+            yy, xx = np.nonzero(msk)
+            if len(xx) < 5:
+                continue
+            ww = np.abs(cutl)[yy, xx]
+            pts = np.column_stack([xx.astype(float), yy.astype(float),
+                                   np.zeros(len(xx))])
+            xa, ya = b2a(pts, cyl, cxl, winw=WINL)
+            qx = float(np.average(xa, weights=ww)) - x_lo
+            qy = float(np.average(ya, weights=ww)) - y_lo
+            ax.plot(qx, qy, marker="o", ms=9, mfc="none", mec="white", mew=1.1,
+                    zorder=6)
+            ax.text(qx, qy, s_, color="white", fontsize=8, fontweight="bold",
+                    ha="center", va="center", zorder=7)
+        if null_ok:
+            xn_, yn_ = b2a(p0[None, :], cyn, cxn)
+            ax.plot(xn_ - x_lo, yn_ - y_lo, marker="*", ms=13, mfc="#ffd34d",
+                    mec="#442200", mew=0.9)
+        ax.set_xlim(0, crop.shape[1]); ax.set_ylim(0, crop.shape[0])
+        ax.set_xticks([]); ax.set_yticks([])
+        ax.text(0.02, 0.975, f"2012-03-07  {tstamp} UT", transform=ax.transAxes,
+                color="white", fontsize=10, va="top", fontweight="bold")
+        mins = int(tstamp[:2]) * 60 + int(tstamp[3:5])
+        if 20 <= mins <= 34:
+            ax.text(0.02, 0.925, "X5.4 flare", transform=ax.transAxes,
+                    color="#ff6644", fontsize=11, va="top", fontweight="bold")
+        elif 70 <= mins <= 80:
+            ax.text(0.02, 0.925, "X1.3 flare", transform=ax.transAxes,
+                    color="#ff6644", fontsize=11, va="top", fontweight="bold")
+        fig.tight_layout(pad=0.4)
+        buf = io.BytesIO()
+        fig.savefig(buf, format="png", dpi=100)
+        plt.close(fig)
+        buf.seek(0)
+        ims.append(Image.open(buf).convert("P", palette=Image.ADAPTIVE, colors=160))
+
+    import json as _json
+    (ROOT / "artifacts" / "aia_gif_null_track.json").write_text(
+        _json.dumps(track, indent=2) + "\n")
+    found = sum(1 for r in track if r["found"])
+    print(f"null persistence: {found}/{n_fr} frames; track -> "
+          "artifacts/aia_gif_null_track.json")
+    out = REPO / "public/img/posts/forbidden-directions-aia-flare.gif"
+    ims[0].save(out, save_all=True, append_images=ims[1:], duration=520, loop=0,
+                optimize=True)
+    print(f"rendered {out.relative_to(REPO)} "
+          f"({out.stat().st_size / 1e6:.1f} MB, {len(ims)} frames)")
+
+
+if __name__ == "__main__":
+    fast = "--fast" in sys.argv
+    if "--anatomy" in sys.argv:       # regenerate only the two anatomy sheets
+        null_anatomy_sun()
+        try:
+            null_anatomy_earth()
+        except Exception as e:
+            print("earth anatomy skipped:", e)
+        sys.exit(0)
+    if not fast:
+        triptych()
+        constellation()
+    skeleton(fast=fast)
+    if not fast:
+        null_anatomy_sun()
+        try:
+            null_anatomy_earth()
+        except Exception as e:
+            print("earth anatomy skipped:", e)
+    if "--overlay" in sys.argv:
+        aia_overlay()
+    if "--gif" in sys.argv:
+        render_aia_gif()

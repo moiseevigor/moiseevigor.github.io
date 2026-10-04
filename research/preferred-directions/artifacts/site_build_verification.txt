@@ -1,0 +1,105 @@
+SITE BUILD VERIFICATION — 2026-07-15 (post-final re-review round)
+Environment: docker container (reviewer checkouts lack the Jekyll executable;
+this log preserves the build evidence)
+container: moiseevigorgithubio-jekyll-1 | image: moiseevigor-blog:dev | status: Up 22 hours
+jekyll 3.9.2
+
+Jekyll production build (JEKYLL_ENV=production, in-container):
+  "done in 51.618 seconds." — PASS
+
+HTTP status of the current layer:
+  articles/magnetic-flux-lifts/                                            200
+  mathematics/2026/08/05/forbidden-directions-research-program/            200
+  mathematics/2026/08/08/forbidden-directions-magnetic-contact/            200
+  mathematics/2026/08/11/forbidden-directions-reading-gradient/            200
+  mathematics/2026/08/14/forbidden-directions-finding-nulls/               200
+  mathematics/2026/08/24/forbidden-directions-null-gallery/                200
+  mathematics/2026/08/27/forbidden-directions-transition-state/            200
+  mathematics/2026/08/30/forbidden-directions-litmus-tests/                200
+  mathematics/2026/09/02/forbidden-directions-jupiter/                     200
+  mathematics/2026/08/21/forbidden-directions-D5-gradient-formula/         200
+
+Served-HTML content checks (post-final re-review items 1-4):
+  [OK ] contains 'analyticity is invoked'                    magnetic-flux-lifts (item 1)
+  [OK ] free of  'analytic flow'                             magnetic-flux-lifts (item 1)
+  [OK ] contains 'bounded normalized-jet family'             magnetic-flux-lifts (item 1)
+  [OK ] contains 'launch-averaged <strong>period</strong>'   magnetic-flux-lifts (item 2)
+  [OK ] contains 'rides on the period identification'        reading-gradient    (item 2)
+  [OK ] free of  'stops refocusing entirely'                 reading-gradient    (item 2)
+  [OK ] contains 'a finite-horizon measurement'              litmus-tests        (item 2)
+  [OK ] contains 'conditional on the period identification'  litmus-tests        (item 2)
+  [OK ] contains 'refuted off-exponential'                   D5-gradient-formula (item 2)
+  [OK ] free of  'is a special property'                     D5-gradient-formula (item 2)
+ALL CHECKS PASS
+
+Live-DOM KaTeX (in-app browser): article 640 rendered / 0 errors (this pass,
+after the finite-regularity Taylor-remainder display was added).
+
+Regression guard v5 (check_retracted_claims.py): clean — 24 files; 44 banned,
+3 require-context, 7 near-context, 2 positive rules; 33 fixtures caught.
+v5 adds the period-vs-refocusing near-context rules ("mean/launch-averaged
+refocusing time diverges", "stops refocusing", "launch-averaged caustic opens"
+each demand period / Conjecture A / finite-horizon language within +-2 lines)
++ 3 fixtures for the paraphrases v4 passed. Scope unchanged: syntactic
+phrase/context regression check; the manual claim-ledger pass remains the
+release gate.
+
+Certificates rerun this pass:
+  F3 uniform small-time factorization: run_f3_smalltime_uniform.py -> PASS, 45 s
+    (t^0..t^3 coefficients identically zero in (l1,l2,l3,h,theta0); t^4
+    coefficient identically 1/12; artifacts/f3_smalltime_uniform.json).
+  O6 caustic coefficient: run_o6_caustic_c2.py -> certificate regenerated, 9 s
+    (c2 = 1 - 3*beta/4, theta0-independent; artifacts/o6_certificate.json).
+  F2 blind-jet test (unchanged since 2026-07-14 stamp): c2 = -7.2e-06 +/- 1.4e-05,
+    pre-registered verdict PASS (artifacts/f2_beta43_blind.json).
+
+Lean formalization: lake build -> "Build completed successfully (8661 jobs)";
+  sorry-scan: no `sorry` in FDFormal code (one docstring mentions the word);
+  toolchain leanprover/lean4:v4.32.0 + mathlib (pinned in lake-manifest.json).
+
+HTML-proofer: NO CONTENT VERDICT — startup failure, missing libcurl in the
+docker image (release-engineering gap, not evidence about the content):
+  bundler: failed to load command: htmlproofer
+  ffi/library.rb:145: Could not open library 'libcurl' / 'libcurl.so' /
+  'libcurl.so.4': cannot open shared object file (LoadError)
+Fix path (documented, not yet applied): add libcurl4 to the image
+(apt-get install -y libcurl4) or run htmlproofer outside the container.
+
+================================================================================
+ACCEPTANCE-REVIEW CLEANUP ADDENDUM — 2026-07-15 (later the same day)
+(REVIEW-SR-ASTROPHYSICS-ACCEPTANCE-2026-07-15.md, non-blocking items 1-3)
+
+1. T2 legacy step numbers replaced with descriptive names
+   (docs/T2-closed-form.md: "the elliptic-reduction step (item 3) is CLOSED;
+   the conjugate-time = period identification (item 2) remains open").
+
+2. Production/development _site destinations SEPARATED:
+   - docker-compose 'build' service now writes --destination _site_production;
+     'htmlproofer' service reads ./_site_production;
+   - _config.yml excludes "_site_production" (keeps the dev watcher from
+     re-ingesting it); .gitignore likewise.
+   Verified: production build 61.0 s to _site_production; the running dev
+   server kept serving the draft layer (article + Part 7 + Part 8 all 200)
+   through and after the production build — the 404-until-regeneration
+   failure mode is gone.
+
+3. libcurl REPAIRED in the image (Dockerfile: apt list += libcurl4; image
+   rebuilt; dev container recreated on the new image). HTML-proofer now RUNS
+   and returns a content verdict:
+   - First run: 3 failures, all legacy link rot OUTSIDE the reviewed package
+     (2017 JSConf post: two twitter/t.co links that reject headless checkers;
+     tag/react page: dead facebook.github.io/react).
+   - Fixes: react link updated to https://react.dev/ at its source
+     (tag/react/index.markdown); twitter.com + t.co added to the compose
+     ignore list (unverifiable headlessly by design).
+   - Second run: "HTML-Proofer finished successfully." (13.05 s, exit 0).
+
+RELEASE-DAY CHECKLIST (still gated on the publish decision; review item 3):
+  [ ] flip published: false -> true and resolve future dates on the article,
+      the eight series posts, and the D1-D5 appendices
+  [ ] one production build with the final publication flags
+      (docker compose run --rm build)
+  [ ] full link pass on that output
+      (docker compose --profile test run --rm htmlproofer)
+  [ ] confirm the pages are present in _site_production (the current
+      pre-release production build correctly excludes them)

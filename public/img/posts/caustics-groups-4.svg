@@ -1,0 +1,22 @@
+<svg viewBox="0 0 220 148" xmlns="http://www.w3.org/2000/svg">
+  <rect width="220" height="148" fill="#fff"/>
+  <!-- In the wild: DW-MRI crossing fibres (where the method speaks) and a
+       region where it stays silent. -->
+  <!-- two crossing fibre bundles -->
+  <g stroke="#1565c0" stroke-width="1.4" stroke-linecap="round" opacity="0.75">
+    <path d="M 30,102 L 96,44"/><path d="M 40,110 L 106,52"/><path d="M 22,96 L 88,38"/>
+  </g>
+  <g stroke="#1565c0" stroke-width="1.4" stroke-linecap="round" opacity="0.42">
+    <path d="M 22,50 L 100,104"/><path d="M 32,42 L 110,96"/><path d="M 14,58 L 92,112"/>
+  </g>
+  <!-- an ODF glyph (two crossing lobes) at the bundle intersection -->
+  <g fill="#e65100" opacity="0.9">
+    <ellipse cx="64" cy="74" rx="13" ry="4.4" transform="rotate(-42 64 74)"/>
+    <ellipse cx="64" cy="74" rx="13" ry="4.4" transform="rotate(42 64 74)"/>
+  </g>
+  <text x="60" y="132" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="7.5" fill="#1565c0">crossing fibres</text>
+  <!-- the silent region: no sub-Riemannian signal -->
+  <circle cx="174" cy="66" r="18" fill="#9aa0a6" fill-opacity="0.10" stroke="#9aa0a6" stroke-width="1.2" stroke-dasharray="3 3"/>
+  <path d="M 162,54 L 186,78" stroke="#9aa0a6" stroke-width="1.4" stroke-linecap="round"/>
+  <text x="174" y="102" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="7.5" fill="#9aa0a6">silent</text>
+</svg>

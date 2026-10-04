@@ -13,10 +13,11 @@ tags: [sub-riemannian, SE2, elastica, jacobi-elliptic, elliptic-integrals, optim
 description: >
   Deriving Euler's elastica from the Pontryagin Maximum Principle on SE(2):
   the pendulum equation, three curve families (inflectional, non-inflectional,
-  Euler spiral), their Jacobi elliptic parametrisations, and the period 4K(k²).
+  borderline elastica), their Jacobi elliptic parametrisations, and the period 4K(k²).
 series: geometry-of-seeing
 series_title: "Geometry of Seeing"
 series_part: 2
+hidden: true
 arxiv: "0807.4731"
 coauthors: "Yu. L. Sachkov"
 comments: true
@@ -27,10 +28,11 @@ comments: true
 <div class="callout">
 <div class="callout-title">What this article covers</div>
 
-We derive the curvature function $\kappa(s)$ of every sub-Riemannian geodesic on
-$\mathrm{SE}(2)$ from first principles using the Pontryagin Maximum Principle.
-The result is a pendulum equation whose general solution involves the three classical
-families of Jacobi elliptic functions.
+We derive, from first principles via the Pontryagin Maximum Principle, the pendulum
+equation that governs every extremal of the $\mathrm{SE}(2)$ problem — and from it the
+closed-form curvature of the smooth completion curves, <strong>Euler's elastica</strong>
+(the free SR geodesics share the same pendulum but project to cuspidal curves; both are
+developed below).
 The <strong>key formula</strong>: for the inflectional family,
 
 $$\kappa(s) = 2k\,\mathrm{cn}(s \mid k^{2}),$$
@@ -43,7 +45,7 @@ All three families are interactive in the figures below.
 
 ## Hamiltonian Formulation via the PMP
 
-Recall from Part 1 that we want to minimise arc length among horizontal curves
+Recall from Part&nbsp;1 that we want to minimise arc length among horizontal curves
 in $\mathrm{SE}(2)$:
 
 $$\min \int_0^T \sqrt{u_1^2 + u_2^2}\,dt, \qquad \dot g = u_1 X_1(g) + u_2 X_2(g).$$
@@ -85,16 +87,20 @@ The **Hamiltonian** for the PMP maximisation condition is
 
 $$H = h_1 u_1 + h_2 u_2 - \nu \sqrt{u_1^2 + u_2^2},$$
 
-where $\nu \in \{0, \tfrac{1}{2}\}$ is the abnormality constant.
-For **normal extremals** ($\nu = \tfrac{1}{2}$), maximising over $u_1, u_2$
-gives the **normal Hamiltonian**
+where $\nu \in \{0, 1\}$ is the abnormality constant ($\nu = 1$ for
+**normal** extremals, $\nu = 0$ for abnormal; Appendix A3 carries out the
+maximisation in full).
+Minimising length is equivalent to minimising the energy
+$\tfrac12\!\int(u_1^2 + u_2^2)\,dt$ over a fixed interval (Cauchy–Schwarz),
+and for normal extremals the PMP maximisation then
+delivers the **normal (sub-Riemannian) Hamiltonian**
 
 $$\mathcal{H}_n = \tfrac{1}{2}\bigl(h_1^2 + h_2^2\bigr).$$
 
 <aside>
-Abnormal extremals ($\nu = 0$) occur when $h_1 \equiv 0$ along the extremal.
-For $\mathrm{SE}(2)$ they exist but are never strictly optimal (Sachkov 2004).
-We focus on normal extremals throughout.
+Abnormal extremals ($\nu = 0$) require $h_1 \equiv h_2 \equiv 0$ along the extremal.
+Because the SE(2) distribution is contact, they are trivial (constant curves) and
+play no role in the synthesis. We focus on normal extremals throughout.
 </aside>
 
 <aside id="note-lie-poisson">
@@ -117,8 +123,8 @@ that Poisson-commutes with <em>every</em> coordinate function — it is
 preserved by every Hamiltonian flow, regardless of which Hamiltonian you
 choose. Casimirs come from the structure of the algebra itself, not from
 any particular dynamics. They label the <em>symplectic leaves</em> on which
-genuine Hamiltonian motion takes place. Appendix A1 derives the SE(2)
-Casimir from the structure constants directly.
+genuine Hamiltonian motion takes place. Appendix A1 reads the SE(2)
+Casimir off the structure constants.
 </aside>
 
 Two integrals reduce this 3D system to a 1D motion. The Hamiltonian itself,
@@ -134,8 +140,8 @@ which Poisson-commutes with every smooth function and is therefore
 The <strong>coadjoint orbits</strong> of a Lie group $G$ partition
 $\mathfrak{g}^{*}$ into Kirillov–Kostant–Souriau symplectic manifolds.
 For SE(2) they are vertical cylinders in $(h_1, h_2, h_3)$-space (plus
-degenerate points along an axis). Appendix A1 §6 derives this directly
-from the adjoint action.
+degenerate points along an axis). Appendix A1 §6 states this and sketches
+why, via the adjoint action.
 </aside>
 
 The Casimir labels the <span class="annotated-term" data-note="note-coadjoint">symplectic leaves</span> of
@@ -170,13 +176,14 @@ Casimir $C$ on the coadjoint orbit.
 
 </div>
 
-The three dynamically distinct regimes of the pendulum correspond directly to the
-**three families of SE(2) geodesics**:
+The three dynamically distinct regimes of the pendulum sort **every extremal of both
+horizontal problems** — the free SR geodesics *and* their elastica siblings — into
+three families:
 
 | Energy $E$ | Pendulum motion | Elastica family |
-|:-----------:|:---------------:|:---------------:|
+|:-----------|:----------------|:----------------|
 | $-1 < E < 1$ | oscillation (libration) | **inflectional** |
-| $E = 1$ | separatrix (infinite period) | **Euler spiral** |
+| $E = 1$ | separatrix (infinite period) | **borderline (solitary)** |
 | $E > 1$ | rotation | **non-inflectional** |
 
 <aside>
@@ -187,24 +194,29 @@ pendulum equation in arc length — the same equation our reduction has just
 delivered for the SR-on-SE(2) costate phase.
 </aside>
 
-### From the pendulum to the curve
+### From the pendulum to the curve — one engine, two problems
 
-The pendulum equation lives on the costate, but the figures below plot the
-**curvature $\kappa(s)$ of the projected plane curve in its own Euclidean
-arc length $s$**. These two are tied together by a quick computation.
+The pendulum lives on the costate; getting a *plane curve* out of it can be done two
+ways, and they give **different curves** (Appendix A3 carries both out in full).
 
-In unit-speed parametrisation $h_1^{2}+h_2^{2}=1$, the projected speed is
-$|h_1| = |\sin(\varphi/2)|$ and the heading derivative is $\dot\theta = h_2 = \cos(\varphi/2)$.
-Reparametrising by Euclidean arc length $s$ with $ds = |h_1|\,dt$, and using
-$\dot\varphi = \pm 2 h_3$, a short calculation gives an explicit closed-form
-$\kappa(s)$ in each regime — the three Jacobi-elliptic curvature profiles
-below. They satisfy the **elastica curvature ODE** (the Duffing form
-equivalent to the pendulum)
+**The free SR geodesics.** Keep both controls. The plane projection's arc length is
+$ds = |h_1|\,dt$, its curvature works out to $\kappa_{\mathrm{SR}} = \cot(\varphi/2)$ —
+*unbounded*, blowing up each time the forward speed $h_1$ crosses zero — so the
+projections of SR geodesics are generically curves **with cusps**, at which the point
+reverses its direction of travel while the heading keeps turning (Moiseev–Sachkov 2010).
+These cuspidal curves are the true shortest paths of the V1 metric.
+
+**The elastica siblings.** Pin the forward speed, $u_1 \equiv 1$, so $t$ *is* arc
+length. The very same pendulum now drives the heading directly, and the curvature comes
+out in closed form as one of the three smooth Jacobi-elliptic profiles below, each
+solving the **elastica curvature ODE** — the Duffing form equivalent to the pendulum,
 
 $$\kappa''(s) + \tfrac{1}{2}\kappa(s)^{3} - \mu\,\kappa(s) \;=\; 0,$$
 
-with the integration constant $\mu$ fixed by the Casimir $C$ — one ODE, three
-qualitatively different solution branches.
+with the integration constant $\mu$ fixed by the Casimir $C$. These are Euler's
+elastica — the classical smooth completion curves, and the family every figure in this
+series draws. One pendulum, two horizontal problems: the smooth elastica where the
+forward speed never stalls, the cuspidal SR geodesics where it may.
 
 ## Three Families via Jacobi Elliptic Functions
 
@@ -219,30 +231,30 @@ Setting the energy $E = 2k^{2} - 1$ with $k \in (0, 1)$, the curvature is
 $$\boxed{\;\kappa(s) = 2k\,\mathrm{cn}(s \mid k^{2})\;}$$
 
 The Jacobi function $\mathrm{cn}(s \mid k^{2})$ has period $4K(k^{2})$ in $s$,
-so the curvature — and hence the curve shape — repeats with spatial period
+so the curvature and tangent repeat with period
 
 $$T_{\kappa} = 4K(k^{2}).$$
 
 As $k \to 0$: $\mathrm{cn}(s\mid 0) = \cos s$ and the elastica approximates a
 cosine-curvature curve (nearly straight).
-As $k \to 1$: $K(1) = \infty$ and the period diverges — the curve spirals inward
-without repeating (the Euler spiral limit).
+As $k \to 1$: $K(1) = \infty$ and the period diverges; on every fixed compact
+$s$-interval the curve approaches the borderline elastica. A repeated curvature
+profile does **not** by itself imply that the plane curve closes: after one period
+the position may have acquired a nonzero translational drift.
 
-### Euler Spiral / Cornu Spiral ($E = 1$, separatrix)
+### The Borderline (Solitary) Elastica ($E = 1$, separatrix)
 
 At the separatrix the curvature is
 
 $$\kappa(s) = \frac{2}{\cosh s}.$$
 
-This is the **Euler–Cornu spiral** (also called the *clothoid*).
-Its curvature is a smooth bump decaying to zero at both ends; the total turning is
-$\Delta\theta = 2\pi$.
-It is the limiting case between oscillating and rotating pendulum, and has
-infinite period $T_\kappa = \infty$.
-
-The Euler spiral is famous in civil engineering (transition curves for railways)
-and optics (Fresnel integrals), but here it arises as the unique separatrix
-geodesic in SE(2).
+This is the **borderline elastica** — the solitary-wave member of the family, a single
+loop whose curvature is one smooth bump decaying to zero at both ends; the total
+turning is $\Delta\theta = 2\pi$, and both tails straighten out along the same
+asymptotic line. It is the limiting case between oscillating and rotating pendulum,
+with infinite period $T_\kappa = \infty$. (It is *not* the Euler–Cornu spiral /
+clothoid of railway engineering, whose curvature grows linearly, $\kappa \propto s$ —
+a common conflation worth flagging.)
 
 ### Non-Inflectional Elastica ($E > 1$)
 
@@ -259,13 +271,13 @@ spatial period is
 $$T_{\kappa} = 2K(m).$$
 
 As $m \to 1$: $\mathrm{dn}(s\mid 1) = \mathrm{sech}(s)$ — the non-inflectional family
-approaches the Euler spiral from the other side.
+approaches the borderline elastica from the other side.
 As $m \to 0$: $\mathrm{dn}(s\mid 0) = 1$ and $\kappa \to 2$ — the curves
 degenerate into circles of radius $1/2$ (high-energy uniform rotation).
 
 </div><!-- /.l-body -->
 
-<!-- Figure 1: Elastica explorer (κ(s) + curve) -->
+<!-- Figure&nbsp;1: Elastica explorer (κ(s) + curve) -->
 <figure class="l-middle">
   <div class="fig-box">
     <div class="fig-controls">
@@ -273,7 +285,7 @@ degenerate into circles of radius $1/2$ (high-energy uniform rotation).
         Family
         <select id="elastica-type">
           <option value="inflectional">Inflectional   κ = 2k cn(s|k²)</option>
-          <option value="euler">Euler spiral   κ = 2/cosh(s)</option>
+          <option value="euler">Borderline elastica   κ = 2/cosh(s)</option>
           <option value="noninflectional">Non-inflectional   κ = 2 dn(s|m)</option>
         </select>
       </label>
@@ -291,15 +303,16 @@ degenerate into circles of radius $1/2$ (high-energy uniform rotation).
     <strong class="figure-label"></strong>
     <strong>Elastica explorer.</strong>
     Left panel: the curvature $\kappa(s)$ as a function of arc length.
-    Right panel: the corresponding plane curve $(x(s), y(s))$, the spatial projection
-    of the SE(2) geodesic.
+    Right panel: the corresponding plane curve $(x(s), y(s))$ of the
+    <em>pinned Euler-elastica problem</em>. It is not the generically cuspidal
+    projection of a free SE(2) sub-Riemannian geodesic.
     For the inflectional family, zeros of $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$
     coincide with inflection points of the curve; the period is $T_\kappa = 4K(k^2)$.
     Drag the slider to vary $k$ (or $m$); switch families with the dropdown.
   </figcaption>
 </figure>
 
-<!-- Figure 2: Period T = 4K(k²) vs k -->
+<!-- Figure&nbsp;2: Period T = 4K(k²) vs k -->
 <figure class="l-middle">
   <div class="fig-box">
     <svg id="fig-period" style="width:100%;height:320px;"></svg>
@@ -309,14 +322,14 @@ degenerate into circles of radius $1/2$ (high-energy uniform rotation).
     <strong>The period $T_\kappa(k) = 4K(k^2)$ diverges as $k \to 1$.</strong>
     Blue: inflectional period $4K(k^2)$; green: non-inflectional period $2K(m)$
     (plotted vs $k = \sqrt{m}$ for comparison).
-    The vertical asymptote at $k = 1$ corresponds to the Euler spiral — infinite period,
-    infinite total curvature.
+    The vertical asymptote at $k = 1$ corresponds to the borderline elastica:
+    infinite period but finite total turning $\int_{-\infty}^{\infty}2\,\mathrm{sech}(s)\,ds=2\pi$.
     For small $k$: $K(k^2) \approx \pi/2 + \pi k^2/8$, so $T_\kappa \approx 2\pi$
     (nearly circular curvature oscillation).
   </figcaption>
 </figure>
 
-<!-- Figure 3: Phase portrait of the pendulum -->
+<!-- Figure&nbsp;3: Phase portrait of the pendulum -->
 <figure class="l-middle">
   <div class="fig-box">
     <svg id="fig-phase" style="width:100%;height:360px;"></svg>
@@ -325,11 +338,11 @@ degenerate into circles of radius $1/2$ (high-energy uniform rotation).
     <strong class="figure-label"></strong>
     <strong>Phase portrait of the pendulum $\ddot\varphi + \sin\varphi = 0$.</strong>
     Closed orbits (blue): libration — inflectional elastica.
-    The separatrix (red, $E = 1$): Euler spiral.
+    The separatrix (red, $E = 1$): borderline elastica.
     Rotation orbits (green): non-inflectional elastica.
-    Each orbit corresponds to a one-parameter family of SE(2) geodesics;
-    the energy $E$ determines the family, and the initial phase on the orbit
-    determines the individual curve.
+    Each orbit supplies the vertical pendulum data shared by two reconstructions:
+    a family of free SE(2) SR extremals and a family of pinned elastica. The energy
+    determines the regime; the initial phase selects an individual extremal.
   </figcaption>
 </figure>
 
@@ -347,7 +360,7 @@ Landen transform and proves the $K$-formula.
 </aside>
 
 The period formula $T_\kappa = 4K(k^{2})$ is not incidental — $K(k^{2})$ is the
-**exact** half-period of $\mathrm{sn}(s\mid k^{2})$ by definition.
+**exact** quarter-period of $\mathrm{sn}(s\mid k^{2})$ by definition.
 This makes the elastica period computable to arbitrary precision via the
 <span class="annotated-term" data-note="note-agm">arithmetic–geometric mean (AGM)</span>:
 
@@ -374,8 +387,9 @@ The browser figures on this page use the same AGM algorithm implemented in
 For the Jacobi functions themselves:
 
 ```python
-from elliptic import ellipj
+from elliptic import ellipj, ellipticK
 
+K = ellipticK(k**2)            # quarter-period of sn, cn
 s = np.linspace(-2*K, 2*K, 800)
 sn, cn, dn = ellipj(s, k**2)
 kappa = 2 * k * cn             # curvature of inflectional elastica
@@ -395,7 +409,7 @@ These let us differentiate $\kappa(s)$ analytically:
 
 $$\kappa'(s) = -2k\,\mathrm{sn}(s)\,\mathrm{dn}(s),$$
 
-which will be essential in Part 3 for locating Maxwell strata.
+which will be essential in Part&nbsp;3 for locating Maxwell strata.
 
 ## Integrating the Elastica
 
@@ -417,9 +431,9 @@ In the `elliptic` package:
 ```python
 from elliptic import elliptic12
 
-phi = np.arcsin(k * sn)
-E_vals, F_vals = elliptic12(phi, k**2)   # E(φ|k²) and F(φ|k²)
-x = 2 * (E_vals - F_vals / 2)            # exact formula from Sachkov (2011)
+am = np.arcsin(sn)                       # Jacobi amplitude am(s | k²)
+F_vals, E_vals = elliptic12(am, k**2)    # F(am | k²) = s  and  E(am | k²)
+x = 2 * E_vals - F_vals                  # x(s) = 2 E(am(s)|k²) − s  (Sachkov 2011)
 ```
 
 The full closed-form expressions — due to Sachkov (2011) — express every
@@ -435,28 +449,33 @@ A few landmarks worth noting:
 - **$k = 0.1$** (inflectional): nearly straight, very gentle curvature oscillation.
   The curve barely bends before straightening again.
 
-- **$k \approx 0.71$** (inflectional): the "figure-eight" lemniscate — the curve
-  crosses itself once per period and the endpoints of one period coincide.
-  This is the **Maxwell stratum** for the symmetric geodesics (Part 3).
+- **$k \approx 0.909$** (inflectional): the "figure-eight" lemniscate — at the
+  modulus where $2E(k^2) = K(k^2)$, the curve crosses itself once per period and
+  the endpoints of one period coincide.
+  This is where the mirror-pair **Maxwell point** of the elastica family lands back
+  at the origin (Part&nbsp;3).
 
-- **$k \to 1^-$** (inflectional → Euler spiral): the period $4K(k^2)$ diverges and
-  the curve spirals inward, winding around two limiting points.
+- **$k \to 1^-$** (inflectional → borderline): the period $4K(k^2)$ diverges and,
+  on bounded arc-length intervals, the curve converges to the solitary borderline
+  elastica. There is no finite period left at $k=1$.
 
-- **Euler spiral** ($k = 1$): curvature $2/\cosh(s)$, total turning $2\pi$.
-  The two asymptotic directions are parallel but offset — the curve never closes.
+- **Borderline elastica** ($k = 1$): curvature $2/\cosh(s)$, total turning $2\pi$.
+  In the standard normalisation its two tails approach the same asymptotic line;
+  the complete curve is non-periodic and contains one loop.
 
 - **Non-inflectional, $m = 0.3$**: like a wavy circle — curvature oscillates but
-  never changes sign; the curve closes after a finite arc length.
+  never changes sign. Curvature and tangent repeat after $2K(m)$, but the plane
+  curve closes only when the net displacement over a period also vanishes.
 
 </div><!-- /.l-body -->
 
-<!-- Figure 4: All three families side by side -->
+<!-- Figure&nbsp;4: All three families side by side -->
 <figure class="l-middle">
   <div class="fig-box">
     <div class="fig-controls">
       <span style="font-size:12px;color:#555;">
         Blue: inflectional (k = 0.3, 0.6, 0.9) &nbsp;·&nbsp;
-        Red: Euler spiral &nbsp;·&nbsp;
+        Red: borderline elastica &nbsp;·&nbsp;
         Green: non-inflectional (m = 0.3, 0.6, 0.9)
       </span>
     </div>
@@ -467,20 +486,22 @@ A few landmarks worth noting:
     <strong>All three families of Euler's elastica</strong> rendered at the same scale.
     Blue curves (inflectional): oscillate between positive and negative curvature;
     the amplitude grows with $k$.
-    Red (Euler spiral / separatrix): the limiting case between oscillation and rotation.
+    Red (borderline elastica / separatrix): the limiting case between oscillation and rotation.
     Green (non-inflectional): curvature stays one-signed; the curves resemble
     deformed circles.
-    Every geodesic of SE(2) projects to one of these curve types.
+    Every smooth completion curve of the pinned problem is one of these elastica; the free SR geodesics project to their cuspidal cousins (Appendix A3).
   </figcaption>
 </figure>
 
 <div class="l-body" markdown="1">
 
-## Summary and Preview of Part 3
+## Summary and Preview of Part&nbsp;3
 
-We have shown that every normal SR geodesic on SE(2) has curvature belonging to
-one of three Jacobi-elliptic families, with the inflectional case
-$\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$ being the generic one.
+We have shown that the reduced pendulum has three Jacobi-elliptic regimes.
+For the pinned reconstruction they give the three smooth Euler-elastica families,
+with inflectional curvature $\kappa(s)=2k\,\mathrm{cn}(s\mid k^2)$. For the free
+SR reconstruction the same pendulum produces different, generically cuspidal plane
+curves whose curvature is not this elastica profile.
 The complete elliptic integral $K(k^2)$ controls the spatial period of the
 curvature, and the closed-form $x(s), y(s)$ involve elliptic integrals of the
 second kind.
@@ -491,15 +512,17 @@ while a completely different geodesic of the same length exists.
 The locus where this happens — where two distinct geodesics of equal length
 *meet* — is the **Maxwell stratum**.
 
-In Part 3 we will show that the Maxwell stratum is governed by the discrete
-symmetry group of $\mathrm{SE}(2)$, and that the first Maxwell time for an
-inflectional geodesic with modulus $k$ is exactly
+In Part&nbsp;3 we will show that the Maxwell strata are governed by the discrete
+reflection group of the pendulum — the $(\mathbb{Z}_2)^3$ of Moiseev–Sachkov (2010) —
+and compute the mirror-pair tie exactly on the elastica family: two mirror elastica
+first re-meet after one full curvature period,
 
-$$t_{\mathrm{MAX}}^{(1)} = \frac{4K(k^{2})}{\omega_0},$$
+$$s \;=\; 4K(k^{2}),$$
 
-the same period $4K(k^{2})$ that controls the curvature oscillation — but this
-time as a *time*, not a length.
-This identity is the heart of the Maxwell strata proof.
+the same elliptic integral that controls the oscillation. For the free SR problem the
+same symmetry machinery gives the sharper (and different!) answer — the cut time is
+$2K(k^2)$, *half* a pendulum period — which is Part&nbsp;4's story. The elliptic clock
+$K(k^2)$ runs both problems.
 
 </div><!-- /.l-body -->
 
@@ -516,7 +539,7 @@ This identity is the heart of the Maxwell strata proof.
   <li>
     Yu. L. Sachkov (2011). "Cut locus and optimal synthesis in the sub-Riemannian
     problem on the group of motions of a plane."
-    <em>ESAIM: COCV</em> 17(4): 293–321.
+    <em>ESAIM: COCV</em> 17(2): 293–321.
     <a href="https://arxiv.org/abs/0903.0727">arXiv:0903.0727</a>
   </li>
   <li>
@@ -964,7 +987,7 @@ function drawFamilies() {
       .attr('fill', 'none').attr('stroke', col).attr('stroke-width', 1.8);
   });
 
-  // Euler spiral (red)
+  // Borderline elastica (red; not an Euler–Cornu clothoid)
   const eulerPts = integrateElastica(s => 2 / Math.cosh(s), -7, 7, 600);
   const ex0 = eulerPts[0].x, ey0 = eulerPts[0].y;
   g.append('path')

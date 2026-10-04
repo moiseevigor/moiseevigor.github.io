@@ -60,6 +60,8 @@
   letter-spacing: 0.13em; text-transform: uppercase;
   color: var(--accent); margin-bottom: 18px;
 }
+.d-eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor; }
+.d-eyebrow a:hover { border-bottom-style: solid; }
 .d-title {
   font-family: var(--sans); font-size: clamp(1.9rem, 4vw, 2.7rem);
   font-weight: 700; letter-spacing: -0.025em; line-height: 1.2;
@@ -110,7 +112,10 @@
 .d-article {
   padding-bottom: 80px;
 }
-.d-article { counter-reset: section figure; }
+/* Reset counters on the real <article> only — a nested <div class="d-article">
+ * (used as a references wrapper on some posts) must NOT restart the section
+ * count, or its "References" heading renders as "1." instead of continuing. */
+article.d-article { counter-reset: section figure; }
 
 /* ── Layout layers ───────────────────────────────────────────────────────── */
 
@@ -172,6 +177,10 @@
   color: var(--text-muted);
   border-left: 2px solid var(--border);
   padding-left: 14px;
+  /* Reserve the right padding the .is-highlighted state uses, so hovering a note
+   * only changes colour — it must NOT shrink the text width and reflow to a taller
+   * box, which would push it down over the collision-positioned note below. */
+  padding-right: 10px;
   transition: border-left-color 0.18s, background 0.18s, color 0.18s;
 }
 .l-body > aside a, .l-body > .marginnote a { color: var(--accent); }
@@ -190,12 +199,60 @@
   border-left-color: var(--accent);
   background: var(--accent-light);
   border-radius: 0 4px 4px 0;
-  padding-right: 10px;
   color: var(--text);
 }
 
+/*
+ * Footnotes relocated into the margin as sidenotes by the distill.html JS
+ * (kramdown emits them at the page bottom; JS clones each next to its
+ * reference). The leading number pairs the margin note with its inline mark.
+ */
+.sidenote-fn-num { font-family: var(--mono); color: var(--accent); font-weight: 600; }
+/*
+ * kramdown wraps footnote text in <p>, which `.d-article p` would render at full
+ * serif body size (16px, near-black) inside the gutter. Make block children of a
+ * margin note inherit the note's small muted sans type so a relocated footnote
+ * looks identical to a hand-authored <aside>. Specificity (0,1,2) beats
+ * `.d-article p` (0,1,1).
+ */
+.l-body > aside p, .l-body > .marginnote p {
+  font: inherit; color: inherit; margin: 0 0 0.6em;
+}
+.l-body > aside p:last-child, .l-body > .marginnote p:last-child { margin-bottom: 0; }
+/*
+ * Wide screen: footnote sidenotes are absolutely positioned by the distill.html
+ * JS at the vertical level of their reference (with collision avoidance), so a
+ * dense run of notes doesn't cascade far below its markers the way float+clear
+ * would. Hand-authored <aside> notes keep the float layout above. At ≤900px the
+ * narrow rule (float:none → inline block) takes over and JS clears the tops.
+ */
+@media (min-width: 1000px) {
+  .l-body > aside.sidenote-fn {
+    position: absolute;
+    left: calc(var(--body-w) + 32px);
+    width: var(--gutter-w);
+    float: none; clear: none; margin: 0;
+  }
+}
+.sidenote-ref > a.footnote { text-decoration: none; color: var(--accent); }
+.sidenote-ref { transition: background 0.18s, box-shadow 0.18s, color 0.18s; border-radius: 3px; }
+/*
+ * Marker highlight — drawn as a pill on the <sup> with box-shadow (a paint-only
+ * property), NOT padding. Padding would widen the inline box and shove the rest
+ * of the line's text sideways on hover; box-shadow never affects layout, so the
+ * number highlights in place. Works for both the relocated-footnote marker
+ * (<a> inside the sup) and the hand-authored one (bare number in the sup).
+ */
+.sidenote-ref.is-active {
+  background: var(--accent-light);
+  box-shadow: 0 0 0 2px var(--accent-light);
+  border-radius: 3px;
+}
+.sidenote-ref.is-active,
+.sidenote-ref.is-active > a.footnote { color: var(--accent); }
+
 /* Narrow screen: collapse back into the flow below the paragraph */
-@media (max-width: 900px) {
+@media (max-width: 999px) {
   .l-body > * { max-width: none; }
   .l-body > aside, .l-body > .marginnote {
     float: none;
@@ -205,6 +262,7 @@
     border-left: none;
     border-top: 2px solid var(--border);
     padding-left: 0;
+    padding-right: 0;
     padding-top: 10px;
     margin: 12px 0;
   }
@@ -368,6 +426,26 @@ body.layout-distill .d-article h2::before {
   counter-increment: figure;
 }
 
+/*
+ * Standard figure width for EVERY distill post: the body column + footnote
+ * gutter (680 + 32 + 220 = 932px), left-aligned with the text column via the
+ * .l-middle margin-left. This lives in the template so all posts match — it was
+ * previously set in a per-post inline <style>, which left older posts on the
+ * generic .l-middle width (1100px) and made figures visibly different sizes
+ * between articles. Media fills the frame; nothing overflows the gutter edge.
+ */
+figure.l-middle {
+  max-width: calc(var(--body-w) + 32px + var(--gutter-w));
+  padding: 0 14px;
+  box-sizing: border-box;
+  /* NOT `hidden`: overflow-x:hidden forces overflow-y to compute to `auto`,
+   * turning every figure into a scroll container — one sub-pixel of vertical
+   * overflow shows a phantom scrollbar (same gotcha as .katex-display above).
+   * `clip` clips without creating a scroll container. */
+  overflow-x: clip;
+}
+figure.l-middle svg, figure.l-middle img { max-width: 100%; height: auto; }
+
 .fig-box {
   background: var(--fig-bg); border: 1px solid var(--border);
   border-radius: 8px; overflow: hidden; position: relative;
@@ -460,6 +538,46 @@ figcaption strong { color: var(--text-light); }
 .d-references li { margin-bottom: 0.5em; }
 .d-references a { color: var(--accent); }
 
+/* ── Footnotes / endnotes ────────────────────────────────────────────────── */
+/*
+ * kramdown appends <div class="footnotes"> as a bare child of .d-article,
+ * OUTSIDE the .l-body wrappers the markdown uses — so with no rule here it
+ * spans the full viewport while every other block stays capped at the body
+ * column. Center + cap it on the same axis as .l-body, and give it the muted
+ * scholarly treatment of .d-references (its sibling apparatus). A "Notes"
+ * label orients the reader, who otherwise meets a numbered list with no title.
+ */
+.d-article .footnotes {
+  max-width: calc(var(--body-w) + 32px + var(--gutter-w));
+  margin: 60px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.d-article .footnotes::before {
+  content: "Notes";
+  display: block; max-width: var(--body-w);
+  font-family: var(--sans); font-size: 1rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 12px;
+}
+.d-article .footnotes ol {
+  max-width: var(--body-w);
+  font-family: var(--sans); font-size: 0.875rem; line-height: 1.7;
+  color: var(--text-muted); padding-left: 1.4em; margin: 0;
+}
+.d-article .footnotes li { margin-bottom: 0.5em; }
+.d-article .footnotes p {
+  font-family: var(--sans); font-size: 0.875rem; line-height: 1.7;
+  color: var(--text-muted); margin: 0;
+}
+.d-article .footnotes a { color: var(--accent); }
+/* Back-reference arrow (↩) — quieten it so it doesn't compete with the note */
+.d-article .footnotes a.reversefootnote {
+  font-family: var(--mono); text-decoration: none;
+  color: var(--text-muted); opacity: 0.45; margin-left: 6px;
+}
+.d-article .footnotes a.reversefootnote:hover { opacity: 1; color: var(--accent); }
+
 /* ── Series navigation ───────────────────────────────────────────────────── */
 .d-series-nav {
   display: flex; justify-content: space-between; align-items: flex-start;
@@ -487,13 +605,32 @@ figcaption strong { color: var(--text-light); }
 .d-footer a { color: var(--text-muted); text-decoration: underline; }
 
 /* ── Responsive ──────────────────────────────────────────────────────────── */
+/*
+ * Single-column range (< 1000px): there's no room for the 932px two-column
+ * layout, so margin notes are already inline (see the max-width:999 rule).
+ * Every centred container also needs a side gutter here — without it, once the
+ * viewport drops below the 932px cap the container fills edge-to-edge and text
+ * touches the screen border. Longhand padding-left/right so each rule keeps its
+ * own vertical padding. box-sizing:border-box (set on .distill-page *) keeps the
+ * padding inside the max-width.
+ */
+@media (max-width: 999px) {
+  .d-header,
+  .l-body, .l-page,
+  .d-article .footnotes,
+  .d-footer,
+  figure.l-middle { padding-left: 24px; padding-right: 24px; }
+}
 @media (max-width: 760px) {
   .d-article { padding-bottom: 60px; }
-  .d-header { padding: 40px 20px 36px; }
-  .d-footer { padding: 20px; }
-  .l-body, .l-middle, .l-page { padding: 0 20px; }
+  .d-header { padding-top: 40px; padding-bottom: 36px; }
+  .l-middle { overflow-x: auto; }
 }
 @media (max-width: 560px) {
   .d-title { font-size: 1.6rem; }
-  .l-middle { overflow-x: auto; }
+  .d-header,
+  .l-body, .l-page,
+  .d-article .footnotes,
+  .d-footer,
+  figure.l-middle { padding-left: 20px; padding-right: 20px; }
 }

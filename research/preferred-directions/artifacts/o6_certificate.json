@@ -1,0 +1,45 @@
+{
+ "statement": "c2_caustic(beta) = 1 - 3*beta/4 for smooth 1D profiles, leading order in epsilon",
+ "exactness_boundary": "EXACT (symbolic): per-order flow coefficients, J0/J1/J2 assembly, J0(2pi)=0, J0'(2pi)=-2pi, tau1, tau2, <tau1>=0, <tau2>=2pi(1-3b/4), small-time series of J0. NUMERICAL (verification only): the quadrature table below.",
+ "J0_at_2pi": "0",
+ "dJ0_at_2pi": "-2*pi",
+ "small_time_J0_leading": {
+  "power": 4,
+  "coefficient": "1/12"
+ },
+ "tau1": "2*pi*sin(th0)",
+ "tau2_average_over_2pi": "1 - 3*b/4",
+ "tau2_full": "pi*(-3*b/2 + 2*sin(th0)**2 + 1)",
+ "quadrature_check": [
+  {
+   "beta": 0.0,
+   "c2_quadrature": 1.0,
+   "c2_predicted": 1.0,
+   "diff": 0.0
+  },
+  {
+   "beta": -0.5,
+   "c2_quadrature": 1.3750000000000002,
+   "c2_predicted": 1.375,
+   "diff": 2.220446049250313e-16
+  },
+  {
+   "beta": -1.0,
+   "c2_quadrature": 1.75,
+   "c2_predicted": 1.75,
+   "diff": 0.0
+  },
+  {
+   "beta": 1.0,
+   "c2_quadrature": 0.25000000000000006,
+   "c2_predicted": 0.25,
+   "diff": 5.551115123125783e-17
+  },
+  {
+   "beta": 2.0,
+   "c2_quadrature": -0.5,
+   "c2_predicted": -0.5,
+   "diff": 0.0
+  }
+ ]
+}

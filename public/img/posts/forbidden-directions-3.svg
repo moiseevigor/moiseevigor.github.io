@@ -1,0 +1,22 @@
+<svg viewBox="0 0 220 148" xmlns="http://www.w3.org/2000/svg">
+  <rect width="220" height="148" fill="#fff"/>
+  <!-- Reading the field gradient from the caustic: a field gradient deforms the
+       flat-model refocusing circle into a delayed locus; delta = -eps^2. -->
+  <!-- field getting stronger to the right (denser dots) -->
+  <g fill="#1565c0" opacity="0.28">
+    <circle cx="22" cy="30" r="1"/><circle cx="22" cy="74" r="1"/><circle cx="22" cy="116" r="1"/>
+    <circle cx="52" cy="24" r="1.2"/><circle cx="52" cy="54" r="1.2"/><circle cx="52" cy="94" r="1.2"/><circle cx="52" cy="122" r="1.2"/>
+    <circle cx="112" cy="22" r="1.5"/><circle cx="112" cy="46" r="1.5"/><circle cx="112" cy="70" r="1.5"/><circle cx="112" cy="94" r="1.5"/><circle cx="112" cy="116" r="1.5"/>
+  </g>
+  <!-- gradient direction -->
+  <path d="M 22,134 L 120,134" stroke="#1565c0" stroke-width="1" opacity="0.5" stroke-linecap="round"/>
+  <path d="M 120,134 l -5,-3 M 120,134 l -5,3" stroke="#1565c0" stroke-width="1" opacity="0.5" fill="none" stroke-linecap="round"/>
+  <text x="58" y="130" font-family="monospace" font-size="9" fill="#1565c0" opacity="0.7">&#8711;B</text>
+  <!-- flat-model refocusing locus (dashed circle) -->
+  <circle cx="78" cy="64" r="26" fill="none" stroke="#1565c0" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.7"/>
+  <!-- the real, deviated locus (solid astroid — refocusing delayed by the gradient) -->
+  <path d="M 108,64 C 96,76 90,84 78,96 C 66,84 60,76 48,64 C 60,52 66,44 78,32 C 90,44 96,52 108,64 Z"
+        fill="#e65100" fill-opacity="0.06" stroke="#e65100" stroke-width="1.5"/>
+  <!-- the measured law -->
+  <text x="150" y="68" font-family="monospace" font-size="13" fill="#e65100">&#948;=&#8722;&#949;&#178;</text>
+</svg>

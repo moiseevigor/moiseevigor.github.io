@@ -1,0 +1,31 @@
+<svg viewBox="0 0 220 148" xmlns="http://www.w3.org/2000/svg">
+  <rect width="220" height="148" fill="#fff"/>
+  <!-- The null gallery: a wall of little null cards — X-type (radial, blue) and
+       O-type (spiral, orange) — each detected (Q=6); one card starred as real. -->
+  <!-- card 1: radial (X) -->
+  <g>
+    <rect x="18" y="22" width="52" height="52" rx="3" fill="none" stroke="#1565c0" stroke-width="1.4"/>
+    <path d="M 24,28 L 64,68 M 24,68 L 64,28" stroke="#1565c0" stroke-width="1.1" opacity="0.55"/>
+    <path d="M 30,48 Q 44,40 58,48 M 30,48 Q 44,56 58,48" stroke="#1565c0" stroke-width="1.1" fill="none" opacity="0.8"/>
+    <circle cx="44" cy="48" r="2.2" fill="#1565c0"/>
+  </g>
+  <!-- card 2: spiral (O) -->
+  <g>
+    <rect x="84" y="22" width="52" height="52" rx="3" fill="none" stroke="#e65100" stroke-width="1.4"/>
+    <path d="M 110,48 m 14,0 a 14,14 0 1,1 -3,-9 M 110,48 m 8,0 a 8,8 0 1,0 -2,5"
+          stroke="#e65100" stroke-width="1.1" fill="none" opacity="0.85"/>
+    <circle cx="110" cy="48" r="2.2" fill="#e65100"/>
+  </g>
+  <!-- card 3: real detection, starred -->
+  <g>
+    <rect x="150" y="22" width="52" height="52" rx="3" fill="#1565c0" fill-opacity="0.06" stroke="#1565c0" stroke-width="1.4"/>
+    <path d="M 156,66 Q 176,30 196,66" stroke="#1565c0" stroke-width="1.1" fill="none" opacity="0.6"/>
+    <path d="M 160,68 Q 176,42 192,68" stroke="#1565c0" stroke-width="1.1" fill="none" opacity="0.6"/>
+    <path d="M 176,26 L 176,54" stroke="#1565c0" stroke-width="1.1" opacity="0.6"/>
+    <path d="M 173,50 l 3,6 l 3,-6 l -6,4 l 6,0 z" fill="#ffd000" stroke="#1565c0" stroke-width="0.8"/>
+  </g>
+  <!-- the shared verdict badge -->
+  <rect x="63" y="96" width="94" height="26" rx="5" fill="#1565c0" fill-opacity="0.08" stroke="#1565c0" stroke-width="1.2"/>
+  <text x="110" y="113" text-anchor="middle" font-family="monospace" font-size="12" fill="#1565c0">Q = 6 &#183; 10/10</text>
+  <text x="110" y="136" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="7.5" fill="#5f6368">synthetic battery + the real Sun</text>
+</svg>

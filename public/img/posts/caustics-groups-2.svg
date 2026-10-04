@@ -1,0 +1,30 @@
+<svg viewBox="0 0 220 148" xmlns="http://www.w3.org/2000/svg">
+  <rect width="220" height="148" fill="#fff"/>
+  <!-- The forward map: each model group focuses its geodesics into its OWN
+       caustic signature. Three groups, three distinct caustics. -->
+
+  <!-- Heisenberg: four-cusp astroid -->
+  <path d="M 67,76 C 59,84 53,90 45,98 C 37,90 31,84 23,76 C 31,68 37,62 45,54 C 53,62 59,68 67,76 Z"
+        fill="#1565c0" fill-opacity="0.08" stroke="#1565c0" stroke-width="1.3"/>
+  <g fill="#1565c0"><circle cx="67" cy="76" r="1.5"/><circle cx="23" cy="76" r="1.5"/><circle cx="45" cy="54" r="1.5"/><circle cx="45" cy="98" r="1.5"/></g>
+  <text x="45" y="120" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="7.5" fill="#1565c0">Heisenberg</text>
+
+  <!-- SE(2): a single semicubical cusp (a beak of focusing rays) -->
+  <g fill="none" stroke="#1565c0" stroke-width="0.8" opacity="0.30">
+    <path d="M 92,76 Q 108,62 126,56"/><path d="M 92,76 Q 110,66 128,64"/>
+    <path d="M 92,76 Q 108,90 126,96"/><path d="M 92,76 Q 110,86 128,88"/>
+  </g>
+  <path d="M 92,76 C 105,63 118,58 129,55 M 92,76 C 105,89 118,94 129,97"
+        fill="none" stroke="#1565c0" stroke-width="1.3" stroke-linecap="round"/>
+  <circle cx="92" cy="76" r="2.4" fill="#e65100"/>
+  <text x="110" y="120" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="7.5" fill="#1565c0">SE(2)</text>
+
+  <!-- Engel: a swallowtail — two cusps and a self-crossing -->
+  <path d="M 160,56 C 172,68 172,72 175,76 C 178,72 178,68 190,56"
+        fill="none" stroke="#1565c0" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M 162,96 C 170,86 173,80 175,76 C 177,80 180,86 188,96"
+        fill="none" stroke="#1565c0" stroke-width="1.3" stroke-linecap="round"/>
+  <g fill="#1565c0"><circle cx="160" cy="56" r="1.5"/><circle cx="190" cy="56" r="1.5"/></g>
+  <circle cx="175" cy="76" r="2" fill="#1565c0"/>
+  <text x="175" y="120" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="7.5" fill="#1565c0">Engel</text>
+</svg>
