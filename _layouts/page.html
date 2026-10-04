@@ -2,6 +2,9 @@
 layout: default
 ---
 
+{% comment %} `hide_title: true` drops the title block (and its rule) for pages
+that open with their own header, e.g. About. {% endcomment %}
+{% unless page.hide_title %}
 <!-- ── Static page header (same d-header chrome, but minimal — title only) ── -->
 <div class="d-header">
   <h1 class="d-title">{{ page.title }}</h1>
@@ -9,8 +12,9 @@ layout: default
   <p class="d-subtitle">{{ page.subtitle }}</p>
   {% endif %}
 </div>
+{% endunless %}
 
-<article class="d-article">
+<article class="d-article{% if page.hide_title %} d-article--untitled{% endif %}">
   <div class="l-body">
     {{ content }}
   </div>

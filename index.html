@@ -32,11 +32,11 @@ page_class: home
         <a href="{{ post.url }}">{{ post.title }}</a>
       </h2>
 
+      {% comment %} One summary per card: the subtitle when the post has one (the
+      description repeats it in other words), else description, else excerpt. {% endcomment %}
       {% if post.subtitle %}
       <p class="home-card-subtitle">{{ post.subtitle }}</p>
-      {% endif %}
-
-      {% if post.description and post.description != "" %}
+      {% elsif post.description and post.description != "" %}
       <p class="home-card-desc">{{ post.description }}</p>
       {% elsif post.excerpt %}
       <p class="home-card-desc">{{ post.excerpt | strip_html | truncatewords: 42 }}</p>

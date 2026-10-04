@@ -65,7 +65,9 @@ layout: default
       {% endfor %}
     </ol>
     {% if series_data.appendices %}
-    <div class="d-series-title" style="margin-top:14px;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:#888;">Appendices — Theory Background</div>
+    {% assign toc_prefix = page.series_part | append: '' | slice: 0 %}
+    <details{% if "ABCDEFGHIJKLMNOPQRSTUVWXYZ" contains toc_prefix %} open{% endif %}>
+    <summary>Appendices — theory background ({{ series_data.appendices.size }})</summary>
     <ol style="list-style:none;padding-left:0;">
       {% for item in series_data.appendices %}
       <li class="{% if item.part == page.series_part %}current{% elsif item.status == 'upcoming' %}upcoming{% endif %}" style="padding-left:1em;">
@@ -86,6 +88,7 @@ layout: default
       </li>
       {% endfor %}
     </ol>
+    </details>
     {% endif %}
   </div>
   {% endif %}

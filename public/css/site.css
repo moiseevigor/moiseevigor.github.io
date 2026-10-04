@@ -518,7 +518,11 @@ a.home-card-series-name:hover { text-decoration: underline; }
   font-style: italic;
   color: var(--text-light);
   line-height: 24px;         /* matches meta baseline */
-  margin: 0 0 7px;           /* keep rhythm into description */
+  margin: 0 0 12px;
+  display: -webkit-box;      /* long subtitles: clamp to 5 lines on the card */
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .home-card-desc {
   font-family: var(--sans);
@@ -672,3 +676,36 @@ span.pagination-item:hover { background: none; border-color: var(--border); }
   .site-nav-links li:first-child { display: none; }
   .site-nav-links a { font-size: 12px; white-space: nowrap; }
 }
+
+/* ── Newsletter signup (Mailchimp form, own styling — a block in the text
+      column, not a margin note) ─────────────────────────────────────────── */
+.email-box {
+  margin: 2.5rem 0 0;
+  padding: 20px 22px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--fig-bg);
+  font-family: var(--sans);
+}
+.email-box .email-box-heading { margin: 0 0 4px; font-size: 1.05rem; border: 0; padding: 0; }
+.email-box h4 { margin: 0 0 10px; font-weight: 400; font-size: 0.9rem; color: var(--text-muted); }
+.email-box #mc_embed_signup_scroll { display: flex; flex-wrap: wrap; gap: 10px 12px; align-items: flex-end; }
+.email-box .email-box-heading, .email-box h4, .email-box #mce-responses { flex: 1 0 100%; }
+.email-box .mc-field-group { flex: 1 1 220px; }
+.email-box #mce-responses { order: 3; }
+.email-box .optionalParent { flex: 0 0 auto; }
+.email-box label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; }
+.email-box input[type="email"] {
+  width: 100%; box-sizing: border-box; font: inherit; font-size: 0.95rem;
+  padding: 8px 10px; border: 1px solid var(--border); border-radius: 5px; background: #fff;
+}
+.email-box input[type="email"]:focus { outline: 2px solid var(--accent-light); border-color: var(--accent); }
+.email-box .clear.foot { display: flex; align-items: center; gap: 12px; }
+.email-box .button {
+  font: inherit; font-size: 0.92rem; font-weight: 600; color: #fff; background: var(--accent);
+  border: 0; border-radius: 5px; padding: 9px 16px; cursor: pointer;
+}
+.email-box .button:hover { opacity: 0.9; }
+.email-box .brandingLogo { margin: 0; line-height: 0; }
+.email-box .brandingLogo img { height: 18px; width: auto; opacity: 0.6; }
+.email-box .response { font-size: 0.85rem; margin-top: 4px; }

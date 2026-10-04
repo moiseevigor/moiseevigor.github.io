@@ -2,13 +2,14 @@
 layout: page
 title: About
 permalink: /about/
+hide_title: true
 group: navigation
 ---
 
 <style>
-.about-hero { display: grid; grid-template-columns: 168px 1fr; gap: 28px; align-items: center; margin: 4px 0 36px; }
+.about-hero { display: grid; grid-template-columns: 168px 1fr; gap: 28px; align-items: center; margin: 0 0 36px; }
 .about-hero img { width: 168px; height: 168px; border-radius: 50%; object-fit: cover; display: block; }
-.about-hero h2 { border: 0; padding: 0; margin: 0 0 6px; font-size: 1.5rem; }
+.about-hero h1 { border: 0; padding: 0; margin: 0 0 6px; font-size: 1.7rem; line-height: 1.2; }
 .about-role { font-family: var(--sans); color: var(--text-light); margin: 0 0 12px; line-height: 1.5; }
 .about-hero .about-links { font-family: var(--sans); font-size: 0.9rem; display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0; padding: 0; list-style: none; }
 .about-links li { margin: 0; }
@@ -30,7 +31,7 @@ group: navigation
 <div class="about-hero">
   <img src="/public/images/igor-220.jpg" alt="Portrait of Igor Moiseev" width="168" height="168">
   <div>
-    <h2>Igor Moiseev</h2>
+    <h1>Igor Moiseev</h1>
     <p class="about-role">Applied mathematician and AI practitioner.<br>
     Director of Engineering at <a href="https://standard.ai">Standard&nbsp;AI</a>.</p>
     <ul class="about-links">
@@ -103,4 +104,5 @@ newsletter below.</p>
 
 </div>
 
+{% assign email_subscription_message_heading = "Get new posts by email" %}
 {% include email_box.html %}
