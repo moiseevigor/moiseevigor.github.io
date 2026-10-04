@@ -84,9 +84,10 @@ drive?* — the rank of the distribution against the ambient dimension. That is 
 question than resolving the full growth vector, which needs the fragile high-weight
 coordinates. So it survives noise that destroys the fine estimate. In the code (metric M4,
 `src/growth.py`), the bit is read from the count of weight-1 coordinates, and the experiments
-show the gap starkly: at a noise level where the *full growth vector* for Cartan is recovered
-0% of the time, the *abnormal bit* is still correct 100% of the time
-([E2](/mathematics/2026/07/22/caustics-to-groups-inverse-map/)).
+show the gap starkly: at endpoint noise $\sigma = 3\times10^{-2}$ the *full growth vector*
+for Cartan is recovered in 0 of 20 trials, while the *abnormal bit* is correct in 20 of 20
+([E2](/mathematics/2026/07/22/caustics-to-groups-inverse-map/); `m4_vs_m1` in
+`research/caustics-to-groups/artifacts/e2_results.json`).
 
 The fingerprint's legs therefore have **complementary noise profiles**: when the growth vector
 collapses a high-step group to "unknown", the abnormal bit still assigns it to the correct

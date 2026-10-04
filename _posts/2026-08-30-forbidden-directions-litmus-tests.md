@@ -74,12 +74,13 @@ here is asymptotic hand-waving; every link is checked at referee grade:
 - **Per launch angle**, the refocusing time equals the $\theta$-period
   $2\pi\big[(1-\varepsilon\sin\theta_0)^2-\varepsilon^2\big]^{-1/2}$ — an
   identification verified against the Jacobian-zero conjugate times of the geodesic
-  integrator to $10^{-8}$ relative, every angle, up to $\varepsilon = 0.45$; formally
+  integrator to $\lesssim 10^{-7}$ relative, every angle, up to $\varepsilon = 0.45$; formally
   open (and it *fails* off the exponential profile), so every "refocusing" reading of
   the period formulas below is conditional on it.
 - **The launch-angle average** equals $\tfrac2\pi K(2\varepsilon)$ — verified
   symbolically term-by-term through $O(\varepsilon^{12})$ (computer algebra) and
-  numerically to $10^{-10}$ absolute through the full measurement pipeline.
+  numerically to $4\times10^{-9}$ or better over $\varepsilon\in[0.05, 0.45]$
+  ($\le 10^{-10}$ for $\varepsilon \le 0.25$) through the full measurement pipeline.
 
 </div><!-- /.l-body -->
 
@@ -124,7 +125,7 @@ horizon we integrated — a finite-horizon measurement; and that the launch-aver
 caustic opens with them is exactly as strong as the period identification.** A
 critical gradient, delivered by a textbook special function. (The two steps a referee
 should still demand, stated plainly: a formal proof that the conjugate time equals the
-period for this integrable family — our evidence is $10^{-8}$ numerics — and one final
+period for this integrable family — our evidence is $\lesssim 10^{-7}$ numerics — and one final
 literature pass on gyro-period integrals in exponential field profiles.)
 
 ## The claim that lost: the crossover, demoted by its own race
@@ -184,7 +185,7 @@ the census on every frame.
 <figure class="l-middle" id="fig-emergence">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-emergence.png"
-      alt="Eight magnetogram frames, A to H in two rows of four, of the emerging active region AR11158 across two and a half days; axes x and y in pixels (linear, 0 to 100), colour line-of-sight field in gauss on one shared linear red-blue scale of plus or minus 850; the region grows from a simple bipole into a multipolar flaring complex, with detected coronal nulls starred: none at first, a pair by ten hours after the X-class flare"
+      alt="Eight magnetogram frames, A to H in two rows of four, of the emerging active region AR11158 across two and a half days; axes x and y in extrapolation-grid pixels (linear, 0 to 100; one pixel is about 2.3 megametres), colour line-of-sight field in gauss on one shared linear red-blue scale of plus or minus 850; the region grows from a simple bipole into a multipolar flaring complex, with detected coronal nulls starred: none at first, a pair by ten hours after the X-class flare"
       style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
@@ -192,7 +193,10 @@ the census on every frame.
     2011-02-13 → 02-15 through the X2.2 flare; frames A–H at 02-13 00:00, 06:00, 12:00,
     18:00, 02-14 00:00, 12:00, 02-15 00:00, 12:00 UT; red/blue = line-of-sight field
     out of/into the photosphere, one shared linear scale saturating at ±850 G; axes in
-    extrapolation-grid pixels; ★ =
+    extrapolation-grid pixels, linear — $1\ \text{px} \approx 3.23'' \approx 2.3$ Mm in
+    the plane of the sky ($0.504''$ HMI pixels resampled $\times 4 \times 1.6$; FITS
+    headers, <code>artifacts/hmi_scale.json</code>), so each frame is $\approx 230$ Mm
+    across; ★ =
     detected coronal nulls of the potential extrapolation). The census reads
     0,0,0,(1),0,1,0,<strong>2</strong>: a young bipole is a simple arcade with no coronal
     nulls at all, and nulls appear as the region builds the multipolar structure that
@@ -224,7 +228,7 @@ fixed by recentring, discarded.)
 | Claim | Status after the litmus tests |
 |---|---|
 | $Q = d+k+2$, tested $k = 0,1,2$ in 3D; **$Q=7$ at the symmetric fold, $Q=6$ at a generic rank-2 fold** | stands as corrected by Part 6's certified collision — intrinsic geometry, no estimation rival |
-| $\delta = 1 - \tfrac2\pi K(2\varepsilon)$ (period average); **critical gradient $\varepsilon = 1/2$** | proven as a period-average identity; its caustic reading verified at $10^{-8}$–$10^{-10}$, formal step still open |
+| $\delta = 1 - \tfrac2\pi K(2\varepsilon)$ (period average); **critical gradient $\varepsilon = 1/2$** | proven as a period-average identity; the closed form verified to $4\times10^{-9}$ or better; its caustic reading (Conjecture A) agrees to $\lesssim 10^{-7}$, formal step still open |
 | Force-free ⇒ radial-only; magnetotail ⇒ 79 spirals | theorem stands; the census half is **retracted** — Part 6's boundary audit puts every T96 census null it tested outside the model's own magnetopause and finds none inside, so no valid interior spiral example survives |
 | Crossover as pair-metrology tool | **demoted** by pre-registered race; survives as concept |
 | Type classification, pair metrology | belong to statistical fits — measured twice |

@@ -26,7 +26,7 @@ every 3rd step); keep the along-filament component intact.
 | Better global transport than Zel'dovich | 4.52 vs 4.98 vox (−9%), 3 held-out seeds × 50k particles |
 | Better than classical isotropic adhesion proxy | isotropic sticking scores 5.34 (E5); this model 4.52 |
 | Matches MUSCLE on transport; complementary field strengths | MUSCLE 4.49 ± 0.12 vs 4.52 ± 0.18 (tie); MUSCLE wins small-scale r(k), this model wins mid-scale T(k); 2LPT degrades to 8.07 (E9) |
-| Near the frame-information optimum | oracle-frame bound 4.47; model reaches 4.52 (89% of the recoverable gap closed) |
+| Near the frame-information optimum | oracle-frame bound 4.45 on the same held-out seeds 4–6 (4.47 over five seeds); model reaches 4.52 — 86% of the recoverable gap closed, (4.976 − 4.521)/(4.976 − 4.448); the earlier 89% mixed the five-seed oracle mean with the three-seed model score |
 | Largest gains where structure forms | at the web (0–2 vox from spines): −14% vs ZA already at the E5c stage; oracle shows −20% available |
 | Preserves along-filament flow | by construction (e₃ component undamped); isotropic sticking destroys it |
 
@@ -44,14 +44,18 @@ every 3rd step); keep the along-filament component intact.
 
 | segment | n/seed | ZA err | this model (E5c stage / E5d winner overall) | oracle bound |
 |---|---|---|---|---|
-| 0–2 | ~21k | 6.95 | 5.96 | 5.53 |
-| 2–4 | ~7k | 5.43 | 5.37 | 5.20 |
-| 4–8 | ~7k | 3.74 | 3.67 | 3.68 |
-| 8–64 | ~15k | 3.38 | 3.28 | 3.33 |
-| **all** | 50k | **4.98** | **4.52** (E5d) | **4.47** |
+| 0–2 | ~21k | 6.93 | 5.96 | 5.51 |
+| 2–4 | ~7k | 5.42 | 5.37 | 5.17 |
+| 4–8 | ~7k | 3.70 | 3.67 | 3.65 |
+| 8–64 | ~15k | 3.35 | 3.28 | 3.29 |
+| **all** | 50k | **4.98** | **4.52** (E5d) | **4.45** |
 
-(Per-bin numbers from the E5c winner β=0.75/smooth-4; the E5d winner
-β=0.6/smooth-2 improves the overall figure; jackknife errors ±0.1–0.3.)
+(All three columns are means over the same held-out seeds 4–6, from
+`artifacts/e5_perbin_seeds4-6.json` (`scripts/make_perbin_matched.py`).
+Per-bin model numbers are the E5c winner β=0.75/smooth-4; the E5d winner
+β=0.6/smooth-2 improves the overall figure, and scores 5.78 at 0–2 (E6);
+seed-to-seed standard errors ±0.1–0.3. Over five seeds (2–6) the ZA and
+oracle columns read 6.95/5.43/3.74/3.38/5.00 and 5.53/5.20/3.68/3.33/4.47.)
 
 ## Failure modes
 

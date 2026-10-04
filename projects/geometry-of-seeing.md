@@ -66,7 +66,7 @@ beyond SE(2).
     </tr>
     <tr>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">4</td>
-      <td style="padding:8px 12px;"><a href="/mathematics/2026/05/15/geometry-of-seeing-cut-time-open-problem/">The Open Problem: Exact Cut Time on SE(2)</a></td>
+      <td style="padding:8px 12px;"><a href="/mathematics/2026/05/15/geometry-of-seeing-cut-time-open-problem/">The Exact Cut Time on SE(2) — and the Open Problem Beyond It</a></td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">cut locus, conjugate time, conjecture</td>
       <td style="padding:8px 12px; text-align:center;"><span style="background:#e8f5e9;color:#2e7d32;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">PUBLISHED</span></td>
     </tr>

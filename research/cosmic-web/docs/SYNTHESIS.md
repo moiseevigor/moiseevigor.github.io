@@ -24,7 +24,8 @@ hypotheses, in the order they were tested and what each result forced next:
 
 - **Exact-truth toys (E0 corrected, 50 seeds × 2 curvature variants):
   refuted.** The Hessian wins completeness at every level from n_gal=2500 up
-  (−0.045 to −0.066, 50/50 seeds, p ≈ 10⁻¹⁵) and junction F1 with it; at
+  (−0.045 to −0.066; Hessian ahead on 47/50 seeds at 2.5k straight, 50/50
+  elsewhere; p ≤ 10⁻⁹) and junction F1 at most levels; at
   ultra-sparse n_gal=1200 the methods are statistically tied (Δ ≈ +0.004,
   p ≈ 0.4). The pre-correction "sparse-regime crossover" does not survive
   honest length matching.
@@ -226,9 +227,12 @@ anisotropic-adhesion term that improves the classical proxy.
 
 The declared optimization campaign froze the model: ZA rays + 60%
 transverse damping in self-density tidal frames (2 h⁻¹Mpc smoothing) at
-first crossing (ρ_c = 5). Held-out: 4.52 vs ZA 4.98 (−9%), 0.05 vox from
-the oracle frame-information bound (4.47) — 89% of the recoverable gap
-closed. Structural findings: partial damping is required for self-density
+first crossing (ρ_c = 5). Held-out (seeds 4–6): 4.52 vs ZA 4.98 (−9%),
+0.07 vox from the oracle frame-information bound on the same seeds (4.45;
+the quoted 4.47 is the five-seed mean, seeds 2–6) — 86% of the recoverable
+gap closed, (4.976 − 4.521)/(4.976 − 4.448). The earlier "89%" mixed the
+seeds-4–6 model score with the five-seed oracle mean
+(artifacts/e5_perbin_seeds4-6.json). Structural findings: partial damping is required for self-density
 frames to pay (full damping self-amplifies crossings); pancake-ordered
 sequential damping underperforms at this resolution. Full specification,
 capabilities, limitations and failure modes: docs/MODEL-CARD.md. The

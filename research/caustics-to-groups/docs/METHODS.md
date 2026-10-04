@@ -30,10 +30,14 @@ there; this is the golden fact `scripts/smoke_test.py` regression-locks.
 
 ## 2. The obstruction: ADE universality (why naive detection fails)
 
-By Arnol'd's classification, a *generic* Lagrangian caustic exhibits only the
-universal ADE germs — fold `A2`, cusp `A3`, swallowtail `A4`, umbilic `D4`. This
-list is the same for optics, the cosmic web, and the SR exponential of every
-candidate group. **A single local germ carries no information about the group.**
+By Arnol'd's classification, a *generic* Lagrangian map of dimension ≤ 5 exhibits only
+the universal ADE germs — fold `A2`, cusp `A3`, swallowtail `A4`, umbilic `D4`, … — a
+list independent of the Hamiltonian. That is the theorem. That the SR exponential map of
+each candidate group *is* generic at a typical conjugate point (away from the pole, the
+abnormal set, and symmetry-collapsed loci such as the Heisenberg axis) is this program's
+working hypothesis, supported for folds by E10 (`docs/E10-fold-germs.md`: SE(2), Engel,
+Cartan 24/24 folds; Heisenberg control 0/24). Under it, **a single local germ carries no
+information about the group.**
 The estimator must therefore never key on a local germ; it keys on the *triple*
 of structure-specific observables below (§3–§5), matched by the deviation
 statistic of §6.

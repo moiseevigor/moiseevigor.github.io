@@ -29,7 +29,7 @@ Gaussian field is run through the identical pipeline as a control.
 ```
 pipeline control (synthetic Gaussian):   alpha = 0.984   (Doroshkevich 1.0)   [pipeline OK]
 
-real CAMELS z=0 field (delta std = 29.8, highly non-linear):
+real CAMELS z=0 field (delta std = 29.8, max 3.1e4; highly non-linear):
   smoothing 0.29 Mpc/h :  alpha = 0.26     (suppressed — halo-dominated)
   smoothing 0.49 Mpc/h :  alpha = 0.67
   smoothing 0.78 Mpc/h :  alpha = 0.85
@@ -42,7 +42,7 @@ real CAMELS z=0 field (delta std = 29.8, highly non-linear):
 Jacobian argument predicts — and non-linear collapse washes it out at small scales.**
 
 At small, halo-dominated scales the field is violently non-Gaussian ($\delta$ up to
-$\sim10^4$ in collapsed objects); the tidal eigenvalues acquire heavy tails and the level
+$\sim3\times10^4$ in collapsed objects; `delta_std`, `delta_max` in the artifact); the tidal eigenvalues acquire heavy tails and the level
 repulsion in the gap histogram is suppressed ($\alpha\approx0.26$). As the field is
 smoothed toward the quasi-linear regime it becomes progressively more Gaussian and the
 repulsion recovers monotonically toward Doroshkevich's $\alpha=1$ ($\alpha\approx0.87$ at

@@ -45,9 +45,12 @@ the more so the larger the loop:
 
 | momentum $w$ | SE(2) refocus time ÷ flat law | reading |
 |---|---|---|
-| 8 (tight loops) | 0.996 | almost flat — the tangent-cone limit |
-| 2 | 0.945 | mild curvature showing |
+| 4 (tight loops) | 0.985 | almost flat — approaching the tangent-cone limit |
+| 1.41 | 0.901 | curvature showing |
 | 0.5 (wide loops) | 0.658 | strongly early — 34% short of flat |
+
+(Values: one minus the SE(2) entries of `deviation_curves` in `artifacts/e1_results.json`,
+computed on the momentum grid $w = 0.5,\ 0.84,\ 1.41,\ 2.38,\ 4$ at launch angle $0.3$ rad.)
 
 Average that shortfall over a range of momenta and you get a single number, the
 **nilpotent-deviation** $\delta$ — how far a group's caustic departs from the flat model.
@@ -84,9 +87,15 @@ what it guesses. That table is the confusion matrix.
     ("it's Engel-or-Cartan / Heisenberg-or-SE(2)") the classifier falls back to when noise
     blurs the fine detail. Clean data: an essentially perfect diagonal (one Cartan realization hedges to
     <em>E/C</em>), the Heisenberg/SE(2) tie broken by $\delta$. As noise rises the step-3 groups (Engel, Cartan)
-    slide into the <em>E/C</em> coarse column — the correct <em>class</em> — and essentially
-    never into a wrong group. The failure mode is honest hedging, not confident error. Data:
-    <code>research/caustics-to-groups/artifacts/e1_results.json</code>.
+    slide into the <em>E/C</em> coarse column — the correct <em>class</em> — and never into a
+    wrong exact group; the only wrong answers in the three matrices are 2 of 25 Engel
+    realizations at noise 0.03 that land in the wrong coarse class <em>H/S</em>. The failure
+    mode is honest hedging, not confident error. "Exact" accuracy counts the diagonal;
+    "class" accuracy also counts a coarse label that contains the true group; both are out
+    of 100 realizations (chance 0.25). Noise is the standard deviation of Gaussian jitter added to
+    geodesic endpoints, in group units; 400 geodesics per realization. Data:
+    <code>research/caustics-to-groups/artifacts/e1_results.json</code> (full run: 25 evaluation
+    seeds per group, threshold calibrated on 10 disjoint seeds).
   </figcaption>
 </figure>
 
@@ -102,11 +111,11 @@ what it guesses. That table is the confusion matrix.
   // real E1 counts (25 per row); columns = Heis,SE2,Eng,Car,Engel/Cartan,Heisenberg/SE(2)
   const M = {
     "0.001": [[25,0,0,0,0,0],[0,25,0,0,0,0],[0,0,25,0,0,0],[0,0,0,24,1,0]],
-    "0.01":  [[25,0,0,0,0,0],[0,25,0,0,0,0],[0,0,19,0,6,0],[0,0,0,18,7,0]],
-    "0.03":  [[23,0,0,0,0,2],[0,25,0,0,0,0],[0,0,3,0,19,3],[0,0,0,1,23,1]]
+    "0.01":  [[25,0,0,0,0,0],[0,25,0,0,0,0],[0,0,20,0,5,0],[0,0,0,18,7,0]],
+    "0.03":  [[25,0,0,0,0,0],[0,25,0,0,0,0],[0,0,4,0,19,2],[0,0,0,1,24,0]]
   };
-  const ACC = { "0.001": "exact 0.99 · class 1.00", "0.01": "exact 0.87 · class 1.00",
-                "0.03": "exact 0.52 · class 0.96" };
+  const ACC = { "0.001": "exact 0.99 · class 1.00", "0.01": "exact 0.88 · class 1.00",
+                "0.03": "exact 0.55 · class 0.98" };
   const W = 560, H = 300, mL = 92, mT = 44, cw = 58, ch = 46;
   const svg = document.createElementNS(ns, "svg");
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
@@ -171,10 +180,11 @@ the study. The moduli component does exactly the job the series was premised on.
 (Heisenberg, SE(2)) stay pinned to the diagonal, while Engel and Cartan slide sideways — but into
 the green *E/C* column, the correct *class*, not into a wrong group. That green column is the
 abnormal bit doing its work: it asks only "how many directions can you drive?", a question so
-coarse it survives noise that erases the fine growth-vector detail (at one particular noise level
-the full growth vector fails for Cartan 100% of the time, while the abnormal bit is still right
-100% of the time). So the classifier's exact-group accuracy falls with noise, but its *class-level*
-accuracy barely moves — from 1.00 to 0.96. **It hedges honestly; it does not guess wrong.** For a
+coarse it survives noise that erases the fine growth-vector detail (in experiment E2, at noise 0.03,
+the full growth vector fails for Cartan in 20 of 20 trials, while the abnormal bit is right
+in 20 of 20). So the classifier's exact-group accuracy falls with noise, but its *class-level*
+accuracy barely moves — from 1.00 to 0.98 (exact-group accuracy falls from 0.99 to 0.55 over the
+same range). **It hedges honestly; it almost never guesses wrong.** For a
 method meant to eventually face real data, falling back to "I can only narrow it to two" is exactly the
 right kind of failure.
 

@@ -181,6 +181,10 @@ Colours encode the orientation angle on a $[0, \pi)$ hue wheel.
     orientation, and end exactly tangent to the target state's stroke.
     The endpoint of each curve is highlighted with the family's colour, and the
     label gives the modulus and plane arc length $L$ in pixels.
+    <em>Axes:</em> the panel is the retinal plane, position $(x, y)$, drawn in a
+    $680 \times 460$ px frame at 78 px per model length unit ($x$ to the right; no tick
+    axes by design — the scale bar, bottom left, marks one unit); the preferred
+    orientation $\theta$ is read in degrees, mod $180°$, in the hover readout.
     The first three families display the pendulum regimes of the pinned problem:
     <strong>inflectional</strong> ($-1\!&lt;\!E\!&lt;\!1$) —
     $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^{2})$, generic S-shaped curve;
@@ -402,6 +406,10 @@ direction the two horizontal moves cannot reach on their own.
     $N = (-\sin\theta(s), \cos\theta(s)) = X_3\!\restriction_{\gamma(s)}$,
     the perpendicular direction that is <em>only</em> reachable through the
     Lie bracket $[X_1, X_2]$.
+    <em>Axes and units:</em> the same retinal plane as Figure&nbsp;2, at 78 px per
+    model length unit (scale bar, bottom left: one unit). The readouts give arc length
+    $s$ and total length $L$ in those length units, the curvature $\kappa$ per unit
+    length, and the angles $\theta$ in degrees.
     <br><br>
     <strong>Why the green field stroke is tangent at the endpoints but not
     in between.</strong> The green stroke at the moving point is
@@ -563,6 +571,10 @@ psychophysics or cortical dynamics is an empirical question.
     the non-periodic borderline elastica on bounded intervals. Beyond the
     separatrix the non-inflectional curves resemble deformed circles, but are
     not generically closed (Part&nbsp;2).
+    <em>Axes:</em> the panel is the plane $(x, y)$ — $x$ to the right, $y$ up, every
+    curve starting at the black dot — with dimensionless coordinates in units of the elastica length scale $\ell$ — the unit of arc length in which the inflectional curvature is $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$ and the pendulum equation is $\ddot\varphi + \sin\varphi = 0$.
+    There are no tick axes by design; the scale bar (bottom
+    left) gives the length scale and rescales with the slider.
   </figcaption>
 </figure>
 
@@ -642,7 +654,7 @@ The four parts of this series develop the full story:
 3. **Part&nbsp;3** (Maxwell Strata): characterising the locus where two geodesics of equal
    length meet; the reflection group $(\mathbb{Z}_2)^3$ of the pendulum; the mirror-pair
    tie computed exactly on the elastica family, and the SR cut value $2K(k^2)$.
-4. **Part&nbsp;4** (The Open Problem): Sachkov's cut-time theorem — what is proved for
+4. **Part&nbsp;4** (The Exact Cut Time on SE(2) — and the Open Problem Beyond It): Sachkov's cut-time theorem — what is proved for
    SE(2) — and the general Maxwell-equals-cut question that remains open beyond it.
 
 </div><!-- /.l-body -->
@@ -799,6 +811,9 @@ function drawV1() {
     if (el) el.textContent = '';
   });
 
+  // Scale bar: 1 model length unit = 78 px (PX_PER_UNIT in scripts/sr_geodesics_v1.py)
+  drawScaleBar(g, xMin + 14, H - 8, 78, 'unit = 78 px');
+
   // Pinwheel centre marker
   g.append('circle').attr('cx', cx).attr('cy', cy)
     .attr('r', 4).attr('fill', 'none').attr('stroke', '#666')
@@ -824,7 +839,9 @@ function drawV1() {
    * BVP, no chance of a curve floating off a stroke.
    *
    * The Maxwell pair is built by Sachkov's σ-symmetric construction
-   * ("Maxwell strata in Euler's elastic problem", J. Dyn. Control Syst. 2008, Fig. 34):
+   * ("Maxwell strata in the Euler elastic problem", J. Dyn. Control Syst. 14 (2008);
+   * cf. Fig. 20 — the figure-eight elastica at k₀ ≈ 0.909 — and Fig. 34 — a fixed
+   * point of the reflection ε³ with θ = π — in the preprint arXiv:0705.0614):
    * two closed figure-8 inflectional elastica κ(s) = 2k·ω·cn(ω·s | k²),
    * launched with headings θ_src and θ_src + π and integrated over
    * N · 4K(k²)/ω.  Curve B is the σ-mirror image of curve A traversed in
@@ -996,7 +1013,7 @@ function drawV1() {
       });
 
       // Maxwell pair: two closed figure-8 inflectional loops at the
-      // Bernoulli modulus k_c (Sachkov, J. Dyn. Control Syst. 2008, Fig. 34).  Both
+      // Bernoulli modulus k_c (Sachkov, J. Dyn. Control Syst. 2008; cf. Figs. 20, 34 of arXiv:0705.0614).  Both
       // start AND end at the source neuron, tangent to its preferred
       // orientation; one starts in the +heading direction, the other in
       // the -heading direction (same line orientation, mod π).  Identical
@@ -1046,7 +1063,7 @@ function drawV1() {
   }
 }
 
-// ── Figure 3: Geodesic family ─────────────────────────────────────────────
+// ── Figure 4: Geodesic family ─────────────────────────────────────────────
 /*
  * Continuous pinned-elastica family parametrised by a single k ∈ (0, K_HI].
  *   k ∈ (0, 1)        inflectional   κ(s) = 2k·cn(s|k²)
@@ -1212,6 +1229,9 @@ function drawGeodesicFamily() {
     plot.append('circle')
       .attr('cx', xOff).attr('cy', yOff).attr('r', 4.5).attr('fill', '#222');
 
+    // Scale bar (the plane is dimensionless, in units of the elastica length ℓ)
+    drawScaleBar(plot, PAD.l + 6, H - PAD.b - 2, scale);
+
     // Update the k_max indicator on the legend
     const my = legY + legH * (1 - kMax / K_HI);
     kMaxMarker.attr('points',
@@ -1278,6 +1298,7 @@ function drawFrenet() {
         .attr('stroke-linecap', 'round').attr('stroke-opacity', 0.55);
     }
   }
+  drawScaleBar(g, xMin + 14, H - 8, 78, 'unit = 78 px');   // PX_PER_UNIT, as in Figure 2
 
   const select = document.getElementById('frenet-curve-select');
   const slider = document.getElementById('frenet-s-slider');

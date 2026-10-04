@@ -61,11 +61,16 @@ def main():
     for name in NAMES:
         spec = liegroup.GROUPS[name]
         rng = np.random.default_rng(0)
-        vec, Q, w = growth.estimate_growth_vector(spec, RADII, 800, rng, 0.0)
+        # same computation as growth.estimate_growth_vector, unrolled so the reach
+        # curves (98th pct of |coord| per radius; rows = radii, cols = coords) are stored
+        reach = growth.coordinate_reach(spec, RADII, 800, rng, 0.0)
+        w = growth.estimate_weights(reach, RADII)
+        vec, Q = growth.growth_vector_from_weights(w)
         wr = "(" + ",".join(f"{x:.2f}" for x in w) + ")"
         ok = "OK" if vec == TRUTH[name] else "MISMATCH"
         print(f"{name:<12}{wr:<26}{str(vec):<10}{Q:<4}{str(TRUTH[name]):<10}{ok}")
-        results["clean"][name] = {"weights": w.tolist(), "vector": list(vec), "Q": Q}
+        results["clean"][name] = {"weights": w.tolist(), "vector": list(vec), "Q": Q,
+                                  "reach": reach.tolist()}
         assert vec == TRUTH[name], f"{name}: clean recovery {vec} != {TRUTH[name]}"
         assert Q == TRUTH_Q[name]
 

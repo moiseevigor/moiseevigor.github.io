@@ -81,9 +81,13 @@ The second is *global* failure, and it can strike much earlier. A geodesic can b
 perfect local minimum — taut, no shortcut in any thin tube around it — while, somewhere
 else in $\mathrm{SE}(2)$, an entirely different geodesic of exactly the same length
 reaches the same endpoint. At that endpoint neither curve is uniquely shortest; they
-**tie**. The moment of the first tie is the <span class="annotated-term" data-note="note-cut">cut time</span> $t_{\mathrm{cut}}$,
-and it is what we actually care about: beyond it, the "completed contour" the cortex would
-draw is no longer well-defined by minimality alone.
+**tie**. A tie caps the <span class="annotated-term" data-note="note-cut">cut time</span> $t_{\mathrm{cut}}$ —
+the geodesic cannot stay uniquely shortest past it, so in general
+$t_{\mathrm{cut}} \le t_{\mathrm{Maxwell}}$, the time of the first tie. That the cut
+happens *exactly* at the first tie is a theorem special to $\mathrm{SE}(2)$ (Sachkov
+2010; Part&nbsp;4), not a general fact. The cut time is what we actually care about:
+beyond it, the "completed contour" the cortex would draw is no longer well-defined by
+minimality alone.
 
 <div class="callout theorem">
 <div class="callout-title">The two clocks</div>
@@ -93,8 +97,8 @@ $$t_{\mathrm{cut}} \;\le\; t_{\mathrm{conj}}.$$
 
 <strong>Conjugate</strong> ($t_{\mathrm{conj}}$): loss of <em>local</em> minimality, a
 fold of the geodesic family. <strong>Cut</strong> ($t_{\mathrm{cut}}$): loss of
-<em>global</em> minimality, the first endpoint reachable equally fast by a different
-geodesic. This article is about the second clock — and the symmetric mechanism that sets
+<em>global</em> minimality — no later than the first endpoint reachable equally fast by a
+different geodesic. This article is about the second clock — and the symmetric mechanism that sets
 it.
 </div>
 
@@ -122,8 +126,8 @@ time $t$, the two happen to arrive at the **same** endpoint,
 $$\gamma(t) \;=\; \varepsilon(\gamma)(t), \qquad \gamma \neq \varepsilon(\gamma),$$
 
 then that endpoint is a <span class="annotated-term" data-note="note-maxwell">Maxwell point</span> by construction — two distinct equal-length
-geodesics tie there. No luck required; the symmetry forces it. So the whole problem of
-locating the cut time reduces to a much more tractable one: **find the symmetries, then
+geodesics tie there. No luck required; the symmetry forces it. So the problem of
+<em>bounding</em> the cut time from above reduces to a much more tractable one: **find the symmetries, then
 find where a geodesic first meets its own symmetric image.**
 
 ## The four symmetries of the pendulum
@@ -150,10 +154,21 @@ they generate a third.
 The <strong>Klein four-group</strong> $\mathbb{Z}_2 \times \mathbb{Z}_2 = \{e,
 \varepsilon^1, \varepsilon^2, \varepsilon^3\}$ is the smallest non-cyclic group: every
 non-identity element is its own inverse, and any two distinct ones compose to the third —
-the symmetries of a non-square rectangle. In the source paper the full reflection group is
-larger, $\{\mathrm{Id}, \varepsilon^1, \dots, \varepsilon^7\} \cong (\mathbb{Z}_2)^3$
-(a third generator shifts the pendulum phase by $2\pi$); the four elements here are the
-core that acts on a single libration orbit.
+the symmetries of a non-square rectangle. In the source paper (Moiseev–Sachkov 2010,
+§5.1) the reflections act on the pendulum's phase cylinder, with coordinates
+$(\gamma, c)$ — pendulum angle $\gamma \in \mathbb{R}/4\pi\mathbb{Z}$ and rate
+$c = \dot\gamma$: $\varepsilon^1 : (\gamma, c) \mapsto (\gamma, -c)$,
+$\varepsilon^2 : (\gamma, c) \mapsto (-\gamma, c)$,
+$\varepsilon^3 : (\gamma, c) \mapsto (-\gamma, -c)$, and a further generator
+$\varepsilon^4 : (\gamma, c) \mapsto (\gamma + 2\pi, c)$, with
+$\varepsilon^{i+4} = \varepsilon^4 \circ \varepsilon^i$. Together they form
+$\{\mathrm{Id}, \varepsilon^1, \dots, \varepsilon^7\} \cong (\mathbb{Z}_2)^3$, "the
+group of symmetries of a parallelepiped". The four elements here are the core that
+acts on a single libration orbit. <em>Numbering:</em> the paper's $\varepsilon^1$ and
+$\varepsilon^2$ both reverse time and its $\varepsilon^3$ preserves it; this article
+generates the same Klein group from time reversal and the pure mirror instead, so our
+$\varepsilon^2$ (the half-turn) is the paper's $\varepsilon^3$, and our composite
+$\varepsilon^3$ is the paper's $\varepsilon^2$.
 </aside>
 
 Together with the identity, these close up into a group under composition: each element
@@ -206,7 +221,8 @@ the first one exactly.
   <figcaption>
     <strong>Figure&nbsp;1. The reflection core acting on the pendulum.</strong>
     Phase plane of $\ddot\varphi + \sin\varphi = 0$: horizontal axis is the pendulum angle
-    $\varphi$ (radians), vertical axis its rate $\dot\varphi$. The bold blue closed loop is
+    $\varphi$ (radians, ticks at $0, \pm\pi$), vertical axis its rate $\dot\varphi$
+    (radians per unit arc length, ticks at $\pm1$; arc length in units of the elastica length scale $\ell$ (the unit of arc length in which the inflectional curvature is $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$ and the pendulum equation is $\ddot\varphi + \sin\varphi = 0$)). The bold blue closed loop is
     one libration orbit (one inflectional geodesic, energy $E = 2k^2 - 1$); faint loops are
     neighbouring orbits. Choose a group element to see its geometry (orange): $\varepsilon^1$
     reflects the phase plane across the horizontal axis $\dot\varphi = 0$, pinning the two
@@ -308,14 +324,19 @@ heart of the Maxwell-strata theorem of Moiseev–Sachkov (2010).
   </div>
   <figcaption>
     <strong>Figure&nbsp;2. The σ-symmetric pair forks and re-meets.</strong>
-    The blue pinned elastica ($\kappa = +2k\,\mathrm{cn}$) and its mirror image (red, dashed,
-    $\kappa = -2k\,\mathrm{cn}$) leave the origin (black dot) together. Drag $s$ to extend
-    them. The vertical guide on the height plot (right) shows $y_A(s) = 2k(1-\mathrm{cn})$,
-    the gap to the mirror axis; its first return to zero — marked, at $s = 4K(k^2)$ — is the
+    <strong>(a)</strong> The plane: the blue pinned elastica
+    ($\kappa = +2k\,\mathrm{cn}$) and its mirror image (red, dashed,
+    $\kappa = -2k\,\mathrm{cn}$) leave the origin (black dot) together; the faint
+    lines are the mirror axis $y = 0$ and the axis $x = 0$. Drag $s$ to extend them.
+    <strong>(b)</strong> The height of the blue curve above the mirror axis,
+    $y_A(s) = 2k(1-\mathrm{cn}(s\mid k^2))$, against arc length $s$; the blue dotted
+    guide is the current $s$. Its first return to zero — marked, at $s = 4K(k^2)$ — is the
     pair's <strong>elastica Maxwell coincidence</strong>, where the two equal-length extremals arrive at
     the same $\mathrm{SE}(2)$ point (orange). The slider's arc-length readout turns orange
-    once you pass it. Horizontal axis of the left panel: plane $x$; right panel: arc length
-    $s$ against height $y_A$ (elastica arc-length units).
+    once you pass it. <em>Axes and units:</em> all lengths are dimensionless, in units of
+    the elastica length scale $\ell$ (the unit of arc length in which the inflectional curvature is $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$ and the pendulum equation is $\ddot\varphi + \sin\varphi = 0$). Panel (a): plane coordinates $x$ (right) and $y$ (up), no tick axes — the
+    scale bar gives the length scale. Panel (b): horizontal axis arc length $s$, vertical
+    axis height $y_A$, both in units of $\ell$, linear scales.
   </figcaption>
 </figure>
 
@@ -354,8 +375,8 @@ all. Proving that, and confronting what remains genuinely open beyond $\mathrm{S
 
 - A geodesic loses optimality two ways: **locally** at its conjugate point, **globally** at
   its cut point, with $t_{\mathrm{cut}} \le t_{\mathrm{conj}}$.
-- Global optimality dies at a **Maxwell point** — where two distinct equal-length geodesics
-  tie — and ties are *forced* by symmetry, not luck.
+- Global optimality dies no later than a **Maxwell point** — where two distinct
+  equal-length geodesics tie — and ties are *forced* by symmetry, not luck.
 - The pendulum carries the reflection group $(\mathbb{Z}_2)^3$ of Moiseev–Sachkov; the
   working core on one orbit is a **Klein four-group** (time reversal, mirror, composite).
 - The mirror's $\sigma$-symmetric pair, computed on the smooth elastica family, first
@@ -434,10 +455,12 @@ function drawSym() {
       .attr('style', 'font-family:var(--mono,monospace);font-size:10px;fill:#aaa')
       .text(n === 0 ? '0' : n === 1 ? 'π' : '-π');
   });
-  g.append('text').attr('x', pad.l + iW - 4).attr('y', ySc(0) + 14).attr('text-anchor', 'end')
-    .attr('style', 'font-family:var(--sans,sans-serif);font-size:11px;fill:#888').text('φ');
+  g.append('text').attr('x', pad.l + iW - 4).attr('y', ySc(0) - 6).attr('text-anchor', 'end')
+    .attr('style', 'font-family:var(--sans,sans-serif);font-size:11px;fill:#888').text('φ (rad)');
   g.append('text').attr('x', xSc(0) + 6).attr('y', pad.t + 12)
-    .attr('style', 'font-family:var(--sans,sans-serif);font-size:11px;fill:#888').text('φ̇');
+    .attr('style', 'font-family:var(--sans,sans-serif);font-size:11px;fill:#888').text('φ̇ (rad per unit arc length)');
+  [-1, 1].forEach(v => g.append('text').attr('x', xSc(0) - 5).attr('y', ySc(v) + 4).attr('text-anchor', 'end')
+    .attr('style', 'font-family:var(--mono,monospace);font-size:10px;fill:#aaa').text(v));
 
   // faint background libration orbits
   [0.35, 0.6, 0.82].forEach(k => {
@@ -593,8 +616,11 @@ function drawFork() {
     g.append('circle').attr('cx', xL(eA.x)).attr('cy', yL(eA.y)).attr('r', 4.5).attr('fill', '#1565c0');
     g.append('circle').attr('cx', xL(eB.x)).attr('cy', yL(eB.y)).attr('r', 4.5).attr('fill', '#b71c1c');
   }
-  g.append('text').attr('x', m.l).attr('y', m.t + 10)
-    .attr('style', 'font-family:var(--sans,sans-serif);font-size:11px;fill:#888').text('plane curves');
+  g.append('text').attr('x', 8).attr('y', 12).attr('style', 'font-family:var(--sans,sans-serif);font-size:12px;font-weight:700;fill:#444').text('a');
+  g.append('line').attr('x1', xL(0)).attr('x2', xL(0)).attr('y1', m.t).attr('y2', H - m.b)
+    .attr('stroke', '#eee').attr('stroke-width', 1);      // axis x = 0
+  labelPlaneAxes(g, split - m.r, yL(0), xL(0), m.t + 14);
+  drawScaleBar(g, m.l + 2, H - 8, plotW / (2 * xR));
 
   // right panel: height y_A(s) = 2k(1 − cn) and its first return to zero
   const yMax = 2 * k * 2 * 1.05;   // 2k(1 − cn) ∈ [0, 4k]
@@ -605,6 +631,10 @@ function drawFork() {
     .attr('stroke', '#e0e0e0').attr('stroke-width', 1);
   g.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(xR2).ticks(6))
     .call(s2 => s2.selectAll('text').attr('font-family', 'var(--sans,sans-serif)').attr('font-size', 10));
+  g.append('g').attr('transform', `translate(${split + m.l},0)`).call(d3.axisLeft(yR2).ticks(4))
+    .call(s2 => s2.selectAll('text').attr('font-family', 'var(--sans,sans-serif)').attr('font-size', 10));
+  g.append('text').attr('x', W - m.r).attr('y', H - 3).attr('text-anchor', 'end')
+    .attr('style', 'font-family:var(--sans,sans-serif);font-size:11px;fill:#666').text('arc length s (units of ℓ)');
 
   const hCurve = A.map(p => ({ s: p.s, h: 2 * k * (1 - ellipj(p.s, k * k).cn) }));
   g.append('path').attr('d', d3.line().x(p => xR2(p.s)).y(p => yR2(p.h))(hCurve))
@@ -612,7 +642,7 @@ function drawFork() {
 
   // first-Maxwell marker at s = 4K — label sits at the bottom, flipping to the
   // left of its guide near the right edge, so it never collides with the
-  // panel title in the top band.
+  // axis label in the top band.
   g.append('line').attr('x1', xR2(sMax1)).attr('x2', xR2(sMax1)).attr('y1', m.t + 22).attr('y2', H - m.b)
     .attr('stroke', '#e65100').attr('stroke-width', 1.5).attr('stroke-dasharray', '4,3');
   g.append('circle').attr('cx', xR2(sMax1)).attr('cy', yR2(0)).attr('r', 4).attr('fill', '#e65100');
@@ -627,9 +657,9 @@ function drawFork() {
   // current-s guide
   g.append('line').attr('x1', xR2(s)).attr('x2', xR2(s)).attr('y1', m.t + 22).attr('y2', H - m.b)
     .attr('stroke', '#1565c0').attr('stroke-width', 1).attr('stroke-dasharray', '2,3').attr('opacity', 0.7);
-  g.append('text').attr('x', split + m.l).attr('y', m.t + 6)
-    .attr('style', 'font-family:var(--sans,sans-serif);font-size:11px;fill:#444')
-    .text('height to mirror axis:  y_A(s) = 2k(1 − cn)');
+  g.append('text').attr('x', split + 6).attr('y', 12).attr('style', 'font-family:var(--sans,sans-serif);font-size:12px;font-weight:700;fill:#444').text('b');
+  g.append('text').attr('x', split + m.l + 6).attr('y', m.t + 6)
+    .attr('style', 'font-family:var(--sans,sans-serif);font-size:11px;fill:#666').text('y_A (units of ℓ)');
 }
 
 // ── boot ──────────────────────────────────────────────────────────────────

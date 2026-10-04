@@ -2,6 +2,9 @@
 
 Phase C of [`PLAN-astrophysics-local-groups.md`](PLAN-astrophysics-local-groups.md).
 Reproduce: `.venv/bin/python scripts/run_e8.py` → `artifacts/e8_results.json`.
+Numbers below are from that artifact, full run (no `--quick`): 3000 paths per reach fit,
+30 base points for the modulated field. `--quick` is a smoke run (1200 paths, 12 base
+points) and overwrites the artifact.
 
 **Verdict: yes — magnetized systems, on the extended (position, flux) space. And there
 the growth vector is a magnetic-null detector.**

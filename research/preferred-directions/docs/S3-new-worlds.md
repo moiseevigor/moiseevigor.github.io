@@ -64,10 +64,11 @@ the ABC-like dynamo field, and the solar corona) in which the detector is ground
 
 ## Correction (2026-07-12, from the S4 boundary audit)
 
-Testing every census null against T96's own magnetopause (`t96_mgnp`):
-the entire null population sits in a shell < 1 R_E OUTSIDE the model
-boundary, and inside its valid domain the model is null-free at every IMF
-Bz probed ([-9, +3] nT). The shell nulls barely respond to Dst
+Testing the 70 core-box census nulls against T96's own magnetopause
+(`t96_mgnp`): all 70 sit OUTSIDE the model boundary (0.68–26.8 R_E from
+it, median 1.5, 33 within 1 R_E; `s4_collider.json` →
+`t96_boundary_audit`), and inside its valid domain the model is null-free
+at every IMF Bz probed ([-9, +3] nT). These nulls barely respond to Dst
 (|dB| <= 0.03 nT per 30 nT) because the ring/tail currents are interior.
 The census stands as anatomy of null structure in a realistically shaped
 non-force-free field — NOT as standing nulls of the valid model interior.

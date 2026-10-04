@@ -18,6 +18,7 @@ Results -> artifacts/e1_results.json
 """
 import json
 import sys
+import zlib  # stable per-group seed offset (builtin hash() is salted per process)
 from pathlib import Path
 
 import numpy as np
@@ -57,7 +58,7 @@ def confusion(noise, tau, dev_curves, n_eval):
     for g in GROUPS:
         spec = liegroup.GROUPS[g]
         for i in range(n_eval):
-            rng = np.random.default_rng(10_000 + hash(g) % 1000 + i)
+            rng = np.random.default_rng(10_000 + zlib.crc32(g.encode()) % 1000 + i)
             pred = fp.classify(spec, rng, n_geo=N_GEO, noise=noise,
                                t_noise=T_NOISE, tau=tau, dev_curves=dev_curves)
             mat[g][pred] += 1
@@ -94,7 +95,9 @@ def main():
     tau, mh, ms = calibrate_tau(dev_curves, T_NOISE, N_CAL)
     print(f"\ncalibrated tau = {tau:.3f}  (Heisenberg delta ~ {mh:.3f}, SE(2) ~ {ms:.3f})")
 
-    results = {"n_eval": N_EVAL, "tau": tau, "t_noise": T_NOISE, "n_geo": N_GEO,
+    results = {"n_eval": N_EVAL, "n_cal": N_CAL, "tau": tau,
+               "tau_calibration": {"heisenberg_delta_mean": mh, "se2_delta_mean": ms},
+               "noise_levels": NOISE_LEVELS, "t_noise": T_NOISE, "n_geo": N_GEO,
                "deviation_curves": {k: v.tolist() for k, v in dev_curves.items()},
                "confusion": {}, "accuracy": {}}
     for noise in NOISE_LEVELS:

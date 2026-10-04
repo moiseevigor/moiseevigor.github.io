@@ -50,27 +50,27 @@ legends moved off the data, an eight-panel strip re-laid as 2×4, and a real
 plotting bug fixed (a stray chord across the Jupiter spine). Captions and alt text
 now carry everything removed from the images.
 
-## Open items for the author (not changed — unverifiable or author's call)
+## The ten open items — resolved
 
-1. **Caustics artifacts on disk are reduced runs** (`e1`: n_eval = 10; `e0`: 6
-   trials) while posts quote the full runs (25 seeds, K = 30). Re-run or re-point.
-2. Caustics: "it is a theorem" that local caustics are group-blind — ADE
-   universality covers generic Lagrangian maps; no Engel/Cartan computation shown.
-3. Cosmic Web Part 1 "Deviations" list omits the dataset swaps (Quijote/TNG →
-   in-house PM + CAMELS; SDSS DR17 → BOSS DR12 CMASS).
-4. Cosmic Web read-only docs (SYNTHESIS, MODEL-CARD, PAPER-DRAFT) still say 89%.
-5. Cosmic Web Part 2 per-bin figure mixes seed sets (5-seed ZA/oracle vs seeds 4–6).
-6. Grochowski reference (Part 3): probably Bull. Polish Acad. Sci. Math. 50 (2002).
-7. Forbidden Directions: no physical scale (Mm/px) for null heights; J∥ has no
-   units; "peak 4777 G" and the T96 audit counts are in no artifact;
-   `j2_census.json` (33/40) and `j2b_sensitivity.json` (32/40) disagree slightly.
-8. Forbidden Directions Part 4 title calls the analytic ABC-like field "a real
-   dynamo field".
-9. Geometry of Seeing Part 4 title "The Open Problem: Exact Cut Time on SE(2)"
-   contradicts its body (SE(2) is solved; the open problem is beyond it).
-10. Geometry of Seeing: "Sachkov 2011, eqs. 24–28" and the reflection-group
-    generators not checked against the journal versions; schematic plane panels
-    have no axis labels.
+| # | Item | Resolution |
+|---|---|---|
+| 1 | Caustics artifacts on disk were reduced runs | All experiments re-run at full settings (≈10 min). E0, E2, E4, E6, E8 reproduce the docs exactly. E1 was **not reproducible**: `run_e1.py` seeded with Python's per-process salted `hash()`; now `zlib.crc32`. Text follows the regenerated artifacts: exact accuracy at noise 0.03 is 0.55 (was 0.52), class accuracy 0.98 (was 0.96), clean accuracy 0.99 ("near-perfect", was "perfect"). No verdict changed. Reach curves are now stored and plotted from the artifact. |
+| 2 | "It is a theorem" that local caustics are group-blind | Split into the theorem (generic Lagrangian maps, n ≤ 5, away from the pole and abnormals) and the program's working hypothesis. New experiment E10 (`run_e10.py`): fold germs (corank 1, kernel transverse) at the first conjugate point in 24/24 geodesics for SE(2), Engel, Cartan; Heisenberg control 0/24. Cusps and SE(3) remain unchecked and are stated as such. |
+| 3 | Cosmic Web Part 1 deviations list incomplete | Added the simulation swap (Quijote/TNG → in-house Zel'dovich and PM boxes; CAMELS only validates the PM code) and the survey swap (SDSS DR17 → BOSS DR12 CMASS-North), each with its effect on the hypotheses. Added the missing T1 verdict (refuted). |
+| 4 | Research docs still said 89% | SYNTHESIS, MODEL-CARD, PAPER-DRAFT, `main.tex` now say 86% on matched seeds 4–6, with the origin of the old figure; ACT significance 1.7σ (unrounded 1.67); seed-win counts corrected. |
+| 5 | Per-bin figure mixed seed sets | All three series recomputed on seeds 4–6 (`make_perbin_matched.py`); figure data, caption and model-card table updated. B3 caption states seed counts; B4 distinguishes "2 voxels" from "2 h⁻¹Mpc". |
+| 6 | Grochowski reference | Confirmed: Bull. Polish Acad. Sci. Math. 50(2) (2002) 161–178. Neyrinck (MNRAS Letters 455, L11) and Feldbrugge et al. (JCAP 05 (2018) 027) confirmed. |
+| 7 | Forbidden Directions: scale, units, unsourced numbers | Pixel scale derived from FITS headers and the resampling code: 3.23″ = 2.3 Mm per grid px (`hmi_scale.json`); heights now given in Mm. Normalisations defined (M̂ = ∇B / max\|λᵢ\|, J∥ dimensionless). "4777 G" and the T96 audit are now in artifacts — and the audit **corrected a claim**: boundary nulls are 0.68–26.8 R_E outside the magnetopause (median 1.5), not "a thin shell under 1 R_E". The two Jupiter census files disagreed because one applied the shell floor inside Newton; aligned, both give 32/40. |
+| 8 | Part 4 called an analytic field "real" | Subtitle and heading now say "analytic ABC-like test field"; "real" is kept for observations only. |
+| 9 | Geometry of Seeing Part 4 title contradicted its body | Retitled "The Exact Cut Time on SE(2) — and the Open Problem Beyond It"; Part 3 now says a tie bounds the cut time, with equality as the SE(2) theorem. |
+| 10 | Unchecked citations; unlabelled schematic figures | The free-geodesic formula is from Moiseev–Sachkov (arXiv:0807.4731, §4.3), not "Sachkov 2011, eqs. 24–28"; the symmetry group is (ℤ₂)³ with the 2π shift as printed in that paper; code-identity claims softened to "same algorithm"; snippets fixed to the `elliptic` package's real API. All plane panels carry axis labels or a scale bar. A dead demo link (11 places) and a NaN in the phase-portrait figure were fixed. |
+
+### Still open
+
+- Figures in the solar posts still label axes in px (captions give the Mm scale); a re-render with a secondary Mm axis would be cleaner.
+- Caustics: cusp germs on Engel/Cartan and anything on SE(3) (n = 6) are untested.
+- Cosmic Web `paper/main.pdf` is stale against `main.tex` (not rebuilt).
+- Journal (as opposed to arXiv) figure and equation numbers for the Sachkov papers were not checked.
 
 ## Glossary
 

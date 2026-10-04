@@ -31,10 +31,10 @@ comments: true
 <div class="callout">
 <div class="callout-title">Where we are</div>
 <a href="{% post_url 2026-08-24-forbidden-directions-null-gallery %}">Part 5</a> settled the
-division of labour: detection, order, and gradient belong to the sub-Riemannian invariants;
+division of labour: local confirmation of a null, its order, and the gradient belong to the sub-Riemannian invariants;
 type classification belongs to the linear fit. This part goes where a pointwise fit cannot
 follow at all — the <em>unstable</em> configurations through which magnetic topology changes —
-and then takes the detector to a world with genuinely non-force-free currents.
+and then takes the growth-vector read-out to a world with genuinely non-force-free currents.
 </div>
 
 ## A null is a place; reconnection is an event
@@ -117,9 +117,12 @@ numerical zero test with no scale attached. The growth vector has a *law* for it
     frame gets its lines, both poles included), and the null re-detected and
     identity-tracked in a stable co-rotating domain. Watch the measured track: the
     null <strong>descends from 3.9 px toward the surface exactly through the X5.4
-    flare</strong> (h = 1.5 px at the 00:24 peak), flickers at its detection floor
+    flare</strong> (h = 1.5 px at the 00:24 peak; heights in extrapolation-grid pixels,
+    $1\ \text{px} \approx 3.23'' \approx 2.3$ Mm in the plane of the sky on this day —
+    derived from the FITS headers in Part 5, <code>artifacts/hmi_scale.json</code> — so
+    $\approx 9$ Mm falling to $\approx 3.5$ Mm), flickers at its detection floor
     through the X1.3 impulsive phase (lost 01:12–01:30), and is <strong>re-found from
-    01:36 onwards</strong> as the region settles, riding at h ≈ 2–3.5 px to the end —
+    01:36 onwards</strong> as the region settles, riding at h ≈ 2–3.5 px (≈ 5–8 Mm) to the end —
     24 of 32 frames in all, within this windowed potential model at survey
     resolution. And the deeper honest point stands: a potential field holds <em>no
     free energy</em>, so the skeleton can only breathe with the boundary data while
@@ -140,12 +143,13 @@ numerical zero test with no scale attached. The growth vector has a *law* for it
 <figure class="l-middle" id="fig-anatomy-sun">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-null-anatomy-sun.png"
-      alt="One row of three null-anatomy panels for the single interior coronal null of the AR11429 volume, in the null's own frame: A, a 3D skeleton with a translucent fan disc and the orange spine axis; B, the view down the spine, axes fan-plane coordinates e1 and e2 in pixels (linear, minus 12 to 12), blue fan field lines radiating from the null; C, the side view, x axis fan-plane coordinate e1 and y axis spine coordinate in pixels (linear), orange spine lines vertical and the fan edge-on"
+      alt="One row of three null-anatomy panels for the single interior coronal null of the AR11429 volume, in the null's own frame: A, a 3D skeleton with a translucent fan disc and the orange spine axis; B, the view down the spine, axes fan-plane coordinates e1 and e2 in extrapolation-grid pixels (linear, minus 12 to 12; one pixel is about 2.3 megametres), blue fan field lines radiating from the null; C, the side view, x axis fan-plane coordinate e1 and y axis spine coordinate in pixels (linear), orange spine lines vertical and the fan edge-on"
       style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
     <strong>The anatomy of a real null.</strong> The one interior coronal null of
-    the null-recentred AR11429 volume (height $h = 4$ px), drawn in the null's
+    the null-recentred AR11429 volume (height $h = 4$ px $\approx 9$ Mm; the panels span
+    $\pm 12$ px $\approx \pm 28$ Mm), drawn in the null's
     <em>own frame</em> (the visual grammar of
     Pontin &amp; Priest 2022: colour = topological role). <em>A:</em> a 3D skeleton with the
     translucent ideal fan disc (dashed rim) and the spine axis (orange arrows).
@@ -159,7 +163,13 @@ numerical zero test with no scale attached. The growth vector has a *law* for it
     that sweeps in along the fan and leaves along the spine is split at the null and
     carries both colours. The measured invariants: radial type, degree $+1$, fan-in,
     normalised $\nabla\mathbf B$ eigenvalues $(1.00,\,-0.30,\,-0.71)$, SR growth vector
-    $Q = 6$. Note $J_\parallel = 0.00$: a
+    $Q = 6$. Here and below "normalised" means
+    $\widehat M = \nabla\mathbf B / \max_i\lvert\lambda_i(\nabla\mathbf B)\rvert$ (trace
+    removed), so the largest eigenvalue has modulus 1, and
+    $J_\parallel \equiv (\nabla\times\widehat M\mathbf r)\cdot\hat{\mathbf s}$ is the
+    spine-parallel component of the curl ($\mu_0\,\mathbf j\cdot\hat{\mathbf s}$, with
+    $\hat{\mathbf s}$ the unit spine eigenvector) in units of that largest eigenvalue —
+    a dimensionless number. Note $J_\parallel = 0.00$: a
     potential field is current-free, exactly as the force-free theorem demands of its
     radial-only nulls. (This is a null <em>of the survey window's extrapolation</em>;
     low potential-field nulls are window-sensitive — see the window-sensitivity check in
@@ -244,7 +254,10 @@ found for classification, now measured twice.
 
 Do real coronal fields carry such pairs? Scanning twelve active-region volumes (four
 windows per day, a wider net than the two per day of Part 5's gallery) across the
-three real days: **four same-volume pairs**, the closest at 23.4 px (2012-03-07). At its
+three real days: **four same-volume pairs**, the closest at 23.4 px (2012-03-07) — about $54$ Mm:
+throughout this post "px" is one cell of the extrapolation grid, $\approx 3.23''$ or
+$\approx 2.3$ Mm in the plane of the sky (full-disk HMI resampled to 1024 px, then each
+window by a further factor $1.6$; Part 5 derives it from the FITS headers). At its
 midpoint, on the real extrapolation's own vector potential:
 
 </div><!-- /.l-body -->
@@ -258,7 +271,7 @@ midpoint, on the real extrapolation's own vector potential:
   <figcaption>
     <strong>The crossover on the real Sun — honestly partial.</strong> The rising edge is
     there: $w_4$ starts at 2 and climbs through $\sim3$ as the probe reaches the pair
-    scale. The degenerate plateau at 4 is not — correctly: a 23-px pair embedded in a busy
+    scale. The degenerate plateau at 4 is not — correctly: a 23-px ($\approx 54$ Mm) pair embedded in a busy
     active region is two independent nulls, not a fold in progress, and beyond the pair
     scale the background field takes over. The clean signature awaits a genuinely
     <em>merging</em> pair, i.e. a flux-emergence magnetogram sequence. Pipeline:
@@ -272,8 +285,8 @@ The same measurement paid an unexpected dividend. Part 4 reported that the raw g
 field could not resolve the null jump and fell back to the measured Jacobian. The pair
 study shows the failure was the *probe window*, not the grid: probed at sub-pixel radii
 the interpolation has flattened everything, but in the window **above the grid cell and
-below the surrounding structure** (1.5–10 px here), the raw real field returns the null
-flux weight $w_4 \approx 3$ directly. On gridded data the detector is not
+below the surrounding structure** (1.5–10 px here, $\approx 3.5$–$23$ Mm), the raw real field returns the null
+flux weight $w_4 \approx 3$ directly. On gridded data the read-out is not
 resolution-limited; it is **scale-windowed** — choose the window consciously and it
 works on the data as it comes.
 
@@ -308,13 +321,15 @@ $w_4 \to 4$ plateau at the collision.
     a degree sum that swings between $-5$ and $-17$ — the churn of marginal, low-lying
     nulls of a windowed potential extrapolation flickering against the finder, not
     interior topology change. <em>B:</em> the one candidate that survived the first cut
-    (an opposite-degree pair approaching $14.5 \to 5.3$ px and co-dying between the
-    01:07 and 01:19 magnetograms) interrogated by <em>boundary continuation</em>: blend
+    (an opposite-degree pair approaching $14.5 \to 5.3$ px, i.e. $\approx 34 \to 12$ Mm,
+    between 00:49 and 01:01; last seen together at 01:07, one member last seen at 01:13,
+    both gone by 01:19 — tracks 1 and 38 of <code>artifacts/s5_solar_fold.json</code> —
+    so the co-death is bracketed by the 01:07 and 01:19 magnetograms) interrogated by <em>boundary continuation</em>: blend
     the two measured magnetograms, $\mathrm{cut}(s) = (1-s)\,\mathrm{cut}_A +
     s\,\mathrm{cut}_B$, and track the pair in $s$. A genuine fold must close like
     $\sqrt{s_c - s}$ (gray dashed); the candidate stays flat at $\approx 6.2$ px
-    (fitted slope $-0.015$), the "collision" point reads $w_4 \approx 2$ and growth
-    vector $Q = 5$ — a generic point, not even a null — and neither $\pm16$-px shifted
+    ($\approx 14$ Mm; fitted slope $-0.015$), the "collision" point reads $w_4 \approx 2$ and growth
+    vector $Q = 5$ — a generic point, not even a null — and neither $\pm16$-px ($\approx\pm 37$ Mm) shifted
     window reproduces it. The pair was never merging; the finder was losing a marginal
     null. (Counts here are Newton-finder censuses — dense seeding, dedup — not
     exhaustive cell censuses; the Haynes–Parnell-grade upgrade is specified in the G1
@@ -370,13 +385,16 @@ collision with adaptive continuation.
     (the fourth in refined form: a collapsing knee on plateau 3, not the pre-registered
     plateau 4); the separate window-robustness check fails and is reported below.</strong>
     The certified fold of the AR11429 boundary blend at $s_c = 0.14095804$ (window
-    position $x \approx 11.8$, $y \approx 209$, height $z \approx 3.7$ px).
+    position $x \approx 11.8$, $y \approx 209$, height $z \approx 3.7$ px, i.e.
+    $\approx 8.5$ Mm above the photosphere at $2.3$ Mm per grid pixel).
     <em>A:</em> the two nulls' paths (blue: degree $+1$, orange: degree $-1$; colour =
     blend $s$), walked with predictor–corrector continuation into the collision (★).
     <em>B:</em> the pair separation against $\delta = s - s_c$ on log–log axes:
     the fitted slope is <strong>0.4999</strong> against the fold's exact $\tfrac12$,
     holding over more than four decades down to a separation of $10^{-5}$ px —
-    a hundred-thousandth of a pixel, courtesy of the spectral microscope; both members'
+    a hundred-thousandth of a pixel (nominally $\sim 20$ m: a statement about the
+    analytic blend family, not about anything the $\approx 2.3$-Mm data resolve),
+    courtesy of the spectral microscope; both members'
     $\det\nabla\mathbf B \to 0$ alongside (orange triangles, scaled). <em>C:</em> the
     SR read: the $w_4(r)$ crossover knee marches to zero with the shrinking pair, and
     at the collision the curve settles on the <em>generic-null</em> plateau 3
@@ -398,7 +416,7 @@ collision with adaptive continuation.
     extrapolation traced in the fold plane (horizontal axis = the fold axis, the kernel
     direction of $\nabla\mathbf B$ at the collision; the same real AR11429 volume as
     the flare sequence). <em>A:</em> at $s_c + 0.05$ the two nulls (★, degrees
-    labelled) sit $\approx 3$ px apart, each with its own X-type line structure.
+    labelled) sit $\approx 3$ px ($\approx 7$ Mm) apart, each with its own X-type line structure.
     <em>B:</em> at $s_c + 0.004$ they nearly touch. <em>C:</em> at $s_c$ one degenerate
     point (gold ★) remains — below $s_c$ the field is null-free here: the pair has
     annihilated. This is the fold sequence of the normal form above, drawn by measured solar boundary data.
@@ -424,7 +442,7 @@ crossover whose elbow marches to zero like $\sqrt{s - s_c}$, visible in panel C 
 The honesty boxes, filled: the two flanking window shifts do <em>not</em> reproduce
 this particular fold ($+16$ px pushes the event region out of frame; $-16$ px has
 different null content at the matching position — window-sensitivity operating at
-event level, on a low null at $z \approx 3.7$ px, exactly the fragile class the R3
+event level, on a low null at $z \approx 3.7$ px ($\approx 8.5$ Mm), exactly the fragile class the R3
 report's window-sensitivity check documented). So the precise claim is: **a fold of the windowed family built from two
 measured magnetograms, certified to machine precision** — the wall between the 00:01
 and 03:07 topologies is real in that family, and its location is pinned; whether the
@@ -450,9 +468,12 @@ The growth vector returns $Q = 6$ at every one, radial and spiral alike.
 The bifurcation hunt (below) forced a sharper audit of this census, and the result is
 worth stating precisely. Testing the census nulls of the core tracking box (70 of them) against the T96
 model's *own* magnetopause (the boundary function shipped with the model): **every one
-sits in a thin shell, under one Earth radius <em>outside</em> the model boundary — and inside its
-valid domain the model has no nulls at all**, at any IMF $B_z$ we probed. The
-smooth *average* magnetosphere of an empirical model is null-free; the shell nulls are
+lies <em>outside</em> the model boundary** (70 of 70; 33 of them within one Earth radius
+of it, the rest up to $27\,R_E$ out, median $1.5\,R_E$) **— and inside its
+valid domain the model has no nulls at all**, at any of the seven IMF $B_z$ values
+probed from $-9$ to $+3$ nT (counts from `artifacts/s4_collider.json`,
+`t96_boundary_audit`, written by `run_s4b_drive.py --audit-only`). The
+smooth *average* magnetosphere of an empirical model is null-free; the census nulls are
 mathematical structure of the field's continuation past its own edge (which is also why
 they barely respond to the ring-current index: $\lvert\Delta\mathbf B\rvert \le 0.03$
 nT for a 30-nT $D_{st}$ swing). That is physically sensible — real magnetospheric
@@ -521,11 +542,20 @@ stays on the books.
     fan plane, open circle = the null, blue for degree $+1$; axes in $R_E$, linear)
     for two core-census magnetospheric nulls. <em>Top (A–C):</em> a radial null at GSM
     $(-12, 17, 11)\,R_E$ —
-    real normalised eigenvalues $(0.66, -0.33, -0.34)$, $J_\parallel = +0.01$; note how much of the local field is
+    real normalised eigenvalues $(0.66, -0.33, -0.34)$, $J_\parallel = +0.01$
+    (normalisation as in the coronal sheet: $\nabla\mathbf B$ divided by its largest
+    $\lvert\lambda_i\rvert$, $J_\parallel = (\nabla\times\mathbf B)\cdot\hat{\mathbf s}
+    / \max_i\lvert\lambda_i\rvert$, dimensionless. The leading value is $0.66$ rather
+    than $1$ because the eigenvalues are quoted <em>after</em> the trace removal, and
+    here the trace is not small: the raw Jacobian at this point has eigenvalues
+    $\approx(1.60,\,0.01,\,-0.00)$ nT$/R_E$ and trace $1.61$ nT$/R_E$ — the model field
+    is not divergence-free there, one more symptom of the point lying outside T96's own
+    magnetopause; the spiral example below has trace $\sim10^{-9}$); note how much of the local field is
     honest gray <em>ambient</em>: a T96 null is weak and buried in its surroundings.
     <em>Bottom (D–F):</em> a spiral null at GSM $(3, 15, 26)\,R_E$ — complex fan pair
     (eigenvalues $0.10,\ -0.05 \pm 1.00\,i$) and
-    $J_\parallel = -6.95$: the field-aligned current the force-free theorem requires. Its
+    $J_\parallel = -6.95$ (i.e. the spine-parallel curl is about seven times the largest
+    eigenvalue rate of $\nabla\mathbf B$ — dimensionless, same definition): the field-aligned current the force-free theorem requires. Its
     winding is so rapid ($\lvert\mathrm{Im}/\mathrm{Re}\rvert \approx 20$ — many turns
     per e-fold of radius) that the fan renders as a tight in-plane bundle rather than a
     visible corkscrew — the dense tube <em>is</em> the visual signature of a fast
@@ -584,7 +614,12 @@ on.
     <strong>The stability map.</strong> <em>A:</em> every null state as a point in the
     $(\widehat{\det\nabla\mathbf B},\, \widehat{\mathrm{disc}})$ plane — normalised
     Jacobian determinant (its sign is the topological degree) against the normalised
-    fan-eigenvalue discriminant (positive = radial, negative = spiral). Pale blue: the
+    fan-eigenvalue discriminant (positive = radial, negative = spiral). The hats are
+    defined by $\widehat M = \nabla\mathbf B/\max_i\lvert\lambda_i(\nabla\mathbf B)\rvert$
+    (trace removed): $\widehat{\det} = \det\widehat M$ and $\widehat{\mathrm{disc}} =
+    (\mu_1-\mu_2)^2$ for the two fan eigenvalues $\mu_{1,2}$ of $\widehat M$ — both
+    dimensionless, both axes linear; for a radial null $\lvert\widehat{\det}\rvert \le
+    \tfrac14$, and the vertical axis is clipped to $[-0.1, 3]$ and shown to $1.06$. Pale blue: the
     135 states of the Dungey $\theta$-census (a vacuum field, so the type wall is
     untouchable — all radial, by Part 5's theorem). Dark blue/orange: the certified
     solar pair of the collider figure, whose two branches dive into the <span
@@ -622,6 +657,17 @@ on.
 
 ## Glossary
 
+- **px (grid pixel)** — one cell of the solar extrapolation grid, horizontally and in
+  height: $\approx 3.23''$, i.e. $\approx 2.3$ Mm in the plane of the sky ($2.32$ Mm on
+  2012-03-07; from the FITS headers, `artifacts/hmi_scale.json`; derivation in Part 5).
+- **Normalised Jacobian $\widehat M$, $\widehat{\det}$, $\widehat{\mathrm{disc}}$,
+  $J_\parallel$** — $\widehat M = \nabla\mathbf B/\max_i\lvert\lambda_i(\nabla\mathbf
+  B)\rvert$ with the trace removed (largest eigenvalue modulus 1); $\widehat{\det} =
+  \det\widehat M$; $\widehat{\mathrm{disc}} = (\mu_1-\mu_2)^2$ over the two fan
+  eigenvalues of $\widehat M$ (positive radial, negative spiral); $J_\parallel =
+  (\nabla\times\widehat M\mathbf r)\cdot\hat{\mathbf s}$, the spine-parallel curl in
+  units of the largest eigenvalue. All dimensionless
+  (`src/nulltopo.py`, `classify_null`).
 - **Fold (saddle–node) bifurcation** — the generic way nulls are created/destroyed: a
   pair of opposite-sign nulls merging through one degenerate null.
 - **Degenerate null** — $\mathbf B = 0$ with $\det\nabla\mathbf B = 0$; here the fully

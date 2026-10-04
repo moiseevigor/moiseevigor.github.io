@@ -73,10 +73,15 @@ $2\pi/|w|$, and that drift is the subject of Part 3.)
 
 ## The obstruction, in the flesh
 
-Part 1 stated it as a theorem; here it is as a fact about these four groups. Zoom far enough
-into a generic point of the caustic of *any* of them (the collapsed Heisenberg axis above is the
-one non-generic exception) and you see the same short list of shapes — a fold, a
-cusp[^cusp] — the universal ADE germs. Hand someone a single cusp and ask which group it came
+Part 1 stated it as a theorem about generic Lagrangian maps plus a working hypothesis about
+these groups; here is the evidence for the four groups. Zoom far enough into a generic point
+of the caustic of SE(2), Engel or Cartan and you see a fold: at the first conjugate point of
+24 random geodesics per group the exponential map has a fold singularity in 24 of 24 cases
+(experiment E10, `research/caustics-to-groups/artifacts/e10_results.json`). The collapsed
+Heisenberg axis above is the non-generic exception, and the same test rejects it in 24 of 24
+cases. Where folds meet you expect the next shape on the list, the cusp[^cusp] — known for 3D
+contact structures, not yet checked numerically for Engel and Cartan. These are the universal
+ADE germs. Hand someone a single cusp and ask which group it came
 from and they cannot answer: the four are **locally identical**. A detector that keys on
 "there is a cusp here" is reading noise. The information that separates the groups is not in
 any one local shape; it is in how the *whole* geometry is organised. The first and coarsest
@@ -113,16 +118,23 @@ The figure shows the real measured curves.
   </div>
   <div id="c2g-reach" style="text-align:center;"></div>
   <figcaption>
-    <strong>The growth vector, measured (experiment E0).</strong> Each line is the
-    <em>reach</em> of a coordinate (98th percentile of |value| across a fan of geodesics)
-    versus geodesic length $r$, both axes logarithmic. A straight line on log–log is a power
+    <strong>The growth vector, measured (experiments E0 and E2).</strong> Each line is the
+    <em>reach</em> of a coordinate (98th percentile of |value| across a fan of 800 noise-free
+    geodesics) versus geodesic length $r$, both axes logarithmic. A straight line on log–log is a power
     law; its <em>slope</em> is the exponent. Directly-drivable coordinates (slope&nbsp;1) fill
     in fastest; coordinates reached through one bracket (slope&nbsp;2) far slower; through two
     brackets (slope&nbsp;3) slower still. Counting how many coordinates sit at each slope gives
     the growth vector: Heisenberg and SE(2) are $(2,3)$ — two slope-1, one slope-2, nothing
-    steeper; Engel adds a slope-3 coordinate → $(2,3,4)$; Cartan adds two → $(2,3,5)$. Slopes
-    recovered from clean data: $0.94$–$0.99$, $1.91$–$2.00$, $2.8$. Points are measured; dashed
-    guides are exact slopes 1, 2, 3. Data: <code>research/caustics-to-groups/artifacts/e0_results.json</code>.
+    steeper; Engel adds a slope-3 coordinate → $(2,3,4)$; Cartan adds two → $(2,3,5)$. The
+    three plotted curves are the stored reach values at the six radii of experiment E0
+    (blue: Heisenberg $x$; orange: Heisenberg $z$; green: Engel's fourth coordinate); dashed
+    guides are exact slopes 1, 2, 3 through each curve's last point. E0 covers Heisenberg,
+    SE(2) and Engel; Cartan's vector is measured by the same estimator in experiment E2 (and
+    classified in E1), and its two slope-3 curves lie almost on top of Engel's. Fitted slopes
+    over all four groups: $0.94$–$0.99$, $1.83$–$2.00$, $2.76$–$2.82$. Data:
+    <code>clean.*.reach</code> and <code>clean.*.weights</code> in
+    <code>research/caustics-to-groups/artifacts/e0_results.json</code>; Cartan from
+    <code>observables.Cartan</code> in <code>artifacts/e2_results.json</code>.
   </figcaption>
 </figure>
 
@@ -133,15 +145,15 @@ The figure shows the real measured curves.
   const ns = "http://www.w3.org/2000/svg";
   const SANS = "'Source Sans 3', system-ui, sans-serif";
   const MONO = "'JetBrains Mono', monospace";
-  const R = [0.12, 0.171, 0.243, 0.346, 0.493, 0.702, 1.0];
-  // measured reach curves (from e0_results): representative coord per weight
-  const W1 = [0.119, 0.169, 0.241, 0.342, 0.485, 0.682, 0.963]; // slope 1 (all groups)
-  const W2 = [0.002, 0.005, 0.009, 0.019, 0.039, 0.078, 0.159]; // slope 2 (Heisenberg z)
-  const W3 = [0.0006, 0.0009, 0.0018, 0.004, 0.011, 0.029, 0.079]; // slope 3 (Engel/Cartan)
+  // reach curves copied from artifacts/e0_results.json: radii, clean.<group>.reach[:, coord]
+  const R = [0.15, 0.2192, 0.3204, 0.4682, 0.6843, 1.0];
+  const W1 = [0.1492, 0.217, 0.316, 0.4572, 0.6588, 0.938];             // Heisenberg x  (fitted slope 0.96)
+  const W2 = [0.003559, 0.00762, 0.01627, 0.03476, 0.07442, 0.1588];    // Heisenberg z  (fitted slope 2.00)
+  const W3 = [0.0002965, 0.0009553, 0.002941, 0.009051, 0.02857, 0.08149]; // Engel 4th coord (fitted slope 2.82)
   const W = 620, H = 400, mL = 58, mR = 120, mT = 18, mB = 48;
   const x0 = mL, x1 = W - mR, y0 = mT, y1 = H - mB;
   const lxmin = Math.log10(0.1), lxmax = Math.log10(1.05);
-  const lymin = Math.log10(3e-4), lymax = Math.log10(1.2);
+  const lymin = Math.log10(2e-4), lymax = Math.log10(1.2);
   const X = v => x0 + (Math.log10(v) - lxmin) / (lxmax - lxmin) * (x1 - x0);
   const Y = v => y1 - (Math.log10(v) - lymin) / (lymax - lymin) * (y1 - y0);
   const svg = document.createElementNS(ns, "svg");
@@ -162,11 +174,11 @@ The figure shows the real measured curves.
   });
   // exact-slope reference guides (dashed), anchored to the last point of each curve
   function guide(slope, anchorR, anchorV, col) {
-    const rA = 0.13, vA = anchorV * Math.pow(rA / anchorR, slope);
+    const rA = 0.15, vA = anchorV * Math.pow(rA / anchorR, slope);
     svg.appendChild(el("line", { x1: X(rA), y1: Y(vA), x2: X(anchorR), y2: Y(anchorV),
       stroke: col, "stroke-width": 1, "stroke-dasharray": "3 3", opacity: 0.5 }));
   }
-  guide(1, 1.0, 0.963, "#2b6cb0"); guide(2, 1.0, 0.159, "#dd6b20"); guide(3, 1.0, 0.079, "#2f855a");
+  guide(1, 1.0, 0.938, "#2b6cb0"); guide(2, 1.0, 0.1588, "#dd6b20"); guide(3, 1.0, 0.08149, "#2f855a");
 
   function plot(vals, col, label, sub) {
     const pts = R.map((r, i) => `${X(r).toFixed(1)},${Y(vals[i]).toFixed(1)}`).join(" ");
@@ -183,8 +195,8 @@ The figure shows the real measured curves.
   // axes
   svg.appendChild(el("line", { x1: x0, y1: y1, x2: x1, y2: y1, stroke: "#333", "stroke-width": 1 }));
   svg.appendChild(el("line", { x1: x0, y1: y0, x2: x0, y2: y1, stroke: "#333", "stroke-width": 1 }));
-  svg.appendChild(el("text", { x: (x0 + x1) / 2, y: H - 6, "text-anchor": "middle", "font-size": 12, fill: "#333", "font-family": SANS }, "geodesic length r  (log)"));
-  const yl = el("text", { x: 15, y: (y0 + y1) / 2, "text-anchor": "middle", "font-size": 12, fill: "#333", "font-family": SANS, transform: `rotate(-90 15 ${(y0 + y1) / 2})` }, "coordinate reach  (log)");
+  svg.appendChild(el("text", { x: (x0 + x1) / 2, y: H - 6, "text-anchor": "middle", "font-size": 12, fill: "#333", "font-family": SANS }, "geodesic length r  (group units, log scale)"));
+  const yl = el("text", { x: 15, y: (y0 + y1) / 2, "text-anchor": "middle", "font-size": 12, fill: "#333", "font-family": SANS, transform: `rotate(-90 15 ${(y0 + y1) / 2})` }, "coordinate reach: 98th pct of |coord|  (log scale)");
   svg.appendChild(yl);
 })();
 </script>
@@ -193,8 +205,8 @@ The figure shows the real measured curves.
 
 ## What the growth vector does and doesn't settle
 
-The measurement is clean. From sampled geodesics the exponents come back at about $0.96, 1.9$–$2.0,
-2.8$ — round them and you read off the growth vector directly: **Heisenberg $(2,3)$, SE(2)
+The measurement is clean. From sampled geodesics the exponents come back at about $0.96$,
+$1.8$–$2.0$, $2.8$ — round them and you read off the growth vector directly: **Heisenberg $(2,3)$, SE(2)
 $(2,3)$, Engel $(2,3,4)$, Cartan $(2,3,5)$.** That already splits the four into three classes,
 and it does so from data, respecting the obstruction — we never named a local cusp.
 
@@ -208,8 +220,9 @@ Two honest limits, both measured rather than asserted:
    r^3$ — a hair above zero at small $r$ (look how the green line hugs the floor). So it is the
    first thing noise erases: recovering Cartan's $(2,3,5)$ needs more samples and tolerates less
    noise than recovering Heisenberg's $(2,3)$. In the experiments, clean data gives every growth
-   vector exactly; at one-percent position noise the contact groups still come back perfectly
-   while Cartan's success rate falls — the price of reading a faint, high-order dimension.
+   vector exactly; at position noise $\sigma = 10^{-2}$ the contact groups still come back
+   every time (E0, 15 trials) while Engel's success rate falls to 87% (E0) and Cartan's to 75%
+   (E2, 20 trials) — the price of reading a faint, high-order dimension.
 
 That second point is not a defect to hide; it is the **sample-complexity-versus-noise tradeoff**
 the program set out to map, and it falls straight out of the geometry: higher-step structure is

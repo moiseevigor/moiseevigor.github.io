@@ -78,6 +78,25 @@ $|1-\tfrac34\beta|^{-1/2}$ calibration factor (article §4). A field gradient
 *delays* refocusing where $1-\tfrac34\beta > 0$ (exponential-class included); past
 $\beta = \tfrac43$ the derived leading-order effect flips to *acceleration*. See [`docs/P1-moduli-read-grad-B.md`](docs/P1-moduli-read-grad-B.md).
 
+## Units and normalisations (one source of truth)
+
+- **px (solar grid pixel)** — one cell of every solar extrapolation cube, horizontally
+  and in height (`dz = 1`): full-disk HMI (`CDELT1` ≈ 0.504″ at `NAXIS1` = 4096) is
+  resampled to a 1024-px disk and each window by a further 1.6 (160 → 100 px in
+  R3/P4/P5, 360 → 225 px in S5), so 1 px = `CDELT1`·(`NAXIS1`/1024)·1.6 ≈ 3.23″ ≈
+  2.3 Mm in the plane of the sky (`RSUN_REF`/`RSUN_OBS` Mm per arcsec; 2.38 / 2.32 /
+  2.33 / 2.31 Mm on 2011-06-07 / 2012-03-07 / 2014-10-22 / 2011-02-13; no
+  foreshortening correction). Written by `scripts/render_real_assets.py --scales` to
+  `artifacts/hmi_scale.json`, which also records the peak |B| of each 1024-px disk.
+- **Normalised Jacobian M̂** — M̂ = ∇B / maxᵢ|λᵢ(∇B)|, then trace removed
+  (`M̂ − tr(M̂)/3·I`). "Normalised eigenvalues" are those of M̂ (largest modulus 1 when
+  ∇B is trace-free). Dimensionless.
+- **J∥** — `(∇×(M̂ r))·ŝ`, ŝ the unit spine eigenvector: the spine-parallel curl of B
+  (μ₀ j∥) in units of the largest eigenvalue modulus of ∇B. Dimensionless
+  (`src/nulltopo.py::classify_null` applied to M̂).
+- **det_hat, disc_hat** (stability-walls figure) — det M̂ and (μ₁ − μ₂)² for the two
+  fan eigenvalues of M̂ (≥ 0 radial, < 0 spiral). Dimensionless.
+
 ## Layout
 
 - `src/mfield.py` — geodesic flow, conjugate time, and nilpotent deviation of a magnetic

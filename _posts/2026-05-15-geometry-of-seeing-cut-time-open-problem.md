@@ -1,7 +1,7 @@
 ---
 layout: distill
 image: /public/img/posts/geometry-seeing-4.svg
-title: "The Open Problem: Exact Cut Time on SE(2)"
+title: "The Exact Cut Time on SE(2) — and the Open Problem Beyond It"
 subtitle: >
   For the visual cortex's geometry, when does a completed contour stop being the unique
   shortest one? Sachkov's answer is exact — half a pendulum period, 2K(k²), with no
@@ -93,7 +93,7 @@ optimality; the geometry never folds. Figure&nbsp;1 draws it.
   <figcaption>
     <strong>Figure&nbsp;1. On the generic family, only the Maxwell clock rings.</strong>
     Horizontal axis: modulus $k \in (0, 1)$ of the inflectional geodesic (dimensionless).
-    Vertical axis: SR arc length. Blue: the cut time $t_{\mathrm{cut}} = \mathfrak t =
+    Vertical axis: sub-Riemannian arc length $t$ along the geodesic, in units of the elastica length scale $\ell$ (the unit of arc length in which the inflectional curvature is $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$ and the pendulum equation is $\ddot\varphi + \sin\varphi = 0$), linear scale, clipped at 26. Blue: the cut time $t_{\mathrm{cut}} = \mathfrak t =
     2K(k^2)$, plotted exactly — half a pendulum period, proven equal to the first Maxwell
     time (Sachkov 2010). There is no conjugate curve to draw at all: for the whole
     inflectional family $t_{\mathrm{conj}} = +\infty$ (Sachkov 2010, Thm 2.1), so local optimality never
@@ -180,8 +180,10 @@ point is the origin itself.
     at the figure-eight modulus $k \approx 0.909$ (ring marker — the curve closes into
     Part&nbsp;2's figure-eight), and continues to negative $x$ beyond it. The free SR cut
     happens at half this clock ($2K(k^2)$) in costate coordinates — this figure is the
-    smooth family's portrait of the same reflection mechanism. Axes: plane $x, y$
-    (elastica arc-length units). Drag $|k|$ to grow the family; toggle the geodesics to
+    smooth family's portrait of the same reflection mechanism. <em>Axes:</em> the plane
+    $(x, y)$ — $x$ to the right along the launch axis, $y$ up, both dimensionless in
+    units of $\ell$; the faint lines are the axes $y = 0$ and $x = 0$, and the scale bar
+    (bottom left) gives the length scale (it rescales with the slider). Drag $|k|$ to grow the family; toggle the geodesics to
     see the locus alone.
   </figcaption>
 </figure>
@@ -335,9 +337,9 @@ function drawClocks() {
       .attr('style', 'font-family:var(--mono,monospace);font-size:10px;fill:#aaa').text(v.toFixed(1));
   });
   g.append('text').attr('x', pad.l + iW / 2).attr('y', H - 8).attr('text-anchor', 'middle')
-    .attr('style', 'font-family:var(--sans,sans-serif);font-size:12px;fill:#666').text('modulus k');
+    .attr('style', 'font-family:var(--sans,sans-serif);font-size:12px;fill:#666').text('modulus k (dimensionless)');
   g.append('text').attr('transform', `translate(14,${pad.t + iH / 2}) rotate(-90)`).attr('text-anchor', 'middle')
-    .attr('style', 'font-family:var(--sans,sans-serif);font-size:12px;fill:#666').text('arc length');
+    .attr('style', 'font-family:var(--sans,sans-serif);font-size:12px;fill:#666').text('SR arc length t (units of ℓ)');
 
   const N = 300;
   const kArr = d3.range(N).map(i => 0.01 + i * 0.975 / N);
@@ -423,6 +425,9 @@ function drawCut() {
     .attr('stroke', '#f2f2f2').attr('stroke-width', 1);
   g.append('line').attr('x1', xS(0)).attr('x2', xS(0)).attr('y1', m.t).attr('y2', H - m.b)
     .attr('stroke', '#f2f2f2').attr('stroke-width', 1);
+
+  labelPlaneAxes(g, W - m.r, yS(0), xS(0), m.t + 16);
+  drawScaleBar(g, m.l + 2, H - 8, (W - m.l - m.r) / (2 * xR));
 
   // faint geodesics
   if (showGeo) {

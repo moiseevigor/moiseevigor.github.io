@@ -314,6 +314,11 @@ degenerate into circles of radius $1/2$ in the rescaled arc length (high-energy 
     For the inflectional family, zeros of $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$
     coincide with inflection points of the curve; the period is $T_\kappa = 4K(k^2)$.
     Drag the slider to vary $k$ (or $m$); switch families with the dropdown.
+    <em>Axes and units:</em> lengths are dimensionless, in units of the elastica length scale $\ell$ — the unit of arc length in which the inflectional curvature is $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$ and the pendulum equation is $\ddot\varphi + \sin\varphi = 0$.
+    Left: horizontal axis arc length $s$ (units of $\ell$), vertical axis
+    curvature $\kappa$ (units of $1/\ell$; ticks at $\pm1, \pm2$). Right: the plane
+    $(x, y)$ in units of $\ell$ ($x$ to the right, $y$ up), drawn without tick axes —
+    the scale bar gives the length scale; open dot: start of the arc, filled dot: end.
   </figcaption>
 </figure>
 
@@ -325,8 +330,12 @@ degenerate into circles of radius $1/2$ in the rescaled arc length (high-energy 
   <figcaption>
     <strong class="figure-label"></strong>
     <strong>The period $T_\kappa(k) = 4K(k^2)$ diverges as $k \to 1$.</strong>
-    Blue: inflectional period $4K(k^2)$; green: non-inflectional period $2K(m)$
-    (plotted vs $k = \sqrt{m}$ for comparison).
+    Horizontal axis: the modulus $k \in (0, 1)$ (dimensionless) for the blue curve, and
+    $k = \sqrt{m}$ for the green one. Vertical axis: the curvature period $T_\kappa$ — the
+    arc length after which $\kappa(s)$ repeats, in units of the elastica length scale
+    $\ell$ (linear scale, clipped at 24). Blue, solid: inflectional period
+    $T_\kappa = 4K(k^2)$; green, dashed: non-inflectional period $T_\kappa = 2K(m)$,
+    plotted against $k = \sqrt{m}$ for comparison; the faint dashed line marks $2\pi$.
     The vertical asymptote at $k = 1$ corresponds to the borderline elastica:
     infinite period but finite total turning $\int_{-\infty}^{\infty}2\,\mathrm{sech}(s)\,ds=2\pi$.
     For small $k$: $K(k^2) \approx \pi/2 + \pi k^2/8$, so $T_\kappa \approx 2\pi$
@@ -372,11 +381,13 @@ This makes the elastica period computable to arbitrary precision via the
 $$K(m) = \frac{\pi}{2\,\mathrm{AGM}\!\bigl(1,\;\sqrt{1 - m}\bigr)}, \qquad m = k^{2}.$$
 
 The AGM converges quadratically: about 16 significant digits in 6 iterations.
-This is precisely what the `elliptic` package uses:
+This is the iteration the `elliptic` package exposes as `agm`:
 
 ```python
-from elliptic import ellipticK
+from elliptic import agm
 import numpy as np
+
+ellipticK = lambda m: np.pi / (2 * agm(1.0, np.sqrt(1 - m)))   # K(m) = π / (2·AGM(1, √(1−m)))
 
 k  = np.linspace(0, 0.999, 500)
 Tk = 4 * ellipticK(k**2)   # spatial period of curvature oscillation
@@ -392,11 +403,11 @@ The browser figures on this page use the same AGM algorithm implemented in
 For the Jacobi functions themselves:
 
 ```python
-from elliptic import ellipj, ellipticK
+from elliptic import ellipj
 
 K = ellipticK(k**2)            # quarter-period of sn, cn
 s = np.linspace(-2*K, 2*K, 800)
-sn, cn, dn = ellipj(s, k**2)
+sn, cn, dn, _ = ellipj(s, k**2)   # ellipj returns (sn, cn, dn, am)
 kappa = 2 * k * cn             # curvature of inflectional elastica
 ```
 
@@ -438,7 +449,7 @@ from elliptic import elliptic12
 
 am = np.arcsin(sn)                       # Jacobi amplitude am(s | k²), valid for |s| ≤ K
                                          # (beyond that, unwrap am continuously)
-F_vals, E_vals = elliptic12(am, k**2)    # F(am | k²) = s  and  E(am | k²)
+F_vals, E_vals, _ = elliptic12(am, k**2) # F(am | k²) = s  and  E(am | k²); third value is Jacobi Z
 x = 2 * E_vals - F_vals                  # x(s) = 2 E(am(s)|k²) − s
 ```
 
@@ -502,6 +513,9 @@ A few landmarks worth noting:
     Green (non-inflectional): curvature stays one-signed; the curves resemble
     deformed circles.
     Every smooth completion curve of the pinned problem is one of these elastica; the free SR geodesics project to their cuspidal cousins (Appendix A3).
+    <em>Axes:</em> the panel is the plane $(x, y)$ in units of the elastica length scale
+    $\ell$ ($x$ to the right, $y$ up; all curves start at the grey dot), drawn without
+    tick axes — the scale bar (bottom left) gives the length scale.
   </figcaption>
 </figure>
 
@@ -685,6 +699,12 @@ function drawElastica() {
       .attr('stroke', type === 'euler' ? '#d32f2f' : type === 'noninflectional' ? '#388e3c' : '#1565c0')
       .attr('stroke-width', 2.2);
 
+    // Axis labels (left panel)
+    leftG.append('text').attr('x', lPad + lW / 2).attr('y', H - 8)
+      .attr('text-anchor', 'middle').attr('style', labelStyle).text('arc length s (units of ℓ)');
+    leftG.append('text').attr('transform', `translate(10,${tPad + lH / 2}) rotate(-90)`)
+      .attr('text-anchor', 'middle').attr('style', labelStyle).text('curvature κ (units of 1/ℓ)');
+
     // y-axis ticks
     const tickVals = [-2, -1, 0, 1, 2].filter(v => Math.abs(v) <= kRange * 0.95);
     tickVals.forEach(v => {
@@ -724,6 +744,9 @@ function drawElastica() {
       .attr('r', 4).attr('fill', '#fff').attr('stroke', '#333').attr('stroke-width', 1.5);
     rightG.append('circle').attr('cx', ex).attr('cy', ey)
       .attr('r', 4).attr('fill', '#333').attr('stroke', '#333').attr('stroke-width', 1.5);
+
+    // Scale bar (right panel has no tick axes)
+    drawScaleBar(rightG, midX + 14, H - 12, sc2);
   }
 
   render();
@@ -793,12 +816,12 @@ function drawPeriodPlot() {
     .attr('x', pad.l + iW / 2).attr('y', H - 6)
     .attr('text-anchor', 'middle')
     .attr('style', 'font-family:var(--sans,"sans-serif");font-size:12px;fill:#666')
-    .text('k');
+    .text('modulus k (blue);  k = √m (green)  — dimensionless');
   g.append('text')
     .attr('transform', `translate(14,${pad.t + iH / 2}) rotate(-90)`)
     .attr('text-anchor', 'middle')
     .attr('style', 'font-family:var(--sans,"sans-serif");font-size:12px;fill:#666')
-    .text('T_κ');
+    .text('curvature period T_κ (arc length, units of ℓ)');
 
   // Inflectional curve
   const inflData = kArr.map((k, i) => [xSc(k), ySc(Math.min(T_infl[i], yMax))]);
@@ -821,9 +844,9 @@ function drawPeriodPlot() {
     .text('2π');
 
   // Legend
-  const leg = [['– 4K(k²)', '#1565c0'], ['- - 2K(m)', '#388e3c']];
+  const leg = [['T_κ = 4K(k²)', '#1565c0'], ['T_κ = 2K(m), m = k²', '#388e3c']];
   leg.forEach(([label, col], i) => {
-    const lx = pad.l + iW - 130, ly = pad.t + 18 + i * 18;
+    const lx = pad.l + iW - 160, ly = pad.t + 18 + i * 18;
     g.append('line').attr('x1', lx).attr('x2', lx + 24)
       .attr('y1', ly).attr('y2', ly)
       .attr('stroke', col).attr('stroke-width', 2)
@@ -895,11 +918,11 @@ function drawPhasePortrait() {
     const N = 200;
     for (let i = 0; i <= N; i++) {
       const phi = -phiMax + 2 * phiMax * i / N;
-      const phidot = Math.sqrt(2 * (E + Math.cos(phi)));
+      const phidot = Math.sqrt(Math.max(0, 2 * (E + Math.cos(phi))));
       if (!isNaN(phidot)) pts.push([xSc(phi), ySc(phidot)]);
     }
     // Mirror
-    const ptsMirror = pts.slice().reverse().map(([x, y]) => [x, ySc(-Math.sqrt(2 * (E + Math.cos(xSc.invert(x)))))]);
+    const ptsMirror = pts.slice().reverse().map(([x, y]) => [x, ySc(-Math.sqrt(Math.max(0, 2 * (E + Math.cos(xSc.invert(x))))))]);
     const col = d3.interpolateBlues(0.35 + k * 0.55);
     const closed = [...pts, ...ptsMirror.slice(1)];
     g.append('path').attr('d', d3.line()(closed) + 'Z')
@@ -1009,6 +1032,9 @@ function drawFamilies() {
   // Start dot
   g.append('circle').attr('cx', cx).attr('cy', cy)
     .attr('r', 3.5).attr('fill', '#555');
+
+  // Scale bar (no tick axes by design)
+  drawScaleBar(g, 16, H - 12, scale);
 }
 
 // ── Init ─────────────────────────────────────────────────────────────────

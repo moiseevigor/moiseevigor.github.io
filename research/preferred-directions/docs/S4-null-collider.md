@@ -34,9 +34,12 @@ contributes the stability phase portrait and the walls.
 2. **Boundary audit (run_s4b_drive.py).** Probing why driven pairs were
    rigid: B at the null positions is IDENTICAL for Dst −5/−50/−100 —
    the nulls do not feel the ring current. Testing every interior null
-   against T96's own magnetopause (`geopack.t96_mgnp`): **all 70 interior
-   census nulls sit < 1 R_E OUTSIDE the model boundary** (dist 0.7–0.8,
-   id = −1), and inside the valid domain the hunt finds **zero nulls at
+   against T96's own magnetopause (`geopack.t96_mgnp`): **all 70 core-box
+   census nulls sit OUTSIDE the model boundary** (id = −1 for 70/70;
+   distance to the boundary 0.68–26.8 R_E, median 1.5, 33 of them within
+   1 R_E — `s4_collider.json` → `t96_boundary_audit`; an earlier draft of
+   this line said "all < 1 R_E, dist 0.7–0.8", which holds only for that
+   nearest group), and inside the valid domain the hunt finds **zero nulls at
    every IMF Bz in [−9, +3] nT**. The smooth average magnetosphere is
    null-free; the "149 nulls, 79 spiral" census of P4-S3 is structure of
    the model's continuation past its own edge. (P4-S3's blog section now
@@ -83,6 +86,8 @@ construction.
 cd research/preferred-directions
 ../cosmic-web/.venv/bin/python scripts/run_s4_collider.py   # Dst sweep (context)
 ../cosmic-web/.venv/bin/python scripts/run_s4b_drive.py     # boundary audit
+# (after run_s4c_dungey.py has written s4_collider.json, use
+#  `run_s4b_drive.py --audit-only` to re-record the audit without overwriting it)
 ../cosmic-web/.venv/bin/python scripts/run_s4c_dungey.py    # Dungey cascade
 ../cosmic-web/.venv/bin/python scripts/render_s45_figures.py
 ```

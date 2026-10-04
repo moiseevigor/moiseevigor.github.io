@@ -133,7 +133,8 @@ any currents in weakly conducting H2); downward continuation to r = 0.85
 amplifies degree-l power by (1/0.85)^(l+2) (~13× at l = 14), which is both
 why the patch appears at depth and why the robustness caveat is load-bearing;
 magnetodisc/magnetopause fields are negligible below r = 1 (tens of nT vs
-1e4–1e6 nT internal). Longitudes are System III as used by JRM33.
+~1e6 nT internal: on a 1° grid 1.8e4–6.3e6 nT at r = 0.85, median 1.0e6;
+1.8e5–1.9e6 nT at r = 1; `j2_census.json` → `B_range_nT`). Longitudes are System III as used by JRM33.
 
 ## Reproduce
 

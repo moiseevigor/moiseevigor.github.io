@@ -58,16 +58,16 @@ falsifiable questions, pre-registered:
 1. **H-R1** — can an SR read-out recover the Parnell type at all?
 2. **H-R2** — is an *integrated* read-out more robust to noise than *differentiating* the
    field, which is what eigenvalue classification does in practice?
-3. **H-R3** — does the detector reproduce a standard null catalogue on real solar data,
+3. **H-R3** — does the growth-vector read-out, evaluated at the standard finder's locations (a local confirmation, not an independent detector), reproduce a standard null catalogue on real solar data,
    plural — a gallery, not a single star on a single magnetogram?
 
-## Every kind of null (the detector is type-agnostic)
+## Every kind of null (the read-out is type-agnostic)
 
 First the battery. We build exact linear nulls of every type — radial and spiral, both
 signs, each in its own randomly rotated frame, with the type *known by construction* — and
-point the growth-vector detector at them, alongside the real Part-4 null. For any traceless
+evaluate the growth vector at them, alongside the real Part-4 null. For any traceless
 Jacobian $M$ there is a one-line exact vector potential $A(\mathbf r) = -\tfrac13\,
-\mathbf r\times(M\mathbf r)$ with $\nabla\times A = M\mathbf r$, so the detector runs on a
+\mathbf r\times(M\mathbf r)$ with $\nabla\times A = M\mathbf r$, so the read-out runs on a
 genuine sub-Riemannian structure in every case, spiral nulls included.
 
 </div><!-- /.l-body -->
@@ -87,7 +87,7 @@ genuine sub-Riemannian structure in every case, spiral nulls included.
     the real SDO/HMI null of 2011-06-07. Axes: fan-plane coordinates $u, v$ in model
     units, linear. Radial versus spiral lives in whether the fan eigenvalues of
     $\nabla\mathbf B$ are real or complex. The sub-Riemannian growth vector returns $Q=6$ at <em>all five</em> —
-    detection recall 5/5 — but the same $Q=6$ for every type: the jump says "a null is
+    local confirmation 5/5 at known locations — but the same $Q=6$ for every type: the jump says "a null is
     here", not which kind. Pipeline:
     <code>research/preferred-directions/scripts/run_r1_gallery.py</code>.
   </figcaption>
@@ -95,7 +95,7 @@ genuine sub-Riemannian structure in every case, spiral nulls included.
 
 <div class="l-body" markdown="1">
 
-The result is clean and it sharpens the problem. The detector fires at **every** null type
+The result is clean and it sharpens the problem. The read-out returns $Q=6$ at **every** null type
 — the $5\to6$ jump is real for radial and spiral alike — and precisely because of that it
 carries no type information. Radial versus spiral lives in the fan topology: whether the
 eigenvalues of $M$ are real or complex. If the framework wants to *classify*, it must read
@@ -182,6 +182,18 @@ AR12192, the largest active region of solar cycle 24 — alongside the 2011-06-0
 Part 4. Per day: the two most bipolar-balanced active regions, potential-field
 extrapolation, the Newton null finder, and *every* interior null kept — no cherry-picking.
 
+**Physical scale, stated once.** All lengths and heights below are in **grid pixels (px)**
+of the extrapolation cube. The pipeline resamples each full-disk magnetogram to a
+1024-px disk and each $160$-px active-region window to $100$ px, with the height step
+equal to the horizontal one. One grid pixel is therefore the header plate scale
+`CDELT1` $\times$ (`NAXIS1`$/1024$) $\times\ (160/100) \approx 3.23''$, and, at the
+headers' own $696\ \text{Mm}$ per `RSUN_OBS` arcseconds, $1\ \text{px} \approx 2.3$ Mm
+($2.38$, $2.32$ and $2.33$ Mm on the three days; plane of sky, no foreshortening
+correction — the same approximation as using the line-of-sight field as the normal
+one). The cube is about $230\times230\times130$ Mm, and the five null heights of
+$14$–$45$ px are $\approx 33$–$105$ Mm. Source: the FITS headers, recorded in
+`artifacts/hmi_scale.json`.
+
 </div><!-- /.l-body -->
 
 <figure class="l-middle" id="fig-hmi-triptych">
@@ -195,7 +207,8 @@ extrapolation, the Newton null finder, and *every* interior null kept — no che
     SDO/HMI recorded them (red / blue = line-of-sight field toward / away from the
     observer, i.e. roughly out of / into the photosphere near disk centre; the pipeline
     uses it as the normal boundary field without a radial correction; peak
-    $\lvert B\rvert$ labelled per disk — up to 4777 G on the AR12192 day). Dashed boxes:
+    $\lvert B\rvert$ of each 1024-px-resampled disk labelled — 2940, 4042 and 4777 G,
+    the last on the AR12192 day; <code>artifacts/hmi_scale.json</code>). Dashed boxes:
     the active-region windows the pipeline extrapolates and searches. Everything below is
     computed from these three images and nothing else.
   </figcaption>
@@ -204,7 +217,7 @@ extrapolation, the Newton null finder, and *every* interior null kept — no che
 <figure class="l-middle" id="fig-real-gallery">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-real-gallery.png"
-      alt="Gallery of five real coronal nulls across three SDO/HMI days, panels A to E: each shows the coronal field magnitude in gauss (shared log colour scale) on a vertical slice, x axis horizontal position 0 to 100 pixels and y axis height 0 to 56 pixels (both linear), collapsing to zero at the cyan-starred null, with white streamlines tracing the topology"
+      alt="Gallery of five real coronal nulls across three SDO/HMI days, panels A to E: each shows the coronal field magnitude in gauss (shared log colour scale) on a vertical slice, x axis horizontal position 0 to 100 grid pixels and y axis height 0 to 56 grid pixels (both linear; one pixel is about 2.3 megametres), collapsing to zero at the cyan-starred null, with white streamlines tracing the topology"
       style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
@@ -212,9 +225,11 @@ extrapolation, the Newton null finder, and *every* interior null kept — no che
     real Sun (2011-06-07; 2012-03-07, X5.4-flare day; 2014-10-22, AR12192). Each card: the
     extrapolated coronal $\lvert\mathbf B\rvert$ on the vertical plane through the null
     (one shared log colour scale in gauss, dark = weak; axes in extrapolation-grid
-    pixels, linear), in-plane field lines in white, cyan ★ the detected null.
-    <em>A:</em> 2011-06-07, radial−, $h = 14$ px. <em>B, C:</em> 2012-03-07, radial+,
-    $h = 20$ and $26$ px. <em>D, E:</em> 2014-10-22, radial+, $h = 45$ and $40$ px.
+    pixels, linear; $1\ \text{px}\approx 3.23''\approx 2.3$ Mm, so each card spans
+    $\approx 230$ Mm across and $\approx 130$ Mm in height), in-plane field lines in white, cyan ★ the detected null.
+    <em>A:</em> 2011-06-07, radial−, $h = 14$ px ($\approx 33$ Mm). <em>B, C:</em>
+    2012-03-07, radial+, $h = 20$ and $26$ px ($\approx 47$ and $61$ Mm). <em>D, E:</em>
+    2014-10-22, radial+, $h = 45$ and $40$ px ($\approx 105$ and $92$ Mm).
     Every null: standard classification and the SR growth vector agree — $Q=6$ at
     5/5, with $Q$ computed on each null's measured tangent cone (a consistency check of
     the law, not an independent detection; the raw-grid reading needs Part 6's
@@ -236,7 +251,7 @@ force-free field $\nabla\times\mathbf B = \alpha\mathbf B$ with bounded $\alpha$
 current vanishes wherever $\mathbf B$ does; the antisymmetric part of
 $\nabla\mathbf B$ is the dual of $\nabla\times\mathbf B$, so at a null the Jacobian is
 symmetric, its eigenvalues real — *no force-free extrapolation, potential, linear
-force-free, or NLFFF alike, can host a spiral null at all*. (Our Part-4 dynamo field can,
+force-free, or NLFFF alike, can host a spiral null at all*. (Our Part-4 analytic test field can,
 precisely because it is not force-free: all eight of its spiral nulls carry
 $\lVert\nabla\times\mathbf B\rVert = \sqrt3 \neq 0$ where $\mathbf B = 0$. The
 theorem's linear-algebra core — a symmetric $\nabla\mathbf B$ has only real
@@ -258,7 +273,7 @@ After R1–R3 the ledger is clean enough to state as a table:
 
 | Question about a null | Right tool | Status |
 |---|---|---|
-| **Is one here?** | SR growth vector: $Q\colon 5\to6$, scale-covariant, defined before any Jacobian is estimable | grounded: full type battery + five real nulls, 10/10 |
+| **Is one here?** | SR growth vector: $Q\colon 5\to6$, scale-covariant, defined before any Jacobian is estimable | grounded as a **local confirmation** at root-finder locations (not an independent detector): full type battery + five real nulls, 10/10 |
 | **What order?** | SR law $Q=k+5$ | confirmed (Part 4) |
 | **How is the field changing nearby?** | SR caustic: $\delta=-\varepsilon^2$ on the exponential profile; general 1D profiles read $(1-\tfrac34\beta)\lvert\nabla\ln B\rvert^2$ | confirmed (Part 3, article §4) |
 | **Radial or spiral, which sign?** | the local least-squares fit of $\nabla\mathbf B$ | the standard scheme keeps it — R2 |
@@ -276,6 +291,10 @@ keeps.
   = spiral (O); the spine is the odd-sign-out eigenvector, the fan its complementary
   plane, and the sign is the spine eigenvalue's sign (this series' convention — opposite
   to the solar literature's "positive null = fan directed away").
+- **px (grid pixel)** — one cell of the extrapolation cube, horizontally and in height:
+  `CDELT1` $\times$ (`NAXIS1`$/1024$) $\times\ (160/100) \approx 3.23''$, i.e.
+  $\approx 2.3$ Mm in the plane of the sky ($696$ Mm per `RSUN_OBS` arcseconds;
+  `artifacts/hmi_scale.json`).
 - **$Q$ (homogeneous dimension)** — sum of the growth-vector weights of the flux lift;
   $Q=5$ where $\mathbf B\neq0$, $Q=6$ at a generic null.
 - **Winding $W$** — median unwrapped angle swept by integrated field-line trajectories

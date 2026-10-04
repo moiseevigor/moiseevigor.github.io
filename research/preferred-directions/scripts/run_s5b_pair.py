@@ -7,8 +7,9 @@ The S5 census exposed two things in the AR11429 wide volume:
     heights (z ~ 8-12 px) with separation ~ 1.6 px -- at the finder's dedup
     radius, so the raw census kept half-erasing it;
 (b) a candidate pair annihilation near (28, 190, z~3) bracketed by the
-    measured frames 01:01 and 01:13 UT (its two members' co-death is
-    ambiguous at 6-min cadence).
+    measured frames 01:07 and 01:19 UT (S5 tracks 1 and 38: last both-alive
+    frame k=11 = 01:07, one member last seen k=12 = 01:13, both gone by
+    k=13 = 01:19; the co-death is ambiguous at 6-min cadence).
 
 H-S5b-1 (the inhabited transition state): a fine-dedup census of the small
 subvolume around (a) tracks ONE opposite-degree pair through all 32 frames;

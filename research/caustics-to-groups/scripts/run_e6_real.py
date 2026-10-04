@@ -92,6 +92,8 @@ def main():
     rho = fields.cic_deposit(pos / box * N, N)
     delta = rho - 1.0
     print(f"  delta std = {delta.std():.1f} (highly non-linear)")
+    res["delta_std"] = float(delta.std())
+    res["delta_max"] = float(delta.max())
 
     print("\n== eigenvalue repulsion vs smoothing scale (real z=0 field) ==")
     sweep = []
