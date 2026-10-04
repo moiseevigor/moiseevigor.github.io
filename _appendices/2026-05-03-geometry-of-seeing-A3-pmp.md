@@ -5,7 +5,7 @@ title: "Appendix A3 — Calculus of Variations and the Pontryagin Maximum Princi
 subtitle: >
   From Euler–Lagrange to the PMP, then Lie–Poisson reduction on
   $\mathfrak{se}(2)^{\ast}$.  Why the equations $\dot h_1 = h_2 h_3$,
-  $\dot h_2 = -h_1 h_3$, $\dot h_3 = -h_1 h_2$ that Part 2 §1 used as a
+  $\dot h_2 = -h_1 h_3$, $\dot h_3 = -h_1 h_2$ that Part 2 used as a
   starting point are exactly what you get when you do the optimal-control
   problem carefully on a Lie group.
 date: 2026-05-03 09:00:00
@@ -29,7 +29,7 @@ permalink: /mathematics/2026/05/03/geometry-of-seeing-A3-pmp/
 <div class="callout">
 <div class="callout-title">What this appendix is for</div>
 
-Part&nbsp;2 §1, paraphrased: <em>the Pontryagin Maximum Principle introduces a
+Part&nbsp;2's opening section ("Hamiltonian Formulation via the PMP"), paraphrased: <em>the Pontryagin Maximum Principle introduces a
 covector $\lambda$ in the cotangent bundle, and — after several steps taken
 there on faith — the Hamiltonian equations on $\mathfrak{se}(2)^{\ast}$ read
 $\dot h_1 = h_2 h_3$, $\dot h_2 = -h_1 h_3$, $\dot h_3 = -h_1 h_2$.</em>
@@ -196,7 +196,7 @@ Define $h_i := \langle \lambda, X_i\rangle$ (this is the contraction of the
 covector $\lambda$ with the left-invariant vector field $X_i$).  Then
 $\mathcal H = u_1 h_1 + u_2 h_2 - \nu$ (the last term is constant in $u$).
 
-Maximising $u_1 h_1 + u_2 h_2$ over $u_1^2 + u_2^2 \leq 1$:
+Maximising $u_1 h_1 + u_2 h_2$ over $u_1^2 + u_2^2 = 1$:
 
 $$\max_{u \in S^1} (u_1 h_1 + u_2 h_2) \;=\; \sqrt{h_1^2 + h_2^2},$$
 
@@ -214,7 +214,7 @@ solutions).  We use the squared form:
 
 $$\boxed{\;\mathcal H_n \;=\; \tfrac12 (h_1^2 + h_2^2).\;}$$
 
-This is the "normal Hamiltonian" of Part&nbsp;2 §1.
+This is the "normal Hamiltonian" of Part&nbsp;2.
 
 ## Lie–Poisson reduction on $\mathfrak{se}(2)^{\ast}$
 
@@ -244,15 +244,17 @@ $$\dot h_i \;=\; -\sum_{j, k} c^k_{ij}\,h_k\,\frac{\partial H}{\partial h_j},$$
 where $$c^k_{ij}$$ are the structure constants $$[X_i, X_j] = c^k_{ij} X_k$$.
 For $\mathfrak{se}(2)$ in the body-frame basis $\{X_1, X_2, X_3\}$ used in
 Part&nbsp;1 (forward / rotation / sideways), the brackets are
-$[X_1, X_2] = -X_3$, $[X_2, X_3] = -X_1$, $[X_1, X_3] = 0$, giving the
-non-zero coordinate brackets $\{h_1, h_2\} = h_3$ and $\{h_2, h_3\} = h_1$.
+$[X_1, X_2] = -X_3$, $[X_2, X_3] = -X_1$, $[X_1, X_3] = 0$.  The minus sign in
+the displayed equation is the convention $\{h_i, h_j\} = -c^k_{ij}h_k$ — the
+canonical bracket of $T^{\ast}G$ restricted to the functions $h_i$ — so the
+non-zero coordinate brackets are $\{h_1, h_2\} = h_3$ and $\{h_2, h_3\} = h_1$.
 With $H_n = \tfrac12(h_1^2 + h_2^2)$ this yields
 
 $$\dot h_1 \;=\; h_2\,h_3, \qquad
   \dot h_2 \;=\; -h_1\,h_3, \qquad
   \dot h_3 \;=\; -h_1\,h_2.$$
 
-These are the equations Part&nbsp;2 §1 uses. The conserved quantities are the
+These are the equations Part&nbsp;2 uses. The conserved quantities are the
 Hamiltonian $\mathcal H_n = \tfrac12(h_1^2 + h_2^2)$ and the
 **Casimir** of $\mathfrak{se}(2)^{*}$,
 
@@ -305,7 +307,7 @@ sister problem in which the curve carries *unit forward speed* and the
 stays bounded. Both problems are driven by the *same* pendulum equation
 $\ddot\varphi + \sin\varphi = 0$ — that shared vertical subsystem is the real
 content of the reduction — but their projected curves differ, and it is the
-elastic representatives the figures draw. Appendix A4 §3 carries the elliptic
+elastic representatives the figures draw. Appendix A4 ("Differential equations") carries the elliptic
 substitution through; the **elastica curvature ODE**
 $\kappa''(s) + \tfrac12\kappa^3 - \mu\kappa = 0$ is the Duffing form
 equivalent to the pendulum.
@@ -355,7 +357,7 @@ equivalent to the pendulum.
 
 ## The reconstruction equation
 
-Once $\mu(t) = (h_1(t), h_2(t), h_3)$ is known, the SE(2) trajectory itself
+Once $\mu(t) = (h_1(t), h_2(t), h_3(t))$ is known, the SE(2) trajectory itself
 is obtained from
 
 $$\dot g(t) \;=\; g(t)\,\xi(t), \qquad \xi(t) := u_1^{\ast}(t) E_1 + u_2^{\ast}(t) E_3,$$
@@ -372,7 +374,7 @@ speed); then $s = t$, and $u_2^{\ast} = \dot\theta = \kappa$ is the
 **curvature** of the projected plane curve.  Here the heading $\theta$ is
 itself the pendulum, so its curvature is the pendulum velocity — a Jacobi
 cn (libration), sech (separatrix), or dn (rotation), i.e. the
-$\kappa = 2k\,\mathrm{cn}(s\mid k^2)$ family of Part&nbsp;2 §2.
+$\kappa = 2k\,\mathrm{cn}(s\mid k^2)$ family of Part&nbsp;2 ("Three Families via Jacobi Elliptic Functions").
 
 </div><!-- /.l-body -->
 
@@ -405,8 +407,8 @@ $\kappa = 2k\,\mathrm{cn}(s\mid k^2)$ family of Part&nbsp;2 §2.
     the reconstruction equation $\dot g = g\cdot\xi(t)$, drawn at unit speed
     ($c = 1$: the shape depends only on the dimensionless ratio $h_3/\sqrt c$,
     so varying $c$ would rescale, not reshape).  Vary $h_3$ and the
-    curve interpolates between near-circular (small $h_3$) and the elastica
-    regime.  (In the
+    curve passes from a straight line ($h_3 = 0$) through gently bending arcs
+    to cusped, looping curves (large $|h_3|$).  (In the
     full flow $h_3$ varies too, by $\dot h_3 = -h_1 h_2$; freezing it keeps
     this picture readable.)
   </figcaption>
@@ -489,7 +491,7 @@ normal Hamiltonian $\mathcal H_n = \tfrac12(h_1^2 + h_2^2)$.
 Lie–Poisson reduction on $\mathfrak{se}(2)^{\ast}$ collapses the
 $T^{\ast}\mathrm{SE}(2)$ flow to the costate equations
 $\dot h_1 = h_2 h_3, \dot h_2 = -h_1 h_3, \dot h_3 = -h_1 h_2$ — exactly the
-equations Part&nbsp;2 §1 wrote down.  Writing $h_1 = \sin\alpha$, $h_2 = \cos\alpha$
+equations Part&nbsp;2 wrote down.  Writing $h_1 = \sin\alpha$, $h_2 = \cos\alpha$
 on the unit Hamiltonian level and differentiating $\varphi = 2\alpha$ once
 more gives the nonlinear pendulum equation $\ddot\varphi + \sin\varphi = 0$.
 
@@ -511,8 +513,9 @@ explicit $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$ formula of Part&nbsp;2.
   </li>
   <li>
     A. A. Agrachev, Yu. L. Sachkov (2004). <em>Control Theory from the
-    Geometric Viewpoint.</em> Springer.  Chapter 12 derives the SR
-    geodesic equations on Lie groups by exactly this route.
+    Geometric Viewpoint.</em> Springer.  Chapter 12 states and proves the Pontryagin
+    Maximum Principle in the Hamiltonian form used here; Chapter 18 treats
+    left-invariant problems on Lie groups by exactly this route.
   </li>
   <li>
     J. E. Marsden, T. S. Ratiu (1999). <em>Introduction to Mechanics and

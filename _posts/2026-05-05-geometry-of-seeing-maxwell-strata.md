@@ -35,7 +35,7 @@ with generically cuspidal projections, and smooth pinned Euler elastica in close
 Jacobi-elliptic form. This part asks when symmetry produces equal-cost competitors.
 A curve can be perfectly taut locally and still be beaten by a completely different
 curve of the same length. The set of endpoints where that happens — where two distinct
-shortest geodesics <em>tie</em> — is the <strong>Maxwell stratum</strong>. We show it is
+equal-length geodesics <em>tie</em> — is the <strong>Maxwell stratum</strong>. We show it is
 forced by the reflection group hiding inside the pendulum equation. We compute the
 mirror-pair tie exactly on the smooth elastica family — it lands at arc length $4K(k^2)$,
 the very period that controlled the curvature in Part&nbsp;2 — and set up the sharper
@@ -107,7 +107,7 @@ and symmetry manufactures coincidences on purpose.
 
 <aside id="note-maxwell">
 A <strong>Maxwell point</strong> is a point reached by two <em>distinct</em>
-length-minimising geodesics from the same origin, with <em>equal</em> length. The set of
+geodesics from the same origin, with <em>equal</em> length. The set of
 all such points is the <strong>Maxwell stratum</strong>. The name entered optimal control
 from catastrophe theory's <em>Maxwell convention</em> — an echo of J. C. Maxwell's
 equal-area rule in thermodynamics: a system sits in its global minimum, and where two
@@ -236,7 +236,10 @@ They start together. When do they first meet again? In the plane, the reflection
 $y \mapsto -y$, so $\gamma_B(s) = \bigl(x_A(s),\, -y_A(s),\, -\theta_A(s)\bigr)$. As points
 of $\mathrm{SE}(2)$ — position **and** heading — the two coincide exactly when
 
-$$y_A(s) = 0 \quad\text{and}\quad \theta_A(s) \equiv 0 \pmod{2\pi}.$$
+$$y_A(s) = 0 \quad\text{and}\quad \theta_A(s) \equiv -\theta_A(s) \pmod{2\pi},
+\ \text{i.e. } \theta_A(s) \in \{0, \pi\}$$
+
+— the mirror's fixed set from the previous section.
 
 Part&nbsp;2 gave the closed form for this inflectional elastica:
 
@@ -258,7 +261,8 @@ $$s = 4K(k^2),$$
 exactly one spatial period of the curvature. The heading returns with it: Part&nbsp;2 gave
 $\theta_A(s) = 2\arcsin\!\bigl(k\,\mathrm{sn}(s\mid k^2)\bigr)$, which vanishes wherever
 $\mathrm{sn}$ does — at $s = 0,\, 2K,\, 4K, \dots$ (it never winds; the heading just
-oscillates within $\pm 2\arcsin k$). At $s = 2K(k^2)$ the heading is zero but the height is
+oscillates within $\pm 2\arcsin k$, strictly inside $(-\pi, \pi)$, so the value
+$\pi$ never occurs). At $s = 2K(k^2)$ the heading is zero but the height is
 *maximal*, $y_A = 4k$; the first instant both conditions hold together is $s = 4K(k^2)$. So
 the mirror pair re-coincides — position and heading at once — for the first time at
 $s = 4K(k^2)$, for **every** modulus $k$.
@@ -384,8 +388,8 @@ all. Proving that, and confronting what remains genuinely open beyond $\mathrm{S
   </li>
   <li>
     A. A. Agrachev &amp; Yu. L. Sachkov (2004). <em>Control Theory from the Geometric
-    Viewpoint.</em> Springer. Chapter 17 — symmetries of the exponential map and Maxwell
-    strata.
+    Viewpoint.</em> Springer. Chapter 21 — the Jacobi equation and conjugate points; the
+    symmetry method for Maxwell strata is developed in the Sachkov papers above.
   </li>
   <li>
     Yu. L. Sachkov (2008). "Maxwell strata in the Euler elastic problem."

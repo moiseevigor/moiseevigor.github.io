@@ -2,7 +2,7 @@
 layout: distill
 title: "Appendix D3 — The Law Q = d + k + 2, Derived"
 subtitle: >
-  The series' central law in four lines. It is an area argument dressed as the Ball–Box theorem:
+  The series' central law in a few lines. It is an area argument dressed as the Ball–Box theorem:
   the flux you catch is field times enclosed area, and near a curvature zero of order k that makes
   the holonomy coordinate weight k+2. Add the d drivable directions and you have the homogeneous
   dimension.
@@ -40,7 +40,7 @@ $$
 B(q_0, r) \;\asymp\; \big\{\, |u_i| \lesssim r^{\,w_i} \,\big\},
 $$
 
-where $w_i$ is the **weight** of coordinate $u_i$ — how many brackets you need to reach it. A
+where $w_i$ is the **weight** of coordinate $u_i$ — the length of the bracket needed to reach it. A
 directly drivable coordinate (one you can move along in the distribution) has weight 1. A
 coordinate reached by one bracket has weight 2, by a bracket-of-a-bracket weight 3, and so on. The
 **homogeneous dimension** is the volume exponent of that box:
@@ -117,15 +117,18 @@ d = 2:   flux weight = k + 2
 
 d = 3:   Q = k + 5
   k=0  ->  Q=5  (B != 0)
-  k=1  ->  Q=6  (a generic magnetic null; k=2 needs the
-                 fold's degenerate point, Part 6)
+  k=1  ->  Q=6  (a generic magnetic null -- and still the
+                 rank-2 fold of Part 6; k=2 needs the
+                 whole Jacobian to vanish)
 ```
 
 A genericity note the table deserves: in 2D a scalar $B$ generically vanishes to order 1
 along a curve — the $k \ge 2$ rows are deliberately *constructed* degeneracies, there to
 test the law, not claims about typical fields. In 3D only $k = 1$ (a transverse zero of
-$\mathbf B$) is generic; $k = 2$ occurs at codimension-one moments like the fold of
-Part 6.
+$\mathbf B$) is generic — and the codimension-one fold of Part 6 does not change that:
+its Jacobian has rank 2, the 1-jet survives, so $k = 1$ and $Q = 6$ still (article
+Cor. 5.1). $k = 2$ needs $\nabla\mathbf B = 0$ at the null, which only the constructed
+symmetric family of Part 6 has.
 
 The measured slopes match the integers to within a percent, and the $d=3$ jump $5\to6$ at a null
 is what indexes nulls for the growth vector (Part 4 — with that part's caveats on what

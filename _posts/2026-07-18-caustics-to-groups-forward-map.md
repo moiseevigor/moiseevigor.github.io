@@ -50,8 +50,8 @@ flow[^liepoisson]). We implemented that engine once and fed it four groups:
   group, and the Dubins car: drive forward and steer, never slide sideways.
 - **Engel** — a car towing one trailer: the trailer angle is a fourth coordinate you can
   only change indirectly.
-- **Cartan** — the exotic $(2,3,5)$ case Élie Cartan singled out in 1910: think a car with
-  *two* trailers, the richest of the small models.
+- **Cartan** — the exotic $(2,3,5)$ case Élie Cartan singled out in 1910: think of one ball
+  rolling on another without slipping or twisting, the richest of the small models.
 
 ## The Heisenberg caustic, exactly
 
@@ -74,7 +74,8 @@ $2\pi/|w|$, and that drift is the subject of Part 3.)
 ## The obstruction, in the flesh
 
 Part 1 stated it as a theorem; here it is as a fact about these four groups. Zoom far enough
-into the caustic of *any* of them and you see the same short list of shapes — a fold, a
+into a generic point of the caustic of *any* of them (the collapsed Heisenberg axis above is the
+one non-generic exception) and you see the same short list of shapes — a fold, a
 cusp[^cusp] — the universal ADE germs. Hand someone a single cusp and ask which group it came
 from and they cannot answer: the four are **locally identical**. A detector that keys on
 "there is a cusp here" is reading noise. The information that separates the groups is not in
@@ -85,7 +86,7 @@ piece of that organisation is the growth vector.
 
 Here is the idea that turns the obstruction into a measurement. In all four groups you may
 only *drive* along two directions. Everything else — height in Heisenberg, the trailer
-angles in Engel and Cartan — you reach **indirectly**, by combining allowed moves (drive a
+angle in Engel, the deepest coordinates in Cartan — you reach **indirectly**, by combining allowed moves (drive a
 little loop and you gain height without ever "moving up"). The question that separates the
 groups is: *how hard* is each hidden dimension to reach?
 
@@ -100,7 +101,7 @@ The figure shows the real measured curves.
 
 [^liepoisson]: The equations of motion for the geodesics of a left-invariant structure, written in the group's own moving frame; one compact system that specialises to each group by plugging in its bracket structure.
 
-[^cusp]: A cusp is the pointed singularity you see on the bright edge of light focused in a coffee cup — the generic caustic shape, and the same one every one of these groups shows locally.
+[^cusp]: A cusp is the pointed singularity you see on the bright edge of light focused in a coffee cup — the simplest caustic singularity after the smooth fold, and one that carries no group label.
 
 [^growthvector]: Written $(n_1, n_2, \dots)$: $n_1$ directions fill in at rate $r$, then $n_2$ total by rate $r^2$, and so on. Heisenberg and SE(2) are $(2,3)$; Engel is $(2,3,4)$; Cartan is $(2,3,5)$.
 
@@ -120,7 +121,7 @@ The figure shows the real measured curves.
     brackets (slope&nbsp;3) slower still. Counting how many coordinates sit at each slope gives
     the growth vector: Heisenberg and SE(2) are $(2,3)$ — two slope-1, one slope-2, nothing
     steeper; Engel adds a slope-3 coordinate → $(2,3,4)$; Cartan adds two → $(2,3,5)$. Slopes
-    recovered from data: $0.97$–$0.98$, $1.95$–$2.00$, $2.8$. Points are measured; dashed
+    recovered from clean data: $0.94$–$0.99$, $1.91$–$2.00$, $2.8$. Points are measured; dashed
     guides are exact slopes 1, 2, 3. Data: <code>research/caustics-to-groups/artifacts/e0_results.json</code>.
   </figcaption>
 </figure>
@@ -192,7 +193,7 @@ The figure shows the real measured curves.
 
 ## What the growth vector does and doesn't settle
 
-The measurement is clean. From noisy geodesic samples the exponents come back at $0.97, 1.95,
+The measurement is clean. From sampled geodesics the exponents come back at about $0.96, 1.9$–$2.0,
 2.8$ — round them and you read off the growth vector directly: **Heisenberg $(2,3)$, SE(2)
 $(2,3)$, Engel $(2,3,4)$, Cartan $(2,3,5)$.** That already splits the four into three classes,
 and it does so from data, respecting the obstruction — we never named a local cusp.

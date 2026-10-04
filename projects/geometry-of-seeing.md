@@ -148,7 +148,7 @@ $2\pi$; endpoint statements modulo $\pi$ are explicitly projected back to the li
 **The metric is sub-Riemannian.** Not all directions in $\mathrm{SE}(2)$ are allowed
 at unit cost. An idealised cortical state at orientation $\theta$ can move cheaply along its preferred
 direction $(\cos\theta, \sin\theta)$ and rotate cheaply by $d\theta$, but moving
-transversally is penalised. This defines a rank-2 distribution (a contact structure)
+transversally is forbidden outright. This defines a rank-2 distribution (a contact structure)
 with the Pontryagin Hamiltonian
 
 $$H = \frac{1}{2}(p_x \cos\theta + p_y \sin\theta)^2 + \frac{1}{2} p_\theta^2.$$
@@ -164,7 +164,7 @@ curves; their cut time is $2K(k^2)$ — half the elastica clock (Sachkov 2010–
 - **Petitot's contact model** (Part 1): how a neurogeometric model lifts orientation
   data to a contact bundle and formulates one class of completion problems variationally.
 - **Complete parametrisation** (Part 2): all three families — the inflectional
-  family, the Euler separatrix, and the non-inflectional family — written in
+  family, the borderline (separatrix) elastica, and the non-inflectional family — written in
   closed form using $\mathrm{sn}, \mathrm{cn}, \mathrm{dn}$.
 - **Maxwell strata** (Part 3): the pendulum's reflection group $$(\mathbb{Z}_2)^3$$,
   the mirror-pair tie at one curvature period $$4K(k^2)$$ on the elastica family,
@@ -181,7 +181,7 @@ complete/incomplete integrals implemented without Maple calls, accepting tensors
 
 - GitHub: [moiseevigor/elliptic](https://github.com/moiseevigor/elliptic)
 - arXiv: [0807.4731](https://arxiv.org/abs/0807.4731) — Moiseev & Sachkov (2010)
-- arXiv: [0903.0727](https://arxiv.org/abs/0903.0727) — Sachkov (2011)
+- arXiv: [0903.0727](https://arxiv.org/abs/0903.0727) — Sachkov (2010, 2011)
 
 <div class="d-references" style="margin-top:2em; padding-top:1em;">
 <h2>Core References</h2>

@@ -65,7 +65,7 @@ exactly.
 <figure class="l-middle" id="fig-jupiter-field">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-jupiter-field.png"
-      alt="Three panels: the JRM33 degree-18 radial-field map at the one-bar surface with the Great Blue Spot labelled near the equator; a polar view at the one-bar surface showing a single outward polarity everywhere; and the same polar view at the mapping surface radius 0.85 where several patches of reversed inward flux appear, outlined by the zero contour"
+      alt="Three panels: the JRM33 degree-18 radial-field map at the one-bar surface with the Great Blue Spot labelled near the equator; a polar view at the one-bar surface showing a single outward polarity everywhere; and the same polar view at the mapping surface radius 0.85 where several patches of reversed inward flux appear, outlined by the zero contour; panel A axes are System III longitude 0 to 360 degrees and latitude minus 90 to 90 degrees (linear); the polar panels show latitude rings at 75, 60 and 45 degrees north with longitude around the rim; each panel has its own colourbar in gauss"
       style="max-width:min(100%,980px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
@@ -76,7 +76,7 @@ exactly.
     out of/into the planet, colour scale in Gauss; black curve = the polarity-inversion
     line $B_r = 0$). The hemispheric dichotomy is plain — a structured north against a
     smooth south — and the <strong>Great Blue Spot</strong> sits at the equator near
-    System III longitude 275°. <em>B:</em> the north polar cap at $r = 1$: one polarity,
+    right-handed System III longitude 275° (≈ 85°W). Colour limits as rendered (each panel has its own colourbar): A ±18 G, B ±12 G, C ±22 G. <em>B:</em> the north polar cap at $r = 1$: one polarity,
     no reversed flux anywhere poleward of 45°N. <em>C:</em> the same cap at
     $r = 0.85\,R_J$ — JRM33's conventional mapping surface near the top of the dynamo
     region (the Lowes-radius estimate for the dynamo top is $\approx 0.81\,R_J$):
@@ -135,13 +135,14 @@ the census shell starts at $0.855$). Anatomy of the find: radial,
 topological degree $-1$ — an opposite-sign partner to the other two. And a topological
 cross-check brackets the shell from above: the degree of
 $\mathbf B/\lvert\mathbf B\rvert$ over spheres at $r = 0.885$, $0.94$ and $0.999$ is
-**numerically consistent with zero** ($-0.000$, $-0.000$, $-0.005$), so the census
+**numerically consistent with zero** ($-0.005$, $-0.000$, $-0.000$), so the census
 leaves no unexplained **net topological charge** above $0.885$ — index-cancelling
 missed pairs are *not* excluded (fold-created nulls come precisely in such pairs).
 The three found nulls all live in $0.855$–$0.885$, where the two-resolution and
 floor-move agreement is *convergence* evidence, not completeness; the stronger
-comparator — a Haynes–Parnell trilinear cell census — is chartered in G1 and not
-implemented here.)
+comparator — a Haynes–Parnell trilinear cell census — is chartered in G1 (the
+program's not-yet-run gold-standard pipeline charter,
+`docs/PROGRAM-G1-solar-gold-standard.md`) and not implemented here.)
 
 The two seeded nulls sit a few hundredths of a radius above the dynamo surface — and
 both land exactly where the theory of Parts 4–5 says they must. The growth vector reads
@@ -150,7 +151,7 @@ extrapolation is analytic, its internal harmonics admit an *exact closed-form* v
 potential ($A = -\tfrac1l r^{-(l+1)}\,\hat r\times\nabla_s S_{lm}$ per harmonic,
 golden-checked $\nabla\times A = \mathbf B$), and the flux-reach exponent can be
 measured on the **full field itself**, no Jacobian input anywhere: $w_4(r)$ reads
-$\approx 3$ across the whole radii ladder at both nulls ($2.8$–$3.1$) and $\approx 2$
+$\approx 3$ across the whole radii ladder at both nulls ($2.7$–$3.1$) and $\approx 2$
 at a generic control point (<code>scripts/run_j1d_raw_w4.py</code>) — the $k=1$ flux
 weight, read raw, on the fourth world. (The tangent-cone $Q = 6$ in the table remains
 what it is everywhere on modelled fields: a consistency check given the measured
@@ -163,12 +164,12 @@ Part 5 forbids spiral nulls here — and the census obliges, 0 spirals out of 3.
 <figure class="l-middle" id="fig-jupiter-skeleton">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-jupiter-skeleton.png"
-      alt="Three-dimensional rendering of Jupiter's dynamo surface textured with the JRM33 radial field, the deep blue Great Blue Spot visible on the lower left, a gold star marking the polar null with an orange fan dome closing onto the reversed patch, the gold spine line arcing away and fading, and a faint translucent shell marking the one-bar cloud surface"
+      alt="Three-dimensional rendering of Jupiter's dynamo surface textured with the JRM33 radial field, the deep blue Great Blue Spot visible on the lower left, a gold star marking the polar null with an orange fan dome closing onto the reversed patch, the gold spine line arcing away and fading, and a faint translucent shell marking the one-bar cloud surface; a 3D rendering without axes, the red-blue texture saturating at plus or minus 20 gauss"
       style="max-width:min(100%,860px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
     <strong>The buried skeleton.</strong> The dynamo surface ($r = 0.85\,R_J$) textured
-    with the real JRM33 $B_r$ (red out / blue in; the deep-blue region at lower left is
+    with the real JRM33 $B_r$ (red out / blue in, colour scale saturating at ±20 G; the deep-blue region at lower left is
     the Great Blue Spot), with the polar null (gold ★, $r = 0.873\,R_J$), its
     <span style="color:#ff8b2e;">fan separatrix dome</span> closing onto the polar
     reversed patch, and its <span style="color:#d4af37;">spine</span> — the inner foot
@@ -236,7 +237,7 @@ flux before it can reach daylight**.
 <figure class="l-middle" id="fig-jupiter-anatomy">
   <div style="text-align:center;">
     <img src="/public/img/posts/forbidden-directions-jupiter-anatomy.png"
-      alt="Two anatomy rows, one per Jupiter null, in null-frame views: a 3D skeleton with translucent fan disc, a view down the spine with blue fan field lines radiating from the null, a side view with the orange spine vertical and the fan curving away like a dome, and a schematic panel listing radial type, normalised gradient eigenvalues, zero field-aligned current, and growth vector Q equals six"
+      alt="Two anatomy rows, one per Jupiter null, in null-frame views: a 3D skeleton with translucent fan disc, a view down the spine with blue fan field lines radiating from the null, and a side view with the orange spine vertical and the fan curving away like a dome; axes are fan-plane coordinates e1, e2 and the spine coordinate in Jupiter radii (linear, minus 0.045 to 0.045); panels A to C the polar null, D to F the low-latitude null"
       style="max-width:min(100%,880px);width:100%;height:auto;border-radius:3px;">
   </div>
   <figcaption>
@@ -248,7 +249,7 @@ flux before it can reach daylight**.
     view with the spine (orange) vertical — where the polar null's fan visibly curves
     <em>downward</em>: that bending sheet is the dome of the skeleton figure closing
     onto the dynamo surface. Gray = ambient lines; open circle coloured by topological
-    degree (blue $+1$, red $-1$); the measured invariants at right. Both are clean radial nulls with $J_\parallel = 0.00$ — the
+    degree (blue $+1$, red $-1$); dashed circle/line = the ideal fan plane; axes in $R_J$, linear. <em>A–C:</em> the polar null ($r = 0.873\,R_J$, latitude $+69°$; normalised $\nabla\mathbf B$ eigenvalues $(1.00, -0.27, -0.73)$). <em>D–F:</em> the low-latitude null ($r = 0.865\,R_J$, latitude $+10°$; eigenvalues $(1.00, -0.07, -0.93)$). Both are clean radial nulls of degree $+1$ with $J_\parallel = 0.00$ — the
     vacuum envelope permits nothing else (Part 5's theorem) — and the SR growth vector
     reads $Q = 6$ at both: the law's fourth-world consistency check.
   </figcaption>
@@ -302,7 +303,7 @@ The honest statement, then, in the form this series has earned: **the dome-plus-
 skeleton is what the $l \le 18$ JRM33 continuation says lies beneath Jupiter's north
 pole — the patch is a combination of separatrices in that modelled field — but the
 structure rides on the degree-14–18 coefficients**, the least-determined tail of the
-model. It is a *resolution tenant*, exactly like the low windowed nulls of Part 5's
+model. It is a *resolution tenant*, exactly like the low windowed nulls of Part 6's
 Sun. And the uncertainty statement now has numbers: formal JRM33 covariances are not
 distributed with the coefficients, so the pipeline builds a **stress ensemble** —
 per-degree Gaussian perturbations scaled by the JRM33−JRM09 per-degree
@@ -359,8 +360,9 @@ increasingly, the actual product.
 - **JRM33 / JRM09** — Juno Reference Model through perijove 33 (degree-30 fit,
   Connerney et al. 2022) / perijove 9 (2018). Spherical-harmonic models of the internal
   field; coefficients via the open `planetmagfields` package.
-- **System III** — Jupiter's magnetospheric rotation frame; longitudes here are
-  System III west longitudes as used by JRM33.
+- **System III** — Jupiter's magnetospheric rotation frame; longitudes here are the
+  right-handed (east-positive) System III longitudes $\phi$ in which the JRM33
+  coefficients are defined; the traditional System III west longitude is $360° - \phi$.
 - **$R_J$** — Jupiter radius (71,492 km at 1 bar). The **1-bar surface** ($r = 1$) is
   the visible cloud deck. The **mapping surface** $r = 0.85\,R_J$ is where JRM33's
   standard field maps are drawn, near the top of the dynamo region; the Lowes-radius

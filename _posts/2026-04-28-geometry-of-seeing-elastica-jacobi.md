@@ -108,7 +108,9 @@ $\{\cdot,\cdot\}$ is the <strong>Lie–Poisson bracket</strong> on $\mathfrak{se
 the natural Poisson structure on the dual of any Lie algebra. With
 $[X_1, X_2] = -X_3$, $[X_2, X_3] = -X_1$, $[X_1, X_3] = 0$ in our body frame,
 the brackets between coordinate functionals are
-$\{h_1, h_2\} = h_3$, $\{h_2, h_3\} = h_1$, $\{h_1, h_3\} = 0$.
+$\{h_1, h_2\} = h_3$, $\{h_2, h_3\} = h_1$, $\{h_1, h_3\} = 0$
+(sign convention $\{h_i, h_j\} = -\langle\lambda, [X_i, X_j]\rangle$, the canonical
+bracket of $T^*\mathrm{SE}(2)$; Appendix A3).
 </aside>
 
 The Hamiltonian equations on $\mathfrak{se}(2)^{*}$, via the <span class="annotated-term" data-note="note-lie-poisson">Lie–Poisson bracket</span>, read
@@ -140,7 +142,7 @@ which Poisson-commutes with every smooth function and is therefore
 The <strong>coadjoint orbits</strong> of a Lie group $G$ partition
 $\mathfrak{g}^{*}$ into Kirillov–Kostant–Souriau symplectic manifolds.
 For SE(2) they are vertical cylinders in $(h_1, h_2, h_3)$-space (plus
-degenerate points along an axis). Appendix A1 §6 states this and sketches
+degenerate points along an axis). Appendix A1 ("Adjoint and coadjoint actions") states this and sketches
 why, via the adjoint action.
 </aside>
 
@@ -260,20 +262,23 @@ a common conflation worth flagging.)
 
 The pendulum rotates without stopping; $\varphi(s)$ is monotone.
 Setting $m = 2/(E + 1) \in (0, 1)$ (here $m$ parametrises this family — at
-$E=1$ the separatrix gives $m=1$, and as $E\to\infty$ we have $m\to 0$):
+$E=1$ the separatrix gives $m=1$, and as $E\to\infty$ we have $m\to 0$) and
+rescaling arc length by $\sqrt m$ — elastica are defined up to similarity; in the
+unit-pendulum clock the profile is $\tfrac{2}{\sqrt m}\,\mathrm{dn}(s/\sqrt m \mid m)$,
+with period $2\sqrt m\,K(m)$ — the curvature is
 
 $$\kappa(s) = 2\,\mathrm{dn}(s \mid m).$$
 
 These curves have **no inflection points** — the curvature never changes sign.
-The Jacobi function $\mathrm{dn}(s\mid m)$ has period $2K(m)$ in $s$, so the
-spatial period is
+The Jacobi function $\mathrm{dn}(s\mid m)$ has period $2K(m)$ in $s$, so in the
+rescaled arc length the spatial period is
 
 $$T_{\kappa} = 2K(m).$$
 
 As $m \to 1$: $\mathrm{dn}(s\mid 1) = \mathrm{sech}(s)$ — the non-inflectional family
 approaches the borderline elastica from the other side.
 As $m \to 0$: $\mathrm{dn}(s\mid 0) = 1$ and $\kappa \to 2$ — the curves
-degenerate into circles of radius $1/2$ (high-energy uniform rotation).
+degenerate into circles of radius $1/2$ in the rescaled arc length (high-energy uniform rotation).
 
 </div><!-- /.l-body -->
 
@@ -431,14 +436,21 @@ In the `elliptic` package:
 ```python
 from elliptic import elliptic12
 
-am = np.arcsin(sn)                       # Jacobi amplitude am(s | k²)
+am = np.arcsin(sn)                       # Jacobi amplitude am(s | k²), valid for |s| ≤ K
+                                         # (beyond that, unwrap am continuously)
 F_vals, E_vals = elliptic12(am, k**2)    # F(am | k²) = s  and  E(am | k²)
-x = 2 * E_vals - F_vals                  # x(s) = 2 E(am(s)|k²) − s  (Sachkov 2011)
+x = 2 * E_vals - F_vals                  # x(s) = 2 E(am(s)|k²) − s
 ```
 
-The full closed-form expressions — due to Sachkov (2011) — express every
-$x(s)$, $y(s)$ of an inflectional elastica as a rational combination of
-$\mathrm{sn}$, $\mathrm{cn}$, $\mathrm{dn}$, and $E(\cdot\mid k^2)$.
+The full closed-form expressions are classical (in the present notation see
+Sachkov 2008, cited in Part&nbsp;3). With $\theta_0 = 0$ and the curve started at the
+origin,
+
+$$x(s) = 2E\bigl(\mathrm{am}(s\mid k^2)\mid k^2\bigr) - s, \qquad
+  y(s) = 2k\bigl(1 - \mathrm{cn}(s\mid k^2)\bigr),$$
+
+obtained by integrating $\cos\theta = 1 - 2k^2\mathrm{sn}^2$ and
+$\sin\theta = 2k\,\mathrm{sn}\,\mathrm{dn}$.
 No numerical ODE integration is needed.
 
 ## What the Three Families Look Like
@@ -449,7 +461,7 @@ A few landmarks worth noting:
 - **$k = 0.1$** (inflectional): nearly straight, very gentle curvature oscillation.
   The curve barely bends before straightening again.
 
-- **$k \approx 0.909$** (inflectional): the "figure-eight" lemniscate — at the
+- **$k \approx 0.909$** (inflectional): the "figure-eight" elastica — at the
   modulus where $2E(k^2) = K(k^2)$, the curve crosses itself once per period and
   the endpoints of one period coincide.
   This is where the mirror-pair **Maxwell point** of the elastica family lands back
@@ -543,7 +555,7 @@ $K(k^2)$ runs both problems.
     <a href="https://arxiv.org/abs/0903.0727">arXiv:0903.0727</a>
   </li>
   <li>
-    Yu. L. Sachkov (2004). "Exponential mapping in generalized Dido's problem."
+    Yu. L. Sachkov (2003). "Exponential mapping in generalized Dido's problem."
     <em>Mat. Sbornik</em> 194(9): 63–90.
   </li>
   <li>

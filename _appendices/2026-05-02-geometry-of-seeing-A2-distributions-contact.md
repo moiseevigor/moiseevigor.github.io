@@ -30,7 +30,7 @@ permalink: /mathematics/2026/05/02/geometry-of-seeing-A2-distributions-contact/
 <div class="callout">
 <div class="callout-title">What this appendix is for</div>
 
-Part&nbsp;1 §3 introduces a horizontal *distribution* $\mathcal H = \mathrm{span}\{X_1, X_2\}$
+Part&nbsp;1 ("The Lie Group SE(2)") introduces a horizontal *distribution* $\mathcal H = \mathrm{span}\{X_1, X_2\}$
 on $\mathrm{SE}(2)$, calls it "completely non-integrable", invokes the
 *Hörmander* (bracket-generating) condition, and applies the
 *Chow–Rashevskii* reachability theorem.  These are not metaphors —
@@ -115,7 +115,7 @@ submanifolds are the slices $x_{k+1}, \ldots, x_n = \text{const}$.  The
 bracket-closure ensures the rectifying coordinates are consistent.
 
 **Worked test for the V1 distribution.**  $X_1 = \cos\theta\,\partial_x +
-\sin\theta\,\partial_y$, $X_2 = \partial_\theta$ (Appendix A1 §3).  Compute
+\sin\theta\,\partial_y$, $X_2 = \partial_\theta$ (Appendix A1, "Left-invariant vector fields").  Compute
 $[X_1, X_2]$ in coordinates:
 
 $$[X_1, X_2]
@@ -344,9 +344,9 @@ homogeneous distance is a separate empirical question.
 $d_{\mathrm{SR}}$ is also called the <strong>Carnot–Carathéodory
 distance</strong>, after the 1909 thermodynamics paper that first used it
 informally. It is a genuine metric: positive, symmetric, and satisfies the
-triangle inequality. But the topology it generates can be very different
-from the ambient Riemannian topology — small SR balls are anisotropic
-"pancakes", flat in the bracket direction.
+triangle inequality. It induces the usual manifold topology, but its metric
+geometry is very different from a Riemannian one — small SR balls are anisotropic
+"pancakes", flat (of thickness $\sim\varepsilon^2$) in the bracket direction.
 </aside>
 
 Once a sub-Riemannian metric $\langle\cdot,\cdot\rangle_p$ on $\Delta_p$ is
@@ -447,7 +447,7 @@ guarantees any two V1 neurons can be linked by a horizontal curve.
 
 Appendix A3 will turn the SR-length minimisation problem into a Hamiltonian
 system on $\mathfrak{se}(2)^{\ast}$ via the Pontryagin Maximum Principle —
-recovering the equations $\dot h_1 = h_2 h_3$ etc. that Part&nbsp;2 §1 uses
+recovering the equations $\dot h_1 = h_2 h_3$ etc. that Part&nbsp;2 uses
 without proof.
 
 </div><!-- /.l-body -->

@@ -93,9 +93,11 @@ $$
 $$
 
 We restrict the "which group?" question to a fixed, honest candidate list —
+
 $$
 \{\,\mathrm{Heisenberg},\; \mathrm{SE}(2),\; \mathrm{SE}(3),\; \mathrm{Engel}\,(2,3,4),\; \mathrm{Cartan}\,(2,3,5)\,\}
 $$
+
 — the groups whose SR geodesics and conjugate loci are known in closed or
 near-closed form (Sachkov school; Duits et al.), so that ground truth is available
 and the inverse can be graded, not just asserted.
@@ -289,7 +291,7 @@ That refusal is a deliverable, connecting this series directly to the
     svg.appendChild(el("text", { x: cx + a + 6, y: cy + 14, "font-size": 11.5, fill: "#e65100",
       "font-family": MONO }, "4-cusp astroid"));
     svg.appendChild(el("text", { x: cx, y: 26, "text-anchor": "middle", "font-size": 12,
-      fill: "#455a64", "font-family": SANS }, "shape deviation from the flat astroid = moduli (χ, κ)"));
+      fill: "#455a64", "font-family": SANS }, "astroid size and shape ↔ moduli (χ, κ)"));
     // abnormal-stratum badge
     const bx = 44, by = 40;
     svg.appendChild(el("rect", { x: bx, y: by, width: 150, height: 40, rx: 5, fill: "#fff",
@@ -353,7 +355,7 @@ candidate group list from caustic observables alone.*
 Falsifiable prediction: the classifier's confusion matrix on held-out synthetic
 realizations (E1) shows significantly-above-chance separation of
 $\{\mathrm{Heisenberg}, \mathrm{SE}(2), \mathrm{Engel}, \mathrm{Cartan}\}$, with the
-abnormal-stratum bit cleanly splitting $\{$contact 3D$\}$ from $\{$Engel, Cartan$\}$.
+abnormal-stratum bit cleanly splitting {contact 3D} from {Engel, Cartan}.
 **If the off-diagonal mass is not significantly below chance, H2 fails** — and the
 program reports *which* observables are informative and which are not.
 
@@ -526,7 +528,7 @@ realizations. Parameter count is part of the model comparison.
 - **Homogeneous dimension $Q$** — $\sum_i i\,(n_i-n_{i-1})$; the exponent in ball-volume
   scaling $\mathrm{vol}\,B(r)\sim r^Q$ (Ball–Box theorem).
 - **Abnormal geodesic** — an extremal arising from the distribution's shape alone, not
-  the metric; present iff corank is high enough.
+  the metric; absent for the 3D contact candidates, present for Engel and Cartan.
 - **Moduli $(\chi, \kappa)$** — Agrachev–Barilari differential invariants classifying
   left-invariant 3D contact SR structures; $\chi=\kappa=0$ is flat Heisenberg.
 - **Nilpotent-deviation statistic $\delta$** — Hausdorff shape distance from the

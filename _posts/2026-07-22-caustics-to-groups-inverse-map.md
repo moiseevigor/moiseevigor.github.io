@@ -82,8 +82,8 @@ what it guesses. That table is the confusion matrix.
     the classifier's guess, over 25 realizations per group; darker = more. The first four
     columns are exact group labels; <em>E/C</em> and <em>H/S</em> are <em>coarse</em> guesses
     ("it's Engel-or-Cartan / Heisenberg-or-SE(2)") the classifier falls back to when noise
-    blurs the fine detail. Clean data: a perfect diagonal — every group named correctly, the
-    Heisenberg/SE(2) tie broken by $\delta$. As noise rises the step-3 groups (Engel, Cartan)
+    blurs the fine detail. Clean data: an essentially perfect diagonal (one Cartan realization hedges to
+    <em>E/C</em>), the Heisenberg/SE(2) tie broken by $\delta$. As noise rises the step-3 groups (Engel, Cartan)
     slide into the <em>E/C</em> coarse column — the correct <em>class</em> — and essentially
     never into a wrong group. The failure mode is honest hedging, not confident error. Data:
     <code>research/caustics-to-groups/artifacts/e1_results.json</code>.
@@ -162,7 +162,7 @@ what it guesses. That table is the confusion matrix.
 
 ## Reading the matrix
 
-**Clean data: a perfect diagonal.** Every group named correctly (one Cartan realization hedges
+**Clean data: a near-perfect diagonal.** Every group named correctly (one Cartan realization hedges
 to the coarse class — 24 of 25 exact). The Heisenberg/SE(2) tie that stumped the growth vector
 is broken cleanly by $\delta$: those two rows never bleed into each other, at any noise level in
 the study. The moduli component does exactly the job the series was premised on.

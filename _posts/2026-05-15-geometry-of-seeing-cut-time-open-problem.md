@@ -42,7 +42,7 @@ headline example of. No hand-waving about what is settled and what is not.
 
 ## Where Part&nbsp;3 left us
 
-The story so far, in one line: the visual cortex completes a contour by the **globally
+The story so far, in one line: in the model, a contour is completed by the **globally
 shortest** horizontal path in $\mathrm{SE}(2)$, and such a path stays uniquely shortest
 only up to its **cut time** $t_{\mathrm{cut}}$. Part&nbsp;3 gave two facts about it.
 
@@ -67,7 +67,8 @@ origin first folds. It marks loss of <em>local</em> optimality. For SE(2) it is 
 from the second variation of the length functional along the geodesic.
 </aside>
 
-The result (Sachkov 2011, Thm 2.1): along every inflectional geodesic — and every
+The result (Sachkov 2010, Thms 2.1, 2.5 and 2.6; theorem numbers as in the preprint
+arXiv:0903.0727): along every inflectional geodesic — and every
 critical-energy one — **there are no <span class="annotated-term" data-note="note-conj-time">conjugate points</span> at all**,
 
 $$t_{\mathrm{conj}}(\lambda) \;=\; +\infty
@@ -94,8 +95,8 @@ optimality; the geometry never folds. Figure&nbsp;1 draws it.
     Horizontal axis: modulus $k \in (0, 1)$ of the inflectional geodesic (dimensionless).
     Vertical axis: SR arc length. Blue: the cut time $t_{\mathrm{cut}} = \mathfrak t =
     2K(k^2)$, plotted exactly — half a pendulum period, proven equal to the first Maxwell
-    time (Sachkov 2011). There is no conjugate curve to draw at all: for the whole
-    inflectional family $t_{\mathrm{conj}} = +\infty$ (Thm 2.1), so local optimality never
+    time (Sachkov 2010). There is no conjugate curve to draw at all: for the whole
+    inflectional family $t_{\mathrm{conj}} = +\infty$ (Sachkov 2010, Thm 2.1), so local optimality never
     fails — the annotation marks it. The cut curve diverges as $k \to 1$ (the separatrix
     limit, where the geodesic stays optimal forever), and starts at $2K(0) = \pi$ for the
     near-straight $k \to 0$ curves. The shaded region below the blue curve is where the
@@ -136,8 +137,8 @@ you when the shortest path stops being unique.
 
 More than the number, Sachkov (2011) determined the whole <span class="annotated-term" data-note="note-cut-locus">cut locus</span> — the set of *all* cut points in
 $\mathrm{SE}(2)$ — and with it the **optimal synthesis**: for any target configuration,
-which geodesic is the minimiser and up to what length. The visual-cortex completion
-problem is, for generic inputs, *solved*.
+which geodesic is the minimiser and up to what length. The shortest-path problem behind the
+completion model is *solved*.
 
 The mirror-symmetry picture of Part&nbsp;3 still deserves its portrait — on the elastica
 sister family, where everything is smooth and visible. There the tie has a geometric
@@ -177,7 +178,7 @@ point is the origin itself.
     The thick orange segment is the swept tie locus: it starts near $x = 2\pi$ (the
     $k \to 0$ limit, $4K(0) = 2\pi$), moves inward, passes <em>through the origin</em>
     at the figure-eight modulus $k \approx 0.909$ (ring marker — the curve closes into
-    Part&nbsp;2's lemniscate), and continues to negative $x$ beyond it. The free SR cut
+    Part&nbsp;2's figure-eight), and continues to negative $x$ beyond it. The free SR cut
     happens at half this clock ($2K(k^2)$) in costate coordinates — this figure is the
     smooth family's portrait of the same reflection mechanism. Axes: plane $x, y$
     (elastica arc-length units). Drag $|k|$ to grow the family; toggle the geodesics to
@@ -294,8 +295,7 @@ is the quiet punchline of the whole series.
   </li>
   <li>
     A. A. Agrachev, D. Barilari &amp; U. Boscain (2019). <em>A Comprehensive Introduction to
-    Sub-Riemannian Geometry.</em> Cambridge — cut/conjugate theory and the state of the
-    general conjecture.
+    Sub-Riemannian Geometry.</em> Cambridge — cut/conjugate theory in general.
   </li>
 </ol>
 </div>
@@ -341,7 +341,7 @@ function drawClocks() {
 
   const N = 300;
   const kArr = d3.range(N).map(i => 0.01 + i * 0.975 / N);
-  // cut time = first Maxwell time = 2K(k²) (Sachkov 2011); no conjugate curve
+  // cut time = first Maxwell time = 2K(k²) (Sachkov 2010); no conjugate curve
   // exists for the inflectional family (t_conj = +∞, Thm 2.1).
   const tCut = kArr.map(k => 2 * ellipticK(k * k));
 
@@ -362,7 +362,7 @@ function drawClocks() {
     .text('t_cut = t_Maxwell = 2K(k²)  — half a pendulum period');
   g.append('text').attr('x', lx).attr('y', ly + 22)
     .attr('style', 'font-family:var(--sans,sans-serif);font-size:11px;fill:#2e7d32')
-    .text('t_conj = +∞ on this whole family (no conjugate points — Sachkov 2011, Thm 2.1)');
+    .text('t_conj = +∞ on this whole family (no conjugate points — Sachkov 2010, Thm 2.1)');
   g.append('text').attr('x', xSc(0.93)).attr('y', pad.t + 12).attr('text-anchor', 'end')
     .attr('style', 'font-family:var(--sans,sans-serif);font-size:10px;fill:#c62828').text('k→1: cut → ∞');
 }

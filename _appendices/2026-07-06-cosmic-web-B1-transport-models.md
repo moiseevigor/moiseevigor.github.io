@@ -237,10 +237,11 @@ metric: structure lives in the singularities of the map, not in curved paths.
 
 This derivation predicts the two dynamical signatures the simulations found
 (E2, E4): matter arrives at a filament along straight rays that terminate *on*
-the shock set — generically **transverse** to it (chord-deviation direction
-statistic P2 = ⟨(d̂·e₃)²⟩ of 0.21–0.30 versus the isotropic null ⅓) — and
+the shock set — generically **transverse** to it (bulk chord-deviation direction
+statistic P2 = ⟨(d̂·e₃)²⟩ of 0.21–0.23 in E2, and 0.21–0.30 for the
+Zel'dovich-residual direction in E4, versus the isotropic null ⅓) — and
 after absorption a weak along-filament stream survives inside the tube: the
-same P2 statistic rises to 0.364 ± 0.010 within ~4 voxels of spines, and the
+P2 statistic rises to 0.364 ± 0.010 within ~4 voxels of spines, and the
 velocity alignment ⟨\|v̂·e₃\|⟩ ≈ 0.56 sits above its 0.5 null (E2).
 
 ## MUSCLE: spherical collapse as the sticking rule
@@ -300,7 +301,7 @@ Back to the series: [The Geometry of the Cosmic Web: A Research Program](/mathem
   <li>S. N. Gurbatov, A. I. Saichev &amp; S. F. Shandarin (1989). "The large-scale structure of the universe in the frame of the model equation of non-linear diffusion." <em>MNRAS</em> 236, 385–402.</li>
   <li>E. Hopf (1950). "The partial differential equation u<sub>t</sub> + uu<sub>x</sub> = μu<sub>xx</sub>." <em>Comm. Pure Appl. Math.</em> 3, 201–230; P. D. Lax (1957). "Hyperbolic systems of conservation laws II." <em>Comm. Pure Appl. Math.</em> 10, 537–566.</li>
   <li>Y. Brenier (1991). "Polar factorization and monotone rearrangement of vector-valued functions." <em>Comm. Pure Appl. Math.</em> 44, 375–417; U. Frisch, S. Matarrese, R. Mohayaee &amp; A. Sobolevski (2002). "A reconstruction of the initial conditions of the Universe by optimal mass transportation." <em>Nature</em> 417, 260–262.</li>
-  <li>M. C. Neyrinck (2016). "Truthing the stretch: non-perturbative cosmological realizations with multiscale spherical collapse (MUSCLE)." <em>MNRAS</em> 455, 1204.</li>
+  <li>M. C. Neyrinck (2016). "Truthing the stretch: non-perturbative cosmological realizations with multiscale spherical collapse (MUSCLE)." <em>MNRAS Letters</em> 455, L11.</li>
   <li>Experiment reports T1, E2, E4, E5, E8, E9 and the model card, in <code>research/cosmic-web/docs/</code> of <a href="https://github.com/moiseevigor/moiseevigor.github.io/tree/research/geometry-of-cosmic-web/research/cosmic-web">the repository</a>.</li>
 </ol>
 </div>

@@ -80,8 +80,8 @@ labelled at one of three levels — **blind detection** (location produced by th
 sub-Riemannian statistic itself, with no root-finder or Jacobian input), **independent
 local confirmation** (the statistic evaluated on the full field at a location another
 method found), or **tangent-cone consistency check** (the structure built from the
-measured Jacobian, which the flag lemma then fixes). Most of the series' planetary and
-solar values are the second and third kind; none are blind detection.
+measured Jacobian, which the flag lemma then fixes). All of the series' planetary and
+solar values are of the second or third kind; none are blind detection.
 
 ## 1. The magnetic flux lift
 
@@ -481,8 +481,8 @@ Status and structure — what is proved, exactly:
    $\big[\partial_E(\text{endpoint}) - T'(E)\,\dot\gamma\big]\, E'(\theta_0)$. The
    Jacobian of the exponential map at $t = T$ vanishes iff this vector is linearly
    dependent with $\{\partial_w \gamma,\ \dot\gamma\}$ — a $3\times3$ determinant identity
-   in explicit one-period $\theta$-integrals that has been verified to $10^{-8}$ across
-   the tested $\varepsilon$ range but not yet proved. Because the variational system of
+   in explicit one-period $\theta$-integrals that has been verified to $6\times10^{-8}$ (worst relative gap; $5\times10^{-7}$ at
+   $\varepsilon = 0.48$) across the tested $\varepsilon$ range but not yet proved. Because the variational system of
    the reduced flow integrates by quadratures ($\partial\theta/\partial\theta_0$ solves a
    first-order linear ODE along the orbit), the missing step is a finite computation with
    elementary integrands; it is **Open problem O2**, and the sharpest single gap in the
@@ -493,7 +493,7 @@ Status and structure — what is proved, exactly:
    the $(X,\theta)$ orbit and collapses the endpoint onto $\sin\theta_0$ — and yet there
    the identity is **false**: the Jacobian pipeline measures
    $\max_{\theta_0}\lvert t_c/T - 1\rvert \propto \varepsilon^2$ (reaching $1.2\times
-   10^{-2}$ at $\varepsilon = 0.15$, against $10^{-8}$ for the exponential profile). So
+   10^{-2}$ at $\varepsilon = 0.15$, against $\lesssim 10^{-7}$ for the exponential profile). So
    Conjecture A, if valid, is an exponential-specific property, and no argument built
    from closure and $E$-collapse alone can prove it — the proof, if it exists, must use
    whatever makes the exponential exceptional (its period integrand is the Poisson
@@ -591,8 +591,8 @@ $$
 \tfrac94$, $c_6 = \tfrac{25}{4}$ are corollaries of Theorem B (as period-average
 statements; as caustic statements, conditional on Conjecture A). The measured values —
 $c_2 = 0.9996$, $c_4 = 2.2497 \pm 0.0009$ from the precision pipeline, and full-curve
-agreement with $1-\tfrac{2}{\pi}K(2\varepsilon)$ to $10^{-10}$ over $\varepsilon \in
-[0.05, 0.45]$ — are independent confirmations, and simultaneously the numerical evidence
+agreement with $1-\tfrac{2}{\pi}K(2\varepsilon)$ to $4\times10^{-9}$ or better over $\varepsilon \in
+[0.05, 0.45]$ ($\le 10^{-10}$ for $\varepsilon \le 0.25$) — are independent confirmations, and simultaneously the numerical evidence
 for Conjecture A.
 
 **Corollary B2 (critical gradient).** $K(k)$ diverges (logarithmically) as $k \to 1^-$;
@@ -708,7 +708,7 @@ exponential curve at leading order.
 
 **Numerical check (period average).** Solving the reduced flow's period directly
 (`run_t4_beta_period_check.py`): at $\varepsilon = 0.02$ the measured
-$-\delta/\varepsilon^2$ is $1.0009,\ 1.5029,\ 0.4994,\ -0.0015,\ 2.0054$ for $\beta = 0,
+$-\delta/\varepsilon^2$ is $1.0009$, $1.5029$, $0.4994$, $-0.0015$, $2.0054$ for $\beta = 0,
 -1, +1, +2, -2$ against the predicted $1, \tfrac32, \tfrac12, 0, 2$; the exact linear
 profile matches $\tfrac32\varepsilon^2 + \tfrac{315}{32}\varepsilon^4$ to a ratio of
 $1.00001$ at $\varepsilon = 0.02$; and the exponential control reproduces
@@ -774,7 +774,7 @@ whenever $\beta \ne 0$: the conjugate time is *not* the $\theta$-period off the
 exponential profile — measured directly as $\max_{\theta_0}\lvert t_c/T-1\rvert \propto
 \varepsilon^2$, roughly proportional to $\lvert\beta\rvert$ ($1.2\times10^{-2}$ vs
 $5.7\times10^{-3}$ at $\varepsilon = 0.15$ for $n = 1, 2$), vanishing on the exponential
-($10^{-8}$). **(b)** Both measured caustic values land on the one-parameter law
+($\lesssim 10^{-7}$). **(b)** Both measured caustic values land on the one-parameter law
 
 $$
 c_2^{\mathrm{caustic}} \;=\; 1 - \tfrac34\,\beta
@@ -1050,7 +1050,7 @@ does not close the novelty question.
     </tr>
     <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
       <td style="padding:6px 10px;">Conjugate time = $\theta$-period (Conjecture A)</td>
-      <td style="padding:6px 10px;"><strong>open (O2)</strong>; verified $10^{-8}$ on the exponential profile, and above the critical gradient for every angle keeping a period (R6, $4\times10^{-5}$ at $\varepsilon=0.55$); steps 1–2 of its structure proved; general-profile version <strong>refuted</strong> by V1 (gap $\propto \beta\varepsilon^2$) — the conjecture is exponential-specific</td>
+      <td style="padding:6px 10px;"><strong>open (O2)</strong>; verified to $6\times10^{-8}$ on the exponential profile, and above the critical gradient for every angle keeping a period (R6, $5\times10^{-5}$ at $\varepsilon=0.52$–$0.55$); steps 1–2 of its structure proved; general-profile version <strong>refuted</strong> by V1 (gap $\propto \beta\varepsilon^2$) — the conjecture is exponential-specific</td>
       <td style="padding:6px 10px;">§3.4, §4; <code>run_r6_supercritical.py</code></td>
     </tr>
     <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
@@ -1060,7 +1060,7 @@ does not close the novelty question.
     </tr>
     <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
       <td style="padding:6px 10px;">$c_2 = 1$, $c_4 = \tfrac94$, $c_6 = \tfrac{25}{4}$</td>
-      <td style="padding:6px 10px;">corollaries of Thm B; measured $0.9996$, $2.2497\pm0.0009$, curve $10^{-10}$</td>
+      <td style="padding:6px 10px;">corollaries of Thm B; measured $0.9996$, $2.2497\pm0.0009$, curve $4\times10^{-9}$</td>
       <td style="padding:6px 10px;">§3.6; <code>run_c4_precision.py</code>, <code>run_p5_series.py</code></td>
     </tr>
     <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
@@ -1116,7 +1116,7 @@ cd research/preferred-directions
 # environment: research/cosmic-web/.venv (runs used numpy 2.5.0, scipy 1.18.0, sympy)
 # Theorem B's chain, symbolically and numerically, at machine precision:
 ../cosmic-web/.venv/bin/python scripts/run_t2_reduction_check.py
-# The closed form against the full conjugate-point pipeline (1e-10):
+# The closed form against the full conjugate-point pipeline (max diff 4e-9):
 ../cosmic-web/.venv/bin/python scripts/run_p5_series.py
 # The c4 precision measurement (2.2497 ± 0.0009):
 ../cosmic-web/.venv/bin/python scripts/run_c4_precision.py

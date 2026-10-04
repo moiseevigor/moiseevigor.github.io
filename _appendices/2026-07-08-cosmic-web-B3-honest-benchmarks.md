@@ -53,11 +53,12 @@ extracted, on the assumption that realised skeleton lengths would follow.
 
 They did not. At sparse sampling the orientation-lift's realised skeletons
 came out about 19% longer than the Hessian baseline's — **1,468 versus
-1,239 voxels** — and the resulting "+0.06 completeness, 48/50 seeds,
+1,239 voxels** — and the resulting "+0.07 completeness, 48/50 seeds,
 p ≈ 10⁻¹⁴" advantage was pure length. Under the corrected extractor, which
 iterates until the realised skeleton itself hits the target length, the
 **sign flips**: the Hessian wins completeness at every sampling level from
-2,500 galaxies up (Δ = −0.045 to −0.057, 50/50 seeds, p ≈ 10⁻¹⁵), with a
+2,500 galaxies up (Δ = −0.045 to −0.066 across both curvature variants, the lift winning
+at most 3 of 50 seeds, p ≤ 8×10⁻¹⁰ everywhere and ≈ 10⁻¹⁵ at most levels), with a
 statistical tie only at ultra-sparse sampling (SYNTHESIS; PAPER-DRAFT
 §5.1). The artifact was detected only because a later instrument change
 retroactively shifted archived scores, and the archived length fields
@@ -93,7 +94,8 @@ nothing about whether the comparison was constructed correctly.*
     versus galaxy count. Both skeletons were pruned to equal length before scoring — but
     equal <em>on what?</em> Matched on a <strong>proxy</strong> (the hysteresis-mask
     volume), the lift's realised skeleton ran ~19% longer at sparse sampling, and length
-    buys completeness: the lift <em>appears</em> to win by up to +0.06 (p ≈ 10⁻¹⁴). Flip
+    buys completeness: the lift <em>appears</em> to win by up to +0.06 in the archived 3-seed run plotted here
+    (+0.07, p ≈ 10⁻¹⁴, once scaled to 50 seeds). Flip
     the match to the <strong>realised skeleton length</strong> — the quantity that actually
     determines the score — and the sparse "win" inverts to a clean Hessian lead at every
     level. The phantom was in the matching, not the method. Proxy numbers from
@@ -202,7 +204,7 @@ consistent with zero (1.65σ). On Planck they show a **4.7σ "bridge"**
 leakage at Planck's 10′ resolution (E3e; Appendix B5 explains the
 mechanism). Without the null, that leakage would have been booked as
 astrophysics. The physically meaningful number is the null-subtracted one:
-~1.2–1.4×10⁻⁸ at ≈2σ per instrument (2.4σ Planck, 1.6σ ACT).
+~1.2–1.4×10⁻⁸ at ≈2σ per instrument (2.2σ Planck, 1.6σ ACT).
 
 The same discipline applied on the sky in an earlier form: the spine-stack
 controls were rejection-matched to the spine points' galactic-latitude
@@ -221,9 +223,11 @@ model beats the Zel'dovich baseline in **every** distance bin (−20% at the
 web; 4.47 versus 5.00 overall), so the damping physics is uniformly
 correct, and the practical model's small outskirts deficit was frame
 estimation, not wrong physics. The oracle also *prices* the remaining
-headroom — 0.46 voxels of recoverable error, more than any other
+headroom — 0.46 voxels of recoverable error between the first model's
+4.93 and the bound, more than any other
 refinement lever — and grades the final model: the frozen recipe's 4.52
-closes 89% of the gap to the 4.47 bound (E5d). An oracle bound converts
+closes roughly 85–90% of the gap to the 4.47 bound (E5d; 86% on the
+matched held-out seeds). An oracle bound converts
 "could do better" into a number.
 
 ## Trust the bytes: the CAMELS twins
