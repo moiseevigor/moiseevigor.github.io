@@ -247,35 +247,49 @@
   {% endif %}
 
   {% if jekyll.environment == "production" %}
-  <!-- Cookie Consent -->
-  <script type="text/javascript" src="https://www.freeprivacypolicy.com/public/cookie-consent/4.0.0/cookie-consent.js" charset="UTF-8"></script>
-  <script type="text/javascript" charset="UTF-8">
-    document.addEventListener('DOMContentLoaded', function () {
-      cookieconsent.run({
-        "notice_banner_type":"simple",
-        "consent_type":"express",
-        "palette":"light",
-        "language":"en",
-        "page_load_consent_levels":["strictly-necessary","tracking"],
-        "notice_banner_reject_button_hide":false,
-        "preferences_center_close_button_hide":false,
-        "page_refresh_confirmation_buttons":false
+  <!-- Analytics consent (first-party, no third-party consent library).
+       Google Analytics is the only non-essential script on this site and it is
+       loaded ONLY after an explicit "Accept"; nothing is set before that.
+       The choice lives in localStorage; "Cookies" in the footer reopens it.
+       Browsers sending Do-Not-Track / Global Privacy Control are treated as
+       "decline" without being asked. -->
+  <script>
+    (function () {
+      var KEY = 'analytics-consent', GA = 'G-5QEQZR22Y2';
+      function loadGA() {
+        var s = document.createElement('script');
+        s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA;
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { dataLayer.push(arguments); };
+        gtag('js', new Date()); gtag('config', GA);
+      }
+      function get() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+      function set(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+      function ask() {
+        if (document.querySelector('.cookie-bar')) return;
+        var bar = document.createElement('div');
+        bar.className = 'cookie-bar'; bar.setAttribute('role', 'region');
+        bar.setAttribute('aria-label', 'Analytics consent');
+        bar.innerHTML = '<span>This site uses Google Analytics cookies to count visits. No ads, no profiling.</span>' +
+          '<span class="cookie-bar-actions"><button type="button" data-v="no">Decline</button>' +
+          '<button type="button" data-v="yes" class="primary">Accept</button></span>';
+        bar.addEventListener('click', function (ev) {
+          var v = ev.target.getAttribute && ev.target.getAttribute('data-v');
+          if (!v) return;
+          set(v); bar.remove(); if (v === 'yes') loadGA();
+        });
+        document.body.appendChild(bar);
+      }
+      var choice = get();
+      var optedOut = navigator.doNotTrack === '1' || navigator.globalPrivacyControl === true;
+      if (choice === 'yes') loadGA();
+      document.addEventListener('DOMContentLoaded', function () {
+        if (!choice && !optedOut) ask();
+        var link = document.getElementById('cookie-prefs');
+        if (link) link.addEventListener('click', function (ev) { ev.preventDefault(); ask(); });
       });
-    });
-  </script>
-  <noscript>Cookie Consent by <a href="https://www.freeprivacypolicy.com/" rel="noopener">Free Privacy Policy Generator</a></noscript>
-  <a href="#" id="open_preferences_center" style="display:none;">Update cookies preferences</a>
-
-  <!-- Google Analytics -->
-  <script type="text/plain" cookie-consent="tracking">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.googletagmanager.com/gtag/js?id=G-5QEQZR22Y2','ga');
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-5QEQZR22Y2');
+    }());
   </script>
 
   {% seo %}

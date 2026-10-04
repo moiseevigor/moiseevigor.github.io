@@ -72,9 +72,6 @@ drwxr-xr-x   2 root root 4,0K ott 26  2009 initrd
 ...
 ```
 
-### Config files structure
-
-
 ## Benchmarking
 
 ### BLOCK WRITE 4KB

@@ -58,7 +58,7 @@ RewriteEngine On
 
 # remove trailing slash
 RewriteCond %{HTTPS} off
-RewriteRule ^(.+[^/])/$ https://%{HTTP_HOST}/$1 [R=301,L]
+RewriteRule ^(.+[^/])/$ http://%{HTTP_HOST}/$1 [R=301,L]
 RewriteCond %{HTTPS} on
 RewriteRule ^(.+[^/])/$ https://%{HTTP_HOST}/$1 [R=301,L]
 ```
