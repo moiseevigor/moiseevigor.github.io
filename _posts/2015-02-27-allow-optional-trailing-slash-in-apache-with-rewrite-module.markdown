@@ -12,9 +12,9 @@ tags:
 comments: true
 ---
 
-Apache's handy [`mod_rewrite`](https://httpd.apache.org/docs/current/mod/mod_rewrite.html) module is helping to correct this unfortunate human typos.
+Apache's handy [`mod_rewrite`](https://httpd.apache.org/docs/current/mod/mod_rewrite.html) module helps to correct these unfortunate human typos.
 
-At first let's check whether the Apache's `mod_rewrite` is enabled. 
+First let's check whether the Apache's `mod_rewrite` is enabled. 
 
 
 ```bash
@@ -30,7 +30,7 @@ If it was not, then reload configuration
 ```
 
 
-to assure that the rewrite will work you need to assure the one more thing, it is `AllowOverride` 
+To ensure that the rewrite will work you need to check one more thing: the `AllowOverride` 
 option in the `VirtualHost` configuration
 
 ```bash

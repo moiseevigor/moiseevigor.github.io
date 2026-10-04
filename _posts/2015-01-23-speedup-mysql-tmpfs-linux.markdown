@@ -16,25 +16,25 @@ comments: true
 
 Today we will deal with temporary tables and files. 
 
-At first lets examine the MySQL whether it actually uses temporary tables writings with [`mysqltuner`](https://mysqltuner.com/)
+First let's examine whether MySQL actually writes temporary tables to disk, with [`mysqltuner`](https://mysqltuner.com/)
 
 ```bash
 :~$ sudo mysqltuner
 [!!] Temporary tables created on disk: 28% (324K on disk / 1M total)
 ```
 
-Yes, it is definitely does. Just one thing to know is that
+Yes, it definitely does. Just one thing to know is that
 
-> Temporary tables are not always flushed to disk, since the time to live of temporary table is rather small.   
+> Temporary tables are not always flushed to disk, since the time to live of a temporary table is rather short.   
 
-Lets find where MySQL saves temporary tables 
+Let's find where MySQL saves temporary tables 
 
 ```bash
 sudo cat /etc/mysql/my.cnf | grep tmpdir
 tmpdir		= /tmp
 ```
 
-If you had no success with previous one find out with the query  
+If you had no success with the previous one, find out with the query  
 
 ```bash
 mysql> SHOW GLOBAL VARIABLES LIKE 'tmpdir';
@@ -46,7 +46,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'tmpdir';
 1 row in set (0.00 sec)
 ```
 
-Let's make sure that MySQL intensively writing in this folder using great [`iwatch`](https://iwatch.sourceforge.net/index.html) command
+Let's make sure that MySQL is intensively writing to this folder using the great [`iwatch`](https://iwatch.sourceforge.net/index.html) command
 
 ```bash
 :~$ sudo iwatch /tmp/
@@ -58,7 +58,7 @@ Let's make sure that MySQL intensively writing in this folder using great [`iwat
 [23/gen/2015 10:43:08] IN_CLOSE_WRITE /tmp//#sql_a87_0.MYD
 ```
 
-This is a good sign, so lets do the rest. 
+This is a good sign, so let's do the rest. 
 
 Add the following string to the `/etc/fstab`
 
@@ -73,7 +73,7 @@ Now let's apply it without reboot
 :~$ sudo mount -a
 ```
 
-Now check how faster is scrolling the listing in `iwatch /tmp`. 
+Now check how much faster the listing scrolls in `iwatch /tmp`. 
 This optimization will be useful also for many other services such as anti-viruses, PHP and web servers, Java and so on. 
 
 

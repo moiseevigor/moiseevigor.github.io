@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "The rmagic gem trouble on linux"
-description: "Howto solve installation problems with rmagic gem on ruby"
+title:  "The rmagick gem trouble on Linux"
+description: "How to solve installation problems with the rmagick gem on Ruby"
 date:   2015-02-17 18:05:45
 categories:
 - programming
@@ -13,7 +13,7 @@ tags:
 comments: true
 ---
 
-Hope this tip will save to someone time for fun coding, if you suddenly get this error while installing the [RMagick gem](https://rubygems.org/gems/rmagick) on linux
+Hope this tip will save someone time for fun coding. If you suddenly get this error while installing the [RMagick gem](https://rubygems.org/gems/rmagick) on Linux
 
 ```bash
 $ sudo gem install rmagick
@@ -42,7 +42,7 @@ Done installing documentation for rmagick after 7 seconds
 1 gem installed
 ```
 
-checkout if everything is OK
+check that everything is OK
 
 ```bash
 $ dpkg -l | grep imagemagick

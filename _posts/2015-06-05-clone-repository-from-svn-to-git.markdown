@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Clone repository from Subversion to Git"
-description: "Small tutorial on how to clone and migrate whole repository with history from Subversion to Git"
+description: "Small tutorial on how to clone and migrate a whole repository with history from Subversion to Git"
 date:   2015-06-05 10:05:45
 categories:
 - software
@@ -14,10 +14,10 @@ tags:
 comments: true
 ---
 
-Here we discus how to migrate the Subversion repository into a new Git repository. 
-We'll do it with a handy `git svn` utility. We will refer Gitlab/Github as the destination Git server.
+Here we discuss how to migrate a Subversion repository into a new Git repository. 
+We'll do it with a handy `git svn` utility. We will refer to Gitlab/Github as the destination Git server.
 
-Create a new project on Gitlab: `https://\<gitlab-address\>/projects/new` and clone it into your local machine
+Create a new project on Gitlab: `https://<gitlab-address>/projects/new` and clone it onto your local machine
 
 ```bash
 git svn clone https://<svn-address>/<projectname>
@@ -77,7 +77,7 @@ Add files
 git add .
 ```
 
-Commit il progetto
+Commit the project
 
 ```bash
 git commit -m "init <projectname>"

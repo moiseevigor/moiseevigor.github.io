@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Oracle fixed length CHAR field in Django"
-description: "How to correctly trim spaces in Django model CharField to represent the Oracle's fixed length CHAR field"
+description: "How to correctly trim spaces in Django model CharField to represent Oracle's fixed length CHAR field"
 date:   2016-05-01 10:05:45
 categories:
 - programming
@@ -12,7 +12,7 @@ tags:
 comments: true
 ---
 
-When you're developing the [Django](/tag/django) app based on the legacy [Oracle](/tag/oracle) database you'll find this type of model   
+When you're developing a [Django](/tag/django) app based on a legacy [Oracle](/tag/oracle) database you'll find this type of model   
 
 ```python
 from django.db import models
@@ -29,11 +29,11 @@ class Product(models.Model):
 
 where the primary key is made by the tuple `('type_product', 'code_product')`.
 The field `code_product` usually is filled by some characters and the rest is padded with spaces
-to respect the Oracle's `CHAR(15)` type. You may wish to trim those spaces in your REST web-service, but still
+to respect Oracle's `CHAR(15)` type. You may wish to trim those spaces in your REST web-service, but still
 wish to filter lists and to join on foreign keys. 
 
-Here is my hack of this problem, the `CharFieldPadding` class register the new character field in Django that 
-call handy [`ljust`](https://docs.python.org/2/library/string.html#string.ljust) function to pad the string with spaces and respect the `max_length` parameter.
+Here is my hack for this problem: the `CharFieldPadding` class registers a new character field in Django that 
+calls the handy [`ljust`](https://docs.python.org/2/library/string.html#string.ljust) function to pad the string with spaces and respect the `max_length` parameter.
 
 ```python
 from django.db import models

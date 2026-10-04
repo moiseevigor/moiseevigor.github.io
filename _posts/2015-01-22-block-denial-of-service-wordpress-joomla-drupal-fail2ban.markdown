@@ -17,7 +17,7 @@ tags:
 comments: true
 ---
 
-Are you tired to see these lines in Apache log
+Are you tired of seeing these lines in the Apache log?
 
 ```bash
 cat /var/log/apache2/other_vhosts_access.log | grep "wp-login.php"
@@ -33,10 +33,10 @@ example.com:80 95.211.131.148 - - [20/Jan/2015:12:40:15 +0100] "POST /wp-login.p
 example.com:80 95.211.131.148 - - [20/Jan/2015:12:40:15 +0100] "POST /wp-login.php HTTP/1.0" 200 211 "-" "-"
 ```
 
-Actually your server is working hard managing multiple attempts to login, especially in such frameworks like 
-Wordpress and Joomla. The saturation of database connections results in Denial-of-Service and the website downtimes!
+Actually your server is working hard managing multiple attempts to log in, especially in frameworks such as 
+Wordpress and Joomla. The saturation of database connections results in Denial-of-Service and website downtime!
 
-To block the unsolicited requests and avoid website downtimes we just need to follow some steps   
+To block the unsolicited requests and avoid website downtime we just need to follow some steps   
 
 ## STEP 1: Fail2ban installation
 
@@ -48,7 +48,7 @@ Install [`Fail2ban`](https://www.fail2ban.org):
 
 ## STEP 2: Fail2ban jail configuration
 
-Now lets configure `Fail2ban` to ban the attacker.
+Now let's configure `Fail2ban` to ban the attacker.
 
 ```bash
 sudo vim /etc/fail2ban/jail.conf
@@ -70,13 +70,13 @@ findtime = 600
 bantime  = 604800
 ```
 
-The default installation of [ISPConfig](https://www.ispconfig.org) writes into log file loceted in `/var/log/apache2/other_vhosts_access.log` in the following format
+The default installation of [ISPConfig](https://www.ispconfig.org) writes into the log file located in `/var/log/apache2/other_vhosts_access.log` in the following format
 
 ```bash
 example.com:80 95.211.131.148 - - [22/Jan/2015:17:10:52 +0100] "GET /wp-login.php HTTP/1.1" 200 22457 "-" "Mozilla/5.0 (compatible; Googlebot/2.1; +https://www.google.com/bot.html)"
 ```
 
-The next is the most important part, the filter configuration
+Next is the most important part, the filter configuration
 
 ```bash
 vim /etc/fail2ban/filter.d/framework-ddos.conf 
@@ -111,7 +111,7 @@ once you've seen the first attacker
 2015-01-20 12:40:35,205 fail2ban.actions: WARNING [framework-ddos] Ban 95.211.131.148
 ```
 
-Check out the `iptables` for the action applied correct firewall rules
+Check `iptables` to see that the action applied the correct firewall rules
 
 ```bash
 Chain fail2ban-framework-ddos (1 references)

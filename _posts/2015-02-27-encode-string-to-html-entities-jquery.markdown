@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Encode string to HTML entities via jQuery"
-description: "How-to encode string that may contain HTML into HTML entities with jQuery"
+description: "How to encode a string that may contain HTML into HTML entities with jQuery"
 date:   2015-02-27 18:05:45
 categories:
 - programming
@@ -12,27 +12,27 @@ tags:
 comments: true
 ---
 
-The follwoing will encode your string to `HTML` entities 
+The following will encode your string to `HTML` entities 
 
-```sql
+```javascript
 jQuery('<div />').text('Some text with <div>html</div>').html()
 ```
 
 and the output will look like
 
-```sql
+```javascript
 "Some text with &lt;div&gt;html&lt;/div&gt;"
 ```
 
 To decode we just switch methods
 
-```sql
+```javascript
 jQuery('<div />').html('Some text with &lt;div&gt;html&lt;/div&gt;').text()
 ```
 
 produces
 
-```sql
+```javascript
 "Some text with <div>html</div>"
 ```
 

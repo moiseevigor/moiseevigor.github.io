@@ -19,7 +19,7 @@ comments: true
 
 ## Search across all databases (schemas) for tables without primary key
 
-The following query obtains the list of tables without primary key, those who destroys the database performance
+The following query obtains the list of tables without primary key, those that destroy database performance
 
 ```sql
 SELECT
@@ -27,7 +27,7 @@ SELECT
 FROM information_schema.tables as t
 LEFT JOIN information_schema.table_constraints as tc 
 ON (
-        t.table_schema = t.table_schema
+        t.table_schema = tc.table_schema
     AND t.table_name = tc.table_name 
     AND tc.constraint_type = 'PRIMARY KEY'
 )
@@ -37,11 +37,11 @@ AND t.table_schema not in ('pg_catalog', 'information_schema')
 AND tc.constraint_name is NULL
 ```
 
-In this example, the table `tables` is used to find all tables registered in PostgreSQL and `LEFT JOIN` with `table_constraints` is used to select relative constraints.
+In this example, the table `tables` is used to find all tables registered in PostgreSQL and `LEFT JOIN` with `table_constraints` is used to select the related constraints.
 
-`WHERE` clause is used to filter out the system related databases and filter the tables that do not have a primary key.
+The `WHERE` clause is used to filter out the system-related schemas and filter the tables that do not have a primary key.
 
-## Restrict search for tables without primary key to a specific databases (schema)
+## Restrict search for tables without primary key to a specific database (schema)
 
 ```sql
 SELECT
@@ -49,7 +49,7 @@ SELECT
 FROM information_schema.tables as t
 LEFT JOIN information_schema.table_constraints as tc 
 ON (
-        t.table_schema = t.table_schema
+        t.table_schema = tc.table_schema
     AND t.table_name = tc.table_name 
     AND tc.constraint_type = 'PRIMARY KEY'
 )
@@ -60,7 +60,7 @@ AND t.table_schema = '<database name>' -- put database name here
 AND tc.constraint_name is NULL
 ```
 
-A friendly advise, the result list of these queries should be an `Empty set`. 
+A friendly piece of advice: the result list of these queries should be an `Empty set`. 
 
 Happy querying!
 

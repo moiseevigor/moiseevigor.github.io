@@ -12,10 +12,10 @@ comments: true
 ---
 
 In this talk I presented the technology behind the Fully Automated Store by Checkout Technologies. 
-The actual version of the store is a result of the work of 12 engineers that spans the areas from hardware 
-and design to the ultimate deep learning architectures. Will be also discussed the challenges and lessons learnt during 
-this adventure and what it means to deploy the system which has an AI engine in its core. Creation of the dataset
-and the invention of the specific metrics that is capable to measure the accuracy of the entire system will be discussed.
+The current version of the store is the result of the work of 12 engineers that spans the areas from hardware 
+and design to the ultimate deep learning architectures. The challenges and lessons learnt during 
+this adventure will also be discussed, as well as what it means to deploy a system which has an AI engine at its core. The creation of the dataset
+and the invention of specific metrics capable of measuring the accuracy of the entire system will be discussed too.
 
 
 

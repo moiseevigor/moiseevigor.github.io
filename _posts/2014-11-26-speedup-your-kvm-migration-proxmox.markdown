@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Speedup your KVM migration in Proxmox"
-description: "Notes on cache setting in Ceph and how to avoid the pitfalls"
+description: "How to speed up KVM live migration in Proxmox on a dedicated network by disabling the secure migration tunnel"
 date:   2014-11-26 17:05:45
 categories:
 - virtualization
@@ -12,9 +12,9 @@ tags:
 comments: true
 ---
 
-If you ever woundered why your 10Gbit link on [Proxmox](https://www.proxmox.com/) node is used only by a few percent during the migration, so you came to the right place.
+If you ever wondered why your 10Gbit link on a [Proxmox](https://www.proxmox.com/) node is used only by a few percent during the migration, then you came to the right place.
 
-The main reason is the **security measures** taken to protect virtual machine memory during the migration. All volume of memory will be transmitted via secure tunnel and that penalizes the speed:
+The main reason is the **security measures** taken to protect virtual machine memory during the migration. The whole volume of memory is transmitted via a secure tunnel and that penalizes the speed:
 
 
 ```bash
@@ -39,7 +39,7 @@ TASK OK
 ```
 
 
-If your configured your Proxmox cluster to use the dedicated network isolated from the public one so you may low down the security level
+If you configured your Proxmox cluster to use a dedicated network isolated from the public one, you may lower the security level
 
 ```bash
 $ cat /etc/pve/datacenter.cfg
@@ -69,7 +69,7 @@ Nov 24 12:42:58 migration finished successfuly (duration 00:00:39)
 TASK OK
 ```
 
-now you're using all available bandwidth for migration, that also is very useful during migration heavy loaded instances.
+Now you're using all available bandwidth for migration, which is also very useful when migrating heavily loaded instances.
 
 
 
