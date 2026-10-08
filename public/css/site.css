@@ -20,7 +20,7 @@
   --code-bg:      #1e2228;
   --bg:           #fff;
   --on-accent:    #fff;
-  --nav-bg:       rgba(255,255,255,0.97);
+  --nav-bg:       rgba(255,255,255,0.86);
   --inline-code-bg: #f3f3f3;
   --good:         #2e7d32;
   --good-bg:      #e8f5e9;
@@ -55,7 +55,7 @@
   --fig-bg:       #1a1d22;
   --bg:           #121417;
   --on-accent:    #0e1520;
-  --nav-bg:       rgba(18,20,23,0.94);
+  --nav-bg:       rgba(18,20,23,0.84);
   --inline-code-bg: #22262c;
   --good:         #6cc070;
   --good-bg:      #1b2e1e;
@@ -100,75 +100,70 @@ body {
 img { max-width: 100%; display: block; border-radius: 4px; }
 
 /* ── Site navigation ──────────────────────────────────────────────────────── */
+/* One sans row, everything vertically centred on the 48px bar. The links are
+   a <ul>, so the global serif list typography (font, line-height, li margin)
+   is reset here explicitly. */
 .site-nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center;
+  height: 48px; padding: 0 32px;
   border-bottom: 1px solid var(--border);
-  padding: 0 32px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
   background: var(--nav-bg);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  z-index: 100;
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
   font-family: var(--sans);
 }
 .site-nav-brand {
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: -0.015em;
-  color: var(--text);
-  text-decoration: none;
+  flex: none;
+  font-size: 15px; font-weight: 700; letter-spacing: -0.015em; white-space: nowrap;
+  color: var(--text); text-decoration: none;
 }
 .site-nav-brand:hover { color: var(--accent); text-decoration: none; }
 
 /* Article title in the sticky nav; JS drives opacity/transform from scroll
    progress as the h1 slides under the bar (crossfade — never both titles).
-   Absolutely positioned so its left edge sits on the article column's left
-   edge (the centered body-w + 32px + gutter-w container), clamped clear of
-   the brand when the viewport is too narrow for true alignment. */
+   Left edge sits on the article column (the centred body-w + 32px + gutter-w
+   container), clamped clear of the brand; right edge clear of the links. */
 .site-nav-title {
   position: absolute;
   left: max(140px, calc((100% - (var(--body-w) + 32px + var(--gutter-w))) / 2));
   right: 500px;               /* nav links (≈390px) + toggle + padding */
   line-height: 48px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  opacity: 0;
-  transform: translateY(4px);
+  font-size: 13px; font-weight: 500;
+  color: var(--text-light);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  opacity: 0; transform: translateY(4px);
   pointer-events: none;
 }
 
 .site-nav-links {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 28px;
+  display: flex; align-self: stretch; gap: 26px;
+  margin: 0 0 0 auto; padding: 0; list-style: none;
+  font: inherit;
 }
+.site-nav-links li { margin: 0; display: flex; }
 .site-nav-links a {
-  font-size: 13px;
-  color: var(--text-muted);
-  text-decoration: none;
-  font-weight: 400;
-  transition: color 0.1s;
+  position: relative; display: flex; align-items: center;
+  font-size: 13.5px; font-weight: 500; white-space: nowrap;
+  color: var(--text-muted); text-decoration: none;
+  transition: color 0.12s;
 }
 .site-nav-links a:hover,
 .site-nav-links a.active { color: var(--text); text-decoration: none; }
-
-.site-nav-links { margin-left: auto; } /* toggle is a 3rd flex item: keep links right */
-.theme-toggle {
-  flex: none; margin-left: 16px; padding: 10px; line-height: 0;
-  background: none; border: 0; border-radius: 4px; cursor: pointer;
-  color: var(--text-muted);
+/* active page: a 2px bar sitting on the nav's bottom hairline */
+.site-nav-links a.active::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px;
+  height: 2px; border-radius: 1px; background: var(--accent);
 }
-.theme-toggle:hover { color: var(--text); }
+
+.theme-toggle {
+  flex: none; display: grid; place-items: center;
+  width: 32px; height: 32px; margin: 0 -6px 0 18px; padding: 0;
+  background: none; border: 0; border-radius: 6px; cursor: pointer;
+  color: var(--text-muted);
+  transition: color 0.12s, background 0.12s;
+}
+.theme-toggle:hover { color: var(--text); background: var(--fig-bg); }
 .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 
 /*
@@ -736,16 +731,25 @@ span.pagination-item:hover { background: none; border-color: var(--border); }
 @media (max-width: 960px) { .site-nav-title { display: none; } }
 @media (max-width: 720px) {
   .site-nav { padding: 0 20px; }
+  .site-nav-links { gap: 20px; }
   body:not(.home) .site-main { padding: 32px 20px 60px; }
   .site-footer { padding: 16px 20px; }
 }
-@media (max-width: 520px) {
-  /* Six links + the brand don't fit a phone: the brand already links home,
-     so drop "Home", tighten the gap, and let the row scroll as a last resort. */
-  .site-nav-brand { white-space: nowrap; font-size: 14px; }
-  .site-nav-links { gap: 12px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+@media (max-width: 600px) {
+  /* Phones: brand + toggle on the first row, the links on a second row
+     (the brand already links home, so "Home" is dropped). Five links fit
+     a 320px screen; the row still scrolls rather than clip if text grows. */
+  .site-nav { flex-wrap: wrap; height: auto; padding: 0 16px; }
+  html { scroll-padding-top: 40px; }   /* anchors clear the taller two-row bar */
+  .site-nav-brand { line-height: 44px; }
+  .theme-toggle { margin-left: auto; }
+  .site-nav-links {
+    order: 3; flex: 1 0 100%; height: 38px; margin: 0; gap: 22px;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .site-nav-links::-webkit-scrollbar { display: none; }
   .site-nav-links li:first-child { display: none; }
-  .site-nav-links a { font-size: 12px; white-space: nowrap; }
+  .site-nav-links a { font-size: 13px; }
 }
 
 /* ── Newsletter signup (Mailchimp form, own styling — a block in the text

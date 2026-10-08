@@ -31,5 +31,3 @@
 @media(max-width:650px){.se2-figure{padding:14px!important}.se2-controls{gap:8px 12px}.se2-controls label{font-size:13px}.se2-controls input[type=range]{width:110px}.se2-canvas-wrap canvas{height:340px}.se2-figure-heading h3{font-size:19px}.se2-readout{min-height:65px}}
 @media(prefers-reduced-motion:reduce){.se2-figure *{scroll-behavior:auto}}
 
-@media(max-width:960px){body:has(.se2-review) .site-nav-title{display:none}}
-@media(max-width:720px){body:has(.se2-review) .site-nav{gap:20px}body:has(.se2-review) .site-nav-brand{white-space:nowrap}body:has(.se2-review) .site-nav-links{gap:12px;overflow-x:auto;min-width:0;scrollbar-width:none}body:has(.se2-review) .site-nav-links a{white-space:nowrap;font-size:12px}}
