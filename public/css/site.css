@@ -85,6 +85,15 @@
 /* Raster figures stay untouched; transparent logos/icons get a white tile so
    dark line-art stays visible. Code panels are already dark: add an edge. */
 :root[data-theme="dark"] img { background-color: #fff; }
+/* Post thumbnails are line-art SVGs on a baked-in white rect (an <img> can't
+   see data-theme). Invert lightness and rotate hue back (black ink -> light,
+   blue/orange keep their hue); the white rect becomes black, and `lighten`
+   lets the page colour win over it, so no box edge shows. */
+:root[data-theme="dark"] img[src^="/public/img/posts/"][src$=".svg"] {
+  background-color: transparent;
+  filter: invert(1) hue-rotate(180deg);
+  mix-blend-mode: lighten;
+}
 :root[data-theme="dark"] .highlight,
 :root[data-theme="dark"] pre { box-shadow: 0 0 0 1px var(--border); }
 
