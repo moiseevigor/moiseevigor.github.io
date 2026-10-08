@@ -474,7 +474,7 @@ Maxwell pairs by chasing the $4K(k^2)$ period through the reconstruction.
 </div>
 
 <!-- ── Interactive figures ── -->
-<script src="/public/js/elliptic-core.js"></script>
+<script src="/public/js/elliptic-core.js?v=20261009-plots1"></script>
 <script>
 (function () {
 'use strict';

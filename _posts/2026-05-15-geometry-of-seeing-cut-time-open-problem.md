@@ -311,7 +311,7 @@ is the quiet punchline of the whole series.
 </div>
 
 <!-- ── Interactive figures ── -->
-<script src="/public/js/elliptic-core.js"></script>
+<script src="/public/js/elliptic-core.js?v=20261009-plots1"></script>
 <script>
 (function () {
 'use strict';

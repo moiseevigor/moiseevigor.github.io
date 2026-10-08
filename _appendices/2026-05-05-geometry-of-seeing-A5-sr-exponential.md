@@ -583,7 +583,7 @@ fluently, and Parts&nbsp;3 and 4 become approachable.
 </div>
 
 <!-- ── Interactive figures ── -->
-<script src="/public/js/elliptic-core.js"></script>
+<script src="/public/js/elliptic-core.js?v=20261009-plots1"></script>
 <script>
 (function () {
 'use strict';

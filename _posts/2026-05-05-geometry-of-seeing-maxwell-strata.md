@@ -423,7 +423,7 @@ all. Proving that, and confronting what remains genuinely open beyond $\mathrm{S
 </div>
 
 <!-- ── Interactive figures ── -->
-<script src="/public/js/elliptic-core.js"></script>
+<script src="/public/js/elliptic-core.js?v=20261009-plots1"></script>
 <script>
 (function () {
 'use strict';
