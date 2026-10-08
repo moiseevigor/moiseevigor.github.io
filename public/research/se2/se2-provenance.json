@@ -1,0 +1,40 @@
+{
+  "snapshot_date": "2026-10-07",
+  "research_revision": "5c304fd9957eafc781969703b4bcc75abe0c0201",
+  "blog_revision": "c80915c063f9ca13b6c4ee90473b079ea98d30b9",
+  "scope": "standard left-invariant SE(2), three manuscript companions",
+  "release_ready": false,
+  "manuscripts": {
+    "conjugate_times_se2": {
+      "source_sha256": "043746bc7127bdc0f6cb7a62d3143ffc1827e7bfcfa51fe18c045683ec7ab512",
+      "pdf_sha256": "7daec5d4f824f67b2f812f0e22f629560a11358084dff1ee21d7269f3990bcdf"
+    },
+    "first_caustic_se2": {
+      "source_sha256": "d81531f383d9694db07f9d4576e4167b8da8e8a65613c8efc224a251d7573813",
+      "pdf_sha256": "12837a9ef2b32b9640a3bd9aa0ad96f8cf74394a92611e0581b45e15394fae85"
+    },
+    "inversion_counts_se2": {
+      "source_sha256": "a0024f75503afecda69ac4287fd079f62bf2a2289237240174026bff6269c4e3",
+      "pdf_sha256": "5f87086ed73493304b65696e8f038e404955824ca5f34762c913d8c9f454a175"
+    }
+  },
+  "browser_math_sha256": "11764a2bc336df2108461d17a7e3412009d12dc50ea3c239b2f136c9aab7f906",
+  "full_grid": {
+    "cells": 38400,
+    "validated": 38400,
+    "failed": [],
+    "whole_cell_verified": 36141,
+    "outside_original_exclusions": 38368,
+    "predicate_leaves": 2337337,
+    "residual_boxes": 304,
+    "residual_cells": 32
+  },
+  "reported_five_exclusions_percent": 2.56,
+  "notes": [
+    "Author manuscript snapshots; no submission approval or new proof replay in this publishing pass.",
+    "Original four-exclusion run left 304 residual boxes in 32 cells; current manuscript adds C4 to its excluded domain. This domain change does not prove the residual boxes.",
+    "Explorer data.json summary has stale cell/leaf counters. This snapshot uses data/e80_full_grid_audit.json for audit totals, and only the ray thresholds from explorer data.json.",
+    "Ray thresholds are floating-point tabulations at alpha=0.35; equality cases require analytical definitions, not browser tolerance.",
+    "Literature catalogue is project-local; individual records retain actual reading and edition limitations."
+  ]
+}

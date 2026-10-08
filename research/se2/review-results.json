@@ -1,0 +1,82 @@
+{
+  "date": "2026-10-07",
+  "source_revision": "5c304fd9957eafc781969703b4bcc75abe0c0201",
+  "static": {
+    "pages": [
+      "mathematics/2026/10/07/se2-geodesics-research-program",
+      "articles/se2-conjugate-times",
+      "articles/se2-conjugate-locus",
+      "articles/se2-geodesic-counts"
+    ],
+    "draft_pages_hidden_in_production": true,
+    "lab_program_hidden_in_production": true,
+    "articles_in_development_index": 3,
+    "manuscript_snapshot_hashes": "matched",
+    "json_assets": "present",
+    "source_revision": "5c304fd9957eafc781969703b4bcc75abe0c0201"
+  },
+  "numerical": {
+    "passed": 33,
+    "checks": [
+      "bracket controls k=0.25 phase=0",
+      "bracket controls k=0.25 phase=0.6",
+      "bracket controls k=0.25 phase=1",
+      "bracket controls k=0.25 phase=2",
+      "bracket controls k=0.75 phase=0",
+      "bracket controls k=0.75 phase=0.6",
+      "bracket controls k=0.75 phase=1",
+      "bracket controls k=0.75 phase=2",
+      "bracket controls k=0.97 phase=0",
+      "bracket controls k=0.97 phase=0.6",
+      "bracket controls k=0.97 phase=1",
+      "bracket controls k=0.97 phase=2",
+      "critical touching roots retained",
+      "nine-source preset forward checked",
+      "forward preset source retained",
+      "ray R=0.015",
+      "ray R=0.045",
+      "ray R=0.5439",
+      "ray R=0.5639",
+      "ray R=0.9419",
+      "ray R=0.9619",
+      "ray R=1.2874",
+      "ray R=1.3074",
+      "ray R=1.3334",
+      "ray R=1.3534",
+      "ray R=1.45",
+      "ray R=1.55",
+      "ray R=1.65",
+      "ray R=1.7",
+      "ray R=1.7289",
+      "ray R=1.7314",
+      "ray R=1.7338",
+      "ray R=1.8"
+    ],
+    "scope": "bounded figure data and control-domain checks; no new global proof",
+    "max_forward_residual": 3.869317121397827e-14
+  },
+  "browser": {
+    "critical_cell_distinct_intersections": 1,
+    "nine_source_preset": 9,
+    "max_forward_residual": 3.87e-14,
+    "heading_and_target_controls": "verified",
+    "caustic_second_sheet": "verified",
+    "ray_control": "verified",
+    "play_pause": "verified",
+    "observed_narrow_css_width": 260,
+    "observed_wider_css_width": 853,
+    "observed_default_css_width": 566,
+    "horizontal_page_overflow": false,
+    "katex_errors_observed": 0,
+    "console_errors_observed": 0
+  },
+  "build": {
+    "jekyll": "3.9.2",
+    "ruby": "3.4.4",
+    "environment": "isolated native build",
+    "docker": "unavailable",
+    "full_lockfile_rebuild": false
+  },
+  "release_ready": false,
+  "published": false
+}

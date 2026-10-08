@@ -61,13 +61,14 @@ Scoreboard:
 
 {% assign programs = site.data.series | reverse %}
 {% for p in programs %}
+{% if p.review_draft != true or jekyll.environment == "development" %}
 {% assign first = p.posts | first %}
 {% assign a0 = p.appendices | first %}{% assign letter = a0.part | slice: 0 %}
 {% assign articles = site.articles | where: "program", p.id %}
 <section class="lab-program" id="{{ p.id }}">
   <div class="lab-eyebrow">
     <span class="lab-status lab-status-{{ p.status }}">{{ p.status | capitalize }}</span>
-    <span>Program {{ letter }}</span>
+    {% if p.review_draft %}<span>Review draft</span>{% elsif letter %}<span>Program {{ letter }}</span>{% endif %}
     <span>{{ p.posts.size }} parts · {{ p.appendices.size }} appendices{% if articles.size > 0 %} · {{ articles.size }} article{% if articles.size > 1 %}s{% endif %}{% endif %}</span>
   </div>
   <h2><a href="{{ first.url }}">{{ p.title }}</a></h2>
@@ -121,6 +122,7 @@ Scoreboard:
     </p>
   </div>
 </section>
+{% endif %}
 {% endfor %}
 
 <section class="lab-program" id="articles">

@@ -77,6 +77,9 @@ exclude:
   # copies ~5.6G into _site (and again into _site_production).
   - "research/cosmic-web/data"
   - "research/preferred-directions/artifacts"
+  # Review-only SE(2) manuscripts and numerical metadata.
+  - "public/research/se2"
+  - "research/se2"
 
 # Appendix pages: rendered at pinned permalinks but never part of site.posts,
 # so they stay out of pagination, archives, and feeds; reachable via the
@@ -92,6 +95,8 @@ collections:
 # Re-include precomputed data assets that the global "*.json" exclude swallows.
 include:
   - "public/data"
+  - "se2-provenance.json"
+  - "se2-ray-thresholds.json"
 
 twitter:
   username: moiseev_igor
@@ -103,3 +108,10 @@ social:
     - https://twitter.com/moiseev_igor
     - https://www.linkedin.com/in/moiseevigor
     - https://github.com/moiseevigor
+
+# SE(2) manuscript snapshots are available only in the local review build.
+defaults:
+  - scope:
+      path: "public/research/se2"
+    values:
+      published: false
