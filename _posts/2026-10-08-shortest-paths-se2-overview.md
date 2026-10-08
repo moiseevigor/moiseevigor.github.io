@@ -54,7 +54,7 @@ The geometry measures the least total effort among allowed motions. In normalize
 
 A Riemannian metric assigns lengths to every tangent direction. A **sub-Riemannian metric** assigns lengths only to an allowed subspace at each state. Here that subspace has two dimensions in a three-dimensional space. A curve tangent to it is called *horizontal*; “horizontal” does not mean parallel to the ground.
 
-Composing the two motions produces the missing third direction. The bracket-generating condition formalizes this, and the Chow–Rashevskii theorem gives connectivity on the connected state space.[^foundations] It guarantees a route, not its optimality.
+Composing the two motions produces the missing third direction. The bracket-generating condition formalizes this, and the Chow–Rashevskii theorem gives connectivity on the connected state space.[^foundations] It guarantees a route, not its optimality. [Appendix A2]({% link _appendices/2026-05-02-geometry-of-seeing-A2-distributions-contact.md %}) works through distributions, brackets and the contact condition for this example.
 
 </details>
 
@@ -96,7 +96,7 @@ Writing $r=(x,y)$ and $R_\theta$ for ordinary planar rotation, the group law is
 
 $$(r,\theta)\cdot(r^{\prime},\theta^{\prime})=(r+R_\theta r^{\prime},\theta+\theta^{\prime}\bmod 2\pi).$$
 
-The same two body-relative controls apply wherever the robot starts and however it faces. This is **left invariance**. If $g_0$ and $g_1$ are arbitrary initial and final poses, solve from the identity to $g_0^{-1}g_1$, then apply $g_0$ to the whole path. This reduces the boundary-value problem to one fixed starting state without changing its cost.
+The same two body-relative controls apply wherever the robot starts and however it faces. This is **left invariance**. If $g_0$ and $g_1$ are arbitrary initial and final poses, solve from the identity to $g_0^{-1}g_1$, then apply $g_0$ to the whole path. This reduces the boundary-value problem to one fixed starting state without changing its cost. [Appendix A1]({% link _appendices/2026-05-01-geometry-of-seeing-A1-lie-groups.md %}) introduces the group law, the Lie algebra and the group exponential of SE(2) from scratch.
 
 </details>
 
@@ -114,7 +114,7 @@ The classical Dubins and Reeds–Shepp car problems impose a minimum turning rad
 
 For an image edge, orientation is often an **unoriented line**, so $\theta$ and $\theta+\pi$ represent the same feature. Our robot has a directed heading modulo $2\pi$. Passing to the projective orientation space changes the endpoint identification and can change shortest-path multiplicities.
 
-A smooth lifted curve moving strictly forward can be reparametrized by spatial arclength $s$. With planar curvature $\kappa$, our normalized length becomes $\int\sqrt{1+\kappa^2}\,ds$. Euler’s elastica instead minimizes a quadratic curvature functional such as $\int(1+\kappa^2)\,ds$. These objectives are different. The forward arclength description also breaks down at a planar cusp or a pure rotation.[^association]
+A smooth lifted curve moving strictly forward can be reparametrized by spatial arclength $s$. With planar curvature $\kappa$, our normalized length becomes $\int\sqrt{1+\kappa^2}\,ds$. [Euler’s elastica]({% post_url 2026-04-28-geometry-of-seeing-elastica-jacobi %}) instead minimizes a quadratic curvature functional such as $\int(1+\kappa^2)\,ds$. These objectives are different. The forward arclength description also breaks down at a planar cusp or a pure rotation.[^association]
 
 </details>
 
@@ -149,7 +149,7 @@ Petitot and Tondut’s 1999 work and Petitot’s 2003 account connect cortical o
 </details>
 <details class="se2-history" markdown="1"><summary><span>2008–2011</span> From geodesic formulas to the global solution</summary>
 
-Moiseev and Sachkov’s Maxwell-strata work appeared as a 2008 preprint and in the journal in 2010. It gives the geodesic parametrization, symmetries, and candidate meeting sets.[^maxwell] Sachkov’s 2010 conjugate-and-cut-time paper settles the cut time and studies conjugate points.[^conjugate] His optimal-synthesis paper appeared as a 2009 preprint, online in 2010, and in the 2011 journal volume.[^cut] That last step describes the global endpoint map and completes the classification of minimizers.
+Moiseev and Sachkov’s Maxwell-strata work appeared as a 2008 preprint and in the journal in 2010. It gives the geodesic parametrization, symmetries, and candidate meeting sets.[^maxwell] Sachkov’s 2010 conjugate-and-cut-time paper settles the cut time and studies conjugate points.[^conjugate] His optimal-synthesis paper appeared as a 2009 preprint, online in 2010, and in the 2011 journal volume.[^cut] That last step describes the global endpoint map and completes the classification of minimizers. On this blog, [Maxwell Strata: When Optimal Paths Fork]({% post_url 2026-05-05-geometry-of-seeing-maxwell-strata %}) retells the symmetry argument, and [The Exact Cut Time on SE(2)]({% post_url 2026-05-15-geometry-of-seeing-cut-time-open-problem %}) the cut-time result.
 
 </details>
 <details class="se2-history" markdown="1"><summary><span>2014 · 2018</span> Geometric solutions become imaging tools</summary>
@@ -174,7 +174,7 @@ In this guide, a *geodesic* means a trajectory of those normal equations, which 
 
 <details class="se2-detail" data-level="mechanism" markdown="1"><summary>Why elliptic functions enter the solution</summary>
 
-The nonlinear pendulum conserves an energy. Below the separatrix energy it swings; above it, it rotates; at the separatrix it approaches an unstable equilibrium. Integrating these motions leads to elliptic integrals and Jacobi elliptic functions. They play the role that sines and cosines play for a linear oscillator, but retain the nonlinear dependence of the period on energy.
+The nonlinear pendulum conserves an energy. Below the separatrix energy it swings; above it, it rotates; at the separatrix it approaches an unstable equilibrium. Integrating these motions leads to elliptic integrals and Jacobi elliptic functions. They play the role that sines and cosines play for a linear oscillator, but retain the nonlinear dependence of the period on energy. [Euler’s Elastica and Jacobi Elliptic Functions]({% post_url 2026-04-28-geometry-of-seeing-elastica-jacobi %}) builds them from the pendulum, and [Appendix A4]({% link _appendices/2026-05-04-geometry-of-seeing-A4-jacobi-elliptic.md %}) shows how to compute them with the arithmetic–geometric mean.
 
 The names *oscillating* and *rotating* refer to this auxiliary pendulum. A rotating pendulum does not necessarily mean the robot’s heading winds once around the circle.
 
@@ -194,13 +194,13 @@ $$\dot x=\sin(\gamma/2)\cos\theta,\quad
 \dot y=\sin(\gamma/2)\sin\theta,\quad
 \dot\theta=-\cos(\gamma/2).$$
 
-The conserved pendulum energy is $\mathcal E=c^2/2-\cos\gamma$. It is different from the fixed Hamiltonian energy $H=1/2$. The pendulum angle is naturally modulo $4\pi$ here: adding $2\pi$ reverses both controls. For this rank-two contact structure in dimension three, nonconstant minimizers are normal; there is no missing family of strictly abnormal minimizing paths.[^foundations]
+The conserved pendulum energy is $\mathcal E=c^2/2-\cos\gamma$. It is different from the fixed Hamiltonian energy $H=1/2$. The pendulum angle is naturally modulo $4\pi$ here: adding $2\pi$ reverses both controls. For this rank-two contact structure in dimension three, nonconstant minimizers are normal; there is no missing family of strictly abnormal minimizing paths.[^foundations] [Appendix A3]({% link _appendices/2026-05-03-geometry-of-seeing-A3-pmp.md %}) derives these equations from the maximum principle, and [Appendix A5]({% link _appendices/2026-05-05-geometry-of-seeing-A5-sr-exponential.md %}) integrates them into the explicit exponential map.
 
 </details>
 
 <h2 id="when-shortest-paths-stop">Following the equations is not enough</h2>
 
-Two paths can leave the origin and arrive at the **same position and heading** with the same length. If these are different minimizing paths, their common endpoint is a **Maxwell point**. In the standard solution, symmetry helps locate these meetings.
+Two paths can leave the origin and arrive at the **same position and heading** with the same length. If these are different minimizing paths, their common endpoint is a **Maxwell point**. In the standard solution, symmetry helps locate these meetings; [Maxwell Strata: When Optimal Paths Fork]({% post_url 2026-05-05-geometry-of-seeing-maxwell-strata %}) draws them with interactive figures.
 
 There is also a local event: neighboring candidate paths can focus so that changing the initial data no longer changes the endpoint to first order. That is a **conjugate point**, a loss of rank of the exponential map that sends initial data and travel time to a pose.
 
@@ -264,7 +264,7 @@ Use the pendulum energy $\mathcal E$ defined above. The published formulas are:
 
 </div>
 
-“Stable” and “unstable” refer to the pendulum, not the robustness of a robot controller. The straight and separatrix trajectories minimize along every finite segment from their initial state. The critical strata must be treated separately; substituting $k=1$ into a finite-period formula is not a valid shortcut.[^cut]
+“Stable” and “unstable” refer to the pendulum, not the robustness of a robot controller. The straight and separatrix trajectories minimize along every finite segment from their initial state. The critical strata must be treated separately; substituting $k=1$ into a finite-period formula is not a valid shortcut.[^cut] [The Exact Cut Time on SE(2)]({% post_url 2026-05-15-geometry-of-seeing-cut-time-open-problem %}) derives the rotating-case formula step by step.
 
 </details>
 
@@ -284,7 +284,13 @@ This is a complete mathematical classification, not a single elementary formula 
 
 The synthesis settles which paths minimize for this exact metric on SE(2). It does not make every question about the geodesic flow disappear. Continuing paths creates further conjugate points, caustic sheets, and additional inverse images of a target. Changing to a forward-only model, adding obstacles, identifying opposite headings, or using image-dependent costs asks a different problem.
 
-Readers who want the newer work can continue to [Beyond the Shortest Path](/mathematics/2026/10/07/se2-geodesics-research-program/) and its three manuscript companions. Their research status, hypotheses, and unresolved questions are stated there. The classical synthesis is a published input to that program; the newer drafts are not needed to justify the solution presented in this overview.
+Readers who want the newer work can continue to [Beyond the Shortest Path](/mathematics/2026/10/07/se2-geodesics-research-program/) and its three manuscript companions. Their research status, hypotheses, and unresolved questions are stated there. The classical synthesis is a published input to that program; the newer drafts are not needed to justify the solution presented in this overview. Each companion takes one question from this guide further:
+
+- [All Conjugate Times of the Rotating Geodesics on SE(2)]({% link _articles/2026-10-07-se2-conjugate-times.md %}) — where the focusing of Experiment 5 happens, beyond the first conjugate point.
+- [The Conjugate Locus of Rotating Geodesics on SE(2)]({% link _articles/2026-10-07-se2-conjugate-locus.md %}) — the shape of the surface those focusing points form.
+- [Inverting the Exponential Map and Counting Geodesics on SE(2)]({% link _articles/2026-10-07-se2-geodesic-counts.md %}) — how many continued geodesics reach one pose.
+
+The same ideas travel beyond the plane. [From Caustics to Groups]({% post_url 2026-07-15-caustics-to-groups-research-program %}) asks whether the shape of a caustic identifies the constrained geometry behind it, and [The Geometry of Forbidden Directions]({% post_url 2026-08-05-forbidden-directions-research-program %}) applies the same tools to charged particles that cannot cross a magnetic field.
 
 ### A small glossary to take with you
 
@@ -295,6 +301,23 @@ Readers who want the newer work can continue to [Beyond the Shortest Path](/math
 Each reference below identifies its role in the explanation. Publication years refer to the cited journal volumes unless an online or preprint date is explicitly given. The historical route is selective; the foundational textbook and the original papers provide broader bibliographies.
 
 The four new experiments implement the stated elementary formulas or a bounded integration of the published normal equations. The fifth reuses the reviewed rotating explorer. Numerical drawings explain these results; they do not replace the published arguments or certify a solver for arbitrary targets.
+
+### On this blog
+
+**The Geometry of Seeing series** develops this problem at a slower pace, with interactive figures:
+
+1. [The Visual Cortex as a Contact Manifold]({% post_url 2026-04-25-geometry-of-seeing-visual-cortex-se2 %}) — why orientation-aware vision lives on SE(2).
+2. [Euler’s Elastica and Jacobi Elliptic Functions]({% post_url 2026-04-28-geometry-of-seeing-elastica-jacobi %}) — the pendulum and the functions that solve it.
+3. [Maxwell Strata: When Optimal Paths Fork]({% post_url 2026-05-05-geometry-of-seeing-maxwell-strata %}) — symmetries and equal-length meetings.
+4. [The Exact Cut Time on SE(2) — and the Open Problem Beyond It]({% post_url 2026-05-15-geometry-of-seeing-cut-time-open-problem %}) — the stopping rule of Experiment 5.
+
+Its appendices fill in the background: [A1 · Lie groups]({% link _appendices/2026-05-01-geometry-of-seeing-A1-lie-groups.md %}), [A2 · distributions and contact geometry]({% link _appendices/2026-05-02-geometry-of-seeing-A2-distributions-contact.md %}), [A3 · the maximum principle]({% link _appendices/2026-05-03-geometry-of-seeing-A3-pmp.md %}), [A4 · Jacobi elliptic functions]({% link _appendices/2026-05-04-geometry-of-seeing-A4-jacobi-elliptic.md %}), [A5 · the SE(2) exponential map]({% link _appendices/2026-05-05-geometry-of-seeing-A5-sr-exponential.md %}).
+
+**Beyond shortest paths:** the [SE(2) geodesics research program]({% post_url 2026-10-07-se2-geodesics-research-program %}) and its articles on [conjugate times]({% link _articles/2026-10-07-se2-conjugate-times.md %}), the [conjugate locus]({% link _articles/2026-10-07-se2-conjugate-locus.md %}) and [geodesic counts]({% link _articles/2026-10-07-se2-geodesic-counts.md %}).
+
+**Related programs:** [From Caustics to Groups]({% post_url 2026-07-15-caustics-to-groups-research-program %}) (caustics as fingerprints of constrained geometries), [The Geometry of Forbidden Directions]({% post_url 2026-08-05-forbidden-directions-research-program %}) (magnetic fields) with its companion article [Growth Vectors and Caustics of Magnetic Flux Lifts]({% link _articles/2026-09-05-magnetic-flux-lifts.md %}). The [Lab](/lab/) lists every research program and its status.
+
+### Literature
 
 [^foundations]: A. Agrachev, D. Barilari, U. Boscain, *A Comprehensive Introduction to Sub-Riemannian Geometry*, Cambridge, 2020. [Author-hosted 2019 draft](https://www.math.unipd.it/~barilari/ABB-v2.pdf), especially §§3.2 and 3.7, the contact discussion, and §13.8 on SE(2). The draft’s page numbers differ from the published edition. It supports the definitions, reachability theorem, historical attribution of terminology, and the normality discussion.
 [^caratheodory]: C. Carathéodory, *Untersuchungen über die Grundlagen der Thermodynamik*, Math. Ann. 67 (1909), 355–386. [Original paper](https://academicweb.nd.edu/~powers/ame.20231/caratheodory1909.pdf). Historical role described in the foundational textbook’s §3.7.
