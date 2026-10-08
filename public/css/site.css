@@ -132,7 +132,7 @@ img { max-width: 100%; display: block; border-radius: 4px; }
 .site-nav-title {
   position: absolute;
   left: max(140px, calc((100% - (var(--body-w) + 32px + var(--gutter-w))) / 2));
-  right: 376px;
+  right: 500px;               /* nav links (≈390px) + toggle + padding */
   line-height: 48px;
   font-size: 13px;
   font-weight: 600;
@@ -162,8 +162,9 @@ img { max-width: 100%; display: block; border-radius: 4px; }
 .site-nav-links a:hover,
 .site-nav-links a.active { color: var(--text); text-decoration: none; }
 
+.site-nav-links { margin-left: auto; } /* toggle is a 3rd flex item: keep links right */
 .theme-toggle {
-  flex: none; margin-left: 20px; padding: 6px; line-height: 0;
+  flex: none; margin-left: 16px; padding: 10px; line-height: 0;
   background: none; border: 0; border-radius: 4px; cursor: pointer;
   color: var(--text-muted);
 }
@@ -732,9 +733,9 @@ span.pagination-item:hover { background: none; border-color: var(--border); }
 .tag_box span { font-size: 0.7rem; color: var(--text-muted); margin-left: 2px; }
 
 /* ── Responsive ───────────────────────────────────────────────────────────── */
+@media (max-width: 960px) { .site-nav-title { display: none; } }
 @media (max-width: 720px) {
   .site-nav { padding: 0 20px; }
-  .site-nav-title { left: 150px; right: 276px; }
   body:not(.home) .site-main { padding: 32px 20px 60px; }
   .site-footer { padding: 16px 20px; }
 }

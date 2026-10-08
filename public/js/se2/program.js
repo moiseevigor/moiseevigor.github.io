@@ -3,7 +3,10 @@
 // corrections and both origin/current hashes are recorded in the snapshot manifest.
 import * as M from './se2math.js?v=20261008-review2';
 const TAU = 2 * Math.PI;
-const C = { ink: '#25313c', muted: '#65727e', rule: '#dee3e7', geo: '#1565c0', conjugate: '#c8501a', cut: '#6b4fa3', green: '#2d8061' };
+const PALETTE = {
+  light: { ink: '#25313c', muted: '#65727e', rule: '#dee3e7', geo: '#1565c0', conjugate: '#c8501a', cut: '#6b4fa3', green: '#2d8061' },
+  dark: { ink: '#e3e5e8', muted: '#99a1ab', rule: '#2d3239', geo: '#7ab0ff', conjugate: '#ff8a50', cut: '#b49be0', green: '#5cc495' } };
+let C = PALETTE.light; // re-read at every draw so the dark-mode toggle repaints
 const f = (x, n = 3) => Number(x).toFixed(n);
 const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
 let thresholds;
@@ -76,6 +79,7 @@ class Figure {
     new ResizeObserver(() => { if (this.visible) this.schedule(); }).observe(this.canvas);
     new IntersectionObserver(entries => { this.visible = entries[0].isIntersecting; if (this.visible) this.schedule(); else this.stop(); }, { rootMargin: '160px' }).observe(el);
     document.addEventListener('visibilitychange', () => { if (document.hidden) this.stop(); });
+    window.addEventListener('themechange', () => { if (this.visible) this.schedule(); });
   }
   sync(key, value) { const input = this.el.querySelector(`[data-control="${key}"]`); if (input) input.value = value; }
   preset(name) {
@@ -92,6 +96,7 @@ class Figure {
       try { await rayData(); } catch (error) { this.readout.textContent = `Threshold data unavailable: ${error.message}`; return; }
       if (generation !== this.drawGeneration) return;
     }
+    C = PALETTE[document.documentElement.dataset.theme] || PALETTE.light;
     const { g, W, H } = frame(this.canvas); if (W < 80) return;
     this.el.querySelectorAll('[data-value]').forEach(o => { const key = o.dataset.value; o.textContent = f(this.state[key], key === 'k' || key === 'radius' ? 3 : 2); });
     try { await this[this.mode](g, W, H); this.el.dataset.ready = 'true'; }

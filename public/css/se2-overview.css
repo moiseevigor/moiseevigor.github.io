@@ -1,7 +1,7 @@
 .se2-reading{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:16px 0 8px;font:14px var(--sans)}
 .se2-reading>span{width:100%;color:var(--text-light)}
 .se2-reading button{font:600 13px var(--sans);padding:10px 13px;border:1px solid var(--border);border-radius:4px;background:var(--fig-bg);color:var(--text);cursor:pointer;min-height:44px}
-.se2-reading button[aria-pressed=true]{color:white;background:var(--accent);border-color:var(--accent)}
+.se2-reading button[aria-pressed=true]{color:var(--on-accent);background:var(--accent);border-color:var(--accent)}
 .se2-depth-note{font:13px/1.6 var(--sans)!important;color:var(--text-light)}
 .se2-overview-map{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--border);margin:24px 0 36px;font:15px var(--sans)}
 .se2-overview-map a{padding:13px 8px 13px 0;border-bottom:1px solid var(--border);text-decoration:none}
