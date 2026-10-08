@@ -96,7 +96,7 @@ has slope 2. The figure shows the real measurement.
 
 <figure class="l-middle" id="fig-reach2d">
   <div style="text-align:center;margin-bottom:0.3em;">
-    <span style="font-size:0.85rem;color:#555;">how far each coordinate reaches vs. path length — log–log, measured</span>
+    <span style="font-size:0.85rem;color:var(--text-light);">how far each coordinate reaches vs. path length — log–log, measured</span>
   </div>
   <div id="fd-reach2d" style="text-align:center;"></div>
   <figcaption>

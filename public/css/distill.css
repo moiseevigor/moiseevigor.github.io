@@ -30,7 +30,7 @@
 }
 
 /* ── Page reset ──────────────────────────────────────────────────────────── */
-.distill-page { margin: 0; padding: 0; background: #fff; color: var(--text); }
+.distill-page { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
 .distill-page *, .distill-page *::before, .distill-page *::after { box-sizing: border-box; }
 
 /* ── Series badge (inside .site-nav) ────────────────────────────────────── */
@@ -67,7 +67,7 @@
 .d-title {
   font-family: var(--sans); font-size: clamp(1.9rem, 4vw, 2.7rem);
   font-weight: 700; letter-spacing: -0.025em; line-height: 1.2;
-  color: #111; margin: 0 0 20px;
+  color: var(--text); margin: 0 0 20px;
 }
 .d-subtitle {
   font-family: var(--serif); font-size: 1.1rem; font-weight: 300;
@@ -284,7 +284,7 @@ article.d-article { counter-reset: section figure; }
 }
 .d-article h2 {
   font-family: var(--sans); font-size: 1.35rem; font-weight: 700;
-  letter-spacing: -0.02em; color: #111;
+  letter-spacing: -0.02em; color: var(--text);
   margin: 60px 0 20px; scroll-margin-top: 56px;
   border-top: 1px solid var(--border); padding-top: 0.2em;
 }
@@ -324,7 +324,7 @@ body.layout-distill .d-article h2::before {
 }
 .d-article h3 {
   font-family: var(--sans); font-size: 1.05rem; font-weight: 600;
-  color: #222; margin: 32px 0 12px;
+  color: var(--text); margin: 32px 0 12px;
 }
 .d-article strong { font-weight: 700; }
 .d-article em { font-style: italic; }
@@ -359,7 +359,7 @@ body.layout-distill .d-article h2::before {
  */
 .d-article code {
   font-family: var(--mono); font-size: 0.82em;
-  background: #f3f3f3; border: 1px solid var(--border);
+  background: var(--inline-code-bg); border: 1px solid var(--border);
   border-radius: 3px; padding: 1px 5px;
 }
 
@@ -496,13 +496,13 @@ figcaption strong { color: var(--text-light); }
   border-bottom: 1px solid var(--border);
   display: flex; flex-wrap: wrap; align-items: center; gap: 12px;
   font-family: var(--sans); font-size: 13px; color: var(--text-muted);
-  background: #fff;
+  background: var(--bg);
 }
 .fig-controls label { display: flex; align-items: center; gap: 8px; }
 .fig-controls input[type=range] { width: 160px; accent-color: var(--accent); }
 .fig-controls select {
   border: 1px solid var(--border); border-radius: 4px;
-  padding: 3px 8px; font-size: 12.5px; background: #fff;
+  padding: 3px 8px; font-size: 12.5px; background: var(--bg);
   font-family: var(--sans); color: var(--text-light);
 }
 .fig-controls .ctrl-val {
@@ -512,7 +512,7 @@ figcaption strong { color: var(--text-light); }
 }
 .fig-toggle {
   padding: 4px 12px; border: 1px solid var(--border);
-  border-radius: 4px; background: #fff; font-size: 12px;
+  border-radius: 4px; background: var(--bg); font-size: 12px;
   font-family: var(--sans); cursor: pointer; color: var(--text-muted);
   transition: all 0.15s;
 }
@@ -540,10 +540,10 @@ figcaption strong { color: var(--text-light); }
 .callout {
   background: var(--accent-light); border-left: 4px solid var(--accent);
   border-radius: 0 6px 6px 0; padding: 14px 18px; margin: 1.8em 0;
-  font-family: var(--sans); font-size: 14px; line-height: 1.65; color: #1a237e;
+  font-family: var(--sans); font-size: 14px; line-height: 1.65; color: var(--callout-ink);
 }
-.callout.theorem { background: #fff8e1; border-color: var(--accent-warm); color: #4e342e; }
-.callout.open-problem { background: #fce4ec; border-color: #c62828; color: #4a0000; }
+.callout.theorem { background: var(--theorem-bg); border-color: var(--accent-warm); color: var(--theorem-ink); }
+.callout.open-problem { background: var(--open-bg); border-color: var(--bad); color: var(--open-ink); }
 .callout-title {
   font-weight: 700; letter-spacing: 0.04em; margin-bottom: 4px;
   text-transform: uppercase; font-size: 11px; opacity: 0.7;

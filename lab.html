@@ -16,7 +16,7 @@ comments: false
 .lab-program { border-top: 1px solid var(--border); padding: 1.6rem 0 1.4rem; scroll-margin-top: 4rem; }
 .lab-eyebrow { font-family: var(--sans); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); display: flex; gap: 0.8em; align-items: center; flex-wrap: wrap; }
 .lab-status { border-radius: 3px; padding: 1px 8px; font-weight: 700; }
-.lab-status-active { background: #fff3e0; color: var(--accent-warm); }
+.lab-status-active { background: var(--warm-bg); color: var(--accent-warm); }
 .lab-status-complete { background: var(--accent-light); color: var(--accent); }
 .lab-program h2 { margin: 0.35rem 0 0.6rem; border-top: none; padding-top: 0; }
 .lab-program h2 a { color: var(--text); text-decoration: none; }
@@ -26,11 +26,11 @@ comments: false
 .lab-program .lab-score { list-style: none; padding: 0; margin: 0.7rem 0; display: flex; flex-wrap: wrap; gap: 6px; }
 .lab-score li { font-family: var(--sans); font-size: 0.85rem; border: 1px solid var(--border); border-radius: 4px; padding: 3px 9px; background: var(--fig-bg); }
 .lab-score .sym { font-weight: 700; margin-right: 0.35em; }
-.lab-score .v-confirmed .sym { color: #2e7d32; }
-.lab-score .v-refuted .sym { color: #c62828; }
+.lab-score .v-confirmed .sym { color: var(--good); }
+.lab-score .v-refuted .sym { color: var(--bad); }
 .lab-score .v-partial .sym { color: var(--accent-warm); }
 .lab-score .v-pending .sym { color: var(--text-muted); }
-.lab-start { display: inline-block; font-family: var(--sans); font-weight: 600; font-size: 0.92rem; background: var(--accent); color: #fff !important; text-decoration: none; border-radius: 4px; padding: 6px 14px; margin: 0.6rem 0.6rem 0.2rem 0; }
+.lab-start { display: inline-block; font-family: var(--sans); font-weight: 600; font-size: 0.92rem; background: var(--accent); color: var(--on-accent) !important; text-decoration: none; border-radius: 4px; padding: 6px 14px; margin: 0.6rem 0.6rem 0.2rem 0; }
 .lab-start:hover { opacity: 0.9; }
 .lab-outputs { margin-top: 0.8rem; font-family: var(--sans); font-size: 0.93rem; }
 .lab-outputs details { border-left: 2px solid var(--border); padding: 0.15rem 0 0.15rem 0.8rem; margin: 0.45rem 0; }
@@ -53,8 +53,8 @@ statements and proofs, and the <strong>code</strong> reproduces every number.
 
 <p class="lab-legend">
 Scoreboard:
-<span><b style="color:#2e7d32">✓</b> confirmed</span>
-<span><b style="color:#c62828">✗</b> refuted</span>
+<span><b style="color:var(--good)">✓</b> confirmed</span>
+<span><b style="color:var(--bad)">✗</b> refuted</span>
 <span><b style="color:var(--accent-warm)">△</b> partial / split</span>
 <span><b style="color:var(--text-muted)">○</b> pending</span>
 </p>

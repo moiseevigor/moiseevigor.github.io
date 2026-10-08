@@ -183,7 +183,7 @@ Carnot–Carathéodory distance well-behaved on $\mathrm{SE}(2)$.
         <input type="range" id="dist-theta" min="0" max="100" value="30" step="1">
         <span class="ctrl-val" id="dist-theta-val">0.94 rad</span>
       </label>
-      <span style="margin-left:auto;font-size:12px;color:#888;">
+      <span style="margin-left:auto;font-size:12px;color:var(--text-muted);">
         2-plane field over the cube $(x, y, \theta)$
       </span>
     </div>
@@ -312,7 +312,7 @@ homogeneous distance is a separate empirical question.
         <input type="range" id="reach-eps" min="5" max="60" value="22" step="1">
         <span class="ctrl-val" id="reach-eps-val">0.22</span>
       </label>
-      <span style="margin-left:auto;font-size:12px;color:#888;">
+      <span style="margin-left:auto;font-size:12px;color:var(--text-muted);">
         Repeated $X_1$ / $X_2$ flows reaching the target
       </span>
     </div>

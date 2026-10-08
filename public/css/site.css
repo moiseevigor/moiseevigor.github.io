@@ -18,19 +18,81 @@
   --border:       #e0e0e0;
   --fig-bg:       #f8f9fb;
   --code-bg:      #1e2228;
+  --bg:           #fff;
+  --on-accent:    #fff;
+  --nav-bg:       rgba(255,255,255,0.97);
+  --inline-code-bg: #f3f3f3;
+  --good:         #2e7d32;
+  --good-bg:      #e8f5e9;
+  --bad:          #c62828;
+  --warm-bg:      #fff3e0;
+  --callout-ink:  #1a237e;
+  --theorem-bg:   #fff8e1;
+  --theorem-ink:  #4e342e;
+  --open-bg:      #fce4ec;
+  --open-ink:     #4a0000;
 
   --serif:  'Merriweather', Georgia, serif;
   --sans:   'Source Sans 3', 'Helvetica Neue', sans-serif;
   --mono:   'JetBrains Mono', 'Fira Code', monospace;
 
   --content-w: 680px;
+  color-scheme: light;
 }
+
+/* ── Dark theme ───────────────────────────────────────────────────────────────
+   data-theme is set pre-paint in head.html. The attribute selector outranks
+   the plain :root in distill.css, so these win on every page. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --accent:       #7ab0ff;
+  --accent-light: #1a2740;
+  --accent-warm:  #ffa266;
+  --text:         #e3e5e8;
+  --text-light:   #b6bcc4;
+  --text-muted:   #8c939c;
+  --border:       #2d3239;
+  --fig-bg:       #1a1d22;
+  --bg:           #121417;
+  --on-accent:    #0e1520;
+  --nav-bg:       rgba(18,20,23,0.94);
+  --inline-code-bg: #22262c;
+  --good:         #6cc070;
+  --good-bg:      #1b2e1e;
+  --bad:          #f07070;
+  --warm-bg:      #33241a;
+  --callout-ink:  #c9d6f6;
+  --theorem-bg:   #2a2418;
+  --theorem-ink:  #ecdcbc;
+  --open-bg:      #301b21;
+  --open-ink:     #f4c9d0;
+}
+/* JS-drawn plots (d3 / SVG widgets) hard-code ~400 colours tuned for white
+   paper. Rather than re-tint them, dark mode keeps each plot on a light
+   "paper" card with the light tokens restored, so every figure renders
+   exactly as published. The SE(2) canvases are theme-aware (program.js). */
+:root[data-theme="dark"] .fig-box,
+:root[data-theme="dark"] figure:has(svg):not(:has(.fig-box)):not(.se2-figure) {
+  color-scheme: light;
+  --accent: #1565c0; --accent-light: #e8f0fe; --accent-warm: #e65100;
+  --text: #1a1a1a; --text-light: #555; --text-muted: #888;
+  --border: #e0e0e0; --fig-bg: #fafafa; --bg: #fff; --inline-code-bg: #f3f3f3; --on-accent: #fff;
+  color: var(--text);
+}
+:root[data-theme="dark"] figure:has(svg):not(:has(.fig-box)):not(.se2-figure) {
+  background: var(--bg); border-radius: 8px; padding: 14px 16px;
+}
+/* Raster figures stay untouched; transparent logos/icons get a white tile so
+   dark line-art stays visible. Code panels are already dark: add an edge. */
+:root[data-theme="dark"] img { background-color: #fff; }
+:root[data-theme="dark"] .highlight,
+:root[data-theme="dark"] pre { box-shadow: 0 0 0 1px var(--border); }
 
 /* ── Reset ────────────────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
 html { font-size: 16px; -webkit-text-size-adjust: 100%; }
 body {
-  margin: 0; padding: 0; background: #fff; color: var(--text); overflow-x: hidden;
+  margin: 0; padding: 0; background: var(--bg); color: var(--text); overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -47,7 +109,7 @@ img { max-width: 100%; display: block; border-radius: 4px; }
   justify-content: space-between;
   position: sticky;
   top: 0;
-  background: rgba(255,255,255,0.97);
+  background: var(--nav-bg);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   z-index: 100;
@@ -70,7 +132,7 @@ img { max-width: 100%; display: block; border-radius: 4px; }
 .site-nav-title {
   position: absolute;
   left: max(140px, calc((100% - (var(--body-w) + 32px + var(--gutter-w))) / 2));
-  right: 340px;
+  right: 376px;
   line-height: 48px;
   font-size: 13px;
   font-weight: 600;
@@ -99,6 +161,14 @@ img { max-width: 100%; display: block; border-radius: 4px; }
 }
 .site-nav-links a:hover,
 .site-nav-links a.active { color: var(--text); text-decoration: none; }
+
+.theme-toggle {
+  flex: none; margin-left: 20px; padding: 6px; line-height: 0;
+  background: none; border: 0; border-radius: 4px; cursor: pointer;
+  color: var(--text-muted);
+}
+.theme-toggle:hover { color: var(--text); }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 
 /*
  * Removed: the old `.site-main { max-width: 680px }` wrapper.
@@ -361,7 +431,7 @@ table { border-collapse: collapse; width: 100%; margin: 1.5em 0; }
   flex-wrap: wrap;
   gap: 10px;
   padding: 10px 0;
-  border-bottom: 1px solid rgba(0,0,0,0.06);
+  border-bottom: 1px solid var(--border);
 }
 .archive-list li:last-child { border-bottom: none; }
 .archive-list a {
@@ -404,7 +474,7 @@ body.home .site-footer { max-width: 1100px; }
   grid-template-columns: 120px 1fr;
   column-gap: 44px;
   padding: 28px 0;
-  border-bottom: 1px solid rgba(0,0,0,0.07);
+  border-bottom: 1px solid var(--border);
   cursor: pointer;
 }
 .home-card.has-media { grid-template-columns: 120px 1fr 220px; }
@@ -664,7 +734,7 @@ span.pagination-item:hover { background: none; border-color: var(--border); }
 /* ── Responsive ───────────────────────────────────────────────────────────── */
 @media (max-width: 720px) {
   .site-nav { padding: 0 20px; }
-  .site-nav-title { left: 150px; right: 240px; }
+  .site-nav-title { left: 150px; right: 276px; }
   body:not(.home) .site-main { padding: 32px 20px 60px; }
   .site-footer { padding: 16px 20px; }
 }
@@ -697,12 +767,12 @@ span.pagination-item:hover { background: none; border-color: var(--border); }
 .email-box label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; }
 .email-box input[type="email"] {
   width: 100%; box-sizing: border-box; font: inherit; font-size: 0.95rem;
-  padding: 8px 10px; border: 1px solid var(--border); border-radius: 5px; background: #fff;
+  padding: 8px 10px; border: 1px solid var(--border); border-radius: 5px; background: var(--bg); color: var(--text);
 }
 .email-box input[type="email"]:focus { outline: 2px solid var(--accent-light); border-color: var(--accent); }
 .email-box .clear.foot { display: flex; align-items: center; gap: 12px; }
 .email-box .button {
-  font: inherit; font-size: 0.92rem; font-weight: 600; color: #fff; background: var(--accent);
+  font: inherit; font-size: 0.92rem; font-weight: 600; color: var(--on-accent); background: var(--accent);
   border: 0; border-radius: 5px; padding: 9px 16px; cursor: pointer;
 }
 .email-box .button:hover { opacity: 0.9; }
@@ -716,7 +786,7 @@ span.pagination-item:hover { background: none; border-color: var(--border); }
   max-width: 620px; margin: 0 auto;
   display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px;
   padding: 12px 16px;
-  background: #fff; border: 1px solid var(--border); border-radius: 8px;
+  background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
   box-shadow: 0 6px 24px rgba(0,0,0,0.12);
   font-family: var(--sans); font-size: 13px; line-height: 1.45; color: var(--text-light);
 }
@@ -725,7 +795,7 @@ span.pagination-item:hover { background: none; border-color: var(--border); }
 .cookie-bar button {
   font: inherit; font-weight: 600; cursor: pointer;
   padding: 6px 14px; border-radius: 5px;
-  border: 1px solid var(--border); background: #fff; color: var(--text);
+  border: 1px solid var(--border); background: var(--bg); color: var(--text);
 }
-.cookie-bar button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.cookie-bar button.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .cookie-bar button:hover { opacity: 0.88; }

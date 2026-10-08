@@ -267,7 +267,7 @@ frame in [Appendix B2](/mathematics/2026/07/07/cosmic-web-B2-tidal-frame/).)
   <div style="text-align:center; margin-bottom:0.4em;">
     <button id="col-play" style="font-size:0.8rem; padding:2px 12px; cursor:pointer;
       border:1px solid #bbb; background:#fafafa; border-radius:3px;">restart</button>
-    <span id="col-stage" style="font-size:0.85rem; color:#555; margin-left:1em;">cloud</span>
+    <span id="col-stage" style="font-size:0.85rem; color:var(--text-light); margin-left:1em;">cloud</span>
   </div>
   <div id="cw-collapse" style="text-align:center;"></div>
   <figcaption>

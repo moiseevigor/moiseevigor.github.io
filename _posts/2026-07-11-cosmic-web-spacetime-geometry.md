@@ -207,12 +207,12 @@ below lets you watch it accumulate.
 </div><!-- /.l-body -->
 
 <figure class="l-middle" id="fig-holonomy">
-  <div style="text-align:center; margin-bottom:0.5em; font-family:'Source Sans 3', sans-serif; font-size:13px; color:#555;">
+  <div style="text-align:center; margin-bottom:0.5em; font-family:'Source Sans 3', sans-serif; font-size:13px; color:var(--text-light);">
     colatitude&nbsp;θ&nbsp;<input type="range" id="hol-lat" min="15" max="88" value="55" style="width:170px; vertical-align:middle; accent-color:#1565c0;">
     &nbsp;&nbsp;transport progress&nbsp;<input type="range" id="hol-phi" min="0" max="100" value="100" style="width:200px; vertical-align:middle; accent-color:#e65100;">
   </div>
   <div id="cw-holonomy" style="text-align:center;"></div>
-  <div id="hol-readout" style="text-align:center; font-family:'Source Sans 3', sans-serif; font-size:13.5px; color:#333; margin-top:8px; min-height:2.4em;"></div>
+  <div id="hol-readout" style="text-align:center; font-family:'Source Sans 3', sans-serif; font-size:13.5px; color:var(--text); margin-top:8px; min-height:2.4em;"></div>
   <figcaption>
     <strong>Parallel transport measures curvature.</strong> A tangent vector (orange)
     is carried around a circle of constant latitude on the unit sphere, never rotating
@@ -449,13 +449,13 @@ theory**.
 </div><!-- /.l-body -->
 
 <figure class="l-middle" id="fig-tidal">
-  <div style="text-align:center; margin-bottom:0.5em; font-family:'Source Sans 3', sans-serif; font-size:13px; color:#555;">
+  <div style="text-align:center; margin-bottom:0.5em; font-family:'Source Sans 3', sans-serif; font-size:13px; color:var(--text-light);">
     λ₁&nbsp;<input type="range" id="td-l1" min="-100" max="100" value="80" style="width:130px; vertical-align:middle; accent-color:#1565c0;">
     &nbsp;λ₂&nbsp;<input type="range" id="td-l2" min="-100" max="100" value="-35" style="width:130px; vertical-align:middle; accent-color:#2f855a;">
     &nbsp;growth&nbsp;D&nbsp;<input type="range" id="td-D" min="0" max="100" value="55" style="width:150px; vertical-align:middle; accent-color:#e65100;">
   </div>
   <div id="cw-tidal" style="text-align:center;"></div>
-  <div id="td-readout" style="text-align:center; font-family:'Source Sans 3', sans-serif; font-size:13.5px; color:#333; margin-top:8px; min-height:2.6em;"></div>
+  <div id="td-readout" style="text-align:center; font-family:'Source Sans 3', sans-serif; font-size:13.5px; color:var(--text); margin-top:8px; min-height:2.6em;"></div>
   <figcaption>
     <strong>The tidal ellipsoid — geodesic deviation as web morphology.</strong> A ring
     of freely falling test particles (grey circle: initial; blue: now) deforms under the
@@ -663,13 +663,13 @@ completely — the geometry of a black-hole horizon. Each corner, gauged by the 
 </div><!-- /.l-body -->
 
 <figure class="l-middle" id="fig-cone">
-  <div style="text-align:center; margin-bottom:0.7em; font-family:'Source Sans 3', sans-serif; font-size:13px; color:#555;">
+  <div style="text-align:center; margin-bottom:0.7em; font-family:'Source Sans 3', sans-serif; font-size:13px; color:var(--text-light);">
     <span style="color:#2f855a; font-weight:600;">space (c → ∞)</span>
     <input type="range" id="cone-c" min="0" max="100" value="6" style="width:230px; vertical-align:middle; margin:0 10px; accent-color:#1565c0;">
     <span style="color:#c53030; font-weight:600;">horizon (c → 0)</span>
   </div>
   <div id="cw-cone" style="text-align:center;"></div>
-  <div id="cone-readout" style="text-align:center; font-family:'Source Sans 3', sans-serif; font-size:13.5px; color:#333; margin-top:10px; min-height:2.6em;"></div>
+  <div id="cone-readout" style="text-align:center; font-family:'Source Sans 3', sans-serif; font-size:13.5px; color:var(--text); margin-top:10px; min-height:2.6em;"></div>
   <figcaption>
     <strong>One family, dialled by the speed of light.</strong> The wedge is the set of
     events a signal can reach from the centre — the future "light cone". At left

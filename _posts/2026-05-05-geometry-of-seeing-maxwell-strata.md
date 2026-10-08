@@ -213,7 +213,7 @@ the first one exactly.
           <option value="e3">ε³ : both composed</option>
         </select>
       </label>
-      <span style="margin-left:auto;font-size:12px;color:#888;">
+      <span style="margin-left:auto;font-size:12px;color:var(--text-muted);">
         one libration orbit (blue) and the chosen symmetry's geometry (orange)
       </span>
     </div>
@@ -317,7 +317,7 @@ heart of the Maxwell-strata theorem of Moiseev–Sachkov (2010).
         <input type="range" id="fork-s" min="10" max="100" value="55" step="1">
         <span class="ctrl-val" id="fork-s-val">—</span>
       </label>
-      <span style="margin-left:auto;font-size:12px;color:#888;">
+      <span style="margin-left:auto;font-size:12px;color:var(--text-muted);">
         blue: $\kappa = +2k\,\mathrm{cn}$ &nbsp;·&nbsp; red: mirror $\kappa = -2k\,\mathrm{cn}$
       </span>
     </div>

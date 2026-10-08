@@ -112,13 +112,13 @@ first place.
 </div><!-- /.l-body -->
 
 <figure class="l-middle" id="fig-tweb">
-  <div style="text-align:center; margin-bottom:0.45em; font-family:'Source Sans 3',sans-serif; font-size:12px; color:#777;">pick a point:&nbsp;
+  <div style="text-align:center; margin-bottom:0.45em; font-family:'Source Sans 3',sans-serif; font-size:12px; color:var(--text-muted);">pick a point:&nbsp;
     <button class="fig-toggle" id="tw-void">void</button>
     <button class="fig-toggle" id="tw-sheet">sheet</button>
     <button class="fig-toggle active" id="tw-fil">filament</button>
     <button class="fig-toggle" id="tw-node">node</button>
   </div>
-  <div style="text-align:center; font-family:'Source Sans 3',sans-serif; font-size:12.5px; color:#555; margin-bottom:0.3em;">
+  <div style="text-align:center; font-family:'Source Sans 3',sans-serif; font-size:12.5px; color:var(--text-light); margin-bottom:0.3em;">
     detection threshold λ<sub>th</sub>&nbsp;<input type="range" id="tw-th" min="-60" max="120" value="0" style="width:200px; accent-color:#1565c0; vertical-align:middle;">
   </div>
   <div id="cw-tweb" style="text-align:center;"></div>
