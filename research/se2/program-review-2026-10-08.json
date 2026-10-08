@@ -1,0 +1,259 @@
+{
+  "date": "2026-10-08",
+  "base_revision": "c63b207460948959cce6c8f0850af97db5c351b9",
+  "scope": "All four published SE(2) web pages, their entire prose/formulas/captions, metadata/navigation, five figure implementations, local links and copied-asset provenance.",
+  "section_coverage": [
+    {
+      "file": "_posts/2026-10-07-se2-geodesics-research-program.md",
+      "sections": [
+        "A pendulum behind every path",
+        "One crossing in each bracket",
+        "From times to a caustic",
+        "Turning the map around",
+        "Which count?",
+        "What is proved and what remains open",
+        "The three articles",
+        "Sources and reproducibility"
+      ],
+      "review": "Read in full; equations and theorem qualifications mapped to manuscript snapshots; supporting source/certificate records checked where claimed."
+    },
+    {
+      "file": "_articles/2026-10-07-se2-conjugate-locus.md",
+      "sections": [
+        "The image of the singular sources",
+        "First variation isolates the kernel",
+        "The polynomial that recognizes a fold",
+        "Edges and the critical point",
+        "Embedding has a target-space boundary",
+        "The incidence bridge to the scalar inverse",
+        "What the interval run establishes",
+        "Status and reproducibility"
+      ],
+      "review": "Read in full; equations and theorem qualifications mapped to manuscript snapshots; supporting source/certificate records checked where claimed."
+    },
+    {
+      "file": "_articles/2026-10-07-se2-conjugate-times.md",
+      "sections": [
+        "The problem and its normalization",
+        "The first-time statement",
+        "Why the crossing is unique",
+        "Every Maxwell cell, including the exceptional case",
+        "Periodic velocity, spatial drift, late times",
+        "The formal proof boundary",
+        "Status and sources"
+      ],
+      "review": "Read in full; equations and theorem qualifications mapped to manuscript snapshots; supporting source/certificate records checked where claimed."
+    },
+    {
+      "file": "_articles/2026-10-07-se2-geodesic-counts.md",
+      "sections": [
+        "Declare the counted object first",
+        "A three-variable inverse becomes a scalar equation",
+        "Why this is exact",
+        "Where a scalar intersection becomes a fold",
+        "An exact count on a half-heading ray",
+        "Large distance, fixed angles",
+        "Winding explains the infinite full fiber",
+        "Other manuscript results and their scope",
+        "Status, verification and provenance"
+      ],
+      "review": "Read in full; equations and theorem qualifications mapped to manuscript snapshots; supporting source/certificate records checked where claimed."
+    }
+  ],
+  "confirmed_findings": [
+    {
+      "severity": "high",
+      "error": "Inverse search omitted all zero-transverse sources.",
+      "counterexample": "R=1.45, alpha=0.35 half-heading ray: expected nine; browser previously returned one.",
+      "fix": "Added separate short/long seam branches, branch-join deduplication, forward checks and an explicit period budget."
+    },
+    {
+      "severity": "high",
+      "error": "Equal time and modulus were treated as source identity, losing regular Maxwell pairs.",
+      "fix": "Compare sign, modulus, time and phase modulo 4K; the two equal-time ray sources are retained."
+    },
+    {
+      "severity": "medium",
+      "error": "Critical fourth-order root at the upper animation endpoint could be omitted by finite-grid detection.",
+      "fix": "Use exact critical-phase cell times, including p=6K."
+    },
+    {
+      "severity": "medium",
+      "error": "Critical/forward presets were silently snapped by HTML range steps while plots used different internal values.",
+      "fix": "Use step=any for exact-valued controls; tested critical modulus and forward heading."
+    },
+    {
+      "severity": "medium",
+      "error": "Companion pages and the index were described as full formal articles although proofs are in linked manuscripts.",
+      "fix": "Label the SE(2) entries Manuscript companion and describe the index accurately; retain manuscript statuses."
+    },
+    {
+      "severity": "medium",
+      "error": "Rounded-threshold readout presented a neighboring integer as a threshold count.",
+      "fix": "Suppress the plotted marker/count near tabulated thresholds; direct readers to the equality formula."
+    },
+    {
+      "severity": "low",
+      "error": "One-part program was labelled 1 parts.",
+      "fix": "Correct singular/plural metadata."
+    },
+    {
+      "severity": "low",
+      "error": "Optimal-synthesis footnote lacked a direct source locator.",
+      "fix": "Add verified DOI 10.1051/cocv/2010005."
+    },
+    {
+      "severity": "low",
+      "error": "Async initial threshold renders could overlap; numerical provenance would become stale after kernel repairs.",
+      "fix": "Suppress stale draw generations and record origin/current hashes with versioned module URLs."
+    },
+    {
+      "severity": "medium",
+      "error": "Some symbols were undefined in standalone companions; the rotating-source description omitted its sign and the flow control covered only half the source phase circle.",
+      "fix": "Define the endpoint-coordinate mean/difference, incomplete/complete elliptic integrals, source sign and 4K source phase. Extend flow phase control to 4K; bracket control remains 2K."
+    }
+  ],
+  "mathematical_statement_review": {
+    "conjugate_times": "Compared coefficient identities, first bracket, closed-bracket/half-open-cell counts, critical exception, scalar order and fixed-modulus late-index law against conjugate_times_se2.tex. Concrete Jacobi existence and tangent finiteness remain formal hypotheses.",
+    "caustic": "Compared physical-time kernel, first-sheet certificate identity, seam qualifications, generating-family versus scalar-order distinction, punctured-target properness and conditional positive-level result against first_caustic_se2.tex. Five exclusions remain unproved domains.",
+    "inverse_counts": "Compared scalar admissibility, normalized phases, both signs, seam formulas, fold bridge, exact ray equality counts, fixed-angle far-field assumptions, winding and separate direction/boundary regimes against inversion_counts_se2.tex.",
+    "provenance": "Read the current semantic full-grid audit totals and Lean reduction source/status, rather than treating historical summaries as current verification; rechecked copied PDF/TeX hashes."
+  },
+  "validation": {
+    "independent": {
+      "exact_algebra_identities": 5,
+      "ode_conjugate_cases": 12,
+      "ode_inverse_sources": 27,
+      "maximum_endpoint_error": 2.6356694604601216e-13,
+      "maximum_conjugate_singular_value_ratio": 2.9794677642352226e-13,
+      "critical_modulus": 0.9089085575485415,
+      "quartic_cells": [
+        1,
+        2,
+        4
+      ],
+      "maximum_quartic_coefficient_error": 3.780189004233828e-14,
+      "scope": "Web equations only; bounded independent checks, not full proof certification"
+    },
+    "ray_regressions": {
+      "ray_and_join_cases": 75,
+      "maximum_forward_residual": 2.3828771892903383e-14,
+      "maxwell_pair_preserved": true,
+      "phase_period_checked": true,
+      "critical_endpoint_retained": true
+    },
+    "formula_rendering": {
+      "pages": [
+        {
+          "path": "/mathematics/2026/10/07/se2-geodesics-research-program/",
+          "formulas": 35,
+          "tables": 1
+        },
+        {
+          "path": "/articles/se2-conjugate-locus/",
+          "formulas": 37,
+          "tables": 0
+        },
+        {
+          "path": "/articles/se2-conjugate-times/",
+          "formulas": 60,
+          "tables": 0
+        },
+        {
+          "path": "/articles/se2-geodesic-counts/",
+          "formulas": 55,
+          "tables": 0
+        }
+      ],
+      "total_formulas": 187,
+      "katex_version": "0.16.9",
+      "errors": 0
+    },
+    "local_links_and_fragments": 109,
+    "narrow_browser": [
+      {
+        "path": "/articles/se2-geodesic-counts/",
+        "errors": 0,
+        "formulas": 55,
+        "scrollWidth": 375,
+        "width": 375
+      },
+      {
+        "path": "/articles/se2-conjugate-times/",
+        "errors": 0,
+        "formulas": 60,
+        "scrollWidth": 375,
+        "width": 375
+      },
+      {
+        "path": "/articles/se2-conjugate-locus/",
+        "errors": 0,
+        "formulas": 37,
+        "scrollWidth": 375,
+        "width": 375
+      },
+      {
+        "path": "/mathematics/2026/10/07/se2-geodesics-research-program/",
+        "errors": 0,
+        "formulas": 35,
+        "scrollWidth": 375,
+        "width": 375
+      }
+    ],
+    "browser_controls": [
+      "symmetric ray returns nine including seven seam sources",
+      "critical modulus retains exact value",
+      "critical bracket shows one distinct root",
+      "geodesic endpoint t corresponds to p=6K"
+    ],
+    "fold_certificate": "216 coefficients and exact reconstruction/digest passed in preceding same-day review; algebra unchanged",
+    "existing_figure_checks": 39,
+    "desktop_browser": [
+      {
+        "path": "/articles/se2-geodesic-counts/",
+        "errors": 0,
+        "formulas": 55,
+        "kind": "Lab \u203a Geodesics on SE(2) \u203a\n    Manuscript companion",
+        "overflow": false,
+        "phaseMax": []
+      },
+      {
+        "path": "/articles/se2-conjugate-times/",
+        "errors": 0,
+        "formulas": 60,
+        "kind": "Lab \u203a Geodesics on SE(2) \u203a\n    Manuscript companion",
+        "overflow": false,
+        "phaseMax": [
+          "2"
+        ]
+      },
+      {
+        "path": "/articles/se2-conjugate-locus/",
+        "errors": 0,
+        "formulas": 37,
+        "kind": "Lab \u203a Geodesics on SE(2) \u203a\n    Manuscript companion",
+        "overflow": false,
+        "phaseMax": []
+      },
+      {
+        "path": "/mathematics/2026/10/07/se2-geodesics-research-program/",
+        "errors": 0,
+        "formulas": 35,
+        "kind": "Lab \u203a Geodesics on SE(2) \u203a\n    Part 1 \u00b7 the program",
+        "overflow": false,
+        "phaseMax": [
+          "4",
+          "2"
+        ]
+      }
+    ]
+  },
+  "primary_reference": "https://www.numdam.org/articles/10.1051/cocv/2010005/",
+  "limits": [
+    "This is a complete pass over the published web program, not a complete proof certification of the 16/31/75-page manuscripts.",
+    "No fresh Lean build, full interval-grid replay or new large simulation.",
+    "Browser root detection remains a bounded floating-point search and may miss roots near singular thresholds.",
+    "Source manuscripts unchanged; mathematical kernel is a documented reviewed derivative of the original snapshot."
+  ],
+  "battery": "80 percent on AC throughout bounded checks"
+}

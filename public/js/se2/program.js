@@ -1,6 +1,7 @@
 // Reading figures for the SE(2) program. Numerical illustrations, never certificates.
-// The mathematical module is an unchanged, hash-pinned snapshot of the research explorer.
-import * as M from './se2math.js';
+// The mathematical module is derived from the research explorer; web-review
+// corrections and both origin/current hashes are recorded in the snapshot manifest.
+import * as M from './se2math.js?v=20261008-review2';
 const TAU = 2 * Math.PI;
 const C = { ink: '#25313c', muted: '#65727e', rule: '#dee3e7', geo: '#1565c0', conjugate: '#c8501a', cut: '#6b4fa3', green: '#2d8061' };
 const f = (x, n = 3) => Number(x).toFixed(n);
@@ -80,11 +81,17 @@ class Figure {
   preset(name) {
     this.state.target = name;
     if (name === 'forward') { const q = M.expC2(.3, .75, 1); this.target = q; this.state.theta = q.theta; }
+    else if (name === 'ray') { this.state.theta = -.7; this.target = { x: 1.45 * Math.sin(-.35), y: -1.45 * Math.cos(-.35) }; }
     else { this.target = name === 'near' ? { x: -1.25, y: -1.8 } : { x: -1, y: -2 }; this.state.theta = -.9; }
     this.sync('theta', this.state.theta); this.sync('target', name);
   }
   schedule() { cancelAnimationFrame(this.pending); this.pending = requestAnimationFrame(() => this.draw()); }
   async draw() {
+    const generation = this.drawGeneration = (this.drawGeneration || 0) + 1;
+    if (this.mode === 'ray') {
+      try { await rayData(); } catch (error) { this.readout.textContent = `Threshold data unavailable: ${error.message}`; return; }
+      if (generation !== this.drawGeneration) return;
+    }
     const { g, W, H } = frame(this.canvas); if (W < 80) return;
     this.el.querySelectorAll('[data-value]').forEach(o => { const key = o.dataset.value; o.textContent = f(this.state[key], key === 'k' || key === 'radius' ? 3 : 2); });
     try { await this[this.mode](g, W, H); this.el.dataset.ready = 'true'; }
@@ -141,17 +148,17 @@ class Figure {
     paths.forEach((p, i) => line(g, p, s, i === 0 ? C.geo : C.conjugate, i === 0 ? 2.5 : 1.3, i === 0 ? 1 : .65)); dot(g, s, [0, 0], C.ink, 3); dot(g, s, [x, y], C.cut, 6);
     const heading = { x, y, theta }; pose(g, s, heading);
     const residual = sources.length ? Math.max(...sources.map(s => s.residual)).toExponential(1) : '—';
-    this.readout.innerHTML = `<b>${sources.length} rotating source${sources.length === 1 ? '' : 's'} found</b> for (${f(x, 2)}, ${f(y, 2)}, ${f(theta, 2)}) with t ≤ 40. Largest forward residual: ${residual}. Click to move the target; all paths share its heading. Browser detection is illustrative and may miss roots near singular thresholds.`;
+    this.readout.innerHTML = `<b>${sources.length} rotating source${sources.length === 1 ? '' : 's'} found</b> for (${f(x, 2)}, ${f(y, 2)}, ${f(theta, 2)}) with t ≤ 40. Largest forward residual: ${residual}. ${sources.filter(s => s.seam).length} use the separate seam chart. Click to move the target; all paths share its heading. Browser detection is illustrative and may miss roots near singular thresholds.`;
   }
   async ray(g, W, H) {
     const d = await rayData(), R = this.state.radius, s = scale([0, 1.85, -.6, 15], W, H, false);
     const count = r => (r > d.twoQ ? 1 : 0) + 2 * d.S.filter(v => v < r).length + 2 * d.cusp.filter(v => v < r).length;
     const ts = [d.twoQ, ...d.S, ...d.cusp].filter(t => t < 1.85).sort((a, b) => a - b), pts = [[.001, count(.001)]];
-    for (const t of ts) pts.push([t, count(t - 1e-9)], [t, count(t + 1e-9)]); pts.push([1.85, count(1.85)]);
-    axes(g, s, W, H, 'radius R', 'rotating source count'); line(g, pts, s, C.geo, 2.5); dot(g, s, [R, count(R)], C.conjugate, 6);
-    for (const t of d.S.filter(t => t < 1.85)) { g.strokeStyle = C.cut; g.globalAlpha = .4; g.setLineDash([3, 4]); g.beginPath(); g.moveTo(s.x(t), s.y(0)); g.lineTo(s.x(t), s.y(14)); g.stroke(); g.setLineDash([]); g.globalAlpha = 1; }
     const close = ts.some(t => Math.abs(R - t) < .0005);
-    this.readout.innerHTML = `<b>${count(R)} rotating sources${close ? ' (near a threshold)' : ''}</b> away from exact thresholds. Purple guides mark Sₙ. At Sₙ the seam contributes one source; the graph uses rounded thresholds and its vertical jumps do not display equality values. The full normal fiber also contains winding sources.`;
+    for (const t of ts) pts.push([t, count(t - 1e-9)], [t, count(t + 1e-9)]); pts.push([1.85, count(1.85)]);
+    axes(g, s, W, H, 'radius R', 'rotating source count'); line(g, pts, s, C.geo, 2.5); if (!close) dot(g, s, [R, count(R)], C.conjugate, 6);
+    for (const t of d.S.filter(t => t < 1.85)) { g.strokeStyle = C.cut; g.globalAlpha = .4; g.setLineDash([3, 4]); g.beginPath(); g.moveTo(s.x(t), s.y(0)); g.lineTo(s.x(t), s.y(14)); g.stroke(); g.setLineDash([]); g.globalAlpha = 1; }
+    this.readout.innerHTML = `<b>${close ? 'Near a threshold: consult the equality formula' : `${count(R)} rotating sources`}</b>${close ? '' : ' away from thresholds.'} Purple guides mark Sₙ. At Sₙ the seam contributes one source; the graph uses rounded thresholds and its vertical jumps do not display equality values. The full normal fiber also contains winding sources.`;
   }
   play() {
     this.playing = true; const b = this.el.querySelector('[data-action="play"]'); b.textContent = 'Pause'; b.setAttribute('aria-pressed', 'true'); let last;

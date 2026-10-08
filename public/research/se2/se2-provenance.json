@@ -18,7 +18,7 @@
       "pdf_sha256": "5f87086ed73493304b65696e8f038e404955824ca5f34762c913d8c9f454a175"
     }
   },
-  "browser_math_sha256": "11764a2bc336df2108461d17a7e3412009d12dc50ea3c239b2f136c9aab7f906",
+  "browser_math_sha256": "a4b4c35c327ac70fdd28bacbc3b7b781679570bd9cfbe0c2f9afe15f39d1546b",
   "full_grid": {
     "cells": 38400,
     "validated": 38400,
@@ -43,5 +43,15 @@
     "authorization": "author requested web publication",
     "journal_review": "not claimed",
     "manuscript_release_ready": false
+  },
+  "browser_math_origin_sha256": "11764a2bc336df2108461d17a7e3412009d12dc50ea3c239b2f136c9aab7f906",
+  "browser_math_review": {
+    "date": "2026-10-08",
+    "changes": [
+      "retain distinct 4K source phases in Maxwell pairs",
+      "add bounded zero-transverse seam reconstruction",
+      "use exact critical cell times including the display endpoint"
+    ],
+    "cache_version": "20261008-review2"
   }
 }

@@ -1,4 +1,5 @@
-// Numerics for the SE(2) conjugate-locus explorer.  Plain ES module, no dependencies.
+// Numerics derived from the SE(2) research explorer, with web-review corrections.
+// Plain ES module, no dependencies. Source phases are retained modulo 4K.
 // Conventions follow the manuscripts: modulus k, parameter m = k^2, p = t/(2k), tau = psi + p.
 // Jacobi functions by the arithmetic-geometric mean (Abramowitz-Stegun 16.4) with a
 // continuous amplitude; incomplete integrals by Carlson's R_F and R_D.
@@ -124,6 +125,11 @@ export function cellData(k, ncell) {
 // zeros) plus touches (even-order zeros, e.g. the coalesced root p = 2nK at k = k0, psi = K), found
 // as local minima of |J2| without a sign change that refine to |J2| below 1e-10 of the local scale.
 export function conjugateTimes(psi, k, pmax, ngrid = 4000) {
+  const K = ellipk(k * k), phase = ((psi - K) % (2 * K) + 2 * K) % (2 * K);
+  // The critical coalescence has an exact cell formula. Avoid cancellation in
+  // detecting a fourth-order touch, including a root at the display endpoint.
+  if (Math.abs(k - K0) < 1e-14 && Math.min(phase, 2 * K - phase) < 1e-12 * K)
+    return Array.from({ length: Math.floor(pmax / (2 * K) + 1e-12) }, (_, i) => 2 * (i + 1) * K);
   const f = q => j2geo(psi, q, k), out = [], vals = [];
   for (let i = 1; i <= ngrid; i++) vals.push([i * pmax / ngrid, f(i * pmax / ngrid)]);
   let scale = 0; for (const [, v] of vals) scale = Math.max(scale, Math.abs(v));
@@ -139,6 +145,7 @@ export function conjugateTimes(psi, k, pmax, ngrid = 4000) {
       if (Math.abs(f(pm)) < 1e-10 * scale) out.push({ p: pm, touch: true });
     }
   }
+  if (vals.length && vals[vals.length - 1][1] === 0) out.push({ p: pmax, touch: false });
   const roots = [];
   for (const r of out) if (!roots.some(q => Math.abs(q - r.p) < 1e-6 * pmax)) roots.push(r.p);
   return roots;
@@ -193,6 +200,64 @@ export function scalarChart(z, x, y, th) {
   const L = 4 * (K - E);
   return { m, A, psi, delta, Q0, N: (A - Q0) / L, K, L };
 }
+// The source phase is modulo 4K, not 2K. Equal time and modulus alone
+// do not identify a source: regular Maxwell pairs have both equal.
+export function sameRotatingSource(a, b) {
+  if (a.eps !== b.eps || Math.abs(a.k - b.k) > 1e-8 || Math.abs(a.t - b.t) > 1e-8) return false;
+  const period = 4 * ellipk(a.k * a.k), d = Math.abs(a.psi - b.psi) % period;
+  return Math.min(d, period - d) < 1e-7;
+}
+
+// Separate B=0 chart (manuscript's complete zero-transverse fiber).
+// This bounded floating-point search includes branch joins but is not a certificate.
+export function seamSources(x, y, th, tmax = 40) {
+  if (!(Math.abs(th) > 1e-8 && Math.abs(th) < PI)) return [];
+  const a = th / 2, sine = Math.sin(a), sa = Math.abs(sine), m0 = sa * sa;
+  const radius = Math.hypot(x, y), transverse = x * Math.cos(a) + y * Math.sin(a);
+  if (!radius || Math.abs(transverse) > 2e-13 * Math.max(1, radius)) return [];
+  const eps = Math.sign(x * Math.sin(a) - y * Math.cos(a)), out = [];
+  const L0 = 4 * (ellipk(m0) - ellipe(m0)), upper = 1 - 1e-12;
+  function data(m) {
+    const phi = Math.asin(Math.min(1, sa / Math.sqrt(m)));
+    const K = ellipk(m), u = ellipf(phi, m), q = u - ellipeinc(phi, m);
+    return { K, u, q, L: 4 * (K - ellipe(m)) };
+  }
+  function add(m, n, short) {
+    const k = Math.sqrt(m), d = data(m), cosine = (short ? -Math.sign(th) : Math.sign(th)) * Math.sqrt(Math.max(0, m - m0));
+    const phi = ((Math.atan2(sine, cosine) % (2 * PI)) + 2 * PI) % (2 * PI);
+    const psi = ellipf(phi, m), delta = short ? 2 * d.u : 4 * d.K - 2 * d.u, t = k * (delta + 4 * n * d.K);
+    if (t > tmax || !(t > 0)) return;
+    const point = expC2(psi, k, t, eps), residual = Math.hypot(point.x - x, point.y - y) + Math.abs(Math.atan2(Math.sin(point.theta - th), Math.cos(point.theta - th)));
+    if (residual > 1e-7) return;
+    const source = { psi, k, t, eps, n, a, residual, seam: true };
+    if (!out.some(old => sameRotatingSource(old, source))) out.push(source);
+  }
+  function crossing(fn, lo, hi, n, short) {
+    const left = fn(lo) - radius, right = fn(hi) - radius;
+    if (Math.abs(left) < 1e-12) return add(lo, n, short);
+    if (Math.abs(right) < 1e-12) return add(hi, n, short);
+    if (left * right < 0) add(bisect(m => fn(m) - radius, lo, hi, 90), n, short);
+  }
+  // Every branch radius is at least nL(m0); time bounds are checked on reconstruction.
+  const nmax = Math.min(Math.ceil(radius / L0), Math.floor(tmax / (4 * sa * ellipk(m0))) + 1);
+  if (!(L0 > 0) || !Number.isFinite(nmax) || nmax > 1000) throw new RangeError('Seam search exceeds the floating-point period budget');
+  for (let n = 0; n <= nmax; n++) {
+    const short = m => { const d = data(m); return n * d.L + 2 * d.q; };
+    const long = m => { const d = data(m); return (n + 1) * d.L - 2 * d.q; };
+    crossing(long, m0, upper, n, false);
+    if (n === 0) { crossing(short, m0, upper, n, true); continue; }
+    let lo = m0, hi = upper;
+    for (let i = 0; i < 100; i++) {
+      const u = lo + (hi - lo) / 3, v = hi - (hi - lo) / 3;
+      if (short(u) < short(v)) hi = v; else lo = u;
+    }
+    const minimum = (lo + hi) / 2;
+    if (Math.abs(short(minimum) - radius) < 1e-12) add(minimum, n, true);
+    else { crossing(short, m0, minimum, n, true); crossing(short, minimum, upper, n, true); }
+  }
+  return out.sort((a, b) => a.t - b.t);
+}
+
 // rotating sources of a target: integer levels of N on each admissible component, both signs.
 // The components are located on a coarse grid, then N is sampled adaptively (intervals are split
 // until the change of N is small), integer crossings are bisected, near-tangent contacts (a local
@@ -254,9 +319,11 @@ export function rotatingSources(x, y, th, na = 400, tmax = 40) {
       const e = expC2(c.psi, k, t, eps);
       const res = Math.hypot(e.x - x, e.y - y) + Math.abs(Math.atan2(Math.sin(e.theta - th), Math.cos(e.theta - th)));
       if (res > 1e-7) continue;                                   // forward verification
-      if (out.some(o => Math.abs(o.t - t) < 1e-8 && o.eps === eps && Math.abs(o.k - k) < 1e-8)) continue;
-      out.push({ t, k, psi: c.psi, eps, n, a, residual: res });
+      const source = { t, k, psi: c.psi, eps, n, a, residual: res };
+      if (out.some(o => sameRotatingSource(o, source))) continue;
+      out.push(source);
     }
   }
+  for (const source of seamSources(x, y, th, tmax)) if (!out.some(old => sameRotatingSource(old, source))) out.push(source);
   return out.sort((u, v) => u.t - v.t);
 }

@@ -4,7 +4,7 @@ import * as M from '../../public/js/se2/se2math.js';
 const checks=[];
 for(const k of [.25,.75,.97]) {
  const c=M.cellData(k,1),K=c.K;
- for(const phase of [0,.6,1,2]) {
+ for(const phase of [0,.6,1,2,3,4]) {
   const roots=M.conjugateTimes(phase*K,k,c.cells[0].pnext-1e-8,2800).filter(p=>p>=c.p0-1e-7);
   assert.equal(roots.length,2,`generic cell k=${k},phase=${phase}`);
   for(const p of roots){const q=M.expC2(phase*K,k,2*k*p);assert.ok([q.x,q.y,q.theta].every(Number.isFinite));}

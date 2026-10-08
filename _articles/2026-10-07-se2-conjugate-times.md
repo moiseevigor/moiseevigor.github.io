@@ -5,6 +5,7 @@ subtitle: "The exact bracket mechanism, its critical exception, and what the Lea
 date: 2026-10-07 10:00:00 +0200
 categories: [articles]
 program: se2-geodesics
+article_kind: "Manuscript companion"
 tags: [SE2, sub-riemannian, geodesics, elliptic-functions]
 permalink: /articles/se2-conjugate-times/
 published: true
@@ -28,7 +29,7 @@ The standard left-invariant sub-Riemannian metric makes
 $$X_1=\cos\theta\,\partial_x+\sin\theta\,\partial_y,
 \qquad X_2=\partial_\theta$$
 
-orthonormal. A normal geodesic starts at $(0,0,0)$ with Hamiltonian energy $1/2$. On the rotating stratum $C_2$, use the modulus $0<k<1$, initial phase $\psi$ and scaled time $p=t/(2k)$. Put $m=k^2$, $K=K(m)$, $E=E(m)$ and $\tau=\psi+p$.
+orthonormal. A normal geodesic starts at $(0,0,0)$ with Hamiltonian energy $1/2$. On either fixed rotation-sign component of the rotating stratum $C_2$, use the modulus $0<k<1$, initial phase $\psi$ and scaled time $p=t/(2k)$. Put $m=k^2$, $K=K(m)$, $E=E(m)$ and $\tau=\psi+p$.
 
 The exponential map sends $(\psi,k,t)$ to the endpoint $(x,y,\theta)$. A positive time is conjugate when this map loses rank. Sachkov's reduced Jacobian has the form
 
@@ -100,7 +101,7 @@ This scalar order does not itself identify the singularity of the full exponenti
 
 The body velocity has period $T=4kK$, while the endpoint satisfies $g(t+nT)=h^n g(t)$ for a period translation $h$. Differentiating with respect to the source parameters gives a determinant that is exactly quadratic in the integer $n$.
 
-For phase representatives in $(-K,K)$, away from $\psi\equiv K$, the manuscript derives
+For each fixed modulus and phase representatives in $(-K,K)$, away from $\psi\equiv K$, the manuscript derives
 
 $$p_{(j)}=(j+\tfrac12)K-\tfrac12\psi+O(1/j).$$
 

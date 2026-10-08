@@ -34,6 +34,8 @@ for (const k of [.25,.75,.97]) for (const phase of [0,.6,1,1.8]) {
  records.push({k,psi,t,q:M.expC2(psi,k,t)});
 }
 const inverse=M.rotatingSources(-1,-2,-.9,400,40).map(s=>({...s,q:{x:-1,y:-2,theta:-.9}}));
+for(const theta of [.7,-.7]) { const a=theta/2,x=1.45*Math.sin(a),y=-1.45*Math.cos(a);
+ inverse.push(...M.rotatingSources(x,y,theta,400,40).map(s=>({...s,q:{x,y,theta}}))); }
 console.log(JSON.stringify({records,inverse}));
 """
 fixtures = json.loads(subprocess.check_output(['node', '--input-type=module', '-e', js], cwd=root, text=True))

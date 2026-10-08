@@ -60,7 +60,7 @@ This program follows that continuation. Its three articles examine the same expo
 
 The maximum principle reduces the normal Hamiltonian equations to a mathematical pendulum. Oscillating and rotating pendulum motions produce different families of geodesics. In the standard metric considered here, **only the rotating family has conjugate points**.[^conjugate]
 
-The rotating family is specified by a modulus $0<k<1$ and an initial phase $\psi$. We use the parameter $m=k^2$ in numerical elliptic functions, and the scaled time
+A rotating source is specified by a modulus $0<k<1$, an initial phase $\psi$ modulo $4K$, and a rotation sign $\varepsilon=\pm1$. The source-flow figures show $\varepsilon=1$; the inverse search considers both signs. We use the parameter $m=k^2$ in numerical elliptic functions, and the scaled time
 
 $$p=\frac{t}{2k},\qquad \tau=\psi+p,\qquad K=K(k^2).$$
 
@@ -120,7 +120,7 @@ Each admissible integer intersection reconstructs an actual rotating source. Bot
 
 </div>
 
-{% include se2-figure.html mode="inverse" kicker="Article C · hold the target fixed" title="Different paths, the same position and heading" caption="The nine-source preset is a regression example for the rotating inverse. Every displayed source is reconstructed and checked forward. Move the target or its heading to explore nearby fibers. The displayed search is bounded by t ≤ 40 and uses floating-point detection; it does not certify completeness for arbitrary targets." %}
+{% include se2-figure.html mode="inverse" kicker="Article C · hold the target fixed" title="Different paths, the same position and heading" caption="The nine-source preset is a regression example for the rotating inverse. Every displayed source is reconstructed and checked forward; seam sources use a separate chart. Move the target or its heading to explore nearby fibers. The displayed search is bounded by t ≤ 40 and uses floating-point detection; it does not certify completeness for arbitrary targets." %}
 
 <div class="l-body" markdown="1">
 
@@ -177,6 +177,6 @@ The web edition snapshots research revision `5c304fd` from 27 September 2026. Th
 
 [^maxwell]: I. Moiseev and Y. L. Sachkov, *Maxwell strata in the sub-Riemannian problem on the group of motions of a plane*, ESAIM: COCV 16 (2010). [DOI](https://doi.org/10.1051/cocv/2009004). Establishes the underlying parametrization and Maxwell structure used here.
 [^conjugate]: Y. L. Sachkov, *Conjugate and cut time in the sub-Riemannian problem on the group of motions of a plane*, ESAIM: COCV 16 (2010). [DOI](https://doi.org/10.1051/cocv/2009031). The known first-time bounds and rotating-stratum conjugate results are inputs to the new manuscript.
-[^cut]: Y. L. Sachkov, *Cut locus and optimal synthesis in the sub-Riemannian problem on the group of motions of a plane*, ESAIM: COCV 17 (2011). The complete minimizing synthesis is an established source result, distinct from post-cut counts.
+[^cut]: Y. L. Sachkov, *Cut locus and optimal synthesis in the sub-Riemannian problem on the group of motions of a plane*, ESAIM: COCV 17 (2011). [DOI](https://doi.org/10.1051/cocv/2010005). The complete minimizing synthesis is an established source result, distinct from post-cut counts.
 
 </div>
