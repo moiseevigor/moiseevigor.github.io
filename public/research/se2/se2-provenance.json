@@ -31,10 +31,17 @@
   },
   "reported_five_exclusions_percent": 2.56,
   "notes": [
-    "Author manuscript snapshots; no submission approval or new proof replay in this publishing pass.",
+    "Author manuscript snapshots published as web companions with author approval on 2026-10-08; no submission approval or new proof replay in this publishing pass.",
     "Original four-exclusion run left 304 residual boxes in 32 cells; current manuscript adds C4 to its excluded domain. This domain change does not prove the residual boxes.",
     "Explorer data.json summary has stale cell/leaf counters. This snapshot uses data/e80_full_grid_audit.json for audit totals, and only the ray thresholds from explorer data.json.",
     "Ray thresholds are floating-point tabulations at alpha=0.35; equality cases require analytical definitions, not browser tolerance.",
     "Literature catalogue is project-local; individual records retain actual reading and edition limitations."
-  ]
+  ],
+  "web_publication": {
+    "date": "2026-10-08",
+    "status": "published",
+    "authorization": "author requested web publication",
+    "journal_review": "not claimed",
+    "manuscript_release_ready": false
+  }
 }

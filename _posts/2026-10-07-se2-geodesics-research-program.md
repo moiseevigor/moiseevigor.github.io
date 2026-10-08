@@ -12,7 +12,7 @@ series: se2-geodesics
 series_title: "Geodesics on SE(2)"
 series_part: 1
 permalink: /mathematics/2026/10/07/se2-geodesics-research-program/
-published: false
+published: true
 comments: false
 description: >
   A unified SE(2) research program connecting exact conjugate-time brackets,
@@ -24,7 +24,7 @@ description: >
 
 <div class="l-body" markdown="1">
 
-<div class="se2-review"><strong>Review draft · 7 October 2026.</strong> This is a reader's map to three author manuscripts. The geometric setting and the published cut-locus synthesis are established inputs; the new results, numerical evidence and unresolved claims are identified below. The manuscripts have not been approved for submission.</div>
+<div class="se2-review"><strong>Research notes · published 8 October 2026.</strong> This is a reader's map to three author manuscripts. The geometric setting and the published cut-locus synthesis are established inputs; the new results, numerical evidence and unresolved claims are identified below. The linked author manuscripts retain the research status and open questions stated below; this web publication does not claim journal peer review.</div>
 
 A point in the plane is not enough to describe a moving vehicle. We also need its heading. Write its state as $(x,y,\theta)$: a position and an angle. Together these states form **SE(2), the group of plane motions**.
 
@@ -172,7 +172,7 @@ All three belong to this single SE(2) program. The model is the standard left-in
 
 The primary literature is indexed in the project's 53-record Obsidian catalogue. Its notes distinguish selected-section reading, abstract-only coverage, unread sources and edition gaps. A catalogue entry does not establish that every theorem in a source has been read or checked.
 
-The web draft snapshots research revision `5c304fd` from 27 September 2026. The [source repository](https://github.com/moiseevigor/se2-conjugate-locus) contains the canonical manuscripts, living notebook, formal development and audit records. The [snapshot manifest](/public/research/se2/se2-provenance.json) binds the copied manuscript PDFs, their TeX sources and the browser math module. This publishing pass checks the figures and records current claims; it does not rerun the full interval computation.
+The web edition snapshots research revision `5c304fd` from 27 September 2026. The [source repository](https://github.com/moiseevigor/se2-conjugate-locus) contains the canonical manuscripts, living notebook, formal development and audit records. The [snapshot manifest](/public/research/se2/se2-provenance.json) binds the copied manuscript PDFs, their TeX sources and the browser math module. This publishing pass checks the figures and records current claims; it does not rerun the full interval computation.
 
 [^maxwell]: I. Moiseev and Y. L. Sachkov, *Maxwell strata in the sub-Riemannian problem on the group of motions of a plane*, ESAIM: COCV 16 (2010). [DOI](https://doi.org/10.1051/cocv/2009004). Establishes the underlying parametrization and Maxwell structure used here.
 [^conjugate]: Y. L. Sachkov, *Conjugate and cut time in the sub-Riemannian problem on the group of motions of a plane*, ESAIM: COCV 16 (2010). [DOI](https://doi.org/10.1051/cocv/2009031). The known first-time bounds and rotating-stratum conjugate results are inputs to the new manuscript.

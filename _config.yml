@@ -77,8 +77,7 @@ exclude:
   # copies ~5.6G into _site (and again into _site_production).
   - "research/cosmic-web/data"
   - "research/preferred-directions/artifacts"
-  # Review-only SE(2) manuscripts and numerical metadata.
-  - "public/research/se2"
+  # Internal SE(2) review records and screenshots stay out of the public site.
   - "research/se2"
 
 # Appendix pages: rendered at pinned permalinks but never part of site.posts,
@@ -108,10 +107,3 @@ social:
     - https://twitter.com/moiseev_igor
     - https://www.linkedin.com/in/moiseevigor
     - https://github.com/moiseevigor
-
-# SE(2) manuscript snapshots are available only in the local review build.
-defaults:
-  - scope:
-      path: "public/research/se2"
-    values:
-      published: false

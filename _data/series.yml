@@ -240,7 +240,6 @@
   title: "Geodesics on SE(2)"
   subtitle: "Beyond the shortest path: exact conjugate times, caustic geometry and inverse geodesic counts in one standard metric."
   status: active
-  review_draft: true
   question: "After a geodesic ceases to minimize, where does it focus and how many geodesics reach the same position and heading?"
   outcome: "Three author manuscripts connect a Riccati bracket count, the geometry of folds and cusp seams, and an exact scalar inverse. The global incidence criterion retains five declared exclusions."
   frontier: "Analytical control of excluded endpoint domains, effective asymptotic thresholds, and final article proof/novelty review."
@@ -256,4 +255,4 @@
     - part: 1
       title: "Beyond the Shortest Path: Geodesics on SE(2)"
       url: /mathematics/2026/10/07/se2-geodesics-research-program/
-      status: draft
+      status: published

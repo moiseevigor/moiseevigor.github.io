@@ -7,7 +7,7 @@ categories: [articles]
 program: se2-geodesics
 tags: [SE2, sub-riemannian, geodesics, elliptic-functions]
 permalink: /articles/se2-conjugate-times/
-published: false
+published: true
 comments: false
 manuscript_status: "manuscript candidate; final review open"
 ---
@@ -16,7 +16,7 @@ manuscript_status: "manuscript candidate; final review open"
 
 <div class="l-body" markdown="1">
 
-<div class="se2-review"><strong>Review draft · manuscript candidate; final review open.</strong> This web companion states the principal results and explains their arguments. The complete hypotheses, detailed proofs, figures and bibliography are in the full manuscript linked below. This page is an editorial adaptation; it adds no theorem or publication approval.</div>
+<div class="se2-review"><strong>Author manuscript · manuscript candidate; final review open.</strong> This web companion states the principal results and explains their arguments. The complete hypotheses, detailed proofs, figures and bibliography are in the full manuscript linked below. This page is an editorial adaptation; it adds no theorem and does not claim journal peer review.</div>
 
 <div class="se2-manuscript"><a href="/public/research/se2/conjugate_times_se2.pdf">Read the full manuscript · 16 pages</a><a href="/public/research/se2/conjugate_times_se2.tex">TeX snapshot</a><a href="/mathematics/2026/10/07/se2-geodesics-research-program/">The SE(2) program</a></div>
 
@@ -118,6 +118,6 @@ This manuscript is an author publication candidate. Its original September revie
 
 Foundational sources are Moiseev–Sachkov's [Maxwell-strata paper](https://doi.org/10.1051/cocv/2009004) and Sachkov's [conjugate/cut-time paper](https://doi.org/10.1051/cocv/2009031). Complete citations and statement locators are in the PDF. The project-local literature catalogue preserves its reading and edition limits.
 
-Continue to [the conjugate locus](/articles/se2-conjugate-locus/): apply the endpoint map to the singular sources identified here. The [snapshot manifest](/public/research/se2/se2-provenance.json) records the exact source and PDF hashes used for this draft.
+Continue to [the conjugate locus](/articles/se2-conjugate-locus/): apply the endpoint map to the singular sources identified here. The [snapshot manifest](/public/research/se2/se2-provenance.json) records the exact source and PDF hashes used for this web edition.
 
 </div>

@@ -7,7 +7,7 @@ categories: [articles]
 program: se2-geodesics
 tags: [SE2, sub-riemannian, geodesics, elliptic-functions]
 permalink: /articles/se2-geodesic-counts/
-published: false
+published: true
 comments: false
 manuscript_status: "manuscript candidate; final proof and novelty review open"
 ---
@@ -16,7 +16,7 @@ manuscript_status: "manuscript candidate; final proof and novelty review open"
 
 <div class="l-body" markdown="1">
 
-<div class="se2-review"><strong>Review draft · manuscript candidate; final proof and novelty review open.</strong> This web companion states the principal results and explains their arguments. The complete hypotheses, detailed proofs, figures and bibliography are in the full manuscript linked below. This page is an editorial adaptation; it adds no theorem or publication approval.</div>
+<div class="se2-review"><strong>Author manuscript · manuscript candidate; final proof and novelty review open.</strong> This web companion states the principal results and explains their arguments. The complete hypotheses, detailed proofs, figures and bibliography are in the full manuscript linked below. This page is an editorial adaptation; it adds no theorem and does not claim journal peer review.</div>
 
 <div class="se2-manuscript"><a href="/public/research/se2/inversion_counts_se2.pdf">Read the full manuscript · 75 pages</a><a href="/public/research/se2/inversion_counts_se2.tex">TeX snapshot</a><a href="/mathematics/2026/10/07/se2-geodesics-research-program/">The SE(2) program</a></div>
 
