@@ -7,7 +7,7 @@ categories: [articles]
 program: se2-geodesics
 tags: [SE2, sub-riemannian, geodesics, elliptic-functions]
 permalink: /articles/se2-conjugate-locus/
-published: false
+published: true
 comments: false
 manuscript_status: "research draft; excluded-domain arguments open"
 ---
@@ -16,7 +16,7 @@ manuscript_status: "research draft; excluded-domain arguments open"
 
 <div class="l-body" markdown="1">
 
-<div class="se2-review"><strong>Review draft · research draft; excluded-domain arguments open.</strong> This web companion states the principal results and explains their arguments. The complete hypotheses, detailed proofs, figures and bibliography are in the full manuscript linked below. This page is an editorial adaptation; it adds no theorem or publication approval.</div>
+<div class="se2-review"><strong>Author manuscript · research draft; excluded-domain arguments open.</strong> This web companion states the principal results and explains their arguments. The complete hypotheses, detailed proofs, figures and bibliography are in the full manuscript linked below. This page is an editorial adaptation; it adds no theorem and does not claim journal peer review.</div>
 
 <div class="se2-manuscript"><a href="/public/research/se2/first_caustic_se2.pdf">Read the full manuscript · 31 pages</a><a href="/public/research/se2/first_caustic_se2.tex">TeX snapshot</a><a href="/mathematics/2026/10/07/se2-geodesics-research-program/">The SE(2) program</a></div>
 

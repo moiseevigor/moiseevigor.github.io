@@ -49,5 +49,19 @@ Provenance corrections discovered while onboarding:
   target, so the nine-source preset label cannot describe a modified target.
 
 Artifacts: `review-results.json`, the snapshot manifest, numerical check script
-and saved preview images. The repository is uncommitted; no push, deployment,
-cloud execution, heavy research sweep or publication approval occurred.
+and saved preview images. These import findings describe the 7 October draft.
+
+## Web publication — 8 October 2026
+
+The author requested publication after PR #26 was merged. The program, three
+article companions and manuscript/data assets are promoted together. Their
+research qualifications and unresolved manuscript review gates remain explicit;
+web publication does not imply journal peer review or submission approval.
+Internal review records and screenshots remain excluded from production.
+No new manuscript proof replay, cloud execution or heavy research sweep occurs
+in this publication pass.
+
+Publication validation: 33 figure checks passed. The production Jekyll 3.9.2
+build passed; all four pages, home/Lab/Articles links, 94 local asset/page links,
+six manuscript hashes and both data assets were verified. Internal review files
+remain excluded. The same temporary dependency limitation recorded above applies.

@@ -1,6 +1,6 @@
 # SE(2): one program, three article companions
 
-This blog draft imports the standard left-invariant SE(2) research program from
+This blog edition imports the standard left-invariant SE(2) research program from
 `https://github.com/moiseevigor/se2-conjugate-locus`, snapshot `5c304fd` (27 September
 2026), for review on 7 October 2026. The canonical research remains in that repository.
 
@@ -13,9 +13,10 @@ This blog draft imports the standard left-invariant SE(2) research program from
 - Numerical figure checks: `node research/se2/check-figures.mjs`.
 
 The pages use the existing Distill layout and belong to one `se2-geodesics` entry
-in `_data/series.yml`. The program entry and article pages are review drafts.
-Production excludes the manuscript/data asset directory; the development overlay
-includes it. The existing `docker compose` preview sees these unpublished pages.
+in `_data/series.yml`. The author approved web publication on 8 October 2026. The program and three
+article companions are published with their manuscript status and open questions
+preserved. Production includes the manuscript/data assets; internal review
+records and screenshots under `research/se2/` remain excluded.
 
 This import covers SE(2) only: no SH(2), SE(3), magnetic or cosmic-web article is
 added. Existing programs and source manuscripts remain independent.
@@ -34,4 +35,5 @@ The current PDFs have 16, 31 and 75 pages, superseding older registry descriptio
 
 No manuscript proof is changed by this web adaptation. The 13-hypothesis Lean
 reduction is reported from the current source record, not freshly rebuilt here.
-Literature reading/edition limits and all publication gates remain in force.
+Literature reading/edition limits and manuscript submission gates remain in force.
+Web publication does not imply journal peer review or submission readiness.
