@@ -29,3 +29,23 @@ export function integrate(gamma,c,time,steps=4800) {
   return path;
 }
 export const pendulumEnergy=(gamma,c)=>c*c/2-Math.cos(gamma);
+
+// Equal data-unit scales at every viewport size. Preserve bounds by centering
+// a fitted plot rectangle; spatial plots may instead expand their bounds.
+export function plotScale(bounds,viewport,preserveBounds=false) {
+  let [a,b,c,d]=bounds, [left,top,width,height]=viewport;
+  const innerWidth=width-80,innerHeight=height-65;
+  const pixelsPerUnit=Math.min(innerWidth/(b-a),innerHeight/(d-c));
+  if(preserveBounds) {
+    const fittedWidth=(b-a)*pixelsPerUnit+80,fittedHeight=(d-c)*pixelsPerUnit+65;
+    left+=(width-fittedWidth)/2;top+=(height-fittedHeight)/2;
+    width=fittedWidth;height=fittedHeight;
+  } else {
+    const cx=(a+b)/2,cy=(c+d)/2;
+    a=cx-innerWidth/pixelsPerUnit/2;b=cx+innerWidth/pixelsPerUnit/2;
+    c=cy-innerHeight/pixelsPerUnit/2;d=cy+innerHeight/pixelsPerUnit/2;
+  }
+  return {x:x=>left+55+(x-a)*(width-80)/(b-a),
+    y:y=>top+25+(height-65)-(y-c)*(height-65)/(d-c),
+    b:[a,b,c,d],viewport:[left,top,width,height]};
+}

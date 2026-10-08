@@ -9,7 +9,7 @@ categories: [mathematics]
 tags: [SE2, sub-riemannian, popular-science, geometry, optimal-control]
 permalink: /mathematics/se2-explained/
 image: /public/img/posts/se2-explained.svg
-published: false
+published: true
 reference_style: bibliography
 comments: false
 description: >
@@ -23,7 +23,7 @@ description: >
 
 <div class="l-body" markdown="1">
 
-<div class="se2-review"><strong>Overview draft · for review.</strong> This guide explains the classical problem and its published solution. The separate <a href="/mathematics/2026/10/07/se2-geodesics-research-program/">research program</a> begins where this story ends: with geodesics continued beyond shortest paths.</div>
+<div class="se2-review"><strong>Interactive overview · published 8 October 2026.</strong> This guide explains the classical problem and its published solution. The separate <a href="/mathematics/2026/10/07/se2-geodesics-research-program/">research program</a> begins where this story ends: with geodesics continued beyond shortest paths.</div>
 
 Imagine a small robot that can drive forward, reverse, and turn on the spot. It cannot slide sideways. To reach a destination, it must choose a route and arrive pointing the right way. What is its shortest possible motion?
 
@@ -276,7 +276,7 @@ This is a complete mathematical classification, not a single elementary formula 
 
 </div>
 
-{% include se2-figure.html mode="geodesic" kicker="Experiment 5 · see the stopping rule" title="A geodesic can continue after it stops being shortest" caption="This previously reviewed explorer shows the rotating family. Purple marks its published cut point; orange marks numerically detected conjugate points. Scrub or play time to continue past the purple marker. Continuing the equations does not preserve shortestness; this is not an arbitrary-target optimal-path solver." %}
+{% include se2-figure.html mode="geodesic" kicker="Experiment 5 · see the stopping rule" title="A geodesic can continue after it stops being shortest" caption="The explorer shows the rotating family. Purple marks its published cut point; orange marks numerically detected conjugate points. Scrub or play time to continue past the purple marker. Continuing the equations does not preserve shortestness; this is not an arbitrary-target optimal-path solver." %}
 
 <div class="l-body" markdown="1">
 
@@ -292,13 +292,13 @@ Readers who want the newer work can continue to [Beyond the Shortest Path](/math
 
 <h2 id="references">Sources and further reading</h2>
 
-The references below are organized by their role in the explanation. Publication years refer to the cited journal volumes unless an online or preprint date is explicitly given. The historical route is selective; the foundational textbook and the original papers provide broader bibliographies.
+Each reference below identifies its role in the explanation. Publication years refer to the cited journal volumes unless an online or preprint date is explicitly given. The historical route is selective; the foundational textbook and the original papers provide broader bibliographies.
 
 The four new experiments implement the stated elementary formulas or a bounded integration of the published normal equations. The fifth reuses the reviewed rotating explorer. Numerical drawings explain these results; they do not replace the published arguments or certify a solver for arbitrary targets.
 
 [^foundations]: A. Agrachev, D. Barilari, U. Boscain, *A Comprehensive Introduction to Sub-Riemannian Geometry*, Cambridge, 2020. [Author-hosted 2019 draft](https://www.math.unipd.it/~barilari/ABB-v2.pdf), especially §§3.2 and 3.7, the contact discussion, and §13.8 on SE(2). The draft’s page numbers differ from the published edition. It supports the definitions, reachability theorem, historical attribution of terminology, and the normality discussion.
 [^caratheodory]: C. Carathéodory, *Untersuchungen über die Grundlagen der Thermodynamik*, Math. Ann. 67 (1909), 355–386. [Original paper](https://academicweb.nd.edu/~powers/ame.20231/caratheodory1909.pdf). Historical role described in the foundational textbook’s §3.7.
-[^chow]: P. K. Rashevskii, *Any two points of a totally nonholonomic space may be connected by an admissible line*, 1938, as cited in the foundational textbook. W.-L. Chow, *Über Systeme von linearen partiellen Differentialgleichungen erster Ordnung*, Math. Ann. 117, 98–105. [Publisher record](https://doi.org/10.1007/BF01450011): received November 1938; issue dated December 1940. The standard textbook bibliography cites the latter as 1939. The original Rashevskii paper has not been inspected for this draft.
+[^chow]: P. K. Rashevskii, *Any two points of a totally nonholonomic space may be connected by an admissible line*, 1938, as cited in the foundational textbook. W.-L. Chow, *Über Systeme von linearen partiellen Differentialgleichungen erster Ordnung*, Math. Ann. 117, 98–105. [Publisher record](https://doi.org/10.1007/BF01450011): received November 1938; issue dated December 1940. The standard textbook bibliography cites the latter as 1939. The original Rashevskii paper has not been inspected for this overview.
 [^dubins]: L. E. Dubins, *On Curves of Minimal Length with a Constraint on Average Curvature, and with Prescribed Initial and Terminal Positions and Tangents*, American Journal of Mathematics 79 (1957), 497–516. [DOI](https://doi.org/10.2307/2372560). A neighboring bounded-curvature model.
 [^reeds]: J. A. Reeds, L. A. Shepp, *Optimal Paths for a Car That Goes Both Forwards and Backwards*, Pacific Journal of Mathematics 145 (1990), 367–393. [Publisher PDF](https://msp.org/pjm/1990/145-2/pjm-v145-n2-p06-p.pdf). The reversible bounded-curvature model.
 [^petitot]: J. Petitot, *The neurogeometry of pinwheels as a sub-Riemannian contact structure*, Journal of Physiology–Paris 97 (2003), 265–309. [DOI](https://doi.org/10.1016/j.jphysparis.2003.10.010). A neurogeometric model; full cortical physiology is outside this guide.
