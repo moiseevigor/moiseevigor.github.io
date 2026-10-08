@@ -37,7 +37,7 @@ $$J_2(\tau,p)=\alpha(p)\operatorname{sn}^2\tau+
 
 Its zeros are the conjugate times, since the full determinant differs by a nonvanishing factor on the rotating chart. This reduction concerns the zero set; it does not replace a geometric rank calculation when classifying the image singularity.
 
-Write $s=\operatorname{sn}p$, $c=\operatorname{cn}p$, $d=\operatorname{dn}p$ and $e=\mathcal E(p)$, where $\mathcal E$ is the Jacobi epsilon function. The coefficients are
+Write $s=\operatorname{sn}p$, $c=\operatorname{cn}p$, $d=\operatorname{dn}p$ and $e=\mathcal E(p)$, where $\mathcal E(p)=E(\operatorname{am}(p\mid m)\mid m)$ is the Jacobi epsilon function, so $\mathcal E^\prime(p)=\operatorname{dn}^2(p\mid m)$. The coefficients are
 
 $$\begin{aligned}
 f_1&=c(e-p)-ds, &\beta_1&=ce-ds,\\
@@ -64,7 +64,7 @@ r=-\frac{\beta}{\alpha-\beta}.$$
 
 Let $u(p)\in[0,K]$ be the inverse phase with $\operatorname{sn}^2u=r$. The zero set lifts to $\tau\equiv\pm u(p)\pmod{2K}$; a geodesic is the line $\tau=\psi+p$.
 
-The Riccati identities control the derivatives of the two coefficient ratios. Their product identity and the arithmetic–geometric mean inequality imply $|u'|\ge1$, with a fixed orientation on each bracket. An oriented monotonicity argument then gives a unique time for the crossing. The two signs describe the same time at a corner, so the conclusion is uniqueness of **time**, rather than uniqueness of a signed pair.
+The Riccati identities control the derivatives of the two coefficient ratios. Their product identity and the arithmetic–geometric mean inequality imply $\lvert u^\prime\rvert\ge1$, with a fixed orientation on each bracket. An oriented monotonicity argument then gives a unique time for the crossing. The two signs describe the same time at a corner, so the conclusion is uniqueness of **time**, rather than uniqueness of a signed pair.
 
 Equality of slopes requires additional care: the paper treats finite tangencies through analytic continuation and local order. The formal counting theorem assumes the needed finiteness of tangencies; it does not silently replace that hypothesis by a strict slope inequality everywhere.
 
@@ -98,7 +98,7 @@ This scalar order does not itself identify the singularity of the full exponenti
 
 ## Periodic velocity, spatial drift, late times
 
-The body velocity has period $T$, while the endpoint satisfies $g(t+nT)=h^n g(t)$ for a period translation $h$. Differentiating with respect to the source parameters gives a determinant that is exactly quadratic in the integer $n$.
+The body velocity has period $T=4kK$, while the endpoint satisfies $g(t+nT)=h^n g(t)$ for a period translation $h$. Differentiating with respect to the source parameters gives a determinant that is exactly quadratic in the integer $n$.
 
 For phase representatives in $(-K,K)$, away from $\psi\equiv K$, the manuscript derives
 

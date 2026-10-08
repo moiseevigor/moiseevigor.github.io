@@ -84,7 +84,7 @@ The useful conditional predicate at an interior critical point is
 
 $$N''<0\qquad\text{or}\qquad N<\tfrac12\ \text{ and }\ R<L(m),$$
 
-where $R$ is the spatial radius and $L(m)=4(K(m)-E(m))$. Under the manuscript's component and critical-point hypotheses, it implies at most one critical point at levels $\ge1$, and at most two solutions at each positive integer level. The uniqueness threshold is **one**, not one half.
+Here $R=\sqrt{x^2+y^2}$ and $L(m)=4(K(m)-E(m))$. The implication requires a nonzero spatial target, a strict heading $0<\lvert\theta\rvert<\pi$, the off-seam condition $x\cos(\theta/2)+y\sin(\theta/2)\ne0$, and a **maximal** admissible component of the scalar inverse. Assume the predicate holds at every critical point with $N\ge1/2$ and at every interior local minimum; any critical points in the excluded regions need separate arguments. Then there is at most one critical point at levels $\ge1$, and at most two solutions at each positive integer level. The uniqueness threshold is **one**, not one half.
 
 A locally certified low-level minimum is compatible with this statement. In fact, six selected targets have such dips below one, which rule out unrestricted all-real-level unimodality. They do not refute the positive-integer-level conjecture.
 

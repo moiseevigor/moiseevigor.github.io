@@ -25,7 +25,7 @@ manuscript_status: "manuscript candidate; final proof and novelty review open"
 
 A source is an initial normal covector of Hamiltonian energy $1/2$ and a positive travel time. We count distinct sources, retaining reflections and continuing trajectories beyond their cut time.
 
-For a strict heading $0<|\theta|<\pi$, distinguish the finite **rotating fiber** from the **full normal fiber**, which can be countably infinite because it also contains nonzero heading-winding classes. Neither is the count of minimizing paths. The latter uses the known optimal synthesis.
+For a strict heading $0<\lvert\theta\rvert<\pi$, distinguish the finite **rotating fiber** from the **full normal fiber**, which can be countably infinite because it also contains nonzero heading-winding classes. Neither is the count of minimizing paths. The latter uses the known optimal synthesis.
 
 These distinctions are part of the theorem statements. A browser drawing of nine rotating sources cannot establish that a target has only nine normal geodesics of every stratum and travel time.
 
@@ -45,7 +45,14 @@ $$\begin{aligned}
 $$C\ne0,\qquad\cos\theta+z\sin\theta>0,
 \qquad xz-y>0,\qquad0<m<1.$$
 
-The sine–cosine pairs $(z/\sqrt H,f)$ and $(D/\sqrt H,g)$ determine endpoint amplitudes $\phi_0,\phi_1$. Choose their representatives in $[0,2\pi)$, form $\psi=F(\phi_0\mid m)$ and $v_0=F(\phi_1\mid m)$, and set
+Define the transverse coordinate $B=C/\sqrt H$. The two displayed pairs have squared norm $m$, so the endpoint amplitudes are specified by the **normalized** sine–cosine pairs
+
+$$\begin{aligned}
+ (\sin\phi_0,\cos\phi_0)&=\frac1{\sqrt m}\left(\frac z{\sqrt H},f\right),\\
+ (\sin\phi_1,\cos\phi_1)&=\frac1{\sqrt m}\left(\frac D{\sqrt H},g\right).
+\end{aligned}$$
+
+Equivalently, use $\phi_0=\operatorname{atan2}(z/\sqrt H,f)$ and $\phi_1=\operatorname{atan2}(D/\sqrt H,g)$, with the sine coordinate first. Choose representatives in $[0,2\pi)$, form $\psi=F(\phi_0\mid m)$ and $v_0=F(\phi_1\mid m)$, and set
 
 $$\begin{aligned}
  w&=\mathbf1_{v_0<\psi},& \delta&=v_0-\psi+4K(m)w,\\
@@ -61,7 +68,7 @@ These exhaust the sources of that sign with nonzero transverse seam coordinate. 
 
 ### Why this is exact
 
-The endpoint equations give $f-g=B$ and a second difference-of-squares relation. Solving them yields the algebraic data above. The admissibility inequalities choose the correct principal angle, positive longitudinal coordinate and real modulus. The remaining longitudinal displacement separates into a residual piece $Q_0$ and an integer number of full-period drifts $nL$.
+The endpoint equations give $f-g=B$ and $f^2-g^2=d/H$. Both pairs satisfy $f^2+z^2/H=g^2+D^2/H=m$. Solving them yields the algebraic data above. The admissibility inequalities choose the correct principal angle, positive longitudinal coordinate and real modulus. The remaining longitudinal displacement separates into a residual piece $Q_0$ and an integer number of full-period drifts $nL$.
 
 No division by the endpoint cosines is required. Their zeros therefore do not disappear from the inverse chart. Local phase lifts handle the apparent jumps caused by the chosen amplitude representatives.
 
@@ -120,7 +127,7 @@ Lift the heading continuously from zero and define $\ell\in\mathbb Z$ by
 
 $$\widetilde\theta(t)=\theta+2\pi\ell.$$
 
-For the strict-heading targets in the stated theorem, every nonzero winding class has exactly one oscillating source, at every positive radius. The zero-winding fiber is finite; its eventual rotating count is the far-field expression above. Thus a finite rotating count and a countably infinite full fiber coexist.
+For the strict-heading targets in the stated theorem, every nonzero winding class has exactly one oscillating source, at every positive radius. The zero-winding fiber is finite. For the fixed-angle rays of the preceding far-field theorem, its eventual count equals the rotating count $4R/L_*+O(1)$; the other direction regimes retain their separate hypotheses. Thus a finite rotating count and a countably infinite full fiber coexist.
 
 Headings zero and $\pi$ have separate catalogues. They are not obtained by plugging those boundary headings into a strict-heading theorem. The nonzero vertical axis at heading zero is among the cases with an infinite rotating fiber.
 

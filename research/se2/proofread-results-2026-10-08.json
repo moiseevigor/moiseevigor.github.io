@@ -1,0 +1,94 @@
+{
+  "date": "2026-10-08",
+  "scope": "SE(2) program and three web article companions; source manuscript statements compared, selected equations independently checked",
+  "fixes": [
+    "Replaced literal absolute-value bars with TeX lvert/rvert in two paragraphs to prevent Markdown table parsing.",
+    "Used explicit TeX primes in inline derivatives to prevent typographic quote substitution.",
+    "Normalized amplitude sine/cosine pairs by sqrt(m), defined B=C/sqrt(H), and stated the two exact circle identities.",
+    "Specified physical pendulum period T=4kK.",
+    "Made the maximal-component, strict-heading, off-seam and critical-point hypotheses explicit for the positive-level implication.",
+    "Restricted the 4R/L_* winding-zero asymptotic to the declared fixed-angle rays, retaining the separate direction regimes."
+  ],
+  "rendering": {
+    "total_formulas": 172,
+    "katex_version": "0.16.9",
+    "strict_errors": 0,
+    "source_preserved_through_markdown": true,
+    "unintended_tables": 0,
+    "production_build": "passed",
+    "browser_preview": [
+      {
+        "path": "/articles/se2-geodesic-counts/",
+        "errors": [],
+        "formulas": 47,
+        "overflow": false,
+        "tables": 0,
+        "width": 1265
+      },
+      {
+        "path": "/articles/se2-conjugate-times/",
+        "errors": [],
+        "formulas": 60,
+        "overflow": false,
+        "tables": 0,
+        "width": 1265
+      },
+      {
+        "path": "/articles/se2-conjugate-locus/",
+        "errors": [],
+        "formulas": 33,
+        "overflow": false,
+        "tables": 0,
+        "width": 1265
+      },
+      {
+        "path": "/mathematics/2026/10/07/se2-geodesics-research-program/",
+        "errors": [],
+        "formulas": 32,
+        "overflow": false,
+        "tables": 1,
+        "width": 1265
+      }
+    ]
+  },
+  "independent_math": {
+    "exact_algebra_identities": 5,
+    "ode_conjugate_cases": 12,
+    "ode_inverse_sources": 9,
+    "maximum_endpoint_error": 2.0272672429655358e-13,
+    "maximum_conjugate_singular_value_ratio": 2.9794677642352226e-13,
+    "critical_modulus": 0.9089085575485415,
+    "quartic_cells": [
+      1,
+      2,
+      4
+    ],
+    "maximum_quartic_coefficient_error": 3.780189004233828e-14,
+    "fold_certificate_positive_rational_coefficients": 216,
+    "fold_certificate_scaling_and_reconstruction": "exact fractions; passed",
+    "fold_certificate_digest": "passed"
+  },
+  "source_locators": {
+    "inverse": "public/research/se2/inversion_counts_se2.tex:398-457 (Proposition 2.1 and proof)",
+    "far_field_and_winding": "public/research/se2/inversion_counts_se2.tex:96-139 (fixed-angle hypotheses and eventual clauses)",
+    "positive_levels": "public/research/se2/first_caustic_se2.tex:1331-1415 (positive superlevels and conditional count corollary)",
+    "floquet_and_late_times": "public/research/se2/conjugate_times_se2.tex:576-614"
+  },
+  "references": [
+    "https://kramdown.gettalong.org/syntax.html#tables",
+    "https://dlmf.nist.gov/22.16",
+    "https://katex.org/docs/supported.html"
+  ],
+  "limits": [
+    "Not a complete adversarial review of all manuscript proofs.",
+    "No fresh Lean build or full-grid interval replay.",
+    "Manuscript PDFs/TeX snapshots and numerical kernel unchanged.",
+    "Native production build uses the previously documented compatible temporary dependencies."
+  ],
+  "battery": {
+    "power": "AC",
+    "percent_before": 80,
+    "percent_after": 80,
+    "heavy_simulations": false
+  }
+}
