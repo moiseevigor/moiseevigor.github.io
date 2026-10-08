@@ -20,3 +20,34 @@ unpublished: true
 # Suppress external pings during local work
 webmention:
   username: ""
+
+
+# Show the SE(2) draft's PDF/source/data assets in the development preview.
+defaults:
+  - scope:
+      path: "public/research/se2"
+    values:
+      published: true
+
+# Re-include the two draft metadata filenames swallowed by the global JSON pattern.
+# The development exclusion override below allows their parent directory.
+include:
+  - "public/data"
+  - "se2-provenance.json"
+  - "se2-ray-thresholds.json"
+
+# Jekyll 3 applies parent-directory exclusions to each child file.
+# Mirror the original excludes in development, allowing only the new draft folders.
+exclude:
+  - "*.json"
+  - "*.log"
+  - "bower_components"
+  - "Gemfile*"
+  - "LICENSE"
+  - "node_modules"
+  - "vendor"
+  - "research/preferred-directions/lean/.lake"
+  - "research/preferred-directions/lean/.github"
+  - "_site_production"
+  - "research/cosmic-web/data"
+  - "research/preferred-directions/artifacts"

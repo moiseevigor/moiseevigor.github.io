@@ -1,0 +1,2073 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=29mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\SE}{\operatorname{SE}(2)}
+\newcommand{\sn}{\operatorname{sn}}
+\newcommand{\cn}{\operatorname{cn}}
+\newcommand{\dn}{\operatorname{dn}}
+\newcommand{\am}{\operatorname{am}}
+\newcommand{\epsi}{\mathcal{E}}
+\newcommand{\Exp}{\operatorname{Exp}}
+\newcommand{\rk}{\operatorname{rank}}
+
+\title{The Conjugate Locus of the Rotating Geodesics\\
+in the Sub-Riemannian Problem on $\SE$}
+\author{Igor Moiseev\thanks{\texttt{moiseev.igor@gmail.com}}}
+\date{September 2026}
+
+\begin{document}
+\setlength{\emergencystretch}{2em}
+\maketitle
+
+\begin{abstract}
+In the standard left-invariant sub-Riemannian problem on the group of plane
+motions the conjugate times of a rotating geodesic are known: there is
+one on each of two brackets in every Maxwell cell
+$[p_n^1,p_{n+1}^1)$, $n\ge1$, the first conjugate time being the one on
+the left bracket of cell~$1$.  These are two distinct times except at
+$k=k_0$, $\psi\equiv K\pmod{2K}$, where they coincide at $2nK$.  We describe the image
+of these points under the exponential map, the conjugate locus.  On every
+open sheet the map has corank one with a kernel tangent to the level
+sets of time, and the fold quantity along that kernel equals, up to an
+explicit nonzero factor, one polynomial $Q$ in the Riccati variables of
+the first-time problem; a positive rational certificate for $Q$ makes the
+sheet a fold surface.  Its Maxwell edge and, below the critical modulus
+$k_0$, its half-period edge are cusp edges; the common point at $k_0$ has
+corank two and is a hyperbolic umbilic $D_4^+$; above $k_0$ the edge on
+which the two phase branches meet is a fold.  The caustic is parametrized
+by the midpoint amplitude and the modulus in an explicit half-angle chart
+in which each of its eight open patches is embedded, the patches meet only
+along common source seams, the small-modulus limit is the identity point,
+and the separatrix limit leaves every compact set.  The proofs use the first
+variation of the endpoint map, addition theorems, and the Riccati
+identities of the conjugate-times paper.  The same identity governs every
+later sheet: each open sheet is a fold surface; for $k\ne k_0$ the four
+seams of a cell are a cusp edge at the Maxwell time, folds at the zeros
+of $\beta_1$ and $\alpha_1$, and a cusp edge at the half period.  At
+$k=k_0$ the $\alpha_1$ and half-period seams meet in a hyperbolic umbilic;
+for large period count the fold quantity has an
+explicit leading term of order $1/n$ whose sign is that of
+$-\sn p\cn p$.  Which sheets meet is restricted by an octant lemma and
+characterized through the scalar level function of the inverse problem:
+a target lies on the left sheet of cell $n$ or the right sheet of cell
+$j$ exactly when that function has a critical point at level $n-1$ or
+$j$, with the residual argument above or below the half period; the
+incidence map of the first four cells is computed numerically, the
+modulus along the chart curve is proved unimodal.  A conditional sign criterion
+implies at most one critical point at levels $\ge1$ and at most two
+solutions per positive integer level on each admissible interval.
+That criterion is verified by interval arithmetic on the endpoint domain
+outside five declared exclusion sets ($2.56\%$ of the ambient volume;
+the fifth is a low-modulus wedge on which the interval engine does not
+close); the global count and
+the types of the two maxima remain conjectural.  Exact identities and
+selected singular values, kernels and edge derivatives have symbolic
+and high-precision checks; Section~\ref{sec:numerics} records their
+finite-sample scope and replay limitations.
+\end{abstract}
+\noindent\textit{Keywords:} sub-Riemannian geometry, group of motions of the plane, conjugate locus, Lagrangian singularities, computer-assisted proof.\\
+\textit{MSC 2020:} 53C17, 58K05, 49K15, 65G20.
+
+\section{Introduction}
+
+The standard sub-Riemannian problem on $\SE$ is
+\begin{equation}\label{eq:control-system}
+ \dot x=u_1\cos\theta,\qquad \dot y=u_1\sin\theta,\qquad \dot\theta=u_2,
+ \qquad \int_0^T(u_1^2+u_2^2)\,dt\to\min,
+\end{equation}
+with the identity as the initial point.  Its normal extremals are
+parametrized by Jacobi elliptic functions, the pendulum structure of the
+vertical part giving five strata $C_1,\dots,C_5$
+\cite{MoiseevSachkov2010Maxwell}; the conjugate times, the cut time and the
+optimal synthesis are known \cite{Sachkov2010Conjugate,Sachkov2011CutLocus},
+and on the rotating stratum $C_2$ the first conjugate time, bracketed by
+Sachkov, was made exact in
+\cite{SE2FirstConjugate}: for every modulus $0<k<1$ and every initial phase
+it is the unique zero of Sachkov's reduced Jacobian $J_2$ in the bracket
+$[p_0,p_1]$, and it is reached by inverting one of two elliptic branches.
+
+This paper describes the first conjugate locus itself: the surface
+$\Sigma_1\subset\SE$ swept by the first conjugate points of the rotating
+geodesics, as the image of a smooth sheet in the source under the
+exponential map.  Its singularities are the singularities of a Lagrangian
+map $\mathbb R^3\to\mathbb R^3$, so the expected local types are folds
+($A_1$), cusp edges ($A_2$), swallowtails ($A_3$) and isolated umbilic
+points ($D_4^\pm$) \cite{Arnold1972NormalForms}.  We use the map-germ indices $A_1$ (fold),
+$A_2$ (cusp), $A_3$ (swallowtail) and $D_4^\pm$ (umbilics)
+\cite{Whitney1955,GolubitskyGuillemin1973,Arnold1972NormalForms}; the
+first sheet contains no swallowtail, since Theorems~\ref{thm:fold}
+and~\ref{thm:edges} leave only folds and cusps on it.  For the umbilics we
+follow Arnold's sign: $D_4^+$ (generating cubic $y_1^2y_2+y_2^3$, the
+hyperbolic umbilic) is the class whose cubic has one real linear factor,
+i.e. negative discriminant, and $D_4^-$ ($y_1^2y_2-y_2^3$, the elliptic
+umbilic) the class with three; this is the convention of
+Proposition~\ref{prop:d4}.  The results are six.
+
+\begin{enumerate}[nosep,leftmargin=*]
+\item \textbf{Fold.}  On the open first sheet $d\Exp$ has corank one with a
+      kernel tangent to the level sets of time
+      (Proposition~\ref{prop:kernel}), and the fold quantity along it is
+      one polynomial $Q$ times an explicit nonzero factor
+      (Theorem~\ref{thm:fold-identity}).  A positive rational certificate
+      for $Q$ makes the whole open sheet a fold surface, including the
+      tangency phases of \cite[Lemma~3.3]{SE2FirstConjugate}, where the
+      time root has odd order at least three (Theorem~\ref{thm:fold}).
+\item \textbf{Edges.}  The Maxwell edge is a cusp edge for every $k$.  For
+      $k<k_0$ the half-period edge $p=2K$ is a second cusp edge; at
+      $k=k_0$ its endpoint has corank two and is a hyperbolic umbilic
+      $D_4^+$; for $k>k_0$ the edge $\alpha_1=0$, on which the two phase
+      branches meet, is a fold (Theorem~\ref{thm:edges},
+      Proposition~\ref{prop:d4}).
+\item \textbf{Atlas.}  The caustic is parametrized by the midpoint
+      amplitude $B$ and the modulus $k$, with an explicit target chart
+      $(U,V,W)$ in which the immersion Jacobian is again $Q$
+      (Proposition~\ref{prop:atlas}).
+\item \textbf{Embedding.}  Each of the eight open patches is embedded; the
+      patches and their seams meet only along common source seams; as
+      $k\downarrow0$ the caustic collapses to the identity and as
+      $k\uparrow1$ it leaves every compact set
+      (Theorems~\ref{thm:univalence} and~\ref{thm:closed}).
+\item \textbf{Every sheet.}  The kernel, the fold identity and the edge
+      computations never use the first cell.  So every later sheet is a
+      fold surface where $Q\ne0$, which the certificates give on every
+      bracket; its seams are classified; the half-period seam degenerates
+      to a hyperbolic umbilic at $k_0$ in every cell; and for large period
+      count $Q$ has an explicit leading term (Theorem~\ref{thm:every-sheet},
+      Proposition~\ref{prop:leading}), which makes the late-fold statement
+      of the conjugate-times paper a corollary with the sign identified.
+\item \textbf{Incidences.}  An octant lemma fixes which sheets can meet,
+      the scalar level function of \cite{SE2Counts} characterizes the
+      sheets as its integer critical levels, the incidence map of cells
+      $1$--$4$ is computed numerically, the modulus along the chart curve is proved
+      unimodal, the derivative of the level function is given in closed
+      form, and a conditional sign criterion implies the count bound at
+      levels $\ge1$.  After correction of two enclosure defects, its
+      interval certificate was regenerated on the full $24\times20\times80$
+      grid: the criterion holds on every cell outside five declared
+      exclusion sets, the fifth being the low-modulus wedge
+      $m\le0.06$, $\mu\ge0.94$, $0.41\le\Delta\varphi\le0.80$ together
+      with one further cell, where the engine's budget passes leave
+      boxes open (Section~\ref{sec:incidence}).
+\end{enumerate}
+Together with the exact conjugate times this is a complete description
+of the first conjugate locus of $\SE$ in the rotating regime, its shape,
+its singularities and its self-incidences, of the local structure of
+every later sheet, and a partial account of incidences between sheets.
+The count criterion is conditional and the global incidence and count
+claims remain open.  Figure~\ref{fig:atlas} shows the atlas;
+Figure~\ref{fig:strip} shows where the fold quantity degenerates.
+
+The method is elementary where the original derivations used charts and
+minors: the first variation of the endpoint map makes the
+velocity transverse to the endpoint variations, so corank one reduces to
+the nonvanishing of one derivative of the heading, and the kernel is the
+null vector of the heading row.  Differentiating $J_2$ along that kernel
+in raw coordinates gives the identity of Theorem~\ref{thm:fold-identity},
+in which the transcendental Jacobi epsilon of the midpoint argument
+cancels.  The edge classification is then a few lines each.  What is not
+elementary is the positivity of $Q$: no short proof is known, and the
+certificate of Section~\ref{sec:certificate} stands in for it.
+
+\section{Coordinates and the first sheet}\label{sec:coordinates}
+
+We use the notation of \cite{SE2FirstConjugate}.  Let $0<k<1$ be the
+modulus, $m=k^2$, $k'=\sqrt{1-m}$, $K=K(k)$ and $E=E(k)$ the complete
+integrals, and $\epsi(p)=\int_0^p\dn^2(s,k)\,ds$ Jacobi's epsilon.  In the
+rotating coordinates
+\begin{equation}\label{eq:coordinates}
+ p=\frac t{2k},\qquad \tau=\psi+p,
+\end{equation}
+$\psi$ is the initial phase and $\tau$ the midpoint phase;
+the terminal phase is $\psi_1=\psi+2p$. The source is
+the cylinder $(\psi,k,t)$, $\psi\in\mathbb R/4K\mathbb Z$, for each of the two
+rotation signs $s_2=\pm1$, and the energy is $H=1/2$.  The exponential map
+is, for $s_2=+1$ \cite[Section 4.3]{MoiseevSachkov2010Maxwell},
+\begin{equation}\label{eq:exp}
+ \begin{aligned}
+ x&=k\bigl[\dn\psi\,(\cn\psi-\cn\psi_1)+\sn\psi\,\Delta\bigr],\\
+ y&=m\sn\psi\,(\cn\psi-\cn\psi_1)-\dn\psi\,\Delta,\\
+ \theta&=\arcsin(k\sn\psi)-\arcsin(k\sn\psi_1),\\
+ \psi_1&=\psi+2p,\qquad \Delta=2p+\epsi(\psi)-\epsi(\psi_1),
+ \end{aligned}
+\end{equation}
+and $s_2=-1$ changes $(x,y,\theta)$ into $(-x,-y,\theta)$.  The heading
+formula uses $(\arcsin(k\sn u))'=k\cn u$ and $\dot\theta=-\cn(\psi+t/k)$.
+
+Sachkov's reduced Jacobian is
+\begin{equation}\label{eq:j2}
+ J_2=\alpha\sn^2\tau+\beta\cn^2\tau,\qquad
+ \alpha=(1-m)\sn p\,\alpha_1,\qquad \beta=f_1\beta_1,
+\end{equation}
+\begin{equation}\label{eq:coeffs}
+ \begin{aligned}
+ \alpha_1&=\cn p\,\dn p\,[p-2\epsi(p)]+\sn p\{\dn^2p+\epsi(p)[p-\epsi(p)]\},\\
+ f_1&=\cn p\,[\epsi(p)-p]-\dn p\,\sn p,\qquad
+ \beta_1=\cn p\,\epsi(p)-\dn p\,\sn p,
+ \end{aligned}
+\end{equation}
+and $\det d\Exp$ in the source coordinates $(t,\varphi,k)$, $\varphi=k\psi$, equals $J_2$
+times the nonvanishing factor $-4k/[(1-m)(1-m\sn^2p\sn^2\tau)]$.  Let
+$p_0=p_1^1(k)\in(K,2K)$ be the first positive zero of $f_1$ and
+$p_1=\min\{2K,p_\alpha\}$, $p_\alpha$ the first zero of $\alpha_1$ after
+$p_0$; $p_1=2K$ for $k\le k_0$ and $p_1=p_\alpha<2K$ for $k>k_0$, where
+$k_0=0.9089085575\ldots$ is the modulus with $K=2E$.  On $(p_0,p_1)$ one has
+$\alpha>0>\beta$, and with
+\begin{equation}\label{eq:r}
+ r=\frac{-\beta}{\alpha-\beta}\in(0,1),\qquad
+ J_2=0\iff\sn^2\tau=r,
+\end{equation}
+the first-time theorem of \cite{SE2FirstConjugate} says that $r$ increases
+strictly from $0$ to $1$ on $(p_0,p_1)$, and that the two phase branches
+$\psi_\pm=\pm F(\arcsin\sqrt r,k)-p$ (mod $2K$) cover the phase circle
+$\mathbb R/2K\mathbb Z$ exactly once.  Throughout we abbreviate
+\begin{equation}\label{eq:abbrev}
+ \begin{gathered}
+ (s,c,d,e,q)=(\sn p,\cn p,\dn p,\epsi(p),p-\epsi(p)),\\
+ (S,C,D)=(\sn\tau,\cn\tau,\dn\tau),\qquad \Delta_0=1-ms^2S^2.
+ \end{gathered}
+\end{equation}
+
+\paragraph{The first sheet.}  The \emph{open first sheet} is
+\[
+ \Sigma=\{(\psi,k,t):\ p_0<p<p_1,\ \sn^2\tau=r(p,k)\},
+\]
+a smooth surface (Lemma~\ref{lem:sheet-smooth}).  Since $J_2$ depends on
+$\psi$ modulo $2K$, it has two components over each $(p,k)$ modulo $2K$, one
+per phase branch, and four on the source circle $\mathbb R/4K\mathbb Z$ (the
+sign patches of Section~\ref{sec:atlas}).  We use the representatives
+$\tau=u$ and $\tau=2K-u$, where $u=F(\arcsin\sqrt r,k)\in(0,K)$:
+there $S=\sqrt r>0$ and $C$ has opposite signs on the two branches.
+The other two patches are their shifts by $2K$, which negate both $S$
+and $C$.  Its closure adds the \emph{Maxwell edge}
+$p=p_0$ ($r=0$, $S=0$) and the \emph{upper edge} $p=p_1$ ($r=1$, $C=0$),
+which for $k<k_0$ is $p=2K$ and for $k>k_0$ is $p=p_\alpha$; the two meet
+at $k_0$.  The first caustic is $\Sigma_1=\Exp(\overline\Sigma)$.
+
+\paragraph{Riccati variables.}  Following \cite[Lemma 3.2]{SE2FirstConjugate}
+put
+\begin{equation}\label{eq:ab}
+ a=\frac{f_1}q,\qquad b=-\frac{\beta_1}e,\qquad z=ab=-\frac\beta\ell,\qquad
+ \ell=eq,
+\end{equation}
+so that $a,b>0$ on $(p_0,p_1)$, $z=ab$ increases from $0$ to $1$, and
+\begin{equation}\label{eq:riccati}
+ a'=\frac{d^2+ca+ms^2a^2}{ds},\qquad
+ z'=\frac{d^2b(1-z)+s^2a(1-m+mz)}{ds}>0 .
+\end{equation}
+The collapse identities $\beta=X-\ell$, $\alpha=(1-m)X$, $X=s\alpha_1$, give
+\begin{equation}\label{eq:r-in-z}
+ r=\frac z{(1-m)+mz},\qquad 1-r=\frac{(1-m)(1-z)}{(1-m)+mz},\qquad
+ 1-mr=\frac{1-m}{(1-m)+mz}.
+\end{equation}
+One more inequality will be used repeatedly: since $f_1=-cq-ds$,
+\begin{equation}\label{eq:a-below-g}
+ \begin{gathered}
+ a=-c-\frac{ds}q<-c=:g,\\
+ \text{hence}\qquad d^2+ca+ms^2a^2>d^2-c^2+ms^2a^2=s^2(1-m+ma^2)>0,
+ \end{gathered}
+\end{equation}
+so $a'>0$ on $(p_0,p_1)$.
+
+\begin{lemma}\label{lem:sheet-smooth}
+$dJ_2\ne0$ on $\overline\Sigma$ minus the point $(p,\tau,k)=(2K,K,k_0)$.
+\end{lemma}
+\begin{proof}
+$\partial_\tau J_2=2SCD(\alpha-\beta)$ is nonzero on $\Sigma$ ($S,C\ne0$,
+$\alpha-\beta>0$).  At $S=0$, $\partial_pJ_2=\beta'C^2=f_1'\beta_1\ne0$
+since $p_0$ is a simple zero of $f_1$ and $\beta_1(p_0)<0$.  At $C=0$,
+$\partial_pJ_2=\alpha'$, which at $p_\alpha$ is $(1-m)s\alpha_1'\ne0$ and
+at $p=2K$ is $(1-m)(-1)\alpha_1(2K)=2(1-m)(K-2E)$, zero exactly at $k_0$.
+\end{proof}
+
+\section{Corank one and the kernel}\label{sec:kernel}
+
+Write $\eta_\psi,\eta_k\in T_q\SE$ for the endpoint variations at fixed $t$
+and $\xi=\dot g$ for the velocity, $q=\Exp(\psi,k,t)$, and let $\lambda(t)$
+be the covector of the extremal at $q$.
+
+\begin{lemma}[First variation]\label{lem:first-variation}
+$\langle\lambda(t),\eta_\psi\rangle=\langle\lambda(t),\eta_k\rangle=0$ and
+$\langle\lambda(t),\xi\rangle=2H=1$.  Consequently
+\[
+ \rk d\Exp=\rk[\eta_\psi,\eta_k]+1 .
+\]
+\end{lemma}
+\begin{proof}
+Let $\phi_t$ be the Hamiltonian flow and $\varsigma=\lambda\,dq$ the Liouville
+form, with the symplectic form $\omega=d\varsigma=d\lambda\wedge dq$ and
+$X_H$ defined by $\iota_{X_H}\omega=-dH$, so that $\dot q=\partial_\lambda H$,
+$\dot\lambda=-\partial_qH$.  Since $H$ is quadratic in the fiber, $\langle\lambda,\partial_\lambda H\rangle=2H$
+and $\mathcal L_{X_H}\varsigma=d(2H)-dH=dH$, so $\phi_t^*\varsigma=\varsigma+t\,dH$.
+Restricted to the fiber $T^*_e\SE$, where $\varsigma=0$, this reads
+$\langle\lambda(t),d\Exp_t(\delta\lambda)\rangle=t\,dH(\delta\lambda)$ for
+every fiber variation $\delta\lambda$
+(see also \cite[Ch.~8]{AgrachevBarilariBoscain2020}).  Our family lies on
+$H=1/2$, so the right side vanishes for $\delta\lambda=\partial_\psi,\partial_k$;
+and $\langle\lambda,\xi\rangle=\langle\lambda,\partial_\lambda H\rangle=2H$.
+Thus $\xi\notin\ker\lambda(t)\supset\operatorname{span}(\eta_\psi,\eta_k)$.
+\end{proof}
+
+\begin{proposition}[Kernel]\label{prop:kernel}
+At a conjugate point $d\Exp$ has corank one if and only if
+$(\eta_\psi,\eta_k)\ne(0,0)$, and then its kernel is spanned by a vector
+with zero time component, namely by $v=(F_k,-F_\psi,0)$ for any target
+coordinate $F$ with $(F_\psi,F_k)\ne(0,0)$.  On the open first sheet
+\begin{equation}\label{eq:theta-psi}
+ \theta_\psi=k\bigl[\cn\psi-\cn(\psi+2p)\bigr]
+ =\frac{2k\,sSdD}{\Delta_0}\ne0,
+\end{equation}
+so $d\Exp$ has corank one on all of $\Sigma$, including the tangency
+phases and the modulus $k_0$, with kernel
+$v=(\theta_k,-\theta_\psi,0)$.
+\end{proposition}
+\begin{proof}
+If $v_\psi\eta_\psi+v_k\eta_k+v_t\xi=0$, pairing with $\lambda(t)$ gives
+$v_t=0$ by Lemma~\ref{lem:first-variation}; so the kernel consists of the
+$(v_\psi,v_k,0)$ with $v_\psi\eta_\psi+v_k\eta_k=0$, it is nonzero at a
+conjugate point because $\det[\eta_\psi,\eta_k,\xi]=0$ forces
+$\eta_\psi\parallel\eta_k$, and it is one-dimensional exactly when the pair
+is not zero.  Any row
+$F$ with nonzero gradient then gives the null vector.  The heading
+derivative is $\theta_\psi=k[\cn\psi-\cn(\psi+2p)]$ by \eqref{eq:exp}, and
+the addition theorem $\cn(\tau\mp p)=(Cc\pm SsDd)/\Delta_0$ gives
+\eqref{eq:theta-psi}; on $\Sigma$, $s=\sn p>0$ for $K<p<2K$ and
+$|S|=\sqrt r>0$.
+\end{proof}
+
+\begin{remark}
+The kernel is tangent to the level sets of physical time.  This is the
+general fact behind Lemma~\ref{lem:first-variation}: at a conjugate time
+the kernel of $d\Exp$ is the kernel of $d\Exp_t$ on the energy level, since
+$\Exp$ is an immersion in $t$.  It explains why the kernel in the
+half-angle chart is the cross product $dt\times dW$ of the time and the
+half-angle differentials.
+\end{remark}
+
+\section{The fold identity}\label{sec:fold}
+
+Let $Q$ be the polynomial of nineteen terms
+\begin{equation}\label{eq:Q}
+ \begin{aligned}
+ Q(a,b,c,s,m)={}&-3a^3b^2cm-a^2b^3cm+3a^2b^2ms^2-8a^2b^2m+3a^2b^2\\
+ &+2a^2bcm+a^2ms^2-a^2s^2+ab^3ms^2-ab^3-2ab^2cm\\
+ &-5abms^2+8abm+3abs^2-6ab+acm-ac+3bcm-3bc,
+ \end{aligned}
+\end{equation}
+evaluated at the Riccati variables \eqref{eq:ab} and $(c,s,m)=(\cn p,\sn p,k^2)$.
+
+\begin{theorem}[Fold identity; computer-assisted]\label{thm:fold-identity}
+On the open first sheet, along the kernel $v=(\theta_k,-\theta_\psi,0)$ and
+at fixed $t$, the following identity holds; its final reduction is a
+computer-algebra verification in the Jacobi ring (see the proof).
+\begin{equation}\label{eq:fold-identity}
+ v(J_2)=-\,\frac{2(1-m)\,q^4e^4\,S}{s\,d\,D\,\Delta_0\,(\alpha-\beta)^2}\;Q .
+\end{equation}
+Apart from the displayed minus sign and the signed factor $S$, every
+factor multiplying $Q$ is positive.  Hence a point of $\Sigma$ is a fold
+of $\Exp$ if and only if $Q\ne0$, and $v(\det d\Exp)$ has the sign of
+$-SQ$ times the sign of the prefactor in \eqref{eq:j2}.  On the chosen
+$S>0$ representatives this reduces to the sign of $-Q$ times that
+prefactor; the phase-shift symmetries preserve the fold type.
+\end{theorem}
+\begin{proof}
+In the coordinates $(\tau,p,k)$ of \eqref{eq:coordinates},
+$\partial_\psi|_{k,t}=\partial_\tau$ and
+$\partial_k|_{\psi,t}=\partial_k|_{\tau,p}-(p/k)(\partial_\tau+\partial_p)$,
+so
+\[
+ v(J_2)=\theta_k\,\partial_\tau J_2
+ -\theta_\psi\bigl[\partial_kJ_2-(p/k)(\partial_\tau J_2+\partial_pJ_2)\bigr].
+\]
+Here $\partial_\tau J_2=2SCD(\alpha-\beta)$, $\partial_pJ_2$ follows from
+$s'=cd$, $c'=-sd$, $d'=-msc$, $e'=d^2$, $q'=ms^2$, and $\partial_k$ at fixed
+argument uses the classical modulus derivatives
+\begin{gather*}
+ \partial_k\sn=\frac{ms c^2-\gamma cd}{k(1-m)},\qquad
+ \partial_k\cn=\frac{s(\gamma d-msc)}{k(1-m)},\\
+ \partial_k\dn=\frac{ks(\gamma c-sd)}{1-m},\qquad
+ \partial_k\epsi=\frac{k(scd-c^2e-(1-m)ps^2)}{1-m},
+\end{gather*}
+with $\gamma=\epsi(u)-(1-m)u$ at the argument $u$.  The heading derivative
+at fixed $(\psi,t)$ is, from \eqref{eq:exp} and $(s+k\partial_ks)/d=(sd-\gamma c)/(1-m)$,
+\begin{equation}\label{eq:theta-k}
+ \theta_k=\frac{s_0d_0-s_1d_1+(\gamma_1-\gamma_0)c_1}{1-m}
+ -\frac{\gamma_0\,\theta_\psi}{k(1-m)}+2pc_1,
+\end{equation}
+where $(s_0,c_0,d_0)$ and $(s_1,c_1,d_1)$ are the Jacobi functions at
+$\tau-p$ and $\tau+p$ (in this proof only), given by the addition theorems, and $\gamma_0,\gamma_1$
+the values of $\gamma$ there; the addition theorem for $\epsi$ gives
+$\gamma_1-\gamma_0=2\gamma_p-2msS^2cd/\Delta_0$ and
+$\gamma_0=\gamma_\tau-\gamma_p+mSs\,s_0$ with $\gamma_p=e-(1-m)p$.  The
+midpoint quantity $\gamma_\tau=\epsi(\tau)-(1-m)\tau$ enters $\theta_k$
+and $\partial_k\sn\tau$ with opposite signs and cancels identically in
+$v(J_2)$, which is therefore a rational function of
+$(s,c,d,e,q,S,C,D,m,k)$ with denominator $\Delta_0^2k(1-m)CD$ and a
+numerator of $155$ terms in normal form modulo $c^2=1-s^2$, $d^2=1-ms^2$,
+$C^2=1-S^2$, $D^2=1-mS^2$, $k^2=m$.  Substituting $S^2=r$ from \eqref{eq:r}
+leaves the single monomial $SC$, so that
+$v(J_2)=SP_\Sigma/[(\alpha-\beta)^3\Delta_0^2k(1-m)D]$ with $P_\Sigma$ a
+polynomial in the $p$-variables, and with
+$\Delta_0(\alpha-\beta)=\alpha-d^2\beta$ the claim \eqref{eq:fold-identity}
+becomes the polynomial identity
+\[
+ P_\Sigma\,s\,d=-2kqe(1-m)^2(\alpha-d^2\beta)\,q^3e^3Q,
+\]
+which holds exactly in the ring
+(\path{research/e74_step2_fold_identity.py}; the script also checks
+$\theta_k$, $\theta_\psi$ and $v(J_2)$ against finite differences of
+\eqref{eq:exp} to $3\times10^{-20}$).  Positivity of the factors:
+$1-m,q,e,d,D,\Delta_0>0$, $s>0$ on $(K,2K)$,
+$|S|=\sqrt r>0$, and $(\alpha-\beta)^2>0$.  On the two chosen
+representatives $S>0$; on their $2K$ shifts the identity carries the
+corresponding negative sign of $S$.  Finally $\det d\Exp=FJ_2$ with $F\ne0$ and
+$v(FJ_2)=Fv(J_2)$ on $J_2=0$.
+\end{proof}
+
+\section{The certificate and the fold theorem}\label{sec:certificate}
+
+The polynomial $Q$ is positive on the open first sheet.  No short proof is
+known, and the positivity rests on an exact certificate; its variables are
+set in sans-serif to keep them apart from the coordinates.
+
+\begin{theorem}[Fold-only open first sheet]\label{thm:fold}
+$Q>0$ on the open first sheet and on its edge $\alpha_1=0$ for $k>k_0$.  Consequently
+the open first sheet, including the tangency phases, consists
+of folds of $\Exp$, and so does the edge $\alpha_1=0$ for $k>k_0$.
+\end{theorem}
+\begin{proof}
+With $g=-c$, $\rho=sd$, $\mathsf u=g-a=\rho/q$, $\mathsf v=b-g=\rho/e$,
+$L_0=(1-m)/m$, the bracket inequalities give $0<\mathsf u<g<1$, $\mathsf v>0$,
+$ab\le1$, and
+\[
+ me-(1-m)q=m\int_0^p\cn^2>0,\qquad e>E>1,
+\]
+so $L_0\mathsf v<\mathsf u$ and $\mathsf v<\rho$.  Put $\mathsf x=\mathsf u/g$,
+$\mathsf t=L_0\mathsf v/\mathsf u$, $\mathsf y=g^2$; then
+$0<\mathsf x,\mathsf t,\mathsf y<1$, and $\mathsf v<\rho$, $ab\le1$ read
+\begin{equation}\label{eq:BZ}
+ \mathsf B=L_0^2(1-\mathsf y)(L_0+\mathsf y)-(1+L_0)\mathsf x^2\mathsf t^2\mathsf y>0,\qquad
+ \mathsf Z=L_0-\mathsf y(1-\mathsf x)(L_0+\mathsf x\mathsf t)\ge0 ,
+\end{equation}
+with $\mathsf Z=0$ exactly at $ab=1$, i.e. at $\alpha_1=0$ by \eqref{eq:ab}.
+Direct substitution gives
+\[
+ Q=\frac{g^2\mathsf x}{L_0^3(1+L_0)}\,P(L_0,\mathsf x,\mathsf t,\mathsf y),
+\]
+and exact rational arithmetic verifies
+\begin{equation}\label{eq:certificate}
+ P=S_0+\mathsf B\,S_B+\mathsf Z\,S_Z,
+\end{equation}
+where $S_0,S_B,S_Z$ are sums of products $L_0^{i_0}\mathcal B^{n_1}_{i_1}(\mathsf x)
+\mathcal B^{n_2}_{i_2}(\mathsf t)\mathcal B^{n_3}_{i_3}(\mathsf y)$ of Bernstein basis
+functions \cite{Bernstein1915,Handelman1988,Farouki2012} with $216$
+strictly positive rational coefficients, of degree
+tuples at most $(5,5,4,3)$, $(2,3,2,1)$, $(4,3,3,2)$ in $(L_0,\mathsf x,\mathsf t,\mathsf y)$.  The sparse table
+is \path{data/open_sheet_q_certificate.json} (its digest is given in the
+code and data section); it has been re-verified independently with
+exact fractions only (\path{scripts/review/verify_q_certificate_fractions.py}).
+In the open cube every Bernstein function is positive, so $S_0>0$, and
+$\mathsf B>0$, $\mathsf Z\ge0$ give $P>0$, including at $\mathsf Z=0$.  Theorem~\ref{thm:fold-identity}
+concludes; on the edge $\alpha_1=0$ the point is an interior point of the
+smooth singular surface (Lemma~\ref{lem:sheet-smooth}) where the two phase
+branches meet ($C=0$, $S=1$), Proposition~\ref{prop:kernel} applies, and
+\eqref{eq:fold-identity} holds with $S=1$: both sides are real-analytic
+on the smooth surface $\{J_2=0\}$ through the edge
+(Lemma~\ref{lem:sheet-smooth}), and the edge is nowhere dense in it, so
+the identity proved on the open sheet persists there.
+\end{proof}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{../figures/caustic_fold_strip.pdf}
+\caption{The fold quantity on the source rectangle of the first sheet,
+$z=\sin^2B=r$ against $k$: $\log_{10}Q$ (color and white contour labels).
+$Q$ is positive inside and tends to zero at the edge $p=2K$ for
+$k\le k_0$, where the kernel derivative of $J_2$ must vanish because that
+edge is a cusp edge, and along the separatrix $k\to1$.  At
+the Maxwell edge $z=0$ it is the factor $S=\sqrt z$ in
+\eqref{eq:fold-identity}, not $Q$, that vanishes.  The $\alpha_1$ edge above
+$k_0$ carries $Q>0$: it is a fold.}
+\label{fig:strip}
+\end{figure}
+
+\section{The edges}\label{sec:edges}
+
+For a corank-one map with determinant $\mathcal J$, smooth singular set
+and a smooth kernel extension $v$ near a singular point, $v(\mathcal J)\ne0$
+is the fold criterion, and $v(\mathcal J)=0$, $v^2(\mathcal J)\ne0$,
+$d\mathcal J\wedge d(v\mathcal J)\ne0$ is the criterion for a cusp $A_2$
+(Morin's criterion, \cite[Appendix~A, Theorem~A.1]{SajiUmeharaYamada2008Recognition}).
+Here $A_1$ (fold) and $A_2$ (cusp) use the Morin map convention;
+the corresponding generating-function types are $A_2$ and $A_3$.
+We use $\mathcal J=J_2$, which differs from
+$\det d\Exp$ by a nonvanishing factor, harmless for both criteria.
+
+\begin{theorem}[Edges]\label{thm:edges}
+\begin{enumerate}[nosep,leftmargin=*]
+\item[(i)] On the Maxwell edge $\{S=0,\ f_1=0\}$, for every $0<k<1$,
+      $\eta_\psi=0$, the kernel is the phase direction, and the point is an
+      $A_2$ cusp.
+\item[(ii)] At $(p,\tau)=(2K,K)$, $\eta_\psi=0$, $d\theta=0$, and
+      \[
+       \eta_k=2(e-q)\Bigl(1,-\frac k{k'},0\Bigr),\qquad e=2E,\ q=2(K-E).
+      \]
+      Hence $d\Exp$ has corank one for $k\ne k_0$ and corank two at $k_0$.
+      For $k\ne k_0$ the point is an $A_2$ cusp; for $k<k_0$ it is the
+      upper edge of the first sheet.
+\item[(iii)] For $k>k_0$ the edge $\alpha_1=0$ is a fold
+      (Theorem~\ref{thm:fold}).
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(i) At $S=0$ one has $\Delta_0=1$, $D=1$, $C=\pm1$, and from \eqref{eq:exp}
+by the addition theorems
+\[
+ x_\psi=-2kC\,d\,f_1,\qquad y_\psi=2ms\,f_1,\qquad \theta_\psi=0,
+ \qquad \theta_k=\frac{2C\beta_1}{1-m};
+\]
+so on the edge $\eta_\psi=0$, and $\theta_k\ne0$ because $\beta_1<0$ on
+$(K,b_1)$: corank one, kernel $\partial_\psi$, by Proposition~\ref{prop:kernel}.
+The extension $v=(\theta_k,-\theta_\psi,0)$ is smooth through the edge and
+equals the kernel there.  On the sheet $v(J_2)=SG$ by
+\eqref{eq:fold-identity}, with $G\ne0$ at the edge: $f_1=0$ gives $a=0$ and
+$Q=-3(1-m)bc>0$.  So $v(J_2)=0$ at the edge, and $v$ is tangent to the
+sheet there.  A derivative along a vector tangent to the sheet depends only
+on the restriction to the sheet, hence
+\[
+ v^2(J_2)=dS(v)\,G=\frac{2\beta_1}{1-m}\,G
+ =-\frac{12(1-m)q^4e^3\beta_1^2\,c}{s\,d\,\alpha^2}>0,
+\]
+using $dS(v)=\theta_kCD=2\beta_1/(1-m)$ and, at the edge, $\beta=0$,
+$\Delta_0=D=1$, $Q=3(1-m)c\beta_1/e$.  The same tangent derivative shows
+$d(vJ_2)(v)\ne0$ while $dJ_2(v)=0$, which is the rank condition.
+
+(ii) At $(2K,K)$: $s=0$, $c=-1$, $d=1$, $C=0$, $S=1$, $D=k'$, $\theta=0$.
+From \eqref{eq:exp}, $x=-2kqS$ and $y=-2qD$ along $s=0$, so $x_\psi=-2kqCD=0$
+and $y_\psi=2mqSC=0$; $\theta_\psi=0$ by \eqref{eq:theta-psi} and
+$\theta_k=0$ by \eqref{eq:theta-k}; $\dot\theta=-\cn(3K)=0$.  The modulus
+derivatives at fixed $(\psi,t)$ are $x_k=2(e-q)$ and $y_k=2k(q-e)/k'$
+(\path{research/e74_step3_edges.py}, exact).  Since $e-q=2(2E-K)$
+vanishes exactly at $k_0$, Lemma~\ref{lem:first-variation} gives the
+corank statement.  For $k\ne k_0$ take the extension $v=(x_k,-x_\psi,0)$
+from the $x$ row.  At the point $v(J_2)=x_k\partial_\tau J_2=0$ because
+$C=0$, and $v$ is tangent to the sheet ($\partial_\tau J_2=0$,
+$\partial_pJ_2\ne0$).  Differentiating once more along $v=x_k\partial_\tau$
+at the point,
+\[
+ v^2(J_2)=x_k\bigl[x_k\,\partial_\tau^2J_2-x_{\psi\psi}\,\partial_k^{\rm src}J_2\bigr]
+ =-12eq(1-m)(e-q)^2\ne0,
+\]
+from $\partial^2_\tau J_2=-2eq(1-m)$, $x_{\psi\psi}=2kq(1-m)$ and
+$\partial^{\rm src}_kJ_2=(e-q)e/k$, where $\partial^{\rm src}_k$ is the
+$k$-derivative at fixed $(\psi,t)$.  The bracket, $-6eq(1-m)(e-q)$, is
+$d(vJ_2)(\partial_\tau)$ while $dJ_2(\partial_\tau)=0$: the rank
+condition.  For $k<k_0$ the point is the upper end $p=p_1=2K$ of the first
+sheet; for $k>k_0$ it lies on the closure of the right sheet of cell~$1$,
+$\Sigma_1^+$ in the notation of Section~\ref{sec:every-sheet}.
+\end{proof}
+
+\begin{proposition}[Hyperbolic umbilic; computer-assisted]\label{prop:d4}
+At $k=k_0$ the point $(p,\tau)=(2K,K)$ is a $D_4^+$ Lagrangian singularity
+of $\Exp$.
+\end{proposition}
+\begin{proof}
+$\Exp$ is Lagrangian: homogeneity identifies $(\lambda,t)$ on the energy
+cylinder with $t\lambda$ in the fiber, the flow maps the fiber to a
+Lagrangian submanifold, and $\Exp$ is its projection.  For the germ we use
+the amplitude chart $(A,B,k)=(\am p,\am\tau,k)$ and the half-angle target
+chart $(U,V,W)$ of Proposition~\ref{prop:atlas} below.  Here $e=\epsi(2K)=K(k_0)>1$ and $k'=\sqrt{1-k_0^2}$.  The vectors
+$(1/k,0,0)$, $(0,1,0)$, $(-e,0,k(1-k^2))$ have $dV=1$ on the first while the
+last two span the kernel, and the image of $d\Exp$ is the $V$-axis, so
+$(U,W)$ are cokernel coordinates.  Hessian contractions of the chart
+formulas \eqref{eq:atlas-target}, computed by computer algebra and
+confirmed numerically to $10^{-10}$, after straightening
+the regular coordinate $\sigma=V-V_0$ and removing pure $\sigma^2$ target
+terms, give the singular quadratic components in kernel coordinates
+$(y_1,y_2)$
+\[
+ U_2=\mathsf a y_1^2+\mathsf b y_2^2+\mathsf c\,\sigma y_2,\qquad
+ W_2=\mathsf d y_1y_2+\mathsf f\,\sigma y_1,
+\]
+\[
+ \mathsf a=\frac{ek^2}{2k'},\quad \mathsf b=\frac{ek^2k'(e^2-1)}2,\quad
+ \mathsf c=-e^2kk',\quad \mathsf d=ek,\quad \mathsf f=-1 .
+\]
+Since $\Exp$ is Lagrangian, the intrinsic second derivative
+$\ker\to\operatorname{coker}$ is the gradient of a binary cubic under the
+symplectic pairing of the kernel with the cokernel; let $(m_{ij})$ be that
+pairing, which turns $(U_2,W_2)$ into a gradient in $(y_1,y_2)$ (it is
+unique up to scale, and the sign of the discriminant is scale-invariant);
+Hessian symmetry forces $m_{12}\mathsf d=2m_{21}\mathsf a$,
+$m_{22}\mathsf d=2m_{11}\mathsf b$, $m_{11}\mathsf c=m_{22}\mathsf f$, and
+$\mathsf c-2\mathsf b\mathsf f/\mathsf d=-kk'\ne0$ gives $m_{11}=m_{22}=0$.
+With $m_{21}=1$ the generating-family jet is
+\[
+ \widehat F_3=\mathsf a y_1^2y_2+\frac{\mathsf b}3y_2^3
+ +\sigma\Bigl(\frac{\mathsf a\mathsf f}{\mathsf d}y_1^2+\frac{\mathsf c}2y_2^2\Bigr),
+\]
+whose binary cubic at $\sigma=0$ has discriminant
+$-4\mathsf a^3\mathsf b/3=-e^4k^8(e^2-1)/(12k'^2)<0$: the $D_4^+$ sign
+\cite[Ch.~5, \S2.3, p.~97]{ArnoldGivental1990Symplectic}.
+The Jacobi algebra is spanned by
+$1,y_1,y_2,y_1^2$; the two cokernel coordinates represent $y_1,y_2$ and
+the regular parameter represents $y_1^2$ with
+coefficient $\mathsf a(\mathsf f/\mathsf d-\mathsf c/(2\mathsf b))=k/[2k'(e^2-1)]>0$,
+so the three-parameter deformation is versal
+\cite[Ch.~5, \S2.5, pp.~98--99]{ArnoldGivental1990Symplectic}.
+For completeness, the cubic is $3$-right-determined.  After positive
+linear rescaling it is $f=x^2y+y^3$.  The five polynomials
+$x^2f_x,xyf_x,y^2f_x,x^2f_y,y^2f_y$ form a basis of the quartic
+homogeneous polynomials.  If $R$ vanishes to order four, the same five
+expressions for $f_t=f+tR$ have an invertible coefficient matrix over
+the quartic monomials near the origin, uniformly for $0\le t\le1$.
+Thus $R=df_t(X_t)$ for a smooth vector field $X_t$ vanishing to order
+two.  The local flow of $-X_t$ fixes the origin and satisfies
+$f_t\circ\Phi_t=f$, proving the assertion.  Together with versality,
+this identifies the full germ, by the generating-family equivalence
+theorem \cite[Ch.~5, \S1.4, p.~93]{ArnoldGivental1990Symplectic}.
+The same three local types occur on the ellipsoid \cite{ItohKiyohara2021}.
+\end{proof}
+
+\begin{remark}[Intrinsic check]\label{rem:intrinsic}
+The real form of the generating cubic can be checked intrinsically;
+classification of the full germ still requires the versality established
+above.  On the kernel plane
+$\ker d\Exp=\operatorname{span}(\partial_\psi,\partial_k)$ the second
+differential modulo the image $\mathbb R\xi$ is a quadratic map
+$\Phi:\ker\to\operatorname{coker}$, which for a Lagrangian map is the
+gradient of the generating cubic in suitable linear coordinates; the
+quadratic form $v\mapsto\det D\Phi(v)$ is then the Hessian form of that
+cubic up to a constant, definite for $D_4^-$ and indefinite for $D_4^+$.
+At $40$ digits its discriminant at our point is $2.2\times10^5>0$
+(\path{research/e74_step4_d4.py}), in agreement with the proposition.
+This discriminant alone is insufficient: the Lagrangian maps
+$(\sigma,2xy,x^2+3y^2)$ and $(\sigma,2xy+2\sigma x,x^2+3y^2)$
+have the same intrinsic quadratic map at the origin, but their rank-one
+loci are respectively a line and an isolated point.  Only the second
+has the missing quadratic parameter class.  The local-algebra and
+rank-locus checks are exact (\path{research/e80_singularity_recognition.py}).
+\end{remark}
+
+\section{The atlas}\label{sec:atlas}
+
+Let $B=\am(\tau,k)$ be a continuous amplitude and $z=\sin^2B$; by the
+first-time theorem $r(\cdot,k)$ has a unique inverse $\mathcal P(z,k)$ on
+$(p_0,p_1)$, and
+\begin{equation}\label{eq:sheet-param}
+ \tau=F(B,k),\qquad \psi=\tau-\mathcal P(\sin^2B,k),\qquad t=2k\mathcal P(\sin^2B,k)
+\end{equation}
+parametrizes the first singular surface, one full period of $B$ covering
+the four sign patches for one sign $s_2$.  The half-angle rectifying chart
+of \cite{MoiseevSachkov2010Maxwell} is
+\begin{equation}\label{eq:half-angle}
+ W=\tan\frac\theta2,\qquad
+ U=-\frac{y\cos\frac\theta2-x\sin\frac\theta2}{2\cos\frac\theta2},\qquad
+ V=-\frac{x\cos\frac\theta2+y\sin\frac\theta2}{2\cos\frac\theta2},
+\end{equation}
+a diffeomorphism of $\{|\theta|<\pi\}$ onto $\mathbb R^3$.
+
+\begin{proposition}[Stratified atlas]\label{prop:atlas}
+With $q=\mathcal P-\epsi(\mathcal P)$, $s=\sn\mathcal P$, $d=\dn\mathcal P$,
+$D=(1-k^2\sin^2B)^{1/2}$, the caustic for $s_2=+1$ is
+\begin{equation}\label{eq:atlas-target}
+ U=\frac{qD}{d},\qquad V=\frac{kf_1(\mathcal P)\sin B}{d},\qquad W=-\frac{ks\cos B}{d}.
+\end{equation}
+The other patches are $B\mapsto-B:(U,V,W)\mapsto(U,-V,W)$,
+$B\mapsto\pi-B:(U,V,-W)$, $B\mapsto B+\pi:(U,-V,-W)$, and
+$s_2\mapsto-s_2:(-U,-V,W)$.  On every open patch $(U,V)$ are local
+coordinates, and on $0<B<\pi/2$
+\begin{equation}\label{eq:orientation}
+ \det\frac{\partial(U,V)}{\partial(z,k)}<0 .
+\end{equation}
+\end{proposition}
+\begin{proof}
+\eqref{eq:atlas-target} is \eqref{eq:exp} in the chart \eqref{eq:half-angle},
+as an identity in $(p,\tau,k)$ with $p=\mathcal P$, $\sin B=\sn\tau$: with
+$\psi=\tau-p$, $\psi_1=\tau+p$, $S=\sn\tau$ and $\Delta_0=1-mS^2s^2$, the
+addition theorems give $\cn\psi-\cn\psi_1=2SsDd/\Delta_0$,
+$\sn\psi=(Scd-CDs)/\Delta_0$, $\dn\psi=(Dd+mSsCc)/\Delta_0$, and the
+addition theorem for $\epsi$ gives $\Delta=2q+2mS^2scd/\Delta_0$; with
+$\sin\theta=k(\sn\psi\dn\psi_1-\dn\psi\sn\psi_1)$,
+$\cos\theta=\dn\psi\dn\psi_1+m\sn\psi\sn\psi_1$ and
+$W=\sin\theta/(1+\cos\theta)$, substitution into \eqref{eq:half-angle}
+reduces, modulo $c^2+s^2=1$, $d^2=1-ms^2$ and the same relations at
+$\tau$, to \eqref{eq:atlas-target} (\path{research/e79_atlas_identity.py},
+symbolic; the formulas hold off the sheet as well).
+The sign actions are Jacobi parity and periodicity.  The restriction of
+$d\Exp$ to the tangent plane of $\Sigma$ is injective exactly when the
+kernel $v$ is transverse to $\Sigma$, i.e. when $v(J_2)\ne0$: that is the
+fold property, Theorem~\ref{thm:fold}, so the caustic is an immersed
+surface.  Its projection determinant $\partial(U,V)/\partial(z,k)$ reduces
+on $J_2=0$, after factors of fixed sign, to the same polynomial $P$ as the
+certificate (Proposition~\ref{prop:app-projection} in the appendix), hence
+is nonzero by Theorem~\ref{thm:fold}; so $(U,V)$ are local coordinates on
+each open patch, and the sign in \eqref{eq:orientation} is fixed by
+continuity and one evaluation (at $k=0.8$, $B=\pi/4$).
+\end{proof}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{../figures/caustic_atlas.pdf}
+\caption{The first caustic.  (a) The fundamental patch $0<B<\pi/2$,
+$s_2=+1$, in the half-angle chart $(U,V)$ for seven moduli (color), with
+the Maxwell seam $B=0$ (solid, the cusp edge, $V=0$) and the upper seam
+$B=\pi/2$ (dashed) across all moduli, and the $D_4^+$ point at $k_0$.
+(b) The planar shadow $(x,y)$ of the same curves and seams; each curve is
+the projection of the first conjugate points of the geodesics of one
+modulus.}
+\label{fig:atlas}
+\end{figure}
+
+\section{Embedding and incidence}\label{sec:embedding}
+
+\begin{lemma}[Slope]\label{lem:slope}
+On the fundamental patch, write $\zeta=ab$ for the Riccati variable of
+\eqref{eq:ab}, retaining $z=\sin^2B=r$ for the atlas coordinate.  Then
+$H=V/U$ satisfies
+\begin{equation}\label{eq:H}
+ H=\frac k{k'}\,a\sqrt\zeta,\qquad
+ \frac{\partial\log H}{\partial p}=\frac{a'}a+\frac{\zeta'}{2\zeta}>0.
+\end{equation}
+Since $z=r=\zeta/(1-m+m\zeta)$ increases with $\zeta$, also $H_z>0$.
+At fixed $k$ the slope runs once from $0$ at the Maxwell
+seam to an upper value $H_1(k)$ at the upper seam.
+\end{lemma}
+\begin{proof}
+$V/U=kf_1S/(qD)$ and by \eqref{eq:r-in-z}
+$S^2/D^2=r/(1-mr)=\zeta/(1-m)$.  The derivative is positive by
+\eqref{eq:riccati} and \eqref{eq:a-below-g}; and $p$ increases with the
+atlas coordinate $z=r$.
+\end{proof}
+
+\begin{lemma}[Upper slope]\label{lem:upper-slope}
+$H_1(k)=k/k'$ for $k\le k_0$, and $H_1$ is strictly increasing on $(0,1)$,
+with $H_1\to0$ as $k\downarrow0$ and $H_1\to\infty$ as $k\uparrow1$
+(for $k>k_0$ the sign of $H_1'$ rests on an exact differentiation replayed
+in \path{scripts/first_caustic_global_univalence_proof.py}).
+\end{lemma}
+\begin{proof}
+For $k\le k_0$ the upper seam is $p=2K$, where $f_1=q=2(K-E)$ and $z=1$.
+For $k>k_0$ it is $\alpha_1=0$, where $z=1$ and $H_1=(k/k')\,f_1/q$.  The
+argument is as follows.  Set $\varpi=2K-p_\alpha$ and, at $\varpi$,
+$\tilde s=\sn\varpi$, $\tilde g=\cn\varpi$, $\tilde d=\dn\varpi$,
+$\tilde e=2E-\epsi(\varpi)$, so that $e=\tilde e$ and $q=p_\alpha-\tilde e$ at
+$p_\alpha$; the endpoint equation $\alpha_1(p_\alpha)=0$ reads
+$q(\tilde e\tilde s-\tilde g\tilde d)+\tilde d(\tilde g\tilde e+\tilde s\tilde d)=0$.
+With $\upsilon=\tilde d/\tilde e$ and $\varrho=\tilde e\tilde s/(\tilde d\tilde g)\in(0,1)$,
+\[
+ \frac{f_1}q=\frac{\sqrt{1+\varrho^2\upsilon^2}}{1+\varrho\upsilon^2},\qquad
+ \frac q{\tilde e}=\frac{1+\varrho\upsilon^2}{1-\varrho},\qquad
+ \frac{p_\alpha}{\tilde e}=\frac{2-\varrho(1-\upsilon^2)}{1-\varrho},
+\]
+and exact differentiation along $\alpha_1=0$ shows that $H_1'(k)$ has the
+sign of $-F_-G$ with
+\[
+ -F_-=1+\varrho\upsilon^2(1-\varrho)+\varrho^3\upsilon^4+k^2\varrho^3\upsilon^2(1-\upsilon^2)
+ +2(1-k^2)\varrho^2\upsilon^2>0,
+\]
+\[
+ G=(1-\varrho)(1+\varrho\upsilon^2)\{1+(2\varrho-1)\upsilon^2\}
+ -(1-m)\varrho\upsilon^2\{2-\varrho(1-\upsilon^2)\}^2 .
+\]
+$G>0$ follows from $G>(1-\varrho)^2\mathcal G/\tilde e^4$ with
+$\mathcal G=\tilde eq(\tilde e^2-\tilde d^2)-(1-m)\tilde d^2p_\alpha^2$, and from
+the three bounds $k_0^2>3/4$, $\tilde e>3/2$, $2(1-m)(K-E)<3/4$ of
+Lemma~\ref{lem:app-bounds} in the appendix, which, with $\tilde d\le1$,
+$\tilde e<q<2(K-E)$ (so that $p_\alpha^2/q=q+2\tilde e+\tilde e^2/q<2(K-E)+3\tilde e$)
+and $1-m<1/4$, give
+$\mathcal G>q\bigl[\tilde e(\tilde e^2-1)-\tfrac34-\tfrac34\tilde e\bigr]
+=\tfrac q4(\tilde e+1)(2\tilde e-3)(2\tilde e+1)>0$.
+The two formulas for $H_1$ agree at $k_0$; the last factor of $f_1/q$
+exceeds $1/2$, so $H_1\to\infty$; and $H_1\to0$ with $k$.
+\end{proof}
+
+\begin{theorem}[Each open patch is embedded]\label{thm:univalence}
+On every open patch the projection $(z,k)\mapsto(U,V)$ is injective; hence
+$(U,V,W)$ embeds the patch.
+\end{theorem}
+\begin{proof}
+Take the fundamental patch.  For $h>0$ the level $H=h$ exists exactly for
+$\kappa(h)<k<1$, $\kappa=H_1^{-1}$, by Lemma~\ref{lem:upper-slope} and is a single graph
+$z=z_h(k)$ by Lemma~\ref{lem:slope}.  The quotient rule and
+\eqref{eq:orientation} give
+$\det\partial(U,H)/\partial(z,k)=U^{-1}\det\partial(U,V)/\partial(z,k)<0$,
+so along the level
+\[
+ \frac{dU}{dk}\Big|_{H=h}=-\frac{\det\partial(U,H)/\partial(z,k)}{H_z}>0 .
+\]
+Two source points with the same $(U,V)$ have the same $H$ and $U$, hence
+the same $k$, hence the same $z$.
+\end{proof}
+
+\begin{theorem}[Closed incidence]\label{thm:closed}
+For $0<k<1$, the caustic is a topological embedding of every fundamental
+strip $0\le B\le\pi/2$, including its seams, into $\SE$.  This embedding
+is proper into the punctured target $\SE\setminus\{e_{\SE}\}$, where
+$e_{\SE}$ is the identity, but not into $\SE$ itself.  The Maxwell seam
+is cuspidal; the upper seam is cuspidal for $k<k_0$, an umbilic at $k_0$,
+and a fold for $k>k_0$ (Theorem~\ref{thm:edges}, Proposition~\ref{prop:d4}).  The eight open patches and their seams have no target
+incidences except the identification of a common source seam.  As
+$k\downarrow0$ the caustic collapses to the identity; no sequence with
+$k\uparrow1$ stays in a compact set.
+\end{theorem}
+\begin{proof}
+On the lower seam $B=0$ one has $f_1=0$, so $U=q/d=-s/c$, $V=0$,
+$-W=ks/d=kU/\sqrt{1+(1-m)U^2}$, and along $f_1=0$
+\[
+ U_k(f_1)_A-U_A(f_1)_k=\frac{k\beta_1}{c^2(k^2-1)}>0,\qquad (f_1)_A=-\frac dc>0,
+\]
+($A=\am p$), so $dU/dk>0$; $U\to0$ as $k\downarrow0$ and
+$U\ge q>K-2E\to\infty$ as $k\uparrow1$: the seam is embedded.  The upper
+seam is embedded because its slope $H_1$ is strictly increasing.  The signs
+on the three strata are $(U,V,W)=(+,+,-)$ inside, $(+,0,-)$ on $B=0$,
+$(+,+,0)$ on $B=\pi/2$; the eight open patches occupy the eight open
+octants, and adjacent patches share seams: the four lower seams carry the
+labels $(\pm,0,\pm)$ and the four upper seams $(\pm,\pm,0)$, one seam per
+label.  As $k\downarrow0$,
+uniformly on the strip, $p=\pi+O(k^2)$, $q=O(k^2)$, $\sn p=O(k^2)$, so
+$(U,V,W)=O(k^2,k^3,k^3)$ and $t=2kp\to0$.  For $k\uparrow1$ let
+$R^2=x^2+y^2=4(U^2+V^2)/(1+W^2)$ be the spatial radius; from
+\eqref{eq:atlas-target} and \eqref{eq:r-in-z}, with the Riccati variable
+$\zeta=ab$, $\chi=k^2g^2\zeta/(1-m)$ and $\varrho_0=a/g$,
+\[
+ \frac{R^2}{4q^2}=1-\frac{(1-\varrho_0^2)\chi}{1+\chi}\ge1-\frac2q,
+\]
+because $1-\varrho_0=sd/(qg)\le q^{-1}\sqrt{1+1/\chi}$, i.e.
+$s^2d^2\le g^2+(1-m)/(m\zeta)$, which follows from
+$s^2d^2=(1-y)(1-m+my)\le1-m+my\le y+(1-m)/m\le y+(1-m)/(m\zeta)$ with
+$y=g^2$, and $\sqrt{\chi(1+\chi)}\le1+\chi$; and $q\ge q(p_0)>K-2E\to\infty$.
+The two boundary limits confine the inverse image of any compact subset
+of $\SE\setminus\{e_{\SE}\}$ to
+$[0,\pi/2]\times[\epsilon,1-\epsilon]$ for some $\epsilon>0$.
+It is closed there, hence compact.  Properness and the proved
+injectivity give a topological embedding into the punctured target,
+and therefore into $\SE$.  Properness into $\SE$ fails: at fixed $B$,
+a sequence $k_j\downarrow0$ has images converging to $e_{\SE}$, so
+these images together with $e_{\SE}$ form a compact set whose inverse
+image contains a sequence without a convergent subsequence in the strip.
+\end{proof}
+
+\section{Every sheet}\label{sec:every-sheet}
+
+By \cite[Theorem 4.1]{SE2FirstConjugate}, in the cell $[p_n^1,p_{n+1}^1)$,
+$n\ge1$, every rotating geodesic has one conjugate time on each of the brackets
+(two distinct times except at $k=k_0$, $\psi\equiv K\pmod{2K}$,
+where both equal $2nK$)
+$B_n^-=[p_n^1,\min(2nK,p_n^\alpha)]$ and $B_n^+=[\max(2nK,p_n^\alpha),b_n]$,
+where $p_n^\alpha$ is the zero of $\alpha_1$ in the cell and $b_n$ the
+zero of $\beta_1$ in $(2nK,(2n+1)K)$; on each open bracket $0<r<1$ and
+the conjugate points are $\sn^2\tau=r$.  The \emph{sheets} $\Sigma_n^\pm$
+are these two surfaces in the source, each with two mirror branches
+$\tau=\pm u$; their closures add the seams $S=0$ (at $p_n^1$ for
+$\Sigma_n^-$, at $b_n$ for $\Sigma_n^+$) and $C=0$ (at $2nK$ or $p_n^\alpha$).
+The first sheet is $\Sigma_1^-$.  With the sign
+$\sigma_n=(-1)^{n+1}$ and $g=|\cn p|$, $\mathsf u=|\sn p|\dn p/q$, $\mathsf v=|\sn p|\dn p/e$,
+\begin{equation}\label{eq:sheet-signs}
+ (\sigma_na,\sigma_nb)=(g-\mathsf u,\ g+\mathsf v)\ \text{on }\Sigma_n^-,\qquad
+ (\sigma_na,\sigma_nb)=(g+\mathsf u,\ g-\mathsf v)\ \text{on }\Sigma_n^+,\qquad \sigma_nc=-g,
+\end{equation}
+because $f_1$ has the sign $\sigma_n$ on the cell, $\beta_1$ the sign
+$(-1)^n=-\sigma_n$ on $(b_{n-1},b_n)$, and $\sn p$ the sign $\sigma_n$ on
+the left half and $-\sigma_n$ on the right half of the cell.  Figure~\ref{fig:sheets}
+shows the first three cells.
+
+\begin{theorem}[Every sheet]\label{thm:every-sheet}
+Let $n\ge1$ and $0<k<1$ (at $k=k_0$ the two brackets touch at $2nK$ and
+$0<r<1$ still holds on both open brackets,
+\cite[Theorem 4.1]{SE2FirstConjugate}).
+\begin{enumerate}[nosep,leftmargin=*]
+\item[(i)] On the open sheets $\Sigma_n^\pm$ the map $\Exp$ has corank one,
+      its kernel is $(\theta_k,-\theta_\psi,0)$, and the identity
+      \eqref{eq:fold-identity} holds with $S=\sn\tau$ and $s=\sn p$ signed.
+\item[(ii)] (computer-assisted) $Q>0$ on $\Sigma_n^-$ and $Q<0$ on $\Sigma_n^+$, up to and
+      including their $\alpha_1$ ends when $k\ne k_0$.  Hence every open
+      sheet is a fold surface, and every noncritical $\alpha_1$ seam is a fold.
+      At $k=k_0$ the common end has $Q=0$ and is covered by (iii).
+\item[(iii)] The seam $S=0$ of $\Sigma_n^-$ (at $p_n^1$) is an $A_2$ cusp
+      edge; the seam $S=0$ of $\Sigma_n^+$ (at $b_n$) is a fold; the seam
+      $C=0$ at $p=2nK$ is an $A_2$ cusp edge for $k\ne k_0$; at
+      $(p,\tau,k)=(2nK,K,k_0)$ the map has corank two and is a hyperbolic
+      umbilic $D_4^+$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(i) Proposition~\ref{prop:kernel} and Theorem~\ref{thm:fold-identity} used
+only $J_2=0$, $\sn p\ne0$ and $\sn\tau\ne0$, which hold on every open
+sheet ($p\notin K\mathbb Z$ there, and $0<r<1$).
+
+(ii) In the variables \eqref{eq:sheet-signs} the certificate of
+Theorem~\ref{thm:fold} applies to $\Sigma_n^-$ verbatim: $0<\mathsf u<g<1$
+and $\mathsf v>0$ by \eqref{eq:sheet-signs}; $ab\le1$ is $\mathsf Z\ge0$
+(equality at the $\alpha_1$ end); $e=\epsi(p)>E>1$ because $p>K$; and
+$me-(1-m)q=m\int_0^p\cn^2>0$.  So $P=S_0+\mathsf B S_B+\mathsf Z S_Z>0$ and
+$Q>0$, with $\mathsf Z=0$ allowed at the end.  On $\Sigma_n^+$ the
+orientation of \eqref{eq:sheet-signs} is reversed, and $Q<0$ there, up to
+and including the $\alpha_1$ end when $k<k_0$, by Proposition~\ref{prop:app-right} in
+the appendix: the bound $\mathsf t=L_0\mathsf v/\mathsf u<1/2$ on every
+later cell, the concavity of the scaled $-Q$ in $g^2$, an elementary
+argument on the face $ab=1$ and four exact rational certificates on the
+face $\mathsf v=\rho/2$ (\path{data/universal_right_sv_certificates.json},
+replayed by \path{scripts/universal_right_fold_proof.py}).  The hypotheses of both
+certificates were also checked on $4{,}480$ interior points of the brackets
+of cells $1$--$8$ at seven moduli.  The minima of the five recorded
+diagnostic margins lie between $5\times10^{-4}$ and $2\times10^{-2}$
+(\path{research/e75_step3_certificate_domains.py}); this range does not
+bound every polynomial margin.  All points were independently replayed
+at $60$ digits (\path{research/e80_certificate_domain_audit.py}).
+This finite survey does not test the critical endpoint.  Away from
+$k=k_0$, the $\alpha_1$ seams are interior points of the smooth singular
+surface where the two mirror branches meet ($C=0$, $S=1$), so (i) applies
+and they are folds by \eqref{eq:fold-identity}.  At the critical end,
+$s=0$, $e=q$, $a=b=-c=\pm1$ instead give $Q=0$.
+
+(iii) At $S=0$ the formulas of Theorem~\ref{thm:edges}(i) hold for every
+$n$: $x_\psi=-2kCdf_1$, $y_\psi=2msf_1$, $\theta_\psi=0$,
+$\theta_k=2C\beta_1/(1-m)$.  At $p_n^1$ therefore $\eta_\psi=0$, the kernel
+is the phase direction, $Q=-3(1-m)bc\ne0$, and
+$v^2(J_2)=-12(1-m)q^4e^3\beta_1^2\,c/(s\,d\,\alpha^2)$, nonzero because
+$c/s<0$ on $((2n-1)K,2nK)$: a cusp, with the rank condition as before.
+At $b_n$ one has $\theta_\psi=\theta_k=0$ but $x_\psi\ne0$, so the
+$x$-row extension $v=(x_k,-x_\psi,0)$ is the kernel, and with
+$\beta_1(b_n(k),k)=0$ an exact computation in the Jacobi algebra
+(\path{research/e74_step3_edges.py}, extended to $b_n$ by quasi-periodicity) gives
+\begin{equation}\label{eq:beta-seam}
+ v(J_2)=2kC^3d\,f_1^2\,\partial_k^{\rm src}\beta_1
+ =\frac{2k^2C^3d\,f_1^2}{mc}\,(es^2-qc^2),
+\end{equation}
+where $\partial^{\rm src}_k$ is the derivative at fixed $(\psi,t)$.  With
+the signs normalized so that $s,c,d>0$, the seam equation $ce=ds$ gives
+$c^2=d^2/(e^2+d^2)$ and $d^2(d^2+e^2-1)=(1-m)e^2$, hence
+$es^2-qc^2=(e^3-qd^2)/(e^2+d^2)$, and $qd^2<e^3$ follows from
+$(1-m)q<(1-m)(2n+1)K\le(2n+1)\pi/2<2n(4n^2-1)<e(e^2-1)$, using
+$e>2nE>2n$: the seam is a fold.  At $(2nK,K)$, $\eta_\psi=0$, $d\theta=0$
+and $\eta_k=2(e-q)\bigl((-1)^{n+1},-k/k',0\bigr)$ with $e=2nE$,
+$q=2(K-E)n$, so $e-q=2n(2E-K)$ vanishes exactly at $k_0$; for $k\ne k_0$
+the computation of Theorem~\ref{thm:edges}(ii) goes through with the sign
+$(-1)^{n+1}$ cancelling in $v^2(J_2)=-12eq(1-m)(e-q)^2$: a cusp.  At $k_0$
+the generating family of Proposition~\ref{prop:d4} applies with
+$e=\epsi(2nK)=nK>1$ (for even $n$ after the target reflection
+$(V,W)\mapsto(-V,-W)$), its discriminant $-e^4k^8(e^2-1)/(12k'^2)$ and
+versal coefficient $k/[2k'(e^2-1)]$ keeping their signs; the intrinsic
+test of Remark~\ref{rem:intrinsic} confirms $D_4^+$ at $n=1,2,3$; the
+closed forms hold for every $n$ because at $p=2nK$, $\tau=K$ the Jacobi
+values are those at $p=0$ up to the sign $(-1)^n$ (absorbed by the
+reflection for even $n$), and $q=e=nK$ at $k_0$, so the contractions
+depend on $(e,k)$ only.
+\end{proof}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{../figures/caustic_sheets.pdf}
+\caption{The sheets of the first three cells at $k=0.8$, both mirror
+branches: (a) in the half-angle chart, solid for $B_n^-$ and dashed for
+$B_n^+$; (b) their planar shadow.  Each bracket sheet is a fold surface;
+its $S=0$ seam is a cusp edge for $B_n^-$ and a fold for $B_n^+$, and its
+$C=0$ seam is the cusp edge at $2nK$ or the fold at $p_n^\alpha$
+(Theorem~\ref{thm:every-sheet}).}
+\label{fig:sheets}
+\end{figure}
+
+\begin{proposition}[Leading term of $Q$]\label{prop:leading}
+Put $g=-\sigma_nc$ and $\mathsf u=g-\sigma_na$, $\mathsf v=\sigma_nb-g$, so that
+$\mathsf u=\rho/q$, $\mathsf v=\rho/e$ with $\rho=\sigma_n\sn p\dn p$.  Then $Q$
+is a polynomial in $(\mathsf u,\mathsf v)$ of degree at most three in each
+variable, with twelve terms and coefficients in $(g,m)$, vanishing at
+$\mathsf u=\mathsf v=0$, with linear part
+$4g(1-g^2)(1-m+mg^2)\,\mathsf u$ and no linear term in $\mathsf v$.  On the
+cell $n$ at $p=2nK+\sigma$, $|\sigma|<K$, exactly
+$q=2n(K-E)+\sigma-\epsi(\sigma)$ and $e=2nE+\epsi(\sigma)$, hence
+\begin{equation}\label{eq:Q-leading}
+ Q=\frac{2\,\sn^3p\,\dn p\,(-\cn p)\,(1-m+m\cn^2p)}{n\,(K-E)}+O(n^{-2}),
+\end{equation}
+uniformly for $\sigma$ in compact subsets of $(-K,0)\cup(0,K)$.  Its
+sign is that of $-\sn\sigma\cn\sigma$: positive on the left half of the
+cell, negative on the right half, at every modulus.
+\end{proposition}
+\begin{proof}
+Substituting $a=\sigma_n(g-\mathsf u)$, $b=\sigma_n(g+\mathsf v)$, $c=-\sigma_ng$
+into \eqref{eq:Q} and reducing with $s^2=1-g^2$ gives the twelve-term
+polynomial; its constant term vanishes and its linear part is as stated
+(\path{research/e80_late_polynomial.py}, exact).  Quasi-periodicity gives the exact
+$q$ and $e$, so $\mathsf u,\mathsf v=O(1/n)$ and the linear term dominates.
+\end{proof}
+
+\begin{corollary}[Late conjugate points are folds]\label{cor:late-folds}
+The conjugate points of every cell $n\ge1$ are folds, for every
+$0<k<1$ and every phase off the seams.  On every compact set of $(\psi,k)$
+with $\psi\not\equiv K$ there is $n_0$ such that for $n\ge n_0$ this follows
+from \eqref{eq:Q-leading} alone, without the certificates.
+\end{corollary}
+\begin{proof}
+The first sentence is Theorem~\ref{thm:every-sheet}(ii).  By the
+large-index law \cite[Theorem 5.1(ii)]{SE2FirstConjugate} the offsets
+$\sigma$ of the two conjugate points of cell $n$ converge to
+$\mp K/2-\psi/2$, with $\psi$ taken in $(-K,K)$, uniformly on the set
+(the remainders of the expansions behind that law are explicit continuous
+functions of $(\sigma,k)$), so for $n\ge n_0$ they lie in a compact subset
+of $(-K,0)\cup(0,K)$, where \eqref{eq:Q-leading} has the sign of
+$-\sn\sigma\cn\sigma$ and its remainder is smaller.
+\end{proof}
+
+\begin{remark}
+For $k\ne k_0$ the sign of $Q$ changes between the two brackets inside
+the gap between $2nK$ and $p_n^\alpha$, in either order.  Put
+$D_0=K-E$ and $\sigma=w/n$.  The leading polynomial balance is
+\[
+ n^4Q\approx w^2\left[-\frac{2w}{D_0}
+       +\frac{3(2E-K)}{4D_0^2E}\right],\qquad
+ n\sigma_\alpha\approx\frac{2E-K}{2D_0E}.
+\]
+Its nonzero root is three quarters of the endpoint offset.  The
+numerically computed argument-offset ratios
+$(p_Q-2nK)/(p_n^\alpha-2nK)$ are $0.771$, $0.755$, $0.7503$
+at $n=2,5,20$ for $k=0.6$; these are not ratios of Jacobi $\sn$ values.
+The balance is checked in \path{research/e80_late_polynomial.py};
+we do not use it as a certificate in the shrinking gap, since the
+fold certificates already cover every open sheet.
+The two cusp seams lie on the closures of the reflection Maxwell strata
+$\operatorname{MAX}_2$ ($p=p_j^1$) and $\operatorname{MAX}_6$ ($p=2jK$) of
+\cite[Theorem 6.2]{MoiseevSachkov2010Maxwell}, the fold seams on neither.
+\end{remark}
+
+\section{Incidences between sheets}\label{sec:incidence}
+
+Two sheets meet where a point of $\SE$ is a conjugate point along two
+different geodesics.  The chart \eqref{eq:half-angle} first restricts
+which sheets can meet at all, and the scalar inverse of the endpoint map
+\cite{SE2Counts} then reduces the question to the level function of a
+target.
+
+\paragraph{Notation.}  In this section $(A_q,B_q)$ are the coordinates of
+the target in the frame of the heading bisector (the amplitudes $A=\am p$,
+$B=\am\tau$ of Sections~\ref{sec:atlas}--\ref{sec:embedding} do not occur
+here), $\nu$ is the parameter of the chart curve (the kernel $v$ of
+Section~\ref{sec:kernel} does not occur), $L(m)=4(K(m)-E(m))$ is the drift
+per period of \cite{SE2Counts}, written $L$ when the argument is clear, and
+$\beta_N=4E(m)/L(m)$; $q$ denotes a target, $\ell$ a real level, and the
+drift $q=p-\epsi(p)$ and $\ell=e\,(p-\epsi(p))$ of \eqref{eq:ab} do not occur;
+$s_i,c_i,d_i$ are the scaled values defined below, not those of
+Section~\ref{sec:fold}.
+
+Let $F(n,\pm)$ be the \emph{fundamental patch} of $\Sigma_n^\pm$: the
+branch $\tau=u\in(0,K)$, $s_2=+1$.  The group $G$ of order eight generated
+by $(U,V,W)\mapsto(U,V,-W)$ (the branch $\tau=2K-u$), $(U,-V,W)$
+($\tau=4K-u$) and $(-U,-V,W)$ ($s_2=-1$) carries the fundamental patches
+onto the whole conjugate locus.
+
+\begin{lemma}[Octants]\label{lem:octants}
+On every open sheet $U>0$.  On $F(n,\pm)$, $V$ has the sign
+$\sigma_n=(-1)^{n+1}$ and $W$ the sign $-\sigma_n$ on $F(n,-)$, $+\sigma_n$
+on $F(n,+)$.  Hence each fundamental patch lies in one open octant, the
+$s_2=-1$ copies lie in $U<0$ and never meet the $s_2=+1$ ones, and
+$F(n,b)$ can meet $g\,F(m,b')$ only for the single $g=(s_V,s_W)\in G$ with
+\[
+ s_V=\sigma_n\sigma_m,\qquad s_W=\epsilon_b\epsilon_{b'}\sigma_n\sigma_m,
+ \qquad \epsilon_-=-1,\ \epsilon_+=+1 .
+\]
+\end{lemma}
+\begin{proof}
+$U=qD/d>0$ since $q,D,d>0$; $V=kf_1S/d$ with $\operatorname{sgn}f_1=\sigma_n$
+on the cell and $S=\sn u>0$; $W=-ksC/d$ with $C=\cn u>0$ and
+$\operatorname{sgn}\sn p=\sigma_n$ on the left half of the cell, $-\sigma_n$
+on the right half.  The seams $S=0$, $C=0$ have $V=0$, $W=0$ and are not in
+the open patches.
+\end{proof}
+
+\begin{proposition}[Conjugate preimages and the level function]\label{prop:level}
+Let $q=(X,\theta)$, $X\ne0$, $0<|\theta|<\pi$, be off the seam of the
+scalar inverse \cite[Proposition 2.1]{SE2Counts}.  Its rotating preimages
+with $s_2=+1$ are the points $z$ of its admissible intervals at which the
+level function
+\begin{equation}\label{eq:level-function}
+ N(z)=\frac{A_q-Q_0}{L(m)},\qquad L(m)=4\bigl(K(m)-E(m)\bigr),
+\end{equation}
+is a nonnegative integer \cite{SE2Counts}; here $A_q>0$ is the drift of
+the target along the axis of its elastica, $L(m)$ the drift per period,
+and $Q_0\in(0,L(m))$ the drift of the residual argument
+$\delta(z)\in(0,4K)$ (Proposition~\ref{prop:N-prime} gives $Q_0$ in closed
+form).  At such a point the source has phase $\psi(z)$, modulus $k(z)$,
+residual argument $\delta(z)$ and time $t=k\delta+N\cdot4kK$.  Then:
+\begin{enumerate}[nosep,leftmargin=*]
+\item[(i)] the preimage is a conjugate point if and only if $N'(z)=0$
+      \cite[Proposition 2.2]{SE2Counts};
+\item[(ii)] a conjugate preimage on $\Sigma_n^-$ has $N=n-1$ and
+      $\delta>2K$; one on $\Sigma_n^+$ has $N=n$ and $\delta<2K$;
+\item[(iii)] $q$ lies on the image of $\Sigma_n^-$ if and only if $N$ has a
+      critical point at level $n-1$ with $\delta>2K$, on the image of
+      $\Sigma_j^+$ if and only if $N$ has one at level $j$ with $\delta<2K$,
+      and on both if and only if both occur.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+(i) is the regularity bridge of the counts paper.  (ii) $p=t/(2k)=2NK+\delta/2$,
+so $p/(2K)=N+\delta/(4K)$; on the left bracket $p\in((2n-1)K,2nK)$, whence
+$N=n-1$ and $\delta\in(2K,4K)$; on the right bracket $p\in(2nK,(2n+1)K)$,
+whence $N=n$ and $\delta\in(0,2K)$.  (iii) restates (i) and (ii).
+\end{proof}
+
+\paragraph{The incidence map.}  For cells $1$--$4$ the eight fundamental
+patches were tested against the $31$ other patches of these cells (four
+branches of each bracket, $s_2=+1$): on $25$ slices $k_1=\mathrm{const}$
+of the first patch, up to four nearest sampled approaches within distance
+$0.35$ were refined by least squares on $(f_1,f_2,k_2)$, where $f_i$ is
+the fractional position in its bracket (with interpolated bracket
+endpoints), three equations in three unknowns, and
+accepted at residual $10^{-10}$ with interior parameters
+(\path{research/e76_incidence_trace.py}).  The result
+(Figure~\ref{fig:incidence}): among the $248$ ordered pairs the search
+detected intersections for the following ten unordered pairs
+\[
+ F(n,-)\ \cap\ g\,F(j,+)\ne\emptyset,\qquad 1\le n\le j\le4,
+\]
+each detected from both sides, with $g$ the reflection
+$W\mapsto-W$ for $n\equiv j$ and $V\mapsto-V$ otherwise, as
+Lemma~\ref{lem:octants} dictates.  No left--left or right--right
+intersection, pair with $j<n$, or self-intersection was detected.
+The sampled same-cell traces are consistent with branches from the
+umbilic toward $k=1$; this finite search does not establish their global
+endpoints or exhaust all intersections.  At the sampled intersections
+the left sheet has the larger modulus, and the right-sheet modulus
+decreases with $j-n$ (from about $0.9$ at $j=n$ to about $0.3$ at $(1,4)$).
+A replay of all $123$ saved accepted points recovers target residuals
+below $6.1\times10^{-13}$.  The finite-grid detector
+(\path{research/e76_level_function.py}) finds exactly two critical points,
+both maxima, at $121$ targets; at one further target it finds two maxima
+and two minima below level zero, and at the remaining target it finds
+only one maximum.  Independent $60$-digit differentiation confirms the
+negative minima and recovers the missed maximum near level $1$ at the
+last target (the detected maximum is near level $2$).  These tests do
+not certify completeness of the critical-point search.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{../figures/caustic_incidence_curves.pdf}
+\caption{Incidences between the sheets of cells $1$--$4$.  (a) The
+accepted intersection points in the planar shadow, over the sheets in
+grey; (b) the same points in the $(k_1,k_2)$ plane of the moduli of the
+two patches, in the order of the label (\texttt{patch A}, \texttt{patch B}
+on the axes); each unordered pair appears twice, mirrored in the
+diagonal, and each color serves two pairs (see the legend).  The sampled
+traces are monotone, and the trace with the left sheet first lies below
+the diagonal: the left sheet has the larger modulus at these points.
+Labels: \texttt{n1-id x n2+V} is
+$F(1,-)\cap g F(2,+)$; the token after each cell index and bracket sign
+names the element of $G$ applied to that patch, \texttt{id} the identity
+(the fundamental patch itself), \texttt{V} the reflection $V\mapsto-V$
+and \texttt{W} the reflection $W\mapsto-W$.}
+\label{fig:incidence}
+\end{figure}
+
+Two facts about the level function are theorems.  Work in the frame of
+the heading bisector: let $\phi$ be the angle of the elastica axis from
+the bisector, $\omega=2\phi$, let $(A_q,B_q)$ be the along-axis and
+transverse coordinates of the target, $R^2=A_q^2+B_q^2$, and let $\nu$ be
+the polar angle of the target seen from the axis, $A_q=R\sin(\nu/2)$,
+$B_q=R\cos(\nu/2)$; along the chart curve of a fixed target $\nu$ is the
+parameter.  Write $s_i=k\sn$, $c_i=k\cn$,
+$d_i=\dn$ at the initial ($i=0$) and final ($i=1$) phase, so
+that $s_0=\sin a$, $s_1=\sin(a-\theta)$ for the axis angle $a$, and
+$B_q=c_0-c_1$.
+
+\begin{lemma}[The modulus along the chart curve]\label{lem:modulus}
+Along the chart curve
+\[
+ 4m=B_q^2+2-2\cos\theta\cos\omega+\frac{\sin^2\theta\,\sin^2\omega}{B_q^2},
+\]
+the chart is admissible only if $B_q^2$ lies strictly between
+$(1-\cos\theta)(1-\cos\omega)$ and $(1+\cos\theta)(1+\cos\omega)$ (this is
+$0<m<1$; admissibility also requires the sign conditions of
+\cite[Section~2]{SE2Counts}), and
+\begin{equation}\label{eq:m-prime}
+\begin{aligned}
+ B_q\,\partial_\nu m&=A_q\,c_0c_1+c_0s_1d_1-c_1s_0d_0,\\
+ B_q\,\partial_\nu^2 m&=\frac{m(1-m)\,(c_0^3-c_1^3)}{2\,c_0^2c_1^2}
+ \quad\text{at every critical point of } m .
+\end{aligned}
+\end{equation}
+Hence every critical point of $m$ with $0<m<1$ is a strict minimum, and
+$m$ is unimodal on every admissible interval.
+\end{lemma}
+\begin{proof}
+The transverse coordinate is $B_q=c_0-c_1$ and both endpoints lie on the
+circle $s_i^2+c_i^2=m$ with $s_0^2-s_1^2=\sin\theta\sin\omega$, which
+gives $c_0=(B_q-\sin\theta\sin\omega/B_q)/2$ and the closed form; $m=1$ is
+$B_q^2=4\cos^2(\theta/2)\cos^2\phi$ or $B_q^2=4\sin^2(\theta/2)\sin^2\phi$.
+Along the curve $\partial_\nu A_q=B_q/2$, $\partial_\nu B_q=-A_q/2$,
+$\partial_\nu s_i=d_i/2$, $\partial_\nu d_i=-s_i/2$, and
+$\partial_\nu c_0=(s_1d_1-s_0d_0+A_qc_1)/(2B_q)$,
+$\partial_\nu c_1=\partial_\nu c_0+A_q/2$ from $s_0^2+c_0^2=s_1^2+c_1^2$.
+Differentiating the closed form gives the first identity
+in~\eqref{eq:m-prime}.  Differentiating it once more and substituting
+the critical value $A_q=s_0d_0/c_0-s_1d_1/c_1$ gives
+$2B_q\,\partial_\nu^2m=c_0c_1(c_0-c_1)+c_0(1-2s_1^2+s_1^2d_1^2/c_1^2)
+-c_1(1-2s_0^2+s_0^2d_0^2/c_0^2)$; the identity
+$(1-2s^2)c^2+s^2d^2=c^4+m(1-m)$ on the circle turns the brackets into
+$c_i^2+m(1-m)/c_i^2$, the cubic terms cancel, and the second identity
+follows.  Its sign is that of $B_q$, so $\partial_\nu^2m>0$ at every
+critical point with $0<m<1$; two strict minima on an open interval would
+enclose a maximum.
+\end{proof}
+
+\begin{proposition}[Derivative of the level function]\label{prop:N-prime}
+Let $w_i=s_id_i/c_i$, $A_q^*=w_0-w_1$, and
+$\Delta E=E(\varphi_1|m)-E(\varphi_0|m)$ the increment of the incomplete
+integral of the second kind between the endpoint amplitudes, so that
+$Q_0=\delta-\Delta E$.  On the chart domain
+$J=(-\pi/2,\pi/2)\cap(\theta-\pi/2,\theta+\pi/2)$ of the principal axis
+angle of Lemma~\ref{lem:positive-superlevels}, where $d_0,d_1>0$, along
+the chart curve
+\begin{equation}\label{eq:N-prime}
+ L\,\partial_\nu N=-\frac{mB_q}{2c_0c_1}
+ -\frac{\partial_\nu m}{2(1-m)}\Bigl(A_q^*+\Delta E+4N\,E(m)\Bigr).
+\end{equation}
+Consequently $\partial_\nu N\ne0$ at the minimum of $m$, with the sign of
+$-B_qc_0c_1$; the critical points of $N$ are the roots $\Xi=A_q-A_q^*$ of
+\[
+ \beta_N \Xi^2+\bigl[A_q^*+\Delta E+\beta_N(A_q^*-Q_0)\bigr]\Xi+\frac{m(1-m)B_q^2}{c_0^2c_1^2}=0,
+ \qquad \beta_N=\frac{4E(m)}{L(m)}.
+\]
+\end{proposition}
+\begin{proof}
+$Q_0=\mathcal D(\varphi_1|m)-\mathcal D(\varphi_0|m)$ with $\mathcal D=F-E$,
+$w(\varphi)=\sqrt{1-m\sin^2\varphi}$, $\partial_\varphi
+\mathcal D=m\sin^2\varphi/w$, $\partial_m\mathcal D=[E(\varphi|m)-\sin\varphi\cos\varphi/w]/(2(1-m))$,
+and the amplitude derivatives $\partial_\nu\varphi_i=(md_i-s_i\partial_\nu m)/(2mc_i)$.
+Collecting, the algebraic part of $\partial_\nu A_q-\partial_\nu Q_0$ is
+$B_q/2-s_1^2/(2c_1)+s_0^2/(2c_0)=-mB_q/(2c_0c_1)$ and the rest is
+$\partial_\nu m$ times $-[A_q^*+\Delta E]/(2(1-m))$, using
+$s_i^3/(c_id_i)/(2m)+s_ic_i/(2md_i(1-m))=w_i/(2(1-m))$; the term
+$-N\partial_\nu L$ with $\partial_mL=2E/(1-m)$ completes~\eqref{eq:N-prime}.
+Multiplying $\partial_\nu N=0$ by $\Xi$ and eliminating $N=(\Xi+A_q^*-Q_0)/L$
+gives the quadratic.  The identities are checked
+numerically in \path{research/e77_h1_proof_check.py} and
+\path{research/e77_Nprime_formula.py}.
+\end{proof}
+
+The quadratic makes the critical points of $N$ a double cover of the
+three-dimensional endpoint data $(m,\varphi_0,\varphi_1)$, so the global
+structure of the level function can be scanned exhaustively.  The scan
+shows that unimodality at every real level fails near zero heading, and
+the conjecture is stated in the form the counts need.
+
+\subsection*{A conditional count criterion and its certificate}
+
+The critical points of the level function form a double cover of the
+endpoint data $(m,\varphi_0,\varphi_1)$ (Proposition~\ref{prop:N-prime}),
+so the sign of $N''$ at every critical point is a statement about an
+explicit function of three variables.  The proposed interval verification
+requires a complete replay: the previous run used incorrect incomplete-integral
+enclosures at negative amplitudes and incorrect Taylor tightening of
+quadratic roots near coalescence.  The repaired primitives pass independent
+checks, but those checks do not certify the full domain.  Write $\mu=(\varphi_0+\varphi_1)/2$ and
+$\Delta\varphi=\varphi_1-\varphi_0$; the statement is invariant under
+$\mu\mapsto\mu+\pi$ and $\mu\mapsto-\mu$, so $\mu\in[0,\pi/2]$ is a
+fundamental domain.  Let $\mathcal B$ be the box
+\[
+ \mathcal B=\{\,0.02\le m\le 0.98,\ 0\le\mu\le\pi/2,\ 0.02\le\Delta\varphi\le 2\pi-0.02\,\}
+\]
+with five sets removed: the slab $\mathcal S=\{|B_q|<0.02\}$ around the
+bisector boundary $B_q=0$ (the seam of the scalar inverse, reached as
+$\mu\to0$ and as $\Delta\varphi\to0,2\pi$), the two corners
+$\mathcal C_1=\{\mu<0.08,\ \Delta\varphi<0.2\}$ and
+$\mathcal C_2=\{\mu<0.08,\ \Delta\varphi>2\pi-0.2\}$ near short or
+full-period residual pieces, and the tube
+$\mathcal C_3=\{\mu<0.08,\ |\Delta\varphi-\pi|<0.1\}$ around the double
+flip $c_0=c_1=0$, where both roots of the critical quadratic escape to
+infinity, and the low-modulus set
+\[
+ \mathcal C_4=\{0.02\le m\le0.06,\ 0.94\le\mu\le\pi/2,\ 0.41\le\Delta\varphi\le0.80\}
+ \ \cup\ \{0.78\le m\le0.82,\ 1.49\le\mu\le\pi/2,\ 0.02\le\Delta\varphi\le0.10\},
+\]
+the union of the $32$ grid cells (a wedge of $31$ cells and one further
+cell) in which the budget passes of the interval engine leave boxes
+open.  On the wedge the small critical root is an $O(m)$ difference of
+$O(1)$ quantities and the interval enclosures widen faster than the
+margin of \eqref{eq:verified-predicate} shrinks; a $50$-digit pointwise
+survey finds $mN''(\nu_*)\to-c(\mu,\Delta\varphi)$ with $c\ge0.0013$ on the
+wedge, so the first alternative holds there numerically with a margin
+growing like $1/m$, but this is not certified and $\mathcal C_4$ is
+declared as an exclusion.  By \emph{the family} we mean below the grid of
+$100\times120\times240$ endpoint data $(m,\mu,\Delta\varphi)$ of
+\path{research/e78_statement_L.py}, which samples the ambient endpoint
+domain, including the removed sets, corners and tube; on this finite grid the tube
+carries no interior minimum, its critical points having $R\ge0.4$ and
+$N\ge0.07$.
+
+\paragraph{Certificate.}
+The computation establishes, at every interior critical
+point $\nu_*$ with $A_q>0$ and endpoint data in
+$\mathcal B\setminus(\mathcal S\cup\mathcal C_1\cup\mathcal C_2\cup\mathcal C_3\cup\mathcal C_4)$,
+the predicate
+\begin{equation}\label{eq:verified-predicate}
+ N''(\nu_*)<0\qquad\text{or}\qquad
+ N(\nu_*)<\tfrac12\ \ \text{and}\ \ R<L\bigl(m(\nu_*)\bigr),
+\end{equation}
+where $R=\sqrt{A_q^2+B_q^2}$.  The run of 21 September 2026 described in
+the numerical paragraph below, with the repaired primitives, closes every
+one of the $38{,}400$ cells outside the five sets: the $304$ boxes left
+open by its budget passes (total volume $0.049\%$ of $\mathcal B$) all lie
+in $\mathcal C_4$, $285$ in the wedge and $19$ in the further cell, and
+are listed in \path{data/e80_full_grid_open_cells.json}.  The excluded
+sets occupy $2.56\%$ of $\mathcal B$ (slab $2.06\%$, corners $0.25\%$,
+tube $0.14\%$, $\mathcal C_4$ $0.11\%$).
+The corollary below is an analytic implication of the predicate; off
+$\mathcal S\cup\mathcal C_1\cup\mathcal C_2\cup\mathcal C_3\cup\mathcal C_4$
+its hypothesis is the certified statement.
+
+\begin{lemma}[Compactness of positive superlevels; {\cite[Proposition~2.4]{SE2Counts}}]\label{lem:positive-superlevels}
+Fix $q=(X,\theta)$ with $X=(x,y)\ne0$, $0<|\theta|<\pi$ and
+$x\cos(\theta/2)+y\sin(\theta/2)\ne0$.  Let $I$ be a maximal
+admissible component of its scalar inverse.  For every $\ell>0$,
+$\{a\in I:N(a)\ge\ell\}$ is a compact subset of $I$, possibly empty.
+\end{lemma}
+\begin{proof}
+Use the principal axis angle $a$, with $b=a-\theta$, on
+$J=(-\pi/2,\pi/2)\cap(\theta-\pi/2,\theta+\pi/2)$, and write
+$A_q=x\sin a-y\cos a$, $B_q=x\cos a+y\sin a$.
+The circle equations give
+\[
+ m=\sin^2a+c_0^2=\sin^2b+c_1^2,\qquad
+ \sin\theta\sin(2a-\theta)=-B_q(c_0+c_1).
+\]
+At least one of $|a|,|b|$ is at least $|\theta|/2$, so
+$m\ge m_h:=\sin^2(\theta/2)>0$.  The defining integral makes $L$
+strictly increasing, with limits $0$ and $+\infty$ at $0$ and $1$
+\cite[Sections 19.2, 19.12]{DLMF}.
+On a nonempty positive superlevel,
+\[
+ \ell L(m)\le A_q-Q_0<A_q\le R,\qquad
+ m_h\le m<M_\ell:=L^{-1}(R/\ell)<1,\qquad
+ A_q>\ell L(m_h)>0.
+\]
+Take a sequence in this superlevel converging in $\overline J$.
+A limit at an end of $J$ would force $m\ge1$, since $a$ or $b$
+would equal $\pm\pi/2$.  At an interior limit, $A_q$ stays positive.
+If $B_q\to0$, boundedness of $c_i$ and the second circle identity
+would give $\sin(2a-\theta)=0$.  On $\overline J$ one has
+$-\pi<2a-\theta<\pi$, hence $a=\theta/2$, contradicting the
+target's off-seam hypothesis.  Thus $B_q\ne0$ at the limit, and
+the algebraic inverse extends there with $0<m<1$.
+Local phase lifts make $Q_0$ continuous: the two endpoint phases
+cannot coincide modulo $4K$, since their principal angles differ
+by $\theta\ne0$.  Hence the limit is admissible with $N\ge\ell$.
+A component is closed relative to the admissible domain, so the
+limit belongs to $I$.  This proves compactness; the parameters
+$z=\tan a$ and $\nu$ give the same conclusion.
+\end{proof}
+
+\begin{corollary}[Counts at positive levels]\label{cor:verified-counts}
+Let $q$ and its maximal admissible component $I$ satisfy
+Lemma~\ref{lem:positive-superlevels}.  Assume that every critical
+point of $N$ with $N\ge\tfrac12$ and every
+interior local minimum of $N$ satisfies \eqref{eq:verified-predicate}.
+Off $\mathcal S\cup\mathcal C_1\cup\mathcal C_2\cup\mathcal C_3\cup\mathcal C_4$
+this is the certified statement; on those sets it is an assumption.  Then
+every critical point of $N$ on $I$ at a level $\ge\tfrac12$ is a strict
+maximum, at most one critical point of $N$ on $I$ lies at a level $\ge1$,
+and for every real $\ell\ge1$ the superlevel set
+$\{\nu\in I:N(\nu)\ge\ell\}$ is an interval (possibly empty).
+Writing $M=\sup_I N$, for every real $\ell\ge1$ the number of
+distinct solutions of $N=\ell$ is $2$, $1$ or $0$ according as
+$\ell<M$, $\ell=M$ or $\ell>M$.  In particular the count for
+integer $n\ge1$ is at most two and non-increasing in $n$.
+\end{corollary}
+\begin{proof}
+By \eqref{eq:verified-predicate} a critical point with $N\ge\tfrac12$ has
+$N''<0$ and is a strict maximum, and an interior local minimum has
+$N<\tfrac12$ and $R<L(m)$.  Let $a<b$ lie in $I$ with
+$N(a),N(b)\ge\ell\ge1$.  If $N$ dips below $\ell$ between them,
+its minimum on $[a,b]$ occurs at an interior point $d$.  By
+Lemma~\ref{lem:modulus}, $m(d)\le\max(m(a),m(b))=:m_{\max}$.  At either
+endpoint $j\in\{a,b\}$,
+$L(m(j))\le N(j)L(m(j))=A_q(j)-Q_0(j)\le R$.  Consequently
+$R\ge L(m_{\max})\ge L(m(d))$, contradicting the predicate at $d$.
+Every superlevel set at a level $\ell\ge1$ is therefore an interval,
+possibly empty.  Two strict maxima with values at least $1$ would
+enclose an interior local minimum; the same inequality, using those
+maxima as $a,b$, excludes it.  Hence there is at most one such
+critical point.  If $N=\ell\ge1$ had three distinct solutions
+$a<b<c$, superlevel connectedness would give $N\ge\ell$ on $[a,c]$,
+making $b$ a local minimum, a contradiction.  This proves the
+two-solution bound without assuming the existence of a maximum.
+Now $M\le R/L(\sin^2(\theta/2))$ is finite.  If $M>0$, a maximizing sequence
+eventually lies in the compact superlevel at $M/2$, so $M$ is
+attained.  For $1\le\ell<M$, compactness of the superlevel and
+continuity give a crossing on each side of the maximum; the
+two-solution bound excludes any more.  At $\ell=M\ge1$ there is
+exactly one maximizer, by the critical-point conclusion, and above
+$M$ there are no roots.  If $M<1$ there are no positive integer
+roots.  This proves the stated count law.
+The inequality at $a,b$ needs $N\ge1$; it does not exclude two
+maxima whose values lie in $[\tfrac12,1)$.
+\end{proof}
+
+\begin{remark}
+The maximal-component and target off-seam hypotheses are essential:
+a truncated interval or a chart component of a seam target can have
+a positive level at an excluded end.  The monotonicity conclusion
+starts at $n=1$.  It does not extend from $n=0$ to $n=1$: in the
+far-field regime of \cite[Theorem 3.3]{SE2Counts}, one component
+has one level-zero root and two roots at level one once its maximum
+exceeds one.  The level-zero clauses therefore remain separate.
+The corollary requires the endpoint-data hypothesis at all of its
+specified critical points; membership of a target in a spatial region
+alone does not establish that hypothesis.  Some necessary constraints are
+explicit: along a component $m\ge\sin^2(\theta/2)$, so $m\ge0.02$ when
+$|\theta|\ge0.284$; and a critical point with $m>0.98$ and
+$N\ge\tfrac12$ needs $R>L(0.98)/2$, since
+$NL=A_q-Q_0\le R$.  On $m\le0.98$, an amplitude increment of size
+$\epsilon$ gives an elliptic phase increment between $\epsilon$ and
+$\epsilon/\sqrt{1-0.98}$, by the integral defining $F$.  Thus
+$\Delta\varphi$ within $0.02$ of $0$ or $2\pi$ puts the phase increment
+within $0.02/\sqrt{0.02}<0.142$ of zero or one full period, respectively.
+The slab $\mathcal S$ is a neighbourhood of the seam $B_q=0$, off which
+Proposition~\ref{prop:level} is stated.  The corner and tube samples do
+not prove exclusions on those continuous sets.  On the finite family the
+reported largest values at an interior minimum are approximately $0.45$
+for $R/L(m)$ and $0.39$ for $N$ on the finest grid of
+\path{research/e78_statement_L.py}, and up to $0.43$ for both on a
+coarser grid, so the margin to the threshold $\tfrac12$ of
+\eqref{eq:verified-predicate} is about
+$0.05$; these are numerical observations, not uniform bounds.  Proposition~\ref{prop:far-incidence} separately
+covers fixed far-field rays.  Level $0$ is outside the positive-level
+corollary.
+\end{remark}
+
+\paragraph{Method.}  Every quantity of Proposition~\ref{prop:N-prime} is
+evaluated in ball arithmetic \cite{Johansson2017Arb,Tucker2011}
+(\texttt{arb}, through \texttt{python-flint}) as a first-order Taylor
+model over a box: centre value, box enclosure, and box enclosure of the
+gradient with respect to $(m,\mu,\Delta\varphi)$, the enclosure being
+tightened by the mean-value form after every operation.  The incomplete
+integrals are enclosed by monotonicity: $F$ and $E$ increase in
+$\varphi$, and in $m$ the derivatives
+$\partial_mF=\tfrac12\int_0^\varphi\sin^2\theta\,(1-m\sin^2\theta)^{-3/2}d\theta$
+and
+$\partial_mE=-\tfrac12\int_0^\varphi\sin^2\theta\,(1-m\sin^2\theta)^{-1/2}d\theta$
+have the signs of $\varphi$ and of $-\varphi$, so the extremes of each
+over a box are corner values, and the union of the four corner
+evaluations is the enclosure for either sign of $\varphi$ (the lower
+endpoint phase $\mu-\Delta\varphi/2$ is negative on most of
+$\mathcal B$); the derivatives are in closed form.  Two reformulations make the evaluation regular: with
+$\Gamma=c_1s_0d_0-c_0s_1d_1$, the polynomial
+$\Lambda=(\Gamma^2-m(1-m)B_q^2)/(c_0c_1)$ and $\mathcal W=\Delta E+\beta_N(A_q-Q_0)$,
+the critical condition is the quadratic
+\[
+ \Psi(A_q)=-c_0c_1\beta_NA_q^2+bA_q+c=0,\qquad
+ b=-\Gamma-c_0c_1(\Delta E-\beta_NQ_0)+\beta_N\Gamma,
+\]
+\[
+ c=\Lambda+\Gamma(\Delta E-\beta_NQ_0),
+\]
+in $A_q$, with $\Psi=2B_q(1-m)L(m)\,\partial_\nu N=\Lambda-A_q\Gamma-(c_0c_1A_q-\Gamma)\mathcal W$,
+so that at a root $\operatorname{sgn}N''=\operatorname{sgn}(B_q\,\partial_\nu\Psi)$.
+For the root test a polynomial form avoids division at an endpoint flip.
+Put $\mathcal F=c_0c_1A_q-\Gamma=B_q\,\partial_\nu m$ and
+$\mathcal W=\Delta E+4E(m)N$.  At $\Psi=0$, hence $\partial_\nu N=0$,
+\[
+ B_q\,\partial_\nu\mathcal W
+ =\frac{d_1R_1-d_0R_0-\mathcal F A_q}{2m},
+ \qquad \partial_\nu\varphi_i=\frac{R_i}{2mB_q},
+\]
+where the $R_i$ are the polynomial amplitude numerators of
+\path{research/e78_regular_prep.py}.  Substituting this expression when
+differentiating $\Psi$ gives a cubic $P_{\rm crit}(A_q)=p_3A_q^3+p_2A_q^2+p_1A_q+p_0$ with polynomial
+coefficients in $(s_i,c_i,d_i,\Delta E,\beta_N,Q_0)$ and
+\[
+ 2mB_q\,\partial_\nu\Psi
+ =P_{\rm crit}(A_q)-\frac{m\beta_N\mathcal F}{1-m}\Psi(A_q).
+\]
+This identity follows also from the omitted term
+$4E(m)\partial_\nu N$ in $\partial_\nu\mathcal W$ and is checked exactly
+modulo the endpoint circle identities.  Thus $P_{\rm crit}$ equals
+$2mB_q\,\partial_\nu\Psi$ at every critical root, including flips by
+continuity, but is not the unrestricted derivative away from those roots.
+Its leading coefficient is
+\[
+ p_3=c_0^2c_1^2-m\beta_N(c_0^2+c_1^2).
+\]
+The unrestricted cubic in \path{research/e78_cubic_prep.py} includes
+$2m\beta_N'(m)=-1-m\beta_N^2/(1-m)$ and has the additional leading term
+$m\beta_N^2c_0^2c_1^2/(1-m)$.  The earlier polynomial is valid for the
+critical-root test; interpreting it as the unrestricted derivative was
+incorrect.  The verifier uses the polynomial coefficients generated by
+\path{research/e80_critical_cubic_prep.py}.  When
+$p_3<0$ on a box, the \emph{cubic threshold}
+\[
+ A_{\rm th}=1+\frac{|p_2|+|p_1|+|p_0|}{-p_3},
+\]
+formed from the bounds of the enclosures, gives $B_q\,\partial_\nu\Psi<0$,
+hence $N''<0$, at every root $A_q\ge A_{\rm th}$: for $A_q\ge1$,
+the sum of the lower-order terms is at most
+$(|p_2|+|p_1|+|p_0|)A_q^2$, while
+$(-p_3)A_q>|p_2|+|p_1|+|p_0|$.  When the enclosure and threshold comparisons succeed, this settles the
+root that escapes to infinity at a flip; otherwise the box remains undecided.  Let
+$\mathcal E=\{N<\tfrac12,\ R<L(m)\}$ be the \emph{escape set}, the
+second alternative of \eqref{eq:verified-predicate}.  A box passes when
+its enclosures establish that $\Psi$ has no real root, or that every root
+$A_q$ of $\Psi$ on the box satisfies
+\begin{equation}\label{eq:box-predicate}
+ \begin{gathered}
+ A_q\le0,\qquad\text{or}\qquad B_q\,\partial_\nu\Psi<0,\qquad\text{or}\qquad
+ A_q\ge A_{\rm th},\\
+ \text{or}\qquad N<\tfrac12\ \text{ and }\ R<L(m)\ \text{ at the root}
+ \end{gathered}
+\end{equation}
+(a root that escapes to infinity because the leading coefficient of
+$\Psi$ straddles zero passes when its modulus is at least $A_{\rm th}$; when the
+enclosure of the discriminant of $\Psi$ straddles zero, its square root
+has no first-order model and is taken as the plain interval
+$[0,\sqrt{\max\operatorname{disc}}]$, the roots and every quantity
+computed from them then being carried as plain intervals without
+mean-value tightening); the
+first alternative is an inadmissible root, the second and third give
+$N''<0$, the fourth is the escape set, so a passed box satisfies
+\eqref{eq:verified-predicate}.  Otherwise the box is bisected along its
+widest side, down to width $\min(2\cdot10^{-3},m/25)$ in the first pass
+and $2.5\cdot10^{-4}$ in the refinement.  The removal of the slab
+$\mathcal S$ and of $\mathcal C_1,\mathcal C_2,\mathcal C_3$ is implemented
+by passing without evaluation every box that lies inside one of them
+(the verifier records them as deferred); these sets are outside the
+scope of the proposed certificate.  The fifth set $\mathcal C_4$ is
+declared after the run as the union of the cells whose budget passes left
+boxes open; its cells were evaluated like all others, their accepted
+leaves are kept, and no box outside $\mathcal C_4$ remains open.
+The certificate run covers the initial grid of $24\times20\times80$
+cells, one checkpoint per cell, with four budget passes of $256$, $4{,}096$,
+$16{,}384$ and $65{,}536$ evaluations; a box is accepted by the first of
+four reviewed predicate methods (the scaled critical-root test above and
+three auxiliary root-branch tests; \path{research/e80_combined_predicate.py}),
+bisected along its widest side otherwise, and left open when
+the budget of its cell is exhausted.  Boxes inside the four deferred sets
+are recorded as deferred, not counted as verified, and are outside the
+scope of the certificate; no box reached the minimum width.  The
+$38{,}400$ checkpoints carry the source hashes and the canonical
+subdivision trace of their cell; an independent semantic replay re-proves
+every accepted leaf, re-walks every partition and checks each resumed
+pass against its parent, with no failure: $1{,}072{,}966$ accepted leaves,
+$15{,}777$ deferred leaves, $304$ open leaves (all in $\mathcal C_4$)
+(\path{data/e80_full_grid_pass1.json}, \path{data/e80_full_grid_audit.json},
+\path{data/e80_full_grid_open_cells.json}).  The old run statistics and
+residual clusters of the defective verifier are withdrawn as certificate
+evidence and retained only in the research notebook; volume fractions use
+the ambient rectangle before exclusions as denominator.
+Scripts:
+\path{research/e78_verify5.py}, \path{research/e78_tm.py},
+\path{research/e78_regular_prep.py}, \path{research/e78_cubic_prep.py},
+\path{research/e80_combined_predicate.py}, \path{research/e80_combined_checkpoint.py},
+\path{research/e80_full_grid_local.py}, \path{research/e80_full_grid_audit.py}.
+
+\begin{conjecture}[Two maxima]\label{conj:two-maxima}
+For every target off the seams with two admissible intervals and every
+integer $n\ge0$, the equation $N=n$ has at most two solutions on each
+interval; for $n\ge1$ their number is non-increasing in $n$, and at levels $\ge1$
+the level function has on each interval at most one critical point, a
+maximum; at level $0$ no critical point other than the maximum of the
+interval lies on the level, so that the conjugate preimages of a target
+are its interval maxima at integer levels; the two maxima have different
+residual types, $\delta>2K$ at one and $\delta<2K$ at the other; and the
+maximum of right type exceeds the maximum of left type, $M_R>M_L$.
+Corollary~\ref{cor:verified-counts} proves the bound of two solutions,
+uniqueness of a critical point, and count monotonicity for $n\ge1$
+on maximal off-seam components under its explicit sign-predicate
+assumption.  The repaired verifier has not yet established that
+assumption on a certified domain.  The unconditional positive-level
+claims, the level $0$ (its count and critical-point clause),
+the removed sets and margins of $\mathcal B$,
+and the two clauses on the types remain conjectural.
+\end{conjecture}
+
+\paragraph{Evidence.}  A replay with $1{,}000$ accepted random targets
+in $0.5<|X|<14$, $0.05<|\theta|<\pi-0.05$ and at least one finite
+admissible interval gives $1{,}798$ finite intervals: the sampled detector
+reports one nonnegative-level maximum on $1{,}667$ and none on $131$.
+A separate sample of $600$ targets with two finite intervals gives $594$
+with both interior maxima detected; their types differ, and $M_R-M_L$
+ranges from $0.1396$ to $274.913$, below $1$ on $94$ targets
+(\path{research/e76_unimodality_scan.py}, seed $20260907$, argument $1000$;
+\path{research/e76_two_maxima.py}, seed $7$, argument $600$).
+These finite-grid results do not exclude missed critical points.
+
+A historical $60\times120\times120$ endpoint-data scan reported
+$405{,}558$ quadratic roots with $A_q>0$, $N\ge0$: $402{,}796$ maxima
+and $2{,}762$ minima.  A portable replay using a separately derived
+critical-curvature formula reproduces these finite-grid counts with
+both the original and a cancellation-resistant quadratic formula
+(\path{research/e80_e77_replay.py}); all $2{,}762$ candidate targets
+match the saved survey in order, with spatial-radius error below
+$1.9\times10^{-12}$.  Selected targets also pass independent
+$70$-digit differentiation checks.  The original scratch polynomial
+remains unavailable; this replacement does not give an interval
+certificate or certify every extremum detected by the subsequent
+chart scans.  The saved survey contains $2{,}762$ records marked as
+minima by those scans.  Their $|\theta|$ is at most
+$0.1597$, $|X|$ at most $1.482$, and minimum level at most $0.2743$;
+the smaller recorded neighboring maximum is at most $0.2744$.
+No record flags four crossings of an integer level.  These saved chart observations do not certify every detected
+stationary point or exclude additional unsampled extrema.  The
+finite-difference detector is unreliable for the shallowest dips:
+on six reconstructed targets with $5$--$11$ historically reported
+critical points, $30$ of $81$ examined sampled derivative signs are
+incorrect in binary64, while $70$-digit recomputation of the same
+stencils removes those mismatches.  Local interval checks isolate
+two maxima and one minimum for each of these six targets, all at
+levels strictly between $0$ and $1$; they do not establish completeness
+outside the $18$ isolating boxes
+(\path{references/review_2026-09-21_neighbors/}).  The finer grid discussed after
+Corollary~\ref{cor:verified-counts} reports levels up to $0.39$.
+A separate saved small-heading survey records $86$ dips, none flagged
+as crossing an integer level four times
+(\path{research/e77_critical_quadratic.py},
+\path{research/e77_dips_survey.py}, \path{research/e77_dips_neighbors.py},
+\path{data/e77_dips_survey.json}).  The locally certified positive-level minima
+rule out all-real-level unimodality; the integer
+statement remains conjectural.
+
+\begin{corollary}[Conditional on Conjecture~\ref{conj:two-maxima}]\label{cor:incidence}
+Let $q=(X,\theta)$ satisfy $X\ne0$, $0<|\theta|<\pi$, be off the
+scalar-inverse seams, and have two admissible intervals as in the
+conjecture.  Such a target has at most two rotating conjugate preimages.
+Within this target domain the left-sheet images are pairwise disjoint,
+and so are the right-sheet images.  For the octant-matching $g$, with
+the intersections restricted to this domain,
+\[
+ F(n,-)\cap g\,F(j,+)=\{q:\ M_L(q)=n-1,\ M_R(q)=j\},
+\]
+which is empty unless $j\ge n$.  The number of rotating geodesics through
+a target is determined by $\lfloor M_L\rfloor$, $\lfloor M_R\rfloor$ and the
+end values of $N$ on the two intervals; it is constant on the chambers
+cut by the sheets and changes by two across a sheet.
+\end{corollary}
+\begin{proof}
+By Proposition~\ref{prop:level} conjugate preimages are critical points
+at integer levels; with one maximum per interval at levels $\ge1$ and
+no critical point at level $0$ other than the interval maxima, there
+are at most two, of different types, and a target on $\Sigma_n^-\cap\Sigma_{n'}^-$ would need
+$M_L=n-1=n'-1$.  The incidence set is the double integer condition, and
+$M_R>M_L$ forces $j>n-1$.  With at most two solutions per integer level,
+non-increasing at positive levels, the number of integer crossings is read off
+from the maximum and the end values, and crossing a sheet changes the
+count by two (a maximum passing an integer level creates or destroys a
+pair).
+\end{proof}
+
+In the far field the unimodality part is a theorem at every real level.
+
+\begin{proposition}[Far-field incidences]\label{prop:far-incidence}
+Fix a spatial direction $a_0$ and a heading $\theta\ne0$ with
+$b_0=a_0-\theta$, both in $(-\pi/2,\pi/2)$ and with
+$\sin^2b_0\ne\sin^2a_0$, and let $q_R=(R\,e(a_0),\theta)$ with
+$e(a_0)=(\sin a_0,-\cos a_0)$ and $L_*=L(\max(\sin^2a_0,\sin^2b_0))$ as in
+\cite[Section~3]{SE2Counts}.  There is
+$R_0$ such that for $R\ge R_0$: the level function of $q_R$ has exactly
+one critical point on each of its two admissible components, a
+nondegenerate maximum, of heights $M_\pm(R)=R/L_*+O(1)$; hence $q_R$
+has at most two conjugate preimages, it lies on the conjugate locus
+exactly when $M_-(R)$ or $M_+(R)$ is an integer, on two sheets exactly
+when both are, and the two sheets through such a point belong to cells
+whose indices differ by $O(1)$ uniformly in $R$.
+\end{proposition}
+\begin{proof}
+The first assertion is \cite[Theorem 3.3]{SE2Counts}, and the exclusion
+of the sign $s_2=-1$ at large $R$ is \cite[Section~3]{SE2Counts}; the rest is
+Proposition~\ref{prop:level}, the level of a conjugate preimage being
+$n-1$ or $n$ for a sheet of cell $n$.
+\end{proof}
+
+What is proved here is therefore the octant restriction, the
+level-function characterization, the conditional count implication at
+levels $\ge1$ (Corollary~\ref{cor:verified-counts}), and the far-field
+structure along fixed rays; the map for the first four cells is computed
+numerically only; the global structure at all radii, and the inequality
+$M_R>M_L$ behind the rule $j\ge n$, rest on
+Conjecture~\ref{conj:two-maxima}.
+
+\section{Numerical verification}\label{sec:numerics}
+
+The accompanying numerical scripts are in the
+\href{https://github.com/moiseevigor/se2-conjugate-locus}{project repository}, folder
+\path{research/}, prefixes \texttt{e74}--\texttt{e78}.
+The historical summaries below describe finite-sample diagnostics;
+the complete collection of these runs has not been independently
+replayed.  At $84$ points of the open sheet, six moduli including
+$0.9089$ (near, but not equal to, $k_0$) and $0.99$, both branches,
+the independently replayed finite-difference
+differential of \eqref{eq:exp} at $40$ digits has singular values
+$\sigma_2/\sigma_1\ge4.9\times10^{-3}$, $\sigma_3/\sigma_1\le6\times10^{-28}$,
+kernel time component $\le7\times10^{-25}$, and the kernel derivative of
+$\det d\Exp$ has the sign predicted by \eqref{eq:fold-identity} at every
+point.  The replayed minimum of $\sigma_2/\sigma_1$ is
+$0.004990276288\ldots$, correcting the previously rounded lower bound.
+Independent $60$-digit differentiation at eight selected points, including
+both phases near this minimum, agrees with separately integrated
+Hamiltonian and variational equations: the largest endpoint error is
+below $9\times10^{-14}$, and the largest differential error, normalized
+by $1+\max|D\Exp|$, is below $4\times10^{-13}$
+(\path{research/e80_geometry_audit.py},
+\path{references/review_2026-09-21_geometry_diagnostics/}).
+These are finite-sample diagnostics, not interval enclosures.
+The remaining historical summaries have not all been independently
+replayed.  The symbolic $\theta_k$, $\theta_\psi$, $v(J_2)$ agree with finite
+differences to $3\times10^{-20}$.  At the Maxwell edge and at $(2K,K)$, for
+four and five moduli, $|v(J_2)|\le3\times10^{-28}$, away from $k_0$ the second kernel derivatives agree
+with Theorem~\ref{thm:edges} to ten and twelve digits and the rank condition
+holds; at $k_0$ the singular values are $1$, $8\times10^{-22}$, $0$.
+On the $\alpha_1$ edge $Q\in[9\times10^{-6},8\times10^{-3}]$ and $|\mathsf Z|\le3\times10^{-42}$
+at four moduli.  The atlas chart agrees with the raw map to $2\times10^{-28}$ at
+$250$ points; $H_p\ge0.0239$, $a'\ge0.0465$, $\zeta'\ge0.003$ there; $H_1$
+increases on $92$ moduli from $0.02$ to $19.6$; $U$ increases along the
+slope levels $H=0.05,0.3,1,3,10$; the lower seam is ordered; and the
+escape bound holds on the strips $k=0.9,0.99,0.999,0.999999$, where the
+minimal spatial radius rises from $3.26$ to $14.18$.
+Independent replay covers the edge and chart samples.  A separate
+$50$-digit implementation checks the upper slopes, lower seams, five
+nonempty slope levels and four escape strips, with selected $60$-digit
+raw-map derivative checks
+(\path{references/review_2026-09-21_edge_embedding/}).  All bounds remain
+finite-sample diagnostics.  On the later sheets,
+at $180$ points of cells $1$--$5$, both brackets and both branches, three
+moduli including $0.9089$, the identity \eqref{eq:fold-identity} holds to
+$10^{-8}$ and the corank is one; $nQ$ divided by the leading term of
+\eqref{eq:Q-leading} tends to one with an $O(1/n)$ deviation up to
+$n=80$; the seam script tests $30$ pairs $(k,n)$ and prints ten of them,
+reporting agreement with \eqref{eq:beta-seam} to $10^{-18}$ and
+$d(kb_n)/dk>0$.  The derivative $\partial_k^{\rm src}\beta_1$ instead
+has sign $(-1)^n$, by \eqref{eq:beta-seam}; independent $60$-digit checks
+at $k=0.6,0.95$ and $n=1,2,3$ confirm this sign and the formula.
+The
+intrinsic umbilic test gives $D_4^+$ at the central points of cells
+$1$--$3$ (\path{research/e75_all_sheets.py}, \path{research/e75_step2_seams_all_n.py}).
+These later-sheet scripts and the $48$ leading-term samples were replayed;
+a separate $60$-digit implementation checks all $180$ open-sheet points,
+critical Hessians at cells $1,2,3,4,6$ and six gap examples
+(\path{references/review_2026-09-21_later_sheets/}).
+
+The independent September 2026 review checked the exact fold certificates,
+atlas identities and umbilic jets, replayed the saved incidence targets
+and the two random-target summaries above, and checked selected raw
+endpoints and the scalar-inverse dependency at $60$ digits.  Its logs,
+source hashes and limitations are retained in
+\path{references/review_2026-09-20_caustic/} and
+\path{references/review_2026-09-21_caustic_provenance/}.
+The interval sign predicate still requires a complete corrected replay
+and an independent coverage and residual audit.
+
+\section{Relation to prior work}
+
+Sachkov \cite{Sachkov2010Conjugate} proves that the first conjugate time
+lies in $[2kp_0,4kK]$, states the bracket $[2kp_0,2kp_1]$ and gives the
+Jacobian \eqref{eq:j2};
+Moiseev--Sachkov \cite{MoiseevSachkov2010Maxwell} give the exponential map
+\eqref{eq:exp} and the half-angle chart; \cite{SE2FirstConjugate} makes the
+first conjugate time exact and supplies the Riccati identities
+\eqref{eq:riccati}.  The Lagrangian classification, with the
+determinacy and versality of the generating families, is Arnold's
+\cite{Arnold1972NormalForms}; the fold and cusp criteria are Morin's
+\cite[Chapter~VII]{GolubitskyGuillemin1973}; Itoh--Kiyohara
+\cite{ItohKiyohara2021} describe the conjugate locus of an ellipsoid with
+the same three local types.  The
+original derivations of the atlas, the univalence argument and the
+closed-incidence argument were made in the half-angle chart; the present
+paper re-derives the corank, kernel, fold identity and edge classification
+in raw coordinates by the first variation, which shortens them and makes
+the fold factor explicit.  The local structure of every later sheet is
+Section~\ref{sec:every-sheet}, whose certificates and seam inequalities
+are reproduced in Appendix~\ref{app:proofs}, and the incidences between
+sheets are Section~\ref{sec:incidence}; the
+multiplicity of every point follows from Conjecture~\ref{conj:two-maxima}
+and is the subject of \cite{SE2Counts}.
+
+\section*{Code and data availability}
+
+All scripts, the certificate tables and the figure code are in the
+repository cited above: \path{research/e74_p8_kernel_rederivation.py},
+\path{research/e74_step2_fold_identity.py}, \path{research/e74_ring.py},
+\path{research/e74_step3_edges.py}, \path{research/e74_step4_d4.py},
+\path{research/e74_step5_embedding_audit.py}, \path{scripts/caustic_figures.py},
+\path{scripts/review/verify_q_certificate_fractions.py},
+\path{scripts/first_caustic_projection_reduction.py},
+\path{scripts/universal_right_fold_proof.py} (run with
+\texttt{PYTHONPATH=.:src}, as it imports the \path{scripts} package),
+\path{research/e78_verify5.py}, \path{research/e78_tm.py},
+\path{research/e78_regular_prep.py}, \path{research/e78_cubic_prep.py},
+\path{research/e78_statement_L.py}, \path{research/e75_leading_term.py},
+\path{research/e75_step3_certificate_domains.py},
+\path{scripts/first_caustic_global_univalence_proof.py},
+\path{research/e79_atlas_identity.py}.  The certificate table
+\path{data/open_sheet_q_certificate.json} records the SHA-256 digest
+\texttt{7e9fabf7\ldots950c} of its canonical coefficient table in its
+\texttt{sha256} field, and \path{data/universal_right_sv_certificates.json}
+likewise \texttt{3643ff00\ldots13ff07} (digests of the tables, not of the
+files).  The prior interval summaries
+\path{data/e78_verify_L.json} and \path{data/e78_refine_L.json}
+are historical outputs of the defective verifier, not proof evidence.
+Independent primitive regression checks are recorded in
+\path{data/e80_primitives_check.json}; the regenerated certificate and its
+replay are \path{data/e80_full_grid_pass1.json},
+\path{data/e80_full_grid_audit.json} and
+\path{data/e80_full_grid_open_cells.json}.  The long
+working manuscript \path{manuscripts/first_conjugate_time_c2.tex} of the
+repository (the research compendium) contains the original derivations in
+the half-angle chart; the three proofs of Appendix~\ref{app:proofs} are
+transplanted from it.
+
+\section*{AI assistance}
+
+This paper was prepared with the assistance of Claude (Anthropic), a large
+language model used through the Claude Code agent in September 2026.  The
+model re-derived the kernel, the fold identity and the edge classification
+in raw coordinates from the author's working manuscript, found the factor
+in \eqref{eq:fold-identity} numerically before proving it, wrote the
+verification and figure code, and drafted the text.  Every statement was
+checked by the author, who takes full responsibility for the content; no
+claim rests on the model's output alone.  OpenAI Codex assisted with the
+September 2026 adversarial review, independent certificate and endpoint
+checks, and the critical-root polynomial reformulation.
+
+\appendix
+\section{Three proofs from the working manuscript}\label{app:proofs}
+
+The three results below are used in Proposition~\ref{prop:atlas},
+Lemma~\ref{lem:upper-slope} and Theorem~\ref{thm:every-sheet}.  They are
+transplanted, in the notation of this paper, from the working manuscript
+named in the code and data section.
+
+\begin{proposition}[Reduction of the projection determinant]\label{prop:app-projection}
+In the amplitude chart $(A,B,k)=(\am p,\am\tau,k)$ of the source put
+\[
+ \Delta=\det\frac{\partial(U,V,J_2)}{\partial(A,B,k)} .
+\]
+On the fundamental patch $0<B<\pi/2$, $(J_2)_B=2\sin B\cos B\,(\alpha-\beta)>0$,
+the restriction of $(U,V)$ to the surface $J_2=0$ has
+\begin{equation}\label{eq:app-projection-restriction}
+ \det\frac{\partial(U,V)}{\partial(A,k)}\Big|_{J_2=0}=-\frac{\Delta}{(J_2)_B},
+\end{equation}
+and on $J_2=0$, in the variables $g=-c$, $\mathsf x=\mathsf u/g$,
+$\mathsf t=L_0\mathsf v/\mathsf u$, $\mathsf y=g^2$ of Theorem~\ref{thm:fold},
+\begin{equation}\label{eq:app-projection-reduction}
+ \Delta=\Pi\cdot g^3\mathsf x^2\,
+ \bigl[L_0^2+L_0\mathsf y(1-\mathsf t+\mathsf t\mathsf x)+L_0\mathsf t+\mathsf y\mathsf t\mathsf x\bigr]\,
+ P(L_0,\mathsf x,\mathsf t,\mathsf y),
+\end{equation}
+with $P$ the certificate polynomial of \eqref{eq:certificate} and $\Pi$ a
+product of factors of fixed sign on the patch.  Consequently
+$\partial(U,V)/\partial(z,k)\ne0$ on every open patch, and the sign in
+\eqref{eq:orientation} is constant on the fundamental patch.
+\end{proposition}
+\begin{proof}
+Expanding $\Delta$ along its third row after the column operations that
+kill $(J_2)_A$ and $(J_2)_k$ gives \eqref{eq:app-projection-restriction},
+because on $J_2=0$ one has $B_A=-(J_2)_A/(J_2)_B$ and $B_k=-(J_2)_k/(J_2)_B$.
+The reduction \eqref{eq:app-projection-reduction} is an exact computation
+in the ring of Section~\ref{sec:fold}: $\Delta$ is formed from
+\eqref{eq:atlas-target}, \eqref{eq:j2} and the modulus derivatives of
+Theorem~\ref{thm:fold-identity}; the factor $C=\cos B>0$ is divided out;
+$J_2=0$ is imposed through $S^2=r$; the Riccati variables enter by
+$q=-ds/(a+c)$, $e=ds/(b+c)$ (that is, \eqref{eq:a-below-g} and its
+analogue for $b$); the result is reduced modulo $c^2+s^2=1$,
+$d^2+ms^2=1$; the fixed factor $a\,d\,k^2s^7(k^2-1)(ks-1)^4(ks+1)^4$ is
+removed; and the substitution $c=-g$, $a=g(1-\mathsf x)$,
+$b=g(1+\mathsf x\mathsf t/L_0)$, $m=1/(1+L_0)$, $s^2=1-g^2$ leaves
+$g^3\mathsf x^2$ times the bracket of \eqref{eq:app-projection-reduction}
+times a polynomial in $(L_0,\mathsf x,\mathsf t,g^2)$, which is verified to
+coincide with $P$ term by term.  The script
+\path{scripts/first_caustic_projection_reduction.py} carries out this
+chain in exact arithmetic and raises an error if the final polynomial
+differs from $P$.  The bracket is positive because $0<\mathsf t<1$, and
+$P>0$ by Theorem~\ref{thm:fold}; so $\Delta\ne0$, hence
+$\partial(U,V)/\partial(A,k)\ne0$ on $J_2=0$ by
+\eqref{eq:app-projection-restriction}, and $\partial(U,V)/\partial(z,k)$
+differs from it by the factor $\partial A/\partial z=\partial_z\am(\mathcal P(z,k),k)>0$,
+since $\mathcal P$ increases with $z$ by the first-time theorem.  The other
+patches follow by the sign actions of Proposition~\ref{prop:atlas}.
+\end{proof}
+
+\begin{lemma}[Three bounds at the supercritical endpoint]\label{lem:app-bounds}
+Let $k_0<k<1$, $m=k^2$, $w(\theta)=\sqrt{1-m\sin^2\theta}$, and let
+$\varpi=2K-p_\alpha\in(0,K)$, $\tilde e=2E-\epsi(\varpi)$ be as in the
+proof of Lemma~\ref{lem:upper-slope}.  Then
+\[
+ \text{(i)}\ k_0^2>\tfrac34,\qquad
+ \text{(ii)}\ \tilde e>\tfrac32,\qquad
+ \text{(iii)}\ 2(1-m)(K-E)<\tfrac34 .
+\]
+\end{lemma}
+\begin{proof}
+(i) Pair $\theta$ with $\pi/2-\theta$ in the complete integrals.  From
+$w(\theta)^2w(\pi/2-\theta)^2=(1-m\sin^2\theta)(1-m\cos^2\theta)
+=1-m+m^2\sin^2\theta\cos^2\theta\ge1-m$,
+\[
+ K=\int_0^{\pi/4}\frac{w(\theta)+w(\pi/2-\theta)}{w(\theta)\,w(\pi/2-\theta)}\,d\theta
+ <\frac1{\sqrt{1-m}}\int_0^{\pi/4}\bigl[w(\theta)+w(\pi/2-\theta)\bigr]d\theta
+ =\frac{E}{\sqrt{1-m}}
+\]
+for every $0<m<1$.  At $m=3/4$ this is $2E>K$.  Since $2E-K$ decreases
+strictly in $m$ ($E$ decreases and $K$ increases) and vanishes exactly at
+$m=k_0^2$, we get $k_0^2>3/4$.
+
+(ii) With $\tilde s=\sn\varpi$, $\tilde g=\cn\varpi$, $\tilde d=\dn\varpi$,
+the endpoint equation $\alpha_1(p_\alpha)=0$ reads, as in the proof of
+Lemma~\ref{lem:upper-slope},
+$q(\tilde e\tilde s-\tilde g\tilde d)+\tilde d(\tilde g\tilde e+\tilde s\tilde d)=0$
+with $q,\tilde d,\tilde g,\tilde e,\tilde s>0$, so $D_0(\varpi)<0$ for
+$D_0(x)=e(x)\sn x-\cn x\dn x$, $e(x)=2E-\epsi(x)$.  Differentiating with
+$e'=-\dn^2$ gives $D_0'(x)=\cn x\,\bigl[e(x)\dn x+m\sn x\cn x\bigr]>0$ on
+$(0,K)$.  Let $\phi_0=\pi/6$ and $x_0=F(\phi_0,k)$, so that
+$D_0(x_0)=\tfrac12\bigl[2E-E(\phi_0\,|\,m)-\sqrt3\,w(\phi_0)\bigr]$.  Put
+$h(\theta)=w(\theta)-\cos\theta$; then $h(0)=0$ and
+$h'(\theta)=\sin\theta\,(w-m\cos\theta)/w>0$ because
+$w^2-m^2\cos^2\theta=(1-m)(1+m\cos^2\theta)>0$, so $h$ increases and is
+positive on $(0,\pi/2]$.  Subtracting the same expression at $m=1$, where
+it equals $2-\sin\phi_0-\sqrt3\cos\phi_0=0$,
+\[
+ 2E-E(\phi_0\,|\,m)-\sqrt3\,w(\phi_0)
+ =\int_0^{\phi_0}h+2\int_{\phi_0}^{\pi/2}h-\sqrt3\,h(\phi_0)
+ >\Bigl[2\Bigl(\frac\pi2-\phi_0\Bigr)-\sqrt3\Bigr]h(\phi_0)>0,
+\]
+since $2\pi/3>\sqrt3$.  Hence $D_0(\varpi)<0<D_0(x_0)$, so $\varpi<x_0$
+and $\am\varpi<\phi_0$, and therefore
+\[
+ \tilde e=2E-E(\am\varpi\,|\,m)>2E-E(\phi_0\,|\,m)>\sqrt3\,w(\phi_0)
+ =\sqrt3\sqrt{1-m/4}>\sqrt3\cdot\tfrac{\sqrt3}2=\tfrac32 .
+\]
+
+(iii) Since $1/w-w=m\sin^2\theta/w$,
+$K-E=m\int_0^{\pi/2}\sin^2\theta\,w(\theta)^{-1}d\theta\le
+m\,\pi/(4\sqrt{1-m})$, so $2(1-m)(K-E)\le\tfrac\pi2\,m\sqrt{1-m}$.  The
+function $m\sqrt{1-m}$ decreases for $m>2/3$, and $m>k_0^2>3/4$ by (i),
+so $m\sqrt{1-m}<\tfrac34\cdot\tfrac12$ and
+$2(1-m)(K-E)<3\pi/16<3/4$.
+\end{proof}
+
+\begin{proposition}[$Q<0$ on the right sheets]\label{prop:app-right}
+For every $n\ge1$ and $0<k<1$, $Q<0$ on the open sheet $\Sigma_n^+$.
+For $k<k_0$ this includes its $\alpha_1$ end $ab=1$; the critical end
+at $k=k_0$ has $Q=0$.
+\end{proposition}
+\begin{proof}
+Every term of $Q$ has even total degree in $(a,b,c)$, so $Q$ is invariant
+under the simultaneous negation of $(a,b,c)$ and we may work with the
+sign-normalized variables of \eqref{eq:sheet-signs}: $a=g+\mathsf u$,
+$b=g-\mathsf v$, $c=-g$, $g=|\cn p|\in(0,1)$, $\mathsf u=\rho/q$,
+$\mathsf v=\rho/e$, $\rho=|\sn p|\dn p$, on $p=2nK+\xi$ with $0<\xi<K$.
+On the sheet $b>0$, so $\mathsf w:=\mathsf v/g<1$; $0<ab\le1$ with
+equality exactly at the $\alpha_1$ end; and $e=\epsi(p)>2nE>2$, so
+$\mathsf v<\rho/2$.  Put $L_0=(1-m)/m$, $\mathsf x=\mathsf u/g$,
+$\mathsf t=L_0\mathsf v/\mathsf u=(1-m)q/(me)$, $\mathsf T=2\mathsf t$ and
+$\mathsf y=g^2$.
+
+\emph{Step 1: $\mathsf t<1/2$ on every cell $n\ge1$.}  The inequality is
+equivalent to $F(p)=mp-(2-m)q(p)>0$.  By quasi-periodicity
+$q(p)=2n(K-E)+\xi-\epsi(\xi)$, so $F(p)=2nD+F_0(\xi)$ with
+\[
+ D=mK-(2-m)(K-E)=(2-m)E-2(1-m)K,\qquad
+ F_0(\xi)=m\xi-(2-m)\bigl(\xi-\epsi(\xi)\bigr).
+\]
+Writing $D=m\int_0^{\pi/2}Y(\theta)/w(\theta)\,d\theta$ with
+$Y=1-(2-m)\sin^2\theta$ and $w=\sqrt{1-m\sin^2\theta}$, and pairing
+$\theta$ with $\pi/2-\theta$, where $Y$ becomes $m-Y$ and $w$ becomes
+$B_0=\sqrt{1-m+m\sin^2\theta}$, the integrand of the pair is
+$Y/A_0+(m-Y)/B_0$ with $A_0=w(\theta)$; on $0\le\theta\le\pi/4$ one has
+$Y\ge m/2>0$, and when $Y>m$ the identity, with $x=\sin^2\theta\le1/2$,
+\[
+ Y^2B_0^2-(Y-m)^2A_0^2=m(2x-1)\bigl\{-(1-m)-x(1-x)(2-m)^2\bigr\}>0
+\]
+gives $Y/A_0>(Y-m)/B_0$.  So $D>0$.  On $[0,K]$, $F_0(0)=0$,
+$F_0(K)=D>0$ and $F_0'(\xi)=m\{1-(2-m)\sn^2\xi\}$ changes sign once, from
+positive to negative; hence $F_0\ge0$ and $F(p)=2nD+F_0(\xi)>0$.
+
+\emph{Step 2: the margins.}  In these variables $\mathsf v<\rho/2$ and
+$ab\le1$ read
+\[
+ \mathsf S_V=(1-\mathsf y)(L_0+\mathsf y)-4(1+L_0)\mathsf w^2\mathsf y>0,\qquad
+ \mathsf S_Z=\mathsf T-\mathsf y(1-\mathsf w)(\mathsf T+2L_0\mathsf w)=2\mathsf t(1-ab)\ge0 .
+\]
+For fixed $(L_0,\mathsf x,\mathsf t)$ both cut upper intervals in
+$\mathsf y$: $\mathsf S_V$ is concave in $\mathsf y$, equal to $L_0$ at
+$\mathsf y=0$ and negative at $\mathsf y=1$, and $\mathsf S_Z$ is linear
+decreasing in $\mathsf y$.
+
+\emph{Step 3: concavity.}  Direct substitution gives
+\[
+ -Q=\frac{g^2\mathsf x}{L_0^3(1+L_0)}\,P^+(L_0,\mathsf x,\mathsf t,\mathsf y),
+\]
+where $P^+$ is a polynomial, quadratic in $\mathsf y$, with leading
+coefficient $(L_0-\mathsf t\mathsf x)^2(1+\mathsf x)\{\mathsf t\mathsf x-L_0(3\mathsf x+4)\}$
+and value $P^+(L_0,\mathsf x,\mathsf t,0)=L_0^3\{L_0(\mathsf x+4)-3\mathsf t\mathsf x\}$.
+Since $\mathsf t\mathsf x=L_0\mathsf w<L_0$, the leading coefficient is
+negative and the value at $\mathsf y=0$ exceeds $L_0^4(1+\mathsf x)>0$.
+So $P^+$ is strictly concave in $\mathsf y$ on the admissible interval and
+positive at its lower end; it is positive on the whole interval as soon as
+it is positive at the upper end, which lies on $\mathsf S_V=0$ or on
+$\mathsf S_Z=0$.
+
+\emph{Step 4: the face $\mathsf S_Z=0$.}  There $ab=1$.  Put
+$r=\mathsf y$, $h=\mathsf w$, $w_0=1-h\in(0,1)$, so that $b=gw_0$ and
+$a=(gw_0)^{-1}$, and let $\mathcal T=g^2w_0^2\,(-Q)$; explicitly
+\[
+ \mathcal T=m\,(r-1)(rw_0^2-1)^2
+ +r^2w_0^4-3r^2w_0^3+3r^2w_0^2-rw_0-r+1,
+\]
+so $\partial_m\mathcal T=(r-1)(rw_0^2-1)^2<0$ (note $rw_0^2=b^2<ab=1$).
+The margin $\mathsf S_V\ge0$ says $m\le M=\{(1-r)-4rh^2\}/(1-r)^2$.  If
+$M\ge1$, i.e. $r\le1-4h^2$ (so $h<1/2$), then
+$\mathcal T(m)>\mathcal T(1)=rw_0(rw_0-1)(rw_0^2-2w_0+1)$, and the last
+factor increases in $r$, so
+$rw_0^2-2w_0+1\le(1-4h^2)(1-h)^2-2(1-h)+1=-h^2(2h-3)(2h-1)<0$; with
+$rw_0<1$ this gives $\mathcal T(1)>0$.  If $M<1$, then
+$\mathcal T(m)\ge\mathcal T(M)=rh\,\mathcal P(h,r)/(r-1)$ with
+\[
+ \mathcal P=-4h^5r^2+16h^4r^2-24h^3r^2+8h^3r+19h^2r^2-19h^2r
+ -10hr^2+16hr-6h+3r^2-6r+3 ,
+\]
+whose leading coefficient in $r$ is $-(h-1)^2(4h^3-8h^2+4h-3)>0$, so
+$\mathcal P$ is strictly convex in $r$; the conditions $0<M<1$ confine
+$r$ to $\max(0,1-4h^2)<r<(1+4h^2)^{-1}$, and at the endpoints
+$\mathcal P(h,(1+4h^2)^{-1})=-4h^4(17h+3)/(1+4h^2)^2<0$,
+$\mathcal P(h,1-4h^2)=-4h^4(h-1)(2h-3)(2h-1)(4h^2-4h-1)<0$ for $h<1/2$,
+and $\mathcal P(h,0)=3(1-2h)\le0$ for $h\ge1/2$.  Hence $\mathcal P<0$ on
+the open interval, $\mathcal T(M)>0$, and $\mathcal T>0$, i.e. $-Q>0$,
+throughout the face.
+
+\emph{Step 5: the face $\mathsf S_V=0$.}  There $\mathsf v=\rho/2$.  Put
+$r=\mathsf y$, $c=\mathsf w=\rho/(2g)$ and $z=ab$.  The face equation gives
+$m=M_0/(1-r)^2$ with $M_0=1-r-4rc^2$, and $0<m<1$ makes $M_0>0$ and
+$M_1=r+4c^2-1>0$; Step~1 reads
+$z_0<z<1$ with $z_0=r(1-c)\{M_0+2rM_1c\}/M_0$.  With $(r,c)$ fixed the
+cleared $-Q$ is a cubic in $z$.  Its first and third Bernstein control
+points on $[z_0,1]$ have exact positive rational identities with $133$ and
+$111$ terms; its second control point is regularized at the cusp
+$r=1$, $c=0$ by the two charts $c=h/2$, $r=1-h^2+h^4u/(1+h^2)$ and
+$c=(1+h)/2$, $r=u/(h^2+2h+2)$, which encode $M_0,M_1\ge0$ and leave the
+margin $M_0(1-z_0)>0$, and has positive rational identities with $246$
+and $165$ terms in the two charts; its fourth control point is the value
+at $z=1$, which lies on $\mathsf S_Z=0$ and is positive by Step~4.  The
+four identities, $655$ positive rational terms in all, are frozen in
+\path{data/universal_right_sv_certificates.json}, which certifies the
+strict positivity of the Bernstein control coefficients $B_0$, $B_1$ (in
+both charts) and $B_2$ of the cleared $-Q$ cubic on $[z_0,1]$ under the
+margins $M_0,M_1,M_0(1-z_0)>0$; the verifier
+\path{scripts/universal_right_fold_proof.py} reconstructs them over
+$\mathbb Q$ without an optimizer and also checks the identities of
+Steps~1, 3 and~4.  Hence $-Q>0$ on the face, and by Step~3 on the whole
+sheet, the $\alpha_1$ end included for $k<k_0$.
+\end{proof}
+
+\bibliographystyle{plain}
+\bibliography{../references/references}
+
+\end{document}

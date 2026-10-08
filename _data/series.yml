@@ -234,3 +234,26 @@
       title: "The Nilpotent-Deviation Gradient Formula"
       url: /mathematics/2026/08/21/forbidden-directions-D5-gradient-formula/
       status: published
+
+
+- id: se2-geodesics
+  title: "Geodesics on SE(2)"
+  subtitle: "Beyond the shortest path: exact conjugate times, caustic geometry and inverse geodesic counts in one standard metric."
+  status: active
+  review_draft: true
+  question: "After a geodesic ceases to minimize, where does it focus and how many geodesics reach the same position and heading?"
+  outcome: "Three author manuscripts connect a Riccati bracket count, the geometry of folds and cusp seams, and an exact scalar inverse. The global incidence criterion retains five declared exclusions."
+  frontier: "Analytical control of excluded endpoint domains, effective asymptotic thresholds, and final article proof/novelty review."
+  grew_from: geometry-of-seeing
+  code: research/se2/
+  overview: /mathematics/2026/10/07/se2-geodesics-research-program/
+  verdicts:
+    - { h: "Times", v: confirmed, label: "manuscript bracket count; critical coalescence explicit" }
+    - { h: "Caustic", v: partial, label: "local geometry; global incidence open" }
+    - { h: "Inverse", v: confirmed, label: "exact scalar reconstruction in its stated chart" }
+    - { h: "Global count", v: pending, label: "excluded-domain arguments remain open" }
+  posts:
+    - part: 1
+      title: "Beyond the Shortest Path: Geodesics on SE(2)"
+      url: /mathematics/2026/10/07/se2-geodesics-research-program/
+      status: draft
