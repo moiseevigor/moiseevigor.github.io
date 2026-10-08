@@ -64,7 +64,7 @@ None of that is actually printed on the page.
            300° CCW from (308,323) to (344,261): large=1, sweep=0 -->
       <path d="M 380,323 L 308,323 A 72,72 0 1,0 344,261 Z" fill="#111"/>
     </svg>
-    <p style="font-family:'Source Sans 3',sans-serif; font-size:12px; color:#aaa; margin:16px 0 0;">
+    <p style="font-family:'Source Sans 3',sans-serif; font-size:12px; color:var(--text-muted); margin:16px 0 0;">
       Kanizsa (1955) — the white triangle does not exist
     </p>
   </div>
@@ -156,7 +156,7 @@ Colours encode the orientation angle on a $[0, \pi)$ hue wheel.
         <span class="v1-swatch" style="background:#e65100"></span>
         Maxwell pair
       </label>
-      <span style="margin-left:auto; font-size:12px; color:#888;">
+      <span style="margin-left:auto; font-size:12px; color:var(--text-muted);">
         Hover a cell:
       </span>
       <span id="v1-angle-display" style="font-family:var(--mono,monospace); font-size:12px; color:#1565c0;"></span>
@@ -354,7 +354,7 @@ direction the two horizontal moves cannot reach on their own.
     <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;
                 font-family:var(--sans);padding:6px 12px 10px;font-size:12.5px;">
       <label style="display:flex;align-items:center;gap:8px;flex:1;min-width:300px;">
-        <span style="white-space:nowrap;color:#444;">arc length s</span>
+        <span style="white-space:nowrap;color:var(--text-light);">arc length s</span>
         <input id="frenet-s-slider" type="range" min="0" max="400" value="0" step="1"
                style="flex:1;accent-color:#1565c0;"/>
         <span id="frenet-s-val" style="font-family:var(--mono);min-width:130px;
@@ -362,7 +362,7 @@ direction the two horizontal moves cannot reach on their own.
           s = 0.000
         </span>
       </label>
-      <label style="display:flex;align-items:center;gap:6px;color:#444;">
+      <label style="display:flex;align-items:center;gap:6px;color:var(--text-light);">
         curve:
         <select id="frenet-curve-select"
                 style="font-family:var(--mono);font-size:12px;padding:2px 6px;">
@@ -372,7 +372,7 @@ direction the two horizontal moves cannot reach on their own.
     </div>
     <svg id="fig-frenet" style="width:100%;height:460px;display:block;"></svg>
     <div id="frenet-readout-single"
-         style="font-family:var(--mono);font-size:12px;color:#444;
+         style="font-family:var(--mono);font-size:12px;color:var(--text-light);
                 padding:8px 14px 0;display:flex;gap:22px;flex-wrap:wrap;">
       <span>θ(s) = <span id="frenet-theta">+0.0°</span></span>
       <span>κ(s) = dθ/ds = <span id="frenet-kappa">+0.000</span> /unit</span>
@@ -380,7 +380,7 @@ direction the two horizontal moves cannot reach on their own.
       <span>Δθ = θ(s) − cell = <span id="frenet-deltatheta">+0.0°</span></span>
     </div>
     <div id="frenet-readout-pair"
-         style="font-family:var(--mono);font-size:12px;color:#444;
+         style="font-family:var(--mono);font-size:12px;color:var(--text-light);
                 padding:8px 14px 0;display:none;flex-wrap:wrap;gap:22px;">
       <span style="color:#e65100;font-weight:600;">curve A:</span>
       <span>θ_A = <span id="frenet-thetaA">+0.0°</span></span>
@@ -388,9 +388,9 @@ direction the two horizontal moves cannot reach on their own.
       <span style="margin-left:18px;color:#bf360c;font-weight:600;">curve B:</span>
       <span>θ_B = <span id="frenet-thetaB">+0.0°</span></span>
       <span>κ_B = <span id="frenet-kappaB">+0.000</span> /unit</span>
-      <span style="margin-left:18px;color:#444;font-weight:600;">
+      <span style="margin-left:18px;color:var(--text-light);font-weight:600;">
         θ_A − θ_B = <span id="frenet-pair-diff">0°</span>
-        <span style="font-style:italic;color:#888;">(mod π = same neuron line)</span>
+        <span style="font-style:italic;color:var(--text-muted);">(mod π = same neuron line)</span>
       </span>
     </div>
   </div>
@@ -546,7 +546,7 @@ psychophysics or cortical dynamics is an empirical question.
         <input type="range" id="geodesic-kmax-slider" min="20" max="195" value="100" step="5">
         <span class="ctrl-val" id="geodesic-kmax-val">1.00</span>
       </label>
-      <span style="font-size:12px; color:#888; margin-left:auto;">
+      <span style="font-size:12px; color:var(--text-muted); margin-left:auto;">
         $k\!&lt;\!1$ inflectional &nbsp;·&nbsp; $k\!=\!1$ borderline &nbsp;·&nbsp; $k\!&gt;\!1$ non-inflectional
       </span>
     </div>

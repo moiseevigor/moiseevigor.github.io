@@ -17,6 +17,9 @@
     <li><a href="/articles/" {% if page.url contains 'articles' %}class="active"{% endif %}>Articles</a></li>
     <li><a href="/archives/" {% if page.url contains 'archives' %}class="active"{% endif %}>Archives</a></li>
   </ul>
+  <button type="button" class="theme-toggle" aria-label="Dark mode" title="Toggle dark mode">
+    <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>
+  </button>
 </nav>
 
 <!-- ── Page content (each layout is responsible for its own d-header / d-article) ── -->
@@ -39,6 +42,28 @@
 </footer>
 
 <script src="/public/js/codeblock.js"></script>
+<script>
+/* Dark-mode toggle. An explicit click is stored; without one the page follows
+   the OS setting live. Fires `themechange` so canvas figures can repaint. */
+(function () {
+  var root = document.documentElement, btn = document.querySelector('.theme-toggle');
+  function apply(t) {
+    root.dataset.theme = t;
+    btn.setAttribute('aria-pressed', t === 'dark');
+    window.dispatchEvent(new Event('themechange'));
+  }
+  btn.setAttribute('aria-pressed', root.dataset.theme === 'dark');
+  btn.addEventListener('click', function () {
+    var t = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('theme', t); } catch (e) {}
+    apply(t);
+  });
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+    var s; try { s = localStorage.getItem('theme'); } catch (x) {}
+    if (!s) apply(e.matches ? 'dark' : 'light');
+  });
+}());
+</script>
 <script>
 /* Crossfade the article title into the sticky nav as the h1 slides under the
    48px bar: opacity tracks scroll progress, so it's never "both big and small". */

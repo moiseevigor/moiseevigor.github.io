@@ -50,25 +50,25 @@ beyond SE(2).
       <td style="padding:8px 12px; color:var(--text-muted,#777);">1</td>
       <td style="padding:8px 12px;"><a href="/mathematics/2026/04/25/geometry-of-seeing-visual-cortex-se2/">The Visual Cortex as a Contact Manifold</a></td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">SE(2), contact structure, Kanizsa</td>
-      <td style="padding:8px 12px; text-align:center;"><span style="background:#e8f5e9;color:#2e7d32;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">PUBLISHED</span></td>
+      <td style="padding:8px 12px; text-align:center;"><span style="background:var(--good-bg);color:var(--good);border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">PUBLISHED</span></td>
     </tr>
     <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
       <td style="padding:8px 12px; color:var(--text-muted,#777);">2</td>
       <td style="padding:8px 12px;"><a href="/mathematics/2026/04/28/geometry-of-seeing-elastica-jacobi/">Euler's Elastica and Jacobi Elliptic Functions</a></td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">sn, cn, dn, K(k²), elastica</td>
-      <td style="padding:8px 12px; text-align:center;"><span style="background:#e8f5e9;color:#2e7d32;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">PUBLISHED</span></td>
+      <td style="padding:8px 12px; text-align:center;"><span style="background:var(--good-bg);color:var(--good);border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">PUBLISHED</span></td>
     </tr>
     <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
       <td style="padding:8px 12px; color:var(--text-muted,#777);">3</td>
       <td style="padding:8px 12px;"><a href="/mathematics/2026/05/05/geometry-of-seeing-maxwell-strata/">Maxwell Strata: When Optimal Paths Fork</a></td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">discrete symmetries, first Maxwell time</td>
-      <td style="padding:8px 12px; text-align:center;"><span style="background:#e8f5e9;color:#2e7d32;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">PUBLISHED</span></td>
+      <td style="padding:8px 12px; text-align:center;"><span style="background:var(--good-bg);color:var(--good);border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">PUBLISHED</span></td>
     </tr>
     <tr>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">4</td>
       <td style="padding:8px 12px;"><a href="/mathematics/2026/05/15/geometry-of-seeing-cut-time-open-problem/">The Exact Cut Time on SE(2) — and the Open Problem Beyond It</a></td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">cut locus, conjugate time, conjecture</td>
-      <td style="padding:8px 12px; text-align:center;"><span style="background:#e8f5e9;color:#2e7d32;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">PUBLISHED</span></td>
+      <td style="padding:8px 12px; text-align:center;"><span style="background:var(--good-bg);color:var(--good);border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">PUBLISHED</span></td>
     </tr>
   </tbody>
 </table>
@@ -102,31 +102,31 @@ from the main parts.
       <td style="padding:8px 12px; color:var(--text-muted,#777);font-family:var(--mono);">A1</td>
       <td style="padding:8px 12px;"><a href="/mathematics/2026/05/01/geometry-of-seeing-A1-lie-groups/">Lie Groups, Lie Algebras, and the Exponential Map of SE(2)</a></td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">$\mathfrak{se}(2)$, brackets, $\exp$</td>
-      <td style="padding:8px 12px; text-align:center;"><span style="background:#e8f5e9;color:#2e7d32;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">PUBLISHED</span></td>
+      <td style="padding:8px 12px; text-align:center;"><span style="background:var(--good-bg);color:var(--good);border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">PUBLISHED</span></td>
     </tr>
     <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
       <td style="padding:8px 12px; color:var(--text-muted,#777);font-family:var(--mono);">A2</td>
       <td style="padding:8px 12px;"><a href="/mathematics/2026/05/02/geometry-of-seeing-A2-distributions-contact/">Distributions, Frobenius, and Contact Geometry</a></td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">Chow, contact, V1 horizontality</td>
-      <td style="padding:8px 12px; text-align:center;"><span style="background:#e8f5e9;color:#2e7d32;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">PUBLISHED</span></td>
+      <td style="padding:8px 12px; text-align:center;"><span style="background:var(--good-bg);color:var(--good);border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">PUBLISHED</span></td>
     </tr>
     <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
       <td style="padding:8px 12px; color:var(--text-muted,#777);font-family:var(--mono);">A3</td>
       <td style="padding:8px 12px;"><a href="/mathematics/2026/05/03/geometry-of-seeing-A3-pmp/">Calculus of Variations and the Pontryagin Maximum Principle</a></td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">Lie–Poisson on $\mathfrak{se}(2)^*$</td>
-      <td style="padding:8px 12px; text-align:center;"><span style="background:#e8f5e9;color:#2e7d32;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">PUBLISHED</span></td>
+      <td style="padding:8px 12px; text-align:center;"><span style="background:var(--good-bg);color:var(--good);border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">PUBLISHED</span></td>
     </tr>
     <tr style="border-bottom:1px solid var(--border,#e0e0e0);">
       <td style="padding:8px 12px; color:var(--text-muted,#777);font-family:var(--mono);">A4</td>
       <td style="padding:8px 12px;"><a href="/mathematics/2026/05/04/geometry-of-seeing-A4-jacobi-elliptic/">Jacobi Elliptic Functions, Elliptic Integrals, and the AGM</a></td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">$\mathrm{sn}, \mathrm{cn}, \mathrm{dn}, K(m)$</td>
-      <td style="padding:8px 12px; text-align:center;"><span style="background:#e8f5e9;color:#2e7d32;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">PUBLISHED</span></td>
+      <td style="padding:8px 12px; text-align:center;"><span style="background:var(--good-bg);color:var(--good);border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">PUBLISHED</span></td>
     </tr>
     <tr>
       <td style="padding:8px 12px; color:var(--text-muted,#777);font-family:var(--mono);">A5</td>
       <td style="padding:8px 12px;"><a href="/mathematics/2026/05/05/geometry-of-seeing-A5-sr-exponential/">The Sub-Riemannian Exponential Map of SE(2)</a></td>
       <td style="padding:8px 12px; color:var(--text-muted,#777);">conjugate / cut / Maxwell</td>
-      <td style="padding:8px 12px; text-align:center;"><span style="background:#e8f5e9;color:#2e7d32;border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">PUBLISHED</span></td>
+      <td style="padding:8px 12px; text-align:center;"><span style="background:var(--good-bg);color:var(--good);border-radius:3px;padding:2px 8px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;">PUBLISHED</span></td>
     </tr>
   </tbody>
 </table>

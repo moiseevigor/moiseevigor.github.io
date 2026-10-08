@@ -623,9 +623,9 @@ on.
     135 states of the Dungey $\theta$-census (a vacuum field, so the type wall is
     untouchable — all radial, by Part 5's theorem). Dark blue/orange: the certified
     solar pair of the collider figure, whose two branches dive into the <span
-    style="color:#c62828;">fold wall $\det = 0$</span> from opposite sides and
+    style="color:#c62828;color:light-dark(#c62828,#f07070);">fold wall $\det = 0$</span> from opposite sides and
     annihilate — the only way a null count can change in the interior of a smooth
-    divergence-free family. The <span style="color:#6a1b9a;">type wall
+    divergence-free family. The <span style="color:#6a1b9a;color:light-dark(#6a1b9a,#c08ae0);">type wall
     $\mathrm{disc} = 0$</span> is the other codimension-1 crossing (radial ↔ spiral
     conversion); crossing it needs the field-aligned current the force-free theorem
     demands. Stability = distance from the walls. <em>B:</em> the Dungey census versus

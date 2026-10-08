@@ -71,7 +71,7 @@ layout: default
     <ol style="list-style:none;padding-left:0;">
       {% for item in series_data.appendices %}
       <li class="{% if item.part == page.series_part %}current{% elsif item.status == 'upcoming' %}upcoming{% endif %}" style="padding-left:1em;">
-        <span style="font-family:var(--mono);font-size:11px;color:#888;">{{ item.part }}.</span>
+        <span style="font-family:var(--mono);font-size:11px;color:var(--text-muted);">{{ item.part }}.</span>
         {% if item.status == 'published' and item.part != page.series_part %}
           <a href="{{ item.url }}">{{ item.title }}</a>
         {% elsif item.status == 'draft' and item.part != page.series_part %}

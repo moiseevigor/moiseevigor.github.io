@@ -28,6 +28,17 @@
     {%- assign social_image = site.url | append: page.image -%}
   {%- endif -%}
 
+  <!-- Theme: set data-theme before first paint (stored choice, else OS
+       preference) so dark readers never see a white flash. The nav toggle
+       in default.html flips and stores it; see the dark tokens in site.css. -->
+  <script>
+    (function () {
+      var t; try { t = localStorage.getItem('theme'); } catch (e) {}
+      document.documentElement.dataset.theme = t ||
+        (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    }());
+  </script>
+
   <title>{{ full_title }}</title>
   <meta name="description"            content="{{ page_desc | escape }}">
   <link rel="canonical"              href="{{ canonical_url }}">

@@ -120,7 +120,7 @@ This makes them functions on the elliptic curve $y^2 = (1 - x^2)(1 - mx^2)$
         <input type="range" id="snm-m" min="1" max="98" value="50" step="1">
         <span class="ctrl-val" id="snm-m-val">0.50</span>
       </label>
-      <span style="margin-left:auto;font-size:12px;color:#888;">
+      <span style="margin-left:auto;font-size:12px;color:var(--text-muted);">
         Jacobi sn (blue), cn (orange), dn (green) as functions of $u$
       </span>
     </div>
@@ -247,8 +247,8 @@ produce the sn/cn/dn values.
         <span class="ctrl-val" id="agm-m-val">0.50</span>
       </label>
       <button id="agm-step" type="button" style="padding:4px 14px;font-family:var(--sans);font-size:13px;border:1px solid #1565c0;background:#1565c0;color:#fff;border-radius:4px;cursor:pointer;">step</button>
-      <button id="agm-reset" type="button" style="padding:4px 14px;font-family:var(--sans);font-size:13px;border:1px solid #888;background:#fff;color:#444;border-radius:4px;cursor:pointer;">reset</button>
-      <span style="margin-left:auto;font-size:12px;color:#888;">
+      <button id="agm-reset" type="button" style="padding:4px 14px;font-family:var(--sans);font-size:13px;border:1px solid #888;background:#fff;color:var(--text-light);border-radius:4px;cursor:pointer;">reset</button>
+      <span style="margin-left:auto;font-size:12px;color:var(--text-muted);">
         Click step; AGM converges quadratically
       </span>
     </div>

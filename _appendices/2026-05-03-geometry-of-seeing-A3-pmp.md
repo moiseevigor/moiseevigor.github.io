@@ -100,7 +100,7 @@ just a slogan.
         <input type="range" id="var-n" min="1" max="6" value="2" step="1">
         <span class="ctrl-val" id="var-n-val">2</span>
       </label>
-      <span style="margin-left:auto;font-size:12px;color:#888;">
+      <span style="margin-left:auto;font-size:12px;color:var(--text-muted);">
         Lagrangian $L = \tfrac12 \dot q^2$; straight line is the geodesic
       </span>
     </div>
@@ -328,7 +328,7 @@ equivalent to the pendulum.
           <option value="all" selected>level sets (libration / sep / rotation)</option>
         </select>
       </label>
-      <span style="margin-left:auto;font-size:12px;color:#888;">
+      <span style="margin-left:auto;font-size:12px;color:var(--text-muted);">
         $\ddot\varphi + \sin\varphi = 0$, energy $E = \tfrac12\dot\varphi^2 - \cos\varphi$
       </span>
     </div>
@@ -390,7 +390,7 @@ $\kappa = 2k\,\mathrm{cn}(s\mid k^2)$ family of Part&nbsp;2 ("Three Families via
         <input type="range" id="costate-c" min="20" max="160" value="100" step="1">
         <span class="ctrl-val" id="costate-c-val">1.00</span>
       </label>
-      <span style="margin-left:auto;font-size:12px;color:#888;">
+      <span style="margin-left:auto;font-size:12px;color:var(--text-muted);">
         Left: costate on cylinder.  Right: reconstructed plane curve.
       </span>
     </div>

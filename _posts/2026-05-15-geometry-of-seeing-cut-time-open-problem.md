@@ -169,7 +169,7 @@ point is the origin itself.
       <label>show geodesics
         <input type="checkbox" id="cut-geo" checked>
       </label>
-      <span style="margin-left:auto;font-size:12px;color:#888;">
+      <span style="margin-left:auto;font-size:12px;color:var(--text-muted);">
         each elastica ends at its mirror tie $s = 4K(k^2)$
       </span>
     </div>

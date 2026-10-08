@@ -298,7 +298,7 @@ degenerate into circles of radius $1/2$ in the rescaled arc length (high-energy 
         k = <span class="ctrl-val" id="k-val">0.70</span>
         <input type="range" id="k-slider" min="1" max="98" value="70">
       </label>
-      <span style="margin-left:auto;font-size:12px;color:#888;">
+      <span style="margin-left:auto;font-size:12px;color:var(--text-muted);">
         Left: κ(s).  Right: projected curve (x, y).
       </span>
     </div>
@@ -496,7 +496,7 @@ A few landmarks worth noting:
 <figure class="l-middle">
   <div class="fig-box">
     <div class="fig-controls">
-      <span style="font-size:12px;color:#555;">
+      <span style="font-size:12px;color:var(--text-light);">
         Blue: inflectional (k = 0.3, 0.6, 0.9) &nbsp;·&nbsp;
         Red: borderline elastica &nbsp;·&nbsp;
         Green: non-inflectional (m = 0.3, 0.6, 0.9)

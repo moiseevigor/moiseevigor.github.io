@@ -1,6 +1,8 @@
 import {compose,maneuver,integrate,pendulumEnergy,plotScale as scale} from './overview-model.js?v=20261008-published1';
 import * as M from './se2math.js?v=20261008-review2';
-const colors={ink:'#25313c',gray:'#65727e',grid:'#dee3e7',blue:'#1565c0',orange:'#c8501a',purple:'#6b4fa3'};
+const palette={light:{ink:'#25313c',gray:'#65727e',grid:'#dee3e7',blue:'#1565c0',orange:'#c8501a',purple:'#6b4fa3'},
+  dark:{ink:'#e3e5e8',gray:'#99a1ab',grid:'#2d3239',blue:'#7ab0ff',orange:'#ff8a50',purple:'#b49be0'}};
+let colors=palette.light; // re-read at every draw so the dark-mode toggle repaints
 const wrap=a=>((a+Math.PI)%(2*Math.PI)+2*Math.PI)%(2*Math.PI)-Math.PI;
 const format=(x,n=3)=>(Math.abs(x)<0.5*10**(-n)?0:x).toFixed(n);
 function frame(canvas) {
@@ -27,9 +29,10 @@ class OverviewFigure {
       if(input.dataset.param==='velocity'){this.state.family='custom';el.querySelector('[data-param=family]').value='custom';}this.schedule();});});
     new ResizeObserver(()=>{if(this.visible)this.schedule();}).observe(this.canvas);
     new IntersectionObserver(entries=>{this.visible=entries[0].isIntersecting;if(this.visible)this.schedule();},{rootMargin:'120px'}).observe(el);
+    window.addEventListener('themechange',()=>{if(this.visible)this.schedule();});
   }
   schedule(){cancelAnimationFrame(this.pending);this.pending=requestAnimationFrame(()=>this.draw());}
-  draw(){const {g,W,H}=frame(this.canvas);if(W<80)return;
+  draw(){colors=palette[document.documentElement.dataset.theme]||palette.light;const {g,W,H}=frame(this.canvas);if(W<80)return;
     this.el.querySelectorAll('[data-value]').forEach(o=>{const key=o.dataset.value;o.textContent=key==='angle'?`${this.state[key]}°`:format(this.state[key],2);});
     try{this[this.mode](g,W,H);this.el.dataset.ready='true';}catch(error){this.readout.textContent='The illustration could not load. The equations remain available in the text.';this.el.dataset.error=error.message;}
   }

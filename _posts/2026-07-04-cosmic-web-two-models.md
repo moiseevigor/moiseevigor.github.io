@@ -760,10 +760,11 @@ scoped in the
 </div><!-- /.l-body -->
 
 <style>
-.cw-ctl { font-size: 0.85rem; color: #555; }
+.cw-ctl { font-size: 0.85rem; color: light-dark(#555, #b6bcc4); }
 .cw-btn {
   font-size: 0.8rem; padding: 2px 10px; margin: 0 1px; cursor: pointer;
-  border: 1px solid #bbb; background: #fafafa; border-radius: 3px; color: #444;
+  border: 1px solid light-dark(#bbb, #3a4048); background: light-dark(#fafafa, #1a1d22);
+  border-radius: 3px; color: light-dark(#444, #b6bcc4);
 }
 .cw-btn.active { background: #2b6cb0; color: #fff; border-color: #2b6cb0; }
 .cw-tip {

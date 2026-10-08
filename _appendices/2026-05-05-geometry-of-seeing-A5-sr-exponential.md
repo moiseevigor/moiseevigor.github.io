@@ -157,7 +157,7 @@ Three takeaways:
         <input type="range" id="exp-T" min="20" max="800" value="200" step="5">
         <span class="ctrl-val" id="exp-T-val">2.00</span>
       </label>
-      <span style="margin-left:auto;font-size:12px;color:#888;">
+      <span style="margin-left:auto;font-size:12px;color:var(--text-muted);">
         pinned elastica endpoint from origin
       </span>
     </div>
@@ -295,7 +295,7 @@ the heart of Parts&nbsp;3–4.
         <input type="range" id="mx-T" min="10" max="120" value="50" step="1">
         <span class="ctrl-val" id="mx-T-val">5.00</span>
       </label>
-      <span style="margin-left:auto;font-size:12px;color:#888;">
+      <span style="margin-left:auto;font-size:12px;color:var(--text-muted);">
         γ_A: κ = +2k·cn — γ_B: κ = −2k·cn — coincidence requires y_A(s) = 0
       </span>
     </div>
@@ -377,7 +377,7 @@ be locally surjective along a critical curve.
         <input type="checkbox" id="conj-cusps" checked>
       </label>
       <button id="conj-play" type="button" style="padding:4px 14px;font-family:var(--sans);font-size:13px;border:1px solid #1565c0;background:#1565c0;color:#fff;border-radius:4px;cursor:pointer;">▶ play</button>
-      <span style="margin-left:auto;font-size:12px;color:#888;">
+      <span style="margin-left:auto;font-size:12px;color:var(--text-muted);">
         Faint trajectories sweep $k \in [-0.95, 0.95]$; the bold curve is $\mathcal W_T$
       </span>
     </div>

@@ -9,7 +9,7 @@ layout: stylesheet
 .highlight .c,
 .highlight .cm,
 .highlight .c1,
-.highlight .cs  { color: #5c6370; font-style: italic; }
+.highlight .cs  { color: #7f848e; font-style: italic; }  /* One Dark Pro comment: 4:1 on #1e2228 */
 .highlight .cp  { color: #5c6370; }
 .highlight .k,
 .highlight .kc,

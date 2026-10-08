@@ -148,8 +148,8 @@ because it kills the along-filament motion real gravity preserves (E8).
     <button class="fig-toggle active" id="tr-adh">adhesion (sticks)</button>
     <button class="fig-toggle" id="tr-za">Zel'dovich (sails through)</button>
   </div>
-  <div style="text-align:center; font-family:'Source Sans 3',sans-serif; font-size:12.5px; color:#555; margin-bottom:0.3em;">
-    early&nbsp;<input type="range" id="tr-D" min="0" max="120" value="88" style="width:210px; vertical-align:middle; accent-color:#1565c0;">&nbsp;collapsed &nbsp;<span style="color:#888;">(growth factor)</span>
+  <div style="text-align:center; font-family:'Source Sans 3',sans-serif; font-size:12.5px; color:var(--text-light); margin-bottom:0.3em;">
+    early&nbsp;<input type="range" id="tr-D" min="0" max="120" value="88" style="width:210px; vertical-align:middle; accent-color:#1565c0;">&nbsp;collapsed &nbsp;<span style="color:var(--text-muted);">(growth factor)</span>
   </div>
   <div id="cw-transport" style="text-align:center;"></div>
   <figcaption>

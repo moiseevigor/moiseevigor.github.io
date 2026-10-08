@@ -189,7 +189,7 @@ $A(t)$ is constant; SR geodesics generally have time-dependent optimal controls.
         <input type="range" id="osg-a3" min="-100" max="100" value="0" step="1">
         <span class="ctrl-val" id="osg-a3-val">+0.00</span>
       </label>
-      <span style="margin-left:auto;font-size:12px;color:#888;">
+      <span style="margin-left:auto;font-size:12px;color:var(--text-muted);">
         Same $(a_1, a_2, a_3)$ — two different groups, two different orbits
       </span>
     </div>
@@ -322,7 +322,7 @@ The Lie bracket is exactly the leading coefficient of that nudge.
       <label>show $O(\varepsilon^3)$ residuals
         <input type="checkbox" id="bracket-residual" checked>
       </label>
-      <span style="margin-left:auto;font-size:12px;color:#888;">
+      <span style="margin-left:auto;font-size:12px;color:var(--text-muted);">
         4-leg loop $+\varepsilon X, +\varepsilon Y, -\varepsilon X, -\varepsilon Y$ — same algebra coefficients, different groups
       </span>
     </div>
@@ -488,7 +488,7 @@ Appendix A3 derives the flow from the Pontryagin Maximum Principle (PMP).
         <input type="range" id="orbit-h3" min="-150" max="150" value="60" step="1">
         <span class="ctrl-val" id="orbit-h3-val">+0.60</span>
       </label>
-      <span style="margin-left:auto;font-size:12px;color:#888;">
+      <span style="margin-left:auto;font-size:12px;color:var(--text-muted);">
         Coadjoint orbit $\mathcal O_c$ on $\mathfrak{se}(2)^{\ast}$
       </span>
     </div>
