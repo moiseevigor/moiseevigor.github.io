@@ -65,3 +65,25 @@ Publication validation: 33 figure checks passed. The production Jekyll 3.9.2
 build passed; all four pages, home/Lab/Articles links, 94 local asset/page links,
 six manuscript hashes and both data assets were verified. Internal review files
 remain excluded. The same temporary dependency limitation recorded above applies.
+
+## Formula proofreading — 8 October 2026
+
+Reviewed the unified program and all three web companions against their manuscript
+snapshots. Fixed two accidental Markdown tables caused by absolute-value bars and
+inline derivative primes changed into curly quotes. Clarified normalized endpoint
+amplitudes, the transverse coordinate, the physical period, positive-level count
+hypotheses and the domain of the winding-zero asymptotic.
+
+All 172 formula strings survive Markdown unchanged and render with strict KaTeX
+0.16.9 without errors. The production build and browser checks pass; the three
+articles contain no tables and the program retains only its intended status table.
+Independent checks include five symbolic inverse identities, 12 Hamiltonian/
+variational conjugate cases, nine independently integrated inverse sources, and
+80-digit critical-contact checks in cells 1, 2 and 4. The 216-coefficient fold
+certificate was rechecked with exact fractions, including reconstruction/digest.
+
+Reproduction: `proofread-checks.py` (NumPy/SciPy/SymPy/mpmath) and
+`proofread-rendering.py SITE_OUTPUT KATEX_CJS` (the site's pinned KaTeX version).
+Results and source locators: `proofread-results-2026-10-08.json`. This is a bounded
+review of web equations and qualifications, not a complete proof audit, Lean
+rebuild or interval-grid replay. Canonical manuscript files remain untouched.
