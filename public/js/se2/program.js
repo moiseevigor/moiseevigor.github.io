@@ -158,7 +158,7 @@ class Figure {
     for (const t of ts) pts.push([t, count(t - 1e-9)], [t, count(t + 1e-9)]); pts.push([1.85, count(1.85)]);
     axes(g, s, W, H, 'radius R', 'rotating source count'); line(g, pts, s, C.geo, 2.5); if (!close) dot(g, s, [R, count(R)], C.conjugate, 6);
     for (const t of d.S.filter(t => t < 1.85)) { g.strokeStyle = C.cut; g.globalAlpha = .4; g.setLineDash([3, 4]); g.beginPath(); g.moveTo(s.x(t), s.y(0)); g.lineTo(s.x(t), s.y(14)); g.stroke(); g.setLineDash([]); g.globalAlpha = 1; }
-    this.readout.innerHTML = `<b>${close ? 'Near a threshold: consult the equality formula' : `${count(R)} rotating sources`}</b>${close ? '' : ' away from thresholds.'} Purple guides mark Sₙ. At Sₙ the seam contributes one source; the graph uses rounded thresholds and its vertical jumps do not display equality values. The full normal fiber also contains winding sources.`;
+    this.readout.innerHTML = `<b>${close ? 'Near a threshold: consult the equality formula.' : `${count(R)} rotating sources`}</b>${close ? '' : ' away from thresholds.'} Purple guides mark Sₙ. At Sₙ the seam contributes one source; the graph uses rounded thresholds and its vertical jumps do not display equality values. The full normal fiber also contains winding sources.`;
   }
   play() {
     this.playing = true; const b = this.el.querySelector('[data-action="play"]'); b.textContent = 'Pause'; b.setAttribute('aria-pressed', 'true'); let last;
