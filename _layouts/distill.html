@@ -142,6 +142,7 @@ layout: default
 }());
 </script>
 
+{% unless page.reference_style == 'bibliography' %}
 <script>
 /*
  * Relocate kramdown's bottom footnotes into margin sidenotes, so every distill
@@ -320,6 +321,7 @@ layout: default
   else window.addEventListener('load', init);
 }());
 </script>
+{% endunless %}
 
 <!-- ── Series navigation (prev / next) ── -->
 {% if page.series %}
