@@ -12,6 +12,7 @@ series: se2-geodesics
 series_title: "Geodesics on SE(2)"
 series_part: 1
 permalink: /mathematics/2026/10/07/se2-geodesics-research-program/
+image: /public/img/posts/se2-geodesics-program.svg
 published: true
 comments: false
 description: >
