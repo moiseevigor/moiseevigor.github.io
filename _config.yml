@@ -79,6 +79,7 @@ exclude:
   - "research/preferred-directions/artifacts"
   # Internal SE(2) review records and screenshots stay out of the public site.
   - "research/se2"
+  - "research/se2-overview"
 
 # Appendix pages: rendered at pinned permalinks but never part of site.posts,
 # so they stay out of pagination, archives, and feeds; reachable via the
