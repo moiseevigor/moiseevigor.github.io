@@ -18,7 +18,7 @@ layout: default
   {% assign crumb_first = crumb.posts | first %}
   {% assign crumb_part = page.series_part | append: '' | slice: 0 %}
   <div class="d-eyebrow"><a href="/lab/">Lab</a> › <a href="/lab/#{{ crumb_id }}">{{ crumb.title }}</a> ›
-    {% if page.program %}Formal article{% elsif "ABCDEFGHIJKLMNOPQRSTUVWXYZ" contains crumb_part %}Appendix {{ page.series_part }}{% elsif page.series_part == 1 %}Part 1 · the program{% else %}Part {{ page.series_part }} of {{ crumb.posts.size }} · <a href="{{ crumb_first.url }}">start at Part 1</a>{% endif %}</div>
+    {% if page.program %}{{ page.article_kind | default: "Formal article" }}{% elsif "ABCDEFGHIJKLMNOPQRSTUVWXYZ" contains crumb_part %}Appendix {{ page.series_part }}{% elsif page.series_part == 1 %}Part 1 · the program{% else %}Part {{ page.series_part }} of {{ crumb.posts.size }} · <a href="{{ crumb_first.url }}">start at Part 1</a>{% endif %}</div>
   {% elsif page.categories.size > 0 %}
   <div class="d-eyebrow">{{ page.categories | first | capitalize }}</div>
   {% endif %}

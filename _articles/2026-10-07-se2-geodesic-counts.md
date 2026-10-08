@@ -5,6 +5,7 @@ subtitle: "An exact scalar inverse, finite rotating fibers, infinite winding fam
 date: 2026-10-07 10:00:00 +0200
 categories: [articles]
 program: se2-geodesics
+article_kind: "Manuscript companion"
 tags: [SE2, sub-riemannian, geodesics, elliptic-functions]
 permalink: /articles/se2-geodesic-counts/
 published: true
@@ -52,6 +53,12 @@ $$\begin{aligned}
  (\sin\phi_1,\cos\phi_1)&=\frac1{\sqrt m}\left(\frac D{\sqrt H},g\right).
 \end{aligned}$$
 
+Here $F(\phi\mid m)$ and $E(\phi\mid m)$ are the real incomplete elliptic integrals
+
+$$F(\phi\mid m)=\int_0^\phi\frac{du}{\sqrt{1-m\sin^2u}},\qquad E(\phi\mid m)=\int_0^\phi\sqrt{1-m\sin^2u}\,du.$$
+
+Their complete values are $K(m)=F(\pi/2\mid m)$ and $E(m)=E(\pi/2\mid m)$; throughout, $m=k^2$ is the parameter, not the modulus.
+
 Equivalently, use $\phi_0=\operatorname{atan2}(z/\sqrt H,f)$ and $\phi_1=\operatorname{atan2}(D/\sqrt H,g)$, with the sine coordinate first. Choose representatives in $[0,2\pi)$, form $\psi=F(\phi_0\mid m)$ and $v_0=F(\phi_1\mid m)$, and set
 
 $$\begin{aligned}
@@ -64,7 +71,7 @@ Every intersection $N(z)=n\in\mathbb Z_{\ge0}$ reconstructs the source
 
 $$\left(\psi,\sqrt m,\sqrt m\,\delta+4n\sqrt m K(m),1\right).$$
 
-These exhaust the sources of that sign with nonzero transverse seam coordinate. Apply the same construction to $-X$ for $\varepsilon=-1$. The zero-transverse seam requires separate formulas; omitting it would lose actual sources, especially on symmetric rays.
+The source phase is taken modulo $4K$; phases separated by $2K$ generally represent different covectors. Equal travel time and modulus therefore do not identify two sources. These exhaust the sources of that sign with nonzero transverse seam coordinate. Apply the same construction to $-X$ for $\varepsilon=-1$. The zero-transverse seam requires separate formulas; omitting it would lose actual sources, especially on symmetric rays.
 
 ### Why this is exact
 
@@ -74,7 +81,7 @@ No division by the endpoint cosines is required. Their zeros therefore do not di
 
 </div>
 
-{% include se2-figure.html mode="inverse" kicker="Reconstruct and check forward" title="Explore a rotating fiber" caption="The nine-source example is recovered by the scalar chart and forward-checked at every render. The numerical search has a travel-time bound and a finite sampling strategy. Agreement for this example is evidence for the implementation, rather than a certificate for every possible target." %}
+{% include se2-figure.html mode="inverse" kicker="Reconstruct and check forward" title="Explore a rotating fiber" caption="The nine-source example is recovered by the scalar chart and forward-checked at every render. The numerical search includes a separate seam chart, a travel-time bound and a finite sampling strategy. Agreement for this example is evidence for the implementation, rather than a certificate for every possible target." %}
 
 <div class="l-body" markdown="1">
 
@@ -141,7 +148,7 @@ The critical scaling expansion has separate nondegeneracy clauses. Simultaneous 
 
 This manuscript is an author publication candidate with final proof, novelty and author review gates open. Its stored evidence includes symbolic identities, domain-specific interval certificates and independent Hamiltonian/variational oracles. Later bounded attacks tested the inverse and selected far-field predictions; absence of a found counterexample is supporting evidence, not a proof of completeness.
 
-The web figures use a tested floating-point module copied from the research explorer. The inverse figure reports its time bound and forward residual. The ray diagram uses rounded data at one fixed angle. The [snapshot manifest](/public/research/se2/se2-provenance.json) records the copied source and PDF hashes; the complete 75-page manuscript is linked above.
+The web figures use a tested floating-point module derived from the research explorer. The inverse figure reports its time bound and forward residual. The ray diagram uses rounded data at one fixed angle. The [snapshot manifest](/public/research/se2/se2-provenance.json) records the copied source and PDF hashes; the complete 75-page manuscript is linked above.
 
 Return to [the unified SE(2) program](/mathematics/2026/10/07/se2-geodesics-research-program/) for the question connecting times, caustics and counts. The published Maxwell and optimal-synthesis sources remain the basis for minimizing conclusions; this article's post-cut source counts use the broader declared object.
 

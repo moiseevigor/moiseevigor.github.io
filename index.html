@@ -19,7 +19,7 @@ page_class: home
       {% if post.series %}
       <a class="home-card-series-name" href="/lab/#{{ post.series }}">{{ post.series_title }}</a>
       {%- assign sdata = site.data.series | where: "id", post.series | first -%}
-      <span class="home-card-series-part">{% if sdata %}{{ sdata.posts.size }}&thinsp;parts{% if sdata.appendices %} · {{ sdata.appendices.size }}&thinsp;appx{% endif %}{% else %}Part {{ post.series_part }}{% endif %}</span>
+      <span class="home-card-series-part">{% if sdata %}{{ sdata.posts.size }}&thinsp;part{% if sdata.posts.size != 1 %}s{% endif %}{% if sdata.appendices %} · {{ sdata.appendices.size }}&thinsp;appx{% endif %}{% else %}Part {{ post.series_part }}{% endif %}</span>
       {% elsif post.categories.size > 0 %}
       <span class="home-card-cat">{{ post.categories | first | capitalize }}</span>
       {% endif %}

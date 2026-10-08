@@ -87,3 +87,26 @@ Reproduction: `proofread-checks.py` (NumPy/SciPy/SymPy/mpmath) and
 Results and source locators: `proofread-results-2026-10-08.json`. This is a bounded
 review of web equations and qualifications, not a complete proof audit, Lean
 rebuild or interval-grid replay. Canonical manuscript files remain untouched.
+
+## Entire published program review — 8 October 2026
+
+Read every section of all four published SE(2) pages and reviewed every figure,
+caption, formula, link, metadata label and source qualification. The prior formula
+pass did not exercise symmetric inverse fibers: those tests now reveal and repair
+two substantive omissions. The browser dropped zero-transverse seam sources and
+merged distinct Maxwell sources with equal time/modulus. Phase identity is modulo
+4K, and the seam requires its own short/long reconstruction. The R=1.45 ray now
+returns nine sources, seven on the seam, for both heading/spatial signs.
+
+Also corrected exact preset values, critical upper-endpoint detection, threshold
+readouts, companion/index labels, singular part counts, the cut-synthesis DOI,
+async initial ray rendering and cache/provenance versioning. The numerical module
+is now a reviewed derivative, with original and current hashes in the manifest.
+
+Evidence: 75 ray/branch-join cases; independent Hamiltonian/variational checks of
+27 inverse sources and 12 conjugate cases; five exact inverse identities; 187
+formulas; 109 local links/fragments; desktop and measured 375px narrow rendering.
+The equation tests have maximum endpoint error 2.64e-13. Details, full section
+coverage, severity-ranked findings and remaining boundaries are recorded in
+`program-review-2026-10-08.json`. The source manuscripts remain unchanged.
+This complete web review is not a complete manuscript proof certification.

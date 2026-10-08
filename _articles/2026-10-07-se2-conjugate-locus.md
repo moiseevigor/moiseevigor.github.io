@@ -5,6 +5,7 @@ subtitle: "From the kernel of the exponential map to folds, cusp seams, and a co
 date: 2026-10-07 10:00:00 +0200
 categories: [articles]
 program: se2-geodesics
+article_kind: "Manuscript companion"
 tags: [SE2, sub-riemannian, geodesics, elliptic-functions]
 permalink: /articles/se2-conjugate-locus/
 published: true
@@ -80,7 +81,7 @@ The small-modulus limit tends to the identity, while the separatrix limit leaves
 
 Article C reconstructs rotating sources from integer intersections of a target-dependent function $N$. A critical integer intersection is a singular source. This turns questions about incidences of conjugate sheets into questions about critical points and integer levels of $N$.
 
-The useful conditional predicate at an interior critical point is
+Primes below differentiate along the scalar inverse chart. The useful conditional predicate at an interior critical point is
 
 $$N''<0\qquad\text{or}\qquad N<\tfrac12\ \text{ and }\ R<L(m),$$
 
@@ -90,7 +91,7 @@ A locally certified low-level minimum is compatible with this statement. In fact
 
 ## What the interval run establishes
 
-The endpoint-coordinate box is
+For endpoint-amplitude lifts $\varphi_0,\varphi_1$, set $\mu=(\varphi_0+\varphi_1)/2$ and $\Delta\varphi=\varphi_1-\varphi_0$. Reflection and period symmetries reduce the midpoint to $\mu\in[0,\pi/2]$. The endpoint-coordinate box is
 
 $$0.02\le m\le0.98,\qquad 0\le\mu\le\pi/2,
 \qquad 0.02\le\Delta\varphi\le2\pi-0.02.$$

@@ -7,10 +7,10 @@ permalink: /articles/
 comments: false
 ---
 
-Long-form mathematical articles: complete statements, hypotheses, and proofs
-behind the blog series. A blog post shows the result and the experiment; the
-article carries the full derivation, the fine print, and an honest ledger of
-what is proven, what is measured, and what remains open.
+Mathematical articles and manuscript companions behind the blog programs.
+Companion pages explain selected results and their hypotheses; their linked
+manuscripts contain the complete statements and proofs. Each page distinguishes
+proved results, numerical evidence, and open questions.
 
 {% assign articles_sorted = site.articles | sort: "date" | reverse %}
 {% if articles_sorted.size > 0 %}

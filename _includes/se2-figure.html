@@ -2,19 +2,19 @@
 <div class="se2-figure-heading"><span>{{ include.kicker }}</span><h3>{{ include.title }}</h3></div>
 {% if include.mode == 'geodesic' or include.mode == 'brackets' %}
 <div class="se2-controls">
-<label>Modulus k <input aria-label="Modulus k" data-control="k" type="range" min="0.25" max="0.97" step="0.005" value="0.75"><output data-value="k">0.750</output></label>
-<label>Initial phase ψ/K <input aria-label="Initial phase in units of K" data-control="phase" type="range" min="0" max="2" step="0.01" value="0.6"><output data-value="phase">0.60</output></label>
+<label>Modulus k <input aria-label="Modulus k" data-control="k" type="range" min="0.25" max="0.97" step="any" value="0.75"><output data-value="k">0.750</output></label>
+<label>Initial phase ψ/K <input aria-label="Initial phase in units of K" data-control="phase" type="range" min="0" max="{% if include.mode == 'geodesic' %}4{% else %}2{% endif %}" step="0.01" value="0.6"><output data-value="phase">0.60</output></label>
 <button type="button" data-action="critical">Critical case: k₀, ψ = K</button>
 </div>
 {% elsif include.mode == 'caustic' %}
 <div class="se2-controls">
-<label>Modulus k <input aria-label="Caustic modulus k" data-control="k" type="range" min="0.25" max="0.97" step="0.005" value="0.75"><output data-value="k">0.750</output></label>
+<label>Modulus k <input aria-label="Caustic modulus k" data-control="k" type="range" min="0.25" max="0.97" step="any" value="0.75"><output data-value="k">0.750</output></label>
 <label>Sheet <select aria-label="Conjugate sheet" data-control="sheet"><option value="first">First conjugate point</option><option value="second">Second distinct conjugate point</option></select></label>
 </div>
 {% elsif include.mode == 'inverse' %}
 <div class="se2-controls">
-<label>Target <select aria-label="Inverse target preset" data-control="target"><option value="nine">Nine-source example</option><option value="forward">Forward-generated target</option><option value="near">Nearby target</option><option value="custom" disabled>Custom target</option></select></label>
-<label>Heading θ <input aria-label="Target heading" data-control="theta" type="range" min="-1.2" max="-0.4" step="0.01" value="-0.9"><output data-value="theta">−0.90</output></label>
+<label>Target <select aria-label="Inverse target preset" data-control="target"><option value="nine">Nine-source example</option><option value="forward">Forward-generated target</option><option value="ray">Symmetric ray · R = 1.45</option><option value="near">Nearby target</option><option value="custom" disabled>Custom target</option></select></label>
+<label>Heading θ <input aria-label="Target heading" data-control="theta" type="range" min="-1.2" max="-0.4" step="any" value="-0.9"><output data-value="theta">−0.90</output></label>
 <button type="button" data-action="reset">Reset target</button>
 </div>
 {% elsif include.mode == 'ray' %}
@@ -26,7 +26,7 @@
 {% if include.mode == 'geodesic' %}
 <div class="se2-controls se2-time">
 <button type="button" data-action="play" aria-pressed="false">Play geodesic</button>
-<label>Time p/K <input aria-label="Geodesic time in units of K" data-control="time" type="range" min="0" max="6" step="0.01" value="2.8"><output data-value="time">2.80</output></label>
+<label>Time p/K <input aria-label="Geodesic time in units of K" data-control="time" type="range" min="0" max="6" step="any" value="2.8"><output data-value="time">2.80</output></label>
 </div>
 {% endif %}
 <div class="se2-canvas-wrap"><canvas aria-label="{{ include.title }}" role="img" tabindex="0"></canvas></div>

@@ -8,7 +8,7 @@ This blog edition imports the standard left-invariant SE(2) research program fro
 - Three reader companions: `_articles/2026-10-07-se2-*.md`.
 - Complete manuscript PDFs and TeX snapshots: `public/research/se2/`.
 - Source/PDF/math hashes and audited scope: `public/research/se2/se2-provenance.json`.
-- Interactive numerical kernel: unchanged snapshot in `public/js/se2/se2math.js`.
+- Interactive numerical kernel: derived module in `public/js/se2/se2math.js`.
 - Figure UI: `public/js/se2/program.js`; shared markup in `_includes/se2-figure.html`.
 - Numerical figure checks: `node research/se2/check-figures.mjs`.
 
@@ -33,7 +33,9 @@ as a fifth excluded set. This domain change does not prove them. The explorer's
 summary counters were stale; the snapshot manifest uses the actual audit JSON.
 The current PDFs have 16, 31 and 75 pages, superseding older registry descriptions.
 
-No manuscript proof is changed by this web adaptation. The 13-hypothesis Lean
+No manuscript proof is changed by this web adaptation. The browser kernel now
+includes reviewed corrections for phase-aware source identity, seam reconstruction
+and critical endpoint detection; origin and current hashes are in the manifest. The 13-hypothesis Lean
 reduction is reported from the current source record, not freshly rebuilt here.
 Literature reading/edition limits and manuscript submission gates remain in force.
 Web publication does not imply journal peer review or submission readiness.
