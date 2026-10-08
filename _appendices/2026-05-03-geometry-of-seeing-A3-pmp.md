@@ -564,7 +564,7 @@ function drawVariation() {
 
   // Left: q(t) plot
   const xS = d3.scaleLinear().domain([0, 1]).range([m.l, split - m.r]);
-  const yS = d3.scaleLinear().domain([-0.4, 1.6]).range([H - m.b, m.t]);
+  const yS = d3.scaleLinear().domain([-Math.abs(eta)-0.1, 1+Math.abs(eta)+0.1]).range([H - m.b, m.t]);
 
   // Straight-line geodesic q(t) = t
   const tArr = d3.range(0, 1.001, 0.005);
@@ -599,7 +599,7 @@ function drawVariation() {
   const Svals = eArr.map(e => ({ e, S: 0.5 + 0.25 * (e * n * Math.PI) ** 2 }));
 
   const xE = d3.scaleLinear().domain([-1, 1]).range([split + m.l, W - m.r]);
-  const yE = d3.scaleLinear().domain([0, 30]).range([H - m.b, m.t]);
+  const yE = d3.scaleLinear().domain([0, 1.05*(0.5+0.25*(n*Math.PI)**2)]).range([H - m.b, m.t]);
 
   g.append('line').attr('x1', split + m.l).attr('x2', W - m.r)
     .attr('y1', yE(0.5)).attr('y2', yE(0.5)).attr('stroke', '#eee').attr('stroke-dasharray', '3,3');
@@ -607,11 +607,11 @@ function drawVariation() {
     .attr('font-family', 'Source Sans 3').attr('font-size', 11).attr('fill', '#888').text('S(η)');
 
   g.append('path')
-    .attr('d', d3.line().x(p => xE(p.e)).y(p => yE(Math.min(p.S, 30)))(Svals))
+    .attr('d', d3.line().x(p => xE(p.e)).y(p => yE(p.S))(Svals))
     .attr('fill', 'none').attr('stroke', '#1565c0').attr('stroke-width', 2);
   // Current point
   const Scur = 0.5 + 0.25 * (eta * n * Math.PI) ** 2;
-  g.append('circle').attr('cx', xE(eta)).attr('cy', yE(Math.min(Scur, 30))).attr('r', 4).attr('fill', '#1565c0');
+  g.append('circle').attr('cx', xE(eta)).attr('cy', yE(Scur)).attr('r', 4).attr('fill', '#1565c0');
   // Min point
   g.append('circle').attr('cx', xE(0)).attr('cy', yE(0.5)).attr('r', 4)
     .attr('fill', 'none').attr('stroke', '#b71c1c').attr('stroke-width', 1.5);
@@ -638,8 +638,7 @@ function drawPhase() {
   const g = d3.select(svg); g.selectAll('*').remove();
 
   const m = { t: 18, b: 36, l: 50, r: 30 };
-  const xS = d3.scaleLinear().domain([-Math.PI * 1.4, Math.PI * 1.4]).range([m.l, W - m.r]);
-  const yS = d3.scaleLinear().domain([-3, 3]).range([H - m.b, m.t]);
+  const {x:xS,y:yS}=equalPhaseScales([-Math.PI*1.4,Math.PI*1.4],[-3,3],[m.l,W-m.r],[H-m.b,m.t]);
 
   // Axes
   g.append('line').attr('x1', m.l).attr('x2', W - m.r)
@@ -657,12 +656,12 @@ function drawPhase() {
         const v = Math.sqrt(inner);
         top.push({ phi: p, dphi: v });
         bot.push({ phi: p, dphi: -v });
-      }
+      } else {top.push(null);bot.push(null);}
     });
     [top, bot].forEach(arr => {
       if (arr.length > 1) {
         g.append('path')
-          .attr('d', d3.line().x(p => xS(p.phi)).y(p => yS(p.dphi))(arr))
+          .attr('d', d3.line().defined(p=>p!==null).x(p => xS(p.phi)).y(p => yS(p.dphi))(arr))
           .attr('fill', 'none').attr('stroke', color).attr('stroke-width', 1.6)
           .attr('stroke-dasharray', dash || null);
       }
@@ -680,7 +679,7 @@ function drawPhase() {
 
   // Selected level
   plotLevel(E,
-    E < 0.99 ? '#1565c0' : (E < 1.02 ? '#b71c1c' : '#2e7d32'),
+    E < 1 ? '#1565c0' : (E === 1 ? '#b71c1c' : '#2e7d32'),
     '5,3');
 
   // Equilibria

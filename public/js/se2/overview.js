@@ -1,5 +1,5 @@
 import {compose,maneuver,integrate,pendulumEnergy,plotScale as scale} from './overview-model.js?v=20261008-published1';
-import * as M from './se2math.js?v=20261008-review2';
+import * as M from './se2math.js?v=20261008-review3';
 const palette={light:{ink:'#25313c',gray:'#65727e',grid:'#dee3e7',blue:'#1565c0',orange:'#c8501a',purple:'#6b4fa3'},
   dark:{ink:'#e3e5e8',gray:'#99a1ab',grid:'#2d3239',blue:'#7ab0ff',orange:'#ff8a50',purple:'#b49be0'}};
 let colors=palette.light; // re-read at every draw so the dark-mode toggle repaints
@@ -39,9 +39,11 @@ class OverviewFigure {
   motion(g,W,H){const {epsilon:e,progress}=this.state,end=maneuver(e),now=maneuver(e,progress),s=scale(box(end.points),[0,0,W,H]);axes(g,s);line(g,end.points,s,colors.grid,3);line(g,now.points,s,colors.blue,3);pose(g,s,now.q);text(g,'start',s.x(0)+10,s.y(0)+19);text(g,'end',s.x(end.q.x)-8,s.y(end.q.y)-15,colors.blue,'right');
     const stages=['Turn','Drive','Turn back','Reverse','Complete'],digits=e<.2?5:3;this.readout.textContent=`${stages[Math.min(4,Math.floor(progress))]} · current x = ${format(now.q.x,digits)}, y = ${format(now.q.y,digits)}, heading = ${format(now.q.theta)} rad. Full maneuver: sideways shift ${format(end.q.y,digits)}, horizontal remainder ${format(end.q.x,digits)}, total effort ${format(4*e)}.`;
   }
-  order(g,W,H){const a=this.state.angle*Math.PI/180,turn={x:0,y:0,theta:a},drive={x:1,y:0,theta:0},first=compose(turn,drive),second=compose(drive,turn),s=scale(box([first,second]),[0,0,W,H]);axes(g,s);line(g,[{x:0,y:0},first],s,colors.blue,3);line(g,[{x:0,y:0},second],s,colors.orange,3);pose(g,s,first,colors.blue);pose(g,s,second,colors.orange);
+  order(g,W,H){const a=this.state.angle*Math.PI/180,turn={x:0,y:0,theta:a},drive={x:1,y:0,theta:0},first=compose(turn,drive),second=compose(drive,turn),s=scale([-1.25,1.25,-1.25,1.25],[0,0,W,H]);axes(g,s);
+    line(g,Array.from({length:121},(_,i)=>({x:Math.cos(2*Math.PI*i/120),y:Math.sin(2*Math.PI*i/120)})),s,colors.grid,1);
+    pose(g,s,{x:0,y:0,theta:0});text(g,'start',s.x(0)+8,s.y(0)+18);line(g,[{x:0,y:0},first],s,colors.blue,3);line(g,[{x:0,y:0},second],s,colors.orange,3);pose(g,s,first,colors.blue);pose(g,s,second,colors.orange);
     text(g,'turn → drive',50,20,colors.blue);text(g,'drive → turn',190,20,colors.orange);
-    this.readout.textContent=`Turn then drive: (${format(first.x)}, ${format(first.y)}). Drive then turn: (1, 0). Both headings: ${this.state.angle}°. Both sequences cost ${format(1+Math.abs(a))}; neither sequence is claimed to be the shortest path to its own endpoint.`;
+    this.readout.textContent=`Turn then drive: (${format(first.x)}, ${format(first.y)}). Drive then turn: (1, 0). Both headings: ${this.state.angle}°. ${this.state.angle===0?'The two endpoints coincide. ':''}Both sequences cost ${format(1+Math.abs(a))}; neither sequence is claimed to be the shortest path to its own endpoint.`;
   }
   pendulum(g,W,H){const {velocity:c,time}=this.state;if(this.cache.c!==c)this.cache={c,path:integrate(1,c,10)};
     const path=this.cache.path,idx=Math.min(path.length-1,Math.round(time/10*(path.length-1))),selected=path.slice(0,idx+1),now=path[idx].v,E=pendulumEnergy(1,c),stack=W<560,v1=stack?[0,0,W,H/2]:[0,0,W/2,H],v2=stack?[0,H/2,W,H/2]:[W/2,0,W/2,H],s=scale([-Math.PI,Math.PI,-4.5,4.5],v1,true);axes(g,s,'γ modulo 2π','c');

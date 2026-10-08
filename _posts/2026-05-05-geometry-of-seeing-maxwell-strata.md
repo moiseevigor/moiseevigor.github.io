@@ -440,8 +440,7 @@ function drawSym() {
   const pad = { l: 44, r: 20, t: 20, b: 36 };
   const iW = W - pad.l - pad.r, iH = H - pad.t - pad.b;
 
-  const xSc = d3.scaleLinear([-Math.PI * 1.15, Math.PI * 1.15], [pad.l, pad.l + iW]);
-  const ySc = d3.scaleLinear([-1.7, 1.7], [pad.t + iH, pad.t]);
+  const {x:xSc,y:ySc}=equalPhaseScales([-Math.PI*1.15,Math.PI*1.15],[-1.7,1.7],[pad.l,pad.l+iW],[pad.t+iH,pad.t]);
 
   g.append('rect').attr('width', W).attr('height', H).attr('fill', '#fafafa');
 

@@ -18,7 +18,7 @@
       "pdf_sha256": "5f87086ed73493304b65696e8f038e404955824ca5f34762c913d8c9f454a175"
     }
   },
-  "browser_math_sha256": "a4b4c35c327ac70fdd28bacbc3b7b781679570bd9cfbe0c2f9afe15f39d1546b",
+  "browser_math_sha256": "d87ed3940289461fed5cff8053860d2eb056bd4c4d623a8a5bd0433cc31dfd67",
   "full_grid": {
     "cells": 38400,
     "validated": 38400,
@@ -50,8 +50,9 @@
     "changes": [
       "retain distinct 4K source phases in Maxwell pairs",
       "add bounded zero-transverse seam reconstruction",
-      "use exact critical cell times including the display endpoint"
+      "use exact critical cell times including the display endpoint",
+      "retain analytical p=2nK conjugate zeros for odd-K source phases at display endpoints"
     ],
-    "cache_version": "20261008-review2"
+    "cache_version": "20261008-review3"
   }
 }

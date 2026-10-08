@@ -1,7 +1,7 @@
 // Reading figures for the SE(2) program. Numerical illustrations, never certificates.
 // The mathematical module is derived from the research explorer; web-review
 // corrections and both origin/current hashes are recorded in the snapshot manifest.
-import * as M from './se2math.js?v=20261008-review2';
+import * as M from './se2math.js?v=20261008-review3';
 const TAU = 2 * Math.PI;
 const PALETTE = {
   light: { ink: '#25313c', muted: '#65727e', rule: '#dee3e7', geo: '#1565c0', conjugate: '#c8501a', cut: '#6b4fa3', green: '#2d8061' },
@@ -109,10 +109,11 @@ class Figure {
       this.cache = { key, c, roots, points, box: bounds(points) };
     }
     const { roots, points, box, c } = this.cache, s = scale(box, W, H); axes(g, s, W, H); line(g, points, s, C.geo, 1.5, .2);
-    const current = points.slice(0, Math.floor(time / 6 * 400) + 1); line(g, current, s, C.geo, 2.5);
+    const q = M.expC2(psi, k, 2 * k * time * K);
+    const current = points.slice(0, Math.floor(time / 6 * 400) + 1); current.push([q.x, q.y]); line(g, current, s, C.geo, 2.5);
     const cut = M.expC2(psi, k, 2 * k * c.p0); dot(g, s, [cut.x, cut.y], C.cut, 5);
     for (const p of roots.filter(p => p <= time * K + 1e-8)) { const q = M.expC2(psi, k, 2 * k * p); dot(g, s, [q.x, q.y], C.conjugate, 4); }
-    const q = M.expC2(psi, k, 2 * k * time * K); pose(g, s, q);
+    pose(g, s, q);
     text(g, 'path', W - 125, 20, C.geo); text(g, 'cut', W - 80, 20, C.cut); text(g, 'conjugate', W - 125, 38, C.conjugate);
     this.readout.innerHTML = `<b>t = ${f(2 * k * time * K)}</b> · cut: p/K = ${f(c.p0 / K)} · first conjugate: p/K = ${roots.length ? f(roots[0] / K) : 'unresolved'} · heading θ = ${f(q.theta)}. Driving may reverse; only sideways motion is forbidden.`;
   }

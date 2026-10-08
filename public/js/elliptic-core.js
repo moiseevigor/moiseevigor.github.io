@@ -110,3 +110,14 @@ function labelPlaneAxes(g, xEnd, y0, x0, yTop) {
   g.append('text').attr('x', xEnd - 2).attr('y', y0 - 4).attr('text-anchor', 'end').attr('style', st).text('x');
   g.append('text').attr('x', x0 + 5).attr('y', yTop + 9).attr('style', st).text('y');
 }
+
+// Equal data-unit phase axes, fitted inside the given panel without changing
+// the specified angular or velocity domains.
+function equalPhaseScales(xDomain,yDomain,xRange,yRange) {
+  const s=Math.min((xRange[1]-xRange[0])/(xDomain[1]-xDomain[0]),
+    (yRange[0]-yRange[1])/(yDomain[1]-yDomain[0]));
+  const cx=(xRange[0]+xRange[1])/2,cy=(yRange[0]+yRange[1])/2;
+  const w=s*(xDomain[1]-xDomain[0]),h=s*(yDomain[1]-yDomain[0]);
+  return {x:d3.scaleLinear(xDomain,[cx-w/2,cx+w/2]),
+    y:d3.scaleLinear(yDomain,[cy+h/2,cy-h/2])};
+}

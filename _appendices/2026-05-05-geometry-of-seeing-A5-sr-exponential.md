@@ -373,7 +373,7 @@ be locally surjective along a critical curve.
       <label>show ghost wavefronts
         <input type="checkbox" id="conj-ghost" checked>
       </label>
-      <label>show cusp markers
+      <label>show sampled bend markers
         <input type="checkbox" id="conj-cusps" checked>
       </label>
       <button id="conj-play" type="button" style="padding:4px 14px;font-family:var(--sans);font-size:13px;border:1px solid #1565c0;background:#1565c0;color:#fff;border-radius:4px;cursor:pointer;">▶ play</button>
@@ -397,23 +397,16 @@ be locally surjective along a critical curve.
       <li>at $T \approx \pi$ it lengthens and starts to flatten;</li>
       <li>around $T \approx 2\pi$ — the smallest period $4K(0)$ in the swept
         family (the near-straight $k \to 0$ curves) — the first
-        <em>cusps appear</em> at the corners of the wavefront (red rings, found
-        by a turning-angle heuristic): fold points of this slice of the
-        <em>elastica</em> family, the planar shadow of that problem's conjugate
-        points — the free
+        <em>sharp bends become visible</em> in the sampled endpoint slice (red rings, found
+        by a turning-angle heuristic): sharp bends in this sampled one-parameter planar slice. These rings do not certify a cusp or a conjugate point; that requires the differential of the full endpoint map. The free
         SR oscillating-pendulum ($C_1$) geodesics have none (Sachkov 2010, Thm 2.1);</li>
       <li>as $T$ grows the wavefront self-intersects: at those crossings two
-        different trajectories reach the same plane point with equal length
-        (a Maxwell point in $\mathrm{SE}(2)$ only if the headings agree too,
-        as for the mirror pair of Figure A5.2).</li>
+        different curves reach the same plane point at equal spatial arclength. This alone does not give a Maxwell point: the headings and the cost for the chosen variational problem must also agree. The mirror pair of Figure A5.2 has the required symmetry, but this diagram does not test arbitrary crossings.</li>
     </ol>
     <em>Axes:</em> the plane $(x, y)$ ($x$ right, $y$ up, origin at the black dot,
     faint lines the axes), dimensionless in units of $\ell$; no tick axes — the scale
     bar (bottom right) gives the length scale and rescales as $T$ grows.
-    Press <em>play</em> to animate $T$ continuously.  The four-fold
-    astroid-like cusp pattern is the plane caustic of the elastica family —
-    Euler's elastic problem does develop conjugate points, even though the free
-    SR oscillating-pendulum ($C_1$) geodesics never do.
+    Press <em>play</em> to animate $T$ continuously.  This is a slice of endpoints of pinned elastica at fixed spatial arclength, not an SR distance sphere or a computed conjugate locus. Euler's elastic problem has its own conjugate-point theory; the free SR oscillating-pendulum ($C_1$) geodesics have no conjugate points.
   </figcaption>
 </figure>
 
@@ -427,9 +420,10 @@ Figure A5.1 is, modulo cosmetics, the same family of curves as
 Dubins-visual-cortex page.  The two visualisations share the same
 integration routine (`integrateElastica` in `elliptic-core.js`) and the
 same colour palette.  The difference is that this appendix interprets
-the curves as the SR exponential map, isolates the Maxwell pair, and
-draws the conjugate locus as a wavefront — the structures Parts&nbsp;3 and 4
-of the blog series develop.
+the curves as pinned-elastica endpoint illustrations, isolates the mirror pair, and
+shows a fixed-arclength endpoint slice. The slice illustrates endpoint geometry;
+it does not compute a conjugate locus. Parts&nbsp;3 and 4 develop the Maxwell and
+cut-time mechanisms separately.
 
 The Dubins-back-wheel cuspidal trajectories of the elliptic project
 (<a href="https://moiseevigor.github.io/elliptic/examples/dubins-visual-cortex/">
@@ -620,7 +614,7 @@ function separatrixGeodesic(T, N) {
   let x = 0, y = 0, theta = 0;
   const pts = [{ x, y, theta, s: 0 }];
   for (let i = 0; i < N; i++) {
-    const s = i * ds - T / 2;
+    const s = i * ds;
     const k1 = 2 / Math.cosh(s + ds / 2);
     const tmid = theta + 0.5 * k1 * ds;
     x += Math.cos(tmid) * ds;
@@ -669,7 +663,15 @@ function drawExpMap() {
   const svg = document.getElementById('fig-expmap');
   if (!svg) return;
   const family = document.getElementById('exp-family').value;
-  const kVal = parseFloat(document.getElementById('exp-k').value) / 100;
+  const kInput=document.getElementById('exp-k');
+  kInput.disabled=family==='separatrix';
+  kInput.min=family==='noninflectional'?'101':'5';
+  kInput.max=family==='noninflectional'?'195':'99';
+  let kVal=parseFloat(kInput.value)/100;
+  if(family==='separatrix')kVal=1;
+  else if(family==='inflectional')kVal=Math.max(.05,Math.min(.99,kVal));
+  else kVal=Math.max(1.01,Math.min(1.95,kVal));
+  if(family!=='separatrix')kInput.value=String(Math.round(100*kVal));
   const T = parseFloat(document.getElementById('exp-T').value) / 100;
   document.getElementById('exp-k-val').textContent = kVal.toFixed(2);
   document.getElementById('exp-T-val').textContent = T.toFixed(2);
@@ -877,7 +879,7 @@ function drawMaxwell() {
       .attr('stroke', '#b71c1c').attr('stroke-width', 1.5).attr('stroke-dasharray', '4,3');
     g.append('circle').attr('cx', xR2(firstZero)).attr('cy', yR2(0)).attr('r', 4)
       .attr('fill', '#b71c1c');
-    g.append('text').attr('x', xR2(firstZero) + 6).attr('y', margin.t + 22)
+    g.append('text').attr('x', xR2(firstZero) - 6).attr('y', margin.t + 22).attr('text-anchor','end')
       .attr('font-family', 'JetBrains Mono').attr('font-size', 11).attr('fill', '#b71c1c')
       .text(`mirror tie @ s = ${firstZero.toFixed(3)}`);
   } else {
@@ -1081,7 +1083,7 @@ function drawConjugate() {
       g.append('text').attr('x', W - margin.r - 4).attr('y', margin.t + 12)
         .attr('text-anchor', 'end')
         .attr('font-family', 'JetBrains Mono').attr('font-size', 11).attr('fill', '#b71c1c')
-        .text(`${cusps.length} cusp${cusps.length === 1 ? '' : 's'} on wavefront`);
+        .text(`${cusps.length} sampled sharp bends (heuristic)`);
     }
   }
 
@@ -1110,14 +1112,15 @@ function drawConjugate() {
 
 // Animate the wavefront forming
 function animateConjugate(now) {
-  if (!conjState.playing) return;
-  const sl = document.getElementById('conj-T');
-  const cur = parseFloat(sl.value) / 10;
-  const speed = 0.04;          // T increase per frame at 60Hz
-  const next = cur > conjState.sMax * 0.97 ? 0.3 : cur + speed;
-  sl.value = String(Math.round(next * 10));
-  drawConjugate();
-  conjState.raf = requestAnimationFrame(animateConjugate);
+  if(!conjState.playing)return;
+  const sl=document.getElementById('conj-T');
+  if(conjState.lastFrame!==undefined) {
+    conjState.playTime+=Math.min(now-conjState.lastFrame,100)/1000*0.6;
+    if(conjState.playTime>conjState.sMax)conjState.playTime=.2;
+    sl.value=String(Math.round(conjState.playTime*10));drawConjugate();
+  }
+  conjState.lastFrame=now;
+  conjState.raf=requestAnimationFrame(animateConjugate);
 }
 
 // ── Boot ─────────────────────────────────────────────────────────
@@ -1142,6 +1145,8 @@ function wire() {
       conjState.playing = !conjState.playing;
       playBtn.textContent = conjState.playing ? '⏸ pause' : '▶ play';
       if (conjState.playing) {
+        conjState.playTime=parseFloat(document.getElementById('conj-T').value)/10;
+        conjState.lastFrame=undefined;
         conjState.raf = requestAnimationFrame(animateConjugate);
       } else if (conjState.raf) {
         cancelAnimationFrame(conjState.raf);

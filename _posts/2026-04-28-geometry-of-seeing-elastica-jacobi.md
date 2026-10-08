@@ -879,8 +879,7 @@ function drawPhasePortrait() {
   const iW = W - pad.l - pad.r;
   const iH = H - pad.t - pad.b;
 
-  const xSc = d3.scaleLinear([-Math.PI * 2.2, Math.PI * 2.2], [pad.l, pad.l + iW]);
-  const ySc = d3.scaleLinear([-2.6, 2.6], [pad.t + iH, pad.t]);
+  const {x:xSc,y:ySc}=equalPhaseScales([-Math.PI*2.2,Math.PI*2.2],[-2.8,2.8],[pad.l,pad.l+iW],[pad.t+iH,pad.t]);
 
   g.append('rect').attr('width', W).attr('height', H).attr('fill', '#fafafa');
 

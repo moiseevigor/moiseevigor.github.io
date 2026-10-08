@@ -1076,7 +1076,7 @@ function drawV1() {
  */
 const K_HI = 1.95;
 const N_CURVES = 22;
-const SEP_EPS = 0.015;
+const SEP_EPS = 1e-12;
 
 function elasticaForK(k) {
   if (k < 1 - SEP_EPS)       return elasticaInflectional(k, 500);
@@ -1174,8 +1174,8 @@ function drawGeodesicFamily() {
   const plot = g.append('g').attr('class', 'geodesic-plot');
 
   // Centre/baseline for the plot
-  const xOff = PAD.l + innerW * 0.34;       // origin slightly left of centre
-  const yOff = PAD.t + innerH * 0.35;   // moved 20 percentage-points higher
+  let xOff = PAD.l + innerW * 0.34;       // origin slightly left of centre
+  let yOff = PAD.t + innerH * 0.35;   // moved 20 percentage-points higher
                                         // so the long inflectional curls
                                         // hanging downward don't get clipped
 
@@ -1208,6 +1208,8 @@ function drawGeodesicFamily() {
     const xRange = Math.max(0.5, xExt[1] - xExt[0]);
     const yRange = Math.max(0.5, yExt[1] - yExt[0]);
     const scale = Math.min(innerW / xRange, innerH / yRange) * 0.85;
+    xOff=PAD.l+innerW/2-(xExt[0]+xExt[1])/2*scale;
+    yOff=PAD.t+innerH/2+(yExt[0]+yExt[1])/2*scale;
 
     // Anchor every curve so each starts at (xOff, yOff)
     curves.forEach(({ k, pts }) => {

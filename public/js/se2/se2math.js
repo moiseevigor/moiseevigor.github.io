@@ -146,6 +146,12 @@ export function conjugateTimes(psi, k, pmax, ngrid = 4000) {
     }
   }
   if (vals.length && vals[vals.length - 1][1] === 0) out.push({ p: pmax, touch: false });
+  // If psi is an odd multiple of K, p=2nK is an exact zero for every k:
+  // sn(p)=0 makes alpha=0 and cn(psi+p)=0 kills the beta term.
+  // Keep these zeros at the display endpoint without relying on exact floating equality.
+  if (Math.min(phase, 2 * K - phase) < 1e-12 * K)
+    for (let n = 1; 2*n*K <= pmax; n++) out.push({p:2*n*K,touch:true});
+  out.sort((a,b)=>a.p-b.p);
   const roots = [];
   for (const r of out) if (!roots.some(q => Math.abs(q - r.p) < 1e-6 * pmax)) roots.push(r.p);
   return roots;

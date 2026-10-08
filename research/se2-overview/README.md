@@ -105,3 +105,27 @@ matching the spatial panels. This remains true when the panels stack on mobile.
 The portrait retains the principal angular bounds [-pi,pi] and fits a centered
 plot rectangle to the viewport. Spatial panels may expand their bounds; neither
 mode stretches the axes independently. The user requests equal axes as the default for plots generally.
+
+## Plot correction release — 9 October 2026
+
+The motion-order experiment now keeps a fixed frame and identifies coincident
+endpoints at zero angle. The shared rotating flow ends its visible line at the
+exact selected pose and retains analytical odd-K conjugate zeros at display
+boundaries. The browser kernel hash and cache version are updated together.
+
+The linked Geometry of Seeing figures correct reachability direction and final
+pose, phase-portrait gaps and equal scales, hidden action clipping, family
+parameter clamping, separatrix starting phase, and elapsed-time playback.
+Heuristic wavefront bend markers are no longer described as certified conjugate
+points. The family fan and distribution camera fit their actual bounds.
+
+`node research/se2-overview/check-plot-regressions.mjs` adds 34 regression cases
+and syntax checks for all nine legacy inline figure scripts. The existing model,
+figure, and ray/join checks remain applicable. Five canonical Hamiltonian
+integrations, 240 independent SciPy elliptic comparisons, and three elastica
+mirror meetings were recomputed during the preceding audit. These bounded checks
+do not certify arbitrary-target inversion or prove new manuscript theorems.
+
+Remaining older SVG label clipping on narrow screens, the A3 radius-readout
+ambiguity, and long-history AGM iteration numbering are outside this correction
+patch. No full-series mobile visual-QA claim is made.

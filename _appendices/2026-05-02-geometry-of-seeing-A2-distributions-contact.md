@@ -320,11 +320,11 @@ homogeneous distance is a separate empirical question.
   </div>
   <figcaption>
     <strong>Figure A2.2.</strong> Chow–Rashevskii in action.
-    A piecewise-horizontal path made of $\pm\varepsilon$ flows along $X_1$ (forward)
+    A piecewise-horizontal path made of flows of size at most $\varepsilon$ along $X_1$ (forward)
     and $X_2$ (rotate) connects the origin to the chosen target.  The
     "sideways" target needs a 4-leg bracket loop with each loop
-    contributing an $\varepsilon^2$ sideways nudge — many loops to make
-    appreciable progress, hence many short legs.  The "parallel-park"
+    contributing $\varepsilon\sin\varepsilon>0$ sideways displacement — many loops to make
+    appreciable progress, hence many short legs. A smaller final loop and a forward correction remove the residual error. The "parallel-park"
     target is the same combinatorics as the cuspidal Dubins trajectory in
     the
     <a href="https://moiseevigor.github.io/elliptic/examples/dubins-visual-cortex/">
@@ -522,7 +522,7 @@ function drawDistribution() {
   const scale = Math.min(plotW, plotH) / 4.6;
   const project = (x, y, th) => ({
     x: ox + scale * (x - 0.5 * cosA * y),
-    y: oy - scale * (th + 0.5 * sinA * y),
+    y: oy - scale * (th - Math.PI/2 + 0.5 * sinA * y),
   });
 
   // Cube edges
@@ -630,54 +630,34 @@ function drawReach() {
   };
   const tg = targets[target] || targets.sideways;
 
-  // Build a piecewise X1/X2 path that *approximately* reaches the target.
-  // Strategy: for sideways, repeat 4-step bracket loops (each loop contributes
-  // ε² sideways).  For rotated, do one rotation then forward.  For parking,
-  // sideways + rotation, alternate.
-  function flowX1(s, t) {
-    return { x: s.x + t * Math.cos(s.theta), y: s.y + t * Math.sin(s.theta), theta: s.theta };
+  // An explicit admissible construction. A turn-first commutator has
+  // displacement (e(cos e-1), e sin e, 0), with positive sideways sign.
+  function flowX1(q, t) {
+    return {x:q.x+t*Math.cos(q.theta),y:q.y+t*Math.sin(q.theta),theta:q.theta};
   }
-  function flowX2(s, t) {
-    return { x: s.x, y: s.y, theta: s.theta + t };
+  function flowX2(q, t) {return {...q,theta:q.theta+t};}
+  const path=[{x:0,y:0,theta:0}];let cur=path[0];
+  function drive(t) {cur=flowX1(cur,t);path.push(cur);}
+  function turn(t) {cur=flowX2(cur,t);path.push(cur);}
+  function bracket(e) {turn(e);drive(e);turn(-e);drive(-e);}
+  function driveDistance(t) {
+    while(Math.abs(t)>1e-12) {const leg=Math.sign(t)*Math.min(eps,Math.abs(t));drive(leg);t-=leg;}
   }
-  function bracket4(s, e) {
-    return [s, flowX1(s, e),
-              flowX2(flowX1(s, e), e),
-              flowX1(flowX2(flowX1(s, e), e), -e),
-              flowX2(flowX1(flowX2(flowX1(s, e), e), -e), -e)];
+  function turnAngle(t) {
+    while(Math.abs(t)>1e-12) {const leg=Math.sign(t)*Math.min(eps,Math.abs(t));turn(leg);t-=leg;}
   }
-
-  const path = [{ x: 0, y: 0, theta: 0 }];
-  let cur = path[0];
-
-  if (target === 'forward') {
-    const n = Math.ceil(tg.x / eps);
-    for (let i = 0; i < n; i++) { cur = flowX1(cur, eps); path.push(cur); }
-  } else if (target === 'sideways') {
-    // Each bracket loop nets ε² in sideways direction; need n loops with n·ε² ≈ tg.y
-    const nLoops = Math.max(1, Math.ceil(tg.y / (eps * eps)));
-    for (let i = 0; i < nLoops; i++) {
-      const loop = bracket4(cur, eps);
-      for (let j = 1; j < loop.length; j++) path.push(loop[j]);
-      cur = loop[loop.length - 1];
+  if(tg.y>0) {
+    const shift=eps*Math.sin(eps),n=Math.floor(tg.y/shift);
+    for(let i=0;i<n;i++)bracket(eps);
+    const remainder=tg.y-cur.y;
+    if(remainder>1e-12) {
+      let lo=0,hi=eps;
+      for(let i=0;i<60;i++){const e=(lo+hi)/2;if(e*Math.sin(e)<remainder)lo=e;else hi=e;}
+      bracket((lo+hi)/2);
     }
-  } else if (target === 'rotated') {
-    // Rotate to π/2, then forward
-    const nRot = Math.ceil((Math.PI / 2) / eps);
-    for (let i = 0; i < nRot; i++) { cur = flowX2(cur, eps); path.push(cur); }
-    const nFwd = Math.ceil(tg.x / eps);
-    for (let i = 0; i < nFwd; i++) { cur = flowX1(cur, eps); path.push(cur); }
-  } else { // parking — sideways + heading flip via repeated K-turn
-    const nLoops = Math.max(1, Math.ceil(tg.y / (eps * eps)));
-    for (let i = 0; i < nLoops; i++) {
-      const loop = bracket4(cur, eps);
-      for (let j = 1; j < loop.length; j++) path.push(loop[j]);
-      cur = loop[loop.length - 1];
-    }
-    // Add explicit rotation to π
-    const nRot = Math.ceil(Math.PI / eps);
-    for (let i = 0; i < nRot; i++) { cur = flowX2(cur, eps); path.push(cur); }
   }
+  // Cancel the horizontal remainder before applying the final target heading.
+  driveDistance(tg.x-cur.x);turnAngle(tg.theta-cur.theta);
 
   // Bounds
   const xs = path.map(p => p.x).concat([tg.x]);
