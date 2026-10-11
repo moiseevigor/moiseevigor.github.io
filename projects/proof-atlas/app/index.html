@@ -5,7 +5,7 @@ permalink: /projects/proof-atlas/app/
 page_class: proof-atlas-app-page
 description: "Full-window interactive atlas of the anonymized structural graph of a real Lean proof, with recursive expansion, dependency constellation, and mathematical explanation."
 ---
-<link rel="stylesheet" href="/public/css/proof-atlas.css?v=2">
+<link rel="stylesheet" href="/public/css/proof-atlas.css?v=3">
 <div class="pa-page pa-page--app" id="proof-atlas">
   <section id="pa-explorer" class="pa-explorer pa-explorer--app" aria-labelledby="pa-explorer-heading">
     <div class="pa-appbar">
@@ -32,7 +32,7 @@ description: "Full-window interactive atlas of the anonymized structural graph o
         </div>
         <div class="pa-app-kicker">CONTROLS</div>
         <div class="pa-toolbar"><button type="button" id="pa-minus" aria-label="Zoom out">−</button><button type="button" id="pa-fit">Reset</button><button type="button" id="pa-plus" aria-label="Zoom in">+</button></div>
-        <p class="pa-app-hint">Drag to pan · scroll to zoom · click a dot to inspect. The recursive view opens a selected subexpression.</p>
+        <p class="pa-app-hint">Hover to illuminate and gently expand every directly connected node (one hop). Click to pin a selection; drag to pan, scroll to zoom.</p>
       </aside>
       <div class="pa-stage">
         <div class="pa-stage-head"><div><strong id="pa-view-title">Whole-proof geometry</strong><span id="pa-view-subtitle">Expression occurrence forest · measured structure</span></div><div class="pa-stage-tools"><button type="button" id="pa-focus" aria-pressed="false" title="Hide side panels to enlarge the graph">Focus graph</button><button type="button" id="pa-fullscreen" title="Enter browser fullscreen (Esc to exit)">⛶ Fullscreen</button><a href="/projects/proof-atlas/app/" class="pa-open-app" title="Open Proof Atlas as a dedicated full-window application">Open full app ↗</a></div></div>
@@ -53,4 +53,4 @@ description: "Full-window interactive atlas of the anonymized structural graph o
   </section>
 </div>
 <script src="/public/data/proof-atlas/crossing-structure.js" defer></script>
-<script src="/public/js/proof-atlas.js?v=2" defer></script>
+<script src="/public/js/proof-atlas.js?v=3" defer></script>
