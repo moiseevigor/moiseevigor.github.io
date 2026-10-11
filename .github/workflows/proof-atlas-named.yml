@@ -1,0 +1,32 @@
+name: Proof Atlas named theorem inspection
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'scripts/inspect-proof-atlas-named.cjs'
+      - '.github/workflows/proof-atlas-named.yml'
+  workflow_dispatch:
+
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          npm install --no-save playwright@1.57.0
+          npx playwright install --with-deps chromium
+      - name: Start local static server
+        run: |
+          python3 -m http.server 8833 --bind 127.0.0.1 >/tmp/atlas-server.log 2>&1 &
+          sleep 2
+      - name: Inspect named proof-map statement fidelity in Chromium
+        run: node scripts/inspect-proof-atlas-named.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: proof-atlas-named-render
+          path: /tmp/proof-atlas-named-diagnostics.png
