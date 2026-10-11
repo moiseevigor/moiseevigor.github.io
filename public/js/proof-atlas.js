@@ -701,5 +701,6 @@
     canvasObserver.observe(canvasFrame);
   }
   window.addEventListener('resize',refitSoon);
-  updateMode('map');resize();selectDeclaration('crossing');
+  if(namedNodes.length){updateMode('map');resize();selectDeclaration('crossing');}
+  else{updateMode('whole');resize();selectExpr(D.roots[1]);}
 })();
