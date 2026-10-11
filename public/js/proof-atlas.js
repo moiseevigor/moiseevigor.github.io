@@ -350,7 +350,13 @@
   function setHover(point) {
     const next=point?infoFor(point):null;
     const old=state.hover;
-    if(old&&next&&old.key===next.key){showTooltip(old);return;}
+    if(old&&next&&old.key===next.key){
+      state.hoverTarget=1;
+      fillHoverDetails(old);showTooltip(old);
+      if(reducedMotion){state.hoverPower=1;draw();}
+      else wakeHover();
+      return;
+    }
     state.hover=next;state.hoverTarget=next?1:0;
     if(next){fillHoverDetails(next);showTooltip(next);}
     else {tooltip.hidden=true;fillHoverDetails(null);}
@@ -407,11 +413,8 @@
     // On dense branches hit detection is intentionally based on the *drawn*
     // geometry (including elastic displacement) so the hover follows dots.
     const p=hit(e.clientX,e.clientY);
-    if(p) {
-      if(state.hover&&state.hover.key===p.type+':'+p.id){showTooltip(state.hover);return;}
-      if(p.type==='theorem'&&state.hover?.key==='theorem'){showTooltip(state.hover);return;}
-      setHover(p);
-    } else clearHover();
+    if(p)setHover(p);
+    else clearHover();
   });
   canvas.addEventListener('pointerleave',()=>{state.pointer=null;clearHover();});
   canvas.addEventListener('pointerup',e=>{
