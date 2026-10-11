@@ -1,0 +1,25 @@
+{
+  "schema": "ppmap-source-uncertainty-audit/1",
+  "protocol_commit": "856a4463",
+  "source_commit": "30445cabe3416c6ca0acc33d2138cf80f531442c",
+  "source_commit_date": "2020-11-14T16:34:49Z",
+  "method": "Static source audit only; no external implementation execution or map reconstruction",
+  "source_result": "Joint spatial/temperature/beta inverse-curvature matrices are calculated internally, but processed central marginal errors are returned; mosaic outputs interpolate these errors rather than exporting covariance.",
+  "normalisation": "OBJCD is passed as dzeta; ETA and N_POST determine distinct prior/posterior scales multiplied by dzeta squared.",
+  "static_initialisation_concern": "Allocated gamma0 has only diagonal assignments before its full inverse; this is a concern about this pinned implementation, with no established impact on archived Hi-GAL products.",
+  "archive_release_binding_established": false,
+  "integrated_column_uncertainty_validated": false,
+  "primary_requested": 1000,
+  "primary_supported": 333,
+  "primary_required": 800,
+  "primary_threshold_changed": false,
+  "infrared_occurrence_measured": false,
+  "birth_confirmed": false,
+  "full_goal_complete": false,
+  "next_evidence_required": [
+    "An explicit map-release/implementation binding",
+    "Matching PSFs, band noise, occupation-to-column units and prior/posterior metadata",
+    "Validated central-block covariance propagation with marginal-output, fallback and mosaic consistency checks on the same frozen sightlines"
+  ],
+  "decision": "Insufficient release-bound integrated uncertainty: the primary comparison remains stopped. No automatic reconstruction or new experiment follows this audit."
+}

@@ -111,6 +111,8 @@ include:
   - "starbirth-mc-historical-profile-stop.json"
   - "starbirth-covariance-audit.json"
   - "starbirth-covariance-verification.json"
+  - "starbirth-source-audit.json"
+  - "starbirth-source-verification.json"
   - "se2-provenance.json"
   - "se2-ray-thresholds.json"
 

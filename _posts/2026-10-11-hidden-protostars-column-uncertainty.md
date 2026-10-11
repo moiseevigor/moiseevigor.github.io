@@ -92,6 +92,14 @@ We also checked a narrower mathematical shortcut: does a nonnegative emission re
 
 The result strengthens the need for a validated integrated-column uncertainty product or a source-bound covariance calculation reproducing the released marginal errors. Neither the known prior metadata nor the hypothetical 814 count unlocks the primary readout. [Exact certificate and cache inventory](/public/data/starbirth/covariance-audit/starbirth-covariance-audit.json), [independent verification](/public/data/starbirth/covariance-audit/starbirth-covariance-verification.json), [source bindings](/public/data/starbirth/covariance-audit/source-inventory.csv).
 
+<h2 id="implementation-audit">A covariance route inside the implementation</h2>
+
+A separately registered static source audit found that the pinned PPMAP implementation computes a **joint spatial, temperature and beta matrix internally**. It returns processed marginal errors and interpolates them across the mosaic; it does not export the missing covariance. This gives us a specific calculation to validate, rather than a reason to assume independent bins. [Pinned source and calculation](https://github.com/ahoward-cf/ppmap/blob/30445cabe3416c6ca0acc33d2138cf80f531442c/src/pperr.f90#L170-L283).
+
+Two limits matter. We have **no explicit binding between this 2020 source and the older archived maps**, whose inspected error-header schema differs. A static background-matrix initialization concern also prevents treating the code as a ready-made uncertainty oracle. It does not establish an error in those archived maps. We ran no third-party code or map reconstruction.
+
+The required evidence is now sharper: a release-bound implementation, matching response/noise and normalization, and a validated covariance calculation consistent with the released marginal-error pipeline. The **333-of-800 gate remains failed**, and infrared occurrence remains unmeasured. [Frozen audit](/public/data/starbirth/source-audit/protocol.md), [findings and exact source lines](/public/data/starbirth/source-audit/results.md), [readout](/public/data/starbirth/source-audit/starbirth-source-audit.json), [independent static verification](/public/data/starbirth/source-audit/starbirth-source-verification.json), [source hashes](/public/data/starbirth/source-audit/source-inventory.csv).
+
 <h2 id="next">The next target is the total-column uncertainty</h2>
 
 The immediate task is to establish whether a defensible total-column uncertainty or covariance model can be obtained for this population. Any new model and validation rule must be frozen before its readout; the failed primary gate remains in the record. If that information cannot be justified, the occurrence comparison stays unresolved. Embeddings cannot supply the missing error model or physical truth.

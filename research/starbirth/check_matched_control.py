@@ -41,6 +41,20 @@ audit_verify=json.loads((audit_dir/'starbirth-covariance-verification.json').rea
 assert audit_verify['independently_verified'] and audit_verify['audit_sha256']==hashlib.sha256((audit_dir/'starbirth-covariance-audit.json').read_bytes()).hexdigest()
 assert audit_verify['integrated_variance']=='182/101' and audit_verify['quadrature_variance']=='152/101'
 assert audit['covariance_estimated'] is False and audit['source_occurrence_measured'] is False
+source_dir=ROOT/'public/data/starbirth/source-audit'
+source_entries=list(csv.DictReader((source_dir/'source-inventory.csv').open()))
+assert len(source_entries)==4
+for e in source_entries:
+    data=(source_dir/e['public_file']).read_bytes()
+    assert len(data)==int(e['bytes']) and hashlib.sha256(data).hexdigest()==e['sha256']
+    assert e['source_revision']=='712d7aeeab27e23163c5ff7b3b0c9d63bd180434'
+source_audit=json.loads((source_dir/'starbirth-source-audit.json').read_text())
+source_verify=json.loads((source_dir/'starbirth-source-verification.json').read_text())
+assert source_verify['verified'] and source_verify['requests']==9
+assert source_verify['source_commit']==source_audit['source_commit']=='30445cabe3416c6ca0acc33d2138cf80f531442c'
+assert source_audit['archive_release_binding_established'] is False
+assert source_audit['integrated_column_uncertainty_validated'] is False
+assert source_audit['primary_supported']==333 and source_audit['primary_required']==800
 if len(sys.argv)>1:
     site=Path(sys.argv[1]); html=(site/ARTICLE.strip('/')/'index.html').read_text()
     for term in ['939','333','814','800','hypothetical','post-read diagnostic','unmeasured','No stellar birth','b0bbc8d89e06cfa812a5b91e5d863b7355750bd9']:
@@ -56,6 +70,9 @@ if len(sys.argv)>1:
         assert (site/'public/data/starbirth/matched-control'/e['public_file']).read_bytes()==(PUBLIC/e['public_file']).read_bytes()
     for e in audit_entries:
         assert (site/'public/data/starbirth/covariance-audit'/e['public_file']).read_bytes()==(audit_dir/e['public_file']).read_bytes()
+    for e in source_entries:
+        assert (site/'public/data/starbirth/source-audit'/e['public_file']).read_bytes()==(source_dir/e['public_file']).read_bytes()
+    assert 'implementation-audit' in html and '333-of-800 gate remains failed' in html
     assert 'not an actual Herschel response' in html and '125 distinct cached native files' in html
     for path in ['lab/index.html','sitemap.xml']:
         assert ARTICLE in (site/path).read_text(), path

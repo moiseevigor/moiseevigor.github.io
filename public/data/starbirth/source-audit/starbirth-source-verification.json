@@ -1,0 +1,64 @@
+{
+  "schema": "ppmap-source-static-verification/1",
+  "verified": true,
+  "source_commit": "30445cabe3416c6ca0acc33d2138cf80f531442c",
+  "files": [
+    {
+      "path": "src/pperr.f90",
+      "bytes": 9751,
+      "sha256": "0e930e01fccb6a6788bb6542350e24646af05060948423e06256682de3b734ad",
+      "git_blob": "54183bbec8b4cb7f44bc57c2967b49fc89eb96b7"
+    },
+    {
+      "path": "src/inversep.f90",
+      "bytes": 2230,
+      "sha256": "a1802e105a5753a9ab901b6ba73449a8bb7dd8dffad9ecf88da4839104221bfa",
+      "git_blob": "0bb19cc8295f7d3faf88a6ef1536eb53b8830051"
+    },
+    {
+      "path": "src/ppmap.f90",
+      "bytes": 27723,
+      "sha256": "17cc0acd89b551b85c30f64c571e0f182edddaaa5024f8ec270fd188fdd5a123",
+      "git_blob": "12dfbcb49564a2d601c49310beecaf02c0d483a9"
+    },
+    {
+      "path": "src/writerho.f",
+      "bytes": 6210,
+      "sha256": "0b31323f802a160ddb7324f0ea7d249bedcdd2c8a172e4b08c43b74257103a07",
+      "git_blob": "2fb433d1e17766480ca000bfde5aee6959d328b6"
+    },
+    {
+      "path": "src/ppmosaic.f90",
+      "bytes": 34235,
+      "sha256": "e8b93b56b0ae11204bea52105063cab6e07532692a37d4d6513bc078bdd12f16",
+      "git_blob": "297479f95d6ff2cd5e94eac64836cd6d7c869678"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1069,
+      "sha256": "c76e6e02b5a22fdb9d816adbead95b03909ede61ba41ba6db908411f9d055d04",
+      "git_blob": "badcab184c4e03faa02becf0fa9e49049e62ee0a"
+    },
+    {
+      "path": "src/readrho.f",
+      "bytes": 1860,
+      "sha256": "1f586dc8a30ee8bde01cbadb8c611ad05ee27ec593f5114f91e6f8fe1b65fe31",
+      "git_blob": "c26703b9e4e89721b9038c0e352ddc6c6c252ef3"
+    }
+  ],
+  "source_citation_ranges": 10,
+  "gamma0_assignments_before_inverse": [
+    [
+      242,
+      "gamma0(n,n) = gamma(n,n) + 1./etaprime"
+    ]
+  ],
+  "requests": 9,
+  "response_body_bytes": 124017,
+  "stage_bytes_at_verification": 160401,
+  "archive_release_binding_established": false,
+  "integrated_column_uncertainty_validated": false,
+  "third_party_code_executed": false,
+  "primary_occurrence_unmeasured": true,
+  "scope": "Independent byte/hash and static-citation checks; no numerical covariance validation."
+}

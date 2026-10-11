@@ -25,7 +25,7 @@ description: >
 
 <div class="l-body sb-program" markdown="1">
 
-<div class="sb-status"><strong>Program updated · 11 October 2026.</strong> The measurement protocol is frozen. Verified profile matches support 939 of 1,000 clumps, but only 333 pass the conservative uncertainty gate, below the required 800. The primary comparison remains unmeasured. <a href="/astrophysics/2026/10/11/hidden-protostars-column-uncertainty/">Read the new results and covariance diagnosis.</a> No confirmed stellar birth or validated birth detector has been established.</div>
+<div class="sb-status"><strong>Program updated · 11 October 2026.</strong> The measurement protocol is frozen. Verified profile matches support 939 of 1,000 clumps, but only 333 pass the conservative uncertainty gate, below the required 800. The primary comparison remains unmeasured. <a href="/astrophysics/2026/10/11/hidden-protostars-column-uncertainty/">Read the measured gates and source uncertainty audit.</a> No confirmed stellar birth or validated birth detector has been established.</div>
 
 Stars form inside clouds that hide the process from view. A patch of cold dust can look quiet while a compact object is already accreting material inside it. Our immediate question is therefore observational: **do apparently prestellar clumps contain more compact mid-infrared sources than comparable dusty sightlines?**
 
