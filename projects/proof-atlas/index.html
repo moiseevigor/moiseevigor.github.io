@@ -60,13 +60,13 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
   <section id="pa-explorer" class="pa-explorer" aria-labelledby="pa-explorer-heading">
     <div class="pa-explorer-heading">
       <div><div class="pa-section-mark">02 / Interactive research instrument</div><h2 id="pa-explorer-heading">Inside a real Lean proof</h2></div>
-      <p>A measured, anonymized structural projection of <code>CrossingData.crossing</code> (SE(2) crossing lemma). No unpublished Lean proof term is served to the browser.</p>
+      <p>A source-traced map of the 26 declarations in <code>Crossing.lean</code>, with theorem statements and supporting references. Switch to the kernel syntax lens for the full 7,288-expression projection.</p>
     </div>
     <div class="pa-app" aria-label="Interactive proof graph microscope">
       <aside class="pa-app-sidebar" aria-label="Visualization controls">
         <div class="pa-app-kicker">CHOOSE A LENS</div>
         <div class="pa-modes" role="group" aria-label="Graph representation">
-          <button type="button" class="is-active" data-mode="whole" aria-pressed="true"><span>01</span> Whole proof</button>
+          <button type="button" class="is-active" data-mode="map" aria-pressed="true"><span>01</span> Named theorem map</button><button type="button" data-mode="whole" aria-pressed="false"><span>05</span> Kernel syntax</button>
           <button type="button" data-mode="deps" aria-pressed="false"><span>02</span> Dependencies</button>
           <button type="button" data-mode="recursive" aria-pressed="false"><span>03</span> Zoom into a branch</button>
           <button type="button" data-mode="meaning" aria-pressed="false"><span>04</span> Mathematical idea</button>
@@ -85,9 +85,9 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
         <p class="pa-app-hint">Hover to illuminate and gently expand every directly connected node (one hop). Click to pin a selection; drag to pan, scroll to zoom.</p>
       </aside>
       <div class="pa-stage">
-        <div class="pa-stage-head"><div><strong id="pa-view-title">Whole-proof geometry</strong><span id="pa-view-subtitle">Expression occurrence forest · measured structure</span></div><div class="pa-stage-tools"><button type="button" id="pa-focus" aria-pressed="false" title="Hide side panels to enlarge the graph">Focus graph</button><button type="button" id="pa-fullscreen" title="Enter browser fullscreen (Esc to exit)">⛶ Fullscreen</button><a href="/projects/proof-atlas/app/" class="pa-open-app" title="Open Proof Atlas as a dedicated full-window application">Open full app ↗</a></div></div>
+        <div class="pa-stage-head"><div><strong id="pa-view-title">Named proof map</strong><span id="pa-view-subtitle">Expression occurrence forest · measured structure</span></div><div class="pa-stage-tools"><button type="button" id="pa-focus" aria-pressed="false" title="Hide side panels to enlarge the graph">Focus graph</button><button type="button" id="pa-fullscreen" title="Enter browser fullscreen (Esc to exit)">⛶ Fullscreen</button><a href="/projects/proof-atlas/app/" class="pa-open-app" title="Open Proof Atlas as a dedicated full-window application">Open full app ↗</a></div></div>
         <div class="pa-canvas-frame"><canvas id="pa-canvas" tabindex="0" aria-label="Interactive Lean proof graph showing expression nodes and structural edges">Your browser does not support Canvas.</canvas></div>
-        <div class="pa-stage-foot"><span id="pa-stage-count">7,288 expression occurrences</span><span id="pa-canvas-status" role="status" aria-live="polite">Select a node to inspect</span></div>
+        <div class="pa-stage-foot"><span id="pa-stage-count">26 named declarations</span><span id="pa-canvas-status" role="status" aria-live="polite">Select a node to inspect</span></div>
       </div>
       <aside class="pa-inspector" aria-label="Selected graph node">
         <div class="pa-app-kicker">INSPECTOR</div>
@@ -135,4 +135,5 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
   </section>
 </main>
 <script src="/public/data/proof-atlas/crossing-structure.js" defer></script>
-<script src="/public/js/proof-atlas.js?v=6" defer></script>
+<script src="/public/data/proof-atlas/crossing-declarations.js" defer></script>
+<script src="/public/js/proof-atlas.js?v=7" defer></script>
