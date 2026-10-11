@@ -72,7 +72,7 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
           <button type="button" data-mode="meaning" aria-pressed="false"><span>04</span> Mathematical idea</button>
         </div>
         <div class="pa-app-kicker">EXPLORE</div>
-        <label for="pa-search">Find a node by number</label>
+        <label for="pa-search">Expression index (syntax lens)</label>
         <div class="pa-searchline"><input id="pa-search" type="number" min="0" max="7287" inputmode="numeric" placeholder="0 – 7287" aria-label="Expression occurrence index"><button type="button" id="pa-find">Go</button></div>
         <div class="pa-quicklinks">
           <button type="button" data-target="proof">Proof root</button>
@@ -82,10 +82,10 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
         </div>
         <div class="pa-app-kicker">CONTROLS</div>
         <div class="pa-toolbar"><button type="button" id="pa-minus" aria-label="Zoom out">−</button><button type="button" id="pa-fit">Reset</button><button type="button" id="pa-plus" aria-label="Zoom in">+</button></div>
-        <p class="pa-app-hint">Hover to illuminate and gently expand every directly connected node (one hop). Click to pin a selection; drag to pan, scroll to zoom.</p>
+        <p class="pa-app-hint">Start with named theorems: hover for context and click for the Lean statement. Select Kernel syntax to inspect all 7,288 expressions. Drag to pan; scroll to zoom.</p>
       </aside>
       <div class="pa-stage">
-        <div class="pa-stage-head"><div><strong id="pa-view-title">Named proof map</strong><span id="pa-view-subtitle">Expression occurrence forest · measured structure</span></div><div class="pa-stage-tools"><button type="button" id="pa-focus" aria-pressed="false" title="Hide side panels to enlarge the graph">Focus graph</button><button type="button" id="pa-fullscreen" title="Enter browser fullscreen (Esc to exit)">⛶ Fullscreen</button><a href="/projects/proof-atlas/app/" class="pa-open-app" title="Open Proof Atlas as a dedicated full-window application">Open full app ↗</a></div></div>
+        <div class="pa-stage-head"><div><strong id="pa-view-title">Named proof map</strong><span id="pa-view-subtitle">Lean source statements · traced direct references</span></div><div class="pa-stage-tools"><button type="button" id="pa-focus" aria-pressed="false" title="Hide side panels to enlarge the graph">Focus graph</button><button type="button" id="pa-fullscreen" title="Enter browser fullscreen (Esc to exit)">⛶ Fullscreen</button><a href="/projects/proof-atlas/app/" class="pa-open-app" title="Open Proof Atlas as a dedicated full-window application">Open full app ↗</a></div></div>
         <div class="pa-canvas-frame"><canvas id="pa-canvas" tabindex="0" aria-label="Interactive Lean proof graph showing expression nodes and structural edges">Your browser does not support Canvas.</canvas></div>
         <div class="pa-stage-foot"><span id="pa-stage-count">26 named declarations</span><span id="pa-canvas-status" role="status" aria-live="polite">Select a node to inspect</span></div>
       </div>
