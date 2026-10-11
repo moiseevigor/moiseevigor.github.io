@@ -387,6 +387,7 @@
     // Keep the last neighbourhood while it relaxes, then remove it.
     if(state.hover) {
       state.hoverTarget=0;tooltip.hidden=true;hoverDetails.hidden=true;
+      $('pa-canvas-status').textContent='Select a node to inspect';
       if(reducedMotion){state.hoverPower=0;state.hover=null;draw();}
       else wakeHover();
     }
