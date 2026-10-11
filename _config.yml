@@ -95,6 +95,13 @@ collections:
 # Re-include precomputed data assets that the global "*.json" exclude swallows.
 include:
   - "public/data"
+  # Jekyll 3 filters static files by basename: namespace these explicit exceptions.
+  - "starbirth-e15.json"
+  - "starbirth-e27.json"
+  - "starbirth-e28.json"
+  - "starbirth-core-verification.json"
+  - "starbirth-n20-witness.json"
+  - "starbirth-c6828-checkpoint.json"
   - "se2-provenance.json"
   - "se2-ray-thresholds.json"
 

@@ -256,3 +256,21 @@
       title: "Beyond the Shortest Path: Geodesics on SE(2)"
       url: /mathematics/2026/10/07/se2-geodesics-research-program/
       status: published
+- id: hidden-protostars
+  title: "Hidden protostars"
+  subtitle: "Embedded activity in apparently prestellar Hi-GAL clumps: reviewed evidence, matched controls, and the limits of birth detection."
+  status: active
+  question: "Do nearby 70 μm-undetected, catalogue-prestellar clumps contain an excess of compact mid-infrared sources over sightlines matched for dust column, sensitivity and crowding?"
+  outcome: "Historical evidence: 12.8% have a 22/24 μm counterpart. Physical membership and the hidden fraction remain unresolved; no confirmed birth or validated detector. The new comparison is not yet measured."
+  frontier: "A seven-day matched-control study: freeze one protocol, independently verify the excess, and report a positive, null or insufficient-evidence outcome."
+  code: research/starbirth/
+  verdicts:
+    - { h: "Counterparts", v: confirmed, label: "catalogue association, not physical membership" }
+    - { h: "Hidden fraction", v: pending, label: "control confounding unresolved" }
+    - { h: "Image increment", v: refuted, label: "not demonstrated in the two reviewed checks" }
+    - { h: "New comparison", v: pending, label: "protocol to be frozen before readout" }
+  posts:
+    - part: 1
+      title: "Hidden protostars: a research program"
+      url: /astrophysics/2026/10/11/hidden-protostars-research-program/
+      status: published

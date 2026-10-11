@@ -35,7 +35,7 @@ def export(source, destination):
         raise RuntimeError('Compact evidence exceeded 1 MiB cap.')
     destination.mkdir(parents=True, exist_ok=True)
     with (destination / 'source-inventory.csv').open('w', newline='') as handle:
-        writer = csv.writer(handle)
+        writer = csv.writer(handle, lineterminator="\n")
         writer.writerow(['public_file', 'source_path', 'bytes', 'sha256', 'source_revision'])
         for name, path, data in entries:
             (destination / name).write_bytes(data)
