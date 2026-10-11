@@ -83,6 +83,10 @@ async function run(){
     check(m.maxCirclePx<=9,'oversized hover marker at zoom: '+m.maxCirclePx);
     await page.screenshot({path:path.join(captures,'hover-hub-zoom.png')});
     // Check a smaller local neighborhood in the zoomed graph, if possible.
+    // Focus mode intentionally hides the left navigation. Restore it before
+    // checking other visualization lenses (this tests the real UI flow).
+    await page.locator('#pa-focus').click();
+    await page.waitForTimeout(250);
     await page.locator('[data-mode="deps"]').click();
     await page.waitForTimeout(110);
     check((await page.locator('#pa-stage-count').textContent()).includes('42'),'dependency mode failed');
