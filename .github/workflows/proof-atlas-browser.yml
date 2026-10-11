@@ -1,0 +1,37 @@
+name: Proof Atlas browser regression
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'public/js/proof-atlas.js'
+      - 'public/css/proof-atlas.css'
+      - 'projects/proof-atlas/**'
+      - 'scripts/test-proof-atlas-browser.cjs'
+      - '.github/workflows/proof-atlas-browser.yml'
+  workflow_dispatch:
+jobs:
+  chromium:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium test dependencies
+        run: |
+          npm install --no-save playwright@1.57.0
+          npx playwright install --with-deps chromium
+      - name: Serve actual repository page and assets
+        run: |
+          python3 -m http.server 8833 --bind 127.0.0.1 > /tmp/proof-atlas-server.log 2>&1 &
+          sleep 2
+      - name: Browser regression — hub hover, geometry, responsiveness
+        run: node scripts/test-proof-atlas-browser.cjs
+        env:
+          ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: proof-atlas-browser-screenshots
+          path: /tmp/proof-atlas-browser
