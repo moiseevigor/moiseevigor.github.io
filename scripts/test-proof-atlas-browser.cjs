@@ -48,6 +48,10 @@ async function run(){
     await page.waitForTimeout(350);
     check(await page.evaluate(()=>!!window.PROOF_ATLAS_DATA),'CoreGIR projection did not load');
     check((await page.evaluate(()=>window.PROOF_ATLAS_DATA.parent.length))===7288,'wrong node count');
+    check((await page.locator('#pa-view-title').textContent()).includes('Named proof map'),'Expected named theorem overview');
+    check((await page.locator('#pa-inspector-heading').textContent()).includes('crossing'),'Expected final theorem inspector');
+    check((await page.locator('.pa-lean-statement').textContent()).includes('∃! p'),'Missing Lean theorem statement');
+    await page.screenshot({path:path.join(captures,'named-proof-map.png')});
     await page.locator('[data-mode="whole"]').click();
     await page.locator('#pa-focus').click();
     await page.waitForTimeout(300);
