@@ -153,3 +153,91 @@ html[data-theme="dark"] .pa-links a small{color:#adc1c6}
  .pa-live-mark{display:none}
 }
 @media(prefers-reduced-motion:reduce){.pa-page *{scroll-behavior:auto!important;transition:none!important}}
+
+
+/* ---- Responsive vector-geometry viewport: equal x/y pixel scale ---- */
+.pa-canvas-frame {
+  position:relative;
+  width:100%;
+  aspect-ratio:16 / 10;
+  flex:0 0 auto;
+  min-height:0;
+  overflow:hidden;
+  background:#10283b;
+}
+.pa-canvas-frame #pa-canvas {
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%;
+  height:100%;
+  min-height:0;
+  flex:none;
+  touch-action:none;
+}
+.pa-stage-tools{display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap;}
+.pa-stage-tools button,.pa-stage-tools a{
+  display:inline-flex;align-items:center;justify-content:center;min-height:33px;
+  border:1px solid #3e6670;border-radius:4px;
+  background:#1b4050;color:#cce2e5;text-decoration:none!important;
+  padding:5px 11px;white-space:nowrap;font-size:12px;font-weight:650;
+}
+.pa-stage-tools a{background:#31676d;color:#fff!important;border-color:#3c8185;}
+.pa-stage-tools button:hover,.pa-stage-tools a:hover{background:#3a7983;color:#fff;}
+.pa-app.pa-focus{grid-template-columns:minmax(0,1fr);}
+.pa-app.pa-focus .pa-app-sidebar,.pa-app.pa-focus .pa-inspector{display:none!important;}
+.pa-app:fullscreen,.pa-app:-webkit-full-screen{
+  border:0;border-radius:0;margin:0;padding:0;
+  display:grid;
+  width:100vw;height:100vh;min-height:0;
+  grid-template-columns:216px minmax(0,1fr) 232px;
+  background:#10283b;
+}
+.pa-app:fullscreen.pa-focus,.pa-app:-webkit-full-screen.pa-focus{grid-template-columns:minmax(0,1fr);}
+.pa-app:fullscreen .pa-stage,.pa-app:-webkit-full-screen .pa-stage{
+  min-height:0;height:100%;overflow:hidden;
+}
+.pa-app:fullscreen .pa-canvas-frame,.pa-app:-webkit-full-screen .pa-canvas-frame{
+  flex:1 1 auto;aspect-ratio:auto;min-height:0;
+}
+.pa-app:fullscreen .pa-app-sidebar,.pa-app:fullscreen .pa-inspector,
+.pa-app:-webkit-full-screen .pa-app-sidebar,.pa-app:-webkit-full-screen .pa-inspector{
+  overflow:auto;max-height:100vh;
+}
+.pa-appbar{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:12px 24px;border-bottom:1px solid #bccac9;}
+.pa-appbar h1{font:600 clamp(18px,1.8vw,27px)/1.2 "Source Sans 3",system-ui,sans-serif;color:var(--pa-ink);margin:3px 0 0;}
+.pa-appbar-links{display:flex;gap:17px;align-items:center;flex-wrap:wrap;}
+.pa-appbar-links a{font-size:13px;font-weight:650;color:#34696b;text-decoration:none;}
+.pa-appnote{color:#52717a;font-size:12px;line-height:1.4;margin:8px 12px 0;}
+/* Dedicated app: the graph occupies the remaining viewport beneath the site nav. */
+@media(min-width:941px) {
+  .proof-atlas-app-page .pa-page--app{height:calc(100vh - 48px);height:calc(100dvh - 48px);min-height:520px;}
+  .proof-atlas-app-page .pa-explorer--app{
+    height:100%;display:flex;flex-direction:column;
+    padding:0 max(6px,1vw) 6px;background:#e7ebea;
+  }
+  .proof-atlas-app-page .pa-app{flex:1 1 auto;min-height:0;overflow:hidden;}
+  .proof-atlas-app-page .pa-stage{min-height:0;height:100%;overflow:hidden;}
+  .proof-atlas-app-page .pa-canvas-frame{flex:1 1 auto;aspect-ratio:auto;min-height:0;}
+  .proof-atlas-app-page .pa-app-sidebar,.proof-atlas-app-page .pa-inspector{overflow:auto;min-height:0;}
+}
+@media(max-width:940px){
+  .pa-app.pa-focus .pa-stage{display:flex;}
+  .pa-stage-tools{gap:5px;}
+  .pa-stage-tools button,.pa-stage-tools a{padding:4px 8px;font-size:11px;}
+}
+@media(max-width:650px){
+  .pa-stage{height:auto;min-height:0;}
+  .pa-canvas-frame{aspect-ratio:4 / 5;}
+  .pa-appbar{display:block;padding:12px 14px;}
+  .pa-appbar-links{margin-top:8px;}
+  .pa-app:fullscreen,.pa-app:-webkit-full-screen{
+    display:flex;flex-direction:column;overflow:auto;
+    height:100vh;height:100dvh;
+  }
+  .pa-app:fullscreen .pa-app-sidebar,.pa-app:-webkit-full-screen .pa-app-sidebar{
+    flex:none;max-height:28vh;overflow:auto;
+  }
+  .pa-app:fullscreen .pa-stage,.pa-app:-webkit-full-screen .pa-stage{flex:1 1 auto;min-height:45vh;}
+  .pa-app:fullscreen .pa-inspector,.pa-app:-webkit-full-screen .pa-inspector{max-height:22vh;overflow:auto;}
+}

@@ -35,8 +35,14 @@
   for(let i=0;i<N;i++) angle[i]=2*Math.PI*((first[i]+last[i])*0.5+0.5)/leafCounter-Math.PI/2;
 
   let width=900,height=620,dpr=1;
+  const appElement = host.querySelector('.pa-app');
+  const canvasFrame = host.querySelector('.pa-canvas-frame');
   function resize() {
-    const box=canvas.getBoundingClientRect();width=Math.max(300,box.width);height=Math.max(280,box.height);
+    // Bitmap size must follow actual CSS dimensions on every layout change.
+    // Using independent width/height scales distorts a circular proof graph;
+    // all drawing transforms below use the same scalar zoom in both axes.
+    const box=canvasFrame.getBoundingClientRect();
+    width=Math.max(1,box.width);height=Math.max(1,box.height);
     dpr=Math.min(2,window.devicePixelRatio||1);
     canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);
     ctx.setTransform(dpr,0,0,dpr,0,0);draw();
@@ -236,6 +242,39 @@
   $('pa-plus').addEventListener('click',()=>{state.scale=Math.min(12,state.scale*1.4);draw();});
   $('pa-minus').addEventListener('click',()=>{state.scale=Math.max(.35,state.scale/1.4);draw();});
   $('pa-fit').addEventListener('click',()=>{state.scale=1;state.panX=state.panY=0;draw();});
-  window.addEventListener('resize',resize);
+  const focusButton = $('pa-focus');
+  const fullscreenButton = $('pa-fullscreen');
+  function refitSoon() {
+    requestAnimationFrame(()=>{resize();requestAnimationFrame(resize);});
+  }
+  function setFocus(on) {
+    appElement.classList.toggle('pa-focus',on);
+    focusButton.setAttribute('aria-pressed',on?'true':'false');
+    focusButton.textContent=on?'Show panels':'Focus graph';
+    refitSoon();
+  }
+  focusButton.addEventListener('click',()=>setFocus(!appElement.classList.contains('pa-focus')));
+  function syncFullscreen() {
+    const active=document.fullscreenElement===appElement;
+    fullscreenButton.textContent=active?'⛶ Exit fullscreen':'⛶ Fullscreen';
+    fullscreenButton.setAttribute('aria-pressed',active?'true':'false');
+    refitSoon();
+  }
+  fullscreenButton.addEventListener('click',async()=>{
+    if(document.fullscreenElement===appElement) {
+      try { await document.exitFullscreen(); } catch(e) { $('pa-canvas-status').textContent='Unable to exit fullscreen'; }
+    } else if (appElement.requestFullscreen) {
+      try { await appElement.requestFullscreen(); }
+      catch(e) { window.location.href='/projects/proof-atlas/app/'; }
+    } else {
+      window.location.href='/projects/proof-atlas/app/';
+    }
+  });
+  document.addEventListener('fullscreenchange',syncFullscreen);
+  if (window.ResizeObserver) {
+    const canvasObserver = new ResizeObserver(()=>resize());
+    canvasObserver.observe(canvasFrame);
+  }
+  window.addEventListener('resize',refitSoon);
   updateMode('whole');resize();selectExpr(D.roots[1]);
 })();

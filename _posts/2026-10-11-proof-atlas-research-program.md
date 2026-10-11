@@ -13,6 +13,7 @@ series_title: "Proof Atlas"
 series_part: 1
 permalink: /mathematics/2026/10/11/proof-atlas-research-program/
 published: true
+image: /public/img/posts/proof-atlas-1.svg
 comments: false
 description: >
   An introduction to the geometry of formal proofs, with a measured 7,288-node
