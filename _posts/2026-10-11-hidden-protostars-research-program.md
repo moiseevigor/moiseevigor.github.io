@@ -21,6 +21,7 @@ description: >
 ---
 
 <link rel="stylesheet" href="/public/css/starbirth-program.css?v=20261011">
+<link rel="stylesheet" href="/public/css/starbirth-formation.css?v=20261011-1">
 
 <div class="l-body sb-program" markdown="1">
 
@@ -30,21 +31,13 @@ Stars form inside clouds that hide the process from view. A patch of cold dust c
 
 The eventual ambition is a detector of physical stellar births across large surveys. The next useful step is smaller: establish what the present data can distinguish before asking a machine-learning model to classify it.
 
-<nav class="sb-jump" aria-label="On this page"><a href="#physics">The physics</a><a href="#ledger">What we found</a><a href="#comparison">Why controls matter</a><a href="#week">The seven-day test</a><a href="#birth">From activity to birth</a><a href="#sources">Sources &amp; evidence</a></nav>
+<nav class="sb-jump" aria-label="On this page"><a href="#physics">The physics</a><a href="#star-formation">Explore formation</a><a href="#ledger">What we found</a><a href="#comparison">Why controls matter</a><a href="#week">The seven-day test</a><a href="#birth">From activity to birth</a><a href="#sources">Sources &amp; evidence</a></nav>
 
 <h2 id="physics">What is born, and what a telescope sees</h2>
 
 In the standard picture of low-mass star formation, gravity contracts a dense molecular core. Radiation initially carries away much of the heat; increasing opacity then allows a pressure-supported **first hydrostatic core** to form. At sufficiently high central temperatures, molecular hydrogen dissociation enables a second collapse and formation of a **second hydrostatic core**, the nascent protostar. This program uses that second-core formation as its physical definition of birth. It precedes sustained main-sequence hydrogen burning. Rotation, magnetic fields and radiative transfer affect the detailed predictions; a simple sequence is not a complete model for every massive clump. [Young (2023)](https://arxiv.org/abs/2312.03039), [Ahmad et al. (2023)](https://arxiv.org/abs/2310.01516).
 
-<figure class="sb-sequence">
-  <ol>
-    <li><span class="sb-number">01</span><strong>Cold, dense core</strong><span>Gravity drives contraction.</span></li>
-    <li><span class="sb-number">02</span><strong>First hydrostatic core</strong><span>Heating temporarily slows collapse.</span></li>
-    <li><span class="sb-number">03</span><strong>Second collapse</strong><span>H₂ dissociation enables rapid contraction.</span></li>
-    <li><span class="sb-number">04</span><strong>Nascent protostar</strong><span>A second core forms and accretes.</span></li>
-  </ol>
-  <figcaption>Established theoretical sequence for low-mass core collapse, shown schematically. The stages are not equally long. None of these drawings or labels represents a newly observed object.</figcaption>
-</figure>
+{% include starbirth-formation.html %}
 
 A telescope measures radiation escaping through the envelope, rather than the central state directly. In the models discussed by Young, second-core formation need not cause an immediate, distinctive change in the emerging spectrum. A brightening can also be an accretion burst from an older protostar. **A new infrared appearance does not uniquely date a birth.** [Young (2023), §4.1](https://arxiv.org/abs/2312.03039).
 
@@ -129,3 +122,4 @@ Download the [evidence inventory](/public/data/starbirth/source-inventory.csv), 
 </div>
 
 <script src="/public/js/starbirth-program.js?v=20261011" defer></script>
+<script src="/public/js/starbirth-formation.js?v=20261011-1" defer></script>

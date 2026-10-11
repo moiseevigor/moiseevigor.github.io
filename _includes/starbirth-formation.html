@@ -1,0 +1,63 @@
+<figure class="sbf" id="star-formation" aria-labelledby="sbf-heading">
+  <header class="sbf-header">
+    <span class="sb-kicker">Explore the physics · a representative Sun-like star</span>
+    <h3 id="sbf-heading">From a cloud to a star</h3>
+    <p>Drag through the sequence. Watch the cloud contract, a protostar emerge, and its envelope and disk clear.</p>
+  </header>
+  <div class="sbf-body">
+    <div class="sbf-scene">
+      <svg class="sbf-placeholder" viewBox="0 0 720 420" aria-hidden="true">
+        <defs><radialGradient id="sbf-cloud-fallback"><stop stop-color="#b1a89d" stop-opacity=".55"/><stop offset="1" stop-color="#b1a89d" stop-opacity="0"/></radialGradient></defs>
+        <ellipse cx="350" cy="215" rx="245" ry="150" fill="url(#sbf-cloud-fallback)"/>
+        <ellipse cx="425" cy="185" rx="175" ry="115" fill="url(#sbf-cloud-fallback)"/>
+        <ellipse cx="275" cy="230" rx="150" ry="110" fill="url(#sbf-cloud-fallback)"/>
+      </svg>
+      <canvas id="sbf-canvas" role="img" aria-label="Schematic molecular cloud of gas and dust. No central star yet.">A molecular cloud contracts into a core, then a protostar, and eventually a main-sequence star. Read the nine milestones below.</canvas>
+      <span class="sbf-scene-tag" id="sbf-scene-tag">Gas + dust</span>
+      <span class="sbf-scene-note" id="sbf-scene-note">Most of the material is gas. Dust helps hide what is inside.</span>
+      <button class="sbf-reveal" id="sbf-reveal" type="button" aria-pressed="false" aria-controls="sbf-canvas" disabled>Reveal centre</button>
+    </div>
+    <section class="sbf-info" aria-labelledby="sbf-title">
+      <span class="sbf-step" id="sbf-step">Milestone 1 of 9</span>
+      <h4 id="sbf-title">Molecular cloud</h4>
+      <p id="sbf-description">Cold molecular gas and a small dust component gather into denser regions. Some regions become gravitationally unstable; others disperse.</p>
+      <dl>
+        <div><dt>What changes</dt><dd id="sbf-change">Dense structures develop inside the cloud.</dd></div>
+        <div><dt>Energy &amp; support</dt><dd id="sbf-energy">Thermal pressure, turbulence and magnetic fields compete with gravity.</dd></div>
+        <div><dt>What a telescope sees</dt><dd id="sbf-observe">Dust emission and molecular spectral lines; no central stellar object yet.</dd></div>
+      </dl>
+      <a class="sbf-source" id="sbf-source" href="https://arxiv.org/abs/1401.1809">Physics source: Dunham et al. (2014) ↗</a>
+    </section>
+  </div>
+  <div class="sbf-controls">
+    <div class="sbf-control-heading"><label for="sbf-timeline">Drag the formation timeline</label><output id="sbf-position" for="sbf-timeline">Cloud → core</output></div>
+    <input id="sbf-timeline" type="range" min="0" max="800" step="1" value="0" aria-describedby="sbf-time-note" aria-valuetext="Molecular cloud, milestone 1 of 9" disabled>
+    <nav class="sbf-milestones" aria-label="Star formation milestones">
+      <button type="button" data-phase="0" aria-current="step" title="Molecular cloud" disabled><span>1</span>Cloud</button>
+      <button type="button" data-phase="1" title="Collapsing prestellar core" disabled><span>2</span>Core</button>
+      <button type="button" data-phase="2" title="First hydrostatic core" disabled><span>3</span>First core</button>
+      <button type="button" data-phase="3" title="Second collapse" disabled><span>4</span>Collapse</button>
+      <button type="button" data-phase="4" title="Embedded protostar: often Class 0" disabled><span>5</span>Protostar</button>
+      <button type="button" data-phase="5" title="Envelope clears: often Class I" disabled><span>6</span>Envelope</button>
+      <button type="button" data-phase="6" title="Young star with disk: often Class II" disabled><span>7</span>Disk</button>
+      <button type="button" data-phase="7" title="Disk-poor young star: often Class III" disabled><span>8</span>Young star</button>
+      <button type="button" data-phase="8" title="Main-sequence star" disabled><span>9</span>Star</button>
+    </nav>
+    <div class="sbf-playback"><button id="sbf-play" type="button" aria-pressed="false" disabled>Play sequence</button><button id="sbf-reset" type="button" disabled>Back to cloud</button><span id="sbf-motion-note">Paused · explore at your own pace</span></div>
+    <p id="sbf-time-note" class="sbf-time-note">This is a sequence, not a calibrated clock. Short collapse stages are expanded; scale and colour are illustrative. Drag backwards to revisit a stage, not to reverse its physics.</p>
+    <p class="sbf-announcement" id="sbf-announcement" role="status" aria-live="polite" aria-atomic="true"></p>
+  </div>
+  <figcaption>A single low-mass pathway, with changing visual zoom. Real clouds can fragment into multiple stars. Class 0–III labels describe observed spectra and can depend on viewing angle; they are not exact ages. Deuterium burning can occur before sustained main-sequence hydrogen burning. The first core and second core are distinct: this research defines birth at <strong>second-core formation</strong>, not at the later main-sequence stage. <a href="https://arxiv.org/abs/2312.03039">Young (2023)</a>, <a href="https://arxiv.org/abs/1602.07314">Furlan et al. (2016)</a>, <a href="https://science.nasa.gov/universe/stars/">NASA: stars</a>.</figcaption>
+  <details class="sbf-reading"><summary>Read all nine milestones</summary><ol>
+    <li><strong>Molecular cloud.</strong> Gas and dust develop dense regions.</li>
+    <li><strong>Collapsing prestellar core.</strong> A bound region contracts; radiation carries away much of its heat.</li>
+    <li><strong>First hydrostatic core.</strong> Increasing opacity traps heat, allowing temporary pressure support.</li>
+    <li><strong>Second collapse.</strong> Near 2,000 K, molecular hydrogen dissociation allows renewed rapid contraction.</li>
+    <li><strong>Embedded protostar.</strong> A second hydrostatic core forms inside an infalling envelope; disks and outflows accompany accretion.</li>
+    <li><strong>Envelope clears.</strong> Accretion continues as the surrounding reservoir diminishes.</li>
+    <li><strong>Young star with disk.</strong> The envelope has largely dispersed; a disk can still feed the star.</li>
+    <li><strong>Disk-poor young star.</strong> The disk disperses and stellar contraction continues.</li>
+    <li><strong>Main-sequence star.</strong> Sustained central hydrogen fusion supports a long-lived stellar state.</li>
+  </ol></details>
+  <noscript><p>Enable JavaScript to drag the timeline. The complete sequence is available in the nine milestones above.</p></noscript>
+</figure>
