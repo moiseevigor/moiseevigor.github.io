@@ -61,7 +61,7 @@ The useful analogy is **local graphical composition**. In a Feynman diagram, per
 
 A mathematical proof may likewise be represented through ports (inputs and outputs), wires (uses or dependencies), interaction nodes (inferences and constructions), and enclosures (assumptions or subproof scopes). Expanding a box reveals its internal argument. Collapsing it retains an honest typed contract.
 
-This is also related to [string diagrams](https://arxiv.org/abs/0908.3347) and [proof nets](https://arxiv.org/abs/1802.03224). These traditions motivate compositional graphical reasoning but do not provide a universal semantics for all Lean proofs out of the box.
+This is also related to [string diagrams](https://arxiv.org/abs/0908.3347) and [proof nets](https://arxiv.org/abs/1802.03224). These traditions motivate compositional graphical reasoning but do not provide a universal semantics for all Lean proofs out of the box. There are also existing Lean-specific structural viewers: [Lean Atlas](https://github.com/NyxFoundation/lean-atlas) and an **independent, similarly named [ProofAtlas](https://proof-atlas.vercel.app/)** that studies Lean expression hypergraphs and verified structural measurements. This project is not affiliated with that one; merely drawing a Lean graph is not a novelty claim. Our open question is whether exact graphs can support faithful, recursively expandable *mathematical explanations*.
 
 ## The recursive tree is a way of reading a graph
 
@@ -138,6 +138,7 @@ The distinction is the research program. We are trying to move from a correct *m
 
 - [Lean 4: Expressions](https://lean-lang.org/doc/api/Lean/Expr.html) and [Theorem Proving in Lean](https://lean-lang.org/theorem_proving_in_lean4/Propositions-and-Proofs/) — the underlying term language and proof typing.
 - [Paperproof](https://github.com/Paper-Proof/paperproof) — visualizing Lean goals, contexts and proof development.
+- [Independent ProofAtlas](https://proof-atlas.vercel.app/) — Lean-based proof hypergraphs and structural metrics; a separate project with a closely related name and research questions.
 - [Lean Atlas](https://github.com/NyxFoundation/lean-atlas) — declaration dependency exploration.
 - [Peter Selinger, *A Survey of Graphical Languages for Monoidal Categories*](https://arxiv.org/abs/0908.3347) — formal compositional diagram syntax.
 - [Proof-net research](https://arxiv.org/abs/1802.03224) — removing sequential bureaucracy in particular logical systems, not all dependent type theory.
