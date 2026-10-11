@@ -1,0 +1,23 @@
+{
+  "schema": "matched-control-profile-uncertainty-gate/1",
+  "state": "stopped_profile_acquisition_incomplete",
+  "registration_commit": "ab969cc3",
+  "implementation_commit": "81ca0933ae7f9b85735c9c311b421e4584dfe43b",
+  "implementation_sha256": "fda661409c901782f4f81ba19f2e651c81e3286785a16714dcee1ab8aeba1d7a",
+  "prior_readout_sha256": "9c0722ed5972c1baf78991330712ea2423fa78ddc7c831d4c8fc737926760a47",
+  "requested": 1000,
+  "infrared_excess_measured": false,
+  "new_mipsgal_source_rows_read": false,
+  "independent_verification_pending": true,
+  "integer_range_amendment_sha256": "48816c5392f35219cc2ebd395633b768c161f2dbb8dffa205e589be6f9b675cb",
+  "error_type": "ValueError",
+  "error": "Whole-file/nonpartial response refused before body read",
+  "requests": 310,
+  "received_body_bytes": 2319232,
+  "acquisition_elapsed_seconds": 31.528392625041306,
+  "database_sha256": "ed1e43ea634d9b0b19f4519ab51567760cf52e52b69bef04f2d74295a8eaf740",
+  "database_bytes": 114688,
+  "stage_bytes": 6158817,
+  "free_bytes": 54801199104,
+  "outputs": {}
+}

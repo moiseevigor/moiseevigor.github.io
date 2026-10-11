@@ -1,0 +1,23 @@
+{
+  "schema": "matched-control-scientific-registration/1",
+  "inputs": {
+    "cache/higal360clump.csv": "e2986e34d18419fb0e7fc911fafaedbd081398d1128977ca1c480a39e4055364",
+    "cache/higal360_fir.csv": "74c391bd15a8bf44075515c8e21c1169edb148d2e6f9f9227bbf0c1236f2b554",
+    "artifacts/e1_full/pilot_targets.csv": "1625d28d54253adfa772937adf680a8d9706a318c2b52b9887bc6eba97be2ed0"
+  },
+  "protocol_path": "docs/MATCHED_CONTROL_STUDY_PROTOCOL_20261011.md",
+  "protocol_sha256": "7bb09af3edcc9a4c4865619c8ec4c9179d0403f2d8d6389a512206ce59fbde9c",
+  "seed": "matched-control-20261011:",
+  "all_cached_clumps": 94604,
+  "parent_count": 19328,
+  "historical_parent_count": 19219,
+  "historical_omissions": 109,
+  "geometric_domain_count": 10136,
+  "outside_domain_count": 9192,
+  "requested_count": 1000,
+  "sample_sha256": "373096ae25c71e6bc181d3361f6eee7c3cd1d2d7dea337cfbb2cc41adf619c8f",
+  "sample_historical_omissions": 2,
+  "new_map_values_read": false,
+  "new_mipsgal_source_rows_read": false,
+  "native_access_evidence": "artifacts/matched_control_header_probe_20261011/verification.json"
+}

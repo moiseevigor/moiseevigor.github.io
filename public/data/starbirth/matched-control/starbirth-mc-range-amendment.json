@@ -1,0 +1,20 @@
+{
+  "schema": "matched-control-range-coalescing-amendment/1",
+  "human_requested_continuation": true,
+  "authorization_text": "Why the goal is blocked? Please continue iterating on the goal and keep maintaining the block posts with interesting results.",
+  "document_path": "docs/MATCHED_CONTROL_RANGE_COALESCING_AMENDMENT_20261011.md",
+  "document_sha256": "601a3f73e3427481beddda4caf93deeb9b41ebd48ae7b597f5b9312ebb12a5f2",
+  "stopped_readout_sha256": "58badf4b1e91a85686e9226c3fc8f3fca39af4dceba2e64aa54e81b252271039",
+  "stopped_database_sha256": "ed1e43ea634d9b0b19f4519ab51567760cf52e52b69bef04f2d74295a8eaf740",
+  "carry_requests": 310,
+  "carry_body_bytes": 2319232,
+  "carry_acquisition_seconds": 31.528392625041306,
+  "same_scientific_comparison": true,
+  "scientific_thresholds_changed": false,
+  "wire_transport_only_changed": true,
+  "old_logical_ranges": 100,
+  "new_wire_ranges": 58,
+  "same_desired_bytes": 400,
+  "extra_gap_bytes": 0,
+  "future_failure_retry_authorized": false
+}

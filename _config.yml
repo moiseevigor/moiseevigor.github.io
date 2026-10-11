@@ -102,6 +102,13 @@ include:
   - "starbirth-core-verification.json"
   - "starbirth-n20-witness.json"
   - "starbirth-c6828-checkpoint.json"
+  - "starbirth-mc-registration.json"
+  - "starbirth-mc-profile-gate.json"
+  - "starbirth-mc-profile-verification.json"
+  - "starbirth-mc-covariance-diagnostic.json"
+  - "starbirth-mc-covariance-verification.json"
+  - "starbirth-mc-range-amendment.json"
+  - "starbirth-mc-historical-profile-stop.json"
   - "se2-provenance.json"
   - "se2-ray-thresholds.json"
 

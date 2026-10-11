@@ -1,0 +1,41 @@
+{
+  "schema": "matched-control-profile-uncertainty-gate/1",
+  "state": "insufficient_registered_uncertainty_support",
+  "registration_commit": "ab969cc3",
+  "implementation_commit": "21701526b75888b8c8c1bf6b0cf94b4b350629a0",
+  "implementation_sha256": "5e893b394b4d61262c393c87f758a277c5e8c39c42f08b0d1b60c171220ca3ce",
+  "prior_readout_sha256": "9c0722ed5972c1baf78991330712ea2423fa78ddc7c831d4c8fc737926760a47",
+  "requested": 1000,
+  "infrared_excess_measured": false,
+  "new_mipsgal_source_rows_read": false,
+  "independent_verification_pending": true,
+  "integer_range_amendment_sha256": null,
+  "range_coalescing_amendment_sha256": "f77efe3158ff363566d5d0d9370b8324b26bc027a0cbcf60e770fc8dcf01db23",
+  "reused_profile_pixels": 13647,
+  "targets_with_profile_control": 939,
+  "profile_control_combinations": 12648,
+  "minimum_required": 800,
+  "targets_with_profile_uncertainty_control": 333,
+  "sensitivity_crowding_balance_complete": false,
+  "requests": 3685,
+  "received_body_bytes": 29761115,
+  "acquisition_elapsed_seconds": 339.07478095800616,
+  "database_sha256": "26871639c1acaf7b6fbd1a3d633798a81bb9c53e4edacc61d9da800d3966bdb8",
+  "database_bytes": 13897728,
+  "stage_bytes": 23763272,
+  "free_bytes": 54771339264,
+  "outputs": {
+    "artifacts/matched_control_study_20261011/column_profiles.csv.gz": {
+      "bytes": 2243639,
+      "sha256": "5dc49f52756c52042681670c7c188ea2f3088a8d0eff47b30ee680e9b2a82b50"
+    },
+    "artifacts/matched_control_study_20261011/column_uncertainties.csv.gz": {
+      "bytes": 1354251,
+      "sha256": "3ca94b1b35dea65fdcb6051b890a87ea75ee42995601c04d71e141457137aa64"
+    },
+    "artifacts/matched_control_study_20261011/profile_support.csv": {
+      "bytes": 44075,
+      "sha256": "5155dedfb77fde1f13e93c35939f6faaca1de20b87ee9e2227342b5c34c640a2"
+    }
+  }
+}

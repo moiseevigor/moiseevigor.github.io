@@ -1,0 +1,19 @@
+{
+  "schema": "matched-control-profile-verification/1",
+  "independently_verified": true,
+  "requested": 1000,
+  "centrally_supported": 941,
+  "profile_supported": 939,
+  "profile_uncertainty_supported": 333,
+  "minimum_required": 800,
+  "state": "insufficient_registered_uncertainty_support",
+  "unique_profile_pixels": 176565,
+  "reused_profile_pixels": 13647,
+  "cumulative_requests": 3685,
+  "cumulative_response_bytes": 29761115,
+  "readout_sha256": "ccb817698114fe09d4e1c1a72d51a383c39ba612bc8dc8ee6e7580e542fc61d1",
+  "database_sha256": "26871639c1acaf7b6fbd1a3d633798a81bb9c53e4edacc61d9da800d3966bdb8",
+  "new_mipsgal_source_rows_read": false,
+  "infrared_excess_measured": false,
+  "scientific_interpretation": "Necessary control gate only; no infrared excess, hidden fraction or birth measurement."
+}

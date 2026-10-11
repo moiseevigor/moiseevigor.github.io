@@ -1,0 +1,24 @@
+{
+  "schema": "matched-control-covariance-verification/1",
+  "independently_verified": true,
+  "method": "Explicit 12x12 PSD covariance matrices and 1^T C 1; profiles recomputed from raw values",
+  "requested": 1000,
+  "scenario_supported_targets": [
+    814,
+    650,
+    514,
+    418,
+    333
+  ],
+  "rho_values": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1
+  ],
+  "original_gate_unchanged": true,
+  "covariance_estimated": false,
+  "source_occurrence_measured": false,
+  "diagnostic_sha256": "48e45e7c068c006b7f3d1e6439760b542fd8c5f806c39d598f7d6aa264e35974"
+}

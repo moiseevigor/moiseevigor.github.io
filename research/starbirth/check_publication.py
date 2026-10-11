@@ -70,7 +70,7 @@ def check_rendered(destination, entries):
     html = (destination / ARTICLE.strip('/') / 'index.html').read_text()
     assert '{{' not in html and '{%' not in html
     for term in ['Hidden protostars', '19,219', '16,754', '64 MiB',
-                 'not yet a frozen measurement protocol', 'invented values',
+                 'The measurement protocol is frozen', 'invented values',
                  'No confirmed stellar birth', '9–25%', '45–55%']:
         assert term in html, 'Missing claim/qualification: ' + term
     page = Page()

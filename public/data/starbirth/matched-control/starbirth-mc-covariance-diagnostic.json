@@ -1,0 +1,67 @@
+{
+  "schema": "matched-control-covariance-diagnostic/1",
+  "role": "post-read diagnostic, not a primary comparison or measured covariance",
+  "requested": 1000,
+  "profile_supported": 939,
+  "original_uncertainty_supported": 333,
+  "original_gate_target_failures": 568,
+  "original_gate_control_only_failures": 38,
+  "unknown_uncertainty_centres": 0,
+  "scenarios": [
+    {
+      "rho": 0,
+      "target_centres_within_limit": 826,
+      "targets_with_possible_control": 814,
+      "control_combinations": 10272,
+      "requested_without_supported_control": 186
+    },
+    {
+      "rho": 0.25,
+      "target_centres_within_limit": 686,
+      "targets_with_possible_control": 650,
+      "control_combinations": 7400,
+      "requested_without_supported_control": 350
+    },
+    {
+      "rho": 0.5,
+      "target_centres_within_limit": 560,
+      "targets_with_possible_control": 514,
+      "control_combinations": 5405,
+      "requested_without_supported_control": 486
+    },
+    {
+      "rho": 0.75,
+      "target_centres_within_limit": 461,
+      "targets_with_possible_control": 418,
+      "control_combinations": 4001,
+      "requested_without_supported_control": 582
+    },
+    {
+      "rho": 1,
+      "target_centres_within_limit": 371,
+      "targets_with_possible_control": 333,
+      "control_combinations": 2987,
+      "requested_without_supported_control": 667
+    }
+  ],
+  "conservative_relative_error_quartiles": {
+    "targets": [
+      0.24187829738770883,
+      0.34081443038021064,
+      0.5058854578169831
+    ],
+    "controls": [
+      0.30435431349062536,
+      0.4294001293357713,
+      0.6294189676214359
+    ]
+  },
+  "independent_bins_would_clear_support": true,
+  "covariance_identified": false,
+  "original_gate_changed": false,
+  "source_occurrence_measured": false,
+  "protocol_sha256": "8c84fe2cca6cd6c7251bea723aece846000ec82da62d3844618f631f6414f417",
+  "code_sha256": "3d1203af1e3ef3bd401dc6cc26eb5c2cef96307318097ef0d24f142762125050",
+  "profile_gate_sha256": "ccb817698114fe09d4e1c1a72d51a383c39ba612bc8dc8ee6e7580e542fc61d1",
+  "implementation_commit": "b076f2d4426c2ab9cd19094f08e90a548b6ec364"
+}

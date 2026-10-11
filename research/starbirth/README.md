@@ -1,8 +1,10 @@
 # Hidden protostars: public research program
 
 Publication date: 11 October 2026. The page introduces the accepted seven-day
-question; the primary comparison has not been measured and its detailed protocol
-is not yet frozen. No confirmed birth, identified population hidden-protostar
+question; the primary comparison has not been measured. Its detailed protocol is now
+frozen, and the independently verified uncertainty gate failed at 333/1,000
+against a required 800. A separate post-read diagnosis is hypothetical, not a
+validated covariance model. No confirmed birth, identified population hidden-protostar
 fraction, physical lifetime measurement or validated detector is asserted.
 
 The blog post lives in `_posts/2026-10-11-hidden-protostars-research-program.md`.
@@ -47,3 +49,12 @@ thresholds, estimator, spatial dependence treatment, uncertainty, decision
 thresholds and cost caps before the new outcome is read. A positive, null or
 insufficient-evidence conclusion is acceptable. A follow-up list contains at most
 20 supported association candidates, never a promised list of newborn stars.
+
+## Current study update
+
+Part 2 reports 939 profile-supported targets, 333 conservative uncertainty-supported
+targets, and the separate hypothetical covariance diagnosis (814 under independence).
+`matched-control/source-inventory.csv` binds twelve compact source files to revision
+`b0bbc8d89e06cfa812a5b91e5d863b7355750bd9`. Historical evidence above remains unchanged.
+The first stopped acquisition is retained alongside the repaired attempt. No new
+infrared source comparison, hidden fraction or birth is claimed.
