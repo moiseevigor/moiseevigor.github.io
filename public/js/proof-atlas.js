@@ -349,6 +349,8 @@
   }
   function setHover(point) {
     const next=point?infoFor(point):null;
+    // Cache the current geometric anchor for local elastic displacement.
+    if(next&&next.type==='expr')next.center=baseCoord(next.id);
     const old=state.hover;
     if(old&&next&&old.key===next.key){
       state.hoverTarget=1;
