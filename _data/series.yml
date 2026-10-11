@@ -278,3 +278,24 @@
       title: "Why matching dust clouds needs an error model"
       url: /astrophysics/2026/10/11/hidden-protostars-column-uncertainty/
       status: published
+
+
+- id: proof-atlas
+  title: "Proof Atlas: The Geometry of Proofs"
+  subtitle: "A typed, multiscale microscope for Lean proofs: whole-proof topology, recursive subarguments, and faithfully sourced mathematical explanations."
+  status: active
+  question: "Can the geometric structure of a formally checked proof reveal its main argument without requiring the reader to inspect every inference?"
+  outcome: "Initial validated instrument: 7,288 elaborated Lean expression occurrences represented as an interactive structural graph. Mathematical core-idea extraction is still human-annotated, not automated."
+  frontier: "Export transitive lemma certificates, implement certified module boundaries, and measure whether graphical navigation actually improves comprehension."
+  code: research/proof-atlas/
+  overview: /projects/proof-atlas/
+  verdicts:
+    - { h: "Structure", v: confirmed, label: "7,288 occurrences extracted and linked" }
+    - { h: "Navigation", v: confirmed, label: "interactive whole-proof graph and recursive drill-down" }
+    - { h: "Meaning", v: pending, label: "automatic semantic compression unverified" }
+    - { h: "Learning", v: pending, label: "reader benefit not yet measured" }
+  posts:
+    - part: 1
+      title: "Proof Atlas: The Geometry of a Formal Proof"
+      url: /mathematics/2026/10/11/proof-atlas-research-program/
+      status: published
