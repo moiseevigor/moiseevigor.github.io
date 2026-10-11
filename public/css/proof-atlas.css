@@ -278,3 +278,10 @@ html[data-theme="dark"] .pa-links a small{color:#adc1c6}
 @media(prefers-reduced-motion:reduce) {
   .pa-node-tooltip{backdrop-filter:none;}
 }
+
+
+/* Source-traceable declarations: readable Lean statements in the inspector. */
+.pa-statement-heading{font-size:10px;font-weight:800;letter-spacing:.13em;color:#8db9bd;margin:16px 0 6px}
+.pa-lean-statement{max-height:175px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;color:#e5edef;background:#102333;border:1px solid #344f5c;border-radius:4px;padding:11px;font:12px/1.55 "JetBrains Mono",ui-monospace,monospace;margin:0 0 12px}
+.pa-app-sidebar .pa-modes button{display:block;min-height:40px}
+.pa-inspector #pa-inspector-actions{max-width:100%}
