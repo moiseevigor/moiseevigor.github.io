@@ -6,7 +6,7 @@ permalink: /projects/proof-atlas/
 page_class: proof-atlas-page
 description: "Explore a real 7,288-expression Lean proof as an interactive graph, then compare its syntactic shape with its mathematical explanation."
 ---
-<link rel="stylesheet" href="/public/css/proof-atlas.css?v=1">
+<link rel="stylesheet" href="/public/css/proof-atlas.css?v=2">
 <main class="pa-page" id="proof-atlas">
   <section class="pa-hero" aria-labelledby="pa-title">
     <div class="pa-eyebrow"><span class="pa-orbit" aria-hidden="true"></span> Research program / Proof Atlas · 2026</div>
@@ -85,8 +85,8 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
         <p class="pa-app-hint">Drag to pan · scroll to zoom · click a dot to inspect. The recursive view opens a selected subexpression.</p>
       </aside>
       <div class="pa-stage">
-        <div class="pa-stage-head"><div><strong id="pa-view-title">Whole-proof geometry</strong><span id="pa-view-subtitle">Expression occurrence forest · measured structure</span></div><div class="pa-live-mark">COREGIR / 2026</div></div>
-        <canvas id="pa-canvas" tabindex="0" aria-label="Interactive Lean proof graph showing expression nodes and structural edges">Your browser does not support Canvas.</canvas>
+        <div class="pa-stage-head"><div><strong id="pa-view-title">Whole-proof geometry</strong><span id="pa-view-subtitle">Expression occurrence forest · measured structure</span></div><div class="pa-stage-tools"><button type="button" id="pa-focus" aria-pressed="false" title="Hide side panels to enlarge the graph">Focus graph</button><button type="button" id="pa-fullscreen" title="Enter browser fullscreen (Esc to exit)">⛶ Fullscreen</button><a href="/projects/proof-atlas/app/" class="pa-open-app" title="Open Proof Atlas as a dedicated full-window application">Open full app ↗</a></div></div>
+        <div class="pa-canvas-frame"><canvas id="pa-canvas" tabindex="0" aria-label="Interactive Lean proof graph showing expression nodes and structural edges">Your browser does not support Canvas.</canvas></div>
         <div class="pa-stage-foot"><span id="pa-stage-count">7,288 expression occurrences</span><span id="pa-canvas-status" role="status" aria-live="polite">Select a node to inspect</span></div>
       </div>
       <aside class="pa-inspector" aria-label="Selected graph node">
@@ -135,4 +135,4 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
   </section>
 </main>
 <script src="/public/data/proof-atlas/crossing-structure.js" defer></script>
-<script src="/public/js/proof-atlas.js?v=1" defer></script>
+<script src="/public/js/proof-atlas.js?v=2" defer></script>
