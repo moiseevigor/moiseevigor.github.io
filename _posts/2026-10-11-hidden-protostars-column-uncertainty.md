@@ -29,7 +29,7 @@ Before counting young stars inside dark clouds, we need a credible background co
 
 The study froze a nearby parent of **19,328 clumps**, a buffered survey domain of **10,136**, and an outcome-blind draw of **1,000**. These are new-study denominators; the historical 19,219-clump result remains a separate cohort. Every requested identity and failure is retained in the [1,000-row support table](/public/data/starbirth/matched-control/profile-support.csv). [Frozen protocol](/public/data/starbirth/matched-control/protocol.md), [registration](/public/data/starbirth/matched-control/starbirth-mc-registration.json).
 
-<nav class="sb-jump" aria-label="On this page"><a href="#gates">The measured gates</a><a href="#errors">Why errors add differently</a><a href="#scenarios">The diagnosis</a><a href="#next">What comes next</a><a href="#evidence">Evidence</a></nav>
+<nav class="sb-jump" aria-label="On this page"><a href="#gates">The measured gates</a><a href="#errors">Why errors add differently</a><a href="#scenarios">The diagnosis</a><a href="#cache-audit">The cache audit</a><a href="#next">What comes next</a><a href="#evidence">Evidence</a></nav>
 
 <h2 id="gates">The controls mostly match. Their uncertainty does not.</h2>
 
@@ -82,6 +82,14 @@ The independent check used full positive-semidefinite 12 × 12 covariance matric
 [Diagnostic rules](/public/data/starbirth/matched-control/covariance-protocol.md), [scenario output](/public/data/starbirth/matched-control/starbirth-mc-covariance-diagnostic.json), [independent matrix replay](/public/data/starbirth/matched-control/starbirth-mc-covariance-verification.json).
 
 The useful finding is that **control support depends strongly on the error model**. The 814 figure supplies no permission to assume independence. These rows are descriptive scenarios, not confidence bounds, fitted correlations, counts of embedded stars, or certified final controls. Under the original bound, 568 profile-supported targets fail their own error limit; another 38 have acceptable target error but lack an acceptable control.
+
+<h2 id="cache-audit">What the cached error products actually supply</h2>
+
+A subsequent, separately frozen offline audit verified **125 distinct cached native files**: 65 integrated-column headers and 60 uncertainty-cube headers. The uncertainty headers contain a dilution parameter (`ETA=10`), but the inspected products do not provide a full temperature-bin covariance or the response/noise information needed to validate it. This describes the inspected cache, not every possible archive product. [Audit report](/public/data/starbirth/covariance-audit/results.md), [frozen scope](/public/data/starbirth/covariance-audit/protocol.md).
+
+We also checked a narrower mathematical shortcut: does a nonnegative emission response alone guarantee that errors added in quadrature overestimate the error of the sum? **No.** A preconstructed positive-definite three-variable example has summed variance 182/101 and diagonal-only variance 152/101. Independent exact-rational methods agree. This is a generic linear-model counterexample, not an actual Herschel response, a measured correction for these clumps, or a failure of PPMAP.
+
+The result strengthens the need for a validated integrated-column uncertainty product or a source-bound covariance calculation reproducing the released marginal errors. Neither the known prior metadata nor the hypothetical 814 count unlocks the primary readout. [Exact certificate and cache inventory](/public/data/starbirth/covariance-audit/starbirth-covariance-audit.json), [independent verification](/public/data/starbirth/covariance-audit/starbirth-covariance-verification.json), [source bindings](/public/data/starbirth/covariance-audit/source-inventory.csv).
 
 <h2 id="next">The next target is the total-column uncertainty</h2>
 

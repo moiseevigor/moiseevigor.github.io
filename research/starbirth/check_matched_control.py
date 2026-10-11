@@ -29,6 +29,18 @@ assert counts==independent['scenario_supported_targets']==[814,650,514,418,333]
 assert independent['independently_verified'] and independent['covariance_estimated'] is False
 assert independent['diagnostic_sha256']==hashlib.sha256((PUBLIC/'starbirth-mc-covariance-diagnostic.json').read_bytes()).hexdigest()
 assert diagnosis['covariance_identified'] is False and diagnosis['original_gate_changed'] is False
+audit_dir=ROOT/'public/data/starbirth/covariance-audit'
+audit_entries=list(csv.DictReader((audit_dir/'source-inventory.csv').open()))
+assert len(audit_entries)==4
+for e in audit_entries:
+    data=(audit_dir/e['public_file']).read_bytes()
+    assert hashlib.sha256(data).hexdigest()==e['sha256'] and len(data)==int(e['bytes'])
+    assert e['source_revision']=='eeaf9440252aeac4d6502b416d2315d4ca98ecbd'
+audit=json.loads((audit_dir/'starbirth-covariance-audit.json').read_text())
+audit_verify=json.loads((audit_dir/'starbirth-covariance-verification.json').read_text())
+assert audit_verify['independently_verified'] and audit_verify['audit_sha256']==hashlib.sha256((audit_dir/'starbirth-covariance-audit.json').read_bytes()).hexdigest()
+assert audit_verify['integrated_variance']=='182/101' and audit_verify['quadrature_variance']=='152/101'
+assert audit['covariance_estimated'] is False and audit['source_occurrence_measured'] is False
 if len(sys.argv)>1:
     site=Path(sys.argv[1]); html=(site/ARTICLE.strip('/')/'index.html').read_text()
     for term in ['939','333','814','800','hypothetical','post-read diagnostic','unmeasured','No stellar birth','b0bbc8d89e06cfa812a5b91e5d863b7355750bd9']:
@@ -42,6 +54,9 @@ if len(sys.argv)>1:
             assert path.exists() or (path/'index.html').exists(), url
     for e in entries:
         assert (site/'public/data/starbirth/matched-control'/e['public_file']).read_bytes()==(PUBLIC/e['public_file']).read_bytes()
+    for e in audit_entries:
+        assert (site/'public/data/starbirth/covariance-audit'/e['public_file']).read_bytes()==(audit_dir/e['public_file']).read_bytes()
+    assert 'not an actual Herschel response' in html and '125 distinct cached native files' in html
     for path in ['index.html','lab/index.html','atom.xml','sitemap.xml']:
         assert ARTICLE in (site/path).read_text(), path
 print('PASS: twelve full source hashes, 1,000 exact identities, 939/333 gates, verified covariance scenarios, qualifications and publication links.')

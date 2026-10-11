@@ -1,0 +1,263 @@
+{
+  "schema": "column-covariance-audit-verification/1",
+  "independently_verified": true,
+  "method": "Exact cofactor inverse, principal minors and separate FITS-card scan",
+  "audit_sha256": "c2537807272fac116319594c7e6686bfe2dbcc7bfdff6eaf16715c4ad66d56f1",
+  "header_counts": {
+    "native_responses_car_amendment.sqlite": 65,
+    "profile_responses_coalesced.sqlite": 125
+  },
+  "curvature_principal_minors": [
+    2,
+    302,
+    404
+  ],
+  "integrated_variance": "182/101",
+  "quadrature_variance": "152/101",
+  "variance_ratio": "91/76",
+  "related_cards": [
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l000_results/l000_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l004_results/l004_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l006_results/l006_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l008_results/l008_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l011_results/l011_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l013_results/l013_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l015_results/l015_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l017_results/l017_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l019_results/l019_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l022_results/l022_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l024_results/l024_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l026_results/l026_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l028_results/l028_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l030_results/l030_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l033_results/l033_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l035_results/l035_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l037_results/l037_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l039_results/l039_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l041_results/l041_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l044_results/l044_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l046_results/l046_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l048_results/l048_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l050_results/l050_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l052_results/l052_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l057_results/l057_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l059_results/l059_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l061_results/l061_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l063_results/l063_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l066_results/l066_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l292_results/l292_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l294_results/l294_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l297_results/l297_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l299_results/l299_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l301_results/l301_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l303_results/l303_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l305_results/l305_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l308_results/l308_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l310_results/l310_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l312_results/l312_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l314_results/l314_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l316_results/l316_sigdiffcdens.fits",
+      "ETA     =             0.300000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l319_results/l319_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l321_results/l321_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l323_results/l323_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l325_results/l325_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l327_results/l327_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l330_results/l330_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l332_results/l332_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l334_results/l334_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l336_results/l336_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l338_results/l338_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l341_results/l341_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l343_results/l343_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l345_results/l345_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l347_results/l347_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l349_results/l349_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l352_results/l352_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l354_results/l354_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l356_results/l356_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ],
+    [
+      "http://www.astro.cardiff.ac.uk/research/ViaLactea/PPMAP_Results/l358_results/l358_sigdiffcdens.fits",
+      "ETA     =            10.000000 / Dilution"
+    ]
+  ],
+  "original_gate_unchanged": true,
+  "covariance_estimated": false,
+  "source_occurrence_measured": false
+}

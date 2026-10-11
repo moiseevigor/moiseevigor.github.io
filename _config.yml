@@ -109,6 +109,8 @@ include:
   - "starbirth-mc-covariance-verification.json"
   - "starbirth-mc-range-amendment.json"
   - "starbirth-mc-historical-profile-stop.json"
+  - "starbirth-covariance-audit.json"
+  - "starbirth-covariance-verification.json"
   - "se2-provenance.json"
   - "se2-ray-thresholds.json"
 
