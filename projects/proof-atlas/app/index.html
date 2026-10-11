@@ -16,10 +16,11 @@ description: "Full-window interactive atlas of the anonymized structural graph o
       <aside class="pa-app-sidebar" aria-label="Visualization controls">
         <div class="pa-app-kicker">CHOOSE A LENS</div>
         <div class="pa-modes" role="group" aria-label="Graph representation">
-          <button type="button" class="is-active" data-mode="whole" aria-pressed="true"><span>01</span> Whole proof</button>
+          <button type="button" class="is-active" data-mode="map" aria-pressed="true"><span>01</span> Named proof map</button>
           <button type="button" data-mode="deps" aria-pressed="false"><span>02</span> Dependencies</button>
           <button type="button" data-mode="recursive" aria-pressed="false"><span>03</span> Zoom into a branch</button>
           <button type="button" data-mode="meaning" aria-pressed="false"><span>04</span> Mathematical idea</button>
+        <button type="button" data-mode="whole" aria-pressed="false"><span>05</span> Raw syntax</button>
         </div>
         <div class="pa-app-kicker">EXPLORE</div>
         <label for="pa-search">Find a node by number</label>
@@ -53,4 +54,5 @@ description: "Full-window interactive atlas of the anonymized structural graph o
   </section>
 </div>
 <script src="/public/data/proof-atlas/crossing-structure.js" defer></script>
-<script src="/public/js/proof-atlas.js?v=6" defer></script>
+<script src="/public/data/proof-atlas/crossing-declarations.js" defer></script>
+<script src="/public/js/proof-atlas.js?v=7" defer></script>
