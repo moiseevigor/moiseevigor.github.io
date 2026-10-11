@@ -55,7 +55,9 @@
   hoverDetails.className='pa-hover-details';hoverDetails.hidden=true;
   hoverDetails.setAttribute('aria-label','Directly connected nodes');
   const inspectorNote=host.querySelector('.pa-inspector-note');
-  inspectorNote.parentNode.insertBefore(hoverDetails,inspectorNote);
+  // Keep ephemeral neighbourhood details above the persistent click inspector.
+  // On large proofs the user should not need to scroll to see one-hop links.
+  inspectorNote.parentNode.insertBefore(hoverDetails,$('pa-inspector-heading'));
   function resize() {
     if(state.hover&&state.hoverTarget){state.hover=null;state.hoverPower=state.hoverTarget=0;tooltip.hidden=true;hoverDetails.hidden=true;}
     // Bitmap size must follow actual CSS dimensions on every layout change.
