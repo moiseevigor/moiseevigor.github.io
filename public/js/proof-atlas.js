@@ -75,6 +75,9 @@
     g.addColorStop(0,'#163144');g.addColorStop(1,'#0b1a2b');
     ctx.fillStyle=g;ctx.fillRect(0,0,width,height);
   }
+  // Sizes and stroke widths are expressed in screen pixels, not in zoomed
+  // world units. Hover never makes a node grow with the zoom level.
+  const screenUnit=()=>1/Math.max(.8,state.scale);
   function plotPoint(x,y,r,col,opacity=1) {
     ctx.globalAlpha=opacity;ctx.fillStyle=col;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
   }
@@ -98,14 +101,27 @@
   function coord(i) {
     const p=baseCoord(i),h=state.hover;
     if(state.mode!=='whole'||!h||h.type!=='expr'||state.hoverPower<.001||i===h.id||!h.adj.has(i)) return p;
-    // A local elastic dilation, not a force simulation: every exact edge
-    // retains its endpoints, while its visible metric embedding breathes.
+    // Subtle elastic movement: at most 2 SCREEN pixels, independent of zoom.
+    // This is a transient viewing effect, never a change to the proof graph.
     const origin=h.center,dx=p.x-origin.x,dy=p.y-origin.y;
     const d=Math.hypot(dx,dy);
-    const push=(7+Math.min(10,Math.log2(1+D.size[i])*1.7))*state.hoverPower;
+    const push=2*screenUnit()*state.hoverPower;
     if(d<.1) {p.x+=Math.cos(angle[i])*push;p.y+=Math.sin(angle[i])*push;}
     else {p.x+=dx/d*push;p.y+=dy/d*push;}
     return p;
+  }
+  // One canonical radial Bézier path is used by both base drawing and hover.
+  // Highlighting therefore retraces an EXISTING parent–child edge: it never
+  // fabricates a straight shortcut between graph nodes.
+  function radialEdge(parent,child) {
+    const cx=width/2,cy=height/2,dx=parent.x-cx,dy=parent.y-cy;
+    const ex=child.x-cx,ey=child.y-cy;
+    const rp=Math.hypot(dx,dy),rc=Math.hypot(ex,ey);
+    const mid=(rp+rc)/2;
+    const pa=Math.atan2(dy,dx),ca=Math.atan2(ey,ex);
+    ctx.moveTo(parent.x,parent.y);
+    ctx.bezierCurveTo(cx+mid*Math.cos(pa),cy+mid*Math.sin(pa),
+      cx+mid*Math.cos(ca),cy+mid*Math.sin(ca),child.x,child.y);
   }
   function oneHop(i) {
     // Deduplicate vertices even if a binder link and child edge meet the same
@@ -122,26 +138,59 @@
   function register(x,y,id,type='expr',radius=7){state.points.push({x,y,id,type,radius});}
   function drawWhole(){
     sceneStart();
-    ctx.lineWidth=.58;ctx.strokeStyle='rgba(146,183,192,.13)';ctx.beginPath();
-    for(let i=0;i<N;i++){const p=D.parent[i];if(p<0)continue;const a=coord(i),b=coord(p);ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);}
+    // The base network and highlighted network follow the exact same path.
+    // Faint curves avoid visual spokes and retain the radial proof structure.
+    ctx.lineWidth=.62*screenUnit();
+    ctx.strokeStyle='rgba(146,183,192,.19)';
+    ctx.beginPath();
+    for(let i=0;i<N;i++){
+      const p=D.parent[i];if(p<0)continue;
+      radialEdge(coord(p),coord(i));
+    }
     ctx.stroke();
-    for(let i=0;i<N;i++){const p=coord(i),k=Number(D.kind[i]);plotPoint(p.x,p.y,k===3||k===4?1.8:1.07,palette[k],k===0?.45:.81);register(p.x,p.y,i,'expr',4);}
-    let i=state.selected;while(i>=0){const a=coord(i);plotPoint(a.x,a.y,i===state.selected?5:2.3,'#f3cb7b',1);i=D.parent[i];}
+    const su=screenUnit();
+    for(let i=0;i<N;i++){
+      const p=coord(i),k=Number(D.kind[i]);
+      plotPoint(p.x,p.y,(k===3||k===4?1.9:1.22)*su,palette[k],k===0?.48:.84);
+      register(p.x,p.y,i,'expr',5);
+    }
+    let i=state.selected;
+    while(i>=0){
+      const a=coord(i);
+      plotPoint(a.x,a.y,(i===state.selected?3.1:1.7)*su,'#f3cb7b',.95);
+      i=D.parent[i];
+    }
     const h=state.hover;
     if(h&&h.type==='expr'&&state.hoverPower>.005){
-      const center=coord(h.id),energy=state.hoverPower;
-      // Neighbours at graph distance exactly one, including binder links.
-      // A soft halo signals proximity without flashing the entire network.
-      ctx.globalAlpha=.12*energy;ctx.fillStyle='#9ce6d4';
-      ctx.beginPath();ctx.arc(center.x,center.y,21+energy*8,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
-      for(const [neighbor,relations] of h.adj){
-        const p=coord(neighbor),binderEdge=relations.includes('binder')||relations.includes('bound variable');
-        segment(center.x,center.y,p.x,p.y,binderEdge?'#ca9fec':'#a4f3da',.88*energy,binderEdge?2.3:2);
-        plotPoint(p.x,p.y,2.5+3.1*energy,binderEdge?'#d5afea':'#a3ebd6',.6+.4*energy);
+      const e=state.hoverPower,origin=coord(h.id);
+      // For high-degree binders use lower contrast, not ever-wider strokes.
+      const alpha=Math.min(.51,Math.max(.21,.64/Math.sqrt(Math.max(1,h.adj.size)/5)))*e;
+      ctx.globalAlpha=alpha;
+      ctx.lineWidth=1.18*su;
+      ctx.strokeStyle='#addfda';
+      ctx.beginPath();
+      for(const [neighbour,relations] of h.adj){
+        // Scope/binder references are real semantic links but are NOT drawn
+        // in the base structural tree. Show endpoints, not fictitious spokes.
+        if(D.parent[neighbour]===h.id)radialEdge(coord(h.id),coord(neighbour));
+        else if(D.parent[h.id]===neighbour)radialEdge(coord(neighbour),coord(h.id));
       }
-      plotPoint(center.x,center.y,5+5*energy,'#ffe2a3',.8+.2*energy);
-      ctx.strokeStyle='#fff2c6';ctx.lineWidth=1.35;ctx.globalAlpha=.8*energy;
-      ctx.beginPath();ctx.arc(center.x,center.y,9+5*energy,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;
+      ctx.stroke();
+      ctx.globalAlpha=1;
+      // Slightly larger dots + thin rings identify the actual degree-1 set.
+      for(const [neighbour,relations] of h.adj){
+        const q=coord(neighbour);
+        const binder=relations.includes('binder')||relations.includes('bound variable');
+        const color=binder?'#ceb3e1':'#a1e4d0';
+        plotPoint(q.x,q.y,2.35*su,color,.55+.4*e);
+        if(binder){
+          ctx.globalAlpha=.53*e;ctx.strokeStyle=color;ctx.lineWidth=.8*su;
+          ctx.beginPath();ctx.arc(q.x,q.y,3.75*su,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;
+        }
+      }
+      plotPoint(origin.x,origin.y,3.55*su,'#ffe3a7',.9);
+      ctx.globalAlpha=.68*e;ctx.strokeStyle='#f7dfae';ctx.lineWidth=.95*su;
+      ctx.beginPath();ctx.arc(origin.x,origin.y,5.65*su,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;
     }
     sceneEnd();
     $('pa-stage-count').textContent='7,288 expression occurrences · 7,286 child edges';
@@ -160,9 +209,13 @@
       segment(center.x,center.y,x,y,d.local?'#e6bb72':'#66acc4',d.local?.52:.23,.65+Math.log1p(d.count)/4);
       const isHover=state.hover && state.hover.type==='dep'&&state.hover.id===i;
       const lift=isHover?state.hoverPower:0;
-      plotPoint(x,y,bubble+lift*6,d.local?'#e6bc79':'#50beb4',.88);
-      if(lift>.02){segment(center.x,center.y,x,y,'#bcf4d8',lift,3);
-        plotPoint(x,y,bubble+lift*6,'#f6dba0',lift*.65);}
+      plotPoint(x,y,bubble,d.local?'#e6bc79':'#50beb4',.88);
+      if(lift>.02){
+        // Existing dependency connection, highlighted at original geometry.
+        segment(center.x,center.y,x,y,'#bcf4d8',.43*lift,1.05*screenUnit());
+        ctx.globalAlpha=.65*lift;ctx.strokeStyle='#f6dba0';ctx.lineWidth=1.1*screenUnit();
+        ctx.beginPath();ctx.arc(x,y,bubble+1.9*screenUnit(),0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;
+      }
       register(x,y,i,'dep',bubble+6);
       if(j<8 || d.local) label(x,y+(bubble+15),depName(d,i).slice(0,26),10.5,'#d5e1e7');
     }
@@ -196,15 +249,18 @@
     for(const n of v){if(!coordMap.has(n.parent))continue;const a=coordMap.get(n.i),b=coordMap.get(n.parent);segment(a.x,a.y,b.x,b.y,'#94bac3',.54,1.55);}
     for(const n of v){const p=coordMap.get(n.i),r=4+Math.min(9,Math.log2(1+D.size[n.i]));plotPoint(p.x,p.y,r,n.i===state.selected?'#f1ce8a':palette[Number(D.kind[n.i])]);register(p.x,p.y,n.i,'expr',r+6);}
     if(state.hover&&state.hover.type==='expr'&&state.hoverPower>.01){
-      const h=state.hover,center=coordMap.get(h.id);
-      if(center) {
-        for(const [other,rel] of h.adj) {
+      const h=state.hover,center=coordMap.get(h.id),su=screenUnit();
+      if(center){
+        for(const [other,rel] of h.adj){
           if(!coordMap.has(other))continue;
           const q=coordMap.get(other),isBinder=rel.includes('binder')||rel.includes('bound variable');
-          segment(center.x,center.y,q.x,q.y,isBinder?'#d8afe8':'#b9f1d9',state.hoverPower,2.5);
-          plotPoint(q.x,q.y,7+3*state.hoverPower,'#a8efdb',state.hoverPower);
+          // Only retrace structural links. Scope links get a small ring.
+          if(D.parent[other]===h.id || D.parent[h.id]===other){
+            segment(center.x,center.y,q.x,q.y,'#b9f1d9',.42*state.hoverPower,1.15*su);
+          }
+          plotPoint(q.x,q.y,(isBinder?3.45:2.75)*su,isBinder?'#c9b0e5':'#a8efdb',.8);
         }
-        plotPoint(center.x,center.y,9+4*state.hoverPower,'#ffe2a3');
+        plotPoint(center.x,center.y,3.8*su,'#ffe2a3');
       }
     }
     sceneEnd();$('pa-stage-count').textContent=v.length+' shown · '+fmt(D.size[state.root])+' in selected subtree';
@@ -224,7 +280,7 @@
     for(const it of reasons){
       const p=pos.get(it.id),col=it.id==='crossing'?'#e5ba72':'#69cbbd';
       const raised=state.hover&&state.hover.type==='idea'&&state.hover.id===it.id;
-      plotPoint(p.x,p.y,Math.min(25,width*.043)+(raised?6*state.hoverPower:0),raised?'#f9d89c':col,.95);
+      plotPoint(p.x,p.y,Math.min(25,width*.043)+(raised?1.2*screenUnit()*state.hoverPower:0),raised?'#f9d89c':col,.95);
       label(p.x,p.y+5,it.symbol,15,'#0d2434', 'center',700);
       label(p.x,p.y+46,it.title,Math.min(13,width*.024),'#e9f0f5','center',600);
       register(p.x,p.y,it.id,'idea',30);
@@ -403,7 +459,11 @@
       const d=(p.x-x)**2+(p.y-y)**2;
       if(d<best){best=d;found=p;}
     }
-    return found&&best<Math.pow(Math.max(found.radius,7)/Math.min(state.scale,1.7),2)*2?found:null;
+    if(!found)return null;
+    // Pointer tolerance is in SCREEN pixels; prevents distant nodes from
+    // acquiring enormous hit radii when heavily zoomed.
+    const tolerance=found.type==='expr'?7:Math.max(10,Math.min(30,found.radius*state.scale+3));
+    return best*state.scale*state.scale<tolerance*tolerance?found:null;
   }
   canvas.addEventListener('pointerdown',e=>{
     clearHover();
