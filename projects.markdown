@@ -15,10 +15,16 @@ a > img {
 
 ## [Research Lab](/lab/)
 
-Four mathematical research programs — each a pre-registered series of posts with
+Mathematical and computational research programs — each a documented series with
 theory appendices, formal articles, and a public research codebase — live in the
 **[Lab](/lab/)**: the question, the verdicts, the open frontier, and every output of
 each program on one page. The projects below are the software they run on.
+
+<hr />
+
+## [Proof Atlas — A Geometric Microscope for Lean](/projects/proof-atlas/)
+
+An [interactive, multiscale map of a real Lean proof](/projects/proof-atlas/) with 7,288 measured expression occurrences, direct-dependency exploration, recursive inspection, and a deliberately separate mathematical explanation. [Read the research program](/mathematics/2026/10/11/proof-atlas-research-program/) for definitions, validation methods, and the open frontier between syntax and mathematical meaning.
 
 <hr />
 
