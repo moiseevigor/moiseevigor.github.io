@@ -43,6 +43,7 @@
   const input = root.querySelector('#sbf-timeline');
   const play = root.querySelector('#sbf-play');
   const reveal = root.querySelector('#sbf-reveal');
+  const expand = root.querySelector('#sbf-expand');
   const buttons = Array.from(root.querySelectorAll('[data-phase]'));
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let position = 0, cutaway = false, playing = false, frame = null, previous = null, announced = -1;
@@ -187,6 +188,46 @@
     root.querySelector('#sbf-motion-note').textContent='Playing · 24-second illustration, not real elapsed time';
     frame=requestAnimationFrame(animate);
   });
+  // Like the article lightbox, this fills the viewport and closes with Escape.
+  // Move the existing figure, keeping its canvas and selected phase intact.
+  const expandedView = document.createElement('dialog');
+  expandedView.id = 'sbf-expanded';
+  expandedView.className = 'sbf-expanded';
+  expandedView.setAttribute('aria-labelledby','sbf-heading');
+  document.body.appendChild(expandedView);
+  const spacer = document.createElement('div');
+  spacer.className = 'sbf-spacer';
+  spacer.setAttribute('aria-hidden','true');
+  function closeExpanded() {
+    if (!expandedView.open) return;
+    pause();
+    expandedView.close();
+    spacer.replaceWith(root);
+    document.documentElement.classList.remove('sbf-modal-open');
+    expand.textContent = 'Full screen';
+    expand.setAttribute('aria-expanded','false');
+    expand.focus({preventScroll:true});
+    resize();
+  }
+  function openExpanded() {
+    pause();
+    spacer.style.height = root.getBoundingClientRect().height + 'px';
+    root.before(spacer);
+    expandedView.appendChild(root);
+    expand.textContent = 'Close full screen';
+    expand.setAttribute('aria-expanded','true');
+    document.documentElement.classList.add('sbf-modal-open');
+    expandedView.showModal();
+    expand.focus({preventScroll:true});
+    resize();
+  }
+  if (typeof expandedView.showModal === 'function') {
+    expand.disabled = false;
+    expand.addEventListener('click',()=>expandedView.open?closeExpanded():openExpanded());
+    expandedView.addEventListener('cancel',event=>{event.preventDefault();closeExpanded();});
+  } else {
+    expand.hidden = true;
+  }
   document.addEventListener('visibilitychange',()=>{if(document.hidden)pause();});
   reducedMotion.addEventListener('change',()=>{pause();play.disabled=reducedMotion.matches;});
   function resize() {

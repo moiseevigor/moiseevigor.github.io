@@ -21,7 +21,7 @@ description: >
 ---
 
 <link rel="stylesheet" href="/public/css/starbirth-program.css?v=20261011">
-<link rel="stylesheet" href="/public/css/starbirth-formation.css?v=20261011-1">
+<link rel="stylesheet" href="/public/css/starbirth-formation.css?v=20261011-2">
 
 <div class="l-body sb-program" markdown="1">
 
@@ -37,7 +37,13 @@ The eventual ambition is a detector of physical stellar births across large surv
 
 In the standard picture of low-mass star formation, gravity contracts a dense molecular core. Radiation initially carries away much of the heat; increasing opacity then allows a pressure-supported **first hydrostatic core** to form. At sufficiently high central temperatures, molecular hydrogen dissociation enables a second collapse and formation of a **second hydrostatic core**, the nascent protostar. This program uses that second-core formation as its physical definition of birth. It precedes sustained main-sequence hydrogen burning. Rotation, magnetic fields and radiative transfer affect the detailed predictions; a simple sequence is not a complete model for every massive clump. [Young (2023)](https://arxiv.org/abs/2312.03039), [Ahmad et al. (2023)](https://arxiv.org/abs/2310.01516).
 
+</div>
+
+<div class="l-page sbf-wide">
 {% include starbirth-formation.html %}
+</div>
+
+<div class="l-body sb-program" markdown="1">
 
 A telescope measures radiation escaping through the envelope, rather than the central state directly. In the models discussed by Young, second-core formation need not cause an immediate, distinctive change in the emerging spectrum. A brightening can also be an accretion burst from an older protostar. **A new infrared appearance does not uniquely date a birth.** [Young (2023), §4.1](https://arxiv.org/abs/2312.03039).
 
@@ -122,4 +128,4 @@ Download the [evidence inventory](/public/data/starbirth/source-inventory.csv), 
 </div>
 
 <script src="/public/js/starbirth-program.js?v=20261011" defer></script>
-<script src="/public/js/starbirth-formation.js?v=20261011-1" defer></script>
+<script src="/public/js/starbirth-formation.js?v=20261011-2" defer></script>
