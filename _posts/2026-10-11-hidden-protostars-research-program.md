@@ -25,7 +25,7 @@ description: >
 
 <div class="l-body sb-program" markdown="1">
 
-<div class="sb-status"><strong>Program opened · 11 October 2026.</strong> Historical results are separated from the proposed seven-day comparison. No confirmed stellar birth or validated birth detector has been established by this project. The new comparison has not yet been measured.</div>
+<div class="sb-status"><strong>Program updated · 11 October 2026.</strong> The measurement protocol is frozen. Verified profile matches support 939 of 1,000 clumps, but only 333 pass the conservative uncertainty gate, below the required 800. The primary comparison remains unmeasured. <a href="/astrophysics/2026/10/11/hidden-protostars-column-uncertainty/">Read the new results and covariance diagnosis.</a> No confirmed stellar birth or validated birth detector has been established.</div>
 
 Stars form inside clouds that hide the process from view. A patch of cold dust can look quiet while a compact object is already accreting material inside it. Our immediate question is therefore observational: **do apparently prestellar clumps contain more compact mid-infrared sources than comparable dusty sightlines?**
 
@@ -81,13 +81,13 @@ Dust can redden an unrelated background star. Crowding can blend neighbours into
   <noscript><p>The initial example is 20% − 8% = 12 percentage points. Enable JavaScript to vary the control.</p></noscript>
 </figure>
 
-We need column-density evidence **at both positions**, not just the clump's catalogue surface density. PPMAP provides model-derived Hi-GAL column maps and corresponding uncertainties at 12-arcsecond resolution. Their dust-opacity and radiative-transfer assumptions remain relevant. MIPSGAL provides catalogue and completeness products useful for checking mid-infrared sensitivity. These are prospective inputs: suitability for the frozen sample has not yet been established. [Marsh et al. (2017)](https://arxiv.org/abs/1707.03808), [IRSA MIPSGAL documentation](https://irsa.ipac.caltech.edu/data/SPITZER/MIPSGAL/).
+We need column-density evidence **at both positions**, not just the clump's catalogue surface density. PPMAP provides model-derived Hi-GAL column maps and corresponding uncertainties at 12-arcsecond resolution. Their dust-opacity and radiative-transfer assumptions remain relevant. MIPSGAL provides catalogue and completeness products useful for checking mid-infrared sensitivity. Column profiles have now been independently checked for the frozen sample, but uncertainty support failed and sensitivity/crowding suitability remains unestablished. [Current evidence](/astrophysics/2026/10/11/hidden-protostars-column-uncertainty/). [Marsh et al. (2017)](https://arxiv.org/abs/1707.03808), [IRSA MIPSGAL documentation](https://irsa.ipac.caltech.edu/data/SPITZER/MIPSGAL/).
 
 <h2 id="week">One week, one falsifiable question</h2>
 
 <blockquote class="sb-goal">Determine whether nearby Hi-GAL clumps labelled prestellar and undetected at 70 μm contain an excess of compact mid-infrared sources compared with sightlines matched for dust column, sensitivity and crowding.</blockquote>
 
-The intended seven-day window starts on 11 October 2026. This page states the research program; **it is not yet a frozen measurement protocol**. The exact eligible footprint, band, apertures, quality cuts, matching tolerances, minimum useful sample and statistical thresholds must be fixed before examining the new clump-versus-control outcome. We will not choose them because they produce the largest excess.
+The intended seven-day window starts on 11 October 2026. **The measurement protocol is frozen**, with a 1,000-clump outcome-blind draw, 15-arcsecond apertures and fixed control/error criteria. The original plan below records the intended sequence; its primary readout is now stopped at the uncertainty gate. Continued iteration concerns defensible total-column uncertainty, rather than a tuned threshold or a smaller primary cohort. [Protocol](/public/data/starbirth/matched-control/protocol.md), [verified outcome and next step](/astrophysics/2026/10/11/hidden-protostars-column-uncertainty/).
 
 <ol class="sb-plan">
   <li><b>Day 1 · Establish feasibility.</b> Check calibrated column maps, uncertainties and comparable mid-infrared coverage at both clump and potential control positions. Prefer cached inputs. Catalogue-only clump columns and display images are insufficient substitutes.</li>
