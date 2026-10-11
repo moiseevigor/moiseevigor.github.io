@@ -57,6 +57,15 @@ if len(sys.argv)>1:
     for e in audit_entries:
         assert (site/'public/data/starbirth/covariance-audit'/e['public_file']).read_bytes()==(audit_dir/e['public_file']).read_bytes()
     assert 'not an actual Herschel response' in html and '125 distinct cached native files' in html
-    for path in ['index.html','lab/index.html','atom.xml','sitemap.xml']:
+    for path in ['lab/index.html','sitemap.xml']:
         assert ARTICLE in (site/path).read_text(), path
+    assert ARTICLE in (site/'astrophysics/2026/10/11/hidden-protostars-research-program/index.html').read_text()
+    for home in [site/'index.html',*site.glob('page*/index.html')]:
+        assert ARTICLE not in home.read_text(), 'Program-only update appears on '+str(home)
+    import xml.etree.ElementTree as ET
+    feed=ET.fromstring((site/'atom.xml').read_text())
+    ns={'a':'http://www.w3.org/2005/Atom'}
+    for entry in feed.findall('a:entry',ns):
+        assert not any(link.get('href','').endswith(ARTICLE) for link in entry.findall('a:link',ns)), 'Program-only update has standalone feed entry'
+
 print('PASS: twelve full source hashes, 1,000 exact identities, 939/333 gates, verified covariance scenarios, qualifications and publication links.')

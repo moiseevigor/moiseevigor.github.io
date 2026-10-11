@@ -13,6 +13,7 @@ series_part: 2
 permalink: /astrophysics/2026/10/11/hidden-protostars-column-uncertainty/
 image: /public/img/posts/hidden-protostars.svg
 published: true
+listed: false
 comments: false
 description: >
   A verified control-support failure and a separate covariance diagnosis:
