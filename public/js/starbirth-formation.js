@@ -198,8 +198,10 @@
   const spacer = document.createElement('div');
   spacer.className = 'sbf-spacer';
   spacer.setAttribute('aria-hidden','true');
+  let nativeExpanded = false;
   function closeExpanded() {
     if (!expandedView.open) return;
+    if (document.fullscreenElement === root) document.exitFullscreen().catch(()=>{});
     pause();
     expandedView.close();
     spacer.replaceWith(root);
@@ -220,7 +222,19 @@
     expandedView.showModal();
     expand.focus({preventScroll:true});
     resize();
+    // Match the other explorers' native fullscreen when the browser permits it.
+    // The viewport-sized dialog stays usable if fullscreen is unavailable.
+    if (root.requestFullscreen) root.requestFullscreen().catch(()=>{});
   }
+  document.addEventListener('fullscreenchange',()=>{
+    if (document.fullscreenElement === root) {
+      nativeExpanded = true;
+      resize();
+    } else if (nativeExpanded) {
+      nativeExpanded = false;
+      closeExpanded();
+    }
+  });
   if (typeof expandedView.showModal === 'function') {
     expand.disabled = false;
     expand.addEventListener('click',()=>expandedView.open?closeExpanded():openExpanded());
