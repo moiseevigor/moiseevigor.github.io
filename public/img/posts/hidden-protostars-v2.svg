@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+<title id="title">Hidden protostars</title><desc id="desc">A schematic dusty clump with a small central source, contrasted with a matched control sightline. An illustration, not a survey image.</desc>
+<rect width="1200" height="630" fill="#ffffff"/>
+<g fill="none" stroke="#52776b" stroke-width="6">
+<ellipse cx="310" cy="270" rx="200" ry="144" opacity=".6"/><ellipse cx="310" cy="270" rx="158" ry="113" opacity=".75"/><ellipse cx="310" cy="270" rx="110" ry="79" opacity=".9"/><ellipse cx="310" cy="270" rx="58" ry="42"/>
+<ellipse cx="890" cy="270" rx="200" ry="144" opacity=".6"/><ellipse cx="890" cy="270" rx="158" ry="113" opacity=".75"/><ellipse cx="890" cy="270" rx="110" ry="79" opacity=".9"/><ellipse cx="890" cy="270" rx="58" ry="42"/>
+<path d="M554 269h90m-16-10 16 10-16 10" stroke="#25313c"/>
+</g>
+<circle cx="310" cy="270" r="9" fill="#ad7334"/><circle cx="960" cy="240" r="5" fill="#25313c"/>
+<g fill="#25313c" font-family="sans-serif" text-anchor="middle"><text x="310" y="466" font-size="23">Clump sightline</text><text x="890" y="466" font-size="23">Matched dusty control</text><text x="600" y="554" font-size="39">Hidden protostars</text><text x="600" y="596" font-size="18" fill="#65727e">A research program · schematic, not observed data</text></g>
+</svg>

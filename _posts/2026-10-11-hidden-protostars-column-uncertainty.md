@@ -11,7 +11,7 @@ series: hidden-protostars
 series_title: "Hidden protostars"
 series_part: 2
 permalink: /astrophysics/2026/10/11/hidden-protostars-column-uncertainty/
-image: /public/img/posts/hidden-protostars.svg
+image: /public/img/posts/hidden-protostars-v2.svg
 published: true
 listed: false
 comments: false
