@@ -1,0 +1,59 @@
+{
+  "schema": "c6828-terminal-checkpoint/1",
+  "status": "complete_unit_insufficient_evidence",
+  "date": "2026-10-08",
+  "question_answer": "Source separation not established because the frozen local reference-pair gate failed.",
+  "target_key": "c6828",
+  "registration_commit": "81e82fa4",
+  "implementation_commit": "efa3b115",
+  "worker_session_id": 62455,
+  "worker_exit_code": 0,
+  "verifier_session_id": 81303,
+  "verifier_exit_code": 0,
+  "worker_elapsed_seconds": 6.532413624983747,
+  "source_separation_fit_performed": false,
+  "physical_birth_confirmed": false,
+  "full_detector_goal_achieved": false,
+  "thresholds_changed_after_readout": false,
+  "failed_worker_restarted": false,
+  "automatic_successor_authorized": false,
+  "external_publication_attempted": false,
+  "files": {
+    "artifacts/c6828_source_association_20261008/registration.json": {
+      "bytes": 63672,
+      "sha256": "1172d041249d81ab77a7a6f3c6a404fc6568bd6decaadb0fadd9164a2f270c44"
+    },
+    "artifacts/c6828_source_association_20261008/prerequisites.json": {
+      "bytes": 59302,
+      "sha256": "ba0ab6669e9b0c6b9325966bc5c51d45105b213f842cf891b46cac2edeb655eb"
+    },
+    "artifacts/c6828_source_association_20261008/verification.json": {
+      "bytes": 1013,
+      "sha256": "a6c1cf2ff68943029150433b58e48f402ef9002ba0465e4e0a4e7aeac1d626cf"
+    },
+    "docs/C6828_SOURCE_ASSOCIATION_PROTOCOL_20261008.md": {
+      "bytes": 7130,
+      "sha256": "c107a752daaabb1ec11c5c7badef0c0a83efa08d5d9b205acdf32a5eee9c9fdd"
+    },
+    "docs/C6828_SOURCE_ASSOCIATION_RESULTS_20261008.md": {
+      "bytes": 5587,
+      "sha256": "fc13f25b533d102416bafef727663cede2c6a3ac0e5befe271e0cbfeb9e29843"
+    },
+    "research/c6828_source_association.py": {
+      "bytes": 12259,
+      "sha256": "fc014a036b80dbc09b0fe82a5cdd071b288cdfce8ece95cb4f4be2dec215192c"
+    },
+    "research/verify_c6828_source_association.py": {
+      "bytes": 9038,
+      "sha256": "5b861612df6e64d2b4416e03fe7a6be6e2e35b7ab4576798ef7901e9b81b5e06"
+    },
+    "tests/test_c6828_source_association.py": {
+      "bytes": 3365,
+      "sha256": "593ec5b76301f822e4f642f639bbfb0dd568954799e60cb7418bc57c3b000b47"
+    }
+  },
+  "free_gib": 39.07455062866211,
+  "new_output_bytes_before_checkpoint": 161366,
+  "output_cap_mib": 64,
+  "reserve_gib": 5
+}

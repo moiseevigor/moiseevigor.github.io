@@ -1,0 +1,27 @@
+{
+ "sample": "malt90",
+ "outcome": "active",
+ "n": 303,
+ "n_positive": 26,
+ "coef_full_model": {
+  "const": -3.805,
+  "log_mass": 3.049,
+  "log_surf_dens": -0.291,
+  "temp": 2.261,
+  "log_dist": -2.312,
+  "clip": -0.193
+ },
+ "clip_coef": -0.193,
+ "clip_coef_ci95_bootstrap": [
+  -0.929,
+  0.484
+ ],
+ "n_boot_ok": 2000,
+ "lr_stat": 0.398,
+ "lr_p": 0.528,
+ "mcfadden_r2": {
+  "tabular": 0.413,
+  "tabular_plus_clip": 0.415
+ },
+ "verdict_N19": "refuted"
+}

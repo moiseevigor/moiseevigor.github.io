@@ -1,0 +1,27 @@
+{
+ "sample": "almagal",
+ "outcome": "frag",
+ "n": 98,
+ "n_positive": 27,
+ "coef_full_model": {
+  "const": -1.185,
+  "log_mass": -0.154,
+  "log_surf_dens": 1.044,
+  "temp": 0.538,
+  "log_dist": 0.258,
+  "clip": 0.214
+ },
+ "clip_coef": 0.214,
+ "clip_coef_ci95_bootstrap": [
+  -0.542,
+  0.887
+ ],
+ "n_boot_ok": 2000,
+ "lr_stat": 0.48,
+ "lr_p": 0.4886,
+ "mcfadden_r2": {
+  "tabular": 0.2,
+  "tabular_plus_clip": 0.204
+ },
+ "verdict_N18": "refuted"
+}

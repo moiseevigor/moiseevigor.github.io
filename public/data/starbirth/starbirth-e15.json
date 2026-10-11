@@ -1,0 +1,57 @@
+{
+ "n_searched": 19219,
+ "n_mir_bright": 2465,
+ "frac_mir_bright": 0.1283,
+ "E15a": {
+  "spicy_rate_mir_bright": 0.0933,
+  "spicy_rate_other": 0.0038,
+  "ratio": 24.8,
+  "fisher_p_one_sided": 1.7375610711925183e-148,
+  "table": [
+   [
+    230,
+    2235
+   ],
+   [
+    63,
+    16691
+   ]
+  ]
+ },
+ "E15b": {
+  "n_with_ulim70": 2465,
+  "frac_F70ulim_below_F23": 0.014,
+  "median_log_F70ulim_over_F23": 0.95
+ },
+ "E15c_spicy_class_mix": {
+  "other": {
+   "ClassII": 0.46,
+   "uncertain": 0.286,
+   "FS": 0.143,
+   "ClassI": 0.095,
+   "ClassIII": 0.016
+  },
+  "mir_bright": {
+   "ClassII": 0.4,
+   "FS": 0.387,
+   "ClassI": 0.191,
+   "uncertain": 0.022
+  }
+ },
+ "distance_median_kpc": {
+  "mir_bright": 2.27,
+  "other": 2.2
+ },
+ "abs_glat_median_deg": {
+  "mir_bright": 0.603,
+  "other": 0.647
+ },
+ "temp_median_K": {
+  "mir_bright": 11.3,
+  "other": 11.0
+ },
+ "verdicts": {
+  "E15a": true,
+  "E15b_falling_SED_majority": false
+ }
+}
