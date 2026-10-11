@@ -5,6 +5,7 @@
 (function () {
   'use strict';
   const D = window.PROOF_ATLAS_DATA;
+  const S = window.PROOF_ATLAS_DECLARATIONS;
   const host = document.getElementById('pa-explorer');
   if (!host) return;
   const canvas = document.getElementById('pa-canvas'), ctx = canvas.getContext('2d');
@@ -15,6 +16,30 @@
   const N = D.parent.length, children = Array.from({length:N}, () => []), depth = new Uint8Array(N);
   D.parent.forEach((p,i) => { if (p >= 0) { children[p].push(i);depth[i]=depth[p]+1; } });
   const palette = ['#6e91c7','#4fc8b4','#bb9ce6','#e4b468','#e4b468','#d89c83'];
+  const namedNodes = S && Array.isArray(S.nodes) ? S.nodes : [];
+  const namedById = new Map(namedNodes.map(n=>[n.short,n]));
+  const namedEdges = S && Array.isArray(S.edges) ? S.edges : [];
+  const namedIncoming = new Map(namedNodes.map(n=>[n.short,[]]));
+  const namedOutgoing = new Map(namedNodes.map(n=>[n.short,[]]));
+  for(const e of namedEdges){
+    if(namedIncoming.has(e.to)&&namedOutgoing.has(e.from)){
+      namedIncoming.get(e.to).push(e.from);namedOutgoing.get(e.from).push(e.to);
+    }
+  }
+  const groupColors={
+    hypotheses:'#8baccb',definitions:'#62c7b5',endpoints:'#a6c2cc',monotonicity:'#c4a3df',
+    range:'#8fa9e2',gluing:'#e0bc83',existence:'#84dec7',uniqueness:'#eac989',conclusion:'#ffdfa4'
+  };
+  const namedDepth=new Map(),namedCoordinates=new Map();
+  function declarationDepth(id){
+    if(namedDepth.has(id))return namedDepth.get(id);
+    let rank=0;
+    for(const p of namedIncoming.get(id)||[])rank=Math.max(rank,1+declarationDepth(p));
+    namedDepth.set(id,rank);return rank;
+  }
+  for(const n of namedNodes) declarationDepth(n.short);
+  // A named theorem map is the default because it communicates mathematics.
+  // The 7,288-expression diagram remains the exact, low-level microscope.
   const reverseBinders = Array.from({length:N},()=>[]);
   const forwardBinders = new Int32Array(N).fill(-1);
   for(const [variable,binder] of D.binder) {
@@ -22,11 +47,12 @@
     forwardBinders[variable]=binder;
   }
   const reducedMotion=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const state = {mode:'whole',selected:D.roots[1],root:D.roots[1],scale:1,panX:0,panY:0,
+  const state = {mode:'map',selected:D.roots[1],namedSelected:'crossing',root:D.roots[1],scale:1,panX:0,panY:0,
     points:[],down:null,open:new Set([D.roots[1]]),extra:null,
     hover:null,hoverPower:0,hoverTarget:0,hoverFrame:0,lastHoverTime:0,pointer:null};
   const titles = {
-    whole:['Whole-proof geometry','All 7,288 Lean expression occurrences · radial syntax layout'],
+    map:['Named proof map','26 Lean declarations · 81 source-level references · Crossing.lean'],
+    whole:['Kernel syntax microscope','7,288 expression occurrences · low-level Lean term structure'],
     deps:['Dependency constellation','42 exact direct references · labels selectively anonymized'],
     recursive:['Recursive microscope','Expand expressions within a scoped subtree'],
     meaning:['Core mathematical argument','Human-authored explanation · NOT an extracted semantic proof']
@@ -135,7 +161,7 @@
     for(const variable of reverseBinders[i])add(variable,'bound variable');
     return adjacent;
   }
-  function register(x,y,id,type='expr',radius=7){state.points.push({x,y,id,type,radius});}
+  function register(x,y,id,type='expr',radius=7,w=0,h=0){state.points.push({x,y,id,type,radius,w,h});}
   function drawWhole(){
     sceneStart();
     // The base network and highlighted network follow the exact same path.
@@ -194,6 +220,85 @@
     }
     sceneEnd();
     $('pa-stage-count').textContent='7,288 expression occurrences · 7,286 child edges';
+  }
+  function drawMap(){
+    sceneStart();
+    if(!namedNodes.length){
+      label(width/2,height/2,'Named declaration data unavailable',17,'#efdfbd');sceneEnd();return;
+    }
+    const marginX=Math.max(70,Math.min(120,width*.085));
+    const marginTop=80,marginBottom=48;
+    const maxLayer=Math.max(...Array.from(namedDepth.values()),1);
+    const grouping=new Map();
+    for(const n of namedNodes){
+      const layer=namedDepth.get(n.short)||0;
+      if(!grouping.has(layer))grouping.set(layer,[]);
+      grouping.get(layer).push(n);
+    }
+    const xScale=(width-2*marginX)/maxLayer;
+    const cardWidth=Math.max(82,Math.min(165,xScale*.76));
+    const cardHeight=Math.max(27,Math.min(37,(height-marginTop-marginBottom)/9*.66));
+    namedCoordinates.clear();
+    for(const [layer,nodes] of grouping) {
+      const x=marginX+layer*xScale;
+      const step=(height-marginTop-marginBottom)/Math.max(1,nodes.length);
+      for(let j=0;j<nodes.length;j++){
+        const y=marginTop+step*(j+.5);
+        namedCoordinates.set(nodes[j].short,{x,y,w:cardWidth,h:cardHeight});
+      }
+    }
+    // Layer headings are conceptual orientation, not a claim that the
+    // dependency layers correspond to unique mathematical mechanisms.
+    const captions=['Inputs','Endpoint lemmas','Ranges & gluing','Combining cases','Uniqueness','Conclusion'];
+    for(let layer=0;layer<=maxLayer;layer++){
+      const x=marginX+layer*xScale;
+      label(x,33,captions[layer]||('Level '+layer),Math.min(12,Math.max(9,xScale*.085)),'#99b8c4');
+    }
+    const active=state.hover?.type==='decl' ? state.hover.id : state.namedSelected;
+    const highlighted=new Set([active,...(namedIncoming.get(active)||[]),...(namedOutgoing.get(active)||[])]);
+    // Draw all source-level references quietly, then bring the local one-hop
+    // dependencies forward. No edges are invented by the graph layout.
+    ctx.beginPath();ctx.strokeStyle='rgba(114,157,174,.13)';ctx.lineWidth=.85*screenUnit();
+    for(const e of namedEdges){
+      const a=namedCoordinates.get(e.from),b=namedCoordinates.get(e.to);
+      if(!a||!b)continue;
+      const bend=Math.max(18,(b.x-a.x)*.38);
+      ctx.moveTo(a.x+a.w/2,a.y);
+      ctx.bezierCurveTo(a.x+a.w/2+bend,a.y,b.x-b.w/2-bend,b.y,b.x-b.w/2,b.y);
+    }
+    ctx.stroke();
+    for(const e of namedEdges){
+      if(e.from!==active&&e.to!==active)continue;
+      const a=namedCoordinates.get(e.from),b=namedCoordinates.get(e.to);
+      if(!a||!b)continue;
+      const bend=Math.max(18,(b.x-a.x)*.38);
+      ctx.beginPath();ctx.moveTo(a.x+a.w/2,a.y);
+      ctx.bezierCurveTo(a.x+a.w/2+bend,a.y,b.x-b.w/2-bend,b.y,b.x-b.w/2,b.y);
+      ctx.strokeStyle=e.to===active?'#e8bf80':'#90e2cd';
+      ctx.globalAlpha=.92;ctx.lineWidth=1.7*screenUnit();ctx.stroke();ctx.globalAlpha=1;
+    }
+    for(const n of namedNodes){
+      const p=namedCoordinates.get(n.short),sel=n.short===active;
+      const dim=!!active&&!highlighted.has(n.short);
+      const major=['crossing','unique_branch','exists_branch','eq_of_branch_eq'].includes(n.short);
+      ctx.fillStyle=sel?'#325967':(major?'#244b58':'#18384a');
+      ctx.globalAlpha=dim?.51:1;
+      ctx.fillRect(p.x-p.w/2,p.y-p.h/2,p.w,p.h);
+      ctx.strokeStyle=sel?'#ffd69a':major?'#82c8bd':'#4b6976';
+      ctx.lineWidth=(sel?2.1:major?1.5:.8)*screenUnit();
+      ctx.strokeRect(p.x-p.w/2,p.y-p.h/2,p.w,p.h);
+      ctx.fillStyle=groupColors[n.group]||'#90b9c2';
+      ctx.fillRect(p.x-p.w/2,p.y-p.h/2,3.1*screenUnit(),p.h);
+      ctx.globalAlpha=dim?.65:1;
+      // Centered names—not numerical expression identifiers.
+      const limit=Math.max(7,Math.floor((p.w-12)/7.05));
+      const shown=n.short.length>limit?n.short.slice(0,limit-1)+'…':n.short;
+      label(p.x,p.y+4*screenUnit(),shown,Math.max(9,Math.min(12,xScale*.083)),'#e5f0f3','center',major?700:550);
+      ctx.globalAlpha=1;
+      register(p.x,p.y,n.short,'decl',Math.max(p.w,p.h)/2,p.w,p.h);
+    }
+    sceneEnd();
+    $('pa-stage-count').textContent=namedNodes.length+' named definitions and theorems · '+namedEdges.length+' source-level references';
   }
   function depName(d,i) {
     return d.name==='Kernel/library declaration'?'Declaration '+String(i+1).padStart(2,'0'):d.name;
@@ -287,7 +392,7 @@
     }
     sceneEnd();$('pa-stage-count').textContent='Interpretation by the researchers · not inferred by the compiler';
   }
-  function draw(){if(!canvas.width)return; if(state.mode==='whole')drawWhole();else if(state.mode==='deps')drawDeps();else if(state.mode==='recursive')drawRecursive();else drawMeaning();}
+  function draw(){if(!canvas.width)return; if(state.mode==='map')drawMap();else if(state.mode==='whole')drawWhole();else if(state.mode==='deps')drawDeps();else if(state.mode==='recursive')drawRecursive();else drawMeaning();}
   function updateMode(mode){
     state.hover=null;state.hoverPower=state.hoverTarget=0;
     tooltip.hidden=true;fillHoverDetails(null);
@@ -303,6 +408,34 @@
   function action(name,handler){
     const b=document.createElement('button');b.type='button';b.textContent=name;b.addEventListener('click',handler);$('pa-inspector-actions').appendChild(b);
   }
+  function showNamedStatement(n){
+    const box=document.createElement('pre');
+    box.className='pa-lean-statement';
+    box.textContent=n.statement;
+    $('pa-inspector-actions').appendChild(box);
+  }
+  function selectDeclaration(id){
+    const n=namedById.get(id);if(!n)return;
+    state.namedSelected=id;
+    $('pa-inspector-fields').replaceChildren();
+    $('pa-inspector-actions').replaceChildren();
+    $('pa-inspector-heading').textContent=n.short;
+    $('pa-inspector-summary').textContent=n.summary;
+    field('Lean declaration',n.kind==='def'?'Definition':n.kind==='structure'?'Structure':'Theorem / lemma');
+    field('Declared in','Crossing.lean, line '+n.line);
+    field('Proof references in this module',(namedIncoming.get(id)||[]).length);
+    field('Used by following declarations',(namedOutgoing.get(id)||[]).length);
+    const heading=document.createElement('div');heading.className='pa-statement-heading';
+    heading.textContent='LEAN STATEMENT';
+    $('pa-inspector-actions').appendChild(heading);
+    showNamedStatement(n);
+    for(const ref of namedIncoming.get(id)||[]){
+      action('← '+ref,()=>selectDeclaration(ref));
+    }
+    if(n.external?.length)field('Other source-level proof machinery',n.external.join(', '));
+    $('pa-canvas-status').textContent=n.name+' · '+n.kind;
+    draw();
+  }
   function selectExpr(i){
     if(i<0||i>=N)return;
     state.selected=i;$('pa-inspector-fields').replaceChildren();$('pa-inspector-actions').replaceChildren();
@@ -312,6 +445,12 @@
     if(D.parent[i]>=0)field('Parent occurrence','#'+D.parent[i]);
     const bound=D.binder.find(pair=>pair[0]===i);
     if(bound)field('Bound by expression','#'+bound[1]);
+    // This anonymized expression projection does not have full type/payloads.
+    // But we can still show named constants referenced inside its subtree.
+    const refs=D.deps.filter(d=>d.name!=='Kernel/library declaration'
+      &&d.uses.some(j=>j>=i&&j<i+D.size[i]))
+      .slice(0,8).map(d=>d.name);
+    if(refs.length)field('Named constants in subtree',refs.join('; '));
     action('Open this subtree',()=>{state.root=i;state.open.add(i);updateMode('recursive');});
     if(children[i].length)action('Show first child',()=>selectExpr(children[i][0]));
     if(D.parent[i]>=0)action('Go to parent',()=>selectExpr(D.parent[i]));
@@ -344,6 +483,14 @@
   // exact Lean expression or binder links.
   const ideaEdges=[['phase','exists'],['phase','unique'],['exists','crossing'],['unique','crossing']];
   function infoFor(p) {
+    if(p.type==='decl'){
+      const n=namedById.get(p.id);
+      const deps=namedIncoming.get(p.id)||[],users=namedOutgoing.get(p.id)||[];
+      const adj=new Map([...deps.map(x=>[x,['required by this declaration']]),...users.map(x=>[x,['uses this declaration']])]);
+      return {key:'decl:'+p.id,id:p.id,type:'decl',title:n.name,subtitle:n.summary,
+        adj,items:[...deps.map(id=>({label:id,detail:'Referenced in proof'})),
+          ...users.map(id=>({label:id,detail:'Uses this declaration'}))],count:adj.size};
+    }
     if(p.type==='expr') {
       const adj=oneHop(p.id);
       return {key:'expr:'+p.id,id:p.id,type:'expr',title:'Expression #'+p.id,
@@ -456,6 +603,10 @@
     const y=(clientY-rect.top-height/2-state.panY)/state.scale+height/2;
     let found=null,best=Infinity;
     for(const p of state.points) {
+      if(p.type==='decl' && Math.abs(p.x-x)<=(p.w||0)/2+3/Math.max(.6,state.scale)
+        && Math.abs(p.y-y)<=(p.h||0)/2+3/Math.max(.6,state.scale)){
+        return p;
+      }
       const d=(p.x-x)**2+(p.y-y)**2;
       if(d<best){best=d;found=p;}
     }
@@ -486,7 +637,8 @@
     const d=state.down;state.down=null;
     if(!d||Math.hypot(e.clientX-d.sx,e.clientY-d.sy)>5)return;
     const p=hit(e.clientX,e.clientY);if(!p)return;
-    if(p.type==='expr')selectExpr(p.id);else if(p.type==='dep')selectDep(p.id);
+    if(p.type==='decl')selectDeclaration(p.id);
+    else if(p.type==='expr')selectExpr(p.id);else if(p.type==='dep')selectDep(p.id);
     else if(p.type==='theorem'){updateMode('whole');selectExpr(D.roots[1]);}
     else selectIdea(p.id);
   });
@@ -549,5 +701,5 @@
     canvasObserver.observe(canvasFrame);
   }
   window.addEventListener('resize',refitSoon);
-  updateMode('whole');resize();selectExpr(D.roots[1]);
+  updateMode('map');resize();selectDeclaration('crossing');
 })();
