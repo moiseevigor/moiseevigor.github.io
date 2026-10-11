@@ -48,6 +48,7 @@ async function run(){
     await page.waitForTimeout(350);
     check(await page.evaluate(()=>!!window.PROOF_ATLAS_DATA),'CoreGIR projection did not load');
     check((await page.evaluate(()=>window.PROOF_ATLAS_DATA.parent.length))===7288,'wrong node count');
+    await page.locator('[data-mode="whole"]').click();
     await page.locator('#pa-focus').click();
     await page.waitForTimeout(300);
     let r=await rootPoint(page);
