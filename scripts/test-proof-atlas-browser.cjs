@@ -23,7 +23,7 @@ async function rootPoint(page){
     const a=Math.PI*2*((first[root]+last[root])*.5+.5)/count-Math.PI/2;
     const r=14+Math.min(rect.width,rect.height)*.44*Math.pow(1/(D.stats.maxDepth+1),.76);
     return {root, x:rect.left+rect.width/2+r*Math.cos(a),y:rect.top+rect.height/2+r*Math.sin(a),
-      degree:child[root].length};
+      degree:new Set([...child[root], ...D.binder.filter(pair=>pair[1]===root).map(pair=>pair[0])]).size};
   });
 }
 async function run(){
@@ -63,7 +63,8 @@ async function run(){
     check(m.beziers>7200,'base proof edges not curved');
     check(m.lines===0,'straight-line spokes found: '+m.lines);
     await page.screenshot({path:path.join(captures,'hover-hub-fit.png')});
-    await page.mouse.move(r.x+180,r.y+175);
+    const off=await page.locator('#pa-canvas').boundingBox();
+    await page.mouse.move(off.x+8,off.y+8);
     await page.waitForTimeout(300);
     check(await page.locator('.pa-node-tooltip:not([hidden])').count()===0,'hover card persisted after mouse-out');
     // Three zoom steps; marker radius should remain bounded in screen pixels.
