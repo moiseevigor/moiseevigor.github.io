@@ -1,0 +1,155 @@
+{
+  "schema": "native-mmb-position-registration/1",
+  "created_utc": "2026-10-12T23:01:29.416407+00:00",
+  "source_revision": "ca2194becd570193fc8a1a326d7de2ea12d669ff",
+  "inputs": [
+    {
+      "path": "artifacts/native_glimpse_association_20261012/evidence_cards.json",
+      "bytes": 34699,
+      "sha256": "8929cd3bb703491adc3bff7853c445bc1e2b4649f83f14fb41a9ef34cc0b7490"
+    },
+    {
+      "path": "cache/e16/mmb_billington2019.csv",
+      "bytes": 39855,
+      "sha256": "3615a3c35b2578c827fd863fb27a525d9c2c3cd270f86d7238310e1bffc999ea"
+    },
+    {
+      "path": "docs/RESEARCH_GOAL.md",
+      "bytes": 19581,
+      "sha256": "0b069de94db20d821cba5aa1565add7a5da274fcb5616e6e27d7ad7b2937916b"
+    },
+    {
+      "path": "docs/MULTISURVEY_RESEARCH_PROGRAM_20261012.md",
+      "bytes": 10578,
+      "sha256": "6dcf4b55081d510a248fba28a1c848bdaf6f720d28dd19d867fc0360b1e94496"
+    },
+    {
+      "path": "docs/ADVERSARIAL_REVIEW_20261006.md",
+      "bytes": 12681,
+      "sha256": "c28b2ccc8513c9fd4b6fc8db7364ba474316a2da53592963037bb1b6358e9021"
+    },
+    {
+      "path": "artifacts/native_profile_quality_checkpoint_20261013.json",
+      "bytes": 4826,
+      "sha256": "fbc6aec2e8c62fdc4c293b059b46af7af5b482445edef9e58aef672bf60945ef"
+    }
+  ],
+  "cases": [
+    {
+      "id": "HIGALBM330.8814-0.3656",
+      "ra": "242.585210",
+      "dec": "-52.099141",
+      "fixed_best_designation": "SSTGLMC G330.8829-00.3661",
+      "alternatives": [
+        {
+          "designation": "SSTGLMC G330.8829-00.3661",
+          "cntr": "23834137",
+          "ra": "242.587533",
+          "dec": "-52.098443"
+        }
+      ]
+    },
+    {
+      "id": "HIGALBM351.2258+0.6937",
+      "ra": "260.038850",
+      "dec": "-35.912856",
+      "fixed_best_designation": "SSTGLMC G351.2258+00.6940",
+      "alternatives": [
+        {
+          "designation": "SSTGLMC G351.2245+00.6932",
+          "cntr": "1054355",
+          "ra": "260.038329",
+          "dec": "-35.914117"
+        },
+        {
+          "designation": "SSTGLMC G351.2258+00.6940",
+          "cntr": "1054996",
+          "ra": "260.038363",
+          "dec": "-35.912558"
+        },
+        {
+          "designation": "SSTGLMC G351.2276+00.6945",
+          "cntr": "1055843",
+          "ra": "260.039101",
+          "dec": "-35.910879"
+        }
+      ]
+    },
+    {
+      "id": "HIGALBM353.4272-0.3734",
+      "ra": "262.634300",
+      "dec": "-34.688756",
+      "fixed_best_designation": "SSTGLMC G353.4273-00.3723",
+      "alternatives": [
+        {
+          "designation": "SSTGLMC G353.4273-00.3723",
+          "cntr": "2224085",
+          "ra": "262.633239",
+          "dec": "-34.688109"
+        },
+        {
+          "designation": "SSTGLMC G353.4284-00.3731",
+          "cntr": "2224805",
+          "ra": "262.634758",
+          "dec": "-34.687567"
+        }
+      ]
+    }
+  ],
+  "url": "https://cdsarc.cds.unistra.fr/ftp/VIII/96/catalog.dat",
+  "metadata_head_preflight": {
+    "http_status": 200,
+    "content_length": 69855,
+    "etag": "\"110df-4f9bccb21cb00\"",
+    "last_modified": "Mon, 19 May 2014 08:46:04 GMT",
+    "catalogue_body_read": false
+  },
+  "native_catalogue_positions_read_before_registration": false,
+  "selection_consumed": true,
+  "catalogue_consumption_history": "MMB/Billington references previously consumed; no claim of fresh held-out truth",
+  "expected_native_rows": 707,
+  "maximum_native_row_width": 114,
+  "primary": "At least one of the three fixed best Catalog points has a flag-blank native MMB position within 1 arcsec, outside numeric boundary guard",
+  "primary_is_projected_geometry_not_physical_validation": true,
+  "rules": {
+    "point_radius_arcsec": 1,
+    "numeric_boundary_guard_arcsec": 1e-05,
+    "secondary_context_radii_arcsec": [
+      15,
+      30
+    ],
+    "native_primary_allowed_flag": " ",
+    "independent_coordinate_tolerance_degrees": 1e-10,
+    "independent_angle_tolerance_arcsec": 2e-06
+  },
+  "limits": {
+    "requests": 1,
+    "retries": 0,
+    "response_bytes": 131072,
+    "timeout_seconds": 60,
+    "cpu_threads": 1,
+    "acquisition_stage_mib": 1,
+    "analysis_stage_mib": 1,
+    "verification_stage_mib": 1,
+    "combined_packet_mib": 4,
+    "worker_wall_seconds": 600,
+    "worker_rss_mib": 256,
+    "free_reserve_gib": 5
+  },
+  "metadata_sources": [
+    "https://cdsarc.cds.unistra.fr/viz-bin/ReadMe/VIII/96?format=html&tex=true",
+    "https://cdsarc.cds.unistra.fr/viz-bin/ReadMe/J/MNRAS/490/2779?format=html&tex=true"
+  ],
+  "synthetic_controls_passed": [
+    "Native field offsets and string row identity",
+    "Negative zero declination",
+    "Single-dish and possibly-thermal flags retained",
+    "Independent sexagesimal conversion and RA-wrap/polar separation"
+  ],
+  "new_survey": false,
+  "new_model_fit": false,
+  "new_stars": 0,
+  "new_births": 0,
+  "restart_neowise_request": false,
+  "restart_n20": false
+}

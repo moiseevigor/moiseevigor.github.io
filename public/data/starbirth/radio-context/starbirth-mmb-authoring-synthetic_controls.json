@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "native_catalogue_body_read": false,
+  "checks": [
+    "Native field offsets and string row identity",
+    "Negative zero declination",
+    "Single-dish and possibly-thermal flags retained",
+    "Independent sexagesimal conversion and RA-wrap/polar separation"
+  ],
+  "source_sha256": {
+    "acquire_native_mmb_positions_20261013.py": "141137cff36e00280176bdb3186912822079f938d1056ac7767ebea0dece7829",
+    "analyze_native_mmb_positions_20261013.py": "c45275a23266e175ebfd5e12c375fe518f327719a43047868280d9c9cb3be3b9",
+    "verify_native_mmb_positions_20261013.py": "b9f852bbc68e4ddbb2d1a2d9a37c63b3fba806b4840eaaa75e3430355dc4c9b2"
+  }
+}

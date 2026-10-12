@@ -1,0 +1,1 @@
+Historical registration authoring and synthetic controls. The script retains its original absolute workspace/temporary source paths; use an isolated checkout and copies of the three retained research implementations for deliberate reproduction. Do not overwrite existing registrations or receipts. Only HTTP headers, not native source positions, were inspected before registration.

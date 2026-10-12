@@ -1,0 +1,246 @@
+{
+  "schema": "native-mmb-three-case-projected-marker/1",
+  "registration_sha256": "95d0d21f137920f0719deb1fb4fc5c4d9382b0f9a4b2786b92cbdaa7328f3b8f",
+  "catalogue_sha256": "794027fab223356a267bfaca8d0e8d369f6ab37adfea15644af00e30183b77a5",
+  "radio_records_sha256": "1c9a4949dde9515d649dacc94ff90029c9c630fd1016ea25401f7682af81f7c5",
+  "native_radio_records": 707,
+  "cases": [
+    {
+      "case_id": "HIGALBM330.8814-0.3656",
+      "assessments": [
+        {
+          "point_id": "HIGALBM330.8814-0.3656",
+          "point_kind": "clump_centre",
+          "ra": "242.585210",
+          "dec": "-52.099141",
+          "fixed_best": false,
+          "nearest_maser": {
+            "maser_row_id": "VIII/96/catalog.dat:000307",
+            "separation_arcsec": 12.519881341253434,
+            "flag": " "
+          },
+          "masers_within_1_arcsec": [],
+          "conservative_projected_radio_support": false,
+          "conservative_radio_rows": [],
+          "masers_within_15_arcsec": [
+            {
+              "maser_row_id": "VIII/96/catalog.dat:000307",
+              "separation_arcsec": 12.519881341253434,
+              "flag": " "
+            }
+          ],
+          "masers_within_30_arcsec": [
+            {
+              "maser_row_id": "VIII/96/catalog.dat:000307",
+              "separation_arcsec": 12.519881341253434,
+              "flag": " "
+            }
+          ],
+          "physical_stage": "unknown",
+          "clump_membership": "unestablished",
+          "birth_status": "not_established"
+        },
+        {
+          "designation": "SSTGLMC G330.8829-00.3661",
+          "cntr": "23834137",
+          "ra": "242.587533",
+          "dec": "-52.098443",
+          "point_id": "SSTGLMC G330.8829-00.3661",
+          "point_kind": "catalogue_alternative",
+          "fixed_best": true,
+          "nearest_maser": {
+            "maser_row_id": "VIII/96/catalog.dat:000307",
+            "separation_arcsec": 17.500514853999416,
+            "flag": " "
+          },
+          "masers_within_1_arcsec": [],
+          "conservative_projected_radio_support": false,
+          "conservative_radio_rows": [],
+          "masers_within_15_arcsec": [],
+          "masers_within_30_arcsec": [
+            {
+              "maser_row_id": "VIII/96/catalog.dat:000307",
+              "separation_arcsec": 17.500514853999416,
+              "flag": " "
+            }
+          ],
+          "physical_stage": "unknown",
+          "clump_membership": "unestablished",
+          "birth_status": "not_established"
+        }
+      ]
+    },
+    {
+      "case_id": "HIGALBM351.2258+0.6937",
+      "assessments": [
+        {
+          "point_id": "HIGALBM351.2258+0.6937",
+          "point_kind": "clump_centre",
+          "ra": "260.038850",
+          "dec": "-35.912856",
+          "fixed_best": false,
+          "nearest_maser": {
+            "maser_row_id": "VIII/96/catalog.dat:000067",
+            "separation_arcsec": 103.45834361679871,
+            "flag": " "
+          },
+          "masers_within_1_arcsec": [],
+          "conservative_projected_radio_support": false,
+          "conservative_radio_rows": [],
+          "masers_within_15_arcsec": [],
+          "masers_within_30_arcsec": [],
+          "physical_stage": "unknown",
+          "clump_membership": "unestablished",
+          "birth_status": "not_established"
+        },
+        {
+          "designation": "SSTGLMC G351.2245+00.6932",
+          "cntr": "1054355",
+          "ra": "260.038329",
+          "dec": "-35.914117",
+          "point_id": "SSTGLMC G351.2245+00.6932",
+          "point_kind": "catalogue_alternative",
+          "fixed_best": false,
+          "nearest_maser": {
+            "maser_row_id": "VIII/96/catalog.dat:000067",
+            "separation_arcsec": 105.08684411595736,
+            "flag": " "
+          },
+          "masers_within_1_arcsec": [],
+          "conservative_projected_radio_support": false,
+          "conservative_radio_rows": [],
+          "masers_within_15_arcsec": [],
+          "masers_within_30_arcsec": [],
+          "physical_stage": "unknown",
+          "clump_membership": "unestablished",
+          "birth_status": "not_established"
+        },
+        {
+          "designation": "SSTGLMC G351.2258+00.6940",
+          "cntr": "1054996",
+          "ra": "260.038363",
+          "dec": "-35.912558",
+          "point_id": "SSTGLMC G351.2258+00.6940",
+          "point_kind": "catalogue_alternative",
+          "fixed_best": true,
+          "nearest_maser": {
+            "maser_row_id": "VIII/96/catalog.dat:000067",
+            "separation_arcsec": 104.88107724059479,
+            "flag": " "
+          },
+          "masers_within_1_arcsec": [],
+          "conservative_projected_radio_support": false,
+          "conservative_radio_rows": [],
+          "masers_within_15_arcsec": [],
+          "masers_within_30_arcsec": [],
+          "physical_stage": "unknown",
+          "clump_membership": "unestablished",
+          "birth_status": "not_established"
+        },
+        {
+          "designation": "SSTGLMC G351.2276+00.6945",
+          "cntr": "1055843",
+          "ra": "260.039101",
+          "dec": "-35.910879",
+          "point_id": "SSTGLMC G351.2276+00.6945",
+          "point_kind": "catalogue_alternative",
+          "fixed_best": false,
+          "nearest_maser": {
+            "maser_row_id": "VIII/96/catalog.dat:000067",
+            "separation_arcsec": 102.95458196526349,
+            "flag": " "
+          },
+          "masers_within_1_arcsec": [],
+          "conservative_projected_radio_support": false,
+          "conservative_radio_rows": [],
+          "masers_within_15_arcsec": [],
+          "masers_within_30_arcsec": [],
+          "physical_stage": "unknown",
+          "clump_membership": "unestablished",
+          "birth_status": "not_established"
+        }
+      ]
+    },
+    {
+      "case_id": "HIGALBM353.4272-0.3734",
+      "assessments": [
+        {
+          "point_id": "HIGALBM353.4272-0.3734",
+          "point_kind": "clump_centre",
+          "ra": "262.634300",
+          "dec": "-34.688756",
+          "fixed_best": false,
+          "nearest_maser": {
+            "maser_row_id": "VIII/96/catalog.dat:000092",
+            "separation_arcsec": 79.06565773823415,
+            "flag": " "
+          },
+          "masers_within_1_arcsec": [],
+          "conservative_projected_radio_support": false,
+          "conservative_radio_rows": [],
+          "masers_within_15_arcsec": [],
+          "masers_within_30_arcsec": [],
+          "physical_stage": "unknown",
+          "clump_membership": "unestablished",
+          "birth_status": "not_established"
+        },
+        {
+          "designation": "SSTGLMC G353.4273-00.3723",
+          "cntr": "2224085",
+          "ra": "262.633239",
+          "dec": "-34.688109",
+          "point_id": "SSTGLMC G353.4273-00.3723",
+          "point_kind": "catalogue_alternative",
+          "fixed_best": true,
+          "nearest_maser": {
+            "maser_row_id": "VIII/96/catalog.dat:000092",
+            "separation_arcsec": 76.93738804871248,
+            "flag": " "
+          },
+          "masers_within_1_arcsec": [],
+          "conservative_projected_radio_support": false,
+          "conservative_radio_rows": [],
+          "masers_within_15_arcsec": [],
+          "masers_within_30_arcsec": [],
+          "physical_stage": "unknown",
+          "clump_membership": "unestablished",
+          "birth_status": "not_established"
+        },
+        {
+          "designation": "SSTGLMC G353.4284-00.3731",
+          "cntr": "2224805",
+          "ra": "262.634758",
+          "dec": "-34.687567",
+          "point_id": "SSTGLMC G353.4284-00.3731",
+          "point_kind": "catalogue_alternative",
+          "fixed_best": false,
+          "nearest_maser": {
+            "maser_row_id": "VIII/96/catalog.dat:000092",
+            "separation_arcsec": 81.83673474826963,
+            "flag": " "
+          },
+          "masers_within_1_arcsec": [],
+          "conservative_projected_radio_support": false,
+          "conservative_radio_rows": [],
+          "masers_within_15_arcsec": [],
+          "masers_within_30_arcsec": [],
+          "physical_stage": "unknown",
+          "clump_membership": "unestablished",
+          "birth_status": "not_established"
+        }
+      ]
+    }
+  ],
+  "fixed_best_projected_support": 0,
+  "fixed_best_denominator": 3,
+  "primary_geometric_criterion_met": false,
+  "physical_validation": false,
+  "new_stars": 0,
+  "new_births": 0,
+  "selection_consumed": true,
+  "independent_held_out_physical_truth": false,
+  "models_changed": false,
+  "radio_absence_means_starless": false,
+  "association_probabilities_calibrated": false,
+  "scope": "Published radio positions versus literal fixed infrared alternatives; no proper-motion/frame/error calibration or velocity membership"
+}
