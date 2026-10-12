@@ -1,0 +1,15 @@
+{
+  "schema": "irac-necessary-class-i-colour-contract/1",
+  "citation": "Gutermuth et al. 2009, ApJS 184, 18, Appendix A.1",
+  "doi": "10.1088/0067-0049/184/1/18",
+  "versioned_primary_source": "https://arxiv.org/pdf/0906.0201v1",
+  "pdf_pages_zero_index": [26, 28],
+  "reviewed_utc_date": "2026-10-12",
+  "phase_i_availability": {"required_bands_um": [3.6, 4.5, 5.8, 8.0], "magnitude_error_strictly_less_than": "0.2"},
+  "necessary_class_i_cuts": {"mag3_6_minus_mag4_5_strictly_greater_than": "0.7", "mag4_5_minus_mag5_8_strictly_greater_than": "0.7"},
+  "complete_classification_implemented": false,
+  "contaminant_rejection_implemented": false,
+  "other_phases_implemented": false,
+  "selection_already_consumed": true,
+  "calibrated_physical_classifier": false
+}

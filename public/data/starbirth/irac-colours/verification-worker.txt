@@ -1,0 +1,22 @@
+{
+  "schema": "independent-irac-necessary-colour-verification/1",
+  "verified": true,
+  "code_revision": "c889cc5e4bbcbc66888404b02cc03a516fd46ec4",
+  "registration_sha256": "2a1b0f5e88c4e3e93dd0e500541a449cf3b2704af1df476bee94ae114c458700",
+  "summary_sha256": "0f9a0f7d48ca74fa07ac9f6eaab1ff5720d3f2319fa5475f572953c5f8add021",
+  "all_records_sha256": "2055480bd77b1b1e77b3ea5593c3124f4f7ed7ce3cb552c708a3e9249f152279",
+  "counts": {
+    "photometric_availability": 0,
+    "central_necessary_support": 0,
+    "robust_necessary_support": 0,
+    "quoted_error_incompatible": 2,
+    "unresolved_necessary_colours": 1
+  },
+  "native_records_verified": 12,
+  "calculable_band_pairs_verified": 34,
+  "method": "Exact Fraction arithmetic from original six native responses, no generator imports",
+  "physical_validation": false,
+  "full_classifier_implemented": false,
+  "new_stars": 0,
+  "new_births": 0
+}

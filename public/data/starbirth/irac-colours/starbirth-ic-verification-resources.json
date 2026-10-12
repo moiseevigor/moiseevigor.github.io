@@ -1,0 +1,98 @@
+{
+  "schema": "bounded-research-resource-monitor/1",
+  "command": [
+    ".venv/bin/python",
+    "research/verify_irac_colour_evidence.py",
+    "--stage",
+    "artifacts/irac_colour_resource_resumed_20261012",
+    "--output",
+    "artifacts/irac_colour_resource_resumed_verification_20261012/verification.json"
+  ],
+  "limits": {
+    "reserve_bytes": 5368709120,
+    "stage_budget_bytes": 1048576,
+    "max_rss_bytes": 268435456,
+    "wall_seconds": 600.0
+  },
+  "sampling_interval_seconds": 1.0,
+  "elapsed_seconds": 1.0511212919373065,
+  "child_exit_code": 0,
+  "stop_reason": null,
+  "completed": true,
+  "peak_sampled_worker_rss_bytes": 1556480,
+  "minimum_observed_free_bytes": 43582885888,
+  "sample_count": 4,
+  "samples_retained": 4,
+  "samples": [
+    {
+      "utc": "2026-10-12T20:43:14.879700+00:00",
+      "free_bytes": 43583102976,
+      "stage_bytes": 0,
+      "worker_rss_bytes": 0,
+      "worker_cpu_percent": 0,
+      "workers": [],
+      "system_memory_pressure_level": 1,
+      "load_average": [
+        21.8134765625,
+        13.43359375,
+        6.9208984375
+      ]
+    },
+    {
+      "utc": "2026-10-12T20:43:14.903308+00:00",
+      "free_bytes": 43583123456,
+      "stage_bytes": 0,
+      "worker_rss_bytes": 1556480,
+      "worker_cpu_percent": 0.0,
+      "workers": [
+        {
+          "pid": 41032,
+          "rss_bytes": 1556480,
+          "cpu_percent": 0.0
+        }
+      ],
+      "system_memory_pressure_level": 1,
+      "load_average": [
+        21.8134765625,
+        13.43359375,
+        6.9208984375
+      ]
+    },
+    {
+      "utc": "2026-10-12T20:43:15.928257+00:00",
+      "free_bytes": 43582885888,
+      "stage_bytes": 1804,
+      "worker_rss_bytes": 0,
+      "worker_cpu_percent": 0.0,
+      "workers": [
+        {
+          "pid": 41032,
+          "rss_bytes": 0,
+          "cpu_percent": 0.0
+        }
+      ],
+      "system_memory_pressure_level": 1,
+      "load_average": [
+        21.8134765625,
+        13.43359375,
+        6.9208984375
+      ]
+    },
+    {
+      "utc": "2026-10-12T20:43:15.931560+00:00",
+      "free_bytes": 43582885888,
+      "stage_bytes": 1804,
+      "worker_rss_bytes": 0,
+      "worker_cpu_percent": 0,
+      "workers": [],
+      "system_memory_pressure_level": 1,
+      "load_average": [
+        21.8134765625,
+        13.43359375,
+        6.9208984375
+      ]
+    }
+  ],
+  "sampling_history": "Latest 128 samples; extrema aggregate all polls",
+  "scope": "Only this process group; RSS sampling may miss sub-interval peaks; no scientific inference."
+}

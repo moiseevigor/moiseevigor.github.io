@@ -1,0 +1,4 @@
+case_id,native_source_id,colour_36_45,quoted_sigma_max,upper_three_quoted_errors,missing_bands,quoted_error_incompatible,four_band_photometric_availability,physical_stage
+HIGALBM330.8814-0.3656,SSTGLMC G330.8829-00.3661,-0.089,0.127,0.292,8_0,True,False,unknown
+HIGALBM351.2258+0.6937,SSTGLMC G351.2258+00.6940,0.134,0.33,1.124,5_8|8_0,False,False,unknown
+HIGALBM353.4272-0.3734,SSTGLMC G353.4273-00.3723,-0.011,0.073,0.208,8_0,True,False,unknown

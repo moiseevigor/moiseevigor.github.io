@@ -1,0 +1,424 @@
+{
+  "schema": "retrospective-irac-necessary-colour-result/1",
+  "selected_cases": 3,
+  "consumed_and_post_read": true,
+  "photometric_availability": 0,
+  "central_necessary_support": 0,
+  "robust_necessary_support": 0,
+  "quoted_error_incompatible": 2,
+  "unresolved_necessary_colours": 1,
+  "native_records_retained": 12,
+  "independent_native_objects": 6,
+  "full_standard_classification_evaluated": false,
+  "physical_validation": false,
+  "original_ranking_changed": false,
+  "new_stars": 0,
+  "new_births": 0,
+  "envelopes_are_confidence_intervals": false,
+  "missing_values_imputed": false,
+  "case_assessments": [
+    {
+      "case_id": "HIGALBM330.8814-0.3656",
+      "native_source_id": "SSTGLMC G330.8829-00.3661",
+      "cntr": "23834137",
+      "colours": [
+        {
+          "band_a": "3_6",
+          "band_b": "4_5",
+          "available": true,
+          "colour_mag": -0.089,
+          "sigma_min": 0.017,
+          "sigma_max": 0.127,
+          "sigma_independent_reference": 0.09060353193998565,
+          "envelopes": {
+            "1": [
+              -0.216,
+              0.038
+            ],
+            "3": [
+              -0.47,
+              0.292
+            ]
+          }
+        },
+        {
+          "band_a": "3_6",
+          "band_b": "5_8",
+          "available": true,
+          "colour_mag": 0.105,
+          "sigma_min": 0.085,
+          "sigma_max": 0.195,
+          "sigma_independent_reference": 0.15041608956491326,
+          "envelopes": {
+            "1": [
+              -0.09,
+              0.3
+            ],
+            "3": [
+              -0.48,
+              0.69
+            ]
+          }
+        },
+        {
+          "band_a": "3_6",
+          "band_b": "8_0",
+          "available": false,
+          "colour_mag": null,
+          "sigma_min": null,
+          "sigma_max": null,
+          "sigma_independent_reference": null,
+          "envelopes": null
+        },
+        {
+          "band_a": "4_5",
+          "band_b": "5_8",
+          "available": true,
+          "colour_mag": 0.194,
+          "sigma_min": 0.068,
+          "sigma_max": 0.212,
+          "sigma_independent_reference": 0.15742934923323543,
+          "envelopes": {
+            "1": [
+              -0.018,
+              0.406
+            ],
+            "3": [
+              -0.442,
+              0.83
+            ]
+          }
+        },
+        {
+          "band_a": "4_5",
+          "band_b": "8_0",
+          "available": false,
+          "colour_mag": null,
+          "sigma_min": null,
+          "sigma_max": null,
+          "sigma_independent_reference": null,
+          "envelopes": null
+        },
+        {
+          "band_a": "5_8",
+          "band_b": "8_0",
+          "available": false,
+          "colour_mag": null,
+          "sigma_min": null,
+          "sigma_max": null,
+          "sigma_independent_reference": null,
+          "envelopes": null
+        }
+      ],
+      "decision": {
+        "four_band_photometric_availability": false,
+        "missing_or_invalid_bands": [
+          "8_0"
+        ],
+        "central_necessary_colours": false,
+        "robust_necessary_colour_support": false,
+        "quoted_error_incompatibility": true,
+        "assessment": "incompatible_with_necessary_colour_in_quoted_error_sensitivity",
+        "full_standard_classification": "not_evaluated",
+        "physical_stage": "unknown",
+        "calibrated_probability": null
+      },
+      "historical_system": {
+        "source_revision": "c6618258f56047aee306e915290ddcebcf7906be",
+        "tile": "33",
+        "fold": "3",
+        "all_requested_review_budget": 982,
+        "models": {
+          "embedding": {
+            "raw_ranking_score": "0.9564869180780988",
+            "selected_at_original_all_requested_budget": true,
+            "calibrated_probability": false
+          },
+          "linear": {
+            "raw_ranking_score": "3.8197018961142595",
+            "selected_at_original_all_requested_budget": true,
+            "calibrated_probability": false
+          },
+          "nonlinear": {
+            "raw_ranking_score": "0.8463274270538195",
+            "selected_at_original_all_requested_budget": true,
+            "calibrated_probability": false
+          },
+          "infrared_only": {
+            "raw_ranking_score": "0.9068712435928008",
+            "selected_at_original_all_requested_budget": true,
+            "calibrated_probability": false
+          }
+        },
+        "new_glimpse_input_used": false
+      },
+      "positional_matches": 21,
+      "positional_visits": 21,
+      "physical_stage": "unknown",
+      "birth_status": "not_established"
+    },
+    {
+      "case_id": "HIGALBM351.2258+0.6937",
+      "native_source_id": "SSTGLMC G351.2258+00.6940",
+      "cntr": "1054996",
+      "colours": [
+        {
+          "band_a": "3_6",
+          "band_b": "4_5",
+          "available": true,
+          "colour_mag": 0.134,
+          "sigma_min": 0.062,
+          "sigma_max": 0.33,
+          "sigma_independent_reference": 0.23742788378789886,
+          "envelopes": {
+            "1": [
+              -0.196,
+              0.464
+            ],
+            "3": [
+              -0.856,
+              1.124
+            ]
+          }
+        },
+        {
+          "band_a": "3_6",
+          "band_b": "5_8",
+          "available": false,
+          "colour_mag": null,
+          "sigma_min": null,
+          "sigma_max": null,
+          "sigma_independent_reference": null,
+          "envelopes": null
+        },
+        {
+          "band_a": "3_6",
+          "band_b": "8_0",
+          "available": false,
+          "colour_mag": null,
+          "sigma_min": null,
+          "sigma_max": null,
+          "sigma_independent_reference": null,
+          "envelopes": null
+        },
+        {
+          "band_a": "4_5",
+          "band_b": "5_8",
+          "available": false,
+          "colour_mag": null,
+          "sigma_min": null,
+          "sigma_max": null,
+          "sigma_independent_reference": null,
+          "envelopes": null
+        },
+        {
+          "band_a": "4_5",
+          "band_b": "8_0",
+          "available": false,
+          "colour_mag": null,
+          "sigma_min": null,
+          "sigma_max": null,
+          "sigma_independent_reference": null,
+          "envelopes": null
+        },
+        {
+          "band_a": "5_8",
+          "band_b": "8_0",
+          "available": false,
+          "colour_mag": null,
+          "sigma_min": null,
+          "sigma_max": null,
+          "sigma_independent_reference": null,
+          "envelopes": null
+        }
+      ],
+      "decision": {
+        "four_band_photometric_availability": false,
+        "missing_or_invalid_bands": [
+          "5_8",
+          "8_0"
+        ],
+        "central_necessary_colours": false,
+        "robust_necessary_colour_support": false,
+        "quoted_error_incompatibility": false,
+        "assessment": "unresolved_necessary_colour",
+        "full_standard_classification": "not_evaluated",
+        "physical_stage": "unknown",
+        "calibrated_probability": null
+      },
+      "historical_system": {
+        "source_revision": "c6618258f56047aee306e915290ddcebcf7906be",
+        "tile": "35",
+        "fold": "0",
+        "all_requested_review_budget": 982,
+        "models": {
+          "embedding": {
+            "raw_ranking_score": "0.6959411572748677",
+            "selected_at_original_all_requested_budget": true,
+            "calibrated_probability": false
+          },
+          "linear": {
+            "raw_ranking_score": "4.645320833609987",
+            "selected_at_original_all_requested_budget": true,
+            "calibrated_probability": false
+          },
+          "nonlinear": {
+            "raw_ranking_score": "1.1845717719441171",
+            "selected_at_original_all_requested_budget": true,
+            "calibrated_probability": false
+          },
+          "infrared_only": {
+            "raw_ranking_score": "0.8443868066828388",
+            "selected_at_original_all_requested_budget": true,
+            "calibrated_probability": false
+          }
+        },
+        "new_glimpse_input_used": false
+      },
+      "positional_matches": 14,
+      "positional_visits": 19,
+      "physical_stage": "unknown",
+      "birth_status": "not_established"
+    },
+    {
+      "case_id": "HIGALBM353.4272-0.3734",
+      "native_source_id": "SSTGLMC G353.4273-00.3723",
+      "cntr": "2224085",
+      "colours": [
+        {
+          "band_a": "3_6",
+          "band_b": "4_5",
+          "available": true,
+          "colour_mag": -0.011,
+          "sigma_min": 0.003,
+          "sigma_max": 0.073,
+          "sigma_independent_reference": 0.05166236541235796,
+          "envelopes": {
+            "1": [
+              -0.084,
+              0.062
+            ],
+            "3": [
+              -0.23,
+              0.208
+            ]
+          }
+        },
+        {
+          "band_a": "3_6",
+          "band_b": "5_8",
+          "available": true,
+          "colour_mag": 0.257,
+          "sigma_min": 0.079,
+          "sigma_max": 0.149,
+          "sigma_independent_reference": 0.11925183436744276,
+          "envelopes": {
+            "1": [
+              0.108,
+              0.406
+            ],
+            "3": [
+              -0.19,
+              0.704
+            ]
+          }
+        },
+        {
+          "band_a": "3_6",
+          "band_b": "8_0",
+          "available": false,
+          "colour_mag": null,
+          "sigma_min": null,
+          "sigma_max": null,
+          "sigma_independent_reference": null,
+          "envelopes": null
+        },
+        {
+          "band_a": "4_5",
+          "band_b": "5_8",
+          "available": true,
+          "colour_mag": 0.268,
+          "sigma_min": 0.076,
+          "sigma_max": 0.152,
+          "sigma_independent_reference": 0.12016655108639841,
+          "envelopes": {
+            "1": [
+              0.116,
+              0.42
+            ],
+            "3": [
+              -0.188,
+              0.724
+            ]
+          }
+        },
+        {
+          "band_a": "4_5",
+          "band_b": "8_0",
+          "available": false,
+          "colour_mag": null,
+          "sigma_min": null,
+          "sigma_max": null,
+          "sigma_independent_reference": null,
+          "envelopes": null
+        },
+        {
+          "band_a": "5_8",
+          "band_b": "8_0",
+          "available": false,
+          "colour_mag": null,
+          "sigma_min": null,
+          "sigma_max": null,
+          "sigma_independent_reference": null,
+          "envelopes": null
+        }
+      ],
+      "decision": {
+        "four_band_photometric_availability": false,
+        "missing_or_invalid_bands": [
+          "8_0"
+        ],
+        "central_necessary_colours": false,
+        "robust_necessary_colour_support": false,
+        "quoted_error_incompatibility": true,
+        "assessment": "incompatible_with_necessary_colour_in_quoted_error_sensitivity",
+        "full_standard_classification": "not_evaluated",
+        "physical_stage": "unknown",
+        "calibrated_probability": null
+      },
+      "historical_system": {
+        "source_revision": "c6618258f56047aee306e915290ddcebcf7906be",
+        "tile": "35",
+        "fold": "0",
+        "all_requested_review_budget": 982,
+        "models": {
+          "embedding": {
+            "raw_ranking_score": "1.3350584606388574",
+            "selected_at_original_all_requested_budget": true,
+            "calibrated_probability": false
+          },
+          "linear": {
+            "raw_ranking_score": "5.271237773835225",
+            "selected_at_original_all_requested_budget": true,
+            "calibrated_probability": false
+          },
+          "nonlinear": {
+            "raw_ranking_score": "1.412128993026831",
+            "selected_at_original_all_requested_budget": true,
+            "calibrated_probability": false
+          },
+          "infrared_only": {
+            "raw_ranking_score": "1.6188616050306794",
+            "selected_at_original_all_requested_budget": true,
+            "calibrated_probability": false
+          }
+        },
+        "new_glimpse_input_used": false
+      },
+      "positional_matches": 4,
+      "positional_visits": 6,
+      "physical_stage": "unknown",
+      "birth_status": "not_established"
+    }
+  ]
+}

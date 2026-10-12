@@ -1,0 +1,22 @@
+{
+  "schema": "irac-colour-preflight-resource-stop/1",
+  "recorded_utc": "2026-10-12T20:40:18.938791+00:00",
+  "registration_sha256": "2a1b0f5e88c4e3e93dd0e500541a449cf3b2704af1df476bee94ae114c458700",
+  "stopped_monitor_sha256": "2dbe193a7578f1e087d1d7e19d95804d78e05ef2c9f80f4b49aa55d088de4516",
+  "scientific_worker_launched": false,
+  "scientific_result_produced": false,
+  "condition": "system_memory_pressure",
+  "current_pressure_level": 2,
+  "free_bytes": 8100130816,
+  "remaining_confirmed_external_process": {
+    "pid": 38678,
+    "alive": true,
+    "ps": "38678 1996336 12:33 /Users/igor/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean",
+    "project": "proof-atlas-site"
+  },
+  "external_process_untouched": true,
+  "goal_blocked_status_threshold_not_met": true,
+  "resume_requires_verified_normal_pressure_and_disk_reserve": true,
+  "no_new_observations": true,
+  "no_threshold_change": true
+}

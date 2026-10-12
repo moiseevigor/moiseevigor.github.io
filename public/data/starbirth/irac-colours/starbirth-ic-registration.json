@@ -1,0 +1,146 @@
+{
+  "schema": "retrospective-irac-necessary-colour-registration/1",
+  "registered_utc": "2026-10-12T20:37:36.323921+00:00",
+  "source_revision_before_registration": "4dce29f57a9ef43314f2f69e06de479e88ec908b",
+  "inputs": [
+    {
+      "path": "docs/IRAC_COLOUR_DIAGNOSTIC_PROTOCOL_20261012.md",
+      "bytes": 6493,
+      "sha256": "409072a8bde3a8d6766d9583585832928955cc9f513f43149d743f1ea3d76763"
+    },
+    {
+      "path": "artifacts/irac_colour_literature_contract_20261012.json",
+      "bytes": 767,
+      "sha256": "cdb1e1798d2551b56cea8dfb69794a4fffd2bb2a99505828622f413417684d0f"
+    },
+    {
+      "path": "research/analyze_irac_colour_evidence.py",
+      "bytes": 6249,
+      "sha256": "786da518da298ba54620b729a9ec356fcca78462265c4a575af6d2858c71b3ef"
+    },
+    {
+      "path": "research/verify_irac_colour_evidence.py",
+      "bytes": 6932,
+      "sha256": "7ad446a0649f974370c1cc7de9a95621188f137c4ab1112d5295e8fb8d74c2a3"
+    },
+    {
+      "path": "scripts/run_guarded_research.py",
+      "bytes": 6628,
+      "sha256": "0988aa41866ad3c65dd99713f3d1cda31cbdfa906c465f1230596f8f43cecfda"
+    },
+    {
+      "path": "artifacts/native_glimpse_association_20261012/evidence_cards.json",
+      "bytes": 34699,
+      "sha256": "8929cd3bb703491adc3bff7853c445bc1e2b4649f83f14fb41a9ef34cc0b7490"
+    },
+    {
+      "path": "artifacts/native_glimpse_association_20261012/sources.csv",
+      "bytes": 5099,
+      "sha256": "0fc97221380fd56cf4052299e44eff2bbc220eef113d93e10ef710785cb5353c"
+    },
+    {
+      "path": "artifacts/native_glimpse_association_20261012/summary.json",
+      "bytes": 2583,
+      "sha256": "8d619970a4a55c9bf90437a23cd8aa0978e964492be2c0c36f50d3b1fe2cec2b"
+    },
+    {
+      "path": "artifacts/native_glimpse_verification_20261012/verification.json",
+      "bytes": 626,
+      "sha256": "5bcfb6feb62b6de71aace1975fbca25d5c235d72ec20b51d65c21e7b188c9961"
+    },
+    {
+      "path": "artifacts/native_glimpse_checkpoint_20261012.json",
+      "bytes": 5572,
+      "sha256": "5f9f32e7e6b091d261e3e3288282d0480506ec8176f7ced1ae9ceaef308db591"
+    },
+    {
+      "path": "artifacts/native_glimpse_acquisition_20261012/q00.csv",
+      "bytes": 517,
+      "sha256": "a1e99e67f070fe4d6ab47e26665b72eb4d486820c687e6c6157beb29a3905c6c"
+    },
+    {
+      "path": "artifacts/native_glimpse_acquisition_20261012/q01.csv",
+      "bytes": 517,
+      "sha256": "3998ac48f2a3e9be75c50858479843700da068fac0db6e9853d85c5d7c571710"
+    },
+    {
+      "path": "artifacts/native_glimpse_acquisition_20261012/q02.csv",
+      "bytes": 1023,
+      "sha256": "9dcc828c441d502576102e4bb3574dae31b94cfc8b6e352881c4ccd2ac8b5724"
+    },
+    {
+      "path": "artifacts/native_glimpse_acquisition_20261012/q03.csv",
+      "bytes": 1023,
+      "sha256": "e5fd8a0bc72fa34553965de79ec75d2884dabb21fc33960c3c8f972fc048fca9"
+    },
+    {
+      "path": "artifacts/native_glimpse_acquisition_20261012/q04.csv",
+      "bytes": 808,
+      "sha256": "12e98fe06a9f1301aa8e2626c0beb6dab708b21da960be01fbfea59a8f1279fc"
+    },
+    {
+      "path": "artifacts/native_glimpse_acquisition_20261012/q05.csv",
+      "bytes": 808,
+      "sha256": "c1cf7d26cf4921379ab4711432662c4bcbd8ff37e705d3ad727f83193cac23c4"
+    }
+  ],
+  "policy_blobs": [
+    {
+      "path": "docs/RESEARCH_GOAL.md",
+      "source_revision": "4dce29f57a9ef43314f2f69e06de479e88ec908b",
+      "sha256": "0b069de94db20d821cba5aa1565add7a5da274fcb5616e6e27d7ad7b2937916b"
+    },
+    {
+      "path": "docs/ADVERSARIAL_REVIEW_20261006.md",
+      "source_revision": "4dce29f57a9ef43314f2f69e06de479e88ec908b",
+      "sha256": "c28b2ccc8513c9fd4b6fc8db7364ba474316a2da53592963037bb1b6358e9021"
+    },
+    {
+      "path": "docs/GIT_SNAPSHOT_WORKFLOW.md",
+      "source_revision": "4dce29f57a9ef43314f2f69e06de479e88ec908b",
+      "sha256": "a3c421e45bd505f91ebbd9044d0a2120c7773d5cca5154c237f5b976c2ac1923"
+    },
+    {
+      "path": "docs/STORAGE_POLICY.md",
+      "source_revision": "4dce29f57a9ef43314f2f69e06de479e88ec908b",
+      "sha256": "cfb7a058d667341331a7f7ed99f2eb57bc99996cefe49a82204ac7864e4c9767"
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "HIGALBM330.8814-0.3656",
+      "native_source_id": "SSTGLMC G330.8829-00.3661"
+    },
+    {
+      "case_id": "HIGALBM351.2258+0.6937",
+      "native_source_id": "SSTGLMC G351.2258+00.6940"
+    },
+    {
+      "case_id": "HIGALBM353.4272-0.3734",
+      "native_source_id": "SSTGLMC G353.4273-00.3723"
+    }
+  ],
+  "cards_path": "artifacts/native_glimpse_association_20261012/evidence_cards.json",
+  "sources_path": "artifacts/native_glimpse_association_20261012/sources.csv",
+  "selection_consumed": true,
+  "native_magnitudes_already_inspected": true,
+  "untouched_physical_validation": false,
+  "diagnostic_rules_frozen_before_worker": true,
+  "necessary_colour_threshold": "0.7",
+  "strict_inequality": true,
+  "primary_sensitivity_multiplier": 3,
+  "secondary_multiplier": 1,
+  "full_classifier_implemented": false,
+  "resource_limits": {
+    "worker_stage_bytes": 1048576,
+    "combined_bytes": 4194304,
+    "wall_seconds": 600,
+    "max_rss_mib": 256,
+    "reserve_bytes": 5368709120,
+    "one_cpu": true,
+    "no_gpu": true,
+    "no_network": true
+  },
+  "no_new_observations": true,
+  "no_model_rerun": true
+}

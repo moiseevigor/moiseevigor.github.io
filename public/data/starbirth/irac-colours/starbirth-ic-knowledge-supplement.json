@@ -1,0 +1,179 @@
+{
+  "schema": "reviewed-irac-colour-knowledge-supplement/1",
+  "source_revision": "5ec09468ac1340befe242c93a1201373fba1bc24",
+  "nodes": [
+    {
+      "id": "Q:IC20261012",
+      "type": "question",
+      "status": "bounded_retrospective_diagnostic_completed",
+      "label": "Do fixed positional counterparts supply necessary red IRAC colour evidence?",
+      "text": "Selected native magnitudes were already consumed before registration. Only a named published colour component is tested; no full classifier or physical validation.",
+      "sources": [
+        "docs/IRAC_COLOUR_DIAGNOSTIC_PROTOCOL_20261012.md",
+        "docs/IRAC_COLOUR_DIAGNOSTIC_RESULTS_20261012.md",
+        "artifacts/irac_colour_literature_contract_20261012.json",
+        "artifacts/irac_colour_registration_20261012.json"
+      ]
+    },
+    {
+      "id": "F:IC20261012:availability",
+      "type": "finding",
+      "status": "verified_insufficient_classification_inputs",
+      "label": "Zero of three best counterparts has four-band photometric availability",
+      "metrics": {
+        "available": 0,
+        "cases": 3,
+        "missing_eight_micron_cases": 3
+      },
+      "text": "Missing native 8-micron entries prevent the declared full Phase-I classification. Missing entries are not flux limits, physical nondetections or starless labels.",
+      "sources": [
+        "docs/IRAC_COLOUR_DIAGNOSTIC_RESULTS_20261012.md",
+        "artifacts/irac_colour_resource_resumed_20261012/summary.json",
+        "artifacts/irac_colour_resource_resumed_verification_20261012/verification.json",
+        "artifacts/irac_colour_checkpoint_20261012.json"
+      ]
+    },
+    {
+      "id": "F:IC20261012:colours",
+      "type": "finding",
+      "status": "verified_conditional_colour_diagnostic",
+      "label": "Two counterpart colours remain below the named necessary cut within quoted-error sensitivity",
+      "metrics": {
+        "case_ids": [
+          "HIGALBM330.8814-0.3656",
+          "HIGALBM351.2258+0.6937",
+          "HIGALBM353.4272-0.3734"
+        ],
+        "colour_36_45": [
+          -0.089,
+          0.134,
+          -0.011
+        ],
+        "upper_three_quoted_error_sensitivity": [
+          0.292,
+          1.124,
+          0.208
+        ],
+        "cut_strictly_greater_than": 0.7,
+        "quoted_error_incompatible": 2,
+        "unresolved": 1,
+        "robust_red_support": 0
+      },
+      "text": "This qualifies interpretation of the projected source, not the correct 21/21 geometry. Sensitivity envelopes are not confidence bounds or physical Class-I exclusions.",
+      "sources": [
+        "docs/IRAC_COLOUR_DIAGNOSTIC_RESULTS_20261012.md",
+        "artifacts/irac_colour_resource_resumed_20261012/summary.json",
+        "artifacts/irac_colour_resource_resumed_verification_20261012/verification.json",
+        "artifacts/irac_colour_resource_resumed_20261012/comparison_cards.json"
+      ]
+    },
+    {
+      "id": "C:IC20261012:scope",
+      "type": "qualification",
+      "status": "unmet_physical_validation",
+      "label": "Clump proxy ranking and point-source evolutionary class are different targets",
+      "text": "All four old methods already selected these clumps; scores/models are unchanged. A high chemistry-proxy clump rank is not youth probability for a nearby point source. No membership, starless clump, universal colour class or birth is established.",
+      "sources": [
+        "docs/IRAC_COLOUR_DIAGNOSTIC_RESULTS_20261012.md",
+        "artifacts/irac_colour_checkpoint_20261012.json",
+        "artifacts/irac_colour_resource_resumed_20261012/comparison_cards.json"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "Q:IC20261012",
+      "target": "F:IC20261012:availability",
+      "relation": "answered_by"
+    },
+    {
+      "source": "Q:IC20261012",
+      "target": "F:IC20261012:colours",
+      "relation": "answered_by"
+    },
+    {
+      "source": "F:IC20261012:colours",
+      "target": "F:NG20261012:alignment",
+      "relation": "qualifies",
+      "text": "Tight geometry remains valid while youth is unsupported by this named colour component."
+    },
+    {
+      "source": "C:IC20261012:scope",
+      "target": "F:IC20261012:colours",
+      "relation": "limits"
+    },
+    {
+      "source": "C:IC20261012:scope",
+      "target": "F:IC20261012:availability",
+      "relation": "limits"
+    }
+  ],
+  "source_blobs": [
+    {
+      "path": "docs/IRAC_COLOUR_DIAGNOSTIC_PROTOCOL_20261012.md",
+      "revision": "5ec09468ac1340befe242c93a1201373fba1bc24",
+      "bytes": 6493,
+      "sha256": "409072a8bde3a8d6766d9583585832928955cc9f513f43149d743f1ea3d76763"
+    },
+    {
+      "path": "docs/IRAC_COLOUR_DIAGNOSTIC_RESULTS_20261012.md",
+      "revision": "5ec09468ac1340befe242c93a1201373fba1bc24",
+      "bytes": 8245,
+      "sha256": "f3767b4d71b75c6b4600e8cd3f50ec68c4b2293add806b925de343641619c62d"
+    },
+    {
+      "path": "artifacts/irac_colour_literature_contract_20261012.json",
+      "revision": "5ec09468ac1340befe242c93a1201373fba1bc24",
+      "bytes": 767,
+      "sha256": "cdb1e1798d2551b56cea8dfb69794a4fffd2bb2a99505828622f413417684d0f"
+    },
+    {
+      "path": "artifacts/irac_colour_registration_20261012.json",
+      "revision": "5ec09468ac1340befe242c93a1201373fba1bc24",
+      "bytes": 5222,
+      "sha256": "2a1b0f5e88c4e3e93dd0e500541a449cf3b2704af1df476bee94ae114c458700"
+    },
+    {
+      "path": "artifacts/irac_colour_resource_resumed_20261012/summary.json",
+      "revision": "5ec09468ac1340befe242c93a1201373fba1bc24",
+      "bytes": 12285,
+      "sha256": "0f9a0f7d48ca74fa07ac9f6eaab1ff5720d3f2319fa5475f572953c5f8add021"
+    },
+    {
+      "path": "artifacts/irac_colour_resource_resumed_verification_20261012/verification.json",
+      "revision": "5ec09468ac1340befe242c93a1201373fba1bc24",
+      "bytes": 902,
+      "sha256": "03ed9b53264d0b9e7d267a942d4b7c3d09d69c4641be18d203079af550c0178a"
+    },
+    {
+      "path": "artifacts/irac_colour_checkpoint_20261012.json",
+      "revision": "5ec09468ac1340befe242c93a1201373fba1bc24",
+      "bytes": 4623,
+      "sha256": "0df759ae3923bfa9d88991a1ed73eefbc5bbb1be30e95eda8c21350eefa03bbc"
+    },
+    {
+      "path": "artifacts/irac_colour_resource_resumed_20261012/comparison_cards.json",
+      "revision": "5ec09468ac1340befe242c93a1201373fba1bc24",
+      "bytes": 66035,
+      "sha256": "3756f05469d331d030cb17cdfdec504035ef09587c8f96a81e0c415e59bf3f7d"
+    },
+    {
+      "path": "artifacts/graph/research_graph.json",
+      "revision": "5ec09468ac1340befe242c93a1201373fba1bc24",
+      "bytes": 1307461,
+      "sha256": "5162974f4fe31bb591b244ad3cc96962069174e1e96fced8586ee6305763692c"
+    },
+    {
+      "path": "artifacts/graph/native_glimpse_reviewed_supplement_20261012.json",
+      "revision": "5ec09468ac1340befe242c93a1201373fba1bc24",
+      "bytes": 7185,
+      "sha256": "6f05b7ccde905f5f0afac8d37170fa7b178fb91a4150f2d5de8e22732726e803"
+    }
+  ],
+  "core_and_prior_supplements_unchanged": true,
+  "consumed_post_read_selection": true,
+  "full_standard_classification": false,
+  "physical_validation": false,
+  "new_stars": 0,
+  "new_births": 0
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "retrospective-irac-necessary-colour-result/1",
+  "selected_cases": 3,
+  "consumed_and_post_read": true,
+  "photometric_availability": 0,
+  "central_necessary_support": 0,
+  "robust_necessary_support": 0,
+  "quoted_error_incompatible": 2,
+  "unresolved_necessary_colours": 1,
+  "native_records_retained": 12,
+  "independent_native_objects": 6,
+  "full_standard_classification_evaluated": false,
+  "physical_validation": false,
+  "original_ranking_changed": false,
+  "new_stars": 0,
+  "new_births": 0,
+  "envelopes_are_confidence_intervals": false,
+  "missing_values_imputed": false
+}

@@ -1,0 +1,20 @@
+{
+  "schema": "irac-colour-pre-spawn-resume-amendment/1",
+  "registered_utc": "2026-10-12T20:43:13.248547+00:00",
+  "registration_sha256": "2a1b0f5e88c4e3e93dd0e500541a449cf3b2704af1df476bee94ae114c458700",
+  "stopped_preflight_sha256": "2dbe193a7578f1e087d1d7e19d95804d78e05ef2c9f80f4b49aa55d088de4516",
+  "prior_worker_never_launched": true,
+  "external_condition_resolved": {
+    "memory_pressure_level": 1,
+    "free_bytes": 43580940288,
+    "prior_pid38678_absent": true
+  },
+  "no_external_process_cancelled": true,
+  "analysis_stage": "artifacts/irac_colour_resource_resumed_20261012",
+  "verification_stage": "artifacts/irac_colour_resource_resumed_verification_20261012",
+  "scientific_inputs_methods_thresholds_unchanged": true,
+  "no_new_observations": true,
+  "no_model_fit": true,
+  "same_worker_limits": true,
+  "cumulative_output_cap_bytes": 4194304
+}

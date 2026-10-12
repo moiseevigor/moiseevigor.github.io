@@ -1,0 +1,108 @@
+{
+  "schema": "verified-retrospective-irac-colour-checkpoint/1",
+  "verified": true,
+  "code_revision": "c889cc5e4bbcbc66888404b02cc03a516fd46ec4",
+  "registration_sha256": "2a1b0f5e88c4e3e93dd0e500541a449cf3b2704af1df476bee94ae114c458700",
+  "summary_sha256": "0f9a0f7d48ca74fa07ac9f6eaab1ff5720d3f2319fa5475f572953c5f8add021",
+  "verification_sha256": "03ed9b53264d0b9e7d267a942d4b7c3d09d69c4641be18d203079af550c0178a",
+  "cases": 3,
+  "four_band_available": 0,
+  "central_necessary_colour_support": 0,
+  "robust_necessary_colour_support": 0,
+  "quoted_error_incompatible": 2,
+  "unresolved_necessary_colour": 1,
+  "complete_standard_classification": false,
+  "physical_validation": false,
+  "all_models_unchanged": true,
+  "original_parent": 19328,
+  "original_unknown_proxy_states": 19066,
+  "new_stars": 0,
+  "new_births": 0,
+  "first_preflight_worker_never_launched": true,
+  "external_build_finished_without_cancellation": true,
+  "consumed_post_read_diagnostic": true,
+  "local_result_unpublished": true,
+  "bytes_before_checkpoint": 167197,
+  "files": {
+    "artifacts/irac_colour_diagnostic_20261012/resource_monitor.json": {
+      "bytes": 1527,
+      "sha256": "2dbe193a7578f1e087d1d7e19d95804d78e05ef2c9f80f4b49aa55d088de4516"
+    },
+    "artifacts/irac_colour_resource_resumed_20261012/summary.json": {
+      "bytes": 12285,
+      "sha256": "0f9a0f7d48ca74fa07ac9f6eaab1ff5720d3f2319fa5475f572953c5f8add021"
+    },
+    "artifacts/irac_colour_resource_resumed_20261012/case_table.csv": {
+      "bytes": 447,
+      "sha256": "1dfe643c8ba79714e20e4a995be6c1689039337391f40dbad96f6f8f624e5900"
+    },
+    "artifacts/irac_colour_resource_resumed_20261012/all_records.json": {
+      "bytes": 36709,
+      "sha256": "2055480bd77b1b1e77b3ea5593c3124f4f7ed7ce3cb552c708a3e9249f152279"
+    },
+    "artifacts/irac_colour_resource_resumed_20261012/worker.log": {
+      "bytes": 598,
+      "sha256": "0fc9d8e754de37c5f9f3554608936d8fb45cec2c235028d923a6d86047da680c"
+    },
+    "artifacts/irac_colour_resource_resumed_20261012/comparison_cards.json": {
+      "bytes": 66035,
+      "sha256": "3756f05469d331d030cb17cdfdec504035ef09587c8f96a81e0c415e59bf3f7d"
+    },
+    "artifacts/irac_colour_resource_resumed_20261012/resource_monitor.json": {
+      "bytes": 2427,
+      "sha256": "1faf90c643ded7dd1709d588c9f5454fe23337bd1a6e018db38cadae42e75d1c"
+    },
+    "artifacts/irac_colour_resource_resumed_verification_20261012/worker.log": {
+      "bytes": 902,
+      "sha256": "03ed9b53264d0b9e7d267a942d4b7c3d09d69c4641be18d203079af550c0178a"
+    },
+    "artifacts/irac_colour_resource_resumed_verification_20261012/verification.json": {
+      "bytes": 902,
+      "sha256": "03ed9b53264d0b9e7d267a942d4b7c3d09d69c4641be18d203079af550c0178a"
+    },
+    "artifacts/irac_colour_resource_resumed_verification_20261012/resource_monitor.json": {
+      "bytes": 2526,
+      "sha256": "b0c3557731cb8cfa0a9cfbeab25c07b642ba16c09ac74c92f82a46e99f29ab13"
+    },
+    "docs/IRAC_COLOUR_DIAGNOSTIC_PROTOCOL_20261012.md": {
+      "bytes": 6493,
+      "sha256": "409072a8bde3a8d6766d9583585832928955cc9f513f43149d743f1ea3d76763"
+    },
+    "docs/IRAC_COLOUR_RESOURCE_RESUME_20261012.md": {
+      "bytes": 1150,
+      "sha256": "985506df33c5702a828462e014aaf350c71243a3553c45a11bc821cfdfc7799e"
+    },
+    "docs/IRAC_COLOUR_DIAGNOSTIC_RESULTS_20261012.md": {
+      "bytes": 8245,
+      "sha256": "f3767b4d71b75c6b4600e8cd3f50ec68c4b2293add806b925de343641619c62d"
+    },
+    "artifacts/irac_colour_literature_contract_20261012.json": {
+      "bytes": 767,
+      "sha256": "cdb1e1798d2551b56cea8dfb69794a4fffd2bb2a99505828622f413417684d0f"
+    },
+    "artifacts/irac_colour_registration_20261012.json": {
+      "bytes": 5222,
+      "sha256": "2a1b0f5e88c4e3e93dd0e500541a449cf3b2704af1df476bee94ae114c458700"
+    },
+    "artifacts/irac_colour_resource_stop_20261012.json": {
+      "bytes": 914,
+      "sha256": "dad1760389e9382cdbe56e581a93f4d1fcc8cc03fe5e2c77d7a34d6e4084fc3a"
+    },
+    "artifacts/irac_colour_resume_amendment_20261012.json": {
+      "bytes": 867,
+      "sha256": "837ef4ec1d9bd3da901c50b166a98c9f8935d73742dc48181b6c5aa9877e0778"
+    },
+    "research/analyze_irac_colour_evidence.py": {
+      "bytes": 6249,
+      "sha256": "786da518da298ba54620b729a9ec356fcca78462265c4a575af6d2858c71b3ef"
+    },
+    "research/verify_irac_colour_evidence.py": {
+      "bytes": 6932,
+      "sha256": "7ad446a0649f974370c1cc7de9a95621188f137c4ab1112d5295e8fb8d74c2a3"
+    },
+    "research/finalize_irac_colour_evidence.py": {
+      "bytes": 6000,
+      "sha256": "e67bd0b973d7788b7e8e6fe641dc46fbae16edc213ab62d8cacc1892abcbf30a"
+    }
+  }
+}
