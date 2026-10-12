@@ -47,7 +47,7 @@ const path=require('path'),fs=require('fs');
       const selected=await page.locator('#pa-scale-kind').textContent();
       if(!selected.startsWith(tag+' '))throw Error('Four-scale selection mismatch '+tag+': '+selected);
       const code=await page.locator('#pa-scale-core').textContent();
-      if(!code.includes('Lean.Expr.'))throw Error('Missing core constructor signature for '+tag);
+      if(!code.includes('Lean.Expr.'+tag+' ')||code.includes('Lean.Expr..'))throw Error('Incorrect Lean.Expr constructor signature for '+tag+': '+code);
       const visual=await page.locator('#pa-scale-graph rect').count();
       if(visual<2)throw Error('Missing typed graph for '+tag);
       if(await page.locator('#pa-scale-module rect').count()<2)throw Error('Missing module view '+tag);
