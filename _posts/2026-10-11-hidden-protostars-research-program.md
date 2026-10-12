@@ -131,6 +131,8 @@ The same fixed counterparts now have an independently checked colour diagnosis: 
 
 The native radio-position check now separates regional activity from a specific infrared point: historical maser **330.878-0.367** is **12.520″** from the first clump centre but **17.501″** from its best infrared counterpart. **0/3** fixed best points and **0/6** alternatives have a catalogue maser within the frozen one-arcsecond criterion. This limits point-specific interpretation; it does not establish starlessness, clump membership or a birth. [Read the radio context and coverage limit](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#radio-context).
 
+The fixed first-field gas–radio comparison adds only **0.1970 km/s** of common velocity-band overlap. The literal criterion passes, but the declared **+1 km/s sensitivity removes overlap**; maser peaks lie outside both gas bands. This is marginal regional context, not confirmed membership or support for the infrared point. All earlier failed gates remain. [Read the measured bands, failed sensitivity and metadata correction](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#gas-velocity).
+
 <h3 id="historical-week">The original control study: frozen and stopped</h3>
 
 <blockquote class="sb-goal">Determine whether nearby Hi-GAL clumps labelled prestellar and undetected at 70 μm contain an excess of compact mid-infrared sources compared with sightlines matched for dust column, sensitivity and crowding.</blockquote>
