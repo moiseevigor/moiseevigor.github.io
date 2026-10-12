@@ -17,7 +17,7 @@ const text=document.createElement('p');text.className='pr-body';text.textContent
 function action(label,i){const b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',()=>api.selectExpression(i));section.append(b);}
 for(const r of list.slice(0,8))action('Application #'+r.application+' · '+r.arguments.length+' arguments',r.application);
 if(occ){if(selection.id!==occ.application)action('Enclosing application #'+occ.application,occ.application);else occ.arguments.forEach((i,j)=>action('Argument '+(j+1)+' → #'+i,i));}
-box.append(section);
+box.prepend(section);
 }
 window.addEventListener('proof-atlas:selection',e=>{selection=e.detail;queueMicrotask(annotate);});
 new MutationObserver(annotate).observe(box,{childList:true});
