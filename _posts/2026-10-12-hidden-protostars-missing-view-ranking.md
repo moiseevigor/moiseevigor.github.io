@@ -21,7 +21,7 @@ description: >
 ---
 
 <link rel="stylesheet" href="/public/css/starbirth-program.css?v=20261011">
-<link rel="stylesheet" href="/public/css/starbirth-ranking.css?v=20261012-3">
+<link rel="stylesheet" href="/public/css/starbirth-ranking.css?v=20261012-4">
 
 <div class="l-body sb-program sb-ranking" markdown="1">
 
@@ -31,7 +31,7 @@ A representation can learn common patterns across surveys. The useful test is wh
 
 That result has a sharper limitation: **none of the 27 qualifying chemistry-positive cases has the registered temporal input view**. The learning procedure can handle a missing observation, but it cannot supply the absent observation. [Verified result](/public/data/starbirth/missing-view/results.md).
 
-<nav class="sb-jump" aria-label="On this page"><a href="#equal-cost">The comparison</a><a href="#learning">What learned without labels</a><a href="#coverage">The coverage gap</a><a href="#temporal-diagnosis">Why the temporal view is missing</a><a href="#native-counterparts">Three native counterpart cases</a><a href="#unknowns">The unknown denominator</a><a href="#next-evidence">What would change the conclusion</a><a href="#evidence">Exact evidence</a></nav>
+<nav class="sb-jump" aria-label="On this page"><a href="#equal-cost">The comparison</a><a href="#learning">What learned without labels</a><a href="#coverage">The coverage gap</a><a href="#temporal-diagnosis">Why the temporal view is missing</a><a href="#native-counterparts">Three native counterpart cases</a><a href="#irac-colours">The physical-colour check</a><a href="#unknowns">The unknown denominator</a><a href="#next-evidence">What would change the conclusion</a><a href="#evidence">Exact evidence</a></nav>
 
 <h2 id="equal-cost">The same eighteen reviews</h2>
 
@@ -127,6 +127,8 @@ These are consumed chemistry-positive references selected before the native read
 
 **Catalogue evidence:** Hi-GAL labels the clump catalogue-prestellar. The consumed MALT90 proxy record is `AG1532`, with tracer flags `Y|N|Y|Y` in native field order `DHC3N`, `DHNCO404`, `DCH3CN` and `DSIO`. Those detections support molecular activity, not a physical class decision. GLIMPSE supplies a previously catalogued point-source record; it supplies no consensus youth or clump-membership classification.
 
+**Published colour component:** [3.6]−[4.5] = **−0.089 mag**; its frozen 3× quoted-error upper sensitivity is **0.292 mag**, below the named necessary cut within the declared quoted-error sensitivity. Missing native 8-micron photometry prevents the full four-band scheme. This is a conditional colour check, not a physical classification or confidence bound. [Comparator scope and exact evidence](#irac-colours).
+
 **Assessment remains unknown:** single-emitter ownership, physical membership, evolutionary stage and temporal birth. This is not a newly discovered star or an independent validation case.
 
 [Download all three complete assessment cards, original scores and every native alternative](/public/data/starbirth/native-glimpse/starbirth-ng-evidence-cards.json).
@@ -141,6 +143,8 @@ These are consumed chemistry-positive references selected before the native read
 **Our historical system:** embedding rank score **0.695941** (not a probability). All four frozen methods already selected this clump at the original **982-review** all-requested budget. The new GLIMPSE data were not model inputs; no rank or model was recomputed.
 
 **Catalogue evidence:** Hi-GAL labels the clump catalogue-prestellar. The consumed MALT90 proxy record is `AG3005`, with tracer flags `Y|N|N|N` in native field order `DHC3N`, `DHNCO404`, `DCH3CN` and `DSIO`. Those detections support molecular activity, not a physical class decision. GLIMPSE supplies a previously catalogued point-source record; it supplies no consensus youth or clump-membership classification.
+
+**Published colour component:** [3.6]−[4.5] = **+0.134 mag**; its frozen 3× quoted-error upper sensitivity is **1.124 mag**, unresolved under the declared quoted-error sensitivity. Missing native 8-micron photometry prevents the full four-band scheme. This is a conditional colour check, not a physical classification or confidence bound. [Comparator scope and exact evidence](#irac-colours).
 
 **Assessment remains unknown:** single-emitter ownership, physical membership, evolutionary stage and temporal birth. This is not a newly discovered star or an independent validation case.
 
@@ -157,6 +161,8 @@ These are consumed chemistry-positive references selected before the native read
 
 **Catalogue evidence:** Hi-GAL labels the clump catalogue-prestellar. The consumed MALT90 proxy record is `AG3227`, with tracer flags `Y|N|N|N` in native field order `DHC3N`, `DHNCO404`, `DCH3CN` and `DSIO`. Those detections support molecular activity, not a physical class decision. GLIMPSE supplies a previously catalogued point-source record; it supplies no consensus youth or clump-membership classification.
 
+**Published colour component:** [3.6]−[4.5] = **−0.011 mag**; its frozen 3× quoted-error upper sensitivity is **0.208 mag**, below the named necessary cut within the declared quoted-error sensitivity. Missing native 8-micron photometry prevents the full four-band scheme. This is a conditional colour check, not a physical classification or confidence bound. [Comparator scope and exact evidence](#irac-colours).
+
 **Assessment remains unknown:** single-emitter ownership, physical membership, evolutionary stage and temporal birth. This is not a newly discovered star or an independent validation case.
 
 [Download all three complete assessment cards, original scores and every native alternative](/public/data/starbirth/native-glimpse/starbirth-ng-evidence-cards.json).
@@ -168,6 +174,36 @@ The other two best records match **14 / 19** and **4 / 6** supported visit media
 The six small original catalogue responses total **4,696 bytes**. Acquisition and independent recomputation belonged to the separately frozen research unit, not this blog upkeep. Publication exported committed bytes offline; it ran no experiment, fit, observation acquisition or threshold adjustment. All **19,328** parent identities and **19,066** unknown proxy states remain unchanged.
 
 Download [the verified report](/public/data/starbirth/native-glimpse/results.md), [all native alternatives](/public/data/starbirth/native-glimpse/sources.csv), [visit medians](/public/data/starbirth/native-glimpse/visits.csv), [180 visit/source edges](/public/data/starbirth/native-glimpse/visit-source-edges.csv), [independent verification](/public/data/starbirth/native-glimpse/starbirth-ng-verification.json), [final checkpoint](/public/data/starbirth/native-glimpse/starbirth-ng-checkpoint.json) and [packet guide with complete source hashes](/public/data/starbirth/native-glimpse/README.md). The source revision is `4e4a9b13c199a7d035a3728d7390d754d9773e89`; its creation-time unpublished flags remain historical, with live publication checked separately. **No new star, confirmed birth or validated physical detector follows from this result.**
+
+<h2 id="irac-colours">A good position does not make a young star</h2>
+
+**New, independently checked retrospective colour diagnosis.** The same three fixed counterparts have short-wave IRAC colours **−0.089, +0.134 and −0.011 mag**. None of the measured central values exceeds the **>0.7 mag** necessary [3.6]−[4.5] colour cut in the named Gutermuth et al. (2009) Phase-I scheme. **Zero of three has usable photometry in all four bands**, so we cannot apply its full classifier.
+
+That published method requires four-band detections with magnitude errors below 0.2, contaminant screening and red [3.6]−[4.5] and [4.5]−[5.8] colours. We tested only its availability and necessary-colour component. We did not run a Class-I/II classifier, use its other phases or validate it for our Hi-GAL population. [Primary method, Appendix A.1](https://arxiv.org/pdf/0906.0201v1).
+
+<div class="sb-ledger sb-irac-colours" role="region" aria-label="Measured short-wave colours of the three fixed positional counterparts" tabindex="0" markdown="1">
+
+| Known counterpart | Colour (mag) | 3× upper (mag) |
+|:--|--:|--:|
+| `SSTGLMC G330.8829-00.3661` | **−0.089** | **0.292** |
+| `SSTGLMC G351.2258+00.6940` | **+0.134** | **1.124** |
+| `SSTGLMC G353.4273-00.3723` | **−0.011** | **0.208** |
+
+</div>
+
+The last column is the measured colour plus three times the sum of its two quoted magnitude errors. It spans the largest linear propagated error under unknown inter-band correlation. It is **quoted-error sensitivity, not a confidence bound or physical exclusion**. Two sources stay below the named short-wave cut within this sensitivity; the second remains unresolved. Corrections, unmodelled systematics and non-Gaussian errors can exceed it. The two classification colours share a band, so we do not combine them as independent probabilities.
+
+**The strongest positional case therefore lacks this named red-colour support.** Its 21/21 alignment stays correct. This does not classify it as a field star, rule out a protostar, determine clump membership, or exclude a different embedded object inside the dust clump. All three lack usable native 8-micron values; the second also lacks 5.8-micron photometry. Missing entries are **not upper limits or physical nondetections**. Near-IR/24-micron alternatives and source ownership remain unverified.
+
+Our old scores rank **clump chemistry proxies**, not the evolutionary class of a nearby Spitzer point source. All four methods already selected these clumps; scores, inputs and review budgets stay unchanged. The magnitudes and case selection had already been inspected before this separately frozen diagnostic, so this is **consumed, post-read evidence**, not a preregistered discovery or independent physical validation.
+
+<h3 id="red-alternative">A different red source deserves its own assessment</h3>
+
+The retained alternatives also contain **`SSTGLMC G353.4284-00.3731`** in the third field. Its central colours are **1.000 and 0.790 mag**, both above the named necessary cuts, and it has usable four-band photometry. It is a previously catalogued **red inspection alternative**, not a new discovery or confirmed young star. Its second colour's frozen sensitivity spans **0.529–1.051**, so it lacks robust necessary-colour support. Only its 4.5-micron quality flag is verified zero; other-band flags and the full classifier remain unassessed.
+
+Crucially, this source matches **0 / 6** supported visit medians and lies **4.490 arcseconds** from the clump centre. It is different from the blue best positional counterpart. We do not assign it that source's time-series measurements or replace the frozen source after readout. A red neighbour, a clump chemistry rank and an emitting source are different pieces of evidence. [Exact retained source, uncertainty and prior geometry](/public/data/starbirth/irac-colours/alternative-note.md).
+
+Download [the three system/comparator cards with every alternative](/public/data/starbirth/irac-colours/starbirth-ic-comparison-cards.json), [verified interpretation](/public/data/starbirth/irac-colours/results.md), [all available and missing colours](/public/data/starbirth/irac-colours/starbirth-ic-all-records.json), [independent verification](/public/data/starbirth/irac-colours/starbirth-ic-verification.json) and [protocol, stopped preflight, unchanged resumption and exact hashes](/public/data/starbirth/irac-colours/README.md). The 23 primary compact source exports bind research revision `106e2f842a903469f7529c54272cbf033509ba43`; five additive secondary-note exports bind `2d098311d6cb089455bc83bbad895fab635c8d8e`. The resource guard stopped the first preflight before spawning a worker, then resumed when the external process was absent and memory pressure had normalized. Starbirth did not cancel it; the other project’s build result was not verified. All scientific rules stayed frozen. **No new observations, model fit, physical stage, discovery or birth is established.**
 
 <h2 id="unknowns">The full catalogue keeps the difficult denominator</h2>
 

@@ -28,7 +28,7 @@ assert sum(p.stat().st_size for p in PACKET.iterdir())<16*1024**2
 assert '\nlisted: false\n' in (ROOT/'_posts/2026-10-12-hidden-protostars-missing-view-ranking.md').read_text()
 if len(sys.argv)>1:
  site=Path(sys.argv[1]);article=(site/URL.strip('/')/'index.html').read_text();program=(site/PROGRAM.strip('/')/'index.html').read_text()
- for term in ['id="native-counterparts"','21 / 21','0.168–0.336','5.719','Zero of three','1536','10 and 11','14 / 19','4 / 6','not twelve independent objects','No new star','333-of-800',REV,'starbirth-ranking.css?v=20261012-3']:
+ for term in ['id="native-counterparts"','21 / 21','0.168–0.336','5.719','Zero of three','1536','10 and 11','14 / 19','4 / 6','not twelve independent objects','No new star','333-of-800',REV,'starbirth-ranking.css?v=20261012-4']:
   assert term in article,term
  assert article.count('class="sb-native-card"')==3
  assert '**982-review' not in article

@@ -16,3 +16,6 @@
 .sb-native-card p{font:14px/1.8 var(--sans)}
 .sb-native-card code{white-space:normal;overflow-wrap:anywhere}
 @media(max-width:600px){.sb-native-card{padding:0 .8rem}.sb-native-card summary{font-size:14px}}
+
+.sb-irac-colours td:first-child,.sb-irac-colours th:first-child{width:60%!important}
+.sb-irac-colours td:not(:first-child),.sb-irac-colours th:not(:first-child){width:20%}
