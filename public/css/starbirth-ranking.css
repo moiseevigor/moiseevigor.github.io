@@ -6,3 +6,6 @@
 .sb-ranking-denominator td:first-child,.sb-ranking-denominator th:first-child{width:40%!important}
 .sb-ranking-denominator td:not(:first-child),.sb-ranking-denominator th:not(:first-child){width:20%}
 @media(max-width:600px){.sb-ranking .sb-ledger table{font-size:12px;line-height:1.6}.sb-ranking .sb-ledger td,.sb-ranking .sb-ledger th{padding:.8rem .4rem!important}}
+
+.sb-temporal-diagnosis td:first-child,.sb-temporal-diagnosis th:first-child{width:80%!important}
+.sb-temporal-diagnosis td:last-child,.sb-temporal-diagnosis th:last-child{width:20%}

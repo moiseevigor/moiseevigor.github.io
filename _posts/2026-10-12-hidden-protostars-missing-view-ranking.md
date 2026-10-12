@@ -21,7 +21,7 @@ description: >
 ---
 
 <link rel="stylesheet" href="/public/css/starbirth-program.css?v=20261011">
-<link rel="stylesheet" href="/public/css/starbirth-ranking.css?v=20261012-1">
+<link rel="stylesheet" href="/public/css/starbirth-ranking.css?v=20261012-2">
 
 <div class="l-body sb-program sb-ranking" markdown="1">
 
