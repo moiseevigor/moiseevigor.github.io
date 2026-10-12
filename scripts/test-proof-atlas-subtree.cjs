@@ -11,6 +11,7 @@ const check=(ok,msg)=>{if(!ok)throw Error(msg);};
  try{
   await page.addInitScript(()=>{localStorage.setItem('theme','light');localStorage.setItem('analytics-consent','no');});
   await page.goto(base+'/projects/proof-atlas/app/#expr-1852');
+  await page.locator('[data-pa-reader-tab="explain"]').click();
   check(await page.evaluate(()=>window.ProofAtlasAPI.getSnapshot().selected)===1852,'Shared occurrence link failed');
   const select=async id=>{await page.locator('#pa-search').fill(String(id));await page.locator('#pa-find').click();};
   await select(1852);

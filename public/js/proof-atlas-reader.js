@@ -34,7 +34,7 @@
     psiP:'The positive branch of the zero-curve phase correspondence.',
     psiM:'The negative branch of the zero-curve phase correspondence.'
   };
-  const state={tab:new URLSearchParams(window.location.search).get('reader')==='article'?'article':'explain',selection:null,open:true,history:[]};
+  const state={tab:['explain','lean'].includes(new URLSearchParams(window.location.search).get('reader'))?new URLSearchParams(window.location.search).get('reader'):'article',selection:null,open:true,history:[]};
   const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   const el=(tag,className,text)=>{const n=document.createElement(tag);if(className)n.className=className;if(text!==undefined)n.textContent=String(text);return n;};
   const word=n=>Number(n).toLocaleString('en-US');
@@ -200,20 +200,24 @@
     if(!passage){paragraph(parent,'This selection has no indexed article passage. You can browse the current crossing-principle index below.');}
     else{
       parent.dataset.articlePassage=passage.id;
-      eyebrow(parent,state.articleId?'Browsing the article':match.relation);
+      eyebrow(parent,state.articleId?'Browsing the article':(selection.type==='expr'?'Node #'+selection.id+' · ':'')+match.relation);
       heading(parent,passage.title);
       if(!state.articleId&&match.inherited)notice(parent,'This is context for the enclosing expression. No separate article sentence has been assigned to this small node.');
       const quote=el('blockquote','pr-article-quote',passage.raw.replace(/\s+/g,' '));parent.appendChild(quote);
       if(window.renderMathInElement)window.renderMathInElement(quote,{delimiters:[{left:'$',right:'$',display:false}],macros:articleIndex.source.macros,throwOnError:false});
       paragraph(parent,passage.note);
       const cite=el('p','pr-detail','Exact excerpt · '+passage.anchor+' · source lines '+passage.sourceLines.join('–')+' · snapshot '+articleIndex.source.snapshotDate);parent.appendChild(cite);
-      const links=makeActions(parent),pdf=el('a',null,'Open article PDF ↗');pdf.href=articleIndex.source.pdf+'#page='+passage.pdfPage;links.appendChild(pdf);
+      const links=makeActions(parent),web=el('a',null,'Read this section in the article ↗');web.href=passage.htmlUrl;web.dataset.articleSection=passage.htmlAnchor;links.appendChild(web);
+      const pdf=el('a',null,'Open article PDF ↗');pdf.href=articleIndex.source.pdf+'#page='+passage.pdfPage;links.appendChild(pdf);
       const tex=el('a',null,'Open article source ↗');tex.href=articleIndex.source.url;links.appendChild(tex);
       const reverse=articleIndex.reverse(passage.id);
       eyebrow(parent,'Lean linked to this passage');
       const actions=makeActions(parent);
       if(!reverse.anchors.length&&!reverse.declarations.length)paragraph(parent,'No mapped Lean proof: this passage records the formalization boundary.');
-      for(const a of reverse.anchors)action(actions,'Read subtree #'+a.occurrence,()=>toExpression(a.occurrence));
+      const preferred=[selection.type==='expr'?selection.id:-1,1852,5830,0,203];
+      const ordered=[...reverse.anchors].sort((a,b)=>{const rank=x=>preferred.includes(x.occurrence)?preferred.indexOf(x.occurrence):preferred.length;return rank(a)-rank(b)||a.occurrence-b.occurrence;});
+      for(const a of ordered.slice(0,8))action(actions,'Read subtree #'+a.occurrence,()=>toExpression(a.occurrence));
+      if(reverse.anchors.length>8)parent.appendChild(el('p','pr-detail',reverse.anchors.length+' exact expression anchors; first 8 shown.'));
       for(const name of reverse.declarations){const short=name.split('.').pop();if(namedMap.has(short))action(actions,'Open '+short,()=>toNamed(short));}
       const provenance=el('details','pr-context');provenance.appendChild(el('summary',null,'Source and alignment provenance'));
       paragraph(provenance,'Article SHA-256: '+articleIndex.source.sha256);paragraph(provenance,'Excerpt SHA-256: '+passage.excerptSha256);
