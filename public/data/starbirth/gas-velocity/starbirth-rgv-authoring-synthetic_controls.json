@@ -1,0 +1,14 @@
+{
+  "synthetic_controls_passed": true,
+  "checks": [
+    "resolved_hyperfine_mode_not_multiple_velocity_clouds",
+    "two_tracer_common_intersection",
+    "disjoint_velocity_rejection",
+    "pairwise_only_false_positive_rejection",
+    "missing_errors_unmeasured",
+    "wrong_fit_mode_unsupported",
+    "rounded_zero_errors_retained",
+    "RA_wrap"
+  ],
+  "native_measurement_readout": false
+}

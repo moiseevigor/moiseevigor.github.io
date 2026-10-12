@@ -1,0 +1,292 @@
+{
+  "schema": "radio-gas-velocity-corrected-assessment/1",
+  "frozen_summary_sha256": "6be9468b276f42eaae4a40c819649040d726c65a41fbe3881b67cbf7e359c08a",
+  "original_summary_preserved": true,
+  "correction_timing": "post-read metadata correction",
+  "changed_measurements_or_equations": false,
+  "mistyped_field": "native_velocity_component",
+  "literal_source_field": "Vc",
+  "correct_meaning": "catalogue consensus gas velocity in km/s; physical component designation comes from native Name suffix",
+  "definition_source": "https://researchonline.ljmu.ac.uk/id/eprint/4139/1/MALT90_catalog.pdf#page=7",
+  "cases": [
+    {
+      "case_id": "HIGALBM330.8814-0.3656",
+      "primary_case": true,
+      "malt90_id": "AG1532",
+      "native_name": "AGAL330.879-00.367_S",
+      "source_row_ordinal": "1732",
+      "malt90_to_clump_arcsec": 10.634536245059737,
+      "nearby_molecular_records": [
+        "1732"
+      ],
+      "radio_row_id": "VIII/96/catalog.dat:000307",
+      "radio_name": "330.878-0.367",
+      "radio_to_clump_arcsec": 12.519881341253434,
+      "native_radio_velocity_fields": {
+        "velocity_low_field": " -60.0",
+        "velocity_high_field": " -58.0",
+        "peak_velocity_mx_field": " -59.2",
+        "peak_velocity_sc_field": " -59.3"
+      },
+      "lines": [
+        {
+          "tracer": "N2HP",
+          "native_fields": {
+            "D": "Y",
+            "NG": "3.0",
+            "Vlsr": "-62.443",
+            "e_Vlsr": "0.077",
+            "FWHM": "4.004",
+            "e_FWHM": "0.138",
+            "Pfit": "0.822",
+            "IISNR": "26.154"
+          },
+          "eligible": true,
+          "reasons": [],
+          "velocity_band_km_s": [
+            -64.943,
+            -59.943
+          ],
+          "zero_quoted_error_retained": false,
+          "band_is_confidence_interval": false
+        },
+        {
+          "tracer": "H13COP",
+          "native_fields": {
+            "D": "Y",
+            "NG": "1.0",
+            "Vlsr": "-62.566",
+            "e_Vlsr": "0.133",
+            "FWHM": "3.938",
+            "e_FWHM": "0.312",
+            "Pfit": "0.237",
+            "IISNR": "11.209"
+          },
+          "eligible": true,
+          "reasons": [],
+          "velocity_band_km_s": [
+            -65.462,
+            -59.67
+          ],
+          "zero_quoted_error_retained": false,
+          "band_is_confidence_interval": false
+        }
+      ],
+      "scenarios": [
+        {
+          "shift_km_s": -1,
+          "compatible": true,
+          "overlap_km_s": 1.1970000000000027,
+          "boundary": false
+        },
+        {
+          "shift_km_s": 0,
+          "compatible": true,
+          "overlap_km_s": 0.19700000000000273,
+          "boundary": false
+        },
+        {
+          "shift_km_s": 1,
+          "compatible": false,
+          "overlap_km_s": -0.8029999999999973,
+          "boundary": false
+        }
+      ],
+      "native_projected_and_velocity_eligible": true,
+      "zero_shift_compatible": true,
+      "physical_membership": "unestablished",
+      "stellar_velocity": "unmeasured",
+      "stellar_youth": "unknown",
+      "birth_status": "not_established",
+      "native_consensus_velocity_field": "-62.71",
+      "native_velocity_component_suffix": "S"
+    },
+    {
+      "case_id": "HIGALBM351.2258+0.6937",
+      "primary_case": false,
+      "malt90_id": "AG3005",
+      "native_name": "AGAL351.228+00.691_S",
+      "source_row_ordinal": "3187",
+      "malt90_to_clump_arcsec": 12.111144902125375,
+      "nearby_molecular_records": [
+        "3187"
+      ],
+      "radio_row_id": "VIII/96/catalog.dat:000067",
+      "radio_name": "351.242+0.670",
+      "radio_to_clump_arcsec": 103.45834361679871,
+      "native_radio_velocity_fields": {
+        "velocity_low_field": "   2.0",
+        "velocity_high_field": "   3.0",
+        "peak_velocity_mx_field": "   2.5",
+        "peak_velocity_sc_field": "   2.5"
+      },
+      "lines": [
+        {
+          "tracer": "N2HP",
+          "native_fields": {
+            "D": "Y",
+            "NG": "3.0",
+            "Vlsr": "-4.579",
+            "e_Vlsr": "0.016",
+            "FWHM": "2.018",
+            "e_FWHM": "0.039",
+            "Pfit": "0.021",
+            "IISNR": "41.41"
+          },
+          "eligible": true,
+          "reasons": [],
+          "velocity_band_km_s": [
+            -5.7545,
+            -3.4034999999999997
+          ],
+          "zero_quoted_error_retained": false,
+          "band_is_confidence_interval": false
+        },
+        {
+          "tracer": "H13COP",
+          "native_fields": {
+            "D": "Y",
+            "NG": "1.0",
+            "Vlsr": "-4.478",
+            "e_Vlsr": "0.078",
+            "FWHM": "1.676",
+            "e_FWHM": "0.183",
+            "Pfit": "0.365",
+            "IISNR": "6.681"
+          },
+          "eligible": true,
+          "reasons": [],
+          "velocity_band_km_s": [
+            -5.8845,
+            -3.0714999999999995
+          ],
+          "zero_quoted_error_retained": false,
+          "band_is_confidence_interval": false
+        }
+      ],
+      "scenarios": [
+        {
+          "shift_km_s": -1,
+          "compatible": false,
+          "overlap_km_s": -4.2635,
+          "boundary": false
+        },
+        {
+          "shift_km_s": 0,
+          "compatible": false,
+          "overlap_km_s": -5.2635,
+          "boundary": false
+        },
+        {
+          "shift_km_s": 1,
+          "compatible": false,
+          "overlap_km_s": -6.2635,
+          "boundary": false
+        }
+      ],
+      "native_projected_and_velocity_eligible": true,
+      "zero_shift_compatible": false,
+      "physical_membership": "unestablished",
+      "stellar_velocity": "unmeasured",
+      "stellar_youth": "unknown",
+      "birth_status": "not_established",
+      "native_consensus_velocity_field": "-4.22",
+      "native_velocity_component_suffix": "S"
+    },
+    {
+      "case_id": "HIGALBM353.4272-0.3734",
+      "primary_case": false,
+      "malt90_id": "AG3227",
+      "native_name": "AGAL353.426-00.371_S",
+      "source_row_ordinal": "3129",
+      "malt90_to_clump_arcsec": 10.14049219692242,
+      "nearby_molecular_records": [
+        "3129"
+      ],
+      "radio_row_id": "VIII/96/catalog.dat:000092",
+      "radio_name": "353.410-0.360",
+      "radio_to_clump_arcsec": 79.06565773823415,
+      "native_radio_velocity_fields": {
+        "velocity_low_field": " -23.0",
+        "velocity_high_field": " -19.0",
+        "peak_velocity_mx_field": " -20.3",
+        "peak_velocity_sc_field": " -20.4"
+      },
+      "lines": [
+        {
+          "tracer": "N2HP",
+          "native_fields": {
+            "D": "Y",
+            "NG": "3.0",
+            "Vlsr": "-17.128",
+            "e_Vlsr": "0.021",
+            "FWHM": "3.618",
+            "e_FWHM": "0.04",
+            "Pfit": "0.055",
+            "IISNR": "79.289"
+          },
+          "eligible": true,
+          "reasons": [],
+          "velocity_band_km_s": [
+            -19.12,
+            -15.136
+          ],
+          "zero_quoted_error_retained": false,
+          "band_is_confidence_interval": false
+        },
+        {
+          "tracer": "H13COP",
+          "native_fields": {
+            "D": "Y",
+            "NG": "1.0",
+            "Vlsr": "-16.791",
+            "e_Vlsr": "0.071",
+            "FWHM": "3.231",
+            "e_FWHM": "0.166",
+            "Pfit": "0.303",
+            "IISNR": "16.459"
+          },
+          "eligible": true,
+          "reasons": [],
+          "velocity_band_km_s": [
+            -18.9285,
+            -14.653500000000001
+          ],
+          "zero_quoted_error_retained": false,
+          "band_is_confidence_interval": false
+        }
+      ],
+      "scenarios": [
+        {
+          "shift_km_s": -1,
+          "compatible": false,
+          "overlap_km_s": -0.9314999999999998,
+          "boundary": false
+        },
+        {
+          "shift_km_s": 0,
+          "compatible": true,
+          "overlap_km_s": 0.06850000000000023,
+          "boundary": false
+        },
+        {
+          "shift_km_s": 1,
+          "compatible": true,
+          "overlap_km_s": 1.0685000000000002,
+          "boundary": false
+        }
+      ],
+      "native_projected_and_velocity_eligible": true,
+      "zero_shift_compatible": true,
+      "physical_membership": "unestablished",
+      "stellar_velocity": "unmeasured",
+      "stellar_youth": "unknown",
+      "birth_status": "not_established",
+      "native_consensus_velocity_field": "-16.77",
+      "native_velocity_component_suffix": "S"
+    }
+  ],
+  "physical_validation": false,
+  "new_stars": 0,
+  "new_births": 0
+}

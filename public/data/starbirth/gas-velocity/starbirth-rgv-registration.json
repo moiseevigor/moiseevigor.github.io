@@ -1,0 +1,162 @@
+{
+  "schema": "radio-gas-velocity-registration/1",
+  "date": "2026-10-13",
+  "source_revision_before_registration": "7ded556f990c7eefa1b1c1ae1901e71b7eb30231",
+  "question": "For fixed nearby historical radio marker 330.878-0.367, do two registered native dense-gas bands in AG1532 have a common literal-velocity intersection with the maser range?",
+  "primary_case": "HIGALBM330.8814-0.3656",
+  "primary_denominator": 1,
+  "cases": [
+    {
+      "case_id": "HIGALBM330.8814-0.3656",
+      "ra": "242.585210",
+      "dec": "-52.099141",
+      "malt90_id": "AG1532",
+      "radio_row_id": "VIII/96/catalog.dat:000307",
+      "radio_name": "330.878-0.367",
+      "radio_to_clump_arcsec": 12.519881341253434,
+      "primary_case": true
+    },
+    {
+      "case_id": "HIGALBM351.2258+0.6937",
+      "ra": "260.038850",
+      "dec": "-35.912856",
+      "malt90_id": "AG3005",
+      "radio_row_id": "VIII/96/catalog.dat:000067",
+      "radio_name": "351.242+0.670",
+      "radio_to_clump_arcsec": 103.45834361679871,
+      "primary_case": false
+    },
+    {
+      "case_id": "HIGALBM353.4272-0.3734",
+      "ra": "262.634300",
+      "dec": "-34.688756",
+      "malt90_id": "AG3227",
+      "radio_row_id": "VIII/96/catalog.dat:000092",
+      "radio_name": "353.410-0.360",
+      "radio_to_clump_arcsec": 79.06565773823415,
+      "primary_case": false
+    }
+  ],
+  "inputs": [
+    {
+      "path": "docs/RESEARCH_GOAL.md",
+      "bytes": 19581,
+      "sha256": "0b069de94db20d821cba5aa1565add7a5da274fcb5616e6e27d7ad7b2937916b"
+    },
+    {
+      "path": "docs/ADVERSARIAL_REVIEW_20261006.md",
+      "bytes": 12681,
+      "sha256": "c28b2ccc8513c9fd4b6fc8db7364ba474316a2da53592963037bb1b6358e9021"
+    },
+    {
+      "path": "docs/MULTISURVEY_RESEARCH_PROGRAM_20261012.md",
+      "bytes": 10578,
+      "sha256": "6dcf4b55081d510a248fba28a1c848bdaf6f720d28dd19d867fc0360b1e94496"
+    },
+    {
+      "path": "cache/n1/malt90_rathborne2016.csv",
+      "bytes": 2870936,
+      "sha256": "a31b9caa0303fe4e2d7a0975d2f71c36be655f09c13cb668ff42c55ce10317cd"
+    },
+    {
+      "path": "artifacts/native_glimpse_association_20261012/evidence_cards.json",
+      "bytes": 34699,
+      "sha256": "8929cd3bb703491adc3bff7853c445bc1e2b4649f83f14fb41a9ef34cc0b7490"
+    },
+    {
+      "path": "artifacts/native_mmb_position_acquisition_20261013/catalog.dat",
+      "bytes": 69855,
+      "sha256": "794027fab223356a267bfaca8d0e8d369f6ab37adfea15644af00e30183b77a5"
+    },
+    {
+      "path": "artifacts/native_mmb_position_analysis_20261013/radio_records.json.gz",
+      "bytes": 76966,
+      "sha256": "1c9a4949dde9515d649dacc94ff90029c9c630fd1016ea25401f7682af81f7c5"
+    },
+    {
+      "path": "artifacts/native_mmb_position_analysis_20261013/summary.json",
+      "bytes": 8823,
+      "sha256": "2539c8b4505082831431bf1d794e5d87dec17c29c85923c20e003d7c6248ebdc"
+    },
+    {
+      "path": "artifacts/native_mmb_position_checkpoint_20261013.json",
+      "bytes": 15862,
+      "sha256": "634b72f92eeffad47e4ce485dc899314af0a22d35d2da0bf7b47dbcb26c6eb1e"
+    },
+    {
+      "path": "artifacts/native_profile_quality_checkpoint_20261013.json",
+      "bytes": 4826,
+      "sha256": "fbc6aec2e8c62fdc4c293b059b46af7af5b482445edef9e58aef672bf60945ef"
+    },
+    {
+      "path": "artifacts/graph/native_mmb_position_reviewed_supplement_20261013.json",
+      "bytes": 6811,
+      "sha256": "653cacbc06714e40a5b6e24a75e15b66719728aa16b678c9c66ff4b3d1137cc0"
+    }
+  ],
+  "malt90_path": "cache/n1/malt90_rathborne2016.csv",
+  "radio_records_path": "artifacts/native_mmb_position_analysis_20261013/radio_records.json.gz",
+  "raw_radio_path": "artifacts/native_mmb_position_acquisition_20261013/catalog.dat",
+  "required_columns": [
+    "ID",
+    "Name",
+    "Vc",
+    "_RA_icrs",
+    "_DE_icrs",
+    "DN2HP",
+    "NGN2HP",
+    "VlsrN2HP",
+    "e_VlsrN2HP",
+    "FWHMN2HP",
+    "e_FWHMN2HP",
+    "PfitN2HP",
+    "IISNRN2HP",
+    "DH13COP",
+    "NGH13COP",
+    "VlsrH13COP",
+    "e_VlsrH13COP",
+    "FWHMH13COP",
+    "e_FWHMH13COP",
+    "PfitH13COP",
+    "IISNRH13COP"
+  ],
+  "tracers": {
+    "N2HP": {
+      "detection": "Y",
+      "fit_mode": 3
+    },
+    "H13COP": {
+      "detection": "Y",
+      "fit_mode": 1
+    }
+  },
+  "line_band_halfwidth": "0.5*FWHM+3*e_Vlsr+1.5*e_FWHM+0.06 km/s",
+  "radio_band": "[VL-0.14+shift,VH+0.14+shift] km/s",
+  "zero_point_shift_sensitivity_km_s": [
+    -1,
+    0,
+    1
+  ],
+  "zero_point_shifts_are_calibration_bounds": false,
+  "primary_rule": "Positive common intersection of all three eligible bands at shift zero; numerical boundary abs(overlap)<=1e-10 is indeterminate",
+  "quoted_errors_zero_retained_as_rounded_values": true,
+  "eligibility": "Native D=Y; registered NG; finite Vlsr, nonnegative quoted errors, positive FWHM; unique exact fixed ID and within30arcsec of case",
+  "missing_eligibility_rule": "Primary compatible/gate null, not false or starlessness",
+  "native_molecular_alternatives": "Retain all original rows within30arcsec of each fixed centre plus every fixed-ID instance; exact original fields and string ordinals",
+  "case_and_data_consumption": "Retrospective source-specific diagnosis. Existing radio selection, line products and model-feature widths consumed; no fresh held-out physical truth. Comparison rule frozen before this new join/readout.",
+  "stellar_velocity": "unmeasured",
+  "systematic_velocity_calibration": "not validated; literal published numeric comparison only",
+  "physical_membership_from_compatibility": false,
+  "models_changed": false,
+  "resources": {
+    "cpu_threads": 1,
+    "gpu": false,
+    "per_stage_mib": 1,
+    "per_stage_seconds": 600,
+    "sampled_rss_mib": 256,
+    "reserve_gib": 5,
+    "complete_packet_mib": 4,
+    "cumulative_seconds": 1800
+  },
+  "stop": "One verified offline report; no fit, new observations, network retry, model update, N20/c6828/archive restart or automatic successor."
+}

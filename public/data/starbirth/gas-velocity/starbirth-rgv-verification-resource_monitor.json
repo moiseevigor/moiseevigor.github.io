@@ -1,0 +1,136 @@
+{
+  "schema": "bounded-research-resource-monitor/1",
+  "command": [
+    ".venv/bin/python",
+    "research/verify_radio_gas_velocity_20261013.py",
+    "artifacts/radio_gas_velocity_verification_20261013",
+    "artifacts/radio_gas_velocity_analysis_20261013"
+  ],
+  "limits": {
+    "reserve_bytes": 5368709120,
+    "stage_budget_bytes": 1048576,
+    "max_rss_bytes": 268435456,
+    "wall_seconds": 600.0
+  },
+  "sampling_interval_seconds": 1.0,
+  "elapsed_seconds": 3.100921082892455,
+  "child_exit_code": 0,
+  "stop_reason": null,
+  "completed": true,
+  "peak_sampled_worker_rss_bytes": 82804736,
+  "minimum_observed_free_bytes": 66929647616,
+  "sample_count": 6,
+  "samples_retained": 6,
+  "samples": [
+    {
+      "utc": "2026-10-12T23:35:50.038602+00:00",
+      "free_bytes": 66929668096,
+      "stage_bytes": 0,
+      "worker_rss_bytes": 0,
+      "worker_cpu_percent": 0,
+      "workers": [],
+      "system_memory_pressure_level": 1,
+      "load_average": [
+        1.08154296875,
+        1.40234375,
+        1.41552734375
+      ]
+    },
+    {
+      "utc": "2026-10-12T23:35:50.060431+00:00",
+      "free_bytes": 66929668096,
+      "stage_bytes": 0,
+      "worker_rss_bytes": 2441216,
+      "worker_cpu_percent": 0.0,
+      "workers": [
+        {
+          "pid": 78776,
+          "rss_bytes": 2441216,
+          "cpu_percent": 0.0
+        }
+      ],
+      "system_memory_pressure_level": 1,
+      "load_average": [
+        1.08154296875,
+        1.40234375,
+        1.41552734375
+      ]
+    },
+    {
+      "utc": "2026-10-12T23:35:51.083775+00:00",
+      "free_bytes": 66929659904,
+      "stage_bytes": 0,
+      "worker_rss_bytes": 82804736,
+      "worker_cpu_percent": 92.7,
+      "workers": [
+        {
+          "pid": 78776,
+          "rss_bytes": 82804736,
+          "cpu_percent": 92.7
+        }
+      ],
+      "system_memory_pressure_level": 1,
+      "load_average": [
+        1.08154296875,
+        1.40234375,
+        1.41552734375
+      ]
+    },
+    {
+      "utc": "2026-10-12T23:35:52.109582+00:00",
+      "free_bytes": 66929655808,
+      "stage_bytes": 0,
+      "worker_rss_bytes": 82804736,
+      "worker_cpu_percent": 99.7,
+      "workers": [
+        {
+          "pid": 78776,
+          "rss_bytes": 82804736,
+          "cpu_percent": 99.7
+        }
+      ],
+      "system_memory_pressure_level": 1,
+      "load_average": [
+        1.07470703125,
+        1.3955078125,
+        1.4130859375
+      ]
+    },
+    {
+      "utc": "2026-10-12T23:35:53.137593+00:00",
+      "free_bytes": 66929647616,
+      "stage_bytes": 1452,
+      "worker_rss_bytes": 0,
+      "worker_cpu_percent": 0.0,
+      "workers": [
+        {
+          "pid": 78776,
+          "rss_bytes": 0,
+          "cpu_percent": 0.0
+        }
+      ],
+      "system_memory_pressure_level": 1,
+      "load_average": [
+        1.07470703125,
+        1.3955078125,
+        1.4130859375
+      ]
+    },
+    {
+      "utc": "2026-10-12T23:35:53.140467+00:00",
+      "free_bytes": 66929647616,
+      "stage_bytes": 1452,
+      "worker_rss_bytes": 0,
+      "worker_cpu_percent": 0,
+      "workers": [],
+      "system_memory_pressure_level": 1,
+      "load_average": [
+        1.07470703125,
+        1.3955078125,
+        1.4130859375
+      ]
+    }
+  ],
+  "sampling_history": "Latest 128 samples; extrema aggregate all polls",
+  "scope": "Only this process group; RSS sampling may miss sub-interval peaks; no scientific inference."
+}

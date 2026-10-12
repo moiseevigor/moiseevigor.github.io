@@ -1,0 +1,190 @@
+{
+  "schema": "radio-gas-velocity-final-checkpoint/1",
+  "registration_revision": "74a45269cb91cb56d4fa9761c677517e0339e030",
+  "unit_complete": true,
+  "independent_verification_passed": true,
+  "primary_denominator": 1,
+  "primary_eligible": true,
+  "primary_rule_met": true,
+  "primary_common_overlap_km_s": 0.19700000000000273,
+  "primary_shift_support": [
+    true,
+    true,
+    false
+  ],
+  "robust_all_declared_shifts": false,
+  "physical_validation": false,
+  "models_changed": false,
+  "new_stars": 0,
+  "new_births": 0,
+  "consumed_source_diagnosis": true,
+  "stellar_velocity": "unmeasured",
+  "metadata_label_correction_post_read": true,
+  "original_readout_preserved": true,
+  "report_path": "docs/RADIO_GAS_VELOCITY_RESULTS_20261013.md",
+  "report_sha256": "622ccbb56689e5a50e5c439760cdfb704866a68c849e0d5355e1e429856bb2fa",
+  "corrected_assessment_path": "artifacts/radio_gas_velocity_corrected_assessment_20261013.json",
+  "corrected_assessment_sha256": "9327fc56373aad4185494315983ba27031802980a56996b97a895f35101c5bf6",
+  "frozen_inputs": [
+    {
+      "path": "docs/RESEARCH_GOAL.md",
+      "bytes": 19581,
+      "sha256": "0b069de94db20d821cba5aa1565add7a5da274fcb5616e6e27d7ad7b2937916b"
+    },
+    {
+      "path": "docs/ADVERSARIAL_REVIEW_20261006.md",
+      "bytes": 12681,
+      "sha256": "c28b2ccc8513c9fd4b6fc8db7364ba474316a2da53592963037bb1b6358e9021"
+    },
+    {
+      "path": "docs/MULTISURVEY_RESEARCH_PROGRAM_20261012.md",
+      "bytes": 10578,
+      "sha256": "6dcf4b55081d510a248fba28a1c848bdaf6f720d28dd19d867fc0360b1e94496"
+    },
+    {
+      "path": "cache/n1/malt90_rathborne2016.csv",
+      "bytes": 2870936,
+      "sha256": "a31b9caa0303fe4e2d7a0975d2f71c36be655f09c13cb668ff42c55ce10317cd"
+    },
+    {
+      "path": "artifacts/native_glimpse_association_20261012/evidence_cards.json",
+      "bytes": 34699,
+      "sha256": "8929cd3bb703491adc3bff7853c445bc1e2b4649f83f14fb41a9ef34cc0b7490"
+    },
+    {
+      "path": "artifacts/native_mmb_position_acquisition_20261013/catalog.dat",
+      "bytes": 69855,
+      "sha256": "794027fab223356a267bfaca8d0e8d369f6ab37adfea15644af00e30183b77a5"
+    },
+    {
+      "path": "artifacts/native_mmb_position_analysis_20261013/radio_records.json.gz",
+      "bytes": 76966,
+      "sha256": "1c9a4949dde9515d649dacc94ff90029c9c630fd1016ea25401f7682af81f7c5"
+    },
+    {
+      "path": "artifacts/native_mmb_position_analysis_20261013/summary.json",
+      "bytes": 8823,
+      "sha256": "2539c8b4505082831431bf1d794e5d87dec17c29c85923c20e003d7c6248ebdc"
+    },
+    {
+      "path": "artifacts/native_mmb_position_checkpoint_20261013.json",
+      "bytes": 15862,
+      "sha256": "634b72f92eeffad47e4ce485dc899314af0a22d35d2da0bf7b47dbcb26c6eb1e"
+    },
+    {
+      "path": "artifacts/native_profile_quality_checkpoint_20261013.json",
+      "bytes": 4826,
+      "sha256": "fbc6aec2e8c62fdc4c293b059b46af7af5b482445edef9e58aef672bf60945ef"
+    },
+    {
+      "path": "artifacts/graph/native_mmb_position_reviewed_supplement_20261013.json",
+      "bytes": 6811,
+      "sha256": "653cacbc06714e40a5b6e24a75e15b66719728aa16b678c9c66ff4b3d1137cc0"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "artifacts/radio_gas_velocity_registration_20261013.json",
+      "bytes": 5871,
+      "sha256": "c7102eb24ec4dbc1b01672329d1617e29957c5130ecf4e49be4974ae7f0dffd8"
+    },
+    {
+      "path": "docs/RADIO_GAS_VELOCITY_PROTOCOL_20261013.md",
+      "bytes": 7091,
+      "sha256": "9379de82d4ac9d431d2596eeade8e82453203e92c16124ea4a952c1156a98f81"
+    },
+    {
+      "path": "research/finalize_radio_gas_velocity_20261013.py",
+      "bytes": 14414,
+      "sha256": "e5f4e9e8732a38ba13551f94e1a6f609a986be677d666fc52f3097d8f4c5a846"
+    },
+    {
+      "path": "research/analyze_radio_gas_velocity_20261013.py",
+      "bytes": 5992,
+      "sha256": "d73fbd8a85b3ac7c1e6f73daa1bb6da1df58a34eb5eb42270c32dc8383c11344"
+    },
+    {
+      "path": "research/verify_radio_gas_velocity_20261013.py",
+      "bytes": 6133,
+      "sha256": "b33514a5164f955f5676f7311d304c9cfc4db572d5094abf2c4f59ab9f2a1c9d"
+    },
+    {
+      "path": "artifacts/radio_gas_velocity_authoring_20261013/prepare.py",
+      "bytes": 6678,
+      "sha256": "2dcc4e2b20ac38321b85882b87887933dd5c4c2c9ac1e66fe8425ede0e2a9aec"
+    },
+    {
+      "path": "artifacts/radio_gas_velocity_authoring_20261013/synthetic_controls.json",
+      "bytes": 394,
+      "sha256": "46467204692ff6a5317669df197291ca3dd4a41e0db220c5a9259fa04bbeb1ba"
+    },
+    {
+      "path": "artifacts/radio_gas_velocity_registration_controls_20261013/resource_monitor.json",
+      "bytes": 2358,
+      "sha256": "ea24f36b595208429473ce81df7924e480e0bd573aec1fb653159b3ead53b7b0"
+    },
+    {
+      "path": "artifacts/radio_gas_velocity_registration_controls_20261013/worker.log",
+      "bytes": 150,
+      "sha256": "175e06fd9494d3b71277cdc86f716e8adddd33738513d93829d5f9d62d9831e7"
+    },
+    {
+      "path": "artifacts/radio_gas_velocity_analysis_20261013/native_records.json.gz",
+      "bytes": 3246,
+      "sha256": "7d78d084da5d0aef93ad93e44d97aaf75f43156fd1bd4f1f41267db4cb205d1e"
+    },
+    {
+      "path": "artifacts/radio_gas_velocity_analysis_20261013/resource_monitor.json",
+      "bytes": 2415,
+      "sha256": "bb987b1b9be315ad52f9526ad6d4fafb15843525f5292f079a0a9a0c7da22922"
+    },
+    {
+      "path": "artifacts/radio_gas_velocity_analysis_20261013/summary.json",
+      "bytes": 8501,
+      "sha256": "6be9468b276f42eaae4a40c819649040d726c65a41fbe3881b67cbf7e359c08a"
+    },
+    {
+      "path": "artifacts/radio_gas_velocity_analysis_20261013/worker.log",
+      "bytes": 738,
+      "sha256": "72a12ef2376a9ba357d3c13b4669a038cee04fcb37263b2adc91887005949d5c"
+    },
+    {
+      "path": "artifacts/radio_gas_velocity_verification_20261013/resource_monitor.json",
+      "bytes": 3400,
+      "sha256": "e423e320beef1dad79a3811fcd0f7a48b8f27fc8105cf4a2065a5f92bcb293ed"
+    },
+    {
+      "path": "artifacts/radio_gas_velocity_verification_20261013/verification.json",
+      "bytes": 726,
+      "sha256": "c0783ebb0a130252169987f9df06ca44e5a0feffe20c60b49adea5299aab5493"
+    },
+    {
+      "path": "artifacts/radio_gas_velocity_verification_20261013/worker.log",
+      "bytes": 726,
+      "sha256": "c0783ebb0a130252169987f9df06ca44e5a0feffe20c60b49adea5299aab5493"
+    }
+  ],
+  "resources": {
+    "registration_controls": {
+      "elapsed_seconds": 1.071086624986492,
+      "peak_sampled_worker_rss_bytes": 1015808,
+      "minimum_observed_free_bytes": 66929848320,
+      "stage_bytes": 2508
+    },
+    "analysis": {
+      "elapsed_seconds": 1.0625444579636678,
+      "peak_sampled_worker_rss_bytes": 688128,
+      "minimum_observed_free_bytes": 66929553408,
+      "stage_bytes": 14900
+    },
+    "verification": {
+      "elapsed_seconds": 3.100921082892455,
+      "peak_sampled_worker_rss_bytes": 82804736,
+      "minimum_observed_free_bytes": 66929647616,
+      "stage_bytes": 4852
+    }
+  },
+  "goal_status": "active_unmet",
+  "publication": "local_unpublished",
+  "automatic_successor_authorized": false
+}

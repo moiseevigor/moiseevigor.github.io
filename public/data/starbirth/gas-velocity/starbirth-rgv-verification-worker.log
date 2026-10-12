@@ -1,0 +1,14 @@
+{
+  "schema": "radio-gas-velocity-independent-verification/1",
+  "verified": true,
+  "registration_sha256": "c7102eb24ec4dbc1b01672329d1617e29957c5130ecf4e49be4974ae7f0dffd8",
+  "summary_sha256": "6be9468b276f42eaae4a40c819649040d726c65a41fbe3881b67cbf7e359c08a",
+  "native_records_sha256": "7d78d084da5d0aef93ad93e44d97aaf75f43156fd1bd4f1f41267db4cb205d1e",
+  "native_molecular_records_checked": 3,
+  "fixed_case_line_assessments_checked": 6,
+  "shift_scenarios_checked": 9,
+  "primary_eligible": true,
+  "primary_compatible": true,
+  "method": "Raw CSV/Decimal native interval arithmetic; original fixed-width maser velocity fields; independent Astropy angular geometry. No worker import.",
+  "physical_validation": false
+}

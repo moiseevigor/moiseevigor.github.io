@@ -1,0 +1,191 @@
+{
+  "schema": "radio-gas-velocity-reviewed-supplement/1",
+  "source_revision": "65af11255eb39b0a2c40649f37489cbda9d737b9",
+  "source_blobs": [
+    {
+      "path": "docs/RADIO_GAS_VELOCITY_RESULTS_20261013.md",
+      "revision": "65af11255eb39b0a2c40649f37489cbda9d737b9",
+      "bytes": 8386,
+      "sha256": "622ccbb56689e5a50e5c439760cdfb704866a68c849e0d5355e1e429856bb2fa"
+    },
+    {
+      "path": "artifacts/radio_gas_velocity_checkpoint_20261013.json",
+      "revision": "65af11255eb39b0a2c40649f37489cbda9d737b9",
+      "bytes": 7013,
+      "sha256": "2656c8324bdcc34995efc293f157319953231b11b68de33fb0ce85c54d443ea1"
+    },
+    {
+      "path": "artifacts/radio_gas_velocity_corrected_assessment_20261013.json",
+      "revision": "65af11255eb39b0a2c40649f37489cbda9d737b9",
+      "bytes": 8597,
+      "sha256": "9327fc56373aad4185494315983ba27031802980a56996b97a895f35101c5bf6"
+    },
+    {
+      "path": "artifacts/radio_gas_velocity_analysis_20261013/summary.json",
+      "revision": "65af11255eb39b0a2c40649f37489cbda9d737b9",
+      "bytes": 8501,
+      "sha256": "6be9468b276f42eaae4a40c819649040d726c65a41fbe3881b67cbf7e359c08a"
+    },
+    {
+      "path": "artifacts/radio_gas_velocity_verification_20261013/verification.json",
+      "revision": "65af11255eb39b0a2c40649f37489cbda9d737b9",
+      "bytes": 726,
+      "sha256": "c0783ebb0a130252169987f9df06ca44e5a0feffe20c60b49adea5299aab5493"
+    },
+    {
+      "path": "docs/RADIO_GAS_VELOCITY_PROTOCOL_20261013.md",
+      "revision": "65af11255eb39b0a2c40649f37489cbda9d737b9",
+      "bytes": 7091,
+      "sha256": "9379de82d4ac9d431d2596eeade8e82453203e92c16124ea4a952c1156a98f81"
+    },
+    {
+      "path": "artifacts/radio_gas_velocity_registration_20261013.json",
+      "revision": "65af11255eb39b0a2c40649f37489cbda9d737b9",
+      "bytes": 5871,
+      "sha256": "c7102eb24ec4dbc1b01672329d1617e29957c5130ecf4e49be4974ae7f0dffd8"
+    }
+  ],
+  "preserved_prior_graph_blobs": [
+    {
+      "path": "artifacts/graph/research_graph.json",
+      "revision": "65af11255eb39b0a2c40649f37489cbda9d737b9",
+      "bytes": 1307461,
+      "sha256": "5162974f4fe31bb591b244ad3cc96962069174e1e96fced8586ee6305763692c"
+    },
+    {
+      "path": "artifacts/graph/multisurvey_reviewed_supplement_20261012.json",
+      "revision": "65af11255eb39b0a2c40649f37489cbda9d737b9",
+      "bytes": 9885,
+      "sha256": "5fbab90d8c5729aa68b4fc3bad2916f7749dc426206e1f9a7e3dcff33bb1c2e3"
+    },
+    {
+      "path": "artifacts/graph/temporal_missingness_reviewed_supplement_20261012.json",
+      "revision": "65af11255eb39b0a2c40649f37489cbda9d737b9",
+      "bytes": 6300,
+      "sha256": "9e8dd86cf6329e3a48134a6814b87eba009ae8da3ffc32a29f39ce715e9db55a"
+    },
+    {
+      "path": "artifacts/graph/native_glimpse_reviewed_supplement_20261012.json",
+      "revision": "65af11255eb39b0a2c40649f37489cbda9d737b9",
+      "bytes": 7185,
+      "sha256": "6f05b7ccde905f5f0afac8d37170fa7b178fb91a4150f2d5de8e22732726e803"
+    },
+    {
+      "path": "artifacts/graph/irac_colour_reviewed_supplement_20261012.json",
+      "revision": "65af11255eb39b0a2c40649f37489cbda9d737b9",
+      "bytes": 7087,
+      "sha256": "94dc7bfaae108acd2a446ad3d55a6a1a76ffaec318061aae8b0dbc238d97d9f4"
+    },
+    {
+      "path": "artifacts/graph/irac_colour_alternative_reviewed_note_20261012.json",
+      "revision": "65af11255eb39b0a2c40649f37489cbda9d737b9",
+      "bytes": 3271,
+      "sha256": "ecfe4f53f61a24434dedb14d8d5a0a7812ec67dd2cd8cbc8eb5974e4373ba886"
+    },
+    {
+      "path": "artifacts/graph/native_neowise_header_operational_note_20261013.json",
+      "revision": "65af11255eb39b0a2c40649f37489cbda9d737b9",
+      "bytes": 6597,
+      "sha256": "6481192a5dc949fc1ac087264368d38a06706e1714578275b1be2b4bef018803"
+    },
+    {
+      "path": "artifacts/graph/native_profile_quality_transport_note_20261013.json",
+      "revision": "65af11255eb39b0a2c40649f37489cbda9d737b9",
+      "bytes": 6122,
+      "sha256": "b5fdac64a4a04f8fce101ee0b625d73b4b5e8f50f9f37ff24e017f901dfe2ed9"
+    },
+    {
+      "path": "artifacts/graph/native_mmb_position_reviewed_supplement_20261013.json",
+      "revision": "65af11255eb39b0a2c40649f37489cbda9d737b9",
+      "bytes": 6811,
+      "sha256": "653cacbc06714e40a5b6e24a75e15b66719728aa16b678c9c66ff4b3d1137cc0"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "F:RGV20261013:conditional-overlap",
+      "type": "measured_result",
+      "status": "verified_literal_criterion_passed",
+      "label": "One fixed regional marker has only a narrow common velocity-band overlap",
+      "metrics": {
+        "primary_denominator": 1,
+        "primary_eligible": true,
+        "primary_rule_met": true,
+        "common_overlap_km_s": 0.19700000000000273,
+        "radio_shift_scenarios_km_s": [
+          -1,
+          0,
+          1
+        ],
+        "primary_shift_compatibility": [
+          true,
+          true,
+          false
+        ],
+        "robust_all_declared_shifts": false
+      },
+      "sources": [
+        "docs/RADIO_GAS_VELOCITY_RESULTS_20261013.md",
+        "artifacts/radio_gas_velocity_checkpoint_20261013.json",
+        "artifacts/radio_gas_velocity_corrected_assessment_20261013.json",
+        "artifacts/radio_gas_velocity_analysis_20261013/summary.json",
+        "artifacts/radio_gas_velocity_verification_20261013/verification.json"
+      ]
+    },
+    {
+      "id": "C:RGV20261013:limits",
+      "type": "qualification",
+      "status": "physical_association_and_youth_unestablished",
+      "label": "Wing overlap is sensitive, not a confirmed clump or stellar association",
+      "text": "The +1 km/s declared shift removes overlap. Shifts are arbitrary sensitivity scenarios, not calibration bounds. The maser peak is outside both registered gas bands. No stellar velocity, calibrated association probability, physical youth, membership, birth or representative truth is established. Other two cases are secondary contextual examples, not verified unrelated controls. Case selection, radio and molecular measurements are consumed; no scores or old gates changed.",
+      "sources": [
+        "docs/RADIO_GAS_VELOCITY_RESULTS_20261013.md",
+        "artifacts/radio_gas_velocity_checkpoint_20261013.json",
+        "artifacts/radio_gas_velocity_corrected_assessment_20261013.json",
+        "artifacts/radio_gas_velocity_analysis_20261013/summary.json",
+        "artifacts/radio_gas_velocity_verification_20261013/verification.json"
+      ]
+    },
+    {
+      "id": "C:RGV20261013:metadata",
+      "type": "metadata_correction",
+      "status": "verified_additive_post_read_correction",
+      "label": "Vc is consensus gas velocity; S/A/B designation is the native Name suffix",
+      "text": "The original output mislabels the literal Vc string as native_velocity_component. The additive corrected assessment fixes field meaning and preserves original summary/code/check bytes. Vc never entered any primary band or decision; no measurement or rule changed.",
+      "sources": [
+        "docs/RADIO_GAS_VELOCITY_RESULTS_20261013.md",
+        "artifacts/radio_gas_velocity_checkpoint_20261013.json",
+        "artifacts/radio_gas_velocity_corrected_assessment_20261013.json",
+        "artifacts/radio_gas_velocity_analysis_20261013/summary.json",
+        "artifacts/radio_gas_velocity_verification_20261013/verification.json"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "C:RGV20261013:limits",
+      "target": "F:RGV20261013:conditional-overlap",
+      "relation": "qualifies"
+    },
+    {
+      "source": "C:RGV20261013:metadata",
+      "target": "F:RGV20261013:conditional-overlap",
+      "relation": "qualifies"
+    },
+    {
+      "source": "F:RGV20261013:conditional-overlap",
+      "target": "F:NMP20261013:regional-marker",
+      "relation": "qualifies",
+      "text": "Adds conditional velocity context to the already distinct radio position, never ownership of the best infrared point."
+    }
+  ],
+  "core_and_prior_graphs_unchanged": true,
+  "archive_not_merged": true,
+  "models_changed": false,
+  "physical_validation": false,
+  "new_stars": 0,
+  "new_births": 0,
+  "goal_status": "active_unmet",
+  "publication": "local_unpublished",
+  "automatic_successor_authorized": false
+}

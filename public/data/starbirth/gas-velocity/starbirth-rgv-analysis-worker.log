@@ -1,0 +1,19 @@
+{
+  "schema": "radio-gas-velocity-descriptive-comparison/1",
+  "registration_sha256": "c7102eb24ec4dbc1b01672329d1617e29957c5130ecf4e49be4974ae7f0dffd8",
+  "native_records_sha256": "7d78d084da5d0aef93ad93e44d97aaf75f43156fd1bd4f1f41267db4cb205d1e",
+  "primary_case": "HIGALBM330.8814-0.3656",
+  "primary_denominator": 1,
+  "primary_eligible": true,
+  "primary_compatible": true,
+  "primary_rule_met": true,
+  "velocity_calibration_validated": false,
+  "error_bands_are_confidence_intervals": false,
+  "case_selection_and_measurements_consumed": true,
+  "physical_validation": false,
+  "new_stars": 0,
+  "new_births": 0,
+  "models_changed": false,
+  "radio_absence_is_physical_negative": false,
+  "automatic_successor_authorized": false
+}
