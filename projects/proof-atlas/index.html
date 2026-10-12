@@ -87,6 +87,14 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
       <div class="pa-stage">
         <div class="pa-stage-head"><div><strong id="pa-view-title">Named proof map</strong><span id="pa-view-subtitle">Lean source statements · traced direct references</span></div><div class="pa-stage-tools"><button type="button" id="pa-focus" aria-pressed="false" title="Hide side panels to enlarge the graph">Focus graph</button><button type="button" id="pa-fullscreen" title="Enter browser fullscreen (Esc to exit)">⛶ Fullscreen</button><a href="/projects/proof-atlas/app/" class="pa-open-app" title="Open Proof Atlas as a dedicated full-window application">Open full app ↗</a></div></div>
         <div class="pa-canvas-frame"><canvas id="pa-canvas" tabindex="0" aria-label="Interactive Lean proof graph showing expression nodes and structural edges">Your browser does not support Canvas.</canvas></div>
+        <div class="pa-syntax-legend" id="pa-syntax-legend" hidden aria-label="Lean expression type legend">
+          <span><i class="pa-dot pa-dot-app"></i> app (application)</span>
+          <span><i class="pa-dot pa-dot-const"></i> const (declaration)</span>
+          <span><i class="pa-dot pa-dot-bvar"></i> bvar (bound variable)</span>
+          <span><i class="pa-dot pa-dot-binder"></i> binder</span>
+          <span><i class="pa-dot pa-dot-lit"></i> lit (literal)</span>
+          <span class="pa-legend-note">Terminal syntax leaves are not automatically lemmas.</span>
+        </div>
         <div class="pa-stage-foot"><span id="pa-stage-count">26 named declarations</span><span id="pa-canvas-status" role="status" aria-live="polite">Select a node to inspect</span></div>
       </div>
       <aside class="pa-inspector" aria-label="Selected graph node">
