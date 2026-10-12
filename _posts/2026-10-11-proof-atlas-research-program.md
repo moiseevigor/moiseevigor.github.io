@@ -232,6 +232,30 @@ formulas, responsive geometry, exact named-declaration navigation, both themes a
 rejection of stale article data. The comparison view is optional; ordinary article
 links continue to open the centered human-readable edition.
 
+## 12 October 2026: auditing every numbered article statement
+
+The initial comparison omitted existing Lean results behind
+[Theorem 3.4](/projects/proof-atlas/article/?view=lean#thm:first) and
+[Theorem 4.1](/projects/proof-atlas/article/?view=lean#thm:cells).
+The reader now audits all nine numbered statements. It adds 39 checked declarations,
+bringing the comparison to 49 statement headers and 107 original source lines.
+Five article statements have partial, conditional counterparts; four remain
+unformalized. The [complete coverage review](/research/proof-atlas/article-coverage-review.md)
+records the scope of each.
+
+All fifteen Lean modules were freshly rebuilt from the exact research revision of
+the published manuscript. The additional declarations passed compiler checks and
+axiom inspection. Their types make the finite-tangency premises (`hfin`, `hL/hR`)
+visible. These checks support scalar counting clauses; they do not establish the
+continuity and extrema of the first root, quartic zero order, Floquet/large-index
+law, late folds or separatrix limits. The reader marks these limits explicitly.
+
+The comparison preserves the article and its formulas, keeps existing crossing
+graph navigation, and links additional declarations to their checked source
+headers. Their complete expression graphs have not been published. This is a more
+complete account of the formalization, not a claim that the entire manuscript is
+formalized or that editorial correspondence is kernel-certified.
+
 ## References and nearby work
 
 - [Lean 4: Expressions](https://lean-lang.org/doc/api/Lean/Expr.html) and [Theorem Proving in Lean](https://lean-lang.org/theorem_proving_in_lean4/Propositions-and-Proofs/) — the underlying term language and proof typing.

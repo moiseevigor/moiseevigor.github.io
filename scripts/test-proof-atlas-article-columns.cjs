@@ -2,7 +2,8 @@
 'use strict';
 const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),crypto=require('node:crypto');
 const context={window:{}};vm.createContext(context);
-for(const file of ['crossing-declarations.js','crossing-article-index.js','crossing-article-lines.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'../public/data/proof-atlas',file),'utf8'),context);
+for(const file of ['crossing-declarations.js','crossing-article-index.js','crossing-article-lines.js','article-coverage.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'../public/data/proof-atlas',file),'utf8'),context);
+const coverage=context.window.PROOF_ATLAS_ARTICLE_COVERAGE;
 const data=context.window.PROOF_ATLAS_ARTICLE_LINES,index=context.window.PROOF_ATLAS_ARTICLE_INDEX,decl=context.window.PROOF_ATLAS_DECLARATIONS;
 assert.equal(data.articleSha256,index.source.sha256);assert.equal(data.declarations.length,10);
 const normalize=s=>s.trim().replace(/\s+/g,' ');
@@ -32,9 +33,9 @@ for(const d of data.declarations){
   assert.equal(await page.locator('.pa-lean-line').count(),0,'Comparison data should load only on demand');
   await page.getByRole('button',{name:'Article + Lean',exact:true}).click();
   await page.waitForFunction(()=>document.body.dataset.paReadingMode==='compare');
-  await page.waitForFunction(()=>document.querySelectorAll('.pa-row-connections svg a').length===10);
+  await page.waitForFunction(()=>document.querySelectorAll('.pa-row-connections svg a[data-lean-name^="CrossingData."]').length===10);
   assert.equal(new URL(page.url()).searchParams.get('view'),'lean');
-  assert.equal(await page.locator('.pa-lean-line').count(),19);assert.equal(await page.locator('.pa-lean-passage').count(),6);
+  assert.equal(await page.locator('.pa-lean-line').count(),19+coverage.counts.sourceLines);assert.equal(await page.locator('.pa-lean-passage').count(),6);
   assert.equal(await page.locator('.pa-paper .katex').count(),916,'Mode switch altered formulas');
   for(const d of data.declarations){
    const actual=await page.locator('.pa-lean-statement').filter({has:page.getByRole('heading',{name:d.name,exact:true})}).locator('.pa-lean-line').evaluateAll(a=>a.map(n=>({number:Number(n.dataset.sourceLine),text:n.querySelector('code').textContent})));
@@ -87,6 +88,6 @@ for(const d of data.declarations){
   await rejected.waitForFunction(()=>document.getElementById('pa-reading-status').textContent.includes('do not match'));
   assert.equal(await rejected.locator('.pa-lean-line').count(),0,'Stale correspondence data must not produce code links');
   await rejected.getByRole('button',{name:'Article',exact:true}).click();assert.equal(await rejected.evaluate(()=>document.body.dataset.paReadingMode),'article');await rejected.close();
-  console.log(JSON.stringify({status:'PASS',centeredDefault:true,originalSourceLines:19,declarations:10,passages:6,twoColumns:true,wideMiddleGraph:true,keyboardCorrespondence:true,realGraphNavigation:true,responsive:true,axeViolations:0,staleData:'rejected'}));
+  console.log(JSON.stringify({status:'PASS',centeredDefault:true,originalSourceLines:19+coverage.counts.sourceLines,declarations:49,passages:6,numberedStatementsAudited:9,twoColumns:true,wideMiddleGraph:true,keyboardCorrespondence:true,realGraphNavigation:true,responsive:true,axeViolations:0,staleData:'rejected'}));
  }finally{await browser.close();}
 })().catch(e=>{console.error(e.stack);process.exit(1);});

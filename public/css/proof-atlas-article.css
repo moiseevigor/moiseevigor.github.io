@@ -88,3 +88,23 @@ body[data-pa-reading-mode="compare"] .pa-comparison-note{display:block;margin-bo
  #pa-reading-status{width:100%;padding-left:12px}
 }
 @media(max-width:560px){.proof-atlas-article-page :is(.d-header,.pa-paper,.pa-reading-toolbar){width:calc(100% - 40px)}}
+
+/* Clause coverage accompanies the original text only in comparison mode. */
+.pa-paper .pa-coverage-inventory{padding-top:18px;margin-top:18px;border-top:1px solid var(--border)}
+.pa-paper .pa-coverage-inventory h2{font:600 18px/1.4 var(--sans);margin:0 0 16px}
+.pa-paper .pa-coverage-inventory ul{list-style:none;padding:0;font:14px/1.6 var(--sans)}
+.pa-paper .pa-coverage-inventory li{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px solid var(--border)}
+.pa-paper .pa-coverage-status{font:600 12px/1.6 var(--sans);color:var(--text);background:var(--fig-bg);padding:4px 8px;border-radius:3px;flex-shrink:0}
+.pa-paper .pa-coverage-panel h3{font:600 17px/1.5 var(--sans);margin:0 0 10px;color:var(--text)}
+.pa-paper .pa-coverage-panel>h4{font:600 13px/1.5 var(--sans);color:var(--text);margin:18px 0 6px}
+.pa-paper .pa-coverage-panel>ul{font:14px/1.7 var(--sans);color:var(--text-light);padding-left:18px;margin:0 0 12px}
+.pa-paper .pa-coverage-panel>ul li{margin-bottom:8px}
+.pa-paper .pa-coverage-panel>.pa-coverage-status{font:600 12px/1.6 var(--sans);margin:0 0 18px;color:var(--text)}
+.pa-paper .pa-coverage-panel{margin-bottom:28px}
+.pa-paper .pa-coverage-panel .pa-lean-context,.pa-paper .pa-row-lean>.pa-lean-context{font:12px/1.7 var(--sans);color:var(--text-light);margin:10px 0 20px}
+.pa-paper .pa-more-statement{margin:12px 0;border-top:1px solid var(--border);padding-top:12px;font:12px/1.6 var(--mono);overflow-wrap:anywhere}
+.pa-paper .pa-more-statement summary{color:var(--text);cursor:pointer}
+.pa-paper .pa-more-statement .pa-lean-statement{margin-top:18px}
+.pa-paper [id^="lean-"]{scroll-margin-top:140px}
+.pa-paper .pa-row-prose>.pa-linked-active{outline:1px solid var(--accent);outline-offset:6px}
+@media(max-width:560px){.pa-paper .pa-coverage-inventory li{flex-direction:column;gap:5px;align-items:flex-start}}

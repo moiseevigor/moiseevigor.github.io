@@ -1,0 +1,117 @@
+JacobiCore.toJacobiFull (J : JacobiCore) : JacobiFull
+'JacobiCore.toJacobiFull' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiData.T1_T2_same_sign (J : JacobiData) (p : ℝ) (hab : 0 < J.a p * J.b p) (hz1 : J.z p < 1) (hd : 0 < J.d p)
+  (hs : J.s p ≠ 0) : 0 < J.a p ∧ 0 < J.b p ∧ 0 ≤ J.T1 p ∧ 0 ≤ J.T2 p ∨ J.a p < 0 ∧ J.b p < 0 ∧ J.T1 p ≤ 0 ∧ J.T2 p ≤ 0
+'JacobiData.T1_T2_same_sign' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiData.T1_mul_T2 (J : JacobiData) (p : ℝ) : J.T1 p * J.T2 p = (J.d p * J.s p) ^ 2 * (J.z p * (1 - J.z p) * J.Dz p)
+'JacobiData.T1_mul_T2' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiData.a_deriv_form (J : JacobiData) (p : ℝ) (hq : J.q p ≠ 0) (hs : J.s p ≠ 0) (hd : J.d p ≠ 0) :
+  (J.d p ^ 2 * J.q p ^ 2 + J.c p * J.f1 p * J.q p + J.k ^ 2 * J.s p ^ 2 * J.f1 p ^ 2) / (J.d p * J.s p * J.q p ^ 2) =
+    (J.d p ^ 2 + J.c p * J.a p + J.k ^ 2 * J.s p ^ 2 * J.a p ^ 2) / (J.d p * J.s p)
+'JacobiData.a_deriv_form' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiData.b_deriv_form (J : JacobiData) (p : ℝ) (he : J.eps p ≠ 0) (hs : J.s p ≠ 0) (hd : J.d p ≠ 0) :
+  ((1 - J.k ^ 2) * J.s p ^ 2 * J.eps p ^ 2 + J.c p * J.β1 p * J.eps p - J.d p ^ 2 * J.β1 p ^ 2) /
+      (J.d p * J.s p * J.eps p ^ 2) =
+    ((1 - J.k ^ 2) * J.s p ^ 2 - J.c p * J.b p - J.d p ^ 2 * J.b p ^ 2) / (J.d p * J.s p)
+'JacobiData.b_deriv_form' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiData.collapse_alpha (J : JacobiData) (p : ℝ) : J.α p = (1 - J.k ^ 2) * J.X p
+'JacobiData.collapse_alpha' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiData.collapse_beta (J : JacobiData) (p : ℝ) : J.β p = J.X p - J.ell p
+'JacobiData.collapse_beta' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiData.collapse_diff (J : JacobiData) (p : ℝ) : J.α p - J.β p = J.ell p - J.k ^ 2 * J.X p
+'JacobiData.collapse_diff' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiData.hasDerivAt_f1_div_c (J : JacobiData) (p : ℝ) (hc : J.c p ≠ 0) :
+  HasDerivAt (fun y => J.f1 y / J.c y) (-J.d p ^ 2 / J.c p ^ 2) p
+'JacobiData.hasDerivAt_f1_div_c' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiData.hasDerivAt_z (J : JacobiData) (p : ℝ) (hq : J.q p ≠ 0) (he : J.eps p ≠ 0) (hs : J.s p ≠ 0) (hd : J.d p ≠ 0) :
+  HasDerivAt J.z ((J.T1 p + J.T2 p) / (J.d p * J.s p)) p
+'JacobiData.hasDerivAt_z' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiData.hasDerivAt_Γ (J : JacobiData) (p : ℝ) (hd : J.d p ≠ 0) : HasDerivAt J.Γ ((1 - J.k ^ 2) / J.d p ^ 2) p
+'JacobiData.hasDerivAt_Γ' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiData.hasDerivAt_α1_div_d (J : JacobiData) (p : ℝ) (hd : J.d p ≠ 0) :
+  HasDerivAt (fun y => J.α1 y / J.d y) (-(J.eps p * J.f1 p) / J.d p ^ 2) p
+'JacobiData.hasDerivAt_α1_div_d' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiData.hasDerivAt_β1_div_c (J : JacobiData) (p : ℝ) (hc : J.c p ≠ 0) :
+  HasDerivAt (fun y => J.β1 y / J.c y) (-((1 - J.k ^ 2) * J.s p ^ 2) / J.c p ^ 2) p
+'JacobiData.hasDerivAt_β1_div_c' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiData.slope_bound_abs (J : JacobiData) (p : ℝ) (hab : 0 < J.a p * J.b p) (hz1 : J.z p < 1) (hd : 0 < J.d p)
+  (hs : J.s p ≠ 0) : 2 * √(J.z p * (1 - J.z p) * J.Dz p) ≤ |(J.T1 p + J.T2 p) / (J.d p * J.s p)|
+'JacobiData.slope_bound_abs' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiData.z_eq_neg_beta_div_ell (J : JacobiData) (p : ℝ) (hq : J.q p ≠ 0) (he : J.eps p ≠ 0) : J.z p = -J.β p / J.ell p
+'JacobiData.z_eq_neg_beta_div_ell' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiData.β1_deriv_eq_Γ (J : JacobiData) (p : ℝ) (hd : J.d p ≠ 0) :
+  -(J.s p * J.d p * J.eps p) + J.k ^ 2 * J.s p ^ 2 * J.c p = -(J.s p * J.d p * J.Γ p)
+'JacobiData.β1_deriv_eq_Γ' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiFull.J2_even_eq_zero_iff (J : JacobiFull) {n : ℕ} (hn : 1 ≤ n) (τ : ℝ) :
+  J.J2 τ (2 * ↑n * J.K) = 0 ↔ ∃ j, τ = J.K + 2 * J.K * ↑j
+'JacobiFull.J2_even_eq_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiFull.J2_pos_before_p0 (J : JacobiFull) {p : ℝ} (hp : p ∈ Set.Ioo 0 J.p0) (τ : ℝ) : 0 < J.J2 τ p
+'JacobiFull.J2_pos_before_p0' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiFull.cell_roots (J : JacobiFull) (m : ℕ) (hL : (J.leftBracket m).tangencies.Finite)
+  (hR : (J.rightBracket m).tangencies.Finite) (ψ : ℝ) :
+  ∃ p ∈ Set.Icc (J.pL m) (J.eL m),
+    ∃ q ∈ Set.Icc (J.eR m) (J.bR m),
+      {x | x ∈ Set.Ico (J.pL m) (J.pL (m + 1)) ∧ J.J2 (ψ + x) x = 0} = {p, q} ∧ (p = q → p = (2 * ↑m + 2) * J.K)
+'JacobiFull.cell_roots' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiFull.coincide_imp (J : JacobiFull) (m : ℕ) (hL : (J.leftBracket m).tangencies.Finite)
+  (hR : (J.rightBracket m).tangencies.Finite) (ψ : ℝ) :
+  ∃ p ∈ Set.Icc (J.pL m) (J.eL m),
+    ∃ q ∈ Set.Icc (J.eR m) (J.bR m),
+      {x | x ∈ Set.Ico (J.pL m) (J.pL (m + 1)) ∧ J.J2 (ψ + x) x = 0} = {p, q} ∧
+        (p = q → p = (2 * ↑m + 2) * J.K ∧ J.K = 2 * J.E)
+'JacobiFull.coincide_imp' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiFull.eL_eq_eR_iff (J : JacobiFull) (m : ℕ) : J.eL m = J.eR m ↔ J.K = 2 * J.E
+'JacobiFull.eL_eq_eR_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiFull.exact_first_time (J : JacobiFull) (hfin : (J.leftBracket 0).tangencies.Finite) (ψ : ℝ) :
+  ∃! p, p ∈ Set.Icc J.p0 J.p1 ∧ J.J2 (ψ + p) p = 0
+'JacobiFull.exact_first_time' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiFull.first_time_complete (J : JacobiFull) (hfin : (J.leftBracket 0).tangencies.Finite) (ψ : ℝ) :
+  ∃! p, p ∈ Set.Ioc 0 J.p1 ∧ J.J2 (ψ + p) p = 0
+'JacobiFull.first_time_complete' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiFull.left_exact_time (J : JacobiFull) (m : ℕ) (hfin : (J.leftBracket m).tangencies.Finite) (ψ : ℝ) :
+  ∃! p, p ∈ Set.Icc (J.pL m) (J.eL m) ∧ (J.leftBracket m).J2 (ψ + p) p = 0
+'JacobiFull.left_exact_time' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiFull.right_exact_time (J : JacobiFull) (m : ℕ) (hfin : (J.rightBracket m).tangencies.Finite) (ψ : ℝ) :
+  ∃! p, p ∈ Set.Icc (J.eR m) (J.bR m) ∧ (J.rightBracket m).J2 (ψ + p) p = 0
+'JacobiFull.right_exact_time' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiFull.roots_ncard (J : JacobiFull) (hL : ∀ (m : ℕ), (J.leftBracket m).tangencies.Finite)
+  (hR : ∀ (m : ℕ), (J.rightBracket m).tangencies.Finite) (hk : J.K ≠ 2 * J.E) (ψ : ℝ) (N : ℕ) :
+  (J.roots ψ N).Finite ∧ (J.roots ψ N).ncard = 2 * N
+'JacobiFull.roots_ncard' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiFull.signed_α1_div_d_strictAntiOn (J : JacobiFull) (m : ℕ) :
+  StrictAntiOn (fun p => (-1) ^ m * (J.α1 p / J.d p)) (Set.Icc (J.pL m) (J.pL (m + 1)))
+'JacobiFull.signed_α1_div_d_strictAntiOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiFull.two_per_cell_of_ne (J : JacobiFull) (m : ℕ) (hL : (J.leftBracket m).tangencies.Finite)
+  (hR : (J.rightBracket m).tangencies.Finite) (hk : J.K ≠ 2 * J.E) (ψ : ℝ) :
+  {x | x ∈ Set.Ico (J.pL m) (J.pL (m + 1)) ∧ J.J2 (ψ + x) x = 0}.ncard = 2
+'JacobiFull.two_per_cell_of_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiFull.α1_zero_unique (J : JacobiFull) (m : ℕ) {p q : ℝ} (hp : p ∈ Set.Icc (J.pL m) (J.pL (m + 1)))
+  (hq : q ∈ Set.Icc (J.pL m) (J.pL (m + 1))) (h0 : J.α1 p = 0) (h1 : J.α1 q = 0) : p = q
+'JacobiFull.α1_zero_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiInit.Γ_pos (J : JacobiInit) {p : ℝ} (hp : 0 < p) : 0 < J.Γ p
+'JacobiInit.Γ_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiInit.Γ_zero (J : JacobiInit) : J.Γ 0 = 0
+'JacobiInit.Γ_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiPeriodic.exists_unique_f1_zero (J : JacobiPeriodic) (m : ℕ) :
+  ∃! p, p ∈ Set.Ioo ((2 * ↑m + 1) * J.K) ((2 * ↑m + 2) * J.K) ∧ J.f1 p = 0
+'JacobiPeriodic.exists_unique_f1_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiPeriodic.exists_unique_β1_zero (J : JacobiPeriodic) (n : ℕ) (hn : 1 ≤ n) :
+  ∃! b, b ∈ Set.Ioo (2 * ↑n * J.K) ((2 * ↑n + 1) * J.K) ∧ J.β1 b = 0
+'JacobiPeriodic.exists_unique_β1_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiPeriodic.f1_sign_after (J : JacobiPeriodic) (m : ℕ) {p : ℝ} (hp : p ∈ Set.Ioo (J.pM m) ((2 * ↑m + 3) * J.K)) :
+  0 < (-1) ^ m * J.f1 p
+'JacobiPeriodic.f1_sign_after' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiPeriodic.f1_sign_before (J : JacobiPeriodic) (m : ℕ) {p : ℝ} (hp : p ∈ Set.Ioo ((2 * ↑m + 1) * J.K) (J.pM m)) :
+  0 < (-1) ^ (m + 1) * J.f1 p
+'JacobiPeriodic.f1_sign_before' depends on axioms: [propext, Classical.choice, Quot.sound]
+JacobiPeriodic.α1_even (J : JacobiPeriodic) (n : ℕ) :
+  J.α1 (2 * ↑n * J.K) = (-1) ^ n * J.d (2 * ↑n * J.K) * (2 * ↑n * J.K - 2 * (2 * ↑n * J.E))
+'JacobiPeriodic.α1_even' depends on axioms: [propext, Classical.choice, Quot.sound]
+SBracket.J2_eq_zero_iff (B : SBracket) {p : ℝ} (hp : p ∈ Set.Icc B.p0 B.p1) (τ : ℝ) : B.J2 τ p = 0 ↔ B.s τ ^ 2 = B.r p
+'SBracket.J2_eq_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+SBracket.exact_time (B : SBracket) (hfin : B.tangencies.Finite) (ψ : ℝ) :
+  ∃! p, p ∈ Set.Icc B.p0 B.p1 ∧ B.J2 (ψ + p) p = 0
+'SBracket.exact_time' depends on axioms: [propext, Classical.choice, Quot.sound]
+SBracket.one_le_ε_deriv_u (B : SBracket) {p : ℝ} (hp : p ∈ Set.Ioo B.p0 B.p1) :
+  1 ≤ B.ε * (B.zp p / (2 * √(B.z p * (1 - B.z p) * B.Dz p)))
+'SBracket.one_le_ε_deriv_u' depends on axioms: [propext, Classical.choice, Quot.sound]

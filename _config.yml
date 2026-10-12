@@ -148,6 +148,10 @@ include:
   - "starbirth-tmd-knowledge-supplement.json"
   - "se2-provenance.json"
   - "se2-ray-thresholds.json"
+  # Proof Atlas coverage evidence linked from the article comparison.
+  - "article-coverage-audit.json"
+  - "article-coverage-map.json"
+  - "article-coverage-lean-check.log"
 
 twitter:
   username: moiseev_igor
