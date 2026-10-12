@@ -244,6 +244,10 @@
   }
   function drawMap(){
     sceneStart();
+    const termView=state.mode==='term';
+    const edges=termView?termEdges:namedEdges;
+    const incoming=termView?termIncoming:namedIncoming;
+    const outgoing=termView?termOutgoing:namedOutgoing;
     if(!namedNodes.length){
       label(width/2,height/2,'Named declaration data unavailable',17,'#efdfbd');sceneEnd();return;
     }
@@ -276,11 +280,11 @@
       label(x,33,captions[layer]||('Level '+layer),Math.min(12,Math.max(9,xScale*.085)),'#99b8c4');
     }
     const active=state.hover?.type==='decl' ? state.hover.id : state.namedSelected;
-    const highlighted=new Set([active,...(namedIncoming.get(active)||[]),...(namedOutgoing.get(active)||[])]);
+    const highlighted=new Set([active,...(incoming.get(active)||[]),...(outgoing.get(active)||[])]);
     // Draw all source-level references quietly, then bring the local one-hop
     // dependencies forward. No edges are invented by the graph layout.
     ctx.beginPath();ctx.strokeStyle='rgba(114,157,174,.13)';ctx.lineWidth=.85*screenUnit();
-    for(const e of namedEdges){
+    for(const e of edges){
       const a=namedCoordinates.get(e.from),b=namedCoordinates.get(e.to);
       if(!a||!b)continue;
       const bend=Math.max(18,(b.x-a.x)*.38);
@@ -288,19 +292,23 @@
       ctx.bezierCurveTo(a.x+a.w/2+bend,a.y,b.x-b.w/2-bend,b.y,b.x-b.w/2,b.y);
     }
     ctx.stroke();
-    for(const e of namedEdges){
+    for(const e of edges){
       if(e.from!==active&&e.to!==active)continue;
       const a=namedCoordinates.get(e.from),b=namedCoordinates.get(e.to);
       if(!a||!b)continue;
       const bend=Math.max(18,(b.x-a.x)*.38);
       ctx.beginPath();ctx.moveTo(a.x+a.w/2,a.y);
       ctx.bezierCurveTo(a.x+a.w/2+bend,a.y,b.x-b.w/2-bend,b.y,b.x-b.w/2,b.y);
-      ctx.strokeStyle=e.to===active?'#e8bf80':'#90e2cd';
-      ctx.globalAlpha=.92;ctx.lineWidth=1.7*screenUnit();ctx.stroke();ctx.globalAlpha=1;
+      ctx.strokeStyle=termView&&!e.lexicalSource?'#f3a66d':e.to===active?'#e8bf80':'#90e2cd';
+      const freq=termView?(e.typeUses+e.valueUses):1;
+      ctx.setLineDash(termView&&!e.lexicalSource?[4*screenUnit(),3*screenUnit()]:[]);
+      ctx.globalAlpha=.93;
+      ctx.lineWidth=(termView?1.2+Math.min(1.6,Math.log10(freq+1)*.56):1.7)*screenUnit();
+      ctx.stroke();ctx.globalAlpha=1;ctx.setLineDash([]);
     }
     for(const n of namedNodes){
       const p=namedCoordinates.get(n.short),sel=n.short===active;
-      const dim=!!active&&!highlighted.has(n.short);
+      const dim=(termView&&!termParticipants.has(n.short)) || (!!active&&!highlighted.has(n.short));
       const major=['crossing','unique_branch','exists_branch','eq_of_branch_eq'].includes(n.short);
       ctx.fillStyle=sel?'#325967':(major?'#244b58':'#18384a');
       ctx.globalAlpha=dim?.51:1;
@@ -319,7 +327,9 @@
       register(p.x,p.y,n.short,'decl',Math.max(p.w,p.h)/2,p.w,p.h);
     }
     sceneEnd();
-    $('pa-stage-count').textContent=namedNodes.length+' named definitions and theorems · '+namedEdges.length+' source-level references';
+    $('pa-stage-count').textContent=termView?
+      termEdges.length+' term references · 3 inspected theorem bodies · 2 additional to the source map':
+      namedNodes.length+' named definitions and theorems · '+namedEdges.length+' lexical source references';
   }
   function depName(d,i) {
     return d.name==='Kernel/library declaration'?'Declaration '+String(i+1).padStart(2,'0'):d.name;
@@ -413,7 +423,7 @@
     }
     sceneEnd();$('pa-stage-count').textContent='Interpretation by the researchers · not inferred by the compiler';
   }
-  function draw(){if(!canvas.width)return; if(state.mode==='map')drawMap();else if(state.mode==='whole')drawWhole();else if(state.mode==='deps')drawDeps();else if(state.mode==='recursive')drawRecursive();else drawMeaning();}
+  function draw(){if(!canvas.width)return; if(state.mode==='map'||state.mode==='term')drawMap();else if(state.mode==='whole')drawWhole();else if(state.mode==='deps')drawDeps();else if(state.mode==='recursive')drawRecursive();else drawMeaning();}
   function updateMode(mode){
     state.hover=null;state.hoverPower=state.hoverTarget=0;
     tooltip.hidden=true;fillHoverDetails(null);
