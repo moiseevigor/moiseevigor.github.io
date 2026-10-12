@@ -137,13 +137,15 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
   </section>
 
   <section class="pa-architecture">
-    <div class="pa-section-mark">03 / Four representations, one object</div>
+    <div class="pa-section-mark">03 / A precise visual language</div>
     <h2>Change the scale.<br><em>Keep the evidence.</em></h2>
-    <div class="pa-four">
-      <article><span>1 / CORE</span><h3>Exact certificate</h3><p>Lean checks an expression against a type in a context. The underlying formal object—not the drawing—is the source of proof validity.</p></article>
-      <article><span>2 / GRAPH</span><h3>Structural anatomy</h3><p>Applications, variables, binders, shared references. Graphs reveal syntax reuse and branching; their layout is a choice.</p></article>
-      <article><span>3 / MODULE</span><h3>Fractal navigation</h3><p>A visible branch can open into another subgraph. Its boundary must preserve every externally required premise.</p></article>
-      <article><span>4 / IDEA</span><h3>Mathematical reading</h3><p>Continuity and endpoint coverage establish existence; monotonicity and endpoint gluing establish uniqueness. This interpretation is currently annotated.</p></article>
+    <p class="pa-grammar-introduction">The diagram vocabulary begins with the twelve actual Lean kernel expression constructors. Each has typed ports and a visual role. The same proof can then be seen as a full syntax graph, a collapsed module with its context preserved, or a mathematical explanation linked back to the checked term.</p>
+    <a class="pa-button pa-primary" href="/projects/proof-atlas/grammar/">Explore the complete Lean.Expr visual alphabet ↗</a>
+    <div class="pa-four" style="margin-top:32px">
+      <article><span>1 / CORE</span><h3>Exact certificate</h3><p><code>Γ ⊢ proof : P</code><br>Lean checks a complete term against its type in context.</p></article>
+      <article><span>2 / GRAPH</span><h3>Typed connections</h3><p>Applications, binders, variables, structure projections and shared declaration references.</p></article>
+      <article><span>3 / MODULE</span><h3>Fractal navigation</h3><p>Collapse a verified subargument while retaining assumptions and conclusions.</p></article>
+      <article><span>4 / IDEA</span><h3>Mathematical reading</h3><p>Existence and uniqueness combine into exactly one crossing. Interpretation remains labeled.</p></article>
     </div>
   </section>
 
