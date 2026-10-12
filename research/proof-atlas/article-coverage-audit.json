@@ -1,0 +1,1567 @@
+{
+  "format": "ProofAtlasArticleCoverage/1",
+  "articleSha256": "043746bc7127bdc0f6cb7a62d3143ffc1827e7bfcfa51fe18c045683ec7ab512",
+  "researchRevision": "5c304fd9957eafc781969703b4bcc75abe0c0201",
+  "leanVersion": "4.33.1",
+  "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "auditDate": "2026-10-12",
+  "modules": {
+    "BeforeFirst": {
+      "sourceSha256": "75893ab07acf5aad4af15fe5bb18535df5ce3e41e248b8d3aeee6564846914bd",
+      "build": "PASS"
+    },
+    "CellCount": {
+      "sourceSha256": "ef7e92b35e45b114a99814d0e659e5e477d7af6b9e5716bc1c60b945b22fc2af",
+      "build": "PASS"
+    },
+    "Crossing": {
+      "sourceSha256": "7dd17803a0e009403754f5111460dcf722a76922391774f4ea4726ed0ee7af31",
+      "build": "PASS"
+    },
+    "FirstCell": {
+      "sourceSha256": "721bcb3af875476293643d45d612fab7039a5218472054a09bfaa62f863ad475",
+      "build": "PASS"
+    },
+    "Identities": {
+      "sourceSha256": "e2660b362273952060cf9cb4081d3e2b61f70eac5b99e02c860f63806bf23788",
+      "build": "PASS"
+    },
+    "Jacobi": {
+      "sourceSha256": "30a398ea15a163df4b8520be9bcc9755cfd1f2271f18172b559c6a617c41d1af",
+      "build": "PASS"
+    },
+    "LeftBracket": {
+      "sourceSha256": "5d7948e16595a6f5fdf65f1d71a2604e7ebc96680bf967d5b448ef8035c8ffa8",
+      "build": "PASS"
+    },
+    "Monotone": {
+      "sourceSha256": "e28627e88dac451942fd92dc653d9b7ff65b64c0ac887e68bdebe9c7b8bead2d",
+      "build": "PASS"
+    },
+    "Reduction": {
+      "sourceSha256": "a0a1cd686cbd6f50fdda94a23de54d292783ae8e5aac5e9c8c46385d5903b77e",
+      "build": "PASS"
+    },
+    "Riccati": {
+      "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+      "build": "PASS"
+    },
+    "RightBracket": {
+      "sourceSha256": "7b2cee55e828d26cf9dd9fc0cba0d300919a4d01cd1f3254e5a1d15fb5526fae",
+      "build": "PASS"
+    },
+    "SignedBracket": {
+      "sourceSha256": "9ce36873599cfff6274fe233ce884a8d2a8e5aef837d9552c71004745f5dfb4a",
+      "build": "PASS"
+    },
+    "SignedTime": {
+      "sourceSha256": "6b3387d76ae3afc34d4b0e1b3a6d38d1d8eb89ebe24a4d951653f212dcd3da86",
+      "build": "PASS"
+    },
+    "Zeros": {
+      "sourceSha256": "d085a47ee2fa36f5db05888181826f8b3f26ee9fb251d7de2e299dc877825caf",
+      "build": "PASS"
+    },
+    "ZerosF1": {
+      "sourceSha256": "41b7a774075145eff046c9a51d2b300d241253ee59d57b81e24f70810a2b3816",
+      "build": "PASS"
+    }
+  },
+  "statements": [
+    {
+      "id": "identities",
+      "number": "3.1",
+      "htmlAnchor": "lem:identities",
+      "title": "Lemma 3.1 · Identities",
+      "status": "partial",
+      "declarations": [
+        {
+          "module": "Identities",
+          "name": "JacobiData.collapse_beta"
+        },
+        {
+          "module": "Identities",
+          "name": "JacobiData.collapse_alpha"
+        },
+        {
+          "module": "Identities",
+          "name": "JacobiData.collapse_diff"
+        },
+        {
+          "module": "Identities",
+          "name": "JacobiData.hasDerivAt_f1_div_c"
+        },
+        {
+          "module": "Identities",
+          "name": "JacobiData.hasDerivAt_β1_div_c"
+        },
+        {
+          "module": "Identities",
+          "name": "JacobiData.hasDerivAt_α1_div_d"
+        },
+        {
+          "module": "Identities",
+          "name": "JacobiData.hasDerivAt_Γ"
+        },
+        {
+          "module": "Identities",
+          "name": "JacobiData.β1_deriv_eq_Γ"
+        },
+        {
+          "module": "Monotone",
+          "name": "JacobiInit.Γ_zero"
+        },
+        {
+          "module": "Monotone",
+          "name": "JacobiInit.Γ_pos"
+        },
+        {
+          "module": "ZerosF1",
+          "name": "JacobiPeriodic.exists_unique_f1_zero"
+        },
+        {
+          "module": "ZerosF1",
+          "name": "JacobiPeriodic.f1_sign_before"
+        },
+        {
+          "module": "ZerosF1",
+          "name": "JacobiPeriodic.f1_sign_after"
+        },
+        {
+          "module": "Zeros",
+          "name": "JacobiPeriodic.exists_unique_β1_zero"
+        },
+        {
+          "module": "CellCount",
+          "name": "JacobiFull.signed_α1_div_d_strictAntiOn"
+        },
+        {
+          "module": "CellCount",
+          "name": "JacobiFull.α1_zero_unique"
+        },
+        {
+          "module": "CellCount",
+          "name": "JacobiPeriodic.α1_even"
+        }
+      ],
+      "covered": [
+        "Coefficient collapse, the three quotient derivatives and the Γ identity.",
+        "Existence, uniqueness and signs of f₁/β₁ zeros; monotonicity and uniqueness for α₁ and its even-period value."
+      ],
+      "missing": [
+        "Simplicity of the α₁ zero and identification of K = 2E with a unique numerical modulus k₀ are not proved in this snapshot."
+      ],
+      "assumptions": [
+        "Jacobi differential rules, initial/period data and positivity hypotheses are supplied through the Jacobi structures."
+      ],
+      "sourceLines": [
+        225,
+        249
+      ],
+      "excerptSha256": "895215e47c845118e041f490bbe1a8b879ae63cae7b2739e402cf7a0a262b8b9"
+    },
+    {
+      "id": "riccati",
+      "number": "3.2",
+      "htmlAnchor": "lem:riccati",
+      "title": "Lemma 3.2 · Riccati slope bound",
+      "status": "partial",
+      "declarations": [
+        {
+          "module": "Riccati",
+          "name": "JacobiData.a_deriv_form"
+        },
+        {
+          "module": "Riccati",
+          "name": "JacobiData.b_deriv_form"
+        },
+        {
+          "module": "Riccati",
+          "name": "JacobiData.hasDerivAt_z"
+        },
+        {
+          "module": "Riccati",
+          "name": "JacobiData.T1_mul_T2"
+        },
+        {
+          "module": "Riccati",
+          "name": "JacobiData.T1_T2_same_sign"
+        },
+        {
+          "module": "Riccati",
+          "name": "JacobiData.slope_bound_abs"
+        },
+        {
+          "module": "Riccati",
+          "name": "JacobiData.z_eq_neg_beta_div_ell"
+        },
+        {
+          "module": "SignedBracket",
+          "name": "SBracket.one_le_ε_deriv_u"
+        }
+      ],
+      "covered": [
+        "The Riccati pair, z derivative, T₁T₂ product, common sign and AM–GM slope inequality.",
+        "The oriented phase-lift derivative bound on signed brackets."
+      ],
+      "missing": [
+        "The displayed exact square-gap formula for |u′| − 1 and its equality-case characterization are not exported as matching theorems in this snapshot."
+      ],
+      "assumptions": [
+        "Nonzero sn/dn and q/ℰ denominators, common sign and bracket conditions remain explicit in the theorem parameters."
+      ],
+      "sourceLines": [
+        320,
+        335
+      ],
+      "excerptSha256": "c1e8fd3164c73d8f29011a705b4b62eae18b04cf35664f651db5cdfcf6025b52"
+    },
+    {
+      "id": "crossing",
+      "number": "3.3",
+      "htmlAnchor": "lem:crossing",
+      "title": "Lemma 3.3 · Crossing principle",
+      "status": "partial",
+      "declarations": [],
+      "covered": [
+        "The counting clause is linked in the phase, counting, bracket and arc passages below."
+      ],
+      "missing": [
+        "Analytic zero orders and finiteness of tangency phases are not proved by Crossing.crossing."
+      ],
+      "assumptions": [
+        "CrossingData assumes continuity, endpoint values and strict branch monotonicity; the article derives these analytically."
+      ],
+      "sourceLines": [
+        356,
+        374
+      ],
+      "excerptSha256": "2b76f74bc03f3af5d4fdc3946b1bd4fad9ad4ea4cef381327109d5fec5e60bac"
+    },
+    {
+      "id": "first",
+      "number": "3.4",
+      "htmlAnchor": "thm:first",
+      "title": "Theorem 3.4 · Exact first conjugate time",
+      "status": "partial",
+      "declarations": [
+        {
+          "module": "BeforeFirst",
+          "name": "JacobiFull.exact_first_time"
+        },
+        {
+          "module": "BeforeFirst",
+          "name": "JacobiFull.first_time_complete"
+        },
+        {
+          "module": "BeforeFirst",
+          "name": "JacobiFull.J2_pos_before_p0"
+        }
+      ],
+      "covered": [
+        "Exactly one reduced-Jacobian zero in [p₀,p₁] and in (0,p₁]; positivity excludes zeros before p₀."
+      ],
+      "missing": [
+        "Continuity and phase extrema of p* are explicitly outside the published Lean scope.",
+        "The geometric identification of conjugate/cut time and the scale t = 2kp are not certified by these scalar root-counting declarations."
+      ],
+      "assumptions": [
+        "exact_first_time and first_time_complete require hfin: finite tangencies on the first bracket.",
+        "JacobiFull hypotheses; the reduced base is constructed by JacobiCore.toJacobiFull."
+      ],
+      "sourceLines": [
+        409,
+        421
+      ],
+      "excerptSha256": "788aeed49ee564cdbdcf35bb66252821244bf06fe9c745e05eac57c2fc8f0400"
+    },
+    {
+      "id": "cells",
+      "number": "4.1",
+      "htmlAnchor": "thm:cells",
+      "title": "Theorem 4.1 · Conjugate times in every cell",
+      "status": "partial",
+      "declarations": [
+        {
+          "module": "CellCount",
+          "name": "JacobiFull.cell_roots"
+        },
+        {
+          "module": "CellCount",
+          "name": "JacobiFull.two_per_cell_of_ne"
+        },
+        {
+          "module": "CellCount",
+          "name": "JacobiFull.eL_eq_eR_iff"
+        },
+        {
+          "module": "CellCount",
+          "name": "JacobiFull.coincide_imp"
+        },
+        {
+          "module": "LeftBracket",
+          "name": "JacobiFull.left_exact_time"
+        },
+        {
+          "module": "RightBracket",
+          "name": "JacobiFull.right_exact_time"
+        },
+        {
+          "module": "BeforeFirst",
+          "name": "JacobiFull.J2_even_eq_zero_iff"
+        },
+        {
+          "module": "BeforeFirst",
+          "name": "JacobiFull.roots_ncard"
+        },
+        {
+          "module": "SignedTime",
+          "name": "SBracket.J2_eq_zero_iff"
+        },
+        {
+          "module": "SignedTime",
+          "name": "SBracket.exact_time"
+        }
+      ],
+      "covered": [
+        "One zero on each closed bracket, exhaustion of the half-open cell, two distinct roots for K ≠ 2E, bracket contact iff K = 2E and the necessary location of coincident roots.",
+        "The phase of an even-period zero and the cumulative 2N root count."
+      ],
+      "missing": [
+        "Simplicity, interior tangency zero orders and the quartic order of the coincident root are not formalized.",
+        "The unique critical modulus k₀ is not identified; Lean uses the algebraic condition K = 2E."
+      ],
+      "assumptions": [
+        "The counting declarations require finite tangencies on the left and right brackets (hL/hR or hfin).",
+        "Lean cell index m corresponds to article n = m + 1. JacobiFull is conditional data, not a construction of SE(2) geodesics."
+      ],
+      "sourceLines": [
+        473,
+        484
+      ],
+      "excerptSha256": "5046a995c723da87fb97126f5c65f59485fce7aa1f03127331fca5bd3deb9c52"
+    },
+    {
+      "id": "coincident",
+      "number": "4.2",
+      "htmlAnchor": "rem:coincident",
+      "title": "Remark 4.2 · Coincident zero order",
+      "status": "not-formalized",
+      "declarations": [],
+      "covered": [],
+      "missing": [
+        "The quartic expansion and exact order four are not formalized in this snapshot. Cell-counting theorems do not establish this zero order."
+      ],
+      "assumptions": [],
+      "sourceLines": [
+        523,
+        545
+      ],
+      "excerptSha256": "7dea17587b7fbf88b9706162ffa664617226d088794e22a450df0bd55c1a7de9"
+    },
+    {
+      "id": "floquet",
+      "number": "5.1",
+      "htmlAnchor": "thm:floquet",
+      "title": "Theorem 5.1 · Floquet form and large-index law",
+      "status": "not-formalized",
+      "declarations": [],
+      "covered": [],
+      "missing": [
+        "Both the Floquet determinant identity and the large-index asymptotic law are outside the published Lean scope (Appendix A excludes Section 5)."
+      ],
+      "assumptions": [],
+      "sourceLines": [
+        576,
+        615
+      ],
+      "excerptSha256": "06eb373d34a556fe2f6814ed0dd32da0a5f4aed5b1947ad4198577cbec187a5b"
+    },
+    {
+      "id": "late-folds",
+      "number": "5.2",
+      "htmlAnchor": "remark-late-folds",
+      "title": "Remark 5.2 · Late conjugate points are folds",
+      "status": "not-formalized",
+      "declarations": [],
+      "covered": [],
+      "missing": [
+        "This is a claim from the companion manuscript, not a theorem of these fifteen Lean modules. No formal proof of the stated late-fold conclusion is indexed."
+      ],
+      "assumptions": [],
+      "sourceLines": [
+        694,
+        702
+      ],
+      "excerptSha256": "975faf21b6494b37cecec8bc6818e2d39bd6da40e46fe442d70a507424b719fb"
+    },
+    {
+      "id": "separatrix",
+      "number": "5.3",
+      "htmlAnchor": "rem:separatrix",
+      "title": "Remark 5.3 · Separatrix limits",
+      "status": "not-formalized",
+      "declarations": [],
+      "covered": [],
+      "missing": [
+        "The k → 1 limits and their rate are outside the published Lean scope."
+      ],
+      "assumptions": [],
+      "sourceLines": [
+        704,
+        722
+      ],
+      "excerptSha256": "3aef21e3be42ca329ef5423075a4e981d892988e8d7957ec2f928d4f908f15b5"
+    }
+  ],
+  "declarations": [
+    {
+      "name": "JacobiCore.toJacobiFull",
+      "short": "toJacobiFull",
+      "module": "Reduction",
+      "kind": "def",
+      "sourceFile": "SE2Conjugate/Reduction.lean",
+      "sourceSha256": "a0a1cd686cbd6f50fdda94a23de54d292783ae8e5aac5e9c8c46385d5903b77e",
+      "context": "namespace JacobiCore; variable (J : JacobiCore)",
+      "lines": [
+        {
+          "number": 785,
+          "text": "def toJacobiFull : JacobiFull"
+        }
+      ],
+      "sha256": "f0a2ffc3ba3821ee5672b5162b0bffe72a24446eae692fe66c10f06dae8d3a05",
+      "checkedType": "JacobiCore.toJacobiFull (J : JacobiCore) : JacobiFull",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiData.T1_T2_same_sign",
+      "short": "T1_T2_same_sign",
+      "module": "Riccati",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/Riccati.lean",
+      "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+      "context": "namespace JacobiData; variable (J : JacobiData)",
+      "lines": [
+        {
+          "number": 142,
+          "text": "theorem T1_T2_same_sign (p : ℝ) (hab : 0 < J.a p * J.b p) (hz1 : J.z p < 1) (hd : 0 < J.d p)"
+        },
+        {
+          "number": 143,
+          "text": "    (hs : J.s p ≠ 0) : (0 < J.a p ∧ 0 < J.b p ∧ 0 ≤ J.T1 p ∧ 0 ≤ J.T2 p)"
+        },
+        {
+          "number": 144,
+          "text": "      ∨ (J.a p < 0 ∧ J.b p < 0 ∧ J.T1 p ≤ 0 ∧ J.T2 p ≤ 0)"
+        }
+      ],
+      "sha256": "8edc9a1f3ff771a22fa5643519f0315d6a63ae7737c7dde6d84f68eae30bfcde",
+      "checkedType": "JacobiData.T1_T2_same_sign (J : JacobiData) (p : ℝ) (hab : 0 < J.a p * J.b p) (hz1 : J.z p < 1) (hd : 0 < J.d p)\n  (hs : J.s p ≠ 0) : 0 < J.a p ∧ 0 < J.b p ∧ 0 ≤ J.T1 p ∧ 0 ≤ J.T2 p ∨ J.a p < 0 ∧ J.b p < 0 ∧ J.T1 p ≤ 0 ∧ J.T2 p ≤ 0",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiData.T1_mul_T2",
+      "short": "T1_mul_T2",
+      "module": "Riccati",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/Riccati.lean",
+      "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+      "context": "namespace JacobiData; variable (J : JacobiData)",
+      "lines": [
+        {
+          "number": 104,
+          "text": "theorem T1_mul_T2 (p : ℝ) :"
+        },
+        {
+          "number": 105,
+          "text": "    J.T1 p * J.T2 p = (J.d p * J.s p) ^ 2 * (J.z p * (1 - J.z p) * J.Dz p)"
+        }
+      ],
+      "sha256": "012780cd7d8c0df449701bb2c9e7ebb2904844659ab5fea0e93a725454a0ba25",
+      "checkedType": "JacobiData.T1_mul_T2 (J : JacobiData) (p : ℝ) : J.T1 p * J.T2 p = (J.d p * J.s p) ^ 2 * (J.z p * (1 - J.z p) * J.Dz p)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiData.a_deriv_form",
+      "short": "a_deriv_form",
+      "module": "Riccati",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/Riccati.lean",
+      "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+      "context": "namespace JacobiData; variable (J : JacobiData)",
+      "lines": [
+        {
+          "number": 76,
+          "text": "theorem a_deriv_form (p : ℝ) (hq : J.q p ≠ 0) (hs : J.s p ≠ 0) (hd : J.d p ≠ 0) :"
+        },
+        {
+          "number": 77,
+          "text": "    (J.d p ^ 2 * J.q p ^ 2 + J.c p * J.f1 p * J.q p + J.k ^ 2 * J.s p ^ 2 * J.f1 p ^ 2)"
+        },
+        {
+          "number": 78,
+          "text": "        / (J.d p * J.s p * J.q p ^ 2)"
+        },
+        {
+          "number": 79,
+          "text": "      = (J.d p ^ 2 + J.c p * J.a p + J.k ^ 2 * J.s p ^ 2 * J.a p ^ 2) / (J.d p * J.s p)"
+        }
+      ],
+      "sha256": "ac401dd7b4e796a00b4d08f6417c32664c1dc8278e224456688d7ba5e5728946",
+      "checkedType": "JacobiData.a_deriv_form (J : JacobiData) (p : ℝ) (hq : J.q p ≠ 0) (hs : J.s p ≠ 0) (hd : J.d p ≠ 0) :\n  (J.d p ^ 2 * J.q p ^ 2 + J.c p * J.f1 p * J.q p + J.k ^ 2 * J.s p ^ 2 * J.f1 p ^ 2) / (J.d p * J.s p * J.q p ^ 2) =\n    (J.d p ^ 2 + J.c p * J.a p + J.k ^ 2 * J.s p ^ 2 * J.a p ^ 2) / (J.d p * J.s p)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiData.b_deriv_form",
+      "short": "b_deriv_form",
+      "module": "Riccati",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/Riccati.lean",
+      "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+      "context": "namespace JacobiData; variable (J : JacobiData)",
+      "lines": [
+        {
+          "number": 84,
+          "text": "theorem b_deriv_form (p : ℝ) (he : J.eps p ≠ 0) (hs : J.s p ≠ 0) (hd : J.d p ≠ 0) :"
+        },
+        {
+          "number": 85,
+          "text": "    ((1 - J.k ^ 2) * J.s p ^ 2 * J.eps p ^ 2 + J.c p * J.β1 p * J.eps p - J.d p ^ 2 * J.β1 p ^ 2)"
+        },
+        {
+          "number": 86,
+          "text": "        / (J.d p * J.s p * J.eps p ^ 2)"
+        },
+        {
+          "number": 87,
+          "text": "      = ((1 - J.k ^ 2) * J.s p ^ 2 - J.c p * J.b p - J.d p ^ 2 * J.b p ^ 2) / (J.d p * J.s p)"
+        }
+      ],
+      "sha256": "885fa5c30ac70a6da8159c361cf1ae8649db7e060d23c89096707aee81939134",
+      "checkedType": "JacobiData.b_deriv_form (J : JacobiData) (p : ℝ) (he : J.eps p ≠ 0) (hs : J.s p ≠ 0) (hd : J.d p ≠ 0) :\n  ((1 - J.k ^ 2) * J.s p ^ 2 * J.eps p ^ 2 + J.c p * J.β1 p * J.eps p - J.d p ^ 2 * J.β1 p ^ 2) /\n      (J.d p * J.s p * J.eps p ^ 2) =\n    ((1 - J.k ^ 2) * J.s p ^ 2 - J.c p * J.b p - J.d p ^ 2 * J.b p ^ 2) / (J.d p * J.s p)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiData.collapse_alpha",
+      "short": "collapse_alpha",
+      "module": "Identities",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/Identities.lean",
+      "sourceSha256": "e2660b362273952060cf9cb4081d3e2b61f70eac5b99e02c860f63806bf23788",
+      "context": "namespace JacobiData; variable (J : JacobiData)",
+      "lines": [
+        {
+          "number": 22,
+          "text": "theorem collapse_alpha (p : ℝ) : J.α p = (1 - J.k ^ 2) * J.X p"
+        }
+      ],
+      "sha256": "a6bea8f922226eebe680ee33fdfb3d0e03211655f6fa12cee8bb1f28d1b065ce",
+      "checkedType": "JacobiData.collapse_alpha (J : JacobiData) (p : ℝ) : J.α p = (1 - J.k ^ 2) * J.X p",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiData.collapse_beta",
+      "short": "collapse_beta",
+      "module": "Identities",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/Identities.lean",
+      "sourceSha256": "e2660b362273952060cf9cb4081d3e2b61f70eac5b99e02c860f63806bf23788",
+      "context": "namespace JacobiData; variable (J : JacobiData)",
+      "lines": [
+        {
+          "number": 18,
+          "text": "theorem collapse_beta (p : ℝ) : J.β p = J.X p - J.ell p"
+        }
+      ],
+      "sha256": "912df5ce7c5812af796e7ac8c00dde2a5f7fa6e841575c2c1d5f330a638c514d",
+      "checkedType": "JacobiData.collapse_beta (J : JacobiData) (p : ℝ) : J.β p = J.X p - J.ell p",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiData.collapse_diff",
+      "short": "collapse_diff",
+      "module": "Identities",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/Identities.lean",
+      "sourceSha256": "e2660b362273952060cf9cb4081d3e2b61f70eac5b99e02c860f63806bf23788",
+      "context": "namespace JacobiData; variable (J : JacobiData)",
+      "lines": [
+        {
+          "number": 26,
+          "text": "theorem collapse_diff (p : ℝ) : J.α p - J.β p = J.ell p - J.k ^ 2 * J.X p"
+        }
+      ],
+      "sha256": "e5b54cdfeb21e4d23f4954eb5f094e1bd919bf083a0f7fd0a847997143833219",
+      "checkedType": "JacobiData.collapse_diff (J : JacobiData) (p : ℝ) : J.α p - J.β p = J.ell p - J.k ^ 2 * J.X p",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiData.hasDerivAt_f1_div_c",
+      "short": "hasDerivAt_f1_div_c",
+      "module": "Identities",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/Identities.lean",
+      "sourceSha256": "e2660b362273952060cf9cb4081d3e2b61f70eac5b99e02c860f63806bf23788",
+      "context": "namespace JacobiData; variable (J : JacobiData)",
+      "lines": [
+        {
+          "number": 32,
+          "text": "theorem hasDerivAt_f1_div_c (p : ℝ) (hc : J.c p ≠ 0) :"
+        },
+        {
+          "number": 33,
+          "text": "    HasDerivAt (fun y => J.f1 y / J.c y) (-(J.d p ^ 2) / J.c p ^ 2) p"
+        }
+      ],
+      "sha256": "c75861c6c30f7a6595e6647c5851f3fc6069e1efb6a49b2f2b583569a14cbdce",
+      "checkedType": "JacobiData.hasDerivAt_f1_div_c (J : JacobiData) (p : ℝ) (hc : J.c p ≠ 0) :\n  HasDerivAt (fun y => J.f1 y / J.c y) (-J.d p ^ 2 / J.c p ^ 2) p",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiData.hasDerivAt_z",
+      "short": "hasDerivAt_z",
+      "module": "Riccati",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/Riccati.lean",
+      "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+      "context": "namespace JacobiData; variable (J : JacobiData)",
+      "lines": [
+        {
+          "number": 93,
+          "text": "theorem hasDerivAt_z (p : ℝ) (hq : J.q p ≠ 0) (he : J.eps p ≠ 0) (hs : J.s p ≠ 0)"
+        },
+        {
+          "number": 94,
+          "text": "    (hd : J.d p ≠ 0) :"
+        },
+        {
+          "number": 95,
+          "text": "    HasDerivAt J.z ((J.T1 p + J.T2 p) / (J.d p * J.s p)) p"
+        }
+      ],
+      "sha256": "7ed2b1060b6ebdf196ed04af62ec415b04f4dc63b12b1db60cdb28af735d42c8",
+      "checkedType": "JacobiData.hasDerivAt_z (J : JacobiData) (p : ℝ) (hq : J.q p ≠ 0) (he : J.eps p ≠ 0) (hs : J.s p ≠ 0) (hd : J.d p ≠ 0) :\n  HasDerivAt J.z ((J.T1 p + J.T2 p) / (J.d p * J.s p)) p",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiData.hasDerivAt_Γ",
+      "short": "hasDerivAt_Γ",
+      "module": "Identities",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/Identities.lean",
+      "sourceSha256": "e2660b362273952060cf9cb4081d3e2b61f70eac5b99e02c860f63806bf23788",
+      "context": "namespace JacobiData; variable (J : JacobiData)",
+      "lines": [
+        {
+          "number": 58,
+          "text": "theorem hasDerivAt_Γ (p : ℝ) (hd : J.d p ≠ 0) :"
+        },
+        {
+          "number": 59,
+          "text": "    HasDerivAt J.Γ ((1 - J.k ^ 2) / J.d p ^ 2) p"
+        }
+      ],
+      "sha256": "e6240bd5aa7d96b1634f8e5c648ffac91838c1b6c2b9274abb9580ad67899579",
+      "checkedType": "JacobiData.hasDerivAt_Γ (J : JacobiData) (p : ℝ) (hd : J.d p ≠ 0) : HasDerivAt J.Γ ((1 - J.k ^ 2) / J.d p ^ 2) p",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiData.hasDerivAt_α1_div_d",
+      "short": "hasDerivAt_α1_div_d",
+      "module": "Identities",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/Identities.lean",
+      "sourceSha256": "e2660b362273952060cf9cb4081d3e2b61f70eac5b99e02c860f63806bf23788",
+      "context": "namespace JacobiData; variable (J : JacobiData)",
+      "lines": [
+        {
+          "number": 48,
+          "text": "theorem hasDerivAt_α1_div_d (p : ℝ) (hd : J.d p ≠ 0) :"
+        },
+        {
+          "number": 49,
+          "text": "    HasDerivAt (fun y => J.α1 y / J.d y) (-(J.eps p * J.f1 p) / J.d p ^ 2) p"
+        }
+      ],
+      "sha256": "97045a1aee151ec6943db90982397a164ebfc1d09e283dde7a6bfec4c2c5bcfd",
+      "checkedType": "JacobiData.hasDerivAt_α1_div_d (J : JacobiData) (p : ℝ) (hd : J.d p ≠ 0) :\n  HasDerivAt (fun y => J.α1 y / J.d y) (-(J.eps p * J.f1 p) / J.d p ^ 2) p",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiData.hasDerivAt_β1_div_c",
+      "short": "hasDerivAt_β1_div_c",
+      "module": "Identities",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/Identities.lean",
+      "sourceSha256": "e2660b362273952060cf9cb4081d3e2b61f70eac5b99e02c860f63806bf23788",
+      "context": "namespace JacobiData; variable (J : JacobiData)",
+      "lines": [
+        {
+          "number": 40,
+          "text": "theorem hasDerivAt_β1_div_c (p : ℝ) (hc : J.c p ≠ 0) :"
+        },
+        {
+          "number": 41,
+          "text": "    HasDerivAt (fun y => J.β1 y / J.c y) (-((1 - J.k ^ 2) * J.s p ^ 2) / J.c p ^ 2) p"
+        }
+      ],
+      "sha256": "a8811632ec95f6f8cbb55c30073053e37d8229e06c9b93b7bbb9e87d5ed9f567",
+      "checkedType": "JacobiData.hasDerivAt_β1_div_c (J : JacobiData) (p : ℝ) (hc : J.c p ≠ 0) :\n  HasDerivAt (fun y => J.β1 y / J.c y) (-((1 - J.k ^ 2) * J.s p ^ 2) / J.c p ^ 2) p",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "short": "slope_bound_abs",
+      "module": "Riccati",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/Riccati.lean",
+      "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+      "context": "namespace JacobiData; variable (J : JacobiData)",
+      "lines": [
+        {
+          "number": 170,
+          "text": "theorem slope_bound_abs (p : ℝ) (hab : 0 < J.a p * J.b p) (hz1 : J.z p < 1) (hd : 0 < J.d p)"
+        },
+        {
+          "number": 171,
+          "text": "    (hs : J.s p ≠ 0) :"
+        },
+        {
+          "number": 172,
+          "text": "    2 * Real.sqrt (J.z p * (1 - J.z p) * J.Dz p) ≤ |(J.T1 p + J.T2 p) / (J.d p * J.s p)|"
+        }
+      ],
+      "sha256": "43f6cc06d5b2ed40e31f319f5116ef7d078f4492f937d4071801145907bda96c",
+      "checkedType": "JacobiData.slope_bound_abs (J : JacobiData) (p : ℝ) (hab : 0 < J.a p * J.b p) (hz1 : J.z p < 1) (hd : 0 < J.d p)\n  (hs : J.s p ≠ 0) : 2 * √(J.z p * (1 - J.z p) * J.Dz p) ≤ |(J.T1 p + J.T2 p) / (J.d p * J.s p)|",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiData.z_eq_neg_beta_div_ell",
+      "short": "z_eq_neg_beta_div_ell",
+      "module": "Riccati",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/Riccati.lean",
+      "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+      "context": "namespace JacobiData; variable (J : JacobiData)",
+      "lines": [
+        {
+          "number": 41,
+          "text": "theorem z_eq_neg_beta_div_ell (p : ℝ) (hq : J.q p ≠ 0) (he : J.eps p ≠ 0) :"
+        },
+        {
+          "number": 42,
+          "text": "    J.z p = -J.β p / J.ell p"
+        }
+      ],
+      "sha256": "588626d9c45e8cf55306119868afb311146bb050a3e31bb0409b1993b9a09e31",
+      "checkedType": "JacobiData.z_eq_neg_beta_div_ell (J : JacobiData) (p : ℝ) (hq : J.q p ≠ 0) (he : J.eps p ≠ 0) : J.z p = -J.β p / J.ell p",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiData.β1_deriv_eq_Γ",
+      "short": "β1_deriv_eq_Γ",
+      "module": "Identities",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/Identities.lean",
+      "sourceSha256": "e2660b362273952060cf9cb4081d3e2b61f70eac5b99e02c860f63806bf23788",
+      "context": "namespace JacobiData; variable (J : JacobiData)",
+      "lines": [
+        {
+          "number": 68,
+          "text": "theorem β1_deriv_eq_Γ (p : ℝ) (hd : J.d p ≠ 0) :"
+        },
+        {
+          "number": 69,
+          "text": "    -(J.s p * J.d p * J.eps p) + J.k ^ 2 * J.s p ^ 2 * J.c p = -(J.s p * J.d p * J.Γ p)"
+        }
+      ],
+      "sha256": "a066bba5cd167feeb7581bf2bb67b3c11c10ea975d985c0485d9c73013b7ae2b",
+      "checkedType": "JacobiData.β1_deriv_eq_Γ (J : JacobiData) (p : ℝ) (hd : J.d p ≠ 0) :\n  -(J.s p * J.d p * J.eps p) + J.k ^ 2 * J.s p ^ 2 * J.c p = -(J.s p * J.d p * J.Γ p)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiFull.J2_even_eq_zero_iff",
+      "short": "J2_even_eq_zero_iff",
+      "module": "BeforeFirst",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/BeforeFirst.lean",
+      "sourceSha256": "75893ab07acf5aad4af15fe5bb18535df5ce3e41e248b8d3aeee6564846914bd",
+      "context": "namespace JacobiFull; variable (J : JacobiFull)",
+      "lines": [
+        {
+          "number": 176,
+          "text": "theorem J2_even_eq_zero_iff {n : ℕ} (hn : 1 ≤ n) (τ : ℝ) :"
+        },
+        {
+          "number": 177,
+          "text": "    J.J2 τ (2 * n * J.K) = 0 ↔ ∃ j : ℤ, τ = J.K + 2 * J.K * j"
+        }
+      ],
+      "sha256": "124f1e226dafc218ad15617d20bd3037a229d1479145bb12326ed7735e2ed492",
+      "checkedType": "JacobiFull.J2_even_eq_zero_iff (J : JacobiFull) {n : ℕ} (hn : 1 ≤ n) (τ : ℝ) :\n  J.J2 τ (2 * ↑n * J.K) = 0 ↔ ∃ j, τ = J.K + 2 * J.K * ↑j",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiFull.J2_pos_before_p0",
+      "short": "J2_pos_before_p0",
+      "module": "BeforeFirst",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/BeforeFirst.lean",
+      "sourceSha256": "75893ab07acf5aad4af15fe5bb18535df5ce3e41e248b8d3aeee6564846914bd",
+      "context": "namespace JacobiFull; variable (J : JacobiFull)",
+      "lines": [
+        {
+          "number": 86,
+          "text": "theorem J2_pos_before_p0 {p : ℝ} (hp : p ∈ Set.Ioo 0 J.p0) (τ : ℝ) : 0 < J.J2 τ p"
+        }
+      ],
+      "sha256": "ebea3f109f3335003911dae6dfe6cf9e3b13cd4a125512c90a1a12317adc7181",
+      "checkedType": "JacobiFull.J2_pos_before_p0 (J : JacobiFull) {p : ℝ} (hp : p ∈ Set.Ioo 0 J.p0) (τ : ℝ) : 0 < J.J2 τ p",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiFull.cell_roots",
+      "short": "cell_roots",
+      "module": "CellCount",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/CellCount.lean",
+      "sourceSha256": "ef7e92b35e45b114a99814d0e659e5e477d7af6b9e5716bc1c60b945b22fc2af",
+      "context": "namespace JacobiFull; variable (J : JacobiFull) (m : ℕ)",
+      "lines": [
+        {
+          "number": 202,
+          "text": "theorem cell_roots (hL : (J.leftBracket m).tangencies.Finite)"
+        },
+        {
+          "number": 203,
+          "text": "    (hR : (J.rightBracket m).tangencies.Finite) (ψ : ℝ) :"
+        },
+        {
+          "number": 204,
+          "text": "    ∃ p ∈ Set.Icc (J.pL m) (J.eL m), ∃ q ∈ Set.Icc (J.eR m) (J.bR m),"
+        },
+        {
+          "number": 205,
+          "text": "      {x | x ∈ Set.Ico (J.pL m) (J.pL (m + 1)) ∧ J.J2 (ψ + x) x = 0} = {p, q} ∧"
+        },
+        {
+          "number": 206,
+          "text": "      (p = q → p = (2 * m + 2) * J.K)"
+        }
+      ],
+      "sha256": "2d7dc607ebb5e50a9fb2fd435f36117ba9089ac43eee7155d2c0af7117b86074",
+      "checkedType": "JacobiFull.cell_roots (J : JacobiFull) (m : ℕ) (hL : (J.leftBracket m).tangencies.Finite)\n  (hR : (J.rightBracket m).tangencies.Finite) (ψ : ℝ) :\n  ∃ p ∈ Set.Icc (J.pL m) (J.eL m),\n    ∃ q ∈ Set.Icc (J.eR m) (J.bR m),\n      {x | x ∈ Set.Ico (J.pL m) (J.pL (m + 1)) ∧ J.J2 (ψ + x) x = 0} = {p, q} ∧ (p = q → p = (2 * ↑m + 2) * J.K)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiFull.coincide_imp",
+      "short": "coincide_imp",
+      "module": "CellCount",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/CellCount.lean",
+      "sourceSha256": "ef7e92b35e45b114a99814d0e659e5e477d7af6b9e5716bc1c60b945b22fc2af",
+      "context": "namespace JacobiFull; variable (J : JacobiFull) (m : ℕ)",
+      "lines": [
+        {
+          "number": 341,
+          "text": "theorem coincide_imp (hL : (J.leftBracket m).tangencies.Finite)"
+        },
+        {
+          "number": 342,
+          "text": "    (hR : (J.rightBracket m).tangencies.Finite) (ψ : ℝ) :"
+        },
+        {
+          "number": 343,
+          "text": "    ∃ p ∈ Set.Icc (J.pL m) (J.eL m), ∃ q ∈ Set.Icc (J.eR m) (J.bR m),"
+        },
+        {
+          "number": 344,
+          "text": "      {x | x ∈ Set.Ico (J.pL m) (J.pL (m + 1)) ∧ J.J2 (ψ + x) x = 0} = {p, q} ∧"
+        },
+        {
+          "number": 345,
+          "text": "      (p = q → p = (2 * m + 2) * J.K ∧ J.K = 2 * J.E)"
+        }
+      ],
+      "sha256": "046724c8c16665dfc50c35ec54357e970077c48c439dc464faf71304942bb823",
+      "checkedType": "JacobiFull.coincide_imp (J : JacobiFull) (m : ℕ) (hL : (J.leftBracket m).tangencies.Finite)\n  (hR : (J.rightBracket m).tangencies.Finite) (ψ : ℝ) :\n  ∃ p ∈ Set.Icc (J.pL m) (J.eL m),\n    ∃ q ∈ Set.Icc (J.eR m) (J.bR m),\n      {x | x ∈ Set.Ico (J.pL m) (J.pL (m + 1)) ∧ J.J2 (ψ + x) x = 0} = {p, q} ∧\n        (p = q → p = (2 * ↑m + 2) * J.K ∧ J.K = 2 * J.E)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiFull.eL_eq_eR_iff",
+      "short": "eL_eq_eR_iff",
+      "module": "CellCount",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/CellCount.lean",
+      "sourceSha256": "ef7e92b35e45b114a99814d0e659e5e477d7af6b9e5716bc1c60b945b22fc2af",
+      "context": "namespace JacobiFull; variable (J : JacobiFull) (m : ℕ)",
+      "lines": [
+        {
+          "number": 312,
+          "text": "theorem eL_eq_eR_iff : J.eL m = J.eR m ↔ J.K = 2 * J.E"
+        }
+      ],
+      "sha256": "4924c5d018d9156193dc8d5531f14e4ba75eca8ece97d4a30925603531c8e651",
+      "checkedType": "JacobiFull.eL_eq_eR_iff (J : JacobiFull) (m : ℕ) : J.eL m = J.eR m ↔ J.K = 2 * J.E",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiFull.exact_first_time",
+      "short": "exact_first_time",
+      "module": "BeforeFirst",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/BeforeFirst.lean",
+      "sourceSha256": "75893ab07acf5aad4af15fe5bb18535df5ce3e41e248b8d3aeee6564846914bd",
+      "context": "namespace JacobiFull; variable (J : JacobiFull)",
+      "lines": [
+        {
+          "number": 105,
+          "text": "theorem exact_first_time (hfin : (J.leftBracket 0).tangencies.Finite) (ψ : ℝ) :"
+        },
+        {
+          "number": 106,
+          "text": "    ∃! p, p ∈ Set.Icc J.p0 J.p1 ∧ J.J2 (ψ + p) p = 0"
+        }
+      ],
+      "sha256": "6d1a5a0e3da38846e1db5da5e002e47eb89d6ab64fd3ec38b218d2cc14a5900d",
+      "checkedType": "JacobiFull.exact_first_time (J : JacobiFull) (hfin : (J.leftBracket 0).tangencies.Finite) (ψ : ℝ) :\n  ∃! p, p ∈ Set.Icc J.p0 J.p1 ∧ J.J2 (ψ + p) p = 0",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiFull.first_time_complete",
+      "short": "first_time_complete",
+      "module": "BeforeFirst",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/BeforeFirst.lean",
+      "sourceSha256": "75893ab07acf5aad4af15fe5bb18535df5ce3e41e248b8d3aeee6564846914bd",
+      "context": "namespace JacobiFull; variable (J : JacobiFull)",
+      "lines": [
+        {
+          "number": 111,
+          "text": "theorem first_time_complete (hfin : (J.leftBracket 0).tangencies.Finite) (ψ : ℝ) :"
+        },
+        {
+          "number": 112,
+          "text": "    ∃! p, p ∈ Set.Ioc 0 J.p1 ∧ J.J2 (ψ + p) p = 0"
+        }
+      ],
+      "sha256": "97fbde4e56380a502bc6984835c35d332db66cf3afce2d546f8b26df021db455",
+      "checkedType": "JacobiFull.first_time_complete (J : JacobiFull) (hfin : (J.leftBracket 0).tangencies.Finite) (ψ : ℝ) :\n  ∃! p, p ∈ Set.Ioc 0 J.p1 ∧ J.J2 (ψ + p) p = 0",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiFull.left_exact_time",
+      "short": "left_exact_time",
+      "module": "LeftBracket",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/LeftBracket.lean",
+      "sourceSha256": "5d7948e16595a6f5fdf65f1d71a2604e7ebc96680bf967d5b448ef8035c8ffa8",
+      "context": "namespace JacobiFull; variable (J : JacobiFull) (m : ℕ)",
+      "lines": [
+        {
+          "number": 215,
+          "text": "theorem left_exact_time (hfin : (J.leftBracket m).tangencies.Finite) (ψ : ℝ) :"
+        },
+        {
+          "number": 216,
+          "text": "    ∃! p, p ∈ Set.Icc (J.pL m) (J.eL m) ∧ (J.leftBracket m).J2 (ψ + p) p = 0"
+        }
+      ],
+      "sha256": "d58a47e19d140b0da0a7611c021a99760fd51c10df5af44d9ab95748a9a4844f",
+      "checkedType": "JacobiFull.left_exact_time (J : JacobiFull) (m : ℕ) (hfin : (J.leftBracket m).tangencies.Finite) (ψ : ℝ) :\n  ∃! p, p ∈ Set.Icc (J.pL m) (J.eL m) ∧ (J.leftBracket m).J2 (ψ + p) p = 0",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiFull.right_exact_time",
+      "short": "right_exact_time",
+      "module": "RightBracket",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/RightBracket.lean",
+      "sourceSha256": "7b2cee55e828d26cf9dd9fc0cba0d300919a4d01cd1f3254e5a1d15fb5526fae",
+      "context": "namespace JacobiFull; variable (J : JacobiFull) (m : ℕ)",
+      "lines": [
+        {
+          "number": 203,
+          "text": "theorem right_exact_time (hfin : (J.rightBracket m).tangencies.Finite) (ψ : ℝ) :"
+        },
+        {
+          "number": 204,
+          "text": "    ∃! p, p ∈ Set.Icc (J.eR m) (J.bR m) ∧ (J.rightBracket m).J2 (ψ + p) p = 0"
+        }
+      ],
+      "sha256": "7f495b2b8dff12e8546473792ec876657d3b49edd09f58dd5c180f19719db51d",
+      "checkedType": "JacobiFull.right_exact_time (J : JacobiFull) (m : ℕ) (hfin : (J.rightBracket m).tangencies.Finite) (ψ : ℝ) :\n  ∃! p, p ∈ Set.Icc (J.eR m) (J.bR m) ∧ (J.rightBracket m).J2 (ψ + p) p = 0",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiFull.roots_ncard",
+      "short": "roots_ncard",
+      "module": "BeforeFirst",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/BeforeFirst.lean",
+      "sourceSha256": "75893ab07acf5aad4af15fe5bb18535df5ce3e41e248b8d3aeee6564846914bd",
+      "context": "namespace JacobiFull; variable (J : JacobiFull)",
+      "lines": [
+        {
+          "number": 151,
+          "text": "theorem roots_ncard (hL : ∀ m, (J.leftBracket m).tangencies.Finite)"
+        },
+        {
+          "number": 152,
+          "text": "    (hR : ∀ m, (J.rightBracket m).tangencies.Finite) (hk : J.K ≠ 2 * J.E) (ψ : ℝ) (N : ℕ) :"
+        },
+        {
+          "number": 153,
+          "text": "    (J.roots ψ N).Finite ∧ (J.roots ψ N).ncard = 2 * N"
+        }
+      ],
+      "sha256": "ce6d1f85ad7bf98616d0595147c15028fa1cc1e6c9a0fe6c55f9d29ab624d946",
+      "checkedType": "JacobiFull.roots_ncard (J : JacobiFull) (hL : ∀ (m : ℕ), (J.leftBracket m).tangencies.Finite)\n  (hR : ∀ (m : ℕ), (J.rightBracket m).tangencies.Finite) (hk : J.K ≠ 2 * J.E) (ψ : ℝ) (N : ℕ) :\n  (J.roots ψ N).Finite ∧ (J.roots ψ N).ncard = 2 * N",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiFull.signed_α1_div_d_strictAntiOn",
+      "short": "signed_α1_div_d_strictAntiOn",
+      "module": "CellCount",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/CellCount.lean",
+      "sourceSha256": "ef7e92b35e45b114a99814d0e659e5e477d7af6b9e5716bc1c60b945b22fc2af",
+      "context": "namespace JacobiFull; variable (J : JacobiFull) (m : ℕ)",
+      "lines": [
+        {
+          "number": 62,
+          "text": "theorem signed_α1_div_d_strictAntiOn :"
+        },
+        {
+          "number": 63,
+          "text": "    StrictAntiOn (fun p => (-1) ^ m * (J.toJacobiData.α1 p / J.d p))"
+        },
+        {
+          "number": 64,
+          "text": "      (Set.Icc (J.pL m) (J.pL (m + 1)))"
+        }
+      ],
+      "sha256": "4ff2988cf1a4c0578746728f07cb5c5610ac9fad00ca043c15be877f12d3deb3",
+      "checkedType": "JacobiFull.signed_α1_div_d_strictAntiOn (J : JacobiFull) (m : ℕ) :\n  StrictAntiOn (fun p => (-1) ^ m * (J.α1 p / J.d p)) (Set.Icc (J.pL m) (J.pL (m + 1)))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiFull.two_per_cell_of_ne",
+      "short": "two_per_cell_of_ne",
+      "module": "CellCount",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/CellCount.lean",
+      "sourceSha256": "ef7e92b35e45b114a99814d0e659e5e477d7af6b9e5716bc1c60b945b22fc2af",
+      "context": "namespace JacobiFull; variable (J : JacobiFull) (m : ℕ)",
+      "lines": [
+        {
+          "number": 335,
+          "text": "theorem two_per_cell_of_ne (hL : (J.leftBracket m).tangencies.Finite)"
+        },
+        {
+          "number": 336,
+          "text": "    (hR : (J.rightBracket m).tangencies.Finite) (hk : J.K ≠ 2 * J.E) (ψ : ℝ) :"
+        },
+        {
+          "number": 337,
+          "text": "    {x | x ∈ Set.Ico (J.pL m) (J.pL (m + 1)) ∧ J.J2 (ψ + x) x = 0}.ncard = 2"
+        }
+      ],
+      "sha256": "455072a180341a2ef0c0623ebf2354e50f7c72dbb62acf6db50d047499f7f372",
+      "checkedType": "JacobiFull.two_per_cell_of_ne (J : JacobiFull) (m : ℕ) (hL : (J.leftBracket m).tangencies.Finite)\n  (hR : (J.rightBracket m).tangencies.Finite) (hk : J.K ≠ 2 * J.E) (ψ : ℝ) :\n  {x | x ∈ Set.Ico (J.pL m) (J.pL (m + 1)) ∧ J.J2 (ψ + x) x = 0}.ncard = 2",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiFull.α1_zero_unique",
+      "short": "α1_zero_unique",
+      "module": "CellCount",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/CellCount.lean",
+      "sourceSha256": "ef7e92b35e45b114a99814d0e659e5e477d7af6b9e5716bc1c60b945b22fc2af",
+      "context": "namespace JacobiFull; variable (J : JacobiFull) (m : ℕ)",
+      "lines": [
+        {
+          "number": 85,
+          "text": "theorem α1_zero_unique {p q : ℝ} (hp : p ∈ Set.Icc (J.pL m) (J.pL (m + 1)))"
+        },
+        {
+          "number": 86,
+          "text": "    (hq : q ∈ Set.Icc (J.pL m) (J.pL (m + 1))) (h0 : J.toJacobiData.α1 p = 0)"
+        },
+        {
+          "number": 87,
+          "text": "    (h1 : J.toJacobiData.α1 q = 0) : p = q"
+        }
+      ],
+      "sha256": "11f0f1ffdbcc2e96cf16651000fdec8fb4e19334436b6d7514858bbc91efff98",
+      "checkedType": "JacobiFull.α1_zero_unique (J : JacobiFull) (m : ℕ) {p q : ℝ} (hp : p ∈ Set.Icc (J.pL m) (J.pL (m + 1)))\n  (hq : q ∈ Set.Icc (J.pL m) (J.pL (m + 1))) (h0 : J.α1 p = 0) (h1 : J.α1 q = 0) : p = q",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiInit.Γ_pos",
+      "short": "Γ_pos",
+      "module": "Monotone",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/Monotone.lean",
+      "sourceSha256": "e28627e88dac451942fd92dc653d9b7ff65b64c0ac887e68bdebe9c7b8bead2d",
+      "context": "namespace JacobiInit; variable (J : JacobiInit)",
+      "lines": [
+        {
+          "number": 51,
+          "text": "theorem Γ_pos {p : ℝ} (hp : 0 < p) : 0 < J.toJacobiData.Γ p"
+        }
+      ],
+      "sha256": "7efdf0baebe12a2830679c5f9a851f14b1363e04e8aca2fa63cecfd4b85e3af2",
+      "checkedType": "JacobiInit.Γ_pos (J : JacobiInit) {p : ℝ} (hp : 0 < p) : 0 < J.Γ p",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiInit.Γ_zero",
+      "short": "Γ_zero",
+      "module": "Monotone",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/Monotone.lean",
+      "sourceSha256": "e28627e88dac451942fd92dc653d9b7ff65b64c0ac887e68bdebe9c7b8bead2d",
+      "context": "namespace JacobiInit; variable (J : JacobiInit)",
+      "lines": [
+        {
+          "number": 39,
+          "text": "theorem Γ_zero : J.toJacobiData.Γ 0 = 0"
+        }
+      ],
+      "sha256": "15f0fbf15af18e9732698433de6515df931dfda271126ecffd893ef6ddb31ccd",
+      "checkedType": "JacobiInit.Γ_zero (J : JacobiInit) : J.Γ 0 = 0",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiPeriodic.exists_unique_f1_zero",
+      "short": "exists_unique_f1_zero",
+      "module": "ZerosF1",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/ZerosF1.lean",
+      "sourceSha256": "41b7a774075145eff046c9a51d2b300d241253ee59d57b81e24f70810a2b3816",
+      "context": "namespace JacobiPeriodic; variable (J : JacobiPeriodic)",
+      "lines": [
+        {
+          "number": 88,
+          "text": "theorem exists_unique_f1_zero (m : ℕ) :"
+        },
+        {
+          "number": 89,
+          "text": "    ∃! p, p ∈ Set.Ioo ((2 * m + 1) * J.K) ((2 * m + 2) * J.K) ∧ J.toJacobiData.f1 p = 0"
+        }
+      ],
+      "sha256": "d5fca8fc3698f25022e24fe0370cf5cf7317e480ac40c74330de9622a3d1abe9",
+      "checkedType": "JacobiPeriodic.exists_unique_f1_zero (J : JacobiPeriodic) (m : ℕ) :\n  ∃! p, p ∈ Set.Ioo ((2 * ↑m + 1) * J.K) ((2 * ↑m + 2) * J.K) ∧ J.f1 p = 0",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiPeriodic.exists_unique_β1_zero",
+      "short": "exists_unique_β1_zero",
+      "module": "Zeros",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/Zeros.lean",
+      "sourceSha256": "d085a47ee2fa36f5db05888181826f8b3f26ee9fb251d7de2e299dc877825caf",
+      "context": "namespace JacobiPeriodic; variable (J : JacobiPeriodic)",
+      "lines": [
+        {
+          "number": 81,
+          "text": "theorem exists_unique_β1_zero (n : ℕ) (hn : 1 ≤ n) :"
+        },
+        {
+          "number": 82,
+          "text": "    ∃! b, b ∈ Set.Ioo (2 * n * J.K) ((2 * n + 1) * J.K) ∧ J.toJacobiData.β1 b = 0"
+        }
+      ],
+      "sha256": "335a522bc73930c848e27e7b2c7d28a8c2b6d3632c592e6916ea0569acba85fd",
+      "checkedType": "JacobiPeriodic.exists_unique_β1_zero (J : JacobiPeriodic) (n : ℕ) (hn : 1 ≤ n) :\n  ∃! b, b ∈ Set.Ioo (2 * ↑n * J.K) ((2 * ↑n + 1) * J.K) ∧ J.β1 b = 0",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiPeriodic.f1_sign_after",
+      "short": "f1_sign_after",
+      "module": "ZerosF1",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/ZerosF1.lean",
+      "sourceSha256": "41b7a774075145eff046c9a51d2b300d241253ee59d57b81e24f70810a2b3816",
+      "context": "namespace JacobiPeriodic; variable (J : JacobiPeriodic)",
+      "lines": [
+        {
+          "number": 171,
+          "text": "theorem f1_sign_after (m : ℕ) {p : ℝ} (hp : p ∈ Set.Ioo (J.pM m) ((2 * m + 3) * J.K)) :"
+        },
+        {
+          "number": 172,
+          "text": "    0 < (-1) ^ m * J.toJacobiData.f1 p"
+        }
+      ],
+      "sha256": "7ba9a44aa8ab651cffb3fa95796445caa2ed34e6b50307e594416c2e42b498da",
+      "checkedType": "JacobiPeriodic.f1_sign_after (J : JacobiPeriodic) (m : ℕ) {p : ℝ} (hp : p ∈ Set.Ioo (J.pM m) ((2 * ↑m + 3) * J.K)) :\n  0 < (-1) ^ m * J.f1 p",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiPeriodic.f1_sign_before",
+      "short": "f1_sign_before",
+      "module": "ZerosF1",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/ZerosF1.lean",
+      "sourceSha256": "41b7a774075145eff046c9a51d2b300d241253ee59d57b81e24f70810a2b3816",
+      "context": "namespace JacobiPeriodic; variable (J : JacobiPeriodic)",
+      "lines": [
+        {
+          "number": 189,
+          "text": "theorem f1_sign_before (m : ℕ) {p : ℝ} (hp : p ∈ Set.Ioo ((2 * m + 1) * J.K) (J.pM m)) :"
+        },
+        {
+          "number": 190,
+          "text": "    0 < (-1) ^ (m + 1) * J.toJacobiData.f1 p"
+        }
+      ],
+      "sha256": "26258284ed92fb494e53b792f055a6a9245a49994a85a32b54fd8b9c72f0a3cf",
+      "checkedType": "JacobiPeriodic.f1_sign_before (J : JacobiPeriodic) (m : ℕ) {p : ℝ} (hp : p ∈ Set.Ioo ((2 * ↑m + 1) * J.K) (J.pM m)) :\n  0 < (-1) ^ (m + 1) * J.f1 p",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "JacobiPeriodic.α1_even",
+      "short": "α1_even",
+      "module": "CellCount",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/CellCount.lean",
+      "sourceSha256": "ef7e92b35e45b114a99814d0e659e5e477d7af6b9e5716bc1c60b945b22fc2af",
+      "context": "namespace JacobiPeriodic; parameters appear in the declaration",
+      "lines": [
+        {
+          "number": 19,
+          "text": "theorem α1_even (J : JacobiPeriodic) (n : ℕ) : J.toJacobiData.α1 (2 * n * J.K)"
+        },
+        {
+          "number": 20,
+          "text": "    = (-1) ^ n * J.d (2 * n * J.K) * (2 * n * J.K - 2 * (2 * n * J.E))"
+        }
+      ],
+      "sha256": "1746a336ac029d4a16d5299e78b89861725fbc170d480b18d11172a9547ed056",
+      "checkedType": "JacobiPeriodic.α1_even (J : JacobiPeriodic) (n : ℕ) :\n  J.α1 (2 * ↑n * J.K) = (-1) ^ n * J.d (2 * ↑n * J.K) * (2 * ↑n * J.K - 2 * (2 * ↑n * J.E))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "SBracket.J2_eq_zero_iff",
+      "short": "J2_eq_zero_iff",
+      "module": "SignedTime",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/SignedTime.lean",
+      "sourceSha256": "6b3387d76ae3afc34d4b0e1b3a6d38d1d8eb89ebe24a4d951653f212dcd3da86",
+      "context": "namespace SBracket; variable (B : SBracket)",
+      "lines": [
+        {
+          "number": 231,
+          "text": "theorem J2_eq_zero_iff {p : ℝ} (hp : p ∈ Set.Icc B.p0 B.p1) (τ : ℝ) :"
+        },
+        {
+          "number": 232,
+          "text": "    B.J2 τ p = 0 ↔ B.s τ ^ 2 = B.r p"
+        }
+      ],
+      "sha256": "934911c775ea96b70a4046aeb12a3409b811b953e9e773b9dc4041147438191b",
+      "checkedType": "SBracket.J2_eq_zero_iff (B : SBracket) {p : ℝ} (hp : p ∈ Set.Icc B.p0 B.p1) (τ : ℝ) : B.J2 τ p = 0 ↔ B.s τ ^ 2 = B.r p",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "SBracket.exact_time",
+      "short": "exact_time",
+      "module": "SignedTime",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/SignedTime.lean",
+      "sourceSha256": "6b3387d76ae3afc34d4b0e1b3a6d38d1d8eb89ebe24a4d951653f212dcd3da86",
+      "context": "namespace SBracket; variable (B : SBracket)",
+      "lines": [
+        {
+          "number": 259,
+          "text": "theorem exact_time (hfin : B.tangencies.Finite) (ψ : ℝ) :"
+        },
+        {
+          "number": 260,
+          "text": "    ∃! p, p ∈ Set.Icc B.p0 B.p1 ∧ B.J2 (ψ + p) p = 0"
+        }
+      ],
+      "sha256": "a5ba9f82acf3f94a1fe489d17be3c4b185062bf587f6d70f17c852307bd65b02",
+      "checkedType": "SBracket.exact_time (B : SBracket) (hfin : B.tangencies.Finite) (ψ : ℝ) :\n  ∃! p, p ∈ Set.Icc B.p0 B.p1 ∧ B.J2 (ψ + p) p = 0",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    },
+    {
+      "name": "SBracket.one_le_ε_deriv_u",
+      "short": "one_le_ε_deriv_u",
+      "module": "SignedBracket",
+      "kind": "theorem",
+      "sourceFile": "SE2Conjugate/SignedBracket.lean",
+      "sourceSha256": "9ce36873599cfff6274fe233ce884a8d2a8e5aef837d9552c71004745f5dfb4a",
+      "context": "namespace SBracket; variable (B : SBracket)",
+      "lines": [
+        {
+          "number": 247,
+          "text": "theorem one_le_ε_deriv_u {p : ℝ} (hp : p ∈ Set.Ioo B.p0 B.p1) :"
+        },
+        {
+          "number": 248,
+          "text": "    1 ≤ B.ε * (B.zp p / (2 * Real.sqrt (B.toJacobiData.z p * (1 - B.toJacobiData.z p)"
+        },
+        {
+          "number": 249,
+          "text": "      * B.toJacobiData.Dz p)))"
+        }
+      ],
+      "sha256": "b281113f253527758cf06965eb102ab87295ff260321b8e61b8cb1763bb479cc",
+      "checkedType": "SBracket.one_le_ε_deriv_u (B : SBracket) {p : ℝ} (hp : p ∈ Set.Ioo B.p0 B.p1) :\n  1 ≤ B.ε * (B.zp p / (2 * √(B.z p * (1 - B.z p) * B.Dz p)))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelCheck": "PASS",
+      "termGraph": false
+    }
+  ],
+  "supportDeclarations": [
+    {
+      "module": "Reduction",
+      "name": "JacobiCore.toJacobiFull"
+    }
+  ],
+  "counts": {
+    "statements": 9,
+    "partial": 5,
+    "notFormalized": 4,
+    "additionalDeclarations": 39,
+    "sourceLines": 88
+  },
+  "scope": "All nine numbered article statements audited. Partial means checked conditional counterparts for specified clauses, not the complete article statement. Kernel checking does not certify the editorial article-to-Lean equivalence. Only the crossing term graph is released.",
+  "checkLogSha256": "285d2277b241ed01b59cc862a43a8b24d18f0a6ba8c5ca2b109ed114736b59fe",
+  "moduleBuildSeconds": 99.35
+}

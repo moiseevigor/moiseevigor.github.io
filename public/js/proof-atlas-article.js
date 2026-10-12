@@ -23,17 +23,19 @@
  async function reveal(){
   let id;try{id=decodeURIComponent(location.hash.slice(1));}catch(_){return;}
   const target=document.getElementById(id);if(!target)return;
+  for(let parent=target.parentElement;parent&&parent!==paper;parent=parent.parentElement){if(parent.tagName==='DETAILS')parent.open=true;}
   if(document.fonts)await document.fonts.ready;
   paper.querySelectorAll('.pa-paper-highlight').forEach(n=>n.classList.remove('pa-paper-highlight'));
-  const block=id.startsWith('passage-')?target:target.closest('p,.lemma,.theorem,.remark,table')||target;
+  const block=id.startsWith('passage-')||id.startsWith('lean-')?target:target.closest('p,.lemma,.theorem,.remark,table')||target;
+  const counterpart=target.dataset.leanPassage||id;
   block.classList.add('pa-paper-highlight');block.tabIndex=requested==='compare'&&id.startsWith('passage-')?0:-1;
-  highlightPair(id);
+  highlightPair(counterpart);
   requestAnimationFrame(()=>{target.scrollIntoView({block:'center'});block.focus({preventScroll:true});});
  }
  function loadScript(src){
   return new Promise((resolve,reject)=>{const n=document.createElement('script');n.src=src;n.onload=resolve;n.onerror=()=>{n.remove();reject(Error('Comparison data could not be loaded. Select Article + Lean to try again.'));};document.head.append(n);});
  }
- function graphUrl(short){return '/projects/proof-atlas/app/#decl-'+encodeURIComponent(short);}
+ function graphUrl(d,passage){return d.termGraph===false?'#lean-'+passage.id+'-'+encodeURIComponent(d.name):'/projects/proof-atlas/app/#decl-'+encodeURIComponent(d.short);}
  function drawGraphs(){
   cancelAnimationFrame(graphFrame);graphFrame=requestAnimationFrame(()=>{
    const ns='http://www.w3.org/2000/svg';
@@ -49,10 +51,10 @@
      const origin=(target.top+target.bottom)/2-bounds.top;
      for(const d of headers){
       const statement=[...entry.row.querySelectorAll('.pa-lean-statement')].find(n=>n.dataset.leanName===d.name);
-      const position=statement.getBoundingClientRect(),y=(position.top+position.bottom)/2-bounds.top;
+      const position=statement.getBoundingClientRect();if(!position.height)continue;const y=(position.top+position.bottom)/2-bounds.top;
       const path=document.createElementNS(ns,'path');path.setAttribute('d','M 2 '+origin+' C 23 '+origin+', 23 '+y+', 34 '+y+' M 147 '+y+' L 179 '+y);svg.append(path);
-      const link=document.createElementNS(ns,'a');link.setAttribute('href',graphUrl(d.short));link.setAttribute('aria-label','Open '+d.short+' in proof graph');link.dataset.leanPassage=passage.htmlAnchor;link.dataset.leanName=d.name;
-      const rect=document.createElementNS(ns,'rect');rect.setAttribute('x',34);rect.setAttribute('y',y-16);rect.setAttribute('width',113);rect.setAttribute('height',32);rect.setAttribute('rx',3);link.append(rect,text(40,y+4,d.short));svg.append(link);
+      const link=document.createElementNS(ns,'a');link.setAttribute('href',graphUrl(d,passage));link.setAttribute('aria-label','Open '+d.short+(d.termGraph===false?' source statement':' in proof graph'));link.dataset.leanPassage=passage.htmlAnchor;link.dataset.leanName=d.name;
+      const rect=document.createElementNS(ns,'rect');rect.setAttribute('x',34);rect.setAttribute('y',y-16);rect.setAttribute('width',113);rect.setAttribute('height',32);rect.setAttribute('rx',3);const short=d.short.length>17?d.short.slice(0,14)+'…':d.short;link.append(rect,text(40,y+4,short));svg.append(link);
       link.addEventListener('mouseenter',()=>highlightPair(passage.htmlAnchor,d.name));link.addEventListener('focus',()=>highlightPair(passage.htmlAnchor,d.name));
      }
     }
@@ -61,14 +63,15 @@
   });
  }
  function statement(d,passage){
-  const block=element('section','pa-lean-statement');block.dataset.leanPassage=passage.htmlAnchor;block.dataset.leanName=d.name;
+  const block=element('section','pa-lean-statement');block.dataset.leanPassage=passage.htmlAnchor;block.dataset.leanName=d.name;if(d.termGraph===false)block.id='lean-'+passage.id+'-'+d.name;
   const label=element('h4','',d.name);block.append(label);
+  if(d.module)block.append(element('p','pa-lean-context',d.module+'.lean · kernel check passed · statement header only'));
   const code=element('div','pa-lean-lines');code.setAttribute('aria-label',d.short+' statement source lines');
   for(const line of d.lines){
-   const link=element('a','pa-lean-line');link.href=graphUrl(d.short);link.dataset.sourceLine=line.number;
-   link.title='Crossing.lean line '+line.number+' · open '+d.short+' in the graph';
+   const link=element('a','pa-lean-line');link.href=graphUrl(d,passage);link.dataset.sourceLine=line.number;
+   link.title=(d.module||'Crossing')+'.lean line '+line.number+' · '+(d.termGraph===false?'view statement source':'open in the proof graph');
    const number=element('span','pa-lean-number',line.number);number.setAttribute('aria-hidden','true');
-   link.setAttribute('aria-label','Open '+d.short+' in proof graph · line '+line.number+': '+line.text);link.append(number,element('code','',line.text));code.append(link);
+   link.setAttribute('aria-label','Open '+d.short+(d.termGraph===false?' statement source':' in proof graph')+' · line '+line.number+': '+line.text);link.append(number,element('code','',line.text));code.append(link);
    link.addEventListener('mouseenter',()=>highlightPair(passage.htmlAnchor,d.name));link.addEventListener('focus',()=>highlightPair(passage.htmlAnchor,d.name));
   }
   block.append(code);return block;
@@ -78,19 +81,25 @@
   await Promise.all([
    window.PROOF_ATLAS_ARTICLE_INDEX?null:loadScript('/public/data/proof-atlas/crossing-article-index.js?v=2'),
    window.PROOF_ATLAS_DECLARATIONS?null:loadScript('/public/data/proof-atlas/crossing-declarations.js'),
-   window.PROOF_ATLAS_ARTICLE_LINES?null:loadScript('/public/data/proof-atlas/crossing-article-lines.js?v=1')
+   window.PROOF_ATLAS_ARTICLE_LINES?null:loadScript('/public/data/proof-atlas/crossing-article-lines.js?v=1'),
+   window.PROOF_ATLAS_ARTICLE_COVERAGE?null:loadScript('/public/data/proof-atlas/article-coverage.js?v=1')
   ]);
   const index=window.PROOF_ATLAS_ARTICLE_INDEX,data=window.PROOF_ATLAS_ARTICLE_LINES,declarations=window.PROOF_ATLAS_DECLARATIONS;
+  const coverage=window.PROOF_ATLAS_ARTICLE_COVERAGE;
   const byName=new Map(data.declarations.map(d=>[d.name,d])),published=new Map(declarations.nodes.map(d=>[d.name,d]));
   const normalize=s=>s.trim().replace(/\s+/g,' ');
   const valid=data.format==='ProofAtlasArticleLines/1'&&data.articleSha256===paper.dataset.sourceSha256&&index.source.sha256===data.articleSha256&&index.passages.every(p=>document.getElementById(p.htmlAnchor)&&p.declarations.every(name=>{
    const d=byName.get(name),original=published.get(name);return d&&original&&d.lines[0].number===original.line&&d.lines.every((l,i)=>l.number===original.line+i)&&normalize(d.lines.map(l=>l.text).join(' '))===normalize(original.kind+' '+original.statement);
   }));
-  if(!valid)throw Error('Comparison data do not match this article and its published Lean statements. The article remains available.');
+  const coverageValid=coverage.format==='ProofAtlasArticleCoverage/1'&&coverage.articleSha256===paper.dataset.sourceSha256&&coverage.statements.length===9&&coverage.statements.every(r=>document.getElementById(r.htmlAnchor)&&['partial','not-formalized'].includes(r.status)&&r.declarations.every(d=>coverage.declarations.some(n=>n.name===d.name&&n.kernelCheck==='PASS')))&&coverage.declarations.every(d=>d.lines.length&&d.lines.every((l,i)=>l.number===d.lines[0].number+i)&&d.axioms.every(a=>['propext','Classical.choice','Quot.sound'].includes(a)));
+  if(!valid||!coverageValid)throw Error('Comparison data do not match this article and its published Lean statements. The article remains available.');
   const note=element('div','pa-comparison-note');
-  note.append(element('p','','Six indexed passages · ten declarations. Source lines retain their original numbers; the correspondence applies to whole statements. Other article passages are not yet linked.'));
-  note.append(element('p','pa-lean-context','Crossing.lean · namespace CrossingData · C : CrossingData. Theorem proof bodies are available as terms in Proof Atlas.'));
-  const jump=element('a','','Go to the first linked passage ↓');jump.href='#passage-phase-equation';note.append(jump);paper.prepend(note);
+  note.append(element('p','','All nine numbered statements audited: five have partial, conditional Lean counterparts; four remain unformalized. Source lines are statement headers, not a certification of every article sentence.'));
+  note.append(element('p','pa-lean-context','Published 7 October snapshot · fifteen modules freshly rebuilt with Lean 4.33.1. The new excerpts cover 39 additional declarations. Only the crossing proof term graph is released; other connection nodes link to their checked statement source.'));
+  const jump=element('a','','Browse statement coverage ↓');jump.href='#pa-statement-coverage';note.append(jump);paper.prepend(note);
+  const inventory=element('section','pa-coverage-inventory');inventory.id='pa-statement-coverage';inventory.append(element('h2','','Lean coverage of every statement'));
+  const list=element('ul','');coverage.statements.forEach(r=>{const item=element('li',''),link=element('a','',r.title);link.href='#'+r.htmlAnchor;item.append(link,element('span','pa-coverage-status',r.status==='partial'?'Partial · conditional':'Not formalized'));list.append(item);});inventory.append(list);note.append(inventory);
+  const evidence=element('a','','Read the source and check audit ↗');evidence.href='/research/proof-atlas/article-coverage-audit.json';note.append(evidence);
   const rows=new Map();
   for(const passage of index.passages){
    const target=document.getElementById(passage.htmlAnchor),block=target.closest('p')||target;
@@ -116,6 +125,27 @@
    target.addEventListener('focus',()=>{if(requested==='compare')highlightPair(passage.htmlAnchor);});
    target.addEventListener('click',()=>{if(requested==='compare')highlightPair(passage.htmlAnchor);});
   }
+  function clauses(parent,label,items){if(!items.length)return;parent.append(element('h4','',label));const ul=element('ul','');items.forEach(t=>ul.append(element('li','',t)));parent.append(ul);}
+  for(const record of coverage.statements){
+   const target=document.getElementById(record.htmlAnchor),overview=element('section','pa-coverage-panel');overview.dataset.coverageStatement=record.id;overview.dataset.coverageStatus=record.status;
+   overview.append(element('h3','',record.title),element('p','pa-coverage-status',record.status==='partial'?'Partial coverage · conditional theorems checked':'Not formalized in this Lean snapshot'));
+   if(record.id==='crossing'){
+    clauses(overview,'Checked counterparts',record.covered);clauses(overview,'Explicit hypotheses',record.assumptions);clauses(overview,'Still outside Lean',record.missing);
+    target.querySelector('.pa-row-lean').append(overview);continue;
+   }
+   const row=element('div','pa-aligned-row'),prose=element('div','pa-row-prose'),lane=element('div','pa-row-connections'),lean=element('aside','pa-row-lean');
+   lean.setAttribute('aria-label','Coverage and checked Lean counterparts for '+record.title);target.before(row);prose.append(target);lean.append(overview);row.append(prose,lane,lean);
+   target.dataset.leanMatch='true';target.addEventListener('mouseenter',()=>{if(requested==='compare')highlightPair(record.htmlAnchor);});target.addEventListener('focus',()=>{if(requested==='compare')highlightPair(record.htmlAnchor);});
+   const headers=record.declarations.map(d=>coverage.declarations.find(n=>n.name===d.name));
+   const entry={row,passages:[{passage:record,headers}]};graphRows.push(entry);
+   headers.forEach((d,i)=>{const code=statement(d,record);if(i<2)overview.append(code);else{const more=element('details','pa-more-statement');more.append(element('summary','',d.name),code);more.addEventListener('toggle',()=>{accessibleScrollRegions();drawGraphs();});overview.append(more);}});
+   clauses(overview,'Checked counterparts',record.covered);clauses(overview,'Explicit hypotheses',record.assumptions);clauses(overview,'Still outside Lean',record.missing);
+   const scope=element('p','pa-lean-context','Original source lines · research revision '+coverage.researchRevision.slice(0,12)+'. Proof bodies and term graphs for these declarations are not published here.');if(headers.length)overview.append(scope);
+  }
+  const support=coverage.declarations.find(d=>d.name==='JacobiCore.toJacobiFull');
+  const app=document.getElementById('app:lean'),supportRow=element('div','pa-aligned-row'),supportProse=element('div','pa-row-prose'),supportLane=element('div','pa-row-connections'),supportAside=element('aside','pa-row-lean');supportAside.setAttribute('aria-label','Checked reduction of the Jacobi hypothesis surface');
+  const supportPassage={id:'hypothesis-reduction',htmlAnchor:'app:lean'};supportAside.append(element('h3','','Hypothesis reduction'),statement(support,supportPassage),element('p','pa-lean-context','JacobiCore.toJacobiFull constructs the 31-field structure from 13 hypotheses. Existence of the Jacobi functions and the first positive cn zero remains assumed. The counting theorems retain their explicit finite-tangency parameters.'));
+  app.before(supportRow);supportProse.append(app);supportRow.append(supportProse,supportLane,supportAside);graphRows.push({row:supportRow,passages:[{passage:supportPassage,headers:[support]}]});
   prepared=true;
   const observer=new ResizeObserver(drawGraphs);observer.observe(paper);graphRows.forEach(e=>observer.observe(e.row));
  }
@@ -136,7 +166,7 @@
   document.body.dataset.paReadingMode=value;
   toolbar.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.paReading===value)));
   paper.querySelectorAll('[data-lean-match]').forEach(n=>{n.tabIndex=value==='compare'?0:-1;});
-  status.textContent=value==='compare'?'Article ↔ Lean · 6 linked passages':'Centered reading';
+  status.textContent=value==='compare'?'Article ↔ Lean · 9 statements audited':'Centered reading';
   if(writeUrl){const url=new URL(location.href);if(value==='compare')url.searchParams.set('view','lean');else url.searchParams.delete('view');history.replaceState(null,'',url);}
   offset();requestAnimationFrame(()=>{if(anchor)window.scrollBy(0,anchor.getBoundingClientRect().top-anchorTop);accessibleScrollRegions();drawGraphs();});
  }

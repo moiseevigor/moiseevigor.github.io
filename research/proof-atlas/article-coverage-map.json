@@ -1,0 +1,311 @@
+{
+  "researchRevision": "5c304fd9957eafc781969703b4bcc75abe0c0201",
+  "statements": [
+    {
+      "id": "identities",
+      "number": "3.1",
+      "htmlAnchor": "lem:identities",
+      "title": "Lemma 3.1 · Identities",
+      "status": "partial",
+      "declarations": [
+        {
+          "module": "Identities",
+          "name": "JacobiData.collapse_beta"
+        },
+        {
+          "module": "Identities",
+          "name": "JacobiData.collapse_alpha"
+        },
+        {
+          "module": "Identities",
+          "name": "JacobiData.collapse_diff"
+        },
+        {
+          "module": "Identities",
+          "name": "JacobiData.hasDerivAt_f1_div_c"
+        },
+        {
+          "module": "Identities",
+          "name": "JacobiData.hasDerivAt_β1_div_c"
+        },
+        {
+          "module": "Identities",
+          "name": "JacobiData.hasDerivAt_α1_div_d"
+        },
+        {
+          "module": "Identities",
+          "name": "JacobiData.hasDerivAt_Γ"
+        },
+        {
+          "module": "Identities",
+          "name": "JacobiData.β1_deriv_eq_Γ"
+        },
+        {
+          "module": "Monotone",
+          "name": "JacobiInit.Γ_zero"
+        },
+        {
+          "module": "Monotone",
+          "name": "JacobiInit.Γ_pos"
+        },
+        {
+          "module": "ZerosF1",
+          "name": "JacobiPeriodic.exists_unique_f1_zero"
+        },
+        {
+          "module": "ZerosF1",
+          "name": "JacobiPeriodic.f1_sign_before"
+        },
+        {
+          "module": "ZerosF1",
+          "name": "JacobiPeriodic.f1_sign_after"
+        },
+        {
+          "module": "Zeros",
+          "name": "JacobiPeriodic.exists_unique_β1_zero"
+        },
+        {
+          "module": "CellCount",
+          "name": "JacobiFull.signed_α1_div_d_strictAntiOn"
+        },
+        {
+          "module": "CellCount",
+          "name": "JacobiFull.α1_zero_unique"
+        },
+        {
+          "module": "CellCount",
+          "name": "JacobiPeriodic.α1_even"
+        }
+      ],
+      "covered": [
+        "Coefficient collapse, the three quotient derivatives and the Γ identity.",
+        "Existence, uniqueness and signs of f₁/β₁ zeros; monotonicity and uniqueness for α₁ and its even-period value."
+      ],
+      "missing": [
+        "Simplicity of the α₁ zero and identification of K = 2E with a unique numerical modulus k₀ are not proved in this snapshot."
+      ],
+      "assumptions": [
+        "Jacobi differential rules, initial/period data and positivity hypotheses are supplied through the Jacobi structures."
+      ]
+    },
+    {
+      "id": "riccati",
+      "number": "3.2",
+      "htmlAnchor": "lem:riccati",
+      "title": "Lemma 3.2 · Riccati slope bound",
+      "status": "partial",
+      "declarations": [
+        {
+          "module": "Riccati",
+          "name": "JacobiData.a_deriv_form"
+        },
+        {
+          "module": "Riccati",
+          "name": "JacobiData.b_deriv_form"
+        },
+        {
+          "module": "Riccati",
+          "name": "JacobiData.hasDerivAt_z"
+        },
+        {
+          "module": "Riccati",
+          "name": "JacobiData.T1_mul_T2"
+        },
+        {
+          "module": "Riccati",
+          "name": "JacobiData.T1_T2_same_sign"
+        },
+        {
+          "module": "Riccati",
+          "name": "JacobiData.slope_bound_abs"
+        },
+        {
+          "module": "Riccati",
+          "name": "JacobiData.z_eq_neg_beta_div_ell"
+        },
+        {
+          "module": "SignedBracket",
+          "name": "SBracket.one_le_ε_deriv_u"
+        }
+      ],
+      "covered": [
+        "The Riccati pair, z derivative, T₁T₂ product, common sign and AM–GM slope inequality.",
+        "The oriented phase-lift derivative bound on signed brackets."
+      ],
+      "missing": [
+        "The displayed exact square-gap formula for |u′| − 1 and its equality-case characterization are not exported as matching theorems in this snapshot."
+      ],
+      "assumptions": [
+        "Nonzero sn/dn and q/ℰ denominators, common sign and bracket conditions remain explicit in the theorem parameters."
+      ]
+    },
+    {
+      "id": "crossing",
+      "number": "3.3",
+      "htmlAnchor": "lem:crossing",
+      "title": "Lemma 3.3 · Crossing principle",
+      "status": "partial",
+      "declarations": [],
+      "covered": [
+        "The counting clause is linked in the phase, counting, bracket and arc passages below."
+      ],
+      "missing": [
+        "Analytic zero orders and finiteness of tangency phases are not proved by Crossing.crossing."
+      ],
+      "assumptions": [
+        "CrossingData assumes continuity, endpoint values and strict branch monotonicity; the article derives these analytically."
+      ]
+    },
+    {
+      "id": "first",
+      "number": "3.4",
+      "htmlAnchor": "thm:first",
+      "title": "Theorem 3.4 · Exact first conjugate time",
+      "status": "partial",
+      "declarations": [
+        {
+          "module": "BeforeFirst",
+          "name": "JacobiFull.exact_first_time"
+        },
+        {
+          "module": "BeforeFirst",
+          "name": "JacobiFull.first_time_complete"
+        },
+        {
+          "module": "BeforeFirst",
+          "name": "JacobiFull.J2_pos_before_p0"
+        }
+      ],
+      "covered": [
+        "Exactly one reduced-Jacobian zero in [p₀,p₁] and in (0,p₁]; positivity excludes zeros before p₀."
+      ],
+      "missing": [
+        "Continuity and phase extrema of p* are explicitly outside the published Lean scope.",
+        "The geometric identification of conjugate/cut time and the scale t = 2kp are not certified by these scalar root-counting declarations."
+      ],
+      "assumptions": [
+        "exact_first_time and first_time_complete require hfin: finite tangencies on the first bracket.",
+        "JacobiFull hypotheses; the reduced base is constructed by JacobiCore.toJacobiFull."
+      ]
+    },
+    {
+      "id": "cells",
+      "number": "4.1",
+      "htmlAnchor": "thm:cells",
+      "title": "Theorem 4.1 · Conjugate times in every cell",
+      "status": "partial",
+      "declarations": [
+        {
+          "module": "CellCount",
+          "name": "JacobiFull.cell_roots"
+        },
+        {
+          "module": "CellCount",
+          "name": "JacobiFull.two_per_cell_of_ne"
+        },
+        {
+          "module": "CellCount",
+          "name": "JacobiFull.eL_eq_eR_iff"
+        },
+        {
+          "module": "CellCount",
+          "name": "JacobiFull.coincide_imp"
+        },
+        {
+          "module": "LeftBracket",
+          "name": "JacobiFull.left_exact_time"
+        },
+        {
+          "module": "RightBracket",
+          "name": "JacobiFull.right_exact_time"
+        },
+        {
+          "module": "BeforeFirst",
+          "name": "JacobiFull.J2_even_eq_zero_iff"
+        },
+        {
+          "module": "BeforeFirst",
+          "name": "JacobiFull.roots_ncard"
+        },
+        {
+          "module": "SignedTime",
+          "name": "SBracket.J2_eq_zero_iff"
+        },
+        {
+          "module": "SignedTime",
+          "name": "SBracket.exact_time"
+        }
+      ],
+      "covered": [
+        "One zero on each closed bracket, exhaustion of the half-open cell, two distinct roots for K ≠ 2E, bracket contact iff K = 2E and the necessary location of coincident roots.",
+        "The phase of an even-period zero and the cumulative 2N root count."
+      ],
+      "missing": [
+        "Simplicity, interior tangency zero orders and the quartic order of the coincident root are not formalized.",
+        "The unique critical modulus k₀ is not identified; Lean uses the algebraic condition K = 2E."
+      ],
+      "assumptions": [
+        "The counting declarations require finite tangencies on the left and right brackets (hL/hR or hfin).",
+        "Lean cell index m corresponds to article n = m + 1. JacobiFull is conditional data, not a construction of SE(2) geodesics."
+      ]
+    },
+    {
+      "id": "coincident",
+      "number": "4.2",
+      "htmlAnchor": "rem:coincident",
+      "title": "Remark 4.2 · Coincident zero order",
+      "status": "not-formalized",
+      "declarations": [],
+      "covered": [],
+      "missing": [
+        "The quartic expansion and exact order four are not formalized in this snapshot. Cell-counting theorems do not establish this zero order."
+      ],
+      "assumptions": []
+    },
+    {
+      "id": "floquet",
+      "number": "5.1",
+      "htmlAnchor": "thm:floquet",
+      "title": "Theorem 5.1 · Floquet form and large-index law",
+      "status": "not-formalized",
+      "declarations": [],
+      "covered": [],
+      "missing": [
+        "Both the Floquet determinant identity and the large-index asymptotic law are outside the published Lean scope (Appendix A excludes Section 5)."
+      ],
+      "assumptions": []
+    },
+    {
+      "id": "late-folds",
+      "number": "5.2",
+      "htmlAnchor": "remark-late-folds",
+      "title": "Remark 5.2 · Late conjugate points are folds",
+      "status": "not-formalized",
+      "declarations": [],
+      "covered": [],
+      "missing": [
+        "This is a claim from the companion manuscript, not a theorem of these fifteen Lean modules. No formal proof of the stated late-fold conclusion is indexed."
+      ],
+      "assumptions": []
+    },
+    {
+      "id": "separatrix",
+      "number": "5.3",
+      "htmlAnchor": "rem:separatrix",
+      "title": "Remark 5.3 · Separatrix limits",
+      "status": "not-formalized",
+      "declarations": [],
+      "covered": [],
+      "missing": [
+        "The k → 1 limits and their rate are outside the published Lean scope."
+      ],
+      "assumptions": []
+    }
+  ],
+  "supportDeclarations": [
+    {
+      "module": "Reduction",
+      "name": "JacobiCore.toJacobiFull"
+    }
+  ]
+}

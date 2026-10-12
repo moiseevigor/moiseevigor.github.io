@@ -74,6 +74,7 @@ def build():
             if number:c[2].insert(0,{'t':'Str','c':number+'. '})
         if t=='Div' and set(c[0][1])&{'lemma','theorem','remark'}:
             kind,number=statements[statement_index];statement_index+=1
+            if kind=='remark' and number=='5.2':c[0][0]='remark-late-folds'
             for inline in c[1][0]['c']:
                 if inline['t']=='Strong':inline['c']=[{'t':'Str','c':kind.title()+' '+number}];break
         if t=='Link':
@@ -133,10 +134,10 @@ math: true
 reference_style: bibliography
 description: "Distill web edition of the published SE(2) rotating-geodesic manuscript, preserving mathematical statements, proofs, figures, references and exact Lean correspondence anchors."
 ---
-<link rel="stylesheet" href="/public/css/proof-atlas-article.css?v=2">
+<link rel="stylesheet" href="/public/css/proof-atlas-article.css?v=3">
 '''
     toolbar='''<nav class="pa-reading-toolbar" aria-label="Article reading mode" hidden><div class="pa-reading-options" role="group" aria-label="Reading layout"><button type="button" data-pa-reading="article" aria-pressed="true">Article</button><button type="button" data-pa-reading="compare" aria-pressed="false">Article + Lean</button></div><span id="pa-reading-status" role="status">Centered reading</span></nav>'''
-    content=front+'{% raw %}'+toolbar+'<div class="l-body pa-paper" data-source-sha256="'+source_hash+'">'+introduction+toc+coverage+rendered+'</div>{% endraw %}\n<script src="/public/js/proof-atlas-article.js?v=2" defer></script>\n'
+    content=front+'{% raw %}'+toolbar+'<div class="l-body pa-paper" data-source-sha256="'+source_hash+'">'+introduction+toc+coverage+rendered+'</div>{% endraw %}\n<script src="/public/js/proof-atlas-article.js?v=3" defer></script>\n'
     class Audit(HTMLParser):
         def __init__(self):super().__init__();self.ids=[];self.targets=[];self.image_count=0
         def handle_starttag(self,tag,attrs):
