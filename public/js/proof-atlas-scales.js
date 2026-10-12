@@ -103,20 +103,29 @@
       return;
     }
     for(let i=0;i<n;i++){
-      const [name,kind]=all[i], x=50+(i+.5)*(462/n),y=155;
+      const [name,kind]=all[i];
+      const crowded=n>3;
+      // Five-field let expressions need two rows; a single row would cause
+      // port rectangles to overlap and create misleading visual connections.
+      const row=crowded?(i<3?0:1):0;
+      const inRow=crowded?(row===0?Math.min(n,3):n-3):n;
+      const pos=crowded?(row===0?i:i-3):i;
+      const x=crowded?(280+(pos-(inRow-1)/2)*(inRow===3?164:174)):(50+(i+.5)*(462/n));
+      const y=crowded?(row===0?142:201):155;
+      const boxWidth=crowded?130:Math.min(144,462/n+26);
       const solid=kind.includes('expression');const color=solid?'#237f7d':'#c19b5f';
-      const sx=281,sy=62,cy=y-16;
+      const sx=281,sy=62,cy=y-15;
       const kx=281+(x-281)*.45;
-      svg.appendChild(svgNode('path',{d:'M'+sx+' '+sy+' C'+sx+' 109 '+kx+' 104 '+x+' '+cy,
+      svg.appendChild(svgNode('path',{d:'M'+sx+' '+sy+' C'+sx+' 92 '+kx+' 96 '+x+' '+cy,
         fill:'none',stroke:color,'stroke-width':solid?2:1.8,
         'stroke-dasharray':solid?'none':'5 4'}));
-      svg.appendChild(svgNode('rect',{x:x-72,y:y-15,width:144,height:43,rx:7,
+      svg.appendChild(svgNode('rect',{x:x-boxWidth/2,y:y-15,width:boxWidth,height:39,rx:7,
         fill:solid?'#e3f3ee':'#f6ede2',stroke:color,'stroke-width':1.2}));
-      svg.appendChild(svgNode('text',{x,y:y+2,'text-anchor':'middle','font-size':Math.min(13,n>3?11.5:13),fill:'#254956','font-weight':650},name.split(' : ')[0]));
-      svg.appendChild(svgNode('text',{x,y:y+18,'text-anchor':'middle','font-size':10,fill:'#56717b'},solid?'child Expr':kind));
+      svg.appendChild(svgNode('text',{x,y:y+1,'text-anchor':'middle','font-size':crowded?11:13,fill:'#254956','font-weight':650},name.split(' : ')[0]));
+      svg.appendChild(svgNode('text',{x,y:y+17,'text-anchor':'middle','font-size':9.5,fill:'#56717b'},solid?'child Expr':kind));
     }
-    svg.appendChild(svgNode('text',{x:280,y:233,'text-anchor':'middle','font-size':12,fill:'#617d7b'},
-      expr.length+' structural Expr '+(expr.length===1?'child':'children')+' · '+other.length+' annotation/reference '+(other.length===1?'field':'fields')));
+    svg.appendChild(svgNode('text',{x:280,y:248,'text-anchor':'middle','font-size':11.5,fill:'#617d7b'},
+      expr.length+' Expr '+(expr.length===1?'child':'children')+' · '+other.length+' reference / annotation '+(other.length===1?'field':'fields')));
   }
   function drawModule(id){
     const svg=$('pa-scale-module');svg.replaceChildren();
@@ -134,7 +143,7 @@
       'Collapsing must preserve the context, types and references'));
   }
   function drawMeaning(id){
-    const svg=$('pa-scale-meaning');svg.replaceChildren();
+    const svg=$('pa-scale-meaning-diagram');svg.replaceChildren();
     const title=defaultLabel[id]||id;
     svg.appendChild(svgNode('rect',{x:31,y:35,width:205,height:85,rx:8,fill:'#e3f0e9',stroke:'#6d9992'}));
     svg.appendChild(svgNode('text',{x:133,y:70,'text-anchor':'middle',fill:'#244f55','font-size':14,'font-weight':650},title));
