@@ -6,7 +6,7 @@ permalink: /projects/proof-atlas/
 page_class: proof-atlas-page
 description: "Explore a real 7,288-expression Lean proof as an interactive graph, then compare its syntactic shape with its mathematical explanation."
 ---
-<link rel="stylesheet" href="/public/css/proof-atlas.css?v=7">
+<link rel="stylesheet" href="/public/css/proof-atlas.css?v=8">
 <main class="pa-page" id="proof-atlas">
   <section class="pa-hero" aria-labelledby="pa-title">
     <div class="pa-eyebrow"><span class="pa-orbit" aria-hidden="true"></span> Research program / Proof Atlas · 2026</div>
@@ -161,6 +161,7 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
         <article class="pa-scale-panel">
           <div class="pa-scale-panel-label"><span>02 / GRAPH</span><h4>Typed connections</h4></div>
           <div class="pa-scale-panel-inset"><svg id="pa-scale-graph" viewBox="0 0 560 256" role="img" aria-label="Expression constructor with child expression links and nonchild attributes"></svg></div>
+          <div id="pa-scale-graph-fields" class="pa-scale-graph-fields" aria-label="Exact constructor fields"></div>
           <p id="pa-scale-graph-note">An expression graph distinguishes child expressions from references.</p>
         </article>
         <article class="pa-scale-panel">
@@ -176,7 +177,7 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
       </div>
       <p class="pa-scale-scope" id="pa-scale-scope">The proposed diagrams are not proof certificates.</p>
       <div class="pa-scale-extended">
-        <a href="/projects/proof-atlas/grammar/">Open the complete 12-constructor diagram explorer ↗</a>
+        <a href="/projects/proof-atlas/grammar/">Explore terms, tactics, commands and universes ↗</a>
         <a href="/projects/proof-atlas/language/">See all 12 illustrated rules together ↗</a>
       </div>
     </div>
@@ -212,6 +213,6 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
 <script src="/public/data/proof-atlas/crossing-structure.js" defer></script>
 <script src="/public/data/proof-atlas/crossing-declarations.js" defer></script>
 <script src="/public/data/proof-atlas/lean-expr-grammar.js" defer></script>
-<script src="/public/js/proof-atlas-scales.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-scales.js?v=2" defer></script>
 <script src="/public/js/proof-atlas.js?v=10" defer></script>
 <script src="/public/js/proof-atlas-reader.js?v=1" defer></script>
