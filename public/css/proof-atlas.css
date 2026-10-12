@@ -514,3 +514,47 @@ html[data-theme="dark"] .pa-links a small{color:#adc1c6}
   .pa-branch-hud{left:8px;bottom:8px;width:min(185px,54%);padding:9px}
   .pa-branch-hud p{display:none}
 }
+
+
+.pa-reader[hidden]{display:none!important}
+.pa-language-hero,.pa-language-bridge,.pa-language-gallery,.pa-language-foot{max-width:1320px;margin:0 auto;padding:68px 6%;}
+.pa-language-hero{max-width:none;background:#edece4;padding-top:80px;padding-bottom:75px}
+.pa-language-hero>*{max-width:1140px;margin-left:auto;margin-right:auto}
+.pa-language h1{font:400 clamp(45px,5vw,74px)/1.19 Merriweather,Georgia,serif;letter-spacing:-.052em;color:#1a3847;margin:19px auto 25px;}
+.pa-language h1 em{font-weight:300;color:#2e7774}
+.pa-language-hero p{font-size:21px;line-height:1.7;color:#526670;font-weight:300;}
+.pa-language h2{font:400 clamp(27px,3vw,42px)/1.35 Georgia,serif;color:#1f3e4e;letter-spacing:-.035em;}
+.pa-language-bridge{padding-bottom:22px}
+.pa-language-levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px;margin-top:25px}
+.pa-language-levels>div{border-top:2px solid #408b8a;padding-top:15px}
+.pa-language-levels span{font-size:11px;font-weight:800;letter-spacing:.13em;color:#44767a}
+.pa-language-levels h3{font:700 21px/1.3 "Source Sans 3",sans-serif;color:#2e4a54;margin:10px 0}
+.pa-language-levels p{font-size:16px;line-height:1.65;color:#546974}
+.pa-language-levels code{font:13px/1.4 "JetBrains Mono",monospace}
+.pa-language-gallery{padding-top:40px}
+.pa-language-intro{max-width:850px;font-size:18px;line-height:1.75;color:#526a70;margin-bottom:24px}
+.pa-language-filters{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0 31px}
+.pa-language-filters button{font:700 13px/1.4 "Source Sans 3",sans-serif;border:1px solid #b9d0cb;background:#edf3ef;border-radius:4px;color:#36626d;padding:8px 13px;cursor:pointer}
+.pa-language-filters button[aria-pressed="true"]{background:#2d696b;color:#fff;border-color:#2d696b}
+.pa-language-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.pa-language-card{background:#fff;border:1px solid #d7e1dd;padding:23px;border-radius:5px;min-width:0;box-shadow:0 2px 8px #1838470b;}
+.pa-language-card-meta{font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:#63898c;margin-bottom:9px}
+.pa-language-card h3{font:600 20px/1.35 "Source Sans 3",sans-serif;color:#1e4a58;margin:0 0 17px}
+.pa-language-card svg{display:block;width:100%;height:auto;margin:0 0 18px}
+.pa-language-card p{font-size:15px;line-height:1.7;color:#405762;margin:0 0 17px}
+.pa-language-card .pa-language-caption{font:700 10px/1.5 "Source Sans 3",sans-serif;color:#5c7c83;letter-spacing:.09em;text-transform:uppercase}
+.pa-language-example{font:13px/1.6 "JetBrains Mono",ui-monospace,monospace;background:#183343;color:#e9edf1;padding:13px 12px;white-space:pre-wrap;overflow-wrap:anywhere;border-radius:3px;margin:7px 0 15px}
+.pa-language-card p.pa-language-caution{font-size:13px;color:#7a684c;border-left:2px solid #c5a973;padding-left:11px;}
+.pa-language-under{font-size:12px;color:#648184;border-top:1px solid #d7e0dd;padding-top:12px;line-height:1.5}
+.pa-language-foot{border-top:1px solid #d3dedc;max-width:1140px;}
+.pa-language-foot p{font-size:17px;color:#516972;line-height:1.8;}
+@media(max-width:1100px){.pa-language-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}}
+@media(max-width:710px){.pa-language-grid,.pa-language-levels{grid-template-columns:1fr}.pa-language-card{padding:17px}.pa-language-hero{padding:50px 6%}}
+html[data-theme="dark"] .pa-language-hero{background:#1e343d}
+html[data-theme="dark"] .pa-language-hero h1,html[data-theme="dark"] .pa-language h2{color:#e8eeee}
+html[data-theme="dark"] .pa-language-hero p,html[data-theme="dark"] .pa-language-intro,
+html[data-theme="dark"] .pa-language-levels p,html[data-theme="dark"] .pa-language-foot p{color:#b9cccf}
+html[data-theme="dark"] .pa-language-card{background:#233d47;border-color:#365864}
+html[data-theme="dark"] .pa-language-card h3{color:#f0f4f5}
+html[data-theme="dark"] .pa-language-card p{color:#d1e0df}
+html[data-theme="dark"] .pa-language-card p.pa-language-caution{color:#dec79f}
