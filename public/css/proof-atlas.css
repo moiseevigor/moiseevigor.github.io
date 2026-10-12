@@ -385,3 +385,17 @@ html[data-theme="dark"] .pa-links a small{color:#adc1c6}
 .pa-dot-binder{background:#e4b468}
 .pa-dot-lit{background:#d89c83}
 .pa-syntax-legend .pa-legend-note{color:#ddb980;font-style:italic;}
+
+
+.pa-terminal-pager{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:6px;padding:9px 0 15px;
+}
+.pa-terminal-pager[hidden]{display:none!important}
+.pa-terminal-pager button{
+  padding:5px 6px!important;font-size:10px!important;line-height:1.3;
+  background:#214556;border:1px solid #46717b;border-radius:3px;
+  color:#d0e8e9;white-space:normal;flex:0 1 40%;
+}
+.pa-terminal-pager button:disabled{opacity:.38;cursor:default}
+.pa-terminal-pager span{text-align:center;color:#a5cbd0;font-size:10px;white-space:nowrap}
