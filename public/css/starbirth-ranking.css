@@ -1,0 +1,8 @@
+.sb-ranking .sb-ledger table{min-width:0;table-layout:fixed}
+.sb-ranking .sb-ledger td,.sb-ranking .sb-ledger th{overflow-wrap:anywhere}
+.sb-ranking-comparison td:first-child,.sb-ranking-comparison th:first-child{width:48%!important}
+.sb-ranking-comparison td:nth-child(2),.sb-ranking-comparison th:nth-child(2){width:16%}
+.sb-ranking-comparison td:last-child,.sb-ranking-comparison th:last-child{width:36%}
+.sb-ranking-denominator td:first-child,.sb-ranking-denominator th:first-child{width:40%!important}
+.sb-ranking-denominator td:not(:first-child),.sb-ranking-denominator th:not(:first-child){width:20%}
+@media(max-width:600px){.sb-ranking .sb-ledger table{font-size:12px;line-height:1.6}.sb-ranking .sb-ledger td,.sb-ranking .sb-ledger th{padding:.8rem .4rem!important}}

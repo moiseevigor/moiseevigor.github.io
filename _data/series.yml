@@ -261,15 +261,15 @@
   subtitle: "Embedded activity in apparently prestellar Hi-GAL clumps: reviewed evidence, multiple survey views, and the limits of birth detection."
   status: active
   question: "Can shared infrared, variability and molecular representations improve embedded-protostar candidate ranking over strong physical baselines at equal review cost?"
-  outcome: "Historical evidence: 12.8% have a 22/24 μm counterpart. Physical membership and the hidden fraction remain unresolved; no confirmed birth or validated detector. The earlier occurrence comparison remains unmeasured: 939 profile matches, but only 333 pass its frozen uncertainty gate. The current 19,328-clump ledger is data readiness; no new model fit or independent detector validation."
-  frontier: "Freeze missing-view and association/error contracts and establish an independent physical evaluation route; previously consumed checks are not fresh truth. Preserve the failed 333/800 control gate."
+  outcome: "First retrospective ranking comparison: embedding 14/27 chemistry positives, nonlinear baseline 15/27, at equal 18 reviews; no gain demonstrated. All 19,328 sources and 19,066 unknown proxies retained. No confirmed birth or validated physical detector; the earlier 333/800 occurrence gate remains failed."
+  frontier: "Establish source ownership, complementary positive-case coverage and independent physical truth under a new prospective evidence protocol; zero qualifying positives have the registered temporal view. Preserve all failed gates."
   code: research/starbirth/
   verdicts:
     - { h: "Counterparts", v: confirmed, label: "catalogue association, not physical membership" }
     - { h: "Hidden fraction", v: pending, label: "control confounding unresolved" }
     - { h: "Image increment", v: refuted, label: "not demonstrated in the two reviewed checks" }
     - { h: "New comparison", v: pending, label: "frozen; insufficient uncertainty support; occurrence unmeasured" }
-    - { h: "Multiview ranking", v: pending, label: "data-readiness audit only; no model fitted or fresh physical validation" }
+    - { h: "Multiview ranking", v: refuted, label: "frozen retrospective benefit gate failed; no physical validation" }
   posts:
     - part: 1
       title: "Hidden protostars: a research program"
@@ -278,6 +278,10 @@
     - part: 2
       title: "Why matching dust clouds needs an error model"
       url: /astrophysics/2026/10/11/hidden-protostars-column-uncertainty/
+      status: published
+    - part: 3
+      title: "A shared embedding did not beat the stronger baseline"
+      url: /astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/
       status: published
 
 
