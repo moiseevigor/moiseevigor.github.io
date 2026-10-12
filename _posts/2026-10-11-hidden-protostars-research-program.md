@@ -129,6 +129,8 @@ A native GLIMPSE check now adds one concrete positional lead: an already catalog
 
 The same fixed counterparts now have an independently checked colour diagnosis: measured [3.6]−[4.5] colours are **−0.089, +0.134 and −0.011 mag**. None supplies robust necessary red-colour support under the declared published component, and all three lack usable 8-micron photometry for the full four-band method. The 21/21 positional lead is real; youth remains unknown. Our clump chemistry ranks are not probabilities for that point source's evolutionary stage. [Read the comparator and source assessment](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#irac-colours).
 
+The native radio-position check now separates regional activity from a specific infrared point: historical maser **330.878-0.367** is **12.520″** from the first clump centre but **17.501″** from its best infrared counterpart. **0/3** fixed best points and **0/6** alternatives have a catalogue maser within the frozen one-arcsecond criterion. This limits point-specific interpretation; it does not establish starlessness, clump membership or a birth. [Read the radio context and coverage limit](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#radio-context).
+
 <h3 id="historical-week">The original control study: frozen and stopped</h3>
 
 <blockquote class="sb-goal">Determine whether nearby Hi-GAL clumps labelled prestellar and undetected at 70 μm contain an excess of compact mid-infrared sources compared with sightlines matched for dust column, sensitivity and crowding.</blockquote>

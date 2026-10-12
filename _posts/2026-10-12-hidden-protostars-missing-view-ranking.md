@@ -31,7 +31,7 @@ A representation can learn common patterns across surveys. The useful test is wh
 
 That result has a sharper limitation: **none of the 27 qualifying chemistry-positive cases has the registered temporal input view**. The learning procedure can handle a missing observation, but it cannot supply the absent observation. [Verified result](/public/data/starbirth/missing-view/results.md).
 
-<nav class="sb-jump" aria-label="On this page"><a href="#equal-cost">The comparison</a><a href="#learning">What learned without labels</a><a href="#coverage">The coverage gap</a><a href="#temporal-diagnosis">Why the temporal view is missing</a><a href="#native-counterparts">Three native counterpart cases</a><a href="#irac-colours">The physical-colour check</a><a href="#unknowns">The unknown denominator</a><a href="#next-evidence">Interpretation limits</a><a href="#evidence">Exact evidence</a></nav>
+<nav class="sb-jump" aria-label="On this page"><a href="#equal-cost">The comparison</a><a href="#learning">What learned without labels</a><a href="#coverage">The coverage gap</a><a href="#temporal-diagnosis">Why the temporal view is missing</a><a href="#native-counterparts">Three native counterpart cases</a><a href="#irac-colours">The physical-colour check</a><a href="#radio-context">Nearby radio activity</a><a href="#unknowns">The unknown denominator</a><a href="#next-evidence">Interpretation limits</a><a href="#evidence">Exact evidence</a></nav>
 
 <h2 id="equal-cost">The same eighteen reviews</h2>
 
@@ -202,6 +202,30 @@ The retained alternatives also contain **`SSTGLMC G353.4284-00.3731`** in the th
 Crucially, this source matches **0 / 6** supported visit medians and lies **4.490 arcseconds** from the clump centre. It is different from the blue best positional counterpart. We do not assign it that source's time-series measurements or replace the frozen source after readout. A red neighbour, a clump chemistry rank and an emitting source are different pieces of evidence. [Exact retained source, uncertainty and prior geometry](/public/data/starbirth/irac-colours/alternative-note.md).
 
 Download [the three system/comparator cards with every alternative](/public/data/starbirth/irac-colours/starbirth-ic-comparison-cards.json), [verified interpretation](/public/data/starbirth/irac-colours/results.md), [all available and missing colours](/public/data/starbirth/irac-colours/starbirth-ic-all-records.json), [independent verification](/public/data/starbirth/irac-colours/starbirth-ic-verification.json) and [protocol and exact source hashes](/public/data/starbirth/irac-colours/README.md). The 23 primary compact source exports bind research revision `106e2f842a903469f7529c54272cbf033509ba43`; five additive secondary-note exports bind `2d098311d6cb089455bc83bbad895fab635c8d8e`. **No new observations, model fit, physical stage, discovery or birth is established.**
+
+<h2 id="radio-context">Nearby radio activity belongs to a different position</h2>
+
+**Native-position check · 13 October 2026.** A historical radio maser record, **330.878-0.367**, lies **12.520 arcseconds** from the first dust-clump centre. But it is **17.501 arcseconds** from the best infrared counterpart, `SSTGLMC G330.8829-00.3661`. A region can contain a useful radio marker without that marker supporting the infrared point selected by a clump-level rank.
+
+The separately frozen comparison used original equatorial positions for **707** historical MMB catalogue records, the same three consumed cases and **all six** retained infrared Catalog alternatives. **0 / 3** fixed best points meets the declared one-arcsecond radio criterion; **0 / 6** alternatives has any catalogue maser position within that radius. The criterion required at least one of the three best points. It failed.
+
+<div class="sb-ledger" role="region" aria-label="Native radio-marker separations for the three fixed counterpart cases" tabindex="0" markdown="1">
+
+| Fixed best infrared record | Nearest catalogue maser | Point-to-maser separation |
+|:--|:--|--:|
+| `SSTGLMC G330.8829-00.3661` | `330.878-0.367` | **17.501″** |
+| `SSTGLMC G351.2258+00.6940` | `351.242+0.670` | **104.881″** |
+| `SSTGLMC G353.4273-00.3723` | `353.410-0.360` | **76.937″** |
+
+</div>
+
+The separate red alternative `SSTGLMC G353.4284-00.3731` is **81.837 arcseconds** from its nearest catalogue maser. It remains distinct from the blue temporal counterpart. **No close radio association is established, and absence of one does not establish starlessness.** This historical snapshot is not a complete census of modern masers. Positional agreement alone would not establish emitter ownership, clump membership, stellar stage or birth. Neither the nearby marker nor the infrared record is a new discovery.
+
+There is also a coverage limit: the first radio position falls just outside the earlier **12-arcsecond infrared query** centred on the clump. A counterpart outside that cone was not tested by the earlier selection. This is **post-read coverage context**, not a relaxed match radius or a substitute candidate. The 15/30-arcsecond context circles are not physical clump boundaries. No new infrared counterpart was acquired or assigned the existing time series.
+
+Independent recomputation verified **all 707 records and 6,363 angular pairs**, preserving literal coordinates, names, native flags and every alternative. It verifies the software geometry, not physical association probabilities. The frozen selection and historical MMB references are consumed evidence; no fresh representative physical validation was supplied. All earlier ranking, colour, cadence and uncertainty gates stay unchanged.
+
+Download [the verified source assessment](/public/data/starbirth/radio-context/results.md), [every nearest match and contextual pair](/public/data/starbirth/radio-context/starbirth-mmb-analysis-summary.json), [all native radio records](/public/data/starbirth/radio-context/radio_records.json.gz), [independent verification](/public/data/starbirth/radio-context/starbirth-mmb-verification-verification.json) and [frozen protocol, original catalogue, code and complete hashes](/public/data/starbirth/radio-context/README.md). The packet binds research revision `70c33bcc9017f994e1a51c2dfe8d150ef7614650`. **No new star, confirmed stellar birth or validated detector follows from this result.**
 
 <h2 id="unknowns">The full catalogue keeps the difficult denominator</h2>
 
