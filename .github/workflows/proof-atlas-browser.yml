@@ -4,6 +4,11 @@ on:
     branches: [master]
     paths:
       - 'public/js/proof-atlas.js'
+      - 'public/js/proof-atlas-reader.js'
+      - 'public/js/proof-atlas-term-reader.js'
+      - 'public/data/proof-atlas/crossing-terms.js'
+      - 'scripts/test-proof-atlas-subtree.cjs'
+      - 'scripts/test-proof-atlas-decoder.cjs'
       - 'public/js/proof-atlas-grammar.js'
       - 'public/js/proof-atlas-scales.js'
       - 'public/data/proof-atlas/lean-expr-grammar.js'
@@ -56,6 +61,12 @@ jobs:
           sleep 2
       - name: Browser regression — hub hover, geometry, responsiveness
         run: node scripts/test-proof-atlas-browser.cjs
+        env:
+          ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
+      - name: Verify actual-term decoder and selected subtree browser
+        run: |
+          node scripts/test-proof-atlas-decoder.cjs
+          node scripts/test-proof-atlas-subtree.cjs
         env:
           ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
       - name: Browser regression — complete Lean.Expr visual grammar

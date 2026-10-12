@@ -131,13 +131,7 @@ async function run(){
     check((await page.locator('#pa-reader-content .pr-code').textContent()).includes('∃ p'),
       'verified Lean declaration statement missing from reader');
     await page.screenshot({path:path.join(captures,'proof-reader-lean-statement.png')});
-    await page.locator('[data-pa-reader-tab="language"]').click();
-    check(await page.locator('.pr-syntax-card').count()===12,'not all twelve core expression rules are rendered');
-    check(await page.locator('.pr-syntax-card svg').count()===12,'missing visual circuit for one of twelve constructors');
-    await page.locator('.pr-syntax-card').filter({hasText:'forallE'}).click();
-    check((await page.locator('#pa-rule-focus').textContent()).includes('Dependent function'),
-      'forallE rule did not open');
-    await page.screenshot({path:path.join(captures,'lean-twelve-visual-rules.png')});
+    check(await page.locator('[data-pa-reader-tab="language"]').count()===0,'reader still contains tutorial tabs');
     await page.locator('#pa-reader-close').click();
     check(!(await page.locator('#pa-reader').isVisible()),'reader drawer did not close');
     await page.locator('#pa-reader-toggle').click();

@@ -3,9 +3,9 @@ layout: default
 title: "Proof Atlas — Interactive App"
 permalink: /projects/proof-atlas/app/
 page_class: proof-atlas-app-page
-description: "Full-window interactive atlas of the anonymized structural graph of a real Lean proof, with recursive expansion, dependency constellation, and mathematical explanation."
+description: "Full-window interactive atlas of a real Lean proof, with complete selected-subtree terms, scoped variables and graph navigation."
 ---
-<link rel="stylesheet" href="/public/css/proof-atlas.css?v=6">
+<link rel="stylesheet" href="/public/css/proof-atlas.css?v=9">
 <div class="pa-page pa-page--app" id="proof-atlas">
   <section id="pa-explorer" class="pa-explorer pa-explorer--app" aria-labelledby="pa-explorer-heading">
     <div class="pa-appbar">
@@ -73,22 +73,23 @@ description: "Full-window interactive atlas of the anonymized structural graph o
           <button type="button" id="pa-reader-close" aria-label="Close proof reader" title="Close reader">×</button>
         </header>
         <div class="pa-reader-tabs" role="tablist" aria-label="Proof reader tabs">
-          <button type="button" class="active" data-pa-reader-tab="explain" role="tab" aria-selected="true">Explain</button>
+          <button type="button" class="active" data-pa-reader-tab="explain" role="tab" aria-selected="true">Read</button>
           <button type="button" data-pa-reader-tab="lean" role="tab" aria-selected="false">Lean</button>
-          <button type="button" data-pa-reader-tab="language" role="tab" aria-selected="false">Visual grammar · 12</button>
         </div>
         <div id="pa-reader-scroll" class="pa-reader-scroll" tabindex="0" role="region" aria-label="Selected proof explanation">
           <div id="pa-reader-content"></div>
         </div>
-        <footer class="pa-reader-footer"><span id="pa-reader-status">Formal structure and explanation are separate.</span><a href="/projects/proof-atlas/language/">All 12 rules ↗</a></footer>
+        <footer class="pa-reader-footer"><span id="pa-reader-status">Formal structure and explanation are separate.</span><a href="/projects/proof-atlas/grammar/">Language reference ↗</a></footer>
       </section>
     </div>
 
-    <p class="pa-appnote">The graph is a measured, anonymized projection of the SE(2) Lean theorem <code>CrossingData.crossing</code>. The mathematical idea is an editorial interpretation, not an automatically verified compression.</p>
+    <p class="pa-appnote">The graph measures the SE(2) Lean theorem <code>CrossingData.crossing</code>. The reader decodes its published type and proof term. The mathematical idea is an editorial interpretation, not an automatically verified compression.</p>
   </section>
 </div>
 <script src="/public/data/proof-atlas/crossing-structure.js" defer></script>
 <script src="/public/data/proof-atlas/crossing-declarations.js" defer></script>
 <script src="/public/data/proof-atlas/lean-expr-grammar.js" defer></script>
 <script src="/public/js/proof-atlas.js?v=10" defer></script>
-<script src="/public/js/proof-atlas-reader.js?v=1" defer></script>
+<script src="/public/data/proof-atlas/crossing-terms.js" defer></script>
+<script src="/public/js/proof-atlas-term-reader.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-reader.js?v=3" defer></script>
