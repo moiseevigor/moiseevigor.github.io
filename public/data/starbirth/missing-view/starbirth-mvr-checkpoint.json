@@ -1,0 +1,130 @@
+{
+  "schema": "multisurvey-missing-view-final-checkpoint/1",
+  "unit_status": "completed_no_retrospective_gain_demonstrated",
+  "independent_recomputation": true,
+  "prospective_registration_commit": "8b9decb2",
+  "requested_sources": 19328,
+  "qualifying_proxy_sources": 262,
+  "primary_recovered_positive": {
+    "embedding": 14,
+    "linear": 14,
+    "nonlinear": 15,
+    "infrared_only": 13
+  },
+  "proxy_positive_denominator": 27,
+  "primary_equal_review_budget": 18,
+  "primary_minimum_recovery_difference": -0.03703703703703709,
+  "spatial_interval": [
+    -0.1111111111111111,
+    0.0
+  ],
+  "benefit_gate_passed": false,
+  "proxy_adequacy_passed": true,
+  "positive_cases_with_temporal_view": 0,
+  "qualifying_cases_with_temporal_view": 3,
+  "score_meaning": "Out-of-fold consumed-proxy ranking, not a physical class probability",
+  "full_goal_achieved": false,
+  "active_goal_remains": "Shared multi-survey ranking with physical validation and long-term detector requirements unmet",
+  "physical_validation": false,
+  "new_stars": 0,
+  "new_births": 0,
+  "occurrence_measured": false,
+  "source_publication_status": "local_verified_unpublished",
+  "private_atlas_action": false,
+  "stopping": "This exact model comparison concluded; no automatic model sweep, acquisition, relaxed cuts or archival restart",
+  "next_requirement": "Distinct evidence route for complementary positive-case coverage, source ownership and independent physical truth",
+  "files": [
+    {
+      "path": "artifacts/multisurvey_missing_view_20261012/checkpoint.json",
+      "bytes": 1444,
+      "sha256": "11f9b40a9fbb070a0f2b5604c32f429fdda3c909cffa2334872955051f82d407"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_20261012/features.npz",
+      "bytes": 1395696,
+      "sha256": "435ebf3b832a5e9df2029ea8de2d42c5833b28244511ace1effba078e47ff04f"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_20261012/fold_0.npz",
+      "bytes": 41233,
+      "sha256": "dc96aceaec9b403ae04b563b9d86517c9e15124c3c542244c6dc9fe43e2ca38a"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_20261012/fold_1.npz",
+      "bytes": 42730,
+      "sha256": "6f58d984019471f55ff39378edb28d259aee12b0cb3c3fa26e951338438daee5"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_20261012/fold_2.npz",
+      "bytes": 42428,
+      "sha256": "62b67016c3e25f0adc8267aa8e8b127bbe74e97343594eedbfe0dfda25348506"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_20261012/fold_3.npz",
+      "bytes": 40655,
+      "sha256": "cec166ef186ea5bcf167e2fe68ed3131c072f75c4869fcc941c493f86f12610f"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_20261012/fold_4.npz",
+      "bytes": 41809,
+      "sha256": "596abf2ad2c7ab4e58d938281b06de9080cb02fea1451f58119460efffe831cd"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_20261012/predictions.npz",
+      "bytes": 1484389,
+      "sha256": "4c98d07181e4cfccd0c2f86ea7a718146847028201bac8abf357bd740d3199c8"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_20261012/resource_monitor.json",
+      "bytes": 6181,
+      "sha256": "b53eecf3d850368cf9b53471e6acd27fe2baca46cda1df3d3b000fad2a7d46b7"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_20261012/sources.csv.gz",
+      "bytes": 1034031,
+      "sha256": "6872b22eed45d6e001d0363c3a05e864702b86adc46f20baaf7b4f1c0a7d24c0"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_20261012/summary.json",
+      "bytes": 9186,
+      "sha256": "993d45a986c6da462743111ec635aa73f70c4173e95db4ac5c24f5557da4b99d"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_20261012/worker.log",
+      "bytes": 3416,
+      "sha256": "1effe4b915ddfc9dcde9017d925b6410bea8a7bcb23481e59f6f3167d6d2e8eb"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_verification_20261012/resource_monitor.json",
+      "bytes": 7151,
+      "sha256": "3ca85feddc2df37c7a8b9e117bd4f0c6b5a6e6a971bf59947ca26cb40c93e8ca"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_verification_20261012/verification.json",
+      "bytes": 840,
+      "sha256": "644d31bf5f9eda18e875b37cfc901b4a3bf697bf71d47ec469cd22602327f668"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_verification_20261012/worker.log",
+      "bytes": 990,
+      "sha256": "42697f43f7808c37350804adc93662d2f0d4fc1c50b290d08283a3308fdc684e"
+    },
+    {
+      "path": "docs/MULTISURVEY_MISSING_VIEW_RESULTS_20261012.md",
+      "bytes": 10910,
+      "sha256": "eaab45dec4b1b7fa9a2634e81d1b116a6c6bec4ba224468e354296203bc6fa31"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_registration_20261012.json",
+      "bytes": 7360,
+      "sha256": "8597fe4e4f2f355b82e9848f528097217979e8831cdd0ae3008fed5e6eb2d6d7"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_splits_20261012.csv.gz",
+      "bytes": 177327,
+      "sha256": "eb092e367c1e816555cedc23a3df7094b0f8d4be40c8c52b2908118034fffacc"
+    }
+  ],
+  "combined_stages_report_bytes_before_checkpoint": 4163089,
+  "free_bytes": 58008023040
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "multisurvey-association-verification/1",
+  "verified": true,
+  "method": "Independent Astropy all-pairs spherical geometry, graph traversal and raw temporal streaming",
+  "registration_sha256": "26276b22f7ce675c699f1a9ca2f0e819622807d2ee434300c408e661e5c3447e",
+  "source_ledger_sha256": "af865147df2ef2eb1556e33d4b66cc0b43b3bd231e0bfc58a91b06375514cb2e",
+  "counts": {
+    "parent": 19328,
+    "wise_anchor_present": 1231,
+    "neowise_requested": 19219,
+    "temporal_support": 761,
+    "one_record_unshared_violation": 32,
+    "one_record_unshared": 276,
+    "molecular_supported": 308,
+    "multiple_molecular_records": 16,
+    "multiple_molecular_positions": 6,
+    "shared_molecular_position_30": 20,
+    "shared_molecular_position_19": 2,
+    "screen_any": 7775,
+    "anchored_any": 975,
+    "fir_error_support": 13297,
+    "fir_temporal": 593,
+    "three_view": 4,
+    "three_view_unique": 3
+  },
+  "verified_edges": 3047,
+  "verified_sources": 19328,
+  "verified_visits": 17151,
+  "combined_bytes_before_receipt": 1010246,
+  "physical_validation": false,
+  "model_fitted": false,
+  "new_births": 0
+}

@@ -1,0 +1,123 @@
+{
+  "schema": "multisurvey-association-registration/1",
+  "registered_before_readout": true,
+  "parent_rows": 19328,
+  "scope": "Source associations and temporal support; no line outcomes or model fit",
+  "primary": "One molecular record and unshared 30-arcsec position for every molecular-supported parent",
+  "reject_when": "At least one parent violates exact geometric uniqueness; no physical hypothesis tested",
+  "molecular_radius_arcsec": 30,
+  "half_fwhm_context_radius_arcsec": 19,
+  "wise_anchor_clump_radius_arcsec": 3,
+  "temporal_anchor_radius_arcsec": 2,
+  "temporal_screen": "SNR>=5, positive quoted error, finite magnitude/MJD/position, frame>0, nb=1, W2 cc flag zero",
+  "visit_gap_days": 30,
+  "minimum_rows_per_visit": 5,
+  "minimum_supported_visits": 3,
+  "minimum_span_days": 365,
+  "limits": {
+    "cpu_threads": 1,
+    "worker_wall_seconds": 600,
+    "checker_wall_seconds": 600,
+    "sampled_rss_mib": 256,
+    "combined_stage_mib": 4,
+    "reserve_gib": 5
+  },
+  "stages": [
+    "artifacts/multisurvey_association_20261012",
+    "artifacts/multisurvey_association_verification_20261012"
+  ],
+  "policy_git_blobs": [
+    {
+      "path": "docs/RESEARCH_GOAL.md",
+      "revision": "9bbd4924b322227650023e780c97eee2863c18ca",
+      "sha256": "0b069de94db20d821cba5aa1565add7a5da274fcb5616e6e27d7ad7b2937916b"
+    },
+    {
+      "path": "docs/MULTISURVEY_RESEARCH_PROGRAM_20261012.md",
+      "revision": "9bbd4924b322227650023e780c97eee2863c18ca",
+      "sha256": "6dcf4b55081d510a248fba28a1c848bdaf6f720d28dd19d867fc0360b1e94496"
+    },
+    {
+      "path": "docs/ADVERSARIAL_REVIEW_20261006.md",
+      "revision": "9bbd4924b322227650023e780c97eee2863c18ca",
+      "sha256": "c28b2ccc8513c9fd4b6fc8db7364ba474316a2da53592963037bb1b6358e9021"
+    },
+    {
+      "path": "docs/GIT_SNAPSHOT_WORKFLOW.md",
+      "revision": "9bbd4924b322227650023e780c97eee2863c18ca",
+      "sha256": "a3c421e45bd505f91ebbd9044d0a2120c7773d5cca5154c237f5b976c2ac1923"
+    },
+    {
+      "path": "docs/STORAGE_POLICY.md",
+      "revision": "9bbd4924b322227650023e780c97eee2863c18ca",
+      "sha256": "cfb7a058d667341331a7f7ed99f2eb57bc99996cefe49a82204ac7864e4c9767"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "cache/higal360clump.csv",
+      "bytes": 10839247,
+      "sha256": "e2986e34d18419fb0e7fc911fafaedbd081398d1128977ca1c480a39e4055364"
+    },
+    {
+      "path": "artifacts/e12b/allwise_features.csv.gz",
+      "bytes": 1471371,
+      "sha256": "ef2ff10425a6a0a79f203f9bc552b7b08e134121608783540b102271b84cc6d0"
+    },
+    {
+      "path": "artifacts/e1_full/pilot_targets.csv",
+      "bytes": 2286440,
+      "sha256": "1625d28d54253adfa772937adf680a8d9706a318c2b52b9887bc6eba97be2ed0"
+    },
+    {
+      "path": "artifacts/e1_full/neowise_rows_on.csv",
+      "bytes": 112911274,
+      "sha256": "f1f6e5901b086b01a8d4e80242deaf25deca593eeacedd142ece906a456627f3"
+    },
+    {
+      "path": "cache/n1/malt90_rathborne2016.csv",
+      "bytes": 2870936,
+      "sha256": "a31b9caa0303fe4e2d7a0975d2f71c36be655f09c13cb668ff42c55ce10317cd"
+    },
+    {
+      "path": "artifacts/multisurvey_eligibility_20261012/sources.csv.gz",
+      "bytes": 575173,
+      "sha256": "7b4a902d69a121c4716eb378603c40f5099c925333bc49d86536adda1cc11379"
+    },
+    {
+      "path": "artifacts/multisurvey_eligibility_20261012/summary.json",
+      "bytes": 1949,
+      "sha256": "a7c3ea14d40eeea876a62fea99997adc1c5d2ffd743870a1e91af26256bcd3d6"
+    },
+    {
+      "path": "artifacts/multisurvey_eligibility_verification_stdlib_20261012/verification.json",
+      "bytes": 1190,
+      "sha256": "b910b565ae40f6dc146c003523a9e8b9a1358f5fc2da2a9b84a32d474303fe9f"
+    },
+    {
+      "path": "artifacts/multisurvey_eligibility_registration_20261012.json",
+      "bytes": 14104,
+      "sha256": "41f5a6bec70c239f9cfc1ede4482cfb6b8e8af95b8460fe27c5f383cdc520487"
+    },
+    {
+      "path": "scripts/run_guarded_research.py",
+      "bytes": 6628,
+      "sha256": "0988aa41866ad3c65dd99713f3d1cda31cbdfa906c465f1230596f8f43cecfda"
+    },
+    {
+      "path": "docs/MULTISURVEY_ASSOCIATION_PROTOCOL_20261012.md",
+      "bytes": 8110,
+      "sha256": "bec21151d8bbe726dea99330a85c6dd6dd934efa37c9a2586e64e9d5074d5f13"
+    },
+    {
+      "path": "research/audit_multisurvey_associations.py",
+      "bytes": 14444,
+      "sha256": "0a79c9ed31feda3937be6df43e8c802d6d03eb235e86976bf00c912288beee4a"
+    },
+    {
+      "path": "research/verify_multisurvey_associations.py",
+      "bytes": 12954,
+      "sha256": "f79b074f6a136219230b1f2d3742a912437d670298c298bf317b592f924151ea"
+    }
+  ]
+}

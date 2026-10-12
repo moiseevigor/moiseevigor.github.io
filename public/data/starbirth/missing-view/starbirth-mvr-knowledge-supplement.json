@@ -1,0 +1,257 @@
+{
+  "schema": "reviewed-multisurvey-knowledge-supplement/1",
+  "source_revision": "c6618258f56047aee306e915290ddcebcf7906be",
+  "core_graph_unchanged": {
+    "path": "artifacts/graph/research_graph.json",
+    "revision": "c6618258f56047aee306e915290ddcebcf7906be",
+    "bytes": 1307461,
+    "sha256": "5162974f4fe31bb591b244ad3cc96962069174e1e96fced8586ee6305763692c"
+  },
+  "nodes": [
+    {
+      "id": "Q:MV20261012",
+      "type": "question",
+      "label": "Shared missing-view ranking",
+      "status": "bounded_comparison_completed",
+      "text": "Can a label-free shared representation improve consumed chemistry-proxy recovery beyond both strong tabular baselines at equal spatial review budgets?",
+      "sources": [
+        "docs/MULTISURVEY_MISSING_VIEW_PROTOCOL_20261012.md"
+      ]
+    },
+    {
+      "id": "M:MV20261012",
+      "type": "method",
+      "label": "Rank-six missing-view completion",
+      "status": "implemented_scoped",
+      "text": "Training-only, label-free low-rank completion of 28 infrared/context, variability and non-withheld gas features; downstream rankers use consumed training-reference proxies.",
+      "sources": [
+        "docs/MULTISURVEY_MISSING_VIEW_PROTOCOL_20261012.md",
+        "artifacts/multisurvey_missing_view_registration_20261012.json"
+      ]
+    },
+    {
+      "id": "F:MV20261012:comparison",
+      "type": "finding",
+      "label": "No retrospective gain demonstrated",
+      "status": "verified_scoped_negative",
+      "metrics": {
+        "requested": 19328,
+        "qualifying": 262,
+        "positive_denominator": 27,
+        "equal_reviews": 18,
+        "recovered": {
+          "embedding": 14,
+          "linear": 14,
+          "nonlinear": 15,
+          "infrared_only": 13
+        },
+        "minimum_recovery_delta": -0.03703703703703709,
+        "conditional_spatial_ci95": [
+          -0.1111111111111111,
+          0.0
+        ]
+      },
+      "text": "Embedding 14/27, linear 14/27, nonlinear 15/27 and infrared-only 13/27 at 18 reviews. Frozen +0.10 improvement/positive lower-bound gate failed. Not physical precision or recall.",
+      "sources": [
+        "artifacts/multisurvey_missing_view_20261012/summary.json",
+        "artifacts/multisurvey_missing_view_verification_20261012/verification.json",
+        "docs/MULTISURVEY_MISSING_VIEW_RESULTS_20261012.md"
+      ]
+    },
+    {
+      "id": "F:MV20261012:association",
+      "type": "finding",
+      "label": "Geometric ambiguity and sparse common support",
+      "status": "verified_geometric_support",
+      "metrics": {
+        "parent": 19328,
+        "wise_anchor_present": 1231,
+        "neowise_requested": 19219,
+        "temporal_support": 761,
+        "one_record_unshared_violation": 32,
+        "one_record_unshared": 276,
+        "molecular_supported": 308,
+        "multiple_molecular_records": 16,
+        "multiple_molecular_positions": 6,
+        "shared_molecular_position_30": 20,
+        "shared_molecular_position_19": 2,
+        "screen_any": 7775,
+        "anchored_any": 975,
+        "fir_error_support": 13297,
+        "fir_temporal": 593,
+        "three_view": 4,
+        "three_view_unique": 3
+      },
+      "text": "32/308 molecular-supported parents violate one-record/unshared-position geometry; four have the frozen three-view support and three are geometrically unambiguous. No source ownership is established.",
+      "sources": [
+        "artifacts/multisurvey_association_compact_20261012/summary.json",
+        "artifacts/multisurvey_association_verification_compact_20261012/verification.json",
+        "docs/MULTISURVEY_ASSOCIATION_RESULTS_20261012.md"
+      ]
+    },
+    {
+      "id": "C:MV20261012:temporal",
+      "type": "qualification",
+      "label": "No supported temporal view in qualifying positives",
+      "status": "verified_limit",
+      "text": "Three qualifying proxies have supported temporal features; none is positive. This comparison does not establish complementary variability/gas information in positive cases.",
+      "sources": [
+        "artifacts/multisurvey_missing_view_20261012/summary.json",
+        "docs/MULTISURVEY_MISSING_VIEW_RESULTS_20261012.md"
+      ]
+    },
+    {
+      "id": "C:MV20261012:truth",
+      "type": "qualification",
+      "label": "Consumed chemistry is not physical truth",
+      "status": "unmet_physical_validation",
+      "text": "Any Y in four withheld tracers gives a consumed proxy positive; four N gives a proxy negative. Marginal/missing flags and ambiguous ownership remain unknown. Shared instrument/environment prevent an independence claim.",
+      "sources": [
+        "docs/MULTISURVEY_MISSING_VIEW_PROTOCOL_20261012.md",
+        "docs/MULTISURVEY_MISSING_VIEW_RESULTS_20261012.md"
+      ]
+    },
+    {
+      "id": "C:MV20261012:unknowns",
+      "type": "qualification",
+      "label": "Unknown review burden retained",
+      "status": "verified_limit",
+      "metrics": {
+        "unknown": 19066,
+        "embedding_all_requested": {
+          "reviews": 982,
+          "selected_proxy_positive": 24,
+          "selected_proxy_negative": 74,
+          "selected_unknown": 884,
+          "unscored": 0
+        }
+      },
+      "text": "19,066/19,328 lack qualifying proxy truth. Embedding all-requested selection has 884 unknowns among 982 reviews. Scores are not calibrated physical class probabilities.",
+      "sources": [
+        "artifacts/multisurvey_missing_view_20261012/summary.json",
+        "docs/MULTISURVEY_MISSING_VIEW_RESULTS_20261012.md"
+      ]
+    },
+    {
+      "id": "G:MV20261012:physical",
+      "type": "requirement",
+      "label": "Independent physical detector validation",
+      "status": "unmet",
+      "text": "Complementary positive-case coverage, source ownership and independent physical validation remain missing. No new star, physical birth, hidden fraction or detector is established; the long-term goal remains active.",
+      "sources": [
+        "docs/MULTISURVEY_MISSING_VIEW_RESULTS_20261012.md",
+        "artifacts/multisurvey_missing_view_checkpoint_20261012.json"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "M:MV20261012",
+      "target": "Q:MV20261012",
+      "type": "tests"
+    },
+    {
+      "source": "F:MV20261012:comparison",
+      "target": "Q:MV20261012",
+      "type": "answers_with_no_demonstrated_gain"
+    },
+    {
+      "source": "F:MV20261012:association",
+      "target": "M:MV20261012",
+      "type": "constrains_support"
+    },
+    {
+      "source": "C:MV20261012:temporal",
+      "target": "F:MV20261012:comparison",
+      "type": "qualifies"
+    },
+    {
+      "source": "C:MV20261012:truth",
+      "target": "F:MV20261012:comparison",
+      "type": "qualifies"
+    },
+    {
+      "source": "C:MV20261012:unknowns",
+      "target": "F:MV20261012:comparison",
+      "type": "qualifies"
+    },
+    {
+      "source": "F:MV20261012:comparison",
+      "target": "G:MV20261012:physical",
+      "type": "does_not_establish"
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "artifacts/graph/research_graph.json",
+      "revision": "c6618258f56047aee306e915290ddcebcf7906be",
+      "bytes": 1307461,
+      "sha256": "5162974f4fe31bb591b244ad3cc96962069174e1e96fced8586ee6305763692c"
+    },
+    {
+      "path": "artifacts/multisurvey_association_compact_20261012/summary.json",
+      "revision": "c6618258f56047aee306e915290ddcebcf7906be",
+      "bytes": 1511,
+      "sha256": "f3dc21f326a10e9ffa87105599f9daec6cb95af2bb7a01c068ff7c7e163acef1"
+    },
+    {
+      "path": "artifacts/multisurvey_association_verification_compact_20261012/verification.json",
+      "revision": "c6618258f56047aee306e915290ddcebcf7906be",
+      "bytes": 1124,
+      "sha256": "0d1f4fa6e9f77764e7dd08a8cfbdb0e1ab052b5b32ed6b97f2819705a9fe3ce7"
+    },
+    {
+      "path": "docs/MULTISURVEY_ASSOCIATION_RESULTS_20261012.md",
+      "revision": "c6618258f56047aee306e915290ddcebcf7906be",
+      "bytes": 10078,
+      "sha256": "b4864fc62e75fa1210d0b613c8246c3de0b9a932a8867b86dd3629f390bd5ba5"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_20261012/summary.json",
+      "revision": "c6618258f56047aee306e915290ddcebcf7906be",
+      "bytes": 9186,
+      "sha256": "993d45a986c6da462743111ec635aa73f70c4173e95db4ac5c24f5557da4b99d"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_verification_20261012/verification.json",
+      "revision": "c6618258f56047aee306e915290ddcebcf7906be",
+      "bytes": 840,
+      "sha256": "644d31bf5f9eda18e875b37cfc901b4a3bf697bf71d47ec469cd22602327f668"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_registration_20261012.json",
+      "revision": "c6618258f56047aee306e915290ddcebcf7906be",
+      "bytes": 7360,
+      "sha256": "8597fe4e4f2f355b82e9848f528097217979e8831cdd0ae3008fed5e6eb2d6d7"
+    },
+    {
+      "path": "docs/MULTISURVEY_MISSING_VIEW_RESULTS_20261012.md",
+      "revision": "c6618258f56047aee306e915290ddcebcf7906be",
+      "bytes": 10910,
+      "sha256": "eaab45dec4b1b7fa9a2634e81d1b116a6c6bec4ba224468e354296203bc6fa31"
+    },
+    {
+      "path": "docs/MULTISURVEY_MISSING_VIEW_PROTOCOL_20261012.md",
+      "revision": "c6618258f56047aee306e915290ddcebcf7906be",
+      "bytes": 15077,
+      "sha256": "3cbff505bcce3a73d7348b5f4d118150ca689a8ca8e4c4d9e90d7cc8563ac54b"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_checkpoint_20261012.json",
+      "revision": "c6618258f56047aee306e915290ddcebcf7906be",
+      "bytes": 5072,
+      "sha256": "940ce58b2ab5f0602d6033bd7e5cccd9494ad04b4b6d74b1b0de439226a0d173"
+    }
+  ],
+  "historical_context": [
+    {
+      "node": "F:E28",
+      "graph_path": "artifacts/graph/research_graph.json",
+      "meaning": "Existing closed CLIP increment finding; context only, not overwritten or independently confirmed by this new test"
+    }
+  ],
+  "archive_merged": false,
+  "new_stars": 0,
+  "new_births": 0,
+  "physical_detector_validated": false
+}

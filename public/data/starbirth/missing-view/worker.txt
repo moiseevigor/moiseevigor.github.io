@@ -1,0 +1,94 @@
+Registered feature and consumed-proxy contract read; no test tuning
+{"fold": 0, "training_parent": 14746, "training_positive": 13, "training_negative": 161, "held_out": 3947, "held_out_qualifying": 81, "valid": true, "logistic_gradient_inf": 9.632421799424251e-08}
+{"fold": 1, "training_parent": 15348, "training_positive": 24, "training_negative": 212, "held_out": 3306, "held_out_qualifying": 25, "valid": true, "logistic_gradient_inf": 4.277669534563655e-08}
+{"fold": 2, "training_parent": 14644, "training_positive": 23, "training_negative": 210, "held_out": 3859, "held_out_qualifying": 26, "valid": true, "logistic_gradient_inf": 2.12675568095691e-07}
+{"fold": 3, "training_parent": 13897, "training_positive": 19, "training_negative": 134, "held_out": 4724, "held_out_qualifying": 90, "valid": true, "logistic_gradient_inf": 5.048714769861906e-08}
+{"fold": 4, "training_parent": 15035, "training_positive": 25, "training_negative": 182, "held_out": 3492, "held_out_qualifying": 40, "valid": true, "logistic_gradient_inf": 1.1031493263313763e-07}
+{
+  "schema": "retrospective-missing-view-ranking/1",
+  "status": "no_retrospective_gain_demonstrated",
+  "requested": 19328,
+  "qualifying_positives": 27,
+  "qualifying_proxy_negatives": 235,
+  "unknown": 19066,
+  "common_qualifying": 262,
+  "unpredicted_qualifying": 0,
+  "populated_tiles": 8,
+  "primary_minimum_recovery_difference": -0.03703703703703709,
+  "spatial_bootstrap_ci95": [
+    -0.1111111111111111,
+    0.0
+  ],
+  "bootstrap_retained": 1999,
+  "bootstrap_discarded": 1,
+  "review_fraction_requested": 0.05,
+  "primary_adequacy": true,
+  "recovery": {
+    "embedding": 0.5185185185185185,
+    "linear": 0.5185185185185185,
+    "nonlinear": 0.5555555555555556,
+    "infrared_only": 0.48148148148148145
+  },
+  "primary": {
+    "embedding": {
+      "reviews": 18,
+      "actual_review_fraction": 0.06870229007633588,
+      "selected_proxy_positive": 14,
+      "selected_proxy_negative": 4
+    },
+    "linear": {
+      "reviews": 18,
+      "actual_review_fraction": 0.06870229007633588,
+      "selected_proxy_positive": 14,
+      "selected_proxy_negative": 4
+    },
+    "nonlinear": {
+      "reviews": 18,
+      "actual_review_fraction": 0.06870229007633588,
+      "selected_proxy_positive": 15,
+      "selected_proxy_negative": 3
+    },
+    "infrared_only": {
+      "reviews": 18,
+      "actual_review_fraction": 0.06870229007633588,
+      "selected_proxy_positive": 13,
+      "selected_proxy_negative": 5
+    }
+  },
+  "all_requested": {
+    "embedding": {
+      "reviews": 982,
+      "selected_proxy_positive": 24,
+      "selected_proxy_negative": 74,
+      "selected_unknown": 884,
+      "unscored": 0
+    },
+    "linear": {
+      "reviews": 982,
+      "selected_proxy_positive": 27,
+      "selected_proxy_negative": 122,
+      "selected_unknown": 833,
+      "unscored": 0
+    },
+    "nonlinear": {
+      "reviews": 982,
+      "selected_proxy_positive": 26,
+      "selected_proxy_negative": 87,
+      "selected_unknown": 869,
+      "unscored": 0
+    },
+    "infrared_only": {
+      "reviews": 982,
+      "selected_proxy_positive": 23,
+      "selected_proxy_negative": 61,
+      "selected_unknown": 898,
+      "unscored": 0
+    }
+  },
+  "validation_role": "consumed chemistry proxy; retrospective and selected",
+  "physical_validation": false,
+  "calibrated_probabilities": false,
+  "new_stars": 0,
+  "new_births": 0,
+  "occurrence_measured": false
+}

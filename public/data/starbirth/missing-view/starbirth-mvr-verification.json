@@ -1,0 +1,21 @@
+{
+  "schema": "missing-view-independent-verification/1",
+  "verified": true,
+  "method": "Raw independent feature/label/graph extraction; eigenvalue completion replay; augmented least-squares encoders; solver algebra; exact paired spatial readout",
+  "registration_sha256": "8597fe4e4f2f355b82e9848f528097217979e8831cdd0ae3008fed5e6eb2d6d7",
+  "summary_sha256": "993d45a986c6da462743111ec635aa73f70c4173e95db4ac5c24f5557da4b99d",
+  "sources_sha256": "6872b22eed45d6e001d0363c3a05e864702b86adc46f20baaf7b4f1c0a7d24c0",
+  "sources": 19328,
+  "features_checked": 28,
+  "valid_models": 5,
+  "status": "no_retrospective_gain_demonstrated",
+  "primary_delta": -0.03703703703703709,
+  "ci95": [
+    -0.1111111111111111,
+    0.0
+  ],
+  "combined_bytes_before_receipt": 4143348,
+  "physical_validation": false,
+  "new_stars": 0,
+  "new_births": 0
+}

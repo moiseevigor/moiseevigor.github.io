@@ -1,0 +1,227 @@
+{
+  "schema": "multisurvey-missing-view-registration/1",
+  "registered_before_new_outcome_readout": true,
+  "historical_outcomes_consumed": true,
+  "source_revision_before_registration": "22859c326d7e627d5816a103bc94c5f1d326766e",
+  "parent_rows": 19328,
+  "question": "Does a label-free shared representation improve withheld consumed chemistry-proxy recovery beyond both strong tabular baselines?",
+  "feature_names": [
+    "log_mass",
+    "temperature",
+    "log_distance",
+    "log_surface_density",
+    "log_diameter",
+    "ln_f160",
+    "ln_f250",
+    "ln_fsc350",
+    "ln_fsc500",
+    "ln_160_250",
+    "ln_250_350",
+    "ln_350_500",
+    "w1_w2",
+    "w2_w3",
+    "w3_w4",
+    "w2_magnitude",
+    "visit_w2_mean",
+    "ln1p_visit_chi2",
+    "visit_range",
+    "visit_slope_per_year",
+    "asinh_snr_HCOP",
+    "ln_width_HCOP",
+    "asinh_snr_HNC",
+    "ln_width_HNC",
+    "asinh_snr_N2HP",
+    "ln_width_N2HP",
+    "asinh_snr_HCN",
+    "ln_width_HCN"
+  ],
+  "withheld_proxy_fields": [
+    "DHC3N",
+    "DHNCO404",
+    "DCH3CN",
+    "DSIO"
+  ],
+  "models": [
+    "embedding",
+    "linear",
+    "nonlinear",
+    "infrared_only"
+  ],
+  "view_dimensions": [
+    16,
+    4,
+    8
+  ],
+  "latent_rank": 6,
+  "completion_iterations": 20,
+  "encoder_ridge": 0.01,
+  "temporal_analysis_floor_mag": 0.03,
+  "labels": "Any Y positive; four N proxy negative; every other case unknown; unshared one-record position required",
+  "split_counts": {
+    "0": 3947,
+    "1": 3306,
+    "2": 3859,
+    "3": 4724,
+    "4": 3492
+  },
+  "training_counts": {
+    "0": 14746,
+    "1": 15348,
+    "2": 14644,
+    "3": 13897,
+    "4": 15035
+  },
+  "spatial_tile_degrees": 10,
+  "fold_count": 5,
+  "training_buffer_degrees": 1,
+  "review_fraction": 0.05,
+  "review_rounding": "ceil per tile",
+  "review_tie_rule": "Exact designation ascending",
+  "bootstrap_draws": 2000,
+  "bootstrap_seed": 20261012,
+  "primary": "min(embedding recovery minus linear recovery, embedding recovery minus nonlinear recovery)",
+  "support_gate": "minimum delta >=0.10 and paired spatial interval lower >0",
+  "adequacy": ">=15 positives, >=80 proxy negatives, >=4 populated tiles, >=1900 retained draws, every qualifying proxy predicted by all primary methods",
+  "limits": {
+    "cpu_threads": 1,
+    "worker_wall_seconds": 1800,
+    "checker_wall_seconds": 1800,
+    "sampled_rss_mib": 256,
+    "combined_outputs_mib": 16,
+    "reserve_gib": 5
+  },
+  "stages": [
+    "artifacts/multisurvey_missing_view_20261012",
+    "artifacts/multisurvey_missing_view_verification_20261012"
+  ],
+  "scientific_validation": "retrospective consumed-proxy only; no physical classifier or newborn detector claim",
+  "policy_git_blobs": [
+    {
+      "path": "docs/RESEARCH_GOAL.md",
+      "revision": "22859c326d7e627d5816a103bc94c5f1d326766e",
+      "sha256": "0b069de94db20d821cba5aa1565add7a5da274fcb5616e6e27d7ad7b2937916b"
+    },
+    {
+      "path": "docs/MULTISURVEY_RESEARCH_PROGRAM_20261012.md",
+      "revision": "22859c326d7e627d5816a103bc94c5f1d326766e",
+      "sha256": "6dcf4b55081d510a248fba28a1c848bdaf6f720d28dd19d867fc0360b1e94496"
+    },
+    {
+      "path": "docs/ADVERSARIAL_REVIEW_20261006.md",
+      "revision": "22859c326d7e627d5816a103bc94c5f1d326766e",
+      "sha256": "c28b2ccc8513c9fd4b6fc8db7364ba474316a2da53592963037bb1b6358e9021"
+    },
+    {
+      "path": "docs/GIT_SNAPSHOT_WORKFLOW.md",
+      "revision": "22859c326d7e627d5816a103bc94c5f1d326766e",
+      "sha256": "a3c421e45bd505f91ebbd9044d0a2120c7773d5cca5154c237f5b976c2ac1923"
+    },
+    {
+      "path": "docs/STORAGE_POLICY.md",
+      "revision": "22859c326d7e627d5816a103bc94c5f1d326766e",
+      "sha256": "cfb7a058d667341331a7f7ed99f2eb57bc99996cefe49a82204ac7864e4c9767"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "cache/higal360clump.csv",
+      "bytes": 10839247,
+      "sha256": "e2986e34d18419fb0e7fc911fafaedbd081398d1128977ca1c480a39e4055364"
+    },
+    {
+      "path": "cache/higal360_fir.csv",
+      "bytes": 9083955,
+      "sha256": "74c391bd15a8bf44075515c8e21c1169edb148d2e6f9f9227bbf0c1236f2b554"
+    },
+    {
+      "path": "artifacts/e12b/allwise_features.csv.gz",
+      "bytes": 1471371,
+      "sha256": "ef2ff10425a6a0a79f203f9bc552b7b08e134121608783540b102271b84cc6d0"
+    },
+    {
+      "path": "artifacts/e1_full/pilot_targets.csv",
+      "bytes": 2286440,
+      "sha256": "1625d28d54253adfa772937adf680a8d9706a318c2b52b9887bc6eba97be2ed0"
+    },
+    {
+      "path": "artifacts/e1_full/neowise_rows_on.csv",
+      "bytes": 112911274,
+      "sha256": "f1f6e5901b086b01a8d4e80242deaf25deca593eeacedd142ece906a456627f3"
+    },
+    {
+      "path": "cache/n1/malt90_rathborne2016.csv",
+      "bytes": 2870936,
+      "sha256": "a31b9caa0303fe4e2d7a0975d2f71c36be655f09c13cb668ff42c55ce10317cd"
+    },
+    {
+      "path": "artifacts/multisurvey_association_compact_20261012/sources.csv.gz",
+      "bytes": 571753,
+      "sha256": "af865147df2ef2eb1556e33d4b66cc0b43b3bd231e0bfc58a91b06375514cb2e"
+    },
+    {
+      "path": "artifacts/multisurvey_association_compact_20261012/molecular_edges.csv.gz",
+      "bytes": 150811,
+      "sha256": "ba1fe27a66f7d9f1441273794dc2540e8c4516b8924970e087033b8656f559e5"
+    },
+    {
+      "path": "artifacts/multisurvey_association_verification_compact_20261012/verification.json",
+      "bytes": 1124,
+      "sha256": "0d1f4fa6e9f77764e7dd08a8cfbdb0e1ab052b5b32ed6b97f2819705a9fe3ce7"
+    },
+    {
+      "path": "artifacts/multisurvey_association_checkpoint_20261012.json",
+      "bytes": 4581,
+      "sha256": "3bbfe4f96e42ba8d481620db70d81b726d9ab855197febdb0888cf274af0ba31"
+    },
+    {
+      "path": "artifacts/graph/research_graph.json",
+      "bytes": 1307461,
+      "sha256": "5162974f4fe31bb591b244ad3cc96962069174e1e96fced8586ee6305763692c"
+    },
+    {
+      "path": "scripts/run_guarded_research.py",
+      "bytes": 6628,
+      "sha256": "0988aa41866ad3c65dd99713f3d1cda31cbdfa906c465f1230596f8f43cecfda"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_splits_20261012.csv.gz",
+      "bytes": 177327,
+      "sha256": "eb092e367c1e816555cedc23a3df7094b0f8d4be40c8c52b2908118034fffacc"
+    },
+    {
+      "path": "docs/MULTISURVEY_MISSING_VIEW_PROTOCOL_20261012.md",
+      "bytes": 15077,
+      "sha256": "3cbff505bcce3a73d7348b5f4d118150ca689a8ca8e4c4d9e90d7cc8563ac54b"
+    },
+    {
+      "path": "research/multisurvey_missing_view_data.py",
+      "bytes": 6338,
+      "sha256": "fc5b3935ac96f470a7043a99f310821ece7216a70fe9b144ff420891d0c9d790"
+    },
+    {
+      "path": "research/multisurvey_missing_view_model.py",
+      "bytes": 3108,
+      "sha256": "c5e5c7eb14f3f4ff789e9dc941127aa4cec7f63c369e0e56ca8b85399e376431"
+    },
+    {
+      "path": "research/multisurvey_missing_view_geometry.py",
+      "bytes": 1399,
+      "sha256": "e9eedba2fb5e6b2aef0e62b72d461268124db447c02f8d40d42ef0c3d45d5e36"
+    },
+    {
+      "path": "research/run_multisurvey_missing_view.py",
+      "bytes": 11872,
+      "sha256": "a0d02e22999964e42fe815e2af1b2ac7a2507653490791d483abb46a151b5643"
+    },
+    {
+      "path": "research/verify_multisurvey_missing_view.py",
+      "bytes": 20435,
+      "sha256": "296c5cdb25bd31960054e50f5442f07b76d202f9aea8b97198487deba91b3fdf"
+    },
+    {
+      "path": "research/check_missing_view_synthetic.py",
+      "bytes": 1459,
+      "sha256": "6154ed91df3901a1f3f03c8553870741c84717e4946b9cd0c2c5970347d699ca"
+    }
+  ]
+}
