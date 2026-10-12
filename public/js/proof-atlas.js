@@ -450,6 +450,8 @@
     state.hover=null;state.hoverPower=state.hoverTarget=0;
     tooltip.hidden=true;fillHoverDetails(null);
     state.mode=mode;state.panX=state.panY=0;state.scale=1;
+    const legend=$('pa-syntax-legend');
+    if(legend)legend.hidden=!(mode==='whole'||mode==='recursive');
     const names=titles[mode];$('pa-view-title').textContent=names[0];$('pa-view-subtitle').textContent=names[1];
     document.querySelectorAll('.pa-modes button').forEach(b=>{const on=b.dataset.mode===mode;b.classList.toggle('is-active',on);b.setAttribute('aria-pressed',on?'true':'false');});
     draw();
