@@ -60,7 +60,7 @@ async function run(){
     await page.mouse.move(r.x,r.y);
     await page.waitForTimeout(280);
     let hover=await page.locator('.pa-node-tooltip:not([hidden]) strong').textContent();
-    check(hover==='Lean lam · #'+r.root,'unexpected hover node '+hover+' / '+r.root);
+    check(hover==='Lean lam #'+r.root,'unexpected hover node '+hover+' / '+r.root);
     let neighbors=await page.locator('.pa-hover-neighbors li').count();
     // The floating preview is deliberately capped at 24 + summary to avoid
     // a 126-row DOM rebuild on every cursor movement. The degree remains exact.
