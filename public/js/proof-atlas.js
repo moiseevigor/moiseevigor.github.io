@@ -638,9 +638,12 @@
           ...users.map(id=>({label:id,detail:'Uses this declaration'}))],count:adj.size};
     }
     if(p.type==='expr') {
-      const adj=oneHop(p.id);
-      return {key:'expr:'+p.id,id:p.id,type:'expr',title:'Expression #'+p.id,
-        subtitle:'Lean '+kind(p.id)+' · depth '+depth[p.id]+' · subtree '+fmt(D.size[p.id]),
+      const adj=oneHop(p.id),terminal=children[p.id].length===0;
+      const role=terminal?describeTerminal(p.id):null;
+      const title=role?.title||('Lean '+kind(p.id)+' · #'+p.id);
+      const subtitle=terminal?(role.type+' · expression #'+p.id):
+        ('Internal expression · depth '+depth[p.id]+' · '+fmt(terminalCounts[p.id])+' terminal leaves');
+      return {key:'expr:'+p.id,id:p.id,type:'expr',title,subtitle,
         adj,items:Array.from(adj,([id,roles])=>({label:'#'+id+' · '+kind(id),detail:roles.join(' / ')})),
         count:adj.size};
     }
@@ -711,7 +714,9 @@
     const old=state.hover;
     if(old&&next&&old.key===next.key){
       state.hoverTarget=1;
-      fillHoverDetails(old);showTooltip(old);
+      // Keep the existing hover list DOM and its scrollTop while moving
+      // over the same node; only the floating pointer card moves.
+      showTooltip(old);
       if(reducedMotion){state.hoverPower=1;draw();}
       else wakeHover();
       return;
@@ -743,7 +748,12 @@
     if(!state.hover&&!state.hoverPower)return;
     // Keep the last neighbourhood while it relaxes, then remove it.
     if(state.hover) {
-      state.hoverTarget=0;tooltip.hidden=true;fillHoverDetails(null);
+      state.hoverTarget=0;tooltip.hidden=true;
+      // Keep the last hovered neighborhood visible in the dock so readers
+      // can move from the canvas to the right pane and scroll the list.
+      if(hoverDetails.firstElementChild){
+        hoverDetails.firstElementChild.textContent='LAST HOVER · DIRECT CONNECTIONS';
+      }
       $('pa-canvas-status').textContent='Select a node to inspect';
       if(reducedMotion){state.hoverPower=0;state.hover=null;draw();}
       else wakeHover();
