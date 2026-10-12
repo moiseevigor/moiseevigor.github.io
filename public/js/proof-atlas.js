@@ -514,43 +514,59 @@
     return {title:'Terminal expression',type:'Lean '+k,
       explanation:'No subexpressions. A syntax leaf is not automatically an independent theorem.'};
   }
-  function firstTerminalOccurrences(i,limit=TERMINAL_PREVIEW_LIMIT){
-    const result=[];
-    if(subtreeValid) {
-      for(let j=i;j<i+D.size[i]&&result.length<limit;j++){
-        if(!children[j].length)result.push(j);
+  function terminalPageOccurrences(i,offset,limit=TERMINAL_PREVIEW_LIMIT){
+    const out=[];
+    let seen=0;
+    if(subtreeValid){
+      for(let j=i;j<i+D.size[i]&&out.length<limit;j++){
+        if(!children[j].length&&seen++>=offset)out.push(j);
       }
     }else{
       const stack=[i];
-      while(stack.length&&result.length<limit){
+      while(stack.length&&out.length<limit){
         const j=stack.pop();
         if(children[j].length)stack.push(...children[j].slice().reverse());
-        else result.push(j);
+        else if(seen++>=offset)out.push(j);
       }
     }
-    return result;
+    return out;
   }
   function addTerminalExplorer(i){
-    const total=terminalCounts[i],preview=firstTerminalOccurrences(i);
+    const total=terminalCounts[i];
     const h=document.createElement('div');
     h.className='pa-statement-heading';h.textContent='TERMINAL LEAVES · '+fmt(total);
     $('pa-inspector-actions').appendChild(h);
     const note=document.createElement('p');note.className='pa-terminal-note';
-    note.textContent='Terminal Lean syntax: const, bvar, lit, etc. Only a named declaration reference can be identified as a lemma.';
+    note.textContent='Each terminal is a Lean expression occurrence—not necessarily a theorem. A known constant can link to its actual declaration.';
     $('pa-inspector-actions').appendChild(note);
     const list=document.createElement('div');list.className='pa-terminal-list';
-    for(const j of preview){
-      const desc=describeTerminal(j),b=document.createElement('button');
-      b.type='button';b.textContent='#'+j+' · '+desc.title;
-      b.addEventListener('click',()=>navigateToExpression(j));
-      list.appendChild(b);
-    }
     $('pa-inspector-actions').appendChild(list);
-    if(total>preview.length){
-      const more=document.createElement('p');more.className='pa-terminal-note';
-      more.textContent='First '+preview.length+' of '+fmt(total)+' leaves. Select a smaller subtree for detail.';
-      $('pa-inspector-actions').appendChild(more);
+    const pager=document.createElement('div');pager.className='pa-terminal-pager';
+    const prev=document.createElement('button');prev.type='button';prev.textContent='← Earlier leaves';
+    const next=document.createElement('button');next.type='button';next.textContent='Later leaves →';
+    const count=document.createElement('span');count.setAttribute('aria-live','polite');
+    pager.append(prev,count,next);
+    $('pa-inspector-actions').appendChild(pager);
+    let page=0;
+    const pages=Math.ceil(total/TERMINAL_PREVIEW_LIMIT);
+    function renderPage(){
+      const offset=page*TERMINAL_PREVIEW_LIMIT;
+      const preview=terminalPageOccurrences(i,offset);
+      list.replaceChildren();
+      for(const j of preview){
+        const desc=describeTerminal(j),button=document.createElement('button');
+        button.type='button';button.textContent='#'+j+' · '+desc.title;
+        button.addEventListener('click',()=>navigateToExpression(j));
+        list.appendChild(button);
+      }
+      prev.disabled=page===0;next.disabled=page>=pages-1;
+      pager.hidden=pages<2;
+      count.textContent=fmt(offset+1)+'–'+fmt(Math.min(offset+preview.length,total))+' / '+fmt(total);
+      list.scrollTop=0;
     }
+    prev.addEventListener('click',()=>{if(page>0){page--;renderPage();}});
+    next.addEventListener('click',()=>{if(page<pages-1){page++;renderPage();}});
+    renderPage();
   }
   function selectExpr(i){
     if(!Number.isInteger(i)||i<0||i>=N)return;
