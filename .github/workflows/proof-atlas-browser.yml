@@ -4,9 +4,11 @@ on:
     branches: [master]
     paths:
       - 'public/js/proof-atlas.js'
+      - 'public/js/proof-atlas-grammar.js'
       - 'public/css/proof-atlas.css'
       - 'projects/proof-atlas/**'
       - 'scripts/test-proof-atlas-browser.cjs'
+      - 'scripts/test-proof-atlas-grammar.cjs'
       - '.github/workflows/proof-atlas-browser.yml'
   workflow_dispatch:
 jobs:
@@ -28,6 +30,10 @@ jobs:
           sleep 2
       - name: Browser regression — hub hover, geometry, responsiveness
         run: node scripts/test-proof-atlas-browser.cjs
+        env:
+          ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
+      - name: Browser regression — complete Lean.Expr visual grammar
+        run: node scripts/test-proof-atlas-grammar.cjs
         env:
           ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
       - uses: actions/upload-artifact@v4
