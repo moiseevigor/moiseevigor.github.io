@@ -6,7 +6,7 @@ permalink: /projects/proof-atlas/
 page_class: proof-atlas-page
 description: "Explore a real 7,288-expression Lean proof as an interactive graph, then compare its syntactic shape with its mathematical explanation."
 ---
-<link rel="stylesheet" href="/public/css/proof-atlas.css?v=6">
+<link rel="stylesheet" href="/public/css/proof-atlas.css?v=7">
 <main class="pa-page" id="proof-atlas">
   <section class="pa-hero" aria-labelledby="pa-title">
     <div class="pa-eyebrow"><span class="pa-orbit" aria-hidden="true"></span> Research program / Proof Atlas · 2026</div>
@@ -140,12 +140,50 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
     <div class="pa-section-mark">03 / A precise visual language</div>
     <h2>Change the scale.<br><em>Keep the evidence.</em></h2>
     <p class="pa-grammar-introduction">The diagram vocabulary begins with the twelve actual Lean kernel expression constructors. Each has typed ports and a visual role. The same proof can then be seen as a full syntax graph, a collapsed module with its context preserved, or a mathematical explanation linked back to the checked term.</p>
-    <a class="pa-button pa-primary" href="/projects/proof-atlas/grammar/">Explore the complete Lean.Expr visual alphabet ↗</a>
-    <div class="pa-four" style="margin-top:32px">
-      <article><span>1 / CORE</span><h3>Exact certificate</h3><p><code>Γ ⊢ proof : P</code><br>Lean checks a complete term against its type in context.</p></article>
-      <article><span>2 / GRAPH</span><h3>Typed connections</h3><p>Applications, binders, variables, structure projections and shared declaration references.</p></article>
-      <article><span>3 / MODULE</span><h3>Fractal navigation</h3><p>Collapse a verified subargument while retaining assumptions and conclusions.</p></article>
-      <article><span>4 / IDEA</span><h3>Mathematical reading</h3><p>Existence and uniqueness combine into exactly one crossing. Interpretation remains labeled.</p></article>
+    <div class="pa-scale-intro">
+      <strong>All twelve constructor forms · six observed in CrossingData.crossing</strong>
+      <span>A visual reference, not a universal automatic proof interpreter.</span>
+    </div>
+    <div class="pa-scale-interactive" id="pa-scale-interactive" aria-label="Interactive four-scale Lean expression diagram">
+      <nav id="pa-scale-choices" class="pa-scale-choices" aria-label="Choose one of the twelve Lean Expr constructors"></nav>
+      <div class="pa-scale-selection" aria-live="polite">
+        <div><div class="pa-section-mark">Selected expression form</div><h3 id="pa-scale-kind">app · Application</h3></div>
+        <span class="pa-scale-status" id="pa-scale-status">Loading constructor information…</span>
+      </div>
+      <p class="pa-scale-definition" id="pa-scale-note">Lean applications connect a function expression to an argument expression.</p>
+      <svg id="pa-scale-flow" class="pa-scale-flow" viewBox="0 0 608 86" role="img" aria-label="Four views of the same Lean expression: exact core, structural graph, module, interpretation"></svg>
+      <div class="pa-scale-panels">
+        <article class="pa-scale-panel">
+          <div class="pa-scale-panel-label"><span>01 / CORE</span><h4>Expression constructor</h4></div>
+          <div class="pa-scale-panel-inset pa-scale-code-wrap"><pre id="pa-scale-core">.app fn arg</pre></div>
+          <p>Kernel-level constructor fields. A source example is illustrative; the type checker validates the complete expression.</p>
+        </article>
+        <article class="pa-scale-panel">
+          <div class="pa-scale-panel-label"><span>02 / GRAPH</span><h4>Typed connections</h4></div>
+          <div class="pa-scale-panel-inset"><svg id="pa-scale-graph" viewBox="0 0 560 256" role="img" aria-label="Expression constructor with child expression links and nonchild attributes"></svg></div>
+          <p id="pa-scale-graph-note">An expression graph distinguishes child expressions from references.</p>
+        </article>
+        <article class="pa-scale-panel">
+          <div class="pa-scale-panel-label"><span>03 / MODULE</span><h4>Preserved boundary</h4></div>
+          <div class="pa-scale-panel-inset"><svg id="pa-scale-module" viewBox="0 0 560 256" role="img" aria-label="Expression in a typing context with input, scope and output boundary"></svg></div>
+          <p id="pa-scale-module-note">A collapsed module must preserve external assumptions and evidence.</p>
+        </article>
+        <article class="pa-scale-panel">
+          <div class="pa-scale-panel-label"><span>04 / IDEA</span><h4>Mathematical interpretation</h4></div>
+          <div class="pa-scale-panel-inset"><svg id="pa-scale-meaning-diagram" viewBox="0 0 560 256" role="img" aria-label="Constructor role does not uniquely establish a proof strategy"></svg></div>
+          <p id="pa-scale-meaning">The full theorem context is needed to interpret the mathematical reasoning.</p>
+        </article>
+      </div>
+      <p class="pa-scale-scope" id="pa-scale-scope">The proposed diagrams are not proof certificates.</p>
+      <div class="pa-scale-extended">
+        <a href="/projects/proof-atlas/grammar/">Open the complete 12-constructor diagram explorer ↗</a>
+        <a href="/projects/proof-atlas/language/">See all 12 illustrated rules together ↗</a>
+      </div>
+    </div>
+    <div class="pa-scale-distinction">
+      <div><span>SOURCE SYNTAX</span><code>theorem · def · by · match · notation</code><p>Rich, extensible syntax. A tactic script is not a single additional kernel expression constructor.</p></div>
+      <div><span>ELABORATION</span><code>goals · metavariables · local context</code><p>Elaborators and tactics construct checked terms; their execution history is not fully retained by a final certificate.</p></div>
+      <div><span>THEOREM / PROOF</span><code>Γ ⊢ proof : Proposition</code><p>Validity comes from the kernel checking a well-formed term against a type in an environment.</p></div>
     </div>
   </section>
 
@@ -174,5 +212,6 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
 <script src="/public/data/proof-atlas/crossing-structure.js" defer></script>
 <script src="/public/data/proof-atlas/crossing-declarations.js" defer></script>
 <script src="/public/data/proof-atlas/lean-expr-grammar.js" defer></script>
+<script src="/public/js/proof-atlas-scales.js?v=1" defer></script>
 <script src="/public/js/proof-atlas.js?v=10" defer></script>
 <script src="/public/js/proof-atlas-reader.js?v=1" defer></script>
