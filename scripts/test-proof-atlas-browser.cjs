@@ -107,7 +107,7 @@ async function run(){
     check((await page.locator('.pa-terminal-pager span').textContent()).includes('3,543'),'missing measured total leaves');
     const firstLeaf=await page.locator('.pa-terminal-list button').first().textContent();
     await page.locator('.pa-terminal-pager button').nth(1).click();
-    check((await page.locator('.pa-terminal-pager span').textContent()).includes('25–48'),'terminal pagination did not advance');
+    check((await page.locator('.pa-terminal-pager span').textContent()).includes('25-48'),'terminal pagination did not advance');
     check((await page.locator('.pa-terminal-list button').first().textContent())!==firstLeaf,'leaf page did not change');
     await page.locator('.pa-terminal-pager button').first().click();
     await page.locator('.pa-inspector-selection').evaluate(el=>{el.scrollTop=Math.min(170,el.scrollHeight-el.clientHeight)});
