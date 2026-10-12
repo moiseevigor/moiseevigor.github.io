@@ -6,7 +6,7 @@
 
 ## What is public
 
-This directory documents a measurable experiment converting a real Lean 4 theorem's elaborated **type and proof expression** into a structural graph. The structural dataset retains anonymized labels for graph navigation. Since the authorized 12 October release, `crossing-terms.js` additionally publishes the complete exported payloads of all 7,288 occurrences in the crossing type and proof, with actual declaration names and structural paths. The original tactic script and private SE(2) manuscript source are not included.
+This directory documents a measurable experiment converting a real Lean 4 theorem's elaborated **type and proof expression** into a structural graph. The structural dataset retains anonymized labels for graph navigation. Since the authorized 12 October release, `crossing-terms.js` additionally publishes the complete exported payloads of all 7,288 occurrences in the crossing type and proof, with actual declaration names and structural paths. The original tactic script and private working manuscript are not included. The already public 7 October manuscript snapshot has a full web edition.
 
 The measured benchmark:
 
@@ -194,3 +194,55 @@ claims, deep links, responsive layouts and scoped automated accessibility. The
 published article snapshot remains unchanged. Original tactic/source-span export,
 coverage of other manuscript statements, one-to-many source proof steps and formal
 certification of these editorial links remain open.
+
+
+## Live article selection and full Distill edition — 12 October 2026
+
+Article is now the first and default reader tab. A graph click clears any browsed
+passage and resolves the selected expression again. The index now has **84 explicit
+expression anchors**: the two crossing roots and 82 lifted phase equalities or
+winding-witness predicates. The builder recognizes their complete expression
+shape and verifies original occurrence paths; it does not guess from nearby text.
+The nearest mapped declaration application also provides context to its children.
+[Occurrence 5830](https://moiseevigor.github.io/projects/proof-atlas/app/#expr-5830)
+now shows the winding predicate's phase equation. The uniqueness application at
+7259 shows the monotonicity argument. Several nodes can legitimately share a
+passage; the reader always identifies the actual selection and inherited context.
+
+[The full Distill web edition](https://moiseevigor.github.io/projects/proof-atlas/article/)
+reproduces the public manuscript snapshot, including its abstract, all nine section
+headings, nine lemma/theorem/remark statements, six proof blocks, 21 numbered
+equations, four vector figures, three tables and twelve cited references. All
+**916 mathematical expressions** are rendered, with original statement numbers,
+equation references and source labels. Each graph passage link lands on and
+highlights the exact excerpt in the full article, not the entire enclosing lemma.
+The article provides reverse links to the indexed Lean selections.
+
+`build_distill_article.py` uses Pandoc's AST and the local numeric citation style.
+Its static output requires no Pandoc dependency at runtime or in the site build.
+`distill-article-manifest.json` records the source hash, preserved mathematical
+bodies, counts and labels. `verify_distill_article.py` independently checks every
+preserved mathematical body against the output, every internal target, the figures,
+tables, statement numbering and the six precise passage anchors. The PDF and TeX
+snapshot remain unchanged. Vector figure assets and cited bibliography entries
+come from the same published snapshot revision recorded in `se2-provenance.json`.
+
+```sh
+python3 research/proof-atlas/build_article_index.py
+python3 research/proof-atlas/build_distill_article.py  # Pandoc 3.9 required to regenerate
+python3 research/proof-atlas/verify_distill_article.py
+# After building and serving the site:
+node scripts/test-proof-atlas-distill.cjs
+```
+
+The browser regression uses actual canvas clicks on 5830, 7259, 7275 and 1852,
+checks first/default Article behavior, follows graph-to-article links, visits all
+six passage targets, and checks rendered formulas, loaded figures, references,
+mobile overflow and light/dark WCAG A/AA accessibility. Scrollable formulas and
+tables are keyboard accessible. Manual assistive-technology review remains open.
+
+The **web edition covers the whole published manuscript**. The **Lean correspondence
+index still covers only six crossing-principle passages and ten named declarations**.
+Other manuscript results are not yet linked, and a kernel node does not necessarily
+have its own article sentence. These are curated correspondences, not a formal
+certification that the manuscript and Lean are equivalent.

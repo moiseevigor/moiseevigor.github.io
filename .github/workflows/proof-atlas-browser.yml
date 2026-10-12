@@ -7,6 +7,10 @@ on:
       - 'public/js/proof-atlas-reader.js'
       - 'public/js/proof-atlas-term-reader.js'
       - 'public/js/proof-atlas-article-index.js'
+      - 'public/js/proof-atlas-article.js'
+      - 'public/research/se2/article-figures/**'
+      - 'public/research/se2/article-references.bib'
+      - 'scripts/test-proof-atlas-distill.cjs'
       - 'public/data/proof-atlas/crossing-article-index.js'
       - 'public/research/se2/conjugate_times_se2.*'
       - 'public/data/proof-atlas/crossing-terms.js'
@@ -77,6 +81,8 @@ jobs:
           node scripts/test-proof-atlas-subtree.cjs
           node scripts/test-proof-atlas-article-index.cjs
           node scripts/test-proof-atlas-article-browser.cjs
+          python3 research/proof-atlas/verify_distill_article.py
+          node scripts/test-proof-atlas-distill.cjs
         env:
           ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
       - name: Browser regression — complete Lean.Expr visual grammar

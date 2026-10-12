@@ -13,6 +13,10 @@ for(const p of index.passages){assert(source.includes(p.raw));assert.equal(sha(p
 assert(source.split('\n')[I.source.tableLine-1].includes('\\texttt{crossing} (\\texttt{Crossing})'));
 assert.equal(index.resolve({type:'expr',id:1852}).passage.id,'phase-equation');
 assert.equal(index.resolve({type:'expr',id:1856}).inherited,true);
+assert.equal(index.resolve({type:'expr',id:5830}).passage.id,'phase-equation');
+assert.equal(index.resolve({type:'expr',id:7275}).passage.id,'arcs');
+assert.equal(I.anchors.length,84);
+assert(I.passages.every(p=>p.htmlUrl==='/projects/proof-atlas/article/#'+p.htmlAnchor));
 assert.equal(index.resolve({type:'expr',id:203}).passage.id,'counting');
 assert.equal(index.resolve({type:'decl',id:'crossing'}).passage.id,'counting');
 assert.equal(index.resolve({type:'decl',id:'exists_branch'}).passage.id,'arcs');
@@ -22,4 +26,4 @@ assert(index.reverse('phase-equation').anchors.some(a=>a.occurrence===1852));
 assert.equal(index.reverse('analytic-scope').declarations.length,0);
 const bad=JSON.parse(JSON.stringify(I));bad.lean.coregirSha256='wrong';assert.equal(create(S,T,decoder,bad).valid,false);
 bad.lean.coregirSha256=I.lean.coregirSha256;bad.anchors[2].path='wrong';assert.equal(create(S,T,decoder,bad).valid,false);
-console.log(JSON.stringify({status:'PASS',passages:6,declarations:10,exactAnchors:3,excerpts:'literal source matches',staleMaps:'rejected'}));
+console.log(JSON.stringify({status:'PASS',passages:6,declarations:10,exactAnchors:84,excerpts:'literal source matches',staleMaps:'rejected'}));

@@ -101,6 +101,7 @@ async function run(){
     // statement; the left HUD summarizes the current structural subtree.
     await page.setViewportSize({width:1580,height:690});
     await page.waitForTimeout(200);
+    await page.locator('[data-pa-reader-tab="explain"]').click();
     await page.locator('#pa-search').fill('203');
     await page.locator('#pa-find').click();
     check(await page.locator('#pa-branch-hud').isVisible(),'branch HUD should be visible in the syntax microscope');

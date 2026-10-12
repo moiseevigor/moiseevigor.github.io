@@ -1,0 +1,30 @@
+/* Published manuscript edition, using the site's Distill typography and theme. */
+.pa-paper-edition{font:15px/1.7 "Source Sans 3",system-ui,sans-serif;border-left:3px solid var(--accent,#2d7774);padding:14px 18px;margin:12px 0 28px;background:var(--fig-bg,#f0f2ed);color:var(--text,#243f49)}
+.pa-paper-toc{font:15px/1.8 "Source Sans 3",system-ui,sans-serif;border-bottom:1px solid var(--border,#d4ddd8);padding:0 0 22px;margin:0 0 25px}
+.pa-paper-toc ol{columns:2;column-gap:35px;list-style:none;padding:8px 0 0;margin:0}
+.pa-paper-toc li{break-inside:avoid;margin:0 0 7px}
+.pa-paper-links{font:15px/1.7 "Source Sans 3",system-ui,sans-serif;padding:12px 0;border-bottom:1px solid var(--border,#d4ddd8);margin-bottom:35px}
+.pa-paper summary{cursor:pointer}
+.pa-paper :is(h2,h3,.lemma,.theorem,.remark,[id^="passage-"],[id^="eq:"]){scroll-margin-top:90px}
+.pa-paper :is(.lemma,.theorem,.remark){padding:15px 0;border-block:1px solid var(--border,#d4ddd8);margin:28px 0}
+.pa-paper .proof{margin:12px 0 35px}
+.pa-paper figure{margin:35px 0;width:100%}
+.pa-paper figure img{display:block;width:100%;height:auto}
+.pa-paper figcaption{font:14px/1.7 "Source Sans 3",system-ui,sans-serif;color:var(--text-light,#536b71);margin-top:12px}
+.pa-paper table{display:block;width:100%;overflow:auto;font-size:14px;line-height:1.6}
+.pa-paper table caption{text-align:left;margin-bottom:12px;line-height:1.65}
+.pa-paper td{min-width:9rem;overflow-wrap:anywhere}
+.pa-paper :is(p,td,th,a){overflow-wrap:anywhere}
+.pa-paper .pa-paper-equation{display:block;max-width:100%;overflow-x:auto}
+.pa-paper .pa-paper-equation .katex-display{margin:18px 0}
+.pa-paper .pa-paper-highlight{background:#f6f0db;outline:2px solid #9b8247;outline-offset:8px;border-radius:2px}
+html[data-theme="dark"] .pa-paper .pa-paper-highlight{background:#283e48;outline-color:#90c9bc}
+.pa-paper #refs{font-size:14px;line-height:1.75}
+.pa-paper .csl-entry{margin:0 0 14px}
+.pa-paper :is(summary,a):focus-visible{outline:3px solid #2a8177;outline-offset:3px}
+@media(max-width:700px){.pa-paper-toc ol{columns:1}.pa-paper :is(.lemma,.theorem,.remark){padding:10px 0}.pa-paper-edition{padding:12px}.pa-paper .katex{font-size:1.05em}}
+
+.pa-paper [id^="passage-"].pa-paper-highlight{box-decoration-break:clone;-webkit-box-decoration-break:clone;outline-offset:3px}
+.pa-paper [tabindex="0"]:focus-visible{outline:3px solid var(--accent,#2a8177);outline-offset:3px}
+
+.pa-paper .footnotes p{color:var(--text-light,#555)}
