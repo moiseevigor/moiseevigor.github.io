@@ -558,3 +558,60 @@ html[data-theme="dark"] .pa-language-card{background:#233d47;border-color:#36586
 html[data-theme="dark"] .pa-language-card h3{color:#f0f4f5}
 html[data-theme="dark"] .pa-language-card p{color:#d1e0df}
 html[data-theme="dark"] .pa-language-card p.pa-language-caution{color:#dec79f}
+
+
+/* Illustrated proof grammar — responsive, standalone teaching atlas. */
+.pa-grammar{background:#f8f7f2;min-height:100vh;}
+.pa-grammar-hero,.pa-grammar-path,.pa-grammar-explorer,.pa-grammar-layers{
+  padding:60px max(4%,calc((100% - 1320px)/2));margin:0 auto;
+}
+.pa-grammar-hero{background:#eaece6;border-bottom:1px solid #d6ded8;}
+.pa-grammar h1{max-width:920px;font:400 clamp(42px,5.4vw,78px)/1.15 Merriweather,Georgia,serif;letter-spacing:-.055em;color:#163549;margin:12px 0 22px;}
+.pa-grammar h1 em{color:#267f79;}
+.pa-grammar h2{font:400 clamp(28px,3vw,43px)/1.25 Merriweather,Georgia,serif;letter-spacing:-.03em;margin:12px 0 22px;color:#183a4b;}
+.pa-grammar-hero>p,.pa-grammar-explorer>p{max-width:880px;font:400 19px/1.7 "Source Sans 3",system-ui,sans-serif;color:#496672;margin:0 0 25px;}
+.pa-grammar .pa-section-mark a{color:inherit;text-decoration:none;}
+.pa-grammar-scope{max-width:1020px;border-left:3px solid #2d8985;background:#f8f8f2;padding:13px 17px;color:#455f68;font-size:16px;line-height:1.65;}
+.pa-grammar-path{border-bottom:1px solid #dce4e0;}
+.pa-scale-drawing{display:block;width:100%;height:auto;max-height:300px;margin:15px auto 0;}
+.pa-grammar-explorer{background:#ebf0ed;}
+.pa-grammar-layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:23px;min-width:0;}
+.pa-grammar-choices{display:grid;grid-template-columns:1fr;gap:5px;align-content:start;}
+.pa-grammar-choice{border:1px solid #d0ded9;border-radius:4px;padding:9px 10px;background:#f6f9f6;text-align:left;display:flex;gap:9px;align-items:center;cursor:pointer;min-width:0;min-height:42px;color:#225063;}
+.pa-grammar-choice:hover,.pa-grammar-choice:focus-visible{border-color:#539995;}
+.pa-grammar-choice[aria-pressed="true"]{background:#164c59;color:#fff;border-color:#164c59;}
+.pa-g-num{font:600 10px/1.3 ui-monospace,monospace;opacity:.65;flex:none;}
+.pa-g-tag{font:700 15px/1.3 "JetBrains Mono",ui-monospace,monospace;min-width:70px;}
+.pa-grammar-choice small{font-size:12px;opacity:.79;overflow-wrap:anywhere;}
+.pa-grammar-stage{min-width:0;background:#fdfcf8;border:1px solid #cedbd7;border-radius:5px;overflow:hidden;}
+.pa-grammar-drawing{padding:25px 24px 10px;background:#eff4ef;border-bottom:1px solid #d3e0d9;}
+#pa-grammar-svg{display:block;width:100%;height:auto;max-height:310px;}
+.pa-grammar-readout{padding:24px 29px 32px;}
+.pa-grammar-readout h3{font:650 clamp(21px,2.15vw,29px)/1.3 "Source Sans 3",sans-serif;color:#1c4457;margin:7px 0 10px;}
+.pa-grammar-readout>p{font-size:17px;line-height:1.67;color:#4e6670;}
+.pa-grammar-tags{display:flex;flex-wrap:wrap;gap:6px;margin:13px 0 18px;}
+.pa-grammar-tags span{padding:4px 9px;background:#e3eeea;border:1px solid #bed9d2;border-radius:3px;color:#336b68;font:500 12px/1.4 "JetBrains Mono",monospace;overflow-wrap:anywhere;}
+.pa-grammar-two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:21px;}
+.pa-grammar-two h4{margin:7px 0;font:bold 11px/1.4 "Source Sans 3",sans-serif;text-transform:uppercase;letter-spacing:.13em;color:#6d898b;}
+.pa-grammar-two pre{background:#123343;color:#e6f3f0;font:12px/1.7 "JetBrains Mono",monospace;white-space:pre-wrap;overflow-wrap:anywhere;padding:12px;border-radius:4px;min-height:89px;margin:0;}
+.pa-grammar-two p{font-size:14px;line-height:1.7;color:#526e75;margin:0;}
+.pa-grammar-layers{border-top:1px solid #d8e2dc;}
+.pa-grammar-layer-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;}
+.pa-grammar-layer-grid article{border-top:2px solid #438d86;padding-top:15px;min-width:0;}
+.pa-grammar-layer-grid article>span{font:700 11px/1.3 "Source Sans 3",sans-serif;letter-spacing:.13em;text-transform:uppercase;color:#478781;}
+.pa-grammar-layer-grid h3{font:650 20px/1.3 "Source Sans 3",sans-serif;margin:8px 0;color:#1d4557;}
+.pa-grammar-layer-grid code{display:block;font:12px/1.6 ui-monospace,monospace;background:#e3eee9;padding:10px;color:#2c5960;overflow-wrap:anywhere;white-space:pre-wrap;}
+.pa-grammar-layer-grid p{font-size:15px;line-height:1.7;color:#516c75;margin:11px 0;}
+.pa-grammar-foot{max-width:1000px;margin:29px 0 12px;border-left:2px solid #548e8b;padding-left:15px;color:#465f69;font-size:16px;line-height:1.7;}
+html[data-theme="dark"] .pa-grammar{background:#152a35;}
+html[data-theme="dark"] .pa-grammar-hero{background:#1c3540;}
+html[data-theme="dark"] .pa-grammar h1,html[data-theme="dark"] .pa-grammar h2{color:#e5eeee;}
+html[data-theme="dark"] .pa-grammar-hero>p,html[data-theme="dark"] .pa-grammar-explorer>p{color:#b4cdd0;}
+html[data-theme="dark"] .pa-grammar-scope,html[data-theme="dark"] .pa-grammar-stage{background:#223e49;color:#c5d7da;border-color:#486269;}
+html[data-theme="dark"] .pa-grammar-explorer,html[data-theme="dark"] .pa-grammar-drawing{background:#1b3541;}
+html[data-theme="dark"] .pa-grammar-choice{background:#294450;color:#e2eeee;border-color:#496775;}
+html[data-theme="dark"] .pa-grammar-choice[aria-pressed="true"]{background:#397c80;}
+html[data-theme="dark"] .pa-grammar-readout h3,html[data-theme="dark"] .pa-grammar-layer-grid h3{color:#e2eeed;}
+html[data-theme="dark"] .pa-grammar-readout>p,html[data-theme="dark"] .pa-grammar-two p,html[data-theme="dark"] .pa-grammar-layer-grid p{color:#c0d2d4;}
+@media(max-width:950px){.pa-grammar-layout{grid-template-columns:1fr}.pa-grammar-choices{grid-template-columns:repeat(4,minmax(0,1fr))}.pa-grammar-choice{display:block}.pa-g-tag{display:block;margin:3px 0}.pa-grammar-layer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:590px){.pa-grammar-hero,.pa-grammar-path,.pa-grammar-explorer,.pa-grammar-layers{padding:38px 5%}.pa-grammar-choices{grid-template-columns:repeat(3,minmax(0,1fr))}.pa-grammar-choice small{display:none}.pa-grammar-two{grid-template-columns:1fr}.pa-grammar-layer-grid{grid-template-columns:1fr}.pa-grammar-drawing{padding:10px}.pa-grammar-readout{padding:17px}.pa-grammar h1{font-size:39px}.pa-scale-drawing{min-height:160px}.pa-grammar-explorer>p{font-size:16px}}
