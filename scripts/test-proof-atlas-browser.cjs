@@ -62,7 +62,12 @@ async function run(){
     let hover=await page.locator('.pa-node-tooltip:not([hidden]) strong').textContent();
     check(hover==='Expression #'+r.root,'unexpected hover node '+hover+' / '+r.root);
     let neighbors=await page.locator('.pa-hover-neighbors li').count();
-    check(neighbors===r.degree,'one-hop degree mismatch '+neighbors+' / '+r.degree);
+    // The floating preview is deliberately capped at 24 + summary to avoid
+    // a 126-row DOM rebuild on every cursor movement. The degree remains exact.
+    check(neighbors===Math.min(24,r.degree)+(r.degree>24?1:0),
+      'hover dock preview mismatch '+neighbors+' / '+r.degree);
+    check((await page.locator('.pa-hover-details p').textContent()).includes('126'),
+      'hover dock must report exact 126-neighbor degree');
     let m=await page.evaluate(()=>window.__canvasMetrics);
     check(m.maxCirclePx<=9,'oversized hover marker at 1x: '+m.maxCirclePx);
     check(m.beziers>7200,'base proof edges not curved');
@@ -92,6 +97,37 @@ async function run(){
     // checking other visualization lenses (this tests the real UI flow).
     await page.locator('#pa-focus').click();
     await page.waitForTimeout(250);
+    // Subtree selection — all descendant leaves and a bounded, navigable
+    // list must appear, while hover never alters selection-panel scrolling.
+    await page.locator('#pa-search').fill('203');
+    await page.locator('#pa-find').click();
+    check((await page.locator('#pa-inspector-heading').textContent()).includes('203'),'proof root selection');
+    check((await page.locator('#pa-inspector-fields').textContent()).includes('Terminal leaves'),'missing descendant leaf count');
+    check((await page.locator('.pa-terminal-list button').count())===24,'missing preview of actual syntax leaves');
+    await page.locator('.pa-inspector-selection').evaluate(el=>{el.scrollTop=Math.min(170,el.scrollHeight-el.clientHeight)});
+    const scrollBefore=await page.locator('.pa-inspector-selection').evaluate(el=>el.scrollTop);
+    const rootBox=await rootPoint(page);
+    await page.mouse.move(rootBox.x,rootBox.y);
+    await page.waitForTimeout(260);
+    const scrollAfter=await page.locator('.pa-inspector-selection').evaluate(el=>el.scrollTop);
+    check(Math.abs(scrollAfter-scrollBefore)<2,'hover shifted the right inspector scroll '+scrollBefore+' -> '+scrollAfter);
+    const dock=await page.locator('.pa-hover-details').boundingBox();
+    await page.mouse.move(off.x+8,off.y+8);
+    await page.waitForTimeout(180);
+    const dockAfter=await page.locator('.pa-hover-details').boundingBox();
+    check(Math.abs(dock.height-dockAfter.height)<2,'hover dock shifted height');
+    await page.locator('#pa-search').fill('1658');
+    await page.locator('#pa-find').click();
+    check((await page.locator('#pa-inspector-fields').textContent()).includes('5'),'selected small subtree not reflected');
+    const smallLeafCount=await page.locator('.pa-terminal-list button').count();
+    check(smallLeafCount>=2&&smallLeafCount<=5,'small subtree leaves incorrect: '+smallLeafCount);
+    await page.screenshot({path:path.join(captures,'selected-small-subtree.png')});
+    await page.locator('#pa-search').fill('600');
+    await page.locator('#pa-find').click();
+    check((await page.locator('#pa-inspector-fields').textContent()).includes('Descendants'),
+      'terminal leaf should show root lineage rather than non-existent descendants');
+    check((await page.locator('.pa-terminal-list button').count())===1,'terminal expression should contain exactly one syntax leaf');
+    await page.screenshot({path:path.join(captures,'selected-terminal-leaf.png')});
     await page.locator('[data-mode="deps"]').click();
     await page.waitForTimeout(110);
     check((await page.locator('#pa-stage-count').textContent()).includes('42'),'dependency mode failed');
