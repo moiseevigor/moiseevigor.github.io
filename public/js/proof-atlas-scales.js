@@ -174,7 +174,7 @@
       'NOT PRESENT IN THIS BENCHMARK';
     $('pa-scale-status').classList.toggle('pa-scale-status-absent',!was);
     $('pa-scale-note').textContent=k.explanation;
-    $('pa-scale-core').textContent='Lean.Expr.'+form[id]+'\n\nIllustrative source:\n'+k.example;
+    $('pa-scale-core').textContent='Lean.Expr'+form[id]+'\n\nIllustrative source:\n'+k.example;
     $('pa-scale-graph-note').textContent='Solid links: expression children. Dashed links: attributes, context, universe levels or environmental references; these are not child expression edges.';
     $('pa-scale-module-note').textContent='A formal certificate is checked in a typing context. A collapsed module is valid only when its assumptions, scope, type and evidence are preserved.';
     $('pa-scale-meaning').textContent=meanings[id];
