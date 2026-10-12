@@ -75,6 +75,7 @@
     return matches.slice(0,limit);
   }
   function renderNamed(parent,n){
+    const complete=el('a','pr-complete-proof','Open complete source and proof graph ↗');complete.href='/projects/proof-atlas/library/?edition=published-15&proof='+encodeURIComponent(n.short==='CrossingData'?'CrossingData':n.name);parent.append(complete);
     parent.appendChild(pill(FORMAL));
     eyebrow(parent,n.kind+' · Crossing.lean · line '+n.line);
     heading(parent,n.short);

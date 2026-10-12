@@ -1,0 +1,34 @@
+name: Proof Atlas compiled proof audit
+on:
+  pull_request:
+    paths: ['research/proof-atlas/**', 'public/data/proof-atlas/library/**', 'public/data/proof-atlas/library-manifest.js', '.github/workflows/proof-atlas-compiled-proofs.yml']
+  push:
+    branches: [master]
+    paths: ['research/proof-atlas/**', 'public/data/proof-atlas/library/**', 'public/data/proof-atlas/library-manifest.js', '.github/workflows/proof-atlas-compiled-proofs.yml']
+  workflow_dispatch:
+jobs:
+  public-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 research/proof-atlas/verify_proof_library.py
+  constructor-controls:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned Lean compiler
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o /tmp/elan-init.sh
+          sh /tmp/elan-init.sh -y --default-toolchain leanprover/lean4:v4.33.1
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Run synthetic constructor and sharing controls without project proofs
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('research/proof-atlas')
+          source=(p/'ExportLibrary.lean').read_text().replace('import SE2Conjugate','')
+          controls=(p/'LibraryControls.lean').read_text().replace('import ExportLibrary','')
+          Path('/tmp/AtlasNativeControls.lean').write_text(source+'\n'+controls)
+          PY
+          lean /tmp/AtlasNativeControls.lean

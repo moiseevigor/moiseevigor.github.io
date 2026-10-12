@@ -75,7 +75,7 @@ theorem identity (P : Prop) : P → P := by
 
 can be understood, after elaboration, as a function taking a proposition `P` and a proof `h : P`, then returning that same proof. Schematically the proof term has nested lambda binders with a bound-variable reference in its body. The proposition to be proved has the corresponding dependent-function structure. **The lines connecting variable occurrences to binders are part of the logic, not decorative edges.**
 
-A second boundary matters just as much. **Tactics, macros, notations, and declarations are not additional `Lean.Expr` constructors.** They belong to the Lean surface language, elaboration process, or declaration environment. Twelve rules cover the *core expression algebra* but do not yet amount to a complete graphical language for every Lean source program. The exporter presently omits metadata payloads, so even its comprehensive constructor coverage must not be confused with lossless reconstruction of all source text or elaborator state.
+A second boundary matters just as much. **Tactics, macros, notations, and declarations are not additional `Lean.Expr` constructors.** They belong to the Lean surface language, elaboration process, or declaration environment. Twelve rules cover the *core expression algebra* but do not yet amount to a complete graphical language for every Lean source program. The initial exporter omitted metadata payloads. The complete-proof release below preserves typed metadata payloads and compiled term data, while keeping source syntax and elaborator state distinct from the kernel graph.
 
 The next test is whether typed visual composition can preserve these boundaries under collapsing and expansion, and whether it helps readers recognize actual mathematical inference patterns.
 
@@ -136,7 +136,7 @@ $$
 
 The existence result uses intermediate-value reasoning over phase intervals. The uniqueness result uses strict monotonicity within branches and the fact that apparent double descriptions at glued endpoints represent the same parameter. The proof is not justified by a winding-number slogan alone: a degree-one map need not be one-to-one.
 
-**For now, the diagram of this idea is an interpretation anchored to named formal results.** The initial export references those two lemmas but does not contain their full internal proofs. Automatically recovering the concept map from transitive formal dependencies is the next challenge.
+**For now, the diagram of this idea is an interpretation anchored to named formal results.** The initial export referenced those two lemmas without their internal proofs; the complete-proof library now contains both complete proofs. Automatically recovering the concept map from transitive formal dependencies is the next challenge.
 
 ## Research questions and failure criteria
 
@@ -255,6 +255,14 @@ graph navigation, and links additional declarations to their checked source
 headers. Their complete expression graphs have not been published. This is a more
 complete account of the formalization, not a claim that the entire manuscript is
 formalized or that editorial correspondence is kernel-certified.
+
+## Complete compiled proof inventories — 12 October 2026
+
+The [compiled proof library](/projects/proof-atlas/library/) extends the experiment from one theorem to every owned declaration in two finite corpora: 739 declarations, including 561 theorem proofs, in the published 15-module snapshot; and 1,359 declarations, including 1,083 theorem proofs, in the current 26-module development. Complete compiled types, available bodies, recursor rules and exact local declaration references are represented. The original crossing microscope remains a focused example.
+
+The representation retains shared subterms without identifying expressions that differ in binder names, annotations or metadata. The current corpus contains 1,277,896 distinct expression nodes representing 670,018,056 expanded occurrences. Bound-variable meaning follows a root-to-node path, so sharing does not imply that a variable has one enclosing binder in every occurrence. This is a structural result about the extracted corpus, not a mathematical proof-equivalence claim.
+
+Five of the article's six proof blocks now link to complete supporting compiled proofs. The Floquet proof remains unformalized in the published snapshot, and the nine numbered results retain their audited partial or unformalized status. Complete declaration coverage is not full formalization of the mathematical article. Original source projects and tactic scripts remain private; public checks reproduce the packet audits rather than a fresh project-source kernel rebuild. The [coverage report](/projects/proof-atlas/coverage/) states these boundaries precisely.
 
 ## References and nearby work
 

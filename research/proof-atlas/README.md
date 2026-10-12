@@ -6,7 +6,7 @@
 
 ## What is public
 
-This directory documents a measurable experiment converting a real Lean 4 theorem's elaborated **type and proof expression** into a structural graph. The structural dataset retains anonymized labels for graph navigation. Since the authorized 12 October release, `crossing-terms.js` additionally publishes the complete exported payloads of all 7,288 occurrences in the crossing type and proof, with actual declaration names and structural paths. The original tactic script and private working manuscript are not included. The already public 7 October manuscript snapshot has a full web edition.
+This directory documents a measurable experiment converting a real Lean 4 theorem's elaborated **type and proof expression** into a structural graph. The structural dataset retains anonymized labels for graph navigation. Since the authorized 12 October release, `crossing-terms.js` additionally publishes the complete exported payloads of all 7,288 occurrences in the crossing type and proof, with actual declaration names and structural paths. The compiled proof release additionally publishes every available type and body in two separately labeled extracted inventories. Original proof scripts and source projects remain private. The private working manuscript is not included. The already public 7 October manuscript snapshot has a full web edition.
 
 The measured benchmark:
 
@@ -19,7 +19,7 @@ The measured benchmark:
 | Distinct directly referenced declarations | 42 |
 | Longest root-to-expression path | 49 |
 
-The private Lean exporter and validation workflow regenerated the benchmark directly from the theorem. This public projection alone is **not a standalone formal proof certificate**, and a public reader cannot fully reproduce Lean kernel validity from it.
+The private Lean exporter and validation workflow regenerated the benchmark directly from the theorem. The old structural projection alone is **not a standalone formal proof certificate**. The compiled-proof library publishes complete extracted type/body graphs and provenance hashes. Public packet audits verify their serialization; original source projects remain private.
 
 Run `python3 research/proof-atlas/verify_public_data.py` from the site repository root to audit graph topology independently.
 
@@ -327,3 +327,17 @@ checks verify the named examples, every target, Greek source fragments, uncovere
 controls, stale-data rejection, all 916 formulas, responsive layout, original graph
 navigation, and scoped light/dark accessibility. Public CI audits the evidence and
 presentation; fresh private-source kernel replay remains a local reproducible audit.
+
+
+## Complete compiled proof library and bounded extraction
+
+[Coverage and checks](https://moiseevigor.github.io/projects/proof-atlas/coverage/) defines the finite denominators: 739 declarations / 715 available bodies in the published 15-module snapshot, and 1,359 / 1,335 in the current 26-module snapshot. Complete compiled types, available bodies, recursor rules and ordered expression links are public. Original project source, tactic scripts, source archives and extraction logs remain private.
+
+`ExprDAG/1` preserves full structural equality, exact decimal counts and contextual binder paths. The browser loads one declaration at a time and paginates compact decoded subterm listings. The original 7,288-occurrence microscope remains a focused example.
+
+```sh
+python3 research/proof-atlas/verify_proof_library.py
+node scripts/test-proof-atlas-library.cjs
+```
+
+Every original type and available body passed native kernel checking during private extraction. Public validation independently verifies packet hashes, graph closure, payloads, reference counts and completeness against the extracted inventory. It does not reproduce private native kernel validity or full mathematical article formalization. The native exporter and synthetic controls are tooling; no private project proof script is included.

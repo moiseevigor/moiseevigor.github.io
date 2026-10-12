@@ -978,5 +978,13 @@
     "passage-arcs",
     "passage-analytic-scope"
   ],
+  "proofAnchors": [
+    "proof-lem-identities",
+    "proof-lem-riccati",
+    "proof-lem-crossing",
+    "proof-thm-first",
+    "proof-thm-cells",
+    "proof-thm-floquet"
+  ],
   "method": "Pandoc AST conversion of published source; math bodies preserved with print wrappers removed and source equation numbers restored; all internal targets audited."
 }

@@ -98,6 +98,7 @@ jobs:
           node scripts/test-proof-atlas-distill.cjs
           node scripts/test-proof-atlas-article-columns.cjs
           node scripts/test-proof-atlas-coverage.cjs
+          node scripts/test-proof-atlas-library.cjs
         env:
           ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
       - name: Browser regression — complete Lean.Expr visual grammar

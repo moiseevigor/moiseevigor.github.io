@@ -33,7 +33,7 @@ for(const d of data.declarations){
   assert.equal(await page.locator('.pa-lean-line').count(),0,'Comparison data should load only on demand');
   await page.getByRole('button',{name:'Article + Lean',exact:true}).click();
   await page.waitForFunction(()=>document.body.dataset.paReadingMode==='compare');
-  await page.waitForFunction(()=>document.querySelectorAll('.pa-row-connections svg a[data-lean-name^="CrossingData."]').length===10);
+  await page.waitForFunction(()=>document.querySelectorAll('.pa-row-connections svg a[data-lean-name^="CrossingData."]').length>=10);
   assert.equal(new URL(page.url()).searchParams.get('view'),'lean');
   assert.equal(await page.locator('.pa-lean-line').count(),19+coverage.counts.sourceLines);assert.equal(await page.locator('.pa-lean-passage').count(),6);
   assert.equal(await page.locator('.pa-paper .katex').count(),916,'Mode switch altered formulas');
@@ -52,7 +52,7 @@ for(const d of data.declarations){
   await page.evaluate(()=>document.getElementById('passage-phase-equation').scrollIntoView({block:'center'}));
   await page.screenshot({path:path.join(dir,'columns-wide.png')});
   assert(await page.evaluate(()=>[...document.querySelectorAll('.pa-row-connections svg a')].every(a=>{
-   const d=[...a.closest('.pa-aligned-row').querySelectorAll('.pa-lean-statement')].find(n=>n.dataset.leanName===a.dataset.leanName),r=a.querySelector('rect').getBoundingClientRect(),s=d.getBoundingClientRect();return Math.abs((r.top+r.bottom)/2-(s.top+s.bottom)/2)<3;
+   const d=[...a.closest('.pa-aligned-row').querySelectorAll('.pa-lean-statement,.pa-source-proof')].find(n=>n.dataset.leanName===a.dataset.leanName),r=a.querySelector('rect').getBoundingClientRect(),s=d.getBoundingClientRect();return Math.abs((r.top+r.bottom)/2-(s.top+s.bottom)/2)<3;
   })),'Graph nodes are not aligned with their statement lines');
   await page.addScriptTag({path:require.resolve('axe-core/axe.min.js')});
   for(const theme of ['light','dark']){
@@ -77,7 +77,7 @@ for(const d of data.declarations){
   await page.reload();await page.waitForFunction(()=>document.body.dataset.paReadingMode==='article');assert.equal(await page.locator('.pa-lean-line').count(),0,'Comparison leaked into default reading');
   await page.setViewportSize({width:1680,height:1050});await page.goto(base+'/projects/proof-atlas/article/?view=lean#passage-counting');
   await page.waitForFunction(()=>document.body.dataset.paReadingMode==='compare');
-  await page.locator('[data-lean-name="CrossingData.crossing"] [data-source-line="233"]').click();
+  await page.locator('.pa-lean-statement[data-lean-name="CrossingData.crossing"] [data-source-line="233"]').click();
   await page.waitForURL('**/projects/proof-atlas/app/#decl-crossing');
   await page.waitForFunction(()=>ProofAtlasAPI.getSnapshot().mode==='map'&&ProofAtlasAPI.getSnapshot().namedSelected==='crossing');
   assert.equal(await page.locator('#pa-reader-content').getAttribute('data-article-passage'),'counting');
