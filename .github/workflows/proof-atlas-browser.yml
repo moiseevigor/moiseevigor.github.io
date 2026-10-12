@@ -5,6 +5,8 @@ on:
     paths:
       - 'public/js/proof-atlas.js'
       - 'public/js/proof-atlas-grammar.js'
+      - 'public/js/proof-atlas-scales.js'
+      - 'public/data/proof-atlas/lean-expr-grammar.js'
       - 'public/css/proof-atlas.css'
       - 'projects/proof-atlas/**'
       - 'scripts/test-proof-atlas-browser.cjs'
