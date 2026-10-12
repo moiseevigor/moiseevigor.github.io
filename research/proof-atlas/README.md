@@ -290,3 +290,40 @@ shareable comparison links; retained formulas; responsive overflow; light/dark W
 A/AA audits; and a deliberately mismatched article hash rejection. This remains a
 statement correspondence interface, not a complete line-by-line alignment of the
 whole manuscript with original Lean proof scripts.
+
+
+## Every numbered statement audited — 12 October 2026
+
+The comparison view now includes **all nine numbered lemmas, theorems and remarks**,
+with explicit coverage statuses and checked counterpart clauses. The missing index
+links for Theorems 3.4 and 4.1 have been added. Five article statements have partial,
+conditional Lean counterparts; four remain unformalized. No complete article
+statement is promoted to fully formalized. The current comparison contains
+**49 declarations and 107 original source lines**, with 39 new declarations checked
+against the exact research revision accompanying the published manuscript.
+
+Read the [complete review](article-coverage-review.md),
+[version-bound audit](article-coverage-audit.json), and
+[actual compiler check log](article-coverage-lean-check.log). The fifteen pinned
+modules rebuilt successfully with Lean 4.33.1 and matching Mathlib. The kernel
+axiom lists use only the standard three dependencies; Jacobi structure fields and
+finite-tangency parameters remain mathematical hypotheses. In particular, the
+first-time results use `hfin`, the cell counts use `hL/hR`, and Lean cell `m` is
+article cell `n = m + 1`.
+
+The new source snippets retain module and header hashes, line numbers, checked
+full types, and provenance. Theorem proof bodies are not newly published. For new
+declarations, connection nodes and line links open the actual source header in
+the article; they do not pretend that an expression graph for that theorem has
+been released. Existing crossing expression and named-declaration links are
+preserved. Unformalized results receive scope explanations without fabricated
+proof links. Default centered reading and the entire manuscript conversion remain
+unchanged.
+
+`verify_article_coverage.py` independently checks completeness of the nine numbered
+statement targets, literal excerpt hashes, module/check evidence, source lines,
+standard axiom lists, conditional premises and exclusions. The expanded browser
+checks verify the named examples, every target, Greek source fragments, uncovered
+controls, stale-data rejection, all 916 formulas, responsive layout, original graph
+navigation, and scoped light/dark accessibility. Public CI audits the evidence and
+presentation; fresh private-source kernel replay remains a local reproducible audit.
