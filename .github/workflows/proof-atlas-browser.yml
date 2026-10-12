@@ -44,8 +44,11 @@ jobs:
           npx playwright install --with-deps chromium
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3'
-          bundler-cache: true
+          ruby-version: '3.1'
+      - name: Install locked website dependencies for the runner platform
+        run: |
+          bundle lock --add-platform x86_64-linux
+          bundle install --jobs 4 --retry 3
       - name: Build and serve the actual website with its global styles
         run: |
           bundle exec jekyll build --destination _site_production
