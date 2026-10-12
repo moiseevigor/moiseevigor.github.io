@@ -153,3 +153,44 @@ text-to-graph navigation, local hypothesis scope, complete 7,085-row download,
 shareable occurrence link, mobile overflow and a scoped automated accessibility
 audit. This does not establish general mathematical explanation or reconstruction
 of arbitrary Lean source programs.
+
+## Lean ↔ article index — 12 October 2026
+
+The Article tab displays exact passages from the **already public 7 October
+manuscript snapshot** of `conjugate_times_se2.tex`. The index covers the crossing
+principle only: six passages, ten named declarations and three exact expression
+anchors. It does not index the whole article or assign a sentence to every kernel
+node. The existing article's theorem table explicitly names `crossing` as the
+counting clause of `lem:crossing`; other links are curated formula, hypothesis or
+supporting-argument correspondences. They are not kernel-certified equivalences.
+
+`build_article_index.py` extracts literal source slices and records article and
+excerpt SHA-256 hashes, stable LaTeX labels, source line ranges, PDF pages, the
+CoreGIR hash and exact occurrence paths. Changes to either source require review
+of the correspondence. The resolver rejects mismatched expression exports or
+paths. Declaration identity and structural ancestry provide context; it does not
+infer correspondence from keyword similarity. Small descendants inherit a clearly
+labelled enclosing passage, rather than claiming an individual sentence match.
+
+Expression 1852 maps to the phase equation, with Lean's integer period shift
+explained separately. Both directions work: select Lean to read its passage, or
+choose an indexed passage and open its mapped declarations/occurrences. The
+analytic-scope passage has no mapped proof: zero orders and finite tangency phases
+are explicitly outside the formalization in this article snapshot.
+
+Validation:
+
+```sh
+python3 research/proof-atlas/build_article_index.py
+node scripts/test-proof-atlas-article-index.cjs
+# After building and serving the site as above:
+node scripts/test-proof-atlas-article-browser.cjs
+```
+
+The independent index audit checks literal excerpt identity, hashes, line ranges,
+all declaration names, reverse links and stale-map rejection. Browser checks cover
+rendered equations, bidirectional navigation, inherited context, unsupported analytic
+claims, deep links, responsive layouts and scoped automated accessibility. The
+published article snapshot remains unchanged. Original tactic/source-span export,
+coverage of other manuscript statements, one-to-many source proof steps and formal
+certification of these editorial links remain open.

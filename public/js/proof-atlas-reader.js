@@ -9,6 +9,7 @@
   const root=document.getElementById('proof-atlas');
   if(!root||!data||!api||!window.ProofAtlasTermReader)return;
   const decoder=window.ProofAtlasTermReader.create(data,terms);
+  const articleIndex=window.ProofAtlasArticleIndex?.create(data,terms,decoder,window.PROOF_ATLAS_ARTICLE_INDEX);
   const $=id=>document.getElementById(id), app=root.querySelector('.pa-app');
   const panel=$('pa-reader'), scroll=$('pa-reader-scroll'), content=$('pa-reader-content');
   const toggle=$('pa-reader-toggle'),close=$('pa-reader-close');
@@ -33,7 +34,7 @@
     psiP:'The positive branch of the zero-curve phase correspondence.',
     psiM:'The negative branch of the zero-curve phase correspondence.'
   };
-  const state={tab:'explain',selection:null,open:true,history:[]};
+  const state={tab:new URLSearchParams(window.location.search).get('reader')==='article'?'article':'explain',selection:null,open:true,history:[]};
   const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   const el=(tag,className,text)=>{const n=document.createElement(tag);if(className)n.className=className;if(text!==undefined)n.textContent=String(text);return n;};
   const word=n=>Number(n).toLocaleString('en-US');
@@ -192,10 +193,41 @@
     $('pa-branch-desc').disabled=leaf;
     $('pa-branch-lineage').disabled=data.parent[i]<0;
   }
+  function renderArticle(parent,selection){
+    heading(parent,'Article correspondence');
+    if(!articleIndex?.valid){notice(parent,'No compatible article index is available for this expression export.');return;}
+    const match=articleIndex.resolve(selection),passage=state.articleId?articleIndex.get(state.articleId):match?.passage;
+    if(!passage){paragraph(parent,'This selection has no indexed article passage. You can browse the current crossing-principle index below.');}
+    else{
+      parent.dataset.articlePassage=passage.id;
+      eyebrow(parent,state.articleId?'Browsing the article':match.relation);
+      heading(parent,passage.title);
+      if(!state.articleId&&match.inherited)notice(parent,'This is context for the enclosing expression. No separate article sentence has been assigned to this small node.');
+      const quote=el('blockquote','pr-article-quote',passage.raw.replace(/\s+/g,' '));parent.appendChild(quote);
+      if(window.renderMathInElement)window.renderMathInElement(quote,{delimiters:[{left:'$',right:'$',display:false}],macros:articleIndex.source.macros,throwOnError:false});
+      paragraph(parent,passage.note);
+      const cite=el('p','pr-detail','Exact excerpt · '+passage.anchor+' · source lines '+passage.sourceLines.join('–')+' · snapshot '+articleIndex.source.snapshotDate);parent.appendChild(cite);
+      const links=makeActions(parent),pdf=el('a',null,'Open article PDF ↗');pdf.href=articleIndex.source.pdf+'#page='+passage.pdfPage;links.appendChild(pdf);
+      const tex=el('a',null,'Open article source ↗');tex.href=articleIndex.source.url;links.appendChild(tex);
+      const reverse=articleIndex.reverse(passage.id);
+      eyebrow(parent,'Lean linked to this passage');
+      const actions=makeActions(parent);
+      if(!reverse.anchors.length&&!reverse.declarations.length)paragraph(parent,'No mapped Lean proof: this passage records the formalization boundary.');
+      for(const a of reverse.anchors)action(actions,'Read subtree #'+a.occurrence,()=>toExpression(a.occurrence));
+      for(const name of reverse.declarations){const short=name.split('.').pop();if(namedMap.has(short))action(actions,'Open '+short,()=>toNamed(short));}
+      const provenance=el('details','pr-context');provenance.appendChild(el('summary',null,'Source and alignment provenance'));
+      paragraph(provenance,'Article SHA-256: '+articleIndex.source.sha256);paragraph(provenance,'Excerpt SHA-256: '+passage.excerptSha256);
+      paragraph(provenance,'Counting correspondence is explicitly listed in the article’s theorem table, source line '+articleIndex.source.tableLine+'. Other links are curated argument and formula correspondences, not kernel-certified article equivalence.');
+      const raw=el('details','pr-context');raw.appendChild(el('summary',null,'Verbatim source excerpt'));code(raw,passage.raw);provenance.appendChild(raw);parent.appendChild(provenance);
+    }
+    const menu=el('details','pr-context');menu.open=!passage;menu.appendChild(el('summary',null,'Browse indexed article passages · '+articleIndex.passages.length));const buttons=makeActions(menu);
+    for(const p of articleIndex.passages)action(buttons,p.title,()=>{state.articleId=p.id;render();});parent.appendChild(menu);
+    parent.appendChild(el('p','pr-detail',articleIndex.scope));
+  }
   function render(opts={}){
     const preserve=opts.resetScroll===false;
     const oldY=preserve?scroll.scrollTop:0;
-    content.replaceChildren();
+    content.replaceChildren();delete content.dataset.articlePassage;
     const s=state.selection||{type:'decl',id:'crossing'};
     $('pa-reader-title').textContent=s.type==='expr'?'Subtree #'+s.id:
       s.type==='decl'?s.id:s.type==='dep'?'Declaration dependency':'Interpretation';
@@ -204,13 +236,14 @@
       const active=b.dataset.paReaderTab===state.tab;
       b.classList.toggle('active',active);b.setAttribute('aria-selected',active?'true':'false');
     });
-    if(s.type==='decl'){
+    if(state.tab==='article')renderArticle(content,s);
+    else if(s.type==='decl'){
       const n=namedMap.get(s.id);if(n)renderNamed(content,n);
     }else if(s.type==='expr')renderExpr(content,s.id);
     else if(s.type==='dep')renderDep(content,s.id);
     else renderIdea(content,s.id);
     displayHud(s);
-    $('pa-reader-status').textContent=s.type==='decl'?'Lean declaration · source-level':
+    $('pa-reader-status').textContent=state.tab==='article'?'Article excerpt · curated correspondence':s.type==='decl'?'Lean declaration · source-level':
       s.type==='expr'?(decoder.complete?'Actual subtree · '+word(data.size[s.id])+' occurrences':'Structural subtree · payload unavailable'):
       s.type==='dep'?'Lean environment dependency':'Editorial explanation';
     scroll.scrollTop=preserve?oldY:0;
@@ -235,7 +268,7 @@
   window.addEventListener('proof-atlas:selection',e=>{
     if(e.detail.type==='expr'&&state.selection?.type==='expr'&&e.detail.id!==state.selection.id&&!state.restoring)state.history.push(state.selection.id);
     if(e.detail.type!=='expr')state.history=[];
-    state.selection=e.detail;
+    state.selection=e.detail;state.articleId=null;
     render();
   });
   window.addEventListener('proof-atlas:mode',()=>{
@@ -249,6 +282,12 @@
     {type:'expr',id:snapshot.selected};
   setOpen(true);render();
   // Share a selected occurrence without changing other page anchors.
-  const selected=window.location.hash.match(/^#expr-(\d+)$/);
-  if(selected&&Number(selected[1])<data.parent.length)toExpression(Number(selected[1]));
+  function restoreLocation(){
+    const selected=window.location.hash.match(/^#expr-(\d+)$/);
+    if(selected&&Number(selected[1])<data.parent.length)toExpression(Number(selected[1]));
+    const passageLink=window.location.hash.match(/^#article-([a-z-]+)$/);
+    if(passageLink&&articleIndex?.get(passageLink[1])){state.tab='article';state.articleId=passageLink[1];render();}
+  }
+  window.addEventListener('hashchange',restoreLocation);
+  restoreLocation();
 })();

@@ -874,3 +874,11 @@ html[data-theme="dark"] .pa-scale-graph-fields span{background:#223d47;color:#ec
 .pa-reader .pr-term-label{overflow-wrap:anywhere;min-width:0}
 .pa-reader .pr-term-more{background:#e7f0ed;color:#20535b;border:1px solid #afc5bc;border-radius:4px;padding:10px;font:600 13px/1.4 "Source Sans 3",system-ui,sans-serif;cursor:pointer}
 .pa-reader :is(button,summary,a):focus-visible{outline:3px solid #267d77;outline-offset:2px}
+
+/* Article passages are source excerpts with explicit correspondence scope. */
+.pa-reader-tabs{grid-template-columns:1fr 1fr 1fr}
+.pa-reader .pr-article-quote{margin:16px 0 22px;padding:0 0 0 16px;border-left:3px solid #337872;color:#234753;font:16px/1.85 Georgia,serif;overflow-wrap:anywhere}
+.pa-reader .pr-article-quote .katex{font-size:1em}
+.pa-reader .pr-article-quote .katex-html{white-space:normal}
+
+html[data-theme] .pa-reader .pr-article-quote{background:#edf3ee;color:#234753;border-color:#337872;padding:10px 16px}

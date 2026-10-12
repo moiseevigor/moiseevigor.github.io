@@ -68,7 +68,15 @@ const assert=(ok,message)=>{if(!ok)throw Error(message);};
    await page.locator('[data-layer="syntax"]').click();await page.locator('[data-id="syntax-ident"]').click();
    const dims=await page.evaluate(()=>({width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth}));
    assert(dims.scroll<=dims.width+2,'Responsive overflow at '+width);
-   const font=await page.locator('.pa-diagram-field-name').first().evaluate(e=>{const s=e.ownerSVGElement;const view=s.viewBox.baseVal;return parseFloat(getComputedStyle(e).fontSize)*Math.min(s.clientWidth/view.width,s.clientHeight/view.height);});
+   // Resize redraws can detach a previously located text node. Read the
+   // current SVG and its label together in one browser turn.
+   const measurement=await page.waitForFunction(()=>{
+    const s=document.getElementById('pa-grammar-svg'),e=s?.querySelector('.pa-diagram-field-name');
+    if(!e||!s.isConnected||!s.viewBox.baseVal.width)return false;
+    const view=s.viewBox.baseVal;
+    return parseFloat(getComputedStyle(e).fontSize)*Math.min(s.clientWidth/view.width,s.clientHeight/view.height);
+   });
+   const font=await measurement.jsonValue();await measurement.dispose();
    assert(font>=12,'Unreadably small diagram labels at '+width+': '+font);
   }
   await page.setViewportSize({width:390,height:850});await page.locator('#pa-reference-detail').scrollIntoViewIfNeeded();
