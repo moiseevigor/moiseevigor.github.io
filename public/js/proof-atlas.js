@@ -446,6 +446,11 @@
     sceneEnd();$('pa-stage-count').textContent='Interpretation by the researchers · not inferred by the compiler';
   }
   function draw(){if(!canvas.width)return; if(state.mode==='map')drawMap();else if(state.mode==='whole')drawWhole();else if(state.mode==='deps')drawDeps();else if(state.mode==='recursive')drawRecursive();else drawMeaning();}
+  function announceSelection(type,id){
+    window.dispatchEvent(new CustomEvent('proof-atlas:selection',{
+      detail:{type,id,mode:state.mode}
+    }));
+  }
   function updateMode(mode){
     state.hover=null;state.hoverPower=state.hoverTarget=0;
     tooltip.hidden=true;fillHoverDetails(null);
@@ -455,6 +460,7 @@
     const names=titles[mode];$('pa-view-title').textContent=names[0];$('pa-view-subtitle').textContent=names[1];
     document.querySelectorAll('.pa-modes button').forEach(b=>{const on=b.dataset.mode===mode;b.classList.toggle('is-active',on);b.setAttribute('aria-pressed',on?'true':'false');});
     draw();
+    window.dispatchEvent(new CustomEvent('proof-atlas:mode',{detail:{mode}}));
   }
   function field(name,value) {
     const dl=$('pa-inspector-fields'),dt=document.createElement('dt'),dd=document.createElement('dd');
@@ -491,6 +497,7 @@
     if(n.external?.length)field('Other source-level proof machinery',n.external.join(', '));
     $('pa-canvas-status').textContent=n.name+' · '+n.kind;
     draw();
+    announceSelection('decl',id);
   }
   function describeTerminal(i){
     const k=kind(i),dep=constantAt.get(i);
@@ -615,6 +622,7 @@
     $('pa-canvas-status').textContent=isTerminal?'Terminal #'+i+' · ancestry highlighted':
       'Subtree #'+i+' · '+fmt(terminalCounts[i])+' leaves';
     draw();
+    announceSelection('expr',i);
   }
   function selectDep(i){
     resetSelectionScroll();
@@ -624,6 +632,7 @@
     field('Direct uses',fmt(d.count));field('Reference kind',d.local?'SE(2) project-local':'Lean / mathlib');
     if(d.uses?.length)action('Inspect first occurrence',()=>{updateMode('whole');selectExpr(d.uses[0]);});
     $('pa-canvas-status').textContent='Selected declaration: '+depName(d,i);draw();
+    announceSelection('dep',i);
   }
   function selectIdea(id){
     const it=reasons.find(x=>x.id===id);if(!it)return;
@@ -638,6 +647,7 @@
     }
     $('pa-canvas-status').textContent='Selected interpretive node: '+it.title;
     draw();
+    announceSelection('idea',id);
   }
 
   // Every edge listed here is one hop in the currently shown explanatory
@@ -879,6 +889,19 @@
     canvasObserver.observe(canvasFrame);
   }
   window.addEventListener('resize',refitSoon);
+  window.ProofAtlasAPI={
+    selectExpression(i){if(state.mode!=='whole')updateMode('whole');selectExpr(i);},
+    selectDeclaration(id){if(state.mode!=='map')updateMode('map');selectDeclaration(id);},
+    selectDependency(i){if(state.mode!=='deps')updateMode('deps');selectDep(i);},
+    mode(mode){updateMode(mode);},
+    setScope(scope){
+      if(scope!=='subtree'&&scope!=='lineage')return;
+      state.selectionScope=scope;draw();
+      announceSelection('expr',state.selected);
+    },
+    getSnapshot(){return {mode:state.mode,selected:state.selected,namedSelected:state.namedSelected,scope:state.selectionScope};},
+    getChildIds(i){return i>=0&&i<N?children[i].slice():[];}
+  };
   fillHoverDetails(null);
   if(namedNodes.length){updateMode('map');resize();selectDeclaration('crossing');}
   else{updateMode('whole');resize();selectExpr(D.roots[1]);}
