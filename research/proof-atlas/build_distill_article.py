@@ -120,21 +120,23 @@ def build():
         i=5830 if p['id']=='phase-equation' else anchors[0]['occurrence'] if anchors else None
         url=('/projects/proof-atlas/app/#expr-'+str(i)) if i is not None else '/projects/proof-atlas/app/#article-'+p['id']
         backlinks.append('<li><a href="#'+p['htmlAnchor']+'">'+html.escape(p['title'])+'</a> · <a href="'+url+'">Open in Proof Atlas ↗</a></li>')
-    introduction='''<div class="pa-paper-edition" role="note"><strong>Web edition · published 7 October 2026 snapshot.</strong> The manuscript text, formulas, figures and references are reproduced below. Its Lean coverage is recorded in <a href="#app:lean">Appendix A</a>. <a href="/public/research/se2/conjugate_times_se2.pdf">Original PDF</a> · <a href="/public/research/se2/conjugate_times_se2.tex">Original TeX</a> · <a href="/projects/proof-atlas/app/">Proof Atlas</a></div>'''
+    introduction='''<div class="pa-paper-edition" role="note"><strong>Web edition · manuscript snapshot of 7 October 2026.</strong> The manuscript text, formulas, figures and references are reproduced below. Its Lean coverage is recorded in <a href="#app:lean">Appendix A</a>. <a href="/public/research/se2/conjugate_times_se2.pdf">Original PDF</a> · <a href="/public/research/se2/conjugate_times_se2.tex">Original TeX</a> · <a href="/projects/proof-atlas/app/">Proof Atlas</a></div>'''
     coverage='<details class="pa-paper-links"><summary>Passages linked to the Lean proof atlas</summary><ul>'+''.join(backlinks)+'</ul></details>'
     front='''---
 layout: distill
 title: "All Conjugate Times of the Rotating Geodesics in the Sub-Riemannian Problem on SE(2)"
 subtitle: "The published manuscript, with formulas and direct links to the Lean proof atlas."
 permalink: /projects/proof-atlas/article/
+page_class: proof-atlas-article-page
 date: 2026-10-12
 math: true
 reference_style: bibliography
 description: "Distill web edition of the published SE(2) rotating-geodesic manuscript, preserving mathematical statements, proofs, figures, references and exact Lean correspondence anchors."
 ---
-<link rel="stylesheet" href="/public/css/proof-atlas-article.css?v=1">
+<link rel="stylesheet" href="/public/css/proof-atlas-article.css?v=2">
 '''
-    content=front+'{% raw %}<div class="l-body pa-paper" data-source-sha256="'+source_hash+'">'+introduction+toc+coverage+rendered+'</div>{% endraw %}\n<script src="/public/js/proof-atlas-article.js?v=1" defer></script>\n'
+    toolbar='''<nav class="pa-reading-toolbar" aria-label="Article reading mode" hidden><div class="pa-reading-options" role="group" aria-label="Reading layout"><button type="button" data-pa-reading="article" aria-pressed="true">Article</button><button type="button" data-pa-reading="compare" aria-pressed="false">Article + Lean</button></div><span id="pa-reading-status" role="status">Centered reading</span></nav>'''
+    content=front+'{% raw %}'+toolbar+'<div class="l-body pa-paper" data-source-sha256="'+source_hash+'">'+introduction+toc+coverage+rendered+'</div>{% endraw %}\n<script src="/public/js/proof-atlas-article.js?v=2" defer></script>\n'
     class Audit(HTMLParser):
         def __init__(self):super().__init__();self.ids=[];self.targets=[];self.image_count=0
         def handle_starttag(self,tag,attrs):

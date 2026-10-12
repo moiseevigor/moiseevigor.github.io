@@ -289,6 +289,8 @@
   function restoreLocation(){
     const selected=window.location.hash.match(/^#expr-(\d+)$/);
     if(selected&&Number(selected[1])<data.parent.length)toExpression(Number(selected[1]));
+    const declaration=window.location.hash.match(/^#decl-([A-Za-z0-9_]+)$/);
+    if(declaration&&namedMap.has(declaration[1]))toNamed(declaration[1]);
     const passageLink=window.location.hash.match(/^#article-([a-z-]+)$/);
     if(passageLink&&articleIndex?.get(passageLink[1])){state.tab='article';state.articleId=passageLink[1];render();}
   }

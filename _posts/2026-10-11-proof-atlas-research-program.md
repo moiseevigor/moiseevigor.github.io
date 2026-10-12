@@ -213,6 +213,25 @@ responsive layout and scoped light/dark accessibility checks pass. The full arti
 is readable online, but its Lean index remains bounded to six crossing-principle
 passages and ten declarations; other manuscript statements are not yet aligned.
 
+## 12 October 2026: reading prose beside its Lean statements
+
+The manuscript now opens as a centered article. Its **Article + Lean** control
+adds the corresponding Lean statement lines alongside the indexed passages;
+[switch to the comparison view](/projects/proof-atlas/article/?view=lean#passage-phase-equation).
+The lines retain their actual numbers in `Crossing.lean`. On wide screens, a middle
+connection lane links each article excerpt to its statement; source-line and graph
+links open the matching declaration in Proof Atlas. Smaller screens use two columns
+or stack the Lean excerpt directly after its prose. Keyboard focus and pointer hover
+identify the corresponding passage without changing the manuscript text.
+
+This comparison covers the current six passages, ten declarations and nineteen
+original statement lines. Other article passages remain unaligned. The source
+excerpts omit theorem proof bodies; the full exported crossing proof term remains
+available in the graph reader. Tests check original line text and hashes, retained
+formulas, responsive geometry, exact named-declaration navigation, both themes and
+rejection of stale article data. The comparison view is optional; ordinary article
+links continue to open the centered human-readable edition.
+
 ## References and nearby work
 
 - [Lean 4: Expressions](https://lean-lang.org/doc/api/Lean/Expr.html) and [Theorem Proving in Lean](https://lean-lang.org/theorem_proving_in_lean4/Propositions-and-Proofs/) — the underlying term language and proof typing.

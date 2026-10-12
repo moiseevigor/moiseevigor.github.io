@@ -246,3 +246,47 @@ index still covers only six crossing-principle passages and ten named declaratio
 Other manuscript results are not yet linked, and a kernel node does not necessarily
 have its own article sentence. These are curated correspondences, not a formal
 certification that the manuscript and Lean are equivalent.
+
+
+## Centered reading and aligned Lean columns — 12 October 2026
+
+The full manuscript defaults to a centered human-readable column. **Article + Lean**
+opens a comparison layout with the prose on the left and corresponding original
+Lean statement lines on the right. Screens at least 1,500 pixels wide also show
+curved correspondence connections in the middle; narrower desktop screens use two
+columns, and small screens stack each Lean excerpt below its article block. These
+are curated passage-to-statement connections, not proof dependency edges. Hover or
+keyboard focus on a source line identifies its exact article passage and graph node.
+Clicking a source line or graph node opens the matching named declaration in the
+full Proof Atlas via a shareable `#decl-NAME` link.
+
+Comparison is optional and shareable with `?view=lean`; it is not stored as the
+default for future visits. Lean comparison data load only when requested. The
+published 916 mathematical expressions, source targets and manuscript text are
+preserved when switching modes. The code excerpt view covers **ten declarations
+and 19 original source lines**, adjacent to the six previously indexed passages.
+The remaining article text is not yet aligned to Lean; the analytic-scope passage
+explicitly has no mapped proof. An article sentence can correspond to several
+statements, and a source line number is not an expression occurrence ID.
+
+`crossing-article-lines.js` contains the original statement line breaks and starting
+line numbers from `SE2Conjugate/Crossing.lean`. `build_article_lines.py` requires an
+explicit source path and verifies each header against the already public declaration
+text and starting line. Theorem proof bodies and their `:=` delimiters are excluded;
+these excerpts add no private proof bodies to the public source projection. Source
+and snippet hashes record provenance. The browser rejects comparison data that do
+not match the article or released declaration headers.
+
+```sh
+python3 research/proof-atlas/build_article_lines.py --lean-source /path/to/SE2Conjugate/Crossing.lean
+# After building and serving the actual website:
+node scripts/test-proof-atlas-article-columns.cjs
+```
+
+The comparison regression checks exact source text, numbers and hashes; default
+centering; two-column and middle-graph geometry; matching connector/statement heights;
+keyboard correspondence; actual source-line-to-graph navigation; mode switching and
+shareable comparison links; retained formulas; responsive overflow; light/dark WCAG
+A/AA audits; and a deliberately mismatched article hash rejection. This remains a
+statement correspondence interface, not a complete line-by-line alignment of the
+whole manuscript with original Lean proof scripts.
