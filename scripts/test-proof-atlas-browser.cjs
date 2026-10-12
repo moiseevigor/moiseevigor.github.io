@@ -97,74 +97,52 @@ async function run(){
     // checking other visualization lenses (this tests the real UI flow).
     await page.locator('#pa-focus').click();
     await page.waitForTimeout(250);
-    // Subtree selection — all descendant leaves and a bounded, navigable
-    // list must appear, while hover never alters selection-panel scrolling.
-    // The selection pane needs its own scrollbar only when viewport space
-    // is actually constrained. Test at laptop height, not a tall desktop.
-    await page.setViewportSize({width:1580,height:620});
-    await page.waitForTimeout(250);
+    // The new document reader is visible and can show a REAL Lean source
+    // statement; the left HUD summarizes the current structural subtree.
+    await page.setViewportSize({width:1580,height:690});
+    await page.waitForTimeout(200);
     await page.locator('#pa-search').fill('203');
     await page.locator('#pa-find').click();
-    check((await page.locator('#pa-inspector-heading').textContent()).includes('203'),'proof root selection');
-    check((await page.locator('#pa-inspector-fields').textContent()).includes('Terminal leaves'),'missing descendant leaf count');
-    check((await page.locator('.pa-terminal-list button').count())===24,'missing preview of actual syntax leaves');
-    check((await page.locator('.pa-terminal-pager span').textContent()).includes('3,543'),'missing measured total leaves');
-    const firstLeaf=await page.locator('.pa-terminal-list button').first().textContent();
-    await page.locator('.pa-terminal-pager button').nth(1).click();
-    check((await page.locator('.pa-terminal-pager span').textContent()).includes('25-48'),'terminal pagination did not advance');
-    check((await page.locator('.pa-terminal-list button').first().textContent())!==firstLeaf,'leaf page did not change');
-    await page.locator('.pa-terminal-pager button').first().click();
-    await page.locator('.pa-inspector-selection').evaluate(el=>{el.scrollTop=Math.min(170,el.scrollHeight-el.clientHeight)});
-    const scrollBefore=await page.locator('.pa-inspector-selection').evaluate(el=>el.scrollTop);
-    check(scrollBefore>15,'selection pane did not scroll at constrained height: '+JSON.stringify(
-      await page.locator('.pa-inspector-selection').evaluate(el=>({
-        scroll:el.scrollTop,height:el.clientHeight,contents:el.scrollHeight
-      }))));
-    const rootBox=await rootPoint(page);
-    const offNow=await page.locator('#pa-canvas').boundingBox();
-    await page.mouse.move(rootBox.x,rootBox.y);
-    await page.waitForTimeout(260);
-    const scrollAfter=await page.locator('.pa-inspector-selection').evaluate(el=>el.scrollTop);
-    check(Math.abs(scrollAfter-scrollBefore)<2,'hover shifted the right inspector scroll '+scrollBefore+' -> '+scrollAfter);
-    const dock=await page.locator('.pa-hover-details').boundingBox();
-    await page.mouse.move(offNow.x+8,offNow.y+8);
-    await page.waitForTimeout(180);
-    const dockAfter=await page.locator('.pa-hover-details').boundingBox();
-    check(Math.abs(dock.height-dockAfter.height)<2,'hover dock shifted height');
-    check((await page.locator('.pa-hover-details p').textContent()).includes('126'),
-      'last hovered neighborhood was lost when moving to inspector');
-    await page.locator('.pa-hover-neighbors').evaluate(el=>{el.scrollTop=32});
-    const dockScroll=await page.locator('.pa-hover-neighbors').evaluate(el=>el.scrollTop);
-    check(dockScroll>10,'hover dock cannot scroll after moving away from graph');
-    await page.locator('#pa-search').fill('1658');
-    await page.locator('#pa-find').click();
-    check((await page.locator('#pa-inspector-fields').textContent()).includes('5'),'selected small subtree not reflected');
-    const smallLeafCount=await page.locator('.pa-terminal-list button').count();
-    check(smallLeafCount>=2&&smallLeafCount<=5,'small subtree leaves incorrect: '+smallLeafCount);
-    await page.screenshot({path:path.join(captures,'selected-small-subtree.png')});
-    await page.locator('#pa-search').fill('600');
-    await page.locator('#pa-find').click();
-    check((await page.locator('#pa-inspector-fields').textContent()).includes('Descendants'),
-      'terminal leaf should show root lineage rather than non-existent descendants');
-    check((await page.locator('.pa-terminal-list button').count())===1,'terminal expression should contain exactly one syntax leaf');
-    await page.screenshot({path:path.join(captures,'selected-terminal-leaf.png')});
-    // A terminal constant can be a named theorem reference. It should
-    // bridge to the verified source-level theorem map—not be called a
-    // lemma merely because it is a syntax leaf.
-    await page.locator('#pa-search').fill('810');
-    await page.locator('#pa-find').click();
-    check((await page.locator('#pa-inspector-heading').textContent()).includes('CrossingData.exists_branch'),
-      'known theorem reference not identified as a named constant');
-    check((await page.locator('#pa-syntax-legend').isVisible()),
-      'Lean syntax legend should be visible in raw expression view');
-    await page.getByRole('button',{name:'Read exists_branch in the theorem map'}).click();
+    check(await page.locator('#pa-branch-hud').isVisible(),'branch HUD should be visible in the syntax microscope');
+    check((await page.locator('#pa-branch-stats').textContent()).includes('3,543'),'branch HUD lost exact terminal count');
+    check((await page.locator('#pa-reader-content').textContent()).includes('Expression #203'),'document reader is not showing selected expression');
+    check((await page.locator('#pa-reader-content').textContent()).includes('3,543'),'reader did not show actual terminal count');
+    // Hovering a different node must not replace the persistent document.
+    const beforeReader=await page.locator('#pa-reader-content').textContent();
+    const readerScroll=page.locator('#pa-reader-scroll');
+    await readerScroll.evaluate(n=>n.scrollTop=120);
+    const scrollBefore=await readerScroll.evaluate(n=>n.scrollTop);
+    const rootPos=await rootPoint(page);
+    await page.mouse.move(rootPos.x,rootPos.y);await page.waitForTimeout(180);
+    check((await page.locator('#pa-reader-content').textContent())===beforeReader,
+      'hover re-rendered / replaced selected document');
+    const scrollAfter=await readerScroll.evaluate(n=>n.scrollTop);
+    check(Math.abs(scrollAfter-scrollBefore)<2,'hover changed document scroll position');
+    await page.locator('#pa-search').fill('1658');await page.locator('#pa-find').click();
+    check((await page.locator('#pa-reader-content').textContent()).includes('3'),'small subtree does not explain its leaves');
+    await page.screenshot({path:path.join(captures,'proof-reader-subtree.png')});
+    await page.locator('#pa-search').fill('810');await page.locator('#pa-find').click();
+    check((await page.locator('#pa-reader-content').textContent()).includes('exists_branch'),
+      'named Lean reference was lost in reader');
+    await page.locator('#pa-reader-content').getByRole('button',{name:/Open named theorem/i}).first().click();
     check((await page.locator('#pa-view-title').textContent()).includes('Named proof map'),
-      'named constant did not navigate to theorem map');
-    check((await page.locator('.pa-lean-statement').textContent()).includes('∃ p'),
-      'source-backed theorem statement not displayed');
-    check(!(await page.locator('#pa-syntax-legend').isVisible()),
-      'Lean syntax legend should be hidden outside low-level graph');
-
+      'named constant should navigate to formal declaration');
+    await page.locator('[data-pa-reader-tab="lean"]').click();
+    check((await page.locator('#pa-reader-content .pr-code').textContent()).includes('∃ p'),
+      'verified Lean declaration statement missing from reader');
+    await page.screenshot({path:path.join(captures,'proof-reader-lean-statement.png')});
+    await page.locator('[data-pa-reader-tab="language"]').click();
+    check(await page.locator('.pr-syntax-card').count()===12,'not all twelve core expression rules are rendered');
+    check(await page.locator('.pr-syntax-card svg').count()===12,'missing visual circuit for one of twelve constructors');
+    await page.locator('.pr-syntax-card').filter({hasText:'forallE'}).click();
+    check((await page.locator('#pa-rule-focus').textContent()).includes('Dependent function'),
+      'forallE rule did not open');
+    await page.screenshot({path:path.join(captures,'lean-twelve-visual-rules.png')});
+    await page.locator('#pa-reader-close').click();
+    check(!(await page.locator('#pa-reader').isVisible()),'reader drawer did not close');
+    await page.locator('#pa-reader-toggle').click();
+    check(await page.locator('#pa-reader').isVisible(),'reader drawer did not reopen');
+    await page.locator('[data-pa-reader-tab="explain"]').click();
     await page.locator('[data-mode="deps"]').click();
     await page.waitForTimeout(110);
     check((await page.locator('#pa-stage-count').textContent()).includes('42'),'dependency mode failed');
@@ -179,6 +157,17 @@ async function run(){
       const rect=c.getBoundingClientRect();return Math.abs(c.width/c.height-rect.width/rect.height);
     });
     check(aspect<.013,'canvas stretched or clipped after resize: '+aspect);
+    // Independently load the illustrated kernel grammar reference.
+    const gallery=await browser.newPage({viewport:{width:1320,height:920}});
+    gallery.on('pageerror',e=>errors.push(e.message));
+    await gallery.goto('http://127.0.0.1:8833/projects/proof-atlas/language/index.html',{waitUntil:'networkidle'});
+    check(await gallery.locator('.pa-language-card').count()===12,'standalone grammar missing some constructors');
+    check(await gallery.locator('.pa-language-card svg').count()===12,'standalone grammar lacks visual diagrams');
+    await gallery.locator('[data-filter="observed"]').click();
+    check(await gallery.locator('.pa-language-card').count()===6,'observed-set filter should show six constructors');
+    await gallery.locator('[data-filter="all"]').click();
+    await gallery.screenshot({path:path.join(captures,'full-lean-kernel-grammar.png')});
+    await gallery.close();
     check(errors.length===0,'page errors: '+errors.join('; '));
     console.log(JSON.stringify({status:'PASS',highDegree:r.degree,oneHop:neighbors,maxMarkerPx:m.maxCirclePx,
       curvedEdges:true,noStraightSpokes:true,canvasAspectError:aspect,screenCaptures:captures}));
