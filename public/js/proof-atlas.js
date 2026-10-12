@@ -67,7 +67,7 @@
     hover:null,hoverPower:0,hoverTarget:0,hoverFrame:0,lastHoverTime:0,pointer:null};
   const titles = {
     map:['Named proof map','26 Lean declarations · 81 source-level references · Crossing.lean'],
-    whole:['Kernel syntax microscope','7,288 expression occurrences · low-level Lean term structure'],
+    whole:['Kernel syntax microscope','CrossingData.crossing · focused example · 7,288 occurrences'],
     deps:['Dependency constellation','42 exact direct references · labels selectively anonymized'],
     recursive:['Recursive microscope','Expand expressions within a scoped subtree'],
     meaning:['Core mathematical argument','Human-authored explanation · NOT an extracted semantic proof']

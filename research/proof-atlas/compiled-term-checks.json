@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "publication": "Compiled terms only; no original project source, tactic scripts, archives or extraction logs.",
+  "editions": [
+    {
+      "edition": "published-15",
+      "status": "PASS",
+      "modules": 15,
+      "declarations": 739,
+      "sharedNodes": 549509,
+      "expandedOccurrences": "49693046",
+      "compressedBytes": 4721282,
+      "metadataKinds": {
+        "ofBool": 503
+      }
+    },
+    {
+      "edition": "working-26",
+      "status": "PASS",
+      "modules": 26,
+      "declarations": 1359,
+      "sharedNodes": 1277896,
+      "expandedOccurrences": "670018056",
+      "compressedBytes": 10183022,
+      "metadataKinds": {
+        "ofBool": 765
+      }
+    }
+  ],
+  "negativeControlsRejected": [
+    "missing child",
+    "false count",
+    "open binder",
+    "untrusted axiom"
+  ],
+  "scope": "Hashes, complete ordered expression graphs, lexical closure and payload statistics compared with the extracted inventory. Native kernel-check flags record private extraction; these public audits do not independently reproduce original kernel validity or mathematical article equivalence."
+}

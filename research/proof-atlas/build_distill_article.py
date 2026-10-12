@@ -60,9 +60,9 @@ def build():
         label=re.search(r'\\label\{([^}]+)\}',region)
         if label:numbers[label[1]]=number
     math_count=0;images=[];statement_index=0;section_index=0
-    preserved_math=[]
+    preserved_math=[];proof_anchors=[];last_statement_anchor=None
     def walk(value):
-        nonlocal math_count,statement_index,section_index
+        nonlocal math_count,statement_index,section_index,last_statement_anchor
         if isinstance(value,list):
             for child in value:walk(child)
             return
@@ -75,8 +75,12 @@ def build():
         if t=='Div' and set(c[0][1])&{'lemma','theorem','remark'}:
             kind,number=statements[statement_index];statement_index+=1
             if kind=='remark' and number=='5.2':c[0][0]='remark-late-folds'
+            last_statement_anchor=c[0][0]
             for inline in c[1][0]['c']:
                 if inline['t']=='Strong':inline['c']=[{'t':'Str','c':kind.title()+' '+number}];break
+        if t=='Div' and 'proof'in c[0][1]:
+            assert last_statement_anchor
+            c[0][0]='proof-'+last_statement_anchor.replace(':','-');proof_anchors.append(c[0][0])
         if t=='Link':
             attrs=dict(c[0][2]);target=attrs.get('reference')
             if target in numbers:c[1]=[{'t':'Str','c':('('+numbers[target]+')') if attrs.get('reference-type')=='eqref' else numbers[target]}]
@@ -134,10 +138,10 @@ math: true
 reference_style: bibliography
 description: "Distill web edition of the published SE(2) rotating-geodesic manuscript, preserving mathematical statements, proofs, figures, references and exact Lean correspondence anchors."
 ---
-<link rel="stylesheet" href="/public/css/proof-atlas-article.css?v=3">
+<link rel="stylesheet" href="/public/css/proof-atlas-article.css?v=4">
 '''
     toolbar='''<nav class="pa-reading-toolbar" aria-label="Article reading mode" hidden><div class="pa-reading-options" role="group" aria-label="Reading layout"><button type="button" data-pa-reading="article" aria-pressed="true">Article</button><button type="button" data-pa-reading="compare" aria-pressed="false">Article + Lean</button></div><span id="pa-reading-status" role="status">Centered reading</span></nav>'''
-    content=front+'{% raw %}'+toolbar+'<div class="l-body pa-paper" data-source-sha256="'+source_hash+'">'+introduction+toc+coverage+rendered+'</div>{% endraw %}\n<script src="/public/js/proof-atlas-article.js?v=3" defer></script>\n'
+    content=front+'{% raw %}'+toolbar+'<div class="l-body pa-paper" data-source-sha256="'+source_hash+'">'+introduction+toc+coverage+rendered+'</div>{% endraw %}\n<script src="/public/js/proof-atlas-article.js?v=4" defer></script>\n'
     class Audit(HTMLParser):
         def __init__(self):super().__init__();self.ids=[];self.targets=[];self.image_count=0
         def handle_starttag(self,tag,attrs):
@@ -156,7 +160,7 @@ description: "Distill web edition of the published SE(2) rotating-geodesic manus
     manifest={'sourceSha256':source_hash,'pandocVersion':pandoc(['--version']).splitlines()[0],
         'sections':len(sections),'statements':len(statements),'equations':eq,'figures':4,'tables':table,
         'mathExpressions':math_count,'mathContentSha256':hashlib.sha256(json.dumps(preserved_math,ensure_ascii=False).encode()).hexdigest(),
-        'mathContent':preserved_math,'sourceLabels':numbers,'passageAnchors':[p['htmlAnchor']for p in index['passages']],
+        'mathContent':preserved_math,'sourceLabels':numbers,'passageAnchors':[p['htmlAnchor']for p in index['passages']],'proofAnchors':proof_anchors,
         'method':'Pandoc AST conversion of published source; math bodies preserved with print wrappers removed and source equation numbers restored; all internal targets audited.'}
     (ROOT/'research/proof-atlas/distill-article-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print(json.dumps({k:manifest[k]for k in ['sections','statements','equations','figures','tables','mathExpressions']}))
