@@ -656,7 +656,7 @@
     if(p.type==='expr') {
       const adj=oneHop(p.id),terminal=children[p.id].length===0;
       const role=terminal?describeTerminal(p.id):null;
-      const title=role?.title||('Lean '+kind(p.id)+' · #'+p.id);
+      const title=role?.title||('Lean '+kind(p.id)+' #'+p.id);
       const subtitle=terminal?(role.type+' · expression #'+p.id):
         ('Internal expression · depth '+depth[p.id]+' · '+fmt(terminalCounts[p.id])+' terminal leaves');
       return {key:'expr:'+p.id,id:p.id,type:'expr',title,subtitle,
