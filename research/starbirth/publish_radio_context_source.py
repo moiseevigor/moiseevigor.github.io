@@ -27,7 +27,7 @@ for item in c['evidence']+[{'path':c['report_path']},{'path':'artifacts/native_m
  else:(folder/name).write_bytes(data)
  entries.append(dict(public_file=name,source_path=path,source_revision=REV,bytes=len(data),sha256=sha(data)))
 with (folder/'source-inventory.csv').open('w') as f:
- w=csv.DictWriter(f,fieldnames=list(entries[0]));w.writeheader();w.writerows(entries)
+ w=csv.DictWriter(f,fieldnames=list(entries[0]),lineterminator='\n');w.writeheader();w.writerows(entries)
 readme='''# Native radio-marker context: projected separation, not physical classification
 
 Exact exports from research revision `'''+REV+'''`.
@@ -59,7 +59,7 @@ readme+='\n[Complete source inventory and SHA-256 hashes](source-inventory.csv).
 (folder/'README.md').write_text(readme)
 assert sum(p.stat().st_size for p in folder.iterdir())<1024**2
 config=B/'_config.yml';s=config.read_text()
-addition='  # Verified native radio context: exact JSON basename exceptions.\n'
+addition='  # Verified native radio context: exact JSON/log basename exceptions.\n'
 for i in entries:
  if i['public_file'].endswith(('.json','.log')):addition+='  - "'+i['public_file']+'"\n'
 needle='  - "starbirth-ic-alternative-knowledge-note.json"\n'

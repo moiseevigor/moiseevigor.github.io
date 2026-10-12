@@ -1,0 +1,19 @@
+{
+  "schema": "native-mmb-three-case-projected-marker/1",
+  "registration_sha256": "95d0d21f137920f0719deb1fb4fc5c4d9382b0f9a4b2786b92cbdaa7328f3b8f",
+  "catalogue_sha256": "794027fab223356a267bfaca8d0e8d369f6ab37adfea15644af00e30183b77a5",
+  "radio_records_sha256": "1c9a4949dde9515d649dacc94ff90029c9c630fd1016ea25401f7682af81f7c5",
+  "native_radio_records": 707,
+  "fixed_best_projected_support": 0,
+  "fixed_best_denominator": 3,
+  "primary_geometric_criterion_met": false,
+  "physical_validation": false,
+  "new_stars": 0,
+  "new_births": 0,
+  "selection_consumed": true,
+  "independent_held_out_physical_truth": false,
+  "models_changed": false,
+  "radio_absence_means_starless": false,
+  "association_probabilities_calibrated": false,
+  "scope": "Published radio positions versus literal fixed infrared alternatives; no proper-motion/frame/error calibration or velocity membership"
+}

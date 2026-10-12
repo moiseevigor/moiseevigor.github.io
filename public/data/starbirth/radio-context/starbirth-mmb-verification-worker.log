@@ -1,0 +1,18 @@
+{
+  "schema": "native-mmb-position-independent-verification/1",
+  "verified": true,
+  "registration_sha256": "95d0d21f137920f0719deb1fb4fc5c4d9382b0f9a4b2786b92cbdaa7328f3b8f",
+  "summary_sha256": "2539c8b4505082831431bf1d794e5d87dec17c29c85923c20e003d7c6248ebdc",
+  "catalogue_sha256": "794027fab223356a267bfaca8d0e8d369f6ab37adfea15644af00e30183b77a5",
+  "radio_records_sha256": "1c9a4949dde9515d649dacc94ff90029c9c630fd1016ea25401f7682af81f7c5",
+  "native_rows_checked": 707,
+  "angular_pairs_recomputed": 6363,
+  "maximum_coordinate_difference_degrees": 1.1368683772161603e-13,
+  "fixed_best_projected_support": 0,
+  "fixed_best_denominator": 3,
+  "primary_geometric_criterion_met": false,
+  "method": "Independent raw field slices, Decimal sexagesimal conversion and vector cross-product geometry; no Astropy/worker import",
+  "physical_validation": false,
+  "new_stars": 0,
+  "new_births": 0
+}

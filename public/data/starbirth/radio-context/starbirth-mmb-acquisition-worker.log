@@ -1,0 +1,15 @@
+{
+  "schema": "native-mmb-position-acquisition/1",
+  "registration_sha256": "95d0d21f137920f0719deb1fb4fc5c4d9382b0f9a4b2786b92cbdaa7328f3b8f",
+  "url": "https://cdsarc.cds.unistra.fr/ftp/VIII/96/catalog.dat",
+  "started_utc": "2026-10-12T23:02:25.697339+00:00",
+  "complete": true,
+  "response_bytes": 69855,
+  "retries": 0,
+  "coordinate_uploads": 0,
+  "http_status": 200,
+  "content_type": "text/plain; charset=utf-8",
+  "sha256": "794027fab223356a267bfaca8d0e8d369f6ab37adfea15644af00e30183b77a5",
+  "native_rows": 707,
+  "elapsed_seconds": 0.24356704205274582
+}
