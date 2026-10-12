@@ -5,7 +5,7 @@ permalink: /projects/proof-atlas/app/
 page_class: proof-atlas-app-page
 description: "Full-window interactive atlas of the anonymized structural graph of a real Lean proof, with recursive expansion, dependency constellation, and mathematical explanation."
 ---
-<link rel="stylesheet" href="/public/css/proof-atlas.css?v=3">
+<link rel="stylesheet" href="/public/css/proof-atlas.css?v=4">
 <div class="pa-page pa-page--app" id="proof-atlas">
   <section id="pa-explorer" class="pa-explorer pa-explorer--app" aria-labelledby="pa-explorer-heading">
     <div class="pa-appbar">
@@ -33,7 +33,7 @@ description: "Full-window interactive atlas of the anonymized structural graph o
         </div>
         <div class="pa-app-kicker">CONTROLS</div>
         <div class="pa-toolbar"><button type="button" id="pa-minus" aria-label="Zoom out">−</button><button type="button" id="pa-fit">Reset</button><button type="button" id="pa-plus" aria-label="Zoom in">+</button></div>
-        <p class="pa-app-hint">Start with named theorems: hover for context and click for the Lean statement. Select Kernel syntax to inspect all 7,288 expressions. Drag to pan; scroll to zoom.</p>
+        <p class="pa-app-hint">Start with named theorems, or switch to Raw syntax: click an internal expression to illuminate its descendant leaves; click a terminal leaf to trace its ancestry. The right inspector scrolls independently. Drag to pan; wheel over the graph to zoom.</p>
       </aside>
       <div class="pa-stage">
         <div class="pa-stage-head"><div><strong id="pa-view-title">Named proof map</strong><span id="pa-view-subtitle">Lean source statements · traced direct references</span></div><div class="pa-stage-tools"><button type="button" id="pa-focus" aria-pressed="false" title="Hide side panels to enlarge the graph">Focus graph</button><button type="button" id="pa-fullscreen" title="Enter browser fullscreen (Esc to exit)">⛶ Fullscreen</button><a href="/projects/proof-atlas/app/" class="pa-open-app" title="Open Proof Atlas as a dedicated full-window application">Open full app ↗</a></div></div>
@@ -63,4 +63,4 @@ description: "Full-window interactive atlas of the anonymized structural graph o
 </div>
 <script src="/public/data/proof-atlas/crossing-structure.js" defer></script>
 <script src="/public/data/proof-atlas/crossing-declarations.js" defer></script>
-<script src="/public/js/proof-atlas.js?v=7" defer></script>
+<script src="/public/js/proof-atlas.js?v=8" defer></script>
