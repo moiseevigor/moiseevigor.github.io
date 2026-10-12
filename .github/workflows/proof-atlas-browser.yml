@@ -6,6 +6,9 @@ on:
       - 'public/js/proof-atlas.js'
       - 'public/js/proof-atlas-reader.js'
       - 'public/js/proof-atlas-term-reader.js'
+      - 'public/js/proof-atlas-article-index.js'
+      - 'public/data/proof-atlas/crossing-article-index.js'
+      - 'public/research/se2/conjugate_times_se2.*'
       - 'public/data/proof-atlas/crossing-terms.js'
       - 'scripts/test-proof-atlas-subtree.cjs'
       - 'scripts/test-proof-atlas-decoder.cjs'
@@ -72,6 +75,8 @@ jobs:
         run: |
           node scripts/test-proof-atlas-decoder.cjs
           node scripts/test-proof-atlas-subtree.cjs
+          node scripts/test-proof-atlas-article-index.cjs
+          node scripts/test-proof-atlas-article-browser.cjs
         env:
           ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
       - name: Browser regression — complete Lean.Expr visual grammar

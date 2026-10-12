@@ -1,12 +1,13 @@
 ---
 layout: default
+math: true
 title: "Proof Atlas"
 subtitle: "The geometry of formal reasoning"
 permalink: /projects/proof-atlas/
 page_class: proof-atlas-page
 description: "Explore a real 7,288-expression Lean proof as an interactive graph, then compare its syntactic shape with its mathematical explanation."
 ---
-<link rel="stylesheet" href="/public/css/proof-atlas.css?v=9">
+<link rel="stylesheet" href="/public/css/proof-atlas.css?v=10">
 <main class="pa-page" id="proof-atlas">
   <section class="pa-hero" aria-labelledby="pa-title">
     <div class="pa-eyebrow"><span class="pa-orbit" aria-hidden="true"></span> Research program / Proof Atlas · 2026</div>
@@ -125,6 +126,7 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
         <div class="pa-reader-tabs" role="tablist" aria-label="Proof reader tabs">
           <button type="button" class="active" data-pa-reader-tab="explain" role="tab" aria-selected="true">Read</button>
           <button type="button" data-pa-reader-tab="lean" role="tab" aria-selected="false">Lean</button>
+          <button type="button" data-pa-reader-tab="article" role="tab" aria-selected="false">Article</button>
         </div>
         <div id="pa-reader-scroll" class="pa-reader-scroll" tabindex="0" role="region" aria-label="Selected proof explanation">
           <div id="pa-reader-content"></div>
@@ -216,4 +218,6 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
 <script src="/public/js/proof-atlas.js?v=10" defer></script>
 <script src="/public/data/proof-atlas/crossing-terms.js" defer></script>
 <script src="/public/js/proof-atlas-term-reader.js?v=1" defer></script>
-<script src="/public/js/proof-atlas-reader.js?v=3" defer></script>
+<script src="/public/data/proof-atlas/crossing-article-index.js" defer></script>
+<script src="/public/js/proof-atlas-article-index.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-reader.js?v=4" defer></script>

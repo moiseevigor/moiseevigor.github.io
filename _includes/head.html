@@ -96,7 +96,7 @@
   <!-- KaTeX math rendering — only on pages whose content actually contains
        math delimiters, so math-less pages (home, about, archives) don't pay
        a render-blocking CDN stylesheet + two script downloads for nothing. -->
-  {% if content contains '$' or content contains '\(' %}
+  {% if page.math or content contains '$' or content contains '\(' %}
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>

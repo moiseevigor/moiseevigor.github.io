@@ -182,6 +182,14 @@ Read mode uses recognized notation. Full term shows all type, instance and unive
 
 This decoder preserves the exported term structure but does not recover original tactics, omitted metadata annotations, types inferred for each node or the bodies of referenced lemmas. Its prose is a deterministic description of terms and recognized logical operations, not an automatically discovered explanation of the whole mathematical argument. The [public research record](https://github.com/moiseevigor/moiseevigor.github.io/tree/master/research/proof-atlas) specifies the data contract and validation.
 
+## 12 October 2026: an initial Lean–article correspondence index
+
+The reader now has an Article tab backed by an explicit index, starting with the crossing principle in the already published manuscript snapshot. Six exact source passages are linked to ten Lean declarations and three expression anchors. [Expression 1852](/projects/proof-atlas/app/#expr-1852) opens the phase equation; [the counting passage](/projects/proof-atlas/app/#article-counting) links back to the theorem statement and proof root. Source labels, line ranges, PDF pages and hashes identify which article version is being read.
+
+The article’s existing theorem table explicitly links `crossing` to the counting clause of `lem:crossing`. The additional links are curated argument, formula and hypothesis correspondences. Lean assumes the strict monotonicity fields used by the counting proof; the article derives them analytically. The index preserves this difference. Small kernel expressions inherit labelled context from an enclosing mapped expression, rather than receiving invented article quotations. The analytic conclusions explicitly listed as outside Lean have no mapped proof.
+
+This is a bounded bidirectional index, not automatic alignment of the whole manuscript or a formal proof that prose and Lean are equivalent. Exact excerpt identity, source hashes, declaration names, expression paths and stale-map rejection are audited; browser checks exercise both navigation directions, rendered equations and accessibility. The published manuscript source is unchanged.
+
 ## References and nearby work
 
 - [Lean 4: Expressions](https://lean-lang.org/doc/api/Lean/Expr.html) and [Theorem Proving in Lean](https://lean-lang.org/theorem_proving_in_lean4/Propositions-and-Proofs/) — the underlying term language and proof typing.
