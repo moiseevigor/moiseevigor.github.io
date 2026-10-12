@@ -16,7 +16,11 @@
   const N = D.parent.length, children = Array.from({length:N}, () => []), depth = new Uint8Array(N);
   D.parent.forEach((p,i) => { if (p >= 0) { children[p].push(i);depth[i]=depth[p]+1; } });
   const subtreeValid=D.parent.every((p,i)=>p<0||p<i) &&
-    D.roots.reduce((n,r)=>n+D.size[r],0)===N;
+    D.roots.reduce((n,r)=>n+D.size[r],0)===N &&
+    children.every((cs,i)=>{
+      let pos=i+1;for(const ch of cs){if(ch!==pos)return false;pos+=D.size[ch];}
+      return pos===i+D.size[i];
+    });
   const constantAt=new Map();
   for(const dep of D.deps)for(const i of dep.uses)constantAt.set(i,dep);
   const terminalCounts=new Uint32Array(N);
@@ -181,6 +185,41 @@
     return adjacent;
   }
   function register(x,y,id,type='expr',radius=7,w=0,h=0){state.points.push({x,y,id,type,radius,w,h});}
+  function drawSelectedSyntaxBranch(){
+    if(state.mode!=='whole')return;
+    const selected=state.selected;
+    if(selected<0||selected>=N)return;
+    const su=screenUnit(),isTerminal=children[selected].length===0;
+    const showLineage=isTerminal||state.selectionScope==='lineage'||!subtreeValid;
+    const count=D.size[selected];
+    ctx.save();
+    ctx.strokeStyle=showLineage?'#f5d8a3':'#86dbc7';
+    ctx.globalAlpha=showLineage?.67:(count<=350?.42:.15);
+    ctx.lineWidth=(showLineage?1.25:.9)*su;
+    ctx.beginPath();
+    if(showLineage){
+      let i=selected;while(D.parent[i]>=0){
+        const par=D.parent[i];radialEdge(coord(par),coord(i));i=par;
+      }
+    }else for(let i=selected+1;i<selected+count;i++){
+      radialEdge(coord(D.parent[i]),coord(i));
+    }
+    ctx.stroke();ctx.globalAlpha=1;
+    if(showLineage){
+      let i=selected;while(i>=0){
+        const q=coord(i);plotPoint(q.x,q.y,(i===selected?3.45:2)*su,'#f1d39f',.88);
+        i=D.parent[i];
+      }
+    }else{
+      for(let i=selected;i<selected+count;i++){
+        if(children[i].length)continue;
+        const q=coord(i);
+        plotPoint(q.x,q.y,(count<=100?2.7:1.85)*su,'#a8ecd1',.84);
+      }
+    }
+    const q=coord(selected);plotPoint(q.x,q.y,3.8*su,'#ffe0a0');
+    ctx.restore();
+  }
   function drawWhole(){
     sceneStart();
     // The base network and highlighted network follow the exact same path.
@@ -199,12 +238,7 @@
       plotPoint(p.x,p.y,(k===3||k===4?1.9:1.22)*su,palette[k],k===0?.48:.84);
       register(p.x,p.y,i,'expr',5);
     }
-    let i=state.selected;
-    while(i>=0){
-      const a=coord(i);
-      plotPoint(a.x,a.y,(i===state.selected?3.1:1.7)*su,'#f3cb7b',.95);
-      i=D.parent[i];
-    }
+    drawSelectedSyntaxBranch();
     const h=state.hover;
     if(h&&h.type==='expr'&&state.hoverPower>.005){
       const e=state.hoverPower,origin=coord(h.id);
