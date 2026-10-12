@@ -900,6 +900,11 @@
       announceSelection('expr',state.selected);
     },
     getSnapshot(){return {mode:state.mode,selected:state.selected,namedSelected:state.namedSelected,scope:state.selectionScope};},
+    getScreenPosition(type,id){
+      const p=state.points.find(p=>p.type===type&&p.id===id);if(!p)return null;
+      const rect=canvas.getBoundingClientRect();
+      return {x:rect.left+width/2+state.panX+state.scale*(p.x-width/2),y:rect.top+height/2+state.panY+state.scale*(p.y-height/2)};
+    },
     getChildIds(i){return i>=0&&i<N?children[i].slice():[];}
   };
   fillHoverDetails(null);

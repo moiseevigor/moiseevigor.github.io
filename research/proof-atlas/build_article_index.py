@@ -30,6 +30,7 @@ def build():
         excerpt = text[a:b]
         entries.append(dict(id=id,title=title,anchor=anchor,raw=excerpt,
             pdfPage=5 if anchor == 'lem:crossing' else 15,
+            htmlAnchor='passage-'+id,htmlUrl='/projects/proof-atlas/article/#passage-'+id,
             sourceLines=[text[:a].count('\n')+1,text[:b].count('\n')+1],
             excerptSha256=sha(excerpt.encode()),declarations=declarations,note=note))
     passage('phase-equation','The phase equation',
@@ -66,18 +67,38 @@ def build():
     paths=[]
     for i,p in enumerate(structure['parent']):
         paths.append(core['rootPaths'][structure['roots'].index(i)] if p<0 else paths[p]+'.'+fields[structure['kinds'][int(structure['kind'][p])]][children[p].index(i)])
-    anchors=[dict(occurrence=i,path=paths[i],passage=p,relation=r) for i,p,r in [
-        (0,'counting','Enclosing theorem statement'),(203,'counting','Enclosing counting proof'),
-        (1852,'phase-equation','Selected lifted phase equality')]]
+    def call(i, name, arity):
+        args=[]
+        while nodes_kind(i)=='app':
+            fn,arg=children[i];args.insert(0,arg);i=fn
+        return args if nodes_kind(i)=='const' and core['payloads'][i].get('name')==name and len(args)==arity else None
+    def nodes_kind(i):
+        return structure['kinds'][int(structure['kind'][i])]
+    def phase_equality(i):
+        eq=call(i,'Eq',3)
+        if not eq or not call(eq[1],'CrossingData.branch',3):return False
+        add=call(eq[2],'HAdd.hAdd',6)
+        if not add:return False
+        mul=call(add[-1],'HMul.hMul',6)
+        if not mul or not call(mul[-1],'Int.cast',3):return False
+        inner=call(mul[-2],'HMul.hMul',6)
+        if not inner or not call(inner[-1],'CrossingData.K',1):return False
+        numeral=call(inner[-2],'OfNat.ofNat',3)
+        return bool(numeral and core['payloads'][numeral[1]].get('repr')=='Lean.Literal.natVal 2')
+    matches={0:('counting','Enclosing theorem statement'),203:('counting','Enclosing counting proof')}
+    for i in range(len(paths)):
+        if phase_equality(i):matches[i]=('phase-equation','Lifted phase equality')
+        elif nodes_kind(i)=='lam' and phase_equality(children[i][1]):matches[i]=('phase-equation','Winding witness predicate')
+    anchors=[dict(occurrence=i,path=paths[i],passage=p,relation=r) for i,(p,r) in sorted(matches.items())]
     return dict(format='ProofAtlasArticleIndex/1',source=dict(
         title='All Conjugate Times of the Rotating Geodesics in the Sub-Riemannian Problem on SE(2)',
         snapshotDate=provenance['snapshot_date'],sha256=sha(raw),
-        url='/public/research/se2/conjugate_times_se2.tex',pdf='/public/research/se2/conjugate_times_se2.pdf',
+        htmlUrl='/projects/proof-atlas/article/',url='/public/research/se2/conjugate_times_se2.tex',pdf='/public/research/se2/conjugate_times_se2.pdf',
         lemmaPdfPage=5,tableLine=table_line,articleLabel='lem:crossing',
         macros={'\\Torus':'\\mathbb T'}),
         lean=dict(theorem=core['theorem'],coregirSha256=core['source']['coregirSha256']),
         method='Exact source excerpts; curated declaration and occurrence correspondences reviewed 2026-10-12. Not kernel-certified article equivalence.',
-        scope='Crossing principle only: 6 passages, 10 named declarations and 3 exact occurrence anchors. Other article statements and arbitrary expression-to-sentence alignment are not indexed.',
+        scope=f'Crossing principle correspondence: 6 passages, 10 named declarations and {len(anchors)} expression anchors. The full manuscript web edition is available; other statements are not yet linked to Lean.',
         passages=entries,anchors=anchors)
 
 if __name__ == '__main__':

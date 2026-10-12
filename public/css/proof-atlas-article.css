@@ -1,0 +1,90 @@
+/* Published manuscript edition, using the site's Distill typography and theme. */
+.pa-paper-edition{font:15px/1.7 "Source Sans 3",system-ui,sans-serif;border-left:3px solid var(--accent,#2d7774);padding:14px 18px;margin:12px 0 28px;background:var(--fig-bg,#f0f2ed);color:var(--text,#243f49)}
+.pa-paper-toc{font:15px/1.8 "Source Sans 3",system-ui,sans-serif;border-bottom:1px solid var(--border,#d4ddd8);padding:0 0 22px;margin:0 0 25px}
+.pa-paper-toc ol{columns:2;column-gap:35px;list-style:none;padding:8px 0 0;margin:0}
+.pa-paper-toc li{break-inside:avoid;margin:0 0 7px}
+.pa-paper-links{font:15px/1.7 "Source Sans 3",system-ui,sans-serif;padding:12px 0;border-bottom:1px solid var(--border,#d4ddd8);margin-bottom:35px}
+.pa-paper summary{cursor:pointer}
+.pa-paper :is(h2,h3,.lemma,.theorem,.remark,[id^="passage-"],[id^="eq:"]){scroll-margin-top:90px}
+.pa-paper :is(.lemma,.theorem,.remark){padding:15px 0;border-block:1px solid var(--border,#d4ddd8);margin:28px 0}
+.pa-paper .proof{margin:12px 0 35px}
+.pa-paper figure{margin:35px 0;width:100%}
+.pa-paper figure img{display:block;width:100%;height:auto}
+.pa-paper figcaption{font:14px/1.7 "Source Sans 3",system-ui,sans-serif;color:var(--text-light,#536b71);margin-top:12px}
+.pa-paper table{display:block;width:100%;overflow:auto;font-size:14px;line-height:1.6}
+.pa-paper table caption{text-align:left;margin-bottom:12px;line-height:1.65}
+.pa-paper td{min-width:9rem;overflow-wrap:anywhere}
+.pa-paper :is(p,td,th,a){overflow-wrap:anywhere}
+.pa-paper .pa-paper-equation{display:block;max-width:100%;overflow-x:auto}
+.pa-paper .pa-paper-equation .katex-display{margin:18px 0}
+.pa-paper .pa-paper-highlight{background:#f6f0db;outline:2px solid #9b8247;outline-offset:8px;border-radius:2px}
+html[data-theme="dark"] .pa-paper .pa-paper-highlight{background:#283e48;outline-color:#90c9bc}
+.pa-paper #refs{font-size:14px;line-height:1.75}
+.pa-paper .csl-entry{margin:0 0 14px}
+.pa-paper :is(summary,a):focus-visible{outline:3px solid #2a8177;outline-offset:3px}
+@media(max-width:700px){.pa-paper-toc ol{columns:1}.pa-paper :is(.lemma,.theorem,.remark){padding:10px 0}.pa-paper-edition{padding:12px}.pa-paper .katex{font-size:1.05em}}
+
+.pa-paper [id^="passage-"].pa-paper-highlight{box-decoration-break:clone;-webkit-box-decoration-break:clone;outline-offset:3px}
+.pa-paper [tabindex="0"]:focus-visible{outline:3px solid var(--accent,#2a8177);outline-offset:3px}
+
+.pa-paper .footnotes p{color:var(--text-light,#555)}
+/* Keep KaTeX's absolute accessible MathML inside its formula's scroll region. */
+.pa-paper .katex{position:relative}
+
+/* Reading modes belong to this manuscript, leaving the shared Distill layout intact. */
+.proof-atlas-article-page .d-header,.proof-atlas-article-page .pa-paper{width:calc(100% - 48px);max-width:680px;margin-inline:auto;padding-inline:0}
+.pa-reading-toolbar{position:sticky;top:var(--pa-nav-offset,48px);z-index:3;width:calc(100% - 48px);max-width:680px;margin:0 auto 28px;padding:12px 0;background:var(--bg,#fff);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;font:14px/1.5 var(--sans)}
+.pa-reading-toolbar[hidden]{display:none}
+.pa-reading-options{display:flex;gap:4px;flex-shrink:0}
+.pa-reading-options button{font:600 14px/1.5 var(--sans);padding:7px 12px;background:transparent;border:1px solid transparent;border-radius:4px;color:var(--text);cursor:pointer}
+.pa-reading-options button[aria-pressed="true"]{background:var(--accent-light);border-color:var(--accent);color:var(--accent)}
+.pa-reading-options button:hover{background:var(--fig-bg)}
+.pa-reading-options button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+#pa-reading-status{color:var(--text-light);font-size:12px}
+.pa-paper .pa-row-lean,.pa-paper .pa-row-connections,.pa-paper .pa-comparison-note{display:none}
+.pa-paper .pa-aligned-row{max-width:none}
+.pa-paper .pa-row-prose{min-width:0}
+body[data-pa-reading-mode="compare"] :is(.d-header,.pa-paper,.pa-reading-toolbar){max-width:1200px}
+body[data-pa-reading-mode="compare"] .pa-paper>:is(.lemma,.theorem,.remark,.proof){max-width:none}
+body[data-pa-reading-mode="compare"] .pa-paper :is(.lemma,.theorem,.remark,.proof)>:not(.pa-aligned-row){max-width:680px}
+body[data-pa-reading-mode="compare"] .pa-aligned-row{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:32px;align-items:start;margin-block:16px 30px}
+body[data-pa-reading-mode="compare"] .pa-row-lean{display:block;grid-column:2;min-width:0;border-left:1px solid var(--border);padding-left:22px}
+body[data-pa-reading-mode="compare"] .pa-comparison-note{display:block;margin-bottom:30px;border-bottom:1px solid var(--border);padding-bottom:20px}
+.pa-paper .pa-comparison-note p,.pa-paper .pa-lean-passage p{font:14px/1.7 var(--sans);color:var(--text-light);margin:8px 0}
+.pa-paper .pa-comparison-note a{font:600 14px/1.7 var(--sans)}
+.pa-paper .pa-lean-context{font-size:12px}
+.pa-paper .pa-lean-passage{margin-bottom:30px}
+.pa-paper .pa-lean-passage h3{font:600 17px/1.4 var(--sans);margin:0 0 15px;color:var(--text)}
+.pa-paper .pa-lean-statement{margin:0 0 22px;padding:5px 0}
+.pa-paper .pa-lean-statement h4{font:500 12px/1.5 var(--mono);overflow-wrap:anywhere;margin:0 0 8px;color:var(--text-light)}
+.pa-lean-lines{font:12px/1.75 var(--mono)}
+.pa-paper .pa-lean-line{display:grid;grid-template-columns:32px minmax(0,1fr);gap:8px;text-decoration:none;color:var(--text);border-radius:2px;padding:4px 6px;background:var(--fig-bg)}
+.pa-paper .pa-lean-line code{background:transparent;color:inherit;font:inherit;border:0;padding:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.pa-paper .pa-lean-number{color:var(--text-light);font-variant-numeric:tabular-nums;text-align:right}
+.pa-paper .pa-lean-line:hover{background:var(--accent-light)}
+.pa-paper .pa-lean-line:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.pa-paper .pa-lean-relation{font:13px/1.7 var(--sans);margin-top:10px}
+.pa-paper .pa-lean-relation summary{color:var(--text-light)}
+.pa-paper [id^="passage-"].pa-linked-active{background:var(--accent-light);box-decoration-break:clone;-webkit-box-decoration-break:clone;outline:1px solid var(--accent);outline-offset:3px}
+.pa-paper .pa-lean-statement.pa-linked-active{outline:1px solid var(--accent);outline-offset:4px;border-radius:2px}
+.pa-row-connections{position:relative;align-self:stretch}
+.pa-row-connections svg{position:absolute;inset:0;width:100%;height:100%;display:block;color:var(--text-light)}
+.pa-row-connections path{fill:none;stroke:var(--text-light);stroke-width:1;stroke-dasharray:3 4}
+.pa-row-connections rect{fill:var(--fig-bg);stroke:var(--border);stroke-width:1}
+.pa-row-connections text{fill:currentColor;font:10px var(--mono)}
+.pa-row-connections a{color:var(--text)}
+.pa-row-connections a:is(:hover,:focus-visible,.pa-linked-active) rect{fill:var(--accent-light);stroke:var(--accent);stroke-width:2}
+@media(min-width:1500px){
+ body[data-pa-reading-mode="compare"] :is(.d-header,.pa-paper,.pa-reading-toolbar){max-width:1440px}
+ body[data-pa-reading-mode="compare"] .pa-aligned-row{grid-template-columns:minmax(0,1.4fr) 180px minmax(0,1fr);gap:24px}
+ body[data-pa-reading-mode="compare"] .pa-row-connections{display:block;grid-column:2;min-width:0}
+ body[data-pa-reading-mode="compare"] .pa-row-lean{grid-column:3}
+}
+@media(max-width:979px){
+ body[data-pa-reading-mode="compare"] :is(.d-header,.pa-paper,.pa-reading-toolbar){max-width:680px}
+ body[data-pa-reading-mode="compare"] .pa-aligned-row{grid-template-columns:minmax(0,1fr);gap:16px}
+ body[data-pa-reading-mode="compare"] .pa-row-lean{grid-column:1;padding:18px 0 0;border-left:0;border-top:1px solid var(--border)}
+ .pa-reading-toolbar{flex-wrap:wrap;gap:4px}
+ #pa-reading-status{width:100%;padding-left:12px}
+}
+@media(max-width:560px){.proof-atlas-article-page :is(.d-header,.pa-paper,.pa-reading-toolbar){width:calc(100% - 40px)}}

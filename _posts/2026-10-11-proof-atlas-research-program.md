@@ -190,6 +190,48 @@ The article’s existing theorem table explicitly links `crossing` to the counti
 
 This is a bounded bidirectional index, not automatic alignment of the whole manuscript or a formal proof that prose and Lean are equivalent. Exact excerpt identity, source hashes, declaration names, expression paths and stale-map rejection are audited; browser checks exercise both navigation directions, rendered equations and accessibility. The published manuscript source is unchanged.
 
+## 12 October 2026: live article selection and the full manuscript online
+
+Article is now the first reader tab. Selecting a graph node resolves its article
+context again. The previous three-anchor map often fell back to the whole crossing
+statement; the index now recognizes 84 exact occurrences and uses the closest
+mapped declaration application for smaller descendants. [Occurrence 5830](/projects/proof-atlas/app/#expr-5830)
+opens the phase equation, while the uniqueness application opens its corresponding
+argument. Shared context remains explicitly labelled.
+
+The [full published manuscript is now a Distill page](/projects/proof-atlas/article/),
+with all 916 mathematical expressions, original theorem and equation numbering,
+four vector figures, three tables and twelve cited references. The graph's article
+link jumps to and highlights the [exact phase excerpt](/projects/proof-atlas/article/#passage-phase-equation)
+or [counting clause](/projects/proof-atlas/article/#passage-counting), with reverse
+links back to Lean. Source hashes, stable labels and an independent conversion
+audit preserve the connection to the unchanged public PDF and TeX snapshot.
+
+Browser checks use actual canvas clicks, verify that the selected passage changes,
+and follow every indexed article target. Formula rendering, figure loading,
+responsive layout and scoped light/dark accessibility checks pass. The full article
+is readable online, but its Lean index remains bounded to six crossing-principle
+passages and ten declarations; other manuscript statements are not yet aligned.
+
+## 12 October 2026: reading prose beside its Lean statements
+
+The manuscript now opens as a centered article. Its **Article + Lean** control
+adds the corresponding Lean statement lines alongside the indexed passages;
+[switch to the comparison view](/projects/proof-atlas/article/?view=lean#passage-phase-equation).
+The lines retain their actual numbers in `Crossing.lean`. On wide screens, a middle
+connection lane links each article excerpt to its statement; source-line and graph
+links open the matching declaration in Proof Atlas. Smaller screens use two columns
+or stack the Lean excerpt directly after its prose. Keyboard focus and pointer hover
+identify the corresponding passage without changing the manuscript text.
+
+This comparison covers the current six passages, ten declarations and nineteen
+original statement lines. Other article passages remain unaligned. The source
+excerpts omit theorem proof bodies; the full exported crossing proof term remains
+available in the graph reader. Tests check original line text and hashes, retained
+formulas, responsive geometry, exact named-declaration navigation, both themes and
+rejection of stale article data. The comparison view is optional; ordinary article
+links continue to open the centered human-readable edition.
+
 ## References and nearby work
 
 - [Lean 4: Expressions](https://lean-lang.org/doc/api/Lean/Expr.html) and [Theorem Proving in Lean](https://lean-lang.org/theorem_proving_in_lean4/Propositions-and-Proofs/) — the underlying term language and proof typing.
