@@ -46,7 +46,12 @@ jobs:
       - name: Install Chromium test dependencies
         run: |
           npm install --no-save playwright@1.57.0 axe-core@4.11.0
-          npx playwright install --with-deps chromium
+          browserPath="$(command -v google-chrome || true)"
+          if [ -n "$browserPath" ]; then
+            echo "ATLAS_CHROMIUM_PATH=$browserPath" >> "$GITHUB_ENV"
+          else
+            npx playwright install --with-deps chromium
+          fi
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1'
