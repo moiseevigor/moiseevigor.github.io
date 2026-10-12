@@ -146,6 +146,18 @@ include:
   - "starbirth-tmd-verification-resources.json"
   - "starbirth-tmd-failed-resources.json"
   - "starbirth-tmd-knowledge-supplement.json"
+  # Verified native GLIMPSE case evidence: exact basename exceptions.
+  - "starbirth-ng-registration.json"
+  - "starbirth-ng-acquisition.json"
+  - "starbirth-ng-acquisition-resources.json"
+  - "starbirth-ng-summary.json"
+  - "starbirth-ng-generation-checkpoint.json"
+  - "starbirth-ng-evidence-cards.json"
+  - "starbirth-ng-analysis-resources.json"
+  - "starbirth-ng-verification.json"
+  - "starbirth-ng-verification-resources.json"
+  - "starbirth-ng-checkpoint.json"
+  - "starbirth-ng-knowledge-supplement.json"
   - "se2-provenance.json"
   - "se2-ray-thresholds.json"
   # Proof Atlas coverage evidence linked from the article comparison.

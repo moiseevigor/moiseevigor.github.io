@@ -1,0 +1,24 @@
+table_name,description
+glimpse3d_v2arc,"GLIMPSE 3D, 2007-2009 Archive (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>more complete, less reliable</a>),(<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE3D_Archive_Erratum.html' target='doc'>Erratum</a>)"
+glimpse3d_v1cat_tbl,"GLIMPSE 3D, 2007-2009 Catalog (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>highly reliable</a>)"
+glimpse3dep1a,"GLIMPSE 3D Epoch 1 Archive (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>more complete, less reliable</a>)"
+glimpse3dep1c,GLIMPSE 3D Epoch 1 Catalog (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>highly reliable</a>)
+glimpse3dep2a,"GLIMPSE 3D Epoch 2 Archive (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>more complete, less reliable</a>)"
+glimpse3dep2mra,"GLIMPSE 3D Epoch 2 More Reliable Archive (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>more complete, less reliable</a>)"
+glimpse360a,"GLIMPSE360 Archive (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>more complete, less reliable</a>)"
+glimpse360c,GLIMPSE360 Catalog (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>highly reliable</a>)
+glimpsepropa,"GLIMPSE Proper Archive (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>more complete, less reliable</a>)"
+glimpsepropc,GLIMPSE Proper Catalog (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>highly reliable</a>)
+glimpsesmoga,"SMOG Archive (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>more complete, less reliable</a>)"
+glimpsesmogc,SMOG Catalog (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>highly reliable</a>)
+glimpsecygxa,"GLIMPSE Cygnus-X Archive (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>more complete, less reliable</a>)"
+glimpsecygxc,GLIMPSE Cygnus-X Catalog (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>highly reliable</a>)
+glimpse_s07_ar,"GLIMPSE I Spring '07 Archive (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>more complete, less reliable</a>)"
+glimpse_s07,GLIMPSE I Spring '07 Catalog (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>highly reliable</a>)
+glimpse2_v2arc,"GLIMPSE II Spring '08 Archive (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>more complete, less reliable</a>)"
+glimpse2_v2cat,GLIMPSE II Spring '08 Catalog (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>highly reliable</a>)
+glimpse2ep1a08,"GLIMPSE II Epoch 1 December '08 Archive (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>more complete, less reliable</a>)"
+glimpse2ep1c08,GLIMPSE II Epoch 1 December '08 Catalog (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>highly reliable</a>)
+glimpse2ep2a09,"GLIMPSE II Epoch 2 November '09 Archive (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>more complete, less reliable</a>)"
+glimpse2ep2mra09,GLIMPSE II Epoch 2 November '09 More Reliable Archive (<a href='/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html' target='doc'>more reliable</a>)
+glimpse2sub,GLIMPSEII Subarray Source List

@@ -1,0 +1,184 @@
+{
+  "schema": "reviewed-native-glimpse-knowledge-supplement/1",
+  "source_revision": "f3233bb0",
+  "core_and_prior_supplements_unchanged": true,
+  "nodes": [
+    {
+      "id": "Q:NG20261012",
+      "type": "question",
+      "status": "bounded_counterpart_test_completed",
+      "label": "Native projected-counterpart support for three selected cases",
+      "text": "One-to-one isolated native GLIMPSE counterpart and fixed visit coverage; selected consumed references, no physical validation.",
+      "sources": [
+        "docs/NATIVE_GLIMPSE_ASSOCIATION_PROTOCOL_20261012.md",
+        "docs/NATIVE_GLIMPSE_ASSOCIATION_RESULTS_20261012.md",
+        "artifacts/native_glimpse_registration_20261012.json"
+      ]
+    },
+    {
+      "id": "F:NG20261012:primary",
+      "type": "finding",
+      "status": "verified_scoped_negative",
+      "label": "Zero of three passes the strict flag-free primary gate",
+      "metrics": {
+        "passed": 0,
+        "cases": 3,
+        "all_zero_quality_flag_required": true
+      },
+      "text": "The frozen criterion failed. This is not a physical null or proof that nonzero-flag counterparts are false sources.",
+      "sources": [
+        "docs/NATIVE_GLIMPSE_ASSOCIATION_RESULTS_20261012.md",
+        "artifacts/native_glimpse_association_20261012/summary.json",
+        "artifacts/native_glimpse_verification_20261012/verification.json",
+        "artifacts/native_glimpse_checkpoint_20261012.json"
+      ]
+    },
+    {
+      "id": "F:NG20261012:alignment",
+      "type": "finding",
+      "status": "verified_projected_geometry",
+      "label": "Known Spitzer source aligns with all 21 supported visit medians",
+      "metrics": {
+        "case_id": "HIGALBM330.8814-0.3656",
+        "native_source_id": "SSTGLMC G330.8829-00.3661",
+        "matched_visits": 21,
+        "total_visits": 21,
+        "separation_range_arcsec": [
+          0.16842389856266285,
+          0.3357171384763996
+        ],
+        "clump_separation_arcsec": 5.718902391659197,
+        "sqf_one_based_bits": [
+          10,
+          11
+        ],
+        "physical_stage": "unknown"
+      },
+      "text": "SSTGLMC G330.8829-00.3661 is 5.7189 arcsec from the dust-clump centre and 0.1684\u20130.3357 arcsec from every supported median. Existing catalogue source; emitter identity, physical membership and stage remain unknown.",
+      "sources": [
+        "docs/NATIVE_GLIMPSE_ASSOCIATION_RESULTS_20261012.md",
+        "artifacts/native_glimpse_association_20261012/evidence_cards.json",
+        "artifacts/native_glimpse_verification_20261012/verification.json",
+        "artifacts/native_glimpse_checkpoint_20261012.json"
+      ]
+    },
+    {
+      "id": "C:NG20261012:flags",
+      "type": "qualification",
+      "status": "documented_instrument_flag_limit",
+      "label": "PSF-adjustment flags are not universal source rejection",
+      "text": "The source has one-based SQF bits 10 and 11. IRSA distinguishes such PSF adjustments from reliability-compromising artifacts. Retain the zero-flag failure without changing the primary; interpret instrument-specific flag semantics prospectively.",
+      "sources": [
+        "docs/NATIVE_GLIMPSE_ASSOCIATION_RESULTS_20261012.md"
+      ],
+      "external_source": "https://irsa.ipac.caltech.edu/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html"
+    },
+    {
+      "id": "C:NG20261012:truth",
+      "type": "qualification",
+      "status": "unmet_physical_validation",
+      "label": "Catalogue point source and historical rank are not physical protostar truth",
+      "text": "Six Catalog records plus six Archive aliases are not twelve independent objects. All three old models/review selections remain unchanged; no new-input score, representative physical class, novelty or birth is established.",
+      "sources": [
+        "docs/NATIVE_GLIMPSE_ASSOCIATION_RESULTS_20261012.md",
+        "artifacts/native_glimpse_association_20261012/evidence_cards.json",
+        "artifacts/native_glimpse_checkpoint_20261012.json"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "Q:NG20261012",
+      "target": "F:NG20261012:primary",
+      "relation": "answered_by"
+    },
+    {
+      "source": "F:NG20261012:alignment",
+      "target": "C:TM20261012:identity",
+      "relation": "informs",
+      "text": "Adds a tight projected counterpart; does not establish emitter ownership."
+    },
+    {
+      "source": "C:NG20261012:flags",
+      "target": "F:NG20261012:primary",
+      "relation": "limits"
+    },
+    {
+      "source": "C:NG20261012:truth",
+      "target": "F:NG20261012:alignment",
+      "relation": "limits"
+    }
+  ],
+  "source_blobs": [
+    {
+      "path": "docs/NATIVE_GLIMPSE_ASSOCIATION_PROTOCOL_20261012.md",
+      "revision": "f3233bb0",
+      "bytes": 8694,
+      "sha256": "20b6816431a8251bef501a9bb2cff9e2d6be66934f5e7c5fce8f8ffaeef1909e"
+    },
+    {
+      "path": "docs/NATIVE_GLIMPSE_ASSOCIATION_RESULTS_20261012.md",
+      "revision": "f3233bb0",
+      "bytes": 10778,
+      "sha256": "06a58a9b45e9e37c8836b69434ccb55174b332c8805457c31eba6acdaca253b9"
+    },
+    {
+      "path": "artifacts/native_glimpse_registration_20261012.json",
+      "revision": "f3233bb0",
+      "bytes": 12536,
+      "sha256": "9eb8df43186e2420586a182573375b5428b5b5f7b41fd731f38fc99b9553fd8c"
+    },
+    {
+      "path": "artifacts/native_glimpse_acquisition_20261012/acquisition.json",
+      "revision": "f3233bb0",
+      "bytes": 8654,
+      "sha256": "9eae9cfb432394921ded31be97c889049e651afaa3992bc74020745a4d6d5c9a"
+    },
+    {
+      "path": "artifacts/native_glimpse_association_20261012/summary.json",
+      "revision": "f3233bb0",
+      "bytes": 2583,
+      "sha256": "8d619970a4a55c9bf90437a23cd8aa0978e964492be2c0c36f50d3b1fe2cec2b"
+    },
+    {
+      "path": "artifacts/native_glimpse_association_20261012/evidence_cards.json",
+      "revision": "f3233bb0",
+      "bytes": 34699,
+      "sha256": "8929cd3bb703491adc3bff7853c445bc1e2b4649f83f14fb41a9ef34cc0b7490"
+    },
+    {
+      "path": "artifacts/native_glimpse_association_20261012/catalog_archive_aliases.csv",
+      "revision": "f3233bb0",
+      "bytes": 894,
+      "sha256": "26deb27f8f79c77dc92059cb557f2d17b3a37705a4d5fcad92202e5835c1f187"
+    },
+    {
+      "path": "artifacts/native_glimpse_verification_20261012/verification.json",
+      "revision": "f3233bb0",
+      "bytes": 626,
+      "sha256": "5bcfb6feb62b6de71aace1975fbca25d5c235d72ec20b51d65c21e7b188c9961"
+    },
+    {
+      "path": "artifacts/native_glimpse_checkpoint_20261012.json",
+      "revision": "f3233bb0",
+      "bytes": 5572,
+      "sha256": "5f9f32e7e6b091d261e3e3288282d0480506ec8176f7ced1ae9ceaef308db591"
+    },
+    {
+      "path": "artifacts/graph/research_graph.json",
+      "revision": "f3233bb0",
+      "bytes": 1307461,
+      "sha256": "5162974f4fe31bb591b244ad3cc96962069174e1e96fced8586ee6305763692c"
+    },
+    {
+      "path": "artifacts/graph/temporal_missingness_reviewed_supplement_20261012.json",
+      "revision": "f3233bb0",
+      "bytes": 6300,
+      "sha256": "9e8dd86cf6329e3a48134a6814b87eba009ae8da3ffc32a29f39ce715e9db55a"
+    }
+  ],
+  "all_six_aliases_reciprocal": true,
+  "physical_validation": false,
+  "new_stars": 0,
+  "new_births": 0
+}

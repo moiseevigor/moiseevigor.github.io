@@ -1,0 +1,4 @@
+case,ra,dec,supported_visits,visit_mean_span_days,required_high_coverage,competitor_threshold,catalog_records,archive_records,qualifying_high_coverage_catalogs,selected_catalog_cntr,selected_catalog_designation,reciprocal_archive_cntr,competitors,projected_support,emitter_identity,physical_membership,physical_class,selection
+HIGALBM330.8814-0.3656,242.585210,-52.099141,21,3649.030046165557,19,3,1,1,0,,,,0,0,unestablished,unestablished,unknown,consumed_positive_query_cadence_cases
+HIGALBM351.2258+0.6937,260.038850,-35.912856,19,3469.0070862142893,18,2,3,3,0,,,,0,0,unestablished,unestablished,unknown,consumed_positive_query_cadence_cases
+HIGALBM353.4272-0.3734,262.634300,-34.688756,6,2188.2326410306923,6,1,2,2,0,,,,0,0,unestablished,unestablished,unknown,consumed_positive_query_cadence_cases

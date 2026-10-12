@@ -1,0 +1,15 @@
+{
+  "schema": "independent-native-glimpse-counterpart-verification/1",
+  "verified": true,
+  "registration_sha256": "9eb8df43186e2420586a182573375b5428b5b5f7b41fd731f38fc99b9553fd8c",
+  "acquisition_sha256": "9eae9cfb432394921ded31be97c889049e651afaa3992bc74020745a4d6d5c9a",
+  "summary_sha256": "8d619970a4a55c9bf90437a23cd8aa0978e964492be2c0c36f50d3b1fe2cec2b",
+  "selected_cases": 3,
+  "projected_support_cases": 0,
+  "native_records": 12,
+  "visit_source_edges": 180,
+  "catalog_archive_pairs": 14,
+  "all_ids_rows_fields_pairs_verified": true,
+  "geometry": "Astropy angular separation",
+  "physical_validation": false
+}

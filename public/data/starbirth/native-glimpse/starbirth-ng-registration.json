@@ -1,0 +1,247 @@
+{
+  "schema": "native-glimpse-projected-counterpart-registration/1",
+  "source_revision_before_registration": "14808bb4df7b7a889de4540ea46ab922f15fc839",
+  "registered_before_native_source_requests": true,
+  "selection_consumed": true,
+  "cases": [
+    {
+      "designation": "HIGALBM330.8814-0.3656",
+      "ra": "242.585210",
+      "dec": "-52.099141",
+      "release": "I Spring 2007"
+    },
+    {
+      "designation": "HIGALBM351.2258+0.6937",
+      "ra": "260.038850",
+      "dec": "-35.912856",
+      "release": "II Spring 2008"
+    },
+    {
+      "designation": "HIGALBM353.4272-0.3734",
+      "ra": "262.634300",
+      "dec": "-34.688756",
+      "release": "II Spring 2008"
+    }
+  ],
+  "columns": [
+    "designation",
+    "cntr",
+    "tmass_designation",
+    "tmass_cntr",
+    "l",
+    "b",
+    "ra",
+    "dec",
+    "dra",
+    "ddec",
+    "csf",
+    "mag3_6",
+    "d3_6m",
+    "f3_6",
+    "df3_6",
+    "mag4_5",
+    "d4_5m",
+    "f4_5",
+    "df4_5",
+    "mag5_8",
+    "d5_8m",
+    "f5_8",
+    "df5_8",
+    "mag8_0",
+    "d8_0m",
+    "f8_0",
+    "df8_0",
+    "sn_4_5",
+    "m4_5",
+    "n4_5",
+    "sqf_4_5",
+    "mf4_5",
+    "dens_4_5",
+    "rms_f4_5",
+    "sky_4_5"
+  ],
+  "requests": [
+    {
+      "key": "q00",
+      "case": "HIGALBM330.8814-0.3656",
+      "kind": "Catalog",
+      "table": "glimpse_s07",
+      "response_file": "q00.csv",
+      "query": "SELECT TOP 1001 designation,cntr,tmass_designation,tmass_cntr,l,b,ra,dec,dra,ddec,csf,mag3_6,d3_6m,f3_6,df3_6,mag4_5,d4_5m,f4_5,df4_5,mag5_8,d5_8m,f5_8,df5_8,mag8_0,d8_0m,f8_0,df8_0,sn_4_5,m4_5,n4_5,sqf_4_5,mf4_5,dens_4_5,rms_f4_5,sky_4_5 FROM glimpse_s07 WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',242.585210,-52.099141,0.0033333333333333335)) ORDER BY cntr",
+      "url": "https://irsa.ipac.caltech.edu/TAP/sync?QUERY=SELECT+TOP+1001+designation%2Ccntr%2Ctmass_designation%2Ctmass_cntr%2Cl%2Cb%2Cra%2Cdec%2Cdra%2Cddec%2Ccsf%2Cmag3_6%2Cd3_6m%2Cf3_6%2Cdf3_6%2Cmag4_5%2Cd4_5m%2Cf4_5%2Cdf4_5%2Cmag5_8%2Cd5_8m%2Cf5_8%2Cdf5_8%2Cmag8_0%2Cd8_0m%2Cf8_0%2Cdf8_0%2Csn_4_5%2Cm4_5%2Cn4_5%2Csqf_4_5%2Cmf4_5%2Cdens_4_5%2Crms_f4_5%2Csky_4_5+FROM+glimpse_s07+WHERE+1%3DCONTAINS%28POINT%28%27ICRS%27%2Cra%2Cdec%29%2CCIRCLE%28%27ICRS%27%2C242.585210%2C-52.099141%2C0.0033333333333333335%29%29+ORDER+BY+cntr&FORMAT=csv&MAXREC=1001"
+    },
+    {
+      "key": "q01",
+      "case": "HIGALBM330.8814-0.3656",
+      "kind": "Archive",
+      "table": "glimpse_s07_ar",
+      "response_file": "q01.csv",
+      "query": "SELECT TOP 1001 designation,cntr,tmass_designation,tmass_cntr,l,b,ra,dec,dra,ddec,csf,mag3_6,d3_6m,f3_6,df3_6,mag4_5,d4_5m,f4_5,df4_5,mag5_8,d5_8m,f5_8,df5_8,mag8_0,d8_0m,f8_0,df8_0,sn_4_5,m4_5,n4_5,sqf_4_5,mf4_5,dens_4_5,rms_f4_5,sky_4_5 FROM glimpse_s07_ar WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',242.585210,-52.099141,0.0033333333333333335)) ORDER BY cntr",
+      "url": "https://irsa.ipac.caltech.edu/TAP/sync?QUERY=SELECT+TOP+1001+designation%2Ccntr%2Ctmass_designation%2Ctmass_cntr%2Cl%2Cb%2Cra%2Cdec%2Cdra%2Cddec%2Ccsf%2Cmag3_6%2Cd3_6m%2Cf3_6%2Cdf3_6%2Cmag4_5%2Cd4_5m%2Cf4_5%2Cdf4_5%2Cmag5_8%2Cd5_8m%2Cf5_8%2Cdf5_8%2Cmag8_0%2Cd8_0m%2Cf8_0%2Cdf8_0%2Csn_4_5%2Cm4_5%2Cn4_5%2Csqf_4_5%2Cmf4_5%2Cdens_4_5%2Crms_f4_5%2Csky_4_5+FROM+glimpse_s07_ar+WHERE+1%3DCONTAINS%28POINT%28%27ICRS%27%2Cra%2Cdec%29%2CCIRCLE%28%27ICRS%27%2C242.585210%2C-52.099141%2C0.0033333333333333335%29%29+ORDER+BY+cntr&FORMAT=csv&MAXREC=1001"
+    },
+    {
+      "key": "q02",
+      "case": "HIGALBM351.2258+0.6937",
+      "kind": "Catalog",
+      "table": "glimpse2_v2cat",
+      "response_file": "q02.csv",
+      "query": "SELECT TOP 1001 designation,cntr,tmass_designation,tmass_cntr,l,b,ra,dec,dra,ddec,csf,mag3_6,d3_6m,f3_6,df3_6,mag4_5,d4_5m,f4_5,df4_5,mag5_8,d5_8m,f5_8,df5_8,mag8_0,d8_0m,f8_0,df8_0,sn_4_5,m4_5,n4_5,sqf_4_5,mf4_5,dens_4_5,rms_f4_5,sky_4_5 FROM glimpse2_v2cat WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',260.038850,-35.912856,0.0033333333333333335)) ORDER BY cntr",
+      "url": "https://irsa.ipac.caltech.edu/TAP/sync?QUERY=SELECT+TOP+1001+designation%2Ccntr%2Ctmass_designation%2Ctmass_cntr%2Cl%2Cb%2Cra%2Cdec%2Cdra%2Cddec%2Ccsf%2Cmag3_6%2Cd3_6m%2Cf3_6%2Cdf3_6%2Cmag4_5%2Cd4_5m%2Cf4_5%2Cdf4_5%2Cmag5_8%2Cd5_8m%2Cf5_8%2Cdf5_8%2Cmag8_0%2Cd8_0m%2Cf8_0%2Cdf8_0%2Csn_4_5%2Cm4_5%2Cn4_5%2Csqf_4_5%2Cmf4_5%2Cdens_4_5%2Crms_f4_5%2Csky_4_5+FROM+glimpse2_v2cat+WHERE+1%3DCONTAINS%28POINT%28%27ICRS%27%2Cra%2Cdec%29%2CCIRCLE%28%27ICRS%27%2C260.038850%2C-35.912856%2C0.0033333333333333335%29%29+ORDER+BY+cntr&FORMAT=csv&MAXREC=1001"
+    },
+    {
+      "key": "q03",
+      "case": "HIGALBM351.2258+0.6937",
+      "kind": "Archive",
+      "table": "glimpse2_v2arc",
+      "response_file": "q03.csv",
+      "query": "SELECT TOP 1001 designation,cntr,tmass_designation,tmass_cntr,l,b,ra,dec,dra,ddec,csf,mag3_6,d3_6m,f3_6,df3_6,mag4_5,d4_5m,f4_5,df4_5,mag5_8,d5_8m,f5_8,df5_8,mag8_0,d8_0m,f8_0,df8_0,sn_4_5,m4_5,n4_5,sqf_4_5,mf4_5,dens_4_5,rms_f4_5,sky_4_5 FROM glimpse2_v2arc WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',260.038850,-35.912856,0.0033333333333333335)) ORDER BY cntr",
+      "url": "https://irsa.ipac.caltech.edu/TAP/sync?QUERY=SELECT+TOP+1001+designation%2Ccntr%2Ctmass_designation%2Ctmass_cntr%2Cl%2Cb%2Cra%2Cdec%2Cdra%2Cddec%2Ccsf%2Cmag3_6%2Cd3_6m%2Cf3_6%2Cdf3_6%2Cmag4_5%2Cd4_5m%2Cf4_5%2Cdf4_5%2Cmag5_8%2Cd5_8m%2Cf5_8%2Cdf5_8%2Cmag8_0%2Cd8_0m%2Cf8_0%2Cdf8_0%2Csn_4_5%2Cm4_5%2Cn4_5%2Csqf_4_5%2Cmf4_5%2Cdens_4_5%2Crms_f4_5%2Csky_4_5+FROM+glimpse2_v2arc+WHERE+1%3DCONTAINS%28POINT%28%27ICRS%27%2Cra%2Cdec%29%2CCIRCLE%28%27ICRS%27%2C260.038850%2C-35.912856%2C0.0033333333333333335%29%29+ORDER+BY+cntr&FORMAT=csv&MAXREC=1001"
+    },
+    {
+      "key": "q04",
+      "case": "HIGALBM353.4272-0.3734",
+      "kind": "Catalog",
+      "table": "glimpse2_v2cat",
+      "response_file": "q04.csv",
+      "query": "SELECT TOP 1001 designation,cntr,tmass_designation,tmass_cntr,l,b,ra,dec,dra,ddec,csf,mag3_6,d3_6m,f3_6,df3_6,mag4_5,d4_5m,f4_5,df4_5,mag5_8,d5_8m,f5_8,df5_8,mag8_0,d8_0m,f8_0,df8_0,sn_4_5,m4_5,n4_5,sqf_4_5,mf4_5,dens_4_5,rms_f4_5,sky_4_5 FROM glimpse2_v2cat WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',262.634300,-34.688756,0.0033333333333333335)) ORDER BY cntr",
+      "url": "https://irsa.ipac.caltech.edu/TAP/sync?QUERY=SELECT+TOP+1001+designation%2Ccntr%2Ctmass_designation%2Ctmass_cntr%2Cl%2Cb%2Cra%2Cdec%2Cdra%2Cddec%2Ccsf%2Cmag3_6%2Cd3_6m%2Cf3_6%2Cdf3_6%2Cmag4_5%2Cd4_5m%2Cf4_5%2Cdf4_5%2Cmag5_8%2Cd5_8m%2Cf5_8%2Cdf5_8%2Cmag8_0%2Cd8_0m%2Cf8_0%2Cdf8_0%2Csn_4_5%2Cm4_5%2Cn4_5%2Csqf_4_5%2Cmf4_5%2Cdens_4_5%2Crms_f4_5%2Csky_4_5+FROM+glimpse2_v2cat+WHERE+1%3DCONTAINS%28POINT%28%27ICRS%27%2Cra%2Cdec%29%2CCIRCLE%28%27ICRS%27%2C262.634300%2C-34.688756%2C0.0033333333333333335%29%29+ORDER+BY+cntr&FORMAT=csv&MAXREC=1001"
+    },
+    {
+      "key": "q05",
+      "case": "HIGALBM353.4272-0.3734",
+      "kind": "Archive",
+      "table": "glimpse2_v2arc",
+      "response_file": "q05.csv",
+      "query": "SELECT TOP 1001 designation,cntr,tmass_designation,tmass_cntr,l,b,ra,dec,dra,ddec,csf,mag3_6,d3_6m,f3_6,df3_6,mag4_5,d4_5m,f4_5,df4_5,mag5_8,d5_8m,f5_8,df5_8,mag8_0,d8_0m,f8_0,df8_0,sn_4_5,m4_5,n4_5,sqf_4_5,mf4_5,dens_4_5,rms_f4_5,sky_4_5 FROM glimpse2_v2arc WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',262.634300,-34.688756,0.0033333333333333335)) ORDER BY cntr",
+      "url": "https://irsa.ipac.caltech.edu/TAP/sync?QUERY=SELECT+TOP+1001+designation%2Ccntr%2Ctmass_designation%2Ctmass_cntr%2Cl%2Cb%2Cra%2Cdec%2Cdra%2Cddec%2Ccsf%2Cmag3_6%2Cd3_6m%2Cf3_6%2Cdf3_6%2Cmag4_5%2Cd4_5m%2Cf4_5%2Cdf4_5%2Cmag5_8%2Cd5_8m%2Cf5_8%2Cdf5_8%2Cmag8_0%2Cd8_0m%2Cf8_0%2Cdf8_0%2Csn_4_5%2Cm4_5%2Cn4_5%2Csqf_4_5%2Cmf4_5%2Cdens_4_5%2Crms_f4_5%2Csky_4_5+FROM+glimpse2_v2arc+WHERE+1%3DCONTAINS%28POINT%28%27ICRS%27%2Cra%2Cdec%29%2CCIRCLE%28%27ICRS%27%2C262.634300%2C-34.688756%2C0.0033333333333333335%29%29+ORDER+BY+cntr&FORMAT=csv&MAXREC=1001"
+    }
+  ],
+  "primary": "At least one of three meets all isolated projected-counterpart gates; not emitter ownership or physical validation",
+  "limits": {
+    "cpu_threads": 1,
+    "sampled_rss_mib": 256,
+    "worker_wall_seconds": 600,
+    "checker_wall_seconds": 600,
+    "response_mib": 1,
+    "cumulative_response_mib": 6,
+    "acquisition_stage_mib": 8,
+    "analysis_stage_mib": 4,
+    "verification_stage_mib": 4,
+    "combined_output_mib": 16,
+    "reserve_gib": 5
+  },
+  "inputs": [
+    {
+      "path": "artifacts/native_glimpse_metadata_20261012/tables.csv",
+      "bytes": 3650,
+      "sha256": "382166474994df816892ef07404570394f9b873c491454d360bdd79757de910e"
+    },
+    {
+      "path": "artifacts/native_glimpse_metadata_20261012/columns.csv",
+      "bytes": 24111,
+      "sha256": "454e7f9522e31ec5e9e532ce0f0eb6b1da362faad89ed7e48d2aebc81c80f755"
+    },
+    {
+      "path": "artifacts/temporal_missingness_schema_adapted_20261012/sources.csv.gz",
+      "bytes": 1594221,
+      "sha256": "37c8a5dcce8b27016439b1efb5c7cc3fe60549ba6e718a03bbc2345f4a1d253d"
+    },
+    {
+      "path": "artifacts/temporal_missingness_schema_adapted_20261012/positive_raw_evidence.csv.gz",
+      "bytes": 38175,
+      "sha256": "98d17596b1c450f9733f560b42edcb3f81e069b5c208b53bd11eb5f8271fe3c5"
+    },
+    {
+      "path": "artifacts/temporal_missingness_verification_schema_adapted_20261012/verification.json",
+      "bytes": 603,
+      "sha256": "4417f6837c2e9834bbf4e47ec395ee697f64d90729b5225f6d55ae65ca9ea5aa"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_20261012/sources.csv.gz",
+      "bytes": 1034031,
+      "sha256": "6872b22eed45d6e001d0363c3a05e864702b86adc46f20baaf7b4f1c0a7d24c0"
+    },
+    {
+      "path": "artifacts/graph/research_graph.json",
+      "bytes": 1307461,
+      "sha256": "5162974f4fe31bb591b244ad3cc96962069174e1e96fced8586ee6305763692c"
+    },
+    {
+      "path": "scripts/run_guarded_research.py",
+      "bytes": 6628,
+      "sha256": "0988aa41866ad3c65dd99713f3d1cda31cbdfa906c465f1230596f8f43cecfda"
+    },
+    {
+      "path": "research/e13_cutouts.py",
+      "bytes": 4465,
+      "sha256": "950d8860d4c874c6e757a6f4fe0aa5fdf5d45eaa7b1a58b4fe0ad8a3ec5ef486"
+    },
+    {
+      "path": "docs/NATIVE_GLIMPSE_ASSOCIATION_PROTOCOL_20261012.md",
+      "bytes": 8694,
+      "sha256": "20b6816431a8251bef501a9bb2cff9e2d6be66934f5e7c5fce8f8ffaeef1909e"
+    },
+    {
+      "path": "research/acquire_native_glimpse_counterparts.py",
+      "bytes": 2868,
+      "sha256": "5ac8e7893c4b1ee4f57c5b509716a6845985f9bcadb1f3917bbf16a4b8cb09bf"
+    },
+    {
+      "path": "research/analyze_native_glimpse_counterparts.py",
+      "bytes": 9227,
+      "sha256": "f92f0842ea2d381c90e475ce599c81337f89101cc0dc8d96bfce7f229df1151f"
+    },
+    {
+      "path": "research/verify_native_glimpse_counterparts.py",
+      "bytes": 10642,
+      "sha256": "3cd08144ad933fc1882674815a9bd94ce7e45a79cab25030d2b6002e57034be8"
+    },
+    {
+      "path": "cache/e13/cutouts/HIGALBM330.8814-0.3656.npz",
+      "bytes": 26560,
+      "sha256": "91307357c0b5d55e0c918d4862d87d9039f3a1d422579df847239832a7b56b72"
+    },
+    {
+      "path": "cache/e13/cutouts/HIGALBM351.2258+0.6937.npz",
+      "bytes": 26722,
+      "sha256": "0a04cce5a4c4c30442f004918c36d8a9b57e6a3f5e3db27ed204e142c508e790"
+    },
+    {
+      "path": "cache/e13/cutouts/HIGALBM353.4272-0.3734.npz",
+      "bytes": 27515,
+      "sha256": "ad062328633bb82a3d088e3f8536f113ae65b0e5fb5c9baa6c0bf060d3ea5714"
+    }
+  ],
+  "policy_git_blobs": [
+    {
+      "path": "docs/RESEARCH_GOAL.md",
+      "revision": "14808bb4df7b7a889de4540ea46ab922f15fc839",
+      "sha256": "0b069de94db20d821cba5aa1565add7a5da274fcb5616e6e27d7ad7b2937916b"
+    },
+    {
+      "path": "docs/MULTISURVEY_RESEARCH_PROGRAM_20261012.md",
+      "revision": "14808bb4df7b7a889de4540ea46ab922f15fc839",
+      "sha256": "6dcf4b55081d510a248fba28a1c848bdaf6f720d28dd19d867fc0360b1e94496"
+    },
+    {
+      "path": "docs/ADVERSARIAL_REVIEW_20261006.md",
+      "revision": "14808bb4df7b7a889de4540ea46ab922f15fc839",
+      "sha256": "c28b2ccc8513c9fd4b6fc8db7364ba474316a2da53592963037bb1b6358e9021"
+    },
+    {
+      "path": "docs/STORAGE_POLICY.md",
+      "revision": "14808bb4df7b7a889de4540ea46ab922f15fc839",
+      "sha256": "cfb7a058d667341331a7f7ed99f2eb57bc99996cefe49a82204ac7864e4c9767"
+    },
+    {
+      "path": "docs/GIT_SNAPSHOT_WORKFLOW.md",
+      "revision": "14808bb4df7b7a889de4540ea46ab922f15fc839",
+      "sha256": "a3c421e45bd505f91ebbd9044d0a2120c7773d5cca5154c237f5b976c2ac1923"
+    }
+  ],
+  "no_coordinate_upload": true,
+  "no_new_survey": true,
+  "no_paid_jobs": true,
+  "old_comparison_unchanged": true,
+  "physical_validation": false
+}

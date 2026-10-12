@@ -1,0 +1,337 @@
+table_name,column_name,datatype,unit,description
+glimpse2_v2arc,designation,char,,GLIMPSEII source designation name
+glimpse2_v2arc,tmass_designation,char,,Source name (designation) from 2MASS All-Sky point source catalog (PSC)
+glimpse2_v2arc,tmass_cntr,long,,Unique ID number (counter) for the 2MASS source from the 2MASS All-Sky PSC
+glimpse2_v2arc,l,double,deg,Galactic longitude
+glimpse2_v2arc,b,double,deg,Galactic latitude
+glimpse2_v2arc,dl,double,arcsec,error in Galactic longitude
+glimpse2_v2arc,db,double,arcsec,error in Galactic latitude
+glimpse2_v2arc,ra,double,deg,Right ascension J2000
+glimpse2_v2arc,dec,double,deg,Declination J2000
+glimpse2_v2arc,dra,double,arcsec,error in Right ascension
+glimpse2_v2arc,ddec,double,arcsec,error in Declination
+glimpse2_v2arc,csf,long,,close source flag
+glimpse2_v2arc,mag_j,float,mag,2MASS All-Sky PSC J Band magnitude
+glimpse2_v2arc,dj_m,float,mag,2MASS All-Sky PSC J Band 1 sigma error
+glimpse2_v2arc,mag_h,float,mag,2MASS All-Sky PSC H Band magnitude
+glimpse2_v2arc,dh_m,float,mag,2MASS All-Sky PSC H Band 1 sigma error
+glimpse2_v2arc,mag_ks,float,mag,2MASS All-Sky PSC Ks Band magnitude
+glimpse2_v2arc,dks_m,float,mag,2MASS All-Sky PSC Ks Band 1 sigma error
+glimpse2_v2arc,mag3_6,float,mag,3.6um IRAC (Band 1) magnitude
+glimpse2_v2arc,d3_6m,float,mag,3.6um IRAC (Band 1) 1 sigma error
+glimpse2_v2arc,mag4_5,float,mag,4.5um IRAC (Band 2) magnitude
+glimpse2_v2arc,d4_5m,float,mag,4.5um IRAC (Band 2) 1 sigma error
+glimpse2_v2arc,mag5_8,float,mag,5.8um IRAC (Band 3) magnitude
+glimpse2_v2arc,d5_8m,float,mag,5.8um IRAC (Band 3) 1 sigma error
+glimpse2_v2arc,mag8_0,float,mag,8.0um IRAC (Band 4) magnitude
+glimpse2_v2arc,d8_0m,float,mag,8.0um IRAC (Band 4) 1 sigma error
+glimpse2_v2arc,f_j,float,mJy,2MASS All-Sky PSC J Band flux
+glimpse2_v2arc,df_j,float,mJy,2MASS All-Sky PSC J Band 1 sigma error
+glimpse2_v2arc,f_h,float,mJy,2MASS All-Sky PSC H Band flux
+glimpse2_v2arc,df_h,float,mJy,2MASS All-Sky PSC H Band 1 sigma error
+glimpse2_v2arc,f_ks,float,mJy,2MASS All-Sky PSC Ks Band flux
+glimpse2_v2arc,df_ks,float,mJy,2MASS All-Sky PSC Ks Band 1 sigma error
+glimpse2_v2arc,f3_6,float,mJy,3.6um IRAC (Band 1) flux
+glimpse2_v2arc,df3_6,float,mJy,3.6um IRAC (Band 1) 1 sigma error
+glimpse2_v2arc,f4_5,float,mJy,4.5um IRAC (Band 2) flux
+glimpse2_v2arc,df4_5,float,mJy,4.5um IRAC (Band 2) 1 sigma error
+glimpse2_v2arc,f5_8,float,mJy,5.8um IRAC (Band 3) flux
+glimpse2_v2arc,df5_8,float,mJy,5.8um IRAC (Band 3) 1 sigma error
+glimpse2_v2arc,f8_0,float,mJy,8.0um IRAC (Band 4) flux
+glimpse2_v2arc,df8_0,float,mJy,8.0um IRAC (Band 4) 1 sigma error
+glimpse2_v2arc,rms_f3_6,float,mJy,rms deviation of individual detections from the final flux 3.6um IRAC (Band 1)
+glimpse2_v2arc,rms_f4_5,float,mJy,rms deviation of individual detections from the final flux 4.5um IRAC (Band 2)
+glimpse2_v2arc,rms_f5_8,float,mJy,rms deviation of individual detections from the final flux 5.8um IRAC (Band 3)
+glimpse2_v2arc,rms_f8_0,float,mJy,rms deviation of individual detections from the final flux 8.0um IRAC (Band 4)
+glimpse2_v2arc,sky_3_6,float,MJy/sr,Local sky background for 3.6um IRAC (Band 1)
+glimpse2_v2arc,sky_4_5,float,MJy/sr,Local sky background for 4.5um IRAC (Band 2)
+glimpse2_v2arc,sky_5_8,float,MJy/sr,Local sky background for 5.8um IRAC (Band 3)
+glimpse2_v2arc,sky_8_0,float,MJy/sr,Local sky background for 8.0um IRAC (Band 4)
+glimpse2_v2arc,sn_j,float,,2MASS All-Sky PSC J Band Signal/Noise
+glimpse2_v2arc,sn_h,float,,2MASS All-Sky PSC H Band Signal/Noise
+glimpse2_v2arc,sn_ks,float,,2MASS All-Sky PSC Ks Band Signal/Noise
+glimpse2_v2arc,sn_3_6,float,,3.6um IRAC (Band 1) Signal/Noise
+glimpse2_v2arc,sn_4_5,float,,4.5um IRAC (Band 2) Signal/Noise
+glimpse2_v2arc,sn_5_8,float,,5.8um IRAC (Band 3) Signal/Noise
+glimpse2_v2arc,sn_8_0,float,,8.0um IRAC (Band 4) Signal/Noise
+glimpse2_v2arc,dens_3_6,float,count/arcmin**2,Local source density for 3.6um IRAC (Band 1)
+glimpse2_v2arc,dens_4_5,float,count/arcmin**2,Local source density for 4.5um IRAC (Band 2)
+glimpse2_v2arc,dens_5_8,float,count/arcmin**2,Local source density for 5.8um IRAC (Band 3)
+glimpse2_v2arc,dens_8_0,float,count/arcmin**2,Local source density for 8.0um IRAC (Band 4)
+glimpse2_v2arc,m3_6,long,,Number of detections for 3.6um IRAC (Band 1)
+glimpse2_v2arc,m4_5,long,,Number of detections for 4.5um IRAC (Band 2)
+glimpse2_v2arc,m5_8,long,,Number of detections for 5.8um IRAC (Band 3)
+glimpse2_v2arc,m8_0,long,,Number of detections for 8.0um IRAC (Band 4)
+glimpse2_v2arc,n3_6,long,,Number of possible detections for 3.6um IRAC (Band 1)
+glimpse2_v2arc,n4_5,long,,Number of possible detections for 4.5um IRAC (Band 2)
+glimpse2_v2arc,n5_8,long,,Number of possible detections for 5.8um IRAC (Band 3)
+glimpse2_v2arc,n8_0,long,,Number of possible detections for 8.0um IRAC (Band 4)
+glimpse2_v2arc,sqf_j,long,,2MASS All-Sky PSC J Band Source Quality Flag (see footnote 1 for more info)
+glimpse2_v2arc,sqf_h,long,,2MASS All-Sky PSC H Band Source Quality Flag (see footnote 1 for more info)
+glimpse2_v2arc,sqf_ks,long,,2MASS All-Sky PSC Ks Band Source Quality Flag (see footnote 1 for more info)
+glimpse2_v2arc,sqf_3_6,long,,Source Quality Flag for 3.6um IRAC (Band 1) (see footnote 1 for more info)
+glimpse2_v2arc,sqf_4_5,long,,Source Quality Flag for 4.5um IRAC (Band 2) (see footnote 1 for more info)
+glimpse2_v2arc,sqf_5_8,long,,Source Quality Flag for 5.8um IRAC (Band 3) (see footnote 1 for more info)
+glimpse2_v2arc,sqf_8_0,long,,Source Quality Flag for 8.0um IRAC (Band 4) (see footnote 1 for more info)
+glimpse2_v2arc,mf3_6,long,,Flux calculation method flag 3.6um IRAC (Band 1) (see footnote 2 for more info)
+glimpse2_v2arc,mf4_5,long,,Flux calculation method flag 4.5um IRAC (Band 2) (see footnote 2 for more info)
+glimpse2_v2arc,mf5_8,long,,Flux calculation method flag 5.8um IRAC (Band 3) (see footnote 2 for more info)
+glimpse2_v2arc,mf8_0,long,,Flux calculation method flag 8.0um IRAC (Band 4) (see footnote 2 for more info)
+glimpse2_v2arc,x,double,,"Unit sphere (x,y,z) position x value"
+glimpse2_v2arc,y,double,,"Unit sphere (x,y,z) position y value"
+glimpse2_v2arc,z,double,,"Unit sphere (x,y,z) position z value"
+glimpse2_v2arc,spt_ind,long,,spatial index
+glimpse2_v2arc,htm20,long,,"HTM 20 spatial (x,y,z) index key"
+glimpse2_v2arc,cntr,long,,entry counter (key) number (unique within table)
+glimpse2_v2cat,designation,char,,GLIMPSEII source designation name
+glimpse2_v2cat,tmass_designation,char,,Source name (designation) from 2MASS All-Sky point source catalog (PSC)
+glimpse2_v2cat,tmass_cntr,long,,Unique ID number (counter) for the 2MASS source from the 2MASS All-Sky PSC
+glimpse2_v2cat,l,double,deg,Galactic longitude
+glimpse2_v2cat,b,double,deg,Galactic latitude
+glimpse2_v2cat,dl,double,arcsec,error in Galactic longitude
+glimpse2_v2cat,db,double,arcsec,error in Galactic latitude
+glimpse2_v2cat,ra,double,deg,Right ascension J2000
+glimpse2_v2cat,dec,double,deg,Declination J2000
+glimpse2_v2cat,dra,double,arcsec,error in Right ascension
+glimpse2_v2cat,ddec,double,arcsec,error in Declination
+glimpse2_v2cat,csf,long,,close source flag
+glimpse2_v2cat,mag_j,float,mag,2MASS All-Sky PSC J Band magnitude
+glimpse2_v2cat,dj_m,float,mag,2MASS All-Sky PSC J Band 1 sigma error
+glimpse2_v2cat,mag_h,float,mag,2MASS All-Sky PSC H Band magnitude
+glimpse2_v2cat,dh_m,float,mag,2MASS All-Sky PSC H Band 1 sigma error
+glimpse2_v2cat,mag_ks,float,mag,2MASS All-Sky PSC Ks Band magnitude
+glimpse2_v2cat,dks_m,float,mag,2MASS All-Sky PSC Ks Band 1 sigma error
+glimpse2_v2cat,mag3_6,float,mag,3.6um IRAC (Band 1) magnitude
+glimpse2_v2cat,d3_6m,float,mag,3.6um IRAC (Band 1) 1 sigma error
+glimpse2_v2cat,mag4_5,float,mag,4.5um IRAC (Band 2) magnitude
+glimpse2_v2cat,d4_5m,float,mag,4.5um IRAC (Band 2) 1 sigma error
+glimpse2_v2cat,mag5_8,float,mag,5.8um IRAC (Band 3) magnitude
+glimpse2_v2cat,d5_8m,float,mag,5.8um IRAC (Band 3) 1 sigma error
+glimpse2_v2cat,mag8_0,float,mag,8.0um IRAC (Band 4) magnitude
+glimpse2_v2cat,d8_0m,float,mag,8.0um IRAC (Band 4) 1 sigma error
+glimpse2_v2cat,f_j,float,mJy,2MASS All-Sky PSC J Band flux
+glimpse2_v2cat,df_j,float,mJy,2MASS All-Sky PSC J Band 1 sigma error
+glimpse2_v2cat,f_h,float,mJy,2MASS All-Sky PSC H Band flux
+glimpse2_v2cat,df_h,float,mJy,2MASS All-Sky PSC H Band 1 sigma error
+glimpse2_v2cat,f_ks,float,mJy,2MASS All-Sky PSC Ks Band flux
+glimpse2_v2cat,df_ks,float,mJy,2MASS All-Sky PSC Ks Band 1 sigma error
+glimpse2_v2cat,f3_6,float,mJy,3.6um IRAC (Band 1) flux
+glimpse2_v2cat,df3_6,float,mJy,3.6um IRAC (Band 1) 1 sigma error
+glimpse2_v2cat,f4_5,float,mJy,4.5um IRAC (Band 2) flux
+glimpse2_v2cat,df4_5,float,mJy,4.5um IRAC (Band 2) 1 sigma error
+glimpse2_v2cat,f5_8,float,mJy,5.8um IRAC (Band 3) flux
+glimpse2_v2cat,df5_8,float,mJy,5.8um IRAC (Band 3) 1 sigma error
+glimpse2_v2cat,f8_0,float,mJy,8.0um IRAC (Band 4) flux
+glimpse2_v2cat,df8_0,float,mJy,8.0um IRAC (Band 4) 1 sigma error
+glimpse2_v2cat,rms_f3_6,float,mJy,rms deviation of individual detections from the final flux 3.6um IRAC (Band 1)
+glimpse2_v2cat,rms_f4_5,float,mJy,rms deviation of individual detections from the final flux 4.5um IRAC (Band 2)
+glimpse2_v2cat,rms_f5_8,float,mJy,rms deviation of individual detections from the final flux 5.8um IRAC (Band 3)
+glimpse2_v2cat,rms_f8_0,float,mJy,rms deviation of individual detections from the final flux 8.0um IRAC (Band 4)
+glimpse2_v2cat,sky_3_6,float,MJy/sr,Local sky background for 3.6um IRAC (Band 1)
+glimpse2_v2cat,sky_4_5,float,MJy/sr,Local sky background for 4.5um IRAC (Band 2)
+glimpse2_v2cat,sky_5_8,float,MJy/sr,Local sky background for 5.8um IRAC (Band 3)
+glimpse2_v2cat,sky_8_0,float,MJy/sr,Local sky background for 8.0um IRAC (Band 4)
+glimpse2_v2cat,sn_j,float,,2MASS All-Sky PSC J Band Signal/Noise
+glimpse2_v2cat,sn_h,float,,2MASS All-Sky PSC H Band Signal/Noise
+glimpse2_v2cat,sn_ks,float,,2MASS All-Sky PSC Ks Band Signal/Noise
+glimpse2_v2cat,sn_3_6,float,,3.6um IRAC (Band 1) Signal/Noise
+glimpse2_v2cat,sn_4_5,float,,4.5um IRAC (Band 2) Signal/Noise
+glimpse2_v2cat,sn_5_8,float,,5.8um IRAC (Band 3) Signal/Noise
+glimpse2_v2cat,sn_8_0,float,,8.0um IRAC (Band 4) Signal/Noise
+glimpse2_v2cat,dens_3_6,float,count/arcmin**2,Local source density for 3.6um IRAC (Band 1)
+glimpse2_v2cat,dens_4_5,float,count/arcmin**2,Local source density for 4.5um IRAC (Band 2)
+glimpse2_v2cat,dens_5_8,float,count/arcmin**2,Local source density for 5.8um IRAC (Band 3)
+glimpse2_v2cat,dens_8_0,float,count/arcmin**2,Local source density for 8.0um IRAC (Band 4)
+glimpse2_v2cat,m3_6,long,,Number of detections for 3.6um IRAC (Band 1)
+glimpse2_v2cat,m4_5,long,,Number of detections for 4.5um IRAC (Band 2)
+glimpse2_v2cat,m5_8,long,,Number of detections for 5.8um IRAC (Band 3)
+glimpse2_v2cat,m8_0,long,,Number of detections for 8.0um IRAC (Band 4)
+glimpse2_v2cat,n3_6,long,,Number of possible detections for 3.6um IRAC (Band 1)
+glimpse2_v2cat,n4_5,long,,Number of possible detections for 4.5um IRAC (Band 2)
+glimpse2_v2cat,n5_8,long,,Number of possible detections for 5.8um IRAC (Band 3)
+glimpse2_v2cat,n8_0,long,,Number of possible detections for 8.0um IRAC (Band 4)
+glimpse2_v2cat,sqf_j,long,,2MASS All-Sky PSC J Band Source Quality Flag (see footnote 1 for more info)
+glimpse2_v2cat,sqf_h,long,,2MASS All-Sky PSC H Band Source Quality Flag (see footnote 1 for more info)
+glimpse2_v2cat,sqf_ks,long,,2MASS All-Sky PSC Ks Band Source Quality Flag (see footnote 1 for more info)
+glimpse2_v2cat,sqf_3_6,long,,Source Quality Flag for 3.6um IRAC (Band 1) (see footnote 1 for more info)
+glimpse2_v2cat,sqf_4_5,long,,Source Quality Flag for 4.5um IRAC (Band 2) (see footnote 1 for more info)
+glimpse2_v2cat,sqf_5_8,long,,Source Quality Flag for 5.8um IRAC (Band 3) (see footnote 1 for more info)
+glimpse2_v2cat,sqf_8_0,long,,Source Quality Flag for 8.0um IRAC (Band 4) (see footnote 1 for more info)
+glimpse2_v2cat,mf3_6,long,,Flux calculation method flag 3.6um IRAC (Band 1) (see footnote 2 for more info)
+glimpse2_v2cat,mf4_5,long,,Flux calculation method flag 4.5um IRAC (Band 2) (see footnote 2 for more info)
+glimpse2_v2cat,mf5_8,long,,Flux calculation method flag 5.8um IRAC (Band 3) (see footnote 2 for more info)
+glimpse2_v2cat,mf8_0,long,,Flux calculation method flag 8.0um IRAC (Band 4) (see footnote 2 for more info)
+glimpse2_v2cat,x,double,,"Unit sphere (x,y,z) position x value"
+glimpse2_v2cat,y,double,,"Unit sphere (x,y,z) position y value"
+glimpse2_v2cat,z,double,,"Unit sphere (x,y,z) position z value"
+glimpse2_v2cat,spt_ind,long,,spatial index
+glimpse2_v2cat,htm20,long,,"HTM 20 spatial (x,y,z) index key"
+glimpse2_v2cat,cntr,long,,entry counter (key) number (unique within table)
+glimpse_s07,designation,char,,GLIMPSEI source designation name
+glimpse_s07,tmass_designation,char,,Source name (designation) from 2MASS All-Sky point source catalog (PSC)
+glimpse_s07,tmass_cntr,long,,Unique id number for the 2MASS source from the 2MASS All-Sky PSC
+glimpse_s07,l,double,deg,Galactic longitude
+glimpse_s07,b,double,deg,Galactic latitude
+glimpse_s07,dl,double,arcsec,error in Galactic longitude
+glimpse_s07,db,double,arcsec,error in Galactic latitude
+glimpse_s07,ra,double,deg,Right ascension J2000
+glimpse_s07,dec,double,deg,Declination J2000
+glimpse_s07,dra,double,arcsec,error in Right ascension
+glimpse_s07,ddec,double,arcsec,error in Declination
+glimpse_s07,csf,long,,close source flag
+glimpse_s07,mag_j,float,mag,2MASS All-Sky PSC J Band magnitude
+glimpse_s07,dj_m,float,mag,2MASS All-Sky PSC J Band 1 sigma error
+glimpse_s07,mag_h,float,mag,2MASS All-Sky PSC H Band magnitude
+glimpse_s07,dh_m,float,mag,2MASS All-Sky PSC H Band 1 sigma error
+glimpse_s07,mag_ks,float,mag,2MASS All-Sky PSC Ks Band magnitude
+glimpse_s07,dks_m,float,mag,2MASS All-Sky PSC Ks Band 1 sigma error
+glimpse_s07,mag3_6,float,mag,3.6um IRAC (Band 1) magnitude
+glimpse_s07,d3_6m,float,mag,3.6um IRAC (Band 1) 1 sigma error
+glimpse_s07,mag4_5,float,mag,4.5um IRAC (Band 2) magnitude
+glimpse_s07,d4_5m,float,mag,4.5um IRAC (Band 2) 1 sigma error
+glimpse_s07,mag5_8,float,mag,5.8um IRAC (Band 3) magnitude
+glimpse_s07,d5_8m,float,mag,5.8um IRAC (Band 3) 1 sigma error
+glimpse_s07,mag8_0,float,mag,8.0um IRAC (Band 4) magnitude
+glimpse_s07,d8_0m,float,mag,8.0um IRAC (Band 4) 1 sigma error
+glimpse_s07,f_j,float,mJy,2MASS All-Sky PSC J Band flux
+glimpse_s07,df_j,float,mJy,2MASS All-Sky PSC J Band 1 sigma error
+glimpse_s07,f_h,float,mJy,2MASS All-Sky PSC H Band flux
+glimpse_s07,df_h,float,mJy,2MASS All-Sky PSC H Band 1 sigma error
+glimpse_s07,f_ks,float,mJy,2MASS All-Sky PSC Ks Band flux
+glimpse_s07,df_ks,float,mJy,2MASS All-Sky PSC Ks Band 1 sigma error
+glimpse_s07,f3_6,float,mJy,3.6um IRAC (Band 1) flux
+glimpse_s07,df3_6,float,mJy,3.6um IRAC (Band 1) 1 sigma error
+glimpse_s07,f4_5,float,mJy,4.5um IRAC (Band 2) flux
+glimpse_s07,df4_5,float,mJy,4.5um IRAC (Band 2) 1 sigma error
+glimpse_s07,f5_8,float,mJy,5.8um IRAC (Band 3) flux
+glimpse_s07,df5_8,float,mJy,5.8um IRAC (Band 3) 1 sigma error
+glimpse_s07,f8_0,float,mJy,8.0um IRAC (Band 4) flux
+glimpse_s07,df8_0,float,mJy,8.0um IRAC (Band 4) 1 sigma error
+glimpse_s07,rms_f3_6,float,mJy,rms deviation of the individual detections from the final flux for 3.6um IRAC
+glimpse_s07,rms_f4_5,float,mJy,rms deviation of the individual detections from the final flux for 4.5um IRAC
+glimpse_s07,rms_f5_8,float,mJy,rms deviation of the individual detections from the final flux for 5.8um IRAC
+glimpse_s07,rms_f8_0,float,mJy,rms deviation of the individual detections from the final flux for 8.0um IRAC
+glimpse_s07,sky_3_6,float,MJy/sr,Local sky background for 3.6um IRAC  (Band 1)
+glimpse_s07,sky_4_5,float,MJy/sr,Local sky background for 4.5um IRAC  (Band 2)
+glimpse_s07,sky_5_8,float,MJy/sr,Local sky background for 5.8um IRAC  (Band 3)
+glimpse_s07,sky_8_0,float,MJy/sr,Local sky background for 8.0um IRAC  (Band 4)
+glimpse_s07,sn_j,float,,2MASS All-Sky PSC J Band Signal/Noise
+glimpse_s07,sn_h,float,,2MASS All-Sky PSC H Band Signal/Noise
+glimpse_s07,sn_ks,float,,2MASS All-Sky PSC Ks Band Signal/Noise
+glimpse_s07,sn_3_6,float,,3.6um IRAC (Band 1) Signal/Noise
+glimpse_s07,sn_4_5,float,,4.5um IRAC (Band 2) Signal/Noise
+glimpse_s07,sn_5_8,float,,5.8um IRAC (Band 3) Signal/Noise
+glimpse_s07,sn_8_0,float,,8.0um IRAC (Band 4) Signal/Noise
+glimpse_s07,dens_3_6,float,count/arcmin**2,Local source density for 3.6um IRAC (Band 1)
+glimpse_s07,dens_4_5,float,count/arcmin**2,Local source density for 4.5um IRAC (Band 2)
+glimpse_s07,dens_5_8,float,count/arcmin**2,Local source density for 5.8um IRAC (Band 3)
+glimpse_s07,dens_8_0,float,count/arcmin**2,Local source density for 8.0um IRAC (Band 4)
+glimpse_s07,m3_6,long,,Number of detections for 3.6um IRAC (Band 1)
+glimpse_s07,m4_5,long,,Number of detections for 4.5um IRAC (Band 2)
+glimpse_s07,m5_8,long,,Number of detections for 5.8um IRAC (Band 3)
+glimpse_s07,m8_0,long,,Number of detections for 8.0um IRAC (Band 4)
+glimpse_s07,n3_6,long,,Number of possible detections for 3.6um IRAC (Band 1)
+glimpse_s07,n4_5,long,,Number of possible detections for 4.5um IRAC (Band 2)
+glimpse_s07,n5_8,long,,Number of possible detections for 5.8um IRAC (Band 3)
+glimpse_s07,n8_0,long,,Number of possible detections for 8.0um IRAC (Band 4)
+glimpse_s07,sqf_j,long,,2MASS All-Sky PSC J Band Source Quality Flag
+glimpse_s07,sqf_h,long,,2MASS All-Sky PSC H Band Source Quality Flag
+glimpse_s07,sqf_ks,long,,2MASS All-Sky PSC Ks Band Source Quality Flag
+glimpse_s07,sqf_3_6,long,,Source Quality Flag for 3.6um IRAC (Band 1)
+glimpse_s07,sqf_4_5,long,,Source Quality Flag for 4.5um IRAC (Band 2)
+glimpse_s07,sqf_5_8,long,,Source Quality Flag for 5.8um IRAC (Band 3)
+glimpse_s07,sqf_8_0,long,,Source Quality Flag for 8.0um IRAC (Band 4)
+glimpse_s07,mf3_6,long,,Flux calculation method flag 3.6um IRAC (Band 1)
+glimpse_s07,mf4_5,long,,Flux calculation method flag 4.5um IRAC (Band 2)
+glimpse_s07,mf5_8,long,,Flux calculation method flag 5.8um IRAC (Band 3)
+glimpse_s07,mf8_0,long,,Flux calculation method flag 8.0um IRAC (Band 4)
+glimpse_s07,x,double,,"Unit sphere (x,y,z) position x value"
+glimpse_s07,y,double,,"Unit sphere (x,y,z) position y value"
+glimpse_s07,z,double,,"Unit sphere (x,y,z) position z value"
+glimpse_s07,spt_ind,long,,spatial index
+glimpse_s07,htm20,long,,"HTM 20 spatial (x,y,z) index key"
+glimpse_s07,cntr,long,,entry counter (key) number (unique within table)
+glimpse_s07_ar,n8_0,long,,Number of possible detections for 8.0um IRAC (Band 4)
+glimpse_s07_ar,sqf_j,long,,2MASS All-Sky PSC J Band Source Quality Flag
+glimpse_s07_ar,sqf_h,long,,2MASS All-Sky PSC H Band Source Quality Flag
+glimpse_s07_ar,sqf_ks,long,,2MASS All-Sky PSC Ks Band Source Quality Flag
+glimpse_s07_ar,sqf_3_6,long,,Source Quality Flag for 3.6um IRAC (Band 1)
+glimpse_s07_ar,sqf_4_5,long,,Source Quality Flag for 4.5um IRAC (Band 2)
+glimpse_s07_ar,sqf_5_8,long,,Source Quality Flag for 5.8um IRAC (Band 3)
+glimpse_s07_ar,sqf_8_0,long,,Source Quality Flag for 8.0um IRAC (Band 4)
+glimpse_s07_ar,mf3_6,long,,Flux calculation method flag 3.6um IRAC (Band 1)
+glimpse_s07_ar,mf4_5,long,,Flux calculation method flag 4.5um IRAC (Band 2)
+glimpse_s07_ar,mf5_8,long,,Flux calculation method flag 5.8um IRAC (Band 3)
+glimpse_s07_ar,mf8_0,long,,Flux calculation method flag 8.0um IRAC (Band 4)
+glimpse_s07_ar,x,double,,"Unit sphere (x,y,z) position x value"
+glimpse_s07_ar,y,double,,"Unit sphere (x,y,z) position y value"
+glimpse_s07_ar,z,double,,"Unit sphere (x,y,z) position z value"
+glimpse_s07_ar,spt_ind,long,,spatial index
+glimpse_s07_ar,htm20,long,,"HTM 20 spatial (x,y,z) index key"
+glimpse_s07_ar,cntr,long,,entry counter (key) number (unique within table)
+glimpse_s07_ar,designation,char,,GLIMPSEI source designation name
+glimpse_s07_ar,tmass_designation,char,,Source name (designation) from 2MASS All-Sky point source catalog (PSC)
+glimpse_s07_ar,tmass_cntr,long,,Unique id number (counter) for the 2MASS source from the 2MASS All-Sky PSC
+glimpse_s07_ar,l,double,deg,Galactic longitude
+glimpse_s07_ar,b,double,deg,Galactic latitude
+glimpse_s07_ar,dl,double,arcsec,error in Galactic longitude
+glimpse_s07_ar,db,double,arcsec,error in Galactic latitude
+glimpse_s07_ar,ra,double,deg,Right ascension J2000
+glimpse_s07_ar,dec,double,deg,Declination J2000
+glimpse_s07_ar,dra,double,arcsec,error in Right ascension
+glimpse_s07_ar,ddec,double,arcsec,error in Declination
+glimpse_s07_ar,csf,long,,close source flag
+glimpse_s07_ar,mag_j,float,mag,2MASS All-Sky PSC J Band magnitude
+glimpse_s07_ar,dj_m,float,mag,2MASS All-Sky PSC J Band 1 sigma error
+glimpse_s07_ar,mag_h,float,mag,2MASS All-Sky PSC H Band magnitude
+glimpse_s07_ar,dh_m,float,mag,2MASS All-Sky PSC H Band 1 sigma error
+glimpse_s07_ar,mag_ks,float,mag,2MASS All-Sky PSC Ks Band magnitude
+glimpse_s07_ar,dks_m,float,mag,2MASS All-Sky PSC Ks Band 1 sigma error
+glimpse_s07_ar,mag3_6,float,mag,3.6um IRAC (Band 1) magnitude
+glimpse_s07_ar,d3_6m,float,mag,3.6um IRAC (Band 1) 1 sigma error
+glimpse_s07_ar,mag4_5,float,mag,4.5um IRAC (Band 2) magnitude
+glimpse_s07_ar,d4_5m,float,mag,4.5um IRAC (Band 2) 1 sigma error
+glimpse_s07_ar,mag5_8,float,mag,5.8um IRAC (Band 3) magnitude
+glimpse_s07_ar,d5_8m,float,mag,5.8um IRAC (Band 3) 1 sigma error
+glimpse_s07_ar,mag8_0,float,mag,8.0um IRAC (Band 4) magnitude
+glimpse_s07_ar,d8_0m,float,mag,8.0um IRAC (Band 4) 1 sigma error
+glimpse_s07_ar,f_j,float,mJy,2MASS All-Sky PSC J Band flux
+glimpse_s07_ar,df_j,float,mJy,2MASS All-Sky PSC J Band 1 sigma error
+glimpse_s07_ar,f_h,float,mJy,2MASS All-Sky PSC H Band flux
+glimpse_s07_ar,df_h,float,mJy,2MASS All-Sky PSC H Band 1 sigma error
+glimpse_s07_ar,f_ks,float,mJy,2MASS All-Sky PSC Ks Band flux
+glimpse_s07_ar,df_ks,float,mJy,2MASS All-Sky PSC Ks Band 1 sigma error
+glimpse_s07_ar,f3_6,float,mJy,3.6um IRAC (Band 1) flux
+glimpse_s07_ar,df3_6,float,mJy,3.6um IRAC (Band 1) 1 sigma error
+glimpse_s07_ar,f4_5,float,mJy,4.5um IRAC (Band 2) flux
+glimpse_s07_ar,df4_5,float,mJy,4.5um IRAC (Band 2) 1 sigma error
+glimpse_s07_ar,f5_8,float,mJy,5.8um IRAC (Band 3) flux
+glimpse_s07_ar,df5_8,float,mJy,5.8um IRAC (Band 3) 1 sigma error
+glimpse_s07_ar,f8_0,float,mJy,8.0um IRAC (Band 4) flux
+glimpse_s07_ar,df8_0,float,mJy,8.0um IRAC (Band 4) 1 sigma error
+glimpse_s07_ar,rms_f3_6,float,mJy,rms deviation of the individual detections from the final flux for 3.6um IRAC
+glimpse_s07_ar,rms_f4_5,float,mJy,rms deviation of the individual detections from the final flux for 4.5um IRAC
+glimpse_s07_ar,rms_f5_8,float,mJy,rms deviation of the individual detections from the final flux for 5.8um IRAC
+glimpse_s07_ar,rms_f8_0,float,mJy,rms deviation of the individual detections from the final flux for 8.0um IRAC
+glimpse_s07_ar,sky_3_6,float,MJy/sr,Local sky background for 3.6um IRAC (Band 1)
+glimpse_s07_ar,sky_4_5,float,MJy/sr,Local sky background for 4.5um IRAC (Band 2)
+glimpse_s07_ar,sky_5_8,float,MJy/sr,Local sky background for 5.8um IRAC (Band 3)
+glimpse_s07_ar,sky_8_0,float,MJy/sr,Local sky background for 8.0um IRAC (Band 4)
+glimpse_s07_ar,sn_j,float,,2MASS All-Sky PSC J Band Signal/Noise
+glimpse_s07_ar,sn_h,float,,2MASS All-Sky PSC H Band Signal/Noise
+glimpse_s07_ar,sn_ks,float,,2MASS All-Sky PSC Ks Band Signal/Noise
+glimpse_s07_ar,sn_3_6,float,,3.6um IRAC (Band 1) Signal/Noise
+glimpse_s07_ar,sn_4_5,float,,4.5um IRAC (Band 2) Signal/Noise
+glimpse_s07_ar,sn_5_8,float,,5.8um IRAC (Band 3) Signal/Noise
+glimpse_s07_ar,sn_8_0,float,,8.0um IRAC (Band 4) Signal/Noise
+glimpse_s07_ar,dens_3_6,float,count/arcmin**2,Local source density for 3.6um IRAC (Band 1)
+glimpse_s07_ar,dens_4_5,float,count/arcmin**2,Local source density for 4.5um IRAC (Band 2)
+glimpse_s07_ar,dens_5_8,float,count/arcmin**2,Local source density for 5.8um IRAC (Band 3)
+glimpse_s07_ar,dens_8_0,float,count/arcmin**2,Local source density for 8.0um IRAC (Band 4)
+glimpse_s07_ar,m3_6,long,,Number of detections for 3.6um IRAC (Band 1)
+glimpse_s07_ar,m4_5,long,,Number of detections for 4.5um IRAC (Band 2)
+glimpse_s07_ar,m5_8,long,,Number of detections for 5.8um IRAC (Band 3)
+glimpse_s07_ar,m8_0,long,,Number of detections for 8.0um IRAC (Band 4)
+glimpse_s07_ar,n3_6,long,,Number of possible detections for 3.6um IRAC (Band 1)
+glimpse_s07_ar,n4_5,long,,Number of possible detections for 4.5um IRAC (Band 2)
+glimpse_s07_ar,n5_8,long,,Number of possible detections for 5.8um IRAC (Band 3)

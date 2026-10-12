@@ -1,0 +1,10 @@
+{
+  "schema": "bounded-native-glimpse-acquisition/1",
+  "registration_sha256": "9eb8df43186e2420586a182573375b5428b5b5f7b41fd731f38fc99b9553fd8c",
+  "complete": true,
+  "total_response_bytes": 4696,
+  "elapsed_seconds": 71.1470334159676,
+  "coordinate_uploads": 0,
+  "retries": 0,
+  "model_fitted": false
+}
