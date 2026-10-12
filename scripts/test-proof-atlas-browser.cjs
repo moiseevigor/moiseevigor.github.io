@@ -60,7 +60,7 @@ async function run(){
     await page.mouse.move(r.x,r.y);
     await page.waitForTimeout(280);
     let hover=await page.locator('.pa-node-tooltip:not([hidden]) strong').textContent();
-    check(hover==='Expression #'+r.root,'unexpected hover node '+hover+' / '+r.root);
+    check(hover==='Lean lam · #'+r.root,'unexpected hover node '+hover+' / '+r.root);
     let neighbors=await page.locator('.pa-hover-neighbors li').count();
     // The floating preview is deliberately capped at 24 + summary to avoid
     // a 126-row DOM rebuild on every cursor movement. The degree remains exact.
@@ -104,8 +104,15 @@ async function run(){
     check((await page.locator('#pa-inspector-heading').textContent()).includes('203'),'proof root selection');
     check((await page.locator('#pa-inspector-fields').textContent()).includes('Terminal leaves'),'missing descendant leaf count');
     check((await page.locator('.pa-terminal-list button').count())===24,'missing preview of actual syntax leaves');
+    check((await page.locator('.pa-terminal-pager span').textContent()).includes('3,543'),'missing measured total leaves');
+    const firstLeaf=await page.locator('.pa-terminal-list button').first().textContent();
+    await page.locator('.pa-terminal-pager button').nth(1).click();
+    check((await page.locator('.pa-terminal-pager span').textContent()).includes('25–48'),'terminal pagination did not advance');
+    check((await page.locator('.pa-terminal-list button').first().textContent())!==firstLeaf,'leaf page did not change');
+    await page.locator('.pa-terminal-pager button').first().click();
     await page.locator('.pa-inspector-selection').evaluate(el=>{el.scrollTop=Math.min(170,el.scrollHeight-el.clientHeight)});
     const scrollBefore=await page.locator('.pa-inspector-selection').evaluate(el=>el.scrollTop);
+    check(scrollBefore>15,'selection pane has no independent scroll region');
     const rootBox=await rootPoint(page);
     await page.mouse.move(rootBox.x,rootBox.y);
     await page.waitForTimeout(260);
@@ -116,6 +123,11 @@ async function run(){
     await page.waitForTimeout(180);
     const dockAfter=await page.locator('.pa-hover-details').boundingBox();
     check(Math.abs(dock.height-dockAfter.height)<2,'hover dock shifted height');
+    check((await page.locator('.pa-hover-details p').textContent()).includes('126'),
+      'last hovered neighborhood was lost when moving to inspector');
+    await page.locator('.pa-hover-neighbors').evaluate(el=>{el.scrollTop=32});
+    const dockScroll=await page.locator('.pa-hover-neighbors').evaluate(el=>el.scrollTop);
+    check(dockScroll>10,'hover dock cannot scroll after moving away from graph');
     await page.locator('#pa-search').fill('1658');
     await page.locator('#pa-find').click();
     check((await page.locator('#pa-inspector-fields').textContent()).includes('5'),'selected small subtree not reflected');
