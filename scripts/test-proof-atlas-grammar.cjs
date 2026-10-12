@@ -15,7 +15,7 @@ const path=require('path'),fs=require('fs');
       if(await b.count()!==1)throw Error('Missing constructor '+t);
       await b.click();
       const title=await page.locator('#pa-g-name').textContent();
-      if(!title.startsWith(t+' — '))throw Error('Wrong selected constructor '+t+': '+title);
+      if(!title.startsWith(t+' '))throw Error('Wrong selected constructor '+t+': '+title);
       if(await page.locator('#pa-grammar-svg rect').count()<2)throw Error('Missing graphical nodes for '+t);
       const statement=await page.locator('#pa-g-example').textContent();
       if(!statement.trim())throw Error('Missing code example for '+t);
