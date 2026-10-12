@@ -5,14 +5,14 @@ permalink: /projects/proof-atlas/app/
 page_class: proof-atlas-app-page
 description: "Full-window interactive atlas of the anonymized structural graph of a real Lean proof, with recursive expansion, dependency constellation, and mathematical explanation."
 ---
-<link rel="stylesheet" href="/public/css/proof-atlas.css?v=5">
+<link rel="stylesheet" href="/public/css/proof-atlas.css?v=6">
 <div class="pa-page pa-page--app" id="proof-atlas">
   <section id="pa-explorer" class="pa-explorer pa-explorer--app" aria-labelledby="pa-explorer-heading">
     <div class="pa-appbar">
       <div><div class="pa-section-mark">Proof Atlas / Interactive microscope</div><h1 id="pa-explorer-heading">Explore the geometry of a Lean proof</h1></div>
       <div class="pa-appbar-links"><a href="/projects/proof-atlas/">← About the project</a><a href="/mathematics/2026/10/11/proof-atlas-research-program/">Research methods ↗</a></div>
     </div>
-    <div class="pa-app" aria-label="Interactive proof graph microscope">
+    <div class="pa-app pa-reader-open" aria-label="Interactive proof graph microscope">
       <aside class="pa-app-sidebar" aria-label="Visualization controls">
         <div class="pa-app-kicker">CHOOSE A LENS</div>
         <div class="pa-modes" role="group" aria-label="Graph representation">
@@ -36,8 +36,19 @@ description: "Full-window interactive atlas of the anonymized structural graph o
         <p class="pa-app-hint">Start with named theorems, or switch to Raw syntax: click an internal expression to illuminate its descendant leaves; click a terminal leaf to trace its ancestry. The right inspector scrolls independently. Drag to pan; wheel over the graph to zoom.</p>
       </aside>
       <div class="pa-stage">
-        <div class="pa-stage-head"><div><strong id="pa-view-title">Named proof map</strong><span id="pa-view-subtitle">Lean source statements · traced direct references</span></div><div class="pa-stage-tools"><button type="button" id="pa-focus" aria-pressed="false" title="Hide side panels to enlarge the graph">Focus graph</button><button type="button" id="pa-fullscreen" title="Enter browser fullscreen (Esc to exit)">⛶ Fullscreen</button><a href="/projects/proof-atlas/app/" class="pa-open-app" title="Open Proof Atlas as a dedicated full-window application">Open full app ↗</a></div></div>
-        <div class="pa-canvas-frame"><canvas id="pa-canvas" tabindex="0" aria-label="Interactive Lean proof graph showing expression nodes and structural edges">Your browser does not support Canvas.</canvas></div>
+        <div class="pa-stage-head"><div><strong id="pa-view-title">Named proof map</strong><span id="pa-view-subtitle">Lean source statements · traced direct references</span></div><div class="pa-stage-tools"><button type="button" id="pa-reader-toggle" class="pa-reader-toggle" aria-expanded="true" aria-controls="pa-reader">Reader ⟩</button><button type="button" id="pa-focus" aria-pressed="false" title="Hide side panels to enlarge the graph">Focus graph</button><button type="button" id="pa-fullscreen" title="Enter browser fullscreen (Esc to exit)">⛶ Fullscreen</button><a href="/projects/proof-atlas/app/" class="pa-open-app" title="Open Proof Atlas as a dedicated full-window application">Open full app ↗</a></div></div>
+        <div class="pa-canvas-frame">
+          <aside id="pa-branch-hud" class="pa-branch-hud" aria-label="Selected subtree anatomy" hidden>
+            <span class="pa-branch-label">SELECTED STRUCTURE</span>
+            <strong id="pa-branch-title">Proof expression</strong>
+            <div id="pa-branch-stats" class="pa-branch-stats"></div>
+            <p id="pa-branch-note"></p>
+            <div class="pa-branch-actions">
+              <button type="button" id="pa-branch-desc">Descendants</button>
+              <button type="button" id="pa-branch-lineage">Ancestors</button>
+            </div>
+          </aside>
+          <canvas id="pa-canvas" tabindex="0" aria-label="Interactive Lean proof graph showing expression nodes and structural edges">Your browser does not support Canvas.</canvas></div>
         <div class="pa-syntax-legend" id="pa-syntax-legend" hidden aria-label="Lean expression type legend">
           <span><i class="pa-dot pa-dot-app"></i> app (application)</span>
           <span><i class="pa-dot pa-dot-const"></i> const (declaration)</span>
@@ -56,6 +67,21 @@ description: "Full-window interactive atlas of the anonymized structural graph o
         <div id="pa-inspector-actions"></div>
         <div class="pa-inspector-note"><strong>What this does not mean</strong><p>Distance, color, and cluster layout describe a visualization. They are not invariants of a mathematical theorem, nor a measure of proof quality.</p></div>
       </aside>
+      <section class="pa-reader" id="pa-reader" aria-label="Proof reader">
+        <header class="pa-reader-head">
+          <div><span>PROOF ATLAS · READER</span><h3 id="pa-reader-title">Mathematical explanation</h3></div>
+          <button type="button" id="pa-reader-close" aria-label="Close proof reader" title="Close reader">×</button>
+        </header>
+        <div class="pa-reader-tabs" role="tablist" aria-label="Proof reader tabs">
+          <button type="button" class="active" data-pa-reader-tab="explain" role="tab" aria-selected="true">Explain</button>
+          <button type="button" data-pa-reader-tab="lean" role="tab" aria-selected="false">Lean</button>
+          <button type="button" data-pa-reader-tab="language" role="tab" aria-selected="false">Visual grammar · 12</button>
+        </div>
+        <div id="pa-reader-scroll" class="pa-reader-scroll" tabindex="0" role="region" aria-label="Selected proof explanation">
+          <div id="pa-reader-content"></div>
+        </div>
+        <footer class="pa-reader-footer"><span id="pa-reader-status">Formal structure and explanation are separate.</span><a href="/projects/proof-atlas/language/">All 12 rules ↗</a></footer>
+      </section>
     </div>
 
     <p class="pa-appnote">The graph is a measured, anonymized projection of the SE(2) Lean theorem <code>CrossingData.crossing</code>. The mathematical idea is an editorial interpretation, not an automatically verified compression.</p>
@@ -63,4 +89,6 @@ description: "Full-window interactive atlas of the anonymized structural graph o
 </div>
 <script src="/public/data/proof-atlas/crossing-structure.js" defer></script>
 <script src="/public/data/proof-atlas/crossing-declarations.js" defer></script>
-<script src="/public/js/proof-atlas.js?v=9" defer></script>
+<script src="/public/data/proof-atlas/lean-expr-grammar.js" defer></script>
+<script src="/public/js/proof-atlas.js?v=10" defer></script>
+<script src="/public/js/proof-atlas-reader.js?v=1" defer></script>
