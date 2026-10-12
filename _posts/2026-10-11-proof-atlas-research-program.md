@@ -13,6 +13,7 @@ series_title: "Proof Atlas"
 series_part: 1
 permalink: /mathematics/2026/10/11/proof-atlas-research-program/
 published: true
+last_modified_at: 2026-10-12
 image: /public/img/posts/proof-atlas-1.svg
 comments: false
 description: >
@@ -56,6 +57,28 @@ The project therefore treats the proof as one exact object with several distinct
 
 These views need not all be generated automatically. In the present prototype the first two follow from measured exports; the explanatory grouping is explicitly authored and labeled.
 
+## A finite visual grammar for Lean's kernel expressions
+
+The first part of the visualization language is now explicit rather than implicit in dot colors. The CoreGIR exporter handles all **twelve constructors of `Lean.Expr`**: `bvar`, `fvar`, `mvar`, `sort`, `const`, `app`, `lam`, `forallE`, `letE`, `lit`, `mdata`, and `proj`. Each has a distinct type of input or scope boundary. Six occur in the exported crossing certificate; all twelve must be representable for a general compiler.
+
+**[Open the illustrated twelve-rule grammar](/projects/proof-atlas/language/)** — every rule has a vector diagram, a Lean example, and a warning about what the picture cannot establish.
+
+The distinction between constructors is structural: `app` takes a function and an argument; `lam` binds a variable to construct a function; `forallE` constructs a dependent function type and also represents universal quantification and implication; `bvar` points back to a specific enclosing binder; `const` refers to a named environment declaration. A theorem need not be a single special kind of syntax node: its checked proof is built from these operations.
+
+One example shows why this matters. The Lean source
+
+```lean
+theorem identity (P : Prop) : P → P := by
+  intro h
+  exact h
+```
+
+can be understood, after elaboration, as a function taking a proposition `P` and a proof `h : P`, then returning that same proof. Schematically the proof term has nested lambda binders with a bound-variable reference in its body. The proposition to be proved has the corresponding dependent-function structure. **The lines connecting variable occurrences to binders are part of the logic, not decorative edges.**
+
+A second boundary matters just as much. **Tactics, macros, notations, and declarations are not additional `Lean.Expr` constructors.** They belong to the Lean surface language, elaboration process, or declaration environment. Twelve rules cover the *core expression algebra* but do not yet amount to a complete graphical language for every Lean source program. The exporter presently omits metadata payloads, so even its comprehensive constructor coverage must not be confused with lossless reconstruction of all source text or elaborator state.
+
+The next test is whether typed visual composition can preserve these boundaries under collapsing and expansion, and whether it helps readers recognize actual mathematical inference patterns.
+
 ## Why borrow from Feynman diagrams?
 
 The useful analogy is **local graphical composition**. In a Feynman diagram, permitted lines and vertices have mathematical meanings and composition rules. The diagram is not, in general, a drawing of a particle's most probable actual path; individual diagrams represent contributions to perturbative calculations. We want to borrow the discipline of a small visual grammar, not the probability interpretation.
@@ -97,7 +120,7 @@ The existing exporter processed the elaborated **theorem statement and proof ter
 
 We also computed **665 distinct structural subtree fingerprints** across the 7,288 occurrences. This is a preliminary *syntactic* statistic, based on constructor, payload and ordered child fingerprints. It does **not** show that 91% of the mathematical argument is redundant, that the associated proofs are equivalent, or that repeated subtrees may be identified across different binder contexts.
 
-The public [interactive atlas](/projects/proof-atlas/) offers whole-proof geometry, a declaration-use constellation, recursive zoom and an editorial explanation. It ships only the anonymized structural projection: not the private Lean certificate text.
+The public [interactive atlas](/projects/proof-atlas/) offers whole-proof geometry, a declaration-use constellation, recursive zoom and an editorial explanation. Its original release shipped an anonymized structural projection. The 12 October subtree-reader release additionally publishes the exported crossing term payloads, as described below; the manuscript and original tactic script remain outside this release.
 
 ## The mathematical idea we want the compiler to find
 
@@ -134,6 +157,38 @@ The experimental sequence is: complete the transitive local dependency graph, bu
 **Not established:** that the graph geometry identifies the important mathematical ideas; that structural repetition is proof redundancy; that arbitrary Lean terms have concise, automatically discovered graphical explanations; or that such explanations measurably improve comprehension.
 
 The distinction is the research program. We are trying to move from a correct *map of a formal object* toward a correct and illuminating *map of its reasoning*.
+
+## 12 October 2026: a reference for Lean’s language layers
+
+The [visual language reference](/projects/proof-atlas/grammar/) now separates eight layers instead of treating every visible feature as an expression constructor. Its **74 entries** cover all **12 `Expr`**, **6 `Level`** and **4 `Syntax`** constructors in **Lean 4.33.1**, together with 16 surface-term families, 11 tactic families, 13 command families, six macro/notation families and six selected elaborator structures.
+
+The finite constructor inventories are exhaustive for the pinned version. The other inventories are curated: Lean and its libraries can register additional parsers, notation, commands and tactics. Each entry includes a tiny example, a diagram, an explanation of the links and a source reference. Constructor fields are checked against Lean’s definitions; family diagrams are explicitly authored processing summaries, not recovered tactic traces or certified translations.
+
+This distinction changes how we read the pictures. A `Level` child is not an `Expr` child. A `Syntax.ident` may resolve to a local variable or a constant. A tactic changes goals and constructs a term, while a command can change the environment without producing a proof expression. Source-to-term correspondence requires retained source spans and elaboration information; the final expression alone does not recover the original proof script.
+
+Validation checks 40 complete source examples with Lean 4.33.1 and ten small closed terms with the kernel, including a negative control that rejects an invalid projection. Chromium exercises all 74 reference entries, search, deep links, keyboard selection, field highlighting and responsive layouts. The reference has no detected WCAG A/AA violations in the scoped automated light/dark audit; this is not a claim of complete accessibility certification. The original expression-graph interaction regression and independent topology audit also pass.
+
+The contrast failure in the first interface exposed a testing gap: tests served raw page files without Jekyll’s shared styles. The browser workflow now builds and serves the actual site. The code panel’s measured foreground/background contrast is **11.02:1**. Reproducible commands, scope and remaining gaps are recorded in the [public research record](https://github.com/moiseevigor/moiseevigor.github.io/tree/master/research/proof-atlas).
+
+This is a reference and interface milestone. It does not establish automatic mathematical explanations, universal semantic compression, or graphical proof construction. The released crossing graph and its provenance data retain their existing scope.
+
+## 12 October 2026: reading the actual selected subtree
+
+The right-hand reader now displays the **entire selected term** and its local variables and assumptions. The complete exported payloads of the crossing type and proof were released with the author's explicit authorization. Constructor lessons remain in the separate language reference.
+
+[Select expression 1852](/projects/proof-atlas/app/#expr-1852). Its 105 occurrences decode to the equality `C.branch σ p = ψ + (2 : Real) * C.K * (↑n : Real)`. This is the actual equality proposition at that node, not a claim that the node itself proves it. The surrounding scope includes `σ : Real`, `n : Int` and `hp : p ∈ [C.lo, C.hi]`.
+
+Read mode uses recognized notation. Full term shows all type, instance and universe arguments, followed by every occurrence with its constructor, field role and binding target. Clicking an occurrence selects it in the graph. Large occurrence lists load incrementally; downloadable text includes the entire subtree, verified for the 7,085-occurrence proof root as well as the 105-occurrence example. All 7,288 occurrence paths and payloads were aligned with the original CoreGIR export before release.
+
+This decoder preserves the exported term structure but does not recover original tactics, omitted metadata annotations, types inferred for each node or the bodies of referenced lemmas. Its prose is a deterministic description of terms and recognized logical operations, not an automatically discovered explanation of the whole mathematical argument. The [public research record](https://github.com/moiseevigor/moiseevigor.github.io/tree/master/research/proof-atlas) specifies the data contract and validation.
+
+## 12 October 2026: an initial Lean–article correspondence index
+
+The reader now has an Article tab backed by an explicit index, starting with the crossing principle in the already published manuscript snapshot. Six exact source passages are linked to ten Lean declarations and three expression anchors. [Expression 1852](/projects/proof-atlas/app/#expr-1852) opens the phase equation; [the counting passage](/projects/proof-atlas/app/#article-counting) links back to the theorem statement and proof root. Source labels, line ranges, PDF pages and hashes identify which article version is being read.
+
+The article’s existing theorem table explicitly links `crossing` to the counting clause of `lem:crossing`. The additional links are curated argument, formula and hypothesis correspondences. Lean assumes the strict monotonicity fields used by the counting proof; the article derives them analytically. The index preserves this difference. Small kernel expressions inherit labelled context from an enclosing mapped expression, rather than receiving invented article quotations. The analytic conclusions explicitly listed as outside Lean have no mapped proof.
+
+This is a bounded bidirectional index, not automatic alignment of the whole manuscript or a formal proof that prose and Lean are equivalent. Exact excerpt identity, source hashes, declaration names, expression paths and stale-map rejection are audited; browser checks exercise both navigation directions, rendered equations and accessibility. The published manuscript source is unchanged.
 
 ## References and nearby work
 
