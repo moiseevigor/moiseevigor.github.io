@@ -1,0 +1,29 @@
+{
+  "verified": true,
+  "method": "Independent per-source reconstruction and set intersections; full hashes",
+  "parent_rows": 19328,
+  "parent_counts": {
+    "e13_sample": 3000,
+    "wise_row": 19328,
+    "wise_coordinates": 1231,
+    "neowise_searched": 19219,
+    "malt90_consumed": 303,
+    "almagal_consumed": 52,
+    "control_sample": 1000,
+    "upper70_present": 19328,
+    "retained_cutout_files_unverified": 3294,
+    "neowise_with_rows": 11845,
+    "neowise_geometry_mismatch_sources": 0,
+    "spicy_association_records": 293,
+    "fir_four_positive_values": 13339,
+    "fir_two_positive_error_values": 13297,
+    "malt90_and_almagal_consumed": 22,
+    "wise_and_neowise_rows": 1098
+  },
+  "summary_sha256": "a7c3ea14d40eeea876a62fea99997adc1c5d2ffd743870a1e91af26256bcd3d6",
+  "ledger_sha256": "7b4a902d69a121c4716eb378603c40f5099c925333bc49d86536adda1cc11379",
+  "registration_sha256": "41f5a6bec70c239f9cfc1ede4482cfb6b8e8af95b8460fe27c5f383cdc520487",
+  "amendment_sha256": "a884718893504fdd34db0f6516cdee9b549d534ff43ac93b9802243ee1a72d0b",
+  "verifier_sha256": "09295d79005fa69cd1a851141422ebc6fe01c9911883b14e8f035a9f3156d898",
+  "independent_physical_validation": false
+}

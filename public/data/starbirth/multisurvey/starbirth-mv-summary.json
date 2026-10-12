@@ -1,0 +1,68 @@
+{
+  "schema": "multisurvey-eligibility/1",
+  "registration_sha256": "41f5a6bec70c239f9cfc1ede4482cfb6b8e8af95b8460fe27c5f383cdc520487",
+  "parent_rows": 19328,
+  "cached_higal_rows": 94604,
+  "source_identity_tables": {
+    "e13": {
+      "rows": 9000,
+      "unique_ids": 9000,
+      "repeated_ids": 0,
+      "extra_rows": 0
+    },
+    "malt90": {
+      "rows": 303,
+      "unique_ids": 303,
+      "repeated_ids": 0,
+      "extra_rows": 0
+    },
+    "almagal": {
+      "rows": 98,
+      "unique_ids": 98,
+      "repeated_ids": 0,
+      "extra_rows": 0
+    },
+    "control": {
+      "rows": 1000,
+      "unique_ids": 1000,
+      "repeated_ids": 0,
+      "extra_rows": 0
+    }
+  },
+  "parent_counts": {
+    "e13_sample": 3000,
+    "wise_row": 19328,
+    "wise_coordinates": 1231,
+    "neowise_searched": 19219,
+    "malt90_consumed": 303,
+    "almagal_consumed": 52,
+    "control_sample": 1000,
+    "upper70_present": 19328,
+    "retained_cutout_files_unverified": 3294,
+    "neowise_with_rows": 11845,
+    "neowise_geometry_mismatch_sources": 0,
+    "spicy_association_records": 293,
+    "fir_four_positive_values": 13339,
+    "fir_two_positive_error_values": 13297,
+    "malt90_and_almagal_consumed": 22,
+    "wise_and_neowise_rows": 1098
+  },
+  "neowise_input_rows": 1250385,
+  "neowise_geometry_mismatch_rows": 0,
+  "spicy_input_rows": 293,
+  "retained_cutout_bytes": 85469057,
+  "fresh_physical_truth_registered": 0,
+  "development_ledger_available": true,
+  "independent_test_eligible": false,
+  "physical_inference_performed": false,
+  "model_fit_performed": false,
+  "stopped_occurrence_rows_opened": false,
+  "outcome": "development_inventory_only; independent_evaluation_unestablished",
+  "limits": "Presence is not quality, physical association, nondetection or survey coverage.",
+  "products": {
+    "sources.csv.gz": {
+      "bytes": 575173,
+      "sha256": "7b4a902d69a121c4716eb378603c40f5099c925333bc49d86536adda1cc11379"
+    }
+  }
+}
