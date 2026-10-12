@@ -285,3 +285,83 @@ html[data-theme="dark"] .pa-links a small{color:#adc1c6}
 .pa-lean-statement{max-height:175px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;color:#e5edef;background:#102333;border:1px solid #344f5c;border-radius:4px;padding:11px;font:12px/1.55 "JetBrains Mono",ui-monospace,monospace;margin:0 0 12px}
 .pa-app-sidebar .pa-modes button{display:block;min-height:40px}
 .pa-inspector #pa-inspector-actions{max-width:100%}
+
+
+/* Proof Atlas: stable right rail. Hover changes only its own dock and never
+   shifts / scrolls the persistent selection panel. */
+.pa-inspector{
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+  max-height:100%;
+  overflow:hidden!important;
+}
+.pa-inspector .pa-hover-details{
+  flex:0 0 148px;
+  height:148px;
+  min-height:148px;
+  margin:0 0 13px;
+  padding:10px 4px 12px 0;
+  overflow:hidden;
+  border-top:0;
+  border-bottom:1px solid #3b5865;
+}
+.pa-inspector .pa-hover-details p{margin-bottom:5px;}
+.pa-inspector .pa-hover-neighbors{
+  max-height:80px;
+  overflow-y:auto;
+  scrollbar-gutter:stable;
+}
+.pa-inspector-selection{
+  flex:1 1 auto;
+  min-height:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  overscroll-behavior:contain;
+  scrollbar-gutter:stable;
+  padding-right:5px;
+  padding-bottom:20px;
+}
+.pa-terminal-note{font-size:12px;line-height:1.55;color:#9abdc7;margin:8px 0 12px;}
+.pa-terminal-list{
+  max-height:176px;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  scrollbar-gutter:stable;
+  border:1px solid #355461;
+  padding:6px;
+  border-radius:4px;
+}
+.pa-terminal-list button{
+  display:block;
+  flex:none;
+  width:100%;
+  overflow-wrap:anywhere;
+  text-align:left;
+  background:#1a3e4b;
+  border:1px solid #3a5e69;
+  border-radius:3px;
+  padding:6px 9px;
+  line-height:1.4;
+  color:#c9ece7;
+  font-size:11px;
+}
+.pa-terminal-list button:hover,.pa-terminal-list button:focus-visible{
+  background:#295c66;
+}
+@media(max-width:940px){
+  .pa-inspector{
+    display:flex;
+    flex-direction:column;
+    height:500px;
+    max-height:500px;
+    padding:14px 18px;
+  }
+}
+@media(max-width:650px){
+  .pa-inspector{height:420px;max-height:420px;}
+  .pa-inspector .pa-hover-details{flex-basis:120px;height:120px;min-height:120px;}
+  .pa-inspector .pa-hover-neighbors{max-height:56px;}
+}
