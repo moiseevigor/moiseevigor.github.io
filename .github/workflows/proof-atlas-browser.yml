@@ -7,10 +7,26 @@ on:
       - 'public/js/proof-atlas-grammar.js'
       - 'public/js/proof-atlas-scales.js'
       - 'public/data/proof-atlas/lean-expr-grammar.js'
-      - 'public/css/proof-atlas.css'
+      - 'public/data/proof-atlas/lean-syntax-reference.js'
+      - 'scripts/test-proof-atlas-reference.cjs'
+      - 'public/css/**'
+      - '_layouts/**'
+      - '_includes/head.html'
+      - 'research/proof-atlas/**'
       - 'projects/proof-atlas/**'
       - 'scripts/test-proof-atlas-browser.cjs'
       - 'scripts/test-proof-atlas-grammar.cjs'
+      - '.github/workflows/proof-atlas-browser.yml'
+  pull_request:
+    paths:
+      - 'public/**/proof-atlas*'
+      - 'public/css/**'
+      - '_layouts/**'
+      - '_includes/head.html'
+      - 'research/proof-atlas/**'
+      - 'public/data/proof-atlas/**'
+      - 'projects/proof-atlas/**'
+      - 'scripts/test-proof-atlas*.cjs'
       - '.github/workflows/proof-atlas-browser.yml'
   workflow_dispatch:
 jobs:
@@ -24,11 +40,16 @@ jobs:
           node-version: '22'
       - name: Install Chromium test dependencies
         run: |
-          npm install --no-save playwright@1.57.0
+          npm install --no-save playwright@1.57.0 axe-core@4.11.0
           npx playwright install --with-deps chromium
-      - name: Serve actual repository page and assets
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+      - name: Build and serve the actual website with its global styles
         run: |
-          python3 -m http.server 8833 --bind 127.0.0.1 > /tmp/proof-atlas-server.log 2>&1 &
+          bundle exec jekyll build --destination _site_production
+          python3 -m http.server 8833 --bind 127.0.0.1 --directory _site_production > /tmp/proof-atlas-server.log 2>&1 &
           sleep 2
       - name: Browser regression — hub hover, geometry, responsiveness
         run: node scripts/test-proof-atlas-browser.cjs
@@ -38,8 +59,26 @@ jobs:
         run: node scripts/test-proof-atlas-grammar.cjs
         env:
           ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
+      - name: Browser regression — scoped Lean reference and accessibility
+        run: node scripts/test-proof-atlas-reference.cjs
+        env:
+          ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: proof-atlas-browser-screenshots
           path: /tmp/proof-atlas-browser
+
+  lean-reference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned Lean compiler
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o /tmp/elan-init.sh
+          sh /tmp/elan-init.sh -y --default-toolchain leanprover/lean4:v4.33.1
+      - name: Check reference fields, source examples and small kernel terms
+        run: python3 research/proof-atlas/verify_lean_reference.py --lean "$HOME/.elan/bin/lean"
+      - name: Audit the unchanged public graph topology
+        run: python3 research/proof-atlas/verify_public_data.py

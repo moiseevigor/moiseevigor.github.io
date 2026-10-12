@@ -1,68 +1,105 @@
-/* Proof Atlas visual grammar: exhaustive on Lean.Expr constructor TAGS;
-   examples show possible surface terms, never promise byte-identical kernel ASTs. */
-(function(){
- 'use strict';
- const root=document.getElementById('pa-grammar');if(!root)return;
- const entries=[
- {tag:'bvar',title:'Bound variable',group:'Variables',desc:'An occurrence referring to a surrounding binder using a de Bruijn index. Index 0 refers to the nearest binder.',example:'fun x : Nat => x',reading:'The small variable node points back to its enclosing λ binder. This is a scope reference, not a new theorem.',ports:[['binder','scope / de Bruijn index']],diagram:['bvar','binder'],edges:[['bvar','binder','scope']]},
- {tag:'fvar',title:'Free variable',group:'Variables',desc:'A local free-variable identifier introduced in an elaboration context, typically a local hypothesis or parameter.',example:'example (h : P) : P := h',reading:'A local-variable occurrence refers to an entry in the current context Γ. Closed kernel terms cannot leave unresolved local variables.',ports:[['Γ','local declaration']],diagram:['fvar','Γ'],edges:[['fvar','Γ','context']]},
- {tag:'mvar',title:'Metavariable',group:'Variables',desc:'A metavariable stands for an expression that elaboration still has to assign. Unresolved metavariables are not acceptable in a completed theorem certificate.',example:'by\n  refine ?_',reading:'The hollow question mark denotes a goal or placeholder. Elaboration must solve it before kernel checking.',ports:[['goal','assignment / pending']],diagram:['mvar','goal'],edges:[['mvar','goal','pending']]},
- {tag:'sort',title:'Sort / universe',group:'Types',desc:'A universe level expressed as Sort u; Prop is Sort 0, while Type u abbreviates Sort (u+1).',example:'#check Prop\n#check Type 0',reading:'A Sort node is a type universe at a particular level; the level is an attribute, not a child proof.',ports:[['u','universe level']],diagram:['sort','level'],edges:[['sort','level','universe']]},
- {tag:'const',title:'Named constant',group:'References',desc:'A reference to a declaration in the environment (definition, theorem, axiom, inductive constructor, etc.), with universe arguments.',example:'#check Nat.succ',reading:'The constant carries a declaration name and universe instantiations. You must look up the declaration to know whether it is a lemma.',ports:[['declaration','name'],['levels','universe arguments']],diagram:['const','declaration','levels'],edges:[['const','declaration','lookup'],['const','levels','levels']]},
- {tag:'app',title:'Application',group:'Composition',desc:'Applies a function expression to an argument expression; a multi-argument application is nested binary applications.',example:'#check Nat.succ 2',reading:'The application vertex has two ordered inputs: function and argument. This is the common repeated branching shape in elaborated Lean terms.',ports:[['function','expression'],['argument','expression']],diagram:['app','function','argument'],edges:[['app','function','function'],['app','argument','argument']]},
- {tag:'lam',title:'Lambda abstraction',group:'Binders',desc:'Builds a function from a binder name, parameter type, body expression and binder information.',example:'fun n : Nat => n + 1',reading:'The λ encloses a body and a parameter type. An occurrence of bvar 0 inside the body refers back to this λ.',ports:[['type','parameter type'],['body','scoped expression']],diagram:['lam','type','body','bvar'],edges:[['lam','type','type'],['lam','body','body'],['body','bvar','scoped use'],['bvar','lam','binder']]},
- {tag:'forallE',title:'Dependent function / ∀',group:'Binders',desc:'A dependent function type. When its result is Prop, it is used to represent universal quantification and implication.',example:'#check ∀ n : Nat, n = n',reading:'The ∀/Π node connects a domain type and a dependent body. An implication A → B is the nondependent special case.',ports:[['domain','binder type'],['body','dependent type']],diagram:['forallE','domain','body','bvar'],edges:[['forallE','domain','domain'],['forallE','body','codomain'],['body','bvar','scope']]},
- {tag:'letE',title:'Local let binding',group:'Binders',desc:'A local definition with binder type, bound value, and body (possibly referencing that bound variable).',example:'let n := 2\nn + n',reading:'Three distinct connections are needed: type, value and scoped body. The binding is local to the expression.',ports:[['type','declaration type'],['value','bound expression'],['body','expression']],diagram:['letE','type','value','body'],edges:[['letE','type','type'],['letE','value','value'],['letE','body','body']]},
- {tag:'lit',title:'Literal',group:'Values',desc:'A kernel literal such as a natural-number or string literal. Elaborated surface numerals can also involve type-class operations.',example:'#check (42 : Nat)',reading:'This is a terminal payload node, not a subproof. The value is stored on the node.',ports:[['payload','numeral / string']],diagram:['lit','payload'],edges:[['lit','payload','value']]},
- {tag:'mdata',title:'Metadata wrapper',group:'Annotations',desc:'Attaches auxiliary metadata to an underlying expression. Metadata does not supply a new proof rule.',example:'-- metadata can be generated by elaborators\nexample : True := trivial',reading:'The wrapper contains an underlying expression plus auxiliary annotations. The annotation is not itself a proof certificate.',ports:[['inner','wrapped expression'],['metadata','annotation']],diagram:['mdata','inner','metadata'],edges:[['mdata','inner','expression'],['mdata','metadata','annotation']]},
- {tag:'proj',title:'Structure projection',group:'References',desc:'Projects a numbered field from an expression of a structure type, using a structure name and projection index.',example:'#check (1, 2).1',reading:'The projection references a structure declaration and an input expression. The field index is an annotation; it is not simply a child node.',ports:[['structure','declaration / index'],['value','structure expression']],diagram:['proj','structure','value'],edges:[['proj','structure','declaration'],['proj','value','input']]}
- ];
- const tags=['bvar','fvar','mvar','sort','const','app','lam','forallE','letE','lit','mdata','proj'];
- const buttons=document.getElementById('pa-grammar-choices'),svg=document.getElementById('pa-grammar-svg');
- const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
- function el(name,attrs,text){const n=document.createElementNS(NS,name);for(const [k,v] of Object.entries(attrs||{}))n.setAttribute(k,String(v));if(text!=null)n.textContent=text;return n;}
- for(const [i,item] of entries.entries()){
-   const b=document.createElement('button');b.type='button';b.className='pa-grammar-choice';b.dataset.tag=item.tag;
-   b.innerHTML='<span class="pa-g-num">'+String(i+1).padStart(2,'0')+'</span><span class="pa-g-tag"></span><small></small>';
-   b.querySelector('.pa-g-tag').textContent=item.tag;b.querySelector('small').textContent=item.group;
-   b.addEventListener('click',()=>select(i));buttons.appendChild(b);
- }
- function draw(item){
-   svg.replaceChildren();
-   const nodes=item.diagram;
-   const positions=new Map();const cx=295,cy=83;
-   positions.set(nodes[0],{x:cx,y:cy});
-   const rest=nodes.slice(1);
-   for(let j=0;j<rest.length;j++){
-     let x,y;
-     if(rest.length===1){x=cx;y=207;}
-     else if(rest.length===2){x=175+j*240;y=208;}
-     else if(rest.length===3){x=127+j*170;y=204;}
-     else{x=110+j*125;y=209;}
-     positions.set(rest[j],{x,y});
-   }
-   for(const [from,to,role] of item.edges){
-     const a=positions.get(from),b=positions.get(to);if(!a||!b)continue;
-     const cross=(role==='binder'||role==='scope');
-     const path=el('path',{d:cross?('M'+a.x+','+(a.y-26)+' Q430,12 '+b.x+','+(b.y-27)):
-       ('M'+a.x+','+(a.y+27)+' Q'+a.x+','+((a.y+b.y)/2)+' '+b.x+','+(b.y-27)),fill:'none',stroke:cross?'#b68b61':'#5c9b98','stroke-width':cross?'1.6':'2.2','stroke-dasharray':cross?'5 5':'none'});
-     svg.appendChild(path);
-     if(!cross)svg.appendChild(el('text',{x:(a.x+b.x)/2,y:(a.y+b.y)/2-6,'text-anchor':'middle',fill:'#648586','font-size':12},role));
-   }
-   for(const [name,p] of positions){
-     const root=name===nodes[0],w=root?142:140;
-     svg.appendChild(el('rect',{x:p.x-w/2,y:p.y-26,width:w,height:52,rx:9,fill:root?'#174657':'#e6f1ee',stroke:root?'#174657':'#699e9b','stroke-width':2}));
-     svg.appendChild(el('text',{x:p.x,y:p.y+6,'text-anchor':'middle',fill:root?'#fff':'#1b4a55','font-size':root?18:15,'font-weight':root?750:550},name));
-   }
- }
- function select(i){
-   const x=entries[i];for(const b of buttons.children)b.setAttribute('aria-pressed',b.dataset.tag===x.tag?'true':'false');
-   $('pa-g-group').textContent=x.group.toUpperCase();$('pa-g-name').textContent=x.tag+' — '+x.title;
-   $('pa-g-description').textContent=x.desc;$('pa-g-example').textContent=x.example;
-   $('pa-g-reading').textContent=x.reading;
-   const ports=$('pa-g-ports');ports.replaceChildren();
-   for(const [p,role] of x.ports){const s=document.createElement('span');s.textContent=p+' · '+role;ports.appendChild(s);}
-   draw(x);
- }
- select(5);
+/* Scoped Lean reference. Fields are version-pinned; family flows are authored summaries. */
+(function () {
+  'use strict';
+  const $=id=>document.getElementById(id), root=$('pa-grammar');
+  if(!root)return;
+  const G=window.PROOF_ATLAS_GRAMMAR,R=window.PROOF_ATLAS_SYNTAX_REFERENCE;
+  if(!G||!R){$('pa-g-description').textContent='The reference could not load. Reload this page or follow the Lean manual below.';return;}
+  const entries=[...G.kinds.map(k=>({...k,id:'expr-'+k.kind,layer:'expr',explanation:k.explanation})),...R.entries];
+  const layerById=new Map(R.layers.map(x=>[x.id,x])), byId=new Map(entries.map(x=>[x.id,x]));
+  const counts=window.PROOF_ATLAS_DATA?.stats?.kindCounts||{};
+  const choices=$('pa-grammar-choices'),svg=$('pa-grammar-svg');
+  let activeLayer='expr',current='expr-app',query='';
+  const dom=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
+  const NS='http://www.w3.org/2000/svg';
+  function el(tag,attrs,text){const e=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs||{}))e.setAttribute(k,String(v));if(text!==undefined)e.textContent=text;return e;}
+  function lines(text,max=26){const out=[];let row='';for(const word of text.split(' ')){if(row.length+word.length+1>max&&row){out.push(row);row=word;}else row+=(row?' ':'')+word;}if(row)out.push(row);return out;}
+  function textAt(x,y,label,cls,max=26){const t=el('text',{x,y,'text-anchor':'middle',class:cls});for(const [i,s]of lines(label,max).entries())t.appendChild(el('tspan',{x,dy:i?19:0},s));svg.appendChild(t);}
+  function draw(e){
+    svg.replaceChildren();svg.appendChild(el('title',{},e.title));
+    const fieldMode=e.fields.length>0||['expr','level','syntax'].includes(e.layer);
+    const fields=e.fields, compact=svg.clientWidth<620, width=compact?420:700;
+    const rows=compact?fields.length:Math.ceil(fields.length/2);
+    const height=fieldMode?Math.max(190,90+rows*85):(compact?355:210);
+    svg.setAttribute('viewBox','0 0 '+width+' '+height);
+    svg.setAttribute('aria-label',e.title+(fieldMode?': '+fields.map(f=>f.name+' : '+f.type+' ('+f.link+')').join('; '):': '+e.flow.join(' → ')));
+    if(fieldMode){
+      svg.appendChild(el('rect',{x:width/2-115,y:12,width:230,height:52,rx:6,class:'pa-diagram-root'}));
+      textAt(width/2,44,e.kind||e.title,'pa-diagram-root-text');
+      if(!fields.length){textAt(width/2,124,'No structural children or payload fields','pa-diagram-note',44);return;}
+      fields.forEach((f,i)=>{
+        const left=i%2===0,x=compact?60:(left?22:398),y=98+(compact?i:Math.floor(i/2))*85;
+        const group=el('g',{'data-field':f.name,class:'pa-diagram-field'});
+        const end=left?302:398;
+        group.appendChild(el('path',{d:compact?'M35 38 H'+(width/2-115)+' M35 38 V'+(y+28)+' H60':'M350 64 V'+(y+28)+' H'+end,class:'pa-diagram-edge pa-link-'+f.link,fill:'none'}));
+        group.appendChild(el('rect',{x,y,width:280,height:65,rx:5,class:'pa-diagram-port pa-link-'+f.link}));
+        const name=el('text',{x:x+140,y:y+24,'text-anchor':'middle',class:'pa-diagram-field-name'},f.name);
+        const type=el('text',{x:x+140,y:y+47,'text-anchor':'middle',class:'pa-diagram-field-type'},f.type);
+        group.append(name,type);svg.appendChild(group);
+      });
+      const selected=$('pa-g-ports').querySelector('[aria-pressed="true"]');
+      if(selected)for(const n of svg.querySelectorAll('[data-field]'))n.classList.toggle('is-dim',n.dataset.field!==selected.dataset.field);
+    }else{
+      e.flow.forEach((label,i)=>{
+        const x=compact?110:18+i*234, y=compact?12+i*103:44;
+        if(i<2)svg.appendChild(el('path',{d:compact?'M210 '+(y+90)+' V'+(y+100)+' l-5 -6 m5 6 l5 -6':'M'+(x+200)+' 94 H'+(x+228)+' l-7 -5 m7 5 l-7 5',class:'pa-diagram-flow',fill:'none'}));
+        svg.appendChild(el('rect',{x,y,width:200,height:compact?90:101,rx:6,class:i===1?'pa-diagram-root':'pa-diagram-port'}));
+        textAt(x+100,y+34,label,i===1?'pa-diagram-root-text':'pa-diagram-field-name',21);
+      });
+      textAt(width/2,compact?334:190,'Conceptual path · exact expansion depends on context','pa-diagram-note',56);
+    }
+  }
+  function matching(){const q=query.toLowerCase().trim();return entries.filter(e=>(q||e.layer===activeLayer)&&(!q||[e.title,e.kind,e.explanation,e.example,e.reading,...e.fields.map(f=>f.name+' '+f.type)].join(' ').toLowerCase().includes(q)));}
+  function renderChoices(){
+    const list=matching();
+    $('pa-reference-count').textContent=list.length+' '+(query?'matches across all layers':'entries');
+    const oldIds=Array.from(choices.querySelectorAll('button')).map(b=>b.dataset.id);
+    if(oldIds.join('|')===list.map(e=>e.id).join('|')){for(const b of choices.querySelectorAll('button'))b.setAttribute('aria-pressed',b.dataset.id===current?'true':'false');return;}
+    choices.replaceChildren();
+    $('pa-reference-count').textContent=list.length+' '+(query?'matches across all layers':'entries');
+    if(!list.length){choices.appendChild(dom('p','pa-reference-empty','No matches. Try a constructor name or clear the search.'));return;}
+    list.forEach((e,i)=>{
+      const b=dom('button','pa-grammar-choice');b.type='button';b.dataset.id=e.id;
+      if(e.layer==='expr')b.dataset.tag=e.kind;
+      b.setAttribute('aria-pressed',e.id===current?'true':'false');b.setAttribute('aria-controls','pa-reference-detail');
+      b.append(dom('span','pa-g-num',String(i+1).padStart(2,'0')),dom('span','pa-g-tag',e.kind||e.title),dom('small',null,e.layer==='expr'?e.title:layerById.get(e.layer).title));
+      b.addEventListener('click',()=>select(e.id));choices.appendChild(b);
+    });
+  }
+  function select(id,updateUrl=true){
+    const e=byId.get(id);if(!e)return;
+    current=id;activeLayer=e.layer;
+    for(const b of $('pa-reference-layers').children)b.setAttribute('aria-pressed',b.dataset.layer===activeLayer?'true':'false');
+    const layer=layerById.get(e.layer);
+    $('pa-reference-scope').textContent=layer.coverage+' · '+layer.scope;
+    $('pa-g-group').textContent=layer.title+' / '+(['expr','level','syntax'].includes(e.layer)?'Constructor reference':'Authored explanation');
+    $('pa-g-name').textContent=(e.kind?e.kind+' — ':'')+e.title;
+    $('pa-g-description').textContent=e.explanation;
+    $('pa-g-example').textContent=e.example;
+    $('pa-reference-code-title').textContent=e.rawExample?'Constructor shape (illustrative)':'Conceptual path';
+    $('pa-reference-form').textContent=e.rawExample||e.flow.join('\n  → ')||'Selected field summary; no canonical source expansion.';
+    $('pa-g-reading').textContent=e.reading;
+    $('pa-reference-status').textContent=e.layer==='expr'?(counts[e.kind]?counts[e.kind].toLocaleString('en-US')+' occurrences in the released crossing benchmark.':'Not observed in the released crossing benchmark.'):'Reference explanation · not extracted from the crossing certificate.';
+    $('pa-reference-limit').textContent=e.layer==='expr'?e.caution:layer.scope;
+    $('pa-reference-fields-title').textContent=e.layer==='elab'?'Selected fields / related data (not exhaustive)':e.fields.length?'Structural fields · select one to locate it':'Reading the connections';
+    $('pa-reference-legend').textContent=e.fields.length?'Solid: Expr / Level / Syntax children. Dashed: payload, scope, environment or context links. Types and labels distinguish the child languages.':'Authored transformation diagram; not a captured elaboration or tactic trace.';
+    const ports=$('pa-g-ports');ports.replaceChildren();
+    for(const f of e.fields){const b=dom('button','pa-reference-field');b.type='button';b.dataset.field=f.name;b.setAttribute('aria-pressed','false');b.append(dom('strong',null,f.name+' : '+f.type),dom('span','pa-field-link',f.link),dom('span','pa-field-note',f.note));b.addEventListener('click',()=>{
+      const on=b.getAttribute('aria-pressed')!=='true';
+      for(const btn of ports.children)btn.setAttribute('aria-pressed',on&&btn===b?'true':'false');
+      for(const n of svg.querySelectorAll('[data-field]'))n.classList.toggle('is-dim',on&&n.dataset.field!==f.name);
+    });ports.appendChild(b);}
+    if(!e.fields.length)ports.appendChild(dom('p',null,e.flow.length?'Arrows show interpretation or processing order, not logical implication. The resulting term must still be checked.':'This constructor is atomic. It has no recursive children.'));
+    $('pa-reference-source').href=e.source;$('pa-reference-source').textContent=e.layer==='expr'||['level','syntax','elab'].includes(e.layer)?'Lean 4.33.1 source ↗':'Lean language manual ↗';
+    $('pa-reference-link').href='#'+id;
+    const index=entries.indexOf(e);$('pa-reference-prev').disabled=index===0;$('pa-reference-next').disabled=index===entries.length-1;
+    draw(e);renderChoices();
+    if(updateUrl)history.replaceState(null,'','#'+id);
+  }
+  for(const l of R.layers){const b=dom('button','pa-reference-layer');b.type='button';b.dataset.layer=l.id;b.setAttribute('aria-pressed','false');b.append(dom('strong',null,l.title),dom('span',null,l.coverage));b.addEventListener('click',()=>{query='';$('pa-reference-search').value='';select(entries.find(e=>e.layer===l.id).id);});$('pa-reference-layers').appendChild(b);}
+  $('pa-reference-search').addEventListener('input',event=>{query=event.target.value;renderChoices();});
+  for(const [id,delta]of [['pa-reference-prev',-1],['pa-reference-next',1]])$(id).addEventListener('click',()=>{query='';$('pa-reference-search').value='';select(entries[entries.findIndex(e=>e.id===current)+delta]?.id);});
+  window.addEventListener('hashchange',()=>{const id=location.hash.slice(1);if(byId.has(id)){query='';$('pa-reference-search').value='';select(id,false);}});
+  new ResizeObserver(()=>{const e=byId.get(current);if(e)draw(e);}).observe(svg.parentElement);
+  select(byId.has(location.hash.slice(1))?location.hash.slice(1):'expr-app',false);
 })();

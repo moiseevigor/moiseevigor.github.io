@@ -72,14 +72,14 @@
    "paper" card with the light tokens restored, so every figure renders
    exactly as published. The SE(2) canvases are theme-aware (program.js). */
 :root[data-theme="dark"] .fig-box,
-:root[data-theme="dark"] figure:has(svg):not(:has(.fig-box)):not(.se2-figure) {
+:root[data-theme="dark"] figure:has(svg):not(:has(.fig-box)):not(.se2-figure):not(.pa-grammar-drawing) {
   color-scheme: light;
   --accent: #1565c0; --accent-light: #e8f0fe; --accent-warm: #e65100;
   --text: #1a1a1a; --text-light: #555; --text-muted: #888;
   --border: #e0e0e0; --fig-bg: #fafafa; --bg: #fff; --inline-code-bg: #f3f3f3; --on-accent: #fff;
   color: var(--text);
 }
-:root[data-theme="dark"] figure:has(svg):not(:has(.fig-box)):not(.se2-figure) {
+:root[data-theme="dark"] figure:has(svg):not(:has(.fig-box)):not(.se2-figure):not(.pa-grammar-drawing) {
   background: var(--bg); border-radius: 8px; padding: 14px 16px;
 }
 /* Raster figures stay untouched; transparent logos/icons get a white tile so

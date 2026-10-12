@@ -2,7 +2,7 @@
 const {chromium}=require('playwright');
 const path=require('path'),fs=require('fs');
 (async()=>{
-  const browser=await chromium.launch({headless:true});
+  const browser=await chromium.launch({headless:true, ...(process.env.ATLAS_CHROMIUM_PATH?{executablePath:process.env.ATLAS_CHROMIUM_PATH}:{})});
   const page=await browser.newPage({viewport:{width:1440,height:1000},deviceScaleFactor:1});
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
   const shots=process.env.ATLAS_SCREENSHOTS||'/tmp/proof-atlas-browser';

@@ -9,34 +9,26 @@
   if (!root || !G || !Array.isArray(G.kinds) || G.kinds.length!==12) return;
   const byKind=new Map(G.kinds.map(k=>[k.kind,k]));
   const order=['bvar','fvar','mvar','sort','const','app','lam','forallE','letE','lit','mdata','proj'];
-  const rawFields={
-    bvar:[['index : Nat','attribute']],fvar:[['fvarId : FVarId','context reference']],
-    mvar:[['mvarId : MVarId','elaboration reference']],sort:[['u : Level','universe']],
-    const:[['name : Name','environment reference'],['us : List Level','universe args']],
-    app:[['fn : Expr','expression'],['arg : Expr','expression']],
-    lam:[['binderName : Name','attribute'],['binderType : Expr','expression'],['body : Expr','scoped expression'],['binderInfo : BinderInfo','attribute']],
-    forallE:[['binderName : Name','attribute'],['binderType : Expr','expression'],['body : Expr','scoped expression'],['binderInfo : BinderInfo','attribute']],
-    letE:[['declName : Name','attribute'],['type : Expr','expression'],['value : Expr','expression'],['body : Expr','scoped expression'],['nondep : Bool','attribute']],
-    lit:[['val : Literal','literal payload']],mdata:[['data : MData','metadata'],['expr : Expr','expression']],
-    proj:[['typeName : Name','environment reference'],['idx : Nat','field index'],['struct : Expr','expression']]
-  };
+  const rawFields=Object.fromEntries(G.kinds.map(k=>[k.kind,k.fields.map(f=>[
+    f.name+' : '+f.type, f.link==='expr'?'expression':f.link+' / '+f.note
+  ])]));
   const meanings={
     bvar:'A de Bruijn index is meaningful only relative to its enclosing binders. The scope connection is a reference, not a theorem dependency.',
     fvar:'A local hypothesis or parameter is tracked in an elaboration context. A closed kernel declaration must not retain unresolved free variables.',
     mvar:'A goal placeholder during elaboration. Unassigned metavariables cannot appear as unresolved holes in a completed kernel-checked proof.',
-    sort:'Universes track levels of types (Prop = Sort 0; Type u = Sort (u + 1)). A universe node does not prove a proposition.',
+    sort:'Prop = Sort 0; Type u = Sort (u + 1); Sort u : Sort (u + 1). Level is a separate recursive language, not an Expr child.',
     const:'A name refers into the environment. It may denote a theorem, a definition, a constructor or an axiom; the declaration kind must be inspected.',
     app:'Applying a term f to an argument a is a generic operation. It is logical modus ponens only when the types say so.',
     lam:'A λ binder creates a function; when its body is a proof, it may introduce a hypothesis. Scope links must remain explicit.',
     forallE:'A dependent Π type expresses function types and, in Prop, universal quantification or implication. Formation alone proves nothing.',
-    letE:'A local value is named within a body; the body sees the new binder. The binding must not leak outside its scope.',
+    letE:'Only the body sees the new binder; the type and value do not. nondep is an elaborator have flag that the kernel does not check.',
     lit:'A natural-number or string literal is atomic data, not a mathematical inference.',
     mdata:'Metadata wraps an expression; its mathematical meaning is that of the inner term. No independent proof edge is created.',
     proj:'Selects a field from a single-constructor inductive structure. The projection type and index must be justified by the environment.'
   };
   const form={
-    bvar:'.bvar index',fvar:'.fvar fvarId',mvar:'.mvar mvarId',sort:'.sort u',
-    const:'.const name levels',app:'.app fn arg',lam:'.lam name type body binderInfo',
+    bvar:'.bvar deBruijnIndex',fvar:'.fvar fvarId',mvar:'.mvar mvarId',sort:'.sort u',
+    const:'.const declName us',app:'.app fn arg',lam:'.lam name type body binderInfo',
     forallE:'.forallE name type body binderInfo',letE:'.letE name type value body nondep',
     lit:'.lit value',mdata:'.mdata data expr',proj:'.proj typeName idx struct'
   };
@@ -125,9 +117,9 @@
       svg.appendChild(svgNode('rect',{x:x-boxWidth/2,y:y-15,width:boxWidth,height:39,rx:7,
         fill:solid?'#e3f3ee':'#f6ede2',stroke:color,'stroke-width':1.2}));
       svg.appendChild(svgNode('text',{x,y:y+1,'text-anchor':'middle','font-size':crowded?11:13,fill:'#254956','font-weight':650},name.split(' : ')[0]));
-      svg.appendChild(svgNode('text',{x,y:y+17,'text-anchor':'middle','font-size':9.5,fill:'#56717b'},solid?'child Expr':kind));
+      svg.appendChild(svgNode('text',{x,y:y+17,'text-anchor':'middle','font-size':11,fill:'#405b62'},solid?(id==='app'?(name.startsWith('fn')?'Nat.succ':'Nat.zero'):'child Expr'):name.split(' : ')[1]));
     }
-    svg.appendChild(svgNode('text',{x:280,y:248,'text-anchor':'middle','font-size':11.5,fill:'#617d7b'},
+    svg.appendChild(svgNode('text',{x:280,y:248,'text-anchor':'middle','font-size':11.5,fill:'#405b62'},
       expr.length+' Expr '+(expr.length===1?'child':'children')+' · '+other.length+' reference / annotation '+(other.length===1?'field':'fields')));
   }
   function drawModule(id){
@@ -175,6 +167,9 @@
     $('pa-scale-status').classList.toggle('pa-scale-status-absent',!was);
     $('pa-scale-note').textContent=k.explanation;
     $('pa-scale-core').textContent='Lean.Expr'+form[id]+'\n\nIllustrative source:\n'+k.example;
+    $('pa-scale-graph').setAttribute('aria-label',id+': '+rawFields[id].map(f=>f[0]).join('; '));
+    const fields=$('pa-scale-graph-fields');
+    if(fields){fields.replaceChildren();for(const field of rawFields[id])fields.appendChild(dom('span',null,field[0]));}
     $('pa-scale-graph-note').textContent='Solid links: expression children. Dashed links: attributes, context, universe levels or environmental references; these are not child expression edges.';
     $('pa-scale-module-note').textContent='A formal certificate is checked in a typing context. A collapsed module is valid only when its assumptions, scope, type and evidence are preserved.';
     $('pa-scale-meaning').textContent=meanings[id];

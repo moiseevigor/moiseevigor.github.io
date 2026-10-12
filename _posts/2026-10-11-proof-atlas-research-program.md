@@ -13,6 +13,7 @@ series_title: "Proof Atlas"
 series_part: 1
 permalink: /mathematics/2026/10/11/proof-atlas-research-program/
 published: true
+last_modified_at: 2026-10-12
 image: /public/img/posts/proof-atlas-1.svg
 comments: false
 description: >
@@ -156,6 +157,20 @@ The experimental sequence is: complete the transitive local dependency graph, bu
 **Not established:** that the graph geometry identifies the important mathematical ideas; that structural repetition is proof redundancy; that arbitrary Lean terms have concise, automatically discovered graphical explanations; or that such explanations measurably improve comprehension.
 
 The distinction is the research program. We are trying to move from a correct *map of a formal object* toward a correct and illuminating *map of its reasoning*.
+
+## 12 October 2026: a reference for Lean’s language layers
+
+The [visual language reference](/projects/proof-atlas/grammar/) now separates eight layers instead of treating every visible feature as an expression constructor. Its **74 entries** cover all **12 `Expr`**, **6 `Level`** and **4 `Syntax`** constructors in **Lean 4.33.1**, together with 16 surface-term families, 11 tactic families, 13 command families, six macro/notation families and six selected elaborator structures.
+
+The finite constructor inventories are exhaustive for the pinned version. The other inventories are curated: Lean and its libraries can register additional parsers, notation, commands and tactics. Each entry includes a tiny example, a diagram, an explanation of the links and a source reference. Constructor fields are checked against Lean’s definitions; family diagrams are explicitly authored processing summaries, not recovered tactic traces or certified translations.
+
+This distinction changes how we read the pictures. A `Level` child is not an `Expr` child. A `Syntax.ident` may resolve to a local variable or a constant. A tactic changes goals and constructs a term, while a command can change the environment without producing a proof expression. Source-to-term correspondence requires retained source spans and elaboration information; the final expression alone does not recover the original proof script.
+
+Validation checks 40 complete source examples with Lean 4.33.1 and ten small closed terms with the kernel, including a negative control that rejects an invalid projection. Chromium exercises all 74 reference entries, search, deep links, keyboard selection, field highlighting and responsive layouts. The reference has no detected WCAG A/AA violations in the scoped automated light/dark audit; this is not a claim of complete accessibility certification. The original expression-graph interaction regression and independent topology audit also pass.
+
+The contrast failure in the first interface exposed a testing gap: tests served raw page files without Jekyll’s shared styles. The browser workflow now builds and serves the actual site. The code panel’s measured foreground/background contrast is **11.02:1**. Reproducible commands, scope and remaining gaps are recorded in the [public research record](https://github.com/moiseevigor/moiseevigor.github.io/tree/master/research/proof-atlas).
+
+This is a reference and interface milestone. It does not establish automatic mathematical explanations, universal semantic compression, or graphical proof construction. The released crossing graph and its provenance data retain their existing scope.
 
 ## References and nearby work
 

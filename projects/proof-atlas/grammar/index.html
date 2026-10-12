@@ -3,15 +3,16 @@ layout: default
 title: "Proof Atlas — Visual Grammar of Lean"
 permalink: /projects/proof-atlas/grammar/
 page_class: proof-atlas-grammar-page
-description: "An illustrated visual grammar for all twelve Lean 4 core expression constructors, and the distinction between surface syntax, tactics, elaboration and proof certificates."
+description: "An illustrated visual grammar for Lean expressions, universes, syntax trees and major families of terms, tactics, commands, macros and elaborator data. Explicit coverage and provenance."
 ---
-<link rel="stylesheet" href="/public/css/proof-atlas.css?v=6">
+<link rel="stylesheet" href="/public/css/proof-atlas.css?v=8">
 <main class="pa-page pa-grammar" id="pa-grammar">
   <header class="pa-grammar-hero">
     <div class="pa-section-mark"><a href="/projects/proof-atlas/">Proof Atlas</a> / Visual language</div>
-    <h1>The anatomy of a <em>Lean expression</em></h1>
-    <p>A formal proof is not a forest of unnamed dots. Each expression node has a constructor, typed connections and a precise role. Select a glyph to see its shape, its inputs, and a short Lean example.</p>
-    <div class="pa-grammar-scope"><strong>Complete at the kernel constructor layer:</strong> all 12 `Lean.Expr` variants. <strong>Not a claim of complete Lean surface syntax:</strong> notation, commands, macros, tactics, and attributes elaborate into this core (or act on declarations and environments). These require additional layers.</div>
+    <h1>Read Lean.<br><em>See its structure.</em></h1>
+    <p>From readable source to checked terms: explore the parts of Lean, how they connect, and what each picture can tell you. Every entry pairs a small example with a diagram, an explanation and its source.</p>
+    <div class="pa-grammar-scope"><strong>Reference baseline: Lean 4.33.1.</strong> All 12 Expr, 6 Level and 4 Syntax constructors; major families of surface terms, tactics, commands and macros; selected elaborator structures. Lean is extensible: this is a scoped reference, not a claim to list every library notation or tactic.</div>
+    <nav class="pa-reference-jump" aria-label="Reference navigation"><a href="#pa-constructors">Explore the language ↓</a><a href="/projects/proof-atlas/app/">Open the working proof graph ↗</a></nav>
   </header>
   <section class="pa-grammar-path" aria-labelledby="pa-path">
     <div class="pa-section-mark">01 / Four scales, with explicit evidence</div>
@@ -27,27 +28,34 @@ description: "An illustrated visual grammar for all twelve Lean 4 core expressio
     </svg>
   </section>
   <section class="pa-grammar-explorer" aria-labelledby="pa-constructors">
-    <div class="pa-section-mark">02 / The kernel alphabet</div>
-    <h2 id="pa-constructors">All twelve `Lean.Expr` constructors</h2>
-    <p>These are the closed set of constructor tags defined by Lean 4's `Expr` type. The drawings below encode syntactic links; they are not claims that arbitrary node positions have mathematical meaning.</p>
+    <div class="pa-section-mark">02 / Language reference</div>
+    <h2 id="pa-constructors">Different layers. Different links.</h2>
+    <div id="pa-reference-layers" class="pa-reference-layers" role="group" aria-label="Choose a Lean language layer"></div>
+    <p id="pa-reference-scope" class="pa-reference-scope"></p>
+    <div class="pa-reference-search"><label for="pa-reference-search">Find a construct</label><input type="search" id="pa-reference-search" placeholder="Try binder, induction, universe, macro…" aria-controls="pa-grammar-choices"><span id="pa-reference-count" role="status" aria-live="polite"></span></div>
     <div class="pa-grammar-layout">
-      <nav id="pa-grammar-choices" class="pa-grammar-choices" aria-label="Choose a kernel constructor"></nav>
-      <div class="pa-grammar-stage">
-        <div class="pa-grammar-drawing">
-          <svg id="pa-grammar-svg" viewBox="0 0 590 275" role="img" aria-label="Diagram of selected Lean kernel expression"></svg>
+      <nav id="pa-grammar-choices" class="pa-grammar-choices" aria-label="Choose a language construct"></nav>
+      <article class="pa-grammar-stage" id="pa-reference-detail" aria-labelledby="pa-g-name">
+        <header class="pa-grammar-readout">
+          <div class="pa-section-mark" id="pa-g-group">Expression</div>
+          <h3 id="pa-g-name">app — Application</h3>
+          <p id="pa-g-description"></p>
+          <p id="pa-reference-status" class="pa-reference-status"></p>
+        </header>
+        <div class="pa-reference-two">
+          <section class="pa-reference-example"><h4 id="pa-reference-code-title">Constructor shape</h4><pre id="pa-reference-form"></pre><h4>Tiny example <span>illustrative</span></h4><pre id="pa-g-example"></pre></section>
+          <figure class="pa-grammar-drawing"><svg id="pa-grammar-svg" viewBox="0 0 700 340" role="img" aria-label="Structure of the selected construct"></svg><figcaption id="pa-reference-legend"></figcaption></figure>
         </div>
         <div class="pa-grammar-readout">
-          <div class="pa-section-mark" id="pa-g-group">Core expression</div>
-          <h3 id="pa-g-name">app — Function application</h3>
-          <p id="pa-g-description"></p>
-          <div class="pa-grammar-tags" id="pa-g-ports"></div>
-          <div class="pa-grammar-two">
-            <div><h4>Lean example</h4><pre id="pa-g-example"></pre></div>
-            <div><h4>How to read the picture</h4><p id="pa-g-reading"></p></div>
-          </div>
+          <h4 id="pa-reference-fields-title">Structural fields</h4>
+          <div id="pa-g-ports" class="pa-reference-fields"></div>
+          <h4>How to read it</h4><p id="pa-g-reading"></p>
+          <p id="pa-reference-limit" class="pa-reference-limit"></p>
+          <footer class="pa-reference-footer"><a id="pa-reference-source" href="https://lean-lang.org/doc/reference/latest/">Read the source ↗</a><a id="pa-reference-link" href="#expr-app">Link to this entry</a><div><button type="button" id="pa-reference-prev" aria-label="Previous construct">← Previous</button><button type="button" id="pa-reference-next" aria-label="Next construct">Next →</button></div></footer>
         </div>
-      </div>
+      </article>
     </div>
+    <noscript><p>The interactive reference requires JavaScript. The <a href="https://lean-lang.org/doc/reference/latest/">Lean language manual</a> remains available.</p></noscript>
   </section>
   <section class="pa-grammar-layers">
     <div class="pa-section-mark">03 / Beyond the kernel</div>
@@ -55,11 +63,14 @@ description: "An illustrated visual grammar for all twelve Lean 4 core expressio
     <div class="pa-grammar-layer-grid">
       <article><span>Surface language</span><h3>Readable notation</h3><code>theorem t : A ∧ B := ⟨ha, hb⟩</code><p>Tokens, declarations, names, syntax quotations, notation and macros belong to a richer syntax tree. They are not additional kernel `Expr` constructors.</p></article>
       <article><span>Elaboration</span><h3>Resolve and elaborate</h3><code>by simp [h]</code><p>Tactics and elaborators use goals, contexts, metavariables, type-class synthesis and elaboration information to construct terms. Their execution history is not preserved by a bare final proof term.</p></article>
-      <article><span>Kernel</span><h3>Small trusted language</h3><code>Γ ⊢ p : P</code><p>The kernel checks expressions using declaration environments and trusted rules. Some expressions also contain metadata or projections. The diagrams illustrate constructors, not every typing judgment.</p></article>
-      <article><span>Proof Atlas</span><h3>Certified view contracts</h3><code>(inputs) ──[proof]──▶ (result)</code><p>A collapsed graphic must retain assumptions, binder scope, axiom dependencies and a link to evidence. Our SE(2) viewer currently proves graph provenance, not universal semantic compression.</p></article>
+      <article><span>Kernel</span><h3>Small trusted language</h3><code>Γ ⊢ p : P</code><p>The kernel checks expressions using declaration environments and trusted rules. Some expressions also contain metadata or projections. The diagrams illustrate constructors, not every typing judgment. Universes, local contexts and declaration kinds are separate structures.</p></article>
+      <article><span>Proof Atlas</span><h3>Certified view contracts</h3><code>(inputs) ──[proof]──▶ (result)</code><p>A collapsed graphic must retain assumptions, binder scope, axiom dependencies and a link to evidence. The SE(2) viewer exposes structural provenance; semantic compression still requires checked contracts.</p></article>
     </div>
     <p class="pa-grammar-foot">Next formal milestones: graphical inference rules for application/binders, correct de Bruijn scope links, shared declarations, definitional equality and transport, recursors/induction, classical assumptions and quotient constructors. We must test each rule on a kernel-checkable example before extending the vocabulary.</p>
-    <p><a href="/projects/proof-atlas/app/">← Explore the measured SE(2) Lean proof</a> · <a href="/projects/proof-atlas/language/">All 12 rules in one illustrated catalogue</a> · <a href="/mathematics/2026/10/11/proof-atlas-research-program/">Read the research methodology</a> · <a href="https://lean-lang.org/doc/api/Lean/Expr.html">Lean Expr API reference</a></p>
+    <p><a href="/projects/proof-atlas/app/">← Explore the measured SE(2) Lean proof</a> · <a href="/projects/proof-atlas/language/">Compact Expr catalogue</a> · <a href="/mathematics/2026/10/11/proof-atlas-research-program/">Read the research methodology</a> · <a href="https://lean-lang.org/doc/api/Lean/Expr.html">Lean Expr API reference</a></p>
   </section>
 </main>
-<script src="/public/js/proof-atlas-grammar.js?v=1" defer></script>
+<script src="/public/data/proof-atlas/lean-expr-grammar.js" defer></script>
+<script src="/public/data/proof-atlas/lean-syntax-reference.js" defer></script>
+<script src="/public/data/proof-atlas/crossing-structure.js" defer></script>
+<script src="/public/js/proof-atlas-grammar.js?v=2" defer></script>
