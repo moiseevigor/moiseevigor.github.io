@@ -130,6 +130,8 @@ A prospectively frozen retrospective comparison now gives **14/27** qualifying c
 
 All **19,328** requested source identities remain in the ranking ledger, including **19,066** unknown qualifying proxies. Only three qualifying cases have supported temporal inputs, and **none of the 27 positives** does. The next evidence route needs source ownership, complementary positive-case coverage and independent physical validation. No automatic model sweep or altered threshold follows from this completed comparison. [Read the full result and exact evidence](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/).
 
+A separately frozen diagnosis now finds query-level cadence in only **3 / 27** of those positives, below its **14-of-27** majority gate. Eleven have no cached rows, nine no screened query rows and four insufficient cadence; the remaining three still lack emitter identity. The anchor is only part of the evidence gap. [Read the exact diagnosis](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#temporal-diagnosis). This is no repair of the ranking result and no physical detector validation.
+
 <h3 id="historical-week">The original control study: frozen and stopped</h3>
 
 <blockquote class="sb-goal">Determine whether nearby Hi-GAL clumps labelled prestellar and undetected at 70 μm contain an excess of compact mid-infrared sources compared with sightlines matched for dust column, sensitivity and crowding.</blockquote>

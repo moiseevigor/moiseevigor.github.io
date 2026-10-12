@@ -31,7 +31,7 @@ A representation can learn common patterns across surveys. The useful test is wh
 
 That result has a sharper limitation: **none of the 27 qualifying chemistry-positive cases has the registered temporal input view**. The learning procedure can handle a missing observation, but it cannot supply the absent observation. [Verified result](/public/data/starbirth/missing-view/results.md).
 
-<nav class="sb-jump" aria-label="On this page"><a href="#equal-cost">The comparison</a><a href="#learning">What learned without labels</a><a href="#coverage">The coverage gap</a><a href="#unknowns">The unknown denominator</a><a href="#next-evidence">What would change the conclusion</a><a href="#evidence">Exact evidence</a></nav>
+<nav class="sb-jump" aria-label="On this page"><a href="#equal-cost">The comparison</a><a href="#learning">What learned without labels</a><a href="#coverage">The coverage gap</a><a href="#temporal-diagnosis">Why the temporal view is missing</a><a href="#unknowns">The unknown denominator</a><a href="#next-evidence">What would change the conclusion</a><a href="#evidence">Exact evidence</a></nav>
 
 <h2 id="equal-cost">The same eighteen reviews</h2>
 
@@ -75,6 +75,34 @@ In the 262-object qualifying-proxy cohort, only **three** have supported tempora
 Source matching also needed care. **32 of 308** molecular-supported parent clumps violate the simple one-record, unshared-position assumption at the frozen 30-arcsecond radius. Some positions have separate molecular velocity records; some have neighbouring Hi-GAL clumps. Every alternative remains in the edge ledger. A geometric nearest match is not proof that the emission belongs to the target clump. [Association report](/public/data/starbirth/missing-view/association-results.md), [complete alternatives](/public/data/starbirth/missing-view/molecular-edges.csv.gz).
 
 The source catalogue describes those separate velocity components and the roughly 38-arcsecond molecular beam. WISE quality flags and quoted errors also leave important limitations: this cached subset lacks some positional and photometric reliability fields. [Rathborne et al., catalogue section 4](https://researchonline.ljmu.ac.uk/id/eprint/4139/1/MALT90_catalog.pdf), [official NEOWISE column descriptions](https://irsa.ipac.caltech.edu/data/WISE/docs/release/NEOWISE/expsup/sec2_1a.html).
+
+<h2 id="temporal-diagnosis">The anchor is only part of the gap</h2>
+
+**New, independently checked post-read diagnosis.** We asked whether removing the anchor requirement would uncover sufficient cached cadence for a majority of the same 27 positive references. This was a separate diagnostic, frozen after the original comparison. It kept the original quality and visit rules, and tested the original six-arcsecond query cone rather than claiming a new source association.
+
+Only **3 / 27** had query-level cadence support, below the frozen **14-of-27 majority gate**. The original anchored view remains absent in all 27. The exact decomposition is:
+
+<div class="sb-ledger sb-temporal-diagnosis" role="region" aria-label="Why the 27 positive references lack temporal support" tabindex="0" markdown="1">
+
+| Where support stops | Positive references |
+|:--|--:|
+| Requested, no cached rows | 11 |
+| Rows exist, none passes the unchanged screen in the query | 9 |
+| Screened query rows, insufficient cadence | 4 |
+| Query cadence supported, qualifying retained anchor absent | 2 |
+| Query cadence supported, anchored cadence insufficient | 1 |
+| Original anchored cadence supported | 0 |
+| **Total** | **27** |
+
+</div>
+
+**The gap is not merely an anchor artefact.** Dropping the anchor would still leave 24 cases without sufficient screened query cadence. And a query cone can contain several emitters: repeated detections within it are **not a single-source light curve**. Missing cached rows do not prove that the survey never observed the location. No variability event, replacement temporal feature or new model result follows from these counts.
+
+Across all 19,328 clumps, **3,013** have query-level cadence and **761** have the original anchored support. Only three of those query-supported cases are qualifying positives. All 27 positives are above the parent medians for mass and surface density, underscoring how selected the chemistry-reference cohort is. Its lower-mass and lower-surface-density validity remains unestablished. [Verified report](/public/data/starbirth/temporal-missingness/results.md), [full selection/support tables](/public/data/starbirth/temporal-missingness/starbirth-tmd-summary.json).
+
+The three consumed support cases are `HIGALBM330.8814-0.3656`, `HIGALBM351.2258+0.6937` and `HIGALBM353.4272-0.3734`. They are **evidence cases, not discoveries**: emitter identity and full reliability remain unresolved. Download [all 1,072 raw query rows for the 27 positives, failures included](/public/data/starbirth/temporal-missingness/positive-raw-evidence.csv.gz) and [every parent identity and failure path](/public/data/starbirth/temporal-missingness/sources.csv.gz).
+
+The independent checker recomputed every field with a different geometry and cadence implementation. The original schema-contract failure and a separately frozen lossless correction remain visible. That correction changed no scientific rule. [Protocol and full packet](/public/data/starbirth/temporal-missingness/README.md), [independent verification](/public/data/starbirth/temporal-missingness/starbirth-tmd-verification.json), [source hashes](/public/data/starbirth/temporal-missingness/source-inventory.csv). The packet binds research revision `3332eb8530fafcf442d191f96efe5149ca989ac8`. This unit stops here: there is no automatic model sweep, weaker matching rule or acquisition.
 
 <h2 id="unknowns">The full catalogue keeps the difficult denominator</h2>
 
