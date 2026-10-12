@@ -1,23 +1,15 @@
 ---
 layout: distill
-title: "The Geometry of Forbidden Directions: A Research Program"
+last_modified_at: 2026-10-13
+title: "Forbidden Directions: The Growth Law and the Failed Estimators"
 subtitle: >
-  When a physical field <em>forbids</em> a direction of motion — not merely slows it — the
-  configuration space stops being ordinary and becomes sub-Riemannian. This post scopes a
-  program built on that distinction, states the identity it is organised around
-  (Q = d + k + 2 — a dimensional count, verified numerically), and draws the sharp line between the physics that qualifies (magnetic
-  fields, rotation) and the physics that only looks like it does (anisotropic transport,
-  gravity).
+  A holonomy growth law and exact magnetic identities survive. Matched estimator comparisons favour standard fits, and a purported magnetospheric null census fails its domain audit.
 date: 2026-08-05 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, magnetic-fields, holonomy, connections, nonholonomic, plasma]
 image: /public/img/posts/forbidden-directions-1.svg
 description: >
-  Scoping document for a research program on the sub-Riemannian geometry of physical
-  connections: the thesis that a connection whose curvature is a physical field makes
-  configuration space sub-Riemannian, the selection rule (forbidden vs merely slow), the
-  confirmed law Q = d + k + 2, and the phased plan with its confirmed results and open
-  questions.
+  Established holonomy scaling, profile-dependent caustic response, estimator losses and withdrawn model-domain claims in magnetic geometry.
 series: preferred-directions
 series_title: "The Geometry of Forbidden Directions"
 series_part: 1
@@ -26,15 +18,7 @@ comments: true
 
 <div class="l-body" markdown="1">
 
-<div class="callout">
-<div class="callout-title">What this document is</div>
-A <strong>scoping document</strong> for a research program — but an unusual one, because
-its central law is already confirmed. It states the thesis, the selection rule that decides
-which physical systems it applies to, the law <code>Q = d + k + 2</code>, the phased plan,
-and — reported honestly up front — what each phase has actually found. The program grew out
-of the <a href="{% post_url 2026-07-15-caustics-to-groups-research-program %}">caustics-to-groups</a>
-series, which built and validated the sub-Riemannian toolkit this one uses.
-</div>
+**Results and scope.** Holonomy lifts yield the growth identity $Q=d+k+2$ under the stated finite-order assumptions. Exact magnetic identities and tested profile corrections survive; growth-vector null confirmation has not outperformed standard detection or classification.
 
 **The question, and a one-word pivot.** The prompt behind this program was simple: *in
 environments where some directions become preferred — magnetized plasma, rotating flows —
@@ -94,8 +78,7 @@ gravitational caustic can *counterfeit* $Q > n$ at a single point without being 
 
 ## The law: Q = d + k + 2
 
-The program's central organising identity — a two-line dimensional count (its own
-kill criterion below says so), verified numerically wherever the program has probed
+The program's central organising identity — a two-line dimensional count under the assumptions below, verified numerically wherever the program has probed
 it. Adjoin the holonomy $\varphi$ to a
 $d$-dimensional space; then wherever the curvature (field) vanishes to order $k$,
 
@@ -215,10 +198,9 @@ argument visible.
 
 <div class="l-body" markdown="1">
 
-## What is already established
+## Positive results and their scope
 
-Because this program moved fast, the scoping comes with verdicts. Every number is from
-reproducible code in `research/preferred-directions/` and the shared toolkit it imports.
+The numerical results and derivations are recorded in [the experiment reports](https://github.com/moiseevigor/moiseevigor.github.io/tree/master/research/preferred-directions/docs).
 
 | Result | Question | Verdict |
 |---|---|---|
@@ -241,36 +223,13 @@ it sits at $Q = d+2$ almost everywhere and pops up by exactly $k$ on the measure
 the field vanishes to order $k$ — a curvature-degeneracy meter in principle; what "detection"
 costs on real data is Part 4's and Part 5's story, told there without cosmetics.
 
-## The honest open question
+## Negative results
 
-The program has a sharp risk, stated as its own kill criterion: **if you already know the
-field, its zeros and their order are elementary to find, and the law above is a two-line
-dimensional argument.** So the real question is whether the sub-Riemannian framing *predicts
-anything a direct look at the field does not*. The growth vector, so far, only *agrees* with the
-standard magnetic-null finder — it detects the same nulls to the same order, but does not
-distinguish their *type* (radial vs spiral), which lives in the eigenvalues of $\nabla B$.
+The growth vector confirms the order of sampled nulls at locations supplied by a standard finder. It does not distinguish radial from spiral type. An integrated classifier works on the synthetic battery, but a fitted field Jacobian is more robust in the matched noise comparison. Likewise, a scale-crossover estimate of pair separation loses to a polynomial fit and root finding by one to four orders of magnitude. [Null classification]({% post_url 2026-08-24-forbidden-directions-null-gallery %}); [matched estimator race]({% post_url 2026-08-30-forbidden-directions-litmus-tests %}).
 
-The one place the framing might genuinely *refine* the standard tools is the **moduli**: the
-caustic already reads the profile-calibrated gradient combination (Part 3), so the decisive experiment is whether a
-finer caustic invariant recovers the null *type* the growth vector discards. That is the
-program's frontier, and Part 4 ends there honestly.
+The T96 magnetospheric census's physical interpretation was withdrawn: all 70 audited core-box roots lie outside the model's own magnetopause, and no interior null was found at the seven tested IMF values. These are structures of a model continuation, not observed magnetospheric nulls. A solar-emergence sequence also did not capture a fold birth. [Domain audit and collision tests]({% post_url 2026-08-27-forbidden-directions-transition-state %}).
 
-## The series
-
-*(The list below is the program's original four-part roadmap, kept as written when this
-post was drafted; the program since grew to eight parts — Part 5 the null gallery, Part 6
-the transition state, Part 7 the litmus tests, Part 8 Jupiter — all reachable from the
-series navigation.)*
-
-- **Part 1** *(this page)* — the program, the selection rule, the law.
-- **Part 2** — *The magnetic contact geometry*: Larmor motion is Heisenberg, and
-  the law measured.
-- **Part 3** — *Reading the field gradient from the caustic*: the deviation
-  statistic and $\delta = -\varepsilon^2$ on the exponential profile.
-- **Part 4** — *Finding magnetic nulls*: 3D, an ABC-like dynamo field, and the external
-  validation.
-- Appendices **D1–D5** — connections and holonomy, the selection rule, the law derived, the
-  magnetic geodesic flow, and the gradient formula.
+The exact period-average identity for the exponential profile is a positive analytical result. Identification of that period with conjugate time remains a numerically supported conjecture. Singular-point ball-volume scaling and a general physical null detector are not established by the growth identity alone. [Analytical status and results]({% post_url 2026-08-30-forbidden-directions-litmus-tests %}).
 
 ## Glossary
 

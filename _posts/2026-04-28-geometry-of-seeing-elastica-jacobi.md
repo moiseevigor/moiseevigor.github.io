@@ -1,5 +1,6 @@
 ---
 layout: distill
+last_modified_at: 2026-10-13
 image: /public/img/posts/geometry-seeing-2.svg
 title: "Euler's Elastica and Jacobi Elliptic Functions"
 subtitle: >
@@ -521,34 +522,9 @@ A few landmarks worth noting:
 
 <div class="l-body" markdown="1">
 
-## Summary and Preview of Part&nbsp;3
+## Derived result
 
-We have shown that the reduced pendulum has three Jacobi-elliptic regimes.
-For the pinned reconstruction they give the three smooth Euler-elastica families,
-with inflectional curvature $\kappa(s)=2k\,\mathrm{cn}(s\mid k^2)$. For the free
-SR reconstruction the same pendulum produces different, generically cuspidal plane
-curves whose curvature is not this elastica profile.
-The complete elliptic integral $K(k^2)$ controls the spatial period of the
-curvature, and the closed-form $x(s), y(s)$ involve elliptic integrals of the
-second kind.
-
-The next natural question is: *which geodesics are globally optimal?*
-A geodesic may be locally length-minimising (no shorter path in a thin tube)
-while a completely different geodesic of the same length exists.
-The locus where this happens — where two distinct geodesics of equal length
-*meet* — is the **Maxwell stratum**.
-
-In Part&nbsp;3 we will show that the Maxwell strata are governed by the discrete
-reflection group of the pendulum — the $(\mathbb{Z}_2)^3$ of Moiseev–Sachkov (2010) —
-and compute the mirror-pair tie exactly on the elastica family: two mirror elastica
-first re-meet after one full curvature period,
-
-$$s \;=\; 4K(k^{2}),$$
-
-the same elliptic integral that controls the oscillation. For the free SR problem the
-same symmetry machinery gives the sharper (and different!) answer — the cut time is
-$2K(k^2)$, *half* a pendulum period — which is Part&nbsp;4's story. The elliptic clock
-$K(k^2)$ runs both problems.
+The reduced pendulum has three Jacobi-elliptic regimes. The pinned reconstruction gives smooth Euler-elastica families, including $\kappa(s)=2k\,\mathrm{cn}(s\mid k^2)$. The free sub-Riemannian reconstruction gives different, generically cuspidal plane curves. Sharing the pendulum equation does not identify the two variational problems or their cut times.
 
 </div><!-- /.l-body -->
 

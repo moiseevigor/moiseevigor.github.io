@@ -1,5 +1,6 @@
 ---
 layout: distill
+last_modified_at: 2026-10-13
 title: "From Cosmic Filaments to Curved Spacetime"
 subtitle: >
   The same geometry that lifts a filament — a direction attached to every point,
@@ -783,26 +784,9 @@ Same blueprint each time: a homogeneous model, a frame at every point, a variati
 flow along it, and the interesting physics concentrated on the *singular set* where the
 flow's map folds.
 
-## What is solid, what is active, what is open
+## Established framework and measured limits
 
-- **Solid (textbook).** Gravity is the gauge theory of the local spacetime symmetry
-  group; Cartan geometry is the common language of Riemannian geometry, the orientation
-  lift, and general relativity (Sharpe 1997; Wise 2010; Blagojević & Hehl 2013).
-  Zel'dovich transport, its caustic classification, and adhesion are the standard
-  analytic theory of the web (Zel'dovich 1970; Arnold–Shandarin–Zel'dovich 1982;
-  Shandarin & Zel'dovich 1989).
-- **Active.** The **caustic skeleton** — using the catastrophe taxonomy as a practical
-  web-finder in the tidal eigenframe — is a live research line (Feldbrugge, van de
-  Weygaert et al. 2018). *Sub-Lorentzian* geometry — the sub-Riemannian construction
-  with a Lorentzian metric on the allowed directions — is young and moving (Grochowski
-  2002 and others). Carrollian horizons are a live topic (Donnay & Marteau 2019).
-- **Open, and close to home.** The exact $$\mathrm{SE}(2)$$ results of the Geometry of
-  Seeing series — Maxwell strata, cut loci via elliptic functions — have sub-Lorentzian
-  analogues on the relativistic cousins of $$\mathrm{SE}(2)$$ that, as far as I can
-  tell, nobody has worked out. And in the other direction: whether the measured
-  transverse-damping coefficient $$\beta$$ of this series can be *derived* — as the
-  leading post-Zel'dovich tidal term in the eigenframe, rather than fit — is exactly the
-  kind of question the dictionary of §5–6 makes well-posed.
+Cartan geometry, the tidal equation, Zel'dovich transport and adhesion supply the published mathematical framework explained above. The series' empirical transverse-damping coefficient is not derived from that framework. The dictionary is not a new gravitational field equation or evidence that matter follows orientation-lifted shortest paths.
 
 ## Glossary
 

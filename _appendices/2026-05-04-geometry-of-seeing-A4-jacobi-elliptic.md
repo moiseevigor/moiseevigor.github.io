@@ -1,5 +1,6 @@
 ---
 layout: distill
+last_modified_at: 2026-10-13
 image: /public/img/posts/geometry-seeing-2.svg
 title: "Appendix A4 — Jacobi Elliptic Functions, Elliptic Integrals, and the AGM"
 subtitle: >
@@ -413,7 +414,7 @@ for m in [0.1, 0.5, 0.9, 0.99]:
     print(f"m = {m}: my_K = {my_ellipticK(m):.15f},  scipy_K = {sp.ellipk(m):.15f}")
 ```
 
-## What we covered, and what comes next
+## Derived results
 
 Elliptic integrals come from arc length; their inverses are the Jacobi
 $\mathrm{sn}, \mathrm{cn}, \mathrm{dn}$.  These satisfy the first-order
@@ -421,11 +422,6 @@ quartic ODE that the pendulum equation reduces to under the half-angle
 substitution.  The complete integrals $K(m), E(m)$ govern the pendulum's
 period and the elastica's plane curve integration; Gauss's AGM evaluates
 them to 16 digits in 6 iterations.
-
-Appendix A5 will use these tools to write down the **sub-Riemannian
-exponential map** of $\mathrm{SE}(2)$ — the family of all geodesics from a
-fixed origin parametrised by $(c, \omega_0, \phi_0)$ — and identify the
-Maxwell pairs by chasing the $4K(k^2)$ period through the reconstruction.
 
 </div><!-- /.l-body -->
 

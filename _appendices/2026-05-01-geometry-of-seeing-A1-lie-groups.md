@@ -1,5 +1,6 @@
 ---
 layout: distill
+last_modified_at: 2026-10-13
 image: /public/img/posts/geometry-seeing-1.svg
 title: "Appendix A1 — Lie Groups, Lie Algebras, and the Exponential Map of SE(2)"
 subtitle: >
@@ -589,7 +590,7 @@ assert np.allclose(comm(E3, E1), E2)
 assert np.allclose(comm(E3, E2), -E1)
 ```
 
-## What we covered, and what comes next
+## Derived results
 
 A Lie group is a manifold-with-group-law.  Its Lie algebra is the tangent
 space at the identity, encoded either as matrices in $\mathrm{Mat}_n$ or as
@@ -599,12 +600,6 @@ commutator, infinitesimal closing-defect of a 4-leg loop).  The **exponential
 map** turns algebra elements into 1-parameter subgroups.  The **coadjoint
 orbits** of $\mathrm{SE}(2)$ are cylinders, and the SR Hamiltonian flow lives
 on them.
-
-Appendix A2 will use this language to give *the right* definition of a
-contact structure and prove Chow–Rashevskii.  Appendix A3 will derive the
-Lie–Poisson equations $\dot h_1 = h_2 h_3, \dot h_2 = -h_1 h_3, \dot h_3 =
--h_1 h_2$ — the equations Part&nbsp;2 asserts without proof — directly from the
-Pontryagin Maximum Principle.
 
 </div><!-- /.l-body -->
 

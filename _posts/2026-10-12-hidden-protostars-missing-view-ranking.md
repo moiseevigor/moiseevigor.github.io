@@ -1,9 +1,9 @@
 ---
 layout: distill
+last_modified_at: 2026-10-13
 title: "A shared embedding did not beat the stronger baseline"
 subtitle: >
-  Equal review budgets gave 14 chemistry-positive recoveries for the embedding
-  and 15 for the nonlinear baseline. The missing observations matter next.
+  At eighteen reviews, the embedding recovers 14 of 27 chemistry positives and the nonlinear baseline 15. Coverage and counterpart checks leave physical classification unresolved.
 date: 2026-10-12 20:40:00 +0200
 categories: [astrophysics]
 tags: [star-formation, unsupervised-learning, Hi-GAL, validation]
@@ -31,7 +31,7 @@ A representation can learn common patterns across surveys. The useful test is wh
 
 That result has a sharper limitation: **none of the 27 qualifying chemistry-positive cases has the registered temporal input view**. The learning procedure can handle a missing observation, but it cannot supply the absent observation. [Verified result](/public/data/starbirth/missing-view/results.md).
 
-<nav class="sb-jump" aria-label="On this page"><a href="#equal-cost">The comparison</a><a href="#learning">What learned without labels</a><a href="#coverage">The coverage gap</a><a href="#temporal-diagnosis">Why the temporal view is missing</a><a href="#native-counterparts">Three native counterpart cases</a><a href="#irac-colours">The physical-colour check</a><a href="#unknowns">The unknown denominator</a><a href="#next-evidence">What would change the conclusion</a><a href="#evidence">Exact evidence</a></nav>
+<nav class="sb-jump" aria-label="On this page"><a href="#equal-cost">The comparison</a><a href="#learning">What learned without labels</a><a href="#coverage">The coverage gap</a><a href="#temporal-diagnosis">Why the temporal view is missing</a><a href="#native-counterparts">Three native counterpart cases</a><a href="#irac-colours">The physical-colour check</a><a href="#unknowns">The unknown denominator</a><a href="#next-evidence">Interpretation limits</a><a href="#evidence">Exact evidence</a></nav>
 
 <h2 id="equal-cost">The same eighteen reviews</h2>
 
@@ -102,7 +102,7 @@ Across all 19,328 clumps, **3,013** have query-level cadence and **761** have th
 
 The three consumed support cases are `HIGALBM330.8814-0.3656`, `HIGALBM351.2258+0.6937` and `HIGALBM353.4272-0.3734`. They are **evidence cases, not discoveries**: emitter identity and full reliability remain unresolved. Download [all 1,072 raw query rows for the 27 positives, failures included](/public/data/starbirth/temporal-missingness/positive-raw-evidence.csv.gz) and [every parent identity and failure path](/public/data/starbirth/temporal-missingness/sources.csv.gz).
 
-The independent checker recomputed every field with a different geometry and cadence implementation. The original schema-contract failure and a separately frozen lossless correction remain visible. That correction changed no scientific rule. [Protocol and full packet](/public/data/starbirth/temporal-missingness/README.md), [independent verification](/public/data/starbirth/temporal-missingness/starbirth-tmd-verification.json), [source hashes](/public/data/starbirth/temporal-missingness/source-inventory.csv). The packet binds research revision `3332eb8530fafcf442d191f96efe5149ca989ac8`. This unit stops here: there is no automatic model sweep, weaker matching rule or acquisition.
+Independent geometry and cadence recomputation agree with the readout. [Protocol and full packet](/public/data/starbirth/temporal-missingness/README.md), [independent verification](/public/data/starbirth/temporal-missingness/starbirth-tmd-verification.json), [source hashes](/public/data/starbirth/temporal-missingness/source-inventory.csv). The packet binds research revision `3332eb8530fafcf442d191f96efe5149ca989ac8`.
 
 <h2 id="native-counterparts">One tight infrared alignment, three unresolved physical cases</h2>
 
@@ -171,8 +171,6 @@ These are consumed chemistry-positive references selected before the native read
 
 The other two best records match **14 / 19** and **4 / 6** supported visit medians. A different zero-flag record matches **0 / 6** in the third field. The packet retains **six Catalog records and six reciprocal Archive aliases**, not twelve independent objects. Both products come from shared observations. Missing WISE positional errors and exposure/source identifiers, blending, epoch differences and proper motion limit interpretation; Spitzer errors alone cannot turn this into a calibrated association probability. No native-image PSF ownership test was performed.
 
-The six small original catalogue responses total **4,696 bytes**. Acquisition and independent recomputation belonged to the separately frozen research unit, not this blog upkeep. Publication exported committed bytes offline; it ran no experiment, fit, observation acquisition or threshold adjustment. All **19,328** parent identities and **19,066** unknown proxy states remain unchanged.
-
 Download [the verified report](/public/data/starbirth/native-glimpse/results.md), [all native alternatives](/public/data/starbirth/native-glimpse/sources.csv), [visit medians](/public/data/starbirth/native-glimpse/visits.csv), [180 visit/source edges](/public/data/starbirth/native-glimpse/visit-source-edges.csv), [independent verification](/public/data/starbirth/native-glimpse/starbirth-ng-verification.json), [final checkpoint](/public/data/starbirth/native-glimpse/starbirth-ng-checkpoint.json) and [packet guide with complete source hashes](/public/data/starbirth/native-glimpse/README.md). The source revision is `4e4a9b13c199a7d035a3728d7390d754d9773e89`; its creation-time unpublished flags remain historical, with live publication checked separately. **No new star, confirmed birth or validated physical detector follows from this result.**
 
 <h2 id="irac-colours">A good position does not make a young star</h2>
@@ -203,7 +201,7 @@ The retained alternatives also contain **`SSTGLMC G353.4284-00.3731`** in the th
 
 Crucially, this source matches **0 / 6** supported visit medians and lies **4.490 arcseconds** from the clump centre. It is different from the blue best positional counterpart. We do not assign it that source's time-series measurements or replace the frozen source after readout. A red neighbour, a clump chemistry rank and an emitting source are different pieces of evidence. [Exact retained source, uncertainty and prior geometry](/public/data/starbirth/irac-colours/alternative-note.md).
 
-Download [the three system/comparator cards with every alternative](/public/data/starbirth/irac-colours/starbirth-ic-comparison-cards.json), [verified interpretation](/public/data/starbirth/irac-colours/results.md), [all available and missing colours](/public/data/starbirth/irac-colours/starbirth-ic-all-records.json), [independent verification](/public/data/starbirth/irac-colours/starbirth-ic-verification.json) and [protocol, stopped preflight, unchanged resumption and exact hashes](/public/data/starbirth/irac-colours/README.md). The 23 primary compact source exports bind research revision `106e2f842a903469f7529c54272cbf033509ba43`; five additive secondary-note exports bind `2d098311d6cb089455bc83bbad895fab635c8d8e`. The resource guard stopped the first preflight before spawning a worker, then resumed when the external process was absent and memory pressure had normalized. Starbirth did not cancel it; the other project’s build result was not verified. All scientific rules stayed frozen. **No new observations, model fit, physical stage, discovery or birth is established.**
+Download [the three system/comparator cards with every alternative](/public/data/starbirth/irac-colours/starbirth-ic-comparison-cards.json), [verified interpretation](/public/data/starbirth/irac-colours/results.md), [all available and missing colours](/public/data/starbirth/irac-colours/starbirth-ic-all-records.json), [independent verification](/public/data/starbirth/irac-colours/starbirth-ic-verification.json) and [protocol and exact source hashes](/public/data/starbirth/irac-colours/README.md). The 23 primary compact source exports bind research revision `106e2f842a903469f7529c54272cbf033509ba43`; five additive secondary-note exports bind `2d098311d6cb089455bc83bbad895fab635c8d8e`. **No new observations, model fit, physical stage, discovery or birth is established.**
 
 <h2 id="unknowns">The full catalogue keeps the difficult denominator</h2>
 
@@ -224,9 +222,9 @@ The separate all-requested review rule selects **982** clumps per method, about 
 
 Those unknowns stay in the review burden. Removing them would inflate an apparent precision. We have no physical class truth for the whole selected set and report **no physical precision or population recall**. A finite score outside the qualifying-proxy support domain is clearly marked outside that evaluation support. The source ledger is a catalogue for assessment, not a catalogue of discoveries.
 
-<h2 id="next-evidence">What would change the conclusion</h2>
+<h2 id="next-evidence">Interpretation limits</h2>
 
-The next useful evidence route must establish **source ownership, complementary positive-case coverage and independent physical truth**. It needs known references, provisional candidates and unknowns kept separate, with a prospective rule before new readout. More scores on these same incomplete proxies would not establish the missing physical validation.
+Source ownership, complementary positive-case coverage and independent physical truth are absent. Additional scores on these same incomplete chemistry proxies would not constitute physical validation.
 
 The earlier occurrence study remains unchanged: its **333-of-800 uncertainty gate failed**, its primary infrared comparison remains **unmeasured**, and the hypothetical 814-support independence scenario is unvalidated. The descriptive 9–25% estimator spread and 45–55% share scenarios are not confidence bounds or measured lifetimes. [Earlier control and uncertainty results](/astrophysics/2026/10/11/hidden-protostars-column-uncertainty/).
 
@@ -234,11 +232,11 @@ The physical birth question remains stricter than activity ranking. A new protos
 
 <h2 id="evidence">Exact evidence and reproducibility</h2>
 
-The independent checker reconstructed all raw feature values, masks, proxies, joins and splits. It replayed the completion by a different linear-algebra route and verified model equations, every source score and the full paired readout. This is independent software recomputation, not fresh physical validation or a separate human review. The original frozen methods and successful resource receipts remain downloadable.
+The independent checker reconstructed all raw feature values, masks, proxies, joins and splits. It replayed the completion by a different linear-algebra route and verified model equations, every source score and the full paired readout. This is independent software recomputation, not fresh physical validation or a separate human review. The frozen methods remain linked in the evidence packet.
 
-The source packet comes from inspected research revision `6a44759b5a5948d9177335ef9a25b51d68ff9309`. It preserves the association audit's memory stop and separately frozen repair, the failed ranking-improvement gate, and all requested unknowns. These operational records support reproducibility; they do not count as discoveries. Execution stayed under its resource guards, with roughly 54 GiB free and about 4 MiB of comparison outputs.
+The source packet binds research revision `6a44759b5a5948d9177335ef9a25b51d68ff9309`. It retains the failed ranking-improvement gate and every requested unknown proxy state.
 
-Download the [packet guide](/public/data/starbirth/missing-view/README.md), [complete source inventory and hashes](/public/data/starbirth/missing-view/source-inventory.csv), [source-bound KG supplement](/public/data/starbirth/missing-view/starbirth-mvr-knowledge-supplement.json), [final checkpoint](/public/data/starbirth/missing-view/starbirth-mvr-checkpoint.json) and [independent verification](/public/data/starbirth/missing-view/starbirth-mvr-verification.json). The guide links all five fold models, feature arrays, unaligned coordinates, bootstrap, source code and association alternatives. Source-snapshot “unpublished” flags describe the state before this blog release; live publication is checked by a separate deployment receipt.
+Download the [packet guide](/public/data/starbirth/missing-view/README.md), [complete source inventory and hashes](/public/data/starbirth/missing-view/source-inventory.csv), [source-bound KG supplement](/public/data/starbirth/missing-view/starbirth-mvr-knowledge-supplement.json), [final checkpoint](/public/data/starbirth/missing-view/starbirth-mvr-checkpoint.json) and [independent verification](/public/data/starbirth/missing-view/starbirth-mvr-verification.json). The guide links all five fold models, feature arrays, unaligned coordinates, bootstrap, source code and association alternatives.
 
 <div class="sb-return"><a href="/astrophysics/2026/10/11/hidden-protostars-research-program/">← Back to the Hidden protostars program</a></div>
 

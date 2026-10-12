@@ -1,5 +1,6 @@
 ---
 layout: distill
+last_modified_at: 2026-10-13
 image: /public/img/posts/geometry-seeing-1.svg
 title: "Appendix A2 — Distributions, Frobenius, and Contact Geometry"
 subtitle: >
@@ -436,7 +437,7 @@ print("α ∧ dα coefficient:", vol_coeff)
 # → -1, i.e. α ∧ dα = −dx ∧ dy ∧ dθ ≠ 0   (SE(2) is contact)
 ```
 
-## What we covered, and what comes next
+## Derived results
 
 A distribution is a smooth plane field; integrability is decided by
 Frobenius's bracket-closure test; bracket-generation gives Chow's
@@ -444,11 +445,6 @@ reachability theorem; contact structures are the "maximally non-integrable"
 case in odd dimensions.  The V1 distribution $\mathcal H = \mathrm{span}\{X_1,
 X_2\}$ on $\mathrm{SE}(2)$ is a contact structure, and Chow's theorem
 guarantees any two V1 neurons can be linked by a horizontal curve.
-
-Appendix A3 will turn the SR-length minimisation problem into a Hamiltonian
-system on $\mathfrak{se}(2)^{\ast}$ via the Pontryagin Maximum Principle —
-recovering the equations $\dot h_1 = h_2 h_3$ etc. that Part&nbsp;2 uses
-without proof.
 
 </div><!-- /.l-body -->
 

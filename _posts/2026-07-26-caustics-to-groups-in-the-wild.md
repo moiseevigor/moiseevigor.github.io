@@ -1,21 +1,15 @@
 ---
 layout: distill
-title: "In the Wild: DW-MRI, and Where the Method Stays Silent"
+last_modified_at: 2026-10-13
+title: "Synthetic SE(3): What the Abstention Test Establishes"
 subtitle: >
-  The synthetic groups are conquered; now the real world. This closing post adds SE(3) —
-  the geometry of diffusion-MRI fibre fields and 3D vision — shows the fingerprint gives a
-  confident answer on genuinely group-structured data, and shows it correctly refusing to
-  answer on the cosmic web, which isn't a group at all. The honest edge of the method, and
-  where the series meets its two siblings.
+  The tangent-cone class is recovered on synthetic SE(3) fields. Real diffusion-MRI inference remains unmeasured, and a gravity counterexample limits the effective-flow interpretation.
 date: 2026-07-26 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, caustics, SE3, DW-MRI, cosmic-web, inverse-problems]
 image: /public/img/posts/caustics-groups-4.svg
 description: >
-  Part 4 (final) of the caustics-to-groups series: the SE(3) structure of DW-MRI and vision
-  as the real-world target, the (3,6) rank-3 fingerprint, confident recovery on homogeneous
-  group-structured fields, calibrated silence on effective (non-group) flows, and the honest
-  scope where the method must abstain. Ties the series to Geometry of Seeing and the Cosmic Web.
+  Synthetic homogeneity and abstention results, their SE(3) tangent-cone scope, and the failure of a physical gravitational growth-vector interpretation.
 series: caustics-to-groups
 series_title: "From Caustics to Groups"
 series_part: 4
@@ -28,10 +22,8 @@ comments: true
 <div class="callout">
 <div class="callout-title">Where we are</div>
 Parts <a href="{% post_url 2026-07-15-caustics-to-groups-research-program %}">1</a>–<a href="{% post_url 2026-07-22-caustics-to-groups-inverse-map %}">3</a>
-built and graded the reverse map on four textbook groups. This post takes it to the geometry
-that actually shows up in data — <strong>SE(3)</strong>, the group behind diffusion-MRI fibre
-tracking and 3D vision — and draws the honest line between where the method answers and where
-it must stay silent.
+built and graded the reverse map on four textbook groups. This post tests the <strong>SE(3) tangent cone on synthetic fields</strong> and a
+synthetic abstention control. No actual diffusion-MRI acquisition is analysed.
 </div>
 
 **The group in the scanner.** When a radiologist images the brain's white matter with
@@ -41,8 +33,8 @@ orientation, $\mathbb{R}^3 \times S^2$, and the rule for tracing a fibre through
 forward, gently reorient, never teleport sideways — is a sub-Riemannian structure on the group
 $\mathrm{SE}(3)$ of 3D rigid motions. This is not an analogy; it is the working geometry of
 Duits' fibre-tracking pipelines and of the [visual cortex]({% post_url 2026-04-25-geometry-of-seeing-visual-cortex-se2 %})
-model in three dimensions. So "which group made these caustics?" is, here, a real question with
-a real answer.
+model in three dimensions. That published geometric model motivates the synthetic test; it does not
+establish inverse identification from a scanner acquisition.
 
 **SE(3)'s fingerprint.** Where the earlier groups let you *drive* along two directions, the
 fibre-tracking structure gives you **three**: move forward, and tilt the axis two ways. That
@@ -55,7 +47,7 @@ and the estimator recovers $(3,6)$ cleanly from the code's synthetic SE(3) field
 from the structure's tangent cone, the free step-2 group on three generators, which is all the
 growth vector sees).
 
-## The two halves of the real-world test
+## The synthetic homogeneity and abstention tests
 
 A method you can trust has to do two opposite things well: **answer** when the data really is a
 group, and **refuse** when it isn't. We tested both by sampling the local growth vector at thirty
@@ -154,35 +146,15 @@ everywhere.
     web — the $z\!=\!0$ dark-matter density of a CAMELS N-body simulation
     ($256^3$ particles, $25\,h^{-1}$Mpc, $\Lambda$CDM). Its caustics show the same universal
     cusps as a group's, but its local structure is not the *same* everywhere: it is a patchwork
-    of sheets, filaments and cluster nodes, each with a different local dimensionality. Sampled
-    across this field the growth vector varies from place to place, so the detector reports "a
-    field of varying tangent cones" and correctly declines to name a group. This is the honest
-    scope of the method made concrete on real data. Rendered from
+    of sheets, filaments and cluster nodes, each with a different local dimensionality. The displayed snapshot is context, not the synthetic input of the
+    homogeneity test. No physical gravitational growth vector was measured here. Rendered from
     <code>research/cosmic-web/data</code>.
   </figcaption>
 </figure>
 
 <div class="l-body" markdown="1">
 
-## Where this sits — between seeing and the cosmos
-
-This series was always the bridge between its two siblings, and now the bridge is complete:
-
-- [**Geometry of Seeing**]({% post_url 2026-04-25-geometry-of-seeing-visual-cortex-se2 %}) is the
-  clean case — the visual cortex genuinely computes on $\mathrm{SE}(2)$, a bona-fide group. The
-  detector would answer confidently there, and it should.
-- [**Geometry of the Cosmic Web**]({% post_url 2026-07-03-geometry-of-cosmic-web-research-program %})
-  is the cautionary case — gravitational collapse draws gorgeous caustics, but the flow is *not*
-  left-invariant, and reading a group into it would be a category error. The detector stays silent
-  there, and it should.
-
-Between them sits this program's real contribution: a way to tell those two situations apart *from
-the caustics alone*, and to say honestly which one you are in. The obstruction from
-[Part 1](/mathematics/2026/07/15/caustics-to-groups-research-program/) — that local caustics are
-group-blind — turned out not to be a dead end but a specification: it told us to build a detector
-out of the three structure-specific observables, and to make silence a first-class output.
-
-## The honest ledger
+## Results and limits
 
 What the four-post series established, and what it did not:
 
@@ -192,13 +164,8 @@ What the four-post series established, and what it did not:
   class-level hedging rather than wrong answers (H2); the aliasing map has exactly two single-clue
   rigidity points (H3); and the method abstains on non-homogeneous effective flows while committing
   on genuine groups, SE(3) included (H4).
-- **Not yet established (needs real data):** inference on an *actual* diffusion-MRI acquisition.
-  That download is credential-gated; the SE(3) results here use synthetic fields, and the honest
-  next step is to wire the DW-MRI adapter and run it — with the abstention machinery standing guard
-  against over-claiming when a real field turns out to be locally inhomogeneous.
-
-The reverse map from caustics to groups is real, bounded, and knows its own limits. That last part
-— knowing when to stay silent — is the part worth keeping.
+- **Unestablished:** inference on an actual diffusion-MRI acquisition. The SE(3) readout uses synthetic fields generated from its tangent cone. Recovering the growth vector identifies a class, not every geometric modulus or a unique group among all possible candidates.
+- **Withdrawn interpretation:** the effective-flow control does not measure a physical gravitational growth vector. A deterministic gravitational flow lacks the controlled distribution required by the method, and a fold can counterfeit pointwise scaling. [Derivation and counterexample](https://github.com/moiseevigor/moiseevigor.github.io/blob/master/research/caustics-to-groups/docs/E5-no-sr-structure-in-gravity.md).
 
 ## Glossary
 

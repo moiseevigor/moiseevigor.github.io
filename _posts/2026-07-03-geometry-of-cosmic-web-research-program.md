@@ -1,22 +1,15 @@
 ---
 layout: distill
-title: "The Geometry of the Cosmic Web: A Research Program"
+last_modified_at: 2026-10-13
+title: "The Cosmic Web: What the Orientation Lift Failed to Improve"
 subtitle: >
-  Matter in the Universe collapses into a web of filaments. This post scopes a
-  falsifiable research program: lift the cosmic web onto the position–orientation
-  manifold $\mathbb{R}^3 \times S^2 \cong \mathrm{SE}(3)/\mathrm{SO}(2)$ — the same
-  machinery the visual cortex uses to complete contours — and test with public
-  simulation and survey data whether sub-Riemannian geodesics trace, and perhaps
-  shape, the filaments.
+  Matched comparisons refuted the orientation lift as a better filament detector. Directional alignment and a transverse-damping model survived, within measured limits.
 date: 2026-07-03 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, SE3, cosmic-web, filaments, cosmology, optimal-control]
 image: /public/img/posts/cosmic-web-1.svg
 description: >
-  Scoping document for a research program connecting the sub-Riemannian geometry of
-  the "Geometry of Seeing" series to cosmic-web filaments: literature review,
-  hypotheses with falsifiable predictions, ordered experiments on public data,
-  and the analysis plan with defined metrics.
+  Positive and negative results from matched filament benchmarks, transport simulations and gas-map controls, with the original comparison limits retained.
 series: geometry-of-cosmic-web
 series_title: "Geometry of the Cosmic Web"
 series_part: 1
@@ -33,7 +26,7 @@ curve buried in a noisy cloud of points. So: is that same geometry a better
 them? We ran the whole program end to end. It mostly answered *no* — in the most
 useful way a program can.
 
-**The four bets, and how they landed.** Every verdict is drawn from the experiment
+**The tested hypotheses.** Every verdict is drawn from the experiment
 data in `research/cosmic-web/` (full reports in `docs/`, start at `SYNTHESIS.md`);
 the narrative version, with interactive figures built from that data, is
 [Part 2]({% post_url 2026-07-04-cosmic-web-two-models %}).
@@ -58,37 +51,9 @@ lands within a hair of its theoretical best ([Part 2]({% post_url 2026-07-04-cos
 - **The story** — **Part 1** *(this page)* the program and its verdicts · **[Part 2](/mathematics/2026/07/04/cosmic-web-two-models/)** the results for a general reader, with interactive figures from the real data · **[Part 3](/mathematics/2026/07/11/cosmic-web-spacetime-geometry/)** *From Cosmic Filaments to Curved Spacetime* — the same geometry, carried up to gravity itself.
 - **The machinery** — **[B1](/mathematics/2026/07/06/cosmic-web-B1-transport-models/)** transport models · **[B2](/mathematics/2026/07/07/cosmic-web-B2-tidal-frame/)** the tidal frame · **[B3](/mathematics/2026/07/08/cosmic-web-B3-honest-benchmarks/)** honest benchmarks · **[B4](/mathematics/2026/07/09/cosmic-web-B4-transverse-damping/)** the transverse-damping model · **[B5](/mathematics/2026/07/10/cosmic-web-B5-reading-gas-maps/)** reading the sky's hot gas.
 
-<div class="callout">
-<div class="callout-title">What this page is — and why the verdicts above can be trusted</div>
-What follows is the <strong>original plan, written before any experiment ran</strong>:
-the question, the literature, four hypotheses, and — fixed in advance — the exact
-result that would kill each one. That pre-registration is <em>why</em> the
-refutations are trustworthy: the program was built to be able to lose, and it did.
-Every experiment runs on a single workstation with public data.
-<p><strong>Deviations from this plan</strong> (an honest pre-registration names its
-own drift): the external comparators DisPerSE/NEXUS were replaced by an in-house
-Hessian ridge baseline (conservative for H1 — the lift lost to a <em>weaker</em>
-opponent — but H3's "at least match DisPerSE" clause was never literally run);
-the E0 testbed became Voronoi-skeleton toys rather than GRF+Zel'dovich
-deformation-tensor truth; M1's match tolerance widened from 0.5 to 2 voxels
-(junctions 3); orientation sampling settled at 42 directions; M5 used 200
-sky-matched controls rather than ≥1000; and H4's verdict came from a
-direction-statistic protocol on transport residuals instead of the original M4
-three-arm race (the isotropic-Jacobi arm was dropped as moot once H4 died in the
-bulk). The <strong>datasets</strong> also changed. The planned Quijote /
-IllustrisTNG-100-Dark snapshots were never used: E1 ran on in-house Zel'dovich
-boxes and E1b, E2 and the transport experiments on in-house particle-mesh (PM)
-N-body runs (128³ particles, 128 <em>h</em>⁻¹Mpc box, 1 <em>h</em>⁻¹Mpc grid),
-with CAMELS CV_0 (Arepo and MP-Gadget, 25 <em>h</em>⁻¹Mpc box) used only to
-validate the PM code (median per-particle offset 0.41 <em>h</em>⁻¹Mpc) — neutral
-for H1/H2, where both detectors see the same fields, but <em>not</em> conservative
-for H4, whose along-spine flow the 1 <em>h</em>⁻¹Mpc grid under-resolves. And E3
-used BOSS DR12 CMASS-North (z = 0.45–0.55, 274,000 galaxies) rather than the full
-SDSS DR17 spectroscopic sample, adding the ACT DR6 + Planck Compton-<em>y</em> map
-to the planned Planck maps — conservative for H3's comparative loss, since the
-plan itself expected sparser sampling to <em>favour</em> the lift. None of these change a verdict's direction; all are listed so the reader
-can audit them.</p>
-</div>
+## Comparison scope
+
+The baseline was an in-house Hessian ridge detector, not a direct DisPerSE/NEXUS comparison. Synthetic truth came from Voronoi-skeleton toys. Transport used in-house particle-mesh runs (128³ particles, 128 $h^{-1}$Mpc box, 1 $h^{-1}$Mpc grid); CAMELS CV_0 was a code validation rather than the main transport test. That resolution under-resolves along-spine drainage. The survey comparison used BOSS DR12 CMASS-North at $z=0.45$–0.55 (274,000 galaxies), with Planck and ACT DR6 + Planck gas maps. Matching used a two-voxel spine tolerance, three at junctions, and 200 sky-matched controls. These deviations from the original protocol limit the comparative claims; they do not turn an unrun comparator into a measured result.
 
 ## The question
 
@@ -129,21 +94,6 @@ Sachkov 2014).
 </figure>
 
 <div class="l-body" markdown="1">
-
-The program asks two **separate** questions, in increasing order of ambition:
-
-1. **Methodological (C1).** Is the orientation-lifted manifold a *better
-   instrument* for extracting filament spines from noisy density fields than
-   density-only methods — especially at crossings and junctions, where
-   $$\mathrm{SE}(2)$$/$$\mathrm{SE}(3)$$ lifting is provably advantageous in imaging?
-2. **Physical (C2).** Do the *dynamics* of structure formation themselves follow
-   sub-Riemannian geodesics of an effective metric on the lifted space — i.e., is
-   the intrinsic geometry not just a good detector but part of the mechanism?
-
-C1 is concrete, testable, and publishable on its own. C2 is speculative; the
-scoping below keeps it honest by demanding a dynamical test in simulations, not
-just skeleton overlap. Conflating the two is the main failure mode this document
-is designed to avoid.
 
 ## What the literature already says
 
@@ -409,249 +359,17 @@ penalise bending. In 2D this reproduces the psychophysical association field
 (Duits, Boscain, Rossi &amp; Sachkov 2014); in 3D on $$\mathrm{SE}(3)/\mathrm{SO}(2)$$ it underlies crossing-preserving enhancement of
 diffusion-MRI fibre fields (Duits &amp; Franken 2011; Portegies et al. 2015).
 
-**The candidate edge**, in one sentence: *filament finders in cosmology are still
-density/Hessian methods in $$\mathbb{R}^3$$; nobody appears to have run the
-orientation-lifted $$\mathrm{SE}(3)$$ machinery — which demonstrably beats Hessian
-methods at crossings in imaging — on cosmic-web fields, and the physics itself
-(anisotropic tidal collapse) supplies a natural drift and anisotropy for the
-lifted generator.*
+## The shortest-path interpretation fails
 
-## From GR to an effective geometry — and its honest limits
+In growth-factor time, Zel'dovich trajectories are straight lines,
 
-Cold dark matter is pressureless dust following geodesics of spacetime. In the
-weak-field, sub-horizon limit the dynamics reduce to Vlasov–Poisson[^vlasov-poisson] in comoving
-coordinates[^comoving]; anisotropy enters through the tidal eigenframe. Two geometric
-observations motivate the lift:
+$$\mathbf{x}(\mathbf{q},D)=\mathbf{q}-D\nabla_q\Phi^{(1)}(\mathbf{q}).$$
 
-**Jacobi/Maupertuis metric.**[^jacobi] For a test particle with conserved energy $$E$$ in a
-static potential $$\Phi$$, trajectories are geodesics of the conformally flat
-Riemannian metric $$g^{\mathrm{J}} = 2m\,(E - \Phi)\, g_{\mathrm{Euclid}}$$. Paths
-are "cheap" where $$\Phi$$ is deep — along potential valleys, i.e. filaments:
-matter should prefer gravity's valleys the way light bends toward denser glass,
-and those valleys *are* the filaments.
-**Caveat, stated up front:** in an expanding universe with a growing potential,
-energy is *not* conserved along comoving trajectories, so the Jacobi construction
-does not literally apply. Making the argument respectable in comoving coordinates
-(where the Zel'dovich flow is potential, $$\mathbf{v} \propto \nabla_q \Phi$$) is
-itself a theory work-item (T1 below), not an assumption we grant ourselves.
+The adhesion model instead uses quadratic-cost optimal transport through the Hopf–Lax construction; filaments arise as shocks where this map folds. Neither result supplies the proposed potential-weighted, orientation-lifted shortest-path formation law. A static conserved-energy Jacobi metric does not apply literally to the evolving comoving potential. [Derivation](/mathematics/2026/07/06/cosmic-web-B1-transport-models/).
 
-**Orientation is physical here.** The tidal tensor gives every point a *frame* $$(e_1, e_2, e_3)$$ with $$\lambda_1 \ge \lambda_2 \ge \lambda_3$$, and filaments
-extend along $$e_3$$. So the natural generator on $$\mathbb{R}^3 \times S^2$$ is not
-isotropic: diffusion should be strong along the local tangent, weak across it and
-in orientation, with coefficients tied to the tidal eigenvalues:
+## Limits of the results
 
-$$
-\partial_t U
-= D_\parallel\, \mathcal{A}_3^2\, U
-+ D_\perp \left( \mathcal{A}_1^2 + \mathcal{A}_2^2 \right) U
-+ D_S\, \Delta_{S^2} U
-+ \mu\, \mathcal{A}_3\, U,
-$$
-
-where $$\mathcal{A}_i$$ are the left-invariant vector fields[^left-invariant] on $$\mathrm{SE}(3)/\mathrm{SO}(2)$$ ($$\mathcal{A}_3$$ = transport along $$\mathbf{n}$$), $$\Delta_{S^2}$$ is the spherical Laplacian in the orientation variable, $$D_\parallel \gg D_\perp$$, and the drift $$\mu$$ and the ratios $$D_\parallel : D_\perp : D_S$$ are functions of $$(\lambda_1, \lambda_2, \lambda_3)$$
-to be calibrated (see H2/E1). This is the direct 3D analogue of the $$\mathrm{SE}(2)$$ hypoelliptic evolution in
-[Part 1 of the Geometry of Seeing]({% post_url 2026-04-25-geometry-of-seeing-visual-cortex-se2 %}), with the
-physics entering through the coefficients instead of being bolted on afterwards.
-
-Picture the box of galaxies copied once for every direction, with heat spreading
-through the stack — easily *along* each copy's own direction, reluctantly
-sideways, and only slowly between copies of nearby directions. Structures aligned
-with a copy's direction glow; the rest washes out. The equation above is that
-rule, with the local gravity field (the $$\lambda_i$$) setting how eager the flow
-is in each direction.
-
-## Hypotheses
-
-The four bets and their verdicts are tabled at the top of this page; here is each
-one in full, with the pre-registered result fixed in advance that would kill it.
-
-Conventions used throughout: tidal eigenvalues ordered $$\lambda_1 \ge \lambda_2 \ge \lambda_3$$ with eigenvectors $$e_1, e_2, e_3$$;
-filament axis along $$e_3$$. "Spine" = 1D curve set output by a filament finder.
-All metrics are defined in the data-analysis plan below.
-
-**H1 (instrument).** *Orientation-lifted extraction recovers filament spines more
-faithfully than density-only methods, with the largest gains at
-crossings/junctions.*
-Falsifiable prediction: on simulations with known structure (E0, E1), the $$\mathrm{SE}(3)$$ spines beat DisPerSE and NEXUS spines on spine-distance and
-junction recovery at matched total spine length; if the gain at junctions is not
-statistically significant, H1 fails.
-
-**H2 (physics-informed generator).** *Coupling the generator's coefficients to
-the tidal eigenvalues improves extraction over a fixed-coefficient generator.*
-Falsifiable prediction: the tidally-modulated diffusion (coefficients as
-functions of $$\lambda_i$$) outperforms the best constant-coefficient run under the
-same metrics with the same parameter budget (calibrated on one sub-box, tested on
-held-out sub-boxes). If constant coefficients do as well, the "physics prior"
-adds nothing — H2 fails even if H1 holds.
-
-**H3 (mass follows the geodesic spines).** *The sub-Riemannian spine network
-traces real mass and gas at least as well as standard skeletons.*
-Falsifiable prediction: stacking weak-lensing convergence and tSZ maps along $$\mathrm{SE}(3)$$ spines (E3) yields stack significance at least matching DisPerSE
-spines on the same footprint, at matched spine length and after identical masking.
-A materially lower stack SNR kills H3.
-
-**H4 (formation, the strong claim).** *Matter transport during web assembly
-follows sub-Riemannian geodesics of the effective metric.*
-Falsifiable prediction: in an N-body simulation[^nbody], lift particle trajectories $$(\mathbf{x}(t), \hat{\mathbf{v}}(t))$$ to $$\mathbb{R}^3 \times S^2$$ and compare
-them, between fixed snapshots, to SR geodesics of the calibrated metric with the
-same endpoints. H4 requires the geodesic prediction to beat the straight-line
-(Zel'dovich ballistic) baseline on transport error by a pre-registered margin
-(metric M4 in the data-analysis plan). If SR geodesics do not beat Zel'dovich, H4 is dead and C2 with it —
-and the program remains a methods paper (C1).
-
-## Experiments, in order
-
-The campaign, end to end: first settle whether the theory even permits the
-boldest claim (T1); race the two methods on toy universes where the answer is
-known (E0); repeat on real simulated gravity (E1); watch matter actually move and
-ask whose paths it follows (E2); and only then take the surviving method to the
-real sky, checking its webs against maps of mass and hot gas (E3). Each experiment
-gates the next; a kill criterion stops a branch, and each stage's analysis sets
-the next stage's coefficients.
-
-**T1 (theory, parallel track).** Derive — or refute — a Jacobi-type variational
-principle for the Zel'dovich/adhesion flow in comoving coordinates, giving the
-effective metric whose geodesics the flow follows. Candidate route: the adhesion
-model is the zero-viscosity limit of Burgers flow, whose characteristics *are*
-extremals of an action; recast that action on $$\mathbb{R}^3 \times S^2$$ and read
-off the metric and the correct $$\lambda_i$$-dependence of $$D_\parallel, D_\perp, D_S, \mu$$. Also connects to optimal-transport
-reconstruction of the early Universe (Brenier, Frisch et al. 2003), which is
-Monge–Ampère[^optimal-transport] — i.e. already a geodesic statement in a Wasserstein geometry.
-Deliverable: a note fixing the functional form of the coefficients used in E1–E3
-instead of leaving them free parameters.
-
-**E0 (synthetic ground truth; days, laptop).**
-Generate Gaussian random fields with a $$\Lambda$$CDM-like power spectrum in a $$256^3$$ box, displace particles with the Zel'dovich map at several growth factors,
-deposit density with cloud-in-cell. Ground-truth spines and junctions are known
-from the deformation-tensor eigenstructure of the initial field. Build the
-orientation score with 3D steerable ridge filters[^steerable] over $$\sim 3$$ scales and $$\sim 60{-}160$$ orientations (a $$256^3 \times 60$$ float32 score is $$\sim 4$$ GB —
-workstation-feasible), run the lifted diffusion, trace SR geodesics, project to $$\mathbb{R}^3$$. Benchmark against DisPerSE on the same fields across noise levels
-and sampling densities. **Tests H1. Kill criterion: no significant gain at any
-noise level.**
-
-**E1 (real gravity; weeks, one GPU/big-RAM node).**
-Public N-body data: a Quijote fiducial snapshot (Villaescusa-Navarro et al. 2020)
-and/or IllustrisTNG-100-Dark (Nelson et al. 2019). Compute $$T_{ij}$$ by FFT of the
-deposited density, smoothed at $$2\,h^{-1}$$Mpc; run the pipeline with and without
-tidal modulation of the coefficients; calibrate on one octant, evaluate on the
-others. Extraction quality is judged against the E0-style metrics (using
-high-resolution DisPerSE-on-particles as reference where no analytic truth
-exists) plus two physical alignments: spine tangent vs. $$e_3(T)$$, and spine
-tangent vs. DM particle velocities. **Tests H1 on real gravity and H2. Kill
-criterion for H2: tidal modulation ≤ constant coefficients on held-out volumes.**
-
-**E2 (dynamical test of formation; runs on E1's data).**
-Between consecutive Quijote/TNG snapshots, select particles ending on filament
-spines; compare their lifted trajectories to (a) SR geodesics of the calibrated
-metric, (b) Zel'dovich straight-line transport, (c) geodesics of the isotropic
-Jacobi metric with no orientation lift. **Tests H4 — the only experiment that can
-support C2.** Pre-register the margin before running (metric M4).
-
-**E3 (observations; after E1 passes).**
-SDSS DR17 spectroscopic sample (selection-corrected density field, redshift-space
-distortions[^rsd] treated at least by anisotropic smoothing along the line of sight —
-a known caveat — see the caveats section), spines extracted with coefficients frozen from E1. Stack the
-public Planck 2018 lensing convergence map and Compton-$$y$$ map along spines vs.
-(i) DisPerSE spines on the identical catalogue and (ii) randomised control
-spines. Optional extension at $$z \sim 2.3$$ with CLAMATO tomography, where sparse
-sampling should favour the orientation lift. Also re-measure the spin–filament
-alignment trend with the new spines (a sharper mass transition supports H3).
-**Tests H3.**
-
-## Data-analysis plan: the metrics, defined
-
-Every claim in the program is judged by one of the six metrics below, all
-frozen before any experiment ran. (Why benchmarks need this discipline —
-matched budgets, held-out scoring, and the one rule whose violation later
-became the program's central lesson — is
-[Appendix B3](/mathematics/2026/07/08/cosmic-web-B3-honest-benchmarks/).)
-
-- **M1 — spine distance.** Sample both skeletons at $$0.1\,h^{-1}$$Mpc; report the
-  two directed median point-to-curve distances
-  $$d_{A \to B} = \mathrm{median}_{x \in S_A} \min_{y \in S_B} \lVert x - y \rVert$$
-  and the completeness/purity pair: fraction of truth within
-  $$r_0 = 0.5\,h^{-1}$$Mpc of the estimate, and vice versa, at **matched total
-  spine length** (prune both skeletons to equal length before comparing —
-  otherwise longer skeletons win purity-free).
-- **M2 — junction recovery.** Precision/recall of ground-truth junction points
-  recovered within $$r_0$$; junctions are where H1 predicts the win.
-- **M3 — alignment statistic.** For spine samples with tangent $$t_i$$:
-  $$A = \langle \lvert t_i \cdot e_3(x_i) \rvert \rangle$$. Under an isotropic null
-  $$\mathbb{E}[A] = 1/2$$; significance by permutation over randomly rotated
-  spines. Same statistic against normalised DM velocities.
-- **M4 — transport error (E2).** For particle $$p$$ over snapshot interval
-  $$[t_1, t_2]$$, $$\varepsilon_p = \tfrac{1}{L_p} \int \lVert x_p(t) - \gamma_p(t) \rVert \, dt$$,
-  path-length-normalised, where $$\gamma_p$$ is the
-  candidate curve with matched endpoints. Compare distributions of
-  $$\varepsilon_p$$ (SR geodesic vs. Zel'dovich vs. isotropic Jacobi) with a paired
-  test; pre-registered success margin: median error reduction $$\ge 10\%$$ over
-  Zel'dovich. Below that, H4 is rejected regardless of p-values.
-- **M5 — stack SNR (E3).** Mean excess convergence
-  $$\Delta\kappa$$ (or Compton-$$y$$) in tubes of radius $$1\,h^{-1}$$Mpc around
-  spines; $$\mathrm{SNR} = (\Delta\kappa - \langle \Delta\kappa_{\mathrm{ctrl}} \rangle)/\sigma_{\mathrm{ctrl}}$$
-  over $$\ge 1000$$ control realisations
-  (randomly rotated/translated spines respecting the survey mask).
-- **M6 — topology.** Betti curves[^betti] $$\beta_0, \beta_1$$ of the skeleton vs.
-  persistence threshold; compared to the reference skeleton's, on the same field.
-
-Calibration discipline: all free parameters ($$D_\parallel, D_\perp, D_S, \mu$$ and
-their $$\lambda_i$$-dependence, wavelet scales, persistence thresholds) are set on
-designated calibration volumes only; every reported number comes from held-out
-volumes or sky areas. Parameter count is part of the model comparison (H2).
-
-## Caveats and failure modes, catalogued now
-
-1. **Analogy ≠ mechanism.** Success of $$\mathrm{SE}(3)$$ methods in imaging says
-   nothing about cosmology by itself; only E2 speaks to mechanism. The write-up
-   must keep C1 results from leaking into C2 claims.
-2. **Flexible-parameter self-deception.** The lifted generator has more knobs
-   than DisPerSE. Held-out evaluation and parameter-count-aware comparison (H2)
-   are the guardrails.
-3. **Jacobi-metric gap.** Until T1 lands, "geodesics of an effective metric" is a
-   motivated ansatz, not a derivation. If T1 refutes it, E2 becomes a pure
-   null-test and C2 should be dropped from the framing.
-4. **Redshift-space distortions.** Observed density fields are anisotropic along
-   the line of sight (Kaiser squashing, Fingers-of-God); a spurious win in E3
-   could come from the orientation machinery absorbing RSD anisotropy rather
-   than tracing mass. Mitigation: test on RSD-mocked simulation catalogues in E1
-   before touching data.
-5. **Static snapshot vs. dynamic web.** Filaments migrate; skeletons from a
-   single snapshot are time-slices of a flow. E2's snapshot-pair design addresses
-   this partially; a full time-dependent treatment is future work.
-6. **Selection and masks.** Survey selection can imprint fake elongation.
-   Controls in M5 must respect the exact mask geometry.
-7. **Compute ceiling.** $$\mathrm{SE}(3)$$ diffusion at $$512^3 \times 160$$
-   orientations exceeds a workstation; the program is scoped at $$256^3 \times 60$$
-   with fast separable kernel approximations (Portegies et al. 2015). Resolution
-   sensitivity must be reported.
-
-## Success criteria and outcomes
-
-- **Minimum publishable outcome (C1):** E0+E1 show significant junction-recovery
-  and spine-distance gains → methods paper: "orientation-score filament finding
-  for cosmic-web fields", regardless of E2/E3.
-- **Strong outcome (C1+C2):** additionally, E2 beats the Zel'dovich baseline at
-  the pre-registered margin and T1 supplies the variational derivation → the
-  intrinsic-geometry claim has dynamical support and the observational program
-  (E3) becomes decisive.
-- **Null outcome:** no E0/E1 gains → write the negative result with the
-  benchmark suite; the comparison framework itself (twelve finders vs. a lifted
-  one on common metrics) is a useful contribution.
-
-## Open questions / next tests
-
-- T1: does the adhesion action admit a clean $$\mathbb{R}^3 \times S^2$$
-  reformulation, and what $$\lambda_i$$-dependence does it force on the
-  coefficients?
-- Should the geodesic penalty include torsion as well as curvature (in 3D, twist
-  of the spine matters at junction handoffs)?
-- Branching: handled by persistence pruning, or does the lifted space admit a
-  principled branching prior (junctions are crossings in $$\mathbb{R}^3$$ but
-  *separated* points in $$\mathbb{R}^3 \times S^2$$)?
-- Curvature diagnostics: do Ollivier–Ricci/Forman curvatures[^network-curvature] of the spine graph
-  correlate with tSZ brightness along filaments?
-- High-$$z$$: does the orientation lift stabilise CLAMATO skeletons at sparse
-  sampling, where density-only methods degrade fastest?
+The detector comparison measures an instrument, not a law of structure formation. Hot-gas stacks are dominated by tracer halos; the approximately 2σ bridge signals do not establish a strong inter-halo detection. The transport verdict applies to the sampled models and their resolution. The measured transverse-damping coefficient remains empirical, rather than derived from gravitational dynamics. Detailed matched scoring, uncertainty and source data are in [the results article]({% post_url 2026-07-04-cosmic-web-two-models %}) and [the experiment reports](https://github.com/moiseevigor/moiseevigor.github.io/tree/master/research/cosmic-web/docs).
 
 ## Glossary
 
@@ -688,9 +406,6 @@ volumes or sky areas. Parameter count is part of the model comparison (H2).
 - **Jacobi/Maupertuis metric** — conformal metric $$2m(E-\Phi)\,g_{\mathrm{Euclid}}$$
   whose geodesics are fixed-energy mechanical trajectories.
 - **Spine** — the 1D curve network a filament finder outputs.
-- **M1–M6** — the six evaluation metrics defined in the data-analysis plan.
-- **C1/C2, H1–H4, E0–E3, T1** — the two claims, four hypotheses, four
-  experiments, and one theory work-item defined in the sections above.
 
 [^persistent-homology]: A topology tool that tracks how connected pieces, loops, and voids appear and merge as a detection threshold is swept; features that survive over a wide range of the sweep are treated as real, short-lived ones as noise.
 

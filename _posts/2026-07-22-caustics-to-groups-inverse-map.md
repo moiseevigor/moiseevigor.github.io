@@ -1,5 +1,6 @@
 ---
 layout: distill
+last_modified_at: 2026-10-13
 title: "The Inverse Map: Reading the Fingerprint"
 subtitle: >
   Now we run the reverse. Given noisy caustic data, can we name the group? This post
@@ -210,27 +211,13 @@ caustic field is **not** a single group — it is a patchwork of sheets, filamen
 with different local structure. Point the detector at such a field and the honest answer is *"there
 is no one group here."*
 
-It gives that answer. Sampling the growth vector at many points across a genuine group returns the
-same vector everywhere → a confident label. Sampling across a modelled effective flow returns a
-*mixture* — $(2,3)$, $(2,3,4)$, $(2,3,5)$ all present, no single vector holding even 40% — and the
-detector reports **"a field of varying tangent cones"** rather than inventing a group. That is the
-calibrated silence promised in Part 1: the method mapping the edge of its own competence, refusing
-to read a group into a flow that hasn't got one.
+In the synthetic effective-flow control, no vector occupies even 40% of sampled base points, and the detector abstains. A later [gravitational counterexample](https://github.com/moiseevigor/moiseevigor.github.io/blob/master/research/caustics-to-groups/docs/E5-no-sr-structure-in-gravity.md) shows why that control cannot establish a physical inference from a cosmic-web flow: gravity supplies no controlled distribution, and a fold can imitate the pointwise scaling exponent.
 
-## The verdict, and the frontier
+## Result and scope
 
-The reverse map works — with a stated envelope. From caustic data alone the detector recovers the
-group when the geometry is homogeneous, breaks the one alias the coarse fingerprint can't, degrades
-into honest class-level hedging rather than wrong answers as noise grows, names exactly which
-distinctions are single-clue fragile, and stays silent when handed a flow that isn't a group. The
-group-blindness obstruction of Part 1 is real, and the escape — the *triple* fingerprint, never a
-local germ — is what makes the inverse possible.
+The synthetic tests separate the stated candidate groups and map which distinctions depend on one observable. They establish neither an unrestricted inverse theorem nor identification from a lone local caustic germ. The effective-flow test below is a synthetic abstention control, not an observation of physical gravitational growth vectors.
 
-What remains is the genuine wild: the $\mathrm{SE}(3)$ structure of diffusion-MRI fibre fields, where
-the configuration space really is a group and the data is real and noisy. That is the next frontier ([Part 4]({% post_url 2026-07-26-caustics-to-groups-in-the-wild %})) —
-and the calibrated-silence machinery above is exactly what will keep the answer honest when we get
-there. The full, reproducible code, every experiment, and the methods derivation live in
-[`research/caustics-to-groups/`](https://github.com/moiseevigor/moiseevigor.github.io/tree/master/research/caustics-to-groups).
+The classifier result is restricted to these synthetic candidate models. Inference on an actual diffusion-MRI acquisition remains unmeasured. [Synthetic SE(3) scope]({% post_url 2026-07-26-caustics-to-groups-in-the-wild %}) and [full methods and evidence](https://github.com/moiseevigor/moiseevigor.github.io/tree/master/research/caustics-to-groups) document the boundary.
 
 ## Glossary
 

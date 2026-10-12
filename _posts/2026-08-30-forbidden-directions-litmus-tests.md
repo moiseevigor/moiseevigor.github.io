@@ -1,5 +1,6 @@
 ---
 layout: distill
+last_modified_at: 2026-10-13
 title: "The Litmus Tests: What Survived Our Own Review"
 subtitle: >
   Before claiming new science, attack it yourself. This part — the series' review
@@ -207,21 +208,7 @@ the census on every frame.
 
 <div class="l-body" markdown="1">
 
-The honest verdict: **no fold was caught.** The final pair is same-signed, and
-fold-born pairs are necessarily opposite-signed (topological degree conservation) — so
-these two nulls arose independently as the region's complexity grew. What the census
-*does* deliver is a real-data observation worth keeping as a **candidate**: the coronal
-null count as a topological complexity indicator of an emerging region, zero while it
-is a simple arcade. Candidate, not established — eight frames of a window-sensitive
-extrapolation are too sparse and too model-dependent to establish an index or any
-relation to flare capability; the G1 protocol (the chartered, not-yet-run
-gold-standard solar pipeline, `docs/PROGRAM-G1-solar-gold-standard.md`: hourly cadence,
-tracked windows, census-grade counts, ensembles) is the test it must pass.
-Catching a birth needs hourly cadence, a co-moving window, and null identity tracking —
-specified for the follow-up, not claimed. (One methodological save worth confessing: the
-first tracking pass left the region in the window's corner, and its quiet-Sun nulls
-briefly impersonated an "annihilation candidate" — caught by looking at the picture,
-fixed by recentring, discarded.)
+**No fold birth was captured.** The final pair is same-signed, whereas fold-born pairs have opposite topological degree. The eight-frame, window-sensitive potential extrapolation cannot establish a relation between null count and flare capability. An apparent annihilation from the first window placement disappeared after recentring and was discarded. These are negative results, not a new solar complexity index.
 
 ## What stands after review
 
@@ -232,14 +219,9 @@ fixed by recentring, discarded.)
 | Force-free ⇒ radial-only; magnetotail ⇒ 79 spirals | theorem stands; the census half is **retracted** — Part 6's boundary audit puts every T96 census null it tested outside the model's own magnetopause and finds none inside, so no valid interior spiral example survives |
 | Crossover as pair-metrology tool | **demoted** by pre-registered race; survives as concept |
 | Type classification, pair metrology | belong to statistical fits — measured twice |
-| Fold birth on the real Sun | not caught; requirements specified |
+| Fold birth on the real Sun | not caught; sparse, window-sensitive extrapolation |
 
-The series' deepest result is the shape of this table: the sub-Riemannian framing's
-durable contributions are **laws, exact structure, and dictionaries** — things with no
-estimation competitor — while every head-to-head against a matched statistical estimator
-was lost and reported. That is what distinguishes a research program from an
-advertisement, and it is the standard the next phase (the moduli question, the hourly
-fold hunt, the in-situ cross-match) will be held to.
+The matched comparisons favour statistical fits for null type and pair separation. The surviving analytical identities remain distinct from those failed estimator claims.
 
 ## Glossary
 

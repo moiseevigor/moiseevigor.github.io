@@ -1,5 +1,6 @@
 ---
 layout: distill
+last_modified_at: 2026-10-13
 image: /public/img/posts/geometry-seeing-2.svg
 title: "Appendix A3 — Calculus of Variations and the Pontryagin Maximum Principle"
 subtitle: >
@@ -482,7 +483,7 @@ def reconstruct_se2(h_t, t_arr):
     return np.array(out)
 ```
 
-## What we covered, and what comes next
+## Derived results
 
 The Pontryagin Maximum Principle takes an optimal-control problem and
 produces a Hamiltonian system on $T^{\ast}M$.  For the SE(2) sub-Riemannian
@@ -494,11 +495,6 @@ $\dot h_1 = h_2 h_3, \dot h_2 = -h_1 h_3, \dot h_3 = -h_1 h_2$ — exactly the
 equations Part&nbsp;2 wrote down.  Writing $h_1 = \sin\alpha$, $h_2 = \cos\alpha$
 on the unit Hamiltonian level and differentiating $\varphi = 2\alpha$ once
 more gives the nonlinear pendulum equation $\ddot\varphi + \sin\varphi = 0$.
-
-Appendix A4 will solve the pendulum equation in closed form using Jacobi
-elliptic functions and the arithmetic–geometric mean (AGM), recovering the
-period $4K(k^2)$ and the
-explicit $\kappa(s) = 2k\,\mathrm{cn}(s\mid k^2)$ formula of Part&nbsp;2.
 
 </div><!-- /.l-body -->
 

@@ -1,5 +1,6 @@
 ---
 layout: distill
+last_modified_at: 2026-10-13
 image: /public/img/posts/geometry-seeing-4.svg
 title: "The Exact Cut Time on SE(2) — and the Open Problem Beyond It"
 subtitle: >
@@ -14,7 +15,7 @@ description: >
   The cut time of the SE(2) sub-Riemannian problem: Sachkov's theorem t_cut = t(λ) —
   2K(k²) on the oscillating-pendulum family (C₁), 2kp₁(k) on the rotating-pendulum family (C₂), infinite on the
   separatrix — the absence of conjugate points on the generic family, and the open
-  frontier: the general Maxwell-equals-cut question for left-invariant SR problems.
+  limits of extending a symmetry-generated cut-time formula to other structures.
 series: geometry-of-seeing
 series_title: "Geometry of Seeing"
 series_part: 4
@@ -35,9 +36,8 @@ shortest past the first Maxwell time $\mathfrak t(\lambda)$ — $2K(k^2)$ on the
 family. The natural question — is that bound <em>exact</em>? — has a proven answer for
 $\mathrm{SE}(2)$: yes, everywhere, with a bonus no one would guess — the generic
 geodesics never develop conjugate points at all. We give the honest map: Sachkov's
-theorems (2010–2011) in full, the elastica sister picture beside them, and the frontier
-that stays open — the general "Maxwell equals cut" question that $\mathrm{SE}(2)$ is the
-headline example of. No hand-waving about what is settled and what is not.
+theorems (2010–2011) in full, with the elastica comparison and the limits
+of extending the result to other sub-Riemannian structures.
 </div>
 
 ## Where Part&nbsp;3 left us
@@ -216,25 +216,9 @@ Martinet distribution discussed in the [magnetic-flux article](/articles/magneti
 condition fails on a surface and strictly abnormal minimisers can live there.
 </aside>
 
-### The broader structural question
+### Limit of the theorem
 
-Zoom out from $\mathrm{SE}(2)$ and a defensible open direction appears. In several
-highly symmetric left-invariant sub-Riemannian problems, a first Maxwell time generated
-by an explicit discrete or continuous symmetry turns out to equal the cut time. This is
-not a universal law for arbitrary left-invariant structures: conjugate points or
-non-symmetry-related competitors may intervene. What is missing is a useful theorem with
-checkable hypotheses — on the symmetry action, conjugate-time bounds, properness, and the
-global topology of the exponential map — under which a specified Maxwell family exhausts
-the cut mechanism.
-
-<div class="callout open-problem">
-<div class="callout-title">Open Problem</div>
-Find verifiable sufficient conditions for a symmetric left-invariant sub-Riemannian
-problem under which a named first Maxwell family gives the cut time along every
-geodesic and its strata exhaust the cut locus. The known examples motivate the
-question, but no universality claim is made outside such a precisely specified class.
-$\mathrm{SE}(2)$ is a rich worked example, not the general answer.
-</div>
+Equality of a specified symmetry-generated Maxwell time with the cut time is established for this $\mathrm{SE}(2)$ synthesis. It is not a universal law for arbitrary left-invariant sub-Riemannian structures: conjugate points or non-symmetry-related competitors may intervene. No general sufficiency theorem is claimed here.
 
 ## Status of the problem, honestly
 

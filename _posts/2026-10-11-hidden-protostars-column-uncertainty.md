@@ -1,9 +1,9 @@
 ---
 layout: distill
+last_modified_at: 2026-10-13
 title: "Why matching dust clouds needs an error model"
 subtitle: >
-  We found possible profile matches for 939 clumps. Only 333 pass the frozen
-  uncertainty gate. The difference tells us what to investigate next.
+  Only 333 of 1,000 clumps pass the required 800-control uncertainty gate. Covariance scenarios and an exact counterexample show why marginal errors are insufficient.
 date: 2026-10-11 20:00:00 +0200
 categories: [astrophysics]
 tags: [star-formation, infrared, Hi-GAL, uncertainty]
@@ -24,13 +24,13 @@ description: >
 
 <div class="l-body sb-program" markdown="1">
 
-<div class="sb-status"><strong>Verified progress · 11 October 2026.</strong> Data access is repaired. The registered uncertainty gate failed: 333 of 1,000 clumps qualify, against a required 800. The infrared occurrence comparison remains unmeasured. No stellar birth or validated detector is established.</div>
+<div class="sb-status"><strong>Verified result · 11 October 2026.</strong> The registered uncertainty gate failed: 333 of 1,000 clumps qualify, against a required 800. The infrared occurrence comparison remains unmeasured. No stellar birth or validated detector is established.</div>
 
 Before counting young stars inside dark clouds, we need a credible background comparison. Our [research program](/astrophysics/2026/10/11/hidden-protostars-research-program/) asks whether apparently prestellar Hi-GAL clumps contain more compact mid-infrared sources than dusty sightlines with comparable observing conditions. Today's result concerns **whether we can build those controls**, rather than the source excess itself.
 
 The study froze a nearby parent of **19,328 clumps**, a buffered survey domain of **10,136**, and an outcome-blind draw of **1,000**. These are new-study denominators; the historical 19,219-clump result remains a separate cohort. Every requested identity and failure is retained in the [1,000-row support table](/public/data/starbirth/matched-control/profile-support.csv). [Frozen protocol](/public/data/starbirth/matched-control/protocol.md), [registration](/public/data/starbirth/matched-control/starbirth-mc-registration.json).
 
-<nav class="sb-jump" aria-label="On this page"><a href="#gates">The measured gates</a><a href="#errors">Why errors add differently</a><a href="#scenarios">The diagnosis</a><a href="#cache-audit">The cache audit</a><a href="#next">What comes next</a><a href="#evidence">Evidence</a></nav>
+<nav class="sb-jump" aria-label="On this page"><a href="#gates">The measured gates</a><a href="#errors">Why errors add differently</a><a href="#scenarios">The diagnosis</a><a href="#cache-audit">The cache audit</a><a href="#next">Interpretation limits</a><a href="#evidence">Evidence</a></nav>
 
 <h2 id="gates">The controls mostly match. Their uncertainty does not.</h2>
 
@@ -100,21 +100,13 @@ Two limits matter. We have **no explicit binding between this 2020 source and th
 
 The required evidence is now sharper: a release-bound implementation, matching response/noise and normalization, and a validated covariance calculation consistent with the released marginal-error pipeline. The **333-of-800 gate remains failed**, and infrared occurrence remains unmeasured. [Frozen audit](/public/data/starbirth/source-audit/protocol.md), [findings and exact source lines](/public/data/starbirth/source-audit/results.md), [readout](/public/data/starbirth/source-audit/starbirth-source-audit.json), [independent static verification](/public/data/starbirth/source-audit/starbirth-source-verification.json), [source hashes](/public/data/starbirth/source-audit/source-inventory.csv).
 
-<h2 id="next">The next target is the total-column uncertainty</h2>
+<h2 id="next">Interpretation limits</h2>
 
-The immediate task is to establish whether a defensible total-column uncertainty or covariance model can be obtained for this population. Any new model and validation rule must be frozen before its readout; the failed primary gate remains in the record. If that information cannot be justified, the occurrence comparison stays unresolved. Embeddings cannot supply the missing error model or physical truth.
+The original **333-of-800 gate remains failed**. Without a justified uncertainty model, the infrared occurrence comparison remains unmeasured. Embeddings do not supply the missing covariance or physical truth. No physical hidden-protostar fraction, stellar lifetime, birth detection or population precision/recall follows from these control-support results.
 
-The earlier technical block is also preserved: the archive returned an entire file instead of the first requested profile ranges, so that attempt stopped without accepting the body. The user then authorized continuation. A registered transport repair coalesced adjacent requested bytes without reading additional pixels, preserving the sample, scientific thresholds and cumulative acquisition caps. That enabled the verified gate above. [Original stopped attempt](/public/data/starbirth/matched-control/historical-first-attempt.md), [original response stop](/public/data/starbirth/matched-control/starbirth-mc-historical-profile-stop.json), [repair record](/public/data/starbirth/matched-control/starbirth-mc-range-amendment.json).
+<h2 id="evidence">Evidence</h2>
 
-The resumed acquisition used 3,685 cumulative requests and 29,761,115 response-body bytes, with about 339 seconds of acquisition time. The scientific stage occupies about 23 MiB and retained about 51 GiB free disk at verification. These are operational accounting, not discoveries. Complete native responses remain local; the public evidence is compact.
-
-We still have no confirmed stellar birth, physical hidden-protostar fraction, lifetime measurement or population-level detector precision/recall. What changed today is our understanding of the comparison's limiting evidence.
-
-<h2 id="evidence">A reproducible, bounded record</h2>
-
-The [source inventory](/public/data/starbirth/matched-control/source-inventory.csv) binds twelve byte-identical files to research revision `b0bbc8d89e06cfa812a5b91e5d863b7355750bd9`. The [results report](/public/data/starbirth/matched-control/results.md) retains the success, failure and interpretation limits together. Native inputs are hash-bound in those records but are not copied into the blog. The original producer receipt says verification was pending when emitted; its linked later independent receipt records completion.
-
-This public update is separate from the restricted private Atlas. Earlier failed studies, the historical gallery and the original formation explorer are preserved. [Explore the stages of star formation](/astrophysics/2026/10/11/hidden-protostars-research-program/#star-formation).
+The [source inventory](/public/data/starbirth/matched-control/source-inventory.csv) binds the reported gates to research revision `b0bbc8d89e06cfa812a5b91e5d863b7355750bd9`. The [results report](/public/data/starbirth/matched-control/results.md) retains the counts, independent verification and interpretation limits.
 
 <p class="sb-return"><a href="/astrophysics/2026/10/11/hidden-protostars-research-program/">← Research program and formation explorer</a> · <a href="/lab/">All research programs</a></p>
 
