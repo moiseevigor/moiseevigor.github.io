@@ -6,6 +6,7 @@
   'use strict';
   const D = window.PROOF_ATLAS_DATA;
   const S = window.PROOF_ATLAS_DECLARATIONS;
+  const E = window.PROOF_ATLAS_TERM_EVIDENCE;
   const host = document.getElementById('pa-explorer');
   if (!host) return;
   const canvas = document.getElementById('pa-canvas'), ctx = canvas.getContext('2d');
@@ -26,6 +27,25 @@
       namedIncoming.get(e.to).push(e.from);namedOutgoing.get(e.from).push(e.to);
     }
   }
+  // Keep source references distinct from observed Lean Expr.const use.
+  const termDeclarations=(E&&E.schema==='ProofAtlasTermReferenceEvidence/1'&&E.declarations)||{};
+  const termEdges=[],termIncoming=new Map(namedNodes.map(n=>[n.short,[]])),
+        termOutgoing=new Map(namedNodes.map(n=>[n.short,[]])),termParticipants=new Set();
+  for(const [target,d] of Object.entries(termDeclarations)){
+    if(!namedById.has(target))continue;
+    termParticipants.add(target);
+    for(const use of d.observed){
+      if(!namedById.has(use.from))continue;
+      termEdges.push({from:use.from,to:target,...use});
+      termIncoming.get(target).push(use.from);
+      termOutgoing.get(use.from).push(target);termParticipants.add(use.from);
+    }
+  }
+  const termEdgeByPair=new Map(termEdges.map(e=>[e.from+'->'+e.to,e]));
+  function linksFor(id){return {
+    incoming:(state.mode==='term'?termIncoming:namedIncoming).get(id)||[],
+    outgoing:(state.mode==='term'?termOutgoing:namedOutgoing).get(id)||[]
+  };}
   const groupColors={
     hypotheses:'#8baccb',definitions:'#62c7b5',endpoints:'#a6c2cc',monotonicity:'#c4a3df',
     range:'#8fa9e2',gluing:'#e0bc83',existence:'#84dec7',uniqueness:'#eac989',conclusion:'#ffdfa4'
@@ -52,6 +72,7 @@
     hover:null,hoverPower:0,hoverTarget:0,hoverFrame:0,lastHoverTime:0,pointer:null};
   const titles = {
     map:['Named proof map','26 Lean declarations · 81 source-level references · Crossing.lean'],
+    term:['Lean term references','3 inspected declarations · 24 observed named Expr.const edges · NOT a complete proof graph'],
     whole:['Kernel syntax microscope','7,288 expression occurrences · low-level Lean term structure'],
     deps:['Dependency constellation','42 exact direct references · labels selectively anonymized'],
     recursive:['Recursive microscope','Expand expressions within a scoped subtree'],
