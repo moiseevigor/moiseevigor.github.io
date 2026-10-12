@@ -1,5 +1,6 @@
 ---
 layout: distill
+last_modified_at: 2026-10-13
 image: /public/img/posts/geometry-seeing-1.svg
 title: "Appendix A5 — The Sub-Riemannian Exponential Map of SE(2)"
 subtitle: >
@@ -490,7 +491,7 @@ for k in (0.1, 0.3, 0.5, 0.7, 0.9, 0.95):
     print(f"k = {k:4.2f}:  ~T_conj(elastica) = {conjugate_scale_elastica(k):.4f}")
 ```
 
-## What we covered, and where Parts&nbsp;3–4 go next
+## Derived results
 
 The SR exponential map of $\mathrm{SE}(2)$ takes initial costates to
 group endpoints; its closed form involves Jacobi elliptic functions and
@@ -501,24 +502,6 @@ distinct geodesics meeting with the same SR length.  For the oscillating-pendulu
 family ($C_1$) the free SR cut fires at $2K(k^2)$ — half a pendulum period — while
 the smooth elastica sister pair first ties at $4K(k^2)$, one full curvature
 period: the same elliptic clock, two problems.
-
-What Parts&nbsp;3 and 4 of the blog series do with it:
-
-- **Part&nbsp;3** develops the Maxwell mechanism via the pendulum's
-  reflection group $(\mathbb Z_2)^3$, computes the mirror-pair tie exactly on
-  the elastica family ($s = 4K(k^2)$, one curvature period), and states the
-  SR result it bounds: $t_{\mathrm{cut}} \le \mathfrak t(\lambda)$.
-- **Part&nbsp;4** presents Sachkov's theorem $t_{\mathrm{cut}} = \mathfrak
-  t(\lambda)$ — for the oscillating-pendulum family ($C_1$) $2K(k^2)$, half a pendulum
-  period, with <em>no conjugate points at all</em> along the way — and lays
-  out what stays genuinely open: the general Maxwell-equals-cut question
-  beyond $\mathrm{SE}(2)$.
-
-The five appendices A1–A5 supply every prerequisite: Lie groups (A1),
-distributions and contact structures (A2), the Pontryagin Maximum
-Principle and Lie–Poisson reduction (A3), Jacobi elliptic functions and
-the arithmetic–geometric mean (A4), and the SR exponential map (A5).  With them in hand, Parts&nbsp;1 and 2 should read
-fluently, and Parts&nbsp;3 and 4 become approachable.
 
 </div><!-- /.l-body -->
 

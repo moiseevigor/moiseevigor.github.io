@@ -1,5 +1,6 @@
 ---
 layout: distill
+last_modified_at: 2026-10-13
 title: "Finding Magnetic Nulls with a Growth Vector"
 subtitle: >
   A magnetic null — where the field vanishes, and a candidate site for reconnection —
@@ -241,40 +242,6 @@ log-spaced, 7 per window. The scale-window rule on gridded data: lower edge $\ge
 grid cells, upper edge $\le$ half the distance to the nearest neighbouring structure —
 stated in advance, so the $Q = 5 \to 6$ change of verdict with window choice is a
 recorded parameter decision, not a post-hoc tunable.*
-
-## The one place it might yet win
-
-There is a leg we have not used here. Part 3 showed the *caustic* — not the growth vector — reads
-the profile-calibrated gradient combination $(1-\tfrac34\beta)\lvert\nabla\ln B\rvert^2$
-(with unit calibration on the exponential profile). A null's type is precisely a statement about $\nabla\mathbf B$,
-the very thing the caustic is sensitive to. So the decisive, still-open question is whether a
-caustic invariant like the nilpotent deviation $\delta$ distinguishes spiral-A from spiral-B where
-the growth vector cannot. If it does, the framing genuinely *refines* the standard null classifier;
-if it does not, the honest conclusion is that this is a beautiful re-description of magnetic
-topology rather than a new instrument. That experiment is the program's frontier; this post —
-originally the roadmap's last — names it rather than pretending it is already done, and
-Parts 5–8 (the null gallery, the transition state, the litmus tests, Jupiter) carry the
-program on from here.
-
-## The series, in one arc
-
-- **[Part 1](/mathematics/2026/08/05/forbidden-directions-research-program/)** — the selection
-  rule: a forbidden direction, not a slow one; a connection whose curvature is a physical field.
-- **[Part 2](/mathematics/2026/08/08/forbidden-directions-magnetic-contact/)** — the geometry:
-  Larmor motion is Heisenberg, and the flux is an area-like weight-2 coordinate, so $Q=d+k+2$.
-- **[Part 3](/mathematics/2026/08/11/forbidden-directions-reading-gradient/)** — the caustic reads
-  the field gradient: $\delta=-\varepsilon^2$ on the exponential profile, the calibrated
-  combination $(1-\tfrac34\beta)\lvert\nabla\ln B\rvert^2$ in general.
-- **Part 4** *(this page)* — the growth vector locates magnetic nulls, agreeing with the standard
-  finder on location and order (a consistency check, not blind detection), with type left
-  open. *(Parts 5–8 continue the series beyond this original roadmap.)*
-
-The whole program rests on one distinction that most "preferred direction" intuitions miss:
-geometry only becomes sub-Riemannian when a direction is **forbidden and bracket-reachable**, and
-then — remarkably — the geometry reads the field that forbade it. Where that holds (magnetism,
-rotation) the invariants are curvature-degeneracy meters; where it only seems to (anisotropic
-transport, gravity) the honest answer is that there is no sub-Riemannian structure to find. Knowing
-which case you are in, and not confusing them, is the result worth keeping.
 
 ## Glossary
 

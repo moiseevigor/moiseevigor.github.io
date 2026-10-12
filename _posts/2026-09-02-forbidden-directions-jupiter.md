@@ -1,5 +1,6 @@
 ---
 layout: distill
+last_modified_at: 2026-10-13
 title: "Jupiter's Buried Skeleton: The Polar Patch as a Combination of Separatrices"
 subtitle: >
   Juno's magnetic model shows a patch of reversed flux near Jupiter's north pole — but only
@@ -140,9 +141,7 @@ leaves no unexplained **net topological charge** above $0.885$ — index-cancell
 missed pairs are *not* excluded (fold-created nulls come precisely in such pairs).
 The three found nulls all live in $0.855$–$0.885$, where the two-resolution and
 floor-move agreement is *convergence* evidence, not completeness; the stronger
-comparator — a Haynes–Parnell trilinear cell census — is chartered in G1 (the
-program's not-yet-run gold-standard pipeline charter,
-`docs/PROGRAM-G1-solar-gold-standard.md`) and not implemented here.)
+comparator, a Haynes–Parnell trilinear cell census, was not performed.)
 
 The two seeded nulls sit a few hundredths of a radius above the dynamo surface — and
 both land exactly where the theory of Parts 4–5 says they must. The growth vector reads

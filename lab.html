@@ -2,9 +2,8 @@
 layout: page
 title: Lab
 subtitle: >
-  Research programs and their outputs. Each program asks one question, pre-registers
-  its hypotheses with the result that would kill them, runs the experiments in public,
-  and reports the verdict — negative results included.
+  Significant positive and negative research results, their evidence, and the limits
+  of each claim.
 permalink: /lab/
 comments: false
 ---
@@ -43,12 +42,11 @@ comments: false
 </style>
 
 <p class="lab-intro">
-Every program follows the same loop: <em>literature → candidate edge &amp; caveats →
-hypothesis with a kill criterion → experiment → verdict → next hypothesis</em>. A program
-is read from its <strong>Part&nbsp;1</strong>, which states the question and the verdicts up
-front; the remaining outputs hang under it. <strong>Parts</strong> are the narrative posts,
-<strong>appendices</strong> the theory background, <strong>articles</strong> the formal
-statements and proofs, and the <strong>code</strong> reproduces every number.
+Each series begins with its results and their scope. The linked posts explain
+substantive findings, including refuted hypotheses and withdrawn claims.
+<strong>Appendices</strong> give the mathematical background,
+<strong>articles</strong> give formal statements and proofs, and the linked
+<strong>evidence</strong> identifies the measured inputs and checks.
 </p>
 
 <p class="lab-legend">
@@ -85,7 +83,7 @@ Scoreboard:
   </ul>
   {% endif %}
 
-  {% if p.frontier %}<p class="lab-field"><b>Frontier</b>{{ p.frontier }}</p>{% endif %}
+  {% if p.limits %}<p class="lab-field"><b>Limits</b>{{ p.limits }}</p>{% endif %}
   {% if p.grew_from %}
   {% assign parent = site.data.series | where: "id", p.grew_from | first %}
   <p class="lab-field"><b>Grew out of</b><a href="#{{ parent.id }}">{{ parent.title }}</a></p>

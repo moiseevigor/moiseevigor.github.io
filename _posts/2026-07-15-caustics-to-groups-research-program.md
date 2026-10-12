@@ -1,23 +1,15 @@
 ---
 layout: distill
-title: "From Caustics to Groups: A Research Program"
+last_modified_at: 2026-10-13
+title: "From Caustics to Groups: Identifiability and Its Limits"
 subtitle: >
-  A caustic is where a flow of paths focuses — the bright edge in a coffee cup, the
-  cusp in a gravitational lens, the shell-crossing wall of the cosmic web. This post
-  scopes a falsifiable research program for the <em>reverse</em> map: given an observed
-  field of caustics, infer the hidden sub-Riemannian (Lie-group) geometry that produced
-  it. The program is built around a hard obstruction — most caustics are provably
-  group-blind — and the three places where the discriminating information actually lives.
+  Generic local caustics do not identify a group. Finite synthetic tests recover additional structure, while degenerate tangencies refute a universal cusp claim.
 date: 2026-07-15 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, caustics, lie-groups, singularity-theory, optimal-control, inverse-problems]
 image: /public/img/posts/caustics-groups-1.svg
 description: >
-  Scoping document for a research program that inverts the map from sub-Riemannian
-  group structure to caustics: the ADE group-blindness obstruction, a three-component
-  fingerprint (tangent-cone growth vector, conjugate-locus moduli at the pole, abnormal
-  stratum), hypotheses with pre-registered kill criteria, ordered experiments on
-  synthetic and real caustic fields, and the metrics that judge them.
+  The group-blindness obstruction, sampled fold and cusp results, synthetic classification and the limits of inferring geometry from caustics.
 series: caustics-to-groups
 series_title: "From Caustics to Groups"
 series_part: 1
@@ -26,17 +18,7 @@ comments: true
 
 <div class="l-body" markdown="1">
 
-<div class="callout">
-<div class="callout-title">What this document is — and what it is not</div>
-A <strong>scoping document</strong>, not a result. It defines a research program:
-the question, what the literature already settles, the one obstruction the whole
-design must respect, four hypotheses with falsifiable predictions and the metrics
-that will judge them, and an ordered sequence of experiments — synthetic first,
-real data last. The program follows the loop <em>literature → edge &amp; caveats →
-hypothesis → test → analysis → next hypothesis</em>, and each hypothesis states in
-advance the exact result that would <em>kill</em> it. A clean negative result, with
-evidence, is a valid outcome here — arguably the most likely one.
-</div>
+**Results and scope.** Generic Lagrangian singularities supply a sharp obstruction to identifying a group from one local caustic. Sampled fold tests support that obstruction; cusp tests also expose symmetry exceptions. A finite synthetic classifier separates four candidate structures, but real diffusion-MRI inference is not established.
 
 **The question, in one breath.** A caustic is the pattern a flow of shortest paths
 makes when it focuses — where nearby paths pile onto the same point. The
@@ -55,17 +37,6 @@ built around, is *mostly no — and we can say precisely where the "no" comes fr
 what narrow "yes" survives it.* That structure — a sharp obstruction plus a
 three-part escape from it — is the scientific content of the series. The rest of
 this page makes it precise.
-
-**The planned arc.** Part 1 *(this page)* scopes the program.
-**[Part 2]({% post_url 2026-07-18-caustics-to-groups-forward-map %})**
-builds the forward model — the caustics of the model groups Heisenberg, $\mathrm{SE}(2)$,
-Engel, and Cartan, with their explicit conjugate loci.
-**[Part 3]({% post_url 2026-07-22-caustics-to-groups-inverse-map %})** builds
-the inverse map — the three-component fingerprint, the classifier, and the first
-confusion matrix. **[Part 4]({% post_url 2026-07-26-caustics-to-groups-in-the-wild %})**
-takes the surviving method into the wild:
-diffusion-MRI orientation fields, and the cosmic web as the stress test that shows
-*where the method must stay silent.* Theory background lands in appendices C1–C6.
 
 ## The question, made precise
 
@@ -208,11 +179,11 @@ $$
 \Big(\; \underbrace{\text{growth vector of the tangent cone}}_{\text{which Carnot model}},\;\; \underbrace{\text{symmetry + moduli of the conjugate locus at the pole}}_{\text{which group within the class}},\;\; \underbrace{\text{abnormal stratum present?}}_{\text{one topological bit}} \;\Big).
 $$
 
-The correct matching statistic is not "does the data contain a cusp" but the
-**nilpotent-deviation**: *how far, and in what shape, does the observed conjugate
-locus depart from the caustic of its own tangent cone* (in the spirit of
-Sacchelli's caustic-stability invariant, 2019). Everything downstream is built
-around that quantity — defined precisely below — not around raw cusp classification.
+For the contact comparison, the measured deviation is the average shortfall of
+refocusing time relative to the flat Heisenberg law. It separates Heisenberg
+(approximately zero) from SE(2) (approximately 0.14) on the stated momentum and
+launch-angle grid. This is a finite-model observable, not a universal group identifier.
+[Definition, grid and results]({% post_url 2026-07-22-caustics-to-groups-inverse-map %}).
 
 ## What the literature already settles
 
@@ -356,195 +327,15 @@ That refusal is a deliverable, connecting this series directly to the
 
 <div class="l-body" markdown="1">
 
-## The matching statistic, defined
+## The measured inverse result
 
-Let $C_{\mathrm{obs}}$ be the observed first conjugate locus near the base point,
-sampled as a point set in SR-normal coordinates (the intrinsic dilation-adapted
-coordinates in which the tangent cone is the identity model). Let
-$C_{\mathrm{nil}}(\theta)$ be the conjugate locus of the candidate tangent cone with
-growth vector $\theta$ (Heisenberg for $(2,3)$, Engel for $(2,3,4)$, …), computed in
-the same coordinates from the known closed form. The **nilpotent-deviation
-statistic** is the shape distance
+On four synthetic candidate groups, the fingerprint classifier achieves **0.99 exact accuracy** at the lowest tested noise and **0.55** at noise 0.03; accepting a correct coarse class gives **0.98** at the latter noise. The thresholds use ten calibration seeds distinct from the 25 evaluation seeds per group. The Heisenberg/SE(2) distinction depends on finite-scale refocusing deviation; Engel/Cartan separation depends on the growth vector. Removing the corresponding observable removes that distinction. [Confusion matrix and aliasing results]({% post_url 2026-07-22-caustics-to-groups-inverse-map %}).
 
-$$
-\delta(C_{\mathrm{obs}}, \theta) \;=\; \min_{g \in G_\theta} \; d_{\mathrm{H}}\!\big(g \cdot C_{\mathrm{obs}},\; C_{\mathrm{nil}}(\theta)\big),
-$$
+These tests use known model flows and directional reach, not arbitrary observed cusp photographs. The implemented contact deviation averages the refocusing-time shortfall against the flat law; it is not the originally proposed general Hausdorff shape-distance estimator. Real diffusion-MRI acquisition inference remains unmeasured. The synthetic SE(3) test recovers its tangent-cone class, not unique identification of every geometry with that growth vector. [Test scope]({% post_url 2026-07-26-caustics-to-groups-in-the-wild %}).
 
-where $d_{\mathrm{H}}$ is the Hausdorff distance between the two curve/surface sets
-and the minimum is over $G_\theta$, the group of intrinsic symmetries (dilations and
-rotations) of the nilpotent model — so the statistic measures *shape*, not accidental
-placement or scale. The recovered class is $\hat\theta = \arg\min_\theta \delta$, and
-the *residual shape* of $C_{\mathrm{obs}}$ after removing the best nilpotent match
-carries the moduli $(\chi, \kappa)$ that pin the specific group within the class.
-This is the quantity every experiment below reports, with uncertainty.
+**A second negative result corrects the original gravitational interpretation.** A deterministic gravitational flow supplies no controlled distribution whose brackets could be inferred this way. A Zel'dovich fold can counterfeit Heisenberg's pointwise scaling exponent without being sub-Riemannian. Therefore the effective-flow abstention test cannot establish recovery of physical gravitational growth vectors. [Derivation and counterexample](https://github.com/moiseevigor/moiseevigor.github.io/blob/master/research/caustics-to-groups/docs/E5-no-sr-structure-in-gravity.md).
 
-## Hypotheses
-
-Conventions: "conjugate locus at the pole" always means the *full* first conjugate
-locus from the base point, not a single germ; growth vectors are written
-$(n_1, n_2, \dots)$; all metrics are defined in the data-analysis plan.
-
-**H1 (identifiability).** *From noisy, finite samples of a caustic / conjugate-locus
-field, the tangent-cone growth vector can be recovered stably.*
-Falsifiable prediction: on synthetic data with a known growth vector (E0), the
-Ball–Box growth-vector estimator returns the correct vector with accuracy rising
-monotonically in sample size and degrading gracefully in noise, beating a
-majority-class baseline at realistic noise. **If recovery is no better than the
-baseline at any noise level, H1 fails** and the tangent-cone leg of the fingerprint
-is dead.
-
-**H2 (discrimination).** *The three-component fingerprint reliably separates the
-candidate group list from caustic observables alone.*
-Falsifiable prediction: the classifier's confusion matrix on held-out synthetic
-realizations (E1) shows significantly-above-chance separation of
-$\{\mathrm{Heisenberg}, \mathrm{SE}(2), \mathrm{Engel}, \mathrm{Cartan}\}$, with the
-abnormal-stratum bit cleanly splitting {contact 3D} from {Engel, Cartan}.
-**If the off-diagonal mass is not significantly below chance, H2 fails** — and the
-program reports *which* observables are informative and which are not.
-
-**H3 (rigidity / aliasing).** *Some group pairs are provably or empirically aliased —
-they produce indistinguishable caustics under the available observables.*
-This hypothesis predicts its own partial failure: certain pairs (candidates:
-$\mathrm{SE}(2)$ vs. Heisenberg, which share the $(2,3)$ tangent cone and differ only
-in moduli; structures related by projective/affine equivalence of SR metrics) will
-*collapse* under caustic observables. The deliverable is an **aliasing map**: for
-each pair, the smallest observable set that separates it, or a statement that none in
-our kit does. **H3 "fails" only if the aliasing is not reproducible** — i.e. if the
-same pair sometimes separates and sometimes does not under identical protocol, which
-would indict the estimator rather than reveal geometry.
-
-**H4 (in-the-wild inference).** *On real data where the configuration space is
-assumed to be a group (cortex, DW-MRI), the fingerprint picks out a best-fitting
-candidate structure with calibrated confidence.*
-Falsifiable prediction: on a DW-MRI orientation field (E3), the recovered tangent
-cone is stable across the acquisition and consistent with the left-invariant
-$\mathrm{SE}(3)$ model, with a reported posterior — *and* on the cosmic-web stress
-test (E4) the method correctly **abstains** (wide posterior, no confident group),
-because the flow is not left-invariant. **H4 fails if the method returns a confident
-group on the effective-flow data** — that would prove it is fitting caustic
-universals, not geometry.
-
-## Experiments, in order
-
-Each experiment gates the next; a kill criterion stops a branch. The generator and
-the detector share **no fitted state** — the leakage discipline of the sibling
-series applies here verbatim.
-
-**E0 (synthetic ground truth; laptop).** For each candidate tangent cone, integrate
-the nilpotent SR geodesic flow from a base point (closed form where it exists;
-symplectic integration otherwise), compute the first conjugate locus, and emit
-caustic point-clouds with controllable noise and sampling density. Ground truth — the
-growth vector and the exact locus — is known by construction. Run the growth-vector
-estimator and the conjugate-locus descriptor across a noise/sampling grid.
-**Tests H1. Kill criterion: no growth-vector recovery above baseline at any noise
-level.**
-
-**E1 (the inverse core + first confusion matrix; laptop).** Add the full non-nilpotent
-groups (Heisenberg, $\mathrm{SE}(2)$, Engel, Cartan) via their explicit geodesics;
-generate labelled caustic realizations; run the complete three-component fingerprint
-and the classifier; produce the first confusion matrix on held-out realizations.
-**Tests H2.** Exit target set after the E0 baseline, not guessed in advance.
-
-**E2 (robustness &amp; the aliasing map; laptop).** Noise and sampling sweeps;
-identifiability curves (recovery accuracy vs. noise, per component); the rigidity
-study — which pairs collapse, and the minimal observable that separates each.
-**Tests H3.** Produces the honest map of what is and isn't distinguishable.
-
-**E3 (SE(3) + real neuro-imaging data).** Add the $\mathrm{SE}(3)$ forward model
-(elliptic-integral geodesics; cuspless-projection handling, Duits et al. 2013). Wire a
-thin adapter converting a DW-MRI orientation field into the common
-`ConjugateLocusSample` schema (credentialed download gated behind a documented step).
-Run inference; report the recovered structure *with* its homogeneity assumptions
-stated explicitly. **Tests H4 (the "yes" half).**
-
-**E4 (astrophysical stress test — calibrated silence).** Apply the same pipeline to a
-cosmic-web caustic-skeleton field (Feldbrugge/Hertzsch-style shell-crossing surfaces)
-and to splashback caustics. **The pre-registered expectation is abstention.**
-**Tests H4 (the "no" half).** A confident group output here is a *failure* of the
-method, not a discovery — and catching that is the point.
-
-## Data-analysis plan: the metrics, defined
-
-Every claim is judged by one of these, all fixed before any experiment runs.
-
-- **M1 — growth-vector accuracy.** From local ball-volume scaling
-  $\mathrm{vol}\,B(q_0, r) \sim r^{\,Q}$, the **homogeneous dimension**
-  $Q = \sum_i i\,(n_i - n_{i-1})$ and the per-step increments give the growth vector;
-  report the fraction of held-out points whose full vector is recovered exactly, with
-  a confusion matrix over vectors. (Heisenberg/$\mathrm{SE}(2)$: $Q=4$; Engel: $Q=7$;
-  Cartan: $Q=10$.)
-- **M2 — nilpotent deviation $\delta$.** The statistic defined above; reported as a
-  distribution over realizations, per candidate $\theta$, with the gap between the
-  best and second-best $\theta$ as the discrimination margin.
-- **M3 — conjugate-locus descriptor error.** Cusp count and symmetry-group
-  identification accuracy, plus the estimated moduli $(\hat\chi, \hat\kappa)$ against
-  ground truth (bias and spread).
-- **M4 — abnormal-stratum detection.** Precision/recall of the yes/no abnormal-bit
-  against the known class, flagged as **lower-confidence** throughout — regularity of
-  abnormal minimizers is itself an open problem, so this leg is reported with an
-  explicit reliability caveat, never as a hard gate.
-- **M5 — classifier posterior &amp; confusion matrix.** A posterior over the candidate
-  list per realization; the confusion matrix is the headline deliverable of H2, scored
-  only on held-out realizations, split **by realization, never by point**.
-- **M6 — aliasing separation.** For each group pair, the minimal observable subset (of
-  the three fingerprint components) achieving reproducible separation at a fixed
-  confidence, or "none in kit."
-
-Calibration discipline: every free parameter (kernel scales, ball-radius range for
-the scaling fit, Hausdorff sampling density, classifier thresholds) is set on
-designated calibration realizations only; every reported number comes from held-out
-realizations. Parameter count is part of the model comparison.
-
-## Caveats and failure modes, catalogued now
-
-1. **ADE universality caps local data.** The method may need global/base-point
-   information (the full conjugate locus from a pole) that real fields do not cleanly
-   provide — you rarely get to choose the pole in the wild. Where only local germs are
-   available, the honest output is "group-blind here." The write-up must never let a
-   local cusp count leak into a group claim.
-2. **Homogeneity rarely holds.** A recovered "group" is really the *tangent cone at a
-   point*; a real field gives a *field* of tangent cones. Outputs are framed as
-   tangent-cone fields, and a single global group is claimed only where homogeneity is
-   independently justified.
-3. **Abnormal detection is numerically delicate.** Treated as a lower-confidence leg
-   and flagged (M4). A missed or spurious abnormal bit degrades class separation but
-   never silently flips a verdict.
-4. **Genuine mathematical aliasing.** Two non-isomorphic structures can be
-   projectively/affinely equivalent and share caustics — a theorem, not a bug. The
-   aliasing map (M6) is where this is reported, not hidden.
-5. **Coordinate/units errors masquerade as geometry.** SR-normal coordinates,
-   dilation weights, and frames are tracked explicitly; a silent weight error would
-   look like a moduli signal.
-6. **Compute and closed-form ceilings.** $\mathrm{SE}(3)$ geodesics need elliptic
-   integrals and careful cuspless handling; where no closed form exists the flow is
-   integrated symplectically and the integration error is reported alongside the
-   deviation statistic.
-
-## Success criteria and outcomes
-
-- **Minimum publishable outcome:** E0+E1 show stable growth-vector recovery and an
-  above-chance confusion matrix on the synthetic candidate list → a methods
-  contribution: *a graded inverse estimator from caustics to sub-Riemannian
-  structure, with its identifiability curves.*
-- **Strong outcome:** additionally, E3 returns a stable, well-calibrated
-  $\mathrm{SE}(3)$ inference on real DW-MRI **and** E4 correctly abstains on the cosmic
-  web → the method has a demonstrated honest scope, not just synthetic success.
-- **Null outcome:** no recovery above baseline → the negative result *plus the
-  aliasing map* is the contribution: a precise statement of what caustic data can and
-  cannot reveal about the group behind it.
-
-## Open questions / next tests
-
-- Does the nilpotent-deviation statistic $\delta$ separate $\mathrm{SE}(2)$ from
-  Heisenberg at realistic noise, given they share the $(2,3)$ tangent cone and differ
-  only in moduli?
-- Is the abnormal-stratum bit recoverable at all from *caustic* data (as opposed to
-  the distribution itself), or is it observable only with access to the geodesic flow?
-- How does the estimator behave on a *field* of tangent cones — can it segment a
-  domain into regions of differing growth vector, the way a web finder segments
-  sheets/filaments/nodes?
-- What is the exact aliasing class under projective equivalence within our candidate
-  list — provable, or only empirical?
+The sampled fold and cusp results above are numerical evidence with stated exceptions. They neither prove genericity for every candidate exponential map nor establish an unrestricted inverse theorem. [Methods and result reports](https://github.com/moiseevigor/moiseevigor.github.io/tree/master/research/caustics-to-groups/docs).
 
 ## Glossary
 
@@ -575,9 +366,7 @@ realizations. Parameter count is part of the model comparison.
   the metric; absent for the 3D contact candidates, present for Engel and Cartan.
 - **Moduli $(\chi, \kappa)$** — Agrachev–Barilari differential invariants classifying
   left-invariant 3D contact SR structures; $\chi=\kappa=0$ is flat Heisenberg.
-- **Nilpotent-deviation statistic $\delta$** — Hausdorff shape distance from the
-  observed conjugate locus to its tangent cone's caustic, minimised over intrinsic
-  symmetries; the program's central matching quantity.
+
 - **E10 (fold check)** — a numerical check added after review: at the first conjugate
   point of random geodesics, is the exponential map a *fold* (Jacobian of corank 1 whose
   kernel is transverse to the critical set)? Supports the group-blindness hypothesis for
@@ -589,8 +378,6 @@ realizations. Parameter count is part of the model comparison.
 - **Degenerate tangency** — a point where the kernel is tangent to the critical set but
   the tangency is not simple, so the germ is not a cusp; in E11 most of these are points
   where a one-parameter family of geodesics refocuses at one point.
-- **H1–H4, E0–E4, M1–M6** — the four hypotheses, five experiments, and six metrics
-  defined above.
 
 [^subriemannian]: A geometry in which motion is allowed only along certain directions at each point, and length is measured under that restriction; its shortest paths trade distance travelled against turning (see Glossary).
 

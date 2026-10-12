@@ -1,5 +1,6 @@
 ---
 layout: distill
+last_modified_at: 2026-10-13
 title: "The Forward Map: Caustics of the Model Groups"
 subtitle: >
   Before you can reverse a map you have to understand it forwards. This post meets
@@ -227,14 +228,6 @@ Two honest limits, both measured rather than asserted:
 That second point is not a defect to hide; it is the **sample-complexity-versus-noise tradeoff**
 the program set out to map, and it falls straight out of the geometry: higher-step structure is
 intrinsically harder to see.
-
-## What's next
-
-We now have four groups, their caustics, and a measurable coarse fingerprint that sorts them
-into three classes. What remains is the hard and interesting half: telling **Heisenberg from
-SE(2)** — the two the growth vector declares identical — by how far each one's caustic *deviates*
-from the flat model. That deviation is the nilpotent-deviation statistic, and turning it into a
-working classifier with an honest confusion matrix is **[Part 3]({% post_url 2026-07-22-caustics-to-groups-inverse-map %})**.
 
 [^tangentcone]: The shape a sub-Riemannian geometry approaches when you zoom infinitely far in at a point — always a "Carnot group", the model whose growth vector we are measuring. Two different groups can share one tangent cone, which is exactly why the growth vector cannot always tell them apart.
 

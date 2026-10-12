@@ -7,7 +7,7 @@
   status: complete
   question: "How does the visual cortex complete contours that are not there, and what exactly are the optimal curves it draws?"
   outcome: "Exposition: V1 as a contact bundle on SE(2), elastica via Jacobi elliptic functions, Maxwell strata — ending on Sachkov's exact cut time and the question it leaves open beyond SE(2)."
-  frontier: "Cut = first Maxwell time is proven for SE(2); a general theorem for left-invariant SR problems remains open."
+  limits: "This is the published SE(2) synthesis; it supplies no universal Maxwell-equals-cut law."
   overview: /projects/geometry-of-seeing/
   posts:
     - part: 1
@@ -53,7 +53,7 @@
   subtitle: >
     A research program testing whether the orientation-lifted geometry of the
     Geometry of Seeing series can find — and explain — cosmic filaments: a
-    scoping document, a benchmark whose corrected verdict favours the simple
+    matched benchmark whose corrected verdict favours the simple
     model, and the constructive result the refutations left behind, a measured
     transverse correction to Zel'dovich transport.
   status: complete
@@ -68,7 +68,7 @@
     - { h: H4, v: refuted, label: "matter travels along the geodesics" }
   posts:
     - part: 1
-      title: "The Geometry of the Cosmic Web: A Research Program"
+      title: "The Cosmic Web: What the Orientation Lift Failed to Improve"
       url: /mathematics/2026/07/03/geometry-of-cosmic-web-research-program/
       status: published
     - part: 2
@@ -111,8 +111,8 @@
     conjugate locus at the pole, and the abnormal-geodesic stratum.
   status: complete
   question: "Given an observed field of caustics, can you infer the sub-Riemannian Lie group that produced it?"
-  outcome: "Yes on synthetic data — identifiable, discriminable, with a mapped aliasing structure — and calibrated silence where no group exists; gravity turns out to carry no sub-Riemannian structure at all."
-  frontier: "Real DW-MRI inference (needs credentialed data)."
+  outcome: "Synthetic four-model classification reaches 0.99 exact accuracy at low noise; sampled degenerate tangencies refute universal cusp behavior. A gravitational fold counterfeits pointwise scaling, invalidating the original physical growth-vector interpretation."
+  limits: "Real diffusion-MRI inference is unmeasured. Synthetic tangent-cone recovery does not identify a unique group in an unrestricted class."
   code: research/caustics-to-groups/
   verdicts:
     - { h: H1, v: confirmed, label: "identifiability" }
@@ -121,7 +121,7 @@
     - { h: H4, v: pending, label: "in-the-wild inference (synthetic confirmed, real DW-MRI pending)" }
   posts:
     - part: 1
-      title: "From Caustics to Groups: A Research Program"
+      title: "From Caustics to Groups: Identifiability and Its Limits"
       url: /mathematics/2026/07/15/caustics-to-groups-research-program/
       status: published
     - part: 2
@@ -133,7 +133,7 @@
       url: /mathematics/2026/07/22/caustics-to-groups-inverse-map/
       status: published
     - part: 4
-      title: "In the Wild: DW-MRI, and Where the Method Stays Silent"
+      title: "Synthetic SE(3): What the Abstention Test Establishes"
       url: /mathematics/2026/07/26/caustics-to-groups-in-the-wild/
       status: published
   appendices:
@@ -171,8 +171,8 @@
     measures the field gradient, and a growth vector that detects magnetic nulls.
   status: active
   question: "Where a physical field forbids a direction of motion, can sub-Riemannian geometry read the field's local structure?"
-  outcome: "For magnetic fields, yes: the law Q = d + k + 2 holds in 2D and 3D, and the caustic reads the field gradient — tested on the Sun, Earth's magnetosphere and Jupiter."
-  frontier: "Do finer caustic invariants recover the null type (radial vs spiral) the growth vector discards?"
+  outcome: "The holonomy growth law and profile-dependent response survive. Integrated null classification and pair metrology lose to matched fits. The physical T96 census interpretation is withdrawn; the Jupiter continuation remains model-dependent."
+  limits: "Null confirmation does not outperform matched statistical fits. T96 census roots audited outside the model domain are not physical magnetospheric detections."
   grew_from: caustics-to-groups
   code: research/preferred-directions/
   verdicts:
@@ -182,7 +182,7 @@
     - { h: "Nulls", v: confirmed, label: "agrees with the standard finder (a consistency check)" }
   posts:
     - part: 1
-      title: "The Geometry of Forbidden Directions: A Research Program"
+      title: "Forbidden Directions: The Growth Law and the Failed Estimators"
       url: /mathematics/2026/08/05/forbidden-directions-research-program/
       status: published
     - part: 2
@@ -242,7 +242,7 @@
   status: active
   question: "After a geodesic ceases to minimize, where does it focus and how many geodesics reach the same position and heading?"
   outcome: "Three author manuscripts connect a Riccati bracket count, the geometry of folds and cusp seams, and an exact scalar inverse. The global incidence criterion retains five declared exclusions."
-  frontier: "Analytical control of excluded endpoint domains, effective asymptotic thresholds, and final article proof/novelty review."
+  limits: "Five endpoint-domain exclusions remain in the global incidence criterion; the displayed numerical searches do not certify arbitrary fibers."
   grew_from: geometry-of-seeing
   code: research/se2/
   overview: /mathematics/2026/10/07/se2-geodesics-research-program/
@@ -262,7 +262,7 @@
   status: active
   question: "Can shared infrared, variability and molecular representations improve embedded-protostar candidate ranking over strong physical baselines at equal review cost?"
   outcome: "First retrospective ranking comparison: embedding 14/27 chemistry positives, nonlinear baseline 15/27, at equal 18 reviews; no gain demonstrated. All 19,328 sources and 19,066 unknown proxies retained. Temporal diagnosis: only 3/27 positive references have query-level cadence, below the frozen 14/27 gate; identity remains unresolved. Native GLIMPSE: one known source aligns with 21/21 visit medians, but 0/3 passes the strict zero-flag gate; physical stage unknown. The same counterparts lack robust necessary red-colour support; full four-band classification lacks photometry. No confirmed birth or validated physical detector; the earlier 333/800 occurrence gate remains failed."
-  frontier: "Establish source ownership, complementary positive-case coverage and independent physical truth under a new prospective evidence protocol; zero qualifying positives have the registered temporal view. Preserve all failed gates."
+  limits: "Source ownership and physical truth remain unresolved. No qualifying positive has the registered temporal view; no stellar birth or physical detector is validated."
   code: research/starbirth/
   verdicts:
     - { h: "Counterparts", v: confirmed, label: "catalogue association, not physical membership" }
@@ -272,7 +272,7 @@
     - { h: "Multiview ranking", v: refuted, label: "frozen retrospective benefit gate failed; no physical validation" }
   posts:
     - part: 1
-      title: "Hidden protostars: a research program"
+      title: "Hidden Protostars: Failed Gates and Unresolved Counterparts"
       url: /astrophysics/2026/10/11/hidden-protostars-research-program/
       status: published
     - part: 2
@@ -290,13 +290,14 @@
   subtitle: "A typed, multiscale microscope for Lean proofs: whole-proof topology, recursive subarguments, and faithfully sourced mathematical explanations."
   status: active
   question: "Can the geometric structure of a formally checked proof reveal its main argument without requiring the reader to inspect every inference?"
-  outcome: "Initial validated instrument: 7,288 elaborated Lean expression occurrences represented as an interactive structural graph. Mathematical core-idea extraction is still human-annotated, not automated."
-  frontier: "Export transitive lemma certificates, implement certified module boundaries, and measure whether graphical navigation actually improves comprehension."
+  outcome: "Complete compiled inventories cover 739 and 1,359 declarations in two Lean corpora. The working graph shares 1,277,896 nodes across 670,018,056 expanded occurrences. Article correspondence is partial; mathematical interpretation remains human-authored."
+  limits: "Five article statements have partial counterparts and four remain unformalized. Automatic explanation and reader benefit are unmeasured."
   code: research/proof-atlas/
   overview: /projects/proof-atlas/
   verdicts:
     - { h: "Structure", v: confirmed, label: "7,288 occurrences extracted and linked" }
-    - { h: "Navigation", v: confirmed, label: "interactive whole-proof graph and recursive drill-down" }
+    - { h: "Corpus", v: confirmed, label: "all owned compiled types and available bodies in two snapshots" }
+    - { h: "Article", v: partial, label: "five partial statements; four unformalized" }
     - { h: "Meaning", v: pending, label: "automatic semantic compression unverified" }
     - { h: "Learning", v: pending, label: "reader benefit not yet measured" }
   posts:

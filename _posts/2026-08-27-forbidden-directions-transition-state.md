@@ -1,5 +1,6 @@
 ---
 layout: distill
+last_modified_at: 2026-10-13
 title: "The Transition State: Reading a Null Collision from One Point"
 subtitle: >
   Magnetic nulls are born and destroyed in pairs, and the instant of birth passes through a
@@ -332,10 +333,7 @@ $w_4 \to 4$ plateau at the collision.
     vector $Q = 5$ — a generic point, not even a null — and neither $\pm16$-px ($\approx\pm 37$ Mm) shifted
     window reproduces it. The pair was never merging; the finder was losing a marginal
     null. (Counts here are Newton-finder censuses — dense seeding, dedup — not
-    exhaustive cell censuses; the Haynes–Parnell-grade upgrade is specified in the G1
-    charter — <code>docs/PROGRAM-G1-solar-gold-standard.md</code>, the chartered,
-    not-yet-run gold-standard solar pipeline: vector-magnetogram boundary data,
-    non-periodic extrapolation, window ensembles, exhaustive cell census.) Pipeline: <code>scripts/run_s5_solar_fold.py</code> +
+    exhaustive cell censuses; no Haynes–Parnell cell census was performed.) Pipeline: <code>scripts/run_s5_solar_fold.py</code> +
     <code>scripts/run_s5b_pair.py</code>; census and blend in
     <code>artifacts/s5_solar_fold.json</code>, <code>s5b_pair.json</code>.
   </figcaption>
@@ -481,8 +479,7 @@ nulls are *dynamical* creatures of the reconnecting current sheet, which is exac
 why the in-situ missions hunt them during events rather than in quiet averages — and
 it upgrades the honest reading of the two figures below: they are anatomy of spiral
 and radial null structure in a realistically shaped, genuinely non-force-free field —
-not spacecraft-confirmed standing nulls of the magnetosphere. The MMS cross-match
-stays on the books.
+not spacecraft-confirmed standing nulls of the magnetosphere. No in-situ null cross-match validates this census.
 
 </div><!-- /.l-body -->
 
@@ -524,8 +521,7 @@ stays on the books.
     plasma-sheet flanks. Honest caveats: these are nulls of an <em>empirical model</em>
     fitted to data — not directly measured zeros — the population sits where the model's
     current closure is least constrained, and no dayside cusp nulls converge in T96's
-    soft magnetopause. Cross-matching against in-situ Cluster/MMS null catalogues is the
-    recorded next step.
+    soft magnetopause. No in-situ Cluster/MMS comparison was performed.
   </figcaption>
 </figure>
 
@@ -564,13 +560,6 @@ stays on the books.
 </figure>
 
 <div class="l-body" markdown="1">
-
-And the worlds beyond, honestly scoped: planetary *internal* fields (Jupiter's included —
-Part 8 hunts its envelope and finds the polar patch dome-covered) are vacuum fields —
-curl-free, so the theorem allows only radial nulls there; magnetars have no observed
-field *maps* to detect anything in; and black-hole magnetospheres are
-general-relativistic objects whose flux lift must first be rebuilt on curved spacetime.
-That last one is a genuine frontier, not an afternoon.
 
 ## The hunt at Earth: stability, and the wall the collider maps
 
