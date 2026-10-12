@@ -21,7 +21,7 @@ description: >
 ---
 
 <link rel="stylesheet" href="/public/css/starbirth-program.css?v=20261011">
-<link rel="stylesheet" href="/public/css/starbirth-ranking.css?v=20261012-2">
+<link rel="stylesheet" href="/public/css/starbirth-ranking.css?v=20261012-3">
 
 <div class="l-body sb-program sb-ranking" markdown="1">
 
@@ -31,7 +31,7 @@ A representation can learn common patterns across surveys. The useful test is wh
 
 That result has a sharper limitation: **none of the 27 qualifying chemistry-positive cases has the registered temporal input view**. The learning procedure can handle a missing observation, but it cannot supply the absent observation. [Verified result](/public/data/starbirth/missing-view/results.md).
 
-<nav class="sb-jump" aria-label="On this page"><a href="#equal-cost">The comparison</a><a href="#learning">What learned without labels</a><a href="#coverage">The coverage gap</a><a href="#temporal-diagnosis">Why the temporal view is missing</a><a href="#unknowns">The unknown denominator</a><a href="#next-evidence">What would change the conclusion</a><a href="#evidence">Exact evidence</a></nav>
+<nav class="sb-jump" aria-label="On this page"><a href="#equal-cost">The comparison</a><a href="#learning">What learned without labels</a><a href="#coverage">The coverage gap</a><a href="#temporal-diagnosis">Why the temporal view is missing</a><a href="#native-counterparts">Three native counterpart cases</a><a href="#unknowns">The unknown denominator</a><a href="#next-evidence">What would change the conclusion</a><a href="#evidence">Exact evidence</a></nav>
 
 <h2 id="equal-cost">The same eighteen reviews</h2>
 
@@ -103,6 +103,71 @@ Across all 19,328 clumps, **3,013** have query-level cadence and **761** have th
 The three consumed support cases are `HIGALBM330.8814-0.3656`, `HIGALBM351.2258+0.6937` and `HIGALBM353.4272-0.3734`. They are **evidence cases, not discoveries**: emitter identity and full reliability remain unresolved. Download [all 1,072 raw query rows for the 27 positives, failures included](/public/data/starbirth/temporal-missingness/positive-raw-evidence.csv.gz) and [every parent identity and failure path](/public/data/starbirth/temporal-missingness/sources.csv.gz).
 
 The independent checker recomputed every field with a different geometry and cadence implementation. The original schema-contract failure and a separately frozen lossless correction remain visible. That correction changed no scientific rule. [Protocol and full packet](/public/data/starbirth/temporal-missingness/README.md), [independent verification](/public/data/starbirth/temporal-missingness/starbirth-tmd-verification.json), [source hashes](/public/data/starbirth/temporal-missingness/source-inventory.csv). The packet binds research revision `3332eb8530fafcf442d191f96efe5149ca989ac8`. This unit stops here: there is no automatic model sweep, weaker matching rule or acquisition.
+
+<h2 id="native-counterparts">One tight infrared alignment, three unresolved physical cases</h2>
+
+**New cross-survey evidence.** A separately registered native GLIMPSE catalogue inspection asked whether the three query-supported positive references have a unique, isolated infrared counterpart under a frozen geometric and quality rule. **Zero of three passes every condition.** Yet one existing Spitzer source agrees closely with all **21 / 21** supported query-visit medians. The failed conservative test and positive positional evidence answer different questions; neither establishes a protostar.
+
+<div class="sb-status"><strong>What is interesting.</strong> For <code>HIGALBM330.8814-0.3656</code>, the known record <code>SSTGLMC G330.8829-00.3661</code> is only <b>0.168–0.336 arcseconds</b> from those 21 visit medians, but <b>5.719 arcseconds</b> from the dust-clump centre. It sits outside the original 3-arcsecond counterpart search. This supports a missed-centre-association explanation for this case, while emitter identity, clump membership and physical stage remain unknown.</div>
+
+The frozen test required at least 90% of supported visit medians within two arcseconds of one qualified Catalog record, at least three visits spanning a year, a unique reciprocal Archive alias and no qualifying geometric competitor. It also required signal-to-noise ≥5, at least two detections, finite positive coordinate errors ≤1 arcsecond, a clear close-source flag and **an all-zero 4.5-micron quality flag**. No rule was changed after readout. [Exact frozen protocol](/public/data/starbirth/native-glimpse/protocol.md).
+
+That last requirement matters. The first record's flag is **1536**, or one-based bits **10 and 11**: positive/negative PSF-photometry adjustments. IRSA explains that such adjustments can increase photometric uncertainty without compromising source reliability. The conservative zero-flag rule still rejects it; rejection does **not** demonstrate a false detection or physical absence. Future protocols should distinguish instrument corrections from fatal problems before freezing a gate. We have applied no post-read exemption. [Official GLIMPSE flag definitions](https://irsa.ipac.caltech.edu/data/SPITZER/GLIMPSE/gator_docs/GLIMPSE_colDescriptions.html), [prospective flag-policy lesson](/public/data/starbirth/native-glimpse/flag-policy.md).
+
+<h3>Inspect the three evidence cases</h3>
+
+These are consumed chemistry-positive references selected before the native readout. Each card keeps the historical system ranking separate from catalogue statements and unresolved physical interpretation. The named counterpart is the best geometric coverage record, **not an admitted candidate under a replacement rule**.
+
+<details class="sb-native-card" open markdown="1">
+<summary>HIGALBM330.8814-0.3656 · 21 / 21 visits align</summary>
+
+**Known positional record:** `SSTGLMC G330.8829-00.3661`. Clump-centre separation **5.719 arcseconds**. All 21 visits align; nonzero PSF-photometry adjustment flags fail the frozen rule.
+
+**Our historical system:** embedding rank score **0.956487** (not a probability). All four frozen methods already selected this clump at the original **982-review** all-requested budget. The new GLIMPSE data were not model inputs; no rank or model was recomputed.
+
+**Catalogue evidence:** Hi-GAL labels the clump catalogue-prestellar. The consumed MALT90 proxy record is `AG1532`, with tracer flags `Y|N|Y|Y` in native field order `DHC3N`, `DHNCO404`, `DCH3CN` and `DSIO`. Those detections support molecular activity, not a physical class decision. GLIMPSE supplies a previously catalogued point-source record; it supplies no consensus youth or clump-membership classification.
+
+**Assessment remains unknown:** single-emitter ownership, physical membership, evolutionary stage and temporal birth. This is not a newly discovered star or an independent validation case.
+
+[Download all three complete assessment cards, original scores and every native alternative](/public/data/starbirth/native-glimpse/starbirth-ng-evidence-cards.json).
+
+</details>
+
+<details class="sb-native-card" markdown="1">
+<summary>HIGALBM351.2258+0.6937 · 14 / 19 visits align</summary>
+
+**Known positional record:** `SSTGLMC G351.2258+00.6940`. Clump-centre separation **1.780 arcseconds**. Only 14 of 19 visits align; the frozen coverage requirement is 18. Quality flag 1024 is also nonzero.
+
+**Our historical system:** embedding rank score **0.695941** (not a probability). All four frozen methods already selected this clump at the original **982-review** all-requested budget. The new GLIMPSE data were not model inputs; no rank or model was recomputed.
+
+**Catalogue evidence:** Hi-GAL labels the clump catalogue-prestellar. The consumed MALT90 proxy record is `AG3005`, with tracer flags `Y|N|N|N` in native field order `DHC3N`, `DHNCO404`, `DCH3CN` and `DSIO`. Those detections support molecular activity, not a physical class decision. GLIMPSE supplies a previously catalogued point-source record; it supplies no consensus youth or clump-membership classification.
+
+**Assessment remains unknown:** single-emitter ownership, physical membership, evolutionary stage and temporal birth. This is not a newly discovered star or an independent validation case.
+
+[Download all three complete assessment cards, original scores and every native alternative](/public/data/starbirth/native-glimpse/starbirth-ng-evidence-cards.json).
+
+</details>
+
+<details class="sb-native-card" markdown="1">
+<summary>HIGALBM353.4272-0.3734 · 4 / 6 visits align</summary>
+
+**Known positional record:** `SSTGLMC G353.4273-00.3723`. Clump-centre separation **3.910 arcseconds**. Only 4 of 6 visits align; all six are required. Quality flag 512 is also nonzero. The separate zero-flag Catalog record matches 0/6 visits.
+
+**Our historical system:** embedding rank score **1.335058** (not a probability). All four frozen methods already selected this clump at the original **982-review** all-requested budget. The new GLIMPSE data were not model inputs; no rank or model was recomputed.
+
+**Catalogue evidence:** Hi-GAL labels the clump catalogue-prestellar. The consumed MALT90 proxy record is `AG3227`, with tracer flags `Y|N|N|N` in native field order `DHC3N`, `DHNCO404`, `DCH3CN` and `DSIO`. Those detections support molecular activity, not a physical class decision. GLIMPSE supplies a previously catalogued point-source record; it supplies no consensus youth or clump-membership classification.
+
+**Assessment remains unknown:** single-emitter ownership, physical membership, evolutionary stage and temporal birth. This is not a newly discovered star or an independent validation case.
+
+[Download all three complete assessment cards, original scores and every native alternative](/public/data/starbirth/native-glimpse/starbirth-ng-evidence-cards.json).
+
+</details>
+
+The other two best records match **14 / 19** and **4 / 6** supported visit medians. A different zero-flag record matches **0 / 6** in the third field. The packet retains **six Catalog records and six reciprocal Archive aliases**, not twelve independent objects. Both products come from shared observations. Missing WISE positional errors and exposure/source identifiers, blending, epoch differences and proper motion limit interpretation; Spitzer errors alone cannot turn this into a calibrated association probability. No native-image PSF ownership test was performed.
+
+The six small original catalogue responses total **4,696 bytes**. Acquisition and independent recomputation belonged to the separately frozen research unit, not this blog upkeep. Publication exported committed bytes offline; it ran no experiment, fit, observation acquisition or threshold adjustment. All **19,328** parent identities and **19,066** unknown proxy states remain unchanged.
+
+Download [the verified report](/public/data/starbirth/native-glimpse/results.md), [all native alternatives](/public/data/starbirth/native-glimpse/sources.csv), [visit medians](/public/data/starbirth/native-glimpse/visits.csv), [180 visit/source edges](/public/data/starbirth/native-glimpse/visit-source-edges.csv), [independent verification](/public/data/starbirth/native-glimpse/starbirth-ng-verification.json), [final checkpoint](/public/data/starbirth/native-glimpse/starbirth-ng-checkpoint.json) and [packet guide with complete source hashes](/public/data/starbirth/native-glimpse/README.md). The source revision is `4e4a9b13c199a7d035a3728d7390d754d9773e89`; its creation-time unpublished flags remain historical, with live publication checked separately. **No new star, confirmed birth or validated physical detector follows from this result.**
 
 <h2 id="unknowns">The full catalogue keeps the difficult denominator</h2>
 

@@ -132,6 +132,8 @@ All **19,328** requested source identities remain in the ranking ledger, includi
 
 A separately frozen diagnosis now finds query-level cadence in only **3 / 27** of those positives, below its **14-of-27** majority gate. Eleven have no cached rows, nine no screened query rows and four insufficient cadence; the remaining three still lack emitter identity. The anchor is only part of the evidence gap. [Read the exact diagnosis](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#temporal-diagnosis). This is no repair of the ranking result and no physical detector validation.
 
+A native GLIMPSE check now adds one concrete positional lead: an already catalogued source matches **21 / 21** supported visit medians within **0.168–0.336 arcseconds**, despite lying **5.719 arcseconds** from the clump centre. Its PSF-photometry adjustment flags fail the frozen all-zero rule; **zero of three** cases passes every criterion. This is useful source-association evidence with unknown physical stage, not a repaired ranking result or a birth. [Inspect all three source assessment cards and the failed gate](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#native-counterparts).
+
 <h3 id="historical-week">The original control study: frozen and stopped</h3>
 
 <blockquote class="sb-goal">Determine whether nearby Hi-GAL clumps labelled prestellar and undetected at 70 μm contain an excess of compact mid-infrared sources compared with sightlines matched for dust column, sensitivity and crowding.</blockquote>
