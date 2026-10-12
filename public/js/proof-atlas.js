@@ -469,6 +469,7 @@
   }
   function selectDeclaration(id){
     const n=namedById.get(id);if(!n)return;
+    resetSelectionScroll();
     state.namedSelected=id;
     $('pa-inspector-fields').replaceChildren();
     $('pa-inspector-actions').replaceChildren();
@@ -489,27 +490,111 @@
     $('pa-canvas-status').textContent=n.name+' · '+n.kind;
     draw();
   }
+  function describeTerminal(i){
+    const k=kind(i),dep=constantAt.get(i);
+    if(k==='const'){
+      if(dep&&dep.name!=='Kernel/library declaration'){
+        const x=dep.name.split('.').pop(),named=namedById.get(x);
+        return {title:dep.name,type:named?.kind==='theorem'?'Named theorem reference':
+          named?.kind==='def'?'Named definition reference':'Named constant reference',
+          explanation:named?.summary||'A Lean constant reference: whether it represents a lemma depends on its declaration.'};
+      }
+      return {title:'Anonymized constant',type:'Lean constant',
+        explanation:'The declaration name was removed from this public dataset; this terminal syntax node cannot be classified as a lemma.'};
+    }
+    if(k==='bvar'){
+      const binder=forwardBinders[i];
+      return {title:'Bound variable',type:'Lean bound-variable occurrence',
+        explanation:binder>=0?'This leaf points to its enclosing binder at expression #'+binder+'.':'A variable belonging to an enclosing scope.'};
+    }
+    if(k==='lit')return {title:'Literal',type:'Lean literal',
+      explanation:'A literal value (for example a number), with no expression children.'};
+    return {title:'Terminal expression',type:'Lean '+k,
+      explanation:'No subexpressions. A syntax leaf is not automatically an independent theorem.'};
+  }
+  function firstTerminalOccurrences(i,limit=TERMINAL_PREVIEW_LIMIT){
+    const result=[];
+    if(subtreeValid) {
+      for(let j=i;j<i+D.size[i]&&result.length<limit;j++){
+        if(!children[j].length)result.push(j);
+      }
+    }else{
+      const stack=[i];
+      while(stack.length&&result.length<limit){
+        const j=stack.pop();
+        if(children[j].length)stack.push(...children[j].slice().reverse());
+        else result.push(j);
+      }
+    }
+    return result;
+  }
+  function addTerminalExplorer(i){
+    const total=terminalCounts[i],preview=firstTerminalOccurrences(i);
+    const h=document.createElement('div');
+    h.className='pa-statement-heading';h.textContent='TERMINAL LEAVES · '+fmt(total);
+    $('pa-inspector-actions').appendChild(h);
+    const note=document.createElement('p');note.className='pa-terminal-note';
+    note.textContent='Terminal Lean syntax: const, bvar, lit, etc. Only a named declaration reference can be identified as a lemma.';
+    $('pa-inspector-actions').appendChild(note);
+    const list=document.createElement('div');list.className='pa-terminal-list';
+    for(const j of preview){
+      const desc=describeTerminal(j),b=document.createElement('button');
+      b.type='button';b.textContent='#'+j+' · '+desc.title;
+      b.addEventListener('click',()=>navigateToExpression(j));
+      list.appendChild(b);
+    }
+    $('pa-inspector-actions').appendChild(list);
+    if(total>preview.length){
+      const more=document.createElement('p');more.className='pa-terminal-note';
+      more.textContent='First '+preview.length+' of '+fmt(total)+' leaves. Select a smaller subtree for detail.';
+      $('pa-inspector-actions').appendChild(more);
+    }
+  }
   function selectExpr(i){
-    if(i<0||i>=N)return;
-    state.selected=i;$('pa-inspector-fields').replaceChildren();$('pa-inspector-actions').replaceChildren();
-    $('pa-inspector-heading').textContent='Expression #'+i;
-    $('pa-inspector-summary').textContent='A single elaborated Lean expression occurrence; this public projection deliberately omits its original payload and source text.';
-    field('Lean expression kind',kind(i));field('Depth in expression forest',depth[i]);field('Nodes in subtree',fmt(D.size[i]));field('Direct child expressions',children[i].length);
-    if(D.parent[i]>=0)field('Parent occurrence','#'+D.parent[i]);
-    const bound=D.binder.find(pair=>pair[0]===i);
-    if(bound)field('Bound by expression','#'+bound[1]);
-    // This anonymized expression projection does not have full type/payloads.
-    // But we can still show named constants referenced inside its subtree.
-    const refs=D.deps.filter(d=>d.name!=='Kernel/library declaration'
-      &&d.uses.some(j=>j>=i&&j<i+D.size[i]))
-      .slice(0,8).map(d=>d.name);
-    if(refs.length)field('Named constants in subtree',refs.join('; '));
-    action('Open this subtree',()=>{state.root=i;state.open.add(i);updateMode('recursive');});
-    if(children[i].length)action('Show first child',()=>selectExpr(children[i][0]));
-    if(D.parent[i]>=0)action('Go to parent',()=>selectExpr(D.parent[i]));
-    $('pa-canvas-status').textContent='Selected expression #'+i;draw();
+    if(!Number.isInteger(i)||i<0||i>=N)return;
+    resetSelectionScroll();
+    state.selected=i;state.selectionScope='subtree';
+    const isTerminal=children[i].length===0,leaf=isTerminal?describeTerminal(i):null;
+    $('pa-inspector-fields').replaceChildren();$('pa-inspector-actions').replaceChildren();
+    $('pa-inspector-heading').textContent=isTerminal?'#'+i+' · '+leaf.title:'Expression #'+i;
+    $('pa-inspector-summary').textContent=isTerminal?leaf.explanation:
+      'This subexpression has '+fmt(terminalCounts[i])+' terminal syntax leaves. Its highlighted descendant region is exact in the CoreGIR occurrence tree—not a set of independent lemmas.';
+    field('Lean expression kind',kind(i));
+    field('Syntactic role',isTerminal?leaf.type:'Internal expression');
+    field('Depth from root',depth[i]);
+    field('Subtree occurrences',fmt(D.size[i]));
+    field('Terminal leaves',fmt(terminalCounts[i]));
+    if(D.parent[i]>=0)field('Parent expression','#'+D.parent[i]);
+    if(forwardBinders[i]>=0)field('Bound by expression','#'+forwardBinders[i]);
+    if(isTerminal){
+      field('Descendants','0 · ancestor path highlighted');
+      action('Follow this leaf to its parent',()=>{
+        if(D.parent[i]>=0)navigateToExpression(D.parent[i]);
+      });
+    }else{
+      action('Highlight all descendants + leaves',()=>{state.selectionScope='subtree';draw();});
+      action('Highlight path to root',()=>{state.selectionScope='lineage';draw();});
+    }
+    const refs=D.deps.filter(dep=>dep.name!=='Kernel/library declaration' &&
+      dep.uses.some(j=>j>=i&&j<i+D.size[i])).slice(0,8);
+    if(refs.length){
+      const h=document.createElement('div');h.className='pa-statement-heading';
+      h.textContent='NAMED DECLARATIONS IN SUBTREE';
+      $('pa-inspector-actions').appendChild(h);
+      for(const dep of refs){
+        const j=dep.uses.find(x=>x>=i&&x<i+D.size[i]);
+        action(dep.name+' → #'+j,()=>navigateToExpression(j));
+      }
+    }
+    addTerminalExplorer(i);
+    action('Open as recursive subexpression',()=>{state.root=i;state.open.add(i);updateMode('recursive');});
+    if(D.parent[i]>=0)action('Go to parent',()=>navigateToExpression(D.parent[i]));
+    $('pa-canvas-status').textContent=isTerminal?'Terminal #'+i+' · ancestry highlighted':
+      'Subtree #'+i+' · '+fmt(terminalCounts[i])+' leaves';
+    draw();
   }
   function selectDep(i){
+    resetSelectionScroll();
     const d=D.deps[i];$('pa-inspector-fields').replaceChildren();$('pa-inspector-actions').replaceChildren();
     $('pa-inspector-heading').textContent=depName(d,i);
     $('pa-inspector-summary').textContent='A referenced declaration in the theorem type or proof value. Marker size encodes use frequency.';
@@ -519,6 +604,7 @@
   }
   function selectIdea(id){
     const it=reasons.find(x=>x.id===id);if(!it)return;
+    resetSelectionScroll();
     $('pa-inspector-fields').replaceChildren();$('pa-inspector-actions').replaceChildren();
     $('pa-inspector-heading').textContent=it.title;
     $('pa-inspector-summary').textContent=it.note;
