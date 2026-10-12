@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/Users/igor/Work/me/starbirth-search/research/verify_multisurvey_eligibility.py", line 9, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
