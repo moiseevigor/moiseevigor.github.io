@@ -568,9 +568,14 @@
     if(forwardBinders[i]>=0)field('Bound by expression','#'+forwardBinders[i]);
     if(isTerminal){
       field('Descendants','0 · ancestor path highlighted');
-      action('Follow this leaf to its parent',()=>{
-        if(D.parent[i]>=0)navigateToExpression(D.parent[i]);
-      });
+      const dep=constantAt.get(i);
+      const localName=dep?.name.startsWith('CrossingData.')?dep.name.split('.').pop():null;
+      if(localName&&namedById.has(localName)){
+        action('Read '+localName+' in the theorem map',()=>{
+          updateMode('map');selectDeclaration(localName);
+        });
+      }
+      if(D.parent[i]>=0)action('Follow this leaf to its parent',()=>navigateToExpression(D.parent[i]));
     }else{
       action('Highlight all descendants + leaves',()=>{state.selectionScope='subtree';draw();});
       action('Highlight path to root',()=>{state.selectionScope='lineage';draw();});
