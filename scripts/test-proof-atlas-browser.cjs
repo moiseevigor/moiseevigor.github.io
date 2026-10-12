@@ -99,6 +99,10 @@ async function run(){
     await page.waitForTimeout(250);
     // Subtree selection — all descendant leaves and a bounded, navigable
     // list must appear, while hover never alters selection-panel scrolling.
+    // The selection pane needs its own scrollbar only when viewport space
+    // is actually constrained. Test at laptop height, not a tall desktop.
+    await page.setViewportSize({width:1580,height:620});
+    await page.waitForTimeout(250);
     await page.locator('#pa-search').fill('203');
     await page.locator('#pa-find').click();
     check((await page.locator('#pa-inspector-heading').textContent()).includes('203'),'proof root selection');
@@ -112,14 +116,18 @@ async function run(){
     await page.locator('.pa-terminal-pager button').first().click();
     await page.locator('.pa-inspector-selection').evaluate(el=>{el.scrollTop=Math.min(170,el.scrollHeight-el.clientHeight)});
     const scrollBefore=await page.locator('.pa-inspector-selection').evaluate(el=>el.scrollTop);
-    check(scrollBefore>15,'selection pane has no independent scroll region');
+    check(scrollBefore>15,'selection pane did not scroll at constrained height: '+JSON.stringify(
+      await page.locator('.pa-inspector-selection').evaluate(el=>({
+        scroll:el.scrollTop,height:el.clientHeight,contents:el.scrollHeight
+      }))));
     const rootBox=await rootPoint(page);
+    const offNow=await page.locator('#pa-canvas').boundingBox();
     await page.mouse.move(rootBox.x,rootBox.y);
     await page.waitForTimeout(260);
     const scrollAfter=await page.locator('.pa-inspector-selection').evaluate(el=>el.scrollTop);
     check(Math.abs(scrollAfter-scrollBefore)<2,'hover shifted the right inspector scroll '+scrollBefore+' -> '+scrollAfter);
     const dock=await page.locator('.pa-hover-details').boundingBox();
-    await page.mouse.move(off.x+8,off.y+8);
+    await page.mouse.move(offNow.x+8,offNow.y+8);
     await page.waitForTimeout(180);
     const dockAfter=await page.locator('.pa-hover-details').boundingBox();
     check(Math.abs(dock.height-dockAfter.height)<2,'hover dock shifted height');
