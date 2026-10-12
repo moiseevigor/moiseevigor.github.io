@@ -6,7 +6,7 @@ permalink: /projects/proof-atlas/
 page_class: proof-atlas-page
 description: "Explore a real 7,288-expression Lean proof as an interactive graph, then compare its syntactic shape with its mathematical explanation."
 ---
-<link rel="stylesheet" href="/public/css/proof-atlas.css?v=5">
+<link rel="stylesheet" href="/public/css/proof-atlas.css?v=6">
 <main class="pa-page" id="proof-atlas">
   <section class="pa-hero" aria-labelledby="pa-title">
     <div class="pa-eyebrow"><span class="pa-orbit" aria-hidden="true"></span> Research program / Proof Atlas · 2026</div>
@@ -62,7 +62,7 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
       <div><div class="pa-section-mark">02 / Interactive research instrument</div><h2 id="pa-explorer-heading">Inside a real Lean proof</h2></div>
       <p>A source-traced map of the 26 declarations in <code>Crossing.lean</code>, with theorem statements and supporting references. Switch to the kernel syntax lens for the full 7,288-expression projection.</p>
     </div>
-    <div class="pa-app" aria-label="Interactive proof graph microscope">
+    <div class="pa-app pa-reader-open" aria-label="Interactive proof graph microscope">
       <aside class="pa-app-sidebar" aria-label="Visualization controls">
         <div class="pa-app-kicker">CHOOSE A LENS</div>
         <div class="pa-modes" role="group" aria-label="Graph representation">
@@ -85,8 +85,19 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
         <p class="pa-app-hint">Start with named theorems, or switch to Raw syntax: click an internal expression to illuminate its descendant leaves; click a terminal leaf to trace its ancestry. The right inspector scrolls independently. Drag to pan; wheel over the graph to zoom.</p>
       </aside>
       <div class="pa-stage">
-        <div class="pa-stage-head"><div><strong id="pa-view-title">Named proof map</strong><span id="pa-view-subtitle">Lean source statements · traced direct references</span></div><div class="pa-stage-tools"><button type="button" id="pa-focus" aria-pressed="false" title="Hide side panels to enlarge the graph">Focus graph</button><button type="button" id="pa-fullscreen" title="Enter browser fullscreen (Esc to exit)">⛶ Fullscreen</button><a href="/projects/proof-atlas/app/" class="pa-open-app" title="Open Proof Atlas as a dedicated full-window application">Open full app ↗</a></div></div>
-        <div class="pa-canvas-frame"><canvas id="pa-canvas" tabindex="0" aria-label="Interactive Lean proof graph showing expression nodes and structural edges">Your browser does not support Canvas.</canvas></div>
+        <div class="pa-stage-head"><div><strong id="pa-view-title">Named proof map</strong><span id="pa-view-subtitle">Lean source statements · traced direct references</span></div><div class="pa-stage-tools"><button type="button" id="pa-reader-toggle" class="pa-reader-toggle" aria-expanded="true" aria-controls="pa-reader">Reader ⟩</button><button type="button" id="pa-focus" aria-pressed="false" title="Hide side panels to enlarge the graph">Focus graph</button><button type="button" id="pa-fullscreen" title="Enter browser fullscreen (Esc to exit)">⛶ Fullscreen</button><a href="/projects/proof-atlas/app/" class="pa-open-app" title="Open Proof Atlas as a dedicated full-window application">Open full app ↗</a></div></div>
+        <div class="pa-canvas-frame">
+          <aside id="pa-branch-hud" class="pa-branch-hud" aria-label="Selected subtree anatomy" hidden>
+            <span class="pa-branch-label">SELECTED STRUCTURE</span>
+            <strong id="pa-branch-title">Proof expression</strong>
+            <div id="pa-branch-stats" class="pa-branch-stats"></div>
+            <p id="pa-branch-note"></p>
+            <div class="pa-branch-actions">
+              <button type="button" id="pa-branch-desc">Descendants</button>
+              <button type="button" id="pa-branch-lineage">Ancestors</button>
+            </div>
+          </aside>
+          <canvas id="pa-canvas" tabindex="0" aria-label="Interactive Lean proof graph showing expression nodes and structural edges">Your browser does not support Canvas.</canvas></div>
         <div class="pa-syntax-legend" id="pa-syntax-legend" hidden aria-label="Lean expression type legend">
           <span><i class="pa-dot pa-dot-app"></i> app (application)</span>
           <span><i class="pa-dot pa-dot-const"></i> const (declaration)</span>
@@ -105,6 +116,21 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
         <div id="pa-inspector-actions"></div>
         <div class="pa-inspector-note"><strong>What this does not mean</strong><p>Distance, color, and cluster layout describe a visualization. They are not invariants of a mathematical theorem, nor a measure of proof quality.</p></div>
       </aside>
+      <section class="pa-reader" id="pa-reader" aria-label="Proof reader">
+        <header class="pa-reader-head">
+          <div><span>PROOF ATLAS · READER</span><h3 id="pa-reader-title">Mathematical explanation</h3></div>
+          <button type="button" id="pa-reader-close" aria-label="Close proof reader" title="Close reader">×</button>
+        </header>
+        <div class="pa-reader-tabs" role="tablist" aria-label="Proof reader tabs">
+          <button type="button" class="active" data-pa-reader-tab="explain" role="tab" aria-selected="true">Explain</button>
+          <button type="button" data-pa-reader-tab="lean" role="tab" aria-selected="false">Lean</button>
+          <button type="button" data-pa-reader-tab="language" role="tab" aria-selected="false">Visual grammar · 12</button>
+        </div>
+        <div id="pa-reader-scroll" class="pa-reader-scroll" tabindex="0" role="region" aria-label="Selected proof explanation">
+          <div id="pa-reader-content"></div>
+        </div>
+        <footer class="pa-reader-footer"><span id="pa-reader-status">Formal structure and explanation are separate.</span><a href="/projects/proof-atlas/language/">All 12 rules ↗</a></footer>
+      </section>
     </div>
     <div class="pa-explorer-note"><span>↗</span><p><strong>Exact versus interpretive.</strong> Whole proof and recursion use observed CoreGIR syntax. The dependency view uses actual reference counts but anonymizes some names. The mathematical-idea view is a <em>human-authored interpretation</em> of two named supporting lemmas—not automatically inferred from graph topology.</p></div>
   </section>
@@ -144,4 +170,6 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
 </main>
 <script src="/public/data/proof-atlas/crossing-structure.js" defer></script>
 <script src="/public/data/proof-atlas/crossing-declarations.js" defer></script>
-<script src="/public/js/proof-atlas.js?v=9" defer></script>
+<script src="/public/data/proof-atlas/lean-expr-grammar.js" defer></script>
+<script src="/public/js/proof-atlas.js?v=10" defer></script>
+<script src="/public/js/proof-atlas-reader.js?v=1" defer></script>
