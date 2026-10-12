@@ -1,0 +1,44 @@
+---
+layout: default
+title: "The Visual Grammar of Lean"
+permalink: /projects/proof-atlas/language/
+description: "All 12 Lean.Expr constructors illustrated as typed diagrams, with examples and explicit limits of visual proof syntax."
+---
+<link rel="stylesheet" href="/public/css/proof-atlas.css?v=6">
+<main class="pa-page pa-language">
+  <header class="pa-language-hero">
+    <div class="pa-eyebrow">Proof Atlas · The core language</div>
+    <h1>Twelve ways to build<br><em>a Lean expression.</em></h1>
+    <p>What the kernel sees is not a paragraph of tactics. It is a typed expression built from twelve constructor forms. Here is the complete structural alphabet our CoreGIR exporter handles, each with an explicit visual interface, a Lean example, and its limits.</p>
+    <div class="pa-hero-actions"><a href="/projects/proof-atlas/app/" class="pa-button pa-primary">Open the proof microscope ↗</a><a href="/mathematics/2026/10/11/proof-atlas-research-program/" class="pa-button pa-secondary">Read the research basis ↗</a></div>
+  </header>
+  <section class="pa-language-bridge">
+    <h2>Three different languages must not be confused</h2>
+    <div class="pa-language-levels">
+      <div><span>01 / AUTHOR</span><h3>Lean source</h3><p><code>theorem</code>, <code>def</code>, <code>by</code>, pattern matching, tactics, notation and macros. Rich, expandable syntax.</p></div>
+      <div><span>02 / ELABORATE</span><h3>Core expression</h3><p>Applications, binders, constants, projections, literals, metadata and references. Twelve constructors, formal scope.</p></div>
+      <div><span>03 / VERIFY</span><h3>Kernel</h3><p>Checks a term has its expected type in an environment. Drawings are explanatory views, not substitutes for checking.</p></div>
+    </div>
+  </section>
+  <section class="pa-language-gallery" aria-labelledby="pa-language-h">
+    <div class="pa-section-mark">The complete CoreGIR constructor vocabulary</div>
+    <h2 id="pa-language-h">Every node has a rule.</h2>
+    <p class="pa-language-intro">Select a form to explore its inputs, output, binding behavior and examples. The coloring indicates abstract syntax roles—not theorem truth values. Six forms were observed in the exported SE(2) benchmark; the other six are part of the universal exporter.</p>
+    <div id="pa-language-filters" class="pa-language-filters" role="group" aria-label="Filter Lean expression constructors">
+      <button type="button" data-filter="all" aria-pressed="true">All 12</button>
+      <button type="button" data-filter="observed" aria-pressed="false">Observed in benchmark</button>
+      <button type="button" data-filter="binder" aria-pressed="false">Binders</button>
+      <button type="button" data-filter="other" aria-pressed="false">Other constructors</button>
+    </div>
+    <div id="pa-language-grid" class="pa-language-grid" aria-live="polite">
+      <p>Loading the Lean expression visual grammar…</p>
+    </div>
+  </section>
+  <section class="pa-language-foot">
+    <h2>What this does—and doesn't—claim</h2>
+    <p>These diagrams provide a proposed visual grammar for the complete <strong>Lean.Expr constructor algebra</strong>. They do not yet constitute a certified translation of the entire Lean surface grammar, a tactic-language visualizer, or a proof-net calculus for every theorem. Terms still need typed boundaries, references and environments; scope cannot be inferred from mere visual proximity.</p>
+    <p>The [initial research benchmark](/projects/proof-atlas/) is a public anonymized structural projection of <code>CrossingData.crossing</code>. The [Lean.Expr reference](https://lean-lang.org/doc/api/Lean/Expr.html) and our exhaustive CoreGIR exporter define the scope of the twelve rules.</p>
+  </section>
+</main>
+<script src="/public/data/proof-atlas/lean-expr-grammar.js" defer></script>
+<script src="/public/js/proof-atlas-language.js?v=1" defer></script>
