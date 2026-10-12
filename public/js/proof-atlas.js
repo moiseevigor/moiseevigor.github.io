@@ -561,7 +561,7 @@
       }
       prev.disabled=page===0;next.disabled=page>=pages-1;
       pager.hidden=pages<2;
-      count.textContent=fmt(offset+1)+'–'+fmt(Math.min(offset+preview.length,total))+' / '+fmt(total);
+      count.textContent=fmt(offset+1)+'-'+fmt(Math.min(offset+preview.length,total))+' / '+fmt(total);
       list.scrollTop=0;
     }
     prev.addEventListener('click',()=>{if(page>0){page--;renderPage();}});
