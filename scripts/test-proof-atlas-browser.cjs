@@ -128,6 +128,23 @@ async function run(){
       'terminal leaf should show root lineage rather than non-existent descendants');
     check((await page.locator('.pa-terminal-list button').count())===1,'terminal expression should contain exactly one syntax leaf');
     await page.screenshot({path:path.join(captures,'selected-terminal-leaf.png')});
+    // A terminal constant can be a named theorem reference. It should
+    // bridge to the verified source-level theorem map—not be called a
+    // lemma merely because it is a syntax leaf.
+    await page.locator('#pa-search').fill('810');
+    await page.locator('#pa-find').click();
+    check((await page.locator('#pa-inspector-heading').textContent()).includes('CrossingData.exists_branch'),
+      'known theorem reference not identified as a named constant');
+    check((await page.locator('#pa-syntax-legend').isVisible()),
+      'Lean syntax legend should be visible in raw expression view');
+    await page.getByRole('button',{name:'Read exists_branch in the theorem map'}).click();
+    check((await page.locator('#pa-view-title').textContent()).includes('Named proof map'),
+      'named constant did not navigate to theorem map');
+    check((await page.locator('.pa-lean-statement').textContent()).includes('∃ p'),
+      'source-backed theorem statement not displayed');
+    check(!(await page.locator('#pa-syntax-legend').isVisible()),
+      'Lean syntax legend should be hidden outside low-level graph');
+
     await page.locator('[data-mode="deps"]').click();
     await page.waitForTimeout(110);
     check((await page.locator('#pa-stage-count').textContent()).includes('42'),'dependency mode failed');
