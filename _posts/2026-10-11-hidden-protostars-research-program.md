@@ -17,7 +17,7 @@ comments: false
 reference_style: bibliography
 description: >
   The physics of embedded star formation, a reviewed results ledger, and a
-  seven-day matched-control study of nearby Hi-GAL prestellar clumps.
+  multi-survey candidate-ranking program for nearby Hi-GAL prestellar clumps.
 ---
 
 <link rel="stylesheet" href="/public/css/starbirth-program.css?v=20261011">
@@ -25,9 +25,9 @@ description: >
 
 <div class="l-body sb-program" markdown="1">
 
-<div class="sb-status"><strong>Program updated · 11 October 2026.</strong> The measurement protocol is frozen. Verified profile matches support 939 of 1,000 clumps, but only 333 pass the conservative uncertainty gate, below the required 800. The primary comparison remains unmeasured. <a href="/astrophysics/2026/10/11/hidden-protostars-column-uncertainty/">Read the measured gates and source uncertainty audit.</a> No confirmed stellar birth or validated birth detector has been established.</div>
+<div class="sb-status"><strong>Program updated · 12 October 2026.</strong> The current goal is a multi-survey test of embedded-protostar candidate ranking. The new 19,328-clump ledger is a data-readiness audit, not detector validation. <a href="#multisurvey">Read the accepted plan and evidence limits.</a> The earlier matched-control study remains stopped. The measurement protocol is frozen. Verified profile matches support 939 of 1,000 clumps, but only 333 pass the conservative uncertainty gate, below the required 800. The primary comparison remains unmeasured. <a href="/astrophysics/2026/10/11/hidden-protostars-column-uncertainty/">Read the measured gates and source uncertainty audit.</a> No confirmed stellar birth or validated birth detector has been established.</div>
 
-Stars form inside clouds that hide the process from view. A patch of cold dust can look quiet while a compact object is already accreting material inside it. Our immediate question is therefore observational: **do apparently prestellar clumps contain more compact mid-infrared sources than comparable dusty sightlines?**
+Stars form inside clouds that hide the process from view. A patch of cold dust can look quiet while a compact object is already accreting material inside it. Our current question is observational and computational: **can infrared emission, variability and molecular evidence together rank embedded-protostar candidates better than simple physical features?** The earlier compact-source occurrence question remains unanswered after its frozen uncertainty gate failed.
 
 The eventual ambition is a detector of physical stellar births across large surveys. The next useful step is smaller: establish what the present data can distinguish before asking a machine-learning model to classify it.
 
@@ -53,7 +53,7 @@ This is already supported by targeted observations: Traficante and colleagues fo
 
 <h2 id="ledger">What survived the research review</h2>
 
-The following are **our historical measurements and checks**, reviewed through 8 October 2026. They are not results of the new matched-control study. Each row links to a compact source snapshot; the [evidence inventory](/public/data/starbirth/source-inventory.csv) records original paths, byte counts, hashes and the source revision.
+The following are **our historical measurements and checks**, reviewed through 8 October 2026. They are not results of the stopped matched-control study or the new multi-survey ranking program. Each row links to a compact source snapshot; the [evidence inventory](/public/data/starbirth/source-inventory.csv) records original paths, byte counts, hashes and the source revision.
 
 <div class="sb-ledger" role="region" aria-label="Reviewed findings" tabindex="0" markdown="1">
 
@@ -89,11 +89,46 @@ Dust can redden an unrelated background star. Crowding can blend neighbours into
 
 We need column-density evidence **at both positions**, not just the clump's catalogue surface density. PPMAP provides model-derived Hi-GAL column maps and corresponding uncertainties at 12-arcsecond resolution. Their dust-opacity and radiative-transfer assumptions remain relevant. MIPSGAL provides catalogue and completeness products useful for checking mid-infrared sensitivity. Column profiles have now been independently checked for the frozen sample, but uncertainty support failed and sensitivity/crowding suitability remains unestablished. [Current evidence](/astrophysics/2026/10/11/hidden-protostars-column-uncertainty/). [Marsh et al. (2017)](https://arxiv.org/abs/1707.03808), [IRSA MIPSGAL documentation](https://irsa.ipac.caltech.edu/data/SPITZER/MIPSGAL/).
 
-<h2 id="week">One week, one falsifiable question</h2>
+<h2 id="week">Current week: multiple views, one comparison</h2>
+
+<blockquote class="sb-goal">Test whether a shared representation of infrared emission, variability and molecular activity ranks candidate embedded protostars in nearby Hi-GAL catalogue-prestellar clumps better than strong physical-feature baselines, at the same review budget and in held-out sky regions.</blockquote>
+
+This goal was accepted on **12 October 2026**. Unsupervised learning can discover similarities across views without class labels; its advantage is a hypothesis to test. The result we seek is better candidate ranking, followed by source-specific assessment. It is not a claim that an embedding has detected a stellar birth. [Accepted program](/public/data/starbirth/multisurvey/program.md).
+
+<h3 id="multisurvey">First checkpoint: what the cached views actually support</h3>
+
+**Data readiness · not a detector result.** A separately registered offline audit retains all **19,328** nearby catalogue-prestellar clumps, including missing views and unknown truth. An independently implemented checker reconstructed every ledger row and verified its byte bindings. That is reproducibility of the inventory, not independent physical validation.
+
+| Retained record in the audited parent | Clumps | What it does not establish |
+|:--|--:|:--|
+| NEOWISE observation rows | **11,845** | Complete usable light curves or ownership of the emitter |
+| WISE counterpart coordinates | **1,231** | Physical association with the clump |
+| Both WISE coordinates and NEOWISE rows | **1,098** | Representative support for all requested clumps |
+| Previously consumed MALT90 check | **303** | Fresh or definitive physical protostar labels |
+| Previously consumed ALMAGAL check within this nearby parent | **52** | Birth truth from fragmentation |
+| Both consumed molecular/core checks | **22** | Independent labels merely because surveys differ |
+
+Requiring both retained WISE coordinates and NEOWISE rows would leave only **1,098 / 19,328 ≈ 5.7%** of this parent before quality and association checks. A complete-case model would change the population substantially. A useful method must handle missing views and report recovery for every requested object. Missing records are not verified physical non-detections.
+
+The reviewed core already draws on Hi-GAL, AllWISE, NEOWISE, GLIMPSE, MIPSGAL, ATLASGAL, MMB, MALT90 and ALMAGAL. This is a count of nine main data streams, not nine independent sensors or full joint coverage. SPICY derives from Spitzer and PPMAP from Herschel. Evidence used as a model input cannot also serve as its allegedly independent evaluation truth without an explicitly separated design.
+
+**No fresh physical-truth cohort was supplied in this bounded audit. No model was fitted.** Existing catalogue-stage checks, chemistry and fragmentation outcomes have already been inspected; changing their spatial split does not make them untouched validation. Cutout file presence also does not establish calibrated fluxes, native resolution or noise. Full uncertainty and source-association contracts remain necessary.
+
+Download the [complete exact-ID ledger (gzip CSV)](/public/data/starbirth/multisurvey/sources.csv.gz), [verified report](/public/data/starbirth/multisurvey/results.md), [independent verification](/public/data/starbirth/multisurvey/starbirth-mv-verification.json) and [source inventory](/public/data/starbirth/multisurvey/source-inventory.csv). These exact source bytes come from research revision `a1c389e90dde1aeb7539bc314ffa21963f551dbe`. The original failed checker stopped before reading data because its pandas dependency was absent; its attempt and the separately frozen dependency-free repair are preserved in the evidence packet. [Packet guide](/public/data/starbirth/multisurvey/README.md).
+
+<ol class="sb-plan">
+  <li><b>Audit support and identities.</b> The first source-ledger checkpoint is complete. Verify native flux/error, PSF, epoch and competing-counterpart evidence before treating a projected match as the same physical source.</li>
+  <li><b>Freeze one comparison.</b> Specify the exact cohort, missing-view treatment, association rules, training/calibration/evaluation roles, review budget and decision criteria before outcome readout. Without fresh physical truth, label any comparison retrospective feasibility.</li>
+  <li><b>Learn complementary views.</b> Use reliable associations to learn without class labels. Preserve fluxes, errors and upper limits alongside morphology; retain cases that lack one view. No new fit has been run.</li>
+  <li><b>Challenge the apparent gain.</b> Compare against mass, temperature, distance, surface density, colours and variability on equal support and review cost. Keep single-view ablations, spatial uncertainty and unknown denominators.</li>
+  <li><b>Conclude with the supported scope.</b> Report a positive, null or insufficient-evidence result. If justified, prepare at most 20 source-specific review cards. Candidates, catalogue counterparts and confirmed births remain different categories.</li>
+</ol>
+
+<h3 id="historical-week">The original control study: frozen and stopped</h3>
 
 <blockquote class="sb-goal">Determine whether nearby Hi-GAL clumps labelled prestellar and undetected at 70 μm contain an excess of compact mid-infrared sources compared with sightlines matched for dust column, sensitivity and crowding.</blockquote>
 
-The intended seven-day window starts on 11 October 2026. **The measurement protocol is frozen**, with a 1,000-clump outcome-blind draw, 15-arcsecond apertures and fixed control/error criteria. The original plan below records the intended sequence; its primary readout is now stopped at the uncertainty gate. Continued iteration concerns defensible total-column uncertainty, rather than a tuned threshold or a smaller primary cohort. [Protocol](/public/data/starbirth/matched-control/protocol.md), [verified outcome and next step](/astrophysics/2026/10/11/hidden-protostars-column-uncertainty/).
+The intended seven-day window starts on 11 October 2026. **The measurement protocol is frozen**, with a 1,000-clump outcome-blind draw, 15-arcsecond apertures and fixed control/error criteria. The original plan below records the intended sequence; its primary readout is now stopped at the uncertainty gate. Repair of this particular comparison would require defensible total-column uncertainty, rather than a tuned threshold or a smaller primary cohort. The new ranking question above neither measures this excess nor changes its failed gate. [Protocol](/public/data/starbirth/matched-control/protocol.md), [verified outcome and next step](/astrophysics/2026/10/11/hidden-protostars-column-uncertainty/).
 
 <ol class="sb-plan">
   <li><b>Day 1 · Establish feasibility.</b> Check calibrated column maps, uncertainties and comparable mid-infrared coverage at both clump and potential control positions. Prefer cached inputs. Catalogue-only clump columns and display images are insufficient substitutes.</li>
@@ -113,7 +148,7 @@ The long-term target requires several distinct kinds of evidence. A real, persis
 
 <div class="sb-ladder"><span>Compact-source excess</span><span>Source ownership</span><span>Physical stage</span><span>Temporal transition</span><span>Independent detector validation</span></div>
 
-These are evidence requirements, not accomplished milestones or an automatically authorized sequence of experiments. The current week addresses only the first step and follow-up associations.
+These are evidence requirements, not accomplished milestones or an automatically authorized sequence of experiments. The current ranking program concerns embedded-activity candidates and their evidence. The earlier occurrence study is stopped; neither program has established a physical transition.
 
 **Unsupervised learning remains an optional tool.** An embedding could summarize spectral shapes or temporal behaviour, but it cannot create missing physical truth. Any later use must improve over simple flux, colour and clump-property baselines on the same objects and support. Unknowns remain unknown; an anomaly score is not a calibrated birth probability.
 
