@@ -15,6 +15,16 @@
   }
   const N = D.parent.length, children = Array.from({length:N}, () => []), depth = new Uint8Array(N);
   D.parent.forEach((p,i) => { if (p >= 0) { children[p].push(i);depth[i]=depth[p]+1; } });
+  const subtreeValid=D.parent.every((p,i)=>p<0||p<i) &&
+    D.roots.reduce((n,r)=>n+D.size[r],0)===N;
+  const constantAt=new Map();
+  for(const dep of D.deps)for(const i of dep.uses)constantAt.set(i,dep);
+  const terminalCounts=new Uint32Array(N);
+  for(let i=N-1;i>=0;i--){
+    terminalCounts[i]=children[i].length?
+      children[i].reduce((n,j)=>n+terminalCounts[j],0):1;
+  }
+  const TERMINAL_PREVIEW_LIMIT=24;
   const palette = ['#6e91c7','#4fc8b4','#bb9ce6','#e4b468','#e4b468','#d89c83'];
   const namedNodes = S && Array.isArray(S.nodes) ? S.nodes : [];
   const namedById = new Map(namedNodes.map(n=>[n.short,n]));
@@ -49,6 +59,7 @@
   const reducedMotion=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const state = {mode:'map',selected:D.roots[1],namedSelected:'crossing',root:D.roots[1],scale:1,panX:0,panY:0,
     points:[],down:null,open:new Set([D.roots[1]]),extra:null,
+    selectionScope:'subtree',
     hover:null,hoverPower:0,hoverTarget:0,hoverFrame:0,lastHoverTime:0,pointer:null};
   const titles = {
     map:['Named proof map','26 Lean declarations · 81 source-level references · Crossing.lean'],
@@ -77,15 +88,23 @@
   const tooltip=document.createElement('div');
   tooltip.className='pa-node-tooltip';tooltip.hidden=true;
   tooltip.setAttribute('aria-hidden','true');canvasFrame.appendChild(tooltip);
+  // The transient hover dock and persistent inspector scroll separately.
+  const inspector=host.querySelector('.pa-inspector');
+  const inspectorSelected=document.createElement('div');
+  inspectorSelected.className='pa-inspector-selection';
+  while(inspector.firstChild)inspectorSelected.appendChild(inspector.firstChild);
+  inspector.appendChild(inspectorSelected);
   const hoverDetails=document.createElement('section');
-  hoverDetails.className='pa-hover-details';hoverDetails.hidden=true;
+  hoverDetails.className='pa-hover-details';
   hoverDetails.setAttribute('aria-label','Directly connected nodes');
-  const inspectorNote=host.querySelector('.pa-inspector-note');
-  // Keep ephemeral neighbourhood details above the persistent click inspector.
-  // On large proofs the user should not need to scroll to see one-hop links.
-  inspectorNote.parentNode.insertBefore(hoverDetails,$('pa-inspector-heading'));
+  inspector.insertBefore(hoverDetails,inspectorSelected);
+  function resetSelectionScroll(){inspectorSelected.scrollTop=0;}
+  function navigateToExpression(i){
+    if(state.mode!=='whole')updateMode('whole');
+    selectExpr(i);
+  }
   function resize() {
-    if(state.hover&&state.hoverTarget){state.hover=null;state.hoverPower=state.hoverTarget=0;tooltip.hidden=true;hoverDetails.hidden=true;}
+    if(state.hover&&state.hoverTarget){state.hover=null;state.hoverPower=state.hoverTarget=0;tooltip.hidden=true;fillHoverDetails(null);}
     // Bitmap size must follow actual CSS dimensions on every layout change.
     // Using independent width/height scales distorts a circular proof graph;
     // all drawing transforms below use the same scalar zoom in both axes.
@@ -519,20 +538,26 @@
       items:ids.map(i=>({label:reasons.find(t=>t.id===i).title,detail:'direct diagram connection'})),count:ids.length};
   }
   function fillHoverDetails(h) {
+    // A fixed-size dock prevents layout shifts while hover data changes.
     hoverDetails.replaceChildren();
-    if(!h){hoverDetails.hidden=true;return;}
-    hoverDetails.hidden=false;
-    const head=document.createElement('h4');head.textContent='ONE-HOP NEIGHBOURHOOD';
+    const head=document.createElement('h4');
+    head.textContent='HOVER · DIRECT CONNECTIONS';
     hoverDetails.appendChild(head);
     const blurb=document.createElement('p');
-    blurb.textContent=h.title+' · '+h.count+' directly connected node'+(h.count===1?'':'s');
+    blurb.textContent=h?h.title+' · '+h.count+' direct neighbour'+(h.count===1?'':'s'):
+      'Hover a node for its one-hop connections; click to examine a branch.';
     hoverDetails.appendChild(blurb);
+    if(!h)return;
     const list=document.createElement('ol');list.className='pa-hover-neighbors';
-    for(const row of h.items) {
+    for(const row of h.items.slice(0,24)){
       const li=document.createElement('li');
       const name=document.createElement('strong');name.textContent=row.label;
       const rel=document.createElement('span');rel.textContent=row.detail;
       li.append(name,rel);list.appendChild(li);
+    }
+    if(h.items.length>24){
+      const li=document.createElement('li');li.textContent='… plus '+(h.items.length-24)+' connections';
+      list.appendChild(li);
     }
     hoverDetails.appendChild(list);
   }
@@ -591,7 +616,7 @@
     if(!state.hover&&!state.hoverPower)return;
     // Keep the last neighbourhood while it relaxes, then remove it.
     if(state.hover) {
-      state.hoverTarget=0;tooltip.hidden=true;hoverDetails.hidden=true;
+      state.hoverTarget=0;tooltip.hidden=true;fillHoverDetails(null);
       $('pa-canvas-status').textContent='Select a node to inspect';
       if(reducedMotion){state.hoverPower=0;state.hover=null;draw();}
       else wakeHover();
@@ -701,6 +726,7 @@
     canvasObserver.observe(canvasFrame);
   }
   window.addEventListener('resize',refitSoon);
+  fillHoverDetails(null);
   if(namedNodes.length){updateMode('map');resize();selectDeclaration('crossing');}
   else{updateMode('whole');resize();selectExpr(D.roots[1]);}
 })();
