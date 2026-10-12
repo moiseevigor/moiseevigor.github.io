@@ -1,0 +1,65 @@
+---
+layout: default
+title: "Proof Atlas — Visual Grammar of Lean"
+permalink: /projects/proof-atlas/grammar/
+page_class: proof-atlas-grammar-page
+description: "An illustrated visual grammar for all eleven Lean 4 kernel expression constructors, and the distinction between surface syntax, tactics, elaboration and proof certificates."
+---
+<link rel="stylesheet" href="/public/css/proof-atlas.css?v=6">
+<main class="pa-page pa-grammar" id="pa-grammar">
+  <header class="pa-grammar-hero">
+    <div class="pa-section-mark"><a href="/projects/proof-atlas/">Proof Atlas</a> / Visual language</div>
+    <h1>The anatomy of a <em>Lean expression</em></h1>
+    <p>A formal proof is not a forest of unnamed dots. Each expression node has a constructor, typed connections and a precise role. Select a glyph to see its shape, its inputs, and a short Lean example.</p>
+    <div class="pa-grammar-scope"><strong>Complete at the kernel constructor layer:</strong> all 11 `Lean.Expr` variants. <strong>Not a claim of complete Lean surface syntax:</strong> notation, commands, macros, tactics, and attributes elaborate into this core (or act on declarations and environments). These require additional layers.</div>
+  </header>
+  <section class="pa-grammar-path" aria-labelledby="pa-path">
+    <div class="pa-section-mark">01 / Four scales, with explicit evidence</div>
+    <h2 id="pa-path">One proof. Four ways to see it.</h2>
+    <svg class="pa-scale-drawing" viewBox="0 0 1060 240" role="img" aria-label="From Lean certificate through exact expression graph and collapsed module to annotated mathematical mechanism">
+      <defs><marker id="pa-ar" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7Z" fill="#4b8b87"/></marker></defs>
+      <g font-family="system-ui,sans-serif" font-size="14" fill="#244357">
+        <g transform="translate(0 0)"><rect x="4" y="8" width="235" height="208" rx="8" fill="#e5ece8"/><text x="21" y="38" font-weight="700">01 · Certificate</text><g font-family="monospace" font-size="12"><text x="24" y="82">Γ ⊢ proof : P</text><text x="24" y="112">app (const ...)</text><text x="24" y="135">    (lam ...)</text><text x="24" y="158">    (bvar 0)</text></g><text x="21" y="195" font-size="11" fill="#567279">Kernel-checked expression</text></g>
+        <g transform="translate(272 0)"><rect x="0" y="8" width="235" height="208" rx="8" fill="#e5ece8"/><text x="17" y="38" font-weight="700">02 · Typed graph</text><g fill="none" stroke="#5a9092" stroke-width="2"><path d="M116 76L60 124M116 76L170 124M60 124L36 164M60 124L85 164M170 124L142 164M170 124L195 164"/></g><g fill="#ecf6f1" stroke="#477d82" stroke-width="2"><circle cx="116" cy="76" r="14"/><circle cx="60" cy="124" r="11"/><circle cx="170" cy="124" r="11"/><circle cx="36" cy="164" r="8"/><circle cx="85" cy="164" r="8"/><circle cx="142" cy="164" r="8"/><circle cx="195" cy="164" r="8"/></g><text x="17" y="195" font-size="11" fill="#567279">Every typed expression link</text></g>
+        <g transform="translate(544 0)"><rect x="0" y="8" width="235" height="208" rx="8" fill="#e5ece8"/><text x="17" y="38" font-weight="700">03 · Collapsed module</text><rect x="39" y="78" width="159" height="67" rx="7" fill="#164c59"/><text x="119" y="105" fill="#f5f5ef" text-anchor="middle" font-weight="700">Lemma L</text><text x="119" y="127" fill="#b7dfd4" text-anchor="middle" font-size="11">open to inspect</text><path d="M12 110H39 M198 110H220" stroke="#50888b" stroke-width="2"/><text x="17" y="195" font-size="11" fill="#567279">Inputs and result retained</text></g>
+        <g transform="translate(816 0)"><rect x="0" y="8" width="235" height="208" rx="8" fill="#e5ece8"/><text x="17" y="38" font-weight="700">04 · Mathematical idea</text><g fill="#fff" stroke="#628f8a"><rect x="17" y="65" width="91" height="44" rx="7"/><rect x="126" y="65" width="92" height="44" rx="7"/><rect x="67" y="145" width="110" height="36" rx="7"/></g><g font-size="11" text-anchor="middle"><text x="62" y="91">Existence</text><text x="172" y="91">Uniqueness</text><text x="122" y="168">Exactly one</text></g><path d="M62 109L113 145M173 109L130 145" stroke="#628f8a" stroke-width="2" fill="none"/><text x="17" y="197" font-size="11" fill="#567279">Annotated, not automatic</text></g>
+      </g><g stroke="#4b8b87" stroke-width="1.5" marker-end="url(#pa-ar)"><path d="M242 111H263"/><path d="M510 111H535"/><path d="M782 111H807"/></g>
+    </svg>
+  </section>
+  <section class="pa-grammar-explorer" aria-labelledby="pa-constructors">
+    <div class="pa-section-mark">02 / The kernel alphabet</div>
+    <h2 id="pa-constructors">All eleven `Lean.Expr` constructors</h2>
+    <p>These are the closed set of constructor tags defined by Lean 4's `Expr` type. The drawings below encode syntactic links; they are not claims that arbitrary node positions have mathematical meaning.</p>
+    <div class="pa-grammar-layout">
+      <nav id="pa-grammar-choices" class="pa-grammar-choices" aria-label="Choose a kernel constructor"></nav>
+      <div class="pa-grammar-stage">
+        <div class="pa-grammar-drawing">
+          <svg id="pa-grammar-svg" viewBox="0 0 590 275" role="img" aria-label="Diagram of selected Lean kernel expression"></svg>
+        </div>
+        <div class="pa-grammar-readout">
+          <div class="pa-section-mark" id="pa-g-group">Core expression</div>
+          <h3 id="pa-g-name">app — Function application</h3>
+          <p id="pa-g-description"></p>
+          <div class="pa-grammar-tags" id="pa-g-ports"></div>
+          <div class="pa-grammar-two">
+            <div><h4>Lean example</h4><pre id="pa-g-example"></pre></div>
+            <div><h4>How to read the picture</h4><p id="pa-g-reading"></p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="pa-grammar-layers">
+    <div class="pa-section-mark">03 / Beyond the kernel</div>
+    <h2>Lean code is larger than `Lean.Expr`.</h2>
+    <div class="pa-grammar-layer-grid">
+      <article><span>Surface language</span><h3>Readable notation</h3><code>theorem t : A ∧ B := ⟨ha, hb⟩</code><p>Tokens, declarations, names, syntax quotations, notation and macros belong to a richer syntax tree. They are not additional kernel `Expr` constructors.</p></article>
+      <article><span>Elaboration</span><h3>Resolve and elaborate</h3><code>by simp [h]</code><p>Tactics and elaborators use goals, contexts, metavariables, type-class synthesis and elaboration information to construct terms. Their execution history is not preserved by a bare final proof term.</p></article>
+      <article><span>Kernel</span><h3>Small trusted language</h3><code>Γ ⊢ p : P</code><p>The kernel checks expressions using declaration environments and trusted rules. Some expressions also contain metadata or projections. The diagrams illustrate constructors, not every typing judgment.</p></article>
+      <article><span>Proof Atlas</span><h3>Certified view contracts</h3><code>(inputs) ──[proof]──▶ (result)</code><p>A collapsed graphic must retain assumptions, binder scope, axiom dependencies and a link to evidence. Our SE(2) viewer currently proves graph provenance, not universal semantic compression.</p></article>
+    </div>
+    <p class="pa-grammar-foot">Next formal milestones: graphical inference rules for application/binders, correct de Bruijn scope links, shared declarations, definitional equality and transport, recursors/induction, classical assumptions and quotient constructors. We must test each rule on a kernel-checkable example before extending the vocabulary.</p>
+    <p><a href="/projects/proof-atlas/app/">← Explore the measured SE(2) Lean proof</a> · <a href="/mathematics/2026/10/11/proof-atlas-research-program/">Read the research methodology</a> · <a href="https://lean-lang.org/doc/api/Lean/Expr.html">Lean Expr API reference</a></p>
+  </section>
+</main>
+<script src="/public/js/proof-atlas-grammar.js?v=1" defer></script>
