@@ -1,0 +1,98 @@
+{
+  "schema": "bounded-research-resource-monitor/1",
+  "command": [
+    ".venv/bin/python",
+    "research/verify_multisurvey_eligibility.py",
+    "--stage",
+    "artifacts/multisurvey_eligibility_20261012",
+    "--output",
+    "artifacts/multisurvey_eligibility_verification_20261012/verification.json"
+  ],
+  "limits": {
+    "reserve_bytes": 5368709120,
+    "stage_budget_bytes": 1048576,
+    "max_rss_bytes": 268435456,
+    "wall_seconds": 600.0
+  },
+  "sampling_interval_seconds": 1.0,
+  "elapsed_seconds": 1.0616379580460489,
+  "child_exit_code": 1,
+  "stop_reason": null,
+  "completed": false,
+  "peak_sampled_worker_rss_bytes": 2195456,
+  "minimum_observed_free_bytes": 60539662336,
+  "sample_count": 4,
+  "samples_retained": 4,
+  "samples": [
+    {
+      "utc": "2026-10-12T12:38:52.957071+00:00",
+      "free_bytes": 60539682816,
+      "stage_bytes": 0,
+      "worker_rss_bytes": 0,
+      "worker_cpu_percent": 0,
+      "workers": [],
+      "system_memory_pressure_level": 1,
+      "load_average": [
+        2.05908203125,
+        2.86474609375,
+        2.642578125
+      ]
+    },
+    {
+      "utc": "2026-10-12T12:38:52.980652+00:00",
+      "free_bytes": 60539682816,
+      "stage_bytes": 0,
+      "worker_rss_bytes": 2195456,
+      "worker_cpu_percent": 0.0,
+      "workers": [
+        {
+          "pid": 92981,
+          "rss_bytes": 2195456,
+          "cpu_percent": 0.0
+        }
+      ],
+      "system_memory_pressure_level": 1,
+      "load_average": [
+        2.05908203125,
+        2.86474609375,
+        2.642578125
+      ]
+    },
+    {
+      "utc": "2026-10-12T12:38:54.015346+00:00",
+      "free_bytes": 60539662336,
+      "stage_bytes": 215,
+      "worker_rss_bytes": 0,
+      "worker_cpu_percent": 0.0,
+      "workers": [
+        {
+          "pid": 92981,
+          "rss_bytes": 0,
+          "cpu_percent": 0.0
+        }
+      ],
+      "system_memory_pressure_level": 1,
+      "load_average": [
+        2.05908203125,
+        2.86474609375,
+        2.642578125
+      ]
+    },
+    {
+      "utc": "2026-10-12T12:38:54.019413+00:00",
+      "free_bytes": 60539662336,
+      "stage_bytes": 215,
+      "worker_rss_bytes": 0,
+      "worker_cpu_percent": 0,
+      "workers": [],
+      "system_memory_pressure_level": 1,
+      "load_average": [
+        2.05908203125,
+        2.86474609375,
+        2.642578125
+      ]
+    }
+  ],
+  "sampling_history": "Latest 128 samples; extrema aggregate all polls",
+  "scope": "Only this process group; RSS sampling may miss sub-interval peaks; no scientific inference."
+}

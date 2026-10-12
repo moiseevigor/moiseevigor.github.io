@@ -1,0 +1,24 @@
+{
+  "schema": "multisurvey-eligibility-checkpoint/1",
+  "date": "2026-10-12",
+  "registration_revision": "d041663d",
+  "verification_amendment_revision": "ed6b45f7",
+  "checkpoint_status": "complete",
+  "research_objective_achieved": false,
+  "independent_test_eligible": false,
+  "development_ledger_available": true,
+  "model_fit_performed": false,
+  "physical_births_confirmed": 0,
+  "public_publication_performed": false,
+  "report_path": "docs/MULTISURVEY_ELIGIBILITY_RESULTS_20261012.md",
+  "report_sha256": "c5dd1efbaddd3a17814dc00aba36f1a10c62b3d2f3184d8947798f3fbc7363fa",
+  "evidence_summary_sha256": "a7c3ea14d40eeea876a62fea99997adc1c5d2ffd743870a1e91af26256bcd3d6",
+  "ledger_sha256": "7b4a902d69a121c4716eb378603c40f5099c925333bc49d86536adda1cc11379",
+  "next_requirement": "Freeze retrospective feasibility or establish independent physical evidence with association/error contracts",
+  "preserved_stops": [
+    "333/1000 versus 800 control gate",
+    "N20",
+    "c6828",
+    "E29-E160 archive"
+  ]
+}

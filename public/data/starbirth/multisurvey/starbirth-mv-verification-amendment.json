@@ -1,0 +1,25 @@
+{
+  "schema": "multisurvey-verification-implementation-amendment/1",
+  "registration_sha256": "41f5a6bec70c239f9cfc1ede4482cfb6b8e8af95b8460fe27c5f383cdc520487",
+  "verifier_sha256": "09295d79005fa69cd1a851141422ebc6fe01c9911883b14e8f035a9f3156d898",
+  "reason": "Original pandas verifier failed during import before data read",
+  "scientific_inputs_and_rules_unchanged": true,
+  "inputs": [
+    {
+      "path": "research/verify_multisurvey_eligibility_stdlib.py",
+      "sha256": "09295d79005fa69cd1a851141422ebc6fe01c9911883b14e8f035a9f3156d898"
+    },
+    {
+      "path": "docs/MULTISURVEY_ELIGIBILITY_VERIFICATION_AMENDMENT_20261012.md",
+      "sha256": "d7d1fea7f8c4ab8e51a89a98eebdb1af7ee20cb69ca0b7fcd5c3fcf3c78b6c2c"
+    },
+    {
+      "path": "artifacts/multisurvey_eligibility_verification_20261012/worker.log",
+      "sha256": "49a3ec6a1566af57ece0e43b45a541dea9dc64dec3ee30da9d0eccef2c050527"
+    },
+    {
+      "path": "artifacts/multisurvey_eligibility_verification_20261012/resource_monitor.json",
+      "sha256": "9116e5809f0501b18fbb7c4735fecdc406d26eb3d05792c35aa59c38644e8d09"
+    }
+  ]
+}

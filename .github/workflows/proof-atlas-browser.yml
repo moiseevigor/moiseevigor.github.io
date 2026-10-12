@@ -6,6 +6,8 @@ on:
       - 'public/js/proof-atlas.js'
       - 'public/js/proof-atlas-reader.js'
       - 'public/js/proof-atlas-term-reader.js'
+      - 'public/js/proof-atlas-application-*.js'
+      - 'scripts/test-proof-atlas-applications*.cjs'
       - 'public/js/proof-atlas-article-index.js'
       - 'public/js/proof-atlas-article.js'
       - 'public/research/se2/article-figures/**'
@@ -50,6 +52,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Audit all exact constant references and application spines
+        run: node scripts/test-proof-atlas-applications.cjs
       - name: Install Chromium test dependencies
         run: |
           npm install --no-save playwright@1.57.0 axe-core@4.11.0
@@ -71,6 +75,10 @@ jobs:
           bundle exec jekyll build --destination _site_production
           python3 -m http.server 8833 --bind 127.0.0.1 --directory _site_production > /tmp/proof-atlas-server.log 2>&1 &
           sleep 2
+      - name: Verify exact named-application navigation on production pages
+        run: node scripts/test-proof-atlas-applications-browser.cjs
+        env:
+          ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
       - name: Browser regression — hub hover, geometry, responsiveness
         run: node scripts/test-proof-atlas-browser.cjs
         env:

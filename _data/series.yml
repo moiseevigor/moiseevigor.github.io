@@ -258,17 +258,18 @@
       status: published
 - id: hidden-protostars
   title: "Hidden protostars"
-  subtitle: "Embedded activity in apparently prestellar Hi-GAL clumps: reviewed evidence, matched controls, and the limits of birth detection."
+  subtitle: "Embedded activity in apparently prestellar Hi-GAL clumps: reviewed evidence, multiple survey views, and the limits of birth detection."
   status: active
-  question: "Do nearby 70 μm-undetected, catalogue-prestellar clumps contain an excess of compact mid-infrared sources over sightlines matched for dust column, sensitivity and crowding?"
-  outcome: "Historical evidence: 12.8% have a 22/24 μm counterpart. Physical membership and the hidden fraction remain unresolved; no confirmed birth or validated detector. The new comparison remains unmeasured: 939 profile matches, but only 333 pass the frozen uncertainty gate."
-  frontier: "Bind and validate the implementation covariance route against archived maps; the static audit supplies no validated total-column error, and the 333/800 gate remains failed."
+  question: "Can shared infrared, variability and molecular representations improve embedded-protostar candidate ranking over strong physical baselines at equal review cost?"
+  outcome: "Historical evidence: 12.8% have a 22/24 μm counterpart. Physical membership and the hidden fraction remain unresolved; no confirmed birth or validated detector. The earlier occurrence comparison remains unmeasured: 939 profile matches, but only 333 pass its frozen uncertainty gate. The current 19,328-clump ledger is data readiness; no new model fit or independent detector validation."
+  frontier: "Freeze missing-view and association/error contracts and establish an independent physical evaluation route; previously consumed checks are not fresh truth. Preserve the failed 333/800 control gate."
   code: research/starbirth/
   verdicts:
     - { h: "Counterparts", v: confirmed, label: "catalogue association, not physical membership" }
     - { h: "Hidden fraction", v: pending, label: "control confounding unresolved" }
     - { h: "Image increment", v: refuted, label: "not demonstrated in the two reviewed checks" }
     - { h: "New comparison", v: pending, label: "frozen; insufficient uncertainty support; occurrence unmeasured" }
+    - { h: "Multiview ranking", v: pending, label: "data-readiness audit only; no model fitted or fresh physical validation" }
   posts:
     - part: 1
       title: "Hidden protostars: a research program"
