@@ -365,3 +365,23 @@ html[data-theme="dark"] .pa-links a small{color:#adc1c6}
   .pa-inspector .pa-hover-details{flex-basis:120px;height:120px;min-height:120px;}
   .pa-inspector .pa-hover-neighbors{max-height:56px;}
 }
+
+
+/* Lean syntax is an exact formal-expression hierarchy, not a lemma tree:
+   keep its type legend compact and visible when navigating raw leaves. */
+.pa-syntax-legend{
+  display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;
+  gap:8px 15px;padding:7px 16px;
+  background:#10293b;border-top:1px solid #2a4a5b;
+  color:#a8c3cc;font-family:"Source Sans 3",system-ui,sans-serif;
+  font-size:11px;line-height:1.4;
+}
+.pa-syntax-legend[hidden]{display:none!important;}
+.pa-syntax-legend span{display:inline-flex;gap:5px;align-items:center;}
+.pa-syntax-legend .pa-dot{display:inline-block;flex:none;width:7px;height:7px;border-radius:50%;}
+.pa-dot-app{background:#6e91c7}
+.pa-dot-const{background:#4fc8b4}
+.pa-dot-bvar{background:#bb9ce6}
+.pa-dot-binder{background:#e4b468}
+.pa-dot-lit{background:#d89c83}
+.pa-syntax-legend .pa-legend-note{color:#ddb980;font-style:italic;}
