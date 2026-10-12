@@ -1,0 +1,87 @@
+{
+  "schema": "already-computed-secondary-irac-alternative/1",
+  "verified_source_binding": true,
+  "source_revision": "106e2f842a903469f7529c54272cbf033509ba43",
+  "case_id": "HIGALBM353.4272-0.3734",
+  "native_source_id": "SSTGLMC G353.4284-00.3731",
+  "native_cntr": "2224805",
+  "role": "post-read display of a retained secondary alternative, not replacement of the three fixed best counterparts",
+  "colour_36_45": {
+    "band_a": "3_6",
+    "band_b": "4_5",
+    "available": true,
+    "colour_mag": 1.0,
+    "sigma_min": 0.008,
+    "sigma_max": 0.076,
+    "sigma_independent_reference": 0.054037024344425186,
+    "envelopes": {
+      "1": [
+        0.924,
+        1.076
+      ],
+      "3": [
+        0.772,
+        1.228
+      ]
+    }
+  },
+  "colour_45_58": {
+    "band_a": "4_5",
+    "band_b": "5_8",
+    "available": true,
+    "colour_mag": 0.79,
+    "sigma_min": 0.003,
+    "sigma_max": 0.087,
+    "sigma_independent_reference": 0.06155485358604958,
+    "envelopes": {
+      "1": [
+        0.703,
+        0.877
+      ],
+      "3": [
+        0.529,
+        1.051
+      ]
+    }
+  },
+  "four_band_photometric_availability": true,
+  "central_necessary_colours": true,
+  "robust_necessary_colour_support": false,
+  "full_standard_classification": "not_evaluated",
+  "native_45_quality_flag": "0",
+  "other_band_quality_flags": "not_retained_by_native_excerpt",
+  "matched_visits": 0,
+  "supported_visits": 6,
+  "clump_separation_arcsec": 4.489974240547987,
+  "physical_stage": "unknown",
+  "physical_membership": "unestablished",
+  "birth_status": "not_established",
+  "new_discovery": false,
+  "original_primary_and_models_unchanged": true,
+  "source_blobs": [
+    {
+      "path": "artifacts/irac_colour_resource_resumed_20261012/all_records.json",
+      "revision": "106e2f842a903469f7529c54272cbf033509ba43",
+      "bytes": 36709,
+      "sha256": "2055480bd77b1b1e77b3ea5593c3124f4f7ed7ce3cb552c708a3e9249f152279"
+    },
+    {
+      "path": "artifacts/irac_colour_resource_resumed_verification_20261012/verification.json",
+      "revision": "106e2f842a903469f7529c54272cbf033509ba43",
+      "bytes": 902,
+      "sha256": "03ed9b53264d0b9e7d267a942d4b7c3d09d69c4641be18d203079af550c0178a"
+    },
+    {
+      "path": "artifacts/native_glimpse_association_20261012/evidence_cards.json",
+      "revision": "106e2f842a903469f7529c54272cbf033509ba43",
+      "bytes": 34699,
+      "sha256": "8929cd3bb703491adc3bff7853c445bc1e2b4649f83f14fb41a9ef34cc0b7490"
+    },
+    {
+      "path": "artifacts/irac_colour_resource_resumed_20261012/summary.json",
+      "revision": "106e2f842a903469f7529c54272cbf033509ba43",
+      "bytes": 12285,
+      "sha256": "0f9a0f7d48ca74fa07ac9f6eaab1ff5720d3f2319fa5475f572953c5f8add021"
+    }
+  ]
+}

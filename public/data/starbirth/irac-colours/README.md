@@ -12,3 +12,9 @@ Exact committed bytes from `106e2f842a903469f7529c54272cbf033509ba43`. Source cr
 - [Complete exact byte inventory and hashes](source-inventory.csv). It also lists the four source scripts, worker logs and successful resource receipts.
 
 There are six Catalog sources and six Archive aliases, not twelve independent objects. All 19,328 parent identities and 19,066 unknown qualifying proxy states remain in the earlier ledger. The historical system ranks clump chemistry proxies, not a nearby infrared point source's evolutionary stage. Independent software reconstruction is not physical validation or human adjudication.
+
+## Retained secondary red neighbour
+
+Five additive exports bind `2d098311d6cb089455bc83bbad895fab635c8d8e`: [source-bound note](alternative-note.md), [exact secondary record and geometry](starbirth-ic-secondary-alternative.json), [typed qualification](starbirth-ic-alternative-knowledge-note.json), and the two generation scripts listed in the inventory. The first 23 source exports remain unchanged.
+
+`SSTGLMC G353.4284-00.3731` has central colours 1.000/0.790 and four-band photometric availability but matches 0/6 supported visits. Its second colour's 3x quoted-error sensitivity spans 0.529–1.051: no robust necessary-colour support or full classification. It is a previously catalogued inspection alternative, not the temporal emitter, independent youth truth or a discovery. The three fixed primary counterparts, old models and all counts stay unchanged.

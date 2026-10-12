@@ -172,6 +172,8 @@ include:
   - "starbirth-ic-verification-resources.json"
   - "starbirth-ic-checkpoint.json"
   - "starbirth-ic-knowledge-supplement.json"
+  - "starbirth-ic-secondary-alternative.json"
+  - "starbirth-ic-alternative-knowledge-note.json"
   - "se2-provenance.json"
   - "se2-ray-thresholds.json"
   # Proof Atlas coverage evidence linked from the article comparison.

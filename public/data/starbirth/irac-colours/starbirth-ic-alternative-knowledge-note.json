@@ -1,0 +1,82 @@
+{
+  "schema": "reviewed-secondary-irac-alternative-knowledge-note/1",
+  "source_revision": "f7c04658baade0a5ed0a3e2d7cb4fab51bd8f988",
+  "nodes": [
+    {
+      "id": "F:IC20261012:alternative",
+      "type": "finding",
+      "status": "verified_secondary_central_colour_measurement",
+      "label": "Known red four-band alternative matches zero of six visit medians",
+      "metrics": {
+        "case_id": "HIGALBM353.4272-0.3734",
+        "native_source_id": "SSTGLMC G353.4284-00.3731",
+        "colour_36_45": 1,
+        "colour_45_58": 0.79,
+        "four_band_available": true,
+        "matched_visits": 0,
+        "supported_visits": 6,
+        "robust_necessary_colour_support": false
+      },
+      "text": "A distinct retained Catalog source has central red colours; do not substitute it for the frozen best counterpart or assign it the visit photometry. Physical class, membership, novelty and birth are unestablished.",
+      "sources": [
+        "artifacts/irac_colour_secondary_alternative_20261012.json",
+        "docs/IRAC_COLOUR_ALTERNATIVE_NOTE_20261012.md"
+      ]
+    },
+    {
+      "id": "C:IC20261012:alternative",
+      "type": "qualification",
+      "status": "unmet_physical_validation",
+      "label": "Central red alternative is not a full classifier or independent youth label",
+      "text": "The second colour 3x quoted-error sensitivity spans 0.529\u20131.051. Other-band reliability, contaminants and ownership remain unverified. All original primary decisions/models stay fixed; no discovery or birth.",
+      "sources": [
+        "artifacts/irac_colour_secondary_alternative_20261012.json",
+        "docs/IRAC_COLOUR_ALTERNATIVE_NOTE_20261012.md"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "C:IC20261012:alternative",
+      "target": "F:IC20261012:alternative",
+      "relation": "limits"
+    },
+    {
+      "source": "F:IC20261012:alternative",
+      "target": "F:IC20261012:availability",
+      "relation": "qualifies",
+      "text": "The zero-of-three availability count concerns the three fixed best counterparts; other retained records are separate."
+    }
+  ],
+  "source_blobs": [
+    {
+      "path": "artifacts/irac_colour_secondary_alternative_20261012.json",
+      "revision": "f7c04658baade0a5ed0a3e2d7cb4fab51bd8f988",
+      "bytes": 2728,
+      "sha256": "2de83a46777fa7cae4e5bfebbd1c7fa3cc7baba55b898e9ad09b5aebabd74a07"
+    },
+    {
+      "path": "docs/IRAC_COLOUR_ALTERNATIVE_NOTE_20261012.md",
+      "revision": "f7c04658baade0a5ed0a3e2d7cb4fab51bd8f988",
+      "bytes": 2552,
+      "sha256": "01f149037c01b89e2d9f71d3cb8eb3e4d3bf363cd6e7b7b5cc2099b78dc9a117"
+    },
+    {
+      "path": "artifacts/graph/irac_colour_reviewed_supplement_20261012.json",
+      "revision": "f7c04658baade0a5ed0a3e2d7cb4fab51bd8f988",
+      "bytes": 7087,
+      "sha256": "94dc7bfaae108acd2a446ad3d55a6a1a76ffaec318061aae8b0dbc238d97d9f4"
+    },
+    {
+      "path": "artifacts/graph/research_graph.json",
+      "revision": "f7c04658baade0a5ed0a3e2d7cb4fab51bd8f988",
+      "bytes": 1307461,
+      "sha256": "5162974f4fe31bb591b244ad3cc96962069174e1e96fced8586ee6305763692c"
+    }
+  ],
+  "core_and_prior_supplements_unchanged": true,
+  "primary_unchanged": true,
+  "physical_validation": false,
+  "new_stars": 0,
+  "new_births": 0
+}
