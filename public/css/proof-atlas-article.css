@@ -28,3 +28,5 @@ html[data-theme="dark"] .pa-paper .pa-paper-highlight{background:#283e48;outline
 .pa-paper [tabindex="0"]:focus-visible{outline:3px solid var(--accent,#2a8177);outline-offset:3px}
 
 .pa-paper .footnotes p{color:var(--text-light,#555)}
+/* Keep KaTeX's absolute accessible MathML inside its formula's scroll region. */
+.pa-paper .katex{position:relative}
