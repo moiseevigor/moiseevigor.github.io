@@ -1,0 +1,18 @@
+{
+  "registration_sha256": "3583ac10844feeb4d1b5d79c865904deb2215619a7015242b726e4cba4115f70",
+  "outputs": {
+    "summary.json": {
+      "bytes": 10461,
+      "sha256": "0a7e7b8ef76f550e7baeebdd699dc964d063bf3f0f550e28b3d05dafcbf61144"
+    },
+    "positive_raw_evidence.csv.gz": {
+      "bytes": 38175,
+      "sha256": "98d17596b1c450f9733f560b42edcb3f81e069b5c208b53bd11eb5f8271fe3c5"
+    },
+    "sources.csv.gz": {
+      "bytes": 1594221,
+      "sha256": "37c8a5dcce8b27016439b1efb5c7cc3fe60549ba6e718a03bbc2345f4a1d253d"
+    }
+  },
+  "independent_verification_pending": true
+}

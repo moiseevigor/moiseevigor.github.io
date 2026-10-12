@@ -135,6 +135,17 @@ include:
   - "starbirth-mvr-association-registration.json"
   - "starbirth-mvr-association-amendment.json"
   - "starbirth-mvr-association-memory-stop.json"
+  # Verified post-read temporal diagnosis: narrow basename exceptions.
+  - "starbirth-tmd-original-registration.json"
+  - "starbirth-tmd-schema-amendment.json"
+  - "starbirth-tmd-summary.json"
+  - "starbirth-tmd-generation-checkpoint.json"
+  - "starbirth-tmd-checkpoint.json"
+  - "starbirth-tmd-verification.json"
+  - "starbirth-tmd-worker-resources.json"
+  - "starbirth-tmd-verification-resources.json"
+  - "starbirth-tmd-failed-resources.json"
+  - "starbirth-tmd-knowledge-supplement.json"
   - "se2-provenance.json"
   - "se2-ray-thresholds.json"
 

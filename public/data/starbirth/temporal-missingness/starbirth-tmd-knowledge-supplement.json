@@ -1,0 +1,168 @@
+{
+  "schema": "reviewed-temporal-missingness-knowledge-supplement/1",
+  "source_revision": "0ea2011e",
+  "post_read_consumed_proxy_diagnosis": true,
+  "core_and_prior_supplement_unchanged": true,
+  "nodes": [
+    {
+      "id": "Q:TM20261012",
+      "type": "question",
+      "status": "post_read_diagnostic_completed",
+      "label": "Temporal missingness: query versus anchor",
+      "text": "Separately frozen after the 27 consumed positive cases were known to lack anchored temporal support. Count original-query cadence without asserting emitter identity.",
+      "sources": [
+        "docs/TEMPORAL_MISSINGNESS_PROTOCOL_20261012.md",
+        "docs/TEMPORAL_MISSINGNESS_SCHEMA_AMENDMENT_20261012.md",
+        "docs/TEMPORAL_MISSINGNESS_RESULTS_20261012.md"
+      ]
+    },
+    {
+      "id": "F:TM20261012:support",
+      "type": "finding",
+      "status": "verified_scoped_negative",
+      "label": "Only 3 of 27 positives have query-level cadence",
+      "metrics": {
+        "positive": {
+          "count": 27,
+          "query_support": 3,
+          "anchored_support": 0,
+          "outcomes": {
+            "no_screened_in_query": 9,
+            "query_cadence_insufficient": 4,
+            "query_supported_anchor_cadence_insufficient": 1,
+            "query_supported_anchor_missing": 2,
+            "requested_no_rows": 11
+          }
+        },
+        "primary_gate": 14,
+        "majority_gate_passed": false,
+        "parent": 19328,
+        "parent_query_support": 3013,
+        "parent_anchored_support": 761
+      },
+      "text": "The query-level majority gate failed: 11 positives have no cached rows, 9 no screened query rows, 4 insufficient cadence, 2 supported queries without anchors and 1 insufficient anchored cadence. Original comparison remains unchanged.",
+      "sources": [
+        "docs/TEMPORAL_MISSINGNESS_RESULTS_20261012.md",
+        "artifacts/temporal_missingness_schema_adapted_20261012/summary.json",
+        "artifacts/temporal_missingness_verification_schema_adapted_20261012/verification.json",
+        "artifacts/temporal_missingness_checkpoint_20261012.json"
+      ]
+    },
+    {
+      "id": "C:TM20261012:identity",
+      "type": "qualification",
+      "status": "unmet_emitter_identity",
+      "label": "Query cadence is not a single-source light curve",
+      "text": "All three support cases remain consumed references with unresolved source identity and full reliability. No temporal feature repair, classifier benefit, physical validation or stellar birth follows.",
+      "sources": [
+        "docs/TEMPORAL_MISSINGNESS_PROTOCOL_20261012.md",
+        "docs/TEMPORAL_MISSINGNESS_RESULTS_20261012.md"
+      ]
+    },
+    {
+      "id": "C:TM20261012:selection",
+      "type": "qualification",
+      "status": "verified_selection_limit",
+      "label": "Positive proxies occupy high-mass/high-surface-density support",
+      "metrics": {
+        "parent_medians": {
+          "mass": 43.8,
+          "temp": 11.0,
+          "dist": 2.21,
+          "surf_dens": 0.14,
+          "diam": 0.28
+        },
+        "positive_above_mass_median": 27,
+        "positive_above_surface_density_median": 27
+      },
+      "text": "All 27 positives are above parent mass and surface-density medians. Neither low-mass/low-surface-density validity nor representative independent truth is established.",
+      "sources": [
+        "docs/TEMPORAL_MISSINGNESS_RESULTS_20261012.md",
+        "artifacts/temporal_missingness_schema_adapted_20261012/summary.json",
+        "artifacts/temporal_missingness_verification_schema_adapted_20261012/verification.json"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "Q:TM20261012",
+      "target": "F:TM20261012:support",
+      "relation": "answered_by"
+    },
+    {
+      "source": "F:TM20261012:support",
+      "target": "C:MV20261012:temporal",
+      "relation": "qualifies",
+      "text": "Absent anchored positive overlap is not predominantly explained by the anchor alone."
+    },
+    {
+      "source": "C:TM20261012:identity",
+      "target": "F:TM20261012:support",
+      "relation": "limits"
+    },
+    {
+      "source": "C:TM20261012:selection",
+      "target": "F:TM20261012:support",
+      "relation": "limits"
+    }
+  ],
+  "source_blobs": [
+    {
+      "path": "docs/TEMPORAL_MISSINGNESS_PROTOCOL_20261012.md",
+      "revision": "0ea2011e",
+      "bytes": 7620,
+      "sha256": "8ca9377a2ddeef6875d1140c2be8d0be14d311c1e386c8732104e9a3f9d8afc4"
+    },
+    {
+      "path": "docs/TEMPORAL_MISSINGNESS_SCHEMA_AMENDMENT_20261012.md",
+      "revision": "0ea2011e",
+      "bytes": 1954,
+      "sha256": "a50b0897a2311e39cebb223d7187d4bb6d1007367e4b4ab1f10142feba81450a"
+    },
+    {
+      "path": "docs/TEMPORAL_MISSINGNESS_RESULTS_20261012.md",
+      "revision": "0ea2011e",
+      "bytes": 9299,
+      "sha256": "d824f4c3f76f99b5c1556c1e83ac3aac2ee7a958d64c4b97a2506aed4b629112"
+    },
+    {
+      "path": "artifacts/temporal_missingness_schema_amendment_20261012.json",
+      "revision": "0ea2011e",
+      "bytes": 6286,
+      "sha256": "3583ac10844feeb4d1b5d79c865904deb2215619a7015242b726e4cba4115f70"
+    },
+    {
+      "path": "artifacts/temporal_missingness_schema_adapted_20261012/summary.json",
+      "revision": "0ea2011e",
+      "bytes": 10461,
+      "sha256": "0a7e7b8ef76f550e7baeebdd699dc964d063bf3f0f550e28b3d05dafcbf61144"
+    },
+    {
+      "path": "artifacts/temporal_missingness_verification_schema_adapted_20261012/verification.json",
+      "revision": "0ea2011e",
+      "bytes": 603,
+      "sha256": "4417f6837c2e9834bbf4e47ec395ee697f64d90729b5225f6d55ae65ca9ea5aa"
+    },
+    {
+      "path": "artifacts/temporal_missingness_checkpoint_20261012.json",
+      "revision": "0ea2011e",
+      "bytes": 3140,
+      "sha256": "778d18394d46741d509a9b052e25038547d43ba773e301ed06d4027982ca8b4e"
+    },
+    {
+      "path": "artifacts/graph/research_graph.json",
+      "revision": "0ea2011e",
+      "bytes": 1307461,
+      "sha256": "5162974f4fe31bb591b244ad3cc96962069174e1e96fced8586ee6305763692c"
+    },
+    {
+      "path": "artifacts/graph/multisurvey_reviewed_supplement_20261012.json",
+      "revision": "0ea2011e",
+      "bytes": 9885,
+      "sha256": "5fbab90d8c5729aa68b4fc3bad2916f7749dc426206e1f9a7e3dcff33bb1c2e3"
+    }
+  ],
+  "physical_validation": false,
+  "new_stars": 0,
+  "new_births": 0
+}

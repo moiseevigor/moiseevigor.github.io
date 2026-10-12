@@ -1,0 +1,15 @@
+{
+  "schema": "independent-temporal-missingness-verification/1",
+  "verified": true,
+  "registration_sha256": "3583ac10844feeb4d1b5d79c865904deb2215619a7015242b726e4cba4115f70",
+  "summary_sha256": "0a7e7b8ef76f550e7baeebdd699dc964d063bf3f0f550e28b3d05dafcbf61144",
+  "requested_identities": 19328,
+  "positive_raw_rows": 1072,
+  "primary_count": 3,
+  "primary_denominator": 27,
+  "independent_geometry": "unit-vector atan2",
+  "independent_visits": "exact tuple sets and gap-index boundaries",
+  "raw_passes": 4,
+  "all_fields_strata_membership_hashes_verified": true,
+  "physical_validation": false
+}

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/igor/Work/me/starbirth-search/research/audit_temporal_missingness.py", line 144, in <module>
+    else:assert a.stage and a.stage.is_dir();run(a.stage)
+                                             ^^^^^^^^^^^^
+  File "/Users/igor/Work/me/starbirth-search/research/audit_temporal_missingness.py", line 88, in run
+    assert set(parent)==set(old)==set(labels) and Counter(labels.values())==Counter(positive=27,negative=235,unknown=19066)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
