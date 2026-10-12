@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Proof Atlas — compiled proof coverage and resource audit
+title: Proof Atlas — compiled proof coverage and checks
 permalink: /projects/proof-atlas/coverage/
 ---
 
-# Complete compiled proofs, bounded resources
+# Complete compiled proof coverage
 
 12 October 2026. The [compiled proof library](/projects/proof-atlas/library/) covers every declaration extracted from two finite project snapshots. Original source projects, tactic scripts, downloadable source archives and extraction logs remain private. The previously published article and statement excerpts remain available.
 
@@ -22,15 +22,11 @@ Every type, available body and recursor rule passed native Lean kernel checking 
 
 Public checks verify every compressed packet's hashes, constructor arities, ordered child links, root reachability, lexical-scope requirements, expanded counts and declaration references. These checks validate the published serialization. They do not independently reproduce the private native kernel checks or prove that every article sentence follows from Lean. The packets are not advertised as standalone kernel certificates.
 
-## Sharing and disk use
+## Structural sharing and binding
 
-The initial exporter repeatedly unfolded shared subterms into trees and created large disposable intermediates. Approximately 9 GiB of those files was removed, raising free disk space from 47 to 56 GiB. Research sources, toolchains and dependency caches were preserved.
+`ExprDAG/1` preserves full structural sharing, including binder names, annotations and metadata. Every ordered child reference remains present. The current inventory has 1,277,896 distinct expression nodes representing 670,018,056 expanded occurrences. This is a measured structural property of the extracted corpus, not a mathematical proof-equivalence claim.
 
-The complete current compiled inventory represents 670 million occurrences with 1.28 million shared nodes, using about 10 MB of compressed packets. The measured private export used about 44 MiB of temporary graph data and 5.7 GiB peak sampled resident memory, including Lean's imported environment. One declaration is processed at a time and its table is released before the next declaration. The browser fetches one declaration at a time too.
-
-The export runner samples memory, output size and free space every five seconds. Default budgets are 8 GiB resident memory, 1 GiB output, a 30 GiB free-space reserve, a 30-minute timeout and a 256 MiB per-file limit. Sampled RAM budgets are not an instantaneous hard allocation ceiling. An unavailable memory monitor causes the runner to stop.
-
-`ExprDAG/1` preserves full structural sharing, including binder names, annotations and metadata. Every ordered child reference remains present. Expanded counts and natural-number literals use exact decimal strings. A stress fixture represents `2^81 − 1` occurrences with 81 nodes. Native controls preserve binder and metadata variants and reject invalid/open expressions and a false body/type pairing. The disk reserve control refused a run with an unavailable reserve.
+Expanded counts and natural-number literals use exact decimal strings. The exporter uses full expression structural equality rather than alpha equality, preserving distinctions that matter for the representation. A bound variable's enclosing binder depends on its root-to-node path. Sharing does not give a variable one fixed binder in every context.
 
 ## Reading compiled proofs
 

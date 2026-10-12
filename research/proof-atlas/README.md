@@ -331,7 +331,7 @@ presentation; fresh private-source kernel replay remains a local reproducible au
 
 ## Complete compiled proof library and bounded extraction
 
-[Coverage and resource audit](https://moiseevigor.github.io/projects/proof-atlas/coverage/) defines the finite denominators: 739 declarations / 715 available bodies in the published 15-module snapshot, and 1,359 / 1,335 in the current 26-module snapshot. Complete compiled types, available bodies, recursor rules and ordered expression links are public. Original project source, tactic scripts, source archives and extraction logs remain private.
+[Coverage and checks](https://moiseevigor.github.io/projects/proof-atlas/coverage/) defines the finite denominators: 739 declarations / 715 available bodies in the published 15-module snapshot, and 1,359 / 1,335 in the current 26-module snapshot. Complete compiled types, available bodies, recursor rules and ordered expression links are public. Original project source, tactic scripts, source archives and extraction logs remain private.
 
 `ExprDAG/1` preserves full structural equality, exact decimal counts and contextual binder paths. The browser loads one declaration at a time and paginates compact decoded subterm listings. The original 7,288-occurrence microscope remains a focused example.
 
