@@ -11,7 +11,7 @@ for dest,src in pairs:
  data=subprocess.check_output(['git','show',a.revision+':'+src],cwd=RESEARCH);total+=len(data);assert total<16*1024**2
  path=OUT/dest;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(data);entries.append(dict(public_file=dest,source_path=src,source_revision=a.revision,bytes=len(data),sha256=hashlib.sha256(data).hexdigest()))
 with (OUT/'source-inventory.csv').open('x',newline='') as f:
- w=csv.DictWriter(f,fieldnames=list(entries[0]));w.writeheader();w.writerows(entries)
+ w=csv.DictWriter(f,fieldnames=list(entries[0]),lineterminator="\n");w.writeheader();w.writerows(entries)
 readme=f'''# Temporal missingness: query cadence is not emitter identity
 
 Exact source blobs from research revision `{a.revision}`.
