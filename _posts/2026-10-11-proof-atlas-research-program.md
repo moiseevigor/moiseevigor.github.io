@@ -56,6 +56,28 @@ The project therefore treats the proof as one exact object with several distinct
 
 These views need not all be generated automatically. In the present prototype the first two follow from measured exports; the explanatory grouping is explicitly authored and labeled.
 
+## A finite visual grammar for Lean's kernel expressions
+
+The first part of the visualization language is now explicit rather than implicit in dot colors. The CoreGIR exporter handles all **twelve constructors of `Lean.Expr`**: `bvar`, `fvar`, `mvar`, `sort`, `const`, `app`, `lam`, `forallE`, `letE`, `lit`, `mdata`, and `proj`. Each has a distinct type of input or scope boundary. Six occur in the exported crossing certificate; all twelve must be representable for a general compiler.
+
+**[Open the illustrated twelve-rule grammar](/projects/proof-atlas/language/)** — every rule has a vector diagram, a Lean example, and a warning about what the picture cannot establish.
+
+The distinction between constructors is structural: `app` takes a function and an argument; `lam` binds a variable to construct a function; `forallE` constructs a dependent function type and also represents universal quantification and implication; `bvar` points back to a specific enclosing binder; `const` refers to a named environment declaration. A theorem need not be a single special kind of syntax node: its checked proof is built from these operations.
+
+One example shows why this matters. The Lean source
+
+```lean
+theorem identity (P : Prop) : P → P := by
+  intro h
+  exact h
+```
+
+can be understood, after elaboration, as a function taking a proposition `P` and a proof `h : P`, then returning that same proof. Schematically the proof term has nested lambda binders with a bound-variable reference in its body. The proposition to be proved has the corresponding dependent-function structure. **The lines connecting variable occurrences to binders are part of the logic, not decorative edges.**
+
+A second boundary matters just as much. **Tactics, macros, notations, and declarations are not additional `Lean.Expr` constructors.** They belong to the Lean surface language, elaboration process, or declaration environment. Twelve rules cover the *core expression algebra* but do not yet amount to a complete graphical language for every Lean source program. The exporter presently omits metadata payloads, so even its comprehensive constructor coverage must not be confused with lossless reconstruction of all source text or elaborator state.
+
+The next test is whether typed visual composition can preserve these boundaries under collapsing and expansion, and whether it helps readers recognize actual mathematical inference patterns.
+
 ## Why borrow from Feynman diagrams?
 
 The useful analogy is **local graphical composition**. In a Feynman diagram, permitted lines and vertices have mathematical meanings and composition rules. The diagram is not, in general, a drawing of a particle's most probable actual path; individual diagrams represent contributions to perturbative calculations. We want to borrow the discipline of a small visual grammar, not the probability interpretation.
