@@ -5,14 +5,14 @@
 (function () {
   'use strict';
   const data=window.PROOF_ATLAS_DATA, named=window.PROOF_ATLAS_DECLARATIONS,
-    grammar=window.PROOF_ATLAS_GRAMMAR, api=window.ProofAtlasAPI;
+    terms=window.PROOF_ATLAS_TERMS, api=window.ProofAtlasAPI;
   const root=document.getElementById('proof-atlas');
-  if(!root||!data||!api||!grammar||grammar.kinds.length!==12)return;
+  if(!root||!data||!api||!window.ProofAtlasTermReader)return;
+  const decoder=window.ProofAtlasTermReader.create(data,terms);
   const $=id=>document.getElementById(id), app=root.querySelector('.pa-app');
   const panel=$('pa-reader'), scroll=$('pa-reader-scroll'), content=$('pa-reader-content');
   const toggle=$('pa-reader-toggle'),close=$('pa-reader-close');
   const hud=$('pa-branch-hud'), hudTitle=$('pa-branch-title'),hudStats=$('pa-branch-stats'),hudNote=$('pa-branch-note');
-  const kinds=new Map(grammar.kinds.map(k=>[k.kind,k]));
   const namedMap=new Map((named?.nodes||[]).map(n=>[n.short,n]));
   const children=Array.from({length:data.parent.length},()=>[]);
   for(let i=0;i<data.parent.length;i++){
@@ -24,8 +24,7 @@
   }
   const depIndex=new Map();
   for(const d of data.deps)for(const i of d.uses)depIndex.set(i,d);
-  const languageKinds=kinds;
-  const FORMAL='From Lean / source',EDITORIAL='Explanatory interpretation',REDACTED='Source payload not public';
+  const FORMAL='From Lean / source',EDITORIAL='Explanatory interpretation';
   const article={
     crossing:'This is the counting conclusion of Lemma 3.3, the crossing principle. The two phase branches cover the phase circle once while monotonicity and endpoint identification exclude distinct crossings. This paragraph is a synopsis, not a quotation from the research manuscript.',
     exists_branch:'Existence is obtained by reducing a phase modulo 2K and applying the intermediate value theorem to one of two continuous phase branches. The formal proof cites intermediate-value lemmas in Mathlib.',
@@ -34,7 +33,7 @@
     psiP:'The positive branch of the zero-curve phase correspondence.',
     psiM:'The negative branch of the zero-curve phase correspondence.'
   };
-  const state={tab:'explain',selection:null,selectedKind:'app',open:true};
+  const state={tab:'explain',selection:null,open:true,history:[]};
   const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   const el=(tag,className,text)=>{const n=document.createElement(tag);if(className)n.className=className;if(text!==undefined)n.textContent=String(text);return n;};
   const word=n=>Number(n).toLocaleString('en-US');
@@ -74,70 +73,6 @@
     }
     return matches.slice(0,limit);
   }
-  function diagram(k){
-    const row=k.diagram||[['input','expression'],['operation','result']];
-    const two=k.kind==='app'||k.kind==='lam'||k.kind==='forallE'||k.kind==='letE'||k.kind==='proj';
-    const boxText=esc(row[1]?.[0]||k.form);
-    const a=esc(row[0]?.[0]||'input'),b=esc(row[0]?.[1]||'term');
-    // Structural ports, scopes, and bindings are explicit; all geometry is
-    // schematic and not a representation of source spans.
-    const arrows=two?
-      '<path d="M73 48 C73 73 133 70 133 93 M259 48 C259 72 199 75 199 93" />':
-      '<path d="M165 49 L165 93"/>';
-    const inputNodes=two?
-      '<rect x="13" y="14" width="123" height="32" rx="5"/><rect x="199" y="14" width="123" height="32" rx="5"/>':
-      '<rect x="70" y="14" width="190" height="32" rx="5"/>';
-    const labels=two?
-      '<text x="74" y="34" text-anchor="middle">'+a+'</text><text x="260" y="34" text-anchor="middle">'+b+'</text>':
-      '<text x="165" y="34" text-anchor="middle">'+a+'</text>';
-    const scope=k.role==='binder'?'<path d="M43 59 V141 H287 V59" stroke="#c6a981" stroke-dasharray="5 5" fill="none" opacity=".65"/>':'';
-    const hole=k.kind==='mvar'?'<circle cx="165" cy="112" r="25" fill="none" stroke="#ad889e" stroke-dasharray="5 4" stroke-width="2"/>':'';
-    return '<svg viewBox="0 0 334 158" class="pr-rule-svg" role="img" aria-label="'+esc(k.title)+': '+esc(k.meaning)+'">'+
-      '<rect width="334" height="158" rx="9" fill="#edf3ef"/>'+
-      '<g fill="none" stroke="#7ea1a5" stroke-width="2">'+arrows+'</g>'+scope+
-      '<g fill="#fff" stroke="#769ba2" stroke-width="1.5">'+inputNodes+'</g>'+hole+
-      '<rect x="89" y="93" width="153" height="37" rx="6" fill="#1c5360" />'+
-      '<g fill="#264b55" font-family="system-ui,sans-serif" font-size="11">'+labels+'</g>'+
-      '<text x="165" y="116" fill="#f7faf8" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="600">'+boxText.slice(0,21)+'</text>'+
-      '<text x="165" y="149" fill="#66818a" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10">'+esc(k.meaning)+'</text></svg>';
-  }
-  function selectedRule(){
-    return languageKinds.get(state.selectedKind)||grammar.kinds[0];
-  }
-  function renderRule(parent,k){
-    eyebrow(parent,'Core expression constructor · '+k.kind);
-    heading(parent,k.title);
-    const svg=el('div');svg.innerHTML=diagram(k);parent.appendChild(svg);
-    paragraph(parent,k.explanation);
-    eyebrow(parent,'Corresponding Lean source expression — illustrative');
-    code(parent,k.example);
-    notice(parent,k.caution);
-    const foot=el('p','pr-detail',k.observed?
-      'Observed in the SE(2) crossing certificate. This example describes the constructor, not the selected proof expression.':
-      'Not observed in the closed CrossingData.crossing certificate; included because it is part of the Lean.Expr language.');
-    parent.appendChild(foot);
-  }
-  function renderGrammar(parent){
-    parent.appendChild(pill('12 / 12 Core Lean.Expr constructors'));
-    eyebrow(parent,'A finite graphical alphabet');
-    heading(parent,'The visual syntax of Lean');
-    paragraph(parent,'These twelve constructors define the kernel expression tree exported by CoreGIR. Surface syntax (theorem, tactics, macro syntax) elaborates into combinations of them; it is a separate, much larger language.');
-    const grid=el('div','pr-syntax-grid');
-    for(const k of grammar.kinds){
-      const b=el('button','pr-syntax-card'+(state.selectedKind===k.kind?' active':''));b.type='button';
-      b.append(el('strong',null,k.kind),el('span',null,k.title));
-      const svg=el('div');svg.innerHTML=diagram(k);b.appendChild(svg);
-      b.addEventListener('click',()=>{
-        state.selectedKind=k.kind;
-        render({resetScroll:false});
-        const spot=$('pa-rule-focus');if(spot)spot.scrollIntoView({block:'nearest',behavior:'smooth'});
-      });
-      grid.appendChild(b);
-    }
-    parent.appendChild(grid);separator(parent);
-    const box=el('div');box.id='pa-rule-focus';parent.appendChild(box);
-    renderRule(box,selectedRule());
-  }
   function renderNamed(parent,n){
     parent.appendChild(pill(FORMAL));
     eyebrow(parent,n.kind+' · Crossing.lean · line '+n.line);
@@ -147,7 +82,8 @@
     if(state.tab==='lean'){
       eyebrow(parent,'Verified source-level declaration statement');
       code(parent,n.statement);
-      notice(parent,'This is the declaration statement exported from Crossing.lean; the unpublished proof body and elaborated term are not included in the public atlas.');
+      notice(parent,n.short==='crossing'?'The crossing type and elaborated proof term are published. Inspect the proof root to read the actual term; its original tactic script is not reconstructed.':'This declaration statement is published. Its own proof body is not expanded by the crossing export; references to it remain named constants.');
+      if(n.short==='crossing')action(makeActions(parent),'Read complete crossing proof',()=>toExpression(data.roots[1]));
     }else{
       paragraph(parent,'This node names a Lean '+(n.kind==='def'?'definition':n.kind==='structure'?'structure':'theorem')+'. It is not an arbitrary expression ID.');
       if(article[n.short]){
@@ -170,64 +106,57 @@
       state.tab=state.tab==='lean'?'explain':'lean';render();
     });
   }
+  function download(text,name){
+    const url=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));
+    const link=el('a');link.href=url;link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  }
   function renderExpr(parent,i){
-    const k=data.kinds[Number(data.kind[i])],rule=languageKinds.get(k);
-    const leaf=(data.size[i]===1),decl=leaf?namedForOccurrence(i):null;
-    state.selectedKind=k;
-    parent.appendChild(pill('Measured CoreGIR expression'));
-    eyebrow(parent,leaf?'Terminal syntax occurrence':'Internal expression');
-    heading(parent,decl?decl.short:'Expression #'+i+' · '+(rule?.title||k));
-    if(state.tab==='lean'){
-      eyebrow(parent,'Structural syntax — payload anonymized');
-      const childIds=children[i];
-      const preview=leaf?('Expr.'+k+'  -- no expression children') :
-        ('Expr.'+k+'(\n'+childIds.map((j,n)=>'  child '+(n+1)+': #'+j+'  -- '+data.kinds[+data.kind[j]]).join('\n')+'\n)');
-      code(parent,decl?decl.statement:preview);
-      if(!decl)notice(parent,'This is a readable structural sketch, not verbatim Lean source. Binder names, universe levels, types, and original source spans were withheld in the public projection.');
-    }else{
-      if(decl){
-        paragraph(parent,'This syntax leaf is a reference to the actual Lean '+decl.kind+' '+decl.name+'. The enclosing expression applies or otherwise uses that declaration.');
-        if(article[decl.short])paragraph(parent,article[decl.short]);
+    const k=decoder.kind(i),leaf=data.size[i]===1,decl=leaf?namedForOccurrence(i):null;
+    heading(parent,'Expression #'+i+' · '+(data.roots[1]===i?'Crossing proof':k));
+    const meta=el('p','pr-subtree-meta',word(data.size[i])+' occurrences · '+word(termCounts[i])+' terminal leaves');parent.appendChild(meta);
+    if(state.history.length){const prior=state.history[state.history.length-1],back=makeActions(parent);action(back,'← Back to subtree #'+prior,()=>{state.history.pop();state.restoring=true;toExpression(prior);state.restoring=false;});}
+    if(decoder.complete){
+      if(state.tab==='explain'){
+        paragraph(parent,decoder.describe(i));
+        eyebrow(parent,'The selected term · readable rendering');
+        const pre=code(parent,decoder.format(i));pre.id='pa-subtree-text';
+        parent.appendChild(el('p','pr-detail','Notation hides recognized type and instance arguments. The full-term view retains every occurrence.'));
       }else{
-        paragraph(parent,rule?.explanation||'A Lean expression. The public data give its structural constructor and edges, not the original mathematical formula.');
+        eyebrow(parent,'All arguments · no subtree truncation');
+        const pre=code(parent,decoder.format(i,false));pre.id='pa-subtree-text';
       }
-      if(rule){
-        const d=el('div');d.innerHTML=diagram(rule);parent.appendChild(d);
+      const ctx=decoder.context(i);
+      if(ctx.length){
+        const details=el('details','pr-context');details.appendChild(el('summary',null,'Variables and assumptions in scope · '+ctx.length));
+        const list=el('dl','pr-context-list');for(const entry of ctx){const dt=el('dt');action(dt,entry.name+' · binder #'+entry.id,()=>toExpression(entry.id));const dd=el('dd',null,entry.type);list.append(dt,dd);}details.appendChild(list);parent.appendChild(details);
       }
-      notice(parent,leaf?
-        'A terminal expression is not necessarily a lemma. A const node can reference a named declaration; a bvar points to its binder; a lit is an atomic value.':
-        'The highlighted subtree is an exact set of expression occurrences. It has no automatically known article passage or independent lemma boundary.');
+      if(state.tab==='lean'){
+        eyebrow(parent,'Every occurrence in this subtree');
+        const rows=decoder.rows(i),list=el('ol','pr-term-tree');let shown=0;
+        const more=el('button','pr-term-more'),status=el('p','pr-detail');more.type='button';
+        const append=()=>{for(const r of rows.slice(shown,shown+200)){const li=el('li');li.dataset.occurrence=r.id;li.style.setProperty('--term-depth',Math.min(r.depth,8));const b=el('button','pr-term-row');b.type='button';b.dataset.occurrence=r.id;b.append(el('span','pr-term-index','#'+r.id),el('span','pr-term-role',r.role),el('span','pr-term-label',r.label));b.title=r.path;b.addEventListener('click',()=>toExpression(r.id));li.appendChild(b);list.appendChild(li);}shown=Math.min(shown+200,rows.length);status.textContent=word(shown)+' / '+word(rows.length)+' occurrences shown';more.hidden=shown===rows.length;more.textContent='Show next '+Math.min(200,rows.length-shown)+' occurrences';};
+        more.addEventListener('click',append);append();parent.append(list,status,more);
+      }
+      const actions=makeActions(parent);
+      action(actions,'Download entire subtree',()=>{const rows=decoder.rows(i);download('Selected occurrence #'+i+'\n'+decoder.path(i)+'\nCoreGIR SHA-256: '+terms.source.coregirSha256+'\n\nFULL TERM\n'+decoder.format(i,false)+'\n\nALL '+rows.length+' OCCURRENCES\n'+rows.map(r=>'  '.repeat(r.depth)+'#'+r.id+' '+r.role+' | '+r.label+' | '+JSON.stringify(r.payload)+' | '+r.path).join('\n'),'crossing-subtree-'+i+'.txt');});
+      const source=el('details','pr-context');source.appendChild(el('summary',null,'Formal provenance'));paragraph(source,decoder.path(i));paragraph(source,'CoreGIR SHA-256: '+terms.source.coregirSha256);paragraph(source,terms.scope);parent.appendChild(source);
+    }else{
+      notice(parent,'The released graph omits term payloads. The entire structural subtree is shown below, but its redacted formulas cannot be reconstructed.');
+      const rows=decoder.rows(i);code(parent,rows.map(r=>'  '.repeat(r.depth)+'#'+r.id+' '+r.role+' · '+r.label).join('\n'));
     }
-    stats(parent,[['Expression occurrences',word(data.size[i])],['Terminal leaves',word(termCounts[i])],['Direct children',children[i].length],['Source depth',(()=>{let d=0,j=i;while(data.parent[j]>=0){d++;j=data.parent[j];}return d})()]]);
     const refs=relatedNames(i);
-    if(refs.length){
-      separator(parent);
-      eyebrow(parent,'Named declarations inside this subtree');
-      const a=makeActions(parent);
-      for(const r of refs){
-        const n=namedMap.get(r.name.split('.').pop());
-        action(a,r.name+' · '+r.count+' occurrence'+(r.count===1?'':'s'),()=>n?toNamed(n.short):toExpression(r.idx));
-      }
-    }
-    if(decl){
-      const a=makeActions(parent);
-      action(a,'Open named '+decl.kind+' ↗',()=>toNamed(decl.short));
-    }
-    separator(parent);
-    eyebrow(parent,'Immediate syntax structure');
+    if(refs.length){const details=el('details','pr-context');details.appendChild(el('summary',null,'Project declarations used here · '+refs.length));const a=makeActions(details);for(const r of refs){const n=namedMap.get(r.name.split('.').pop());action(a,r.name+' · '+r.count+' use'+(r.count===1?'':'s'),()=>n?toNamed(n.short):toExpression(r.idx));}parent.appendChild(details);}
+    if(decl){const a=makeActions(parent);action(a,'Open named '+decl.kind+' '+decl.short+' ↗',()=>toNamed(decl.short));}
     const actions=makeActions(parent);
     if(data.parent[i]>=0)action(actions,'Parent #'+data.parent[i],()=>toExpression(data.parent[i]));
-    for(const j of children[i].slice(0,7))action(actions,'Child #'+j+' · '+data.kinds[+data.kind[j]],()=>toExpression(j));
-    if(children[i].length>7)paragraph(parent,'The remaining '+(children[i].length-7)+' direct children are accessible through the subtree explorer.');
-    const choose=makeActions(parent);
-    action(choose,'Show descendants on graph',()=>api.setScope('subtree'));
-    action(choose,'Show path to root',()=>api.setScope('lineage'));
+    for(const j of children[i])action(actions,'Child #'+j+' · '+decoder.kind(j),()=>toExpression(j));
+    const choose=makeActions(parent);action(choose,'Show descendants on graph',()=>api.setScope('subtree'));action(choose,'Show path to root',()=>api.setScope('lineage'));
   }
   function renderDep(parent,i){
     const d=data.deps[i];parent.appendChild(pill(FORMAL));
     eyebrow(parent,'Direct environment declaration reference');
     heading(parent,d.name==='Kernel/library declaration'?'Library declaration #'+(i+1):d.name);
-    paragraph(parent,'This dependency appears '+d.count+' time'+(d.count===1?'':'s')+' in the theorem’s elaborated expression. The public projection obscures many library names; the original closed proof remains private.');
+    paragraph(parent,'This dependency appears '+d.count+' time'+(d.count===1?'':'s')+' in the theorem’s elaborated expression. The graph projection abbreviates library names; the selected reference occurrence reveals the actual published declaration name. Referenced declarations’ own proof bodies are not expanded.');
     const actions=makeActions(parent);
     if(d.uses.length)action(actions,'Inspect exact reference occurrence #'+d.uses[0],()=>toExpression(d.uses[0]));
     const local=d.name.startsWith('CrossingData.')?namedMap.get(d.name.split('.').pop()):null;
@@ -268,22 +197,21 @@
     const oldY=preserve?scroll.scrollTop:0;
     content.replaceChildren();
     const s=state.selection||{type:'decl',id:'crossing'};
-    $('pa-reader-title').textContent=s.type==='expr'?'Lean expression '+s.id:
+    $('pa-reader-title').textContent=s.type==='expr'?'Subtree #'+s.id:
       s.type==='decl'?s.id:s.type==='dep'?'Declaration dependency':'Interpretation';
+    document.querySelector('[data-pa-reader-tab="lean"]').textContent=s.type==='expr'?'Full term':'Lean statement';
     document.querySelectorAll('.pa-reader-tabs [data-pa-reader-tab]').forEach(b=>{
       const active=b.dataset.paReaderTab===state.tab;
       b.classList.toggle('active',active);b.setAttribute('aria-selected',active?'true':'false');
     });
-    if(state.tab==='language')renderGrammar(content);
-    else if(s.type==='decl'){
+    if(s.type==='decl'){
       const n=namedMap.get(s.id);if(n)renderNamed(content,n);
     }else if(s.type==='expr')renderExpr(content,s.id);
     else if(s.type==='dep')renderDep(content,s.id);
     else renderIdea(content,s.id);
     displayHud(s);
-    $('pa-reader-status').textContent=state.tab==='language'?'12 Lean.Expr constructors · all covered':
-      s.type==='decl'?'Lean declaration · source-level':
-      s.type==='expr'?'CoreGIR structure · original payload private':
+    $('pa-reader-status').textContent=s.type==='decl'?'Lean declaration · source-level':
+      s.type==='expr'?(decoder.complete?'Actual subtree · '+word(data.size[s.id])+' occurrences':'Structural subtree · payload unavailable'):
       s.type==='dep'?'Lean environment dependency':'Editorial explanation';
     scroll.scrollTop=preserve?oldY:0;
   }
@@ -300,35 +228,27 @@
   toggle.addEventListener('click',()=>setOpen(!state.open));
   document.querySelectorAll('[data-pa-reader-tab]').forEach(b=>b.addEventListener('click',()=>{
     state.tab=b.dataset.paReaderTab;
-    if(state.tab==='language'&&state.selection?.type==='expr'){
-      state.selectedKind=data.kinds[Number(data.kind[state.selection.id])];
-    }
     setOpen(true);render();
   }));
   $('pa-branch-desc').addEventListener('click',()=>api.setScope('subtree'));
   $('pa-branch-lineage').addEventListener('click',()=>api.setScope('lineage'));
   window.addEventListener('proof-atlas:selection',e=>{
+    if(e.detail.type==='expr'&&state.selection?.type==='expr'&&e.detail.id!==state.selection.id&&!state.restoring)state.history.push(state.selection.id);
+    if(e.detail.type!=='expr')state.history=[];
     state.selection=e.detail;
-    if(state.tab==='language'&&e.detail.type==='expr'){
-      state.selectedKind=data.kinds[Number(data.kind[e.detail.id])];
-    }
     render();
   });
   window.addEventListener('proof-atlas:mode',()=>{
     displayHud(state.selection);
   });
-  window.ProofAtlasReader={
-    open:()=>setOpen(true),close:()=>setOpen(false),
-    showGrammar:kind=>{
-      if(kind&&kinds.has(kind))state.selectedKind=kind;
-      state.tab='language';setOpen(true);render();
-    }
-  };
+  window.ProofAtlasReader={open:()=>setOpen(true),close:()=>setOpen(false),showSubtree:toExpression};
   // The main graph initializes before this reader script. Restore its actual
   // default named declaration selection on first load.
   const snapshot=api.getSnapshot();
   state.selection=snapshot.mode==='map'?{type:'decl',id:snapshot.namedSelected}:
     {type:'expr',id:snapshot.selected};
-  state.selectedKind=data.kinds[Number(data.kind[snapshot.selected])];
   setOpen(true);render();
+  // Share a selected occurrence without changing other page anchors.
+  const selected=window.location.hash.match(/^#expr-(\d+)$/);
+  if(selected&&Number(selected[1])<data.parent.length)toExpression(Number(selected[1]));
 })();

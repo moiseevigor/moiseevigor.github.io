@@ -120,7 +120,7 @@ The existing exporter processed the elaborated **theorem statement and proof ter
 
 We also computed **665 distinct structural subtree fingerprints** across the 7,288 occurrences. This is a preliminary *syntactic* statistic, based on constructor, payload and ordered child fingerprints. It does **not** show that 91% of the mathematical argument is redundant, that the associated proofs are equivalent, or that repeated subtrees may be identified across different binder contexts.
 
-The public [interactive atlas](/projects/proof-atlas/) offers whole-proof geometry, a declaration-use constellation, recursive zoom and an editorial explanation. It ships only the anonymized structural projection: not the private Lean certificate text.
+The public [interactive atlas](/projects/proof-atlas/) offers whole-proof geometry, a declaration-use constellation, recursive zoom and an editorial explanation. Its original release shipped an anonymized structural projection. The 12 October subtree-reader release additionally publishes the exported crossing term payloads, as described below; the manuscript and original tactic script remain outside this release.
 
 ## The mathematical idea we want the compiler to find
 
@@ -171,6 +171,16 @@ Validation checks 40 complete source examples with Lean 4.33.1 and ten small clo
 The contrast failure in the first interface exposed a testing gap: tests served raw page files without Jekyll’s shared styles. The browser workflow now builds and serves the actual site. The code panel’s measured foreground/background contrast is **11.02:1**. Reproducible commands, scope and remaining gaps are recorded in the [public research record](https://github.com/moiseevigor/moiseevigor.github.io/tree/master/research/proof-atlas).
 
 This is a reference and interface milestone. It does not establish automatic mathematical explanations, universal semantic compression, or graphical proof construction. The released crossing graph and its provenance data retain their existing scope.
+
+## 12 October 2026: reading the actual selected subtree
+
+The right-hand reader now displays the **entire selected term** and its local variables and assumptions. The complete exported payloads of the crossing type and proof were released with the author's explicit authorization. Constructor lessons remain in the separate language reference.
+
+[Select expression 1852](/projects/proof-atlas/app/#expr-1852). Its 105 occurrences decode to the equality `C.branch σ p = ψ + (2 : Real) * C.K * (↑n : Real)`. This is the actual equality proposition at that node, not a claim that the node itself proves it. The surrounding scope includes `σ : Real`, `n : Int` and `hp : p ∈ [C.lo, C.hi]`.
+
+Read mode uses recognized notation. Full term shows all type, instance and universe arguments, followed by every occurrence with its constructor, field role and binding target. Clicking an occurrence selects it in the graph. Large occurrence lists load incrementally; downloadable text includes the entire subtree, verified for the 7,085-occurrence proof root as well as the 105-occurrence example. All 7,288 occurrence paths and payloads were aligned with the original CoreGIR export before release.
+
+This decoder preserves the exported term structure but does not recover original tactics, omitted metadata annotations, types inferred for each node or the bodies of referenced lemmas. Its prose is a deterministic description of terms and recognized logical operations, not an automatically discovered explanation of the whole mathematical argument. The [public research record](https://github.com/moiseevigor/moiseevigor.github.io/tree/master/research/proof-atlas) specifies the data contract and validation.
 
 ## References and nearby work
 

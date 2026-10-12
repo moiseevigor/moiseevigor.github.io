@@ -6,7 +6,7 @@
 
 ## What is public
 
-This directory documents a measurable experiment converting a real Lean 4 theorem's elaborated **type and proof expression** into a structural graph. The anonymized dataset exposes expression occurrence topology and direct reference counts, not proof-term payloads or the Lean source of the private SE(2) manuscript.
+This directory documents a measurable experiment converting a real Lean 4 theorem's elaborated **type and proof expression** into a structural graph. The structural dataset retains anonymized labels for graph navigation. Since the authorized 12 October release, `crossing-terms.js` additionally publishes the complete exported payloads of all 7,288 occurrences in the crossing type and proof, with actual declaration names and structural paths. The original tactic script and private SE(2) manuscript source are not included.
 
 The measured benchmark:
 
@@ -34,7 +34,7 @@ The public `crossing-structure.js` assigns a single `window.PROOF_ATLAS_DATA` ob
 - `deps` contains direct declaration-use counts and occurrence indices, with most declaration names anonymized.
 - `stats` is a verified summary from the original exporter.
 
-The index is **not** a stable Lean source location. Internal provenance remains private until a deliberate release.
+The index is **not** a stable Lean source location. The term release reconstructs the original CoreGIR paths from parents and ordered constructor fields; its builder checks every path against the original export.
 
 ## Scope and next research step
 
@@ -83,6 +83,8 @@ docker compose --profile build run --rm build
 python3 -m http.server 8833 --bind 127.0.0.1 --directory _site_production
 # In a second terminal:
 node scripts/test-proof-atlas-browser.cjs
+node scripts/test-proof-atlas-decoder.cjs
+node scripts/test-proof-atlas-subtree.cjs
 node scripts/test-proof-atlas-grammar.cjs
 node scripts/test-proof-atlas-reference.cjs
 ```
@@ -114,3 +116,40 @@ source-info export/trace replay remain outside this iteration. Semantic module
 certification, proof construction, reader comprehension studies and general
 mathematical explanation remain research targets. Existing witness integrity work
 is separate; this UI change does not certify every public witness path.
+
+
+## Selected-subtree reader — 12 October 2026
+
+The right reader now follows the selected expression and shows its actual term,
+not a generic constructor lesson. Read mode decodes known notation and displays
+variables and assumptions from enclosing binders. Full term retains all arguments,
+universe parameters and an occurrence listing with field roles and binding IDs.
+Selecting a row selects that exact graph occurrence. Large listings load 200 rows
+at a time; both the term text and downloadable listing include the entire subtree.
+The standalone language reference remains separate.
+
+For example, [occurrence 1852](https://moiseevigor.github.io/projects/proof-atlas/app/#expr-1852)
+has 105 occurrences and states `C.branch σ p = ψ + (2 : Real) * C.K * (↑n : Real)`.
+It is an equality proposition, not itself a proof of that equality. The proof root
+has 7,085 occurrences; the separate type root has 203.
+
+`crossing-terms.js` has format `ProofAtlasTermPayload/1`: aligned `payloads`,
+`rootPaths`, declaration kinds, the original export SHA-256 and artifact run.
+`build_term_data.py` verifies constructors, ordered children and all reconstructed
+paths against the original CoreGIR export before producing this file. Payload
+publication was explicitly authorized by the repository owner. The release uses
+export SHA-256 `43fbca52cefe9158d5859de6c8ef0e7f379ffce18015e3577d1a3a168bdfbfc8`.
+
+This is a deterministic display decoder, not Lean's pretty-printer or a new kernel
+check. Display names simplify compiler hygiene suffixes; original payloads and
+paths remain in the download. Recognized notation hides type and instance arguments
+only in Read mode. Unrecognized terms retain their arguments. The export lacks
+metadata key/value payloads, original tactics, inferred types for every occurrence,
+and transitive dependency proof bodies. No missing information is invented.
+
+Decoder checks cover every released occurrence and an independent incomplete
+application control. Browser checks verify the example's full 105-row listing,
+text-to-graph navigation, local hypothesis scope, complete 7,085-row download,
+shareable occurrence link, mobile overflow and a scoped automated accessibility
+audit. This does not establish general mathematical explanation or reconstruction
+of arbitrary Lean source programs.

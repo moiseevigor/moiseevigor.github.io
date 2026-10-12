@@ -6,7 +6,7 @@ permalink: /projects/proof-atlas/
 page_class: proof-atlas-page
 description: "Explore a real 7,288-expression Lean proof as an interactive graph, then compare its syntactic shape with its mathematical explanation."
 ---
-<link rel="stylesheet" href="/public/css/proof-atlas.css?v=8">
+<link rel="stylesheet" href="/public/css/proof-atlas.css?v=9">
 <main class="pa-page" id="proof-atlas">
   <section class="pa-hero" aria-labelledby="pa-title">
     <div class="pa-eyebrow"><span class="pa-orbit" aria-hidden="true"></span> Research program / Proof Atlas · 2026</div>
@@ -123,14 +123,13 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
           <button type="button" id="pa-reader-close" aria-label="Close proof reader" title="Close reader">×</button>
         </header>
         <div class="pa-reader-tabs" role="tablist" aria-label="Proof reader tabs">
-          <button type="button" class="active" data-pa-reader-tab="explain" role="tab" aria-selected="true">Explain</button>
+          <button type="button" class="active" data-pa-reader-tab="explain" role="tab" aria-selected="true">Read</button>
           <button type="button" data-pa-reader-tab="lean" role="tab" aria-selected="false">Lean</button>
-          <button type="button" data-pa-reader-tab="language" role="tab" aria-selected="false">Visual grammar · 12</button>
         </div>
         <div id="pa-reader-scroll" class="pa-reader-scroll" tabindex="0" role="region" aria-label="Selected proof explanation">
           <div id="pa-reader-content"></div>
         </div>
-        <footer class="pa-reader-footer"><span id="pa-reader-status">Formal structure and explanation are separate.</span><a href="/projects/proof-atlas/language/">All 12 rules ↗</a></footer>
+        <footer class="pa-reader-footer"><span id="pa-reader-status">Formal structure and explanation are separate.</span><a href="/projects/proof-atlas/grammar/">Language reference ↗</a></footer>
       </section>
     </div>
     <div class="pa-explorer-note"><span>↗</span><p><strong>Exact versus interpretive.</strong> Whole proof and recursion use observed CoreGIR syntax. The dependency view uses actual reference counts but anonymizes some names. The mathematical-idea view is a <em>human-authored interpretation</em> of two named supporting lemmas—not automatically inferred from graph topology.</p></div>
@@ -205,7 +204,7 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
     <h2>The research trail</h2>
     <div class="pa-links">
       <a href="/mathematics/2026/10/11/proof-atlas-research-program/"><span>Research introduction</span><strong>From certificates to geometric explanations ↗</strong><small>Motivation, diagram grammar, claims and falsifiable next tests</small></a>
-      <a href="/public/data/proof-atlas/crossing-structure.js"><span>Public structural data</span><strong>Anonymized graph projection ↗</strong><small>Real 7,288-node topology; no private certificate payload</small></a>
+      <a href="/public/data/proof-atlas/crossing-structure.js"><span>Public structural data</span><strong>Anonymized graph projection ↗</strong><small>Real 7,288-node topology; paired with the published term data</small></a>
       <a href="https://lean-lang.org/doc/reference/latest/" target="_blank" rel="noopener"><span>External reference</span><strong>The Lean 4 reference manual ↗</strong><small>Kernel expressions, proofs and dependent type theory</small></a>
     </div>
   </section>
@@ -215,4 +214,6 @@ description: "Explore a real 7,288-expression Lean proof as an interactive graph
 <script src="/public/data/proof-atlas/lean-expr-grammar.js" defer></script>
 <script src="/public/js/proof-atlas-scales.js?v=2" defer></script>
 <script src="/public/js/proof-atlas.js?v=10" defer></script>
-<script src="/public/js/proof-atlas-reader.js?v=1" defer></script>
+<script src="/public/data/proof-atlas/crossing-terms.js" defer></script>
+<script src="/public/js/proof-atlas-term-reader.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-reader.js?v=3" defer></script>
