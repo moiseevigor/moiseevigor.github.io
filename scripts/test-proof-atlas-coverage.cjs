@@ -33,6 +33,8 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=r
   await p.screenshot({path:path.join(dir,'theorem-4-1-coverage.png')});
   const greek=p.locator('.pa-more-statement').filter({has:p.locator('.pa-lean-statement[data-lean-name="JacobiData.hasDerivAt_β1_div_c"]')});await greek.locator('summary').click();await greek.locator('.pa-lean-line').first().click();
   assert(await p.evaluate(()=>document.activeElement.id==='lean-identities-JacobiData.hasDerivAt_β1_div_c'),'Greek declaration fragment was not restored');
+  await p.reload();await p.waitForFunction(()=>document.activeElement.id==='lean-identities-JacobiData.hasDerivAt_β1_div_c');
+  assert(await p.locator('.pa-lean-statement[data-lean-name="JacobiData.hasDerivAt_β1_div_c"]').isVisible(),'Shared source fragment must expand its declaration');
   for(const id of ['coincident','floquet','late-folds','separatrix']){
    const panel=p.locator('[data-coverage-statement="'+id+'"]');assert.equal(await panel.locator('.pa-lean-statement').count(),0);
    assert((await panel.textContent()).includes('Not formalized'));

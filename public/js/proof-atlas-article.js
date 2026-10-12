@@ -23,6 +23,7 @@
  async function reveal(){
   let id;try{id=decodeURIComponent(location.hash.slice(1));}catch(_){return;}
   const target=document.getElementById(id);if(!target)return;
+  for(let parent=target.parentElement;parent&&parent!==paper;parent=parent.parentElement){if(parent.tagName==='DETAILS')parent.open=true;}
   if(document.fonts)await document.fonts.ready;
   paper.querySelectorAll('.pa-paper-highlight').forEach(n=>n.classList.remove('pa-paper-highlight'));
   const block=id.startsWith('passage-')||id.startsWith('lean-')?target:target.closest('p,.lemma,.theorem,.remark,table')||target;
