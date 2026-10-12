@@ -207,7 +207,7 @@ Download [the three system/comparator cards with every alternative](/public/data
 
 **Native-position check · 13 October 2026.** A historical radio maser record, **330.878-0.367**, lies **12.520 arcseconds** from the first dust-clump centre. But it is **17.501 arcseconds** from the best infrared counterpart, `SSTGLMC G330.8829-00.3661`. A region can contain a useful radio marker without that marker supporting the infrared point selected by a clump-level rank.
 
-The separately frozen comparison used original equatorial positions for **707** historical MMB catalogue records, the same three consumed cases and **all six** retained infrared Catalog alternatives. **0 / 3** fixed best points meets the declared one-arcsecond radio criterion; **0 / 6** alternatives has any catalogue maser position within that radius. The criterion required at least one of the three best points. It failed.
+The separately frozen comparison used original equatorial positions for **707** historical MMB catalogue records, the same three consumed cases and **all six** retained infrared Catalog alternatives. **0 / 3** fixed best points meet the declared one-arcsecond radio criterion; **0 / 6** alternatives have any catalogue maser position within that radius. The criterion required at least one of the three best points. It failed.
 
 <div class="sb-ledger" role="region" aria-label="Native radio-marker separations for the three fixed counterpart cases" tabindex="0" markdown="1">
 
