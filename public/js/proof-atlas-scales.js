@@ -47,7 +47,10 @@
     mdata:'Auxiliary annotation',proj:'Field selection'
   };
   const NS='http://www.w3.org/2000/svg';
-  const observedCounts={app:3527,const:2892,bvar:431,lam:110,lit:322,forallE:6};
+  // Derive measured status from the released CoreGIR benchmark, not from
+  // the examples used to explain the universal constructor language.
+  const observedCounts=window.PROOF_ATLAS_DATA?.stats?.kindCounts ||
+    {app:3527,const:2892,bvar:431,lam:110,lit:322,forallE:6};
   const $=id=>document.getElementById(id);
   const dom=(tag,cls,content)=>{
     const el=document.createElement(tag);if(cls)el.className=cls;
