@@ -3,14 +3,14 @@
  'use strict';
  const definitions=[
   ['factor','JacobiData.z_eq_neg_beta_div_ell','step-riccati-factor','Factorization','z = ab = −β/ℓ','derivatives',0],
-  ['a','JacobiData.a_deriv_form','step-riccati-pair','Riccati equation for a','a′ = (d² + ca + k²s²a²)/(ds)','derivatives',1],
-  ['b','JacobiData.b_deriv_form','step-riccati-pair','Riccati equation for b','b′ = ((1−k²)s² − cb − d²b²)/(ds)','derivatives',1],
+  ['a','JacobiData.a_deriv_form','step-riccati-pair','Rewrite the a-slope formula','(d² + ca + k²s²a²)/(ds)','derivatives',1],
+  ['b','JacobiData.b_deriv_form','step-riccati-pair','Rewrite the b-slope formula','((1−k²)s² − cb − d²b²)/(ds)','derivatives',1],
   ['z','JacobiData.hasDerivAt_z','step-riccati-cancellation','Product differentiation','z′ = (T₁ + T₂)/(ds)','derivatives',2],
   ['product','JacobiData.T1_mul_T2','step-riccati-product','Product identity','T₁T₂ = d²s²z(1−z)D','bound',0],
   ['sign','JacobiData.T1_T2_same_sign','step-riccati-sign','Common sign','T₁ and T₂ have the same sign','bound',0],
   ['amgm','JacobiData.two_sqrt_mul_le_add','step-riccati-amgm','AM–GM helper','2√(xy) ≤ x + y, x,y ≥ 0','bound',0],
   ['slope','JacobiData.slope_bound_abs','step-riccati-amgm','Scalar slope bound','|(T₁ + T₂)/(ds)| ≥ 2√(z(1−z)D)','bound',1],
-  ['lift','SBracket.one_le_ε_deriv_u','step-riccati-lift','Oriented phase-lift bound','εu′ ≥ 1 on a signed bracket','bound',2]
+  ['lift','SBracket.one_le_ε_deriv_u','step-riccati-lift','Bound the lift-slope expression','ε zₚ/(2√(z(1−z)D)) ≥ 1','bound',2]
  ];
  function model(index){
   const nodes=definitions.map(([id,declaration,step,title,formula,group,level])=>{
@@ -27,6 +27,7 @@
   const data=model(index),buttons=new Map(),ns='http://www.w3.org/2000/svg';
   const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text)n.textContent=text;if(cls)n.className=cls;return n;};
   container.replaceChildren();container.append(el('p','Arrows point from a lemma to its completed application in another proof. They show indexed calls, not a claim that all intermediate arguments are displayed.','pa-argument-note'));
+  container.append(el('p','The a/b nodes rewrite derivative formulas algebraically. The z′ node contains the differentiation proof. The last node bounds the oriented lift-slope expression.','pa-argument-note'));
   container.append(el('p','D = 1 − k² + k²z. The scalar bound retains z ∈ (0,1), d > 0 and nonzero denominator hypotheses; the phase-lift result uses the supplied inverse-lift derivative and ε = ±1.','pa-argument-note'));
   const groups=[];
   for(const [id,title]of [['derivatives','Differentiation'],['bound','Slope inequality']]){
