@@ -396,6 +396,10 @@
         {
           "declaration": "SBracket.exact_time",
           "selector": "proof"
+        },
+        {
+          "declaration": "SBracket.J2_eq_zero_iff",
+          "selector": "proof"
         }
       ],
       "selection": "JacobiFull.cell_roots"
@@ -521,6 +525,703 @@
         }
       ],
       "selection": "JacobiFull.J2_even_eq_zero_iff"
+    },
+    {
+      "id": "step-identities-beta",
+      "title": "3.1 proof · coefficient product",
+      "articleAnchor": "lem:identities",
+      "sourceLines": [
+        252,
+        254
+      ],
+      "raw": "(i) From \\eqref{eq:coefficients}, $f_1=-cq-ds$ and $\\beta_1=c\\epsilon-ds$;\nmultiplying and using $c^2+s^2=1$,\n$f_1\\beta_1=s\\{cd(q-\\epsilon)+s(d^2+\\epsilon q)\\}-\\epsilon q=X-\\ell$.",
+      "note": "Coefficient collapse under the JacobiData algebraic identities.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiData.collapse_beta",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiData.collapse_beta"
+    },
+    {
+      "id": "step-identities-alpha",
+      "title": "3.1 proof · alpha identity",
+      "articleAnchor": "lem:identities",
+      "sourceLines": [
+        255,
+        255
+      ],
+      "raw": "The second identity is the definition of $\\alpha$;",
+      "note": "The compiled alpha collapse unfolds its definition.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiData.collapse_alpha",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiData.collapse_alpha"
+    },
+    {
+      "id": "step-identities-diff",
+      "title": "3.1 proof · coefficient difference",
+      "articleAnchor": "lem:identities",
+      "sourceLines": [
+        255,
+        255
+      ],
+      "raw": "subtracting gives the third.",
+      "note": "Subtraction of the collapsed coefficients.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiData.collapse_diff",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiData.collapse_diff"
+    },
+    {
+      "id": "step-identities-f-derivative",
+      "title": "3.1 proof · derivative of f₁/c",
+      "articleAnchor": "lem:identities",
+      "sourceLines": [
+        257,
+        257
+      ],
+      "raw": "(ii) With $f_1=-c(p-\\epsilon)-ds$ one finds $f_1'c-f_1c'=-d^2$;",
+      "note": "Quotient differentiation and algebraic reduction, assuming c ≠ 0.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiData.hasDerivAt_f1_div_c",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiData.hasDerivAt_f1_div_c"
+    },
+    {
+      "id": "step-identities-beta-derivative",
+      "title": "3.1 proof · derivative of β₁/c",
+      "articleAnchor": "lem:identities",
+      "sourceLines": [
+        257,
+        258
+      ],
+      "raw": "with\n$\\beta_1=c\\epsilon-ds$, $\\beta_1'c-\\beta_1c'=-(1-k^2)s^2$;",
+      "note": "Quotient differentiation with c ≠ 0.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiData.hasDerivAt_β1_div_c",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiData.hasDerivAt_β1_div_c"
+    },
+    {
+      "id": "step-identities-alpha-derivative",
+      "title": "3.1 proof · derivative of α₁/d",
+      "articleAnchor": "lem:identities",
+      "sourceLines": [
+        258,
+        260
+      ],
+      "raw": "and with $\\alpha_1$\nas in \\eqref{eq:coefficients}, $\\alpha_1'd-\\alpha_1d'=-\\epsilon f_1$ after\nreduction by $c^2=1-s^2$, $d^2=1-k^2s^2$.",
+      "note": "Quotient differentiation and reduction using sc and sd, with d ≠ 0.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiData.hasDerivAt_α1_div_d",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiData.hasDerivAt_α1_div_d"
+    },
+    {
+      "id": "step-identities-gamma",
+      "title": "3.1 proof · derivative of Γ",
+      "articleAnchor": "lem:identities",
+      "sourceLines": [
+        264,
+        265
+      ],
+      "raw": "(iii) $\\Gamma'=d^2-k^2\\bigl[(c^2-s^2)d^2+k^2s^2c^2\\bigr]/d^2\n=\\bigl[d^4-k^2(1-2s^2+k^2s^4)\\bigr]/d^2=(1-k^2)/d^2$,",
+      "note": "The compiled derivative identity uses Jacobi differential rules. Positivity requires d ≠ 0 and 0 < k < 1.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiData.hasDerivAt_Γ",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiData.hasDerivAt_Γ"
+    },
+    {
+      "id": "step-identities-beta-gamma",
+      "title": "3.1 proof · β₁ derivative in terms of Γ",
+      "articleAnchor": "lem:identities",
+      "sourceLines": [
+        266,
+        266
+      ],
+      "raw": "$\\beta_1'=-sd\\epsilon+cd^2+k^2s^2c-cd^2=-sd\\,(\\epsilon-k^2sc/d)$.",
+      "note": "The factored derivative identity, under the JacobiData hypotheses.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiData.β1_deriv_eq_Γ",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiData.β1_deriv_eq_Γ"
+    },
+    {
+      "id": "step-identities-f-zero",
+      "title": "3.1 proof · unique Maxwell zero",
+      "articleAnchor": "lem:identities",
+      "sourceLines": [
+        268,
+        270
+      ],
+      "raw": "(iv) By (ii), $f_1/c$ decreases on each $((2m+1)K,(2m+3)K)$ from\n$+\\infty$ to $-\\infty$ (there $\\cn$ has the sign $(-1)^{m+1}$, and\n$f_1=(-1)^{m+1}k'$ at the left end, $(-1)^mk'$ at the right end),",
+      "note": "Unique zero is proved from quotient monotonicity and endpoint values. This index does not certify the prose claim of infinite endpoint limits or simplicity.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiPeriodic.exists_unique_f1_zero",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiPeriodic.exists_unique_f1_zero",
+          "selector": "call",
+          "callee": "JacobiPeriodic.f1_div_c_strictAntiOn_I"
+        }
+      ],
+      "selection": "JacobiPeriodic.exists_unique_f1_zero"
+    },
+    {
+      "id": "step-identities-f-sign",
+      "title": "3.1 proof · signs around Maxwell zeros",
+      "articleAnchor": "lem:identities",
+      "sourceLines": [
+        271,
+        272
+      ],
+      "raw": "and its sign alternates between consecutive\nzeros; $f_1(0)=0$ and $f_1(2nK)/\\cn(2nK)=2n(E-K)<0$ place the sign.",
+      "note": "The compiled sign-before/sign-after theorems identify the signs around each Maxwell zero, using the supplied period and sign hypotheses.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiPeriodic.f1_sign_before",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiPeriodic.f1_sign_after",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiPeriodic.f1_sign_before"
+    },
+    {
+      "id": "step-identities-beta-mono",
+      "title": "3.1 proof · monotonicity of β₁",
+      "articleAnchor": "lem:identities",
+      "sourceLines": [
+        272,
+        273
+      ],
+      "raw": "For $\\beta_1$:\nby (iii) it is strictly monotone on each $(nK,(n+1)K)$,",
+      "note": "Signed monotonicity on the even-to-even cell follows from the Γ identity and sign hypotheses; Γ positivity is derived from its value at zero and strict monotonicity.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiPeriodic.signed_β1_strictAntiOn",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiInit.Γ_pos",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiInit.Γ_zero",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiPeriodic.exists_unique_β1_zero",
+          "selector": "call",
+          "callee": "JacobiPeriodic.signed_β1_strictAntiOn"
+        }
+      ],
+      "selection": "JacobiPeriodic.signed_β1_strictAntiOn"
+    },
+    {
+      "id": "step-identities-beta-endpoints",
+      "title": "3.1 proof · endpoint values of β₁",
+      "articleAnchor": "lem:identities",
+      "sourceLines": [
+        273,
+        274
+      ],
+      "raw": "with\n$\\beta_1(2nK)=(-1)^n2nE$ and $\\beta_1((2n+1)K)=(-1)^{n+1}k'$",
+      "note": "Periodic endpoint identities use the supplied JacobiPeriodic values.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiPeriodic.β1_even",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiPeriodic.β1_odd",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiPeriodic.exists_unique_β1_zero",
+          "selector": "call",
+          "callee": "JacobiPeriodic.β1_even"
+        },
+        {
+          "declaration": "JacobiPeriodic.exists_unique_β1_zero",
+          "selector": "call",
+          "callee": "JacobiPeriodic.β1_odd"
+        }
+      ],
+      "selection": "JacobiPeriodic.β1_even"
+    },
+    {
+      "id": "step-identities-beta-zero",
+      "title": "3.1 proof · unique β₁ zero and excluded intervals",
+      "articleAnchor": "lem:identities",
+      "sourceLines": [
+        274,
+        276
+      ],
+      "raw": "so it has one\nzero in $(2nK,(2n+1)K)$ and none in $[(2n-1)K,2nK]$; on $(0,2K]$ this is\n\\cite[Lemma~2.6]{Sachkov2010Conjugate}.",
+      "note": "Existence/uniqueness of the positive-cell zero and exclusion on the stated closed odd interval and (0,2K].",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiPeriodic.exists_unique_β1_zero",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiPeriodic.β1_ne_zero_on_odd_interval",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiFull.β1_neg_Ioc",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiPeriodic.exists_unique_β1_zero"
+    },
+    {
+      "id": "step-identities-alpha-unique",
+      "title": "3.1 proof · at most one α₁ zero",
+      "articleAnchor": "lem:identities",
+      "sourceLines": [
+        276,
+        278
+      ],
+      "raw": "For $\\alpha_1$: by (ii) and the\nsign of $f_1$, $\\alpha_1/d$ is strictly monotone on each cell, so\n$\\alpha_1$ has at most one zero per cell.",
+      "note": "Signed quotient monotonicity and the resulting injectivity argument. Lean cell m corresponds to article n = m + 1.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiFull.signed_α1_div_d_strictAntiOn",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiFull.α1_zero_unique",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiFull.α1_zero_unique",
+          "selector": "call",
+          "callee": "JacobiFull.signed_α1_div_d_strictAntiOn"
+        }
+      ],
+      "selection": "JacobiFull.signed_α1_div_d_strictAntiOn"
+    },
+    {
+      "id": "step-identities-alpha-endpoints",
+      "title": "3.1 proof · opposite α₁ endpoint signs",
+      "articleAnchor": "lem:identities",
+      "sourceLines": [
+        278,
+        280
+      ],
+      "raw": "At $p_n^1$ and at $b_n$, $\\beta=0$ gives $X=\\ell>0$, so\n$\\alpha_1$ has the sign of $s$ there: $(-1)^{n+1}$ at $p_n^1\\in((2n-1)K,2nK)$\nand $(-1)^n$ at $b_n\\in(2nK,(2n+1)K)$.",
+      "note": "The endpoint sign proofs reduce β = 0 to X = ℓ > 0 and transfer the sign of sn.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiFull.signed_α1_pL_pos",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiFull.signed_α1_bR_pos",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiFull.signed_α1_pL_pos"
+    },
+    {
+      "id": "step-identities-alpha-exists",
+      "title": "3.1 proof · existence of an α₁ zero",
+      "articleAnchor": "lem:identities",
+      "sourceLines": [
+        280,
+        281
+      ],
+      "raw": "Hence $\\alpha_1$ has exactly one\nzero in $(p_n^1,b_n)$,",
+      "note": "The compiled intermediate-value helper proves a zero on a closed interval from continuity and a nonpositive endpoint product. Strict interior placement requires the separately indexed endpoint signs; no single exported theorem is claimed to equal this whole sentence.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiFull.exists_α1_zero",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiFull.exists_α1_zero"
+    },
+    {
+      "id": "step-identities-alpha-simple",
+      "title": "3.1 proof · simplicity of the α₁ zero",
+      "articleAnchor": "lem:identities",
+      "sourceLines": [
+        281,
+        281
+      ],
+      "raw": "simple because $(\\alpha_1/d)'\\ne0$ there.",
+      "note": "No matching zero-simplicity theorem is exported in the published snapshot.",
+      "status": "unmapped",
+      "anchors": [],
+      "selection": null
+    },
+    {
+      "id": "step-identities-alpha-even",
+      "title": "3.1 proof · α₁ at an even period",
+      "articleAnchor": "lem:identities",
+      "sourceLines": [
+        281,
+        283
+      ],
+      "raw": "Its side\nof $2nK$ follows from $\\alpha_1(2nK)=(-1)^n2n(K-2E)$, read off from\n\\eqref{eq:coefficients} with $s=0$, $c=(-1)^n$, $d=1$, $\\epsilon=2nE$,",
+      "note": "The compiled even-period value is indexed. Its dn factor is explicit in the theorem; dn = 1 at this endpoint follows from the Jacobi hypotheses. This step does not identify k₀.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiPeriodic.α1_even",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiPeriodic.α1_even"
+    },
+    {
+      "id": "step-identities-critical",
+      "title": "3.1 proof · unique critical modulus",
+      "articleAnchor": "lem:identities",
+      "sourceLines": [
+        284,
+        287
+      ],
+      "raw": "since $2E-K$ decreases strictly from $\\pi/2$ to $-\\infty$ on $0<k<1$\n($dK/dk>0$ and $dE/dk=(E-K)/k<0$ \\cite[\\S19.4]{DLMF}; this is\n\\cite[Proposition~11.5]{Sachkov2008Elastic}), so that $K-2E$ has\nthe sign of $k-k_0$.",
+      "note": "The variation of K and E with modulus, unique numerical k₀ and its identification with K = 2E are not formalized in this snapshot.",
+      "status": "unmapped",
+      "anchors": [],
+      "selection": null
+    },
+    {
+      "id": "step-riccati-factor",
+      "title": "3.2 proof · factorization z = ab",
+      "articleAnchor": "lem:riccati",
+      "sourceLines": [
+        338,
+        338
+      ],
+      "raw": "$ab=-f_1\\beta_1/(q\\epsilon)=-\\beta/\\ell=z$ by Lemma~\\ref{lem:identities}(i);",
+      "note": "The compiled z = −β/ℓ identity unfolds z = ab and β = f₁β₁, with denominator conditions explicit.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiData.z_eq_neg_beta_div_ell",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiData.z_eq_neg_beta_div_ell"
+    },
+    {
+      "id": "step-riccati-sign",
+      "title": "3.2 proof · common sign",
+      "articleAnchor": "lem:riccati",
+      "sourceLines": [
+        339,
+        340
+      ],
+      "raw": "$z\\in(0,1)$ forces a common sign of $a,b$, shared by $T_1,T_2$ as\n$1-z=y>0$ and $\\mathsf D>0$.",
+      "note": "T₁T₂ same-sign theorem uses 0 < ab, z < 1 and positive/nonzero denominators; it does not assume the conclusion of the slope bound.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiData.T1_T2_same_sign",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiData.slope_bound_abs",
+          "selector": "call",
+          "callee": "JacobiData.T1_T2_same_sign"
+        }
+      ],
+      "selection": "JacobiData.T1_T2_same_sign"
+    },
+    {
+      "id": "step-riccati-pair",
+      "title": "3.2 proof · differential pair for a and b",
+      "articleAnchor": "lem:riccati",
+      "sourceLines": [
+        340,
+        345
+      ],
+      "raw": "Using $s'=cd$, $c'=-sd$, $d'=-k^2sc$,\n$\\epsilon'=d^2$, $q'=k^2s^2$, direct differentiation gives the Riccati pair\n\\begin{equation}\\label{eq:riccati-pair}\n a'=\\frac{d^2+ca+k^2s^2a^2}{ds},\\qquad\n b'=\\frac{(1-k^2)s^2-cb-d^2b^2}{ds};\n\\end{equation}",
+      "note": "Riccati derivative formulas obtained from the Jacobi derivative rules, with q, ε, d and sn nonzero. Their completed applications inside the z derivative proof are indexed separately.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiData.a_deriv_form",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiData.b_deriv_form",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiData.hasDerivAt_z",
+          "selector": "call",
+          "callee": "JacobiData.a_deriv_form"
+        },
+        {
+          "declaration": "JacobiData.hasDerivAt_z",
+          "selector": "call",
+          "callee": "JacobiData.b_deriv_form"
+        }
+      ],
+      "selection": "JacobiData.a_deriv_form"
+    },
+    {
+      "id": "step-riccati-cancellation",
+      "title": "3.2 proof · derivative of z",
+      "articleAnchor": "lem:riccati",
+      "sourceLines": [
+        346,
+        346
+      ],
+      "raw": "the mixed terms cancel in $(ab)'$, giving \\eqref{eq:zprime}.",
+      "note": "Product differentiation of ab and cancellation after substituting the two Riccati formulas.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiData.hasDerivAt_z",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiData.hasDerivAt_z"
+    },
+    {
+      "id": "step-riccati-product",
+      "title": "3.2 proof · product T₁T₂",
+      "articleAnchor": "lem:riccati",
+      "sourceLines": [
+        346,
+        347
+      ],
+      "raw": "The product\n$T_1T_2=d^2s^2\\,ab\\,(1-z)\\mathsf D$",
+      "note": "Algebraic product identity, also indexed at its fully applied use in the slope inequality.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiData.T1_mul_T2",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiData.slope_bound_abs",
+          "selector": "call",
+          "callee": "JacobiData.T1_mul_T2"
+        }
+      ],
+      "selection": "JacobiData.T1_mul_T2"
+    },
+    {
+      "id": "step-riccati-amgm",
+      "title": "3.2 proof · arithmetic–geometric mean bound",
+      "articleAnchor": "lem:riccati",
+      "sourceLines": [
+        347,
+        348
+      ],
+      "raw": "and the arithmetic--geometric mean\ninequality give the first inequality in \\eqref{eq:slope}.",
+      "note": "The scalar slope inequality uses the product and common-sign lemmas. Its completed AM–GM helper call and use in the phase-lift proof are indexed.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiData.slope_bound_abs",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiData.two_sqrt_mul_le_add",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiData.slope_bound_abs",
+          "selector": "call",
+          "callee": "JacobiData.two_sqrt_mul_le_add"
+        },
+        {
+          "declaration": "SBracket.one_le_ε_deriv_u",
+          "selector": "call",
+          "callee": "JacobiData.slope_bound_abs"
+        }
+      ],
+      "selection": "JacobiData.slope_bound_abs"
+    },
+    {
+      "id": "step-riccati-lift",
+      "title": "3.2 proof · transfer to the phase lift",
+      "articleAnchor": "lem:riccati",
+      "sourceLines": [
+        348,
+        352
+      ],
+      "raw": "From\n\\eqref{eq:z-r-u}, $r'=(1-k^2)z'/\\mathsf D^2$ and\n$r(1-r)(1-k^2r)=(1-k^2)^2z(1-z)/\\mathsf D^3$, so\n$|r'|\\ge2\\sqrt{r(1-r)(1-k^2r)}$; and $u'=r'/\\bigl(2\\sqrt{r(1-r)(1-k^2r)}\\bigr)$\n\\cite[\\S19.2(ii)]{DLMF}, which gives $|u'|\\ge1$",
+      "note": "The oriented bound εu′ ≥ 1 on a signed bracket follows using the inverse phase-lift derivative supplied in the structure. Its absolute-value consequence is interpreted under ε = ±1; the inverse elliptic integral is not constructed here.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "SBracket.one_le_ε_deriv_u",
+          "selector": "proof"
+        }
+      ],
+      "selection": "SBracket.one_le_ε_deriv_u"
+    },
+    {
+      "id": "step-riccati-gap",
+      "title": "3.2 proof · exact square-gap identity",
+      "articleAnchor": "lem:riccati",
+      "sourceLines": [
+        352,
+        353
+      ],
+      "raw": "and, on writing\n$|T_1|+|T_2|-2\\sqrt{|T_1T_2|}$ as a square, the last identity.",
+      "note": "The displayed exact square-gap identity and equality-case characterization have no matching exported proof in this snapshot.",
+      "status": "unmapped",
+      "anchors": [],
+      "selection": null
+    },
+    {
+      "id": "step-crossing-orders",
+      "title": "3.3 statement · zero orders and finite tangencies",
+      "articleAnchor": "lem:crossing",
+      "sourceLines": [
+        365,
+        373
+      ],
+      "raw": "Consequently $\\sn^2(\\psi+p)-\\sn^2u(p)$ has exactly one zero in\n$[p',p'']$.  An interior zero is simple except at a tangency, $|u'(p)|=1$, where\nit has odd order at least three.  At a corner, $p\\in\\{p',p''\\}$, met\nexactly for the two corner phases $\\psi_\\pm(p')$ and $\\psi_\\pm(p'')$ (the\ntwo signs agree there), it is simple provided $\\sn^2u$ has a simple zero\nat the end where $u=0$ and $1-\\sn^2u$ a simple zero at the end where\n$u=K$.  The tangency phases are finitely many when\n$|u'|\\to\\infty$ at both ends, or at one end while $u$ extends analytically\nacross the other.",
+      "note": "Counting is formalized conditionally; simple/odd zero orders, corner orders and finiteness derived from analyticity are not proved by CrossingData.crossing.",
+      "status": "unmapped",
+      "anchors": [],
+      "selection": null
+    },
+    {
+      "id": "step-crossing-analytic-proof",
+      "title": "3.3 proof · analytic zero-order argument",
+      "articleAnchor": "lem:crossing",
+      "sourceLines": [
+        390,
+        406
+      ],
+      "raw": "By\n\\eqref{eq:sn-addition}, $\\sn^2(\\psi+p)-\\sn^2u(p)$ is\n$\\sn(\\psi+p-u)\\sn(\\psi+p+u)$ times a positive factor, so the order of the\nzero along the line is that of $\\psi_\\sigma(p)-\\psi$ in the open\ninterval: one where\n$\\psi_\\sigma'\\ne0$; at a tangency the slope $\\sigma u'-1\\ge0$ vanishes to\neven order, being nonnegative and analytic, so the zero has odd order at\nleast three; and the zeros of the analytic function $\\sigma u'-1$, which is\nnot identically zero, can accumulate only at an end of the interval, which is\nexcluded where $|u'|\\to\\infty$ and where $u$ extends analytically across\nthe end.  At a corner $p_c$ one expands directly.  If $u(p_c)=0$, the\ncorner phase is $\\psi=-p_c$, and, with $h=p-p_c$,\n$\\sn^2(\\psi+p)-\\sn^2u(p)=-(\\sn^2u)'(p_c)h+o(h)$,\na simple zero when $\\sn^2u$ has a simple zero.\nIf $u(p_c)=K$, the corner phase is $K-p_c$, and\n$1-\\sn^2(K+h)=(1-k^2)\\sn^2h/\\dn^2h=O(h^2)$ gives\nthe same conclusion with $1-\\sn^2u$.",
+      "note": "No matching compiled proof of this analytic order/finiteness argument is exported. The finite tangency hypothesis in the counting theorems remains an assumption.",
+      "status": "unmapped",
+      "anchors": [],
+      "selection": null
+    },
+    {
+      "id": "step-total-count",
+      "title": "Formalization scope · cumulative 2N root count",
+      "articleAnchor": "app:lean",
+      "sourceLines": [
+        801,
+        802
+      ],
+      "raw": "the total\nof $2N$ conjugate times before $p_{N+1}^1$ for $K\\ne2E$,",
+      "note": "roots_ncard proves the scalar finite-set count by induction using cell_roots, roots_succ and two_per_cell_of_ne. Geometric conjugate-time identification is outside its scope.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiFull.roots_ncard",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiFull.roots_ncard",
+          "selector": "call",
+          "callee": "JacobiFull.two_per_cell_of_ne"
+        },
+        {
+          "declaration": "JacobiFull.roots_ncard",
+          "selector": "call",
+          "callee": "JacobiFull.roots_succ"
+        }
+      ],
+      "selection": "JacobiFull.roots_ncard"
+    },
+    {
+      "id": "step-hypothesis-reduction",
+      "title": "Appendix A · reduction to the core hypotheses",
+      "articleAnchor": "app:lean",
+      "sourceLines": [
+        814,
+        816
+      ],
+      "raw": "the module\n\\texttt{Reduction} proves that they follow from the 13 hypotheses of\nTable~\\ref{tab:lean-core}, so that only these are assumed.",
+      "note": "The compiled construction maps JacobiCore to JacobiFull. It discharges derived structure fields; the core Jacobi and inverse phase-lift hypotheses remain assumed.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiCore.toJacobiFull",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiCore.toJacobiFull"
+    },
+    {
+      "id": "step-identities-f-simple",
+      "title": "3.1 proof · simplicity of the Maxwell zero",
+      "articleAnchor": "lem:identities",
+      "status": "unmapped",
+      "anchors": [],
+      "selection": null,
+      "note": "These indexed sign/counting theorems do not establish the stated zero-simplicity claim; no matching exported simplicity theorem is assigned.",
+      "raw": "so\nthe zeros of $f_1$ are simple",
+      "sourceLines": [
+        270,
+        271
+      ]
+    },
+    {
+      "id": "step-riccati-equality",
+      "title": "3.2 statement · equality in the slope bound",
+      "articleAnchor": "lem:riccati",
+      "status": "unmapped",
+      "anchors": [],
+      "selection": null,
+      "note": "The exact equality-case characterization and square-gap identity are not exported as matching theorems in this snapshot.",
+      "raw": "so $|u'|=1$ exactly where $|T_1|=|T_2|$.",
+      "sourceLines": [
+        334,
+        334
+      ]
     }
   ]
 }

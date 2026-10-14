@@ -42,3 +42,21 @@ body.layout-distill .d-article .pa-sync-panel h2::before{content:none;counter-in
 #pa-sync-step-choices p{font:12px/1.6 var(--sans);margin:0 0 6px}
 #pa-sync-step-choices button{display:block;text-align:left;margin:5px 0;padding:6px 8px;font:12px/1.6 var(--sans);border:1px solid var(--border);background:var(--bg);color:var(--text);border-radius:3px;cursor:pointer}
 #pa-sync-step-choices button[aria-pressed=true]{background:var(--accent-light);border-color:var(--accent)}
+
+.pa-argument{margin:14px 0 24px;padding:14px;border:1px solid var(--border,#c9d6d2);border-radius:6px;font:13px/1.5 var(--sans,system-ui)}
+.pa-argument summary{font-weight:700;cursor:pointer}.pa-argument-note{font-size:12px!important;color:var(--text-light,#536b71)}
+.pa-argument-group h3{font:600 14px/1.4 var(--sans,system-ui);margin:20px 0 12px}.pa-argument-graph{position:relative}.pa-argument-graph>svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.pa-argument-graph svg path{fill:none;stroke:var(--accent,#28756e);stroke-width:1.8}.pa-argument-graph svg marker path{fill:var(--accent,#28756e);stroke:none}
+.pa-argument-row{display:flex;justify-content:center;gap:12px;position:relative;pointer-events:none}.pa-argument-row+.pa-argument-row{margin-top:38px}
+.pa-argument-node{pointer-events:auto;flex:1;max-width:260px;min-width:0;padding:10px 8px;border:1px solid var(--border,#c9d6d2);border-radius:5px;background:var(--bg,#fff);color:var(--text,#243f49);text-align:left;font:12px/1.5 var(--sans,system-ui);cursor:pointer;overflow-wrap:anywhere}
+.pa-argument-node :is(strong,span,small){display:block}.pa-argument-node strong{font-size:12px}.pa-argument-node span{margin:5px 0;font-size:12px}.pa-argument-node small{font:10px/1.5 var(--mono,monospace);color:var(--text-light,#536b71)}
+.pa-argument-node[aria-pressed=true]{border-color:var(--accent,#28756e);outline:2px solid var(--accent,#28756e);outline-offset:2px;background:var(--accent-light,#e1f0ec)}
+.pa-argument :is(button,summary):focus-visible{outline:3px solid var(--accent,#28756e);outline-offset:3px}.pa-argument-calls{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.pa-argument-calls button,.pa-argument-unsupported{font:12px/1.5 var(--sans,system-ui);text-align:left;color:var(--text,#243f49);background:var(--bg,#fff);border:1px solid var(--border,#c9d6d2);border-radius:4px;padding:7px 9px;cursor:pointer}.pa-argument-unsupported{margin-top:14px}
+@media(max-width:560px){.pa-argument{padding:10px}.pa-argument-row{gap:6px}.pa-argument-node{padding:8px 5px}.pa-argument-node small{font-size:9px}}
+
+.pa-argument-calls button[aria-pressed=true]{background:var(--accent-light,#e1f0ec);border-color:var(--accent,#28756e);font-weight:600}
+
+.pa-argument-graph svg path.is-selected{stroke-width:3.5}
+.pa-argument-graph svg path.pa-argument-hit{stroke:transparent;stroke-width:18;pointer-events:stroke;cursor:pointer}
+.pa-argument-selection{font:600 12px/1.5 var(--sans,system-ui)!important;min-height:3em;border-left:3px solid var(--accent,#28756e);padding-left:9px}

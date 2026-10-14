@@ -4,14 +4,14 @@
  const paper=document.querySelector('.pa-paper'),panel=document.getElementById('pa-sync-panel');if(!paper||!panel)return;
  const $=id=>document.getElementById(id),toggle=document.querySelector('[data-pa-sync]');
  const layout=document.createElement('div');layout.className='pa-sync-layout';paper.before(layout);layout.append(paper,panel);
- let indexMetadata,metadata,engine,active=null,revision=0,opened=false,pending=0;
+ let argumentReady,argument,indexMetadata,metadata,engine,active=null,revision=0,opened=false,pending=0;
  const targets=new Map(),status=$('pa-sync-status'),chooser=$('pa-sync-declaration');
  function script(src){return new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src;s.onload=resolve;s.onerror=()=>{s.remove();reject(Error('Could not load correspondence data. Retry the synchronized view.'));};document.head.append(s);});}
  async function indexReady(){
   if(!indexMetadata)indexMetadata=Promise.all([
    window.PROOF_ATLAS_ARTICLE_INDEX||script('/public/data/proof-atlas/crossing-article-index.js?v=2'),
    window.PROOF_ATLAS_ARTICLE_COVERAGE||script('/public/data/proof-atlas/article-coverage.js?v=1'),
-   window.PROOF_ATLAS_PROOF_STEPS||script('/public/data/proof-atlas/article-proof-steps.js?v=1'),
+   window.PROOF_ATLAS_PROOF_STEPS||script('/public/data/proof-atlas/article-proof-steps.js?v=2'),
    window.ProofAtlasProofStepIndex||script('/public/js/proof-atlas-proof-step-index.js?v=1')
   ]).then(()=>{
    const index=window.PROOF_ATLAS_ARTICLE_INDEX,coverage=window.PROOF_ATLAS_ARTICLE_COVERAGE;
@@ -49,7 +49,7 @@
  async function engineReady(){
   if(!engine)engine=(async()=>{
    await metadataReady();if(!window.ProofAtlasLibraryData)await script('/public/js/proof-atlas-library-data.js');
-   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=3');
+   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=4');
    if(!$('pl-provenance').closest('details')){const details=document.createElement('details'),summary=document.createElement('summary');summary.textContent='Provenance and axiom dependencies';$('pl-provenance').before(details);details.append(summary,$('pl-provenance'));}
    return window.ProofAtlasLibrary;
   })().catch(e=>{engine=null;throw e;});return engine;
@@ -61,9 +61,25 @@
   $('pa-sync-back').href='#'+id;$('pa-sync-back').textContent='Article: '+(targets.get(id)?.title||'selected paragraph');
   if(scroll)target.scrollIntoView({block:'center',behavior:'auto'});
  }
+ async function geometry(target,snapshot){
+  const host=$('pa-riccati-geometry');host.hidden=target?.articleAnchor!=='lem:riccati'&&target?.id!=='lem:riccati'&&target?.id!=='proof-lem-riccati';
+  if(host.hidden)return;
+  if(!argumentReady)argumentReady=(async()=>{
+   if(!window.ProofAtlasRiccatiGeometry)await script('/public/js/proof-atlas-riccati-geometry.js?v=1');
+   argument=window.ProofAtlasRiccatiGeometry.mount($('pa-riccati-argument'),window.PROOF_ATLAS_PROOF_STEPS,async anchor=>{
+    try{
+     await selectArticle(anchor.step,anchor.declaration);
+     if(!anchor.path||!window.ProofAtlasLibrary?.getData())return;
+     const api=window.ProofAtlasLibrary,mapped=routeFromPath(api.getData(),anchor.path);await api.selectOccurrence(mapped.node,true,false,mapped.route);
+    }catch(e){unavailable(e.message);}
+   });
+  })().catch(e=>{argumentReady=null;throw e;});
+  await argumentReady;if(active?.id!==target?.id||!opened)return;argument.select(snapshot);
+ }
  function unavailable(text){
+  const u=new URL(location.href);u.searchParams.delete('proof');u.searchParams.delete('route');if(active)u.hash=active.id;history.replaceState(null,'',u);
   window.ProofAtlasLibrary?.clearSelection();$('pa-sync-proof').hidden=true;$('pa-sync-empty').hidden=false;$('pa-sync-empty').textContent=text;chooser.replaceChildren();chooser.disabled=true;
-  showStepChoices([],null);status.textContent=text;panel.dataset.match='unmapped';
+  if(active&&!active.names.length)geometry(active,null).catch(e=>{status.textContent=e.message;});else $('pa-riccati-geometry').hidden=true;showStepChoices([],null);status.textContent=text;panel.dataset.match='unmapped';
  }
  function close(){opened=false;revision++;panel.hidden=true;delete document.body.dataset.paSync;toggle.setAttribute('aria-pressed','false');document.querySelector('[data-pa-reading=article]').setAttribute('aria-pressed','true');$('pa-reading-status').textContent='Centered reading';const u=new URL(location.href);if(u.searchParams.get('view')==='proof'){u.searchParams.delete('view');u.searchParams.delete('proof');u.searchParams.delete('route');history.replaceState(null,'',u);}}
  async function open(){
@@ -104,14 +120,14 @@
    const snapshot=api.getSnapshot();panel.dataset.match=active.kind==='proof-step'?'indexed':active.kind==='passage'&&name==='CrossingData.crossing'&&m.index.anchors.some(a=>m.index.passages.find(p=>p.id===a.passage)?.htmlAnchor===id)?'indexed':'context';
    status.textContent=active.title+' · '+(panel.dataset.match==='indexed'?(active.kind==='proof-step'?'Indexed proof step. ':'Indexed expression correspondence. '):active.kind==='statement'?'Declaration counterpart. ':'Proof context. ')+active.note;
    history.replaceState(null,'','#'+encodeURIComponent(id));
-   emit(snapshot);
+   await geometry(active,snapshot);if(token!==revision)return;emit(snapshot);
   }catch(e){if(token===revision)unavailable(e.message);}finally{pending--;}
  }
  function emit(snapshot){if(snapshot){const u=new URL(location.href);u.searchParams.set('view','proof');u.searchParams.set('proof',snapshot.name);u.searchParams.set('route',snapshot.route.root+':'+snapshot.route.slots.join('.'));if(active)u.hash=active.id;history.replaceState(null,'',u);}window.dispatchEvent(new CustomEvent('proof-atlas:synchronized',{detail:{article:active?.id||null,match:panel.dataset.match,compiled:snapshot}}));}
  function showStepChoices(matches,selected){
   const host=$('pa-sync-step-choices');host.replaceChildren();host.hidden=matches.length<2;
   if(matches.length<2)return;const label=document.createElement('p');label.textContent='This helper also corresponds to:';host.append(label);
-  for(const m of matches){const b=document.createElement('button');b.type='button';b.textContent=m.passage.title;b.setAttribute('aria-pressed',String(m===selected));b.onclick=()=>{active=targets.get(m.passage.id);highlight(active.id,true);status.textContent=active.title+' · '+active.note;options(active,window.ProofAtlasLibrary.getSnapshot().name,new Map(window.PROOF_ATLAS_LIBRARY.editions[0].declarations.map(d=>[d.name,d])));emit(window.ProofAtlasLibrary.getSnapshot());showStepChoices(matches,m);};host.append(b);}
+  for(const m of matches){const b=document.createElement('button');b.type='button';b.textContent=m.passage.title;b.setAttribute('aria-pressed',String(m===selected));b.onclick=()=>{active=targets.get(m.passage.id);highlight(active.id,true);status.textContent=active.title+' · '+active.note;options(active,window.ProofAtlasLibrary.getSnapshot().name,new Map(window.PROOF_ATLAS_LIBRARY.editions[0].declarations.map(d=>[d.name,d])));geometry(active,window.ProofAtlasLibrary.getSnapshot()).catch(e=>{status.textContent=e.message;});emit(window.ProofAtlasLibrary.getSnapshot());showStepChoices(matches,m);};host.append(b);}
  }
  async function fromCompiled(snapshot){
   if(!opened||pending)return;const token=++revision,m=await metadataReady(),current=window.ProofAtlasLibrary.getSnapshot();if(token!==revision||current?.name!==snapshot.name||current?.path!==snapshot.path)return;
@@ -119,7 +135,7 @@
   let target,relation='Declaration/module proof context.',match='context';
   m.steps.validate(snapshot,window.ProofAtlasLibrary.getData(),window.ProofAtlasLibraryData);
   const matches=m.steps.resolve(snapshot),group=active?.articleAnchor||active?.id?.replace(/^proof-(thm|lem)-/,'$1:');
-  const step=matches.find(c=>c.passage.articleAnchor===group)||matches[0];
+  const step=matches.find(c=>c.passage.id===active?.id)||matches.find(c=>c.passage.articleAnchor===group)||matches[0];
   if(step){target=targets.get(step.passage.id);match=step.inherited?'step-context':'indexed';relation=(step.inherited?'Within indexed proof step: ':'Indexed proof step: ')+(step.anchor.callee||snapshot.name)+'.';}
   else if(m.steps.hasDeclaration(snapshot.name))relation='No proof-step anchor covers this node; enclosing declaration context.';
   showStepChoices(matches,step);
@@ -134,7 +150,7 @@
   }
   active=target||null;if(target){options(target,snapshot.name,m.records);highlight(target.id,true);status.textContent=target.title+' · '+relation+' '+target.note;}
   else{clearHighlight();chooser.replaceChildren();chooser.disabled=true;status.textContent='No indexed article passage for '+snapshot.name+'. The compiled node and its graph remain selected.';}
-  panel.dataset.match=target?match:'unmapped';emit(snapshot);
+  panel.dataset.match=target?match:'unmapped';await geometry(active,snapshot);if(token!==revision)return;emit(snapshot);
  }
  toggle.addEventListener('click',async()=>{try{if(opened)close();else{await open();if(active)await selectArticle(active.id,chooser.value);else unavailable('Select an article passage, statement or proof.');}}catch(e){status.textContent=e.message;}});
  document.querySelector('[data-pa-reading="article"]').addEventListener('click',close);
