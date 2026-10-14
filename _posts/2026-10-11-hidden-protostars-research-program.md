@@ -101,7 +101,7 @@ One known infrared source agrees with **21/21** query-visit medians, but positio
 <details markdown="1">
 <summary>Data coverage and retained history</summary>
 
-The original offline inventory preserves all **19,328** requested clumps and every missing view. **No model was fitted in that initial inventory audit.** Data readiness is not a detector result. [Exact historical inventory, source revision and coverage counts](/public/data/starbirth/multisurvey/README.md).
+The original offline inventory preserves all **19,328** requested clumps and every missing view. **No model was fitted.** This describes the initial inventory audit, before the later ranking study. Data readiness is not a detector result. [Exact historical inventory, source revision and coverage counts](/public/data/starbirth/multisurvey/README.md).
 
 The subsequent query-level cadence diagnosis has only **3/27** supported positive references against a required **14/27**; query-level support does not assign emission to a single source. [Temporal coverage and ownership limits](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#temporal-diagnosis). The model's stricter registered temporal input remains absent from all 27 positive proxies.
 

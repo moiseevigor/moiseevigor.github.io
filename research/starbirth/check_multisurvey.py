@@ -52,6 +52,6 @@ if len(sys.argv) > 1:
         path = Path('public/data/starbirth/multisurvey') / entry['public_file']
         assert (site / path).read_bytes() == (ROOT / path).read_bytes(), path
     assert (site / 'public/data/starbirth/multisurvey/source-inventory.csv').read_bytes() == (PUBLIC / 'source-inventory.csv').read_bytes()
-    assert 'shared infrared' in (site / 'lab/index.html').read_text().lower()
+    assert '/astrophysics/2026/10/11/hidden-protostars-research-program/' in (site / 'lab/index.html').read_text()
     assert {p.name for p in (ROOT / '_posts').iterdir() if p.name.startswith('2026-10-12-hidden-protostars')} == {'2026-10-12-hidden-protostars-missing-view-ranking.md'}, 'Only the separately verified ranking result may extend this program'
 print('PASS: 15 complete evidence bindings, 19,328 exact IDs and unknowns, presence counts, preserved failure, original gates and formation assets. No detector validation.')
