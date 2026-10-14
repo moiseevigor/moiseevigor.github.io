@@ -13,6 +13,10 @@ on:
       - 'public/js/proof-atlas-sync.js'
       - 'scripts/test-proof-atlas-sync.cjs'
       - '_includes/proof-atlas-compiled-workspace.html'
+      - '_includes/proof-atlas-reading-tools.html'
+      - 'public/js/proof-atlas-proof-step-index.js'
+      - 'scripts/test-proof-atlas-proof-steps*.cjs'
+      - 'public/data/proof-atlas/article-proof-steps.js'
       - 'public/research/se2/article-figures/**'
       - 'public/research/se2/article-references.bib'
       - 'scripts/test-proof-atlas-distill.cjs'
@@ -43,6 +47,7 @@ on:
       - 'projects.markdown'
       - '_includes/research-highlights.html'
       - '_includes/proof-atlas-nav.html'
+      - '_includes/proof-atlas-reading-tools.html'
       - 'scripts/test-proof-atlas-browser.cjs'
       - 'scripts/test-proof-atlas-grammar.cjs'
       - '.github/workflows/proof-atlas-browser.yml'
@@ -56,6 +61,7 @@ on:
       - 'projects.markdown'
       - '_includes/research-highlights.html'
       - '_includes/proof-atlas-nav.html'
+      - '_includes/proof-atlas-reading-tools.html'
       - 'public/**/proof-atlas*'
       - 'public/css/**'
       - '_layouts/**'
@@ -123,6 +129,8 @@ jobs:
           node scripts/test-proof-atlas-coverage.cjs
           node scripts/test-proof-atlas-library.cjs
           node scripts/test-proof-atlas-sync.cjs
+          node scripts/test-proof-atlas-proof-steps.cjs
+          node scripts/test-proof-atlas-proof-steps-browser.cjs
         env:
           ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
       - name: Browser regression — complete Lean.Expr visual grammar

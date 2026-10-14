@@ -9,7 +9,7 @@ The site uses Jekyll, Liquid templates and its existing vanilla CSS/JavaScript. 
 - Tools (`/projects/`) separates interactive scientific explainers from software libraries.
 - Manuscripts and background remain reachable from Research and each topic. Historical URLs remain valid.
 
-Proof Atlas has one overview and a primary synchronized reader at `/projects/proof-atlas/article/`. Human-readable article text is the default. Optional side views share a path-qualified compiled graph/Lean selection. Indexed crossing expression paths, declaration counterparts and supporting-module context are distinct relations; an unindexed passage clears the previous match. The separate crossing microscope and complete compiled library remain available under Reference & evidence, including their historical URLs. Language reference and coverage are supporting material; the compact constructor catalogue retains its optional illustrative scale diagrams. The overview does not duplicate the working graph or language explorer. Old shared occurrence/declaration URLs on the overview resolve to the microscope.
+Proof Atlas has one overview and a primary synchronized reader at `/projects/proof-atlas/article/`. Human-readable article text is the default. Optional side views share a path-qualified compiled graph/Lean selection. Indexed crossing expressions, source-bound proof steps for Theorems 3.4/4.1, declaration counterparts and supporting-module context are distinct relations; an unindexed passage clears the previous match. The separate crossing microscope and complete compiled library remain available under Reference & evidence, including their historical URLs. Language reference and coverage are supporting material; the compact constructor catalogue retains its optional illustrative scale diagrams. The overview does not duplicate the working graph or language explorer. Old shared occurrence/declaration URLs on the overview resolve to the microscope.
 
 ## Editorial rule
 
@@ -22,3 +22,9 @@ Emphasis on positive findings does not justify promoting partial formalization t
 ## Validation
 
 Build the actual production site. Check internal URLs and anchors, active navigation, desktop/mobile reading, both themes and keyboard access. Exercise the graph, library, article correspondence and references after shared navigation changes. Preserve source/data hashes and mathematical article content; run the existing artifact checkers. Application fragments such as `#expr-1852` require browser checks.
+
+## Proof-step correspondence
+
+`research/proof-atlas/proof-step-map.json` is the reviewed input. Each excerpt retains literal manuscript text, source lines, declared scope and an explicit unformalized status where needed. `build_proof_steps.cjs` binds compiled paths to immutable packets; it uses full application spines and declaration telescope arities for named proof calls and recorded paths for reviewed witness/uniqueness branches. It prunes shared graphs before enumerating indexed occurrence paths. `article-proof-steps.js` contains only public article excerpts and compiled-term metadata.
+
+`build_distill_article.py` adds these anchors without changing mathematical content and preserves the reading tools through their shared include. The browser distinguishes a selected anchor from a descendant within its indexed proof step. For a reused helper, show the relevant article uses explicitly. This index does not certify prose equivalence or formalize the excluded analytic clauses. Do not replace checksum/path checks with declaration-name or module-name heuristics.

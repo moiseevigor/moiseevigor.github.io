@@ -19,7 +19,7 @@ for(const anchor of index.anchors){assert.equal(decoder.path(anchor.occurrence),
  const page=await browser.newPage({viewport:{width:1800,height:1100}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.addInitScript(()=>{localStorage.setItem('analytics-consent','no');localStorage.setItem('theme','light');});
  const snap=()=>page.evaluate(()=>window.ProofAtlasSync.getSnapshot());
- const settled=()=>page.waitForFunction(()=>['indexed','context','unmapped'].includes(document.querySelector('#pa-sync-panel').dataset.match));
+ const settled=()=>page.waitForFunction(()=>['indexed','context','step-context','unmapped'].includes(document.querySelector('#pa-sync-panel').dataset.match));
  try{
   await page.goto(origin+'/projects/proof-atlas/article/',{waitUntil:'networkidle'});
   await page.waitForFunction(()=>document.querySelector('#passage-phase-equation').dataset.syncAnchor);

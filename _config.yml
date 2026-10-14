@@ -95,6 +95,7 @@ collections:
 # Re-include precomputed data assets that the global "*.json" exclude swallows.
 include:
   - "compiled-term-checks.json"
+  - "proof-step-map.json"
   - "public/data"
   # Jekyll 3 filters static files by basename: namespace these explicit exceptions.
   - "starbirth-e15.json"

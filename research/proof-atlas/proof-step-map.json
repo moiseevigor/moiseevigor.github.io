@@ -1,0 +1,526 @@
+{
+  "format": "ProofAtlasProofStepReview/1",
+  "steps": [
+    {
+      "id": "step-first-unique",
+      "title": "3.4 · unique root in the bracket",
+      "articleAnchor": "thm:first",
+      "sourceLines": [
+        411,
+        411
+      ],
+      "raw": "$J_2(\\psi+p,p,k)=0$ has exactly one solution $p_*(\\psi,k)$ in $[p_0,p_1]$",
+      "note": "Conditional on JacobiFull and finite tangencies. This matches the scalar root count, not continuity, extrema or the geometric time conversion.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiFull.exact_first_time",
+          "selector": "conclusion"
+        }
+      ],
+      "selection": "JacobiFull.exact_first_time"
+    },
+    {
+      "id": "step-first-none",
+      "title": "3.4 · no earlier root",
+      "articleAnchor": "thm:first",
+      "sourceLines": [
+        412,
+        412
+      ],
+      "raw": "and none in $(0,p_0)$",
+      "note": "Strict positivity excludes a zero in (0,p₀), under JacobiFull. This is a positivity counterpart of the no-root clause.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiFull.J2_pos_before_p0",
+          "selector": "conclusion"
+        }
+      ],
+      "selection": "JacobiFull.J2_pos_before_p0"
+    },
+    {
+      "id": "step-first-signs",
+      "title": "3.4 proof · bracket sign conditions",
+      "articleAnchor": "thm:first",
+      "sourceLines": [
+        424,
+        427
+      ],
+      "raw": "On $(p_0,p_1)$ one has $s>0$ (as $K<p_0<p_1\\le2K$), $f_1>0$ and $\\beta_1<0$\nby Lemma~\\ref{lem:identities}(iv), and $\\alpha_1>0$, since $\\alpha_1(p_0)>0$\nby Lemma~\\ref{lem:identities}(iv) and $p_1$ is at most the first zero of\n$\\alpha_1$ after $p_0$; so $\\beta<0<\\alpha$, i.e.\\ $0<y<1$; $y=1$ at $p_0$ ($\\beta=0$) and $y=0$ at $p_1$ ($\\alpha=0$).",
+      "note": "The sign fields are checked on the abstract left bracket. For the first bracket m = 0 the parity factor is 1. The y endpoint formulas require the other bracket lemmas.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiFull.leftBracket._proof_7",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiFull.leftBracket._proof_8",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiFull.leftBracket._proof_9",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiFull.leftBracket._proof_10",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiFull.leftBracket._proof_7"
+    },
+    {
+      "id": "step-first-lift",
+      "title": "3.4 proof · continuous lift and slope bound",
+      "articleAnchor": "thm:first",
+      "sourceLines": [
+        428,
+        430
+      ],
+      "raw": "$r$ runs from $0$ to $1$, continuously since $\\mathsf D\\ge1-k^2$, and\n$u=F(\\arcsin\\sqrt r)$ from $0$ to $K$, continuous on the closed and\nanalytic on the open bracket, with $u'\\ge1$ by Lemma~\\ref{lem:riccati}",
+      "note": "The continuous lift, its endpoint values and the oriented slope bound are checked for SBracket. Analyticity in this excerpt is outside those declarations.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "SBracket.continuousOn_uu",
+          "selector": "proof"
+        },
+        {
+          "declaration": "SBracket.uu_p0",
+          "selector": "proof"
+        },
+        {
+          "declaration": "SBracket.uu_p1",
+          "selector": "proof"
+        },
+        {
+          "declaration": "SBracket.one_le_ε_deriv_u",
+          "selector": "proof"
+        }
+      ],
+      "selection": "SBracket.continuousOn_uu"
+    },
+    {
+      "id": "step-first-singularity",
+      "title": "3.4 proof · endpoint divergence",
+      "articleAnchor": "thm:first",
+      "sourceLines": [
+        430,
+        432
+      ],
+      "raw": "and $u'\\to\\infty$ as $p\\to p_0$, because $r(p_0)=0$\nand $r'(p_0)\\ne0$: at the zero $p_0$ of $f_1$, $T_1=d^2b\\ne0$ in\n\\eqref{eq:zprime}.",
+      "note": "No compiled proof of this endpoint-divergence argument is indexed. Finite tangencies are an explicit assumption of the counting theorem.",
+      "status": "unmapped",
+      "anchors": [],
+      "selection": null
+    },
+    {
+      "id": "step-first-crossing",
+      "title": "3.4 proof · apply crossing to the first bracket",
+      "articleAnchor": "thm:first",
+      "sourceLines": [
+        432,
+        433
+      ],
+      "raw": "Lemma~\\ref{lem:crossing} on $[p_0,p_1]$, with \\eqref{eq:zero-set}, gives\nexactly one root there",
+      "note": "Conditional on JacobiFull and finite tangencies. This matches the scalar root count, not continuity, extrema or the geometric time conversion. The witness-construction and q ≥ p₀ uniqueness branches reuse this bracket count to assemble the positive-interval result.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiFull.exact_first_time",
+          "selector": "call",
+          "callee": "JacobiFull.left_exact_time"
+        },
+        {
+          "declaration": "JacobiFull.first_time_complete",
+          "selector": "call",
+          "callee": "JacobiFull.exact_first_time"
+        },
+        {
+          "declaration": "JacobiFull.left_exact_time",
+          "selector": "proof"
+        },
+        {
+          "declaration": "SBracket.exact_time",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiFull.first_time_complete",
+          "selector": "node",
+          "node": 934,
+          "expectedKind": "app",
+          "callee": "And.intro",
+          "arity": 4
+        },
+        {
+          "declaration": "JacobiFull.first_time_complete",
+          "selector": "node",
+          "node": 1039,
+          "expectedKind": "lam"
+        }
+      ],
+      "selection": "JacobiFull.exact_first_time"
+    },
+    {
+      "id": "step-first-continuity",
+      "title": "3.4 proof · dependence on initial phase",
+      "articleAnchor": "thm:first",
+      "sourceLines": [
+        433,
+        434
+      ],
+      "raw": ", continuous in $\\psi$ because the branches are\nstrictly monotone.",
+      "note": "Continuity of the selected root as a function of ψ has no compiled counterpart in this snapshot.",
+      "status": "unmapped",
+      "anchors": [],
+      "selection": null
+    },
+    {
+      "id": "step-first-exclusion",
+      "title": "3.4 proof · positivity rules out earlier roots",
+      "articleAnchor": "thm:first",
+      "sourceLines": [
+        434,
+        437
+      ],
+      "raw": "On $(0,p_0)$, $f_1<0$ and $\\beta_1<0$ by\nLemma~\\ref{lem:identities}(iv), so $\\beta>0$ and\n$\\alpha=(1-k^2)(\\beta+\\ell)>0$: $J_2>0$, no root (this is\n\\cite[Theorem~2.2]{Sachkov2010Conjugate}).",
+      "note": "The fully applied J2_pos_before_p0 proof supplies strict positivity in the contradiction branch of first_time_complete. The bracket count still requires finite tangencies.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiFull.first_time_complete",
+          "selector": "call",
+          "callee": "JacobiFull.J2_pos_before_p0"
+        },
+        {
+          "declaration": "JacobiFull.J2_pos_before_p0",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiFull.β_pos_before_p0",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiFull.J2_pos_of_β_pos",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiFull.first_time_complete",
+          "selector": "node",
+          "node": 1018,
+          "expectedKind": "lam"
+        }
+      ],
+      "selection": "JacobiFull.first_time_complete"
+    },
+    {
+      "id": "step-first-extrema",
+      "title": "3.4 proof · corner phases, extrema and cut time",
+      "articleAnchor": "thm:first",
+      "sourceLines": [
+        437,
+        440
+      ],
+      "raw": "The corner phases are\n$\\psi_\\pm(p_0)=-p_0$ and $\\psi_\\pm(p_1)=K-p_1$, where $p_*=p_0$ and\n$p_*=p_1$; every other phase is attained at an interior $p$.  The cut\ntime is $2kp_0$ \\cite[Theorem~3.3]{Sachkov2010Conjugate}.",
+      "note": "The root extrema, their unique attaining phases and cut-time interpretation are not established by the scalar counting declarations.",
+      "status": "unmapped",
+      "anchors": [],
+      "selection": null
+    },
+    {
+      "id": "step-cells-count-clause",
+      "title": "4.1 · one root on each bracket and no other roots",
+      "articleAnchor": "thm:cells",
+      "sourceLines": [
+        477,
+        479
+      ],
+      "raw": "Consequently, for every initial phase, the geodesic has exactly one\nconjugate time on each closed bracket and none elsewhere in\n$[p_n^1,p_{n+1}^1)$.",
+      "note": "Lean m is article n − 1. JacobiFull and finite tangencies hL/hR remain assumptions; zero orders and identification of k₀ are not certified.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiFull.cell_roots",
+          "selector": "conclusion"
+        }
+      ],
+      "selection": "JacobiFull.cell_roots"
+    },
+    {
+      "id": "step-cells-distinct-clause",
+      "title": "4.1 · distinct roots and critical coincidence",
+      "articleAnchor": "thm:cells",
+      "sourceLines": [
+        479,
+        481
+      ],
+      "raw": "The two bracket roots are distinct except when\n$k=k_0$ and $\\psi\\equiv K\\pmod{2K}$: in that case the cell contains the\nsingle conjugate time $p=2nK$.",
+      "note": "Two roots are checked for K ≠ 2E; coincidence forces the even-period endpoint and K = 2E. The numerical identification of k₀ and zero order are separate, unformalized claims.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiFull.two_per_cell_of_ne",
+          "selector": "conclusion"
+        },
+        {
+          "declaration": "JacobiFull.coincide_imp",
+          "selector": "conclusion"
+        }
+      ],
+      "selection": "JacobiFull.two_per_cell_of_ne"
+    },
+    {
+      "id": "step-cells-after",
+      "title": "4.1 proof · no root after bₙ",
+      "articleAnchor": "thm:cells",
+      "sourceLines": [
+        487,
+        489
+      ],
+      "raw": "On $(b_n,p_{n+1}^1)$, $f_1$ and $\\beta_1$ have the common sign\n$(-1)^{n+1}$ by Lemma~\\ref{lem:identities}(iv), so $\\beta>0$ and\n$\\alpha=(1-k^2)(\\ell+\\beta)>0$: $J_2>0$, no zero (there $y>1$).",
+      "note": "J2_pos_after_bR proves positivity on (bR m, pL (m+1)); m = n − 1. Its application excludes this region from the cell zero set.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiFull.cell_roots",
+          "selector": "call",
+          "callee": "JacobiFull.J2_pos_after_bR"
+        },
+        {
+          "declaration": "JacobiFull.J2_pos_after_bR",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiFull.cell_roots"
+    },
+    {
+      "id": "step-cells-gap",
+      "title": "4.1 proof · no root between the two brackets",
+      "articleAnchor": "thm:cells",
+      "sourceLines": [
+        490,
+        496
+      ],
+      "raw": "On $(p_n^1,b_n)$,\n$f_1$ and $\\beta_1$ have opposite signs, so $\\beta<0$; $s$ has the sign\n$(-1)^{n+1}$ before $2nK$ and $(-1)^n$ after, and $\\alpha_1$ has the sign\n$(-1)^{n+1}$ before $p_n^\\alpha$ and $(-1)^n$ after\n(Lemma~\\ref{lem:identities}(iv)).  Hence $X=s\\,\\alpha_1<0$ strictly\nbetween $2nK$ and $p_n^\\alpha$, where $\\beta=X-\\ell<0$ and\n$\\alpha=(1-k^2)X<0$ give $J_2<0$: no zero (there $y<0$).",
+      "note": "J2_neg_gap proves strict negativity on (eL m, eR m). The indexed call is the gap-exclusion branch of cell_roots, under JacobiFull.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiFull.cell_roots",
+          "selector": "call",
+          "callee": "JacobiFull.J2_neg_gap"
+        },
+        {
+          "declaration": "JacobiFull.J2_neg_gap",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiFull.cell_roots"
+    },
+    {
+      "id": "step-cells-lift",
+      "title": "4.1 proof · oriented phase lifts on both brackets",
+      "articleAnchor": "thm:cells",
+      "sourceLines": [
+        496,
+        501
+      ],
+      "raw": "On the\ntwo open brackets $X>0$,\nso $0<y<1$, with $y=1$ at $p_n^1$ and $b_n$ ($\\beta=0$) and $y=0$ at $2nK$\nand $p_n^\\alpha$ ($X=0$); thus $r$ runs between $0$ and $1$ and $u$ between\n$0$ and $K$, from $0$ to $K$ on $B_n^-$ and from $K$ to $0$ on $B_n^+$,\nwith $|u'|\\ge1$ (Lemma~\\ref{lem:riccati})",
+      "note": "SBracket proves continuous lift endpoints and an oriented slope bound. The left/right bracket orientations supply the two directions; this is not a proof of endpoint blow-up or analyticity.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "SBracket.one_le_ε_deriv_u",
+          "selector": "proof"
+        },
+        {
+          "declaration": "SBracket.continuousOn_uu",
+          "selector": "proof"
+        },
+        {
+          "declaration": "SBracket.uu_p0",
+          "selector": "proof"
+        },
+        {
+          "declaration": "SBracket.uu_p1",
+          "selector": "proof"
+        }
+      ],
+      "selection": "SBracket.one_le_ε_deriv_u"
+    },
+    {
+      "id": "step-cells-regularity",
+      "title": "4.1 proof · endpoint regularity and critical continuation",
+      "articleAnchor": "thm:cells",
+      "sourceLines": [
+        501,
+        511
+      ],
+      "raw": "and $|u'|$ unbounded at the end\nwhere $r=0$ (at\n$p_n^1$, a zero of $f_1$, $T_1=d^2b\\ne0$; at $b_n$, a zero of $\\beta_1$,\n$T_2=s^2a\\mathsf D\\ne0$); at the other end $r=1$ and $|u'|\\to\\infty$ as\nwell, since $y$ has a simple zero there, unless $k=k_0$, where\n$2nK=p_n^\\alpha$, $y$ has a double zero at $2nK$ (as\n$\\alpha_1'(2nK)=(-1)^n4n^2E(K-E)\\ne0$) and\n$\\sn(K-u)/\\dn(K-u)=\\sqrt{y/\\mathsf D}$ (quarter-period shift), the root\ntaken with the sign of $p-2nK$, is analytic across $2nK$; hence so is the\ncontinuation of $u$ from $B_n^-$ by $2K-u$ on $B_n^+$, which is what\nLemma~\\ref{lem:crossing} requires at that end.",
+      "note": "The endpoint asymptotics, analytic continuation and finiteness argument have no compiled counterpart here. hL/hR remain explicit finite-tangency assumptions.",
+      "status": "unmapped",
+      "anchors": [],
+      "selection": null
+    },
+    {
+      "id": "step-cells-crossing",
+      "title": "4.1 proof · apply crossing to each bracket",
+      "articleAnchor": "thm:cells",
+      "sourceLines": [
+        511,
+        513
+      ],
+      "raw": "So\nLemma~\\ref{lem:crossing}, with \\eqref{eq:zero-set}, applies to each bracket\nseparately: exactly one root on each closed bracket",
+      "note": "Lean m is article n − 1. JacobiFull and finite tangencies hL/hR remain assumptions; zero orders and identification of k₀ are not certified.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiFull.cell_roots",
+          "selector": "call",
+          "callee": "JacobiFull.left_exact_time"
+        },
+        {
+          "declaration": "JacobiFull.cell_roots",
+          "selector": "call",
+          "callee": "JacobiFull.right_exact_time"
+        },
+        {
+          "declaration": "JacobiFull.left_exact_time",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiFull.right_exact_time",
+          "selector": "proof"
+        },
+        {
+          "declaration": "SBracket.exact_time",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiFull.cell_roots"
+    },
+    {
+      "id": "step-cells-orders",
+      "title": "4.1 proof · simple roots and the double corner",
+      "articleAnchor": "thm:cells",
+      "sourceLines": [
+        513,
+        516
+      ],
+      "raw": ", simple off the\ntangency phases, and simple at the corners as well, since $r=\\sn^2u$ and\n$1-r$ have the simple zeros just noted, except at the double corner $2nK$\nfor $k=k_0$.",
+      "note": "These zero-order claims have no corresponding compiled proof in the published snapshot.",
+      "status": "unmapped",
+      "anchors": [],
+      "selection": null
+    },
+    {
+      "id": "step-cells-exhaustion",
+      "title": "4.1 proof · bracket roots exhaust the cell",
+      "articleAnchor": "thm:cells",
+      "sourceLines": [
+        516,
+        517
+      ],
+      "raw": "Since $p_n^1\\in B_n^-$ and\n$b_n<p_{n+1}^1$, these bracket roots exhaust the half-open cell.",
+      "note": "Set extensionality proves that the half-open cell zero set equals {p, q}, using the two bracket counts and the positive/negative exclusion branches.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiFull.cell_roots",
+          "selector": "call",
+          "callee": "Set.ext",
+          "arity": 4
+        },
+        {
+          "declaration": "JacobiFull.coincide_imp",
+          "selector": "call",
+          "callee": "JacobiFull.cell_roots"
+        }
+      ],
+      "selection": "JacobiFull.cell_roots"
+    },
+    {
+      "id": "step-cells-contact",
+      "title": "4.1 proof · coincidence forces the common endpoint",
+      "articleAnchor": "thm:cells",
+      "sourceLines": [
+        517,
+        518
+      ],
+      "raw": "The roots on the\ntwo closed brackets coincide only if both are the common endpoint",
+      "note": "The coincidence branch forces p = (2m+2)K; eL_eq_eR_iff proves contact iff K = 2E. This index does not identify the unique numerical k₀.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiFull.coincide_imp",
+          "selector": "call",
+          "callee": "JacobiFull.eL_eq_eR_iff"
+        },
+        {
+          "declaration": "JacobiFull.eL_eq_eR_iff",
+          "selector": "proof"
+        },
+        {
+          "declaration": "JacobiFull.coincide_imp",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiFull.coincide_imp"
+    },
+    {
+      "id": "step-cells-critical",
+      "title": "4.1 proof · identification of the critical modulus",
+      "articleAnchor": "thm:cells",
+      "sourceLines": [
+        518,
+        519
+      ],
+      "raw": "which\nexists only for $k=k_0$",
+      "note": "The unique numerical k₀ and its identification with the elliptic equation K = 2E are not constructed in this Lean snapshot.",
+      "status": "unmapped",
+      "anchors": [],
+      "selection": null
+    },
+    {
+      "id": "step-cells-location",
+      "title": "4.1 proof · location of coincident bracket roots",
+      "articleAnchor": "thm:cells",
+      "sourceLines": [
+        519,
+        519
+      ],
+      "raw": "where it is the corner $(2nK,K)$ of both curves",
+      "note": "The coincidence branch proves p = (2m+2)K, with m = n − 1. This is a scalar location counterpart; the phase criterion is indexed in the next passage.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiFull.cell_roots",
+          "selector": "node",
+          "node": 4558,
+          "expectedKind": "lam"
+        }
+      ],
+      "selection": "JacobiFull.cell_roots"
+    },
+    {
+      "id": "step-cells-phase",
+      "title": "4.1 proof · phase at the common endpoint",
+      "articleAnchor": "thm:cells",
+      "sourceLines": [
+        520,
+        520
+      ],
+      "raw": "met by the line exactly when $\\psi\\equiv K-2nK\\equiv K$.",
+      "note": "The compiled equivalence characterizes J2(τ, 2nK) = 0 by τ = K + 2Kj. Along τ = ψ + 2nK this gives ψ ≡ K. Only this scalar phase criterion is indexed.",
+      "status": "partial",
+      "anchors": [
+        {
+          "declaration": "JacobiFull.J2_even_eq_zero_iff",
+          "selector": "proof"
+        }
+      ],
+      "selection": "JacobiFull.J2_even_eq_zero_iff"
+    }
+  ]
+}

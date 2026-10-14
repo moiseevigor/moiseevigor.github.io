@@ -6,6 +6,8 @@ permalink: /projects/proof-atlas/coverage/
 
 12 October 2026. The [compiled proof library](/projects/proof-atlas/library/) covers every declaration extracted from two finite project snapshots. Original source projects, tactic scripts, downloadable source archives and extraction logs remain private. The previously published article and statement excerpts remain available.
 
+The [proof-step correspondence index](/projects/proof-atlas/proof-steps/) links clauses and proof steps of Theorems 3.4 and 4.1 to 44 checksum-bound compiled occurrence anchors. Exact selected anchors and descendant step context are distinguished; excluded analytic clauses remain explicit.
+
 | Extracted inventory | Published article snapshot | Current working snapshot |
 |:--|--:|--:|
 | Owned source modules | 15 | 26 |
