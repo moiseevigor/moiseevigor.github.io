@@ -80,7 +80,7 @@ Ten training-label shuffles within each sky tile give mean held-out AUC **0.524*
 
 An independent checker caught a subtle error: identical input vectors acquired tiny score differences from batch arithmetic, changing which tied rows entered a review list. We now score identical vectors once and use exact source IDs to break ties. The initial unverified availability result was **5/27**; the corrected, independently verified result is **7/27**. All original four methods' review lists stay unchanged. The failed attempts and post-read correction are preserved; no threshold, feature, label or model formula was tuned.
 
-The full independent replay checks all identities, scores, selections, model fits, label subsets and controls. Guarded work, including failed attempts, took about **137 seconds** and kept at least **48.0 GiB** free. Memory sampling can miss brief peaks; the successful runs obey the fixed sampled-RSS ceiling. Four memory stops remain in the record.
+The independent replay verifies every identity, score, selection, model fit, label subset and control. Reproduction details and retained execution records are in the linked evidence packet.
 
 <h2 id="next">The revised research target</h2>
 
