@@ -135,6 +135,8 @@ The fixed first-field gas–radio comparison adds only **0.1970 km/s** of common
 
 **14 October corrected update:** the approved offline NEOWISE flag repair removes 645 shape-only rejections from the same 874 rows, but adds **zero accepted measurements**. Independent recomputation now establishes a failed **0/3 quality/cadence gate**, below required 2/3. All numerical cuts and raw strings are unchanged; no new observations or physical birth are claimed. [Read the corrected result and retained original attempt](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#flag-repair). [Historical unresolved contract](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#native-quality).
 
+**14 October ablation:** sixteen fixed contrasts do not establish clear underfitting or uniform severe overfitting on consumed proxies. The embedding remains 14/27 versus raw nonlinear 15/27; availability alone recovers 7/27 and no positive proxy has temporal support. Independent validation and coverage now take priority over model capacity. [Read every contrast, learning-curve limitation and numerical correction](/astrophysics/2026/10/14/hidden-protostars-ablation/).
+
 <h3 id="historical-week">The original control study: frozen and stopped</h3>
 
 <blockquote class="sb-goal">Determine whether nearby Hi-GAL clumps labelled prestellar and undetected at 70 μm contain an excess of compact mid-infrared sources compared with sightlines matched for dust column, sensitivity and crowding.</blockquote>
