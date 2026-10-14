@@ -1,0 +1,9 @@
+proxy_state,model_temporal_support,molecular_geometry,parents
+qualifying_positive,0,geometric_unique_unshared,27
+qualifying_proxy_negative,0,geometric_unique_unshared,232
+qualifying_proxy_negative,1,geometric_unique_unshared,3
+unknown,0,ambiguous_or_shared,31
+unknown,0,geometric_unique_unshared,14
+unknown,0,none_retained,18263
+unknown,1,ambiguous_or_shared,1
+unknown,1,none_retained,757

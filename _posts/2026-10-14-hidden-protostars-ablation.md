@@ -90,6 +90,35 @@ The learned representation is unsupervised; the downstream proxy ranker is super
 
 If suitable validation or temporal support cannot be established within the next bounded week, the result should state that limitation. A larger architecture, a relaxed quality cut or another consumed-label win would not resolve it. The original ranking improvement gate and the earlier **333-of-800** control gate remain failed. The corrected NEOWISE quality/cadence support remains **0/3**. **No new star or birth is confirmed.**
 
+<h2 id="validation-cohort">Independent evidence: a cohort with explicit limits</h2>
+
+We can now inspect a fixed **223-clump prospective cohort**, with known inclusion fractions and a record for every parent. It contains **60** sources selected by both methods, **103** where they disagree, and **60** selected by neither. Including the last group matters: examining only high scores cannot measure how many true protostars the methods miss.
+
+The conservative frame retains **14,980 of 19,328** clumps after excluding groups with previously consumed outcome/sample evidence or protected matched-control membership. Every exclusion is recorded. The existing unlabelled feature values were already inspected; this is a prospective assessment of frozen scores against future external evidence, not a new untouched training/test split.
+
+<div class="sb-ledger" role="region" aria-label="Prospective cohort allocation" tabindex="0" markdown="1">
+
+| Original selection | Temporal input present | Temporal input missing |
+|:--|--:|--:|
+| Both methods | 30 of 48 groups | 30 of 355 |
+| Embedding only | All 13 groups | 30 of 266 |
+| Nonlinear only | 30 of 81 groups | 30 of 162 |
+| Neither | 30 of 452 groups | 30 of 13,603 |
+
+</div>
+
+**103** sampled clumps have the registered temporal input, **105** have historical WISE coordinate anchors, and **168** have the cached four-band FIR/error support. These are separate, overlapping counts. The sample deliberately oversamples disagreements and complementary observations; its raw fractions are not population prevalence. Exact inclusion weights remain downloadable.
+
+**The decisive limitation: none of the 223 prospective cases has retained molecular support, and zero has independently certified physical truth.** Conservative consumption exclusions leave a review queue that cannot currently test the molecular contribution. This is a coverage limitation of this frame and cache, not evidence that the clumps contain no dense gas or protostars.
+
+Ownership is also unresolved. In the full parent, **32 of 308** molecular associations are ambiguous/shared; even the 276 unique unshared records do not assign a particular emitter inside a telescope beam. Of 1,231 historical WISE anchors, 1,230 lack a retained native identifier in the combined ledger. Three separately inspected native cases retain exact identifiers but failed association context; they are not independent validation cases.
+
+We audited cached request, row and quality support. **Actual per-source exposure-footprint completeness remains unverified**, as do source deblending and physical clump membership. Empty cached results are not physical non-detections. [NEOWISE's official reliability guidance](https://irsa.ipac.caltech.edu/data/WISE/docs/release/NEOWISE/expsup/sec2_3.html) explains why catalog presence, photometric quality and artifact checks are different questions; the retained metadata does not supply every recommended diagnostic.
+
+Independent adjudication now has a concrete target: exact observation identities and sensitivity, competing emitters, resolved protostellar evidence and defensible parent membership. Reviewers must be blinded to scores before outcome readout; this public selection table is not a blinded packet. A negative requires an adequate diagnostic and explicit scope; unresolved cases stay unknown. The fixed review budget is **not a power guarantee**. A paired, spatially grouped power/review-cost protocol must be frozen before physical performance readout. Estimates apply to this restricted frame, not automatically to all 19,328 parents.
+
+[Download the 223-case review cohort](/public/data/starbirth/validation-cohort/review-cohort.csv.gz), [all 19,328 ownership and coverage records](/public/data/starbirth/validation-cohort/population.csv.gz), [full interpretation](/public/data/starbirth/validation-cohort/results.md) and [the exact protocol, alternatives, verification and source hashes](/public/data/starbirth/validation-cohort/README.md). Source revision: `cb45d33be7fdb64d765edef3ba8c17fab1689e4d`. No observations were acquired, rankings changed, or new stars or births confirmed.
+
 <h2 id="evidence">Exact evidence and scope</h2>
 
 This study was frozen after the earlier outcomes were already known. It is a retrospective diagnostic with disclosed implementation corrections, not fresh outcome-blind confirmation. All sixteen contrasts and negative findings are published; no winner is promoted.

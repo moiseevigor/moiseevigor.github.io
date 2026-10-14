@@ -1,0 +1,35 @@
+{
+  "schema": "cohort-independent-verification/1",
+  "verified": true,
+  "method": "Separate raw-parent reconstruction, relational joins, group exclusions, hexadecimal seeded priority order, complete ledgers and upstream alternatives",
+  "sources": 19328,
+  "cohort_members": 223,
+  "sampled_groups": 223,
+  "summary_sha256": "b2305093129d145a1ad4e0fc270110ec9cc9273d0a166553c7ec5f85a49a8bb9",
+  "population_sha256": "65ca831cc592fedc1e0882279f57a2c5e035111c748693cf18ed467cb4dd8f09",
+  "queue_sha256": "172da05b62ffeddd6ada9f1491e708e59e9307c53ed26ba4f7e952293dc45003",
+  "registration_sha256": "b3942c38dedae2a64ea294e65d20cd4c00f9446388cf8bd5c11a095cfec607a5",
+  "physical_validation": false,
+  "outputs": [
+    {
+      "path": "artifacts/validation_cohort_20261014/coverage.csv",
+      "bytes": 389,
+      "sha256": "a5cdb38cf9122a11488143e0edb94217029504b82af01b5517bef0ca2a96507a"
+    },
+    {
+      "path": "artifacts/validation_cohort_20261014/molecular-alternatives.csv.gz",
+      "bytes": 150395,
+      "sha256": "baed4ba212257b138d43ba9fddf83f0cdd617f1c36655458ea86c8a76730c09d"
+    },
+    {
+      "path": "artifacts/validation_cohort_20261014/population.csv.gz",
+      "bytes": 836889,
+      "sha256": "65ca831cc592fedc1e0882279f57a2c5e035111c748693cf18ed467cb4dd8f09"
+    },
+    {
+      "path": "artifacts/validation_cohort_20261014/review-cohort.csv.gz",
+      "bytes": 11935,
+      "sha256": "172da05b62ffeddd6ada9f1491e708e59e9307c53ed26ba4f7e952293dc45003"
+    }
+  ]
+}

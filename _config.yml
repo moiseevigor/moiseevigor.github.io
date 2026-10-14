@@ -175,6 +175,14 @@ include:
   - "starbirth-ic-knowledge-supplement.json"
   - "starbirth-ic-secondary-alternative.json"
   - "starbirth-ic-alternative-knowledge-note.json"
+  # Verified prospective cohort exact exports.
+  - "cohort-02-validation_cohort_registration_20261014.json"
+  - "cohort-05-verification.json"
+  - "summary.json"
+  - "cohort-11-validation_cohort_checker_amendment_20261014.json"
+  - "cohort-12-validation_cohort_verification3_registration_20261014.json"
+  - "cohort-13-validation_cohort_checkpoint_20261014.json"
+  - "cohort-14-validation_cohort_reviewed_supplement_20261014.json"
   # Verified retrospective ablation source files.
   - "ablation-09-ablation_registration_20261014.json"
   - "ablation-10-ablation_execution3_registration_20261014.json"

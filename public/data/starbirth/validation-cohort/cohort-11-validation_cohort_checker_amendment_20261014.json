@@ -1,0 +1,16 @@
+{
+  "schema": "cohort-checker-implementation-amendment/1",
+  "failed_stage": "artifacts/validation_cohort_verification_20261014",
+  "failure": "Checker raw catalogue parser attempted float on an empty distance; worker already excludes nonfinite/missing distance by frozen parent definition",
+  "predicates_or_outputs_changed": false,
+  "original_registration_preserved": true,
+  "replacement_checker": "research/verify_validation_cohort2_20261014.py",
+  "replacement_checker_sha256": "45a9bf26b6d88805535a549efd0cc2a8360ced12d7b1a4bab3dca4c20d59870f",
+  "stage": "artifacts/validation_cohort_verification2_20261014",
+  "limits": {
+    "seconds": 600,
+    "mib": 1,
+    "sampled_rss_mib": 256,
+    "free_gib": 5
+  }
+}

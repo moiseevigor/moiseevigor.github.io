@@ -1,0 +1,91 @@
+{
+  "schema": "validation-cohort-registration/1",
+  "pre_read_seed": true,
+  "prior_outcomes_consumed": true,
+  "prior_features_consumed": true,
+  "source_revision_before_registration": "59a4e6354692a42f8b9f6140777876767e55ca6a",
+  "seed": "4c5794b653bcfef7f34c286b1e0f9f5e2720b6da2a1628bf4719b6e4658c6f07",
+  "identity": "artifacts/multisurvey_eligibility_20261012/sources.csv.gz",
+  "coverage": "artifacts/multisurvey_association_compact_20261012/sources.csv.gz",
+  "edges": "artifacts/multisurvey_association_compact_20261012/molecular_edges.csv.gz",
+  "ranking": "artifacts/multisurvey_missing_view_20261012/sources.csv.gz",
+  "independent_truth_manifest": null,
+  "per_stratum_group_cap": 30,
+  "group_cap": 240,
+  "member_cap": 480,
+  "limits": {
+    "worker_seconds": 600,
+    "checker_seconds": 600,
+    "worker_mib": 4,
+    "checker_mib": 1,
+    "sampled_rss_mib": 256,
+    "free_reserve_gib": 5
+  },
+  "inputs": [
+    {
+      "path": "cache/higal360clump.csv",
+      "bytes": 10839247,
+      "sha256": "e2986e34d18419fb0e7fc911fafaedbd081398d1128977ca1c480a39e4055364"
+    },
+    {
+      "path": "artifacts/multisurvey_eligibility_20261012/sources.csv.gz",
+      "bytes": 575173,
+      "sha256": "7b4a902d69a121c4716eb378603c40f5099c925333bc49d86536adda1cc11379"
+    },
+    {
+      "path": "artifacts/multisurvey_eligibility_verification_stdlib_20261012/verification.json",
+      "bytes": 1190,
+      "sha256": "b910b565ae40f6dc146c003523a9e8b9a1358f5fc2da2a9b84a32d474303fe9f"
+    },
+    {
+      "path": "artifacts/multisurvey_association_compact_20261012/sources.csv.gz",
+      "bytes": 571753,
+      "sha256": "af865147df2ef2eb1556e33d4b66cc0b43b3bd231e0bfc58a91b06375514cb2e"
+    },
+    {
+      "path": "artifacts/multisurvey_association_compact_20261012/molecular_edges.csv.gz",
+      "bytes": 150811,
+      "sha256": "ba1fe27a66f7d9f1441273794dc2540e8c4516b8924970e087033b8656f559e5"
+    },
+    {
+      "path": "artifacts/multisurvey_association_verification_compact_20261012/verification.json",
+      "bytes": 1124,
+      "sha256": "0d1f4fa6e9f77764e7dd08a8cfbdb0e1ab052b5b32ed6b97f2819705a9fe3ce7"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_20261012/sources.csv.gz",
+      "bytes": 1034031,
+      "sha256": "6872b22eed45d6e001d0363c3a05e864702b86adc46f20baaf7b4f1c0a7d24c0"
+    },
+    {
+      "path": "artifacts/multisurvey_missing_view_verification_20261012/verification.json",
+      "bytes": 840,
+      "sha256": "644d31bf5f9eda18e875b37cfc901b4a3bf697bf71d47ec469cd22602327f668"
+    },
+    {
+      "path": "tools/review/backend/evidence_v5/native-cards.json",
+      "bytes": 34699,
+      "sha256": "8929cd3bb703491adc3bff7853c445bc1e2b4649f83f14fb41a9ef34cc0b7490"
+    },
+    {
+      "path": "docs/RESEARCH_GOAL.md",
+      "bytes": 21027,
+      "sha256": "00bc0502faac480a1fd0328a0c58eb261308ccfc767743a90a5c003d7be2c16d"
+    },
+    {
+      "path": "docs/VALIDATION_COHORT_PROTOCOL_20261014.md",
+      "bytes": 6360,
+      "sha256": "ea9952881f56a67eb2159159f4df1083683becb4bc527ebbccfa9f6584be5252"
+    },
+    {
+      "path": "research/build_validation_cohort_20261014.py",
+      "bytes": 7997,
+      "sha256": "512483f37ae90e81735c1b69b6bd4b377a867418361e039afdddc409de66561e"
+    },
+    {
+      "path": "research/verify_validation_cohort_20261014.py",
+      "bytes": 7802,
+      "sha256": "08cdd6eec67a4a9db69d3affcc17cc8128d50b999a85214be2a3204e9bc32779"
+    }
+  ]
+}

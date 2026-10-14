@@ -1,0 +1,14 @@
+{
+  "stage": "artifacts/validation_cohort_verification3_20261014",
+  "checker": "research/verify_validation_cohort3_20261014.py",
+  "sha256": "805e6c3a2a7da4cbf99fcf41529a1710752dcaac0fe34b02ec354bb57bfffb20",
+  "previous_stop": "system_memory_pressure before worker launch; original receipt retained",
+  "pressure_before_launch": 1,
+  "scientific_changes": false,
+  "limits": {
+    "seconds": 600,
+    "mib": 1,
+    "sampled_rss_mib": 256,
+    "reserve_gib": 5
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "schema": "independent-evidence-cohort/1",
+  "registration_sha256": "b3942c38dedae2a64ea294e65d20cd4c00f9446388cf8bd5c11a095cfec607a5",
+  "counts": {
+    "parent": 19328,
+    "prospective_frame_members": 14980,
+    "sampled_members": 223,
+    "fir_value_error_support": 13297,
+    "wise_anchor_present": 1231,
+    "screened_temporal_support": 761,
+    "model_temporal_support": 761,
+    "molecular_none_retained": 19020,
+    "infrared_no_retained_anchor": 18095,
+    "molecular_geometric_unique_unshared": 276,
+    "molecular_ambiguous_or_shared": 32,
+    "infrared_projected_anchor_native_id_missing": 1230,
+    "infrared_native_id_retained_association_gate_failed": 3
+  },
+  "groups": 19327,
+  "frame_groups": 14980,
+  "excluded_groups": 4347,
+  "sampled_groups": 223,
+  "strata": {
+    "both|temporal": {
+      "groups": 48,
+      "sampled_groups": 30,
+      "frame_members": 48,
+      "sampled_members": 30
+    },
+    "both|no_temporal": {
+      "groups": 355,
+      "sampled_groups": 30,
+      "frame_members": 355,
+      "sampled_members": 30
+    },
+    "embedding_only|temporal": {
+      "groups": 13,
+      "sampled_groups": 13,
+      "frame_members": 13,
+      "sampled_members": 13
+    },
+    "embedding_only|no_temporal": {
+      "groups": 266,
+      "sampled_groups": 30,
+      "frame_members": 266,
+      "sampled_members": 30
+    },
+    "nonlinear_only|temporal": {
+      "groups": 81,
+      "sampled_groups": 30,
+      "frame_members": 81,
+      "sampled_members": 30
+    },
+    "nonlinear_only|no_temporal": {
+      "groups": 162,
+      "sampled_groups": 30,
+      "frame_members": 162,
+      "sampled_members": 30
+    },
+    "neither|temporal": {
+      "groups": 452,
+      "sampled_groups": 30,
+      "frame_members": 452,
+      "sampled_members": 30
+    },
+    "neither|no_temporal": {
+      "groups": 13603,
+      "sampled_groups": 30,
+      "frame_members": 13603,
+      "sampled_members": 30
+    }
+  },
+  "independent_truth_manifest": null,
+  "certified_validation_eligible": 0,
+  "truth_unknown": 19328,
+  "physical_validation": false,
+  "models_fitted": false,
+  "rankings_changed": false,
+  "new_stars": 0,
+  "new_births": 0,
+  "all_inputs_previously_inspected": true,
+  "footprint_completeness": "unverified",
+  "outputs": [
+    {
+      "path": "artifacts/validation_cohort_20261014/coverage.csv",
+      "bytes": 389,
+      "sha256": "a5cdb38cf9122a11488143e0edb94217029504b82af01b5517bef0ca2a96507a"
+    },
+    {
+      "path": "artifacts/validation_cohort_20261014/molecular-alternatives.csv.gz",
+      "bytes": 150395,
+      "sha256": "baed4ba212257b138d43ba9fddf83f0cdd617f1c36655458ea86c8a76730c09d"
+    },
+    {
+      "path": "artifacts/validation_cohort_20261014/population.csv.gz",
+      "bytes": 836889,
+      "sha256": "65ca831cc592fedc1e0882279f57a2c5e035111c748693cf18ed467cb4dd8f09"
+    },
+    {
+      "path": "artifacts/validation_cohort_20261014/review-cohort.csv.gz",
+      "bytes": 11935,
+      "sha256": "172da05b62ffeddd6ada9f1491e708e59e9307c53ed26ba4f7e952293dc45003"
+    }
+  ]
+}

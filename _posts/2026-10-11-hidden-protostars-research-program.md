@@ -98,6 +98,8 @@ One known infrared source agrees with **21/21** query-visit medians, but positio
 
 **14 October ablation:** sixteen fixed contrasts do not establish clear underfitting or uniform severe overfitting on consumed proxies. The embedding remains 14/27 versus raw nonlinear 15/27; availability alone recovers 7/27 and no positive proxy has temporal support. Independent validation and coverage now take priority over model capacity. [Read every contrast, learning-curve limitation and numerical correction](/astrophysics/2026/10/14/hidden-protostars-ablation/).
 
+**Independent-evidence cohort:** a frozen 223-clump sample includes agreements, disagreements and sources selected by neither method. Zero has certified independent truth or retained molecular support. Ownership and exposure coverage remain unresolved. [The cohort and its limits](/astrophysics/2026/10/14/hidden-protostars-ablation/#validation-cohort).
+
 <details markdown="1">
 <summary>Data coverage and retained history</summary>
 

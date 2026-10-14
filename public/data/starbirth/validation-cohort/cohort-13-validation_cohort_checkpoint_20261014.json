@@ -1,0 +1,81 @@
+{
+  "schema": "validation-cohort-checkpoint/1",
+  "unit_complete": true,
+  "independent_verification_passed": true,
+  "physical_validation": false,
+  "summary_sha256": "b2305093129d145a1ad4e0fc270110ec9cc9273d0a166553c7ec5f85a49a8bb9",
+  "verification_sha256": "df93c067491ab0b22908c3ec11cbba4a12f8e7215d526c73311ac2f8261bff2d",
+  "sampled_groups": 223,
+  "parent": 19328,
+  "frame_members": 14980,
+  "known_independent_truth": 0,
+  "app_published": false,
+  "blog_published": false,
+  "evidence": [
+    {
+      "path": "docs/VALIDATION_COHORT_PROTOCOL_20261014.md",
+      "bytes": 6360,
+      "sha256": "ea9952881f56a67eb2159159f4df1083683becb4bc527ebbccfa9f6584be5252"
+    },
+    {
+      "path": "docs/VALIDATION_COHORT_RESULTS_20261014.md",
+      "bytes": 7314,
+      "sha256": "69f0bf25eb6ab84415b3a5d926643bfcae7f68d144dbc4b2ed0cd4aa28ce96a6"
+    },
+    {
+      "path": "artifacts/validation_cohort_registration_20261014.json",
+      "bytes": 3412,
+      "sha256": "b3942c38dedae2a64ea294e65d20cd4c00f9446388cf8bd5c11a095cfec607a5"
+    },
+    {
+      "path": "research/build_validation_cohort_20261014.py",
+      "bytes": 7997,
+      "sha256": "512483f37ae90e81735c1b69b6bd4b377a867418361e039afdddc409de66561e"
+    },
+    {
+      "path": "research/verify_validation_cohort3_20261014.py",
+      "bytes": 7886,
+      "sha256": "805e6c3a2a7da4cbf99fcf41529a1710752dcaac0fe34b02ec354bb57bfffb20"
+    },
+    {
+      "path": "artifacts/validation_cohort_verification3_20261014/verification.json",
+      "bytes": 1486,
+      "sha256": "df93c067491ab0b22908c3ec11cbba4a12f8e7215d526c73311ac2f8261bff2d"
+    },
+    {
+      "path": "artifacts/validation_cohort_20261014/summary.json",
+      "bytes": 3030,
+      "sha256": "b2305093129d145a1ad4e0fc270110ec9cc9273d0a166553c7ec5f85a49a8bb9"
+    },
+    {
+      "path": "artifacts/validation_cohort_20261014/population.csv.gz",
+      "bytes": 836889,
+      "sha256": "65ca831cc592fedc1e0882279f57a2c5e035111c748693cf18ed467cb4dd8f09"
+    },
+    {
+      "path": "artifacts/validation_cohort_20261014/review-cohort.csv.gz",
+      "bytes": 11935,
+      "sha256": "172da05b62ffeddd6ada9f1491e708e59e9307c53ed26ba4f7e952293dc45003"
+    },
+    {
+      "path": "artifacts/validation_cohort_20261014/molecular-alternatives.csv.gz",
+      "bytes": 150395,
+      "sha256": "baed4ba212257b138d43ba9fddf83f0cdd617f1c36655458ea86c8a76730c09d"
+    },
+    {
+      "path": "artifacts/validation_cohort_20261014/coverage.csv",
+      "bytes": 389,
+      "sha256": "a5cdb38cf9122a11488143e0edb94217029504b82af01b5517bef0ca2a96507a"
+    },
+    {
+      "path": "artifacts/validation_cohort_checker_amendment_20261014.json",
+      "bytes": 717,
+      "sha256": "2ba498453148011d260252d81136b560d1e3feaa5c0a468be5aa99028c442726"
+    },
+    {
+      "path": "artifacts/validation_cohort_verification3_registration_20261014.json",
+      "bytes": 468,
+      "sha256": "911d6aa86b721639341047fcc67114fbc34e86f6f66af2da92e0c526ff041c8a"
+    }
+  ]
+}
