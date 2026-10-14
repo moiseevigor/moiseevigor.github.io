@@ -1,9 +1,9 @@
 ---
 layout: distill
 last_modified_at: 2026-10-14
-title: "Hidden Protostars: Failed Gates and Unresolved Counterparts"
+title: "Hidden Protostars: Survey Evidence and Its Limits"
 subtitle: >
-  A matched-control study fails its uncertainty gate, an embedding does not beat the stronger ranking baseline, and infrared alignments leave stellar identity unresolved.
+  Reproducible catalogue associations, a non-identifiability result, and failed ranking and uncertainty gates define what the present surveys establish.
 date: 2026-10-11 12:00:00 +0200
 categories: [astrophysics]
 tags: [star-formation, infrared, Hi-GAL, inference]
@@ -24,7 +24,7 @@ description: >
 
 <div class="l-body sb-program" markdown="1">
 
-<div class="sb-status"><strong>Program updated · 12 October 2026.</strong> The first frozen missing-view ranking comparison is verified: the embedding recovered <b>14/27</b> qualifying chemistry positives, the nonlinear baseline <b>15/27</b>, at the same <b>18 reviews</b>. No retrospective gain was demonstrated. <a href="/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/">Read the comparison, coverage limits and full source ledger.</a> The first 19,328-clump inventory remains historical data readiness. The earlier control study also remains stopped: 939/1,000 profile matches, but only 333 pass the conservative uncertainty gate against 800. Its primary occurrence comparison remains unmeasured. <a href="/astrophysics/2026/10/11/hidden-protostars-column-uncertainty/">Read the failed control gate.</a> No confirmed stellar birth or validated birth detector has been established.</div>
+<div class="sb-status"><strong>Scientific scope.</strong> Survey associations are reproducible, but neither a physical hidden-protostar fraction nor a stellar birth is established. The ranking comparison and matched-control uncertainty gate both failed. <a href="/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/">Read the measured outcomes and exact evidence.</a></div>
 
 Stars form inside clouds that hide the process from view. A patch of cold dust can look quiet while a compact object is already accreting material inside it. Our current question is observational and computational: **can infrared emission, variability and molecular evidence together rank embedded-protostar candidates better than simple physical features?** The earlier compact-source occurrence question remains unanswered after its frozen uncertainty gate failed.
 
@@ -86,54 +86,15 @@ Dust can redden an unrelated background star. Crowding can blend neighbours into
 
 We need column-density evidence **at both positions**, not just the clump's catalogue surface density. PPMAP provides model-derived Hi-GAL column maps and corresponding uncertainties at 12-arcsecond resolution. Their dust-opacity and radiative-transfer assumptions remain relevant. MIPSGAL provides catalogue and completeness products useful for checking mid-infrared sensitivity. Column profiles have now been independently checked for the frozen sample, but uncertainty support failed and sensitivity/crowding suitability remains unestablished. [Current evidence](/astrophysics/2026/10/11/hidden-protostars-column-uncertainty/). [Marsh et al. (2017)](https://arxiv.org/abs/1707.03808), [IRSA MIPSGAL documentation](https://irsa.ipac.caltech.edu/data/SPITZER/MIPSGAL/).
 
-<h2 id="week">Multiple views: measured comparison and coverage</h2>
+<h2 id="week">Measured ranking and observational support</h2>
 
-<h3 id="multisurvey">What the observed views support</h3>
+<span id="multisurvey"></span><h3 id="ranking-result">The embedding did not beat the stronger baseline</h3>
 
-**Data readiness · not a detector result.** A separately registered offline audit retains all **19,328** nearby catalogue-prestellar clumps, including missing views and unknown truth. An independently implemented checker reconstructed every ledger row and verified its byte bindings. That is reproducibility of the inventory, not independent physical validation.
+At the same **18 reviews**, the shared embedding recovered **14/27** qualifying chemistry positives, the linear baseline **14/27**, the nonlinear baseline **15/27** and the infrared-only ablation **13/27**. The frozen benefit gate failed. This is a retrospective chemistry-proxy comparison, not physical protostar recall. All **19,328** requested identities and **19,066** unknown proxies remain in the ledger. None of the 27 positives has the registered temporal view. [Comparison and support limits](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/).
 
-| Retained record in the audited parent | Clumps | What it does not establish |
-|:--|--:|:--|
-| NEOWISE observation rows | **11,845** | Complete usable light curves or ownership of the emitter |
-| WISE counterpart coordinates | **1,231** | Physical association with the clump |
-| Both WISE coordinates and NEOWISE rows | **1,098** | Representative support for all requested clumps |
-| Previously consumed MALT90 check | **303** | Fresh or definitive physical protostar labels |
-| Previously consumed ALMAGAL check within this nearby parent | **52** | Birth truth from fragmentation |
-| Both consumed molecular/core checks | **22** | Independent labels merely because surveys differ |
+The later native-quality check likewise fails: **0/3** fixed counterparts pass the quality/cadence gate, below the required **2/3**. Correcting the flag-format contract adds no accepted measurements. This failure concerns the fixed observational criteria; it does not demonstrate physical starlessness. [Current quality result](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#flag-repair), [original contract evidence](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#native-quality).
 
-Requiring both retained WISE coordinates and NEOWISE rows would leave only **1,098 / 19,328 ≈ 5.7%** of this parent before quality and association checks. A complete-case model would change the population substantially. A useful method must handle missing views and report recovery for every requested object. Missing records are not verified physical non-detections.
-
-The reviewed core already draws on Hi-GAL, AllWISE, NEOWISE, GLIMPSE, MIPSGAL, ATLASGAL, MMB, MALT90 and ALMAGAL. This is a count of nine main data streams, not nine independent sensors or full joint coverage. SPICY derives from Spitzer and PPMAP from Herschel. Evidence used as a model input cannot also serve as its allegedly independent evaluation truth without an explicitly separated design.
-
-**Historical first-checkpoint scope: no fresh physical-truth cohort was supplied in that bounded audit. No model was fitted.** Existing catalogue-stage checks, chemistry and fragmentation outcomes have already been inspected; changing their spatial split does not make them untouched validation. Cutout file presence also does not establish calibrated fluxes, native resolution or noise. Full uncertainty and source-association contracts remain necessary.
-
-Download the [complete exact-ID ledger (gzip CSV)](/public/data/starbirth/multisurvey/sources.csv.gz), [verified report](/public/data/starbirth/multisurvey/results.md), [independent verification](/public/data/starbirth/multisurvey/starbirth-mv-verification.json) and [source inventory](/public/data/starbirth/multisurvey/source-inventory.csv). These exact source bytes come from research revision `a1c389e90dde1aeb7539bc314ffa21963f551dbe`. The original failed checker stopped before reading data because its pandas dependency was absent; its attempt and the separately frozen dependency-free repair are preserved in the evidence packet. [Packet guide](/public/data/starbirth/multisurvey/README.md).
-
-<ol class="sb-plan">
-  <li><b>Audit support and identities.</b> The first source-ledger checkpoint is complete. Verify native flux/error, PSF, epoch and competing-counterpart evidence before treating a projected match as the same physical source.</li>
-  <li><b>Freeze one comparison.</b> Specify the exact cohort, missing-view treatment, association rules, training/calibration/evaluation roles, review budget and decision criteria before outcome readout. Without fresh physical truth, label any comparison retrospective feasibility.</li>
-  <li><b>Learn complementary views.</b> Use reliable associations to learn without class labels. Preserve fluxes, errors and upper limits alongside morphology; retain cases that lack one view. The separately frozen missing-view fit has now been verified; it did not demonstrate an improvement over the nonlinear baseline.</li>
-  <li><b>Challenge the apparent gain.</b> Compare against mass, temperature, distance, surface density, colours and variability on equal support and review cost. Keep single-view ablations, spatial uncertainty and unknown denominators.</li>
-  <li><b>Conclude with the supported scope.</b> Report a positive, null or insufficient-evidence result. If justified, prepare at most 20 source-specific review cards. Candidates, catalogue counterparts and confirmed births remain different categories.</li>
-</ol>
-
-<h3 id="ranking-result">First ranking result: the stronger baseline recovered one more</h3>
-
-A prospectively frozen retrospective comparison now gives **14/27** qualifying chemistry-positive recoveries for the shared embedding, **14/27** for the linear comparator, **15/27** for the nonlinear comparator and **13/27** for the infrared-only ablation, all at **18 reviews**. The minimum paired gain is **−3.70 percentage points**, with a conditional spatial interval **−11.11 to 0.00**; the required +10-point gain and positive lower endpoint failed. These are consumed chemistry proxies, not independent physical truth or population recall.
-
-All **19,328** requested source identities remain in the ranking ledger, including **19,066** unknown qualifying proxies. Only three qualifying cases have supported temporal inputs, and **none of the 27 positives** does. Source ownership, complementary positive-case coverage and independent physical validation remain absent. [Read the full result and exact evidence](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/).
-
-A separately frozen diagnosis now finds query-level cadence in only **3 / 27** of those positives, below its **14-of-27** majority gate. Eleven have no cached rows, nine no screened query rows and four insufficient cadence; the remaining three still lack emitter identity. The anchor is only part of the evidence gap. [Read the exact diagnosis](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#temporal-diagnosis). This is no repair of the ranking result and no physical detector validation.
-
-A native GLIMPSE check now adds one concrete positional lead: an already catalogued source matches **21 / 21** supported visit medians within **0.168–0.336 arcseconds**, despite lying **5.719 arcseconds** from the clump centre. Its PSF-photometry adjustment flags fail the frozen all-zero rule; **zero of three** cases passes every criterion. This is useful source-association evidence with unknown physical stage, not a repaired ranking result or a birth. [Inspect all three source assessment cards and the failed gate](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#native-counterparts).
-
-The same fixed counterparts now have an independently checked colour diagnosis: measured [3.6]−[4.5] colours are **−0.089, +0.134 and −0.011 mag**. None supplies robust necessary red-colour support under the declared published component, and all three lack usable 8-micron photometry for the full four-band method. The 21/21 positional lead is real; youth remains unknown. Our clump chemistry ranks are not probabilities for that point source's evolutionary stage. [Read the comparator and source assessment](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#irac-colours).
-
-The native radio-position check now separates regional activity from a specific infrared point: historical maser **330.878-0.367** is **12.520″** from the first clump centre but **17.501″** from its best infrared counterpart. **0/3** fixed best points and **0/6** alternatives have a catalogue maser within the frozen one-arcsecond criterion. This limits point-specific interpretation; it does not establish starlessness, clump membership or a birth. [Read the radio context and coverage limit](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#radio-context).
-
-The fixed first-field gas–radio comparison adds only **0.1970 km/s** of common velocity-band overlap. The literal criterion passes, but the declared **+1 km/s sensitivity removes overlap**; maser peaks lie outside both gas bands. This is marginal regional context, not confirmed membership or support for the infrared point. All earlier failed gates remain. [Read the measured bands, failed sensitivity and metadata correction](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#gas-velocity).
-
-**14 October corrected update:** the approved offline NEOWISE flag repair removes 645 shape-only rejections from the same 874 rows, but adds **zero accepted measurements**. Independent recomputation now establishes a failed **0/3 quality/cadence gate**, below required 2/3. All numerical cuts and raw strings are unchanged; no new observations or physical birth are claimed. [Read the corrected result and retained original attempt](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#flag-repair). [Historical unresolved contract](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#native-quality).
+One known infrared source agrees with **21/21** query-visit medians, but positional agreement does not establish emitter ownership, clump membership or stellar youth. The <a href="/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#irac-colours">colour</a>, <a href="/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#radio-context">radio</a> and <a href="/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#gas-velocity">gas</a> probes add no confirmed physical classification. Their final outcomes and retained alternatives are in the [source assessment](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#native-counterparts). No confirmed stellar birth follows.
 
 <h3 id="historical-week">The original control study: frozen and stopped</h3>
 

@@ -2,18 +2,17 @@
 
 [![CircleCI](https://circleci.com/gh/moiseevigor/moiseevigor.github.io/tree/master.svg?style=svg)](https://circleci.com/gh/moiseevigor/moiseevigor.github.io/tree/master)
 
-## Lab structure
+## Research structure
 
-Research programs are the unit (see `/lab/`, rendered by `lab.html`).
+Read [the publication and navigation contract](docs/research-publication.md) before editing the research presentation. The site uses Jekyll and vanilla CSS/JavaScript.
 
-- `_data/series.yml` — single source of truth per program: question, status, outcome,
-  verdict scoreboard, frontier, lineage (`grew_from`), code path, and the ordered parts
-  and appendices. The Lab page, series TOC, prev/next nav and home cards render from it.
-- `_posts/` — program parts. Part 1 is the program's only entry in the home feed;
-  Parts 2+ carry `hidden: true` (dropped from pagination only; archives/tags/atom keep them).
-- `_appendices/` — theory appendices (`series_part: A1`, `B3`, …; the letter is the program).
-- `_articles/` — formal articles; link one to its program with `program: <series id>`.
-- `research/<program>/` — code and data behind every number.
+- `_data/series.yml` owns research topics, scope and ordered outputs. `_data/research.yml` curates supported results and their evidence for Home and Research.
+- `/lab/` leads with positive findings, retains decisive negative conclusions, and links complete accounts, manuscripts and background.
+- `/projects/` identifies the distinct interactive tools and software libraries.
+- Proof Atlas has one overview, an article, a crossing microscope and a compiled Lean library, with a shared navigation. Language reference and coverage are supporting views.
+- `_posts/`, `_appendices/` and `_articles/` retain their scientific scope and historical URLs. Evidence remains in `research/` and public packets.
+
+Research posts contain significant scientific results, not run diaries, transient checkpoints or proposed roadmaps. Preserve the final qualified result and link the original evidence.
 
 ## Run Blog
 

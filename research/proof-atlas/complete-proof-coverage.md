@@ -1,10 +1,8 @@
 ---
-layout: default
-title: Proof Atlas — compiled proof coverage and checks
+layout: page
+title: Proof Atlas coverage
 permalink: /projects/proof-atlas/coverage/
 ---
-
-# Complete compiled proof coverage
 
 12 October 2026. The [compiled proof library](/projects/proof-atlas/library/) covers every declaration extracted from two finite project snapshots. Original source projects, tactic scripts, downloadable source archives and extraction logs remain private. The previously published article and statement excerpts remain available.
 

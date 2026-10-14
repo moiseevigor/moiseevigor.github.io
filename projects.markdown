@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Projects
-header: Projects
+title: Tools
+header: Tools
 group: navigation
 permalink: /projects/
 comments: false
@@ -13,20 +13,42 @@ a > img {
 }
 </style>
 
-## [Research Lab](/lab/)
+<nav class="research-index-jump" aria-label="Tools index"><a href="#interactive-tools">Interactive tools</a><a href="#software">Software</a><a href="/lab/">Research results</a></nav>
 
-Mathematical and computational research programs — each a documented series with
-theory appendices, formal articles, and a public research codebase — live in the
-**[Lab](/lab/)**: the question, the verdicts, the open frontier, and every output of
-each program on one page. The projects below are the software they run on.
+<div class="research-tool-list" id="interactive-tools" markdown="1">
 
-<hr />
+## Interactive tools
 
-## [Proof Atlas — A Geometric Microscope for Lean](/projects/proof-atlas/)
+<div class="research-tool" markdown="1">
 
-An [interactive, multiscale map of a real Lean proof](/projects/proof-atlas/) with 7,288 measured expression occurrences, direct-dependency exploration, recursive inspection, and a deliberately separate mathematical explanation. [Read the research program](/mathematics/2026/10/11/proof-atlas-research-program/) for definitions, validation methods, and the open frontier between syntax and mathematical meaning.
+### [Proof Atlas](/projects/proof-atlas/)
 
-<hr />
+Read the mathematical article, follow its crossing proof in the graph, or browse all compiled Lean declarations. The overview explains which view to choose; references and coverage sit alongside them.
+
+[Open Proof Atlas →](/projects/proof-atlas/)
+
+</div>
+<div class="research-tool" markdown="1">
+
+### [The geometry of shortest paths](/mathematics/se2-explained/)
+
+Interactive figures explain motion, the pendulum reduction, cut time and the classical SE(2) optimal synthesis. Numerical illustrations carry their stated scope.
+
+[Explore the guide →](/mathematics/se2-explained/)
+
+</div>
+<div class="research-tool" markdown="1">
+
+### [Stages of star formation](/astrophysics/2026/10/11/hidden-protostars-research-program/#star-formation)
+
+A physical explainer of collapse and embedded stellar formation. It illustrates published physics; the survey research has established no stellar-birth detector.
+
+[Explore formation →](/astrophysics/2026/10/11/hidden-protostars-research-program/#star-formation)
+
+</div>
+</div>
+
+<h2 id="software">Software and libraries</h2>
 
 ## [Elliptic functions for Matlab and Octave]({{ site.url }}/elliptic)
 
@@ -41,17 +63,5 @@ The main *GOAL* of the project is to provide the natural Matlab scripts *WITHOUT
 
 
 <hr />
-
-## [Tech Blog]({{ site.url }}/)
-
-<a aria-label="Star moiseevigor/moiseevigor.github.io on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/moiseevigor/moiseevigor.github.io#stargazers_count" data-count-href="/moiseevigor/moiseevigor.github.io/stargazers" data-style="mega" data-icon="octicon-star" href="https://github.com/moiseevigor/moiseevigor.github.io" class="github-button">Star</a>&nbsp;&nbsp;
-<a aria-label="Fork moiseevigor/moiseevigor.github.io on GitHub" data-count-aria-label="# forks on GitHub" data-count-api="/repos/moiseevigor/moiseevigor.github.io#forks_count" data-count-href="/moiseevigor/moiseevigor.github.io/network" data-style="mega" data-icon="octicon-git-branch" href="https://github.com/moiseevigor/moiseevigor.github.io/fork" class="github-button">Fork</a>
-
-
-A public space for thoughts on machine learning and human intelligence, plus notes
-on tech and related topics — and the host of everything on this page: the series,
-the [articles](/articles/), and the research code are all in this one repository.
-
-[![CircleCI](https://circleci.com/gh/moiseevigor/moiseevigor.github.io/tree/master.svg?style=svg)](https://circleci.com/gh/moiseevigor/moiseevigor.github.io/tree/master)
 
 <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>

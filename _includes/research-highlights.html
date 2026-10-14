@@ -1,0 +1,11 @@
+<div class="research-findings">
+{% for result in site.data.research.positive limit:include.limit %}
+  <article class="research-finding">
+    <p class="research-kind">{{ result.kind }}</p>
+    <h3><a href="{{ result.url }}">{{ result.title }}</a></h3>
+    <p>{{ result.summary }}</p>
+    <p class="research-scope">{{ result.scope }}</p>
+    <div class="research-links"><a href="{{ result.url }}">Read the result <span aria-hidden="true">→</span></a><a href="{{ result.evidence }}">Evidence</a>{% if result.tool %}<a href="{{ result.tool }}">Explore</a>{% endif %}</div>
+  </article>
+{% endfor %}
+</div>

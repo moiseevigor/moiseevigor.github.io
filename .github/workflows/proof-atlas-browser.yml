@@ -32,11 +32,27 @@ on:
       - '_includes/head.html'
       - 'research/proof-atlas/**'
       - 'projects/proof-atlas/**'
+      - 'scripts/test-research-navigation.cjs'
+      - '_data/research.yml'
+      - '_data/series.yml'
+      - 'lab.html'
+      - 'index.html'
+      - 'projects.markdown'
+      - '_includes/research-highlights.html'
+      - '_includes/proof-atlas-nav.html'
       - 'scripts/test-proof-atlas-browser.cjs'
       - 'scripts/test-proof-atlas-grammar.cjs'
       - '.github/workflows/proof-atlas-browser.yml'
   pull_request:
     paths:
+      - 'scripts/test-research-navigation.cjs'
+      - '_data/research.yml'
+      - '_data/series.yml'
+      - 'lab.html'
+      - 'index.html'
+      - 'projects.markdown'
+      - '_includes/research-highlights.html'
+      - '_includes/proof-atlas-nav.html'
       - 'public/**/proof-atlas*'
       - 'public/css/**'
       - '_layouts/**'
@@ -81,6 +97,10 @@ jobs:
           sleep 2
       - name: Verify exact named-application navigation on production pages
         run: node scripts/test-proof-atlas-applications-browser.cjs
+        env:
+          ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
+      - name: Research and tool reading journeys
+        run: node scripts/test-research-navigation.cjs
         env:
           ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
       - name: Browser regression — hub hover, geometry, responsiveness

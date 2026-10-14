@@ -34,11 +34,12 @@ const path=require('path'),fs=require('fs');
     }));
     if(dimension.body>dimension.available+4)throw Error('Mobile page horizontal overflow '+JSON.stringify(dimension));
     await page.screenshot({path:path.join(shots,'lean-constructor-mobile.png'),fullPage:true});
-    // The landing-page "four scales" is interactive, not just four prose
+    // The compact reference’s optional "four scales" is interactive, not just four prose
     // cards. Every one of Lean.Expr's 12 constructor tags must update all
     // four visual views and preserve native keyboard/button interaction.
     await page.setViewportSize({width:1490,height:1030});
-    await page.goto('http://127.0.0.1:8833/projects/proof-atlas/index.html',{waitUntil:'networkidle'});
+    await page.goto('http://127.0.0.1:8833/projects/proof-atlas/language/index.html',{waitUntil:'networkidle'});
+    await page.locator('.pa-reference-scales > summary').click();
     const chips=page.locator('#pa-scale-choices button');
     if(await chips.count()!==12)throw Error('Expected 12 interactive four-scale constructor buttons');
     const observed=['app','const','bvar','lam','lit','forallE'];

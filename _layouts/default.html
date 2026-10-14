@@ -10,17 +10,17 @@
   <a class="site-nav-brand" href="/">{{ site.title }}</a>
   {% if page.title and page.page_class != 'home' %}<span class="site-nav-title" aria-hidden="true">{{ page.title }}</span>{% endif %}
   <ul class="site-nav-links">
-    <li><a href="/"          {% if page.url == '/'             %}class="active"{% endif %}>Home</a></li>
-    <li><a href="/about/"    {% if page.url contains 'about'    %}class="active"{% endif %}>About</a></li>
-    <li><a href="/lab/"      {% if page.url == '/lab/' or page.series %}class="active"{% endif %}>Lab</a></li>
-    <li><a href="/projects/" {% if page.url contains 'projects' %}class="active"{% endif %}>Projects</a></li>
-    <li><a href="/articles/" {% if page.url contains 'articles' %}class="active"{% endif %}>Articles</a></li>
-    <li><a href="/archives/" {% if page.url contains 'archives' %}class="active"{% endif %}>Archives</a></li>
+    <li><a href="/"{% if page.url == '/' %} class="active"{% endif %}>Home</a></li>
+    <li><a href="/lab/"{% if page.url == '/lab/' or page.series or page.program or page.url contains '/articles' %} class="active"{% endif %}>Research</a></li>
+    <li><a href="/projects/"{% if page.url contains '/projects' %} class="active"{% endif %}>Tools</a></li>
+    <li><a href="/about/"{% if page.url contains '/about' %} class="active"{% endif %}>About</a></li>
   </ul>
   <button type="button" class="theme-toggle" aria-label="Dark mode" title="Toggle dark mode">
     <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>
   </button>
 </nav>
+
+{% if page.url contains '/projects/proof-atlas/' %}{% include proof-atlas-nav.html %}{% endif %}
 
 <!-- ── Page content (each layout is responsible for its own d-header / d-article) ── -->
 {{ content }}
@@ -31,6 +31,7 @@
   <span class="d-dot">·</span>
   <a href="{{ site.url }}">{{ site.url | remove: 'https://' }}</a>
   <span class="d-dot">·</span>
+  <a href="/archives/">Archive</a>
   <a href="https://github.com/{{ site.github_username | default: 'moiseevigor' }}" rel="me">GitHub</a>
   <a href="https://twitter.com/moiseev_igor" rel="me">Twitter</a>
   <a href="https://www.linkedin.com/in/moiseevigor" rel="me">LinkedIn</a>
