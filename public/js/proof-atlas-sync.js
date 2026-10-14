@@ -126,7 +126,7 @@
  function showStepChoices(matches,selected){
   const host=$('pa-sync-step-choices');host.replaceChildren();host.hidden=matches.length<2;
   if(matches.length<2)return;const label=document.createElement('p');label.textContent='This helper also corresponds to:';host.append(label);
-  for(const m of matches){const b=document.createElement('button');b.type='button';b.textContent=m.passage.title;b.setAttribute('aria-pressed',String(m===selected));b.onclick=()=>{active=targets.get(m.passage.id);highlight(active.id,true);status.textContent=active.title+' · '+active.note;options(active,window.ProofAtlasLibrary.getSnapshot().name,new Map(window.PROOF_ATLAS_LIBRARY.editions[0].declarations.map(d=>[d.name,d])));emit(window.ProofAtlasLibrary.getSnapshot());showStepChoices(matches,m);};host.append(b);}
+  for(const m of matches){const b=document.createElement('button');b.type='button';b.textContent=m.passage.title;b.setAttribute('aria-pressed',String(m===selected));b.onclick=()=>{active=targets.get(m.passage.id);highlight(active.id,true);status.textContent=active.title+' · '+active.note;options(active,window.ProofAtlasLibrary.getSnapshot().name,new Map(window.PROOF_ATLAS_LIBRARY.editions[0].declarations.map(d=>[d.name,d])));geometry(active,window.ProofAtlasLibrary.getSnapshot()).catch(e=>{status.textContent=e.message;});emit(window.ProofAtlasLibrary.getSnapshot());showStepChoices(matches,m);};host.append(b);}
  }
  async function fromCompiled(snapshot){
   if(!opened||pending)return;const token=++revision,m=await metadataReady(),current=window.ProofAtlasLibrary.getSnapshot();if(token!==revision||current?.name!==snapshot.name||current?.path!==snapshot.path)return;
