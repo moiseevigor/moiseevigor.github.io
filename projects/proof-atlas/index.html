@@ -1,224 +1,44 @@
 ---
 layout: default
 math: true
-title: "Proof Atlas"
-subtitle: "The geometry of formal reasoning"
+title: Proof Atlas
 permalink: /projects/proof-atlas/
 page_class: proof-atlas-page
-description: "Explore a real 7,288-expression Lean proof as an interactive graph, then compare its syntactic shape with its mathematical explanation."
+description: Read the mathematical article, explore its crossing proof, or browse the complete compiled Lean inventories. One entry point with distinct views and explicit coverage.
 ---
-<link rel="stylesheet" href="/public/css/proof-atlas.css?v=10">
-<main class="pa-page" id="proof-atlas">
-  <section class="pa-hero" aria-labelledby="pa-title">
-    <div class="pa-eyebrow"><span class="pa-orbit" aria-hidden="true"></span> Research program / Proof Atlas · 2026</div>
-    <div class="pa-hero-grid">
-      <div>
-        <h1 id="pa-title">Can a proof<br><em>have a shape?</em></h1>
-        <p class="pa-deck">A Lean proof is an exact mathematical object. What happens when we stop reading it as thousands of symbols and begin to explore it as a landscape—branches, junctions, repeated forms, and the ideas that hold everything together?</p>
-        <div class="pa-hero-actions">
-          <a class="pa-button pa-primary" href="#pa-explorer">Explore the proof <span aria-hidden="true">↘</span></a>
-          <a class="pa-button pa-secondary" href="/projects/proof-atlas/library/">All declarations and complete proofs <span aria-hidden="true">↗</span></a>
-          <a class="pa-button pa-secondary" href="/mathematics/2026/10/11/proof-atlas-research-program/">Read the research program <span aria-hidden="true">↗</span></a>
-          <a class="pa-button pa-secondary" href="/projects/proof-atlas/language/">Explore the 12 visual rules <span aria-hidden="true">↗</span></a>
-        </div>
-      </div>
-      <div class="pa-hero-art" aria-hidden="true">
-        <svg viewBox="0 0 490 370" role="presentation">
-          <defs><linearGradient id="pa-flow" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#50aaae"/><stop offset="1" stop-color="#d9ab68"/></linearGradient></defs>
-          <g fill="none" stroke="url(#pa-flow)" stroke-width="1.5" opacity=".8">
-            <path d="M40 184H124 M124 184L190 92 M124 184L190 280 M190 92L282 50 M190 92L282 146 M190 280L282 229 M190 280L282 319 M282 146L383 184 M282 229L383 184 M383 184H452"/>
-            <path d="M282 50L332 20 M282 50L341 90 M282 319L341 354 M282 319L347 295"/>
-          </g>
-          <g fill="#0f313e" stroke="#61adaf" stroke-width="2">
-            <circle cx="40" cy="184" r="7"/><circle cx="124" cy="184" r="10"/><circle cx="190" cy="92" r="10"/><circle cx="190" cy="280" r="10"/>
-            <circle cx="282" cy="50" r="7"/><circle cx="282" cy="146" r="9"/><circle cx="282" cy="229" r="9"/><circle cx="282" cy="319" r="7"/>
-          </g>
-          <g fill="#e6c48a" stroke="#e6c48a" stroke-width="1.5"><circle cx="383" cy="184" r="12"/><circle cx="452" cy="184" r="6"/></g>
-          <g fill="#a4ccd0"><circle cx="332" cy="20" r="4"/><circle cx="341" cy="90" r="4"/><circle cx="341" cy="354" r="4"/><circle cx="347" cy="295" r="4"/></g>
-          <g fill="#cadcdd" font-size="12" font-family="system-ui,sans-serif"><text x="13" y="164">input</text><text x="398" y="161">result</text><text x="199" y="75">branch</text><text x="202" y="302">branch</text><text x="353" y="220">join</text></g>
-        </svg>
-        <div class="pa-art-caption">Schematic · not the measured Lean graph</div>
-      </div>
+<main class="research-hub" id="proof-atlas">
+  <header>
+    <p class="research-kicker">Proof Atlas</p>
+    <h1>Read the mathematics.<br>Explore the proof.</h1>
+    <p>Follow a mathematical argument into its Lean declarations and compiled terms. The article, crossing microscope and full proof library are three views with different scopes.</p>
+  </header>
+  <p class="research-scope">The compiled inventories refer to the released 12 October snapshots. Their exact editions and validation scope are recorded in the <a href="/projects/proof-atlas/coverage/">coverage report</a>.</p>
+  <div class="research-hub-stats" aria-label="Working compiled corpus">
+    <div><strong>1,359</strong>declarations in the working snapshot</div>
+    <div><strong>1,083</strong>complete compiled theorem bodies</div>
+    <div><strong>1,277,896</strong>shared expression nodes</div>
+  </div>
+  <section class="research-section" aria-labelledby="atlas-start">
+    <h2 id="atlas-start">Choose how to read</h2>
+    <div class="research-hub-tasks">
+      <article class="research-hub-task"><h3>Read the article</h3><p>The full SE(2) manuscript, with formulas, proofs and figures. Start with readable mathematics; switch to Article + Lean to compare the corresponding formal evidence.</p><a href="/projects/proof-atlas/article/">Read article →</a></article>
+      <article class="research-hub-task"><h3>Follow the crossing proof</h3><p>An interactive map of <code>CrossingData.crossing</code>. Select declarations or any of its 7,288 expression occurrences to read the term and its linked article passage.</p><a href="/projects/proof-atlas/app/">Explore proof →</a></article>
+      <article class="research-hub-task"><h3>Browse the Lean corpus</h3><p>Every owned declaration in the published and working snapshots. Open complete types, proof bodies, shared subterms and local dependency links.</p><a href="/projects/proof-atlas/library/">Browse Lean →</a></article>
     </div>
   </section>
-
-  <section class="pa-metrics" aria-label="Measured Lean certificate">
-    <div><b>7,288</b><span>expression occurrences</span></div>
-    <div><b>7,286</b><span>structural edges</span></div>
-    <div><b>431</b><span>binder references</span></div>
-    <div><b>42</b><span>distinct direct dependencies</span></div>
+  <section class="research-section" aria-labelledby="atlas-result">
+    <h2 id="atlas-result">The established result</h2>
+    <p>The two extracted inventories cover 739 and 1,359 declarations. In the working corpus, 670,018,056 expanded expression occurrences are represented by 1,277,896 shared nodes, retaining ordered children, payloads and contextual binding.</p>
+    <p>Five article proof blocks link to complete supporting compiled proofs. The nine numbered statements retain their audited status: five partial, conditional counterparts and four unformalized. Complete corpus coverage does not mean that the whole article is formalized.</p>
+    <div class="research-links"><a href="/mathematics/2026/10/11/proof-atlas-research-program/">Read the research result →</a><a href="/projects/proof-atlas/coverage/">Coverage and provenance</a></div>
   </section>
-
-  <section class="pa-explainer">
-    <div class="pa-section-mark">01 / A new way of looking</div>
-    <div class="pa-prose-grid">
-      <h2>Not a picture <em>of</em> mathematics.<br>A picture <em>of the proof.</em></h2>
-      <div>
-        <p>Formal verification gives a proof a precise structure: terms, types, declarations, binders, and applications. Our first view treats these as a graph. Each visible point belongs to an expression occurrence in an actual Lean certificate; the edges record how the expression is assembled.</p>
-        <p>But <strong>a syntactic graph is not the same thing as an explanation.</strong> A theorem may contain thousands of repeated type expressions while resting, mathematically, on a single clever argument. Proof Atlas keeps these two levels distinct—and aims eventually to connect them without losing rigor.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="pa-explorer" class="pa-explorer" aria-labelledby="pa-explorer-heading">
-    <div class="pa-explorer-heading">
-      <div><div class="pa-section-mark">02 / Interactive research instrument</div><h2 id="pa-explorer-heading">Inside a real Lean proof</h2></div>
-      <p>A source-traced map of the 26 declarations in <code>Crossing.lean</code>, with theorem statements and supporting references. Switch to the kernel syntax lens for the full 7,288-expression projection.</p>
-    </div>
-    <div class="pa-app pa-reader-open" aria-label="Interactive proof graph microscope">
-      <aside class="pa-app-sidebar" aria-label="Visualization controls">
-        <div class="pa-app-kicker">CHOOSE A LENS</div>
-        <div class="pa-modes" role="group" aria-label="Graph representation">
-          <button type="button" class="is-active" data-mode="map" aria-pressed="true"><span>01</span> Named theorem map</button><button type="button" data-mode="whole" aria-pressed="false"><span>05</span> Kernel syntax</button>
-          <button type="button" data-mode="deps" aria-pressed="false"><span>02</span> Dependencies</button>
-          <button type="button" data-mode="recursive" aria-pressed="false"><span>03</span> Zoom into a branch</button>
-          <button type="button" data-mode="meaning" aria-pressed="false"><span>04</span> Mathematical idea</button>
-        </div>
-        <div class="pa-app-kicker">EXPLORE</div>
-        <label for="pa-search">Expression index (syntax lens)</label>
-        <div class="pa-searchline"><input id="pa-search" type="number" min="0" max="7287" inputmode="numeric" placeholder="0 – 7287" aria-label="Expression occurrence index"><button type="button" id="pa-find">Go</button></div>
-        <div class="pa-quicklinks">
-          <button type="button" data-target="proof">Proof root</button>
-          <button type="button" data-target="type">Type root</button>
-          <button type="button" data-target="exists">Existence lemma</button>
-          <button type="button" data-target="unique">Uniqueness lemma</button>
-        </div>
-        <div class="pa-app-kicker">CONTROLS</div>
-        <div class="pa-toolbar"><button type="button" id="pa-minus" aria-label="Zoom out">−</button><button type="button" id="pa-fit">Reset</button><button type="button" id="pa-plus" aria-label="Zoom in">+</button></div>
-        <p class="pa-app-hint">Start with named theorems, or switch to Raw syntax: click an internal expression to illuminate its descendant leaves; click a terminal leaf to trace its ancestry. The right inspector scrolls independently. Drag to pan; wheel over the graph to zoom.</p>
-      </aside>
-      <div class="pa-stage">
-        <div class="pa-stage-head"><div><strong id="pa-view-title">Named proof map</strong><span id="pa-view-subtitle">Lean source statements · traced direct references</span></div><div class="pa-stage-tools"><button type="button" id="pa-reader-toggle" class="pa-reader-toggle" aria-expanded="true" aria-controls="pa-reader">Reader ⟩</button><button type="button" id="pa-focus" aria-pressed="false" title="Hide side panels to enlarge the graph">Focus graph</button><button type="button" id="pa-fullscreen" title="Enter browser fullscreen (Esc to exit)">⛶ Fullscreen</button><a href="/projects/proof-atlas/app/" class="pa-open-app" title="Open Proof Atlas as a dedicated full-window application">Open full app ↗</a></div></div>
-        <div class="pa-canvas-frame">
-          <aside id="pa-branch-hud" class="pa-branch-hud" aria-label="Selected subtree anatomy" hidden>
-            <span class="pa-branch-label">SELECTED STRUCTURE</span>
-            <strong id="pa-branch-title">Proof expression</strong>
-            <div id="pa-branch-stats" class="pa-branch-stats"></div>
-            <p id="pa-branch-note"></p>
-            <div class="pa-branch-actions">
-              <button type="button" id="pa-branch-desc">Descendants</button>
-              <button type="button" id="pa-branch-lineage">Ancestors</button>
-            </div>
-          </aside>
-          <canvas id="pa-canvas" tabindex="0" aria-label="Interactive Lean proof graph showing expression nodes and structural edges">Your browser does not support Canvas.</canvas></div>
-        <div class="pa-syntax-legend" id="pa-syntax-legend" hidden aria-label="Lean expression type legend">
-          <span><i class="pa-dot pa-dot-app"></i> app (application)</span>
-          <span><i class="pa-dot pa-dot-const"></i> const (declaration)</span>
-          <span><i class="pa-dot pa-dot-bvar"></i> bvar (bound variable)</span>
-          <span><i class="pa-dot pa-dot-binder"></i> binder</span>
-          <span><i class="pa-dot pa-dot-lit"></i> lit (literal)</span>
-          <span class="pa-legend-note">Terminal syntax leaves are not automatically lemmas.</span>
-        </div>
-        <div class="pa-stage-foot"><span id="pa-stage-count">26 named declarations</span><span id="pa-canvas-status" role="status" aria-live="polite">Select a node to inspect</span></div>
-      </div>
-      <aside class="pa-inspector" aria-label="Selected graph node">
-        <div class="pa-app-kicker">INSPECTOR</div>
-        <h3 id="pa-inspector-heading">Proof root</h3>
-        <p id="pa-inspector-summary">Choose a node to inspect its role in the formal structure.</p>
-        <dl class="pa-inspector-list" id="pa-inspector-fields"></dl>
-        <div id="pa-inspector-actions"></div>
-        <div class="pa-inspector-note"><strong>What this does not mean</strong><p>Distance, color, and cluster layout describe a visualization. They are not invariants of a mathematical theorem, nor a measure of proof quality.</p></div>
-      </aside>
-      <section class="pa-reader" id="pa-reader" aria-label="Proof reader">
-        <header class="pa-reader-head">
-          <div><span>PROOF ATLAS · READER</span><h3 id="pa-reader-title">Mathematical explanation</h3></div>
-          <button type="button" id="pa-reader-close" aria-label="Close proof reader" title="Close reader">×</button>
-        </header>
-        <div class="pa-reader-tabs" role="tablist" aria-label="Proof reader tabs">
-          <button type="button" class="active" data-pa-reader-tab="article" role="tab" aria-selected="true">Article</button>
-          <button type="button" data-pa-reader-tab="explain" role="tab" aria-selected="false">Read</button>
-          <button type="button" data-pa-reader-tab="lean" role="tab" aria-selected="false">Lean</button>
-        </div>
-        <div id="pa-reader-scroll" class="pa-reader-scroll" tabindex="0" role="region" aria-label="Selected proof explanation">
-          <div id="pa-reader-content"></div>
-        </div>
-        <footer class="pa-reader-footer"><span id="pa-reader-status">Formal structure and explanation are separate.</span><a href="/projects/proof-atlas/grammar/">Language reference ↗</a></footer>
-      </section>
-    </div>
-    <div class="pa-explorer-note"><span>↗</span><p><strong>Exact versus interpretive.</strong> Whole proof and recursion use observed CoreGIR syntax. The dependency view uses actual reference counts but anonymizes some names. The mathematical-idea view is a <em>human-authored interpretation</em> of two named supporting lemmas—not automatically inferred from graph topology.</p></div>
-  </section>
-
-  <section class="pa-architecture" id="visual-grammar">
-    <div class="pa-section-mark">03 / A precise visual language</div>
-    <h2>Change the scale.<br><em>Keep the evidence.</em></h2>
-    <p class="pa-grammar-introduction">The diagram vocabulary begins with the twelve actual Lean kernel expression constructors. Each has typed ports and a visual role. The same proof can then be seen as a full syntax graph, a collapsed module with its context preserved, or a mathematical explanation linked back to the checked term.</p>
-    <div class="pa-scale-intro">
-      <strong>All twelve constructor forms · six observed in CrossingData.crossing</strong>
-      <span>A visual reference, not a universal automatic proof interpreter.</span>
-    </div>
-    <div class="pa-scale-interactive" id="pa-scale-interactive" aria-label="Interactive four-scale Lean expression diagram">
-      <nav id="pa-scale-choices" class="pa-scale-choices" aria-label="Choose one of the twelve Lean Expr constructors"></nav>
-      <div class="pa-scale-selection" aria-live="polite">
-        <div><div class="pa-section-mark">Selected expression form</div><h3 id="pa-scale-kind">app · Application</h3></div>
-        <span class="pa-scale-status" id="pa-scale-status">Loading constructor information…</span>
-      </div>
-      <p class="pa-scale-definition" id="pa-scale-note">Lean applications connect a function expression to an argument expression.</p>
-      <svg id="pa-scale-flow" class="pa-scale-flow" viewBox="0 0 608 86" role="img" aria-label="Four views of the same Lean expression: exact core, structural graph, module, interpretation"></svg>
-      <div class="pa-scale-panels">
-        <article class="pa-scale-panel">
-          <div class="pa-scale-panel-label"><span>01 / CORE</span><h4>Expression constructor</h4></div>
-          <div class="pa-scale-panel-inset pa-scale-code-wrap"><pre id="pa-scale-core">.app fn arg</pre></div>
-          <p>Kernel-level constructor fields. A source example is illustrative; the type checker validates the complete expression.</p>
-        </article>
-        <article class="pa-scale-panel">
-          <div class="pa-scale-panel-label"><span>02 / GRAPH</span><h4>Typed connections</h4></div>
-          <div class="pa-scale-panel-inset"><svg id="pa-scale-graph" viewBox="0 0 560 256" role="img" aria-label="Expression constructor with child expression links and nonchild attributes"></svg></div>
-          <div id="pa-scale-graph-fields" class="pa-scale-graph-fields" aria-label="Exact constructor fields"></div>
-          <p id="pa-scale-graph-note">An expression graph distinguishes child expressions from references.</p>
-        </article>
-        <article class="pa-scale-panel">
-          <div class="pa-scale-panel-label"><span>03 / MODULE</span><h4>Preserved boundary</h4></div>
-          <div class="pa-scale-panel-inset"><svg id="pa-scale-module" viewBox="0 0 560 256" role="img" aria-label="Expression in a typing context with input, scope and output boundary"></svg></div>
-          <p id="pa-scale-module-note">A collapsed module must preserve external assumptions and evidence.</p>
-        </article>
-        <article class="pa-scale-panel">
-          <div class="pa-scale-panel-label"><span>04 / IDEA</span><h4>Mathematical interpretation</h4></div>
-          <div class="pa-scale-panel-inset"><svg id="pa-scale-meaning-diagram" viewBox="0 0 560 256" role="img" aria-label="Constructor role does not uniquely establish a proof strategy"></svg></div>
-          <p id="pa-scale-meaning">The full theorem context is needed to interpret the mathematical reasoning.</p>
-        </article>
-      </div>
-      <p class="pa-scale-scope" id="pa-scale-scope">The proposed diagrams are not proof certificates.</p>
-      <div class="pa-scale-extended">
-        <a href="/projects/proof-atlas/grammar/">Explore terms, tactics, commands and universes ↗</a>
-        <a href="/projects/proof-atlas/language/">See all 12 illustrated rules together ↗</a>
-      </div>
-    </div>
-    <div class="pa-scale-distinction">
-      <div><span>SOURCE SYNTAX</span><code>theorem · def · by · match · notation</code><p>Rich, extensible syntax. A tactic script is not a single additional kernel expression constructor.</p></div>
-      <div><span>ELABORATION</span><code>goals · metavariables · local context</code><p>Elaborators and tactics construct checked terms; their execution history is not fully retained by a final certificate.</p></div>
-      <div><span>THEOREM / PROOF</span><code>Γ ⊢ proof : Proposition</code><p>Validity comes from the kernel checking a well-formed term against a type in an environment.</p></div>
-    </div>
-  </section>
-
-  <section class="pa-study">
-    <div class="pa-section-mark">04 / What the experiment establishes</div>
-    <div class="pa-prose-grid">
-      <h2>We can see the syntax.<br><em>Can we see the idea?</em></h2>
-      <div>
-        <p><strong>Measured.</strong> The export contains 7,288 occurrences, 7,286 child edges, 431 links from bound-variable occurrences to their binders, 2,892 constant-use occurrences, and 42 distinct directly referenced declarations. Its maximum expression depth is 49 edges.</p>
-        <p><strong>Exploratory.</strong> Structural fingerprinting found 665 different subtree fingerprints among 7,288 occurrences. That is repetition of <em>syntax patterns</em>, not proof equivalence, semantic redundancy, or a safe invitation to merge nodes across different binding contexts.</p>
-        <p><strong>Open.</strong> This prototype does not expand the internal proof bodies of every referenced lemma and does not discover the core argument automatically. The next test is to include transitive local proofs and see whether their logical modules can be recovered faithfully.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="pa-reading">
-    <div class="pa-section-mark">05 / Read and reproduce</div>
-    <h2>The research trail</h2>
-    <div class="pa-links">
-      <a href="/mathematics/2026/10/11/proof-atlas-research-program/"><span>Research introduction</span><strong>From certificates to geometric explanations ↗</strong><small>Motivation, diagram grammar, claims and falsifiable next tests</small></a>
-      <a href="/public/data/proof-atlas/crossing-structure.js"><span>Public structural data</span><strong>Anonymized graph projection ↗</strong><small>Real 7,288-node topology; paired with the published term data</small></a>
-      <a href="https://lean-lang.org/doc/reference/latest/" target="_blank" rel="noopener"><span>External reference</span><strong>The Lean 4 reference manual ↗</strong><small>Kernel expressions, proofs and dependent type theory</small></a>
-    </div>
+  <section class="research-section" aria-labelledby="atlas-help">
+    <h2 id="atlas-help">Reference and evidence</h2>
+    <p>The <a href="/projects/proof-atlas/grammar/">Lean language reference</a> separates kernel expressions, universes, syntax trees and major surface-language families. The <a href="/projects/proof-atlas/coverage/">coverage report</a> records exact inventories, validation and the boundaries of the article correspondence.</p>
+    <p class="research-scope">Graph layout is a reading aid. Mathematical explanations remain authored interpretations. Original tactic scripts remain private; public packet checks do not constitute an independent project-source kernel rebuild.</p>
   </section>
 </main>
-<script src="/public/data/proof-atlas/crossing-structure.js" defer></script>
-<script src="/public/data/proof-atlas/crossing-declarations.js" defer></script>
-<script src="/public/data/proof-atlas/lean-expr-grammar.js" defer></script>
-<script src="/public/js/proof-atlas-scales.js?v=2" defer></script>
-<script src="/public/js/proof-atlas.js?v=11" defer></script>
-<script src="/public/data/proof-atlas/crossing-terms.js" defer></script>
-<script src="/public/js/proof-atlas-term-reader.js?v=1" defer></script>
-<script src="/public/data/proof-atlas/crossing-article-index.js?v=2" defer></script>
-<script src="/public/js/proof-atlas-article-index.js?v=2" defer></script>
-<script src="/public/js/proof-atlas-reader.js?v=7" defer></script>
+<script>
+/* Existing shared occurrence/declaration links now open the single microscope. */
+(function(){var h=location.hash;if(/^#(?:expr-|decl-|article-)/.test(h)||h==='#pa-explorer')location.replace('/projects/proof-atlas/app/'+location.search+(h==='#pa-explorer'?'':h));else if(h==='#visual-grammar')location.replace('/projects/proof-atlas/grammar/');})();
+</script>

@@ -58,7 +58,7 @@
     transverse correction to Zel'dovich transport.
   status: complete
   question: "Is the orientation-lifted geometry of visual completion a better instrument for finding cosmic filaments, or even part of the physics that builds them?"
-  outcome: "Mostly no — and usefully so. What survived: a cleaner anisotropy descriptor and an unplanned one-rule transport model, brake sideways at the web."
+  outcome: "Transverse damping improves mean transport error from 4.98 to 4.52 voxels on three held-out seeds. The orientation lift improves directional alignment, but loses the matched filament-recovery comparison."
   grew_from: geometry-of-seeing
   code: research/cosmic-web/
   verdicts:
@@ -68,7 +68,7 @@
     - { h: H4, v: refuted, label: "matter travels along the geodesics" }
   posts:
     - part: 1
-      title: "The Cosmic Web: What the Orientation Lift Failed to Improve"
+      title: "The Cosmic Web: A Transport Correction and Its Limits"
       url: /mathematics/2026/07/03/geometry-of-cosmic-web-research-program/
       status: published
     - part: 2
@@ -171,7 +171,7 @@
     measures the field gradient, and a growth vector that detects magnetic nulls.
   status: active
   question: "Where a physical field forbids a direction of motion, can sub-Riemannian geometry read the field's local structure?"
-  outcome: "The holonomy growth law and profile-dependent response survive. Integrated null classification and pair metrology lose to matched fits. The physical T96 census interpretation is withdrawn; the Jupiter continuation remains model-dependent."
+  outcome: "The holonomy growth law and exact exponential-profile period identity survive. Matched statistical fits win null classification and pair metrology; the physical T96 census interpretation is withdrawn."
   limits: "Null confirmation does not outperform matched statistical fits. T96 census roots audited outside the model domain are not physical magnetospheric detections."
   grew_from: caustics-to-groups
   code: research/preferred-directions/
@@ -182,7 +182,7 @@
     - { h: "Nulls", v: confirmed, label: "agrees with the standard finder (a consistency check)" }
   posts:
     - part: 1
-      title: "Forbidden Directions: The Growth Law and the Failed Estimators"
+      title: "Forbidden Directions: Exact Magnetic Laws and Estimator Limits"
       url: /mathematics/2026/08/05/forbidden-directions-research-program/
       status: published
     - part: 2
@@ -259,10 +259,9 @@
 - id: hidden-protostars
   title: "Hidden protostars"
   subtitle: "Embedded activity in apparently prestellar Hi-GAL clumps: reviewed evidence, multiple survey views, and the limits of birth detection."
-  latest_result: "Offline NEOWISE flag repair removes 645 shape-only rejections but adds zero accepted rows. Corrected quality/cadence support 0/3 versus required 2/3; physical stage remains unknown."
   status: active
   question: "Can shared infrared, variability and molecular representations improve embedded-protostar candidate ranking over strong physical baselines at equal review cost?"
-  outcome: "First retrospective ranking comparison: embedding 14/27 chemistry positives, nonlinear baseline 15/27, at equal 18 reviews; no gain demonstrated. All 19,328 sources and 19,066 unknown proxies retained. Temporal diagnosis: only 3/27 positive references have query-level cadence, below the frozen 14/27 gate; identity remains unresolved. Native GLIMPSE: one known source aligns with 21/21 visit medians, but 0/3 passes the strict zero-flag gate; physical stage unknown. The same counterparts lack robust necessary red-colour support; full four-band classification lacks photometry. Native radio positions: 0/3 fixed best points and 0/6 alternatives meet the one-arcsecond check; nearby first-field activity is separate from the infrared point. First-field gas/radio bands overlap by only 0.1970 km/s; +1 km/s sensitivity removes overlap, and physical membership is unestablished. No confirmed birth or validated physical detector; the earlier 333/800 occurrence gate remains failed."
+  outcome: "Catalogue associations are reproducible, but the physical hidden fraction is not identified. Ranking benefit, matched-control uncertainty and native quality/cadence gates failed; no stellar birth or physical detector is established."
   limits: "Source ownership and physical truth remain unresolved. No qualifying positive has the registered temporal view; no stellar birth or physical detector is validated."
   code: research/starbirth/
   verdicts:
@@ -273,7 +272,7 @@
     - { h: "Multiview ranking", v: refuted, label: "frozen retrospective benefit gate failed; no physical validation" }
   posts:
     - part: 1
-      title: "Hidden Protostars: Failed Gates and Unresolved Counterparts"
+      title: "Hidden Protostars: Survey Evidence and Its Limits"
       url: /astrophysics/2026/10/11/hidden-protostars-research-program/
       status: published
     - part: 2

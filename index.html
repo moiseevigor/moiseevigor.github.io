@@ -5,6 +5,13 @@ page_class: home
 ---
 
 <main class="site-main">
+{% if paginator.page == 1 %}
+<section class="research-home" aria-labelledby="home-research">
+  <header class="research-intro"><p class="research-kicker">Mathematics and computational research</p><h1 id="home-research">Results worth keeping.</h1><p>Formal proof structure, exact geometry and tested models. Start with the established findings and follow the evidence.</p><div class="research-links"><a href="/lab/">Research results →</a><a href="/projects/">Interactive tools</a></div></header>
+  {% include research-highlights.html limit=2 %}
+</section>
+<h2 class="research-home-title">From the blog</h2>
+{% endif %}
 <div class="home-list">
   {% for post in paginator.posts %}{% unless post.listed == false %}
   {%- assign wc = post.content | number_of_words -%}

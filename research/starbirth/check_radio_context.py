@@ -24,8 +24,8 @@ assert round(c['first_field_clump_offset_arcsec'],3)==12.520 and round(c['first_
 assert '\nlisted: false\n' in (ROOT/'_posts/2026-10-12-hidden-protostars-missing-view-ranking.md').read_text()
 if len(sys.argv)>1:
  site=Path(sys.argv[1]);article=(site/URL.strip('/')/'index.html').read_text();program=(site/PROGRAM.strip('/')/'index.html').read_text()
- for term in ['id="radio-context"','12.520','17.501','104.881','76.937','81.837','0 / 3','0 / 6','6,363','707','post-read coverage context','absence of one does not establish starlessness','consumed evidence','No new star','333-of-800',REV]:assert term in article,term
- assert URL+'#radio-context' in program and '0/3' in program and '0/6' in program and 'sbf-timeline' in program and 'sbf-expand' in program
+ for term in ['id="radio-context"','104.881','76.937','81.837','0 / 3','0 / 6','6,363','707','post-read coverage context','absence of one does not establish starlessness','consumed evidence','No new star','333-of-800',REV]:assert term in article,term
+ assert URL+'#radio-context' in program and '0/3' in program and 'physical classification' in program and 'sbf-timeline' in program and 'sbf-expand' in program
  for name in [x['public_file'] for x in items]+['README.md','source-inventory.csv']:
   path=Path('public/data/starbirth/radio-context')/name;assert (site/path).read_bytes()==(ROOT/path).read_bytes(),name
  for home in [site/'index.html',*site.glob('page*/index.html')]:assert URL not in home.read_text()

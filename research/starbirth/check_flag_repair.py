@@ -9,7 +9,7 @@ assert c['corrected_supported']==0 and c['corrected_gate_passed'] is False and c
 assert not c['scientific_thresholds_changed'] and c['new_observation_requests']==0 and not c['physical_validation']
 if len(sys.argv)>1:
  site=Path(sys.argv[1]);url='astrophysics/2026/10/12/hidden-protostars-missing-view-ranking';page=(site/url/'index.html').read_text()
- for term in ['id="flag-repair"','645','Zero rows become accepted','failed, 0/3 versus required 2/3','post-read repair on consumed cases','no numerical cut relaxed','id="native-quality"','Historical state','60/75','b38a93adaf95f3ee38fad04610ccfca061cfb3fa']:assert term in page,term
+ for term in ['id="flag-repair"','645','Zero rows become accepted','failed, 0/3 versus required 2/3','post-read repair on consumed cases','no numerical cut relaxed','id="native-quality"','/public/data/starbirth/native-quality/results.md','60/75','b38a93adaf95f3ee38fad04610ccfca061cfb3fa']:assert term in page,term
  program=(site/'astrophysics/2026/10/11/hidden-protostars-research-program/index.html').read_text();assert '#flag-repair' in program and '#native-quality' in program and 'sbf-expand' in program
  for x in items:
   rel=Path('public/data/starbirth/flag-repair')/x['public_file'];assert (site/rel).read_bytes()==(R/rel).read_bytes()
