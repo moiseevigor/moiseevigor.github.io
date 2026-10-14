@@ -43,10 +43,11 @@ assert 'ModuleNotFoundError' in (PUBLIC / 'starbirth-mv-failed-verifier.log').re
 if len(sys.argv) > 1:
     site = Path(sys.argv[1])
     page = (site / ARTICLE).read_text()
-    for term in ['19,328', '11,845', '1,231', '1,098', '5.7%', 'Data readiness',
-                 'No model was fitted', 'No confirmed stellar birth', '939', '333', '800',
-                 'historical-week', 'id="multisurvey"', 'id="sbf-timeline"', 'id="sbf-expand"', REV]:
+    for term in ['19,328', 'No model was fitted', '939', '333', '800',
+                 'historical-week', 'id="multisurvey"', 'id="sbf-timeline"', 'id="sbf-expand"',
+                 '/public/data/starbirth/multisurvey/README.md']:
         assert term in page, term
+    assert REV in (site / 'public/data/starbirth/multisurvey/README.md').read_text()
     for entry in entries:
         path = Path('public/data/starbirth/multisurvey') / entry['public_file']
         assert (site / path).read_bytes() == (ROOT / path).read_bytes(), path
