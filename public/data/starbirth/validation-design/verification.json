@@ -1,0 +1,13 @@
+{
+  "verified": true,
+  "uniform_stratum_probability_checked": true,
+  "selection_and_all_other_fields_unchanged": true,
+  "corrected_unsampled_members": 14757,
+  "population": 19328,
+  "queue": 223,
+  "physical_validation": false,
+  "source_population_sha256": "65ca831cc592fedc1e0882279f57a2c5e035111c748693cf18ed467cb4dd8f09",
+  "corrected_population_sha256": "1c6f5f71fbf5803a65188a934917e25840c03cc95a6e137dac7ffbada138428a",
+  "queue_sha256": "172da05b62ffeddd6ada9f1491e708e59e9307c53ed26ba4f7e952293dc45003",
+  "correction_sha256": "0977cc4b52b93a2823e782956394e4d6090cdceaacf635a8719912012f2efb1b"
+}

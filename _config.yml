@@ -175,6 +175,10 @@ include:
   - "starbirth-ic-knowledge-supplement.json"
   - "starbirth-ic-secondary-alternative.json"
   - "starbirth-ic-alternative-knowledge-note.json"
+  # Corrected population design probabilities.
+  - "verification.json"
+  - "correction.json"
+  - "registration.json"
   # Verified prospective cohort exact exports.
   - "cohort-02-validation_cohort_registration_20261014.json"
   - "cohort-05-verification.json"

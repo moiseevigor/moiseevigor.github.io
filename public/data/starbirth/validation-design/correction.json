@@ -1,0 +1,15 @@
+{
+  "corrected_unsampled_members": 14757,
+  "population": 19328,
+  "selected": 223,
+  "changed_fields": [
+    "sampled_stratum_groups",
+    "inclusion_numerator",
+    "inverse_inclusion_weight"
+  ],
+  "source_population_sha256": "65ca831cc592fedc1e0882279f57a2c5e035111c748693cf18ed467cb4dd8f09",
+  "corrected_population_sha256": "1c6f5f71fbf5803a65188a934917e25840c03cc95a6e137dac7ffbada138428a",
+  "corrected_population_bytes": 840170,
+  "selection_or_outcome_changed": false,
+  "physical_validation": false
+}

@@ -1,0 +1,39 @@
+{
+  "population": "artifacts/validation_cohort_20261014/population.csv.gz",
+  "queue": "artifacts/validation_cohort_20261014/review-cohort.csv.gz",
+  "summary": "artifacts/validation_cohort_20261014/summary.json",
+  "rules_unchanged": true,
+  "pre_transformation": true,
+  "inputs": [
+    {
+      "path": "artifacts/validation_cohort_20261014/population.csv.gz",
+      "sha256": "65ca831cc592fedc1e0882279f57a2c5e035111c748693cf18ed467cb4dd8f09",
+      "bytes": 836889
+    },
+    {
+      "path": "artifacts/validation_cohort_20261014/review-cohort.csv.gz",
+      "sha256": "172da05b62ffeddd6ada9f1491e708e59e9307c53ed26ba4f7e952293dc45003",
+      "bytes": 11935
+    },
+    {
+      "path": "artifacts/validation_cohort_20261014/summary.json",
+      "sha256": "b2305093129d145a1ad4e0fc270110ec9cc9273d0a166553c7ec5f85a49a8bb9",
+      "bytes": 3030
+    },
+    {
+      "path": "docs/VALIDATION_DESIGN_PROBABILITY_AMENDMENT_20261014.md",
+      "sha256": "dda8a43351502a15f3880fca9f919f86ab7f212a7fcb5fdd50dae840d4b7fe48",
+      "bytes": 1603
+    },
+    {
+      "path": "research/correct_validation_design_probabilities_20261014.py",
+      "sha256": "b3dc144fc2b5a740bc1d4b650940300f3e5e57676be7b526e36042804ecf7c16",
+      "bytes": 1835
+    },
+    {
+      "path": "research/verify_validation_design_probabilities_20261014.py",
+      "sha256": "ceb632d2aad0d8623ca31627a6a88016c6a485cee29b8035c6edcfd5b73b8cc8",
+      "bytes": 2402
+    }
+  ]
+}

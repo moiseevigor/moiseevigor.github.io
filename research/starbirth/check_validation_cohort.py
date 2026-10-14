@@ -16,3 +16,14 @@ for text in ['id="validation-cohort"','223-clump','14,980','zero has independent
 program=(S/'astrophysics/2026/10/11/hidden-protostars-research-program/index.html').read_text();assert '#validation-cohort' in program
 home=(S/'index.html').read_text();assert 'Independent evidence: a cohort with explicit limits' not in home
 print('Verified exact cohort exports, all unknown labels, review allocation and program placement')
+
+D2=S/'public/data/starbirth/validation-design'
+for r in csv.DictReader((D2/'source-inventory.csv').open()):
+ b=(D2/r['public_file']).read_bytes();assert len(b)==int(r['bytes']) and hashlib.sha256(b).hexdigest()==r['sha256']
+with gzip.open(D2/'population-design.csv.gz','rt') as f: design=list(csv.DictReader(f))
+assert len(design)==19328 and [r for r in design if r['review_sample']=='1']==queue
+for row in design:
+ if row['prospective_frame']=='1':
+  stratum=summary['strata'][row['stratum']];assert int(row['inclusion_numerator'])==stratum['sampled_groups'] and float(row['inverse_inclusion_weight'])==stratum['groups']/stratum['sampled_groups']
+assert 'validation-design/population-design.csv.gz' in page and '14,757 unsampled' in page
+print('Verified uniform design probabilities on every frame member; original and selected evidence unchanged')
