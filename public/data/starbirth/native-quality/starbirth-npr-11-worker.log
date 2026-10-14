@@ -1,0 +1,17 @@
+{
+  "schema": "native-profile-gator-independent-transport-verification/1",
+  "verified": true,
+  "registration_sha256": "64fcb5ae85c18a2b8560ced1dce74f597350a342266420bfb5689f47365b1363",
+  "amendment_sha256": "6543c839c450757cd37bc99e404718f04f1e13e1c08509936eb55186cc29728d",
+  "acquisition_sha256": "028274e17cc578f76e189770d8b1b1c1c9878d5568cdc99c87f162c6f7a30471",
+  "complete_delivery": true,
+  "native_vo_rows_byte_field_equivalent_to_csv": 874,
+  "requests_attempted": 3,
+  "raw_retained_bytes": 965148,
+  "normalized_csv_bytes": 253103,
+  "original_science_rules_unchanged": true,
+  "stop_is_not_scientific_negative": false,
+  "cause_beyond_observed_error": null,
+  "measurement_analyzer_allowed": true,
+  "physical_validation": false
+}

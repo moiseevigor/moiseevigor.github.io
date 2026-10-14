@@ -266,7 +266,7 @@ Download [the verified assessment](/public/data/starbirth/gas-velocity/results.m
 
 <h2 id="native-quality">The measurements arrived. Their quality verdict is still unresolved.</h2>
 
-The three explicitly approved NEOWISE requests completed on 14 October: **874 native extraction rows**, split **312 / 273 / 289** across the same three clumps. Every raw VO cell agrees with the exported CSV; an independent checker reproduces the unchanged registered analysis. This resolves delivery, not source ownership.
+After explicit human approval, the three frozen NEOWISE requests completed on 14 October: **874 native extraction rows**, split **312 / 273 / 289** across the same three clumps. Every raw VO cell agrees with the exported CSV; an independent checker reproduces the unchanged registered analysis. This resolves delivery, not source ownership.
 
 The frozen rule returns **0/3**, against the required 2/3. But the exact delivered `ph_qual` values contain **two characters in all 874 rows**, while the code and [official NEOWISE field description](https://irsa.ipac.caltech.edu/data/WISE/docs/release/NEOWISE/expsup/sec2_1a.html) specify four. The cause of this discrepancy remains unknown. The raw strings were preserved without adding missing characters or relaxing a cut.
 

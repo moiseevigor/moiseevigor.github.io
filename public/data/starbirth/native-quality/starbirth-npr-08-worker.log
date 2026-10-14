@@ -1,0 +1,17 @@
+{
+  "schema": "native-profile-gator-amended-acquisition/1",
+  "registration_sha256": "64fcb5ae85c18a2b8560ced1dce74f597350a342266420bfb5689f47365b1363",
+  "transport_amendment_sha256": "6543c839c450757cd37bc99e404718f04f1e13e1c08509936eb55186cc29728d",
+  "complete": true,
+  "raw_response_bytes": 965148,
+  "response_bytes": 253103,
+  "normalized_csv_bytes": 253103,
+  "literal_url_retries": 0,
+  "deliberate_amended_resumptions": 1,
+  "previous_terminal_attempt_preserved": true,
+  "coordinate_list_uploads": 0,
+  "physical_validation": false,
+  "new_stars": 0,
+  "new_births": 0,
+  "elapsed_seconds": 14.233581790933385
+}
