@@ -27,7 +27,10 @@ def build():
     # Source-positioned targets wrap the exact excerpt, preserving its text.
     # No mathematical text is rewritten to create these anchors.
     enhanced=text
-    for passage in sorted(index['passages'],key=lambda p:text.index(p['raw']),reverse=True):
+    steps=json.loads((ROOT/'public/data/proof-atlas/article-proof-steps.js').read_text().split('window.PROOF_ATLAS_PROOF_STEPS=')[1].rstrip(';\n'))
+    assert steps['articleSha256']==source_hash
+    all_passages=[*index['passages'],*[{**p,'htmlAnchor':p['id']} for p in steps['passages']]]
+    for passage in sorted(all_passages,key=lambda p:text.index(p['raw']),reverse=True):
         a=enhanced.index(passage['raw'])
         enhanced=enhanced[:a]+r'\hypertarget{'+passage['htmlAnchor']+r'}{'+passage['raw']+'}'+enhanced[a+len(passage['raw']):]
     doc=json.loads(pandoc(['-f','latex','-t','json'],enhanced))
@@ -108,6 +111,26 @@ def build():
         if t=='Math':return
         for child in value.values():walk(child)
     walk(doc['blocks'])
+    def inline_proof_steps(value):
+        # Pandoc turns paragraph-sized hypertargets into block Divs. Keep these
+        # source annotations inline so a comma never starts an artificial paragraph.
+        if isinstance(value,list):
+            for child in value:inline_proof_steps(child)
+        elif isinstance(value,dict):
+            for child in value.values():inline_proof_steps(child)
+            if value.get('t')=='Div':
+                attrs,blocks=value['c']
+                if attrs[0].startswith('step-'):
+                    assert len(blocks)==1 and blocks[0]['t']in ('Para','Plain')
+                    value.clear();value.update({'t':'Para','c':[{'t':'Span','c':[attrs,blocks[0]['c']]}]})
+                elif attrs[0]in ('proof-thm-first','proof-thm-cells'):
+                    assert all(block['t']=='Para' for block in blocks)
+                    joined=[]
+                    for block in blocks:
+                        if joined:joined.append({'t':'Space'})
+                        joined.extend(block['c'])
+                    value['c'][1]=[{'t':'Para','c':joined}]
+    inline_proof_steps(doc['blocks'])
     assert section_index==len(sections)
     assert statement_index==len(statements)
     assert len(images)==figure==4
@@ -138,10 +161,9 @@ math: true
 reference_style: bibliography
 description: "Distill web edition of the published SE(2) rotating-geodesic manuscript, preserving mathematical statements, proofs, figures, references and exact Lean correspondence anchors."
 ---
-<link rel="stylesheet" href="/public/css/proof-atlas-article.css?v=4">
+<link rel="stylesheet" href="/public/css/proof-atlas-article.css?v=5">
 '''
-    toolbar='''<nav class="pa-reading-toolbar" aria-label="Article reading mode" hidden><div class="pa-reading-options" role="group" aria-label="Reading layout"><button type="button" data-pa-reading="article" aria-pressed="true">Article</button><button type="button" data-pa-reading="compare" aria-pressed="false">Article + Lean</button></div><span id="pa-reading-status" role="status">Centered reading</span></nav>'''
-    content=front+'{% raw %}'+toolbar+'<div class="l-body pa-paper" data-source-sha256="'+source_hash+'">'+introduction+toc+coverage+rendered+'</div>{% endraw %}\n<script src="/public/js/proof-atlas-article.js?v=4" defer></script>\n'
+    content=front+'{% include proof-atlas-reading-tools.html part="toolbar" %}\n{% raw %}<div class="l-body pa-paper" data-source-sha256="'+source_hash+'">'+introduction+toc+coverage+rendered+'</div>{% endraw %}\n{% include proof-atlas-reading-tools.html part="panels" %}\n'
     class Audit(HTMLParser):
         def __init__(self):super().__init__();self.ids=[];self.targets=[];self.image_count=0
         def handle_starttag(self,tag,attrs):
@@ -152,7 +174,7 @@ description: "Distill web edition of the published SE(2) rotating-geodesic manus
     audit=Audit();audit.feed(content)
     assert len(audit.ids)==len(set(audit.ids)),'Duplicate targets'
     assert not(set(audit.targets)-set(audit.ids)),set(audit.targets)-set(audit.ids)
-    assert all(p['htmlAnchor']in audit.ids for p in index['passages'])
+    assert all(p['htmlAnchor']in audit.ids for p in all_passages)
     assert all(label in audit.ids for label in numbers),set(numbers)-set(audit.ids)
     assert audit.image_count==4
     assert 'data-cites='in rendered and 'id="refs"'in rendered

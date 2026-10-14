@@ -68,7 +68,13 @@
   if(binder!==undefined){const b=el('button','Enclosing binder #'+binder+' · '+label(binder));b.type='button';b.onclick=()=>selectOccurrence(binder,true,true,binding.route);actions.append(b);}
   if(current.kind(i)==='const'){const local=edition.declarations.find(d=>d.name===p.name);target.append(local?link('Open the referenced '+local.kind+' and its entire proof ↗',url(local.name)):el('p','External Lean/Mathlib reference; its body is outside the project corpus.'));}
   target.append(actions);if(write)updateLocation();rowOffset=0;rowIds=A.reachable(current.data,selected);rowRoutes=branchRoutes(selected,selectedRoute);$('pl-rows').replaceChildren();await appendRows();if(owner!==current||selectionToken!==selectionSerial)return;await layout();
-  window.dispatchEvent(new CustomEvent('proof-atlas:compiled-selection',{detail:window.ProofAtlasLibrary.getSnapshot()}));
+  const snapshot=window.ProofAtlasLibrary.getSnapshot();
+  if(snapshot.edition==='published-15'&&window.ProofAtlasProofStepIndex&&window.PROOF_ATLAS_PROOF_STEPS&&!document.getElementById('pa-sync-panel')){
+   const index=window.ProofAtlasProofStepIndex.create(window.PROOF_ATLAS_PROOF_STEPS,window.PROOF_ATLAS_PROOF_STEPS.articleSha256);index.validate(snapshot,current.data,A);
+   $('pl-downloads').querySelectorAll('[data-proof-step-link]').forEach(n=>n.remove());
+   for(const match of index.resolve(snapshot)){const u=new URL('/projects/proof-atlas/article/',location.origin);u.searchParams.set('view','proof');u.searchParams.set('proof',snapshot.name);u.searchParams.set('route',snapshot.route.root+':'+snapshot.route.slots.join('.'));u.hash=match.passage.id;const a=link('Proof step: '+match.passage.title,u.pathname+u.search+u.hash);a.dataset.proofStepLink=match.passage.id;$('pl-downloads').append(a);}
+  }
+  window.dispatchEvent(new CustomEvent('proof-atlas:compiled-selection',{detail:snapshot}));
  }
  async function appendRows(){
   const owner=current,ids=rowIds.slice(rowOffset,rowOffset+200);await owner.payloads(ids);if(owner!==current)return;

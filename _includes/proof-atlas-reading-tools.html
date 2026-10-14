@@ -1,0 +1,15 @@
+{% if include.part == "toolbar" %}
+<nav class="pa-reading-toolbar" aria-label="Article reading mode" hidden><div class="pa-reading-options" role="group" aria-label="Reading layout"><button type="button" data-pa-reading="article" aria-pressed="true">Article</button><button type="button" data-pa-reading="compare" aria-pressed="false">Article + Lean</button><button type="button" data-pa-sync="toggle" aria-pressed="false" aria-controls="pa-sync-panel">Article + graph + Lean</button></div><span id="pa-reading-status" role="status">Centered reading</span></nav>
+{% else %}
+<aside id="pa-sync-panel" class="pa-sync-panel" aria-label="Synchronized graph and compiled Lean proof" hidden>
+ <header class="pa-sync-header"><h2>Graph and compiled Lean</h2><p id="pa-sync-status" role="status" aria-live="polite">Select an indexed passage, statement or proof.</p><label>Corresponding declaration<select id="pa-sync-declaration"></select></label><a id="pa-sync-back" href="#abstract">Selected article passage</a></header>
+ <div id="pa-sync-step-choices" hidden></div>
+ <p id="pa-sync-empty" hidden></p>
+ <div id="pa-sync-proof"><div id="pl-library" class="pl-library">{% include proof-atlas-compiled-workspace.html %}</div></div>
+</aside>
+<link rel="stylesheet" href="/public/css/proof-atlas-library.css">
+<link rel="stylesheet" href="/public/css/proof-atlas-sync.css?v=2">
+<script src="/public/js/proof-atlas-article.js?v=6" defer></script>
+<script src="/public/js/proof-atlas-sync.js?v=2" defer></script>
+
+{% endif %}

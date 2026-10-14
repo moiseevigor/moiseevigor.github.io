@@ -10,7 +10,9 @@
  async function indexReady(){
   if(!indexMetadata)indexMetadata=Promise.all([
    window.PROOF_ATLAS_ARTICLE_INDEX||script('/public/data/proof-atlas/crossing-article-index.js?v=2'),
-   window.PROOF_ATLAS_ARTICLE_COVERAGE||script('/public/data/proof-atlas/article-coverage.js?v=1')
+   window.PROOF_ATLAS_ARTICLE_COVERAGE||script('/public/data/proof-atlas/article-coverage.js?v=1'),
+   window.PROOF_ATLAS_PROOF_STEPS||script('/public/data/proof-atlas/article-proof-steps.js?v=1'),
+   window.ProofAtlasProofStepIndex||script('/public/js/proof-atlas-proof-step-index.js?v=1')
   ]).then(()=>{
    const index=window.PROOF_ATLAS_ARTICLE_INDEX,coverage=window.PROOF_ATLAS_ARTICLE_COVERAGE;
    if(index.source.sha256!==paper.dataset.sourceSha256||coverage.articleSha256!==paper.dataset.sourceSha256)throw Error('Article and correspondence hashes differ. Synchronization is disabled.');
@@ -18,14 +20,16 @@
    for(const t of coverage.statements)register(t.htmlAnchor,t.title,t.id==='crossing'?['CrossingData.crossing']:t.declarations.map(d=>d.name),'statement',t.status==='partial'?'Partial, conditional counterpart. '+t.missing.join(' '):'Not formalized in the published snapshot.');
    for(const proof of paper.querySelectorAll('.proof')){
     const anchor=proof.id.replace(/^proof-/,'').replace(/^(lem|thm)-/,'$1:'),t=targets.get(anchor);
-    register(proof.id,'Proof of '+(t?.title||anchor),t?.names||[],'proof','Supporting declaration/module context; no sentence-by-sentence proof alignment is indexed.');
+    register(proof.id,'Proof of '+(t?.title||anchor),t?.names||[],'proof','Whole-proof context. Indexed nodes and the marked article passages identify specific steps; other nodes retain broader context.');
    }
-   return{index,coverage};
+   const steps=window.ProofAtlasProofStepIndex.create(window.PROOF_ATLAS_PROOF_STEPS,paper.dataset.sourceSha256);if(!steps.valid)throw Error('Proof-step index does not match this article.');
+   for(const p of steps.passages){register(p.id,p.title,p.declarations,'proof-step',p.note);Object.assign(targets.get(p.id),{articleAnchor:p.articleAnchor,defaultDeclaration:p.defaultDeclaration,defaultPath:p.defaultPath});}
+   return{index,coverage,steps};
   }).catch(e=>{indexMetadata=null;throw e;});return indexMetadata;
  }
  async function metadataReady(){
   if(!metadata)metadata=(async()=>{
-   const {index,coverage}=await indexReady();if(!window.PROOF_ATLAS_LIBRARY)await script('/public/data/proof-atlas/library-manifest.js');
+   const {index,coverage,steps}=await indexReady();if(!window.PROOF_ATLAS_LIBRARY)await script('/public/data/proof-atlas/library-manifest.js');
    const edition=window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id==='published-15');if(!edition)throw Error('Published compiled edition is unavailable.');
    const records=new Map(edition.declarations.map(d=>[d.name,d]));
    // Bridge audited against this immutable packet, not a similarly named later proof.
@@ -34,7 +38,7 @@
     const anchor=t.id.replace(/^proof-/,'').replace(/^(lem|thm)-/,'$1:');
     t.names=[...new Set([...t.names,...edition.declarations.filter(d=>d.articleAnchor===anchor).map(d=>d.name)])];
    }
-   return{index,coverage,edition,records};
+   return{index,coverage,steps,edition,records};
   })().catch(e=>{metadata=null;throw e;});return metadata;
  }
 
@@ -45,7 +49,7 @@
  async function engineReady(){
   if(!engine)engine=(async()=>{
    await metadataReady();if(!window.ProofAtlasLibraryData)await script('/public/js/proof-atlas-library-data.js');
-   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=2');
+   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=3');
    if(!$('pl-provenance').closest('details')){const details=document.createElement('details'),summary=document.createElement('summary');summary.textContent='Provenance and axiom dependencies';$('pl-provenance').before(details);details.append(summary,$('pl-provenance'));}
    return window.ProofAtlasLibrary;
   })().catch(e=>{engine=null;throw e;});return engine;
@@ -59,7 +63,7 @@
  }
  function unavailable(text){
   window.ProofAtlasLibrary?.clearSelection();$('pa-sync-proof').hidden=true;$('pa-sync-empty').hidden=false;$('pa-sync-empty').textContent=text;chooser.replaceChildren();chooser.disabled=true;
-  status.textContent=text;panel.dataset.match='unmapped';
+  showStepChoices([],null);status.textContent=text;panel.dataset.match='unmapped';
  }
  function close(){opened=false;revision++;panel.hidden=true;delete document.body.dataset.paSync;toggle.setAttribute('aria-pressed','false');document.querySelector('[data-pa-reading=article]').setAttribute('aria-pressed','true');$('pa-reading-status').textContent='Centered reading';const u=new URL(location.href);if(u.searchParams.get('view')==='proof'){u.searchParams.delete('view');u.searchParams.delete('proof');u.searchParams.delete('route');history.replaceState(null,'',u);}}
  async function open(){
@@ -77,32 +81,49 @@
  }
  async function selectArticle(id,name,scroll=false){
   const token=++revision;panel.dataset.match='loading';await open();const m=await metadataReady();if(token!==revision)return;
-  active=targets.get(id)||null;highlight(id,scroll);
+  active=targets.get(id)||null;showStepChoices([],null);highlight(id,scroll);
   if(!active){unavailable('No indexed Lean correspondence for this paragraph.');return;}
-  name=name||active.names.find(n=>n==='CrossingData.crossing')||active.names[0];options(active,name,m.records);
+  name=name||active.defaultDeclaration||active.names.find(n=>n==='CrossingData.crossing')||active.names[0];options(active,name,m.records);
+  if(active.kind==='proof-step'&&!active.names.includes(name)){unavailable('This declaration has no indexed counterpart for the selected proof step.');return;}
   if(!name||!m.records.has(name)){unavailable(active.note||'No compiled Lean counterpart is indexed for this passage.');return;}
   $('pa-sync-proof').hidden=false;$('pa-sync-empty').hidden=true;panel.dataset.match='loading';status.textContent='Loading '+name+'…';
   pending++;try{
    const api=await engineReady();if(token!==revision)return;
    await api.selectDeclaration(name,undefined,false);if(token!==revision)return;
+   if(active.kind==='proof-step'){
+    m.steps.validate(api.getSnapshot(),api.getData(),window.ProofAtlasLibraryData);
+    const anchor=m.steps.anchors.find(a=>a.step===id&&a.declaration===name&&a.path===active.defaultPath)||m.steps.anchors.find(a=>a.step===id&&a.declaration===name);
+    if(!anchor)throw Error('No exact compiled path is indexed for this proof step.');const mapped=routeFromPath(api.getData(),anchor.path);await api.selectOccurrence(mapped.node,true,false,mapped.route);if(token!==revision)return;
+   }
    if(name==='CrossingData.crossing'){
     const anchors=m.index.anchors.filter(a=>m.index.passages.find(p=>p.id===a.passage)?.htmlAnchor===id);
     // Prefer a proof expression over the statement occurrence when both are indexed.
     const anchor=anchors.find(a=>a.path.startsWith('root.value'))||anchors[0];
     if(anchor){const mapped=routeFromPath(api.getData(),anchor.path);await api.selectOccurrence(mapped.node,true,false,mapped.route);if(token!==revision)return;}
    }
-   const snapshot=api.getSnapshot();panel.dataset.match=active.kind==='passage'&&name==='CrossingData.crossing'&&m.index.anchors.some(a=>m.index.passages.find(p=>p.id===a.passage)?.htmlAnchor===id)?'indexed':'context';
-   status.textContent=active.title+' · '+(panel.dataset.match==='indexed'?'Indexed expression correspondence. ':active.kind==='statement'?'Declaration counterpart. ':'Proof context. ')+active.note;
+   const snapshot=api.getSnapshot();panel.dataset.match=active.kind==='proof-step'?'indexed':active.kind==='passage'&&name==='CrossingData.crossing'&&m.index.anchors.some(a=>m.index.passages.find(p=>p.id===a.passage)?.htmlAnchor===id)?'indexed':'context';
+   status.textContent=active.title+' · '+(panel.dataset.match==='indexed'?(active.kind==='proof-step'?'Indexed proof step. ':'Indexed expression correspondence. '):active.kind==='statement'?'Declaration counterpart. ':'Proof context. ')+active.note;
    history.replaceState(null,'','#'+encodeURIComponent(id));
    emit(snapshot);
   }catch(e){if(token===revision)unavailable(e.message);}finally{pending--;}
  }
  function emit(snapshot){if(snapshot){const u=new URL(location.href);u.searchParams.set('view','proof');u.searchParams.set('proof',snapshot.name);u.searchParams.set('route',snapshot.route.root+':'+snapshot.route.slots.join('.'));if(active)u.hash=active.id;history.replaceState(null,'',u);}window.dispatchEvent(new CustomEvent('proof-atlas:synchronized',{detail:{article:active?.id||null,match:panel.dataset.match,compiled:snapshot}}));}
+ function showStepChoices(matches,selected){
+  const host=$('pa-sync-step-choices');host.replaceChildren();host.hidden=matches.length<2;
+  if(matches.length<2)return;const label=document.createElement('p');label.textContent='This helper also corresponds to:';host.append(label);
+  for(const m of matches){const b=document.createElement('button');b.type='button';b.textContent=m.passage.title;b.setAttribute('aria-pressed',String(m===selected));b.onclick=()=>{active=targets.get(m.passage.id);highlight(active.id,true);status.textContent=active.title+' · '+active.note;options(active,window.ProofAtlasLibrary.getSnapshot().name,new Map(window.PROOF_ATLAS_LIBRARY.editions[0].declarations.map(d=>[d.name,d])));emit(window.ProofAtlasLibrary.getSnapshot());showStepChoices(matches,m);};host.append(b);}
+ }
  async function fromCompiled(snapshot){
-  if(!opened||pending)return;const m=await metadataReady();revision++;
+  if(!opened||pending)return;const token=++revision,m=await metadataReady(),current=window.ProofAtlasLibrary.getSnapshot();if(token!==revision||current?.name!==snapshot.name||current?.path!==snapshot.path)return;
   if(snapshot.edition!=='published-15'){active=null;clearHighlight();status.textContent='This edition has no reviewed article index.';panel.dataset.match='unmapped';emit(snapshot);return;}
   let target,relation='Declaration/module proof context.',match='context';
-  if(snapshot.name==='CrossingData.crossing'){
+  m.steps.validate(snapshot,window.ProofAtlasLibrary.getData(),window.ProofAtlasLibraryData);
+  const matches=m.steps.resolve(snapshot),group=active?.articleAnchor||active?.id?.replace(/^proof-(thm|lem)-/,'$1:');
+  const step=matches.find(c=>c.passage.articleAnchor===group)||matches[0];
+  if(step){target=targets.get(step.passage.id);match=step.inherited?'step-context':'indexed';relation=(step.inherited?'Within indexed proof step: ':'Indexed proof step: ')+(step.anchor.callee||snapshot.name)+'.';}
+  else if(m.steps.hasDeclaration(snapshot.name))relation='No proof-step anchor covers this node; enclosing declaration context.';
+  showStepChoices(matches,step);
+  if(!target&&snapshot.name==='CrossingData.crossing'){
    const anchors=m.index.anchors.filter(a=>snapshot.path===a.path||snapshot.path.startsWith(a.path+'.')).sort((a,b)=>b.path.length-a.path.length);
    const a=anchors[0];if(a){target=targets.get(m.index.passages.find(p=>p.id===a.passage).htmlAnchor);match=a.path===snapshot.path?'indexed':'context';relation=(match==='indexed'?'Indexed expression: ':'Context from enclosing expression: ')+a.relation+'.';}
   }
@@ -127,7 +148,7 @@
   selectArticle(id).catch(e=>unavailable(e.message));
  }
  paper.addEventListener('click',interact);paper.addEventListener('keydown',interact);
- window.addEventListener('proof-atlas:compiled-selection',e=>fromCompiled(e.detail).catch(error=>{status.textContent=error.message;}));
+ window.addEventListener('proof-atlas:compiled-selection',e=>fromCompiled(e.detail).catch(error=>{active=null;clearHighlight();showStepChoices([],null);chooser.replaceChildren();chooser.disabled=true;panel.dataset.match='unmapped';status.textContent=error.message;}));
  window.addEventListener('hashchange',()=>{if(opened){const id=decodeURIComponent(location.hash.slice(1));if(targets.has(id)&&active?.id!==id)selectArticle(id);}});
  window.ProofAtlasSync={selectArticle,close,getSnapshot:()=>({article:active?.id||null,match:panel.dataset.match,open:opened,compiled:$('pa-sync-proof').hidden?null:window.ProofAtlasLibrary?.getSnapshot()||null}),routeFromPath};
  indexReady().then(async()=>{
