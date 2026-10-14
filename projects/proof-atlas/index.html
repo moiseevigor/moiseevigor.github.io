@@ -9,8 +9,8 @@ description: Read the mathematical article, explore its crossing proof, or brows
 <main class="research-hub" id="proof-atlas">
   <header>
     <p class="research-kicker">Proof Atlas</p>
-    <h1>Read the mathematics.<br>Explore the proof.</h1>
-    <p>Follow a mathematical argument into its Lean declarations and compiled terms. The article, crossing microscope and full proof library are three views with different scopes.</p>
+    <h1>Article, graph and compiled Lean.</h1>
+    <p>Follow a mathematical argument into its Lean declarations and compiled terms. The article is the default. Its optional graph and compiled Lean panel share selections.</p>
   </header>
   <p class="research-scope">The compiled inventories refer to the released 12 October snapshots. Their exact editions and validation scope are recorded in the <a href="/projects/proof-atlas/coverage/">coverage report</a>.</p>
   <div class="research-hub-stats" aria-label="Working compiled corpus">
@@ -19,13 +19,14 @@ description: Read the mathematical article, explore its crossing proof, or brows
     <div><strong>1,277,896</strong>shared expression nodes</div>
   </div>
   <section class="research-section" aria-labelledby="atlas-start">
-    <h2 id="atlas-start">Choose how to read</h2>
+    <h2 id="atlas-start">Read the article and proof</h2>
     <div class="research-hub-tasks">
-      <article class="research-hub-task"><h3>Read the article</h3><p>The full SE(2) manuscript, with formulas, proofs and figures. Start with readable mathematics; switch to Article + Lean to compare the corresponding formal evidence.</p><a href="/projects/proof-atlas/article/">Read article →</a></article>
-      <article class="research-hub-task"><h3>Follow the crossing proof</h3><p>An interactive map of <code>CrossingData.crossing</code>. Select declarations or any of its 7,288 expression occurrences to read the term and its linked article passage.</p><a href="/projects/proof-atlas/app/">Explore proof →</a></article>
-      <article class="research-hub-task"><h3>Browse the Lean corpus</h3><p>Every owned declaration in the published and working snapshots. Open complete types, proof bodies, shared subterms and local dependency links.</p><a href="/projects/proof-atlas/library/">Browse Lean →</a></article>
+      <article class="research-hub-task"><h3>Read the article</h3><p>The full SE(2) manuscript, with formulas, proofs and figures. Read the article by default. Select a passage to open its graph and compiled Lean counterpart on the same page. Indexed expression matches and broader proof context are labelled separately.</p><a href="/projects/proof-atlas/article/">Read article →</a></article>
+
     </div>
   </section>
+<details class="research-section"><summary>Separate explorers</summary>      <article class="research-hub-advanced"><h3>Follow the crossing proof</h3><p>An interactive map of <code>CrossingData.crossing</code>. Select declarations or any of its 7,288 expression occurrences to read the term and its linked article passage.</p><a href="/projects/proof-atlas/app/">Explore proof →</a></article>
+      <article class="research-hub-advanced"><h3>Browse the Lean corpus</h3><p>Every owned declaration in the published and working snapshots. Open complete types, proof bodies, shared subterms and local dependency links.</p><a href="/projects/proof-atlas/library/">Browse Lean →</a></article></details>
   <section class="research-section" aria-labelledby="atlas-result">
     <h2 id="atlas-result">The established result</h2>
     <p>The two extracted inventories cover 739 and 1,359 declarations. In the working corpus, 670,018,056 expanded expression occurrences are represented by 1,277,896 shared nodes, retaining ordered children, payloads and contextual binding.</p>

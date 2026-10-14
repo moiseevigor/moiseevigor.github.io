@@ -196,19 +196,22 @@
   const anchorTop=anchor?.getBoundingClientRect().top;
   requested=value;
   if(value==='compare'){
+   window.ProofAtlasSync?.close();
    status.textContent='Loading corresponding Lean statements…';toolbar.setAttribute('aria-busy','true');
    try{if(!loading)loading=prepare().catch(e=>{loading=null;throw e;});await loading;}
    catch(e){if(requested==='compare')status.textContent=e.message;toolbar.removeAttribute('aria-busy');return;}
    toolbar.removeAttribute('aria-busy');if(requested!=='compare')return;
   }
   document.body.dataset.paReadingMode=value;
-  toolbar.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.paReading===value)));
+  const synced=value==='article'&&document.body.dataset.paSync==='open';
+  toolbar.querySelectorAll('button[data-pa-reading]').forEach(b=>b.setAttribute('aria-pressed',String(!synced&&b.dataset.paReading===value)));
   paper.querySelectorAll('[data-lean-match]').forEach(n=>{n.tabIndex=value==='compare'?0:-1;});
-  status.textContent=value==='compare'?'Article ↔ Lean · 9 statements audited':'Centered reading';
+  status.textContent=synced?'Synchronized reading':value==='compare'?'Article ↔ Lean · 9 statements audited':'Centered reading';
   if(writeUrl){const url=new URL(location.href);if(value==='compare')url.searchParams.set('view','lean');else url.searchParams.delete('view');history.replaceState(null,'',url);}
   offset();requestAnimationFrame(()=>{if(anchor)window.scrollBy(0,anchor.getBoundingClientRect().top-anchorTop);accessibleScrollRegions();drawGraphs();});
  }
- toolbar.hidden=false;toolbar.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>mode(b.dataset.paReading)));
+ window.ProofAtlasArticle={mode};
+ toolbar.hidden=false;toolbar.querySelectorAll('button[data-pa-reading]').forEach(b=>b.addEventListener('click',()=>mode(b.dataset.paReading)));
  function ready(){offset();accessibleScrollRegions();mode(new URLSearchParams(location.search).get('view')==='lean'?'compare':'article',false).then(reveal);}
  window.addEventListener('hashchange',reveal);window.addEventListener('popstate',()=>mode(new URLSearchParams(location.search).get('view')==='lean'?'compare':'article',false));
  window.addEventListener('resize',()=>{offset();accessibleScrollRegions();drawGraphs();});

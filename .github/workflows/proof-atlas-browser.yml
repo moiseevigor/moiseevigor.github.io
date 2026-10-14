@@ -10,6 +10,9 @@ on:
       - 'scripts/test-proof-atlas-applications*.cjs'
       - 'public/js/proof-atlas-article-index.js'
       - 'public/js/proof-atlas-article.js'
+      - 'public/js/proof-atlas-sync.js'
+      - 'scripts/test-proof-atlas-sync.cjs'
+      - '_includes/proof-atlas-compiled-workspace.html'
       - 'public/research/se2/article-figures/**'
       - 'public/research/se2/article-references.bib'
       - 'scripts/test-proof-atlas-distill.cjs'
@@ -119,6 +122,7 @@ jobs:
           node scripts/test-proof-atlas-article-columns.cjs
           node scripts/test-proof-atlas-coverage.cjs
           node scripts/test-proof-atlas-library.cjs
+          node scripts/test-proof-atlas-sync.cjs
         env:
           ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
       - name: Browser regression — complete Lean.Expr visual grammar

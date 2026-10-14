@@ -1,6 +1,6 @@
 ---
 layout: distill
-title: "Proof Atlas: The Geometry of a Formal Proof"
+title: "Proof Atlas: Compiled Proof Graphs and Article Coverage"
 subtitle: >
   Complete compiled proof graphs from two Lean corpora, their shared structure, and the limits of correspondence with a mathematical article.
 date: 2026-10-11 18:30:00 +0200
@@ -22,7 +22,7 @@ description: >
 
 **Measured result · 12 October 2026.** Proof Atlas represents every owned declaration in two finite Lean corpora, including complete compiled theorem bodies and local dependency links. This establishes structural coverage of the extracted formal objects. It does not establish complete formalization of the accompanying article or automatic discovery of its mathematical argument.
 
-[Explore the compiled proof library](/projects/proof-atlas/library/) · [Crossing microscope](/projects/proof-atlas/app/) · [Coverage and evidence](/projects/proof-atlas/coverage/)
+[Read the article with synchronized proof views](/projects/proof-atlas/article/) · [Coverage and evidence](/projects/proof-atlas/coverage/)
 
 Lean checks a proof term against a proposition. In a context of assumptions $\Gamma$,
 
@@ -32,7 +32,7 @@ means that the term $p$ has type $T$. An exact structural representation must re
 
 ## Complete compiled proof inventories
 
-The experiment now includes every owned declaration in two separately identified snapshots:
+The extracted inventory includes every owned declaration in two separately identified snapshots:
 
 | Extracted corpus | Modules | Declarations | Theorems | Available bodies | Shared expression nodes | Expanded occurrences |
 |:--|--:|--:|--:|--:|--:|--:|
@@ -41,7 +41,7 @@ The experiment now includes every owned declaration in two separately identified
 
 Both inventories include complete types, available bodies, eight recursor reduction rules and exact local declaration references. External library references remain named boundaries. The published and working snapshots are different corpora; their counts must not be combined as independent samples.
 
-**Structural sharing is the substantial representation result.** The working corpus's 670,018,056 expanded occurrences are represented by 1,277,896 shared nodes. Sharing retains binder names, annotations and typed metadata. It does not identify proofs up to mathematical equivalence. A bound variable's meaning follows its root-to-node path: a shared node may occur under several different enclosing binders.
+**Structural sharing.** The working corpus's 670,018,056 expanded occurrences are represented by 1,277,896 shared nodes. Sharing retains binder names, annotations and typed metadata. It does not identify proofs up to mathematical equivalence. A bound variable's meaning follows its root-to-node path: a shared node may occur under several different enclosing binders.
 
 The private native check kernel-checked all extracted types, available bodies and reduction rules and compared inferred types. Public packet audits reproduce graph, scope, hash and inventory checks. Original source projects and tactic scripts remain private, so these public audits are not an independent project-source kernel rebuild. The [coverage report](/projects/proof-atlas/coverage/) links the exact inventories and checks.
 
@@ -76,7 +76,7 @@ The [web article](/projects/proof-atlas/article/?view=lean) preserves the publis
 
 Complete declaration coverage is not complete article formalization. The checked scalar counting clauses retain finite-tangency assumptions (`hfin`, `hL/hR`). They do not establish all the article's claims about first-root continuity and extrema, quartic zero order, Floquet asymptotics, late folds or separatrix limits. The [statement-by-statement review](/research/proof-atlas/article-coverage-review.md) records the exact boundaries.
 
-Article links are curated correspondences with source hashes, labels and expression paths. Several expressions can inherit the same enclosing passage; a small kernel node need not have an individual article sentence. The links are provenance, not a kernel-certified equivalence between prose and Lean.
+Article links are curated correspondences with source hashes, labels and expression paths. Several expressions can inherit the same enclosing passage; a small kernel node need not have an individual article sentence. The links record provenance. They do not certify equivalence between prose and Lean.
 
 ## Structure does not yet explain the proof
 

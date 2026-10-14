@@ -3,7 +3,7 @@ layout: distill
 last_modified_at: 2026-10-14
 title: "Forbidden Directions: Exact Magnetic Laws and Estimator Limits"
 subtitle: >
-  A holonomy growth law and exact magnetic identities survive. Matched estimator comparisons favour standard fits, and a purported magnetospheric null census fails its domain audit.
+  A holonomy growth law and exact magnetic identities hold under stated assumptions. Matched estimator comparisons favour standard fits, and a purported magnetospheric null census fails its domain audit.
 date: 2026-08-05 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, magnetic-fields, holonomy, connections, nonholonomic, plasma]
@@ -18,19 +18,11 @@ comments: true
 
 <div class="l-body" markdown="1">
 
-**Results and scope.** Holonomy lifts yield the growth identity $Q=d+k+2$ under the stated finite-order assumptions. Exact magnetic identities and tested profile corrections survive; growth-vector null confirmation has not outperformed standard detection or classification.
+**Results and scope.** Holonomy lifts yield the growth identity $Q=d+k+2$ under the stated finite-order assumptions. Exact magnetic identities and tested profile corrections hold under their stated assumptions; growth-vector null confirmation has not outperformed standard detection or classification.
 
-**The question, and a one-word pivot.** The prompt behind this program was simple: *in
-environments where some directions become preferred — magnetized plasma, rotating flows —
-can the sub-Riemannian machinery detect local structure?* The entire answer turns on
-replacing one word. **Preferred is not enough. The direction must be forbidden.** A
-direction that is merely *slow* — cross-field diffusion, an anisotropic medium — leaves the
-geometry ordinary (Riemannian); the reachable set is just a squashed ellipsoid. A direction
-that is *forbidden*, reachable only by combining allowed moves, is what makes a geometry
-genuinely sub-Riemannian. Getting that distinction right is most of the work, and it is the
-subject of the [selection rule](#the-selection-rule) below.
+**Admissible motion.** Sub-Riemannian geometry models directions that cannot be followed directly but can be reached by combining allowed motions. Anisotropic coefficients alone, including slow cross-field diffusion, define a Riemannian model. The [selection rule](#the-selection-rule) distinguishes these cases.
 
-**The thesis, in one sentence.**
+**Scope of the construction.**
 
 > If a physical environment carries **a connection whose curvature is a physical field**,
 > it carries genuine sub-Riemannian geometry — and then the geometry *reads that field
@@ -53,7 +45,7 @@ studies.
 
 ## The selection rule
 
-Here is the filter, and it is strict. Most "preferred direction" phenomena fail it.
+The construction requires a constraint on admissible motion. Most anisotropic transport models do not meet this condition.
 
 | Environment | What the structure is | Sub-Riemannian? |
 |---|---|---|
@@ -209,7 +201,7 @@ The numerical results and derivations are recorded in [the experiment reports](h
 | **The law (3D)** | Does $Q = k+5$ hold in 3D? | ✓ confirmed; the growth vector jumps $5\to6$ at a null |
 | **Null detection** | Does it agree with the standard finder? | ✓ on an analytic solenoidal test field (location + order); on real extrapolations the raw-grid read needs the super-pixel scale window, and the tangent-cone $Q$ is a consistency check, not an independent detection (Part 4) |
 
-Three of these are worth stating plainly. **Uniform magnetic motion is exactly the Heisenberg
+Three cases specify the scope. **Uniform magnetic motion is exactly the Heisenberg
 group** — a classical identification (it is the isoperimetric/magnetic model in Montgomery's
 book), stated here because the whole program leans on it: the Larmor orbit of a charged
 particle *is* a sub-Riemannian geodesic, and the flux it sweeps is the Heisenberg group's
@@ -221,7 +213,7 @@ leading-order estimator once that profile factor is supplied (Part 3, and the co
 article's §4). And **the growth vector indexes magnetic nulls**:
 it sits at $Q = d+2$ almost everywhere and pops up by exactly $k$ on the measure-zero set where
 the field vanishes to order $k$ — a curvature-degeneracy meter in principle; what "detection"
-costs on real data is Part 4's and Part 5's story, told there without cosmetics.
+costs on real data is tested in Parts 4 and 5.
 
 ## Negative results
 
