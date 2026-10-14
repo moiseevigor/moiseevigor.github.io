@@ -20,7 +20,7 @@ comments: true
 
 **Results and scope.** Generic Lagrangian singularities supply a sharp obstruction to identifying a group from one local caustic. Sampled fold tests support that obstruction; cusp tests also expose symmetry exceptions. A finite synthetic classifier separates four candidate structures, but real diffusion-MRI inference is not established.
 
-**The question, in one breath.** A caustic is the pattern a flow of shortest paths
+**Inverse problem.** A caustic is the pattern a flow of shortest paths
 makes when it focuses — where nearby paths pile onto the same point. The
 [Geometry of Seeing]({% post_url 2026-04-25-geometry-of-seeing-visual-cortex-se2 %})
 series showed that the visual cortex traces shortest paths on a curved geometry
@@ -63,7 +63,7 @@ $$
 \text{observed caustic field} \;\overset{?}{\longrightarrow}\; \text{underlying SR structure (which group?)}.
 $$
 
-We restrict the "which group?" question to a fixed, honest candidate list —
+We restrict the "which group?" question to a fixed candidate list —
 
 $$
 \{\,\mathrm{Heisenberg},\; \mathrm{SE}(2),\; \mathrm{SE}(3),\; \mathrm{Engel}\,(2,3,4),\; \mathrm{Cartan}\,(2,3,5)\,\}
@@ -73,10 +73,11 @@ $$
 near-closed form (Sachkov school; Duits et al.), so that ground truth is available
 and the inverse can be graded, not just asserted.
 
-## The obstruction that shapes everything
+<span id="the-obstruction-that-shapes-everything"></span>
 
-Here is the wall the whole design must respect. Part of it is a theorem and part of
-it is this program's working hypothesis; the two are stated separately.
+## Identifiability limits
+
+The identifiability limits below separate a classification theorem from the program's working hypothesis.
 
 **The theorem.** A caustic is the set of critical values of a Lagrangian map. By
 Arnol'd's classification[^arnold], a *generic* Lagrangian map of a manifold of

@@ -9,7 +9,7 @@ subtitle: >
   JRM33 continuation the answer is yes — a null point floats over the patch, its fan separatrix closes into
   a dome whose footprint traces the patch boundary, and its spine completes the skeleton —
   all of it hidden nine thousand kilometres below the visible surface. Then we run our own
-  robustness protocol on the claim, and report what survives.
+  robustness protocol on the claim, and report the truncation and stress-test results.
 date: 2026-09-02 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, magnetic-nulls, separatrix, jupiter, juno, real-data]
@@ -18,7 +18,7 @@ description: >
   Part 8 of the Forbidden Directions series: Jupiter's JRM33 field, the north polar
   reversed-flux patch, a null-point hunt in the molecular envelope, the separatrix dome whose
   footprint traces the patch boundary, the growth-vector law consistent on a fourth world, and
-  the honest model-truncation caveat.
+  the model-truncation limit.
 series: preferred-directions
 series_title: "The Geometry of Forbidden Directions"
 series_part: 8
@@ -300,12 +300,11 @@ of ~13 at $l = 14$. So:
   location, and its own envelope nulls sit elsewhere (three near the equator, two in
   the south) — at that resolution the polar parasite is simply not in the model.
 
-The honest statement, then, in the form this series has earned: **the dome-plus-spine
+In this model, **the dome-plus-spine
 skeleton is what the $l \le 18$ JRM33 continuation says lies beneath Jupiter's north
 pole — the patch is a combination of separatrices in that modelled field — but the
 structure rides on the degree-14–18 coefficients**, the least-determined tail of the
-model. It is a *resolution tenant*, exactly like the low windowed nulls of Part 6's
-Sun. And the uncertainty statement now has numbers: formal JRM33 covariances are not
+model. The inferred structure depends on model resolution, as do the low windowed nulls in Part 6. For the uncertainty test, formal JRM33 covariances are not
 distributed with the coefficients, so the pipeline builds a **stress ensemble** —
 per-degree Gaussian perturbations scaled by the JRM33−JRM09 per-degree
 coefficient change (1.3% at $l = 2$, 23% at $l = 10$, log-linearly extrapolated to
@@ -339,7 +338,7 @@ ensemble, sample position range (over those 32 survivors) $r\,0.86$–$0.93$, la
 $64$–$73°$, lon $265$–$301°$ —
 and it is falsifiable by the next model release.
 
-Two more honesty notes. The potential-field treatment of the envelope neglects any
+Two further limitations. The potential-field treatment of the envelope neglects any
 currents in the weakly conducting molecular hydrogen (standard practice, but an
 approximation — the same caveat as every solar potential extrapolation in this series);
 and the magnetodisc and magnetopause currents, which dominate Jupiter's *external*

@@ -1,0 +1,25 @@
+ <div id="pl-status" role="status" aria-live="polite">Loading the verified declaration inventory…</div>
+ <section class="pl-controls" aria-label="Proof selection">
+  <label>Edition<select id="pl-edition"></select></label><label>Module<select id="pl-module"><option value="">All modules</option></select></label>
+  <label>Find a declaration<input id="pl-search" type="search" placeholder="Theorem, definition or generated helper"></label>
+  <label class="pl-declaration-select">Declaration<select id="pl-declaration"></select></label>
+ </section>
+ <div id="pl-coverage" class="pl-coverage"></div>
+ <section class="pl-workspace" aria-label="Complete proof explorer">
+  <div class="pl-graph-panel">
+   <header><h2 id="pl-title">Select a declaration</h2><div class="pl-actions"><button id="pl-term-view" type="button" aria-pressed="true">Term structure</button><button id="pl-deps-view" type="button" aria-pressed="false">All declaration links</button></div></header>
+   <div class="pl-actions" id="pl-roots"></div>
+   <div class="pl-canvas-wrap"><canvas id="pl-canvas" tabindex="0" aria-label="Navigable proof expression tree; an equivalent node list follows"></canvas></div>
+   <div class="pl-actions"><button id="pl-minus" type="button" aria-label="Zoom out">−</button><button id="pl-fit" type="button">Fit graph</button><button id="pl-plus" type="button" aria-label="Zoom in">+</button><button id="pl-parent" type="button">Parent</button><label>Shared node<input id="pl-occurrence" type="number" min="0" value="0"></label><button id="pl-go" type="button">Go</button></div>
+   <p id="pl-graph-note"></p><div id="pl-legend" class="pl-legend"></div>
+   <details><summary>Every declaration in this edition</summary><div id="pl-inventory"></div></details>
+  </div>
+  <aside class="pl-reader" aria-label="Compiled proof and expression details">
+   <h2>Compiled proof and expression details</h2><div id="pl-provenance"></div>
+   <div id="pl-downloads" class="pl-actions"></div>
+   <div id="pl-expression"></div>
+   <details id="pl-source-details" open><summary>Declaration type decoded by Lean</summary><div id="pl-source" class="pl-source" tabindex="0" role="region" aria-label="Scrollable decoded declaration type"></div></details>
+   <details><summary>Exact referenced declarations</summary><div id="pl-references"></div></details>
+   <details open><summary>Complete selected term, with sharing retained</summary><p>eN identifies a shared subterm. Bound-variable indices follow the selected path. This decodes the kernel graph; original tactic scripts remain private.</p><button id="pl-term-download" type="button">Download complete decoded term</button><p id="pl-row-count"></p><ol id="pl-rows"></ol><button id="pl-more" type="button">Show next 200</button></details>
+  </aside>
+ </section>

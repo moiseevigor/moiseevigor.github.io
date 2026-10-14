@@ -22,23 +22,23 @@ comments: true
 
 **The detector and physical interpretation have narrower limits.** Length-matched scoring removes the lift’s early filament-recovery advantage, tidal weighting hurts, and the proposed shortest-path formation interpretation fails for the tested transport models. These conclusions remain explicit below.
 
-**The tested hypotheses.** Every verdict is drawn from the experiment
+**The tested hypotheses.** Conclusions are based on the experiment
 data in `research/cosmic-web/` (full reports in `docs/`, start at `SYNTHESIS.md`);
 the narrative version, with interactive figures built from that data, is
 [Part 2]({% post_url 2026-07-04-cosmic-web-two-models %}).
 
 | Tested claim | Comparator or limit | Conclusion |
 |---|---|---|
-| **H1** · the orientation lift finds filaments better than the standard curvature detector | no gain on known-truth toys | **✗ Refuted.** Under honest, length-matched scoring the plain detector matches or beats the lift almost everywhere; they only tie at the sparsest sampling. An early, spectacular "win" was a flaw in *our own* scoring. |
+| **H1** · the orientation lift finds filaments better than the standard curvature detector | no gain on known-truth toys | **✗ Refuted.** Under length-matched scoring the plain detector matches or beats the lift almost everywhere; they only tie at the sparsest sampling. The initial advantage resulted from a scoring error. |
 | **H2** · feeding the detector the local gravity (tidal) frame sharpens it | tidal tuning ≤ plain tuning | **✗ Refuted.** Tidal weighting *hurts* — even handed a perfect tidal frame. |
-| **H3** · the webs sit on real mass and hot gas | stack signal below the standard skeleton | **△ Split verdict.** Both webs, drawn on 274,000 SDSS galaxies, sit on real hot gas (a 9σ stack — dominated by the tracer galaxies' own halos; the inter-halo *bridge* component is ≈2σ per instrument, matching published amplitudes). But by this bet's own comparative criterion the lift **loses**: the standard skeleton carries more of the gas signal on every statistic, and after halo masking the lift's spines retain essentially none. |
+| **H3** · the webs sit on real mass and hot gas | stack signal below the standard skeleton | **△ Mixed evidence.** Both webs, drawn on 274,000 SDSS galaxies, sit on real hot gas (a 9σ stack — dominated by the tracer galaxies' own halos; the inter-halo *bridge* component is ≈2σ per instrument, matching published amplitudes). Under the registered comparative criterion, the standard skeleton carries more of the gas signal on every statistic, and after halo masking the lift's spines retain essentially none. |
 | **H4** · matter *travels* along the geometry's shortest paths | geodesics can't beat a straight line | **✗ Refuted in the bulk.** Filaments *grow* by matter falling across them; the along-spine drainage toward nodes is real but weak in our measurements (⟨\|v̂·e₃\|⟩ ≈ 0.54–0.57, and our 1 h⁻¹Mpc grid under-resolves it). |
 | **T1** · *(theory)* the flow obeys a shortest-path (Jacobi-metric) variational principle | a derivation showing no such metric exists | **✗ Refuted, with a derivation.** In growth-factor time the Zel'dovich flow is free straight-line motion, and the adhesion model's variational principle is optimal transport with quadratic cost (Hopf–Lax), not geodesic flow of a potential-weighted metric: filaments are pile-ups of the flow, not paths of it ([Appendix B1](/mathematics/2026/07/06/cosmic-web-B1-transport-models/)). |
 
 **The full series.**
 
-- **The story** — **Part 1** *(this page)* the program and its verdicts · **[Part 2](/mathematics/2026/07/04/cosmic-web-two-models/)** the results for a general reader, with interactive figures from the real data · **[Part 3](/mathematics/2026/07/11/cosmic-web-spacetime-geometry/)** *From Cosmic Filaments to Curved Spacetime* — the same geometry, carried up to gravity itself.
-- **The machinery** — **[B1](/mathematics/2026/07/06/cosmic-web-B1-transport-models/)** transport models · **[B2](/mathematics/2026/07/07/cosmic-web-B2-tidal-frame/)** the tidal frame · **[B3](/mathematics/2026/07/08/cosmic-web-B3-honest-benchmarks/)** honest benchmarks · **[B4](/mathematics/2026/07/09/cosmic-web-B4-transverse-damping/)** the transverse-damping model · **[B5](/mathematics/2026/07/10/cosmic-web-B5-reading-gas-maps/)** reading the sky's hot gas.
+- **Results** — **Part 1** *(this page)* the tested hypotheses and conclusions · **[Part 2](/mathematics/2026/07/04/cosmic-web-two-models/)** the results for a general reader, with interactive figures from the real data · **[Part 3](/mathematics/2026/07/11/cosmic-web-spacetime-geometry/)** *From Cosmic Filaments to Curved Spacetime* — the same geometry, carried up to gravity itself.
+- **Methods** — **[B1](/mathematics/2026/07/06/cosmic-web-B1-transport-models/)** transport models · **[B2](/mathematics/2026/07/07/cosmic-web-B2-tidal-frame/)** the tidal frame · **[B3](/mathematics/2026/07/08/cosmic-web-B3-honest-benchmarks/)** matched benchmarks · **[B4](/mathematics/2026/07/09/cosmic-web-B4-transverse-damping/)** the transverse-damping model · **[B5](/mathematics/2026/07/10/cosmic-web-B5-reading-gas-maps/)** reading the sky's hot gas.
 
 ## Comparison scope
 
