@@ -1,6 +1,6 @@
 ---
 layout: distill
-last_modified_at: 2026-10-13
+last_modified_at: 2026-10-14
 title: "Hidden Protostars: Failed Gates and Unresolved Counterparts"
 subtitle: >
   A matched-control study fails its uncertainty gate, an embedding does not beat the stronger ranking baseline, and infrared alignments leave stellar identity unresolved.
@@ -132,6 +132,8 @@ The same fixed counterparts now have an independently checked colour diagnosis: 
 The native radio-position check now separates regional activity from a specific infrared point: historical maser **330.878-0.367** is **12.520″** from the first clump centre but **17.501″** from its best infrared counterpart. **0/3** fixed best points and **0/6** alternatives have a catalogue maser within the frozen one-arcsecond criterion. This limits point-specific interpretation; it does not establish starlessness, clump membership or a birth. [Read the radio context and coverage limit](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#radio-context).
 
 The fixed first-field gas–radio comparison adds only **0.1970 km/s** of common velocity-band overlap. The literal criterion passes, but the declared **+1 km/s sensitivity removes overlap**; maser peaks lie outside both gas bands. This is marginal regional context, not confirmed membership or support for the infrared point. All earlier failed gates remain. [Read the measured bands, failed sensitivity and metadata correction](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#gas-velocity).
+
+**14 October update:** all three approved NEOWISE requests returned **874 rows**. The frozen implementation yields **0/3**, but every delivered photo-quality flag has two characters while the registered contract requires four. The scientific quality verdict remains **unmeasured**; literal flags and the original failure are preserved. No corrected rerun or stellar birth is claimed. [Read the independent audit and full native evidence](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/#native-quality).
 
 <h3 id="historical-week">The original control study: frozen and stopped</h3>
 

@@ -1,6 +1,6 @@
 ---
 layout: distill
-last_modified_at: 2026-10-13
+last_modified_at: 2026-10-14
 title: "A shared embedding did not beat the stronger baseline"
 subtitle: >
   At eighteen reviews, the embedding recovers 14 of 27 chemistry positives and the nonlinear baseline 15. Coverage and counterpart checks leave physical classification unresolved.
@@ -31,7 +31,7 @@ A representation can learn common patterns across surveys. The useful test is wh
 
 That result has a sharper limitation: **none of the 27 qualifying chemistry-positive cases has the registered temporal input view**. The learning procedure can handle a missing observation, but it cannot supply the absent observation. [Verified result](/public/data/starbirth/missing-view/results.md).
 
-<nav class="sb-jump" aria-label="On this page"><a href="#equal-cost">The comparison</a><a href="#learning">What learned without labels</a><a href="#coverage">The coverage gap</a><a href="#temporal-diagnosis">Why the temporal view is missing</a><a href="#native-counterparts">Three native counterpart cases</a><a href="#irac-colours">The physical-colour check</a><a href="#radio-context">Nearby radio activity</a><a href="#gas-velocity">Does the gas velocity agree?</a><a href="#unknowns">The unknown denominator</a><a href="#next-evidence">Interpretation limits</a><a href="#evidence">Exact evidence</a></nav>
+<nav class="sb-jump" aria-label="On this page"><a href="#equal-cost">The comparison</a><a href="#learning">What learned without labels</a><a href="#coverage">The coverage gap</a><a href="#temporal-diagnosis">Why the temporal view is missing</a><a href="#native-counterparts">Three native counterpart cases</a><a href="#irac-colours">The physical-colour check</a><a href="#radio-context">Nearby radio activity</a><a href="#gas-velocity">Does the gas velocity agree?</a><a href="#native-quality">The native quality contract</a><a href="#unknowns">The unknown denominator</a><a href="#next-evidence">Interpretation limits</a><a href="#evidence">Exact evidence</a></nav>
 
 <h2 id="equal-cost">The same eighteen reviews</h2>
 
@@ -262,7 +262,29 @@ There is an explicit metadata correction. The original worker wrongly called nat
 
 An independent check used exact original fields, Decimal interval arithmetic and separate position calculations, verifying **three native records, six tracer fits and nine shift scenarios**. This verifies the calculation, not the physical association. The gas catalogue’s beam does not assign emission to the best infrared point, which remains **17.501 arcseconds** from the radio marker. **No ownership, stellar youth, birth, new model benefit or physical precision/recall is established.** All earlier failed gates, source alternatives and unknowns remain intact.
 
-Download [the verified assessment](/public/data/starbirth/gas-velocity/results.md), [corrected field meanings and all three cases](/public/data/starbirth/gas-velocity/starbirth-rgv-corrected_assessment.json), [unchanged original readout](/public/data/starbirth/gas-velocity/starbirth-rgv-analysis-summary.json), [three complete native molecular records](/public/data/starbirth/gas-velocity/starbirth-rgv-analysis-native_records.json.gz), [independent verification](/public/data/starbirth/gas-velocity/starbirth-rgv-verification-verification.json) and [frozen protocol, code and full source hashes](/public/data/starbirth/gas-velocity/README.md). Exact exports bind research revision `dc8d8ca3349d68f6c1d9b0aa5431ac894383ac10`. The native NEOWISE quality retry remains stopped pending explicit human approval; this publication acquired no observations or measurements.
+Download [the verified assessment](/public/data/starbirth/gas-velocity/results.md), [corrected field meanings and all three cases](/public/data/starbirth/gas-velocity/starbirth-rgv-corrected_assessment.json), [unchanged original readout](/public/data/starbirth/gas-velocity/starbirth-rgv-analysis-summary.json), [three complete native molecular records](/public/data/starbirth/gas-velocity/starbirth-rgv-analysis-native_records.json.gz), [independent verification](/public/data/starbirth/gas-velocity/starbirth-rgv-verification-verification.json) and [frozen protocol, code and full source hashes](/public/data/starbirth/gas-velocity/README.md). Exact exports bind research revision `dc8d8ca3349d68f6c1d9b0aa5431ac894383ac10`. This gas comparison used cached data. The separate NEOWISE resumption was subsequently explicitly approved; its qualified result appears below. Publication itself does not acquire measurements.
+
+<h2 id="native-quality">The measurements arrived. Their quality verdict is still unresolved.</h2>
+
+The three explicitly approved NEOWISE requests completed on 14 October: **874 native extraction rows**, split **312 / 273 / 289** across the same three clumps. Every raw VO cell agrees with the exported CSV; an independent checker reproduces the unchanged registered analysis. This resolves delivery, not source ownership.
+
+The frozen rule returns **0/3**, against the required 2/3. But the exact delivered `ph_qual` values contain **two characters in all 874 rows**, while the code and [official NEOWISE field description](https://irsa.ipac.caltech.edu/data/WISE/docs/release/NEOWISE/expsup/sec2_1a.html) specify four. The cause of this discrepancy remains unknown. The raw strings were preserved without adding missing characters or relaxing a cut.
+
+<div class="sb-result sb-result--negative"><strong>Insufficient evidence.</strong> The computational failure is reproducible; a scientifically validated quality/cadence verdict is still <strong>unmeasured</strong>. Two implementations can agree while sharing an incompatible input contract. This does not establish an absence of usable observations, young stars or births.</div>
+
+| Fixed clump | Native rows | Unique literal rows at best counterpart | Frozen accepted rows |
+|---|---:|---:|---:|
+| G330.8814−0.3656 | 312 | 307 | 0 |
+| G351.2258+0.6937 | 273 | 75 | 0 |
+| G353.4272−0.3734 | 289 | 68 | 0 |
+
+The first and third best points also fail the original profile-fit criterion in every matched row. The second has overlapping SNR and fit-quality rejections. These are descriptive tallies under the unchanged rule, not a revised cadence verdict. All six alternatives remain available; the separate red third point has zero unique matched extractions and cannot inherit the blue point’s history.
+
+The bounded unit stops here. No corrected scientific rerun or further request followed automatically. A future contract repair must be explicit, separately frozen and tested on now-consumed evidence. No ownership, physical classification, representative precision/recall, new star or stellar birth is established. The earlier ranking, control, colour and radio/gas failures remain unchanged.
+
+The new acquisition used 14.61 seconds; including the earlier 91.19-second failed TAP attempt, acquisition consumed 105.80 of the original 600 seconds. Three new requests means four cumulative attempts. The new research packet is about 1.3 MiB; sampled acquisition RSS peaked at 34.94 MiB with at least 50.65 GiB free. Monitoring is sampled process-group evidence and may miss shorter peaks.
+
+Download [the qualified result](/public/data/starbirth/native-quality/results.md), [all cases and exact flag audit](/public/data/starbirth/native-quality/assessment.json), and [every raw response, unchanged analysis, independent receipt, protocol and source hash](/public/data/starbirth/native-quality/README.md). Exact source revision: `92ece66f0d3a3b927a5146df7b6b90c5f361fae9`.
 
 <h2 id="unknowns">The full catalogue keeps the difficult denominator</h2>
 
