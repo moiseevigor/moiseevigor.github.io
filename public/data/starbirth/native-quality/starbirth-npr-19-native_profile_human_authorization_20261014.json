@@ -1,0 +1,107 @@
+{
+  "schema": "native-profile-explicit-human-authorization/1",
+  "recorded_utc": "2026-10-14T13:21:28.642736+00:00",
+  "human_message": "I approve the three bounded NEOWISE requests. Please resume the research, keep monitoring disk space, and update the app and blog with verified results.",
+  "human_approval_received": true,
+  "approved_frozen_revision": "e6750e5da7199c7fb9ea68cc7d2e96733e013312",
+  "amendment_sha256": "6543c839c450757cd37bc99e404718f04f1e13e1c08509936eb55186cc29728d",
+  "approved_requests": [
+    {
+      "case_id": "HIGALBM330.8814-0.3656",
+      "url": "https://irsa.ipac.caltech.edu/cgi-bin/Gator/nph-query?catalog=neowiser_p1bs_psd&spatial=cone&objstr=242.585210+-52.099141&radius=12&radunits=arcsec&outfmt=3&outrows=5001&order=source_id&selcols=cntr%2Csource_id%2Cscan_id%2Cframe_num%2Cra%2Cdec%2Csigra%2Csigdec%2Csigradec%2Cmjd%2Cw2mpro%2Cw2sigmpro%2Cw2snr%2Cw2rchi2%2Cw2flux%2Cw2sigflux%2Cw2sat%2Cw2fitr%2Cnb%2Cna%2Ccc_flags%2Cw2cc_map%2Cph_qual%2Cqual_frame%2Cqi_fact%2Csaa_sep%2Cmoon_masked%2Cw2frtr%2Csso_flg",
+      "parameters": {
+        "catalog": "neowiser_p1bs_psd",
+        "spatial": "cone",
+        "objstr": "242.585210 -52.099141",
+        "radius": "12",
+        "radunits": "arcsec",
+        "outfmt": "3",
+        "outrows": "5001",
+        "order": "source_id",
+        "selcols": "cntr,source_id,scan_id,frame_num,ra,dec,sigra,sigdec,sigradec,mjd,w2mpro,w2sigmpro,w2snr,w2rchi2,w2flux,w2sigflux,w2sat,w2fitr,nb,na,cc_flags,w2cc_map,ph_qual,qual_frame,qi_fact,saa_sep,moon_masked,w2frtr,sso_flg"
+      },
+      "raw_response_file": "q00.xml",
+      "response_file": "q00.csv"
+    },
+    {
+      "case_id": "HIGALBM351.2258+0.6937",
+      "url": "https://irsa.ipac.caltech.edu/cgi-bin/Gator/nph-query?catalog=neowiser_p1bs_psd&spatial=cone&objstr=260.038850+-35.912856&radius=12&radunits=arcsec&outfmt=3&outrows=5001&order=source_id&selcols=cntr%2Csource_id%2Cscan_id%2Cframe_num%2Cra%2Cdec%2Csigra%2Csigdec%2Csigradec%2Cmjd%2Cw2mpro%2Cw2sigmpro%2Cw2snr%2Cw2rchi2%2Cw2flux%2Cw2sigflux%2Cw2sat%2Cw2fitr%2Cnb%2Cna%2Ccc_flags%2Cw2cc_map%2Cph_qual%2Cqual_frame%2Cqi_fact%2Csaa_sep%2Cmoon_masked%2Cw2frtr%2Csso_flg",
+      "parameters": {
+        "catalog": "neowiser_p1bs_psd",
+        "spatial": "cone",
+        "objstr": "260.038850 -35.912856",
+        "radius": "12",
+        "radunits": "arcsec",
+        "outfmt": "3",
+        "outrows": "5001",
+        "order": "source_id",
+        "selcols": "cntr,source_id,scan_id,frame_num,ra,dec,sigra,sigdec,sigradec,mjd,w2mpro,w2sigmpro,w2snr,w2rchi2,w2flux,w2sigflux,w2sat,w2fitr,nb,na,cc_flags,w2cc_map,ph_qual,qual_frame,qi_fact,saa_sep,moon_masked,w2frtr,sso_flg"
+      },
+      "raw_response_file": "q01.xml",
+      "response_file": "q01.csv"
+    },
+    {
+      "case_id": "HIGALBM353.4272-0.3734",
+      "url": "https://irsa.ipac.caltech.edu/cgi-bin/Gator/nph-query?catalog=neowiser_p1bs_psd&spatial=cone&objstr=262.634300+-34.688756&radius=12&radunits=arcsec&outfmt=3&outrows=5001&order=source_id&selcols=cntr%2Csource_id%2Cscan_id%2Cframe_num%2Cra%2Cdec%2Csigra%2Csigdec%2Csigradec%2Cmjd%2Cw2mpro%2Cw2sigmpro%2Cw2snr%2Cw2rchi2%2Cw2flux%2Cw2sigflux%2Cw2sat%2Cw2fitr%2Cnb%2Cna%2Ccc_flags%2Cw2cc_map%2Cph_qual%2Cqual_frame%2Cqi_fact%2Csaa_sep%2Cmoon_masked%2Cw2frtr%2Csso_flg",
+      "parameters": {
+        "catalog": "neowiser_p1bs_psd",
+        "spatial": "cone",
+        "objstr": "262.634300 -34.688756",
+        "radius": "12",
+        "radunits": "arcsec",
+        "outfmt": "3",
+        "outrows": "5001",
+        "order": "source_id",
+        "selcols": "cntr,source_id,scan_id,frame_num,ra,dec,sigra,sigdec,sigradec,mjd,w2mpro,w2sigmpro,w2snr,w2rchi2,w2flux,w2sigflux,w2sat,w2fitr,nb,na,cc_flags,w2cc_map,ph_qual,qual_frame,qi_fact,saa_sep,moon_masked,w2frtr,sso_flg"
+      },
+      "raw_response_file": "q02.xml",
+      "response_file": "q02.csv"
+    }
+  ],
+  "maximum_new_requests": 3,
+  "maximum_cumulative_requests": 4,
+  "original_acquisition_elapsed_seconds": 91.18965533305891,
+  "remaining_acquisition_wall_seconds": 508,
+  "free_bytes_before_acquisition": 54393827328,
+  "frozen_code": [
+    {
+      "path": "research/acquire_native_profile_gator_20261013.py",
+      "bytes": 5812,
+      "sha256": "26df452358cb30d754a3ffae15bc586a279479e21dfadda8e35deb24c5ac7c72"
+    },
+    {
+      "path": "research/verify_native_profile_gator_transport_20261013.py",
+      "bytes": 5437,
+      "sha256": "227b56d0dcb6564f4f44dffcd492c7c0dd53eb6c7cfe740f1e3a10b5a9635c19"
+    },
+    {
+      "path": "research/analyze_native_profile_quality_20261013.py",
+      "bytes": 8515,
+      "sha256": "152864846811d537a738bd25059da4937203cb8deeca42458413e91d76d2ac20"
+    },
+    {
+      "path": "research/verify_native_profile_quality_20261013.py",
+      "bytes": 8962,
+      "sha256": "7bc9d0f7dfad9a88b25367b743fefa0a549964ba27869774be5ef17be1609d7a"
+    },
+    {
+      "path": "artifacts/native_profile_gator_amendment_20261013.json",
+      "bytes": 7860,
+      "sha256": "6543c839c450757cd37bc99e404718f04f1e13e1c08509936eb55186cc29728d"
+    }
+  ],
+  "inputs_verified": 17,
+  "gator_stages_absent_before_acquisition": [
+    "native_profile_gator_acquisition_20261013",
+    "native_profile_gator_transport_verification_20261013",
+    "native_profile_gator_analysis_20261013",
+    "native_profile_gator_quality_verification_20261013"
+  ],
+  "historical_rejection_preserved": "artifacts/native_profile_gator_approval_status_20261013.json",
+  "research_resumed_by_human": true,
+  "native_goal_api_status_observed": "blocked; API cannot resume; human approval clears the execution blocker",
+  "scientific_thresholds_unchanged": true,
+  "automatic_successor_authorized": false,
+  "atlas_e155_e121_archive_restrictions_unchanged": true,
+  "physical_validation": false
+}

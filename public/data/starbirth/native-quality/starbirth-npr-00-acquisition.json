@@ -1,0 +1,799 @@
+{
+  "schema": "native-profile-gator-amended-acquisition/1",
+  "registration_sha256": "64fcb5ae85c18a2b8560ced1dce74f597350a342266420bfb5689f47365b1363",
+  "transport_amendment_sha256": "6543c839c450757cd37bc99e404718f04f1e13e1c08509936eb55186cc29728d",
+  "requests": [
+    {
+      "case_id": "HIGALBM330.8814-0.3656",
+      "url": "https://irsa.ipac.caltech.edu/cgi-bin/Gator/nph-query?catalog=neowiser_p1bs_psd&spatial=cone&objstr=242.585210+-52.099141&radius=12&radunits=arcsec&outfmt=3&outrows=5001&order=source_id&selcols=cntr%2Csource_id%2Cscan_id%2Cframe_num%2Cra%2Cdec%2Csigra%2Csigdec%2Csigradec%2Cmjd%2Cw2mpro%2Cw2sigmpro%2Cw2snr%2Cw2rchi2%2Cw2flux%2Cw2sigflux%2Cw2sat%2Cw2fitr%2Cnb%2Cna%2Ccc_flags%2Cw2cc_map%2Cph_qual%2Cqual_frame%2Cqi_fact%2Csaa_sep%2Cmoon_masked%2Cw2frtr%2Csso_flg",
+      "parameters": {
+        "catalog": "neowiser_p1bs_psd",
+        "spatial": "cone",
+        "objstr": "242.585210 -52.099141",
+        "radius": "12",
+        "radunits": "arcsec",
+        "outfmt": "3",
+        "outrows": "5001",
+        "order": "source_id",
+        "selcols": "cntr,source_id,scan_id,frame_num,ra,dec,sigra,sigdec,sigradec,mjd,w2mpro,w2sigmpro,w2snr,w2rchi2,w2flux,w2sigflux,w2sat,w2fitr,nb,na,cc_flags,w2cc_map,ph_qual,qual_frame,qi_fact,saa_sep,moon_masked,w2frtr,sso_flg"
+      },
+      "raw_response_file": "q00.xml",
+      "response_file": "q00.csv",
+      "status": "complete_native_csv",
+      "requested_utc": "2026-10-14T13:22:06.539303+00:00",
+      "http_status": 200,
+      "content_type": "text/xml",
+      "raw_bytes": 342643,
+      "raw_sha256": "5d050b5e38db43642871adf63ed383bcefa5c3106b1e89ee6711cd5198be43c1",
+      "bytes": 88582,
+      "sha256": "6a19dcce3d47afb18776cab19c7904b1a438e3f09b9876b85187abe3fad9089c",
+      "rows": 312,
+      "native_field_metadata": [
+        {
+          "name": "cntr",
+          "datatype": "long",
+          "ucd": "meta.record;meta.main",
+          "unit": "null"
+        },
+        {
+          "name": "source_id",
+          "datatype": "char",
+          "arraysize": "*",
+          "ucd": "meta.id;meta.main",
+          "unit": "null"
+        },
+        {
+          "name": "scan_id",
+          "datatype": "char",
+          "arraysize": "*",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "frame_num",
+          "datatype": "int",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "ra",
+          "datatype": "double",
+          "precision": "7",
+          "ucd": "pos.eq.ra;meta.main",
+          "unit": "deg",
+          "width": "11"
+        },
+        {
+          "name": "dec",
+          "datatype": "double",
+          "precision": "7",
+          "ucd": "pos.eq.dec;meta.main",
+          "unit": "deg",
+          "width": "11"
+        },
+        {
+          "name": "clon",
+          "datatype": "char",
+          "arraysize": "*"
+        },
+        {
+          "name": "clat",
+          "datatype": "char",
+          "arraysize": "*"
+        },
+        {
+          "name": "sigra",
+          "datatype": "double",
+          "precision": "4",
+          "ucd": "null",
+          "unit": "arcsec",
+          "width": "8"
+        },
+        {
+          "name": "sigdec",
+          "datatype": "double",
+          "precision": "4",
+          "ucd": "null",
+          "unit": "arcsec",
+          "width": "8"
+        },
+        {
+          "name": "sigradec",
+          "datatype": "double",
+          "precision": "4",
+          "ucd": "null",
+          "unit": "arcsec",
+          "width": "9"
+        },
+        {
+          "name": "mjd",
+          "datatype": "double",
+          "precision": "8",
+          "ucd": "time;obs.exposure",
+          "unit": "d",
+          "width": "14"
+        },
+        {
+          "name": "w2mpro",
+          "datatype": "double",
+          "precision": "3",
+          "ucd": "phot.mag;em.IR.4-8um",
+          "unit": "mag",
+          "width": "7"
+        },
+        {
+          "name": "w2sigmpro",
+          "datatype": "double",
+          "precision": "3",
+          "ucd": "stat.error;phot.mag;em.IR.4-8um",
+          "unit": "mag",
+          "width": "5"
+        },
+        {
+          "name": "w2snr",
+          "datatype": "double",
+          "precision": "1",
+          "ucd": "null",
+          "unit": "null",
+          "width": "7"
+        },
+        {
+          "name": "w2rchi2",
+          "datatype": "double",
+          "precision": "3",
+          "ucd": "null",
+          "unit": "null",
+          "width": "10"
+        },
+        {
+          "name": "w2flux",
+          "datatype": "double",
+          "precision": "4",
+          "ucd": "null",
+          "unit": "count",
+          "width": "11"
+        },
+        {
+          "name": "w2sigflux",
+          "datatype": "double",
+          "precision": "4",
+          "ucd": "null",
+          "unit": "count",
+          "width": "11"
+        },
+        {
+          "name": "w2sat",
+          "datatype": "double",
+          "precision": "5",
+          "ucd": "null",
+          "unit": "null",
+          "width": "8"
+        },
+        {
+          "name": "w2fitr",
+          "datatype": "double",
+          "precision": "2",
+          "ucd": "null",
+          "unit": "arcsec",
+          "width": "7"
+        },
+        {
+          "name": "nb",
+          "datatype": "int",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "na",
+          "datatype": "int",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "cc_flags",
+          "datatype": "char",
+          "arraysize": "*",
+          "ucd": "meta.code.qual",
+          "unit": "null"
+        },
+        {
+          "name": "w2cc_map",
+          "datatype": "int",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "ph_qual",
+          "datatype": "char",
+          "arraysize": "*",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "qual_frame",
+          "datatype": "int",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "qi_fact",
+          "datatype": "double",
+          "precision": "1",
+          "ucd": "null",
+          "unit": "null",
+          "width": "3"
+        },
+        {
+          "name": "saa_sep",
+          "datatype": "double",
+          "precision": "3",
+          "ucd": "null",
+          "unit": "deg",
+          "width": "7"
+        },
+        {
+          "name": "moon_masked",
+          "datatype": "char",
+          "arraysize": "*",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "w2frtr",
+          "datatype": "char",
+          "arraysize": "*",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "sso_flg",
+          "datatype": "int",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "dist",
+          "datatype": "double",
+          "unit": "arcsec"
+        },
+        {
+          "name": "angle",
+          "datatype": "double",
+          "unit": "deg"
+        }
+      ]
+    },
+    {
+      "case_id": "HIGALBM351.2258+0.6937",
+      "url": "https://irsa.ipac.caltech.edu/cgi-bin/Gator/nph-query?catalog=neowiser_p1bs_psd&spatial=cone&objstr=260.038850+-35.912856&radius=12&radunits=arcsec&outfmt=3&outrows=5001&order=source_id&selcols=cntr%2Csource_id%2Cscan_id%2Cframe_num%2Cra%2Cdec%2Csigra%2Csigdec%2Csigradec%2Cmjd%2Cw2mpro%2Cw2sigmpro%2Cw2snr%2Cw2rchi2%2Cw2flux%2Cw2sigflux%2Cw2sat%2Cw2fitr%2Cnb%2Cna%2Ccc_flags%2Cw2cc_map%2Cph_qual%2Cqual_frame%2Cqi_fact%2Csaa_sep%2Cmoon_masked%2Cw2frtr%2Csso_flg",
+      "parameters": {
+        "catalog": "neowiser_p1bs_psd",
+        "spatial": "cone",
+        "objstr": "260.038850 -35.912856",
+        "radius": "12",
+        "radunits": "arcsec",
+        "outfmt": "3",
+        "outrows": "5001",
+        "order": "source_id",
+        "selcols": "cntr,source_id,scan_id,frame_num,ra,dec,sigra,sigdec,sigradec,mjd,w2mpro,w2sigmpro,w2snr,w2rchi2,w2flux,w2sigflux,w2sat,w2fitr,nb,na,cc_flags,w2cc_map,ph_qual,qual_frame,qi_fact,saa_sep,moon_masked,w2frtr,sso_flg"
+      },
+      "raw_response_file": "q01.xml",
+      "response_file": "q01.csv",
+      "status": "complete_native_csv",
+      "requested_utc": "2026-10-14T13:22:10.701290+00:00",
+      "http_status": 200,
+      "content_type": "text/xml",
+      "raw_bytes": 301329,
+      "raw_sha256": "5a1c984ebf7d5808cc945ee65c367dffb1eb83a1555ccb6158270cdac2874ede",
+      "bytes": 78822,
+      "sha256": "d6f6ae9d5a2c62d9194dc516fe018c611269945e99c8622aaaa14279cd254d1f",
+      "rows": 273,
+      "native_field_metadata": [
+        {
+          "name": "cntr",
+          "datatype": "long",
+          "ucd": "meta.record;meta.main",
+          "unit": "null"
+        },
+        {
+          "name": "source_id",
+          "datatype": "char",
+          "arraysize": "*",
+          "ucd": "meta.id;meta.main",
+          "unit": "null"
+        },
+        {
+          "name": "scan_id",
+          "datatype": "char",
+          "arraysize": "*",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "frame_num",
+          "datatype": "int",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "ra",
+          "datatype": "double",
+          "precision": "7",
+          "ucd": "pos.eq.ra;meta.main",
+          "unit": "deg",
+          "width": "11"
+        },
+        {
+          "name": "dec",
+          "datatype": "double",
+          "precision": "7",
+          "ucd": "pos.eq.dec;meta.main",
+          "unit": "deg",
+          "width": "11"
+        },
+        {
+          "name": "clon",
+          "datatype": "char",
+          "arraysize": "*"
+        },
+        {
+          "name": "clat",
+          "datatype": "char",
+          "arraysize": "*"
+        },
+        {
+          "name": "sigra",
+          "datatype": "double",
+          "precision": "4",
+          "ucd": "null",
+          "unit": "arcsec",
+          "width": "8"
+        },
+        {
+          "name": "sigdec",
+          "datatype": "double",
+          "precision": "4",
+          "ucd": "null",
+          "unit": "arcsec",
+          "width": "8"
+        },
+        {
+          "name": "sigradec",
+          "datatype": "double",
+          "precision": "4",
+          "ucd": "null",
+          "unit": "arcsec",
+          "width": "9"
+        },
+        {
+          "name": "mjd",
+          "datatype": "double",
+          "precision": "8",
+          "ucd": "time;obs.exposure",
+          "unit": "d",
+          "width": "14"
+        },
+        {
+          "name": "w2mpro",
+          "datatype": "double",
+          "precision": "3",
+          "ucd": "phot.mag;em.IR.4-8um",
+          "unit": "mag",
+          "width": "7"
+        },
+        {
+          "name": "w2sigmpro",
+          "datatype": "double",
+          "precision": "3",
+          "ucd": "stat.error;phot.mag;em.IR.4-8um",
+          "unit": "mag",
+          "width": "5"
+        },
+        {
+          "name": "w2snr",
+          "datatype": "double",
+          "precision": "1",
+          "ucd": "null",
+          "unit": "null",
+          "width": "7"
+        },
+        {
+          "name": "w2rchi2",
+          "datatype": "double",
+          "precision": "3",
+          "ucd": "null",
+          "unit": "null",
+          "width": "10"
+        },
+        {
+          "name": "w2flux",
+          "datatype": "double",
+          "precision": "4",
+          "ucd": "null",
+          "unit": "count",
+          "width": "11"
+        },
+        {
+          "name": "w2sigflux",
+          "datatype": "double",
+          "precision": "4",
+          "ucd": "null",
+          "unit": "count",
+          "width": "11"
+        },
+        {
+          "name": "w2sat",
+          "datatype": "double",
+          "precision": "5",
+          "ucd": "null",
+          "unit": "null",
+          "width": "8"
+        },
+        {
+          "name": "w2fitr",
+          "datatype": "double",
+          "precision": "2",
+          "ucd": "null",
+          "unit": "arcsec",
+          "width": "7"
+        },
+        {
+          "name": "nb",
+          "datatype": "int",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "na",
+          "datatype": "int",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "cc_flags",
+          "datatype": "char",
+          "arraysize": "*",
+          "ucd": "meta.code.qual",
+          "unit": "null"
+        },
+        {
+          "name": "w2cc_map",
+          "datatype": "int",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "ph_qual",
+          "datatype": "char",
+          "arraysize": "*",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "qual_frame",
+          "datatype": "int",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "qi_fact",
+          "datatype": "double",
+          "precision": "1",
+          "ucd": "null",
+          "unit": "null",
+          "width": "3"
+        },
+        {
+          "name": "saa_sep",
+          "datatype": "double",
+          "precision": "3",
+          "ucd": "null",
+          "unit": "deg",
+          "width": "7"
+        },
+        {
+          "name": "moon_masked",
+          "datatype": "char",
+          "arraysize": "*",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "w2frtr",
+          "datatype": "char",
+          "arraysize": "*",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "sso_flg",
+          "datatype": "int",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "dist",
+          "datatype": "double",
+          "unit": "arcsec"
+        },
+        {
+          "name": "angle",
+          "datatype": "double",
+          "unit": "deg"
+        }
+      ]
+    },
+    {
+      "case_id": "HIGALBM353.4272-0.3734",
+      "url": "https://irsa.ipac.caltech.edu/cgi-bin/Gator/nph-query?catalog=neowiser_p1bs_psd&spatial=cone&objstr=262.634300+-34.688756&radius=12&radunits=arcsec&outfmt=3&outrows=5001&order=source_id&selcols=cntr%2Csource_id%2Cscan_id%2Cframe_num%2Cra%2Cdec%2Csigra%2Csigdec%2Csigradec%2Cmjd%2Cw2mpro%2Cw2sigmpro%2Cw2snr%2Cw2rchi2%2Cw2flux%2Cw2sigflux%2Cw2sat%2Cw2fitr%2Cnb%2Cna%2Ccc_flags%2Cw2cc_map%2Cph_qual%2Cqual_frame%2Cqi_fact%2Csaa_sep%2Cmoon_masked%2Cw2frtr%2Csso_flg",
+      "parameters": {
+        "catalog": "neowiser_p1bs_psd",
+        "spatial": "cone",
+        "objstr": "262.634300 -34.688756",
+        "radius": "12",
+        "radunits": "arcsec",
+        "outfmt": "3",
+        "outrows": "5001",
+        "order": "source_id",
+        "selcols": "cntr,source_id,scan_id,frame_num,ra,dec,sigra,sigdec,sigradec,mjd,w2mpro,w2sigmpro,w2snr,w2rchi2,w2flux,w2sigflux,w2sat,w2fitr,nb,na,cc_flags,w2cc_map,ph_qual,qual_frame,qi_fact,saa_sep,moon_masked,w2frtr,sso_flg"
+      },
+      "raw_response_file": "q02.xml",
+      "response_file": "q02.csv",
+      "status": "complete_native_csv",
+      "requested_utc": "2026-10-14T13:22:15.619627+00:00",
+      "http_status": 200,
+      "content_type": "text/xml",
+      "raw_bytes": 321176,
+      "raw_sha256": "690adc9b78c0de0c97e4f68bfbe896a1c0642c073bf9e692c33bd714c6615f88",
+      "bytes": 85699,
+      "sha256": "947c0452dbda4298d93e2291dcae691f5006f9f497b041058e7d7787ee93d668",
+      "rows": 289,
+      "native_field_metadata": [
+        {
+          "name": "cntr",
+          "datatype": "long",
+          "ucd": "meta.record;meta.main",
+          "unit": "null"
+        },
+        {
+          "name": "source_id",
+          "datatype": "char",
+          "arraysize": "*",
+          "ucd": "meta.id;meta.main",
+          "unit": "null"
+        },
+        {
+          "name": "scan_id",
+          "datatype": "char",
+          "arraysize": "*",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "frame_num",
+          "datatype": "int",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "ra",
+          "datatype": "double",
+          "precision": "7",
+          "ucd": "pos.eq.ra;meta.main",
+          "unit": "deg",
+          "width": "11"
+        },
+        {
+          "name": "dec",
+          "datatype": "double",
+          "precision": "7",
+          "ucd": "pos.eq.dec;meta.main",
+          "unit": "deg",
+          "width": "11"
+        },
+        {
+          "name": "clon",
+          "datatype": "char",
+          "arraysize": "*"
+        },
+        {
+          "name": "clat",
+          "datatype": "char",
+          "arraysize": "*"
+        },
+        {
+          "name": "sigra",
+          "datatype": "double",
+          "precision": "4",
+          "ucd": "null",
+          "unit": "arcsec",
+          "width": "8"
+        },
+        {
+          "name": "sigdec",
+          "datatype": "double",
+          "precision": "4",
+          "ucd": "null",
+          "unit": "arcsec",
+          "width": "8"
+        },
+        {
+          "name": "sigradec",
+          "datatype": "double",
+          "precision": "4",
+          "ucd": "null",
+          "unit": "arcsec",
+          "width": "9"
+        },
+        {
+          "name": "mjd",
+          "datatype": "double",
+          "precision": "8",
+          "ucd": "time;obs.exposure",
+          "unit": "d",
+          "width": "14"
+        },
+        {
+          "name": "w2mpro",
+          "datatype": "double",
+          "precision": "3",
+          "ucd": "phot.mag;em.IR.4-8um",
+          "unit": "mag",
+          "width": "7"
+        },
+        {
+          "name": "w2sigmpro",
+          "datatype": "double",
+          "precision": "3",
+          "ucd": "stat.error;phot.mag;em.IR.4-8um",
+          "unit": "mag",
+          "width": "5"
+        },
+        {
+          "name": "w2snr",
+          "datatype": "double",
+          "precision": "1",
+          "ucd": "null",
+          "unit": "null",
+          "width": "7"
+        },
+        {
+          "name": "w2rchi2",
+          "datatype": "double",
+          "precision": "3",
+          "ucd": "null",
+          "unit": "null",
+          "width": "10"
+        },
+        {
+          "name": "w2flux",
+          "datatype": "double",
+          "precision": "4",
+          "ucd": "null",
+          "unit": "count",
+          "width": "11"
+        },
+        {
+          "name": "w2sigflux",
+          "datatype": "double",
+          "precision": "4",
+          "ucd": "null",
+          "unit": "count",
+          "width": "11"
+        },
+        {
+          "name": "w2sat",
+          "datatype": "double",
+          "precision": "5",
+          "ucd": "null",
+          "unit": "null",
+          "width": "8"
+        },
+        {
+          "name": "w2fitr",
+          "datatype": "double",
+          "precision": "2",
+          "ucd": "null",
+          "unit": "arcsec",
+          "width": "7"
+        },
+        {
+          "name": "nb",
+          "datatype": "int",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "na",
+          "datatype": "int",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "cc_flags",
+          "datatype": "char",
+          "arraysize": "*",
+          "ucd": "meta.code.qual",
+          "unit": "null"
+        },
+        {
+          "name": "w2cc_map",
+          "datatype": "int",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "ph_qual",
+          "datatype": "char",
+          "arraysize": "*",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "qual_frame",
+          "datatype": "int",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "qi_fact",
+          "datatype": "double",
+          "precision": "1",
+          "ucd": "null",
+          "unit": "null",
+          "width": "3"
+        },
+        {
+          "name": "saa_sep",
+          "datatype": "double",
+          "precision": "3",
+          "ucd": "null",
+          "unit": "deg",
+          "width": "7"
+        },
+        {
+          "name": "moon_masked",
+          "datatype": "char",
+          "arraysize": "*",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "w2frtr",
+          "datatype": "char",
+          "arraysize": "*",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "sso_flg",
+          "datatype": "int",
+          "ucd": "null",
+          "unit": "null"
+        },
+        {
+          "name": "dist",
+          "datatype": "double",
+          "unit": "arcsec"
+        },
+        {
+          "name": "angle",
+          "datatype": "double",
+          "unit": "deg"
+        }
+      ]
+    }
+  ],
+  "complete": true,
+  "raw_response_bytes": 965148,
+  "response_bytes": 253103,
+  "normalized_csv_bytes": 253103,
+  "literal_url_retries": 0,
+  "deliberate_amended_resumptions": 1,
+  "previous_terminal_attempt_preserved": true,
+  "coordinate_list_uploads": 0,
+  "physical_validation": false,
+  "new_stars": 0,
+  "new_births": 0,
+  "elapsed_seconds": 14.233581790933385
+}

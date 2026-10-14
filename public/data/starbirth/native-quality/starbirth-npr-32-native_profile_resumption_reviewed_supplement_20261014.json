@@ -1,0 +1,92 @@
+{
+  "schema": "native-profile-resumption-reviewed-supplement/1",
+  "source_assessment_sha256": "9245ccdb6b848d4d58e689e35d0a007817906af63ebf8e79ba684fc829387a72",
+  "preserved_prior_graph_blobs": [
+    {
+      "path": "artifacts/graph/irac_colour_alternative_reviewed_note_20261012.json",
+      "sha256": "ecfe4f53f61a24434dedb14d8d5a0a7812ec67dd2cd8cbc8eb5974e4373ba886"
+    },
+    {
+      "path": "artifacts/graph/irac_colour_reviewed_supplement_20261012.json",
+      "sha256": "94dc7bfaae108acd2a446ad3d55a6a1a76ffaec318061aae8b0dbc238d97d9f4"
+    },
+    {
+      "path": "artifacts/graph/multisurvey_reviewed_supplement_20261012.json",
+      "sha256": "5fbab90d8c5729aa68b4fc3bad2916f7749dc426206e1f9a7e3dcff33bb1c2e3"
+    },
+    {
+      "path": "artifacts/graph/native_glimpse_reviewed_supplement_20261012.json",
+      "sha256": "6f05b7ccde905f5f0afac8d37170fa7b178fb91a4150f2d5de8e22732726e803"
+    },
+    {
+      "path": "artifacts/graph/native_mmb_position_reviewed_supplement_20261013.json",
+      "sha256": "653cacbc06714e40a5b6e24a75e15b66719728aa16b678c9c66ff4b3d1137cc0"
+    },
+    {
+      "path": "artifacts/graph/native_neowise_header_operational_note_20261013.json",
+      "sha256": "6481192a5dc949fc1ac087264368d38a06706e1714578275b1be2b4bef018803"
+    },
+    {
+      "path": "artifacts/graph/native_profile_gator_approval_note_20261013.json",
+      "sha256": "5953b72a655e796465617f7908e585c5fa6fb17e77dd30311c508d88fa02a462"
+    },
+    {
+      "path": "artifacts/graph/native_profile_quality_transport_note_20261013.json",
+      "sha256": "b5fdac64a4a04f8fce101ee0b625d73b4b5e8f50f9f37ff24e017f901dfe2ed9"
+    },
+    {
+      "path": "artifacts/graph/radio_gas_velocity_reviewed_supplement_20261013.json",
+      "sha256": "926f5d1bb62564ffa4797866cbbe9ffbf4972169077929901c0e2864ead13fe0"
+    },
+    {
+      "path": "artifacts/graph/temporal_missingness_reviewed_supplement_20261012.json",
+      "sha256": "9e8dd86cf6329e3a48134a6814b87eba009ae8da3ffc32a29f39ce715e9db55a"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "F:NPR20261014:delivery",
+      "type": "operational_evidence",
+      "label": "Three approved cones delivered 874 exact native rows",
+      "sources": [
+        "artifacts/native_profile_gator_transport_verification_20261013/verification.json"
+      ]
+    },
+    {
+      "id": "F:NPR20261014:frozen-rule",
+      "type": "finding",
+      "status": "computational_failure_qualified_by_native_contract_mismatch",
+      "label": "Frozen rule returns 0/3; scientifically valid cadence decision unresolved",
+      "sources": [
+        "artifacts/native_profile_gator_analysis_20261013/summary.json",
+        "artifacts/native_profile_gator_quality_verification_20261013/verification.json"
+      ]
+    },
+    {
+      "id": "C:NPR20261014:flag-contract",
+      "type": "qualification",
+      "status": "insufficient_evidence",
+      "label": "All 874 literal photo-quality flags have two characters; frozen code and official contract require four",
+      "sources": [
+        "artifacts/native_profile_resumption_assessment_20261014.json",
+        "artifacts/native_profile_resumption_assessment_verification_20261014.json",
+        "docs/NATIVE_PROFILE_RESUMPTION_RESULTS_20261014.md"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "C:NPR20261014:flag-contract",
+      "target": "F:NPR20261014:frozen-rule",
+      "relation": "qualifies"
+    }
+  ],
+  "physical_validation": false,
+  "new_stars": 0,
+  "new_births": 0,
+  "models_changed": false,
+  "all_six_alternatives_retained": true,
+  "automatic_successor_authorized": false,
+  "goal_complete": false,
+  "archive_not_merged": true
+}

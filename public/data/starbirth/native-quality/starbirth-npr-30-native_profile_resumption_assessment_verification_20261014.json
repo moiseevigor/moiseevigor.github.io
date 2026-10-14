@@ -1,0 +1,11 @@
+{
+  "schema": "native-profile-resumption-independent-qualification/1",
+  "verified": true,
+  "assessment_sha256": "9245ccdb6b848d4d58e689e35d0a007817906af63ebf8e79ba684fc829387a72",
+  "report_sha256": "bdfc84d6e6fb46c41bf159e494ce192bfc3b4b23c9c698e72ab4501db0321ffc",
+  "native_vo_ph_qual_two_character_rows_checked": 874,
+  "all_six_alternatives_preserved": true,
+  "no_corrected_rerun": true,
+  "scientifically_validated_gate": null,
+  "physical_validation": false
+}

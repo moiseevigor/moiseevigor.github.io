@@ -1,0 +1,169 @@
+{
+  "schema": "native-profile-quality-diagnostic/1",
+  "registration_sha256": "64fcb5ae85c18a2b8560ced1dce74f597350a342266420bfb5689f47365b1363",
+  "acquisition_sha256": "028274e17cc578f76e189770d8b1b1c1c9878d5568cdc99c87f162c6f7a30471",
+  "detections_sha256": "5a35cc259bc86bdab6179c2f71fbec5fd485bd24028405d815f6035996cc4237",
+  "cases": [
+    {
+      "case_id": "HIGALBM330.8814-0.3656",
+      "native_rows": 312,
+      "image_exposure_joined_rows": 0,
+      "geometry_ambiguous_or_unmatched_rows": 5,
+      "catalogue_alternatives": [
+        {
+          "designation": "SSTGLMC G330.8829-00.3661",
+          "cntr": "23834137",
+          "fixed_best": true,
+          "unique_geometric_rows": 307,
+          "strict_quality_rows": 0,
+          "supported_epoch_groups": 0,
+          "supported_reported_span_days": null,
+          "conservative_pipeline_cadence_support": false,
+          "rejection_counts": {
+            "w2_profile_fit_not_in_0_to_2": 307,
+            "qi_fact_strict_requirement": 286,
+            "ph_qual_w2_requirement": 307,
+            "nb_strict_requirement": 10,
+            "w2cc_map_strict_requirement": 71,
+            "cc_flags_w2_requirement": 71,
+            "frame_quality_not_positive": 27,
+            "saa_separation_below_5_or_missing": 35,
+            "w2sat_strict_requirement": 1
+          },
+          "physical_stage": "unknown",
+          "emitter_ownership": "unestablished"
+        }
+      ]
+    },
+    {
+      "case_id": "HIGALBM351.2258+0.6937",
+      "native_rows": 273,
+      "image_exposure_joined_rows": 114,
+      "geometry_ambiguous_or_unmatched_rows": 188,
+      "catalogue_alternatives": [
+        {
+          "designation": "SSTGLMC G351.2245+00.6932",
+          "cntr": "1054355",
+          "fixed_best": false,
+          "unique_geometric_rows": 7,
+          "strict_quality_rows": 0,
+          "supported_epoch_groups": 0,
+          "supported_reported_span_days": null,
+          "conservative_pipeline_cadence_support": false,
+          "rejection_counts": {
+            "w2_snr_not_above_10": 7,
+            "w2_profile_fit_not_in_0_to_2": 1,
+            "qi_fact_strict_requirement": 6,
+            "frame_quality_not_positive": 2,
+            "saa_separation_below_5_or_missing": 3,
+            "ph_qual_w2_requirement": 7
+          },
+          "physical_stage": "unknown",
+          "emitter_ownership": "unestablished"
+        },
+        {
+          "designation": "SSTGLMC G351.2258+00.6940",
+          "cntr": "1054996",
+          "fixed_best": true,
+          "unique_geometric_rows": 75,
+          "strict_quality_rows": 0,
+          "supported_epoch_groups": 0,
+          "supported_reported_span_days": null,
+          "conservative_pipeline_cadence_support": false,
+          "rejection_counts": {
+            "w2_snr_not_above_10": 61,
+            "w2cc_map_strict_requirement": 14,
+            "qi_fact_strict_requirement": 45,
+            "cc_flags_w2_requirement": 14,
+            "ph_qual_w2_requirement": 75,
+            "w2_profile_fit_not_in_0_to_2": 24,
+            "saa_separation_below_5_or_missing": 19,
+            "frame_quality_not_positive": 9,
+            "moon_masked_w2_requirement": 5
+          },
+          "physical_stage": "unknown",
+          "emitter_ownership": "unestablished"
+        },
+        {
+          "designation": "SSTGLMC G351.2276+00.6945",
+          "cntr": "1055843",
+          "fixed_best": false,
+          "unique_geometric_rows": 3,
+          "strict_quality_rows": 0,
+          "supported_epoch_groups": 0,
+          "supported_reported_span_days": null,
+          "conservative_pipeline_cadence_support": false,
+          "rejection_counts": {
+            "w2_snr_not_above_10": 2,
+            "w2cc_map_strict_requirement": 3,
+            "qi_fact_strict_requirement": 3,
+            "frame_quality_not_positive": 1,
+            "saa_separation_below_5_or_missing": 2,
+            "cc_flags_w2_requirement": 3,
+            "ph_qual_w2_requirement": 3,
+            "nb_strict_requirement": 1,
+            "moon_masked_w2_requirement": 1,
+            "w2_profile_fit_not_in_0_to_2": 1
+          },
+          "physical_stage": "unknown",
+          "emitter_ownership": "unestablished"
+        }
+      ]
+    },
+    {
+      "case_id": "HIGALBM353.4272-0.3734",
+      "native_rows": 289,
+      "image_exposure_joined_rows": 137,
+      "geometry_ambiguous_or_unmatched_rows": 221,
+      "catalogue_alternatives": [
+        {
+          "designation": "SSTGLMC G353.4273-00.3723",
+          "cntr": "2224085",
+          "fixed_best": true,
+          "unique_geometric_rows": 68,
+          "strict_quality_rows": 0,
+          "supported_epoch_groups": 0,
+          "supported_reported_span_days": null,
+          "conservative_pipeline_cadence_support": false,
+          "rejection_counts": {
+            "w2_profile_fit_not_in_0_to_2": 68,
+            "w2cc_map_strict_requirement": 60,
+            "saa_separation_below_5_or_missing": 16,
+            "cc_flags_w2_requirement": 60,
+            "ph_qual_w2_requirement": 68,
+            "qi_fact_strict_requirement": 23,
+            "frame_quality_not_positive": 4,
+            "moon_masked_w2_requirement": 8
+          },
+          "physical_stage": "unknown",
+          "emitter_ownership": "unestablished"
+        },
+        {
+          "designation": "SSTGLMC G353.4284-00.3731",
+          "cntr": "2224805",
+          "fixed_best": false,
+          "unique_geometric_rows": 0,
+          "strict_quality_rows": 0,
+          "supported_epoch_groups": 0,
+          "supported_reported_span_days": null,
+          "conservative_pipeline_cadence_support": false,
+          "rejection_counts": {},
+          "physical_stage": "unknown",
+          "emitter_ownership": "unestablished"
+        }
+      ]
+    }
+  ],
+  "native_rows": 874,
+  "fixed_best_supported": 0,
+  "fixed_best_denominator": 3,
+  "required_supported_best": 2,
+  "primary_gate_passed": false,
+  "selection_consumed": true,
+  "full_goal_achieved": false,
+  "physical_validation": false,
+  "new_stars": 0,
+  "new_births": 0,
+  "new_model_fitted": false,
+  "scope": "Conservative native pipeline quality and literal geometry; no calibrated ownership or physical class"
+}

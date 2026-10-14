@@ -1,0 +1,193 @@
+{
+  "schema": "native-profile-quality-registration/1",
+  "created_utc": "2026-10-12T22:38:55.015046+00:00",
+  "source_revision": "12e25ba9e05bbba9dba085c5a81603ddd169da09",
+  "inputs": [
+    {
+      "path": "artifacts/native_glimpse_association_20261012/evidence_cards.json",
+      "bytes": 34699,
+      "sha256": "8929cd3bb703491adc3bff7853c445bc1e2b4649f83f14fb41a9ef34cc0b7490"
+    },
+    {
+      "path": "artifacts/native_neowise_header_audit_20261013/frames.json.gz",
+      "bytes": 98149,
+      "sha256": "d0195cf3974f25f90bd9fc08aaf550edf608c1aa7c8162a90c7daf4c490cd18d"
+    },
+    {
+      "path": "artifacts/native_neowise_header_checkpoint_20261013.json",
+      "bytes": 7945,
+      "sha256": "77b1ef7975a797530c26a7c15d5ab91917bb2c07756cdce6de305bca2948072c"
+    },
+    {
+      "path": "docs/RESEARCH_GOAL.md",
+      "bytes": 19581,
+      "sha256": "0b069de94db20d821cba5aa1565add7a5da274fcb5616e6e27d7ad7b2937916b"
+    },
+    {
+      "path": "docs/MULTISURVEY_RESEARCH_PROGRAM_20261012.md",
+      "bytes": 10578,
+      "sha256": "6dcf4b55081d510a248fba28a1c848bdaf6f720d28dd19d867fc0360b1e94496"
+    },
+    {
+      "path": "docs/ADVERSARIAL_REVIEW_20261006.md",
+      "bytes": 12681,
+      "sha256": "c28b2ccc8513c9fd4b6fc8db7364ba474316a2da53592963037bb1b6358e9021"
+    }
+  ],
+  "cases": [
+    {
+      "id": "HIGALBM330.8814-0.3656",
+      "ra": "242.585210",
+      "dec": "-52.099141",
+      "fixed_best_designation": "SSTGLMC G330.8829-00.3661",
+      "catalogue_alternatives": [
+        {
+          "designation": "SSTGLMC G330.8829-00.3661",
+          "cntr": "23834137",
+          "ra": "242.587533",
+          "dec": "-52.098443"
+        }
+      ]
+    },
+    {
+      "id": "HIGALBM351.2258+0.6937",
+      "ra": "260.038850",
+      "dec": "-35.912856",
+      "fixed_best_designation": "SSTGLMC G351.2258+00.6940",
+      "catalogue_alternatives": [
+        {
+          "designation": "SSTGLMC G351.2245+00.6932",
+          "cntr": "1054355",
+          "ra": "260.038329",
+          "dec": "-35.914117"
+        },
+        {
+          "designation": "SSTGLMC G351.2258+00.6940",
+          "cntr": "1054996",
+          "ra": "260.038363",
+          "dec": "-35.912558"
+        },
+        {
+          "designation": "SSTGLMC G351.2276+00.6945",
+          "cntr": "1055843",
+          "ra": "260.039101",
+          "dec": "-35.910879"
+        }
+      ]
+    },
+    {
+      "id": "HIGALBM353.4272-0.3734",
+      "ra": "262.634300",
+      "dec": "-34.688756",
+      "fixed_best_designation": "SSTGLMC G353.4273-00.3723",
+      "catalogue_alternatives": [
+        {
+          "designation": "SSTGLMC G353.4273-00.3723",
+          "cntr": "2224085",
+          "ra": "262.633239",
+          "dec": "-34.688109"
+        },
+        {
+          "designation": "SSTGLMC G353.4284-00.3731",
+          "cntr": "2224805",
+          "ra": "262.634758",
+          "dec": "-34.687567"
+        }
+      ]
+    }
+  ],
+  "columns": [
+    "cntr",
+    "source_id",
+    "scan_id",
+    "frame_num",
+    "ra",
+    "dec",
+    "sigra",
+    "sigdec",
+    "sigradec",
+    "mjd",
+    "w2mpro",
+    "w2sigmpro",
+    "w2snr",
+    "w2rchi2",
+    "w2flux",
+    "w2sigflux",
+    "w2sat",
+    "w2fitr",
+    "nb",
+    "na",
+    "cc_flags",
+    "w2cc_map",
+    "ph_qual",
+    "qual_frame",
+    "qi_fact",
+    "saa_sep",
+    "moon_masked",
+    "w2frtr",
+    "sso_flg"
+  ],
+  "requests": [
+    {
+      "case_id": "HIGALBM330.8814-0.3656",
+      "response_file": "q00.csv",
+      "query": "SELECT TOP 5001 cntr,source_id,scan_id,frame_num,ra,dec,sigra,sigdec,sigradec,mjd,w2mpro,w2sigmpro,w2snr,w2rchi2,w2flux,w2sigflux,w2sat,w2fitr,nb,na,cc_flags,w2cc_map,ph_qual,qual_frame,qi_fact,saa_sep,moon_masked,w2frtr,sso_flg FROM neowiser_p1bs_psd WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',242.585210,-52.099141,0.0033333333333333335)) ORDER BY source_id",
+      "url": "https://irsa.ipac.caltech.edu/TAP/sync?QUERY=SELECT+TOP+5001+cntr%2Csource_id%2Cscan_id%2Cframe_num%2Cra%2Cdec%2Csigra%2Csigdec%2Csigradec%2Cmjd%2Cw2mpro%2Cw2sigmpro%2Cw2snr%2Cw2rchi2%2Cw2flux%2Cw2sigflux%2Cw2sat%2Cw2fitr%2Cnb%2Cna%2Ccc_flags%2Cw2cc_map%2Cph_qual%2Cqual_frame%2Cqi_fact%2Csaa_sep%2Cmoon_masked%2Cw2frtr%2Csso_flg+FROM+neowiser_p1bs_psd+WHERE+1%3DCONTAINS%28POINT%28%27ICRS%27%2Cra%2Cdec%29%2CCIRCLE%28%27ICRS%27%2C242.585210%2C-52.099141%2C0.0033333333333333335%29%29+ORDER+BY+source_id&FORMAT=csv&MAXREC=5001"
+    },
+    {
+      "case_id": "HIGALBM351.2258+0.6937",
+      "response_file": "q01.csv",
+      "query": "SELECT TOP 5001 cntr,source_id,scan_id,frame_num,ra,dec,sigra,sigdec,sigradec,mjd,w2mpro,w2sigmpro,w2snr,w2rchi2,w2flux,w2sigflux,w2sat,w2fitr,nb,na,cc_flags,w2cc_map,ph_qual,qual_frame,qi_fact,saa_sep,moon_masked,w2frtr,sso_flg FROM neowiser_p1bs_psd WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',260.038850,-35.912856,0.0033333333333333335)) ORDER BY source_id",
+      "url": "https://irsa.ipac.caltech.edu/TAP/sync?QUERY=SELECT+TOP+5001+cntr%2Csource_id%2Cscan_id%2Cframe_num%2Cra%2Cdec%2Csigra%2Csigdec%2Csigradec%2Cmjd%2Cw2mpro%2Cw2sigmpro%2Cw2snr%2Cw2rchi2%2Cw2flux%2Cw2sigflux%2Cw2sat%2Cw2fitr%2Cnb%2Cna%2Ccc_flags%2Cw2cc_map%2Cph_qual%2Cqual_frame%2Cqi_fact%2Csaa_sep%2Cmoon_masked%2Cw2frtr%2Csso_flg+FROM+neowiser_p1bs_psd+WHERE+1%3DCONTAINS%28POINT%28%27ICRS%27%2Cra%2Cdec%29%2CCIRCLE%28%27ICRS%27%2C260.038850%2C-35.912856%2C0.0033333333333333335%29%29+ORDER+BY+source_id&FORMAT=csv&MAXREC=5001"
+    },
+    {
+      "case_id": "HIGALBM353.4272-0.3734",
+      "response_file": "q02.csv",
+      "query": "SELECT TOP 5001 cntr,source_id,scan_id,frame_num,ra,dec,sigra,sigdec,sigradec,mjd,w2mpro,w2sigmpro,w2snr,w2rchi2,w2flux,w2sigflux,w2sat,w2fitr,nb,na,cc_flags,w2cc_map,ph_qual,qual_frame,qi_fact,saa_sep,moon_masked,w2frtr,sso_flg FROM neowiser_p1bs_psd WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',262.634300,-34.688756,0.0033333333333333335)) ORDER BY source_id",
+      "url": "https://irsa.ipac.caltech.edu/TAP/sync?QUERY=SELECT+TOP+5001+cntr%2Csource_id%2Cscan_id%2Cframe_num%2Cra%2Cdec%2Csigra%2Csigdec%2Csigradec%2Cmjd%2Cw2mpro%2Cw2sigmpro%2Cw2snr%2Cw2rchi2%2Cw2flux%2Cw2sigflux%2Cw2sat%2Cw2fitr%2Cnb%2Cna%2Ccc_flags%2Cw2cc_map%2Cph_qual%2Cqual_frame%2Cqi_fact%2Csaa_sep%2Cmoon_masked%2Cw2frtr%2Csso_flg+FROM+neowiser_p1bs_psd+WHERE+1%3DCONTAINS%28POINT%28%27ICRS%27%2Cra%2Cdec%29%2CCIRCLE%28%27ICRS%27%2C262.634300%2C-34.688756%2C0.0033333333333333335%29%29+ORDER+BY+source_id&FORMAT=csv&MAXREC=5001"
+    }
+  ],
+  "header_ledger": "artifacts/native_neowise_header_audit_20261013/frames.json.gz",
+  "selection_consumed": true,
+  "new_data_read_before_registration": false,
+  "primary": "At least two of the three fixed best Catalog records have isolated pipeline-quality, uniquely literal-geometric cadence support",
+  "criteria": {
+    "literal_radius_arcsec": 1,
+    "geometry_boundary_guard_arcsec": 1e-05,
+    "epoch_gap_days": 30,
+    "minimum_rows_per_epoch": 5,
+    "minimum_supported_epochs": 3,
+    "minimum_reported_span_days": 365,
+    "minimum_fixed_best_supported": 2,
+    "native_image_time_consistency_seconds": 60
+  },
+  "limits": {
+    "requests": 3,
+    "retries": 0,
+    "per_response_mib": 2,
+    "total_response_mib": 6,
+    "rows_per_case_ceiling": 5000,
+    "acquisition_stage_mib": 8,
+    "analysis_stage_mib": 2,
+    "verification_stage_mib": 1,
+    "combined_packet_mib": 16,
+    "wall_seconds_per_worker": 600,
+    "rss_mib_per_worker": 256,
+    "cpu_threads": 1,
+    "free_reserve_gib": 5
+  },
+  "synthetic_checks": [
+    "IDs above 2^53 retained as strings",
+    "Contradictory native cntr refused",
+    "Upper limits/null errors retained and excluded from strict measurements",
+    "Exact SNR and fit-quality thresholds",
+    "Deblending/transient/covariance failures",
+    "Independent spherical distance at RA wrap/poles",
+    "Epoch count/span"
+  ],
+  "physical_validation": false,
+  "new_stars": 0,
+  "new_births": 0,
+  "models_changed": false,
+  "coordinate_list_uploads": 0
+}

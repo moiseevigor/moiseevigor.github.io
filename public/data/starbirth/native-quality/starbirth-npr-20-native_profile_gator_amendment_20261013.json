@@ -1,0 +1,164 @@
+{
+  "schema": "native-profile-deliberate-gator-transport-amendment/1",
+  "date": "2026-10-13",
+  "original_registration_sha256": "64fcb5ae85c18a2b8560ced1dce74f597350a342266420bfb5689f47365b1363",
+  "original_registration_revision": "518e8683049cdbd6a380ee19c6588ccc7ec74e6b",
+  "original_stop_revision": "275d822187472755a2bb51dd3590b5d28aece20a",
+  "inputs": [
+    {
+      "path": "artifacts/native_glimpse_association_20261012/evidence_cards.json",
+      "bytes": 34699,
+      "sha256": "8929cd3bb703491adc3bff7853c445bc1e2b4649f83f14fb41a9ef34cc0b7490"
+    },
+    {
+      "path": "artifacts/native_neowise_header_audit_20261013/frames.json.gz",
+      "bytes": 98149,
+      "sha256": "d0195cf3974f25f90bd9fc08aaf550edf608c1aa7c8162a90c7daf4c490cd18d"
+    },
+    {
+      "path": "artifacts/native_neowise_header_checkpoint_20261013.json",
+      "bytes": 7945,
+      "sha256": "77b1ef7975a797530c26a7c15d5ab91917bb2c07756cdce6de305bca2948072c"
+    },
+    {
+      "path": "docs/RESEARCH_GOAL.md",
+      "bytes": 19581,
+      "sha256": "0b069de94db20d821cba5aa1565add7a5da274fcb5616e6e27d7ad7b2937916b"
+    },
+    {
+      "path": "docs/MULTISURVEY_RESEARCH_PROGRAM_20261012.md",
+      "bytes": 10578,
+      "sha256": "6dcf4b55081d510a248fba28a1c848bdaf6f720d28dd19d867fc0360b1e94496"
+    },
+    {
+      "path": "docs/ADVERSARIAL_REVIEW_20261006.md",
+      "bytes": 12681,
+      "sha256": "c28b2ccc8513c9fd4b6fc8db7364ba474316a2da53592963037bb1b6358e9021"
+    },
+    {
+      "path": "artifacts/native_profile_quality_registration_20261013.json",
+      "bytes": 7920,
+      "sha256": "64fcb5ae85c18a2b8560ced1dce74f597350a342266420bfb5689f47365b1363"
+    },
+    {
+      "path": "docs/NATIVE_PROFILE_QUALITY_PROTOCOL_20261013.md",
+      "bytes": 7843,
+      "sha256": "37fa50d0c31030d011935d4e57226c6a4dbcbee346aafaa851296fd793bad7b9"
+    },
+    {
+      "path": "research/starbirth_native_profile_quality_20261013.py",
+      "bytes": 4216,
+      "sha256": "a31cd00ee3f73300cbf5ec4237baf42c535176a5782da9da9f7ed094eef6b1f9"
+    },
+    {
+      "path": "research/analyze_native_profile_quality_20261013.py",
+      "bytes": 8515,
+      "sha256": "152864846811d537a738bd25059da4937203cb8deeca42458413e91d76d2ac20"
+    },
+    {
+      "path": "research/verify_native_profile_quality_20261013.py",
+      "bytes": 8962,
+      "sha256": "7bc9d0f7dfad9a88b25367b743fefa0a549964ba27869774be5ef17be1609d7a"
+    },
+    {
+      "path": "docs/NATIVE_PROFILE_QUALITY_RESULTS_20261013.md",
+      "bytes": 4813,
+      "sha256": "cfe4d0473c2b8266cfb7710077c998fc0add23546a745a95a930ebd5a5632783"
+    },
+    {
+      "path": "artifacts/native_profile_quality_checkpoint_20261013.json",
+      "bytes": 4826,
+      "sha256": "fbc6aec2e8c62fdc4c293b059b46af7af5b482445edef9e58aef672bf60945ef"
+    },
+    {
+      "path": "artifacts/native_profile_quality_acquisition_20261013/acquisition.json",
+      "bytes": 1556,
+      "sha256": "941e8fd817a83d15e8a895ae927aa018fa12408d7b7184f8d24b623770ace2c6"
+    },
+    {
+      "path": "artifacts/native_profile_quality_acquisition_20261013/resource_monitor.json",
+      "bytes": 42067,
+      "sha256": "38fa91ddac6afa3a61f3181f9c7677903fc1b7beeefa7da3519e114ff3c5000a"
+    },
+    {
+      "path": "artifacts/native_profile_quality_acquisition_20261013/worker.log",
+      "bytes": 3408,
+      "sha256": "c844e73e88fbb135cb11cc75889db85cae98c03f8c83f609fc0ddf648a8ec2d2"
+    },
+    {
+      "path": "artifacts/native_profile_quality_stop_verification_20261013/verification.json",
+      "bytes": 2476,
+      "sha256": "ee9e90daae0693af2d3ca1bdce8595cbcee13c7f5fc3468dcb7d3fee35a419ff"
+    }
+  ],
+  "requests": [
+    {
+      "case_id": "HIGALBM330.8814-0.3656",
+      "url": "https://irsa.ipac.caltech.edu/cgi-bin/Gator/nph-query?catalog=neowiser_p1bs_psd&spatial=cone&objstr=242.585210+-52.099141&radius=12&radunits=arcsec&outfmt=3&outrows=5001&order=source_id&selcols=cntr%2Csource_id%2Cscan_id%2Cframe_num%2Cra%2Cdec%2Csigra%2Csigdec%2Csigradec%2Cmjd%2Cw2mpro%2Cw2sigmpro%2Cw2snr%2Cw2rchi2%2Cw2flux%2Cw2sigflux%2Cw2sat%2Cw2fitr%2Cnb%2Cna%2Ccc_flags%2Cw2cc_map%2Cph_qual%2Cqual_frame%2Cqi_fact%2Csaa_sep%2Cmoon_masked%2Cw2frtr%2Csso_flg",
+      "parameters": {
+        "catalog": "neowiser_p1bs_psd",
+        "spatial": "cone",
+        "objstr": "242.585210 -52.099141",
+        "radius": "12",
+        "radunits": "arcsec",
+        "outfmt": "3",
+        "outrows": "5001",
+        "order": "source_id",
+        "selcols": "cntr,source_id,scan_id,frame_num,ra,dec,sigra,sigdec,sigradec,mjd,w2mpro,w2sigmpro,w2snr,w2rchi2,w2flux,w2sigflux,w2sat,w2fitr,nb,na,cc_flags,w2cc_map,ph_qual,qual_frame,qi_fact,saa_sep,moon_masked,w2frtr,sso_flg"
+      },
+      "raw_response_file": "q00.xml",
+      "response_file": "q00.csv"
+    },
+    {
+      "case_id": "HIGALBM351.2258+0.6937",
+      "url": "https://irsa.ipac.caltech.edu/cgi-bin/Gator/nph-query?catalog=neowiser_p1bs_psd&spatial=cone&objstr=260.038850+-35.912856&radius=12&radunits=arcsec&outfmt=3&outrows=5001&order=source_id&selcols=cntr%2Csource_id%2Cscan_id%2Cframe_num%2Cra%2Cdec%2Csigra%2Csigdec%2Csigradec%2Cmjd%2Cw2mpro%2Cw2sigmpro%2Cw2snr%2Cw2rchi2%2Cw2flux%2Cw2sigflux%2Cw2sat%2Cw2fitr%2Cnb%2Cna%2Ccc_flags%2Cw2cc_map%2Cph_qual%2Cqual_frame%2Cqi_fact%2Csaa_sep%2Cmoon_masked%2Cw2frtr%2Csso_flg",
+      "parameters": {
+        "catalog": "neowiser_p1bs_psd",
+        "spatial": "cone",
+        "objstr": "260.038850 -35.912856",
+        "radius": "12",
+        "radunits": "arcsec",
+        "outfmt": "3",
+        "outrows": "5001",
+        "order": "source_id",
+        "selcols": "cntr,source_id,scan_id,frame_num,ra,dec,sigra,sigdec,sigradec,mjd,w2mpro,w2sigmpro,w2snr,w2rchi2,w2flux,w2sigflux,w2sat,w2fitr,nb,na,cc_flags,w2cc_map,ph_qual,qual_frame,qi_fact,saa_sep,moon_masked,w2frtr,sso_flg"
+      },
+      "raw_response_file": "q01.xml",
+      "response_file": "q01.csv"
+    },
+    {
+      "case_id": "HIGALBM353.4272-0.3734",
+      "url": "https://irsa.ipac.caltech.edu/cgi-bin/Gator/nph-query?catalog=neowiser_p1bs_psd&spatial=cone&objstr=262.634300+-34.688756&radius=12&radunits=arcsec&outfmt=3&outrows=5001&order=source_id&selcols=cntr%2Csource_id%2Cscan_id%2Cframe_num%2Cra%2Cdec%2Csigra%2Csigdec%2Csigradec%2Cmjd%2Cw2mpro%2Cw2sigmpro%2Cw2snr%2Cw2rchi2%2Cw2flux%2Cw2sigflux%2Cw2sat%2Cw2fitr%2Cnb%2Cna%2Ccc_flags%2Cw2cc_map%2Cph_qual%2Cqual_frame%2Cqi_fact%2Csaa_sep%2Cmoon_masked%2Cw2frtr%2Csso_flg",
+      "parameters": {
+        "catalog": "neowiser_p1bs_psd",
+        "spatial": "cone",
+        "objstr": "262.634300 -34.688756",
+        "radius": "12",
+        "radunits": "arcsec",
+        "outfmt": "3",
+        "outrows": "5001",
+        "order": "source_id",
+        "selcols": "cntr,source_id,scan_id,frame_num,ra,dec,sigra,sigdec,sigradec,mjd,w2mpro,w2sigmpro,w2snr,w2rchi2,w2flux,w2sigflux,w2sat,w2fitr,nb,na,cc_flags,w2cc_map,ph_qual,qual_frame,qi_fact,saa_sep,moon_masked,w2frtr,sso_flg"
+      },
+      "raw_response_file": "q02.xml",
+      "response_file": "q02.csv"
+    }
+  ],
+  "cases_fields_geometry_scientific_rules_thresholds_unchanged": true,
+  "raw_format": "VOTable TABLEDATA literal strings",
+  "normalized_format": "Original registered columns in CSV; extra fields preserved in original VO",
+  "cause_of_original_timeout": "unknown",
+  "remote_previous_job_state": "unknown; no handle; no cancellation or restart",
+  "literal_url_retries": 0,
+  "deliberate_amended_resumptions": 1,
+  "cumulative_maximum_requests_including_original": 4,
+  "remaining_acquisition_wall_seconds": 508,
+  "original_acquisition_elapsed_seconds": 91.18965533305891,
+  "primary_count_required": 2,
+  "primary_denominator": 3,
+  "cost_limits_not_increased": true,
+  "complete_original_and_resumed_packet_cap_mib": 16,
+  "physical_validation": false,
+  "automatic_successor_authorized": false,
+  "metadata_source": "https://irsa.ipac.caltech.edu/onlinehelp/catalogs/catalogs/api.html"
+}
