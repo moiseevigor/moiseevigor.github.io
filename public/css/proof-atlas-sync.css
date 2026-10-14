@@ -1,0 +1,38 @@
+/* Optional side views; manuscript measure and centered default are unchanged. */
+.pa-sync-panel[hidden],#pa-sync-proof[hidden],#pa-sync-empty[hidden]{display:none}
+.pa-sync-panel{font:14px/1.6 var(--sans);min-width:0;background:var(--bg);border:1px solid var(--border);border-radius:4px}
+.pa-sync-header{padding:16px 18px;border-bottom:1px solid var(--border)}
+.pa-sync-header h2{font:600 18px/1.4 var(--sans);margin:0 0 8px}
+.pa-sync-header p,#pa-sync-empty{font:13px/1.6 var(--sans);margin:8px 0;color:var(--text-light)}
+#pa-sync-empty{padding:18px}
+.pa-sync-header label{display:block;font:600 12px/1.6 var(--sans)}
+.pa-sync-header select{display:block;max-width:100%;width:100%;margin:6px 0 10px;padding:8px;font:12px/1.6 var(--mono);color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:4px}
+.pa-sync-header a{font-size:12px;overflow-wrap:anywhere;text-decoration:underline}
+body[data-pa-sync="open"] .pa-reading-toolbar{max-width:1740px}
+body[data-pa-sync="open"] .pa-sync-layout{width:calc(100% - 48px);max-width:1740px;margin:0 auto;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr);gap:28px;align-items:start}
+body[data-pa-sync="open"] .pa-sync-layout .pa-paper{width:100%;min-width:0;margin:0;max-width:680px}
+body[data-pa-sync="open"] .pa-sync-panel{position:sticky;top:calc(var(--pa-nav-offset,48px) + 88px);max-height:calc(100vh - var(--pa-nav-offset,48px) - 100px);overflow:auto;overscroll-behavior:contain}
+.pa-sync-panel .pl-library{padding:16px;max-width:none;font-size:13px}
+.pa-sync-panel .pl-controls,.pa-sync-panel .pl-coverage{display:none}
+.pa-sync-panel .pl-workspace{grid-template-columns:minmax(0,1fr);gap:18px;margin:8px 0}
+.pa-sync-panel .pl-canvas-wrap{height:280px}
+.pa-sync-panel .pl-reader{padding:18px 0 0;border-left:0;border-top:1px solid var(--border)}
+.pa-sync-panel #pl-provenance p{overflow-wrap:anywhere;margin:6px 0}
+.pa-sync-panel :is(button,a,input,select,summary):focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.pa-paper .pa-sync-selected{background:var(--accent-light);outline:2px solid var(--accent);outline-offset:4px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.pa-paper [data-sync-anchor]{cursor:pointer}
+.pa-paper [data-sync-anchor]:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+@media(min-width:1500px){
+ body[data-pa-sync="open"] .pa-sync-layout{grid-template-columns:minmax(0,680px) minmax(0,1fr)}
+ .pa-sync-panel .pl-workspace{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .pa-sync-panel .pl-reader{border-left:1px solid var(--border);border-top:0;padding:0 0 0 16px}
+}
+@media(max-width:900px){
+ body[data-pa-sync="open"] .pa-sync-layout{max-width:680px;grid-template-columns:minmax(0,1fr);gap:24px}
+ body[data-pa-sync="open"] .pa-sync-panel{grid-row:1;position:relative;top:auto;max-height:65vh}
+ .pa-reading-options{flex-wrap:wrap;flex-shrink:1}
+ .pa-reading-options button{font-size:12px;padding:7px 8px}
+}
+
+/* Side-panel controls are outside the manuscript's numbered section hierarchy. */
+body.layout-distill .d-article .pa-sync-panel h2::before{content:none;counter-increment:none}

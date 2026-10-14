@@ -308,15 +308,8 @@ completeness by 4–7 points on at least 47 of 50 seeds (50 of 50 at all
 but one variant–density combination), and junction F1 with it.
 
 <div class="callout">
-<div class="callout-title">In plain words</div>
-Imagine grading two students who each trace a river network on a map, where
-the score is "how much of the true river did your tracing cover?" — and one
-student was quietly allowed to draw a 19% longer line. On sparse data, more
-line means more coverage, skill or not. Our scoring made exactly that
-mistake, and the extra length masqueraded as a discovery with spectacular
-statistics. Equalise the pencil, and the simpler method wins the race
-almost everywhere. The full anatomy of this mistake — and the other ways a
-method comparison can quietly rig itself — is
+<div class="callout-title">Scoring correction</div>
+The lift initially produced skeletons 19% longer than the comparator. Extra length increased coverage and biased the score. Under equal-length scoring, the simpler method performs better in most tested cases. The scoring procedure and its correction are documented in
 <a href="/mathematics/2026/07/08/cosmic-web-B3-honest-benchmarks/">Appendix B3</a>.
 </div>
 

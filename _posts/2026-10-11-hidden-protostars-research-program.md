@@ -65,7 +65,7 @@ The following are **our historical measurements and checks**, reviewed through 8
 
 </div>
 
-The main positive result is the first row. It identifies a question worth investigating; it does not answer the physical membership question. The main negative lesson is that neither a red source nor a learned embedding repairs a mismatched comparison.
+The main positive result is the first row. The positional and velocity agreement is measurable; physical membership remains unverified. Red colour and a learned embedding do not resolve a mismatched comparison.
 
 <h2 id="comparison">The sky is not a neutral background</h2>
 

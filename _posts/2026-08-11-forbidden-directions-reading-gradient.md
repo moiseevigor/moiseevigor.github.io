@@ -225,9 +225,7 @@ $\lvert\nabla\ln B\rvert = \lvert 1-\tfrac34\beta\rvert^{-1/2}\,\sqrt{\lvert\del
 to leading order, **valid only for $\beta \ne \tfrac43$** — at $\beta = \tfrac43$ the
 leading statistic is blind (tested — experiment F2 of the companion article's §4, `run_f2_beta43_blind.py`) and this estimator is undefined. The profile
 factor is $1$ exactly on exponential-class jets ($\beta = 0$),
-which is the case this post measures. The
-shape of a caustic is not decoration — it is a readout. One honest qualifier, established
-by follow-up work: the leading coefficient is $1$ only for
+which is the case this post measures. Follow-up work establishes that the leading coefficient is $1$ only for
 exponential-class profiles. The caustic law is $c_2 = 1 - \tfrac34\beta$ with
 $\beta = (\ln B)''/\lvert(\ln B)'\rvert^2$ the dimensionless profile curvature at the
 launch point — first measured (linear profile: $\tfrac74$, found $1.7466 \pm 0.0074$),
@@ -274,14 +272,11 @@ not an observed one) — and it passed exactly,
 with a sharp coefficient and the predicted parity. A statistic invented to tell Lie groups apart
 turns out to read a magnetic field gradient.
 
-## The honest edge
+<span id="the-honest-edge"></span>
 
-$\delta$ reads one profile-calibrated gradient combination at a smooth point. The real prize is at the **nulls**,
-where the field vanishes and the interesting plasma physics happens. The growth vector detects
-those nulls but cannot tell their *type* (Part 4). The open question — the one that decides
-whether this whole framing *refines* the standard tools or merely agrees with them — is whether a
-caustic invariant like $\delta$ recovers the null type. Part 4 sets that question up honestly and
-does not oversell the answer.
+## Estimator limits
+
+$\delta$ measures one profile-calibrated gradient combination at a smooth point. At magnetic nulls, the growth vector detects vanishing but does not identify the null type (Part 4). Whether the caustic invariant $\delta$ recovers that type remains an open estimator question. Parts 4 and 5 report the tested comparisons.
 
 ## Glossary
 

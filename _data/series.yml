@@ -290,8 +290,8 @@
 
 
 - id: proof-atlas
-  title: "Proof Atlas: The Geometry of Proofs"
-  subtitle: "A typed, multiscale microscope for Lean proofs: whole-proof topology, recursive subarguments, and faithfully sourced mathematical explanations."
+  title: "Proof Atlas: Compiled Proofs"
+  subtitle: "Compiled Lean expression graphs, declaration dependencies and a partial article correspondence index."
   status: active
   question: "Can the geometric structure of a formally checked proof reveal its main argument without requiring the reader to inspect every inference?"
   outcome: "Complete compiled inventories cover 739 and 1,359 declarations in two Lean corpora. The working graph shares 1,277,896 nodes across 670,018,056 expanded occurrences. Article correspondence is partial; mathematical interpretation remains human-authored."
@@ -306,6 +306,6 @@
     - { h: "Learning", v: pending, label: "reader benefit not yet measured" }
   posts:
     - part: 1
-      title: "Proof Atlas: The Geometry of a Formal Proof"
+      title: "Proof Atlas: Compiled Proof Graphs and Article Coverage"
       url: /mathematics/2026/10/11/proof-atlas-research-program/
       status: published
