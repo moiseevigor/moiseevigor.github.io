@@ -73,6 +73,8 @@ $$
 near-closed form (Sachkov school; Duits et al.), so that ground truth is available
 and the inverse can be graded, not just asserted.
 
+<span id="the-obstruction-that-shapes-everything"></span>
+
 ## Identifiability limits
 
 The identifiability limits below separate a classification theorem from the program's working hypothesis.

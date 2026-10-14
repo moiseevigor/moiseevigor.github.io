@@ -272,6 +272,8 @@ not an observed one) — and it passed exactly,
 with a sharp coefficient and the predicted parity. A statistic invented to tell Lie groups apart
 turns out to read a magnetic field gradient.
 
+<span id="the-honest-edge"></span>
+
 ## Estimator limits
 
 $\delta$ measures one profile-calibrated gradient combination at a smooth point. At magnetic nulls, the growth vector detects vanishing but does not identify the null type (Part 4). Whether the caustic invariant $\delta$ recovers that type remains an open estimator question. Parts 4 and 5 report the tested comparisons.
