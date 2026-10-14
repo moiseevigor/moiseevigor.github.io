@@ -1,0 +1,9 @@
+{
+  "verified": true,
+  "valid_literal_forms_checked": 50,
+  "invalid_literal_forms_checked": 14,
+  "unchanged_quality_boundary_controls": 9,
+  "raw_values_unchanged": true,
+  "missing_w3_w4_not_imputed": true,
+  "no_native_readout_or_network": true
+}

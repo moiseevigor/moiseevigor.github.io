@@ -1,0 +1,168 @@
+{
+  "schema": "neowise-offline-flag-format-amendment/1",
+  "date": "2026-10-14",
+  "human_authorization": "Please fix the NEOWISE flag-format mismatch using the data already downloaded, resume the research goal, and keep the app and blog updated with verified results while monitoring disk space.",
+  "prior_verified_revision": "bd6fa75da21e524d25fd47eec630a497e839dbf1",
+  "inputs": [
+    {
+      "path": "artifacts/native_glimpse_association_20261012/evidence_cards.json",
+      "bytes": 34699,
+      "sha256": "8929cd3bb703491adc3bff7853c445bc1e2b4649f83f14fb41a9ef34cc0b7490"
+    },
+    {
+      "path": "artifacts/native_neowise_header_audit_20261013/frames.json.gz",
+      "bytes": 98149,
+      "sha256": "d0195cf3974f25f90bd9fc08aaf550edf608c1aa7c8162a90c7daf4c490cd18d"
+    },
+    {
+      "path": "artifacts/native_neowise_header_checkpoint_20261013.json",
+      "bytes": 7945,
+      "sha256": "77b1ef7975a797530c26a7c15d5ab91917bb2c07756cdce6de305bca2948072c"
+    },
+    {
+      "path": "docs/RESEARCH_GOAL.md",
+      "bytes": 19581,
+      "sha256": "0b069de94db20d821cba5aa1565add7a5da274fcb5616e6e27d7ad7b2937916b"
+    },
+    {
+      "path": "docs/MULTISURVEY_RESEARCH_PROGRAM_20261012.md",
+      "bytes": 10578,
+      "sha256": "6dcf4b55081d510a248fba28a1c848bdaf6f720d28dd19d867fc0360b1e94496"
+    },
+    {
+      "path": "docs/ADVERSARIAL_REVIEW_20261006.md",
+      "bytes": 12681,
+      "sha256": "c28b2ccc8513c9fd4b6fc8db7364ba474316a2da53592963037bb1b6358e9021"
+    },
+    {
+      "path": "artifacts/native_profile_quality_registration_20261013.json",
+      "bytes": 7920,
+      "sha256": "64fcb5ae85c18a2b8560ced1dce74f597350a342266420bfb5689f47365b1363"
+    },
+    {
+      "path": "artifacts/native_profile_gator_acquisition_20261013/acquisition.json",
+      "bytes": 21296,
+      "sha256": "028274e17cc578f76e189770d8b1b1c1c9878d5568cdc99c87f162c6f7a30471"
+    },
+    {
+      "path": "artifacts/native_profile_gator_transport_verification_20261013/verification.json",
+      "bytes": 746,
+      "sha256": "2f50dfcabc7bc862c22185f6d3f856a0dccbbe0f0142a72b5da6c7c3760e30a0"
+    },
+    {
+      "path": "artifacts/native_profile_gator_analysis_20261013/summary.json",
+      "bytes": 6202,
+      "sha256": "cc658ac7a7d0d94f46a64bde5d91fd09d07873b83880cceb95d706b101f07f8d"
+    },
+    {
+      "path": "artifacts/native_profile_gator_analysis_20261013/detections.csv.gz",
+      "bytes": 91132,
+      "sha256": "5a35cc259bc86bdab6179c2f71fbec5fd485bd24028405d815f6035996cc4237"
+    },
+    {
+      "path": "artifacts/native_profile_gator_quality_verification_20261013/verification.json",
+      "bytes": 903,
+      "sha256": "253831948e1f2218c5c6d5f1c5018f249c87225562cc84eb4710997aaf88d4ed"
+    },
+    {
+      "path": "artifacts/native_profile_resumption_assessment_20261014.json",
+      "bytes": 14217,
+      "sha256": "9245ccdb6b848d4d58e689e35d0a007817906af63ebf8e79ba684fc829387a72"
+    },
+    {
+      "path": "artifacts/native_profile_resumption_assessment_verification_20261014.json",
+      "bytes": 470,
+      "sha256": "cfd67410f1bf9a08149bbbee1d657f74d680f97229139699e1cff21e70f4e085"
+    },
+    {
+      "path": "research/analyze_native_profile_quality_20261013.py",
+      "bytes": 8515,
+      "sha256": "152864846811d537a738bd25059da4937203cb8deeca42458413e91d76d2ac20"
+    },
+    {
+      "path": "research/verify_native_profile_quality_20261013.py",
+      "bytes": 8962,
+      "sha256": "7bc9d0f7dfad9a88b25367b743fefa0a549964ba27869774be5ef17be1609d7a"
+    },
+    {
+      "path": "research/neowise_flag_format.py",
+      "bytes": 428,
+      "sha256": "05c327e48817cad37ac49f2e4deb00be00e340f3a0ac1eac6c9be8eda2e2fcb6"
+    },
+    {
+      "path": "research/analyze_native_profile_flag_repair_20261014.py",
+      "bytes": 8979,
+      "sha256": "8c2917df8d4723761210186ee4d849caa3d78ab732a6493b46d6594bfbc1487b"
+    },
+    {
+      "path": "research/verify_native_profile_flag_repair_20261014.py",
+      "bytes": 9614,
+      "sha256": "5579e55d544aa61962dea72cc195bc318ee3be4d860532678fe25598add303e1"
+    },
+    {
+      "path": "research/check_neowise_flag_format_controls_20261014.py",
+      "bytes": 2472,
+      "sha256": "98a1fa2df3b4cb6bf908c3bf3c3897202d21a056fd03c0d48f6bdb766b15493c"
+    },
+    {
+      "path": "artifacts/neowise_flag_format_controls_permitted_20261014/verification.json",
+      "bytes": 252,
+      "sha256": "4925e424ee6bfa782e476f2b5633c70cd6b4b090784d6111c9e9dcd751d3fbf4"
+    },
+    {
+      "path": "docs/NEOWISE_FLAG_FORMAT_AMENDMENT_20261014.md",
+      "bytes": 3639,
+      "sha256": "9a3cc9ad2df3a01ab826292a54e53d9fdca10359736e179697ac05bbe8cf8c40"
+    },
+    {
+      "path": "artifacts/native_profile_gator_acquisition_20261013/q00.xml",
+      "bytes": 342643,
+      "sha256": "5d050b5e38db43642871adf63ed383bcefa5c3106b1e89ee6711cd5198be43c1"
+    },
+    {
+      "path": "artifacts/native_profile_gator_acquisition_20261013/q00.csv",
+      "bytes": 88582,
+      "sha256": "6a19dcce3d47afb18776cab19c7904b1a438e3f09b9876b85187abe3fad9089c"
+    },
+    {
+      "path": "artifacts/native_profile_gator_acquisition_20261013/q01.xml",
+      "bytes": 301329,
+      "sha256": "5a1c984ebf7d5808cc945ee65c367dffb1eb83a1555ccb6158270cdac2874ede"
+    },
+    {
+      "path": "artifacts/native_profile_gator_acquisition_20261013/q01.csv",
+      "bytes": 78822,
+      "sha256": "d6f6ae9d5a2c62d9194dc516fe018c611269945e99c8622aaaa14279cd254d1f"
+    },
+    {
+      "path": "artifacts/native_profile_gator_acquisition_20261013/q02.xml",
+      "bytes": 321176,
+      "sha256": "690adc9b78c0de0c97e4f68bfbe896a1c0642c073bf9e692c33bd714c6615f88"
+    },
+    {
+      "path": "artifacts/native_profile_gator_acquisition_20261013/q02.csv",
+      "bytes": 85699,
+      "sha256": "947c0452dbda4298d93e2291dcae691f5006f9f497b041058e7d7787ee93d668"
+    }
+  ],
+  "native_rows": 874,
+  "case_count": 3,
+  "alternative_count": 6,
+  "new_survey_requests": 0,
+  "repair_is_post_read": true,
+  "fresh_physical_evaluation": false,
+  "decoder_contract": "Uppercase active pair from ABCUX; two-character W1/W2 or four-character W1/W2XX; take W2 without rewriting literal",
+  "all_scientific_thresholds_unchanged": true,
+  "primary_required": 2,
+  "primary_denominator": 3,
+  "new_output_cap_mib": 16,
+  "one_cpu": true,
+  "max_rss_mib": 256,
+  "reserve_gib": 5,
+  "cumulative_worker_wall_minutes": 30,
+  "independent_checker_imports_decoder": false,
+  "automatic_successor_authorized": false,
+  "physical_validation": false,
+  "full_goal_achieved": false,
+  "official_contract_source": "https://irsa.ipac.caltech.edu/data/WISE/docs/release/NEOWISE/expsup/sec2_1a.html"
+}

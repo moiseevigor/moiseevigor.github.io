@@ -1,0 +1,17 @@
+{
+  "schema": "neowise-flag-repair-exact-delta-verification/1",
+  "verified": true,
+  "native_rows_checked": 874,
+  "raw_fields_positions_identity_and_exposure_joins_unchanged": true,
+  "only_photo_quality_reason_and_result_boolean_changed": true,
+  "rows_with_shape_only_rejection_removed": 645,
+  "accepted_rows_added": 0,
+  "corrected_supported": 0,
+  "corrected_denominator": 3,
+  "corrected_gate_passed": false,
+  "all_six_alternatives_preserved": true,
+  "independent_summary_sha256": "5051edc4e10d5a651c42034d98a48626914fd4abd3b312a21400957239008290",
+  "new_requests": 0,
+  "post_read_repair_not_fresh_physical_validation": true,
+  "physical_validation": false
+}

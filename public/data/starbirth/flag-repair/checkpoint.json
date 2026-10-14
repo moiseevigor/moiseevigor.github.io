@@ -1,0 +1,143 @@
+{
+  "schema": "neowise-offline-flag-repair-checkpoint/1",
+  "unit_complete": true,
+  "independent_verification_passed": true,
+  "exact_delta_verification_passed": true,
+  "native_rows": 874,
+  "corrected_supported": 0,
+  "corrected_denominator": 3,
+  "required_supported": 2,
+  "corrected_gate_passed": false,
+  "shape_only_rejections_removed": 645,
+  "accepted_rows_added": 0,
+  "native_flags_decoded_without_rewriting": true,
+  "scientific_thresholds_changed": false,
+  "all_six_alternatives_preserved": true,
+  "new_observation_requests": 0,
+  "post_read_consumed_data": true,
+  "fresh_physical_validation": false,
+  "physical_validation": false,
+  "new_stars": 0,
+  "new_births": 0,
+  "models_changed": false,
+  "full_goal_achieved": false,
+  "automatic_successor_authorized": false,
+  "current_interpretation": "Corrected conservative pipeline-quality/cadence gate failed; no physical negative or birth claim",
+  "historical_null_gate_preserved": "artifacts/native_profile_resumption_assessment_20261014.json",
+  "report_path": "docs/NEOWISE_FLAG_REPAIR_RESULTS_20261014.md",
+  "evidence": [
+    {
+      "path": "artifacts/neowise_flag_format_registration_20261014.json",
+      "bytes": 6583,
+      "sha256": "e361ec3576def8e38a9afe4a347d7911e8e94f4be0a8e3341c5a40eb5f0a4f7a"
+    },
+    {
+      "path": "docs/NEOWISE_FLAG_FORMAT_AMENDMENT_20261014.md",
+      "bytes": 3639,
+      "sha256": "9a3cc9ad2df3a01ab826292a54e53d9fdca10359736e179697ac05bbe8cf8c40"
+    },
+    {
+      "path": "docs/NEOWISE_FLAG_REPAIR_RESULTS_20261014.md",
+      "bytes": 3842,
+      "sha256": "7944d8e5692bf5c11eb5d539499a7ae5ec9fd2129b293143c79bd1f87c376a1e"
+    },
+    {
+      "path": "research/neowise_flag_format.py",
+      "bytes": 428,
+      "sha256": "05c327e48817cad37ac49f2e4deb00be00e340f3a0ac1eac6c9be8eda2e2fcb6"
+    },
+    {
+      "path": "research/analyze_native_profile_flag_repair_20261014.py",
+      "bytes": 8979,
+      "sha256": "8c2917df8d4723761210186ee4d849caa3d78ab732a6493b46d6594bfbc1487b"
+    },
+    {
+      "path": "research/verify_native_profile_flag_repair_20261014.py",
+      "bytes": 9614,
+      "sha256": "5579e55d544aa61962dea72cc195bc318ee3be4d860532678fe25598add303e1"
+    },
+    {
+      "path": "research/check_neowise_flag_format_controls_20261014.py",
+      "bytes": 2472,
+      "sha256": "98a1fa2df3b4cb6bf908c3bf3c3897202d21a056fd03c0d48f6bdb766b15493c"
+    },
+    {
+      "path": "research/verify_neowise_flag_repair_delta_20261014.py",
+      "bytes": 3325,
+      "sha256": "fb783ca72df61452584dbb2727d4ad69b9e9686e977f5da62fcd90a70d323c7c"
+    },
+    {
+      "path": "research/prepare_neowise_flag_repair_20261014.py",
+      "bytes": 2519,
+      "sha256": "803a48b4caafa9a8c05ef716a7475f676b70aa357cf572fb3ce292e5490909af"
+    },
+    {
+      "path": "artifacts/neowise_flag_format_controls_permitted_20261014/resource_monitor.json",
+      "bytes": 2462,
+      "sha256": "e42e1138ca9ba2283670feb924d843cf5fa693613f6ebf6c88f2d791152e2c06"
+    },
+    {
+      "path": "artifacts/neowise_flag_format_controls_permitted_20261014/verification.json",
+      "bytes": 252,
+      "sha256": "4925e424ee6bfa782e476f2b5633c70cd6b4b090784d6111c9e9dcd751d3fbf4"
+    },
+    {
+      "path": "artifacts/neowise_flag_format_controls_permitted_20261014/worker.log",
+      "bytes": 236,
+      "sha256": "a9059b009d7f724cee20707640984b0ebf987ceda26a8c9e05449d1f751bc14e"
+    },
+    {
+      "path": "artifacts/neowise_flag_repair_analysis_20261014/detections.csv.gz",
+      "bytes": 90949,
+      "sha256": "768457e962fb0338d5dd6aa04c201dfbe329d300f2498d8d9438b44981cdf46d"
+    },
+    {
+      "path": "artifacts/neowise_flag_repair_analysis_20261014/resource_monitor.json",
+      "bytes": 2484,
+      "sha256": "86112814454ee3b5052e3037074b97f355190a66ffd8091d0d21bb52edab81c5"
+    },
+    {
+      "path": "artifacts/neowise_flag_repair_analysis_20261014/summary.json",
+      "bytes": 6308,
+      "sha256": "5051edc4e10d5a651c42034d98a48626914fd4abd3b312a21400957239008290"
+    },
+    {
+      "path": "artifacts/neowise_flag_repair_analysis_20261014/worker.log",
+      "bytes": 6308,
+      "sha256": "5051edc4e10d5a651c42034d98a48626914fd4abd3b312a21400957239008290"
+    },
+    {
+      "path": "artifacts/neowise_flag_repair_verification_20261014/resource_monitor.json",
+      "bytes": 2548,
+      "sha256": "c173c42050a82b40d222c40af489457a33a16992b1ed90b113a23f9e0e52d9d2"
+    },
+    {
+      "path": "artifacts/neowise_flag_repair_verification_20261014/verification.json",
+      "bytes": 1105,
+      "sha256": "1b2eed825c7319633b81f58143a90cbf223a171734a5f404930bedb4ee6005e0"
+    },
+    {
+      "path": "artifacts/neowise_flag_repair_verification_20261014/worker.log",
+      "bytes": 1105,
+      "sha256": "1b2eed825c7319633b81f58143a90cbf223a171734a5f404930bedb4ee6005e0"
+    },
+    {
+      "path": "artifacts/neowise_flag_repair_delta_20261014/resource_monitor.json",
+      "bytes": 2423,
+      "sha256": "a402fe9aef4ec2d95c7d490f19b68efe2343d5f41bbeb23b78b09bc2f9dd7f3c"
+    },
+    {
+      "path": "artifacts/neowise_flag_repair_delta_20261014/verification.json",
+      "bytes": 671,
+      "sha256": "ae2bf16ba271bf891e93267eec831bb06df4dae9aa1ceda4044b0615f52d1d74"
+    },
+    {
+      "path": "artifacts/neowise_flag_repair_delta_20261014/worker.log",
+      "bytes": 639,
+      "sha256": "ac7d3019b004bccee87b8c54ce84f46c67de908ad12807def92c9b7a4ad12aee"
+    }
+  ],
+  "worker_elapsed_seconds": 4.322679208940826,
+  "minimum_observed_free_bytes": 51906498560,
+  "publication_status_at_creation": "local; separate publication receipts required"
+}

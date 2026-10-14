@@ -1,0 +1,21 @@
+{
+  "schema": "native-profile-quality-flag-repair-independent-verification/1",
+  "flag_format_registration_sha256": "e361ec3576def8e38a9afe4a347d7911e8e94f4be0a8e3341c5a40eb5f0a4f7a",
+  "representation_repair_post_read": true,
+  "scientific_thresholds_changed": false,
+  "verified": true,
+  "scope": "Native extraction identities and conservative pipeline-quality/literal-geometry diagnostic only",
+  "registration_sha256": "64fcb5ae85c18a2b8560ced1dce74f597350a342266420bfb5689f47365b1363",
+  "summary_sha256": "5051edc4e10d5a651c42034d98a48626914fd4abd3b312a21400957239008290",
+  "detections_sha256": "768457e962fb0338d5dd6aa04c201dfbe329d300f2498d8d9438b44981cdf46d",
+  "native_rows_checked": 874,
+  "fixed_best_supported": 0,
+  "fixed_best_denominator": 3,
+  "primary_gate_passed": false,
+  "maximum_geometry_implementation_difference_arcsec": 3.7936896679635623e-11,
+  "method": "Independent raw CSV and ID slicing, Decimal thresholds and vector cross-product spherical distance; no worker import",
+  "physical_validation": false,
+  "new_stars": 0,
+  "new_births": 0,
+  "full_goal_achieved": false
+}
