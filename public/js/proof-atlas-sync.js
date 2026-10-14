@@ -77,6 +77,7 @@
   await argumentReady;if(active?.id!==target?.id||!opened)return;argument.select(snapshot);
  }
  function unavailable(text){
+  const u=new URL(location.href);u.searchParams.delete('proof');u.searchParams.delete('route');if(active)u.hash=active.id;history.replaceState(null,'',u);
   window.ProofAtlasLibrary?.clearSelection();$('pa-sync-proof').hidden=true;$('pa-sync-empty').hidden=false;$('pa-sync-empty').textContent=text;chooser.replaceChildren();chooser.disabled=true;
   if(active&&!active.names.length)geometry(active,null).catch(e=>{status.textContent=e.message;});else $('pa-riccati-geometry').hidden=true;showStepChoices([],null);status.textContent=text;panel.dataset.match='unmapped';
  }

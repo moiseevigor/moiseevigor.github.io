@@ -56,3 +56,7 @@ body.layout-distill .d-article .pa-sync-panel h2::before{content:none;counter-in
 @media(max-width:560px){.pa-argument{padding:10px}.pa-argument-row{gap:6px}.pa-argument-node{padding:8px 5px}.pa-argument-node small{font-size:9px}}
 
 .pa-argument-calls button[aria-pressed=true]{background:var(--accent-light,#e1f0ec);border-color:var(--accent,#28756e);font-weight:600}
+
+.pa-argument-graph svg path.is-selected{stroke-width:3.5}
+.pa-argument-graph svg path.pa-argument-hit{stroke:transparent;stroke-width:18;pointer-events:stroke;cursor:pointer}
+.pa-argument-selection{font:600 12px/1.5 var(--sans,system-ui)!important;min-height:3em;border-left:3px solid var(--accent,#28756e);padding-left:9px}
