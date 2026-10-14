@@ -31,7 +31,7 @@ A representation can learn common patterns across surveys. The useful test is wh
 
 That result has a sharper limitation: **none of the 27 qualifying chemistry-positive cases has the registered temporal input view**. The learning procedure can handle a missing observation, but it cannot supply the absent observation. [Verified result](/public/data/starbirth/missing-view/results.md).
 
-<nav class="sb-jump" aria-label="On this page"><a href="#equal-cost">The comparison</a><a href="#learning">What learned without labels</a><a href="#coverage">The coverage gap</a><a href="#temporal-diagnosis">Why the temporal view is missing</a><a href="#native-counterparts">Three native counterpart cases</a><a href="#irac-colours">The physical-colour check</a><a href="#radio-context">Nearby radio activity</a><a href="#gas-velocity">Does the gas velocity agree?</a><a href="#native-quality">The original quality contract</a><a href="#flag-repair">The verified flag repair</a><a href="#unknowns">The unknown denominator</a><a href="#next-evidence">Interpretation limits</a><a href="#evidence">Exact evidence</a></nav>
+<nav class="sb-jump" aria-label="On this page"><a href="#equal-cost">The comparison</a><a href="#learning">What learned without labels</a><a href="#coverage">The coverage gap</a><a href="#temporal-diagnosis">Why the temporal view is missing</a><a href="#native-counterparts">Three native counterpart cases</a><a href="#irac-colours">The physical-colour check</a><a href="#radio-context">Nearby radio activity</a><a href="#gas-velocity">Gas–radio comparison</a><a href="#flag-repair">Native quality gate</a><a href="#unknowns">The unknown denominator</a><a href="#next-evidence">Interpretation limits</a><a href="#evidence">Exact evidence</a></nav>
 
 <h2 id="equal-cost">The same eighteen reviews</h2>
 
@@ -258,37 +258,15 @@ The frozen gas half-width is FWHM/2 + 3 × quoted centroid error + 1.5 × quoted
 
 The other two fixed fields remain **secondary context**, not substitute primaries or verified unrelated controls. The second has no overlap in any declared scenario. The third has a tiny **0.0685 km/s** zero-shift overlap, yet its nearest radio marker is **79.066 arcseconds** from the clump centre. This illustrates why a velocity match cannot replace positional and physical association; missing overlap does not establish starlessness either.
 
-There is an explicit metadata correction. The original worker wrongly called native `Vc` a velocity component. It is the catalogue’s **consensus gas velocity**; the component designation is the **S/A/B suffix of the native Name**. The additive corrected assessment retains the original output and fixes that meaning. `Vc` did not enter the test: no measurement, selection, equation or decision changed. The N₂H⁺ three-component fit resolves hyperfine structure; it is not three distinct gas clouds. [Native catalogue definitions, sections 3–4](https://researchonline.ljmu.ac.uk/id/eprint/4139/1/MALT90_catalog.pdf).
+The native `Vc` is the catalogue’s **consensus gas velocity**; the component designation is the **S/A/B suffix of the native Name**. The additive corrected assessment retains the original output and fixes that meaning. `Vc` did not enter the test: no measurement, selection, equation or decision changed. The N₂H⁺ three-component fit resolves hyperfine structure; it is not three distinct gas clouds. [Native catalogue definitions, sections 3–4](https://researchonline.ljmu.ac.uk/id/eprint/4139/1/MALT90_catalog.pdf).
 
 An independent check used exact original fields, Decimal interval arithmetic and separate position calculations, verifying **three native records, six tracer fits and nine shift scenarios**. This verifies the calculation, not the physical association. The gas catalogue’s beam does not assign emission to the best infrared point, which remains **17.501 arcseconds** from the radio marker. **No ownership, stellar youth, birth, new model benefit or physical precision/recall is established.** All earlier failed gates, source alternatives and unknowns remain intact.
 
-Download [the verified assessment](/public/data/starbirth/gas-velocity/results.md), [corrected field meanings and all three cases](/public/data/starbirth/gas-velocity/starbirth-rgv-corrected_assessment.json), [unchanged original readout](/public/data/starbirth/gas-velocity/starbirth-rgv-analysis-summary.json), [three complete native molecular records](/public/data/starbirth/gas-velocity/starbirth-rgv-analysis-native_records.json.gz), [independent verification](/public/data/starbirth/gas-velocity/starbirth-rgv-verification-verification.json) and [frozen protocol, code and full source hashes](/public/data/starbirth/gas-velocity/README.md). Exact exports bind research revision `dc8d8ca3349d68f6c1d9b0aa5431ac894383ac10`. This gas comparison used cached data. The separate NEOWISE resumption was subsequently explicitly approved; its qualified result appears below. Publication itself does not acquire measurements.
+Download the [final gas–radio assessment](/public/data/starbirth/gas-velocity/results.md), [corrected field meanings](/public/data/starbirth/gas-velocity/starbirth-rgv-corrected_assessment.json), and [protocol, native records and checks](/public/data/starbirth/gas-velocity/README.md). The correction distinguishes consensus gas velocity from component identity; the measured intervals and decision are unchanged. Source revision: `dc8d8ca3349d68f6c1d9b0aa5431ac894383ac10`.
 
-<h2 id="native-quality">Historical first readout: the unresolved flag contract</h2>
+<span id="native-quality"></span>
 
-**Historical state, before the separately approved offline repair below.** Preserve this original attempt; the current quality-gate result is now measured and failed. [Read the corrected result](#flag-repair).
-
-After explicit human approval, the three frozen NEOWISE requests completed on 14 October: **874 native extraction rows**, split **312 / 273 / 289** across the same three clumps. Every raw VO cell agrees with the exported CSV; an independent checker reproduces the unchanged registered analysis. This resolves delivery, not source ownership.
-
-The frozen rule returns **0/3**, against the required 2/3. But the exact delivered `ph_qual` values contain **two characters in all 874 rows**, while the code and [official NEOWISE field description](https://irsa.ipac.caltech.edu/data/WISE/docs/release/NEOWISE/expsup/sec2_1a.html) specify four. The cause of this discrepancy remains unknown. The raw strings were preserved without adding missing characters or relaxing a cut.
-
-<div class="sb-result sb-result--negative"><strong>Insufficient evidence.</strong> The computational failure is reproducible; a scientifically validated quality/cadence verdict is still <strong>unmeasured</strong>. Two implementations can agree while sharing an incompatible input contract. This does not establish an absence of usable observations, young stars or births.</div>
-
-| Fixed clump | Native rows | Unique literal rows at best counterpart | Frozen accepted rows |
-|---|---:|---:|---:|
-| G330.8814−0.3656 | 312 | 307 | 0 |
-| G351.2258+0.6937 | 273 | 75 | 0 |
-| G353.4272−0.3734 | 289 | 68 | 0 |
-
-The first and third best points also fail the original profile-fit criterion in every matched row. The second has overlapping SNR and fit-quality rejections. These are descriptive tallies under the unchanged rule, not a revised cadence verdict. All six alternatives remain available; the separate red third point has zero unique matched extractions and cannot inherit the blue point’s history.
-
-The original bounded unit stopped here. No corrected scientific rerun or further request followed automatically; the later offline repair received a separate explicit human instruction. A future contract repair must be explicit, separately frozen and tested on now-consumed evidence. No ownership, physical classification, representative precision/recall, new star or stellar birth is established. The earlier ranking, control, colour and radio/gas failures remain unchanged.
-
-The new acquisition used 14.61 seconds; including the earlier 91.19-second failed TAP attempt, acquisition consumed 105.80 of the original 600 seconds. Three new requests means four cumulative attempts. The new research packet is about 1.3 MiB; sampled acquisition RSS peaked at 34.94 MiB with at least 50.65 GiB free. Monitoring is sampled process-group evidence and may miss shorter peaks.
-
-Download [the qualified result](/public/data/starbirth/native-quality/results.md), [all cases and exact flag audit](/public/data/starbirth/native-quality/assessment.json), and [every raw response, unchanged analysis, independent receipt, protocol and source hash](/public/data/starbirth/native-quality/README.md). Exact source revision: `92ece66f0d3a3b927a5146df7b6b90c5f361fae9`.
-
-<h2 id="flag-repair">The flag repair worked. The quality gate still fails.</h2>
+<h2 id="flag-repair">The final native quality gate fails</h2>
 
 The approved offline repair reads the W2 grade from the same 874 downloaded rows. Two-character W1/W2 values and four-character W1/W2XX values expose the same active slots; raw strings stay unchanged. No missing bands were imputed, no new observations requested, and no numerical cut relaxed.
 
@@ -304,9 +282,9 @@ The approved offline repair reads the W2 grade from the same 874 downloaded rows
 
 The first and third best points fail the declared reduced profile-fit criterion in 307/307 and 68/68 matched rows. The second fails SNR in 61/75, profile fit in 24/75, image quality in 45/75 and the now correctly read W2 grade in 60/75. Counts overlap; they are not independent failure probabilities. All six alternatives remain separate, including the red third point with zero unique matched rows.
 
-This is a **post-read repair on consumed cases**, not fresh physical validation. Fifty valid synthetic encodings, fourteen malformed/null encodings and nine unchanged quality-boundary controls passed before execution. Independent Decimal/vector and exact old/new checks agree. The parser correction succeeds; the measurement route under the fixed criteria fails. The earlier unresolved readout remains visible as history above.
+This is a **post-read repair on consumed cases**, not fresh physical validation. The parser contract is corrected; the fixed measurement criteria still fail. The [original contract readout](/public/data/starbirth/native-quality/results.md) and unchanged native rows remain in the evidence packet. The numerical cuts were not relaxed.
 
-The repair used cached data only and about 4.3 seconds of guarded work, with at least 48.34 GiB free. Short-lived workers make RSS sampling incomplete; we do not claim those samples bound the true peak. The initial sandbox process-priority refusal occurred before the synthetic worker started and is preserved. No model or physical truth changed. All earlier ranking, colour, control and radio/gas limits remain; no star or birth is confirmed.
+
 
 Read [the corrected result](/public/data/starbirth/flag-repair/results.md), [the checked conclusion](/public/data/starbirth/flag-repair/checkpoint.json), and [all corrected rows, independent checks, exact delta, protocol, code and hashes](/public/data/starbirth/flag-repair/README.md). Source revision: `b38a93adaf95f3ee38fad04610ccfca061cfb3fa`.
 

@@ -1,0 +1,42 @@
+# Curated presentation of supported results; series.yml owns topics and outputs.
+order: [proof-atlas, se2-geodesics, preferred-directions, geometry-of-cosmic-web, geometry-of-seeing, hidden-protostars]
+positive:
+  - title: Complete compiled Lean proof graphs
+    kind: Verified representation
+    summary: Two finite corpora contain 739 and 1,359 declarations. The working corpus represents 670,018,056 expanded occurrences with 1,277,896 shared nodes.
+    scope: Structural coverage of the extracted corpora; article formalization remains partial.
+    url: /mathematics/2026/10/11/proof-atlas-research-program/#complete-compiled-proof-inventories
+    evidence: /projects/proof-atlas/coverage/
+    tool: /projects/proof-atlas/
+  - title: A measured correction to cosmic transport
+    kind: Numerical result
+    summary: Transverse damping reduces mean particle-position error from 4.98 to 4.52 voxels against Zel’dovich transport on three held-out simulation seeds.
+    scope: A tested effective model, with performance similar to MUSCLE; not a new gravitational law.
+    url: /mathematics/2026/07/04/cosmic-web-two-models/#the-correction-measured
+    evidence: /mathematics/2026/07/09/cosmic-web-B4-transverse-damping/
+  - title: An exact magnetic period identity
+    kind: Analytical result
+    summary: The launch-averaged period for the exponential magnetic profile reduces to a complete elliptic integral, with a critical dimensionless gradient of one half.
+    scope: A proved period-average identity; its identification with conjugate time remains conjectural.
+    url: /mathematics/2026/08/30/forbidden-directions-litmus-tests/#the-claim-that-hardened-the-refocusing-average-is-an-elliptic-integral
+    evidence: /articles/magnetic-flux-lifts/#theorem-b-the-elliptic-reduction-proved
+  - title: Exact shortest paths on SE(2)
+    kind: Published theory explained
+    summary: The classical optimal synthesis identifies cut times and minimizing paths for a vehicle that can drive and turn but cannot move sideways.
+    scope: Moiseev–Sachkov’s published theory; the interactive guide is an illustration.
+    url: /mathematics/se2-explained/
+    evidence: /mathematics/2026/05/15/geometry-of-seeing-cut-time-open-problem/
+    tool: /mathematics/se2-explained/#the-rule
+negative:
+  - title: The filament detector’s apparent win reversed
+    summary: Matching the realized skeleton length removed the orientation lift’s early advantage. Directional alignment improved; filament recovery did not.
+    url: /mathematics/2026/07/04/cosmic-web-two-models/#the-result--and-the-evaluation-flaw-that-preceded-it
+  - title: Standard fits beat the proposed magnetic estimators
+    summary: Matched comparisons favoured fitted field Jacobians for null type and polynomial fits for pair separation. The physical T96 null-census interpretation was withdrawn after a domain audit.
+    url: /mathematics/2026/08/30/forbidden-directions-litmus-tests/#what-stands-after-review
+  - title: A local caustic does not identify its group
+    summary: Generic germs are shared across geometries. Sampled degenerate tangencies also refute the claim that every tested tangency is a standard cusp.
+    url: /mathematics/2026/07/15/caustics-to-groups-research-program/#the-obstruction-that-shapes-everything
+  - title: Protostar ranking and control gates failed
+    summary: At equal review cost the embedding recovered 14 of 27 chemistry positives, against 15 for the nonlinear baseline. Only 333 control pairs passed the required 800-clump uncertainty gate.
+    url: /astrophysics/2026/10/11/hidden-protostars-research-program/#week

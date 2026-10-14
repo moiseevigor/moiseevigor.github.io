@@ -81,7 +81,8 @@ const assert=(ok,message)=>{if(!ok)throw Error(message);};
   }
   await page.setViewportSize({width:390,height:850});await page.locator('#pa-reference-detail').scrollIntoViewIfNeeded();
   await page.screenshot({path:path.join(shots,'lean-reference-mobile.png'),fullPage:true});
-  await page.setViewportSize({width:1440,height:1000});await page.goto(base+'/projects/proof-atlas/');
+  await page.setViewportSize({width:1440,height:1000});await page.goto(base+'/projects/proof-atlas/language/');
+  await page.locator('.pa-reference-scales > summary').click();
   await page.locator('[data-kind="app"]').click();
   const contrast=await page.locator('#pa-scale-core').evaluate(e=>{const s=getComputedStyle(e);const rgb=x=>x.match(/\d+/g).slice(0,3).map(Number);const lum=x=>rgb(x).map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4}).reduce((a,v,i)=>a+v*[.2126,.7152,.0722][i],0);return (Math.max(lum(s.color),lum(s.backgroundColor))+.05)/(Math.min(lum(s.color),lum(s.backgroundColor))+.05);});
   assert(contrast>=7,'Reported code contrast regression: '+contrast);

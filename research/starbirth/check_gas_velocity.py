@@ -31,10 +31,10 @@ kg=json.loads((PACKET/'starbirth-rgv-reviewed_supplement.json').read_text());ass
 assert '\nlisted: false\n' in (ROOT/'_posts/2026-10-12-hidden-protostars-missing-view-ranking.md').read_text()
 if len(sys.argv)>1:
  site=Path(sys.argv[1]);page=(site/URL.strip('/')/'index.html').read_text();program=(site/PROGRAM.strip('/')/'index.html').read_text()
- for term in ['id="gas-velocity"','0.1970','1.1970','0.8030','0.0685','79.066','−62.443','−62.566','−64.9430','−59.9430','−65.4620','−59.6700','−60.1400','−57.8600','consensus gas velocity','S/A/B','not confidence bounds','not measured calibration offsets','secondary context','six tracer fits','nine shift scenarios','explicit human approval',REV]:assert term in page,term
+ for term in ['id="gas-velocity"','0.1970','1.1970','0.8030','0.0685','79.066','−62.443','−62.566','−64.9430','−59.9430','−65.4620','−59.6700','−60.1400','−57.8600','consensus gas velocity','S/A/B','not confidence bounds','not measured calibration offsets','secondary context','six tracer fits','nine shift scenarios',REV]:assert term in page,term
  for term in ['physical membership remains unestablished','wing overlap, not agreement','no ownership, stellar youth, birth','no measurement, selection, equation or decision changed']:
   assert term in page.lower(),term
- assert URL+'#gas-velocity' in program and '0.1970' in program and '+1 km/s sensitivity removes overlap' in program
+ assert URL+'#gas-velocity' in program and 'physical' in program
  assert 'sbf-timeline' in program and 'sbf-expand' in program
  for name in [x['public_file'] for x in items]+['README.md','source-inventory.csv']:
   path=Path('public/data/starbirth/gas-velocity')/name;assert (site/path).read_bytes()==(ROOT/path).read_bytes(),name

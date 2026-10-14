@@ -1,7 +1,7 @@
 ---
 layout: distill
-last_modified_at: 2026-10-13
-title: "Forbidden Directions: The Growth Law and the Failed Estimators"
+last_modified_at: 2026-10-14
+title: "Forbidden Directions: Exact Magnetic Laws and Estimator Limits"
 subtitle: >
   A holonomy growth law and exact magnetic identities survive. Matched estimator comparisons favour standard fits, and a purported magnetospheric null census fails its domain audit.
 date: 2026-08-05 09:00:00

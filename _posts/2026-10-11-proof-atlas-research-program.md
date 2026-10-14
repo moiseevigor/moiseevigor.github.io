@@ -11,7 +11,7 @@ series_title: "Proof Atlas"
 series_part: 1
 permalink: /mathematics/2026/10/11/proof-atlas-research-program/
 published: true
-last_modified_at: 2026-10-13
+last_modified_at: 2026-10-14
 image: /public/img/posts/proof-atlas-1.svg
 comments: false
 description: >
@@ -22,31 +22,13 @@ description: >
 
 **Measured result · 12 October 2026.** Proof Atlas represents every owned declaration in two finite Lean corpora, including complete compiled theorem bodies and local dependency links. This establishes structural coverage of the extracted formal objects. It does not establish complete formalization of the accompanying article or automatic discovery of its mathematical argument.
 
-[Explore the compiled proof library](/projects/proof-atlas/library/) · [Crossing microscope](/projects/proof-atlas/) · [Coverage and evidence](/projects/proof-atlas/coverage/)
+[Explore the compiled proof library](/projects/proof-atlas/library/) · [Crossing microscope](/projects/proof-atlas/app/) · [Coverage and evidence](/projects/proof-atlas/coverage/)
 
 Lean checks a proof term against a proposition. In a context of assumptions $\Gamma$,
 
 $$\Gamma \vdash p : T$$
 
 means that the term $p$ has type $T$. An exact structural representation must retain expression children, declaration references and variable binding. A drawing's layout is an additional choice, not a mathematical invariant of the proof.
-
-## The crossing benchmark
-
-The first measured object is `CrossingData.crossing`, a counting lemma in the $\mathrm{SE}(2)$ formalization. Its exported type and proof contain:
-
-| Measured quantity | Value |
-|:--|--:|
-| Expression occurrences | **7,288** |
-| Structural child edges | **7,286** |
-| Bound-variable-to-binder links | **431** |
-| Constant-use occurrences | **2,892** |
-| Distinct directly referenced declarations | **42** |
-| Maximum expression depth | **49** |
-| Distinct structural subtree fingerprints | **665** |
-
-The type has 203 occurrences and the proof 7,085. The complete term payloads retain declaration names and occurrence paths. For example, [occurrence 1852](/projects/proof-atlas/app/#expr-1852) has 105 occurrences and decodes to `C.branch σ p = ψ + (2 : Real) * C.K * (↑n : Real)`. It is an equality proposition; selecting it does not itself supply a proof of that equality.
-
-The fingerprints measure repeated serialized syntax. They do not measure mathematical redundancy or certify equivalence across binder contexts. A reference to a named lemma also does not reveal that lemma's internal argument unless its body is included.
 
 ## Complete compiled proof inventories
 
@@ -62,6 +44,25 @@ Both inventories include complete types, available bodies, eight recursor reduct
 **Structural sharing is the substantial representation result.** The working corpus's 670,018,056 expanded occurrences are represented by 1,277,896 shared nodes. Sharing retains binder names, annotations and typed metadata. It does not identify proofs up to mathematical equivalence. A bound variable's meaning follows its root-to-node path: a shared node may occur under several different enclosing binders.
 
 The private native check kernel-checked all extracted types, available bodies and reduction rules and compared inferred types. Public packet audits reproduce graph, scope, hash and inventory checks. Original source projects and tactic scripts remain private, so these public audits are not an independent project-source kernel rebuild. The [coverage report](/projects/proof-atlas/coverage/) links the exact inventories and checks.
+
+<span id="the-crossing-benchmark"></span>
+
+## A worked crossing proof
+
+The first measured object is `CrossingData.crossing`, a counting lemma in the $\mathrm{SE}(2)$ formalization. Its exported type and proof contain:
+
+| Measured quantity | Value |
+|:--|--:|
+| Expression occurrences | **7,288** |
+| Structural child edges | **7,286** |
+| Bound-variable-to-binder links | **431** |
+| Constant-use occurrences | **2,892** |
+| Distinct directly referenced declarations | **42** |
+| Maximum expression depth | **49** |
+
+The type has 203 occurrences and the proof 7,085. The complete term payloads retain declaration names and occurrence paths. For example, [occurrence 1852](/projects/proof-atlas/app/#expr-1852) has 105 occurrences and decodes to `C.branch σ p = ψ + (2 : Real) * C.K * (↑n : Real)`. It is an equality proposition; selecting it does not itself supply a proof of that equality.
+
+A declaration reference reveals its supporting argument only when that declaration’s body is included. Repeated syntax is not by itself mathematical redundancy or proof equivalence.
 
 ## What the article correspondence establishes
 

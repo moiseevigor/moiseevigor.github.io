@@ -1,9 +1,9 @@
 ---
 layout: distill
-last_modified_at: 2026-10-13
-title: "The Cosmic Web: What the Orientation Lift Failed to Improve"
+last_modified_at: 2026-10-14
+title: "The Cosmic Web: A Transport Correction and Its Limits"
 subtitle: >
-  Matched comparisons refuted the orientation lift as a better filament detector. Directional alignment and a transverse-damping model survived, within measured limits.
+  A measured transverse correction improves approximate cosmic transport. Matched detector comparisons establish where orientation lifting helps and where it fails.
 date: 2026-07-03 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, SE3, cosmic-web, filaments, cosmology, optimal-control]
@@ -18,33 +18,22 @@ comments: true
 
 <div class="l-body" markdown="1">
 
-**The question, in one breath.** Your visual cortex completes a broken contour by
-lifting the image into a space of *positions and orientations* and tracing the
-straightest-possible path there. A cosmic filament is also a broken, oriented
-curve buried in a noisy cloud of points. So: is that same geometry a better
-**instrument** for finding filaments — or even part of the **physics** that builds
-them? We ran the whole program end to end. It mostly answered *no* — in the most
-useful way a program can.
+**Positive result.** A frozen transverse-damping model reduces mean particle-position error from **4.98 to 4.52 voxels** against Zel’dovich transport on three held-out simulation seeds. Its performance is similar to MUSCLE in this test; the coefficient is empirical, not a new gravitational law. The orientation lift also improves spine–tidal alignment (**0.73–0.76 versus 0.67**). [Transport and alignment results]({% post_url 2026-07-04-cosmic-web-two-models %}); [model definition and scope](/mathematics/2026/07/09/cosmic-web-B4-transverse-damping/).
+
+**The detector and physical interpretation have narrower limits.** Length-matched scoring removes the lift’s early filament-recovery advantage, tidal weighting hurts, and the proposed shortest-path formation interpretation fails for the tested transport models. These conclusions remain explicit below.
 
 **The tested hypotheses.** Every verdict is drawn from the experiment
 data in `research/cosmic-web/` (full reports in `docs/`, start at `SYNTHESIS.md`);
 the narrative version, with interactive figures built from that data, is
 [Part 2]({% post_url 2026-07-04-cosmic-web-two-models %}).
 
-| The bet | What would kill it | Verdict |
+| Tested claim | Comparator or limit | Conclusion |
 |---|---|---|
 | **H1** · the orientation lift finds filaments better than the standard curvature detector | no gain on known-truth toys | **✗ Refuted.** Under honest, length-matched scoring the plain detector matches or beats the lift almost everywhere; they only tie at the sparsest sampling. An early, spectacular "win" was a flaw in *our own* scoring. |
-| **H2** · feeding the detector the local gravity (tidal) frame sharpens it | tidal tuning ≤ plain tuning | **✗ Dead.** Tidal weighting *hurts* — even handed a perfect tidal frame. |
+| **H2** · feeding the detector the local gravity (tidal) frame sharpens it | tidal tuning ≤ plain tuning | **✗ Refuted.** Tidal weighting *hurts* — even handed a perfect tidal frame. |
 | **H3** · the webs sit on real mass and hot gas | stack signal below the standard skeleton | **△ Split verdict.** Both webs, drawn on 274,000 SDSS galaxies, sit on real hot gas (a 9σ stack — dominated by the tracer galaxies' own halos; the inter-halo *bridge* component is ≈2σ per instrument, matching published amplitudes). But by this bet's own comparative criterion the lift **loses**: the standard skeleton carries more of the gas signal on every statistic, and after halo masking the lift's spines retain essentially none. |
 | **H4** · matter *travels* along the geometry's shortest paths | geodesics can't beat a straight line | **✗ Refuted in the bulk.** Filaments *grow* by matter falling across them; the along-spine drainage toward nodes is real but weak in our measurements (⟨\|v̂·e₃\|⟩ ≈ 0.54–0.57, and our 1 h⁻¹Mpc grid under-resolves it). |
 | **T1** · *(theory)* the flow obeys a shortest-path (Jacobi-metric) variational principle | a derivation showing no such metric exists | **✗ Refuted, with a derivation.** In growth-factor time the Zel'dovich flow is free straight-line motion, and the adhesion model's variational principle is optimal transport with quadratic cost (Hopf–Lax), not geodesic flow of a potential-weighted metric: filaments are pile-ups of the flow, not paths of it ([Appendix B1](/mathematics/2026/07/06/cosmic-web-B1-transport-models/)). |
-
-**What survived the refutations** — and it's the interesting part. The lift reads the
-web's *directions* more faithfully than the standard detector (spine–tidal alignment
-0.73–0.76 vs 0.67; a cleaner **anisotropy descriptor**). A hybrid of the two gains
-purity at junctions. And — unplanned — chasing *"what does the standard transport
-model actually need?"* produced a one-rule model, **brake sideways at the web**, that
-lands within a hair of its theoretical best ([Part 2]({% post_url 2026-07-04-cosmic-web-two-models %}); [Appendix B4](/mathematics/2026/07/09/cosmic-web-B4-transverse-damping/)).
 
 **The full series.**
 

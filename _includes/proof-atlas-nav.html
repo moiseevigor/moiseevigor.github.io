@@ -1,0 +1,13 @@
+<nav class="atlas-navigation" aria-label="Proof Atlas pages">
+  <a class="atlas-navigation-brand" href="/projects/proof-atlas/">Proof Atlas</a>
+  <div class="atlas-navigation-main">
+    <a href="/projects/proof-atlas/"{% if page.url == '/projects/proof-atlas/' %} aria-current="page"{% endif %}>Overview</a>
+    <a href="/projects/proof-atlas/article/"{% if page.url contains '/article/' %} aria-current="page"{% endif %}>Read article</a>
+    <a href="/projects/proof-atlas/app/"{% if page.url contains '/app/' %} aria-current="page"{% endif %}>Explore proof</a>
+    <a href="/projects/proof-atlas/library/"{% if page.url contains '/library/' %} aria-current="page"{% endif %}>Browse Lean</a>
+  </div>
+  <details class="atlas-navigation-help">
+    <summary>Reference &amp; evidence</summary>
+    <div><a href="/projects/proof-atlas/grammar/"{% if page.url contains '/grammar/' %} aria-current="page"{% endif %}>Lean language reference</a><a href="/projects/proof-atlas/coverage/"{% if page.url contains '/coverage/' %} aria-current="page"{% endif %}>Coverage and provenance</a><a href="/mathematics/2026/10/11/proof-atlas-research-program/">Research result</a></div>
+  </details>
+</nav>
