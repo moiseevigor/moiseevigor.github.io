@@ -113,9 +113,14 @@
  $('pl-go').onclick=()=>safely(selectOccurrence(Number($('pl-occurrence').value),true));$('pl-parent').onclick=()=>{const r={root:selectedRoute.root,slots:selectedRoute.slots.slice(0,-1)};safely(selectOccurrence(A.walk(current.data,r),true,true,r));};$('pl-more').onclick=()=>safely(appendRows());
  for(const [id,value]of [['pl-term-view','term'],['pl-deps-view','dependencies']])$(id).onclick=()=>{mode=value;$('pl-term-view').setAttribute('aria-pressed',String(mode==='term'));$('pl-deps-view').setAttribute('aria-pressed',String(mode==='dependencies'));zoom=1;pan={x:0,y:0};safely(layout());};
  $('pl-minus').onclick=()=>{zoom=Math.max(.2,zoom/1.3);draw();};$('pl-plus').onclick=()=>{zoom=Math.min(30,zoom*1.3);draw();};$('pl-fit').onclick=()=>{zoom=1;pan={x:0,y:0};draw();};
+ function nearestPoint(x,y){
+  let nearest=null,distance=9;
+  for(const point of points){const next=Math.hypot(point.x-x,point.y-y);if(next<distance){nearest=point;distance=next;}}
+  return nearest;
+ }
  canvas.onpointerdown=e=>{drag={x:e.offsetX,y:e.offsetY,px:pan.x,py:pan.y,moved:false};canvas.setPointerCapture(e.pointerId);};
- canvas.onpointermove=e=>{if(drag){const x=e.offsetX-drag.x,y=e.offsetY-drag.y;drag.moved=drag.moved||Math.hypot(x,y)>4;pan={x:drag.px+x,y:drag.py+y};draw();}else{const n=points.find(p=>Math.hypot(p.x-e.offsetX,p.y-e.offsetY)<9);canvas.title=n?n.name:'';}};
- canvas.onpointerup=e=>{if(drag&&!drag.moved){const n=points.find(p=>Math.hypot(p.x-e.offsetX,p.y-e.offsetY)<9);if(n)safely(mode==='dependencies'?selectDeclaration(n.id):selectOccurrence(n.id,true,true,n.route));}drag=null;};
+ canvas.onpointermove=e=>{if(drag){const x=e.offsetX-drag.x,y=e.offsetY-drag.y;drag.moved=drag.moved||Math.hypot(x,y)>4;pan={x:drag.px+x,y:drag.py+y};draw();}else{const n=nearestPoint(e.offsetX,e.offsetY);canvas.title=n?n.name:'';}};
+ canvas.onpointerup=e=>{if(drag&&!drag.moved){const n=nearestPoint(e.offsetX,e.offsetY);if(n)safely(mode==='dependencies'?selectDeclaration(n.id):selectOccurrence(n.id,true,true,n.route));}drag=null;};
  canvas.onwheel=e=>{e.preventDefault();zoom=Math.max(.2,Math.min(30,zoom*Math.exp(-e.deltaY*.001)));draw();};
  new ResizeObserver(()=>{if(current)draw();}).observe(frame);
  $('pl-library').addEventListener('click',e=>{const a=e.target.closest('a');if(!a)return;const u=new URL(a.href,location.href);if((u.pathname===location.pathname||document.getElementById('pa-sync-panel')&&u.pathname==='/projects/proof-atlas/library/')&&u.searchParams.has('proof')){e.preventDefault();if(u.searchParams.get('edition')!==edition.id)chooseEdition(u.searchParams.get('edition'));safely(selectDeclaration(u.searchParams.get('proof')));}});

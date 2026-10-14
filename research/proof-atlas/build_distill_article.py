@@ -26,7 +26,17 @@ def build():
     assert index['source']['sha256']==source_hash
     # Source-positioned targets wrap the exact excerpt, preserving its text.
     # No mathematical text is rewritten to create these anchors.
+    # Keep the original proof paragraphs as groups before Pandoc splits targets
+    # into blocks. Restore each group after converting step targets to spans.
     enhanced=text
+    proof_regions=list(re.finditer(r'\\begin\{proof\}(.*?)\\end\{proof\}',text,re.S))
+    for proof_number,region in reversed(list(enumerate(proof_regions[:5]))):
+        body=region[1]
+        for paragraph_number,paragraph in reversed(list(enumerate(re.split(r'\n\s*\n',body)))):
+            if not paragraph.strip():continue
+            a=region.start(1)+body.index(paragraph)
+            marker=f'pa-proof-paragraph-{proof_number}-{paragraph_number}'
+            enhanced=enhanced[:a]+r'\hypertarget{'+marker+'}{'+paragraph+'}'+enhanced[a+len(paragraph):]
     steps=json.loads((ROOT/'public/data/proof-atlas/article-proof-steps.js').read_text().split('window.PROOF_ATLAS_PROOF_STEPS=')[1].rstrip(';\n'))
     assert steps['articleSha256']==source_hash
     all_passages=[*index['passages'],*[{**p,'htmlAnchor':p['id']} for p in steps['passages']]]
@@ -120,17 +130,27 @@ def build():
             for child in value.values():inline_proof_steps(child)
             if value.get('t')=='Div':
                 attrs,blocks=value['c']
-                if attrs[0].startswith('step-'):
+                if attrs[0].startswith('step-') or attrs[0] in {p['htmlAnchor'] for p in index['passages']}:
                     assert len(blocks)==1 and blocks[0]['t']in ('Para','Plain')
                     value.clear();value.update({'t':'Para','c':[{'t':'Span','c':[attrs,blocks[0]['c']]}]})
-                elif attrs[0]in ('proof-thm-first','proof-thm-cells'):
-                    assert all(block['t']=='Para' for block in blocks)
+                elif attrs[0].startswith('pa-proof-paragraph-'):
+                    assert all(block['t'] in ('Para','Plain') for block in blocks),(attrs[0],[b['t'] for b in blocks])
                     joined=[]
                     for block in blocks:
                         if joined:joined.append({'t':'Space'})
                         joined.extend(block['c'])
-                    value['c'][1]=[{'t':'Para','c':joined}]
+                    value.clear();value.update({'t':'Para','c':joined})
     inline_proof_steps(doc['blocks'])
+    # Pandoc puts the proof label and closing square outside the paragraph
+    # group. Rejoin those two annotations without merging original paragraphs.
+    for block in doc['blocks']:
+        if block.get('t')!='Div' or 'proof' not in block['c'][0][1]:continue
+        parts=block['c'][1]
+        if len(parts)>1 and parts[0]['t']=='Para' and len(parts[0]['c'])==1 and parts[0]['c'][0]['t']=='Emph':
+            parts[1]['c']=[*parts[0]['c'],{'t':'Space'},*parts[1]['c']];parts.pop(0)
+        if len(parts)>1 and parts[-1]['t']=='Para' and all(i['t']=='Str' for i in parts[-1]['c']) and ''.join(i['c'] for i in parts[-1]['c']).strip()=='◻':
+            parts[-2]['c'].extend([{'t':'Space'},*parts[-1]['c']]);parts.pop()
+    assert [len(b['c'][1]) for b in doc['blocks'] if b.get('t')=='Div' and 'proof' in b['c'][0][1]]==[4,1,1,1,1,2], 'Original proof paragraphs changed'
     assert section_index==len(sections)
     assert statement_index==len(statements)
     assert len(images)==figure==4
