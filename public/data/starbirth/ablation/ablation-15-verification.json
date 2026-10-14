@@ -1,0 +1,21 @@
+{
+  "schema": "independent-ablation-verification/1",
+  "status": "verified",
+  "registration_sha256": "7f46d16a6970c0b317d523c864d7ff279847c0c60b71e361bc4b862254f223b0",
+  "verification_registration_sha256": "c598dcf565fbdadd1b110f9e0470dd47fb89c8a449df2854cc042a9f30c58c22",
+  "verifier_allocation_correction": true,
+  "study_checkpoint_sha256": "a46c8d33554702faaa30092e150658a15ae9428a67c235e108d9754ecf469d08",
+  "summary_sha256": "4c9d0a43eb0580da3e02305c5bc9d4d30b6c2729106fbeacd9ef59c2cfcad609",
+  "source_ledger_sha256": "738d9912dea85907edf8941cf27ff81fc3e07f8a2efdc7cf946c6459cf314812",
+  "requested": 19328,
+  "proxy_positive": 27,
+  "proxy_negative": 235,
+  "unknown": 19066,
+  "main_fold_models": 80,
+  "auxiliary_fold_models": 128,
+  "input_immutability": true,
+  "all_scores_and_selections_replayed": true,
+  "training_only_preprocessing": true,
+  "physical_truth": false,
+  "full_goal_achieved": false
+}

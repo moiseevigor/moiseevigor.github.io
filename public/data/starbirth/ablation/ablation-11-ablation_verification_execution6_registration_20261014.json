@@ -1,0 +1,46 @@
+{
+  "schema": "ablation-verification-registration/1",
+  "role": "post-read streaming-only checker correction; every score/selection unchanged",
+  "inputs": [
+    {
+      "path": "research/verify_ablation_diagnostic.py",
+      "bytes": 15783,
+      "sha256": "5bd32c037b686060c9b30d0cc784a1b02ae6eb7a973f9d36602f80da40337b6f"
+    },
+    {
+      "path": "docs/ABLATION_VERIFICATION_AMENDMENT_20261014.md",
+      "bytes": 2523,
+      "sha256": "4d563dc492b459fa6edaefac3c0d3ff77fb028387f12bf8f402034ca14166bbd"
+    },
+    {
+      "path": "artifacts/ablation_execution3_registration_20261014.json",
+      "bytes": 7837,
+      "sha256": "7f46d16a6970c0b317d523c864d7ff279847c0c60b71e361bc4b862254f223b0"
+    },
+    {
+      "path": "artifacts/ablation_diagnostic_execution3_20261014/checkpoint.json",
+      "bytes": 2519,
+      "sha256": "a46c8d33554702faaa30092e150658a15ae9428a67c235e108d9754ecf469d08"
+    },
+    {
+      "path": "artifacts/ablation_diagnostic_execution3_20261014/resource_monitor.json",
+      "bytes": 15570,
+      "sha256": "5c458267d7163b5b41505e322c3dcbb2e19a152cfd7915cb8009b6a26de0138b"
+    },
+    {
+      "path": "artifacts/ablation_verification_execution5_registration_20261014.json",
+      "bytes": 1730,
+      "sha256": "f5ab321158a57af33c38f3ec7a068872287218a2013ccad9e5763a47b80e3084"
+    },
+    {
+      "path": "artifacts/ablation_verification_execution5_20261014/resource_monitor.json",
+      "bytes": 10457,
+      "sha256": "2562c95e5d8ba0b1d0e77b83cb7895ad5f1598999715ef42f2c33e63384a143a"
+    },
+    {
+      "path": "artifacts/ablation_verification_execution5_20261014/worker.log",
+      "bytes": 495,
+      "sha256": "bd3b9abe376458ae2ce84e0876bc12909a93e3fcaf555b00f1bf886bcb9f3b2a"
+    }
+  ]
+}

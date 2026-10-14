@@ -1,0 +1,3767 @@
+{
+  "schema": "retrospective-ablation/1",
+  "status": "diagnostic_only_not_model_selection",
+  "methods": [
+    "embedding",
+    "linear",
+    "nonlinear",
+    "infrared_embedding",
+    "physical",
+    "availability",
+    "infrared_raw",
+    "no_molecular",
+    "no_temporal",
+    "molecular",
+    "latent_only",
+    "embedding_no_masks",
+    "rank2",
+    "rank12",
+    "ridge01",
+    "ridge10"
+  ],
+  "requested": 19328,
+  "proxy_positive": 27,
+  "proxy_negative": 235,
+  "unknown": 19066,
+  "permutations": [
+    {
+      "method": "embedding",
+      "fold": 0,
+      "draw": 0,
+      "test": {
+        "auc": 0.7270531400966184,
+        "ap": 0.2662051519167815,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 0,
+      "draw": 0,
+      "test": {
+        "auc": 0.6243961352657005,
+        "ap": 0.19697207344774437,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 0,
+      "draw": 1,
+      "test": {
+        "auc": 0.4927536231884058,
+        "ap": 0.2498522553715339,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 0,
+      "draw": 1,
+      "test": {
+        "auc": 0.2898550724637681,
+        "ap": 0.13002726126520733,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 0,
+      "draw": 2,
+      "test": {
+        "auc": 0.3828502415458937,
+        "ap": 0.132547828647369,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 0,
+      "draw": 2,
+      "test": {
+        "auc": 0.286231884057971,
+        "ap": 0.10722324381017578,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 0,
+      "draw": 3,
+      "test": {
+        "auc": 0.41183574879227053,
+        "ap": 0.1286858392420136,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 0,
+      "draw": 3,
+      "test": {
+        "auc": 0.5205314009661836,
+        "ap": 0.16350050123164786,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 0,
+      "draw": 4,
+      "test": {
+        "auc": 0.3635265700483092,
+        "ap": 0.12110605122489006,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 0,
+      "draw": 4,
+      "test": {
+        "auc": 0.5507246376811594,
+        "ap": 0.17049857777865474,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 0,
+      "draw": 5,
+      "test": {
+        "auc": 0.6461352657004831,
+        "ap": 0.2890810173506408,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 0,
+      "draw": 5,
+      "test": {
+        "auc": 0.788647342995169,
+        "ap": 0.317851747215558,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 0,
+      "draw": 6,
+      "test": {
+        "auc": 0.23429951690821257,
+        "ap": 0.10125786535104575,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 0,
+      "draw": 6,
+      "test": {
+        "auc": 0.2041062801932367,
+        "ap": 0.097579392140701,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 0,
+      "draw": 7,
+      "test": {
+        "auc": 0.20169082125603865,
+        "ap": 0.09720762747866868,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 0,
+      "draw": 7,
+      "test": {
+        "auc": 0.3719806763285024,
+        "ap": 0.12293407735930284,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 0,
+      "draw": 8,
+      "test": {
+        "auc": 0.5132850241545893,
+        "ap": 0.15729746403680286,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 0,
+      "draw": 8,
+      "test": {
+        "auc": 0.7041062801932367,
+        "ap": 0.258901013592666,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 0,
+      "draw": 9,
+      "test": {
+        "auc": 0.5193236714975845,
+        "ap": 0.1524189128433144,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 0,
+      "draw": 9,
+      "test": {
+        "auc": 0.47101449275362317,
+        "ap": 0.14804483498967227,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 1,
+      "draw": 0,
+      "test": {
+        "auc": 0.2727272727272727,
+        "ap": 0.11341269841269841,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 1,
+      "draw": 0,
+      "test": {
+        "auc": 0.4090909090909091,
+        "ap": 0.1493606138107417,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 1,
+      "draw": 1,
+      "test": {
+        "auc": 0.09090909090909091,
+        "ap": 0.0884126984126984,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 1,
+      "draw": 1,
+      "test": {
+        "auc": 0.12121212121212122,
+        "ap": 0.09189095928226364,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 1,
+      "draw": 2,
+      "test": {
+        "auc": 0.09090909090909091,
+        "ap": 0.08738562091503267,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 1,
+      "draw": 2,
+      "test": {
+        "auc": 0.2878787878787879,
+        "ap": 0.1356521739130435,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 1,
+      "draw": 3,
+      "test": {
+        "auc": 0.7272727272727273,
+        "ap": 0.5526315789473685,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 1,
+      "draw": 3,
+      "test": {
+        "auc": 0.803030303030303,
+        "ap": 0.5714285714285714,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 1,
+      "draw": 4,
+      "test": {
+        "auc": 0.48484848484848486,
+        "ap": 0.15963987703118138,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 1,
+      "draw": 4,
+      "test": {
+        "auc": 0.48484848484848486,
+        "ap": 0.16340326340326342,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 1,
+      "draw": 5,
+      "test": {
+        "auc": 0.9696969696969697,
+        "ap": 0.8055555555555555,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 1,
+      "draw": 5,
+      "test": {
+        "auc": 0.8636363636363636,
+        "ap": 0.42063492063492064,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 1,
+      "draw": 6,
+      "test": {
+        "auc": 0.8484848484848485,
+        "ap": 0.5535714285714285,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 1,
+      "draw": 6,
+      "test": {
+        "auc": 0.9090909090909091,
+        "ap": 0.6333333333333333,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 1,
+      "draw": 7,
+      "test": {
+        "auc": 0.16666666666666666,
+        "ap": 0.0952729044834308,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 1,
+      "draw": 7,
+      "test": {
+        "auc": 0.3181818181818182,
+        "ap": 0.11842105263157894,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 1,
+      "draw": 8,
+      "test": {
+        "auc": 0.24242424242424243,
+        "ap": 0.10388888888888888,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 1,
+      "draw": 8,
+      "test": {
+        "auc": 0.09090909090909091,
+        "ap": 0.08863636363636364,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 1,
+      "draw": 9,
+      "test": {
+        "auc": 0.9242424242424242,
+        "ap": 0.6984126984126983,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 1,
+      "draw": 9,
+      "test": {
+        "auc": 0.9696969696969697,
+        "ap": 0.8055555555555555,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 2,
+      "draw": 0,
+      "test": {
+        "auc": 0.782608695652174,
+        "ap": 0.2785714285714286,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 2,
+      "draw": 0,
+      "test": {
+        "auc": 0.8405797101449275,
+        "ap": 0.37777777777777777,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 2,
+      "draw": 1,
+      "test": {
+        "auc": 0.2028985507246377,
+        "ap": 0.09846153846153845,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 2,
+      "draw": 1,
+      "test": {
+        "auc": 0.13043478260869565,
+        "ap": 0.08735042735042735,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 2,
+      "draw": 2,
+      "test": {
+        "auc": 0.8840579710144928,
+        "ap": 0.6555555555555556,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 2,
+      "draw": 2,
+      "test": {
+        "auc": 0.782608695652174,
+        "ap": 0.5054945054945055,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 2,
+      "draw": 3,
+      "test": {
+        "auc": 0.43478260869565216,
+        "ap": 0.1493734335839599,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 2,
+      "draw": 3,
+      "test": {
+        "auc": 0.42028985507246375,
+        "ap": 0.125,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 2,
+      "draw": 4,
+      "test": {
+        "auc": 0.8840579710144928,
+        "ap": 0.6555555555555556,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 2,
+      "draw": 4,
+      "test": {
+        "auc": 0.5072463768115942,
+        "ap": 0.41798941798941797,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 2,
+      "draw": 5,
+      "test": {
+        "auc": 0.43478260869565216,
+        "ap": 0.1323671497584541,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 2,
+      "draw": 5,
+      "test": {
+        "auc": 0.5072463768115942,
+        "ap": 0.41944444444444445,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 2,
+      "draw": 6,
+      "test": {
+        "auc": 0.7246376811594203,
+        "ap": 0.35555555555555557,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 2,
+      "draw": 6,
+      "test": {
+        "auc": 0.8260869565217391,
+        "ap": 0.3686868686868687,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 2,
+      "draw": 7,
+      "test": {
+        "auc": 0.5072463768115942,
+        "ap": 0.41842105263157897,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 2,
+      "draw": 7,
+      "test": {
+        "auc": 0.6086956521739131,
+        "ap": 0.21428571428571427,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 2,
+      "draw": 8,
+      "test": {
+        "auc": 0.8695652173913043,
+        "ap": 0.6,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 2,
+      "draw": 8,
+      "test": {
+        "auc": 0.5362318840579711,
+        "ap": 0.4288888888888889,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 2,
+      "draw": 9,
+      "test": {
+        "auc": 0.4492753623188406,
+        "ap": 0.24588235294117647,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 2,
+      "draw": 9,
+      "test": {
+        "auc": 0.463768115942029,
+        "ap": 0.145224171539961,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 3,
+      "draw": 0,
+      "test": {
+        "auc": 0.6265060240963856,
+        "ap": 0.24556153515780846,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 3,
+      "draw": 0,
+      "test": {
+        "auc": 0.6592082616179001,
+        "ap": 0.24997160723672884,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 3,
+      "draw": 1,
+      "test": {
+        "auc": 0.6798623063683304,
+        "ap": 0.36442012028853776,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 3,
+      "draw": 1,
+      "test": {
+        "auc": 0.6901893287435457,
+        "ap": 0.6214381334863263,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 3,
+      "draw": 2,
+      "test": {
+        "auc": 0.6454388984509466,
+        "ap": 0.12461516577442386,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 3,
+      "draw": 2,
+      "test": {
+        "auc": 0.7022375215146299,
+        "ap": 0.19885204081632651,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 3,
+      "draw": 3,
+      "test": {
+        "auc": 0.6265060240963856,
+        "ap": 0.2879075052919818,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 3,
+      "draw": 3,
+      "test": {
+        "auc": 0.7056798623063684,
+        "ap": 0.23311492432410086,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 3,
+      "draw": 4,
+      "test": {
+        "auc": 0.5559380378657487,
+        "ap": 0.09412286240669585,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 3,
+      "draw": 4,
+      "test": {
+        "auc": 0.7538726333907056,
+        "ap": 0.2160251283264232,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 3,
+      "draw": 5,
+      "test": {
+        "auc": 0.4612736660929432,
+        "ap": 0.08262888091339135,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 3,
+      "draw": 5,
+      "test": {
+        "auc": 0.48881239242685026,
+        "ap": 0.10439419653256131,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 3,
+      "draw": 6,
+      "test": {
+        "auc": 0.4853700516351119,
+        "ap": 0.07956337793830127,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 3,
+      "draw": 6,
+      "test": {
+        "auc": 0.32013769363166955,
+        "ap": 0.061912881328954304,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 3,
+      "draw": 7,
+      "test": {
+        "auc": 0.4853700516351119,
+        "ap": 0.14450383205328793,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 3,
+      "draw": 7,
+      "test": {
+        "auc": 0.49225473321858865,
+        "ap": 0.11984395650932918,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 3,
+      "draw": 8,
+      "test": {
+        "auc": 0.6540447504302926,
+        "ap": 0.14828211986549006,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 3,
+      "draw": 8,
+      "test": {
+        "auc": 0.5473321858864028,
+        "ap": 0.12605244187312664,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 3,
+      "draw": 9,
+      "test": {
+        "auc": 0.5077452667814114,
+        "ap": 0.11080584143074867,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 3,
+      "draw": 9,
+      "test": {
+        "auc": 0.6833046471600689,
+        "ap": 0.2322447160682455,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 4,
+      "draw": 0,
+      "test": {
+        "auc": 0.32894736842105265,
+        "ap": 0.05411255411255411,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 4,
+      "draw": 0,
+      "test": {
+        "auc": 0.2894736842105263,
+        "ap": 0.05115089514066496,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 4,
+      "draw": 1,
+      "test": {
+        "auc": 0.5789473684210527,
+        "ap": 0.08333333333333334,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 4,
+      "draw": 1,
+      "test": {
+        "auc": 0.3026315789473684,
+        "ap": 0.05300127713920817,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 4,
+      "draw": 2,
+      "test": {
+        "auc": 0.6842105263157895,
+        "ap": 0.12142857142857143,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 4,
+      "draw": 2,
+      "test": {
+        "auc": 0.8421052631578947,
+        "ap": 0.2,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 4,
+      "draw": 3,
+      "test": {
+        "auc": 0.8552631578947368,
+        "ap": 0.20833333333333331,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 4,
+      "draw": 3,
+      "test": {
+        "auc": 0.47368421052631576,
+        "ap": 0.06798245614035087,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 4,
+      "draw": 4,
+      "test": {
+        "auc": 0.5789473684210527,
+        "ap": 0.08496732026143791,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 4,
+      "draw": 4,
+      "test": {
+        "auc": 0.5131578947368421,
+        "ap": 0.07323232323232323,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 4,
+      "draw": 5,
+      "test": {
+        "auc": 0.7894736842105263,
+        "ap": 0.1534090909090909,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 4,
+      "draw": 5,
+      "test": {
+        "auc": 0.881578947368421,
+        "ap": 0.24285714285714285,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 4,
+      "draw": 6,
+      "test": {
+        "auc": 0.631578947368421,
+        "ap": 0.09429824561403508,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 4,
+      "draw": 6,
+      "test": {
+        "auc": 0.5789473684210527,
+        "ap": 0.08712121212121213,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 4,
+      "draw": 7,
+      "test": {
+        "auc": 0.23684210526315788,
+        "ap": 0.04816017316017316,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 4,
+      "draw": 7,
+      "test": {
+        "auc": 0.4473684210526316,
+        "ap": 0.06477732793522267,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 4,
+      "draw": 8,
+      "test": {
+        "auc": 0.23684210526315788,
+        "ap": 0.04777777777777778,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 4,
+      "draw": 8,
+      "test": {
+        "auc": 0.14473684210526316,
+        "ap": 0.04372294372294372,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "embedding",
+      "fold": 4,
+      "draw": 9,
+      "test": {
+        "auc": 0.06578947368421052,
+        "ap": 0.0402046783625731,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      },
+      "mixed_training_tiles": 4
+    },
+    {
+      "method": "nonlinear",
+      "fold": 4,
+      "draw": 9,
+      "test": {
+        "auc": 0.27631578947368424,
+        "ap": 0.05030303030303031,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      },
+      "mixed_training_tiles": 4
+    }
+  ],
+  "label_curves": [
+    {
+      "method": "embedding",
+      "fold": 0,
+      "fraction": 0.5,
+      "valid": true,
+      "positive": 6,
+      "negative": 81,
+      "components": 87,
+      "train": {
+        "auc": 0.9958847736625515,
+        "ap": 0.9583333333333334,
+        "positive": 6,
+        "negative": 81,
+        "prevalence": 0.06896551724137931
+      },
+      "test": {
+        "auc": 0.8876811594202898,
+        "ap": 0.5677690773279008,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      }
+    },
+    {
+      "method": "nonlinear",
+      "fold": 0,
+      "fraction": 0.5,
+      "valid": true,
+      "positive": 6,
+      "negative": 81,
+      "components": 87,
+      "train": {
+        "auc": 1.0,
+        "ap": 1.0,
+        "positive": 6,
+        "negative": 81,
+        "prevalence": 0.06896551724137931
+      },
+      "test": {
+        "auc": 0.9782608695652174,
+        "ap": 0.9153078403078402,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      }
+    },
+    {
+      "method": "embedding",
+      "fold": 0,
+      "fraction": 0.75,
+      "valid": true,
+      "positive": 11,
+      "negative": 120,
+      "components": 131,
+      "train": {
+        "auc": 0.9962121212121212,
+        "ap": 0.9715909090909091,
+        "positive": 11,
+        "negative": 120,
+        "prevalence": 0.08396946564885496
+      },
+      "test": {
+        "auc": 0.927536231884058,
+        "ap": 0.8138843276774311,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      }
+    },
+    {
+      "method": "nonlinear",
+      "fold": 0,
+      "fraction": 0.75,
+      "valid": true,
+      "positive": 11,
+      "negative": 120,
+      "components": 131,
+      "train": {
+        "auc": 0.9992424242424243,
+        "ap": 0.9924242424242423,
+        "positive": 11,
+        "negative": 120,
+        "prevalence": 0.08396946564885496
+      },
+      "test": {
+        "auc": 0.9867149758454107,
+        "ap": 0.9425888439046334,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      }
+    },
+    {
+      "method": "embedding",
+      "fold": 0,
+      "fraction": 1.0,
+      "valid": true,
+      "positive": 13,
+      "negative": 161,
+      "components": 174,
+      "train": {
+        "auc": 0.9928332537028189,
+        "ap": 0.9428904428904429,
+        "positive": 13,
+        "negative": 161,
+        "prevalence": 0.07471264367816093
+      },
+      "test": {
+        "auc": 0.9227053140096618,
+        "ap": 0.816019880174292,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      }
+    },
+    {
+      "method": "nonlinear",
+      "fold": 0,
+      "fraction": 1.0,
+      "valid": true,
+      "positive": 13,
+      "negative": 161,
+      "components": 174,
+      "train": {
+        "auc": 0.9985666507405638,
+        "ap": 0.9855769230769231,
+        "positive": 13,
+        "negative": 161,
+        "prevalence": 0.07471264367816093
+      },
+      "test": {
+        "auc": 0.9734299516908212,
+        "ap": 0.9123015873015872,
+        "positive": 12,
+        "negative": 69,
+        "prevalence": 0.14814814814814814
+      }
+    },
+    {
+      "method": "embedding",
+      "fold": 1,
+      "fraction": 0.5,
+      "valid": true,
+      "positive": 6,
+      "negative": 112,
+      "components": 118,
+      "train": {
+        "auc": 1.0,
+        "ap": 1.0,
+        "positive": 6,
+        "negative": 112,
+        "prevalence": 0.05084745762711865
+      },
+      "test": {
+        "auc": 0.6212121212121212,
+        "ap": 0.24444444444444444,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      }
+    },
+    {
+      "method": "nonlinear",
+      "fold": 1,
+      "fraction": 0.5,
+      "valid": true,
+      "positive": 6,
+      "negative": 112,
+      "components": 118,
+      "train": {
+        "auc": 1.0,
+        "ap": 1.0,
+        "positive": 6,
+        "negative": 112,
+        "prevalence": 0.05084745762711865
+      },
+      "test": {
+        "auc": 0.9090909090909091,
+        "ap": 0.6333333333333333,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      }
+    },
+    {
+      "method": "embedding",
+      "fold": 1,
+      "fraction": 0.75,
+      "valid": true,
+      "positive": 16,
+      "negative": 161,
+      "components": 177,
+      "train": {
+        "auc": 0.9968944099378882,
+        "ap": 0.9770720108695652,
+        "positive": 16,
+        "negative": 161,
+        "prevalence": 0.0903954802259887
+      },
+      "test": {
+        "auc": 0.9242424242424242,
+        "ap": 0.6666666666666666,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      }
+    },
+    {
+      "method": "nonlinear",
+      "fold": 1,
+      "fraction": 0.75,
+      "valid": true,
+      "positive": 16,
+      "negative": 161,
+      "components": 177,
+      "train": {
+        "auc": 0.9992236024844721,
+        "ap": 0.9930555555555556,
+        "positive": 16,
+        "negative": 161,
+        "prevalence": 0.0903954802259887
+      },
+      "test": {
+        "auc": 0.9545454545454546,
+        "ap": 0.7555555555555555,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      }
+    },
+    {
+      "method": "embedding",
+      "fold": 1,
+      "fraction": 1.0,
+      "valid": true,
+      "positive": 24,
+      "negative": 212,
+      "components": 236,
+      "train": {
+        "auc": 0.9925314465408805,
+        "ap": 0.9512407731157732,
+        "positive": 24,
+        "negative": 212,
+        "prevalence": 0.1016949152542373
+      },
+      "test": {
+        "auc": 0.9696969696969697,
+        "ap": 0.8666666666666667,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      }
+    },
+    {
+      "method": "nonlinear",
+      "fold": 1,
+      "fraction": 1.0,
+      "valid": true,
+      "positive": 24,
+      "negative": 212,
+      "components": 236,
+      "train": {
+        "auc": 0.9982311320754716,
+        "ap": 0.9868589743589743,
+        "positive": 24,
+        "negative": 212,
+        "prevalence": 0.1016949152542373
+      },
+      "test": {
+        "auc": 0.9545454545454546,
+        "ap": 0.8333333333333334,
+        "positive": 3,
+        "negative": 22,
+        "prevalence": 0.12
+      }
+    },
+    {
+      "method": "embedding",
+      "fold": 2,
+      "fraction": 0.5,
+      "valid": true,
+      "positive": 6,
+      "negative": 111,
+      "components": 117,
+      "train": {
+        "auc": 0.9954954954954955,
+        "ap": 0.9305555555555557,
+        "positive": 6,
+        "negative": 111,
+        "prevalence": 0.05128205128205128
+      },
+      "test": {
+        "auc": 1.0,
+        "ap": 1.0,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      }
+    },
+    {
+      "method": "nonlinear",
+      "fold": 2,
+      "fraction": 0.5,
+      "valid": true,
+      "positive": 6,
+      "negative": 111,
+      "components": 117,
+      "train": {
+        "auc": 1.0,
+        "ap": 1.0,
+        "positive": 6,
+        "negative": 111,
+        "prevalence": 0.05128205128205128
+      },
+      "test": {
+        "auc": 1.0,
+        "ap": 1.0,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      }
+    },
+    {
+      "method": "embedding",
+      "fold": 2,
+      "fraction": 0.75,
+      "valid": true,
+      "positive": 17,
+      "negative": 158,
+      "components": 175,
+      "train": {
+        "auc": 0.9936708860759493,
+        "ap": 0.9559971890854243,
+        "positive": 17,
+        "negative": 158,
+        "prevalence": 0.09714285714285714
+      },
+      "test": {
+        "auc": 1.0,
+        "ap": 1.0,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      }
+    },
+    {
+      "method": "nonlinear",
+      "fold": 2,
+      "fraction": 0.75,
+      "valid": true,
+      "positive": 17,
+      "negative": 158,
+      "components": 175,
+      "train": {
+        "auc": 0.9973938942665674,
+        "ap": 0.9811945238453438,
+        "positive": 17,
+        "negative": 158,
+        "prevalence": 0.09714285714285714
+      },
+      "test": {
+        "auc": 1.0,
+        "ap": 1.0,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      }
+    },
+    {
+      "method": "embedding",
+      "fold": 2,
+      "fraction": 1.0,
+      "valid": true,
+      "positive": 23,
+      "negative": 210,
+      "components": 233,
+      "train": {
+        "auc": 0.9881987577639751,
+        "ap": 0.9317656531211519,
+        "positive": 23,
+        "negative": 210,
+        "prevalence": 0.09871244635193133
+      },
+      "test": {
+        "auc": 1.0,
+        "ap": 1.0,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      }
+    },
+    {
+      "method": "nonlinear",
+      "fold": 2,
+      "fraction": 1.0,
+      "valid": true,
+      "positive": 23,
+      "negative": 210,
+      "components": 233,
+      "train": {
+        "auc": 0.9966873706004141,
+        "ap": 0.9775079992471297,
+        "positive": 23,
+        "negative": 210,
+        "prevalence": 0.09871244635193133
+      },
+      "test": {
+        "auc": 1.0,
+        "ap": 1.0,
+        "positive": 3,
+        "negative": 23,
+        "prevalence": 0.11538461538461539
+      }
+    },
+    {
+      "method": "embedding",
+      "fold": 3,
+      "fraction": 0.5,
+      "valid": false,
+      "positive": 2,
+      "negative": 75,
+      "components": 77
+    },
+    {
+      "method": "nonlinear",
+      "fold": 3,
+      "fraction": 0.5,
+      "valid": false,
+      "positive": 2,
+      "negative": 75,
+      "components": 77
+    },
+    {
+      "method": "embedding",
+      "fold": 3,
+      "fraction": 0.75,
+      "valid": true,
+      "positive": 11,
+      "negative": 104,
+      "components": 115,
+      "train": {
+        "auc": 0.9991258741258742,
+        "ap": 0.9924242424242423,
+        "positive": 11,
+        "negative": 104,
+        "prevalence": 0.09565217391304348
+      },
+      "test": {
+        "auc": 0.882960413080895,
+        "ap": 0.7128815628815629,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      }
+    },
+    {
+      "method": "nonlinear",
+      "fold": 3,
+      "fraction": 0.75,
+      "valid": true,
+      "positive": 11,
+      "negative": 104,
+      "components": 115,
+      "train": {
+        "auc": 1.0,
+        "ap": 1.0,
+        "positive": 11,
+        "negative": 104,
+        "prevalence": 0.09565217391304348
+      },
+      "test": {
+        "auc": 0.919104991394148,
+        "ap": 0.7807430664573521,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      }
+    },
+    {
+      "method": "embedding",
+      "fold": 3,
+      "fraction": 1.0,
+      "valid": true,
+      "positive": 19,
+      "negative": 134,
+      "components": 153,
+      "train": {
+        "auc": 0.9925373134328358,
+        "ap": 0.964700677131425,
+        "positive": 19,
+        "negative": 134,
+        "prevalence": 0.12418300653594772
+      },
+      "test": {
+        "auc": 0.8795180722891566,
+        "ap": 0.692955892034233,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      }
+    },
+    {
+      "method": "nonlinear",
+      "fold": 3,
+      "fraction": 1.0,
+      "valid": true,
+      "positive": 19,
+      "negative": 134,
+      "components": 153,
+      "train": {
+        "auc": 0.997643362136685,
+        "ap": 0.9873684210526315,
+        "positive": 19,
+        "negative": 134,
+        "prevalence": 0.12418300653594772
+      },
+      "test": {
+        "auc": 0.9380378657487092,
+        "ap": 0.8008403361344537,
+        "positive": 7,
+        "negative": 83,
+        "prevalence": 0.07777777777777778
+      }
+    },
+    {
+      "method": "embedding",
+      "fold": 4,
+      "fraction": 0.5,
+      "valid": true,
+      "positive": 7,
+      "negative": 97,
+      "components": 104,
+      "train": {
+        "auc": 0.9985272459499264,
+        "ap": 0.9821428571428571,
+        "positive": 7,
+        "negative": 97,
+        "prevalence": 0.0673076923076923
+      },
+      "test": {
+        "auc": 1.0,
+        "ap": 1.0,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      }
+    },
+    {
+      "method": "nonlinear",
+      "fold": 4,
+      "fraction": 0.5,
+      "valid": true,
+      "positive": 7,
+      "negative": 97,
+      "components": 104,
+      "train": {
+        "auc": 1.0,
+        "ap": 1.0,
+        "positive": 7,
+        "negative": 97,
+        "prevalence": 0.0673076923076923
+      },
+      "test": {
+        "auc": 1.0,
+        "ap": 1.0,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      }
+    },
+    {
+      "method": "embedding",
+      "fold": 4,
+      "fraction": 0.75,
+      "valid": true,
+      "positive": 19,
+      "negative": 137,
+      "components": 156,
+      "train": {
+        "auc": 0.9900115251632732,
+        "ap": 0.9451448304669722,
+        "positive": 19,
+        "negative": 137,
+        "prevalence": 0.12179487179487179
+      },
+      "test": {
+        "auc": 1.0,
+        "ap": 1.0,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      }
+    },
+    {
+      "method": "nonlinear",
+      "fold": 4,
+      "fraction": 0.75,
+      "valid": true,
+      "positive": 19,
+      "negative": 137,
+      "components": 156,
+      "train": {
+        "auc": 0.996926623127161,
+        "ap": 0.9844054580896685,
+        "positive": 19,
+        "negative": 137,
+        "prevalence": 0.12179487179487179
+      },
+      "test": {
+        "auc": 1.0,
+        "ap": 1.0,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      }
+    },
+    {
+      "method": "embedding",
+      "fold": 4,
+      "fraction": 1.0,
+      "valid": true,
+      "positive": 25,
+      "negative": 182,
+      "components": 207,
+      "train": {
+        "auc": 0.9830769230769231,
+        "ap": 0.9241635773590366,
+        "positive": 25,
+        "negative": 182,
+        "prevalence": 0.12077294685990338
+      },
+      "test": {
+        "auc": 1.0,
+        "ap": 1.0,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      }
+    },
+    {
+      "method": "nonlinear",
+      "fold": 4,
+      "fraction": 1.0,
+      "valid": true,
+      "positive": 25,
+      "negative": 182,
+      "components": 207,
+      "train": {
+        "auc": 0.9967032967032967,
+        "ap": 0.982063492063492,
+        "positive": 25,
+        "negative": 182,
+        "prevalence": 0.12077294685990338
+      },
+      "test": {
+        "auc": 1.0,
+        "ap": 1.0,
+        "positive": 2,
+        "negative": 38,
+        "prevalence": 0.05
+      }
+    }
+  ],
+  "results": {
+    "embedding": {
+      "folds": [
+        {
+          "fold": 0,
+          "train": {
+            "auc": 0.9928332537028189,
+            "ap": 0.9428904428904429,
+            "positive": 13,
+            "negative": 161,
+            "prevalence": 0.07471264367816093
+          },
+          "test": {
+            "auc": 0.9227053140096618,
+            "ap": 0.816019880174292,
+            "positive": 12,
+            "negative": 69,
+            "prevalence": 0.14814814814814814
+          }
+        },
+        {
+          "fold": 1,
+          "train": {
+            "auc": 0.9925314465408805,
+            "ap": 0.9512407731157732,
+            "positive": 24,
+            "negative": 212,
+            "prevalence": 0.1016949152542373
+          },
+          "test": {
+            "auc": 0.9696969696969697,
+            "ap": 0.8666666666666667,
+            "positive": 3,
+            "negative": 22,
+            "prevalence": 0.12
+          }
+        },
+        {
+          "fold": 2,
+          "train": {
+            "auc": 0.9881987577639751,
+            "ap": 0.9317656531211519,
+            "positive": 23,
+            "negative": 210,
+            "prevalence": 0.09871244635193133
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 3,
+            "negative": 23,
+            "prevalence": 0.11538461538461539
+          }
+        },
+        {
+          "fold": 3,
+          "train": {
+            "auc": 0.9925373134328358,
+            "ap": 0.964700677131425,
+            "positive": 19,
+            "negative": 134,
+            "prevalence": 0.12418300653594772
+          },
+          "test": {
+            "auc": 0.8795180722891566,
+            "ap": 0.692955892034233,
+            "positive": 7,
+            "negative": 83,
+            "prevalence": 0.07777777777777778
+          }
+        },
+        {
+          "fold": 4,
+          "train": {
+            "auc": 0.9830769230769231,
+            "ap": 0.9241635773590366,
+            "positive": 25,
+            "negative": 182,
+            "prevalence": 0.12077294685990338
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 2,
+            "negative": 38,
+            "prevalence": 0.05
+          }
+        }
+      ],
+      "macro": {
+        "train_auc": 0.9898355389034867,
+        "test_auc": 0.9543840711991576,
+        "gap": 0.035451467704329075,
+        "train_ap": 0.942952224723566,
+        "test_ap": 0.8751284877750383,
+        "eligible_folds": 5
+      },
+      "reviews": 18,
+      "recovered_positive": 14,
+      "selected_proxy_negative": 4,
+      "all_requested_reviews": 982,
+      "all_requested_positive": 24,
+      "all_requested_proxy_negative": 74,
+      "all_requested_unknown": 884,
+      "delta_recovery_vs_embedding": 0.0,
+      "delta_spatial_ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    "linear": {
+      "folds": [
+        {
+          "fold": 0,
+          "train": {
+            "auc": 0.9942666029622551,
+            "ap": 0.9588264299802761,
+            "positive": 13,
+            "negative": 161,
+            "prevalence": 0.07471264367816093
+          },
+          "test": {
+            "auc": 0.9879227053140096,
+            "ap": 0.9573412698412698,
+            "positive": 12,
+            "negative": 69,
+            "prevalence": 0.14814814814814814
+          }
+        },
+        {
+          "fold": 1,
+          "train": {
+            "auc": 0.9937106918238994,
+            "ap": 0.9649840799297321,
+            "positive": 24,
+            "negative": 212,
+            "prevalence": 0.1016949152542373
+          },
+          "test": {
+            "auc": 0.9242424242424242,
+            "ap": 0.5555555555555555,
+            "positive": 3,
+            "negative": 22,
+            "prevalence": 0.12
+          }
+        },
+        {
+          "fold": 2,
+          "train": {
+            "auc": 0.989648033126294,
+            "ap": 0.942865844510457,
+            "positive": 23,
+            "negative": 210,
+            "prevalence": 0.09871244635193133
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 3,
+            "negative": 23,
+            "prevalence": 0.11538461538461539
+          }
+        },
+        {
+          "fold": 3,
+          "train": {
+            "auc": 0.9948939512961509,
+            "ap": 0.9786184210526315,
+            "positive": 19,
+            "negative": 134,
+            "prevalence": 0.12418300653594772
+          },
+          "test": {
+            "auc": 0.9449225473321858,
+            "ap": 0.8047619047619047,
+            "positive": 7,
+            "negative": 83,
+            "prevalence": 0.07777777777777778
+          }
+        },
+        {
+          "fold": 4,
+          "train": {
+            "auc": 0.9896703296703296,
+            "ap": 0.9544765457808936,
+            "positive": 25,
+            "negative": 182,
+            "prevalence": 0.12077294685990338
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 2,
+            "negative": 38,
+            "prevalence": 0.05
+          }
+        }
+      ],
+      "macro": {
+        "train_auc": 0.9924379217757858,
+        "test_auc": 0.9714175353777239,
+        "gap": 0.021020386398061874,
+        "train_ap": 0.9599542642507981,
+        "test_ap": 0.863531746031746,
+        "eligible_folds": 5
+      },
+      "reviews": 18,
+      "recovered_positive": 14,
+      "selected_proxy_negative": 4,
+      "all_requested_reviews": 982,
+      "all_requested_positive": 27,
+      "all_requested_proxy_negative": 122,
+      "all_requested_unknown": 833,
+      "delta_recovery_vs_embedding": 0.0,
+      "delta_spatial_ci95": [
+        -0.1766042780748663,
+        0.10526315789473684
+      ]
+    },
+    "nonlinear": {
+      "folds": [
+        {
+          "fold": 0,
+          "train": {
+            "auc": 0.9985666507405638,
+            "ap": 0.9855769230769231,
+            "positive": 13,
+            "negative": 161,
+            "prevalence": 0.07471264367816093
+          },
+          "test": {
+            "auc": 0.9734299516908212,
+            "ap": 0.9123015873015872,
+            "positive": 12,
+            "negative": 69,
+            "prevalence": 0.14814814814814814
+          }
+        },
+        {
+          "fold": 1,
+          "train": {
+            "auc": 0.9982311320754716,
+            "ap": 0.9868589743589743,
+            "positive": 24,
+            "negative": 212,
+            "prevalence": 0.1016949152542373
+          },
+          "test": {
+            "auc": 0.9545454545454546,
+            "ap": 0.8333333333333334,
+            "positive": 3,
+            "negative": 22,
+            "prevalence": 0.12
+          }
+        },
+        {
+          "fold": 2,
+          "train": {
+            "auc": 0.9966873706004141,
+            "ap": 0.9775079992471297,
+            "positive": 23,
+            "negative": 210,
+            "prevalence": 0.09871244635193133
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 3,
+            "negative": 23,
+            "prevalence": 0.11538461538461539
+          }
+        },
+        {
+          "fold": 3,
+          "train": {
+            "auc": 0.997643362136685,
+            "ap": 0.9873684210526315,
+            "positive": 19,
+            "negative": 134,
+            "prevalence": 0.12418300653594772
+          },
+          "test": {
+            "auc": 0.9380378657487092,
+            "ap": 0.8008403361344537,
+            "positive": 7,
+            "negative": 83,
+            "prevalence": 0.07777777777777778
+          }
+        },
+        {
+          "fold": 4,
+          "train": {
+            "auc": 0.9967032967032967,
+            "ap": 0.982063492063492,
+            "positive": 25,
+            "negative": 182,
+            "prevalence": 0.12077294685990338
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 2,
+            "negative": 38,
+            "prevalence": 0.05
+          }
+        }
+      ],
+      "macro": {
+        "train_auc": 0.9975663624512862,
+        "test_auc": 0.9732026543969969,
+        "gap": 0.02436370805428927,
+        "train_ap": 0.9838751619598302,
+        "test_ap": 0.9092950513538749,
+        "eligible_folds": 5
+      },
+      "reviews": 18,
+      "recovered_positive": 15,
+      "selected_proxy_negative": 3,
+      "all_requested_reviews": 982,
+      "all_requested_positive": 26,
+      "all_requested_proxy_negative": 87,
+      "all_requested_unknown": 869,
+      "delta_recovery_vs_embedding": 0.037037037037037035,
+      "delta_spatial_ci95": [
+        0.0,
+        0.1111111111111111
+      ]
+    },
+    "infrared_embedding": {
+      "folds": [
+        {
+          "fold": 0,
+          "train": {
+            "auc": 0.9923554706163402,
+            "ap": 0.930952380952381,
+            "positive": 13,
+            "negative": 161,
+            "prevalence": 0.07471264367816093
+          },
+          "test": {
+            "auc": 0.9009661835748792,
+            "ap": 0.7670255602240896,
+            "positive": 12,
+            "negative": 69,
+            "prevalence": 0.14814814814814814
+          }
+        },
+        {
+          "fold": 1,
+          "train": {
+            "auc": 0.9909591194968553,
+            "ap": 0.9393726001166017,
+            "positive": 24,
+            "negative": 212,
+            "prevalence": 0.1016949152542373
+          },
+          "test": {
+            "auc": 0.9242424242424242,
+            "ap": 0.6984126984126983,
+            "positive": 3,
+            "negative": 22,
+            "prevalence": 0.12
+          }
+        },
+        {
+          "fold": 2,
+          "train": {
+            "auc": 0.9867494824016563,
+            "ap": 0.9175774709114236,
+            "positive": 23,
+            "negative": 210,
+            "prevalence": 0.09871244635193133
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 3,
+            "negative": 23,
+            "prevalence": 0.11538461538461539
+          }
+        },
+        {
+          "fold": 3,
+          "train": {
+            "auc": 0.9917517674783974,
+            "ap": 0.9606252473288485,
+            "positive": 19,
+            "negative": 134,
+            "prevalence": 0.12418300653594772
+          },
+          "test": {
+            "auc": 0.9018932874354562,
+            "ap": 0.7001915708812261,
+            "positive": 7,
+            "negative": 83,
+            "prevalence": 0.07777777777777778
+          }
+        },
+        {
+          "fold": 4,
+          "train": {
+            "auc": 0.9835164835164835,
+            "ap": 0.9172736263173078,
+            "positive": 25,
+            "negative": 182,
+            "prevalence": 0.12077294685990338
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 2,
+            "negative": 38,
+            "prevalence": 0.05
+          }
+        }
+      ],
+      "macro": {
+        "train_auc": 0.9890664647019465,
+        "test_auc": 0.945420379050552,
+        "gap": 0.04364608565139463,
+        "train_ap": 0.9331602651253125,
+        "test_ap": 0.8331259659036029,
+        "eligible_folds": 5
+      },
+      "reviews": 18,
+      "recovered_positive": 13,
+      "selected_proxy_negative": 5,
+      "all_requested_reviews": 982,
+      "all_requested_positive": 23,
+      "all_requested_proxy_negative": 61,
+      "all_requested_unknown": 898,
+      "delta_recovery_vs_embedding": -0.037037037037037035,
+      "delta_spatial_ci95": [
+        -0.18181818181818182,
+        0.0
+      ]
+    },
+    "physical": {
+      "folds": [
+        {
+          "fold": 0,
+          "train": {
+            "auc": 0.979933110367893,
+            "ap": 0.8683944609534445,
+            "positive": 13,
+            "negative": 161,
+            "prevalence": 0.07471264367816093
+          },
+          "test": {
+            "auc": 0.855072463768116,
+            "ap": 0.6024257605139959,
+            "positive": 12,
+            "negative": 69,
+            "prevalence": 0.14814814814814814
+          }
+        },
+        {
+          "fold": 1,
+          "train": {
+            "auc": 0.9669811320754716,
+            "ap": 0.8656273691320046,
+            "positive": 24,
+            "negative": 212,
+            "prevalence": 0.1016949152542373
+          },
+          "test": {
+            "auc": 0.9696969696969697,
+            "ap": 0.8666666666666667,
+            "positive": 3,
+            "negative": 22,
+            "prevalence": 0.12
+          }
+        },
+        {
+          "fold": 2,
+          "train": {
+            "auc": 0.9583850931677018,
+            "ap": 0.84756551734471,
+            "positive": 23,
+            "negative": 210,
+            "prevalence": 0.09871244635193133
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 3,
+            "negative": 23,
+            "prevalence": 0.11538461538461539
+          }
+        },
+        {
+          "fold": 3,
+          "train": {
+            "auc": 0.9744697564807542,
+            "ap": 0.9170848997493734,
+            "positive": 19,
+            "negative": 134,
+            "prevalence": 0.12418300653594772
+          },
+          "test": {
+            "auc": 0.8674698795180723,
+            "ap": 0.567914979757085,
+            "positive": 7,
+            "negative": 83,
+            "prevalence": 0.07777777777777778
+          }
+        },
+        {
+          "fold": 4,
+          "train": {
+            "auc": 0.9589010989010989,
+            "ap": 0.867319988569746,
+            "positive": 25,
+            "negative": 182,
+            "prevalence": 0.12077294685990338
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 2,
+            "negative": 38,
+            "prevalence": 0.05
+          }
+        }
+      ],
+      "macro": {
+        "train_auc": 0.967734038198584,
+        "test_auc": 0.9384478625966317,
+        "gap": 0.0292861756019523,
+        "train_ap": 0.8731984471498556,
+        "test_ap": 0.8074014813875495,
+        "eligible_folds": 5
+      },
+      "reviews": 18,
+      "recovered_positive": 13,
+      "selected_proxy_negative": 5,
+      "all_requested_reviews": 982,
+      "all_requested_positive": 23,
+      "all_requested_proxy_negative": 62,
+      "all_requested_unknown": 897,
+      "delta_recovery_vs_embedding": -0.037037037037037035,
+      "delta_spatial_ci95": [
+        -0.1111111111111111,
+        0.0
+      ]
+    },
+    "availability": {
+      "folds": [
+        {
+          "fold": 0,
+          "train": {
+            "auc": 0.8096034400382226,
+            "ap": 0.41173076923076923,
+            "positive": 13,
+            "negative": 161,
+            "prevalence": 0.07471264367816093
+          },
+          "test": {
+            "auc": 0.6914251207729468,
+            "ap": 0.22143605870020963,
+            "positive": 12,
+            "negative": 69,
+            "prevalence": 0.14814814814814814
+          }
+        },
+        {
+          "fold": 1,
+          "train": {
+            "auc": 0.7777122641509434,
+            "ap": 0.3165111084519963,
+            "positive": 24,
+            "negative": 212,
+            "prevalence": 0.1016949152542373
+          },
+          "test": {
+            "auc": 0.6136363636363636,
+            "ap": 0.15,
+            "positive": 3,
+            "negative": 22,
+            "prevalence": 0.12
+          }
+        },
+        {
+          "fold": 2,
+          "train": {
+            "auc": 0.7429606625258799,
+            "ap": 0.23763808458419125,
+            "positive": 23,
+            "negative": 210,
+            "prevalence": 0.09871244635193133
+          },
+          "test": {
+            "auc": 0.8115942028985508,
+            "ap": 0.4666666666666666,
+            "positive": 3,
+            "negative": 23,
+            "prevalence": 0.11538461538461539
+          }
+        },
+        {
+          "fold": 3,
+          "train": {
+            "auc": 0.7232914375490966,
+            "ap": 0.27452868246241563,
+            "positive": 19,
+            "negative": 134,
+            "prevalence": 0.12418300653594772
+          },
+          "test": {
+            "auc": 0.7857142857142857,
+            "ap": 0.2712765957446809,
+            "positive": 7,
+            "negative": 83,
+            "prevalence": 0.07777777777777778
+          }
+        },
+        {
+          "fold": 4,
+          "train": {
+            "auc": 0.7450549450549451,
+            "ap": 0.2650986842105263,
+            "positive": 25,
+            "negative": 182,
+            "prevalence": 0.12077294685990338
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 2,
+            "negative": 38,
+            "prevalence": 0.05
+          }
+        }
+      ],
+      "macro": {
+        "train_auc": 0.7597245498638175,
+        "test_auc": 0.7804739946044293,
+        "gap": -0.020749444740611866,
+        "train_ap": 0.3011014657879797,
+        "test_ap": 0.4218758642223114,
+        "eligible_folds": 5
+      },
+      "reviews": 18,
+      "recovered_positive": 7,
+      "selected_proxy_negative": 11,
+      "all_requested_reviews": 982,
+      "all_requested_positive": 27,
+      "all_requested_proxy_negative": 175,
+      "all_requested_unknown": 780,
+      "delta_recovery_vs_embedding": -0.25925925925925924,
+      "delta_spatial_ci95": [
+        -0.3181818181818182,
+        -0.18181818181818182
+      ]
+    },
+    "infrared_raw": {
+      "folds": [
+        {
+          "fold": 0,
+          "train": {
+            "auc": 0.9918776875298615,
+            "ap": 0.9328754578754579,
+            "positive": 13,
+            "negative": 161,
+            "prevalence": 0.07471264367816093
+          },
+          "test": {
+            "auc": 0.9082125603864735,
+            "ap": 0.8024481644000804,
+            "positive": 12,
+            "negative": 69,
+            "prevalence": 0.14814814814814814
+          }
+        },
+        {
+          "fold": 1,
+          "train": {
+            "auc": 0.9901729559748428,
+            "ap": 0.9368629758846524,
+            "positive": 24,
+            "negative": 212,
+            "prevalence": 0.1016949152542373
+          },
+          "test": {
+            "auc": 0.9090909090909091,
+            "ap": 0.6333333333333333,
+            "positive": 3,
+            "negative": 22,
+            "prevalence": 0.12
+          }
+        },
+        {
+          "fold": 2,
+          "train": {
+            "auc": 0.9853002070393375,
+            "ap": 0.9083949088809983,
+            "positive": 23,
+            "negative": 210,
+            "prevalence": 0.09871244635193133
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 3,
+            "negative": 23,
+            "prevalence": 0.11538461538461539
+          }
+        },
+        {
+          "fold": 3,
+          "train": {
+            "auc": 0.9925373134328358,
+            "ap": 0.9635088768572148,
+            "positive": 19,
+            "negative": 134,
+            "prevalence": 0.12418300653594772
+          },
+          "test": {
+            "auc": 0.8760757314974182,
+            "ap": 0.7346764346764346,
+            "positive": 7,
+            "negative": 83,
+            "prevalence": 0.07777777777777778
+          }
+        },
+        {
+          "fold": 4,
+          "train": {
+            "auc": 0.9835164835164835,
+            "ap": 0.9156643467579532,
+            "positive": 25,
+            "negative": 182,
+            "prevalence": 0.12077294685990338
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 2,
+            "negative": 38,
+            "prevalence": 0.05
+          }
+        }
+      ],
+      "macro": {
+        "train_auc": 0.9886809294986723,
+        "test_auc": 0.9386758401949603,
+        "gap": 0.05000508930371206,
+        "train_ap": 0.9314613132512554,
+        "test_ap": 0.8340915864819696,
+        "eligible_folds": 5
+      },
+      "reviews": 18,
+      "recovered_positive": 13,
+      "selected_proxy_negative": 5,
+      "all_requested_reviews": 982,
+      "all_requested_positive": 24,
+      "all_requested_proxy_negative": 56,
+      "all_requested_unknown": 902,
+      "delta_recovery_vs_embedding": -0.037037037037037035,
+      "delta_spatial_ci95": [
+        -0.18181818181818182,
+        0.0
+      ]
+    },
+    "no_molecular": {
+      "folds": [
+        {
+          "fold": 0,
+          "train": {
+            "auc": 0.9918776875298615,
+            "ap": 0.9328754578754579,
+            "positive": 13,
+            "negative": 161,
+            "prevalence": 0.07471264367816093
+          },
+          "test": {
+            "auc": 0.9094202898550725,
+            "ap": 0.8027403911680523,
+            "positive": 12,
+            "negative": 69,
+            "prevalence": 0.14814814814814814
+          }
+        },
+        {
+          "fold": 1,
+          "train": {
+            "auc": 0.9899764150943396,
+            "ap": 0.9360459824206001,
+            "positive": 24,
+            "negative": 212,
+            "prevalence": 0.1016949152542373
+          },
+          "test": {
+            "auc": 0.9090909090909091,
+            "ap": 0.6333333333333333,
+            "positive": 3,
+            "negative": 22,
+            "prevalence": 0.12
+          }
+        },
+        {
+          "fold": 2,
+          "train": {
+            "auc": 0.9853002070393375,
+            "ap": 0.9083949088809983,
+            "positive": 23,
+            "negative": 210,
+            "prevalence": 0.09871244635193133
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 3,
+            "negative": 23,
+            "prevalence": 0.11538461538461539
+          }
+        },
+        {
+          "fold": 3,
+          "train": {
+            "auc": 0.9925373134328358,
+            "ap": 0.9635088768572148,
+            "positive": 19,
+            "negative": 134,
+            "prevalence": 0.12418300653594772
+          },
+          "test": {
+            "auc": 0.8777969018932874,
+            "ap": 0.7352548036758563,
+            "positive": 7,
+            "negative": 83,
+            "prevalence": 0.07777777777777778
+          }
+        },
+        {
+          "fold": 4,
+          "train": {
+            "auc": 0.9837362637362638,
+            "ap": 0.9181643467579532,
+            "positive": 25,
+            "negative": 182,
+            "prevalence": 0.12077294685990338
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 2,
+            "negative": 38,
+            "prevalence": 0.05
+          }
+        }
+      ],
+      "macro": {
+        "train_auc": 0.9886855773665276,
+        "test_auc": 0.9392616201678538,
+        "gap": 0.04942395719867385,
+        "train_ap": 0.9317979145584449,
+        "test_ap": 0.8342657056354483,
+        "eligible_folds": 5
+      },
+      "reviews": 18,
+      "recovered_positive": 13,
+      "selected_proxy_negative": 5,
+      "all_requested_reviews": 982,
+      "all_requested_positive": 24,
+      "all_requested_proxy_negative": 59,
+      "all_requested_unknown": 899,
+      "delta_recovery_vs_embedding": -0.037037037037037035,
+      "delta_spatial_ci95": [
+        -0.18181818181818182,
+        0.0
+      ]
+    },
+    "no_temporal": {
+      "folds": [
+        {
+          "fold": 0,
+          "train": {
+            "auc": 0.9990444338270426,
+            "ap": 0.9897435897435898,
+            "positive": 13,
+            "negative": 161,
+            "prevalence": 0.07471264367816093
+          },
+          "test": {
+            "auc": 0.9734299516908212,
+            "ap": 0.9123015873015872,
+            "positive": 12,
+            "negative": 69,
+            "prevalence": 0.14814814814814814
+          }
+        },
+        {
+          "fold": 1,
+          "train": {
+            "auc": 0.9982311320754716,
+            "ap": 0.9868589743589743,
+            "positive": 24,
+            "negative": 212,
+            "prevalence": 0.1016949152542373
+          },
+          "test": {
+            "auc": 0.9545454545454546,
+            "ap": 0.8333333333333334,
+            "positive": 3,
+            "negative": 22,
+            "prevalence": 0.12
+          }
+        },
+        {
+          "fold": 2,
+          "train": {
+            "auc": 0.9966873706004141,
+            "ap": 0.9775079992471297,
+            "positive": 23,
+            "negative": 210,
+            "prevalence": 0.09871244635193133
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 3,
+            "negative": 23,
+            "prevalence": 0.11538461538461539
+          }
+        },
+        {
+          "fold": 3,
+          "train": {
+            "auc": 0.997643362136685,
+            "ap": 0.9873684210526315,
+            "positive": 19,
+            "negative": 134,
+            "prevalence": 0.12418300653594772
+          },
+          "test": {
+            "auc": 0.9397590361445783,
+            "ap": 0.8049219687875151,
+            "positive": 7,
+            "negative": 83,
+            "prevalence": 0.07777777777777778
+          }
+        },
+        {
+          "fold": 4,
+          "train": {
+            "auc": 0.9973626373626374,
+            "ap": 0.9849673202614379,
+            "positive": 25,
+            "negative": 182,
+            "prevalence": 0.12077294685990338
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 2,
+            "negative": 38,
+            "prevalence": 0.05
+          }
+        }
+      ],
+      "macro": {
+        "train_auc": 0.9977937872004501,
+        "test_auc": 0.9735468884761709,
+        "gap": 0.02424689872427932,
+        "train_ap": 0.9852892609327526,
+        "test_ap": 0.9101113778844871,
+        "eligible_folds": 5
+      },
+      "reviews": 18,
+      "recovered_positive": 15,
+      "selected_proxy_negative": 3,
+      "all_requested_reviews": 982,
+      "all_requested_positive": 26,
+      "all_requested_proxy_negative": 85,
+      "all_requested_unknown": 871,
+      "delta_recovery_vs_embedding": 0.037037037037037035,
+      "delta_spatial_ci95": [
+        0.0,
+        0.1111111111111111
+      ]
+    },
+    "molecular": {
+      "folds": [
+        {
+          "fold": 0,
+          "train": {
+            "auc": 0.9952221691352127,
+            "ap": 0.9626143087681549,
+            "positive": 13,
+            "negative": 161,
+            "prevalence": 0.07471264367816093
+          },
+          "test": {
+            "auc": 0.9891304347826086,
+            "ap": 0.9411778036778037,
+            "positive": 12,
+            "negative": 69,
+            "prevalence": 0.14814814814814814
+          }
+        },
+        {
+          "fold": 1,
+          "train": {
+            "auc": 0.9943003144654088,
+            "ap": 0.9673055085011607,
+            "positive": 24,
+            "negative": 212,
+            "prevalence": 0.1016949152542373
+          },
+          "test": {
+            "auc": 0.9696969696969697,
+            "ap": 0.8055555555555555,
+            "positive": 3,
+            "negative": 22,
+            "prevalence": 0.12
+          }
+        },
+        {
+          "fold": 2,
+          "train": {
+            "auc": 0.9937888198757764,
+            "ap": 0.9671461609620721,
+            "positive": 23,
+            "negative": 210,
+            "prevalence": 0.09871244635193133
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 3,
+            "negative": 23,
+            "prevalence": 0.11538461538461539
+          }
+        },
+        {
+          "fold": 3,
+          "train": {
+            "auc": 0.9984289080911233,
+            "ap": 0.9908466819221967,
+            "positive": 19,
+            "negative": 134,
+            "prevalence": 0.12418300653594772
+          },
+          "test": {
+            "auc": 0.9621342512908778,
+            "ap": 0.8724489795918368,
+            "positive": 7,
+            "negative": 83,
+            "prevalence": 0.07777777777777778
+          }
+        },
+        {
+          "fold": 4,
+          "train": {
+            "auc": 0.9958241758241758,
+            "ap": 0.9777907840951319,
+            "positive": 25,
+            "negative": 182,
+            "prevalence": 0.12077294685990338
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 2,
+            "negative": 38,
+            "prevalence": 0.05
+          }
+        }
+      ],
+      "macro": {
+        "train_auc": 0.9955128774783393,
+        "test_auc": 0.9841923311540912,
+        "gap": 0.011320546324248148,
+        "train_ap": 0.9731406888497434,
+        "test_ap": 0.9238364677650391,
+        "eligible_folds": 5
+      },
+      "reviews": 18,
+      "recovered_positive": 14,
+      "selected_proxy_negative": 4,
+      "all_requested_reviews": 982,
+      "all_requested_positive": 27,
+      "all_requested_proxy_negative": 140,
+      "all_requested_unknown": 815,
+      "delta_recovery_vs_embedding": 0.0,
+      "delta_spatial_ci95": [
+        -0.1766042780748663,
+        0.10526315789473684
+      ]
+    },
+    "latent_only": {
+      "folds": [
+        {
+          "fold": 0,
+          "train": {
+            "auc": 0.9971333014811276,
+            "ap": 0.9709114414996769,
+            "positive": 13,
+            "negative": 161,
+            "prevalence": 0.07471264367816093
+          },
+          "test": {
+            "auc": 0.9432367149758454,
+            "ap": 0.87752849002849,
+            "positive": 12,
+            "negative": 69,
+            "prevalence": 0.14814814814814814
+          }
+        },
+        {
+          "fold": 1,
+          "train": {
+            "auc": 0.9929245283018868,
+            "ap": 0.9534102182539682,
+            "positive": 24,
+            "negative": 212,
+            "prevalence": 0.1016949152542373
+          },
+          "test": {
+            "auc": 0.8939393939393939,
+            "ap": 0.7666666666666666,
+            "positive": 3,
+            "negative": 22,
+            "prevalence": 0.12
+          }
+        },
+        {
+          "fold": 2,
+          "train": {
+            "auc": 0.9853002070393375,
+            "ap": 0.9204501168056155,
+            "positive": 23,
+            "negative": 210,
+            "prevalence": 0.09871244635193133
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 3,
+            "negative": 23,
+            "prevalence": 0.11538461538461539
+          }
+        },
+        {
+          "fold": 3,
+          "train": {
+            "auc": 0.9937156323644933,
+            "ap": 0.9668024550540437,
+            "positive": 19,
+            "negative": 134,
+            "prevalence": 0.12418300653594772
+          },
+          "test": {
+            "auc": 0.8743545611015491,
+            "ap": 0.7176311250535382,
+            "positive": 7,
+            "negative": 83,
+            "prevalence": 0.07777777777777778
+          }
+        },
+        {
+          "fold": 4,
+          "train": {
+            "auc": 0.9857142857142858,
+            "ap": 0.9352834665334666,
+            "positive": 25,
+            "negative": 182,
+            "prevalence": 0.12077294685990338
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 2,
+            "negative": 38,
+            "prevalence": 0.05
+          }
+        }
+      ],
+      "macro": {
+        "train_auc": 0.9909575909802262,
+        "test_auc": 0.9423061340033577,
+        "gap": 0.048651456976868526,
+        "train_ap": 0.9493715396293542,
+        "test_ap": 0.8723652563497388,
+        "eligible_folds": 5
+      },
+      "reviews": 18,
+      "recovered_positive": 14,
+      "selected_proxy_negative": 4,
+      "all_requested_reviews": 982,
+      "all_requested_positive": 24,
+      "all_requested_proxy_negative": 95,
+      "all_requested_unknown": 863,
+      "delta_recovery_vs_embedding": 0.0,
+      "delta_spatial_ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    "embedding_no_masks": {
+      "folds": [
+        {
+          "fold": 0,
+          "train": {
+            "auc": 0.9937888198757764,
+            "ap": 0.9493006993006993,
+            "positive": 13,
+            "negative": 161,
+            "prevalence": 0.07471264367816093
+          },
+          "test": {
+            "auc": 0.9202898550724637,
+            "ap": 0.8076602596441664,
+            "positive": 12,
+            "negative": 69,
+            "prevalence": 0.14814814814814814
+          }
+        },
+        {
+          "fold": 1,
+          "train": {
+            "auc": 0.99312106918239,
+            "ap": 0.9557318192428488,
+            "positive": 24,
+            "negative": 212,
+            "prevalence": 0.1016949152542373
+          },
+          "test": {
+            "auc": 0.9848484848484849,
+            "ap": 0.9166666666666666,
+            "positive": 3,
+            "negative": 22,
+            "prevalence": 0.12
+          }
+        },
+        {
+          "fold": 2,
+          "train": {
+            "auc": 0.9884057971014493,
+            "ap": 0.9340138964507013,
+            "positive": 23,
+            "negative": 210,
+            "prevalence": 0.09871244635193133
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 3,
+            "negative": 23,
+            "prevalence": 0.11538461538461539
+          }
+        },
+        {
+          "fold": 3,
+          "train": {
+            "auc": 0.9937156323644933,
+            "ap": 0.9719773916449816,
+            "positive": 19,
+            "negative": 134,
+            "prevalence": 0.12418300653594772
+          },
+          "test": {
+            "auc": 0.8812392426850258,
+            "ap": 0.6933810621022604,
+            "positive": 7,
+            "negative": 83,
+            "prevalence": 0.07777777777777778
+          }
+        },
+        {
+          "fold": 4,
+          "train": {
+            "auc": 0.9837362637362638,
+            "ap": 0.9261781891050994,
+            "positive": 25,
+            "negative": 182,
+            "prevalence": 0.12077294685990338
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 2,
+            "negative": 38,
+            "prevalence": 0.05
+          }
+        }
+      ],
+      "macro": {
+        "train_auc": 0.9905535164520745,
+        "test_auc": 0.9572755165211948,
+        "gap": 0.033277999930879654,
+        "train_ap": 0.947440399148866,
+        "test_ap": 0.8835415976826188,
+        "eligible_folds": 5
+      },
+      "reviews": 18,
+      "recovered_positive": 14,
+      "selected_proxy_negative": 4,
+      "all_requested_reviews": 982,
+      "all_requested_positive": 24,
+      "all_requested_proxy_negative": 55,
+      "all_requested_unknown": 903,
+      "delta_recovery_vs_embedding": 0.0,
+      "delta_spatial_ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    "rank2": {
+      "folds": [
+        {
+          "fold": 0,
+          "train": {
+            "auc": 0.9894887720974678,
+            "ap": 0.9151470324547248,
+            "positive": 13,
+            "negative": 161,
+            "prevalence": 0.07471264367816093
+          },
+          "test": {
+            "auc": 0.9009661835748792,
+            "ap": 0.7919016319117739,
+            "positive": 12,
+            "negative": 69,
+            "prevalence": 0.14814814814814814
+          }
+        },
+        {
+          "fold": 1,
+          "train": {
+            "auc": 0.9758254716981132,
+            "ap": 0.9042883784403694,
+            "positive": 24,
+            "negative": 212,
+            "prevalence": 0.1016949152542373
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 3,
+            "negative": 22,
+            "prevalence": 0.12
+          }
+        },
+        {
+          "fold": 2,
+          "train": {
+            "auc": 0.9706004140786749,
+            "ap": 0.8898806428125651,
+            "positive": 23,
+            "negative": 210,
+            "prevalence": 0.09871244635193133
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 3,
+            "negative": 23,
+            "prevalence": 0.11538461538461539
+          }
+        },
+        {
+          "fold": 3,
+          "train": {
+            "auc": 0.9803613511390417,
+            "ap": 0.9460333384781603,
+            "positive": 19,
+            "negative": 134,
+            "prevalence": 0.12418300653594772
+          },
+          "test": {
+            "auc": 0.8864027538726333,
+            "ap": 0.7128684807256237,
+            "positive": 7,
+            "negative": 83,
+            "prevalence": 0.07777777777777778
+          }
+        },
+        {
+          "fold": 4,
+          "train": {
+            "auc": 0.9681318681318681,
+            "ap": 0.89955974850518,
+            "positive": 25,
+            "negative": 182,
+            "prevalence": 0.12077294685990338
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 2,
+            "negative": 38,
+            "prevalence": 0.05
+          }
+        }
+      ],
+      "macro": {
+        "train_auc": 0.9768815754290332,
+        "test_auc": 0.9574737874895025,
+        "gap": 0.01940778793953062,
+        "train_ap": 0.9109818281382,
+        "test_ap": 0.9009540225274794,
+        "eligible_folds": 5
+      },
+      "reviews": 18,
+      "recovered_positive": 14,
+      "selected_proxy_negative": 4,
+      "all_requested_reviews": 982,
+      "all_requested_positive": 23,
+      "all_requested_proxy_negative": 68,
+      "all_requested_unknown": 891,
+      "delta_recovery_vs_embedding": 0.0,
+      "delta_spatial_ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    "rank12": {
+      "folds": [
+        {
+          "fold": 0,
+          "train": {
+            "auc": 0.9976110845676063,
+            "ap": 0.9759832927253742,
+            "positive": 13,
+            "negative": 161,
+            "prevalence": 0.07471264367816093
+          },
+          "test": {
+            "auc": 0.967391304347826,
+            "ap": 0.9165084915084916,
+            "positive": 12,
+            "negative": 69,
+            "prevalence": 0.14814814814814814
+          }
+        },
+        {
+          "fold": 1,
+          "train": {
+            "auc": 0.9960691823899371,
+            "ap": 0.9727141519737869,
+            "positive": 24,
+            "negative": 212,
+            "prevalence": 0.1016949152542373
+          },
+          "test": {
+            "auc": 0.9242424242424242,
+            "ap": 0.7916666666666666,
+            "positive": 3,
+            "negative": 22,
+            "prevalence": 0.12
+          }
+        },
+        {
+          "fold": 2,
+          "train": {
+            "auc": 0.9971014492753624,
+            "ap": 0.9814699792960662,
+            "positive": 23,
+            "negative": 210,
+            "prevalence": 0.09871244635193133
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 3,
+            "negative": 23,
+            "prevalence": 0.11538461538461539
+          }
+        },
+        {
+          "fold": 3,
+          "train": {
+            "auc": 0.9972505891594659,
+            "ap": 0.98582995951417,
+            "positive": 19,
+            "negative": 134,
+            "prevalence": 0.12418300653594772
+          },
+          "test": {
+            "auc": 0.9345955249569707,
+            "ap": 0.7884353741496598,
+            "positive": 7,
+            "negative": 83,
+            "prevalence": 0.07777777777777778
+          }
+        },
+        {
+          "fold": 4,
+          "train": {
+            "auc": 0.9923076923076923,
+            "ap": 0.9634680134680135,
+            "positive": 25,
+            "negative": 182,
+            "prevalence": 0.12077294685990338
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 2,
+            "negative": 38,
+            "prevalence": 0.05
+          }
+        }
+      ],
+      "macro": {
+        "train_auc": 0.9960679995400128,
+        "test_auc": 0.965245850709444,
+        "gap": 0.030822148830568597,
+        "train_ap": 0.9758930793954821,
+        "test_ap": 0.8993221064649635,
+        "eligible_folds": 5
+      },
+      "reviews": 18,
+      "recovered_positive": 15,
+      "selected_proxy_negative": 3,
+      "all_requested_reviews": 982,
+      "all_requested_positive": 26,
+      "all_requested_proxy_negative": 70,
+      "all_requested_unknown": 886,
+      "delta_recovery_vs_embedding": 0.037037037037037035,
+      "delta_spatial_ci95": [
+        0.0,
+        0.1111111111111111
+      ]
+    },
+    "ridge01": {
+      "folds": [
+        {
+          "fold": 0,
+          "train": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 13,
+            "negative": 161,
+            "prevalence": 0.07471264367816093
+          },
+          "test": {
+            "auc": 0.9070048309178744,
+            "ap": 0.7687413262208344,
+            "positive": 12,
+            "negative": 69,
+            "prevalence": 0.14814814814814814
+          }
+        },
+        {
+          "fold": 1,
+          "train": {
+            "auc": 0.9996069182389937,
+            "ap": 0.9965972222222224,
+            "positive": 24,
+            "negative": 212,
+            "prevalence": 0.1016949152542373
+          },
+          "test": {
+            "auc": 0.9848484848484849,
+            "ap": 0.9166666666666666,
+            "positive": 3,
+            "negative": 22,
+            "prevalence": 0.12
+          }
+        },
+        {
+          "fold": 2,
+          "train": {
+            "auc": 0.9993788819875776,
+            "ap": 0.9946313799621926,
+            "positive": 23,
+            "negative": 210,
+            "prevalence": 0.09871244635193133
+          },
+          "test": {
+            "auc": 0.9710144927536232,
+            "ap": 0.8666666666666667,
+            "positive": 3,
+            "negative": 23,
+            "prevalence": 0.11538461538461539
+          }
+        },
+        {
+          "fold": 3,
+          "train": {
+            "auc": 0.9992144540455616,
+            "ap": 0.9949874686716792,
+            "positive": 19,
+            "negative": 134,
+            "prevalence": 0.12418300653594772
+          },
+          "test": {
+            "auc": 0.9053356282271945,
+            "ap": 0.6977272727272726,
+            "positive": 7,
+            "negative": 83,
+            "prevalence": 0.07777777777777778
+          }
+        },
+        {
+          "fold": 4,
+          "train": {
+            "auc": 0.9986813186813187,
+            "ap": 0.9909706959706961,
+            "positive": 25,
+            "negative": 182,
+            "prevalence": 0.12077294685990338
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 2,
+            "negative": 38,
+            "prevalence": 0.05
+          }
+        }
+      ],
+      "macro": {
+        "train_auc": 0.9993763145906904,
+        "test_auc": 0.9536406873494354,
+        "gap": 0.04573562724125495,
+        "train_ap": 0.995437353365358,
+        "test_ap": 0.8499603864562882,
+        "eligible_folds": 5
+      },
+      "reviews": 18,
+      "recovered_positive": 13,
+      "selected_proxy_negative": 5,
+      "all_requested_reviews": 982,
+      "all_requested_positive": 24,
+      "all_requested_proxy_negative": 55,
+      "all_requested_unknown": 903,
+      "delta_recovery_vs_embedding": -0.037037037037037035,
+      "delta_spatial_ci95": [
+        -0.07142857142857142,
+        0.0
+      ]
+    },
+    "ridge10": {
+      "folds": [
+        {
+          "fold": 0,
+          "train": {
+            "auc": 0.9646440516005733,
+            "ap": 0.8708828283727068,
+            "positive": 13,
+            "negative": 161,
+            "prevalence": 0.07471264367816093
+          },
+          "test": {
+            "auc": 0.9371980676328503,
+            "ap": 0.8144052706552706,
+            "positive": 12,
+            "negative": 69,
+            "prevalence": 0.14814814814814814
+          }
+        },
+        {
+          "fold": 1,
+          "train": {
+            "auc": 0.9699292452830188,
+            "ap": 0.8845945030178829,
+            "positive": 24,
+            "negative": 212,
+            "prevalence": 0.1016949152542373
+          },
+          "test": {
+            "auc": 0.8787878787878788,
+            "ap": 0.41111111111111115,
+            "positive": 3,
+            "negative": 22,
+            "prevalence": 0.12
+          }
+        },
+        {
+          "fold": 2,
+          "train": {
+            "auc": 0.962111801242236,
+            "ap": 0.8566426580658577,
+            "positive": 23,
+            "negative": 210,
+            "prevalence": 0.09871244635193133
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 3,
+            "negative": 23,
+            "prevalence": 0.11538461538461539
+          }
+        },
+        {
+          "fold": 3,
+          "train": {
+            "auc": 0.9838963079340142,
+            "ap": 0.928570479228374,
+            "positive": 19,
+            "negative": 134,
+            "prevalence": 0.12418300653594772
+          },
+          "test": {
+            "auc": 0.8657487091222031,
+            "ap": 0.6876718254869516,
+            "positive": 7,
+            "negative": 83,
+            "prevalence": 0.07777777777777778
+          }
+        },
+        {
+          "fold": 4,
+          "train": {
+            "auc": 0.9494505494505494,
+            "ap": 0.8485352352496737,
+            "positive": 25,
+            "negative": 182,
+            "prevalence": 0.12077294685990338
+          },
+          "test": {
+            "auc": 1.0,
+            "ap": 1.0,
+            "positive": 2,
+            "negative": 38,
+            "prevalence": 0.05
+          }
+        }
+      ],
+      "macro": {
+        "train_auc": 0.9660063911020783,
+        "test_auc": 0.9363469311085865,
+        "gap": 0.02965945999349191,
+        "train_ap": 0.877845140786899,
+        "test_ap": 0.7826376414506667,
+        "eligible_folds": 5
+      },
+      "reviews": 18,
+      "recovered_positive": 12,
+      "selected_proxy_negative": 6,
+      "all_requested_reviews": 982,
+      "all_requested_positive": 24,
+      "all_requested_proxy_negative": 79,
+      "all_requested_unknown": 879,
+      "delta_recovery_vs_embedding": -0.07407407407407407,
+      "delta_spatial_ci95": [
+        -0.36363636363636365,
+        0.0
+      ]
+    }
+  },
+  "diagnosis": {
+    "embedding": {
+      "verdict": "mixed_or_inconclusive",
+      "large_gap_folds": 1,
+      "low_train_and_test_folds": 0,
+      "ridge10_improves_test_auc": false,
+      "label_curve_change": {
+        "paired_folds": 4,
+        "test_auc_increase": 0.09587725076855513,
+        "gap_reduction": 0.10419403427439905
+      }
+    },
+    "nonlinear": {
+      "verdict": "mixed_or_inconclusive",
+      "large_gap_folds": 0,
+      "low_train_and_test_folds": 0,
+      "ridge10_improves_test_auc": false,
+      "label_curve_change": {
+        "paired_folds": 4,
+        "test_auc_increase": 0.010155906895037314,
+        "gap_reduction": 0.012608794365100762
+      }
+    }
+  },
+  "temporal_positive": 0,
+  "bootstrap_retained": 2000,
+  "registration_sha256": "7f46d16a6970c0b317d523c864d7ff279847c0c60b71e361bc4b862254f223b0",
+  "physical_truth": false,
+  "full_goal_achieved": false
+}

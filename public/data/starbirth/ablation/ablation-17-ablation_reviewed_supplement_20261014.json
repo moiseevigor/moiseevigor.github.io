@@ -1,0 +1,150 @@
+{
+  "schema": "reviewed-ablation-supplement/1",
+  "checkpoint_sha256": "5ab4add0ba29a35dae148a0ed11a9f5ed56823135976215b3e27d5135496f9fc",
+  "prior_graphs": [
+    {
+      "path": "artifacts/graph/candidate_screening_objective_terminal.json",
+      "sha256": "f8fe5be793176ead3f6d2d54eca3faceb8f26b97a9143db2e26d67d980af3b10"
+    },
+    {
+      "path": "artifacts/graph/e101_e102_final_bindings.json",
+      "sha256": "3c6386d4c7b02afc7d37bf6dbb535b1ed134bc870d4028596d2ae322ca64e99c"
+    },
+    {
+      "path": "artifacts/graph/e101_e102_presentation_terminal.json",
+      "sha256": "dd7dfe96070c739a39bbe9373efee27d02c0913104ae3bc31c2c1e1622adb392"
+    },
+    {
+      "path": "artifacts/graph/e101_e102_viewer_update.json",
+      "sha256": "5f47e845a83d14479d7717f9da2383e0da83fc4b17f1f78759afe1d167ca96a6"
+    },
+    {
+      "path": "artifacts/graph/e76_e79_final_presentation_terminal.json",
+      "sha256": "b3c04eb97d6f31e23e31a4e62807e6a0fcd135a82d0cdce64792682a862062d6"
+    },
+    {
+      "path": "artifacts/graph/e76_e79_graph_tests_terminal.json",
+      "sha256": "a8c58817378c5d5f3c228b3e65dfd4873e446706dfd1c50c7bb4d4b44b08dc4e"
+    },
+    {
+      "path": "artifacts/graph/e80_e81_presentation_terminal.json",
+      "sha256": "38538195a638f70cb318e91a7f1a8d9867062ed74bc71cadce87741e16ce3b7a"
+    },
+    {
+      "path": "artifacts/graph/e82_e83_final_bindings.json",
+      "sha256": "111749e6c0e82dd4e70ccddeda4e2883711ece5316a7e80fa0630dde3317c53b"
+    },
+    {
+      "path": "artifacts/graph/e82_e83_presentation_terminal.json",
+      "sha256": "c77fa49757cc84dab6b634df7463a50d73dc59beeb20cd2fcca760a5fe7e9a26"
+    },
+    {
+      "path": "artifacts/graph/e84_e86_scientific_bindings.json",
+      "sha256": "0d37568d8541e10cabfb4fdea5d3f181ee6f645ef74657654e4d7b3ded2f6d51"
+    },
+    {
+      "path": "artifacts/graph/e84_e86_viewer_update.json",
+      "sha256": "469925ed6c3fcc80c98ccf6a2820a52c7f3e6596d8a61aac15dfa4c3129167ea"
+    },
+    {
+      "path": "artifacts/graph/e87_viewer_update.json",
+      "sha256": "da6cbf6ce5dd0f514d25b7981354c7e4ed32578f5237ab6bdd1cccb491723cf8"
+    },
+    {
+      "path": "artifacts/graph/e88_presentation_terminal.json",
+      "sha256": "c7c90e2d0b03bf6a124aff40613487d244bbe838a85d4e623b4ac7c35e8e6a28"
+    },
+    {
+      "path": "artifacts/graph/e88_viewer_update.json",
+      "sha256": "ec8e224a9e1930194d55aed60d83b2dc2eef39680572b369b772d83ff378a6e8"
+    },
+    {
+      "path": "artifacts/graph/e89_presentation_terminal.json",
+      "sha256": "2c0017648cd51dcc239425bce32f0bbceb58f4af302c8cd143ab51fa8711bb5d"
+    },
+    {
+      "path": "artifacts/graph/e89_viewer_update.json",
+      "sha256": "be71d8b836bed2a077fdd67cb8d4423a55108df53776bab5ea806d863db047b4"
+    },
+    {
+      "path": "artifacts/graph/irac_colour_alternative_reviewed_note_20261012.json",
+      "sha256": "ecfe4f53f61a24434dedb14d8d5a0a7812ec67dd2cd8cbc8eb5974e4373ba886"
+    },
+    {
+      "path": "artifacts/graph/irac_colour_reviewed_supplement_20261012.json",
+      "sha256": "94dc7bfaae108acd2a446ad3d55a6a1a76ffaec318061aae8b0dbc238d97d9f4"
+    },
+    {
+      "path": "artifacts/graph/multisurvey_reviewed_supplement_20261012.json",
+      "sha256": "5fbab90d8c5729aa68b4fc3bad2916f7749dc426206e1f9a7e3dcff33bb1c2e3"
+    },
+    {
+      "path": "artifacts/graph/native_glimpse_reviewed_supplement_20261012.json",
+      "sha256": "6f05b7ccde905f5f0afac8d37170fa7b178fb91a4150f2d5de8e22732726e803"
+    },
+    {
+      "path": "artifacts/graph/native_mmb_position_reviewed_supplement_20261013.json",
+      "sha256": "653cacbc06714e40a5b6e24a75e15b66719728aa16b678c9c66ff4b3d1137cc0"
+    },
+    {
+      "path": "artifacts/graph/native_neowise_header_operational_note_20261013.json",
+      "sha256": "6481192a5dc949fc1ac087264368d38a06706e1714578275b1be2b4bef018803"
+    },
+    {
+      "path": "artifacts/graph/native_pixel_operator_learning_terminal.json",
+      "sha256": "426c829bbb555c83c38aff8041e99fd9252d64236d94b3e14eedbeac7fa98161"
+    },
+    {
+      "path": "artifacts/graph/native_profile_gator_approval_note_20261013.json",
+      "sha256": "5953b72a655e796465617f7908e585c5fa6fb17e77dd30311c508d88fa02a462"
+    },
+    {
+      "path": "artifacts/graph/native_profile_quality_transport_note_20261013.json",
+      "sha256": "b5fdac64a4a04f8fce101ee0b625d73b4b5e8f50f9f37ff24e017f901dfe2ed9"
+    },
+    {
+      "path": "artifacts/graph/native_profile_resumption_reviewed_supplement_20261014.json",
+      "sha256": "ed3d00608fa3a9a7daa835d7ad920916707a09422096c3129c703dbcb58adb0b"
+    },
+    {
+      "path": "artifacts/graph/neowise_flag_repair_reviewed_supplement_20261014.json",
+      "sha256": "0cd5e138654f95fd0873ac9f68dcb68ac098411c80ff6fb5cec1ac866f8a3eb3"
+    },
+    {
+      "path": "artifacts/graph/radio_gas_velocity_reviewed_supplement_20261013.json",
+      "sha256": "926f5d1bb62564ffa4797866cbbe9ffbf4972169077929901c0e2864ead13fe0"
+    },
+    {
+      "path": "artifacts/graph/research_graph.json",
+      "sha256": "5162974f4fe31bb591b244ad3cc96962069174e1e96fced8586ee6305763692c"
+    },
+    {
+      "path": "artifacts/graph/temporal_missingness_reviewed_supplement_20261012.json",
+      "sha256": "9e8dd86cf6329e3a48134a6814b87eba009ae8da3ffc32a29f39ce715e9db55a"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "F:ABL20261014:capacity",
+      "status": "verified_retrospective_diagnostic",
+      "label": "No clear underfit or uniform severe overfit on consumed proxies; embedding label-count sensitivity and one weak sky fold",
+      "source": "docs/ABLATION_RESULTS_20261014.md"
+    },
+    {
+      "id": "F:ABL20261014:selection",
+      "status": "verified_conditional_proxy_finding",
+      "label": "Availability-only recovers 7/27; zero positive proxies has the registered temporal view",
+      "source": "artifacts/ablation_diagnostic_execution3_20261014/summary.json"
+    },
+    {
+      "id": "F:ABL20261014:no_gain",
+      "status": "original_failed_gate_preserved",
+      "label": "Embedding 14/27; raw nonlinear 15/27; rank 12 is not promoted",
+      "source": "artifacts/ablation_verification_execution6_20261014/verification.json"
+    }
+  ],
+  "archive_not_merged": true,
+  "physical_validation": false,
+  "new_stars": 0,
+  "new_births": 0
+}
