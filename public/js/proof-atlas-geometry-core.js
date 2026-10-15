@@ -15,31 +15,61 @@
   for(const slot of route.slots){const kind=A.kinds[data.kind[id]];demand(Number.isInteger(slot)&&slot>=0&&slot<data.children[id].length,'invalid occurrence slot');if(binds(kind,slot))scope={node:id,route:{root:route.root,slots:[...slots]},outer:scope};slots.push(slot);id=data.children[id][slot];}
   return{id,scope};
  }
+ function telescope(data,route,limit=64){
+  demand(Number.isInteger(limit)&&limit>=2&&limit<=128,'telescope limit must be 2–128');
+  const start=checkedRoute(data,route),members=[],regions=[];let id=start.id,at={root:route.root,slots:[...route.slots]},scope=start.scope,hidden=0n;
+  while([6,7,8].includes(data.kind[id])&&members.length<limit){
+   const kind=A.kinds[data.kind[id]],cs=data.children[id],body=kind==='letE'?2:1,path=A.path(data,at);
+   const member={node:id,path,route:at,kind,payload:data.payloads[id],bodyPort:body,contextBefore:scope?A.path(data,scope.route):null,regions:[]};
+   for(let slot=0;slot<body;slot++){
+    const r={node:cs[slot],route:{root:at.root,slots:[...at.slots,slot]},field:vocabulary[kind].ports[slot],scopeBefore:path,requiredScope:data.neededScope[cs[slot]],expanded:data.expanded[cs[slot]]};r.path=A.path(data,r.route);member.regions.push(r);regions.push(r);hidden+=BigInt(r.expanded);
+   }
+   members.push(member);scope={node:id,route:at,outer:scope};id=cs[body];at={root:at.root,slots:[...at.slots,body]};
+  }
+  demand(BigInt(members.length)+hidden+BigInt(data.expanded[id])===BigInt(data.expanded[start.id]),'telescope partition failed');
+  return{members,regions,headerHidden:hidden.toString(),retainedOccurrences:members.length,continuation:{node:id,route:at,path:A.path(data,at),expanded:data.expanded[id]},truncated:[6,7,8].includes(data.kind[id])};
+ }
  function create(data,record,options={}){
   demand(data.serialization==='ExprDAG/1'&&data.declaration.name===record.name,'packet identity mismatch');
   const budget=options.maxNodes??48,depthLimit=options.maxDepth??4,route=options.route||{root:data.roots.length>1?1:0,slots:[]};
   demand(Number.isInteger(budget)&&budget>=1&&budget<=10000,'node budget must be 1–10000');demand(Number.isInteger(depthLimit)&&depthLimit>=0&&depthLimit<=128,'depth must be 0–128');
+  const folded=options.foldBinders===true,telescopeLimit=options.telescopeLimit??64;
+  if(folded)demand(Number.isInteger(telescopeLimit)&&telescopeLimit>=2&&telescopeLimit<=128,'telescope limit must be 2–128');
   const start=checkedRoute(data,route),work=[{id:start.id,scope:start.scope,route:{root:route.root,slots:[...route.slots]},depth:0,parent:null,field:null}],nodes=[],edges=[],links=[];
   for(let at=0;at<work.length;at++){
    const item=work[at],kind=A.kinds[data.kind[item.id]],rule=vocabulary[kind],cs=data.children[item.id];demand(rule&&cs.length===rule.ports.length,'unknown constructor or port arity');
    const path=A.path(data,item.route),expanded=BigInt(data.expanded[item.id]);demand(expanded>=1n,'invalid expanded count');
+   const prefix=folded&&[6,7,8].includes(data.kind[item.id])?telescope(data,item.route,telescopeLimit):null;
+   const fold=prefix&&prefix.members.length>=2;
    const expand=cs.length>0&&item.depth<depthLimit&&work.length+cs.length<=budget;
-   const node={id:path,node:item.id,kind,glyph:rule.glyph,role:rule.role,route:item.route,depth:item.depth,payload:data.payloads[item.id],ports:[...rule.ports],kernelPorts:rule.ports.map(p=>(kind==='lam'||kind==='forallE')&&p==='domain'?'binderType':p),expanded:expanded.toString(),hidden:expand?'0':(expanded-1n).toString(),frontier:cs.length>0&&!expand,children:[]};nodes.push(node);
-   if(item.parent!==null)edges.push({from:item.parent,to:path,field:item.field,relation:'constructor-child'});
+   const node={id:path,node:item.id,kind,glyph:rule.glyph,role:rule.role,route:item.route,depth:item.depth,payload:data.payloads[item.id],ports:[...rule.ports],kernelPorts:rule.ports.map(p=>(kind==='lam'||kind==='forallE')&&p==='domain'?'binderType':p),expanded:expanded.toString(),hidden:expand?'0':(expanded-1n).toString(),frontier:cs.length>0&&!expand,children:[]};
+   if(fold){
+    const open=item.depth<depthLimit&&work.length+1<=budget;
+    Object.assign(node,{abstraction:'binder-telescope',sourceRole:rule.role,role:'ordered-binder-context',glyph:'T',members:prefix.members,regions:prefix.regions,continuation:prefix.continuation,truncated:prefix.truncated,ports:['continuation'],retainedOccurrences:prefix.retainedOccurrences,hidden:(BigInt(prefix.headerHidden)+(open?0n:BigInt(prefix.continuation.expanded))).toString(),frontier:!open});
+    if(open){node.children.push(prefix.continuation.path);work.push({id:prefix.continuation.node,route:prefix.continuation.route,scope:checkedRoute(data,prefix.continuation.route).scope,depth:item.depth+1,parent:path,field:'continuation',relation:'telescope-continuation'});}
+   }else if(folded)node.retainedOccurrences=1;
+   nodes.push(node);
+   if(item.parent!==null)edges.push({from:item.parent,to:path,field:item.field,relation:item.relation||'constructor-child'});
    if(kind==='bvar'){
     let binder=item.scope,index=node.payload.index;demand(Number.isInteger(index)&&index>=0,'invalid de Bruijn index');while(index--&&binder)binder=binder.outer;
     links.push(binder?{from:path,relation:'bound-to',node:binder.node,route:binder.route,target:A.path(data,binder.route)}:{from:path,relation:'unresolved-scope',index:node.payload.index});
    }else if(kind==='const')links.push({from:path,relation:'declaration-reference',name:node.payload.name,levels:node.payload.levels});
    else if(kind==='fvar'||kind==='mvar')links.push({from:path,relation:kind==='fvar'?'local-context':'metavariable-context',contextId:node.payload.id,status:'context-not-exported'});
-   if(expand)cs.forEach((child,slot)=>{const childRoute={root:item.route.root,slots:[...item.route.slots,slot]};node.children.push(A.path(data,childRoute));work.push({id:child,route:childRoute,depth:item.depth+1,parent:path,field:rule.ports[slot],scope:binds(kind,slot)?{node:item.id,route:item.route,outer:item.scope}:item.scope});});
+   if(expand&&!fold)cs.forEach((child,slot)=>{const childRoute={root:item.route.root,slots:[...item.route.slots,slot]};node.children.push(A.path(data,childRoute));work.push({id:child,route:childRoute,depth:item.depth+1,parent:path,field:rule.ports[slot],scope:binds(kind,slot)?{node:item.id,route:item.route,outer:item.scope}:item.scope});});
   }
-  const visible=new Set(nodes.map(n=>n.id));for(const link of links)if(link.relation==='bound-to')link.boundary=!visible.has(link.target);
-  const total=BigInt(data.expanded[start.id]),hidden=nodes.reduce((s,n)=>s+BigInt(n.hidden),0n);demand(BigInt(nodes.length)+hidden===total,'frontier accounting failed');
-  return{format:'ProofAtlasGeometricScene/1',source:{name:record.name,indexSha256:record.indexSha256,sourceSha256:record.sourceSha256},root:{node:start.id,route:{root:route.root,slots:[...route.slots]},path:A.path(data,route),category:route.slots.length?'expression':data.declaration.rootPaths[route.root]==='root.type'?'declaration-type':data.declaration.rootPaths[route.root]==='root.value'?(record.kind==='theorem'?'proof-body':'definition-body'):'reduction-or-other-root'},budget,depthLimit,nodes,edges,links,stats:{displayed:nodes.length,hidden:hidden.toString(),represented:total.toString(),frontiers:nodes.filter(n=>n.frontier).length,scopeBoundaries:links.filter(l=>l.relation==='bound-to'&&l.boundary).length},guarantee:'Occurrence structure and lexical binding against the identified packet. No inferred occurrence types, semantic equivalence, tactic reconstruction or human comprehension claim.'};
+  const visible=new Set(nodes.map(n=>n.id)),members=new Map();for(const n of nodes)if(n.abstraction)for(let i=0;i<n.members.length;i++)members.set(n.members[i].path,{target:n.id,slot:i+1});
+  for(const link of links)if(link.relation==='bound-to'){
+   const member=members.get(link.target);link.boundary=!visible.has(link.target)&&!member;
+   if(member){link.displayTarget=member.target;link.telescopeSlot=member.slot;}
+  }
+  const total=BigInt(data.expanded[start.id]),hidden=nodes.reduce((s,n)=>s+BigInt(n.hidden),0n),retained=nodes.reduce((s,n)=>s+BigInt(n.retainedOccurrences??1),0n);demand(retained+hidden===total,'frontier accounting failed');
+  const result={format:folded?'ProofAtlasGeometricScene/2':'ProofAtlasGeometricScene/1',source:{name:record.name,indexSha256:record.indexSha256,sourceSha256:record.sourceSha256},root:{node:start.id,route:{root:route.root,slots:[...route.slots]},path:A.path(data,route),category:route.slots.length?'expression':data.declaration.rootPaths[route.root]==='root.type'?'declaration-type':data.declaration.rootPaths[route.root]==='root.value'?(record.kind==='theorem'?'proof-body':'definition-body'):'reduction-or-other-root'},budget,depthLimit,nodes,edges,links,stats:{displayed:nodes.length,hidden:hidden.toString(),represented:total.toString(),frontiers:nodes.filter(n=>n.frontier).length,scopeBoundaries:links.filter(l=>l.relation==='bound-to'&&l.boundary).length},guarantee:'Occurrence structure and lexical binding against the identified packet. No inferred occurrence types, semantic equivalence, tactic reconstruction or human comprehension claim.'};
+  if(folded){result.telescopeLimit=telescopeLimit;result.stats.retainedOccurrences=retained.toString();result.stats.foldedTelescopes=nodes.filter(n=>n.abstraction).length;result.stats.hiddenHeaderRegions=nodes.reduce((s,n)=>s+(n.regions?.length||0),0);result.stats.foldedBinders=nodes.reduce((s,n)=>s+(n.members?.length||0),0);}
+  return result;
  }
  function validate(scene,data,record){
-  demand(scene.format==='ProofAtlasGeometricScene/1','unknown format');demand(scene.source.name===record.name&&scene.source.indexSha256===record.indexSha256&&scene.source.sourceSha256===record.sourceSha256,'stale packet');
-  const expected=create(data,record,{route:scene.root.route,maxNodes:scene.budget,maxDepth:scene.depthLimit});demand(JSON.stringify(scene)===JSON.stringify(expected),'changed scene or scope');return true;
+  demand(['ProofAtlasGeometricScene/1','ProofAtlasGeometricScene/2'].includes(scene.format),'unknown format');demand(scene.source.name===record.name&&scene.source.indexSha256===record.indexSha256&&scene.source.sourceSha256===record.sourceSha256,'stale packet');
+  const expected=create(data,record,{route:scene.root.route,maxNodes:scene.budget,maxDepth:scene.depthLimit,foldBinders:scene.format==='ProofAtlasGeometricScene/2',telescopeLimit:scene.telescopeLimit});demand(JSON.stringify(scene)===JSON.stringify(expected),'changed scene or scope');return true;
  }
- const api={vocabulary,create,validate};if(typeof module!=='undefined'&&module.exports)module.exports=api;else host.ProofAtlasGeometry=api;
+ const api={vocabulary,create,validate,telescope};if(typeof module!=='undefined'&&module.exports)module.exports=api;else host.ProofAtlasGeometry=api;
 })(typeof window==='undefined'?globalThis:window);

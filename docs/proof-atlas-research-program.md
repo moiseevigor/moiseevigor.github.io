@@ -65,8 +65,23 @@ A scene is a finite cut of the expanded occurrence tree, constructed directly fr
 
 The audit currently checks 6,166 cuts across all 2,098 packets and 4,972 lexical-scope links. Three synthetic scope controls include a shared bound-variable node with different binders, a let value outside its new binder and an enclosing binder outside the current cut. These controls are structural tests, not additional kernel certificates.
 
-In the real `JacobiCore.E_pos` proof, shared node 17 appears on two displayed routes and points to different binders. The prototype draws separate occurrences. The initial largest proof-body cut shows 9 occurrences and records 462,476,262 hidden descendants, accounting for 462,476,271 body occurrences. This verifies the cut's accounting, not meaningful semantic compression or human comprehension. The depth cut can stop in a binder telescope before exposing the mathematical argument; structured telescope abstraction is a subsequent research problem.
+In the real `JacobiCore.E_pos` proof, shared node 17 appears on two displayed routes and points to different binders. The prototype draws separate occurrences. The initial largest proof-body cut shows 9 occurrences and records 462,476,262 hidden descendants, accounting for 462,476,271 body occurrences. This verifies the cut's accounting, not meaningful semantic compression or human comprehension. The raw depth cut can stop in a binder telescope before exposing the mathematical argument; the optional abstraction below addresses this specific obstruction.
 
 Reproduce with `node scripts/test-proof-atlas-geometry-core.cjs`; after the production site build, run `node scripts/test-proof-atlas-geometry-browser.cjs`. The browser checks real canvas/keyboard selections, distinct scope targets, exact boundary refinement, saved routes and the large body at phone/desktop widths in both themes.
 
 [Scene implementation](/public/js/proof-atlas-geometry-core.js) · [Independent path/scope audit](/scripts/test-proof-atlas-geometry-core.cjs) · [Browser checks](/scripts/test-proof-atlas-geometry-browser.cjs)
+
+
+## Binder-telescope abstraction
+
+The optional **Fold binder contexts** rule contracts a contiguous prefix of `lam`, `forallE` and `letE` along their body ports. `Tₙ` denotes an ordered n-entry telescope, not an additional Lean constructor. Mixed prefixes retain each entry's constructor, payload, visibility and original route. Type/domain and let-value regions remain separate hidden regions in the environment *before* their own binder. The continuation uses the environment after all retained entries.
+
+`ProofAtlasGeometricScene/2` distinguishes drawn vertices from retained kernel occurrences. A telescope with n entries retains n binder occurrences and the exact roots of its header regions. Thus **retained binder occurrences + hidden header regions + continuation = original subtree**, using exact expanded counts. No represented term is rewritten. Ordinary scene version 1 remains available by turning folding off.
+
+References from the displayed continuation to a folded binder keep the original target path plus a telescope vertex and one-based slot. The ordered header list opens the exact binder, its type or let-value region. The continuation also has an exact navigation link. A prefix scan is capped at 64 entries per compound node; a longer prefix is explicitly marked as continuing, rather than silently omitted.
+
+The independent audit checks 4,164 folded cuts across all 2,098 packets: 3,545 telescope vertices, 17,978 retained binder entries and 3,260 displayed links to folded slots. Small adversarial controls check a mixed lambda/forall/let prefix, shadowing, dependent header scopes, exact partition of every original occurrence and a deliberately truncated prefix. Five corruption/limit controls must be rejected. These are representation checks, not a semantic proof-compression certificate.
+
+On the largest compiled proof body, the 13-entry prefix becomes one vertex and the first non-binder application is exposed. The resulting initial view has 14 vertices retaining 26 kernel occurrences plus 462,476,245 hidden occurrences, still accounting for the original 462,476,271. This improves access past the header; readability of the remaining application structure and human comprehension remain unmeasured.
+
+[Folded example](/projects/proof-atlas/library/?proof=JacobiCore.E_pos&geometry=scoped&fold=binders) · [Large proof example](/projects/proof-atlas/library/?edition=working-26&proof=JacobiConcrete.AmplitudeChart.midpoint_polynomial&geometry=scoped&fold=binders) · [Telescope audit](/scripts/test-proof-atlas-telescope.cjs) · [Browser checks](/scripts/test-proof-atlas-telescope-browser.cjs)

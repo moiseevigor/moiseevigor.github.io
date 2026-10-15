@@ -13,6 +13,7 @@ on:
       - 'public/js/proof-atlas-sync.js'
       - 'public/js/proof-atlas-geometry-core.js'
       - 'scripts/test-proof-atlas-geometry*.cjs'
+      - 'scripts/test-proof-atlas-telescope*.cjs'
       - 'scripts/test-proof-atlas-sync.cjs'
       - '_includes/proof-atlas-compiled-workspace.html'
       - '_includes/proof-atlas-reading-tools.html'
@@ -131,6 +132,8 @@ jobs:
           node scripts/test-proof-atlas-coverage.cjs
           node scripts/test-proof-atlas-library.cjs
           node scripts/test-proof-atlas-sync.cjs
+          node scripts/test-proof-atlas-telescope.cjs
+          node scripts/test-proof-atlas-telescope-browser.cjs
           node scripts/test-proof-atlas-geometry-core.cjs
           node scripts/test-proof-atlas-geometry-browser.cjs
           node scripts/test-proof-atlas-proof-steps.cjs
