@@ -9,18 +9,19 @@
  for(const rule of Object.values(vocabulary)){Object.freeze(rule.ports);Object.freeze(rule);}
  const binds=(kind,slot)=>(kind==='lam'||kind==='forallE')&&slot===1||kind==='letE'&&slot===2;
  function demand(condition,message){if(!condition)throw Error('Geometric scene: '+message);}
- function checkedRoute(data,route){
+ function checkedRoute(data,route,initialScope=null){
   demand(route&&Number.isInteger(route.root)&&route.root>=0&&route.root<data.roots.length&&Array.isArray(route.slots),'invalid root route');
-  let id=data.roots[route.root],scope=null;const slots=[];
+  let id=data.roots[route.root],scope=initialScope;const slots=[];
   for(const slot of route.slots){const kind=A.kinds[data.kind[id]];demand(Number.isInteger(slot)&&slot>=0&&slot<data.children[id].length,'invalid occurrence slot');if(binds(kind,slot))scope={node:id,route:{root:route.root,slots:[...slots]},outer:scope};slots.push(slot);id=data.children[id][slot];}
   return{id,scope};
  }
- function telescope(data,route,limit=64){
+ const scopePath=(data,binder)=>binder.external?binder.target:A.path(data,binder.route);
+ function telescope(data,route,limit=64,initialScope=null){
   demand(Number.isInteger(limit)&&limit>=2&&limit<=128,'telescope limit must be 2–128');
-  const start=checkedRoute(data,route),members=[],regions=[];let id=start.id,at={root:route.root,slots:[...route.slots]},scope=start.scope,hidden=0n;
+  const start=checkedRoute(data,route,initialScope),members=[],regions=[];let id=start.id,at={root:route.root,slots:[...route.slots]},scope=start.scope,hidden=0n;
   while([6,7,8].includes(data.kind[id])&&members.length<limit){
    const kind=A.kinds[data.kind[id]],cs=data.children[id],body=kind==='letE'?2:1,path=A.path(data,at);
-   const member={node:id,path,route:at,kind,payload:data.payloads[id],bodyPort:body,contextBefore:scope?A.path(data,scope.route):null,regions:[]};
+   const member={node:id,path,route:at,kind,payload:data.payloads[id],bodyPort:body,contextBefore:scope?scopePath(data,scope):null,regions:[]};
    for(let slot=0;slot<body;slot++){
     const r={node:cs[slot],route:{root:at.root,slots:[...at.slots,slot]},field:vocabulary[kind].ports[slot],scopeBefore:path,requiredScope:data.neededScope[cs[slot]],expanded:data.expanded[cs[slot]]};r.path=A.path(data,r.route);member.regions.push(r);regions.push(r);hidden+=BigInt(r.expanded);
    }
@@ -41,19 +42,20 @@
   demand(BigInt(members.length)+mass+BigInt(data.expanded[id])===BigInt(data.expanded[start.id]),'application partition failed');
   return{members,arguments:args,head:{node:id,route:at,path:A.path(data,at),expanded:data.expanded[id]},spineComplete:!truncated,truncated,saturation:'not-inferred'};
  }
- function create(data,record,options={}){
+ function build(data,record,options={},origin=null,ambient=[]){
   demand(data.serialization==='ExprDAG/1'&&data.declaration.name===record.name,'packet identity mismatch');
   const budget=options.maxNodes??48,depthLimit=options.maxDepth??4,route=options.route||{root:data.roots.length>1?1:0,slots:[]};
   demand(Number.isInteger(budget)&&budget>=1&&budget<=10000,'node budget must be 1–10000');demand(Number.isInteger(depthLimit)&&depthLimit>=0&&depthLimit<=128,'depth must be 0–128');
   const folded=options.foldBinders===true,telescopeLimit=options.telescopeLimit??64,grouped=options.foldApplications===true,applicationLimit=options.applicationLimit??64,applicationChildren=options.maxApplicationChildren??6,maxLayerNodes=options.maxLayerNodes??8,abstracted=folded||grouped;
   if(folded)demand(Number.isInteger(telescopeLimit)&&telescopeLimit>=2&&telescopeLimit<=128,'telescope limit must be 2–128');
   if(grouped){demand(Number.isInteger(applicationLimit)&&applicationLimit>=2&&applicationLimit<=128,'application limit must be 2–128');demand(Number.isInteger(applicationChildren)&&applicationChildren>=1&&applicationChildren<=129,'application child budget must be 1–129');demand(Number.isInteger(maxLayerNodes)&&maxLayerNodes>=1&&maxLayerNodes<=10000,'layer budget must be 1–10000');}
-  const start=checkedRoute(data,route),work=[{id:start.id,scope:start.scope,route:{root:route.root,slots:[...route.slots]},depth:0,parent:null,field:null}],nodes=[],edges=[],links=[];
+  let initialScope=null;for(const b of ambient)initialScope={...b,target:b.path,external:true,outer:initialScope};
+  const start=checkedRoute(data,route,initialScope),work=[{id:start.id,scope:start.scope,route:{root:route.root,slots:[...route.slots]},depth:0,parent:null,field:null}],nodes=[],edges=[],links=[];
   const layers=new Map([[0,1]]),enqueue=item=>{work.push(item);layers.set(item.depth,(layers.get(item.depth)||0)+1);};
   for(let at=0;at<work.length;at++){
    const item=work[at],kind=A.kinds[data.kind[item.id]],rule=vocabulary[kind],cs=data.children[item.id];demand(rule&&cs.length===rule.ports.length,'unknown constructor or port arity');
    const path=A.path(data,item.route),expanded=BigInt(data.expanded[item.id]);demand(expanded>=1n,'invalid expanded count');
-   const prefix=folded&&[6,7,8].includes(data.kind[item.id])?telescope(data,item.route,telescopeLimit):null;
+   const prefix=folded&&[6,7,8].includes(data.kind[item.id])?telescope(data,item.route,telescopeLimit,initialScope):null;
    const fold=prefix&&prefix.members.length>=2;
    const spine=grouped&&kind==='app'?application(data,item.route,applicationLimit):null,group=spine&&spine.members.length>=2;
    const layerRoom=grouped?Math.max(0,maxLayerNodes-(layers.get(item.depth+1)||0)):Infinity;
@@ -62,7 +64,7 @@
    if(fold){
     const open=item.depth<depthLimit&&work.length+1<=budget&&layerRoom>=1;
     Object.assign(node,{abstraction:'binder-telescope',sourceRole:rule.role,role:'ordered-binder-context',glyph:'T',members:prefix.members,regions:prefix.regions,continuation:prefix.continuation,truncated:prefix.truncated,ports:['continuation'],retainedOccurrences:prefix.retainedOccurrences,hidden:(BigInt(prefix.headerHidden)+(open?0n:BigInt(prefix.continuation.expanded))).toString(),frontier:!open});
-    if(open){node.children.push(prefix.continuation.path);enqueue({id:prefix.continuation.node,route:prefix.continuation.route,scope:checkedRoute(data,prefix.continuation.route).scope,depth:item.depth+1,parent:path,field:'continuation',relation:'telescope-continuation'});}
+    if(open){node.children.push(prefix.continuation.path);enqueue({id:prefix.continuation.node,route:prefix.continuation.route,scope:checkedRoute(data,prefix.continuation.route,initialScope).scope,depth:item.depth+1,parent:path,field:'continuation',relation:'telescope-continuation'});}
    }else if(group){
     const regions=[{...spine.head,field:spine.truncated?'remaining-function':'head'},...spine.arguments.map(a=>({...a,field:'arg'+a.slot}))];
     const open=item.depth<depthLimit?Math.min(regions.length,applicationChildren,budget-work.length,layerRoom):0;
@@ -73,7 +75,7 @@
    if(item.parent!==null)edges.push({from:item.parent,to:path,field:item.field,relation:item.relation||'constructor-child'});
    if(kind==='bvar'){
     let binder=item.scope,index=node.payload.index;demand(Number.isInteger(index)&&index>=0,'invalid de Bruijn index');while(index--&&binder)binder=binder.outer;
-    links.push(binder?{from:path,relation:'bound-to',node:binder.node,route:binder.route,target:A.path(data,binder.route)}:{from:path,relation:'unresolved-scope',index:node.payload.index});
+    links.push(binder?{from:path,relation:'bound-to',node:binder.node,route:binder.route,target:scopePath(data,binder),...(binder.external?{external:true,targetNamespace:'proof-context'}:{})}:{from:path,relation:'unresolved-scope',index:node.payload.index});
    }else if(kind==='const')links.push({from:path,relation:'declaration-reference',name:node.payload.name,levels:node.payload.levels});
    else if(kind==='fvar'||kind==='mvar')links.push({from:path,relation:kind==='fvar'?'local-context':'metavariable-context',contextId:node.payload.id,status:'context-not-exported'});
    if(expand&&!fold&&!group)cs.forEach((child,slot)=>{const childRoute={root:item.route.root,slots:[...item.route.slots,slot]};node.children.push(A.path(data,childRoute));enqueue({id:child,route:childRoute,depth:item.depth+1,parent:path,field:rule.ports[slot],scope:binds(kind,slot)?{node:item.id,route:item.route,outer:item.scope}:item.scope});});
@@ -88,11 +90,20 @@
   if(abstracted)result.stats.retainedOccurrences=retained.toString();
   if(folded){const ts=nodes.filter(n=>n.abstraction==='binder-telescope');result.telescopeLimit=telescopeLimit;result.stats.foldedTelescopes=ts.length;result.stats.hiddenHeaderRegions=ts.reduce((s,n)=>s+n.regions.length,0);result.stats.foldedBinders=ts.reduce((s,n)=>s+n.members.length,0);}
   if(grouped){const apps=nodes.filter(n=>n.abstraction==='application-spine');Object.assign(result,{foldBinders:folded,applicationLimit,maxApplicationChildren:applicationChildren,maxLayerNodes});result.stats.foldedApplications=apps.length;result.stats.retainedApplications=apps.reduce((s,n)=>s+n.members.length,0);result.stats.hiddenApplicationRegions=apps.reduce((s,n)=>s+n.regions.filter(r=>!r.displayed).length,0);}
+  if(origin){result.format='ProofAtlasGeometricScene/4';result.source={...result.source,...origin};result.openOptions={foldBinders:folded,foldApplications:grouped};result.ambientContext=ambient.map(b=>({node:b.node,path:b.path,kind:b.kind,route:{root:b.route.root,slots:[...b.route.slots]}}));result.root.category='type-expression';result.guarantee='Structural type-expression cut with lexical links to internal type binders or the separately identified proof context. No inferred typing judgment for type descendants or semantic equivalence claim.';}
   return result;
+ }
+ function create(data,record,options={}){return build(data,record,options);}
+ function createOpen(data,record,origin,ambient,options={}){
+  demand(origin?.kind==='checked-type-expression'&&/^[a-f0-9]{64}$/.test(origin.typeEvidenceSha256),'open-expression origin');demand(Array.isArray(ambient)&&ambient.length<=512,'ambient context bound');for(const b of ambient)demand(Number.isInteger(b.node)&&b.node>=0&&typeof b.path==='string'&&['lam','forallE','letE'].includes(b.kind)&&Number.isInteger(b.route?.root)&&Array.isArray(b.route.slots),'ambient binder');
+  return build(data,record,options,origin,ambient);
+ }
+ function validateOpen(scene,data,record,origin,ambient){
+  demand(scene.format==='ProofAtlasGeometricScene/4','unknown open format');const expected=createOpen(data,record,origin,ambient,{route:scene.root.route,maxNodes:scene.budget,maxDepth:scene.depthLimit,foldBinders:scene.openOptions.foldBinders,foldApplications:scene.openOptions.foldApplications,telescopeLimit:scene.telescopeLimit,applicationLimit:scene.applicationLimit,maxApplicationChildren:scene.maxApplicationChildren,maxLayerNodes:scene.maxLayerNodes});demand(JSON.stringify(scene)===JSON.stringify(expected),'changed open scene or scope');return true;
  }
  function validate(scene,data,record){
   demand(['ProofAtlasGeometricScene/1','ProofAtlasGeometricScene/2','ProofAtlasGeometricScene/3'].includes(scene.format),'unknown format');demand(scene.source.name===record.name&&scene.source.indexSha256===record.indexSha256&&scene.source.sourceSha256===record.sourceSha256,'stale packet');
   const expected=create(data,record,{route:scene.root.route,maxNodes:scene.budget,maxDepth:scene.depthLimit,foldBinders:scene.format==='ProofAtlasGeometricScene/2'||scene.foldBinders===true,telescopeLimit:scene.telescopeLimit,foldApplications:scene.format==='ProofAtlasGeometricScene/3',applicationLimit:scene.applicationLimit,maxApplicationChildren:scene.maxApplicationChildren,maxLayerNodes:scene.maxLayerNodes});demand(JSON.stringify(scene)===JSON.stringify(expected),'changed scene or scope');return true;
  }
- const api={vocabulary,create,validate,telescope,application};if(typeof module!=='undefined'&&module.exports)module.exports=api;else host.ProofAtlasGeometry=api;
+ const api={vocabulary,create,validate,createOpen,validateOpen,telescope,application};if(typeof module!=='undefined'&&module.exports)module.exports=api;else host.ProofAtlasGeometry=api;
 })(typeof window==='undefined'?globalThis:window);
