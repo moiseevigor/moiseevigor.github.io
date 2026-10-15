@@ -128,3 +128,17 @@ python3 research/proof-atlas/verify_binding_uses_controls.py /path/to/lean
 CI also downloads the pinned official Parquet file, verifies its complete hash,
 and recovers all 24 exact source identities with the same sampling rule. It does
 not upload those original scripts or compile Mathlib.
+
+
+## One-step let reduction
+
+`type_let_reductions.py` reopens the same compiled modules and verifies every source/module hash before and after extraction. It queries one representative route for each of the 48 stored let nodes in seven declarations, without changing the original 175-query package. `ExportLetReduction.lean` records domain, value, body and result judgments. All 48 exact queries pass. The private raw attestation is projected by `publish_let_reductions.cjs` into separate compiled-only sidecars.
+
+```sh
+python3 research/proof-atlas/type_let_reductions.py --evaluation-dir /tmp/atlas-ai/evaluation --snapshot /path/to/pinned-dependency-metadata --lean /path/to/lean
+node research/proof-atlas/publish_let_reductions.cjs /tmp/atlas-ai/evaluation/native-lets-01.json
+node scripts/test-proof-atlas-let-reductions.cjs
+python3 research/proof-atlas/verify_let_controls.py /path/to/lean
+```
+
+If a compiler probe fails, use a fresh `--tag` to preserve its inputs and logs. Extraction uses the same fixed memory, disk and execution limits. The sidecars contain compiled graphs and native evidence only. One representative route does not establish typed coverage of every occurrence of a shared node. Exact independent substitution and occurrence accounting supplement native conversion, which alone cannot establish proof-term provenance in the presence of proof irrelevance. The computed DAG/node bounds and audit scope are recorded in the research program.

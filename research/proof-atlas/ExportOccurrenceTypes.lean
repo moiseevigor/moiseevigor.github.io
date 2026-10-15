@@ -408,10 +408,11 @@ def inspect (original term : Expr) (xs : Array Expr) (context : Array Json) (sha
   ("typeRoot",nat typeRoot),("typeGraph",graphJson types),("typeText",str text),
   ("typeTextIsPresentation",toJson true),("arguments",toJson arguments)] ++ application.toList)
 
-partial def atRoute (e : Expr) (rest : List Nat) (xs : Array Expr) (context : Array Json)
-    (shared : Shared) (root : Nat) (slots : Array Nat) (path : String) : MetaM Json := do
+partial def atRouteWith (e : Expr) (rest : List Nat) (xs : Array Expr) (context : Array Json)
+    (shared : Shared) (root : Nat) (slots : Array Nat) (path : String)
+    (observe : Expr → Expr → Array Expr → Array Json → Shared → Nat → Array Nat → String → MetaM Json) : MetaM Json := do
  match rest with
- | [] => inspect e (e.instantiateRev xs) xs context shared root slots path
+ | [] => observe e (e.instantiateRev xs) xs context shared root slots path
  | slot :: tail =>
   let (field,child) ← match e,slot with
    | .app f _,0 => pure ("fn",f) | .app _ a,1 => pure ("arg",a)
@@ -420,7 +421,7 @@ partial def atRoute (e : Expr) (rest : List Nat) (xs : Array Expr) (context : Ar
    | .letE _ t _ _ _,0 => pure ("type",t) | .letE _ _ v _ _,1 => pure ("value",v) | .letE _ _ _ b _,2 => pure ("body",b)
    | .mdata _ x,0 => pure ("expr",x) | .proj _ _ x,0 => pure ("struct",x)
    | _,_ => throwError "Invalid occurrence route"
-  let descend (ys : Array Expr) (ctx : Array Json) := atRoute child tail ys ctx shared root (slots.push slot) (path ++ "." ++ field)
+  let descend (ys : Array Expr) (ctx : Array Json) := atRouteWith child tail ys ctx shared root (slots.push slot) (path ++ "." ++ field) observe
   match e,slot with
   | .lam n t _ info,1 | .forallE n t _ info,1 =>
    let entry := obj [("node",nat (← sourceId shared e)),("route",routeJson root slots),("path",str path),
@@ -433,9 +434,13 @@ partial def atRoute (e : Expr) (rest : List Nat) (xs : Array Expr) (context : Ar
    let domain := t.instantiateRev xs
    let value := v.instantiateRev xs
    checkDomain domain
-   unless ← isDefEq (← kernelType value) domain do throwError "Let value has the wrong declared type"
+   kernelAs value domain
    withLetDecl n domain value (nondep := nondep) fun x => descend (xs.push x) (context.push entry)
   | _,_ => descend xs context
+
+def atRoute (e : Expr) (rest : List Nat) (xs : Array Expr) (context : Array Json)
+    (shared : Shared) (root : Nat) (slots : Array Nat) (path : String) : MetaM Json :=
+ atRouteWith e rest xs context shared root slots path inspect
 
 def readJson (p : String) : CommandElabM Json := do
  let text ← liftIO <| IO.FS.readFile p
