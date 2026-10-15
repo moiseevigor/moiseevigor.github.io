@@ -8,6 +8,7 @@ on:
       - 'public/js/proof-atlas-term-reader.js'
       - 'public/js/proof-atlas-application-*.js'
       - 'scripts/test-proof-atlas-applications*.cjs'
+      - 'scripts/test-proof-atlas-application-geometry*.cjs'
       - 'public/js/proof-atlas-article-index.js'
       - 'public/js/proof-atlas-article.js'
       - 'public/js/proof-atlas-sync.js'
@@ -132,6 +133,8 @@ jobs:
           node scripts/test-proof-atlas-coverage.cjs
           node scripts/test-proof-atlas-library.cjs
           node scripts/test-proof-atlas-sync.cjs
+          node scripts/test-proof-atlas-application-geometry.cjs
+          node scripts/test-proof-atlas-application-geometry-browser.cjs
           node scripts/test-proof-atlas-telescope.cjs
           node scripts/test-proof-atlas-telescope-browser.cjs
           node scripts/test-proof-atlas-geometry-core.cjs
