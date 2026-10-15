@@ -14,6 +14,8 @@ on:
       - 'public/js/proof-atlas-sync.js'
       - 'public/js/proof-atlas-geometry-core.js'
       - 'public/js/proof-atlas-occurrence-types.js'
+      - 'public/js/proof-atlas-type-geometry.js'
+      - 'scripts/test-proof-atlas-type-*.cjs'
       - 'public/data/proof-atlas/occurrence-types*'
       - 'public/data/proof-atlas/occurrence-types/**'
       - 'scripts/test-proof-atlas-geometry*.cjs'
@@ -138,6 +140,9 @@ jobs:
           node scripts/test-proof-atlas-sync.cjs
           node scripts/test-proof-atlas-occurrence-types.cjs
           node scripts/test-proof-atlas-occurrence-types-browser.cjs
+          node scripts/test-proof-atlas-type-sharing.cjs
+          node scripts/test-proof-atlas-type-geometry.cjs
+          node scripts/test-proof-atlas-type-geometry-browser.cjs
           node scripts/test-proof-atlas-application-geometry.cjs
           node scripts/test-proof-atlas-application-geometry-browser.cjs
           node scripts/test-proof-atlas-telescope.cjs

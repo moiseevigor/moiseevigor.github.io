@@ -1,10 +1,10 @@
 name: Proof Atlas compiled proof audit
 on:
   pull_request:
-    paths: ['research/proof-atlas/**', 'public/data/proof-atlas/library/**', 'public/data/proof-atlas/library-manifest.js', 'public/data/proof-atlas/occurrence-types/**', 'public/data/proof-atlas/occurrence-types-manifest.js', 'public/js/proof-atlas-occurrence-types.js', 'scripts/test-proof-atlas-occurrence-types.cjs', '.github/workflows/proof-atlas-compiled-proofs.yml']
+    paths: ['research/proof-atlas/**', 'public/data/proof-atlas/library/**', 'public/data/proof-atlas/library-manifest.js', 'public/data/proof-atlas/occurrence-types/**', 'public/data/proof-atlas/occurrence-types-manifest.js', 'public/js/proof-atlas-occurrence-types.js', 'scripts/test-proof-atlas-occurrence-types.cjs', 'scripts/test-proof-atlas-type-*.cjs', 'public/js/proof-atlas-type-geometry.js', '.github/workflows/proof-atlas-compiled-proofs.yml']
   push:
     branches: [master]
-    paths: ['research/proof-atlas/**', 'public/data/proof-atlas/library/**', 'public/data/proof-atlas/library-manifest.js', 'public/data/proof-atlas/occurrence-types/**', 'public/data/proof-atlas/occurrence-types-manifest.js', 'public/js/proof-atlas-occurrence-types.js', 'scripts/test-proof-atlas-occurrence-types.cjs', '.github/workflows/proof-atlas-compiled-proofs.yml']
+    paths: ['research/proof-atlas/**', 'public/data/proof-atlas/library/**', 'public/data/proof-atlas/library-manifest.js', 'public/data/proof-atlas/occurrence-types/**', 'public/data/proof-atlas/occurrence-types-manifest.js', 'public/js/proof-atlas-occurrence-types.js', 'scripts/test-proof-atlas-occurrence-types.cjs', 'scripts/test-proof-atlas-type-*.cjs', 'public/js/proof-atlas-type-geometry.js', '.github/workflows/proof-atlas-compiled-proofs.yml']
   workflow_dispatch:
 jobs:
   public-package:
@@ -16,6 +16,8 @@ jobs:
         with:
           node-version: '22'
       - run: node scripts/test-proof-atlas-occurrence-types.cjs
+      - run: node scripts/test-proof-atlas-type-sharing.cjs
+      - run: node scripts/test-proof-atlas-type-geometry.cjs
   constructor-controls:
     runs-on: ubuntu-latest
     timeout-minutes: 10
