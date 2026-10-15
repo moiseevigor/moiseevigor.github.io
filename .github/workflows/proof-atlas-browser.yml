@@ -14,6 +14,11 @@ on:
       - 'scripts/check-proof-atlas-native-lambda-models.cjs'
       - 'public/js/proof-atlas-lambda-judgment.js'
       - 'public/js/proof-atlas-elimination.js'
+      - 'public/js/proof-atlas-recursive-inputs.js'
+      - 'public/js/proof-atlas-recursion-examples.js'
+      - 'public/data/proof-atlas/recursion-examples*'
+      - 'public/data/proof-atlas/recursion-examples/**'
+      - 'scripts/test-proof-atlas-recurs*.cjs'
       - 'public/data/proof-atlas/eliminations*'
       - 'public/data/proof-atlas/eliminations/**'
       - 'scripts/test-proof-atlas-elimination*.cjs'
@@ -166,6 +171,9 @@ jobs:
           node scripts/test-proof-atlas-beta-reductions-browser.cjs
           node scripts/test-proof-atlas-elimination.cjs
           node scripts/test-proof-atlas-elimination-browser.cjs
+          node scripts/test-proof-atlas-recursive-inputs.cjs
+          node scripts/test-proof-atlas-recursion-examples.cjs
+          node scripts/test-proof-atlas-recursive-inputs-browser.cjs
           node scripts/test-proof-atlas-application-geometry.cjs
           node scripts/test-proof-atlas-application-geometry-browser.cjs
           node scripts/test-proof-atlas-telescope.cjs
