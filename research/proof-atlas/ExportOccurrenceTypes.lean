@@ -174,6 +174,162 @@ def betaJudgment (original term type : Expr) (xs : Array Expr) (context : Array 
   ("originalText",str (← prettyType term)),("reducedText",str (← prettyType reduced)),
   ("textIsPresentation",toJson true)],s)
 
+/- Structural adapters only: a kernel recursor or a bijective lambda/permutation wrapper with literal eta forwarding.
+   Definitional equality alone cannot certify branch provenance (proof irrelevance). -/
+def recursorAdapter (head : Expr) : MetaM (Option (Expr × RecursorVal × Array Nat × Array Nat × Option Expr)) := do
+ let .const name levels := head | return none
+ let info ← getConstInfo name
+ if let .recInfo r := info then
+  return some (head,r,Array.range (r.getMajorIdx+1),Array.replicate (r.getMajorIdx+1) 0,none)
+ let .defnInfo d := info | return none
+ let value := d.value.instantiateLevelParams d.levelParams levels
+ let mut body := value
+ let mut count := 0
+ while body.isLambda do
+  count := count+1
+  if count > 128 then return none
+  body := body.bindingBody!
+ let .const recName _ := body.getAppFn | return none
+ let .recInfo r ← getConstInfo recName | return none
+ if count != r.getMajorIdx+1 || body.getAppArgs.size != count then
+  throwError "Recursor wrapper does not have the complete permutation arity"
+ let mut order : Array Nat := #[]
+ let mut etaDepths : Array Nat := #[]
+ for arg in body.getAppArgs do
+  let mut forwarded := arg
+  let mut depth := 0
+  while forwarded.isLambda do
+   depth := depth+1
+   if depth > 128 then throwError "Eta-forwarding prefix exceeds its bound"
+   forwarded := forwarded.bindingBody!
+  let .bvar index := forwarded.getAppFn | throwError "Recursor wrapper does not forward an input binder"
+  if forwarded.getAppArgs.size != depth then throwError "Eta-forwarding arity changed"
+  for i in [:depth] do
+   unless forwarded.getAppArgs[i]! == Expr.bvar (depth-1-i) do throwError "Eta-forwarding input order changed"
+  if index < depth || index-depth >= count then throwError "Recursor wrapper has a captured or escaping binder"
+  let slot := count-1-(index-depth)
+  if order.contains slot then throwError "Recursor wrapper duplicates an argument"
+  order := order.push slot
+  etaDepths := etaDepths.push depth
+ return some (body.getAppFn,r,order,etaDepths,some value)
+
+def eliminationJudgment (original term type : Expr) (xs : Array Expr) (shared initial : Shared)
+    (root : Nat) (slots : Array Nat) (path : String) : MetaM (Option (Json × Shared)) := do
+ let some (recHead,rec,order,etaDepths,wrapper) ← recursorAdapter term.getAppFn | return none
+ let count := rec.getMajorIdx+1
+ let args := term.getAppArgs
+ if count > 128 || args.size < count then throwError "Recursor application is partial or exceeds its bound"
+ if rec.numMinors > 32 || rec.rules.length > 32 then
+  throwError "Recursor branch inventory exceeds the current bound"
+ let recArgs := order.map (args[·]!)
+ let core := mkAppN recHead recArgs
+ let sourceCore := mkAppN term.getAppFn (args.extract 0 count)
+ if let some value := wrapper then
+  let mut body := value
+  for _ in [:count] do body := body.bindingBody!
+  unless (⟨value.beta (args.extract 0 count)⟩ : ExprStructEq) == ⟨body.instantiateRev (args.extract 0 count)⟩ do
+   throwError "Wrapper unfolding changed its literal body"
+  let template := mkAppN recHead (order.map (fun i => Expr.bvar (count-1-i)))
+  unless (⟨template.instantiateRev (args.extract 0 count)⟩ : ExprStructEq) == ⟨core⟩ do
+   throwError "Forwarding template/permutation structural mismatch"
+ let coreType ← kernelType core
+ let sourceType ← kernelType sourceCore
+ kernelAs core sourceType
+ match Kernel.isDefEq (← getEnv) (← getLCtx) sourceCore core with
+ | .ok true => pure ()
+ | _ => throwError "Recursor projection failed kernel conversion"
+ let full := mkAppN core (args.extract count args.size)
+ kernelAs full type
+ let mut source := original
+ let mut sourceSlots := slots
+ let mut sourcePath := path
+ for _ in [:args.size-count] do
+  source := source.appFn!; sourceSlots := sourceSlots.push 0; sourcePath := sourcePath ++ ".fn"
+ let sourceCoreJson := obj [("node",nat (← sourceId shared source)),("route",routeJson root sourceSlots),("path",str sourcePath)]
+ let .const recName recLevels := recHead | throwError "Missing recursor constant"
+ let (recTypeRoot,metadataStart) ← internScoped (rec.type.instantiateLevelParams rec.levelParams recLevels) #[] {} 16384
+ let (wrapperRoot,metadataStart) ← match wrapper with
+  | some value => do let (r,s) ← internScoped value #[] metadataStart 16384; pure (some r,s)
+  | none => pure (none,metadataStart)
+ let mut metadataTable := metadataStart
+ let mut rules : Array Json := #[]
+ let mut mapped : Array Nat := #[]
+ for rule in rec.rules do
+  let rhs := rule.rhs.instantiateLevelParams rec.levelParams recLevels
+  let _ ← kernelType rhs
+  let mut body := rhs
+  let mut binders := 0
+  while body.isLambda do
+   binders := binders+1; body := body.bindingBody!
+  if binders != rec.numParams+rec.numMotives+rec.numMinors+rule.nfields then
+   throwError "Recursor reduction rule has an unsupported binder prefix"
+  let .bvar index := body.getAppFn | throwError "Recursor reduction does not directly call a minor premise"
+  if index >= binders then throwError "Recursor rule reference escapes its context"
+  let binder := binders-1-index
+  if binder < rec.numParams+rec.numMotives || binder >= rec.numParams+rec.numMotives+rec.numMinors then
+   throwError "Recursor rule does not call a minor premise"
+  let minor := binder-rec.numParams-rec.numMotives
+  if mapped.contains minor then throwError "Several constructor rules call the same minor premise"
+  if body.getAppArgs.size > 128 then throwError "Minor input inventory exceeds its bound"
+  mapped := mapped.push minor
+  let mut minorBinder := rhs
+  for _ in [:rec.numParams+rec.numMotives+minor] do minorBinder := minorBinder.bindingBody!
+  let mut minorResult := minorBinder.bindingDomain!
+  for _ in [:body.getAppArgs.size] do
+   let .forallE _ _ result _ := minorResult | throwError "Minor input telescope is not explicit"
+   minorResult := result
+  let some constructorResult := minorResult.getAppArgs.back? | throwError "Minor result has no constructor argument"
+  unless constructorResult.getAppFn.isConstOf rule.ctor do throwError "Minor result constructor differs from its reduction rule"
+  let .ctorInfo ctor ← getConstInfo rule.ctor | throwError "Rule constructor metadata missing"
+  if ctor.numFields != rule.nfields then throwError "Constructor field count differs from the recursor rule"
+  let (rhsRoot,s) ← internScoped rhs #[] metadataTable 16384
+  metadataTable := s
+  rules := rules.push (obj [("constructor",str rule.ctor.toString),("constructorFields",nat rule.nfields),
+   ("minor",nat minor),("inputCount",nat body.getAppArgs.size),("rhsRoot",nat rhsRoot),
+   ("binderCount",nat binders),("kernelRuleTyping",str "PASS")])
+ if mapped.size != rec.numMinors then throwError "Some minor premises have no mapped constructor rule"
+ let (coreTypeRoot,start) ← internScoped coreType xs initial 32768
+ let mut types := start
+ let mut before ← kernelType recHead
+ let mut applied := recHead
+ let mut observations : Array Json := #[]
+ for j in [:count] do
+  let pi ← whnf before
+  let .forallE _ domain _ _ := pi | throwError "Recursor argument domain is missing"
+  let arg := recArgs[j]!
+  let actual ← kernelType arg
+  kernelAs arg domain
+  let (actualRoot,s) ← internScoped actual xs types 32768
+  let (expectedRoot,s) ← internScoped domain xs s 32768
+  types := s
+  let sourceSlot := order[j]!
+  let mut sourceArg := original
+  let mut atSlots := slots
+  let mut atPath := path
+  for _ in [:args.size-1-sourceSlot] do
+   sourceArg := sourceArg.appFn!; atSlots := atSlots.push 0; atPath := atPath ++ ".fn"
+  sourceArg := sourceArg.appArg!; atSlots := atSlots.push 1; atPath := atPath ++ ".arg"
+  observations := observations.push (obj [("slot",nat (j+1)),("sourceSlot",nat (sourceSlot+1)),
+   ("node",nat (← sourceId shared sourceArg)),("route",routeJson root atSlots),("path",str atPath),
+   ("typeRoot",nat actualRoot),("expectedRoot",nat expectedRoot),("role",str (← role actual)),
+   ("typeText",str (← prettyType actual)),("expectedText",str (← prettyType domain)),("kernelDomainConversion",str "PASS")])
+  applied := mkApp applied arg
+  before ← kernelType applied
+ unless (⟨before⟩ : ExprStructEq) == ⟨coreType⟩ do throwError "Recursor trace has a changed result type"
+ let .const sourceName sourceLevels := term.getAppFn | throwError "Missing source head"
+ return some (obj [("format",str "ProofAtlasElimination/1"),("status",str "checked"),
+  ("projection",str (if wrapper.isSome then "structural-eta-permutation-wrapper/1" else "direct-kernel-recursor/1")),
+  ("sourceHead",str sourceName.toString),("sourceLevels",toJson (sourceLevels.map AtlasLibrary.level)),
+  ("recursor",str recName.toString),("recursorLevels",toJson (recLevels.map AtlasLibrary.level)),
+  ("inductives",toJson (rec.all.map Name.toString)),("parameters",nat rec.numParams),("indices",nat rec.numIndices),
+  ("motives",nat rec.numMotives),("minors",nat rec.numMinors),("majorSlot",nat (rec.getMajorIdx+1)),
+  ("argumentOrder",toJson (order.map (·+1))),("etaDepths",toJson etaDepths),("arguments",toJson observations),
+  ("rules",toJson rules),("metadataGraph",graphJson metadataTable),("recursorTypeRoot",nat recTypeRoot),
+  ("wrapperRoot",toJson wrapperRoot),("core",sourceCoreJson),("coreTypeRoot",nat coreTypeRoot),
+  ("trailingArguments",nat (args.size-count)),("coreTypeText",str (← prettyType coreType)),("coreRole",str (← role coreType)),
+  ("kernelCoreTyping",str "PASS"),("kernelCoreTypeConversion",str "PASS"),("kernelTermConversion",str "PASS"),
+  ("wrapperStructuralMatch",toJson true),("typeAbstractionRoundtrip",toJson true),("textIsPresentation",toJson true)],types)
+
 def inspect (original term : Expr) (xs : Array Expr) (context : Array Json) (shared : Shared)
     (root : Nat) (slots : Array Nat) (path : String) : MetaM Json := do
  let type ← kernelType term
@@ -236,6 +392,15 @@ def inspect (original term : Expr) (xs : Array Expr) (context : Array Json) (sha
    logInfo m!"Beta record unavailable at {path}: {ex.toMessageData}"
    application := application.push ("betaJudgment",obj [("status",str "unavailable"),
     ("reason",str "Beta record exceeded its bound or failed native checks")])
+ if args.size > 0 then
+  try
+   if let some (judgment,s) ← eliminationJudgment original term type xs shared types root slots path then
+    types := s
+    application := application.push ("eliminationJudgment",judgment)
+  catch ex =>
+   logInfo m!"Elimination record unavailable at {path}: {ex.toMessageData}"
+   application := application.push ("eliminationJudgment",obj [("status",str "unavailable"),
+    ("reason",str "Recursor adapter, rule inventory, application arity or native checks are unsupported")])
  let text ← withOptions (fun o => ((o.set `pp.maxDepth (12 : Nat)).set `pp.maxSteps (5000 : Nat)).set `pp.width (80 : Nat)) do
   return (← ppExpr type).pretty
  return obj ([("status",str "checked"),("kernelCheck",str "PASS"),("contextWellFormed",toJson true),("typeAbstractionRoundtrip",toJson true),("node",nat (← sourceId shared original)),
