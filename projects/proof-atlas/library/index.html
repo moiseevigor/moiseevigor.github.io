@@ -3,9 +3,9 @@ layout: default
 title: Proof Atlas — complete proof library
 description: Every declaration, proof body and kernel occurrence in the published Lean development.
 ---
-<link rel="stylesheet" href="/public/css/proof-atlas-library.css?v=8">
+<link rel="stylesheet" href="/public/css/proof-atlas-library.css?v=9">
 <main class="pl-library" id="pl-library">
- <header class="pl-header"><p>PROOF ATLAS / COMPLETE PROOF LIBRARY</p><h1>Compiled Lean library</h1><p>Browse the compiled declaration inventory, complete compiled proof terms, shared expression graphs and exact declaration references. The optional scoped geometry prototype uses constructor glyphs, ordered ports and occurrence-specific binder links; collapsed descendants retain exact accounting.</p></header>
+ <header class="pl-header"><p>PROOF ATLAS / COMPLETE PROOF LIBRARY</p><h1>Compiled Lean library</h1><p>Browse the compiled declaration inventory, complete compiled proof terms, shared expression graphs and exact declaration references. The optional scoped geometry prototype uses constructor glyphs, ordered ports and occurrence-specific binder links; collapsed descendants retain exact accounting.</p><p>Controlled recursion examples use the same reader: <a href="?edition=recursion-controls&amp;proof=AtlasExamples.nat_self&amp;geometry=scoped&amp;fold=binders,applications&amp;route=1:1#expr-33">natural-number induction</a>, <a href="?edition=recursion-controls&amp;proof=AtlasExamples.fan_holds&amp;geometry=scoped&amp;fold=binders,applications&amp;route=1:1#expr-20">a recursive family</a>, <a href="?edition=recursion-controls&amp;proof=AtlasExamples.shared_induction_64&amp;geometry=scoped&amp;fold=binders,applications">a large shared proof</a>. These are synthetic controls; their <a href="/projects/proof-atlas/program/#recursive-premises">generation and limits</a> are recorded separately from the two project snapshots.</p></header>
  {% include proof-atlas-compiled-workspace.html %}
  <section class="pl-evidence"><h2>What the inventory proves</h2><p>Module ownership is the denominator: every project declaration, every complete type, every available theorem or definition body, and recursor reduction rules are included. Every compiled type, proof body and elaborated child link remains available. Original source projects and tactic scripts remain private. Shared subterms are stored once; exact expanded occurrence counts are computed without unfolding the graph. Large branches are collapsed visually and can be opened by their node number.</p><p>Article links identify a reviewed proof or supporting-module context. They do not certify that every article sentence follows from Lean. Lean/Mathlib dependencies outside this project remain named external boundaries. Surface syntax, tactics, macros and elaborator state are distinct from the twelve kernel expression constructors; the kernel diagram represents elaborated terms.</p></section>
 </main>
@@ -13,11 +13,14 @@ description: Every declaration, proof body and kernel occurrence in the publishe
 <script src="/public/data/proof-atlas/lean-expr-grammar.js" defer></script>
 <script src="/public/js/proof-atlas-library-data.js" defer></script>
 <script src="/public/data/proof-atlas/occurrence-types-manifest.js?v=4" defer></script>
-<script src="/public/js/proof-atlas-occurrence-types.js?v=5" defer></script>
+<script src="/public/js/proof-atlas-occurrence-types.js?v=6" defer></script>
 <script src="/public/data/proof-atlas/article-proof-steps.js?v=2" defer></script>
 <script src="/public/js/proof-atlas-proof-step-index.js?v=1" defer></script>
 <script src="/public/data/proof-atlas/beta-reductions-manifest.js?v=1" defer></script>
 <script src="/public/js/proof-atlas-beta-reduction.js?v=1" defer></script>
 <script src="/public/data/proof-atlas/eliminations-manifest.js?v=1" defer></script>
-<script src="/public/js/proof-atlas-elimination.js?v=1" defer></script>
-<script src="/public/js/proof-atlas-library.js?v=13" defer></script>
+<script src="/public/data/proof-atlas/recursion-examples-manifest.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-recursion-examples.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-recursive-inputs.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-elimination.js?v=2" defer></script>
+<script src="/public/js/proof-atlas-library.js?v=14" defer></script>
