@@ -1,10 +1,10 @@
 name: Proof Atlas compiled proof audit
 on:
   pull_request:
-    paths: ['research/proof-atlas/**', 'public/data/proof-atlas/library/**', 'public/data/proof-atlas/library-manifest.js', '.github/workflows/proof-atlas-compiled-proofs.yml']
+    paths: ['research/proof-atlas/**', 'public/data/proof-atlas/library/**', 'public/data/proof-atlas/library-manifest.js', 'public/data/proof-atlas/occurrence-types/**', 'public/data/proof-atlas/occurrence-types-manifest.js', 'public/js/proof-atlas-occurrence-types.js', 'scripts/test-proof-atlas-occurrence-types.cjs', '.github/workflows/proof-atlas-compiled-proofs.yml']
   push:
     branches: [master]
-    paths: ['research/proof-atlas/**', 'public/data/proof-atlas/library/**', 'public/data/proof-atlas/library-manifest.js', '.github/workflows/proof-atlas-compiled-proofs.yml']
+    paths: ['research/proof-atlas/**', 'public/data/proof-atlas/library/**', 'public/data/proof-atlas/library-manifest.js', 'public/data/proof-atlas/occurrence-types/**', 'public/data/proof-atlas/occurrence-types-manifest.js', 'public/js/proof-atlas-occurrence-types.js', 'scripts/test-proof-atlas-occurrence-types.cjs', '.github/workflows/proof-atlas-compiled-proofs.yml']
   workflow_dispatch:
 jobs:
   public-package:
@@ -12,6 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python3 research/proof-atlas/verify_proof_library.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/test-proof-atlas-occurrence-types.cjs
   constructor-controls:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -32,3 +36,5 @@ jobs:
           Path('/tmp/AtlasNativeControls.lean').write_text(source+'\n'+controls)
           PY
           lean /tmp/AtlasNativeControls.lean
+      - name: Check exact occurrence types and reject a changed packet
+        run: python3 research/proof-atlas/verify_occurrence_type_controls.py
