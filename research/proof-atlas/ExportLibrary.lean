@@ -15,13 +15,52 @@ def nameParts : Name → List Json
   | .anonymous => []
   | .str p s => nameParts p ++ [obj [("str", str s)]]
   | .num p n => nameParts p ++ [obj [("num", str (toString n))]]
-partial def level : Level → Json
+/- Level payload transport is distinct from the six kernel constructors.
+   Memoize before serializing; a shared Level must never expand as a JSON tree. -/
+structure LevelPool where
+  seen : LevelMap Nat := {}
+  kind : Array String := #[]
+  children : Array (Array Nat) := #[]
+  payloads : Array Json := #[]
+  expanded : Array Nat := #[]
+  depth : Array Nat := #[]
+  deriving Inhabited
+partial def internLevel (u : Level) (s : LevelPool) : Nat × LevelPool := Id.run do
+  if let some i := s.seen[u]? then return (i,s)
+  let (tag,payload,inputs) := match u with
+    | .zero => ("zero",obj [],#[])
+    | .succ a => ("succ",obj [],#[a])
+    | .max a b => ("max",obj [],#[a,b])
+    | .imax a b => ("imax",obj [],#[a,b])
+    | .param n => ("param",obj [("name",str n.toString),("nameParts",toJson (nameParts n))],#[])
+    | .mvar n => ("mvar",obj [("id",str (reprStr n)),("idNameParts",toJson (nameParts n.name))],#[])
+  let mut s := s
+  let mut cs := #[]
+  for child in inputs do
+    let (i,next) := internLevel child s
+    s := next; cs := cs.push i
+  let i := s.kind.size
+  let size := cs.foldl (fun n c => n+s.expanded[c]!) 1
+  let depth := cs.foldl (fun n c => max n (s.depth[c]!+1)) 0
+  return (i, { s with seen := (s.seen.insert u i), kind := (s.kind.push tag), children := (s.children.push cs), payloads := (s.payloads.push payload), expanded := (s.expanded.push size), depth := (s.depth.push depth) })
+def levelPoolJson (root : Nat) (s : LevelPool) : Json := obj [("encoding",str "LevelDAG/1"),
+  ("graph",obj [("format",str "LevelDAG/1"),("kind",toJson s.kind),("children",toJson s.children),
+    ("payloads",toJson s.payloads),("expanded",toJson (s.expanded.map (toString ·))),("roots",toJson #[root])])]
+def levelCompact (u : Level) : Json :=
+  let (root,s) := internLevel u {}
+  levelPoolJson root s
+partial def levelTree : Level → Json
   | .zero => obj [("kind", str "zero")]
-  | .succ u => obj [("kind", str "succ"), ("of", level u)]
-  | .max u v => obj [("kind", str "max"), ("left", level u), ("right", level v)]
-  | .imax u v => obj [("kind", str "imax"), ("left", level u), ("right", level v)]
+  | .succ u => obj [("kind", str "succ"), ("of", levelTree u)]
+  | .max u v => obj [("kind", str "max"), ("left", levelTree u), ("right", levelTree v)]
+  | .imax u v => obj [("kind", str "imax"), ("left", levelTree u), ("right", levelTree v)]
   | .param n => obj [("kind", str "param"), ("name", str n.toString), ("nameParts", toJson (nameParts n))]
   | .mvar n => obj [("kind", str "mvar"), ("id", str (reprStr n)), ("idNameParts", toJson (nameParts n.name))]
+def level (u : Level) : Json :=
+  let (root,s) := internLevel u {}
+  -- Bound the legacy tree before constructing it. No normalization is performed.
+  if s.expanded[root]! <= 256 && s.depth[root]! <= 32 then levelTree u
+  else levelPoolJson root s
 def bi : BinderInfo → String
   | .default => "default" | .implicit => "implicit"
   | .strictImplicit => "strictImplicit" | .instImplicit => "instImplicit"

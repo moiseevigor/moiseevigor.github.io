@@ -2,6 +2,7 @@
    the full occurrence listing retains every node, payload, field and scope link. */
 (function (host) {
  'use strict';
+ const levelData=typeof module!=='undefined'&&module.exports?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData;
  function create(structure,terms){
   const N=structure.parent.length,children=Array.from({length:N},()=>[]);
   structure.parent.forEach((p,i)=>{if(p>=0)children[p].push(i);});
@@ -24,7 +25,7 @@
    friendly.set(i,taken.has(base)?base+'_'+i:base);
   }
   const name=i=>i===undefined?'unresolved binder':(friendly.get(i)||binderName(i));
-  function level(l){if(!l)return '?u';switch(l.kind){case'zero':return'0';case'succ':return'('+level(l.of)+' + 1)';case'param':return l.name;case'mvar':return'?'+l.id;case'max':case'imax':return l.kind+' '+level(l.left)+' '+level(l.right);default:return'?level';}}
+  function level(l){if(!l)return '?u';if(l.encoding!==undefined)return levelData?levelData.levelText(l):'LevelDAG reference (decoder unavailable)';switch(l.kind){case'zero':return'0';case'succ':return'('+level(l.of)+' + 1)';case'param':return l.name;case'mvar':return'?'+l.id;case'max':case'imax':return l.kind+' '+level(l.left)+' '+level(l.right);default:return'?level';}}
   function constant(i){return payload(i).name||(deps.get(i)==='Kernel/library declaration'?'constant#'+i:deps.get(i))||'constant#'+i;}
   function spine(i){const args=[];let head=i;while(kind(head)==='app'){const [f,a]=children[head];if(f===undefined||a===undefined)throw Error('Invalid application children');args.unshift(a);head=f;}return{head,args};}
   function literal(i){const p=payload(i);const nat=p.repr?.match(/^Lean\.Literal\.natVal (\d+)$/);return nat?nat[1]:p.repr?.replace(/^Lean\.Literal\.strVal /,'')||'literal#'+i;}
@@ -35,7 +36,7 @@
    if(k==='const'){const us=p.levels||[];out=constant(i)+(!readable&&us.length?'.{'+us.map(level).join(', ')+'}':'');}
    else if(k==='bvar'){const b=binderAt.get(i);out=b!==undefined?name(b):'unbound#'+i;if(!readable)out='bvar '+(p.index??'?')+' ['+out+' @#'+b+']';}
    else if(k==='lit')out=literal(i);
-   else if(k==='sort')out=p.level?.kind==='zero'?'Prop':'Sort '+level(p.level);
+   else if(k==='sort'){const graph=p.level?.encoding!==undefined&&levelData?levelData.compileLevels([p.level]):null,isZero=graph?graph.kind[graph.roots[0]]==='zero':p.level?.kind==='zero';out=isZero?'Prop':'Sort '+level(p.level);}
    else if(k==='fvar'||k==='mvar')out=(k==='mvar'?'?':'')+(p.id||k+'#'+i);
    else if(k==='app'){
     const {head,args}=spine(i),c=kind(head)==='const'?constant(head):null;

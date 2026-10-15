@@ -29,5 +29,10 @@ if args.publish:
  (target.parent/'universe-controls-manifest.js').write_text('window.PROOF_ATLAS_UNIVERSE_CONTROLS = '+json.dumps(descriptor,separators=(',',':'))+';\n')
 else:
  committed=gzip.decompress((base.parents[1]/'public/data/proof-atlas/universe-controls.json.gz').read_bytes())
- assert json.loads(committed)==x,'Native universe controls changed; regenerate deliberately.'
+ # Preserve the original producer identity; compare every compiled field on replay.
+ old=json.loads(committed)
+ manifest=json.loads((base.parents[1]/'public/data/proof-atlas/universe-controls-manifest.js').read_text().split('=',1)[1].strip().removesuffix(';'))
+ assert hashlib.sha256(committed).hexdigest()==manifest['sha256'] and old['sourceSha256']==manifest['sourceSha256'],'Original native control provenance changed'
+ assert {k:v for k,v in old.items() if k!='sourceSha256'}=={k:v for k,v in x.items() if k!='sourceSha256'},'Native universe controls changed; regenerate deliberately.'
+ print(json.dumps({'status':'PASS','publishedProducerSha256':old['sourceSha256'],'replayProducerSha256':x['sourceSha256'],'compiledControlPayloadMatches':True}))
 

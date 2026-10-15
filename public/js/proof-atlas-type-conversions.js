@@ -5,12 +5,12 @@
  const demand=(ok,m)=>{if(!ok)throw Error('Type conversion: '+m);},key=r=>r.root+':'+r.slots.join('.'),canonical=x=>Array.isArray(x)?x.map(canonical):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,canonical(x[k])])):x,same=(a,b)=>JSON.stringify(canonical(a))===JSON.stringify(canonical(b)),at=e=>({node:e.node,path:e.path,route:e.route});
  function classes(g){
   T.validateExpressionGraph(g,[],0,65536);const ids=[],intern=new Map();
-  for(let i=0;i<g.kind.length;i++){const signature=JSON.stringify([g.kind[i],canonical(g.payloads[i]),g.children[i].map(c=>ids[c])]);if(!intern.has(signature))intern.set(signature,intern.size);ids.push(intern.get(signature));}return ids;
+  for(let i=0;i<g.kind.length;i++){const signature=JSON.stringify([g.kind[i],A.payloadKey(g.kind[i],g.payloads[i]),g.children[i].map(c=>ids[c])]);if(!intern.has(signature))intern.set(signature,intern.size);ids.push(intern.get(signature));}return ids;
  }
  function structuralCut(g,ids,left,right,options={}){
   const budget=options.maxRegions??48,depth=options.maxDepth??6;demand(Number.isInteger(budget)&&budget>=1&&budget<=128&&Number.isInteger(depth)&&depth>=0&&depth<=32,'comparison bounds');demand([left,right].every(r=>Number.isInteger(r)&&r>=0&&r<g.kind.length)&&ids.length===g.kind.length,'comparison roots');
   const rows=[{left,right,slots:[]}];let headers=0,leftBoundary=0n,rightBoundary=0n;
-  for(let i=0;i<rows.length;i++){const r=rows[i],equal=ids[r.left]===ids[r.right],head=g.kind[r.left]===g.kind[r.right]&&same(g.payloads[r.left],g.payloads[r.right]),cs=g.children[r.left];r.path='type'+r.slots.map((slot,j)=>{let n=left;for(const s of r.slots.slice(0,j))n=g.children[n][s];return'.'+A.fields[A.kinds[g.kind[n]]][slot];}).join('');r.relation=equal?'same-relative-syntax':head?'matching-constructor-fields':'different-constructor-or-payload';r.nativeConversion=false;
+  for(let i=0;i<rows.length;i++){const r=rows[i],equal=ids[r.left]===ids[r.right],head=g.kind[r.left]===g.kind[r.right]&&A.payloadKey(g.kind[r.left],g.payloads[r.left])===A.payloadKey(g.kind[r.right],g.payloads[r.right]),cs=g.children[r.left];r.path='type'+r.slots.map((slot,j)=>{let n=left;for(const s of r.slots.slice(0,j))n=g.children[n][s];return'.'+A.fields[A.kinds[g.kind[n]]][slot];}).join('');r.relation=equal?'same-relative-syntax':head?'matching-constructor-fields':'different-constructor-or-payload';r.nativeConversion=false;
    const expand=!equal&&head&&cs.length>0&&r.slots.length<depth&&rows.length+cs.length<=budget;r.expansion=expand?'ports':'boundary';r.leftOccurrences=g.expanded[r.left];r.rightOccurrences=g.expanded[r.right];
    if(expand){headers++;cs.forEach((c,j)=>rows.push({left:c,right:g.children[r.right][j],slots:[...r.slots,j]}));}else{leftBoundary+=BigInt(r.leftOccurrences);rightBoundary+=BigInt(r.rightOccurrences);}
   }
