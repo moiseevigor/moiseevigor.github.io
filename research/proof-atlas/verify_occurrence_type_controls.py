@@ -9,6 +9,10 @@ def AtlasTypedFixture.compose (P Q : Prop) (f : P → Q) (p : P) : Q := f p
 def AtlasTypedFixture.shadow (x : Nat) : Nat := let x := Nat.succ x; Nat.succ x
 def AtlasTypedFixture.zero : 0 = 0 := Eq.refl 0
 def AtlasTypedFixture.dependent (α : Type) (P : α → Prop) (x : α) (h : P x) : P x := h
+def AtlasTypedFixture.dependentApp (f : (n : Nat) → Fin (n + 1)) (n : Nat) : Fin (n + 1) := f n
+def AtlasTypedFixture.Alias := Nat
+def AtlasTypedFixture.convertApp (f : AtlasTypedFixture.Alias → Nat) (x : Nat) : Nat := f x
+def AtlasTypedFixture.residual (f : Nat → Nat → Nat) (x : Nat) : Nat → Nat := f x
 run_meta do
  for bad in [Expr.lam `bad (mkNatLit 0) (.bvar 0) .default,
    Expr.letE `bad (mkConst ``Nat) (mkConst ``True.intro) (.bvar 0) false] do
@@ -16,13 +20,16 @@ run_meta do
   let slot := if bad.isLambda then 1 else 2
   let accepted ← observing? (AtlasOccurrenceTypes.atRoute bad [slot] #[] #[] shared 0 #[] "root.value")
   unless accepted.isNone do throwError "Invalid surrounding context was accepted"
+ let invalidConversion ← observing? (AtlasOccurrenceTypes.kernelAs (mkConst ``True.intro) (mkConst ``Nat))
+ unless invalidConversion.isNone do throwError "Invalid typed-identity conversion was accepted"
 '''
 with tempfile.TemporaryDirectory(prefix='atlas-type-controls-') as tmp:
     folder=Path(tmp);requests=folder/'requests.json';output=folder/'types.json'
     prepare='''
 run_cmd do
  let mut requests : Array Json := #[]
- for name in [``AtlasTypedFixture.compose, ``AtlasTypedFixture.shadow, ``AtlasTypedFixture.zero, ``AtlasTypedFixture.dependent] do
+ for name in [``AtlasTypedFixture.compose, ``AtlasTypedFixture.shadow, ``AtlasTypedFixture.zero, ``AtlasTypedFixture.dependent,
+   ``AtlasTypedFixture.dependentApp, ``AtlasTypedFixture.convertApp, ``AtlasTypedFixture.residual] do
   let info ← getConstInfo name
   let some value := info.value? true | throwError "Missing fixture body"
   let (t,s) := AtlasLibrary.intern info.type {}
@@ -36,6 +43,8 @@ run_cmd do
   if name == ``AtlasTypedFixture.compose then paths := paths.push (AtlasOccurrenceTypes.routeJson 1 #[1,1,1,1])
   if name == ``AtlasTypedFixture.dependent then paths := paths.push (AtlasOccurrenceTypes.routeJson 1 #[1,1,1,1])
   if name == ``AtlasTypedFixture.shadow then paths := paths ++ #[AtlasOccurrenceTypes.routeJson 1 #[1,1],AtlasOccurrenceTypes.routeJson 1 #[1,2]]
+  if name == ``AtlasTypedFixture.dependentApp || name == ``AtlasTypedFixture.convertApp || name == ``AtlasTypedFixture.residual then
+   paths := paths.push (AtlasOccurrenceTypes.routeJson 1 #[1,1])
   requests := requests.push (Json.mkObj [("packetFile",toJson file),("routes",toJson paths),
    ("source",Json.mkObj [("edition",toJson "native-control"),("name",toJson name.toString),("indexSha256",toJson "fixture"),("sourceSha256",toJson "fixture")])])
  liftIO <| IO.FS.writeFile "REQUESTS" (toJson requests).compress
@@ -53,9 +62,24 @@ run_cmd do
     dependent=next(r for r in result if r['name'].endswith('.dependent'))['entries'][-1]
     assert dependent['role']=='proof' and len(dependent['context'])==4 and dependent['typeAbstractionRoundtrip'] is True
     assert all(e['typeAbstractionRoundtrip'] is True for r in result for e in r['entries'])
+    applications=[e for r in result for e in r['entries'] if e['arguments']]
+    assert all(e['applicationJudgment']['status']=='checked'for e in applications)
+    for e in applications:
+        trace=e['applicationJudgment'];assert trace['finalTypeStructuralMatch'] is True
+        assert len(trace['stages'])==len(e['arguments']) and trace['stages'][-1]['afterRoot']==e['typeRoot']
+        assert all(s[k]=='PASS'for s in trace['stages'] for k in ['kernelFunctionConversion','kernelDomainConversion','kernelResultConversion'])
+    dep=next(r for r in result if r['name'].endswith('.dependentApp'))['entries'][-1]['applicationJudgment']['stages'][0]
+    assert dep['bodyUsesBinder'] is True
+    converted=next(r for r in result if r['name'].endswith('.convertApp'))['entries'][-1]['applicationJudgment']['stages'][0]
+    assert converted['actualRoot']!=converted['domainRoot']
+    residual=next(r for r in result if r['name'].endswith('.residual'))['entries'][-1]
+    assert residual['typeGraph']['kind'][residual['typeRoot']]==7
+    models=subprocess.run(['node',str(base.parent.parent/'scripts/check-proof-atlas-native-application-models.cjs'),str(entry),str(requests),str(output)],capture_output=True,text=True)
+    assert models.returncode==0,models.stdout+models.stderr
+    print(models.stdout.strip())
     query=json.loads(requests.read_text())[0];packet=Path(query['packetFile']);data=json.loads(packet.read_text())
     next(p for p in data['payloads'] if 'binderName'in p)['binderName']='deliberatelyChangedBinder'
     packet.write_text(json.dumps(data));requests.write_text(json.dumps([query]))
     bad=folder/'RejectChangedPacket.lean';bad.write_text(core+defs+'\n#atlas_occurrence_types '+json.dumps(str(requests))+' => '+json.dumps(str(folder/'bad.json'))+'\n')
     rejected=subprocess.run([lean,str(bad)],capture_output=True,text=True);assert rejected.returncode!=0 and 'Native/published DAG mismatch'in rejected.stdout+rejected.stderr
-    print(json.dumps({'status':'PASS','kernelTypedControls':4,'selectedOccurrences':sum(len(r['entries'])for r in result),'proofTypeValueRoles':True,'dependentTypeAbstractionRoundtrip':True,'letValueOutsideOwnBinder':True,'invalidContextsRejected':2,'changedPacketRejected':True,'scope':'Small native kernel controls; not independent replay of the private corpus.'}))
+    print(json.dumps({'status':'PASS','kernelTypedControls':7,'selectedOccurrences':sum(len(r['entries'])for r in result),'proofTypeValueRoles':True,'dependentTypeAbstractionRoundtrip':True,'letValueOutsideOwnBinder':True,'invalidContextsRejected':2,'changedPacketRejected':True,'applicationTraces':len(applications),'dependentSubstitution':True,'definitionallyEqualDistinctDomains':True,'residualFunctionType':True,'invalidTypedConversionRejected':True,'scope':'Small native kernel controls; not independent replay of the private corpus.'}))
