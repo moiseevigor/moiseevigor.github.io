@@ -22,5 +22,5 @@ const A=require('../public/js/proof-atlas-library-data'),T=require('../public/js
    const routes=A.routes(d);let missing=false;for(let id=0;id<d.kind.length;id++){const route=routes.route(id);if(!api.get(route)){assert.equal(api.get(route),undefined);missing=true;break;}}assert(missing);
   }
  }finally{globalThis.fetch=originalFetch;}
- assert.equal(entries,943);assert(sharedContexts>0);console.log(JSON.stringify({status:'PASS',declarations:inventory.length,entries,argumentObservations:args,initialGroupedArgumentRoles:roleEdges,sharedNodesWithDistinctContexts:sharedContexts,negativeControls:negatives,unknownPathsDoNotInherit:true,scope:'Hashes and structural/context attachment of native extraction attestations; no browser kernel replay or prose-equivalence claim.'}));
+ assert.equal(entries,954);assert(sharedContexts>0);console.log(JSON.stringify({status:'PASS',declarations:inventory.length,entries,argumentObservations:args,initialGroupedArgumentRoles:roleEdges,sharedNodesWithDistinctContexts:sharedContexts,negativeControls:negatives,unknownPathsDoNotInherit:true,scope:'Hashes and structural/context attachment of native extraction attestations; no browser kernel replay or prose-equivalence claim.'}));
 })().catch(e=>{console.error(e.stack);process.exit(1)});

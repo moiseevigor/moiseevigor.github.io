@@ -10,6 +10,9 @@ def AtlasTypedFixture.shadow (x : Nat) : Nat := let x := Nat.succ x; Nat.succ x
 def AtlasTypedFixture.zero : 0 = 0 := Eq.refl 0
 def AtlasTypedFixture.dependent (α : Type) (P : α → Prop) (x : α) (h : P x) : P x := h
 def AtlasTypedFixture.dependentApp (f : (n : Nat) → Fin (n + 1)) (n : Nat) : Fin (n + 1) := f n
+def AtlasTypedFixture.shadowLambda (x : Nat) : Nat → Nat := fun x => x
+def AtlasTypedFixture.reflexive (n : Nat) : n = n := Eq.refl n
+def AtlasTypedFixture.recursorBody (P : Prop) (p : P) : True → P := fun h => @True.rec (fun _ => P) p h
 def AtlasTypedFixture.Alias := Nat
 def AtlasTypedFixture.convertApp (f : AtlasTypedFixture.Alias → Nat) (x : Nat) : Nat := f x
 def AtlasTypedFixture.residual (f : Nat → Nat → Nat) (x : Nat) : Nat → Nat := f x
@@ -29,7 +32,7 @@ with tempfile.TemporaryDirectory(prefix='atlas-type-controls-') as tmp:
 run_cmd do
  let mut requests : Array Json := #[]
  for name in [``AtlasTypedFixture.compose, ``AtlasTypedFixture.shadow, ``AtlasTypedFixture.zero, ``AtlasTypedFixture.dependent,
-   ``AtlasTypedFixture.dependentApp, ``AtlasTypedFixture.convertApp, ``AtlasTypedFixture.residual] do
+   ``AtlasTypedFixture.dependentApp, ``AtlasTypedFixture.convertApp, ``AtlasTypedFixture.residual, ``AtlasTypedFixture.shadowLambda, ``AtlasTypedFixture.reflexive, ``AtlasTypedFixture.recursorBody] do
   let info ← getConstInfo name
   let some value := info.value? true | throwError "Missing fixture body"
   let (t,s) := AtlasLibrary.intern info.type {}
@@ -40,6 +43,9 @@ run_cmd do
   let file := "FOLDER/" ++ name.toString ++ ".json"
   liftIO <| IO.FS.writeFile file packet.compress
   let mut paths := #[AtlasOccurrenceTypes.routeJson 1 #[]]
+  if name == ``AtlasTypedFixture.recursorBody then paths := paths ++ #[AtlasOccurrenceTypes.routeJson 1 #[1,1],AtlasOccurrenceTypes.routeJson 1 #[1,1,1]]
+  if name == ``AtlasTypedFixture.reflexive then paths := paths.push (AtlasOccurrenceTypes.routeJson 1 #[1])
+  if name == ``AtlasTypedFixture.shadowLambda then paths := paths.push (AtlasOccurrenceTypes.routeJson 1 #[1])
   if name == ``AtlasTypedFixture.compose then paths := paths.push (AtlasOccurrenceTypes.routeJson 1 #[1,1,1,1])
   if name == ``AtlasTypedFixture.dependent then paths := paths.push (AtlasOccurrenceTypes.routeJson 1 #[1,1,1,1])
   if name == ``AtlasTypedFixture.shadow then paths := paths ++ #[AtlasOccurrenceTypes.routeJson 1 #[1,1],AtlasOccurrenceTypes.routeJson 1 #[1,2]]
@@ -74,12 +80,23 @@ run_cmd do
     assert converted['actualRoot']!=converted['domainRoot']
     residual=next(r for r in result if r['name'].endswith('.residual'))['entries'][-1]
     assert residual['typeGraph']['kind'][residual['typeRoot']]==7
+    lambdas=[e for r in result for e in r['entries'] if 'lambdaJudgment'in e]
+    assert lambdas and all(e['lambdaJudgment']['status']=='checked'for e in lambdas)
+    for e in lambdas:
+        t=e['lambdaJudgment'];g=e['typeGraph']
+        assert t['domainBeforeBinder'] and t['bodyContextExtended'] and t['expectedBodyStructuralMatch']
+        assert len(t['body']['context'])==len(e['context'])+1 and t['body']['context'][-1]['route']==e['route']
+        assert t['body']['expectedRoot']==g['children'][t['piRoot']][1] and g['kind'][t['domain']['sortRoot']]==3
+        assert all(t[k]=='PASS'for k in ['kernelDomainSort','kernelBinderConversion','kernelBodyConversion','kernelFunctionConversion'])
     models=subprocess.run(['node',str(base.parent.parent/'scripts/check-proof-atlas-native-application-models.cjs'),str(entry),str(requests),str(output)],capture_output=True,text=True)
     assert models.returncode==0,models.stdout+models.stderr
     print(models.stdout.strip())
+    lambda_models=subprocess.run(['node',str(base.parent.parent/'scripts/check-proof-atlas-native-lambda-models.cjs'),str(entry),str(requests),str(output)],capture_output=True,text=True)
+    assert lambda_models.returncode==0,lambda_models.stdout+lambda_models.stderr
+    print(lambda_models.stdout.strip())
     query=json.loads(requests.read_text())[0];packet=Path(query['packetFile']);data=json.loads(packet.read_text())
     next(p for p in data['payloads'] if 'binderName'in p)['binderName']='deliberatelyChangedBinder'
     packet.write_text(json.dumps(data));requests.write_text(json.dumps([query]))
     bad=folder/'RejectChangedPacket.lean';bad.write_text(core+defs+'\n#atlas_occurrence_types '+json.dumps(str(requests))+' => '+json.dumps(str(folder/'bad.json'))+'\n')
     rejected=subprocess.run([lean,str(bad)],capture_output=True,text=True);assert rejected.returncode!=0 and 'Native/published DAG mismatch'in rejected.stdout+rejected.stderr
-    print(json.dumps({'status':'PASS','kernelTypedControls':7,'selectedOccurrences':sum(len(r['entries'])for r in result),'proofTypeValueRoles':True,'dependentTypeAbstractionRoundtrip':True,'letValueOutsideOwnBinder':True,'invalidContextsRejected':2,'changedPacketRejected':True,'applicationTraces':len(applications),'dependentSubstitution':True,'definitionallyEqualDistinctDomains':True,'residualFunctionType':True,'invalidTypedConversionRejected':True,'scope':'Small native kernel controls; not independent replay of the private corpus.'}))
+    print(json.dumps({'status':'PASS','kernelTypedControls':10,'selectedOccurrences':sum(len(r['entries'])for r in result),'proofTypeValueRoles':True,'dependentTypeAbstractionRoundtrip':True,'letValueOutsideOwnBinder':True,'invalidContextsRejected':2,'changedPacketRejected':True,'applicationTraces':len(applications),'lambdaTraces':len(lambdas),'dependentSubstitution':True,'definitionallyEqualDistinctDomains':True,'residualFunctionType':True,'invalidTypedConversionRejected':True,'scope':'Small native kernel controls; not independent replay of the private corpus.'}))

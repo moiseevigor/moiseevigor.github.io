@@ -10,6 +10,9 @@ on:
       - 'scripts/test-proof-atlas-applications*.cjs'
       - 'scripts/test-proof-atlas-application-geometry*.cjs'
       - 'scripts/test-proof-atlas-application-judgments*.cjs'
+      - 'scripts/test-proof-atlas-lambda-*.cjs'
+      - 'scripts/check-proof-atlas-native-lambda-models.cjs'
+      - 'public/js/proof-atlas-lambda-judgment.js'
       - 'scripts/check-proof-atlas-native-application-models.cjs'
       - 'public/js/proof-atlas-article-index.js'
       - 'public/js/proof-atlas-article.js'
@@ -64,6 +67,7 @@ on:
       - '.github/workflows/proof-atlas-browser.yml'
   pull_request:
     paths:
+      - 'scripts/check-proof-atlas-native-lambda-models.cjs'
       - 'scripts/check-proof-atlas-native-application-models.cjs'
       - 'scripts/test-research-navigation.cjs'
       - '_data/research.yml'
@@ -148,6 +152,8 @@ jobs:
           node scripts/test-proof-atlas-type-geometry-browser.cjs
           node scripts/test-proof-atlas-application-judgments.cjs
           node scripts/test-proof-atlas-application-judgments-browser.cjs
+          node scripts/test-proof-atlas-lambda-judgments.cjs
+          node scripts/test-proof-atlas-lambda-judgments-browser.cjs
           node scripts/test-proof-atlas-application-geometry.cjs
           node scripts/test-proof-atlas-application-geometry-browser.cjs
           node scripts/test-proof-atlas-telescope.cjs
