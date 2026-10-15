@@ -95,6 +95,51 @@ def applicationJudgment (original term type : Expr) (xs : Array Expr) (shared in
   ("head",headJson),("stages",toJson stages),("finalTypeStructuralMatch",toJson true),
   ("conversions",str "native-kernel-typed-identity/1"),("textIsPresentation",toJson true)],types)
 
+def lambdaJudgment (original term type : Expr) (xs : Array Expr) (context : Array Json)
+    (shared initial : Shared) (root : Nat) (slots : Array Nat) (path : String) : MetaM (Json × Shared) := do
+ let .lam _ originalDomain originalBody _ := original | throwError "Source is not a lambda"
+ let .lam binderName domain body binderInfo := term | throwError "Contextual term is not a lambda"
+ let pi ← whnf type
+ let .forallE _ piDomain piBody _ := pi | throwError "Lambda type does not normalize to Pi"
+ kernelAs term pi
+ let domainType ← kernelType domain
+ let sort ← match Kernel.whnf (← getEnv) (← getLCtx) domainType with
+  | .ok value => pure value
+  | .error ex => throwError "Kernel domain normalization failed: {ex.toMessageData (← getOptions)}"
+ unless sort.isSort do throwError "Lambda domain is not a type"
+ let (piRoot,s) ← internScoped pi xs initial 32768
+ let (domainRoot,s) ← internScoped domain xs s 32768
+ let (piDomainRoot,s) ← internScoped piDomain xs s 32768
+ let (domainTypeRoot,s) ← internScoped domainType xs s 32768
+ let (sortRoot,s) ← internScoped sort xs s 32768
+ let domainText ← prettyType domain
+ let domainTypeText ← prettyType domainType
+ let binder := obj [("node",nat (← sourceId shared original)),("route",routeJson root slots),
+  ("path",str path),("kind",str "lam")]
+ withLocalDecl binderName binderInfo domain fun x => do
+  kernelAs x piDomain
+  let openBody := body.instantiate1 x
+  let actual ← kernelType openBody
+  let expected := piBody.instantiate1 x
+  kernelAs openBody expected
+  let (actualRoot,s) ← internScoped actual (xs.push x) s 32768
+  let (expectedRoot,s) ← internScoped expected (xs.push x) s 32768
+  unless expectedRoot == ((s.children[piRoot]!)[1]!) do throwError "Pi/body abstraction changed binding"
+  let domainJson := obj [("node",nat (← sourceId shared originalDomain)),("route",routeJson root (slots.push 0)),
+   ("path",str (path ++ ".domain")),("expressionRoot",nat domainRoot),("piDomainRoot",nat piDomainRoot),
+   ("typeRoot",nat domainTypeRoot),("sortRoot",nat sortRoot),("text",str domainText),
+   ("typeText",str domainTypeText)]
+  let bodyJson := obj [("node",nat (← sourceId shared originalBody)),("route",routeJson root (slots.push 1)),
+   ("path",str (path ++ ".body")),("context",toJson (context.push binder)),("typeRoot",nat actualRoot),
+   ("expectedRoot",nat expectedRoot),("role",str (← role actual)),("text",str (← prettyType actual)),
+   ("expectedText",str (← prettyType expected))]
+  return (obj [("format",str "ProofAtlasLambdaJudgment/1"),("status",str "checked"),("piRoot",nat piRoot),
+   ("domain",domainJson),("body",bodyJson),("binderName",str binderName.toString),
+   ("binderInfo",str (AtlasLibrary.bi binderInfo)),("domainBeforeBinder",toJson true),("bodyContextExtended",toJson true),
+   ("expectedBodyStructuralMatch",toJson true),("kernelDomainSort",str "PASS"),("kernelBinderConversion",str "PASS"),
+   ("kernelBodyConversion",str "PASS"),("kernelFunctionConversion",str "PASS"),
+   ("conversions",str "native-kernel-typed-identity/1"),("textIsPresentation",toJson true)],s)
+
 def inspect (original term : Expr) (xs : Array Expr) (context : Array Json) (shared : Shared)
     (root : Nat) (slots : Array Nat) (path : String) : MetaM Json := do
  let type ← kernelType term
@@ -139,6 +184,15 @@ def inspect (original term : Expr) (xs : Array Expr) (context : Array Json) (sha
    logInfo m!"Application trace unavailable at {path}: {ex.toMessageData}"
    application := #[("applicationJudgment",obj [("status",str "unavailable"),
     ("reason",str "Application trace exceeded its bound or failed native checks")])]
+ if term.isLambda then
+  try
+   let (judgment,s) ← lambdaJudgment original term type xs context shared types root slots path
+   types := s
+   application := application.push ("lambdaJudgment",judgment)
+  catch ex =>
+   logInfo m!"Lambda trace unavailable at {path}: {ex.toMessageData}"
+   application := application.push ("lambdaJudgment",obj [("status",str "unavailable"),
+    ("reason",str "Lambda trace exceeded its bound or failed native checks")])
  let text ← withOptions (fun o => ((o.set `pp.maxDepth (12 : Nat)).set `pp.maxSteps (5000 : Nat)).set `pp.width (80 : Nat)) do
   return (← ppExpr type).pretty
  return obj ([("status",str "checked"),("kernelCheck",str "PASS"),("contextWellFormed",toJson true),("typeAbstractionRoundtrip",toJson true),("node",nat (← sourceId shared original)),

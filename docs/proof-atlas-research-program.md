@@ -108,7 +108,7 @@ For each route, the extractor reconstructs its lexical context with Lean local a
 
 Each judgment retains a shared type-expression DAG with its context abstracted back to bound indices. Reopening that type in its original context must reproduce the inferred expression by structural equality, including binder names and metadata. Pretty text is a presentation, not the formal type. The browser checks the sidecar hash, packet identity, exact route, complete enclosing-binder list, argument order and type-graph scope. The browser does not rerun Lean. These are native extraction attestations tied to the recorded environment, not portable kernel certificates or certified article equivalences.
 
-The primary query inventory contains **943 selected occurrence judgments in five declarations**, with 2,784 argument observations. It covers finite geometry-derived queries for `JacobiCore.E_pos`, `JacobiData.slope_bound_abs`, `SBracket.mk.inj` and `CrossingData.crossing` in the published snapshot, plus `JacobiConcrete.AmplitudeChart.midpoint_polynomial` in the working snapshot. This is not complete occurrence-type coverage of those proofs or the 2,098-packet inventory. A path without a primary query or an explicit application-trace observation remains without recorded type evidence; it does not inherit a judgment from a shared node or enclosing match.
+The initial primary query inventory contained **943 selected occurrence judgments in five declarations**, with 2,784 argument observations. It covers finite geometry-derived queries for `JacobiCore.E_pos`, `JacobiData.slope_bound_abs`, `SBracket.mk.inj` and `CrossingData.crossing` in the published snapshot, plus `JacobiConcrete.AmplitudeChart.midpoint_polynomial` in the working snapshot. This is not complete occurrence-type coverage of those proofs or the 2,098-packet inventory. A path without a primary query or an explicit application-trace observation remains without recorded type evidence; it does not inherit a judgment from a shared node or enclosing match.
 
 The data audit checks 146 shared nodes appearing in distinct recorded contexts and rejects 37 altered-hash, stale-packet, wrong-node, wrong-context, changed-count, duplicate-route, reordered-argument, missing-environment and unreviewed source-syntax cases. Small independently run native controls check proof/type/value roles, dependent contexts and let scope. Two deliberately ill-formed surrounding contexts must be rejected; changing a serialized binder name also makes the native/packet comparison fail. The browser exercises exact argument and type selections, statement/proof distinction, missing-path fallback, rejected evidence without losing the original graph, and article synchronization.
 
@@ -157,6 +157,34 @@ Complete traces have a fixed allowance of 32,768 shared type nodes per primary j
 
 The richer projection has **26,795 shared type nodes instead of 622,744 separately serialized nodes** and occupies **844,759 compressed bytes instead of 4,088,554** without interning. The application audit checks all 2,784 rule stages, **16,704 linked type-component cuts**, 754 observation cuts and 80 rejection controls. Fresh native controls additionally exercise the visual model and reject changed-context/environment merges. Browser checks cover premise/conclusion and Γ jumps, observation provenance, the 59-stage trace, delayed loads, missing optional code, unsupported article selections and keyboard/accessibility behavior in both themes and viewport sizes.
 
-This supplies one compositional typing rule. It does not yet provide lambda-introduction or recursor-elimination diagrams, inventory-wide type coverage, an AI-origin benchmark, measured comprehension results or shareable stage/type-local selections. The general research goal remains active; the blog is unchanged.
+The application rule supplies one compositional typing relation. The introduction rule below complements it. Recursor-elimination diagrams, inventory-wide type coverage, an AI-origin benchmark, measured comprehension results and shareable rule/type-local selections remain open work. The general research goal remains active; the blog is unchanged.
 
 [Application rule model](/public/js/proof-atlas-application-judgment.js) · [Application audit](/scripts/test-proof-atlas-application-judgments.cjs) · [Fresh native model controls](/scripts/check-proof-atlas-native-application-models.cjs) · [Browser checks](/scripts/test-proof-atlas-application-judgments-browser.cjs)
+
+
+<span id="checked-lambda-introduction"></span>
+
+## Checked lambda introduction and context discharge
+
+**Show lambda introduction** represents one binder by the following rule. The domain is outside the extended frame; the body is inside it. The conclusion returns to Γ and discharges exactly the selected binder.
+
+```text
+Γ ⊢ A : σ       σ normalizes to Sort u
+Γ, x : A ⊢ b : B′       B′ ≡ B
+──────────────────────────────────── Π introduction
+Γ ⊢ λ x : A, b : τ      τ ≡ Π (x : A), B
+```
+
+The native extractor checks the domain's type and normalizes it with the kernel to a sort. It checks the lambda at its normalized Π-type, then opens the original body under a fresh local declaration with the original binder name and visibility. Typed identities enforce conversion of the new local to the Π-domain and of the body to the expected codomain. Each type is abstracted in its appropriate context and reopened without structural change. Domain/type/sort and function-type diagrams use Γ; actual and expected body-type diagrams use Γ,x:A. Their proof-context links therefore distinguish the current binder from enclosing binders, including repeated names.
+
+The finite inventory contained 97 typed lambdas. Closing their consecutive lambda bodies yielded **104 introductions**, all of which pass the native checks. Five actual body types differ structurally from the recorded Π codomain. They contain unreduced motive applications, such as `(fun x => P) h`, while the expected type is `P`. Their recorded kernel conversions establish the connection; the two expressions remain separate. This is a conversion of formal types, not an inferred equivalence of article passages.
+
+Eleven additional primary lambda queries bring the total to **954**. The primary queries and explicit application/introduction observations provide **1,737 exact typed routes** in the same five declarations. Application traces retain their previous 399 calls, 2,784 stages and 8,352 conversions. All 943 preceding primary core judgments and the complete application records were compared structurally with the prior release and remain unchanged.
+
+The independent audit checks all 104 context extensions/discharges and **832 linked type cuts**, including nine displayed links to the current binder, and rejects 80 modified records/scenes. Fresh native controls include repeated binder names, a body type depending on the new binder, and a beta-convertible body type; their visual models check both contexts. Browser tests exercise actual term and binder clicks, observation provenance, stale loads, optional-view failures, article selection, both themes, phone/desktop widths and keyboard accessibility.
+
+The shared type tables contain **26,801 nodes instead of 623,784 separately serialized nodes**; the enriched files total **871,865 compressed bytes instead of 4,145,891** without interning. Existing fixed trace, packet and display limits remain in force. A displayed body type does not give its internal subexpressions new inferred types. The source lambdas remain recoverable by exact routes; no lambda is rewritten or removed from the compiled proof.
+
+This adds an introduction rule to the common term/type/binding language. It does not complete the recursor, inductive elimination, universe-formation or semantic-abstraction layers. The corpus remains a finite private-development projection with public compiled data; no AI-origin benchmark or comprehension study is claimed. The research goal remains active, and the blog is unchanged.
+
+[Introduction model](/public/js/proof-atlas-lambda-judgment.js) · [Scope/type audit](/scripts/test-proof-atlas-lambda-judgments.cjs) · [Fresh native controls](/scripts/check-proof-atlas-native-lambda-models.cjs) · [Browser checks](/scripts/test-proof-atlas-lambda-judgments-browser.cjs)

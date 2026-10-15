@@ -11,6 +11,7 @@ Read [the publication and navigation contract](docs/research-publication.md) bef
 - `/projects/` identifies the distinct interactive tools and software libraries.
 - Proof Atlas has one overview, an article, a crossing microscope and a compiled Lean library, with a shared navigation. Language reference and coverage are supporting views.
 - Its primary objective is the [general geometric language research program](docs/proof-atlas-research-program.md). The compiled library provides bounded constructor geometry, binder telescopes, ordered applications and optional checked-type diagrams. Type diagrams use the same constructor rules and distinguish type-local binding from the original proof context. Repeated type structures share storage; occurrence contexts remain separate.
+- Checked lambdas have an optional introduction view: the domain uses Γ, the body uses Γ,x:A, and the conclusion discharges exactly that binder. Type diagrams retain those distinct contexts.
 - Individually queried applications also have an optional Π-application rule view. It connects native-checked function, argument and result judgments, with exact term routes and type-diagram links. These typing rules are distinct from the structural graph's child arrows.
 - `_posts/`, `_appendices/` and `_articles/` retain their scientific scope and historical URLs. Evidence remains in `research/` and public packets.
 
