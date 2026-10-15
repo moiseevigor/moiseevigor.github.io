@@ -17,17 +17,83 @@ def kernelType (e : Expr) : MetaM Expr := do
  match Kernel.check (← getEnv) (← getLCtx) e with
  | .ok t => return t
  | .error ex => throwError "Kernel rejected contextual expression: {ex.toMessageData (← getOptions)}"
+def kernelAs (e expected : Expr) : MetaM Unit := do
+ -- The typed identity forces the kernel to check conversion to `expected`.
+ -- Meta.isDefEq alone is not the recorded conversion evidence.
+ let _ ← kernelType (mkApp (mkLambda `atlasExpected .default expected (.bvar 0)) e)
+ pure ()
+def prettyType (type : Expr) : MetaM String :=
+ withOptions (fun o => ((o.set `pp.maxDepth (8 : Nat)).set `pp.maxSteps (2000 : Nat)).set `pp.width (72 : Nat)) do
+  return (← ppExpr type).pretty
 def checkDomain (domain : Expr) : MetaM Unit := do
  unless (← whnf (← kernelType domain)).isSort do throwError "Local declaration domain is not a type"
-def internScoped (type : Expr) (xs : Array Expr) (shared : Shared) : MetaM (Nat × Shared) := do
+def internScoped (type : Expr) (xs : Array Expr) (shared : Shared) (limit : Nat := 8192) : MetaM (Nat × Shared) := do
  let type ← instantiateMVars type
  let abstractType := type.abstract xs
  if abstractType.hasFVar || abstractType.hasMVar then throwError "Unresolved local/type metavariable"
  unless (⟨abstractType.instantiateRev xs⟩ : ExprStructEq) == ⟨type⟩ do
   throwError "Type abstraction/context roundtrip changed the inferred expression"
  let (r,next) := intern abstractType shared
- if next.kind.size > 8192 then throwError "Type DAG exceeds 8192 shared nodes"
+ if next.kind.size > limit then throwError "Type DAG exceeds {limit} shared nodes"
  return (r,next)
+
+def applicationJudgment (original term type : Expr) (xs : Array Expr) (shared initial : Shared)
+    (root : Nat) (slots : Array Nat) (path : String) : MetaM (Json × Shared) := do
+ let args := term.getAppArgs
+ let mut funTerm := term.getAppFn
+ let mut before ← kernelType funTerm
+ let (headRoot,start) ← internScoped before xs initial 32768
+ let mut types := start
+ let mut head := original
+ let mut headSlots := slots
+ let mut headPath := path
+ for _ in [:args.size] do
+  head := head.appFn!
+  headSlots := headSlots.push 0
+  headPath := headPath ++ ".fn"
+ let headJson := obj [("node",nat (← sourceId shared head)),("route",routeJson root headSlots),
+  ("path",str headPath),("typeRoot",nat headRoot),("role",str (← role before))]
+ let mut stages : Array Json := #[]
+ for j in [:args.size] do
+  let arg := args[j]!
+  let pi ← whnf before
+  let .forallE binderName domain body binderInfo := pi | throwError "No normalized function domain"
+  kernelAs funTerm pi
+  let actual ← kernelType arg
+  kernelAs arg domain
+  let next := mkApp funTerm arg
+  let after ← kernelType next
+  let substituted := body.instantiate1 arg
+  kernelAs next substituted
+  let (beforeRoot,s) ← internScoped before xs types 32768
+  let (piRoot,s) ← internScoped pi xs s 32768
+  let (actualRoot,s) ← internScoped actual xs s 32768
+  let (domainRoot,s) ← internScoped domain xs s 32768
+  let (afterRoot,s) ← internScoped after xs s 32768
+  let (substitutedRoot,s) ← internScoped substituted xs s 32768
+  types := s
+  let mut source := original
+  let mut appSlots := slots
+  let mut atPath := path
+  for _ in [:args.size-1-j] do
+   source := source.appFn!
+   appSlots := appSlots.push 0
+   atPath := atPath ++ ".fn"
+  stages := stages.push (obj [("slot",nat (j+1)),("node",nat (← sourceId shared source)),
+   ("route",routeJson root appSlots),("path",str atPath),("beforeRoot",nat beforeRoot),("piRoot",nat piRoot),
+   ("actualRoot",nat actualRoot),("domainRoot",nat domainRoot),
+   ("afterRoot",nat afterRoot),("substitutedRoot",nat substitutedRoot),("binderName",str binderName.toString),
+   ("binderInfo",str (AtlasLibrary.bi binderInfo)),("bodyUsesBinder",toJson (body.hasLooseBVar 0)),
+   ("functionRole",str (← role before)),("resultRole",str (← role after)),
+   ("kernelFunctionConversion",str "PASS"),("kernelDomainConversion",str "PASS"),("kernelResultConversion",str "PASS"),
+   ("beforeText",str (← prettyType before)),("argumentText",str (← prettyType actual)),
+   ("domainText",str (← prettyType domain)),("afterText",str (← prettyType after))])
+  funTerm := next
+  before := after
+ unless (⟨before⟩ : ExprStructEq) == ⟨type⟩ do throwError "Application trace does not end at the selected kernel type"
+ return (obj [("format",str "ProofAtlasApplicationJudgment/1"),("status",str "checked"),
+  ("head",headJson),("stages",toJson stages),("finalTypeStructuralMatch",toJson true),
+  ("conversions",str "native-kernel-typed-identity/1"),("textIsPresentation",toJson true)],types)
 
 def inspect (original term : Expr) (xs : Array Expr) (context : Array Json) (shared : Shared)
     (root : Nat) (slots : Array Nat) (path : String) : MetaM Json := do
@@ -63,12 +129,22 @@ def inspect (original term : Expr) (xs : Array Expr) (context : Array Json) (sha
    ("route",routeJson root argSlots),("path",str argPath),("role",str (← role argType)),
    ("binderInfo",str (AtlasLibrary.bi binderInfo)),("typeRoot",nat aRoot),("expectedRoot",nat dRoot)])
   funTerm := next
+ let mut application : Array (String × Json) := #[]
+ if args.size > 0 then
+  try
+   let (judgment,s) ← applicationJudgment original term type xs shared types root slots path
+   types := s
+   application := #[("applicationJudgment",judgment)]
+  catch ex =>
+   logInfo m!"Application trace unavailable at {path}: {ex.toMessageData}"
+   application := #[("applicationJudgment",obj [("status",str "unavailable"),
+    ("reason",str "Application trace exceeded its bound or failed native checks")])]
  let text ← withOptions (fun o => ((o.set `pp.maxDepth (12 : Nat)).set `pp.maxSteps (5000 : Nat)).set `pp.width (80 : Nat)) do
   return (← ppExpr type).pretty
- return obj [("status",str "checked"),("kernelCheck",str "PASS"),("contextWellFormed",toJson true),("typeAbstractionRoundtrip",toJson true),("node",nat (← sourceId shared original)),
+ return obj ([("status",str "checked"),("kernelCheck",str "PASS"),("contextWellFormed",toJson true),("typeAbstractionRoundtrip",toJson true),("node",nat (← sourceId shared original)),
   ("route",routeJson root slots),("path",str path),("context",toJson context),("role",str (← role type)),
   ("typeRoot",nat typeRoot),("typeGraph",graphJson types),("typeText",str text),
-  ("typeTextIsPresentation",toJson true),("arguments",toJson arguments)]
+  ("typeTextIsPresentation",toJson true),("arguments",toJson arguments)] ++ application.toList)
 
 partial def atRoute (e : Expr) (rest : List Nat) (xs : Array Expr) (context : Array Json)
     (shared : Shared) (root : Nat) (slots : Array Nat) (path : String) : MetaM Json := do
