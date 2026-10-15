@@ -1,0 +1,23 @@
+Compiled Proof Atlas sample from Goedel-LM/Lean-workbook-proofs.
+Pinned dataset revision: b731852af8d8ab11498fda27bce9020738c01c59
+Source: https://huggingface.co/datasets/Goedel-LM/Lean-workbook-proofs
+
+The dataset publisher attributes these scripts to Goedel-Prover-SFT.
+Citation: Yong Lin et al., Goedel-Prover: A Frontier Model for Open-Source
+Automated Theorem Proving, 2025, arXiv:2502.07640.
+https://arxiv.org/abs/2502.07640
+
+The source LICENSE file states, verbatim:
+## License
+This dataset is licensed under the MIT License.
+
+License source:
+https://huggingface.co/datasets/Goedel-LM/Lean-workbook-proofs/blob/b731852af8d8ab11498fda27bce9020738c01c59/LICENSE
+SHA-256: d16f34eb33458b59555327a1e3595afea96e86275b33b684a2ae6e13cce5ab68
+
+This projection contains compiled expressions and native extraction evidence.
+Original source scripts and compiler logs are not included. Scripts were
+recompiled, unchanged, under the recorded Lean 4.33.1/Mathlib environment.
+This is not a reproduction of the original model run, original compiler
+environment or original benchmark success rate. External Lean and Mathlib
+references remain named boundaries with their respective project licenses.

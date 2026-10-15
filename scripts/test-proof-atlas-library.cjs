@@ -22,7 +22,7 @@ assert.deepEqual(A.binding(sharedBinder,{root:1,slots:[1]}).route,{root:1,slots:
    }
    return result;
   });
-  assert.equal(all.length,3);assert.equal(all[2].edition,'recursion-controls');assert.equal(all[2].declarations,85);assert.equal(all[0].declarations,739);assert.equal(all[1].declarations,1359);console.log('Every served packet verified: '+JSON.stringify(all));
+  assert.equal(all.length,4);assert.equal(all[3].edition,'goedel-sample-4331');assert.equal(all[3].declarations,20);assert.equal(all[2].edition,'recursion-controls');assert.equal(all[2].declarations,85);assert.equal(all[0].declarations,739);assert.equal(all[1].declarations,1359);console.log('Every served packet verified: '+JSON.stringify(all));
   const records=await p.evaluate(()=>{const e=PROOF_ATLAS_LIBRARY.editions[0],groups=new Map();e.declarations.forEach(r=>{if(!groups.has(r.module)&&r.bodyAvailable)groups.set(r.module,r.name);});return[...groups.values(),e.declarations.find(r=>r.kind==='recursor').name,e.declarations.find(r=>!r.sourceRange&&r.bodyAvailable).name,'CrossingData.crossing','JacobiData.hasDerivAt_a','JacobiCore.abs_Φ\'_le'];});
   for(const name of records){await p.evaluate(name=>ProofAtlasLibrary.selectDeclaration(name),name);const d=await p.evaluate(()=>ProofAtlasLibrary.getData());assert(d.kind.length>0);const snap=await p.evaluate(()=>ProofAtlasLibrary.getSnapshot());assert.equal(snap.name,name);assert(await p.locator('#pl-rows button').count()>0);assert((await p.locator('#pl-expression').textContent()).includes('root.'));}
   await p.evaluate(()=>ProofAtlasLibrary.selectDeclaration('CrossingData.crossing'));

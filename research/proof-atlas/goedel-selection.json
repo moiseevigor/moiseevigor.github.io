@@ -1,0 +1,184 @@
+{
+  "format": "ProofAtlasGoedelSelection/1",
+  "dataset": "Goedel-LM/Lean-workbook-proofs",
+  "revision": "b731852af8d8ab11498fda27bce9020738c01c59",
+  "parquetSha256": "24fcb50eecc2ccbcc52a58c6412c6d10edbeaa9483a97d30e207fb20ef6e2677",
+  "population": 29750,
+  "method": "16 smallest SHA256(ProofAtlasGoedel/1:problem_id), union 8 longest UTF-8 full_proof scripts; length ties by problem_id. Length includes comments.",
+  "provenance": "Dataset publisher attributes the records to Goedel-Prover-SFT. Generation was not independently observed. Compilation and graph coverage are tested separately.",
+  "readmeUrl": "https://huggingface.co/datasets/Goedel-LM/Lean-workbook-proofs/blob/b731852af8d8ab11498fda27bce9020738c01c59/README.md",
+  "readmeSha256": "99c0bcae41e3947032517ac3187b35edce257445ede547cef00a7aabf97df616",
+  "license": "MIT (as declared by the dataset publisher)",
+  "licenseUrl": "https://huggingface.co/datasets/Goedel-LM/Lean-workbook-proofs/blob/b731852af8d8ab11498fda27bce9020738c01c59/LICENSE",
+  "licenseSha256": "d16f34eb33458b59555327a1e3595afea96e86275b33b684a2ae6e13cce5ab68",
+  "entries": [
+    {
+      "row": 14951,
+      "problem_id": "lean_workbook_plus_19785",
+      "bytes": 1405,
+      "sourceSha256": "7f15d291636d5a0278d9312b5f3cf99d5f2d6b39a354d227e9fd143f1f89ee37",
+      "stratum": "hash-selected"
+    },
+    {
+      "row": 24693,
+      "problem_id": "lean_workbook_plus_62755",
+      "bytes": 1280,
+      "sourceSha256": "7e270522ac93030b71efabbf6d3ffd84407805aa1cee8348a6fd427c86aa423c",
+      "stratum": "hash-selected"
+    },
+    {
+      "row": 24764,
+      "problem_id": "lean_workbook_plus_63081",
+      "bytes": 1333,
+      "sourceSha256": "8edd950efcaed46473a9cfeb1000b7b4bac0782c105ab3054360e50515846287",
+      "stratum": "hash-selected"
+    },
+    {
+      "row": 14223,
+      "problem_id": "lean_workbook_plus_16912",
+      "bytes": 1484,
+      "sourceSha256": "a88efcf7a6eb35f44a480e3b787ef5bb7b2a47d877b72b181acb737e831828a2",
+      "stratum": "hash-selected"
+    },
+    {
+      "row": 22854,
+      "problem_id": "lean_workbook_plus_54622",
+      "bytes": 977,
+      "sourceSha256": "7af1d5d69178702a11b13d77dad54ca31956e713a16ec2047a0899281db245ec",
+      "stratum": "hash-selected"
+    },
+    {
+      "row": 11252,
+      "problem_id": "lean_workbook_56144",
+      "bytes": 1037,
+      "sourceSha256": "88f54d38e9c49131cb291df6527bc9e47ed5fb946c46ee0901c938b18297c55c",
+      "stratum": "hash-selected"
+    },
+    {
+      "row": 26452,
+      "problem_id": "lean_workbook_plus_70240",
+      "bytes": 2199,
+      "sourceSha256": "4ba4a3343641286d44918d602cbab2e6c47e4a07ca166d8d41d0791c92d98378",
+      "stratum": "hash-selected"
+    },
+    {
+      "row": 14387,
+      "problem_id": "lean_workbook_plus_17551",
+      "bytes": 2042,
+      "sourceSha256": "c148ec14f5fe62b017ac36f8f99838c23ffcf7ac49b20335bacb43e72b18b80b",
+      "stratum": "hash-selected"
+    },
+    {
+      "row": 26083,
+      "problem_id": "lean_workbook_plus_68616",
+      "bytes": 1365,
+      "sourceSha256": "b3845eec83a376e18ca1fb1429d5408c6673462fff37088173770e1535254968",
+      "stratum": "hash-selected"
+    },
+    {
+      "row": 7973,
+      "problem_id": "lean_workbook_4274",
+      "bytes": 1850,
+      "sourceSha256": "761ccc0ee9e693f87eabfca7b94449ec8ebe1c5293ddd528bed8eade57ca74a4",
+      "stratum": "hash-selected"
+    },
+    {
+      "row": 9611,
+      "problem_id": "lean_workbook_49456",
+      "bytes": 883,
+      "sourceSha256": "feb8f7b2ab730b0efdee245bd28e648ffb3ca004c15f1deeb6b0754f8a478434",
+      "stratum": "hash-selected"
+    },
+    {
+      "row": 26111,
+      "problem_id": "lean_workbook_plus_68794",
+      "bytes": 1834,
+      "sourceSha256": "9f309029babdfcee078518fe49ca92d664fa885eb45b3483068b1b5656f00586",
+      "stratum": "hash-selected"
+    },
+    {
+      "row": 6036,
+      "problem_id": "lean_workbook_3485",
+      "bytes": 1969,
+      "sourceSha256": "ace2b6ea44489642395660c0e4dff53ee2c2d870ebc437b25e38c9b6cb929f93",
+      "stratum": "hash-selected"
+    },
+    {
+      "row": 25944,
+      "problem_id": "lean_workbook_plus_68077",
+      "bytes": 1747,
+      "sourceSha256": "bc81bd2c7804c444b05280db621904637eb34d360fc5952bcb10850e82f38a62",
+      "stratum": "hash-selected"
+    },
+    {
+      "row": 13773,
+      "problem_id": "lean_workbook_plus_15068",
+      "bytes": 1172,
+      "sourceSha256": "c8a09c1ece2d7fc13d9ef4d0979c71870e9e97202f8bed0df415a5c52788c2b5",
+      "stratum": "hash-selected"
+    },
+    {
+      "row": 19472,
+      "problem_id": "lean_workbook_plus_39831",
+      "bytes": 1099,
+      "sourceSha256": "ceca77661c386d820b66fac94e6e1e4ebbb18d894f0b6a79c37f6cd2f425c9cf",
+      "stratum": "hash-selected"
+    },
+    {
+      "row": 2498,
+      "problem_id": "lean_workbook_20418",
+      "bytes": 6495,
+      "sourceSha256": "44d7d19cff28d5b75dc33d21733bf14cb764e765f493ca46cf2a66345b8a3d07",
+      "stratum": "longest-script"
+    },
+    {
+      "row": 20436,
+      "problem_id": "lean_workbook_plus_43987",
+      "bytes": 6035,
+      "sourceSha256": "182370b92c287cb5f51d7e5f0caeb77eb22d79fd67dbff75acbbbb371d4552b8",
+      "stratum": "longest-script"
+    },
+    {
+      "row": 24538,
+      "problem_id": "lean_workbook_plus_6206",
+      "bytes": 5891,
+      "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+      "stratum": "longest-script"
+    },
+    {
+      "row": 14909,
+      "problem_id": "lean_workbook_plus_19617",
+      "bytes": 5456,
+      "sourceSha256": "0c75bdffb8429241e73c9e4f375bd15130b2c5a19855281071b9706b89478578",
+      "stratum": "longest-script"
+    },
+    {
+      "row": 24385,
+      "problem_id": "lean_workbook_plus_61403",
+      "bytes": 5215,
+      "sourceSha256": "a12e28fcab85c77a9d2d398c937206a56f55c9666ca90ccb446bb0415be80371",
+      "stratum": "longest-script"
+    },
+    {
+      "row": 25841,
+      "problem_id": "lean_workbook_plus_67559",
+      "bytes": 5110,
+      "sourceSha256": "6454f66afa4aa9e21822dd67a8e9bbba226acb93185a6ead2e28d8c277e76111",
+      "stratum": "longest-script"
+    },
+    {
+      "row": 4142,
+      "problem_id": "lean_workbook_27090",
+      "bytes": 4906,
+      "sourceSha256": "67c2c7a2ef9d4bf43553e94a028aa792271857c97828a2c92b227b0d035096f5",
+      "stratum": "longest-script"
+    },
+    {
+      "row": 22733,
+      "problem_id": "lean_workbook_plus_54159",
+      "bytes": 4870,
+      "sourceSha256": "6e775cf687f0ff3c190bb091692f5a795294f4ae6bc17173df1744ba26042859",
+      "stratum": "longest-script"
+    }
+  ]
+}

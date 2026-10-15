@@ -135,6 +135,12 @@ elab_rules : command
           | .error _ => throwError "Kernel rejected body {name}"
         unless ← liftTermElabM fun _ => isDefEq inferred info.type do
           throwError "Body/type mismatch for {name}"
+        -- Also force the declared-type conversion through the kernel itself.
+        -- Meta unification alone is not the independent conversion check.
+        let atDeclaredType := mkApp (mkLambda `atlasDeclaredType .default info.type (.bvar 0)) value
+        let _ ← match Kernel.check env {} atDeclaredType with
+          | .ok t => pure t
+          | .error _ => throwError "Kernel rejected body at declared type {name}"
       let typeText ← liftTermElabM fun _ => withOptions (fun o => (o.setBool `pp.universes true).set `pp.width (100 : Nat)) do
         return (← ppExpr info.type).pretty
       let (typeRoot, initial) := intern info.type {}

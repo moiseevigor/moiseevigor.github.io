@@ -1,10 +1,10 @@
 name: Proof Atlas compiled proof audit
 on:
   pull_request:
-    paths: ['research/proof-atlas/**', 'public/js/proof-atlas-recursive-inputs.js', 'public/js/proof-atlas-recursion-examples.js', 'public/data/proof-atlas/recursion-examples*', 'public/data/proof-atlas/recursion-examples/**', 'scripts/test-proof-atlas-recurs*.cjs', 'public/data/proof-atlas/library/**', 'public/data/proof-atlas/library-manifest.js', 'public/data/proof-atlas/occurrence-types/**', 'public/data/proof-atlas/occurrence-types-manifest.js', 'public/js/proof-atlas-elimination.js', 'public/data/proof-atlas/eliminations*', 'public/data/proof-atlas/eliminations/**', 'scripts/test-proof-atlas-elimination*.cjs', 'scripts/check-proof-atlas-native-elimination-models.cjs', 'public/js/proof-atlas-beta-reduction.js', 'public/data/proof-atlas/beta-reductions*', 'public/data/proof-atlas/beta-reductions/**', 'scripts/test-proof-atlas-beta-*.cjs', 'scripts/check-proof-atlas-native-beta-models.cjs', 'public/js/proof-atlas-occurrence-types.js', 'scripts/test-proof-atlas-occurrence-types.cjs', 'scripts/test-proof-atlas-type-*.cjs', 'scripts/test-proof-atlas-application-judgments*.cjs', 'scripts/test-proof-atlas-lambda-*.cjs', 'scripts/check-proof-atlas-native-lambda-models.cjs', 'public/js/proof-atlas-lambda-judgment.js', 'scripts/check-proof-atlas-native-application-models.cjs', 'public/js/proof-atlas-application-judgment.js', 'public/js/proof-atlas-type-geometry.js', '.github/workflows/proof-atlas-compiled-proofs.yml']
+    paths: ['research/proof-atlas/**', 'public/js/proof-atlas-ai-sample.js', 'public/js/proof-atlas-binding-uses.js', 'public/data/proof-atlas/goedel-sample*', 'public/data/proof-atlas/goedel-sample/**', 'scripts/test-proof-atlas-ai-sample*.cjs', 'scripts/test-proof-atlas-binding-uses.cjs', 'public/js/proof-atlas-recursive-inputs.js', 'public/js/proof-atlas-recursion-examples.js', 'public/data/proof-atlas/recursion-examples*', 'public/data/proof-atlas/recursion-examples/**', 'scripts/test-proof-atlas-recurs*.cjs', 'public/data/proof-atlas/library/**', 'public/data/proof-atlas/library-manifest.js', 'public/data/proof-atlas/occurrence-types/**', 'public/data/proof-atlas/occurrence-types-manifest.js', 'public/js/proof-atlas-elimination.js', 'public/data/proof-atlas/eliminations*', 'public/data/proof-atlas/eliminations/**', 'scripts/test-proof-atlas-elimination*.cjs', 'scripts/check-proof-atlas-native-elimination-models.cjs', 'public/js/proof-atlas-beta-reduction.js', 'public/data/proof-atlas/beta-reductions*', 'public/data/proof-atlas/beta-reductions/**', 'scripts/test-proof-atlas-beta-*.cjs', 'scripts/check-proof-atlas-native-beta-models.cjs', 'public/js/proof-atlas-occurrence-types.js', 'scripts/test-proof-atlas-occurrence-types.cjs', 'scripts/test-proof-atlas-type-*.cjs', 'scripts/test-proof-atlas-application-judgments*.cjs', 'scripts/test-proof-atlas-lambda-*.cjs', 'scripts/check-proof-atlas-native-lambda-models.cjs', 'public/js/proof-atlas-lambda-judgment.js', 'scripts/check-proof-atlas-native-application-models.cjs', 'public/js/proof-atlas-application-judgment.js', 'public/js/proof-atlas-type-geometry.js', '.github/workflows/proof-atlas-compiled-proofs.yml']
   push:
     branches: [master]
-    paths: ['research/proof-atlas/**', 'public/js/proof-atlas-recursive-inputs.js', 'public/js/proof-atlas-recursion-examples.js', 'public/data/proof-atlas/recursion-examples*', 'public/data/proof-atlas/recursion-examples/**', 'scripts/test-proof-atlas-recurs*.cjs', 'public/data/proof-atlas/library/**', 'public/data/proof-atlas/library-manifest.js', 'public/data/proof-atlas/occurrence-types/**', 'public/data/proof-atlas/occurrence-types-manifest.js', 'public/js/proof-atlas-elimination.js', 'public/data/proof-atlas/eliminations*', 'public/data/proof-atlas/eliminations/**', 'scripts/test-proof-atlas-elimination*.cjs', 'scripts/check-proof-atlas-native-elimination-models.cjs', 'public/js/proof-atlas-beta-reduction.js', 'public/data/proof-atlas/beta-reductions*', 'public/data/proof-atlas/beta-reductions/**', 'scripts/test-proof-atlas-beta-*.cjs', 'scripts/check-proof-atlas-native-beta-models.cjs', 'public/js/proof-atlas-occurrence-types.js', 'scripts/test-proof-atlas-occurrence-types.cjs', 'scripts/test-proof-atlas-type-*.cjs', 'scripts/test-proof-atlas-application-judgments*.cjs', 'scripts/test-proof-atlas-lambda-*.cjs', 'scripts/check-proof-atlas-native-lambda-models.cjs', 'public/js/proof-atlas-lambda-judgment.js', 'scripts/check-proof-atlas-native-application-models.cjs', 'public/js/proof-atlas-application-judgment.js', 'public/js/proof-atlas-type-geometry.js', '.github/workflows/proof-atlas-compiled-proofs.yml']
+    paths: ['research/proof-atlas/**', 'public/js/proof-atlas-ai-sample.js', 'public/js/proof-atlas-binding-uses.js', 'public/data/proof-atlas/goedel-sample*', 'public/data/proof-atlas/goedel-sample/**', 'scripts/test-proof-atlas-ai-sample*.cjs', 'scripts/test-proof-atlas-binding-uses.cjs', 'public/js/proof-atlas-recursive-inputs.js', 'public/js/proof-atlas-recursion-examples.js', 'public/data/proof-atlas/recursion-examples*', 'public/data/proof-atlas/recursion-examples/**', 'scripts/test-proof-atlas-recurs*.cjs', 'public/data/proof-atlas/library/**', 'public/data/proof-atlas/library-manifest.js', 'public/data/proof-atlas/occurrence-types/**', 'public/data/proof-atlas/occurrence-types-manifest.js', 'public/js/proof-atlas-elimination.js', 'public/data/proof-atlas/eliminations*', 'public/data/proof-atlas/eliminations/**', 'scripts/test-proof-atlas-elimination*.cjs', 'scripts/check-proof-atlas-native-elimination-models.cjs', 'public/js/proof-atlas-beta-reduction.js', 'public/data/proof-atlas/beta-reductions*', 'public/data/proof-atlas/beta-reductions/**', 'scripts/test-proof-atlas-beta-*.cjs', 'scripts/check-proof-atlas-native-beta-models.cjs', 'public/js/proof-atlas-occurrence-types.js', 'scripts/test-proof-atlas-occurrence-types.cjs', 'scripts/test-proof-atlas-type-*.cjs', 'scripts/test-proof-atlas-application-judgments*.cjs', 'scripts/test-proof-atlas-lambda-*.cjs', 'scripts/check-proof-atlas-native-lambda-models.cjs', 'public/js/proof-atlas-lambda-judgment.js', 'scripts/check-proof-atlas-native-application-models.cjs', 'public/js/proof-atlas-application-judgment.js', 'public/js/proof-atlas-type-geometry.js', '.github/workflows/proof-atlas-compiled-proofs.yml']
   workflow_dispatch:
 jobs:
   public-package:
@@ -24,6 +24,8 @@ jobs:
       - run: node scripts/test-proof-atlas-elimination.cjs
       - run: node scripts/test-proof-atlas-recursive-inputs.cjs
       - run: node scripts/test-proof-atlas-recursion-examples.cjs
+      - run: node scripts/test-proof-atlas-ai-sample.cjs
+      - run: node scripts/test-proof-atlas-binding-uses.cjs
   constructor-controls:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -57,3 +59,21 @@ jobs:
         run: |
           python3 research/proof-atlas/build_recursion_examples.py --workdir /tmp/AtlasRecursionExamples --reserve-gib 5
           node scripts/test-proof-atlas-recursion-examples.cjs /tmp/AtlasRecursionExamples
+      - name: Check native lexical support, scope boundaries and declared-type conversion
+        run: python3 research/proof-atlas/verify_binding_uses_controls.py --reserve-gib 5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Recover the fixed sample from the pinned official release
+        run: |
+          python -m pip install --no-deps pyarrow==19.0.1
+          curl --fail --location --retry 3 --max-time 120 --max-filesize 33554432 https://huggingface.co/datasets/Goedel-LM/Lean-workbook-proofs/resolve/b731852af8d8ab11498fda27bce9020738c01c59/data/train-00000-of-00001.parquet --output /tmp/atlas-goedel.parquet
+          python research/proof-atlas/prepare_goedel_sample.py --parquet /tmp/atlas-goedel.parquet --output /tmp/atlas-goedel-selected.json
+          python - <<'PYCONTROL'
+          import json, sys
+          sys.path.insert(0, 'research/proof-atlas')
+          from evaluate_goedel import review_source
+          rows=json.load(open('/tmp/atlas-goedel-selected.json'))
+          for row in rows: review_source(row)
+          print('All 24 exact released source scripts satisfy the reviewed command policy.')
+          PYCONTROL
