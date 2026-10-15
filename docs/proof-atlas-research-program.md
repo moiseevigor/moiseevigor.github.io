@@ -24,7 +24,7 @@ The article reader is an application and evaluation case. Improving an article, 
 
 ## Required invariants
 
-- A visible formal object identifies its compiled packet and exact occurrence route. A shared DAG node identifier alone is insufficient for binder meaning.
+- A visible source object identifies its compiled packet and exact occurrence route. A computed object identifies its checked derivation record, separate namespace and exact path within the computed graph; it never acquires an invented source occurrence. A shared DAG node identifier alone is insufficient for binder meaning.
 - Constructor ports retain their names, order and roles. Function/argument, binder domain/body, let type/value/body and projection structure are distinct.
 - Bound-variable links follow lexical scope. Binder domains and let values do not acquire the new binder; bodies do. A link outside the current view remains an explicit context boundary.
 - Universe levels, declaration references, metadata and unresolved elaborator objects have distinct representations. Unknown context or inferred types are marked unavailable, never invented.
