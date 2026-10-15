@@ -1,8 +1,11 @@
 """Independent small native controls; no private environment or original proof sources."""
-import json, subprocess, tempfile, sys
+import argparse, json, subprocess, tempfile, sys
 from pathlib import Path
 base=Path(__file__).parent
-lean=sys.argv[1] if len(sys.argv)>1 else 'lean'
+from build_recursion_examples import run_checked
+parser=argparse.ArgumentParser();parser.add_argument('lean',nargs='?',default='lean');parser.add_argument('--reserve-gib',type=int,default=30)
+args=parser.parse_args();assert args.reserve_gib>=1
+lean=args.lean
 core=(base/'ExportLibrary.lean').read_text().replace('import SE2Conjugate','')+'\n'+(base/'ExportOccurrenceTypes.lean').read_text().replace('import ExportLibrary','')
 defs='''
 def AtlasTypedFixture.compose (P Q : Prop) (f : P → Q) (p : P) : Q := f p
@@ -57,7 +60,7 @@ run_cmd do
 '''
     prepare=prepare.replace('FOLDER',str(folder)).replace('REQUESTS',str(requests))
     entry=folder/'Controls.lean';entry.write_text(core+defs+prepare+'\n#atlas_occurrence_types '+json.dumps(str(requests))+' => '+json.dumps(str(output))+'\n')
-    ok=subprocess.run([lean,str(entry)],capture_output=True,text=True);assert ok.returncode==0,ok.stdout+ok.stderr
+    run_checked([lean,str(entry)],folder,'positive',reserve=args.reserve_gib)
     result=json.loads(output.read_text());assert all(e['status']=='checked'for r in result for e in r['entries'])
     compose=next(r for r in result if r['name'].endswith('.compose'))['entries'][-1]
     assert [a['role']for a in compose['arguments']]==['proof'] and len(compose['context'])==4
@@ -94,9 +97,17 @@ run_cmd do
     lambda_models=subprocess.run(['node',str(base.parent.parent/'scripts/check-proof-atlas-native-lambda-models.cjs'),str(entry),str(requests),str(output)],capture_output=True,text=True)
     assert lambda_models.returncode==0,lambda_models.stdout+lambda_models.stderr
     print(lambda_models.stdout.strip())
+    subprocess.run(['node',str(base.parent.parent/'scripts/check-proof-atlas-native-conversions.cjs'),str(requests),str(output)],check=True)
     query=json.loads(requests.read_text())[0];packet=Path(query['packetFile']);data=json.loads(packet.read_text())
     next(p for p in data['payloads'] if 'binderName'in p)['binderName']='deliberatelyChangedBinder'
     packet.write_text(json.dumps(data));requests.write_text(json.dumps([query]))
     bad=folder/'RejectChangedPacket.lean';bad.write_text(core+defs+'\n#atlas_occurrence_types '+json.dumps(str(requests))+' => '+json.dumps(str(folder/'bad.json'))+'\n')
-    rejected=subprocess.run([lean,str(bad)],capture_output=True,text=True);assert rejected.returncode!=0 and 'Native/published DAG mismatch'in rejected.stdout+rejected.stderr
+    try:
+        run_checked([lean,str(bad)],folder,'changed-packet',reserve=args.reserve_gib)
+    except RuntimeError:
+        rejected=json.loads((folder/'changed-packet.resources.json').read_text())
+        assert rejected['stopReason'] is None and rejected['exitCode']!=0
+        assert 'Native/published DAG mismatch' in (folder/'changed-packet.log').read_text()
+    else:
+        raise AssertionError('Changed packet was accepted')
     print(json.dumps({'status':'PASS','kernelTypedControls':10,'selectedOccurrences':sum(len(r['entries'])for r in result),'proofTypeValueRoles':True,'dependentTypeAbstractionRoundtrip':True,'letValueOutsideOwnBinder':True,'invalidContextsRejected':2,'changedPacketRejected':True,'applicationTraces':len(applications),'lambdaTraces':len(lambdas),'dependentSubstitution':True,'definitionallyEqualDistinctDomains':True,'residualFunctionType':True,'invalidTypedConversionRejected':True,'scope':'Small native kernel controls; not independent replay of the private corpus.'}))

@@ -38,3 +38,5 @@ entry = folder / 'Controls.lean'
 entry.write_text(core + prepare + '\n#atlas_let_reductions ' + json.dumps(str(request)) + ' => ' + json.dumps(str(output)) + '\n')
 run_checked([args.lean, str(entry)], folder, 'native', reserve=args.reserve_gib)
 subprocess.run(['node', 'scripts/check-proof-atlas-native-let-models.cjs', str(request), str(output)], check=True)
+
+subprocess.run(['node', 'scripts/check-proof-atlas-native-conversions.cjs', str(request), str(output)], check=True)
