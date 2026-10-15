@@ -9,6 +9,13 @@ def AtlasTypedFixture.compose (P Q : Prop) (f : P → Q) (p : P) : Q := f p
 def AtlasTypedFixture.shadow (x : Nat) : Nat := let x := Nat.succ x; Nat.succ x
 def AtlasTypedFixture.zero : 0 = 0 := Eq.refl 0
 def AtlasTypedFixture.dependent (α : Type) (P : α → Prop) (x : α) (h : P x) : P x := h
+run_meta do
+ for bad in [Expr.lam `bad (mkNatLit 0) (.bvar 0) .default,
+   Expr.letE `bad (mkConst ``Nat) (mkConst ``True.intro) (.bvar 0) false] do
+  let (_,shared) := AtlasLibrary.intern bad {}
+  let slot := if bad.isLambda then 1 else 2
+  let accepted ← observing? (AtlasOccurrenceTypes.atRoute bad [slot] #[] #[] shared 0 #[] "root.value")
+  unless accepted.isNone do throwError "Invalid surrounding context was accepted"
 '''
 with tempfile.TemporaryDirectory(prefix='atlas-type-controls-') as tmp:
     folder=Path(tmp);requests=folder/'requests.json';output=folder/'types.json'
@@ -51,4 +58,4 @@ run_cmd do
     packet.write_text(json.dumps(data));requests.write_text(json.dumps([query]))
     bad=folder/'RejectChangedPacket.lean';bad.write_text(core+defs+'\n#atlas_occurrence_types '+json.dumps(str(requests))+' => '+json.dumps(str(folder/'bad.json'))+'\n')
     rejected=subprocess.run([lean,str(bad)],capture_output=True,text=True);assert rejected.returncode!=0 and 'Native/published DAG mismatch'in rejected.stdout+rejected.stderr
-    print(json.dumps({'status':'PASS','kernelTypedControls':4,'selectedOccurrences':sum(len(r['entries'])for r in result),'proofTypeValueRoles':True,'dependentTypeAbstractionRoundtrip':True,'letValueOutsideOwnBinder':True,'changedPacketRejected':True,'scope':'Small native kernel controls; not independent replay of the private corpus.'}))
+    print(json.dumps({'status':'PASS','kernelTypedControls':4,'selectedOccurrences':sum(len(r['entries'])for r in result),'proofTypeValueRoles':True,'dependentTypeAbstractionRoundtrip':True,'letValueOutsideOwnBinder':True,'invalidContextsRejected':2,'changedPacketRejected':True,'scope':'Small native kernel controls; not independent replay of the private corpus.'}))

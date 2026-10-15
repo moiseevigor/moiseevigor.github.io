@@ -13,6 +13,12 @@ def graphJson (shared : Shared) : Json := obj [("kind",toJson shared.kind),("chi
 def role (type : Expr) : MetaM String := do
  if ← isProp type then return "proof"
  match ← whnf type with | .sort _ => return "type" | _ => return "value"
+def kernelType (e : Expr) : MetaM Expr := do
+ match Kernel.check (← getEnv) (← getLCtx) e with
+ | .ok t => return t
+ | .error ex => throwError "Kernel rejected contextual expression: {ex.toMessageData (← getOptions)}"
+def checkDomain (domain : Expr) : MetaM Unit := do
+ unless (← whnf (← kernelType domain)).isSort do throwError "Local declaration domain is not a type"
 def internScoped (type : Expr) (xs : Array Expr) (shared : Shared) : MetaM (Nat × Shared) := do
  let type ← instantiateMVars type
  let abstractType := type.abstract xs
@@ -25,9 +31,7 @@ def internScoped (type : Expr) (xs : Array Expr) (shared : Shared) : MetaM (Nat 
 
 def inspect (original term : Expr) (xs : Array Expr) (context : Array Json) (shared : Shared)
     (root : Nat) (slots : Array Nat) (path : String) : MetaM Json := do
- let type ← match Kernel.check (← getEnv) (← getLCtx) term with
-  | .ok t => pure t
-  | .error ex => throwError "Kernel rejected selected occurrence: {ex.toMessageData (← getOptions)}"
+ let type ← kernelType term
  unless ← isDefEq type (← inferType term) do throwError "Kernel/meta type mismatch"
  let (typeRoot,initial) ← internScoped type xs {}
  let mut types := initial
@@ -61,7 +65,7 @@ def inspect (original term : Expr) (xs : Array Expr) (context : Array Json) (sha
   funTerm := next
  let text ← withOptions (fun o => ((o.set `pp.maxDepth (12 : Nat)).set `pp.maxSteps (5000 : Nat)).set `pp.width (80 : Nat)) do
   return (← ppExpr type).pretty
- return obj [("status",str "checked"),("kernelCheck",str "PASS"),("typeAbstractionRoundtrip",toJson true),("node",nat (← sourceId shared original)),
+ return obj [("status",str "checked"),("kernelCheck",str "PASS"),("contextWellFormed",toJson true),("typeAbstractionRoundtrip",toJson true),("node",nat (← sourceId shared original)),
   ("route",routeJson root slots),("path",str path),("context",toJson context),("role",str (← role type)),
   ("typeRoot",nat typeRoot),("typeGraph",graphJson types),("typeText",str text),
   ("typeTextIsPresentation",toJson true),("arguments",toJson arguments)]
@@ -83,10 +87,16 @@ partial def atRoute (e : Expr) (rest : List Nat) (xs : Array Expr) (context : Ar
   | .lam n t _ info,1 | .forallE n t _ info,1 =>
    let entry := obj [("node",nat (← sourceId shared e)),("route",routeJson root slots),("path",str path),
     ("kind",str (if e.isLambda then "lam" else "forallE"))]
-   withLocalDecl n info (t.instantiateRev xs) fun x => descend (xs.push x) (context.push entry)
+   let domain := t.instantiateRev xs
+   checkDomain domain
+   withLocalDecl n info domain fun x => descend (xs.push x) (context.push entry)
   | .letE n t v _ nondep,2 =>
    let entry := obj [("node",nat (← sourceId shared e)),("route",routeJson root slots),("path",str path),("kind",str "letE")]
-   withLetDecl n (t.instantiateRev xs) (v.instantiateRev xs) (nondep := nondep) fun x => descend (xs.push x) (context.push entry)
+   let domain := t.instantiateRev xs
+   let value := v.instantiateRev xs
+   checkDomain domain
+   unless ← isDefEq (← kernelType value) domain do throwError "Let value has the wrong declared type"
+   withLetDecl n domain value (nondep := nondep) fun x => descend (xs.push x) (context.push entry)
   | _,_ => descend xs context
 
 def readJson (p : String) : CommandElabM Json := do
