@@ -1,5 +1,6 @@
 ---
 layout: page
+hide_title: true
 title: "Proof Atlas: geometric language research program"
 permalink: /projects/proof-atlas/program/
 ---
