@@ -1,6 +1,7 @@
 ---
 layout: page
 hide_title: true
+page_class: proof-atlas-program
 title: "Proof Atlas: geometric language research program"
 permalink: /projects/proof-atlas/program/
 ---
@@ -338,3 +339,26 @@ On the frozen packages, **1,382 checked query entries supply 11,166 relation rec
 Fresh core-only fixtures check the same adapters on native type, lambda, application, beta and let records, including aliases, dependent contexts, shadowing and a shared let under different binders. Opening a let conversion uses the already verified metadata and fetches no computed-result pool. Four released let values have identical printed inferred/declared types but different compiled ordering-instance expressions; both graphs remain available. This is a finite representation result, not a new kernel certificate, descendant equivalence theorem, complete typing inventory or measured comprehension result. The general goal remains active; the blog is unchanged.
 
 [Conversion example](/projects/proof-atlas/library/?edition=goedel-sample-4331&proof=lean_workbook_plus_54159&geometry=scoped&fold=binders,applications#expr-6444) · [Conversion model and renderer](/public/js/proof-atlas-type-conversions.js) · [Full recorded-pair audit](/scripts/test-proof-atlas-type-conversions.cjs) · [Fresh native model checks](/scripts/check-proof-atlas-native-conversions.cjs) · [Browser checks](/scripts/test-proof-atlas-type-conversions-browser.cjs)
+
+
+
+<span id="universe-geometry"></span>
+
+## Universe-level geometry
+
+Universe levels now have their own compositional grammar: `zero`, `succ`, `max`, `imax`, `param` and `mvar`, with ordered `of`, `left` and `right` ports. They are payloads of `Expr.sort` and `Expr.const`, not additional Expr children. `imax(a, b)` is zero when b is zero and otherwise the maximum of a and b. Raw syntax remains intact, including `max(u, 0)` and reversed max inputs; the view does not normalize levels. A constant's universe arguments retain their original slot order.
+
+Parameter references use the serialized structured Lean Name and the enclosing compiled declaration's packet identity. They occupy a separate universe-context namespace, independent of expression binders. Numeric and string Name components remain distinct. These are exact nominal references; the view does not invent a declaration-parameter slot from a displayed name. Missing structured names and unresolved universe metavariables remain explicit boundaries, without inferred assignments. Optional numeric inputs illustrate constructor semantics and do not instantiate the proof.
+
+The source audit covers **123,121 universe fields and 132,567 serialized Level occurrences in 2,203 packets**, containing 2,100,910 stored expressions across both snapshots, the fixed AI-source sample and synthetic recursion controls. It checks all fields and their 4,883 exact nominal references. The maximum stored Level depth is six and the largest per-expression payload has sixteen Level occurrences. The max/imax examples in this inventory come from the separately labelled synthetic recursion edition; these counts do not establish difficult-universe coverage of AI-generated proofs.
+
+The converter retains structural sharing in a bounded Level DAG. A fresh native raw-max control has **81 stored nodes and 2⁸¹−1 expanded Level occurrences**. Its large shared shape is a structural control, not a kernel-checked proof. The native suite checks all six constructors, ordered max syntax, exact Name binding and 375 concrete valuations. It also distinguishes two kernel interfaces: an isolated `Sort ?u` expression check can succeed, while admission of a declaration containing that unresolved universe fails. Neither the renderer nor the valuation treats `?u` as solved.
+
+Source, recorded-type, conversion-endpoint and computed-result inspectors reuse the same universe rule while retaining their separate provenance. A scene draws at most 24 Level vertices at four levels; frontier counts retain the complete selected region. The DAG is capped at 4,096 nodes, with bounded input work and depth. Shared-node navigation and parameter inputs are paged. Existing raw JSON payloads must still be decoded before conversion; the new native control producer demonstrates bounded Level-DAG export but does not replace the older proof-packet exporter. The full research goal remains active. No blog entry is added.
+
+<link rel="stylesheet" href="/public/css/proof-atlas-library.css?v=12">
+<details id="pa-universe-controls"><summary>Native universe reference controls · synthetic</summary><p>The large shared input is a structural example. These controls are separate from the proof corpus.</p><button type="button">Load native universe controls</button><div data-universe-controls hidden></div></details>
+<script src="/public/data/proof-atlas/universe-controls-manifest.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-universe-controls.js?v=1" defer></script>
+
+[Source example](/projects/proof-atlas/library/?edition=recursion-controls&proof=AtlasExamples.Sized.cons.elim&geometry=scoped&fold=binders,applications#expr-79) · [Universe model and renderer](/public/js/proof-atlas-universes.js) · [Source-field audit](/scripts/test-proof-atlas-universes.cjs) · [Native controls and reproduction](/research/proof-atlas/verify_universe_controls.py)
