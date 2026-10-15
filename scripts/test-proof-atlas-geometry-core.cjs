@@ -21,7 +21,7 @@ function fixture(){
  const nat=add('const',[],{name:'Nat',levels:[]}),v=add('bvar',[],{index:0}),inner=add('lam',[v,v],{binderName:'x',binderInfo:'default'}),outer=add('lam',[nat,inner],{binderName:'x',binderInfo:'default'}),letNode=add('letE',[nat,v,v],{binderName:'x',nondep:false}),withLet=add('lam',[nat,letNode],{binderName:'x',binderInfo:'default'});
  const r={name:d.declaration.name,indexSha256:'synthetic-scope-control',sourceSha256:'synthetic-not-kernel-checked',kind:'theorem'};d.roots=[outer,withLet];d.declaration.rootPaths=['root.value','root.control'];return{d,r,add,v};
 }
-const{d,r,add,v}=fixture();let s=G.create(d,r,{route:{root:0,slots:[]},maxNodes:30,maxDepth:12});audit(d,r,s);
+const{d,r,add,v}=fixture();let s=G.create(d,r,{route:{root:0,slots:[]},maxNodes:30,maxDepth:12});audit(d,r,s);assert.equal(s.root.category,'proof-body','Root labels, not root indices, distinguish a proof from its type');
 const references=s.nodes.filter(n=>n.node===v);assert.equal(references.length,2,'Shared bvar must have two occurrence vertices');const links=s.links.filter(l=>l.relation==='bound-to');assert.notEqual(links[0].target,links[1].target,'Domain refers to outer binder; body to inner binder');
 s=G.create(d,r,{route:{root:1,slots:[]},maxNodes:30,maxDepth:12});audit(d,r,s);const letRefs=s.links.filter(l=>l.relation==='bound-to');assert.notEqual(letRefs[0].target,letRefs[1].target,'Let value must not bind itself');
 s=G.create(d,r,{route:{root:0,slots:[1,1]},maxNodes:1,maxDepth:0});audit(d,r,s);assert(s.links[0].boundary,'Binder outside cut must remain an explicit boundary');
