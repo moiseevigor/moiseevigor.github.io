@@ -140,6 +140,40 @@ def lambdaJudgment (original term type : Expr) (xs : Array Expr) (context : Arra
    ("kernelBodyConversion",str "PASS"),("kernelFunctionConversion",str "PASS"),
    ("conversions",str "native-kernel-typed-identity/1"),("textIsPresentation",toJson true)],s)
 
+def betaJudgment (original term type : Expr) (xs : Array Expr) (context : Array Json)
+    (shared initial : Shared) (root : Nat) (slots : Array Nat) (path : String) : MetaM (Json × Shared) := do
+ let args := term.getAppArgs
+ if args.isEmpty then throwError "No beta argument"
+ let fn := term.getAppFn
+ let .lam _ _ body _ := fn | throwError "Head is not a lambda"
+ let mut sourceHead := original
+ let mut headSlots := slots
+ let mut headPath := path
+ for _ in [:args.size] do
+  sourceHead := sourceHead.appFn!
+  headSlots := headSlots.push 0
+  headPath := headPath ++ ".fn"
+ let headType ← kernelType fn
+ let (headRoot,s) ← internScoped headType xs initial 32768
+ let (introduction,s) ← lambdaJudgment sourceHead fn headType xs context shared s root headSlots headPath
+ let reduced := mkAppN (body.instantiate1 args[0]!) (args.extract 1 args.size)
+ let reducedType ← kernelType reduced
+ kernelAs reduced type
+ match Kernel.isDefEq (← getEnv) (← getLCtx) term reduced with
+ | .ok true => pure ()
+ | _ => throwError "Kernel rejected beta term conversion"
+ let (reducedTypeRoot,s) ← internScoped reducedType xs s 32768
+ let (reducedRoot,reducedGraph) ← internScoped reduced xs {} 32768
+ return (obj [("format",str "ProofAtlasBetaReduction/1"),("status",str "checked"),
+  ("method",str "one-leading-beta/1"),("kernelTermConversion",str "PASS"),("kernelResultTyping",str "PASS"),
+  ("kernelResultTypeConversion",str "PASS"),("termAbstractionRoundtrip",toJson true),
+  ("head",obj [("node",nat (← sourceId shared sourceHead)),("route",routeJson root headSlots),
+    ("path",str headPath),("typeRoot",nat headRoot),("typeText",str (← prettyType headType))]),("introduction",introduction),
+  ("argumentCount",nat args.size),("reducedTypeRoot",nat reducedTypeRoot),
+  ("reducedRoot",nat reducedRoot),("reducedGraph",graphJson reducedGraph),
+  ("originalText",str (← prettyType term)),("reducedText",str (← prettyType reduced)),
+  ("textIsPresentation",toJson true)],s)
+
 def inspect (original term : Expr) (xs : Array Expr) (context : Array Json) (shared : Shared)
     (root : Nat) (slots : Array Nat) (path : String) : MetaM Json := do
  let type ← kernelType term
@@ -193,6 +227,15 @@ def inspect (original term : Expr) (xs : Array Expr) (context : Array Json) (sha
    logInfo m!"Lambda trace unavailable at {path}: {ex.toMessageData}"
    application := application.push ("lambdaJudgment",obj [("status",str "unavailable"),
     ("reason",str "Lambda trace exceeded its bound or failed native checks")])
+ if args.size > 0 && term.getAppFn.isLambda then
+  try
+   let (judgment,s) ← betaJudgment original term type xs context shared types root slots path
+   types := s
+   application := application.push ("betaJudgment",judgment)
+  catch ex =>
+   logInfo m!"Beta record unavailable at {path}: {ex.toMessageData}"
+   application := application.push ("betaJudgment",obj [("status",str "unavailable"),
+    ("reason",str "Beta record exceeded its bound or failed native checks")])
  let text ← withOptions (fun o => ((o.set `pp.maxDepth (12 : Nat)).set `pp.maxSteps (5000 : Nat)).set `pp.width (80 : Nat)) do
   return (← ppExpr type).pretty
  return obj ([("status",str "checked"),("kernelCheck",str "PASS"),("contextWellFormed",toJson true),("typeAbstractionRoundtrip",toJson true),("node",nat (← sourceId shared original)),

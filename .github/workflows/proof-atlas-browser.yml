@@ -13,6 +13,10 @@ on:
       - 'scripts/test-proof-atlas-lambda-*.cjs'
       - 'scripts/check-proof-atlas-native-lambda-models.cjs'
       - 'public/js/proof-atlas-lambda-judgment.js'
+      - 'public/js/proof-atlas-beta-reduction.js'
+      - 'public/data/proof-atlas/beta-reductions*'
+      - 'public/data/proof-atlas/beta-reductions/**'
+      - 'scripts/test-proof-atlas-beta-*.cjs'
       - 'scripts/check-proof-atlas-native-application-models.cjs'
       - 'public/js/proof-atlas-article-index.js'
       - 'public/js/proof-atlas-article.js'
@@ -154,6 +158,8 @@ jobs:
           node scripts/test-proof-atlas-application-judgments-browser.cjs
           node scripts/test-proof-atlas-lambda-judgments.cjs
           node scripts/test-proof-atlas-lambda-judgments-browser.cjs
+          node scripts/test-proof-atlas-beta-reductions.cjs
+          node scripts/test-proof-atlas-beta-reductions-browser.cjs
           node scripts/test-proof-atlas-application-geometry.cjs
           node scripts/test-proof-atlas-application-geometry-browser.cjs
           node scripts/test-proof-atlas-telescope.cjs

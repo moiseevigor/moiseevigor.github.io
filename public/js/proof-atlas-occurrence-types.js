@@ -66,5 +66,5 @@
    get:route=>lookup.get(key(route)),getQuery:route=>entries.get(key(route)),argument:(callRoute,argRoute)=>{const e=lookup.get(key(callRoute));return e?.status==='checked'?e.arguments.find(a=>key(a.route)===key(argRoute)):undefined;},
    guarantee:'Kernel and domain checks recorded during native extraction against the exact packet and lexical context. The browser verifies hashes and structural binding; it does not rerun Lean or certify article prose.'};
  }
- const api={context,validate,open,applicationRoots,validateApplication,lambdaRoots,validateLambda,indexObservations};if(typeof module!=='undefined'&&module.exports)module.exports=api;else host.ProofAtlasOccurrenceTypes=api;
+ const api={context,validate,open,applicationRoots,validateApplication,lambdaRoots,validateLambda,indexObservations,validateExpressionGraph:typeGraph};if(typeof module!=='undefined'&&module.exports)module.exports=api;else host.ProofAtlasOccurrenceTypes=api;
 })(typeof window==='undefined'?globalThis:window);
