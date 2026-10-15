@@ -1,8 +1,11 @@
 """Fresh raw kernel controls preserve lambda heads that surface elaboration may reduce."""
-import json, subprocess, tempfile, sys
+import argparse, json, subprocess, tempfile, sys
 from pathlib import Path
 base=Path(__file__).parent
-lean=sys.argv[1] if len(sys.argv)>1 else 'lean'
+from build_recursion_examples import run_checked
+parser=argparse.ArgumentParser();parser.add_argument('lean',nargs='?',default='lean');parser.add_argument('--reserve-gib',type=int,default=30)
+args=parser.parse_args();assert args.reserve_gib>=1
+lean=args.lean
 core=(base/'ExportLibrary.lean').read_text().replace('import SE2Conjugate','')+'\n'+(base/'ExportOccurrenceTypes.lean').read_text().replace('import ExportLibrary','')
 fixture='''
 run_meta do
@@ -46,6 +49,7 @@ run_cmd do
 '''
  prepare=prepare.replace('FOLDER',str(folder)).replace('REQUESTS',str(requests))
  entry=folder/'Controls.lean';entry.write_text(core+fixture+prepare+'\n#atlas_occurrence_types '+json.dumps(str(requests))+' => '+json.dumps(str(output))+'\n')
- run=subprocess.run([lean,str(entry)],capture_output=True,text=True);assert run.returncode==0,run.stdout+run.stderr
+ run_checked([lean,str(entry)],folder,'native',reserve=args.reserve_gib)
  check=subprocess.run(['node',str(base.parent.parent/'scripts/check-proof-atlas-native-beta-models.cjs'),str(requests),str(output)],capture_output=True,text=True);assert check.returncode==0,check.stdout+check.stderr
  print(check.stdout.strip())
+ subprocess.run(['node',str(base.parent.parent/'scripts/check-proof-atlas-native-conversions.cjs'),str(requests),str(output)],check=True)
