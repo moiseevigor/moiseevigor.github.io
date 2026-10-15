@@ -1,6 +1,6 @@
 # Proof Atlas — public research record
 
-**Program goal:** develop a consistent geometric language for Lean proofs, including massive AI-generated proofs, with faithful scope, composition, abstraction and provenance. The article reader is one application. The general scoped-geometry core now has an optional, scope-preserving binder-telescope rule; its exact syntax/binding guarantees and limitations are recorded in the program. The [saved research program](../../docs/proof-atlas-research-program.md) defines the questions, invariants and evidence requirements; it remains active across individual tool releases.
+**Program goal:** develop a consistent geometric language for Lean proofs, including massive AI-generated proofs, with faithful scope, composition, abstraction and provenance. The article reader is one application. The general scoped-geometry core has composable binder-telescope and ordered application-spine rules; their exact syntax/binding guarantees and limitations are recorded in the program. The [saved research program](../../docs/proof-atlas-research-program.md) defines the questions, invariants and evidence requirements; it remains active across individual tool releases.
 
 **Introduction:** [The Geometry of a Formal Proof](https://moiseevigor.github.io/mathematics/2026/10/11/proof-atlas-research-program/)  
 **Interactive visualization:** [Proof Atlas](https://moiseevigor.github.io/projects/proof-atlas/)  
