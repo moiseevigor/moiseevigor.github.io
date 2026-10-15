@@ -48,24 +48,24 @@
  }
  async function engineReady(){
   if(!engine)engine=(async()=>{
-   await metadataReady();if(!window.ProofAtlasLibraryData)await script('/public/js/proof-atlas-library-data.js?v=2');
+   await metadataReady();if(!window.ProofAtlasLibraryData)await script('/public/js/proof-atlas-library-data.js?v=3');
    try{
     if(!window.PROOF_ATLAS_OCCURRENCE_TYPES)await script('/public/data/proof-atlas/occurrence-types-manifest.js?v=4');
-    if(!window.ProofAtlasOccurrenceTypes)await script('/public/js/proof-atlas-occurrence-types.js?v=7');
+    if(!window.ProofAtlasOccurrenceTypes)await script('/public/js/proof-atlas-occurrence-types.js?v=8');
    }catch(_){/* Optional type evidence must not block the original compiled reader. */}
    try{
     if(!window.PROOF_ATLAS_BETA_REDUCTIONS)await script('/public/data/proof-atlas/beta-reductions-manifest.js?v=1');
-    if(!window.ProofAtlasBetaReduction)await script('/public/js/proof-atlas-beta-reduction.js?v=3');
+    if(!window.ProofAtlasBetaReduction)await script('/public/js/proof-atlas-beta-reduction.js?v=4');
     if(!window.ProofAtlasLetPools)await script('/public/js/proof-atlas-let-pools.js?v=2');
     if(!window.ProofAtlasLetReduction)await script('/public/js/proof-atlas-let-reduction.js?v=3');
    }catch(_){/* Optional reduction evidence must not block the original compiled reader. */}
    try{
     if(!window.PROOF_ATLAS_ELIMINATIONS)await script('/public/data/proof-atlas/eliminations-manifest.js?v=1');
-    if(!window.ProofAtlasRecursiveInputs)await script('/public/js/proof-atlas-recursive-inputs.js?v=2');
-    if(!window.ProofAtlasElimination)await script('/public/js/proof-atlas-elimination.js?v=2');
+    if(!window.ProofAtlasRecursiveInputs)await script('/public/js/proof-atlas-recursive-inputs.js?v=3');
+    if(!window.ProofAtlasElimination)await script('/public/js/proof-atlas-elimination.js?v=3');
    }catch(_){/* Optional elimination evidence must not block the original reader. */}
    try{if(!window.ProofAtlasBindingUses&&window.ProofAtlasRecursiveInputs)await script('/public/js/proof-atlas-binding-uses.js?v=1');}catch(_){/* Optional reference counts do not block the source reader. */}
-   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=20');
+   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=21');
    if(!$('pl-provenance').closest('details')){const details=document.createElement('details'),summary=document.createElement('summary');summary.textContent='Provenance and axiom dependencies';$('pl-provenance').before(details);details.append(summary,$('pl-provenance'));}
    return window.ProofAtlasLibrary;
   })().catch(e=>{engine=null;throw e;});return engine;

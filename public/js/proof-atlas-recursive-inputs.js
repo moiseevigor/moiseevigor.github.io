@@ -16,7 +16,7 @@
   if(g.kind[input.node]===0){const index=g.payloads[input.node].index;if(index<r.constructorFields){const field=r.constructorFields-1-index;return{slot,kind:'constructor-field',field,expression:result.expression,fieldBinder:{node:A.walk({...g,roots:[r.rhsRoot]},{root:0,slots:Array(base+field).fill(1)}),route:{root:0,slots:Array(base+field).fill(1)},namespace:'kernel-rule'}};}return result;}
   let id=input.node,route=input.route,depth=0;while(g.kind[id]===6){if(++depth>64)return{...result,reason:'Recursive-family binder limit'};id=g.children[id][1];route={root:0,slots:[...route.slots,1]};}
   const call=spine(g,id,route),head=g.payloads[call.head.node];
-  if(g.kind[call.head.node]!==4||head.name!==t.recursor||!same(head.levels,t.recursorLevels)||call.args.length!==t.majorSlot)return result;
+  if(g.kind[call.head.node]!==4||head.name!==t.recursor||A.levelsKey(head.levels)!==A.levelsKey(t.recursorLevels)||call.args.length!==t.majorSlot)return result;
   for(let j=0;j<base;j++){const a=call.args[j].node;if(g.kind[a]!==0||g.payloads[a].index!==b+depth-1-j)return{...result,reason:'Recursive call changes a parameter, motive or minor premise'};}
   const major=call.args[t.majorSlot-1],fieldCall=spine(g,major.node,major.route),p=g.payloads[fieldCall.head.node];
   if(g.kind[fieldCall.head.node]!==0||p.index<depth||p.index>=depth+r.constructorFields||fieldCall.args.length!==depth)return{...result,reason:'Recursive major is not the corresponding constructor field/family'};

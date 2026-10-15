@@ -1,0 +1,1 @@
+window.PROOF_ATLAS_LEVEL_TRANSPORT_CONTROLS = {"format":"ProofAtlasLevelTransportControls/1","file":"/public/data/proof-atlas/level-transport-controls.json.gz","sha256":"67f86e9e850b7a4b4ec8603a5936b7d0ff9bf342c71b6600c2719d05fefa926f","decodedBytes":88284,"sourceSha256":"475cc296bb7d1962acbf293494c0df7df100fef0821acce674c0c526fbd7f4dc","leanVersion":"4.33.1"};

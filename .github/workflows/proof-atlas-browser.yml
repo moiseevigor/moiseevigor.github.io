@@ -49,6 +49,9 @@ on:
       - 'public/js/proof-atlas-occurrence-types.js'
       - 'public/js/proof-atlas-type-geometry.js'
       - 'public/js/proof-atlas-type-conversions.js'
+      - 'public/data/proof-atlas/level-transport-controls*'
+      - 'scripts/check-proof-atlas-native-level-transport.cjs'
+      - 'scripts/test-proof-atlas-level-transport*.cjs'
       - 'public/js/proof-atlas-universes.js'
       - 'public/js/proof-atlas-universe-controls.js'
       - 'public/data/proof-atlas/universe-controls*'
@@ -102,6 +105,7 @@ on:
       - '.github/workflows/proof-atlas-browser.yml'
   pull_request:
     paths:
+      - 'scripts/check-proof-atlas-native-level-transport.cjs'
       - 'scripts/check-proof-atlas-native-lambda-models.cjs'
       - 'scripts/check-proof-atlas-native-application-models.cjs'
       - 'scripts/test-research-navigation.cjs'
@@ -126,7 +130,7 @@ on:
 jobs:
   chromium:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -186,6 +190,9 @@ jobs:
           node scripts/test-proof-atlas-type-geometry.cjs
           node scripts/test-proof-atlas-type-conversions.cjs
           node scripts/test-proof-atlas-universes.cjs
+          node scripts/test-proof-atlas-level-transport.cjs
+          node scripts/check-proof-atlas-native-level-transport.cjs
+          node scripts/test-proof-atlas-level-transport-browser.cjs
           node scripts/test-proof-atlas-universes-browser.cjs
           node scripts/test-proof-atlas-type-conversions-browser.cjs
           node scripts/test-proof-atlas-type-geometry-browser.cjs
