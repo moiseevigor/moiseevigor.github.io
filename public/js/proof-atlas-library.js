@@ -7,9 +7,9 @@
  const number=n=>BigInt(n).toLocaleString('en-US'),link=(text,url)=>{const n=el('a',text);n.href=url;return n;};
  const palette=['#bda6e4','#8dd5e9','#e3a5cd','#d3dce8','#5ed0bc','#8dacde','#e9bf76','#edca86','#e3a381','#bbd7a7','#d2bba2','#e79dac'];
  const canvas=$('pl-canvas'),ctx=canvas.getContext('2d'),frame=canvas.parentElement;
- let edition,current,serial=0,selected=0,root=0,mode='term',points=[],world=[],edges=[],rowOffset=0,zoom=1,pan={x:0,y:0},drag=null,sourceCache=new Map(),selectedRoute=null,rowIds=[],selectionSerial=0,rowRoutes=new Map(),rootRoute=null;
+ let edition,current,serial=0,selected=0,root=0,mode='term',scene=null,geometryLoad=null,points=[],world=[],edges=[],rowOffset=0,zoom=1,pan={x:0,y:0},drag=null,sourceCache=new Map(),selectedRoute=null,rowIds=[],selectionSerial=0,rowRoutes=new Map(),rootRoute=null;
  const rootLabel=(d,i)=>i===0?'Type':d.declaration.rootPaths[i]==='root.value'?(d.declaration.kind==='theorem'?'Complete proof':'Definition body'):'Reduction rule '+(i-(d.declaration.bodyAvailable?1:0));
- function url(name,occurrence,route){const u=new URL(location.href);u.searchParams.set('edition',edition.id);u.searchParams.set('proof',name);u.hash=occurrence===undefined?'':'expr-'+occurrence;if(route)u.searchParams.set('route',route.root+':'+route.slots.join('.'));else u.searchParams.delete('route');return (document.getElementById('pa-sync-panel')?'/projects/proof-atlas/library/':u.pathname)+u.search+u.hash;}
+ function url(name,occurrence,route){const u=new URL(location.href);u.searchParams.set('edition',edition.id);u.searchParams.set('proof',name);if(mode==='geometry')u.searchParams.set('geometry','scoped');else u.searchParams.delete('geometry');u.hash=occurrence===undefined?'':'expr-'+occurrence;if(route)u.searchParams.set('route',route.root+':'+route.slots.join('.'));else u.searchParams.delete('route');return (document.getElementById('pa-sync-panel')?'/projects/proof-atlas/library/':u.pathname)+u.search+u.hash;}
  function children(i){return current.children(i);}
  function branchRoutes(start,route){
   // Store one parent per shared node; materialize only the displayed occurrence paths.
@@ -81,9 +81,27 @@
   for(const i of ids){const li=el('li'),b=el('button','e'+i+' := '+A.describe(current.data,i));b.type='button';b.dataset.occurrence=i;b.setAttribute('aria-pressed',String(i===selected));b.title=A.path(current.data,rowRoutes.get(i));const route=rowRoutes.get(i);b.onclick=()=>selectOccurrence(i,true,true,route);li.append(b);$('pl-rows').append(li);}
   rowOffset+=ids.length;const total=rowIds.length;$('pl-row-count').textContent=number(rowOffset)+' / '+number(total)+' distinct subterms shown. Repeated occurrences are represented by shared child links.';$('pl-more').hidden=rowOffset===total;
  }
+ async function geometryReady(){
+  if(window.ProofAtlasGeometry)return;
+  if(!geometryLoad)geometryLoad=new Promise((resolve,reject)=>{const s=document.createElement('script');s.src='/public/js/proof-atlas-geometry-core.js?v=1';s.onload=resolve;s.onerror=()=>{geometryLoad=null;s.remove();reject(Error('Geometric language core is unavailable'));};document.head.append(s);});
+  await geometryLoad;
+ }
+ function scopedLayout(){
+  scene=window.ProofAtlasGeometry.create(current.data,current.record,{route:rootRoute||current.route(root),maxNodes:48,maxDepth:4});
+  const byPath=new Map(),groups=new Map(),max=Math.max(1,...scene.nodes.map(n=>n.depth));
+  for(const n of scene.nodes){if(!groups.has(n.depth))groups.set(n.depth,[]);groups.get(n.depth).push(n);}
+  for(const n of scene.nodes){const group=groups.get(n.depth),p={id:n.node,path:n.id,route:n.route,x:n.depth/(max+1),y:(group.indexOf(n)+.5)/group.length,kind:current.data.kind[n.node],glyph:n.glyph,name:n.kind+' · '+n.id+' · '+n.hidden+' hidden occurrences',collapsed:n.frontier};world.push(p);byPath.set(n.id,p);}
+  for(const edge of scene.edges)edges.push([byPath.get(edge.from),byPath.get(edge.to),'child',edge.field]);
+  const contexts=new Map(),boundaries=scene.links.filter(l=>l.relation==='bound-to'&&l.boundary),unique=[...new Set(boundaries.map(l=>l.target))];
+  for(const l of boundaries)if(!contexts.has(l.target)){const p={id:l.node,path:l.target,route:l.route,x:1,y:(unique.indexOf(l.target)+.5)/unique.length,kind:current.data.kind[l.node],glyph:'↑',context:true,name:'Context binder · '+l.target};contexts.set(l.target,p);world.push(p);}
+  for(const l of scene.links)if(l.relation==='bound-to')edges.push([byPath.get(l.from),byPath.get(l.target)||contexts.get(l.target),'binder']);
+  $('pl-scene-rows').replaceChildren();for(const p of world){const row=el('li'),b=el('button',(p.context?'Context binder':current.kind(p.id))+' · '+p.path);b.type='button';b.dataset.scenePath=p.path;b.onclick=()=>selectOccurrence(p.id,true,true,p.route);row.append(b);$('pl-scene-rows').append(row);}
+  const s=scene.stats;$('pl-graph-note').textContent='Scoped geometry prototype · '+s.displayed+' visible occurrences + '+number(s.hidden)+' hidden = '+number(s.represented)+' represented. '+s.frontiers+' exact collapsed boundaries; '+s.scopeBoundaries+' links to enclosing context. Solid links are ordered constructor fields; dashed links are lexical binding. Layout positions are not a mathematical invariant.';
+ }
  async function layout(){
-  world=[];edges=[];
-  if(mode==='dependencies'){
+  world=[];edges=[];scene=null;$('pl-scene-details').hidden=mode!=='geometry';
+  if(mode==='geometry'){await geometryReady();scopedLayout();}
+  else if(mode==='dependencies'){
    const records=edition.declarations,byName=new Map();records.forEach((d,i)=>{const a=2*Math.PI*i/records.length;const p={id:d.name,x:Math.cos(a),y:Math.sin(a),kind:4,name:d.name};world.push(p);byName.set(d.name,p);});
    edition.edges.forEach(e=>edges.push([byName.get(e.from),byName.get(e.to)]));$('pl-graph-note').textContent=number(records.length)+' / '+number(records.length)+' project declarations · '+number(edition.edges.length)+' exact local dependency links. External references appear in the reader.';
   }else{
@@ -103,18 +121,27 @@
   const w=frame.clientWidth,h=frame.clientHeight,dpr=Math.min(devicePixelRatio||1,2);canvas.width=w*dpr;canvas.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.fillStyle='#112a37';ctx.fillRect(0,0,w,h);
   const scale=Math.min(w-60,h-60)/(mode==='dependencies'?2:1)*zoom,cx=mode==='dependencies'?0:.5,cy=mode==='dependencies'?0:.5;
   const point=p=>({x:w/2+(p.x-cx)*scale+pan.x,y:h/2+(p.y-cy)*scale+pan.y});
-  for(const [a,b,type]of edges){const p=point(a),q=point(b);ctx.strokeStyle=type==='binder'?'#c4a6e0':'#759bab';ctx.globalAlpha=mode==='dependencies'?.08:.32;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();}
-  ctx.globalAlpha=1;points=[];for(const n of world){const p=point(n),active=mode==='dependencies'?n.id===current.record.name:n.id===selected;ctx.fillStyle=active?'#ffe2a3':palette[n.kind];ctx.beginPath();ctx.arc(p.x,p.y,active?6:3,0,Math.PI*2);ctx.fill();if(n.collapsed){ctx.strokeStyle='#a1c8c9';ctx.beginPath();ctx.arc(p.x,p.y,6,0,Math.PI*2);ctx.stroke();}points.push({...n,...p});}
+  for(const [a,b,type,field]of edges){const p=point(a),q=point(b);ctx.strokeStyle=type==='binder'?'#c4a6e0':'#759bab';ctx.globalAlpha=mode==='dependencies'?.08:.32;ctx.setLineDash(mode==='geometry'&&type==='binder'?[4,4]:[]);ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();ctx.setLineDash([]);
+   if(mode==='geometry'){const angle=Math.atan2(q.y-p.y,q.x-p.x),x=q.x-12*Math.cos(angle),y=q.y-12*Math.sin(angle);ctx.globalAlpha=.9;ctx.beginPath();ctx.moveTo(x-6*Math.cos(angle-.45),y-6*Math.sin(angle-.45));ctx.lineTo(x,y);ctx.lineTo(x-6*Math.cos(angle+.45),y-6*Math.sin(angle+.45));ctx.stroke();if(field){ctx.font='10px system-ui';ctx.fillStyle='#d5e5e7';ctx.fillText(field,p.x+(q.x-p.x)*.35+3,p.y+(q.y-p.y)*.35-4);}}
+  }
+  ctx.globalAlpha=1;points=[];for(const n of world){const p=point(n),active=mode==='dependencies'?n.id===current.record.name:mode==='geometry'?n.path===A.path(current.data,selectedRoute):n.id===selected;ctx.fillStyle=active?'#ffe2a3':palette[n.kind];ctx.beginPath();
+   if(mode==='geometry'){
+    if([6,7,8].includes(n.kind))ctx.rect(p.x-13,p.y-10,26,20);
+    else if([0,1,2,4].includes(n.kind)){ctx.moveTo(p.x,p.y-12);ctx.lineTo(p.x+12,p.y);ctx.lineTo(p.x,p.y+12);ctx.lineTo(p.x-12,p.y);ctx.closePath();}
+    else ctx.arc(p.x,p.y,11,0,Math.PI*2);ctx.fill();ctx.font='bold 12px system-ui';ctx.textAlign='center';ctx.fillStyle='#102a37';ctx.fillText(n.glyph,p.x,p.y+4);ctx.textAlign='start';
+   }else{ctx.arc(p.x,p.y,active?6:3,0,Math.PI*2);ctx.fill();}
+   if(n.collapsed){ctx.strokeStyle='#a1c8c9';ctx.beginPath();ctx.arc(p.x,p.y,mode==='geometry'?16:6,0,Math.PI*2);ctx.stroke();}points.push({...n,...p});}
+
  }
  function safely(p){Promise.resolve(p).catch(e=>setStatus(e.message));}
  $('pl-edition').onchange=()=>{chooseEdition($('pl-edition').value);safely(selectDeclaration(edition.declarations.find(d=>d.name==='JacobiFull.exact_first_time')?.name||edition.declarations[0].name));};
  $('pl-module').onchange=inventory;$('pl-search').oninput=inventory;$('pl-declaration').onchange=()=>safely(selectDeclaration($('pl-declaration').value));
  $('pl-term-download').onclick=()=>{const data=current.data,root=selected,text='Decoded kernel term with sharing retained. eN refers to a shared node; bound variable indices are contextual. This is not the original tactic script.\nRoot: e'+root+'\n\n'+A.termLines(data,root).join('\n'),a=document.createElement('a'),u=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));a.href=u;a.download=current.record.name+'-compiled-node-'+root+'.txt';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);};
  $('pl-go').onclick=()=>safely(selectOccurrence(Number($('pl-occurrence').value),true));$('pl-parent').onclick=()=>{const r={root:selectedRoute.root,slots:selectedRoute.slots.slice(0,-1)};safely(selectOccurrence(A.walk(current.data,r),true,true,r));};$('pl-more').onclick=()=>safely(appendRows());
- for(const [id,value]of [['pl-term-view','term'],['pl-deps-view','dependencies']])$(id).onclick=()=>{mode=value;$('pl-term-view').setAttribute('aria-pressed',String(mode==='term'));$('pl-deps-view').setAttribute('aria-pressed',String(mode==='dependencies'));zoom=1;pan={x:0,y:0};safely(layout());};
+ for(const [id,value]of [['pl-term-view','term'],['pl-geometry-view','geometry'],['pl-deps-view','dependencies']])$(id).onclick=()=>safely((async()=>{if(value==='geometry')await geometryReady();mode=value;for(const[k,m]of [['pl-term-view','term'],['pl-geometry-view','geometry'],['pl-deps-view','dependencies']])$(k).setAttribute('aria-pressed',String(mode===m));zoom=1;pan={x:0,y:0};await layout();updateLocation();})());
  $('pl-minus').onclick=()=>{zoom=Math.max(.2,zoom/1.3);draw();};$('pl-plus').onclick=()=>{zoom=Math.min(30,zoom*1.3);draw();};$('pl-fit').onclick=()=>{zoom=1;pan={x:0,y:0};draw();};
  function nearestPoint(x,y){
-  let nearest=null,distance=9;
+  let nearest=null,distance=mode==='geometry'?16:9;
   for(const point of points){const next=Math.hypot(point.x-x,point.y-y);if(next<distance){nearest=point;distance=next;}}
   return nearest;
  }
@@ -124,10 +151,11 @@
  canvas.onwheel=e=>{e.preventDefault();zoom=Math.max(.2,Math.min(30,zoom*Math.exp(-e.deltaY*.001)));draw();};
  new ResizeObserver(()=>{if(current)draw();}).observe(frame);
  $('pl-library').addEventListener('click',e=>{const a=e.target.closest('a');if(!a)return;const u=new URL(a.href,location.href);if((u.pathname===location.pathname||document.getElementById('pa-sync-panel')&&u.pathname==='/projects/proof-atlas/library/')&&u.searchParams.has('proof')){e.preventDefault();if(u.searchParams.get('edition')!==edition.id)chooseEdition(u.searchParams.get('edition'));safely(selectDeclaration(u.searchParams.get('proof')));}});
- window.ProofAtlasLibrary={selectDeclaration,selectOccurrence,clearSelection:()=>{serial++;selectionSerial++;current=null;points=[];world=[];edges=[];$('pl-rows').replaceChildren();$('pl-expression').replaceChildren();ctx.clearRect(0,0,canvas.width,canvas.height);},getSnapshot:()=>current?{edition:edition.id,name:current.record.name,selected,root,mode,occurrences:current.record.occurrences,uniqueNodes:current.record.uniqueNodes,path:A.path(current.data,selectedRoute),route:{root:selectedRoute.root,slots:[...selectedRoute.slots]},sourceSha256:current.record.sourceSha256,indexSha256:current.record.indexSha256,rendered:points.length}:null,getData:()=>current?.data,getPoint:i=>points.find(p=>p.id===i)};
+ window.ProofAtlasLibrary={selectDeclaration,selectOccurrence,clearSelection:()=>{serial++;selectionSerial++;current=null;scene=null;points=[];world=[];edges=[];$('pl-scene-rows').replaceChildren();$('pl-scene-details').hidden=true;$('pl-rows').replaceChildren();$('pl-expression').replaceChildren();ctx.clearRect(0,0,canvas.width,canvas.height);},getSnapshot:()=>current?{edition:edition.id,name:current.record.name,selected,root,mode,occurrences:current.record.occurrences,uniqueNodes:current.record.uniqueNodes,path:A.path(current.data,selectedRoute),route:{root:selectedRoute.root,slots:[...selectedRoute.slots]},sourceSha256:current.record.sourceSha256,indexSha256:current.record.indexSha256,rendered:points.length}:null,getData:()=>current?.data,getScene:()=>scene,getOccurrencePoint:path=>points.find(p=>p.path===path),getPoint:i=>points.find(p=>p.id===i)};
  lib.editions.forEach(e=>{const o=el('option',e.id==='published-15'?'Published article · 15 modules':e.id+' · '+e.counts.modules+' modules');o.value=e.id;$('pl-edition').append(o);});
  const params=new URLSearchParams(location.search);chooseEdition(params.get('edition'));
  if(document.getElementById('pa-sync-panel'))return;
+ if(params.get('geometry')==='scoped'){await geometryReady();mode='geometry';$('pl-term-view').setAttribute('aria-pressed','false');$('pl-geometry-view').setAttribute('aria-pressed','true');}
  const name=params.get('proof')||edition.declarations.find(d=>d.name==='JacobiFull.exact_first_time')?.name||edition.declarations[0].name;
  const route=params.get('route')?.match(/^(\d+):([\d.]*)$/);await selectDeclaration(name,location.hash.match(/^#expr-(\d+)$/)?Number(location.hash.slice(6)):undefined,true,route?{root:Number(route[1]),slots:route[2]?route[2].split('.').map(Number):[]}:undefined);
 })().catch(e=>{const n=document.getElementById('pl-status');if(n)n.textContent=e.message;});

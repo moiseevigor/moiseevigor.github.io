@@ -1,5 +1,7 @@
 # Proof Atlas — public research record
 
+**Program goal:** develop a consistent geometric language for Lean proofs, including massive AI-generated proofs, with faithful scope, composition, abstraction and provenance. The article reader is one application. The [saved research program](../../docs/proof-atlas-research-program.md) defines the questions, invariants and evidence requirements; it remains active across individual tool releases.
+
 **Introduction:** [The Geometry of a Formal Proof](https://moiseevigor.github.io/mathematics/2026/10/11/proof-atlas-research-program/)  
 **Interactive visualization:** [Proof Atlas](https://moiseevigor.github.io/projects/proof-atlas/)  
 **Public structural data:** [crossing-structure.js](../../public/data/proof-atlas/crossing-structure.js)

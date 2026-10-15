@@ -22,3 +22,5 @@
 @media(max-width:560px){.pl-library{padding:22px 18px}.pl-controls{grid-template-columns:1fr}.pl-declaration-select{grid-column:1}.pl-canvas-wrap{height:340px}.pl-coverage{gap:12px 20px}}
 
 .pl-library p{font-family:inherit;font-size:inherit;line-height:inherit}
+
+#pl-scene-details[hidden]{display:none}#pl-scene-rows{max-height:260px;overflow:auto;padding-left:22px}#pl-scene-rows button{font:12px/1.5 var(--mono,monospace);width:100%;text-align:left;overflow-wrap:anywhere;margin:2px 0}

@@ -49,7 +49,7 @@
  async function engineReady(){
   if(!engine)engine=(async()=>{
    await metadataReady();if(!window.ProofAtlasLibraryData)await script('/public/js/proof-atlas-library-data.js');
-   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=4');
+   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=5');
    if(!$('pl-provenance').closest('details')){const details=document.createElement('details'),summary=document.createElement('summary');summary.textContent='Provenance and axiom dependencies';$('pl-provenance').before(details);details.append(summary,$('pl-provenance'));}
    return window.ProofAtlasLibrary;
   })().catch(e=>{engine=null;throw e;});return engine;
