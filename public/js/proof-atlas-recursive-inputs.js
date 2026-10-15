@@ -24,13 +24,33 @@
   const field=r.constructorFields-1-(p.index-depth),fieldRoute={root:0,slots:Array(base+field).fill(1)};
   return{slot,kind:'recursive-premise',field,familyArity:depth,expression:result.expression,call:{node:id,route,namespace:'kernel-rule'},major:{...major,namespace:'kernel-rule'},indices:call.args.slice(base,t.majorSlot-1).map(a=>({...a,namespace:'kernel-rule'})),fieldBinder:{node:A.walk({...g,roots:[r.rhsRoot]},fieldRoute),route:fieldRoute,namespace:'kernel-rule'}};
  }
+ // A bounded support table is computed once per immutable, postorder source DAG.
+ // Domains and let values stay outside their own binder; only body masks shift.
+ const supportCaches=new WeakMap(),supportCacheLimit=131072,supportWidth=512;
+ function supportIndex(data){
+  if(supportCaches.has(data))return supportCaches.get(data);
+  if(data.kind.length>supportCacheLimit){supportCaches.set(data,null);return null;}
+  const masks=[];
+  for(let id=0;id<data.kind.length;id++){
+   if(data.neededScope[id]===0){masks.push(0n);continue;}
+   if(data.neededScope[id]>supportWidth){masks.push(undefined);continue;}
+   const kind=data.kind[id],cs=data.children[id],children=cs.map(c=>masks[c]);let value;
+   if(kind===0)value=1n<<BigInt(data.payloads[id].index);
+   else if(children.every(c=>c!==undefined)){if(kind===6||kind===7)value=children[0]|(children[1]>>1n);else if(kind===8)value=children[0]|children[1]|(children[2]>>1n);else value=children.reduce((a,b)=>a|b,0n);}
+   masks.push(value);
+  }
+  supportCaches.set(data,masks);return masks;
+ }
  function countReferences(data,root,index,options={}){
   const limit=options.maxStates??65536,maxDepth=options.maxDepth??512;
   demand(Number.isInteger(index)&&index>=0&&Number.isInteger(limit)&&limit>=1&&limit<=65536&&Number.isInteger(maxDepth)&&maxDepth>=0&&maxDepth<=512,'usage bounds');
-  let states=0;const memo=new Map();
-  function visit(id,depth,distance){const key=id+':'+depth;if(memo.has(key))return memo.get(key);if(distance>maxDepth||++states>limit)throw Error('budget');
-   let n=0n;if(data.neededScope[id]>index+depth){const kind=data.kind[id];if(kind===0)n=data.payloads[id].index===index+depth?1n:0n;else data.children[id].forEach((c,j)=>{n+=visit(c,depth+(binds(kind,j)?1:0),distance+1);});}memo.set(key,n);return n;}
-  try{return{status:'counted',occurrences:visit(root,0,0).toString(),states,method:'scoped-dag-reference-count/1'};}catch(_){return{status:'unavailable',reason:'Scoped reference-count budget exceeded',states,method:'scoped-dag-reference-count/1'};}
+  let states=0;const memo=new Map(),useSupport=options.useSupport!==false,support=useSupport?supportIndex(data):null;
+  function visit(id,depth,distance){const key=id+':'+depth;if(memo.has(key))return memo.get(key);if(distance>maxDepth||++states>limit)throw Error('count budget');
+   let n=0n;const target=index+depth,known=support?.[id];
+   if(data.neededScope[id]>target&&(known===undefined||((known>>BigInt(target))&1n)!==0n)){const kind=data.kind[id];if(kind===0)n=data.payloads[id].index===target?1n:0n;else data.children[id].forEach((c,j)=>{n+=visit(c,depth+(binds(kind,j)?1:0),distance+1);});}memo.set(key,n);return n;
+  }
+  const method=useSupport?'scoped-dag-reference-count/2':'scoped-dag-reference-count/1',supportInfo=useSupport?{supportAvailable:support?.[root]!==undefined,supportWidth,supportCacheLimit}:{};
+  try{return{status:'counted',occurrences:visit(root,0,0).toString(),states,method,...supportInfo};}catch(_){return{status:'unavailable',reason:'Scoped reference-count budget exceeded',states,method,...supportInfo};}
  }
  function describe(t,r,data,frames){
   return Array.from({length:r.inputCount},(_,j)=>{const input=role(t,r,j+1),source=frames[j]?.binder||null,complete=frames.length===r.inputCount;
