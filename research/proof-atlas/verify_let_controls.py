@@ -21,7 +21,7 @@ core += '\n' + (base / 'LetReductionControls.lean').read_text()
 prepare = '''
 run_cmd do
  let mut requests : Array Json := #[]
- for name in [`AtlasLet.proof,`AtlasLet.value,`AtlasLet.dependent,`AtlasLet.capture,`AtlasLet.duplicate,`AtlasLet.boundValue,`AtlasLet.beforeValue,`AtlasLet.domain,`AtlasLet.typeLevel,`AtlasLet.unused,`AtlasLet.shadow,`AtlasLet.proofIrrelevance,`AtlasLet.shared,`AtlasLet.projection,`AtlasLet.annotation,`AtlasLet.poly] do
+ for name in [`AtlasLet.proof,`AtlasLet.value,`AtlasLet.dependent,`AtlasLet.capture,`AtlasLet.duplicate,`AtlasLet.boundValue,`AtlasLet.beforeValue,`AtlasLet.domain,`AtlasLet.typeLevel,`AtlasLet.unused,`AtlasLet.shadow,`AtlasLet.proofIrrelevance,`AtlasLet.shared,`AtlasLet.projection,`AtlasLet.annotation,`AtlasLet.poly,`AtlasLet.sharedContexts] do
   let info ← getConstInfo name
   let some value := info.value? true | throwError "No fixture body"
   let (t,s) := AtlasLibrary.intern info.type {}
@@ -30,7 +30,8 @@ run_cmd do
   let file := "FOLDER/" ++ name.toString ++ ".json"
   liftIO <| IO.FS.writeFile file packet.compress
   let slots := if name == `AtlasLet.proofIrrelevance || name == `AtlasLet.poly then #[1,1] else if [``AtlasLet.capture,``AtlasLet.duplicate,``AtlasLet.boundValue,``AtlasLet.beforeValue,``AtlasLet.shared].contains name then #[1] else #[]
-  requests := requests.push (Json.mkObj [("packetFile",toJson file),("routes",toJson #[AtlasOccurrenceTypes.routeJson 1 slots]),("source",Json.mkObj [("edition",toJson "native-control"),("name",toJson name.toString),("indexSha256",toJson "fixture"),("sourceSha256",toJson "fixture")])])
+  let routes := if name == `AtlasLet.sharedContexts then #[AtlasOccurrenceTypes.routeJson 1 #[0,1,1],AtlasOccurrenceTypes.routeJson 1 #[1,0,1,1]] else #[AtlasOccurrenceTypes.routeJson 1 slots]
+  requests := requests.push (Json.mkObj [("packetFile",toJson file),("routes",toJson routes),("source",Json.mkObj [("edition",toJson "native-control"),("name",toJson name.toString),("indexSha256",toJson "fixture"),("sourceSha256",toJson "fixture")])])
  liftIO <| IO.FS.writeFile "REQUEST" (toJson requests).compress
 '''.replace('FOLDER', str(folder)).replace('REQUEST', str(request))
 entry = folder / 'Controls.lean'
