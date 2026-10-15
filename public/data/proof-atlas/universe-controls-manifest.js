@@ -1,0 +1,1 @@
+window.PROOF_ATLAS_UNIVERSE_CONTROLS = {"format":"ProofAtlasUniverseControls/1","file":"/public/data/proof-atlas/universe-controls.json.gz","sha256":"0f783fa5a6a4d848f0e7e406122efc41f78c6c7498f6d77a0b13f6450ed2f293","decodedBytes":30118,"sourceSha256":"f7d774b299e499237e75602280369fc52c1442924a3f4804c7d12bda13938902","leanVersion":"4.33.1"};
