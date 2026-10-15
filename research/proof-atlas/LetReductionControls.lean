@@ -21,6 +21,10 @@ run_meta do
  let projection := localDef `p (mkApp2 (mkConst ``Prod [.zero,.zero]) nat nat) (mkAppN (mkConst ``Prod.mk [.zero,.zero]) #[nat,nat,mkNatLit 2,mkNatLit 3]) (.proj ``Prod 0 z)
  let annotation := localDef `x nat (mkNatLit 2) (.mdata {} z)
  let poly := lam `A (mkSort (.param `u)) (lam `x z (localDef `y (.bvar 1) z z))
+ let sharedLet := localDef `x nat z z
+ let pairFn := mkApp2 (mkConst ``Prod [.zero,.zero]) natFn natFn
+ let rightPair := mkAppN (mkConst ``Prod.mk [.zero,.zero]) #[natFn,natFn,lam `q nat sharedLet,lam `r nat sharedLet]
+ let sharedContexts := mkAppN (mkConst ``Prod.mk [.zero,.zero]) #[natFn,pairFn,lam `p nat sharedLet,rightPair]
  let proofIrrelevance := lam `p truth (lam `q truth (localDef `h truth (.bvar 1) z))
  let mut proposition := truth
  let mut body := Expr.bvar 1
@@ -28,7 +32,7 @@ run_meta do
   body := mkAppN (mkConst ``And.intro) #[proposition,proposition,body,body]
   proposition := mkApp2 (mkConst ``And) proposition proposition
  let shared := lam `p truth (localDef `unused nat (mkNatLit 2) body)
- for (name,term) in #[(`AtlasLet.proof,proof),(`AtlasLet.value,value),(`AtlasLet.dependent,dependent),(`AtlasLet.capture,capture),(`AtlasLet.duplicate,duplicate),(`AtlasLet.boundValue,boundValue),(`AtlasLet.beforeValue,beforeValue),(`AtlasLet.domain,domain),(`AtlasLet.typeLevel,typeLevel),(`AtlasLet.unused,unused),(`AtlasLet.shadow,shadow),(`AtlasLet.proofIrrelevance,proofIrrelevance),(`AtlasLet.shared,shared),(`AtlasLet.projection,projection),(`AtlasLet.annotation,annotation),(`AtlasLet.poly,poly)] do
+ for (name,term) in #[(`AtlasLet.proof,proof),(`AtlasLet.value,value),(`AtlasLet.dependent,dependent),(`AtlasLet.capture,capture),(`AtlasLet.duplicate,duplicate),(`AtlasLet.boundValue,boundValue),(`AtlasLet.beforeValue,beforeValue),(`AtlasLet.domain,domain),(`AtlasLet.typeLevel,typeLevel),(`AtlasLet.unused,unused),(`AtlasLet.shadow,shadow),(`AtlasLet.proofIrrelevance,proofIrrelevance),(`AtlasLet.shared,shared),(`AtlasLet.projection,projection),(`AtlasLet.annotation,annotation),(`AtlasLet.poly,poly),(`AtlasLet.sharedContexts,sharedContexts)] do
   let type ← AtlasOccurrenceTypes.kernelType term
   addDecl (.defnDecl {name,levelParams:=(if name == `AtlasLet.poly then [`u] else []),type,value:=term,hints:=.abbrev,safety:=.safe})
  let mut rejected := false

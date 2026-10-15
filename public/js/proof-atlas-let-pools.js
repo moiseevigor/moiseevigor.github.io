@@ -1,0 +1,39 @@
+/* One retained result pool, serialized loads and exact per-query contexts. */
+(function(host){
+ 'use strict';
+ const node=typeof module!=='undefined'&&module.exports,A=node?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData,T=node?require('./proof-atlas-occurrence-types'):host.ProofAtlasOccurrenceTypes;
+ const cap=131072,indexLimit=8388608,poolLimit=33554432,key=r=>r.root+':'+r.slots.join('.'),canonical=x=>Array.isArray(x)?x.map(canonical):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,canonical(x[k])])):x,same=(a,b)=>JSON.stringify(canonical(a))===JSON.stringify(canonical(b)),demand=(ok,m)=>{if(!ok)throw Error('Let pool: '+m);},hash=x=>/^[a-f0-9]{64}$/.test(x),check=signal=>{if(signal?.aborted)throw signal.reason||Error('Let result load cancelled');};
+ let tail=Promise.resolve(),pending=null,cache=null,inFlight=0,peakInFlight=0,loads=0,hits=0;
+ function state(){return{retainedPools:cache?1:0,retainedNodes:cache?.pool.graph.kind.length||0,decodedBytes:cache?.bytes||0,inFlight,peakInFlight,loads,cacheHits:hits,nodeLimit:cap,poolByteLimit:poolLimit};}
+ function release(owner){if(pending?.owner===owner)pending.controller.abort();if(cache?.owner===owner)cache=null;}
+ function validateIndex(index,descriptor,data,record,validateMetadata){
+  demand(descriptor.storage==='bounded-result-pools/1'&&descriptor.name===record.name&&descriptor.indexSha256===record.indexSha256&&descriptor.sourceSha256===record.sourceSha256,'descriptor source');T.validate(index,data,record);const packing=index.resultPacking;
+  demand(packing?.method==='bounded-result-pools/1'&&packing.nodeLimit===cap&&packing.indexByteLimit===indexLimit&&packing.poolByteLimit===poolLimit,'packing bounds');demand(same(packing.legacy,{file:descriptor.legacy?.file,sha256:descriptor.legacy?.sha256})&&hash(packing.legacy.sha256),'archive identity');
+  demand(Array.isArray(packing.pools)&&packing.pools.length>0&&packing.pools.length<=512,'pool inventory');
+  packing.pools.forEach((p,i)=>demand(p.id===i&&hash(p.sha256)&&p.file.startsWith('/public/data/proof-atlas/let-result-pools/')&&Number.isInteger(p.nodes)&&p.nodes>=1&&p.nodes<=cap&&Number.isInteger(p.queries)&&p.queries>=1&&p.queries<=512&&Number.isInteger(p.decodedBytes)&&p.decodedBytes>=1&&p.decodedBytes<=poolLimit,'pool descriptor'));
+  demand(index.source.edition===descriptor.edition&&index.entries.length===descriptor.queried&&index.entries.filter(e=>e.status==='checked').length===descriptor.checked&&same(index.entries.map(e=>e.route),descriptor.routes),'query inventory');const use=new Map();
+  for(const e of index.entries){if(e.status!=='checked')continue;validateMetadata(e,data,index.typeGraph);const z=e.letJudgment,r=z.result,p=packing.pools[r?.pool];demand(!z.reducedGraph&&z.reducedRoot===undefined&&p&&Number.isInteger(r.root)&&r.root>=0&&r.root<p.nodes&&/^[1-9]\d*$/.test(r.expanded)&&Number.isInteger(r.neededScope)&&r.neededScope>=0&&r.neededScope<=e.context.length&&Number.isInteger(r.originalRoot)&&r.originalRoot>=0&&r.originalRoot<r.originalNodes&&Number.isInteger(r.originalNodes)&&r.originalNodes>=1&&r.originalNodes<=cap,'result reference');use.set(r.pool,(use.get(r.pool)||0)+1);}
+  packing.pools.forEach(p=>demand(use.get(p.id)===p.queries,'pool query denominator'));return true;
+ }
+ function validatePool(pool,descriptor,index){
+  demand(pool.format==='ProofAtlasLetPool/1'&&same(pool.source,index.source)&&pool.graph.kind.length===descriptor.nodes,'pool source/size');T.validateExpressionGraph(pool.graph,[],0,cap);demand(Array.isArray(pool.roots)&&pool.roots.length===descriptor.queries,'pool roots');const seen=new Set();
+  for(const root of pool.roots){const k=key(root.route),e=index.entries.find(e=>key(e.route)===k),r=e?.letJudgment?.result;demand(!seen.has(k)&&e?.status==='checked'&&r.pool===descriptor.id&&root.root===r.root&&root.node===e.node&&root.path===e.path&&same(root.context,e.context),'pool query/context');seen.add(k);demand(pool.graph.expanded[root.root]===r.expanded&&pool.graph.neededScope[root.root]===r.neededScope,'root accounting/scope');}
+  const reachable=new Uint8Array(pool.graph.kind.length),todo=pool.roots.map(r=>r.root);let count=0;while(todo.length){const n=todo.pop();if(reachable[n])continue;reachable[n]=1;count++;todo.push(...pool.graph.children[n]);}demand(count===pool.graph.kind.length,'unreachable pool nodes');return true;
+ }
+ function requestPool(descriptor,index,owner,signal){
+  check(signal);pending?.controller.abort();const controller=new AbortController(),request={controller,owner};pending=request;const abort=()=>controller.abort(signal?.reason);signal?.addEventListener('abort',abort,{once:true});
+  const job=tail.catch(()=>{}).then(async()=>{check(controller.signal);if(cache?.owner===owner&&cache.sha256===descriptor.sha256){hits++;return cache.pool;}cache=null;inFlight++;peakInFlight=Math.max(peakInFlight,inFlight);
+   try{const pool=await A.compressed(descriptor.file,descriptor.sha256,{signal:controller.signal,maxBytes:poolLimit,expectedBytes:descriptor.decodedBytes});check(controller.signal);validatePool(pool,descriptor,index);check(controller.signal);cache={owner,sha256:descriptor.sha256,pool,bytes:descriptor.decodedBytes};loads++;return pool;}finally{inFlight--;}
+  }).finally(()=>{signal?.removeEventListener('abort',abort);if(pending===request)pending=null;});tail=job.then(()=>undefined,()=>undefined);return job;
+ }
+ async function open(descriptor,data,record,hooks,options={}){
+  demand(Number.isInteger(descriptor.decodedBytes)&&descriptor.decodedBytes>0&&descriptor.decodedBytes<=indexLimit&&hash(descriptor.sha256)&&descriptor.file.startsWith('/public/data/proof-atlas/let-result-pools/'),'index descriptor');const index=await A.compressed(descriptor.file,descriptor.sha256,{maxBytes:indexLimit,expectedBytes:descriptor.decodedBytes,signal:options.signal});validateIndex(index,descriptor,data,record,hooks.validateMetadata);const owner={},native=new Map(),observations=[];
+  for(const e of index.entries){native.set(key(e.route),e);if(e.status==='checked'){const copy={...e,typeGraph:index.typeGraph,letReduction:{status:'available',storage:'bounded-result-pools/1'}};delete copy.letJudgment;observations.push(copy);}}
+  const lookup=hooks.indexEntries(index.entries.map(e=>observations.find(x=>key(x.route)===key(e.route))||e));let disposed=false;const verified=new Set();
+  const provider={source:index.source,sha256:descriptor.sha256,file:descriptor.file,checked:descriptor.checked,queried:descriptor.queried,observations,get:lookup.get,hasReduction:route=>native.get(key(route))?.status==='checked',getLoadState:()=>({...state(),verifiedQueries:verified.size}),dispose:()=>{disposed=true;release(owner);},cancel:()=>release(owner),load:async(route,options={})=>{
+   demand(!disposed,'disposed provider');const e=native.get(key(route));demand(e?.status==='checked','unqueried occurrence');const r=e.letJudgment.result,p=index.resultPacking.pools[r.pool],pool=await requestPool(p,index,owner,options.signal);check(options.signal);demand(!disposed,'disposed provider');const trace={...e.letJudgment,reducedGraph:pool.graph,reducedRoot:r.root};delete trace.result;const entry={...e,typeGraph:index.typeGraph,letJudgment:trace};try{hooks.validateEntry(entry,data,index.typeGraph);check(options.signal);}catch(error){if(cache?.owner===owner&&cache.sha256===p.sha256)cache=null;throw error;}verified.add(key(route));
+   return{source:index.source,sha256:descriptor.sha256,file:descriptor.file,get:at=>key(at)===key(route)?entry:lookup.get(at),resultOrigin:{method:'bounded-result-pools/1',indexSha256:descriptor.sha256,poolSha256:p.sha256,pool:p.id,root:r.root,archiveSha256:index.resultPacking.legacy.sha256}};
+  }};return provider;
+ }
+ const api={open,validateIndex,validatePool,state,release};if(node)module.exports=api;else host.ProofAtlasLetPools=api;
+})(typeof window==='undefined'?globalThis:window);

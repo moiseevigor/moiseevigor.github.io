@@ -142,3 +142,19 @@ python3 research/proof-atlas/verify_let_controls.py /path/to/lean
 ```
 
 If a compiler probe fails, use a fresh `--tag` to preserve its inputs and logs. Extraction uses the same fixed memory, disk and execution limits. The sidecars contain compiled graphs and native evidence only. One representative route does not establish typed coverage of every occurrence of a shared node. Exact independent substitution and occurrence accounting supplement native conversion, which alone cannot establish proof-term provenance in the presence of proof irrelevance. The computed DAG/node bounds and audit scope are recorded in the research program.
+
+
+## Bounded result delivery
+
+After producing the original let attestations, derive the normal reader's separate inventory and pools:
+
+```sh
+node research/proof-atlas/publish_let_pools.cjs
+node scripts/test-proof-atlas-let-pools.cjs
+```
+
+The publisher verifies the immutable original manifest, full native sidecar hashes, type packing, compiled source indexes and independent substitutions before writing the new delivery files. `pack_let_results.cjs` preserves every native judgment, type graph, source route and context; only the computed graphs are interned and split. The archive comparison reconstructs the original records and compares every complete result root. Original attestations remain in `let-reductions/`, and their original manifest is unchanged. `let-result-pools-manifest.js` is the separate modern delivery inventory.
+
+The new index explicitly identifies its bounded result packing and archive hash. It is not a standalone full occurrence-types attestation: use `pack_let_results.verify` with the archive instead of the type-only packing verifier. A metadata type judgment does not imply that its computed graph is already loaded or independently checked in the browser. The result loader validates the selected query after fetching its pool, and records index, pool, root and archive identities in the computed view's provenance.
+
+One pool is retained by the loader, with serialized, abortable fetches and bounded decoded JSON. Browser lifecycle tests cover delayed geometry, reuse, pool replacement, cancellation, corrupt results, retries and optional failure. Existing full let-view and article tests remain required. These checks do not measure general browser RAM consumption or human comprehension. The new native control covers a reused let under distinct Γ contexts and an unqueried third occurrence.

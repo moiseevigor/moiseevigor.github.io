@@ -4,13 +4,21 @@
  const fields={app:['fn','arg'],lam:['domain','body'],forallE:['domain','body'],letE:['type','value','body'],mdata:['expr'],proj:['struct']};
  const kinds=['bvar','fvar','mvar','sort','const','app','lam','forallE','letE','lit','mdata','proj'];
  async function digest(bytes){return [...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(x=>x.toString(16).padStart(2,'0')).join('');}
- async function compressed(file,hash){
-  const r=await fetch(file);if(!r.ok)throw Error('Proof asset unavailable: '+file+' ('+r.status+')');
+ async function compressed(file,hash,options={}){
+  const signal=options.signal,check=()=>{if(signal?.aborted)throw signal.reason||Error('Proof load cancelled');};check();
+  const limit=options.maxBytes;if(limit!==undefined&&(!Number.isInteger(limit)||limit<1||limit>67108864))throw Error('Invalid proof asset byte bound');
+  if(options.expectedBytes!==undefined&&(!Number.isInteger(options.expectedBytes)||options.expectedBytes<0||(limit!==undefined&&options.expectedBytes>limit)))throw Error('Invalid expected proof asset size');
+  const r=await fetch(file,signal?{signal}:undefined);if(!r.ok)throw Error('Proof asset unavailable: '+file+' ('+r.status+')');
   if(!host.DecompressionStream)throw Error('This browser needs gzip decompression support. The compressed term packet remains available.');
-  const bytes=await new Response(r.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
-  if(await digest(bytes)!==hash)throw Error('Proof asset SHA-256 mismatch: '+file);
-  return JSON.parse(new TextDecoder().decode(bytes));
+  const stream=r.body.pipeThrough(new DecompressionStream('gzip'));let bytes;
+  if(limit!==undefined){const reader=stream.getReader(),chunks=[];let total=0;
+   try{while(true){check();const part=await reader.read();if(part.done)break;total+=part.value.byteLength;if(total>limit)throw Error('Proof asset exceeds decoded byte bound');chunks.push(part.value);}check();bytes=new Uint8Array(total);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.byteLength;}}
+   catch(error){await reader.cancel(error).catch(()=>{});throw error;}finally{reader.releaseLock();}
+  }else bytes=await new Response(stream).arrayBuffer();check();
+  if(options.expectedBytes!==undefined&&bytes.byteLength!==options.expectedBytes)throw Error('Proof asset decoded size mismatch');
+  if(await digest(bytes)!==hash)throw Error('Proof asset SHA-256 mismatch: '+file);check();return JSON.parse(new TextDecoder().decode(bytes));
  }
+
  function children(data,i){return data.children[i];}
  function validateIndex(data,record){
   const n=record.uniqueNodes;if(data.serialization!=='ExprDAG/1'||data.kind.length!==n||data.children.length!==n||data.expanded.length!==n||data.payloads.length!==n||data.neededScope.length!==n||data.declaration.name!==record.name||data.declaration.kernelCheck!=='PASS')throw Error('Proof index does not match the compiled inventory');
