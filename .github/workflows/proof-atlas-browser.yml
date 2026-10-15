@@ -194,6 +194,8 @@ jobs:
           node scripts/test-proof-atlas-ai-sample-browser.cjs
           node scripts/test-proof-atlas-let-reductions.cjs
           node scripts/test-proof-atlas-let-reductions-browser.cjs
+          node scripts/test-proof-atlas-let-premises.cjs
+          node scripts/test-proof-atlas-let-premises-browser.cjs
           node scripts/test-proof-atlas-let-pools.cjs
           node scripts/test-proof-atlas-let-pools-browser.cjs
           node scripts/test-proof-atlas-application-geometry.cjs

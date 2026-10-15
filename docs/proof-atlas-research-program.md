@@ -306,3 +306,20 @@ The source sample's let nodes have no alternate occurrence paths, so it cannot t
 This preserves source-relative proof geometry while reducing repeated result delivery on the evaluated corpus. It does not establish arbitrary-corpus memory bounds, semantic proof compression, universal normalization or measured human inspection benefits. Native records remain environment-relative attestations. The general goal stays active; the blog is unchanged.
 
 [Delivery index and pool loader](/public/js/proof-atlas-let-pools.js) · [Lossless pool packer](/research/proof-atlas/pack_let_results.cjs) · [Archive comparison and resource checks](/scripts/test-proof-atlas-let-pools.cjs) · [Browser lifecycle checks](/scripts/test-proof-atlas-let-pools-browser.cjs) · [Shared native context control](/research/proof-atlas/LetReductionControls.lean)
+
+
+<span id="let-premise-types"></span>
+
+## Types of local-definition premises
+
+A recorded let step supplies three occurrence-type observations as well as its computed substitution result. These now use the existing type-expression language: the declared type's inferred type, the value's inferred type and the body's inferred type. The value's declared type is a separate component, linked by the recorded native conversion check. A checked type does not supply an application trace, a lambda rule or a further let reduction for its subject.
+
+The declared type and value keep Γ, before the new binder. The body keeps Γ, x : A := v, including the local definition. Every component retains its source child route, original native query and type-graph root. Direct checked queries take precedence over derived observations at the same path. Premise inspection needs only the checked metadata index; it does not load a computed-result pool. Type-only navigation preserves the selected proof occurrence; source and context jumps select exact original routes.
+
+The 48 released let records contain **144 premise-type observations**, 48 per field. Sixty-five paths were already reachable through primary observations or direct let queries; **79 additional paths** are now available. There are still 48 native let queries, with no new inference or claim of complete type coverage. All 144 types agree with their native fields and exact contexts; the audit checks 336 type scenes and rejects 799 altered-record cases. Declared-type presentations are summaries of the compiled type constructor, rather than invented native pretty text. Value and body type text retain the native presentation. Four of the 48 value judgments have structurally different inferred and declared types; the recorded kernel conversion check relates them, while the diagrams preserve both expressions.
+
+Fresh core-only checks reuse the 17 native examples and 18 queries. Their 54 premises and 72 type scenes include a universe-polymorphic example whose value and body types refer to the same outer type binder at different bound indices, a body type referring to the current let, and one shared let under distinct outer contexts. A body that is itself an unqueried let gets a type observation without acquiring a reduction record. The suite checks 593 computed cuts and 135 rejection controls. Browser checks exercise all 192 parent components, 144 exact child selections, keyboard source/context links and four accessibility configurations, without requesting a result pool.
+
+These results extend exact typed navigation for the stated records. They do not establish new kernel certificates, complete occurrence typing, semantic compression or measured proof-inspection benefits. The general research goal remains active; the blog is unchanged.
+
+[Premise example](/projects/proof-atlas/library/?edition=goedel-sample-4331&proof=lean_workbook_plus_54159&geometry=scoped&fold=binders,applications#expr-6444) · [Observation model](/public/js/proof-atlas-let-reduction.js) · [Type geometry](/public/js/proof-atlas-type-geometry.js) · [Data audit](/scripts/test-proof-atlas-let-premises.cjs) · [Fresh native checks](/research/proof-atlas/verify_let_controls.py) · [Browser checks](/scripts/test-proof-atlas-let-premises-browser.cjs)

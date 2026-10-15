@@ -27,6 +27,7 @@ jobs:
       - run: node scripts/test-proof-atlas-ai-sample.cjs
       - run: node scripts/test-proof-atlas-binding-uses.cjs
       - run: node scripts/test-proof-atlas-let-reductions.cjs
+      - run: node scripts/test-proof-atlas-let-premises.cjs
       - run: node scripts/test-proof-atlas-let-pools.cjs
   constructor-controls:
     runs-on: ubuntu-latest
