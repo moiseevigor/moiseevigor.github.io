@@ -1,0 +1,108 @@
+{
+  "status": "PASS",
+  "declarations": 19,
+  "entries": 20,
+  "cuts": 124,
+  "nativeRootComparisons": 98,
+  "scopeLinkAppearances": 47,
+  "negativeControls": 205,
+  "borrowedComparisonShortcuts": 19,
+  "sharedContexts": 2,
+  "large": [
+    {
+      "name": "AtlasReferenceControl.largeIndependent",
+      "role": "value",
+      "storedSourceNodes": 196617,
+      "templateNodes": 4,
+      "view": {
+        "virtualNodes": 34,
+        "work": 104,
+        "maxNodes": 65536,
+        "maxWork": 131072,
+        "maxDepth": 512
+      },
+      "comparison": {
+        "equal": true,
+        "work": 1,
+        "borrowedShortcuts": 1
+      },
+      "drawnResultRegions": 1,
+      "resultOccurrences": "1"
+    },
+    {
+      "name": "AtlasReferenceControl.largeDependent",
+      "role": "proof",
+      "storedSourceNodes": 196626,
+      "templateNodes": 8,
+      "view": {
+        "virtualNodes": 35,
+        "work": 118,
+        "maxNodes": 65536,
+        "maxWork": 131072,
+        "maxDepth": 512
+      },
+      "comparison": {
+        "equal": true,
+        "work": 6,
+        "borrowedShortcuts": 1
+      },
+      "drawnResultRegions": 13,
+      "resultOccurrences": "2359313"
+    },
+    {
+      "name": "AtlasReferenceControl.largeFunction",
+      "role": "proof",
+      "storedSourceNodes": 196627,
+      "templateNodes": 12,
+      "view": {
+        "virtualNodes": 39,
+        "work": 138,
+        "maxNodes": 65536,
+        "maxWork": 131072,
+        "maxDepth": 512
+      },
+      "comparison": {
+        "equal": true,
+        "work": 9,
+        "borrowedShortcuts": 1
+      },
+      "drawnResultRegions": 9,
+      "resultOccurrences": "2359315"
+    },
+    {
+      "name": "AtlasReferenceControl.largeOpenFunction",
+      "role": "proof",
+      "storedSourceNodes": 196634,
+      "templateNodes": 12,
+      "view": {
+        "virtualNodes": 41,
+        "work": 145,
+        "maxNodes": 65536,
+        "maxWork": 131072,
+        "maxDepth": 512
+      },
+      "comparison": {
+        "equal": true,
+        "work": 9,
+        "borrowedShortcuts": 1
+      },
+      "drawnResultRegions": 9,
+      "resultOccurrences": "2359339"
+    }
+  ],
+  "scope": "Own synthetic native-checked source-reference experiment. No public reader integration, arbitrary source paging, AI benchmark or comprehension claim.",
+  "format": "ProofAtlasSourceReferenceExperiment/1",
+  "nativeVersion": "4.33.1",
+  "sourceSha256": "bd8c982511f7313b1c33a5708ebb4901c522a66fc45ae5ca2aab11066c5ffe8a",
+  "producerSha256": "d4925a33822527c2b9db6fac30b366bd78247e0968d008f879d9fc47ec5a52f4",
+  "changedPacketRejected": true,
+  "implementationSha256": {
+    "research/proof-atlas/ExportSourceReferences.lean": "65ff66a6042a568d0a98f2e407b0b76ad6488c23b5ad2bf96b22e3a4ac4a8a72",
+    "research/proof-atlas/source_reference_view.cjs": "4fded8ac1dc6aff37d96f6ce9efa720e542db668d76e0dbcd6e4d56b9d3ab2a8",
+    "research/proof-atlas/source_reference_validation.cjs": "49521dd2b99dd296c545be288ea38e02a3d208bfea6389e8cc35dc7ce018c1e8",
+    "research/proof-atlas/verify_source_references.py": "58c63ec3fcbc1c7775b28fc12b81dd09d3c7494f6050e4d62bb0a916ca2f3041",
+    "scripts/test-proof-atlas-source-references.cjs": "a48a5b05b35cd597b047b4df19dd03ef9af4bf8c1ca3bd8177ce253272a4761a",
+    "scripts/check-proof-atlas-source-references.cjs": "2b8df72aba2d1c9a735a5883a7fd30bc10daf74f395daaad35e8afafd77a3f1e",
+    "public/js/proof-atlas-geometry-core.js": "f00ffecfbfb7956a04370027e8bcf8f250f7e44cc508589ffa304ae838411240"
+  }
+}
