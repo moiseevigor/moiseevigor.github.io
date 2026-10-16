@@ -39,7 +39,9 @@
    function route(index){const row=rows[index];demand(row,'scan row');const slots=[];let at=row.position;while(queue[at].parent>=0){slots.push(queue[at].slot);at=queue[at].parent;}const result={root:root.root,slots:[...root.slots,...slots.reverse()]};demand(result.slots.length<=512&&A.walk(data,result)===row.node,'scan representative route');return result;}
    return{summary,rows,route};
   }
-  return{edition:c.edition,sha256,file,layout,scan,inventory:c.inventory};
+  function expected(data,record,route,options={}){const use=layout(data,record,route);demand(use&&['complete','partial'].includes(use.status),use?.reason||'no native constructor at this occurrence');const X=node?require('./proof-atlas-constructor-expectations'):host.ProofAtlasConstructorExpectations;demand(X,'expectation module unavailable');return X.derive(c.graph,use.origin.instantiatedTypeRoot,data,record,use,options);}
+  function validateExpected(p,data,record,route){const use=layout(data,record,route);demand(use&&['complete','partial'].includes(use.status),'native constructor layout required');const X=node?require('./proof-atlas-constructor-expectations'):host.ProofAtlasConstructorExpectations;return X.validate(p,c.graph,use.origin.instantiatedTypeRoot,data,record,use);}
+  return{edition:c.edition,sha256,file,layout,scan,expected,validateExpected,inventory:c.inventory};
  }
  async function open(d){demand(d&&hash(d.sha256)&&Number.isInteger(d.decodedBytes)&&d.decodedBytes>0&&d.decodedBytes<=16*1024**2,'descriptor/bounds');const c=await A.compressed(d.file,d.sha256,{maxBytes:16*1024**2,expectedBytes:d.decodedBytes});demand(c.edition===d.edition&&c.producerSha256===d.producerSha256&&c.requestSha256===d.requestSha256,'descriptor identity');return provider(c,d.sha256,d.file);}
  const api={validate,provider,open,telescope,spine};if(node)module.exports=api;else host.ProofAtlasConstructors=api;

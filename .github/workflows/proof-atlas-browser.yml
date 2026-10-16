@@ -50,6 +50,9 @@ on:
       - 'public/js/proof-atlas-type-geometry.js'
       - 'public/js/proof-atlas-type-conversions.js'
       - 'public/data/proof-atlas/level-transport-controls*'
+      - 'public/js/proof-atlas-constructor-expectations.js'
+      - 'scripts/test-proof-atlas-expectations*.cjs'
+      - 'scripts/check-proof-atlas-native-expectations.cjs'
       - 'public/js/proof-atlas-constructors.js'
       - 'public/data/proof-atlas/constructors*'
       - 'public/data/proof-atlas/constructors/**'
@@ -113,6 +116,9 @@ on:
       - '.github/workflows/proof-atlas-browser.yml'
   pull_request:
     paths:
+      - 'public/js/proof-atlas-constructor-expectations.js'
+      - 'scripts/test-proof-atlas-expectations*.cjs'
+      - 'scripts/check-proof-atlas-native-expectations.cjs'
       - 'public/js/proof-atlas-constructors.js'
       - 'public/data/proof-atlas/constructors*'
       - 'public/data/proof-atlas/constructors/**'
@@ -216,6 +222,8 @@ jobs:
           node scripts/test-proof-atlas-application-judgments-browser.cjs
           node scripts/test-proof-atlas-constructors.cjs
           node scripts/test-proof-atlas-constructors-browser.cjs
+          node scripts/test-proof-atlas-expectations.cjs
+          node scripts/test-proof-atlas-expectations-browser.cjs
           node scripts/test-proof-atlas-judgment-geometry.cjs
           node scripts/test-proof-atlas-judgment-geometry-browser.cjs
           node scripts/test-proof-atlas-lambda-judgments.cjs
