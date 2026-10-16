@@ -52,3 +52,5 @@
 .pl-judgment-rule[data-judgment-rule="construction-structure"]>.pl-judgment-premises,.pl-judgment-rule[data-judgment-rule="constructor-reference"]>.pl-judgment-premises{border-bottom-style:dashed}.pl-judgment-rule[data-judgment-rule="construction-structure"]>.pl-judgment-card,.pl-judgment-rule[data-judgment-rule="constructor-reference"]>.pl-judgment-card{border-top-style:dashed}
 .pl-constructor-results{max-height:320px;overflow:auto;padding-left:24px}.pl-constructor-results li{margin:8px 0}
 .pl-judgment-geometry label{display:flex;align-items:center;gap:8px;min-height:44px}
+
+.pl-judgment-rule[data-judgment-rule="projection-structure"]>.pl-judgment-premises{border-bottom-style:dashed}.pl-judgment-rule[data-judgment-rule="projection-structure"]>.pl-judgment-card{border-top-style:dashed}

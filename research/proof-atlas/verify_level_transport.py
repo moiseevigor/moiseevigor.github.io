@@ -22,11 +22,21 @@ x['referenceFixtureSha256']=hashlib.sha256(gzip.decompress((base.parents[1]/'pub
 raw=json.dumps(x,separators=(',',':'),ensure_ascii=False).encode()
 output.write_bytes(raw)
 subprocess.run(['node','scripts/check-proof-atlas-native-level-transport.cjs',str(output)],check=True)
-target=base.parents[1]/'public/data/proof-atlas/level-transport-controls.json.gz'
+# Published generations are immutable; producer-only changes receive a new file.
+manifest=base.parents[1]/'public/data/proof-atlas/level-transport-controls-manifest.js'
 if args.publish:
- target.write_bytes(gzip.compress(raw,mtime=0))
- descriptor={'format':x['format'],'file':'/public/data/proof-atlas/level-transport-controls.json.gz','sha256':hashlib.sha256(raw).hexdigest(),'decodedBytes':len(raw),'sourceSha256':x['sourceSha256'],'leanVersion':x['leanVersion']}
- (target.parent/'level-transport-controls-manifest.js').write_text('window.PROOF_ATLAS_LEVEL_TRANSPORT_CONTROLS = '+json.dumps(descriptor,separators=(',',':'))+';\n')
+ file='/public/data/proof-atlas/level-transport-controls-'+x['sourceSha256']+'.json.gz'
+ target=base.parents[1]/file.lstrip('/')
+ if target.exists():assert gzip.decompress(target.read_bytes())==raw,'Do not overwrite a different frozen generation'
+ else:target.write_bytes(gzip.compress(raw,mtime=0))
+ descriptor={'format':x['format'],'file':file,'sha256':hashlib.sha256(raw).hexdigest(),'decodedBytes':len(raw),'sourceSha256':x['sourceSha256'],'leanVersion':x['leanVersion']}
+ manifest.write_text('window.PROOF_ATLAS_LEVEL_TRANSPORT_CONTROLS = '+json.dumps(descriptor,separators=(',',':'))+';\n')
 else:
- assert json.loads(gzip.decompress(target.read_bytes()))==x,'Native transport fixture changed; regenerate deliberately.'
+ descriptor=json.loads(manifest.read_text().split('=',1)[1].strip().rstrip(';'))
+ assert descriptor['file'].startswith('/public/data/proof-atlas/level-transport-controls')
+ target=base.parents[1]/descriptor['file'].lstrip('/')
+ assert descriptor['sourceSha256']==x['sourceSha256'],'Native transport producer changed; publish a new generation deliberately.'
+ frozen=gzip.decompress(target.read_bytes())
+ assert descriptor['sha256']==hashlib.sha256(frozen).hexdigest() and descriptor['decodedBytes']==len(frozen),'Native transport descriptor changed'
+ assert json.loads(frozen)==x,'Native transport fixture changed; regenerate deliberately.'
 print(json.dumps({'status':'EXTRACTED','file':str(output),'sourceSha256':x['sourceSha256'],'resources':resources}))
