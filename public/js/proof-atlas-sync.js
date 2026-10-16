@@ -69,7 +69,7 @@
    try{if(!window.PROOF_ATLAS_SOURCE_REFERENCES)await script('/public/data/proof-atlas/source-references-manifest.js?v=1');if(!window.ProofAtlasSourceReferenceExamples)await script('/public/js/proof-atlas-source-reference-examples.js?v=1');if(!window.PROOF_ATLAS_LIBRARY.editions.some(e=>e.id==='source-reference-controls'))window.PROOF_ATLAS_LIBRARY=window.ProofAtlasSourceReferenceExamples.register(window.PROOF_ATLAS_LIBRARY,window.PROOF_ATLAS_SOURCE_REFERENCES);}catch(_){/* Optional controls preserve the original inventories. */}
    try{for(const [name,url]of [['ProofAtlasExpressionViews','/public/js/proof-atlas-expression-views.js?v=1'],['ProofAtlasSourceReferences','/public/js/proof-atlas-source-references.js?v=1']])if(!window[name])await script(url);}catch(_){/* Optional source-backed types preserve source navigation. */}
    try{if(!window.PROOF_ATLAS_COMPOSITIONAL_TYPES)await script('/public/data/proof-atlas/compositional-types-manifest.js?v=1');}catch(_){/* Optional type compositions preserve the source reader. */}
-   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=27');
+   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=28');
    if(!$('pl-provenance').closest('details')){const details=document.createElement('details'),summary=document.createElement('summary');summary.textContent='Provenance and axiom dependencies';$('pl-provenance').before(details);details.append(summary,$('pl-provenance'));}
    return window.ProofAtlasLibrary;
   })().catch(e=>{engine=null;throw e;});return engine;

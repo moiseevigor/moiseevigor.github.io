@@ -3,13 +3,18 @@
 const node=typeof module!=='undefined'&&module.exports;
 const A=node?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData,T=node?require('./proof-atlas-occurrence-types'):host.ProofAtlasOccurrenceTypes,G=node?require('./proof-atlas-geometry-core'):host.ProofAtlasGeometry,L=node?require('./proof-atlas-context-views'):host.ProofAtlasContextViews;
 const same=L.same,demand=(x,m)=>{if(!x)throw Error('Context transport: '+m);},key=r=>r.root+':'+r.slots.join('.');
-function candidates(data,route){const ctx=T.context(data,route).binders,out=[],seen=new Set();let truncated=false;
- function add(r,origin){const k=key(r);if(seen.has(k))return;if(r.slots.length>512||out.length===256){truncated=true;return;}seen.add(k);const c=T.context(data,r),sourceContext=c.binders;demand(same(sourceContext,ctx.slice(0,sourceContext.length)),'candidate context not a prefix');out.push({node:c.node,route:r,path:A.path(data,r),sourceContext,lift:ctx.length-sourceContext.length,origin,contextEmbeddingRoundtrip:true});}
- function group(r,origin){if(r.slots.length>512){truncated=true;return;}add(r,origin);let id=A.walk(data,r),slots=[...r.slots];const args=[];for(let j=0;j<Math.min(128,512-r.slots.length)&&data.kind[id]===5;j++){args.unshift({root:r.root,slots:[...slots,1]});id=data.children[id][0];slots.push(0);}for(const a of args)add(a,origin+'-argument');if(data.kind[id]===5)truncated=true;}
- group(route,'selected');const node=A.walk(data,route),kind=data.kind[node],slots=kind===5?[0,1]:kind===6||kind===7||kind===10||kind===11?[0]:kind===8?[0,1]:[];
- for(const j of slots)group({root:route.root,slots:[...route.slots,j]},'selected-child');
- const headers=[];for(const b of ctx){headers.push({root:b.route.root,slots:[...b.route.slots,0]});if(b.kind==='letE')headers.push({root:b.route.root,slots:[...b.route.slots,1]});}for(const r of headers.reverse())group(r,'context-header');
+function candidates(data,route){
+ const ctx=T.context(data,route).binders,out=[],seen=new Set(),prefixes=new Map([[ctx.length,ctx]]);let truncated=false;
+ function prefix(n){demand(Number.isInteger(n)&&n>=0&&n<=ctx.length,'candidate scope prefix');if(!prefixes.has(n))prefixes.set(n,ctx.slice(0,n));return prefixes.get(n);}
+ function add(r,origin,scope){const k=key(r);if(seen.has(k))return;if(r.slots.length>512||out.length===256){truncated=true;return;}seen.add(k);out.push({node:A.walk(data,r),route:r,path:A.path(data,r),sourceContext:prefix(scope),lift:ctx.length-scope,origin,contextEmbeddingRoundtrip:true});}
+ function group(r,origin,scope){if(r.slots.length>512){truncated=true;return;}add(r,origin,scope);let id=A.walk(data,r),slots=[...r.slots];const args=[];for(let j=0;j<Math.min(128,512-r.slots.length)&&data.kind[id]===5;j++){args.unshift({root:r.root,slots:[...slots,1]});id=data.children[id][0];slots.push(0);}for(const a of args)add(a,origin+'-argument',scope);if(data.kind[id]===5)truncated=true;}
+ group(route,'selected',ctx.length);const node=A.walk(data,route),kind=data.kind[node],slots=kind===5?[0,1]:kind===6||kind===7||kind===10||kind===11?[0]:kind===8?[0,1]:[];
+ // These child ports never enter their constructor's binder. Header regions
+ // likewise live in the source context before that header's own binder.
+ for(const j of slots)group({root:route.root,slots:[...route.slots,j]},'selected-child',ctx.length);
+ const headers=[];for(let i=0;i<ctx.length;i++){const b=ctx[i];headers.push({route:{root:b.route.root,slots:[...b.route.slots,0]},scope:i});if(b.kind==='letE')headers.push({route:{root:b.route.root,slots:[...b.route.slots,1]},scope:i});}for(const h of headers.reverse())group(h.route,'context-header',h.scope);
  return{anchors:out,truncated,context:ctx};}
+
 function validate(e,data,record,options={}){demand(e.format==='ProofAtlasContextTransport/1'&&e.namespace==='context-transport'&&e.status==='checked'&&e.kernelOriginalTermTyping==='PASS'&&e.kernelOriginalTypeTyping==='PASS'&&e.templateInstantiationStructuralRoundtrip===true&&e.templatesAreKernelJudgments===false,'native attestation');
  const expected=candidates(data,e.route);demand(e.node===A.walk(data,e.route)&&e.path===A.path(data,e.route)&&same(e.context,expected.context)&&same(e.anchors,expected.anchors)&&e.anchorCollectorTruncated===expected.truncated,'source candidates/context/lifting');demand(e.roots.length===3,'three original roots');T.validateExpressionGraph(e.templateGraph,e.roots,e.context.length+e.anchors.length,32768);
  const embedded=L.sourceViews(data,e.anchors,e.context.length),view=L.instantiate(e.templateGraph,e.roots[0],embedded.graph,embedded.roots,e.context.length,{roots:e.roots});const compare=L.equal(view.graph,view.roots[0],data,e.node);demand(compare.equal,'selected term reconstruction');
