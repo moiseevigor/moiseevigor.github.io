@@ -1,0 +1,63 @@
+{
+  "format": "ProofAtlasCompositionalTransportResults/1",
+  "scope": "Self-contained native controls and selected published own synthetic terms; no all-context typing, AI-proof scale or human-comprehension result.",
+  "leanVersion": "4.33.1",
+  "nativeControls": {
+    "declarations": 20,
+    "queries": 113,
+    "independentTypeComparisons": 108,
+    "boundedCuts": 4541,
+    "borrowedBindingChecks": 6974,
+    "rejectedControls": 1023,
+    "mappingPointChecks": 32000,
+    "binderInfos": [
+      "default",
+      "implicit",
+      "instImplicit",
+      "strictImplicit"
+    ],
+    "universeParameters": [
+      "u",
+      "v"
+    ],
+    "prefix64": "PASS",
+    "prefix65": "EXPLICIT_NATIVE_BOUND",
+    "declarationWithoutBody": "EXPECTED_REJECTION"
+  },
+  "readerPackages": {
+    "status": "PASS",
+    "packages": 19,
+    "queries": 44,
+    "storedLambdas": 27,
+    "storedLambdasWithRepresentative": 27,
+    "nativeDeclaredTypeConversions": 19,
+    "exactDeclaredTypeSyntax": 4,
+    "cuts": 71,
+    "sourceJumpAppearances": 182,
+    "negativeControls": 169,
+    "retainedPreparedRecords": 1
+  },
+  "nativeReaderReplay": {
+    "status": "PASS",
+    "declarations": 19,
+    "queries": 44,
+    "allFormalFieldsMatch": true,
+    "nativeDeclaredTypeConversions": 19,
+    "presentationTextsMatching": 44
+  },
+  "sourceSha256": {
+    "context": "77cb9bdf76c107ccc4634ad2238c5d6842e922db58ccbea2e981149ba02edb6c",
+    "scope": "4531634dddafa2acac64d3b5af3a2d249184ae827903f8947d85d5da9210403b"
+  },
+  "extractorSha256": {
+    "ExportContextTransport.lean": "6893a699f3528e852ad15aef450879f9813f877e75188a51f29e9a8a3a834a26",
+    "ExportIntroductionTransport.lean": "c9ca3697d8b3d03d9afb1342a196151b205cd8240e0d5534222303f983a716bb"
+  },
+  "limits": [
+    "64 introductions per native record",
+    "Bounded terminal templates",
+    "Original source packet loaded in full",
+    "Other contexts retain source structure",
+    "No general application-stage source transport"
+  ]
+}
