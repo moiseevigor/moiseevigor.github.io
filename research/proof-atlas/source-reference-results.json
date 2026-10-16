@@ -1,0 +1,114 @@
+{
+  "status": "PASS",
+  "declarations": 19,
+  "entries": 20,
+  "cuts": 124,
+  "nativeRootComparisons": 98,
+  "publicReplay": 19,
+  "scopeLinkAppearances": 47,
+  "negativeControls": 205,
+  "borrowedComparisonShortcuts": 19,
+  "sharedContexts": 2,
+  "large": [
+    {
+      "name": "AtlasReferenceControl.largeIndependent",
+      "role": "value",
+      "storedSourceNodes": 196617,
+      "templateNodes": 4,
+      "view": {
+        "virtualNodes": 34,
+        "work": 104,
+        "maxNodes": 65536,
+        "maxWork": 131072,
+        "maxDepth": 512
+      },
+      "comparison": {
+        "equal": true,
+        "work": 1,
+        "borrowedShortcuts": 1
+      },
+      "drawnResultRegions": 1,
+      "resultOccurrences": "1"
+    },
+    {
+      "name": "AtlasReferenceControl.largeDependent",
+      "role": "proof",
+      "storedSourceNodes": 196626,
+      "templateNodes": 8,
+      "view": {
+        "virtualNodes": 35,
+        "work": 118,
+        "maxNodes": 65536,
+        "maxWork": 131072,
+        "maxDepth": 512
+      },
+      "comparison": {
+        "equal": true,
+        "work": 6,
+        "borrowedShortcuts": 1
+      },
+      "drawnResultRegions": 13,
+      "resultOccurrences": "2359313"
+    },
+    {
+      "name": "AtlasReferenceControl.largeFunction",
+      "role": "proof",
+      "storedSourceNodes": 196627,
+      "templateNodes": 12,
+      "view": {
+        "virtualNodes": 39,
+        "work": 138,
+        "maxNodes": 65536,
+        "maxWork": 131072,
+        "maxDepth": 512
+      },
+      "comparison": {
+        "equal": true,
+        "work": 9,
+        "borrowedShortcuts": 1
+      },
+      "drawnResultRegions": 9,
+      "resultOccurrences": "2359315"
+    },
+    {
+      "name": "AtlasReferenceControl.largeOpenFunction",
+      "role": "proof",
+      "storedSourceNodes": 196634,
+      "templateNodes": 12,
+      "view": {
+        "virtualNodes": 41,
+        "work": 145,
+        "maxNodes": 65536,
+        "maxWork": 131072,
+        "maxDepth": 512
+      },
+      "comparison": {
+        "equal": true,
+        "work": 9,
+        "borrowedShortcuts": 1
+      },
+      "drawnResultRegions": 9,
+      "resultOccurrences": "2359339"
+    }
+  ],
+  "scope": "Own synthetic native-checked source-reference controls. Published sidecar/browser checks are separate. No arbitrary source paging, AI benchmark or comprehension claim.",
+  "format": "ProofAtlasSourceReferenceExperiment/2",
+  "nativeVersion": "4.33.1",
+  "sourceSha256": "bd8c982511f7313b1c33a5708ebb4901c522a66fc45ae5ca2aab11066c5ffe8a",
+  "producerSha256": "1e8f5ea52a1588ca0db858189dff873a631582e011a273b90c18b0dae62536e4",
+  "changedPacketRejected": true,
+  "implementationSha256": {
+    "research/proof-atlas/ExportSourceReferences.lean": "36e302a9656b5a247d0701e84149429ace630cead0b7223ea19975daedd0ef8d",
+    "public/js/proof-atlas-expression-views.js": "7e83c140fb17b56d75c87f50bd21ca7406db1703524e7115c070ae019c30e958",
+    "public/js/proof-atlas-source-references.js": "f4461527f3a6b23449c71026509eef4b182b98d64af8cd3ffe1911997e5aac8b",
+    "research/proof-atlas/source_reference_view.cjs": "0b6eb46a2cb06d7c60b123b1e221b8fb3e3e1d5d5d917a7608344a1de81bda2f",
+    "research/proof-atlas/source_reference_validation.cjs": "1b071623360ff7735576788dea4f63ec0e15bfefce090b0a1d60a8d3cc1656eb",
+    "research/proof-atlas/verify_source_references.py": "eef3222f81b5597f45b9f78fb0185afbf667394d8ece76d02f9ddb2cec365f3f",
+    "scripts/check-proof-atlas-source-references.cjs": "d4334b6214099b2342bab0abff9aebe3d8af44c1cca514396041fa245d5c73b9",
+    "scripts/test-proof-atlas-source-references.cjs": "a48a5b05b35cd597b047b4df19dd03ef9af4bf8c1ca3bd8177ce253272a4761a",
+    "scripts/test-proof-atlas-source-reference-packages.cjs": "f4f76c30c5a6f3cdd5c26d94ac0eede2587ef3f148a56b5f1e9c8409e1bfaec9",
+    "scripts/test-proof-atlas-reference-loading.cjs": "26d4bc4fc7ed7639d162306e3acf65e34ba68e246773ba920aa998b15049f15e",
+    "scripts/test-proof-atlas-source-references-browser.cjs": "2d6c6238e138fbd9788d0cd008782724552965a409adf587caa31938908281de",
+    "public/js/proof-atlas-geometry-core.js": "f00ffecfbfb7956a04370027e8bcf8f250f7e44cc508589ffa304ae838411240"
+  }
+}

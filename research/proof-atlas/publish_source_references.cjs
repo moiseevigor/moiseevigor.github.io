@@ -1,0 +1,22 @@
+/* Immutable compiled sidecars and own synthetic term packets only. */
+'use strict';
+const fs=require('fs'),path=require('path'),z=require('zlib'),crypto=require('crypto'),assert=require('assert/strict'),R=require('../../public/js/proof-atlas-source-references'),A=require('../../public/js/proof-atlas-library-data');
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex'),[batchesFile,controlsFolder]=process.argv.slice(2),descriptors=[],declarations=[],counts={};let compressedBytes=0;
+function write(file,bytes){const target='.'+file;fs.mkdirSync(path.dirname(target),{recursive:true});if(fs.existsSync(target))assert(fs.readFileSync(target).equals(bytes),'Immutable asset differs: '+file);else fs.writeFileSync(target,bytes);}
+function publish(pkg,data,record){for(const e of pkg.entries){e.templateSha256=sha(JSON.stringify(e.templateGraph));e.metadataSha256=sha(JSON.stringify(e.metadataGraph));}
+ const bytes=Buffer.from(JSON.stringify(pkg)),hash=sha(bytes),file='/public/data/proof-atlas/source-references/'+pkg.source.edition+'/'+hash+'.json.gz',gzip=z.gzipSync(bytes,{level:9});
+ const checked=R.provider(pkg,data,{...record,...pkg.source},hash,file);write(file,gzip);descriptors.push({...pkg.source,file,sha256:hash,decodedBytes:bytes.length,checked:checked.checked,routes:pkg.entries.map(e=>e.route),producerSha256:pkg.producerSha256,requestSha256:pkg.requestSha256});compressedBytes+=gzip.length;
+}
+if(batchesFile!=='-')for(const batch of JSON.parse(fs.readFileSync(batchesFile))){const queries=JSON.parse(fs.readFileSync(batch.file));for(const pkg of JSON.parse(fs.readFileSync(batch.output))){const q=queries.find(q=>q.source.name===pkg.source.name),bytes=fs.readFileSync(q.packetFile);assert.equal(sha(bytes),pkg.source.indexSha256);const data=JSON.parse(bytes);publish(pkg,data,data.declaration);}}
+const queries=JSON.parse(fs.readFileSync(path.join(controlsFolder,'requests.json'))),pkgs=JSON.parse(fs.readFileSync(path.join(controlsFolder,'references.json')));let sourceSha256;
+for(const q of queries){const original=fs.readFileSync(q.packetFile),data=JSON.parse(original),record=data.declaration;A.validateIndex(data,record);assert.equal(sha(original),q.source.indexSha256);sourceSha256=record.sourceSha256;
+ const raw=Buffer.from(JSON.stringify(data)),hash=sha(raw),file='/public/data/proof-atlas/source-reference-controls/'+hash+'.json.gz',gzip=z.gzipSync(raw,{level:9});
+ // Bind each public sidecar to precisely the bytes used in native extraction.
+ assert.equal(hash,q.source.indexSha256);write(file,gzip);declarations.push({...record,file,indexFile:file,sha256:hash,indexSha256:hash,gzipSha256:sha(gzip)});
+ const weights=Array(data.kind.length).fill(0n);for(const r of data.roots)weights[r]++;for(let i=weights.length-1;i>=0;i--){counts[A.kinds[data.kind[i]]]=(counts[A.kinds[data.kind[i]]]||0n)+weights[i];for(const c of data.children[i])weights[c]+=weights[i];}
+ const pkg=pkgs.find(p=>p.source.name===record.name);publish(pkg,data,record);
+}
+const edition={id:'source-reference-controls',label:'Source-backed type controls',modulePrefix:'Reference',modules:{Fixture:{declarations:declarations.length}},edges:[],counts:{modules:1,declarations:declarations.length,theorems:declarations.filter(r=>r.kind==='theorem').length,bodies:declarations.length,uniqueNodes:declarations.reduce((n,r)=>n+r.uniqueNodes,0),constructors:Object.fromEntries(Object.entries(counts).map(([k,n])=>[k,n.toString()])),occurrences:declarations.reduce((n,r)=>n+BigInt(r.occurrences),0n).toString()},declarations};
+const result={format:'ProofAtlasSourceReferenceInventory/1',coverage:'One native checked representative per stored projection in the four frozen inventories, plus the explicitly selected own synthetic controls. Other occurrence contexts and unqueried syntax retain their original source layout.',records:descriptors,edition,provenance:{kind:'assistant-authored-synthetic-controls',sourceSha256,scope:'Predetermined small controls, large shared annotations and four large stored operands. Not an AI theorem-solving or comprehension benchmark.'}};
+fs.writeFileSync('public/data/proof-atlas/source-references-manifest.js','window.PROOF_ATLAS_SOURCE_REFERENCES='+JSON.stringify(result)+';\n');
+console.log(JSON.stringify({status:'PASS',packages:descriptors.length,queries:descriptors.reduce((n,r)=>n+r.checked,0),syntheticPackets:declarations.length,compressedMetadataBytes:compressedBytes}));

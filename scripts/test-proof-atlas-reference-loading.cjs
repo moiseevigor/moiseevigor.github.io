@@ -1,0 +1,11 @@
+'use strict';
+const fs=require('fs'),vm=require('vm'),z=require('zlib'),assert=require('assert/strict'),A=require('../public/js/proof-atlas-library-data'),R=require('../public/js/proof-atlas-source-references'),w={};vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/source-references-manifest.js','utf8'),{window:w});
+const inv=w.PROOF_ATLAS_SOURCE_REFERENCES,record=inv.edition.declarations.find(r=>r.name==='AtlasProjectionControl.Base.value'),d=inv.records.find(r=>r.edition===inv.edition.id&&r.name===record.name),data=JSON.parse(z.gunzipSync(fs.readFileSync('.'+record.file))),pkg=JSON.parse(z.gunzipSync(fs.readFileSync('.'+d.file)));
+(async()=>{const original=A.compressed;let active=0,peak=0,loads=0;const releases=[];
+ try{A.compressed=(_,__,options)=>new Promise((resolve,reject)=>{loads++;active++;peak=Math.max(peak,active);let settled=false;const complete=(error,value)=>{if(settled)return;settled=true;active--;options.signal?.removeEventListener('abort',cancel);error?reject(error):resolve(value);},cancel=()=>complete(Error('cancelled'));options.signal?.addEventListener('abort',cancel,{once:true});releases.push(()=>complete(null,pkg));});
+  const first=new AbortController(),second=new AbortController(),p1=R.open(d,data,record,{signal:first.signal}),r1=assert.rejects(p1),p2=R.open(d,data,record,{signal:second.signal}),r2=assert.rejects(p2);second.abort();await r2;assert.equal(loads,1);const p3=R.open(d,data,record);first.abort();await r1;await new Promise(resolve=>setImmediate(resolve));assert.equal(loads,2);assert.equal(peak,1);releases.at(-1)();assert.equal((await p3).checked,1);assert.equal(R.state().activeLoad,false);
+  const prior=loads,cancelled=new AbortController();cancelled.abort();await assert.rejects(R.open(d,data,record,{signal:cancelled.signal}));assert.equal(loads,prior);
+  A.compressed=async()=>{const bad=structuredClone(pkg);bad.entries[0].templateSha256='0'.repeat(64);return bad;};await assert.rejects(R.open(d,data,record),/template\/metadata hash/);assert.equal(R.state().activeLoad,false);
+  console.log(JSON.stringify({status:'PASS',peakActiveDecodes:peak,abortedWaiterDoesNotLoad:true,activeAbortReleased:true,nextLoadCompletes:true,preAbortedDoesNotLoad:true,corruptTemplateHashRejected:true}));
+ }finally{A.compressed=original;}
+})().catch(e=>{console.error(e);process.exit(1)});
