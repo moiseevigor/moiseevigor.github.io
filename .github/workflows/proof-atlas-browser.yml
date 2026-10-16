@@ -53,6 +53,12 @@ on:
       - 'public/js/proof-atlas-constructor-expectations.js'
       - 'scripts/test-proof-atlas-expectations*.cjs'
       - 'scripts/check-proof-atlas-native-expectations.cjs'
+      - 'public/js/proof-atlas-projections.js'
+      - 'public/data/proof-atlas/projections*'
+      - 'public/data/proof-atlas/projections/**'
+      - 'scripts/test-proof-atlas-projections*.cjs'
+      - 'scripts/test-proof-atlas-projection-loading.cjs'
+      - 'scripts/check-proof-atlas-native-projections.cjs'
       - 'public/js/proof-atlas-constructors.js'
       - 'public/data/proof-atlas/constructors*'
       - 'public/data/proof-atlas/constructors/**'
@@ -119,6 +125,12 @@ on:
       - 'public/js/proof-atlas-constructor-expectations.js'
       - 'scripts/test-proof-atlas-expectations*.cjs'
       - 'scripts/check-proof-atlas-native-expectations.cjs'
+      - 'public/js/proof-atlas-projections.js'
+      - 'public/data/proof-atlas/projections*'
+      - 'public/data/proof-atlas/projections/**'
+      - 'scripts/test-proof-atlas-projections*.cjs'
+      - 'scripts/test-proof-atlas-projection-loading.cjs'
+      - 'scripts/check-proof-atlas-native-projections.cjs'
       - 'public/js/proof-atlas-constructors.js'
       - 'public/data/proof-atlas/constructors*'
       - 'public/data/proof-atlas/constructors/**'
@@ -222,6 +234,9 @@ jobs:
           node scripts/test-proof-atlas-application-judgments-browser.cjs
           node scripts/test-proof-atlas-constructors.cjs
           node scripts/test-proof-atlas-constructors-browser.cjs
+          node scripts/test-proof-atlas-projections.cjs
+          node scripts/test-proof-atlas-projection-loading.cjs
+          node scripts/test-proof-atlas-projections-browser.cjs
           node scripts/test-proof-atlas-expectations.cjs
           node scripts/test-proof-atlas-expectations-browser.cjs
           node scripts/test-proof-atlas-judgment-geometry.cjs

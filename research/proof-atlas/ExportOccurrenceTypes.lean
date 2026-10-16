@@ -330,6 +330,71 @@ def eliminationJudgment (original term type : Expr) (xs : Array Expr) (shared in
   ("kernelCoreTyping",str "PASS"),("kernelCoreTypeConversion",str "PASS"),("kernelTermConversion",str "PASS"),
   ("wrapperStructuralMatch",toJson true),("typeAbstractionRoundtrip",toJson true),("textIsPresentation",toJson true)],types)
 
+/- Kernel Expr.proj is a field elimination, not a named-function heuristic. -/
+def projectionJudgment (original term type : Expr) (xs : Array Expr) (shared initial : Shared)
+    (root : Nat) (slots : Array Nat) (path : String) : MetaM (Json × Shared) := do
+ let .proj structName index structTerm := term | throwError "Projection required"
+ let .proj originalName originalIndex originalStruct := original | throwError "Source projection required"
+ unless structName == originalName && index == originalIndex do throwError "Projection source identity"
+ let inputType ← kernelType structTerm
+ let normalized ← whnf inputType
+ let .const family levels := normalized.getAppFn | throwError "Projection structure family"
+ unless family == structName do throwError "Projection family differs from structure type"
+ let params := normalized.getAppArgs
+ let ind ← getConstInfoInduct structName
+ unless ind.ctors.length == 1 && ind.numIndices == 0 && params.size == ind.numParams do
+  throwError "Single-constructor unindexed projection family required"
+ let ctor ← getConstInfoCtor ind.ctors.head!
+ unless !ind.isUnsafe && !ctor.isUnsafe && index < ctor.numFields && ctor.numParams+ctor.numFields <= 256 do throwError "Projection field bound"
+ let nativeCtorType ← kernelType (mkConst ctor.name levels)
+ let mut expected := nativeCtorType
+ let mut types := initial
+ let mut parameterRoots : Array Nat := #[]
+ for param in params do
+  let .forallE _ domain body _ := expected | throwError "Constructor parameter telescope"
+  kernelAs param domain
+  let (r,next) ← internScoped param xs types 32768
+  types := next; parameterRoots := parameterRoots.push r
+  expected := body.instantiate1 param
+ let mut previous : Array Nat := #[]
+ for j in [:index] do
+  let .forallE _ domain body _ := expected | throwError "Constructor field telescope"
+  let value := Expr.proj structName j structTerm
+  kernelAs value domain
+  let (r,next) ← internScoped value xs types 32768
+  types := next; previous := previous.push r
+  expected := body.instantiate1 value
+ let .forallE fieldName domain _ binderInfo := expected | throwError "Selected field telescope"
+ kernelAs structTerm normalized
+ kernelAs term domain
+ let (inputRoot,next) ← internScoped inputType xs types 32768
+ let (normalizedRoot,next) ← internScoped normalized xs next 32768
+ let (expressionRoot,next) ← internScoped structTerm xs next 32768
+ let (expectedRoot,next) ← internScoped domain xs next 32768
+ let (resultRoot,next) ← internScoped type xs next 32768
+ let (ctorRoot,signatureTable) := intern ctor.type {}
+ let (instanceRoot,signatureTable) := intern nativeCtorType signatureTable
+ unless signatureTable.kind.size <= 32768 do throwError "Projection metadata bound"
+ return (obj [("format",str "ProofAtlasProjection/1"),("status",str "checked"),
+  ("method",str "native-kernel-field-telescope/1"),("family",str structName.toString),
+  ("familyNameParts",toJson (nameParts structName)),("index",nat index),("position",nat (index+1)),
+  ("parameters",nat ctor.numParams),("fields",nat ctor.numFields),("fieldName",str fieldName.toString),
+  ("binderInfo",str (AtlasLibrary.bi binderInfo)),("levels",toJson (levels.map AtlasLibrary.level)),
+  ("constructor",str ctor.name.toString),("constructorNameParts",toJson (nameParts ctor.name)),
+  ("nativeConstructor",obj [("kind",str "ctorInfo"),("name",str ctor.name.toString),
+   ("nameParts",toJson (nameParts ctor.name)),("inductive",str ctor.induct.toString),
+   ("index",nat ctor.cidx),("parameters",nat ctor.numParams),("fields",nat ctor.numFields),("unsafe",toJson ctor.isUnsafe)]),
+  ("constructorTypeRoot",nat ctorRoot),("instantiatedConstructorTypeRoot",nat instanceRoot),
+  ("metadataGraph",graphJson signatureTable),("parameterRoots",toJson parameterRoots),("previousProjectionRoots",toJson previous),
+  ("structure",obj [("node",nat (← sourceId shared originalStruct)),("path",str (path++".struct")),
+   ("route",routeJson root (slots.push 0)),("expressionRoot",nat expressionRoot),
+   ("typeRoot",nat inputRoot),("normalizedTypeRoot",nat normalizedRoot),("role",str (← role inputType)),
+   ("typeText",str (← prettyType inputType))]),
+  ("expectedRoot",nat expectedRoot),("resultRoot",nat resultRoot),("expectedText",str (← prettyType domain)),
+  ("kernelStructureConversion",str "PASS"),("kernelFieldConversion",str "PASS"),
+  ("kernelConstructorTyping",str "PASS"),("kernelPrecedingFields",str "PASS"),("kernelParameters",str "PASS"),
+  ("kernelProjectionTyping",str "PASS"),("typeAbstractionRoundtrip",toJson true),("textIsPresentation",toJson true)],next)
+
 def inspect (original term : Expr) (xs : Array Expr) (context : Array Json) (shared : Shared)
     (root : Nat) (slots : Array Nat) (path : String) : MetaM Json := do
  let type ← kernelType term
@@ -401,6 +466,15 @@ def inspect (original term : Expr) (xs : Array Expr) (context : Array Json) (sha
    logInfo m!"Elimination record unavailable at {path}: {ex.toMessageData}"
    application := application.push ("eliminationJudgment",obj [("status",str "unavailable"),
     ("reason",str "Recursor adapter, rule inventory, application arity or native checks are unsupported")])
+ if let .proj .. := term then
+  try
+   let (judgment,s) ← projectionJudgment original term type xs shared types root slots path
+   types := s
+   application := application.push ("projectionJudgment",judgment)
+  catch ex =>
+   logInfo m!"Projection trace unavailable at {path}: {ex.toMessageData}"
+   application := application.push ("projectionJudgment",obj [("status",str "unavailable"),
+    ("reason",str "Projection family, field telescope or native checks are unsupported")])
  let text ← withOptions (fun o => ((o.set `pp.maxDepth (12 : Nat)).set `pp.maxSteps (5000 : Nat)).set `pp.width (80 : Nat)) do
   return (← ppExpr type).pretty
  return obj ([("status",str "checked"),("kernelCheck",str "PASS"),("contextWellFormed",toJson true),("typeAbstractionRoundtrip",toJson true),("node",nat (← sourceId shared original)),

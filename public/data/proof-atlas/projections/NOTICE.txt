@@ -1,0 +1,9 @@
+Proof Atlas native projection evidence
+
+Compiled expressions, native kernel typing/conversion attestations and declaration metadata only. Original project source files, tactic scripts, requests and execution logs are not included.
+
+The published-15 and working-26 records are tied to their existing public packet hashes, source-module hashes and separately recorded compiled environments. Each stored Expr.proj has one exact representative route; other lexical occurrences do not inherit its typing record. Native lambda/application ancestors are included to compose those selected paths.
+
+The recursion-controls records come from the assistant-authored deterministic fixture already published with Proof Atlas. Its six projection-bearing packets can be replayed with research/proof-atlas/verify_projection_replay.py. Compiler/build digests and request paths are environment-relative. These packages are native extraction attestations, not portable proof certificates or article equivalences.
+
+The Goedel AI-source sample has no stored Expr.proj nodes. Named projection functions and wrappers are ordinary applications unless their actual kernel bodies are opened; no classification is made from their names.
