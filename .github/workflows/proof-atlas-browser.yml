@@ -56,6 +56,10 @@ on:
       - 'public/js/proof-atlas-context-*.js'
       - 'public/js/proof-atlas-introduction-transport.js'
       - 'public/js/proof-atlas-compositional-types.js'
+      - 'public/js/proof-atlas-application-types.js'
+      - 'public/js/proof-atlas-application-transport.js'
+      - 'public/data/proof-atlas/application-types*'
+      - 'public/data/proof-atlas/application-types/**'
       - 'public/data/proof-atlas/compositional-types*'
       - 'public/data/proof-atlas/compositional-types/**'
       - 'scripts/test-proof-atlas-composition*.cjs'
@@ -142,6 +146,10 @@ on:
       - 'public/js/proof-atlas-context-*.js'
       - 'public/js/proof-atlas-introduction-transport.js'
       - 'public/js/proof-atlas-compositional-types.js'
+      - 'public/js/proof-atlas-application-types.js'
+      - 'public/js/proof-atlas-application-transport.js'
+      - 'public/data/proof-atlas/application-types*'
+      - 'public/data/proof-atlas/application-types/**'
       - 'public/data/proof-atlas/compositional-types*'
       - 'public/data/proof-atlas/compositional-types/**'
       - 'scripts/test-proof-atlas-composition*.cjs'
@@ -269,8 +277,11 @@ jobs:
           node scripts/test-proof-atlas-reference-loading.cjs
           node scripts/test-proof-atlas-source-references-browser.cjs
           node scripts/test-proof-atlas-compositional-types.cjs
+          node scripts/test-proof-atlas-application-types.cjs
+          node scripts/test-proof-atlas-application-type-loading.cjs
           node scripts/test-proof-atlas-composition-loading.cjs
           node scripts/test-proof-atlas-compositional-types-browser.cjs
+          node scripts/test-proof-atlas-application-types-browser.cjs
           node scripts/test-proof-atlas-expectations.cjs
           node scripts/test-proof-atlas-expectations-browser.cjs
           node scripts/test-proof-atlas-judgment-geometry.cjs

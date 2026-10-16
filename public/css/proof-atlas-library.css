@@ -58,3 +58,5 @@
 .pl-source-reference-types button,.pl-library .pl-reference-toggle{min-height:44px}
 
 #pl-composed-type :is(button,summary,pre,svg){scroll-margin-block-start:96px}
+
+.pl-source-application-type,.pl-source-application-type :is(button,select,summary,pre,svg){scroll-margin-block-start:96px}.pl-source-application-type :is(button,select){min-height:44px}
