@@ -65,7 +65,7 @@
     if(!window.ProofAtlasElimination)await script('/public/js/proof-atlas-elimination.js?v=3');
    }catch(_){/* Optional elimination evidence must not block the original reader. */}
    try{if(!window.ProofAtlasBindingUses&&window.ProofAtlasRecursiveInputs)await script('/public/js/proof-atlas-binding-uses.js?v=1');}catch(_){/* Optional reference counts do not block the source reader. */}
-   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=22');
+   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=23');
    if(!$('pl-provenance').closest('details')){const details=document.createElement('details'),summary=document.createElement('summary');summary.textContent='Provenance and axiom dependencies';$('pl-provenance').before(details);details.append(summary,$('pl-provenance'));}
    return window.ProofAtlasLibrary;
   })().catch(e=>{engine=null;throw e;});return engine;
