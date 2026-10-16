@@ -359,7 +359,7 @@ Source, recorded-type, conversion-endpoint and computed-result inspectors reuse 
 <link rel="stylesheet" href="/public/css/proof-atlas-library.css?v=14">
 <details id="pa-universe-controls"><summary>Native universe reference controls · synthetic</summary><p>The large shared input is a structural example. These controls are separate from the proof corpus.</p><button type="button">Load native universe controls</button><div data-universe-controls hidden></div></details>
 <script src="/public/data/proof-atlas/universe-controls-manifest.js?v=1" defer></script>
-<script src="/public/data/proof-atlas/level-transport-controls-manifest.js?v=1" defer></script>
+<script src="/public/data/proof-atlas/level-transport-controls-manifest.js?v=2" defer></script>
 <script src="/public/js/proof-atlas-universe-controls.js?v=2" defer></script>
 
 [Source example](/projects/proof-atlas/library/?edition=recursion-controls&proof=AtlasExamples.Sized.cons.elim&geometry=scoped&fold=binders,applications#expr-79) · [Universe model and renderer](/public/js/proof-atlas-universes.js) · [Source-field audit](/scripts/test-proof-atlas-universes.cjs) · [Native controls and reproduction](/research/proof-atlas/verify_universe_controls.py)
