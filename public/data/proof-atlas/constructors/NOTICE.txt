@@ -1,0 +1,18 @@
+Proof Atlas native constructor catalogues
+
+Compiled declaration metadata for Lean 4.33.1 and the four source inventories in
+library-manifest.js, goedel-sample-manifest.js and recursion-examples-manifest.js.
+Original project source scripts and resource logs are not included.
+
+Each catalogue records its producer hash, complete constant-inventory request
+hash, source packet identities and native environment. The project and released
+AI-source environments retain their recorded compiled dependency revisions.
+The recursion catalogue derives from the assistant-authored public fixture
+research/proof-atlas/recursion_fixture_source.py. Its catalogue can be replayed
+without the private projects. Fresh independent controls are in
+research/proof-atlas/verify_constructor_controls.py.
+
+Lean source and release: https://github.com/leanprover/lean4/tree/v4.33.1
+Existing corpus provenance and third-party notices remain in the corresponding
+public/data/proof-atlas inventories. These declaration catalogues do not grant
+additional rights to original private project source code.
