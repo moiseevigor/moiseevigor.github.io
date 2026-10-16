@@ -54,9 +54,18 @@ run_cmd do
  for name in names do
   let info ← getConstInfo name
   let some value := info.value? true | throwError "No fixture value"
+  for e in [info.type,value,mkApp (mkLambda `atlasDeclaredType .default info.type (.bvar 0)) value] do
+   match Kernel.check (← getEnv) {} e with
+   | .ok _ => pure ()
+   | .error _ => throwError "Fixture kernel/type conversion rejected"
+  let axioms ← collectAxioms name
+  let typeText ← liftTermElabM <| withOptions (fun o => (o.set `pp.maxDepth (6 : Nat)).set `pp.maxSteps (1000 : Nat)) do
+   return (← ppExpr info.type).pretty
   let (t,s) := AtlasLibrary.intern info.type {}
   let (v,s) := AtlasLibrary.intern value s
-  let packet := Json.mkObj [("declaration",Json.mkObj [("name",toJson name.toString),("rootPaths",toJson #["root.type","root.value"])]),
+  let packet := Json.mkObj [("declaration",Json.mkObj [("name",toJson name.toString),("rootPaths",toJson #["root.type","root.value"]),
+   ("kernelCheck",toJson "PASS"),("kind",toJson (AtlasLibrary.kind info)),("type",toJson typeText),
+   ("levelParams",toJson (info.levelParams.map Name.toString)),("axioms",toJson (axioms.map Name.toString))]),
    ("roots",toJson #[t,v]),("kind",toJson s.kind),("children",toJson s.children),("payloads",toJson s.payloads),
    ("expanded",toJson (s.expanded.map (toString ·))),("neededScope",toJson s.neededScope)]
   let file := "FOLDER/"++name.toString++".json"
@@ -108,6 +117,27 @@ def main():
     queries = json.loads(request.read_text())
     for q in queries:
         data = json.loads(Path(q['packetFile']).read_bytes())
+        decl = data['declaration']
+        assert decl['kernelCheck'] == 'PASS'
+        decl.update(module='ReferenceFixture', sourceSha256=source_sha, bodyAvailable=True, unsafe=False, partial=False,
+                    rules=[], sourceRange=None, articleAnchor=None, uniqueNodes=len(data['kind']),
+                    occurrences=str(sum(int(data['expanded'][r]) for r in data['roots'])),
+                    typeOccurrences=data['expanded'][data['roots'][0]], proofOccurrences=data['expanded'][data['roots'][1]])
+        weights = [0]*len(data['kind'])
+        for root in data['roots']:
+            weights[root] += 1
+        for i in range(len(weights)-1, -1, -1):
+            for c in data['children'][i]:
+                weights[c] += weights[i]
+        dependencies = {}
+        for i, kind in enumerate(data['kind']):
+            if kind == 4:
+                name = data['payloads'][i]['name']
+                dependencies[name] = dependencies.get(name, 0)+weights[i]
+        decl['references'] = sorted(dependencies)
+        data['dependencies'] = [dict(name=n, count=str(c), local=False) for n,c in sorted(dependencies.items())]
+        data['serialization'] = 'ExprDAG/1'
+        Path(q['packetFile']).write_text(json.dumps(data, ensure_ascii=False, separators=(',', ':')))
         q['source'] = dict(edition='source-reference-controls', name=data['declaration']['name'], indexSha256=sha(Path(q['packetFile']).read_bytes()), sourceSha256=source_sha)
     request.write_text(json.dumps(queries, separators=(',', ':')))
     small_request = folder/'small-requests.json'

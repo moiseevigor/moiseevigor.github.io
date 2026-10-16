@@ -54,3 +54,5 @@
 .pl-judgment-geometry label{display:flex;align-items:center;gap:8px;min-height:44px}
 
 .pl-judgment-rule[data-judgment-rule="projection-structure"]>.pl-judgment-premises{border-bottom-style:dashed}.pl-judgment-rule[data-judgment-rule="projection-structure"]>.pl-judgment-card{border-top-style:dashed}
+
+.pl-source-reference-types button,.pl-library .pl-reference-toggle{min-height:44px}

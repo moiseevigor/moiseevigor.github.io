@@ -1,0 +1,18 @@
+'use strict';
+const fs=require('fs'),z=require('zlib'),vm=require('vm'),crypto=require('crypto'),assert=require('assert/strict'),A=require('../public/js/proof-atlas-library-data'),R=require('../public/js/proof-atlas-source-references'),V=require('../public/js/proof-atlas-expression-views'),J=require('../public/js/proof-atlas-judgment-geometry');
+const w={},sha=b=>crypto.createHash('sha256').update(b).digest('hex'),read=f=>JSON.parse(z.gunzipSync(fs.readFileSync('.'+f)));
+for(const f of ['library-manifest.js','recursion-examples-manifest.js','goedel-sample-manifest.js','source-references-manifest.js'])vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/'+f,'utf8'),{window:w});
+const editions=[...w.PROOF_ATLAS_LIBRARY.editions,w.PROOF_ATLAS_RECURSION_EXAMPLES.edition,w.PROOF_ATLAS_AI_SAMPLE?.edition].filter(Boolean);
+editions.push(w.PROOF_ATLAS_SOURCE_REFERENCES.edition);
+let queries=0,cuts=0,negative=0,sourceJumps=0;const large=[];
+for(const d of w.PROOF_ATLAS_SOURCE_REFERENCES.records){const edition=editions.find(e=>e.id===d.edition),record=edition.declarations.find(r=>r.name===d.name),data=read(record.indexFile),bytes=z.gunzipSync(fs.readFileSync('.'+d.file));assert.equal(sha(bytes),d.sha256);assert.equal(bytes.length,d.decodedBytes);assert.equal(sha(z.gunzipSync(fs.readFileSync('.'+record.indexFile))),record.indexSha256);A.validateIndex(data,record);const pkg=JSON.parse(bytes);
+ for(const e of pkg.entries){assert.equal(sha(JSON.stringify(e.templateGraph)),e.templateSha256);assert.equal(sha(JSON.stringify(e.metadataGraph)),e.metadataSha256);}
+ const provider=R.provider(pkg,data,record,d.sha256,d.file);assert.equal(provider.checked,d.checked);
+ for(const e of pkg.entries){const p=provider.getRecord(e.route),s=J.create(data,record,()=>provider,{judgmentRoute:e.route});assert(J.validate(s,data,record,()=>provider));assert.equal(s.nodes[0].rule,'projection');assert.equal(s.nodes[0].typeReference.namespace,'source-reference-view');assert.equal(s.nodes[0].typeReference.template.root,e.roots[3]);assert.equal(BigInt(s.stats.retainedOccurrences)+BigInt(s.stats.hidden),BigInt(data.expanded[e.node]));queries++;
+  for(const c of [1,2,3,4]){const view={...p.view,root:p.view.roots[c]},scene=V.scene(view,record,e.context,[],{anchors:e.anchors,maxNodes:13});assert(scene.stats.displayed<=13);assert.equal(BigInt(scene.stats.retainedOccurrences)+BigInt(scene.stats.hidden),BigInt(scene.stats.represented));for(const n of scene.nodes){const origin=p.view.origin(n.route.slots,e.anchors,view.root);if(origin){assert.equal(A.walk(data,origin.route),origin.node);sourceJumps++;}}cuts++;}
+  if(record.name==='AtlasReferenceControl.largeOpenFunction'){large.push({sourceNodes:data.kind.length,templateNodes:e.templateGraph.kind.length,view:p.view.stats()});assert(p.view.stats().virtualNodes<1024);}
+  for(const mutate of [x=>x.nativeConstructor.name='wrong',x=>x.structureRole='unknown',x=>x.constructor='wrong',x=>x.roots[4]=-1,x=>x.anchors[0].route.slots.pop()]){const bad=structuredClone(e);mutate(bad);assert.throws(()=>R.validate(bad,data,record));negative++;}
+ }
+}
+assert.equal(queries,249);assert.equal(large.length,1);assert.equal(w.PROOF_ATLAS_SOURCE_REFERENCES.records.length,241);assert.equal(w.PROOF_ATLAS_SOURCE_REFERENCES.edition.declarations.length,19);
+console.log(JSON.stringify({status:'PASS',packages:241,sourceProjections:229,syntheticQueries:20,queries,boundedTypeCuts:cuts,exactSourceJumps:sourceJumps,negativeControls:negative,large,scope:'Exact representative occurrences and selected synthetic controls; no all-context coverage, source paging or comprehension claim.'}));

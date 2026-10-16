@@ -4,6 +4,9 @@ import ExportOccurrenceTypes
    substitution slots, not types inferred for the slots or new kernel nodes. -/
 open Lean Elab Command Meta AtlasLibrary AtlasOccurrenceTypes
 namespace AtlasSourceReferences
+def presentation (e : Expr) : MetaM String := do
+ let text ← prettyType e
+ return if text.length <= 8192 then text else String.ofList (text.toList.take 8192) ++ "\n… [presentation truncated; inspect the shared expression]"
 
 structure Anchor where
  original : Expr
@@ -87,15 +90,20 @@ def projection (original term : Expr) (xs : Array Expr) (context : Array Json)
    pure <| obj [("node",nat (← sourceId shared a.original)),("route",a.route),("path",str a.path),("contextAbstractionRoundtrip",toJson true)]
   let (signatureRoot,metadata) := intern nativeCtorType {}
   unless metadata.kind.size <= 32768 do throwError "Native signature bound"
-  return obj [("format",str "ProofAtlasSourceReferences/1"),("status",str "checked"),
+  return obj [("format",str "ProofAtlasSourceReferences/2"),("status",str "checked"),
    ("method",str "native-exact-source-substitution/1"),("node",nat (← sourceId shared original)),
    ("route",routeJson root slots),("path",str path),("context",toJson context),
    ("family",str family.toString),("familyNameParts",toJson (nameParts family)),("levels",toJson (levels.map level)),
    ("index",nat index),("parameters",nat ctor.numParams),("fields",nat ctor.numFields),
-   ("constructor",str ctor.name.toString),("fieldName",str fieldName.toString),("binderInfo",str (bi binderInfo)),
+   ("constructor",str ctor.name.toString),("constructorNameParts",toJson (nameParts ctor.name)),
+   ("nativeConstructor",obj [("kind",str "ctorInfo"),("name",str ctor.name.toString),("nameParts",toJson (nameParts ctor.name)),
+    ("inductive",str ctor.induct.toString),("index",nat ctor.cidx),("parameters",nat ctor.numParams),("fields",nat ctor.numFields),("unsafe",toJson ctor.isUnsafe)]),
+   ("fieldName",str fieldName.toString),("binderInfo",str (bi binderInfo)),
    ("anchors",toJson anchorRecords),("templateGraph",graphJson templates),("roots",toJson roots),
    ("metadataGraph",graphJson metadata),("signatureRoot",nat signatureRoot),
-   ("role",str (← role resultType)),("kernelProjectionTyping",str "PASS"),("kernelStructureConversion",str "PASS"),
+   ("role",str (← role resultType)),("structureRole",str (← role inputType)),
+   ("typeText",str (← presentation resultType)),("structureTypeText",str (← presentation inputType)),("expectedText",str (← presentation domain)),("textIsPresentation",toJson true),
+   ("kernelProjectionTyping",str "PASS"),("kernelStructureConversion",str "PASS"),
    ("kernelFieldConversion",str "PASS"),("kernelParameters",str "PASS"),("kernelPrecedingFields",str "PASS"),
    ("templateInstantiationStructuralRoundtrip",toJson true),("templatesAreKernelJudgments",toJson false)]
 
@@ -134,7 +142,7 @@ elab_rules : command
     -- Fail closed: research fixtures must all succeed. No unavailable success.
     let e ← liftTermElabM fun _ => atRouteWith exprs[root]! slots.toList #[] #[] shared root #[] labels[root]! projection
     entries := entries.push e
-   results := results.push <| obj [("format",str "ProofAtlasSourceReferencePackage/1"),("source",← field query "source"),
+   results := results.push <| obj [("format",str "ProofAtlasSourceReferencePackage/2"),("source",← field query "source"),
     ("nativeDagMatchesPacket",toJson true),("leanVersion",str Lean.versionString),("entries",toJson entries)]
   liftIO <| IO.FS.writeFile output.getString (toJson results).compress
 end AtlasSourceReferences

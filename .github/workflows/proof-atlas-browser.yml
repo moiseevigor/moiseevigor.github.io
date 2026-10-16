@@ -53,6 +53,14 @@ on:
       - 'public/js/proof-atlas-constructor-expectations.js'
       - 'scripts/test-proof-atlas-expectations*.cjs'
       - 'scripts/check-proof-atlas-native-expectations.cjs'
+      - 'public/js/proof-atlas-expression-views.js'
+      - 'public/js/proof-atlas-source-references.js'
+      - 'public/js/proof-atlas-source-reference-examples.js'
+      - 'public/data/proof-atlas/source-reference*'
+      - 'public/data/proof-atlas/source-reference-controls/**'
+      - 'public/data/proof-atlas/source-references/**'
+      - 'scripts/test-proof-atlas-source-reference*.cjs'
+      - 'scripts/test-proof-atlas-reference-loading.cjs'
       - 'public/js/proof-atlas-projections.js'
       - 'public/data/proof-atlas/projections*'
       - 'public/data/proof-atlas/projections/**'
@@ -125,6 +133,14 @@ on:
       - 'public/js/proof-atlas-constructor-expectations.js'
       - 'scripts/test-proof-atlas-expectations*.cjs'
       - 'scripts/check-proof-atlas-native-expectations.cjs'
+      - 'public/js/proof-atlas-expression-views.js'
+      - 'public/js/proof-atlas-source-references.js'
+      - 'public/js/proof-atlas-source-reference-examples.js'
+      - 'public/data/proof-atlas/source-reference*'
+      - 'public/data/proof-atlas/source-reference-controls/**'
+      - 'public/data/proof-atlas/source-references/**'
+      - 'scripts/test-proof-atlas-source-reference*.cjs'
+      - 'scripts/test-proof-atlas-reference-loading.cjs'
       - 'public/js/proof-atlas-projections.js'
       - 'public/data/proof-atlas/projections*'
       - 'public/data/proof-atlas/projections/**'
@@ -237,6 +253,9 @@ jobs:
           node scripts/test-proof-atlas-projections.cjs
           node scripts/test-proof-atlas-projection-loading.cjs
           node scripts/test-proof-atlas-projections-browser.cjs
+          node scripts/test-proof-atlas-source-reference-packages.cjs
+          node scripts/test-proof-atlas-reference-loading.cjs
+          node scripts/test-proof-atlas-source-references-browser.cjs
           node scripts/test-proof-atlas-expectations.cjs
           node scripts/test-proof-atlas-expectations-browser.cjs
           node scripts/test-proof-atlas-judgment-geometry.cjs
