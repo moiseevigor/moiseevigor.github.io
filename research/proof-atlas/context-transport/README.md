@@ -17,6 +17,7 @@ Run from the repository root with Lean 4.33.1 and Node installed:
 ```sh
 python3 research/proof-atlas/verify_compositional_transport.py --workdir /tmp/AtlasCompositionalTransport
 node scripts/test-proof-atlas-compositional-types.cjs
+node scripts/test-proof-atlas-composition-sharing.cjs
 node scripts/test-proof-atlas-composition-loading.cjs
 ```
 
@@ -43,6 +44,10 @@ CI also runs `node scripts/check-proof-atlas-native-compositional-types.cjs ABSO
 The extraction step checks the source and compiled-module hashes before and after importing that existing fixture. It checks every native DAG field against the exact packet. Publishing preserves the original packet files and inventories.
 
 ## Finite results and limits
+
+The context collector shares canonical lexical prefixes instead of rebuilding every anchor's environment. The JSON comparison caches object pairs only after fully checking their equality, within one call. This avoids repeatedly checking common binder prefixes without changing any structural acceptance rule or the 524,288-work / 1,024-depth comparison limits. A 24-level shared JSON control requires 50 visits and 24 verified-pair shortcuts; 2,003 independent small JSON and mutation controls check equivalence and cache lifetime. This is an implementation result, not a proof-compression measure.
+
+Two additional native controls query the last lambda and its body in 129- and 193-binder functions. All four inferred types match independent native occurrence queries. They check 1,024 anchor scopes, six bounded cuts and twenty rejected record changes. The deeper anchor comparison uses 72,357 visits; the earlier unshared comparison reached the unchanged work bound. Each record contains zero or one introduction, so these cases test ambient contexts, not longer introduction chains. The finite 256-anchor collector limit remains explicitly marked in every record. These controls run serially in the aggregate native suite; their source and compiled-module hashes remain in its generated evidence.
 
 The two native control sets contain twenty declarations and 113 selected queries. They check 108 independent type-root comparisons, 4,541 bounded cuts and 6,974 borrowed-variable binding appearances. Cases include dependent domains, local definitions, captured functions, shadowing, two universe parameters, all four binder visibility kinds and a 64-entry telescope. Two packets have 196,628 and 196,631 stored source nodes; eight-node terminal templates suffice for their composed whole-function types. Large arithmetic annotations and reflexivity fields are scale controls, not difficult theorem-solving benchmarks.
 

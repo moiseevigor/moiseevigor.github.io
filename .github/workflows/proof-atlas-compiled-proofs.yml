@@ -20,6 +20,7 @@ jobs:
       - run: node scripts/test-proof-atlas-source-references.cjs
       - run: node scripts/test-proof-atlas-source-reference-packages.cjs
       - run: node scripts/test-proof-atlas-compositional-types.cjs
+      - run: node scripts/test-proof-atlas-composition-sharing.cjs
       - run: node scripts/test-proof-atlas-composition-loading.cjs
       - run: node scripts/test-proof-atlas-reference-loading.cjs
       - run: node scripts/test-proof-atlas-type-geometry.cjs

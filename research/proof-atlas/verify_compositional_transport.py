@@ -39,9 +39,11 @@ def main():
     introductions = run('introduction-checks', ['node', str(scripts / 'check_introductions.cjs'), folder])
     scope = run('native-scopes', ['python3', str(scripts / 'verify_introduction_scopes.py')])
     scopes = run('scope-checks', ['node', str(scripts / 'check_introduction_scopes.cjs'), scope['folder']])
+    deep_native = run('native-deep-contexts', ['python3', str(scripts / 'verify_deep_contexts.py')])
+    deep = run('deep-context-checks', ['node', str(scripts / 'check_deep_contexts.cjs'), deep_native['folder']])
     result = dict(status='PASS', compiler=compiler, workdir=str(work),
                   context=context, mappings=mappings, firstRuleBoundary=boundary,
-                  introductions=introductions, scopes=scopes)
+                  introductions=introductions, scopes=scopes, deepContexts=deep)
     (work / 'checks.json').write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps(result))
 
