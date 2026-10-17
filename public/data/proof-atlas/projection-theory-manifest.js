@@ -1,0 +1,1 @@
+window.PROOF_ATLAS_PROJECTION_THEORY={"format":"ProofAtlasProjectionTheoryDescriptor/1","file":"/public/data/proof-atlas/projection-theory/ef495a4e8139a7e43cb9e38780e6261399dd56b608799a05f6d2b7449f9dc3bf.json.gz","sha256":"ef495a4e8139a7e43cb9e38780e6261399dd56b608799a05f6d2b7449f9dc3bf","decodedBytes":1038496};
