@@ -51,7 +51,7 @@
    await metadataReady();if(!window.ProofAtlasLibraryData)await script('/public/js/proof-atlas-library-data.js?v=3');
    try{
     if(!window.PROOF_ATLAS_OCCURRENCE_TYPES)await script('/public/data/proof-atlas/occurrence-types-manifest.js?v=4');
-    if(!window.ProofAtlasOccurrenceTypes)await script('/public/js/proof-atlas-occurrence-types.js?v=9');
+    if(!window.ProofAtlasOccurrenceTypes)await script('/public/js/proof-atlas-occurrence-types.js?v=10');
    }catch(_){/* Optional type evidence must not block the original compiled reader. */}
    try{
     if(!window.PROOF_ATLAS_BETA_REDUCTIONS)await script('/public/data/proof-atlas/beta-reductions-manifest.js?v=1');

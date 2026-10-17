@@ -7,8 +7,12 @@
  const key=r=>r.root+':'+r.slots.join('.');
  function level(u){const g=A.compileLevels([u]);demand(!g.kind.includes('mvar'),'unresolved universe');}
  function context(data,route){
-  demand(Number.isInteger(route?.root)&&route.root>=0&&route.root<data.roots.length&&Array.isArray(route.slots)&&route.slots.length<=512,'invalid route');let id=data.roots[route.root];const out=[],slots=[];
-  for(const slot of route.slots){const kind=A.kinds[data.kind[id]];demand(Number.isInteger(slot)&&slot>=0&&slot<data.children[id].length,'invalid occurrence slot');if((kind==='lam'||kind==='forallE')&&slot===1||kind==='letE'&&slot===2){const r={root:route.root,slots:[...slots]};out.push({node:id,kind,path:A.path(data,r),route:r});}slots.push(slot);id=data.children[id][slot];}
+  demand(Number.isInteger(route?.root)&&route.root>=0&&route.root<data.roots.length&&Array.isArray(route.slots)&&route.slots.length<=512,'invalid route');let id=data.roots[route.root],path;const out=[],slots=[];
+  for(const slot of route.slots){
+   const kind=A.kinds[data.kind[id]];demand(Number.isInteger(slot)&&slot>=0&&slot<data.children[id].length,'invalid occurrence slot');
+   if((kind==='lam'||kind==='forallE')&&slot===1||kind==='letE'&&slot===2){const r={root:route.root,slots:[...slots]};if(path===undefined)path=A.path(data,r);out.push({node:id,kind,path,route:r});}
+   if(path!==undefined){const field=A.fields[kind]?.[slot];path=field===undefined?undefined:path+'.'+field;}slots.push(slot);id=data.children[id][slot];
+  }
   return{node:id,binders:out};
  }
  function typeGraph(g,roots,scope,limit=8192){

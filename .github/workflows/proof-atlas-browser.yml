@@ -47,6 +47,7 @@ on:
       - 'public/js/proof-atlas-sync.js'
       - 'public/js/proof-atlas-geometry-core.js'
       - 'public/js/proof-atlas-occurrence-types.js'
+      - 'scripts/test-proof-atlas-context-walk.cjs'
       - 'public/js/proof-atlas-type-geometry.js'
       - 'public/js/proof-atlas-type-conversions.js'
       - 'public/data/proof-atlas/level-transport-controls*'
@@ -261,6 +262,7 @@ jobs:
           node scripts/test-proof-atlas-library.cjs
           node scripts/test-proof-atlas-sync.cjs
           node scripts/test-proof-atlas-occurrence-types.cjs
+          node scripts/test-proof-atlas-context-walk.cjs
           node scripts/test-proof-atlas-occurrence-types-browser.cjs
           node scripts/test-proof-atlas-type-sharing.cjs
           node scripts/test-proof-atlas-type-geometry.cjs
@@ -343,6 +345,7 @@ jobs:
           name: proof-atlas-scene-audits
           path: |
             /tmp/atlas-introduction-frames.json
+            /tmp/atlas-context-walk.json
             /tmp/atlas-judgment-proof-focus.json
 
   lean-reference:
