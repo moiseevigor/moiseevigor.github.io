@@ -3,6 +3,10 @@ on:
   push:
     branches: [master]
     paths:
+      - 'public/data/proof-atlas/context-closure*'
+      - 'public/data/proof-atlas/context-closure/**'
+      - 'scripts/test-proof-atlas-context-closure.cjs'
+      - 'research/proof-atlas/context-closure/**'
       - 'public/js/proof-atlas-context-interface-view.js'
       - 'scripts/test-proof-atlas-context-interface-browser.cjs'
       - 'public/data/proof-atlas/projection-support*'
@@ -187,6 +191,10 @@ on:
       - '.github/workflows/proof-atlas-browser.yml'
   pull_request:
     paths:
+      - 'public/data/proof-atlas/context-closure*'
+      - 'public/data/proof-atlas/context-closure/**'
+      - 'scripts/test-proof-atlas-context-closure.cjs'
+      - 'research/proof-atlas/context-closure/**'
       - 'public/js/proof-atlas-context-interface-view.js'
       - 'scripts/test-proof-atlas-context-interface-browser.cjs'
       - 'public/data/proof-atlas/projection-support*'
@@ -383,6 +391,7 @@ jobs:
           node scripts/test-proof-atlas-compiled-replay.cjs
           node scripts/test-proof-atlas-projection-theory.cjs
           node scripts/test-proof-atlas-projection-support.cjs
+          node scripts/test-proof-atlas-context-closure.cjs
           node scripts/test-proof-atlas-compiled-replay-browser.cjs
           node scripts/test-proof-atlas-context-modules-browser.cjs
           node scripts/test-proof-atlas-context-interface-browser.cjs
@@ -451,6 +460,7 @@ jobs:
         with:
           name: proof-atlas-scene-audits
           path: |
+            /tmp/atlas-context-closure.json
             /tmp/atlas-projection-support.json
             /tmp/atlas-projection-theory.json
             /tmp/atlas-introduction-frames.json
@@ -481,5 +491,9 @@ jobs:
         run: |
           support_prefix="$("$HOME/.elan/bin/lean" --print-prefix)"
           python3 research/proof-atlas/context-projection/verify_support.py --lean "$support_prefix/bin/lean" --workdir "$RUNNER_TEMP/atlas-projection-support" --check
+      - name: Kernel-check least context closure and regenerate dependency fixtures
+        run: |
+          closure_prefix="$("$HOME/.elan/bin/lean" --print-prefix)"
+          python3 research/proof-atlas/context-closure/verify.py --lean "$closure_prefix/bin/lean" --workdir "$RUNNER_TEMP/atlas-context-closure" --check
       - name: Audit the unchanged public graph topology
         run: python3 research/proof-atlas/verify_public_data.py

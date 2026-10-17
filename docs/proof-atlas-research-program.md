@@ -700,3 +700,11 @@ The **Required context** diagram exposes the dependency interface already used t
 The view is available for the own checked-module controls and the three recorded reduced AI contexts. Full-context mode and unsupported selections gain no inferred reduction or typing. Existing native root checks and the finite dependency audit remain separate evidence. This is a navigation layer over the qualified interface, not a new semantic abstraction or a measured comprehension result.
 
 [Construction and limits](/research/proof-atlas/context-modules/README.md#dependency-interface-geometry) · [Browser checks](/scripts/test-proof-atlas-context-interface-browser.cjs)
+
+## Least syntactic context closure
+
+Six kernel-checked laws characterize the ordered dependency closure used by context interfaces. If every header dependency points to an earlier binder and every seed is inside the context, the descending pass retains all seeds, stays inside the context and yields the least dependency-closed superset. Reapplying closure changes no membership. For two bounded seed sets in the same dependency graph, closing their union equals the union of their closures. This is a compositional rule for syntactic interfaces, not a theorem of logical necessity or general typing preservation.
+
+All 76 ordered graphs through depth four and all 1,099 seed choices agree between native Lean, the existing browser closure and an independent reachability calculation. The comparison also covers 16,933 union pairs and larger controls up to 512 context slots. A single ascending pass fails on the chain `2 → 1 → 0`; the current descending implementation retains all three slots. The proofs use `propext` and `Quot.sound`. Finite comparisons do not prove the JavaScript implementation or its support producer. Native types, source identities and original binder maps remain separate requirements.
+
+[Definitions, proofs and boundaries](/research/proof-atlas/context-closure/README.md) · [Lean source](/research/proof-atlas/context-closure/Closure.lean) · [Implementation comparison](/scripts/test-proof-atlas-context-closure.cjs)
