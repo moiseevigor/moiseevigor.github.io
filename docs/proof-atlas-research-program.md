@@ -673,3 +673,11 @@ The 20 frozen AI-attributed theorem packets, containing 268,356 stored expressio
 Own controls separately exercise all twelve constructors structurally, including open terms that receive no kernel-validity claim. Four closed terms have native checks. Boolean metadata is supported; other metadata kinds are rejected. The 20 compiled theorems are the successful part of the predetermined 24-script sample, not the complete source dataset. This establishes recoverability for these packets. It does not prove a general decoder theorem, assign types to arbitrary diagram nodes, validate article prose or measure comprehension.
 
 [Method, assumptions and reproduction](/research/proof-atlas/compiled-replay/README.md) · [Public compiled-evidence audit](/scripts/test-proof-atlas-compiled-replay.cjs)
+
+## Structural laws for context projection
+
+Seven kernel-checked theorems on an explicit `Lean.Expr` renaming function establish exact recovery under a partial inverse, composition, injectivity, preservation of expanded constructor counts and internal binder cutoffs. All twelve constructors retain their ordered fields and non-variable payloads. The proofs depend on `propext` and `Quot.sound`. They concern syntax, with an explicit inverse condition; they do not establish typing preservation or semantic proof compression.
+
+The bounded JavaScript projection matches the native function on 713 generated primary cases and 1,969 second-stage selections, including missing-variable failures, shadowing, let scope and shared nodes under different binders. These finite comparisons do not prove the JavaScript implementation. The existing native checks of closed context modules and their instantiations remain separate. General typing results, broader implementation verification and measured inspection benefits remain open.
+
+[Definitions, proofs, scope and reproduction](/research/proof-atlas/context-projection/README.md) · [Lean source](/research/proof-atlas/context-projection/Projection.lean) · [Implementation comparison](/scripts/test-proof-atlas-projection-theory.cjs)
