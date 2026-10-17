@@ -36,12 +36,17 @@ def package(verification):
     assert len(native['rows']) == len(records) == 20
     metadata = 0
     for row, record in zip(native['rows'], records):
+        assert set(row) == {'name', 'indexSha256', 'storedNodes', 'roundtripFields',
+                            'knownBaselineConstantNodes', 'axioms', 'kernelExpectedType',
+                            'kernelProof', 'kernelExpectedTypeIsProposition', 'kernelExpectedTypeConversion',
+                            'originalTheoremAbsentFromEnvironment', 'originalModuleAbsentFromEnvironment',
+                            'wrongProofRejectedByKernel', 'illTypedBinderRejectedByKernel'}
         assert row['name'] == record['name'] and row['indexSha256'] == record['indexSha256']
         assert row['storedNodes'] == record['uniqueNodes']
         assert sorted(row['axioms']) == sorted(record['axioms']) and 'sorryAx' not in row['axioms']
         assert row['originalTheoremAbsentFromEnvironment'] and row['originalModuleAbsentFromEnvironment']
         assert row['wrongProofRejectedByKernel'] and row['illTypedBinderRejectedByKernel']
-        assert all(row[k] == 'PASS' for k in ['kernelExpectedType', 'kernelProof', 'kernelExpectedTypeConversion'])
+        assert all(row[k] == 'PASS' for k in ['kernelExpectedType', 'kernelProof', 'kernelExpectedTypeIsProposition', 'kernelExpectedTypeConversion'])
         raw = gzip.decompress((ROOT / record['indexFile'].lstrip('/')).read_bytes())
         assert sha(raw) == record['indexSha256']
         source = json.loads(raw)
@@ -73,6 +78,7 @@ def main():
     args = parser.parse_args()
     data = package(args.verification.resolve())
     raw = json.dumps(data, separators=(',', ':'), ensure_ascii=False).encode()
+    assert not any(p in raw for p in [b'/Users/', b'/private/', b'/var/folders/']), 'Private path in public metadata'
     digest = sha(raw)
     file = '/public/data/proof-atlas/compiled-replay/' + digest + '.json.gz'
     descriptor = {'format': 'ProofAtlasCompiledReplayManifest/1', 'edition': data['edition'],

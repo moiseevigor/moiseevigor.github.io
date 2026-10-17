@@ -88,7 +88,15 @@ elab_rules : command
     unless !accepted do throwError "Invalid kernel control accepted: {label}"
     kernelRejected := kernelRejected.push label
    return kernelRejected
+  let valueRoleRejected ← liftTermElabM fun _ => do
+   let _ ← checked zero
+   let accepted ← try
+    theoremType nat
+    pure true
+   catch _ => pure false
+   unless !accepted do throwError "A typed value was classified as a theorem proof"
+   return true
   liftIO <| IO.FS.writeFile output.getString (Json.mkObj [("format",toJson "ProofAtlasPacketReplayControls/1"),
    ("structural",toJson cases),("native",toJson positive),("decoderRejected",toJson rejected),
-   ("kernelRejected",toJson kernelRejected)]).compress
+   ("kernelRejected",toJson kernelRejected),("typedValueRejectedAsTheoremProof",toJson valueRoleRejected)]).compress
 end AtlasPacketReplay

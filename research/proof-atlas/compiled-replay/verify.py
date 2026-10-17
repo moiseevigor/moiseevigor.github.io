@@ -93,6 +93,8 @@ def main():
     entry.write_text(stable + '\n#atlas_packet_controls ' + json.dumps(str(controls)) +
                      '\n#atlas_packet_replay ' + json.dumps(str(request)) +
                      ' => ' + json.dumps(str(output)) + '\n')
+    entry_sha, request_sha = sha(entry.read_bytes()), sha(request.read_bytes())
+    driver_sha = sha(Path(__file__).read_bytes())
     profile = sandbox_profile(lean, folder, paths)
     env = {'PATH': str(lean.parent) + ':/usr/bin:/bin',
            'LEAN_PATH': os.pathsep.join(map(str, [folder] + paths)),
@@ -100,13 +102,17 @@ def main():
     resources = run_checked(['/usr/bin/sandbox-exec', '-p', profile, str(lean), str(entry)],
                             folder, 'native', env, 30, 120)
     assert verify_dependencies(args.dependency_reference.resolve())[1] == environment
+    assert sha(entry.read_bytes()) == entry_sha and sha(request.read_bytes()) == request_sha
+    assert sha(Path(__file__).read_bytes()) == driver_sha and runtime_source() == stable
+    for item in requests:
+        assert sha(Path(item['file']).read_bytes()) == item['indexSha256'], 'Replay input changed during execution'
     rows = [json.loads(line) for line in output.read_text().splitlines()]
     assert len(rows) == len(records)
     for row, record in zip(rows, records):
         assert row['name'] == record['name'] and row['indexSha256'] == record['indexSha256']
         assert row['storedNodes'] == record['uniqueNodes']
         assert set(row['axioms']) == set(record['axioms']) and 'sorryAx' not in row['axioms']
-        for key in ['kernelExpectedType', 'kernelProof', 'kernelExpectedTypeConversion']:
+        for key in ['kernelExpectedType', 'kernelProof', 'kernelExpectedTypeIsProposition', 'kernelExpectedTypeConversion']:
             assert row[key] == 'PASS'
         for key in ['originalTheoremAbsentFromEnvironment', 'originalModuleAbsentFromEnvironment',
                     'wrongProofRejectedByKernel', 'illTypedBinderRejectedByKernel']:
@@ -114,9 +120,9 @@ def main():
     result = {'status': 'PASS', 'compiler': compiler, 'environment': environment,
               'imports': ['Mathlib', 'Aesop'], 'originalProofModulesImported': False,
               'originalProofProjectsOrDependenciesBuilt': False,
-              'runtimeSourceSha256': sha(stable.encode()), 'driverSha256': sha(Path(__file__).read_bytes()),
-              'entrySha256': sha(entry.read_bytes()),
-              'requestSha256': sha(request.read_bytes()), 'nativeOutputSha256': sha(output.read_bytes()),
+              'runtimeSourceSha256': sha(stable.encode()), 'driverSha256': driver_sha,
+              'entrySha256': entry_sha,
+              'requestSha256': request_sha, 'nativeOutputSha256': sha(output.read_bytes()),
               'controlsSha256': sha(controls.read_bytes()), 'rows': rows,
               'controls': json.loads(controls.read_text()), 'resources': resources,
               'scope': 'Frozen 20-proof AI-attributed sample or explicit subset. Exact Boolean metadata only; '

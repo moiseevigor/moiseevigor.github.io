@@ -97,6 +97,9 @@ def checked (e : Expr) : MetaM Expr := do
  match Kernel.check (← getEnv) {} e with
  | .ok type => return type
  | .error ex => throwError "Decoded packet kernel check: {ex.toMessageData (← getOptions)}"
+def theoremType (type : Expr) : MetaM Unit := do
+ let sort ← checked type
+ unless sort == mkSort .zero do throwError "Theorem expected type is not a proposition"
 syntax "#atlas_packet_replay " str " => " str : command
 elab_rules : command
  | `(#atlas_packet_replay $input:str => $output:str) => do
@@ -126,7 +129,7 @@ elab_rules : command
    unless (allAxioms.map Name.toString).qsort (· < ·) == expectedAxioms.qsort (· < ·) do throwError "Transitive baseline axiom mismatch"
    unless !(allAxioms.contains ``sorryAx) do throwError "Admitted proof dependency"
    liftTermElabM fun _ => do
-    let _ ← checked type
+    theoremType type
     let _ ← checked value
     let _ ← checked (mkApp (mkLambda `atlasDecodedExpected .default type (.bvar 0)) value)
     let wrongProofAccepted ← try
@@ -144,7 +147,8 @@ elab_rules : command
    let row := Json.mkObj [("name",toJson theoremName),("indexSha256",toJson packetSha),("storedNodes",toJson values.size),
     ("roundtripFields",toJson #["kind","children","payloads","expanded","neededScope","roots"]),
     ("knownBaselineConstantNodes",toJson constants),("kernelExpectedType",toJson "PASS"),
-    ("kernelProof",toJson "PASS"),("kernelExpectedTypeConversion",toJson "PASS"),("axioms",toJson (allAxioms.map Name.toString)),
+    ("kernelProof",toJson "PASS"),("kernelExpectedTypeIsProposition",toJson "PASS"),
+    ("kernelExpectedTypeConversion",toJson "PASS"),("axioms",toJson (allAxioms.map Name.toString)),
     ("originalTheoremAbsentFromEnvironment",toJson true),("originalModuleAbsentFromEnvironment",toJson true),
     ("wrongProofRejectedByKernel",toJson true),("illTypedBinderRejectedByKernel",toJson true)]
    liftIO <| IO.FS.withFile output.getString .append fun h => h.putStrLn row.compress

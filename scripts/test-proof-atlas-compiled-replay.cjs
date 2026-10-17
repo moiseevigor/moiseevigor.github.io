@@ -53,7 +53,7 @@ function validate(data){
   const record=source.edition.declarations.find(r=>r.name===row.name);assert(record);
   assert.equal(row.indexSha256,record.indexSha256);assert.equal(row.storedNodes,record.uniqueNodes);
   assert.deepEqual(row.roundtripFields,fields);
-  for(const flag of ['kernelExpectedType','kernelProof','kernelExpectedTypeConversion'])assert.equal(row[flag],'PASS');
+  for(const flag of ['kernelExpectedType','kernelProof','kernelExpectedTypeIsProposition','kernelExpectedTypeConversion'])assert.equal(row[flag],'PASS');
   for(const flag of ['originalTheoremAbsentFromEnvironment','originalModuleAbsentFromEnvironment','wrongProofRejectedByKernel','illTypedBinderRejectedByKernel'])assert.equal(row[flag],true);
   assert.deepEqual([...row.axioms].sort(),[...record.axioms].sort());assert(!row.axioms.includes('sorryAx'));
   const raw=z.gunzipSync(fs.readFileSync('.'+record.indexFile));assert.equal(sha(raw),row.indexSha256);
@@ -68,7 +68,7 @@ function validate(data){
  assert.deepEqual([...kinds].sort((a,b)=>a-b),Array.from({length:12},(_,i)=>i));
  assert.deepEqual([...visibility].sort(),['default','implicit','instImplicit','strictImplicit']);
  assert.deepEqual([...letFlags].sort(),[false,true]);assert.equal(booleans.size,2);
- assert.equal(controls.native.length,4);
+ assert.equal(controls.typedValueRejectedAsTheoremProof,true);assert.equal(controls.native.length,4);
  for(const c of controls.native){table(c.packet);assert(c.packet.roots.every(r=>c.packet.neededScope[r]===0));for(const flag of ['kernelExpectedType','kernelTerm','kernelExpectedTypeConversion'])assert.equal(c[flag],'PASS');}
  assert.equal(controls.decoderRejected.length,10);assert.equal(new Set(controls.decoderRejected).size,10);
  assert.equal(controls.kernelRejected.length,3);assert.equal(new Set(controls.kernelRejected).size,3);
@@ -83,7 +83,7 @@ const raw=z.gunzipSync(fs.readFileSync('.'+m.package.file));assert(raw.length<=1
 assert.equal(sha(raw),m.package.sha256);assert.equal(raw.length,m.package.decodedBytes);
 const data=JSON.parse(raw),counts=validate(data);
 let negatives=0;
-for(const mutate of [d=>d.rows[0].indexSha256='0'.repeat(64),d=>d.rows.pop(),d=>d.rows[0].kernelProof='FAIL',d=>d.rows[0].originalModuleAbsentFromEnvironment=false,d=>d.rows[0].axioms.push('sorryAx'),d=>d.imports.push('ProofAtlasAI.Original'),d=>d.environment.dependencyRevisions.mathlib='0'.repeat(40),d=>d.controls.structural[0].kernelChecked=true,d=>d.controls.native[0].kernelExpectedTypeConversion='FAIL']){
+for(const mutate of [d=>d.rows[0].indexSha256='0'.repeat(64),d=>d.rows.pop(),d=>d.rows[0].kernelProof='FAIL',d=>d.rows[0].kernelExpectedTypeIsProposition='FAIL',d=>d.controls.typedValueRejectedAsTheoremProof=false,d=>d.rows[0].originalModuleAbsentFromEnvironment=false,d=>d.rows[0].axioms.push('sorryAx'),d=>d.imports.push('ProofAtlasAI.Original'),d=>d.environment.dependencyRevisions.mathlib='0'.repeat(40),d=>d.controls.structural[0].kernelChecked=true,d=>d.controls.native[0].kernelExpectedTypeConversion='FAIL']){
  const changed=structuredClone(data);mutate(changed);changed.producer.nativeOutputSha256=sha(changed.rows.map(r=>nativeText(r)+'\n').join(''));changed.producer.controlsSha256=sha(nativeText(changed.controls));assert.throws(()=>validate(changed));negatives++;
 }
-console.log(JSON.stringify({status:'PASS',packets:data.rows.length,storedNodes:counts.nodes,metadataEntries:counts.metadata,constructorKinds:12,structuralControls:20,ownNativeControls:4,decoderRejections:10,kernelRejections:3,wrongProofChecks:20,modifiedAttestationsRejected:negatives,scope:'Public compiled replay attestations and structural audit only. Fresh Lean replay is a separate command; this script is not a kernel.'}));
+console.log(JSON.stringify({status:'PASS',packets:data.rows.length,storedNodes:counts.nodes,metadataEntries:counts.metadata,constructorKinds:12,structuralControls:20,ownNativeControls:4,decoderRejections:10,kernelRejections:3,wrongProofChecks:20,modifiedAttestationsRejected:negatives,typedValueNotMislabelledAsProof:true,scope:'Public compiled replay attestations and structural audit only. Fresh Lean replay is a separate command; this script is not a kernel.'}));

@@ -3,6 +3,10 @@ on:
   push:
     branches: [master]
     paths:
+      - 'public/data/proof-atlas/compiled-replay*'
+      - 'public/data/proof-atlas/compiled-replay/**'
+      - 'scripts/test-proof-atlas-compiled-replay*.cjs'
+      - 'research/proof-atlas/compiled-replay/**'
       - 'public/js/proof-atlas-native-pages.js'
       - 'public/data/proof-atlas/native-query-pages*'
       - 'public/data/proof-atlas/native-query-pages/**'
@@ -174,6 +178,10 @@ on:
       - '.github/workflows/proof-atlas-browser.yml'
   pull_request:
     paths:
+      - 'public/data/proof-atlas/compiled-replay*'
+      - 'public/data/proof-atlas/compiled-replay/**'
+      - 'scripts/test-proof-atlas-compiled-replay*.cjs'
+      - 'research/proof-atlas/compiled-replay/**'
       - 'public/js/proof-atlas-native-pages.js'
       - 'public/data/proof-atlas/native-query-pages*'
       - 'public/data/proof-atlas/native-query-pages/**'
@@ -354,6 +362,8 @@ jobs:
           node scripts/test-proof-atlas-projected-context-modules.cjs
           node scripts/test-proof-atlas-projected-context-loading.cjs
           node scripts/test-proof-atlas-projected-context-browser.cjs
+          node scripts/test-proof-atlas-compiled-replay.cjs
+          node scripts/test-proof-atlas-compiled-replay-browser.cjs
           node scripts/test-proof-atlas-context-modules-browser.cjs
           node scripts/test-proof-atlas-source-context-modules-browser.cjs
           node scripts/test-proof-atlas-context-type-loading.cjs
