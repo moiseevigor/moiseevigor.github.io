@@ -64,8 +64,8 @@
   for(const parent of entries.values()){const t=parent.lambdaJudgment;if(t?.status!=='checked')continue;add(parent,t.domain,t.domain.typeRoot,'type',t.domain.typeText,'domain',null,[],undefined,parent.context,'lambda-introduction-observation');add(parent,t.body,t.body.typeRoot,t.body.role,t.body.text,'body',null,[],undefined,t.body.context,'lambda-introduction-observation');}
   return{entries,lookup,observed};
  }
- async function open(descriptor,data,record){
-  demand(descriptor.name===record.name&&descriptor.indexSha256===record.indexSha256&&descriptor.sourceSha256===record.sourceSha256,'descriptor source mismatch');const evidence=await A.compressed(descriptor.file,descriptor.sha256);validate(evidence,data,record);demand(evidence.source.edition===descriptor.edition,'edition mismatch');const {entries,lookup,observed}=indexObservations(evidence,data);
+ async function open(descriptor,data,record,options={}){
+  demand(descriptor.name===record.name&&descriptor.indexSha256===record.indexSha256&&descriptor.sourceSha256===record.sourceSha256,'descriptor source mismatch');const evidence=await A.compressed(descriptor.file,descriptor.sha256,{signal:options.signal});validate(evidence,data,record);demand(evidence.source.edition===descriptor.edition,'edition mismatch');const {entries,lookup,observed}=indexObservations(evidence,data);
   return{source:evidence.source,file:descriptor.file,sha256:descriptor.sha256,checked:evidence.entries.filter(e=>e.status==='checked').length,queried:entries.size,observed,typedOccurrences:[...lookup.values()].filter(e=>e.status==='checked').length,
    get:route=>lookup.get(key(route)),getQuery:route=>entries.get(key(route)),argument:(callRoute,argRoute)=>{const e=lookup.get(key(callRoute));return e?.status==='checked'?e.arguments.find(a=>key(a.route)===key(argRoute)):undefined;},
    guarantee:'Kernel and domain checks recorded during native extraction against the exact packet and lexical context. The browser verifies hashes and structural binding; it does not rerun Lean or certify article prose.'};

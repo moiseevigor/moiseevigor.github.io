@@ -72,3 +72,6 @@
 .pl-judgment-rule[data-judgment-rule="introduction-telescope"]>.pl-judgment-card .pl-judgment-formula{-webkit-line-clamp:3}
 
 .pl-judgment-geometry .pl-actions>label{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}.pl-judgment-geometry .pl-actions>label select{width:auto;max-width:100%}
+
+.pl-library [hidden]{display:none!important}.pl-paged-workspace{width:100%;max-width:100%;min-width:0}.pl-judgment-rule[data-judgment-rule="kernel-structure"]>.pl-judgment-premises{border-bottom-style:dashed}.pl-judgment-rule[data-judgment-rule="kernel-structure"]>.pl-judgment-card{border-top-style:dashed}
+.pl-judgment-geometry pre{color:var(--text,#243f49);background:var(--bg,#fff)}
