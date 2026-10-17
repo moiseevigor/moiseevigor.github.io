@@ -156,3 +156,19 @@ Each origin shows at most sixteen reference edges. Later pages retain the remain
 `node scripts/test-proof-atlas-context-interface-browser.cjs` checks a proof hypothesis whose type depends on another context entry, all three native reduced AI interfaces, local header inspection, exact original/type jumps, complete 33-edge paging and stale-handler disposal. Desktop/phone checks in both themes cover visible cards and accessibility. The independent dependency audit remains the source of correspondence checks across 743 existing observations. These are implementation and navigation checks, not a comprehension result.
 
 The separate [ordered closure theory](../context-closure/README.md) proves leastness, closure, bounds, idempotence and union composition for an explicit descending dependency-list function. Its earlier-header condition describes the pre-binder scope used here. Finite comparisons with this implementation are separate from the source-summary checks and native module typing records; no additional occurrence receives typing from the closure theorem.
+
+### Reference-chain witnesses
+
+**Why retained** displays one shortest reference chain from the selected term or recorded type to a retained slot. Each edge distinguishes term support, recorded-type support, binder-type support or let-value support. It identifies the complete originating region and exact original target binder. A support set does not identify an individual variable use inside that region; the view makes no such claim. Recorded-type origins keep their native-type namespace.
+
+The search uses the prepared qualified interface only. It fetches no source or support pages and expands no proof occurrences. Breadth-first discovery starts both term and type roots before visiting headers. Equal-length ties prefer term, then the existing ascending slot and field order. The index retains at most 512 predecessor triples; its queue has at most 514 origins. It performs at most 524,288 mask-slot inspections, counting both zero and present references. A chain has at most 512 edges and returns sixteen per page. The input interface, source/type evidence and temporary reference pages have separate residency. Exhausted bounds or inconsistent closure produce an unavailable explanation, preserving the dependency diagram. These are fixed representation bounds, not whole-browser memory measurements.
+
+The optional witness code loads on first request. Failed code can be retried. A new explanation cancels its preceding code waiter. Disposal removes that waiter immediately, even while the shared script request is still pending, so it does not keep the previous module alive until download completion. A late load cannot restore the disposed view. Original-region and target-binder actions use the existing source maps; type-origin actions open the original recorded type. The witness operation adds no native typing or article correspondence.
+
+The independent audit covers 746 existing observations: 594 own module observations, 149 original AI observations used for offline interface checks, and the three native reduced AI observations. It checks 454 retained-slot paths and 460 edge appearances against independent expression-support sets and repeated distance relaxation. Six paths are indirect, all in own controls; the audited AI paths are direct. The browser retains its existing coverage of own modules and three reduced AI routes; the offline 149-observation audit creates no new full-context interface control. A synthetic 512-slot chain checks complete path paging, while competing-root controls check shortest paths and deterministic ties. These finite checks do not prove the JavaScript implementation or establish logical necessity or comprehension.
+
+```sh
+node scripts/test-proof-atlas-context-witnesses.cjs
+# After the production site build:
+node scripts/test-proof-atlas-context-witnesses-browser.cjs
+```

@@ -708,3 +708,11 @@ Six kernel-checked laws characterize the ordered dependency closure used by cont
 All 76 ordered graphs through depth four and all 1,099 seed choices agree between native Lean, the existing browser closure and an independent reachability calculation. The comparison also covers 16,933 union pairs and larger controls up to 512 context slots. A single ascending pass fails on the chain `2 → 1 → 0`; the current descending implementation retains all three slots. The proofs use `propext` and `Quot.sound`. Finite comparisons do not prove the JavaScript implementation or its support producer. Native types, source identities and original binder maps remain separate requirements.
 
 [Definitions, proofs and boundaries](/research/proof-atlas/context-closure/README.md) · [Lean source](/research/proof-atlas/context-closure/Closure.lean) · [Implementation comparison](/scripts/test-proof-atlas-context-closure.cjs)
+
+## Reference-chain witnesses
+
+The context interface now supplies one shortest syntactic reference chain from a term/type seed to a retained binder. Its edges retain their relation, original originating region and exact target binder. Header domains and let values stay in their pre-binder scopes; type origins stay in the recorded-type namespace. A source-support edge identifies a region mentioning a binder, not an individual variable-use occurrence or a logical implication.
+
+The search reads the prepared interface without reopening proof subtrees. It retains at most 512 predecessor records and pages chains sixteen edges at a time. Independent source-set and distance checks cover 454 paths across 746 existing observations. Six indirect paths occur in own let controls; audited AI interfaces have direct paths. The browser exposes witnesses only where the dependency interface is already available. No additional typing or measured comprehension benefit follows from this navigation layer.
+
+[Algorithm, limits and coverage](/research/proof-atlas/context-modules/README.md#reference-chain-witnesses) · [Model audit](/scripts/test-proof-atlas-context-witnesses.cjs) · [Browser checks](/scripts/test-proof-atlas-context-witnesses-browser.cjs)
