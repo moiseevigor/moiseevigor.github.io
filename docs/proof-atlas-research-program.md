@@ -744,3 +744,13 @@ The finite arithmetic comparison covers 421 successful and 292 withheld projecti
 The reader retains this distinction in **Closure size accounting**: each omitted binder links to its original type or let value. The disclosure belongs to the selected use, while canonical module geometry stays shared. No new typing for descendants or measured comprehension benefit is asserted.
 
 [Definitions, proofs and reproduction](/research/proof-atlas/context-accounting/README.md) · [Lean laws](/research/proof-atlas/context-accounting/Accounting.lean) · [Corpus comparison](/scripts/test-proof-atlas-context-accounting.cjs) · [Reader checks](/scripts/test-proof-atlas-context-accounting-browser.cjs)
+
+## Context size and body access
+
+A fixed-budget comparison separates context-size accounting from access to the selected expression. Across 149 frozen AI-source routes, both components and four budgets, all 1,192 initial full/reduced comparisons retain identical relative body paths. In this inventory the smaller context closures do not expose additional body constructors under the current initial-cut policy. A separate 193-header structural control demonstrates that this equality is not general once the telescope limit is reached.
+
+The optional **Focus selected term / Focus recorded type** action navigates past checked module wrappers while keeping computed binding links and exact original-use maps. At the reader's 32-vertex/depth-three budget, 68 of 298 term/type views retain more body constructors and 230 are unchanged. At budget eight/depth two, one view retains fewer. The root policy remains the default. Retained constructors include folded members and annotations; they are not counted proof steps or a comprehension measure.
+
+Full and reduced focused cuts agree on relative body paths, with 19,008 original-constructor comparisons and 514 independent lexical-link checks. Focusing does not infer a typing judgment for a computed descendant. The same navigation rule is available in the own small-proof and source-backed module readers.
+
+[Definitions, budgets, counterexamples and reproduction](/research/proof-atlas/context-modules/BODY_FOCUS.md) · [Finite comparison](/scripts/test-proof-atlas-context-body-focus.cjs) · [Reader checks](/scripts/test-proof-atlas-context-body-focus-browser.cjs)

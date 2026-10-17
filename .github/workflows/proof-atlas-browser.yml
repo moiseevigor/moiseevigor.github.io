@@ -17,6 +17,7 @@ on:
       - 'public/data/proof-atlas/context-accounting/**'
       - 'research/proof-atlas/context-accounting/**'
       - 'scripts/test-proof-atlas-context-accounting*.cjs'
+      - 'scripts/test-proof-atlas-context-body-focus*.cjs'
       - 'research/proof-atlas/context-closure/**'
       - 'public/js/proof-atlas-context-interface-view.js'
       - 'scripts/test-proof-atlas-context-interface-browser.cjs'
@@ -216,6 +217,7 @@ on:
       - 'public/data/proof-atlas/context-accounting/**'
       - 'research/proof-atlas/context-accounting/**'
       - 'scripts/test-proof-atlas-context-accounting*.cjs'
+      - 'scripts/test-proof-atlas-context-body-focus*.cjs'
       - 'research/proof-atlas/context-closure/**'
       - 'public/js/proof-atlas-context-interface-view.js'
       - 'scripts/test-proof-atlas-context-interface-browser.cjs'
@@ -419,6 +421,8 @@ jobs:
           node scripts/test-proof-atlas-context-closure.cjs
           node scripts/test-proof-atlas-context-accounting.cjs
           node scripts/test-proof-atlas-context-accounting-browser.cjs
+          node scripts/test-proof-atlas-context-body-focus.cjs
+          node scripts/test-proof-atlas-context-body-focus-browser.cjs
           node scripts/test-proof-atlas-compiled-replay-browser.cjs
           node scripts/test-proof-atlas-context-modules-browser.cjs
           node scripts/test-proof-atlas-context-interface-browser.cjs
@@ -495,6 +499,8 @@ jobs:
             /tmp/atlas-context-witnesses.json
             /tmp/atlas-context-closure.json
             /tmp/atlas-context-accounting.json
+            /tmp/atlas-context-body-focus.json
+            /tmp/atlas-context-body-focus-browser/
             /tmp/atlas-context-accounting-browser/
             /tmp/atlas-projection-support.json
             /tmp/atlas-projection-theory.json
