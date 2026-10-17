@@ -90,3 +90,6 @@
 .pl-context-module .pl-beta-node-label{fill:#e2ecee;font:12px var(--sans,system-ui)}
 
 .pl-context-module pre{color:var(--text,#243f49);font:12px/1.7 var(--mono,monospace);white-space:pre-wrap;overflow-wrap:anywhere;background:var(--fig-bg,#edf2ef);padding:12px;border-radius:4px}
+
+/* Measured connection captions interrupt only their own edge. */
+.pl-beta-edge-caption-background{fill:#112a37}
