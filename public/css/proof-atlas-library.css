@@ -88,3 +88,5 @@
 .pl-context-module{min-width:0;scroll-margin-top:72px}.pl-context-module h4{font:600 22px/1.3 var(--sans,system-ui);margin:0 0 12px}.pl-context-module h5{font:600 16px/1.4 var(--sans,system-ui);margin:18px 0 8px}.pl-context-module label{display:grid;gap:6px;font-weight:600;margin:14px 0}.pl-context-module select{max-width:100%}.pl-context-module code{display:block;max-width:100%;white-space:normal;overflow-wrap:anywhere;font-size:13px}.pl-context-module button{font-size:14px;min-height:40px}.pl-context-module section{min-width:0;margin-block:16px}.pl-context-module>details{margin-top:16px}.pl-context-module .pl-actions{align-items:center}
 
 .pl-context-module .pl-beta-node-label{fill:#e2ecee;font:12px var(--sans,system-ui)}
+
+.pl-context-module pre{color:var(--text,#243f49);font:12px/1.7 var(--mono,monospace);white-space:pre-wrap;overflow-wrap:anywhere;background:var(--fig-bg,#edf2ef);padding:12px;border-radius:4px}

@@ -60,3 +60,43 @@ node scripts/test-proof-atlas-context-module-loading.cjs
 # After the production site build:
 node scripts/test-proof-atlas-context-modules-browser.cjs
 ```
+
+
+## Source-backed full-context modules
+
+The same reader control also supports the existing full-recorded-context native observations. It borrows the original term, header domains and let values from authenticated source pages, and borrows the separately recorded raw type graph. New lambda/Pi/let wrappers close the term and its expected type. New lets use `nondep=false`. The original context order is retained; this operation supplies no newly minimized typed interface.
+
+`ProofAtlasSourceContextModuleScene/1` uses the same constructor glyphs, ordered fields, binder telescopes and application spines as the materialized module view. Term and expected-type components have separate roots. Default cuts contain at most 32 drawn vertices and depth three; the hard limits are 64 and six. Retained plus hidden occurrences account for the selected computed region. Native root evidence does not supply additional typing for a focused descendant.
+
+The computed class is qualified by its canonical native observation, source/environment and evidence hashes. Switching an original use preserves that computed path. A separate inverse map selects the use's original header, term or raw-type occurrence. Raw types retain their native-type namespace; Γ links return to exact original binders. Selected-use header captions are captured independently of canonical binder identities. Different context-entry boundaries remain separate classes. The method uses recorded canonical-to-target kernel checks and structural equality of raw expected types; it creates no new native judgments or arbitrary unqueried-route transport.
+
+The existing AI package has 149 exact observations in 128 full-context classes, with 21 recorded alternate instantiations (four type and seventeen value observations). It includes the 31,752,787-occurrence proof body in `lean_workbook_plus_6206` and a context borrowing a let value with 10,844,757 occurrences. No alternate proof-role observation occurs in this package. These frozen sources are publisher-attributed to Goedel-LM/Lean-workbook-proofs; original generation is not independently reproduced. The interface is available at these exact recorded routes. Unrecorded routes clear the module view and remain explicitly unsupported.
+
+Five AI observations have different inferred and wrapped expected closed-type syntax. Their recorded kernel conversion checks pass. `closedTypesStructurallyEqual` describes that inferred/expected comparison; it is not a canonical-to-target equality flag. Both the original syntax flag and the selected target's native conversion evidence remain visible in provenance.
+
+The model audit covers 633 existing native observations in thirteen packets: twelve own controls and the frozen AI proof. It checks 5,926 cuts, including 478 canonical-use cuts, 1,299 displayed variable-link checks and 163 rejection controls. Of these cuts, 2,182 use source pages. Their largest copied source snapshot contains 48 tuples and 5,426 decoded JSON bytes; this is a measurement of the finite audit. The underlying AI source stores 91,424 nodes, and the independent materialized reference reaches 91,425 nodes. That offline reference is fully resident in the test process. These are finite structural tests, not a Lean proof of the implementation, semantic compression or a comprehension study.
+
+In paged mode the reader shares its original source cursor, capped at 4,096 tuples. A prepared module snapshot has separate hard limits of 4,096 source tuples and 8 MiB decoded JSON. The existing native context package is separately resident, capped at 8 MiB decoded; each raw type graph is capped at 32,768 stored nodes. One prepared selection is cached. The preceding visible cut can coexist briefly with its replacement during asynchronous preparation. These limits do not describe total JavaScript heap or whole-browser memory. Complete mode retains its existing fully resident source.
+
+The asynchronous viewport prepares source-dependent fields, labels and inverse references under the source queue. A sealed cut then renders without accessing evicted source pages. Failed optional data preserve the current cut or source graph, with retry. Proof, use and region changes cancel stale work. Existing own reduced-context modules retain their original component and remain available without the new optional code.
+
+The extension reuses published compiled context data. It rebuilds no private proof project or Mathlib and publishes no original AI proof scripts. The shared viewport has optional initial-route and asynchronous navigation hooks; its synchronous callers retain their existing behavior. Its code hash is reflected in regenerated native metadata manifests; native queries and type graphs are unchanged.
+
+```sh
+node scripts/test-proof-atlas-source-context-modules.cjs
+node scripts/test-proof-atlas-source-context-module-loading.cjs
+# After the production site build:
+node scripts/test-proof-atlas-source-context-modules-browser.cjs
+```
+
+
+### Computed occurrence references
+
+| Computed region | Relation to the selected original use |
+| --- | --- |
+| Added lambda/Pi/let wrapper | Exact source context header; relation `new-wrapper-from-source-header` |
+| Wrapper domain or let value | Exact original header field and descendant route, in the pre-binder context |
+| Closed term body | Selected original term route followed by the computed descendant route |
+| Closed expected-type body | Selected native raw-type graph and type-local route |
+
+The canonical observation identifies the computed graph. The selected observation identifies the inverse map and retains its own native flags. The audit additionally opens 1,432 cuts through recorded context header fields across term/type components. Variable checks compare each displayed computed binder reference with the corresponding original source binder or native type-local binder; raw-type ambient references resolve through the selected original context. Wrapper references retain their construction relation rather than acquiring an invented identical source expression.
