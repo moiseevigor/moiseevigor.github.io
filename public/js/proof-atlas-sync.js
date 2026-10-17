@@ -71,7 +71,7 @@
    try{if(!window.PROOF_ATLAS_COMPOSITIONAL_TYPES)await script('/public/data/proof-atlas/compositional-types-manifest.js?v=1');}catch(_){/* Optional type compositions preserve the source reader. */}
    try{if(!window.PROOF_ATLAS_APPLICATION_TYPES)await script('/public/data/proof-atlas/application-types-manifest.js?v=1');}catch(_){/* Optional application types preserve the source reader. */}
    try{if(!window.PROOF_ATLAS_CONTEXT_TYPES)await script('/public/data/proof-atlas/context-types-manifest.js?v=1');}catch(_){/* Optional context evidence preserves the source reader. */}
-   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=32');
+   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=33');
    if(!$('pl-provenance').closest('details')){const details=document.createElement('details'),summary=document.createElement('summary');summary.textContent='Provenance and axiom dependencies';$('pl-provenance').before(details);details.append(summary,$('pl-provenance'));}
    return window.ProofAtlasLibrary;
   })().catch(e=>{engine=null;throw e;});return engine;

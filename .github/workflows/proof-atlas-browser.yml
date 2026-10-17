@@ -88,6 +88,8 @@ on:
       - 'scripts/check-proof-atlas-native-constructors.cjs'
       - 'public/js/proof-atlas-judgment-geometry.js'
       - 'scripts/test-proof-atlas-judgment-*.cjs'
+      - 'scripts/test-proof-atlas-context-frames*.cjs'
+      - 'scripts/proof-atlas-judgment-fixtures.cjs'
       - 'scripts/check-proof-atlas-native-judgment-models.cjs'
       - 'scripts/check-proof-atlas-native-level-transport.cjs'
       - 'scripts/test-proof-atlas-level-transport*.cjs'
@@ -181,6 +183,8 @@ on:
       - 'scripts/check-proof-atlas-native-constructors.cjs'
       - 'public/js/proof-atlas-judgment-geometry.js'
       - 'scripts/test-proof-atlas-judgment-*.cjs'
+      - 'scripts/test-proof-atlas-context-frames*.cjs'
+      - 'scripts/proof-atlas-judgment-fixtures.cjs'
       - 'scripts/check-proof-atlas-native-judgment-models.cjs'
       - 'scripts/check-proof-atlas-native-level-transport.cjs'
       - 'scripts/check-proof-atlas-native-lambda-models.cjs'
@@ -207,7 +211,7 @@ on:
 jobs:
   chromium:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -297,6 +301,7 @@ jobs:
           node scripts/test-proof-atlas-expectations-browser.cjs
           node scripts/test-proof-atlas-judgment-geometry.cjs
           node scripts/test-proof-atlas-judgment-geometry-browser.cjs
+          node scripts/test-proof-atlas-context-frames-browser.cjs
           node scripts/test-proof-atlas-lambda-judgments.cjs
           node scripts/test-proof-atlas-lambda-judgments-browser.cjs
           node scripts/test-proof-atlas-beta-reductions.cjs
