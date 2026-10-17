@@ -102,3 +102,5 @@
 @media(max-width:600px){.pl-context-interface{padding:12px}.pl-context-dependencies{grid-template-columns:minmax(0,1fr)}.pl-context-dependency{grid-template-columns:minmax(0,1fr);gap:6px}.pl-context-relation{border:0;padding-left:12px}.pl-context-target{margin-left:12px}}
 
 .pl-context-witness{padding-top:12px;border-top:1px solid var(--border,#668e91)}.pl-context-witness[hidden]{display:none}.pl-context-witness h6{font:600 15px/1.5 var(--sans,system-ui)}.pl-context-interface .pl-context-witness ol{max-height:none;overflow:visible;padding-left:24px;font:14px/1.5 var(--sans,system-ui)}.pl-context-witness li{margin:12px 0;padding:12px;border-left:2px dashed var(--border,#668e91);overflow-wrap:anywhere}.pl-context-witness li>*{display:block;margin-block:6px}.pl-context-witness button{width:100%}
+
+.pl-context-module .pl-context-accounting ol{max-height:none;overflow:visible;padding-left:24px}.pl-context-accounting li{margin-block:12px;padding:12px;border-left:2px solid var(--border,#668e91);overflow-wrap:anywhere}.pl-context-accounting li button{display:block;width:100%;min-height:44px}.pl-context-accounting p{overflow-wrap:anywhere}

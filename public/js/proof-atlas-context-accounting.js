@@ -1,0 +1,25 @@
+/* Expanded-occurrence accounting; no typing or logical-necessity inference. */
+(function(host){
+'use strict';
+const node=typeof module!=='undefined'&&module.exports,A=node?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData;
+const demand=(ok,m)=>{if(!ok)throw Error('Context accounting: '+m);},same=(a,b)=>JSON.stringify(a)===JSON.stringify(b),clone=x=>JSON.parse(JSON.stringify(x));
+function count(s){demand(typeof s==='string'&&s.length<=1024&&/^[1-9][0-9]*$/.test(s),'positive bounded occurrence count');return BigInt(s);}
+function freeze(x){if(!x||typeof x!=='object'||Object.isFrozen(x))return x;for(const v of Object.values(x))freeze(v);return Object.freeze(x);}
+function calculate(bodies,headers,retainedSlots){
+ demand(Array.isArray(headers)&&headers.length<=512&&Array.isArray(retainedSlots)&&retainedSlots.length<=headers.length&&retainedSlots.every((j,k)=>Number.isInteger(j)&&j>=0&&j<headers.length&&(k===0||retainedSlots[k-1]<j)),'ordered context bounds');
+ const kept=new Set(retainedSlots);let all=0n,retained=0n,omitted=0n;
+ const rows=headers.map((h,slot)=>{demand(h.slot===slot,'header order');const domain=count(h.domainOccurrences),value=h.valueOccurrences===null?0n:count(h.valueOccurrences),weight=1n+domain+value,selected=kept.has(slot);all+=weight;if(selected)retained+=weight;else omitted+=weight;return{slot,retained:selected,wrapperOccurrences:'1',domainOccurrences:h.domainOccurrences,valueOccurrences:h.valueOccurrences,weight:weight.toString()};});
+ const components={};for(const part of ['term','type']){const body=count(bodies[part]);components[part]={body:body.toString(),full:(body+all).toString(),reduced:(body+retained).toString(),removed:omitted.toString()};}
+ demand(all===retained+omitted,'header partition');return freeze({format:'ProofAtlasContextAccounting/1',namespace:'context-occurrence-accounting',method:'wrapper-domain-let-value-sum/1',contextDepth:headers.length,retainedSlots:[...retainedSlots],omittedSlots:rows.filter(r=>!r.retained).map(r=>r.slot),headerOccurrences:{full:all.toString(),retained:retained.toString(),removed:omitted.toString()},components,headers:rows,guarantee:'Expanded constructor occurrences in recorded closures. Successful variable projection preserves each retained body/header size; only omitted headers contribute the difference. This does not count stored nodes, display vertices, logical necessity or whole-proof compression.'});
+}
+function analyze(source,record,entry,model,module){
+ demand(source.serialization==='ExprDAG/1'&&source.declaration.name===record.name&&model?.format==='ProofAtlasDependentInterface/1'&&model.source.name===record.name&&model.source.indexSha256===record.indexSha256&&model.source.sourceSha256===record.sourceSha256&&model.source.node===entry.node&&same(model.source.route,entry.state.route),'source identity');
+ demand(entry.reducedContext?.status==='checked'&&same(model.retainedSlots,entry.reducedContext.slots)&&Array.isArray(entry.recipe)&&entry.recipe.length===model.contexts.length&&entry.recipe.length<=512,'native retained context');
+ demand(A.walk(source,entry.state.route)===entry.node&&module?.id===entry.reducedContext.module.id&&same(module.canonicalRoute,entry.reducedContext.module.canonicalRoute),'original occurrence/module identity');
+ const refs=[],headers=entry.recipe.map((h,slot)=>{const c=model.contexts[slot];demand(c.slot===slot&&c.sourceBinder.node===h.node&&same(c.sourceBinder.route,h.sourceRoute)&&c.domain.node===h.domain&&(h.value===null?c.value===null:c.value?.node===h.value),'header identity');demand(A.walk(source,h.sourceRoute)===h.node&&source.children[h.node][0]===h.domain&&(h.value===null||source.children[h.node][1]===h.value)&&same(c.domain.route,{root:h.sourceRoute.root,slots:[...h.sourceRoute.slots,0]})&&(h.value===null||same(c.value.route,{root:h.sourceRoute.root,slots:[...h.sourceRoute.slots,1]})),'original header fields');demand([6,7,8].includes(source.kind[h.node])&&(source.kind[h.node]===8)===(h.value!==null),'header constructor');refs.push({binder:clone(c.sourceBinder),domain:clone(c.domain),value:clone(c.value),name:source.payloads[h.node].binderName||source.payloads[h.node].declName||'_'});return{slot,domainOccurrences:source.expanded[h.domain],valueOccurrences:h.value===null?null:source.expanded[h.value]};});
+ const accounting=calculate({term:source.expanded[entry.node],type:entry.graph.expanded[entry.typeRoot]},headers,model.retainedSlots);
+ const nativeTerm=module.nativeTermOccurrences??module.moduleGraph?.expanded[module.moduleTermRoot],nativeType=module.nativeExpectedTypeOccurrences??module.moduleGraph?.expanded[module.moduleTypeRoot];demand(accounting.components.term.reduced===nativeTerm&&accounting.components.type.reduced===nativeType,'native closed-root counts');
+ return freeze({...accounting,source:clone(model.source),headers:accounting.headers.map((h,j)=>({...h,...refs[j]})),nativeCountComparison:'PASS',nativeJudgmentScope:'complete-closed-roots',typingAtDescendants:'not-derived'});
+}
+const api={calculate,analyze};if(node)module.exports=api;else host.ProofAtlasContextAccounting=api;
+})(typeof window==='undefined'?globalThis:window);
