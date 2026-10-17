@@ -17,6 +17,15 @@ core += '\nset_option maxHeartbeats 5000000\nset_option maxRecDepth 8192\n'
 core += (BASE / 'ExportOccurrenceTypes.lean').read_text().replace('import ExportLibrary', '')
 core += '\n' + (BASE / 'ExportLetReduction.lean').read_text().replace('import ExportOccurrenceTypes', '')
 fixture = '''
+class AtlasCompose.ValueBox where
+ value : Nat
+ property : True
+class AtlasCompose.ProofBox : Prop where
+ property : True
+def AtlasCompose.takeInputs (α : Type) [AtlasCompose.ValueBox] [AtlasCompose.ProofBox] (x : α) (h : True) : True := h
+def AtlasCompose.mixed (α : Type) [v : AtlasCompose.ValueBox] [p : AtlasCompose.ProofBox] (x : α) (h : True) : True := @AtlasCompose.takeInputs α v p x h
+def AtlasCompose.nestedProof (h : True) : True := @AtlasCompose.takeInputs ((fun (_ : True) => Nat) h) ⟨0, True.intro⟩ ⟨True.intro⟩ 0 h
+
 def AtlasCompose.mp (P Q : Prop) (f : P → Q) (h : P) : Q := f h
 def AtlasCompose.dependent (P : Nat → Prop) (h : ∀ n, P n) (n : Nat) : P n := h n
 def AtlasCompose.chain (P Q R : Prop) (f : P → Q) (g : Q → R) (h : P) : R := g (f h)
@@ -32,7 +41,7 @@ run_cmd do
  let mut requests : Array Json := #[]
  let mut lets : Array Json := #[]
  for name in [``AtlasCompose.mp,``AtlasCompose.dependent,``AtlasCompose.chain,``AtlasCompose.shadow,
-   ``AtlasCompose.localProof,``AtlasCompose.localDependent,``AtlasCompose.unused,``AtlasCompose.cases,``AtlasCompose.recursiveUnused] do
+   ``AtlasCompose.localProof,``AtlasCompose.localDependent,``AtlasCompose.unused,``AtlasCompose.cases,``AtlasCompose.recursiveUnused,``AtlasCompose.takeInputs,``AtlasCompose.mixed,``AtlasCompose.nestedProof] do
   let info ← getConstInfo name
   let some value := info.value? true | throwError "Missing body"
   let (t,s) := AtlasLibrary.intern info.type {}
