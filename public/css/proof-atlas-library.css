@@ -61,3 +61,12 @@
 
 .pl-source-application-type,.pl-source-application-type :is(button,select,summary,pre,svg){scroll-margin-block-start:96px}.pl-source-application-type :is(button,select){min-height:44px}
 .pl-context-type,.pl-context-type :is(button,summary,pre,svg){scroll-margin-block-start:96px}.pl-context-type button{min-height:44px}.pl-context-type>a{display:inline-block;margin:8px 0 12px}
+
+/* Optional checked-introduction frames keep full formulas in the inspector. */
+.pl-judgment-branch{min-width:220px;border:1px solid #97beb7;border-radius:4px;padding:10px}
+.pl-judgment-world[data-introduction-groups="true"] .pl-judgment-rule-label{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.pl-judgment-world[data-introduction-groups="true"] .pl-judgment-formula{-webkit-line-clamp:2}
+.pl-judgment-rule[data-judgment-rule="introduction-telescope"]>.pl-judgment-card{border-left:4px solid #347768}
+@media(max-width:600px){.pl-judgment-branch{min-width:0;width:100%;box-sizing:border-box}}
+
+.pl-judgment-rule[data-judgment-rule="introduction-telescope"]>.pl-judgment-card .pl-judgment-formula{-webkit-line-clamp:3}
