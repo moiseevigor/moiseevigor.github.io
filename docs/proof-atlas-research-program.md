@@ -734,3 +734,13 @@ The reduced-context reader now covers the complete frozen 149-route inventory of
 An independent paged audit compares 1,071 cuts with reconstructed references, checks 124 canonical-use component pairs and 199 variable links, and rejects sixteen altered evidence or typing controls. In 138 variable-link appearances a projected index changes while its original binder is retained. Browser checks prepare all 298 term/type root components and exercise representative visual navigation. These establish finite coverage and structural correspondence, not whole-proof compression, general typing preservation or measured readability.
 
 [Reader and adapter boundaries](/research/proof-atlas/reduced-replay/README.md#bounded-reader-adapter) · [Paged model checks](/scripts/test-proof-atlas-replay-context-loading.cjs) · [Browser checks](/scripts/test-proof-atlas-replay-context-browser.cjs)
+
+## Exact accounting of context reduction
+
+Nine kernel-checked structural laws state where context-projection size changes occur. Closing a term adds one wrapper and its type/value regions per header. Successful projection preserves the selected body and each retained header's expanded occurrence count. Therefore the difference between full and required-context closures is exactly the sum of omitted header weights, with a strict decrease exactly when some header is omitted. This is an identity for actual `Lean.Expr` constructors, not a general typing-preservation theorem.
+
+The finite arithmetic comparison covers 421 successful and 292 withheld projections in 713 synthetic rows, plus 743 existing native term/type contexts. All recorded reduced root sizes agree; 143 selected contexts strictly shrink. In the type-valued 9,439,756 → 95 example, the selected body remains 93 occurrences and omitted headers account for 9,439,661. These are context closures, not whole-theorem compression or fewer displayed vertices.
+
+The reader retains this distinction in **Closure size accounting**: each omitted binder links to its original type or let value. The disclosure belongs to the selected use, while canonical module geometry stays shared. No new typing for descendants or measured comprehension benefit is asserted.
+
+[Definitions, proofs and reproduction](/research/proof-atlas/context-accounting/README.md) · [Lean laws](/research/proof-atlas/context-accounting/Accounting.lean) · [Corpus comparison](/scripts/test-proof-atlas-context-accounting.cjs) · [Reader checks](/scripts/test-proof-atlas-context-accounting-browser.cjs)
