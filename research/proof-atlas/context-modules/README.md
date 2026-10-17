@@ -1,6 +1,6 @@
 # Checked context modules
 
-Status: geometry and inverse-map implementation; reader integration is pending. The deployed source-shape reader remains a distinct syntax layer.
+Status: integrated prototype in the existing compiled reader. Source-shape sharing remains a distinct syntax layer. Typed-module evidence currently covers the finite own-control observations below.
 
 A term's source-variable links do not define its typing interface. For example, a proof hypothesis `h : p` mentions only `h` as a term, while its recorded type requires `p`. A retained let definition can also require an earlier variable through its value. `ProofAtlasDependentInterface/1` begins with the free context slots of the selected term and its recorded type, then closes that set under selected header types and let values. Headers use their pre-binder context. Original order, constructor, visibility, universe namespace and source routes remain attached.
 
@@ -47,4 +47,16 @@ node scripts/test-proof-atlas-context-modules.cjs
 python3 research/proof-atlas/context-modules/verify_controls.py --lean lean
 ```
 
-The reader still needs an authenticated abortable package loader, a checked-module panel using the existing geometry renderer, per-use source navigation, failure/cancellation handling and browser/accessibility verification. The existing computed renderer assumes root zero in two navigation paths; module expected-type roots require preserving the actual component root. No blog update accompanies this implementation.
+## Reader
+
+Open an exact source occurrence and choose **Show checked context module**. Term and expected-type views reuse the existing constructor renderer, with visible variable/declaration captions, zoom, pan, keyboard navigation and a module-root control. Changing an original use preserves the selected computed region and changes its inverse map. Source jumps are explicit. Raw type-body selections open their native type graph; they never acquire invented proof-source routes. Header dependencies have separately paged field labels. Retained let definitions remain distinct from callable assumptions.
+
+The optional loader authenticates a package of at most 8 MiB decoded, checks its source/environment and finite native inventory, and retains one prepared selection. Source-dependent preparation and inverse maps run through the source owner. Small own packets use a support table capped at 4,096 nodes; a paged support callback is accepted separately. Closing or changing a proof cancels its view. Failed optional data/assets leave the source reader available and support retry. Missing routes remain explicitly unsupported. Original context-type packages and other reader data retain their separate bounds; this is not a total browser-memory bound.
+
+The shared renderer now preserves the actual term/type component root. Its validator hash was updated in the native-page catalogue; existing native query and type-graph bytes are unchanged. Browser checks cover original uses with different binders, local refinement, exact source and native-type binding jumps, let values, universe namespaces, delayed maps/scripts, failed package retry and four desktop/phone theme/accessibility combinations. Existing source-sharing, beta, context-type, native-page and complete-library checks remain separate regressions. No blog update accompanies this implementation.
+
+```sh
+node scripts/test-proof-atlas-context-module-loading.cjs
+# After the production site build:
+node scripts/test-proof-atlas-context-modules-browser.cjs
+```
