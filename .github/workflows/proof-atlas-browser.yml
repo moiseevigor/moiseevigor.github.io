@@ -3,6 +3,7 @@ on:
   push:
     branches: [master]
     paths:
+      - 'scripts/test-proof-atlas-context-witnesses*.cjs'
       - 'public/data/proof-atlas/context-closure*'
       - 'public/data/proof-atlas/context-closure/**'
       - 'scripts/test-proof-atlas-context-closure.cjs'
@@ -191,6 +192,7 @@ on:
       - '.github/workflows/proof-atlas-browser.yml'
   pull_request:
     paths:
+      - 'scripts/test-proof-atlas-context-witnesses*.cjs'
       - 'public/data/proof-atlas/context-closure*'
       - 'public/data/proof-atlas/context-closure/**'
       - 'scripts/test-proof-atlas-context-closure.cjs'
@@ -395,6 +397,8 @@ jobs:
           node scripts/test-proof-atlas-compiled-replay-browser.cjs
           node scripts/test-proof-atlas-context-modules-browser.cjs
           node scripts/test-proof-atlas-context-interface-browser.cjs
+          node scripts/test-proof-atlas-context-witnesses.cjs
+          node scripts/test-proof-atlas-context-witnesses-browser.cjs
           node scripts/test-proof-atlas-source-context-modules-browser.cjs
           node scripts/test-proof-atlas-context-type-loading.cjs
           node scripts/test-proof-atlas-context-types-browser.cjs
@@ -460,6 +464,7 @@ jobs:
         with:
           name: proof-atlas-scene-audits
           path: |
+            /tmp/atlas-context-witnesses.json
             /tmp/atlas-context-closure.json
             /tmp/atlas-projection-support.json
             /tmp/atlas-projection-theory.json
