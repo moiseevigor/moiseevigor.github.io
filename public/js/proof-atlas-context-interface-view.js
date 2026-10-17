@@ -1,18 +1,23 @@
 /* A finite view of syntactic context dependencies; no additional typing judgment. */
 (function(host){
  'use strict';
- let witnessScript=null;
- async function witnessesReady(){
-  if(host.ProofAtlasContextWitnesses)return;
-  if(!witnessScript)witnessScript=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='/public/js/proof-atlas-context-witnesses.js?v=1';script.onload=resolve;script.onerror=()=>{script.remove();reject(Error('Optional reference-chain code unavailable'));};document.head.append(script);}).catch(error=>{witnessScript=null;throw error;});
-  await witnessScript;if(!host.ProofAtlasContextWitnesses?.index){witnessScript=null;throw Error('Reference-chain code is incomplete');}
+ let witnessScript=null;const witnessWaiters=new Set();
+ function finishWitnessLoad(error){const waiters=[...witnessWaiters];witnessWaiters.clear();witnessScript=null;for(const finish of waiters)finish(error);}
+ function witnessesReady(signal){
+  if(signal.aborted)return Promise.reject(signal.reason);
+  if(typeof host.ProofAtlasContextWitnesses?.index==='function')return Promise.resolve();
+  return new Promise((resolve,reject)=>{
+   const finish=error=>{signal.removeEventListener('abort',cancel);if(error)reject(error);else resolve();},cancel=()=>{witnessWaiters.delete(finish);finish(signal.reason||Error('Reference-chain request cancelled'));};
+   witnessWaiters.add(finish);signal.addEventListener('abort',cancel,{once:true});
+   if(!witnessScript){const script=document.createElement('script');witnessScript=script;script.src='/public/js/proof-atlas-context-witnesses.js?v=1';script.onload=()=>{const error=typeof host.ProofAtlasContextWitnesses?.index==='function'?null:Error('Reference-chain code is incomplete');if(error)script.remove();finishWitnessLoad(error);};script.onerror=()=>{script.remove();finishWitnessLoad(Error('Optional reference-chain code unavailable'));};document.head.append(script);}
+  });
  }
  function mount(container,{model,onOriginalOccurrence,onRecordedType}){
   const D=host.ProofAtlasDependentInterface;
   if(!D||model?.format!=='ProofAtlasDependentInterface/1'||model.contexts.length>512)throw Error('Context dependency interface unavailable');
   const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;},button=(text,fn)=>{const n=el('button',text);n.type='button';n.onclick=()=>{if(!disposed)fn();};return n;},name=c=>c.payload.binderName||c.payload.declName||'_',source=ref=>onOriginalOccurrence(ref.node,{root:ref.route.root,slots:[...ref.route.slots]});
   const labels={'term-support':'Term reference','recorded-type-support':'Recorded-type reference','binder-type':'Binder-type reference','let-value':'Let-value reference'};
-  let origin='term',offset=0,disposed=false,history=[],witnesses=null,witnessTarget=null,witnessOffset=0,witnessEpoch=0;
+  let origin='term',offset=0,disposed=false,history=[],witnesses=null,witnessTarget=null,witnessOffset=0,witnessEpoch=0,witnessRequest=null;
   container.replaceChildren();container.classList.add('pl-context-interface');
   const heading=el('h5','Required context'),note=el('p','Arrows show syntactic references, including type dependencies. They do not assert logical necessity or add typing judgments.'),select=el('select'),actions=el('div',undefined,'pl-actions'),back=button('Previous dependency origin',()=>{const previous=history.pop();if(previous){origin=previous.origin;offset=previous.offset;draw();}}),diagram=el('div',undefined,'pl-context-dependencies'),paging=el('div',undefined,'pl-actions'),status=el('p'),explanation=el('section'),details=el('details');
   select.setAttribute('aria-label','Context reference origin');status.setAttribute('role','status');
@@ -21,12 +26,12 @@
   actions.append(back);container.append(heading,note,select,actions,diagram,paging,status,explanation,details);explanation.className='pl-context-witness';explanation.hidden=true;
   function focus(next){if(disposed)return;history.push({origin,offset});if(history.length>512)history.shift();origin=next;offset=0;draw();select.focus();}
   async function explain(slot){
-   if(disposed)return;const token=++witnessEpoch;witnessTarget=slot;explanation.hidden=false;explanation.replaceChildren(el('h6','Why '+name(model.contexts[slot])+' is retained'));
+   if(disposed)return;const token=++witnessEpoch;witnessRequest?.abort();witnessRequest=new AbortController();const request=witnessRequest;witnessTarget=slot;explanation.hidden=false;explanation.replaceChildren(el('h6','Why '+name(model.contexts[slot])+' is retained'));
    explanation.setAttribute('aria-busy','true');explanation.append(el('p','Preparing the reference chain…'));
-   try{await witnessesReady();if(disposed||token!==witnessEpoch)return;explanation.replaceChildren(el('h6','Why '+name(model.contexts[slot])+' is retained'));if(!witnesses)witnesses=host.ProofAtlasContextWitnesses.index(model);const page=witnesses.path(slot,{offset:witnessOffset}),list=el('ol');list.start=witnessOffset+1;explanation.dataset.witnessTarget=String(slot);explanation.append(el('p','One shortest syntactic reference chain · '+page.length+' edge'+(page.length===1?'':'s')+'. References identify regions, not individual variable uses.'),list);
+   try{await witnessesReady(request.signal);if(disposed||token!==witnessEpoch)return;explanation.replaceChildren(el('h6','Why '+name(model.contexts[slot])+' is retained'));if(!witnesses)witnesses=host.ProofAtlasContextWitnesses.index(model);const page=witnesses.path(slot,{offset:witnessOffset}),list=el('ol');list.start=witnessOffset+1;explanation.dataset.witnessTarget=String(slot);explanation.append(el('p','One shortest syntactic reference chain · '+page.length+' edge'+(page.length===1?'':'s')+'. References identify regions, not individual variable uses.'),list);
     for(const edge of page.edges){const row=el('li'),from=edge.from==='term'?'Selected term':edge.from==='type'?'Recorded type':'Header '+name(model.contexts[edge.from])+' · slot '+(edge.from+1),to=name(model.contexts[edge.targetSlot])+' · slot '+(edge.targetSlot+1);row.dataset.witnessFrom=String(edge.from);row.dataset.witnessTo=String(edge.targetSlot);row.dataset.witnessRelation=edge.relation;row.append(el('strong',from+' → '+to),el('span',labels[edge.relation]));if(edge.from==='type'){if(onRecordedType)row.append(button('Open reference region',()=>onRecordedType()));}else row.append(button('Open reference region',()=>source(edge.originRegion)));row.append(button('Open target binder',()=>source(edge.target)));list.append(row);}
     const controls=el('div',undefined,'pl-actions'),previous=button('Previous chain edges',()=>{witnessOffset=Math.max(0,witnessOffset-16);explain(slot);}),next=button('Next chain edges',()=>{witnessOffset+=16;explain(slot);});previous.disabled=witnessOffset===0;next.disabled=!page.remaining;controls.append(previous,el('span',(witnessOffset+1)+'–'+(witnessOffset+page.edges.length)+' / '+page.length),next);explanation.append(controls);
-   }catch(error){if(!disposed&&token===witnessEpoch)explanation.replaceChildren(el('h6','Reference chain unavailable'),el('p',error.message+'. The dependency diagram remains available; select Why retained again to retry.'));}finally{if(!disposed&&token===witnessEpoch)explanation.setAttribute('aria-busy','false');}
+   }catch(error){if(!disposed&&token===witnessEpoch)explanation.replaceChildren(el('h6','Reference chain unavailable'),el('p',error.message+'. The dependency diagram remains available; select Why retained again to retry.'));}finally{if(witnessRequest===request)witnessRequest=null;if(!disposed&&token===witnessEpoch)explanation.setAttribute('aria-busy','false');}
   }
   function draw(){
    if(disposed)return;const page=D.dependencies(model,origin,{offset,limit:16});container.dataset.contextOrigin=String(origin);select.value=String(origin);back.disabled=!history.length;diagram.replaceChildren();paging.replaceChildren();
@@ -39,7 +44,7 @@
    status.textContent=model.retainedSlots.length+' / '+model.originalDepth+' original context entries retained by syntactic closure. '+(page.remaining?page.remaining+' further references on later pages.':'All references for this origin are shown.');
   }
   select.onchange=()=>focus(select.value==='term'||select.value==='type'?select.value:Number(select.value));draw();
-  return{getState:()=>({origin,offset,history:history.length,visibleEdges:diagram.querySelectorAll('[data-context-target]').length,witnessTarget,witnessState:witnesses?.state()||null}),dispose(){disposed=true;witnessEpoch++;witnesses=null;select.onchange=null;container.replaceChildren();container.classList.remove('pl-context-interface');}};
+  return{getState:()=>({origin,offset,history:history.length,visibleEdges:diagram.querySelectorAll('[data-context-target]').length,witnessTarget,witnessState:witnesses?.state()||null}),dispose(){disposed=true;witnessEpoch++;witnessRequest?.abort();witnessRequest=null;witnesses=null;select.onchange=null;container.replaceChildren();container.classList.remove('pl-context-interface');}};
  }
- host.ProofAtlasContextInterfaceView={mount};
+ host.ProofAtlasContextInterfaceView={mount,state:()=>({codeWaiters:witnessWaiters.size,codeLoading:!!witnessScript})};
 })(typeof window==='undefined'?globalThis:window);
