@@ -460,6 +460,8 @@ jobs:
       - name: Check reference fields, source examples and small kernel terms
         run: python3 research/proof-atlas/verify_lean_reference.py --lean "$HOME/.elan/bin/lean"
       - name: Kernel-check context projection laws and regenerate bridge fixtures
-        run: python3 research/proof-atlas/context-projection/verify.py --lean "$HOME/.elan/bin/lean" --workdir "$RUNNER_TEMP/atlas-projection-theory" --check
+        run: |
+          theory_prefix="$("$HOME/.elan/bin/lean" --print-prefix)"
+          python3 research/proof-atlas/context-projection/verify.py --lean "$theory_prefix/bin/lean" --workdir "$RUNNER_TEMP/atlas-projection-theory" --check
       - name: Audit the unchanged public graph topology
         run: python3 research/proof-atlas/verify_public_data.py

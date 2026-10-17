@@ -24,6 +24,16 @@ The count theorem concerns a borrowed expression region before context wrappers 
 
 The browser accepts an outermost-first ordered subset of context slots. The Lean selector uses the corresponding innermost-first original de Bruijn indices. The bridge converts between those conventions explicitly and compares the existing lazy projection with the Lean result.
 
+For context depth `d` and retained slots `S`, the selector list is `reverse(S).map(s => d-1-s)`. Under `c` internal binders, an ambient variable at index `i` is looked up at `i-c`, then shifted back by `c`. An absent entry rejects the projection.
+
+For example, with independent `a b c : Nat`, remove unused `b` from `fun x : Nat => (a, x, c)`. The bindings remain the same:
+
+| Variable | Original index under `x` | Reduced index under `x` |
+|---|---:|---:|
+| `a` | 3 | 2 |
+| `x` | 0 | 0 |
+| `c` | 1 | 1 |
+
 Own generated cases cover all retained subsets at ambient depths zero through four, with 23 expression patterns per subset: 713 primary cases. They include shared nodes used inside and outside a binder, shadowing, dependent domains, pre-binder let values, all visibility flags, both let flags, universe payloads and opaque metadata. All twelve expression constructors occur. Open expression cases remain structural objects and receive no typing claim.
 
 The finite comparison has 421 successful and 292 rejected primary projections. It also checks 1,969 second-stage selections against both sequential and directly composed projections; 1,369 succeed. It checks 266 ambient variable occurrences, 121 internal variable occurrences and 148 changed indices. Four invalid ordered-context maps are rejected. Every compared constructor, payload, ordered child, expanded count and scope maximum matches the native reference. Prepared tuple snapshots remain readable after sealing.
