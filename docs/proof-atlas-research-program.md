@@ -468,6 +468,18 @@ The complete source packet and native type evidence remain resident. Record/port
 [Context-frame model](/public/js/proof-atlas-judgment-geometry.js) · [Finite corpus comparison](/scripts/test-proof-atlas-context-frames.cjs) · [Primitive-interface and independent source audit](/scripts/test-proof-atlas-context-frames-audit.cjs) · [Native controls](/research/proof-atlas/verify_judgment_controls.py) · [Browser checks](/scripts/test-proof-atlas-context-frames-browser.cjs)
 
 
+## Paged source composition
+
+The optional [paged geometry](/projects/proof-atlas/library/?loading=paged&proof=JacobiData.slope_bound_abs) uses the same occurrence-based language while fetching source fields on demand. Each tuple preserves its constructor, ordered children, payload, expanded count and scope requirement. A hash-addressed index connects the pages to a completely validated offline packet. The client retains at most 4,096 source tuples and four index pages; native evidence, headers, scenes and decoding buffers have separate residency. This is a source-cache bound, not a whole-application memory bound.
+
+Across the finite 34-packet native-query inventory, all 1,979,510 field values and 23,184 complete scenes agree with independently opened full-source references. The scenes cover 1,288 recorded routes, three priorities, three grouping modes and source fallback on/off. Earlier scene formats remain equal in 11,592 comparisons. This inventory includes twenty released AI-source declarations; the browser scale case represents a 29,794,821-occurrence body without downloading its complete source packet. These checks do not establish all-context typing or human comprehension.
+
+Scene version 7 exposes literal kernel fields where native construction evidence is absent. Dashed source layouts preserve lexical scope and exact routes without assigning unrecorded child types or proof roles. They cannot become checked introduction/context frames. Distinct source-field and typing-premise edges prevent this structural fallback from acquiring an unsupported logical interpretation. Synthetic controls cover all twelve constructors, shadowing and shared variables under different binders.
+
+The paged mode covers four published research declarations, one working-snapshot declaration, twenty released AI-source declarations and nine recursion controls. Other declarations and the article retain the complete loader. Missing assets, unsupported declarations and exhausted resource bounds remain explicit; opening the complete view requires a user action. Native packages are still fully resident. Paging the remaining evidence and evaluating proof-inspection tasks remain open.
+
+[Protocol and reproduction](/research/proof-atlas/source-pages.md) · [Producer verification](/scripts/build-proof-atlas-source-pages.cjs) · [Complete-reference comparison](/scripts/test-proof-atlas-source-pages.cjs) · [Corruption and scope controls](/scripts/test-proof-atlas-source-page-controls.cjs) · [Browser checks](/scripts/test-proof-atlas-source-pages-browser.cjs)
+
 ## Scope-path traversal
 
 The context walker retains the current source path as it follows a route. It no longer restarts from the declaration root for every enclosing binder. The first binder requests the prefix path once; subsequent fields extend it directly. Binder-free routes retain the earlier lazy access to root-path metadata. No route or context cache is introduced. Domains and let values still precede their own binder; bodies still extend the context by one.
