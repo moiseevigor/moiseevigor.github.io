@@ -19,11 +19,11 @@
   function typed(e,p){
    source(p);const at=T.context(data,e.route);demand(e.status==='checked'&&e.kernelCheck==='PASS'&&e.contextWellFormed===true&&e.typeAbstractionRoundtrip===true&&roles.has(e.role),'unchecked type');demand(e.node===at.node&&e.path===A.path(data,e.route)&&same(e.context,at.binders),'type context/occurrence');
    const g=e.typeGraph;demand(g,'type graph absent');if(e.sourceReference)demand(p.isObservation?.(e),'unbound source-reference observation');else if(!checkedGraphs.has(g)){T.validateExpressionGraph(g,[],0,65536);checkedGraphs.add(g);}demand(Number.isInteger(e.typeRoot)&&e.typeRoot>=0&&e.typeRoot<g.kind.length&&g.neededScope[e.typeRoot]<=at.binders.length,'type root/context');
-   return{role:e.role,text:e.typeText,root:e.typeRoot,graph:g,context:e.context,reference:{namespace:e.sourceReference?'source-reference-view':'type-expression',evidenceSha256:p.sha256,file:p.file||null,query:e.typingOrigin?.query||{node:e.node,path:e.path,route:e.route},graphRoot:e.typeRoot,...(e.sourceReference?{template:{sha256:e.referenceTemplateSha256,root:e.referenceTemplateRoots[e.referenceComponent]}}:{}),...(e.typingOrigin?{typingOrigin:e.typingOrigin}:{})}};
+   return{role:e.role,text:e.typeText,root:e.typeRoot,graph:g,context:e.context,reference:{namespace:e.sourceReference?'source-reference-view':'type-expression',evidenceSha256:p.sha256,file:p.file||null,...(p.recording?{recording:p.recording}:{}),query:e.typingOrigin?.query||{node:e.node,path:e.path,route:e.route},graphRoot:e.typeRoot,...(e.sourceReference?{template:{sha256:e.referenceTemplateSha256,root:e.referenceTemplateRoots[e.referenceComponent]}}:{}),...(e.typingOrigin?{typingOrigin:e.typingOrigin}:{})}};
   }
   function observed(parent,provider,at,root,role,text,context,part,slot){
    const expected=T.context(data,at.route);demand(at.node===expected.node&&at.path===A.path(data,at.route)&&same(context,expected.binders),'premise context/occurrence');demand(roles.has(role)&&Number.isInteger(root)&&root>=0&&root<parent.typeGraph.kind.length&&parent.typeGraph.neededScope[root]<=context.length,'premise type/context');
-   return{role,text,root,graph:parent.typeGraph,context,reference:{namespace:parent.sourceReference?'source-reference-view':'type-expression',evidenceSha256:provider.sha256,file:provider.file||null,query:parent.typingOrigin?.query||{node:parent.node,path:parent.path,route:parent.route},graphRoot:root,...(parent.sourceReference?{template:{sha256:parent.referenceTemplateSha256,root:parent.referenceTemplateRoots[1]}}:{}),component:{part,...(slot?{slot}:{})},relation:'recorded-parent-premise'}};
+   return{role,text,root,graph:parent.typeGraph,context,reference:{namespace:parent.sourceReference?'source-reference-view':'type-expression',evidenceSha256:provider.sha256,file:provider.file||null,...(provider.recording?{recording:provider.recording}:{}),query:parent.typingOrigin?.query||{node:parent.node,path:parent.path,route:parent.route},graphRoot:root,...(parent.sourceReference?{template:{sha256:parent.referenceTemplateSha256,root:parent.referenceTemplateRoots[1]}}:{}),component:{part,...(slot?{slot}:{})},relation:'recorded-parent-premise'}};
   }
   function port(label,at,observation,extra={}){return{label,node:at.node,path:at.path,route:copy(at.route),expanded:data.expanded[at.node],observation,...extra};}
   function describe(at,expected){
@@ -58,7 +58,7 @@
    }
    if(n.ports.length){const partition=BigInt(n.retainedOccurrences)+n.ports.reduce((s,p)=>s+BigInt(p.expanded),0n);demand(partition===BigInt(n.expanded),'rule source partition');}
    if(e.projectionJudgment?.status==='unavailable')n.reason=e.projectionJudgment.reason;
-   n.attestation={evidenceSha256:provider.sha256,file:provider.file||null,query:e.typingOrigin?.query||where,...(e.typingOrigin?{typingOrigin:e.typingOrigin}:{})};return sourceStructure(decorateConstruction(n,e,g,observation));
+   n.attestation={evidenceSha256:provider.sha256,file:provider.file||null,...(provider.recording?{recording:provider.recording}:{}),query:e.typingOrigin?.query||where,...(e.typingOrigin?{typingOrigin:e.typingOrigin}:{})};return sourceStructure(decorateConstruction(n,e,g,observation));
   }
   function sourceStructure(n){
    const cs=data.children[n.node];if(!sourceFallback||n.rule!=='boundary'||!cs.length)return n;

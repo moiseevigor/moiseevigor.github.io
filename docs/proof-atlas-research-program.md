@@ -754,3 +754,14 @@ The optional **Focus selected term / Focus recorded type** action navigates past
 Full and reduced focused cuts agree on relative body paths, with 19,008 original-constructor comparisons and 514 independent lexical-link checks. Focusing does not infer a typing judgment for a computed descendant. The same navigation rule is available in the own small-proof and source-backed module readers.
 
 [Definitions, budgets, counterexamples and reproduction](/research/proof-atlas/context-modules/BODY_FOCUS.md) · [Finite comparison](/scripts/test-proof-atlas-context-body-focus.cjs) · [Reader checks](/scripts/test-proof-atlas-context-body-focus-browser.cjs)
+
+
+## Public-packet construction recovery
+
+An internal lambda in the AI-attributed sample had a checked type but no introduction record, so the composed geometry stopped at a typed source boundary. A predetermined union of 17 prior primary queries and 14 proof-role context roots gives 19 distinct queries. Native replay reconstructs them from the public compiled packet, with the original proof module absent. The inventory records ten checked introductions and five checked applications; one application also has elimination metadata. Three local definitions retain their separate earlier records.
+
+At node 30853, proving `¬a = 0 → a = 1 / 2`, the recovered introduction distinguishes the seven-entry domain context from the eight-entry body context and records all four kernel conversions. The shared reader vocabulary now draws the introduction rather than a boundary. A recorded body type does not create an internal application rule.
+
+The common schema has a distinct public-packet replay environment and does not assert verification of an original compiled module. Independent checks preserve all 17 previous primary judgments and 62 exact type observations, compare 57 full/paged scenes and reject twenty-three altered records or limit controls. The paged reader's small supplement has a separate 32-query/256-KiB cap; source traversal remains paged. This is finite construction recovery, not complete proof coverage or measured comprehension.
+
+[Method and reproduction](/research/proof-atlas/packet-typing/README.md) · [Independent checks](/scripts/test-proof-atlas-packet-types.cjs) · [Browser checks](/scripts/test-proof-atlas-packet-types-browser.cjs)

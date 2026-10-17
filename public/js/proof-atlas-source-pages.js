@@ -29,5 +29,5 @@
   function run(fn,runOptions={}){const task=async()=>{live(runOptions.signal);for(let attempt=0;attempt<64;attempt++)try{const value=await fn();live(runOptions.signal);return value;}catch(error){live(runOptions.signal);if(!(error instanceof MissingPage))throw error;await load(error.page,runOptions.signal||signal);}throw Error('Source pages: retry limit reached; the complete view remains available.');};const result=queue.then(task,task);queue=result.catch(()=>{});return result;}
   return{data,manifest:m,record,run,state:()=>({...stats,cachedPages:pages.size,cachedNodes:[...pages.values()].reduce((sum,p)=>sum+p.nodes.length,0),indexPages:indices.size,pageLimit,indexLimit,nodeLimit:pageLimit*256,originalIndexSha256:record.indexSha256,manifestSha256:descriptor.sha256,validation:'full-source producer attestation; fetched pages checked by hash and local shape'}),dispose:()=>{disposed=true;pages.clear();indices.clear();}};
  }
- const api={open,fields};if(typeof module!=='undefined'&&module.exports)module.exports=api;else host.ProofAtlasSourcePages=api;
+ const api={open,fields,MissingPage};if(typeof module!=='undefined'&&module.exports)module.exports=api;else host.ProofAtlasSourcePages=api;
 })(typeof window==='undefined'?globalThis:window);
