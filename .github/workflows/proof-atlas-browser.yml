@@ -7,6 +7,11 @@ on:
       - 'public/data/proof-atlas/native-query-pages*'
       - 'public/data/proof-atlas/native-query-pages/**'
       - 'scripts/test-proof-atlas-native-page*.cjs'
+      - 'public/js/proof-atlas-projected-context-*.js'
+      - 'public/data/proof-atlas/projected-context-modules*'
+      - 'public/data/proof-atlas/projected-context-modules/**'
+      - 'scripts/test-proof-atlas-projected-context-*.cjs'
+      - 'scripts/proof-atlas-expression-digest.cjs'
       - 'public/js/proof-atlas-source-context-module*.js'
       - 'scripts/test-proof-atlas-source-context-module*.cjs'
       - 'public/js/proof-atlas-context-module*.js'
@@ -173,6 +178,11 @@ on:
       - 'public/data/proof-atlas/native-query-pages*'
       - 'public/data/proof-atlas/native-query-pages/**'
       - 'scripts/test-proof-atlas-native-page*.cjs'
+      - 'public/js/proof-atlas-projected-context-*.js'
+      - 'public/data/proof-atlas/projected-context-modules*'
+      - 'public/data/proof-atlas/projected-context-modules/**'
+      - 'scripts/test-proof-atlas-projected-context-*.cjs'
+      - 'scripts/proof-atlas-expression-digest.cjs'
       - 'public/js/proof-atlas-source-context-module*.js'
       - 'scripts/test-proof-atlas-source-context-module*.cjs'
       - 'public/js/proof-atlas-context-module*.js'
@@ -341,6 +351,9 @@ jobs:
           node scripts/test-proof-atlas-context-module-loading.cjs
           node scripts/test-proof-atlas-source-context-modules.cjs
           node scripts/test-proof-atlas-source-context-module-loading.cjs
+          node scripts/test-proof-atlas-projected-context-modules.cjs
+          node scripts/test-proof-atlas-projected-context-loading.cjs
+          node scripts/test-proof-atlas-projected-context-browser.cjs
           node scripts/test-proof-atlas-context-modules-browser.cjs
           node scripts/test-proof-atlas-source-context-modules-browser.cjs
           node scripts/test-proof-atlas-context-type-loading.cjs
@@ -410,6 +423,9 @@ jobs:
             /tmp/atlas-context-walk.json
             /tmp/atlas-source-context-modules.json
             /tmp/atlas-source-context-module-loading.json
+            /tmp/atlas-projected-context-modules.json
+            /tmp/atlas-projected-context-loading.json
+            /tmp/atlas-projected-context-browser/
             /tmp/atlas-judgment-proof-focus.json
 
   lean-reference:
