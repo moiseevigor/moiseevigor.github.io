@@ -1,0 +1,1 @@
+window.PROOF_ATLAS_CONTEXT_CLOSURE={"format":"ProofAtlasContextClosureDescriptor/1","file":"/public/data/proof-atlas/context-closure/46b4bb8f05d7086d7b4f86cc4a05f86595a4b8455e975afbbe56e07c56df2a85.json.gz","sha256":"46b4bb8f05d7086d7b4f86cc4a05f86595a4b8455e975afbbe56e07c56df2a85","decodedBytes":539602};
