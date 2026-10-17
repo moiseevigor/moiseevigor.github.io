@@ -51,8 +51,9 @@
    await metadataReady();if(!window.ProofAtlasLibraryData)await script('/public/js/proof-atlas-library-data.js?v=3');
    try{
     if(!window.PROOF_ATLAS_OCCURRENCE_TYPES)await script('/public/data/proof-atlas/occurrence-types-manifest.js?v=4');
-    if(!window.ProofAtlasOccurrenceTypes)await script('/public/js/proof-atlas-occurrence-types.js?v=11');
+    if(!window.ProofAtlasOccurrenceTypes)await script('/public/js/proof-atlas-occurrence-types.js?v=12');
    }catch(_){/* Optional type evidence must not block the original compiled reader. */}
+   try{if(!window.PROOF_ATLAS_PACKET_TYPES)await script('/public/data/proof-atlas/packet-types-manifest.js?v=1');}catch(_){/* Earlier judgments remain usable without the replay supplement. */}
    try{
     if(!window.PROOF_ATLAS_BETA_REDUCTIONS)await script('/public/data/proof-atlas/beta-reductions-manifest.js?v=1');
     if(!window.ProofAtlasBetaReduction)await script('/public/js/proof-atlas-beta-reduction.js?v=12');
@@ -75,7 +76,7 @@
    try{if(!window.PROOF_ATLAS_PROJECTED_CONTEXT_MODULES)await script('/public/data/proof-atlas/projected-context-modules-manifest.js?v=1');}catch(_){/* Optional reduced contexts preserve the existing full-context reader. */}
    try{if(!window.PROOF_ATLAS_REDUCED_REPLAY)await script('/public/data/proof-atlas/reduced-replay-manifest.js?v=1');}catch(_){/* Existing recorded contexts remain available. */}
    try{if(!window.PROOF_ATLAS_COMPILED_REPLAY)await script('/public/data/proof-atlas/compiled-replay-manifest.js?v=1');}catch(_){/* Optional replay metadata leaves the compiled reader available. */}
-   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=47');
+   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=48');
    if(!$('pl-provenance').closest('details')){const details=document.createElement('details'),summary=document.createElement('summary');summary.textContent='Provenance and axiom dependencies';$('pl-provenance').before(details);details.append(summary,$('pl-provenance'));}
    return window.ProofAtlasLibrary;
   })().catch(e=>{engine=null;throw e;});return engine;
