@@ -2,7 +2,7 @@
 
 The complete frozen context inventory for `lean_workbook_plus_6206` has 149 selected source routes. Every route now has a reduced term/type closure checked directly from the public compiled packet. The native process imports the pinned compiled Mathlib/Aesop dependencies; the original theorem and proof module are absent. No original proof script or project build is required.
 
-This inventory evaluates the ordered context-projection rule. The existing reader still uses its separately published three-route package. The broader evidence below is a distinct format with an explicit public-packet environment; it must not be presented as an imported-original-module attestation or silently passed to that reader loader.
+This inventory evaluates the ordered context-projection rule. A dedicated reader adapter now authenticates its public-packet environment and exposes the 149 recorded routes. The earlier three-route imported-module package remains a separate fallback when the optional replay manifest is absent. Neither environment is presented as the other.
 
 ## Checks
 
@@ -31,7 +31,7 @@ The 93 reductions count context closures, including types and values. They are n
 
 `reduced-replay-manifest.js` identifies the immutable `ProofAtlasReducedReplayEvidence/1` package. It contains source routes, compact closure recipes, raw recorded types, canonical-root fingerprints, native-check flags, baseline assumptions and producer/independent-checker hashes. It excludes original scripts, private paths, logs and materialized closed graphs. The earlier compiled-module digest belongs to the input context evidence; this replay does not load or reverify that original module.
 
-The public audit independently reconstructs all 149 closures, checks fingerprints and boundaries, reproduces the query inventory and rejects altered provenance/typing claims. Archived flags and fingerprints are not a portable kernel certificate. Fresh replay is a separate native command. These records provide no inferred typing for arbitrary diagram descendants, no certified article equivalence and no comprehension measurement. The reader's three-route coverage remains explicit until a loader for this environment is validated.
+The public audit independently reconstructs all 149 closures, checks fingerprints and boundaries, reproduces the query inventory and rejects altered provenance/typing claims. Archived flags and fingerprints are not a portable kernel certificate. Fresh replay is a separate native command. These records provide no inferred typing for arbitrary diagram descendants, no certified article equivalence and no comprehension measurement.
 
 ## Reproduction
 
@@ -49,3 +49,18 @@ node scripts/test-proof-atlas-reduced-replay.cjs
 ```
 
 The publisher's default compares the regenerated compact package with the frozen generation. `--publish` deliberately creates a new immutable generation. Raw native output and resource records remain private. The public artifact audit needs only Node and the checked-out public data; it does not run a kernel.
+
+## Bounded reader adapter
+
+The [reader](https://moiseevigor.github.io/projects/proof-atlas/library/?loading=paged&edition=goedel-sample-4331&proof=lean_workbook_plus_6206&route=1:1.1.1.1.1.1.1.2.0#expr-154) defaults to the original full-context observation. **Required syntactic context** loads the replay package only on request. Its adapter authenticates the source, earlier context-package identity, pinned dependencies, baseline proof checks, unchanged original observations, exact route inventory and reduced-module checks before preparing geometry. It shares the bounded projection renderer, not the older imported-module provenance envelope.
+
+Every replay cut retains `public-packet-reduced-context/1`, the replay environment hash, native-output and query-inventory hashes and baseline-proof digest. The earlier compiled-module hash is labelled as an earlier input record, not reverified by replay. Canonical modules share their computed geometry; switching an original use retains its own source mapping. Native checks cover complete closed term/type roots. Computed descendants receive no additional typing judgment.
+
+The independent paged-loader audit checks all 149 routes, 1,071 cuts, 124 canonical-use component comparisons and 3,598 inverse source locations against separately reconstructed references. It checks 199 variable links, including 138 appearances where the index changes but the original binder does not. The largest tested cut captures 56 source tuples and 71 virtual states. These are finite cut measurements; raw type metadata and the independent offline reference have separate residency. The existing 4,096-tuple source cache and projection limits remain in force.
+
+```sh
+node scripts/test-proof-atlas-replay-context-loading.cjs
+node scripts/test-proof-atlas-replay-context-browser.cjs
+```
+
+The browser check prepares both root components at all 149 routes and exercises representative proof/type/value reductions, recorded type/value instantiations, source-preserving local navigation, both reader loading modes, optional-package/code failures and retry, and four phone/desktop and light/dark accessibility audits. The older three-route browser suite explicitly withholds the optional replay manifest to check that fallback separately. No blog claim or new native result is generated by this adapter.

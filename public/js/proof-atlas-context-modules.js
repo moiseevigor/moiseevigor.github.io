@@ -10,7 +10,14 @@ function dataFor(record,module,evidence){
  return {...module.moduleGraph,serialization:'ExprDAG/1',roots:[module.moduleTermRoot,module.moduleTypeRoot],declaration:{name:record.name,rootPaths:[stem+'.term',stem+'.type']}};
 }
 function origin(record,module,evidence,part){
- demand(['term','type'].includes(part),'module part');for(const field of ['sha256','producerSha256','requestSha256','nativeOutputSha256','compiledModuleSha256'])demand(hash(evidence[field]),'evidence identity');
+ demand(['term','type'].includes(part),'module part');
+ if(evidence?.format==='ProofAtlasReplayContextModuleDescriptor/1'){
+  for(const f of ['sha256','producerRuntimeSha256','queryInventorySha256','nativeOutputSha256','baselineProofSha256','environmentSha256'])demand(hash(evidence[f]),'replay evidence identity');
+  demand(evidence.name===record.name&&evidence.indexSha256===record.indexSha256&&evidence.sourceSha256===record.sourceSha256,'replay source identity');
+  demand(evidence.environment?.kind==='public-packet-reduced-context/1'&&evidence.environment.originalProofModulesImported===false&&!('compiledModuleSha256'in evidence),'replay environment boundary');
+  return {kind:'checked-context-module',namespace:'checked-context-module',method:'closed-public-packet-context/1',status:'native-checked',nativeJudgmentScope:'complete-module-root',moduleId:module.id,part,evidenceSha256:evidence.sha256,producerRuntimeSha256:evidence.producerRuntimeSha256,queryInventorySha256:evidence.queryInventorySha256,nativeOutputSha256:evidence.nativeOutputSha256,baselineProofSha256:evidence.baselineProofSha256,environmentSha256:evidence.environmentSha256,environment:clone(evidence.environment),sourceContextEvidence:clone(evidence.sourceContextEvidence),source:{name:record.name,indexSha256:record.indexSha256,sourceSha256:record.sourceSha256},contextEntryCount:module.contextEntryCount,argumentCount:module.argumentCount,letSlots:[...module.letSlots]};
+ }
+for(const field of ['sha256','producerSha256','requestSha256','nativeOutputSha256','compiledModuleSha256'])demand(hash(evidence[field]),'evidence identity');
  demand(evidence.name===record.name&&evidence.indexSha256===record.indexSha256&&evidence.sourceSha256===record.sourceSha256,'source identity');
  return {kind:'checked-context-module',namespace:'checked-context-module',method:'closed-source-context/1',status:'native-checked',nativeJudgmentScope:'complete-module-root',moduleId:module.id,part,evidenceSha256:evidence.sha256,producerSha256:evidence.producerSha256,requestSha256:evidence.requestSha256,nativeOutputSha256:evidence.nativeOutputSha256,compiledModuleSha256:evidence.compiledModuleSha256,source:{name:record.name,indexSha256:record.indexSha256,sourceSha256:record.sourceSha256},contextEntryCount:module.contextEntryCount,argumentCount:module.argumentCount,letSlots:[...module.letSlots]};
 }
