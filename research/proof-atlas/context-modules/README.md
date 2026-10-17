@@ -127,7 +127,7 @@ The model audit covers 597 native observations in sixteen packets: 594 existing 
 
 A prepared cut has hard limits of 4,096 captured source tuples, 8 MiB decoded source tuples, 8,192 virtual states and 65,536 virtual property operations. The finite audit reaches 47 source tuples, 5,145 decoded bytes, 61 states and 191 operations. Source and scope caches, raw type metadata and the preceding visible cut during replacement have separate residency. Complete mode retains its full source. These bounds do not describe total browser memory.
 
-The integrated browser checks both contexts, all six term/type roots, exact binder and raw-type Γ jumps, preserved source selections, optional-load recovery and stale preparation. Desktop/mobile and light/dark accessibility checks cover the reader. These checks do not establish readability or improved human comprehension; central edge captions can still overlap.
+The integrated browser checks both contexts, all six term/type roots, exact binder and raw-type Γ jumps, preserved source selections, optional-load recovery and stale preparation. Desktop/mobile and light/dark accessibility checks cover the reader. These checks do not establish readability or improved human comprehension.
 
 ```sh
 node scripts/test-proof-atlas-projected-context-modules.cjs
@@ -135,3 +135,9 @@ node scripts/test-proof-atlas-projected-context-loading.cjs
 # After the production site build:
 node scripts/test-proof-atlas-projected-context-browser.cjs
 ```
+
+### Connection captions in computed views
+
+The shared computed-term viewport measures the rendered caption font and reserves glyph and node-name bounds. It tries five fixed positions along each connection, rejecting collisions with previous captions, nodes, names, other connections and the viewport boundary. A caption remains on its own straight segment. At narrow widths, or when no candidate fits, the visual caption is omitted; the edge title and keyboard connection list retain the exact field or scope role and both endpoint paths. The endpoint buttons use the same computed/original namespace distinction as node navigation. Resize and font-load events remeasure the finite scene without changing its mathematical structure.
+
+`node scripts/test-proof-atlas-beta-captions-browser.cjs` audits actual SVG bounds and exact connection lists on all three native routes, both context modes and both term/type roots, at four widths in both themes. It deliberately overlaps two captions and changes a keyboard port to check rejection, exercises font remeasurement and follows an endpoint button. This is a finite caption-placement check; node-name layout, edge crossings away from captions, and human comprehension remain separate questions.
