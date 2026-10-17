@@ -1,6 +1,6 @@
 # Checked context modules
 
-Status: integrated prototype in the existing compiled reader. Source-shape sharing remains a distinct syntax layer. Typed-module evidence currently covers the finite own-control observations below.
+Status: integrated prototype in the existing compiled reader. Source-shape sharing remains a distinct syntax layer. Typed-module evidence covers the finite own-control observations and three separately selected AI-proof routes in the ordered projection extension below.
 
 A term's source-variable links do not define its typing interface. For example, a proof hypothesis `h : p` mentions only `h` as a term, while its recorded type requires `p`. A retained let definition can also require an earlier variable through its value. `ProofAtlasDependentInterface/1` begins with the free context slots of the selected term and its recorded type, then closes that set under selected header types and let values. Headers use their pre-binder context. Original order, constructor, visibility, universe namespace and source routes remain attached.
 
@@ -35,7 +35,7 @@ Fifteen own declarations supply 594 exact native observations, 313 closed module
 
 An independent reconstruction of the source term, type and reordered header expressions matches all stored module term/type graphs. Geometry checks cover 5,634 cuts and 6,860 inverse mappings, including 563 original-source variable links and 441 raw-type variable links. Sixty-five geometry/provenance/limit alterations must be rejected. A fresh own-control replay matches all 594 stored entries and rejects 31 deliberately omitted required context entries. These are finite checks, not a proved Lean metatheory, a portable standalone kernel certificate, semantic compression or a comprehension result.
 
-The interface operation is also independently checked on 743 recorded observations: the 594 own observations and 149 existing AI-attributed observations in `lean_workbook_plus_6206`. All 149 AI source/scope-paged interfaces match the full-source reference with a source cache capped at 4,096 tuples and a scope cache capped at sixteen entries. The original context-type package is separately resident. No reduced-context or module typing has been freshly checked for those AI observations. These cache bounds do not describe total browser memory.
+The interface operation is also independently checked on 743 recorded observations: the 594 own observations and 149 existing AI-attributed observations in `lean_workbook_plus_6206`. All 149 AI source/scope-paged interfaces match the full-source reference with a source cache capped at 4,096 tuples and a scope cache capped at sixteen entries. The original context-type package is separately resident. Three selected AI routes have separate reduced-context native checks in the ordered projection extension below. The interface computation does not confer typing on the other routes. These cache bounds do not describe total browser memory.
 
 ## Data and reproduction
 
@@ -100,3 +100,38 @@ node scripts/test-proof-atlas-source-context-modules-browser.cjs
 | Closed expected-type body | Selected native raw-type graph and type-local route |
 
 The canonical observation identifies the computed graph. The selected observation identifies the inverse map and retains its own native flags. The audit additionally opens 1,432 cuts through recorded context header fields across term/type components. Variable checks compare each displayed computed binder reference with the corresponding original source binder or native type-local binder; raw-type ambient references resolve through the selected original context. Wrapper references retain their construction relation rather than acquiring an invented identical source expression.
+
+## Ordered source-context projection
+
+The same reader now offers **Required syntactic context** at three separately checked routes in `lean_workbook_plus_6206`. **Full recorded context** remains the default. Other full-context observations receive no reduction control and explicitly report that a checked reduced context is not recorded at that route. Missing optional inventory is labelled unavailable. The article remains a separate application; this rule operates on compiled terms without article correspondences.
+
+The source-backed projection changes free variable indices while retaining constructor payloads, ordered ports and every internal binder. For an original context of depth `d`, let `S` be its retained slots in increasing order. Under `c` internal binders, an index `i < c` remains unchanged. Otherwise its original context slot is `j = d - 1 - (i - c)`; if `j` is the `q`th entry of `S`, its projected index is `c + |S| - 1 - q`. An omitted required slot is rejected. Header domains and let values use the retained prefix strictly before their own source binder. New assumptions become lambda/Pi pairs; retained definitions remain lets with `nondep=false`.
+
+Authenticated source support summaries and the validated recorded-type graph supply the dependency interface. The native retained slots must match that interface. Projection preserves each borrowed region's occurrence count. Its exact maximum free index follows from the monotone ordered index map, without scanning every borrowed node. Only accessed source tuples and virtual states are retained. This is a tested implementation rule, not a Lean metatheory proof.
+
+Fresh native checks in the same frozen compiled AI environment verify closed term/type typing, expected-type conversion, instantiation typing and conversion to each original occurrence. Two additional queries deliberately omit required support; both fail specifically because support remains free. The finite results are:
+
+| Selected original route | Role | Context entries | Full closure occurrences | Reduced closure occurrences |
+| --- | --- | ---: | ---: | ---: |
+| `1:1.1.1.1.1.1.1.2.0` | type-valued proposition | 8 → 1 | 9,439,756 | 95 |
+| `1:1.1.1.1.1.1.1.1.0` | proof | 7 → 1 | 575 | 285 |
+| `1:1.1.1.1.1.1.1.2.1` | proof | 8 → 7 | 20,284,420 | 10,845,049 |
+
+These counts describe three context closures. They are not a reduction of the entire theorem, logically minimal assumptions or semantic proof compression. The largest reduced module contains 33,484 distinct nodes and exceeds the existing materialized-module limit of 32,768. Its source-backed view does not raise that limit or load a second complete closed graph. It borrows the original source cursor and remaps indices lazily.
+
+`ProofAtlasProjectedContextModuleScene/1` uses the `source-projected-context-module` namespace and the existing constructor notation. Complete closed roots carry the corresponding native judgment; focused descendants receive no additional typing. Each selected use has its own inverse map. Header regions and term-body routes return to exact original source occurrences; expected-type bodies retain a native-type namespace. The original-type view uses the original context and exact Γ targets, including omitted headers needed only to identify that original context.
+
+`projected-context-modules-manifest.js` pins a 16,243-byte decoded compiled package with the three recipes and small original type graphs. It excludes original Lean scripts, logs and materialized closed graphs. Separate constructor-root fingerprints pin native closed terms and expected types independent of DAG node numbering and sharing. The public offline checker reconstructs those expressions and matches their fingerprints. The reader authenticates the package and computes finite cuts; it does not rerun Lean or recompute an entire closed graph. Fingerprints and archived native attestations are not a portable kernel certificate. Fresh native reproduction additionally requires the pinned compiled module and dependency environment.
+
+The model audit covers 597 native observations in sixteen packets: 594 existing own controls and the three AI routes. It compares 5,582 cuts and 2,031 displayed inverse variable links with independent references. In 302 displayed cases an index changes while its exact original binder is preserved. It also checks 562 canonical-use selections, 506 header-region cuts and 99 rejection controls. The AI subset has 54 source-paged cuts; full offline reference graphs are separately resident. Native reuse checks belong to the existing own controls; the three AI records contain no further module instantiation or cross-proof reuse result.
+
+A prepared cut has hard limits of 4,096 captured source tuples, 8 MiB decoded source tuples, 8,192 virtual states and 65,536 virtual property operations. The finite audit reaches 47 source tuples, 5,145 decoded bytes, 61 states and 191 operations. Source and scope caches, raw type metadata and the preceding visible cut during replacement have separate residency. Complete mode retains its full source. These bounds do not describe total browser memory.
+
+The integrated browser checks both contexts, all six term/type roots, exact binder and raw-type Γ jumps, preserved source selections, optional-load recovery and stale preparation. Desktop/mobile and light/dark accessibility checks cover the reader. These checks do not establish readability or improved human comprehension; central edge captions can still overlap.
+
+```sh
+node scripts/test-proof-atlas-projected-context-modules.cjs
+node scripts/test-proof-atlas-projected-context-loading.cjs
+# After the production site build:
+node scripts/test-proof-atlas-projected-context-browser.cjs
+```
