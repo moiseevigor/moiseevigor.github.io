@@ -500,6 +500,14 @@ Independent finite-set calculations agree with all 395,902 stored summaries in t
 
 [Method, bounds and reproduction](/research/proof-atlas/scope-interfaces.md) · [Independent audit](/scripts/test-proof-atlas-scope-interfaces.cjs) · [Failure controls](/scripts/test-proof-atlas-scope-controls.cjs) · [Browser checks](/scripts/test-proof-atlas-scope-browser.cjs)
 
+## Parametric source sharing
+
+Repeated source expressions can now share one relative shape while retaining separate original occurrences and binder assignments. Free term references become formal ports; internal binders retain relative routes in a template namespace. Instantiation restores the original source paths and lexical targets. Each occurrence keeps its own recorded root type and role. Refinement preserves the whole-template interface, including ports unused in the smaller cut.
+
+The comparison includes displayed proof regions and collapsed source regions. The independent audit checks 23,198 uses in 11,592 views across the finite 34-packet inventory, including 1,881 proof-role appearances. In `lean_workbook_20418`, three proof-valued uses of `Classical.or_iff_not_imp_left` share a 93-occurrence source shape with separate binder assignments and proof records. Selected regions also expose relative source geometry, ordered fields and retained constructor occurrences for local inspection. This is syntactic sharing; native judgments remain specific to each use. Semantic compression and comprehension have separate evaluation requirements.
+
+[Example reader](/projects/proof-atlas/library/?loading=paged&edition=goedel-sample-4331&proof=lean_workbook_20418) · [Protocol, bounds and reproduction](/research/proof-atlas/source-templates.md) · [Independent corpus audit](/scripts/test-proof-atlas-source-templates.cjs) · [Constructor and failure controls](/scripts/test-proof-atlas-source-template-controls.cjs) · [Browser checks](/scripts/test-proof-atlas-source-template-browser.cjs)
+
 ## Scope-path traversal
 
 The context walker retains the current source path as it follows a route. It no longer restarts from the declaration root for every enclosing binder. The first binder requests the prefix path once; subsequent fields extend it directly. Binder-free routes retain the earlier lazy access to root-path metadata. No route or context cache is introduced. Domains and let values still precede their own binder; bodies still extend the context by one.
