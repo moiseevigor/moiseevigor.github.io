@@ -38,4 +38,4 @@ The codec controls cover corruption, re-signed invalid shapes, decoded-byte limi
 
 ## Remaining limits
 
-Native type packages still load in full. Very scattered source working sets can exceed the cache/retry bound and remain explicitly unavailable in paged mode; the complete-view link is an explicit user action. No automatic full-source fallback occurs. This does not establish a bound for all browser memory, semantic compression, complete all-context typing, reconstruction of tactic histories or improved human comprehension.
+The [native query layer](native-query-pages.md) now loads selected native records on demand in this mode. Shared native type graphs still load fully within separate fixed bounds. Very scattered source working sets can exceed the cache/retry bound and remain explicitly unavailable in paged mode; the complete-view link is an explicit user action. No automatic full-source fallback occurs. This does not establish a bound for all browser memory, semantic compression, complete all-context typing, reconstruction of tactic histories or improved human comprehension.

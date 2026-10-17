@@ -3,6 +3,10 @@ on:
   push:
     branches: [master]
     paths:
+      - 'public/js/proof-atlas-native-pages.js'
+      - 'public/data/proof-atlas/native-query-pages*'
+      - 'public/data/proof-atlas/native-query-pages/**'
+      - 'scripts/test-proof-atlas-native-page*.cjs'
       - 'public/js/proof-atlas-source-pages.js'
       - 'public/js/proof-atlas-paged-library.js'
       - 'public/data/proof-atlas/source-pages*'
@@ -151,6 +155,10 @@ on:
       - '.github/workflows/proof-atlas-browser.yml'
   pull_request:
     paths:
+      - 'public/js/proof-atlas-native-pages.js'
+      - 'public/data/proof-atlas/native-query-pages*'
+      - 'public/data/proof-atlas/native-query-pages/**'
+      - 'scripts/test-proof-atlas-native-page*.cjs'
       - 'public/js/proof-atlas-source-pages.js'
       - 'public/js/proof-atlas-paged-library.js'
       - 'public/data/proof-atlas/source-pages*'
@@ -313,6 +321,7 @@ jobs:
           node scripts/test-proof-atlas-judgment-geometry-browser.cjs
           node scripts/test-proof-atlas-context-frames-browser.cjs
           node scripts/test-proof-atlas-source-pages-browser.cjs
+          node scripts/test-proof-atlas-native-pages-browser.cjs
           node scripts/test-proof-atlas-lambda-judgments.cjs
           node scripts/test-proof-atlas-lambda-judgments-browser.cjs
           node scripts/test-proof-atlas-beta-reductions.cjs
