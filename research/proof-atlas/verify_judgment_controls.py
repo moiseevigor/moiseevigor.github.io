@@ -38,6 +38,21 @@ def AtlasCompose.longProofContext
 def AtlasCompose.sharedProofContext (P : Prop) : (P → P → P) ∧ (P → P → P) :=
  And.intro (fun q r => q) (fun q r => q)
 
+def AtlasCompose.singleCase (P Q : Prop) (h : P ∧ Q) : P := by
+ cases h with
+ | intro p q => exact p
+def AtlasCompose.nestedCase (P Q R : Prop) (h : P ∧ (Q ∧ R)) : P ∧ R := by
+ cases h with
+ | intro p hqr =>
+  cases hqr with
+  | intro q r => exact And.intro p r
+def AtlasCompose.existsCase (P : Nat → Prop) (h : ∃ n, P n) : ∃ n, P n := by
+ cases h with
+ | intro n hn => exact Exists.intro n hn
+def AtlasCompose.caseLet (P Q : Prop) (h : P ∧ Q) : P ∧ Q := by
+ cases h with
+ | intro p q => exact let saved : P := p; And.intro saved q
+
 def AtlasCompose.mp (P Q : Prop) (f : P → Q) (h : P) : Q := f h
 def AtlasCompose.dependent (P : Nat → Prop) (h : ∀ n, P n) (n : Nat) : P n := h n
 def AtlasCompose.chain (P Q R : Prop) (f : P → Q) (g : Q → R) (h : P) : R := g (f h)
@@ -53,7 +68,7 @@ run_cmd do
  let mut requests : Array Json := #[]
  let mut lets : Array Json := #[]
  for name in [``AtlasCompose.mp,``AtlasCompose.dependent,``AtlasCompose.chain,``AtlasCompose.shadow,
-   ``AtlasCompose.localProof,``AtlasCompose.localDependent,``AtlasCompose.unused,``AtlasCompose.cases,``AtlasCompose.recursiveUnused,``AtlasCompose.takeInputs,``AtlasCompose.mixed,``AtlasCompose.nestedProof,``AtlasCompose.wideProofHead,``AtlasCompose.proofShadow,``AtlasCompose.longProofContext,``AtlasCompose.sharedProofContext] do
+   ``AtlasCompose.localProof,``AtlasCompose.localDependent,``AtlasCompose.unused,``AtlasCompose.cases,``AtlasCompose.recursiveUnused,``AtlasCompose.takeInputs,``AtlasCompose.mixed,``AtlasCompose.nestedProof,``AtlasCompose.wideProofHead,``AtlasCompose.proofShadow,``AtlasCompose.longProofContext,``AtlasCompose.sharedProofContext,``AtlasCompose.singleCase,``AtlasCompose.nestedCase,``AtlasCompose.existsCase,``AtlasCompose.caseLet] do
   let info ← getConstInfo name
   let some value := info.value? true | throwError "Missing body"
   let (t,s) := AtlasLibrary.intern info.type {}
