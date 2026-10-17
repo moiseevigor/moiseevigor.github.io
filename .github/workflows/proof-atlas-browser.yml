@@ -7,6 +7,12 @@ on:
       - 'public/data/proof-atlas/native-query-pages*'
       - 'public/data/proof-atlas/native-query-pages/**'
       - 'scripts/test-proof-atlas-native-page*.cjs'
+      - 'public/js/proof-atlas-context-module*.js'
+      - 'public/js/proof-atlas-dependent-interface.js'
+      - 'public/data/proof-atlas/context-modules*'
+      - 'public/data/proof-atlas/context-modules/**'
+      - 'scripts/*proof-atlas-context-module*.cjs'
+      - 'scripts/test-proof-atlas-dependent-interfaces.cjs'
       - 'public/js/proof-atlas-source-template*.js'
       - 'scripts/test-proof-atlas-source-template*.cjs'
       - 'public/js/proof-atlas-scope-*.js'
@@ -165,6 +171,12 @@ on:
       - 'public/data/proof-atlas/native-query-pages*'
       - 'public/data/proof-atlas/native-query-pages/**'
       - 'scripts/test-proof-atlas-native-page*.cjs'
+      - 'public/js/proof-atlas-context-module*.js'
+      - 'public/js/proof-atlas-dependent-interface.js'
+      - 'public/data/proof-atlas/context-modules*'
+      - 'public/data/proof-atlas/context-modules/**'
+      - 'scripts/*proof-atlas-context-module*.cjs'
+      - 'scripts/test-proof-atlas-dependent-interfaces.cjs'
       - 'public/js/proof-atlas-source-template*.js'
       - 'scripts/test-proof-atlas-source-template*.cjs'
       - 'public/js/proof-atlas-scope-*.js'
@@ -320,6 +332,10 @@ jobs:
           node scripts/test-proof-atlas-source-references-browser.cjs
           node scripts/test-proof-atlas-compositional-types.cjs
           node scripts/test-proof-atlas-context-types.cjs
+          node scripts/test-proof-atlas-dependent-interfaces.cjs
+          node scripts/test-proof-atlas-context-modules.cjs
+          node scripts/test-proof-atlas-context-module-loading.cjs
+          node scripts/test-proof-atlas-context-modules-browser.cjs
           node scripts/test-proof-atlas-context-type-loading.cjs
           node scripts/test-proof-atlas-context-types-browser.cjs
           node scripts/test-proof-atlas-application-types.cjs
