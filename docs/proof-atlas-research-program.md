@@ -723,6 +723,14 @@ All 149 routes in the frozen context inventory of one AI-attributed proof now ha
 
 Of 93 proper context reductions, two are proof-valued, thirty type-valued and sixty-one value-valued. Alternate instantiations are types or values, with no alternate proof-role observation. These are local closures in a predetermined route inventory, not whole-proof or semantic compression. The protocol reuses the pinned compiled dependencies and preserves the earlier three native roots. It publishes compact compiled evidence, not original scripts or materialized closed graphs.
 
-The broader replay evidence has a distinct public-packet environment. The existing reader still exposes its separate three-route reduced-context package; it gains no silent coverage from this artifact. Unrecorded descendants, other declarations, general typing preservation and measured comprehension remain open.
+The broader replay evidence has a distinct public-packet environment. A dedicated reader adapter exposes all 149 recorded routes while retaining the earlier imported-module evidence as a separate fallback. The full recorded context remains the default. Unrecorded descendants, other declarations, general typing preservation and measured comprehension remain open.
 
 [Method, coverage and reproduction](/research/proof-atlas/reduced-replay/README.md) · [Compiled evidence manifest](/public/data/proof-atlas/reduced-replay-manifest.js) · [Independent artifact audit](/scripts/test-proof-atlas-reduced-replay.cjs)
+
+## Replay-backed context geometry
+
+The reduced-context reader now covers the complete frozen 149-route inventory of `lean_workbook_plus_6206`, using the public-packet replay checks above. Its 87 canonical modules and 62 recorded type/value instantiations retain separate original-use maps. Diagram provenance names the replay environment and qualifies the earlier source-module hash as an input record; the original proof module was not imported for replay. Native judgments cover complete closed roots only.
+
+An independent paged audit compares 1,071 cuts with reconstructed references, checks 124 canonical-use component pairs and 199 variable links, and rejects sixteen altered evidence or typing controls. In 138 variable-link appearances a projected index changes while its original binder is retained. Browser checks prepare all 298 term/type root components and exercise representative visual navigation. These establish finite coverage and structural correspondence, not whole-proof compression, general typing preservation or measured readability.
+
+[Reader and adapter boundaries](/research/proof-atlas/reduced-replay/README.md#bounded-reader-adapter) · [Paged model checks](/scripts/test-proof-atlas-replay-context-loading.cjs) · [Browser checks](/scripts/test-proof-atlas-replay-context-browser.cjs)

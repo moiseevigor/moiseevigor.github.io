@@ -14,6 +14,10 @@ async function provider(pkg,descriptor,owner,record,{signal,scope:sharedScope,sc
  demand(env?.kind==='existing-compiled-reduced-context/1'&&env.module===record.module&&env.sourceSha256===record.sourceSha256&&env.compiledModuleSha256===descriptor.compiledModuleSha256&&env.compiler?.includes('version 4.33.1,')&&env.dependencyRevisions?.mathlib==='0df444a360eaa60ab8c11dca51a86af692955474'&&hash(env.lakeManifestSha256),'native environment');
  demand(await A.digest(new TextEncoder().encode(JSON.stringify(env)))===descriptor.environmentSha256,'environment hash');
  demand(Array.isArray(pkg.entries)&&pkg.entries.length>=1&&pkg.entries.length<=512&&pkg.entries.length===descriptor.checked&&same(pkg.entries.map(e=>e.state?.route),descriptor.routes),'exact native route inventory');
+ return recipes(pkg,descriptor,owner,record,{signal,scope:sharedScope,scopeDescriptor});
+}
+// Shared recipe machinery is called only after a format-specific envelope check.
+async function recipes(pkg,descriptor,owner,record,{signal,scope:sharedScope,scopeDescriptor}={}){
  let scope=sharedScope,ownScope=false,disposed=false,cached=null,epoch=0;const entries=new Map(),canonical=new Map(),models=new Map(),groups=new Map();
  const run=(fn,s)=>owner.run?owner.run(fn,{signal:s||signal}):Promise.resolve().then(()=>{check(s||signal);return fn();});
  try{
@@ -38,5 +42,5 @@ async function open(descriptor,owner,record,options={}){
  check(options.signal);demand(descriptor?.name===record.name&&descriptor.indexSha256===record.indexSha256&&descriptor.sourceSha256===record.sourceSha256&&hash(descriptor.sha256)&&descriptor.file.startsWith('/public/data/proof-atlas/projected-context-modules/')&&Number.isInteger(descriptor.decodedBytes)&&descriptor.decodedBytes>=1&&descriptor.decodedBytes<=8*1024**2,'descriptor identity/bounds');
  while(pending){await wait(pending,options.signal);check(options.signal);}const job=(async()=>{const pkg=await A.compressed(descriptor.file,descriptor.sha256,{maxBytes:8*1024**2,expectedBytes:descriptor.decodedBytes,signal:options.signal});check(options.signal);return provider(pkg,descriptor,owner,record,options);})();pending=job;try{return await job;}finally{if(pending===job)pending=null;}
 }
-const api={open,provider,state:()=>({activeLoad:pending!==null})};if(node)module.exports=api;else host.ProofAtlasProjectedContextModuleData=api;
+const api={open,provider,recipes,state:()=>({activeLoad:pending!==null})};if(node)module.exports=api;else host.ProofAtlasProjectedContextModuleData=api;
 })(typeof window==='undefined'?globalThis:window);
