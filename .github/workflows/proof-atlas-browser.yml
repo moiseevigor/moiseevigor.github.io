@@ -3,6 +3,10 @@ on:
   push:
     branches: [master]
     paths:
+      - 'public/data/proof-atlas/reduced-replay*'
+      - 'public/data/proof-atlas/reduced-replay/**'
+      - 'research/proof-atlas/reduced-replay/**'
+      - 'scripts/test-proof-atlas-reduced-replay.cjs'
       - 'scripts/test-proof-atlas-context-witnesses*.cjs'
       - 'public/data/proof-atlas/context-closure*'
       - 'public/data/proof-atlas/context-closure/**'
@@ -192,6 +196,10 @@ on:
       - '.github/workflows/proof-atlas-browser.yml'
   pull_request:
     paths:
+      - 'public/data/proof-atlas/reduced-replay*'
+      - 'public/data/proof-atlas/reduced-replay/**'
+      - 'research/proof-atlas/reduced-replay/**'
+      - 'scripts/test-proof-atlas-reduced-replay.cjs'
       - 'scripts/test-proof-atlas-context-witnesses*.cjs'
       - 'public/data/proof-atlas/context-closure*'
       - 'public/data/proof-atlas/context-closure/**'
@@ -391,6 +399,7 @@ jobs:
           node scripts/test-proof-atlas-projected-context-loading.cjs
           node scripts/test-proof-atlas-projected-context-browser.cjs
           node scripts/test-proof-atlas-compiled-replay.cjs
+          node scripts/test-proof-atlas-reduced-replay.cjs
           node scripts/test-proof-atlas-projection-theory.cjs
           node scripts/test-proof-atlas-projection-support.cjs
           node scripts/test-proof-atlas-context-closure.cjs
@@ -464,6 +473,7 @@ jobs:
         with:
           name: proof-atlas-scene-audits
           path: |
+            /tmp/atlas-reduced-replay.json
             /tmp/atlas-context-witnesses.json
             /tmp/atlas-context-closure.json
             /tmp/atlas-projection-support.json

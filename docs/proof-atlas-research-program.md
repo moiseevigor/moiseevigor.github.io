@@ -716,3 +716,13 @@ The context interface now supplies one shortest syntactic reference chain from a
 The search reads the prepared interface without reopening proof subtrees. It retains at most 512 predecessor records and pages chains sixteen edges at a time. Independent source-set and distance checks cover 454 paths across 746 existing observations. Six indirect paths occur in own let controls; audited AI interfaces have direct paths. The browser exposes witnesses only where the dependency interface is already available. No additional typing or measured comprehension benefit follows from this navigation layer.
 
 [Algorithm, limits and coverage](/research/proof-atlas/context-modules/README.md#reference-chain-witnesses) · [Model audit](/scripts/test-proof-atlas-context-witnesses.cjs) · [Browser checks](/scripts/test-proof-atlas-context-witnesses-browser.cjs)
+
+## Reduced-context replay coverage
+
+All 149 routes in the frozen context inventory of one AI-attributed proof now have native reduced-closure checks from their public compiled packet, without importing the original proof module. The kernel checks closed terms/types, expected-type conversion and instantiation back at every original use; an independent offline reconstruction agrees with every native module. All 109 predetermined direct-support omission controls reject for the required free-support reason. The observations form 87 canonical modules and 62 checked alternate instantiations.
+
+Of 93 proper context reductions, two are proof-valued, thirty type-valued and sixty-one value-valued. Alternate instantiations are types or values, with no alternate proof-role observation. These are local closures in a predetermined route inventory, not whole-proof or semantic compression. The protocol reuses the pinned compiled dependencies and preserves the earlier three native roots. It publishes compact compiled evidence, not original scripts or materialized closed graphs.
+
+The broader replay evidence has a distinct public-packet environment. The existing reader still exposes its separate three-route reduced-context package; it gains no silent coverage from this artifact. Unrecorded descendants, other declarations, general typing preservation and measured comprehension remain open.
+
+[Method, coverage and reproduction](/research/proof-atlas/reduced-replay/README.md) · [Compiled evidence manifest](/public/data/proof-atlas/reduced-replay-manifest.js) · [Independent artifact audit](/scripts/test-proof-atlas-reduced-replay.cjs)
