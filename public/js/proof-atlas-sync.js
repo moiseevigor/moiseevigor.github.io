@@ -73,7 +73,8 @@
    try{if(!window.PROOF_ATLAS_CONTEXT_TYPES)await script('/public/data/proof-atlas/context-types-manifest.js?v=1');}catch(_){/* Optional context evidence preserves the source reader. */}
    try{if(!window.PROOF_ATLAS_CONTEXT_MODULES)await script('/public/data/proof-atlas/context-modules-manifest.js?v=1');if(!window.ProofAtlasContextModuleExamples)await script('/public/js/proof-atlas-context-module-examples.js?v=1');if(!window.PROOF_ATLAS_LIBRARY.editions.some(e=>e.id==='context-module-controls'))window.PROOF_ATLAS_LIBRARY=window.ProofAtlasContextModuleExamples.register(window.PROOF_ATLAS_LIBRARY,window.PROOF_ATLAS_CONTEXT_MODULES);}catch(_){/* Optional own controls preserve the existing source inventories. */}
    try{if(!window.PROOF_ATLAS_PROJECTED_CONTEXT_MODULES)await script('/public/data/proof-atlas/projected-context-modules-manifest.js?v=1');}catch(_){/* Optional reduced contexts preserve the existing full-context reader. */}
-   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=41');
+   try{if(!window.PROOF_ATLAS_COMPILED_REPLAY)await script('/public/data/proof-atlas/compiled-replay-manifest.js?v=1');}catch(_){/* Optional replay metadata leaves the compiled reader available. */}
+   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=42');
    if(!$('pl-provenance').closest('details')){const details=document.createElement('details'),summary=document.createElement('summary');summary.textContent='Provenance and axiom dependencies';$('pl-provenance').before(details);details.append(summary,$('pl-provenance'));}
    return window.ProofAtlasLibrary;
   })().catch(e=>{engine=null;throw e;});return engine;
