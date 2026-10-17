@@ -3,6 +3,8 @@ on:
   push:
     branches: [master]
     paths:
+      - 'public/js/proof-atlas-context-interface-view.js'
+      - 'scripts/test-proof-atlas-context-interface-browser.cjs'
       - 'public/data/proof-atlas/projection-support*'
       - 'public/data/proof-atlas/projection-support/**'
       - 'scripts/test-proof-atlas-projection-support.cjs'
@@ -185,6 +187,8 @@ on:
       - '.github/workflows/proof-atlas-browser.yml'
   pull_request:
     paths:
+      - 'public/js/proof-atlas-context-interface-view.js'
+      - 'scripts/test-proof-atlas-context-interface-browser.cjs'
       - 'public/data/proof-atlas/projection-support*'
       - 'public/data/proof-atlas/projection-support/**'
       - 'scripts/test-proof-atlas-projection-support.cjs'
@@ -381,6 +385,7 @@ jobs:
           node scripts/test-proof-atlas-projection-support.cjs
           node scripts/test-proof-atlas-compiled-replay-browser.cjs
           node scripts/test-proof-atlas-context-modules-browser.cjs
+          node scripts/test-proof-atlas-context-interface-browser.cjs
           node scripts/test-proof-atlas-source-context-modules-browser.cjs
           node scripts/test-proof-atlas-context-type-loading.cjs
           node scripts/test-proof-atlas-context-types-browser.cjs

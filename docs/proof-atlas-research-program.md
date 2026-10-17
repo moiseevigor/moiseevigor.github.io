@@ -691,3 +691,12 @@ A proved counterexample has two terms with the same positive scope maximum but d
 The proofs use the recorded standard axioms `propext`, `Quot.sound` and, for two laws, `Classical.choice`. Unresolved named variables, metavariables, universe data, context typing and metadata semantics remain separate. The laws prove the explicit Lean function; finite comparisons do not prove the browser implementation. General typing preservation, wider evidence coverage and measured proof-inspection benefits remain open.
 
 [Support laws and boundaries](/research/proof-atlas/context-projection/README.md#exact-free-index-support) · [Lean source](/research/proof-atlas/context-projection/Support.lean) · [Summary comparison](/scripts/test-proof-atlas-projection-support.cjs)
+
+
+## Inspecting context dependencies
+
+The **Required context** diagram exposes the dependency interface already used to construct checked context modules. A selected term, its recorded type or a retained header connects to exact original context entries. Term, recorded-type, binder-type and let-value references keep separate labels. Header inspection follows the syntactic dependency chain within the module; original-binder and recorded-type actions retain their existing namespaces. A page shows at most sixteen edges, with explicit continuation.
+
+The view is available for the own checked-module controls and the three recorded reduced AI contexts. Full-context mode and unsupported selections gain no inferred reduction or typing. Existing native root checks and the finite dependency audit remain separate evidence. This is a navigation layer over the qualified interface, not a new semantic abstraction or a measured comprehension result.
+
+[Construction and limits](/research/proof-atlas/context-modules/README.md#dependency-interface-geometry) · [Browser checks](/scripts/test-proof-atlas-context-interface-browser.cjs)
