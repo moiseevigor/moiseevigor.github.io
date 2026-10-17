@@ -681,3 +681,13 @@ Seven kernel-checked theorems on an explicit `Lean.Expr` renaming function estab
 The bounded JavaScript projection matches the native function on 713 generated primary cases and 1,969 second-stage selections, including missing-variable failures, shadowing, let scope and shared nodes under different binders. These finite comparisons do not prove the JavaScript implementation. The existing native checks of closed context modules and their instantiations remain separate. General typing results, broader implementation verification and measured inspection benefits remain open.
 
 [Definitions, proofs, scope and reproduction](/research/proof-atlas/context-projection/README.md) · [Lean source](/research/proof-atlas/context-projection/Projection.lean) · [Implementation comparison](/scripts/test-proof-atlas-projection-theory.cjs)
+
+## Exact context support
+
+Four further kernel-checked laws characterize free de Bruijn support for the same projection function. Projection succeeds exactly when its partial variable map covers every required index. The structural scope maximum bounds those indices, and a zero maximum is equivalent to an empty set. Binder domains and let values use their original scope; lambda/Pi/let bodies remove their newly bound variable. These are syntax laws, not typing preservation or logical necessity.
+
+A proved counterexample has two terms with the same positive scope maximum but different support: under `a b c : Nat`, retaining only `a` admits `a` and rejects `Nat.add a c`. A maximum cannot replace an exact dependency interface. The bounded browser summary agrees with native support on 875 generated source nodes at four widths, with conservative withholding allowed; all 713 retained-context decisions agree. Deliberately omitting a lower support index demonstrates why authenticated exact summaries remain an API precondition.
+
+The proofs use the recorded standard axioms `propext`, `Quot.sound` and, for two laws, `Classical.choice`. Unresolved named variables, metavariables, universe data, context typing and metadata semantics remain separate. The laws prove the explicit Lean function; finite comparisons do not prove the browser implementation. General typing preservation, wider evidence coverage and measured proof-inspection benefits remain open.
+
+[Support laws and boundaries](/research/proof-atlas/context-projection/README.md#exact-free-index-support) · [Lean source](/research/proof-atlas/context-projection/Support.lean) · [Summary comparison](/scripts/test-proof-atlas-projection-support.cjs)

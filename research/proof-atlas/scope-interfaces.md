@@ -23,3 +23,5 @@ node scripts/test-proof-atlas-scope-browser.cjs
 ```
 
 The independent audit writes its packet hashes, counts and observed cache state to `/tmp/atlas-scope-interfaces.json`. CI retains this and the failure controls as technical evidence. Browser checks cover keyboard navigation, exact source jumps, local refinement, stale responses, unavailable optional evidence and desktop/phone layouts in both themes. No new native Lean certificate is claimed: summaries are source-derived structure.
+
+The separate [free-index support theory](context-projection/README.md#exact-free-index-support) proves the success criterion for a specified `Lean.Expr` projection and the relation between exact support and scope maxima. It justifies the empty-support shortcut for a correct scope field and gives a counterexample to replacing support by a positive maximum. Fresh compiled fixtures compare this summary producer with native sets at four widths. The theory does not prove this JavaScript producer or add typing to the source interfaces.

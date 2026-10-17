@@ -1,0 +1,1 @@
+window.PROOF_ATLAS_PROJECTION_SUPPORT={"format":"ProofAtlasProjectionSupportDescriptor/1","file":"/public/data/proof-atlas/projection-support/af71fa53ce8a0321eddf9bedc909f3de237b1f2d66aee998083956eb36fe2e8e.json.gz","sha256":"af71fa53ce8a0321eddf9bedc909f3de237b1f2d66aee998083956eb36fe2e8e","decodedBytes":182540};

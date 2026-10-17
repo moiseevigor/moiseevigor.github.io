@@ -3,6 +3,9 @@ on:
   push:
     branches: [master]
     paths:
+      - 'public/data/proof-atlas/projection-support*'
+      - 'public/data/proof-atlas/projection-support/**'
+      - 'scripts/test-proof-atlas-projection-support.cjs'
       - 'public/data/proof-atlas/projection-theory*'
       - 'public/data/proof-atlas/projection-theory/**'
       - 'scripts/test-proof-atlas-projection-theory.cjs'
@@ -182,6 +185,9 @@ on:
       - '.github/workflows/proof-atlas-browser.yml'
   pull_request:
     paths:
+      - 'public/data/proof-atlas/projection-support*'
+      - 'public/data/proof-atlas/projection-support/**'
+      - 'scripts/test-proof-atlas-projection-support.cjs'
       - 'public/data/proof-atlas/projection-theory*'
       - 'public/data/proof-atlas/projection-theory/**'
       - 'scripts/test-proof-atlas-projection-theory.cjs'
@@ -372,6 +378,7 @@ jobs:
           node scripts/test-proof-atlas-projected-context-browser.cjs
           node scripts/test-proof-atlas-compiled-replay.cjs
           node scripts/test-proof-atlas-projection-theory.cjs
+          node scripts/test-proof-atlas-projection-support.cjs
           node scripts/test-proof-atlas-compiled-replay-browser.cjs
           node scripts/test-proof-atlas-context-modules-browser.cjs
           node scripts/test-proof-atlas-source-context-modules-browser.cjs
@@ -439,6 +446,8 @@ jobs:
         with:
           name: proof-atlas-scene-audits
           path: |
+            /tmp/atlas-projection-support.json
+            /tmp/atlas-projection-theory.json
             /tmp/atlas-introduction-frames.json
             /tmp/atlas-context-walk.json
             /tmp/atlas-source-context-modules.json
@@ -463,5 +472,9 @@ jobs:
         run: |
           theory_prefix="$("$HOME/.elan/bin/lean" --print-prefix)"
           python3 research/proof-atlas/context-projection/verify.py --lean "$theory_prefix/bin/lean" --workdir "$RUNNER_TEMP/atlas-projection-theory" --check
+      - name: Kernel-check exact context support and regenerate summaries
+        run: |
+          support_prefix="$("$HOME/.elan/bin/lean" --print-prefix)"
+          python3 research/proof-atlas/context-projection/verify_support.py --lean "$support_prefix/bin/lean" --workdir "$RUNNER_TEMP/atlas-projection-support" --check
       - name: Audit the unchanged public graph topology
         run: python3 research/proof-atlas/verify_public_data.py

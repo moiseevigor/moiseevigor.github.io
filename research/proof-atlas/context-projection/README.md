@@ -46,6 +46,29 @@ These laws do not prove typing preservation, logical necessity of retained assum
 
 The browser reuses its existing constructor, binding and context notation. No additional article mapping, node typing or proof interpretation follows from this theory.
 
+## Exact free-index support
+
+`Support.lean` adds four kernel-checked laws about the same projection function. Its `support` list contains the free de Bruijn indices of an expression. Application combines both children. Lambda/Pi bodies remove index zero and decrement the remaining indices; their domains do not. Let types and values stay in the original scope; only the body removes its new binder. Repeated indices are harmless for these membership statements. The published fixtures additionally sort and deduplicate them.
+
+- `project_supported`: projection succeeds exactly when the partial map is defined on every index in `support`. This holds for every expression and every partial map, including failure cases.
+- `needed_bound`: the structural scope maximum is at most `d` exactly when every support index is below `d`.
+- `needed_zero_iff`: a zero scope maximum is equivalent to empty free-index support. This justifies the corresponding empty-support shortcut for a correctly computed scope field, even if a child summary exceeds the bit-width bound.
+- `maximum_is_not_support`: equal positive scope maxima do not imply equal support or equal projection eligibility.
+
+The last result uses independent ambient variables `a b c : Nat`. The expression `a` has free indices `{2}`; `Nat.add a c` has `{0, 2}`. Both need a scope of depth three. Retaining only `a` permits the first projection and rejects the second. A maximum-index check cannot replace the exact support set. Under a new lambda, an internal variable remains internal and does not become an ambient dependency.
+
+The general laws are checked at their declared types. Recorded dependencies are `propext` and `Quot.sound`, with `Classical.choice` also used by the scope-bound and empty-support proofs. There are no additional axioms or admitted proofs. Free-variable identifiers, expression metavariables and universe metavariables are separate from free de Bruijn indices: empty support does not establish kernel closure, a well-formed context or typing. Opaque metadata is unchanged and receives no semantic interpretation.
+
+### Comparison with bounded summaries
+
+Fresh core Lean produces 115 source cases (23 patterns at each ambient depth zero through four), all 713 retained-context selections, and five additional controls. These include a closed 513-binder expression whose internal scope exceeds the summary width, shared structure, the equal-maximum counterexample and an unresolved universe. Each serialized node has a native free-index set, scope maximum and unresolved-term flag. All twelve constructors occur. These expression fixtures have no kernel typing claim.
+
+The JavaScript audit compares the existing summary producer at widths 1, 2, 4 and 512. Across 875 source nodes it checks 1,180 available summaries and 2,320 conservative withholdings, plus 3,500 unresolved-term flags. Exact support agrees with all 713 native projection decisions: 421 accept and 292 reject. Withholding a nonzero summary remains allowed; it is not interpreted as an empty set.
+
+One deliberately forged summary retains the correct maximum but omits a required lower index. It passes the coarse root maximum check and fails when that missing variable is expanded. The correct summary rejects the same projection before expansion. This is an explicit counterexample to maximum-only validation, not a production failure with valid authenticated inputs. The browser API requires exact summaries from its authenticated producer and validated source fields. The finite comparisons do not prove that producer or the lazy JavaScript implementation correct for all inputs.
+
+The new compiled generation and driver are separate from the seven-law generation above; its original producer hashes remain unchanged. No source project, private proof script or raw execution log is added to the public package.
+
 ## Reproduction
 
 ```sh
@@ -56,3 +79,14 @@ python3 research/proof-atlas/context-projection/verify.py \
 ```
 
 The second command uses only core Lean, recompiles the own theory and regenerates the compiled fixtures before comparing the frozen generation. It imports no research project or Mathlib. The existing fixed native resource limits apply; raw logs stay in the workdir. `--publish` deliberately creates a new immutable compiled generation when the producer changes. The source proofs are own implementation research, separate from the original private mathematical proof projects.
+
+Regenerate the additional support laws and compare their separate frozen generation with:
+
+```sh
+node scripts/test-proof-atlas-projection-support.cjs
+python3 research/proof-atlas/context-projection/verify_support.py \
+  --lean /path/to/lean-4.33.1/bin/lean \
+  --workdir /path/to/another-new-private-workdir --check
+```
+
+This driver also imports only core Lean. It compiles the parent projection definition and the new support theory together, verifies theorem types/proofs, and compares freshly computed per-node support and selection decisions with the hash-addressed compiled fixture package.
