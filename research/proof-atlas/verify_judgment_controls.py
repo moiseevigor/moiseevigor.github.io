@@ -26,6 +26,10 @@ def AtlasCompose.takeInputs (α : Type) [AtlasCompose.ValueBox] [AtlasCompose.Pr
 def AtlasCompose.mixed (α : Type) [v : AtlasCompose.ValueBox] [p : AtlasCompose.ProofBox] (x : α) (h : True) : True := @AtlasCompose.takeInputs α v p x h
 def AtlasCompose.nestedProof (h : True) : True := @AtlasCompose.takeInputs ((fun (_ : True) => Nat) h) ⟨0, True.intro⟩ ⟨True.intro⟩ 0 h
 
+def AtlasCompose.wideProofHead (h : True) : True :=
+ (fun (_h1 _h2 _h3 _h4 _h5 _h6 _h7 _h8 _h9 _h10 _h11 _h12 : True) => h)
+ h h h h h h h h h h h h
+
 def AtlasCompose.mp (P Q : Prop) (f : P → Q) (h : P) : Q := f h
 def AtlasCompose.dependent (P : Nat → Prop) (h : ∀ n, P n) (n : Nat) : P n := h n
 def AtlasCompose.chain (P Q R : Prop) (f : P → Q) (g : Q → R) (h : P) : R := g (f h)
@@ -41,7 +45,7 @@ run_cmd do
  let mut requests : Array Json := #[]
  let mut lets : Array Json := #[]
  for name in [``AtlasCompose.mp,``AtlasCompose.dependent,``AtlasCompose.chain,``AtlasCompose.shadow,
-   ``AtlasCompose.localProof,``AtlasCompose.localDependent,``AtlasCompose.unused,``AtlasCompose.cases,``AtlasCompose.recursiveUnused,``AtlasCompose.takeInputs,``AtlasCompose.mixed,``AtlasCompose.nestedProof] do
+   ``AtlasCompose.localProof,``AtlasCompose.localDependent,``AtlasCompose.unused,``AtlasCompose.cases,``AtlasCompose.recursiveUnused,``AtlasCompose.takeInputs,``AtlasCompose.mixed,``AtlasCompose.nestedProof,``AtlasCompose.wideProofHead] do
   let info ← getConstInfo name
   let some value := info.value? true | throwError "Missing body"
   let (t,s) := AtlasLibrary.intern info.type {}
