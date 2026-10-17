@@ -19,6 +19,48 @@ Could prime numbers make a flower of their own? And if their picture develops sp
 
 We can explore this with two constructions: put primes into the sunflower arrangement, then change the arrangement to expose the arithmetic of squares. The resulting patterns lead from the golden ratio to modular arithmetic, quadratic polynomials, and questions mathematicians still cannot settle.
 
+
+## Explore the spirals
+
+Change one setting at a time. Try **144°** to see five exact directions, then **137.5°** and the **golden angle** to compare a rounded rotation with the irrational ideal. Switch to Sacks and highlight a quadratic to follow its track. Changing the radial exponent changes the spacing; the standard constructions use 0.50.
+
+<link rel="stylesheet" href="/public/css/prime-spirals.css">
+<div class="prime-explorer" data-prime-explorer>
+  <div class="prime-controls">
+    <label>Spiral arrangement
+      <select data-control="mode"><option value="sunflower">Constant angle / sunflower</option><option value="sacks">Sacks / square root angle</option></select>
+    </label>
+    <label>Highlight a quadratic
+      <select data-control="track"><option value="none">None</option><option value="euler">k² + k + 41</option><option value="square">k² + 1</option></select>
+    </label>
+    <label>Integer labels: <output data-count-value>6,000</output>
+      <input data-control="count" aria-label="Number of integer labels" type="range" min="200" max="30000" step="100" value="6000">
+    </label>
+    <label>Radial exponent: <output data-power-value>0.50</output>
+      <input data-control="power" aria-label="Radial exponent" type="range" min="0.3" max="0.8" step="0.01" value="0.5">
+    </label>
+    <label>Rotation per integer: <output data-angle-value>137.507764°</output>
+      <input data-control="angle" aria-label="Rotation angle in degrees" type="range" min="0" max="360" step="any" value="137.507764">
+    </label>
+    <label><input data-control="background" type="checkbox" checked> Show nonprime labels</label>
+  </div>
+  <div aria-label="Rotation presets">
+    <button type="button" data-angle="golden">Golden angle</button>
+    <button type="button" data-angle="137.5">137.5°</button>
+    <button type="button" data-angle="144">144° / five directions</button>
+    <button type="button" data-reset>Reset</button>
+  </div>
+  <p data-formula></p>
+  <canvas width="600" height="600" role="img" aria-label="Interactive prime spiral"></canvas>
+  <p class="prime-legend">Colored dots: primes, with color increasing by label. Gray: nonprime labels. On a highlighted quadratic, mint dots are prime and white dots are nonprime. Quadratic inputs are nonnegative integers.</p>
+  <p data-stats role="status" aria-live="polite"></p>
+  <p data-detail></p>
+  <noscript>Enable JavaScript to use the controls. The static figures below show the standard constructions.</noscript>
+</div>
+<script type="module" src="/public/js/prime-spirals.js"></script>
+
+The rotation control applies to the constant-angle arrangement. Sacks uses its own angle rule, so that control is disabled there. Counts always refer to integer labels 1 through the selected limit. At very large radii a rounded golden angle can behave differently from the exact irrational value; this finite plot uses floating-point arithmetic.
+
 ![All 6000 sunflower points](/public/img/posts/prime-spirals/sunflower.png)
 
 ![The 783 primes in the same sunflower arrangement](/public/img/posts/prime-spirals/prime-sunflower.png)
