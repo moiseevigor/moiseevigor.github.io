@@ -492,6 +492,14 @@ The mechanism preserves the existing geometric language under partial evidence d
 
 [Protocol and reproduction](/research/proof-atlas/native-query-pages.md) · [Native producer](/scripts/build-proof-atlas-native-pages.cjs) · [Complete-reference check](/scripts/test-proof-atlas-native-pages.cjs) · [Failure and namespace controls](/scripts/test-proof-atlas-native-page-controls.cjs) · [Browser checks](/scripts/test-proof-atlas-native-pages-browser.cjs)
 
+## Scope interfaces for retained regions
+
+A retained source region now exposes its exact free term-binder mentions, including type annotations. Targets keep the original occurrence route and any folded-frame slot. The view bundles these links by context frame, with individual source navigation; it does not classify a syntactic mention as logical necessity. A shared DAG node can use different binders in different contexts, so only its relative support summary is shared. The scene's original geometry and provenance remain unchanged beneath this additive layer.
+
+Independent finite-set calculations agree with all 395,902 stored summaries in the 34-packet inventory. At 1,288 recorded routes, three priorities and three grouping modes give 11,592 checked cuts and 181,702 binder-target appearances across overlapping views. One 527-occurrence `SBracket.mk.inj` region mentions 57 external term binders, represented by four introduction-frame bundles of 16, 16, 16 and 9. These results establish structural correspondence, not semantic necessity or improved comprehension. Unresolved objects, unsupported widths and failed evidence remain explicitly unavailable.
+
+[Method, bounds and reproduction](/research/proof-atlas/scope-interfaces.md) · [Independent audit](/scripts/test-proof-atlas-scope-interfaces.cjs) · [Failure controls](/scripts/test-proof-atlas-scope-controls.cjs) · [Browser checks](/scripts/test-proof-atlas-scope-browser.cjs)
+
 ## Scope-path traversal
 
 The context walker retains the current source path as it follows a route. It no longer restarts from the declaration root for every enclosing binder. The first binder requests the prefix path once; subsequent fields extend it directly. Binder-free routes retain the earlier lazy access to root-path metadata. No route or context cache is introduced. Domains and let values still precede their own binder; bodies still extend the context by one.

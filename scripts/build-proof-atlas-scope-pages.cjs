@@ -1,0 +1,14 @@
+/* Source-derived scope masks; complete offline DAG validation, no private source rebuild. */
+'use strict';
+const fs=require('fs'),z=require('zlib'),crypto=require('crypto'),assert=require('assert/strict'),A=require('../public/js/proof-atlas-library-data'),I=require('../public/js/proof-atlas-scope-interfaces'),{inventory}=require('./proof-atlas-judgment-fixtures.cjs');
+const root='public/data/proof-atlas/scope-pages',check=process.argv.includes('--check'),hash=b=>crypto.createHash('sha256').update(b).digest('hex'),encode=v=>Buffer.from(JSON.stringify(v));
+assert(fs.statfsSync('.').bavail*fs.statfsSync('.').bsize>=30*1024**3,'Disk reserve');
+function put(dir,value,cap){const b=encode(value);assert(b.length<=cap,'Scope asset byte bound');const sha=hash(b),file=dir+'/'+sha+'.gz';if(check)assert(z.gunzipSync(fs.readFileSync(file),{maxOutputLength:cap}).equals(b),'Scope asset differs: '+file);else fs.writeFileSync(file,z.gzipSync(b));return sha;}
+let nodes=0,pages=0;const records=[];
+for(const item of inventory()){
+ const {record}=item,bytes=z.gunzipSync(fs.readFileSync('.'+record.indexFile),{maxOutputLength:67108864});assert.equal(hash(bytes),record.indexSha256);const data=A.validateIndex(JSON.parse(bytes),record),table=I.compute(data),dir=root+'/'+record.indexSha256;if(!check)fs.mkdirSync(dir,{recursive:true});let leaves=[];
+ for(let start=0;start<table.rows.length;start+=256)leaves.push(put(dir,{format:'ProofAtlasScopePage/1',indexSha256:record.indexSha256,start,rows:table.rows.slice(start,start+256)},65536));
+ const pageCount=leaves.length;let level=0,span=1;while(true){const next=[];for(let i=0;i<leaves.length;i+=64)next.push(put(dir,{format:'ProofAtlasScopeIndex/1',level,first:i*span,children:leaves.slice(i,i+64)},16384));if(next.length===1){leaves=next;break;}leaves=next;level++;span*=64;}
+ const manifest={format:'ProofAtlasScopePages/1',name:record.name,edition:item.edition,indexSha256:record.indexSha256,sourceSha256:record.sourceSha256,nodeCount:data.kind.length,pageCount,pageSize:256,fanout:64,indexLevel:level,indexRoot:leaves[0],width:512,method:'free-term-binder-support/1',derivationSha256:hash(fs.readFileSync('public/js/proof-atlas-scope-interfaces.js')),producerSha256:hash(fs.readFileSync(__filename))},sha=put(dir,manifest,65536);records.push({edition:item.edition,name:record.name,indexSha256:record.indexSha256,sourceSha256:record.sourceSha256,file:'/'+dir+'/'+sha+'.gz',sha256:sha,nodes:data.kind.length});nodes+=data.kind.length;pages+=pageCount;
+}
+const file='public/data/proof-atlas/scope-pages-manifest.js',b=Buffer.from('window.PROOF_ATLAS_SCOPE_PAGES='+JSON.stringify({format:'ProofAtlasScopeInventory/1',records})+';\n');if(check)assert(fs.readFileSync(file).equals(b));else fs.writeFileSync(file,b);console.log(JSON.stringify({status:'PASS',mode:check?'check':'write',packets:records.length,nodes,pages,scope:'Derived source-binder mentions only; original expressions are unchanged.'}));
