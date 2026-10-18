@@ -1,0 +1,12 @@
+.prime-explorer{border:1px solid var(--border,#aaa);border-radius:12px;padding:18px;margin:24px 0;font-family:var(--sans,sans-serif)}
+.prime-explorer .prime-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:14px}
+.prime-explorer label{display:block;font-size:14px;line-height:1.6}
+.prime-explorer select{width:100%;max-width:100%;padding:7px;background:var(--bg,#fff);color:inherit;border:1px solid #888;border-radius:4px}
+.prime-explorer input[type=range]{display:block;width:100%;accent-color:#9b58e0}
+.prime-explorer button{padding:6px 10px;margin:3px 4px 3px 0;background:var(--bg,#fff);color:inherit;border:1px solid #888;border-radius:5px;cursor:pointer;font-size:13px}
+.prime-explorer button:disabled{opacity:.4;cursor:default}
+.prime-explorer :focus-visible{outline:3px solid #a76aee;outline-offset:3px}
+.prime-explorer canvas{display:block;width:100%;aspect-ratio:1;border-radius:8px;touch-action:pan-y}
+.prime-explorer [data-stats],.prime-explorer [data-formula],.prime-explorer [data-detail]{font-size:13px;line-height:1.6;margin:8px 0;overflow-wrap:anywhere}
+.prime-explorer .prime-legend{font-size:13px;line-height:1.6;margin:10px 0}
+@media(max-width:480px){.prime-explorer{padding:10px}.prime-explorer .prime-controls{grid-template-columns:1fr}}
