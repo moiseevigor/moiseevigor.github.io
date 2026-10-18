@@ -55,7 +55,7 @@ def main():
     ax.scatter((r*np.cos(theta))[mask], (r*np.sin(theta))[mask], s=9, c=n[mask], cmap=cmap, linewidths=0)
     fig.tight_layout(pad=.1)
     path = output / 'thumb.png'
-    fig.savefig(path, dpi=100, transparent=True)
+    fig.savefig(path, dpi=300, transparent=True)
     plt.close(fig)
     Image.open(path).convert('RGBA').quantize(256, method=Image.FASTOCTREE).save(path, optimize=True)
     s = sieve(1_000_042)
