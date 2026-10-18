@@ -1,0 +1,1 @@
+window.PROOF_ATLAS_SOURCE_CUT_LAWS={"format":"ProofAtlasSourceCutLawsDescriptor/1","file":"/public/data/proof-atlas/source-cut-laws/34144dd54b3f33d084d5d2e77403dd1cc3726dd9d99fa91116971d3a02a0c2b1.json.gz","sha256":"34144dd54b3f33d084d5d2e77403dd1cc3726dd9d99fa91116971d3a02a0c2b1","decodedBytes":76354};
