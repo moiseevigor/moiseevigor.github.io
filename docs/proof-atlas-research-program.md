@@ -831,3 +831,21 @@ Preparation is bounded and lazy; individual rows preserve exact source and focus
 navigation. General semantic abstraction and comprehension remain unevaluated.
 
 [Counterexample, rule and limits](/research/proof-atlas/frontier-boundary/README.md) · [Compiled control manifest](/public/data/proof-atlas/boundary-controls-manifest.js) · [Source accounting audit](/scripts/test-proof-atlas-boundary-ledger.cjs)
+
+
+## Source-cut refinement laws
+
+Six kernel-checked laws give a structural criterion for refining a cut of an
+actual `Lean.Expr`: retained constructors stay at their original paths, retained
+and hidden occurrences conserve the original size, and the two counts transfer
+exactly. The model supports all twelve constructors. It supplies a criterion for
+local refinement, not a proof that the browser implements it.
+
+The distinction matters at a fixed display budget. In finite tests of the proof-focus
+selection core, increasing depth can reselect previously retained structure; independent
+source-path checks preserve two small counterexamples, including one with an
+unchanged retained count. Increasing the vertex budget preserves the tested cuts
+in the finite initial-root comparison. Native proof observations and semantic or
+comprehension claims are separate.
+
+[Definitions, proofs, counterexamples and limits](/research/proof-atlas/cut-refinement/README.md) · [Lean laws](/research/proof-atlas/cut-refinement/Cut.lean) · [Compiled comparison records](/public/data/proof-atlas/source-cut-laws-manifest.js) · [Independent audit](/scripts/test-proof-atlas-source-cut-laws.cjs)

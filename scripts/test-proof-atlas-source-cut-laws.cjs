@@ -1,0 +1,8 @@
+'use strict';
+const fs=require('fs'),assert=require('assert/strict'),audit=require('./proof-atlas-source-cut-laws-audit.cjs');
+let data;
+if(process.argv[2])data=JSON.parse(fs.readFileSync(process.argv[2]));
+else{const vm=require('vm'),z=require('zlib'),crypto=require('crypto'),w={};vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/source-cut-laws-manifest.js','utf8'),{window:w});const d=w.PROOF_ATLAS_SOURCE_CUT_LAWS;assert.equal(d.format,'ProofAtlasSourceCutLawsDescriptor/1');const bytes=z.gunzipSync(fs.readFileSync('.'+d.file));assert.equal(bytes.length,d.decodedBytes);assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),d.sha256);data=JSON.parse(bytes);for(const [f,h]of Object.entries(data.producer.sourceFiles))assert.equal(crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex'),h);}
+const result=audit(data);let negativeControls=0;
+for(const change of [x=>x.format='other',x=>x.theorems.pop(),x=>x.theorems[0].name='other',x=>x.theorems[0].axioms.push('sorryAx'),x=>x.theorems[0].kernelProof='unrecorded',x=>x.cases.pop(),x=>x.cases[0].proofTypingClaim=true,x=>x.cases[0].source.kind='unknown',x=>x.cases[0].source.children.push({kind:'const',children:[]}),x=>x.cases[0].occurrences++,x=>x.cases[0].rows[0].depth++,x=>x.cases[0].rows[0].retained++,x=>x.cases[0].rows[0].hidden++,x=>x.cases[6].rows[2].paths.pop(),x=>x.cases[0].rows[0].visibility[0].visible=true,x=>x.cases[0].rows[0].visibility.pop()]){const changed=structuredClone(data);change(changed);assert.throws(()=>audit(changed));negativeControls++;}
+const report={...result,negativeControls};fs.writeFileSync(process.env.ATLAS_SOURCE_CUT_REPORT||'/tmp/atlas-source-cut-laws.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));

@@ -4,6 +4,10 @@ on:
     branches: [master]
     paths:
       - '_config.yml'
+      - 'scripts/*proof-atlas-source-cut*.cjs'
+      - 'scripts/*proof-atlas-depth*.cjs'
+      - 'public/data/proof-atlas/source-cut-laws*'
+      - 'public/data/proof-atlas/source-cut-laws/**'
       - 'public/data/proof-atlas/reduced-replay*'
       - 'public/data/proof-atlas/reduced-replay/**'
       - 'research/proof-atlas/reduced-replay/**'
@@ -212,6 +216,10 @@ on:
   pull_request:
     paths:
       - '_config.yml'
+      - 'scripts/*proof-atlas-source-cut*.cjs'
+      - 'scripts/*proof-atlas-depth*.cjs'
+      - 'public/data/proof-atlas/source-cut-laws*'
+      - 'public/data/proof-atlas/source-cut-laws/**'
       - 'public/data/proof-atlas/reduced-replay*'
       - 'public/data/proof-atlas/reduced-replay/**'
       - 'research/proof-atlas/reduced-replay/**'
