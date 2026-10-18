@@ -849,3 +849,21 @@ in the finite initial-root comparison. Native proof observations and semantic or
 comprehension claims are separate.
 
 [Definitions, proofs, counterexamples and limits](/research/proof-atlas/cut-refinement/README.md) · [Lean laws](/research/proof-atlas/cut-refinement/Cut.lean) · [Compiled comparison records](/public/data/proof-atlas/source-cut-laws-manifest.js) · [Independent audit](/scripts/test-proof-atlas-source-cut-laws.cjs)
+
+
+## Local refinement of source regions
+
+The source reader can replace one hidden region while retaining the existing
+selected root, source paths and native records. The new cut checks exact transfer
+between hidden and retained counts; undo returns its prior state. Native type
+interfaces are recovered from the recorded parent query, with structural agreement
+required for a separate child type record. Source-only fields keep unknown roles.
+
+The finite audit includes 1,224 initial-region expansions over 34 inventories and
+148 expansions at current replay-query cuts. In the large projection control,
+opening a value input exposes a separately checked proof application that the
+proof-premise-only traversal omits. The operation keeps fixed display, route,
+boundary and metadata limits. No whole-proof, general typing or comprehension
+result follows from these tests.
+
+[Rule, bounds and reproduction](/research/proof-atlas/local-refinement/README.md) · [Implementation](/public/js/proof-atlas-local-refinement.js) · [Independent source audit](/scripts/test-proof-atlas-local-refinement.cjs) · [Reader checks](/scripts/test-proof-atlas-local-refinement-browser.cjs)
