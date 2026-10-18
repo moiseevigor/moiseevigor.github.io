@@ -56,7 +56,7 @@
 
  const sessions=new WeakMap();
  function dispose(container){sessions.get(container)?.dispose();sessions.delete(container);}
- function mount(container,{scene,prepare,onFocus,onSource}){
+ function mount(container,{scene,prepare,onFocus,onSource,onExpand,expansionCapacity=0}){
   dispose(container);
   const el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
   const section=el('details'),summary=el('summary','Hidden source regions · '+scene.stats.hidden+' occurrences'),note=el('p','Roles describe region roots. Type and value regions may contain proofs; an empty proof-premise frontier does not certify complete coverage.'),status=el('p'),filter=el('select'),list=el('ol'),controls=el('div'),previous=el('button','Previous hidden regions'),next=el('button','Next hidden regions'),position=el('span');
@@ -67,7 +67,7 @@
   let ledger=null,offset=0,controller=null,epoch=0,disposed=false;
   function draw(){
    if(disposed)return;filter.disabled=false;const p=page(ledger,{offset,role:filter.value});list.replaceChildren();
-   for(const row of p.rows){const li=el('li'),focus=el('button',row.role+' · '+row.origin.field+' · e'+row.node+' · '+row.expanded+' source occurrences'),source=el('button','Open source · e'+row.node),path=el('code',row.path);focus.type=source.type='button';focus.dataset.boundaryFocus=row.path;source.dataset.boundarySource=row.path;focus.onclick=()=>{if(!disposed)onFocus(row.route);};source.onclick=()=>{if(!disposed)onSource(row.node,row.route);};li.append(focus,source,path);list.append(li);}
+   for(const row of p.rows){const li=el('li'),focus=el('button','Focus · '+row.role+' · '+row.origin.field+' · e'+row.node+' · '+row.expanded+' source occurrences'),source=el('button','Open source · e'+row.node),path=el('code',row.path);focus.type=source.type='button';focus.dataset.boundaryFocus=row.path;source.dataset.boundarySource=row.path;focus.onclick=()=>{if(!disposed)onFocus(row.route);};source.onclick=()=>{if(!disposed)onSource(row.node,row.route);};if(onExpand){const expand=el('button','Expand here');expand.type='button';expand.dataset.boundaryExpand=row.path;expand.disabled=expansionCapacity===0;expand.onclick=async()=>{if(disposed)return;expand.disabled=true;try{await onExpand(row.path);}finally{if(!disposed)expand.disabled=expansionCapacity===0;}};li.append(expand);}li.append(focus,source,path);list.append(li);}
    previous.disabled=offset===0;next.disabled=offset+16>=p.total;position.textContent=p.total?(offset+1)+'–'+Math.min(offset+16,p.total)+' / '+p.total:'No hidden roots in this category';
    status.textContent=ledger.retained+' retained + '+ledger.hidden+' hidden = '+ledger.represented+' source occurrences. '+Object.entries(ledger.totals).map(([role,t])=>t.regions+' '+role+' roots').join(' · ')+'.';
   }
