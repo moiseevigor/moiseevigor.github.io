@@ -37,6 +37,7 @@ jobs:
       - run: node scripts/test-proof-atlas-context-closure.cjs
       - run: node scripts/test-proof-atlas-context-accounting.cjs
       - run: node scripts/test-proof-atlas-context-body-focus.cjs
+      - run: node scripts/test-proof-atlas-packet-types.cjs
       - run: node scripts/test-proof-atlas-context-witnesses.cjs
       - run: node scripts/test-proof-atlas-context-type-loading.cjs
       - run: node scripts/test-proof-atlas-application-types.cjs

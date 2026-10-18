@@ -1,10 +1,10 @@
 /* Query pages retain original native provenance; type graphs have separate fixed bounds. */
 (function(host){
  'use strict';
- const node=typeof module!=='undefined'&&module.exports,A=node?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData,T=node?require('./proof-atlas-occurrence-types'):host.ProofAtlasOccurrenceTypes,E=node?require('./proof-atlas-elimination'):host.ProofAtlasElimination,B=node?require('./proof-atlas-beta-reduction'):host.ProofAtlasBetaReduction,Z=node?require('./proof-atlas-let-reduction'):host.ProofAtlasLetReduction;
+ const node=typeof module!=='undefined'&&module.exports,A=node?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData,T=node?require('./proof-atlas-occurrence-types'):host.ProofAtlasOccurrenceTypes,E=node?require('./proof-atlas-elimination'):host.ProofAtlasElimination,B=node?require('./proof-atlas-beta-reduction'):host.ProofAtlasBetaReduction,Z=node?require('./proof-atlas-let-reduction'):host.ProofAtlasLetReduction,SP=node?require('./proof-atlas-source-pages'):host.ProofAtlasSourcePages;
 const demand=(x,m)=>{if(!x)throw Error('Native pages: '+m);},hex=x=>typeof x==='string'&&/^[a-f0-9]{64}$/.test(x),routeKey=r=>{demand(Number.isInteger(r?.root)&&r.root>=0&&r.root<=2147483647&&Array.isArray(r.slots)&&r.slots.length<=512&&r.slots.every(x=>Number.isInteger(x)&&x>=0&&x<=2),'route');return r.root+':'+r.slots.join('');};
 class MissingNative extends Error{constructor(kind,provider,ref,level=null){super('Native '+kind+' is not resident');Object.assign(this,{kind,provider,ref,level});}}
-async function open(descriptor,data,record,{signal,queryLimit=128,byteLimit=16777216,indexLimit=16,expectedDescriptors}={}){
+async function open(descriptor,data,record,{signal,queryLimit=128,byteLimit=16777216,indexLimit=16,expectedDescriptors,packetTypingDescriptor}={}){
  const base=descriptor.file?.slice(0,descriptor.file.lastIndexOf('/')+1);demand(base?.startsWith('/public/data/proof-atlas/native-query-pages/'),'asset base');
  async function read(d,cap,s){demand(d&&hex(d.sha256)&&Number.isInteger(d.bytes)&&d.bytes>0&&d.bytes<=cap,'asset descriptor');return A.compressed(d===descriptor?descriptor.file:base+d.sha256+'.gz',d.sha256,{maxBytes:cap,expectedBytes:d.bytes,signal:s});}
  const live=s=>{if(signal?.aborted||s?.aborted)throw signal?.reason||s.reason||Error('aborted');demand(!disposed,'disposed');};let disposed=false,queue=Promise.resolve();
@@ -36,6 +36,15 @@ async function open(descriptor,data,record,{signal,queryLimit=128,byteLimit=1677
   demand(p.get&&Boolean(p.getQuery)===p.methods.getQuery,'lookup methods');
   const graph=await read(p.graph,16777216,signal);live();T.validate({...p.header,typeGraph:graph,entries:[]},data,record);live();const model={...p,graph,graphBytes:p.graph.bytes};models.push(model);const api={source:p.header.source,sha256:p.descriptor.sha256,file:p.descriptor.file,get:r=>lookup(model,'get',r),argument:(r,a)=>lookup(model,'get',r)?.arguments?.find(x=>routeKey(x.route)===routeKey(a))};if(p.methods.getQuery)api.getQuery=r=>lookup(model,'getQuery',r);providers[p.kind]=api;
  }
+ // A separately capped replay supplement keeps the historical paged inventory intact.
+ // Its small shared table and queries are resident; source fields still use the source cursor.
+ let packetEvidence=null,packetProvider=null,packetFailure=null,packetBytes=0;
+ if(packetTypingDescriptor)try{
+  const d=packetTypingDescriptor;demand(d.edition===descriptor.edition&&d.name===record.name&&d.indexSha256===record.indexSha256&&d.sourceSha256===record.sourceSha256&&hex(d.sha256)&&d.file==='/public/data/proof-atlas/packet-types/'+d.sha256+'.json.gz'&&Number.isInteger(d.bytes)&&d.bytes>0&&d.bytes<=262144,'packet supplement descriptor');
+  const e=await A.compressed(d.file,d.sha256,{signal,maxBytes:262144,expectedBytes:d.bytes});live();demand(e.environment?.kind==='public-packet-occurrence-replay/1'&&e.source?.edition===d.edition&&Array.isArray(e.entries)&&e.entries.length<=32,'packet supplement inventory');T.validate({...e,entries:[]},data,record);packetEvidence=e;packetBytes=d.bytes;
+  const prepared=()=>{live();if(packetFailure)return null;try{if(!packetProvider)packetProvider=T.provider(packetEvidence,data,record,d);return packetProvider;}catch(error){live();if(SP?.MissingPage&&error instanceof SP.MissingPage)throw error;packetFailure=error.message;packetEvidence=null;packetProvider=null;packetBytes=0;return null;}};
+  providers.packet={source:e.source,file:d.file,sha256:d.sha256,recording:{kind:e.environment.kind,originalProofModuleImported:false,packetSha256:e.replay.packetSha256,baselineProofSha256:e.replay.baselineProofSha256},get:r=>prepared()?.get(r),getQuery:r=>prepared()?.getQuery(r),argument:(r,a)=>prepared()?.argument(r,a)};
+ }catch(error){live();packetFailure=error.message;}
  async function load(error,s){live(s);const {provider:p,ref}=error;
   if(error.kind==='index'){
    const v=await read(ref,131072,s||signal);live(s);demand(v.format==='NativeQueryIndex/1'&&v.level===error.level&&Number.isInteger(v.level)&&v.level>=0&&v.level<=4,'index level');let min,max;
@@ -48,7 +57,7 @@ async function open(descriptor,data,record,{signal,queryLimit=128,byteLimit=1677
   }
  }
  function run(fn,options={}){const task=async()=>{live(options.signal);for(let attempt=0;attempt<512;attempt++)try{const value=await fn();live(options.signal);return value;}catch(e){live(options.signal);if(!(e instanceof MissingNative))throw e;await load(e,options.signal);}throw Error('Native pages: retry limit; evidence working set exceeds the cache bound.');};const result=queue.then(task,task);queue=result.catch(()=>{});return result;}
- live();return{providers,manifest:m,run,state:()=>({...stats,source:{name:record.name,indexSha256:record.indexSha256,sourceSha256:record.sourceSha256},manifestSha256:descriptor.sha256,cachedQueries:queries.size,indexPages:indices.size,queryLimit,byteLimit,indexLimit,typeNodeLimit:65536,typeGraphByteLimit:16777216,typeGraphs:models.filter(p=>p.graph).length,typeNodes:models.reduce((sum,p)=>sum+(p.graph?.kind.length||0),0),typeDecodedBytes:models.reduce((sum,p)=>sum+(p.graph?p.graphBytes:0),0)}),dispose:()=>{disposed=true;queries.clear();indices.clear();for(const p of models)p.graph=null;stats.decodedBytes=0;}};
+ live();return{providers,manifest:m,run,state:()=>({...stats,source:{name:record.name,indexSha256:record.indexSha256,sourceSha256:record.sourceSha256},manifestSha256:descriptor.sha256,cachedQueries:queries.size,indexPages:indices.size,queryLimit,byteLimit,indexLimit,packetSupplement:{queries:packetEvidence?.entries.length||0,decodedBytes:packetBytes,byteLimit:262144,queryLimit:32,typeNodes:packetEvidence?.typeGraph.kind.length||0,failure:packetFailure},typeNodeLimit:65536,typeGraphByteLimit:16777216,typeGraphs:models.filter(p=>p.graph).length,typeNodes:models.reduce((sum,p)=>sum+(p.graph?.kind.length||0),0),typeDecodedBytes:models.reduce((sum,p)=>sum+(p.graph?p.graphBytes:0),0)}),dispose:()=>{disposed=true;queries.clear();indices.clear();for(const p of models)p.graph=null;packetEvidence=null;packetProvider=null;packetBytes=0;stats.decodedBytes=0;}};
 }
 const api={open,routeKey};if(node)module.exports=api;else host.ProofAtlasNativePages=api;
 
