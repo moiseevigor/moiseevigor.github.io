@@ -6,10 +6,10 @@ The primary Proof Atlas objective is the [general geometric language research pr
 
 ## Navigation
 
-- Home introduces selected supported results, then the existing blog feed.
-- Research (`/lab/`) presents positive results first, then decisive negative findings and topic-level accounts. `_data/series.yml` owns topics and their outputs; `_data/research.yml` curates the supported findings and display order.
-- Tools (`/projects/`) separates interactive scientific explainers from software libraries.
-- Manuscripts and background remain reachable from Research and each topic. Historical URLs remain valid.
+- Home introduces the author and lists recent articles, with equations or measured results on their cards.
+- Lab (`/lab/`) presents research series with their question, main result and explicit confirmed, refuted, partial or pending findings. `_data/series.yml` owns topics and their outputs; `_data/research.yml` supplies supported findings.
+- Projects (`/projects/`) separates interactive scientific explainers from software libraries. Articles (`/articles/`) provides the article index.
+- Manuscripts and background remain reachable from Lab and each topic. Historical URLs remain valid.
 
 Proof Atlas has one overview, a general research program and a scoped geometry prototype in the compiled library. Its article application has a synchronized reader at `/projects/proof-atlas/article/`. Human-readable article text is the default. Optional side views share a path-qualified compiled graph/Lean selection. Indexed crossing expressions, source-bound proof steps for Lemmas 3.1–3.3 and Theorems 3.4/4.1, declaration counterparts and supporting-module context are distinct relations; an unindexed passage clears the previous match. The separate crossing microscope and complete compiled library remain available under Reference & evidence, including their historical URLs. Language reference and coverage are supporting material; the compact constructor catalogue retains its optional illustrative scale diagrams. The overview does not duplicate the working graph or language explorer. Old shared occurrence/declaration URLs on the overview resolve to the microscope.
 

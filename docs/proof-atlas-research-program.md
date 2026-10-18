@@ -776,3 +776,58 @@ The resulting 27-query inventory records twelve introductions, eleven applicatio
 The policy also enumerates candidate frontiers in 34 frozen earlier native-query inventories, with 112 distinct candidate routes in total and at most 31 in one inventory. These candidates are drawn from earlier recorded premise roles; they have not all received new construction checks. The independent audit derives candidates directly from native application, introduction and let fields, checks contextual sharing, and keeps the unresolved next layer explicit. This is finite construction coverage, not complete proofs or semantic explanation.
 
 [Policy, limits and reproduction](/research/proof-atlas/packet-typing/README.md) · [Independent frontier audit](/scripts/test-proof-atlas-proof-frontier.cjs) · [Corpus candidate audit](/scripts/audit-proof-atlas-proof-frontiers.cjs) · [Reader checks](/scripts/test-proof-atlas-proof-frontier-browser.cjs)
+
+
+## Paged construction evidence and frontier audits
+
+The frozen proof-premise chain now contains 19 → 27 → 36 → 50 native queries.
+The last layer adds fourteen checked applications, preserving every earlier
+contextual judgment. This finite inventory contains sixteen introductions and
+thirty applications; seven applications also carry elimination metadata.
+Eighteen next-layer roots remain explicitly unrecorded. Following proof-valued
+premises omits type/value branches and stops at declaration/context references;
+even an empty frontier under this policy would not establish complete proofs.
+
+An independent native-field audit checks all three layer transitions, exact
+source paths, parent incidence and structural type identities. It compares 147
+premise appearances across the snapshots and rejects sixteen changed-data or
+bound controls. Three stored nodes appear at distinct frontier routes; node
+sharing never substitutes for lexical context. The same independent enumerator
+agrees with the visual frontier on all 34 existing native inventories, without
+supplying new kernel checks for those other candidates.
+
+Optional replay records share the 128-query/16-MiB native cache; paged source fields
+retain their 4,096-node cache. The complete-source reader keeps its source packet
+in full and one selected observation/query for synchronous inspection tools. Shared type tables remain fully loaded under
+separate fixed bounds. The historical resident fallback keeps its 32-query/
+256-KiB cap. The current complete replay package exceeds both fallback bounds;
+the paged reader retrieves individual queries. These are component bounds, not a
+total-browser memory guarantee. Transport creates no new typing judgments.
+
+Both fresh native runs reproduce all fifty query records identically. The
+transport audit compares 320 exact observations and 150 complete/paged cuts,
+forces eviction with a one-query cache, and retains sixteen failure/disposal
+controls. General typing preservation, semantic abstraction, broader coverage
+and measured comprehension remain open.
+
+[Method and limits](/research/proof-atlas/packet-typing/README.md) · [Immutable frontier chain](/research/proof-atlas/packet-typing/frontier-chain.json) · [Independent audit](/scripts/test-proof-atlas-frontier-chain.cjs) · [Native-field implementation](/scripts/proof-atlas-frontier-chain-audit.cjs)
+
+
+## Hidden-region interfaces
+
+A fresh core-only counterexample demonstrates that an empty proof-premise
+frontier can omit a proof-valued application below a value input. The projection,
+value application and a separate proof-witness query retain their exact source
+paths and native contexts. The selected projection expands to about 9.67 × 10²⁴
+source occurrences but uses 177 stored source nodes. This concerns syntactic
+coverage, not the mathematical importance of the omitted reflexivity proof.
+
+The **Hidden source regions** disclosure makes these boundaries explicit. Its
+source-root antichain accounts for every hidden occurrence in the displayed cut;
+root roles do not classify descendants. Opaque source children remain untyped.
+The finite audit covers 612 initial cuts across 34 inventories and 150 current
+replay cuts, with 9,177 boundary appearances and twenty rejection controls.
+Preparation is bounded and lazy; individual rows preserve exact source and focus
+navigation. General semantic abstraction and comprehension remain unevaluated.
+
+[Counterexample, rule and limits](/research/proof-atlas/frontier-boundary/README.md) · [Compiled control manifest](/public/data/proof-atlas/boundary-controls-manifest.js) · [Source accounting audit](/scripts/test-proof-atlas-boundary-ledger.cjs)
