@@ -40,6 +40,12 @@ fail the pointwise refinement criterion. All such failures use the proof-focus
 policy. Increasing the vertex budget preserves refinement in all 1,836 tested
 budget transitions; this finite comparison is not a universal monotonicity proof.
 
+The matrix uses initial proof-body roots: budgets 1, 8, 13 and 32 at depth three,
+and depths 2, 3, 4 and 6 at budgets 8, 13 and 32. It covers three selection
+policies, three grouping modes and both literal-source fallback settings. Optional
+constructor-layout lookup is absent. Interactive reader states and that optional
+layout layer are outside this audit.
+
 An independent reconstruction of retained source paths confirms two small
 counterexamples. In `JacobiCore.E_pos`, increasing depth two to three at budget
 eight hides a previously displayed proof application and its source application

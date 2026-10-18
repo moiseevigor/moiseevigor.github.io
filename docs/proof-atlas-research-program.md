@@ -841,8 +841,8 @@ and hidden occurrences conserve the original size, and the two counts transfer
 exactly. The model supports all twelve constructors. It supplies a criterion for
 local refinement, not a proof that the browser implements it.
 
-The distinction matters at a fixed display budget. In the current proof-focus
-selector, increasing depth can reselect previously retained structure; independent
+The distinction matters at a fixed display budget. In finite tests of the proof-focus
+selection core, increasing depth can reselect previously retained structure; independent
 source-path checks preserve two small counterexamples, including one with an
 unchanged retained count. Increasing the vertex budget preserves the tested cuts
 in the finite initial-root comparison. Native proof observations and semantic or
