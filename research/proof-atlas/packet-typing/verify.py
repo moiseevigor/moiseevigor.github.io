@@ -28,6 +28,7 @@ def main():
     parser.add_argument('--dependency-reference', type=Path, required=True)
     parser.add_argument('--workdir', type=Path, required=True)
     parser.add_argument('--name', default='lean_workbook_plus_6206')
+    parser.add_argument('--proof-frontier', action='store_true', help='One frozen native proof-premise layer beyond the seed inventory')
     args = parser.parse_args()
     lean = args.lean.resolve()
     compiler = subprocess.check_output([str(lean), '--version'], text=True).strip()
@@ -36,14 +37,21 @@ def main():
     folder.mkdir(exist_ok=False)
     (folder / 'scratch').mkdir()
     assert shutil.disk_usage(folder).free >= 30 * 1024**3
-    sources = {str(f.relative_to(ROOT)): sha(f.read_bytes()) for f in FILES}
+    files = list(FILES)
+    if args.proof_frontier:
+        files += [BASE / 'frontier.cjs', BASE / 'proof-premise-seed.json']
+        files += [ROOT / ('public/js/proof-atlas-' + name + '.js') for name in ['library-data', 'occurrence-types', 'judgment-geometry', 'let-reduction', 'let-pools', 'beta-reduction', 'elimination', 'geometry-core', 'projections']]
+    sources = {str(f.relative_to(ROOT)): sha(f.read_bytes()) for f in files}
     stable = runtime()
     paths, dependencies = verify_dependencies(args.dependency_reference.resolve())
     manifest = json.loads((ROOT / 'public/data/proof-atlas/goedel-sample-manifest.js').read_text().split('=', 1)[1].strip().rstrip(';'))
     assert dependencies == manifest['provenance']['environment']
-    summary = json.loads(subprocess.check_output(['node', str(BASE / 'prepare.cjs'), str(folder), args.name], cwd=ROOT, text=True))
+    summary = json.loads(subprocess.check_output(['node', str(BASE / 'prepare.cjs'), str(folder), args.name] + (['--proof-frontier'] if args.proof_frontier else []), cwd=ROOT, text=True))
     inventory = json.loads((folder / 'inventory.json').read_text())
-    assert summary == {'primary': 17, 'proofRoots': 14, 'union': 19, 'added': 2}
+    expected_summary = {'primary': 17, 'proofRoots': 14, 'union': 19, 'added': 2}
+    if args.proof_frontier:
+        expected_summary.update(union=27, added=10, frontier={'seedQueries': 19, 'newQueries': 8, 'totalQueries': 27})
+    assert summary == expected_summary
     request, proof, output = folder / 'request.json', folder / 'proof.ndjson', folder / 'observations.json'
     entry = folder / 'PacketTypes.lean'
     entry.write_text(stable + '\n#atlas_packet_replay ' + json.dumps(str(folder / 'proof-request.json')) + ' => ' + json.dumps(str(proof)) + '\n#atlas_packet_types ' + json.dumps(str(request)) + ' => ' + json.dumps(str(output)) + '\n')
@@ -52,7 +60,7 @@ def main():
     env = {'PATH': str(lean.parent) + ':/usr/bin:/bin', 'LEAN_PATH': os.pathsep.join(map(str, [folder] + paths)), 'TMPDIR': str(folder / 'scratch'), 'LANG': 'en_US.UTF-8'}
     resources = run_checked(['/usr/bin/sandbox-exec', '-p', sandbox_profile(lean, folder, paths), str(lean), str(entry)], folder, 'native', env, 30, 120)
     assert dependencies == verify_dependencies(args.dependency_reference.resolve())[1] and stable == runtime()
-    assert sources == {str(f.relative_to(ROOT)): sha(f.read_bytes()) for f in FILES}
+    assert sources == {str(f.relative_to(ROOT)): sha(f.read_bytes()) for f in files}
     assert hashes == {p.name: sha(p.read_bytes()) for p in inputs}
     rows = [json.loads(line) for line in proof.read_text().splitlines()]
     assert len(rows) == 1
@@ -74,6 +82,16 @@ def main():
     for key in ['kernelDomainSort', 'kernelBinderConversion', 'kernelBodyConversion', 'kernelFunctionConversion']:
         assert target['lambdaJudgment'][key] == 'PASS'
     result = {'status': 'PASS', 'source': inventory['source'], 'inventory': summary, 'queryInventorySha256': sha(json.dumps(inventory['routes'], separators=(',', ':')).encode()), 'compiler': compiler, 'environment': dependencies, 'imports': ['Mathlib', 'Aesop'], 'originalProofModulesImported': False, 'privateProofProjectsOrDependenciesBuilt': False, 'baselineProof': baseline, 'baselineProofSha256': sha(proof.read_bytes()), 'nativeOutputSha256': sha(output.read_bytes()), 'runtimeSha256': sha(stable.encode()), 'producerFiles': sources, 'targetLambda': {'route': target['route'], 'node': target['node'], 'typeText': target['typeText'], 'status': target['lambdaJudgment']['status']}, 'resources': resources}
+    if args.proof_frontier:
+        frontier = inventory['frontier']
+        assert len(frontier['snapshot']['pending']) == summary['frontier']['newQueries']
+        by_route = {json.dumps(e['route'], sort_keys=True): e for e in evidence['entries']}
+        for pending in frontier['snapshot']['pending']:
+            observed = by_route[json.dumps(pending['route'], sort_keys=True)]
+            assert observed['node'] == pending['node'] and observed['role'] == 'proof'
+            kind = 'lambdaJudgment' if pending['kind'] == 'lam' else 'applicationJudgment' if pending['kind'] == 'app' else 'projectionJudgment'
+            assert observed.get(kind, {}).get('status') == 'checked'
+        result['frontier'] = frontier
     (folder / 'verification.json').write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps({'status': 'PASS', 'inventory': summary, 'internalLambda': target['lambdaJudgment']['status']}))
 

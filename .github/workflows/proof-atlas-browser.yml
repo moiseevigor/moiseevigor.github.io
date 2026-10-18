@@ -424,7 +424,9 @@ jobs:
           node scripts/test-proof-atlas-context-body-focus.cjs
           node scripts/test-proof-atlas-context-body-focus-browser.cjs
           node scripts/test-proof-atlas-packet-types.cjs
+          node scripts/test-proof-atlas-proof-frontier.cjs
           node scripts/test-proof-atlas-packet-types-browser.cjs
+          node scripts/test-proof-atlas-proof-frontier-browser.cjs
           node scripts/test-proof-atlas-compiled-replay-browser.cjs
           node scripts/test-proof-atlas-context-modules-browser.cjs
           node scripts/test-proof-atlas-context-interface-browser.cjs
@@ -504,6 +506,9 @@ jobs:
             /tmp/atlas-context-body-focus.json
             /tmp/atlas-context-body-focus-browser/
             /tmp/atlas-packet-types-browser/
+            /tmp/atlas-proof-frontier-browser/
+            /tmp/atlas-proof-frontier.json
+            /tmp/atlas-proof-frontiers.json
             /tmp/proof-atlas-packet-types.json
             /tmp/atlas-context-accounting-browser/
             /tmp/atlas-projection-support.json
