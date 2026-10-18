@@ -869,6 +869,15 @@ result follows from these tests.
 
 [Rule, bounds and reproduction](/research/proof-atlas/local-refinement/README.md) · [Implementation](/public/js/proof-atlas-local-refinement.js) · [Independent source audit](/scripts/test-proof-atlas-local-refinement.cjs) · [Reader checks](/scripts/test-proof-atlas-local-refinement-browser.cjs)
 
+A recorded type interface identifies the exact source occurrence, its original
+lexical context and role, and the referenced type expression. Equal shared term
+or type roots alone do not identify that judgment. The
+[independent interface checker](/research/proof-atlas/type-interfaces/README.md)
+resolves the original native records and compares stored type syntax in that
+context, without importing the scene producer or its comparator. Unrecorded
+parent fields remain source relations when a child has a separate type record.
+This check adds no kernel typing judgment or general definitional equality rule.
+
 ## Locality and nested composition
 
 An expression-indexed one-hole context makes local replacement explicit. Ten

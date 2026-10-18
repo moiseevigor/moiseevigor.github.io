@@ -84,6 +84,11 @@ preservation criterion. These finite implementation checks do not constitute a
 formal proof of the JavaScript or a measured comprehension benefit. General
 semantic abstraction and complete native construction coverage remain open.
 
+The [independent recorded-type interface audit](../type-interfaces/README.md)
+resolves parent and child records directly from their hash-pinned packages. It
+checks source contexts and full stored type syntax without importing the judgment
+producer or its comparator; it does not add a kernel typing judgment.
+
 ```sh
 node scripts/test-proof-atlas-local-refinement.cjs
 # After the production site is built and served:
