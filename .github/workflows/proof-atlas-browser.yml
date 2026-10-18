@@ -4,6 +4,9 @@ on:
     branches: [master]
     paths:
       - '_config.yml'
+      - 'public/js/proof-atlas-cut-certificate.js'
+      - 'scripts/*proof-atlas-cut-certificate*.cjs'
+      - 'research/proof-atlas/cut-records/**'
       - 'public/js/proof-atlas-local-refinement.js'
       - 'scripts/*proof-atlas-local-refinement*.cjs'
       - 'scripts/*proof-atlas-local-cut-context*.cjs'
@@ -222,6 +225,9 @@ on:
   pull_request:
     paths:
       - '_config.yml'
+      - 'public/js/proof-atlas-cut-certificate.js'
+      - 'scripts/*proof-atlas-cut-certificate*.cjs'
+      - 'research/proof-atlas/cut-records/**'
       - 'public/js/proof-atlas-local-refinement.js'
       - 'scripts/*proof-atlas-local-refinement*.cjs'
       - 'scripts/*proof-atlas-local-cut-context*.cjs'
@@ -467,6 +473,7 @@ jobs:
           node scripts/test-proof-atlas-boundary-ledger-browser.cjs
           node scripts/test-proof-atlas-local-refinement.cjs
           node scripts/test-proof-atlas-local-refinement-browser.cjs
+          node scripts/test-proof-atlas-cut-certificate-browser.cjs
           node scripts/test-proof-atlas-local-cut-context.cjs
           node scripts/test-proof-atlas-local-cut-context-browser.cjs
           node scripts/test-proof-atlas-proof-frontier.cjs
