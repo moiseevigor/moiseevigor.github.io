@@ -3,6 +3,7 @@ on:
   push:
     branches: [master]
     paths:
+      - '_config.yml'
       - 'public/data/proof-atlas/reduced-replay*'
       - 'public/data/proof-atlas/reduced-replay/**'
       - 'research/proof-atlas/reduced-replay/**'
@@ -210,6 +211,7 @@ on:
       - '.github/workflows/proof-atlas-browser.yml'
   pull_request:
     paths:
+      - '_config.yml'
       - 'public/data/proof-atlas/reduced-replay*'
       - 'public/data/proof-atlas/reduced-replay/**'
       - 'research/proof-atlas/reduced-replay/**'
