@@ -1,14 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 148" role="img" aria-labelledby="title desc">
 <title id="title">Proof Atlas — geometry of a proof</title>
-<desc id="desc">A small typed proof graph: one trunk forks into nested subarguments, shared dependencies join, and two paths converge on a common conclusion.</desc>
+<desc id="desc">A small typed proof graph: one trunk forks into nested subarguments, one shared lemma feeds both subarguments, and two paths converge on a common conclusion.</desc>
 <rect width="220" height="148" fill="#fff"/>
 <g fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path d="M18 75H50 M50 75L82 39 M50 75L82 111" stroke="#295468" stroke-width="1.75"/>
   <path d="M82 39L112 24 M82 39L112 54 M82 111L112 94 M82 111L112 125" stroke="#477e83" stroke-width="1.5"/>
   <path d="M112 24L137 39 M112 54L137 39 M112 94L137 107 M112 125L137 107" stroke="#779c9b" stroke-width="1.35"/>
   <path d="M137 39L172 75 M137 107L172 75 M172 75H201" stroke="#295468" stroke-width="1.75"/>
-  <path d="M103 65L155 65L155 83L103 83Z" stroke="#d5c6a8" stroke-width="1" stroke-dasharray="2.5 2.5" opacity=".9"/>
-  <path d="M103 69V79 M155 69V79" stroke="#a4a9a5" stroke-width="1"/>
+  <path d="M100 75L137 39 M100 75L137 107" stroke="#c8501a" stroke-width="1.35"/>
 </g>
 <g fill="#fff" stroke="#326a79" stroke-width="1.7">
   <circle cx="18" cy="75" r="4.4"/><circle cx="50" cy="75" r="6.7"/>
@@ -17,8 +16,9 @@
   <circle cx="112" cy="94" r="3.7"/><circle cx="112" cy="125" r="3.7"/>
   <circle cx="137" cy="39" r="5"/><circle cx="137" cy="107" r="5"/>
 </g>
-<g fill="#bd8544" stroke="#ffffff" stroke-width="1.5"><circle cx="172" cy="75" r="7.5"/></g>
+<g fill="#fff" stroke="#295468" stroke-width="1.9"><circle cx="172" cy="75" r="6.5"/></g>
 <circle cx="201" cy="75" r="4.6" fill="#285768"/>
+<circle cx="100" cy="75" r="4.2" fill="#c8501a" stroke="#ffffff" stroke-width="1.5"/>
 <g fill="#4e9295"><circle cx="112" cy="24" r="1.5"/><circle cx="112" cy="54" r="1.5"/><circle cx="112" cy="94" r="1.5"/><circle cx="112" cy="125" r="1.5"/></g>
-<g fill="#576c78" font-family="sans-serif" font-size="9"><text x="18" y="91" text-anchor="middle">input</text><text x="201" y="91" text-anchor="middle">theorem</text></g>
+<g fill="#576c78" font-family="sans-serif" font-size="9"><text x="18" y="91" text-anchor="middle">input</text><text x="201" y="91" text-anchor="middle">theorem</text><text x="112" y="73" font-size="7.5" fill="#c8501a">shared</text><text x="112" y="82" font-size="7.5" fill="#c8501a">lemma</text></g>
 </svg>

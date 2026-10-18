@@ -11,7 +11,8 @@ series: hidden-protostars
 series_title: "Hidden protostars"
 series_part: 2
 permalink: /astrophysics/2026/10/11/hidden-protostars-column-uncertainty/
-image: /public/img/posts/hidden-protostars-v2.svg
+image: /public/img/posts/hidden-protostars-2.svg
+result: '333 of 1,000 clumps pass the 800-control gate'
 published: true
 listed: false
 comments: false

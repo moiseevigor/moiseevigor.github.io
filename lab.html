@@ -1,48 +1,58 @@
 ---
 layout: default
-title: Research
+title: Lab
 subtitle: >
-  Established results, decisive negative findings, and the evidence behind them.
+  Research series: each question, its main result, and the hypotheses that did not hold.
 permalink: /lab/
 comments: false
 ---
 
-<main class="research-hub research-index">
-<header><p class="research-kicker">Research</p><h1>Research results and evidence.</h1><p>Analytical identities, compiled proof structure and measured model comparisons. Each account records assumptions, evidence and decisive negative findings.</p></header>
-<nav class="research-index-jump" aria-label="Research index sections"><a href="#results">Selected results</a><a href="#negative-results">Negative findings</a><a href="#topics">Research topics</a><a href="/projects/">Interactive tools</a><a href="/articles/">Manuscripts</a></nav>
-
-<section class="research-section" id="results" aria-labelledby="results-title">
-  <h2 id="results-title">Selected results</h2>
-  {% include research-highlights.html %}
+<main class="hp-wrap">
+<section class="lab-head" aria-labelledby="lab-h">
+  <h1 id="lab-h" class="hp-head">Lab</h1>
+  <p class="hp-lede">Research series. Each opens with its question and its main result, and keeps the hypotheses that were refuted. Appendices give the background, <a href="/articles/">articles</a> give statements and proofs.</p>
+  <p class="lab-legend"><span><b class="v-ok">✓</b>confirmed</span><span><b class="v-no">✗</b>refuted</span><span><b class="v-part">△</b>partial</span><span><b class="v-open">○</b>pending</span></p>
 </section>
 
-<section class="research-section" id="negative-results" aria-labelledby="negative-title">
-  <h2 id="negative-title">Decisive negative findings</h2>
-  <p>These failures change the scientific conclusion. Unmeasured claims remain limits, rather than measured null results.</p>
-  <ul class="research-negative">
-  {% for result in site.data.research.negative %}<li><h3><a href="{{ result.url }}">{{ result.title }}</a></h3><p>{{ result.summary }}</p></li>{% endfor %}
-  </ul>
-</section>
-
-<section class="research-section research-topics" id="topics" aria-labelledby="topics-title">
-  <h2 id="topics-title">Research topics and full accounts</h2>
-  {% for id in site.data.research.order %}
-  {% assign p = site.data.series | where: 'id', id | first %}
-  {% assign first = p.posts | first %}
-  {% assign articles = site.articles | where: 'program', p.id %}
-  <article class="research-topic" id="{{ p.id }}">
-    <h3><a href="{{ first.url }}">{{ p.title }}</a></h3>
-    <p>{{ p.outcome }}</p>
-    {% if p.limits %}<p class="research-scope">{{ p.limits }}</p>{% endif %}
-    <div class="research-links"><a href="{{ first.url }}">Read the findings →</a>{% if p.overview %}<a href="{{ p.overview }}">Explore</a>{% endif %}</div>
-    <details><summary>Articles, background and evidence</summary>
-      <ul>{% for item in p.posts %}<li><a href="{{ item.url }}">{{ item.title }}</a></li>{% endfor %}</ul>
-      {% if articles.size > 0 %}<p><strong>Manuscripts</strong></p><ul>{% for a in articles %}<li><a href="{{ a.url }}">{{ a.title }}</a></li>{% endfor %}</ul>{% endif %}
-      {% if p.appendices %}<p><strong>Mathematical background</strong></p><ul>{% for item in p.appendices %}<li><a href="{{ item.url }}">{{ item.title }}</a></li>{% endfor %}</ul>{% endif %}
-      {% if p.code %}<p><a href="{{ site.github_repo_url }}/tree/master/{{ p.code }}">Source data and reproducibility</a></p>{% endif %}
+<div class="hc-list">
+{% for id in site.data.research.order %}
+{%- assign p = site.data.series | where: 'id', id | first -%}
+{%- if p -%}
+{%- assign first = p.posts | first -%}
+{%- assign fp = site.posts | where: 'url', first.url | first -%}
+{%- assign img = p.image | default: fp.image -%}
+{%- assign articles = site.articles | where: 'program', p.id -%}
+<article class="hc hc--lab{% unless img %} hc--noimg{% endunless %}" id="{{ p.id }}">
+  <div class="hc-meta">
+    <span class="lab-status lab-status-{{ p.status }}">{{ p.status | capitalize }}</span>
+    <span>{{ p.posts.size }} part{% if p.posts.size != 1 %}s{% endif %}{% if p.appendices %} · {{ p.appendices.size }} appendices{% endif %}{% if articles.size > 0 %} · {{ articles.size }} article{% if articles.size != 1 %}s{% endif %}{% endif %}</span>
+  </div>
+  <h2 class="hc-title"><a href="{{ first.url }}">{{ p.title }}</a></h2>
+  {% if img %}<a class="hc-fig" href="{{ first.url }}" tabindex="-1" aria-hidden="true"><img src="{{ img }}" alt="" loading="lazy"></a>{% endif %}
+  {% if p.question %}<p class="hc-sum hc-sum--full">{{ p.question }}</p>{% endif %}
+  {% if p.result %}<p class="hc-res" tabindex="0">{{ p.result }}</p>{% endif %}
+  <div class="hc-more">
+    {% if p.verdicts %}
+    <ul class="lab-verdicts">
+      {% for v in p.verdicts %}{% case v.v %}{% when 'confirmed' %}{% assign sym = '✓' %}{% assign cls = 'v-ok' %}{% when 'refuted' %}{% assign sym = '✗' %}{% assign cls = 'v-no' %}{% when 'partial' %}{% assign sym = '△' %}{% assign cls = 'v-part' %}{% else %}{% assign sym = '○' %}{% assign cls = 'v-open' %}{% endcase %}
+      <li title="{{ v.label | escape }}"><b class="{{ cls }}">{{ sym }}</b>{% if v.h.size <= 3 %}{{ v.label }}{% else %}{{ v.h }}{% endif %}</li>{% endfor %}
+    </ul>
+    {% endif %}
+    <div class="lab-links">
+      <a href="{{ first.url }}">Read Part 1 →</a>
+      {% if p.overview and p.overview != first.url %}<a href="{{ p.overview }}">Overview</a>{% endif %}
+      {% if p.code %}<a href="{{ site.github_repo_url }}/tree/master/{{ p.code }}">Code &amp; data</a>{% endif %}
+    </div>
+    {% if p.posts.size > 1 or p.appendices or articles.size > 0 %}
+    <details class="lab-parts"><summary>Contents</summary>
+      <ol>{% for item in p.posts %}<li><a href="{{ item.url }}">{{ item.title }}</a></li>{% endfor %}</ol>
+      {% if p.appendices %}<p class="lab-sub">Appendices</p><ul>{% for item in p.appendices %}<li><a href="{{ item.url }}">{{ item.title }}</a></li>{% endfor %}</ul>{% endif %}
+      {% if articles.size > 0 %}<p class="lab-sub">Articles</p><ul>{% for a in articles %}<li><a href="{{ a.url }}">{{ a.title }}</a></li>{% endfor %}</ul>{% endif %}
     </details>
-  </article>
-  {% endfor %}
-</section>
-
+    {% endif %}
+  </div>
+</article>
+{%- endif -%}
+{% endfor %}
+</div>
 </main>

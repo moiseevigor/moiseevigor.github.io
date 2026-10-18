@@ -8,6 +8,7 @@ date: 2026-07-03 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, SE3, cosmic-web, filaments, cosmology, optimal-control]
 image: /public/img/posts/cosmic-web-1.svg
+result: 'mean transport error 4.98 → 4.52 voxels · 3 held-out seeds'
 description: >
   Positive and negative results from matched filament benchmarks, transport simulations and gas-map controls, with the original comparison limits retained.
 series: geometry-of-cosmic-web

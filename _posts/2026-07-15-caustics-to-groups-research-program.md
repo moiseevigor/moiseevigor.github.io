@@ -8,6 +8,7 @@ date: 2026-07-15 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, caustics, lie-groups, singularity-theory, optimal-control, inverse-problems]
 image: /public/img/posts/caustics-groups-1.svg
+result: 'exact accuracy 0.99 at low noise · four synthetic models'
 description: >
   The group-blindness obstruction, sampled fold and cusp results, synthetic classification and the limits of inferring geometry from caustics.
 series: caustics-to-groups

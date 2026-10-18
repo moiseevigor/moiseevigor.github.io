@@ -11,7 +11,8 @@ series: hidden-protostars
 series_title: "Hidden protostars"
 series_part: 3
 permalink: /astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/
-image: /public/img/posts/hidden-protostars-v2.svg
+image: /public/img/posts/hidden-protostars-3.svg
+result: '14/27 vs 15/27 positives at 18 reviews'
 published: true
 listed: false
 comments: false

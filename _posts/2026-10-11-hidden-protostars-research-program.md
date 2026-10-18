@@ -11,7 +11,8 @@ series: hidden-protostars
 series_title: "Hidden protostars"
 series_part: 1
 permalink: /astrophysics/2026/10/11/hidden-protostars-research-program/
-image: /public/img/posts/hidden-protostars-v2.svg
+image: /public/img/posts/hidden-protostars-1.svg
+result: '14/27 vs 15/27 positives at 18 reviews'
 published: true
 comments: false
 reference_style: bibliography
