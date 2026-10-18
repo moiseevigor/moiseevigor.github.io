@@ -776,3 +776,26 @@ The resulting 27-query inventory records twelve introductions, eleven applicatio
 The policy also enumerates candidate frontiers in 34 frozen earlier native-query inventories, with 112 distinct candidate routes in total and at most 31 in one inventory. These candidates are drawn from earlier recorded premise roles; they have not all received new construction checks. The independent audit derives candidates directly from native application, introduction and let fields, checks contextual sharing, and keeps the unresolved next layer explicit. This is finite construction coverage, not complete proofs or semantic explanation.
 
 [Policy, limits and reproduction](/research/proof-atlas/packet-typing/README.md) · [Independent frontier audit](/scripts/test-proof-atlas-proof-frontier.cjs) · [Corpus candidate audit](/scripts/audit-proof-atlas-proof-frontiers.cjs) · [Reader checks](/scripts/test-proof-atlas-proof-frontier-browser.cjs)
+
+
+## Paged construction evidence
+
+The next recorded proof-premise layer adds nine checked roots, giving 36 queries
+while preserving all 27 earlier judgments. Sixteen introductions and sixteen
+applications now use the common construction notation in this finite inventory.
+Fourteen next-layer roots remain explicitly unrecorded; proof coverage is incomplete.
+
+Optional replay evidence now uses the existing query-page transport. Its records
+share the 128-query/16-MiB native cache; source fields retain their 4,096-node cache.
+Shared type tables remain fully loaded under separate fixed bounds. The historical
+resident fallback keeps its 32-query/256-KiB cap. These are component bounds, not a
+total-browser memory guarantee. Transport does not create new typing judgments.
+
+The independent audit compares 194 exact observations and 108 complete/paged cuts,
+forces eviction with a one-query cache, and rejects sixteen changed-data or disposal
+controls. Both fresh native runs reproduce the 36 query records identically. Reader
+checks distinguish all nine added construction roots from fourteen unsupported next
+roots. General typing preservation, broader proof coverage and comprehension remain
+open.
+
+[Reproduction and boundaries](/research/proof-atlas/packet-typing/README.md#second-layer-and-bounded-delivery) · [Transport audit](/scripts/test-proof-atlas-replay-query-pages.cjs) · [Failure controls](/scripts/test-proof-atlas-replay-query-controls.cjs)

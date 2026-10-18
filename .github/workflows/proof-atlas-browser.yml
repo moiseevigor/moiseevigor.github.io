@@ -36,6 +36,8 @@ on:
       - 'public/data/proof-atlas/native-query-pages*'
       - 'public/data/proof-atlas/native-query-pages/**'
       - 'scripts/test-proof-atlas-native-page*.cjs'
+      - 'scripts/test-proof-atlas-replay-query*.cjs'
+      - 'public/data/proof-atlas/packet-query-pages-manifest.js'
       - 'public/js/proof-atlas-projected-context-*.js'
       - 'public/data/proof-atlas/projected-context-modules*'
       - 'public/data/proof-atlas/projected-context-modules/**'
@@ -236,6 +238,8 @@ on:
       - 'public/data/proof-atlas/native-query-pages*'
       - 'public/data/proof-atlas/native-query-pages/**'
       - 'scripts/test-proof-atlas-native-page*.cjs'
+      - 'scripts/test-proof-atlas-replay-query*.cjs'
+      - 'public/data/proof-atlas/packet-query-pages-manifest.js'
       - 'public/js/proof-atlas-projected-context-*.js'
       - 'public/data/proof-atlas/projected-context-modules*'
       - 'public/data/proof-atlas/projected-context-modules/**'
@@ -424,6 +428,8 @@ jobs:
           node scripts/test-proof-atlas-context-body-focus.cjs
           node scripts/test-proof-atlas-context-body-focus-browser.cjs
           node scripts/test-proof-atlas-packet-types.cjs
+          node scripts/test-proof-atlas-replay-query-pages.cjs
+          node scripts/test-proof-atlas-replay-query-controls.cjs
           node scripts/test-proof-atlas-proof-frontier.cjs
           node scripts/test-proof-atlas-packet-types-browser.cjs
           node scripts/test-proof-atlas-proof-frontier-browser.cjs
@@ -507,6 +513,8 @@ jobs:
             /tmp/atlas-context-body-focus-browser/
             /tmp/atlas-packet-types-browser/
             /tmp/atlas-proof-frontier-browser/
+            /tmp/atlas-replay-query-pages.json
+            /tmp/atlas-replay-query-controls.json
             /tmp/atlas-proof-frontier.json
             /tmp/atlas-proof-frontiers.json
             /tmp/proof-atlas-packet-types.json

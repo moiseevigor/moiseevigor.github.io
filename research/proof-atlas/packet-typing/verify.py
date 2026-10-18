@@ -28,7 +28,9 @@ def main():
     parser.add_argument('--dependency-reference', type=Path, required=True)
     parser.add_argument('--workdir', type=Path, required=True)
     parser.add_argument('--name', default='lean_workbook_plus_6206')
-    parser.add_argument('--proof-frontier', action='store_true', help='One frozen native proof-premise layer beyond the seed inventory')
+    policy = parser.add_mutually_exclusive_group()
+    policy.add_argument('--proof-frontier', action='store_true', help='One frozen native proof-premise layer beyond the initial seed')
+    policy.add_argument('--frontier-seed', type=Path, help='Explicit frozen proof-premise seed configuration under this repository')
     args = parser.parse_args()
     lean = args.lean.resolve()
     compiler = subprocess.check_output([str(lean), '--version'], text=True).strip()
@@ -38,19 +40,23 @@ def main():
     (folder / 'scratch').mkdir()
     assert shutil.disk_usage(folder).free >= 30 * 1024**3
     files = list(FILES)
-    if args.proof_frontier:
-        files += [BASE / 'frontier.cjs', BASE / 'proof-premise-seed.json']
+    frontier_seed = args.frontier_seed.resolve() if args.frontier_seed else BASE / 'proof-premise-seed.json'
+    use_frontier = args.proof_frontier or args.frontier_seed is not None
+    if use_frontier:
+        frontier_seed.relative_to(ROOT)
+        files += [BASE / 'frontier.cjs', frontier_seed]
         files += [ROOT / ('public/js/proof-atlas-' + name + '.js') for name in ['library-data', 'occurrence-types', 'judgment-geometry', 'let-reduction', 'let-pools', 'beta-reduction', 'elimination', 'geometry-core', 'projections']]
     sources = {str(f.relative_to(ROOT)): sha(f.read_bytes()) for f in files}
     stable = runtime()
     paths, dependencies = verify_dependencies(args.dependency_reference.resolve())
     manifest = json.loads((ROOT / 'public/data/proof-atlas/goedel-sample-manifest.js').read_text().split('=', 1)[1].strip().rstrip(';'))
     assert dependencies == manifest['provenance']['environment']
-    summary = json.loads(subprocess.check_output(['node', str(BASE / 'prepare.cjs'), str(folder), args.name] + (['--proof-frontier'] if args.proof_frontier else []), cwd=ROOT, text=True))
+    summary = json.loads(subprocess.check_output(['node', str(BASE / 'prepare.cjs'), str(folder), args.name] + (['--frontier-seed', str(frontier_seed)] if args.frontier_seed else ['--proof-frontier'] if args.proof_frontier else []), cwd=ROOT, text=True))
     inventory = json.loads((folder / 'inventory.json').read_text())
     expected_summary = {'primary': 17, 'proofRoots': 14, 'union': 19, 'added': 2}
-    if args.proof_frontier:
-        expected_summary.update(union=27, added=10, frontier={'seedQueries': 19, 'newQueries': 8, 'totalQueries': 27})
+    if use_frontier:
+        expected = json.loads(frontier_seed.read_text())['expected']
+        expected_summary.update(union=expected['totalQueries'], added=expected['totalQueries']-17, frontier={k: expected[k] for k in ['seedQueries', 'newQueries', 'totalQueries']})
     assert summary == expected_summary
     request, proof, output = folder / 'request.json', folder / 'proof.ndjson', folder / 'observations.json'
     entry = folder / 'PacketTypes.lean'
@@ -82,7 +88,7 @@ def main():
     for key in ['kernelDomainSort', 'kernelBinderConversion', 'kernelBodyConversion', 'kernelFunctionConversion']:
         assert target['lambdaJudgment'][key] == 'PASS'
     result = {'status': 'PASS', 'source': inventory['source'], 'inventory': summary, 'queryInventorySha256': sha(json.dumps(inventory['routes'], separators=(',', ':')).encode()), 'compiler': compiler, 'environment': dependencies, 'imports': ['Mathlib', 'Aesop'], 'originalProofModulesImported': False, 'privateProofProjectsOrDependenciesBuilt': False, 'baselineProof': baseline, 'baselineProofSha256': sha(proof.read_bytes()), 'nativeOutputSha256': sha(output.read_bytes()), 'runtimeSha256': sha(stable.encode()), 'producerFiles': sources, 'targetLambda': {'route': target['route'], 'node': target['node'], 'typeText': target['typeText'], 'status': target['lambdaJudgment']['status']}, 'resources': resources}
-    if args.proof_frontier:
+    if use_frontier:
         frontier = inventory['frontier']
         assert len(frontier['snapshot']['pending']) == summary['frontier']['newQueries']
         by_route = {json.dumps(e['route'], sort_keys=True): e for e in evidence['entries']}

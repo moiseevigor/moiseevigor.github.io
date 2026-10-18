@@ -1,0 +1,166 @@
+{
+  "format": "ProofAtlasProofPremiseSeed/1",
+  "source": {
+    "edition": "goedel-sample-4331",
+    "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+    "name": "lean_workbook_plus_6206",
+    "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5"
+  },
+  "seedTypes": {
+    "edition": "goedel-sample-4331",
+    "name": "lean_workbook_plus_6206",
+    "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+    "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+    "file": "/public/data/proof-atlas/packet-types/77ba2dcda61d0e61bcefc5bea793a12d6ad4e8298bc14396f67b9daee15e651b.json.gz",
+    "sha256": "77ba2dcda61d0e61bcefc5bea793a12d6ad4e8298bc14396f67b9daee15e651b",
+    "checked": 27,
+    "queried": 27,
+    "bytes": 176544
+  },
+  "providers": [
+    {
+      "kind": "primary",
+      "descriptor": {
+        "edition": "goedel-sample-4331",
+        "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+        "name": "lean_workbook_plus_6206",
+        "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+        "file": "/public/data/proof-atlas/goedel-sample/types-9b2585406fc0f8da07b5.json.gz",
+        "sha256": "eae59a61ec7d01a1979634b91c63bd6c08b80d0d4165edbb408490892b98c8ef",
+        "compressedBytes": 8703,
+        "checked": 17,
+        "queried": 17
+      }
+    },
+    {
+      "kind": "case",
+      "descriptor": {
+        "edition": "goedel-sample-4331",
+        "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+        "name": "lean_workbook_plus_6206",
+        "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+        "file": "/public/data/proof-atlas/goedel-sample/cases-9b2585406fc0f8da07b5.json.gz",
+        "sha256": "d2110c1509b50b0af708a2d906905149f1d7befb676ea461e7ade4075ab5fb51",
+        "compressedBytes": 9771,
+        "checked": 1,
+        "queried": 1
+      }
+    },
+    {
+      "kind": "let",
+      "descriptor": {
+        "edition": "goedel-sample-4331",
+        "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+        "name": "lean_workbook_plus_6206",
+        "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+        "file": "/public/data/proof-atlas/let-result-pools/goedel-9b2585406fc0f8da07b5.index.json.gz",
+        "sha256": "55bc45b8775034ad7b8f27c711bd928daf0f280418aff4a064d830aa80e2bd4a",
+        "checked": 3,
+        "queried": 3,
+        "routes": [
+          {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2
+            ]
+          },
+          {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2
+            ]
+          },
+          {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        ],
+        "storage": "bounded-result-pools/1",
+        "legacy": {
+          "edition": "goedel-sample-4331",
+          "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+          "name": "lean_workbook_plus_6206",
+          "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+          "file": "/public/data/proof-atlas/let-reductions/goedel-9b2585406fc0f8da07b5.json.gz",
+          "sha256": "a3f89e180b618683f53edd1f7b68e9cf5e03a5cb06b8da5d6c435bb7887302b7",
+          "checked": 3,
+          "queried": 3,
+          "routes": [
+            {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                2,
+                2
+              ]
+            },
+            {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                2
+              ]
+            },
+            {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        "decodedBytes": 915581,
+        "compressedBytes": 34228
+      }
+    }
+  ],
+  "expected": {
+    "seedQueries": 27,
+    "proofPremises": 48,
+    "terminalReferences": 14,
+    "recordedConstructions": 25,
+    "newQueries": 9,
+    "totalQueries": 36
+  }
+}
