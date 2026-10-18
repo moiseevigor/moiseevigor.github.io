@@ -13,6 +13,7 @@ on:
       - 'public/data/proof-atlas/native-source-cuts/**'
       - 'public/js/proof-atlas-local-refinement.js'
       - 'scripts/*proof-atlas-local-refinement*.cjs'
+      - 'scripts/test-proof-atlas-type-interface-browser.cjs'
       - 'scripts/*proof-atlas-local-cut-context*.cjs'
       - 'public/data/proof-atlas/local-cut-context*'
       - 'public/data/proof-atlas/local-cut-context/**'
@@ -238,6 +239,7 @@ on:
       - 'public/data/proof-atlas/native-source-cuts/**'
       - 'public/js/proof-atlas-local-refinement.js'
       - 'scripts/*proof-atlas-local-refinement*.cjs'
+      - 'scripts/test-proof-atlas-type-interface-browser.cjs'
       - 'scripts/*proof-atlas-local-cut-context*.cjs'
       - 'public/data/proof-atlas/local-cut-context*'
       - 'public/data/proof-atlas/local-cut-context/**'
@@ -481,6 +483,7 @@ jobs:
           node scripts/test-proof-atlas-boundary-ledger-browser.cjs
           node scripts/test-proof-atlas-local-refinement.cjs
           node scripts/test-proof-atlas-local-refinement-browser.cjs
+          node scripts/test-proof-atlas-type-interface-browser.cjs
           node scripts/test-proof-atlas-cut-certificate-browser.cjs
           node scripts/test-proof-atlas-cut-native-browser.cjs
           node scripts/test-proof-atlas-local-cut-context.cjs
