@@ -206,3 +206,9 @@ semantic proof-compression claim follows.
 [Native reconstruction](NativeCut.lean) · [Lexical wire checks](NativeBindings.lean)
 · [Reproducer](verify_native.py) · [Native rejection controls](verify_native_controls.py)
 · [Compiled evidence manifest](/public/data/proof-atlas/native-source-cuts-manifest.js)
+
+The separate [larger source-table profile](large-profile.md) accepts up to 262,144
+stored nodes while preserving this frozen verifier. Two kernel-checked laws
+establish agreement within the original kind-table bound. Its finite source,
+rejection and deep-syntax checks have separate compiled evidence; they add no
+mathematical typing or all-size guarantee.
