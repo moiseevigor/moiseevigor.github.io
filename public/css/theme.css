@@ -1,0 +1,206 @@
+/**
+ * theme.css — type, colour and the shared page system (nav, footer, cards).
+ * Loaded after site.css and distill.css, so its tokens win on every page.
+ *
+ * Principles: a white page so figures and plots sit on the same ground;
+ * equations and figures carry each card; navigation is the name (home) plus
+ * four sections; archive, tags and feeds live in the footer.
+ */
+
+/* ── Tokens (light). Dark tokens stay in site.css: :root[data-theme="dark"]
+   outranks :root, so these only replace the light values. ─────────────────── */
+:root {
+  --accent:       #2d5b8c;
+  --accent-light: #e9eff6;
+  --accent-warm:  #b4652e;
+  --text:         #1c1d1f;
+  --text-light:   #3f4349;
+  --text-muted:   #5b5f66;
+  --border:       #e6e5e1;
+  --fig-bg:       #f6f6f3;
+  --bg:           #ffffff;
+  --good:         #3d6b4f;
+  --bad:          #9a4a1e;
+  --partial:      #8a5a12;
+
+  --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --sans:  'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono:  'IBM Plex Mono', 'SFMono-Regular', Menlo, monospace;
+}
+:root[data-theme="dark"] { --partial: #e0b25e; }
+
+/* Source Serif has a smaller x-height than Merriweather: one step up. */
+.l-body p, .l-body li, .post-body p, .post-body li { font-size: 1.0625rem; }
+
+/* ── Navigation ─────────────────────────────────────────────────────────── */
+/* Bar height stays 48px: Proof Atlas tools offset their sticky panels by it. */
+.site-nav-brand { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+.site-nav-links { gap: 28px; }
+.site-nav-links a { font-size: 14px; font-weight: 400; color: var(--text-light); }
+.site-nav-links a.active { color: var(--text); font-weight: 600; }
+.site-nav-links a.active::after { background: var(--text); }
+.theme-toggle { width: 40px; height: 40px; margin: 0 -10px 0 18px; }
+
+/* ── Footer ─────────────────────────────────────────────────────────────── */
+.site-foot { border-top: 1px solid var(--border); background: var(--fig-bg); margin-top: 24px; }
+.site-foot-in {
+  max-width: 1040px; margin: 0 auto; padding: 28px 24px;
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px;
+  font-family: var(--sans); font-size: 13px; color: var(--text-muted);
+}
+.site-foot-links { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.site-foot-links a { color: var(--text-light); text-decoration: none; }
+.site-foot-links a:hover { color: var(--accent); }
+
+/* ── Home and Lab: shared page frame ────────────────────────────────────── */
+.hp-wrap { max-width: 1040px; margin: 0 auto; padding: 56px 24px 80px; font-family: var(--sans); color: var(--text); }
+.hp-wrap a { text-decoration: none; }
+.hp-head {
+  font-family: var(--serif); font-size: 30px; font-weight: 600; line-height: 1.3;
+  letter-spacing: -0.01em; margin: 0; border: 0; padding: 0; color: var(--text);
+}
+.hp-lede { font-family: var(--serif); font-size: 18px; line-height: 1.6; color: var(--text-light); margin: 0 0 14px; }
+.hp-lede a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+.hp-intro {
+  display: grid; grid-template-columns: 132px minmax(0, 1fr);
+  grid-template-areas: "photo head" "photo text";
+  column-gap: 36px; row-gap: 12px; align-items: start;
+  max-width: 820px; margin-bottom: 36px;
+}
+.hp-photo { grid-area: photo; width: 132px; height: 132px; border-radius: 50%; object-fit: cover; }
+.hp-head { grid-area: head; align-self: end; }
+.hp-text { grid-area: text; }
+.hp-links { display: flex; flex-wrap: wrap; gap: 0 24px; margin: 0; font-family: var(--sans); font-size: 14px; font-weight: 500; }
+.hp-links a { color: var(--accent); padding: 6px 0; }
+.lab-head .hp-head { margin-bottom: 14px; }
+.lab-head { max-width: 700px; margin-bottom: 16px; }
+
+/* ── Cards: text left, figure right; key result as an equation ──────────── */
+.hc {
+  display: grid; grid-template-columns: minmax(0, 1fr) 200px;
+  grid-template-areas: "meta fig" "title fig" "res fig" "sum fig" "more fig";
+  column-gap: 48px; row-gap: 8px; align-items: start;
+  padding: 28px 0;
+}
+.hc--noimg { grid-template-columns: minmax(0, 1fr); grid-template-areas: "meta" "title" "res" "sum" "more"; }
+/* Lab cards read question first, then the result. */
+.hc--lab { grid-template-areas: "meta fig" "title fig" "sum fig" "res fig" "more fig"; row-gap: 10px; }
+.hc--lab.hc--noimg { grid-template-areas: "meta" "title" "sum" "res" "more"; }
+.hc-meta {
+  grid-area: meta; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px;
+  font-size: 12px; color: var(--text-muted);
+}
+.hc-meta time { font-family: var(--mono); }
+.hc-series { font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.hc-title {
+  grid-area: title; margin: 0; border: 0; padding: 0;
+  font-family: var(--sans); font-size: 21px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.3;
+}
+.hc-title a { color: var(--text); }
+.hc:hover .hc-title a, .hc-title a:hover { color: var(--accent); }
+.hc-res {
+  grid-area: res; margin: 2px 0; padding-left: 12px; border-left: 2px solid var(--accent);
+  font-family: var(--mono); font-size: 14px; line-height: 1.7; color: var(--text);
+  overflow-x: auto; overflow-y: hidden;
+}
+.hc-res .katex { font-size: 1.22em; }
+.hc-sum {
+  grid-area: sum; margin: 0; font-family: var(--serif); font-size: 16px; line-height: 1.6; color: var(--text-light);
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.hc-sum--full { display: block; }
+.hc-fig { grid-area: fig; display: block; }
+.hc-fig img { width: 200px; height: 135px; object-fit: contain; border-radius: 0; transition: opacity .15s; }
+.hc:hover .hc-fig img { opacity: .85; }
+.hc-more { grid-area: more; display: flex; flex-direction: column; gap: 8px; margin-top: 2px; }
+
+/* Lab specifics */
+.lab-status { font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.lab-status-active { color: #8a4a1c; }
+:root[data-theme="dark"] .lab-status-active { color: var(--accent-warm); }
+.lab-legend, .lab-verdicts {
+  display: flex; flex-wrap: wrap; gap: 2px 18px; list-style: none; margin: 0; padding: 0;
+  font-family: var(--sans); font-size: 13px; color: var(--text-light);
+}
+.lab-legend { color: var(--text-muted); }
+.lab-verdicts li { margin: 0; font: inherit; }
+.lab-legend b, .lab-verdicts b { display: inline-block; width: 1.1em; }
+.v-ok { color: var(--good); } .v-no { color: var(--bad); } .v-part { color: var(--partial); } .v-open { color: var(--text-muted); }
+.lab-links { display: flex; flex-wrap: wrap; gap: 0 20px; font-size: 14px; }
+.lab-links a { color: var(--accent); padding: 4px 0; }
+.lab-links a:first-child { font-weight: 500; }
+.lab-parts { font-size: 14px; color: var(--text-light); }
+.lab-parts summary { cursor: pointer; color: var(--text-muted); padding: 4px 0; }
+.lab-parts ol, .lab-parts ul { margin: 6px 0 4px; padding-left: 20px; font-family: var(--sans); font-size: 14px; line-height: 1.55; }
+.lab-parts li { margin: 2px 0; }
+.lab-parts a { color: var(--accent); }
+.lab-sub { margin: 10px 0 0; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+
+/* Pager */
+.hp-pager { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 24px; font-size: 14px; }
+.hp-pager a { color: var(--accent); font-weight: 500; padding: 10px 0; }
+.hp-pager-off { color: var(--text-muted); padding: 10px 0; }
+.hp-pager-n { font-family: var(--mono); font-size: 12px; color: var(--text-muted); }
+
+/* ── Article header (distill + post layouts) ────────────────────────────── */
+.d-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; color: var(--accent); }
+.d-eyebrow a { border-bottom: 0; }
+.d-eyebrow a:hover { text-decoration: underline; }
+.d-title {
+  font-family: var(--serif); font-weight: 600; letter-spacing: -0.015em; line-height: 1.2;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+.d-subtitle { font-weight: 400; font-size: 1.15rem; line-height: 1.6; max-width: 640px; }
+.d-series-toc { background: transparent; }
+
+/* Optional "Main result" block under the byline (front matter: main_result). */
+.d-result { margin: 32px 0 0; padding: 18px 0 16px; border-top: 1px solid var(--text); border-bottom: 1px solid var(--border); max-width: var(--body-w); }
+.d-result-cap { font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+.d-result-eq { overflow-x: auto; overflow-y: hidden; }
+.d-result-eq .katex-display { margin: 0.6em 0; }
+.d-result-eq .katex-display > .katex { font-size: 1.35em; }
+.d-result-note { font-family: var(--serif); font-size: 15px; line-height: 1.65; color: var(--text-light); margin: 6px 0 0; }
+
+/* ── Phone ──────────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* Two rows on a phone, so the bar scrolls away instead of sticking;
+     Proof Atlas sticky toolbars then sit at the top edge. */
+  .site-nav { position: relative; height: auto; min-height: 52px; flex-wrap: wrap; padding: 0 16px; }
+  body { --pa-nav-offset: 0px !important; }
+  .site-nav-brand { padding: 15px 0; }
+  .site-nav-title { display: none; }
+  .site-nav-links {
+    order: 3; width: 100%; margin: 0; gap: 24px; overflow-x: auto;
+    border-top: 1px solid var(--border); align-self: auto;
+  }
+  .site-nav-links a { padding: 11px 0; font-size: 14px; }
+  .site-nav-links li:first-child { display: flex; }
+  .theme-toggle { margin-left: auto; }
+
+  .hp-wrap { padding: 32px 16px 56px; }
+  .hp-head { font-size: 23px; }
+  .hp-lede { font-size: 16px; }
+  .hp-intro { grid-template-columns: 72px minmax(0, 1fr); grid-template-areas: "photo head" "text text"; column-gap: 16px; margin-bottom: 24px; }
+  .hp-photo { width: 72px; height: 72px; }
+  .hp-head { align-self: center; }
+
+  .hc {
+    grid-template-columns: minmax(0, 1fr) 84px;
+    grid-template-areas: "meta meta" "title fig" "res res" "sum sum" "more more";
+    column-gap: 16px; padding: 22px 0;
+  }
+  .hc--lab { grid-template-areas: "meta meta" "title fig" "sum sum" "res res" "more more"; }
+  .hc--noimg { grid-template-columns: minmax(0, 1fr); grid-template-areas: "meta" "title" "res" "sum" "more"; }
+  .hc--lab.hc--noimg { grid-template-areas: "meta" "title" "sum" "res" "more"; }
+  .hc-title { font-size: 18px; }
+  .hc-fig img { width: 84px; height: 57px; }
+  .hc-sum { font-size: 15px; }
+  .hc-res { font-size: 13px; }
+
+  .site-foot-in { padding: 24px 16px; }
+}
+
+/* Dark mode: card thumbnails sit directly on the page (no white tile behind
+   letterboxed raster images; SVG line-art keeps site.css's invert rule). */
+:root[data-theme="dark"] .hc-fig img:not([src$=".svg"]) { background-color: transparent; }

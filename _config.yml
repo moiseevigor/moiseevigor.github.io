@@ -24,7 +24,7 @@ tagline:             'Applied mathematician, AI Enthusiast'
 description:         'Notes on technology and intelligence.'
 url:                 https://moiseevigor.github.io
 baseurl:             ""
-paginate:            5
+paginate:            10
 
 github_repo_url:     https://github.com/moiseevigor/moiseevigor.github.io
 

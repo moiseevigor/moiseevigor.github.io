@@ -5,15 +5,17 @@
 
 <body class="layout-{{ page.layout | default: 'page' }}{% if page.page_class %} {{ page.page_class }}{% endif %}">
 
-<!-- ── Top navigation (shared by every page) ── -->
-<nav class="site-nav">
-  <a class="site-nav-brand" href="/">{{ site.title }}</a>
+<!-- ── Top navigation (shared by every page). The name is the home link. ── -->
+{%- assign in_lab = false -%}
+{%- if page.url == '/lab/' or page.series or page.program -%}{%- assign in_lab = true -%}{%- endif -%}
+<nav class="site-nav" aria-label="Main">
+  <a class="site-nav-brand" href="/"{% if page.url == '/' %} aria-current="page"{% endif %}>{{ site.title }}</a>
   {% if page.title and page.page_class != 'home' %}<span class="site-nav-title" aria-hidden="true">{{ page.title }}</span>{% endif %}
   <ul class="site-nav-links">
-    <li><a href="/"{% if page.url == '/' %} class="active"{% endif %}>Home</a></li>
-    <li><a href="/lab/"{% if page.url == '/lab/' or page.series or page.program or page.url contains '/articles' %} class="active"{% endif %}>Research</a></li>
-    <li><a href="/projects/"{% if page.url contains '/projects' %} class="active"{% endif %}>Tools</a></li>
-    <li><a href="/about/"{% if page.url contains '/about' %} class="active"{% endif %}>About</a></li>
+    <li><a href="/lab/"{% if in_lab %} class="active" aria-current="page"{% endif %}>Lab</a></li>
+    <li><a href="/articles/"{% if page.url contains '/articles' and in_lab == false %} class="active" aria-current="page"{% endif %}>Articles</a></li>
+    <li><a href="/projects/"{% if page.url contains '/projects' %} class="active" aria-current="page"{% endif %}>Projects</a></li>
+    <li><a href="/about/"{% if page.url contains '/about' %} class="active" aria-current="page"{% endif %}>About</a></li>
   </ul>
   <button type="button" class="theme-toggle" aria-label="Dark mode" title="Toggle dark mode">
     <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>
@@ -25,21 +27,21 @@
 <!-- ── Page content (each layout is responsible for its own d-header / d-article) ── -->
 {{ content }}
 
-<!-- ── Unified footer (the distill d-footer style, with social links) ── -->
-<footer class="d-footer">
-  <span>&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}</span>
-  <span class="d-dot">·</span>
-  <a href="{{ site.url }}">{{ site.url | remove: 'https://' }}</a>
-  <span class="d-dot">·</span>
-  <a href="/archives/">Archive</a>
-  <a href="https://github.com/{{ site.github_username | default: 'moiseevigor' }}" rel="me">GitHub</a>
-  <a href="https://twitter.com/moiseev_igor" rel="me">Twitter</a>
-  <a href="https://www.linkedin.com/in/moiseevigor" rel="me">LinkedIn</a>
-  {% if jekyll.environment == "production" %}<a href="#" id="cookie-prefs">Cookies</a>{% endif %}
-  {% if page.path %}
-  <span class="d-dot">·</span>
-  <a href="https://github.com/{{ site.github_username | default: 'moiseevigor' }}/{{ site.github_repo | default: 'moiseevigor.github.io' }}/edit/master/{{ page.path }}">Edit&nbsp;on&nbsp;GitHub</a>
-  {% endif %}
+<!-- ── Footer: secondary navigation (archive, tags, feeds, profiles) ── -->
+<footer class="site-foot">
+  <div class="site-foot-in">
+    <nav class="site-foot-links" aria-label="Site">
+      <a href="/archives/">Archive</a>
+      <a href="/tags/">Tags</a>
+      <a href="/atom.xml">RSS</a>
+      <a href="https://github.com/{{ site.github_username | default: 'moiseevigor' }}" rel="me">GitHub</a>
+      <a href="https://twitter.com/moiseev_igor" rel="me">Twitter</a>
+      <a href="https://www.linkedin.com/in/moiseevigor" rel="me">LinkedIn</a>
+      {% if page.path %}<a href="https://github.com/{{ site.github_username | default: 'moiseevigor' }}/{{ site.github_repo | default: 'moiseevigor.github.io' }}/edit/master/{{ page.path }}">Edit on GitHub</a>{% endif %}
+      {% if jekyll.environment == "production" %}<a href="#" id="cookie-prefs">Cookies</a>{% endif %}
+    </nav>
+    <span>&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}</span>
+  </div>
 </footer>
 
 <script src="/public/js/codeblock.js"></script>

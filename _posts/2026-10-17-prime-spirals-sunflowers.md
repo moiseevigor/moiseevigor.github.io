@@ -7,6 +7,7 @@ categories: [mathematics]
 tags: [number-theory, primes, spirals, golden-ratio, popular-science]
 permalink: /mathematics/prime-spirals-sunflowers/
 image: /public/img/posts/prime-spirals/sacks.png
+result: '$z_p=\sqrt p\,e^{2\pi i\beta p},\quad \beta=1/\varphi^2$'
 math: true
 published: true
 comments: false

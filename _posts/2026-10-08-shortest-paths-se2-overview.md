@@ -9,6 +9,7 @@ categories: [mathematics]
 tags: [SE2, sub-riemannian, popular-science, geometry, optimal-control]
 permalink: /mathematics/se2-explained/
 image: /public/img/posts/se2-explained.svg
+result: '$\dot q=u_1X_1+u_2X_2,\quad X_1=\cos\theta\,\partial_x+\sin\theta\,\partial_y$'
 published: true
 reference_style: bibliography
 comments: false

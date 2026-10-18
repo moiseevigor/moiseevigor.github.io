@@ -17,7 +17,7 @@ layout: default
   {% assign crumb = site.data.series | where: "id", crumb_id | first %}
   {% assign crumb_first = crumb.posts | first %}
   {% assign crumb_part = page.series_part | append: '' | slice: 0 %}
-  <div class="d-eyebrow"><a href="/lab/">Research</a> › <a href="/lab/#{{ crumb_id }}">{{ crumb.title }}</a> ›
+  <div class="d-eyebrow"><a href="/lab/">Lab</a> › <a href="/lab/#{{ crumb_id }}">{{ crumb.title }}</a> ›
     {% if page.program %}{{ page.article_kind | default: "Formal article" }}{% elsif "ABCDEFGHIJKLMNOPQRSTUVWXYZ" contains crumb_part %}Appendix {{ page.series_part }}{% elsif page.series_part == 1 %}Findings{% else %}Part {{ page.series_part }} of {{ crumb.posts.size }} · <a href="{{ crumb_first.url }}">read the findings</a>{% endif %}</div>
   {% elsif page.categories.size > 0 %}
   <div class="d-eyebrow">{{ page.categories | first | capitalize }}</div>
@@ -39,6 +39,14 @@ layout: default
     <span>with {{ page.coauthors }}</span>
     {% endif %}
   </div>
+
+  {% if page.main_result %}
+  <section class="d-result" aria-label="Main result">
+    <div class="d-result-cap">Main result</div>
+    <div class="d-result-eq">$${{ page.main_result }}$$</div>
+    {% if page.main_result_note %}<p class="d-result-note">{{ page.main_result_note }}</p>{% endif %}
+  </section>
+  {% endif %}
 
   {% if page.series %}
   {% assign series_data = site.data.series | where: "id", page.series | first %}

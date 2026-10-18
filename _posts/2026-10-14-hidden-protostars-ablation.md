@@ -11,7 +11,8 @@ series: hidden-protostars
 series_title: "Hidden protostars"
 series_part: 4
 permalink: /astrophysics/2026/10/14/hidden-protostars-ablation/
-image: /public/img/posts/hidden-protostars-v2.svg
+image: /public/img/posts/hidden-protostars-4.svg
+result: 'availability alone recovers 7/27 · 16 fixed ablations'
 published: true
 listed: false
 comments: false
