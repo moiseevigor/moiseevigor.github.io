@@ -1,0 +1,28 @@
+.pow-shell{max-width:1480px;margin:auto;min-width:0;padding:1.5rem;color:var(--text,#243c49)}
+.pow-header>p:first-child{font:700 .75rem/1.5 system-ui;letter-spacing:.13em;color:var(--text-light,#61737b)}
+.pow-header h1{font-size:clamp(1.35rem,2.4vw,2rem);overflow-wrap:anywhere;line-height:1.25;margin:.65rem 0}
+.pow-header>a{display:inline-block;margin:0 1.4rem .75rem 0}
+.pow-status{padding:.75rem 1rem;background:var(--fig-bg,#eef2f1);border-left:3px solid #327879;font-size:.94rem}
+.pow-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,330px);gap:1.5rem;align-items:start}
+.pow-layout>section{min-width:0}.pow-tools{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:.65rem}
+.pow-shell button,.pow-shell select{font:600 .88rem/1.35 system-ui;color:inherit;border:1px solid var(--border,#9bacb2);border-radius:5px;background:var(--bg,#fff);min-height:36px;padding:.4rem .65rem;cursor:pointer}
+.pow-shell button:hover{border-color:#307875;background:var(--fig-bg,#edf3f0)}
+.pow-shell :focus-visible{outline:3px solid #b97a20;outline-offset:3px}.pow-help,.pow-summary{font-size:.88rem;line-height:1.6;color:var(--text-light,#546b77)}
+.pow-viewport{height:650px;overflow:auto;max-width:100%;border:1px solid var(--border,#a9b8bd);border-radius:6px;background:var(--fig-bg,#f2f5f4);touch-action:pan-x pan-y}
+.pow-sizing{position:relative;min-width:100%;min-height:100%}.pow-stage{position:absolute;left:0;top:0;transform-origin:0 0}
+.pow-edges{position:absolute;inset:0;pointer-events:none;overflow:visible}.pow-edges path{stroke:#6b8b94;stroke-width:1.7;fill:none}
+.pow-card{position:absolute;box-sizing:border-box;width:245px;min-height:205px;max-height:245px;overflow:auto;background:var(--bg,#fff);border:1px solid var(--border,#a4b4b8);border-top:3px solid #427b8a;border-radius:5px;padding:.6rem;box-shadow:none}
+.pow-card[data-constructor="bvar"]{border-top-color:#9b79c4}.pow-card[data-constructor="lam"],.pow-card[data-constructor="forallE"],.pow-card[data-constructor="letE"]{border-top-color:#b68b42}
+.pow-card>[data-occurrence-node]{width:100%;text-align:left;font-size:1rem;background:transparent;border:0;padding:0;min-height:36px}.pow-card>[aria-pressed="true"]{outline:2px solid #348a85;outline-offset:3px}
+.pow-card small{display:block;font-weight:400;font-size:.75rem;padding-top:.2rem;color:var(--text-light,#566e78)}
+.pow-formula{font:.85rem/1.45 ui-monospace,monospace;margin:.6rem 0;max-height:3.8em;overflow:auto;overflow-wrap:anywhere}
+.pow-card .pow-port{display:block;text-align:left;width:100%;margin:.25rem 0;min-height:30px;font-size:.8rem;border:0;background:var(--fig-bg,#edf3f0)}
+.pow-card .pow-frontier{border-left:2px dashed #778c94}.pow-card .pow-binding{color:var(--accent,#226a68);font-size:.8rem;min-height:30px;border-style:dashed}
+.pow-inspector{padding:0 1rem 1rem;border-left:1px solid var(--border,#b0bec2);overflow-wrap:anywhere}.pow-inspector h2{font-size:1.3rem;margin:.25rem 0 .75rem}.pow-inspector h3{font:700 .9rem/1.4 system-ui;margin:1.4rem 0 .5rem}
+.pow-inspector p,.pow-inspector small{font-size:.88rem;line-height:1.6}.pow-inspector pre{color:var(--text,#243c49);max-height:320px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font-size:.8rem;line-height:1.6;background:var(--fig-bg,#edf2f2);padding:.75rem;border:1px solid var(--border,#b1bfc2)}
+.pow-inspector>a{display:block;font-size:.88rem;margin:.75rem 0}.pow-inspector ol{padding-left:1.25rem}.pow-inspector li{padding-bottom:.6rem}.pow-inspector li small{display:block}.pow-inspector details{margin-top:1rem;font-size:.85rem}.pow-inspector summary{cursor:pointer;line-height:1.6}
+@media(max-width:900px){.pow-layout{grid-template-columns:minmax(0,1fr)}.pow-inspector{border-left:0;border-top:1px solid var(--border,#b0bec2);padding:1rem 0}.pow-shell{padding:1rem}.pow-viewport{height:530px}}
+
+.pow-tools select{width:auto}.pow-edges .pow-binding-edge{stroke:var(--accent,#327879);stroke-dasharray:5 4;stroke-width:2}
+
+.pow-context-card{position:absolute;box-sizing:border-box;width:245px;min-height:140px;padding:.7rem;background:var(--bg,#fff);border:1px dashed var(--accent,#327879);border-radius:5px}.pow-context-card small{display:block;font:600 .65rem/1.5 system-ui;letter-spacing:.06em;color:var(--text-light,#546b77);margin-bottom:.5rem}.pow-context-card button{display:block;text-align:left;width:100%;background:transparent;border:0;padding:0}.pow-context-card p{font-size:.8rem;line-height:1.5;margin:.6rem 0 0}

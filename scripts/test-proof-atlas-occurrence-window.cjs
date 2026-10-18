@@ -1,0 +1,70 @@
+/* Independent source-path, lexical-target and frontier audit; no scene producer helpers. */
+'use strict';
+const fs=require('fs'),vm=require('vm'),z=require('zlib'),crypto=require('crypto'),assert=require('assert/strict');
+const W=require('../public/js/proof-atlas-occurrence-window'),P=require('../public/js/proof-atlas-packed-routes');
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex'),w={};
+function manifest(file,name){vm.runInNewContext(fs.readFileSync(file,'utf8'),{window:w});return w[name];}
+const baseLibrary=manifest('public/data/proof-atlas/library-manifest.js','PROOF_ATLAS_LIBRARY'),sample=manifest('public/data/proof-atlas/goedel-sample-manifest.js','PROOF_ATLAS_AI_SAMPLE'),library=require('../public/js/proof-atlas-ai-sample').register(baseLibrary,null,null,sample).library;
+const auditedFiles=['public/js/proof-atlas-packed-routes.js','public/js/proof-atlas-occurrence-window.js','public/js/proof-atlas-library-data.js','public/js/proof-atlas-geometry-core.js','scripts/test-proof-atlas-occurrence-window.cjs'],startHashes=Object.fromEntries(auditedFiles.map(f=>[f,sha(fs.readFileSync(f))]));
+const labels=[[],[],[],[],[],['fn','arg'],['domain','body'],['domain','body'],['type','value','body'],[],['expr'],['struct']];
+function unpack(route){const bytes=Buffer.from(route.slots,'base64url');return Array.from({length:route.depth},(_,i)=>Math.floor(bytes[Math.floor(i/4)]/4**(i%4))%4);}
+function at(data,route){
+ const slots=unpack(route),scope=[];let node=data.roots[route.root];
+ slots.forEach((slot,depth)=>{const kind=data.kind[node];if((kind===6||kind===7)&&slot===1||kind===8&&slot===2)scope.push({node,depth});node=data.children[node][slot];assert.notEqual(node,undefined);});
+ const index=data.kind[node]===0?data.payloads[node].index:null,target=index===null?null:scope[scope.length-1-index]||null;
+ return{node,slots,scopeDepth:scope.length,binding:target?{node:target.node,root:route.root,slots:slots.slice(0,target.depth)}:null};
+}
+function audit(scene,data,record){
+ assert.equal(scene.source.name,record.name);assert.equal(scene.source.indexSha256,record.indexSha256);assert.equal(scene.source.sourceSha256,record.sourceSha256);assert.equal(scene.namespace,'source-expression');assert.equal(scene.typing,'not-queried');
+ assert(scene.nodes.length>0&&scene.nodes.length<=scene.budget&&scene.budget<=32);const root=at(data,scene.root.route);assert.equal(root.node,scene.root.node);
+ let hidden=0n;const ids=new Map(),frontiers=[],expectedLinks=[],expectedEdges=[];
+ for(const n of scene.nodes){
+  assert(!ids.has(n.id));ids.set(n.id,n);const original=at(data,n.route);assert.equal(original.node,n.node);assert.equal(original.scopeDepth,n.scopeDepth);assert.equal(n.kind,['bvar','fvar','mvar','sort','const','app','lam','forallE','letE','lit','mdata','proj'][data.kind[n.node]]);assert.equal(n.glyph,['↶','Γ','?','U','C','@','λ','∀','let','#','μ','π'][data.kind[n.node]]);assert.equal(n.structuralRole,['bound-reference','local-reference','unresolved','universe','declaration-reference','application','abstraction','dependent-function-type','local-definition','literal','annotation','projection'][data.kind[n.node]]);assert.equal(n.expanded,data.expanded[n.node]);assert.equal(n.typeStatus,'not-queried');
+  assert.equal(n.route.root,scene.root.route.root);assert.deepEqual(original.slots.slice(0,root.slots.length),root.slots);assert.equal(n.depth,original.slots.length-root.slots.length);
+  if(original.binding){assert(n.binding);assert.equal(n.binding.node,original.binding.node);assert.equal(n.binding.route.root,original.binding.root);assert.deepEqual(unpack(n.binding.route),original.binding.slots);}else assert.equal(n.binding,null);
+  assert.equal(n.ports.length,data.children[n.node].length);
+  for(const [i,port]of n.ports.entries()){
+   assert.equal(port.slot,i);assert.equal(port.field,labels[data.kind[n.node]][i]);assert.equal(port.kernelField,(n.kind==='lam'||n.kind==='forallE')&&i===0?'binderType':port.field);assert.equal(port.node,data.children[n.node][i]);assert.equal(port.route.root,n.route.root);assert.deepEqual(unpack(port.route),[...original.slots,i]);assert.equal(port.expanded,data.expanded[port.node]);
+  }
+ }
+ assert.equal(scene.nodes[0].node,scene.root.node);assert.deepEqual(scene.nodes[0].route,scene.root.route);
+ for(const n of scene.nodes){
+  for(const port of n.ports){const target=scene.nodes.find(v=>v.route.root===port.route.root&&JSON.stringify(unpack(v.route))===JSON.stringify(unpack(port.route)));assert.equal(port.displayed,!!target);if(target)expectedEdges.push({from:n.id,to:target.id,slot:port.slot});else{hidden+=BigInt(port.expanded);frontiers.push(unpack(port.route));}}
+  if(n.binding){const target=scene.nodes.find(v=>v.route.root===n.binding.route.root&&JSON.stringify(unpack(v.route))===JSON.stringify(unpack(n.binding.route)));expectedLinks.push({from:n.id,to:n.binding.route.root+':'+n.binding.route.depth+':'+n.binding.route.slots,node:n.binding.node,route:n.binding.route,relation:'source-bound-to',boundary:!target});}
+ }
+ assert.deepEqual(scene.edges,expectedEdges);assert.deepEqual(scene.links,expectedLinks);
+ for(let i=0;i<frontiers.length;i++)for(let j=0;j<frontiers.length;j++)if(i!==j)assert.notDeepEqual(frontiers[i].slice(0,frontiers[j].length),frontiers[j]);
+ assert.equal(BigInt(scene.stats.retained),BigInt(scene.nodes.length));assert.equal(BigInt(scene.stats.hidden),hidden);assert.equal(BigInt(scene.stats.represented),BigInt(data.expanded[scene.root.node]));assert.equal(BigInt(scene.nodes.length)+hidden,BigInt(data.expanded[scene.root.node]));
+ for(const n of scene.nodes)if(n!==scene.nodes[0])assert.equal(scene.edges.filter(e=>e.to===n.id).length,1);
+ return{nodes:scene.nodes.length,bindings:scene.links.length,frontiers:frontiers.length};
+}
+let packets=0,cuts=0,nodes=0,bindings=0,frontiers=0,checkedAIPackets=0;const retained=[];
+function check(data,record,route,options){const scene=W.create(data,record,route,options),counts=audit(scene,data,record);cuts++;nodes+=counts.nodes;bindings+=counts.bindings;frontiers+=counts.frontiers;return scene;}
+for(const edition of library.editions)for(const record of edition.declarations){
+ if(record.uniqueNodes>P.limits.sourceNodes)continue;const raw=z.gunzipSync(fs.readFileSync('.'+record.indexFile),{maxOutputLength:67108864});assert.equal(sha(raw),record.indexSha256);const data=JSON.parse(raw);W.validateSource(data,record);packets++;if(edition.id===sample.edition.id)checkedAIPackets++;
+ for(let root=0;root<data.roots.length;root++)check(data,record,P.encode(root,[]),{maxNodes:7,maxDepth:2});
+ if(record.name==='JacobiCore.E_pos')for(const slots of [[1,1,0,0,0,1],[1,2,1]])retained.push({data,record,scene:check(data,record,P.encode(1,slots),{maxNodes:1,maxDepth:0})});
+}
+const desc=manifest('public/data/proof-atlas/large-source-cuts-manifest.js','PROOF_ATLAS_LARGE_SOURCE_CUT_CHECKS'),bytes=z.gunzipSync(fs.readFileSync('.'+desc.file));assert.equal(sha(bytes),desc.sha256);const evidence=JSON.parse(bytes);
+let deep=null;
+for(const row of evidence.positive.rows){const raw=z.gunzipSync(fs.readFileSync('.'+row.sourcePacket),{maxOutputLength:67108864});assert.equal(sha(raw),row.source.indexSha256);const data=JSON.parse(raw);W.validateSource(data,row.source);packets++;for(let root=0;root<data.roots.length;root++)check(data,row.source,P.encode(root,[]),{maxNodes:13,maxDepth:3});if(row.origin.startsWith('own-serialized')){const scene=check(data,row.source,P.encode(1,Array(10001).fill(1)),{maxNodes:1,maxDepth:0});assert.equal(scene.root.node,3);assert.equal(scene.links[0].node,10004);assert.equal(scene.links[0].route.depth,0);deep={depth:10001,packedBytes:P.parse(scene.root.route).length,retained:scene.stats.retained,represented:scene.stats.represented};retained.push({data,record:row.source,scene});}}
+let rejected=0;const exemplar=retained[0];assert(exemplar);
+for(const change of [s=>s.source.indexSha256='0'.repeat(64),s=>s.nodes[0].node++,s=>s.nodes[0].binding.node++,s=>s.nodes[0].binding.route=P.encode(1,[1]),s=>s.nodes[0].scopeDepth++,s=>s.nodes[0].kind='const',s=>s.nodes[0].typeStatus='checked',s=>s.stats.hidden='1',s=>s.links[0].boundary=false,s=>s.links[0].relation='logical-implication']){const bad=structuredClone(exemplar.scene);change(bad);assert.throws(()=>audit(bad,exemplar.data,exemplar.record));rejected++;}
+const proofUse=retained.find(x=>x.scene.nodes[0].scopeDepth===2),wrongOuter=structuredClone(proofUse.scene);wrongOuter.nodes[0].binding={node:73,route:P.encode(1,[])};Object.assign(wrongOuter.links[0],{node:73,to:'1:0:',route:P.encode(1,[])});assert.equal(proofUse.data.kind[73],6);assert.throws(()=>audit(wrongOuter,proofUse.data,proofUse.record));rejected++;const falseRole=structuredClone(exemplar.scene);falseRole.nodes[0].structuralRole='proof';assert.throws(()=>audit(falseRole,exemplar.data,exemplar.record));rejected++;
+const own={serialization:'ExprDAG/1',declaration:{name:'Own.scope',rootPaths:['root.syntax'],kernelCheck:'not-claimed'},kind:[3,0,0,5],children:[[],[],[],[1,2]],payloads:[{level:{kind:'zero'}},{index:0},{index:9999},{}],expanded:['1','1','1','3'],neededScope:[0,1,10000,10000],roots:[]};
+for(let i=0;i<10000;i++){const child=own.kind.length-1;own.kind.push(6);own.children.push([0,child]);own.payloads.push({binderName:'x',binderInfo:'default'});own.expanded.push(String(BigInt(own.expanded[child])+2n));own.neededScope.push(Math.max(0,own.neededScope[child]-1));}own.roots=[own.kind.length-1];const record={name:own.declaration.name,indexSha256:sha(Buffer.from(JSON.stringify(own))),sourceSha256:sha(fs.readFileSync(__filename)),uniqueNodes:own.kind.length};W.validateSource(own,record);
+for(const [slot,targetDepth]of [[0,9999],[1,0]]){const scene=check(own,record,P.encode(0,[...Array(10000).fill(1),slot]),{maxNodes:1,maxDepth:0});assert.equal(scene.links[0].route.depth,targetDepth);}
+for(const {record,scene}of retained){assert.deepEqual(W.fromToken(record,W.token(record,scene.root.route)),scene.root.route);assert.throws(()=>W.fromToken({...record,indexSha256:'f'.repeat(64)},W.token(record,scene.root.route)));rejected++;}
+let codecCases=0;
+for(let length=0;length<=128;length++){const slots=Array.from({length},(_,i)=>(i*7+length)%3),packed=P.encode(0,slots);assert.deepEqual(P.encodeReversed(0,Uint8Array.from([...slots].reverse())),packed);for(let split=0;split<=length;split++)assert.deepEqual(P.append(P.prefix(packed,split),slots.slice(split)),packed);codecCases++;}
+for(const changed of[{...P.encode(0,[]),extra:0},{...P.encode(0,[1]),slots:'Aw'},{...P.encode(0,[1]),slots:'BA'},{...P.encode(0,[]),slots:'A'},{...P.encode(0,[]),depth:262145}]){assert.throws(()=>P.parse(changed));rejected++;}
+assert.equal(P.parse(P.encodeReversed(0,new Uint8Array(262144).fill(2))).length,65536);
+const reps=W.representatives(own);assert.equal(reps.state.indexBytes,own.kind.length*10);for(const n of [0,1,2,3,own.roots[0]]){const route=reps.route(n);assert.equal(at(own,route).node,n);check(own,record,route,{maxNodes:1,maxDepth:0});}assert.equal(reps.route(1).depth,10001);assert.equal(reps.route(2).depth,10001);
+const all={serialization:'ExprDAG/1',declaration:{name:'Own.fields',rootPaths:[],kernelCheck:'not-claimed'},kind:[0,0,3,4,5,6,7,8,10,11,1,2,9],children:[[],[],[],[],[0,1],[2,4],[2,5],[2,5,4],[7],[8],[],[],[]],payloads:[{index:0},{index:1},{},{},{},{},{},{},{},{},{},{},{}],expanded:[],neededScope:[],roots:[9,5,6,7,4,10,11,12,3]};
+all.payloads[2]={level:{kind:'zero'}};all.payloads[3]={name:'Nat',nameParts:[{str:'Nat'}],levels:[]};for(const i of [5,6])all.payloads[i]={binderName:'x',binderNameParts:[{str:'x'}],binderInfo:'default'};all.payloads[7]={declName:'x',declNameParts:[{str:'x'}],nondep:false};all.payloads[8]={metadata:[]};all.payloads[9]={typeName:'Pair',typeNameParts:[{str:'Pair'}],index:0};all.payloads[10]={id:'x',idNameParts:[{str:'x'}]};all.payloads[11]={id:'m',idNameParts:[{str:'m'}]};all.payloads[12]={literalKind:'natVal',value:'3'};
+all.roots.forEach((_,i)=>all.declaration.rootPaths.push('control.root'+i));for(let i=0;i<all.kind.length;i++){const k=all.kind[i],cs=all.children[i];all.expanded.push(String(1n+cs.reduce((s,c)=>s+BigInt(all.expanded[c]),0n)));all.neededScope.push(k===0?all.payloads[i].index+1:Math.max(0,...cs.map((c,j)=>all.neededScope[c]-(((k===6||k===7)&&j===1||k===8&&j===2)?1:0))));}
+const allRecord={name:all.declaration.name,indexSha256:sha(Buffer.from(JSON.stringify(all))),sourceSha256:sha(fs.readFileSync(__filename)),uniqueNodes:all.kind.length};W.validateSource(all,allRecord);const covered=new Set();for(let root=0;root<all.roots.length;root++){const work=[[]];while(work.length){const slots=work.pop(),route=P.encode(root,slots),original=at(all,route);covered.add(all.kind[original.node]);check(all,allRecord,route,{maxNodes:7,maxDepth:3});all.children[original.node].forEach((_,i)=>work.push([...slots,i]));}}assert.equal(covered.size,12);
+assert.equal(checkedAIPackets,20);
+assert.deepEqual(Object.fromEntries(auditedFiles.map(f=>[f,sha(fs.readFileSync(f))])),startHashes);
+const report={status:'PASS',format:'ProofAtlasOccurrenceWindowAudit/1',publisherAttributedAIPackets:checkedAIPackets,packets,cuts,nodes,bindings,frontiers,rejections:rejected,wrongGenuineOuterBinderRejected:true,falseProofRoleRejected:true,codecCases,constructorKinds:covered.size,deep,shadowedBinders:10000,representativeIndexBytes:reps.state.indexBytes,sourceModuleBytesVerified:false,typingInferred:false,codecFormallyVerified:false,sourceFiles:startHashes};
+fs.writeFileSync(process.env.ATLAS_OCCURRENCE_REPORT||'/tmp/atlas-occurrence-window-audit.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
