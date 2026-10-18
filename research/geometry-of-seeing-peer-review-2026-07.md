@@ -5,6 +5,35 @@
 **Date:** 13 July 2026  
 **Recommendation:** **Major revision before scholarly publication**
 
+## Revision addendum — 17 July 2026
+
+The repository has now addressed the principal text- and code-level blockers identified
+in this report:
+
+- the project page, posts, captions, comments, and generator now distinguish pinned
+  Euler elastica from free SR geodesics;
+- the V1 state space is stated as $\mathbb R^2\times\mathbb P^1$, with SE(2) used as
+  its oriented double cover and quotient-sensitive endpoint claims flagged;
+- Part 4 no longer presents abnormal or separatrix seams as unresolved parts of the
+  completed SE(2) synthesis;
+- the open Maxwell question is narrowed to a request for sufficient hypotheses rather
+  than stated as a universal law;
+- the magnetic article uses a consistent Lorentz-force sign convention and now includes
+  a worked Martinet bracket example;
+- the false curve-closure, infinite-total-curvature, and Euler-spiral statements were
+  corrected;
+- Appendix A5's mirror-pair sample code was repaired: the previous phase parameter was
+  unused and generated the same curve twice;
+- Appendices A1–A2 now include concrete explanations of algebra element versus vector
+  field versus trajectory, matrix brackets, coadjoint “prices,” and the change from
+  contact growth $(2,3)$ to Martinet growth $(2,2,3)$.
+
+The recommendation remains **major revision** as a record of the reviewed snapshot, but
+the listed Priority 1 textual blockers are resolved in the working tree. Remaining work
+is principally external scholarly validation: exact source-level theorem cross-references,
+independent line-by-line mathematical review, and—before any astrophysics-journal claim—
+blind observational benchmarks with uncertainty propagation.
+
 ## Executive assessment
 
 The *Geometry of Seeing* series is an unusually ambitious and potentially valuable pedagogical synthesis. Its strongest contribution is expository: it connects the contact geometry of orientation lifts, the Pontryagin maximum principle, the pendulum reduction, Jacobi elliptic functions, Maxwell strata, and the exact SE(2) optimal synthesis in a coherent visual narrative. The appendices are substantially stronger than ordinary blog supplements and could form the basis of a serious graduate-level survey.

@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-sr_geodesics_v1.py — pre-compute SE(2) sub-Riemannian geodesics for Figure 2
+sr_geodesics_v1.py — pre-compute pinned Euler-elastica candidates for Figure 2
 of "The Visual Cortex as a Contact Manifold".
 
 Solves the *tangent-matching* boundary-value problem:
 
     Given source neuron (x0, y0, theta0) and target neuron (xt, yt, theta_t),
     find inflectional-elastica parameters (k, omega, phase, L) such that the
-    SE(2) horizontal flow
+    pinned-forward-speed horizontal flow
 
         dx/ds = cos theta,  dy/ds = sin theta,  dtheta/ds = kappa(s)
 
@@ -20,16 +20,22 @@ Three curve families:
     non-inflect    kappa(s) = 2*omega*dn(omega*s + phase | k^2)
     separatrix     kappa(s) = 2*omega*sech(omega*(s - shift))
 
-Maxwell pair (Sachkov, "Maxwell strata in Euler's elastic problem", ESAIM:COCV
+Elastica Maxwell pair (Sachkov, "Maxwell strata in Euler's elastic problem", ESAIM:COCV
 2008, Fig. 34) — sigma-symmetric closed pair on the source-tangent axis:
 
     Curve A:  kappa_A(s) = +2*k*omega*cn(omega*s | m)
     Curve B:  kappa_B(s) = -kappa_A(s)             (sigma-mirror)
 
     Integrated over s in [0, L] with L = N_periods * 4*K(m)/omega.
-    Both end at the IDENTICAL group element (X_end, 0, 0) on the source axis;
+    Both end at the IDENTICAL lifted endpoint (X_end, 0, 0) on the source axis;
     arc lengths are equal by construction.  k > 1/sqrt(2) makes each curve
-    have visible loops/cusps; N_periods >= 2 yields >= 4 cusps per curve.
+    have visible loops/self-intersections; N_periods >= 2 yields repeated lobes.
+
+Important: these smooth curves solve the pinned Euler-elastica problem. They are
+not the generically cuspidal planar projections of free sub-Riemannian geodesics
+for H = (h1^2 + h2^2)/2. The two problems share a pendulum reduction but have
+different reconstruction equations and different Maxwell clocks (4K here, 2K
+for the generic inflectional family of the free SR problem).
 
 Output: public/data/v1_geodesics.json (consumed by the front-end JS).
 """
