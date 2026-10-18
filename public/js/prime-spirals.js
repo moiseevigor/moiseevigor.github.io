@@ -29,7 +29,11 @@ function mount(root) {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     canvas.width = Math.round(width*dpr); canvas.height = Math.round(width*dpr);
     ctx.setTransform(dpr,0,0,dpr,0,0);
-    ctx.fillStyle = '#0b0b15'; ctx.fillRect(0,0,width,width);
+    // Plot sits on the page itself; dot colours follow the light/dark theme.
+    const dark = document.documentElement.dataset.theme === 'dark';
+    const C = dark ? {rest:'#3a3846', hi:'#6dffe2', hiRest:'#e5f9f5', light:65}
+                   : {rest:'#d9d7e0', hi:'#00897b', hiRest:'#9fd6cf', light:48};
+    ctx.clearRect(0,0,width,width);
     const scale = .46*width/(N**b), center = width/2;
     const radius = Math.max(.65, Math.min(2.8, width/Math.sqrt(N)*.22));
     const highlighted = new Set();
@@ -48,8 +52,8 @@ function mount(root) {
       if (!flags[n] && !background.checked && !highlighted.has(n)) continue;
       const [x,y] = point(n, mode.value, a, b);
       const px = center+scale*x, py = center-scale*y;
-      ctx.fillStyle = highlighted.has(n) ? (flags[n] ? '#6dffe2' : '#e5f9f5') :
-        flags[n] ? `hsl(${285-235*n/N} 95% 65%)` : '#34313f';
+      ctx.fillStyle = highlighted.has(n) ? (flags[n] ? C.hi : C.hiRest) :
+        flags[n] ? `hsl(${285-235*n/N} 95% ${C.light}%)` : C.rest;
       ctx.beginPath(); ctx.arc(px,py,highlighted.has(n) ? radius*1.65 : radius,0,2*Math.PI); ctx.fill();
       points.push({n,x:px,y:py});
     }
@@ -88,6 +92,7 @@ function mount(root) {
   }
   canvas.addEventListener('pointermove', inspect);
   canvas.addEventListener('click', inspect);
+  window.addEventListener('themechange', schedule);
   if (typeof ResizeObserver !== 'undefined') new ResizeObserver(schedule).observe(canvas);
   else window.addEventListener('resize', schedule);
   angle.value=GOLDEN_ANGLE;

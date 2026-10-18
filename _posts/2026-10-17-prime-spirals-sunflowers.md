@@ -53,7 +53,7 @@ Change one setting at a time. Try **144°** to see five exact directions, then *
   </div>
   <p data-formula></p>
   <canvas width="600" height="600" role="img" aria-label="Interactive prime spiral"></canvas>
-  <p class="prime-legend">Colored dots: primes, with color increasing by label. Gray: nonprime labels. On a highlighted quadratic, mint dots are prime and white dots are nonprime. Quadratic inputs are nonnegative integers.</p>
+  <p class="prime-legend">Colored dots: primes, with color increasing by label. Gray: nonprime labels. On a highlighted quadratic, the larger teal dots are prime and the pale ones are nonprime. Quadratic inputs are nonnegative integers.</p>
   <p data-stats role="status" aria-live="polite"></p>
   <p data-detail></p>
   <noscript>Enable JavaScript to use the controls. The static figures below show the standard constructions.</noscript>
