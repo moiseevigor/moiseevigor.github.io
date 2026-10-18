@@ -185,16 +185,16 @@
   .hp-photo { width: 72px; height: 72px; }
   .hp-head { align-self: center; }
 
-  .hc {
-    grid-template-columns: minmax(0, 1fr) 84px;
-    grid-template-areas: "meta meta" "title fig" "res res" "sum sum" "more more";
-    column-gap: 16px; padding: 22px 0;
+  /* Figure as a full-width banner above the card, as before the restyle:
+     line-art thumbnails are unreadable at icon size. */
+  .hc, .hc--noimg {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "fig" "meta" "title" "res" "sum" "more";
+    padding: 22px 0;
   }
-  .hc--lab { grid-template-areas: "meta meta" "title fig" "sum sum" "res res" "more more"; }
-  .hc--noimg { grid-template-columns: minmax(0, 1fr); grid-template-areas: "meta" "title" "res" "sum" "more"; }
-  .hc--lab.hc--noimg { grid-template-areas: "meta" "title" "sum" "res" "more"; }
+  .hc--lab, .hc--lab.hc--noimg { grid-template-areas: "fig" "meta" "title" "sum" "res" "more"; }
   .hc-title { font-size: 18px; }
-  .hc-fig img { width: 84px; height: 57px; }
+  .hc-fig img { width: 100%; height: 160px; }
   .hc-sum { font-size: 15px; }
   .hc-res { font-size: 13px; }
 
