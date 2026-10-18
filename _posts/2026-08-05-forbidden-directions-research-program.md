@@ -8,6 +8,7 @@ date: 2026-08-05 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, magnetic-fields, holonomy, connections, nonholonomic, plasma]
 image: /public/img/posts/forbidden-directions-1.svg
+result: '$\delta(\varepsilon)=1-\tfrac{2}{\pi}K(2\varepsilon),\quad \varepsilon<\tfrac12$'
 description: >
   Established holonomy scaling, profile-dependent caustic response, estimator losses and withdrawn model-domain claims in magnetic geometry.
 series: preferred-directions

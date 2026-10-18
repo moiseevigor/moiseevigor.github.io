@@ -1,6 +1,7 @@
 ---
 layout: distill
 image: /public/img/posts/geometry-seeing-1.svg
+result: '$\dot x=u_1\cos\theta,\quad \dot y=u_1\sin\theta,\quad \dot\theta=u_2$'
 title: "The Visual Cortex as a Contact Manifold"
 subtitle: >
   Your brain fills in contours that do not exist. Petitot's neurogeometry models

@@ -10,3 +10,5 @@
 .prime-explorer [data-stats],.prime-explorer [data-formula],.prime-explorer [data-detail]{font-size:13px;line-height:1.6;margin:8px 0;overflow-wrap:anywhere}
 .prime-explorer .prime-legend{font-size:13px;line-height:1.6;margin:10px 0}
 @media(max-width:480px){.prime-explorer{padding:10px}.prime-explorer .prime-controls{grid-template-columns:1fr}}
+/* The figures are transparent and read on both themes: skip site.css's dark-mode white tile. */
+:root[data-theme="dark"] img[src*="/prime-spirals/"]{background-color:transparent}

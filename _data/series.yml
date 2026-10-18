@@ -7,6 +7,7 @@
   status: complete
   question: "How does the visual cortex complete contours that are not there, and what exactly are the optimal curves it draws?"
   outcome: "Exposition: V1 as a contact bundle on SE(2), elastica via Jacobi elliptic functions, Maxwell strata — ending on Sachkov's exact cut time and the question it leaves open beyond SE(2)."
+  result: '$\dot x=u_1\cos\theta,\quad \dot y=u_1\sin\theta,\quad \dot\theta=u_2$'
   limits: "This is the published SE(2) synthesis; it supplies no universal Maxwell-equals-cut law."
   overview: /projects/geometry-of-seeing/
   posts:
@@ -59,6 +60,7 @@
   status: complete
   question: "Is the orientation-lifted geometry of visual completion a better instrument for finding cosmic filaments, or even part of the physics that builds them?"
   outcome: "Transverse damping improves mean transport error from 4.98 to 4.52 voxels on three held-out seeds. The orientation lift improves directional alignment, but loses the matched filament-recovery comparison."
+  result: 'mean transport error 4.98 → 4.52 voxels · 3 held-out seeds'
   grew_from: geometry-of-seeing
   code: research/cosmic-web/
   verdicts:
@@ -112,6 +114,7 @@
   status: complete
   question: "Given an observed field of caustics, can you infer the sub-Riemannian Lie group that produced it?"
   outcome: "Synthetic four-model classification reaches 0.99 exact accuracy at low noise; sampled degenerate tangencies refute universal cusp behavior. A gravitational fold counterfeits pointwise scaling, invalidating the original physical growth-vector interpretation."
+  result: 'exact accuracy 0.99 at low noise · four synthetic models'
   limits: "Real diffusion-MRI inference is unmeasured. Synthetic tangent-cone recovery does not identify a unique group in an unrestricted class."
   code: research/caustics-to-groups/
   verdicts:
@@ -172,6 +175,7 @@
   status: active
   question: "Where a physical field forbids a direction of motion, can sub-Riemannian geometry read the field's local structure?"
   outcome: "The holonomy growth law and exact exponential-profile period identity survive. Matched statistical fits win null classification and pair metrology; the physical T96 census interpretation is withdrawn."
+  result: '$\delta(\varepsilon)=1-\tfrac{2}{\pi}K(2\varepsilon),\quad \varepsilon<\tfrac12$'
   limits: "Null confirmation does not outperform matched statistical fits. T96 census roots audited outside the model domain are not physical magnetospheric detections."
   grew_from: caustics-to-groups
   code: research/preferred-directions/
@@ -242,6 +246,7 @@
   status: active
   question: "After a geodesic ceases to minimize, where does it focus and how many geodesics reach the same position and heading?"
   outcome: "Three author manuscripts connect a Riccati bracket count, the geometry of folds and cusp seams, and an exact scalar inverse. The global incidence criterion retains five declared exclusions."
+  result: '$\operatorname{sn}^2(\psi+p)=r(p)$'
   limits: "Five endpoint-domain exclusions remain in the global incidence criterion; the displayed numerical searches do not certify arbitrary fibers."
   grew_from: geometry-of-seeing
   code: research/se2/
@@ -262,6 +267,7 @@
   status: active
   question: "Can shared infrared, variability and molecular representations improve embedded-protostar candidate ranking over strong physical baselines at equal review cost?"
   outcome: "Catalogue associations are reproducible, but the physical hidden fraction is not identified. Ranking benefit, matched-control uncertainty and native quality/cadence gates failed. Fixed ablations recover 7/27 proxies from availability alone and establish no capacity cure; independent physical validation remains missing. No stellar birth or physical detector is established."
+  result: '14/27 vs 15/27 positives at 18 reviews · 333/800 controls pass'
   limits: "Source ownership and physical truth remain unresolved. No qualifying positive has the registered temporal view; no stellar birth or physical detector is validated."
   code: research/starbirth/
   verdicts:
@@ -295,6 +301,7 @@
   status: active
   question: "Can the geometric structure of a formally checked proof reveal its main argument without requiring the reader to inspect every inference?"
   outcome: "Complete compiled inventories cover 739 and 1,359 declarations in two Lean corpora. The working graph shares 1,277,896 nodes across 670,018,056 expanded occurrences. Article correspondence is partial; mathematical interpretation remains human-authored."
+  result: '739 + 1,359 declarations · 1,277,896 shared nodes'
   limits: "Five article statements have partial counterparts and four remain unformalized. Automatic explanation and reader benefit are unmeasured."
   code: research/proof-atlas/
   overview: /projects/proof-atlas/

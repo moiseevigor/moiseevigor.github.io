@@ -4,91 +4,57 @@ title: Home
 page_class: home
 ---
 
-<main class="site-main">
+<main class="hp-wrap">
 {% if paginator.page == 1 %}
-<section class="research-home" aria-labelledby="home-research">
-  <header class="research-intro"><p class="research-kicker">Mathematics and computational research</p><h1 id="home-research">Research results.</h1><p>Formal proof structure, exact geometry and tested models. Results, assumptions and source records.</p><div class="research-links"><a href="/lab/">Research results →</a><a href="/projects/">Interactive tools</a></div></header>
-  {% include research-highlights.html limit=2 %}
+<section class="hp-intro" aria-labelledby="hp-welcome">
+  <img class="hp-photo" src="/public/images/igor-220.jpg" alt="Igor Moiseev" width="132" height="132">
+  <h1 id="hp-welcome" class="hp-head">Welcome to my blog.</h1>
+  <div class="hp-text">
+    <p class="hp-lede">I’m Igor, an applied mathematician. I write here about geometry, optimal control, formal proofs, machine learning and software engineering, mostly as research series with their equations, figures and code.</p>
+    <p class="hp-links"><a href="/lab/">The Lab: research series →</a><a href="/about/">About me and publications</a></p>
+  </div>
 </section>
-<h2 class="research-home-title">From the blog</h2>
 {% endif %}
-<div class="home-list">
+
+<div class="hc-list">
   {% for post in paginator.posts %}{% unless post.listed == false %}
   {%- assign wc = post.content | number_of_words -%}
   {%- assign mins = wc | divided_by: 90 -%}
   {%- if mins == 0 %}{%- assign mins = 1 %}{%- endif -%}
+  {%- assign sdata = nil -%}
+  {%- if post.series %}{%- assign sdata = site.data.series | where: "id", post.series | first -%}{%- endif -%}
 
-  <article class="home-card{% if post.image %} has-media{% endif %}">
-
-    <!-- ── Col 1: meta (24px baseline grid — each item aligns with one content line) ── -->
-    <div class="home-card-meta">
-      <time class="home-card-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b'%y" }}</time>
-      {% if post.series %}
-      <a class="home-card-series-name" href="/lab/#{{ post.series }}">{{ post.series_title }}</a>
-      {%- assign sdata = site.data.series | where: "id", post.series | first -%}
-      <span class="home-card-series-part">{% if sdata %}{{ sdata.posts.size }}&thinsp;part{% if sdata.posts.size != 1 %}s{% endif %}{% if sdata.appendices %} · {{ sdata.appendices.size }}&thinsp;appx{% endif %}{% else %}Part {{ post.series_part }}{% endif %}</span>
-      {% elsif post.categories.size > 0 %}
-      <span class="home-card-cat">{{ post.categories | first | capitalize }}</span>
-      {% endif %}
-      <span class="home-card-readtime">{{ mins }}&thinsp;min</span>
+  <article class="hc{% unless post.image %} hc--noimg{% endunless %}">
+    <div class="hc-meta">
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+      {%- if post.series %}
+      <a class="hc-series" href="/lab/#{{ post.series }}">{{ post.series_title | default: sdata.title }}</a>
+      {%- if post.series_part and sdata %}<span>Part {{ post.series_part }} of {{ sdata.posts.size }}</span>{% endif %}
+      {%- elsif post.categories.size > 0 %}
+      <span class="hc-series">{{ post.categories | first | capitalize }}</span>
+      {%- endif %}
+      <span>{{ mins }} min</span>
     </div>
-
-    <!-- ── Col 2: content ── -->
-    <div class="home-card-body">
-      <h2 class="home-card-title">
-        <a href="{{ post.url }}">{{ post.title }}</a>
-      </h2>
-
-      {% comment %} One summary per card: the subtitle when the post has one (the
-      description repeats it in other words), else description, else excerpt. {% endcomment %}
-      {% if post.subtitle %}
-      <p class="home-card-subtitle">{{ post.subtitle }}</p>
-      {% elsif post.description and post.description != "" %}
-      <p class="home-card-desc">{{ post.description }}</p>
-      {% elsif post.excerpt %}
-      <p class="home-card-desc">{{ post.excerpt | strip_html | truncatewords: 42 }}</p>
-      {% endif %}
-
-      <div class="home-card-footer">
-        {% if post.series and post.categories.size > 0 %}
-        <span class="home-card-cat-inline">{{ post.categories | first | capitalize }}</span>
-        {% endif %}
-        {% if post.tags.size > 0 %}
-        <div class="home-card-tags">
-          {% for tag in post.tags limit:4 %}
-          <span class="home-card-tag">{{ tag }}</span>
-          {% endfor %}
-        </div>
-        {% endif %}
-      </div>
-    </div>
-
-    <!-- ── Col 3: media (only when post.image set) ── -->
-    {% if post.image %}
-    <div class="home-card-media">
-      <img src="{{ post.image }}" alt="{{ post.title }}" loading="lazy">
-    </div>
+    <h2 class="hc-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+    {% if post.image %}<a class="hc-fig" href="{{ post.url }}" tabindex="-1" aria-hidden="true"><img src="{{ post.image }}" alt="" loading="lazy"></a>{% endif %}
+    {% if post.result %}<p class="hc-res" tabindex="0">{{ post.result }}</p>{% endif %}
+    {% comment %} One summary per card: subtitle, else description, else excerpt. {% endcomment %}
+    {% if post.subtitle %}
+    <p class="hc-sum">{{ post.subtitle }}</p>
+    {% elsif post.description and post.description != "" %}
+    <p class="hc-sum">{{ post.description }}</p>
+    {% elsif post.excerpt %}
+    <p class="hc-sum">{{ post.excerpt | strip_html | truncatewords: 42 }}</p>
     {% endif %}
-
   </article>
-  {% endunless %}
-  {% endfor %}
+  {% endunless %}{% endfor %}
 </div>
 
-<div class="pagination">
-  {% if paginator.next_page %}
-    <a class="pagination-item older" href="{{ site.baseurl }}/page{{paginator.next_page}}">Older</a>
-  {% else %}
-    <span class="pagination-item older">Older</span>
-  {% endif %}
+<nav class="hp-pager" aria-label="Pagination">
   {% if paginator.previous_page %}
-    {% if paginator.page == 2 %}
-      <a class="pagination-item newer" href="{{ site.baseurl }}/">Newer</a>
-    {% else %}
-      <a class="pagination-item newer" href="{{ site.baseurl }}/page{{paginator.previous_page}}">Newer</a>
-    {% endif %}
-  {% else %}
-    <span class="pagination-item newer">Newer</span>
-  {% endif %}
-</div>
+    {% if paginator.page == 2 %}<a href="{{ site.baseurl }}/">← Newer</a>{% else %}<a href="{{ site.baseurl }}/page{{ paginator.previous_page }}">← Newer</a>{% endif %}
+  {% else %}<span class="hp-pager-off">← Newer</span>{% endif %}
+  <span class="hp-pager-n">{{ paginator.page }} / {{ paginator.total_pages }}</span>
+  {% if paginator.next_page %}<a href="{{ site.baseurl }}/page{{ paginator.next_page }}">Older →</a>{% else %}<span class="hp-pager-off">Older →</span>{% endif %}
+</nav>
 </main>

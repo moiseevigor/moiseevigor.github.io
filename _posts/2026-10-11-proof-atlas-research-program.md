@@ -13,6 +13,7 @@ permalink: /mathematics/2026/10/11/proof-atlas-research-program/
 published: true
 last_modified_at: 2026-10-14
 image: /public/img/posts/proof-atlas-1.svg
+result: '739 + 1,359 declarations · 1,277,896 shared nodes'
 comments: false
 description: >
   Measured Lean expression structure, complete compiled declaration inventories, and an audited boundary between proof coverage and mathematical explanation.
