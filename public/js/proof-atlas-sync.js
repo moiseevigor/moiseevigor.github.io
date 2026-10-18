@@ -53,7 +53,7 @@
     if(!window.PROOF_ATLAS_OCCURRENCE_TYPES)await script('/public/data/proof-atlas/occurrence-types-manifest.js?v=4');
     if(!window.ProofAtlasOccurrenceTypes)await script('/public/js/proof-atlas-occurrence-types.js?v=12');
    }catch(_){/* Optional type evidence must not block the original compiled reader. */}
-   try{if(!window.PROOF_ATLAS_PACKET_TYPES)await script('/public/data/proof-atlas/packet-types-manifest.js?v=1');}catch(_){/* Earlier judgments remain usable without the replay supplement. */}
+   try{if(!window.PROOF_ATLAS_PACKET_TYPES)await script('/public/data/proof-atlas/packet-types-manifest.js?v=2');}catch(_){/* Earlier judgments remain usable without the replay supplement. */}
    try{
     if(!window.PROOF_ATLAS_BETA_REDUCTIONS)await script('/public/data/proof-atlas/beta-reductions-manifest.js?v=1');
     if(!window.ProofAtlasBetaReduction)await script('/public/js/proof-atlas-beta-reduction.js?v=12');

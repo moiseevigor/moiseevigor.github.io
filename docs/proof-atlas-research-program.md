@@ -765,3 +765,14 @@ At node 30853, proving `¬a = 0 → a = 1 / 2`, the recovered introduction disti
 The common schema has a distinct public-packet replay environment and does not assert verification of an original compiled module. Independent checks preserve all 17 previous primary judgments and 62 exact type observations, compare 57 full/paged scenes and reject twenty-three altered records or limit controls. The paged reader's small supplement has a separate 32-query/256-KiB cap; source traversal remains paged. This is finite construction recovery, not complete proof coverage or measured comprehension.
 
 [Method and reproduction](/research/proof-atlas/packet-typing/README.md) · [Independent checks](/scripts/test-proof-atlas-packet-types.cjs) · [Browser checks](/scripts/test-proof-atlas-packet-types-browser.cjs)
+
+
+## Recorded proof-premise frontiers
+
+A reusable query policy follows native proof-valued premises of recorded constructions, retaining exact occurrence routes. Terminal declaration/context references remain boundaries; source fields and unknown types do not acquire proof roles. Applied to the frozen nineteen-query AI-proof seed, it identifies eight distinct missing construction roots from nine premise appearances. Three requests share node 166 under three different lexical contexts. Both fresh native reproductions check all eight additions, while preserving the nineteen earlier judgments.
+
+The resulting 27-query inventory records twelve introductions, eleven applications and three elimination records within those applications. It supplies a checked application for the previously unrecorded body of lambda 30853. The next layer still has nine unrecorded proof-premise roots: 36 cumulative requests would exceed the small supplement's 32-query limit. Further expansion needs bounded query paging; the memory limit is retained.
+
+The policy also enumerates candidate frontiers in 34 frozen earlier native-query inventories, with 112 distinct candidate routes in total and at most 31 in one inventory. These candidates are drawn from earlier recorded premise roles; they have not all received new construction checks. The independent audit derives candidates directly from native application, introduction and let fields, checks contextual sharing, and keeps the unresolved next layer explicit. This is finite construction coverage, not complete proofs or semantic explanation.
+
+[Policy, limits and reproduction](/research/proof-atlas/packet-typing/README.md) · [Independent frontier audit](/scripts/test-proof-atlas-proof-frontier.cjs) · [Corpus candidate audit](/scripts/audit-proof-atlas-proof-frontiers.cjs) · [Reader checks](/scripts/test-proof-atlas-proof-frontier-browser.cjs)
