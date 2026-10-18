@@ -25,6 +25,8 @@ source fields. Dashed edges target the original lexical binder. External binder
 references are drawn in a separate context region and excluded from the subtree
 count. Universe and other payloads stay in the original packet; this mode does
 not give them an additional geometric interpretation.
+Kernel reduction-rule roots retain their original labels and separate metadata
+namespace. Their binders are rule parameters, not source proof steps.
 
 Variable lookup first follows the path to count entered binder bodies and read
 the de Bruijn index. A second source pass locates the corresponding binder's

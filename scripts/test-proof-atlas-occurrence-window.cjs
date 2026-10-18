@@ -15,7 +15,7 @@ function at(data,route){
  return{node,slots,scopeDepth:scope.length,binding:target?{node:target.node,root:route.root,slots:slots.slice(0,target.depth)}:null};
 }
 function audit(scene,data,record){
- assert.equal(scene.source.name,record.name);assert.equal(scene.source.indexSha256,record.indexSha256);assert.equal(scene.source.sourceSha256,record.sourceSha256);assert.equal(scene.namespace,'source-expression');assert.equal(scene.typing,'not-queried');
+ assert.equal(scene.source.name,record.name);assert.equal(scene.source.indexSha256,record.indexSha256);assert.equal(scene.source.sourceSha256,record.sourceSha256);const originalRoot=data.declaration.rootPaths[scene.root.route.root],rule=originalRoot.startsWith('root.rule.');assert.equal(scene.root.sourcePath,originalRoot);assert.equal(scene.namespace,rule?'kernel-rule':'source-expression');assert.equal(scene.root.category,rule?'kernel-reduction-rule':originalRoot==='root.type'?'declaration-type':originalRoot==='root.value'?'declaration-value':'serialized-root');assert.equal(scene.typing,'not-queried');
  assert(scene.nodes.length>0&&scene.nodes.length<=scene.budget&&scene.budget<=32);const root=at(data,scene.root.route);assert.equal(root.node,scene.root.node);
  let hidden=0n;const ids=new Map(),frontiers=[],expectedLinks=[],expectedEdges=[];
  for(const n of scene.nodes){
@@ -30,7 +30,7 @@ function audit(scene,data,record){
  assert.equal(scene.nodes[0].node,scene.root.node);assert.deepEqual(scene.nodes[0].route,scene.root.route);
  for(const n of scene.nodes){
   for(const port of n.ports){const target=scene.nodes.find(v=>v.route.root===port.route.root&&JSON.stringify(unpack(v.route))===JSON.stringify(unpack(port.route)));assert.equal(port.displayed,!!target);if(target)expectedEdges.push({from:n.id,to:target.id,slot:port.slot});else{hidden+=BigInt(port.expanded);frontiers.push(unpack(port.route));}}
-  if(n.binding){const target=scene.nodes.find(v=>v.route.root===n.binding.route.root&&JSON.stringify(unpack(v.route))===JSON.stringify(unpack(n.binding.route)));expectedLinks.push({from:n.id,to:n.binding.route.root+':'+n.binding.route.depth+':'+n.binding.route.slots,node:n.binding.node,route:n.binding.route,relation:'source-bound-to',boundary:!target});}
+  if(n.binding){const target=scene.nodes.find(v=>v.route.root===n.binding.route.root&&JSON.stringify(unpack(v.route))===JSON.stringify(unpack(n.binding.route)));expectedLinks.push({from:n.id,to:n.binding.route.root+':'+n.binding.route.depth+':'+n.binding.route.slots,node:n.binding.node,route:n.binding.route,relation:'source-bound-to',namespace:rule?'kernel-rule-context':'proof-context',boundary:!target});}
  }
  assert.deepEqual(scene.edges,expectedEdges);assert.deepEqual(scene.links,expectedLinks);
  for(let i=0;i<frontiers.length;i++)for(let j=0;j<frontiers.length;j++)if(i!==j)assert.notDeepEqual(frontiers[i].slice(0,frontiers[j].length),frontiers[j]);
@@ -38,8 +38,8 @@ function audit(scene,data,record){
  for(const n of scene.nodes)if(n!==scene.nodes[0])assert.equal(scene.edges.filter(e=>e.to===n.id).length,1);
  return{nodes:scene.nodes.length,bindings:scene.links.length,frontiers:frontiers.length};
 }
-let packets=0,cuts=0,nodes=0,bindings=0,frontiers=0,checkedAIPackets=0;const retained=[];
-function check(data,record,route,options){const scene=W.create(data,record,route,options),counts=audit(scene,data,record);cuts++;nodes+=counts.nodes;bindings+=counts.bindings;frontiers+=counts.frontiers;return scene;}
+let packets=0,cuts=0,nodes=0,bindings=0,frontiers=0,checkedAIPackets=0,kernelRuleCuts=0;const retained=[];
+function check(data,record,route,options){const scene=W.create(data,record,route,options),counts=audit(scene,data,record);cuts++;kernelRuleCuts+=Number(scene.namespace==='kernel-rule');nodes+=counts.nodes;bindings+=counts.bindings;frontiers+=counts.frontiers;return scene;}
 for(const edition of library.editions)for(const record of edition.declarations){
  if(record.uniqueNodes>P.limits.sourceNodes)continue;const raw=z.gunzipSync(fs.readFileSync('.'+record.indexFile),{maxOutputLength:67108864});assert.equal(sha(raw),record.indexSha256);const data=JSON.parse(raw);W.validateSource(data,record);packets++;if(edition.id===sample.edition.id)checkedAIPackets++;
  for(let root=0;root<data.roots.length;root++)check(data,record,P.encode(root,[]),{maxNodes:7,maxDepth:2});
@@ -66,5 +66,5 @@ all.roots.forEach((_,i)=>all.declaration.rootPaths.push('control.root'+i));for(l
 const allRecord={name:all.declaration.name,indexSha256:sha(Buffer.from(JSON.stringify(all))),sourceSha256:sha(fs.readFileSync(__filename)),uniqueNodes:all.kind.length};W.validateSource(all,allRecord);const covered=new Set();for(let root=0;root<all.roots.length;root++){const work=[[]];while(work.length){const slots=work.pop(),route=P.encode(root,slots),original=at(all,route);covered.add(all.kind[original.node]);check(all,allRecord,route,{maxNodes:7,maxDepth:3});all.children[original.node].forEach((_,i)=>work.push([...slots,i]));}}assert.equal(covered.size,12);
 assert.equal(checkedAIPackets,20);
 assert.deepEqual(Object.fromEntries(auditedFiles.map(f=>[f,sha(fs.readFileSync(f))])),startHashes);
-const report={status:'PASS',format:'ProofAtlasOccurrenceWindowAudit/1',publisherAttributedAIPackets:checkedAIPackets,packets,cuts,nodes,bindings,frontiers,rejections:rejected,wrongGenuineOuterBinderRejected:true,falseProofRoleRejected:true,codecCases,constructorKinds:covered.size,deep,shadowedBinders:10000,representativeIndexBytes:reps.state.indexBytes,sourceModuleBytesVerified:false,typingInferred:false,codecFormallyVerified:false,sourceFiles:startHashes};
+assert(kernelRuleCuts>0);const report={status:'PASS',format:'ProofAtlasOccurrenceWindowAudit/1',publisherAttributedAIPackets:checkedAIPackets,packets,cuts,kernelRuleCuts,nodes,bindings,frontiers,rejections:rejected,wrongGenuineOuterBinderRejected:true,falseProofRoleRejected:true,codecCases,constructorKinds:covered.size,deep,shadowedBinders:10000,representativeIndexBytes:reps.state.indexBytes,sourceModuleBytesVerified:false,typingInferred:false,codecFormallyVerified:false,sourceFiles:startHashes};
 fs.writeFileSync(process.env.ATLAS_OCCURRENCE_REPORT||'/tmp/atlas-occurrence-window-audit.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));

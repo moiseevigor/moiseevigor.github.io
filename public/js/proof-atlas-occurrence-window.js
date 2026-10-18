@@ -26,6 +26,7 @@
    demand(natural(data.neededScope[i])&&data.neededScope[i]===needed,'source scope recurrence');
   }
   demand(Array.isArray(data.roots)&&data.roots.length>0&&data.roots.length<=P.limits.roots&&data.roots.every(r=>natural(r)&&r<n),'original source roots');
+  demand(Array.isArray(data.declaration.rootPaths)&&data.declaration.rootPaths.length===data.roots.length&&data.declaration.rootPaths.every(p=>typeof p==='string'&&p.length<=512),'original root labels');
   return data;
  }
  function token(record,route){P.parse(route);demand(hash(record.indexSha256),'token source hash');return record.indexSha256+'.'+route.root+'.'+route.depth+'.'+route.slots;}
@@ -46,7 +47,8 @@
  function create(data,record,route,options={}){
   const budget=options.maxNodes??13,depthLimit=options.maxDepth??3,layerLimit=options.maxLayerNodes??4;
   demand(natural(budget)&&budget>=1&&budget<=limits.nodes&&natural(depthLimit)&&depthLimit<=limits.depth&&natural(layerLimit)&&layerLimit>=1&&layerLimit<=limits.layer,'display bounds');
-  const selected=P.resolve(data,route),nodes=[],edges=[],links=[],layers=[],work=[{route,depth:0,parent:null,slot:null}];
+  const selected=P.resolve(data,route),sourcePath=data.declaration.rootPaths[route.root],category=sourcePath.startsWith('root.rule.')?'kernel-reduction-rule':sourcePath==='root.type'?'declaration-type':sourcePath==='root.value'?'declaration-value':'serialized-root',namespace=category==='kernel-reduction-rule'?'kernel-rule':'source-expression';
+  const nodes=[],edges=[],links=[],layers=[],work=[{route,depth:0,parent:null,slot:null}];
   while(work.length){
    const at=work.shift();if(nodes.length>=budget||at.depth>depthLimit||(layers[at.depth]||0)>=layerLimit)continue;
    const resolved=P.resolve(data,at.route),n=resolved.node,k=data.kind[n],rule=G.vocabulary[kinds[k]],entry={id:id(at.route),node:n,route:at.route,kind:kinds[k],glyph:rule.glyph,structuralRole:rule.role,depth:at.depth,row:layers[at.depth]||0,scopeDepth:resolved.scopeDepth,expanded:data.expanded[n],ports:[],binding:resolved.binding,unboundIndex:resolved.unboundIndex??null,typeStatus:'not-queried'};
@@ -61,10 +63,10 @@
   const shown=new Set(nodes.map(n=>n.id));let hidden=0n;
   for(const n of nodes){
    for(const port of n.ports){port.displayed=shown.has(id(port.route));if(!port.displayed)hidden+=amount(port.expanded);}
-   if(n.binding)links.push({from:n.id,to:id(n.binding.route),node:n.binding.node,route:n.binding.route,relation:'source-bound-to',boundary:!shown.has(id(n.binding.route))});
+   if(n.binding)links.push({from:n.id,to:id(n.binding.route),node:n.binding.node,route:n.binding.route,relation:'source-bound-to',namespace:namespace==='kernel-rule'?'kernel-rule-context':'proof-context',boundary:!shown.has(id(n.binding.route))});
   }
   const total=amount(data.expanded[selected.node]);demand(BigInt(nodes.length)+hidden===total,'complete frontier accounting');
-  const scene={format:'ProofAtlasOccurrenceWindow/1',source:{name:record.name,indexSha256:record.indexSha256,sourceSha256:record.sourceSha256},namespace:'source-expression',root:{node:selected.node,route},budget,depthLimit,layerLimit,nodes,edges,links,stats:{retained:String(nodes.length),hidden:String(hidden),represented:String(total)},typing:'not-queried',scope:'Original compiled-source occurrence structure and lexical links. No inferred typing, source-module hash verification or semantic abstraction.'};
+  const scene={format:'ProofAtlasOccurrenceWindow/1',source:{name:record.name,indexSha256:record.indexSha256,sourceSha256:record.sourceSha256},namespace,root:{node:selected.node,route,sourcePath,category},budget,depthLimit,layerLimit,nodes,edges,links,stats:{retained:String(nodes.length),hidden:String(hidden),represented:String(total)},typing:'not-queried',scope:'Original compiled-source occurrence structure and lexical links. Kernel-rule roots retain their metadata namespace. No inferred typing, source-module hash verification or semantic abstraction.'};
   demand(new TextEncoder().encode(JSON.stringify(scene)).length<=limits.metadataBytes,'scene metadata bound; reduce the display budget');
   return scene;
  }

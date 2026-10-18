@@ -37,7 +37,7 @@
    const payload=el('details');payload.append(el('summary','Original constructor payload'));const raw=JSON.stringify(data.payloads[n.node],null,2);payload.append(el('pre',raw.length>12000?raw.slice(0,12000)+'\n… display truncated; complete payload is in the source packet.':raw));panel.append(payload);
   }
   function draw(next){
-   scene=next;stage.replaceChildren();const cols=Math.max(...scene.nodes.map(n=>n.depth))+1,rows=Math.max(...scene.nodes.map(n=>n.row))+1;
+   scene=next;stage.replaceChildren();const cols=Math.max(...scene.nodes.map(n=>n.depth))+1,rows=Math.max(...scene.nodes.map(n=>n.row))+1;subtitle.textContent=control?'Serialized syntax control · no kernel typing claim':(scene.namespace==='kernel-rule'?'Kernel reduction-rule syntax':'Source occurrence geometry')+' · '+edition.label;
    tools.querySelector('[data-window-parent]').disabled=next.root.route.depth===0;tools.querySelector('[data-window-root]').disabled=false;
    const external=[...new Map(scene.links.filter(l=>l.boundary).map(l=>[l.to,l])).values()];
    stageWidth=(cols+(external.length?1:0))*330+30;stageHeight=Math.max(rows*260,external.length*180)+30;stage.style.width=stageWidth+'px';stage.style.height=stageHeight+'px';viewport.style.height=Math.min(650,Math.max(310,stageHeight+20))+'px';
@@ -102,7 +102,7 @@
    if(location.hash)fromLocation();else{const body=data.declaration.rootPaths.indexOf('root.value');navigate(P.encode(body<0?0:body,[]),true,true);}
    let drag=null;viewport.addEventListener('pointerdown',event=>{if(event.target.closest('.pow-card,button,a,input,select'))return;drag={x:event.clientX,y:event.clientY,left:viewport.scrollLeft,top:viewport.scrollTop};viewport.setPointerCapture(event.pointerId);});viewport.addEventListener('pointermove',event=>{if(drag)viewport.scrollTo(drag.left+drag.x-event.clientX,drag.top+drag.y-event.clientY);});viewport.addEventListener('pointerup',()=>{drag=null;});viewport.addEventListener('pointercancel',()=>{drag=null;});
    host.addEventListener('popstate',fromLocation);host.addEventListener('hashchange',fromLocation);
-   const api={getSnapshot:()=>selected&&scene?{source:scene.source,node:selected.node,route:selected.route,scopeDepth:selected.scopeDepth,binding:selected.binding,typing:'not-queried'}:null,getScene:()=>scene,getIndexState:()=>representativeIndex?.state||null,focus:route=>navigate(route),dispose:()=>{disposed=true;host.removeEventListener('popstate',fromLocation);host.removeEventListener('hashchange',fromLocation);}};
+   const api={getSnapshot:()=>selected&&scene?{source:scene.source,namespace:scene.namespace,category:scene.root.category,node:selected.node,route:selected.route,scopeDepth:selected.scopeDepth,binding:selected.binding,typing:'not-queried'}:null,getScene:()=>scene,getIndexState:()=>representativeIndex?.state||null,focus:route=>navigate(route),dispose:()=>{disposed=true;host.removeEventListener('popstate',fromLocation);host.removeEventListener('hashchange',fromLocation);}};
    host.ProofAtlasOccurrenceView=api;return api;
   }catch(error){status.textContent='Occurrence view unavailable: '+error.message;root.append(link('Open declaration library',backURL()));}
   finally{root.setAttribute('aria-busy','false');}
