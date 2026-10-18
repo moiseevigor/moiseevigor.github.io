@@ -778,24 +778,36 @@ The policy also enumerates candidate frontiers in 34 frozen earlier native-query
 [Policy, limits and reproduction](/research/proof-atlas/packet-typing/README.md) · [Independent frontier audit](/scripts/test-proof-atlas-proof-frontier.cjs) · [Corpus candidate audit](/scripts/audit-proof-atlas-proof-frontiers.cjs) · [Reader checks](/scripts/test-proof-atlas-proof-frontier-browser.cjs)
 
 
-## Paged construction evidence
+## Paged construction evidence and frontier audits
 
-The next recorded proof-premise layer adds nine checked roots, giving 36 queries
-while preserving all 27 earlier judgments. Sixteen introductions and sixteen
-applications now use the common construction notation in this finite inventory.
-Fourteen next-layer roots remain explicitly unrecorded; proof coverage is incomplete.
+The frozen proof-premise chain now contains 19 → 27 → 36 → 50 native queries.
+The last layer adds fourteen checked applications, preserving every earlier
+contextual judgment. This finite inventory contains sixteen introductions and
+thirty applications; seven applications also carry elimination metadata.
+Eighteen next-layer roots remain explicitly unrecorded. Following proof-valued
+premises omits type/value branches and stops at declaration/context references;
+even an empty frontier under this policy would not establish complete proofs.
 
-Optional replay evidence now uses the existing query-page transport. Its records
-share the 128-query/16-MiB native cache; source fields retain their 4,096-node cache.
-Shared type tables remain fully loaded under separate fixed bounds. The historical
-resident fallback keeps its 32-query/256-KiB cap. These are component bounds, not a
-total-browser memory guarantee. Transport does not create new typing judgments.
+An independent native-field audit checks all three layer transitions, exact
+source paths, parent incidence and structural type identities. It compares 147
+premise appearances across the snapshots and rejects sixteen changed-data or
+bound controls. Three stored nodes appear at distinct frontier routes; node
+sharing never substitutes for lexical context. The same independent enumerator
+agrees with the visual frontier on all 34 existing native inventories, without
+supplying new kernel checks for those other candidates.
 
-The independent audit compares 194 exact observations and 108 complete/paged cuts,
-forces eviction with a one-query cache, and rejects sixteen changed-data or disposal
-controls. Both fresh native runs reproduce the 36 query records identically. Reader
-checks distinguish all nine added construction roots from fourteen unsupported next
-roots. General typing preservation, broader proof coverage and comprehension remain
-open.
+Optional replay records share the 128-query/16-MiB native cache; paged source fields
+retain their 4,096-node cache. The complete-source reader keeps its source packet
+in full and one selected observation/query for synchronous inspection tools. Shared type tables remain fully loaded under
+separate fixed bounds. The historical resident fallback keeps its 32-query/
+256-KiB cap. The current complete replay package exceeds both fallback bounds;
+the paged reader retrieves individual queries. These are component bounds, not a
+total-browser memory guarantee. Transport creates no new typing judgments.
 
-[Reproduction and boundaries](/research/proof-atlas/packet-typing/README.md#second-layer-and-bounded-delivery) · [Transport audit](/scripts/test-proof-atlas-replay-query-pages.cjs) · [Failure controls](/scripts/test-proof-atlas-replay-query-controls.cjs)
+Both fresh native runs reproduce all fifty query records identically. The
+transport audit compares 320 exact observations and 150 complete/paged cuts,
+forces eviction with a one-query cache, and retains sixteen failure/disposal
+controls. General typing preservation, semantic abstraction, broader coverage
+and measured comprehension remain open.
+
+[Method and limits](/research/proof-atlas/packet-typing/README.md) · [Immutable frontier chain](/research/proof-atlas/packet-typing/frontier-chain.json) · [Independent audit](/scripts/test-proof-atlas-frontier-chain.cjs) · [Native-field implementation](/scripts/proof-atlas-frontier-chain-audit.cjs)

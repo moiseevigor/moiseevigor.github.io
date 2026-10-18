@@ -37,6 +37,7 @@ on:
       - 'public/data/proof-atlas/native-query-pages/**'
       - 'scripts/test-proof-atlas-native-page*.cjs'
       - 'scripts/test-proof-atlas-replay-query*.cjs'
+      - 'scripts/*proof-atlas-frontier-chain*.cjs'
       - 'public/data/proof-atlas/packet-query-pages-manifest.js'
       - 'public/js/proof-atlas-projected-context-*.js'
       - 'public/data/proof-atlas/projected-context-modules*'
@@ -239,6 +240,7 @@ on:
       - 'public/data/proof-atlas/native-query-pages/**'
       - 'scripts/test-proof-atlas-native-page*.cjs'
       - 'scripts/test-proof-atlas-replay-query*.cjs'
+      - 'scripts/*proof-atlas-frontier-chain*.cjs'
       - 'public/data/proof-atlas/packet-query-pages-manifest.js'
       - 'public/js/proof-atlas-projected-context-*.js'
       - 'public/data/proof-atlas/projected-context-modules*'
@@ -515,6 +517,7 @@ jobs:
             /tmp/atlas-proof-frontier-browser/
             /tmp/atlas-replay-query-pages.json
             /tmp/atlas-replay-query-controls.json
+            /tmp/atlas-frontier-chain.json
             /tmp/atlas-proof-frontier.json
             /tmp/atlas-proof-frontiers.json
             /tmp/proof-atlas-packet-types.json
