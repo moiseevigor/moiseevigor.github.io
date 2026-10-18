@@ -139,12 +139,11 @@ This extends the common syntax/binding notation to the selected recorded types. 
 
 **Show application judgment** displays one argument stage as a typing rule. It separates this checked relation from the structural graph's child arrows:
 
-```text
-Γ ⊢ f : τ       τ ≡ Π (x : A), B
+<pre tabindex="0" role="region" aria-label="Dependent application rule"><code>Γ ⊢ f : τ       τ ≡ Π (x : A), B
 Γ ⊢ a : A′      A′ ≡ A
 ──────────────────────────────── Π application
 Γ ⊢ f a : τ′    τ′ ≡ B[a/x]
-```
+</code></pre>
 
 The function premise, argument premise and conclusion retain their original compiled occurrence routes and share the same enclosing context Γ. Type links open the existing constructor geometry for τ, its normalized Π expression, A′, A, τ′ and the substituted result B[a/x]. Selecting a term returns to its original proof occurrence. Stage navigation refines the rule without changing the selected proof or article. A type load from an earlier stage cannot restore that stale selection.
 
@@ -169,12 +168,11 @@ The application rule supplies one compositional typing relation. The introductio
 
 **Show lambda introduction** represents one binder by the following rule. The domain is outside the extended frame; the body is inside it. The conclusion returns to Γ and discharges exactly the selected binder.
 
-```text
-Γ ⊢ A : σ       σ normalizes to Sort u
+<pre tabindex="0" role="region" aria-label="Dependent introduction rule"><code>Γ ⊢ A : σ       σ normalizes to Sort u
 Γ, x : A ⊢ b : B′       B′ ≡ B
 ──────────────────────────────────── Π introduction
 Γ ⊢ λ x : A, b : τ      τ ≡ Π (x : A), B
-```
+</code></pre>
 
 The native extractor checks the domain's type and normalizes it with the kernel to a sort. It checks the lambda at its normalized Π-type, then opens the original body under a fresh local declaration with the original binder name and visibility. Typed identities enforce conversion of the new local to the Π-domain and of the body to the expected codomain. Each type is abstracted in its appropriate context and reopened without structural change. Domain/type/sort and function-type diagrams use Γ; actual and expected body-type diagrams use Γ,x:A. Their proof-context links therefore distinguish the current binder from enclosing binders, including repeated names.
 
@@ -428,6 +426,7 @@ At fixed budget thirteen and depth three, the finite audit checks **2,576 groupe
 |---|---:|---:|
 | Default proof-first | 554 / 691 | 90 / 1,198 / 0 |
 | Follow proof premises | 568 / 802 | 124 / 1,164 / 0 |
+{: tabindex="0" aria-label="Introduction grouping comparison"}
 
 Across twenty declarations in the released AI-source sample, proof focus with grouping improves 49 of 204 queried cuts and increases these record appearances from 332 to 446. All 88 queried cuts in the nine controlled recursion declarations are unchanged on this metric. This is a finite source-cut comparison, rather than a massive-AI-proof readability benchmark.
 
@@ -456,6 +455,7 @@ The finite audit checks **2,576 cuts over 1,288 queried regions in 34 declaratio
 |---|---:|---:|
 | Default proof-first | 368 / 427 | 29 / 1,259 / 0 |
 | Follow proof premises | 459 / 501 | 24 / 1,264 / 0 |
+{: tabindex="0" aria-label="Context frame grouping comparison"}
 
 All gains on this metric occur in the twenty-declaration released AI-source sample: 29 / 24 of its 204 queried cuts improve under the two priorities. The published and working snapshots and the nine recursion controls are unchanged on this metric. These are overlapping cut appearances, not distinct mathematical proof steps, a massive-AI-proof benchmark or evidence of semantic importance. The cuts contain 324 / 356 frame appearances retaining 2,757 / 3,080 construction-record appearances, with 253 variable-link appearances targeting frame slots across both policies.
 
@@ -530,6 +530,7 @@ Inductive datatype constructor metadata (Lean's `ConstructorVal`) adds a second 
 | Solid typing rule / construction | Existing exact occurrence judgment, native application checks where arguments are supplied, and a structurally matching native constructor head type | Recorded source context Γ |
 | Dashed constructor layout | Native declaration metadata, exact constant identity and universe instance, source arity and ordered arguments | Missing occurrence/argument types remain unavailable |
 | Boundary | Exact compiled subtree, without a matching construction rule | No inferred type is invented |
+{: tabindex="0" aria-label="Representation evidence and type scope"}
 
 Constructor layouts introduced `ProofAtlasJudgmentScene/2`; the field-projection rule below extends it to version 3. Source-only layouts are available even when there is no individual occurrence-type query. Their cards show source expressions rather than repeated unavailable-type text. Native constructor signatures are presented separately as generic declaration metadata. Every original application prefix remains directly navigable. Formal field domains use the preceding inputs of the constructor telescope; they are not the actual argument types in Γ. Result-index expressions retain that metadata namespace and telescope context. Recorded source argument types, when available, keep their existing native roots and context. Recursor reduction-rule roots and their binders use the separate `kernel-rule` and `kernel-rule-context` namespaces.
 
@@ -867,3 +868,21 @@ boundary and metadata limits. No whole-proof, general typing or comprehension
 result follows from these tests.
 
 [Rule, bounds and reproduction](/research/proof-atlas/local-refinement/README.md) · [Implementation](/public/js/proof-atlas-local-refinement.js) · [Independent source audit](/scripts/test-proof-atlas-local-refinement.cjs) · [Reader checks](/scripts/test-proof-atlas-local-refinement-browser.cjs)
+
+## Locality and nested composition
+
+An expression-indexed one-hole context makes local replacement explicit. Ten
+kernel-checked structural laws include two pointwise equalities: every path
+outside the selected hole has unchanged visibility, and a path inside it has
+exactly the replacement's visibility at its original offset. Nested contexts
+compose without changing the resulting cut; their hole routes concatenate.
+The original expression's constructor fields and payload parameters remain fixed.
+
+The independent fixture reader checks 624 replacements in 156 small cases,
+including all twelve focus kinds and eleven structural child positions. It compares
+literal payloads and untouched siblings as well as counts, and rejects twenty-two
+altered records. The general Lean laws and these finite decoder checks are separate
+evidence. No JavaScript, source-typing, lexical-link, semantic or comprehension
+proof follows from them.
+
+[Definitions, evidence and scope](/research/proof-atlas/local-cut-context/README.md) · [Lean laws](/research/proof-atlas/local-cut-context/LocalContext.lean) · [Compiled records](/public/data/proof-atlas/local-cut-context-manifest.js) · [Independent reader](/scripts/proof-atlas-local-cut-context-audit.cjs)

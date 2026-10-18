@@ -55,10 +55,12 @@ path is replaced by another. Original source counts stay 186 and 53 respectively
 The native observations already attached to these expressions are unchanged; no
 new construction or proof-typing checks are inferred from this comparison.
 
-The proposed local-refinement operation is not yet implemented in the browser.
-It should replace one exact hidden root, keep the other regions, and refuse a
-replacement that exceeds the existing vertex/path/boundary limits. Scope links
-and native attestations require separate checks when such components are joined.
+The [browser's local-refinement operation](../local-refinement/README.md) replaces
+one hidden root, keeps the other regions, and refuses replacements beyond its
+vertex/path/boundary limits. Scope links and native attestations have separate
+implementation checks. The [one-hole context model](../local-cut-context/README.md)
+adds exact inside/outside path laws and nested composition; neither formal model
+proves the JavaScript implementation.
 
 ## Evidence and reproduction
 

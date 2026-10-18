@@ -6,6 +6,10 @@ on:
       - '_config.yml'
       - 'public/js/proof-atlas-local-refinement.js'
       - 'scripts/*proof-atlas-local-refinement*.cjs'
+      - 'scripts/*proof-atlas-local-cut-context*.cjs'
+      - 'public/data/proof-atlas/local-cut-context*'
+      - 'public/data/proof-atlas/local-cut-context/**'
+      - 'research/proof-atlas/local-cut-context/**'
       - 'scripts/*proof-atlas-source-cut*.cjs'
       - 'scripts/*proof-atlas-depth*.cjs'
       - 'public/data/proof-atlas/source-cut-laws*'
@@ -220,6 +224,10 @@ on:
       - '_config.yml'
       - 'public/js/proof-atlas-local-refinement.js'
       - 'scripts/*proof-atlas-local-refinement*.cjs'
+      - 'scripts/*proof-atlas-local-cut-context*.cjs'
+      - 'public/data/proof-atlas/local-cut-context*'
+      - 'public/data/proof-atlas/local-cut-context/**'
+      - 'research/proof-atlas/local-cut-context/**'
       - 'scripts/*proof-atlas-source-cut*.cjs'
       - 'scripts/*proof-atlas-depth*.cjs'
       - 'public/data/proof-atlas/source-cut-laws*'
@@ -459,6 +467,8 @@ jobs:
           node scripts/test-proof-atlas-boundary-ledger-browser.cjs
           node scripts/test-proof-atlas-local-refinement.cjs
           node scripts/test-proof-atlas-local-refinement-browser.cjs
+          node scripts/test-proof-atlas-local-cut-context.cjs
+          node scripts/test-proof-atlas-local-cut-context-browser.cjs
           node scripts/test-proof-atlas-proof-frontier.cjs
           node scripts/test-proof-atlas-packet-types-browser.cjs
           node scripts/test-proof-atlas-proof-frontier-browser.cjs
@@ -546,6 +556,8 @@ jobs:
             /tmp/atlas-replay-query-controls.json
             /tmp/atlas-boundary-ledger-browser/
             /tmp/atlas-local-refinement-browser/
+            /tmp/atlas-local-cut-context-browser/
+            /tmp/atlas-local-cut-context.json
             /tmp/atlas-local-refinement.json
             /tmp/atlas-boundary-ledger.json
             /tmp/atlas-boundary-control.json

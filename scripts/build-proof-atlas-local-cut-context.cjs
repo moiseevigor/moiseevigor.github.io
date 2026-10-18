@@ -1,0 +1,13 @@
+'use strict';
+const fs=require('fs'),path=require('path'),z=require('zlib'),crypto=require('crypto'),assert=require('assert/strict'),audit=require('./proof-atlas-local-cut-context-audit.cjs');
+const folder=process.argv[2];assert(folder,'Pass a successful fresh native verification directory');
+const verification=JSON.parse(fs.readFileSync(path.join(folder,'verification.json'))),native=fs.readFileSync(path.join(folder,'laws.json')),sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+assert.equal(verification.status,'PASS');assert.equal(sha(native),verification.nativeOutputSha256);
+for(const [f,h]of Object.entries(verification.sourceFiles))assert.equal(sha(fs.readFileSync(f)),h);
+const data=JSON.parse(native);audit(data);
+data.producer={kind:'self-contained-lean-cut-context/1',compiler:verification.compiler,sourceFiles:verification.sourceFiles,nativeOutputSha256:verification.nativeOutputSha256,originalPrivateProofModulesImported:false,scope:verification.scope};
+const raw=Buffer.from(JSON.stringify(data));assert(raw.length<=8388608);const digest=sha(raw),gzip=z.gzipSync(raw),file='/public/data/proof-atlas/local-cut-context/'+digest.slice(0,20)+'.json.gz';
+assert(gzip.length<=4194304);fs.mkdirSync('public/data/proof-atlas/local-cut-context',{recursive:true});fs.writeFileSync('.'+file,gzip);
+const descriptor={format:'ProofAtlasLocalCutContextDescriptor/1',file,sha256:digest,gzipSha256:sha(gzip),decodedBytes:raw.length,kernelCheckedLaws:10,cases:156,replacements:624};
+fs.writeFileSync('public/data/proof-atlas/local-cut-context-manifest.js','window.PROOF_ATLAS_LOCAL_CUT_CONTEXT = '+JSON.stringify(descriptor)+';\n');
+console.log(JSON.stringify(descriptor));
