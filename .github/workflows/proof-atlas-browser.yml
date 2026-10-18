@@ -4,6 +4,7 @@ on:
     branches: [master]
     paths:
       - '_config.yml'
+      - 'public/data/proof-atlas/occurrence-focus-laws.js'
       - 'public/js/proof-atlas-packed-routes.js'
       - 'public/js/proof-atlas-occurrence-*.js'
       - 'public/css/proof-atlas-occurrence-window.css'
@@ -235,6 +236,7 @@ on:
   pull_request:
     paths:
       - '_config.yml'
+      - 'public/data/proof-atlas/occurrence-focus-laws.js'
       - 'public/js/proof-atlas-packed-routes.js'
       - 'public/js/proof-atlas-occurrence-*.js'
       - 'public/css/proof-atlas-occurrence-window.css'

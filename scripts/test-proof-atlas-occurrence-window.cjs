@@ -38,6 +38,7 @@ function audit(scene,data,record){
  for(const n of scene.nodes)if(n!==scene.nodes[0])assert.equal(scene.edges.filter(e=>e.to===n.id).length,1);
  return{nodes:scene.nodes.length,bindings:scene.links.length,frontiers:frontiers.length};
 }
+const laws=manifest('public/data/proof-atlas/occurrence-focus-laws.js','PROOF_ATLAS_OCCURRENCE_FOCUS_LAWS');assert.equal(laws.status,'PASS');assert.equal(laws.format,'ProofAtlasOccurrenceFocusLaws/1');assert.equal(Object.keys(laws.theorems).length,5);for(const [file,digest]of Object.entries(laws.sourceFiles))assert.equal(sha(fs.readFileSync(file)),digest);for(const axioms of Object.values(laws.theorems))assert(axioms.every(a=>['propext','Quot.sound'].includes(a)));assert.equal(laws.codecFormallyVerified,false);assert.equal(laws.browserRendererVerified,false);assert.equal(laws.mathematicalTypingChecked,false);
 let packets=0,cuts=0,nodes=0,bindings=0,frontiers=0,checkedAIPackets=0,kernelRuleCuts=0;const retained=[];
 function check(data,record,route,options){const scene=W.create(data,record,route,options),counts=audit(scene,data,record);cuts++;kernelRuleCuts+=Number(scene.namespace==='kernel-rule');nodes+=counts.nodes;bindings+=counts.bindings;frontiers+=counts.frontiers;return scene;}
 for(const edition of library.editions)for(const record of edition.declarations){

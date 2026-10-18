@@ -24,6 +24,7 @@ def main():
     p.add_argument('--workdir', type=Path, required=True)
     p.add_argument('--reserve-gib', type=int, default=30)
     p.add_argument('--compare', type=Path)
+    p.add_argument('--summary', type=Path, help='Write the compact public JavaScript data wrapper')
     a = p.parse_args()
     assert a.reserve_gib >= 1
     folder = a.workdir.resolve()
@@ -57,9 +58,14 @@ def main():
                   codecFormallyVerified=False, browserRendererVerified=False, mathematicalTypingChecked=False,
                   scope='Structural focusing over actual Lean.Expr and arbitrary finite paths. Segments preserve the original lexical target. No JavaScript, resource, decoder or typing theorem.')
     raw = (json.dumps(result, sort_keys=True, separators=(',', ':'))+'\n').encode()
+    public = b'window.PROOF_ATLAS_OCCURRENCE_FOCUS_LAWS='+raw.rstrip()+b';\n'
     (folder/'verification.json').write_bytes(raw)
+    if a.summary:
+        assert a.summary.suffix == '.js'
+        a.summary.parent.mkdir(parents=True, exist_ok=True)
+        a.summary.write_bytes(public)
     if a.compare:
-        assert a.compare.read_bytes() == raw, 'Compiled law summary differs'
+        assert a.compare.read_bytes() == (public if a.compare.suffix == '.js' else raw), 'Compiled law summary differs'
     print(json.dumps(dict(status='PASS', theorems=len(laws), sha256=sha(raw), report=str(folder/'verification.json'))))
 
 

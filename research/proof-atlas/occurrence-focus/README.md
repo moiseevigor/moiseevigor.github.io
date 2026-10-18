@@ -89,7 +89,7 @@ From the repository root:
 node --max-old-space-size=256 scripts/test-proof-atlas-occurrence-window.cjs
 python3 research/proof-atlas/occurrence-focus/verify.py \
   --lean /absolute/path/to/lean-4.33.1 --workdir /tmp/atlas-occurrence-laws \
-  --compare research/proof-atlas/occurrence-focus/compiled-laws.json
+  --compare public/data/proof-atlas/occurrence-focus-laws.js
 docker compose --profile build run --rm build
 # Serve _site_production, then set ATLAS_ORIGIN and ATLAS_CHROMIUM_PATH as needed.
 node scripts/test-proof-atlas-occurrence-window-browser.cjs
@@ -98,7 +98,7 @@ node scripts/test-proof-atlas-occurrence-window-browser.cjs
 The compact law summary pins the model, runner and dependencies. Raw compiler
 logs and process resource records remain in the private work directory.
 
-[Lean model](Focus.lean) · [Compiled law summary](compiled-laws.json) ·
+[Lean model](Focus.lean) · [Compiled law summary](/public/data/proof-atlas/occurrence-focus-laws.js) ·
 [Independent source audit](/scripts/test-proof-atlas-occurrence-window.cjs) ·
 [Address codec](/public/js/proof-atlas-packed-routes.js) ·
 [Scene model](/public/js/proof-atlas-occurrence-window.js)
