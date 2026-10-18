@@ -13,17 +13,17 @@ const check=(ok,message)=>{if(!ok)throw Error(message)};
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  try{
   await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
-  check(JSON.stringify(await page.locator('.site-nav-links a').allTextContents())===JSON.stringify(['Home','Research','Tools','About']),'Confusing primary navigation');
-  check(await page.locator('.research-home .research-finding').count()===2,'Home should introduce two supported results');
-  await page.locator('.site-nav-links').getByRole('link',{name:'Research',exact:true}).click();
-  await contentReady('#results .research-finding');
-  check(await page.locator('#results .research-finding').count()===4,'Missing positive findings');
-  const order=await page.evaluate(()=>!!(document.querySelector('#results').compareDocumentPosition(document.querySelector('#negative-results')) & Node.DOCUMENT_POSITION_FOLLOWING));
-  check(order,'Positive findings must lead');
-  check(await page.locator('#negative-results li').count()===4,'Decisive negative findings disappeared');
-  check(await page.locator('.research-topic').count()===6,'Lost a research topic');
+  check(JSON.stringify(await page.locator('.site-nav-links a').allTextContents())===JSON.stringify(['Lab','Articles','Projects','About']),'Confusing primary navigation');
+  check(await page.locator('.site-nav-brand').getAttribute('href')==='/','Name must link home');
+  check(await page.locator('.hp-intro').count()===1,'Home should open with the introduction');
+  check(await page.locator('.hc').count()>=5,'Home should list recent posts');
+  await page.locator('.site-nav-links').getByRole('link',{name:'Lab',exact:true}).click();
+  await contentReady('.hc--lab');
+  check(await page.locator('.hc--lab').count()===6,'Lost a research topic');
+  check(await page.locator('.hc--lab .lab-verdicts .v-no').count()>=4,'Refuted hypotheses disappeared');
+  check(await page.locator('.hc--lab .hc-res').count()===6,'Every series needs its main result');
   await page.screenshot({path:path.join(shots,'research-desktop.png')});
-  await page.locator('.site-nav-links').getByRole('link',{name:'Tools',exact:true}).click();
+  await page.locator('.site-nav-links').getByRole('link',{name:'Projects',exact:true}).click();
   await contentReady('.research-tool');
   check(await page.locator('.research-tool').count()===3,'Tool roles should be distinct');
   // A nonessential pending request must not hold up checks of ready page content.
@@ -65,7 +65,7 @@ const check=(ok,message)=>{if(!ok)throw Error(message)};
    for(const width of [1280,390]){
     await page.setViewportSize({width,height:900});
     await page.goto(origin+route,{waitUntil:'domcontentloaded'});
-    await contentReady({'/':'.research-home .research-finding','/lab/':'.research-topic','/projects/':'.research-tool','/projects/proof-atlas/':'.research-hub-task'}[route]);
+    await contentReady({'/':'.hc','/lab/':'.hc--lab','/projects/':'.research-tool','/projects/proof-atlas/':'.research-hub-task'}[route]);
     check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),'Horizontal overflow at '+route+' '+width);
     check(await page.locator('.katex-error').count()===0,'Math parse error at '+route);
     for(const theme of ['light','dark']){
@@ -81,6 +81,6 @@ const check=(ok,message)=>{if(!ok)throw Error(message)};
    }
   }
   check(!errors.length,'Browser errors: '+errors.join('; '));
-  console.log(JSON.stringify({status:'PASS',positiveFindings:4,negativeFindings:4,topics:6,tools:3,accessibilityAudits:audits,sharedExpressionRoute:true,compiledAuditPacket:true,readyContentIndependentOfPendingRequest:true,screenshots:shots}));
+  console.log(JSON.stringify({status:'PASS',topics:6,tools:3,accessibilityAudits:audits,sharedExpressionRoute:true,compiledAuditPacket:true,readyContentIndependentOfPendingRequest:true,screenshots:shots}));
  }finally{await browser.close()}
 })().catch(e=>{console.error(e.stack);process.exit(1)});

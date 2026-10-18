@@ -7,6 +7,7 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from PIL import Image  # ships with matplotlib
 
 def sieve(limit):
     result = np.ones(limit + 1, dtype=bool)
@@ -26,24 +27,26 @@ def main():
     mask = sieve(6000)[1:]
     beta = 1 / ((1 + np.sqrt(5)) / 2) ** 2
     r = np.sqrt(n)
-    for mode, title in [('sunflower', 'Sunflower placement'),
-                        ('prime-sunflower', 'Primes on the sunflower'),
-                        ('sacks', 'Sacks prime spiral')]:
+    # Transparent ground and mid-range plasma (no pale yellow, no near-black
+    # purple), so the same PNG reads on the light and the dark page theme.
+    cmap = matplotlib.colors.ListedColormap(plt.get_cmap('plasma')(np.linspace(.25, .85, 256)))
+    for mode in ('sunflower', 'prime-sunflower', 'sacks'):
         theta = 2*np.pi*(r if mode == 'sacks' else beta*n)
         x, y = r*np.cos(theta), r*np.sin(theta)
-        fig, ax = plt.subplots(figsize=(6, 6), facecolor='#0b0b15')
-        ax.set_facecolor('#0b0b15')
+        fig, ax = plt.subplots(figsize=(6, 6))
         ax.set_aspect('equal')
         ax.axis('off')
         if mode != 'sunflower':
-            ax.scatter(x, y, s=4, c='#292636', linewidths=0)
-            ax.scatter(x[mask], y[mask], s=11, c=n[mask], cmap='plasma', linewidths=0)
+            ax.scatter(x, y, s=4, c='#8c8a99', alpha=.35, linewidths=0)
+            ax.scatter(x[mask], y[mask], s=11, c=n[mask], cmap=cmap, linewidths=0)
         else:
-            ax.scatter(x, y, s=7, c=n, cmap='plasma', linewidths=0)
-        ax.set_title(title, color='#eef0fa', fontsize=19)
-        fig.tight_layout()
-        fig.savefig(output / (mode + '.png'), dpi=150)
+            ax.scatter(x, y, s=7, c=n, cmap=cmap, linewidths=0)
+        fig.tight_layout(pad=.2)
+        path = output / (mode + '.png')
+        fig.savefig(path, dpi=150, transparent=True)
         plt.close(fig)
+        # 256-colour palette keeps the transparent PNG near its opaque size.
+        Image.open(path).convert('RGBA').quantize(256, method=Image.FASTOCTREE).save(path, optimize=True)
     s = sieve(1_000_042)
     k = np.arange(1000)
     for name, values in [('k^2+k', k*k+k), ('k^2+1', k*k+1),

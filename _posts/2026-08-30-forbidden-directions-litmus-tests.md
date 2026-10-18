@@ -15,6 +15,9 @@ date: 2026-08-30 09:00:00
 categories: [mathematics]
 tags: [sub-riemannian, elliptic-integrals, magnetic-nulls, pre-registration, replication, real-data]
 image: /public/img/posts/forbidden-directions-7.svg
+result: '$\delta(\varepsilon)=1-\tfrac{2}{\pi}K(2\varepsilon)$'
+main_result: '\delta(\varepsilon)=1-\frac{2}{\pi}\,K(2\varepsilon)'
+main_result_note: 'Mean refocusing delay of Larmor orbits on the exponential profile, with $\varepsilon=\lvert\nabla\ln B\rvert\,r_L$ and $K$ the complete elliptic integral of the first kind. The mean period diverges at the critical gradient $\varepsilon=1/2$.'
 description: >
   Part 7 of the Forbidden Directions series: the novelty audit, the exact period-average
   law delta = 1 - (2/pi) K(2 eps) with its critical gradient eps = 1/2, the pre-registered race
