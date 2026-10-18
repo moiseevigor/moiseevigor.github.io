@@ -811,3 +811,23 @@ controls. General typing preservation, semantic abstraction, broader coverage
 and measured comprehension remain open.
 
 [Method and limits](/research/proof-atlas/packet-typing/README.md) · [Immutable frontier chain](/research/proof-atlas/packet-typing/frontier-chain.json) · [Independent audit](/scripts/test-proof-atlas-frontier-chain.cjs) · [Native-field implementation](/scripts/proof-atlas-frontier-chain-audit.cjs)
+
+
+## Hidden-region interfaces
+
+A fresh core-only counterexample demonstrates that an empty proof-premise
+frontier can omit a proof-valued application below a value input. The projection,
+value application and a separate proof-witness query retain their exact source
+paths and native contexts. The selected projection expands to about 9.67 × 10²⁴
+source occurrences but uses 177 stored source nodes. This concerns syntactic
+coverage, not the mathematical importance of the omitted reflexivity proof.
+
+The **Hidden source regions** disclosure makes these boundaries explicit. Its
+source-root antichain accounts for every hidden occurrence in the displayed cut;
+root roles do not classify descendants. Opaque source children remain untyped.
+The finite audit covers 612 initial cuts across 34 inventories and 150 current
+replay cuts, with 9,177 boundary appearances and twenty rejection controls.
+Preparation is bounded and lazy; individual rows preserve exact source and focus
+navigation. General semantic abstraction and comprehension remain unevaluated.
+
+[Counterexample, rule and limits](/research/proof-atlas/frontier-boundary/README.md) · [Compiled control manifest](/public/data/proof-atlas/boundary-controls-manifest.js) · [Source accounting audit](/scripts/test-proof-atlas-boundary-ledger.cjs)
