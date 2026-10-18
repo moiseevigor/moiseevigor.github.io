@@ -878,6 +878,13 @@ context, without importing the scene producer or its comparator. Unrecorded
 parent fields remain source relations when a child has a separate type record.
 This check adds no kernel typing judgment or general definitional equality rule.
 
+The selected connection retains expected and observed type records separately.
+The geometry distinguishes a structural type match, a retained parent observation
+and a source-field connection without parent typing. The judgment keeps the
+original context; recording-source actions keep their original query routes.
+Local expansion preserves this interface rather than assigning a type through
+shared-node identity.
+
 ## Locality and nested composition
 
 An expression-indexed one-hole context makes local replacement explicit. Ten

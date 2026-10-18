@@ -111,3 +111,14 @@
 .pl-boundary-ledger li{margin:.65rem 0}
 .pl-boundary-ledger code{display:block;overflow-wrap:anywhere;font-size:.8rem;margin-top:.25rem}
 .pl-boundary-ledger button{margin:.15rem .3rem .15rem 0;white-space:normal;max-width:100%}
+
+/* A type connection preserves one occurrence/context; source edges stay dashed. */
+.pl-type-interface{margin:16px 0;padding:12px 0;border-block:1px solid var(--border,#d4ddd8)}
+.pl-type-interface-map{display:grid;grid-template-columns:minmax(0,1fr) minmax(5rem,auto) minmax(0,1fr);gap:12px;align-items:center}
+.pl-type-interface-map>div:not(.pl-type-interface-join){min-width:0;padding:12px;border:1px solid var(--border,#d4ddd8);border-radius:3px}
+.pl-type-interface-map strong{font:600 14px/1.5 var(--sans,system-ui)}
+.pl-type-interface-map p{margin:6px 0;font:13px/1.5 var(--sans,system-ui)}
+.pl-type-interface-join{font:500 12px/1.5 var(--sans,system-ui);text-align:center;border-block:1px solid currentColor;padding:6px 0;max-width:8rem}
+.pl-type-interface[data-interface-relation="source-field"] .pl-type-interface-join{border-block-style:dashed}
+.pl-type-interface[data-interface-relation="source-field"] .pl-type-interface-map>div:first-child{border-style:dashed}
+@media(max-width:650px){.pl-type-interface-map{grid-template-columns:minmax(0,1fr)}.pl-type-interface-join{justify-self:center;width:100%;max-width:12rem}.pl-type-interface-map button{width:100%}}

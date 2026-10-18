@@ -183,6 +183,18 @@ class Checker:
         edge = case['edge']
         require(edge['from'] == at['path'] and edge['to'] == boundary['origin']['path'], 'refinement connection')
         parent_ref, child_ref = boundary['typeReference'], child['typeReference']
+        detail = child.get('premiseInterface')
+        if detail:
+            require(parent_ref is not None and detail['format'] == 'ProofAtlasRecordedTypeInterface/1', 'unexpected type interface metadata')
+            require(detail['source'] == dict(zip(('name', 'indexSha256', 'sourceSha256'), self.source_identity)), 'type interface packet')
+            require(all(detail[f] == at[f] for f in ('node', 'path', 'route', 'context')), 'type interface occurrence/context')
+            require(detail['role'] == boundary['role'] and detail['expected'] == parent_ref, 'type interface premise')
+            if detail['observed'] is not None:
+                require(detail['observed'] == child_ref and detail['relation'] == 'structural-type-agreement', 'type interface observed syntax relation')
+            else:
+                require(child_ref == parent_ref and detail['relation'] == 'retained-parent-observation', 'type interface retained observation')
+        if 'premiseInterface' in child:
+            require(bool(detail) == bool(parent_ref), 'type interface metadata omitted')
         require(edge['relation'] == ('recorded-premise' if parent_ref else 'source-field'), 'source field promoted to premise')
         if parent_ref:
             interface = case['rootInterface']
@@ -241,6 +253,13 @@ def negative_controls(cases, repo):
         ]
         if case['child']['context']:
             mutations.append(('omitted-context-entry', lambda c: c['child']['context'].pop()))
+        if case['child'].get('premiseInterface'):
+            mutations.extend([
+                ('missing-interface-metadata', lambda c: c['child'].update(premiseInterface=None)),
+                ('wrong-interface-packet', lambda c: c['child']['premiseInterface']['source'].update(indexSha256='0' * 64)),
+                ('wrong-interface-premise', lambda c: c['child']['premiseInterface']['expected'].update(graphRoot=-1)),
+                ('wrong-interface-relation', lambda c: c['child']['premiseInterface'].update(relation='kernel-conversion')),
+            ])
         for name, mutate in mutations:
             rejects(family + '/' + name, case, mutate)
     source_only = next(c for c in cases if not c['boundary']['typeReference'] and c['child']['typeReference'])
@@ -351,6 +370,9 @@ def main():
         counts['unrecordedParentFields'] += not bool(case['boundary']['typeReference'])
         counts['independentTypedChildren'] += bool(case['child']['typeReference']) and not bool(case['boundary']['typeReference'])
         counts['maxTypePairStates'] = max(counts['maxTypePairStates'], states)
+        detail = case['child'].get('premiseInterface')
+        counts['recordedInterfaceMetadata'] += bool(detail)
+        counts['retainedParentObservations'] += bool(detail and detail['observed'] is None)
     negatives = negative_controls(cases, args.repo)
     comparator = comparator_controls(args.repo)
     report = dict(status='PASS', format='ProofAtlasIndependentTypeInterfaces/1', packets=len(sources), casesSha256=hashlib.sha256(raw).hexdigest(),
