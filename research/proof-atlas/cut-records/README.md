@@ -1,7 +1,7 @@
 # Sparse source-cut records
 
-Status: prototype adapter and independent checker. Reader controls and native
-reconstruction of these records are not yet implemented.
+Status: prototype adapter, reader export and independent checker. Native
+reconstruction of these records is not yet implemented.
 
 The adapter reconstructs a cut of the original expression directly from a
 judgment scene's hidden roots. It follows every literal kernel child slot until
@@ -25,6 +25,22 @@ outside this source-only operation. Views that merge source occurrences or omit
 source ancestors require a different relation; they are not source cuts.
 Here variable means `Expr.bvar`; the
 record does not reconstruct elaborator `FVarId` or `MVarId` contexts.
+
+## Reader control
+
+In either the complete or paged compiled reader, open **Source cut record** below
+the composed diagram and select **Check current source cut**. The optional adapter
+loads only on request. The control checks the current cut against its source
+fields, then offers its bounded JSON record. An independent check also needs the
+original packet and separately pinned inventory metadata.
+
+Selecting another displayed card reuses the same cut record. Expanding, undoing,
+changing policy/grouping/depth or focusing another region clears it. Closing a
+pending check or leaving the proof cancels the operation; stale results cannot
+restore a download. A failed component or unavailable source page leaves the
+diagram and exact-source controls usable. The paged reader uses its existing
+4,096-node source cache; the export does not fetch the complete source index.
+There is one cached record and one revocable download URL per displayed cut.
 
 ## Wire format and checking
 
