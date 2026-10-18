@@ -47,6 +47,17 @@ def main():
         plt.close(fig)
         # 256-colour palette keeps the transparent PNG near its opaque size.
         Image.open(path).convert('RGBA').quantize(256, method=Image.FASTOCTREE).save(path, optimize=True)
+    # Card thumbnail: primes only, large dots, so the spiral survives at ~160px.
+    theta = 2*np.pi*r
+    fig, ax = plt.subplots(figsize=(4, 4))
+    ax.set_aspect('equal')
+    ax.axis('off')
+    ax.scatter((r*np.cos(theta))[mask], (r*np.sin(theta))[mask], s=9, c=n[mask], cmap=cmap, linewidths=0)
+    fig.tight_layout(pad=.1)
+    path = output / 'thumb.png'
+    fig.savefig(path, dpi=100, transparent=True)
+    plt.close(fig)
+    Image.open(path).convert('RGBA').quantize(256, method=Image.FASTOCTREE).save(path, optimize=True)
     s = sieve(1_000_042)
     k = np.arange(1000)
     for name, values in [('k^2+k', k*k+k), ('k^2+1', k*k+1),
