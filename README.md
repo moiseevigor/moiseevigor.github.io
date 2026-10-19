@@ -70,7 +70,7 @@ docker compose --profile test run --rm htmlproofer
 
 | Check | Runs | Trigger |
 |---|---|---|
-| CircleCI `build` | `bundle exec jekyll build` with the locked gems (`.circleci/config.yml`) | every push |
+| CircleCI `build` | `bundle exec jekyll build` with the locked gems, then an HTMLProofer link check of `_site` (`.circleci/config.yml`) | every push |
 | `pages-build-deployment` | Jekyll build and deploy | every push to `master` |
 | Proof Atlas browser regression | Builds the site, serves it on `127.0.0.1:8833`, runs the `scripts/test-*-browser.cjs` suite in headless Chromium | pushes and pull requests touching Proof Atlas files or `_config.yml` |
 | Proof Atlas compiled proof audit | Installs the pinned Lean compiler and re-checks the published packets | same paths |
