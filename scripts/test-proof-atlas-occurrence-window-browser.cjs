@@ -1,7 +1,7 @@
 /* Actual node/field/binder clicks, deep node lookup, history and accessible rendering. */
 'use strict';
 const fs=require('fs'),vm=require('vm'),assert=require('assert/strict'),{chromium}=require('playwright');
-const origin=process.env.ATLAS_ORIGIN||'http://127.0.0.1:8836',dir=process.env.ATLAS_SCREENSHOTS||'/tmp/atlas-occurrence-window-browser';
+const origin=process.env.ATLAS_ORIGIN||'http://127.0.0.1:8833',dir=process.env.ATLAS_SCREENSHOTS||'/tmp/atlas-occurrence-window-browser';
 (async()=>{
  fs.mkdirSync(dir,{recursive:true});const browser=await chromium.launch({headless:true,executablePath:process.env.ATLAS_CHROMIUM_PATH}),page=await browser.newPage({viewport:{width:1700,height:1100}}),errors=[];
  page.on('pageerror',e=>errors.push(e.message));await page.addInitScript(()=>{if(location.protocol.startsWith('http')){localStorage.setItem('analytics-consent','no');localStorage.setItem('theme','light');}});
