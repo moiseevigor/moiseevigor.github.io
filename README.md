@@ -1,5 +1,6 @@
 # moiseevigor.github.io
 
+[![CircleCI](https://circleci.com/gh/moiseevigor/moiseevigor.github.io/tree/master.svg?style=svg)](https://circleci.com/gh/moiseevigor/moiseevigor.github.io/tree/master)
 [![Pages](https://github.com/moiseevigor/moiseevigor.github.io/actions/workflows/pages/pages-build-deployment/badge.svg?branch=master)](https://github.com/moiseevigor/moiseevigor.github.io/actions/workflows/pages/pages-build-deployment)
 [![Proof Atlas browser regression](https://github.com/moiseevigor/moiseevigor.github.io/actions/workflows/proof-atlas-browser.yml/badge.svg?branch=master)](https://github.com/moiseevigor/moiseevigor.github.io/actions/workflows/proof-atlas-browser.yml)
 [![Proof Atlas compiled proof audit](https://github.com/moiseevigor/moiseevigor.github.io/actions/workflows/proof-atlas-compiled-proofs.yml/badge.svg?branch=master)](https://github.com/moiseevigor/moiseevigor.github.io/actions/workflows/proof-atlas-compiled-proofs.yml)
@@ -44,7 +45,7 @@ Production build, written to `_site_production` so it never collides with the de
 docker compose --profile build run --rm build
 ```
 
-Link check of that build (the same check CircleCI ran historically):
+Link check of that build with HTMLProofer:
 
 ```bash
 docker compose --profile test run --rm htmlproofer
@@ -69,6 +70,7 @@ docker compose --profile test run --rm htmlproofer
 
 | Check | Runs | Trigger |
 |---|---|---|
+| CircleCI `build` | `bundle exec jekyll build` with the locked gems (`.circleci/config.yml`) | every push |
 | `pages-build-deployment` | Jekyll build and deploy | every push to `master` |
 | Proof Atlas browser regression | Builds the site, serves it on `127.0.0.1:8833`, runs the `scripts/test-*-browser.cjs` suite in headless Chromium | pushes and pull requests touching Proof Atlas files or `_config.yml` |
 | Proof Atlas compiled proof audit | Installs the pinned Lean compiler and re-checks the published packets | same paths |
