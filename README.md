@@ -1,57 +1,94 @@
-# [Tech Blog](https://moiseevigor.github.io)
+# moiseevigor.github.io
 
 [![CircleCI](https://circleci.com/gh/moiseevigor/moiseevigor.github.io/tree/master.svg?style=svg)](https://circleci.com/gh/moiseevigor/moiseevigor.github.io/tree/master)
+[![Pages](https://github.com/moiseevigor/moiseevigor.github.io/actions/workflows/pages/pages-build-deployment/badge.svg?branch=master)](https://github.com/moiseevigor/moiseevigor.github.io/actions/workflows/pages/pages-build-deployment)
+[![Proof Atlas browser regression](https://github.com/moiseevigor/moiseevigor.github.io/actions/workflows/proof-atlas-browser.yml/badge.svg?branch=master)](https://github.com/moiseevigor/moiseevigor.github.io/actions/workflows/proof-atlas-browser.yml)
+[![Proof Atlas compiled proof audit](https://github.com/moiseevigor/moiseevigor.github.io/actions/workflows/proof-atlas-compiled-proofs.yml/badge.svg?branch=master)](https://github.com/moiseevigor/moiseevigor.github.io/actions/workflows/proof-atlas-compiled-proofs.yml)
 
-## Research structure
+Source of [moiseevigor.github.io](https://moiseevigor.github.io), the personal site of Igor
+Moiseev: research series on sub-Riemannian geometry, optimal control, astrophysics and formal
+proofs, with the code, data and interactive tools behind them. It is a plain
+[Jekyll](https://jekyllrb.com) site served by GitHub Pages from the `master` branch; every push
+to `master` is live within a couple of minutes.
 
-Read [the publication and navigation contract](docs/research-publication.md) before editing the research presentation. The site uses Jekyll and vanilla CSS/JavaScript.
+## What is here
 
-- `_data/series.yml` owns research topics, scope and ordered outputs. `_data/research.yml` curates supported results and their evidence for Home and Research.
-- `/lab/` leads with positive findings, retains decisive negative conclusions, and links complete accounts, manuscripts and background.
-- `/projects/` identifies the distinct interactive tools and software libraries.
-- Proof Atlas has one overview, an article, a crossing microscope and a compiled Lean library, with a shared navigation. Language reference and coverage are supporting views.
-- Its primary objective is the [general geometric language research program](docs/proof-atlas-research-program.md). The compiled library provides bounded constructor geometry, binder telescopes, ordered applications and optional checked-type diagrams. Type diagrams use the same constructor rules and distinguish type-local binding from the original proof context. Repeated type structures share storage; occurrence contexts remain separate.
-- Checked lambdas have an optional introduction view: the domain uses Γ, the body uses Γ,x:A, and the conclusion discharges exactly that binder. Type diagrams retain those distinct contexts.
-- Individually queried applications also have an optional Π-application rule view. It connects native-checked function, argument and result judgments, with exact term routes and type-diagram links. These typing rules are distinct from the structural graph's child arrows.
-- `_posts/`, `_appendices/` and `_articles/` retain their scientific scope and historical URLs. Evidence remains in `research/` and public packets.
+| Path | Contents |
+|---|---|
+| `_posts/` | Blog posts, including each research program's opening article. Later parts of a series carry `hidden: true` so the home feed lists only Part 1. |
+| `_articles/`, `_appendices/` | Long-form articles and appendices that belong to a research program. |
+| `_data/series.yml` | The register of research programs: question, status, outcome, ordered parts. `/lab/` is rendered from it. |
+| `_data/research.yml` | Curated results and their evidence for the home and research pages. |
+| `_layouts/`, `_includes/`, `public/css/` | Templates and styles. `public/css/theme.css` is loaded last. |
+| `public/js/`, `public/code/` | Interactive pieces (prime-spiral explorer, galaxy simulator, Proof Atlas) and the Python scripts that generate figures. |
+| `public/img/posts/<post>/` | Figures and card thumbnails, one folder per post. |
+| `public/data/proof-atlas/` | Compiled packets served to the Proof Atlas library pages. |
+| `research/<program>/` | The research code behind each series: `README.md`, `scripts/`, `data/`, `artifacts/`, `docs/` with figures. Numbers quoted in posts are read from these artifacts. |
+| `scripts/` | Node checks (`test-*.cjs`, `check-*.cjs`) for the Proof Atlas pages and data; the CI workflows run them. |
+| `docs/` | Editorial contracts: how research is presented and navigated ([research-publication.md](docs/research-publication.md)) and the Proof Atlas program ([proof-atlas-research-program.md](docs/proof-atlas-research-program.md)). |
+| `llms.txt` | Curated index of citable content; only published series are listed. |
 
-Research posts contain significant scientific results, not run diaries, transient checkpoints or proposed roadmaps. Preserve the final qualified result and link the original evidence.
+## Run the site locally
 
-## Run Blog
+The local Ruby toolchain is not required; everything runs in Docker.
 
-Building image
-
-```
-docker build -t blog .
-```
-
-Serve blog from root dir
-
-```
-docker run --rm --volume="$PWD:/srv/jekyll" -p 4000:4000 -it blog jekyll serve --incremental
-```
-
-Open browser at http://localhost:4000/
-
-## Run Blog with `_drafts`
-
-With `--drafts` it will serve `*.markdown` files from `_drafts` folder.
-
-```
-docker run --rm --volume="$PWD:/srv/jekyll" -p 4000:4000 -it blog jekyll serve --drafts --incremental
+```bash
+docker compose up
 ```
 
-## Testing
+Open <http://localhost:4000/>. This serves with live reload, and the development overlay
+`_config.dev.yml` makes drafts, future-dated posts and `published: false` posts visible.
 
-```
-docker run --rm --volume="$PWD:/srv/jekyll" -it blog \
-    bundle exec htmlproofer ./_site \
-        --only-4xx \
-        --ignore_urls "/example.com/,/ws-na.amazon-adsystem.com/,/molpharm.aspetjournals.org/" \
-        --ignore-status-codes "403"
+Production build, written to `_site_production` so it never collides with the dev server:
+
+```bash
+docker compose --profile build run --rm build
 ```
 
+Link check of that build with HTMLProofer:
+
+```bash
+docker compose --profile test run --rm htmlproofer
+```
+
+## Writing a post
+
+- Front matter: `layout: post` (or `distill` for articles with margin notes), `title`,
+  `date`, `categories`, `permalink`, `image` (card thumbnail, at least 1200 px wide),
+  `math: true` when the post has formulas, and an optional one-line `result` shown on the card.
+- Math is KaTeX: `$…$` inline, `$$…$$` on its own line. Markdown is rendered by kramdown
+  first, and kramdown turns any line containing two `|` characters into a table row, so write
+  absolute values as `\lvert x \rvert`, never `|x|`.
+- Figures go in `public/img/posts/<post>/`, generated by a script in `public/code/` or
+  `research/`, and are embedded with descriptive alt text. Transparent PNGs read on both the
+  light and dark theme.
+- A new research series registers a program in `_data/series.yml` and gets a
+  `research/<program>/` folder. The conventions are in
+  [docs/research-publication.md](docs/research-publication.md).
+
+## Checks
+
+| Check | Runs | Trigger |
+|---|---|---|
+| CircleCI `build` | `bundle exec jekyll build` with the locked gems, then an HTMLProofer link check of `_site` (`.circleci/config.yml`) | every push |
+| `pages-build-deployment` | Jekyll build and deploy | every push to `master` |
+| Proof Atlas browser regression | Builds the site, serves it on `127.0.0.1:8833`, runs the `scripts/test-*-browser.cjs` suite in headless Chromium | pushes and pull requests touching Proof Atlas files or `_config.yml` |
+| Proof Atlas compiled proof audit | Installs the pinned Lean compiler and re-checks the published packets | same paths |
+| Proof Atlas named theorem inspection | Named-theorem spot checks | manual and Proof Atlas paths |
+
+To run a check locally: `node scripts/<name>.cjs` with Node 22. Browser tests need Playwright's
+Chromium and a server for `_site_production`; they read the site from `ATLAS_ORIGIN`
+(default `http://127.0.0.1:8833`) and write screenshots to `ATLAS_SCREENSHOTS`.
+
+```bash
+python3 -m http.server 8833 --bind 127.0.0.1 --directory _site_production &
+node scripts/test-proof-atlas-grammar.cjs
+```
+
+Research scripts state their own command in the program's `README.md`, for example
+`python3 research/galactic-spirals/scripts/pitch_tests.py`.
 
 ## License
 
-Open sourced under the [MIT license](LICENSE.md).
+Open sourced under the [MIT license](LICENSE.md). Research code and data can be cited with
+[CITATION.cff](CITATION.cff).

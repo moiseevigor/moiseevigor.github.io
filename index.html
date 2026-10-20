@@ -28,7 +28,7 @@ page_class: home
     <div class="hc-meta">
       <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
       {%- if post.series %}
-      <a class="hc-series" href="/lab/#{{ post.series }}">{{ post.series_title | default: sdata.title }}</a>
+      <a class="hc-series" href="/lab/{% if site.data.research.order contains post.series %}#{{ post.series }}{% endif %}">{{ post.series_title | default: sdata.title }}</a>
       {%- if post.series_part and sdata %}<span>Part {{ post.series_part }} of {{ sdata.posts.size }}</span>{% endif %}
       {%- elsif post.categories.size > 0 %}
       <span class="hc-series">{{ post.categories | first | capitalize }}</span>
