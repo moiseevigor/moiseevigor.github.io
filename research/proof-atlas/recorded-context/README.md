@@ -6,7 +6,7 @@ The current input inventory has five project declarations and twenty publisher-a
 
 ## Identity and binding
 
-The bridge hashes the original decoded packet and evidence bytes, rather than a reserialized JSON object. It snapshots those bytes and descriptor fields before asynchronous hashing. The existing profile validator checks the compiler/environment attestations, packet identity, query contexts, argument order, introduction scope, packing and type table. The browser does not rerun Lean or independently inspect private source module bytes. The producer's module-hash attestation and the browser's byte-verification scope remain separate fields.
+A separate bounded byte decoder leaves the historical, hash-pinned JSON loader unchanged. The bridge hashes the original decoded packet and evidence bytes, rather than a reserialized JSON object. It snapshots those bytes and descriptor fields before asynchronous hashing. The existing profile validator checks the compiler/environment attestations, packet identity, query contexts, argument order, introduction scope, packing and type table. The browser does not rerun Lean or independently inspect private source module bytes. The producer's module-hash attestation and the browser's byte-verification scope remain separate fields.
 
 `ProofAtlasDeepTypingAttachment/2` preserves:
 

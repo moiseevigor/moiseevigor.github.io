@@ -34,7 +34,9 @@
     const d=host.PROOF_ATLAS_OCCURRENCE_TYPES?.records.find(d=>d.edition===edition.id&&d.name===record.name&&d.indexSha256===record.indexSha256&&d.sourceSha256===record.sourceSha256);
     if(!d)return {cases:[],attach:async()=>null};
     await component('ProofAtlasOccurrenceTypes','/public/js/proof-atlas-occurrence-types.js?v=12');
-    const bytes=await A.compressedBytes(d.file,d.sha256,{maxBytes:67108864,signal:nativeController.signal});
+    await component('ProofAtlasLibraryBytes','/public/js/proof-atlas-library-bytes.js?v=1');
+    sourceBytes??=await host.ProofAtlasLibraryBytes.compressedBytes(record.indexFile,record.indexSha256,{maxBytes:67108864,signal:nativeController.signal});
+    const bytes=await host.ProofAtlasLibraryBytes.compressedBytes(d.file,d.sha256,{maxBytes:67108864,signal:nativeController.signal});
     if(disposed)throw Error('Native record request cancelled');
     return host.ProofAtlasDeepContext.recorded(sourceBytes,bytes,d,record);
    }
@@ -147,7 +149,9 @@
     edition=library.editions.find(e=>e.id===initial.searchParams.get('edition'))||library.editions.find(e=>e.id===library.defaultEdition)||library.editions[0];record=edition.declarations.find(r=>r.name===initial.searchParams.get('proof'));
     if(!record)throw Error('Declaration unavailable; choose an occurrence from the library');
     if(record.uniqueNodes>P.limits.sourceNodes)throw Error('This occurrence profile supports at most '+P.limits.sourceNodes+' stored source nodes');
-    sourceBytes=await A.compressedBytes(record.indexFile,record.indexSha256,{maxBytes:67108864,signal:nativeController.signal});data=A.validateIndex(JSON.parse(new TextDecoder().decode(sourceBytes)),record);
+    try{await component('ProofAtlasLibraryBytes','/public/js/proof-atlas-library-bytes.js?v=1');}catch(error){nativeError=error.message;}
+    if(host.ProofAtlasLibraryBytes){sourceBytes=await host.ProofAtlasLibraryBytes.compressedBytes(record.indexFile,record.indexSha256,{maxBytes:67108864,signal:nativeController.signal});data=A.validateIndex(JSON.parse(new TextDecoder().decode(sourceBytes)),record);}
+    else data=A.validateIndex(await A.compressed(record.indexFile,record.indexSha256,{maxBytes:67108864,signal:nativeController.signal}),record);
    }
    W.validateSource(data,record);if(disposed)return;
    const header=el('header',undefined,'pow-header');title.textContent=record.name;subtitle.textContent=control?'Serialized syntax control · no kernel typing claim':'Source occurrence geometry · '+edition.label;

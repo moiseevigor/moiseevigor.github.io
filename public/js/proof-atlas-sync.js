@@ -48,7 +48,7 @@
  }
  async function engineReady(){
   if(!engine)engine=(async()=>{
-   await metadataReady();if(!window.ProofAtlasLibraryData)await script('/public/js/proof-atlas-library-data.js?v=4');
+   await metadataReady();if(!window.ProofAtlasLibraryData)await script('/public/js/proof-atlas-library-data.js?v=3');
    try{
     if(!window.PROOF_ATLAS_OCCURRENCE_TYPES)await script('/public/data/proof-atlas/occurrence-types-manifest.js?v=4');
     if(!window.ProofAtlasOccurrenceTypes)await script('/public/js/proof-atlas-occurrence-types.js?v=12');

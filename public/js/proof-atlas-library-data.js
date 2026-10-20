@@ -20,7 +20,7 @@
  function levelsKey(levels){levelDemand(Array.isArray(levels),'universe argument slots');return levels.length?JSON.stringify(levelCanonical(compileLevels(levels))):'[]';}
  function payloadKey(kind,p){const normalized={...p};if(kind===3)normalized.level=compileLevels([p.level]);if(kind===4){levelDemand(Array.isArray(p.levels),'constant universe slots');normalized.levels=p.levels.length?compileLevels(p.levels):[];}return JSON.stringify(levelCanonical(normalized));}
  async function digest(bytes){return [...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(x=>x.toString(16).padStart(2,'0')).join('');}
- async function compressedBytes(file,hash,options={}){
+ async function compressed(file,hash,options={}){
   const signal=options.signal,check=()=>{if(signal?.aborted)throw signal.reason||Error('Proof load cancelled');};check();
   const limit=options.maxBytes;if(limit!==undefined&&(!Number.isInteger(limit)||limit<1||limit>67108864))throw Error('Invalid proof asset byte bound');
   if(options.expectedBytes!==undefined&&(!Number.isInteger(options.expectedBytes)||options.expectedBytes<0||(limit!==undefined&&options.expectedBytes>limit)))throw Error('Invalid expected proof asset size');
@@ -32,9 +32,8 @@
    catch(error){await reader.cancel(error).catch(()=>{});throw error;}finally{reader.releaseLock();}
   }else bytes=await new Response(stream).arrayBuffer();check();
   if(options.expectedBytes!==undefined&&bytes.byteLength!==options.expectedBytes)throw Error('Proof asset decoded size mismatch');
-  if(await digest(bytes)!==hash)throw Error('Proof asset SHA-256 mismatch: '+file);check();return bytes;
+  if(await digest(bytes)!==hash)throw Error('Proof asset SHA-256 mismatch: '+file);check();return JSON.parse(new TextDecoder().decode(bytes));
  }
- async function compressed(file,hash,options={}){return JSON.parse(new TextDecoder().decode(await compressedBytes(file,hash,options)));}
 
  function children(data,i){return data.children[i];}
  function validateIndex(data,record){
@@ -77,6 +76,6 @@
   case 'proj':return cs[0]+'.'+p.typeName+'['+p.index+']';
   default:throw Error('Unknown expression constructor');}}
  function termLines(data,root){return reachable(data,root).sort((a,b)=>a-b).map(i=>'e'+i+' := '+describe(data,i));}
- const api={compileLevels,validateLevelGraph,levelNameIdentity,payloadKey,levelsKey,levelText,fields,kinds,children,describe,termLines,path,binding,binder,walk,reachable,routes,validateIndex,digest,compressed,compressedBytes,open};
+ const api={compileLevels,validateLevelGraph,levelNameIdentity,payloadKey,levelsKey,levelText,fields,kinds,children,describe,termLines,path,binding,binder,walk,reachable,routes,validateIndex,digest,compressed,open};
  if(typeof module!=='undefined'&&module.exports)module.exports=api;else host.ProofAtlasLibraryData=api;
 })(typeof window==='undefined'?globalThis:window);
