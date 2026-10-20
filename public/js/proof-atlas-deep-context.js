@@ -75,10 +75,64 @@
   }
   demand(queries===d.queries,'native query inventory');
   return Object.freeze({evidenceSha256:d.sha256,cases:Object.freeze(cases),case:name=>byName.get(name)||null,
-   attach:async(data,record)=>{const found=cases.find(c=>c.name===record.name&&c.record.indexSha256===record.indexSha256);if(!found)return null;demand(record.uniqueNodes===found.record.uniqueNodes&&canonical(data.declaration)===canonical(found.data.declaration)&&await digest(canonical(graph(data)))===found.sourceGraphSha256,'selected source table differs');freeze(data);acceptedSources.set(data,{sourceGraphSha256:found.sourceGraphSha256,sourceSha:record.indexSha256,caseName:record.name});return found;}});
+   attach:async(data,record)=>{const found=cases.find(c=>c.name===record.name&&c.record.indexSha256===record.indexSha256);if(!found)return null;freeze(data);demand(record.uniqueNodes===found.record.uniqueNodes&&canonical(data.declaration)===canonical(found.data.declaration)&&await digest(canonical(graph(data)))===found.sourceGraphSha256,'selected source table differs');acceptedSources.set(data,{sourceGraphSha256:found.sourceGraphSha256,sourceSha:record.indexSha256,caseName:record.name});return found;}});
  }
+ // Existing extraction profiles retain their native provenance and shared type roots.
+ async function recorded(sourceBytes,evidenceBytes,d,record){
+  demand(sourceBytes?.byteLength>0&&sourceBytes.byteLength<=67108864&&evidenceBytes?.byteLength>0&&evidenceBytes.byteLength<=67108864,'recorded input byte bound');
+  const capture=b=>{demand(b instanceof ArrayBuffer||ArrayBuffer.isView(b),'recorded byte buffer');const view=b instanceof ArrayBuffer?new Uint8Array(b):new Uint8Array(b.buffer,b.byteOffset,b.byteLength);demand(view.buffer instanceof ArrayBuffer,'recorded non-shared byte buffer');return view.slice();};
+  sourceBytes=capture(sourceBytes);evidenceBytes=capture(evidenceBytes);d=JSON.parse(JSON.stringify(d));record=JSON.parse(JSON.stringify(record));
+  demand(hash(d?.sha256)&&hash(record?.indexSha256)&&hash(record.sourceSha256)&&d.name===record.name&&d.indexSha256===record.indexSha256&&d.sourceSha256===record.sourceSha256,'recorded descriptor identity');
+  demand(natural(record.uniqueNodes)&&record.uniqueNodes>0&&record.uniqueNodes<=P.limits.sourceNodes,'recorded source bound');
+  demand(typeof d.edition==='string'&&typeof d.file==='string'&&/^\/public\/data\/proof-atlas\/(occurrence-types|goedel-sample)\/[A-Za-z0-9_.-]+\.json\.gz$/.test(d.file),'recorded evidence location');
+  demand(await A.digest(sourceBytes)===record.indexSha256&&await A.digest(evidenceBytes)===d.sha256,'recorded input hash');
+  const source=A.validateIndex(JSON.parse(new TextDecoder().decode(sourceBytes)),record),e=JSON.parse(new TextDecoder().decode(evidenceBytes));
+  demand(source.kind.length<=P.limits.sourceNodes,'recorded source bound');
+  const O=node?require('./proof-atlas-occurrence-types'):host.ProofAtlasOccurrenceTypes;
+  demand(O?.validate&&O?.indexObservations,'existing native profile validator');O.validate(e,source,record);demand(e.source.edition===d.edition,'recorded edition');
+  const indexed=O.indexObservations(e,source),sourceGraphSha256=await digest(canonical(graph(source))),pools=new Map(),entries=new Map(),list=[];
+  freeze(source);
+  for(const q of indexed.lookup.values()){
+   if(q.status!=='checked')continue;
+   demand(list.length<4096,'recorded occurrence inventory bound');
+   const route=P.encode(q.route.root,q.route.slots),resolved=P.resolve(source,route),contextDepths=[],contextNodes=new Uint32Array(q.context.length);
+   demand(q.context.length<=512&&resolved.node===q.node&&resolved.scopeDepth===q.context.length,'recorded occurrence context');
+   q.context.forEach((b,index)=>{demand(b.route.root===q.route.root&&b.route.slots.length<q.route.slots.length&&b.route.slots.every((s,j)=>s===q.route.slots[j])&&P.resolve(source,P.encode(b.route.root,b.route.slots)).node===b.node,'recorded binder prefix');contextDepths.push(b.route.slots.length);contextNodes[index]=b.node;});
+   const g=q.typeGraph;let pool=pools.get(g);
+   if(!pool){
+    // Validate the shared storage once, not once for every recorded root.
+    const storage=table({...g,serialization:'ExprDAG/1',roots:[q.typeRoot]},record.name+' / recorded type',record.sourceSha256,d.sha256,['computed.native.type']);
+    pool={sha256:await digest(canonical(g)),roots:new Map(),storage:freeze(storage.data)};pools.set(g,pool);
+   }
+   let component=pool.roots.get(q.typeRoot);
+   if(!component){
+    const identity={format:'ProofAtlasRecordedTypeComponent/1',evidenceSha256:d.sha256,typeTableSha256:pool.sha256,typeTableRoot:q.typeRoot},componentHash=await digest(canonical(identity));
+    component={data:freeze({...pool.storage,roots:[q.typeRoot]}),record:freeze({name:record.name+' / recorded type',uniqueNodes:g.kind.length,indexSha256:componentHash,sourceSha256:record.sourceSha256}),sha256:componentHash};pool.roots.set(q.typeRoot,component);
+   }
+   demand(component.data.neededScope[q.typeRoot]<=q.context.length,'recorded type context');
+   const primary=indexed.entries.get(q.route.root+':'+q.route.slots.join('.'))?.status==='checked',origin=primary?null:q.typingOrigin;
+   demand(primary||['application-trace-observation','lambda-introduction-observation'].includes(origin?.kind),'recorded observation origin');
+   const queryRoute=primary?route:P.encode(origin.query.route.root,origin.query.route.slots),query=primary?q:indexed.entries.get(origin.query.route.root+':'+origin.query.route.slots.join('.'));
+   demand(query?.status==='checked'&&P.resolve(source,queryRoute).node===(primary?q.node:origin.query.node),'recording parent query');
+   const recording=freeze({kind:primary?'primary-query':origin.kind,queryRoute,queryNode:query.node,...(origin?{part:origin.part,...(origin.slot?{slot:origin.slot}:{})}:{})});
+   const contextLength=q.context.length;
+   const entry=Object.freeze({format:'ProofAtlasDeepTypingAttachment/2',profile:'native-extraction-record',evidenceSha256:d.sha256,evidenceFile:d.file,caseName:record.name,sourceIndexSha256:record.indexSha256,sourceGraphSha256,route:freeze(route),node:q.node,role:q.role,contextLength,
+    typeTableSha256:pool.sha256,typeTableRoot:q.typeRoot,typeComponentSha256:component.sha256,typeData:component.data,typeRecord:component.record,typeText:q.typeText,recording,
+    producerSourceModuleHashVerified:e.sourceModuleHashVerified===true,readerSourceModuleBytesVerified:false,
+    contextAt:index=>{demand(natural(index)&&index<contextLength,'recorded context ordinal');return {ordinal:index,node:contextNodes[index],route:P.prefix(route,contextDepths[index])};}});
+   attestedEntries.add(entry);entries.set(routeKey(route),entry);list.push(entry);
+  }
+  demand(list.length===[...indexed.lookup.values()].filter(q=>q.status==='checked').length,'recorded checked inventory');
+  const value=Object.freeze({name:record.name,data:source,record:freeze({...record}),sourceGraphSha256,entries:Object.freeze(list),get:route=>{P.parse(route);return entries.get(routeKey(route))||null;},
+   provenance:freeze({profile:'native-extraction-record',nativeFormat:e.format,environment:e.environment,packing:e.packing||null,source:e.source,publisherOrigin:record.origin||null,producerSourceModuleHashVerified:e.sourceModuleHashVerified===true,readerSourceModuleBytesVerified:false}),
+   stats:Object.freeze({primaryQueries:[...indexed.entries.values()].filter(q=>q.status==='checked').length,unavailableQueries:[...indexed.entries.values()].filter(q=>q.status==='unavailable').length,explicitObservations:indexed.observed,typedOccurrences:list.length,sharedTypeTables:pools.size,typeComponents:[...pools.values()].reduce((s,p)=>s+p.roots.size,0),storedTypeNodes:[...pools.keys()].reduce((s,g)=>s+g.kind.length,0)})});
+  acceptedSources.set(source,{sourceGraphSha256,sourceSha:record.indexSha256,caseName:record.name});
+  return Object.freeze({evidenceSha256:d.sha256,cases:Object.freeze([value]),case:name=>name===record.name?value:null,
+   attach:async(data,target)=>{if(target.name!==record.name||target.indexSha256!==record.indexSha256||target.sourceSha256!==record.sourceSha256)return null;freeze(data);demand(target.uniqueNodes===record.uniqueNodes&&canonical(data.declaration)===canonical(source.declaration)&&await digest(canonical(graph(data)))===sourceGraphSha256,'recorded source table differs');acceptedSources.set(data,{sourceGraphSha256,sourceSha:record.indexSha256,caseName:record.name});return value;}});
+ }
+ function typeIdentity(entry){return entry.typeTableSha256?{typeTableSha256:entry.typeTableSha256,typeTableRoot:entry.typeTableRoot,typeComponentSha256:entry.typeComponentSha256}:{typeGraphSha256:entry.typeGraphSha256};}
  function typeScene(entry,sourceData,route=P.encode(0,[]),options={}){
-  demand(attestedEntries.has(entry)&&entry?.format==='ProofAtlasDeepTypingAttachment/1'&&hash(entry.evidenceSha256),'record attachment');
+  demand(attestedEntries.has(entry)&&['ProofAtlasDeepTypingAttachment/1','ProofAtlasDeepTypingAttachment/2'].includes(entry?.format)&&hash(entry.evidenceSha256),'record attachment');
   const accepted=acceptedSources.get(sourceData);demand(accepted?.sourceGraphSha256===entry.sourceGraphSha256&&accepted.sourceSha===entry.sourceIndexSha256&&accepted.caseName===entry.caseName,'original source attachment');
   demand((options.maxNodes??9)<=limits.typeNodes&&(options.maxDepth??2)<=limits.typeDepth,'type display bounds');
   const raw=W.create(entry.typeData,entry.typeRecord,route,{maxNodes:options.maxNodes??9,maxDepth:options.maxDepth??2,maxLayerNodes:3});
@@ -92,11 +146,11 @@
    }
    return {...n,payload:entry.typeData.payloads[n.node],namespace:'computed-native-type',binding,typeStatus:'type-syntax-only'};
   });
-  const scene={format:'ProofAtlasCompactTypeScene/1',namespace:'computed-native-type',origin:{evidenceSha256:entry.evidenceSha256,sourceIndexSha256:entry.sourceIndexSha256,sourceRoute:entry.route,typeGraphSha256:entry.typeGraphSha256,contextLength:entry.contextLength},
+  const scene={format:'ProofAtlasCompactTypeScene/1',namespace:'computed-native-type',origin:{evidenceSha256:entry.evidenceSha256,sourceIndexSha256:entry.sourceIndexSha256,sourceRoute:entry.route,...typeIdentity(entry),contextLength:entry.contextLength,...(entry.recording?{recording:entry.recording}:{})},
    root:{node:raw.root.node,route:raw.root.route,category:'recorded-type-expression'},nodes,edges:raw.edges,links:nodes.filter(n=>n.binding).map(n=>({from:n.id,...n.binding})),stats:raw.stats,
    guarantee:'Structure of a recorded native type in its original context. Type descendants have no additional typing judgments.'};
   demand(new TextEncoder().encode(JSON.stringify(scene)).length<=W.limits.metadataBytes,'type scene metadata bound');
   return scene;
  }
- const api={limits,descriptor,prepare,typeScene};if(node)module.exports=api;else host.ProofAtlasDeepContext=api;
+ const api={limits,descriptor,prepare,recorded,typeIdentity,typeScene};if(node)module.exports=api;else host.ProofAtlasDeepContext=api;
 })(typeof window==='undefined'?globalThis:window);

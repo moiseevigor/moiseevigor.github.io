@@ -18,7 +18,7 @@
    const term=el('pre',A.describe(entry.typeData,n.node));term.tabIndex=0;
    inspector.replaceChildren(el('h3',n.glyph+' '+n.kind+' · type e'+n.node),term,el('p','Computed type syntax at depth '+n.route.depth+'. No additional native typing judgment is attached here.'),button('Focus type expression',()=>focus(n.route)));
    if(n.binding){const b=n.binding,external=b.namespace==='original-source-context';const jump=button(external?'Go to original Γ slot '+(b.ordinal+1):'Go to type binder',()=>external?onSource(b.route):focus(b.route));jump.dataset.typeBinding=b.namespace;inspector.append(jump);}
-   const exact=el('details');exact.append(el('summary','Computed type address'),el('pre',JSON.stringify({namespace:'computed-native-type',typeGraphSha256:entry.typeGraphSha256,typeRoute:n.route,originalSourceRoute:entry.route,evidenceSha256:entry.evidenceSha256},null,2)));inspector.append(exact);
+   const exact=el('details');exact.append(el('summary','Computed type address'),el('pre',JSON.stringify({namespace:'computed-native-type',...T.typeIdentity(entry),typeRoute:n.route,originalSourceRoute:entry.route,evidenceSha256:entry.evidenceSha256,recording:entry.recording},null,2)));inspector.append(exact);
    const payload=el('details');payload.append(el('summary','Recorded type constructor payload'),el('pre',JSON.stringify(n.payload,null,2)));inspector.append(payload);
   }
   function focus(route){
@@ -33,7 +33,7 @@
    const positions=new Map(),cards=new Map();
    for(const n of scene.nodes){
     const pos={x:20+n.depth*300,y:20+n.row*260};positions.set(n.id,pos);
-    const card=el('article',undefined,'pow-card'),pick=button(n.glyph+' '+n.kind+' · type e'+n.node,()=>inspect(n)),ports=[];pick.dataset.typeNode=n.id;pick.setAttribute('aria-pressed','false');card.dataset.constructor=n.kind;card.style.left=pos.x+'px';card.style.top=pos.y+'px';pick.append(el('small','Computed type · depth '+n.route.depth));card.append(pick,el('p',A.describe(entry.typeData,n.node),'pow-formula'));
+    const card=el('article',undefined,'pow-card'),pick=button(n.glyph+' '+n.kind+' · type e'+n.node,()=>inspect(n)),formula=el('p',A.describe(entry.typeData,n.node),'pow-formula'),ports=[];formula.tabIndex=0;pick.dataset.typeNode=n.id;pick.setAttribute('aria-pressed','false');card.dataset.constructor=n.kind;card.style.left=pos.x+'px';card.style.top=pos.y+'px';pick.append(el('small','Computed type · depth '+n.route.depth));card.append(pick,formula);
     for(const port of n.ports){const b=button(port.kernelField+' · '+(port.displayed?'shown':port.expanded+' hidden'),()=>focus(port.route));b.className='pow-port'+(port.displayed?'':' pow-frontier');b.dataset.typeField=port.slot;card.append(b);ports.push(b);}
     let binding=null;
     if(n.binding){const external=n.binding.namespace==='original-source-context';binding=button(external?'Γ slot '+(n.binding.ordinal+1)+' of '+entry.contextLength:'↪ type binder',()=>external?onSource(n.binding.route):focus(n.binding.route));binding.className='pow-binding';binding.dataset.typeBoundary=n.binding.namespace;card.append(binding);}
@@ -54,7 +54,7 @@
    inspect(scene.nodes[0]);scaled();viewport.scrollTo(0,0);
   }
   focus(P.encode(0,[]));
-  return {getScene:()=>scene,getSnapshot:()=>({namespace:'computed-native-type',sourceRoute:entry.route,typeRoute:selected.route,node:selected.node,evidenceSha256:entry.evidenceSha256,typeGraphSha256:entry.typeGraphSha256}),focus,dispose:()=>{disposed=true;shell.remove();parent.hidden=true;}};
+  return {getScene:()=>scene,getSnapshot:()=>({namespace:'computed-native-type',sourceRoute:entry.route,typeRoute:selected.route,node:selected.node,evidenceSha256:entry.evidenceSha256,...T.typeIdentity(entry),...(entry.recording?{recording:entry.recording}:{})}),focus,dispose:()=>{disposed=true;shell.remove();parent.hidden=true;}};
  }
  host.ProofAtlasCompactTypeView={mount};
 })(typeof window==='undefined'?globalThis:window);

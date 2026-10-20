@@ -953,3 +953,11 @@ semantic abstraction and human comprehension. The older 512-entry renderer and
 native transport retain their existing limits.
 
 [Method and reproduction](/research/proof-atlas/deep-typing/README.md) · [Context checker](/research/proof-atlas/deep-typing/ContextQuery.lean) · [Independent compiled reader](/scripts/test-proof-atlas-deep-typing.cjs)
+
+## Existing project records in occurrence windows
+
+The bounded occurrence reader also accepts the existing native extraction records for five project declarations and twenty publisher-attributed AI-source declarations. Its 1,129 direct queries and 1,174 explicit application/introduction observations remain distinct. Each recorded position retains its exact source route, context, selected root in the shared type table and original extraction provenance. An observation links back to the query that recorded it. A missing position remains without a recorded type.
+
+The type view uses the same constructor ports and scope rules in a separate computed namespace. Type-local navigation preserves the source selection; original Γ links return to exact source binders. In `JacobiCore.E_pos`, shared source node 17 has both a value use and a proof use under different contexts. The reader preserves those contextual judgments rather than assigning a single role to the DAG node. Shared type arrays are stored once, and the recorded-position list is paginated.
+
+This reuses published judgments; it adds no kernel checks or inventory-wide type coverage. Complete source packets and the selected type table still load within fixed bounds. The browser checks correspondence and does not independently verify private module bytes or original AI generation. [Method and limits](/research/proof-atlas/recorded-context/README.md) · [All-record correspondence audit](/scripts/test-proof-atlas-recorded-context.cjs) · [Browser checks](/scripts/test-proof-atlas-recorded-context-browser.cjs). The general program remains active; there is no new blog claim for this bridge.
