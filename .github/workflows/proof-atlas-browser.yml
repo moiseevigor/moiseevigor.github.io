@@ -4,6 +4,12 @@ on:
     branches: [master]
     paths:
       - '_config.yml'
+      - 'public/data/proof-atlas/occurrence-focus-laws.js'
+      - 'public/js/proof-atlas-packed-routes.js'
+      - 'public/js/proof-atlas-occurrence-*.js'
+      - 'public/css/proof-atlas-occurrence-window.css'
+      - 'scripts/test-proof-atlas-occurrence-window*.cjs'
+      - 'research/proof-atlas/occurrence-focus/**'
       - 'public/js/proof-atlas-cut-certificate.js'
       - 'scripts/*proof-atlas-cut-certificate*.cjs'
       - 'research/proof-atlas/cut-records/**'
@@ -230,6 +236,12 @@ on:
   pull_request:
     paths:
       - '_config.yml'
+      - 'public/data/proof-atlas/occurrence-focus-laws.js'
+      - 'public/js/proof-atlas-packed-routes.js'
+      - 'public/js/proof-atlas-occurrence-*.js'
+      - 'public/css/proof-atlas-occurrence-window.css'
+      - 'scripts/test-proof-atlas-occurrence-window*.cjs'
+      - 'research/proof-atlas/occurrence-focus/**'
       - 'public/js/proof-atlas-cut-certificate.js'
       - 'scripts/*proof-atlas-cut-certificate*.cjs'
       - 'research/proof-atlas/cut-records/**'
@@ -484,6 +496,7 @@ jobs:
           node scripts/test-proof-atlas-local-refinement.cjs
           node scripts/test-proof-atlas-local-refinement-browser.cjs
           node scripts/test-proof-atlas-type-interface-browser.cjs
+          node scripts/test-proof-atlas-occurrence-window-browser.cjs
           node scripts/test-proof-atlas-cut-certificate-browser.cjs
           node scripts/test-proof-atlas-cut-native-browser.cjs
           node scripts/test-proof-atlas-local-cut-context.cjs

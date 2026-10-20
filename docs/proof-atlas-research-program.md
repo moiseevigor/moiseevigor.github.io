@@ -902,3 +902,21 @@ evidence. No JavaScript, source-typing, lexical-link, semantic or comprehension
 proof follows from them.
 
 [Definitions, evidence and scope](/research/proof-atlas/local-cut-context/README.md) · [Lean laws](/research/proof-atlas/local-cut-context/LocalContext.lean) · [Compiled records](/public/data/proof-atlas/local-cut-context-manifest.js) · [Independent reader](/scripts/proof-atlas-local-cut-context-audit.cjs)
+
+
+## Original paths through deep source cuts
+
+Five kernel-checked focusing laws compose finite source-path segments while
+preserving the original endpoint and lexical target. The optional occurrence
+window in the compiled library uses compact original paths and draws external
+binders as context references outside the selected subtree count. It does not
+rebase a focused subtree or infer typing from a shared node identifier.
+
+The independent walker checks 4,267 selected cuts over the two project snapshots,
+twenty publisher-attributed Goedel source packets and five large/deep controls.
+A source-only variable at depth 10,001 remains directly selectable with its
+original binder. Existing native query and source-cut record limits remain
+separate; these checks do not verify the codec or renderer, establish semantic
+compression, or measure comprehension.
+
+[Definitions, bounds and reproduction](/research/proof-atlas/occurrence-focus/README.md)
