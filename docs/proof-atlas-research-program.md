@@ -961,3 +961,24 @@ The bounded occurrence reader also accepts the existing native extraction record
 The type view uses the same constructor ports and scope rules in a separate computed namespace. Type-local navigation preserves the source selection; original Γ links return to exact source binders. In `JacobiCore.E_pos`, shared source node 17 has both a value use and a proof use under different contexts. The reader preserves those contextual judgments rather than assigning a single role to the DAG node. Shared type arrays are stored once, and the recorded-position list is paginated.
 
 This reuses published judgments; it adds no kernel checks or inventory-wide type coverage. Complete source packets and the selected type table still load within fixed bounds. The browser checks correspondence and does not independently verify private module bytes or original AI generation. [Method and limits](/research/proof-atlas/recorded-context/README.md) · [All-record correspondence audit](/scripts/test-proof-atlas-recorded-context.cjs) · [Browser checks](/scripts/test-proof-atlas-recorded-context-browser.cjs). The general program remains active; there is no new blog claim for this bridge.
+
+## Composing constructions through original context references
+
+A separate core-only reference model records Π introduction and one stage of Π
+application at original source positions. Native checks retain the prior domain
+context, extended body context and dependent result substitution. A composed
+child must have the same exact premise position, context, role and structurally
+identical recorded type. Unsupported constructions remain source boundaries.
+
+Query-relative addresses avoid repeating deep source paths for each displayed
+premise and external binder. They recover the complete packed-route scene against
+the authenticated native inventory, including separate computed-type origins.
+Finite checks cover twelve construction records in eight synthetic packets,
+108 cuts in each address representation, and a premise at depth 10,002. The
+same-node type/value and dependent-substitution controls retain their different
+original binders. This is source/context correspondence and metadata reduction,
+not semantic proof compression, a verified codec or a comprehension result.
+
+The reference model is not yet integrated into the browser or adapted to the
+project/AI construction records. Full source and type tables remain resident.
+[Rules, evidence, reproduction and limits](/research/proof-atlas/occurrence-constructions/README.md).
