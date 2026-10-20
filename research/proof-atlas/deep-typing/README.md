@@ -36,11 +36,39 @@ an unresolved metavariable. The independent reader recomputes source paths,
 binding targets, scope requirements and counts, compares observations and
 passes the original selections through the existing occurrence geometry.
 
-The source-only scene does not acquire a native type from these checks.
-Browser attachment, complete proof-corpus typing, source syntax recovery,
-formal verification of the query/codec/renderer, semantic abstraction and
-measured comprehension remain separate work. The full research program
-remains active. No blog result is published for this prototype.
+The underlying source cut stays structural. An optional reader layer attaches
+a native record only to its exact source hash and original packed route.
+Every other position remains without recorded typing. Computed type navigation
+uses the same constructor glyphs and ordered fields, with separate type-local
+binders and links back to the original source Γ. Moving inside a type does not
+move the source selection or infer additional type judgments. Explicit Γ jumps
+return to the original source binder.
+
+The compact type cut retains at most thirteen term occurrences, depth three
+and three nodes per layer, plus displayed context references. It stores no
+copied ancestor path per context entry; only displayed references materialize
+their original packed prefix. A type-node number selects a representative
+occurrence; other uses of that shared node can have different bindings.
+
+The existing 512-entry renderer and native transport are unchanged. The new
+reader overlay consumes the finite core-only records through its own explicit
+attachment format. The producer's immutable `browserTypingAttached: false`
+records its earlier extraction scope; the separate attachment checks establish
+the current reader correspondence. This does not certify the JavaScript or
+browser, type the project/AI corpora, recover source syntax, establish semantic
+abstraction or measure comprehension. The full research program remains active.
+No blog result is published for this prototype.
+
+The attachment audit checks all 27 records and 60 type cuts, including both
+type-local binding and original Γ links. Twelve invalid attachment, scope,
+identity, mutation or limit cases are refused. The browser suite selects all
+27 recorded source positions, tests type and source binder jumps, and exercises
+deep representative navigation, shared-node contexts, let scope, missing code,
+corrupt evidence and late loads. These checks establish finite correspondence;
+they do not turn type descendants into additional native queries.
+
+[Context control](/projects/proof-atlas/library/?view=occurrence&control=checked-context&case=dependent-domain) ·
+[Deep equality control](/projects/proof-atlas/library/?view=occurrence&control=checked-context&case=deep-reflexivity)
 
 The driver also replays the existing public `AtlasLargeCutControl.deepSucc`
 packet in core Lean. Its source bytes, hash and original `not-claimed`
@@ -67,12 +95,15 @@ python3 research/proof-atlas/deep-typing/verify.py \
 node scripts/test-proof-atlas-deep-typing.cjs /tmp/atlas-deep-typing
 python3 research/proof-atlas/deep-typing/pack.py /tmp/atlas-deep-typing
 node scripts/test-proof-atlas-deep-typing.cjs
+node scripts/test-proof-atlas-deep-context.cjs
+# Build and serve the production site; set ATLAS_ORIGIN/ATLAS_CHROMIUM_PATH if needed.
+node scripts/test-proof-atlas-deep-context-browser.cjs
 ```
 
 The packaged evidence retains nine fixed packets, 27 contextual judgments and
 54 source cuts, with depth 10,002 and a context of 10,000 binders. Eight native
 rejections and nine altered-correspondence rejections are finite controls.
-The last command checks the hash-bound compiled artifact without invoking Lean.
+The compiled-data commands check the hash-bound artifact without invoking Lean.
 `verify.py --compare` reruns Lean and requires exact agreement of its emitted
 terms and judgments with that artifact; platform-specific compiler descriptions
 and resource observations are outside that byte comparison.

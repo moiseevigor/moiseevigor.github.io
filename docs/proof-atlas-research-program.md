@@ -939,9 +939,17 @@ checks dependent type context and let scope, and refuses nine altered records;
 eight invalid contexts, paths or terms are rejected natively. The public source
 control retains its original bytes and producer claim; its new replay is separate.
 
+The occurrence reader can attach these records at their exact hash-bound source
+positions. A computed type has a separate namespace and original Γ references;
+type-local navigation keeps the source selection fixed. Native records are
+optional for the old deep-syntax control and available in the synthetic context
+controls. Unrecorded positions remain without typing. The original producer
+metadata stays unchanged. A separate finite audit checks the attachment and
+type cuts; it adds no kernel judgments to descendants of a recorded type.
+
 These are finite native replay and structural correspondence checks. They do
-not verify the query algorithm, provide project/AI corpus typing, attach types
-to the live reader or establish semantic abstraction and human comprehension.
-Existing source-only scenes remain explicitly without recorded typing.
+not verify the query/codec/renderer, provide project/AI corpus typing or establish
+semantic abstraction and human comprehension. The older 512-entry renderer and
+native transport retain their existing limits.
 
 [Method and reproduction](/research/proof-atlas/deep-typing/README.md) · [Context checker](/research/proof-atlas/deep-typing/ContextQuery.lean) · [Independent compiled reader](/scripts/test-proof-atlas-deep-typing.cjs)

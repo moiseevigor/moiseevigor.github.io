@@ -7,6 +7,11 @@ on:
       - 'public/data/proof-atlas/occurrence-focus-laws.js'
       - 'public/js/proof-atlas-packed-routes.js'
       - 'public/js/proof-atlas-occurrence-*.js'
+      - 'public/js/proof-atlas-deep-context.js'
+      - 'public/js/proof-atlas-compact-type-view.js'
+      - 'public/data/proof-atlas/deep-typing*'
+      - 'public/data/proof-atlas/deep-typing/**'
+      - 'scripts/test-proof-atlas-deep-context*.cjs'
       - 'public/css/proof-atlas-occurrence-window.css'
       - 'scripts/test-proof-atlas-occurrence-window*.cjs'
       - 'research/proof-atlas/occurrence-focus/**'
@@ -239,6 +244,11 @@ on:
       - 'public/data/proof-atlas/occurrence-focus-laws.js'
       - 'public/js/proof-atlas-packed-routes.js'
       - 'public/js/proof-atlas-occurrence-*.js'
+      - 'public/js/proof-atlas-deep-context.js'
+      - 'public/js/proof-atlas-compact-type-view.js'
+      - 'public/data/proof-atlas/deep-typing*'
+      - 'public/data/proof-atlas/deep-typing/**'
+      - 'scripts/test-proof-atlas-deep-context*.cjs'
       - 'public/css/proof-atlas-occurrence-window.css'
       - 'scripts/test-proof-atlas-occurrence-window*.cjs'
       - 'research/proof-atlas/occurrence-focus/**'
@@ -497,6 +507,7 @@ jobs:
           node scripts/test-proof-atlas-local-refinement-browser.cjs
           node scripts/test-proof-atlas-type-interface-browser.cjs
           node scripts/test-proof-atlas-occurrence-window-browser.cjs
+          node scripts/test-proof-atlas-deep-context-browser.cjs
           node scripts/test-proof-atlas-cut-certificate-browser.cjs
           node scripts/test-proof-atlas-cut-native-browser.cjs
           node scripts/test-proof-atlas-local-cut-context.cjs
