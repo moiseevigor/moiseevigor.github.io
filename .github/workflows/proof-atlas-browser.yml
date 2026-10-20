@@ -12,6 +12,8 @@ on:
       - 'public/data/proof-atlas/deep-typing*'
       - 'public/data/proof-atlas/deep-typing/**'
       - 'scripts/test-proof-atlas-deep-context*.cjs'
+      - 'scripts/test-proof-atlas-recorded-context*.cjs'
+      - 'scripts/test-proof-atlas-library-bytes.cjs'
       - 'public/css/proof-atlas-occurrence-window.css'
       - 'scripts/test-proof-atlas-occurrence-window*.cjs'
       - 'research/proof-atlas/occurrence-focus/**'
@@ -249,6 +251,8 @@ on:
       - 'public/data/proof-atlas/deep-typing*'
       - 'public/data/proof-atlas/deep-typing/**'
       - 'scripts/test-proof-atlas-deep-context*.cjs'
+      - 'scripts/test-proof-atlas-recorded-context*.cjs'
+      - 'scripts/test-proof-atlas-library-bytes.cjs'
       - 'public/css/proof-atlas-occurrence-window.css'
       - 'scripts/test-proof-atlas-occurrence-window*.cjs'
       - 'research/proof-atlas/occurrence-focus/**'
@@ -508,6 +512,7 @@ jobs:
           node scripts/test-proof-atlas-type-interface-browser.cjs
           node scripts/test-proof-atlas-occurrence-window-browser.cjs
           node scripts/test-proof-atlas-deep-context-browser.cjs
+          node scripts/test-proof-atlas-recorded-context-browser.cjs
           node scripts/test-proof-atlas-cut-certificate-browser.cjs
           node scripts/test-proof-atlas-cut-native-browser.cjs
           node scripts/test-proof-atlas-local-cut-context.cjs

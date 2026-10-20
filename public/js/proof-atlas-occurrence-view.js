@@ -10,8 +10,9 @@
   const A=host.ProofAtlasLibraryData,P=host.ProofAtlasPackedRoutes,W=host.ProofAtlasOccurrenceWindow;
   const initial=new URL(location.href),status=el('p','Loading the original source packet…','pow-status');status.setAttribute('role','status');
   root.replaceChildren(status);root.setAttribute('aria-busy','true');
-  let record,data,edition,control=false,nativeControl=false,scene=null,selected=null,scale=1,disposed=false,representativeIndex=null,operation=0,activeJump=null;
+  let record,data,sourceBytes=null,edition,control=false,nativeControl=false,scene=null,selected=null,scale=1,disposed=false,representativeIndex=null,operation=0,activeJump=null;
   let nativePackage=null,nativeCase=null,nativeLoad=null,nativeError=null,typeView=null,typeScripts=null,inspection=0;
+  let positionPage=0,positionFilter='';
   const nativeController=new AbortController(),typeHost=el('section');typeHost.hidden=true;
   const title=el('h1'),subtitle=el('p'),tools=el('div',undefined,'pow-tools'),viewport=el('div',undefined,'pow-viewport'),sizing=el('div',undefined,'pow-sizing'),stage=el('div',undefined,'pow-stage'),panel=el('section',undefined,'pow-inspector'),summary=el('p',undefined,'pow-summary');
   viewport.tabIndex=0;viewport.setAttribute('aria-label','Occurrence geometry. Scroll or drag empty space to pan.');viewport.append(sizing);sizing.append(stage);
@@ -26,8 +27,18 @@
   }
   function writeAddress(route,replace=false){const u=new URL(location.href);u.searchParams.set('view','occurrence');u.searchParams.delete('route');u.searchParams.delete('loading');u.hash='occurrence='+W.token(record,route);history[replace?'replaceState':'pushState']({},'',u);}
   function describe(n){try{return A.describe(data,n.node);}catch{return n.kind+' · e'+n.node+' · original payload available in the packet';}}
+  async function component(name,url){if(!host[name])await new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=url;script.onload=resolve;script.onerror=()=>{script.remove();reject(Error('Native record component unavailable'));};document.head.append(script);});}
   async function nativeReady(){
-   for(const [name,url]of [['ProofAtlasDeepContext','/public/js/proof-atlas-deep-context.js?v=1'],['PROOF_ATLAS_DEEP_TYPING','/public/data/proof-atlas/deep-typing-manifest.js?v=1']])if(!host[name])await new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=url;script.onload=resolve;script.onerror=()=>{script.remove();reject(Error('Native record component unavailable'));};document.head.append(script);});
+   await component('ProofAtlasDeepContext','/public/js/proof-atlas-deep-context.js?v=2');
+   if(record&&!control){
+    const d=host.PROOF_ATLAS_OCCURRENCE_TYPES?.records.find(d=>d.edition===edition.id&&d.name===record.name&&d.indexSha256===record.indexSha256&&d.sourceSha256===record.sourceSha256);
+    if(!d)return {cases:[],attach:async()=>null};
+    await component('ProofAtlasOccurrenceTypes','/public/js/proof-atlas-occurrence-types.js?v=12');
+    const bytes=await A.compressedBytes(d.file,d.sha256,{maxBytes:67108864,signal:nativeController.signal});
+    if(disposed)throw Error('Native record request cancelled');
+    return host.ProofAtlasDeepContext.recorded(sourceBytes,bytes,d,record);
+   }
+   await component('PROOF_ATLAS_DEEP_TYPING','/public/data/proof-atlas/deep-typing-manifest.js?v=1');
    if(disposed)throw Error('Native record request cancelled');const d=host.ProofAtlasDeepContext.descriptor(host.PROOF_ATLAS_DEEP_TYPING);
    return host.ProofAtlasDeepContext.prepare(await A.compressed(d.file,d.sha256,{maxBytes:8388608,expectedBytes:d.decodedBytes,signal:nativeController.signal}),d);
   }
@@ -36,6 +47,23 @@
    try{nativePackage=await nativeLoad;if(disposed)return;nativeCase=await nativePackage.attach(data,record);}
    catch(error){if(disposed)return;nativeError=error.message;nativeLoad=null;nativeCase=null;nativePackage=null;}
    if(!disposed&&selected&&scene)inspect(selected);
+  }
+  const originLabel=q=>q.recording?.kind==='application-trace-observation'?'application observation':q.recording?.kind==='lambda-introduction-observation'?'introduction observation':'direct query';
+  function positions(selectedEntry){
+   const details=el('details'),list=el('ol'),filter=el('input'),label=el('label','Filter positions '),count=el('p'),paging=el('div',undefined,'pow-tools');details.dataset.nativePositions='';details.append(el('summary','Recorded positions · '+nativeCase.entries.length));
+   filter.type='search';filter.value=positionFilter;filter.placeholder='Role, origin, node, depth';filter.dataset.nativeFilter='';label.append(filter);details.append(label,count,list,paging);
+   const records=nativeCase.entries.map((q,index)=>({q,index,text:'Position '+(index+1)+' · '+q.role+' · e'+q.node+' · depth '+q.route.depth+' · '+originLabel(q)}));
+   const prev=button('Previous positions',()=>{positionPage--;update();}),next=button('Next positions',()=>{positionPage++;update();});paging.append(prev,next);
+   let first=true;
+   function update(){
+    const words=positionFilter.toLowerCase().trim().split(/\s+/),matches=records.filter(r=>words.every(w=>r.text.toLowerCase().includes(w)));
+    if(first&&selectedEntry){const index=matches.findIndex(r=>r.q===selectedEntry);if(index>=0)positionPage=Math.floor(index/20);}first=false;
+    const pages=Math.max(1,Math.ceil(matches.length/20));positionPage=Math.min(positionPage,pages-1);const start=positionPage*20;
+    count.textContent=matches.length?(start+1)+'–'+Math.min(start+20,matches.length)+' of '+matches.length+' matching positions':'No matching recorded positions';count.dataset.nativePage='';count.setAttribute('role','status');list.start=start+1;list.replaceChildren();
+    for(const r of matches.slice(start,start+20)){const item=el('li'),b=button(r.text,()=>safe(()=>navigate(r.q.route)));b.dataset.nativeQuery=r.index;item.append(b);list.append(item);}
+    prev.disabled=positionPage===0;next.disabled=positionPage===pages-1;
+   }
+   filter.oninput=()=>{positionFilter=filter.value;positionPage=0;update();};update();return details;
   }
   function inspect(n){
    const serial=++inspection;
@@ -46,16 +74,18 @@
    const entry=nativeCase?.get(n.route),native=el('section',undefined,'pow-native-record'),message=el('p');message.setAttribute('role','status');
    native.dataset.nativeState=entry?'checked':nativeError?'error':nativePackage?'unrecorded':nativeLoad?'loading':'unloaded';
    if(entry){
-    message.textContent='Native Lean 4.33.1 record · '+entry.role+' · original Γ'+entry.contextLength;
-    const judgment=el('pre','Γ'+entry.contextLength+' ⊢ e'+n.node+' : '+A.describe(entry.typeData,entry.typeData.roots[0]));judgment.tabIndex=0;judgment.dataset.nativeJudgment='';
-    const toggle=button('Show recorded type',async()=>{if(typeView){typeView.dispose();typeView=null;toggle.textContent='Show recorded type';toggle.setAttribute('aria-expanded','false');return;}toggle.disabled=true;try{if(!host.ProofAtlasCompactTypeView){typeScripts??=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='/public/js/proof-atlas-compact-type-view.js?v=1';script.onload=resolve;script.onerror=()=>{script.remove();typeScripts=null;reject(Error('Recorded type renderer unavailable'));};document.head.append(script);});await typeScripts;}if(disposed||serial!==inspection||!scene||!selected)return;typeView=host.ProofAtlasCompactTypeView.mount(typeHost,entry,data,route=>safe(()=>navigate(route)));toggle.textContent='Hide recorded type';toggle.setAttribute('aria-expanded','true');}catch(error){if(!disposed&&serial===inspection)message.textContent='Native typing record retained; type diagram unavailable: '+error.message;}finally{toggle.disabled=false;}});toggle.dataset.showRecordedType='';toggle.setAttribute('aria-expanded','false');
+    message.textContent='Native Lean 4.33.1 record · '+originLabel(entry)+' · '+entry.role+' · original Γ'+entry.contextLength;
+    const judgment=el('pre','Γ'+entry.contextLength+' ⊢ e'+n.node+' : '+(entry.typeText||A.describe(entry.typeData,entry.typeData.roots[0])));judgment.tabIndex=0;judgment.dataset.nativeJudgment='';
+    const toggle=button('Show recorded type',async()=>{if(typeView){typeView.dispose();typeView=null;toggle.textContent='Show recorded type';toggle.setAttribute('aria-expanded','false');return;}toggle.disabled=true;try{if(!host.ProofAtlasCompactTypeView){typeScripts??=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='/public/js/proof-atlas-compact-type-view.js?v=2';script.onload=resolve;script.onerror=()=>{script.remove();typeScripts=null;reject(Error('Recorded type renderer unavailable'));};document.head.append(script);});await typeScripts;}if(disposed||serial!==inspection||!scene||!selected)return;typeView=host.ProofAtlasCompactTypeView.mount(typeHost,entry,data,route=>safe(()=>navigate(route)));toggle.textContent='Hide recorded type';toggle.setAttribute('aria-expanded','true');}catch(error){if(!disposed&&serial===inspection)message.textContent='Native typing record retained; type diagram unavailable: '+error.message;}finally{toggle.disabled=false;}});toggle.dataset.showRecordedType='';toggle.setAttribute('aria-expanded','false');
     native.append(message,judgment,el('p','Recorded kernel typing in the original context. The browser checks correspondence; it does not rerun Lean.'),toggle);
-    const provenance=el('details');provenance.append(el('summary','Native record provenance'),el('pre',JSON.stringify({evidenceSha256:entry.evidenceSha256,sourceIndexSha256:entry.sourceIndexSha256,sourceRoute:entry.route,typeGraphSha256:entry.typeGraphSha256,originalContextLength:entry.contextLength,baselineAxioms:entry.baselineAxioms,sourceModuleBytesVerified:false},null,2)),link('Native term and judgment data ↓',host.PROOF_ATLAS_DEEP_TYPING.file));native.append(provenance);
+    if(entry.recording?.kind!=='primary-query'&&entry.recording){const parent=button('Go to recording query',()=>safe(()=>navigate(entry.recording.queryRoute)));parent.dataset.recordingQuery='';native.append(el('p','This '+originLabel(entry)+' was recorded in '+entry.recording.part+(entry.recording.slot?' '+entry.recording.slot:'')+' of query e'+entry.recording.queryNode+'.'),parent);}
+    if(entry.typeText)native.append(el('p','Type text is a presentation; the diagram retains the recorded expression fields.'));
+    const provenance=el('details');provenance.append(el('summary','Native record provenance'),el('pre',JSON.stringify({evidenceSha256:entry.evidenceSha256,sourceIndexSha256:entry.sourceIndexSha256,sourceRoute:entry.route,...host.ProofAtlasDeepContext.typeIdentity(entry),originalContextLength:entry.contextLength,recording:entry.recording,baselineAxioms:entry.baselineAxioms,sourceModuleBytesVerified:false,...(nativeCase.provenance?{extraction:nativeCase.provenance}:{})},null,2)),link('Native term and judgment data ↓',entry.evidenceFile||host.PROOF_ATLAS_DEEP_TYPING.file));native.append(provenance);
    }else{
     message.textContent=nativeError?'Native record unavailable: '+nativeError:nativePackage?'No recorded native typing at this exact source position.':nativeLoad?'Loading hash-bound native records…':'No native typing query is loaded in this source view.';
     native.append(message);if(!nativePackage){const load=button(nativeError?'Retry recorded types':'Load recorded types',loadTyping);load.disabled=!!nativeLoad;load.dataset.loadRecordedTypes='';native.append(load);}
    }
-   if(nativeCase){const positions=el('details'),list=el('ol');positions.dataset.nativePositions='';positions.append(el('summary','Recorded positions · '+nativeCase.entries.length));for(const [index,q]of nativeCase.entries.entries()){const li=el('li'),b=button('Position '+(index+1)+' · '+q.role+' · e'+q.node+' · depth '+q.route.depth,()=>safe(()=>navigate(q.route)));b.dataset.nativeQuery=index;li.append(b);list.append(li);}positions.append(list);native.append(positions);}
+   if(nativeCase){if(nativeCase.stats)native.append(el('p',nativeCase.stats.primaryQueries+' direct queries + '+nativeCase.stats.explicitObservations+' explicit observations. '+nativeCase.stats.unavailableQueries+' unavailable queries. Other source positions have no recorded type.'));native.append(positions(entry));}
    panel.replaceChildren(heading,context,term,native,focus);
    if(!control)panel.append(link(n.route.depth<=512?'Open this occurrence in the proof reader':'Open declaration in the proof reader',backURL(n.route)));
    const ports=el('ol');for(const port of n.ports){const li=el('li'),b=button(port.kernelField+' → e'+port.node,()=>safe(()=>navigate(port.route)));b.dataset.occurrencePort=port.slot;li.append(b,el('small',(port.displayed?'Shown':'Collapsed')+' · '+shortCount(port.expanded)+' occurrences'));ports.append(li);}if(n.ports.length)panel.append(el('h3','Ordered source fields'),ports);
@@ -73,7 +103,7 @@
    const positions=new Map(scene.nodes.map(n=>[n.id,{x:20+n.depth*330,y:20+n.row*260}])),cards=new Map();
    for(const n of scene.nodes){
     const pos=positions.get(n.id),card=el('article',undefined,'pow-card'),ports=[];let binderButton=null;card.style.left=pos.x+'px';card.style.top=pos.y+'px';card.dataset.constructor=n.kind;
-    const pick=button(n.glyph+' '+n.kind+' · e'+n.node,()=>inspect(n));pick.dataset.occurrenceNode=n.id;pick.setAttribute('aria-pressed','false');pick.append(el('small','Γ'+n.scopeDepth+' · depth '+n.route.depth));card.append(pick,el('p',describe(n),'pow-formula'));cards.set(n.id,{card,pick,ports,get binder(){return binderButton;}});
+    const pick=button(n.glyph+' '+n.kind+' · e'+n.node,()=>inspect(n)),formula=el('p',describe(n),'pow-formula');formula.tabIndex=0;pick.dataset.occurrenceNode=n.id;pick.setAttribute('aria-pressed','false');pick.append(el('small','Γ'+n.scopeDepth+' · depth '+n.route.depth));card.append(pick,formula);cards.set(n.id,{card,pick,ports,get binder(){return binderButton;}});
     for(const port of n.ports){const b=button(port.kernelField+' · '+(port.displayed?'shown':shortCount(port.expanded)+' hidden'),()=>safe(()=>navigate(port.route)));b.dataset.windowField=port.slot;b.className=port.displayed?'pow-port':'pow-port pow-frontier';card.append(b);ports.push(b);}
     if(n.binding){const external=scene.links.find(l=>l.from===n.id).boundary,b=button('↪ '+(external?'outside binder':'binder')+' e'+n.binding.node,()=>safe(()=>navigate(n.binding.route)));b.dataset.windowBinding='';b.className='pow-binding';card.append(b);binderButton=b;}
     stage.append(card);
@@ -117,7 +147,7 @@
     edition=library.editions.find(e=>e.id===initial.searchParams.get('edition'))||library.editions.find(e=>e.id===library.defaultEdition)||library.editions[0];record=edition.declarations.find(r=>r.name===initial.searchParams.get('proof'));
     if(!record)throw Error('Declaration unavailable; choose an occurrence from the library');
     if(record.uniqueNodes>P.limits.sourceNodes)throw Error('This occurrence profile supports at most '+P.limits.sourceNodes+' stored source nodes');
-    data=A.validateIndex(await A.compressed(record.indexFile,record.indexSha256,{maxBytes:67108864}),record);
+    sourceBytes=await A.compressedBytes(record.indexFile,record.indexSha256,{maxBytes:67108864,signal:nativeController.signal});data=A.validateIndex(JSON.parse(new TextDecoder().decode(sourceBytes)),record);
    }
    W.validateSource(data,record);if(disposed)return;
    const header=el('header',undefined,'pow-header');title.textContent=record.name;subtitle.textContent=control?'Serialized syntax control · no kernel typing claim':'Source occurrence geometry · '+edition.label;
@@ -134,7 +164,7 @@
    if(location.hash)fromLocation();else{const body=data.declaration.rootPaths.indexOf('root.value');navigate(P.encode(body<0?0:body,[]),true,true);}
    let drag=null;viewport.addEventListener('pointerdown',event=>{if(event.target.closest('.pow-card,button,a,input,select'))return;drag={x:event.clientX,y:event.clientY,left:viewport.scrollLeft,top:viewport.scrollTop};viewport.setPointerCapture(event.pointerId);});viewport.addEventListener('pointermove',event=>{if(drag)viewport.scrollTo(drag.left+drag.x-event.clientX,drag.top+drag.y-event.clientY);});viewport.addEventListener('pointerup',()=>{drag=null;});viewport.addEventListener('pointercancel',()=>{drag=null;});
    host.addEventListener('popstate',fromLocation);host.addEventListener('hashchange',fromLocation);
-   const api={getSnapshot:()=>{if(!selected||!scene)return null;const q=nativeCase?.get(selected.route);return {source:scene.source,namespace:scene.namespace,category:scene.root.category,node:selected.node,route:selected.route,scopeDepth:selected.scopeDepth,binding:selected.binding,typing:q?'checked-native-record':'not-queried',...(q?{native:{role:q.role,evidenceSha256:q.evidenceSha256,typeGraphSha256:q.typeGraphSha256,contextLength:q.contextLength}}:{})};},getScene:()=>scene,getNativeState:()=>({loaded:!!nativePackage,pending:!!nativeLoad&&!nativePackage,matched:!!nativeCase,error:nativeError}),getTypeScene:()=>typeView?.getScene()||null,getTypeSnapshot:()=>typeView?.getSnapshot()||null,getIndexState:()=>representativeIndex?.state||null,focus:route=>navigate(route),dispose:()=>{disposed=true;nativeController.abort();typeView?.dispose();host.removeEventListener('popstate',fromLocation);host.removeEventListener('hashchange',fromLocation);}};
+   const api={getSnapshot:()=>{if(!selected||!scene)return null;const q=nativeCase?.get(selected.route);return {source:scene.source,namespace:scene.namespace,category:scene.root.category,node:selected.node,route:selected.route,scopeDepth:selected.scopeDepth,binding:selected.binding,typing:q?'checked-native-record':'not-queried',...(q?{native:{role:q.role,evidenceSha256:q.evidenceSha256,...host.ProofAtlasDeepContext.typeIdentity(q),contextLength:q.contextLength,...(q.recording?{recording:q.recording}:{})}}:{})};},getScene:()=>scene,getNativeState:()=>({loaded:!!nativePackage,pending:!!nativeLoad&&!nativePackage,matched:!!nativeCase,error:nativeError,...(nativeCase?.stats?{inventory:nativeCase.stats}:{})}),getTypeScene:()=>typeView?.getScene()||null,getTypeSnapshot:()=>typeView?.getSnapshot()||null,getIndexState:()=>representativeIndex?.state||null,focus:route=>navigate(route),dispose:()=>{disposed=true;nativeController.abort();sourceBytes=null;typeView?.dispose();host.removeEventListener('popstate',fromLocation);host.removeEventListener('hashchange',fromLocation);}};
    host.ProofAtlasOccurrenceView=api;return api;
   }catch(error){status.textContent='Occurrence view unavailable: '+error.message;root.append(link('Open declaration library',backURL()));}
   finally{root.setAttribute('aria-busy','false');}
