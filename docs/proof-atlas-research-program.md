@@ -920,3 +920,36 @@ separate; these checks do not verify the codec or renderer, establish semantic
 compression, or measure comprehension.
 
 [Definitions, bounds and reproduction](/research/proof-atlas/occurrence-focus/README.md)
+
+## Native contextual queries at deep source positions
+
+A separate core-only checker follows original source fields and reconstructs
+the ordered lexical context before checking a selected expression. It retains
+one query path plus binder depths rather than copying a complete path for every
+binder. Domains and let values use their prior context; each new domain and let
+value is checked before extending it. Recorded types use a computed namespace
+and must reopen exactly in the original context. Proof/type/value roles come
+from kernel type checks and normalization.
+
+Finite tests cover eight generated controls and the existing public deep-syntax
+packet: 27 selected judgments, depth 10,002 and a context of 10,000 shadowed
+binders. The independent reader compares them with 54 original source cuts.
+It distinguishes shared variables with the same Nat type but different binders,
+checks dependent type context and let scope, and refuses nine altered records;
+eight invalid contexts, paths or terms are rejected natively. The public source
+control retains its original bytes and producer claim; its new replay is separate.
+
+The occurrence reader can attach these records at their exact hash-bound source
+positions. A computed type has a separate namespace and original Γ references;
+type-local navigation keeps the source selection fixed. Native records are
+optional for the old deep-syntax control and available in the synthetic context
+controls. Unrecorded positions remain without typing. The original producer
+metadata stays unchanged. A separate finite audit checks the attachment and
+type cuts; it adds no kernel judgments to descendants of a recorded type.
+
+These are finite native replay and structural correspondence checks. They do
+not verify the query/codec/renderer, provide project/AI corpus typing or establish
+semantic abstraction and human comprehension. The older 512-entry renderer and
+native transport retain their existing limits.
+
+[Method and reproduction](/research/proof-atlas/deep-typing/README.md) · [Context checker](/research/proof-atlas/deep-typing/ContextQuery.lean) · [Independent compiled reader](/scripts/test-proof-atlas-deep-typing.cjs)
