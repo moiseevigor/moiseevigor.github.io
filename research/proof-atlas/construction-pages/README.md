@@ -1,6 +1,7 @@
 # Sparse construction geometry
 
-Local prototype. No browser integration or publication assets have been generated.
+Locally integrated optional `?view=occurrence&loading=paged&diagram=construction`
+reader; not released yet. It uses the existing construction and type renderers.
 The default article and the blog are unchanged. The general geometric-language
 research program remains active.
 
@@ -72,7 +73,7 @@ conclusion envelopes. Observed maxima in this one-page test are 256 source rows,
 64 type rows and 7,005 decoded record bytes. These are cache measurements;
 the reference process also retains complete validated inputs.
 
-`node scripts/test-proof-atlas-construction-page-controls.cjs` checks 38 refusals,
+`node scripts/test-proof-atlas-construction-page-controls.cjs` checks 41 refusals,
 including re-signed recipe/origin mutations, actual source-field mismatches,
 foreign record copies, disposal and cache limits. A separate altered projection
 with a mismatched type fingerprint remains an exact source frontier; it is a
@@ -85,9 +86,38 @@ entry's type table instead of the construction owner's table. Its claimed 36
 refused joins are withdrawn. The corrected model keeps every root paired with its
 own original table, including let-supplement tables with different node numbering.
 
-Browser integration, browser failure/cancellation and proof-switch checks,
-deterministic public assets and release gates are required before this can replace
-the complete construction loader.
+The local browser audit covers all 25 profiles, 43 complete-reference scene
+comparisons, 38 type comparisons and 25 node selections. Two uses of shared source
+node 17 retain their different roles and original contexts. Tests include an
+original source binder jump, an original Γ jump from a computed type, a type-local
+binder jump, a local-definition value type, a separate Meta observation, four
+accessibility audits and seven failure/cancellation/disposal cases. No complete
+source/native archive is requested. Observed maxima are 1,715 source-cache rows,
+256 type-cache rows and 48,618 decoded construction-record bytes. These are finite
+working-set observations, not a whole-browser memory bound.
+
+`scripts/build-proof-atlas-construction-pages.cjs --check` regenerates one validated
+case at a time and compares decoded gzip bytes. The registry describes 2,411
+positions and 1,066 constructions. It references 9,702 unique gzip assets totaling
+7,563,695 compressed bytes, reusing 3,021 existing type assets and adding 6,681
+construction/type-observation assets. Only compiled metadata is emitted.
+
+Without an explicit occurrence link, the sparse profile prefers a checked
+construction in the declaration body, prioritizing proof-role observations.
+Explicit source links keep their exact selected position. A browser control
+checks the default proof focus in the Riccati bound. Shared module loads are
+deduplicated across proof switches so cursor identity brands stay consistent.
+
+Source previews are streamed with the same 32-field application-head limit as
+the complete renderer. Previews over 1,600 characters are explicitly clipped;
+exact payloads and original archive links remain available. The finite audit
+compares 8,478 streamed point previews and their binder labels with the complete
+source formatter; the largest tested presentation is 1,287 decoded bytes.
+Presentation labels
+have a separate 512 KiB cap. Index, record, source and type caches retain their
+separate limits. Grouped applications, context frames and synthetic/deep control
+profiles still use the complete reader; this mode does not silently fetch it.
+Browser regression checks and all release gates remain necessary before release.
 
 Transport hashes authenticate producer-selected projections. They do not prove
 independent membership in a native archive, verify private source module bytes,

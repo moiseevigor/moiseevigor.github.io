@@ -20,6 +20,7 @@ async function open(input,recordInput,{fetcher=host.fetch.bind(host),signal,inde
  const manifest=await read(d,262144,signal);live();
  demand(manifest.format==='ProofAtlasConstructionPages/1'&&manifest.source?.name===record.name&&manifest.source.indexSha256===record.indexSha256&&manifest.source.sourceSha256===record.sourceSha256&&hex(manifest.source.sourceGraphSha256)&&manifest.entries===d.entries&&natural(d.entries)&&d.entries>0&&d.entries<=4096&&manifest.constructions===d.constructions&&natural(d.constructions)&&d.constructions<=d.entries&&[1,2].includes(manifest.version)&&manifest.fingerprint==='ProofAtlasTypeSyntaxFingerprint/1','manifest identity/bounds');
  const source=manifest.source;
+ if(manifest.constructions)P.parse(manifest.firstConstruction);else demand(manifest.firstConstruction===null,'empty construction profile');
  function indexRef(ref){demand(ref&&hex(ref.sha256)&&natural(ref.bytes)&&ref.bytes>0&&ref.bytes<=131072&&ref.file===base+ref.sha256+'.index.gz'&&natural(ref.level)&&ref.level<=4&&natural(ref.count)&&ref.count>0&&ref.count<=4096&&typeof ref.min==='string'&&typeof ref.max==='string'&&ref.min<=ref.max&&ref.min.length<=87500&&ref.max.length<=87500,'index reference');}
  indexRef(manifest.index);demand(manifest.index.count===manifest.entries,'root count');
  const touch=(cache,id)=>{const value=cache.get(id);cache.delete(id);cache.set(id,value);return value;};
@@ -62,7 +63,8 @@ async function open(input,recordInput,{fetcher=host.fetch.bind(host),signal,inde
    activeType=cursor;return Object.freeze({cursor,observation:value});
   }catch(error){cursor.dispose();throw error;}
  }
- const identity=freeze({...source,version:manifest.version,manifestSha256:d.sha256}),api=Object.freeze({manifest,lookup,typeFor,state:()=>({...stats,indexPages:indices.size,recordPages:records.size,indexLimit,recordLimit,indexBytes:[...indices.values()].reduce((sum,r)=>sum+r.bytes,0),recordBytes:[...records.values()].reduce((sum,r)=>sum+r.bytes,0),activeTypeTables:activeType?1:0}),dispose:()=>{disposed=true;typeEpoch++;indices.clear();records.clear();if(activeType)activeType.dispose();activeType=null;}});owners.set(api,{identity,live});return api;
+ const releaseType=()=>{typeEpoch++;if(activeType)activeType.dispose();activeType=null;};
+ const identity=freeze({...source,version:manifest.version,manifestSha256:d.sha256}),api=Object.freeze({manifest,lookup,typeFor,releaseType,state:()=>({...stats,indexPages:indices.size,recordPages:records.size,indexLimit,recordLimit,indexBytes:[...indices.values()].reduce((sum,r)=>sum+r.bytes,0),recordBytes:[...records.values()].reduce((sum,r)=>sum+r.bytes,0),activeTypeTables:activeType?1:0}),dispose:()=>{disposed=true;releaseType();indices.clear();records.clear();}});owners.set(api,{identity,live});return api;
 }
 const api={open,key,identity:cursor=>{const value=owners.get(cursor);demand(value,'foreign construction cursor');value.live();return value.identity;}};if(node)module.exports=api;else host.ProofAtlasConstructionPages=api;
 })(typeof window==='undefined'?globalThis:window);

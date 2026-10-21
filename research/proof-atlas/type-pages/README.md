@@ -1,7 +1,6 @@
 # Paged computed-type geometry
 
-Status: locally integrated optional `?view=occurrence&loading=paged` reader; not
-yet released. The separate older `?loading=paged` judgment reader retains its
+Optional `?view=occurrence&loading=paged` reader. The separate older `?loading=paged` judgment reader retains its
 complete shared type graphs. The new occurrence mode loads source fields, type
 observations and type fields through independent bounded cursors.
 
@@ -152,12 +151,12 @@ It observes no complete source/native archive requests; the measured maxima are
 623 source-cache nodes and 256 type-cache nodes for these browser cuts. These are
 observed working sets, below the configured 4,096-source/512-type cache limits.
 
-Construction rules and arbitrary node-number lookup still use the complete
-loader. Source fields and indexed positions remain navigable in paged mode. A
-complete-loader link preserves the selected source occurrence. Paged native
-construction delivery needs a separate exact projection and explicit handling
-of its component recipes; it must not bypass or weaken the old native validator.
-Frame delivery, broader typing coverage, independently verified AI provenance,
-general consumer correctness and measured comprehension remain open work. The
-general geometric-language program remains active. Article text and the blog
-are unchanged.
+The optional [sparse construction lens](../construction-pages/README.md) reuses
+these type tables with an explicit separate construction-component recipe. Source
+fields, indexed positions and individual native constructions remain navigable
+without automatically loading a complete archive. Grouped application/context
+views and arbitrary node-number lookup retain the complete loader, linked at the
+same source occurrence. Synthetic/deep control profiles need separate adapters.
+Broader typing coverage, independently verified AI provenance, general consumer
+correctness and measured comprehension remain open work. The general geometric
+language program remains active. Article text and the blog are unchanged.

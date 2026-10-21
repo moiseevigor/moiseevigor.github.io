@@ -1,7 +1,7 @@
 /* Construction cuts from bounded native records and original source rows. */
 (function(host){
 'use strict';
-const node=typeof module!=='undefined'&&module.exports,P=node?require('./proof-atlas-packed-routes'):host.ProofAtlasPackedRoutes,CW=node?require('./proof-atlas-cursor-window'):host.ProofAtlasCursorWindow,SP=node?require('./proof-atlas-source-pages'):host.ProofAtlasSourcePages,Q=node?require('./proof-atlas-construction-pages'):host.ProofAtlasConstructionPages,G=node?require('./proof-atlas-geometry-core'):host.ProofAtlasGeometry;
+const node=typeof module!=='undefined'&&module.exports,A=node?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData,P=node?require('./proof-atlas-packed-routes'):host.ProofAtlasPackedRoutes,CW=node?require('./proof-atlas-cursor-window'):host.ProofAtlasCursorWindow,SP=node?require('./proof-atlas-source-pages'):host.ProofAtlasSourcePages,Q=node?require('./proof-atlas-construction-pages'):host.ProofAtlasConstructionPages,G=node?require('./proof-atlas-geometry-core'):host.ProofAtlasGeometry;
 const key=r=>r.root+':'+r.depth+':'+r.slots,demand=(v,m)=>{if(!v)throw Error('Cursor constructions: '+m);},freeze=v=>{if(v&&typeof v==='object'&&!Object.isFrozen(v)){Object.values(v).forEach(freeze);Object.freeze(v);}return v;};
 function addressOf(root,route){P.parse(route);demand(route.root===root.root,'address source root');if(route.depth<root.depth){demand(key(P.prefix(root,route.depth))===key(route),'address ancestor');return{prefixDepth:route.depth};}demand(route.depth-root.depth<=5&&key(P.prefix(route,root.depth))===key(root),'address fields');const bytes=P.parse(route),slots=[];for(let i=root.depth;i<route.depth;i++)slots.push((bytes[i>>2]>>((i%4)*2))&3);return{slots};}
 function resolve(root,address,version){demand(address&&Object.keys(address).every(k=>k==='prefixDepth'||k==='slots'),'address shape');const depth=address.prefixDepth??root.depth,slots=address.slots??[];demand(Number.isSafeInteger(depth)&&depth>=0&&depth<=root.depth&&Array.isArray(slots)&&slots.length<=5&&slots.every(s=>s===0||s===1||version===2&&s===2)&&(!slots.length||depth===root.depth),'address bounds');return P.append(P.prefix(root,depth),slots);}
@@ -39,7 +39,20 @@ function open(sourceCursor,queries){
  }
  function point(scene,id){demand(scenes.has(scene),'foreign construction scene');const value=[...scene.nodes,...scene.frontiers].find(p=>p.id===id);demand(value,'point identity');return value;}
  async function typeFor(scene,id,observation='kernel',options={}){const p=point(scene,id),origin=observation==='meta'?p.alternateTypeSource:p.typeSource;demand(origin,'no recorded type origin');const row=await queries.lookup(resolve(scene.root.route,origin.query,version),options);demand(row,'missing recording query');demand(origin.construction||observation==='kernel','no alternate recorded observation');return queries.typeFor(row,origin.construction?origin.field:'recorded',observation,options);}
- return Object.freeze({create,routeFor:(scene,id)=>resolve(scene.root.route,point(scene,id).address,version),typeFor,source,resolve:(scene,address)=>{demand(scenes.has(scene),'foreign construction scene');return resolve(scene.root.route,address,version);}});
+ async function sourcePoint(route,options={}){const scene=await windows.create(route,{maxNodes:1,maxDepth:0,signal:options.signal});return Object.freeze({point:scene.nodes[0],data:windows.snapshot(scene),state:windows.state(scene)});}
+ async function presentation(scene,options={}){
+  demand(scenes.has(scene),'foreign construction scene');const previews={},binders={},clip=s=>s.length<=1600?s:s.slice(0,1600)+'… [constructor preview clipped]';
+  for(const p of [...scene.nodes,...scene.frontiers]){const route=resolve(scene.root.route,p.address,version);let text;
+   if(p.kind!=='app'){const snapshot=await sourcePoint(route,options);text=A.describe(snapshot.data,p.node);}
+   else{let id=p.node,count=0,row;while(true){row=await sourceCursor.run(()=>[sourceCursor.data.kind[id],sourceCursor.data.children[id]],options);if(row[0]!==5||count===32)break;id=row[1][0];count++;}
+    if(row[0]===5)text='Application head beyond this 32-field preview';
+    else{let head=await sourceCursor.run(()=>A.describe(sourceCursor.data,id),options);if(row[0]===0){const snapshot=await sourcePoint(P.append(route,Array(count).fill(0)),options),binding=snapshot.point.binding;if(binding){const payload=snapshot.data.payloads[binding.node];head=(payload.binderName||payload.declName||'_')+' · binder at source depth '+binding.route.depth;}}text='Head: '+head+' · '+count+' supplied source argument'+(count===1?'':'s');}
+   }previews[p.id]=clip(text);
+  }
+  for(const link of scene.links)if(!binders[link.node]){const value=await sourceCursor.run(()=>({kind:sourceCursor.data.kind[link.node],payload:sourceCursor.data.payloads[link.node]}),options);binders[link.node]={kind:value.kind,name:clip(value.payload.binderName||value.payload.declName||'_')};}
+  SP.identity(sourceCursor);Q.identity(queries);const bytes=new TextEncoder().encode(JSON.stringify({previews,binders})).length;demand(bytes<=524288,'presentation byte bound');return freeze({previews,binders,decodedBytes:bytes,byteLimit:524288});
+ }
+ return Object.freeze({create,routeFor:(scene,id)=>resolve(scene.root.route,point(scene,id).address,version),typeFor,sourcePoint,presentation,source,resolve:(scene,address)=>{demand(scenes.has(scene),'foreign construction scene');return resolve(scene.root.route,address,version);}});
 }
 const api={open};if(node)module.exports=api;else host.ProofAtlasCursorConstructions=api;
 })(typeof window==='undefined'?globalThis:window);
