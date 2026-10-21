@@ -160,3 +160,7 @@ These commands verify the native/reference experiment, not a browser deployment.
 The [reader adapter](reader.md) retains its own source/type correspondence and
 browser checks, with shared extraction type tables stored once per declaration.
 This experiment creates no new blog result.
+
+The [application-fold model](application-fold.md) groups retained native application
+stages reversibly. Its exact Lean.Expr structural laws, source/type adapter audit
+and browser-integration limitations are separate from the primitive reader.

@@ -1,0 +1,28 @@
+{
+  "format": "ProofAtlasApplicationSpineLaws/1",
+  "javascriptFormallyVerified": false,
+  "rendererVerified": false,
+  "scope": "Exact Lean.Expr split/reassembly, bounded argument count and occurrence partition for every fuel and expression. No native typing, serialized cut or browser theorem.",
+  "sourceFile": "research/proof-atlas/occurrence-constructions/ApplicationFold.lean",
+  "sourceSha256": "43612ad9fd186f3d850f5b6ecb9d1fb33e0538e8c96c018c8132446bd8e32b0f",
+  "status": "PASS",
+  "theorems": {
+    "ProofAtlas.ApplicationFold.join_occurrences": [
+      "propext"
+    ],
+    "ProofAtlas.ApplicationFold.split_argument_bound": [
+      "Quot.sound",
+      "propext"
+    ],
+    "ProofAtlas.ApplicationFold.split_partition": [
+      "Quot.sound",
+      "propext"
+    ],
+    "ProofAtlas.ApplicationFold.split_roundtrip": [
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "toolchain": "leanprover/lean4:v4.33.1",
+  "typingAlgorithmFormallyVerified": false
+}

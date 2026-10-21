@@ -645,6 +645,10 @@ jobs:
           sh /tmp/elan-init.sh -y --default-toolchain leanprover/lean4:v4.33.1
       - name: Check reference fields, source examples and small kernel terms
         run: python3 research/proof-atlas/verify_lean_reference.py --lean "$HOME/.elan/bin/lean"
+      - name: Kernel-check application-spine reassembly and occurrence partition
+        run: |
+          application_prefix="$("$HOME/.elan/bin/lean" --print-prefix)"
+          python3 research/proof-atlas/occurrence-constructions/verify_application_fold.py --lean "$application_prefix/bin/lean" --workdir "$RUNNER_TEMP/atlas-application-fold" --reserve-gib 5 --check
       - name: Kernel-check context projection laws and regenerate bridge fixtures
         run: |
           theory_prefix="$("$HOME/.elan/bin/lean" --print-prefix)"

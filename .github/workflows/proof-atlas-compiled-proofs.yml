@@ -56,6 +56,7 @@ jobs:
       - run: node research/proof-atlas/occurrence-constructions/check.cjs
       - run: node scripts/test-proof-atlas-deep-context.cjs
       - run: node scripts/test-proof-atlas-occurrence-constructions.cjs
+      - run: node scripts/test-proof-atlas-occurrence-application-fold.cjs
       - run: node scripts/test-proof-atlas-library-bytes.cjs
       - run: node scripts/test-proof-atlas-recorded-context.cjs
       - run: python3 research/proof-atlas/cut-records/check.py /tmp/atlas-cut-records/source-*.json
