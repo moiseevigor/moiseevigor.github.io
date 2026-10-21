@@ -3,20 +3,21 @@
 'use strict';
 const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
 const button=(text,action)=>{const n=el('button',text);n.type='button';n.onclick=action;return n;};
-function mount(parent,model,data,scene,callbacks){
+function mount(parent,model,data,scene,callbacks,presentation=null){
  let disposed=false,action=0,scale=1;const points=[];
  const shell=el('section',undefined,'poc-view pcf-view'),viewport=el('div',undefined,'pow-viewport'),sizing=el('div',undefined,'pow-sizing'),stage=el('div',undefined,'pcf-stage'),status=el('p',undefined,'pow-help');
  shell.dataset.contextFrameView='';viewport.tabIndex=0;viewport.setAttribute('aria-label','Context frame. Scroll or drag empty space to pan.');status.setAttribute('role','status');
  shell.append(el('h2','Recorded context frame'),el('p','Each row extends the original Γ once. Headers stay before their own binder; the remaining body follows the last extension.','pow-help'));
  const initial=el('p','Original context Γ'+scene.context.initialLength+' → Γ'+scene.context.finalLength+' · '+scene.members.length+' retained extensions','pcf-initial');stage.append(initial);
  function pick(address,notify=true){
+  if(notify)action++;
   const route=model.resolve(scene,address);for(const p of points)p.button.setAttribute('aria-pressed',String(JSON.stringify(p.address)===JSON.stringify(address)));
-  if(notify)callbacks.onSelect(route,model.typeFor(scene,address));return route;
+  if(notify)callbacks.onSelect(route,callbacks.lazyTypes?()=>model.typeFor(scene,address):model.typeFor(scene,address));return route;
  }
  function sourceControl(address,label,parent){
-  const route=model.resolve(scene,address),node=host.ProofAtlasPackedRoutes.resolve(data,route).node,b=button(label,()=>pick(address));b.dataset.contextFramePoint=JSON.stringify(address);b.dataset.constructionPoint='';b.setAttribute('aria-pressed','false');parent.append(b);points.push({address,route,button:b});
-  const detail=host.ProofAtlasLibraryData.describe(data,node),preview=el('p',detail.length>240?detail.slice(0,240)+'… [constructor preview]':detail,'pow-formula');preview.tabIndex=0;parent.append(preview);
-  const actions=el('div',undefined,'pcf-actions'),type=button('Recorded type',async()=>{const epoch=++action;type.disabled=true;try{const entry=await model.typeFor(scene,address);if(!disposed&&epoch===action){pick(address,false);callbacks.onType(route,entry);}}catch(error){if(!disposed)status.textContent=error.message;}finally{type.disabled=false;}});type.dataset.contextFrameType=JSON.stringify(address);actions.append(type,button('Focus source',()=>callbacks.onSource(route)));parent.append(actions);
+  const route=model.resolve(scene,address),prepared=presentation?.previews[JSON.stringify(address)],node=prepared?prepared.node:host.ProofAtlasPackedRoutes.resolve(data,route).node,b=button(label,()=>pick(address));b.dataset.contextFramePoint=JSON.stringify(address);b.dataset.constructionPoint='';b.setAttribute('aria-pressed','false');parent.append(b);points.push({address,route,button:b});
+  const detail=prepared?prepared.text:host.ProofAtlasLibraryData.describe(data,node),preview=el('p',prepared?detail:detail.length>240?detail.slice(0,240)+'… [constructor preview]':detail,'pow-formula');preview.tabIndex=0;parent.append(preview);
+  const actions=el('div',undefined,'pcf-actions'),type=button('Recorded type',async()=>{const epoch=++action;type.disabled=true;try{callbacks.onTypeStart?.();const entry=await model.typeFor(scene,address);if(!disposed&&epoch===action){pick(address,false);callbacks.onType(route,entry);}}catch(error){if(!disposed&&epoch===action)status.textContent=error.message;}finally{type.disabled=false;}});type.dataset.contextFrameType=JSON.stringify(address);actions.append(type,button('Focus source',()=>callbacks.onSource(route)));parent.append(actions);
   const link=scene.links.find(l=>JSON.stringify(l.from)===JSON.stringify(address));if(link){const jump=button('Go to original '+(link.bindingClass==='local-definition'?'definition':'binder'),()=>callbacks.onSource(model.resolve(scene,link.target)));jump.dataset.contextFrameBinding=JSON.stringify(address);jump.className='pow-binding';parent.append(jump);}
  }
  for(const [i,m]of scene.members.entries()){
