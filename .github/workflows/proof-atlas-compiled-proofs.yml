@@ -124,8 +124,8 @@ jobs:
             /tmp/atlas-type-page-controls.json
             /tmp/atlas-type-query-pages.json
             /tmp/atlas-type-query-controls.json
-          /tmp/atlas-construction-pages.json
-          /tmp/atlas-construction-page-controls.json
+            /tmp/atlas-construction-pages.json
+            /tmp/atlas-construction-page-controls.json
             /tmp/atlas-application-spine-fold/verification.json
             /tmp/atlas-occurrence-constructions.json
             /tmp/atlas-reduced-replay.json
