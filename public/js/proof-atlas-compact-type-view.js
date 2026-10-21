@@ -42,7 +42,7 @@
    boundaries.forEach((b,i)=>{
     const external=b.namespace==='original-source-context',id=key(b),card=el('article',undefined,'pow-context-card'),pos={x:20+cols*300,y:20+i*180};positions.set(id,pos);card.style.left=pos.x+'px';card.style.top=pos.y+'px';
     const target=external?source:entry.typeData,payload=target.payloads[b.node],pick=button(external?'Γ slot '+(b.ordinal+1)+' · '+(payload.binderName||payload.declName||'_'):'Enclosing type binder · e'+b.node,()=>external?onSource(b.route):focus(b.route));pick.dataset.typeContext=b.namespace;
-    card.append(el('small',external?'ORIGINAL SOURCE CONTEXT':'ENCLOSING COMPUTED TYPE'),pick,el('p','Outside this type cut; excluded from its occurrence count.'));stage.append(card);cards.set(id,{card,pick});
+    card.append(el('small',external?(b.bindingClass==='local-definition'?'ORIGINAL SOURCE DEFINITION':'ORIGINAL SOURCE CONTEXT'):(b.bindingClass==='local-definition'?'ENCLOSING TYPE DEFINITION':'ENCLOSING COMPUTED TYPE')),pick,el('p','Outside this type cut; excluded from its occurrence count.'));stage.append(card);cards.set(id,{card,pick});
    });
    function paths(){if(disposed||scene!==next)return;svg.replaceChildren();
     function line(from,to,control,relation){const a=positions.get(from),b=positions.get(to),target=cards.get(to).pick,right=b.x>=a.x,p=document.createElementNS(svg.namespaceURI,'path'),sx=right?a.x+245:a.x,sy=a.y+control.offsetTop+control.offsetHeight/2,tx=right?b.x:b.x+245,ty=b.y+target.offsetTop+target.offsetHeight/2;p.setAttribute('d','M '+sx+' '+sy+' C '+(sx+(right?30:-30))+' '+sy+' '+(tx+(right?-30:30))+' '+ty+' '+tx+' '+ty);p.dataset.relation=relation;if(relation!=='type-field')p.classList.add('pow-binding-edge');svg.append(p);}

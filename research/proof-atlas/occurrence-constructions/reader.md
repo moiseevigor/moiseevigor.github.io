@@ -1,8 +1,8 @@
 # Recorded constructions in the occurrence reader
 
 The optional **Proof constructions** lens shares the existing compiled-source
-occurrence reader. It expands recorded Π introductions and individual Π
-application stages. **Source occurrences** retains the expression view. Both
+occurrence reader. It expands recorded Π introductions, individual Π application stages and
+source-bound local definitions where their native metadata are available. **Source occurrences** retains the expression view. Both
 lenses use the same selected original occurrence, source fields, binder links
 and recorded-type panel. The human-readable article remains the default article
 view; this lens is independent of its passage index.
@@ -49,7 +49,7 @@ when the selected construction is an observed application prefix.
 ## Compact addresses and bounds
 
 The reader's `ProofAtlasOccurrenceConstructionCut/1` stores one original packed
-root route. Descendant points use at most five binary source-field suffix slots;
+root route. In version 1, descendant points use at most five binary source-field suffix slots;
 external ancestor targets use their original prefix depths. A suffix cannot
 follow a shortened prefix. Source/type origins and original recording-query
 addresses use this same encoding. It recovers original paths without rebasing
@@ -93,10 +93,14 @@ provenance. This finite inventory is not complete construction coverage of those
 declarations or independent verification of original private module bytes or AI
 generation.
 
-The five project records belong to **published-15**. This adapter does not give
-the **working-26** snapshot native typing/construction coverage. Matching names
-or node numbers cannot transfer those records to another snapshot; the exact
-source index and source provenance must match.
+The project records cover four declarations in **published-15**
+(`JacobiCore.E_pos`, `JacobiData.slope_bound_abs`, `SBracket.mk.inj` and
+`CrossingData.crossing`) and one declaration in **working-26**
+(`JacobiConcrete.AmplitudeChart.midpoint_polynomial`). These are finite recorded
+positions, not complete typing coverage of either snapshot. Matching names or
+node numbers cannot transfer records to another source: for example, the
+published Riccati record does not attach to its working-snapshot counterpart.
+The exact source index and source provenance must match.
 
 The independent source audit compares 108 control cuts with the frozen reference
 model and checks 3,054 corpus cuts. It walks original source fields and contexts,
@@ -140,3 +144,7 @@ The optional [application groups](application-fold.md) retain the same primitive
 cut and expose its application stages in one call card, with ordered ports and
 separate per-stage source and type actions. The actual Lean.Expr reassembly laws
 and the finite JavaScript/browser checks establish different guarantees.
+
+Recorded [local definitions](local-definitions.md) add ordered type/value/body
+ports in a versioned ternary cut. Their body retains the original local-definition
+context; the reader does not load or execute the separately pooled ζ results.
