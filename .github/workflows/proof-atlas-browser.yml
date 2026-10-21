@@ -5,6 +5,8 @@ on:
     paths:
       - 'public/js/proof-atlas-construction-pages.js'
       - 'public/js/proof-atlas-cursor-constructions.js'
+      - 'public/js/proof-atlas-cursor-context-frame.js'
+      - 'scripts/test-proof-atlas-cursor-context-frame*.cjs'
       - 'research/proof-atlas/construction-pages/**'
       - 'public/data/proof-atlas/construction-pages/**'
       - 'public/data/proof-atlas/construction-pages-manifest.js'
@@ -255,6 +257,8 @@ on:
     paths:
       - 'public/js/proof-atlas-construction-pages.js'
       - 'public/js/proof-atlas-cursor-constructions.js'
+      - 'public/js/proof-atlas-cursor-context-frame.js'
+      - 'scripts/test-proof-atlas-cursor-context-frame*.cjs'
       - 'research/proof-atlas/construction-pages/**'
       - 'public/data/proof-atlas/construction-pages/**'
       - 'public/data/proof-atlas/construction-pages-manifest.js'
@@ -538,6 +542,7 @@ jobs:
           node scripts/test-proof-atlas-occurrence-application-fold-browser.cjs
           node scripts/test-proof-atlas-occurrence-let-bindings-browser.cjs
           node scripts/test-proof-atlas-occurrence-context-frame-browser.cjs
+          node scripts/test-proof-atlas-cursor-context-frame-browser.cjs
           node scripts/test-proof-atlas-type-pages-browser.cjs
           node scripts/test-proof-atlas-construction-pages-browser.cjs
           node scripts/test-proof-atlas-recorded-context-browser.cjs

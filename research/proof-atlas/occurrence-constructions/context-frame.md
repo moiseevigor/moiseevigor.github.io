@@ -1,8 +1,8 @@
 # Context frames over recorded introduction and definition chains
 
-Status: experimental context-frame lens in the occurrence reader, tested locally
-and not yet released. Existing primitive cut and application-group formats retain
-their previous meanings and limits.
+Status: context-frame lens in the occurrence reader. The paged extension below
+is tested locally and awaits release checks. Existing primitive cut and
+application-group formats retain their previous meanings and limits.
 
 ## Representation problem
 
@@ -143,7 +143,67 @@ frame URL, checks both themes at phone/desktop widths, and verifies missing and
 delayed optional scripts. Four accessibility audits pass. These finite checks do
 not prove general renderer correctness. The article default and blog are unchanged.
 
-Paged frame delivery, general native-consumer correctness, other rule families,
-semantic abstraction and measured proof-inspection tasks remain open. Frame size
+General native-consumer correctness, paged synthetic/deep profile adapters, other
+rule families, semantic abstraction and measured proof-inspection tasks remain open. Frame size
 reduction does not by itself establish improved comprehension. The general
 geometric-language program remains active; the blog is unchanged.
+
+
+## Paged source, construction and type transport
+
+The optional `loading=paged&diagram=construction&group=contexts` lens uses the
+same frame protocol and renderer. `ProofAtlasCursorContextFrame` reads source
+rows and native construction records through separate bounded cursors. It
+compares each proposed member and premise with the actual source fields and
+original context depth. Composition compares type syntax fingerprints computed
+in each construction's own type table. A missing record or incompatible type
+interface leaves the original continuation visible. No complete source or native
+archive is fetched by the consumer.
+
+The model retains at most 64 members and 129 frontiers within the existing
+128 KiB frame bound. Browser cache limits remain 4,096 source rows, eight native
+records of at most 64 KiB, four index pages of at most 128 KiB and one active type
+table with a 512-row cache. Constructor previews retain at most 240 characters
+per source point and have a separate 256 KiB presentation bound. These are
+representation and cache limits, not a total browser-memory bound.
+
+The paged audit compares all 251 chain starts in 25 profiles at member budgets
+1, 4, 13, 32 and 64: 1,255 frames, 26,226 source-address actions, 8,985 recorded
+type selections and 6,270 constructor previews agree with the complete reader.
+The largest observed frame is 61,251 bytes; the largest preview packet is
+8,608 bytes. The one-page audit retains at most 256 source rows, 64 type rows and
+7,005 decoded native-record bytes. It includes 33 mixed introduction/definition
+chains and five displayed links to original local definitions. These counts
+include overlapping chain suffixes, not distinct proofs.
+
+A parent's body and its child's conclusion have the same source occurrence but
+can come from distinct recorded type components. All 2,464 such joins in the
+maximum-budget audit retain their original recording identities. Selecting one
+must not silently select the other. Four rehashed-transport refusal controls
+check altered source nodes/fields and disposal during a load. Two altered type
+interfaces remain explicit uncomposed continuations. These are synthetic
+transport controls, not newly discovered mathematical counterexamples.
+
+The browser compares all 251 frames across the 25 profiles, selects 101 source
+points and opens 48 exact recorded type diagrams. It checks the 57-member chain,
+budgeted continuation, an original local-definition jump, the two recording
+identities at a shared body route, missing/delayed frame components and a stale
+type selection. Four accessibility audits cover both themes at phone/desktop
+widths. No complete source or native archive request occurs.
+
+For `JacobiData.slope_bound_abs`, the proof-root frame exposes six introductions
+and then stops at the original local-definition occurrence at depth six, for
+which this finite profile has no construction record. Its remaining source
+region contains 165,476 occurrences. The frame does not claim to expose or type
+that definition's proof steps. Broader native query coverage is still needed to
+reach the interior Riccati argument through this lens.
+
+```sh
+node scripts/test-proof-atlas-cursor-context-frame.cjs
+node scripts/test-proof-atlas-cursor-context-frame-controls.cjs
+node scripts/test-proof-atlas-cursor-context-frame-browser.cjs
+```
+
+The Lean structural laws above remain separate evidence. Complete-reference
+agreement does not prove the JavaScript consumer, a source-module hash or a new
+kernel typing judgment. The article and blog are unchanged.
