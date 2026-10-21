@@ -25,6 +25,6 @@ let observations=0,scenes=0,tables=0,originalLinks=0,typeLocalLinks=0,peakTypeNo
   }finally{source.dispose();for(const cursor of cursors.values())cursor.dispose();}
  }
  assert.equal(observations,2411);assert.equal(tables,32);assert(originalLinks>0&&typeLocalLinks>0);assert.equal(fullArchiveRequests,0);
- const report={status:'PASS',scope:'Finite complete-reference comparison of paged computed type geometry; no UI integration or whole-browser memory proof',declarations:rows.length,tables,observations,scenes,refinements,originalContextLinkAppearances:originalLinks,typeLocalLinkAppearances:typeLocalLinks,peakTypeNodes,peakTypeBytes,fullArchiveRequests,rows};
+ const report={status:'PASS',scope:'Independent finite model comparison of paged computed type geometry; browser integration and whole-browser memory have separate evidence',declarations:rows.length,tables,observations,scenes,refinements,originalContextLinkAppearances:originalLinks,typeLocalLinkAppearances:typeLocalLinks,peakTypeNodes,peakTypeBytes,fullArchiveRequests,rows};
  fs.writeFileSync(process.env.ATLAS_TYPE_PAGES_REPORT||'/tmp/atlas-type-pages.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({...report,rows:undefined}));
 })().catch(e=>{console.error(e.stack);process.exit(1);});

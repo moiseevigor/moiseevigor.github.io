@@ -1,8 +1,9 @@
 # Paged computed-type geometry
 
-Status: experimental producer/cursor and complete-reference evaluation. This
-prototype is not wired into the website. The released native-query reader still
-loads its shared type graphs completely. No new type archive is published here.
+Status: locally integrated optional `?view=occurrence&loading=paged` reader; not
+yet released. The separate older `?loading=paged` judgment reader retains its
+complete shared type graphs. The new occurrence mode loads source fields, type
+observations and type fields through independent bounded cursors.
 
 ## Representation and scope
 
@@ -103,6 +104,10 @@ Run from the repository root:
 ```sh
 node scripts/test-proof-atlas-type-pages.cjs
 node scripts/test-proof-atlas-type-page-controls.cjs
+node scripts/build-proof-atlas-type-pages.cjs --check
+node scripts/test-proof-atlas-type-query-pages.cjs
+node scripts/test-proof-atlas-type-query-controls.cjs
+node scripts/test-proof-atlas-type-pages-browser.cjs
 node scripts/test-proof-atlas-source-page-controls.cjs
 node scripts/test-proof-atlas-source-pages.cjs
 ```
@@ -116,11 +121,43 @@ compiler/module attestation. Original private mathematical module bytes are
 neither read nor published. This cursor is not a JavaScript kernel or a formal
 proof of native-consumer correctness.
 
-The next step is to connect this cursor to the existing recorded-type renderer
-and then replace complete type-table residency in paged native-query delivery.
-The renderer must consume bounded scene/payload snapshots, preserve original Γ
-jumps and cancel stale source/type selections. Query/table registration and
-construction-premise recipes must retain their distinct original provenance.
-This experiment does not yet change live loading, frame delivery, article
-reading, other proof-rule coverage or measured human inspection performance.
-The general geometric-language program remains active. The blog is unchanged.
+The occurrence reader's optional **Paged source and types** link uses the existing
+source and type renderers. Source cuts and type cuts resume through independent
+row cursors; their display snapshots retain original payloads and exact binder
+addresses. One selected type table is active at a time. A source display snapshot
+retains at most 64 source rows and 8 MiB decoded JSON; a type presentation is also
+capped at 8 MiB. These bounds are separate from the page caches. Constructor text
+previews may be clipped explicitly while the exact payload remains available.
+
+`ProofAtlasTypeQueryPages/1` supplies authenticated finite route lookup and a
+paginated list of every checked observation. Sixteen rows are shown per page.
+The query cache retains at most four index pages, each capped at 128 KiB; its
+manifest is capped at 256 KiB, with at most two type-table descriptors and 4,096
+positions per declaration. Root/child counts, ranges, ordering, source identity
+and selected observation summaries are checked. A failed asset load is reported
+as unavailable evidence; it cannot become a clean absence. Native archive links
+retain their original public paths and hashes. An archive link is not fetched
+automatically. The registry contains all 2,411 checked positions, including the
+108 extra let observations, not every queried-but-unavailable or unqueried path.
+
+The route-index audit compares all 2,411 lookups and paginated rows, 25 clean
+absences, 2,411 type cuts and 4,822 source cuts. All 18,153 displayed source
+presentations agree with the complete reader. The separate index control suite
+checks 26 refusals, signed range/count relationships, input snapshots and disposal.
+
+The local browser audit covers 25 profiles: 28 source/type comparisons, 25 type
+refinements, 25 indexed-position selections, original Γ and type-local binder
+jumps, two uses of shared source node 17 with different roles/contexts, four accessibility audits and six failure/cancellation/disposal cases.
+It observes no complete source/native archive requests; the measured maxima are
+623 source-cache nodes and 256 type-cache nodes for these browser cuts. These are
+observed working sets, below the configured 4,096-source/512-type cache limits.
+
+Construction rules and arbitrary node-number lookup still use the complete
+loader. Source fields and indexed positions remain navigable in paged mode. A
+complete-loader link preserves the selected source occurrence. Paged native
+construction delivery needs a separate exact projection and explicit handling
+of its component recipes; it must not bypass or weaken the old native validator.
+Frame delivery, broader typing coverage, independently verified AI provenance,
+general consumer correctness and measured comprehension remain open work. The
+general geometric-language program remains active. Article text and the blog
+are unchanged.

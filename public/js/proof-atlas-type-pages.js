@@ -16,7 +16,7 @@ async function open(input,{fetcher=host.fetch.bind(host),signal,pageLimit=8,inde
  const live=s=>{if(signal?.aborted||s?.aborted)throw signal?.reason||s.reason||Error('aborted');demand(!disposed,'disposed');};
  demand(natural(pageLimit)&&pageLimit>=1&&pageLimit<=limits.pages&&natural(indexLimit)&&indexLimit>=1&&indexLimit<=limits.indexPages,'cache bounds');
  demand(hex(d.sha256)&&hex(d.typeTableSha256)&&hex(d.evidenceSha256)&&typeof d.file==='string'&&d.file.startsWith('/public/data/proof-atlas/type-pages/'+d.typeTableSha256+'/')&&/\/type-pages\/[a-f0-9]{64}\/[a-f0-9]{64}\.manifest\.gz$/.test(d.file),'descriptor identity');
- const base=d.file.slice(0,d.file.lastIndexOf('/')+1),pages=new Map(),indices=new Map(),observations=new WeakSet(),stats={pageLoads:0,indexLoads:0,observationLoads:0,evictions:0,faults:0,peakCachedNodes:0,peakCachedBytes:0};
+ const base=d.file.slice(0,d.file.lastIndexOf('/')+1),pages=new Map(),indices=new Map(),observations=new WeakSet(),scenes=new WeakSet(),stats={pageLoads:0,indexLoads:0,observationLoads:0,evictions:0,faults:0,peakCachedNodes:0,peakCachedBytes:0};
  async function read(descriptor,cap,s){
   live(s);demand(hex(descriptor.sha256)&&natural(descriptor.bytes)&&descriptor.bytes>0&&descriptor.bytes<=cap&&typeof descriptor.file==='string'&&descriptor.file.startsWith(base)&&/^[a-f0-9]{64}\.(manifest|index|page|observation)\.gz$/.test(descriptor.file.slice(base.length)),'asset descriptor');
   const r=await fetcher(descriptor.file,{signal:s||signal});demand(r.ok,'asset unavailable ('+r.status+')');
@@ -26,7 +26,7 @@ async function open(input,{fetcher=host.fetch.bind(host),signal,pageLimit=8,inde
   demand(count===descriptor.bytes,'asset decoded size');const bytes=new Uint8Array(count);let at=0;for(const b of chunks){bytes.set(b,at);at+=b.byteLength;}
   demand(await A.digest(bytes)===descriptor.sha256,'asset hash');live(s);return freeze(JSON.parse(new TextDecoder().decode(bytes)));
  }
- const manifest=await read(d,limits.manifestBytes,signal),n=manifest.nodeCount;
+ const manifest=await read(d,limits.manifestBytes,signal),n=manifest.nodeCount;live();
  let level=0,capacity=64;while(capacity<manifest.pageCount){capacity*=64;level++;}
  demand(manifest.format==='ProofAtlasTypePages/1'&&manifest.typeTableSha256===d.typeTableSha256&&manifest.evidenceSha256===d.evidenceSha256&&natural(n)&&n===d.nodes&&n>0&&n<=limits.nodes&&manifest.pageSize===limits.pageSize&&manifest.pageCount===Math.ceil(n/limits.pageSize)&&manifest.indexLevel===level&&hex(manifest.indexRoot),'manifest identity/bounds');
  demand(manifest.source&&hex(manifest.source.indexSha256)&&hex(manifest.source.sourceSha256)&&typeof manifest.source.name==='string'&&manifest.typeDeclaration?.name===manifest.source.name+' / recorded type'&&Array.isArray(manifest.typeDeclaration.rootPaths)&&manifest.typeDeclaration.rootPaths.length===1&&manifest.typeDeclaration.rootPaths[0]==='computed.native.type','source/type identity');
@@ -36,13 +36,13 @@ async function open(input,{fetcher=host.fetch.bind(host),signal,pageLimit=8,inde
   if(indices.has(sha))return touch(indices,sha);
   // Index decoded sizes are in their parent descriptor; the root has its own.
   const ref=manifest.indexSizes[sha];demand(natural(ref)&&ref>0&&ref<=limits.indexBytes,'index size');
-  const v=await read({file:base+sha+'.index.gz',sha256:sha,bytes:ref},limits.indexBytes,s);demand(v.format==='ProofAtlasTypeIndex/1'&&Array.isArray(v.children)&&v.children.length>0&&v.children.length<=64&&v.children.every(x=>hex(x.sha256)&&natural(x.bytes)&&x.bytes>0&&x.bytes<=limits.pageBytes),'index shape');
+  const v=await read({file:base+sha+'.index.gz',sha256:sha,bytes:ref},limits.indexBytes,s);live(s);demand(v.format==='ProofAtlasTypeIndex/1'&&Array.isArray(v.children)&&v.children.length>0&&v.children.length<=64&&v.children.every(x=>hex(x.sha256)&&natural(x.bytes)&&x.bytes>0&&x.bytes<=limits.pageBytes),'index shape');
   if(indices.size===indexLimit)indices.delete(indices.keys().next().value);indices.set(sha,v);stats.indexLoads++;return v;
  }
  async function load(page,s){
   live(s);demand(natural(page)&&page<manifest.pageCount,'page address');if(pages.has(page)){touch(pages,page);return;}
   let ref={sha256:manifest.indexRoot,bytes:manifest.indexSizes[manifest.indexRoot]};for(let i=manifest.indexLevel;i>=0;i--){demand(ref.bytes===manifest.indexSizes[ref.sha256],'index parent size');const v=await index(ref.sha256,s),span=64**i,first=Math.floor(page/(64*span))*64*span;demand(v.level===i&&v.first===first&&v.children.length===Math.min(64,Math.ceil((manifest.pageCount-first)/span)),'index range');ref=v.children[Math.floor(page/span)%64];}
-  const value=await read({...ref,file:base+ref.sha256+'.page.gz'},limits.pageBytes,s);
+  const value=await read({...ref,file:base+ref.sha256+'.page.gz'},limits.pageBytes,s);live(s);
   demand(value.format==='ProofAtlasTypePage/1'&&value.typeTableSha256===d.typeTableSha256&&value.start===page*limits.pageSize&&Array.isArray(value.nodes)&&value.nodes.length===Math.min(limits.pageSize,n-value.start),'page identity');
   for(const [j,row]of value.nodes.entries()){
    demand(Array.isArray(row)&&row.length===5,'type tuple');const [k,children,payload,count,scope]=row;
@@ -58,10 +58,10 @@ async function open(input,{fetcher=host.fetch.bind(host),signal,pageLimit=8,inde
  function run(fn,{signal:s}={}){const task=async()=>{for(let i=0;i<limits.faults;i++){live(s);try{const value=await fn();live(s);return value;}catch(error){live(s);if(!(error instanceof MissingTypePage))throw error;await load(error.page,s);}}throw Error('Type pages: working-set retry limit; no complete-table fallback');};const result=queue.then(task,task);queue=result.catch(()=>{});return result;}
  async function observation(input,{signal:s}={}){
   const descriptor=freeze(snapshot(input)),o=await read(descriptor,limits.observationBytes,s);
-  demand(o.format==='ProofAtlasPagedTypeObservation/1'&&o.typeTableSha256===d.typeTableSha256&&o.evidenceSha256===d.evidenceSha256&&o.sourceIndexSha256===manifest.source.indexSha256&&natural(o.root)&&o.root<n&&natural(o.sourceNode)&&natural(o.contextLength)&&['proof','type','value'].includes(o.role),'observation identity');
+  demand(o.format==='ProofAtlasPagedTypeObservation/1'&&o.typeTableSha256===d.typeTableSha256&&o.evidenceSha256===d.evidenceSha256&&o.sourceIndexSha256===manifest.source.indexSha256&&typeof o.evidenceFile==='string'&&o.evidenceFile.startsWith('/public/data/proof-atlas/')&&!o.evidenceFile.split('/').includes('..')&&o.evidenceFile.endsWith('.gz')&&natural(o.root)&&o.root<n&&natural(o.sourceNode)&&natural(o.contextLength)&&['proof','type','value'].includes(o.role),'observation identity');
   P.parse(o.sourceRoute);demand(o.typeRecord?.name===manifest.typeDeclaration.name&&o.typeRecord.uniqueNodes===n&&o.typeRecord.sourceSha256===manifest.source.sourceSha256&&o.typeRecord.indexSha256===o.origin?.typeComponentSha256&&hex(o.typeRecord.indexSha256)&&o.origin.evidenceSha256===d.evidenceSha256&&o.origin.typeTableSha256===d.typeTableSha256&&o.origin.contextLength===o.contextLength&&JSON.stringify(o.origin.sourceRoute)===JSON.stringify(o.sourceRoute)&&o.origin.sourceIndexSha256===o.sourceIndexSha256,'observation origin');
   demand(o.contextLength<=o.sourceRoute.depth&&o.origin.typeTableRoot===o.root&&await A.digest(new TextEncoder().encode(canonical({format:'ProofAtlasRecordedTypeComponent/1',evidenceSha256:o.evidenceSha256,typeTableSha256:o.typeTableSha256,typeTableRoot:o.root})))===o.origin.typeComponentSha256,'recorded component identity');
-  observations.add(o);stats.observationLoads++;return o;
+  live(s);observations.add(o);stats.observationLoads++;return o;
  }
  async function scene(o,sourceCursor,route=P.encode(0,[]),inputOptions={}){
   route=freeze(snapshot(route));const options={...inputOptions},budget=options.maxNodes??9,depthLimit=options.maxDepth??2;live(options.signal);
@@ -109,10 +109,17 @@ async function open(input,{fetcher=host.fetch.bind(host),signal,pageLimit=8,inde
   const shown=new Set(nodes.map(p=>p.id));let hidden=0n;for(const point of nodes)for(const port of point.ports){port.displayed=shown.has(W.id(port.route));if(!port.displayed)hidden+=BigInt(port.expanded);}
   demand(BigInt(nodes.length)+hidden===BigInt(selected.row[3]),'exact frontier partition');
   const result={format:'ProofAtlasCompactTypeScene/1',namespace:'computed-native-type',origin:o.origin,root:{node:selected.node,route,category:'recorded-type-expression'},nodes,edges,links:nodes.filter(p=>p.binding).map(p=>({from:p.id,...p.binding})),stats:{retained:String(nodes.length),hidden:String(hidden),represented:selected.row[3]},guarantee:'Structure of a recorded native type in its original context. Type descendants have no additional typing judgments.'};
-  demand(new TextEncoder().encode(JSON.stringify(result)).length<=W.limits.metadataBytes,'scene byte bound');return result;
+  demand(new TextEncoder().encode(JSON.stringify(result)).length<=W.limits.metadataBytes,'scene byte bound');live(options.signal);freeze(result);scenes.add(result);return result;
+ }
+ async function presentation(scene,sourceCursor,options={}){
+  live(options.signal);demand(scenes.has(scene),'foreign type scene');const identity=SP.identity(sourceCursor);demand(identity.indexSha256===manifest.source.indexSha256&&identity.sourceSha256===manifest.source.sourceSha256,'presentation source identity');
+  const descriptions={},bindings={};
+  for(const point of scene.nodes){const text=await run(()=>A.describe(storage,point.node),options);descriptions[point.node]=text.length<=1600?text:text.slice(0,1600)+'… [constructor preview clipped; exact payload retained]';}
+  for(const link of scene.links){const id=link.namespace+':'+link.route.root+':'+link.route.depth+':'+link.route.slots;if(bindings[id])continue;const source=link.namespace==='original-source-context',row=source?await sourceCursor.run(()=>[sourceCursor.data.kind[link.node],sourceCursor.data.payloads[link.node]],options):await run(()=>[storage.kind[link.node],storage.payloads[link.node]],options);bindings[id]={kind:A.kinds[row[0]],name:row[1].binderName||row[1].declName||'_',payload:row[1]};}
+  live(options.signal);demand(new TextEncoder().encode(JSON.stringify({descriptions,bindings})).length<=8388608,'presentation byte bound');return freeze({descriptions,bindings});
  }
  function table(o){live();demand(observations.has(o),'foreign observation');return Object.freeze({data:Object.freeze({...storage,roots:Object.freeze([o.root])}),record:o.typeRecord});}
- return Object.freeze({manifest,observation,run,scene,table,state:()=>({...stats,cachedPages:pages.size,cachedNodes:[...pages.values()].reduce((s,p)=>s+p.value.nodes.length,0),completeTableResident:[...pages.values()].reduce((s,p)=>s+p.value.nodes.length,0)===n,indexPages:indices.size,pageLimit,indexLimit,nodeLimit:pageLimit*limits.pageSize,fullTableArchiveRequests:0,validation:'producer-validated native table; fetched pages checked by hash/local shape, visible recurrences and original source context'}),dispose:()=>{disposed=true;pages.clear();indices.clear();}});
+ return Object.freeze({manifest,observation,run,scene,presentation,table,state:()=>({...stats,cachedPages:pages.size,cachedNodes:[...pages.values()].reduce((s,p)=>s+p.value.nodes.length,0),completeTableResident:[...pages.values()].reduce((s,p)=>s+p.value.nodes.length,0)===n,indexPages:indices.size,pageLimit,indexLimit,nodeLimit:pageLimit*limits.pageSize,fullTableArchiveRequests:0,validation:'producer-validated native table; fetched pages checked by hash/local shape, visible recurrences and original source context'}),dispose:()=>{disposed=true;pages.clear();indices.clear();}});
 }
 const api={open,limits,MissingTypePage};if(node)module.exports=api;else host.ProofAtlasTypePages=api;
 })(typeof window==='undefined'?globalThis:window);
