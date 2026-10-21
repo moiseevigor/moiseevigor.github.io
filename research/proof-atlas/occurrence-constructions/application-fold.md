@@ -114,3 +114,7 @@ labels, inner-source focus, saved view settings, distinct Meta/kernel types,
 missing/stale optional components and desktop/mobile reading in both themes.
 These tests establish the listed interactions, not a renderer correctness proof
 or coverage of every formalized proof step.
+
+[Local definitions](local-definitions.md) use version 2 of the primitive and grouped
+cut formats. They retain three source ports as one member; their body context
+is extended by a local definition. The application-group rule remains unchanged.

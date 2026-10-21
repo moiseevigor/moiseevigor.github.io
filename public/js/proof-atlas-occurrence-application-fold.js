@@ -8,7 +8,8 @@ const demand=(v,m)=>{if(!v)throw Error('Application spine fold: '+m);};
 const canonical=v=>JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.keys(x).sort().map(k=>[k,x[k]])):x);
 const freeze=v=>{if(v&&typeof v==='object'&&!Object.isFrozen(v)){Object.values(v).forEach(freeze);Object.freeze(v);}return v;};
 function fold(input,memberLimit=13){
- demand(input.format==='ProofAtlasOccurrenceConstructionCut/1','primitive scene format');
+ demand(['ProofAtlasOccurrenceConstructionCut/1','ProofAtlasOccurrenceConstructionCut/2'].includes(input.format),'primitive scene format');
+ const version=input.format.endsWith('/2')?2:1;
  demand(Number.isInteger(memberLimit)&&memberLimit>=1&&memberLimit<=13,'member limit');
  const byId=new Map(input.nodes.map(n=>[n.id,n])),claimed=new Set(),groups=[],owner=new Map();
  const child=(id,field)=>input.edges.find(e=>e.from===id&&e.field===field);
@@ -30,20 +31,20 @@ function fold(input,memberLimit=13){
     ...members.map((m,i)=>({field:'arg'+(i+1),slot:i+1,member:m.id,sourceField:'arg',original:child(m.id,'arg')}))];
    group.headIsApplication=(byId.get(group.ports[0].original.to)||input.frontiers.find(p=>p.id===group.ports[0].original.to))?.kind==='app';
    group.slotBasis=group.headIsApplication?'relative-to-retained-suffix':'complete-source-spine';
-  }else group.ports=['binderType','body'].map(field=>({field,member:outer.id,sourceField:field,original:child(outer.id,field)}));
+  }else group.ports=(outer.rule==='let-binding'?['type','value','body']:['binderType','body']).map(field=>({field,member:outer.id,sourceField:field,original:child(outer.id,field)}));
   demand(group.ports.every(p=>p.original),'ordered primitive ports');groups.push(group);
  }
  const edges=[];
  for(const group of groups)for(const port of group.ports){const edge=port.original;edges.push({from:group.id,to:owner.get(edge.to)||edge.to,field:port.field,sourceFrom:edge.from,sourceField:edge.field,sourceTo:edge.to,relation:edge.relation});delete port.original;}
- const result=freeze({format:'ProofAtlasApplicationSpineCut/1',addressing:input.addressing,source:input.source,root:input.root,options:input.options,memberLimit,
+ const result=freeze({format:'ProofAtlasApplicationSpineCut/'+version,addressing:input.addressing,source:input.source,root:input.root,options:input.options,memberLimit,
   nodes:groups,frontiers:input.frontiers,edges,sourceEdges:input.edges,links:input.links,primitiveScope:input.scope,
   stats:{...input.stats,displayedRules:groups.length,applicationGroups:groups.filter(g=>g.rule==='Pi-application-spine').length},
   guarantee:'Reversible grouping of recorded construction cuts. Every retained application remains a member. Ports retain exact source fields; no rewriting or additional typing judgments.'});
  demand(new TextEncoder().encode(JSON.stringify(result)).length<=65536,'metadata bound');return result;
 }
 function unfold(scene){
- demand(scene?.format==='ProofAtlasApplicationSpineCut/1','folded scene format');
- return {format:'ProofAtlasOccurrenceConstructionCut/1',addressing:scene.addressing,source:scene.source,root:scene.root,options:scene.options,
+ demand(['ProofAtlasApplicationSpineCut/1','ProofAtlasApplicationSpineCut/2'].includes(scene?.format),'folded scene format');
+ return {format:'ProofAtlasOccurrenceConstructionCut/'+(scene.format.endsWith('/2')?2:1),addressing:scene.addressing,source:scene.source,root:scene.root,options:scene.options,
   nodes:scene.nodes.flatMap(n=>n.members).sort((a,b)=>Number(a.id.slice(1))-Number(b.id.slice(1))),frontiers:scene.frontiers,edges:scene.sourceEdges,links:scene.links,
   stats:{retained:scene.stats.retained,hidden:scene.stats.hidden,represented:scene.stats.represented},scope:scene.primitiveScope};
 }
@@ -72,7 +73,7 @@ function open(nativeCase){
     ...(c.premises[1].alternateTypeRoot!==undefined?{metaArgument:ref(c.premises[1].alternateTypeRoot)}:{})},
    texts:{before:c.premises[0].typeText,argument:c.premises[1].typeText,after:entry.typeText},checks:c.checks});
  }
- return Object.freeze({create,validate,unfold,stageFor,source:model.source,memberTypeFor:async(scene,groupId,memberId,field,observation='kernel')=>{const o=origin(scene,groupId,memberId),route=model.routeFor(o.primitive,o.member.id);return T.constructionType(nativeCase.get(route),nativeCase.data,field,observation);},routeFor:(scene,groupId,memberId)=>{const o=origin(scene,groupId,memberId);return model.routeFor(o.primitive,o.member.id);},typeFor:(scene,groupId,memberOrObservation='kernel')=>{const observation=['kernel','meta'].includes(memberOrObservation)?memberOrObservation:'kernel',o=origin(scene,groupId,observation===memberOrObservation?null:memberOrObservation);return model.typeFor(o.primitive,o.member.id,observation);},resolve:(scene,address)=>{demand(scenes.has(scene),'foreign folded scene');return C.resolveAddress(scene.root.route,address);}});
+ return Object.freeze({create,validate,unfold,stageFor,source:model.source,memberTypeFor:async(scene,groupId,memberId,field,observation='kernel')=>{const o=origin(scene,groupId,memberId),route=model.routeFor(o.primitive,o.member.id);return T.constructionType(nativeCase.get(route),nativeCase.data,field,observation);},routeFor:(scene,groupId,memberId)=>{const o=origin(scene,groupId,memberId);return model.routeFor(o.primitive,o.member.id);},typeFor:(scene,groupId,memberOrObservation='kernel')=>{const observation=['kernel','meta'].includes(memberOrObservation)?memberOrObservation:'kernel',o=origin(scene,groupId,observation===memberOrObservation?null:memberOrObservation);return model.typeFor(o.primitive,o.member.id,observation);},resolve:(scene,address)=>{demand(scenes.has(scene),'foreign folded scene');return C.resolveAddress(scene.root.route,address,scene.format.endsWith('/2')?2:1);}});
 }
 const api={fold,unfold,open,canonical};if(node)module.exports=api;else host.ProofAtlasOccurrenceApplicationFold=api;
 })(typeof window==='undefined'?globalThis:window);

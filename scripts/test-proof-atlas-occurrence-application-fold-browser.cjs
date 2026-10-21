@@ -2,16 +2,16 @@
 'use strict';
 const fs=require('fs'),vm=require('vm'),z=require('zlib'),assert=require('assert/strict'),{chromium}=require('playwright');
 const T=require('../public/js/proof-atlas-deep-context'),F=require('../public/js/proof-atlas-occurrence-application-fold'),P=require('../public/js/proof-atlas-packed-routes'),h={};
-for(const f of ['deep-typing-manifest','occurrence-constructions-manifest','library-manifest','occurrence-types-manifest','goedel-sample-manifest'])vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/'+f+'.js','utf8'),{window:h});
+for(const f of ['deep-typing-manifest','occurrence-constructions-manifest','library-manifest','occurrence-types-manifest','goedel-sample-manifest','let-result-pools-manifest'])vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/'+f+'.js','utf8'),{window:h});
 const raw=file=>z.gunzipSync(fs.readFileSync('.'+file)),read=d=>JSON.parse(raw(d.file)),origin=process.env.ATLAS_ORIGIN||'http://127.0.0.1:8833',dir=process.env.ATLAS_SCREENSHOTS||'/tmp/atlas-application-fold-browser';
 const equalRoute=(a,b)=>a.root===b.root&&a.depth===b.depth&&a.slots===b.slots;
 (async()=>{
  fs.mkdirSync(dir,{recursive:true});const controls=T.mergeControls(await T.prepare(read(h.PROOF_ATLAS_DEEP_TYPING),h.PROOF_ATLAS_DEEP_TYPING),await T.prepareConstructions(read(h.PROOF_ATLAS_OCCURRENCE_CONSTRUCTIONS),h.PROOF_ATLAS_OCCURRENCE_CONSTRUCTIONS));
  const {library,types}=require('../public/js/proof-atlas-ai-sample').register(h.PROOF_ATLAS_LIBRARY,h.PROOF_ATLAS_OCCURRENCE_TYPES,null,h.PROOF_ATLAS_AI_SAMPLE),corpus=[];
- for(const d of types.records){const record=library.editions.find(e=>e.id===d.edition).declarations.find(r=>r.name===d.name),pkg=await T.recorded(raw(record.indexFile),raw(d.file),d,record);corpus.push({d,c:pkg.case(record.name)});}
+ for(const d of types.records){const record=library.editions.find(e=>e.id===d.edition).declarations.find(r=>r.name===d.name);let pkg=await T.recorded(raw(record.indexFile),raw(d.file),d,record);const ld=h.PROOF_ATLAS_LET_REDUCTIONS.records.find(x=>x.name===record.name&&x.edition===d.edition&&x.indexSha256===record.indexSha256);if(ld)pkg=T.mergeRecorded(pkg,await T.recordedLets(raw(record.indexFile),raw(ld.file),ld,record));corpus.push({d,c:pkg.case(record.name)});}
  const browser=await chromium.launch({headless:true,executablePath:process.env.ATLAS_CHROMIUM_PATH}),page=await browser.newPage({viewport:{width:1700,height:1100}}),errors=[];
  await page.addInitScript(()=>{localStorage.setItem('analytics-consent','no');localStorage.setItem('theme','light');});page.on('pageerror',e=>errors.push(e.message));
- const ready=()=>page.waitForFunction(()=>window.ProofAtlasOccurrenceView?.getConstructionScene()?.format==='ProofAtlasApplicationSpineCut/1');
+ const ready=()=>page.waitForFunction(()=>window.ProofAtlasOccurrenceView?.getConstructionScene()?.format?.startsWith('ProofAtlasApplicationSpineCut/'));
  const choose=async route=>{await page.evaluate(r=>ProofAtlasOccurrenceView.focus(r),route);await page.waitForFunction(r=>JSON.stringify(ProofAtlasOccurrenceView.getConstructionScene()?.root.route)===JSON.stringify(r),route);};
  const actual=()=>page.evaluate(()=>ProofAtlasOccurrenceView.getConstructionScene());
  const url=c=>origin+'/projects/proof-atlas/library/?view=occurrence&diagram=construction&group=applications&levels=4&'+(c.d?'edition='+encodeURIComponent(c.d.edition)+'&proof='+encodeURIComponent(c.d.name):'control=checked-context&case='+encodeURIComponent(c.name));

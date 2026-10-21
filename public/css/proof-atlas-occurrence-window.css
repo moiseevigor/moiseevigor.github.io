@@ -49,3 +49,5 @@
 .poc-card [data-construction-stages] ol{max-height:320px;overflow:auto;padding-right:.25rem}
 
 .poc-stage-types{color:var(--text,#243c49);background:var(--fig-bg,#edf2f2);border:1px solid var(--border,#a4b4b8);padding:.45rem}
+
+.poc-view .poc-card[data-local-definition]{max-height:none}

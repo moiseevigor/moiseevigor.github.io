@@ -13,7 +13,7 @@
  const routeKey=r=>r.root+':'+r.depth+':'+r.slots;
  const graphFields=['children','expanded','kind','neededScope','payloads','roots','serialization'];
  const graph=data=>Object.fromEntries(graphFields.map(k=>[k,data[k]]));
- const attestedEntries=new WeakSet(),acceptedSources=new WeakMap(),constructionRecords=new WeakMap(),contextDescriptors=new WeakMap(),controlPackages=new WeakMap();
+ const attestedEntries=new WeakSet(),acceptedSources=new WeakMap(),constructionRecords=new WeakMap(),contextDescriptors=new WeakMap(),controlPackages=new WeakMap(),recordedPackages=new WeakSet();
  function freeze(value){if(value&&typeof value==='object'&&!Object.isFrozen(value)){for(const v of Object.values(value))freeze(v);Object.freeze(value);}return value;}
  function expressionEqual(g,a,h,b){
   const todo=[[a,b]],seen=new Set();while(todo.length){const [x,y]=todo.pop(),key=x+':'+y;if(seen.has(key))continue;seen.add(key);
@@ -28,17 +28,19 @@
  function sourceIdentity(source,record){const a=acceptedSources.get(source);demand(a&&a.caseName===record.name&&a.sourceSha===record.indexSha256&&record.uniqueNodes===source.kind.length,'accepted source identity');return Object.freeze({name:a.caseName,indexSha256:a.sourceSha,sourceGraphSha256:a.sourceGraphSha256});}
  function contextSlot(signature,index){if(signature.base)return index===signature.length-1&&signature.extra?signature.extra:contextSlot(signature.base,index);return{depth:signature.depths[index],node:signature.nodes[index]};}
  function saveConstruction(entry,source,rule,parts,checks,components,recording=entry.recording){
-  const intro=rule==='Pi-introduction';demand(intro||rule==='Pi-application','construction rule');
-  demand(source.kind[entry.node]===(intro?6:5)&&parts.length===2,'construction source');
+  const intro=rule==='Pi-introduction',definition=rule==='let-binding';demand(intro||definition||rule==='Pi-application','construction rule');
+  const fields=definition?['type','value','body']:intro?['binderType','body']:['fn','arg'];
+  demand(source.kind[entry.node]===(definition?8:intro?6:5)&&parts.length===fields.length&&parts.every((p,i)=>p.field===fields[i]),'construction source');
   const premises=parts.map((part,slot)=>{
-   const route=P.append(entry.route,[slot]),resolved=P.resolve(source,route),contextLength=entry.contextLength+(intro&&slot===1?1:0);
+   const route=P.append(entry.route,[slot]),resolved=P.resolve(source,route),contextLength=entry.contextLength+((intro&&slot===1||definition&&slot===2)?1:0);
    demand(resolved.node===source.children[entry.node][slot]&&resolved.scopeDepth===contextLength,'construction field/context');
    demand(['proof','type','value'].includes(part.role)&&entry.typeData.neededScope[part.typeRoot]<=contextLength,'construction premise type');
    const contextAt=index=>{demand(natural(index)&&index<contextLength,'premise context ordinal');return index<entry.contextLength?entry.contextAt(index):{ordinal:index,node:entry.node,route:entry.route};};
    return freeze({...part,node:resolved.node,route,contextLength,contextAt});
   });
   demand(Object.values(checks).every(x=>x==='PASS'),'construction conversions');
-  const value=freeze({rule,entry,premises,checks,components,recording});constructionRecords.set(entry,value);return value;
+  if(definition)demand(Object.values(components).every(root=>natural(root)&&entry.typeData.neededScope[root]<=entry.contextLength),'local-definition component scope');
+  const value=freeze({rule,entry,premises,checks,components,recording,...(definition?{contextExtension:{kind:'local-definition',binderName:source.payloads[entry.node].declName,nondep:source.payloads[entry.node].nondep,typeField:'type',valueField:'value',bodyField:'body'}}:{})});constructionRecords.set(entry,value);return value;
  }
  function construction(entry,source){sourceAccepted(entry,source);return constructionRecords.get(entry)||null;}
  async function constructionType(entry,source,field,observation='kernel'){
@@ -51,7 +53,7 @@
    typeText:field==='conclusion'?c.entry.typeText:observation==='kernel'?p.typeText:undefined,
    typeData:freeze({...c.entry.typeData,roots:[root]}),typeRecord:freeze({...c.entry.typeRecord,indexSha256:componentHash}),
    ...(c.entry.typeTableSha256?{typeTableRoot:root,typeComponentSha256:componentHash}:{typeComponentRoot:root}),
-   recording:freeze({kind:'construction-premise-observation',queryRoute:c.recording?.queryRoute||entry.route,queryNode:c.recording?.queryNode??entry.node,constructionRoute:entry.route,constructionNode:entry.node,field,observation,...(c.recording?.stage?{stage:c.recording.stage}:{}),nativeRecording:c.recording})});
+   recording:freeze({kind:'construction-premise-observation',queryRoute:c.recording?.queryRoute||entry.route,queryNode:c.recording?.queryNode??entry.node,constructionRoute:entry.route,constructionNode:entry.node,field,observation,...(p.typePresentation?{presentation:p.typePresentation}:{}),...(c.recording?.stage?{stage:c.recording.stage}:{}),nativeRecording:c.recording})});
   attestedEntries.add(result);const prior=contextDescriptors.get(c.entry);if(prior)contextDescriptors.set(result,p.contextLength===c.entry.contextLength?prior:{base:prior,length:p.contextLength,extra:{depth:c.entry.route.depth,node:c.entry.node}});return result;
  }
  function descriptor(d){
@@ -208,19 +210,32 @@
   return Object.freeze({cases:Object.freeze(cases),case:name=>byName.get(name)||null,attach:async(data,record)=>{const c=byName.get(record.name);if(!c)return null;const original=baseline.case(record.name);const found=await (original?baseline:supplement).attach(data,record);return found?c:null;}});
  }
  // Existing extraction profiles retain their native provenance and shared type roots.
- async function recorded(sourceBytes,evidenceBytes,d,record){
+ async function recorded(sourceBytes,evidenceBytes,d,record){return recordedProfile(sourceBytes,evidenceBytes,d,record,false);}
+ async function recordedLets(sourceBytes,evidenceBytes,d,record){return recordedProfile(sourceBytes,evidenceBytes,d,record,true);}
+ async function recordedProfile(sourceBytes,evidenceBytes,d,record,letMetadata){
   demand(sourceBytes?.byteLength>0&&sourceBytes.byteLength<=67108864&&evidenceBytes?.byteLength>0&&evidenceBytes.byteLength<=67108864,'recorded input byte bound');
   const capture=b=>{demand(b instanceof ArrayBuffer||ArrayBuffer.isView(b),'recorded byte buffer');const view=b instanceof ArrayBuffer?new Uint8Array(b):new Uint8Array(b.buffer,b.byteOffset,b.byteLength);demand(view.buffer instanceof ArrayBuffer,'recorded non-shared byte buffer');return view.slice();};
   sourceBytes=capture(sourceBytes);evidenceBytes=capture(evidenceBytes);d=JSON.parse(JSON.stringify(d));record=JSON.parse(JSON.stringify(record));
   demand(hash(d?.sha256)&&hash(record?.indexSha256)&&hash(record.sourceSha256)&&d.name===record.name&&d.indexSha256===record.indexSha256&&d.sourceSha256===record.sourceSha256,'recorded descriptor identity');
   demand(natural(record.uniqueNodes)&&record.uniqueNodes>0&&record.uniqueNodes<=P.limits.sourceNodes,'recorded source bound');
-  demand(typeof d.edition==='string'&&typeof d.file==='string'&&/^\/public\/data\/proof-atlas\/(occurrence-types|goedel-sample)\/[A-Za-z0-9_.-]+\.json\.gz$/.test(d.file),'recorded evidence location');
+  const location=letMetadata?/^\/public\/data\/proof-atlas\/let-result-pools\/[A-Za-z0-9_.-]+\.index\.json\.gz$/:/^\/public\/data\/proof-atlas\/(occurrence-types|goedel-sample)\/[A-Za-z0-9_.-]+\.json\.gz$/;
+  demand(typeof d.edition==='string'&&typeof d.file==='string'&&location.test(d.file),'recorded evidence location');
   demand(await A.digest(sourceBytes)===record.indexSha256&&await A.digest(evidenceBytes)===d.sha256,'recorded input hash');
   const source=A.validateIndex(JSON.parse(new TextDecoder().decode(sourceBytes)),record),e=JSON.parse(new TextDecoder().decode(evidenceBytes));
   demand(source.kind.length<=P.limits.sourceNodes,'recorded source bound');
   const O=node?require('./proof-atlas-occurrence-types'):host.ProofAtlasOccurrenceTypes;
-  demand(O?.validate&&O?.indexObservations,'existing native profile validator');O.validate(e,source,record);demand(e.source.edition===d.edition,'recorded edition');
-  const indexed=O.indexObservations(e,source),sourceGraphSha256=await digest(canonical(graph(source))),pools=new Map(),entries=new Map(),list=[];
+  demand(O?.validate&&O?.indexObservations,'existing native profile validator');
+  let indexed;
+  if(letMetadata){
+   const L=node?require('./proof-atlas-let-reduction'):host.ProofAtlasLetReduction,I=node?require('./proof-atlas-let-pools'):host.ProofAtlasLetPools;
+   demand(L?.validateMetadata&&I?.validateIndex&&natural(d.decodedBytes)&&d.decodedBytes===evidenceBytes.byteLength&&d.decodedBytes<=8388608,'bounded let metadata profile');
+   I.validateIndex(e,d,source,record,L.validateMetadata);
+   const entries=new Map(e.entries.map(q=>[q.route.root+':'+q.route.slots.join('.'),q.status==='checked'?{...q,typeGraph:e.typeGraph}:q])),view=L.indexPremises([...entries.values()],source);
+   indexed={entries,lookup:new Map(e.entries.filter(q=>q.status!=='checked').map(q=>[q.route.root+':'+q.route.slots.join('.'),q])),observed:view.observed};
+   for(const q of view.observations)indexed.lookup.set(q.route.root+':'+q.route.slots.join('.'),q);
+  }else{O.validate(e,source,record);indexed=O.indexObservations(e,source);}
+  demand(e.source.edition===d.edition,'recorded edition');
+  const sourceGraphSha256=await digest(canonical(graph(source))),pools=new Map(),entries=new Map(),list=[];
   freeze(source);
   for(const q of indexed.lookup.values()){
    if(q.status!=='checked')continue;
@@ -241,17 +256,25 @@
    }
    demand(component.data.neededScope[q.typeRoot]<=q.context.length,'recorded type context');
    const primary=indexed.entries.get(q.route.root+':'+q.route.slots.join('.'))?.status==='checked',origin=primary?null:q.typingOrigin;
-   demand(primary||['application-trace-observation','lambda-introduction-observation'].includes(origin?.kind),'recorded observation origin');
+   demand(primary||['application-trace-observation','lambda-introduction-observation',...(letMetadata?['let-premise-observation']:[])].includes(origin?.kind),'recorded observation origin');
    const queryRoute=primary?route:P.encode(origin.query.route.root,origin.query.route.slots),query=primary?q:indexed.entries.get(origin.query.route.root+':'+origin.query.route.slots.join('.'));
    demand(query?.status==='checked'&&P.resolve(source,queryRoute).node===(primary?q.node:origin.query.node),'recording parent query');
-   const recording=freeze({kind:primary?'primary-query':origin.kind,queryRoute,queryNode:query.node,...(origin?{part:origin.part,...(origin.slot?{slot:origin.slot}:{})}:{})});
+   const recording=freeze({kind:primary?'primary-query':origin.kind,queryRoute,queryNode:query.node,...(origin?{part:origin.part,...(origin.presentation?{presentation:origin.presentation}:{}),...(origin.slot?{slot:origin.slot}:{})}:{})});
    const contextLength=q.context.length;
-   const entry=Object.freeze({format:'ProofAtlasDeepTypingAttachment/2',profile:'native-extraction-record',evidenceSha256:d.sha256,evidenceFile:d.file,caseName:record.name,sourceIndexSha256:record.indexSha256,sourceGraphSha256,route:freeze(route),node:q.node,role:q.role,contextLength,
+   const entry=Object.freeze({format:'ProofAtlasDeepTypingAttachment/2',profile:letMetadata?'native-let-extraction-record':'native-extraction-record',evidenceSha256:d.sha256,evidenceFile:d.file,caseName:record.name,sourceIndexSha256:record.indexSha256,sourceGraphSha256,route:freeze(route),node:q.node,role:q.role,contextLength,
     typeTableSha256:pool.sha256,typeTableRoot:q.typeRoot,typeComponentSha256:component.sha256,typeData:component.data,typeRecord:component.record,typeText:q.typeText,recording,
     producerSourceModuleHashVerified:e.sourceModuleHashVerified===true,readerSourceModuleBytesVerified:false,
     contextAt:index=>{demand(natural(index)&&index<contextLength,'recorded context ordinal');return {ordinal:index,node:contextNodes[index],route:P.prefix(route,contextDepths[index])};}});
    attestedEntries.add(entry);contextDescriptors.set(entry,{depths:contextDepths,nodes:contextNodes});entries.set(routeKey(route),entry);list.push(entry);
-   if(q.lambdaJudgment?.status==='checked'){
+   if(letMetadata&&q.letJudgment?.status==='checked'){
+    const z=q.letJudgment;
+    saveConstruction(entry,source,'let-binding',[
+     {field:'type',role:'type',typeRoot:z.type.typeRoot,typeText:A.describe(g,z.type.typeRoot),typePresentation:'compiled-constructor-summary'},
+     {field:'value',role:z.value.role,typeRoot:z.value.typeRoot,typeText:z.value.typeText},
+     {field:'body',role:z.body.role,typeRoot:z.body.typeRoot,typeText:z.body.typeText}
+    ],Object.fromEntries(['kernelDomainSort','kernelValueConversion','kernelTermConversion','kernelResultTyping','kernelResultTypeConversion','kernelSubstitutedTypeConversion'].map(k=>[k,z[k]])),
+    {declaredType:z.type.expressionRoot,declaredSort:z.type.sortRoot,expectedValueType:z.value.expectedRoot,substitutedBodyType:z.substitutedTypeRoot,reducedType:z.reducedTypeRoot},recording);
+   }else if(q.lambdaJudgment?.status==='checked'){
     const t=q.lambdaJudgment;
     saveConstruction(entry,source,'Pi-introduction',[
      {field:'binderType',role:'type',typeRoot:t.domain.typeRoot,typeText:t.domain.typeText},
@@ -269,11 +292,34 @@
   }
   demand(list.length===[...indexed.lookup.values()].filter(q=>q.status==='checked').length,'recorded checked inventory');
   const value=Object.freeze({name:record.name,data:source,record:freeze({...record}),sourceGraphSha256,entries:Object.freeze(list),get:route=>{P.parse(route);return entries.get(routeKey(route))||null;},
-   provenance:freeze({profile:'native-extraction-record',nativeFormat:e.format,environment:e.environment,packing:e.packing||null,source:e.source,publisherOrigin:record.origin||null,producerSourceModuleHashVerified:e.sourceModuleHashVerified===true,readerSourceModuleBytesVerified:false}),
+   provenance:freeze({profile:letMetadata?'native-let-extraction-record':'native-extraction-record',...(letMetadata?{letPacking:{method:e.resultPacking.method,pools:e.resultPacking.pools.length,reducedPoolsLoaded:false}}:{}),nativeFormat:e.format,environment:e.environment,packing:e.packing||null,source:e.source,publisherOrigin:record.origin||null,producerSourceModuleHashVerified:e.sourceModuleHashVerified===true,readerSourceModuleBytesVerified:false}),
    stats:Object.freeze({primaryQueries:[...indexed.entries.values()].filter(q=>q.status==='checked').length,unavailableQueries:[...indexed.entries.values()].filter(q=>q.status==='unavailable').length,explicitObservations:indexed.observed,typedOccurrences:list.length,sharedTypeTables:pools.size,typeComponents:[...pools.values()].reduce((s,p)=>s+p.roots.size,0),storedTypeNodes:[...pools.keys()].reduce((s,g)=>s+g.kind.length,0)})});
   acceptedSources.set(source,{sourceGraphSha256,sourceSha:record.indexSha256,caseName:record.name});
-  return Object.freeze({evidenceSha256:d.sha256,cases:Object.freeze([value]),case:name=>name===record.name?value:null,
-   attach:async(data,target)=>{if(target.name!==record.name||target.indexSha256!==record.indexSha256||target.sourceSha256!==record.sourceSha256)return null;freeze(data);demand(target.uniqueNodes===record.uniqueNodes&&canonical(data.declaration)===canonical(source.declaration)&&await digest(canonical(graph(data)))===sourceGraphSha256,'recorded source table differs');acceptedSources.set(data,{sourceGraphSha256,sourceSha:record.indexSha256,caseName:record.name});return value;}});
+  const pkg=Object.freeze({evidenceSha256:d.sha256,cases:Object.freeze([value]),case:name=>name===record.name?value:null,
+   attach:async(data,target)=>{if(target.name!==record.name||target.indexSha256!==record.indexSha256||target.sourceSha256!==record.sourceSha256)return null;freeze(data);demand(target.uniqueNodes===record.uniqueNodes&&canonical(data.declaration)===canonical(source.declaration)&&await digest(canonical(graph(data)))===sourceGraphSha256,'recorded source table differs');acceptedSources.set(data,{sourceGraphSha256,sourceSha:record.indexSha256,caseName:record.name});return value;}});recordedPackages.add(pkg);return pkg;
+ }
+ function mergeRecorded(baseline,supplement){
+  demand(recordedPackages.has(baseline)&&recordedPackages.has(supplement)&&baseline.cases.length===1&&supplement.cases.length===1,'sealed recorded packages');
+  const original=baseline.cases[0],extra=supplement.cases[0];
+  demand(extra.provenance.profile==='native-let-extraction-record'&&!original.provenance.supplementalLetMetadata,'one let metadata supplement');
+  demand(original.name===extra.name&&original.provenance.source.edition===extra.provenance.source.edition&&original.record.indexSha256===extra.record.indexSha256&&original.record.sourceSha256===extra.record.sourceSha256&&original.sourceGraphSha256===extra.sourceGraphSha256,'let source correspondence');
+  const entries=new Map(original.entries.map(e=>[routeKey(e.route),e])),pending=[];let overlap=0;
+  for(const entry of extra.entries){
+   const previous=entries.get(routeKey(entry.route));
+   if(!previous){entries.set(routeKey(entry.route),entry);continue;}
+   demand(previous.node===entry.node&&previous.role===entry.role&&previous.contextLength===entry.contextLength&&expressionEqual(previous.typeData,previous.typeData.roots[0],entry.typeData,entry.typeData.roots[0]),'let observation/type agreement');
+   const a=contextDescriptors.get(previous),b=contextDescriptors.get(entry);
+   for(let i=0;i<entry.contextLength;i++){const x=contextSlot(a,i),y=contextSlot(b,i);demand(x.depth===y.depth&&x.node===y.node,'let ordered context agreement');}
+   const c=constructionRecords.get(entry);
+   if(c){demand(!constructionRecords.has(previous),'duplicate native construction at source occurrence');pending.push([previous,c]);}overlap++;
+  }
+  const value=Object.freeze({...original,entries:Object.freeze([...entries.values()]),get:route=>{P.parse(route);return entries.get(routeKey(route))||null;},
+   provenance:freeze({...original.provenance,supplementalLetMetadata:{evidenceSha256:supplement.evidenceSha256,...extra.provenance}}),
+   stats:Object.freeze({...original.stats,typedOccurrences:entries.size,supplementalLetQueries:extra.stats.primaryQueries,supplementalLetObservations:extra.stats.explicitObservations,supplementalLetOverlap:overlap,sharedTypeTables:original.stats.sharedTypeTables+extra.stats.sharedTypeTables,typeComponents:original.stats.typeComponents+extra.stats.typeComponents,storedTypeNodes:original.stats.storedTypeNodes+extra.stats.storedTypeNodes})});
+  // A refusal anywhere above leaves the original package's constructions intact.
+  for(const [entry,c]of pending)constructionRecords.set(entry,c);
+  const pkg=Object.freeze({cases:Object.freeze([value]),case:name=>name===value.name?value:null,attach:async(data,record)=>await baseline.attach(data,record)?value:null});
+  recordedPackages.add(pkg);return pkg;
  }
  function typeIdentity(entry){return entry.typeTableSha256?{typeTableSha256:entry.typeTableSha256,typeTableRoot:entry.typeTableRoot,typeComponentSha256:entry.typeComponentSha256}:{typeGraphSha256:entry.typeGraphSha256,...(entry.typeComponentRoot!==undefined?{typeComponentRoot:entry.typeComponentRoot}:{})};}
  function typeScene(entry,sourceData,route=P.encode(0,[]),options={}){
@@ -283,11 +329,11 @@
   const raw=W.create(entry.typeData,entry.typeRecord,route,{maxNodes:options.maxNodes??9,maxDepth:options.maxDepth??2,maxLayerNodes:3});
   const nodes=raw.nodes.map(n=>{
    let binding=null;
-   if(n.binding)binding={namespace:'computed-native-type',node:n.binding.node,route:n.binding.route};
+   if(n.binding)binding={namespace:'computed-native-type',node:n.binding.node,route:n.binding.route,...(entry.typeData.kind[n.binding.node]===8?{bindingClass:'local-definition'}:{})};
    else if(n.kind==='bvar'){
     const index=entry.typeData.payloads[n.node].index-n.scopeDepth,ordinal=entry.contextLength-1-index;
     demand(ordinal>=0&&ordinal<entry.contextLength,'recorded ambient type index');const target=entry.contextAt(ordinal);
-    demand(P.resolve(sourceData,target.route).node===target.node,'original Γ target');binding={namespace:'original-source-context',...target};
+    demand(P.resolve(sourceData,target.route).node===target.node,'original Γ target');binding={namespace:'original-source-context',...target,...(sourceData.kind[target.node]===8?{bindingClass:'local-definition'}:{})};
    }
    return {...n,payload:entry.typeData.payloads[n.node],namespace:'computed-native-type',binding,typeStatus:'type-syntax-only'};
   });
@@ -297,5 +343,5 @@
   demand(new TextEncoder().encode(JSON.stringify(scene)).length<=W.limits.metadataBytes,'type scene metadata bound');
   return scene;
  }
- const api={limits,descriptor,constructionDescriptor,prepare,prepareConstructions,mergeControls,recorded,typeIdentity,typeScene,construction,constructionType,expressionEqual,sourceIdentity};if(node)module.exports=api;else host.ProofAtlasDeepContext=api;
+ const api={limits,descriptor,constructionDescriptor,prepare,prepareConstructions,mergeControls,recorded,recordedLets,mergeRecorded,typeIdentity,typeScene,construction,constructionType,expressionEqual,sourceIdentity};if(node)module.exports=api;else host.ProofAtlasDeepContext=api;
 })(typeof window==='undefined'?globalThis:window);
