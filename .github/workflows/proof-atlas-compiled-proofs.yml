@@ -319,4 +319,5 @@ jobs:
             /tmp/atlas-deep-typing/public-replay.json
             /tmp/atlas-deep-typing/independent-audit.json
             /tmp/atlas-occurrence-constructions/independent-audit.json
+            /tmp/atlas-context-frame-laws/verification.json
           if-no-files-found: ignore

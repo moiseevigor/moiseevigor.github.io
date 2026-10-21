@@ -1,8 +1,8 @@
 # Context frames over recorded introduction and definition chains
 
-Status: model and structural laws under evaluation. The occurrence reader does
-not yet render this protocol. Its existing primitive cut and application-group
-formats retain their previous meanings and limits.
+Status: experimental context-frame lens in the occurrence reader, tested locally
+and not yet released. Existing primitive cut and application-group formats retain
+their previous meanings and limits.
 
 ## Representation problem
 
@@ -102,7 +102,7 @@ observed counts and byte maximum; overlapping appearances are not new proofs.
 
 The checked run has 1,262 frames, including seven native control frames, 9,563
 header appearances, 6,293 recorded type actions and 26 refusal controls. The
-largest frame is 60,292 bytes. The deep control starts in an original context of
+largest frame is 61,251 bytes. The deep control starts in an original context of
 10,000 binders. Across the overlapping cuts, 5,806 expected-body component
 appearances require the extended context rather than the member's preceding Γ.
 Twenty displayed reference appearances point to local definitions. No reduced
@@ -112,6 +112,7 @@ Run from the repository root:
 
 ```sh
 node scripts/test-proof-atlas-occurrence-context-frame.cjs
+node scripts/test-proof-atlas-occurrence-context-frame-browser.cjs
 python3 research/proof-atlas/occurrence-constructions/verify_context_frame.py \
   --lean /absolute/path/to/lean-4.33.1/bin/lean \
   --workdir /private/workdir/context-frame --check
@@ -126,11 +127,21 @@ or published by this work.
 
 ## Remaining evaluation
 
-The next implementation step is an optional context-frame lens within the same
-occurrence construction reader, using the existing expression glyphs, source/type
-inspection and explicit Γ boundaries. Member selection, dependent headers,
-continuation navigation and the original binder jumps need actual browser tests.
-No new standalone tool page or default article view is needed.
+The optional **Context frame** control uses the same occurrence construction
+reader, expression glyphs, source/type inspection and explicit Γ boundaries. A
+frame has an independent member limit of 1, 4, 13, 32 or 64; source node/depth
+controls do not change its meaning. Frame mode and the limit are saved in the
+URL. Selecting a member/header changes the original source inspector; **Focus
+source** refines the root and provides a shareable occurrence link. A body without
+a context-chain record shows its available primitive construction with an
+explicit notice. Source mode and application grouping remain available.
+
+The browser audit compares all 251 chain starts across 25 profiles, makes 99
+source selections and opens 48 recorded type views. It follows an original local
+definition, checks the 57-member frame and budgeted continuation, reloads a saved
+frame URL, checks both themes at phone/desktop widths, and verifies missing and
+delayed optional scripts. Four accessibility audits pass. These finite checks do
+not prove general renderer correctness. The article default and blog are unchanged.
 
 Paged frame delivery, general native-consumer correctness, other rule families,
 semantic abstraction and measured proof-inspection tasks remain open. Frame size

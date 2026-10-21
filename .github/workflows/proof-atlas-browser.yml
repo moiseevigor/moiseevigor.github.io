@@ -523,6 +523,7 @@ jobs:
           node scripts/test-proof-atlas-occurrence-constructions-browser.cjs
           node scripts/test-proof-atlas-occurrence-application-fold-browser.cjs
           node scripts/test-proof-atlas-occurrence-let-bindings-browser.cjs
+          node scripts/test-proof-atlas-occurrence-context-frame-browser.cjs
           node scripts/test-proof-atlas-recorded-context-browser.cjs
           node scripts/test-proof-atlas-cut-certificate-browser.cjs
           node scripts/test-proof-atlas-cut-native-browser.cjs

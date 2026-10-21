@@ -58,7 +58,7 @@ function open(nativeCase){
    demand(entry.contextLength===selected.scopeDepth+i&&same(entry.route,sourceRoute(route,members,{member:i})),'ordered context chain');
    routes.push(entry.route);
    members.push({id:'m'+i,node:entry.node,rule:c.rule,role:entry.role,contextLength:entry.contextLength,
-    binder:{kind:c.rule==='let-binding'?'local-definition':'assumption',name:payload.declName,...(c.rule==='let-binding'?{nondep:payload.nondep}:{binderInfo:payload.binderInfo})},
+    binder:{kind:c.rule==='let-binding'?'local-definition':'assumption',name:c.rule==='let-binding'?payload.declName:payload.binderName,...(c.rule==='let-binding'?{nondep:payload.nondep}:{binderInfo:payload.binderInfo})},
     type:typeRef(c,entry.typeData.roots[0],{member:i}),components:{status:'recorded-type-expressions-only',expressions:Object.fromEntries(Object.entries(c.components).map(([name,root])=>[name,typeRef(c,root,c.rule==='Pi-introduction'&&name==='expectedBody'?{member:i,field:'body'}:{member:i})]))},
     recording:{kind:c.recording?.kind||'primary-query',query:relative(route,c.recording?.queryRoute||entry.route),...(c.recording?.stage?{stage:c.recording.stage}:{})},checks:c.checks});
    for(const part of c.premises.slice(0,-1)){
