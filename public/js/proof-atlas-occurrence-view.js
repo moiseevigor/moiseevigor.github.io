@@ -12,24 +12,29 @@
   root.replaceChildren(status);root.setAttribute('aria-busy','true');
   let record,data,sourceBytes=null,edition,control=false,nativeControl=false,scene=null,selected=null,scale=1,disposed=false,representativeIndex=null,operation=0,activeJump=null;
   let nativePackage=null,nativeCase=null,nativeLoad=null,nativeError=null,typeView=null,typeScripts=null,inspection=0;
-  let positionPage=0,positionFilter='';
+  let positionPage=0,positionFilter='',positionConstructionsOnly=false,selectedTyping=null;
+  let constructionMode=initial.searchParams.get('diagram')==='construction',constructionView=null,constructionModel=null,constructionScripts=null,constructionSelection=0,constructionError=null;
+  let initialConstructionFocus=constructionMode&&!initial.hash;
+  let constructionButton=null,sourceButton=null,controlConstructionError=null,mounted=false,redrawSourcePaths=null;const observedTypes=new Map();
+  const constructionHost=el('section');constructionHost.hidden=true;
   const nativeController=new AbortController(),typeHost=el('section');typeHost.hidden=true;
   const title=el('h1'),subtitle=el('p'),tools=el('div',undefined,'pow-tools'),viewport=el('div',undefined,'pow-viewport'),sizing=el('div',undefined,'pow-sizing'),stage=el('div',undefined,'pow-stage'),panel=el('section',undefined,'pow-inspector'),summary=el('p',undefined,'pow-summary');
   viewport.tabIndex=0;viewport.setAttribute('aria-label','Occurrence geometry. Scroll or drag empty space to pan.');viewport.append(sizing);sizing.append(stage);
   const nodeBudget=el('select'),depth=el('select');for(const n of [1,7,13,25,32]){const o=el('option',String(n));o.value=n;nodeBudget.append(o);}nodeBudget.value='13';for(let i=0;i<=6;i++){const o=el('option',String(i));o.value=i;depth.append(o);}depth.value='2';
   let stageWidth=0,stageHeight=0;
-  function scaled(){stage.style.transform='scale('+scale+')';sizing.style.width=stageWidth*scale+'px';sizing.style.height=stageHeight*scale+'px';}
+  function scaled(){stage.style.transform='scale('+scale+')';sizing.style.width=stageWidth*scale+'px';sizing.style.height=stageHeight*scale+'px';constructionView?.setScale(scale);}
   function backURL(route){
-   const u=new URL(location.href);u.searchParams.delete('view');u.searchParams.delete('control');u.searchParams.delete('loading');u.hash='';
+   const u=new URL(location.href);u.searchParams.delete('view');u.searchParams.delete('control');u.searchParams.delete('loading');u.searchParams.delete('diagram');u.hash='';
    if(control){u.searchParams.delete('proof');u.searchParams.delete('edition');return u.pathname+u.search;}
    if(route&&route.depth<=512){const bytes=P.parse(route),slots=[];for(let i=0;i<route.depth;i++)slots.push((bytes[i>>2]>>((i%4)*2))&3);u.searchParams.set('route',route.root+':'+slots.join('.'));u.hash='expr-'+P.resolve(data,route).node;}else u.searchParams.delete('route');
    return u.pathname+u.search+u.hash;
   }
-  function writeAddress(route,replace=false){const u=new URL(location.href);u.searchParams.set('view','occurrence');u.searchParams.delete('route');u.searchParams.delete('loading');u.hash='occurrence='+W.token(record,route);history[replace?'replaceState':'pushState']({},'',u);}
+  function writeAddress(route,replace=false){const u=new URL(location.href);u.searchParams.set('view','occurrence');u.searchParams.delete('route');u.searchParams.delete('loading');if(constructionMode)u.searchParams.set('diagram','construction');else u.searchParams.delete('diagram');u.hash='occurrence='+W.token(record,route);history[replace?'replaceState':'pushState']({},'',u);}
   function describe(n){try{return A.describe(data,n.node);}catch{return n.kind+' · e'+n.node+' · original payload available in the packet';}}
   async function component(name,url){if(!host[name])await new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=url;script.onload=resolve;script.onerror=()=>{script.remove();reject(Error('Native record component unavailable'));};document.head.append(script);});}
+  async function constructionSupplement(){await component('PROOF_ATLAS_OCCURRENCE_CONSTRUCTIONS','/public/data/proof-atlas/occurrence-constructions-manifest.js?v=1');let d;try{d=host.ProofAtlasDeepContext.constructionDescriptor(host.PROOF_ATLAS_OCCURRENCE_CONSTRUCTIONS);}catch(error){delete host.PROOF_ATLAS_OCCURRENCE_CONSTRUCTIONS;throw error;}return host.ProofAtlasDeepContext.prepareConstructions(await A.compressed(d.file,d.sha256,{maxBytes:8388608,expectedBytes:d.decodedBytes,signal:nativeController.signal}),d);}
   async function nativeReady(){
-   await component('ProofAtlasDeepContext','/public/js/proof-atlas-deep-context.js?v=2');
+   await component('ProofAtlasDeepContext','/public/js/proof-atlas-deep-context.js?v=3');
    if(record&&!control){
     const d=host.PROOF_ATLAS_OCCURRENCE_TYPES?.records.find(d=>d.edition===edition.id&&d.name===record.name&&d.indexSha256===record.indexSha256&&d.sourceSha256===record.sourceSha256);
     if(!d)return {cases:[],attach:async()=>null};
@@ -42,7 +47,9 @@
    }
    await component('PROOF_ATLAS_DEEP_TYPING','/public/data/proof-atlas/deep-typing-manifest.js?v=1');
    if(disposed)throw Error('Native record request cancelled');const d=host.ProofAtlasDeepContext.descriptor(host.PROOF_ATLAS_DEEP_TYPING);
-   return host.ProofAtlasDeepContext.prepare(await A.compressed(d.file,d.sha256,{maxBytes:8388608,expectedBytes:d.decodedBytes,signal:nativeController.signal}),d);
+   const baseline=await host.ProofAtlasDeepContext.prepare(await A.compressed(d.file,d.sha256,{maxBytes:8388608,expectedBytes:d.decodedBytes,signal:nativeController.signal}),d);
+   try{return host.ProofAtlasDeepContext.mergeControls(baseline,await constructionSupplement());}
+   catch(error){controlConstructionError=error.message;return baseline;}
   }
   async function loadTyping(){
    nativeError=null;nativeLoad??=nativeReady();if(selected&&scene)inspect(selected);
@@ -50,37 +57,38 @@
    catch(error){if(disposed)return;nativeError=error.message;nativeLoad=null;nativeCase=null;nativePackage=null;}
    if(!disposed&&selected&&scene)inspect(selected);
   }
-  const originLabel=q=>q.recording?.kind==='application-trace-observation'?'application observation':q.recording?.kind==='lambda-introduction-observation'?'introduction observation':'direct query';
+  const originLabel=q=>q.recording?.kind==='application-trace-observation'?'application observation':q.recording?.kind==='lambda-introduction-observation'?'introduction observation':q.recording?.kind==='construction-premise-observation'?'construction observation':'direct query';
   function positions(selectedEntry){
    const details=el('details'),list=el('ol'),filter=el('input'),label=el('label','Filter positions '),count=el('p'),paging=el('div',undefined,'pow-tools');details.dataset.nativePositions='';details.append(el('summary','Recorded positions · '+nativeCase.entries.length));
-   filter.type='search';filter.value=positionFilter;filter.placeholder='Role, origin, node, depth';filter.dataset.nativeFilter='';label.append(filter);details.append(label,count,list,paging);
-   const records=nativeCase.entries.map((q,index)=>({q,index,text:'Position '+(index+1)+' · '+q.role+' · e'+q.node+' · depth '+q.route.depth+' · '+originLabel(q)}));
+   filter.type='search';filter.value=positionFilter;filter.placeholder='Role, origin, rule, node, depth';filter.dataset.nativeFilter='';label.append(filter);
+   const only=el('input'),onlyLabel=el('label','Recorded constructions only ');only.type='checkbox';only.checked=positionConstructionsOnly;only.dataset.nativeConstructionsOnly='';onlyLabel.append(only);details.append(label,onlyLabel,count,list,paging);
+   const records=nativeCase.entries.map((q,index)=>{const rule=host.ProofAtlasDeepContext.construction(q,data)?.rule;return{q,index,rule,text:'Position '+(index+1)+' · '+q.role+' · e'+q.node+' · depth '+q.route.depth+' · '+originLabel(q)+(rule?' · '+rule:'')};});
    const prev=button('Previous positions',()=>{positionPage--;update();}),next=button('Next positions',()=>{positionPage++;update();});paging.append(prev,next);
    let first=true;
    function update(){
-    const words=positionFilter.toLowerCase().trim().split(/\s+/),matches=records.filter(r=>words.every(w=>r.text.toLowerCase().includes(w)));
+    const words=positionFilter.toLowerCase().trim().split(/\s+/),matches=records.filter(r=>(!positionConstructionsOnly||r.rule)&&words.every(w=>r.text.toLowerCase().includes(w)));
     if(first&&selectedEntry){const index=matches.findIndex(r=>r.q===selectedEntry);if(index>=0)positionPage=Math.floor(index/20);}first=false;
     const pages=Math.max(1,Math.ceil(matches.length/20));positionPage=Math.min(positionPage,pages-1);const start=positionPage*20;
     count.textContent=matches.length?(start+1)+'–'+Math.min(start+20,matches.length)+' of '+matches.length+' matching positions':'No matching recorded positions';count.dataset.nativePage='';count.setAttribute('role','status');list.start=start+1;list.replaceChildren();
     for(const r of matches.slice(start,start+20)){const item=el('li'),b=button(r.text,()=>safe(()=>navigate(r.q.route)));b.dataset.nativeQuery=r.index;item.append(b);list.append(item);}
     prev.disabled=positionPage===0;next.disabled=positionPage===pages-1;
    }
-   filter.oninput=()=>{positionFilter=filter.value;positionPage=0;update();};update();return details;
+   filter.oninput=()=>{positionFilter=filter.value;positionPage=0;update();};only.onchange=()=>{positionConstructionsOnly=only.checked;positionPage=0;update();};update();return details;
   }
-  function inspect(n){
+  function inspect(n,observation=null){
    const serial=++inspection;
    typeView?.dispose();typeView=null;typeHost.hidden=true;typeHost.replaceChildren();
    selected=n;for(const b of stage.querySelectorAll('[data-occurrence-node]'))b.setAttribute('aria-pressed',String(b.dataset.occurrenceNode===n.id));
    const heading=el('h2',n.glyph+' '+n.kind+' · e'+n.node),context=el('p','Original root '+n.route.root+' · depth '+n.route.depth+' · '+n.scopeDepth+' enclosing binders'),term=el('pre',describe(n));term.tabIndex=0;
    const focus=button('Focus this occurrence',()=>safe(()=>navigate(n.route)));focus.dataset.occurrenceFocus='';
-   const entry=nativeCase?.get(n.route),native=el('section',undefined,'pow-native-record'),message=el('p');message.setAttribute('role','status');
+   const entry=observation||nativeCase?.get(n.route)||observedTypes.get(W.id(n.route));selectedTyping=entry||null;const native=el('section',undefined,'pow-native-record'),message=el('p');message.setAttribute('role','status');
    native.dataset.nativeState=entry?'checked':nativeError?'error':nativePackage?'unrecorded':nativeLoad?'loading':'unloaded';
    if(entry){
-    message.textContent='Native Lean 4.33.1 record · '+originLabel(entry)+' · '+entry.role+' · original Γ'+entry.contextLength;
+    message.textContent=(entry.recording?.observation==='meta'?'Native extraction · Meta-inferred argument type':'Native Lean 4.33.1 record · '+originLabel(entry))+' · '+entry.role+' · original Γ'+entry.contextLength;
     const judgment=el('pre','Γ'+entry.contextLength+' ⊢ e'+n.node+' : '+(entry.typeText||A.describe(entry.typeData,entry.typeData.roots[0])));judgment.tabIndex=0;judgment.dataset.nativeJudgment='';
-    const toggle=button('Show recorded type',async()=>{if(typeView){typeView.dispose();typeView=null;toggle.textContent='Show recorded type';toggle.setAttribute('aria-expanded','false');return;}toggle.disabled=true;try{if(!host.ProofAtlasCompactTypeView){typeScripts??=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='/public/js/proof-atlas-compact-type-view.js?v=2';script.onload=resolve;script.onerror=()=>{script.remove();typeScripts=null;reject(Error('Recorded type renderer unavailable'));};document.head.append(script);});await typeScripts;}if(disposed||serial!==inspection||!scene||!selected)return;typeView=host.ProofAtlasCompactTypeView.mount(typeHost,entry,data,route=>safe(()=>navigate(route)));toggle.textContent='Hide recorded type';toggle.setAttribute('aria-expanded','true');}catch(error){if(!disposed&&serial===inspection)message.textContent='Native typing record retained; type diagram unavailable: '+error.message;}finally{toggle.disabled=false;}});toggle.dataset.showRecordedType='';toggle.setAttribute('aria-expanded','false');
-    native.append(message,judgment,el('p','Recorded kernel typing in the original context. The browser checks correspondence; it does not rerun Lean.'),toggle);
-    if(entry.recording?.kind!=='primary-query'&&entry.recording){const parent=button('Go to recording query',()=>safe(()=>navigate(entry.recording.queryRoute)));parent.dataset.recordingQuery='';native.append(el('p','This '+originLabel(entry)+' was recorded in '+entry.recording.part+(entry.recording.slot?' '+entry.recording.slot:'')+' of query e'+entry.recording.queryNode+'.'),parent);}
+    const toggle=button('Show recorded type',async()=>{if(typeView){typeView.dispose();typeView=null;toggle.textContent='Show recorded type';toggle.setAttribute('aria-expanded','false');return;}toggle.disabled=true;try{if(!host.ProofAtlasCompactTypeView){typeScripts??=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='/public/js/proof-atlas-compact-type-view.js?v=3';script.onload=resolve;script.onerror=()=>{script.remove();typeScripts=null;reject(Error('Recorded type renderer unavailable'));};document.head.append(script);});await typeScripts;}if(disposed||serial!==inspection||!scene||!selected)return;typeView=host.ProofAtlasCompactTypeView.mount(typeHost,entry,data,route=>safe(()=>navigate(route)));toggle.textContent='Hide recorded type';toggle.setAttribute('aria-expanded','true');}catch(error){if(!disposed&&serial===inspection)message.textContent='Native typing record retained; type diagram unavailable: '+error.message;}finally{toggle.disabled=false;}});toggle.dataset.showRecordedType='';toggle.setAttribute('aria-expanded','false');
+    native.append(message,judgment,el('p',entry.recording?.observation==='meta'?'Meta-inferred type recorded in the original context. Kernel conversion records remain separate; the browser does not rerun Lean.':'Recorded kernel typing in the original context. The browser checks correspondence; it does not rerun Lean.'),toggle);
+    if(entry.recording?.kind!=='primary-query'&&entry.recording){const parent=button('Go to recording query',()=>safe(()=>navigate(entry.recording.queryRoute)));parent.dataset.recordingQuery='';native.append(el('p','This '+originLabel(entry)+' was recorded in '+(entry.recording.stage?'stage '+entry.recording.stage+' · ':'')+(entry.recording.part||entry.recording.field)+(entry.recording.slot?' '+entry.recording.slot:'')+' of query e'+entry.recording.queryNode+'.'),parent);}
     if(entry.typeText)native.append(el('p','Type text is a presentation; the diagram retains the recorded expression fields.'));
     const provenance=el('details');provenance.append(el('summary','Native record provenance'),el('pre',JSON.stringify({evidenceSha256:entry.evidenceSha256,sourceIndexSha256:entry.sourceIndexSha256,sourceRoute:entry.route,...host.ProofAtlasDeepContext.typeIdentity(entry),originalContextLength:entry.contextLength,recording:entry.recording,baselineAxioms:entry.baselineAxioms,sourceModuleBytesVerified:false,...(nativeCase.provenance?{extraction:nativeCase.provenance}:{})},null,2)),link('Native term and judgment data ↓',entry.evidenceFile||host.PROOF_ATLAS_DEEP_TYPING.file));native.append(provenance);
    }else{
@@ -96,7 +104,45 @@
    const exact=el('details'),label=el('summary','Exact source address and accounting');exact.append(label,el('pre',JSON.stringify({source:scene.source,route:n.route,expandedOccurrences:n.expanded},null,2)));panel.append(exact);
    const payload=el('details');payload.append(el('summary','Original constructor payload'));const raw=JSON.stringify(data.payloads[n.node],null,2);payload.append(el('pre',raw.length>12000?raw.slice(0,12000)+'\n… display truncated; complete payload is in the source packet.':raw));panel.append(payload);
   }
+  function rememberType(entry){const key=W.id(entry.route);observedTypes.delete(key);observedTypes.set(key,entry);while(observedTypes.size>4)observedTypes.delete(observedTypes.keys().next().value);}
+  function sourcePoint(route){return W.create(data,record,route,{maxNodes:1,maxDepth:0}).nodes[0];}
+  function modeControls(){
+   constructionButton?.setAttribute('aria-pressed',String(constructionMode));sourceButton?.setAttribute('aria-pressed',String(!constructionMode));
+   for(const option of nodeBudget.options)option.disabled=constructionMode&&Number(option.value)>13;
+   for(const option of depth.options)option.disabled=constructionMode&&Number(option.value)>4;
+   if(constructionMode&&Number(nodeBudget.value)>13)nodeBudget.value='13';if(constructionMode&&Number(depth.value)>4)depth.value='4';
+   if(nodeBudget.parentElement)nodeBudget.parentElement.firstChild.textContent=constructionMode?'Construction nodes ':'Source nodes ';
+  }
+  function renderConstructions(){
+   constructionSelection++;constructionView?.dispose();constructionView=null;
+   if(!constructionMode||!constructionModel||!scene){viewport.hidden=false;summary.hidden=false;constructionHost.hidden=true;redrawSourcePaths?.();return;}
+   modeControls();const cut=constructionModel.create(scene.root.route,{maxNodes:Number(nodeBudget.value),maxDepth:Number(depth.value)});
+   constructionView=host.ProofAtlasOccurrenceConstructionView.mount(constructionHost,constructionModel,data,cut,{
+    onSource:route=>safe(()=>navigate(route)),
+    onSelect:async(route,pending)=>{const epoch=++constructionSelection;inspect(sourcePoint(route));if(!pending)return;try{const entry=await pending;if(disposed||epoch!==constructionSelection||!constructionMode)return;rememberType(entry);inspect(sourcePoint(route),entry);}catch(error){if(epoch===constructionSelection)status.textContent=error.message;}},
+    onType:async(route,entry)=>{const epoch=++constructionSelection;rememberType(entry);inspect(sourcePoint(route),entry);const serial=inspection;try{await component('ProofAtlasCompactTypeView','/public/js/proof-atlas-compact-type-view.js?v=3');if(disposed||epoch!==constructionSelection||serial!==inspection)return;typeView=host.ProofAtlasCompactTypeView.mount(typeHost,entry,data,r=>safe(()=>navigate(r)));const toggle=panel.querySelector('[data-show-recorded-type]');if(toggle){toggle.textContent='Hide recorded type';toggle.setAttribute('aria-expanded','true');}}catch(error){if(epoch===constructionSelection)status.textContent=error.message;}}
+   });
+   constructionView.setScale(scale);viewport.hidden=true;summary.hidden=true;constructionHost.hidden=false;constructionView.select(selected?.route||scene.root.route);
+   subtitle.textContent='Recorded construction geometry · '+(nativeControl?'synthetic core control':edition.label);
+  }
+  async function setConstructionMode(enabled){
+   constructionMode=enabled;constructionError=null;modeControls();
+   if(!enabled){constructionSelection++;constructionView?.dispose();constructionView=null;constructionHost.hidden=true;viewport.hidden=false;summary.hidden=false;redrawSourcePaths?.();subtitle.textContent=nativeControl?'Synthetic core control · selected native records':control?'Serialized syntax control · original producer made no typing claim':'Source occurrence geometry · '+edition.label;status.textContent='Original occurrence structure. Native records retain their exact source positions.';if(scene)writeAddress(scene.root.route,true);return;}
+   constructionButton.disabled=true;status.textContent='Loading recorded construction interfaces…';
+   try{
+    if(!nativePackage)await loadTyping();if(disposed||!constructionMode)return;
+    if(!nativeCase)throw Error('No native record package is available for this declaration');
+    if(nativeControl&&controlConstructionError){nativePackage=host.ProofAtlasDeepContext.mergeControls(nativePackage,await constructionSupplement());nativeCase=nativePackage.case(record.name);controlConstructionError=null;const choice=root.querySelector('[data-native-control-choice]');if(choice){choice.replaceChildren(...nativePackage.cases.map(c=>{const option=el('option',c.name);option.value=c.name;return option;}));choice.value=record.name;}}
+    constructionScripts??=(async()=>{await component('ProofAtlasOccurrenceConstructions','/public/js/proof-atlas-occurrence-constructions.js?v=1');await component('ProofAtlasOccurrenceConstructionView','/public/js/proof-atlas-occurrence-construction-view.js?v=1');})();
+    await constructionScripts;if(disposed||!constructionMode)return;constructionModel=host.ProofAtlasOccurrenceConstructions.open(nativeCase);
+    if(initialConstructionFocus){initialConstructionFocus=false;const current=nativeCase.get(scene.root.route);if(!current||!host.ProofAtlasDeepContext.construction(current,data)){const first=nativeCase.entries.find(e=>host.ProofAtlasDeepContext.construction(e,data));if(first)navigate(first.route,true,true);}}
+    renderConstructions();if(scene)writeAddress(scene.root.route,true);
+    status.textContent='Recorded Π constructions in their original source context. Other rules and unrecorded positions remain boundaries.';
+   }catch(error){constructionScripts=null;constructionError=error.message;constructionMode=false;modeControls();renderConstructions();status.textContent='Construction view unavailable: '+error.message+'. Source structure and existing native types remain available.';}
+   finally{constructionButton.disabled=false;}
+  }
   function draw(next){
+   constructionSelection++;constructionView?.dispose();constructionView=null;
    scene=next;stage.replaceChildren();const cols=Math.max(...scene.nodes.map(n=>n.depth))+1,rows=Math.max(...scene.nodes.map(n=>n.row))+1;subtitle.textContent=nativeControl?'Synthetic core control · selected native records':control?'Serialized syntax control · original producer made no typing claim':(scene.namespace==='kernel-rule'?'Kernel reduction-rule syntax':'Source occurrence geometry')+' · '+edition.label;
    tools.querySelector('[data-window-parent]').disabled=next.root.route.depth===0;tools.querySelector('[data-window-root]').disabled=false;
    const external=[...new Map(scene.links.filter(l=>l.boundary).map(l=>[l.to,l])).values()];
@@ -112,25 +158,26 @@
    }
    external.forEach((ref,i)=>{const pos={x:20+cols*330,y:20+i*180},card=el('article',undefined,'pow-context-card'),payload=data.payloads[ref.node],kind=W.kinds[data.kind[ref.node]];positions.set(ref.to,pos);card.style.left=pos.x+'px';card.style.top=pos.y+'px';card.append(el('small','CONTEXT · OUTSIDE THIS CUT'));const pick=button(kind+' '+(payload.binderName||payload.declName||'_')+' · e'+ref.node,()=>safe(()=>navigate(ref.route)));pick.dataset.contextReference=ref.to;card.append(pick,el('p','Original binder at depth '+ref.route.depth+'. Not included in the subtree count.'));stage.append(card);cards.set(ref.to,{card,pick});});
    function paths(){
+    if(viewport.hidden)return;
     svg.replaceChildren();
     function line(from,to,control,cls,slot){const a=positions.get(from),b=positions.get(to),target=cards.get(to).pick,right=b.x>=a.x,sx=right?a.x+245:a.x,sy=a.y+control.offsetTop+control.offsetHeight/2,tx=right?b.x:b.x+245,ty=b.y+target.offsetTop+target.offsetHeight/2,p=document.createElementNS(svg.namespaceURI,'path');p.setAttribute('d','M '+sx+' '+sy+' C '+(sx+(right?40:-40))+' '+sy+' '+(tx+(right?-40:40))+' '+ty+' '+tx+' '+ty);if(cls)p.classList.add(cls);p.dataset.relation=cls?'source-bound-to':'source-field';if(slot!==undefined)p.dataset.slot=slot;svg.append(p);}
     for(const edge of scene.edges)line(edge.from,edge.to,cards.get(edge.from).ports[edge.slot],null,edge.slot);
     for(const binding of scene.links)line(binding.from,binding.to,cards.get(binding.from).binder,'pow-binding-edge');
    }
-   paths();document.fonts?.ready.then(()=>{if(scene===next&&!disposed)paths();});
+   redrawSourcePaths=paths;paths();document.fonts?.ready.then(()=>{if(scene===next&&!disposed)paths();});
    summary.textContent=scene.stats.retained+' retained + '+shortCount(scene.stats.hidden)+' hidden = '+shortCount(scene.stats.represented)+' occurrences. '+external.length+' context references lie outside this count.';
-   inspect(scene.nodes[0]);scaled();viewport.scrollTo(0,0);status.textContent='Original occurrence structure. '+(nativeControl?'Synthetic core control; native typing is available only at recorded positions.':control?'Serialized syntax control; original producer typing is not claimed.':'Compiled declaration; mathematical interpretation and typing queries are separate.');
+   inspect(scene.nodes[0]);scaled();viewport.scrollTo(0,0);status.textContent='Original occurrence structure. '+(nativeControl?'Synthetic core control; native typing is available only at recorded positions.':control?'Serialized syntax control; original producer typing is not claimed.':'Compiled declaration; mathematical interpretation and typing queries are separate.');if(constructionMode&&constructionModel)renderConstructions();
   }
   function safe(action){try{action();}catch(error){status.textContent=error.message;}}
   function navigate(route,write=true,replace=false){
-   operation++;if(disposed)return;
+   operation++;if(write&&!replace)initialConstructionFocus=false;if(disposed)return;
    const next=W.create(data,record,route,{maxNodes:Number(nodeBudget.value),maxDepth:Number(depth.value)});
-   if(disposed)return;const hadFocus=root.contains(document.activeElement);draw(next);if(hadFocus)stage.querySelector('[data-occurrence-node]')?.focus({preventScroll:true});if(write)writeAddress(route,replace);
+   if(disposed)return;const hadFocus=root.contains(document.activeElement);draw(next);if(hadFocus)(constructionView?constructionHost.querySelector('[data-construction-point]'):stage.querySelector('[data-occurrence-node]'))?.focus({preventScroll:true});if(write)writeAddress(route,replace);
   }
   function fromLocation(){
    operation++;
-   try{const u=new URL(location.href);if(!u.hash.startsWith('#occurrence='))throw Error('No original occurrence address in this link');const route=W.fromToken(record,u.hash.slice(12));navigate(route,false);}
-   catch(error){scene=null;selected=null;typeView?.dispose();typeView=null;typeHost.hidden=true;stage.replaceChildren();panel.replaceChildren();summary.textContent='';for(const b of tools.querySelectorAll('[data-window-parent],[data-window-root]'))b.disabled=true;status.textContent='Occurrence unavailable: '+error.message;}
+   try{const u=new URL(location.href);constructionMode=u.searchParams.get('diagram')==='construction';modeControls();if(!u.hash.startsWith('#occurrence='))throw Error('No original occurrence address in this link');const route=W.fromToken(record,u.hash.slice(12));navigate(route,false);if(constructionMode&&!constructionModel&&mounted)setConstructionMode(true);else if(!constructionMode)renderConstructions();}
+   catch(error){scene=null;selected=null;constructionSelection++;constructionView?.dispose();constructionView=null;constructionHost.hidden=true;typeView?.dispose();typeView=null;typeHost.hidden=true;stage.replaceChildren();panel.replaceChildren();summary.textContent='';for(const b of tools.querySelectorAll('[data-window-parent],[data-window-root]'))b.disabled=true;status.textContent='Occurrence unavailable: '+error.message;}
   }
   try{
    if(initial.searchParams.get('control')==='checked-context'){
@@ -156,20 +203,22 @@
    W.validateSource(data,record);if(disposed)return;
    const header=el('header',undefined,'pow-header');title.textContent=record.name;subtitle.textContent=control?'Serialized syntax control · no kernel typing claim':'Source occurrence geometry · '+edition.label;
    header.append(el('p','PROOF ATLAS / OCCURRENCE GEOMETRY'),title,subtitle,link('Declaration library',backURL()),link(nativeControl?'Control and judgment packet ↓':'Original term packet ↓',record.indexFile),link('Native context controls (synthetic)','/projects/proof-atlas/library/?view=occurrence&control=checked-context&case=deep-reflexivity'));
-   if(nativeControl){const label=el('label','Native context control '),choice=el('select');for(const c of nativePackage.cases){const option=el('option',c.name);option.value=c.name;choice.append(option);}choice.value=nativeCase.name;choice.onchange=()=>{const u=new URL(location.href);u.searchParams.set('case',choice.value);u.hash='';location.assign(u);};label.append(choice);header.append(label);}
+   if(nativeControl){const label=el('label','Native context control '),choice=el('select');choice.dataset.nativeControlChoice='';for(const c of nativePackage.cases){const option=el('option',c.name);option.value=c.name;choice.append(option);}choice.value=nativeCase.name;choice.onchange=()=>{const u=new URL(location.href);u.searchParams.set('case',choice.value);u.hash='';location.assign(u);};label.append(choice);header.append(label);}
    const countLabel=el('label','Source nodes ');countLabel.append(nodeBudget);const depthLabel=el('label','Levels ');depthLabel.append(depth);
    const jump=el('input');jump.type='number';jump.min='0';jump.max=String(record.uniqueNodes-1);jump.step='1';jump.setAttribute('aria-label','Stored source node number');jump.placeholder='Node number';jump.style.width='9rem';
    const jumpButton=button('Go to node',async()=>{const epoch=++operation;activeJump=epoch;root.setAttribute('aria-busy','true');status.textContent='Resolving a representative occurrence…';try{await new Promise(resolve=>requestAnimationFrame(resolve));if(disposed||epoch!==operation)return;if(jump.value.trim()==='')throw Error('Enter a stored source node number');representativeIndex??=W.representatives(data);navigate(representativeIndex.route(Number(jump.value)));}catch(error){status.textContent=error.message;}finally{if(activeJump===epoch){activeJump=null;root.setAttribute('aria-busy','false');}}});
    const parent=button('Parent occurrence',()=>safe(()=>navigate(P.prefix(scene.root.route,scene.root.route.depth-1)))),original=button('Original root',()=>safe(()=>navigate(P.encode(scene.root.route.root,[]))));parent.dataset.windowParent='';original.dataset.windowRoot='';
    tools.append(countLabel,depthLabel,button('−',()=>{scale=Math.max(.25,scale/1.25);scaled();}),button('+',()=>{scale=Math.min(2,scale*1.25);scaled();}),button('Reset zoom',()=>{scale=1;scaled();}),parent,original,jump,jumpButton);
    tools.querySelectorAll('button')[0].setAttribute('aria-label','Zoom out');tools.querySelectorAll('button')[1].setAttribute('aria-label','Zoom in');
-   const help=el('p','Scroll or drag empty space to pan. Solid lines follow source fields; dashed lines reference binders. A node number chooses one representative path; a shared node can have other uses.','pow-help'),layout=el('div',undefined,'pow-layout'),drawing=el('section');drawing.setAttribute('aria-label','Source occurrence diagram');drawing.append(tools,help,viewport,summary,typeHost);layout.append(drawing,panel);root.replaceChildren(header,status,layout);root.classList.add('pow-shell');
+   const modes=el('div',undefined,'pow-tools');modes.setAttribute('role','group');modes.setAttribute('aria-label','Diagram representation');sourceButton=button('Source occurrences',()=>setConstructionMode(false));sourceButton.dataset.sourceMode='';constructionButton=button('Proof constructions',()=>setConstructionMode(true));constructionButton.dataset.constructionMode='';modes.append(sourceButton,constructionButton);tools.append(modes);modeControls();
+   const help=el('p','Scroll or drag empty space to pan. Solid lines follow source fields; dashed lines reference binders. A node number chooses one representative path; a shared node can have other uses.','pow-help'),layout=el('div',undefined,'pow-layout'),drawing=el('section');drawing.setAttribute('aria-label','Source occurrence diagram');drawing.append(tools,help,viewport,summary,constructionHost,typeHost);layout.append(drawing,panel);root.replaceChildren(header,status,layout);root.classList.add('pow-shell');
    nodeBudget.onchange=depth.onchange=()=>{if(!scene){status.textContent='Choose a source node or restore a valid occurrence link.';return;}safe(()=>navigate(scene.root.route,false));};
    if(location.hash)fromLocation();else{const body=data.declaration.rootPaths.indexOf('root.value');navigate(P.encode(body<0?0:body,[]),true,true);}
+   if(constructionMode&&!constructionModel)await setConstructionMode(true);
    let drag=null;viewport.addEventListener('pointerdown',event=>{if(event.target.closest('.pow-card,button,a,input,select'))return;drag={x:event.clientX,y:event.clientY,left:viewport.scrollLeft,top:viewport.scrollTop};viewport.setPointerCapture(event.pointerId);});viewport.addEventListener('pointermove',event=>{if(drag)viewport.scrollTo(drag.left+drag.x-event.clientX,drag.top+drag.y-event.clientY);});viewport.addEventListener('pointerup',()=>{drag=null;});viewport.addEventListener('pointercancel',()=>{drag=null;});
    host.addEventListener('popstate',fromLocation);host.addEventListener('hashchange',fromLocation);
-   const api={getSnapshot:()=>{if(!selected||!scene)return null;const q=nativeCase?.get(selected.route);return {source:scene.source,namespace:scene.namespace,category:scene.root.category,node:selected.node,route:selected.route,scopeDepth:selected.scopeDepth,binding:selected.binding,typing:q?'checked-native-record':'not-queried',...(q?{native:{role:q.role,evidenceSha256:q.evidenceSha256,...host.ProofAtlasDeepContext.typeIdentity(q),contextLength:q.contextLength,...(q.recording?{recording:q.recording}:{})}}:{})};},getScene:()=>scene,getNativeState:()=>({loaded:!!nativePackage,pending:!!nativeLoad&&!nativePackage,matched:!!nativeCase,error:nativeError,...(nativeCase?.stats?{inventory:nativeCase.stats}:{})}),getTypeScene:()=>typeView?.getScene()||null,getTypeSnapshot:()=>typeView?.getSnapshot()||null,getIndexState:()=>representativeIndex?.state||null,focus:route=>navigate(route),dispose:()=>{disposed=true;nativeController.abort();sourceBytes=null;typeView?.dispose();host.removeEventListener('popstate',fromLocation);host.removeEventListener('hashchange',fromLocation);}};
-   host.ProofAtlasOccurrenceView=api;return api;
+   const api={getSnapshot:()=>{if(!selected||!scene)return null;const q=selectedTyping;return {source:scene.source,namespace:scene.namespace,category:scene.root.category,node:selected.node,route:selected.route,scopeDepth:selected.scopeDepth,binding:selected.binding,typing:q?'checked-native-record':'not-queried',...(q?{native:{role:q.role,evidenceSha256:q.evidenceSha256,...host.ProofAtlasDeepContext.typeIdentity(q),contextLength:q.contextLength,...(q.recording?{recording:q.recording}:{})}}:{})};},getScene:()=>scene,getNativeState:()=>({loaded:!!nativePackage,pending:!!nativeLoad&&!nativePackage,matched:!!nativeCase,error:nativeError,...(nativeCase?.stats?{inventory:nativeCase.stats}:{})}),getConstructionScene:()=>constructionView?.getScene()||null,getConstructionState:()=>({enabled:constructionMode,ready:!!constructionView,error:constructionError}),getTypeScene:()=>typeView?.getScene()||null,getTypeSnapshot:()=>typeView?.getSnapshot()||null,getIndexState:()=>representativeIndex?.state||null,focus:route=>navigate(route),dispose:()=>{disposed=true;constructionSelection++;constructionView?.dispose();observedTypes.clear();nativeController.abort();sourceBytes=null;typeView?.dispose();host.removeEventListener('popstate',fromLocation);host.removeEventListener('hashchange',fromLocation);}};
+   mounted=true;host.ProofAtlasOccurrenceView=api;return api;
   }catch(error){status.textContent='Occurrence view unavailable: '+error.message;root.append(link('Open declaration library',backURL()));}
   finally{root.setAttribute('aria-busy','false');}
  }

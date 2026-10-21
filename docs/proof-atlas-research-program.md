@@ -979,6 +979,19 @@ same-node type/value and dependent-substitution controls retain their different
 original binders. This is source/context correspondence and metadata reduction,
 not semantic proof compression, a verified codec or a comprehension result.
 
-The reference model is not yet integrated into the browser or adapted to the
-project/AI construction records. Full source and type tables remain resident.
-[Rules, evidence, reproduction and limits](/research/proof-atlas/occurrence-constructions/README.md).
+The optional construction lens in the existing occurrence reader uses these
+interfaces with the frozen controls and 1,018 earlier project/AI construction
+records. Source selection, computed types and original Γ links stay synchronized.
+Missing constructions, declaration/context references and type expressions remain
+explicit boundaries. Native pretty-print text follows its exact type component;
+distinct Meta and kernel argument-type observations keep separate origins.
+
+The reader stores one packed selected-root path with short field suffixes and
+original ancestor-prefix depths. Its finite audit checks 108 reference-model
+comparisons, 3,054 corpus cuts and all 2,036 recorded premise text components.
+The eleven synthetic controls retain 49 distinct typed positions, including
+the previous 27. Source/type tables remain resident under their existing bounds;
+record transport adds no native judgments, source-module verification or
+whole-proof coverage. The general program remains active.
+[Rules and native evidence](/research/proof-atlas/occurrence-constructions/README.md) ·
+[Reader scope and checks](/research/proof-atlas/occurrence-constructions/reader.md).

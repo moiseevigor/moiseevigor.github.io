@@ -2,9 +2,11 @@
 
 This experiment extends the construction vocabulary to the compact original-path
 representation. It records **Π introduction** and one stage of **Π application**
-in their original lexical contexts. It is a reference model, not a new reader
-page or a replacement for the existing construction view. Browser integration
-and project/AI construction adaptation remain unfinished.
+in their original lexical contexts. This directory retains the Node reference
+model and its frozen native experiment. A separate [reader adapter](reader.md)
+uses the same rule interfaces inside the existing occurrence view, including
+the existing project/AI extraction profiles. Neither component supplies complete
+construction coverage or a general typing-preservation theorem.
 
 The representation problem is specific: a small construction cut can repeat a
 very long source address for every premise, type origin and external binder.
@@ -154,6 +156,7 @@ The kernel checks the finite emitted judgments. The query/codec/consumer
 algorithms are not formally verified. These controls do not establish complete
 proof coverage, project/AI corpus construction coverage, original private-module
 verification, all Lean syntax, semantic abstraction or improved comprehension.
-No browser integration or deployment follows from these commands. The next
-integration should extend the existing occurrence reader and retain shared type
-tables once per declaration. This experiment creates no new blog result.
+These commands verify the native/reference experiment, not a browser deployment.
+The [reader adapter](reader.md) retains its own source/type correspondence and
+browser checks, with shared extraction type tables stored once per declaration.
+This experiment creates no new blog result.
