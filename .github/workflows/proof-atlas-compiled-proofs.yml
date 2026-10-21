@@ -58,6 +58,7 @@ jobs:
       - run: node scripts/test-proof-atlas-occurrence-constructions.cjs
       - run: node scripts/test-proof-atlas-occurrence-application-fold.cjs
       - run: node scripts/test-proof-atlas-occurrence-let-bindings.cjs
+      - run: node scripts/test-proof-atlas-occurrence-context-frame.cjs
       - run: node scripts/test-proof-atlas-library-bytes.cjs
       - run: node scripts/test-proof-atlas-recorded-context.cjs
       - run: python3 research/proof-atlas/cut-records/check.py /tmp/atlas-cut-records/source-*.json
@@ -110,6 +111,7 @@ jobs:
           name: proof-atlas-context-frame-and-source-page-evidence
           path: |
             /tmp/atlas-occurrence-let-bindings.json
+            /tmp/atlas-occurrence-context-frame.json
             /tmp/atlas-application-spine-fold/verification.json
             /tmp/atlas-occurrence-constructions.json
             /tmp/atlas-reduced-replay.json
@@ -282,6 +284,8 @@ jobs:
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
       - name: Kernel-check source focusing and compare the compact law summary
         run: python3 research/proof-atlas/occurrence-focus/verify.py --lean "$(elan which lean)" --workdir /tmp/atlas-occurrence-laws --reserve-gib 5 --compare public/data/proof-atlas/occurrence-focus-laws.js
+      - name: Kernel-check context-frame reassembly, accounting and lexical scope
+        run: python3 research/proof-atlas/occurrence-constructions/verify_context_frame.py --lean "$(elan which lean)" --workdir /tmp/atlas-context-frame-laws --reserve-gib 5 --check
       - name: Replay deep contextual judgments and compare compiled terms
         run: |
           python3 research/proof-atlas/deep-typing/verify.py --lean "$(elan which lean)" --workdir /tmp/atlas-deep-typing --reserve-gib 5 --compare
@@ -315,4 +319,5 @@ jobs:
             /tmp/atlas-deep-typing/public-replay.json
             /tmp/atlas-deep-typing/independent-audit.json
             /tmp/atlas-occurrence-constructions/independent-audit.json
+            /tmp/atlas-context-frame-laws/verification.json
           if-no-files-found: ignore
