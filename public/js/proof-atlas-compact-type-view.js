@@ -3,26 +3,28 @@
  'use strict';
  const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
  const button=(text,action)=>{const n=el('button',text);n.type='button';n.onclick=action;return n;};
- function mount(parent,entry,source,onSource){
+ function mount(parent,entry,source,onSource,adapter=null){
   const A=host.ProofAtlasLibraryData,P=host.ProofAtlasPackedRoutes,T=host.ProofAtlasDeepContext,W=host.ProofAtlasOccurrenceWindow;
-  let scene=null,selected=null,disposed=false,scale=1,index=null;
+  let scene=null,selected=null,disposed=false,scale=1,index=null,presentation=null,epoch=0,controller=null;
+  const identity=()=>adapter?entry.origin:T.typeIdentity(entry),describe=n=>presentation?presentation.descriptions[n.node]:A.describe(entry.typeData,n.node);
   const shell=el('section',undefined,'pow-type-region'),heading=el('h2','Recorded type geometry'),caption=el('p',(entry.recording?.observation==='meta'?'Meta-inferred argument type':'Native '+entry.role+' record')+' · Γ'+entry.contextLength+' · computed type namespace'),tools=el('div',undefined,'pow-tools'),viewport=el('div',undefined,'pow-viewport pow-type-viewport'),sizing=el('div',undefined,'pow-sizing'),stage=el('div',undefined,'pow-stage'),summary=el('p',undefined,'pow-summary'),inspector=el('section',undefined,'pow-type-inspector');
   shell.dataset.recordedType='';viewport.tabIndex=0;viewport.setAttribute('aria-label','Recorded type geometry. Scroll to inspect the bounded cut.');viewport.append(sizing);sizing.append(stage);shell.append(heading,caption,tools,viewport,summary,inspector);parent.replaceChildren(shell);parent.hidden=false;
-  const root=button('Type root',()=>focus(P.encode(0,[]))),up=button('Type parent',()=>focus(P.prefix(scene.root.route,scene.root.route.depth-1)));
+  const root=button('Type root',()=>focus(P.encode(0,[]))),up=button('Type parent',()=>{if(scene)focus(P.prefix(scene.root.route,scene.root.route.depth-1));});
   function scaled(){stage.style.transform='scale('+scale+')';sizing.style.width=Number(stage.dataset.width)*scale+'px';sizing.style.height=Number(stage.dataset.height)*scale+'px';}
-  const jump=el('input');jump.type='number';jump.min='0';jump.max=String(entry.typeData.kind.length-1);jump.setAttribute('aria-label','Computed type node number');jump.style.width='9rem';
+  const jump=el('input');jump.type='number';jump.min='0';jump.max=String(adapter?adapter.nodes-1:entry.typeData.kind.length-1);jump.setAttribute('aria-label','Computed type node number');jump.style.width='9rem';
   const status=el('p','A type node number chooses one representative occurrence; descendants have no additional typing.','pow-help');status.setAttribute('role','status');tools.after(status);
   tools.append(root,up,button('Type zoom out',()=>{scale=Math.max(.4,scale/1.25);scaled();}),button('Type zoom in',()=>{scale=Math.min(2,scale*1.25);scaled();}),button('Reset type zoom',()=>{scale=1;scaled();}),jump,button('Go to type node',()=>{try{if(!jump.value.trim())throw Error('Enter a stored type node number');index??=W.representatives(entry.typeData);focus(index.route(Number(jump.value)));status.textContent='Representative computed type occurrence. The source selection is unchanged.';}catch(error){status.textContent=error.message;}}));
+  if(adapter){jump.hidden=true;tools.lastChild.hidden=true;status.textContent='Navigate the original type fields. Node-number search uses the complete loader.';}
   function inspect(n){
    selected=n;for(const b of stage.querySelectorAll('[data-type-node]'))b.setAttribute('aria-pressed',String(b.dataset.typeNode===n.id));
-   const term=el('pre',A.describe(entry.typeData,n.node));term.tabIndex=0;
+   const term=el('pre',describe(n));term.tabIndex=0;
    inspector.replaceChildren(el('h3',n.glyph+' '+n.kind+' · type e'+n.node),term,el('p','Computed type syntax at depth '+n.route.depth+'. No additional native typing judgment is attached here.'),button('Focus type expression',()=>focus(n.route)));
    if(n.binding){const b=n.binding,external=b.namespace==='original-source-context';const jump=button(external?'Go to original Γ slot '+(b.ordinal+1):'Go to type binder',()=>external?onSource(b.route):focus(b.route));jump.dataset.typeBinding=b.namespace;inspector.append(jump);}
-   const exact=el('details');exact.append(el('summary','Computed type address'),el('pre',JSON.stringify({namespace:'computed-native-type',...T.typeIdentity(entry),typeRoute:n.route,originalSourceRoute:entry.route,evidenceSha256:entry.evidenceSha256,recording:entry.recording},null,2)));inspector.append(exact);
+   const exact=el('details');exact.append(el('summary','Computed type address'),el('pre',JSON.stringify({namespace:'computed-native-type',...identity(),typeRoute:n.route,originalSourceRoute:entry.route,evidenceSha256:entry.evidenceSha256,recording:entry.recording},null,2)));inspector.append(exact);
    const payload=el('details');payload.append(el('summary','Recorded type constructor payload'),el('pre',JSON.stringify(n.payload,null,2)));inspector.append(payload);
   }
-  function focus(route){
-   if(disposed)return;const next=T.typeScene(entry,source,route);scene=next;stage.replaceChildren();
+  function render(next,labels=null){
+   if(disposed)return;scene=next;presentation=labels;stage.replaceChildren();
    const cols=Math.max(...scene.nodes.map(n=>n.depth))+1,rows=Math.max(...scene.nodes.map(n=>n.row))+1;
    const key=b=>b.namespace+':'+b.route.root+':'+b.route.depth+':'+b.route.slots;
    const shown=new Map(scene.nodes.map(n=>[key({namespace:'computed-native-type',route:n.route}),n.id]));
@@ -33,7 +35,7 @@
    const positions=new Map(),cards=new Map();
    for(const n of scene.nodes){
     const pos={x:20+n.depth*300,y:20+n.row*260};positions.set(n.id,pos);
-    const card=el('article',undefined,'pow-card'),pick=button(n.glyph+' '+n.kind+' · type e'+n.node,()=>inspect(n)),formula=el('p',A.describe(entry.typeData,n.node),'pow-formula'),ports=[];formula.tabIndex=0;pick.dataset.typeNode=n.id;pick.setAttribute('aria-pressed','false');card.dataset.constructor=n.kind;card.style.left=pos.x+'px';card.style.top=pos.y+'px';pick.append(el('small','Computed type · depth '+n.route.depth));card.append(pick,formula);
+    const card=el('article',undefined,'pow-card'),pick=button(n.glyph+' '+n.kind+' · type e'+n.node,()=>inspect(n)),formula=el('p',describe(n),'pow-formula'),ports=[];formula.tabIndex=0;pick.dataset.typeNode=n.id;pick.setAttribute('aria-pressed','false');card.dataset.constructor=n.kind;card.style.left=pos.x+'px';card.style.top=pos.y+'px';pick.append(el('small','Computed type · depth '+n.route.depth));card.append(pick,formula);
     for(const port of n.ports){const b=button(port.kernelField+' · '+(port.displayed?'shown':port.expanded+' hidden'),()=>focus(port.route));b.className='pow-port'+(port.displayed?'':' pow-frontier');b.dataset.typeField=port.slot;card.append(b);ports.push(b);}
     let binding=null;
     if(n.binding){const external=n.binding.namespace==='original-source-context';binding=button(external?'Γ slot '+(n.binding.ordinal+1)+' of '+entry.contextLength:'↪ type binder',()=>external?onSource(n.binding.route):focus(n.binding.route));binding.className='pow-binding';binding.dataset.typeBoundary=n.binding.namespace;card.append(binding);}
@@ -41,7 +43,7 @@
    }
    boundaries.forEach((b,i)=>{
     const external=b.namespace==='original-source-context',id=key(b),card=el('article',undefined,'pow-context-card'),pos={x:20+cols*300,y:20+i*180};positions.set(id,pos);card.style.left=pos.x+'px';card.style.top=pos.y+'px';
-    const target=external?source:entry.typeData,payload=target.payloads[b.node],pick=button(external?'Γ slot '+(b.ordinal+1)+' · '+(payload.binderName||payload.declName||'_'):'Enclosing type binder · e'+b.node,()=>external?onSource(b.route):focus(b.route));pick.dataset.typeContext=b.namespace;
+    const target=external?source:entry.typeData,payload=presentation?presentation.bindings[id].payload:target.payloads[b.node],pick=button(external?'Γ slot '+(b.ordinal+1)+' · '+(payload.binderName||payload.declName||'_'):'Enclosing type binder · e'+b.node,()=>external?onSource(b.route):focus(b.route));pick.dataset.typeContext=b.namespace;
     card.append(el('small',external?(b.bindingClass==='local-definition'?'ORIGINAL SOURCE DEFINITION':'ORIGINAL SOURCE CONTEXT'):(b.bindingClass==='local-definition'?'ENCLOSING TYPE DEFINITION':'ENCLOSING COMPUTED TYPE')),pick,el('p','Outside this type cut; excluded from its occurrence count.'));stage.append(card);cards.set(id,{card,pick});
    });
    function paths(){if(disposed||scene!==next)return;svg.replaceChildren();
@@ -49,12 +51,16 @@
     for(const edge of scene.edges)line(edge.from,edge.to,cards.get(edge.from).ports[edge.slot],'type-field');
     for(const b of scene.links)line(b.from,shown.get(key(b))||key(b),cards.get(b.from).binding,b.namespace==='original-source-context'?'type-original-context':'type-bound-to');
    }
-   paths();document.fonts?.ready.then(paths);up.disabled=route.depth===0;
+   paths();document.fonts?.ready.then(paths);up.disabled=scene.root.route.depth===0;
    summary.textContent=scene.stats.retained+' retained + '+scene.stats.hidden+' hidden = '+scene.stats.represented+' type occurrences. '+boundaries.length+' context references are outside this count.';
    inspect(scene.nodes[0]);scaled();viewport.scrollTo(0,0);
   }
+  function focus(route){
+   if(disposed)return;if(!adapter){render(T.typeScene(entry,source,route));return;}const request=++epoch;controller?.abort();controller=new AbortController();shell.setAttribute('aria-busy','true');status.textContent='Loading recorded type fields…';
+   adapter.prepare(route,{signal:controller.signal}).then(result=>{if(disposed||request!==epoch)return;render(result.scene,result.presentation);status.textContent='Recorded type syntax in its original context; pages are loaded on demand.';}).catch(error=>{if(!disposed&&request===epoch)status.textContent='Type diagram unavailable: '+error.message;}).finally(()=>{if(!disposed&&request===epoch)shell.setAttribute('aria-busy','false');});
+  }
   focus(P.encode(0,[]));
-  return {getScene:()=>scene,getSnapshot:()=>({namespace:'computed-native-type',sourceRoute:entry.route,typeRoute:selected.route,node:selected.node,evidenceSha256:entry.evidenceSha256,...T.typeIdentity(entry),...(entry.recording?{recording:entry.recording}:{})}),focus,dispose:()=>{disposed=true;shell.remove();parent.hidden=true;}};
+  return {getScene:()=>scene,getSnapshot:()=>selected?({namespace:'computed-native-type',sourceRoute:entry.route,typeRoute:selected.route,node:selected.node,evidenceSha256:entry.evidenceSha256,...identity(),...(entry.recording?{recording:entry.recording}:{})}):null,focus,dispose:()=>{disposed=true;epoch++;controller?.abort();shell.remove();parent.hidden=true;}};
  }
- host.ProofAtlasCompactTypeView={mount};
+ host.ProofAtlasCompactTypeView={mount,mountPaged:(parent,cursor,observation,sourceCursor,onSource)=>{const entry={role:observation.role,contextLength:observation.contextLength,route:observation.sourceRoute,evidenceSha256:observation.evidenceSha256,recording:observation.origin.recording,origin:observation.origin};return mount(parent,entry,null,onSource,{nodes:cursor.manifest.nodeCount,prepare:async(route,options)=>{const scene=await cursor.scene(observation,sourceCursor,route,options);return{scene,presentation:await cursor.presentation(scene,sourceCursor,options)};}});}};
 })(typeof window==='undefined'?globalThis:window);
