@@ -1,0 +1,35 @@
+{
+  "format": "ProofAtlasContextFrameLaws/1",
+  "javascriptFormallyVerified": false,
+  "rendererVerified": false,
+  "scope": "Exact Lean.Expr context peel/rebuild, member bound, occurrence partition and syntactic bound-variable scope. No typing, serialized cut or browser theorem.",
+  "sourceFile": "research/proof-atlas/occurrence-constructions/ContextFrame.lean",
+  "sourceSha256": "1e5520422a82f3c583a2963ffecdbfa29ce9e283b512e5e731e539f043bfa44c",
+  "status": "PASS",
+  "theorems": {
+    "ProofAtlas.ContextFrame.peel_member_bound": [
+      "Quot.sound",
+      "propext"
+    ],
+    "ProofAtlas.ContextFrame.peel_partition": [
+      "propext"
+    ],
+    "ProofAtlas.ContextFrame.peel_roundtrip": [
+      "propext"
+    ],
+    "ProofAtlas.ContextFrame.peel_scope": [
+      "propext"
+    ],
+    "ProofAtlas.ContextFrame.rebuild_occurrences": [
+      "propext"
+    ],
+    "ProofAtlas.ContextFrame.rebuild_scope": [
+      "propext"
+    ],
+    "ProofAtlas.ContextFrame.wrap_scope": [
+      "propext"
+    ]
+  },
+  "toolchain": "leanprover/lean4:v4.33.1",
+  "typingAlgorithmFormallyVerified": false
+}
