@@ -103,3 +103,23 @@ applications. Other rule families, deeper local-definition controls, general
 consumer/renderer verification, paged construction delivery and measured human
 inspection tasks remain separate work. No semantic-compression or complete
 formalization claim follows from these checks.
+
+
+## Further native queries
+
+`run_occurrence_types.py --kind let` runs the existing exact-route let checker
+against a private pinned compiled environment. The request retains the original
+packet hash, source-module hash and explicit occurrence routes. The driver
+imports only the requested modules, checks available dependency revisions,
+compares the complete native DAG with the packet, and checks source and selected
+compiled-module bytes again after extraction. It accepts an explicit
+`--search-path-file` when the private snapshot has no saved search-path file.
+It does not download dependencies or rebuild a project. Native jobs are limited
+to 120 seconds, 8 GiB RSS and a 64 MiB output file, retaining a 30 GiB disk reserve.
+Requests and extraction logs stay outside the public website; publication is a
+separate reviewed compiled-data projection.
+
+A recorded body type does not supply that body's constructor rule. To compose
+an introduction or local definition, query that exact constructor or retain an
+explicit boundary. In particular, one query at a function root is not a record
+for every introduction in its binder prefix.
