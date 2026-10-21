@@ -2,10 +2,11 @@
 'use strict';
 const crypto=require('crypto'),assert=require('assert/strict'),T=require('../../../public/js/proof-atlas-deep-context'),L=require('../../../public/js/proof-atlas-type-pages');
 const bytes=v=>Buffer.from(JSON.stringify(v)),hash=b=>crypto.createHash('sha256').update(b).digest('hex');
-function pack(nativeCase){
+function pack(nativeCase,typeOwners=[]){
+ assert(Array.isArray(typeOwners)&&typeOwners.length<=4096,'Additional native type-owner bound');
  const files=new Map(),tables=new Map(),observations=[];
  function put(base,suffix,value){const raw=bytes(value),sha256=hash(raw),file=base+sha256+suffix;assert(!files.has(file)||files.get(file).equals(raw));files.set(file,raw);return{file,sha256,bytes:raw.length};}
- for(const entry of nativeCase.entries){
+ for(const [position,entry]of [...nativeCase.entries,...typeOwners].entries()){
   // This also checks the sealed original source/observation attachment. Native
   // validators already checked the complete shared table when the case opened.
   const reference=T.typeScene(entry,nativeCase.data),key=entry.evidenceSha256+'/'+entry.typeTableSha256;assert(entry.typeTableSha256);
@@ -20,6 +21,9 @@ function pack(nativeCase){
     source:{name:nativeCase.record.name,indexSha256:nativeCase.record.indexSha256,sourceSha256:nativeCase.record.sourceSha256},producerSha256:hash(require('fs').readFileSync(__filename)),nativeValidatorSha256:hash(require('fs').readFileSync(require.resolve('../../../public/js/proof-atlas-deep-context'))),validation:'Original native archive/source/table validated by producer; transport is not an independent archive membership or kernel proof'};
    const descriptor=put(base,'.manifest.gz',manifest);assert(descriptor.bytes<=L.limits.manifestBytes);table={descriptor:{...descriptor,typeTableSha256:entry.typeTableSha256,evidenceSha256:entry.evidenceSha256,nodes:data.kind.length},nodes:data.kind.length};tables.set(key,table);
   }
+  // A construction can own a table absent from the chosen position records.
+  // Pack that attested table without adding another position observation.
+  if(position>=nativeCase.entries.length)continue;
   const metadata={format:'ProofAtlasPagedTypeObservation/1',typeTableSha256:entry.typeTableSha256,evidenceSha256:entry.evidenceSha256,evidenceFile:entry.evidenceFile,sourceIndexSha256:entry.sourceIndexSha256,sourceRoute:entry.route,sourceNode:entry.node,contextLength:entry.contextLength,role:entry.role,root:entry.typeData.roots[0],typeRecord:entry.typeRecord,origin:reference.origin};
   const descriptor=put(table.descriptor.file.slice(0,table.descriptor.file.lastIndexOf('/')+1),'.observation.gz',metadata);assert(descriptor.bytes<=L.limits.observationBytes);observations.push({sourceRoute:entry.route,table:table.descriptor,descriptor});
  }

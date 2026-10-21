@@ -123,3 +123,20 @@ A recorded body type does not supply that body's constructor rule. To compose
 an introduction or local definition, query that exact constructor or retain an
 explicit boundary. In particular, one query at a function root is not a record
 for every introduction in its binder prefix.
+
+## Construction-owned type tables in sparse projections
+
+The selected position record and its native construction can come from different
+extraction tables at the same source route. Position precedence must not replace
+the construction's table. The type-page producer accepts additional attested
+table owners without adding position observations. The construction-page
+producer supplies these owners explicitly. Tables retain their original
+evidence and type-table identities; component roots are never interpreted in a
+neighbouring observation's table.
+
+`test-proof-atlas-construction-owner-tables.cjs` projects one existing public
+position whose let construction owns a different table. It retains one position
+observation, delivers both tables, compares the recorded type, conclusion and
+three field types, and compares the complete and paged one-member frame.
+Unattested, foreign-source and unbounded owner inputs are refused. This is a
+transport/provenance regression, not an additional kernel judgment.
