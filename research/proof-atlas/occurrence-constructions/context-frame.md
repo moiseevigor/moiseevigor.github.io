@@ -1,8 +1,8 @@
 # Context frames over recorded introduction and definition chains
 
-Status: context-frame lens in the occurrence reader. The paged extension below
-is tested locally and awaits release checks. Existing primitive cut and
-application-group formats retain their previous meanings and limits.
+Status: context-frame lens in the complete and paged occurrence readers.
+Existing primitive cut and application-group formats retain their previous
+meanings and limits.
 
 ## Representation problem
 

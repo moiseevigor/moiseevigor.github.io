@@ -100,7 +100,7 @@ node scripts/test-proof-atlas-occurrence-let-bindings-browser.cjs
 
 The scope remains finite recorded local definitions, Π introductions and Π
 applications. Other rule families, deeper local-definition controls, general
-consumer/renderer verification, paged construction delivery and measured human
+consumer/renderer verification, paged synthetic/deep adapters and measured human
 inspection tasks remain separate work. No semantic-compression or complete
 formalization claim follows from these checks.
 
