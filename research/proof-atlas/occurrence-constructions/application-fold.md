@@ -7,8 +7,9 @@ outermost application. Each argument port names its original member and `arg`
 field. The head port names the innermost member's original `fn` field.
 
 This uses the existing application-spine vocabulary. It introduces no Lean
-constructor, term rewriting or inferred type judgment. The current implementation
-is a model experiment; it is not connected to the browser renderer.
+constructor, term rewriting or inferred type judgment. The optional **Group applications** control uses this rule in the existing
+occurrence construction reader. Individual stages remain available by turning
+grouping off. Article reading defaults are unchanged.
 
 ## Contract
 
@@ -63,7 +64,7 @@ The independent audit checks 9,270 cuts in 36 cases: eleven contextual controls
 and twenty-five existing project/attributed-AI declarations. Across the tested
 cuts it checks 4,155 multi-member group appearances, 10,261 grouped member
 appearances, 4,143 original binder-link appearances and 2,345 on-demand stage
-interfaces. It checks selection at 709 inner applications and twelve refusal
+interfaces, with 7,035 before/argument/after type-component checks. It checks selection at 709 inner applications and twelve refusal
 controls. The largest tested scene is 40,191 bytes. Counts are appearances in
 these overlapping cuts, not distinct new proofs or kernel judgments.
 
@@ -86,5 +87,30 @@ python3 research/proof-atlas/occurrence-constructions/verify_application_fold.py
 The default audit output is `/tmp/atlas-application-spine-fold/`. Compiler logs
 and resource reports stay in the requested private work directory. These results
 do not establish complete proof coverage, semantic compression or improved human
-comprehension. Browser integration and the consumer's general correctness remain
-separate work.
+comprehension. The consumer's general correctness and measured reading tasks remain separate
+work.
+
+## Reader interactions
+
+In the occurrence reader choose **Proof constructions**, then **Group
+applications**. The shared node/depth controls still bound retained primitive
+rules. A group has a head port and ordered argument ports. Its **Retained stages**
+list opens individual member selections without changing the group root. Each
+member has before, argument and after type actions and a source-focus action.
+Before/argument actions select those exact original source fields, rather than
+showing their type beside the parent application's source node.
+
+The list is scrollable and native text previews are capped at 1,600 characters
+per component; the full recorded type graph remains selectable. Expanding the
+list recomputes card positions and connector endpoints. Grouping and the level
+limit are retained in shareable occurrence URLs. A failed optional grouping
+script leaves the individual construction reader available, and a late load
+cannot override an explicit return to individual stages or source mode.
+
+Browser checks compare the grouped scene in all 36 profiles, including three
+controls that have no construction records. They exercise Riccati port order,
+every retained AM–GM stage's source and three type components, partial-spine
+labels, inner-source focus, saved view settings, distinct Meta/kernel types,
+missing/stale optional components and desktop/mobile reading in both themes.
+These tests establish the listed interactions, not a renderer correctness proof
+or coverage of every formalized proof step.

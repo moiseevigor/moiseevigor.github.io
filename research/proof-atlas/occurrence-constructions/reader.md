@@ -135,3 +135,8 @@ no blog result is published for the attachment.
 [Riccati declaration](/projects/proof-atlas/library/?view=occurrence&proof=JacobiData.slope_bound_abs&diagram=construction) ·
 [Representation](/public/js/proof-atlas-occurrence-constructions.js) ·
 [Independent audit](/scripts/test-proof-atlas-occurrence-constructions.cjs)
+
+The optional [application groups](application-fold.md) retain the same primitive
+cut and expose its application stages in one call card, with ordered ports and
+separate per-stage source and type actions. The actual Lean.Expr reassembly laws
+and the finite JavaScript/browser checks establish different guarantees.
