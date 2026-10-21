@@ -13,7 +13,7 @@
   'typed-source-boundary':'Recorded type · construction outside this profile',
   'unrecorded-source':'No recorded native type or construction'
  };
- function mount(parent,model,data,scene,callbacks){
+ function mount(parent,model,data,scene,callbacks,presentation=null){
   const A=host.ProofAtlasLibraryData,P=host.ProofAtlasPackedRoutes;
   let disposed=false,scale=1,selected=null,action=0;
   const shell=el('section',undefined,'poc-view'),heading=el('h2','Recorded proof constructions'),caption=el('p','Ordered ports are original source fields. Γ labels retain the original lexical context. Dashed connections identify binders.','pow-help'),viewport=el('div',undefined,'pow-viewport'),sizing=el('div',undefined,'pow-sizing'),stage=el('div',undefined,'pow-stage'),summary=el('p',undefined,'pow-summary'),status=el('p',undefined,'pow-help');
@@ -29,10 +29,11 @@
   const width=(columns+(external.length?1:0))*340+30,height=Math.max(Math.max(...layers.values())*370,external.length*180)+30;let currentHeight=height;
   stage.style.width=width+'px';stage.style.height=height+'px';viewport.style.height=Math.min(650,Math.max(350,height+20))+'px';
   const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.classList.add('pow-edges');svg.setAttribute('width',width);svg.setAttribute('height',height);svg.setAttribute('aria-hidden','true');stage.append(svg);
-  function pick(p,notify=true){if(notify)action++;selected=p.id;for(const item of cards.values())if(item.pick.dataset.constructionPoint)item.pick.setAttribute('aria-pressed',String(item.pick.dataset.constructionPoint===selected));for(const b of stage.querySelectorAll('[data-construction-member]'))b.setAttribute('aria-pressed','false');if(notify)callbacks.onSelect(model.routeFor(scene,p.id),p.typeReference?model.typeFor(scene,p.id):null);}
+  function pick(p,notify=true){if(notify)action++;selected=p.id;for(const item of cards.values())if(item.pick.dataset.constructionPoint)item.pick.setAttribute('aria-pressed',String(item.pick.dataset.constructionPoint===selected));for(const b of stage.querySelectorAll('[data-construction-member]'))b.setAttribute('aria-pressed','false');if(notify)callbacks.onSelect(model.routeFor(scene,p.id),p.typeReference?(callbacks.lazyTypes?()=>model.typeFor(scene,p.id):model.typeFor(scene,p.id)):null);}
   function pickMember(p,m){action++;pick(p,false);for(const b of stage.querySelectorAll('[data-construction-member]'))b.setAttribute('aria-pressed',String(b.dataset.constructionMember===p.id+':'+m.id));callbacks.onSelect(model.routeFor(scene,p.id,m.id),model.typeFor(scene,p.id,m.id));}
   async function memberType(p,m,field,b){const epoch=++action;b.disabled=true;try{const entry=await model.memberTypeFor(scene,p.id,m.id,field);if(!disposed&&epoch===action)callbacks.onType(entry.route,entry);}catch(error){status.textContent=error.message;}finally{b.disabled=false;}}
   function preview(p){
+   if(presentation)return presentation.previews[p.id];
    if(p.kind!=='app')return A.describe(data,p.node);
    let id=p.node,count=0;while(data.kind[id]===5&&count<32){id=data.children[id][0];count++;}
    if(data.kind[id]===5)return 'Application head beyond this 32-field preview';
@@ -52,9 +53,9 @@
    if(!p.rule)card.append(el('p',p.expanded+' source occurrence'+(p.expanded==='1'?'':'s')+' inside this boundary.','poc-context'));
    const ports=new Map();for(const edge of scene.edges.filter(e=>e.from===p.id)){const child=points.find(p=>p.id===edge.to),field=edge.field==='head'?'Head':/^arg\d+$/.test(edge.field)?(p.headIsApplication?'Trailing argument ':'Argument ')+edge.field.slice(3):edge.field,b=button(field+' · '+child.role+' · Γ'+child.contextLength,()=>pick(child));b.className='pow-port';b.dataset.constructionField=edge.field;card.append(b);ports.set(edge.field,b);}
    if(p.typeReference){
-    const b=button('Recorded type · Γ'+p.contextLength,async()=>{const epoch=++action;b.disabled=true;try{const type=await model.typeFor(scene,p.id);if(!disposed&&epoch===action){pick(p,false);callbacks.onType(model.routeFor(scene,p.id),type);}}catch(error){status.textContent=error.message;}finally{b.disabled=false;}});b.dataset.constructionType=p.id;card.append(b);
+    const b=button('Recorded type · Γ'+p.contextLength,async()=>{const epoch=++action;b.disabled=true;try{callbacks.onTypeStart?.();const type=await model.typeFor(scene,p.id);if(!disposed&&epoch===action){pick(p,false);callbacks.onType(model.routeFor(scene,p.id),type);}}catch(error){status.textContent=error.message;}finally{b.disabled=false;}});b.dataset.constructionType=p.id;card.append(b);
    }
-   if(p.alternateTypeReference){const b=button('Meta-inferred argument type',async()=>{const epoch=++action;b.disabled=true;try{const type=await model.typeFor(scene,p.id,'meta');if(!disposed&&epoch===action){pick(p,false);callbacks.onType(model.routeFor(scene,p.id),type);}}catch(error){status.textContent=error.message;}finally{b.disabled=false;}});b.dataset.constructionAlternateType=p.id;card.append(b);}
+   if(p.alternateTypeReference){const b=button('Meta-inferred argument type',async()=>{const epoch=++action;b.disabled=true;try{callbacks.onTypeStart?.();const type=await model.typeFor(scene,p.id,'meta');if(!disposed&&epoch===action){pick(p,false);callbacks.onType(model.routeFor(scene,p.id),type);}}catch(error){status.textContent=error.message;}finally{b.disabled=false;}});b.dataset.constructionAlternateType=p.id;card.append(b);}
    if(p.members&&p.kind==='app'){
     const details=el('details'),content=el('ol');details.dataset.constructionStages=p.id;details.append(el('summary','Retained stages · '+p.members.length),content);let populated=false;
     details.ontoggle=()=>{if(populated||!details.open)return;populated=true;for(const [i,m]of p.members.entries()){
@@ -67,7 +68,7 @@
    let binding=null;if(p.binding){binding=button('Go to original binder',()=>callbacks.onSource(model.resolve(scene,p.binding.address)));binding.className='pow-binding';binding.dataset.constructionBinding=p.id;card.append(binding);}
    stage.append(card);cards.set(p.id,{card,pick:pickButton,ports,binding});
   }
-  external.forEach((ref,i)=>{const id='ctx'+i,pos={x:20+columns*340,y:20+i*180},card=el('article',undefined,'pow-context-card'),r=model.resolve(scene,ref.address),payload=data.payloads[ref.node],pick=button((payload.binderName||payload.declName||'_')+' · e'+ref.node,()=>callbacks.onSource(r));positions.set(id,pos);byAddress.set(addressKey(ref.address),id);card.style.left=pos.x+'px';card.style.top=pos.y+'px';pick.dataset.constructionContext=id;card.append(el('small',data.kind[ref.node]===8?'ORIGINAL Γ · LOCAL DEFINITION':'ORIGINAL Γ · OUTSIDE THIS CUT'),pick,el('p','Source depth '+r.depth+'. Excluded from the subtree count.'));stage.append(card);cards.set(id,{card,pick});});
+  external.forEach((ref,i)=>{const id='ctx'+i,pos={x:20+columns*340,y:20+i*180},card=el('article',undefined,'pow-context-card'),r=model.resolve(scene,ref.address),label=presentation?.binders[ref.node],payload=label?null:data.payloads[ref.node],pick=button((label?label.name:payload.binderName||payload.declName||'_')+' · e'+ref.node,()=>callbacks.onSource(r));positions.set(id,pos);byAddress.set(addressKey(ref.address),id);card.style.left=pos.x+'px';card.style.top=pos.y+'px';pick.dataset.constructionContext=id;card.append(el('small',(label?label.kind:data.kind[ref.node])===8?'ORIGINAL Γ · LOCAL DEFINITION':'ORIGINAL Γ · OUTSIDE THIS CUT'),pick,el('p','Source depth '+r.depth+'. Excluded from the subtree count.'));stage.append(card);cards.set(id,{card,pick});});
   function paths(){if(disposed)return;svg.replaceChildren();function line(from,to,control,relation){const a=positions.get(from),b=positions.get(to),target=cards.get(to).pick,right=b.x>=a.x,sx=right?a.x+280:a.x,sy=a.y+control.offsetTop+control.offsetHeight/2,tx=right?b.x:b.x+280,ty=b.y+target.offsetTop+target.offsetHeight/2,path=document.createElementNS(svg.namespaceURI,'path');path.setAttribute('d','M '+sx+' '+sy+' C '+(sx+(right?35:-35))+' '+sy+' '+(tx+(right?-35:35))+' '+ty+' '+tx+' '+ty);path.dataset.relation=relation;if(relation==='original-source-context')path.classList.add('pow-binding-edge');svg.append(path);}
    for(const edge of scene.edges)line(edge.from,edge.to,cards.get(edge.from).ports.get(edge.field),edge.relation);
    for(const link of scene.links)line(link.from,byAddress.get(addressKey(link.address)),cards.get(link.from).binding,'original-source-context');

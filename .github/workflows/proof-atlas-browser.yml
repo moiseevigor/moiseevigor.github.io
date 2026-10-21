@@ -3,6 +3,13 @@ on:
   push:
     branches: [master]
     paths:
+      - 'public/js/proof-atlas-construction-pages.js'
+      - 'public/js/proof-atlas-cursor-constructions.js'
+      - 'research/proof-atlas/construction-pages/**'
+      - 'public/data/proof-atlas/construction-pages/**'
+      - 'public/data/proof-atlas/construction-pages-manifest.js'
+      - 'scripts/*proof-atlas-construction-page*.cjs'
+      - 'scripts/build-proof-atlas-construction-pages.cjs'
       - '_config.yml'
       - 'public/data/proof-atlas/occurrence-focus-laws.js'
       - 'public/js/proof-atlas-packed-routes.js'
@@ -246,6 +253,13 @@ on:
       - '.github/workflows/proof-atlas-browser.yml'
   pull_request:
     paths:
+      - 'public/js/proof-atlas-construction-pages.js'
+      - 'public/js/proof-atlas-cursor-constructions.js'
+      - 'research/proof-atlas/construction-pages/**'
+      - 'public/data/proof-atlas/construction-pages/**'
+      - 'public/data/proof-atlas/construction-pages-manifest.js'
+      - 'scripts/*proof-atlas-construction-page*.cjs'
+      - 'scripts/build-proof-atlas-construction-pages.cjs'
       - '_config.yml'
       - 'public/data/proof-atlas/occurrence-focus-laws.js'
       - 'public/js/proof-atlas-packed-routes.js'
@@ -525,6 +539,7 @@ jobs:
           node scripts/test-proof-atlas-occurrence-let-bindings-browser.cjs
           node scripts/test-proof-atlas-occurrence-context-frame-browser.cjs
           node scripts/test-proof-atlas-type-pages-browser.cjs
+          node scripts/test-proof-atlas-construction-pages-browser.cjs
           node scripts/test-proof-atlas-recorded-context-browser.cjs
           node scripts/test-proof-atlas-cut-certificate-browser.cjs
           node scripts/test-proof-atlas-cut-native-browser.cjs
