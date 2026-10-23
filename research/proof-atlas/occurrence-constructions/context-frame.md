@@ -1,8 +1,13 @@
 # Context frames over recorded introduction and definition chains
 
-Status: context-frame lens in the occurrence reader. The paged extension below
-is tested locally and awaits release checks. Existing primitive cut and
-application-group formats retain their previous meanings and limits.
+Status: context-frame lens in the complete and paged occurrence readers.
+Existing primitive cut and application-group formats retain their previous
+meanings and limits.
+
+The numerical audits below describe the released 25-profile baseline. The
+[additional Riccati context records](riccati-continuation.md) extend the local
+inventory to 26 profiles and 269 recorded chain starts; their native provenance,
+checks and remaining boundaries are documented separately.
 
 ## Representation problem
 

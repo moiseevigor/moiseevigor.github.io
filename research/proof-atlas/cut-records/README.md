@@ -181,8 +181,8 @@ whole-browser memory guarantee. Native reconstruction loads one source DAG in
 full and currently accepts at most 131,072 unique nodes, independently of its
 expanded occurrence count. Larger unique DAGs require further work.
 
-The reproducible fixture matrix contains 3,156 cuts, 3,011 bound-variable
-appearances and 1,592 external targets across 40 source requests. This includes
+The reproducible fixture matrix contains 3,222 cuts, 3,087 bound-variable
+appearances and 1,597 external targets across 41 source requests. This includes
 the four additional scope controls. The native checker rejects 88 altered
 records (22 changes applied to each control), including wrong existing binders.
 An additional 15 actual hosted-reader exports pass native reconstruction and

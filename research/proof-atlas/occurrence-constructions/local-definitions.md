@@ -100,6 +100,43 @@ node scripts/test-proof-atlas-occurrence-let-bindings-browser.cjs
 
 The scope remains finite recorded local definitions, Π introductions and Π
 applications. Other rule families, deeper local-definition controls, general
-consumer/renderer verification, paged construction delivery and measured human
+consumer/renderer verification, paged synthetic/deep adapters and measured human
 inspection tasks remain separate work. No semantic-compression or complete
 formalization claim follows from these checks.
+
+
+## Further native queries
+
+`run_occurrence_types.py --kind let` runs the existing exact-route let checker
+against a private pinned compiled environment. The request retains the original
+packet hash, source-module hash and explicit occurrence routes. The driver
+imports only the requested modules, checks available dependency revisions,
+compares the complete native DAG with the packet, and checks source and selected
+compiled-module bytes again after extraction. It accepts an explicit
+`--search-path-file` when the private snapshot has no saved search-path file.
+It does not download dependencies or rebuild a project. Native jobs are limited
+to 120 seconds, 8 GiB RSS and a 64 MiB output file, retaining a 30 GiB disk reserve.
+Requests and extraction logs stay outside the public website; publication is a
+separate reviewed compiled-data projection.
+
+A recorded body type does not supply that body's constructor rule. To compose
+an introduction or local definition, query that exact constructor or retain an
+explicit boundary. In particular, one query at a function root is not a record
+for every introduction in its binder prefix.
+
+## Construction-owned type tables in sparse projections
+
+The selected position record and its native construction can come from different
+extraction tables at the same source route. Position precedence must not replace
+the construction's table. The type-page producer accepts additional attested
+table owners without adding position observations. The construction-page
+producer supplies these owners explicitly. Tables retain their original
+evidence and type-table identities; component roots are never interpreted in a
+neighbouring observation's table.
+
+`test-proof-atlas-construction-owner-tables.cjs` projects one existing public
+position whose let construction owns a different table. It retains one position
+observation, delivers both tables, compares the recorded type, conclusion and
+three field types, and compares the complete and paged one-member frame.
+Unattested, foreign-source and unbounded owner inputs are refused. This is a
+transport/provenance regression, not an additional kernel judgment.

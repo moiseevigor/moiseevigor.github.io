@@ -24,7 +24,7 @@ let observations=0,scenes=0,tables=0,originalLinks=0,typeLocalLinks=0,peakTypeNo
    rows.push({name:record.name,edition:d.edition,observations:packed.observations.length,tables:packed.tables.map(t=>({nodes:t.nodes,state:cursors.get(t.descriptor.sha256).state()})),sourceState:source.state()});
   }finally{source.dispose();for(const cursor of cursors.values())cursor.dispose();}
  }
- assert.equal(observations,2411);assert.equal(tables,32);assert(originalLinks>0&&typeLocalLinks>0);assert.equal(fullArchiveRequests,0);
+ assert.equal(observations,2442);assert.equal(tables,34);assert(originalLinks>0&&typeLocalLinks>0);assert.equal(fullArchiveRequests,0);
  const report={status:'PASS',scope:'Independent finite model comparison of paged computed type geometry; browser integration and whole-browser memory have separate evidence',declarations:rows.length,tables,observations,scenes,refinements,originalContextLinkAppearances:originalLinks,typeLocalLinkAppearances:typeLocalLinks,peakTypeNodes,peakTypeBytes,fullArchiveRequests,rows};
  fs.writeFileSync(process.env.ATLAS_TYPE_PAGES_REPORT||'/tmp/atlas-type-pages.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({...report,rows:undefined}));
 })().catch(e=>{console.error(e.stack);process.exit(1);});

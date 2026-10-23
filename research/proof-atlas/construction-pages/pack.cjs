@@ -7,7 +7,8 @@ function fingerprints(g){
  const hashes=[];for(let i=0;i<g.kind.length;i++){assert(g.children[i].every(c=>c<i));hashes.push(sha(bytes(['ProofAtlasTypeSyntaxFingerprint/1',g.kind[i],A.payloadKey(g.kind[i],g.payloads[i]),g.children[i].map(c=>hashes[c])])));}return hashes;
 }
 async function pack(c){
- const source={...T.sourceIdentity(c.data,c.record),sourceSha256:c.record.sourceSha256},types=TP.pack(c),files=new Map(types.files),rows=[],pools=new WeakMap();let constructions=0,componentCount=0,maxRecordBytes=0,firstConstruction=null;
+ const owners=[...new Set(c.entries.map(e=>T.construction(e,c.data)?.entry).filter(Boolean))];
+ const source={...T.sourceIdentity(c.data,c.record),sourceSha256:c.record.sourceSha256},types=TP.pack(c,owners),files=new Map(types.files),rows=[],pools=new WeakMap();let constructions=0,componentCount=0,maxRecordBytes=0,firstConstruction=null;
  const fp=(e,root)=>{let values=pools.get(e.typeData.kind);if(!values){values=fingerprints(e.typeData);pools.set(e.typeData.kind,values);}return values[root];};
  function put(base,suffix,value,cap){const raw=bytes(value),hash=sha(raw),file=base+hash+suffix;assert(raw.length<=cap,'construction asset byte bound');assert(!files.has(file)||files.get(file).equals(raw));files.set(file,raw);return{file,sha256:hash,bytes:raw.length};}
  const tableFor=e=>{const table=types.tables.find(t=>t.descriptor.evidenceSha256===e.evidenceSha256&&t.descriptor.typeTableSha256===e.typeTableSha256);assert(table,'construction table requires explicit producer adapter');return table.descriptor;};

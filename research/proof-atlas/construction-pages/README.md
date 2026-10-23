@@ -1,9 +1,13 @@
 # Sparse construction geometry
 
-Locally integrated optional `?view=occurrence&loading=paged&diagram=construction`
-reader; not released yet. It uses the existing construction and type renderers.
+Released optional `?view=occurrence&loading=paged&diagram=construction`
+reader. It uses the existing construction and type renderers.
 The default article and the blog are unchanged. The general geometric-language
 research program remains active.
+
+The numerical audits below describe the released 25-profile baseline. The
+[local Riccati extension](../occurrence-constructions/riccati-continuation.md)
+adds compiled records while retaining the same source and type interfaces.
 
 The construction reader must retain native premise interfaces without keeping
 complete source/native/type graphs in the consumer. This prototype projects the
