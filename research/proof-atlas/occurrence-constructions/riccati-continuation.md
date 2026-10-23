@@ -42,6 +42,14 @@ refuses replacement, validates source/context attachments and records this
 environment scope. Its compiled input archives permit deterministic projection
 checks without importing private mathematical modules.
 
+The canonical projection excludes gzip-size measurements: recompressing identical
+JSON can produce different sizes under different zlib versions. It records
+decoded size instead. Delivery-pool sizes describe the retained gzip artifacts;
+the publisher compares every decoded byte before retaining their stored sizes.
+The explicit `--reproject` command changes packing metadata only and refuses any
+change to the source, environment, expressions or contextual judgments. Original
+input archives and preceding packed archives remain available.
+
 A construction can own a different shared type table from an overlapping older
 position observation. Page production retains the construction's original table
 identity without replacing the position observation or inventing another query.
@@ -59,13 +67,23 @@ node scripts/test-proof-atlas-riccati-context-continuation-browser.cjs
 ```
 
 The publication check reconstructs three new compiled-input projections and
-rejects 26 changed provenance/context/conversion controls. The targeted page
+rejects 26 changed provenance/context/conversion controls. Six alternate gzip
+encodings must preserve the same canonical descriptors and decoded data. The
+projection and delivery-page checks also pass under Node 22 and Node 23. The targeted page
 check compares both twelve-member frames and all 62 selected recorded type
 views with the complete reference, independently walks source fields and binder
 depths, and rejects foreign packet attachments. The normal production browser
 compares the same 62 views, follows both AM–GM source focuses, checks the explicit
 working-packet boundary, and runs four accessibility checks at phone/desktop
 widths in both themes. These interactions fetch no complete source/native archive.
+
+The refreshed structural source-cut summary covers 41 requests, 3,222 cuts and
+3,087 binding appearances, including the working Riccati packet. Its native
+execution and independent target audit were completed in CI. Fresh local core
+Lean runs for both Riccati packets and the shared-binder control additionally
+match the CI native output hashes: 450 cuts and 227 binding appearances. These
+checks reconstruct source syntax and lexical targets; they do not type-check
+the original mathematical proofs.
 
 The normal paged-browser audit compares 26 extraction profiles and 269 recorded
 chain starts after this extension. These are finite occurrence checks, not whole-proof
