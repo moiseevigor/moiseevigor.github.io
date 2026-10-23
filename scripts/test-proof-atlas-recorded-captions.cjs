@@ -11,7 +11,7 @@ const {library, types} = require('../public/js/proof-atlas-ai-sample').register(
 const raw = file => z.gunzipSync(fs.readFileSync('.' + file), {maxOutputLength: 67108864});
 const fetcher = async file => { assert(file.startsWith('/public/data/proof-atlas/construction-pages/')); return new Response(fs.readFileSync('.' + file)); };
 (async () => {
-  const report = {status: 'RUNNING', profiles: 0, constructions: 0, inferredTypes: 0, sourceHeaders: 0, summaries: 0, truncated: 0,
+  const report = {status: 'RUNNING', profiles: 0, constructions: 0, inferredTypes: 0, sourceHeaders: 0, positionCaptions: 0, positionTextMissing: 0, positionTruncated: 0, positionSummaries: 0, refusedPositionOrigins: 0, summaries: 0, truncated: 0,
     refusedAttachments: 0, refusedArchives: 0, refusedChangedCaptions: 0, refusedChangedOrigins: 0, refusedEqualTextOrigins: 0, unicodeControls: 0, maxEnvelopeBytes: 0,
     presentationInputArchives: 0, sourcePacketBytesUnchanged: true};
   for (const d of types.records) {
@@ -23,12 +23,16 @@ const fetcher = async file => { assert(file.startsWith('/public/data/proof-atlas
     const adapter = producer.open(c, owner => { if (!inputs.has(owner.evidenceSha256)) inputs.set(owner.evidenceSha256, raw(owner.evidenceFile)); return inputs.get(owner.evidenceSha256); });
     const descriptor = h.PROOF_ATLAS_CONSTRUCTION_PAGES.records.find(x => x.name === record.name && x.edition === d.edition);
     const queries = await Q.open(descriptor, record, {fetcher, indexLimit: 1, recordLimit: 1});
-    let controlled = false, headerControlled = false, crossControlled = false;
+    let controlled = false, headerControlled = false, crossControlled = false, positionControlled = false;
     try {
       for (const entry of c.entries) {
+        const row = await queries.lookup(entry.route), position = await adapter.createRecorded(entry);
+        if(position){assert.deepEqual(await queries.positionCaptionFor(row),position);assert(await C.validate(position,C.recordedOrigin(source,row.typed)));report.positionCaptions++;report.positionTruncated+=position.truncatedByCaptionBudget;report.positionSummaries+=position.presentation==='compiled-constructor-summary';
+          if(!positionControlled){const original=C.recordedOrigin(source,row.typed);for(const change of [x=>x.observation='kernel',x=>x.position.route.root=1-x.position.route.root,x=>x.recording.queryRoute.root=1-x.recording.queryRoute.root]){const foreign=structuredClone(original);change(foreign);await assert.rejects(()=>C.validate(position,foreign));report.refusedPositionOrigins++;}positionControlled=true;}
+        }else{assert.equal(await queries.positionCaptionFor(row),null);report.positionTextMissing++;}
         const construction = T.construction(entry, c.data); if (!construction) continue;
-        const emitted = await adapter.create(entry), row = await queries.lookup(entry.route);
-        assert(row?.construction); report.constructions++;
+        const emitted = await adapter.create(entry);
+        assert(row?.construction); assert.equal(queries.manifest.captionFormat,'ProofAtlasConstructionCaptions/1'); assert.deepEqual(await queries.captionsFor(row),emitted); report.constructions++;
         const pieces = Object.entries(emitted.inferredTypes).map(([field, caption]) => ({field, caption}));
         if (emitted.sourceHeader) pieces.push({field: construction.premises[0].field, caption: emitted.sourceHeader});
         for (const {field, caption} of pieces) {
@@ -74,7 +78,7 @@ const fetcher = async file => { assert(file.startsWith('/public/data/proof-atlas
     assert(Buffer.byteLength(short.text) <= C.limits.textBytes); assert(!short.text.includes('\ufffd')); report.unicodeControls++;
   }
   assert.throws(() => C.excerpt('\ud800')); assert.throws(() => C.excerpt('\udc00')); report.unicodeControls += 2;
-  assert.equal(report.profiles, 26); assert.equal(report.constructions, 1084); assert.equal(report.inferredTypes, 3312); assert.equal(report.sourceHeaders, 269);
+  assert.equal(report.profiles, 26); assert.equal(report.constructions, 1084); assert.equal(report.inferredTypes, 3312); assert.equal(report.sourceHeaders, 269); assert.equal(report.positionCaptions,2442);assert.equal(report.positionTextMissing,0);assert.equal(report.refusedPositionOrigins,78);
   assert.equal(report.summaries, 60); assert.equal(report.refusedAttachments, 26); assert.equal(report.refusedArchives, 26);
   assert.equal(report.refusedChangedCaptions, 182); assert.equal(report.refusedChangedOrigins, 312); assert.equal(report.refusedEqualTextOrigins, 26);
   report.status = 'PASS';

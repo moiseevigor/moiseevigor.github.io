@@ -17,11 +17,12 @@
     demand(attachment?.format === 'ProofAtlasCaptionOrigin/1' && ['original-source', 'computed-native-type'].includes(attachment.namespace), 'origin namespace');
     demand(typeof attachment.source?.name === 'string' && hex(attachment.source.indexSha256) && hex(attachment.source.sourceGraphSha256)
       && hex(attachment.evidenceSha256) && hex(attachment.typeTableSha256), 'origin source/owner');
-    P.parse(attachment.construction?.route); P.parse(attachment.selected?.route); P.parse(attachment.recording?.queryRoute);
-    demand(natural(attachment.construction.node) && natural(attachment.selected.node) && natural(attachment.selected.contextLength)
+    const position = attachment.field === 'recorded', owner = position ? attachment.position : attachment.construction;
+    P.parse(owner?.route); P.parse(attachment.selected?.route); P.parse(attachment.recording?.queryRoute);
+    demand(natural(owner.node) && natural(attachment.selected.node) && natural(attachment.selected.contextLength)
       && attachment.selected.contextLength <= attachment.selected.route.depth && ['proof', 'type', 'value'].includes(attachment.selected.role), 'origin interface');
-    demand(['conclusion', 'binderType', 'body', 'fn', 'arg', 'type', 'value'].includes(attachment.field), 'origin field');
-    if (attachment.namespace === 'computed-native-type') demand(natural(attachment.typeRoot) && attachment.observation === 'kernel', 'inferred-type origin');
+    demand(['recorded', 'conclusion', 'binderType', 'body', 'fn', 'arg', 'type', 'value'].includes(attachment.field), 'origin field');
+    if (attachment.namespace === 'computed-native-type') demand(natural(attachment.typeRoot) && attachment.observation === (position ? 'recorded' : 'kernel') && (!position || attachment.construction === undefined), 'inferred-type origin');
     else demand(['binderType', 'type'].includes(attachment.field) && attachment.selected.role === 'type'
       && attachment.typeRoot === undefined && attachment.observation === undefined, 'source-expression origin');
   }
@@ -65,6 +66,15 @@
       selected: {route: part.route, node: part.node, contextLength: part.contextLength, role: part.role},
       ...(category === 'recorded-inferred-type' ? {typeRoot: root, observation: 'kernel'} : {}), recording: construction.recording};
   }
+  function recordedOrigin(source, entry) {
+    const result = {format: 'ProofAtlasCaptionOrigin/1', namespace: 'computed-native-type',
+      source: {name: source.name, indexSha256: source.indexSha256, sourceGraphSha256: source.sourceGraphSha256},
+      evidenceSha256: entry.evidenceSha256, typeTableSha256: entry.typeTableSha256,
+      position: {route: entry.route, node: entry.node}, field: 'recorded',
+      selected: {route: entry.route, node: entry.node, contextLength: entry.contextLength, role: entry.role},
+      typeRoot: entry.root, observation: 'recorded', recording: entry.recording};
+    validateOrigin(result); return result;
+  }
   async function create(text, attachment, presentation = 'recorded-native-text') {
     validateOrigin(attachment);
     demand(['recorded-native-text', 'compiled-constructor-summary'].includes(presentation), 'presentation');
@@ -91,6 +101,6 @@
     else demand(caption.truncatedByCaptionBudget === true && caption.text.endsWith(suffix) && (caption.originalCodePoints > limits.codePoints || caption.originalBytes > limits.textBytes), 'explicit truncation');
     return true;
   }
-  const api = {limits, excerpt, origin, create, validate};
+  const api = {limits, excerpt, origin, recordedOrigin, create, validate};
   if (node) module.exports = api; else host.ProofAtlasRecordedCaptions = api;
 })(typeof window === 'undefined' ? globalThis : window);

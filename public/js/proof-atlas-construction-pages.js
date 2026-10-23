@@ -7,12 +7,12 @@ const freeze=v=>{if(v&&typeof v==='object'&&!Object.isFrozen(v)){Object.values(v
 const canonical=v=>JSON.stringify(v,(_,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.fromEntries(Object.keys(x).sort().map(k=>[k,x[k]])):x);
 const schemas={'Pi-application':{fields:['fn','arg'],checks:['kernelFunctionConversion','kernelDomainConversion','kernelResultConversion']},'Pi-introduction':{fields:['binderType','body'],checks:['kernelDomainSort','kernelBinderConversion','kernelBodyConversion','kernelFunctionConversion']},'let-binding':{fields:['type','value','body'],checks:['kernelDomainSort','kernelValueConversion','kernelTermConversion','kernelResultTyping','kernelResultTypeConversion','kernelSubstitutedTypeConversion']}};
 async function open(input,recordInput,{fetcher=host.fetch.bind(host),signal,indexLimit=4,recordLimit=8}={}){
- const d=freeze(JSON.parse(JSON.stringify(input))),record=freeze(JSON.parse(JSON.stringify(recordInput))),base='/public/data/proof-atlas/construction-pages/'+record.indexSha256+'/',indices=new Map(),records=new Map(),issued=new WeakSet();let disposed=false,activeType=null,typeEpoch=0;
+ const d=freeze(JSON.parse(JSON.stringify(input))),record=freeze(JSON.parse(JSON.stringify(recordInput))),base='/public/data/proof-atlas/construction-pages/'+record.indexSha256+'/',indices=new Map(),records=new Map(),issued=new WeakSet();let disposed=false,activeType=null,typeEpoch=0,captionCache=null;
  const live=s=>{if(signal?.aborted||s?.aborted)throw signal?.reason||s.reason||Error('aborted');demand(!disposed,'disposed');};
  demand(natural(indexLimit)&&indexLimit>=1&&indexLimit<=4&&natural(recordLimit)&&recordLimit>=1&&recordLimit<=8&&d.name===record.name&&d.indexSha256===record.indexSha256&&d.sourceSha256===record.sourceSha256,'descriptor/cache identity');
- const stats={indexLoads:0,recordLoads:0,lookups:0,absent:0,peakIndexBytes:0,peakRecordBytes:0};
- async function read(ref,cap,s){
-  live(s);demand(hex(ref?.sha256)&&natural(ref.bytes)&&ref.bytes>0&&ref.bytes<=cap&&ref.file===base+ref.sha256+(cap===262144?'.manifest.gz':cap===131072?'.index.gz':'.record.gz'),'asset descriptor');
+ const stats={indexLoads:0,recordLoads:0,lookups:0,absent:0,peakIndexBytes:0,peakRecordBytes:0,captionLoads:0,peakCaptionBytes:0};
+ async function read(ref,cap,s,suffix=cap===262144?'.manifest.gz':cap===131072?'.index.gz':'.record.gz'){
+  live(s);demand(hex(ref?.sha256)&&natural(ref.bytes)&&ref.bytes>0&&ref.bytes<=cap&&ref.file===base+ref.sha256+suffix,'asset descriptor');
   const response=await fetcher(ref.file,{signal:s||signal});demand(response.ok,'asset unavailable ('+response.status+')');const reader=response.body.pipeThrough(new host.DecompressionStream('gzip')).getReader(),chunks=[];let count=0;
   try{while(true){live(s);const part=await reader.read();if(part.done)break;count+=part.value.byteLength;demand(count<=ref.bytes,'asset byte bound');chunks.push(part.value);}}catch(error){await reader.cancel(error).catch(()=>{});throw error;}finally{reader.releaseLock();}
   demand(count===ref.bytes,'decoded byte count');const bytes=new Uint8Array(count);let at=0;for(const part of chunks){bytes.set(part,at);at+=part.byteLength;}demand(await A.digest(bytes)===ref.sha256,'asset hash');live(s);return freeze(JSON.parse(new TextDecoder().decode(bytes)));
@@ -63,8 +63,32 @@ async function open(input,recordInput,{fetcher=host.fetch.bind(host),signal,inde
    activeType=cursor;return Object.freeze({cursor,observation:value});
   }catch(error){cursor.dispose();throw error;}
  }
+ const validatedCaptions=new WeakSet(),validatedPositionCaptions=new WeakSet();
+ async function captionValue(ref,s){
+  live(s);demand(ref&&Object.keys(ref).sort().join(',')==='bytes,file,sha256'&&hex(ref.sha256)&&natural(ref.bytes)&&ref.bytes>0&&ref.bytes<=16384&&ref.file===base+ref.sha256+'.caption.gz','caption descriptor');
+  if(captionCache?.sha256===ref.sha256){demand(captionCache.bytes===ref.bytes,'cached caption size');return captionCache.value;}
+  const value=await read(ref,16384,s,'.caption.gz');live(s);captionCache={sha256:ref.sha256,bytes:ref.bytes,value};stats.captionLoads++;stats.peakCaptionBytes=Math.max(stats.peakCaptionBytes,ref.bytes);return value;
+ }
+ async function positionCaptionFor(row,{signal:s}={}){
+  live(s);demand(issued.has(row),'foreign position caption record');if(!row.typed.caption)return null;
+  const value=await captionValue(row.typed.caption,s);if(validatedPositionCaptions.has(row))return value;
+  const C=node?require('./proof-atlas-recorded-captions'):host.ProofAtlasRecordedCaptions;demand(C?.recordedOrigin&&C?.validate,'optional position caption validator unavailable');
+  await C.validate(value,C.recordedOrigin(source,row.typed));live(s);validatedPositionCaptions.add(row);return value;
+ }
+ async function captionsFor(row,{signal:s}={}){
+  live(s);demand(issued.has(row),'foreign caption record');const c=row.construction,ref=c?.captions;
+  if(!ref)return null;
+  const value=await captionValue(ref,s);if(validatedCaptions.has(row))return value;
+  const C=node?require('./proof-atlas-recorded-captions'):host.ProofAtlasRecordedCaptions;
+  demand(C?.validate&&C?.origin,'optional caption validator unavailable');
+  demand(value.format==='ProofAtlasConstructionCaptions/1'&&Object.keys(value).every(k=>['format','inferredTypes','sourceHeader'].includes(k))&&value.inferredTypes&&typeof value.inferredTypes==='object'&&!Array.isArray(value.inferredTypes),'caption package');
+  demand(Object.keys(value.inferredTypes).length<=4,'caption component bound');
+  for(const [field,caption]of Object.entries(value.inferredTypes)){await C.validate(caption,C.origin(source,c,field));live(s);}
+  if(value.sourceHeader){const field=c.rule==='Pi-introduction'?'binderType':c.rule==='let-binding'?'type':null;demand(field,'unexpected source header caption');await C.validate(value.sourceHeader,C.origin(source,c,field,'recorded-source-expression'));live(s);}
+  validatedCaptions.add(row);return value;
+ }
  const releaseType=()=>{typeEpoch++;if(activeType)activeType.dispose();activeType=null;};
- const identity=freeze({...source,version:manifest.version,manifestSha256:d.sha256}),api=Object.freeze({manifest,lookup,typeFor,releaseType,state:()=>({...stats,indexPages:indices.size,recordPages:records.size,indexLimit,recordLimit,indexBytes:[...indices.values()].reduce((sum,r)=>sum+r.bytes,0),recordBytes:[...records.values()].reduce((sum,r)=>sum+r.bytes,0),activeTypeTables:activeType?1:0}),dispose:()=>{disposed=true;releaseType();indices.clear();records.clear();}});owners.set(api,{identity,live});return api;
+ const identity=freeze({...source,version:manifest.version,manifestSha256:d.sha256}),api=Object.freeze({manifest,lookup,typeFor,captionsFor,positionCaptionFor,releaseType,state:()=>({...stats,indexPages:indices.size,recordPages:records.size,indexLimit,recordLimit,indexBytes:[...indices.values()].reduce((sum,r)=>sum+r.bytes,0),recordBytes:[...records.values()].reduce((sum,r)=>sum+r.bytes,0),activeTypeTables:activeType?1:0,captionPackages:captionCache?1:0,captionBytes:captionCache?.bytes||0}),dispose:()=>{disposed=true;releaseType();captionCache=null;indices.clear();records.clear();}});owners.set(api,{identity,live});return api;
 }
 const api={open,key,identity:cursor=>{const value=owners.get(cursor);demand(value,'foreign construction cursor');value.live();return value.identity;}};if(node)module.exports=api;else host.ProofAtlasConstructionPages=api;
 })(typeof window==='undefined'?globalThis:window);

@@ -1,6 +1,6 @@
 # Recorded Riccati context continuation
 
-Status: integrated and tested locally; release verification remains pending.
+Status: released and deployment-verified in [PR120](https://github.com/moiseevigor/moiseevigor.github.io/pull/120).
 The general geometric-language research program remains active.
 
 ## Problem and representation
@@ -87,6 +87,6 @@ the original mathematical proofs.
 
 The normal paged-browser audit compares 26 extraction profiles and 269 recorded
 chain starts after this extension. These are finite occurrence checks, not whole-proof
-coverage. Source captions still contain constructor summaries and node numbers;
-this iteration does not establish mathematical readability, semantic compression
-or improved human comprehension.
+coverage. PR120 supplied the contextual records; it did not evaluate mathematical readability,
+semantic compression or human comprehension. The subsequent bounded caption rule is
+described in [the caption method](../construction-pages/captions.md).

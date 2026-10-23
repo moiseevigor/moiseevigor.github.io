@@ -59,3 +59,6 @@
 .poc-stage-types{color:var(--text,#243c49);background:var(--fig-bg,#edf2f2);border:1px solid var(--border,#a4b4b8);padding:.45rem}
 
 .poc-view .poc-card[data-local-definition]{max-height:none}
+/* Recorded text keeps native line breaks and remains bounded inside the cut. */
+.poc-view .pow-formula[data-recorded-caption]{white-space:pre-wrap;max-height:10em}
+.poc-view button{min-height:44px}

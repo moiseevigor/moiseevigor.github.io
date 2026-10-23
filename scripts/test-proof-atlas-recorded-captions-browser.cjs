@@ -19,6 +19,7 @@ const raw = file => z.gunzipSync(fs.readFileSync('.' + file), {maxOutputLength: 
     for (let member = 0; member < frame.members.length; member++) {
       const entry = c.get(frameModel.resolve(frame, {member})), native = T.construction(entry, c.data);
       const construction = {...native, entry: {...native.entry, root: native.entry.typeData.roots[0]}}, captions = await adapter.create(entry);
+      examples.push({caption:await adapter.createRecorded(entry),attachment:C.recordedOrigin(source,{...entry,root:entry.typeData.roots[0]}),text:entry.typeText});
       for (const [field, caption] of Object.entries(captions.inferredTypes)) {
         const part = await T.constructionType(entry, c.data, field);
         examples.push({caption, attachment: C.origin(source, construction, field), text: part.typeText});
@@ -27,7 +28,7 @@ const raw = file => z.gunzipSync(fs.readFileSync('.' + file), {maxOutputLength: 
         attachment: C.origin(source, construction, construction.premises[0].field, 'recorded-source-expression')});
     }
   }
-  assert.equal(examples.length, 108); // 84 typed rule components and 24 source headers.
+  assert.equal(examples.length, 132); // 84 rule components, 24 headers and 24 separately recorded positions.
   const browser = await chromium.launch({headless: true, executablePath: process.env.ATLAS_CHROMIUM_PATH});
   const page = await browser.newPage(), errors = [];
   page.on('pageerror', error => errors.push(error.message));

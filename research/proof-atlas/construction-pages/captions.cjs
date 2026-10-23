@@ -54,6 +54,12 @@ function open(nativeCase, loadEvidence) {
     }
     return {format: 'ProofAtlasConstructionCaptions/1', inferredTypes, ...(sourceHeader ? {sourceHeader} : {})};
   }
-  return {create};
+  async function createRecorded(entry) {
+    T.typeScene(entry, nativeCase.data, undefined, {maxNodes: 1, maxDepth: 0});
+    if (typeof entry.typeText !== 'string') return null;
+    return C.create(entry.typeText, C.recordedOrigin(source, {...entry, root: entry.typeData.roots[0]}),
+      entry.recording.presentation === 'compiled-constructor-summary' ? 'compiled-constructor-summary' : 'recorded-native-text');
+  }
+  return {create, createRecorded};
 }
 module.exports = {open};
