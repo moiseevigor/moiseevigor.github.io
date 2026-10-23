@@ -4,6 +4,11 @@ Status: context-frame lens in the complete and paged occurrence readers.
 Existing primitive cut and application-group formats retain their previous
 meanings and limits.
 
+The numerical audits below describe the released 25-profile baseline. The
+[additional Riccati context records](riccati-continuation.md) extend the local
+inventory to 26 profiles and 269 recorded chain starts; their native provenance,
+checks and remaining boundaries are documented separately.
+
 ## Representation problem
 
 A binary or ternary constructor cut spends one retained vertex on each binder.

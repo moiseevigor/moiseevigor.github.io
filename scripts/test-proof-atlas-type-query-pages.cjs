@@ -17,5 +17,5 @@ const {library,types}=require('../public/js/proof-atlas-ai-sample').register(h.P
    assert(query.state().indexPages<=4);rows.push({name:record.name,sourceIndexSha256:record.indexSha256,observations:c.entries.length,queryState:query.state(),sourceState:source.state()});
   }finally{source.dispose();query.dispose();}
  }
- assert.equal(lookups,2411);assert(missing>0);const report={status:'PASS',declarations:rows.length,lookups,cleanAbsences:missing,typeCuts,sourceCuts:cuts,sourcePresentationPoints:snapshots,pagedRows,completeArchiveRequests:0,rows};fs.writeFileSync('/tmp/atlas-type-query-pages.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({...report,rows:undefined}));
+ assert.equal(lookups,2442);assert(missing>0);const report={status:'PASS',declarations:rows.length,lookups,cleanAbsences:missing,typeCuts,sourceCuts:cuts,sourcePresentationPoints:snapshots,pagedRows,completeArchiveRequests:0,rows};fs.writeFileSync('/tmp/atlas-type-query-pages.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({...report,rows:undefined}));
 })().catch(e=>{console.error(e.stack);process.exit(1);});

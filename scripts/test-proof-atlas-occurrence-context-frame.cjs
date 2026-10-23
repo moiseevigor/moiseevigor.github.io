@@ -67,7 +67,7 @@ async function audit(c,entry,limit,checkTypes=false){
  for(const change of [s=>s.members[0].contextLength++,s=>s.members[0].binder.kind='local-definition',s=>s.headers[0].type.root++,s=>s.continuation.address.member--,s=>s.origins[0].namespace='source',s=>s.members.reverse(),s=>s.stats.hidden='0',s=>s.source.indexSha256='0'.repeat(64)]){const bad=structuredClone(frame);change(bad);reject(()=>model.validate(bad));}
  await refuse(()=>model.typeFor(frame,{member:57,field:'body'}));await refuse(()=>model.typeFor(frame,{member:0},'unsupported'));
  assert(linkSaved);for(const change of [s=>s.links[0].target={member:s.members.length},s=>s.headers[0].contextLength++]){const bad=structuredClone(linkSaved.frame);change(bad);reject(()=>linkSaved.model.validate(bad));}
- assert.equal(starts,251);assert.equal(long,61);assert.equal(mixed,33);assert.equal(frames,starts*5+controlFrames);
+ assert.equal(starts,269);assert.equal(long,61);assert.equal(mixed,45);assert.equal(frames,starts*5+controlFrames);
  assert(maxInitialContext>=10000);assert(dependentBodyComponents>0);
  const report={status:'PASS',scope:'Finite native-compatible context-frame model; not a renderer, native consumer proof or whole-proof typing claim',starts,frames,controlFrames,longerThanThirteen:long,mixedChains:mixed,headerAppearances:headers,typedBoundaryActions:typeActions,binderLinkAppearances:links,localDefinitionLinks:localLinks,maxInitialContext,dependentBodyComponents,maxSceneBytes:maxBytes,refusals,newNativeJudgments:0,rows};
  fs.writeFileSync(process.env.ATLAS_CONTEXT_FRAME_REPORT||'/tmp/atlas-occurrence-context-frame.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({...report,rows:undefined}));

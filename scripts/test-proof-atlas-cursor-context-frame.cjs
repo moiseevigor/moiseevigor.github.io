@@ -60,7 +60,7 @@ const{library,types}=require('../public/js/proof-atlas-ai-sample').register(h.PR
    if(finalFrame){reject(()=>model.resolve(finalFrame,{member:0}));await refuse(()=>model.create(finalFrame.root.route));await refuse(()=>model.typeFor(finalFrame,{member:0}));}
   }
  }
- if(!process.env.ATLAS_CONTEXT_FRAME_CASE){assert.equal(report.profiles,25);assert.equal(report.starts,251);assert.equal(report.frames,1255);assert.equal(report.mixedChains,33);assert.equal(report.maxMembers,57);assert(report.sameSourceDifferentComponents>0&&report.localDefinitionLinks>0);}
+ if(!process.env.ATLAS_CONTEXT_FRAME_CASE){assert.equal(report.profiles,26);assert.equal(report.starts,269);assert.equal(report.frames,1345);assert.equal(report.mixedChains,45);assert.equal(report.maxMembers,57);assert(report.sameSourceDifferentComponents>0&&report.localDefinitionLinks>0);}
  report.status='PASS';report.scope='Finite exact complete-reference comparison of paged context frames and their recorded type components. One-page source/native/index/type caches. No new native judgments, whole-process memory claim, synthetic/deep adapter or measured comprehension result.';
  fs.writeFileSync(process.env.ATLAS_CONTEXT_FRAME_REPORT||'/tmp/atlas-cursor-context-frame.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({...report,rows:undefined}));
 })().catch(error=>{console.error(error.stack);process.exit(1);});

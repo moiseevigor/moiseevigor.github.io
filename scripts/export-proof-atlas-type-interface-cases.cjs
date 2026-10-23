@@ -28,7 +28,7 @@ function expansion(x,options,selected=null,inherited=false){
    expansion(x,{judgmentRoute:{root:root<0?0:root,slots:[]},maxNodes:13,maxDepth:3,policy,foldIntroductions:grouping==='introductions',foldContextFrames:grouping==='context',sourceFallback});
   }
  }
- assert.equal(packets,34);assert.equal(cases.length,1227);
+ assert.equal(packets,35);assert.equal(cases.length,1263);
  const packet={format:'ProofAtlasTypeInterfaceCases/1',packets,cases,scope:'Actual producer output. Validate source paths, native-record references and type syntax independently; no new kernel typing claimed.'},raw=JSON.stringify(packet)+'\n';
  assert(Buffer.byteLength(raw)<=64*1024**2);fs.mkdirSync(path.dirname(output),{recursive:true});fs.writeFileSync(output,raw);
  console.log(JSON.stringify({status:'PASS',packets,cases:cases.length,typedInterfaces:cases.filter(c=>c.boundary.typeReference).length,output,sha256:crypto.createHash('sha256').update(raw).digest('hex')}));
