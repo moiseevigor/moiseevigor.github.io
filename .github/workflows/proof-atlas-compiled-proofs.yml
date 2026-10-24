@@ -74,6 +74,8 @@ jobs:
       - run: node scripts/test-proof-atlas-cursor-mixed-interfaces.cjs
       - run: node research/proof-atlas/mixed-interfaces/check-correspondence.cjs
       - run: node research/proof-atlas/mixed-interfaces/check-composition.cjs
+      - run: node research/proof-atlas/recorded-variable-uses/check.cjs
+      - run: node research/proof-atlas/recorded-variable-uses/check-support.cjs
       - run: node research/proof-atlas/publish_let_pools.cjs --check
       - run: node scripts/test-proof-atlas-construction-pages.cjs
       - run: node scripts/build-proof-atlas-type-pages.cjs --check
@@ -151,6 +153,8 @@ jobs:
             /tmp/atlas-cursor-mixed-interfaces.json
             research/proof-atlas/mixed-interfaces/binder-correspondence-verification.json
             research/proof-atlas/mixed-interfaces/composition-verification.json
+            research/proof-atlas/recorded-variable-uses/verification.json
+            research/proof-atlas/recorded-variable-uses/support-verification.json
             /tmp/atlas-application-spine-fold/verification.json
             /tmp/atlas-occurrence-constructions.json
             /tmp/atlas-reduced-replay.json

@@ -1,0 +1,744 @@
+{
+  "status": "PASS",
+  "profiles": 51,
+  "observations": 340,
+  "uses": 170,
+  "binderQueries": 131,
+  "regionQueries": 575,
+  "returnedRows": 4725,
+  "paginationSteps": 1346,
+  "pages": 74,
+  "storedBytes": 391712,
+  "maxManifestBytes": 7482,
+  "peakResidentPageBytes": 19408,
+  "peakResultBytes": 16560,
+  "refusals": 59,
+  "deepStorageControls": 1,
+  "sourceOnlyUses": 36,
+  "frames": 909,
+  "references": 12642,
+  "referenceKinds": {
+    "retained-binder": 1233,
+    "internal-to-hidden-region": 5166,
+    "external-original-context": 6243
+  },
+  "inputs": [
+    {
+      "source": {
+        "name": "JacobiCore.E_pos",
+        "indexSha256": "42c5264d2680fe256ee4bfc588ed1ed3d648f38eeb56916d2e1ce02e11ae0c33",
+        "sourceGraphSha256": "26b4cc98b0400ad17d7f84290a90f8bb6334cee9a9739f6d7d14b490c460174a",
+        "edition": "published-15"
+      },
+      "manifestSha256": "403f1ef9de257c9be61835c0fd7c2c71b59de89fac4a88e6e50e5e10f9b06a77",
+      "manifestBytes": 1608,
+      "uses": 9,
+      "observations": 18,
+      "sourcePages": 2,
+      "binderPages": 2
+    },
+    {
+      "source": {
+        "name": "JacobiData.slope_bound_abs",
+        "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+        "sourceGraphSha256": "e9bad6c603a042a2761d6944e8bf3ecc27cbd406a562c776b456df5d1b32dfab",
+        "edition": "published-15"
+      },
+      "manifestSha256": "aa1c40dd7219551218c0f78d89a14d8a412e38e2663967bf75eb6877d27761bc",
+      "manifestBytes": 1116,
+      "uses": 4,
+      "observations": 8,
+      "sourcePages": 1,
+      "binderPages": 1
+    },
+    {
+      "source": {
+        "name": "SBracket.mk.inj",
+        "indexSha256": "39dbe3b524a288ceb58009e86becc10331d8bbd3e230306d727649e9da8c6d76",
+        "sourceGraphSha256": "7f881a949bb55814a3e7eee35518cdeb3ee65478b4887534351c98abf55a94c1",
+        "edition": "published-15"
+      },
+      "manifestSha256": "7a32c50861647e4d3bfe87d913a16e010f9a2fe73a56272a862376ddfc184566",
+      "manifestBytes": 7482,
+      "uses": 91,
+      "observations": 182,
+      "sourcePages": 12,
+      "binderPages": 12
+    },
+    {
+      "source": {
+        "name": "CrossingData.crossing",
+        "indexSha256": "b1f3867250131bf76d40e9dca395e29595ccf8d4bb49c8e075ba40213b33057a",
+        "sourceGraphSha256": "04dcbe58b8a5bfe71b82164e250031c3a3e37d87aabf163e4fc5f473b26b8344",
+        "edition": "published-15"
+      },
+      "manifestSha256": "8367c01f722a79a5afe0e2300f8267774ce665e4c466d124add5253ebe7adbdd",
+      "manifestBytes": 1113,
+      "uses": 6,
+      "observations": 12,
+      "sourcePages": 1,
+      "binderPages": 1
+    },
+    {
+      "source": {
+        "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
+        "indexSha256": "2d55fcee4c570869eacb882d5c131deb173cfd82c941af68aa2b561943627f7b",
+        "sourceGraphSha256": "7abde40ff639c0da960a6387955083899eeff0d2b10a9f06ffe89e638e44f454",
+        "edition": "working-26"
+      },
+      "manifestSha256": "c60203c7b73ad17454f2e809b4a469d613cf04965843be97b7c4ee369c4af98c",
+      "manifestBytes": 2194,
+      "uses": 18,
+      "observations": 36,
+      "sourcePages": 3,
+      "binderPages": 3
+    },
+    {
+      "source": {
+        "name": "JacobiData.slope_bound_abs",
+        "indexSha256": "a786a311ffd35d388b79b4af11a5d733dde834f8e0fe7967b74ad07d4dea15e4",
+        "sourceGraphSha256": "e9bad6c603a042a2761d6944e8bf3ecc27cbd406a562c776b456df5d1b32dfab",
+        "edition": "working-26"
+      },
+      "manifestSha256": "e64ebcc65d6edbf2d23fe124f63f63b7b45debfa3308d66615750c1bb16eb2e7",
+      "manifestBytes": 1113,
+      "uses": 1,
+      "observations": 2,
+      "sourcePages": 1,
+      "binderPages": 1
+    },
+    {
+      "source": {
+        "name": "lean_workbook_20418",
+        "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+        "sourceGraphSha256": "c8e081ef9d3c23eea10655d465fa8a7a0670e62dca61e1e0ae47ae6bf381d666",
+        "edition": "goedel-sample-4331"
+      },
+      "manifestSha256": "2615e3e8258da0765166d6daae6da3806ffc954a61dd7bbf62843c0dc84043a7",
+      "manifestBytes": 1124,
+      "uses": 1,
+      "observations": 2,
+      "sourcePages": 1,
+      "binderPages": 1
+    },
+    {
+      "source": {
+        "name": "lean_workbook_3485",
+        "indexSha256": "bd496000a8da7ce06393d1cdd66b86c1a76aa6004c6eca19c36e083a3082948c",
+        "sourceGraphSha256": "a07dc0c2a45e129573e2d0e7ad02616fd2e795b36c3fc6f2fa66d260bfdd3e6a",
+        "edition": "goedel-sample-4331"
+      },
+      "manifestSha256": "b53ee4b0bf4042922b66f6c6418359c2adcd046645355b4dda29e8496573ac1a",
+      "manifestBytes": 1114,
+      "uses": 4,
+      "observations": 8,
+      "sourcePages": 1,
+      "binderPages": 1
+    },
+    {
+      "source": {
+        "name": "lean_workbook_4274",
+        "indexSha256": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+        "sourceGraphSha256": "4a3b9d5deba77fd9841d24c6f8441d12a2c7c93cc344e03c03ccaae2c27d53ed",
+        "edition": "goedel-sample-4331"
+      },
+      "manifestSha256": "d34544e5883a6334fec52ab979952708630424fd6dfda17d05c0011fe25a4db2",
+      "manifestBytes": 1115,
+      "uses": 4,
+      "observations": 8,
+      "sourcePages": 1,
+      "binderPages": 1
+    },
+    {
+      "source": {
+        "name": "lean_workbook_49456",
+        "indexSha256": "66459f55804e8ae09fc9a8615191fba8f5277f1fb0831c1bb132e1bc60552b38",
+        "sourceGraphSha256": "576862027be25175881eb1fd062381f5fb7c834c57551475493eff5fa10fb703",
+        "edition": "goedel-sample-4331"
+      },
+      "manifestSha256": "1be770c72e7fa4867a9728afbc87f61de99b78c234f93fe32fbb81615c8cd6e6",
+      "manifestBytes": 609,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "lean_workbook_56144",
+        "indexSha256": "60ff188d4edd927f72c0393d678f5a9cfb80d344d3ec459aec958443f07dc256",
+        "sourceGraphSha256": "4186022236c2ba663d20adfb351bc3f62ada252f67f3fd2452957ad0dfc6bcae",
+        "edition": "goedel-sample-4331"
+      },
+      "manifestSha256": "983b9b4b7c8f2871d7250210f86f291e922eb4b18d682d7653d821eac4036c37",
+      "manifestBytes": 609,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "lean_workbook_plus_15068",
+        "indexSha256": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+        "sourceGraphSha256": "37b2ac94902db2e0e362122dfe694132294063a2e6db7f8f567815587dfaac2b",
+        "edition": "goedel-sample-4331"
+      },
+      "manifestSha256": "50f891cb667ade6810305a016036991165bc873b6f49b54186f15251e55d5e78",
+      "manifestBytes": 614,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "lean_workbook_plus_16912",
+        "indexSha256": "6c061155ccb98286c7608ad3bfbd316714aea3a1b33817720b3c4b2846c39510",
+        "sourceGraphSha256": "ea38793e93026eb86ab91618f6806022ac497d77828d1f7bdc3543c04e391243",
+        "edition": "goedel-sample-4331"
+      },
+      "manifestSha256": "f69dbbbdc64524f3a1c69892f1b5ce9f7a22b63ef25b13e3402e6e76fa5407dc",
+      "manifestBytes": 614,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "lean_workbook_plus_19617",
+        "indexSha256": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+        "sourceGraphSha256": "46fae1dc00bba2b29c525e5a4fa917872a34483b7a7e14c29e22773db12c92e2",
+        "edition": "goedel-sample-4331"
+      },
+      "manifestSha256": "d07944b40288470ae29cad752602bcaa5f491f75d3a0f7f9a127c65d082d5996",
+      "manifestBytes": 1123,
+      "uses": 8,
+      "observations": 16,
+      "sourcePages": 1,
+      "binderPages": 1
+    },
+    {
+      "source": {
+        "name": "lean_workbook_plus_39831",
+        "indexSha256": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+        "sourceGraphSha256": "8486bb9cc0e3184404634e4b971f1a925d948a5c36465f03c9a08063238aad28",
+        "edition": "goedel-sample-4331"
+      },
+      "manifestSha256": "b070ebaa48bfde6bdb2ba37b83f9e862674c83b601c376f96df181e4cd6487cf",
+      "manifestBytes": 1118,
+      "uses": 2,
+      "observations": 4,
+      "sourcePages": 1,
+      "binderPages": 1
+    },
+    {
+      "source": {
+        "name": "lean_workbook_plus_43987",
+        "indexSha256": "159699ca3f1d90ccd733d2a5fe4c0541ae4c785b8cb942333058b16653cef385",
+        "sourceGraphSha256": "1d003cdcf0d17dde6615d492a537ca943e4776d7b589ecdff1f7b5a1ee45a1f5",
+        "edition": "goedel-sample-4331"
+      },
+      "manifestSha256": "72f3aa0c671dacec4dc8df75d02eb8951b9b73d2e902788b931961d9660155be",
+      "manifestBytes": 614,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "lean_workbook_plus_54159",
+        "indexSha256": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+        "sourceGraphSha256": "c485c612bcc04f568d3af08ebd62247ed31f701db8badebce1d969d5b9810ec6",
+        "edition": "goedel-sample-4331"
+      },
+      "manifestSha256": "9e79a1615db0c9d516792c7d416c3d43e6a56dce5dfb9dcd3aae6d22aa3c580d",
+      "manifestBytes": 1119,
+      "uses": 1,
+      "observations": 2,
+      "sourcePages": 1,
+      "binderPages": 1
+    },
+    {
+      "source": {
+        "name": "lean_workbook_plus_54622",
+        "indexSha256": "0b128b2e4d02870a974f0f00684ea058eded20eed8f15f32e84872e4bca50d73",
+        "sourceGraphSha256": "1b002254e77cfadccbe147caa3136e1ac8764168b6ec221f1a66035cae327229",
+        "edition": "goedel-sample-4331"
+      },
+      "manifestSha256": "d85e8cb77900e8525a5253391c2365d7a4b53e773673880bd8a22e378bf6e837",
+      "manifestBytes": 614,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "lean_workbook_plus_61403",
+        "indexSha256": "a52afaeee83e9f155855d77dc8f906f03abf8da6038abde95c7dc6e104568459",
+        "sourceGraphSha256": "9f16c3988b59f82e09556694cdf206727d02846417cf51de01901e9e429bd53b",
+        "edition": "goedel-sample-4331"
+      },
+      "manifestSha256": "baf09be9d06f0f4d14ab4cd9b74e76739a15d17d12276ffe53c6fb3860801bf8",
+      "manifestBytes": 614,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "lean_workbook_plus_6206",
+        "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+        "sourceGraphSha256": "1dc8a9bbb5bd943dce6683d46f54c38ff1522d5e36d37aec5191cbae0c910415",
+        "edition": "goedel-sample-4331"
+      },
+      "manifestSha256": "fe5a51c90d8867ecbfc0d0bc13149d1980296039e2c6fb0b27963397deeabd8c",
+      "manifestBytes": 1128,
+      "uses": 1,
+      "observations": 2,
+      "sourcePages": 1,
+      "binderPages": 1
+    },
+    {
+      "source": {
+        "name": "lean_workbook_plus_62755",
+        "indexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+        "sourceGraphSha256": "23260334d9342974f146a1e4698f8d4c9a85a7cefc9fde024f8017bae67941c0",
+        "edition": "goedel-sample-4331"
+      },
+      "manifestSha256": "d78f5ea354706d48ff6f41e31c712010d83a8b2bab55e1aef3eadb834d7eeb92",
+      "manifestBytes": 1119,
+      "uses": 2,
+      "observations": 4,
+      "sourcePages": 1,
+      "binderPages": 1
+    },
+    {
+      "source": {
+        "name": "lean_workbook_plus_63081",
+        "indexSha256": "e8a13f9af176053ae5b0220fc5a1526de1e937ca2e8972035dcc70ee1da74217",
+        "sourceGraphSha256": "eb1514481f4cbb2514097b455a64666a6a95f7db9cef8dac675af2b7478af792",
+        "edition": "goedel-sample-4331"
+      },
+      "manifestSha256": "ec2c615f902aed4f5f10216045a8ac3d1c958b623e0c50d9ade845b94f56ec8e",
+      "manifestBytes": 614,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "lean_workbook_plus_68077",
+        "indexSha256": "501dba70283e270631eba54e85d5f16c3ca44cfaba068ea4f39a45b550997e62",
+        "sourceGraphSha256": "8e1be303c35d70498183edb42f1bb3de953f1cbc7943f1046f55051fb5028fdb",
+        "edition": "goedel-sample-4331"
+      },
+      "manifestSha256": "1596ef9abba324187bf93b50da340d4e90802b38686c5e2c0f73e24900ac8a51",
+      "manifestBytes": 614,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "lean_workbook_plus_68616",
+        "indexSha256": "2f1f6523063a579076448d2a6caa42d496003a1be382692e8747442b1d9aef83",
+        "sourceGraphSha256": "b5337be03c349a76dfb089a5886a2ccb4022257e4513bf1e8fc322da94ffba18",
+        "edition": "goedel-sample-4331"
+      },
+      "manifestSha256": "bb17ecac7253aa9b33311b7ae408924b98955018f4e4ac8bd54a195035ef5fc9",
+      "manifestBytes": 614,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "lean_workbook_plus_68794",
+        "indexSha256": "17a8502769796c60075b569ccf17b5bf99c47c12e6e1771705ae3eb540656f3b",
+        "sourceGraphSha256": "0a101b2112710283a2a73fee5bf7596838f66ef38aec9b9e90bc9be2c08874c2",
+        "edition": "goedel-sample-4331"
+      },
+      "manifestSha256": "b4df7905dcea1b6d82c6317b20a822c34d94c3ad6dc50893756ea3f792ae9c23",
+      "manifestBytes": 614,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "lean_workbook_plus_70240",
+        "indexSha256": "cbc4fcc25f7b3decb12c29ac4d90e9f01671a2bfcce24e948c9af0445a387290",
+        "sourceGraphSha256": "61d60f62de0aaf4aab8665dc43651a036a12534f19eaf858aa4ff15c3680bdf1",
+        "edition": "goedel-sample-4331"
+      },
+      "manifestSha256": "8282da0a17c195b778e3b8dba5964f735748ee7fc786321ee5ef395e371f06b3",
+      "manifestBytes": 614,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "AtlasLet.annotation",
+        "indexSha256": "fa5d68965bec9937bbbd3ce9c1c944364a0cd6061bf2b2077110579cd4bce8a9",
+        "sourceGraphSha256": "4d1a459b05a3758b1a360387315648c2895f3090ffb75c26fa9e6fbde7da61e2",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "bf10686837c747950d1fc8b91fa5f39b7bc69c8163cdc6825b1970ddc82bc544",
+      "manifestBytes": 616,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "AtlasLet.beforeValue",
+        "indexSha256": "0c27a8641429363b58a0cec8d0e44b999838e198d82c0e0b9b2ac99b19e957f1",
+        "sourceGraphSha256": "1105763b5e2cbafe441c467f721296b45ab29f059e92bc675b46025fe91c44f5",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "ec98835599cb04c430ebf15c056d2d1344f4308da95d70203a4417def52c643c",
+      "manifestBytes": 1119,
+      "uses": 3,
+      "observations": 6,
+      "sourcePages": 1,
+      "binderPages": 1
+    },
+    {
+      "source": {
+        "name": "AtlasLet.boundValue",
+        "indexSha256": "eb2483dea9b5a22b48ee2a39bde2ca0354baf5fea3a4fcd8d33e6582ce0f742e",
+        "sourceGraphSha256": "cab01348af1d1d24c8ab7b9e7e767a0272b2012dabe4f2ae16ee2f0a68ca4bc4",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "4ab5759a95b0431139106e4c04a73e1f0043d9e44698d05d65a1573c959a4659",
+      "manifestBytes": 616,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "AtlasLet.capture",
+        "indexSha256": "4e7658392e7f02a9c6e617fc01289cc16e603d74698682ebb5f11143bbbe6dd8",
+        "sourceGraphSha256": "550aa40fde99bd34ef2cdda2a6f95bd10aef761bd264397be5c185bb71757090",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "cc3a3689e50110bee44f4aaaa03350f7b66f5a69257fe79b694cfcfc0c461d7b",
+      "manifestBytes": 1112,
+      "uses": 1,
+      "observations": 2,
+      "sourcePages": 1,
+      "binderPages": 1
+    },
+    {
+      "source": {
+        "name": "AtlasLet.dependent",
+        "indexSha256": "cfde8988a357f203c0560d50bc05ab53b937916de6e20dbb6c4affbfe747ddb7",
+        "sourceGraphSha256": "328efe691c5e5655f094c43af9961fcfbdca2a340f40aef57317b10b47b96185",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "9025b75b3792df54a6082d865634cd11df0c57551e29fcc29afa901ad98ba52d",
+      "manifestBytes": 615,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "AtlasLet.domain",
+        "indexSha256": "cfede9d61ddb4792ba03b16c3eef0e6b1dd71bb34310ea3a9a9da90a8efcf372",
+        "sourceGraphSha256": "8c5830ad5fba3c8cdbeee06dc23911eabcb3425647ef997816537f3368b8850e",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "5278530cfe189df9c33c804ad98418c5ed38a5612691d1294cc34e64dd46aef4",
+      "manifestBytes": 612,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "AtlasLet.duplicate",
+        "indexSha256": "ff120bc7adae2c2f7bd9d672b0b766c195a101e35b7796b0d75228c010b5e8d3",
+        "sourceGraphSha256": "d1340d198f61dbce831eeb35fe05ff80cda15bea37b9f548728140d45592bfcf",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "32c5014b246fdc108eed7ca80bcfa35380031b578d188a4167ec0e86be101003",
+      "manifestBytes": 615,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "AtlasLet.mixedShadow",
+        "indexSha256": "f2940f40ee03036df5ee18f2be7bae122b8e8497e06fc86f500fcbf802f640d3",
+        "sourceGraphSha256": "a552fc9a46b140527c08ba4c1c0bef2399cedec9d423ffecb98e0af232107991",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "f35d47a0a494bca302eb2c2c3d2cbcc1cc237d318355d0bed74b260fbb5f9cfb",
+      "manifestBytes": 617,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "AtlasLet.poly",
+        "indexSha256": "4fe49c22322f4a9c7f769f5f2abf426e7562d673c2716c5d89dfeb5a1123deee",
+        "sourceGraphSha256": "64fb15ee43c31c4944eef312434643024ec76fb2bc8feca7fa49a5594e10591e",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "208bd7f0ebe3fec2f305dbb7ea07e39a240297b7a7f4e718bc8753a06d5b4c74",
+      "manifestBytes": 1112,
+      "uses": 3,
+      "observations": 6,
+      "sourcePages": 1,
+      "binderPages": 1
+    },
+    {
+      "source": {
+        "name": "AtlasLet.projection",
+        "indexSha256": "7b5fef595f982a432e9c1edf519859a9c58ba75a85637883e7eede2548fa49d7",
+        "sourceGraphSha256": "96a9e48473b6256018831eb274207906da363f1b65eff249c4b13d4cb0c206a0",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "57d828f82cbf8b6176ed184dc0cfcead6af460cf2f214024d415a002a6566663",
+      "manifestBytes": 616,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "AtlasLet.proof",
+        "indexSha256": "c21484e9c117aa2f995a5f978f7cce02f9699b49d3882b6f98096ca5c41b8244",
+        "sourceGraphSha256": "3ec9e7cdfc60ed88975cddd175b7bf5d1f7b2c98c9036227f3de0c63205f9e79",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "525abd1a14d0340993e231d24907cfa52473a65a4ebb4546133aff67c28b2e58",
+      "manifestBytes": 1110,
+      "uses": 1,
+      "observations": 2,
+      "sourcePages": 1,
+      "binderPages": 1
+    },
+    {
+      "source": {
+        "name": "AtlasLet.proofChain",
+        "indexSha256": "35b0e8fce4749f3e01d098731030db802bce8a575833843e575b335cb98041fe",
+        "sourceGraphSha256": "f8f1789dfcde5b5c6328b684db18b87333527d32a095249ffab005a60f9ae0bc",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "e7c001d7de9bf2d51c99e7d1c7796ac4504c2c47df67ae72912e6b5fb148acee",
+      "manifestBytes": 1115,
+      "uses": 1,
+      "observations": 2,
+      "sourcePages": 1,
+      "binderPages": 1
+    },
+    {
+      "source": {
+        "name": "AtlasLet.proofIrrelevance",
+        "indexSha256": "60ecac4443e760cc384fceb52397909a5e2368bf683b0c27fcf3411864992138",
+        "sourceGraphSha256": "ec4e44ae0a1f79675db007c619e29a5bf6420542bd1d18b2d5d207eee42c28ad",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "3ba840a620a8c4f7a5551727091111fbf2d3ad44676bbf564195a0c257baac79",
+      "manifestBytes": 1123,
+      "uses": 2,
+      "observations": 4,
+      "sourcePages": 1,
+      "binderPages": 1
+    },
+    {
+      "source": {
+        "name": "AtlasLet.scalarChain",
+        "indexSha256": "de5039430544ddf6b527053243a2a434201a210a15d6639e9b57822634f48050",
+        "sourceGraphSha256": "d8b4f0cc259c8b1b48efd1db52880bc8d56792f08ee2e5f0fb19b446f3376abf",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "1366d6c911f884d0dfb410d842c9c2b3a193d7bfa3d397679b2324a4714880b5",
+      "manifestBytes": 617,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "AtlasLet.shadow",
+        "indexSha256": "b09b7ba05b7f0f0813c4e7038dd8f1e3503fa4603d41bbc58f42887266ef3b8f",
+        "sourceGraphSha256": "bcbd89fcd5efc28ec83b19c397acd0c85f5e7f69f03832820bf9c1edb8f5b31d",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "70d75cec7b83f668213b3eb25392090351d410697736769e577a9e36b371396d",
+      "manifestBytes": 1111,
+      "uses": 1,
+      "observations": 2,
+      "sourcePages": 1,
+      "binderPages": 1
+    },
+    {
+      "source": {
+        "name": "AtlasLet.shared",
+        "indexSha256": "374067cd60254254fd0c91996e9e4cc70497688bbd14b296cb822991b311aa9f",
+        "sourceGraphSha256": "322df32c38176a0cb2913d1b78deff3895e98b73f526ddbf3b3eeead0d1fad1a",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "fd5277ae75827dfc56801ed557255a4444ef21baa7aae40d6e90d81aa9e403d4",
+      "manifestBytes": 612,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "AtlasLet.sharedContexts",
+        "indexSha256": "5e07dca93c2b388e2ae33e7ae85886bfed0423c0c9b84a913da2172e63158e10",
+        "sourceGraphSha256": "784eb52cb3fe612de7d9b5d6cbbef99fb10509cf092a930f342cc5adda0e893f",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "5d7983d5dff68e94944c86d30970904ef7af6a5bab029687ef8a21cc3bd17c26",
+      "manifestBytes": 1125,
+      "uses": 4,
+      "observations": 8,
+      "sourcePages": 1,
+      "binderPages": 1
+    },
+    {
+      "source": {
+        "name": "AtlasLet.sortValue",
+        "indexSha256": "ded24165497278a4eac23f0bf5b946f8edd8b091987da6ea5f8a621f36b69fd4",
+        "sourceGraphSha256": "3d31d991a962d9c2cd836786046b4c31b99eff4fe5a18e76eb9ffa6521cc8f99",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "4aea8bd6be39b0eaae07b3d3aebac1edcd33aca39c6edfa8c483a3f036150386",
+      "manifestBytes": 615,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "AtlasLet.typeChain",
+        "indexSha256": "c3361251b65251d76a908d3ab37d138e0e3c0241e7ba6d3edcf8df0c8c6e511e",
+        "sourceGraphSha256": "b5696731cdcca2f765985a0ef4a5294e772480a7a0d5a0ee5e2e39e8e45a6b89",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "01c048f93d1da3740c2797c26d30a20d312bc7705629e118bb4bd147c9f78d69",
+      "manifestBytes": 1116,
+      "uses": 2,
+      "observations": 4,
+      "sourcePages": 1,
+      "binderPages": 1
+    },
+    {
+      "source": {
+        "name": "AtlasLet.typeInProof",
+        "indexSha256": "1d4121626a1a383a7f3e0c6ab46c9728e1e272934878933685ac3e10912732aa",
+        "sourceGraphSha256": "4e7d1c4b252e7785ac94950ad50acea024e2d1584965ae0f33dc408522a2bff9",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "680d5f972004ba7fe624e08461dba8b18a2a8385e53d97f83319ed86b72469c2",
+      "manifestBytes": 617,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "AtlasLet.typeLevel",
+        "indexSha256": "39fd14b8e959fee67975cd495db7c2c20fc342ecd93c9d3500114f1098de776d",
+        "sourceGraphSha256": "6686af3d5fef50462da39cb758cb4aebee03c69035deb010ed67c0cbcba2eef5",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "de2dd051fc3921a46b98e76d32bcbbbd633e6f7af286d913b541c1f871676c79",
+      "manifestBytes": 615,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "AtlasLet.unused",
+        "indexSha256": "1fc5b8ce98fbfb7f384a9d79a9f2fd076da22b3a036b8a23912565ca26b32c76",
+        "sourceGraphSha256": "e7651929f422020963a25c4952e3e3cec82f937f30345f9d189b7ef49fea3899",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "f7a2049cc243a810144501b6efdcf469a7b132fb8612c7a1666301e37cc964a1",
+      "manifestBytes": 612,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "AtlasLet.unusedType",
+        "indexSha256": "33b7dfc70bf3acff6d564808401ff244962d28dd2ff6d172688a769abeb9200c",
+        "sourceGraphSha256": "c28f1bc18359671ac3773327008ee51281912971e5d6b6d944dd59f8f02bcd91",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "ebac2d637fb206125997cc8a7562b09440958913d7374add27bde1fcfc68c233",
+      "manifestBytes": 616,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "AtlasLet.value",
+        "indexSha256": "6e3c2097797dd57c9d45976e3817bd700d6210e09fb419c8ffbb71f24a43b34b",
+        "sourceGraphSha256": "0d91ee7d9eb3b02db920a28e56f6a9cde6a0175834bc5d0100d13e8fe6b31111",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "b64d31ca2c1dcd9a5cab2353b7921bf9e5267ae6b0b02451b7b2302aa94fcc33",
+      "manifestBytes": 611,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    },
+    {
+      "source": {
+        "name": "AtlasLet.valueInProof",
+        "indexSha256": "dfa7e0fa11ac76d365155b162868c7fb2b488db3817ea3eb7b6842245cc59588",
+        "sourceGraphSha256": "75a72951b2df67879b38d731d19d35513780c829bf80607d5a6c9398ab6cde19",
+        "edition": "local-definition-controls"
+      },
+      "manifestSha256": "1e1a1e0e8ab07e1484e5ffc62ae210bd46941c3a9f21f087cf626af5ad874d1b",
+      "manifestBytes": 618,
+      "uses": 0,
+      "observations": 0,
+      "sourcePages": 0,
+      "binderPages": 0
+    }
+  ],
+  "codeSha256": "3d23d5074b21716c04566b184ea991a13d680c1c42387a1064cd9427f3838291",
+  "testSha256": "43ba6c7c6405f88671bfef3b12149986789d663fb3ab521b6b4d8e49ff1727ce",
+  "scope": "Local sparse delivery and zero-source-count geometric references over existing observations, with independent native-owner/source/context comparisons and exact binder/subregion retrieval. Two resident delivery pages and bounded per-query results/reads; producer and native reference tables are not memory-bounded by this test. Deep controls test storage only. No public integration, exhaustive dependency coverage, fresh native typing, semantic necessity or comprehension result."
+}
