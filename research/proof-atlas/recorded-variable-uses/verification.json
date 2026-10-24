@@ -8,10 +8,10 @@
   "returnedRows": 4725,
   "paginationSteps": 1346,
   "pages": 74,
-  "storedBytes": 391712,
+  "storedBytes": 394086,
   "maxManifestBytes": 7482,
-  "peakResidentPageBytes": 19408,
-  "peakResultBytes": 16560,
+  "peakResidentPageBytes": 19522,
+  "peakResultBytes": 16683,
   "refusals": 59,
   "deepStorageControls": 1,
   "sourceOnlyUses": 36,
@@ -30,7 +30,7 @@
         "sourceGraphSha256": "26b4cc98b0400ad17d7f84290a90f8bb6334cee9a9739f6d7d14b490c460174a",
         "edition": "published-15"
       },
-      "manifestSha256": "403f1ef9de257c9be61835c0fd7c2c71b59de89fac4a88e6e50e5e10f9b06a77",
+      "manifestSha256": "09c22e4f8587ebf1495d7762c7cee8b409d496e9fbf2c87a705e9a96bda86e27",
       "manifestBytes": 1608,
       "uses": 9,
       "observations": 18,
@@ -44,7 +44,7 @@
         "sourceGraphSha256": "e9bad6c603a042a2761d6944e8bf3ecc27cbd406a562c776b456df5d1b32dfab",
         "edition": "published-15"
       },
-      "manifestSha256": "aa1c40dd7219551218c0f78d89a14d8a412e38e2663967bf75eb6877d27761bc",
+      "manifestSha256": "020d59fc2ad6bca890824ef68831341a8bd49f179908f6b9bd3ce1f051d02c28",
       "manifestBytes": 1116,
       "uses": 4,
       "observations": 8,
@@ -58,7 +58,7 @@
         "sourceGraphSha256": "7f881a949bb55814a3e7eee35518cdeb3ee65478b4887534351c98abf55a94c1",
         "edition": "published-15"
       },
-      "manifestSha256": "7a32c50861647e4d3bfe87d913a16e010f9a2fe73a56272a862376ddfc184566",
+      "manifestSha256": "18d65ee138fc650f0aa4dbe33414a4caa5c74bb4cb9cd214ed5d65e5ce74460f",
       "manifestBytes": 7482,
       "uses": 91,
       "observations": 182,
@@ -72,7 +72,7 @@
         "sourceGraphSha256": "04dcbe58b8a5bfe71b82164e250031c3a3e37d87aabf163e4fc5f473b26b8344",
         "edition": "published-15"
       },
-      "manifestSha256": "8367c01f722a79a5afe0e2300f8267774ce665e4c466d124add5253ebe7adbdd",
+      "manifestSha256": "9626a1096e2538c60b344c9c20b5aed8eea38816049005e86b6121353ba2c8ab",
       "manifestBytes": 1113,
       "uses": 6,
       "observations": 12,
@@ -86,7 +86,7 @@
         "sourceGraphSha256": "7abde40ff639c0da960a6387955083899eeff0d2b10a9f06ffe89e638e44f454",
         "edition": "working-26"
       },
-      "manifestSha256": "c60203c7b73ad17454f2e809b4a469d613cf04965843be97b7c4ee369c4af98c",
+      "manifestSha256": "d83784508387c416dbd5c63a933c8288adcae8712ad6962e2f36982f12599df8",
       "manifestBytes": 2194,
       "uses": 18,
       "observations": 36,
@@ -100,7 +100,7 @@
         "sourceGraphSha256": "e9bad6c603a042a2761d6944e8bf3ecc27cbd406a562c776b456df5d1b32dfab",
         "edition": "working-26"
       },
-      "manifestSha256": "e64ebcc65d6edbf2d23fe124f63f63b7b45debfa3308d66615750c1bb16eb2e7",
+      "manifestSha256": "5acd7025442a942828363f6f0d33d3389593f86673dddd0a27fffc07775d0caa",
       "manifestBytes": 1113,
       "uses": 1,
       "observations": 2,
@@ -114,7 +114,7 @@
         "sourceGraphSha256": "c8e081ef9d3c23eea10655d465fa8a7a0670e62dca61e1e0ae47ae6bf381d666",
         "edition": "goedel-sample-4331"
       },
-      "manifestSha256": "2615e3e8258da0765166d6daae6da3806ffc954a61dd7bbf62843c0dc84043a7",
+      "manifestSha256": "8b0062c77ff0e0061dae4df569c113da46dccd8efa23021d1c8c0dc31ba2af58",
       "manifestBytes": 1124,
       "uses": 1,
       "observations": 2,
@@ -128,7 +128,7 @@
         "sourceGraphSha256": "a07dc0c2a45e129573e2d0e7ad02616fd2e795b36c3fc6f2fa66d260bfdd3e6a",
         "edition": "goedel-sample-4331"
       },
-      "manifestSha256": "b53ee4b0bf4042922b66f6c6418359c2adcd046645355b4dda29e8496573ac1a",
+      "manifestSha256": "e841f71a9ad2bae44c8b6f2be3d007e67db173c9cb00b4b8880941588bee8662",
       "manifestBytes": 1114,
       "uses": 4,
       "observations": 8,
@@ -142,7 +142,7 @@
         "sourceGraphSha256": "4a3b9d5deba77fd9841d24c6f8441d12a2c7c93cc344e03c03ccaae2c27d53ed",
         "edition": "goedel-sample-4331"
       },
-      "manifestSha256": "d34544e5883a6334fec52ab979952708630424fd6dfda17d05c0011fe25a4db2",
+      "manifestSha256": "a89d87c97e50880c968f49b4f22e39eb98ae63c62005120acabb6fa706d83988",
       "manifestBytes": 1115,
       "uses": 4,
       "observations": 8,
@@ -212,7 +212,7 @@
         "sourceGraphSha256": "46fae1dc00bba2b29c525e5a4fa917872a34483b7a7e14c29e22773db12c92e2",
         "edition": "goedel-sample-4331"
       },
-      "manifestSha256": "d07944b40288470ae29cad752602bcaa5f491f75d3a0f7f9a127c65d082d5996",
+      "manifestSha256": "607eedb9a9e409604b4fa0f459e81fad296bc29c6e3dbb553e830c2e527f9d54",
       "manifestBytes": 1123,
       "uses": 8,
       "observations": 16,
@@ -226,7 +226,7 @@
         "sourceGraphSha256": "8486bb9cc0e3184404634e4b971f1a925d948a5c36465f03c9a08063238aad28",
         "edition": "goedel-sample-4331"
       },
-      "manifestSha256": "b070ebaa48bfde6bdb2ba37b83f9e862674c83b601c376f96df181e4cd6487cf",
+      "manifestSha256": "41bba4a2d3379a1d7b8386dc94587c6ada8b02ca466962496373b39f6d1d698d",
       "manifestBytes": 1118,
       "uses": 2,
       "observations": 4,
@@ -254,7 +254,7 @@
         "sourceGraphSha256": "c485c612bcc04f568d3af08ebd62247ed31f701db8badebce1d969d5b9810ec6",
         "edition": "goedel-sample-4331"
       },
-      "manifestSha256": "9e79a1615db0c9d516792c7d416c3d43e6a56dce5dfb9dcd3aae6d22aa3c580d",
+      "manifestSha256": "ad546bfde052c56b4d6eb9134b74020b51bba0c4c9b360ed65012109284f09e3",
       "manifestBytes": 1119,
       "uses": 1,
       "observations": 2,
@@ -296,7 +296,7 @@
         "sourceGraphSha256": "1dc8a9bbb5bd943dce6683d46f54c38ff1522d5e36d37aec5191cbae0c910415",
         "edition": "goedel-sample-4331"
       },
-      "manifestSha256": "fe5a51c90d8867ecbfc0d0bc13149d1980296039e2c6fb0b27963397deeabd8c",
+      "manifestSha256": "0546887c58d62054a3fe604791d457e8385081c4f905aa4c99c9f1576aaa738d",
       "manifestBytes": 1128,
       "uses": 1,
       "observations": 2,
@@ -310,7 +310,7 @@
         "sourceGraphSha256": "23260334d9342974f146a1e4698f8d4c9a85a7cefc9fde024f8017bae67941c0",
         "edition": "goedel-sample-4331"
       },
-      "manifestSha256": "d78f5ea354706d48ff6f41e31c712010d83a8b2bab55e1aef3eadb834d7eeb92",
+      "manifestSha256": "59c41f99a99e0c960031fdf961830a5c72804519f02781ee4fab0e6cf1f1d888",
       "manifestBytes": 1119,
       "uses": 2,
       "observations": 4,
@@ -408,7 +408,7 @@
         "sourceGraphSha256": "1105763b5e2cbafe441c467f721296b45ab29f059e92bc675b46025fe91c44f5",
         "edition": "local-definition-controls"
       },
-      "manifestSha256": "ec98835599cb04c430ebf15c056d2d1344f4308da95d70203a4417def52c643c",
+      "manifestSha256": "7c6cd8604648aeed5d6a006c8c28eeb2cba082b70b3d06f6e3ed667dced0de8c",
       "manifestBytes": 1119,
       "uses": 3,
       "observations": 6,
@@ -436,7 +436,7 @@
         "sourceGraphSha256": "550aa40fde99bd34ef2cdda2a6f95bd10aef761bd264397be5c185bb71757090",
         "edition": "local-definition-controls"
       },
-      "manifestSha256": "cc3a3689e50110bee44f4aaaa03350f7b66f5a69257fe79b694cfcfc0c461d7b",
+      "manifestSha256": "655b04f6358a98ac386d660e61e09e52402ebde0731a94cdfa03f03a2058aee0",
       "manifestBytes": 1112,
       "uses": 1,
       "observations": 2,
@@ -506,7 +506,7 @@
         "sourceGraphSha256": "64fb15ee43c31c4944eef312434643024ec76fb2bc8feca7fa49a5594e10591e",
         "edition": "local-definition-controls"
       },
-      "manifestSha256": "208bd7f0ebe3fec2f305dbb7ea07e39a240297b7a7f4e718bc8753a06d5b4c74",
+      "manifestSha256": "65ec3859f1847f1163ec02d261f7867fa37bcd5df1e4c603161d0f4bdd1aafb1",
       "manifestBytes": 1112,
       "uses": 3,
       "observations": 6,
@@ -534,7 +534,7 @@
         "sourceGraphSha256": "3ec9e7cdfc60ed88975cddd175b7bf5d1f7b2c98c9036227f3de0c63205f9e79",
         "edition": "local-definition-controls"
       },
-      "manifestSha256": "525abd1a14d0340993e231d24907cfa52473a65a4ebb4546133aff67c28b2e58",
+      "manifestSha256": "10ced592ff88011d64af0365cea67c71cbe52dd259b501b41b26f1670d4a29d4",
       "manifestBytes": 1110,
       "uses": 1,
       "observations": 2,
@@ -548,7 +548,7 @@
         "sourceGraphSha256": "f8f1789dfcde5b5c6328b684db18b87333527d32a095249ffab005a60f9ae0bc",
         "edition": "local-definition-controls"
       },
-      "manifestSha256": "e7c001d7de9bf2d51c99e7d1c7796ac4504c2c47df67ae72912e6b5fb148acee",
+      "manifestSha256": "851c9f5a4c8c8fcfd22a1fc6cf65565543b8e7a0733a9b8f62e2de0cfdbe1413",
       "manifestBytes": 1115,
       "uses": 1,
       "observations": 2,
@@ -562,7 +562,7 @@
         "sourceGraphSha256": "ec4e44ae0a1f79675db007c619e29a5bf6420542bd1d18b2d5d207eee42c28ad",
         "edition": "local-definition-controls"
       },
-      "manifestSha256": "3ba840a620a8c4f7a5551727091111fbf2d3ad44676bbf564195a0c257baac79",
+      "manifestSha256": "7e896e11c4227a739ebbec89c51feb30d349c782b889c20ca2ac71fc18801ef5",
       "manifestBytes": 1123,
       "uses": 2,
       "observations": 4,
@@ -590,7 +590,7 @@
         "sourceGraphSha256": "bcbd89fcd5efc28ec83b19c397acd0c85f5e7f69f03832820bf9c1edb8f5b31d",
         "edition": "local-definition-controls"
       },
-      "manifestSha256": "70d75cec7b83f668213b3eb25392090351d410697736769e577a9e36b371396d",
+      "manifestSha256": "0c81d2722ab6253170a4f8faf58763dcbe78d6269dbfc702a5483e5ee7e462bc",
       "manifestBytes": 1111,
       "uses": 1,
       "observations": 2,
@@ -618,7 +618,7 @@
         "sourceGraphSha256": "784eb52cb3fe612de7d9b5d6cbbef99fb10509cf092a930f342cc5adda0e893f",
         "edition": "local-definition-controls"
       },
-      "manifestSha256": "5d7983d5dff68e94944c86d30970904ef7af6a5bab029687ef8a21cc3bd17c26",
+      "manifestSha256": "dc8ce5eff53839461a75cb8aeb6112d52e89fbe10d8de9cd21e5069e94a62c6e",
       "manifestBytes": 1125,
       "uses": 4,
       "observations": 8,
@@ -646,7 +646,7 @@
         "sourceGraphSha256": "b5696731cdcca2f765985a0ef4a5294e772480a7a0d5a0ee5e2e39e8e45a6b89",
         "edition": "local-definition-controls"
       },
-      "manifestSha256": "01c048f93d1da3740c2797c26d30a20d312bc7705629e118bb4bd147c9f78d69",
+      "manifestSha256": "9f244d6368f0dfef160fcf1c81661147b5ae0043c92482d359514bd5a793bd91",
       "manifestBytes": 1116,
       "uses": 2,
       "observations": 4,
@@ -739,7 +739,7 @@
     }
   ],
   "callerMutationControls": 2,
-  "codeSha256": "5a373bbbf424b896a8d732774ecbc97d5a0b2343c3357baacdc4dea74001cff9",
-  "testSha256": "687108a6bea666a07fd7adb519f4a3ef8893b97afdbdd11b1bfa8c84ce8703c5",
+  "codeSha256": "9b71583d3cecbe44453eeca401e48566f270d06a277a506ce6c49d3f9e69e7bd",
+  "testSha256": "3b9763faceac7493af28bc982962ecea988cc33e0ebcb4eb270cb5e1b57c05de",
   "scope": "Local sparse delivery and zero-source-count geometric references over existing observations, with independent native-owner/source/context comparisons and exact binder/subregion retrieval. Two resident delivery pages and bounded per-query results/reads; producer and native reference tables are not memory-bounded by this test. Deep controls test storage only. No public integration, exhaustive dependency coverage, fresh native typing, semantic necessity or comprehension result."
 }

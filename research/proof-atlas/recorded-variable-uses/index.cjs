@@ -26,17 +26,19 @@ async function extract(x){
   const c=T.construction(e,x.c.data),observations=[{point:e,field:'recorded'},...(c?c.premises.map(point=>({point,field:point.field})):[])];
   for(const{point,field}of observations){
    if(x.c.data.kind[point.node]!==0)continue;
-   const id=key(point.route)+':'+e.evidenceSha256+':'+key(e.route)+':'+field;if(seen.has(id))continue;seen.add(id);
+   const owner=field==='recorded'?e:c.entry;
+   const id=key(point.route)+':'+owner.evidenceSha256+':'+key(owner.route)+':'+field;if(seen.has(id))continue;seen.add(id);
    const actual=P.resolve(x.c.data,point.route);demand(actual.node===point.node&&actual.scopeDepth===point.contextLength&&actual.binding,'native occurrence and original binder');
    const typed=field==='recorded'?e:await T.constructionType(e,x.c.data,field),binder=actual.binding;
    const ordinal=point.contextLength-1-x.c.data.payloads[point.node].index;
    const target=typed.contextAt(ordinal);demand(key(target.route)===key(binder.route)&&target.node===binder.node,'native original context target');
    const binderContext=P.resolve(x.c.data,binder.route).scopeDepth;
    demand(binderContext===ordinal,'binder ordinal');
-   const observation={field,role:typed.role,owner:{route:e.route,node:e.node,evidenceSha256:e.evidenceSha256,typeIdentity:T.typeIdentity(typed),typeRoot:typed.typeData.roots[0],recording:typed.recording}};
+   demand(typed.evidenceSha256===owner.evidenceSha256,'native type owner');
+   const observation={field,role:typed.role,owner:{route:owner.route,node:owner.node,evidenceSha256:owner.evidenceSha256,typeIdentity:T.typeIdentity(typed),typeRoot:typed.typeData.roots[0],recording:typed.recording}};
    const routeKey=key(point.route),old=uses.get(routeKey);
    if(old){demand(old.row.role===typed.role&&key(old.row.binder.route)===key(binder.route)&&old.row.contextLength===typed.contextLength,'same occurrence context and role');demand(T.expressionEqual(old.typed.typeData,old.typed.typeData.roots[0],typed.typeData,typed.typeData.roots[0]),'repeated recorded type');old.row.observations.push(observation);}
-   else uses.set(routeKey,{typed,row:{route:point.route,node:point.node,contextLength:typed.contextLength,role:typed.role,binder:{route:binder.route,node:binder.node,contextLength:binderContext,ordinal},observations:[observation],countContribution:'0'}});
+   else uses.set(routeKey,{typed,row:{route:point.route,node:point.node,contextLength:typed.contextLength,role:typed.role,binder:{route:binder.route,node:binder.node,contextLength:binderContext,ordinal,name:x.c.data.payloads[binder.node].binderName??x.c.data.payloads[binder.node].declName??'_'},observations:[observation],countContribution:'0'}});
   }
  }
  return freeze({source,rows:[...uses.values()].map(x=>x.row).sort((a,b)=>compare(a.route,b.route)),observationCount:seen.size,scope:'Sparse existing observations. No absence-of-use claim, fresh variable typing or inherited region judgment.'});

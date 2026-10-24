@@ -1,7 +1,7 @@
 # Recorded variable-use references
 
-Local reference model for the next geometric rule. It is not integrated into
-the reader. The deployed mixed interfaces are a separate result. This package
+Reference model and candidate reader integration for the next geometric rule.
+The deployed mixed interfaces are a separate result. This package
 uses existing public compiled records and owned calibration controls; it
 contains no original private mathematical source or new native Lean run.
 
@@ -19,6 +19,13 @@ same occurrence retain separate evidence hashes, original recording owners,
 fields, type components and roles. They are not counted as independent uses.
 Agreement is checked against the accepted records, not inferred from a node ID
 or binder name. The catalogue does not infer missing observations.
+
+The selected lookup entry and a construction's native owner can have different
+evidence hashes after supplementary let records are attached. The index takes a
+premise observation's owner from the construction entry, not from the enclosing
+lookup entry. The public paged check opens all 304 observations and rejects the
+three cases where substituting the lookup entry's evidence hash would misidentify
+that native owner. Matching type syntax alone would not detect this error.
 
 ## Geometric rule
 
@@ -69,8 +76,8 @@ reproducible catalogue hashes are in `verification.json`.
 
 These are delivery-component bounds. The producer and reference tests load the
 accepted source/native tables. Decoded JSON sizes and page-cache counts do not
-measure whole-process or browser memory. Browser selection, refinement history,
-optional-data failure and accessibility tests remain necessary for integration.
+measure whole-process or browser memory. The candidate consumer and its browser
+checks are described in [reader.md](reader.md).
 
 ## Syntax counts are a separate measure
 

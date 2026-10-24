@@ -13,10 +13,11 @@ out.inputs=[];
 async function nativeRow(row,x){
  const r=P.resolve(x.c.data,row.route);assert.equal(r.node,row.node);assert.equal(r.scopeDepth,row.contextLength);assert.equal(x.c.data.kind[row.node],0);assert.deepEqual(r.binding,{node:row.binder.node,route:row.binder.route});
  assert.equal(row.binder.ordinal,row.contextLength-1-x.c.data.payloads[row.node].index);
+ assert.equal(row.binder.name,x.c.data.payloads[row.binder.node].binderName??x.c.data.payloads[row.binder.node].declName??'_');
  for(const o of row.observations){
   const e=x.c.get(o.owner.route);assert(e);const typed=o.field==='recorded'?e:await T.constructionType(e,x.c.data,o.field);
   assert.deepEqual(typed.route,row.route);assert.equal(typed.node,row.node);assert.equal(typed.role,row.role);assert.equal(o.role,row.role);assert.equal(typed.contextLength,row.contextLength);
-  assert.deepEqual(JSON.parse(JSON.stringify(T.typeIdentity(typed))),o.owner.typeIdentity);assert.deepEqual(JSON.parse(JSON.stringify(typed.recording)),o.owner.recording);assert.equal(typed.typeData.roots[0],o.owner.typeRoot);assert.equal(e.evidenceSha256,o.owner.evidenceSha256);assert.deepEqual(typed.contextAt(row.binder.ordinal).route,row.binder.route);
+  assert.deepEqual(JSON.parse(JSON.stringify(T.typeIdentity(typed))),o.owner.typeIdentity);assert.deepEqual(JSON.parse(JSON.stringify(typed.recording)),o.owner.recording);assert.equal(typed.typeData.roots[0],o.owner.typeRoot);assert.equal(typed.evidenceSha256,o.owner.evidenceSha256);assert.deepEqual(typed.contextAt(row.binder.ordinal).route,row.binder.route);
  }
 }
 async function consume(client,query,expected){
