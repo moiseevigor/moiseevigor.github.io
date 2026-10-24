@@ -71,6 +71,7 @@ function produce(inventory){
 }
 
 function open(raw,expectedHash,expectedSource,read){
+ expectedSource=freeze(copy(expectedSource));
  demand(Buffer.isBuffer(raw)&&raw.length<=limits.manifestBytes&&hash(raw)===expectedHash,'manifest hash/bound');
  const manifest=JSON.parse(raw);demand(manifest.format==='ProofAtlasRecordedVariableUseIndex/1'&&canonical(manifest.source)===canonical(expectedSource),'manifest source');
  demand(canonical(manifest.limits)===canonical(limits),'delivery contract');
@@ -90,6 +91,7 @@ function open(raw,expectedHash,expectedSource,read){
   cache[mode]={sha,value,bytes:raw.length};stats.peakResidentPageBytes=Math.max(stats.peakResidentPageBytes,(cache.source?.bytes||0)+(cache.binder?.bytes||0));return value;
  }
  async function query({within,binder=null,limit=8,cursor=null}){
+  within=freeze(copy(within));if(binder)binder=freeze(copy(binder));
   demand(!disposed,'disposed');P.parse(within);if(binder)P.parse(binder);demand(Number.isSafeInteger(limit)&&limit>=1&&limit<=limits.resultRows,'result bound');
   const mode=binder?'binder':'source',scope=canonical({within,binder}),ds=manifest.indexes[mode],budget={reads:0},rows=[];let resultBytes=2,scanned=0;
   if(cursor)demand(cursors.has(cursor)&&cursor.manifest===expectedHash&&cursor.scope===scope,'issued cursor for same source/query');

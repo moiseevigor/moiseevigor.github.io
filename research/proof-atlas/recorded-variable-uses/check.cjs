@@ -75,6 +75,10 @@ async function consume(client,query,expected){
  assert.throws(()=>I.open(built.manifestBytes,built.manifestSha256,{...inventory.source,indexSha256:'0'.repeat(64)},async()=>{}));out.refusals++;
  const damaged=fresh(async sha=>{const b=Buffer.from(built.files.get(sha));b[0]^=1;return b;});await assert.rejects(()=>damaged.query({within}));out.refusals++;
  const client=fresh(),a=await client.query({within,limit:1});assert(a.next);await assert.rejects(()=>client.query({within,cursor:{...a.next}}));out.refusals++;
+ // Caller-owned identity/query objects cannot change an in-flight selection.
+ const identity=JSON.parse(JSON.stringify(inventory.source)),owned=I.open(built.manifestBytes,built.manifestSha256,identity,async sha=>built.files.get(sha));identity.indexSha256='0'.repeat(64);
+ assert.deepEqual(owned.manifest.source,inventory.source);assert((await owned.query({within})).rows.length>0);
+ let release,hit;const gate=new Promise(r=>release=r),started=new Promise(r=>hit=r),delayed=fresh(async sha=>{hit();await gate;return built.files.get(sha);}),requestRoute=JSON.parse(JSON.stringify(within)),pending=delayed.query({within:requestRoute});await started;requestRoute.root=0;release();assert.deepEqual((await pending).rows,inventory.rows.filter(r=>r.route.root===1).slice(0,8));out.callerMutationControls=2;
  await assert.rejects(()=>client.query({within:P.encode(0,[]),cursor:a.next}));out.refusals++;
  await assert.rejects(()=>fresh().query({within,cursor:a.next}));out.refusals++;
  await assert.rejects(()=>client.query({within,limit:9}));out.refusals++;

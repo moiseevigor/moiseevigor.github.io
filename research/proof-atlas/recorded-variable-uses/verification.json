@@ -738,7 +738,8 @@
       "binderPages": 0
     }
   ],
-  "codeSha256": "3d23d5074b21716c04566b184ea991a13d680c1c42387a1064cd9427f3838291",
-  "testSha256": "43ba6c7c6405f88671bfef3b12149986789d663fb3ab521b6b4d8e49ff1727ce",
+  "callerMutationControls": 2,
+  "codeSha256": "5a373bbbf424b896a8d732774ecbc97d5a0b2343c3357baacdc4dea74001cff9",
+  "testSha256": "687108a6bea666a07fd7adb519f4a3ef8893b97afdbdd11b1bfa8c84ce8703c5",
   "scope": "Local sparse delivery and zero-source-count geometric references over existing observations, with independent native-owner/source/context comparisons and exact binder/subregion retrieval. Two resident delivery pages and bounded per-query results/reads; producer and native reference tables are not memory-bounded by this test. Deep controls test storage only. No public integration, exhaustive dependency coverage, fresh native typing, semantic necessity or comprehension result."
 }
