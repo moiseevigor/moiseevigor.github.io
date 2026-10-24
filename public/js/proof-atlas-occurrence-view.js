@@ -367,11 +367,11 @@
   }
   function safe(action){try{const result=action();if(result?.then)result.catch(error=>{status.textContent=error.message;});}catch(error){status.textContent=error.message;}}
   function navigate(route,write=true,replace=false){
-   if(disposed)return;retireConstructionView();
+   if(disposed)return;const hadFocus=root.contains(document.activeElement);retireConstructionView();
    if(paged){const epoch=++operation;constructionRenderController?.abort();constructionSelection++;navigationController?.abort();navigationController=new AbortController();root.setAttribute('aria-busy','true');status.textContent='Loading original source fields…';return sourceModel.create(route,{maxNodes:Number(nodeBudget.value),maxDepth:Number(depth.value),signal:navigationController.signal}).then(next=>{if(disposed||epoch!==operation)return;displayData=sourceModel.snapshot(next);draw(next);if(write)writeAddress(route,replace);}).catch(error=>{if(disposed||epoch!==operation)return;scene=null;selected=null;constructionView?.dispose();constructionView=null;constructionHost.hidden=true;constructionRegistry?.releaseType();pagedController?.abort();pagedSession?.cursor.dispose();pagedSession=null;typeView?.dispose();typeView=null;stage.replaceChildren();panel.replaceChildren(button('Retry source occurrence',()=>safe(()=>navigate(route,write,replace))));summary.textContent='';status.textContent='Source occurrence unavailable: '+error.message;}).finally(()=>{if(!disposed&&epoch===operation)root.setAttribute('aria-busy','false');});}
    operation++;if(write&&!replace)initialConstructionFocus=false;if(disposed)return;
    const next=W.create(data,record,route,{maxNodes:Number(nodeBudget.value),maxDepth:Number(depth.value)});
-   if(disposed)return;const hadFocus=root.contains(document.activeElement);draw(next);if(hadFocus)(constructionView?constructionHost.querySelector('[data-construction-point]'):stage.querySelector('[data-occurrence-node]'))?.focus({preventScroll:true});if(write)writeAddress(route,replace);
+   if(disposed)return;draw(next);if(hadFocus)(constructionView?constructionHost.querySelector('[data-construction-point]'):stage.querySelector('[data-occurrence-node]'))?.focus({preventScroll:true});if(write)writeAddress(route,replace);
   }
   function fromLocation(){
    operation++;
