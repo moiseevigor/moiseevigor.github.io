@@ -71,7 +71,7 @@
 :root .proof-atlas-theme .pa-appbar h1 {font:600 clamp(1.35rem,2.5vw,1.9rem)/1.25 var(--serif);letter-spacing:-.015em}
 :root .proof-atlas-theme .pa-app :is(p,span,label,dt,dd,small,.pa-app-kicker,.pa-live-mark) {color:var(--text-light)}
 :root .proof-atlas-theme .pa-app :is(h2,h3,strong) {color:var(--text)}
-:root .proof-atlas-theme .pa-app :is(button,input,select) {font-family:var(--sans);color:var(--text);background:var(--bg);border-color:var(--border);min-height:40px;box-shadow:none}
+:root .proof-atlas-theme .pa-app :is(button,input,select) {font-family:var(--sans);color:var(--text);background:var(--bg);border-color:var(--border);min-height:44px;box-shadow:none}
 :root .proof-atlas-theme .pa-app :is(button:hover,button.is-active,.pa-reader-tabs button[aria-selected="true"]) {color:var(--accent);background:var(--accent-light);border-color:var(--accent)}
 :root .proof-atlas-theme :is(.pa-hover-dock,.pa-tooltip,.pa-branch-hud) {background:var(--bg);color:var(--text);border-color:var(--border);box-shadow:0 2px 8px #0001}
 :root .proof-atlas-theme :is(.pa-hover-dock,.pa-tooltip,.pa-branch-hud) :is(p,strong,h3,span) {color:var(--text)}
@@ -87,7 +87,7 @@
 :root .proof-atlas-theme .pow-card[data-constructor="bvar"] {border-top-color:var(--text-light)}
 :root .proof-atlas-theme :is(.pow-card>[aria-pressed="true"],.pow-shell :focus-visible) {outline-color:var(--accent)}
 :root .proof-atlas-theme .pow-shell button:hover {border-color:var(--accent)}
-:root .proof-atlas-theme :is(.pow-shell,.pl-library) :is(button,select,input) {min-height:40px;font-family:var(--sans)}
+:root .proof-atlas-theme :is(.pow-shell,.pl-library) :is(button,select,input) {min-height:44px;font-family:var(--sans)}
 :root .proof-atlas-theme :is(a,button,input,select,summary,[tabindex="0"]):focus-visible {outline-color:var(--accent)}
 
 /* Program and evidence have a short reading route and a separate technical index. */
