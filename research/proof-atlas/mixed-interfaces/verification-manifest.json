@@ -10,8 +10,8 @@
   "branch": "feat/proof-atlas-mixed-interfaces",
   "files": {
     "research/proof-atlas/mixed-interfaces/README.md": {
-      "sha256": "736ba1cb79aef7a2224799e3ec9766070bc9a87af437e410d570224e97f79df3",
-      "bytes": 9319
+      "sha256": "5b5171214b23b74aaa2ae17b0807818e800fd3684b913df74ea33527ff5ac419",
+      "bytes": 9458
     },
     "research/proof-atlas/mixed-interfaces/check-composition.cjs": {
       "sha256": "d812e674896708f62f5cdddf01334e94a5bbd030e40d37a37bed38eecda79b69",
@@ -219,5 +219,8 @@
   "browserIntegrated": false,
   "mixedRulePublished": false,
   "scope": "Finite original-source/recorded-typing composition, exact rechunking, explicit binder correspondence and bounded candidate cursor caches. Reference audits load complete compiled graphs. No general preservation theorem, new kernel replay, whole-process memory bound, semantic compression or human comprehension result.",
-  "nextStep": "Integrate the mixed rule into the existing reader, retaining distinct actual/expected types and original/computed binders, then test actual source/type interactions and unsupported boundaries."
+  "nextStep": "Integrate the mixed rule into the existing reader, retaining distinct actual/expected types and original/computed binders, then test actual source/type interactions and unsupported boundaries.",
+  "referenceModelOnly": true,
+  "readerMethod": "research/proof-atlas/mixed-interfaces/reader.md",
+  "documentationUpdatedAfterModelAudit": "Reader-method links added; audited model, input and report bytes are unchanged."
 }
