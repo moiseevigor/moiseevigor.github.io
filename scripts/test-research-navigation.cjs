@@ -24,21 +24,22 @@ const check=(ok,message)=>{if(!ok)throw Error(message)};
   check(await page.locator('.hc--lab .hc-res').count()===6,'Every series needs its main result');
   await page.screenshot({path:path.join(shots,'research-desktop.png')});
   await page.locator('.site-nav-links').getByRole('link',{name:'Projects',exact:true}).click();
-  await contentReady('.research-tool');
-  check(await page.locator('.research-tool').count()===3,'Tool roles should be distinct');
+  await contentReady('.project-entry');
+  check(await page.locator('#interactive-tools + .project-entries .project-entry').count()===3,'Interactive tool roles should be distinct');
+  check(await page.locator('.project-entry').count()===4,'Software entry missing');
   // A nonessential pending request must not hold up checks of ready page content.
   let requested,release;const pending=new Promise(resolve=>requested=resolve);
   await page.route('**/__navigation_pending__',async route=>{requested();await new Promise(resolve=>release=resolve);await route.fulfill({body:'done'});});
   await page.evaluate(()=>{window.__navigationPending=fetch('/__navigation_pending__').catch(()=>null);});await pending;
-  await contentReady('.research-tool');check(await page.locator('.research-tool').count()===3,'Ready tools hidden by background request');release();await page.evaluate(()=>window.__navigationPending);await page.unroute('**/__navigation_pending__');
+  await contentReady('.project-entry');check(await page.locator('.project-entry').count()===4,'Ready projects hidden by background request');release();await page.evaluate(()=>window.__navigationPending);await page.unroute('**/__navigation_pending__');
 
-  await page.locator('.research-tool').getByRole('link',{name:'Open Proof Atlas →',exact:true}).click();
-  await contentReady('.research-hub-task');
-  check(await page.locator('.research-hub-task').count()===1,'Missing primary synchronized reading route');
+  await page.locator('.project-entry').getByRole('link',{name:'Proof Atlas',exact:true}).click();
+  await contentReady('.atlas-overview-route');
+  check(await page.locator('.atlas-overview-route article').count()===3,'Missing ordered notation, proof and research route');
   check(await page.locator('canvas').count()===0,'Overview duplicates the working graph');
   check(await page.locator('script[src*="/public/data/proof-atlas/"]').count()===0,'Overview downloads term data before a tool is chosen');
   await page.screenshot({path:path.join(shots,'atlas-overview-desktop.png')});
-  await page.locator('.research-hub-task').getByRole('link',{name:'Read article →',exact:true}).click();
+  await page.getByRole('link',{name:'SE(2) article reader',exact:true}).click();
   await contentReady('#pa-reading-status');
   await page.waitForFunction(()=>document.getElementById('pa-reading-status')?.textContent.includes('Centered'));
   check((await page.locator('#pa-reading-status').textContent()).includes('Centered'),'Readable article should be default');
@@ -51,7 +52,7 @@ const check=(ok,message)=>{if(!ok)throw Error(message)};
   const packet=await page.request.get(origin+'/research/proof-atlas/compiled-term-checks.json');
   check(packet.status()===200,'Published audit packet missing');
   await page.locator('.atlas-navigation-help summary').press('Enter');
-  await page.locator('.atlas-navigation-help').getByRole('link',{name:'Browse Lean',exact:true}).click();
+  await page.locator('.atlas-navigation-main').getByRole('link',{name:'2. Explore proofs',exact:true}).click();
   await contentReady('#pl-edition');
   await page.waitForFunction(()=>document.querySelector('#pl-edition')?.options.length===7);
   check(await page.locator('#pl-edition').evaluate(select=>Array.from(select.options,o=>o.value).join(',')==='published-15,working-26,recursion-controls,goedel-sample-4331,source-reference-controls,closed-context-controls,context-module-controls'),'Project snapshots, recursion controls, AI-source sample, source-reference controls closed-context controls and checked-module controls must stay separately labelled');
@@ -65,7 +66,7 @@ const check=(ok,message)=>{if(!ok)throw Error(message)};
    for(const width of [1280,390]){
     await page.setViewportSize({width,height:900});
     await page.goto(origin+route,{waitUntil:'domcontentloaded'});
-    await contentReady({'/':'.hc','/lab/':'.hc--lab','/projects/':'.research-tool','/projects/proof-atlas/':'.research-hub-task'}[route]);
+    await contentReady({'/':'.hc','/lab/':'.hc--lab','/projects/':'.project-entry','/projects/proof-atlas/':'.atlas-overview-route'}[route]);
     check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2),'Horizontal overflow at '+route+' '+width);
     check(await page.locator('.katex-error').count()===0,'Math parse error at '+route);
     for(const theme of ['light','dark']){
@@ -81,6 +82,6 @@ const check=(ok,message)=>{if(!ok)throw Error(message)};
    }
   }
   check(!errors.length,'Browser errors: '+errors.join('; '));
-  console.log(JSON.stringify({status:'PASS',topics:6,tools:3,accessibilityAudits:audits,sharedExpressionRoute:true,compiledAuditPacket:true,readyContentIndependentOfPendingRequest:true,screenshots:shots}));
+  console.log(JSON.stringify({status:'PASS',topics:6,tools:3,software:1,orderedAtlasSteps:3,accessibilityAudits:audits,sharedExpressionRoute:true,compiledAuditPacket:true,readyContentIndependentOfPendingRequest:true,screenshots:shots}));
  }finally{await browser.close()}
 })().catch(e=>{console.error(e.stack);process.exit(1)});
