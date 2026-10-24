@@ -1,4 +1,4 @@
-# Recorded uses in the existing mixed reader
+# Recorded uses in source and mixed-interface readers
 
 Candidate integration; deployment is a separate check. Open the occurrence
 reader with `diagram=construction&group=interfaces`, then select **Recorded
@@ -79,3 +79,39 @@ These checks establish finite correspondence and application behavior. They
 add no native judgments, verified codec/renderer, general preservation theorem,
 semantic abstraction or measured human inspection benefit. The general program
 remains active; no blog result is claimed.
+
+
+## Ordinary source cuts
+
+In **Source occurrences**, **Recorded variable uses** opens the same optional
+panel for the current source cut. Each use belongs either to one retained
+`bvar` occurrence or one disjoint hidden frontier. A retained use highlights
+its existing lexical edge; it adds no duplicate arrow. A hidden use links its
+original region to a retained binder, an explicit original-context reference,
+or a labelled binder inside that hidden region. Reference labels contribute
+zero occurrences and do not change the cut's retained/hidden partition.
+
+Retained `lam`, `forallE` and `letE` binders can filter the list. These are source
+constructors; `forallE` is not reclassified as a proof introduction. Syntax
+counts are available only for the binders included in the existing count
+inventory. The source scene and its other nodes keep `typing: not-queried`.
+Each type button attaches only the use's selected direct or kernel-premise
+observation, preserving its recording owner. Alternate Meta observations remain
+outside this catalogue.
+
+Source, binder and recorded-type actions use the existing inspector. Changing
+source cuts, representations or declarations retires the panel and pending
+loads. Selecting an ordinary source card clears the reference selection. Both
+source loading modes use the same sparse catalogue; paged mode reads bounded
+source and type pages without loading complete archives. Unsupported profiles
+keep their source graph available and report the missing use inventory.
+
+The independent reference rule is `source-cuts.cjs`. Reproduce its comparison
+with `node scripts/test-proof-atlas-source-variable-uses.cjs`. The finite model
+checks 1,209 cuts across 51 profiles, all 170 indexed uses and 13,923 reference
+placements, including the 28 public uses outside mixed frames. The browser test
+`scripts/test-proof-atlas-source-variable-uses-browser.cjs` exercises all 152
+public uses, retained lexical-edge reuse, actual source/binder/type selections,
+failure recovery, stale controls and accessibility. `ATLAS_SOURCE_USES_FOCUSED=1`
+selects one Riccati profile and produces a separate `fullCorpus: false` report.
+A test description is not a passing result; inspect its emitted report.

@@ -31,6 +31,7 @@ on:
       - 'public/js/proof-atlas-deep-context.js'
       - 'public/js/proof-atlas-library-bytes.js'
       - 'public/js/proof-atlas-compact-type-view.js'
+      - 'scripts/test-proof-atlas-source-variable-uses*.cjs'
       - 'scripts/test-proof-atlas-occurrence-*.cjs'
       - 'public/data/proof-atlas/occurrence-constructions*'
       - 'public/data/proof-atlas/occurrence-constructions/**'
@@ -295,6 +296,7 @@ on:
       - 'public/js/proof-atlas-deep-context.js'
       - 'public/js/proof-atlas-library-bytes.js'
       - 'public/js/proof-atlas-compact-type-view.js'
+      - 'scripts/test-proof-atlas-source-variable-uses*.cjs'
       - 'scripts/test-proof-atlas-occurrence-*.cjs'
       - 'public/data/proof-atlas/occurrence-constructions*'
       - 'public/data/proof-atlas/occurrence-constructions/**'
@@ -575,6 +577,7 @@ jobs:
           node scripts/test-proof-atlas-local-definitions-browser.cjs
           node scripts/test-proof-atlas-mixed-interfaces-browser.cjs
           node scripts/test-proof-atlas-variable-uses-browser.cjs
+          node scripts/test-proof-atlas-source-variable-uses-browser.cjs
           node scripts/test-proof-atlas-type-pages-browser.cjs
           node scripts/test-proof-atlas-construction-pages-browser.cjs
           node scripts/test-proof-atlas-recorded-context-browser.cjs

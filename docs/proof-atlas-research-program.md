@@ -1024,3 +1024,27 @@ A separate reference model attaches existing typed variable observations to thei
 Finite checks cover 340 observations at 170 distinct source uses across 51 profiles, including 36 uses whose binders lack a current typed-interface record. The reference links compose with 909 mixed frames without changing source accounting. A separate syntax counter completes 296 of 303 binder counts within its state limit; seven remain unavailable. In 229 completed cases the syntax contains more uses than the recorded typing inventory, so those coverage measures remain distinct. The candidate reader attaches these references to its existing mixed interfaces through a sparse index, with separate source and native-type selections. Public delivery covers 152 uses and 304 observations across 26 extraction profiles; missing records remain missing. This adds no native judgments or semantic-necessity claim. The general program remains active.
 
 [Rule, bounds and reproduction](/research/proof-atlas/recorded-variable-uses/README.md) · [Candidate reader and checks](/research/proof-atlas/recorded-variable-uses/reader.md).
+
+
+## Recorded uses in ordinary source cuts
+
+The reference rule also applies to an ordinary source cut. A recorded variable
+use is either a retained source occurrence or lies in exactly one hidden
+frontier. Retained uses reuse their existing lexical edge; hidden-use references
+connect their original region to the exact binder or an explicit internal or
+external boundary. Each reference adds zero occurrences. Source `forallE`
+binders remain source type binders, without an invented proof-introduction role.
+The selected observation types only its original use; the cut remains untyped.
+
+The independent model comparison covers 1,209 cuts, 13,923 reference placements
+and all 170 indexed uses across 51 profiles. The public-browser audit reaches
+all 152 indexed uses across 26 extraction profiles, including the 28 outside
+mixed-interface frames. It checks 204 source cuts, existing lexical-edge reuse
+at all 152 retained uses, 309 source and binder selections, 308 native-type
+selections and three retained `forallE` binder cases. Complete-mode controls,
+optional failures, stale responses, keyboard access and four accessibility
+configurations are checked separately. These are finite correspondence results;
+there are no new native judgments, exhaustive typing or comprehension results.
+The existing catalogue still omits 141 separate alternate Meta observations.
+
+[Reference rule and reproduction](/research/proof-atlas/recorded-variable-uses/reader.md#ordinary-source-cuts) · [Independent source-cut checks](/scripts/test-proof-atlas-source-variable-uses.cjs) · [Browser audit](/scripts/test-proof-atlas-source-variable-uses-browser.cjs)
