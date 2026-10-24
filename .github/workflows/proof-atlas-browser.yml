@@ -3,6 +3,11 @@ on:
   push:
     branches: [master]
     paths:
+      - 'public/js/proof-atlas-syntax-counts.js'
+      - 'public/data/proof-atlas/syntax-count*'
+      - 'public/data/proof-atlas/syntax-count-pages/**'
+      - 'scripts/*proof-atlas-syntax-count*.cjs'
+      - 'research/proof-atlas/free-index-multiplicity/**'
       - 'public/js/proof-atlas-construction-pages.js'
       - 'public/js/proof-atlas-cursor-constructions.js'
       - 'public/js/proof-atlas-cursor-context-frame.js'
@@ -268,6 +273,11 @@ on:
       - '.github/workflows/proof-atlas-browser.yml'
   pull_request:
     paths:
+      - 'public/js/proof-atlas-syntax-counts.js'
+      - 'public/data/proof-atlas/syntax-count*'
+      - 'public/data/proof-atlas/syntax-count-pages/**'
+      - 'scripts/*proof-atlas-syntax-count*.cjs'
+      - 'research/proof-atlas/free-index-multiplicity/**'
       - 'public/js/proof-atlas-construction-pages.js'
       - 'public/js/proof-atlas-cursor-constructions.js'
       - 'public/js/proof-atlas-cursor-context-frame.js'
@@ -578,6 +588,7 @@ jobs:
           node scripts/test-proof-atlas-mixed-interfaces-browser.cjs
           node scripts/test-proof-atlas-variable-uses-browser.cjs
           node scripts/test-proof-atlas-source-variable-uses-browser.cjs
+          node scripts/test-proof-atlas-syntax-counts-browser.cjs
           node scripts/test-proof-atlas-type-pages-browser.cjs
           node scripts/test-proof-atlas-construction-pages-browser.cjs
           node scripts/test-proof-atlas-recorded-context-browser.cjs

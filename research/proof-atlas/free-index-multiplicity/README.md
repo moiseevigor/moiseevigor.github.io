@@ -1,6 +1,6 @@
 # Free-index multiplicity and source-cut refinement
 
-Local reference model; reader integration and deployment are separate work.
+Reference model and candidate reader integration; deployment is a separate gate.
 This package reads authenticated compiled expressions. It does not read original
 private mathematical source or run a new Lean compiler job.
 
@@ -112,9 +112,9 @@ original source packets and the frozen reader candidates remain unchanged.
 The source audit authenticates packet hashes and structural metadata. It does
 not prove the JavaScript implementation or a general Lean metatheorem. Large
 results have the separate 303-count scalar comparison; small-body enumeration
-covers only its stated subset. There is no new native judgment, public count
-transport, browser integration, semantic necessity or measured comprehension
-result.
+covers only its stated subset. These reference checks add no native judgment, semantic necessity or measured
+comprehension result. The separate candidate transport and reader checks are
+described in [reader.md](reader.md).
 
 ## Reproduction
 
@@ -134,7 +134,7 @@ The scalar comparison modifies only the verification copy's state cap in an
 isolated module; it records both code hashes and leaves `support.cjs` unchanged.
 No data is downloaded and no native Lean job is started.
 
-The aggregate checked snapshot is in `verification.json`. The candidate
-compiled-proof CI configuration registers all three scripts and their complete
-public-input reports. That registration is local; no GitHub run is claimed.
+The aggregate checked reference snapshot is in `verification.json`. The
+compiled-proof CI configuration registers these scripts and their complete
+public-input reports. Registration alone does not establish a passing run.
 A stored summary alone does not establish that a later implementation passes.
