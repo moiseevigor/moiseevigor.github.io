@@ -3,7 +3,7 @@
 
 {% include head.html %}
 
-<body class="layout-{{ page.layout | default: 'page' }}{% if page.page_class %} {{ page.page_class }}{% endif %}">
+<body class="layout-{{ page.layout | default: 'page' }}{% if page.page_class %} {{ page.page_class }}{% endif %}{% if page.url contains '/projects/proof-atlas/' or page.series == 'proof-atlas' %} proof-atlas-theme{% endif %}">
 
 <!-- ── Top navigation (shared by every page). The name is the home link. ── -->
 {%- assign in_lab = false -%}
@@ -22,10 +22,15 @@
   </button>
 </nav>
 
-{% if page.url contains '/projects/proof-atlas/' %}{% include proof-atlas-nav.html %}{% endif %}
+{% if page.url contains '/projects/proof-atlas/' or page.series == 'proof-atlas' %}{% include proof-atlas-nav.html %}{% endif %}
 
 <!-- ── Page content (each layout is responsible for its own d-header / d-article) ── -->
 {{ content }}
+
+{% if page.url contains '/projects/proof-atlas/' or page.series == 'proof-atlas' %}
+<link rel="stylesheet" href="/public/css/proof-atlas-theme.css?v=1">
+<script src="/public/js/proof-atlas-guide.js?v=1" defer></script>
+{% endif %}
 
 <!-- ── Footer: secondary navigation (archive, tags, feeds, profiles) ── -->
 <footer class="site-foot">

@@ -95,6 +95,9 @@
   <link rel="stylesheet" href="/public/css/syntax.css?v={{ css_v }}">
   <!-- theme.css last: type, colour tokens and the shared nav / footer / card system. -->
   <link rel="stylesheet" href="/public/css/theme.css?v={{ css_v }}">
+  {% if page.url contains '/projects/proof-atlas/' or page.series == 'proof-atlas' %}
+  <script src="/public/js/proof-atlas-drawing-theme.js?v=1" defer></script>
+  {% endif %}
 
   <!-- KaTeX math rendering — only on pages whose content actually contains
        math delimiters, so math-less pages (home, about, archives) don't pay

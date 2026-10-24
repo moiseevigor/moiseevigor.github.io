@@ -69,19 +69,19 @@
     cards.set(id,b);
   }
   const pi=[
-    {x:85,label:'CORE',fill:'#ddece6'}, {x:231,label:'GRAPH',fill:'#e3e7ef'},
-    {x:377,label:'MODULE',fill:'#e9e9db'}, {x:523,label:'IDEA',fill:'#f0e3d6'}
+    {x:85,label:'CORE',fill:'var(--fig-bg)'}, {x:231,label:'GRAPH',fill:'var(--fig-bg)'},
+    {x:377,label:'MODULE',fill:'var(--fig-bg)'}, {x:523,label:'IDEA',fill:'var(--fig-bg)'}
   ];
   function drawFlow(id){
     const svg=$('pa-scale-flow');svg.replaceChildren();
     for(let i=0;i<4;i++){
       let {x,label,fill}=pi[i];
-      svg.appendChild(svgNode('rect',{x:x-60,y:13,width:119,height:60,rx:8,fill,stroke:'#8da8a3','stroke-width':.8}));
-      svg.appendChild(svgNode('text',{x,y:36,'font-size':11,'font-weight':700,'text-anchor':'middle',fill:'#49716f'},label));
-      svg.appendChild(svgNode('text',{x,y:56,'font-size':13,'font-weight':650,'text-anchor':'middle',fill:'#183f4c'},i===0?id:i===1?'child links':i===2?'typed boundary':'explanation'));
+      svg.appendChild(svgNode('rect',{x:x-60,y:13,width:119,height:60,rx:8,fill,stroke:'var(--text-light)','stroke-width':.8}));
+      svg.appendChild(svgNode('text',{x,y:36,'font-size':11,'font-weight':700,'text-anchor':'middle',fill:'var(--text-light)'},label));
+      svg.appendChild(svgNode('text',{x,y:56,'font-size':13,'font-weight':650,'text-anchor':'middle',fill:'var(--text-light)'},i===0?id:i===1?'child links':i===2?'typed boundary':'explanation'));
       if(i<3){
-        svg.appendChild(svgNode('path',{d:'M'+(x+61)+' 43H'+(pi[i+1].x-64),stroke:'#588c88','stroke-width':1.6,fill:'none'}));
-        svg.appendChild(svgNode('path',{d:'M'+(pi[i+1].x-64)+' 43l-6 -4v8z',fill:'#588c88'}));
+        svg.appendChild(svgNode('path',{d:'M'+(x+61)+' 43H'+(pi[i+1].x-64),stroke:'var(--text-light)','stroke-width':1.6,fill:'none'}));
+        svg.appendChild(svgNode('path',{d:'M'+(pi[i+1].x-64)+' 43l-6 -4v8z',fill:'var(--text-light)'}));
       }
     }
   }
@@ -90,11 +90,11 @@
     const all=rawFields[id];
     const expr=all.filter(a=>a[1].includes('expression'));
     const other=all.filter(a=>!a[1].includes('expression'));
-    svg.appendChild(svgNode('rect',{x:208,y:20,width:146,height:42,rx:9,fill:'#194f5a'}));
-    svg.appendChild(svgNode('text',{x:281,y:46,'text-anchor':'middle','font-size':18,'font-weight':700,fill:'#fff'},id));
+    svg.appendChild(svgNode('rect',{x:208,y:20,width:146,height:42,rx:9,fill:'var(--accent)'}));
+    svg.appendChild(svgNode('text',{x:281,y:46,'text-anchor':'middle','font-size':18,'font-weight':700,fill:'var(--bg)'},id));
     const n=all.length;
     if(!n){
-      svg.appendChild(svgNode('text',{x:281,y:185,'text-anchor':'middle','font-size':14,fill:'#435e69'},'Atomic constructor'));
+      svg.appendChild(svgNode('text',{x:281,y:185,'text-anchor':'middle','font-size':14,fill:'var(--text-light)'},'Atomic constructor'));
       return;
     }
     for(let i=0;i<n;i++){
@@ -108,49 +108,49 @@
       const x=crowded?(280+(pos-(inRow-1)/2)*(inRow===3?164:174)):(50+(i+.5)*(462/n));
       const y=crowded?(row===0?142:201):155;
       const boxWidth=crowded?130:Math.min(144,462/n+26);
-      const solid=kind.includes('expression');const color=solid?'#237f7d':'#c19b5f';
+      const solid=kind.includes('expression');const color=solid?'var(--text-light)':'var(--text-light)';
       const sx=281,sy=62,cy=y-15;
       const kx=281+(x-281)*.45;
       svg.appendChild(svgNode('path',{d:'M'+sx+' '+sy+' C'+sx+' 92 '+kx+' 96 '+x+' '+cy,
         fill:'none',stroke:color,'stroke-width':solid?2:1.8,
         'stroke-dasharray':solid?'none':'5 4'}));
       svg.appendChild(svgNode('rect',{x:x-boxWidth/2,y:y-15,width:boxWidth,height:39,rx:7,
-        fill:solid?'#e3f3ee':'#f6ede2',stroke:color,'stroke-width':1.2}));
-      svg.appendChild(svgNode('text',{x,y:y+1,'text-anchor':'middle','font-size':crowded?11:13,fill:'#254956','font-weight':650},name.split(' : ')[0]));
-      svg.appendChild(svgNode('text',{x,y:y+17,'text-anchor':'middle','font-size':11,fill:'#405b62'},solid?(id==='app'?(name.startsWith('fn')?'Nat.succ':'Nat.zero'):'child Expr'):name.split(' : ')[1]));
+        fill:solid?'var(--fig-bg)':'var(--fig-bg)',stroke:color,'stroke-width':1.2}));
+      svg.appendChild(svgNode('text',{x,y:y+1,'text-anchor':'middle','font-size':crowded?11:13,fill:'var(--text-light)','font-weight':650},name.split(' : ')[0]));
+      svg.appendChild(svgNode('text',{x,y:y+17,'text-anchor':'middle','font-size':11,fill:'var(--text-light)'},solid?(id==='app'?(name.startsWith('fn')?'Nat.succ':'Nat.zero'):'child Expr'):name.split(' : ')[1]));
     }
-    svg.appendChild(svgNode('text',{x:280,y:248,'text-anchor':'middle','font-size':11.5,fill:'#405b62'},
+    svg.appendChild(svgNode('text',{x:280,y:248,'text-anchor':'middle','font-size':11.5,fill:'var(--text-light)'},
       expr.length+' Expr '+(expr.length===1?'child':'children')+' · '+other.length+' reference / annotation '+(other.length===1?'field':'fields')));
   }
   function drawModule(id){
     const svg=$('pa-scale-module');svg.replaceChildren();
     const open=id==='mvar'||id==='fvar';
-    svg.appendChild(svgNode('rect',{x:35,y:35,width:490,height:172,rx:11,fill:'#edf3ef',stroke:'#90aca2','stroke-width':1.3,'stroke-dasharray':'6 4'}));
-    svg.appendChild(svgNode('text',{x:60,y:65,fill:'#496e70','font-size':13,'font-weight':700},'LOCAL TYPING CONTEXT Γ'));
-    svg.appendChild(svgNode('rect',{x:164,y:100,width:240,height:51,rx:8,fill:'#1e5260'}));
-    svg.appendChild(svgNode('text',{x:284,y:130,'text-anchor':'middle',fill:'#fff','font-size':16,'font-weight':700},id));
-    svg.appendChild(svgNode('path',{d:'M86 124H163 M403 124H481',stroke:'#699b93','stroke-width':2,fill:'none'}));
-    svg.appendChild(svgNode('text',{x:92,y:112,'text-anchor':'middle',fill:'#47686c','font-size':12},'inputs'));
-    svg.appendChild(svgNode('text',{x:466,y:112,'text-anchor':'middle',fill:'#47686c','font-size':12},'result'));
-    svg.appendChild(svgNode('text',{x:280,y:187,'text-anchor':'middle',fill:open?'#996c3d':'#467b73','font-size':12},
+    svg.appendChild(svgNode('rect',{x:35,y:35,width:490,height:172,rx:11,fill:'var(--fig-bg)',stroke:'var(--text-light)','stroke-width':1.3,'stroke-dasharray':'6 4'}));
+    svg.appendChild(svgNode('text',{x:60,y:65,fill:'var(--text-light)','font-size':13,'font-weight':700},'LOCAL TYPING CONTEXT Γ'));
+    svg.appendChild(svgNode('rect',{x:164,y:100,width:240,height:51,rx:8,fill:'var(--accent)'}));
+    svg.appendChild(svgNode('text',{x:284,y:130,'text-anchor':'middle',fill:'var(--bg)','font-size':16,'font-weight':700},id));
+    svg.appendChild(svgNode('path',{d:'M86 124H163 M403 124H481',stroke:'var(--text-light)','stroke-width':2,fill:'none'}));
+    svg.appendChild(svgNode('text',{x:92,y:112,'text-anchor':'middle',fill:'var(--text-light)','font-size':12},'inputs'));
+    svg.appendChild(svgNode('text',{x:466,y:112,'text-anchor':'middle',fill:'var(--text-light)','font-size':12},'result'));
+    svg.appendChild(svgNode('text',{x:280,y:187,'text-anchor':'middle',fill:open?'var(--text-light)':'var(--text-light)','font-size':12},
       open?'Open / temporary elaboration state':'Type and environment obligations still apply'));
-    svg.appendChild(svgNode('text',{x:280,y:232,'text-anchor':'middle',fill:'#698286','font-size':12},
+    svg.appendChild(svgNode('text',{x:280,y:232,'text-anchor':'middle',fill:'var(--text-light)','font-size':12},
       'Collapsing must preserve the context, types and references'));
   }
   function drawMeaning(id){
     const svg=$('pa-scale-meaning-diagram');svg.replaceChildren();
     const title=defaultLabel[id]||id;
-    svg.appendChild(svgNode('rect',{x:31,y:35,width:205,height:85,rx:8,fill:'#e3f0e9',stroke:'#6d9992'}));
-    svg.appendChild(svgNode('text',{x:133,y:70,'text-anchor':'middle',fill:'#244f55','font-size':14,'font-weight':650},title));
-    svg.appendChild(svgNode('text',{x:133,y:93,'text-anchor':'middle',fill:'#547376','font-size':12},'constructor-level role'));
-    svg.appendChild(svgNode('path',{d:'M244 76H307',stroke:'#9e9980','stroke-width':2,'stroke-dasharray':'4 5'}));
-    svg.appendChild(svgNode('path',{d:'M304 72l7 4-7 4',fill:'none',stroke:'#9e9980','stroke-width':1.5}));
-    svg.appendChild(svgNode('rect',{x:320,y:35,width:213,height:85,rx:8,fill:'#f6ebdc',stroke:'#d1ac76'}));
-    svg.appendChild(svgNode('text',{x:426,y:68,'text-anchor':'middle',fill:'#725c3c','font-size':14,'font-weight':650},'Mathematical meaning'));
-    svg.appendChild(svgNode('text',{x:426,y:93,'text-anchor':'middle',fill:'#907653','font-size':12},'Needs full theorem context'));
-    svg.appendChild(svgNode('text',{x:280,y:157,'text-anchor':'middle',fill:'#55727a','font-size':13},
+    svg.appendChild(svgNode('rect',{x:31,y:35,width:205,height:85,rx:8,fill:'var(--fig-bg)',stroke:'var(--text-light)'}));
+    svg.appendChild(svgNode('text',{x:133,y:70,'text-anchor':'middle',fill:'var(--text-light)','font-size':14,'font-weight':650},title));
+    svg.appendChild(svgNode('text',{x:133,y:93,'text-anchor':'middle',fill:'var(--text-light)','font-size':12},'constructor-level role'));
+    svg.appendChild(svgNode('path',{d:'M244 76H307',stroke:'var(--text-light)','stroke-width':2,'stroke-dasharray':'4 5'}));
+    svg.appendChild(svgNode('path',{d:'M304 72l7 4-7 4',fill:'none',stroke:'var(--text-light)','stroke-width':1.5}));
+    svg.appendChild(svgNode('rect',{x:320,y:35,width:213,height:85,rx:8,fill:'var(--fig-bg)',stroke:'var(--text-light)'}));
+    svg.appendChild(svgNode('text',{x:426,y:68,'text-anchor':'middle',fill:'var(--text-light)','font-size':14,'font-weight':650},'Mathematical meaning'));
+    svg.appendChild(svgNode('text',{x:426,y:93,'text-anchor':'middle',fill:'var(--text-light)','font-size':12},'Needs full theorem context'));
+    svg.appendChild(svgNode('text',{x:280,y:157,'text-anchor':'middle',fill:'var(--text-light)','font-size':13},
       'A single expression tag never identifies a proof strategy'));
-    svg.appendChild(svgNode('text',{x:280,y:180,'text-anchor':'middle',fill:'#55727a','font-size':13},
+    svg.appendChild(svgNode('text',{x:280,y:180,'text-anchor':'middle',fill:'var(--text-light)','font-size':13},
       'or establishes theorem validity by itself.'));
   }
   const allCounts={};let total=0;

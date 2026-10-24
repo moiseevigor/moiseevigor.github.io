@@ -155,9 +155,11 @@ async function run(){
     // Independently load the illustrated kernel grammar reference.
     const gallery=await browser.newPage({viewport:{width:1320,height:920}});
     gallery.on('pageerror',e=>errors.push(e.message));
-    await gallery.goto('http://127.0.0.1:8833/projects/proof-atlas/language/index.html',{waitUntil:'networkidle'});
+    await gallery.goto(new URL('/projects/proof-atlas/language/index.html',base).href,{waitUntil:'networkidle'});
     check(await gallery.locator('.pa-language-card').count()===12,'standalone grammar missing some constructors');
-    check(await gallery.locator('.pa-language-card svg').count()===12,'standalone grammar lacks visual diagrams');
+    check(await gallery.locator('.pa-language-card .pa-field-diagram').count()===12,'standalone grammar lacks field diagrams');
+    check(await gallery.locator('.pa-field-diagram [data-field]').count()===27,'standalone grammar omits semantic fields');
+    check(await gallery.locator('#lean-expression-letE [data-relation=expr]').count()===3,'letE must retain type, value and body');
     await gallery.locator('[data-filter="observed"]').click();
     check(await gallery.locator('.pa-language-card').count()===6,'observed-set filter should show six constructors');
     await gallery.locator('[data-filter="all"]').click();

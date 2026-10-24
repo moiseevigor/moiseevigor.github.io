@@ -1,5 +1,6 @@
 ---
 layout: default
+math: true
 title: "Proof Atlas geometric syntax: visual manual"
 permalink: /projects/proof-atlas/manual/
 description: "A visual manual for occurrence paths, ordered ports, lexical scope, folds, typing rules and evidence boundaries in Proof Atlas."
@@ -8,7 +9,7 @@ description: "A visual manual for occurrence paths, ordered ports, lexical scope
 <main class="pa-manual" id="geometric-manual">
   <header>
     <p><a href="/projects/proof-atlas/">Proof Atlas</a> / Visual manual · notation revision 1</p>
-    <h1>Reading the geometry<br>of a Lean proof</h1>
+    <h1>Reading the geometry of a Lean proof</h1>
     <p>The drawing starts from an expression occurrence, its ordered fields and its binding context. Larger figures compose these objects into applications, introductions and local definitions. This manual explains what each connection means, what folding preserves, and where the language remains incomplete.</p>
     <p class="pm-caption">The interactive examples below are authored structural controls. They use the production scene model, but have no native typing certificate. Links to recorded compiled proofs are provided separately.</p>
     <nav aria-label="Manual contents"><a href="#connections">Connections</a><a href="#scope-lab">Scope and scale</a><a href="#constructors">12 constructors</a><a href="#composition">Composition</a><a href="#judgments">Checked rules</a><a href="#universes">Universes</a><a href="#assessment">Assessment</a><a href="#practice">Compiled examples</a></nav>
@@ -55,42 +56,22 @@ computed identity = evidence/derivation hash + namespace + computed route</code>
   <section id="composition" aria-labelledby="composition-title">
     <h2 id="composition-title">4. Composition without losing the term</h2>
     <div class="pm-rule-grid">
-      <article><h3>Ordered binder telescope Tₙ</h3><pre><code>λ x₁ : A₁, … λ xₙ : Aₙ, t
-             ↓ fold
-Tₙ [x₁ : A₁, …, xₙ : Aₙ] → t</code></pre><p>Retain each binder's original route, kind, visibility and header regions. Headers use the context before their binder; the continuation sees the extended context. The same rule can retain mixed <code>lam</code>, <code>forallE</code> and <code>letE</code> prefixes. A folded <code>forallE</code> remains a type binder.</p></article>
-      <article><h3>Application spine @ₙ</h3><pre><code>(((h a₁) a₂) … aₙ)
-             ↓ group
-@ₙ (head: h; arg1: a₁, …, argN: aₙ)</code></pre><p>Keep all original application occurrences and arguments in order. <code>head</code> and <code>argN</code> are abstract ports. Grouping performs no substitution, hides no implicit argument and proves no saturation or logical inference. A capped spine explicitly retains the remaining function region.</p></article>
-      <article><h3>Exact cut and frontier</h3><pre><code>retained occurrences
-  + disjoint hidden region sizes
-  = selected subtree size</code></pre><p>A large count is stored exactly. Expanding a frontier refines one region while preserving the selected root and its scope interface. Counts measure syntax occurrences, not proof difficulty, premise necessity or time to understand a proof.</p></article>
-      <article><h3>Shared terms, separate occurrences</h3><pre><code>same stored eₖ
-  route r₁ / context Γ₁
-  route r₂ / context Γ₂</code></pre><p>Storage sharing does not merge lexical meaning. A source reference or context module keeps its own provenance and explicit original-use mapping. Computed substitution must avoid capture; descendants do not inherit a new native judgment.</p></article>
+      <article><h3>Ordered binder telescope Tₙ</h3><div class="pm-math" role="region" tabindex="0" aria-label="Schematic notation 1">$$\begin{gathered}\underbrace{\lambda (x_1:A_1)\ldots\lambda(x_n:A_n),\,t}_{n\text{ retained binders}}\\\longmapsto\quad T_n\,[x_1:A_1,\ldots,x_n:A_n]\ ;\ t\end{gathered}$$</div><p>Retain each binder's original route, kind, visibility and header regions. Headers use the context before their binder; the continuation sees the extended context. The same rule can retain mixed <code>lam</code>, <code>forallE</code> and <code>letE</code> prefixes. A folded <code>forallE</code> remains a type binder.</p></article>
+      <article><h3>Application spine @ₙ</h3><div class="pm-math" role="region" tabindex="0" aria-label="Schematic notation 2">$$\begin{gathered}(((h\,a_1)\,a_2)\ldots a_n)\\\longmapsto\quad\mathbin{@}_n(h; a_1,\ldots,a_n)\end{gathered}$$</div><p>Keep all original application occurrences and arguments in order. <code>head</code> and <code>argN</code> are abstract ports. Grouping performs no substitution, hides no implicit argument and proves no saturation or logical inference. A capped spine explicitly retains the remaining function region.</p></article>
+      <article><h3>Exact cut and frontier</h3><div class="pm-math" role="region" tabindex="0" aria-label="Schematic notation 3">$$N_{\mathrm{retained}}+\sum_{R\in\mathcal F}|R|=|t|$$</div><p>A large count is stored exactly. Expanding a frontier refines one region while preserving the selected root and its scope interface. Counts measure syntax occurrences, not proof difficulty, premise necessity or time to understand a proof.</p></article>
+      <article><h3>Shared terms, separate occurrences</h3><div class="pm-math" role="region" tabindex="0" aria-label="Schematic notation 4">$$\begin{gathered}e_k\text{ at }r_1\text{ in }\Gamma_1\\ e_k\text{ at }r_2\text{ in }\Gamma_2\end{gathered}$$</div><p>Storage sharing does not merge lexical meaning. A source reference or context module keeps its own provenance and explicit original-use mapping. Computed substitution must avoid capture; descendants do not inherit a new native judgment.</p></article>
     </div>
     <p>Syntax-use counts and native recorded-use counts answer different questions. The first counts occurrences in the complete stored body. The second counts the finite native observations retained in an evidence package. A syntactically unused binder is not a proof that an assumption is mathematically unnecessary.</p>
   </section>
 
   <section id="judgments" aria-labelledby="judgments-title">
     <h2 id="judgments-title">5. From syntax to a checked construction</h2>
-    <p>Read <code>Γ ⊢ t : A</code> as “in context Γ, term t has type A”. The schemata below explain the notation; each concrete viewer instance needs a matching recorded judgment. <code>≡</code> denotes definitional conversion, distinct from structural identity and a proof of equality.</p>
+    <p>Read \(\Gamma\vdash t:A\) as “in context Γ, term t has type A”. The schemata below explain the notation; each concrete viewer instance needs a matching recorded judgment. \(\equiv\) denotes definitional conversion, distinct from structural identity and a proof of equality.</p>
     <div class="pm-rule-grid">
-      <article><h3>Π application</h3><pre><code>Γ ⊢ f : τ      τ ≡ Π (x : A), B
-Γ ⊢ a : A′     A′ ≡ A
-──────────────────────────────
-Γ ⊢ f a : τ′   τ′ ≡ B[a/x]</code></pre><p>The argument type is compared with the expected domain; the result is instantiated in order. Proof/type/value roles come from recorded type information. A proof argument may become a premise, while a value argument remains a parameter.</p></article>
-      <article><h3>Lambda introduction</h3><pre><code>Γ ⊢ A : Sort u
-Γ, x : A ⊢ t : B
-──────────────────────────────
-Γ ⊢ (fun x : A => t) : Π x : A, B</code></pre><p>The domain is outside x's scope; the body is inside. The interface discharges x at the conclusion. It is an implication introduction only in the appropriate propositional case.</p></article>
-      <article><h3>Local definition</h3><pre><code>Γ ⊢ A : Sort u    Γ ⊢ v : A
-Γ, x : A := v ⊢ t : B
-──────────────────────────────
-Γ ⊢ (let x : A := v; t) : B[v/x]</code></pre><p>The type and value precede the binder. The body sees both its type and value. Native records may expose separate type-conversion and computed substitution views; their roots and evidence remain distinct from source routes.</p></article>
-      <article><h3>Elimination and recursive premises</h3><pre><code>parameters · motive · branch methods
-indices · major premise
-──────────────────────────────
-recursor application : instantiated motive</code></pre><p>A recursor needs its actual signature, constructor fields and branch contexts. This is an interface sketch, not a universal recursor typing rule. Recorded cases and recursive premises have dedicated views; arbitrary recursors and every tactic strategy are not covered by a complete automatic interpretation.</p></article>
+      <article><h3>Π application</h3><div class="pm-math" role="region" tabindex="0" aria-label="Schematic notation 5">$$\frac{\begin{gathered}\Gamma\vdash f:\tau\quad\tau\equiv\Pi(x:A),B\\ \Gamma\vdash a:A'\quad A'\equiv A\end{gathered}}{\Gamma\vdash f\,a:\tau'\quad\tau'\equiv B[a/x]}$$</div><p>The argument type is compared with the expected domain; the result is instantiated in order. Proof/type/value roles come from recorded type information. A proof argument may become a premise, while a value argument remains a parameter.</p></article>
+      <article><h3>Lambda introduction</h3><div class="pm-math" role="region" tabindex="0" aria-label="Schematic notation 6">$$\frac{\Gamma\vdash A:\operatorname{Sort}u\qquad\Gamma,x:A\vdash t:B}{\Gamma\vdash(\lambda(x:A),t):\Pi(x:A),B}$$</div><p>The domain is outside x's scope; the body is inside. The interface discharges x at the conclusion. It is an implication introduction only in the appropriate propositional case.</p></article>
+      <article><h3>Local definition</h3><div class="pm-math" role="region" tabindex="0" aria-label="Schematic notation 7">$$\frac{\begin{gathered}\Gamma\vdash A:\operatorname{Sort}u\quad\Gamma\vdash v:A\\ \Gamma,x:A:=v\vdash t:B\end{gathered}}{\Gamma\vdash(\mathbf{let}\ x:A:=v;\ t):B[v/x]}$$</div><p>The type and value precede the binder. The body sees both its type and value. Native records may expose separate type-conversion and computed substitution views; their roots and evidence remain distinct from source routes.</p></article>
+      <article><h3>Elimination and recursive premises</h3><div class="pm-math" role="region" tabindex="0" aria-label="Schematic notation 8">$$\frac{\begin{gathered}\text{parameters, motive, branch methods}\\\text{indices, major premise}\end{gathered}}{\text{recursor application}:\text{instantiated motive}}$$</div><p>A recursor needs its actual signature, constructor fields and branch contexts. This is an interface sketch, not a universal recursor typing rule. Recorded cases and recursive premises have dedicated views; arbitrary recursors and every tactic strategy are not covered by a complete automatic interpretation.</p></article>
     </div>
     <p>A native extraction record ties a finite judgment to a specific environment, packet and context. The browser validates that identity; it does not run Lean. An article correspondence is a separate reviewed relation and is not implied by a typing rule.</p>
   </section>
@@ -103,7 +84,7 @@ Level.max u v       maximum of u and v
 Level.imax u v      0 when v = 0; otherwise max u v
 Level.param n       named universe parameter
 Level.mvar id       unresolved universe metavariable</code></pre>
-    <p>Universe edges form a separate level graph attached to <code>sort</code> and <code>const</code>. They are not term-child ports or de Bruijn binder links. <code>Prop = Sort 0</code> and <code>Type u = Sort (u + 1)</code>. See the <a href="https://github.com/leanprover/lean4/blob/v4.33.1/src/Lean/Level.lean">pinned level definition</a> and <a href="/projects/proof-atlas/grammar/">layered Lean reference</a>.</p>
+    <p>Universe edges form a separate level graph attached to <code>sort</code> and <code>const</code>. They are not term-child ports or de Bruijn binder links. \(\operatorname{Prop}=\operatorname{Sort}0\) and \(\operatorname{Type}u=\operatorname{Sort}(u+1)\). See the <a href="https://github.com/leanprover/lean4/blob/v4.33.1/src/Lean/Level.lean">pinned level definition</a> and <a href="/projects/proof-atlas/grammar/">layered Lean reference</a>.</p>
     <div class="pm-table-scroll" tabindex="0" role="region" aria-label="Lean layers and representation coverage"><table><thead><tr><th>Layer</th><th>Examples</th><th>What the geometry can recover</th></tr></thead><tbody>
       <tr><td>Kernel expressions</td><td>All 12 forms above</td><td>Ordered structure, payloads, exact occurrence routes and lexical scope.</td></tr>
       <tr><td>Surface terms</td><td>Notation, <code>fun</code>, <code>match</code>, <code>do</code>, coercions</td><td>The elaborated expression, when exported. Original spelling and desugaring history need source maps.</td></tr>
