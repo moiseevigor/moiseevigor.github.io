@@ -63,7 +63,7 @@
    try{
     if(!window.PROOF_ATLAS_ELIMINATIONS)await script('/public/data/proof-atlas/eliminations-manifest.js?v=1');
     if(!window.ProofAtlasRecursiveInputs)await script('/public/js/proof-atlas-recursive-inputs.js?v=3');
-    if(!window.ProofAtlasElimination)await script('/public/js/proof-atlas-elimination.js?v=4');
+    if(!window.ProofAtlasElimination)await script('/public/js/proof-atlas-elimination.js?v=5');
    }catch(_){/* Optional elimination evidence must not block the original reader. */}
    try{if(!window.PROOF_ATLAS_PROJECTIONS)await script('/public/data/proof-atlas/projections-manifest.js?v=1');}catch(_){/* Optional projection evidence leaves the source graph available. */}
    try{if(!window.ProofAtlasBindingUses&&window.ProofAtlasRecursiveInputs)await script('/public/js/proof-atlas-binding-uses.js?v=1');}catch(_){/* Optional reference counts do not block the source reader. */}
@@ -76,7 +76,7 @@
    try{if(!window.PROOF_ATLAS_PROJECTED_CONTEXT_MODULES)await script('/public/data/proof-atlas/projected-context-modules-manifest.js?v=1');}catch(_){/* Optional reduced contexts preserve the existing full-context reader. */}
    try{if(!window.PROOF_ATLAS_REDUCED_REPLAY)await script('/public/data/proof-atlas/reduced-replay-manifest.js?v=1');}catch(_){/* Existing recorded contexts remain available. */}
    try{if(!window.PROOF_ATLAS_COMPILED_REPLAY)await script('/public/data/proof-atlas/compiled-replay-manifest.js?v=1');}catch(_){/* Optional replay metadata leaves the compiled reader available. */}
-   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=76');
+   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=77');
    if(!$('pl-provenance').closest('details')){const details=document.createElement('details'),summary=document.createElement('summary');summary.textContent='Provenance and axiom dependencies';$('pl-provenance').before(details);details.append(summary,$('pl-provenance'));}
    return window.ProofAtlasLibrary;
   })().catch(e=>{engine=null;throw e;});return engine;

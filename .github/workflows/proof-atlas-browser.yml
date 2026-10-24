@@ -627,7 +627,9 @@ jobs:
           node scripts/test-proof-atlas-beta-reductions-browser.cjs
           node scripts/test-proof-atlas-beta-captions-browser.cjs
           node scripts/test-proof-atlas-elimination.cjs
+          node scripts/test-proof-atlas-elimination-composition.cjs
           node scripts/test-proof-atlas-elimination-browser.cjs
+          node scripts/test-proof-atlas-elimination-composition-browser.cjs
           node scripts/test-proof-atlas-recursive-inputs.cjs
           node scripts/test-proof-atlas-recursion-examples.cjs
           node scripts/test-proof-atlas-recursive-inputs-browser.cjs

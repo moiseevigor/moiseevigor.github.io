@@ -1,0 +1,1053 @@
+{
+  "status": "PASS",
+  "format": "ProofAtlasCaseCompositionAudit/1",
+  "implementationSha256": "491d6a498e64d376618700d9463028be39a4832e597d7764ce66f566d9259926",
+  "checkerSha256": "6d2d29d3d6848005d3646feac48a656e901b5df4442d64a0c4e9e5c576f30eaf",
+  "completeQueryStarts": 29,
+  "caseCuts": 232,
+  "budgetRefinements": 203,
+  "checkedContinuationJoins": 165,
+  "checkedInputFrames": 890,
+  "repeatedSharedNodePositions": 103,
+  "negativeControls": 298,
+  "separateTypeTablesPreserveJudgments": true,
+  "riccatiComparison": {
+    "individual": {
+      "displayedRegions": 13,
+      "recursorRecords": 3
+    },
+    "contextFrames": {
+      "displayedRegions": 13,
+      "recursorRecords": 7
+    },
+    "caseComposition": {
+      "recursorCells": 7,
+      "terminalBodies": 2
+    }
+  },
+  "rows": [
+    {
+      "edition": "published-15",
+      "name": "CrossingData.crossing",
+      "indexSha256": "b1f3867250131bf76d40e9dca395e29595ccf8d4bb49c8e075ba40213b33057a",
+      "sourceSha256": "7dd17803a0e009403754f5111460dcf722a76922391774f4ea4726ed0ee7af31",
+      "nativeEvidenceSha256": "ae3f49692fe9d6e4067967c91d9a99f4730cd9b00a9cdd528308704ea3a193d5",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 5,
+        "branches": 5,
+        "inputBinders": 10,
+        "retainedOccurrences": "35",
+        "hiddenOccurrences": "7046",
+        "representedOccurrences": "7081"
+      },
+      "joins": 4
+    },
+    {
+      "edition": "published-15",
+      "name": "CrossingData.crossing",
+      "indexSha256": "b1f3867250131bf76d40e9dca395e29595ccf8d4bb49c8e075ba40213b33057a",
+      "sourceSha256": "7dd17803a0e009403754f5111460dcf722a76922391774f4ea4726ed0ee7af31",
+      "nativeEvidenceSha256": "ae3f49692fe9d6e4067967c91d9a99f4730cd9b00a9cdd528308704ea3a193d5",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 4,
+        "branches": 4,
+        "inputBinders": 8,
+        "retainedOccurrences": "28",
+        "hiddenOccurrences": "6251",
+        "representedOccurrences": "6279"
+      },
+      "joins": 3
+    },
+    {
+      "edition": "published-15",
+      "name": "CrossingData.crossing",
+      "indexSha256": "b1f3867250131bf76d40e9dca395e29595ccf8d4bb49c8e075ba40213b33057a",
+      "sourceSha256": "7dd17803a0e009403754f5111460dcf722a76922391774f4ea4726ed0ee7af31",
+      "nativeEvidenceSha256": "ae3f49692fe9d6e4067967c91d9a99f4730cd9b00a9cdd528308704ea3a193d5",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 1,
+        "branches": 1,
+        "inputBinders": 2,
+        "retainedOccurrences": "7",
+        "hiddenOccurrences": "364",
+        "representedOccurrences": "371"
+      },
+      "joins": 0
+    },
+    {
+      "edition": "published-15",
+      "name": "CrossingData.crossing",
+      "indexSha256": "b1f3867250131bf76d40e9dca395e29595ccf8d4bb49c8e075ba40213b33057a",
+      "sourceSha256": "7dd17803a0e009403754f5111460dcf722a76922391774f4ea4726ed0ee7af31",
+      "nativeEvidenceSha256": "ae3f49692fe9d6e4067967c91d9a99f4730cd9b00a9cdd528308704ea3a193d5",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 2,
+        "branches": 2,
+        "inputBinders": 4,
+        "retainedOccurrences": "14",
+        "hiddenOccurrences": "839",
+        "representedOccurrences": "853"
+      },
+      "joins": 1
+    },
+    {
+      "edition": "published-15",
+      "name": "CrossingData.crossing",
+      "indexSha256": "b1f3867250131bf76d40e9dca395e29595ccf8d4bb49c8e075ba40213b33057a",
+      "sourceSha256": "7dd17803a0e009403754f5111460dcf722a76922391774f4ea4726ed0ee7af31",
+      "nativeEvidenceSha256": "ae3f49692fe9d6e4067967c91d9a99f4730cd9b00a9cdd528308704ea3a193d5",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 3,
+        "branches": 3,
+        "inputBinders": 6,
+        "retainedOccurrences": "21",
+        "hiddenOccurrences": "1330",
+        "representedOccurrences": "1351"
+      },
+      "joins": 2
+    },
+    {
+      "edition": "published-15",
+      "name": "CrossingData.crossing",
+      "indexSha256": "b1f3867250131bf76d40e9dca395e29595ccf8d4bb49c8e075ba40213b33057a",
+      "sourceSha256": "7dd17803a0e009403754f5111460dcf722a76922391774f4ea4726ed0ee7af31",
+      "nativeEvidenceSha256": "ae3f49692fe9d6e4067967c91d9a99f4730cd9b00a9cdd528308704ea3a193d5",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 4,
+        "branches": 4,
+        "inputBinders": 8,
+        "retainedOccurrences": "28",
+        "hiddenOccurrences": "1913",
+        "representedOccurrences": "1941"
+      },
+      "joins": 3
+    },
+    {
+      "edition": "published-15",
+      "name": "CrossingData.crossing",
+      "indexSha256": "b1f3867250131bf76d40e9dca395e29595ccf8d4bb49c8e075ba40213b33057a",
+      "sourceSha256": "7dd17803a0e009403754f5111460dcf722a76922391774f4ea4726ed0ee7af31",
+      "nativeEvidenceSha256": "ae3f49692fe9d6e4067967c91d9a99f4730cd9b00a9cdd528308704ea3a193d5",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 1,
+        "branches": 1,
+        "inputBinders": 2,
+        "retainedOccurrences": "7",
+        "hiddenOccurrences": "4126",
+        "representedOccurrences": "4133"
+      },
+      "joins": 0
+    },
+    {
+      "edition": "published-15",
+      "name": "CrossingData.crossing",
+      "indexSha256": "b1f3867250131bf76d40e9dca395e29595ccf8d4bb49c8e075ba40213b33057a",
+      "sourceSha256": "7dd17803a0e009403754f5111460dcf722a76922391774f4ea4726ed0ee7af31",
+      "nativeEvidenceSha256": "ae3f49692fe9d6e4067967c91d9a99f4730cd9b00a9cdd528308704ea3a193d5",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 2,
+        "branches": 2,
+        "inputBinders": 4,
+        "retainedOccurrences": "14",
+        "hiddenOccurrences": "4793",
+        "representedOccurrences": "4807"
+      },
+      "joins": 1
+    },
+    {
+      "edition": "published-15",
+      "name": "CrossingData.crossing",
+      "indexSha256": "b1f3867250131bf76d40e9dca395e29595ccf8d4bb49c8e075ba40213b33057a",
+      "sourceSha256": "7dd17803a0e009403754f5111460dcf722a76922391774f4ea4726ed0ee7af31",
+      "nativeEvidenceSha256": "ae3f49692fe9d6e4067967c91d9a99f4730cd9b00a9cdd528308704ea3a193d5",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 3,
+        "branches": 3,
+        "inputBinders": 6,
+        "retainedOccurrences": "21",
+        "hiddenOccurrences": "5476",
+        "representedOccurrences": "5497"
+      },
+      "joins": 2
+    },
+    {
+      "edition": "published-15",
+      "name": "JacobiData.slope_bound_abs",
+      "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+      "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+      "nativeEvidenceSha256": "7abc46d6d0199ab0166bdb2e3519e0eff8eed87c1d27491bad044e5ce5d7a83e",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 7,
+        "branches": 8,
+        "inputBinders": 14,
+        "retainedOccurrences": "50",
+        "hiddenOccurrences": "55365",
+        "representedOccurrences": "55415"
+      },
+      "joins": 6
+    },
+    {
+      "edition": "published-15",
+      "name": "JacobiData.slope_bound_abs",
+      "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+      "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+      "nativeEvidenceSha256": "7abc46d6d0199ab0166bdb2e3519e0eff8eed87c1d27491bad044e5ce5d7a83e",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 1,
+        "branches": 1,
+        "inputBinders": 2,
+        "retainedOccurrences": "7",
+        "hiddenOccurrences": "19572",
+        "representedOccurrences": "19579"
+      },
+      "joins": 0
+    },
+    {
+      "edition": "published-15",
+      "name": "JacobiData.slope_bound_abs",
+      "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+      "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+      "nativeEvidenceSha256": "7abc46d6d0199ab0166bdb2e3519e0eff8eed87c1d27491bad044e5ce5d7a83e",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 2,
+        "branches": 2,
+        "inputBinders": 4,
+        "retainedOccurrences": "14",
+        "hiddenOccurrences": "19873",
+        "representedOccurrences": "19887"
+      },
+      "joins": 1
+    },
+    {
+      "edition": "published-15",
+      "name": "JacobiData.slope_bound_abs",
+      "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+      "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+      "nativeEvidenceSha256": "7abc46d6d0199ab0166bdb2e3519e0eff8eed87c1d27491bad044e5ce5d7a83e",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 3,
+        "branches": 3,
+        "inputBinders": 6,
+        "retainedOccurrences": "21",
+        "hiddenOccurrences": "20252",
+        "representedOccurrences": "20273"
+      },
+      "joins": 2
+    },
+    {
+      "edition": "published-15",
+      "name": "JacobiData.slope_bound_abs",
+      "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+      "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+      "nativeEvidenceSha256": "7abc46d6d0199ab0166bdb2e3519e0eff8eed87c1d27491bad044e5ce5d7a83e",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 1,
+        "branches": 1,
+        "inputBinders": 2,
+        "retainedOccurrences": "7",
+        "hiddenOccurrences": "33730",
+        "representedOccurrences": "33737"
+      },
+      "joins": 0
+    },
+    {
+      "edition": "published-15",
+      "name": "JacobiData.slope_bound_abs",
+      "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+      "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+      "nativeEvidenceSha256": "7abc46d6d0199ab0166bdb2e3519e0eff8eed87c1d27491bad044e5ce5d7a83e",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 2,
+        "branches": 2,
+        "inputBinders": 4,
+        "retainedOccurrences": "14",
+        "hiddenOccurrences": "34031",
+        "representedOccurrences": "34045"
+      },
+      "joins": 1
+    },
+    {
+      "edition": "published-15",
+      "name": "JacobiData.slope_bound_abs",
+      "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+      "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+      "nativeEvidenceSha256": "7abc46d6d0199ab0166bdb2e3519e0eff8eed87c1d27491bad044e5ce5d7a83e",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 3,
+        "branches": 3,
+        "inputBinders": 6,
+        "retainedOccurrences": "21",
+        "hiddenOccurrences": "34410",
+        "representedOccurrences": "34431"
+      },
+      "joins": 2
+    },
+    {
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.fan_holds",
+      "indexSha256": "2040eb9cf64dc81af995f034e42db0b252f6a309c8714b413dd2282b87f3f238",
+      "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+      "nativeEvidenceSha256": "43169e9bb128cf7663197bb8632f1220b82411234d16cc3028d23bb086a746b1",
+      "route": {
+        "root": 1,
+        "slots": [
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 1,
+        "branches": 2,
+        "inputBinders": 2,
+        "retainedOccurrences": "6",
+        "hiddenOccurrences": "23",
+        "representedOccurrences": "29"
+      },
+      "joins": 0
+    },
+    {
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.fork_holds",
+      "indexSha256": "c66d2df9daeb72b79edd55509d40a4c1161f4dd926505b6e73e83fb5fcb10eca",
+      "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+      "nativeEvidenceSha256": "b7e190dbc620e367b54ce90bbaba0a5ddb0b88ce94e9b08e47a2fc96f81fb4db",
+      "route": {
+        "root": 1,
+        "slots": [
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 1,
+        "branches": 2,
+        "inputBinders": 4,
+        "retainedOccurrences": "8",
+        "hiddenOccurrences": "69",
+        "representedOccurrences": "77"
+      },
+      "joins": 0
+    },
+    {
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.fork_holds",
+      "indexSha256": "c66d2df9daeb72b79edd55509d40a4c1161f4dd926505b6e73e83fb5fcb10eca",
+      "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+      "nativeEvidenceSha256": "b7e190dbc620e367b54ce90bbaba0a5ddb0b88ce94e9b08e47a2fc96f81fb4db",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 1,
+        "branches": 2,
+        "inputBinders": 4,
+        "retainedOccurrences": "8",
+        "hiddenOccurrences": "15",
+        "representedOccurrences": "23"
+      },
+      "joins": 0
+    },
+    {
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.fork_holds",
+      "indexSha256": "c66d2df9daeb72b79edd55509d40a4c1161f4dd926505b6e73e83fb5fcb10eca",
+      "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+      "nativeEvidenceSha256": "b7e190dbc620e367b54ce90bbaba0a5ddb0b88ce94e9b08e47a2fc96f81fb4db",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 1,
+        "branches": 2,
+        "inputBinders": 4,
+        "retainedOccurrences": "8",
+        "hiddenOccurrences": "15",
+        "representedOccurrences": "23"
+      },
+      "joins": 0
+    },
+    {
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.ignored_premise",
+      "indexSha256": "ed5c5380f2e9300694f3bea8363f40a1989db506b3475ebd1b73669979d296f0",
+      "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+      "nativeEvidenceSha256": "ba2b46e13af8a6a8f6d536e4ef35e05c971c2695327f09f99ac102c46cfe2a5f",
+      "route": {
+        "root": 1,
+        "slots": [
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 1,
+        "branches": 2,
+        "inputBinders": 2,
+        "retainedOccurrences": "6",
+        "hiddenOccurrences": "25",
+        "representedOccurrences": "31"
+      },
+      "joins": 0
+    },
+    {
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.list_copy_eq",
+      "indexSha256": "97ee0e28cbe3e288952e262edb215dc953933e2b9b45f6d736471abff9266653",
+      "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+      "nativeEvidenceSha256": "37b105e5350502850030e7cc45fb5a3da3afc8a50cb9c0b6a12a6ed9ff65ede2",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 1,
+        "branches": 2,
+        "inputBinders": 3,
+        "retainedOccurrences": "8",
+        "hiddenOccurrences": "101",
+        "representedOccurrences": "109"
+      },
+      "joins": 0
+    },
+    {
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.list_copy_eq",
+      "indexSha256": "97ee0e28cbe3e288952e262edb215dc953933e2b9b45f6d736471abff9266653",
+      "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+      "nativeEvidenceSha256": "37b105e5350502850030e7cc45fb5a3da3afc8a50cb9c0b6a12a6ed9ff65ede2",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 1,
+        "branches": 2,
+        "inputBinders": 3,
+        "retainedOccurrences": "8",
+        "hiddenOccurrences": "27",
+        "representedOccurrences": "35"
+      },
+      "joins": 0
+    },
+    {
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.nat_self",
+      "indexSha256": "d64ca32b7c3ab5022b1d861e835bc98804c26da94e880ba57a5159ee8ec6f079",
+      "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+      "nativeEvidenceSha256": "6e20437c2fb0c4f2e1486bf242b5ab91d5e771047b15958d2abde6ed2f562282",
+      "route": {
+        "root": 1,
+        "slots": [
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 1,
+        "branches": 2,
+        "inputBinders": 2,
+        "retainedOccurrences": "6",
+        "hiddenOccurrences": "45",
+        "representedOccurrences": "51"
+      },
+      "joins": 0
+    },
+    {
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.shared_induction_24",
+      "indexSha256": "15adae1388b989e66284b8faeb8b897eb1b03a1479cc34b1d0cc354c32e216a0",
+      "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+      "nativeEvidenceSha256": "c1c11003b22783490ca74f240fc040e00d83aeaf536f63098ce0084fffcbc1f5",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 1,
+        "branches": 2,
+        "inputBinders": 2,
+        "retainedOccurrences": "6",
+        "hiddenOccurrences": "45",
+        "representedOccurrences": "51"
+      },
+      "joins": 0
+    },
+    {
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.shared_induction_64",
+      "indexSha256": "2ab1d320fb4c5ec7290b1bf1b64c4538cc65835717dee405192ce9b3daa30ca3",
+      "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+      "nativeEvidenceSha256": "a549f4c4ad40149047795abd40400c59c13f662d30ac230c7e45a4c353427088",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 1,
+        "branches": 2,
+        "inputBinders": 2,
+        "retainedOccurrences": "6",
+        "hiddenOccurrences": "45",
+        "representedOccurrences": "51"
+      },
+      "joins": 0
+    },
+    {
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.shared_induction_8",
+      "indexSha256": "a2b9dd1177e142b70895702b62c2294d00ef3c955c7f4d3b49ae8359deeb8e74",
+      "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+      "nativeEvidenceSha256": "3445f2d10467814affda7d3909b17af6243e214ea102a7333c97318b65fd7376",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 1,
+        "branches": 2,
+        "inputBinders": 2,
+        "retainedOccurrences": "6",
+        "hiddenOccurrences": "45",
+        "representedOccurrences": "51"
+      },
+      "joins": 0
+    },
+    {
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.sized_copy_eq",
+      "indexSha256": "a110e9b09786e011585b98ddd08192ef580549b0ddf90ca8a7d7997d38482c3a",
+      "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+      "nativeEvidenceSha256": "e6570706576ed2856a1d98f87c88c337f9f1bdac6f208f3ebb5f8c481c2cb720",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 1,
+        "branches": 2,
+        "inputBinders": 4,
+        "retainedOccurrences": "10",
+        "hiddenOccurrences": "181",
+        "representedOccurrences": "191"
+      },
+      "joins": 0
+    },
+    {
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.sized_copy_eq",
+      "indexSha256": "a110e9b09786e011585b98ddd08192ef580549b0ddf90ca8a7d7997d38482c3a",
+      "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+      "nativeEvidenceSha256": "e6570706576ed2856a1d98f87c88c337f9f1bdac6f208f3ebb5f8c481c2cb720",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "stats": {
+        "eliminations": 1,
+        "branches": 2,
+        "inputBinders": 4,
+        "retainedOccurrences": "10",
+        "hiddenOccurrences": "41",
+        "representedOccurrences": "51"
+      },
+      "joins": 0
+    }
+  ],
+  "scope": "Finite serialized native corpus: two project declarations and nine synthetic recursion profiles. Repeated cuts overlap; sums are not distinct source inventories. No fresh Lean replay, arbitrary elimination coverage, normalization trace, semantic importance or comprehension claim."
+}

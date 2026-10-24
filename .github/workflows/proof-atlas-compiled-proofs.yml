@@ -135,6 +135,7 @@ jobs:
       - run: node scripts/test-proof-atlas-lambda-judgments.cjs
       - run: node scripts/test-proof-atlas-beta-reductions.cjs
       - run: node scripts/test-proof-atlas-elimination.cjs
+      - run: node scripts/test-proof-atlas-elimination-composition.cjs
       - run: node scripts/test-proof-atlas-recursive-inputs.cjs
       - run: node scripts/test-proof-atlas-recursion-examples.cjs
       - run: node scripts/test-proof-atlas-ai-sample.cjs

@@ -1,0 +1,87 @@
+{
+  "status": "PASS",
+  "publication": "LOCAL_NOT_PUBLISHED",
+  "productionAssetsMatchSources": true,
+  "sourceHashes": {
+    "public/js/proof-atlas-elimination.js": "491d6a498e64d376618700d9463028be39a4832e597d7764ce66f566d9259926",
+    "public/js/proof-atlas-library.js": "fb20b2704e0b01396e98bb63f6dd7b5a01e22f43581226b9894507fe017606f9",
+    "public/js/proof-atlas-sync.js": "fd018622c84ff13e089ed63cabe9ab146623eb3448ccf384218a8400607da96f",
+    "public/css/proof-atlas-library.css": "392da0e2246460c0373341c7c95fde9286f5dece610df7aeba42813918584688",
+    "projects/proof-atlas/library/index.html": "74cd7fb78d405ceffa0b0ca11fc5d1263d863736b3ba0be7101da286fd239b12",
+    "_includes/proof-atlas-reading-tools.html": "073dab9db4032c2416aa323a2d2d224ded159453aa4db388d0ce4321b232f36f"
+  },
+  "checks": [
+    {
+      "script": "test-proof-atlas-elimination-composition-browser.cjs",
+      "sha256": "4fa0935e5aa42149f21551916a55efaa3a2c953fd900cf21e681ff007833fb36",
+      "result": {
+        "status": "PASS",
+        "articleCaseComposition": true,
+        "cacheVersions": true,
+        "recursorCells": 7,
+        "caseLanes": 8,
+        "inputBinders": 14,
+        "terminalBoundaries": 2,
+        "localInspectionPreservesSelection": true,
+        "exactKeyboardSourceJumps": 2,
+        "zoomAndScroll": true,
+        "accessibilityAudits": 4,
+        "scope": "Riccati sign subproof in the complete published packet; not paged occurrence-view support or comprehension evidence."
+      }
+    },
+    {
+      "script": "test-proof-atlas-elimination-browser.cjs",
+      "sha256": "f9027057c7b56afc81484075f9632a48f89f6c374626488b45549f9ce8a22d14",
+      "result": {
+        "status": "PASS",
+        "caseRulesVisible": 16,
+        "wrapperSourceOrder": true,
+        "preBinderDomain": true,
+        "extendedBodyContext": true,
+        "sevenExactJumps": true,
+        "partialCallWithheld": true,
+        "branchAndInputPaging": true,
+        "articleIsolation": true,
+        "unsupportedClearsViews": true,
+        "staleTypeDoesNotRestoreBranch": true,
+        "staleDataDoesNotRestoreProof": true,
+        "optionalFailuresPreserveReader": true,
+        "accessibilityAudits": 4
+      }
+    },
+    {
+      "script": "test-proof-atlas-recursive-inputs-browser.cjs",
+      "sha256": "258965568eef86c8db660c86a8de2a6fcb472a8371d853820dd47d8a61451af0",
+      "result": {
+        "status": "PASS",
+        "recursiveCaseViews": 13,
+        "metadataLocalNavigation": true,
+        "exactSourceBinderJump": true,
+        "recursiveFamily": true,
+        "indexedConstructor": true,
+        "zeroUsePremise": true,
+        "massiveSharedProof": {
+          "edition": "recursion-controls",
+          "name": "AtlasExamples.shared_induction_64",
+          "selected": 420,
+          "root": 420,
+          "mode": "geometry",
+          "occurrences": "12912720851596686131202",
+          "uniqueNodes": 421,
+          "path": "root.value",
+          "route": {
+            "root": 1,
+            "slots": []
+          },
+          "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+          "indexSha256": "2ab1d320fb4c5ec7290b1bf1b64c4538cc65835717dee405192ce9b3daa30ca3",
+          "rendered": 24
+        },
+        "staleGeometryDoesNotRestoreSource": true,
+        "optionalFailuresPreserveOriginalCorpus": true,
+        "accessibilityAudits": 4
+      }
+    }
+  ],
+  "scope": "Local production preview; no hosted deployment or new Lean replay."
+}
