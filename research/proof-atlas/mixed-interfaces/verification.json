@@ -1,0 +1,148 @@
+{
+  "status": "PASS",
+  "profiles": 26,
+  "starts": 269,
+  "frames": 807,
+  "mixedFrames": 71,
+  "joins": 1639,
+  "uniqueIntroductions": 209,
+  "uniqueLets": 60,
+  "distinctBodyCodomains": 7,
+  "variableRolesInvented": 0,
+  "maxUnits": 8,
+  "maxBytes": 132486,
+  "refusals": 2330,
+  "rows": [
+    {
+      "edition": "published-15",
+      "name": "JacobiCore.E_pos",
+      "starts": 2
+    },
+    {
+      "edition": "published-15",
+      "name": "JacobiData.slope_bound_abs",
+      "starts": 16
+    },
+    {
+      "edition": "published-15",
+      "name": "SBracket.mk.inj",
+      "starts": 64
+    },
+    {
+      "edition": "published-15",
+      "name": "CrossingData.crossing",
+      "starts": 15
+    },
+    {
+      "edition": "working-26",
+      "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
+      "starts": 13
+    },
+    {
+      "edition": "working-26",
+      "name": "JacobiData.slope_bound_abs",
+      "starts": 12
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_20418",
+      "starts": 12
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_3485",
+      "starts": 6
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_4274",
+      "starts": 8
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_49456",
+      "starts": 2
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_56144",
+      "starts": 6
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_15068",
+      "starts": 8
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_16912",
+      "starts": 7
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_19617",
+      "starts": 8
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_39831",
+      "starts": 5
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_43987",
+      "starts": 5
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_54159",
+      "starts": 35
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_54622",
+      "starts": 7
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_61403",
+      "starts": 1
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_6206",
+      "starts": 12
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_62755",
+      "starts": 6
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_63081",
+      "starts": 3
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_68077",
+      "starts": 7
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_68616",
+      "starts": 3
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_68794",
+      "starts": 3
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_70240",
+      "starts": 3
+    }
+  ],
+  "scope": "Local prospective mixed context interfaces over finite existing native records. Actual body type C is distinct from expected Pi codomain D; explicit source-lambda/computed-Pi binder correspondence retains both namespaces. No new native variable judgments, browser integration, general preservation or comprehension claim."
+}

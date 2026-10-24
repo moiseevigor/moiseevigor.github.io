@@ -1,0 +1,223 @@
+{
+  "format": "ProofAtlasMixedInterfaceExperimentVerification/1",
+  "status": "LOCAL_RESEARCH_MODEL_PASS_NOT_BROWSER_INTEGRATED",
+  "goal": "ACTIVE",
+  "previousGoalTurnClassification": "progress",
+  "previousTurnEvidence": "Exact-head CI completion observed; release then proceeded through checked merge, Pages and hosted gates.",
+  "observedAt": "2026-10-24T02:50:08.178937+00:00",
+  "baseline": "b0bc39cf3943fe2ffaf4e95403cead967cd45fbc",
+  "baselineTree": "71698c5c81faff6c185ea880682fdf2527c731cc",
+  "branch": "feat/proof-atlas-mixed-interfaces",
+  "files": {
+    "research/proof-atlas/mixed-interfaces/README.md": {
+      "sha256": "736ba1cb79aef7a2224799e3ec9766070bc9a87af437e410d570224e97f79df3",
+      "bytes": 9319
+    },
+    "research/proof-atlas/mixed-interfaces/check-composition.cjs": {
+      "sha256": "d812e674896708f62f5cdddf01334e94a5bbd030e40d37a37bed38eecda79b69",
+      "bytes": 4021
+    },
+    "research/proof-atlas/mixed-interfaces/check-correspondence.cjs": {
+      "sha256": "0dd3a1dd5653f8bfc67bc01918d99eb44638daa6445b941885f287af263ec89b",
+      "bytes": 4821
+    },
+    "research/proof-atlas/mixed-interfaces/check-cursor.cjs": {
+      "sha256": "5996a98a7b4bc17a3bb4025a9a6afc1b7dfc9471595dedd5e7441f4b4cc7b774",
+      "bytes": 5065
+    },
+    "research/proof-atlas/mixed-interfaces/check.cjs": {
+      "sha256": "b8f679c112779decd995581ab441d0ded3f393baee720c6bd1c7c4fc22ffe7e5",
+      "bytes": 7942
+    },
+    "research/proof-atlas/mixed-interfaces/cursor.cjs": {
+      "sha256": "44b85492523c2e45c5924e7c2fed2e228bc862c221551fb20eaf34f702fe1f3b",
+      "bytes": 12815
+    },
+    "research/proof-atlas/mixed-interfaces/inputs.cjs": {
+      "sha256": "51d8268c8da0385c11dc7688c99d8b882354ee6705396a0f43063314ab480c16",
+      "bytes": 2306
+    },
+    "research/proof-atlas/mixed-interfaces/model.cjs": {
+      "sha256": "5d8d2a22ebfb4d72f766e58e5aedf0ffe5ba574b79e592113493218110473dbc",
+      "bytes": 10145
+    },
+    "research/proof-atlas/mixed-interfaces/rules.md": {
+      "sha256": "3d2e79f894d0290cd628f3488b23301260917ef681f7b054f7c45106b4d44454",
+      "bytes": 5787
+    }
+  },
+  "inputManifests": {
+    "public/data/proof-atlas/library-manifest.js": {
+      "sha256": "5dea2c726ac5c197bb98f4dacfd2425602d4e7e4c4739fd3617763e079495276",
+      "bytes": 7045740
+    },
+    "public/data/proof-atlas/occurrence-types-manifest.js": {
+      "sha256": "54140da24487a360e72db4fdc8e3592dde8532d07a774b72e97911018e6b6ced",
+      "bytes": 3103
+    },
+    "public/data/proof-atlas/goedel-sample-manifest.js": {
+      "sha256": "12aa51e78c3758a1dd23aa9b3bbec66934c163e7d4c8b6034ad0c1bd3520e3d1",
+      "bytes": 140904
+    },
+    "public/data/proof-atlas/let-result-pools-manifest.js": {
+      "sha256": "d99849dcc83d84b055018c634683a5924dbb4d853f0f9ee53ff4d65a4c143657",
+      "bytes": 15744
+    },
+    "public/data/proof-atlas/source-pages-manifest.js": {
+      "sha256": "0ed6f4cb93056505e1766bc3bef93cd39ebeebb96a26d7c22ba4b6b4377721bd",
+      "bytes": 18371
+    },
+    "public/data/proof-atlas/construction-pages-manifest.js": {
+      "sha256": "982db7442aa3e62b8317040f53f4da5da702344f579071a9797d2b6cb008130f",
+      "bytes": 14236
+    },
+    "research/proof-atlas/local-definitions/fixtures/index.json": {
+      "sha256": "3d7ede7e44026411aa2342ded79c633e1449effcb8e834c8140fe8cb1223fe51",
+      "bytes": 75999
+    }
+  },
+  "releasedInterpretationModules": {
+    "public/js/proof-atlas-deep-context.js": {
+      "sha256": "89012323844d940d29905ab5945a0ac098000dd810aea085355365e22ca27a8d",
+      "bytes": 41641
+    },
+    "public/js/proof-atlas-packed-routes.js": {
+      "sha256": "68d7fc8fc2ec1d4e2db582a764d349ff1b08cc1831868f553426520ad9482ef2",
+      "bytes": 5317
+    },
+    "public/js/proof-atlas-library-data.js": {
+      "sha256": "a4a01e2e93d015397eb6a8d6fd677e6b788e079440c3e206c43b8c56e06161e9",
+      "bytes": 13318
+    },
+    "public/js/proof-atlas-occurrence-context-frame.js": {
+      "sha256": "a4d57a1ef8fea876cf301b1d1df018d15b2af5f8917f0a1edc26c49b96376fb2",
+      "bytes": 9239
+    },
+    "public/js/proof-atlas-local-definition-unit.js": {
+      "sha256": "a2324be138c2504a1cff1e1ac478c7c4adaf083a1f531585d5cf217612dd859c",
+      "bytes": 8222
+    },
+    "public/js/proof-atlas-local-definition-frame.js": {
+      "sha256": "d2f2c41bfba094b357d8e7d0f08a17b275539d6ac39a648e0e378521c0ac6533",
+      "bytes": 5422
+    },
+    "public/js/proof-atlas-recorded-captions.js": {
+      "sha256": "c8eb15b72f7777b6bce87c7d07379098606e532167df094a60e2648e2c21a6a1",
+      "bytes": 9077
+    },
+    "public/js/proof-atlas-cursor-local-definitions.js": {
+      "sha256": "2674960546ded9059062afecb09c339ef18cdcf45788d9beece3859e6fb7090a",
+      "bytes": 15126
+    },
+    "public/js/proof-atlas-cursor-context-frame.js": {
+      "sha256": "c7367131ed5c65a63253694cd4386aaedbeb1a9ee52de4ad783b7dd18ee6464b",
+      "bytes": 11284
+    },
+    "public/js/proof-atlas-cursor-constructions.js": {
+      "sha256": "d8c79177722abd8c97393c0a13b738c0769661267f0934868009bc75386526c7",
+      "bytes": 11098
+    },
+    "public/js/proof-atlas-source-pages.js": {
+      "sha256": "b9af2065260c5eecd4cee53aa82016a53ce7aac7305a9a10307def811d480c28",
+      "bytes": 8806
+    },
+    "public/js/proof-atlas-construction-pages.js": {
+      "sha256": "f743fbf58f3c3c3bd3f465d600b24a80a1d0bfdebdb9c11c8a78f175b881156c",
+      "bytes": 16748
+    },
+    "public/js/proof-atlas-type-pages.js": {
+      "sha256": "7b92a955c33e27d9bc7b3db8520cd8349ce097104b62a547b210fd1bd16eb2b8",
+      "bytes": 19505
+    },
+    "public/js/proof-atlas-ai-sample.js": {
+      "sha256": "088f6aaf51c3696bc70ea17707bc89bf235937c899cbaa03a989a01948360472",
+      "bytes": 3045
+    },
+    "research/proof-atlas/local-definitions/control-pages.cjs": {
+      "sha256": "058125b7faf80df6a6a0c6eb9c2f8c10ff80850bf929620511aa03bcad563b0d",
+      "bytes": 3450
+    },
+    "research/proof-atlas/construction-pages/captions.cjs": {
+      "sha256": "b524f11cb3411229e93d4b5340aa9d3789a35ed2433d9431ce1db15fd32784a1",
+      "bytes": 4088
+    }
+  },
+  "checks": {
+    "verification.json": {
+      "sha256": "ec167cc1bda00d62948f0b10257f0265c373ef6c6679e38da0c4a7d2fd1e5414",
+      "result": {
+        "status": "PASS",
+        "profiles": 26,
+        "starts": 269,
+        "frames": 807,
+        "mixedFrames": 71,
+        "joins": 1639,
+        "uniqueIntroductions": 209,
+        "uniqueLets": 60,
+        "distinctBodyCodomains": 7,
+        "variableRolesInvented": 0,
+        "maxUnits": 8,
+        "maxBytes": 132486,
+        "refusals": 2330,
+        "scope": "Local prospective mixed context interfaces over finite existing native records. Actual body type C is distinct from expected Pi codomain D; explicit source-lambda/computed-Pi binder correspondence retains both namespaces. No new native variable judgments, browser integration, general preservation or comprehension claim."
+      }
+    },
+    "cursor-verification.json": {
+      "sha256": "49b413acb45e8fe5184e97296e88f450e78ceb80a4514a7cec91d1891ef7dc1d",
+      "result": {
+        "status": "PASS",
+        "corpusProfiles": 26,
+        "coreProfiles": 25,
+        "corpusStarts": 269,
+        "coreStarts": 34,
+        "frames": 909,
+        "mixedFrames": 71,
+        "joins": 1657,
+        "distinctBodyCodomains": 7,
+        "peakSourceNodes": 256,
+        "peakTypeNodes": 64,
+        "peakFrameBytes": 132486,
+        "refusals": 1397,
+        "completeArchiveRequests": 0,
+        "scope": "Local paged mixed introduction/definition model compared exactly with the complete compiled-record model. One-page source/native/index/type caches, distinct actual/expected/codomain origins. No complete archive fallback, new native judgments, browser integration, whole-process memory bound or comprehension claim."
+      }
+    },
+    "binder-correspondence-verification.json": {
+      "sha256": "ab7d275705211ced12b5e338b46c115cac11caf64e04ce40b1d0c39ba123e927",
+      "result": {
+        "status": "PASS",
+        "profiles": 26,
+        "introductions": 209,
+        "syntaxPairs": 55443,
+        "scopeStates": 127984,
+        "innerBinderStates": 5110,
+        "introducedBinderStates": 341,
+        "outerContextStates": 3696,
+        "sameRootDifferentBinderNamespaces": 123,
+        "maxScopeStates": 3111,
+        "scope": "Finite symbolic de Bruijn scope-state check. Expected D uses original \u0393+x; the observed codomain uses a computed Pi-local binder plus \u0393. Matching syntax/root IDs do not identify those binders. Repeated DAG node/depth states are memoized; this is not an enumeration of every expanded occurrence, a new typing judgment or general preservation theorem."
+      }
+    },
+    "composition-verification.json": {
+      "sha256": "e90bbb5f2ccf00122cb6bf9e002d78d657d2a019a8abebcdc008e0683b129480",
+      "result": {
+        "status": "PASS",
+        "profiles": 51,
+        "starts": 303,
+        "partitions": 606,
+        "chunks": 1126,
+        "mixedPartitions": 90,
+        "seams": 520,
+        "conversionSensitiveBodyJoins": 2,
+        "refusals": 226,
+        "scope": "Finite rechunking at 4+4 and 1+3+4: same eight-unit prefix, final original boundary, disjoint source partition and distinct native seam origins. Corpus/calibration starts overlap. This is not a general associativity/preservation proof or semantic proof compression."
+      }
+    }
+  },
+  "nativeChecksAdded": 0,
+  "originalMathematicalSourcePublished": false,
+  "browserIntegrated": false,
+  "mixedRulePublished": false,
+  "scope": "Finite original-source/recorded-typing composition, exact rechunking, explicit binder correspondence and bounded candidate cursor caches. Reference audits load complete compiled graphs. No general preservation theorem, new kernel replay, whole-process memory bound, semantic compression or human comprehension result.",
+  "nextStep": "Integrate the mixed rule into the existing reader, retaining distinct actual/expected types and original/computed binders, then test actual source/type interactions and unsupported boundaries."
+}
