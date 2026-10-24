@@ -47,7 +47,16 @@ function open(c,captions,edition){
  }
  async function validate(value){demand(value?.format==='ProofAtlasLocalDefinitionFramePrototype/1','frame format');demand(canonical(value)===canonical(await create(value.root.route,value.options)),'frame differs from original interfaces');return true;}
  function unit(value,index){demand(issued.has(value)&&Number.isInteger(index)&&index>=0&&index<value.units.length,'issued unit address');return value.units[index];}
- return Object.freeze({create,validate,unit});
+ function resolve(value,address){
+  demand(address&&Object.keys(address).every(k=>['unit','field'].includes(k)),'unit address fields');
+  const u=unit(value,address.unit),field=address.field||'conclusion';demand(['conclusion','type','value','body','binding'].includes(field),'unit field');
+  return field==='type'?u.ports.declared.route:['conclusion','binding'].includes(field)?u.root.route:u[field].route;
+ }
+ async function typeFor(value,address,observation='kernel'){
+  resolve(value,address);demand(observation==='kernel'&&address.field!=='binding','recorded field observation');
+  return T.constructionType(c.get(unit(value,address.unit).root.route),c.data,address.field||'conclusion',observation);
+ }
+ return Object.freeze({create,validate,unit,resolve,typeFor});
 }
 const api=Object.freeze({open,limits});
 if(node)module.exports=api;else host.ProofAtlasLocalDefinitionFrame=api;

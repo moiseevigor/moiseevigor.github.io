@@ -6,6 +6,10 @@ on:
       - 'public/js/proof-atlas-construction-pages.js'
       - 'public/js/proof-atlas-cursor-constructions.js'
       - 'public/js/proof-atlas-cursor-context-frame.js'
+      - 'public/js/proof-atlas-cursor-local-definitions.js'
+      - 'public/js/proof-atlas-local-definition-*.js'
+      - 'scripts/test-proof-atlas-local-definitions*.cjs'
+      - 'scripts/test-proof-atlas-cursor-local-definitions.cjs'
       - 'scripts/test-proof-atlas-cursor-context-frame*.cjs'
       - 'scripts/test-proof-atlas-riccati-context-continuation*.cjs'
       - 'public/js/proof-atlas-recorded-captions.js'
@@ -263,6 +267,10 @@ on:
       - 'public/js/proof-atlas-construction-pages.js'
       - 'public/js/proof-atlas-cursor-constructions.js'
       - 'public/js/proof-atlas-cursor-context-frame.js'
+      - 'public/js/proof-atlas-cursor-local-definitions.js'
+      - 'public/js/proof-atlas-local-definition-*.js'
+      - 'scripts/test-proof-atlas-local-definitions*.cjs'
+      - 'scripts/test-proof-atlas-cursor-local-definitions.cjs'
       - 'scripts/test-proof-atlas-cursor-context-frame*.cjs'
       - 'scripts/test-proof-atlas-riccati-context-continuation*.cjs'
       - 'public/js/proof-atlas-recorded-captions.js'
@@ -556,6 +564,7 @@ jobs:
           node scripts/test-proof-atlas-riccati-context-continuation-browser.cjs
           node scripts/test-proof-atlas-recorded-captions-browser.cjs
           node scripts/test-proof-atlas-construction-captions-browser.cjs
+          node scripts/test-proof-atlas-local-definitions-browser.cjs
           node scripts/test-proof-atlas-type-pages-browser.cjs
           node scripts/test-proof-atlas-construction-pages-browser.cjs
           node scripts/test-proof-atlas-recorded-context-browser.cjs

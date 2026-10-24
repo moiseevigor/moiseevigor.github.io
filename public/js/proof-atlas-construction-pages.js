@@ -87,7 +87,7 @@ async function open(input,recordInput,{fetcher=host.fetch.bind(host),signal,inde
   if(value.sourceHeader){const field=c.rule==='Pi-introduction'?'binderType':c.rule==='let-binding'?'type':null;demand(field,'unexpected source header caption');await C.validate(value.sourceHeader,C.origin(source,c,field,'recorded-source-expression'));live(s);}
   validatedCaptions.add(row);return value;
  }
- const releaseType=()=>{typeEpoch++;if(activeType)activeType.dispose();activeType=null;};
+ const releaseType=expected=>{if(expected&&activeType!==expected)return false;typeEpoch++;if(activeType)activeType.dispose();activeType=null;return true;};
  const identity=freeze({...source,version:manifest.version,manifestSha256:d.sha256}),api=Object.freeze({manifest,lookup,typeFor,captionsFor,positionCaptionFor,releaseType,state:()=>({...stats,indexPages:indices.size,recordPages:records.size,indexLimit,recordLimit,indexBytes:[...indices.values()].reduce((sum,r)=>sum+r.bytes,0),recordBytes:[...records.values()].reduce((sum,r)=>sum+r.bytes,0),activeTypeTables:activeType?1:0,captionPackages:captionCache?1:0,captionBytes:captionCache?.bytes||0}),dispose:()=>{disposed=true;releaseType();captionCache=null;indices.clear();records.clear();}});owners.set(api,{identity,live});return api;
 }
 const api={open,key,identity:cursor=>{const value=owners.get(cursor);demand(value,'foreign construction cursor');value.live();return value.identity;}};if(node)module.exports=api;else host.ProofAtlasConstructionPages=api;
