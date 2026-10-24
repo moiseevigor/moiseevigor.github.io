@@ -1077,3 +1077,12 @@ no native judgments or semantic-necessity result. Candidate verification and
 public deployment remain distinct, and the general program stays active.
 
 [Rule and reference evidence](/research/proof-atlas/free-index-multiplicity/README.md) · [Candidate reader and scope](/research/proof-atlas/free-index-multiplicity/reader.md)
+
+
+## Visual notation manual and field fidelity
+
+The [visual manual](/projects/proof-atlas/manual/) separates ordered expression children, lexical references, non-expression attributes and native typing judgments. It documents the twelve semantic Expr forms, scope and occurrence identity, reversible telescopes/application spines, exact frontier accounting, universes and the limits of source/tactic recovery. Its capability assessment separates tested structural laws, sparse native records and unmeasured comprehension.
+
+The older constructor gallery used a generic two-input illustration, omitting the third `letE` child and obscuring reference/payload roles. It now shares a schema-driven field renderer with the manual. Every semantic field is retained in constructor order, and binder body fields identify the extended context. This corrects representation fidelity; it is not a new native judgment or a comprehension result.
+
+Four authored structural controls use the existing production scene algebra: dependent binders sharing a bound-variable node, a let value outside its new binder, a shared application and a 60-level doubling DAG. They are explicitly not extracted declarations or certified proofs. The manual tests check fields against the pinned catalogue, lexical targets against an independent path walk, cut accounting and folding, corrupted-scene refusals, keyboard selection, external binder navigation, mobile/dark-theme accessibility and continued compiled-library navigation. Exact test results are kept with the release evidence. The blog and mathematical article are unchanged.

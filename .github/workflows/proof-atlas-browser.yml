@@ -650,6 +650,12 @@ jobs:
           node scripts/test-proof-atlas-proof-steps-browser.cjs
         env:
           ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
+      - name: Visual manual — scope, fields and browser
+        run: |
+          node scripts/test-proof-atlas-manual.cjs
+          node scripts/test-proof-atlas-manual-browser.cjs
+        env:
+          ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
       - name: Browser regression — complete Lean.Expr visual grammar
         run: node scripts/test-proof-atlas-grammar.cjs
         env:

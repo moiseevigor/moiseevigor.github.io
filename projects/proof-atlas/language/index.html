@@ -2,15 +2,16 @@
 layout: default
 title: "The Visual Grammar of Lean"
 permalink: /projects/proof-atlas/language/
-description: "All 12 Lean.Expr constructors illustrated as typed diagrams, with examples and explicit limits of visual proof syntax."
+description: "All 12 Lean.Expr constructors illustrated with ordered semantic fields, with examples and explicit limits of visual proof syntax."
 ---
 <link rel="stylesheet" href="/public/css/proof-atlas.css?v=8">
+<link rel="stylesheet" href="/public/css/proof-atlas-manual.css?v=1">
 <main class="pa-page pa-language">
   <header class="pa-language-hero">
     <div class="pa-eyebrow">Proof Atlas · The core language</div>
     <h1>Twelve ways to build<br><em>a Lean expression.</em></h1>
-    <p>What the kernel sees is not a paragraph of tactics. It is a typed expression built from twelve constructor forms. Here is the complete structural alphabet our CoreGIR exporter handles, each with an explicit visual interface, a Lean example, and its limits.</p>
-    <div class="pa-hero-actions"><a href="/projects/proof-atlas/app/" class="pa-button pa-primary">Open the proof microscope ↗</a><a href="/mathematics/2026/10/11/proof-atlas-research-program/" class="pa-button pa-secondary">Read the research basis ↗</a><a href="/projects/proof-atlas/grammar/" class="pa-button pa-secondary">Full Lean language reference ↗</a></div>
+    <p>What the kernel sees is not a paragraph of tactics. It is a typed expression built from twelve constructor forms. Here is the complete structural alphabet our CoreGIR exporter handles, each with its ordered semantic fields, a Lean example, and its limits.</p>
+    <div class="pa-hero-actions"><a href="/projects/proof-atlas/manual/" class="pa-button pa-secondary">Geometric syntax manual ↗</a><a href="/projects/proof-atlas/app/" class="pa-button pa-primary">Open the proof microscope ↗</a><a href="/mathematics/2026/10/11/proof-atlas-research-program/" class="pa-button pa-secondary">Read the research basis ↗</a><a href="/projects/proof-atlas/grammar/" class="pa-button pa-secondary">Full Lean language reference ↗</a></div>
   </header>
   <section class="pa-language-bridge">
     <h2>Three different languages must not be confused</h2>
@@ -43,7 +44,7 @@ description: "All 12 Lean.Expr constructors illustrated as typed diagrams, with 
   <section class="pa-architecture" id="visual-grammar">
     <div class="pa-section-mark">03 / A precise visual language</div>
     <h2>Change the scale.<br><em>Keep the evidence.</em></h2>
-    <p class="pa-grammar-introduction">The diagram vocabulary begins with the twelve actual Lean kernel expression constructors. Each has typed ports and a visual role. The same proof can then be seen as a full syntax graph, a collapsed module with its context preserved, or a mathematical explanation linked back to the checked term.</p>
+    <p class="pa-grammar-introduction">The diagram vocabulary begins with the twelve actual Lean kernel expression constructors. Each has ordered fields and a visual role. The same proof can then be seen as a full syntax graph, a collapsed module with its context preserved, or a mathematical explanation linked back to the checked term.</p>
     <div class="pa-scale-intro">
       <strong>All twelve constructor forms · six observed in CrossingData.crossing</strong>
       <span>A visual reference, not a universal automatic proof interpreter.</span>
@@ -95,6 +96,7 @@ description: "All 12 Lean.Expr constructors illustrated as typed diagrams, with 
 </details>
 </main>
 <script src="/public/data/proof-atlas/lean-expr-grammar.js" defer></script>
-<script src="/public/js/proof-atlas-language.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-constructor-diagram.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-language.js?v=2" defer></script>
 
 <script src="/public/js/proof-atlas-scales.js?v=3" defer></script>
