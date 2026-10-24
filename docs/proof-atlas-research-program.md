@@ -995,3 +995,15 @@ record transport adds no native judgments, source-module verification or
 whole-proof coverage. The general program remains active.
 [Rules and native evidence](/research/proof-atlas/occurrence-constructions/README.md) ·
 [Reader scope and checks](/research/proof-atlas/occurrence-constructions/reader.md).
+
+## Compositional local-definition interfaces
+
+For `let x : A := v; b`, the interface keeps the source declared type A, the value's recorded type B, the context extension, the body's recorded type C and the whole expression's result type R distinct. A and B use the prior context; C uses the extended context. A shared formula display requires structural equality of A/B in the same context and preserves both formal ports. The context extension does not invent a source occurrence or a typing judgment for the introduced variable. A value's proof/type/value role comes from its own record.
+
+Two consecutive definitions compose at the exact original body occurrence, with matching context, role and recorded type syntax. The parent's body type and the child's conclusion type retain separate native origins even when they agree. The represented region is a disjoint source cut: n retained lets, 2n header regions and one remaining body. Overlapping whole-unit subtrees are not added. Continuation retains its exact original address; missing, incompatible and unsupported records remain explicit boundaries.
+
+The candidate reader offers the same local-definition view in complete and paged modes. The paged implementation compares source and type expressions through resumable row reads and bounded caches, without a complete-archive fallback. Four definitions form the default chunk; eight is the maximum. The finite evidence covers60 corpus positions and34 owned native calibration positions. The latter include value-, type- and proof-valued definitions and mixed chains; ten cases distinguish the value role from the enclosing-expression role. These are calibration controls rather than complete Lean coverage or an independent AI benchmark.
+
+This establishes finite source/context/type-origin correspondence for the implemented rule. General mixed proof units, introduced-variable witnesses, semantic abstraction and measured human proof-inspection benefits remain open.
+
+[Riccati definition chain](/projects/proof-atlas/library/?view=occurrence&loading=paged&diagram=construction&group=definitions&members=8&edition=published-15&proof=JacobiData.slope_bound_abs#occurrence=0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa.1.6.VQU) · [Rule and evidence scope](/research/proof-atlas/local-definitions/README.md).
