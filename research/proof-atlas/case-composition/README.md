@@ -3,6 +3,10 @@
 Status: local research prototype. No blog result or deployment is attached to
 this iteration. The general geometric-language goal remains active.
 
+The original audits were frozen at local commit `2c607f10`. Their browser hashes
+describe that checkpoint. The later [source-context browser audit](../source-corridor/browser-audit.json)
+records integration checks against the subsequent reader implementation.
+
 ## Representation problem
 
 The target is the manual’s “Read a proof construction” weakness: compositional

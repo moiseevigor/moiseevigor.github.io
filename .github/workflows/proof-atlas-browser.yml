@@ -125,6 +125,8 @@ on:
       - 'public/data/proof-atlas/scope-pages*'
       - 'public/data/proof-atlas/scope-pages/**'
       - 'scripts/*proof-atlas-scope*.cjs'
+      - 'public/js/proof-atlas-source-corridor.js'
+      - 'scripts/test-proof-atlas-source-corridor*.cjs'
       - 'public/js/proof-atlas-source-pages.js'
       - 'public/js/proof-atlas-paged-library.js'
       - 'public/data/proof-atlas/source-pages*'
@@ -395,6 +397,8 @@ on:
       - 'public/data/proof-atlas/scope-pages*'
       - 'public/data/proof-atlas/scope-pages/**'
       - 'scripts/*proof-atlas-scope*.cjs'
+      - 'public/js/proof-atlas-source-corridor.js'
+      - 'scripts/test-proof-atlas-source-corridor*.cjs'
       - 'public/js/proof-atlas-source-pages.js'
       - 'public/js/proof-atlas-paged-library.js'
       - 'public/data/proof-atlas/source-pages*'
@@ -628,8 +632,10 @@ jobs:
           node scripts/test-proof-atlas-beta-captions-browser.cjs
           node scripts/test-proof-atlas-elimination.cjs
           node scripts/test-proof-atlas-elimination-composition.cjs
+          node scripts/test-proof-atlas-source-corridor.cjs
           node scripts/test-proof-atlas-elimination-browser.cjs
           node scripts/test-proof-atlas-elimination-composition-browser.cjs
+          node scripts/test-proof-atlas-source-corridor-browser.cjs
           node scripts/test-proof-atlas-recursive-inputs.cjs
           node scripts/test-proof-atlas-recursion-examples.cjs
           node scripts/test-proof-atlas-recursive-inputs-browser.cjs

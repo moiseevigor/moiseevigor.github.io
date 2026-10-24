@@ -1,0 +1,97 @@
+{
+  "status": "PASS",
+  "publication": "LOCAL_NOT_PUBLISHED",
+  "productionAssetsMatchSources": true,
+  "sourceHashes": {
+    "public/js/proof-atlas-source-corridor.js": "bf2646c5049109cbf4ae47d4f5cf5a812f05eb6d41909048b0864fa91b67e44b",
+    "public/js/proof-atlas-library.js": "158fe44679afabcbada26da1188971cb7323a09df0c306b9c194029204a2831f",
+    "public/js/proof-atlas-paged-library.js": "6a9fbb6f4cbedbdf6a0624abb01e5cb9485d6aff7b672ae17768f587790daef5",
+    "public/js/proof-atlas-sync.js": "148df948d6f1366c08dbf309c39b723b60f657424061a1754a1f04bc92a2aa11",
+    "public/css/proof-atlas-library.css": "cab9c7a4881dafa10e577bb70f2c2e1d11d09ef302b729a835389e13295aaf7c",
+    "projects/proof-atlas/manual/index.html": "7fcd50b555a590d4ba492d619ae5d061003911e5b609d806efbb54c29a760822",
+    "docs/proof-atlas-evidence.md": "4530bf4baaf2151801d085e8474ab26d878e06d2442e7e0a15d2ea97bb37b970",
+    "docs/proof-atlas-research-program.md": "4d2dbc046fe8f3505c8644ba3a41045cda4402e4b4f430f3778b65a4c79ed9d5",
+    "_includes/proof-atlas-reading-tools.html": "75107a2873bc1ff11fd36a8adc97f283cde424d3d0cbad12779df9e05dfdfa1a"
+  },
+  "checks": [
+    {
+      "script": "test-proof-atlas-source-corridor-browser.cjs",
+      "sha256": "f6770c617e2fbbe9049c1a3218abb51b135b894d23c19adf71a66570fc868e24",
+      "result": {
+        "status": "PASS",
+        "completeAndPagedAgree": true,
+        "routeOnlyLinks": true,
+        "rejectedNodeMismatchPreservesCompleteSelection": true,
+        "declarationLoadingHasNoMixedSelection": true,
+        "sourceInspectionPreservesSelection": true,
+        "lastLetValueBeforeBinder": true,
+        "lastLetBodyAfterBinder": true,
+        "exactKeyboardSourceAndBinderJumps": 3,
+        "attributedAISource": true,
+        "largeProjectPacket": true,
+        "pagedSourceWithoutCompleteArchive": true,
+        "stalePreparationIgnored": true,
+        "optionalFailurePreservesExplorer": true,
+        "accessibilityAudits": 8,
+        "scope": "Source-context paths in the existing complete/paged readers. No typing of intermediate expressions or measured comprehension claim."
+      }
+    },
+    {
+      "script": "test-proof-atlas-elimination-composition-browser.cjs",
+      "sha256": "207551dd35ebb89a8accb54c8712cc79f0225085d1c55389dd0a664e6d71f18b",
+      "result": {
+        "status": "PASS"
+      },
+      "record": "Verified preceding sequential run; detailed stdout was not persisted."
+    },
+    {
+      "script": "test-proof-atlas-elimination-browser.cjs",
+      "sha256": "f9027057c7b56afc81484075f9632a48f89f6c374626488b45549f9ce8a22d14",
+      "result": {
+        "status": "PASS"
+      },
+      "record": "Verified preceding sequential run; detailed stdout was not persisted."
+    },
+    {
+      "script": "test-proof-atlas-source-pages-browser.cjs",
+      "sha256": "741f12a1094a9d74c0060b9766985de501d214567a964af80823124f6e3d82ed",
+      "result": {
+        "status": "PASS"
+      },
+      "record": "Verified preceding sequential run; detailed stdout was not persisted."
+    },
+    {
+      "script": "test-proof-atlas-manual-browser.cjs",
+      "sha256": "f25981e4b37f1ef3567f00091cce47738c2eb82c0f3fafcd95ad733f91a6eb15",
+      "result": {
+        "status": "PASS"
+      },
+      "record": "Verified preceding sequential run; detailed stdout was not persisted."
+    },
+    {
+      "script": "test-proof-atlas-scientific-theme-browser.cjs",
+      "sha256": "4c25c55abffaa27e707260984a766ea69ac91652504c8a842fba50071dae77d9",
+      "result": {
+        "status": "PASS",
+        "responsiveStates": 34,
+        "accessibility": 20,
+        "mathFigures": 9,
+        "evidenceEntries": 63,
+        "stableAnchors": 75,
+        "forwardedAnchors": 3,
+        "searches": 2,
+        "layers": 5,
+        "projects": 4,
+        "canvasThemes": 4,
+        "unchangedSelections": 2,
+        "scope": "Shared article tokens/fonts, rendered mathematical rules, responsive pages, searchable verbatim evidence, preserved anchors and live canvas themes with unchanged source identity. No new formal proof claims."
+      }
+    }
+  ],
+  "scope": "Local production preview. Source-context and selection-state checks reuse existing compiled evidence; no hosted deployment, new Lean replay or comprehension result.",
+  "renderedPageHashes": {
+    "projects/proof-atlas/manual/index.html": "d99803ff2963c4119cc0cf8859162f03af8489bcdf32fc049a46b1d6d5607620",
+    "projects/proof-atlas/evidence/index.html": "8f3ccb86ffcc1956baceca5ac15e95a1ab4313c1e7eb9dccd1dc61b9275fddf3",
+    "projects/proof-atlas/program/index.html": "e567cf7ab827cdce18c24c2d58d0a94bf54c0735d91a264d5aa9b7335bcf2e06"
+  }
+}

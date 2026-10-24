@@ -417,6 +417,19 @@ proof follows from them.
 
 <!-- atlas-original-end -->
 
+<span id="source-context-paths"></span>
+
+### Source context paths C[p]
+
+The complete and paged readers provide an optional **Source context path**. It folds an exact path into one surrounding context while retaining its ordered source fields, off-path regions and original lexical binder identities. This is a source relation. It assigns no typing judgment to an intervening expression. A separately validated proof interface can replace the endpoint cut without changing the surrounding source partition.
+
+The finite adapter audit checks 1,300 recorded endpoints in 35 profiles, including 204 endpoints in the twenty-profile attributed AI sample. All eleven structural child positions and twelve endpoint kinds have controls. Independent reconstruction checks source coverage and lexical contexts; a one-page source consumer agrees with the complete reference. In the Riccati sign argument, the twelve-constructor surrounding context and seven-recursors interface account for the complete proof body: **62 retained + 165,532 hidden = 165,594 occurrences**. The existing proof-under-a-value-boundary counterexample remains reachable without assigning proof roles to its source path.
+
+The source protocol has 512-member/512-slot and 128-KiB metadata limits. The separate transfer operation has its own entry, trie and byte limits. This adds no kernel theorem, arbitrary elimination coverage, semantic abstraction or measured comprehension result. The earlier one-hole laws remain its structural basis; the JavaScript adapter has finite independent checks.
+
+[Protocol and reproduction](/research/proof-atlas/source-corridor/README.md) · [Source model](/public/js/proof-atlas-source-corridor.js) · [Finite audit](/research/proof-atlas/source-corridor/audit.json)
+
+
 </details>
 
 <details class="atlas-evidence-entry" data-evidence-order="53" markdown="1">
