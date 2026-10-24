@@ -88,8 +88,38 @@ async function openIndex(raw,expectedHash,expectedSource,read,{signal}={}){
   });
   return freeze({references:refs,next:result.next,complete:result.complete,countContribution:'0',sourcePartition:frame.sourcePartition,coverage:'recorded-uses-only'});
  }
+ function sourceReferences(scene,result){
+  demand(!disposed&&results.has(result),'issued sparse result');
+  demand(scene?.format==='ProofAtlasOccurrenceWindow/1'&&scene.namespace==='source-expression'&&scene.typing==='not-queried','original source window without inherited typing');
+  demand(scene.source.name===expectedSource.name&&scene.source.indexSha256===expectedSource.indexSha256&&scene.nodes.length>0&&scene.nodes.length<=32,'source window identity/bound');
+  const nodes=new Map(),regions=[];
+  for(const n of scene.nodes){P.parse(n.route);demand(!nodes.has(key(n.route))&&prefix(scene.root.route,n.route)&&n.typeStatus==='not-queried','distinct original source nodes');nodes.set(key(n.route),n);
+   for(const p of n.ports)if(!p.displayed)regions.push({route:p.route,node:p.node,contextLength:n.scopeDepth+((['lam','forallE'].includes(n.kind)&&p.slot===1||n.kind==='letE'&&p.slot===2)?1:0),expanded:p.expanded});
+  }
+  demand(BigInt(scene.stats.retained)===BigInt(nodes.size)&&BigInt(scene.stats.hidden)===regions.reduce((n,r)=>n+BigInt(r.expanded),0n)&&BigInt(scene.stats.represented)===BigInt(scene.stats.retained)+BigInt(scene.stats.hidden),'unchanged source accounting');
+  const refs=result.rows.map(row=>{
+   demand(prefix(scene.root.route,row.route),'use within source window');const use=nodes.get(key(row.route)),hidden=regions.filter(r=>prefix(r.route,row.route));demand(Number(!!use)+hidden.length===1,'one retained use or disjoint frontier');
+   const region=use?{route:use.route,node:use.node,contextLength:use.scopeDepth}:hidden[0],binder=nodes.get(key(row.binder.route));let kind,target;
+   if(binder){
+    demand(['lam','forallE','letE'].includes(binder.kind)&&binder.node===row.binder.node&&binder.scopeDepth===row.binder.contextLength,'original retained source binder');
+    demand(prefix(binder.route,row.route)&&row.route.depth>binder.route.depth&&compare(P.prefix(row.route,binder.route.depth+1),P.append(binder.route,[binder.kind==='letE'?2:1]))===0,'use in original binder body');
+    kind='retained-binder';target={namespace:'original-source-context-slot',sourceId:binder.id,ordinal:row.binder.ordinal,route:binder.route,node:binder.node,sourceKind:binder.kind};
+   }else if(prefix(region.route,row.binder.route)){
+    demand(!use,'hidden binder cannot enclose a retained use');kind='internal-to-hidden-region';target={namespace:'original-source',route:row.binder.route,node:row.binder.node,visibility:'inside-region'};
+   }else{
+    demand(prefix(row.binder.route,scene.root.route)&&row.binder.route.depth<scene.root.route.depth&&row.binder.ordinal<scene.nodes[0].scopeDepth,'original context before the source cut');kind='external-original-context';target={namespace:'original-source-context-boundary',ordinal:row.binder.ordinal,route:row.binder.route,node:row.binder.node};
+   }
+   let existingBindingEdge=null;
+   if(use){
+    demand(use.kind==='bvar'&&use.node===row.node&&use.scopeDepth===row.contextLength&&use.binding?.node===row.binder.node&&compare(use.binding.route,row.binder.route)===0,'retained source use/context/binder');
+    const edge=scene.links.find(e=>e.from===use.id);demand(edge&&edge.relation==='source-bound-to'&&edge.node===row.binder.node&&compare(edge.route,row.binder.route)===0,'existing lexical edge');existingBindingEdge={from:edge.from,to:edge.to,relation:edge.relation};
+   }
+   return{format:'ProofAtlasRecordedVariableUseReference/1',source:expectedSource,kind,region,target,use:row,countContribution:'0',useVisibility:use?'retained-source-use':'inside-source-frontier',sourceUseId:use?.id||null,existingBindingEdge,typingScope:'Only this original use has the listed observations. Source forall binders are not classified as proof introductions.'};
+  });
+  return freeze({format:'ProofAtlasSourceUseOverlay/1',references:refs,next:result.next,complete:result.complete,countContribution:'0',sourcePartition:{...scene.stats},coverage:'recorded-uses-only'});
+ }
  function dispose(){disposed=true;cache.source=null;cache.binder=null;}
- return Object.freeze({query,references,dispose,stats:()=>({...stats,residentPages:Number(!!cache.source)+Number(!!cache.binder)}),manifest:freeze(manifest)});
+ return Object.freeze({query,references,sourceReferences,dispose,stats:()=>({...stats,residentPages:Number(!!cache.source)+Number(!!cache.binder)}),manifest:freeze(manifest)});
 }
 
 async function open(input,source,{fetcher=host.fetch.bind(host),signal}={}){

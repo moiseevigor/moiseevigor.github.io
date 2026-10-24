@@ -66,3 +66,5 @@
 /* Recorded text keeps native line breaks and remains bounded inside the cut. */
 .poc-view .pow-formula[data-recorded-caption]{white-space:pre-wrap;max-height:10em}
 .poc-view button{min-height:44px}
+
+.pow-stage button[data-use-highlight]{outline:2px dashed var(--accent,#327879);outline-offset:2px}.pow-edges path[data-use-highlight]{stroke:var(--accent,#327879);stroke-width:3}.pvu-panel button[aria-pressed="true"]{outline:2px solid var(--accent,#327879);outline-offset:2px}

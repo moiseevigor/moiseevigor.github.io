@@ -27,6 +27,7 @@
   let constructionGrouped=initial.searchParams.get('group')==='applications',groupingControl=null,groupingLabel=null;
   let constructionFramed=initial.searchParams.get('group')==='contexts',frameControl=null,frameLabel=null;
   let constructionInterfaces=initial.searchParams.get('group')==='interfaces',interfaceRules=null,interfaceRulesLabel=null;
+  let sourceUseView=null,sourceUseButton=null,sourceUseController=null,sourceUseEpoch=0,sourceUseAction=0,sourceUseLoading=false,sourceUseError=null,sourceUseLayout=null;
   let constructionDefinitions=initial.searchParams.get('group')==='definitions',definitionControl=null,definitionLabel=null,definitionModel=null;
   const frameBudget=el('select');frameBudget.setAttribute('aria-label','Context frame members');for(const n of [1,4,8,13,32,64]){const o=el('option',String(n));o.value=n;frameBudget.append(o);}frameBudget.value=['1','4','8','13','32','64'].includes(initial.searchParams.get('members'))?initial.searchParams.get('members'):'32';
   const frameBudgetLabel=el('label','Frame members ');frameBudgetLabel.append(frameBudget);
@@ -35,7 +36,7 @@
   const constructionHost=el('section');constructionHost.hidden=true;
   const nativeController=new AbortController(),typeHost=el('section');typeHost.hidden=true;
   function dispose(){
-   if(disposed)return;disposed=true;pagedController?.abort();navigationController?.abort();constructionRenderController?.abort();nativeController.abort();pagedSession?.cursor.dispose();queryRegistry?.dispose();constructionRegistry?.dispose();sourceCursor?.dispose();
+   if(disposed)return;retireSourceUses();disposed=true;pagedController?.abort();navigationController?.abort();constructionRenderController?.abort();nativeController.abort();pagedSession?.cursor.dispose();queryRegistry?.dispose();constructionRegistry?.dispose();sourceCursor?.dispose();
    if(paged)retiredResidency={disposed:true,display:null,source:sourceCursor?.state(),query:queryRegistry?.state(),construction:constructionRegistry?.state(),type:pagedSession?.cursor.state()||null,activeTypeTables:0};
    pagedPending=false;constructionSelection++;constructionView?.dispose();typeView?.dispose();observedTypes.clear();host.removeEventListener('popstate',fromLocation);host.removeEventListener('hashchange',fromLocation);
    pagedSession=null;queryRegistry=null;queryLoad=null;constructionRegistry=null;constructionRegistryLoad=null;constructionPresentation=null;captionPresentation=null;captionState={status:"disposed"};sourceCursor=null;sourceModel=null;displayData=null;sourceBytes=null;nativePackage=null;nativeCase=null;nativeLoad=null;constructionModel=null;constructionView=null;definitionModel=null;typeView=null;representativeIndex=null;scene=null;selected=null;selectedTyping=null;if(disposeActive===dispose)disposeActive=null;
@@ -155,7 +156,8 @@
    }
    filter.oninput=()=>{positionFilter=filter.value;positionPage=0;update();};only.onchange=()=>{positionConstructionsOnly=only.checked;positionPage=0;update();};update();return details;
   }
-  function inspect(n,observation=null,pointData=null){
+  function inspect(n,observation=null,pointData=null,fromUse=false){
+   if(!fromUse){sourceUseAction++;sourceUseView?.clearSelection();}
    const serial=++inspection;if(paged){pagedController?.abort();if(pagedSession?.cursor!==observation?.cursor)pagedSession?.cursor.dispose();if(!observation?.construction)constructionRegistry?.releaseType();pagedSession=null;selectedTyping=null;pagedPending=false;pagedController=new AbortController();}
    typeView?.dispose();typeView=null;typeHost.hidden=true;typeHost.replaceChildren();
    selected=n;for(const b of stage.querySelectorAll('[data-occurrence-node]'))b.setAttribute('aria-pressed',String(b.dataset.occurrenceNode===n.id));
@@ -188,6 +190,7 @@
   function rememberType(entry){const key=W.id(entry.route);observedTypes.delete(key);observedTypes.set(key,entry);while(observedTypes.size>4)observedTypes.delete(observedTypes.keys().next().value);}
   function sourcePoint(route){return W.create(data,record,route,{maxNodes:1,maxDepth:0}).nodes[0];}
   function modeControls(){
+   if(sourceUseButton){sourceUseButton.hidden=constructionMode;sourceUseButton.disabled=sourceUseLoading;sourceUseButton.setAttribute('aria-expanded',String(!!sourceUseView));sourceUseButton.textContent=sourceUseLoading?'Loading recorded uses…':sourceUseView?'Hide recorded variable uses':sourceUseError?'Retry recorded variable uses':'Recorded variable uses';}
    if(definitionLabel)definitionLabel.hidden=!constructionMode;if(definitionControl)definitionControl.checked=constructionDefinitions||constructionInterfaces;if(interfaceRulesLabel)interfaceRulesLabel.hidden=!constructionMode||(!constructionDefinitions&&!constructionInterfaces);if(interfaceRules)interfaceRules.value=constructionInterfaces?'interfaces':constructionDefinitions?'definitions':interfaceRules.value;
    for(const o of frameBudget.options)o.disabled=(constructionDefinitions||constructionInterfaces)&&Number(o.value)>8;if((constructionDefinitions||constructionInterfaces)&&Number(frameBudget.value)>8)frameBudget.value='4';frameBudgetLabel.firstChild.textContent=constructionInterfaces?'Interfaces per chunk ':constructionDefinitions?'Definitions per chunk ':'Frame members ';
    if(frameLabel)frameLabel.hidden=!constructionMode;if(frameControl)frameControl.checked=constructionFramed;frameBudgetLabel.hidden=!constructionMode||(!constructionFramed&&!constructionDefinitions&&!constructionInterfaces);nodeBudget.disabled=depth.disabled=constructionMode&&(constructionFramed||constructionDefinitions||constructionInterfaces);
@@ -211,15 +214,15 @@
     view.setCaptions(result,()=>annotateConstructions(view,model,cut,signal));captionPresentation=result;captionState={status:'ready',...result.counts,decodedBytes:result.decodedBytes,byteLimit:result.byteLimit,sourceIndexSha256:cut.source.indexSha256,root:cut.root.route};
    }catch(error){if(!live())return;captionState={status:'error',error:error.message};view.setCaptionError?.(error.message,()=>annotateConstructions(view,model,cut,signal));}
   }
-  async function selectPagedConstruction(model,route,pending,showType,signal){
-   const epoch=++constructionSelection,live=()=>!disposed&&!signal.aborted&&epoch===constructionSelection&&constructionMode;
+  async function selectPagedConstruction(model,route,pending,showType,signal,requireConstruction=true,current=()=>true){
+   const epoch=++constructionSelection,live=()=>!disposed&&!signal.aborted&&epoch===constructionSelection&&(requireConstruction?constructionMode:!constructionMode)&&current();
    try{const snapshot=await model.sourcePoint(route,{signal});if(!live())return;let session=null;
-    if(typeof pending==='function'){inspect(snapshot.point,null,snapshot.data);session=await pending();}
+    if(typeof pending==='function'){inspect(snapshot.point,null,snapshot.data,!requireConstruction);session=await pending();}
     else session=pending;
     if(!live()){if(session?.cursor){session.cursor.dispose();constructionRegistry?.releaseType(session.cursor);}return;}
-    if(session){session={...session,construction:true};inspect(snapshot.point,session,snapshot.data);}else inspect(snapshot.point,null,snapshot.data);
+    if(session){session={...session,construction:true};inspect(snapshot.point,session,snapshot.data,!requireConstruction);}else inspect(snapshot.point,null,snapshot.data,!requireConstruction);
     if(showType&&session){const serial=inspection;await component('ProofAtlasCompactTypeView','/public/js/proof-atlas-compact-type-view.js?v=5');if(!live()||serial!==inspection)return;typeView=host.ProofAtlasCompactTypeView.mountPaged(typeHost,session.cursor,session.observation,sourceCursor,r=>safe(()=>navigate(r)));const toggle=panel.querySelector('[data-show-recorded-type]');if(toggle){toggle.textContent='Hide recorded type';toggle.setAttribute('aria-expanded','true');}}
-    if(live()&&session)status.textContent='Recorded construction '+session.observation.role+' observation in its original source context.';
+    if(live()&&session)status.textContent='Recorded '+(requireConstruction?'construction ':'source ')+session.observation.role+' observation in its original source context.';
     if(live()&&showType&&session)return typeView;
    }catch(error){if(live()){pagedError=error.message;status.textContent='Construction observation unavailable: '+error.message;}}
   }
@@ -256,7 +259,7 @@
     const useCallbacks=mixed?{
      loadUses:async useSignal=>{
       const combined=host.AbortSignal.any([signal,useSignal]);
-      await component('ProofAtlasVariableUses','/public/js/proof-atlas-variable-uses.js?v=1');await component('ProofAtlasVariableUseView','/public/js/proof-atlas-variable-use-view.js?v=1');await component('PROOF_ATLAS_VARIABLE_USES','/public/data/proof-atlas/variable-uses-manifest.js?v=1');
+      await component('ProofAtlasVariableUses','/public/js/proof-atlas-variable-uses.js?v=2');await component('ProofAtlasVariableUseView','/public/js/proof-atlas-variable-use-view.js?v=2');await component('PROOF_ATLAS_VARIABLE_USES','/public/data/proof-atlas/variable-uses-manifest.js?v=1');
       if(!live())throw Error('Context frame changed');const inventory=host.PROOF_ATLAS_VARIABLE_USES;
       if(inventory?.format!=='ProofAtlasVariableUseInventory/1'||!Array.isArray(inventory.records)||inventory.records.length>512){delete host.PROOF_ATLAS_VARIABLE_USES;throw Error('Invalid variable-use inventory');}
       const d=inventory.records.find(d=>d.name===record.name&&d.edition===edition.id&&d.indexSha256===record.indexSha256&&d.sourceSha256===record.sourceSha256);if(!d)throw Error('No recorded-use profile for this declaration');
@@ -351,7 +354,53 @@
    }catch(error){if(disposed||activation!==constructionActivation)return;constructionScripts=null;constructionError=error.message;constructionMode=false;modeControls();renderConstructions();status.textContent='Construction view unavailable: '+error.message+'. Source structure and existing native types remain available.';}
    finally{if(activation===constructionActivation)constructionButton.disabled=false;}
   }
+  function retireSourceUses(){
+   sourceUseEpoch++;sourceUseAction++;sourceUseController?.abort();sourceUseController=null;
+   sourceUseView?.clearSelection();sourceUseView?.dispose();sourceUseView=null;sourceUseLoading=false;sourceUseError=null;modeControls();
+  }
+  async function toggleSourceUses(){
+   if(sourceUseView){retireSourceUses();return;}
+   if(disposed||constructionMode||!scene||sourceUseLoading)return;
+   const cut=scene,layout=sourceUseLayout,epoch=++sourceUseEpoch;sourceUseAction++;sourceUseLoading=true;sourceUseError=null;
+   sourceUseController?.abort();sourceUseController=new AbortController();const signal=AbortSignal.any([nativeController.signal,sourceUseController.signal]);
+   const live=()=>!disposed&&!signal.aborted&&epoch===sourceUseEpoch&&!constructionMode&&scene===cut;
+   const current=action=>live()&&action===sourceUseAction;
+   modeControls();let provider=null;
+   try{
+    await component('ProofAtlasVariableUses','/public/js/proof-atlas-variable-uses.js?v=2');await component('ProofAtlasVariableUseView','/public/js/proof-atlas-variable-use-view.js?v=2');await component('PROOF_ATLAS_VARIABLE_USES','/public/data/proof-atlas/variable-uses-manifest.js?v=1');if(!live())return;
+    const inventory=host.PROOF_ATLAS_VARIABLE_USES;
+    if(inventory?.format!=='ProofAtlasVariableUseInventory/1'||!Array.isArray(inventory.records)||inventory.records.length>512){delete host.PROOF_ATLAS_VARIABLE_USES;throw Error('Invalid variable-use inventory');}
+    const descriptor=inventory.records.find(d=>d.name===record.name&&d.edition===edition.id&&d.indexSha256===record.indexSha256&&d.sourceSha256===record.sourceSha256);
+    if(!descriptor)throw Error('No recorded variable-use profile for this declaration; its source graph remains available');
+    const registry=await pagedConstructionRegistry();if(!live())return;
+    const identity=host.ProofAtlasConstructionPages.identity(registry),source=Object.fromEntries(['name','edition','indexSha256','sourceGraphSha256'].map(k=>[k,k==='edition'?edition.id:identity[k]]));
+    let model;
+    if(paged)model=host.ProofAtlasCursorConstructions.open(sourceCursor,registry);
+    else{await loadTyping();if(!live())return;await loadLetTyping();if(!live())return;if(!nativeCase)throw Error(nativeError||'Original native recording is unavailable');const actual=host.ProofAtlasDeepContext.sourceIdentity(data,record);if(['name','indexSha256','sourceGraphSha256'].some(k=>actual[k]!==source[k]))throw Error('Original source identity differs');model={sourcePoint:async route=>({point:sourcePoint(route),data})};}
+    provider=await host.ProofAtlasVariableUses.open(descriptor,source,{signal});if(!live()){provider.dispose();return;}
+    const U=host.ProofAtlasVariableUses;
+    async function usePoint(ref,action){const snapshot=await model.sourcePoint(ref.use.route,{signal});if(!current(action))throw Error('Recorded-use selection changed');U.verifySource(ref,snapshot.point,source);return snapshot;}
+    const clearType=()=>{constructionSelection++;inspection++;pagedController?.abort();pagedSession?.cursor.dispose();pagedSession=null;registry.releaseType();selectedTyping=null;pagedPending=false;typeView?.dispose();typeView=null;typeHost.hidden=true;typeHost.replaceChildren();};
+    const callbacks={onPick:()=>{sourceUseAction++;},onReset:()=>{sourceUseAction++;},
+     onSource:async ref=>{const action=sourceUseAction,snapshot=await usePoint(ref,action);if(current(action))inspect(snapshot.point,null,snapshot.data,true);},
+     onBinder:async ref=>{const action=sourceUseAction;await usePoint(ref,action);const snapshot=await model.sourcePoint(ref.use.binder.route,{signal});if(!current(action))return;if(snapshot.point.node!==ref.use.binder.node||snapshot.point.scopeDepth!==ref.use.binder.contextLength)throw Error('Original binder differs');inspect(snapshot.point,null,snapshot.data,true);},
+     onType:async(ref,choice)=>{
+      const action=sourceUseAction;clearType();await usePoint(ref,action);const o=ref.use.observations[choice];if(!o)throw Error('No selected native observation');let entry;
+      if(paged){const row=await registry.lookup(o.owner.route,{signal});if(!current(action))return;if(!row)throw Error('No original recording owner');entry=await registry.typeFor(row,o.field,'kernel',{signal});}
+      else{const owner=nativeCase.get(o.owner.route);if(!owner)throw Error('No original recording owner');entry=o.field==='recorded'?owner:await host.ProofAtlasDeepContext.constructionType(owner,data,o.field);}
+      if(!current(action)){if(paged)registry.releaseType(entry?.cursor);return;}
+      try{U.verifyObservation(ref,choice,entry);}catch(error){if(paged)registry.releaseType(entry?.cursor);throw error;}
+      if(paged){await selectPagedConstruction(model,ref.use.route,entry,true,signal,false,()=>current(action));return;}
+      rememberType(entry);inspect(sourcePoint(ref.use.route),entry,null,true);const serial=inspection;await component('ProofAtlasCompactTypeView','/public/js/proof-atlas-compact-type-view.js?v=5');if(!current(action)||serial!==inspection)return;
+      typeView=host.ProofAtlasCompactTypeView.mount(typeHost,entry,data,r=>safe(()=>navigate(r)));const toggle=panel.querySelector('[data-show-recorded-type]');if(toggle){toggle.textContent='Hide recorded type';toggle.setAttribute('aria-expanded','true');}
+     },onFocus:route=>safe(()=>navigate(route))};
+    sourceUseView=host.ProofAtlasVariableUseView.mount(typeHost.parentElement,stage,cut,provider,callbacks,layout);provider=null;
+    await sourceUseView.setFilter(null);if(live())status.textContent='Recorded variable uses reference original source binders. The source cut and its accounting are unchanged.';
+   }catch(error){provider?.dispose();if(live()){sourceUseError=error.message;status.textContent='Recorded uses unavailable: '+error.message+'. Source fields and existing recorded types remain available.';}}
+   finally{if(live()){sourceUseLoading=false;modeControls();}}
+  }
   function draw(next){
+   retireSourceUses();
    constructionSelection++;constructionView?.dispose();constructionView=null;
    scene=next;stage.replaceChildren();const cols=Math.max(...scene.nodes.map(n=>n.depth))+1,rows=Math.max(...scene.nodes.map(n=>n.row))+1;subtitle.textContent=nativeControl?'Synthetic core control · selected native records':control?'Serialized syntax control · original producer made no typing claim':(scene.namespace==='kernel-rule'?'Kernel reduction-rule syntax':'Source occurrence geometry')+' · '+(edition.label||edition.id);
    tools.querySelector('[data-window-parent]').disabled=next.root.route.depth===0;tools.querySelector('[data-window-root]').disabled=false;
@@ -370,15 +419,29 @@
    function paths(){
     if(viewport.hidden||scene!==next)return;
     svg.replaceChildren();
-    function line(from,to,control,cls,slot){const a=positions.get(from),b=positions.get(to),target=cards.get(to).pick,right=b.x>=a.x,sx=right?a.x+245:a.x,sy=a.y+control.offsetTop+control.offsetHeight/2,tx=right?b.x:b.x+245,ty=b.y+target.offsetTop+target.offsetHeight/2,p=document.createElementNS(svg.namespaceURI,'path');p.setAttribute('d','M '+sx+' '+sy+' C '+(sx+(right?40:-40))+' '+sy+' '+(tx+(right?-40:40))+' '+ty+' '+tx+' '+ty);if(cls)p.classList.add(cls);p.dataset.relation=cls?'source-bound-to':'source-field';if(slot!==undefined)p.dataset.slot=slot;svg.append(p);}
+    function line(from,to,control,cls,slot){const a=positions.get(from),b=positions.get(to),target=cards.get(to).pick,right=b.x>=a.x,s=stage.getBoundingClientRect(),factor=s.width/stageWidth,sourceBox=cards.get(from).card.getBoundingClientRect(),targetBox=cards.get(to).card.getBoundingClientRect(),c=control.getBoundingClientRect(),t=target.getBoundingClientRect(),sx=((right?sourceBox.right:sourceBox.left)-s.left)/factor,sy=(c.top+c.height/2-s.top)/factor,tx=((right?targetBox.left:targetBox.right)-s.left)/factor,ty=(t.top+t.height/2-s.top)/factor,p=document.createElementNS(svg.namespaceURI,'path');p.setAttribute('d','M '+sx+' '+sy+' C '+(sx+(right?40:-40))+' '+sy+' '+(tx+(right?-40:40))+' '+ty+' '+tx+' '+ty);if(cls)p.classList.add(cls);p.dataset.relation=cls?'source-bound-to':'source-field';p.dataset.sourceFrom=from;p.dataset.sourceTo=to;if(slot!==undefined)p.dataset.slot=slot;svg.append(p);}
     for(const edge of scene.edges)line(edge.from,edge.to,cards.get(edge.from).ports[edge.slot],null,edge.slot);
     for(const binding of scene.links)line(binding.from,binding.to,cards.get(binding.from).binder,'pow-binding-edge');
+    sourceUseView?.redraw();
    }
+   for(const {card}of cards.values())card.addEventListener('scroll',paths);
+   const baseWidth=stageWidth,baseHeight=stageHeight;
+   const retainedBinders=scene.nodes.filter(n=>['lam','forallE','letE'].includes(n.kind)).map(n=>({root:{route:n.route,node:n.node},binding:{name:(displayData||data).payloads[n.node].binderName||(displayData||data).payloads[n.node].declName||'_'}}));
+   const endpoint=ref=>{if(ref.sourceUseId)return cards.get(ref.sourceUseId)?.pick;for(const n of next.nodes){const port=n.ports.find(p=>W.id(p.route)===W.id(ref.region.route));if(port)return cards.get(n.id).ports[port.slot];}return null;};
+   const target=ref=>cards.get(W.id(ref.use.binder.route))?.pick||null;
+   sourceUseLayout={binders:retainedBinders,before:typeHost,binder:u=>cards.get(W.id(u.root.route)).card,endpoint,target,
+    prepareTarget:node=>{node.style.position='absolute';node.style.left=baseWidth+'px';node.style.top='20px';node.style.width='245px';},
+    showTarget:shown=>{if(scene!==next)return;stageWidth=baseWidth+(shown?330:0);stage.style.width=stageWidth+'px';scaled();},
+    bindingEdge:ref=>[...svg.querySelectorAll('[data-relation="source-bound-to"]')].find(p=>p.dataset.sourceFrom===ref.existingBindingEdge?.from&&p.dataset.sourceTo===ref.existingBindingEdge?.to),
+    reveal:(ref,mode)=>{const node=mode==='binder'?target(ref):endpoint(ref),card=node?.closest('.pow-card');if(card){const top=node.offsetTop,bottom=top+node.offsetHeight;if(top<card.scrollTop)card.scrollTop=top;if(bottom>card.scrollTop+card.clientHeight-8)card.scrollTop=Math.max(0,bottom-card.clientHeight+8);}paths();},
+    dispose:()=>{if(scene===next){stageWidth=baseWidth;stageHeight=baseHeight;stage.style.width=stageWidth+'px';scaled();}}
+   };
    redrawSourcePaths=paths;paths();document.fonts?.ready.then(()=>{if(scene===next&&!disposed)paths();});
-   summary.textContent=scene.stats.retained+' retained + '+shortCount(scene.stats.hidden)+' hidden = '+shortCount(scene.stats.represented)+' occurrences. '+external.length+' context references lie outside this count.';
+   summary.textContent=scene.stats.retained+' retained + '+shortCount(scene.stats.hidden)+' hidden = '+shortCount(scene.stats.represented)+' occurrences. '+external.length+' source-context cards lie outside this count.';
    inspect(scene.nodes[0]);scaled();viewport.scrollTo(0,0);status.textContent='Original occurrence structure. '+(nativeControl?'Synthetic core control; native typing is available only at recorded positions.':control?'Serialized syntax control; original producer typing is not claimed.':'Compiled declaration; mathematical interpretation and typing queries are separate.');if(constructionMode&&constructionModel)renderConstructions();
   }
   function retireConstructionView(){
+   retireSourceUses();
    constructionRenderController?.abort();constructionRender++;constructionSelection++;
    constructionView?.dispose();constructionView=null;definitionModel=null;
    typeView?.dispose();typeView=null;typeHost.hidden=true;typeHost.replaceChildren();
@@ -436,7 +499,7 @@
    tools.querySelectorAll('button')[0].setAttribute('aria-label','Zoom out');tools.querySelectorAll('button')[1].setAttribute('aria-label','Zoom in');
    const modes=el('div',undefined,'pow-tools');modes.setAttribute('role','group');modes.setAttribute('aria-label','Diagram representation');sourceButton=button('Source occurrences',()=>setConstructionMode(false));sourceButton.dataset.sourceMode='';constructionButton=button('Proof constructions',()=>setConstructionMode(true));constructionButton.dataset.constructionMode='';groupingControl=el('input');groupingControl.type='checkbox';groupingControl.dataset.constructionGroup='';groupingLabel=el('label');groupingLabel.append(groupingControl,document.createTextNode('Group applications'));groupingControl.onchange=()=>{constructionGrouped=groupingControl.checked;if(constructionGrouped){constructionFramed=false;constructionDefinitions=false;constructionInterfaces=false;}setConstructionMode(true);};frameControl=el('input');frameControl.type='checkbox';frameControl.dataset.constructionFrame='';frameLabel=el('label');frameLabel.append(frameControl,document.createTextNode('Context frame'));frameControl.onchange=()=>{constructionFramed=frameControl.checked;if(constructionFramed){constructionGrouped=false;constructionDefinitions=false;constructionInterfaces=false;}setConstructionMode(true);};frameBudget.onchange=()=>{if(scene)safe(()=>navigate(scene.root.route,true,true));};definitionControl=el('input');definitionControl.type='checkbox';definitionControl.dataset.definitionMode='';definitionLabel=el('label');definitionLabel.append(definitionControl,document.createTextNode('Typed interfaces'));definitionControl.onchange=()=>{constructionInterfaces=definitionControl.checked&&interfaceRules.value==='interfaces';constructionDefinitions=definitionControl.checked&&!constructionInterfaces;if(definitionControl.checked){constructionFramed=false;constructionGrouped=false;}setConstructionMode(true);};
    interfaceRules=el('select');interfaceRules.dataset.interfaceRules='';for(const[value,text]of [['interfaces','Introductions + definitions'],['definitions','Local definitions']]){const option=el('option',text);option.value=value;interfaceRules.append(option);}interfaceRules.value=constructionDefinitions?'definitions':'interfaces';interfaceRulesLabel=el('label','Interface rules ');interfaceRulesLabel.append(interfaceRules);interfaceRules.onchange=()=>{constructionInterfaces=interfaceRules.value==='interfaces';constructionDefinitions=!constructionInterfaces;constructionFramed=false;constructionGrouped=false;setConstructionMode(true);}
-;modes.append(sourceButton,constructionButton,groupingLabel,frameLabel,definitionLabel,interfaceRulesLabel,frameBudgetLabel);tools.append(modes);if(paged){constructionButton.title='Bounded source, type and construction records';const complete=new URL(location.href);complete.searchParams.delete('loading');modes.append(link('Complete constructions',complete.pathname+complete.search+complete.hash),el('span','Paged source, types and recorded context frames. Grouped applications use the complete reader.','pow-help'));}modeControls();
+;sourceUseButton=button('Recorded variable uses',()=>safe(toggleSourceUses));sourceUseButton.dataset.sourceUseActivate='';sourceUseButton.setAttribute('aria-expanded','false');modes.append(sourceButton,constructionButton,sourceUseButton,groupingLabel,frameLabel,definitionLabel,interfaceRulesLabel,frameBudgetLabel);tools.append(modes);if(paged){constructionButton.title='Bounded source, type and construction records';const complete=new URL(location.href);complete.searchParams.delete('loading');modes.append(link('Complete constructions',complete.pathname+complete.search+complete.hash),el('span','Paged source, types and recorded context frames. Grouped applications use the complete reader.','pow-help'));}modeControls();
    const help=el('p',paged?'Scroll or drag empty space to pan. Source fields and recorded positions use exact occurrence routes. Solid lines follow source fields; dashed lines reference binders.':'Scroll or drag empty space to pan. Solid lines follow source fields; dashed lines reference binders. A node number chooses one representative path; a shared node can have other uses.','pow-help'),layout=el('div',undefined,'pow-layout'),drawing=el('section');drawing.setAttribute('aria-label','Source occurrence diagram');drawing.append(tools,help,viewport,summary,constructionHost,typeHost);layout.append(drawing,panel);root.replaceChildren(header,status,layout);root.classList.add('pow-shell');
    nodeBudget.onchange=depth.onchange=()=>{if(!scene){status.textContent='Choose a source node or restore a valid occurrence link.';return;}safe(()=>navigate(scene.root.route,constructionMode&&constructionGrouped,true));};
    if(loadingLink){const target=new URL(location.href);if(paged){target.searchParams.delete('loading');target.searchParams.set('diagram','construction');}else target.searchParams.set('loading','paged');loadingLink.href=target.pathname+target.search+target.hash;}
@@ -444,7 +507,7 @@
    if(constructionMode&&!constructionModel)await setConstructionMode(true);
    let drag=null;viewport.addEventListener('pointerdown',event=>{if(event.target.closest('.pow-card,button,a,input,select'))return;drag={x:event.clientX,y:event.clientY,left:viewport.scrollLeft,top:viewport.scrollTop};viewport.setPointerCapture(event.pointerId);});viewport.addEventListener('pointermove',event=>{if(drag)viewport.scrollTo(drag.left+drag.x-event.clientX,drag.top+drag.y-event.clientY);});viewport.addEventListener('pointerup',()=>{drag=null;});viewport.addEventListener('pointercancel',()=>{drag=null;});
    host.addEventListener('popstate',fromLocation);host.addEventListener('hashchange',fromLocation);
-   const api={getSnapshot:()=>{if(!selected||!scene)return null;const q=selectedTyping;return {source:scene.source,namespace:scene.namespace,category:scene.root.category,node:selected.node,route:selected.route,scopeDepth:selected.scopeDepth,binding:selected.binding,typing:q?'checked-native-record':'not-queried',...(q?{native:{role:q.role,evidenceSha256:q.evidenceSha256,...(paged?q.origin:host.ProofAtlasDeepContext.typeIdentity(q)),contextLength:q.contextLength,...(q.recording?{recording:q.recording}:{})}}:{})};},getScene:()=>scene,getResidency:()=>retiredResidency|| (paged?{disposed,display:scene?sourceModel.state(scene):null,source:sourceCursor?.state(),query:queryRegistry?.state(),construction:constructionRegistry?.state(),constructionPresentation:constructionPresentation?{decodedBytes:constructionPresentation.decodedBytes,byteLimit:constructionPresentation.byteLimit}:null,type:pagedSession?.cursor.state()||null,activeTypeTables:pagedSession?1:0}:null),getNativeState:()=>paged?({loaded:!!queryRegistry||!!constructionRegistry,pending:pagedPending,matched:!!pagedSession,error:pagedError,missingProfile:queryMissing}):({loaded:!!nativePackage,pending:!!nativeLoad&&!nativePackage,matched:!!nativeCase,error:nativeError,...(nativeCase?.stats?{inventory:nativeCase.stats}:{})}),getConstructionScene:()=>constructionView?.getScene()||null,getConstructionState:()=>({enabled:constructionMode,grouped:constructionGrouped,framed:constructionFramed,definitions:constructionDefinitions,interfaces:constructionInterfaces,ready:!!constructionView,error:constructionError,groupingError,localDefinitions:paged?{loaded:constructionRegistry?.manifest.version===2,queries:null,scope:'Sparse recorded local definitions; reduced pools are not loaded'}:{loaded:letSupplemented&&!!nativeCase?.stats?.supplementalLetQueries,queries:nativeCase?.stats?.supplementalLetQueries||0,error:letSupplementError}}),getDefinitionSelection:()=>constructionDefinitions?constructionView?.getSelection?.()||null:null,getDefinitionState:()=>({enabled:constructionDefinitions,ready:constructionDefinitions&&constructionView?.getScene()?.format==='ProofAtlasLocalDefinitionFramePrototype/1',model:definitionModel?.state?.()||null}),getVariableUseState:()=>constructionInterfaces?constructionView?.getVariableUseState?.()||null:null,getInterfaceSelection:()=>constructionInterfaces?constructionView?.getSelection?.()||null:null,getInterfaceState:()=>({enabled:constructionInterfaces,ready:constructionInterfaces&&constructionView?.getScene()?.format==='ProofAtlasMixedInterfaceFramePrototype/1',model:definitionModel?.state?.()||null}),getCaptionState:()=>({...captionState}),getTypeScene:()=>typeView?.getScene()||null,getTypeSnapshot:()=>typeView?.getSnapshot()||null,getIndexState:()=>representativeIndex?.state||null,focus:route=>navigate(route),dispose};
+   const api={getSnapshot:()=>{if(!selected||!scene)return null;const q=selectedTyping;return {source:scene.source,namespace:scene.namespace,category:scene.root.category,node:selected.node,route:selected.route,scopeDepth:selected.scopeDepth,binding:selected.binding,typing:q?'checked-native-record':'not-queried',...(q?{native:{role:q.role,evidenceSha256:q.evidenceSha256,...(paged?q.origin:host.ProofAtlasDeepContext.typeIdentity(q)),contextLength:q.contextLength,...(q.recording?{recording:q.recording}:{})}}:{})};},getScene:()=>scene,getResidency:()=>retiredResidency|| (paged?{disposed,display:scene?sourceModel.state(scene):null,source:sourceCursor?.state(),query:queryRegistry?.state(),construction:constructionRegistry?.state(),constructionPresentation:constructionPresentation?{decodedBytes:constructionPresentation.decodedBytes,byteLimit:constructionPresentation.byteLimit}:null,type:pagedSession?.cursor.state()||null,activeTypeTables:pagedSession?1:0}:null),getNativeState:()=>paged?({loaded:!!queryRegistry||!!constructionRegistry,pending:pagedPending,matched:!!pagedSession,error:pagedError,missingProfile:queryMissing}):({loaded:!!nativePackage,pending:!!nativeLoad&&!nativePackage,matched:!!nativeCase,error:nativeError,...(nativeCase?.stats?{inventory:nativeCase.stats}:{})}),getConstructionScene:()=>constructionView?.getScene()||null,getConstructionState:()=>({enabled:constructionMode,grouped:constructionGrouped,framed:constructionFramed,definitions:constructionDefinitions,interfaces:constructionInterfaces,ready:!!constructionView,error:constructionError,groupingError,localDefinitions:paged?{loaded:constructionRegistry?.manifest.version===2,queries:null,scope:'Sparse recorded local definitions; reduced pools are not loaded'}:{loaded:letSupplemented&&!!nativeCase?.stats?.supplementalLetQueries,queries:nativeCase?.stats?.supplementalLetQueries||0,error:letSupplementError}}),getDefinitionSelection:()=>constructionDefinitions?constructionView?.getSelection?.()||null:null,getDefinitionState:()=>({enabled:constructionDefinitions,ready:constructionDefinitions&&constructionView?.getScene()?.format==='ProofAtlasLocalDefinitionFramePrototype/1',model:definitionModel?.state?.()||null}),getVariableUseState:()=>constructionInterfaces?constructionView?.getVariableUseState?.()||null:null,getSourceVariableUseState:()=>({enabled:!!sourceUseView,loading:sourceUseLoading,error:sourceUseError,...(sourceUseView?.getState()||{})}),getInterfaceSelection:()=>constructionInterfaces?constructionView?.getSelection?.()||null:null,getInterfaceState:()=>({enabled:constructionInterfaces,ready:constructionInterfaces&&constructionView?.getScene()?.format==='ProofAtlasMixedInterfaceFramePrototype/1',model:definitionModel?.state?.()||null}),getCaptionState:()=>({...captionState}),getTypeScene:()=>typeView?.getScene()||null,getTypeSnapshot:()=>typeView?.getSnapshot()||null,getIndexState:()=>representativeIndex?.state||null,focus:route=>navigate(route),dispose};
    mounted=true;host.ProofAtlasOccurrenceView=api;return api;
   }catch(error){if(!disposed){status.textContent='Occurrence view unavailable: '+error.message;root.append(link('Open declaration library',backURL()));}}
   finally{if(!disposed)root.setAttribute('aria-busy','false');}
