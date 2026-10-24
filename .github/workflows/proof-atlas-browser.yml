@@ -452,8 +452,10 @@ on:
   workflow_dispatch:
 jobs:
   chromium:
+    env:
+      ATLAS_ORIGIN: http://127.0.0.1:8833
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -572,6 +574,7 @@ jobs:
           node scripts/test-proof-atlas-construction-captions-browser.cjs
           node scripts/test-proof-atlas-local-definitions-browser.cjs
           node scripts/test-proof-atlas-mixed-interfaces-browser.cjs
+          node scripts/test-proof-atlas-variable-uses-browser.cjs
           node scripts/test-proof-atlas-type-pages-browser.cjs
           node scripts/test-proof-atlas-construction-pages-browser.cjs
           node scripts/test-proof-atlas-recorded-context-browser.cjs

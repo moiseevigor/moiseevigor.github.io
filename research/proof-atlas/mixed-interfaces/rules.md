@@ -60,4 +60,4 @@ Earlier whole-unit subtrees overlap later units and are not summed. Rechunking t
 
 A future integrated view must make source fields, typing and conversions visually distinguishable; show the original contexts on both sides of each extension; and expose original/computed binder correspondence without drawing an invented source variable node. The same source position can select two different native components, for example a parent's body type and the child's conclusion type. Missing or incompatible observations must preserve source navigation and an explicit unavailable state.
 
-This experiment has not yet implemented or evaluated that mixed view. Bounded paged model construction is separate from whole-browser memory, mathematical abstraction and measured proof-inspection benefit. Article synchronization is not required by the rule.
+The integrated mixed view and its finite browser checks are described in [reader.md](reader.md). Bounded paged model construction is separate from whole-browser memory, mathematical abstraction and measured proof-inspection benefit. Article synchronization is not required by the rule.
