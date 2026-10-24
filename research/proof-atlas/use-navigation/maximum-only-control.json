@@ -1,0 +1,102 @@
+{
+  "status": "PASS",
+  "source": {
+    "name": "lean_workbook_20418",
+    "edition": "goedel-sample-4331",
+    "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+    "sourceSha256": "44d7d19cff28d5b75dc33d21733bf14cb764e765f493ca46cf2a66345b8a3d07"
+  },
+  "selectedBinder": 86579,
+  "route": {
+    "format": "ProofAtlasPackedRoute/1",
+    "root": 1,
+    "depth": 7,
+    "slots": "VRU"
+  },
+  "direction": "first",
+  "maximumOnly": {
+    "status": "unavailable",
+    "reason": "Source use navigation: visit budget exhausted",
+    "source": {
+      "name": "lean_workbook_20418",
+      "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+      "sourceSha256": "44d7d19cff28d5b75dc33d21733bf14cb764e765f493ca46cf2a66345b8a3d07"
+    },
+    "selection": {
+      "node": 86579,
+      "kind": "letE",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 7,
+        "slots": "VRU"
+      }
+    },
+    "stats": {
+      "visits": 65537,
+      "scopePrunes": 13051,
+      "memoPrunes": 18176,
+      "supportPrunes": 0,
+      "peakStack": 121,
+      "peakRows": 128,
+      "peakNegative": 4096
+    }
+  },
+  "withExactSupport": {
+    "format": "ProofAtlasUseWitness/1",
+    "status": "found",
+    "source": {
+      "name": "lean_workbook_20418",
+      "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+      "sourceSha256": "44d7d19cff28d5b75dc33d21733bf14cb764e765f493ca46cf2a66345b8a3d07"
+    },
+    "selection": {
+      "node": 86579,
+      "kind": "letE",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 7,
+        "slots": "VRU"
+      }
+    },
+    "body": {
+      "node": 86578,
+      "slot": 2
+    },
+    "witness": {
+      "node": 16,
+      "index": 2,
+      "namespace": "selected-binder-body-relative",
+      "relative": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 0,
+        "depth": 5,
+        "slots": "CgE"
+      }
+    },
+    "stats": {
+      "visits": 11,
+      "scopePrunes": 0,
+      "memoPrunes": 0,
+      "supportPrunes": 5,
+      "peakStack": 5,
+      "peakRows": 18,
+      "peakNegative": 0
+    },
+    "typing": "not-queried"
+  },
+  "independentlyAuditedSource": {
+    "node": 16,
+    "route": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 13,
+      "slots": "VZUKAQ"
+    }
+  },
+  "moduleSha256": "ed7c3dc7bcc6b2fb355281280ebfa8445f504a4360737260feb9f54349d1805c",
+  "checkerSha256": "2421913372e3c8a2b6c43e6cf736c640f12a305f43f23f7c1a157bcdbb7a0608",
+  "rankAuditSha256": "475e7600854fc172cb7e1ca9176edebe54127a28f5b5be844ef4faad3419f597",
+  "scope": "One bounded-search counterexample. The 65,536-visit maximum-only search is unavailable; exact support recovers the independently rank-checked use. Not a theorem about every maximum-only algorithm."
+}

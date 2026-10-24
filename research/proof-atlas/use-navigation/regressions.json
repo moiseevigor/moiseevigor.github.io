@@ -1,0 +1,134 @@
+{
+  "status": "PASS",
+  "sourceFiles": {
+    "public/js/proof-atlas-use-navigation.js": "ed7c3dc7bcc6b2fb355281280ebfa8445f504a4360737260feb9f54349d1805c",
+    "public/js/proof-atlas-binding-uses.js": "25b730c8b3052da67ebeeb89dc2aa5abd06488ad3030adbb86daca20e6710e4d",
+    "public/js/proof-atlas-library.js": "9745d80168d91f972cf51e82b13826c083894fe87614ea62d1022a1f535e2afc",
+    "public/js/proof-atlas-paged-library.js": "1b0dec51db36192ae175990674336b0d6287099323e640deab4813da92a5c4f7",
+    "public/js/proof-atlas-sync.js": "70f6e1b22dd27cff7fa766513c73d31039f1e691dc4cbde060b93e6eb99a928e",
+    "public/css/proof-atlas-library.css": "e5827ec934949b854e34c71d34c6070655c6f4329fc459516f93797115f6f79c",
+    "projects/proof-atlas/library/index.html": "a321827419f23bcb79b7642b800feb4c283a2bf8401eb0e6d93c5dcd965814d5",
+    "_includes/proof-atlas-reading-tools.html": "400380a20a86beb5bb3153a325e61df04e8bbfcc065789302e476f7a4d5d8cc8"
+  },
+  "checks": [
+    {
+      "script": "scripts/test-proof-atlas-ai-sample-browser.cjs",
+      "sha256": "2b23fb9eac955247007e230bb729686dd0a73b72009f29818d1fe07bcbb25e6d",
+      "result": {
+        "status": "PASS",
+        "aiProofViews": 20,
+        "rootBindingCountsMatchNative": true,
+        "zeroReferenceLet": true,
+        "usedBindingScopeArrow": true,
+        "threeExactRegionJumps": true,
+        "telescopeBindingNavigation": true,
+        "largeProofVertices": 24,
+        "unavailableIsNotZero": true,
+        "queuedCountsCannotRestoreOldSource": true,
+        "articleSelectionPreserved": true,
+        "unsupportedClearsBindingView": true,
+        "optionalFailuresPreserveOriginalReader": true,
+        "accessibilityAudits": 4
+      }
+    },
+    {
+      "script": "scripts/test-proof-atlas-source-corridor-browser.cjs",
+      "sha256": "f6770c617e2fbbe9049c1a3218abb51b135b894d23c19adf71a66570fc868e24",
+      "result": {
+        "status": "PASS",
+        "completeAndPagedAgree": true,
+        "routeOnlyLinks": true,
+        "rejectedNodeMismatchPreservesCompleteSelection": true,
+        "declarationLoadingHasNoMixedSelection": true,
+        "sourceInspectionPreservesSelection": true,
+        "lastLetValueBeforeBinder": true,
+        "lastLetBodyAfterBinder": true,
+        "exactKeyboardSourceAndBinderJumps": 3,
+        "attributedAISource": true,
+        "largeProjectPacket": true,
+        "pagedSourceWithoutCompleteArchive": true,
+        "stalePreparationIgnored": true,
+        "optionalFailurePreservesExplorer": true,
+        "accessibilityAudits": 8,
+        "scope": "Source-context paths in the existing complete/paged readers. No typing of intermediate expressions or measured comprehension claim."
+      }
+    },
+    {
+      "script": "scripts/test-proof-atlas-elimination-composition-browser.cjs",
+      "sha256": "2eafffbf80982e39c4fb3f6f9b038ef5baf69185ad1ce9f94840e3e2aeaf2a16",
+      "result": {
+        "status": "PASS",
+        "articleCaseComposition": true,
+        "cacheVersions": true,
+        "recursorCells": 7,
+        "caseLanes": 8,
+        "inputBinders": 14,
+        "terminalBoundaries": 2,
+        "localInspectionPreservesSelection": true,
+        "exactKeyboardSourceJumps": 2,
+        "zoomAndScroll": true,
+        "accessibilityAudits": 4,
+        "scope": "Riccati sign subproof in the complete published packet; not paged occurrence-view support or comprehension evidence."
+      }
+    },
+    {
+      "script": "scripts/test-proof-atlas-source-pages-browser.cjs",
+      "sha256": "741f12a1094a9d74c0060b9766985de501d214567a964af80823124f6e3d82ed",
+      "result": {
+        "status": "PASS",
+        "liveSceneMatchesCompleteReference": true,
+        "sourceOnlyFieldsNavigable": true,
+        "localFocusPreservesSelection": true,
+        "sourceJumpExact": true,
+        "modeAndDepthCancellation": true,
+        "proofSwitchCancelsStaleLoad": true,
+        "damagedManifestExplicitlyUnavailable": true,
+        "missingModuleRecoveryLink": true,
+        "unsupportedDeclarationExplicit": true,
+        "completeSourceRequests": 0,
+        "sourceCacheLimit": 4096,
+        "completeNativeEvidenceRequests": 0,
+        "largeAISourceBodyOccurrences": "29794821",
+        "accessibilityAudits": 4,
+        "rows": [
+          {
+            "width": 1700,
+            "theme": "light"
+          },
+          {
+            "width": 1700,
+            "theme": "dark"
+          },
+          {
+            "width": 390,
+            "theme": "light"
+          },
+          {
+            "width": 390,
+            "theme": "dark"
+          }
+        ],
+        "scope": "Paged source and native-query geometry in the existing library; shared type graphs have separate residency. Not a total browser-memory or comprehension result."
+      }
+    },
+    {
+      "script": "scripts/test-proof-atlas-scientific-theme-browser.cjs",
+      "sha256": "4c25c55abffaa27e707260984a766ea69ac91652504c8a842fba50071dae77d9",
+      "result": {
+        "status": "PASS",
+        "responsiveStates": 34,
+        "accessibility": 20,
+        "mathFigures": 9,
+        "evidenceEntries": 63,
+        "stableAnchors": 75,
+        "forwardedAnchors": 3,
+        "searches": 2,
+        "layers": 5,
+        "projects": 4,
+        "canvasThemes": 4,
+        "unchangedSelections": 2,
+        "scope": "Shared article tokens/fonts, rendered mathematical rules, responsive pages, searchable verbatim evidence, preserved anchors and live canvas themes with unchanged source identity. No new formal proof claims."
+      }
+    }
+  ]
+}

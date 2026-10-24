@@ -126,6 +126,9 @@ on:
       - 'public/data/proof-atlas/scope-pages/**'
       - 'scripts/*proof-atlas-scope*.cjs'
       - 'public/js/proof-atlas-source-corridor.js'
+      - 'public/js/proof-atlas-use-navigation.js'
+      - 'research/proof-atlas/use-navigation/**'
+      - 'scripts/test-proof-atlas-use-navigation*.cjs'
       - 'scripts/test-proof-atlas-source-corridor*.cjs'
       - 'public/js/proof-atlas-source-pages.js'
       - 'public/js/proof-atlas-paged-library.js'
@@ -398,6 +401,9 @@ on:
       - 'public/data/proof-atlas/scope-pages/**'
       - 'scripts/*proof-atlas-scope*.cjs'
       - 'public/js/proof-atlas-source-corridor.js'
+      - 'public/js/proof-atlas-use-navigation.js'
+      - 'research/proof-atlas/use-navigation/**'
+      - 'scripts/test-proof-atlas-use-navigation*.cjs'
       - 'scripts/test-proof-atlas-source-corridor*.cjs'
       - 'public/js/proof-atlas-source-pages.js'
       - 'public/js/proof-atlas-paged-library.js'
@@ -633,9 +639,12 @@ jobs:
           node scripts/test-proof-atlas-elimination.cjs
           node scripts/test-proof-atlas-elimination-composition.cjs
           node scripts/test-proof-atlas-source-corridor.cjs
+          ATLAS_USE_CHECK_REPORT=1 node scripts/test-proof-atlas-use-navigation.cjs
+          node scripts/test-proof-atlas-use-navigation-maximum.cjs
           node scripts/test-proof-atlas-elimination-browser.cjs
           node scripts/test-proof-atlas-elimination-composition-browser.cjs
           node scripts/test-proof-atlas-source-corridor-browser.cjs
+          node scripts/test-proof-atlas-use-navigation-browser.cjs
           node scripts/test-proof-atlas-recursive-inputs.cjs
           node scripts/test-proof-atlas-recursion-examples.cjs
           node scripts/test-proof-atlas-recursive-inputs-browser.cjs
@@ -747,6 +756,10 @@ jobs:
         run: |
           support_prefix="$("$HOME/.elan/bin/lean" --print-prefix)"
           python3 research/proof-atlas/context-projection/verify_support.py --lean "$support_prefix/bin/lean" --workdir "$RUNNER_TEMP/atlas-projection-support" --check
+      - name: Kernel-check binder-use navigation support laws
+        run: |
+          use_prefix="$("$HOME/.elan/bin/lean" --print-prefix)"
+          python3 research/proof-atlas/context-projection/verify_use_navigation.py --lean "$use_prefix/bin/lean" --workdir "$RUNNER_TEMP/atlas-use-navigation-theory"
       - name: Kernel-check least context closure and regenerate dependency fixtures
         run: |
           closure_prefix="$("$HOME/.elan/bin/lean" --print-prefix)"

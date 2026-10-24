@@ -429,6 +429,17 @@ The source protocol has 512-member/512-slot and 128-KiB metadata limits. The sep
 
 [Protocol and reproduction](/research/proof-atlas/source-corridor/README.md) · [Source model](/public/js/proof-atlas-source-corridor.js) · [Finite audit](/research/proof-atlas/source-corridor/audit.json)
 
+<span id="binder-use-navigation"></span>
+
+### Discovering a use from a collapsed binding wire
+
+The complete and paged readers can find a selected binder’s first, last, next or previous literal source use. The result retains its packet hashes, original binder route and exact use route. The search includes type and value fields, shifts the queried index only in binder bodies, and does not expand the shared occurrence tree. Authenticated free-index summaries prune absent regions; bounded source traversal supplies the witness. Search limits and missing data produce an unavailable result.
+
+The independent finite audit checks source ordering and original binder identity on the Riccati proof, the other recorded profiles and small constructor controls. A 10,000-binder source control exercises paths beyond the bitset width. Six fresh kernel-checked support laws justify the index bounds and field shifts. They do not verify the JavaScript algorithm or assign types to discovered uses. Mathematical relevance and improved comprehension remain unmeasured.
+
+[Protocol and reproduction](/research/proof-atlas/use-navigation/README.md) · [Finite audit](/research/proof-atlas/use-navigation/audit.json) · [Lean laws](/research/proof-atlas/context-projection/UseNavigation.lean) · [Native verification](/research/proof-atlas/use-navigation/native-verification.json)
+
+
 
 </details>
 

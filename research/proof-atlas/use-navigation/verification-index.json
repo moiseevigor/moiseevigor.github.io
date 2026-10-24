@@ -1,0 +1,39 @@
+{
+  "format": "ProofAtlasUseNavigationVerificationIndex/1",
+  "status": "PASS",
+  "release": "local research branch; not pushed or deployed",
+  "previousResearchCommit": "532a2694",
+  "moduleSha256": "ed7c3dc7bcc6b2fb355281280ebfa8445f504a4360737260feb9f54349d1805c",
+  "records": {
+    "browser-audit.json": "fe3ad80c69dab7df4b5706a5e8652a3be3499926977e4c0f14b20bb726418121",
+    "audit.json": "475e7600854fc172cb7e1ca9176edebe54127a28f5b5be844ef4faad3419f597",
+    "native-verification.json": "09640dd90dad4d7537f672f239d354cc0ff4f6c4794921be6f9f5476f2c7d17a",
+    "maximum-only-control.json": "3ce2a9bed34ec65f400ac33677fc998f4bde9c9871fa7dd1ad6e437f84e85763",
+    "README.md": "229afe0f254bd68a865c60a63c9a8f72321450db290604d3557ce864b11481b9",
+    "regressions.json": "0b69182c6f3729e65c443855fd5c1ded1cae56fb5cd884ab30ab588ec1627fbb"
+  },
+  "builtAssetSha256": {
+    "public/js/proof-atlas-use-navigation.js": "ed7c3dc7bcc6b2fb355281280ebfa8445f504a4360737260feb9f54349d1805c",
+    "public/js/proof-atlas-binding-uses.js": "25b730c8b3052da67ebeeb89dc2aa5abd06488ad3030adbb86daca20e6710e4d",
+    "public/js/proof-atlas-library.js": "9745d80168d91f972cf51e82b13826c083894fe87614ea62d1022a1f535e2afc",
+    "public/js/proof-atlas-paged-library.js": "1b0dec51db36192ae175990674336b0d6287099323e640deab4813da92a5c4f7",
+    "public/js/proof-atlas-sync.js": "70f6e1b22dd27cff7fa766513c73d31039f1e691dc4cbde060b93e6eb99a928e",
+    "public/css/proof-atlas-library.css": "e5827ec934949b854e34c71d34c6070655c6f4329fc459516f93797115f6f79c"
+  },
+  "renderedPageSha256": {
+    "projects/proof-atlas/manual/index.html": "e18587cf2092759bccd65f48b6394e9d321607260d2f2a35c017034ec2ab8de4",
+    "projects/proof-atlas/library/index.html": "e9928cbcd04c0552d8f1e4fead5a2b52ccb4aa898ba9f4de24d2151758b51f1d",
+    "projects/proof-atlas/article/index.html": "43582a9403171f2fe09650ef368f17afe318030400dc518b6006a840220613c3",
+    "projects/proof-atlas/evidence/index.html": "e4a049b6978df9913447980fd306e7455cee5a6006a13bafdf42db03e7cfee4e"
+  },
+  "checks": {
+    "rankAndBindingChecks": 4413,
+    "sourceContextCompositions": 1084,
+    "profiles": 35,
+    "selectedBinders": 317,
+    "nativeTheorems": 6,
+    "browserAccessibilityAudits": 8,
+    "existingBrowserSuites": 5
+  },
+  "scope": "Finite exact-source navigation and structural support laws. No all-binder coverage, new native typing of discovered uses, semantic relevance, comprehension or public release claim."
+}

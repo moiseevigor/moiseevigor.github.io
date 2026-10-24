@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "format": "ProofAtlasUseNavigationBrowserAudit/1",
+  "moduleSha256": "ed7c3dc7bcc6b2fb355281280ebfa8445f504a4360737260feb9f54349d1805c",
+  "checkerSha256": "ace0c4da66703aac2f103cd38a21601548d8bf695f99e87ba0ea4b12e7e39145",
+  "source": {
+    "name": "JacobiData.slope_bound_abs",
+    "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+    "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7"
+  },
+  "completeAndPagedAgreement": true,
+  "pagedFullSourceRequests": 0,
+  "directions": [
+    "first",
+    "next",
+    "previous",
+    "last"
+  ],
+  "originalSelectionPreserved": true,
+  "exactKeyboardSourceJumps": 2,
+  "accessibilityAudits": 8,
+  "unavailableHasNoWitness": true,
+  "articleIntegration": true,
+  "disposalClearsWitness": true,
+  "pageErrors": [],
+  "screenshots": "/private/tmp/proof-atlas-use-navigation",
+  "scope": "Riccati hd : 0 < J.d p source-use navigation; software and accessibility checks, not comprehension or arbitrary all-position typing."
+}

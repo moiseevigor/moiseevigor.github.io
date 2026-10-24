@@ -1,0 +1,94 @@
+{
+  "format": "ProofAtlasUseNavigationTheory/1",
+  "theorems": [
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelExpectedTypeConversion": "PASS",
+      "kernelProof": "PASS",
+      "kernelType": "PASS",
+      "name": "ProofAtlas.Projection.above_support_absent",
+      "type": "\u2200 {e : Expr} {i : Nat}, ProofAtlas.Projection.needed e \u2264 i \u2192 \u00aci \u2208 ProofAtlas.Projection.support e"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelExpectedTypeConversion": "PASS",
+      "kernelProof": "PASS",
+      "kernelType": "PASS",
+      "name": "ProofAtlas.Projection.highest_support_present",
+      "type": "\u2200 {e : Expr}, 0 < ProofAtlas.Projection.needed e \u2192 ProofAtlas.Projection.needed e - 1 \u2208 ProofAtlas.Projection.support e"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelExpectedTypeConversion": "PASS",
+      "kernelProof": "PASS",
+      "kernelType": "PASS",
+      "name": "ProofAtlas.Projection.mem_unbind_iff",
+      "type": "\u2200 {xs : List Nat} {i : Nat}, i \u2208 ProofAtlas.Projection.unbind xs \u2194 i + 1 \u2208 xs"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelExpectedTypeConversion": "PASS",
+      "kernelProof": "PASS",
+      "kernelType": "PASS",
+      "name": "ProofAtlas.Projection.lambda_use_fields",
+      "type": "\u2200 {n : Name} {t b : Expr} {bi : BinderInfo} {i : Nat},\n  i \u2208 ProofAtlas.Projection.support (Expr.lam n t b bi) \u2194\n    i \u2208 ProofAtlas.Projection.support t \u2228 i + 1 \u2208 ProofAtlas.Projection.support b"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelExpectedTypeConversion": "PASS",
+      "kernelProof": "PASS",
+      "kernelType": "PASS",
+      "name": "ProofAtlas.Projection.forall_use_fields",
+      "type": "\u2200 {n : Name} {t b : Expr} {bi : BinderInfo} {i : Nat},\n  i \u2208 ProofAtlas.Projection.support (Expr.forallE n t b bi) \u2194\n    i \u2208 ProofAtlas.Projection.support t \u2228 i + 1 \u2208 ProofAtlas.Projection.support b"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "kernelExpectedTypeConversion": "PASS",
+      "kernelProof": "PASS",
+      "kernelType": "PASS",
+      "name": "ProofAtlas.Projection.let_use_fields",
+      "type": "\u2200 {n : Name} {t v b : Expr} {nd : Bool} {i : Nat},\n  i \u2208 ProofAtlas.Projection.support (Expr.letE n t v b nd) \u2194\n    (i \u2208 ProofAtlas.Projection.support t \u2228 i \u2208 ProofAtlas.Projection.support v) \u2228\n      i + 1 \u2208 ProofAtlas.Projection.support b"
+    }
+  ],
+  "status": "PASS",
+  "compiler": "Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+  "resources": {
+    "exitCode": 0,
+    "stopReason": null,
+    "maxRssBytes": 1389510656,
+    "seconds": 2.15
+  },
+  "sourceFiles": {
+    "research/proof-atlas/context-projection/Projection.lean": "1c2de6235881215c5d2d514bbc31ef7389325540e50c2cc08664016f7ef82016",
+    "research/proof-atlas/context-projection/Support.lean": "ee132098363f44bd51227ca50c10e17ca13061df06682b9c07fedb72a3c1319b",
+    "research/proof-atlas/context-projection/UseNavigation.lean": "ef05ef75d99568c760f7f6f63e162d850b29b8a76ffba4975b710b8a169d217e",
+    "research/proof-atlas/context-projection/verify_use_navigation.py": "069414d2306380a0afec5aaa528ca0217ea04952042a36c8b69de673edb0c231"
+  },
+  "entrySha256": "fcc0d3d8ed95d0a02127365f13350ce691c80497986160ad1797a32126f60378",
+  "outputSha256": "4a2eea156dbd2aca98f2cc4fea6b9a5d41404c3096cffeb48d78924b71e8b41b",
+  "scope": "General raw Expr support facts. No JavaScript implementation verification or typing theorem."
+}
