@@ -452,6 +452,8 @@ on:
   workflow_dispatch:
 jobs:
   chromium:
+    env:
+      ATLAS_ORIGIN: http://127.0.0.1:8833
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
