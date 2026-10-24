@@ -109,7 +109,7 @@ function mount(parent, model, data, scene, callbacks) {
         b.onclick = () => {if (disposed || epoch !== rendering) return; action++; selection = {kind:'join',index:i,value:j}; highlight([i,i+1],[i + '-body',i + '-bodyType',(i+1) + '-root',(i+1) + '-conclusionType']); b.setAttribute('aria-pressed','true'); identity.textContent = JSON.stringify({source:scene.source,...selection},null,2); status.textContent = 'Same source occurrence and structurally equal recorded types. The parent body and next conclusion keep distinct native origins.'; callbacks.onSelect(j.sourcePosition.route,callbacks.lazyTypes ? () => model.typeFor(scene,{unit:i,field:'body'}) : model.typeFor(scene,{unit:i,field:'body'}));}; stage.append(join);
       }
     }
-    resize();
+    resize();callbacks.onRender?.();
   }
   function resize() {if (disposed) return; sizing.style.width = stage.offsetWidth * scale + 'px'; sizing.style.height = stage.offsetHeight * scale + 'px';}
   function setScale(value) {scale = value; stage.style.transform = 'scale(' + scale + ')'; resize();}

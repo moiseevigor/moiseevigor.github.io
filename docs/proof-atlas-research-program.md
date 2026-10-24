@@ -1048,3 +1048,32 @@ there are no new native judgments, exhaustive typing or comprehension results.
 The existing catalogue still omits 141 separate alternate Meta observations.
 
 [Reference rule and reproduction](/research/proof-atlas/recorded-variable-uses/reader.md#ordinary-source-cuts) · [Independent source-cut checks](/scripts/test-proof-atlas-source-variable-uses.cjs) · [Browser audit](/scripts/test-proof-atlas-source-variable-uses-browser.cjs)
+
+
+## Syntax multiplicities under source-cut refinement
+
+A source region has a sparse multiplicity vector over free term de Bruijn
+indices. Application fields add their vectors; binder bodies drop index zero
+and shift the other indices, while domains and let values keep the prior scope.
+Shared fields contribute with their expanded occurrence multiplicity. In a
+source cut, retained free variable occurrences plus scope-adjusted hidden-region
+vectors recover the root vector. This is a syntax annotation, separate from
+native typing and logical necessity.
+
+The bounded reference method completed all 44,143 stored binders in the 2,098
+library packets, with 36,358 small-body enumeration comparisons. All 303 selected
+construction counts agree with a separate scalar evaluator, including seven
+previous refusals. The finite refinement check covers 909 cuts and 4,929 hidden
+frontier terms. The new delivery includes twenty frozen publisher-attributed AI
+packets as well: 44,887 stored-binder rows across 2,118 packets. The candidate
+reader attaches these rows to original binder/body positions in the existing
+source and typed context views. It preserves raw source forall binders and
+keeps recorded typed-use coverage separate.
+
+Count delivery retains one bounded page. Whole-source residency and the
+35-profile source-paging inventory remain separate limits; other declarations
+use the complete source reader. Missing metadata stays unavailable. This adds
+no native judgments or semantic-necessity result. Candidate verification and
+public deployment remain distinct, and the general program stays active.
+
+[Rule and reference evidence](/research/proof-atlas/free-index-multiplicity/README.md) · [Candidate reader and scope](/research/proof-atlas/free-index-multiplicity/reader.md)

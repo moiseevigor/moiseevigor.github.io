@@ -19,6 +19,7 @@ function mount(shell,stage,scene,provider,callbacks,layout=null){
   const box=layout?layout.binder(u):stage.querySelector('[data-definition-unit="'+i+'"] .pdu-binding'),count=provider.supportFor(u.root.route),note=el('p',undefined,'pvu-count');
   note.dataset.variableUseCount=i;
   note.textContent=count?count.recordedUses+' recorded typed use'+(count.recordedUses===1?'':'s')+' · '+(count.status==='complete'?count.count+' syntax occurrence'+(count.count==='1'?'':'s'):'syntax count unavailable'):'Syntax count unavailable for this original binder.';
+  note.dataset.scalarCountText=note.textContent;note.dataset.recordedUseLabel=count?count.recordedUses+' recorded typed use'+(count.recordedUses===1?'':'s'):'Recorded typing coverage unavailable';if(box.dataset.syntaxCountsActive==='true')note.textContent=note.dataset.recordedUseLabel;
   note.title='The syntax count covers the original binder body. It is not a count of type judgments or necessary assumptions.';box.append(note);countNodes.push(note);
  }
  function endpoint(ref){

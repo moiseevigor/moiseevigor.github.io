@@ -68,3 +68,5 @@
 .poc-view button{min-height:44px}
 
 .pow-stage button[data-use-highlight]{outline:2px dashed var(--accent,#327879);outline-offset:2px}.pow-edges path[data-use-highlight]{stroke:var(--accent,#327879);stroke-width:3}.pvu-panel button[aria-pressed="true"]{outline:2px solid var(--accent,#327879);outline-offset:2px}
+
+.pow-syntax-count{font:.8rem/1.5 system-ui;padding:8px 0;margin:8px 0 0;border-top:1px solid var(--border,#a4b4b8);overflow-wrap:anywhere}.pow-card [data-syntax-count-note],.pdu-binding [data-syntax-count-note]{font:.75rem/1.5 system-ui}.pow-card [data-syntax-count-note] pre,.pdu-binding [data-syntax-count-note] pre{font:.7rem/1.5 ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere;max-height:200px;overflow:auto}
