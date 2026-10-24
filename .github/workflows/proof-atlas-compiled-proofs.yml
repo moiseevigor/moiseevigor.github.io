@@ -76,6 +76,11 @@ jobs:
       - run: node research/proof-atlas/mixed-interfaces/check-composition.cjs
       - run: node research/proof-atlas/recorded-variable-uses/check.cjs
       - run: node research/proof-atlas/recorded-variable-uses/check-support.cjs
+      - name: Source-syntax multiplicities and cut refinement
+        run: |
+          node research/proof-atlas/free-index-multiplicity/check.cjs
+          node research/proof-atlas/free-index-multiplicity/check-corpus.cjs
+          node research/proof-atlas/free-index-multiplicity/check-refinement.cjs
       - run: node scripts/build-proof-atlas-variable-uses.cjs
       - run: node scripts/test-proof-atlas-variable-uses.cjs
       - run: node scripts/test-proof-atlas-variable-uses-paged.cjs
@@ -163,6 +168,9 @@ jobs:
             /tmp/atlas-variable-uses.json
             /tmp/atlas-variable-uses-paged.json
             /tmp/atlas-source-variable-uses.json
+            /tmp/atlas-free-index-multiplicity-controls.json
+            /tmp/atlas-free-index-multiplicity-corpus.json
+            /tmp/atlas-free-index-multiplicity-refinement.json
             /tmp/atlas-application-spine-fold/verification.json
             /tmp/atlas-occurrence-constructions.json
             /tmp/atlas-reduced-replay.json

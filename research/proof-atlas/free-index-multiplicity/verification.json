@@ -1,0 +1,77 @@
+{
+  "status": "PASS",
+  "scope": "Local reference checks on macOS Node and repeated on cached Linux Node 22.23.3. Whole-inventory and selected-profile counts overlap. These are finite implementation checks, not a general formal proof, browser integration or deployment.",
+  "reports": {
+    "controls": {
+      "sha256": "a3ae897463e3d080b7412b98a52115be31e0797fc786fe003f4eb0d9d9020ae0",
+      "summary": {
+        "status": "PASS",
+        "smallComparisons": 5554,
+        "constructors": 12,
+        "refusals": 12,
+        "partialRefusals": 2,
+        "largeSharing": 240,
+        "deepBinders": 10000,
+        "modelSha256": "4bcda599c2e6a73ba995954541de3858db47435d2fa096b317a6feb96e791177",
+        "testSha256": "daf5b1819e84f079e7fc27013ed7af1e2a18477c21c8ff7d74cb21de3bfc6cbf",
+        "scope": "Independent small occurrence enumeration, all twelve structural constructors, lexical shifts, extreme sharing, deep binders, bounded partial results and rejected modifications. Structural fixtures have no native kernel-validity claim."
+      }
+    },
+    "corpus": {
+      "sha256": "3fc7b135cb728bec7d7bf8f3b8db7be9a5b20003f304e07552a935f7959fa4d4",
+      "summary": {
+        "status": "PASS",
+        "selectedProfiles": 51,
+        "selectedCounts": 303,
+        "scalarComparisons": 303,
+        "legacyUnavailableResolved": 7,
+        "profileBinderQueries": 1272,
+        "profileBinderComplete": 1272,
+        "profileBinderUnavailable": 0,
+        "profileBruteComparisons": 891,
+        "libraryPackets": 2098,
+        "libraryNodes": 1827405,
+        "libraryBinderNodes": 44143,
+        "libraryQueries": 47136,
+        "libraryComplete": 44143,
+        "libraryUnavailable": 0,
+        "libraryBruteComparisons": 36358,
+        "partialPackets": 0,
+        "unavailablePackets": 0,
+        "peakCoefficientCells": 32479,
+        "peakDecimalDigits": 53491,
+        "peakIndexBytes": 607840,
+        "algorithm": "free-index-live-frontier/1",
+        "limits": {
+          "sourceNodes": 262144,
+          "queryRows": 262144,
+          "coefficientCells": 65536,
+          "decimalDigits": 524288
+        },
+        "modelSha256": "4bcda599c2e6a73ba995954541de3858db47435d2fa096b317a6feb96e791177",
+        "testSha256": "ca6556ee450fbd194c20d4bbe6fe206d25de1d141497891459282bc6b2efbde6",
+        "oracleSha256": "da565a3a6485188b6332a11d36dd0e8f340806b734d7c42d761f4d55a51b754d",
+        "scalarSourceSha256": "7f8ce9e0b87c848ddeb1cac887508a4a96127775482c9b40e28c52059e6e8f0d",
+        "verificationScalarSha256": "aa7bcbea9cd28965421c004787bcf22f748c5f189826c8cb0d983f15bf6a7853",
+        "scope": "Exact source-syntax multiplicities, conditional on authenticated validated DAGs. All stored binders in each packet are attempted under fixed coefficient/output limits; unavailable entries remain explicit. Small-body occurrence enumeration and 303 separate larger-budget scalar comparisons are independent checks. Profile and library inventories overlap and are reported separately. No new native judgments, browser integration, semantic necessity or measured comprehension."
+      }
+    },
+    "refinement": {
+      "sha256": "0510e6269a398d4040dbab4b728f8224fb71ba2cc427ea87cc2cc08f070e7116",
+      "summary": {
+        "status": "PASS",
+        "profiles": 51,
+        "binders": 303,
+        "cuts": 909,
+        "frontierTerms": 4929,
+        "retainedVariableTerms": 119,
+        "changedPartitions": 291,
+        "peakCoefficientCells": 32488,
+        "peakDecimalDigits": 53500,
+        "modelSha256": "4bcda599c2e6a73ba995954541de3858db47435d2fa096b317a6feb96e791177",
+        "testSha256": "2c892e689b9bbf77539906f8f4b4ec687ca84cf1d095835661166ac698a04b10",
+        "scope": "Finite free-index-zero cut composition for each selected original binder body: retained variable occurrences plus scope-shifted hidden-region coefficients equals the whole-body count. Exact source partitions stay unchanged under three display budgets. No new source occurrences, typing, semantic necessity or general formal proof."
+      }
+    }
+  }
+}

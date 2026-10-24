@@ -133,3 +133,7 @@ input packet identities, per-packet result digests and declared limitations.
 The scalar comparison modifies only the verification copy's state cap in an
 isolated module; it records both code hashes and leaves `support.cjs` unchanged.
 No data is downloaded and no native Lean job is started.
+
+The aggregate checked snapshot is in `verification.json`. The compiled-proof CI
+audit runs all three scripts and retains their complete public-input reports.
+A stored summary alone does not establish that a later implementation passes.
