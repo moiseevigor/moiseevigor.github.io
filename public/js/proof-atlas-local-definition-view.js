@@ -51,13 +51,16 @@ function mount(parent, model, data, scene, callbacks) {
       const shared = sharing.checked && u.sharing.structuralEquality, declared = el('div',undefined,'pdu-type-block'); declared.append(el('h4',shared ? 'Declared A / recorded B' : 'Declared type A')); formula(declared,u.ports.declared.caption,'Declared type A');
       const aPorts = el('div',undefined,'pdu-ports'); sourceButton(aPorts,i,'declared','A · source'); if (shared) typeButton(aPorts,i,'valueType','B · recorded type'); declared.append(aPorts); if (shared) declared.append(el('small','One formula; two separate formal ports.')); value.append(declared);
       if (!shared) {const inferred = el('div',undefined,'pdu-type-block'); inferred.append(el('h4','Recorded value type B')); formula(inferred,u.ports.valueType.caption,'Recorded value type B'); const p = el('div',undefined,'pdu-ports'); typeButton(p,i,'valueType','B · recorded type'); inferred.append(p); value.append(inferred);}
+      const conversion = el('p','B ≡ A · recorded conversion','pdu-conversion'); conversion.dataset.definitionConversion = 'value'; conversion.dataset.definitionChecks = 'kernelValueConversion'; value.append(conversion);
       const binding = el('section',undefined,'pdu-card pdu-binding'); binding.append(el('p','Definition ' + (i + 1),'pow-help'),el('h3',u.binding.name + ' := v'),el('p','Γ' + u.binding.from + ' → Γ' + u.binding.to,'pdu-context'));
+      binding.append(el('p','Declared type at port A.','pow-help'));
       const bPorts = el('div',undefined,'pdu-ports'); sourceButton(bPorts,i,'binding','Context extension'); sourceButton(bPorts,i,'root','Whole let · source'); binding.append(bPorts);
       const result = el('section',undefined,'pdu-card'); result.append(el('h3','Body and result'));
       for (const [title,id,field,scope] of [['Body type C','bodyType','body',u.body.contextLength],['Result type R','conclusionType','root',u.context.length]]) {
         const block = el('div',undefined,'pdu-type-block'); block.append(el('h4',title + ' · Γ' + scope)); formula(block,u.ports[id].caption,title);
         const p = el('div',undefined,'pdu-ports'); if (field === 'body') sourceButton(p,i,field,'Body · source'); typeButton(p,i,id,field === 'body' ? 'C · recorded type' : 'R · recorded type'); block.append(p); result.append(block);
       }
+      const substitution = el('p','C[v/x] ≡ R · recorded result conversion','pdu-conversion'); substitution.dataset.definitionConversion = 'result'; substitution.dataset.definitionChecks = 'kernelResultTypeConversion,kernelSubstitutedTypeConversion'; substitution.setAttribute('aria-label','Recorded result conversion after substituting the value for the local definition ' + u.binding.name + ' in the body type'); result.append(substitution);
       const assignment = el('span',':= →','pdu-assignment'), extension = el('span','Γ+ →','pdu-extension'); assignment.setAttribute('aria-hidden','true'); extension.setAttribute('aria-hidden','true'); row.append(value,binding,result,assignment,extension); stage.append(row);
       if (i < scene.joins.length) {
         const j = scene.joins[i], join = el('section',undefined,'pdu-join'), epoch = rendering, b = el('button','Inspect join ' + (i + 1)); b.type = 'button'; b.dataset.definitionJoin = i; b.setAttribute('aria-pressed','false');

@@ -23,7 +23,13 @@ const out = {status:'RUNNING',pagedFrames:0,completeFrames:0,sourcePortSelection
   const url = (x,entry,mode='paged',budget=8) => origin + '/projects/proof-atlas/library/?view=occurrence&diagram=construction&group=definitions&members=' + budget + '&edition=' + encodeURIComponent(x.d.edition) + '&proof=' + encodeURIComponent(x.record.name) + (mode === 'paged' ? '&loading=paged' : '') + '#occurrence=' + x.record.indexSha256 + '.' + entry.route.root + '.' + entry.route.depth + '.' + entry.route.slots;
   const ready = () => page.waitForFunction(() => window.ProofAtlasOccurrenceView?.getDefinitionState().ready && ProofAtlasOccurrenceView.getConstructionScene()?.format === 'ProofAtlasLocalDefinitionFramePrototype/1',{},{timeout:60000});
   async function go(x,entry,mode='paged',budget=8) {paged = mode === 'paged'; await page.goto(url(x,entry,mode,budget)); await ready();}
-  async function compare(x,entry,budget=8) {const expected = await x.model.create(entry.route,{maxUnits:budget}); assert.deepEqual(await page.evaluate(() => ProofAtlasOccurrenceView.getConstructionScene()),expected); assert(await page.locator('[data-local-definition-view]').isVisible()); return expected;}
+  async function compare(x,entry,budget=8) {
+    const expected = await x.model.create(entry.route,{maxUnits:budget}); assert.deepEqual(await page.evaluate(() => ProofAtlasOccurrenceView.getConstructionScene()),expected); assert(await page.locator('[data-local-definition-view]').isVisible());
+    const relations = await page.locator('[data-definition-unit]').evaluateAll(rows => rows.map(row => [...row.querySelectorAll('[data-definition-conversion]')].map(n => ({kind:n.dataset.definitionConversion,checks:n.dataset.definitionChecks.split(','),text:n.textContent}))));
+    assert.equal(relations.length,expected.units.length);
+    for (const [i,items] of relations.entries()) {assert.deepEqual(items.map(n => n.kind),['value','result']); assert.equal(items[0].text,'B ≡ A · recorded conversion'); assert.equal(items[1].text,'C[v/x] ≡ R · recorded result conversion'); for (const item of items) for (const check of item.checks) assert.equal(expected.units[i].checks[check],'PASS');}
+    return expected;
+  }
   async function selectSource(frame,index,id) {
     await page.locator('[data-definition-port="' + index + '-' + id + '"]').evaluate(b => b.click());
     const u = frame.units[index], value = u.ports[id] || u[id]; assert.deepEqual(await page.evaluate(() => ProofAtlasOccurrenceView.getDefinitionSelection()),{kind:'port',unit:index,id,value}); out.sourcePortSelections++;
