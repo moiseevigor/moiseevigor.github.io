@@ -1007,3 +1007,12 @@ The candidate reader offers the same local-definition view in complete and paged
 This establishes finite source/context/type-origin correspondence for the implemented rule. General mixed proof units, introduced-variable witnesses, semantic abstraction and measured human proof-inspection benefits remain open.
 
 [Riccati definition chain](/projects/proof-atlas/library/?view=occurrence&loading=paged&diagram=construction&group=definitions&members=8&edition=published-15&proof=JacobiData.slope_bound_abs#occurrence=0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa.1.6.VQU) · [Rule and evidence scope](/research/proof-atlas/local-definitions/README.md).
+
+
+## Mixed introduction and definition interfaces
+
+The optional **Typed interfaces → Introductions + definitions** view composes recorded assumptions and local definitions through their actual original body interfaces. An introduction keeps source domain A, the recorded type of A, actual body type C, expected expression D and result type R separate. Source lambda and computed Pi binders retain distinct identities and an explicit correspondence. The native C ≡ D conversion does not replace C at a structural join. Expected expressions do not acquire new typing judgments; codomain geometry is navigation inside the existing recorded R.
+
+The same rule has complete and paged models, bounded chunks and exact source cuts. The finite inventory contains209recorded introductions and60recorded local definitions across26profiles; it is not complete Lean coverage. Seven actual/expected body types differ structurally. At two published crossing positions, the next recorded application's actual result matches C but not D, so joining through D would change the implemented structural relation. Applications beyond the admitted context chain remain boundaries. Rechunking checks preserve original regions and separate native origins. General preservation, broader elimination coverage and measured human inspection benefits remain open.
+
+[Integrated reader and reproducible checks](/research/proof-atlas/mixed-interfaces/reader.md) · [Rule specification](/research/proof-atlas/mixed-interfaces/rules.md).

@@ -7,6 +7,9 @@ on:
       - 'public/js/proof-atlas-cursor-constructions.js'
       - 'public/js/proof-atlas-cursor-context-frame.js'
       - 'public/js/proof-atlas-cursor-local-definitions.js'
+      - 'public/js/proof-atlas-*mixed-interface*.js'
+      - 'scripts/test-proof-atlas-*mixed-interfaces*.cjs'
+      - 'research/proof-atlas/mixed-interfaces/**'
       - 'public/js/proof-atlas-local-definition-*.js'
       - 'scripts/test-proof-atlas-local-definitions*.cjs'
       - 'scripts/test-proof-atlas-cursor-local-definitions.cjs'
@@ -268,6 +271,9 @@ on:
       - 'public/js/proof-atlas-cursor-constructions.js'
       - 'public/js/proof-atlas-cursor-context-frame.js'
       - 'public/js/proof-atlas-cursor-local-definitions.js'
+      - 'public/js/proof-atlas-*mixed-interface*.js'
+      - 'scripts/test-proof-atlas-*mixed-interfaces*.cjs'
+      - 'research/proof-atlas/mixed-interfaces/**'
       - 'public/js/proof-atlas-local-definition-*.js'
       - 'scripts/test-proof-atlas-local-definitions*.cjs'
       - 'scripts/test-proof-atlas-cursor-local-definitions.cjs'
@@ -447,7 +453,7 @@ on:
 jobs:
   chromium:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -565,6 +571,7 @@ jobs:
           node scripts/test-proof-atlas-recorded-captions-browser.cjs
           node scripts/test-proof-atlas-construction-captions-browser.cjs
           node scripts/test-proof-atlas-local-definitions-browser.cjs
+          node scripts/test-proof-atlas-mixed-interfaces-browser.cjs
           node scripts/test-proof-atlas-type-pages-browser.cjs
           node scripts/test-proof-atlas-construction-pages-browser.cjs
           node scripts/test-proof-atlas-recorded-context-browser.cjs
