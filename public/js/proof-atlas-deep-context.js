@@ -218,7 +218,7 @@
   sourceBytes=capture(sourceBytes);evidenceBytes=capture(evidenceBytes);d=JSON.parse(JSON.stringify(d));record=JSON.parse(JSON.stringify(record));
   demand(hash(d?.sha256)&&hash(record?.indexSha256)&&hash(record.sourceSha256)&&d.name===record.name&&d.indexSha256===record.indexSha256&&d.sourceSha256===record.sourceSha256,'recorded descriptor identity');
   demand(natural(record.uniqueNodes)&&record.uniqueNodes>0&&record.uniqueNodes<=P.limits.sourceNodes,'recorded source bound');
-  const location=letMetadata?/^\/public\/data\/proof-atlas\/let-result-pools\/[A-Za-z0-9_.-]+\.index\.json\.gz$/:/^\/public\/data\/proof-atlas\/(occurrence-types|goedel-sample)\/[A-Za-z0-9_.-]+\.json\.gz$/;
+  const location=letMetadata?/^\/public\/data\/proof-atlas\/let-result-pools\/[A-Za-z0-9_.-]+\.index\.json\.gz$/:/^\/public\/data\/proof-atlas\/(occurrence-types|goedel-sample|eliminations|beta-reductions|packet-types|use-site-types|recursion-examples)\/[A-Za-z0-9_.-]+\.json\.gz$/;
   demand(typeof d.edition==='string'&&typeof d.file==='string'&&location.test(d.file),'recorded evidence location');
   demand(await A.digest(sourceBytes)===record.indexSha256&&await A.digest(evidenceBytes)===d.sha256,'recorded input hash');
   const source=A.validateIndex(JSON.parse(new TextDecoder().decode(sourceBytes)),record),e=JSON.parse(new TextDecoder().decode(evidenceBytes));
@@ -259,7 +259,8 @@
    demand(primary||['application-trace-observation','lambda-introduction-observation',...(letMetadata?['let-premise-observation']:[])].includes(origin?.kind),'recorded observation origin');
    const queryRoute=primary?route:P.encode(origin.query.route.root,origin.query.route.slots),query=primary?q:indexed.entries.get(origin.query.route.root+':'+origin.query.route.slots.join('.'));
    demand(query?.status==='checked'&&P.resolve(source,queryRoute).node===(primary?q.node:origin.query.node),'recording parent query');
-   const recording=freeze({kind:primary?'primary-query':origin.kind,queryRoute,queryNode:query.node,...(origin?{part:origin.part,...(origin.presentation?{presentation:origin.presentation}:{}),...(origin.slot?{slot:origin.slot}:{})}:{})});
+   const nativeRecording=O.recording?.(e);
+   const recording=freeze({kind:primary?'primary-query':origin.kind,queryRoute,queryNode:query.node,...(origin?{part:origin.part,...(origin.presentation?{presentation:origin.presentation}:{}),...(origin.slot?{slot:origin.slot}:{})}:{}),...(nativeRecording?{native:nativeRecording}:{})});
    const contextLength=q.context.length;
    const entry=Object.freeze({format:'ProofAtlasDeepTypingAttachment/2',profile:letMetadata?'native-let-extraction-record':'native-extraction-record',evidenceSha256:d.sha256,evidenceFile:d.file,caseName:record.name,sourceIndexSha256:record.indexSha256,sourceGraphSha256,route:freeze(route),node:q.node,role:q.role,contextLength,
     typeTableSha256:pool.sha256,typeTableRoot:q.typeRoot,typeComponentSha256:component.sha256,typeData:component.data,typeRecord:component.record,typeText:q.typeText,recording,
@@ -321,6 +322,37 @@
   const pkg=Object.freeze({cases:Object.freeze([value]),case:name=>name===value.name?value:null,attach:async(data,record)=>await baseline.attach(data,record)?value:null});
   recordedPackages.add(pkg);return pkg;
  }
+ // A position, its type observation and its construction owner are separate.
+ // Select a whole sealed entry instead of attaching another package's rule to
+ // the former entry. Nothing in any input package is modified by this union.
+ function unionRecorded(input){
+  const order=['case','beta','let','primary','packet','useSites'];
+  demand(Array.isArray(input)&&input.length>0&&input.length<=8,'recorded union package bound');
+  const seen=new Set(),parts=input.map(p=>{demand(order.includes(p.kind)&&!seen.has(p.kind)&&recordedPackages.has(p.package)&&p.package.cases.length===1,'sealed distinct union inputs');seen.add(p.kind);return{kind:p.kind,package:p.package,value:p.package.cases[0]};}).sort((a,b)=>order.indexOf(a.kind)-order.indexOf(b.kind));
+  const locations={case:/\/(eliminations|recursion-examples|goedel-sample)\//,beta:/\/beta-reductions\//,let:/\/let-result-pools\//,primary:/\/(occurrence-types|goedel-sample)\//,packet:/\/packet-types\//,useSites:/\/use-site-types\//};
+  for(const part of parts)demand(hash(part.package.evidenceSha256)&&part.value.entries.every(e=>e.evidenceSha256===part.package.evidenceSha256&&locations[part.kind].test(e.evidenceFile)),'union input kind/owner');
+  const first=parts[0].value,entries=new Map(),alternatives=new Map();let overlaps=0,total=0;
+  for(const part of parts){const c=part.value;
+   demand(c.name===first.name&&c.provenance.source.edition===first.provenance.source.edition&&c.record.indexSha256===first.record.indexSha256&&c.record.sourceSha256===first.record.sourceSha256&&c.sourceGraphSha256===first.sourceGraphSha256,'union source correspondence');
+   for(const entry of c.entries){total++;demand(total<=32768&&attestedEntries.has(entry),'union observation bound/attachment');const key=routeKey(entry.route),previous=entries.get(key);
+    if(previous){
+     demand(previous.node===entry.node&&previous.role===entry.role&&previous.contextLength===entry.contextLength&&expressionEqual(previous.typeData,previous.typeData.roots[0],entry.typeData,entry.typeData.roots[0]),'union observation/type agreement');
+     const a=contextDescriptors.get(previous),b=contextDescriptors.get(entry);demand(a&&b,'union ordered context descriptors');
+     for(let i=0;i<entry.contextLength;i++){const x=contextSlot(a,i),y=contextSlot(b,i);demand(x.depth===y.depth&&x.node===y.node,'union ordered context agreement');}
+     if(!constructionRecords.has(previous)&&constructionRecords.has(entry))entries.set(key,entry);overlaps++;
+    }else{entries.set(key,entry);demand(entries.size<=4096,'union unique position bound');}
+    if(!alternatives.has(key))alternatives.set(key,[]);alternatives.get(key).push(freeze({kind:part.kind,evidenceSha256:entry.evidenceSha256,evidenceFile:entry.evidenceFile,queryRoute:entry.recording.queryRoute,queryNode:entry.recording.queryNode,recordingKind:entry.recording.kind,type:typeIdentity(entry),hasConstruction:constructionRecords.has(entry)}));
+   }
+  }
+  for(const [key,list]of alternatives){
+   alternatives.set(key,Object.freeze(list));const original=entries.get(key),entry=Object.freeze({...original,recording:freeze({...original.recording,union:{format:'ProofAtlasPositionConsensus/1',method:'same-type-syntax-role-and-ordered-source-context',selection:'checked-primitive-before-observation/1',alternatives:list}})});
+   attestedEntries.add(entry);contextDescriptors.set(entry,contextDescriptors.get(original));const construction=constructionRecords.get(original);if(construction)constructionRecords.set(entry,construction);entries.set(key,entry);
+  }
+  const value=Object.freeze({...first,entries:Object.freeze([...entries.values()]),get:route=>{P.parse(route);return entries.get(routeKey(route))||null;},alternatives:route=>{P.parse(route);return alternatives.get(routeKey(route))||Object.freeze([]);},
+   provenance:freeze({...first.provenance,producerSourceModuleHashVerified:parts.every(p=>p.value.provenance.producerSourceModuleHashVerified===true),recordedUnion:{format:'ProofAtlasRecordedUnion/1',policy:'checked-primitive-before-observation/1',order:parts.map(p=>p.kind),inputs:parts.map(p=>({kind:p.kind,evidenceSha256:p.package.evidenceSha256,...p.value.provenance}))}}),
+   stats:freeze({primaryQueries:parts.reduce((n,p)=>n+p.value.stats.primaryQueries,0),unavailableQueries:parts.reduce((n,p)=>n+p.value.stats.unavailableQueries,0),explicitObservations:parts.reduce((n,p)=>n+p.value.stats.explicitObservations,0),typedOccurrences:entries.size,unionInputObservations:total,unionOverlaps:overlaps,sharedTypeTables:parts.reduce((n,p)=>n+p.value.stats.sharedTypeTables,0),typeComponents:parts.reduce((n,p)=>n+p.value.stats.typeComponents,0),storedTypeNodes:parts.reduce((n,p)=>n+p.value.stats.storedTypeNodes,0)})});
+  const pkg=Object.freeze({cases:Object.freeze([value]),case:name=>name===value.name?value:null,attach:async(data,record)=>await parts[0].package.attach(data,record)?value:null});recordedPackages.add(pkg);return pkg;
+ }
  function typeIdentity(entry){return entry.typeTableSha256?{typeTableSha256:entry.typeTableSha256,typeTableRoot:entry.typeTableRoot,typeComponentSha256:entry.typeComponentSha256}:{typeGraphSha256:entry.typeGraphSha256,...(entry.typeComponentRoot!==undefined?{typeComponentRoot:entry.typeComponentRoot}:{})};}
  function typeScene(entry,sourceData,route=P.encode(0,[]),options={}){
   demand(attestedEntries.has(entry)&&['ProofAtlasDeepTypingAttachment/1','ProofAtlasDeepTypingAttachment/2'].includes(entry?.format)&&hash(entry.evidenceSha256),'record attachment');
@@ -343,5 +375,5 @@
   demand(new TextEncoder().encode(JSON.stringify(scene)).length<=W.limits.metadataBytes,'type scene metadata bound');
   return scene;
  }
- const api={limits,descriptor,constructionDescriptor,prepare,prepareConstructions,mergeControls,recorded,recordedLets,mergeRecorded,typeIdentity,typeScene,construction,constructionType,expressionEqual,sourceIdentity};if(node)module.exports=api;else host.ProofAtlasDeepContext=api;
+ const api={limits,descriptor,constructionDescriptor,prepare,prepareConstructions,mergeControls,recorded,recordedLets,mergeRecorded,unionRecorded,typeIdentity,typeScene,construction,constructionType,expressionEqual,sourceIdentity};if(node)module.exports=api;else host.ProofAtlasDeepContext=api;
 })(typeof window==='undefined'?globalThis:window);

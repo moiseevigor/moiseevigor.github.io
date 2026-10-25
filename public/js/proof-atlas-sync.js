@@ -80,7 +80,7 @@
    try{for(const [name,url]of [['ProofAtlasPackedRoutes','/public/js/proof-atlas-packed-routes.js?v=1'],['ProofAtlasScopeInterfaces','/public/js/proof-atlas-scope-interfaces.js?v=1'],['ProofAtlasUseNavigation','/public/js/proof-atlas-use-navigation.js?v=1'],['ProofAtlasApplicationJudgment','/public/js/proof-atlas-application-judgment.js?v=1'],['ProofAtlasUseInputs','/public/js/proof-atlas-use-inputs.js?v=1']])if(!window[name])await script(url);}catch(_){/* Exact source navigation remains usable without optional use discovery. */}
    try{if(!window.PROOF_ATLAS_USE_SITE_TYPES)await script('/public/data/proof-atlas/use-site-types-manifest.js?v=1');}catch(_){/* Unavailable additional evidence leaves earlier records explicit. */}
    if(!window.ProofAtlasNativeSelection)await script('/public/js/proof-atlas-native-selection.js?v=1');
-   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=82');
+   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=83');
    if(!$('pl-provenance').closest('details')){const details=document.createElement('details'),summary=document.createElement('summary');summary.textContent='Provenance and axiom dependencies';$('pl-provenance').before(details);details.append(summary,$('pl-provenance'));}
    return window.ProofAtlasLibrary;
   })().catch(e=>{engine=null;throw e;});return engine;

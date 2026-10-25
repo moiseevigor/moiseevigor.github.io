@@ -2,9 +2,9 @@
 const fs=require('fs'),vm=require('vm'),z=require('zlib'),assert=require('assert/strict');
 const T=require('../public/js/proof-atlas-deep-context'),Q=require('../public/js/proof-atlas-type-query-pages'),SP=require('../public/js/proof-atlas-source-pages'),C=require('../public/js/proof-atlas-cursor-window'),W=require('../public/js/proof-atlas-occurrence-window'),P=require('../public/js/proof-atlas-packed-routes'),h={};
 for(const name of ['library-manifest','occurrence-types-manifest','goedel-sample-manifest','let-result-pools-manifest','source-pages-manifest','type-query-pages-manifest'])vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/'+name+'.js','utf8'),{window:h});
-const {library,types}=require('../public/js/proof-atlas-ai-sample').register(h.PROOF_ATLAS_LIBRARY,h.PROOF_ATLAS_OCCURRENCE_TYPES,null,h.PROOF_ATLAS_AI_SAMPLE),raw=f=>z.gunzipSync(fs.readFileSync('.'+f),{maxOutputLength:67108864});let lookups=0,cuts=0,missing=0,typeCuts=0,snapshots=0,pagedRows=0;const rows=[];
+const U=require('../research/proof-atlas/recorded-union.cjs'),raw=U.raw;let lookups=0,cuts=0,missing=0,typeCuts=0,snapshots=0,pagedRows=0;const rows=[];
 (async()=>{
- for(const d of types.records){const record=library.editions.find(e=>e.id===d.edition).declarations.find(r=>r.name===d.name),b=raw(record.indexFile);let pkg=await T.recorded(b,raw(d.file),d,record);const ld=h.PROOF_ATLAS_LET_REDUCTIONS.records.find(x=>x.edition===d.edition&&x.name===record.name&&x.indexSha256===record.indexSha256);if(ld)pkg=T.mergeRecorded(pkg,await T.recordedLets(b,raw(ld.file),ld,record));const c=pkg.case(record.name);
+ for(const item of U.inventory()){const d={edition:item.edition},record=item.record,{package:pkg}=await U.open(item);const c=pkg.case(record.name);
   const fetcher=async file=>{assert(file.startsWith('/public/data/proof-atlas/type-pages/')||file.startsWith('/public/data/proof-atlas/type-query-pages/')||file.startsWith('/public/data/proof-atlas/source-pages/'),'Complete archive or unexpected request: '+file);return new Response(fs.readFileSync('.'+file));};
   const qd=h.PROOF_ATLAS_TYPE_QUERY_PAGES.records.find(x=>x.edition===d.edition&&x.name===record.name),sd=h.PROOF_ATLAS_SOURCE_PAGES.records.find(x=>x.edition===d.edition&&x.name===record.name),query=await Q.open(qd,record,{fetcher}),source=await SP.open(sd,record,{fetcher}),model=C.open(source),seen=new Set();
   try{for(const entry of c.entries){const found=await query.lookup(entry.route);assert(found);assert.deepEqual(found.route,entry.route);seen.add(Q.key(entry.route));lookups++;
@@ -17,5 +17,5 @@ const {library,types}=require('../public/js/proof-atlas-ai-sample').register(h.P
    assert(query.state().indexPages<=4);rows.push({name:record.name,sourceIndexSha256:record.indexSha256,observations:c.entries.length,queryState:query.state(),sourceState:source.state()});
   }finally{source.dispose();query.dispose();}
  }
- assert.equal(lookups,2442);assert(missing>0);const report={status:'PASS',declarations:rows.length,lookups,cleanAbsences:missing,typeCuts,sourceCuts:cuts,sourcePresentationPoints:snapshots,pagedRows,completeArchiveRequests:0,rows};fs.writeFileSync('/tmp/atlas-type-query-pages.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({...report,rows:undefined}));
+ assert.equal(lookups,5568);assert(missing>0);const report={status:'PASS',declarations:rows.length,lookups,cleanAbsences:missing,typeCuts,sourceCuts:cuts,sourcePresentationPoints:snapshots,pagedRows,completeArchiveRequests:0,rows};fs.writeFileSync('/tmp/atlas-type-query-pages.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({...report,rows:undefined}));
 })().catch(e=>{console.error(e.stack);process.exit(1);});

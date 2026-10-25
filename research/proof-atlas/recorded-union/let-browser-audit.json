@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "declarations": 9,
+  "letSelections": 60,
+  "premiseSelections": 180,
+  "typeViews": 180,
+  "groupedComparisons": 9,
+  "binderJumps": 1,
+  "accessibilityAudits": 4,
+  "failureAndStaleControls": 2,
+  "reducedPoolRequests": 0,
+  "newNativeJudgments": 0,
+  "wholeProofCoverage": false
+}

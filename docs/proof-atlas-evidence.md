@@ -455,9 +455,15 @@ Riccati's original compiled graph is matched field for field after privately rec
 
 [Immediate-site protocol](/research/proof-atlas/use-sites/README.md) · [Native verification](/research/proof-atlas/use-sites/native-verification.json) · [Current finite audit](/research/proof-atlas/use-sites/audit.json)
 
-The ordinary library construction diagrams also use the additional records. In the same 283-site subset, 279 application frames become available and four earlier replay frames are retained. Across 849 complete/paged cuts, source partitions, original contexts and all six application-type components agree. Fifteen variable-headed calls include declaration types, body type regions and proof/value applications; those regions remain distinct. The separate occurrence-window indexes are not included in this integration.
+The ordinary library construction diagrams also use the additional records. In the same 283-site subset, 279 application frames become available and four earlier replay frames are retained. Across 849 complete/paged cuts, source partitions, original contexts and all six application-type components agree. Fifteen variable-headed calls include declaration types, body type regions and proof/value applications; those regions remain distinct. The occurrence-window indexes now use a separate finite union with original ownership retained; see below.
 
 [Construction integration and limits](/research/proof-atlas/construction-union/README.md) · [Cut audit](/research/proof-atlas/construction-union/audit.json)
+
+<span id="recorded-position-union"></span>
+
+The complete and sparse occurrence readers share 5,568 recorded positions and 2,527 primitive constructions across 35 profiles, including recursion controls. All 448 overlapping observations agree on type syntax, role and ordered original context. At all 283 immediate application sites, six type components agree with the ordinary proof diagram. Selected constructions retain their original evidence owner and an alternative-observation ledger. Sparse navigation keeps one active type table; absent positions remain unrecorded. These are finite consistency checks, without new native execution or a comprehension claim.
+
+[Union rule and limits](/research/proof-atlas/recorded-union/README.md) · [Independent audit](/research/proof-atlas/recorded-union/audit.json) · [Verification index](/research/proof-atlas/recorded-union/verification-index.json)
 
 
 [Protocol and limits](/research/proof-atlas/use-inputs/README.md) · [Independent audit](/research/proof-atlas/use-inputs/audit.json) · [Model](/public/js/proof-atlas-use-inputs.js)

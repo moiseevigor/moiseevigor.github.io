@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "profiles": 35,
+  "statementComparisons": 3,
+  "defaultProofFocus": 1,
+  "sceneComparisons": 51,
+  "typeComparisons": 46,
+  "nodeSelections": 35,
+  "sharedNodeSelections": 2,
+  "recordedBoundaryTypes": 2,
+  "sourceBinderJumps": 1,
+  "typeBinderJumps": 1,
+  "localTypeJumps": 1,
+  "letSelections": 1,
+  "alternateTypes": 1,
+  "axeAudits": 4,
+  "failureControls": 7,
+  "peakSourceNodes": 1971,
+  "peakTypeNodes": 320,
+  "peakRecordBytes": 70811,
+  "completeArchiveRequests": 0,
+  "moduleLoadRequests": 1
+}

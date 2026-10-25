@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "profiles": 35,
+  "sourceComparisons": 38,
+  "typeComparisons": 38,
+  "sharedNodeSelections": 2,
+  "refinements": 35,
+  "positionSelections": 35,
+  "binderJumps": 1,
+  "localBinderJumps": 1,
+  "absenceChecks": 1,
+  "axeAudits": 4,
+  "failureControls": 6,
+  "peakSourceNodes": 623,
+  "peakTypeNodes": 256,
+  "completeArchiveRequests": 0
+}

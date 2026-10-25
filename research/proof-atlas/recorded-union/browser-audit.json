@@ -1,0 +1,127 @@
+{
+  "status": "PASS",
+  "sourceSites": 3,
+  "sceneComparisons": 6,
+  "typeComparisons": 14,
+  "sourceSelections": 14,
+  "provenanceSelections": 14,
+  "transportPairs": 3,
+  "pagedCompleteArchiveRequests": 0,
+  "failureControls": 1,
+  "rows": [
+    {
+      "edition": "published-15",
+      "name": "JacobiData.slope_bound_abs",
+      "node": 2333,
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 18,
+        "slots": "VaWqRQU"
+      },
+      "loading": "complete",
+      "constructionOwner": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+      "alternatives": [
+        {
+          "kind": "useSites",
+          "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520"
+        }
+      ]
+    },
+    {
+      "edition": "published-15",
+      "name": "JacobiData.slope_bound_abs",
+      "node": 2333,
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 18,
+        "slots": "VaWqRQU"
+      },
+      "loading": "paged",
+      "constructionOwner": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+      "alternatives": [
+        {
+          "kind": "useSites",
+          "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520"
+        }
+      ]
+    },
+    {
+      "edition": "published-15",
+      "name": "JacobiData.slope_bound_abs",
+      "node": 1298,
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 16,
+        "slots": "VaVqEA"
+      },
+      "loading": "complete",
+      "constructionOwner": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+      "alternatives": [
+        {
+          "kind": "useSites",
+          "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520"
+        }
+      ]
+    },
+    {
+      "edition": "published-15",
+      "name": "JacobiData.slope_bound_abs",
+      "node": 1298,
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 16,
+        "slots": "VaVqEA"
+      },
+      "loading": "paged",
+      "constructionOwner": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+      "alternatives": [
+        {
+          "kind": "useSites",
+          "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520"
+        }
+      ]
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_43987",
+      "node": 78,
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 19,
+        "slots": "VUVURRE"
+      },
+      "loading": "complete",
+      "constructionOwner": "0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77",
+      "alternatives": [
+        {
+          "kind": "useSites",
+          "evidenceSha256": "0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77"
+        }
+      ]
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_43987",
+      "node": 78,
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 19,
+        "slots": "VUVURRE"
+      },
+      "loading": "paged",
+      "constructionOwner": "0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77",
+      "alternatives": [
+        {
+          "kind": "useSites",
+          "evidenceSha256": "0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77"
+        }
+      ]
+    }
+  ]
+}

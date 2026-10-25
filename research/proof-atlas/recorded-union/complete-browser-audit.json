@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "sourceSelections": 103,
+  "corpusSelections": 52,
+  "baselineCorpusSelections": 50,
+  "continuationCorpusSelections": 2,
+  "nativeControlPositions": 49,
+  "deepBodyTypeReturnsToOriginalBinder": true,
+  "distinctSameNodeContexts": true,
+  "metaKernelTypesRemainSeparate": true,
+  "originalExtractionQueryJump": true,
+  "binderJumps": 2,
+  "recordedTypeViews": 155,
+  "premiseTexts": 52,
+  "accessibilityAudits": 4,
+  "failureAndStaleControls": 3,
+  "newNativeJudgments": 0,
+  "wholeProofCoverage": false
+}

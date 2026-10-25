@@ -1,0 +1,175 @@
+{
+  "format": "ProofAtlasRecordedUnionVerification/1",
+  "status": "PASS",
+  "publication": "LOCAL_NOT_DEPLOYED_NO_BLOG_POST",
+  "newNativeExecution": false,
+  "privateMathematicalSourcePublished": false,
+  "inputPackagesUnchanged": true,
+  "finiteSample": {
+    "profiles": 35,
+    "typedPositions": 5568,
+    "primitiveConstructions": 2527,
+    "overlaps": 448,
+    "independentOrderedContextSlots": 64446,
+    "ordinaryOccurrenceSites": 283,
+    "ordinaryOccurrenceTypeComponents": 1698
+  },
+  "transport": {
+    "completeReferenceConstructionCuts": 7581,
+    "typeLookups": 5568,
+    "sourceCuts": 11136,
+    "onePageSourceNodePeak": 256,
+    "onePageTypeNodePeak": 64,
+    "fullArchiveRequests": 0,
+    "maxTypeDescriptorsObserved": 5,
+    "typeDescriptorLimit": 8,
+    "activeTypeTableLimit": 1
+  },
+  "browser": {
+    "exactImmediateInputSites": 3,
+    "fullPagedPairs": 3,
+    "sourceAndProvenanceSelections": 14,
+    "scopedEvidence": [
+      "browser-audit.json",
+      "transport-browser-audit.json",
+      "type-browser-audit.json",
+      "let-browser-audit.json",
+      "complete-browser-audit.json"
+    ]
+  },
+  "scope": [
+    "Finite consistency of compiled native attestations and their geometry.",
+    "Source packet, edition and exact occurrence route identify a position.",
+    "Alternative records retain their original owners; syntactic type/context disagreements reject the union.",
+    "Private native provenance and public packet replay retain different scopes.",
+    "Dependency cache attribution is not independent Git checkout or rebuild verification.",
+    "No whole-proof native typing coverage, premise-necessity result, semantic compression or human-comprehension result.",
+    "No private original Lean projects or tactic scripts copied."
+  ],
+  "files": [
+    {
+      "file": "public/data/proof-atlas/construction-pages-manifest.js",
+      "sha256": "87870a70f44cabaf62d0ba7db21b6ca331db3ca23b147a65aecdb2d15825bbf0"
+    },
+    {
+      "file": "public/data/proof-atlas/recorded-unions-manifest.js",
+      "sha256": "951635f94cc798527ed514c8e7fe70a549680e4599af39a162ddc5e94af092d3"
+    },
+    {
+      "file": "public/data/proof-atlas/type-query-pages-manifest.js",
+      "sha256": "31d2ee057b03c07748d977cb37486a396abf87560892dda751926dd0833a2d54"
+    },
+    {
+      "file": "public/js/proof-atlas-deep-context.js",
+      "sha256": "141773a7d2b19b763f21597bdd13e670ffd041b1ea2e17f726ad389ee16c486b"
+    },
+    {
+      "file": "public/js/proof-atlas-occurrence-view.js",
+      "sha256": "a8168d82035fdbf9816e0409c631fd253800d562f16cd0f134ba49acc6064560"
+    },
+    {
+      "file": "public/js/proof-atlas-type-query-pages.js",
+      "sha256": "658d16d1f7c5383f4a6fc80e1520366a81d3feff59e1fd671779b21e960f5bc7"
+    },
+    {
+      "file": "research/proof-atlas/construction-union/audit.json",
+      "sha256": "c516de021d6db7963c1857f0d6bee3d472c92a89989111676d9e5b01121858de"
+    },
+    {
+      "file": "research/proof-atlas/recorded-union.cjs",
+      "sha256": "f0fda5c7f6c1815b8104f460dfdcf614288c2d8d3a238d4d82a22308383ac37f"
+    },
+    {
+      "file": "research/proof-atlas/recorded-union/README.md",
+      "sha256": "03bb935fc12893bddff442b89439779108a6ad1ef71afbc78ee0c8e0fe855b91"
+    },
+    {
+      "file": "research/proof-atlas/recorded-union/audit.json",
+      "sha256": "0a8742950ede8d8855124837bfd89bcc5973393c76e71db7a0bc648bf457d8d4"
+    },
+    {
+      "file": "research/proof-atlas/recorded-union/browser-audit.json",
+      "sha256": "f5c971c6a1a3ce70d53ddef48550968dbe7301cbb472e88f8a6b9a78fa7244f1"
+    },
+    {
+      "file": "research/proof-atlas/recorded-union/complete-browser-audit.json",
+      "sha256": "b3983b798859df6aa3dc11df48f8e682fa79f3b425ce5a9f153d75d4fb6fd6c4"
+    },
+    {
+      "file": "research/proof-atlas/recorded-union/construction-transport.json",
+      "sha256": "9f6ad2cd760ca91062165ef4335693b31ca5ca24f69d51ccd52b244673d43400"
+    },
+    {
+      "file": "research/proof-atlas/recorded-union/let-browser-audit.json",
+      "sha256": "994ce0db70ed57d4c8ee22a9280988f0596b40a06437477300e3c7d9a9f242f2"
+    },
+    {
+      "file": "research/proof-atlas/recorded-union/regressions.json",
+      "sha256": "351b8e87c3022a64bdfeac0bec631c9f2e58089f6fb386d2fbbc2c7682ee03ab"
+    },
+    {
+      "file": "research/proof-atlas/recorded-union/transport-browser-audit.json",
+      "sha256": "06c1751d93ccb567ddba3da683a86ec5c76399f8680a4ecf45d3eaeec5d391b6"
+    },
+    {
+      "file": "research/proof-atlas/recorded-union/type-browser-audit.json",
+      "sha256": "d4a8040d9c80fd44546c413d6454edd1c2b563dcd57eb16498b4960d1aecff08"
+    },
+    {
+      "file": "research/proof-atlas/recorded-union/type-query-transport.json",
+      "sha256": "d3ad629e8421432ad919a28777c6d5d05ad2542efa20719863f5924d9e4d27b6"
+    },
+    {
+      "file": "research/proof-atlas/type-pages/query-pack.cjs",
+      "sha256": "7c8e877f505a46ad81bef787600a5f2b96b276b0e41486dec416cf60b8a312c0"
+    },
+    {
+      "file": "research/proof-atlas/use-sites/native-verification.json",
+      "sha256": "adb0657605fc74ab083c9242ec1a35b4d15fd11ee659564b9c3ccbb301f542e7"
+    },
+    {
+      "file": "scripts/build-proof-atlas-construction-pages.cjs",
+      "sha256": "4879e435dd0dc690d0457baac4a8aa8a459631ae2a4a79762bc1ad4b2f30c379"
+    },
+    {
+      "file": "scripts/build-proof-atlas-type-pages.cjs",
+      "sha256": "9ff01ac132536fda1c1d7c1d606b70afe215e63ad50be2704adcabfda94da51b"
+    },
+    {
+      "file": "scripts/test-proof-atlas-construction-pages-browser.cjs",
+      "sha256": "ec7c0db466e6f439ea9a9c2deb05e54c50620286da497594e347f5f709023e8d"
+    },
+    {
+      "file": "scripts/test-proof-atlas-construction-pages.cjs",
+      "sha256": "ec237ef96260fc39891dd5b3ec040e945730f18f93daa45a3ab77eab7c253675"
+    },
+    {
+      "file": "scripts/test-proof-atlas-occurrence-constructions-browser.cjs",
+      "sha256": "783ec9cb2f56843c92a146ca788b523a193cacd83d94cb69444e49f70b8d35a1"
+    },
+    {
+      "file": "scripts/test-proof-atlas-occurrence-let-bindings-browser.cjs",
+      "sha256": "d389d96b949abe37e8274ca7a7c04dda1358a25e3cae2a2b3c3980c19d9aac63"
+    },
+    {
+      "file": "scripts/test-proof-atlas-recorded-union-browser.cjs",
+      "sha256": "f098a1076999af8d554daef16dc3d22d9aea202657769c5e1b14fd1e260ce69f"
+    },
+    {
+      "file": "scripts/test-proof-atlas-recorded-union.cjs",
+      "sha256": "efb56360c780109b530dbf6f9f9171659fb212b042b778c3fccf2b967fd2b009"
+    },
+    {
+      "file": "scripts/test-proof-atlas-type-pages-browser.cjs",
+      "sha256": "83d2073c0538cd476f38982b3c28b01e0ecc93e7a421cb4b3ab343ff4911a852"
+    },
+    {
+      "file": "scripts/test-proof-atlas-type-query-controls.cjs",
+      "sha256": "d096e297fb20daab0d6b324041f9e0d9bf604267fae1999c250ab44e2965a846"
+    },
+    {
+      "file": "scripts/test-proof-atlas-type-query-pages.cjs",
+      "sha256": "ed57eaf9881cae990dfb6750f0680ab64eba2818d4c7d0680f07df3cb9ae453e"
+    }
+  ]
+}

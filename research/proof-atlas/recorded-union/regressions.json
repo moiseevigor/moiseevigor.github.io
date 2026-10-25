@@ -1,0 +1,112 @@
+{
+  "status": "PASS",
+  "checks": {
+    "deepContext": {
+      "status": "PASS",
+      "cases": 9,
+      "queries": 27,
+      "typeCuts": 60,
+      "internalTypeBindings": 2,
+      "originalContextBindings": 6,
+      "maxDepth": 10002,
+      "maxContext": 10000,
+      "rejections": 12,
+      "sourceCutsUnchanged": true,
+      "unrecordedPositionsRemainUnknown": true,
+      "computedNamespacePreserved": true,
+      "nativeKernelRerun": false
+    },
+    "constructionModel": {
+      "status": "PASS",
+      "syntheticCases": 11,
+      "syntheticTypedPositions": 49,
+      "syntheticConstructionCuts": 108,
+      "frozenReferenceComparisons": 108,
+      "corpusConstructions": 1024,
+      "corpusConstructionCuts": 3072,
+      "originalBinderLinkAppearances": 1249,
+      "typeCuts": 50,
+      "premiseTexts": 2048,
+      "differentParentTexts": 1996,
+      "distinctKernelMetaArgumentTypes": 3,
+      "maxSceneBytes": 31243,
+      "rejections": 20,
+      "newNativeJudgments": 0,
+      "wholeProofCoverage": false,
+      "rendererVerified": false
+    },
+    "constructionTransportControls": {
+      "status": "PASS",
+      "refusals": 41,
+      "sourceFieldChecks": 2,
+      "syntheticTypeMismatchBoundaries": 1,
+      "signedIndexControls": 3,
+      "descriptorSnapshot": true,
+      "distinctComponentRecipes": true,
+      "oneActiveTypeTable": true,
+      "immutableRecords": true,
+      "disposedCacheStaysEmpty": true,
+      "scope": "Transport, source/interface, identity and lifecycle controls; not independent kernel or native archive membership verification. The mismatch boundary is a synthetic altered projection, not a new native judgment."
+    },
+    "typeTransportControls": {
+      "status": "PASS",
+      "refusals": 43,
+      "resumableCutMatchesComplete": true,
+      "restartExhaustionReproduced": true,
+      "onePageTypeNodeLimit": 64,
+      "evictionAndResume": true,
+      "immutableNestedTuples": true,
+      "sourceCursorSeal": true,
+      "descriptorSnapshot": true,
+      "completeArchiveRequests": 0,
+      "scope": "Codec, identity, scope, cache and cancellation checks; no new typing or general consumer correctness theorem"
+    },
+    "typeQueryControls": {
+      "status": "PASS",
+      "refusals": 27,
+      "positionRows": 644,
+      "boundedIndexPages": 4,
+      "lookupAndPositionOrder": true,
+      "inputSnapshots": true,
+      "scope": "Authenticated transport and finite profile membership/absence; not independent native archive membership or kernel checking"
+    },
+    "historicalTypeModel": {
+      "status": "PASS",
+      "scope": "Independent finite model comparison of paged computed type geometry; browser integration and whole-browser memory have separate evidence",
+      "declarations": 26,
+      "tables": 34,
+      "observations": 2442,
+      "scenes": 7326,
+      "refinements": 1084,
+      "originalContextLinkAppearances": 216,
+      "typeLocalLinkAppearances": 331,
+      "peakTypeNodes": 512,
+      "peakTypeBytes": 40495,
+      "fullArchiveRequests": 0
+    },
+    "producers": [
+      {
+        "status": "PASS",
+        "mode": "check",
+        "profiles": 35,
+        "positions": 5568,
+        "constructions": 2527,
+        "positionCaptions": 5568,
+        "uniqueGzipAssets": 30407,
+        "compressedBytes": 27513569,
+        "newFiles": 0,
+        "scope": "Existing compiled term/type/construction metadata only; no new native queries or private mathematical source modules."
+      },
+      {
+        "status": "PASS",
+        "mode": "check",
+        "declarations": 35,
+        "observations": 5568,
+        "files": 6957,
+        "compressedBytes": 6281565,
+        "scope": "Compiled term/type metadata only; no private Lean source modules or new typing queries."
+      }
+    ]
+  },
+  "scope": "Finite model and transport controls. Historical type model deliberately retains its original 26-profile subset. No new native Lean execution."
+}
