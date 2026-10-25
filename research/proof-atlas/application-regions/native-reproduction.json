@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "controlsPlanSha256": "0ad2a88c4c15f557ea397a00bb8adf75d15602d215722f74a0857c8e22ff773c",
+  "reconstructedNativeBatchSha256": "a16be1be3b7ccd706f499d846bdf784cebf02c8b5ab8c337cec3764f4346b85a",
+  "publicNativeOwners": [
+    "49a42668bc0e682e7c4abbd75012dd5ebbab4f20d351d03537ca705a57ff6bf5",
+    "ec1a1a7011bf00f14bac877967d16439804c320cdfe65c8cdf9f2f4b9f6d6102",
+    "4249637cf30ba42946fb366fdd7f9e66f67d472d52347d5380ca370abc86befa",
+    "20a896b31dd0d3588140aaf2cb53832ec160b44b9dc4e774eca87d9e80a21181"
+  ],
+  "scope": "Exact public input-plan bytes and reconstruction of the fresh native output batch from the four immutable compiled-observation owners. Execution logs and private source projects are excluded."
+}

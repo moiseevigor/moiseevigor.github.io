@@ -1,0 +1,29 @@
+{
+  "format": "ProofAtlasApplicationRegionsBrowser/1",
+  "status": "PASS",
+  "sourceOverride": false,
+  "authoredProfiles": 4,
+  "inputSelections": 16,
+  "resultSelections": 12,
+  "internalSelections": 12,
+  "miniResultSelections": 12,
+  "miniBusChecks": 4,
+  "panChecks": 1,
+  "zoomChecks": 2,
+  "partialRegions": 1,
+  "cycleWitnessSelections": 2,
+  "selectionRoundTrips": 4,
+  "sourceOnlyRefusals": 1,
+  "axeAudits": 4,
+  "keyboardChecks": 1,
+  "staleRefusals": 1,
+  "optionalFailures": 1,
+  "files": {
+    "public/js/proof-atlas-application-regions.js": "61cd59797b73ab38075cfacf55355cd6a3ccfceaa8be4bbf46c6a84b7d36575b",
+    "public/js/proof-atlas-application-region-view.js": "6f3264c397d7c548101acd482f667bc71143235007dd915839c1c1ba11fde7c3",
+    "public/js/proof-atlas-network-stream-view.js": "eb325ff59a4075f738ccaf21e88d7cf97221c88a4f2fc006aac0796c8e264638",
+    "public/css/proof-atlas-application-regions.css": "e6db2c4b87cd089dc1378a356055e156591aa2378b42815766fa48fd63bda97c",
+    "public/data/proof-atlas/application-region-controls-manifest.js": "8d1c8742f466b0adc810124b6cc8da0ee785904e36b51d7b066f0f6a4dff261b"
+  },
+  "wholeArchiveAttempts": 0
+}

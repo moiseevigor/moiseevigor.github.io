@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "assets": 72,
+  "servedBytesMatchSource": true,
+  "origin": "http://127.0.0.1:8866",
+  "scope": "The complete added authored-control asset closure, checked against the production build."
+}

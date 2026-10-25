@@ -1,0 +1,755 @@
+{
+  "format": "ProofAtlasApplicationRegionsCheck/1",
+  "status": "PASS",
+  "nativeProfiles": 35,
+  "nativeCuts": 121,
+  "partitionChecks": 4418,
+  "accepted": 672,
+  "disconnectedRefusals": 3742,
+  "cycleRefusals": 4,
+  "inverseRoundTrips": 672,
+  "mergeLaws": 148,
+  "splitLaws": 110,
+  "canonicalOrderChecks": 121,
+  "nativeResultSelections": 531,
+  "nativeInputSelections": 1969,
+  "sourceOnlyCuts": 5,
+  "negativeControls": 10,
+  "peakCalls": 8,
+  "peakModelBytes": 44299,
+  "riccati": {
+    "members": [
+      25,
+      26,
+      27,
+      75,
+      76,
+      77,
+      78
+    ],
+    "counts": {
+      "calls": 7,
+      "actualPorts": 41,
+      "inputs": 35,
+      "internalUses": 6,
+      "resultPortals": 7,
+      "locallyTerminalResults": 1,
+      "outsideInventoriedUses": 0,
+      "inputKinds": {
+        "function": 7,
+        "proof": 5,
+        "type": 12,
+        "value": 11,
+        "unobserved": 0
+      }
+    },
+    "contexts": [
+      13,
+      13,
+      13,
+      10,
+      13,
+      13,
+      13
+    ]
+  },
+  "cycleWitnesses": [
+    {
+      "source": {
+        "edition": "application-region-controls",
+        "name": "AtlasRegionControls.diamond",
+        "indexSha256": "dd404836f8498f8ab1225abd13c3d1a7ee42a54631785db4ef90fc2aa6d83016",
+        "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda"
+      },
+      "nativeOwner": "49a42668bc0e682e7c4abbd75012dd5ebbab4f20d351d03537ca705a57ff6bf5",
+      "partition": [
+        [
+          2
+        ],
+        [
+          0,
+          1,
+          3
+        ]
+      ],
+      "witness": {
+        "units": [
+          [
+            0,
+            1,
+            3
+          ],
+          [
+            2
+          ],
+          [
+            0,
+            1,
+            3
+          ]
+        ],
+        "ports": [
+          {
+            "id": "2:1",
+            "from": 0,
+            "to": 2,
+            "slot": 1,
+            "role": "value",
+            "visibility": "default",
+            "relation": "binding-mediated-source-use",
+            "hops": 1,
+            "ordinal": 1,
+            "input": {
+              "namespace": "source-expression",
+              "name": "AtlasRegionControls.diamond",
+              "indexSha256": "dd404836f8498f8ab1225abd13c3d1a7ee42a54631785db4ef90fc2aa6d83016",
+              "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda",
+              "node": 18,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  2,
+                  1,
+                  1
+                ]
+              }
+            },
+            "producer": {
+              "namespace": "source-expression",
+              "name": "AtlasRegionControls.diamond",
+              "indexSha256": "dd404836f8498f8ab1225abd13c3d1a7ee42a54631785db4ef90fc2aa6d83016",
+              "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda",
+              "node": 19,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1
+                ]
+              }
+            }
+          },
+          {
+            "id": "3:2",
+            "from": 2,
+            "to": 3,
+            "slot": 2,
+            "role": "value",
+            "visibility": "default",
+            "relation": "direct-source-use",
+            "hops": 0,
+            "ordinal": 3,
+            "input": {
+              "namespace": "source-expression",
+              "name": "AtlasRegionControls.diamond",
+              "indexSha256": "dd404836f8498f8ab1225abd13c3d1a7ee42a54631785db4ef90fc2aa6d83016",
+              "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda",
+              "node": 23,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  2,
+                  1
+                ]
+              }
+            },
+            "producer": {
+              "namespace": "source-expression",
+              "name": "AtlasRegionControls.diamond",
+              "indexSha256": "dd404836f8498f8ab1225abd13c3d1a7ee42a54631785db4ef90fc2aa6d83016",
+              "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda",
+              "node": 23,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  2,
+                  1
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "source": {
+        "edition": "application-region-controls",
+        "name": "AtlasRegionControls.diamond",
+        "indexSha256": "dd404836f8498f8ab1225abd13c3d1a7ee42a54631785db4ef90fc2aa6d83016",
+        "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda"
+      },
+      "nativeOwner": "49a42668bc0e682e7c4abbd75012dd5ebbab4f20d351d03537ca705a57ff6bf5",
+      "partition": [
+        [
+          1
+        ],
+        [
+          0,
+          2,
+          3
+        ]
+      ],
+      "witness": {
+        "units": [
+          [
+            0,
+            2,
+            3
+          ],
+          [
+            1
+          ],
+          [
+            0,
+            2,
+            3
+          ]
+        ],
+        "ports": [
+          {
+            "id": "1:1",
+            "from": 0,
+            "to": 1,
+            "slot": 1,
+            "role": "value",
+            "visibility": "default",
+            "relation": "binding-mediated-source-use",
+            "hops": 1,
+            "ordinal": 0,
+            "input": {
+              "namespace": "source-expression",
+              "name": "AtlasRegionControls.diamond",
+              "indexSha256": "dd404836f8498f8ab1225abd13c3d1a7ee42a54631785db4ef90fc2aa6d83016",
+              "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda",
+              "node": 18,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  2,
+                  0,
+                  1,
+                  1
+                ]
+              }
+            },
+            "producer": {
+              "namespace": "source-expression",
+              "name": "AtlasRegionControls.diamond",
+              "indexSha256": "dd404836f8498f8ab1225abd13c3d1a7ee42a54631785db4ef90fc2aa6d83016",
+              "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda",
+              "node": 19,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1
+                ]
+              }
+            }
+          },
+          {
+            "id": "3:1",
+            "from": 1,
+            "to": 3,
+            "slot": 1,
+            "role": "value",
+            "visibility": "default",
+            "relation": "direct-source-use",
+            "hops": 0,
+            "ordinal": 2,
+            "input": {
+              "namespace": "source-expression",
+              "name": "AtlasRegionControls.diamond",
+              "indexSha256": "dd404836f8498f8ab1225abd13c3d1a7ee42a54631785db4ef90fc2aa6d83016",
+              "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda",
+              "node": 19,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  2,
+                  0,
+                  1
+                ]
+              }
+            },
+            "producer": {
+              "namespace": "source-expression",
+              "name": "AtlasRegionControls.diamond",
+              "indexSha256": "dd404836f8498f8ab1225abd13c3d1a7ee42a54631785db4ef90fc2aa6d83016",
+              "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda",
+              "node": 19,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  2,
+                  0,
+                  1
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "source": {
+        "edition": "application-region-controls",
+        "name": "AtlasRegionControls.shortcut",
+        "indexSha256": "e76ed433811b4ac2e4af546b17d23e450e7b44c639c22824eb49d67a28a0162f",
+        "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda"
+      },
+      "nativeOwner": "ec1a1a7011bf00f14bac877967d16439804c320cdfe65c8cdf9f2f4b9f6d6102",
+      "partition": [
+        [
+          1
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "witness": {
+        "units": [
+          [
+            0,
+            2
+          ],
+          [
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "ports": [
+          {
+            "id": "1:1",
+            "from": 0,
+            "to": 1,
+            "slot": 1,
+            "role": "value",
+            "visibility": "default",
+            "relation": "binding-mediated-source-use",
+            "hops": 1,
+            "ordinal": 0,
+            "input": {
+              "namespace": "source-expression",
+              "name": "AtlasRegionControls.shortcut",
+              "indexSha256": "e76ed433811b4ac2e4af546b17d23e450e7b44c639c22824eb49d67a28a0162f",
+              "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda",
+              "node": 15,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  2,
+                  1,
+                  1
+                ]
+              }
+            },
+            "producer": {
+              "namespace": "source-expression",
+              "name": "AtlasRegionControls.shortcut",
+              "indexSha256": "e76ed433811b4ac2e4af546b17d23e450e7b44c639c22824eb49d67a28a0162f",
+              "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda",
+              "node": 16,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1
+                ]
+              }
+            }
+          },
+          {
+            "id": "2:2",
+            "from": 1,
+            "to": 2,
+            "slot": 2,
+            "role": "value",
+            "visibility": "default",
+            "relation": "direct-source-use",
+            "hops": 0,
+            "ordinal": 2,
+            "input": {
+              "namespace": "source-expression",
+              "name": "AtlasRegionControls.shortcut",
+              "indexSha256": "e76ed433811b4ac2e4af546b17d23e450e7b44c639c22824eb49d67a28a0162f",
+              "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda",
+              "node": 16,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  2,
+                  1
+                ]
+              }
+            },
+            "producer": {
+              "namespace": "source-expression",
+              "name": "AtlasRegionControls.shortcut",
+              "indexSha256": "e76ed433811b4ac2e4af546b17d23e450e7b44c639c22824eb49d67a28a0162f",
+              "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda",
+              "node": 16,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  2,
+                  1
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "source": {
+        "edition": "application-region-controls",
+        "name": "AtlasRegionControls.proofShortcut",
+        "indexSha256": "0ac17626bab6e383f875b1d78d02f0bffac5645bf796a40d590c7a09c2f71508",
+        "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda"
+      },
+      "nativeOwner": "20a896b31dd0d3588140aaf2cb53832ec160b44b9dc4e774eca87d9e80a21181",
+      "partition": [
+        [
+          1
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "witness": {
+        "units": [
+          [
+            0,
+            2
+          ],
+          [
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "ports": [
+          {
+            "id": "1:1",
+            "from": 0,
+            "to": 1,
+            "slot": 1,
+            "role": "proof",
+            "visibility": "default",
+            "relation": "binding-mediated-source-use",
+            "hops": 1,
+            "ordinal": 0,
+            "input": {
+              "namespace": "source-expression",
+              "name": "AtlasRegionControls.proofShortcut",
+              "indexSha256": "0ac17626bab6e383f875b1d78d02f0bffac5645bf796a40d590c7a09c2f71508",
+              "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda",
+              "node": 19,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  2,
+                  1,
+                  1
+                ]
+              }
+            },
+            "producer": {
+              "namespace": "source-expression",
+              "name": "AtlasRegionControls.proofShortcut",
+              "indexSha256": "0ac17626bab6e383f875b1d78d02f0bffac5645bf796a40d590c7a09c2f71508",
+              "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda",
+              "node": 17,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1
+                ]
+              }
+            }
+          },
+          {
+            "id": "2:2",
+            "from": 1,
+            "to": 2,
+            "slot": 2,
+            "role": "proof",
+            "visibility": "default",
+            "relation": "direct-source-use",
+            "hops": 0,
+            "ordinal": 2,
+            "input": {
+              "namespace": "source-expression",
+              "name": "AtlasRegionControls.proofShortcut",
+              "indexSha256": "0ac17626bab6e383f875b1d78d02f0bffac5645bf796a40d590c7a09c2f71508",
+              "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda",
+              "node": 21,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  2,
+                  1
+                ]
+              }
+            },
+            "producer": {
+              "namespace": "source-expression",
+              "name": "AtlasRegionControls.proofShortcut",
+              "indexSha256": "0ac17626bab6e383f875b1d78d02f0bffac5645bf796a40d590c7a09c2f71508",
+              "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda",
+              "node": 21,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  2,
+                  1
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "diamond": {
+    "counts": {
+      "calls": 4,
+      "actualPorts": 9,
+      "inputs": 5,
+      "internalUses": 4,
+      "resultPortals": 4,
+      "locallyTerminalResults": 1,
+      "outsideInventoriedUses": 0,
+      "inputKinds": {
+        "function": 4,
+        "proof": 0,
+        "type": 0,
+        "value": 1,
+        "unobserved": 0
+      }
+    },
+    "results": [
+      {
+        "call": 0,
+        "contextLength": 10,
+        "insideUses": 2
+      },
+      {
+        "call": 1,
+        "contextLength": 11,
+        "insideUses": 1
+      },
+      {
+        "call": 2,
+        "contextLength": 11,
+        "insideUses": 1
+      },
+      {
+        "call": 3,
+        "contextLength": 11,
+        "insideUses": 0
+      }
+    ]
+  },
+  "expansionCounterexample": {
+    "source": {
+      "edition": "application-region-controls",
+      "name": "AtlasRegionControls.shortcut",
+      "indexSha256": "e76ed433811b4ac2e4af546b17d23e450e7b44c639c22824eb49d67a28a0162f",
+      "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda"
+    },
+    "partialMembers": [
+      0,
+      2
+    ],
+    "revealedCall": 1,
+    "originalGuarantee": {
+      "checked": "retained-quotient",
+      "outsidePaths": "unverified",
+      "inventoryUseCoverage": "finite"
+    },
+    "expandedFold": "QUOTIENT_CYCLE"
+  },
+  "parallelPortControl": true,
+  "largeBranch": {
+    "members": [
+      47,
+      48,
+      4061,
+      6233,
+      6234,
+      6235,
+      6236,
+      6241
+    ],
+    "counts": {
+      "calls": 8,
+      "actualPorts": 32,
+      "inputs": 25,
+      "internalUses": 7,
+      "resultPortals": 8,
+      "locallyTerminalResults": 1,
+      "outsideInventoriedUses": 14,
+      "inputKinds": {
+        "function": 8,
+        "proof": 0,
+        "type": 0,
+        "value": 0,
+        "unobserved": 17
+      }
+    },
+    "sharedResult": 4061,
+    "insideUses": 1,
+    "outsideInventoriedUses": 13
+  },
+  "scope": "Finite original native cuts plus four fresh authored kernel/native controls and five bounded cuts in a 201,340-call source-only index. Structural partition and merge/split laws, not a Lean metatheory proof, complete-use interface or measured human comprehension."
+}

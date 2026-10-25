@@ -1,0 +1,81 @@
+{
+  "format": "ProofAtlasApplicationRegionsEvidence/1",
+  "status": "PASS",
+  "checkedAtUtc": "2026-10-25T23:57:39.175725+00:00",
+  "baselineCommit": "72f69bd2773070dd6a85652d4bbaaa5eefd3d718",
+  "deployment": "LOCAL_NOT_PUBLISHED",
+  "sourceFiles": {
+    "public/js/proof-atlas-application-regions.js": "61cd59797b73ab38075cfacf55355cd6a3ccfceaa8be4bbf46c6a84b7d36575b",
+    "public/js/proof-atlas-application-region-view.js": "6f3264c397d7c548101acd482f667bc71143235007dd915839c1c1ba11fde7c3",
+    "public/js/proof-atlas-network-stream-view.js": "eb325ff59a4075f738ccaf21e88d7cf97221c88a4f2fc006aac0796c8e264638",
+    "public/css/proof-atlas-application-regions.css": "e6db2c4b87cd089dc1378a356055e156591aa2378b42815766fa48fd63bda97c",
+    "public/data/proof-atlas/application-region-controls-manifest.js": "8d1c8742f466b0adc810124b6cc8da0ee785904e36b51d7b066f0f6a4dff261b",
+    "research/proof-atlas/network-streaming/index.html": "d7e8d7276f3148640fe7940b51ca1d6215f4d154a08df551c3a4c4937e0f3090",
+    "research/proof-atlas/application-regions/README.md": "eb7d6373abd2c14d1097d3c250bb0a3f51be40c918cd519151e60043d2f9a8f0",
+    "research/proof-atlas/application-regions/Controls.lean": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda",
+    "research/proof-atlas/application-regions/verify-controls.py": "46f6aed8262e765b750f96111e16383240fe307264d0cf81b7080ebb062ac8e0",
+    "research/proof-atlas/application-regions/prepare-controls.cjs": "5386abdd6e3bc88afdf686f4b46e0a071f7af14f734891cddcdc45a69e2be7cd",
+    "research/proof-atlas/application-regions/publish-controls.cjs": "9a7f9728d211f4617d480503f2876414950cb925bdafd3802d1864734a8ca32f",
+    "scripts/test-proof-atlas-application-regions.cjs": "f6d29c73d45519ce79ad3d4694d74ed87e5c3db6d3672c5e696accc2cb281cfd",
+    "scripts/test-proof-atlas-application-regions-browser.cjs": "b3b33ceccae94d14ef654574d0191b1445839a4dfa057f92ba72f61e28129c3e",
+    "scripts/test-proof-atlas-region-control-assets.cjs": "2a86db8f9bb820ec93a6ca68b181367c031e414c0429a4adaa9436b7d86c7fe9",
+    "projects/proof-atlas/manual/index.html": "6625d49f5e62f2ea34f254e847ad141fcf3f6e6d2400b68967ee00ef703d91a6",
+    "docs/proof-atlas-research-program.md": "47e3071caebbd052efbd2a929f411d83135383987b62b5d801ac30c316b3a30e"
+  },
+  "reports": {
+    "asset-check.json": "a4c2e5f1a0e12229d470a346a59058a7d016e84ae4c077895addeb3b5808b2e3",
+    "browser-check.json": "d95f99c9eb4199807803b605e58496d63dcd1658397ad6ad42207f3f6e32c718",
+    "compatibility.json": "d0d81a1dddf3601a86cd2da8830756c74129be81a08d319c165c4d1d6c19c2ad",
+    "controls-derivation.json": "081415bb867dbff75c718f2d1577a1cfc3f05d2aa82b1d6b68de7d4b69a20027",
+    "controls-plan.json": "0ad2a88c4c15f557ea397a00bb8adf75d15602d215722f74a0857c8e22ff773c",
+    "model-check.json": "526ab4f509e4447c0f24d417ce3dd55a50ad780c7220ebb45e5abdea440821d6",
+    "native-reproduction.json": "604804456636f13ff30a846e591f2610b77d546ececa9f0b365356c316a27fa7",
+    "native-verification.json": "15993f8b8cf8fd18fdd5ab2314f976f78fd2ad4ae2b7b749126c4b72569620af",
+    "served-assets.json": "b5562f172b27d2a51a93eb59dfa47fc96e26922e74f03b691111106e179a0004"
+  },
+  "build": {
+    "command": "docker compose run --rm --no-deps --pull never build",
+    "exitCode": 0,
+    "reportedSeconds": 264.667,
+    "servedOrigin": "http://127.0.0.1:8866",
+    "htmlSha256": "20da322f59bf67630b7af4940c6346f5e6bc106029fe6abe10666bdd30444a0f",
+    "staticReadmeRefresh": {
+      "file": "research/proof-atlas/application-regions/README.md",
+      "sha256": "eb7d6373abd2c14d1097d3c250bb0a3f51be40c918cd519151e60043d2f9a8f0",
+      "reason": "Clarify that record-list order is canonicalized while actual argument positions stay ordered. Raw static copy, no template transformation."
+    },
+    "additionalStaticRefreshes": [
+      {
+        "file": "public/js/proof-atlas-application-region-view.js",
+        "sha256": "6f3264c397d7c548101acd482f667bc71143235007dd915839c1c1ba11fde7c3",
+        "transformation": "identity copy of raw Jekyll static asset",
+        "reason": "Keep all seven Riccati call cards visible without the scrollbar consuming their width; final region browser suite passed."
+      },
+      {
+        "file": "public/css/proof-atlas-application-regions.css",
+        "sha256": "e6db2c4b87cd089dc1378a356055e156591aa2378b42815766fa48fd63bda97c",
+        "transformation": "identity copy of raw Jekyll static asset",
+        "reason": "Keep all seven Riccati call cards visible without the scrollbar consuming their width; final region browser suite passed."
+      }
+    ]
+  },
+  "unchangedPriorInventories": {
+    "public/data/proof-atlas/application-ports-manifest.js": "dbece0e885bd25a31d93c9871f8c0124aee18e64acfb5bf1956c407f65dbc50d",
+    "public/data/proof-atlas/application-network-manifest.js": "4a826bff4fac9649aeb2e1fb95c569e4072de8a692093ae398ff2ef049ec7060",
+    "public/data/proof-atlas/network-streaming-manifest.js": "5768d4f66ce01a092b5e126512998264502bd92b7c15caae8c79a60702e3087b"
+  },
+  "addedData": {
+    "kind": "authored synthetic controls and derived compiled/native/source-page data only",
+    "assetClosureReport": "asset-check.json",
+    "profiles": 4,
+    "calls": 12,
+    "ports": 28,
+    "privateOriginalSourceProjectsRead": false
+  },
+  "blogChanges": [],
+  "limits": [
+    "At most eight retained calls, with a separate derived model capped at 8 MiB; component bounds are not total heap measurements.",
+    "Connectedness and quotient acyclicity are checked only in the retained cut. A verified counterexample shows why hidden paths prevent a global module claim.",
+    "Original native typing applies to each call/port. The region adds no common-context typing judgment, closed interface, premise-necessity or comprehension claim."
+  ]
+}

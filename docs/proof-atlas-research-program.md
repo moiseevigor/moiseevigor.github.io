@@ -60,6 +60,8 @@ A [result-use path fold](/projects/proof-atlas/manual/paged-network/#ns-lab) fol
 
 A branch now exposes a bounded page of all inventoried input uses of its last result, including uses already inside the retained cut. One original result feeds distinct consumer occurrences; grouping consumer cards does not merge their input positions. Each page checks its reverse-index rows against the actual consumer ports and original contexts. A selected use starts a new bounded path, leaving other uses in the index. This is source-use navigation, not semantic sharing or a closed proof module. [Rule and checks](/research/proof-atlas/result-use-branches/README.md).
 
+A [reversible application region](/projects/proof-atlas/manual/paged-network/#ns-lab) can contain branches and joins while preserving every input position and result portal. Connectedness alone is insufficient: fresh native controls demonstrate a fold whose quotient becomes cyclic. The implementation rejects this for retained edges and satisfies finite merge/split checks. Hidden paths remain unverified, so a locally valid grouping is not a globally certified module. [Rule, counterexample and evidence](/research/proof-atlas/application-regions/README.md).
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?
