@@ -1,0 +1,28 @@
+{
+  "format": "ProofAtlasMethodParametersBrowserAudit/1",
+  "status": "PASS",
+  "frames": 14,
+  "inputStates": 26,
+  "groupSelections": 17,
+  "argumentSelections": 29,
+  "schemaClicks": 123,
+  "sourceSelectionPreserved": 152,
+  "parameterWindows": 1,
+  "emptyLevelViews": 2,
+  "keyboardChecks": 1,
+  "releaseChecks": 7,
+  "axeAudits": 4,
+  "wireRouteChecks": 29,
+  "optionalFailureControls": 1,
+  "staleControls": 1,
+  "builtFiles": {
+    "public/js/proof-atlas-recursor-arguments.js": "0c59610e60d143d5ddbe330c8b9060f56173df53dc3fa2c5b6f7d3155ca17a1f",
+    "public/js/proof-atlas-method-indices.js": "7542a219d92d0b5dc6826679b9318e7c350a1a167cabb0c2ba43743665fd65b8",
+    "public/js/proof-atlas-method-flow.js": "77fae3c47ff2631de8ab7925b9e17eb11aa12d0d10e01c797c8fdf003b38b4b4",
+    "public/js/proof-atlas-method-interfaces.js": "8a5d8079abe1700f2ea45e354be2f22f97de3bdcd4ab65b9961a678e17999b75",
+    "public/js/proof-atlas-method-examples.js": "6b24e3d459baf3114c5f608e4606e19af543beca13c18d044c0b03d4032ed3c7",
+    "public/css/proof-atlas-theme.css": "5ffb618b7ce9a5b1671dc23a4ef7b99f0e34c2c72283e7b4c6d3ff600a5e9d90",
+    "public/data/proof-atlas/method-parameters-manifest.js": "d1adbe2efa5636a5dad2f91fab2b5cdfc59e7656cc01a3330f523c9b62977434"
+  },
+  "checkerSha256": "566d20197e707506a0d6add4abb42aca197bca2e3fc0d542a26887cd5004c396"
+}

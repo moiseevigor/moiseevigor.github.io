@@ -44,6 +44,8 @@ The [kernel-origin view](/research/proof-atlas/method-origins/README.md) maps co
 
 The [recursive-index ports](/research/proof-atlas/method-indices/README.md) expose ordered indices separately from the major premise. Authored indexed controls exercise single and paged multi-index calls, including an index scoped inside a recursive-family lambda. This is literal schema structure, not normalized index equality.
 
+The [argument-group collar](/research/proof-atlas/method-parameters/README.md) separates parameters, motives, branch methods and indices of recorded indexed self-recursive calls. Fresh polymorphic controls test dependent parameters, a five-parameter window and separate universe-level payloads.
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?

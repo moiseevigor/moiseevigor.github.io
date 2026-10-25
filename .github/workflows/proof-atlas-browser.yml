@@ -146,6 +146,10 @@ on:
       - 'research/proof-atlas/method-flow/**'
       - 'research/proof-atlas/method-origins/**'
       - 'research/proof-atlas/method-indices/**'
+      - 'research/proof-atlas/method-parameters/**'
+      - 'public/data/proof-atlas/method-parameters*'
+      - 'public/data/proof-atlas/method-parameters/**'
+      - 'public/js/proof-atlas-recursor-arguments.js'
       - 'public/data/proof-atlas/method-indices*'
       - 'public/data/proof-atlas/method-indices/**'
       - 'public/data/proof-atlas/method-origins*'
@@ -461,6 +465,10 @@ on:
       - 'research/proof-atlas/method-flow/**'
       - 'research/proof-atlas/method-origins/**'
       - 'research/proof-atlas/method-indices/**'
+      - 'research/proof-atlas/method-parameters/**'
+      - 'public/data/proof-atlas/method-parameters*'
+      - 'public/data/proof-atlas/method-parameters/**'
+      - 'public/js/proof-atlas-recursor-arguments.js'
       - 'public/data/proof-atlas/method-indices*'
       - 'public/data/proof-atlas/method-indices/**'
       - 'public/data/proof-atlas/method-origins*'
@@ -748,6 +756,9 @@ jobs:
           ATLAS_INDICES_CHECK=1 node scripts/test-proof-atlas-method-indices.cjs
           node scripts/test-proof-atlas-method-indices-browser.cjs
           node scripts/build-proof-atlas-method-indices-evidence.cjs --check
+          ATLAS_PARAMETERS_CHECK=1 node scripts/test-proof-atlas-method-parameters.cjs
+          node scripts/test-proof-atlas-method-parameters-browser.cjs
+          node scripts/build-proof-atlas-method-parameters-evidence.cjs --check
           ATLAS_RECORDED_UNION_CHECK=1 node scripts/test-proof-atlas-recorded-union.cjs
           node scripts/build-proof-atlas-recorded-union-evidence.cjs --check
           node scripts/test-proof-atlas-recorded-union-browser.cjs

@@ -1,0 +1,26 @@
+{
+  "format": "ProofAtlasMethodIndicesBrowserAudit/1",
+  "status": "PASS",
+  "frames": 6,
+  "inputStates": 13,
+  "indexSelections": 7,
+  "schemaClicks": 34,
+  "sourceSelectionPreserved": 44,
+  "computedAddressChecks": 3,
+  "indexWindows": 1,
+  "keyboardChecks": 1,
+  "releaseChecks": 3,
+  "axeAudits": 4,
+  "wireRouteChecks": 7,
+  "optionalFailureControls": 1,
+  "staleControls": 1,
+  "builtFiles": {
+    "public/js/proof-atlas-method-indices.js": "7542a219d92d0b5dc6826679b9318e7c350a1a167cabb0c2ba43743665fd65b8",
+    "public/js/proof-atlas-method-flow.js": "77fae3c47ff2631de8ab7925b9e17eb11aa12d0d10e01c797c8fdf003b38b4b4",
+    "public/js/proof-atlas-method-interfaces.js": "8a5d8079abe1700f2ea45e354be2f22f97de3bdcd4ab65b9961a678e17999b75",
+    "public/js/proof-atlas-method-examples.js": "6b24e3d459baf3114c5f608e4606e19af543beca13c18d044c0b03d4032ed3c7",
+    "public/css/proof-atlas-theme.css": "5ffb618b7ce9a5b1671dc23a4ef7b99f0e34c2c72283e7b4c6d3ff600a5e9d90",
+    "public/data/proof-atlas/method-indices-manifest.js": "31376a075322d4d81738a955f3e002d156b0771d2932f777da986b83c36ff742"
+  },
+  "checkerSha256": "c70b0414c6720899dcc3497e88dcdb925f3b0d77c97ebc749b3f1db20e9aab8c"
+}

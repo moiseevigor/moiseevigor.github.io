@@ -1,0 +1,4290 @@
+{
+  "format": "ProofAtlasMethodParametersAudit/1",
+  "status": "PASS",
+  "frames": 54,
+  "inputs": 79,
+  "indexedMethods": 7,
+  "groups": 28,
+  "prefixArguments": 29,
+  "argumentViews": 58,
+  "kernelCuts": 218,
+  "indexArguments": 11,
+  "forwardedPrefixBindings": 29,
+  "zeroParameterGroups": 4,
+  "emptyLevelPayloads": 1,
+  "parameterizedMethods": 3,
+  "dependentDomainChecks": 3,
+  "familyScopeChecks": 1,
+  "pagedFrames": 8,
+  "pagedCalls": 4,
+  "recordRoundtrips": 4,
+  "rejections": 376,
+  "nonIndexedRefusals": 72,
+  "wholeArchiveRequests": 0,
+  "rows": [
+    {
+      "name": "AtlasIndexControls.chain",
+      "query": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 1,
+      "computedInput": 2,
+      "partition": {
+        "source": {
+          "name": "AtlasIndexControls.chain",
+          "indexSha256": "8819a60467a478947054f1b847c8e320e174bd22b9ef871d5541b7b88c8d2d9b",
+          "sourceSha256": "fe427693eebec6daf8efd900bf09e463b371fef4f091a0d4c86c5aa088afcfd8",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "method": {
+            "namespace": "source-expression",
+            "node": 17,
+            "path": "root.value.body.body.body.body.fn.fn.arg",
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                1
+              ]
+            }
+          }
+        },
+        "evidenceSha256": "e42b21e8a6278177ae0a6820026503ad9edc550d702bdf8d569b2014a72d132c",
+        "query": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 1,
+        "groups": [
+          {
+            "kind": "parameters",
+            "label": "Parameter",
+            "count": 0,
+            "items": []
+          },
+          {
+            "kind": "motives",
+            "label": "Motive",
+            "count": 1,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 1,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "e42b21e8a6278177ae0a6820026503ad9edc550d702bdf8d569b2014a72d132c",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 69,
+                  "node": 21,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "e42b21e8a6278177ae0a6820026503ad9edc550d702bdf8d569b2014a72d132c",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 69,
+                    "node": 69,
+                    "route": {
+                      "root": 0,
+                      "slots": []
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "motive",
+                    "binderNameParts": [
+                      {
+                        "str": "motive"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "kind": "minors",
+            "label": "Branch method",
+            "count": 2,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 2,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "e42b21e8a6278177ae0a6820026503ad9edc550d702bdf8d569b2014a72d132c",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 69,
+                  "node": 17,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "e42b21e8a6278177ae0a6820026503ad9edc550d702bdf8d569b2014a72d132c",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 69,
+                    "node": 68,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "zero",
+                    "binderNameParts": [
+                      {
+                        "str": "zero"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "ordinal": 1,
+                "argumentSlot": 3,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "e42b21e8a6278177ae0a6820026503ad9edc550d702bdf8d569b2014a72d132c",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 69,
+                  "node": 31,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "e42b21e8a6278177ae0a6820026503ad9edc550d702bdf8d569b2014a72d132c",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 69,
+                    "node": 67,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "next",
+                    "binderNameParts": [
+                      {
+                        "str": "next"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "kind": "indices",
+            "label": "Index",
+            "count": 1,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 4,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "e42b21e8a6278177ae0a6820026503ad9edc550d702bdf8d569b2014a72d132c",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 69,
+                  "node": 18,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      1
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "major": {
+          "argumentSlot": 5,
+          "address": {
+            "namespace": "kernel-rule",
+            "component": "recursor-reduction-schema",
+            "evidenceSha256": "e42b21e8a6278177ae0a6820026503ad9edc550d702bdf8d569b2014a72d132c",
+            "query": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "minor": 1,
+            "schemaRoot": 69,
+            "node": 2,
+            "route": {
+              "root": 0,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "head": {
+          "address": {
+            "namespace": "kernel-rule",
+            "component": "recursor-reduction-schema",
+            "evidenceSha256": "e42b21e8a6278177ae0a6820026503ad9edc550d702bdf8d569b2014a72d132c",
+            "query": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "minor": 1,
+            "schemaRoot": 69,
+            "node": 58,
+            "route": {
+              "root": 0,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "name": "AtlasIndexControls.Chain.rec",
+          "levels": [
+            {
+              "kind": "succ",
+              "of": {
+                "kind": "zero"
+              }
+            }
+          ],
+          "levelGraph": {
+            "format": "LevelDAG/1",
+            "kind": [
+              "zero",
+              "succ"
+            ],
+            "children": [
+              [],
+              [
+                0
+              ]
+            ],
+            "payloads": [
+              {},
+              {}
+            ],
+            "expanded": [
+              "1",
+              "2"
+            ],
+            "roots": [
+              1
+            ]
+          }
+        },
+        "guarantee": "Literal schema-call argument partition. Constant universe levels are a separate payload; group roles do not establish mathematical premise necessity."
+      },
+      "scope": "Recorded kernel-rule namespace; prefix arguments forward the original rule binders."
+    },
+    {
+      "name": "AtlasIndexControls.grid",
+      "query": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 1,
+      "computedInput": 6,
+      "partition": {
+        "source": {
+          "name": "AtlasIndexControls.grid",
+          "indexSha256": "7af8b5f25f103e897c4a4897f7568543387dd080994d42de9dc8e82b4a422a8b",
+          "sourceSha256": "fe427693eebec6daf8efd900bf09e463b371fef4f091a0d4c86c5aa088afcfd8",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "method": {
+            "namespace": "source-expression",
+            "node": 37,
+            "path": "root.value.body.body.body.body.body.body.body.body.fn.fn.fn.fn.fn.fn.arg",
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          }
+        },
+        "evidenceSha256": "c003f6859d87782dbb7540ac7e932ecb08c19c4fba42b78bd275992458431fb4",
+        "query": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 1,
+        "groups": [
+          {
+            "kind": "parameters",
+            "label": "Parameter",
+            "count": 0,
+            "items": []
+          },
+          {
+            "kind": "motives",
+            "label": "Motive",
+            "count": 1,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 1,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "c003f6859d87782dbb7540ac7e932ecb08c19c4fba42b78bd275992458431fb4",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 121,
+                  "node": 41,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "c003f6859d87782dbb7540ac7e932ecb08c19c4fba42b78bd275992458431fb4",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 121,
+                    "node": 121,
+                    "route": {
+                      "root": 0,
+                      "slots": []
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "motive",
+                    "binderNameParts": [
+                      {
+                        "str": "motive"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "kind": "minors",
+            "label": "Branch method",
+            "count": 2,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 2,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "c003f6859d87782dbb7540ac7e932ecb08c19c4fba42b78bd275992458431fb4",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 121,
+                  "node": 33,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "c003f6859d87782dbb7540ac7e932ecb08c19c4fba42b78bd275992458431fb4",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 121,
+                    "node": 120,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "zero",
+                    "binderNameParts": [
+                      {
+                        "str": "zero"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "ordinal": 1,
+                "argumentSlot": 3,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "c003f6859d87782dbb7540ac7e932ecb08c19c4fba42b78bd275992458431fb4",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 121,
+                  "node": 51,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "c003f6859d87782dbb7540ac7e932ecb08c19c4fba42b78bd275992458431fb4",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 121,
+                    "node": 119,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "next",
+                    "binderNameParts": [
+                      {
+                        "str": "next"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "kind": "indices",
+            "label": "Index",
+            "count": 5,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 4,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "c003f6859d87782dbb7540ac7e932ecb08c19c4fba42b78bd275992458431fb4",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 121,
+                  "node": 34,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                }
+              },
+              {
+                "ordinal": 1,
+                "argumentSlot": 5,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "c003f6859d87782dbb7540ac7e932ecb08c19c4fba42b78bd275992458431fb4",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 121,
+                  "node": 2,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                }
+              },
+              {
+                "ordinal": 2,
+                "argumentSlot": 6,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "c003f6859d87782dbb7540ac7e932ecb08c19c4fba42b78bd275992458431fb4",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 121,
+                  "node": 4,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                }
+              },
+              {
+                "ordinal": 3,
+                "argumentSlot": 7,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "c003f6859d87782dbb7540ac7e932ecb08c19c4fba42b78bd275992458431fb4",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 121,
+                  "node": 6,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                }
+              },
+              {
+                "ordinal": 4,
+                "argumentSlot": 8,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "c003f6859d87782dbb7540ac7e932ecb08c19c4fba42b78bd275992458431fb4",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 121,
+                  "node": 8,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      1
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "major": {
+          "argumentSlot": 9,
+          "address": {
+            "namespace": "kernel-rule",
+            "component": "recursor-reduction-schema",
+            "evidenceSha256": "c003f6859d87782dbb7540ac7e932ecb08c19c4fba42b78bd275992458431fb4",
+            "query": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "minor": 1,
+            "schemaRoot": 121,
+            "node": 10,
+            "route": {
+              "root": 0,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "head": {
+          "address": {
+            "namespace": "kernel-rule",
+            "component": "recursor-reduction-schema",
+            "evidenceSha256": "c003f6859d87782dbb7540ac7e932ecb08c19c4fba42b78bd275992458431fb4",
+            "query": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "minor": 1,
+            "schemaRoot": 121,
+            "node": 102,
+            "route": {
+              "root": 0,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "name": "AtlasIndexControls.Grid.rec",
+          "levels": [
+            {
+              "kind": "succ",
+              "of": {
+                "kind": "zero"
+              }
+            }
+          ],
+          "levelGraph": {
+            "format": "LevelDAG/1",
+            "kind": [
+              "zero",
+              "succ"
+            ],
+            "children": [
+              [],
+              [
+                0
+              ]
+            ],
+            "payloads": [
+              {},
+              {}
+            ],
+            "expanded": [
+              "1",
+              "2"
+            ],
+            "roots": [
+              1
+            ]
+          }
+        },
+        "guarantee": "Literal schema-call argument partition. Constant universe levels are a separate payload; group roles do not establish mathematical premise necessity."
+      },
+      "scope": "Recorded kernel-rule namespace; prefix arguments forward the original rule binders."
+    },
+    {
+      "name": "AtlasIndexControls.family",
+      "query": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 1,
+      "computedInput": 2,
+      "partition": {
+        "source": {
+          "name": "AtlasIndexControls.family",
+          "indexSha256": "7cf25ad185cce2e7ffa878f7a213fa1341a5b17fedf8dbe16bd7b3de97666063",
+          "sourceSha256": "fe427693eebec6daf8efd900bf09e463b371fef4f091a0d4c86c5aa088afcfd8",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "method": {
+            "namespace": "source-expression",
+            "node": 27,
+            "path": "root.value.body.body.body.body.fn.fn.arg",
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                1
+              ]
+            }
+          }
+        },
+        "evidenceSha256": "fe291f0f2455d0cbd8769baacea753b5d8f9a12863ddb4d158644bd6803a6183",
+        "query": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 1,
+        "groups": [
+          {
+            "kind": "parameters",
+            "label": "Parameter",
+            "count": 0,
+            "items": []
+          },
+          {
+            "kind": "motives",
+            "label": "Motive",
+            "count": 1,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 1,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "fe291f0f2455d0cbd8769baacea753b5d8f9a12863ddb4d158644bd6803a6183",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 83,
+                  "node": 70,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "fe291f0f2455d0cbd8769baacea753b5d8f9a12863ddb4d158644bd6803a6183",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 83,
+                    "node": 83,
+                    "route": {
+                      "root": 0,
+                      "slots": []
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "motive",
+                    "binderNameParts": [
+                      {
+                        "str": "motive"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "kind": "minors",
+            "label": "Branch method",
+            "count": 2,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 2,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "fe291f0f2455d0cbd8769baacea753b5d8f9a12863ddb4d158644bd6803a6183",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 83,
+                  "node": 26,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "fe291f0f2455d0cbd8769baacea753b5d8f9a12863ddb4d158644bd6803a6183",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 83,
+                    "node": 82,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "zero",
+                    "binderNameParts": [
+                      {
+                        "str": "zero"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "ordinal": 1,
+                "argumentSlot": 3,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "fe291f0f2455d0cbd8769baacea753b5d8f9a12863ddb4d158644bd6803a6183",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 83,
+                  "node": 73,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "fe291f0f2455d0cbd8769baacea753b5d8f9a12863ddb4d158644bd6803a6183",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 83,
+                    "node": 81,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "node",
+                    "binderNameParts": [
+                      {
+                        "str": "node"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "kind": "indices",
+            "label": "Index",
+            "count": 1,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 4,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "fe291f0f2455d0cbd8769baacea753b5d8f9a12863ddb4d158644bd6803a6183",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 83,
+                  "node": 29,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      1
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "major": {
+          "argumentSlot": 5,
+          "address": {
+            "namespace": "kernel-rule",
+            "component": "recursor-reduction-schema",
+            "evidenceSha256": "fe291f0f2455d0cbd8769baacea753b5d8f9a12863ddb4d158644bd6803a6183",
+            "query": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "minor": 1,
+            "schemaRoot": 83,
+            "node": 31,
+            "route": {
+              "root": 0,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "head": {
+          "address": {
+            "namespace": "kernel-rule",
+            "component": "recursor-reduction-schema",
+            "evidenceSha256": "fe291f0f2455d0cbd8769baacea753b5d8f9a12863ddb4d158644bd6803a6183",
+            "query": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "minor": 1,
+            "schemaRoot": 83,
+            "node": 69,
+            "route": {
+              "root": 0,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "name": "AtlasIndexControls.Stair.rec",
+          "levels": [
+            {
+              "kind": "succ",
+              "of": {
+                "kind": "zero"
+              }
+            }
+          ],
+          "levelGraph": {
+            "format": "LevelDAG/1",
+            "kind": [
+              "zero",
+              "succ"
+            ],
+            "children": [
+              [],
+              [
+                0
+              ]
+            ],
+            "payloads": [
+              {},
+              {}
+            ],
+            "expanded": [
+              "1",
+              "2"
+            ],
+            "roots": [
+              1
+            ]
+          }
+        },
+        "guarantee": "Literal schema-call argument partition. Constant universe levels are a separate payload; group roles do not establish mathematical premise necessity."
+      },
+      "scope": "Recorded kernel-rule namespace; prefix arguments forward the original rule binders."
+    },
+    {
+      "name": "AtlasParameterControls.vector",
+      "query": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 1,
+      "computedInput": 3,
+      "partition": {
+        "source": {
+          "name": "AtlasParameterControls.vector",
+          "indexSha256": "df802a5d41182a9b9e9d24e574632e16cac0b4c1c21054eb55118091609bdf98",
+          "sourceSha256": "14abf2ea9271bb2e9897e2744683647d337f47789470ebada8221f8a8f70f199",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "method": {
+            "namespace": "source-expression",
+            "node": 2,
+            "path": "root.value.body.body.body.body.body.fn.fn.arg",
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                1
+              ]
+            }
+          }
+        },
+        "evidenceSha256": "95640dc6c62fd0c5493053d7cf6c75896fd2589810f8f8557f5b2f082af2bd22",
+        "query": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 1,
+        "groups": [
+          {
+            "kind": "parameters",
+            "label": "Parameter",
+            "count": 1,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 1,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "95640dc6c62fd0c5493053d7cf6c75896fd2589810f8f8557f5b2f082af2bd22",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 88,
+                  "node": 46,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "95640dc6c62fd0c5493053d7cf6c75896fd2589810f8f8557f5b2f082af2bd22",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 88,
+                    "node": 88,
+                    "route": {
+                      "root": 0,
+                      "slots": []
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "A",
+                    "binderNameParts": [
+                      {
+                        "str": "A"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "kind": "motives",
+            "label": "Motive",
+            "count": 1,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 2,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "95640dc6c62fd0c5493053d7cf6c75896fd2589810f8f8557f5b2f082af2bd22",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 88,
+                  "node": 28,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "95640dc6c62fd0c5493053d7cf6c75896fd2589810f8f8557f5b2f082af2bd22",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 88,
+                    "node": 87,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "motive",
+                    "binderNameParts": [
+                      {
+                        "str": "motive"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "kind": "minors",
+            "label": "Branch method",
+            "count": 2,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 3,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "95640dc6c62fd0c5493053d7cf6c75896fd2589810f8f8557f5b2f082af2bd22",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 88,
+                  "node": 22,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "95640dc6c62fd0c5493053d7cf6c75896fd2589810f8f8557f5b2f082af2bd22",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 88,
+                    "node": 86,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "nil",
+                    "binderNameParts": [
+                      {
+                        "str": "nil"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "ordinal": 1,
+                "argumentSlot": 4,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "95640dc6c62fd0c5493053d7cf6c75896fd2589810f8f8557f5b2f082af2bd22",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 88,
+                  "node": 21,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "95640dc6c62fd0c5493053d7cf6c75896fd2589810f8f8557f5b2f082af2bd22",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 88,
+                    "node": 85,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "cons",
+                    "binderNameParts": [
+                      {
+                        "str": "cons"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "kind": "indices",
+            "label": "Index",
+            "count": 1,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 5,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "95640dc6c62fd0c5493053d7cf6c75896fd2589810f8f8557f5b2f082af2bd22",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 88,
+                  "node": 25,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      1
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "major": {
+          "argumentSlot": 6,
+          "address": {
+            "namespace": "kernel-rule",
+            "component": "recursor-reduction-schema",
+            "evidenceSha256": "95640dc6c62fd0c5493053d7cf6c75896fd2589810f8f8557f5b2f082af2bd22",
+            "query": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "minor": 1,
+            "schemaRoot": 88,
+            "node": 5,
+            "route": {
+              "root": 0,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "head": {
+          "address": {
+            "namespace": "kernel-rule",
+            "component": "recursor-reduction-schema",
+            "evidenceSha256": "95640dc6c62fd0c5493053d7cf6c75896fd2589810f8f8557f5b2f082af2bd22",
+            "query": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "minor": 1,
+            "schemaRoot": 88,
+            "node": 74,
+            "route": {
+              "root": 0,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "name": "AtlasParameterControls.Vec.rec",
+          "levels": [
+            {
+              "kind": "succ",
+              "of": {
+                "kind": "zero"
+              }
+            },
+            {
+              "kind": "param",
+              "name": "u",
+              "nameParts": [
+                {
+                  "str": "u"
+                }
+              ]
+            }
+          ],
+          "levelGraph": {
+            "format": "LevelDAG/1",
+            "kind": [
+              "zero",
+              "succ",
+              "param"
+            ],
+            "children": [
+              [],
+              [
+                0
+              ],
+              []
+            ],
+            "payloads": [
+              {},
+              {},
+              {
+                "name": "u",
+                "nameParts": [
+                  {
+                    "str": "u"
+                  }
+                ]
+              }
+            ],
+            "expanded": [
+              "1",
+              "2",
+              "1"
+            ],
+            "roots": [
+              1,
+              2
+            ]
+          }
+        },
+        "guarantee": "Literal schema-call argument partition. Constant universe levels are a separate payload; group roles do not establish mathematical premise necessity."
+      },
+      "scope": "Recorded kernel-rule namespace; prefix arguments forward the original rule binders."
+    },
+    {
+      "name": "AtlasParameterControls.dependent",
+      "query": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 1,
+      "computedInput": 2,
+      "partition": {
+        "source": {
+          "name": "AtlasParameterControls.dependent",
+          "indexSha256": "0716b0a0403311a30673da7d5a437933561f560eeceeb06de1f020c86a516e6c",
+          "sourceSha256": "14abf2ea9271bb2e9897e2744683647d337f47789470ebada8221f8a8f70f199",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "method": {
+            "namespace": "source-expression",
+            "node": 16,
+            "path": "root.value.body.body.body.body.body.body.body.body.body.fn.fn.arg",
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                1
+              ]
+            }
+          }
+        },
+        "evidenceSha256": "015343d1b86ad35959f1f0c758c8fe4663afa4703897f5a0db61485bd7aab387",
+        "query": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 1,
+        "groups": [
+          {
+            "kind": "parameters",
+            "label": "Parameter",
+            "count": 5,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 1,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "015343d1b86ad35959f1f0c758c8fe4663afa4703897f5a0db61485bd7aab387",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 125,
+                  "node": 63,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "015343d1b86ad35959f1f0c758c8fe4663afa4703897f5a0db61485bd7aab387",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 125,
+                    "node": 125,
+                    "route": {
+                      "root": 0,
+                      "slots": []
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "A",
+                    "binderNameParts": [
+                      {
+                        "str": "A"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "ordinal": 1,
+                "argumentSlot": 2,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "015343d1b86ad35959f1f0c758c8fe4663afa4703897f5a0db61485bd7aab387",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 125,
+                  "node": 65,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "015343d1b86ad35959f1f0c758c8fe4663afa4703897f5a0db61485bd7aab387",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 125,
+                    "node": 124,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "B",
+                    "binderNameParts": [
+                      {
+                        "str": "B"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "ordinal": 2,
+                "argumentSlot": 3,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "015343d1b86ad35959f1f0c758c8fe4663afa4703897f5a0db61485bd7aab387",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 125,
+                  "node": 36,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "015343d1b86ad35959f1f0c758c8fe4663afa4703897f5a0db61485bd7aab387",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 125,
+                    "node": 123,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "a",
+                    "binderNameParts": [
+                      {
+                        "str": "a"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "ordinal": 3,
+                "argumentSlot": 4,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "015343d1b86ad35959f1f0c758c8fe4663afa4703897f5a0db61485bd7aab387",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 125,
+                  "node": 38,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "015343d1b86ad35959f1f0c758c8fe4663afa4703897f5a0db61485bd7aab387",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 125,
+                    "node": 122,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "b",
+                    "binderNameParts": [
+                      {
+                        "str": "b"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "ordinal": 4,
+                "argumentSlot": 5,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "015343d1b86ad35959f1f0c758c8fe4663afa4703897f5a0db61485bd7aab387",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 125,
+                  "node": 8,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "015343d1b86ad35959f1f0c758c8fe4663afa4703897f5a0db61485bd7aab387",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 125,
+                    "node": 121,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "tag",
+                    "binderNameParts": [
+                      {
+                        "str": "tag"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "kind": "motives",
+            "label": "Motive",
+            "count": 1,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 6,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "015343d1b86ad35959f1f0c758c8fe4663afa4703897f5a0db61485bd7aab387",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 125,
+                  "node": 10,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "015343d1b86ad35959f1f0c758c8fe4663afa4703897f5a0db61485bd7aab387",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 125,
+                    "node": 120,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "motive",
+                    "binderNameParts": [
+                      {
+                        "str": "motive"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "kind": "minors",
+            "label": "Branch method",
+            "count": 2,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 7,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "015343d1b86ad35959f1f0c758c8fe4663afa4703897f5a0db61485bd7aab387",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 125,
+                  "node": 12,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "015343d1b86ad35959f1f0c758c8fe4663afa4703897f5a0db61485bd7aab387",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 125,
+                    "node": 119,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "zero",
+                    "binderNameParts": [
+                      {
+                        "str": "zero"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "ordinal": 1,
+                "argumentSlot": 8,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "015343d1b86ad35959f1f0c758c8fe4663afa4703897f5a0db61485bd7aab387",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 125,
+                  "node": 14,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "015343d1b86ad35959f1f0c758c8fe4663afa4703897f5a0db61485bd7aab387",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 125,
+                    "node": 118,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "next",
+                    "binderNameParts": [
+                      {
+                        "str": "next"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "kind": "indices",
+            "label": "Index",
+            "count": 1,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 9,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "015343d1b86ad35959f1f0c758c8fe4663afa4703897f5a0db61485bd7aab387",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 125,
+                  "node": 4,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      1
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "major": {
+          "argumentSlot": 10,
+          "address": {
+            "namespace": "kernel-rule",
+            "component": "recursor-reduction-schema",
+            "evidenceSha256": "015343d1b86ad35959f1f0c758c8fe4663afa4703897f5a0db61485bd7aab387",
+            "query": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "minor": 1,
+            "schemaRoot": 125,
+            "node": 1,
+            "route": {
+              "root": 0,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "head": {
+          "address": {
+            "namespace": "kernel-rule",
+            "component": "recursor-reduction-schema",
+            "evidenceSha256": "015343d1b86ad35959f1f0c758c8fe4663afa4703897f5a0db61485bd7aab387",
+            "query": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "minor": 1,
+            "schemaRoot": 125,
+            "node": 104,
+            "route": {
+              "root": 0,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "name": "AtlasParameterControls.Dep.rec",
+          "levels": [
+            {
+              "kind": "succ",
+              "of": {
+                "kind": "zero"
+              }
+            },
+            {
+              "kind": "param",
+              "name": "u",
+              "nameParts": [
+                {
+                  "str": "u"
+                }
+              ]
+            },
+            {
+              "kind": "param",
+              "name": "v",
+              "nameParts": [
+                {
+                  "str": "v"
+                }
+              ]
+            }
+          ],
+          "levelGraph": {
+            "format": "LevelDAG/1",
+            "kind": [
+              "zero",
+              "succ",
+              "param",
+              "param"
+            ],
+            "children": [
+              [],
+              [
+                0
+              ],
+              [],
+              []
+            ],
+            "payloads": [
+              {},
+              {},
+              {
+                "name": "u",
+                "nameParts": [
+                  {
+                    "str": "u"
+                  }
+                ]
+              },
+              {
+                "name": "v",
+                "nameParts": [
+                  {
+                    "str": "v"
+                  }
+                ]
+              }
+            ],
+            "expanded": [
+              "1",
+              "2",
+              "1",
+              "1"
+            ],
+            "roots": [
+              1,
+              2,
+              3
+            ]
+          }
+        },
+        "guarantee": "Literal schema-call argument partition. Constant universe levels are a separate payload; group roles do not establish mathematical premise necessity."
+      },
+      "scope": "Recorded kernel-rule namespace; prefix arguments forward the original rule binders."
+    },
+    {
+      "name": "AtlasParameterControls.family",
+      "query": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 1,
+      "computedInput": 2,
+      "partition": {
+        "source": {
+          "name": "AtlasParameterControls.family",
+          "indexSha256": "bad085c14c739eebc8a7c548076cebfec8f0796b4e75d2e3ccdf80f4560d10f0",
+          "sourceSha256": "14abf2ea9271bb2e9897e2744683647d337f47789470ebada8221f8a8f70f199",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "method": {
+            "namespace": "source-expression",
+            "node": 4,
+            "path": "root.value.body.body.body.body.body.body.fn.fn.arg",
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                1
+              ]
+            }
+          }
+        },
+        "evidenceSha256": "d0f00252f04a24d2ab7a3847f3486bd6c029583b7cd10236d55f5a1b447fac0f",
+        "query": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 1,
+        "groups": [
+          {
+            "kind": "parameters",
+            "label": "Parameter",
+            "count": 2,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 1,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "d0f00252f04a24d2ab7a3847f3486bd6c029583b7cd10236d55f5a1b447fac0f",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 119,
+                  "node": 100,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "d0f00252f04a24d2ab7a3847f3486bd6c029583b7cd10236d55f5a1b447fac0f",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 119,
+                    "node": 119,
+                    "route": {
+                      "root": 0,
+                      "slots": []
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "A",
+                    "binderNameParts": [
+                      {
+                        "str": "A"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "ordinal": 1,
+                "argumentSlot": 2,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "d0f00252f04a24d2ab7a3847f3486bd6c029583b7cd10236d55f5a1b447fac0f",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 119,
+                  "node": 64,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "d0f00252f04a24d2ab7a3847f3486bd6c029583b7cd10236d55f5a1b447fac0f",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 119,
+                    "node": 118,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "size",
+                    "binderNameParts": [
+                      {
+                        "str": "size"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "kind": "motives",
+            "label": "Motive",
+            "count": 1,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 3,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "d0f00252f04a24d2ab7a3847f3486bd6c029583b7cd10236d55f5a1b447fac0f",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 119,
+                  "node": 29,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "d0f00252f04a24d2ab7a3847f3486bd6c029583b7cd10236d55f5a1b447fac0f",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 119,
+                    "node": 117,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "motive",
+                    "binderNameParts": [
+                      {
+                        "str": "motive"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "kind": "minors",
+            "label": "Branch method",
+            "count": 2,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 4,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "d0f00252f04a24d2ab7a3847f3486bd6c029583b7cd10236d55f5a1b447fac0f",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 119,
+                  "node": 31,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "d0f00252f04a24d2ab7a3847f3486bd6c029583b7cd10236d55f5a1b447fac0f",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 119,
+                    "node": 116,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "zero",
+                    "binderNameParts": [
+                      {
+                        "str": "zero"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "ordinal": 1,
+                "argumentSlot": 5,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "d0f00252f04a24d2ab7a3847f3486bd6c029583b7cd10236d55f5a1b447fac0f",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 119,
+                  "node": 25,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "d0f00252f04a24d2ab7a3847f3486bd6c029583b7cd10236d55f5a1b447fac0f",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 119,
+                    "node": 115,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "node",
+                    "binderNameParts": [
+                      {
+                        "str": "node"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "kind": "indices",
+            "label": "Index",
+            "count": 1,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 6,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "d0f00252f04a24d2ab7a3847f3486bd6c029583b7cd10236d55f5a1b447fac0f",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 119,
+                  "node": 108,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      1
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "major": {
+          "argumentSlot": 7,
+          "address": {
+            "namespace": "kernel-rule",
+            "component": "recursor-reduction-schema",
+            "evidenceSha256": "d0f00252f04a24d2ab7a3847f3486bd6c029583b7cd10236d55f5a1b447fac0f",
+            "query": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "minor": 1,
+            "schemaRoot": 119,
+            "node": 44,
+            "route": {
+              "root": 0,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "head": {
+          "address": {
+            "namespace": "kernel-rule",
+            "component": "recursor-reduction-schema",
+            "evidenceSha256": "d0f00252f04a24d2ab7a3847f3486bd6c029583b7cd10236d55f5a1b447fac0f",
+            "query": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "minor": 1,
+            "schemaRoot": 119,
+            "node": 99,
+            "route": {
+              "root": 0,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "name": "AtlasParameterControls.Fan.rec",
+          "levels": [
+            {
+              "kind": "succ",
+              "of": {
+                "kind": "zero"
+              }
+            },
+            {
+              "kind": "param",
+              "name": "u",
+              "nameParts": [
+                {
+                  "str": "u"
+                }
+              ]
+            }
+          ],
+          "levelGraph": {
+            "format": "LevelDAG/1",
+            "kind": [
+              "zero",
+              "succ",
+              "param"
+            ],
+            "children": [
+              [],
+              [
+                0
+              ],
+              []
+            ],
+            "payloads": [
+              {},
+              {},
+              {
+                "name": "u",
+                "nameParts": [
+                  {
+                    "str": "u"
+                  }
+                ]
+              }
+            ],
+            "expanded": [
+              "1",
+              "2",
+              "1"
+            ],
+            "roots": [
+              1,
+              2
+            ]
+          }
+        },
+        "guarantee": "Literal schema-call argument partition. Constant universe levels are a separate payload; group roles do not establish mathematical premise necessity."
+      },
+      "scope": "Recorded kernel-rule namespace; prefix arguments forward the original rule binders."
+    },
+    {
+      "name": "AtlasParameterControls.proposition",
+      "query": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 1,
+      "computedInput": 2,
+      "partition": {
+        "source": {
+          "name": "AtlasParameterControls.proposition",
+          "indexSha256": "b764f0b590d0cff5b65383aebe3b36c98dfe2ad876a9d2ce0c72a7dbd8e3987c",
+          "sourceSha256": "14abf2ea9271bb2e9897e2744683647d337f47789470ebada8221f8a8f70f199",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "method": {
+            "namespace": "source-expression",
+            "node": 18,
+            "path": "root.value.body.body.body.body.fn.fn.arg",
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                1
+              ]
+            }
+          }
+        },
+        "evidenceSha256": "fb48df396c1bc16e3db5a47434fcf4962ce6f2d5a62f8976bd13dd2c2166bf22",
+        "query": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 1,
+        "groups": [
+          {
+            "kind": "parameters",
+            "label": "Parameter",
+            "count": 0,
+            "items": []
+          },
+          {
+            "kind": "motives",
+            "label": "Motive",
+            "count": 1,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 1,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "fb48df396c1bc16e3db5a47434fcf4962ce6f2d5a62f8976bd13dd2c2166bf22",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 69,
+                  "node": 21,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "fb48df396c1bc16e3db5a47434fcf4962ce6f2d5a62f8976bd13dd2c2166bf22",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 69,
+                    "node": 69,
+                    "route": {
+                      "root": 0,
+                      "slots": []
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "motive",
+                    "binderNameParts": [
+                      {
+                        "str": "motive"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "kind": "minors",
+            "label": "Branch method",
+            "count": 2,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 2,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "fb48df396c1bc16e3db5a47434fcf4962ce6f2d5a62f8976bd13dd2c2166bf22",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 69,
+                  "node": 17,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "fb48df396c1bc16e3db5a47434fcf4962ce6f2d5a62f8976bd13dd2c2166bf22",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 69,
+                    "node": 68,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "zero",
+                    "binderNameParts": [
+                      {
+                        "str": "zero"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "ordinal": 1,
+                "argumentSlot": 3,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "fb48df396c1bc16e3db5a47434fcf4962ce6f2d5a62f8976bd13dd2c2166bf22",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 69,
+                  "node": 31,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "binder": {
+                  "address": {
+                    "namespace": "kernel-rule",
+                    "component": "recursor-reduction-schema",
+                    "evidenceSha256": "fb48df396c1bc16e3db5a47434fcf4962ce6f2d5a62f8976bd13dd2c2166bf22",
+                    "query": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    "minor": 1,
+                    "schemaRoot": 69,
+                    "node": 67,
+                    "route": {
+                      "root": 0,
+                      "slots": [
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "payload": {
+                    "binderInfo": "default",
+                    "binderName": "step",
+                    "binderNameParts": [
+                      {
+                        "str": "step"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "kind": "indices",
+            "label": "Index",
+            "count": 1,
+            "items": [
+              {
+                "ordinal": 0,
+                "argumentSlot": 4,
+                "address": {
+                  "namespace": "kernel-rule",
+                  "component": "recursor-reduction-schema",
+                  "evidenceSha256": "fb48df396c1bc16e3db5a47434fcf4962ce6f2d5a62f8976bd13dd2c2166bf22",
+                  "query": {
+                    "root": 1,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  "minor": 1,
+                  "schemaRoot": 69,
+                  "node": 18,
+                  "route": {
+                    "root": 0,
+                    "slots": [
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      0,
+                      1
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "major": {
+          "argumentSlot": 5,
+          "address": {
+            "namespace": "kernel-rule",
+            "component": "recursor-reduction-schema",
+            "evidenceSha256": "fb48df396c1bc16e3db5a47434fcf4962ce6f2d5a62f8976bd13dd2c2166bf22",
+            "query": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "minor": 1,
+            "schemaRoot": 69,
+            "node": 2,
+            "route": {
+              "root": 0,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "head": {
+          "address": {
+            "namespace": "kernel-rule",
+            "component": "recursor-reduction-schema",
+            "evidenceSha256": "fb48df396c1bc16e3db5a47434fcf4962ce6f2d5a62f8976bd13dd2c2166bf22",
+            "query": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "minor": 1,
+            "schemaRoot": 69,
+            "node": 58,
+            "route": {
+              "root": 0,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "name": "AtlasParameterControls.Even.rec",
+          "levels": [],
+          "levelGraph": null
+        },
+        "guarantee": "Literal schema-call argument partition. Constant universe levels are a separate payload; group roles do not establish mathematical premise necessity."
+      },
+      "scope": "Recorded kernel-rule namespace; prefix arguments forward the original rule binders."
+    }
+  ],
+  "checkerSha256": "1b4a599fcaca09bc946686a569819a47e28d99c6ffbaa8adcadf7aae520dfbec",
+  "files": [
+    {
+      "file": "public/js/proof-atlas-recursor-arguments.js",
+      "sha256": "0c59610e60d143d5ddbe330c8b9060f56173df53dc3fa2c5b6f7d3155ca17a1f"
+    },
+    {
+      "file": "public/js/proof-atlas-method-indices.js",
+      "sha256": "7542a219d92d0b5dc6826679b9318e7c350a1a167cabb0c2ba43743665fd65b8"
+    },
+    {
+      "file": "public/js/proof-atlas-method-flow.js",
+      "sha256": "77fae3c47ff2631de8ab7925b9e17eb11aa12d0d10e01c797c8fdf003b38b4b4"
+    },
+    {
+      "file": "public/js/proof-atlas-method-interfaces.js",
+      "sha256": "8a5d8079abe1700f2ea45e354be2f22f97de3bdcd4ab65b9961a678e17999b75"
+    },
+    {
+      "file": "public/data/proof-atlas/method-parameters-manifest.js",
+      "sha256": "d1adbe2efa5636a5dad2f91fab2b5cdfc59e7656cc01a3330f523c9b62977434"
+    }
+  ],
+  "scope": "Literal parameter/motive/method/index/major partition of seven finite indexed self-recursive methods. Four fresh authored controls add dependent parameters, polymorphic levels and an empty-level proposition recursor. Exact lexical routes and bounded cuts; no index normalization/equality, arbitrary elimination, premise necessity, execution or comprehension result."
+}
