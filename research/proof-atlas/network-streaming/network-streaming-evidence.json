@@ -1,0 +1,1200 @@
+{
+  "format": "ProofAtlasNetworkStreamingEvidence/1",
+  "status": "PASS",
+  "publication": "Local experiment. No blog, PR, push or public deployment.",
+  "scope": "Paged source-use cuts retain original native owners. Complete source-spine coverage and fresh closed-packet replay for one larger public packet are separate from per-call type observations, which remain unavailable there. Resident component bounds do not establish total heap use, compact global storage, semantic abstraction or comprehension.",
+  "runtime": {
+    "node": "v23.11.0",
+    "producerSQLite": "node:sqlite"
+  },
+  "previous": {
+    "file": "research/proof-atlas/application-network/application-network-evidence.json",
+    "sha256": "3d86409241a04d819dc24616880cce9e7e39f18aa332620d3cb964e91c68260f",
+    "unchangedSourceFiles": 47
+  },
+  "derivation": {
+    "format": "ProofAtlasNetworkStreamingDerivation/1",
+    "status": "PASS",
+    "previousEvidenceSha256": "3d86409241a04d819dc24616880cce9e7e39f18aa332620d3cb964e91c68260f",
+    "nativeProfiles": 31,
+    "nativeCalls": 162,
+    "nativePorts": 787,
+    "nativeConnections": 101,
+    "sourceOnly": [
+      {
+        "source": {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_plus_54159",
+          "indexSha256": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+          "sourceSha256": "6e775cf687f0ff3c190bb091692f5a795294f4ae6bc17173df1744ba26042859"
+        },
+        "storedNodes": 6479,
+        "expandedOccurrences": "997411",
+        "maximalSpines": 201340,
+        "ports": 699453,
+        "maxArguments": 17,
+        "bindingPaths": 32,
+        "calls": 201340,
+        "known": 201190,
+        "unrecorded": 498263
+      }
+    ],
+    "maxCallBytes": 13087,
+    "producerSha256": "cc99b6f566abb9c49d59799956b39a39cfc9a8fe0b80f2e16c4126e0c5b9ef52",
+    "packerSha256": "09354dbb18b36bb1678b57d42259389328e48ab9341e974c44dfdb878c52ffb6",
+    "manifestSha256": "5768d4f66ce01a092b5e126512998264502bd92b7c15caae8c79a60702e3087b",
+    "scope": "Paged topology preserves the earlier finite native observations; the larger source-only packet adds structural coverage without per-call typing or new kernel runs."
+  },
+  "unit": {
+    "format": "ProofAtlasNetworkStreamingAudit/1",
+    "status": "PASS",
+    "nativeProfiles": 31,
+    "nativeCuts": 305,
+    "nativePortSelections": 787,
+    "exactPortAddresses": 1574,
+    "computedContexts": 2361,
+    "collapseRoundtrips": 144,
+    "connectionPages": 469,
+    "largeCuts": 207,
+    "largeSourceInspections": 31,
+    "sourceOnlyTypeRefusals": 31,
+    "rankSelectChecks": 71478,
+    "staleRefusals": 1,
+    "corruptionRefusals": 1,
+    "budgetRefusals": 1,
+    "peakRetainedCalls": 8,
+    "peakRetainedBytes": 27276,
+    "peakCallCacheRows": 4,
+    "peakOutgoingCacheRows": 32,
+    "peakConnectionRows": 8,
+    "wholeArchivesRequested": 0,
+    "files": [
+      {
+        "file": "public/js/proof-atlas-network-page-store.js",
+        "sha256": "8653362782be9b69eaba6c4b67962200685ea00d363c71c373db04b22ff5855a"
+      },
+      {
+        "file": "public/js/proof-atlas-network-streaming.js",
+        "sha256": "0c871f8ffd713581717f31a07e99606ec46e4db9f5642706596d0744e84482ba"
+      },
+      {
+        "file": "public/js/proof-atlas-network-stream-pages.js",
+        "sha256": "0dcd3c2fc7f9ce2a117cc78eea862d5a907328b43174311aa0c79c5c720bffe5"
+      },
+      {
+        "file": "public/js/proof-atlas-network-port-inspector.js",
+        "sha256": "04ddbe608d77c623aad81fb4a79da0654e80390b8e7f057ae9a58fb8367b5d98"
+      },
+      {
+        "file": "public/data/proof-atlas/network-streaming-manifest.js",
+        "sha256": "5768d4f66ce01a092b5e126512998264502bd92b7c15caae8c79a60702e3087b"
+      },
+      {
+        "file": "scripts/test-proof-atlas-network-streaming.cjs",
+        "sha256": "d4f8797ec03393ea3f6b3dcaa1ec5e46de1211b1d15513a5e498e917a300947d"
+      }
+    ],
+    "scope": "All earlier native ports retain addresses and contexts; actual large-packet cuts use bounded pages and refuse unobserved types. Numeric high-degree controls test rank/select arithmetic, not a million-call Lean proof or a full high-degree browser benchmark."
+  },
+  "source": {
+    "format": "ProofAtlasNetworkSourceIndexAudit/1",
+    "status": "PASS",
+    "source": {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_54159",
+      "indexSha256": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+      "sourceSha256": "6e775cf687f0ff3c190bb091692f5a795294f4ae6bc17173df1744ba26042859"
+    },
+    "calls": 201340,
+    "ports": 699453,
+    "sourceWitnesses": 699453,
+    "reverseEdges": 201190,
+    "completeSourceOccurrences": 997411,
+    "maximalSourceSpines": 201340,
+    "degreeChecks": 201340,
+    "unobservedTypes": 699453,
+    "lexicalBindingChecks": 7835,
+    "peakCallLeafRows": 4,
+    "peakOutgoingLeafRows": 32,
+    "wholeArchivesRequested": 0,
+    "decodedRecordsSha256": "6577e5729a179971215be6fd4d675046d7d629b8e7376e6c35b272482ac75078",
+    "manifestSha256": "5768d4f66ce01a092b5e126512998264502bd92b7c15caae8c79a60702e3087b",
+    "checkerSha256": "c1c1bd8f0fe1cdf32d0ad384af725ecbea5332848fa9ccc1869a7917066def49",
+    "scope": "All maximal application-spine occurrences in both roots of one published compiled packet, with exact ordered fields, source-use witnesses, reverse indices and unavailable per-call types. No new Lean kernel run, semantic dependence or corpus-wide completeness claim."
+  },
+  "closedPacketReplay": {
+    "format": "ProofAtlasNetworkPacketReplay/1",
+    "status": "PASS",
+    "source": {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_54159",
+      "indexSha256": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+      "sourceSha256": "6e775cf687f0ff3c190bb091692f5a795294f4ae6bc17173df1744ba26042859"
+    },
+    "compiler": "Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+    "dependencyRecovery": {
+      "kind": "mathlib-cache-attribution/1",
+      "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+      "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+      "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+      "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+      "artifactCount": 43450,
+      "allBinaryHashesVerified": true,
+      "originalGitCheckoutsVerified": false,
+      "independentlyRebuilt": false
+    },
+    "packetSha256": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+    "proof": {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "illTypedBinderRejectedByKernel": true,
+      "indexSha256": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+      "kernelExpectedType": "PASS",
+      "kernelExpectedTypeConversion": "PASS",
+      "kernelExpectedTypeIsProposition": "PASS",
+      "kernelProof": "PASS",
+      "knownBaselineConstantNodes": 234,
+      "name": "lean_workbook_plus_54159",
+      "originalModuleAbsentFromEnvironment": true,
+      "originalTheoremAbsentFromEnvironment": true,
+      "roundtripFields": [
+        "kind",
+        "children",
+        "payloads",
+        "expanded",
+        "neededScope",
+        "roots"
+      ],
+      "storedNodes": 6479,
+      "wrongProofRejectedByKernel": true
+    },
+    "nativeOutputSha256": "d08f7752c457f0c10902e381cf9c1ed420936a527e3fdc2cf52789a8a6cc94b9",
+    "runtimeSha256": "33f2911a9ebcd73e7d3fbd5d26433c2af2898059ac26d36795ecb3ceea2520a2",
+    "producerFiles": {
+      "research/proof-atlas/network-streaming/verify-packet.py": "8e471cb11fb35ba6d8ba88bceec202e57e1ef4173172b6135bf3e977c48d439c",
+      "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+      "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567",
+      "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+      "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+      "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+      "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+      "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+      "research/proof-atlas/evaluate_goedel.py": "66f224948d3576c900f3818dc55cd171cb16c5ac2124e41042d18c6c77f0114a",
+      "research/proof-atlas/build_recursion_examples.py": "b063049511685815acf92367766e146694fb98a9d661453da13f288a6444ef9b"
+    },
+    "imports": [
+      "Mathlib",
+      "Aesop"
+    ],
+    "originalProofSourcesRead": false,
+    "originalProofModuleImported": false,
+    "privateRiccatiModulesImported": false,
+    "perCallTypeObservationsAdded": 0,
+    "scope": "Fresh closed-packet kernel replay and negative controls. Source-spine types remain unobserved; dependency revision is cache attribution, not an independent dependency rebuild."
+  },
+  "browser": {
+    "format": "ProofAtlasNetworkStreamingBrowser/1",
+    "status": "PASS",
+    "nativeProfiles": 31,
+    "nativeCalls": 162,
+    "nativeWires": 101,
+    "nativeTypeSelections": 101,
+    "bindingSelections": 7,
+    "largeCalls": 11,
+    "unavailableTypes": 11,
+    "expansions": 1,
+    "consumerPages": 1,
+    "zoomChecks": 3,
+    "panChecks": 2,
+    "axeAudits": 4,
+    "keyboardChecks": 1,
+    "staleRefusals": 1,
+    "hashRefusals": 1,
+    "releases": 1,
+    "wholeArchiveAttempts": 0,
+    "builtFiles": {
+      "public/js/proof-atlas-network-page-store.js": "8653362782be9b69eaba6c4b67962200685ea00d363c71c373db04b22ff5855a",
+      "public/js/proof-atlas-network-streaming.js": "0c871f8ffd713581717f31a07e99606ec46e4db9f5642706596d0744e84482ba",
+      "public/js/proof-atlas-network-stream-pages.js": "0dcd3c2fc7f9ce2a117cc78eea862d5a907328b43174311aa0c79c5c720bffe5",
+      "public/js/proof-atlas-network-port-inspector.js": "04ddbe608d77c623aad81fb4a79da0654e80390b8e7f057ae9a58fb8367b5d98",
+      "public/js/proof-atlas-network-stream-view.js": "c9d5bd8b47be0a77b5eb00d9edc5cfd5f868b6d10cd65befb29b5f8ddc60eaf2",
+      "public/data/proof-atlas/network-streaming-manifest.js": "5768d4f66ce01a092b5e126512998264502bd92b7c15caae8c79a60702e3087b"
+    },
+    "html": {
+      "source": "research/proof-atlas/network-streaming/index.html",
+      "sourceSha256": "592fd4c620785648b797a05dfbc1eed618345320faa23288b0d7ba13e39db0af",
+      "normalizedSha256": "472de19f46a0699397814112dc3a6e9b26d06cbb644f8c3c350c713c851ab882"
+    },
+    "checkerSha256": "685c6312221b7ae6d3eaf0f62083658c293fe884a9d8836b8b57fcc6b9ad776f"
+  },
+  "roots": [
+    {
+      "mode": "native",
+      "source": {
+        "edition": "published-15",
+        "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+        "name": "JacobiData.slope_bound_abs",
+        "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7"
+      },
+      "scope": "39c7a5191d3eb257ffdfa30fb10c0245812f1ded7bfe967394878dee8f35246a",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/4a978b79ec87b900cdda0cfaadda15e741d89c00abda00eed0c7db61e40cb638.json.gz",
+        "sha256": "4a978b79ec87b900cdda0cfaadda15e741d89c00abda00eed0c7db61e40cb638",
+        "bytes": 1445
+      },
+      "counts": {
+        "calls": 87,
+        "ports": 394,
+        "known": 68,
+        "unrecorded": 326
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/4b984b42ce986ccbe6b0fc606beba93b6b8d535ac18e5388841a6ef55c64df45.json.gz",
+        "sha256": "4b984b42ce986ccbe6b0fc606beba93b6b8d535ac18e5388841a6ef55c64df45",
+        "bytes": 74301
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "equality-transport-controls",
+        "indexSha256": "1884ff1d2a463be258a27a4487ae83afcd0f7237636975bcd72c74b18128ecc2",
+        "name": "AtlasTransportControls.simple",
+        "sourceSha256": "e0581a59e2ad4cf295d4b723b3d607a9d69a097c3e6a265cca1b3cb76cd1cdb8"
+      },
+      "scope": "278dc4f91120c63dc09cf9ef900ee5112a5f7e0bdb125de64398e7046324eff3",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/8fe1d685f059208d204cfdd81a5946dbaf799fc92ff224a35c89709758cba58c.json.gz",
+        "sha256": "8fe1d685f059208d204cfdd81a5946dbaf799fc92ff224a35c89709758cba58c",
+        "bytes": 1213
+      },
+      "counts": {
+        "calls": 1,
+        "ports": 5,
+        "known": 0,
+        "unrecorded": 5
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/c0ac48ea00791cf282e54bf7838f353da8fe544515b3b0f8a1279fa6b9078d95.json.gz",
+        "sha256": "c0ac48ea00791cf282e54bf7838f353da8fe544515b3b0f8a1279fa6b9078d95",
+        "bytes": 2607
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "equality-transport-controls",
+        "indexSha256": "9d6027e1c4236e349c4ece751ec87c624803e6004de9d7399a943cab4219558e",
+        "name": "AtlasTransportControls.dependent",
+        "sourceSha256": "e0581a59e2ad4cf295d4b723b3d607a9d69a097c3e6a265cca1b3cb76cd1cdb8"
+      },
+      "scope": "a50d10ea3e81f3ccc6531c4abfa12c8f47f6c36af594b009a55e49e5273d013d",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/5ff5096caf7e088693655e720917a193a8fada9d60a8b9b167ff947064483189.json.gz",
+        "sha256": "5ff5096caf7e088693655e720917a193a8fada9d60a8b9b167ff947064483189",
+        "bytes": 1216
+      },
+      "counts": {
+        "calls": 1,
+        "ports": 7,
+        "known": 0,
+        "unrecorded": 7
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/8c845b8502b643fb2c86e9d65873582f2957087e70ca6aa40afc0c4860f9e112.json.gz",
+        "sha256": "8c845b8502b643fb2c86e9d65873582f2957087e70ca6aa40afc0c4860f9e112",
+        "bytes": 2834
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "equality-transport-controls",
+        "indexSha256": "eb374d618bc2a5e9bc4bda68dfdcb2397808be685df3c0997ab4f7e4f016d26d",
+        "name": "AtlasTransportControls.proofDependent",
+        "sourceSha256": "e0581a59e2ad4cf295d4b723b3d607a9d69a097c3e6a265cca1b3cb76cd1cdb8"
+      },
+      "scope": "efd59bcf38852e161274260596c8aaeb81777afc82f754d9c5ecbad28a62fe5c",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/c98ee86ec0a0c15e0d43d2c134241bd4998b587e01eea365a1856d2925ad41bc.json.gz",
+        "sha256": "c98ee86ec0a0c15e0d43d2c134241bd4998b587e01eea365a1856d2925ad41bc",
+        "bytes": 1221
+      },
+      "counts": {
+        "calls": 1,
+        "ports": 7,
+        "known": 0,
+        "unrecorded": 7
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/a202e6283875b2160f7e5600b073cadfaf9e6787be52bd66606125f6e4e28e63.json.gz",
+        "sha256": "a202e6283875b2160f7e5600b073cadfaf9e6787be52bd66606125f6e4e28e63",
+        "bytes": 2847
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "equality-transport-controls",
+        "indexSha256": "977d4904a0f5596ed06d0ef5cc9796688b84d66e4ce7b021299589f33f649d52",
+        "name": "AtlasTransportControls.trailing",
+        "sourceSha256": "e0581a59e2ad4cf295d4b723b3d607a9d69a097c3e6a265cca1b3cb76cd1cdb8"
+      },
+      "scope": "a637dea9f50b6b323643b7ce12679dc60f2c3d456ed0ea2dccd9353d156aec9d",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/9cd4826f517df8b8ef99a6fd63ecc5064499cd94081e8d181385761b6b56e90d.json.gz",
+        "sha256": "9cd4826f517df8b8ef99a6fd63ecc5064499cd94081e8d181385761b6b56e90d",
+        "bytes": 1215
+      },
+      "counts": {
+        "calls": 1,
+        "ports": 5,
+        "known": 0,
+        "unrecorded": 5
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/c47257380dcaa77ce164aa12b12a1526b7437a8a6ca4132976ebe5cc645813d7.json.gz",
+        "sha256": "c47257380dcaa77ce164aa12b12a1526b7437a8a6ca4132976ebe5cc645813d7",
+        "bytes": 2650
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "equality-transport-controls",
+        "indexSha256": "dc46fa73198156f1c18ec58a9b6882968a85f765b1c0a5975f7a1039afe83035",
+        "name": "AtlasTransportControls.same",
+        "sourceSha256": "e0581a59e2ad4cf295d4b723b3d607a9d69a097c3e6a265cca1b3cb76cd1cdb8"
+      },
+      "scope": "90c3a7cca90966c2f6ee67bc68e86880a957c72c69e91b1136dd732262c03156",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/aa43d95f0f97d80093f2bc229c4a2af86da1216b68566f56b542cd8441c33429.json.gz",
+        "sha256": "aa43d95f0f97d80093f2bc229c4a2af86da1216b68566f56b542cd8441c33429",
+        "bytes": 1211
+      },
+      "counts": {
+        "calls": 1,
+        "ports": 5,
+        "known": 0,
+        "unrecorded": 5
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/1eec459d6dd0993e445726f40d0d136d3bfd23d73a8da5a780bfb209e07da84f.json.gz",
+        "sha256": "1eec459d6dd0993e445726f40d0d136d3bfd23d73a8da5a780bfb209e07da84f",
+        "bytes": 2588
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "equality-transport-controls",
+        "indexSha256": "a4b09e16906d5ae5481bb094ca9586728cc0059b57a4cf96e58eb14c7cd9b425",
+        "name": "AtlasTransportControls.reordered",
+        "sourceSha256": "e0581a59e2ad4cf295d4b723b3d607a9d69a097c3e6a265cca1b3cb76cd1cdb8"
+      },
+      "scope": "bb3d2f346f47aa55aff6705bf2189728acc9061f5d6e685defd2db3432240e76",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/7e600dc50c331bdf9ef884886fdc69f3bfe585c45f48f0813e5d2d99aa4d86f1.json.gz",
+        "sha256": "7e600dc50c331bdf9ef884886fdc69f3bfe585c45f48f0813e5d2d99aa4d86f1",
+        "bytes": 1216
+      },
+      "counts": {
+        "calls": 1,
+        "ports": 7,
+        "known": 0,
+        "unrecorded": 7
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/afcaafaf516945606844ddc7c9c00db425b309199be422956a4f30afb4fd2cff.json.gz",
+        "sha256": "afcaafaf516945606844ddc7c9c00db425b309199be422956a4f30afb4fd2cff",
+        "bytes": 2834
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "equality-transport-controls",
+        "indexSha256": "7230301a294058c5c4f776f0cd93dd946b8633a13ccdefd386496be1e8d2e3ea",
+        "name": "AtlasTransportControls.reverse",
+        "sourceSha256": "e0581a59e2ad4cf295d4b723b3d607a9d69a097c3e6a265cca1b3cb76cd1cdb8"
+      },
+      "scope": "03801c61b423c58de6c6c0479d0d7376ecb092ab1d43f8dbd6de124d7a3d8a72",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/7f9ced96a6bf529142c536715ebd4d14542e478494808d2dc7936aa9b46c1233.json.gz",
+        "sha256": "7f9ced96a6bf529142c536715ebd4d14542e478494808d2dc7936aa9b46c1233",
+        "bytes": 1214
+      },
+      "counts": {
+        "calls": 1,
+        "ports": 5,
+        "known": 0,
+        "unrecorded": 5
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/056d8f66f4f8dda2db3904c870d125975b8af9fd4ed9be033f96d12278283057.json.gz",
+        "sha256": "056d8f66f4f8dda2db3904c870d125975b8af9fd4ed9be033f96d12278283057",
+        "bytes": 2611
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "goedel-sample-4331",
+        "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+        "name": "lean_workbook_20418",
+        "sourceSha256": "44d7d19cff28d5b75dc33d21733bf14cb764e765f493ca46cf2a66345b8a3d07"
+      },
+      "scope": "f0ecb59a1703ef5ae3cf03397753fe1e8d8c86caecd1da0fe331e89623315a2b",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/1b23ecd3808119cab0c1effe6b9aa89faa4fcf4eed0bc42095e7feb4a9c83b8a.json.gz",
+        "sha256": "1b23ecd3808119cab0c1effe6b9aa89faa4fcf4eed0bc42095e7feb4a9c83b8a",
+        "bytes": 1437
+      },
+      "counts": {
+        "calls": 2,
+        "ports": 12,
+        "known": 1,
+        "unrecorded": 11
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/9cce08bb1417a8d3a5dc664cedf2786dbc29e223ca7988aa0b209feb2118ede6.json.gz",
+        "sha256": "9cce08bb1417a8d3a5dc664cedf2786dbc29e223ca7988aa0b209feb2118ede6",
+        "bytes": 12556
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "goedel-sample-4331",
+        "indexSha256": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+        "name": "lean_workbook_4274",
+        "sourceSha256": "761ccc0ee9e693f87eabfca7b94449ec8ebe1c5293ddd528bed8eade57ca74a4"
+      },
+      "scope": "29c3725abd44fad302561a01c94729b998c093f68a7965cc323a8a2a17e5519f",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/15296c3c35ff7d13fee744823623e96fed05f5dc1e94e0eb93c6879c1a7fb6cd.json.gz",
+        "sha256": "15296c3c35ff7d13fee744823623e96fed05f5dc1e94e0eb93c6879c1a7fb6cd",
+        "bytes": 1436
+      },
+      "counts": {
+        "calls": 5,
+        "ports": 26,
+        "known": 4,
+        "unrecorded": 22
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/500a7cc0c691a384b913db52a911ad3378e05391be000224ce217a77d4870b56.json.gz",
+        "sha256": "500a7cc0c691a384b913db52a911ad3378e05391be000224ce217a77d4870b56",
+        "bytes": 11148
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "goedel-sample-4331",
+        "indexSha256": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+        "name": "lean_workbook_plus_15068",
+        "sourceSha256": "c8a09c1ece2d7fc13d9ef4d0979c71870e9e97202f8bed0df415a5c52788c2b5"
+      },
+      "scope": "3ec010a170d45ea2136dc52deaebec5b5dd7d61985054289433f58d28cf13393",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/6c6c914b1548386d88f69c84bc1f65ff1ac4d4ec9651a6497c101580033a4f63.json.gz",
+        "sha256": "6c6c914b1548386d88f69c84bc1f65ff1ac4d4ec9651a6497c101580033a4f63",
+        "bytes": 1444
+      },
+      "counts": {
+        "calls": 4,
+        "ports": 34,
+        "known": 2,
+        "unrecorded": 32
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/6fb6c79dab7b2ae26cbd04a3157ad9b192d9f652c4be8e87ad3beb456290cda4.json.gz",
+        "sha256": "6fb6c79dab7b2ae26cbd04a3157ad9b192d9f652c4be8e87ad3beb456290cda4",
+        "bytes": 16959
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "goedel-sample-4331",
+        "indexSha256": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+        "name": "lean_workbook_plus_19617",
+        "sourceSha256": "0c75bdffb8429241e73c9e4f375bd15130b2c5a19855281071b9706b89478578"
+      },
+      "scope": "a88788f00734b1e80b4c70c48d077b65bfac028a541cc84dce73dc951b8ba099",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/7ccba6d9b8feb3b3d51bb652888f96252222439ed84bd7eeb32515d47e56c800.json.gz",
+        "sha256": "7ccba6d9b8feb3b3d51bb652888f96252222439ed84bd7eeb32515d47e56c800",
+        "bytes": 1441
+      },
+      "counts": {
+        "calls": 5,
+        "ports": 27,
+        "known": 3,
+        "unrecorded": 24
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/e8a2c87acb7d5b7317e4166784fc89ed5333a897f8f45606e271a549d6008de8.json.gz",
+        "sha256": "e8a2c87acb7d5b7317e4166784fc89ed5333a897f8f45606e271a549d6008de8",
+        "bytes": 8483
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "goedel-sample-4331",
+        "indexSha256": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+        "name": "lean_workbook_plus_39831",
+        "sourceSha256": "ceca77661c386d820b66fac94e6e1e4ebbb18d894f0b6a79c37f6cd2f425c9cf"
+      },
+      "scope": "ecad476ef4cf7aa0d32457b8b780b75eab02afec74ff78b5f7a4ad3a9121307a",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/236eba1a632ea59fde628f18009ac33fd9391a38a8165a9274a34695a2f3e255.json.gz",
+        "sha256": "236eba1a632ea59fde628f18009ac33fd9391a38a8165a9274a34695a2f3e255",
+        "bytes": 1444
+      },
+      "counts": {
+        "calls": 4,
+        "ports": 24,
+        "known": 2,
+        "unrecorded": 22
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/75880e8521ae912a09a80e5ab9acca37d0756ef0940fc73847ac792a2cf0a2b8.json.gz",
+        "sha256": "75880e8521ae912a09a80e5ab9acca37d0756ef0940fc73847ac792a2cf0a2b8",
+        "bytes": 11924
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "goedel-sample-4331",
+        "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+        "name": "lean_workbook_plus_6206",
+        "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5"
+      },
+      "scope": "9c3ba39e689e48b22b7b181071ec6029df29fed109130d91f6e03208601c1bd9",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/744d03d3e6dd0f0dd735236ade0d47f9945cf4ba2bbe058d4e88da5ac894980d.json.gz",
+        "sha256": "744d03d3e6dd0f0dd735236ade0d47f9945cf4ba2bbe058d4e88da5ac894980d",
+        "bytes": 1441
+      },
+      "counts": {
+        "calls": 8,
+        "ports": 48,
+        "known": 4,
+        "unrecorded": 44
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/20f14df81de32bcd46f12af91e28279950fcff33e9abc7510814f256a6ce8cc7.json.gz",
+        "sha256": "20f14df81de32bcd46f12af91e28279950fcff33e9abc7510814f256a6ce8cc7",
+        "bytes": 18187
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "equality-transport-controls",
+        "indexSha256": "a0baa9aad5f3968145d1353663406709a49ef5438dd5ee4372a9fd484d2dafa9",
+        "name": "AtlasTransportStress.balanced",
+        "sourceSha256": "8ced97a2ba446c1a95806b72481c17d4539f91283f0f96f46bf47ce4508e0ba9"
+      },
+      "scope": "a9b0a920df35268ca3f62591aca2e335b49741b8d063ff81627cc3dafe3246af",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/3ecb1f4803859ecb8f36c412aef9db194ce15c71138510f475ad5d7b189dbf97.json.gz",
+        "sha256": "3ecb1f4803859ecb8f36c412aef9db194ce15c71138510f475ad5d7b189dbf97",
+        "bytes": 1458
+      },
+      "counts": {
+        "calls": 3,
+        "ports": 13,
+        "known": 2,
+        "unrecorded": 11
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/94b99ca2bd049afcbf9bad0e24b97015f86d6dd43a542381e471301b89862cd6.json.gz",
+        "sha256": "94b99ca2bd049afcbf9bad0e24b97015f86d6dd43a542381e471301b89862cd6",
+        "bytes": 3533
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "construction-composition-controls",
+        "indexSha256": "d103c773f0970a2395dee6852bd0c1704180f2377677f7b5010222a8845a8c51",
+        "name": "AtlasComposeControls.inlineCalls",
+        "sourceSha256": "14fda69fda6a9601fc288056df7c7dc6014addd0e66a77aed12b7e808e221d39"
+      },
+      "scope": "ff9fae436e5e39441e0436b874392fe3d777ea186698b1464ed725f9f799d5fb",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/5ead2ca86293fedc5ddbecbb6d2d7593c801fbb60a44c39f992f7864497e4701.json.gz",
+        "sha256": "5ead2ca86293fedc5ddbecbb6d2d7593c801fbb60a44c39f992f7864497e4701",
+        "bytes": 1463
+      },
+      "counts": {
+        "calls": 2,
+        "ports": 10,
+        "known": 1,
+        "unrecorded": 9
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/aefa1c66cda6a32911742c43669801ea2e4a66b4079fc9b943b9435a67364a30.json.gz",
+        "sha256": "aefa1c66cda6a32911742c43669801ea2e4a66b4079fc9b943b9435a67364a30",
+        "bytes": 3261
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "construction-composition-controls",
+        "indexSha256": "3d0318b2bb63638991f34b7744472aa34fc5b1d76277697d68966bad9c68ddd3",
+        "name": "AtlasComposeControls.aliases",
+        "sourceSha256": "14fda69fda6a9601fc288056df7c7dc6014addd0e66a77aed12b7e808e221d39"
+      },
+      "scope": "c8fbd8bb7b647406cb6f9554ef14782baddf23272f714e32eaa322a47b3ee499",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/336895416d7f640c713790a2b3ba952183ad37079f432489f0a737a6d7d318ba.json.gz",
+        "sha256": "336895416d7f640c713790a2b3ba952183ad37079f432489f0a737a6d7d318ba",
+        "bytes": 1459
+      },
+      "counts": {
+        "calls": 2,
+        "ports": 10,
+        "known": 1,
+        "unrecorded": 9
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/ab42f061d9c6c87c82fbd22ea817285f2c1316384751a23d51ec05566fa4ab7f.json.gz",
+        "sha256": "ab42f061d9c6c87c82fbd22ea817285f2c1316384751a23d51ec05566fa4ab7f",
+        "bytes": 3275
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "construction-composition-controls",
+        "indexSha256": "6158ada685fe132b395d22b477973ebcc94ae7643445bcc16df25e205f0e7602",
+        "name": "AtlasComposeControls.weakening",
+        "sourceSha256": "14fda69fda6a9601fc288056df7c7dc6014addd0e66a77aed12b7e808e221d39"
+      },
+      "scope": "f7f0d6bff0dd6cba31c1fba0e19c923cd6615257136843c5128948a12522c656",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/de53a2fd4060525209f3dec5ac4e98419ebe25238a14776c3423cef8227fb1f3.json.gz",
+        "sha256": "de53a2fd4060525209f3dec5ac4e98419ebe25238a14776c3423cef8227fb1f3",
+        "bytes": 1461
+      },
+      "counts": {
+        "calls": 2,
+        "ports": 10,
+        "known": 1,
+        "unrecorded": 9
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/b705888f624095c7f6d194b4b4aaebb4c48216d08b07eb54569062c30b94a4f2.json.gz",
+        "sha256": "b705888f624095c7f6d194b4b4aaebb4c48216d08b07eb54569062c30b94a4f2",
+        "bytes": 3281
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "construction-composition-controls",
+        "indexSha256": "ccadd94c7553fc27ce8d9a1f9e0783b8a9ae1b8cc93ffab233f3ec7b4b2af43d",
+        "name": "AtlasComposeControls.parallel",
+        "sourceSha256": "14fda69fda6a9601fc288056df7c7dc6014addd0e66a77aed12b7e808e221d39"
+      },
+      "scope": "e38f760cc923af4284308310cd322e343cdb2593d34ceb3c11f96417f49d47ba",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/c1e0edf6b3c6d2ffd1699144def59b7b11bca488d73e9b8503f6e41fdbb4fec7.json.gz",
+        "sha256": "c1e0edf6b3c6d2ffd1699144def59b7b11bca488d73e9b8503f6e41fdbb4fec7",
+        "bytes": 1461
+      },
+      "counts": {
+        "calls": 3,
+        "ports": 15,
+        "known": 1,
+        "unrecorded": 14
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/9e2fce9cd327ca42d6e6ff51afdec3fb5750371b148afdfbadac2d070f63683a.json.gz",
+        "sha256": "9e2fce9cd327ca42d6e6ff51afdec3fb5750371b148afdfbadac2d070f63683a",
+        "bytes": 3901
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "construction-composition-controls",
+        "indexSha256": "5bfcfaf10f2b18b5a526a081cb8c9d8ee6222f36da78695f7bcddf7bb8b3e4ba",
+        "name": "AtlasComposeControls.shared",
+        "sourceSha256": "14fda69fda6a9601fc288056df7c7dc6014addd0e66a77aed12b7e808e221d39"
+      },
+      "scope": "05c0596b080a2519bb1aea71717e21668132bc3ee45c265b74fe9a1eb5ffe3cc",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/62916a9b3528b72ae7377248e8a0f70e02c3f9813d92776d89cbd005f6f26dbb.json.gz",
+        "sha256": "62916a9b3528b72ae7377248e8a0f70e02c3f9813d92776d89cbd005f6f26dbb",
+        "bytes": 1459
+      },
+      "counts": {
+        "calls": 3,
+        "ports": 15,
+        "known": 1,
+        "unrecorded": 14
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/17c624a2082d6c7293e00a7f4addf36a0dff1f5d55659515c65bb9faf29a7e3d.json.gz",
+        "sha256": "17c624a2082d6c7293e00a7f4addf36a0dff1f5d55659515c65bb9faf29a7e3d",
+        "bytes": 3859
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "construction-composition-controls",
+        "indexSha256": "98334325c3b378f8530c60902e8f8ef1fad049eba477cb6325aa732c1d1863ac",
+        "name": "AtlasComposeControls.crossContext",
+        "sourceSha256": "14fda69fda6a9601fc288056df7c7dc6014addd0e66a77aed12b7e808e221d39"
+      },
+      "scope": "0f8d43ca69b36dbcb6f03b02eb19eb6c1edc749e4e5464048ad88c4b930e568c",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/c9eea1375699de3f549e7ecc4d09a9bb7e001ab2fcc3b0099e92a43cc3c35bf3.json.gz",
+        "sha256": "c9eea1375699de3f549e7ecc4d09a9bb7e001ab2fcc3b0099e92a43cc3c35bf3",
+        "bytes": 1225
+      },
+      "counts": {
+        "calls": 2,
+        "ports": 10,
+        "known": 0,
+        "unrecorded": 10
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/29ead177ef825e1ed7956cfe62dd649463e931d8e89979b628b9a800492b8948.json.gz",
+        "sha256": "29ead177ef825e1ed7956cfe62dd649463e931d8e89979b628b9a800492b8948",
+        "bytes": 3239
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "construction-composition-controls",
+        "indexSha256": "913bff062a1cfdfceafc3002e6e83dc5ffb1f8d83976d267987c695832e32622",
+        "name": "AtlasComposeControls.samePorts",
+        "sourceSha256": "14fda69fda6a9601fc288056df7c7dc6014addd0e66a77aed12b7e808e221d39"
+      },
+      "scope": "ff963edfe09370e6c20ab1b16e44167238afbf30e286394b46e71f89fd4fec45",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/25157e483ee1d0c69fac4865ef74eb5b25c57a634b3b2e6c750b978f2a2ff3af.json.gz",
+        "sha256": "25157e483ee1d0c69fac4865ef74eb5b25c57a634b3b2e6c750b978f2a2ff3af",
+        "bytes": 1462
+      },
+      "counts": {
+        "calls": 3,
+        "ports": 13,
+        "known": 2,
+        "unrecorded": 11
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/31a4c9aac0ca277047390ff0545ed60b35f6ef1794c100445cf76d66c63df2a1.json.gz",
+        "sha256": "31a4c9aac0ca277047390ff0545ed60b35f6ef1794c100445cf76d66c63df2a1",
+        "bytes": 3470
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "construction-composition-controls",
+        "indexSha256": "9497ff68cdbc00976a2d646d0cb9ba21457d110ef60a94a982fafac3865573a1",
+        "name": "AtlasComposeControls.nondepValue",
+        "sourceSha256": "14fda69fda6a9601fc288056df7c7dc6014addd0e66a77aed12b7e808e221d39"
+      },
+      "scope": "c5526b2451d73dbfc48dc046f19e234807ca5369b6cbe4910cec99cdff5577cf",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/f8a7b53a187a90f0943924980058b31493379132a55d39c7b7620eb5572219ba.json.gz",
+        "sha256": "f8a7b53a187a90f0943924980058b31493379132a55d39c7b7620eb5572219ba",
+        "bytes": 1464
+      },
+      "counts": {
+        "calls": 2,
+        "ports": 14,
+        "known": 1,
+        "unrecorded": 13
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/36f3be5e470da7f8ee922342dfdc099ff9b2242a2ad15df7736f31be2eb13036.json.gz",
+        "sha256": "36f3be5e470da7f8ee922342dfdc099ff9b2242a2ad15df7736f31be2eb13036",
+        "bytes": 3542
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "application-port-controls",
+        "name": "AtlasApplicationPorts.dependent",
+        "indexSha256": "e476a4f0e6bc510e477a1b2139f4e8eb3ba35af1483a10f99aacfa84fb8b0eba",
+        "sourceSha256": "d274508f46bb25a56846b615e2cf51a65cefd74f223482cf648b5f9539b44992"
+      },
+      "scope": "61294e41e27863817beebc4d1b4049addea9ef590f204a6018f91826330af1d7",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/5f5d229a83e8418c9356da1c09852a201b5f9b3e360adb1e11174bc9eea59ac8.json.gz",
+        "sha256": "5f5d229a83e8418c9356da1c09852a201b5f9b3e360adb1e11174bc9eea59ac8",
+        "bytes": 1213
+      },
+      "counts": {
+        "calls": 3,
+        "ports": 9,
+        "known": 0,
+        "unrecorded": 9
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/0b4e105abbfe181ac9624d15e9007f017965c277ea6f5484132fdff15bf454f0.json.gz",
+        "sha256": "0b4e105abbfe181ac9624d15e9007f017965c277ea6f5484132fdff15bf454f0",
+        "bytes": 3210
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "application-port-controls",
+        "name": "AtlasApplicationPorts.functions",
+        "indexSha256": "b8dc6049b71ce9c28d40c198efab6922fbbd8302e51b15934efb5181541f2243",
+        "sourceSha256": "d274508f46bb25a56846b615e2cf51a65cefd74f223482cf648b5f9539b44992"
+      },
+      "scope": "a77d7712adff281b1ab19924a4b2383073cccc28391282470bcd7d242f49a408",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/137372f6729b89b93e4d3239a07a750f41959a37d59cd3aa87b34b2a4744f1c6.json.gz",
+        "sha256": "137372f6729b89b93e4d3239a07a750f41959a37d59cd3aa87b34b2a4744f1c6",
+        "bytes": 1213
+      },
+      "counts": {
+        "calls": 1,
+        "ports": 7,
+        "known": 0,
+        "unrecorded": 7
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/09225100e19256e04d31024d86caf0ede073d48897106fe47f7f6000c6a91df3.json.gz",
+        "sha256": "09225100e19256e04d31024d86caf0ede073d48897106fe47f7f6000c6a91df3",
+        "bytes": 2859
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "application-port-controls",
+        "name": "AtlasApplicationPorts.instances",
+        "indexSha256": "e275084ceeabe654527b4fb481f54a4fb0fc957d0dc9c901ebf758a1ab93a3c3",
+        "sourceSha256": "d274508f46bb25a56846b615e2cf51a65cefd74f223482cf648b5f9539b44992"
+      },
+      "scope": "07d392c0295dd2da86c5a67a1f7b4153a4081c35e04d600201c66bb7688216c5",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/0f9cd5c6b5d16995a53a14a779766bc48cb0bce6c265ed139b3a49b6513d66a1.json.gz",
+        "sha256": "0f9cd5c6b5d16995a53a14a779766bc48cb0bce6c265ed139b3a49b6513d66a1",
+        "bytes": 1454
+      },
+      "counts": {
+        "calls": 2,
+        "ports": 10,
+        "known": 1,
+        "unrecorded": 9
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/b5768cd58003c06971260c7d575d7969d04c4d4dcfbe2b668429641283050c5e.json.gz",
+        "sha256": "b5768cd58003c06971260c7d575d7969d04c4d4dcfbe2b668429641283050c5e",
+        "bytes": 3138
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "application-port-controls",
+        "name": "AtlasApplicationPorts.partialUse",
+        "indexSha256": "b40e524f2fbc99dce9aa5013d8aac3820f5a429650294d1ef77ff5ca7d62190f",
+        "sourceSha256": "d274508f46bb25a56846b615e2cf51a65cefd74f223482cf648b5f9539b44992"
+      },
+      "scope": "d5665f44130341f4439257f42524e6f3522a4090d999b4a23391dd019281a10c",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/178256765761a0c475a900271f2f97a2cdacead324648eb329ef85ebe48c7a0f.json.gz",
+        "sha256": "178256765761a0c475a900271f2f97a2cdacead324648eb329ef85ebe48c7a0f",
+        "bytes": 1214
+      },
+      "counts": {
+        "calls": 1,
+        "ports": 6,
+        "known": 0,
+        "unrecorded": 6
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/8666243172c8dcedc4964ceb12419b825506ae02f6f5ad0b03a4b619362eb84a.json.gz",
+        "sha256": "8666243172c8dcedc4964ceb12419b825506ae02f6f5ad0b03a4b619362eb84a",
+        "bytes": 2722
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "application-port-controls",
+        "name": "AtlasApplicationPorts.binding",
+        "indexSha256": "7b47587bbe92aa9bdd6390507a382e487ac74d128b4384dc7561f310bdcb2c7e",
+        "sourceSha256": "d274508f46bb25a56846b615e2cf51a65cefd74f223482cf648b5f9539b44992"
+      },
+      "scope": "c86bb281f268f2baea0c1c5a3297545ca7d66c5d0f0b4749981331abfd93be7e",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/ebf7ce63cc6c479481128bdf4b9a6775bdbd1825625d17ecad7e6feccc7eb711.json.gz",
+        "sha256": "ebf7ce63cc6c479481128bdf4b9a6775bdbd1825625d17ecad7e6feccc7eb711",
+        "bytes": 1210
+      },
+      "counts": {
+        "calls": 1,
+        "ports": 2,
+        "known": 0,
+        "unrecorded": 2
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/e7dd6dd8cf8097f728ac6e2121203b236cdc57f988c357a18ff4e32653edf688.json.gz",
+        "sha256": "e7dd6dd8cf8097f728ac6e2121203b236cdc57f988c357a18ff4e32653edf688",
+        "bytes": 2362
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "application-port-controls",
+        "name": "AtlasApplicationPorts.wide",
+        "indexSha256": "6f39e61f647922beb34e83afa2281c002217952fb0bd548e58ab46da1671a914",
+        "sourceSha256": "d274508f46bb25a56846b615e2cf51a65cefd74f223482cf648b5f9539b44992"
+      },
+      "scope": "381c39b4db594d4f1a944e0d692c5b594371662f11b8a66ce2bf4289e2d894b9",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/8b3c46c04a20928011b493325b1e50df6cb08acb3e2ddbcc3a9124fe3302baca.json.gz",
+        "sha256": "8b3c46c04a20928011b493325b1e50df6cb08acb3e2ddbcc3a9124fe3302baca",
+        "bytes": 1210
+      },
+      "counts": {
+        "calls": 1,
+        "ports": 10,
+        "known": 0,
+        "unrecorded": 10
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/4847871d4c938bf59d3550f30c02a3ec90bebbbb5828d6b45db8be0d76358eac.json.gz",
+        "sha256": "4847871d4c938bf59d3550f30c02a3ec90bebbbb5828d6b45db8be0d76358eac",
+        "bytes": 3238
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "application-port-controls",
+        "name": "AtlasApplicationPorts.visibility",
+        "indexSha256": "2c0d7e2c293145519029dc152654f0ab47d377f86b13e3e938c6ea5efc19edea",
+        "sourceSha256": "d274508f46bb25a56846b615e2cf51a65cefd74f223482cf648b5f9539b44992"
+      },
+      "scope": "7f27c1fadb90bd3b872bb117a974b6c761ee7441359a57aa695d00e09e35b2eb",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/7407e404d39cad4b5c95f5a96fb5a5be9c9ed264b137664332cba4c83470a3e8.json.gz",
+        "sha256": "7407e404d39cad4b5c95f5a96fb5a5be9c9ed264b137664332cba4c83470a3e8",
+        "bytes": 1455
+      },
+      "counts": {
+        "calls": 6,
+        "ports": 19,
+        "known": 4,
+        "unrecorded": 15
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/cb34c1d0915a713654284a0ce493f0cc20bc23685611e18692b640de9b671f0c.json.gz",
+        "sha256": "cb34c1d0915a713654284a0ce493f0cc20bc23685611e18692b640de9b671f0c",
+        "bytes": 4435
+      }
+    },
+    {
+      "mode": "native",
+      "source": {
+        "edition": "application-port-controls",
+        "name": "AtlasApplicationPorts.aliasType",
+        "indexSha256": "6e00e2ea6bb0666b12febd4bf84d2707f9bb07a0c526986ca714c360df1c21eb",
+        "sourceSha256": "d274508f46bb25a56846b615e2cf51a65cefd74f223482cf648b5f9539b44992"
+      },
+      "scope": "555298861ab06a8450c676bcb55841e56a6e2427c7812539b196aef970433180",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/7016355e7931b6e13827937dd968e0324d9a32bcb20f7c951b984ec517e2dfbf.json.gz",
+        "sha256": "7016355e7931b6e13827937dd968e0324d9a32bcb20f7c951b984ec517e2dfbf",
+        "bytes": 1453
+      },
+      "counts": {
+        "calls": 3,
+        "ports": 8,
+        "known": 2,
+        "unrecorded": 6
+      },
+      "nativeDescriptor": {
+        "file": "/public/data/proof-atlas/network-streaming/2e528492b053aba771a57a2b6ba62c401a180b63d5be377ed825fc8ecb20fe9d.json.gz",
+        "sha256": "2e528492b053aba771a57a2b6ba62c401a180b63d5be377ed825fc8ecb20fe9d",
+        "bytes": 3090
+      }
+    },
+    {
+      "mode": "source-only",
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_plus_54159",
+        "indexSha256": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+        "sourceSha256": "6e775cf687f0ff3c190bb091692f5a795294f4ae6bc17173df1744ba26042859"
+      },
+      "scope": "ea2b31ce5838b9b0996a0cdce790cd4ab96882ac62292b7c004cb67ce9aca4c5",
+      "pages": {
+        "file": "/public/data/proof-atlas/network-streaming/082aa5de3af66272d87953911fdc30deeb20a41de286b286d4b8ac6fcb26ab38.json.gz",
+        "sha256": "082aa5de3af66272d87953911fdc30deeb20a41de286b286d4b8ac6fcb26ab38",
+        "bytes": 1409
+      },
+      "counts": {
+        "calls": 201340,
+        "ports": 699453,
+        "known": 201190,
+        "unrecorded": 498263
+      },
+      "nativeDescriptor": null
+    }
+  ],
+  "deliveryClosure": {
+    "format": "ProofAtlasSortedAssetClosure/1",
+    "assets": 58599,
+    "compressedBytes": 52749311,
+    "sha256": "84baeb5a1de555f404cd2052e953d2c6686d35411a05ffb06feec1d5416af8fe",
+    "algorithm": "Sorted reachable file path, tab, compressed SHA-256, newline. All decoded page hashes/ranges are checked by the closure walker and complete-source audit."
+  },
+  "files": [
+    {
+      "file": "public/data/proof-atlas/network-streaming-audit.json.gz",
+      "sha256": "78e5668e25365f2f9a48a64881ef45f63edaf2280b8b17adfff7ef66ce2b590f"
+    },
+    {
+      "file": "public/data/proof-atlas/network-streaming-manifest.js",
+      "sha256": "5768d4f66ce01a092b5e126512998264502bd92b7c15caae8c79a60702e3087b"
+    },
+    {
+      "file": "public/js/proof-atlas-network-page-store.js",
+      "sha256": "8653362782be9b69eaba6c4b67962200685ea00d363c71c373db04b22ff5855a"
+    },
+    {
+      "file": "public/js/proof-atlas-network-port-inspector.js",
+      "sha256": "04ddbe608d77c623aad81fb4a79da0654e80390b8e7f057ae9a58fb8367b5d98"
+    },
+    {
+      "file": "public/js/proof-atlas-network-stream-pages.js",
+      "sha256": "0dcd3c2fc7f9ce2a117cc78eea862d5a907328b43174311aa0c79c5c720bffe5"
+    },
+    {
+      "file": "public/js/proof-atlas-network-stream-view.js",
+      "sha256": "c9d5bd8b47be0a77b5eb00d9edc5cfd5f868b6d10cd65befb29b5f8ddc60eaf2"
+    },
+    {
+      "file": "public/js/proof-atlas-network-streaming.js",
+      "sha256": "0c871f8ffd713581717f31a07e99606ec46e4db9f5642706596d0744e84482ba"
+    },
+    {
+      "file": "research/proof-atlas/ExportLibrary.lean",
+      "sha256": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1"
+    },
+    {
+      "file": "research/proof-atlas/ExportOccurrenceTypes.lean",
+      "sha256": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102"
+    },
+    {
+      "file": "research/proof-atlas/LevelTransportControls.lean",
+      "sha256": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9"
+    },
+    {
+      "file": "research/proof-atlas/application-network/application-network-evidence.json",
+      "sha256": "3d86409241a04d819dc24616880cce9e7e39f18aa332620d3cb964e91c68260f"
+    },
+    {
+      "file": "research/proof-atlas/build_recursion_examples.py",
+      "sha256": "b063049511685815acf92367766e146694fb98a9d661453da13f288a6444ef9b"
+    },
+    {
+      "file": "research/proof-atlas/compiled-replay/Replay.lean",
+      "sha256": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935"
+    },
+    {
+      "file": "research/proof-atlas/evaluate_goedel.py",
+      "sha256": "66f224948d3576c900f3818dc55cd171cb16c5ac2124e41042d18c6c77f0114a"
+    },
+    {
+      "file": "research/proof-atlas/network-streaming/README.md",
+      "sha256": "00ed9bda29373104f42ab17ab6c21b484bfaa97672be67c178f517e97bdeeb4d"
+    },
+    {
+      "file": "research/proof-atlas/network-streaming/assets.cjs",
+      "sha256": "8948452686eeb5c40410140b47dec039ce13b40f0ba79bbb5a7271140823aeef"
+    },
+    {
+      "file": "research/proof-atlas/network-streaming/audit.json",
+      "sha256": "9d5aa6267eb2e83b1e4534057ef7cfbb3f3c51e79b9c1fa4f7eb761c2e9cf214"
+    },
+    {
+      "file": "research/proof-atlas/network-streaming/browser-audit.json",
+      "sha256": "edd27a732b662a0b013c30daa915266a2534e5a81175810ab7937a81362933d4"
+    },
+    {
+      "file": "research/proof-atlas/network-streaming/build.cjs",
+      "sha256": "cc99b6f566abb9c49d59799956b39a39cfc9a8fe0b80f2e16c4126e0c5b9ef52"
+    },
+    {
+      "file": "research/proof-atlas/network-streaming/derivation.json",
+      "sha256": "c5df00feed9aeaf7e67e931c9b32e383f825fd79f797e4296835370e6e09b944"
+    },
+    {
+      "file": "research/proof-atlas/network-streaming/index.html",
+      "sha256": "592fd4c620785648b797a05dfbc1eed618345320faa23288b0d7ba13e39db0af"
+    },
+    {
+      "file": "research/proof-atlas/network-streaming/pack.cjs",
+      "sha256": "09354dbb18b36bb1678b57d42259389328e48ab9341e974c44dfdb878c52ffb6"
+    },
+    {
+      "file": "research/proof-atlas/network-streaming/packet-replay.json",
+      "sha256": "42267c1eda39f861fdb0e810d20e04d8cf2669b1a545875f1e76d2db62ced17e"
+    },
+    {
+      "file": "research/proof-atlas/network-streaming/source-index-audit.json",
+      "sha256": "70a47ddafcf60b293f3d1edf70d8292f8f0387e1001d79102e637b26cd455ef8"
+    },
+    {
+      "file": "research/proof-atlas/network-streaming/verify-packet.py",
+      "sha256": "8e471cb11fb35ba6d8ba88bceec202e57e1ef4173172b6135bf3e977c48d439c"
+    },
+    {
+      "file": "research/proof-atlas/packet-typing/PacketTyping.lean",
+      "sha256": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a"
+    },
+    {
+      "file": "research/proof-atlas/packet-typing/verify.py",
+      "sha256": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+    },
+    {
+      "file": "research/proof-atlas/use-sites/verify.py",
+      "sha256": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff"
+    },
+    {
+      "file": "scripts/build-proof-atlas-network-streaming-evidence.cjs",
+      "sha256": "ac744fecbacc2267aa509204ce574b84663af1d40cafd0f4c9f4a5aefa0d9087"
+    },
+    {
+      "file": "scripts/test-proof-atlas-network-source-index.cjs",
+      "sha256": "c1c1bd8f0fe1cdf32d0ad384af725ecbea5332848fa9ccc1869a7917066def49"
+    },
+    {
+      "file": "scripts/test-proof-atlas-network-streaming-browser.cjs",
+      "sha256": "685c6312221b7ae6d3eaf0f62083658c293fe884a9d8836b8b57fcc6b9ad776f"
+    },
+    {
+      "file": "scripts/test-proof-atlas-network-streaming.cjs",
+      "sha256": "d4f8797ec03393ea3f6b3dcaa1ec5e46de1211b1d15513a5e498e917a300947d"
+    }
+  ]
+}

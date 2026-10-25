@@ -1,0 +1,13 @@
+{
+  "format": "ProofAtlasNetworkStreamingDelivery/1",
+  "status": "PASS",
+  "origin": "http://127.0.0.1:8866",
+  "builtAssets": 58599,
+  "builtCompressedBytes": 52749311,
+  "closureSha256": "84baeb5a1de555f404cd2052e953d2c6686d35411a05ffb06feec1d5416af8fe",
+  "httpByteChecks": 25,
+  "pages": 1,
+  "evidenceSha256": "eb8ac7945f21ceb7c88611a6a98956471febb099b21bbcfdafa6951ef9fb9570",
+  "checkerSha256": "044c2ccd9ccf180469179cea80c7cca20c87ca0090fced2de951b8525e0763b4",
+  "scope": "All reachable new topology files match the checked closure in the actual production build; representative files, application assets and evidence download match through the local HTTP server. No public deployment."
+}

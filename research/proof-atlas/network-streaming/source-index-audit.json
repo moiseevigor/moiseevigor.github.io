@@ -1,0 +1,26 @@
+{
+  "format": "ProofAtlasNetworkSourceIndexAudit/1",
+  "status": "PASS",
+  "source": {
+    "edition": "goedel-sample-4331",
+    "name": "lean_workbook_plus_54159",
+    "indexSha256": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+    "sourceSha256": "6e775cf687f0ff3c190bb091692f5a795294f4ae6bc17173df1744ba26042859"
+  },
+  "calls": 201340,
+  "ports": 699453,
+  "sourceWitnesses": 699453,
+  "reverseEdges": 201190,
+  "completeSourceOccurrences": 997411,
+  "maximalSourceSpines": 201340,
+  "degreeChecks": 201340,
+  "unobservedTypes": 699453,
+  "lexicalBindingChecks": 7835,
+  "peakCallLeafRows": 4,
+  "peakOutgoingLeafRows": 32,
+  "wholeArchivesRequested": 0,
+  "decodedRecordsSha256": "6577e5729a179971215be6fd4d675046d7d629b8e7376e6c35b272482ac75078",
+  "manifestSha256": "5768d4f66ce01a092b5e126512998264502bd92b7c15caae8c79a60702e3087b",
+  "checkerSha256": "c1c1bd8f0fe1cdf32d0ad384af725ecbea5332848fa9ccc1869a7917066def49",
+  "scope": "All maximal application-spine occurrences in both roots of one published compiled packet, with exact ordered fields, source-use witnesses, reverse indices and unavailable per-call types. No new Lean kernel run, semantic dependence or corpus-wide completeness claim."
+}

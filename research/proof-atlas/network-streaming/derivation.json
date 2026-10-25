@@ -1,0 +1,33 @@
+{
+  "format": "ProofAtlasNetworkStreamingDerivation/1",
+  "status": "PASS",
+  "previousEvidenceSha256": "3d86409241a04d819dc24616880cce9e7e39f18aa332620d3cb964e91c68260f",
+  "nativeProfiles": 31,
+  "nativeCalls": 162,
+  "nativePorts": 787,
+  "nativeConnections": 101,
+  "sourceOnly": [
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_plus_54159",
+        "indexSha256": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+        "sourceSha256": "6e775cf687f0ff3c190bb091692f5a795294f4ae6bc17173df1744ba26042859"
+      },
+      "storedNodes": 6479,
+      "expandedOccurrences": "997411",
+      "maximalSpines": 201340,
+      "ports": 699453,
+      "maxArguments": 17,
+      "bindingPaths": 32,
+      "calls": 201340,
+      "known": 201190,
+      "unrecorded": 498263
+    }
+  ],
+  "maxCallBytes": 13087,
+  "producerSha256": "cc99b6f566abb9c49d59799956b39a39cfc9a8fe0b80f2e16c4126e0c5b9ef52",
+  "packerSha256": "09354dbb18b36bb1678b57d42259389328e48ab9341e974c44dfdb878c52ffb6",
+  "manifestSha256": "5768d4f66ce01a092b5e126512998264502bd92b7c15caae8c79a60702e3087b",
+  "scope": "Paged topology preserves the earlier finite native observations; the larger source-only packet adds structural coverage without per-call typing or new kernel runs."
+}

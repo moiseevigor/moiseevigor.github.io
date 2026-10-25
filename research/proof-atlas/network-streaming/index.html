@@ -1,0 +1,31 @@
+---
+layout: default
+math: true
+title: "Proof Atlas: paged source-use geometry"
+permalink: /projects/proof-atlas/manual/paged-network/
+---
+<link rel="stylesheet" href="/public/css/proof-atlas-manual.css?v=1">
+<link rel="stylesheet" href="/public/css/proof-atlas-application-network.css?v=1">
+<style>#ns-lab input{min-height:44px;padding:.45rem;color:var(--text);background:var(--bg);border:1px solid var(--text-muted);border-radius:3px;font:inherit}</style>
+<main class="pa-manual">
+ <header><p><a href="/projects/proof-atlas/manual/">Visual notation manual</a> / <a href="/projects/proof-atlas/manual/application-network/">Application cuts</a> / Paged delivery · local experiment</p><h1>Keep the cut, page the surrounding graph</h1><p>The source-use rule is unchanged: connect an ordered input to its exact source producer, retaining local-definition paths. The viewport now loads selected call records and a page of consumer connections rather than a complete topology. Layout and colors carry no mathematical metric.</p></header>
+ <section><h2>Count hidden structure without loading it</h2><div class="pm-math" role="region" tabindex="0" aria-label="Cut degree identities">$$\begin{aligned}E_{\mathrm{in}}&=\sum_{c\in S}\deg_{\mathrm{in}}(c)-E_{SS},\\ E_{\mathrm{out}}&=\sum_{p\in S}\deg_{\mathrm{out}}(p)-E_{SS}.\end{aligned}$$</div><p>Each input is owned by its consumer. Selected input rows determine the internal edges and incoming boundary; recorded reverse degrees determine the outgoing count. Consumer rows load separately, eight at a time. Internal edges are excluded from a producer's outgoing list by their exact reverse-index ordinals. No scan of every hidden consumer is needed to request a distant page.</p><p>The earlier native inventory remains 31 profiles, 162 calls, 787 ports and 101 source connections. A separate source-only index covers all 201,340 maximal application spines in both roots of a published compiled proof packet, representing 997,411 expression occurrences. Its 699,453 inputs and 201,190 application-to-application uses have structural source witnesses. The closed packet passes a separate fresh Lean kernel replay; per-call native types remain unavailable. Publisher attribution to AI generation is inherited, not independently verified.</p></section>
+ <section class="an-lab" id="ns-lab" aria-labelledby="ns-title"><h2 id="ns-title">Inspect a paged cut</h2><p>The Riccati AM–GM application is the default. The last profile is the larger source-only packet. Type controls are disabled where no native observation exists. Solid wires are direct source uses; dashed wires pass through recorded local definitions. Every supplied argument remains in the input list.</p>
+ <div class="an-controls"><label>Profile <select data-ns-profile></select></label><label>Focus call <input data-ns-call type="number" min="0" step="1" style="max-width:12rem"></label><button type="button" data-ns-load>Load paged cut</button><button type="button" data-ns-release>Release cut</button></div><p data-ns-count class="an-caption"></p><p data-ns-status role="status">Loading the compact catalogue.</p>
+ <div class="an-controls" role="group" aria-label="Diagram zoom"><button type="button" data-ns-zoom-out aria-label="Zoom out">−</button><button type="button" data-ns-zoom-reset>100%</button><button type="button" data-ns-zoom-in aria-label="Zoom in">+</button><span data-ns-zoom-label class="an-caption">100%</span><span class="an-caption">Scroll inside the figure to pan.</span></div>
+ <div data-ns-drawing class="an-scroll" tabindex="0" role="region" aria-label="Paged application cut; scroll horizontally and vertically to pan"></div><div data-ns-frontier></div><div data-ns-ports></div><div data-ns-detail></div><noscript><p>Interactive cuts require JavaScript. The identities and limitations remain readable.</p></noscript></section>
+ <section><h2>Coverage and limits</h2><p>The larger packet has 6,479 stored expression nodes. Indexing its occurrence routes separately is a deliberate scale test, not a compressed representation of all shared proof instances. Its index grows with the number of call occurrences. The source-only layer does not recover tactics, prove premise necessity or provide new typing observations.</p><p>The reader retains at most eight call records, one four-row call-page cache, one 32-row reverse-page cache and two branch records per cursor. Connection lists show eight rows. Native types retain their original evidence owners and existing separate bounds. Source-only selections use bounded original paths and explicitly refuse computed-type selection.</p><p><a href="/research/proof-atlas/network-streaming/README.md">Protocol, checks and limitations</a> · <a href="/public/data/proof-atlas/network-streaming-audit.json.gz">Model record (gzip)</a> · <a href="/projects/proof-atlas/program/">General research program</a></p></section>
+</main>
+<script src="/public/js/proof-atlas-library-data.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-occurrence-types.js?v=13" defer></script>
+<script src="/public/js/proof-atlas-equality-transport.js?v=2" defer></script>
+<script src="/public/js/proof-atlas-construction-composition.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-source-pages.js?v=3" defer></script>
+<script src="/public/js/proof-atlas-application-ports.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-application-port-pages.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-network-page-store.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-network-streaming.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-network-stream-pages.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-network-port-inspector.js?v=1" defer></script>
+<script src="/public/data/proof-atlas/network-streaming-manifest.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-network-stream-view.js?v=1" defer></script>
