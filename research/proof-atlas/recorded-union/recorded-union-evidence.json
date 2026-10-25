@@ -1,0 +1,4004 @@
+{
+  "format": "ProofAtlasRecordedUnionPublicEvidence/1",
+  "index": {
+    "format": "ProofAtlasRecordedUnionVerification/1",
+    "status": "PASS",
+    "publication": "LOCAL_NOT_DEPLOYED_NO_BLOG_POST",
+    "newNativeExecution": false,
+    "privateMathematicalSourcePublished": false,
+    "inputPackagesUnchanged": true,
+    "finiteSample": {
+      "profiles": 35,
+      "typedPositions": 5568,
+      "primitiveConstructions": 2527,
+      "overlaps": 448,
+      "independentOrderedContextSlots": 64446,
+      "ordinaryOccurrenceSites": 283,
+      "ordinaryOccurrenceTypeComponents": 1698
+    },
+    "transport": {
+      "completeReferenceConstructionCuts": 7581,
+      "typeLookups": 5568,
+      "sourceCuts": 11136,
+      "onePageSourceNodePeak": 256,
+      "onePageTypeNodePeak": 64,
+      "fullArchiveRequests": 0,
+      "maxTypeDescriptorsObserved": 5,
+      "typeDescriptorLimit": 8,
+      "activeTypeTableLimit": 1
+    },
+    "browser": {
+      "exactImmediateInputSites": 3,
+      "fullPagedPairs": 3,
+      "sourceAndProvenanceSelections": 14,
+      "scopedEvidence": [
+        "browser-audit.json",
+        "transport-browser-audit.json",
+        "type-browser-audit.json",
+        "let-browser-audit.json",
+        "complete-browser-audit.json"
+      ]
+    },
+    "scope": [
+      "Finite consistency of compiled native attestations and their geometry.",
+      "Source packet, edition and exact occurrence route identify a position.",
+      "Alternative records retain their original owners; syntactic type/context disagreements reject the union.",
+      "Private native provenance and public packet replay retain different scopes.",
+      "Dependency cache attribution is not independent Git checkout or rebuild verification.",
+      "No whole-proof native typing coverage, premise-necessity result, semantic compression or human-comprehension result.",
+      "No private original Lean projects or tactic scripts copied."
+    ],
+    "files": [
+      {
+        "file": "public/data/proof-atlas/construction-pages-manifest.js",
+        "sha256": "87870a70f44cabaf62d0ba7db21b6ca331db3ca23b147a65aecdb2d15825bbf0"
+      },
+      {
+        "file": "public/data/proof-atlas/recorded-unions-manifest.js",
+        "sha256": "951635f94cc798527ed514c8e7fe70a549680e4599af39a162ddc5e94af092d3"
+      },
+      {
+        "file": "public/data/proof-atlas/type-query-pages-manifest.js",
+        "sha256": "31d2ee057b03c07748d977cb37486a396abf87560892dda751926dd0833a2d54"
+      },
+      {
+        "file": "public/js/proof-atlas-deep-context.js",
+        "sha256": "141773a7d2b19b763f21597bdd13e670ffd041b1ea2e17f726ad389ee16c486b"
+      },
+      {
+        "file": "public/js/proof-atlas-occurrence-view.js",
+        "sha256": "a8168d82035fdbf9816e0409c631fd253800d562f16cd0f134ba49acc6064560"
+      },
+      {
+        "file": "public/js/proof-atlas-type-query-pages.js",
+        "sha256": "658d16d1f7c5383f4a6fc80e1520366a81d3feff59e1fd671779b21e960f5bc7"
+      },
+      {
+        "file": "research/proof-atlas/construction-union/audit.json",
+        "sha256": "c516de021d6db7963c1857f0d6bee3d472c92a89989111676d9e5b01121858de"
+      },
+      {
+        "file": "research/proof-atlas/recorded-union.cjs",
+        "sha256": "f0fda5c7f6c1815b8104f460dfdcf614288c2d8d3a238d4d82a22308383ac37f"
+      },
+      {
+        "file": "research/proof-atlas/recorded-union/README.md",
+        "sha256": "fd0a7a25c5bad731c3906fb2081827da125a3eb6a3e78eb5163bd90368a8b213"
+      },
+      {
+        "file": "research/proof-atlas/recorded-union/audit.json",
+        "sha256": "0a8742950ede8d8855124837bfd89bcc5973393c76e71db7a0bc648bf457d8d4"
+      },
+      {
+        "file": "research/proof-atlas/recorded-union/browser-audit.json",
+        "sha256": "f5c971c6a1a3ce70d53ddef48550968dbe7301cbb472e88f8a6b9a78fa7244f1"
+      },
+      {
+        "file": "research/proof-atlas/recorded-union/complete-browser-audit.json",
+        "sha256": "b3983b798859df6aa3dc11df48f8e682fa79f3b425ce5a9f153d75d4fb6fd6c4"
+      },
+      {
+        "file": "research/proof-atlas/recorded-union/construction-transport.json",
+        "sha256": "9f6ad2cd760ca91062165ef4335693b31ca5ca24f69d51ccd52b244673d43400"
+      },
+      {
+        "file": "research/proof-atlas/recorded-union/let-browser-audit.json",
+        "sha256": "994ce0db70ed57d4c8ee22a9280988f0596b40a06437477300e3c7d9a9f242f2"
+      },
+      {
+        "file": "research/proof-atlas/recorded-union/regressions.json",
+        "sha256": "351b8e87c3022a64bdfeac0bec631c9f2e58089f6fb386d2fbbc2c7682ee03ab"
+      },
+      {
+        "file": "research/proof-atlas/recorded-union/transport-browser-audit.json",
+        "sha256": "06c1751d93ccb567ddba3da683a86ec5c76399f8680a4ecf45d3eaeec5d391b6"
+      },
+      {
+        "file": "research/proof-atlas/recorded-union/type-browser-audit.json",
+        "sha256": "d4a8040d9c80fd44546c413d6454edd1c2b563dcd57eb16498b4960d1aecff08"
+      },
+      {
+        "file": "research/proof-atlas/recorded-union/type-query-transport.json",
+        "sha256": "d3ad629e8421432ad919a28777c6d5d05ad2542efa20719863f5924d9e4d27b6"
+      },
+      {
+        "file": "research/proof-atlas/type-pages/query-pack.cjs",
+        "sha256": "7c8e877f505a46ad81bef787600a5f2b96b276b0e41486dec416cf60b8a312c0"
+      },
+      {
+        "file": "research/proof-atlas/use-sites/native-verification.json",
+        "sha256": "adb0657605fc74ab083c9242ec1a35b4d15fd11ee659564b9c3ccbb301f542e7"
+      },
+      {
+        "file": "scripts/build-proof-atlas-construction-pages.cjs",
+        "sha256": "4879e435dd0dc690d0457baac4a8aa8a459631ae2a4a79762bc1ad4b2f30c379"
+      },
+      {
+        "file": "scripts/build-proof-atlas-recorded-union-evidence.cjs",
+        "sha256": "ed0107e3ebea13dfe4214d10a55187b63293bf079a81f522f9ecceead3ee4832"
+      },
+      {
+        "file": "scripts/build-proof-atlas-type-pages.cjs",
+        "sha256": "9ff01ac132536fda1c1d7c1d606b70afe215e63ad50be2704adcabfda94da51b"
+      },
+      {
+        "file": "scripts/test-proof-atlas-construction-pages-browser.cjs",
+        "sha256": "ec7c0db466e6f439ea9a9c2deb05e54c50620286da497594e347f5f709023e8d"
+      },
+      {
+        "file": "scripts/test-proof-atlas-construction-pages.cjs",
+        "sha256": "ec237ef96260fc39891dd5b3ec040e945730f18f93daa45a3ab77eab7c253675"
+      },
+      {
+        "file": "scripts/test-proof-atlas-occurrence-constructions-browser.cjs",
+        "sha256": "783ec9cb2f56843c92a146ca788b523a193cacd83d94cb69444e49f70b8d35a1"
+      },
+      {
+        "file": "scripts/test-proof-atlas-occurrence-let-bindings-browser.cjs",
+        "sha256": "d389d96b949abe37e8274ca7a7c04dda1358a25e3cae2a2b3c3980c19d9aac63"
+      },
+      {
+        "file": "scripts/test-proof-atlas-recorded-union-browser.cjs",
+        "sha256": "f098a1076999af8d554daef16dc3d22d9aea202657769c5e1b14fd1e260ce69f"
+      },
+      {
+        "file": "scripts/test-proof-atlas-recorded-union.cjs",
+        "sha256": "efb56360c780109b530dbf6f9f9171659fb212b042b778c3fccf2b967fd2b009"
+      },
+      {
+        "file": "scripts/test-proof-atlas-type-pages-browser.cjs",
+        "sha256": "83d2073c0538cd476f38982b3c28b01e0ecc93e7a421cb4b3ab343ff4911a852"
+      },
+      {
+        "file": "scripts/test-proof-atlas-type-query-controls.cjs",
+        "sha256": "d096e297fb20daab0d6b324041f9e0d9bf604267fae1999c250ab44e2965a846"
+      },
+      {
+        "file": "scripts/test-proof-atlas-type-query-pages.cjs",
+        "sha256": "ed57eaf9881cae990dfb6750f0680ab64eba2818d4c7d0680f07df3cb9ae453e"
+      }
+    ],
+    "publicEvidenceBundle": "recorded-union-evidence.json"
+  },
+  "reports": {
+    "audit.json": {
+      "format": "ProofAtlasRecordedUnionAudit/1",
+      "status": "PASS",
+      "checkerSha256": "efb56360c780109b530dbf6f9f9171659fb212b042b778c3fccf2b967fd2b009",
+      "modelSha256": "141773a7d2b19b763f21597bdd13e670ffd041b1ea2e17f726ad389ee16c486b",
+      "profiles": 35,
+      "positions": 5568,
+      "constructions": 2527,
+      "overlapChecks": 448,
+      "inputObservationChecks": 6016,
+      "orderedContextChecks": 64446,
+      "crossViewSites": 283,
+      "crossViewTypeComponents": 1698,
+      "refusals": 9,
+      "inputPackagesUnchanged": true,
+      "rows": [
+        {
+          "edition": "published-15",
+          "name": "JacobiCore.E_pos",
+          "indexSha256": "42c5264d2680fe256ee4bfc588ed1ed3d648f38eeb56916d2e1ce02e11ae0c33",
+          "sourceSha256": "a0a1cd686cbd6f50fdda94a23de54d292783ae8e5aac5e9c8c46385d5903b77e",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "7651b9d50e36a7267c9652b7cbf92062cac865ac32d0c43be107e829ab8afe61"
+            }
+          ],
+          "positions": 133,
+          "constructions": 63,
+          "overlaps": 0,
+          "typeTables": 1
+        },
+        {
+          "edition": "published-15",
+          "name": "JacobiData.slope_bound_abs",
+          "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+          "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "458d4d128a36ae4d22da2a5c0b840323fe40f59269a2707feaa7cb4f7f3b7a81"
+            },
+            {
+              "kind": "case",
+              "evidenceSha256": "7abc46d6d0199ab0166bdb2e3519e0eff8eed87c1d27491bad044e5ce5d7a83e"
+            },
+            {
+              "kind": "let",
+              "evidenceSha256": "462e5a00af974385485d2d4066366347b05b6bc8b89bed49506b4abcef876c98"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520"
+            }
+          ],
+          "positions": 752,
+          "constructions": 356,
+          "overlaps": 39,
+          "typeTables": 4
+        },
+        {
+          "edition": "published-15",
+          "name": "SBracket.mk.inj",
+          "indexSha256": "39dbe3b524a288ceb58009e86becc10331d8bbd3e230306d727649e9da8c6d76",
+          "sourceSha256": "9ce36873599cfff6274fe233ce884a8d2a8e5aef837d9552c71004745f5dfb4a",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "254f9c1bee88a03ab8056c437fb37791fc598400135505e04f0b49f17eb625eb"
+            }
+          ],
+          "positions": 644,
+          "constructions": 264,
+          "overlaps": 0,
+          "typeTables": 1
+        },
+        {
+          "edition": "published-15",
+          "name": "CrossingData.crossing",
+          "indexSha256": "b1f3867250131bf76d40e9dca395e29595ccf8d4bb49c8e075ba40213b33057a",
+          "sourceSha256": "7dd17803a0e009403754f5111460dcf722a76922391774f4ea4726ed0ee7af31",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "c2e7af7127199d57ce7e4c1d21c7bbd732681dd4ccb6540aabc3639309e49620"
+            },
+            {
+              "kind": "case",
+              "evidenceSha256": "ae3f49692fe9d6e4067967c91d9a99f4730cd9b00a9cdd528308704ea3a193d5"
+            },
+            {
+              "kind": "beta",
+              "evidenceSha256": "c7d7493d3ab8888d21c415048b06099681c05aeb061256b00984623bd74c9a44"
+            }
+          ],
+          "positions": 258,
+          "constructions": 124,
+          "overlaps": 29,
+          "typeTables": 3
+        },
+        {
+          "edition": "working-26",
+          "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
+          "indexSha256": "2d55fcee4c570869eacb882d5c131deb173cfd82c941af68aa2b561943627f7b",
+          "sourceSha256": "c07a081cbbe3ba11e7779ce10513ca146566681ed7d483ad556dfbd157faa172",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "5f71e6ed61d26cd5ff6b03bc426f4968a0a056654dd4c3a0b37034e7d9419f2d"
+            }
+          ],
+          "positions": 380,
+          "constructions": 176,
+          "overlaps": 0,
+          "typeTables": 1
+        },
+        {
+          "edition": "working-26",
+          "name": "JacobiData.slope_bound_abs",
+          "indexSha256": "a786a311ffd35d388b79b4af11a5d733dde834f8e0fe7967b74ad07d4dea15e4",
+          "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "32de3c03c45c979943756fb14db7da0ffeeea6b478a7bdae4a03f23b47e028e6"
+            },
+            {
+              "kind": "let",
+              "evidenceSha256": "2f13310715983b796e5e34034edb5df2c2fd4ee25660724112f1199d7652d438"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "a86bba393dfc2c8cedcb0977bff7eb46d7023a00f6631df099566b56e9649719"
+            }
+          ],
+          "positions": 201,
+          "constructions": 90,
+          "overlaps": 1,
+          "typeTables": 3
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_20418",
+          "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+          "sourceSha256": "44d7d19cff28d5b75dc33d21733bf14cb764e765f493ca46cf2a66345b8a3d07",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "7e55ac6ed707140f209d76ebd5e644c58a918346c0e916838f2f0993b543f2ff"
+            },
+            {
+              "kind": "case",
+              "evidenceSha256": "13f5c207bca803eed9033658a9cb693f0edf3c34138aefcecf002887c3be4afb"
+            },
+            {
+              "kind": "let",
+              "evidenceSha256": "9ef0b777d331ce547f5a0ba754113822aed041848a894d55776e6f283b973edf"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "fade836fc546ffa20c11e5c30145b5ce928ac541e997580d9dc8141b5f9a9991"
+            }
+          ],
+          "positions": 229,
+          "constructions": 104,
+          "overlaps": 70,
+          "typeTables": 4
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_3485",
+          "indexSha256": "bd496000a8da7ce06393d1cdd66b86c1a76aa6004c6eca19c36e083a3082948c",
+          "sourceSha256": "ace2b6ea44489642395660c0e4dff53ee2c2d870ebc437b25e38c9b6cb929f93",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "3c5aaafb754f799cb5750b422aec77a2d226f89499e42bb9d70088c30fb4c77f"
+            },
+            {
+              "kind": "let",
+              "evidenceSha256": "0cc823d978a1d7c8fec9b3813c73caabdd9f935da7501dcc703b1b4f7878a87e"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "04b46eaf19b556495d3c9db9af1eadd32b087f0578c430784371a66edcdd3c4d"
+            }
+          ],
+          "positions": 141,
+          "constructions": 66,
+          "overlaps": 5,
+          "typeTables": 3
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_4274",
+          "indexSha256": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+          "sourceSha256": "761ccc0ee9e693f87eabfca7b94449ec8ebe1c5293ddd528bed8eade57ca74a4",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "818912c1637647432065fe69103af864529160a0c79dd4fe62be7eb9d5f32863"
+            },
+            {
+              "kind": "let",
+              "evidenceSha256": "cc8fb0daef1fb9c7df0e7a576a94107d81fb1f87217cb4fbdd4e3165d10218be"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "481bde98a32a8e1d1a389f9fd5a367fef2ca677bd18cc33b165decc9c30a1d39"
+            }
+          ],
+          "positions": 111,
+          "constructions": 48,
+          "overlaps": 10,
+          "typeTables": 3
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_49456",
+          "indexSha256": "66459f55804e8ae09fc9a8615191fba8f5277f1fb0831c1bb132e1bc60552b38",
+          "sourceSha256": "feb8f7b2ab730b0efdee245bd28e648ffb3ca004c15f1deeb6b0754f8a478434",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "8fa8a2eedb36c4505ec5a72277fd1ee4ef948294053681014b59d4844778efec"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "6910a5321d72e789fa77a46d05e5cf027b77e971010589a24d5812e87fbc7291"
+            }
+          ],
+          "positions": 27,
+          "constructions": 11,
+          "overlaps": 0,
+          "typeTables": 2
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_56144",
+          "indexSha256": "60ff188d4edd927f72c0393d678f5a9cfb80d344d3ec459aec958443f07dc256",
+          "sourceSha256": "88f54d38e9c49131cb291df6527bc9e47ed5fb946c46ee0901c938b18297c55c",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "580ea311c12a377a9ed3a9393e97164c3336161acd9df8507aefefe80826d2cd"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "990374abcfcf36e4c59f0f33d9932b7aa3fd67d4c5234e98fb689b407aad0187"
+            }
+          ],
+          "positions": 91,
+          "constructions": 41,
+          "overlaps": 0,
+          "typeTables": 2
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_plus_15068",
+          "indexSha256": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+          "sourceSha256": "c8a09c1ece2d7fc13d9ef4d0979c71870e9e97202f8bed0df415a5c52788c2b5",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "770f09c7e74b159c6001c2478e59857ca69f597b30fec7cf4e59988e2fa3167f"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "89f3d2aa41917f8f706dfd2963a3d2045da43990b3dd5f11a7d31a86cb1f3430"
+            }
+          ],
+          "positions": 186,
+          "constructions": 86,
+          "overlaps": 2,
+          "typeTables": 2
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_plus_16912",
+          "indexSha256": "6c061155ccb98286c7608ad3bfbd316714aea3a1b33817720b3c4b2846c39510",
+          "sourceSha256": "a88efcf7a6eb35f44a480e3b787ef5bb7b2a47d877b72b181acb737e831828a2",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "54a4552e924b7ccc0c8611bb1833d307ba190b153f5bf8a93c292e155b38aa1f"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "204ea6404c2f9aaa1f579f845a09fe4032400ce1db939e0e035ecc89bb303dcb"
+            }
+          ],
+          "positions": 171,
+          "constructions": 80,
+          "overlaps": 3,
+          "typeTables": 2
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_plus_19617",
+          "indexSha256": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+          "sourceSha256": "0c75bdffb8429241e73c9e4f375bd15130b2c5a19855281071b9706b89478578",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "96ba21340e2650df9c03569d3e629c6617e88cfe46fd07baf0a580cdf7e6b2e8"
+            },
+            {
+              "kind": "case",
+              "evidenceSha256": "afca92d49caa2b6d16820ca272356dbd89bf47e72f9d19f4312d7e51d5650ef2"
+            },
+            {
+              "kind": "let",
+              "evidenceSha256": "219d2ed561757c0f123ce892fb4a8507efa554e5a6072a05698b4bdca9e95073"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "876f84472ea9fb0e27a3e16214f263bc136f5511ae0f4b111af99e238435eac7"
+            }
+          ],
+          "positions": 77,
+          "constructions": 32,
+          "overlaps": 48,
+          "typeTables": 4
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_plus_39831",
+          "indexSha256": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+          "sourceSha256": "ceca77661c386d820b66fac94e6e1e4ebbb18d894f0b6a79c37f6cd2f425c9cf",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "344826433696a7be269f608cd7d66979b1b8de8cc2b11b2ea878a701121d13f9"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "8d8c4a0242b8af7414370d2e9a5fb80043e02ed89993b0dc72c880fa49528210"
+            }
+          ],
+          "positions": 116,
+          "constructions": 53,
+          "overlaps": 2,
+          "typeTables": 2
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_plus_43987",
+          "indexSha256": "159699ca3f1d90ccd733d2a5fe4c0541ae4c785b8cb942333058b16653cef385",
+          "sourceSha256": "182370b92c287cb5f51d7e5f0caeb77eb22d79fd67dbff75acbbbb371d4552b8",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "80636d8d09af53e03d6eb8b22d3209a4b25e3ccbc20c541dfd8da2a4095193d9"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77"
+            }
+          ],
+          "positions": 43,
+          "constructions": 16,
+          "overlaps": 0,
+          "typeTables": 2
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_plus_54159",
+          "indexSha256": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+          "sourceSha256": "6e775cf687f0ff3c190bb091692f5a795294f4ae6bc17173df1744ba26042859",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "e8908cfcfa8198714cb70c999aafb70a7de84efdb900e47ea54071d6c14f7fd3"
+            },
+            {
+              "kind": "let",
+              "evidenceSha256": "dbd885f4a9b87e68ca006b3c65f2f306cdfc430272e9a24823fe41fbdb67e4e6"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "322ee44283d0a22496b116dc3931b326a50621454de8eb500cac107a6b2ee262"
+            }
+          ],
+          "positions": 277,
+          "constructions": 117,
+          "overlaps": 8,
+          "typeTables": 3
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_plus_54622",
+          "indexSha256": "0b128b2e4d02870a974f0f00684ea058eded20eed8f15f32e84872e4bca50d73",
+          "sourceSha256": "7af1d5d69178702a11b13d77dad54ca31956e713a16ec2047a0899281db245ec",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "788eeaa91641694bd3dead30f0ae640061e201f31b4ed10963ceb744d5fec18a"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "5e401ba7424457a70e0db7e3b5bf6fab25e78c9f3601cf6c396e5974fcf67d86"
+            }
+          ],
+          "positions": 187,
+          "constructions": 87,
+          "overlaps": 0,
+          "typeTables": 2
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_plus_61403",
+          "indexSha256": "a52afaeee83e9f155855d77dc8f906f03abf8da6038abde95c7dc6e104568459",
+          "sourceSha256": "a12e28fcab85c77a9d2d398c937206a56f55c9666ca90ccb446bb0415be80371",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "9f25782ef81a5be6c0e6fad48c1b09e855bb800010e1dcdbf132303dcf388000"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "35c09070e7a6538c82b28e515202a41cae5d0bb138e3c0f94d3985b9dde103db"
+            }
+          ],
+          "positions": 54,
+          "constructions": 24,
+          "overlaps": 0,
+          "typeTables": 2
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_plus_6206",
+          "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+          "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "eae59a61ec7d01a1979634b91c63bd6c08b80d0d4165edbb408490892b98c8ef"
+            },
+            {
+              "kind": "case",
+              "evidenceSha256": "d2110c1509b50b0af708a2d906905149f1d7befb676ea461e7ade4075ab5fb51"
+            },
+            {
+              "kind": "let",
+              "evidenceSha256": "55bc45b8775034ad7b8f27c711bd928daf0f280418aff4a064d830aa80e2bd4a"
+            },
+            {
+              "kind": "packet",
+              "evidenceSha256": "88eb53fb27c57eaea860f0f2abe306c822180256e8bc12304017d85f01ff486c"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "1283c539f9c0475130ce9dc6987863ddfc7f26e355a45124b2d14ac0fbf7107a"
+            }
+          ],
+          "positions": 499,
+          "constructions": 237,
+          "overlaps": 167,
+          "typeTables": 5
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_plus_62755",
+          "indexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+          "sourceSha256": "7e270522ac93030b71efabbf6d3ffd84407805aa1cee8348a6fd427c86aa423c",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "2a9a2b29854159a0e2302d0e312dac1a138041dad3603f771b441c201aa60311"
+            },
+            {
+              "kind": "case",
+              "evidenceSha256": "8695824b37600e4d1456350c9b4ee3f8a4327b996bf0eac2b26c4f7d740b6ff0"
+            },
+            {
+              "kind": "let",
+              "evidenceSha256": "f67163533284c539ac3a4c54547d4c3d97f27928d4ce2f046655ebca2c04519f"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "4ae600ef7cb5d8711e87851ca5e24f4270ae56383a3dad12079ca77ea18d518f"
+            }
+          ],
+          "positions": 161,
+          "constructions": 73,
+          "overlaps": 60,
+          "typeTables": 4
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_plus_63081",
+          "indexSha256": "e8a13f9af176053ae5b0220fc5a1526de1e937ca2e8972035dcc70ee1da74217",
+          "sourceSha256": "8edd950efcaed46473a9cfeb1000b7b4bac0782c105ab3054360e50515846287",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "2a0369e77930dc835f0dd3d2f9e4766fad272306324d8c003cc64da3f97c24a7"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "8f590a0cab6a06cf9e42a2ddc8af4f50b0ceaf519e866d274dd7237680de2c1f"
+            }
+          ],
+          "positions": 99,
+          "constructions": 45,
+          "overlaps": 0,
+          "typeTables": 2
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_plus_68077",
+          "indexSha256": "501dba70283e270631eba54e85d5f16c3ca44cfaba068ea4f39a45b550997e62",
+          "sourceSha256": "bc81bd2c7804c444b05280db621904637eb34d360fc5952bcb10850e82f38a62",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "5c26cf0ade31f3abd8f9fec0387ff1595070eb7fcd6bbf5a52aa0a389dd90983"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "a6ba14a1f3503aa3a4dab490e1a2aea1187fc11c71d5f34fb94bf4f2f67ff5f0"
+            }
+          ],
+          "positions": 208,
+          "constructions": 97,
+          "overlaps": 3,
+          "typeTables": 2
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_plus_68616",
+          "indexSha256": "2f1f6523063a579076448d2a6caa42d496003a1be382692e8747442b1d9aef83",
+          "sourceSha256": "b3845eec83a376e18ca1fb1429d5408c6673462fff37088173770e1535254968",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "0852bc2f434744c845dd1f617f212be145f964384d594c8741fd7d313c741609"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "19e3399bc95488f058c13a0f4d0881baeded07301586096405a1cd495b662098"
+            }
+          ],
+          "positions": 53,
+          "constructions": 24,
+          "overlaps": 1,
+          "typeTables": 2
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_plus_68794",
+          "indexSha256": "17a8502769796c60075b569ccf17b5bf99c47c12e6e1771705ae3eb540656f3b",
+          "sourceSha256": "9f309029babdfcee078518fe49ca92d664fa885eb45b3483068b1b5656f00586",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "a800d7a259101d99a5c4dead52b09c771b7ec2a99c16117251c4362bdde09791"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "819fa14e38332f6290bd0a33db56c57c4c3050d01bf353117f0961910443d315"
+            }
+          ],
+          "positions": 106,
+          "constructions": 48,
+          "overlaps": 0,
+          "typeTables": 2
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_plus_70240",
+          "indexSha256": "cbc4fcc25f7b3decb12c29ac4d90e9f01671a2bfcce24e948c9af0445a387290",
+          "sourceSha256": "4ba4a3343641286d44918d602cbab2e6c47e4a07ca166d8d41d0791c92d98378",
+          "inputs": [
+            {
+              "kind": "primary",
+              "evidenceSha256": "228049c8c3799d8f757a1c065456534b2a7ae75ce565c152459793c75ff0a67a"
+            },
+            {
+              "kind": "useSites",
+              "evidenceSha256": "d030d53e88cab5f0e6cb5bb3a467f8c58c8eddbb8074e3a5d196cbbe56211287"
+            }
+          ],
+          "positions": 90,
+          "constructions": 41,
+          "overlaps": 0,
+          "typeTables": 2
+        },
+        {
+          "edition": "recursion-controls",
+          "name": "AtlasExamples.fan_holds",
+          "indexSha256": "2040eb9cf64dc81af995f034e42db0b252f6a309c8714b413dd2282b87f3f238",
+          "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+          "inputs": [
+            {
+              "kind": "case",
+              "evidenceSha256": "43169e9bb128cf7663197bb8632f1220b82411234d16cc3028d23bb086a746b1"
+            }
+          ],
+          "positions": 20,
+          "constructions": 9,
+          "overlaps": 0,
+          "typeTables": 1
+        },
+        {
+          "edition": "recursion-controls",
+          "name": "AtlasExamples.fork_holds",
+          "indexSha256": "c66d2df9daeb72b79edd55509d40a4c1161f4dd926505b6e73e83fb5fcb10eca",
+          "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+          "inputs": [
+            {
+              "kind": "case",
+              "evidenceSha256": "b7e190dbc620e367b54ce90bbaba0a5ddb0b88ce94e9b08e47a2fc96f81fb4db"
+            }
+          ],
+          "positions": 58,
+          "constructions": 27,
+          "overlaps": 0,
+          "typeTables": 1
+        },
+        {
+          "edition": "recursion-controls",
+          "name": "AtlasExamples.ignored_premise",
+          "indexSha256": "ed5c5380f2e9300694f3bea8363f40a1989db506b3475ebd1b73669979d296f0",
+          "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+          "inputs": [
+            {
+              "kind": "case",
+              "evidenceSha256": "ba2b46e13af8a6a8f6d536e4ef35e05c971c2695327f09f99ac102c46cfe2a5f"
+            }
+          ],
+          "positions": 18,
+          "constructions": 8,
+          "overlaps": 0,
+          "typeTables": 1
+        },
+        {
+          "edition": "recursion-controls",
+          "name": "AtlasExamples.list_copy_eq",
+          "indexSha256": "97ee0e28cbe3e288952e262edb215dc953933e2b9b45f6d736471abff9266653",
+          "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+          "inputs": [
+            {
+              "kind": "case",
+              "evidenceSha256": "37b105e5350502850030e7cc45fb5a3da3afc8a50cb9c0b6a12a6ed9ff65ede2"
+            }
+          ],
+          "positions": 43,
+          "constructions": 20,
+          "overlaps": 0,
+          "typeTables": 1
+        },
+        {
+          "edition": "recursion-controls",
+          "name": "AtlasExamples.nat_self",
+          "indexSha256": "d64ca32b7c3ab5022b1d861e835bc98804c26da94e880ba57a5159ee8ec6f079",
+          "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+          "inputs": [
+            {
+              "kind": "case",
+              "evidenceSha256": "6e20437c2fb0c4f2e1486bf242b5ab91d5e771047b15958d2abde6ed2f562282"
+            }
+          ],
+          "positions": 18,
+          "constructions": 8,
+          "overlaps": 0,
+          "typeTables": 1
+        },
+        {
+          "edition": "recursion-controls",
+          "name": "AtlasExamples.shared_induction_24",
+          "indexSha256": "15adae1388b989e66284b8faeb8b897eb1b03a1479cc34b1d0cc354c32e216a0",
+          "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+          "inputs": [
+            {
+              "kind": "case",
+              "evidenceSha256": "c1c11003b22783490ca74f240fc040e00d83aeaf536f63098ce0084fffcbc1f5"
+            }
+          ],
+          "positions": 19,
+          "constructions": 8,
+          "overlaps": 0,
+          "typeTables": 1
+        },
+        {
+          "edition": "recursion-controls",
+          "name": "AtlasExamples.shared_induction_64",
+          "indexSha256": "2ab1d320fb4c5ec7290b1bf1b64c4538cc65835717dee405192ce9b3daa30ca3",
+          "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+          "inputs": [
+            {
+              "kind": "case",
+              "evidenceSha256": "a549f4c4ad40149047795abd40400c59c13f662d30ac230c7e45a4c353427088"
+            }
+          ],
+          "positions": 19,
+          "constructions": 8,
+          "overlaps": 0,
+          "typeTables": 1
+        },
+        {
+          "edition": "recursion-controls",
+          "name": "AtlasExamples.shared_induction_8",
+          "indexSha256": "a2b9dd1177e142b70895702b62c2294d00ef3c955c7f4d3b49ae8359deeb8e74",
+          "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+          "inputs": [
+            {
+              "kind": "case",
+              "evidenceSha256": "3445f2d10467814affda7d3909b17af6243e214ea102a7333c97318b65fd7376"
+            }
+          ],
+          "positions": 19,
+          "constructions": 8,
+          "overlaps": 0,
+          "typeTables": 1
+        },
+        {
+          "edition": "recursion-controls",
+          "name": "AtlasExamples.sized_copy_eq",
+          "indexSha256": "a110e9b09786e011585b98ddd08192ef580549b0ddf90ca8a7d7997d38482c3a",
+          "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+          "inputs": [
+            {
+              "kind": "case",
+              "evidenceSha256": "e6570706576ed2856a1d98f87c88c337f9f1bdac6f208f3ebb5f8c481c2cb720"
+            }
+          ],
+          "positions": 60,
+          "constructions": 28,
+          "overlaps": 0,
+          "typeTables": 1
+        }
+      ],
+      "scope": "Union of authenticated compiled native attestations. Independent source contexts and type-syntax agreement; no new native execution, portable kernel certificate, necessity or comprehension claim. Forged conflict claims are in-memory negative controls only."
+    },
+    "browser-audit.json": {
+      "status": "PASS",
+      "sourceSites": 3,
+      "sceneComparisons": 6,
+      "typeComparisons": 14,
+      "sourceSelections": 14,
+      "provenanceSelections": 14,
+      "transportPairs": 3,
+      "pagedCompleteArchiveRequests": 0,
+      "failureControls": 1,
+      "rows": [
+        {
+          "edition": "published-15",
+          "name": "JacobiData.slope_bound_abs",
+          "node": 2333,
+          "route": {
+            "format": "ProofAtlasPackedRoute/1",
+            "root": 1,
+            "depth": 18,
+            "slots": "VaWqRQU"
+          },
+          "loading": "complete",
+          "constructionOwner": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+          "alternatives": [
+            {
+              "kind": "useSites",
+              "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520"
+            }
+          ]
+        },
+        {
+          "edition": "published-15",
+          "name": "JacobiData.slope_bound_abs",
+          "node": 2333,
+          "route": {
+            "format": "ProofAtlasPackedRoute/1",
+            "root": 1,
+            "depth": 18,
+            "slots": "VaWqRQU"
+          },
+          "loading": "paged",
+          "constructionOwner": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+          "alternatives": [
+            {
+              "kind": "useSites",
+              "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520"
+            }
+          ]
+        },
+        {
+          "edition": "published-15",
+          "name": "JacobiData.slope_bound_abs",
+          "node": 1298,
+          "route": {
+            "format": "ProofAtlasPackedRoute/1",
+            "root": 1,
+            "depth": 16,
+            "slots": "VaVqEA"
+          },
+          "loading": "complete",
+          "constructionOwner": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+          "alternatives": [
+            {
+              "kind": "useSites",
+              "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520"
+            }
+          ]
+        },
+        {
+          "edition": "published-15",
+          "name": "JacobiData.slope_bound_abs",
+          "node": 1298,
+          "route": {
+            "format": "ProofAtlasPackedRoute/1",
+            "root": 1,
+            "depth": 16,
+            "slots": "VaVqEA"
+          },
+          "loading": "paged",
+          "constructionOwner": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+          "alternatives": [
+            {
+              "kind": "useSites",
+              "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520"
+            }
+          ]
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_plus_43987",
+          "node": 78,
+          "route": {
+            "format": "ProofAtlasPackedRoute/1",
+            "root": 1,
+            "depth": 19,
+            "slots": "VUVURRE"
+          },
+          "loading": "complete",
+          "constructionOwner": "0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77",
+          "alternatives": [
+            {
+              "kind": "useSites",
+              "evidenceSha256": "0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77"
+            }
+          ]
+        },
+        {
+          "edition": "goedel-sample-4331",
+          "name": "lean_workbook_plus_43987",
+          "node": 78,
+          "route": {
+            "format": "ProofAtlasPackedRoute/1",
+            "root": 1,
+            "depth": 19,
+            "slots": "VUVURRE"
+          },
+          "loading": "paged",
+          "constructionOwner": "0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77",
+          "alternatives": [
+            {
+              "kind": "useSites",
+              "evidenceSha256": "0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77"
+            }
+          ]
+        }
+      ]
+    },
+    "complete-browser-audit.json": {
+      "status": "PASS",
+      "sourceSelections": 103,
+      "corpusSelections": 52,
+      "baselineCorpusSelections": 50,
+      "continuationCorpusSelections": 2,
+      "nativeControlPositions": 49,
+      "deepBodyTypeReturnsToOriginalBinder": true,
+      "distinctSameNodeContexts": true,
+      "metaKernelTypesRemainSeparate": true,
+      "originalExtractionQueryJump": true,
+      "binderJumps": 2,
+      "recordedTypeViews": 155,
+      "premiseTexts": 52,
+      "accessibilityAudits": 4,
+      "failureAndStaleControls": 3,
+      "newNativeJudgments": 0,
+      "wholeProofCoverage": false
+    },
+    "construction-transport.json": {
+      "status": "PASS",
+      "profiles": 35,
+      "records": 5568,
+      "constructions": 2527,
+      "scenes": 7581,
+      "recordedOnlyScenes": 3041,
+      "sourceOnlyScenes": 35,
+      "sceneTypeSelections": 2527,
+      "presentationPoints": 18904,
+      "maxPresentationBytes": 1287,
+      "premiseTypeComparisons": 5114,
+      "alternateTypeComparisons": 2159,
+      "recordedTypeComparisons": 5568,
+      "conclusionTypeComparisons": 2527,
+      "componentNamespacesRefused": 2527,
+      "knownInterfaceBoundaries": 0,
+      "differentPositionAndConstructionTypes": 0,
+      "candidateInterfaces": 2237,
+      "compatibleInterfaces": 2237,
+      "refusedInterfaces": 0,
+      "completeArchiveRequests": 0,
+      "peakSourceNodes": 256,
+      "peakTypeNodes": 64,
+      "peakRecordBytes": 10805,
+      "rows": [
+        {
+          "name": "JacobiCore.E_pos",
+          "entries": 133,
+          "constructions": 63,
+          "components": 250,
+          "positionCaptions": 0,
+          "maxRecordBytes": 7373,
+          "source": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 74,
+            "peakCachedDecodedBytes": 3470,
+            "cachedPages": 1,
+            "cachedNodes": 74,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "42c5264d2680fe256ee4bfc588ed1ed3d648f38eeb56916d2e1ce02e11ae0c33",
+            "manifestSha256": "8ddc5b1aa20338f7911dcbfca5781c1b8993cb2f9c93d835ffefbdcc7ac1061a",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 3956,
+            "recordLoads": 1825,
+            "lookups": 1978,
+            "absent": 2,
+            "peakIndexBytes": 6349,
+            "peakRecordBytes": 7373,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6275,
+            "recordBytes": 2569,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "JacobiData.slope_bound_abs",
+          "entries": 752,
+          "constructions": 356,
+          "components": 1402,
+          "positionCaptions": 0,
+          "maxRecordBytes": 10590,
+          "source": {
+            "pageLoads": 75136,
+            "indexLoads": 1,
+            "faults": 75136,
+            "evictions": 75135,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 11983,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+            "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 34101,
+            "recordLoads": 10493,
+            "lookups": 11367,
+            "absent": 2,
+            "peakIndexBytes": 11058,
+            "peakRecordBytes": 10590,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6445,
+            "recordBytes": 3380,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "SBracket.mk.inj",
+          "entries": 644,
+          "constructions": 264,
+          "components": 992,
+          "positionCaptions": 0,
+          "maxRecordBytes": 7695,
+          "source": {
+            "pageLoads": 44976,
+            "indexLoads": 1,
+            "faults": 44976,
+            "evictions": 44975,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 14424,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "39dbe3b524a288ceb58009e86becc10331d8bbd3e230306d727649e9da8c6d76",
+            "manifestSha256": "60b4f39c246bb8990f9663ea1918f670c27df54186e7d41858a1dd53360d87ba",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 27387,
+            "recordLoads": 8324,
+            "lookups": 9129,
+            "absent": 2,
+            "peakIndexBytes": 11740,
+            "peakRecordBytes": 7695,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6343,
+            "recordBytes": 2640,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "CrossingData.crossing",
+          "entries": 258,
+          "constructions": 124,
+          "components": 467,
+          "positionCaptions": 0,
+          "maxRecordBytes": 7841,
+          "source": {
+            "pageLoads": 16289,
+            "indexLoads": 1,
+            "faults": 16289,
+            "evictions": 16288,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 10605,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "b1f3867250131bf76d40e9dca395e29595ccf8d4bb49c8e075ba40213b33057a",
+            "manifestSha256": "35525a231b5fc2069853bd8a8c3cd4fed7d65e3ddd8d8166752f784aed1c9328",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 8556,
+            "recordLoads": 3961,
+            "lookups": 4278,
+            "absent": 2,
+            "peakIndexBytes": 6577,
+            "peakRecordBytes": 7841,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6393,
+            "recordBytes": 2593,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
+          "entries": 380,
+          "constructions": 176,
+          "components": 691,
+          "positionCaptions": 0,
+          "maxRecordBytes": 7588,
+          "source": {
+            "pageLoads": 34178,
+            "indexLoads": 3,
+            "faults": 34178,
+            "evictions": 34177,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 10388,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 3,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "2d55fcee4c570869eacb882d5c131deb173cfd82c941af68aa2b561943627f7b",
+            "manifestSha256": "4f3895e5331e66db849da700b0c1d97009e490a1511919faf5f330e1599469db",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 11880,
+            "recordLoads": 5501,
+            "lookups": 5940,
+            "absent": 2,
+            "peakIndexBytes": 8371,
+            "peakRecordBytes": 7588,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6413,
+            "recordBytes": 2700,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "JacobiData.slope_bound_abs",
+          "entries": 201,
+          "constructions": 90,
+          "components": 354,
+          "positionCaptions": 0,
+          "maxRecordBytes": 9610,
+          "source": {
+            "pageLoads": 17860,
+            "indexLoads": 1,
+            "faults": 17860,
+            "evictions": 17859,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 11983,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "a786a311ffd35d388b79b4af11a5d733dde834f8e0fe7967b74ad07d4dea15e4",
+            "manifestSha256": "1e73d26525b292719d20a4f46fe2cd0fa54e96b8265af72b2a20f0ee0caa994b",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 5586,
+            "recordLoads": 2556,
+            "lookups": 2793,
+            "absent": 2,
+            "peakIndexBytes": 6581,
+            "peakRecordBytes": 9610,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 3570,
+            "recordBytes": 3359,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "lean_workbook_20418",
+          "entries": 229,
+          "constructions": 104,
+          "components": 407,
+          "positionCaptions": 0,
+          "maxRecordBytes": 10805,
+          "source": {
+            "pageLoads": 25110,
+            "indexLoads": 102,
+            "faults": 25110,
+            "evictions": 25109,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 13317,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 4,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+            "manifestSha256": "a3525f4c281e8e9afd0cc28004fca7757bc929432731e696fbc0ca2b02bb1ab5",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 6306,
+            "recordLoads": 2885,
+            "lookups": 3153,
+            "absent": 2,
+            "peakIndexBytes": 6921,
+            "peakRecordBytes": 10805,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6313,
+            "recordBytes": 3435,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "lean_workbook_3485",
+          "entries": 141,
+          "constructions": 66,
+          "components": 259,
+          "positionCaptions": 0,
+          "maxRecordBytes": 10157,
+          "source": {
+            "pageLoads": 9441,
+            "indexLoads": 1,
+            "faults": 9441,
+            "evictions": 9440,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 12669,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "bd496000a8da7ce06393d1cdd66b86c1a76aa6004c6eca19c36e083a3082948c",
+            "manifestSha256": "8df2d47efc7eaad0cbb4431fd41b8eb8355a58fb783d8cd9d5ffdc6e93996733",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 4286,
+            "recordLoads": 1983,
+            "lookups": 2143,
+            "absent": 2,
+            "peakIndexBytes": 6477,
+            "peakRecordBytes": 10157,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6285,
+            "recordBytes": 3428,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "lean_workbook_4274",
+          "entries": 111,
+          "constructions": 48,
+          "components": 188,
+          "positionCaptions": 0,
+          "maxRecordBytes": 10190,
+          "source": {
+            "pageLoads": 6400,
+            "indexLoads": 1,
+            "faults": 6400,
+            "evictions": 6399,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 11801,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+            "manifestSha256": "8445a143694429ffce96fc4afeca0b1c36282063a37462e5876f510854146c7f",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 2976,
+            "recordLoads": 1358,
+            "lookups": 1488,
+            "absent": 2,
+            "peakIndexBytes": 6501,
+            "peakRecordBytes": 10190,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 5904,
+            "recordBytes": 3430,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "lean_workbook_49456",
+          "entries": 27,
+          "constructions": 11,
+          "components": 42,
+          "positionCaptions": 0,
+          "maxRecordBytes": 9596,
+          "source": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 42,
+            "peakCachedDecodedBytes": 2143,
+            "cachedPages": 1,
+            "cachedNodes": 42,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "66459f55804e8ae09fc9a8615191fba8f5277f1fb0831c1bb132e1bc60552b38",
+            "manifestSha256": "356dec35ca5dd8bb7e6881d9f3ce2c934e8043c4828ec13e8a88cb90953482f3",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 566,
+            "recordLoads": 249,
+            "lookups": 283,
+            "absent": 2,
+            "peakIndexBytes": 6265,
+            "peakRecordBytes": 9596,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6265,
+            "recordBytes": 3407,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "lean_workbook_56144",
+          "entries": 91,
+          "constructions": 41,
+          "components": 158,
+          "positionCaptions": 0,
+          "maxRecordBytes": 9806,
+          "source": {
+            "pageLoads": 5682,
+            "indexLoads": 1,
+            "faults": 5682,
+            "evictions": 5681,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 13526,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "60ff188d4edd927f72c0393d678f5a9cfb80d344d3ec459aec958443f07dc256",
+            "manifestSha256": "6431ac09df11ed8d8de4e407fb97d5f92aaf57f902312536e0d10fd5672e7dff",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 2370,
+            "recordLoads": 1075,
+            "lookups": 1185,
+            "absent": 2,
+            "peakIndexBytes": 6425,
+            "peakRecordBytes": 9806,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6375,
+            "recordBytes": 3425,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "lean_workbook_plus_15068",
+          "entries": 186,
+          "constructions": 86,
+          "components": 336,
+          "positionCaptions": 0,
+          "maxRecordBytes": 10164,
+          "source": {
+            "pageLoads": 22473,
+            "indexLoads": 3,
+            "faults": 22473,
+            "evictions": 22472,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 11732,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 3,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+            "manifestSha256": "548d26b53b9ecdddba03b0f96c828548f3a5bd66936990923913d27a1070aba6",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 5234,
+            "recordLoads": 2402,
+            "lookups": 2617,
+            "absent": 2,
+            "peakIndexBytes": 7109,
+            "peakRecordBytes": 10164,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6373,
+            "recordBytes": 3442,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "lean_workbook_plus_16912",
+          "entries": 171,
+          "constructions": 80,
+          "components": 313,
+          "positionCaptions": 0,
+          "maxRecordBytes": 10171,
+          "source": {
+            "pageLoads": 14371,
+            "indexLoads": 1,
+            "faults": 14371,
+            "evictions": 14370,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 13843,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "6c061155ccb98286c7608ad3bfbd316714aea3a1b33817720b3c4b2846c39510",
+            "manifestSha256": "f02e094d8c631be07cd3c34fb69bce6865ca533a6598b7e133b2875ccdb52170",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 5024,
+            "recordLoads": 2316,
+            "lookups": 2512,
+            "absent": 2,
+            "peakIndexBytes": 6715,
+            "peakRecordBytes": 10171,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6365,
+            "recordBytes": 3445,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "lean_workbook_plus_19617",
+          "entries": 77,
+          "constructions": 32,
+          "components": 124,
+          "positionCaptions": 0,
+          "maxRecordBytes": 10757,
+          "source": {
+            "pageLoads": 5096,
+            "indexLoads": 1,
+            "faults": 5096,
+            "evictions": 5095,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 10184,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+            "manifestSha256": "da084009994f6aefbabbd9d45f5054c3516b6014c8c155d0642b3553ab6da1f7",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 2052,
+            "recordLoads": 933,
+            "lookups": 1026,
+            "absent": 2,
+            "peakIndexBytes": 6401,
+            "peakRecordBytes": 10757,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6339,
+            "recordBytes": 3433,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "lean_workbook_plus_39831",
+          "entries": 116,
+          "constructions": 53,
+          "components": 207,
+          "positionCaptions": 0,
+          "maxRecordBytes": 10163,
+          "source": {
+            "pageLoads": 10827,
+            "indexLoads": 1,
+            "faults": 10827,
+            "evictions": 10826,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 13259,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+            "manifestSha256": "265d25f3d7fe247e7ef06a6b0089fb4a1da2acd75e02a0e1cb034a4dd7372685",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 3116,
+            "recordLoads": 1420,
+            "lookups": 1558,
+            "absent": 2,
+            "peakIndexBytes": 6497,
+            "peakRecordBytes": 10163,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6267,
+            "recordBytes": 3437,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "lean_workbook_plus_43987",
+          "entries": 43,
+          "constructions": 16,
+          "components": 59,
+          "positionCaptions": 0,
+          "maxRecordBytes": 9652,
+          "source": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 204,
+            "peakCachedDecodedBytes": 10052,
+            "cachedPages": 1,
+            "cachedNodes": 204,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "159699ca3f1d90ccd733d2a5fe4c0541ae4c785b8cb942333058b16653cef385",
+            "manifestSha256": "4886f778c3b4b94d2c55cbd5d231a7b35a91a140ab6edc09ded7ff4d24084f61",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 764,
+            "recordLoads": 329,
+            "lookups": 382,
+            "absent": 2,
+            "peakIndexBytes": 6321,
+            "peakRecordBytes": 9652,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6315,
+            "recordBytes": 3429,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "lean_workbook_plus_54159",
+          "entries": 277,
+          "constructions": 117,
+          "components": 464,
+          "positionCaptions": 0,
+          "maxRecordBytes": 10289,
+          "source": {
+            "pageLoads": 26426,
+            "indexLoads": 1,
+            "faults": 26426,
+            "evictions": 26425,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 12949,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+            "manifestSha256": "b462eb808a08908ba3c7936e52f607fd90cc4ce4f000949e9c6108c482db5e00",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 8692,
+            "recordLoads": 4020,
+            "lookups": 4346,
+            "absent": 2,
+            "peakIndexBytes": 6927,
+            "peakRecordBytes": 10289,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6638,
+            "recordBytes": 3466,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "lean_workbook_plus_54622",
+          "entries": 187,
+          "constructions": 87,
+          "components": 341,
+          "positionCaptions": 0,
+          "maxRecordBytes": 9873,
+          "source": {
+            "pageLoads": 14651,
+            "indexLoads": 1,
+            "faults": 14651,
+            "evictions": 14650,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 12733,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "0b128b2e4d02870a974f0f00684ea058eded20eed8f15f32e84872e4bca50d73",
+            "manifestSha256": "f2273950cf35388d9eb6b625cc20045f7ee17a474752171c24ea307bc05439af",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 5394,
+            "recordLoads": 2484,
+            "lookups": 2697,
+            "absent": 2,
+            "peakIndexBytes": 6621,
+            "peakRecordBytes": 9873,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6369,
+            "recordBytes": 3435,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "lean_workbook_plus_61403",
+          "entries": 54,
+          "constructions": 24,
+          "components": 95,
+          "positionCaptions": 0,
+          "maxRecordBytes": 9764,
+          "source": {
+            "pageLoads": 1733,
+            "indexLoads": 1,
+            "faults": 1733,
+            "evictions": 1732,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 10802,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "a52afaeee83e9f155855d77dc8f906f03abf8da6038abde95c7dc6e104568459",
+            "manifestSha256": "e84565e49f97a34b000c8f4dce2517b333c45d90bfa9ff4b86d6ad8b346877f4",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 1358,
+            "recordLoads": 617,
+            "lookups": 679,
+            "absent": 2,
+            "peakIndexBytes": 6343,
+            "peakRecordBytes": 9764,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6343,
+            "recordBytes": 3415,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "lean_workbook_plus_6206",
+          "entries": 499,
+          "constructions": 237,
+          "components": 932,
+          "positionCaptions": 0,
+          "maxRecordBytes": 9943,
+          "source": {
+            "pageLoads": 64350,
+            "indexLoads": 1903,
+            "faults": 64350,
+            "evictions": 64349,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 12089,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 4,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+            "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 15340,
+            "recordLoads": 7094,
+            "lookups": 7670,
+            "absent": 2,
+            "peakIndexBytes": 11189,
+            "peakRecordBytes": 9943,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6313,
+            "recordBytes": 3451,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "lean_workbook_plus_62755",
+          "entries": 161,
+          "constructions": 73,
+          "components": 288,
+          "positionCaptions": 0,
+          "maxRecordBytes": 10766,
+          "source": {
+            "pageLoads": 14360,
+            "indexLoads": 1,
+            "faults": 14360,
+            "evictions": 14359,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 12184,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+            "manifestSha256": "6d632b791dbd94dafd3c5dc42681b47ebd36041957d997ccb3968de30882cad9",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 4412,
+            "recordLoads": 2024,
+            "lookups": 2206,
+            "absent": 2,
+            "peakIndexBytes": 6433,
+            "peakRecordBytes": 10766,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6333,
+            "recordBytes": 3436,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "lean_workbook_plus_63081",
+          "entries": 99,
+          "constructions": 45,
+          "components": 177,
+          "positionCaptions": 0,
+          "maxRecordBytes": 9787,
+          "source": {
+            "pageLoads": 5717,
+            "indexLoads": 1,
+            "faults": 5717,
+            "evictions": 5716,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 11421,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "e8a13f9af176053ae5b0220fc5a1526de1e937ca2e8972035dcc70ee1da74217",
+            "manifestSha256": "5df253f5f8d87473b35517f7f843ed78cead47723c8dd0441854452326959942",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 2650,
+            "recordLoads": 1213,
+            "lookups": 1325,
+            "absent": 2,
+            "peakIndexBytes": 6445,
+            "peakRecordBytes": 9787,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6391,
+            "recordBytes": 3427,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "lean_workbook_plus_68077",
+          "entries": 208,
+          "constructions": 97,
+          "components": 381,
+          "positionCaptions": 0,
+          "maxRecordBytes": 10170,
+          "source": {
+            "pageLoads": 15399,
+            "indexLoads": 1,
+            "faults": 15399,
+            "evictions": 15398,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 13234,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "501dba70283e270631eba54e85d5f16c3ca44cfaba068ea4f39a45b550997e62",
+            "manifestSha256": "bcae60ecc4dc97be71fef2b0807651994a440ac8680125c8d190e986d5556edd",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 6024,
+            "recordLoads": 2776,
+            "lookups": 3012,
+            "absent": 2,
+            "peakIndexBytes": 6637,
+            "peakRecordBytes": 10170,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6349,
+            "recordBytes": 3439,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "lean_workbook_plus_68616",
+          "entries": 53,
+          "constructions": 24,
+          "components": 93,
+          "positionCaptions": 0,
+          "maxRecordBytes": 10145,
+          "source": {
+            "pageLoads": 2413,
+            "indexLoads": 1,
+            "faults": 2413,
+            "evictions": 2412,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 12257,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "2f1f6523063a579076448d2a6caa42d496003a1be382692e8747442b1d9aef83",
+            "manifestSha256": "dc56a8515c326c5df25fcbb0150310767b0ef288e8245f9266e2733e57e8e057",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 1440,
+            "recordLoads": 657,
+            "lookups": 720,
+            "absent": 2,
+            "peakIndexBytes": 6329,
+            "peakRecordBytes": 10145,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6287,
+            "recordBytes": 3417,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "lean_workbook_plus_68794",
+          "entries": 106,
+          "constructions": 48,
+          "components": 189,
+          "positionCaptions": 0,
+          "maxRecordBytes": 9784,
+          "source": {
+            "pageLoads": 7661,
+            "indexLoads": 1,
+            "faults": 7661,
+            "evictions": 7660,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 11362,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "17a8502769796c60075b569ccf17b5bf99c47c12e6e1771705ae3eb540656f3b",
+            "manifestSha256": "f3f5e87eac51b89cd2039502fb4dd7581bc2f4b49c245595965faad3d93b961e",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 2786,
+            "recordLoads": 1273,
+            "lookups": 1393,
+            "absent": 2,
+            "peakIndexBytes": 6431,
+            "peakRecordBytes": 9784,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6347,
+            "recordBytes": 3426,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "lean_workbook_plus_70240",
+          "entries": 90,
+          "constructions": 41,
+          "components": 161,
+          "positionCaptions": 0,
+          "maxRecordBytes": 9780,
+          "source": {
+            "pageLoads": 6657,
+            "indexLoads": 1,
+            "faults": 6657,
+            "evictions": 6656,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 11736,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "cbc4fcc25f7b3decb12c29ac4d90e9f01671a2bfcce24e948c9af0445a387290",
+            "manifestSha256": "38bca9e00856d285e988c6bb3535d9e371a5619d45915ae2abe469b18c382fbd",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 2440,
+            "recordLoads": 1118,
+            "lookups": 1220,
+            "absent": 2,
+            "peakIndexBytes": 6433,
+            "peakRecordBytes": 9780,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6347,
+            "recordBytes": 3428,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "AtlasExamples.fan_holds",
+          "entries": 20,
+          "constructions": 9,
+          "components": 31,
+          "positionCaptions": 0,
+          "maxRecordBytes": 7345,
+          "source": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 22,
+            "peakCachedDecodedBytes": 1933,
+            "cachedPages": 1,
+            "cachedNodes": 22,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "2040eb9cf64dc81af995f034e42db0b252f6a309c8714b413dd2282b87f3f238",
+            "manifestSha256": "b494a38b05261bbb15385bf60e00d5989452a8bcaf1eefbf2170c1a1487ff632",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 584,
+            "recordLoads": 264,
+            "lookups": 292,
+            "absent": 2,
+            "peakIndexBytes": 6253,
+            "peakRecordBytes": 7345,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6253,
+            "recordBytes": 2573,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "AtlasExamples.fork_holds",
+          "entries": 58,
+          "constructions": 27,
+          "components": 93,
+          "positionCaptions": 0,
+          "maxRecordBytes": 7382,
+          "source": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 42,
+            "peakCachedDecodedBytes": 3546,
+            "cachedPages": 1,
+            "cachedNodes": 42,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "c66d2df9daeb72b79edd55509d40a4c1161f4dd926505b6e73e83fb5fcb10eca",
+            "manifestSha256": "2113493e383a327b570a3d35938b9d1f2120128a7f23220c991227edce554d55",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 1704,
+            "recordLoads": 769,
+            "lookups": 852,
+            "absent": 2,
+            "peakIndexBytes": 6413,
+            "peakRecordBytes": 7382,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6353,
+            "recordBytes": 2583,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "AtlasExamples.ignored_premise",
+          "entries": 18,
+          "constructions": 8,
+          "components": 28,
+          "positionCaptions": 0,
+          "maxRecordBytes": 7353,
+          "source": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 19,
+            "peakCachedDecodedBytes": 1800,
+            "cachedPages": 1,
+            "cachedNodes": 19,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "ed5c5380f2e9300694f3bea8363f40a1989db506b3475ebd1b73669979d296f0",
+            "manifestSha256": "83486c193f48016f40f55bad5c131baed7e642d874982a48a704fbd1bc3b2483",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 510,
+            "recordLoads": 230,
+            "lookups": 255,
+            "absent": 2,
+            "peakIndexBytes": 6253,
+            "peakRecordBytes": 7353,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6253,
+            "recordBytes": 2573,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "AtlasExamples.list_copy_eq",
+          "entries": 43,
+          "constructions": 20,
+          "components": 70,
+          "positionCaptions": 0,
+          "maxRecordBytes": 7398,
+          "source": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 77,
+            "peakCachedDecodedBytes": 4591,
+            "cachedPages": 1,
+            "cachedNodes": 77,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "97ee0e28cbe3e288952e262edb215dc953933e2b9b45f6d736471abff9266653",
+            "manifestSha256": "f6a1178849f71df50b4f554b13c931e3e0f250a23d671104abaa9bbaa62c4b4e",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 1280,
+            "recordLoads": 583,
+            "lookups": 640,
+            "absent": 2,
+            "peakIndexBytes": 6373,
+            "peakRecordBytes": 7398,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6373,
+            "recordBytes": 2586,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "AtlasExamples.nat_self",
+          "entries": 18,
+          "constructions": 8,
+          "components": 28,
+          "positionCaptions": 0,
+          "maxRecordBytes": 7348,
+          "source": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 35,
+            "peakCachedDecodedBytes": 2131,
+            "cachedPages": 1,
+            "cachedNodes": 35,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "d64ca32b7c3ab5022b1d861e835bc98804c26da94e880ba57a5159ee8ec6f079",
+            "manifestSha256": "c97967934e6531e94a3108a1f56c85d846ffc8db060c8608b9ccfbe4bd1d6a39",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 510,
+            "recordLoads": 230,
+            "lookups": 255,
+            "absent": 2,
+            "peakIndexBytes": 6253,
+            "peakRecordBytes": 7348,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6253,
+            "recordBytes": 2566,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "AtlasExamples.shared_induction_24",
+          "entries": 19,
+          "constructions": 8,
+          "components": 28,
+          "positionCaptions": 0,
+          "maxRecordBytes": 7450,
+          "source": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 181,
+            "peakCachedDecodedBytes": 6057,
+            "cachedPages": 1,
+            "cachedNodes": 181,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "15adae1388b989e66284b8faeb8b897eb1b03a1479cc34b1d0cc354c32e216a0",
+            "manifestSha256": "072feba5f575cce0abd7ae79d57d232c2a5361b3e212ce8f00839765d5468829",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 456,
+            "recordLoads": 204,
+            "lookups": 228,
+            "absent": 2,
+            "peakIndexBytes": 6467,
+            "peakRecordBytes": 7450,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6467,
+            "recordBytes": 2609,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "AtlasExamples.shared_induction_64",
+          "entries": 19,
+          "constructions": 8,
+          "components": 28,
+          "positionCaptions": 0,
+          "maxRecordBytes": 7559,
+          "source": {
+            "pageLoads": 557,
+            "indexLoads": 1,
+            "faults": 557,
+            "evictions": 556,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 256,
+            "peakCachedDecodedBytes": 8565,
+            "cachedPages": 1,
+            "cachedNodes": 256,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "2ab1d320fb4c5ec7290b1bf1b64c4538cc65835717dee405192ce9b3daa30ca3",
+            "manifestSha256": "f82a2de46fdcee7122573d7654b2416ba1380feecfb170bbfcea8606868e7177",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 456,
+            "recordLoads": 204,
+            "lookups": 228,
+            "absent": 2,
+            "peakIndexBytes": 6779,
+            "peakRecordBytes": 7559,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6779,
+            "recordBytes": 2648,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "AtlasExamples.shared_induction_8",
+          "entries": 19,
+          "constructions": 8,
+          "components": 28,
+          "positionCaptions": 0,
+          "maxRecordBytes": 7382,
+          "source": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 85,
+            "peakCachedDecodedBytes": 3386,
+            "cachedPages": 1,
+            "cachedNodes": 85,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "a2b9dd1177e142b70895702b62c2294d00ef3c955c7f4d3b49ae8359deeb8e74",
+            "manifestSha256": "59ebaab7f165a38a895661b5965e570ce2e6ed776d29960f26235dcfb4c0df34",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 456,
+            "recordLoads": 204,
+            "lookups": 228,
+            "absent": 2,
+            "peakIndexBytes": 6353,
+            "peakRecordBytes": 7382,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6353,
+            "recordBytes": 2590,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        },
+        {
+          "name": "AtlasExamples.sized_copy_eq",
+          "entries": 60,
+          "constructions": 28,
+          "components": 96,
+          "positionCaptions": 0,
+          "maxRecordBytes": 7416,
+          "source": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 131,
+            "peakCachedDecodedBytes": 7252,
+            "cachedPages": 1,
+            "cachedNodes": 131,
+            "indexPages": 1,
+            "pageLimit": 1,
+            "indexLimit": 4,
+            "nodeLimit": 256,
+            "originalIndexSha256": "a110e9b09786e011585b98ddd08192ef580549b0ddf90ca8a7d7997d38482c3a",
+            "manifestSha256": "a43cc7fb1ac6c408b9a5e489cca01fd59636290d9a949ee55e82000a0e4ee0a1",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          },
+          "query": {
+            "indexLoads": 1850,
+            "recordLoads": 841,
+            "lookups": 925,
+            "absent": 2,
+            "peakIndexBytes": 6421,
+            "peakRecordBytes": 7416,
+            "captionLoads": 0,
+            "peakCaptionBytes": 0,
+            "indexPages": 1,
+            "recordPages": 1,
+            "indexLimit": 1,
+            "recordLimit": 1,
+            "indexBytes": 6369,
+            "recordBytes": 2591,
+            "activeTypeTables": 1,
+            "captionPackages": 0,
+            "captionBytes": 0
+          }
+        }
+      ],
+      "scope": "Finite complete-reference comparison of bounded construction/source/type transport. One-page source/type/record/index caches. No new kernel judgments or independent archive membership. Browser behavior and whole-process memory have separate evidence."
+    },
+    "let-browser-audit.json": {
+      "status": "PASS",
+      "declarations": 9,
+      "letSelections": 60,
+      "premiseSelections": 180,
+      "typeViews": 180,
+      "groupedComparisons": 9,
+      "binderJumps": 1,
+      "accessibilityAudits": 4,
+      "failureAndStaleControls": 2,
+      "reducedPoolRequests": 0,
+      "newNativeJudgments": 0,
+      "wholeProofCoverage": false
+    },
+    "regressions.json": {
+      "status": "PASS",
+      "checks": {
+        "deepContext": {
+          "status": "PASS",
+          "cases": 9,
+          "queries": 27,
+          "typeCuts": 60,
+          "internalTypeBindings": 2,
+          "originalContextBindings": 6,
+          "maxDepth": 10002,
+          "maxContext": 10000,
+          "rejections": 12,
+          "sourceCutsUnchanged": true,
+          "unrecordedPositionsRemainUnknown": true,
+          "computedNamespacePreserved": true,
+          "nativeKernelRerun": false
+        },
+        "constructionModel": {
+          "status": "PASS",
+          "syntheticCases": 11,
+          "syntheticTypedPositions": 49,
+          "syntheticConstructionCuts": 108,
+          "frozenReferenceComparisons": 108,
+          "corpusConstructions": 1024,
+          "corpusConstructionCuts": 3072,
+          "originalBinderLinkAppearances": 1249,
+          "typeCuts": 50,
+          "premiseTexts": 2048,
+          "differentParentTexts": 1996,
+          "distinctKernelMetaArgumentTypes": 3,
+          "maxSceneBytes": 31243,
+          "rejections": 20,
+          "newNativeJudgments": 0,
+          "wholeProofCoverage": false,
+          "rendererVerified": false
+        },
+        "constructionTransportControls": {
+          "status": "PASS",
+          "refusals": 41,
+          "sourceFieldChecks": 2,
+          "syntheticTypeMismatchBoundaries": 1,
+          "signedIndexControls": 3,
+          "descriptorSnapshot": true,
+          "distinctComponentRecipes": true,
+          "oneActiveTypeTable": true,
+          "immutableRecords": true,
+          "disposedCacheStaysEmpty": true,
+          "scope": "Transport, source/interface, identity and lifecycle controls; not independent kernel or native archive membership verification. The mismatch boundary is a synthetic altered projection, not a new native judgment."
+        },
+        "typeTransportControls": {
+          "status": "PASS",
+          "refusals": 43,
+          "resumableCutMatchesComplete": true,
+          "restartExhaustionReproduced": true,
+          "onePageTypeNodeLimit": 64,
+          "evictionAndResume": true,
+          "immutableNestedTuples": true,
+          "sourceCursorSeal": true,
+          "descriptorSnapshot": true,
+          "completeArchiveRequests": 0,
+          "scope": "Codec, identity, scope, cache and cancellation checks; no new typing or general consumer correctness theorem"
+        },
+        "typeQueryControls": {
+          "status": "PASS",
+          "refusals": 27,
+          "positionRows": 644,
+          "boundedIndexPages": 4,
+          "lookupAndPositionOrder": true,
+          "inputSnapshots": true,
+          "scope": "Authenticated transport and finite profile membership/absence; not independent native archive membership or kernel checking"
+        },
+        "historicalTypeModel": {
+          "status": "PASS",
+          "scope": "Independent finite model comparison of paged computed type geometry; browser integration and whole-browser memory have separate evidence",
+          "declarations": 26,
+          "tables": 34,
+          "observations": 2442,
+          "scenes": 7326,
+          "refinements": 1084,
+          "originalContextLinkAppearances": 216,
+          "typeLocalLinkAppearances": 331,
+          "peakTypeNodes": 512,
+          "peakTypeBytes": 40495,
+          "fullArchiveRequests": 0
+        },
+        "producers": [
+          {
+            "status": "PASS",
+            "mode": "check",
+            "profiles": 35,
+            "positions": 5568,
+            "constructions": 2527,
+            "positionCaptions": 5568,
+            "uniqueGzipAssets": 30407,
+            "compressedBytes": 27513569,
+            "newFiles": 0,
+            "scope": "Existing compiled term/type/construction metadata only; no new native queries or private mathematical source modules."
+          },
+          {
+            "status": "PASS",
+            "mode": "check",
+            "declarations": 35,
+            "observations": 5568,
+            "files": 6957,
+            "compressedBytes": 6281565,
+            "scope": "Compiled term/type metadata only; no private Lean source modules or new typing queries."
+          }
+        ]
+      },
+      "scope": "Finite model and transport controls. Historical type model deliberately retains its original 26-profile subset. No new native Lean execution."
+    },
+    "transport-browser-audit.json": {
+      "status": "PASS",
+      "profiles": 35,
+      "statementComparisons": 3,
+      "defaultProofFocus": 1,
+      "sceneComparisons": 51,
+      "typeComparisons": 46,
+      "nodeSelections": 35,
+      "sharedNodeSelections": 2,
+      "recordedBoundaryTypes": 2,
+      "sourceBinderJumps": 1,
+      "typeBinderJumps": 1,
+      "localTypeJumps": 1,
+      "letSelections": 1,
+      "alternateTypes": 1,
+      "axeAudits": 4,
+      "failureControls": 7,
+      "peakSourceNodes": 1971,
+      "peakTypeNodes": 320,
+      "peakRecordBytes": 70811,
+      "completeArchiveRequests": 0,
+      "moduleLoadRequests": 1
+    },
+    "type-browser-audit.json": {
+      "status": "PASS",
+      "profiles": 35,
+      "sourceComparisons": 38,
+      "typeComparisons": 38,
+      "sharedNodeSelections": 2,
+      "refinements": 35,
+      "positionSelections": 35,
+      "binderJumps": 1,
+      "localBinderJumps": 1,
+      "absenceChecks": 1,
+      "axeAudits": 4,
+      "failureControls": 6,
+      "peakSourceNodes": 623,
+      "peakTypeNodes": 256,
+      "completeArchiveRequests": 0
+    },
+    "type-query-transport.json": {
+      "status": "PASS",
+      "declarations": 35,
+      "lookups": 5568,
+      "cleanAbsences": 36,
+      "typeCuts": 5568,
+      "sourceCuts": 11136,
+      "sourcePresentationPoints": 38788,
+      "pagedRows": 5568,
+      "completeArchiveRequests": 0,
+      "rows": [
+        {
+          "name": "JacobiCore.E_pos",
+          "sourceIndexSha256": "42c5264d2680fe256ee4bfc588ed1ed3d648f38eeb56916d2e1ce02e11ae0c33",
+          "observations": 133,
+          "queryState": {
+            "indexLoads": 50,
+            "lookups": 134,
+            "found": 133,
+            "absent": 1,
+            "peakIndexBytes": 25286,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 20254
+          },
+          "sourceState": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 74,
+            "peakCachedDecodedBytes": 3470,
+            "cachedPages": 1,
+            "cachedNodes": 74,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "42c5264d2680fe256ee4bfc588ed1ed3d648f38eeb56916d2e1ce02e11ae0c33",
+            "manifestSha256": "8ddc5b1aa20338f7911dcbfca5781c1b8993cb2f9c93d835ffefbdcc7ac1061a",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "JacobiData.slope_bound_abs",
+          "sourceIndexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+          "observations": 752,
+          "queryState": {
+            "indexLoads": 656,
+            "lookups": 753,
+            "found": 752,
+            "absent": 1,
+            "peakIndexBytes": 27215,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 26880
+          },
+          "sourceState": {
+            "pageLoads": 12,
+            "indexLoads": 1,
+            "faults": 12,
+            "evictions": 0,
+            "peakCachedPages": 12,
+            "peakCachedNodes": 2995,
+            "peakCachedDecodedBytes": 111134,
+            "cachedPages": 12,
+            "cachedNodes": 2995,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+            "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "SBracket.mk.inj",
+          "sourceIndexSha256": "39dbe3b524a288ceb58009e86becc10331d8bbd3e230306d727649e9da8c6d76",
+          "observations": 644,
+          "queryState": {
+            "indexLoads": 269,
+            "lookups": 645,
+            "found": 644,
+            "absent": 1,
+            "peakIndexBytes": 29367,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 21790
+          },
+          "sourceState": {
+            "pageLoads": 4,
+            "indexLoads": 1,
+            "faults": 4,
+            "evictions": 0,
+            "peakCachedPages": 4,
+            "peakCachedNodes": 975,
+            "peakCachedDecodedBytes": 47855,
+            "cachedPages": 4,
+            "cachedNodes": 975,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "39dbe3b524a288ceb58009e86becc10331d8bbd3e230306d727649e9da8c6d76",
+            "manifestSha256": "60b4f39c246bb8990f9663ea1918f670c27df54186e7d41858a1dd53360d87ba",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "CrossingData.crossing",
+          "sourceIndexSha256": "b1f3867250131bf76d40e9dca395e29595ccf8d4bb49c8e075ba40213b33057a",
+          "observations": 258,
+          "queryState": {
+            "indexLoads": 102,
+            "lookups": 259,
+            "found": 258,
+            "absent": 1,
+            "peakIndexBytes": 29041,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 21698
+          },
+          "sourceState": {
+            "pageLoads": 3,
+            "indexLoads": 1,
+            "faults": 3,
+            "evictions": 0,
+            "peakCachedPages": 3,
+            "peakCachedNodes": 665,
+            "peakCachedDecodedBytes": 27646,
+            "cachedPages": 3,
+            "cachedNodes": 665,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "b1f3867250131bf76d40e9dca395e29595ccf8d4bb49c8e075ba40213b33057a",
+            "manifestSha256": "35525a231b5fc2069853bd8a8c3cd4fed7d65e3ddd8d8166752f784aed1c9328",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
+          "sourceIndexSha256": "2d55fcee4c570869eacb882d5c131deb173cfd82c941af68aa2b561943627f7b",
+          "observations": 380,
+          "queryState": {
+            "indexLoads": 186,
+            "lookups": 381,
+            "found": 380,
+            "absent": 1,
+            "peakIndexBytes": 31418,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 29013
+          },
+          "sourceState": {
+            "pageLoads": 11,
+            "indexLoads": 7,
+            "faults": 11,
+            "evictions": 0,
+            "peakCachedPages": 11,
+            "peakCachedNodes": 2784,
+            "peakCachedDecodedBytes": 91883,
+            "cachedPages": 11,
+            "cachedNodes": 2784,
+            "indexPages": 4,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "2d55fcee4c570869eacb882d5c131deb173cfd82c941af68aa2b561943627f7b",
+            "manifestSha256": "4f3895e5331e66db849da700b0c1d97009e490a1511919faf5f330e1599469db",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "JacobiData.slope_bound_abs",
+          "sourceIndexSha256": "a786a311ffd35d388b79b4af11a5d733dde834f8e0fe7967b74ad07d4dea15e4",
+          "observations": 201,
+          "queryState": {
+            "indexLoads": 82,
+            "lookups": 203,
+            "found": 201,
+            "absent": 2,
+            "peakIndexBytes": 27879,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 24031
+          },
+          "sourceState": {
+            "pageLoads": 12,
+            "indexLoads": 1,
+            "faults": 12,
+            "evictions": 0,
+            "peakCachedPages": 12,
+            "peakCachedNodes": 2995,
+            "peakCachedDecodedBytes": 111134,
+            "cachedPages": 12,
+            "cachedNodes": 2995,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "a786a311ffd35d388b79b4af11a5d733dde834f8e0fe7967b74ad07d4dea15e4",
+            "manifestSha256": "1e73d26525b292719d20a4f46fe2cd0fa54e96b8265af72b2a20f0ee0caa994b",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "lean_workbook_20418",
+          "sourceIndexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+          "observations": 229,
+          "queryState": {
+            "indexLoads": 86,
+            "lookups": 230,
+            "found": 229,
+            "absent": 1,
+            "peakIndexBytes": 29300,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 22628
+          },
+          "sourceState": {
+            "pageLoads": 27,
+            "indexLoads": 14,
+            "faults": 27,
+            "evictions": 11,
+            "peakCachedPages": 16,
+            "peakCachedNodes": 3899,
+            "peakCachedDecodedBytes": 150465,
+            "cachedPages": 16,
+            "cachedNodes": 3899,
+            "indexPages": 4,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+            "manifestSha256": "a3525f4c281e8e9afd0cc28004fca7757bc929432731e696fbc0ca2b02bb1ab5",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "lean_workbook_3485",
+          "sourceIndexSha256": "bd496000a8da7ce06393d1cdd66b86c1a76aa6004c6eca19c36e083a3082948c",
+          "observations": 141,
+          "queryState": {
+            "indexLoads": 42,
+            "lookups": 142,
+            "found": 141,
+            "absent": 1,
+            "peakIndexBytes": 26204,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 24243
+          },
+          "sourceState": {
+            "pageLoads": 3,
+            "indexLoads": 1,
+            "faults": 3,
+            "evictions": 0,
+            "peakCachedPages": 3,
+            "peakCachedNodes": 629,
+            "peakCachedDecodedBytes": 27074,
+            "cachedPages": 3,
+            "cachedNodes": 629,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "bd496000a8da7ce06393d1cdd66b86c1a76aa6004c6eca19c36e083a3082948c",
+            "manifestSha256": "8df2d47efc7eaad0cbb4431fd41b8eb8355a58fb783d8cd9d5ffdc6e93996733",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "lean_workbook_4274",
+          "sourceIndexSha256": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+          "observations": 111,
+          "queryState": {
+            "indexLoads": 27,
+            "lookups": 112,
+            "found": 111,
+            "absent": 1,
+            "peakIndexBytes": 25566,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 24596
+          },
+          "sourceState": {
+            "pageLoads": 4,
+            "indexLoads": 1,
+            "faults": 4,
+            "evictions": 0,
+            "peakCachedPages": 4,
+            "peakCachedNodes": 939,
+            "peakCachedDecodedBytes": 38533,
+            "cachedPages": 4,
+            "cachedNodes": 939,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+            "manifestSha256": "8445a143694429ffce96fc4afeca0b1c36282063a37462e5876f510854146c7f",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "lean_workbook_49456",
+          "sourceIndexSha256": "66459f55804e8ae09fc9a8615191fba8f5277f1fb0831c1bb132e1bc60552b38",
+          "observations": 27,
+          "queryState": {
+            "indexLoads": 3,
+            "lookups": 28,
+            "found": 27,
+            "absent": 1,
+            "peakIndexBytes": 13290,
+            "indexPages": 3,
+            "indexLimit": 4,
+            "decodedIndexBytes": 13290
+          },
+          "sourceState": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 42,
+            "peakCachedDecodedBytes": 2143,
+            "cachedPages": 1,
+            "cachedNodes": 42,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "66459f55804e8ae09fc9a8615191fba8f5277f1fb0831c1bb132e1bc60552b38",
+            "manifestSha256": "356dec35ca5dd8bb7e6881d9f3ce2c934e8043c4828ec13e8a88cb90953482f3",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "lean_workbook_56144",
+          "sourceIndexSha256": "60ff188d4edd927f72c0393d678f5a9cfb80d344d3ec459aec958443f07dc256",
+          "observations": 91,
+          "queryState": {
+            "indexLoads": 29,
+            "lookups": 92,
+            "found": 91,
+            "absent": 1,
+            "peakIndexBytes": 24864,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 22313
+          },
+          "sourceState": {
+            "pageLoads": 5,
+            "indexLoads": 1,
+            "faults": 5,
+            "evictions": 0,
+            "peakCachedPages": 5,
+            "peakCachedNodes": 1068,
+            "peakCachedDecodedBytes": 42888,
+            "cachedPages": 5,
+            "cachedNodes": 1068,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "60ff188d4edd927f72c0393d678f5a9cfb80d344d3ec459aec958443f07dc256",
+            "manifestSha256": "6431ac09df11ed8d8de4e407fb97d5f92aaf57f902312536e0d10fd5672e7dff",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "lean_workbook_plus_15068",
+          "sourceIndexSha256": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+          "observations": 186,
+          "queryState": {
+            "indexLoads": 65,
+            "lookups": 187,
+            "found": 186,
+            "absent": 1,
+            "peakIndexBytes": 28695,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 25229
+          },
+          "sourceState": {
+            "pageLoads": 14,
+            "indexLoads": 3,
+            "faults": 14,
+            "evictions": 0,
+            "peakCachedPages": 14,
+            "peakCachedNodes": 3407,
+            "peakCachedDecodedBytes": 121990,
+            "cachedPages": 14,
+            "cachedNodes": 3407,
+            "indexPages": 3,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+            "manifestSha256": "548d26b53b9ecdddba03b0f96c828548f3a5bd66936990923913d27a1070aba6",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "lean_workbook_plus_16912",
+          "sourceIndexSha256": "6c061155ccb98286c7608ad3bfbd316714aea3a1b33817720b3c4b2846c39510",
+          "observations": 171,
+          "queryState": {
+            "indexLoads": 62,
+            "lookups": 172,
+            "found": 171,
+            "absent": 1,
+            "peakIndexBytes": 27523,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 24103
+          },
+          "sourceState": {
+            "pageLoads": 7,
+            "indexLoads": 1,
+            "faults": 7,
+            "evictions": 0,
+            "peakCachedPages": 7,
+            "peakCachedNodes": 1566,
+            "peakCachedDecodedBytes": 59435,
+            "cachedPages": 7,
+            "cachedNodes": 1566,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "6c061155ccb98286c7608ad3bfbd316714aea3a1b33817720b3c4b2846c39510",
+            "manifestSha256": "f02e094d8c631be07cd3c34fb69bce6865ca533a6598b7e133b2875ccdb52170",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "lean_workbook_plus_19617",
+          "sourceIndexSha256": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+          "observations": 77,
+          "queryState": {
+            "indexLoads": 18,
+            "lookups": 78,
+            "found": 77,
+            "absent": 1,
+            "peakIndexBytes": 24364,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 22808
+          },
+          "sourceState": {
+            "pageLoads": 3,
+            "indexLoads": 1,
+            "faults": 3,
+            "evictions": 0,
+            "peakCachedPages": 3,
+            "peakCachedNodes": 563,
+            "peakCachedDecodedBytes": 22695,
+            "cachedPages": 3,
+            "cachedNodes": 563,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+            "manifestSha256": "da084009994f6aefbabbd9d45f5054c3516b6014c8c155d0642b3553ab6da1f7",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "lean_workbook_plus_39831",
+          "sourceIndexSha256": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+          "observations": 116,
+          "queryState": {
+            "indexLoads": 40,
+            "lookups": 117,
+            "found": 116,
+            "absent": 1,
+            "peakIndexBytes": 25866,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 19667
+          },
+          "sourceState": {
+            "pageLoads": 7,
+            "indexLoads": 1,
+            "faults": 7,
+            "evictions": 0,
+            "peakCachedPages": 7,
+            "peakCachedNodes": 1543,
+            "peakCachedDecodedBytes": 56491,
+            "cachedPages": 7,
+            "cachedNodes": 1543,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+            "manifestSha256": "265d25f3d7fe247e7ef06a6b0089fb4a1da2acd75e02a0e1cb034a4dd7372685",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "lean_workbook_plus_43987",
+          "sourceIndexSha256": "159699ca3f1d90ccd733d2a5fe4c0541ae4c785b8cb942333058b16653cef385",
+          "observations": 43,
+          "queryState": {
+            "indexLoads": 4,
+            "lookups": 44,
+            "found": 43,
+            "absent": 1,
+            "peakIndexBytes": 21123,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 21123
+          },
+          "sourceState": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 204,
+            "peakCachedDecodedBytes": 10052,
+            "cachedPages": 1,
+            "cachedNodes": 204,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "159699ca3f1d90ccd733d2a5fe4c0541ae4c785b8cb942333058b16653cef385",
+            "manifestSha256": "4886f778c3b4b94d2c55cbd5d231a7b35a91a140ab6edc09ded7ff4d24084f61",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "lean_workbook_plus_54159",
+          "sourceIndexSha256": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+          "observations": 277,
+          "queryState": {
+            "indexLoads": 94,
+            "lookups": 278,
+            "found": 277,
+            "absent": 1,
+            "peakIndexBytes": 30585,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 24182
+          },
+          "sourceState": {
+            "pageLoads": 9,
+            "indexLoads": 1,
+            "faults": 9,
+            "evictions": 0,
+            "peakCachedPages": 9,
+            "peakCachedNodes": 2127,
+            "peakCachedDecodedBytes": 82921,
+            "cachedPages": 9,
+            "cachedNodes": 2127,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+            "manifestSha256": "b462eb808a08908ba3c7936e52f607fd90cc4ce4f000949e9c6108c482db5e00",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "lean_workbook_plus_54622",
+          "sourceIndexSha256": "0b128b2e4d02870a974f0f00684ea058eded20eed8f15f32e84872e4bca50d73",
+          "observations": 187,
+          "queryState": {
+            "indexLoads": 69,
+            "lookups": 188,
+            "found": 187,
+            "absent": 1,
+            "peakIndexBytes": 27701,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 24582
+          },
+          "sourceState": {
+            "pageLoads": 5,
+            "indexLoads": 1,
+            "faults": 5,
+            "evictions": 0,
+            "peakCachedPages": 5,
+            "peakCachedNodes": 1134,
+            "peakCachedDecodedBytes": 46445,
+            "cachedPages": 5,
+            "cachedNodes": 1134,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "0b128b2e4d02870a974f0f00684ea058eded20eed8f15f32e84872e4bca50d73",
+            "manifestSha256": "f2273950cf35388d9eb6b625cc20045f7ee17a474752171c24ea307bc05439af",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "lean_workbook_plus_61403",
+          "sourceIndexSha256": "a52afaeee83e9f155855d77dc8f906f03abf8da6038abde95c7dc6e104568459",
+          "observations": 54,
+          "queryState": {
+            "indexLoads": 9,
+            "lookups": 55,
+            "found": 54,
+            "absent": 1,
+            "peakIndexBytes": 24002,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 19355
+          },
+          "sourceState": {
+            "pageLoads": 3,
+            "indexLoads": 1,
+            "faults": 3,
+            "evictions": 0,
+            "peakCachedPages": 3,
+            "peakCachedNodes": 553,
+            "peakCachedDecodedBytes": 20477,
+            "cachedPages": 3,
+            "cachedNodes": 553,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "a52afaeee83e9f155855d77dc8f906f03abf8da6038abde95c7dc6e104568459",
+            "manifestSha256": "e84565e49f97a34b000c8f4dce2517b333c45d90bfa9ff4b86d6ad8b346877f4",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "lean_workbook_plus_6206",
+          "sourceIndexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+          "observations": 499,
+          "queryState": {
+            "indexLoads": 287,
+            "lookups": 500,
+            "found": 499,
+            "absent": 1,
+            "peakIndexBytes": 35140,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 27539
+          },
+          "sourceState": {
+            "pageLoads": 45,
+            "indexLoads": 25,
+            "faults": 45,
+            "evictions": 29,
+            "peakCachedPages": 16,
+            "peakCachedNodes": 3872,
+            "peakCachedDecodedBytes": 138406,
+            "cachedPages": 16,
+            "cachedNodes": 3872,
+            "indexPages": 4,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+            "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "lean_workbook_plus_62755",
+          "sourceIndexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+          "observations": 161,
+          "queryState": {
+            "indexLoads": 60,
+            "lookups": 162,
+            "found": 161,
+            "absent": 1,
+            "peakIndexBytes": 26762,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 19371
+          },
+          "sourceState": {
+            "pageLoads": 7,
+            "indexLoads": 1,
+            "faults": 7,
+            "evictions": 0,
+            "peakCachedPages": 7,
+            "peakCachedNodes": 1647,
+            "peakCachedDecodedBytes": 58596,
+            "cachedPages": 7,
+            "cachedNodes": 1647,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+            "manifestSha256": "6d632b791dbd94dafd3c5dc42681b47ebd36041957d997ccb3968de30882cad9",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "lean_workbook_plus_63081",
+          "sourceIndexSha256": "e8a13f9af176053ae5b0220fc5a1526de1e937ca2e8972035dcc70ee1da74217",
+          "observations": 99,
+          "queryState": {
+            "indexLoads": 26,
+            "lookups": 100,
+            "found": 99,
+            "absent": 1,
+            "peakIndexBytes": 25389,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 19042
+          },
+          "sourceState": {
+            "pageLoads": 4,
+            "indexLoads": 1,
+            "faults": 4,
+            "evictions": 0,
+            "peakCachedPages": 4,
+            "peakCachedNodes": 882,
+            "peakCachedDecodedBytes": 37216,
+            "cachedPages": 4,
+            "cachedNodes": 882,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "e8a13f9af176053ae5b0220fc5a1526de1e937ca2e8972035dcc70ee1da74217",
+            "manifestSha256": "5df253f5f8d87473b35517f7f843ed78cead47723c8dd0441854452326959942",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "lean_workbook_plus_68077",
+          "sourceIndexSha256": "501dba70283e270631eba54e85d5f16c3ca44cfaba068ea4f39a45b550997e62",
+          "observations": 208,
+          "queryState": {
+            "indexLoads": 76,
+            "lookups": 209,
+            "found": 208,
+            "absent": 1,
+            "peakIndexBytes": 28051,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 27088
+          },
+          "sourceState": {
+            "pageLoads": 5,
+            "indexLoads": 1,
+            "faults": 5,
+            "evictions": 0,
+            "peakCachedPages": 5,
+            "peakCachedNodes": 1278,
+            "peakCachedDecodedBytes": 50401,
+            "cachedPages": 5,
+            "cachedNodes": 1278,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "501dba70283e270631eba54e85d5f16c3ca44cfaba068ea4f39a45b550997e62",
+            "manifestSha256": "bcae60ecc4dc97be71fef2b0807651994a440ac8680125c8d190e986d5556edd",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "lean_workbook_plus_68616",
+          "sourceIndexSha256": "2f1f6523063a579076448d2a6caa42d496003a1be382692e8747442b1d9aef83",
+          "observations": 53,
+          "queryState": {
+            "indexLoads": 14,
+            "lookups": 54,
+            "found": 53,
+            "absent": 1,
+            "peakIndexBytes": 23819,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 18709
+          },
+          "sourceState": {
+            "pageLoads": 2,
+            "indexLoads": 1,
+            "faults": 2,
+            "evictions": 0,
+            "peakCachedPages": 2,
+            "peakCachedNodes": 362,
+            "peakCachedDecodedBytes": 17606,
+            "cachedPages": 2,
+            "cachedNodes": 362,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "2f1f6523063a579076448d2a6caa42d496003a1be382692e8747442b1d9aef83",
+            "manifestSha256": "dc56a8515c326c5df25fcbb0150310767b0ef288e8245f9266e2733e57e8e057",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "lean_workbook_plus_68794",
+          "sourceIndexSha256": "17a8502769796c60075b569ccf17b5bf99c47c12e6e1771705ae3eb540656f3b",
+          "observations": 106,
+          "queryState": {
+            "indexLoads": 30,
+            "lookups": 107,
+            "found": 106,
+            "absent": 1,
+            "peakIndexBytes": 25343,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 22313
+          },
+          "sourceState": {
+            "pageLoads": 4,
+            "indexLoads": 1,
+            "faults": 4,
+            "evictions": 0,
+            "peakCachedPages": 4,
+            "peakCachedNodes": 779,
+            "peakCachedDecodedBytes": 30613,
+            "cachedPages": 4,
+            "cachedNodes": 779,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "17a8502769796c60075b569ccf17b5bf99c47c12e6e1771705ae3eb540656f3b",
+            "manifestSha256": "f3f5e87eac51b89cd2039502fb4dd7581bc2f4b49c245595965faad3d93b961e",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "lean_workbook_plus_70240",
+          "sourceIndexSha256": "cbc4fcc25f7b3decb12c29ac4d90e9f01671a2bfcce24e948c9af0445a387290",
+          "observations": 90,
+          "queryState": {
+            "indexLoads": 24,
+            "lookups": 91,
+            "found": 90,
+            "absent": 1,
+            "peakIndexBytes": 24915,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 21909
+          },
+          "sourceState": {
+            "pageLoads": 4,
+            "indexLoads": 1,
+            "faults": 4,
+            "evictions": 0,
+            "peakCachedPages": 4,
+            "peakCachedNodes": 966,
+            "peakCachedDecodedBytes": 34993,
+            "cachedPages": 4,
+            "cachedNodes": 966,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "cbc4fcc25f7b3decb12c29ac4d90e9f01671a2bfcce24e948c9af0445a387290",
+            "manifestSha256": "38bca9e00856d285e988c6bb3535d9e371a5619d45915ae2abe469b18c382fbd",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "AtlasExamples.fan_holds",
+          "sourceIndexSha256": "2040eb9cf64dc81af995f034e42db0b252f6a309c8714b413dd2282b87f3f238",
+          "observations": 20,
+          "queryState": {
+            "indexLoads": 3,
+            "lookups": 21,
+            "found": 20,
+            "absent": 1,
+            "peakIndexBytes": 10035,
+            "indexPages": 3,
+            "indexLimit": 4,
+            "decodedIndexBytes": 10035
+          },
+          "sourceState": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 22,
+            "peakCachedDecodedBytes": 1933,
+            "cachedPages": 1,
+            "cachedNodes": 22,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "2040eb9cf64dc81af995f034e42db0b252f6a309c8714b413dd2282b87f3f238",
+            "manifestSha256": "b494a38b05261bbb15385bf60e00d5989452a8bcaf1eefbf2170c1a1487ff632",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "AtlasExamples.fork_holds",
+          "sourceIndexSha256": "c66d2df9daeb72b79edd55509d40a4c1161f4dd926505b6e73e83fb5fcb10eca",
+          "observations": 58,
+          "queryState": {
+            "indexLoads": 13,
+            "lookups": 59,
+            "found": 58,
+            "absent": 1,
+            "peakIndexBytes": 23969,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 21072
+          },
+          "sourceState": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 42,
+            "peakCachedDecodedBytes": 3546,
+            "cachedPages": 1,
+            "cachedNodes": 42,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "c66d2df9daeb72b79edd55509d40a4c1161f4dd926505b6e73e83fb5fcb10eca",
+            "manifestSha256": "2113493e383a327b570a3d35938b9d1f2120128a7f23220c991227edce554d55",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "AtlasExamples.ignored_premise",
+          "sourceIndexSha256": "ed5c5380f2e9300694f3bea8363f40a1989db506b3475ebd1b73669979d296f0",
+          "observations": 18,
+          "queryState": {
+            "indexLoads": 3,
+            "lookups": 19,
+            "found": 18,
+            "absent": 1,
+            "peakIndexBytes": 9116,
+            "indexPages": 3,
+            "indexLimit": 4,
+            "decodedIndexBytes": 9116
+          },
+          "sourceState": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 19,
+            "peakCachedDecodedBytes": 1800,
+            "cachedPages": 1,
+            "cachedNodes": 19,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "ed5c5380f2e9300694f3bea8363f40a1989db506b3475ebd1b73669979d296f0",
+            "manifestSha256": "83486c193f48016f40f55bad5c131baed7e642d874982a48a704fbd1bc3b2483",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "AtlasExamples.list_copy_eq",
+          "sourceIndexSha256": "97ee0e28cbe3e288952e262edb215dc953933e2b9b45f6d736471abff9266653",
+          "observations": 43,
+          "queryState": {
+            "indexLoads": 4,
+            "lookups": 44,
+            "found": 43,
+            "absent": 1,
+            "peakIndexBytes": 21234,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 21234
+          },
+          "sourceState": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 77,
+            "peakCachedDecodedBytes": 4591,
+            "cachedPages": 1,
+            "cachedNodes": 77,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "97ee0e28cbe3e288952e262edb215dc953933e2b9b45f6d736471abff9266653",
+            "manifestSha256": "f6a1178849f71df50b4f554b13c931e3e0f250a23d671104abaa9bbaa62c4b4e",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "AtlasExamples.nat_self",
+          "sourceIndexSha256": "d64ca32b7c3ab5022b1d861e835bc98804c26da94e880ba57a5159ee8ec6f079",
+          "observations": 18,
+          "queryState": {
+            "indexLoads": 3,
+            "lookups": 19,
+            "found": 18,
+            "absent": 1,
+            "peakIndexBytes": 9115,
+            "indexPages": 3,
+            "indexLimit": 4,
+            "decodedIndexBytes": 9115
+          },
+          "sourceState": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 35,
+            "peakCachedDecodedBytes": 2131,
+            "cachedPages": 1,
+            "cachedNodes": 35,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "d64ca32b7c3ab5022b1d861e835bc98804c26da94e880ba57a5159ee8ec6f079",
+            "manifestSha256": "c97967934e6531e94a3108a1f56c85d846ffc8db060c8608b9ccfbe4bd1d6a39",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "AtlasExamples.shared_induction_24",
+          "sourceIndexSha256": "15adae1388b989e66284b8faeb8b897eb1b03a1479cc34b1d0cc354c32e216a0",
+          "observations": 19,
+          "queryState": {
+            "indexLoads": 3,
+            "lookups": 20,
+            "found": 19,
+            "absent": 1,
+            "peakIndexBytes": 9896,
+            "indexPages": 3,
+            "indexLimit": 4,
+            "decodedIndexBytes": 9896
+          },
+          "sourceState": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 181,
+            "peakCachedDecodedBytes": 6057,
+            "cachedPages": 1,
+            "cachedNodes": 181,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "15adae1388b989e66284b8faeb8b897eb1b03a1479cc34b1d0cc354c32e216a0",
+            "manifestSha256": "072feba5f575cce0abd7ae79d57d232c2a5361b3e212ce8f00839765d5468829",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "AtlasExamples.shared_induction_64",
+          "sourceIndexSha256": "2ab1d320fb4c5ec7290b1bf1b64c4538cc65835717dee405192ce9b3daa30ca3",
+          "observations": 19,
+          "queryState": {
+            "indexLoads": 3,
+            "lookups": 20,
+            "found": 19,
+            "absent": 1,
+            "peakIndexBytes": 10326,
+            "indexPages": 3,
+            "indexLimit": 4,
+            "decodedIndexBytes": 10326
+          },
+          "sourceState": {
+            "pageLoads": 2,
+            "indexLoads": 1,
+            "faults": 2,
+            "evictions": 0,
+            "peakCachedPages": 2,
+            "peakCachedNodes": 421,
+            "peakCachedDecodedBytes": 15048,
+            "cachedPages": 2,
+            "cachedNodes": 421,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "2ab1d320fb4c5ec7290b1bf1b64c4538cc65835717dee405192ce9b3daa30ca3",
+            "manifestSha256": "f82a2de46fdcee7122573d7654b2416ba1380feecfb170bbfcea8606868e7177",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "AtlasExamples.shared_induction_8",
+          "sourceIndexSha256": "a2b9dd1177e142b70895702b62c2294d00ef3c955c7f4d3b49ae8359deeb8e74",
+          "observations": 19,
+          "queryState": {
+            "indexLoads": 3,
+            "lookups": 20,
+            "found": 19,
+            "absent": 1,
+            "peakIndexBytes": 9691,
+            "indexPages": 3,
+            "indexLimit": 4,
+            "decodedIndexBytes": 9691
+          },
+          "sourceState": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 85,
+            "peakCachedDecodedBytes": 3386,
+            "cachedPages": 1,
+            "cachedNodes": 85,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "a2b9dd1177e142b70895702b62c2294d00ef3c955c7f4d3b49ae8359deeb8e74",
+            "manifestSha256": "59ebaab7f165a38a895661b5965e570ce2e6ed776d29960f26235dcfb4c0df34",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        },
+        {
+          "name": "AtlasExamples.sized_copy_eq",
+          "sourceIndexSha256": "a110e9b09786e011585b98ddd08192ef580549b0ddf90ca8a7d7997d38482c3a",
+          "observations": 60,
+          "queryState": {
+            "indexLoads": 15,
+            "lookups": 61,
+            "found": 60,
+            "absent": 1,
+            "peakIndexBytes": 24067,
+            "indexPages": 4,
+            "indexLimit": 4,
+            "decodedIndexBytes": 22089
+          },
+          "sourceState": {
+            "pageLoads": 1,
+            "indexLoads": 1,
+            "faults": 1,
+            "evictions": 0,
+            "peakCachedPages": 1,
+            "peakCachedNodes": 131,
+            "peakCachedDecodedBytes": 7252,
+            "cachedPages": 1,
+            "cachedNodes": 131,
+            "indexPages": 1,
+            "pageLimit": 16,
+            "indexLimit": 4,
+            "nodeLimit": 4096,
+            "originalIndexSha256": "a110e9b09786e011585b98ddd08192ef580549b0ddf90ca8a7d7997d38482c3a",
+            "manifestSha256": "a43cc7fb1ac6c408b9a5e489cca01fd59636290d9a949ee55e82000a0e4ee0a1",
+            "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -81,7 +81,7 @@
     },
     {
       "file": "research/proof-atlas/recorded-union/README.md",
-      "sha256": "03bb935fc12893bddff442b89439779108a6ad1ef71afbc78ee0c8e0fe855b91"
+      "sha256": "fd0a7a25c5bad731c3906fb2081827da125a3eb6a3e78eb5163bd90368a8b213"
     },
     {
       "file": "research/proof-atlas/recorded-union/audit.json",
@@ -132,6 +132,10 @@
       "sha256": "4879e435dd0dc690d0457baac4a8aa8a459631ae2a4a79762bc1ad4b2f30c379"
     },
     {
+      "file": "scripts/build-proof-atlas-recorded-union-evidence.cjs",
+      "sha256": "ed0107e3ebea13dfe4214d10a55187b63293bf079a81f522f9ecceead3ee4832"
+    },
+    {
       "file": "scripts/build-proof-atlas-type-pages.cjs",
       "sha256": "9ff01ac132536fda1c1d7c1d606b70afe215e63ad50be2704adcabfda94da51b"
     },
@@ -171,5 +175,6 @@
       "file": "scripts/test-proof-atlas-type-query-pages.cjs",
       "sha256": "ed57eaf9881cae990dfb6750f0680ab64eba2818d4c7d0680f07df3cb9ae453e"
     }
-  ]
+  ],
+  "publicEvidenceBundle": "recorded-union-evidence.json"
 }

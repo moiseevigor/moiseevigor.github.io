@@ -463,7 +463,7 @@ The ordinary library construction diagrams also use the additional records. In t
 
 The complete and sparse occurrence readers share 5,568 recorded positions and 2,527 primitive constructions across 35 profiles, including recursion controls. All 448 overlapping observations agree on type syntax, role and ordered original context. At all 283 immediate application sites, six type components agree with the ordinary proof diagram. Selected constructions retain their original evidence owner and an alternative-observation ledger. Sparse navigation keeps one active type table; absent positions remain unrecorded. These are finite consistency checks, without new native execution or a comprehension claim.
 
-[Union rule and limits](/research/proof-atlas/recorded-union/README.md) · [Independent audit](/research/proof-atlas/recorded-union/audit.json) · [Verification index](/research/proof-atlas/recorded-union/verification-index.json)
+[Union rule and limits](/research/proof-atlas/recorded-union/README.md) · [Audit reports and verification index](/research/proof-atlas/recorded-union/recorded-union-evidence.json)
 
 
 [Protocol and limits](/research/proof-atlas/use-inputs/README.md) · [Independent audit](/research/proof-atlas/use-inputs/audit.json) · [Model](/public/js/proof-atlas-use-inputs.js)

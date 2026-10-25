@@ -69,7 +69,7 @@ It is not a portable kernel certificate, a new proof of the Riccati theorem,
 premise-necessity analysis, semantic compression or a comprehension result.
 The original mathematical source projects and tactic scripts remain private.
 Native execution and dependency-cache attribution retain the limits in the
-[immediate-site verification](../use-sites/native-verification.json).
+[immediate-site protocol](../use-sites/README.md).
 
 ## Reproduction
 
@@ -83,6 +83,7 @@ Native execution and dependency-cache attribution retain the limits in the
 
 Browser checks use a production build served at `ATLAS_ORIGIN`. Their evidence
 and the exact source/compiler-data identities are indexed in
-[verification-index.json](verification-index.json). Deliberately conflicting
+[public evidence bundle](recorded-union-evidence.json). Deliberately conflicting
 producer claims are in-memory rejection controls only; they are not published
-as native records.
+as native records. The public bundle contains the nine reports and their
+verification index; the separate JSON files are repository reproduction records.
