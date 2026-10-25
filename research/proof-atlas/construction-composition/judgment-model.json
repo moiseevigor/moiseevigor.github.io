@@ -1,0 +1,77 @@
+{
+  "status": "PASS",
+  "checkerSha256": "1912d364b56c18a3272ff17ce653ac632203116a05a5f22cef6ae5dee4370e78",
+  "moduleSha256": "c1ea59adfdac69cb67dccdac50a1f34b113a510e339abee08333c6f4ed30c5d6",
+  "observations": {
+    "status": "PASS",
+    "introductionComparison": {
+      "proof-first": {
+        "cuts": 1300,
+        "moreNonIntroductionProofRules": 99,
+        "sameNonIntroductionProofRules": 1201,
+        "fewerNonIntroductionProofRules": 0,
+        "baselineNonIntroductionProofRules": 610,
+        "groupedNonIntroductionProofRules": 766,
+        "groups": 296,
+        "members": 1990
+      },
+      "proof-focus": {
+        "cuts": 1300,
+        "moreNonIntroductionProofRules": 134,
+        "sameNonIntroductionProofRules": 1166,
+        "fewerNonIntroductionProofRules": 0,
+        "baselineNonIntroductionProofRules": 640,
+        "groupedNonIntroductionProofRules": 903,
+        "groups": 332,
+        "members": 2321
+      }
+    },
+    "groupedCuts": 2600,
+    "groupedBindings": 101,
+    "proofFocusComparison": {
+      "proofVertices": {
+        "baseline": 2705,
+        "focused": 2808,
+        "more": 34,
+        "same": 1266,
+        "fewer": 0
+      },
+      "proofRules": {
+        "baseline": 1425,
+        "focused": 1467,
+        "more": 20,
+        "same": 1280,
+        "fewer": 0
+      }
+    },
+    "foldedInputRegions": 555,
+    "foldedInputOccurrences": "35999",
+    "sources": 35,
+    "composedCuts": 1300,
+    "ruleVertices": {
+      "boundary": 4850,
+      "application": 998,
+      "introduction": 962,
+      "let": 234,
+      "recursor": 86
+    },
+    "recordedStageRules": {
+      "\u03a0 application": 2255,
+      "\u2200 elimination": 2893,
+      "\u2192 elimination": 363
+    },
+    "sourceRegions": {
+      "declaration-type": 1007,
+      "body-term-or-argument": 4770,
+      "type-region": 1353
+    },
+    "scopeLinks": 1112,
+    "negativeControls": 424,
+    "sourcePartAccounting": true,
+    "allApplicationArgumentsRetained": true,
+    "domainAndValueBeforeBinder": true,
+    "caseAndLetUseMetadataOnly": true,
+    "noResultPoolLoad": true,
+    "scope": "Finite compiled typing records and bounded source cuts; not all-occurrence rule coverage, article equivalence or comprehension evidence."
+  }
+}

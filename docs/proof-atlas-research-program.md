@@ -52,6 +52,8 @@ The [equality-transport square](/projects/proof-atlas/manual/equality-transport/
 
 [Paged transport delivery](/research/proof-atlas/equality-streaming/README.md) preserves those original native owners while checking one selected query through source pages. All 58 earlier scenes match complete-data results; an authored 40,985-node dependent-family control adds a source-lifting test beyond the retained-path limit. The control retains 13 source-path rows and a 256-row fetch cache. The selected computed graph remains fully resident.
 
+The [source-input collar](/projects/proof-atlas/manual/equality-transport/) connects recorded constructions through exact ordered arguments and bounded local-binding paths. Native checks cover 142 input ports at 71 transport cores; fifteen direct Riccati transport-to-transport uses are identified by occurrence. Authored controls distinguish conversion from source use, shared storage from occurrence, and separate lexical contexts. Nondependent binding flags remain explicit. This is a finite composition rule for two transport inputs, not a whole-proof semantic abstraction. [Protocol and checks](/research/proof-atlas/construction-composition/README.md).
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?

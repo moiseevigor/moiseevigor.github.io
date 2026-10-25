@@ -1,0 +1,33 @@
+{
+  "format": "ProofAtlasConstructionCompositionBrowser/1",
+  "status": "PASS",
+  "manualProfiles": 23,
+  "manualCores": 71,
+  "manualSourceSelections": 213,
+  "manualTypeSelections": 142,
+  "libraryCores": 47,
+  "librarySourceJumps": 94,
+  "computedSourceSelectionsPreserved": 47,
+  "bindingHopJumps": 3,
+  "axeAudits": 4,
+  "keyboardChecks": 2,
+  "releaseChecks": 1,
+  "staleSelectionChecks": 1,
+  "hashRefusals": 1,
+  "optionalComponentFailures": 1,
+  "wholeArchiveAttempts": 0,
+  "typingDependenciesReady": 97,
+  "builtFiles": {
+    "public/js/proof-atlas-construction-composition.js": "343e03a93ecbeda8a751b70661fa9bad7ef31d39679b5eb7fae43315813a9079",
+    "public/js/proof-atlas-construction-composition-pages.js": "8a2fc0f8b7411dc9e4cc3674401d2461750c529a8375470c4f7b254a0c1ec8ad",
+    "public/js/proof-atlas-construction-view.js": "987b33b2b6463fa5cdd29cf3aaa68f8214ba6aceae7cd8c31e062fbf45cf5507",
+    "public/css/proof-atlas-construction.css": "66e4183cf0bba73529c7599234a49776675fe6b317eef8f626cb50fec6c630ed",
+    "public/data/proof-atlas/construction-composition-manifest.js": "788f4dacf9b26da837aa452859c5e70ba1d6da6446be51a7cb24276fcad8a9c3",
+    "public/js/proof-atlas-equality-diagram.js": "42f28feef0c78ee285aef18686c9e4351fe0f25085d4eefe3c689256663457e9",
+    "public/js/proof-atlas-equality-view.js": "6f7d0bc0c681737e049d66ecb9bce5079346ab359d81f497de530489cb8311cc",
+    "public/js/proof-atlas-equality-source-view.js": "1b996bd39802b44dea1255f728e66771e4579e5b424930dc6a31dce40538b2fa",
+    "public/js/proof-atlas-paged-library.js": "666b17b99b822ec5e60a64b5507da87d9d5439674d09f2fd01009d1d95d19ba1",
+    "public/js/proof-atlas-library.js": "1b74c1ca9ae18e4798464c870ea43b997cff310e1a697ceea5b2249efc3877c0"
+  },
+  "checkerSha256": "e01aa0b88c207aa1f5fd5d412e5c0b1a67f3cba10f0c12643794a65b4cb97f37"
+}

@@ -505,6 +505,19 @@ compression, or measure comprehension.
 
 <section class="atlas-evidence-group" data-evidence-group="typing" markdown="1">
 
+<details class="atlas-evidence-entry" data-evidence-order="75" markdown="1">
+<summary>Typed source-input composition</summary>
+
+## Typed source-input composition
+
+A three-box collar connects a selected transport to its two original ordered inputs. Source occurrence paths and explicit local-binding values select the producer. Native observations check the producer in its original context, context extension and conversion to the consumer domain. The inventory contains 71 cores and 142 ports, including fifteen direct Riccati transport-to-transport uses. Authored controls reject substitution of a different proof occurrence despite kernel conversion, reject merging equal stored nodes at different routes, and retain incompatible branch contexts separately. Nondependent bindings preserve their flag and checked closed binding conversion.
+
+The selected collar loads one pair of native observations through authenticated pages. Source paths are capped independently at 4,096 rows and a 256-row fetch cache; computed type graphs for the pair load fully. This does not define semantic proof compression, complete Lean construction coverage or improved comprehension.
+
+[Visual rule](/projects/proof-atlas/manual/equality-transport/) · [Native protocol, controls and reproduction](/research/proof-atlas/construction-composition/README.md)
+
+</details>
+
 ## 3. Typed constructions
 
 <details class="atlas-evidence-entry" data-evidence-order="3" markdown="1">

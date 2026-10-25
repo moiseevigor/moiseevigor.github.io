@@ -149,6 +149,14 @@ on:
       - 'research/proof-atlas/method-parameters/**'
       - 'research/proof-atlas/equality-transport/**'
       - 'research/proof-atlas/equality-streaming/**'
+      - 'research/proof-atlas/construction-composition/**'
+      - 'public/data/proof-atlas/construction-composition*'
+      - 'public/data/proof-atlas/construction-composition/**'
+      - 'public/js/proof-atlas-construction-composition*.js'
+      - 'public/js/proof-atlas-construction-view.js'
+      - 'public/css/proof-atlas-construction.css'
+      - 'scripts/*proof-atlas-construction-composition*'
+      - 'scripts/serve-proof-atlas-checks.py'
       - 'public/data/proof-atlas/equality-streaming/**'
       - 'public/js/proof-atlas-equality-*.js'
       - 'public/css/proof-atlas-equality.css'
@@ -479,6 +487,14 @@ on:
       - 'research/proof-atlas/method-parameters/**'
       - 'research/proof-atlas/equality-transport/**'
       - 'research/proof-atlas/equality-streaming/**'
+      - 'research/proof-atlas/construction-composition/**'
+      - 'public/data/proof-atlas/construction-composition*'
+      - 'public/data/proof-atlas/construction-composition/**'
+      - 'public/js/proof-atlas-construction-composition*.js'
+      - 'public/js/proof-atlas-construction-view.js'
+      - 'public/css/proof-atlas-construction.css'
+      - 'scripts/*proof-atlas-construction-composition*'
+      - 'scripts/serve-proof-atlas-checks.py'
       - 'public/data/proof-atlas/equality-streaming/**'
       - 'public/js/proof-atlas-equality-*.js'
       - 'public/css/proof-atlas-equality.css'
@@ -614,7 +630,7 @@ jobs:
       - name: Build and serve the actual website with its global styles
         run: |
           bundle exec jekyll build --destination _site_production
-          python3 -m http.server 8833 --bind 127.0.0.1 --directory _site_production > /tmp/proof-atlas-server.log 2>&1 &
+          python3 scripts/serve-proof-atlas-checks.py --port 8833 --directory _site_production > /tmp/proof-atlas-server.log 2>&1 &
           sleep 2
       - name: Verify exact named-application navigation on production pages
         run: node scripts/test-proof-atlas-applications-browser.cjs
@@ -790,6 +806,9 @@ jobs:
           ATLAS_EQUALITY_STREAM_CHECK=1 node scripts/test-proof-atlas-equality-streaming.cjs
           node scripts/test-proof-atlas-equality-streaming-browser.cjs
           node scripts/build-proof-atlas-equality-streaming-evidence.cjs --check
+          ATLAS_COMPOSITION_CHECK=1 node scripts/test-proof-atlas-construction-composition.cjs
+          node scripts/test-proof-atlas-construction-composition-browser.cjs
+          node scripts/build-proof-atlas-construction-composition-evidence.cjs --check
           ATLAS_RECORDED_UNION_CHECK=1 node scripts/test-proof-atlas-recorded-union.cjs
           node scripts/build-proof-atlas-recorded-union-evidence.cjs --check
           node scripts/test-proof-atlas-recorded-union-browser.cjs

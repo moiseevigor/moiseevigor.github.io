@@ -1,0 +1,3306 @@
+{
+  "format": "ProofAtlasConstructionCompositionAudit/1",
+  "status": "PASS",
+  "profiles": 23,
+  "cores": 71,
+  "ports": 142,
+  "aliasQueries": 4,
+  "exactScenes": 71,
+  "recordRoundtrips": 23,
+  "sourceSelections": 426,
+  "computedSelections": 426,
+  "knownTransportUses": 20,
+  "riccatiDirectTransportUses": 15,
+  "bindingMediatedUses": 7,
+  "nondependentBindingUses": 5,
+  "contextInputs": 47,
+  "typeContextExtensions": 7,
+  "nativeAlternativeControls": [
+    {
+      "control": "parallel",
+      "anchor": {
+        "node": 28,
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ]
+        }
+      },
+      "contextCompatible": true,
+      "kernelTermConversion": true,
+      "kernelTypeConversion": true,
+      "sameStoredNode": false,
+      "sourceWitnessMatches": false
+    },
+    {
+      "control": "shared",
+      "anchor": {
+        "node": 27,
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ]
+        }
+      },
+      "contextCompatible": true,
+      "kernelTermConversion": true,
+      "kernelTypeConversion": true,
+      "sameStoredNode": true,
+      "sourceWitnessMatches": false
+    },
+    {
+      "control": "crossContext",
+      "anchor": {
+        "node": 5,
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            0,
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      "contextCompatible": false,
+      "kernelTermConversion": null,
+      "kernelTypeConversion": null,
+      "sameStoredNode": true,
+      "sourceWitnessMatches": false
+    }
+  ],
+  "sameNodeDifferentPorts": true,
+  "peakSourceRows": 73,
+  "peakSourcePageCache": 256,
+  "peakNativeCollarNodes": 69658,
+  "rejections": 802,
+  "releases": 71,
+  "wholeArchiveRequests": 0,
+  "rows": [
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 42,
+      "nativeNodes": 158,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 1,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 52,
+      "nativeNodes": 214,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 2,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 33,
+      "nativeNodes": 287,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 3,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          2,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 34,
+      "nativeNodes": 276,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 4,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          2,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 33,
+      "nativeNodes": 292,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 5,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          2,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 32,
+      "nativeNodes": 280,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 6,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          2,
+          1
+        ]
+      },
+      "sourceRows": 31,
+      "nativeNodes": 272,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 7,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          2
+        ]
+      },
+      "sourceRows": 30,
+      "nativeNodes": 268,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 8,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 62,
+      "nativeNodes": 158,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 9,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 61,
+      "nativeNodes": 158,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 10,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 72,
+      "nativeNodes": 239,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 11,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 43,
+      "nativeNodes": 70,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 12,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 44,
+      "nativeNodes": 72,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 13,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 43,
+      "nativeNodes": 78,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 14,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 71,
+      "nativeNodes": 241,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 15,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 49,
+      "nativeNodes": 158,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 16,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 48,
+      "nativeNodes": 158,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 17,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 50,
+      "nativeNodes": 110,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 18,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 43,
+      "nativeNodes": 110,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 19,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 42,
+      "nativeNodes": 112,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 20,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 51,
+      "nativeNodes": 158,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 21,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 50,
+      "nativeNodes": 172,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 22,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 51,
+      "nativeNodes": 220,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 23,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 50,
+      "nativeNodes": 172,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 24,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 49,
+      "nativeNodes": 172,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 25,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 56,
+      "nativeNodes": 318,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "binding-mediated-use",
+          "contextShift": 3,
+          "bindingFlags": [
+            true
+          ]
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 26,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 53,
+      "nativeNodes": 322,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 27,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 52,
+      "nativeNodes": 329,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 28,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 58,
+      "nativeNodes": 414,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 29,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 39,
+      "nativeNodes": 405,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 30,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 34,
+      "nativeNodes": 347,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 31,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 33,
+      "nativeNodes": 335,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 32,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1
+        ]
+      },
+      "sourceRows": 32,
+      "nativeNodes": 337,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "index": 33,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      "sourceRows": 31,
+      "nativeNodes": 319,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasTransportControls.simple",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 13,
+      "nativeNodes": 9,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasTransportControls.dependent",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 19,
+      "nativeNodes": 14,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 6,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasTransportControls.proofDependent",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 19,
+      "nativeNodes": 27,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 6,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasTransportControls.trailing",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "sourceRows": 16,
+      "nativeNodes": 13,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasTransportControls.same",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 11,
+      "nativeNodes": 7,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasTransportControls.reordered",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 19,
+      "nativeNodes": 27,
+      "links": [
+        {
+          "role": "value",
+          "slot": 6,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 5,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasTransportControls.reverse",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 13,
+      "nativeNodes": 9,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_20418",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "sourceRows": 34,
+      "nativeNodes": 379,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 6,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_4274",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 41,
+      "nativeNodes": 246,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "binding-mediated-use",
+          "contextShift": 5,
+          "bindingFlags": [
+            true
+          ]
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_4274",
+      "index": 1,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 40,
+      "nativeNodes": 246,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "binding-mediated-use",
+          "contextShift": 5,
+          "bindingFlags": [
+            true
+          ]
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_15068",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 73,
+      "nativeNodes": 320,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_15068",
+      "index": 1,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 53,
+      "nativeNodes": 320,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_19617",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          1
+        ]
+      },
+      "sourceRows": 28,
+      "nativeNodes": 43,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_19617",
+      "index": 1,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 37,
+      "nativeNodes": 272,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "binding-mediated-use",
+          "contextShift": 4,
+          "bindingFlags": [
+            true
+          ]
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_39831",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 40,
+      "nativeNodes": 195,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_39831",
+      "index": 1,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 39,
+      "nativeNodes": 195,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 38,
+      "nativeNodes": 118,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "index": 1,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 37,
+      "nativeNodes": 118,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "index": 2,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 37,
+      "nativeNodes": 118,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "index": 3,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 52,
+      "nativeNodes": 126,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasTransportStress.balanced",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1
+        ]
+      },
+      "sourceRows": 16,
+      "nativeNodes": 69658,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 6,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasComposeControls.inlineCalls",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 21,
+      "nativeNodes": 9,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasComposeControls.inlineCalls",
+      "index": 1,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 16,
+      "nativeNodes": 9,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasComposeControls.aliases",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 16,
+      "nativeNodes": 9,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasComposeControls.aliases",
+      "index": 1,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2
+        ]
+      },
+      "sourceRows": 23,
+      "nativeNodes": 10,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "binding-mediated-use",
+          "contextShift": 2,
+          "bindingFlags": [
+            false,
+            false
+          ]
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasComposeControls.weakening",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 16,
+      "nativeNodes": 9,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasComposeControls.weakening",
+      "index": 1,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          1
+        ]
+      },
+      "sourceRows": 24,
+      "nativeNodes": 10,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "binding-mediated-use",
+          "contextShift": 2,
+          "bindingFlags": [
+            false
+          ]
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasComposeControls.parallel",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1
+        ]
+      },
+      "sourceRows": 18,
+      "nativeNodes": 9,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasComposeControls.parallel",
+      "index": 1,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 25,
+      "nativeNodes": 9,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasComposeControls.parallel",
+      "index": 2,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 18,
+      "nativeNodes": 9,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasComposeControls.shared",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1
+        ]
+      },
+      "sourceRows": 17,
+      "nativeNodes": 9,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasComposeControls.shared",
+      "index": 1,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 23,
+      "nativeNodes": 9,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasComposeControls.shared",
+      "index": 2,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 17,
+      "nativeNodes": 9,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasComposeControls.crossContext",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 15,
+      "nativeNodes": 9,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasComposeControls.crossContext",
+      "index": 1,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "sourceRows": 16,
+      "nativeNodes": 9,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 3,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasComposeControls.samePorts",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": []
+      },
+      "sourceRows": 13,
+      "nativeNodes": 50,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        },
+        {
+          "role": "equality",
+          "slot": 6,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    },
+    {
+      "name": "AtlasComposeControls.nondepValue",
+      "index": 0,
+      "core": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          2
+        ]
+      },
+      "sourceRows": 24,
+      "nativeNodes": 41,
+      "links": [
+        {
+          "role": "value",
+          "slot": 4,
+          "relation": "binding-mediated-use",
+          "contextShift": 1,
+          "bindingFlags": [
+            true
+          ]
+        },
+        {
+          "role": "equality",
+          "slot": 6,
+          "relation": "direct-source-use",
+          "contextShift": 0,
+          "bindingFlags": []
+        }
+      ]
+    }
+  ],
+  "definitionLimitControl": {
+    "hops": 16,
+    "boundary": true,
+    "syntheticStructuralOnly": true
+  },
+  "scope": "Finite typed source-use composition: 71 selected collars, two original application ports each. Source argument paths and binding values choose edges; native type/term conversion and shared storage cannot choose them. No tactic reconstruction, semantic compression, total-heap or completeness claim.",
+  "checkerSha256": "5c18a193f6a2dbeb24054524a0b93abed798b5f0ab0482d771876b1a110e8326",
+  "files": [
+    {
+      "file": "public/js/proof-atlas-construction-composition.js",
+      "sha256": "343e03a93ecbeda8a751b70661fa9bad7ef31d39679b5eb7fae43315813a9079"
+    },
+    {
+      "file": "public/js/proof-atlas-construction-composition-pages.js",
+      "sha256": "8a2fc0f8b7411dc9e4cc3674401d2461750c529a8375470c4f7b254a0c1ec8ad"
+    },
+    {
+      "file": "public/js/proof-atlas-construction-view.js",
+      "sha256": "987b33b2b6463fa5cdd29cf3aaa68f8214ba6aceae7cd8c31e062fbf45cf5507"
+    },
+    {
+      "file": "public/css/proof-atlas-construction.css",
+      "sha256": "66e4183cf0bba73529c7599234a49776675fe6b317eef8f626cb50fec6c630ed"
+    },
+    {
+      "file": "public/js/proof-atlas-equality-diagram.js",
+      "sha256": "42f28feef0c78ee285aef18686c9e4351fe0f25085d4eefe3c689256663457e9"
+    },
+    {
+      "file": "public/js/proof-atlas-equality-source-view.js",
+      "sha256": "1b996bd39802b44dea1255f728e66771e4579e5b424930dc6a31dce40538b2fa"
+    },
+    {
+      "file": "public/js/proof-atlas-equality-view.js",
+      "sha256": "6f7d0bc0c681737e049d66ecb9bce5079346ab359d81f497de530489cb8311cc"
+    },
+    {
+      "file": "public/data/proof-atlas/construction-composition-manifest.js",
+      "sha256": "788f4dacf9b26da837aa452859c5e70ba1d6da6446be51a7cb24276fcad8a9c3"
+    },
+    {
+      "file": "research/proof-atlas/construction-composition/publish.cjs",
+      "sha256": "0ce26bfd4d56389da4952b8148b05ed7880e1a6fa4fd4ce324176cc4cceab643"
+    }
+  ]
+}
