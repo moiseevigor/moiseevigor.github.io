@@ -1,0 +1,66 @@
+{
+  "format": "ProofAtlasConstructionUnionBrowserAudit/1",
+  "status": "PASS",
+  "checkerSha256": "b8b6d1a068ab22675fc752d4bc2b42ec4d42962f0cf280c879a7b338c0bc4378",
+  "selectorSha256": "80313ef81560b3e1d9cb0602b75f97d0b63c06cc970ca471e1597402d846ce55",
+  "examples": [
+    {
+      "mode": "complete",
+      "name": "JacobiData.slope_bound_abs",
+      "node": 2333,
+      "rule": "application",
+      "stages": 6,
+      "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520"
+    },
+    {
+      "mode": "paged",
+      "name": "JacobiData.slope_bound_abs",
+      "node": 2333,
+      "rule": "application",
+      "stages": 6,
+      "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520"
+    },
+    {
+      "mode": "complete",
+      "name": "JacobiData.slope_bound_abs",
+      "node": 1298,
+      "rule": "application",
+      "stages": 5,
+      "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520"
+    },
+    {
+      "mode": "paged",
+      "name": "JacobiData.slope_bound_abs",
+      "node": 1298,
+      "rule": "application",
+      "stages": 5,
+      "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520"
+    },
+    {
+      "mode": "complete",
+      "name": "lean_workbook_plus_43987",
+      "node": 78,
+      "rule": "application",
+      "stages": 1,
+      "evidenceSha256": "0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77"
+    },
+    {
+      "mode": "paged",
+      "name": "lean_workbook_plus_43987",
+      "node": 78,
+      "rule": "application",
+      "stages": 1,
+      "evidenceSha256": "0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77"
+    }
+  ],
+  "completeAndPagedScenesEqual": true,
+  "exactKeyboardJumps": 6,
+  "accessibilityAudits": 8,
+  "dependentHypothesisApplication": true,
+  "valueArgumentRemainsValue": true,
+  "articleThemeTokens": true,
+  "rejectedEvidenceExplicit": true,
+  "pageErrors": [],
+  "screenshots": "/private/tmp/atlas-construction-union",
+  "scope": "Ordinary library construction diagrams for two Riccati consumers and a proof-body universal-hypothesis application; not all views or comprehension."
+}

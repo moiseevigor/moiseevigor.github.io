@@ -455,6 +455,11 @@ Riccati's original compiled graph is matched field for field after privately rec
 
 [Immediate-site protocol](/research/proof-atlas/use-sites/README.md) · [Native verification](/research/proof-atlas/use-sites/native-verification.json) · [Current finite audit](/research/proof-atlas/use-sites/audit.json)
 
+The ordinary library construction diagrams also use the additional records. In the same 283-site subset, 279 application frames become available and four earlier replay frames are retained. Across 849 complete/paged cuts, source partitions, original contexts and all six application-type components agree. Fifteen variable-headed calls include declaration types, body type regions and proof/value applications; those regions remain distinct. The separate occurrence-window indexes are not included in this integration.
+
+[Construction integration and limits](/research/proof-atlas/construction-union/README.md) · [Cut audit](/research/proof-atlas/construction-union/audit.json)
+
+
 [Protocol and limits](/research/proof-atlas/use-inputs/README.md) · [Independent audit](/research/proof-atlas/use-inputs/audit.json) · [Model](/public/js/proof-atlas-use-inputs.js)
 
 

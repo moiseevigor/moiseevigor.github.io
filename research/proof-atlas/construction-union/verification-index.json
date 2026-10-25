@@ -1,0 +1,39 @@
+{
+  "format": "ProofAtlasConstructionUnionVerificationIndex/1",
+  "status": "PASS",
+  "baseCommit": "2dbfe23f",
+  "release": "Local research iteration; no push, deployment or new blog post",
+  "records": {
+    "README.md": "ec038af3e15602edc508a96f2b859d37efcd4ea92a40bee35829d78c5965fcfd",
+    "audit.json": "c516de021d6db7963c1857f0d6bee3d472c92a89989111676d9e5b01121858de",
+    "browser-audit.json": "b16734d4db3849bc0327ff52b3a9ffb7fad75653e9d3ec73e6f767cf44215ceb",
+    "regressions.json": "608d5e1e93b68e9a027693fd4ef3467d79a81846e1421a73c0799da80e1e70c2"
+  },
+  "sourceFiles": {
+    "public/js/proof-atlas-native-selection.js": "80313ef81560b3e1d9cb0602b75f97d0b63c06cc970ca471e1597402d846ce55",
+    "public/js/proof-atlas-library.js": "15e062e48a19a223058f1f8b219ebf21de551f6ff4f5e5ae269e3305ce3eb0fe",
+    "public/js/proof-atlas-paged-library.js": "0d4295c2cb49aa1eb8f374016b19b5e3287c350623a8fd83f95c3440d9bd8672",
+    "public/js/proof-atlas-sync.js": "77304fc5e345de90fe491df2e9bf2b1cb8f14e9e18551d8a67b53c6da91e5d10",
+    "public/css/proof-atlas-theme.css": "caa888a61792c7c6b276f9fb7d2ed0b0f8ed56d493ca7a79af6f917d8cc5e19e",
+    "projects/proof-atlas/library/index.html": "715e1668a07e2a1b85b6eaa00511141e52f927f436614bf4c040ab406c3fbd0e",
+    "projects/proof-atlas/manual/index.html": "17ebfd7a8948086af7c6cafeaafde6f1d343261d78430a1b09756d57f839a487",
+    "_includes/proof-atlas-reading-tools.html": "2aa3820e0e200baf7633207e508ec2d78d58845ce28260902f5ebd971e1756fc",
+    "_layouts/default.html": "b17febf938936c18d7cfc08d0f52b9ead8a1f10a5837371682ab500c6fc99f74",
+    "docs/proof-atlas-evidence.md": "afa6fe9f808ad1e246800e3f928fe6e8768641ca8a75efc4080ee292e8e9226a",
+    ".github/workflows/proof-atlas-browser.yml": "48190d2182d692956d9fca730e04e88a7e5fe1ab5e78f3934e7564aa5d5b75cf",
+    "scripts/proof-atlas-judgment-fixtures.cjs": "f7a95d121c746a435b3fece77a533f6af772a6a32595afe0df675403a2d88a8c",
+    "scripts/test-proof-atlas-construction-union.cjs": "5199cf25e648812970c6f8626649b4380c553a06a05ad6fdacb6b9dcf82eb435",
+    "scripts/test-proof-atlas-construction-union-browser.cjs": "b8b6d1a068ab22675fc752d4bc2b42ec4d42962f0cf280c879a7b338c0bc4378",
+    "scripts/test-proof-atlas-source-pages-browser.cjs": "4fbb706d8970a7e95624452a7ca9f97f09fb7cb03736631f040f412977e81a46",
+    "scripts/test-proof-atlas-judgment-geometry-browser.cjs": "f5e2588fe4a3f43fdbdfee8467c7079c6e0d0853cb7549fa6eaf7ee9c94396de"
+  },
+  "builtAssets": {
+    "public/js/proof-atlas-native-selection.js": "80313ef81560b3e1d9cb0602b75f97d0b63c06cc970ca471e1597402d846ce55",
+    "public/js/proof-atlas-library.js": "15e062e48a19a223058f1f8b219ebf21de551f6ff4f5e5ae269e3305ce3eb0fe",
+    "public/js/proof-atlas-paged-library.js": "0d4295c2cb49aa1eb8f374016b19b5e3287c350623a8fd83f95c3440d9bd8672",
+    "public/js/proof-atlas-sync.js": "77304fc5e345de90fe491df2e9bf2b1cb8f14e9e18551d8a67b53c6da91e5d10",
+    "public/css/proof-atlas-theme.css": "caa888a61792c7c6b276f9fb7d2ed0b0f8ed56d493ca7a79af6f917d8cc5e19e"
+  },
+  "reusedNativeVerificationSha256": "adb0657605fc74ab083c9242ec1a35b4d15fd11ee659564b9c3ccbb301f542e7",
+  "scope": "Ordinary library diagrams and article application. The separate occurrence-window reader still requires an evidence-index union. The general research goal remains active."
+}

@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "productionBuild": "docker compose production build; final static assets match source",
+  "checks": [
+    {
+      "script": "scripts/test-proof-atlas-construction-union.cjs",
+      "status": "PASS",
+      "mode": "frozen report comparison",
+      "profiles": 22,
+      "applicationSites": 283,
+      "newFrames": 279,
+      "pairedCuts": 849,
+      "contextChecks": 5709,
+      "overlappingTypes": 65,
+      "negativeControls": 12
+    },
+    {
+      "script": "scripts/test-proof-atlas-construction-union-browser.cjs",
+      "status": "PASS",
+      "completePagedExamples": 3,
+      "keyboardSourceJumps": 6,
+      "accessibilityAudits": 8,
+      "themeTokens": true,
+      "rejectedEvidenceExplicit": true
+    },
+    {
+      "script": "scripts/test-proof-atlas-source-pages-browser.cjs",
+      "status": "PASS",
+      "scope": "Broader Riccati cut, source navigation and exact complete-reference agreement; isolated rerun passed after an initial concurrent-run timeout.",
+      "accessibilityAudits": 4
+    },
+    {
+      "script": "scripts/test-proof-atlas-use-inputs-browser.cjs",
+      "status": "PASS",
+      "articleSynchronization": true,
+      "accessibilityAudits": 8
+    },
+    {
+      "script": "scripts/test-proof-atlas-judgment-geometry-browser.cjs",
+      "status": "PASS",
+      "scope": "Primitive controls explicitly select individual rules/proof-first; source-fallback format 7. Tests local inspection, context/telescope controls, let/case premises, source jumps, stale loads and the article synchronizer.",
+      "accessibilityAudits": 4
+    },
+    {
+      "script": "scripts/test-proof-atlas-scientific-theme-browser.cjs",
+      "status": "PASS",
+      "responsiveStates": 34,
+      "accessibilityAudits": 20,
+      "renderedMathFigures": 9,
+      "preservedAnchors": 75
+    },
+    {
+      "script": "scripts/test-proof-atlas-use-navigation.cjs",
+      "status": "PASS",
+      "mode": "unchanged baseline comparison"
+    },
+    {
+      "script": "scripts/test-proof-atlas-use-inputs.cjs",
+      "status": "PASS",
+      "mode": "unchanged baseline comparison"
+    },
+    {
+      "script": "scripts/test-proof-atlas-use-sites.cjs",
+      "status": "PASS",
+      "mode": "unchanged immediate-input audit comparison"
+    }
+  ],
+  "scope": "Compiled-evidence composition and software behavior only. No new native extraction, all-position coverage, semantic equivalence or comprehension result."
+}

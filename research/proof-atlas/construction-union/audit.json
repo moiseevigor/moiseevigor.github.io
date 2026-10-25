@@ -1,0 +1,4808 @@
+{
+  "format": "ProofAtlasConstructionUnionAudit/1",
+  "status": "PASS",
+  "checkerSha256": "5199cf25e648812970c6f8626649b4380c553a06a05ad6fdacb6b9dcf82eb435",
+  "selectorSha256": "80313ef81560b3e1d9cb0602b75f97d0b63c06cc970ca471e1597402d846ce55",
+  "nativeVerificationSha256": "adb0657605fc74ab083c9242ec1a35b4d15fd11ee659564b9c3ccbb301f542e7",
+  "profiles": 22,
+  "sites": 283,
+  "newApplicationFrames": 279,
+  "nonconstantHeads": 15,
+  "nonconstantRegions": {
+    "declaration-type": 3,
+    "body-term-or-argument": 6,
+    "type-region": 6
+  },
+  "fullPagedComparisons": 849,
+  "contextChecks": 5709,
+  "typeOverlapChecks": 65,
+  "negativeControls": 12,
+  "examples": [
+    {
+      "kind": "riccati-hypothesis-consumer",
+      "edition": "published-15",
+      "name": "JacobiData.slope_bound_abs",
+      "source": {
+        "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+        "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7"
+      },
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ]
+      },
+      "node": 2333,
+      "head": "abs_of_pos",
+      "beforeRule": "kernel-structure",
+      "scene": {
+        "format": "ProofAtlasJudgmentScene/7",
+        "source": {
+          "name": "JacobiData.slope_bound_abs",
+          "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+          "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7"
+        },
+        "root": {
+          "node": 2333,
+          "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1
+            ]
+          },
+          "namespace": "source-expression"
+        },
+        "budget": 1,
+        "depthLimit": 0,
+        "policy": "proof-first",
+        "sourceFallback": true,
+        "nodes": [
+          {
+            "id": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg",
+            "node": 2333,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                1,
+                1,
+                0,
+                1,
+                1,
+                1
+              ]
+            },
+            "kind": "app",
+            "region": "body-term-or-argument",
+            "context": [
+              {
+                "node": 3250,
+                "kind": "lam",
+                "path": "root.value",
+                "route": {
+                  "root": 1,
+                  "slots": []
+                }
+              },
+              {
+                "node": 3249,
+                "kind": "lam",
+                "path": "root.value.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1
+                  ]
+                }
+              },
+              {
+                "node": 3248,
+                "kind": "lam",
+                "path": "root.value.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "node": 3247,
+                "kind": "lam",
+                "path": "root.value.body.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "node": 3246,
+                "kind": "lam",
+                "path": "root.value.body.body.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "node": 3245,
+                "kind": "lam",
+                "path": "root.value.body.body.body.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "node": 3244,
+                "kind": "letE",
+                "path": "root.value.body.body.body.body.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "node": 3243,
+                "kind": "letE",
+                "path": "root.value.body.body.body.body.body.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2
+                  ]
+                }
+              },
+              {
+                "node": 3242,
+                "kind": "letE",
+                "path": "root.value.body.body.body.body.body.body.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2
+                  ]
+                }
+              },
+              {
+                "node": 3241,
+                "kind": "letE",
+                "path": "root.value.body.body.body.body.body.body.body.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2
+                  ]
+                }
+              },
+              {
+                "node": 3240,
+                "kind": "letE",
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2
+                  ]
+                }
+              },
+              {
+                "node": 3239,
+                "kind": "letE",
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2
+                  ]
+                }
+              }
+            ],
+            "role": "proof",
+            "typeText": "|J.d p| = J.d p",
+            "typeReference": {
+              "namespace": "type-expression",
+              "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+              "file": "/public/data/proof-atlas/use-site-types/7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520.json.gz",
+              "recording": {
+                "kind": "cache-restored-source-recompile/1",
+                "originalProofModuleImported": true,
+                "sourceModuleSha256": "5d43e49880bc35c48d6e6ea7d0378e2042a6d46b8820a4f98d162d87111290da",
+                "dependencyRecovery": {
+                  "kind": "mathlib-cache-attribution/1",
+                  "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+                  "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+                  "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+                  "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+                  "artifactCount": 43450,
+                  "allBinaryHashesVerified": true,
+                  "originalGitCheckoutsVerified": false,
+                  "independentlyRebuilt": false
+                }
+              },
+              "query": {
+                "node": 2333,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              "graphRoot": 521
+            },
+            "rule": "application",
+            "label": "Proof application",
+            "retainedOccurrences": "6",
+            "expanded": "25",
+            "ports": [
+              {
+                "label": "Function head",
+                "node": 2327,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg.fn.fn.fn.fn.fn.fn",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "expanded": "1",
+                "field": "head",
+                "scopeExtension": 0,
+                "child": null,
+                "frontier": true,
+                "role": "proof",
+                "typeText": "∀ {α : Type} [inst : Lattice α] [inst_1 : AddGroup α] {a : α} [AddLeftMono α], 0 < a → |a| = a",
+                "typeReference": {
+                  "namespace": "type-expression",
+                  "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+                  "file": "/public/data/proof-atlas/use-site-types/7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520.json.gz",
+                  "recording": {
+                    "kind": "cache-restored-source-recompile/1",
+                    "originalProofModuleImported": true,
+                    "sourceModuleSha256": "5d43e49880bc35c48d6e6ea7d0378e2042a6d46b8820a4f98d162d87111290da",
+                    "dependencyRecovery": {
+                      "kind": "mathlib-cache-attribution/1",
+                      "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+                      "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+                      "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+                      "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+                      "artifactCount": 43450,
+                      "allBinaryHashesVerified": true,
+                      "originalGitCheckoutsVerified": false,
+                      "independentlyRebuilt": false
+                    }
+                  },
+                  "query": {
+                    "node": 2333,
+                    "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg",
+                    "route": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        1,
+                        1,
+                        0,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "graphRoot": 642,
+                  "component": {
+                    "part": "application-head"
+                  },
+                  "relation": "recorded-parent-premise"
+                }
+              },
+              {
+                "label": "Argument 1",
+                "node": 1,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg.fn.fn.fn.fn.fn.arg",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                },
+                "expanded": "1",
+                "field": "arg1",
+                "slot": 1,
+                "binderInfo": "implicit",
+                "scopeExtension": 0,
+                "domainRoot": 331,
+                "domainText": "Type",
+                "kernelDomainConversion": "PASS",
+                "child": null,
+                "frontier": true,
+                "role": "type",
+                "typeText": "Type",
+                "typeReference": {
+                  "namespace": "type-expression",
+                  "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+                  "file": "/public/data/proof-atlas/use-site-types/7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520.json.gz",
+                  "recording": {
+                    "kind": "cache-restored-source-recompile/1",
+                    "originalProofModuleImported": true,
+                    "sourceModuleSha256": "5d43e49880bc35c48d6e6ea7d0378e2042a6d46b8820a4f98d162d87111290da",
+                    "dependencyRecovery": {
+                      "kind": "mathlib-cache-attribution/1",
+                      "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+                      "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+                      "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+                      "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+                      "artifactCount": 43450,
+                      "allBinaryHashesVerified": true,
+                      "originalGitCheckoutsVerified": false,
+                      "independentlyRebuilt": false
+                    }
+                  },
+                  "query": {
+                    "node": 2333,
+                    "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg",
+                    "route": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        1,
+                        1,
+                        0,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "graphRoot": 331,
+                  "component": {
+                    "part": "application-argument",
+                    "slot": 1
+                  },
+                  "relation": "recorded-parent-premise"
+                }
+              },
+              {
+                "label": "Argument 2",
+                "node": 117,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg.fn.fn.fn.fn.arg",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                },
+                "expanded": "1",
+                "field": "arg2",
+                "slot": 2,
+                "binderInfo": "instImplicit",
+                "scopeExtension": 0,
+                "domainRoot": 523,
+                "domainText": "Lattice ℝ",
+                "kernelDomainConversion": "PASS",
+                "child": null,
+                "frontier": true,
+                "role": "value",
+                "typeText": "Lattice ℝ",
+                "typeReference": {
+                  "namespace": "type-expression",
+                  "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+                  "file": "/public/data/proof-atlas/use-site-types/7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520.json.gz",
+                  "recording": {
+                    "kind": "cache-restored-source-recompile/1",
+                    "originalProofModuleImported": true,
+                    "sourceModuleSha256": "5d43e49880bc35c48d6e6ea7d0378e2042a6d46b8820a4f98d162d87111290da",
+                    "dependencyRecovery": {
+                      "kind": "mathlib-cache-attribution/1",
+                      "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+                      "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+                      "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+                      "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+                      "artifactCount": 43450,
+                      "allBinaryHashesVerified": true,
+                      "originalGitCheckoutsVerified": false,
+                      "independentlyRebuilt": false
+                    }
+                  },
+                  "query": {
+                    "node": 2333,
+                    "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg",
+                    "route": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        1,
+                        1,
+                        0,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "graphRoot": 523,
+                  "component": {
+                    "part": "application-argument",
+                    "slot": 2
+                  },
+                  "relation": "recorded-parent-premise"
+                }
+              },
+              {
+                "label": "Argument 3",
+                "node": 119,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg.fn.fn.fn.arg",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                },
+                "expanded": "1",
+                "field": "arg3",
+                "slot": 3,
+                "binderInfo": "instImplicit",
+                "scopeExtension": 0,
+                "domainRoot": 525,
+                "domainText": "AddGroup ℝ",
+                "kernelDomainConversion": "PASS",
+                "child": null,
+                "frontier": true,
+                "role": "value",
+                "typeText": "AddGroup ℝ",
+                "typeReference": {
+                  "namespace": "type-expression",
+                  "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+                  "file": "/public/data/proof-atlas/use-site-types/7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520.json.gz",
+                  "recording": {
+                    "kind": "cache-restored-source-recompile/1",
+                    "originalProofModuleImported": true,
+                    "sourceModuleSha256": "5d43e49880bc35c48d6e6ea7d0378e2042a6d46b8820a4f98d162d87111290da",
+                    "dependencyRecovery": {
+                      "kind": "mathlib-cache-attribution/1",
+                      "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+                      "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+                      "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+                      "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+                      "artifactCount": 43450,
+                      "allBinaryHashesVerified": true,
+                      "originalGitCheckoutsVerified": false,
+                      "independentlyRebuilt": false
+                    }
+                  },
+                  "query": {
+                    "node": 2333,
+                    "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg",
+                    "route": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        1,
+                        1,
+                        0,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "graphRoot": 525,
+                  "component": {
+                    "part": "application-argument",
+                    "slot": 3
+                  },
+                  "relation": "recorded-parent-premise"
+                }
+              },
+              {
+                "label": "Argument 4",
+                "node": 2209,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg.fn.fn.arg",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    0,
+                    0,
+                    1
+                  ]
+                },
+                "expanded": "5",
+                "field": "arg4",
+                "slot": 4,
+                "binderInfo": "implicit",
+                "scopeExtension": 0,
+                "domainRoot": 0,
+                "domainText": "ℝ",
+                "kernelDomainConversion": "PASS",
+                "child": null,
+                "frontier": true,
+                "role": "value",
+                "typeText": "ℝ",
+                "typeReference": {
+                  "namespace": "type-expression",
+                  "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+                  "file": "/public/data/proof-atlas/use-site-types/7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520.json.gz",
+                  "recording": {
+                    "kind": "cache-restored-source-recompile/1",
+                    "originalProofModuleImported": true,
+                    "sourceModuleSha256": "5d43e49880bc35c48d6e6ea7d0378e2042a6d46b8820a4f98d162d87111290da",
+                    "dependencyRecovery": {
+                      "kind": "mathlib-cache-attribution/1",
+                      "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+                      "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+                      "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+                      "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+                      "artifactCount": 43450,
+                      "allBinaryHashesVerified": true,
+                      "originalGitCheckoutsVerified": false,
+                      "independentlyRebuilt": false
+                    }
+                  },
+                  "query": {
+                    "node": 2333,
+                    "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg",
+                    "route": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        1,
+                        1,
+                        0,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "graphRoot": 0,
+                  "component": {
+                    "part": "application-argument",
+                    "slot": 4
+                  },
+                  "relation": "recorded-parent-premise"
+                }
+              },
+              {
+                "label": "Argument 5",
+                "node": 266,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg.fn.arg",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    0,
+                    1
+                  ]
+                },
+                "expanded": "9",
+                "field": "arg5",
+                "slot": 5,
+                "binderInfo": "instImplicit",
+                "scopeExtension": 0,
+                "domainRoot": 563,
+                "domainText": "AddLeftMono ℝ",
+                "kernelDomainConversion": "PASS",
+                "child": null,
+                "frontier": true,
+                "role": "proof",
+                "typeText": "AddLeftMono ℝ",
+                "typeReference": {
+                  "namespace": "type-expression",
+                  "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+                  "file": "/public/data/proof-atlas/use-site-types/7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520.json.gz",
+                  "recording": {
+                    "kind": "cache-restored-source-recompile/1",
+                    "originalProofModuleImported": true,
+                    "sourceModuleSha256": "5d43e49880bc35c48d6e6ea7d0378e2042a6d46b8820a4f98d162d87111290da",
+                    "dependencyRecovery": {
+                      "kind": "mathlib-cache-attribution/1",
+                      "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+                      "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+                      "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+                      "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+                      "artifactCount": 43450,
+                      "allBinaryHashesVerified": true,
+                      "originalGitCheckoutsVerified": false,
+                      "independentlyRebuilt": false
+                    }
+                  },
+                  "query": {
+                    "node": 2333,
+                    "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg",
+                    "route": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        1,
+                        1,
+                        0,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "graphRoot": 546,
+                  "component": {
+                    "part": "application-argument",
+                    "slot": 5
+                  },
+                  "relation": "recorded-parent-premise"
+                }
+              },
+              {
+                "label": "Argument 6",
+                "node": 184,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg.arg",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "expanded": "1",
+                "field": "arg6",
+                "slot": 6,
+                "binderInfo": "default",
+                "scopeExtension": 0,
+                "domainRoot": 581,
+                "domainText": "0 < J.d p",
+                "kernelDomainConversion": "PASS",
+                "child": null,
+                "frontier": true,
+                "role": "proof",
+                "typeText": "0 < J.d p",
+                "typeReference": {
+                  "namespace": "type-expression",
+                  "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+                  "file": "/public/data/proof-atlas/use-site-types/7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520.json.gz",
+                  "recording": {
+                    "kind": "cache-restored-source-recompile/1",
+                    "originalProofModuleImported": true,
+                    "sourceModuleSha256": "5d43e49880bc35c48d6e6ea7d0378e2042a6d46b8820a4f98d162d87111290da",
+                    "dependencyRecovery": {
+                      "kind": "mathlib-cache-attribution/1",
+                      "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+                      "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+                      "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+                      "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+                      "artifactCount": 43450,
+                      "allBinaryHashesVerified": true,
+                      "originalGitCheckoutsVerified": false,
+                      "independentlyRebuilt": false
+                    }
+                  },
+                  "query": {
+                    "node": 2333,
+                    "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg",
+                    "route": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        1,
+                        1,
+                        0,
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  },
+                  "graphRoot": 38,
+                  "component": {
+                    "part": "application-argument",
+                    "slot": 6
+                  },
+                  "relation": "recorded-parent-premise"
+                }
+              }
+            ],
+            "stages": [
+              {
+                "slot": 1,
+                "node": 2328,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg.fn.fn.fn.fn.fn",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rule": "∀ elimination",
+                "functionRole": "proof",
+                "argumentRole": "type",
+                "resultRole": "proof",
+                "binderInfo": "implicit",
+                "bodyUsesBinder": true,
+                "beforeRoot": 642,
+                "piRoot": 642,
+                "actualRoot": 331,
+                "domainRoot": 331,
+                "afterRoot": 676,
+                "substitutedRoot": 676,
+                "conversions": {
+                  "function": "PASS",
+                  "domain": "PASS",
+                  "result": "PASS"
+                },
+                "nativeConversionScope": "complete-recorded-type-roots-only"
+              },
+              {
+                "slot": 2,
+                "node": 2329,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg.fn.fn.fn.fn",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rule": "∀ elimination",
+                "functionRole": "proof",
+                "argumentRole": "value",
+                "resultRole": "proof",
+                "binderInfo": "instImplicit",
+                "bodyUsesBinder": true,
+                "beforeRoot": 676,
+                "piRoot": 676,
+                "actualRoot": 523,
+                "domainRoot": 523,
+                "afterRoot": 687,
+                "substitutedRoot": 687,
+                "conversions": {
+                  "function": "PASS",
+                  "domain": "PASS",
+                  "result": "PASS"
+                },
+                "nativeConversionScope": "complete-recorded-type-roots-only"
+              },
+              {
+                "slot": 3,
+                "node": 2330,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg.fn.fn.fn",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rule": "∀ elimination",
+                "functionRole": "proof",
+                "argumentRole": "value",
+                "resultRole": "proof",
+                "binderInfo": "instImplicit",
+                "bodyUsesBinder": true,
+                "beforeRoot": 687,
+                "piRoot": 687,
+                "actualRoot": 525,
+                "domainRoot": 525,
+                "afterRoot": 694,
+                "substitutedRoot": 694,
+                "conversions": {
+                  "function": "PASS",
+                  "domain": "PASS",
+                  "result": "PASS"
+                },
+                "nativeConversionScope": "complete-recorded-type-roots-only"
+              },
+              {
+                "slot": 4,
+                "node": 2331,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg.fn.fn",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    0,
+                    0
+                  ]
+                },
+                "rule": "∀ elimination",
+                "functionRole": "proof",
+                "argumentRole": "value",
+                "resultRole": "proof",
+                "binderInfo": "implicit",
+                "bodyUsesBinder": true,
+                "beforeRoot": 694,
+                "piRoot": 694,
+                "actualRoot": 0,
+                "domainRoot": 0,
+                "afterRoot": 701,
+                "substitutedRoot": 701,
+                "conversions": {
+                  "function": "PASS",
+                  "domain": "PASS",
+                  "result": "PASS"
+                },
+                "nativeConversionScope": "complete-recorded-type-roots-only"
+              },
+              {
+                "slot": 5,
+                "node": 2332,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg.fn",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    0
+                  ]
+                },
+                "rule": "→ elimination",
+                "functionRole": "proof",
+                "argumentRole": "proof",
+                "resultRole": "proof",
+                "binderInfo": "instImplicit",
+                "bodyUsesBinder": false,
+                "beforeRoot": 701,
+                "piRoot": 701,
+                "actualRoot": 546,
+                "domainRoot": 563,
+                "afterRoot": 705,
+                "substitutedRoot": 705,
+                "conversions": {
+                  "function": "PASS",
+                  "domain": "PASS",
+                  "result": "PASS"
+                },
+                "nativeConversionScope": "complete-recorded-type-roots-only"
+              },
+              {
+                "slot": 6,
+                "node": 2333,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1
+                  ]
+                },
+                "rule": "→ elimination",
+                "functionRole": "proof",
+                "argumentRole": "proof",
+                "resultRole": "proof",
+                "binderInfo": "default",
+                "bodyUsesBinder": false,
+                "beforeRoot": 705,
+                "piRoot": 705,
+                "actualRoot": 38,
+                "domainRoot": 581,
+                "afterRoot": 521,
+                "substitutedRoot": 521,
+                "conversions": {
+                  "function": "PASS",
+                  "domain": "PASS",
+                  "result": "PASS"
+                },
+                "nativeConversionScope": "complete-recorded-type-roots-only"
+              }
+            ],
+            "checks": {
+              "method": "native-kernel-typed-identity/1",
+              "stages": 6
+            },
+            "binder": null,
+            "reason": null,
+            "attestation": {
+              "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+              "file": "/public/data/proof-atlas/use-site-types/7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520.json.gz",
+              "recording": {
+                "kind": "cache-restored-source-recompile/1",
+                "originalProofModuleImported": true,
+                "sourceModuleSha256": "5d43e49880bc35c48d6e6ea7d0378e2042a6d46b8820a4f98d162d87111290da",
+                "dependencyRecovery": {
+                  "kind": "mathlib-cache-attribution/1",
+                  "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+                  "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+                  "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+                  "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+                  "artifactCount": 43450,
+                  "allBinaryHashesVerified": true,
+                  "originalGitCheckoutsVerified": false,
+                  "independentlyRebuilt": false
+                }
+              },
+              "query": {
+                "node": 2333,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            },
+            "depth": 0,
+            "hidden": "19",
+            "portCatalogueSize": 7
+          }
+        ],
+        "edges": [],
+        "links": [],
+        "stats": {
+          "displayed": 1,
+          "rules": 1,
+          "structures": 0,
+          "retainedOccurrences": "6",
+          "hidden": "19",
+          "represented": "25",
+          "frontierPorts": 7
+        },
+        "guarantee": "Exact source occurrence partition and composition of recorded native typing rules. Argument roles and visibility are retained, including proof-valued instance and type-annotation terms. Native constructor layouts are separately marked source structure and do not infer occurrence or argument types. No normalization trace, semantic importance, article equivalence or human-comprehension result is asserted. Unavailable constructions expose literal source fields without inferred child types; source-field edges are not typing-premise edges."
+      }
+    },
+    {
+      "kind": "riccati-hypothesis-consumer",
+      "edition": "published-15",
+      "name": "JacobiData.slope_bound_abs",
+      "source": {
+        "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+        "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7"
+      },
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          0,
+          0,
+          1,
+          0
+        ]
+      },
+      "node": 1298,
+      "head": "JacobiData.T1_T2_same_sign",
+      "beforeRule": "kernel-structure",
+      "scene": {
+        "format": "ProofAtlasJudgmentScene/7",
+        "source": {
+          "name": "JacobiData.slope_bound_abs",
+          "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+          "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7"
+        },
+        "root": {
+          "node": 1298,
+          "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg.fn",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              0,
+              0,
+              1,
+              0
+            ]
+          },
+          "namespace": "source-expression"
+        },
+        "budget": 1,
+        "depthLimit": 0,
+        "policy": "proof-first",
+        "sourceFallback": true,
+        "nodes": [
+          {
+            "id": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg.fn",
+            "node": 1298,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                2,
+                1,
+                0,
+                0,
+                1,
+                0
+              ]
+            },
+            "kind": "app",
+            "region": "body-term-or-argument",
+            "context": [
+              {
+                "node": 3250,
+                "kind": "lam",
+                "path": "root.value",
+                "route": {
+                  "root": 1,
+                  "slots": []
+                }
+              },
+              {
+                "node": 3249,
+                "kind": "lam",
+                "path": "root.value.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1
+                  ]
+                }
+              },
+              {
+                "node": 3248,
+                "kind": "lam",
+                "path": "root.value.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "node": 3247,
+                "kind": "lam",
+                "path": "root.value.body.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "node": 3246,
+                "kind": "lam",
+                "path": "root.value.body.body.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "node": 3245,
+                "kind": "lam",
+                "path": "root.value.body.body.body.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "node": 3244,
+                "kind": "letE",
+                "path": "root.value.body.body.body.body.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "node": 3243,
+                "kind": "letE",
+                "path": "root.value.body.body.body.body.body.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2
+                  ]
+                }
+              },
+              {
+                "node": 3242,
+                "kind": "letE",
+                "path": "root.value.body.body.body.body.body.body.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2
+                  ]
+                }
+              },
+              {
+                "node": 3241,
+                "kind": "letE",
+                "path": "root.value.body.body.body.body.body.body.body.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2
+                  ]
+                }
+              },
+              {
+                "node": 3240,
+                "kind": "letE",
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2
+                  ]
+                }
+              }
+            ],
+            "role": "proof",
+            "typeText": "J.s p ≠ 0 → 0 < J.a p ∧ 0 < J.b p ∧ 0 ≤ J.T1 p ∧ 0 ≤ J.T2 p ∨ J.a p < 0 ∧ J.b p < 0 ∧ J.T1 p ≤ 0 ∧ J.T2 p ≤ 0",
+            "typeReference": {
+              "namespace": "type-expression",
+              "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+              "file": "/public/data/proof-atlas/use-site-types/7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520.json.gz",
+              "recording": {
+                "kind": "cache-restored-source-recompile/1",
+                "originalProofModuleImported": true,
+                "sourceModuleSha256": "5d43e49880bc35c48d6e6ea7d0378e2042a6d46b8820a4f98d162d87111290da",
+                "dependencyRecovery": {
+                  "kind": "mathlib-cache-attribution/1",
+                  "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+                  "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+                  "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+                  "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+                  "artifactCount": 43450,
+                  "allBinaryHashesVerified": true,
+                  "originalGitCheckoutsVerified": false,
+                  "independentlyRebuilt": false
+                }
+              },
+              "query": {
+                "node": 1298,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg.fn",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0,
+                    0,
+                    1,
+                    0
+                  ]
+                }
+              },
+              "graphRoot": 825
+            },
+            "rule": "application",
+            "label": "Proof application",
+            "retainedOccurrences": "5",
+            "expanded": "11",
+            "ports": [
+              {
+                "label": "Function head",
+                "node": 1293,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg.fn.fn.fn.fn.fn.fn",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "expanded": "1",
+                "field": "head",
+                "scopeExtension": 0,
+                "child": null,
+                "frontier": true,
+                "role": "proof",
+                "typeText": "∀ (J : JacobiData) (p : ℝ),\n  0 < J.a p * J.b p →\n    J.z p < 1 →\n      0 < J.d p →\n        J.s p ≠ 0 → 0 < J.a p ∧ 0 < J.b p ∧ 0 ≤ J.T1 p ∧ 0 ≤ J.T2 p ∨ J.a p < 0 ∧ J.b p < 0 ∧ J.T1 p ≤ 0 ∧ J.T2 p ≤ 0",
+                "typeReference": {
+                  "namespace": "type-expression",
+                  "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+                  "file": "/public/data/proof-atlas/use-site-types/7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520.json.gz",
+                  "recording": {
+                    "kind": "cache-restored-source-recompile/1",
+                    "originalProofModuleImported": true,
+                    "sourceModuleSha256": "5d43e49880bc35c48d6e6ea7d0378e2042a6d46b8820a4f98d162d87111290da",
+                    "dependencyRecovery": {
+                      "kind": "mathlib-cache-attribution/1",
+                      "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+                      "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+                      "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+                      "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+                      "artifactCount": 43450,
+                      "allBinaryHashesVerified": true,
+                      "originalGitCheckoutsVerified": false,
+                      "independentlyRebuilt": false
+                    }
+                  },
+                  "query": {
+                    "node": 1298,
+                    "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg.fn",
+                    "route": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        1,
+                        0,
+                        0,
+                        1,
+                        0
+                      ]
+                    }
+                  },
+                  "graphRoot": 175,
+                  "component": {
+                    "part": "application-head"
+                  },
+                  "relation": "recorded-parent-premise"
+                }
+              },
+              {
+                "label": "Argument 1",
+                "node": 532,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg.fn.fn.fn.fn.fn.arg",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                },
+                "expanded": "1",
+                "field": "arg1",
+                "slot": 1,
+                "binderInfo": "default",
+                "scopeExtension": 0,
+                "domainRoot": 2,
+                "domainText": "JacobiData",
+                "kernelDomainConversion": "PASS",
+                "child": null,
+                "frontier": true,
+                "role": "value",
+                "typeText": "JacobiData",
+                "typeReference": {
+                  "namespace": "type-expression",
+                  "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+                  "file": "/public/data/proof-atlas/use-site-types/7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520.json.gz",
+                  "recording": {
+                    "kind": "cache-restored-source-recompile/1",
+                    "originalProofModuleImported": true,
+                    "sourceModuleSha256": "5d43e49880bc35c48d6e6ea7d0378e2042a6d46b8820a4f98d162d87111290da",
+                    "dependencyRecovery": {
+                      "kind": "mathlib-cache-attribution/1",
+                      "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+                      "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+                      "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+                      "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+                      "artifactCount": 43450,
+                      "allBinaryHashesVerified": true,
+                      "originalGitCheckoutsVerified": false,
+                      "independentlyRebuilt": false
+                    }
+                  },
+                  "query": {
+                    "node": 1298,
+                    "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg.fn",
+                    "route": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        1,
+                        0,
+                        0,
+                        1,
+                        0
+                      ]
+                    }
+                  },
+                  "graphRoot": 2,
+                  "component": {
+                    "part": "application-argument",
+                    "slot": 1
+                  },
+                  "relation": "recorded-parent-premise"
+                }
+              },
+              {
+                "label": "Argument 2",
+                "node": 372,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg.fn.fn.fn.fn.arg",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                },
+                "expanded": "1",
+                "field": "arg2",
+                "slot": 2,
+                "binderInfo": "default",
+                "scopeExtension": 0,
+                "domainRoot": 0,
+                "domainText": "ℝ",
+                "kernelDomainConversion": "PASS",
+                "child": null,
+                "frontier": true,
+                "role": "value",
+                "typeText": "ℝ",
+                "typeReference": {
+                  "namespace": "type-expression",
+                  "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+                  "file": "/public/data/proof-atlas/use-site-types/7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520.json.gz",
+                  "recording": {
+                    "kind": "cache-restored-source-recompile/1",
+                    "originalProofModuleImported": true,
+                    "sourceModuleSha256": "5d43e49880bc35c48d6e6ea7d0378e2042a6d46b8820a4f98d162d87111290da",
+                    "dependencyRecovery": {
+                      "kind": "mathlib-cache-attribution/1",
+                      "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+                      "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+                      "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+                      "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+                      "artifactCount": 43450,
+                      "allBinaryHashesVerified": true,
+                      "originalGitCheckoutsVerified": false,
+                      "independentlyRebuilt": false
+                    }
+                  },
+                  "query": {
+                    "node": 1298,
+                    "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg.fn",
+                    "route": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        1,
+                        0,
+                        0,
+                        1,
+                        0
+                      ]
+                    }
+                  },
+                  "graphRoot": 0,
+                  "component": {
+                    "part": "application-argument",
+                    "slot": 2
+                  },
+                  "relation": "recorded-parent-premise"
+                }
+              },
+              {
+                "label": "Argument 3",
+                "node": 274,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg.fn.fn.fn.arg",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    1
+                  ]
+                },
+                "expanded": "1",
+                "field": "arg3",
+                "slot": 3,
+                "binderInfo": "default",
+                "scopeExtension": 0,
+                "domainRoot": 111,
+                "domainText": "0 < J.a p * J.b p",
+                "kernelDomainConversion": "PASS",
+                "child": null,
+                "frontier": true,
+                "role": "proof",
+                "typeText": "0 < J.a p * J.b p",
+                "typeReference": {
+                  "namespace": "type-expression",
+                  "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+                  "file": "/public/data/proof-atlas/use-site-types/7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520.json.gz",
+                  "recording": {
+                    "kind": "cache-restored-source-recompile/1",
+                    "originalProofModuleImported": true,
+                    "sourceModuleSha256": "5d43e49880bc35c48d6e6ea7d0378e2042a6d46b8820a4f98d162d87111290da",
+                    "dependencyRecovery": {
+                      "kind": "mathlib-cache-attribution/1",
+                      "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+                      "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+                      "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+                      "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+                      "artifactCount": 43450,
+                      "allBinaryHashesVerified": true,
+                      "originalGitCheckoutsVerified": false,
+                      "independentlyRebuilt": false
+                    }
+                  },
+                  "query": {
+                    "node": 1298,
+                    "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg.fn",
+                    "route": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        1,
+                        0,
+                        0,
+                        1,
+                        0
+                      ]
+                    }
+                  },
+                  "graphRoot": 111,
+                  "component": {
+                    "part": "application-argument",
+                    "slot": 3
+                  },
+                  "relation": "recorded-parent-premise"
+                }
+              },
+              {
+                "label": "Argument 4",
+                "node": 184,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg.fn.fn.arg",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    1
+                  ]
+                },
+                "expanded": "1",
+                "field": "arg4",
+                "slot": 4,
+                "binderInfo": "default",
+                "scopeExtension": 0,
+                "domainRoot": 25,
+                "domainText": "J.z p < 1",
+                "kernelDomainConversion": "PASS",
+                "child": null,
+                "frontier": true,
+                "role": "proof",
+                "typeText": "J.z p < 1",
+                "typeReference": {
+                  "namespace": "type-expression",
+                  "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+                  "file": "/public/data/proof-atlas/use-site-types/7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520.json.gz",
+                  "recording": {
+                    "kind": "cache-restored-source-recompile/1",
+                    "originalProofModuleImported": true,
+                    "sourceModuleSha256": "5d43e49880bc35c48d6e6ea7d0378e2042a6d46b8820a4f98d162d87111290da",
+                    "dependencyRecovery": {
+                      "kind": "mathlib-cache-attribution/1",
+                      "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+                      "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+                      "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+                      "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+                      "artifactCount": 43450,
+                      "allBinaryHashesVerified": true,
+                      "originalGitCheckoutsVerified": false,
+                      "independentlyRebuilt": false
+                    }
+                  },
+                  "query": {
+                    "node": 1298,
+                    "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg.fn",
+                    "route": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        1,
+                        0,
+                        0,
+                        1,
+                        0
+                      ]
+                    }
+                  },
+                  "graphRoot": 25,
+                  "component": {
+                    "part": "application-argument",
+                    "slot": 4
+                  },
+                  "relation": "recorded-parent-premise"
+                }
+              },
+              {
+                "label": "Argument 5",
+                "node": 167,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg.fn.arg",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    1
+                  ]
+                },
+                "expanded": "1",
+                "field": "arg5",
+                "slot": 5,
+                "binderInfo": "default",
+                "scopeExtension": 0,
+                "domainRoot": 470,
+                "domainText": "0 < J.d p",
+                "kernelDomainConversion": "PASS",
+                "child": null,
+                "frontier": true,
+                "role": "proof",
+                "typeText": "0 < J.d p",
+                "typeReference": {
+                  "namespace": "type-expression",
+                  "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+                  "file": "/public/data/proof-atlas/use-site-types/7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520.json.gz",
+                  "recording": {
+                    "kind": "cache-restored-source-recompile/1",
+                    "originalProofModuleImported": true,
+                    "sourceModuleSha256": "5d43e49880bc35c48d6e6ea7d0378e2042a6d46b8820a4f98d162d87111290da",
+                    "dependencyRecovery": {
+                      "kind": "mathlib-cache-attribution/1",
+                      "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+                      "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+                      "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+                      "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+                      "artifactCount": 43450,
+                      "allBinaryHashesVerified": true,
+                      "originalGitCheckoutsVerified": false,
+                      "independentlyRebuilt": false
+                    }
+                  },
+                  "query": {
+                    "node": 1298,
+                    "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg.fn",
+                    "route": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        1,
+                        0,
+                        0,
+                        1,
+                        0
+                      ]
+                    }
+                  },
+                  "graphRoot": 470,
+                  "component": {
+                    "part": "application-argument",
+                    "slot": 5
+                  },
+                  "relation": "recorded-parent-premise"
+                }
+              }
+            ],
+            "stages": [
+              {
+                "slot": 1,
+                "node": 1294,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg.fn.fn.fn.fn.fn",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rule": "∀ elimination",
+                "functionRole": "proof",
+                "argumentRole": "value",
+                "resultRole": "proof",
+                "binderInfo": "default",
+                "bodyUsesBinder": true,
+                "beforeRoot": 175,
+                "piRoot": 175,
+                "actualRoot": 2,
+                "domainRoot": 2,
+                "afterRoot": 234,
+                "substitutedRoot": 234,
+                "conversions": {
+                  "function": "PASS",
+                  "domain": "PASS",
+                  "result": "PASS"
+                },
+                "nativeConversionScope": "complete-recorded-type-roots-only"
+              },
+              {
+                "slot": 2,
+                "node": 1295,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg.fn.fn.fn.fn",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rule": "∀ elimination",
+                "functionRole": "proof",
+                "argumentRole": "value",
+                "resultRole": "proof",
+                "binderInfo": "default",
+                "bodyUsesBinder": true,
+                "beforeRoot": 234,
+                "piRoot": 234,
+                "actualRoot": 0,
+                "domainRoot": 0,
+                "afterRoot": 283,
+                "substitutedRoot": 283,
+                "conversions": {
+                  "function": "PASS",
+                  "domain": "PASS",
+                  "result": "PASS"
+                },
+                "nativeConversionScope": "complete-recorded-type-roots-only"
+              },
+              {
+                "slot": 3,
+                "node": 1296,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg.fn.fn.fn",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "rule": "→ elimination",
+                "functionRole": "proof",
+                "argumentRole": "proof",
+                "resultRole": "proof",
+                "binderInfo": "default",
+                "bodyUsesBinder": false,
+                "beforeRoot": 283,
+                "piRoot": 283,
+                "actualRoot": 111,
+                "domainRoot": 111,
+                "afterRoot": 95,
+                "substitutedRoot": 95,
+                "conversions": {
+                  "function": "PASS",
+                  "domain": "PASS",
+                  "result": "PASS"
+                },
+                "nativeConversionScope": "complete-recorded-type-roots-only"
+              },
+              {
+                "slot": 4,
+                "node": 1297,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg.fn.fn",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0
+                  ]
+                },
+                "rule": "→ elimination",
+                "functionRole": "proof",
+                "argumentRole": "proof",
+                "resultRole": "proof",
+                "binderInfo": "default",
+                "bodyUsesBinder": false,
+                "beforeRoot": 95,
+                "piRoot": 95,
+                "actualRoot": 25,
+                "domainRoot": 25,
+                "afterRoot": 510,
+                "substitutedRoot": 510,
+                "conversions": {
+                  "function": "PASS",
+                  "domain": "PASS",
+                  "result": "PASS"
+                },
+                "nativeConversionScope": "complete-recorded-type-roots-only"
+              },
+              {
+                "slot": 5,
+                "node": 1298,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg.fn",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0,
+                    0,
+                    1,
+                    0
+                  ]
+                },
+                "rule": "→ elimination",
+                "functionRole": "proof",
+                "argumentRole": "proof",
+                "resultRole": "proof",
+                "binderInfo": "default",
+                "bodyUsesBinder": false,
+                "beforeRoot": 510,
+                "piRoot": 510,
+                "actualRoot": 470,
+                "domainRoot": 470,
+                "afterRoot": 825,
+                "substitutedRoot": 825,
+                "conversions": {
+                  "function": "PASS",
+                  "domain": "PASS",
+                  "result": "PASS"
+                },
+                "nativeConversionScope": "complete-recorded-type-roots-only"
+              }
+            ],
+            "checks": {
+              "method": "native-kernel-typed-identity/1",
+              "stages": 5
+            },
+            "binder": null,
+            "reason": null,
+            "attestation": {
+              "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+              "file": "/public/data/proof-atlas/use-site-types/7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520.json.gz",
+              "recording": {
+                "kind": "cache-restored-source-recompile/1",
+                "originalProofModuleImported": true,
+                "sourceModuleSha256": "5d43e49880bc35c48d6e6ea7d0378e2042a6d46b8820a4f98d162d87111290da",
+                "dependencyRecovery": {
+                  "kind": "mathlib-cache-attribution/1",
+                  "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+                  "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+                  "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+                  "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+                  "artifactCount": 43450,
+                  "allBinaryHashesVerified": true,
+                  "originalGitCheckoutsVerified": false,
+                  "independentlyRebuilt": false
+                }
+              },
+              "query": {
+                "node": 1298,
+                "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg.fn",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0,
+                    0,
+                    1,
+                    0
+                  ]
+                }
+              }
+            },
+            "depth": 0,
+            "hidden": "6",
+            "portCatalogueSize": 6
+          }
+        ],
+        "edges": [],
+        "links": [],
+        "stats": {
+          "displayed": 1,
+          "rules": 1,
+          "structures": 0,
+          "retainedOccurrences": "5",
+          "hidden": "6",
+          "represented": "11",
+          "frontierPorts": 6
+        },
+        "guarantee": "Exact source occurrence partition and composition of recorded native typing rules. Argument roles and visibility are retained, including proof-valued instance and type-annotation terms. Native constructor layouts are separately marked source structure and do not infer occurrence or argument types. No normalization trace, semantic importance, article equivalence or human-comprehension result is asserted. Unavailable constructions expose literal source fields without inferred child types; source-field edges are not typing-premise edges."
+      }
+    },
+    {
+      "kind": "variable-function",
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_43987",
+      "source": {
+        "indexSha256": "159699ca3f1d90ccd733d2a5fe4c0541ae4c785b8cb942333058b16653cef385",
+        "sourceSha256": "182370b92c287cb5f51d7e5f0caeb77eb22d79fd67dbff75acbbbb371d4552b8"
+      },
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          1
+        ]
+      },
+      "node": 78,
+      "head": "bound variable",
+      "beforeRule": "kernel-structure",
+      "scene": {
+        "format": "ProofAtlasJudgmentScene/7",
+        "source": {
+          "name": "lean_workbook_plus_43987",
+          "indexSha256": "159699ca3f1d90ccd733d2a5fe4c0541ae4c785b8cb942333058b16653cef385",
+          "sourceSha256": "182370b92c287cb5f51d7e5f0caeb77eb22d79fd67dbff75acbbbb371d4552b8"
+        },
+        "root": {
+          "node": 78,
+          "path": "root.value.body.body.body.body.body.arg.fn.arg.fn.arg.arg.arg.body.body.fn.arg.arg.fn.body",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1
+            ]
+          },
+          "namespace": "source-expression"
+        },
+        "budget": 1,
+        "depthLimit": 0,
+        "policy": "proof-first",
+        "sourceFallback": true,
+        "nodes": [
+          {
+            "id": "root.value.body.body.body.body.body.arg.fn.arg.fn.arg.arg.arg.body.body.fn.arg.arg.fn.body",
+            "node": 78,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1
+              ]
+            },
+            "kind": "app",
+            "region": "body-term-or-argument",
+            "context": [
+              {
+                "node": 203,
+                "kind": "lam",
+                "path": "root.value",
+                "route": {
+                  "root": 1,
+                  "slots": []
+                }
+              },
+              {
+                "node": 202,
+                "kind": "lam",
+                "path": "root.value.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1
+                  ]
+                }
+              },
+              {
+                "node": 201,
+                "kind": "lam",
+                "path": "root.value.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "node": 200,
+                "kind": "lam",
+                "path": "root.value.body.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "node": 199,
+                "kind": "lam",
+                "path": "root.value.body.body.body.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "node": 182,
+                "kind": "lam",
+                "path": "root.value.body.body.body.body.body.arg.fn.arg.fn.arg.arg.arg",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    0,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "node": 181,
+                "kind": "lam",
+                "path": "root.value.body.body.body.body.body.arg.fn.arg.fn.arg.arg.arg.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    0,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              },
+              {
+                "node": 176,
+                "kind": "lam",
+                "path": "root.value.body.body.body.body.body.arg.fn.arg.fn.arg.arg.arg.body.body.fn.arg.arg.fn",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    0,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    0
+                  ]
+                }
+              }
+            ],
+            "role": "proof",
+            "typeText": "‖z k‖ = ‖omega k‖",
+            "typeReference": {
+              "namespace": "type-expression",
+              "evidenceSha256": "0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77",
+              "file": "/public/data/proof-atlas/use-site-types/0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77.json.gz",
+              "recording": {
+                "kind": "public-packet-occurrence-replay/1",
+                "originalProofModuleImported": false,
+                "packetSha256": "159699ca3f1d90ccd733d2a5fe4c0541ae4c785b8cb942333058b16653cef385",
+                "baselineProofSha256": "3a3cc0f7b3606fe0ab7c37a79201ad6d5b68cf32818e8bc71cba922b886be9b9",
+                "dependencyRecovery": {
+                  "kind": "mathlib-cache-attribution/1",
+                  "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+                  "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+                  "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+                  "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+                  "artifactCount": 43450,
+                  "allBinaryHashesVerified": true,
+                  "originalGitCheckoutsVerified": false,
+                  "independentlyRebuilt": false
+                }
+              },
+              "query": {
+                "node": 78,
+                "path": "root.value.body.body.body.body.body.arg.fn.arg.fn.arg.arg.arg.body.body.fn.arg.arg.fn.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    0,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    0,
+                    1
+                  ]
+                }
+              },
+              "graphRoot": 27
+            },
+            "rule": "application",
+            "label": "Proof application",
+            "retainedOccurrences": "1",
+            "expanded": "3",
+            "ports": [
+              {
+                "label": "Function head",
+                "node": 50,
+                "path": "root.value.body.body.body.body.body.arg.fn.arg.fn.arg.arg.arg.body.body.fn.arg.arg.fn.body.fn",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    0,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    0,
+                    1,
+                    0
+                  ]
+                },
+                "expanded": "1",
+                "field": "head",
+                "scopeExtension": 0,
+                "child": null,
+                "frontier": true,
+                "role": "proof",
+                "typeText": "∀ (k : Fin n), ‖z k‖ = ‖omega k‖",
+                "typeReference": {
+                  "namespace": "type-expression",
+                  "evidenceSha256": "0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77",
+                  "file": "/public/data/proof-atlas/use-site-types/0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77.json.gz",
+                  "recording": {
+                    "kind": "public-packet-occurrence-replay/1",
+                    "originalProofModuleImported": false,
+                    "packetSha256": "159699ca3f1d90ccd733d2a5fe4c0541ae4c785b8cb942333058b16653cef385",
+                    "baselineProofSha256": "3a3cc0f7b3606fe0ab7c37a79201ad6d5b68cf32818e8bc71cba922b886be9b9",
+                    "dependencyRecovery": {
+                      "kind": "mathlib-cache-attribution/1",
+                      "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+                      "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+                      "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+                      "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+                      "artifactCount": 43450,
+                      "allBinaryHashesVerified": true,
+                      "originalGitCheckoutsVerified": false,
+                      "independentlyRebuilt": false
+                    }
+                  },
+                  "query": {
+                    "node": 78,
+                    "path": "root.value.body.body.body.body.body.arg.fn.arg.fn.arg.arg.arg.body.body.fn.arg.arg.fn.body",
+                    "route": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        0,
+                        1,
+                        0,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        0,
+                        1,
+                        1,
+                        0,
+                        1
+                      ]
+                    }
+                  },
+                  "graphRoot": 34,
+                  "component": {
+                    "part": "application-head"
+                  },
+                  "relation": "recorded-parent-premise"
+                }
+              },
+              {
+                "label": "Argument 1",
+                "node": 2,
+                "path": "root.value.body.body.body.body.body.arg.fn.arg.fn.arg.arg.arg.body.body.fn.arg.arg.fn.body.arg",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    0,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1
+                  ]
+                },
+                "expanded": "1",
+                "field": "arg1",
+                "slot": 1,
+                "binderInfo": "default",
+                "scopeExtension": 0,
+                "domainRoot": 29,
+                "domainText": "Fin n",
+                "kernelDomainConversion": "PASS",
+                "child": null,
+                "frontier": true,
+                "role": "value",
+                "typeText": "Fin n",
+                "typeReference": {
+                  "namespace": "type-expression",
+                  "evidenceSha256": "0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77",
+                  "file": "/public/data/proof-atlas/use-site-types/0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77.json.gz",
+                  "recording": {
+                    "kind": "public-packet-occurrence-replay/1",
+                    "originalProofModuleImported": false,
+                    "packetSha256": "159699ca3f1d90ccd733d2a5fe4c0541ae4c785b8cb942333058b16653cef385",
+                    "baselineProofSha256": "3a3cc0f7b3606fe0ab7c37a79201ad6d5b68cf32818e8bc71cba922b886be9b9",
+                    "dependencyRecovery": {
+                      "kind": "mathlib-cache-attribution/1",
+                      "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+                      "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+                      "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+                      "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+                      "artifactCount": 43450,
+                      "allBinaryHashesVerified": true,
+                      "originalGitCheckoutsVerified": false,
+                      "independentlyRebuilt": false
+                    }
+                  },
+                  "query": {
+                    "node": 78,
+                    "path": "root.value.body.body.body.body.body.arg.fn.arg.fn.arg.arg.arg.body.body.fn.arg.arg.fn.body",
+                    "route": {
+                      "root": 1,
+                      "slots": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        0,
+                        1,
+                        0,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        0,
+                        1,
+                        1,
+                        0,
+                        1
+                      ]
+                    }
+                  },
+                  "graphRoot": 29,
+                  "component": {
+                    "part": "application-argument",
+                    "slot": 1
+                  },
+                  "relation": "recorded-parent-premise"
+                }
+              }
+            ],
+            "stages": [
+              {
+                "slot": 1,
+                "node": 78,
+                "path": "root.value.body.body.body.body.body.arg.fn.arg.fn.arg.arg.arg.body.body.fn.arg.arg.fn.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    0,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    0,
+                    1
+                  ]
+                },
+                "rule": "∀ elimination",
+                "functionRole": "proof",
+                "argumentRole": "value",
+                "resultRole": "proof",
+                "binderInfo": "default",
+                "bodyUsesBinder": true,
+                "beforeRoot": 34,
+                "piRoot": 34,
+                "actualRoot": 29,
+                "domainRoot": 29,
+                "afterRoot": 27,
+                "substitutedRoot": 27,
+                "conversions": {
+                  "function": "PASS",
+                  "domain": "PASS",
+                  "result": "PASS"
+                },
+                "nativeConversionScope": "complete-recorded-type-roots-only"
+              }
+            ],
+            "checks": {
+              "method": "native-kernel-typed-identity/1",
+              "stages": 1
+            },
+            "binder": null,
+            "reason": null,
+            "attestation": {
+              "evidenceSha256": "0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77",
+              "file": "/public/data/proof-atlas/use-site-types/0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77.json.gz",
+              "recording": {
+                "kind": "public-packet-occurrence-replay/1",
+                "originalProofModuleImported": false,
+                "packetSha256": "159699ca3f1d90ccd733d2a5fe4c0541ae4c785b8cb942333058b16653cef385",
+                "baselineProofSha256": "3a3cc0f7b3606fe0ab7c37a79201ad6d5b68cf32818e8bc71cba922b886be9b9",
+                "dependencyRecovery": {
+                  "kind": "mathlib-cache-attribution/1",
+                  "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+                  "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+                  "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+                  "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+                  "artifactCount": 43450,
+                  "allBinaryHashesVerified": true,
+                  "originalGitCheckoutsVerified": false,
+                  "independentlyRebuilt": false
+                }
+              },
+              "query": {
+                "node": 78,
+                "path": "root.value.body.body.body.body.body.arg.fn.arg.fn.arg.arg.arg.body.body.fn.arg.arg.fn.body",
+                "route": {
+                  "root": 1,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    0,
+                    1,
+                    0,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    0,
+                    1,
+                    1,
+                    0,
+                    1
+                  ]
+                }
+              }
+            },
+            "depth": 0,
+            "hidden": "2",
+            "portCatalogueSize": 2
+          }
+        ],
+        "edges": [],
+        "links": [],
+        "stats": {
+          "displayed": 1,
+          "rules": 1,
+          "structures": 0,
+          "retainedOccurrences": "1",
+          "hidden": "2",
+          "represented": "3",
+          "frontierPorts": 2
+        },
+        "guarantee": "Exact source occurrence partition and composition of recorded native typing rules. Argument roles and visibility are retained, including proof-valued instance and type-annotation terms. Native constructor layouts are separately marked source structure and do not infer occurrence or argument types. No normalization trace, semantic importance, article equivalence or human-comprehension result is asserted. Unavailable constructions expose literal source fields without inferred child types; source-field edges are not typing-premise edges."
+      }
+    }
+  ],
+  "rows": [
+    {
+      "edition": "published-15",
+      "name": "JacobiData.slope_bound_abs",
+      "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+      "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+      "sites": 29,
+      "comparisons": 87,
+      "newApplicationFrames": 29,
+      "nonconstantHeads": 0,
+      "typeOverlaps": 4,
+      "priorRules": {
+        "kernel-structure": 29
+      },
+      "newRules": {
+        "application": 29
+      },
+      "sourceCache": {
+        "pageLoads": 10,
+        "indexLoads": 1,
+        "faults": 10,
+        "evictions": 0,
+        "peakCachedPages": 10,
+        "peakCachedNodes": 2483,
+        "peakCachedDecodedBytes": 96164,
+        "cachedPages": 10,
+        "cachedNodes": 2483,
+        "indexPages": 1,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+        "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 33,
+        "evictions": 0,
+        "decodedBytes": 249771,
+        "peakQueries": 33,
+        "peakBytes": 249771,
+        "indexLoads": 14,
+        "source": {
+          "name": "JacobiData.slope_bound_abs",
+          "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+          "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7"
+        },
+        "manifestSha256": "aede443408e723b61c91bbddf584aa32229792fc8aa2697b6607e6162e2f4a40",
+        "cachedQueries": 33,
+        "indexPages": 14,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "resident-supplement",
+          "queries": 0,
+          "decodedBytes": 0,
+          "byteLimit": 262144,
+          "queryLimit": 32,
+          "typeNodes": 0,
+          "failure": null
+        },
+        "useSiteSupplement": {
+          "queries": 29,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 4,
+        "typeNodes": 4659,
+        "typeDecodedBytes": 212240
+      }
+    },
+    {
+      "edition": "working-26",
+      "name": "JacobiData.slope_bound_abs",
+      "indexSha256": "a786a311ffd35d388b79b4af11a5d733dde834f8e0fe7967b74ad07d4dea15e4",
+      "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+      "sites": 20,
+      "comparisons": 60,
+      "newApplicationFrames": 20,
+      "nonconstantHeads": 0,
+      "typeOverlaps": 0,
+      "priorRules": {
+        "kernel-structure": 20
+      },
+      "newRules": {
+        "application": 20
+      },
+      "sourceCache": {
+        "pageLoads": 10,
+        "indexLoads": 1,
+        "faults": 10,
+        "evictions": 0,
+        "peakCachedPages": 10,
+        "peakCachedNodes": 2483,
+        "peakCachedDecodedBytes": 96164,
+        "cachedPages": 10,
+        "cachedNodes": 2483,
+        "indexPages": 1,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "a786a311ffd35d388b79b4af11a5d733dde834f8e0fe7967b74ad07d4dea15e4",
+        "manifestSha256": "1e73d26525b292719d20a4f46fe2cd0fa54e96b8265af72b2a20f0ee0caa994b",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 20,
+        "evictions": 0,
+        "decodedBytes": 143550,
+        "peakQueries": 20,
+        "peakBytes": 143550,
+        "indexLoads": 6,
+        "source": {
+          "name": "JacobiData.slope_bound_abs",
+          "indexSha256": "a786a311ffd35d388b79b4af11a5d733dde834f8e0fe7967b74ad07d4dea15e4",
+          "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7"
+        },
+        "manifestSha256": "cc575811ee64fc12e3e798d9a2de2f9713198da2c8901c8c532b595ea16450ad",
+        "cachedQueries": 20,
+        "indexPages": 6,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "resident-supplement",
+          "queries": 0,
+          "decodedBytes": 0,
+          "byteLimit": 262144,
+          "queryLimit": 32,
+          "typeNodes": 0,
+          "failure": null
+        },
+        "useSiteSupplement": {
+          "queries": 20,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 3,
+        "typeNodes": 2283,
+        "typeDecodedBytes": 97046
+      }
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_20418",
+      "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+      "sourceSha256": "44d7d19cff28d5b75dc33d21733bf14cb764e765f493ca46cf2a66345b8a3d07",
+      "sites": 22,
+      "comparisons": 66,
+      "newApplicationFrames": 22,
+      "nonconstantHeads": 0,
+      "typeOverlaps": 2,
+      "priorRules": {
+        "kernel-structure": 22
+      },
+      "newRules": {
+        "application": 22
+      },
+      "sourceCache": {
+        "pageLoads": 19,
+        "indexLoads": 11,
+        "faults": 19,
+        "evictions": 3,
+        "peakCachedPages": 16,
+        "peakCachedNodes": 3899,
+        "peakCachedDecodedBytes": 146218,
+        "cachedPages": 16,
+        "cachedNodes": 3899,
+        "indexPages": 2,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+        "manifestSha256": "a3525f4c281e8e9afd0cc28004fca7757bc929432731e696fbc0ca2b02bb1ab5",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 24,
+        "evictions": 0,
+        "decodedBytes": 183824,
+        "peakQueries": 24,
+        "peakBytes": 183824,
+        "indexLoads": 6,
+        "source": {
+          "name": "lean_workbook_20418",
+          "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+          "sourceSha256": "44d7d19cff28d5b75dc33d21733bf14cb764e765f493ca46cf2a66345b8a3d07"
+        },
+        "manifestSha256": "0fd946f2884ece7dcafb27dc6a1c8d8f72e10696b1de32c260a619d9cb200f89",
+        "cachedQueries": 24,
+        "indexPages": 6,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "resident-supplement",
+          "queries": 0,
+          "decodedBytes": 0,
+          "byteLimit": 262144,
+          "queryLimit": 32,
+          "typeNodes": 0,
+          "failure": null
+        },
+        "useSiteSupplement": {
+          "queries": 22,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 4,
+        "typeNodes": 1899,
+        "typeDecodedBytes": 86281
+      }
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_3485",
+      "indexSha256": "bd496000a8da7ce06393d1cdd66b86c1a76aa6004c6eca19c36e083a3082948c",
+      "sourceSha256": "ace2b6ea44489642395660c0e4dff53ee2c2d870ebc437b25e38c9b6cb929f93",
+      "sites": 10,
+      "comparisons": 30,
+      "newApplicationFrames": 10,
+      "nonconstantHeads": 0,
+      "typeOverlaps": 2,
+      "priorRules": {
+        "kernel-structure": 10
+      },
+      "newRules": {
+        "application": 10
+      },
+      "sourceCache": {
+        "pageLoads": 3,
+        "indexLoads": 1,
+        "faults": 3,
+        "evictions": 0,
+        "peakCachedPages": 3,
+        "peakCachedNodes": 629,
+        "peakCachedDecodedBytes": 27074,
+        "cachedPages": 3,
+        "cachedNodes": 629,
+        "indexPages": 1,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "bd496000a8da7ce06393d1cdd66b86c1a76aa6004c6eca19c36e083a3082948c",
+        "manifestSha256": "8df2d47efc7eaad0cbb4431fd41b8eb8355a58fb783d8cd9d5ffdc6e93996733",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 12,
+        "evictions": 0,
+        "decodedBytes": 63502,
+        "peakQueries": 12,
+        "peakBytes": 63502,
+        "indexLoads": 5,
+        "source": {
+          "name": "lean_workbook_3485",
+          "indexSha256": "bd496000a8da7ce06393d1cdd66b86c1a76aa6004c6eca19c36e083a3082948c",
+          "sourceSha256": "ace2b6ea44489642395660c0e4dff53ee2c2d870ebc437b25e38c9b6cb929f93"
+        },
+        "manifestSha256": "cff092931fca2ebded5c87ff87b9c6213cdc02f10d5aa25e5e01ed8f326e0aae",
+        "cachedQueries": 12,
+        "indexPages": 5,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "resident-supplement",
+          "queries": 0,
+          "decodedBytes": 0,
+          "byteLimit": 262144,
+          "queryLimit": 32,
+          "typeNodes": 0,
+          "failure": null
+        },
+        "useSiteSupplement": {
+          "queries": 10,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 3,
+        "typeNodes": 911,
+        "typeDecodedBytes": 47373
+      }
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_4274",
+      "indexSha256": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+      "sourceSha256": "761ccc0ee9e693f87eabfca7b94449ec8ebe1c5293ddd528bed8eade57ca74a4",
+      "sites": 10,
+      "comparisons": 30,
+      "newApplicationFrames": 10,
+      "nonconstantHeads": 4,
+      "typeOverlaps": 1,
+      "priorRules": {
+        "kernel-structure": 10
+      },
+      "newRules": {
+        "application": 10
+      },
+      "sourceCache": {
+        "pageLoads": 4,
+        "indexLoads": 1,
+        "faults": 4,
+        "evictions": 0,
+        "peakCachedPages": 4,
+        "peakCachedNodes": 939,
+        "peakCachedDecodedBytes": 38533,
+        "cachedPages": 4,
+        "cachedNodes": 939,
+        "indexPages": 1,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+        "manifestSha256": "8445a143694429ffce96fc4afeca0b1c36282063a37462e5876f510854146c7f",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 11,
+        "evictions": 0,
+        "decodedBytes": 52042,
+        "peakQueries": 11,
+        "peakBytes": 52042,
+        "indexLoads": 5,
+        "source": {
+          "name": "lean_workbook_4274",
+          "indexSha256": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+          "sourceSha256": "761ccc0ee9e693f87eabfca7b94449ec8ebe1c5293ddd528bed8eade57ca74a4"
+        },
+        "manifestSha256": "65dba815bcdc2e61b0cdff40d12cd7c90f4729efa540cd44917421eb21768a08",
+        "cachedQueries": 11,
+        "indexPages": 5,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "resident-supplement",
+          "queries": 0,
+          "decodedBytes": 0,
+          "byteLimit": 262144,
+          "queryLimit": 32,
+          "typeNodes": 0,
+          "failure": null
+        },
+        "useSiteSupplement": {
+          "queries": 10,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 3,
+        "typeNodes": 983,
+        "typeDecodedBytes": 38447
+      }
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_49456",
+      "indexSha256": "66459f55804e8ae09fc9a8615191fba8f5277f1fb0831c1bb132e1bc60552b38",
+      "sourceSha256": "feb8f7b2ab730b0efdee245bd28e648ffb3ca004c15f1deeb6b0754f8a478434",
+      "sites": 5,
+      "comparisons": 15,
+      "newApplicationFrames": 5,
+      "nonconstantHeads": 0,
+      "typeOverlaps": 0,
+      "priorRules": {
+        "kernel-structure": 5
+      },
+      "newRules": {
+        "application": 5
+      },
+      "sourceCache": {
+        "pageLoads": 1,
+        "indexLoads": 1,
+        "faults": 1,
+        "evictions": 0,
+        "peakCachedPages": 1,
+        "peakCachedNodes": 42,
+        "peakCachedDecodedBytes": 2143,
+        "cachedPages": 1,
+        "cachedNodes": 42,
+        "indexPages": 1,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "66459f55804e8ae09fc9a8615191fba8f5277f1fb0831c1bb132e1bc60552b38",
+        "manifestSha256": "356dec35ca5dd8bb7e6881d9f3ce2c934e8043c4828ec13e8a88cb90953482f3",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 5,
+        "evictions": 0,
+        "decodedBytes": 10056,
+        "peakQueries": 5,
+        "peakBytes": 10056,
+        "indexLoads": 2,
+        "source": {
+          "name": "lean_workbook_49456",
+          "indexSha256": "66459f55804e8ae09fc9a8615191fba8f5277f1fb0831c1bb132e1bc60552b38",
+          "sourceSha256": "feb8f7b2ab730b0efdee245bd28e648ffb3ca004c15f1deeb6b0754f8a478434"
+        },
+        "manifestSha256": "9cdca1618c8b825b3a4db9c79d0df051c576d58aad20896f11bd371d5c96fe6c",
+        "cachedQueries": 5,
+        "indexPages": 2,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "resident-supplement",
+          "queries": 0,
+          "decodedBytes": 0,
+          "byteLimit": 262144,
+          "queryLimit": 32,
+          "typeNodes": 0,
+          "failure": null
+        },
+        "useSiteSupplement": {
+          "queries": 5,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 2,
+        "typeNodes": 67,
+        "typeDecodedBytes": 3767
+      }
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_56144",
+      "indexSha256": "60ff188d4edd927f72c0393d678f5a9cfb80d344d3ec459aec958443f07dc256",
+      "sourceSha256": "88f54d38e9c49131cb291df6527bc9e47ed5fb946c46ee0901c938b18297c55c",
+      "sites": 8,
+      "comparisons": 24,
+      "newApplicationFrames": 8,
+      "nonconstantHeads": 0,
+      "typeOverlaps": 0,
+      "priorRules": {
+        "kernel-structure": 8
+      },
+      "newRules": {
+        "application": 8
+      },
+      "sourceCache": {
+        "pageLoads": 5,
+        "indexLoads": 1,
+        "faults": 5,
+        "evictions": 0,
+        "peakCachedPages": 5,
+        "peakCachedNodes": 1068,
+        "peakCachedDecodedBytes": 42888,
+        "cachedPages": 5,
+        "cachedNodes": 1068,
+        "indexPages": 1,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "60ff188d4edd927f72c0393d678f5a9cfb80d344d3ec459aec958443f07dc256",
+        "manifestSha256": "6431ac09df11ed8d8de4e407fb97d5f92aaf57f902312536e0d10fd5672e7dff",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 8,
+        "evictions": 0,
+        "decodedBytes": 41914,
+        "peakQueries": 8,
+        "peakBytes": 41914,
+        "indexLoads": 4,
+        "source": {
+          "name": "lean_workbook_56144",
+          "indexSha256": "60ff188d4edd927f72c0393d678f5a9cfb80d344d3ec459aec958443f07dc256",
+          "sourceSha256": "88f54d38e9c49131cb291df6527bc9e47ed5fb946c46ee0901c938b18297c55c"
+        },
+        "manifestSha256": "ac6f45187c3be36a7d76da29d40f3da843c5c37b87e4257faad104c769174c23",
+        "cachedQueries": 8,
+        "indexPages": 4,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "resident-supplement",
+          "queries": 0,
+          "decodedBytes": 0,
+          "byteLimit": 262144,
+          "queryLimit": 32,
+          "typeNodes": 0,
+          "failure": null
+        },
+        "useSiteSupplement": {
+          "queries": 8,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 2,
+        "typeNodes": 623,
+        "typeDecodedBytes": 32015
+      }
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_15068",
+      "indexSha256": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+      "sourceSha256": "c8a09c1ece2d7fc13d9ef4d0979c71870e9e97202f8bed0df415a5c52788c2b5",
+      "sites": 14,
+      "comparisons": 42,
+      "newApplicationFrames": 14,
+      "nonconstantHeads": 0,
+      "typeOverlaps": 2,
+      "priorRules": {
+        "kernel-structure": 14
+      },
+      "newRules": {
+        "application": 14
+      },
+      "sourceCache": {
+        "pageLoads": 13,
+        "indexLoads": 8,
+        "faults": 13,
+        "evictions": 0,
+        "peakCachedPages": 13,
+        "peakCachedNodes": 3151,
+        "peakCachedDecodedBytes": 114249,
+        "cachedPages": 13,
+        "cachedNodes": 3151,
+        "indexPages": 2,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+        "manifestSha256": "548d26b53b9ecdddba03b0f96c828548f3a5bd66936990923913d27a1070aba6",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 16,
+        "evictions": 0,
+        "decodedBytes": 121308,
+        "peakQueries": 16,
+        "peakBytes": 121308,
+        "indexLoads": 5,
+        "source": {
+          "name": "lean_workbook_plus_15068",
+          "indexSha256": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+          "sourceSha256": "c8a09c1ece2d7fc13d9ef4d0979c71870e9e97202f8bed0df415a5c52788c2b5"
+        },
+        "manifestSha256": "9fefdf4aec0a32e92dd13fdda86a975038143e672c494ea11093533435335c95",
+        "cachedQueries": 16,
+        "indexPages": 5,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "resident-supplement",
+          "queries": 0,
+          "decodedBytes": 0,
+          "byteLimit": 262144,
+          "queryLimit": 32,
+          "typeNodes": 0,
+          "failure": null
+        },
+        "useSiteSupplement": {
+          "queries": 14,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 2,
+        "typeNodes": 1195,
+        "typeDecodedBytes": 53589
+      }
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_16912",
+      "indexSha256": "6c061155ccb98286c7608ad3bfbd316714aea3a1b33817720b3c4b2846c39510",
+      "sourceSha256": "a88efcf7a6eb35f44a480e3b787ef5bb7b2a47d877b72b181acb737e831828a2",
+      "sites": 16,
+      "comparisons": 48,
+      "newApplicationFrames": 16,
+      "nonconstantHeads": 0,
+      "typeOverlaps": 3,
+      "priorRules": {
+        "kernel-structure": 16
+      },
+      "newRules": {
+        "application": 16
+      },
+      "sourceCache": {
+        "pageLoads": 7,
+        "indexLoads": 1,
+        "faults": 7,
+        "evictions": 0,
+        "peakCachedPages": 7,
+        "peakCachedNodes": 1566,
+        "peakCachedDecodedBytes": 59435,
+        "cachedPages": 7,
+        "cachedNodes": 1566,
+        "indexPages": 1,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "6c061155ccb98286c7608ad3bfbd316714aea3a1b33817720b3c4b2846c39510",
+        "manifestSha256": "f02e094d8c631be07cd3c34fb69bce6865ca533a6598b7e133b2875ccdb52170",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 19,
+        "evictions": 0,
+        "decodedBytes": 128409,
+        "peakQueries": 19,
+        "peakBytes": 128409,
+        "indexLoads": 5,
+        "source": {
+          "name": "lean_workbook_plus_16912",
+          "indexSha256": "6c061155ccb98286c7608ad3bfbd316714aea3a1b33817720b3c4b2846c39510",
+          "sourceSha256": "a88efcf7a6eb35f44a480e3b787ef5bb7b2a47d877b72b181acb737e831828a2"
+        },
+        "manifestSha256": "1d1d7b5d85c0cdddd1b635b99381d9ed9535d3f5028cd0f86e9db1209eb5c3a3",
+        "cachedQueries": 19,
+        "indexPages": 5,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "resident-supplement",
+          "queries": 0,
+          "decodedBytes": 0,
+          "byteLimit": 262144,
+          "queryLimit": 32,
+          "typeNodes": 0,
+          "failure": null
+        },
+        "useSiteSupplement": {
+          "queries": 16,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 2,
+        "typeNodes": 808,
+        "typeDecodedBytes": 39990
+      }
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_19617",
+      "indexSha256": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+      "sourceSha256": "0c75bdffb8429241e73c9e4f375bd15130b2c5a19855281071b9706b89478578",
+      "sites": 8,
+      "comparisons": 24,
+      "newApplicationFrames": 8,
+      "nonconstantHeads": 6,
+      "typeOverlaps": 2,
+      "priorRules": {
+        "kernel-structure": 8
+      },
+      "newRules": {
+        "application": 8
+      },
+      "sourceCache": {
+        "pageLoads": 3,
+        "indexLoads": 1,
+        "faults": 3,
+        "evictions": 0,
+        "peakCachedPages": 3,
+        "peakCachedNodes": 563,
+        "peakCachedDecodedBytes": 22695,
+        "cachedPages": 3,
+        "cachedNodes": 563,
+        "indexPages": 1,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+        "manifestSha256": "da084009994f6aefbabbd9d45f5054c3516b6014c8c155d0642b3553ab6da1f7",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 10,
+        "evictions": 0,
+        "decodedBytes": 32183,
+        "peakQueries": 10,
+        "peakBytes": 32183,
+        "indexLoads": 3,
+        "source": {
+          "name": "lean_workbook_plus_19617",
+          "indexSha256": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+          "sourceSha256": "0c75bdffb8429241e73c9e4f375bd15130b2c5a19855281071b9706b89478578"
+        },
+        "manifestSha256": "0e3235832951d14cc02d86395e6904832b94419a83637fa3c645a19798b3ab40",
+        "cachedQueries": 10,
+        "indexPages": 3,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "resident-supplement",
+          "queries": 0,
+          "decodedBytes": 0,
+          "byteLimit": 262144,
+          "queryLimit": 32,
+          "typeNodes": 0,
+          "failure": null
+        },
+        "useSiteSupplement": {
+          "queries": 8,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 4,
+        "typeNodes": 1621,
+        "typeDecodedBytes": 60690
+      }
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_39831",
+      "indexSha256": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+      "sourceSha256": "ceca77661c386d820b66fac94e6e1e4ebbb18d894f0b6a79c37f6cd2f425c9cf",
+      "sites": 12,
+      "comparisons": 36,
+      "newApplicationFrames": 12,
+      "nonconstantHeads": 0,
+      "typeOverlaps": 2,
+      "priorRules": {
+        "kernel-structure": 12
+      },
+      "newRules": {
+        "application": 12
+      },
+      "sourceCache": {
+        "pageLoads": 7,
+        "indexLoads": 1,
+        "faults": 7,
+        "evictions": 0,
+        "peakCachedPages": 7,
+        "peakCachedNodes": 1543,
+        "peakCachedDecodedBytes": 56491,
+        "cachedPages": 7,
+        "cachedNodes": 1543,
+        "indexPages": 1,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+        "manifestSha256": "265d25f3d7fe247e7ef06a6b0089fb4a1da2acd75e02a0e1cb034a4dd7372685",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 14,
+        "evictions": 0,
+        "decodedBytes": 58148,
+        "peakQueries": 14,
+        "peakBytes": 58148,
+        "indexLoads": 4,
+        "source": {
+          "name": "lean_workbook_plus_39831",
+          "indexSha256": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+          "sourceSha256": "ceca77661c386d820b66fac94e6e1e4ebbb18d894f0b6a79c37f6cd2f425c9cf"
+        },
+        "manifestSha256": "f3d9f64e422b35d910fe28de35ed0d5a7400eeec16da8268cd6c693e789745e1",
+        "cachedQueries": 14,
+        "indexPages": 4,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "resident-supplement",
+          "queries": 0,
+          "decodedBytes": 0,
+          "byteLimit": 262144,
+          "queryLimit": 32,
+          "typeNodes": 0,
+          "failure": null
+        },
+        "useSiteSupplement": {
+          "queries": 12,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 2,
+        "typeNodes": 461,
+        "typeDecodedBytes": 20759
+      }
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_43987",
+      "indexSha256": "159699ca3f1d90ccd733d2a5fe4c0541ae4c785b8cb942333058b16653cef385",
+      "sourceSha256": "182370b92c287cb5f51d7e5f0caeb77eb22d79fd67dbff75acbbbb371d4552b8",
+      "sites": 9,
+      "comparisons": 27,
+      "newApplicationFrames": 9,
+      "nonconstantHeads": 5,
+      "typeOverlaps": 0,
+      "priorRules": {
+        "kernel-structure": 9
+      },
+      "newRules": {
+        "application": 9
+      },
+      "sourceCache": {
+        "pageLoads": 1,
+        "indexLoads": 1,
+        "faults": 1,
+        "evictions": 0,
+        "peakCachedPages": 1,
+        "peakCachedNodes": 204,
+        "peakCachedDecodedBytes": 10052,
+        "cachedPages": 1,
+        "cachedNodes": 204,
+        "indexPages": 1,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "159699ca3f1d90ccd733d2a5fe4c0541ae4c785b8cb942333058b16653cef385",
+        "manifestSha256": "4886f778c3b4b94d2c55cbd5d231a7b35a91a140ab6edc09ded7ff4d24084f61",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 9,
+        "evictions": 0,
+        "decodedBytes": 18209,
+        "peakQueries": 9,
+        "peakBytes": 18209,
+        "indexLoads": 2,
+        "source": {
+          "name": "lean_workbook_plus_43987",
+          "indexSha256": "159699ca3f1d90ccd733d2a5fe4c0541ae4c785b8cb942333058b16653cef385",
+          "sourceSha256": "182370b92c287cb5f51d7e5f0caeb77eb22d79fd67dbff75acbbbb371d4552b8"
+        },
+        "manifestSha256": "4409d4adeb274ff8d4d2e76fe95e099b6ad706636fb555a38952383651f0c669",
+        "cachedQueries": 9,
+        "indexPages": 2,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "resident-supplement",
+          "queries": 0,
+          "decodedBytes": 0,
+          "byteLimit": 262144,
+          "queryLimit": 32,
+          "typeNodes": 0,
+          "failure": null
+        },
+        "useSiteSupplement": {
+          "queries": 9,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 2,
+        "typeNodes": 166,
+        "typeDecodedBytes": 7882
+      }
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_54159",
+      "indexSha256": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+      "sourceSha256": "6e775cf687f0ff3c190bb091692f5a795294f4ae6bc17173df1744ba26042859",
+      "sites": 17,
+      "comparisons": 51,
+      "newApplicationFrames": 17,
+      "nonconstantHeads": 0,
+      "typeOverlaps": 5,
+      "priorRules": {
+        "kernel-structure": 17
+      },
+      "newRules": {
+        "application": 17
+      },
+      "sourceCache": {
+        "pageLoads": 9,
+        "indexLoads": 1,
+        "faults": 9,
+        "evictions": 0,
+        "peakCachedPages": 9,
+        "peakCachedNodes": 2127,
+        "peakCachedDecodedBytes": 82921,
+        "cachedPages": 9,
+        "cachedNodes": 2127,
+        "indexPages": 1,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+        "manifestSha256": "b462eb808a08908ba3c7936e52f607fd90cc4ce4f000949e9c6108c482db5e00",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 22,
+        "evictions": 0,
+        "decodedBytes": 584329,
+        "peakQueries": 22,
+        "peakBytes": 584329,
+        "indexLoads": 8,
+        "source": {
+          "name": "lean_workbook_plus_54159",
+          "indexSha256": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+          "sourceSha256": "6e775cf687f0ff3c190bb091692f5a795294f4ae6bc17173df1744ba26042859"
+        },
+        "manifestSha256": "80bdde2c61a1f5886bc63abc0e10b6705e44fcd05895122ffd5354af463aa5e0",
+        "cachedQueries": 22,
+        "indexPages": 8,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "resident-supplement",
+          "queries": 0,
+          "decodedBytes": 0,
+          "byteLimit": 262144,
+          "queryLimit": 32,
+          "typeNodes": 0,
+          "failure": null
+        },
+        "useSiteSupplement": {
+          "queries": 17,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 3,
+        "typeNodes": 903,
+        "typeDecodedBytes": 37153
+      }
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_54622",
+      "indexSha256": "0b128b2e4d02870a974f0f00684ea058eded20eed8f15f32e84872e4bca50d73",
+      "sourceSha256": "7af1d5d69178702a11b13d77dad54ca31956e713a16ec2047a0899281db245ec",
+      "sites": 16,
+      "comparisons": 48,
+      "newApplicationFrames": 16,
+      "nonconstantHeads": 0,
+      "typeOverlaps": 0,
+      "priorRules": {
+        "kernel-structure": 16
+      },
+      "newRules": {
+        "application": 16
+      },
+      "sourceCache": {
+        "pageLoads": 5,
+        "indexLoads": 1,
+        "faults": 5,
+        "evictions": 0,
+        "peakCachedPages": 5,
+        "peakCachedNodes": 1134,
+        "peakCachedDecodedBytes": 46445,
+        "cachedPages": 5,
+        "cachedNodes": 1134,
+        "indexPages": 1,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "0b128b2e4d02870a974f0f00684ea058eded20eed8f15f32e84872e4bca50d73",
+        "manifestSha256": "f2273950cf35388d9eb6b625cc20045f7ee17a474752171c24ea307bc05439af",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 16,
+        "evictions": 0,
+        "decodedBytes": 123899,
+        "peakQueries": 16,
+        "peakBytes": 123899,
+        "indexLoads": 5,
+        "source": {
+          "name": "lean_workbook_plus_54622",
+          "indexSha256": "0b128b2e4d02870a974f0f00684ea058eded20eed8f15f32e84872e4bca50d73",
+          "sourceSha256": "7af1d5d69178702a11b13d77dad54ca31956e713a16ec2047a0899281db245ec"
+        },
+        "manifestSha256": "827c0985b07151346bf45b16c16262d1396041e7bf90ae60318bc07df54e80f3",
+        "cachedQueries": 16,
+        "indexPages": 5,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "resident-supplement",
+          "queries": 0,
+          "decodedBytes": 0,
+          "byteLimit": 262144,
+          "queryLimit": 32,
+          "typeNodes": 0,
+          "failure": null
+        },
+        "useSiteSupplement": {
+          "queries": 16,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 2,
+        "typeNodes": 654,
+        "typeDecodedBytes": 32006
+      }
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_61403",
+      "indexSha256": "a52afaeee83e9f155855d77dc8f906f03abf8da6038abde95c7dc6e104568459",
+      "sourceSha256": "a12e28fcab85c77a9d2d398c937206a56f55c9666ca90ccb446bb0415be80371",
+      "sites": 4,
+      "comparisons": 12,
+      "newApplicationFrames": 4,
+      "nonconstantHeads": 0,
+      "typeOverlaps": 0,
+      "priorRules": {
+        "kernel-structure": 4
+      },
+      "newRules": {
+        "application": 4
+      },
+      "sourceCache": {
+        "pageLoads": 2,
+        "indexLoads": 1,
+        "faults": 2,
+        "evictions": 0,
+        "peakCachedPages": 2,
+        "peakCachedNodes": 297,
+        "peakCachedDecodedBytes": 12190,
+        "cachedPages": 2,
+        "cachedNodes": 297,
+        "indexPages": 1,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "a52afaeee83e9f155855d77dc8f906f03abf8da6038abde95c7dc6e104568459",
+        "manifestSha256": "e84565e49f97a34b000c8f4dce2517b333c45d90bfa9ff4b86d6ad8b346877f4",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 4,
+        "evictions": 0,
+        "decodedBytes": 20562,
+        "peakQueries": 4,
+        "peakBytes": 20562,
+        "indexLoads": 2,
+        "source": {
+          "name": "lean_workbook_plus_61403",
+          "indexSha256": "a52afaeee83e9f155855d77dc8f906f03abf8da6038abde95c7dc6e104568459",
+          "sourceSha256": "a12e28fcab85c77a9d2d398c937206a56f55c9666ca90ccb446bb0415be80371"
+        },
+        "manifestSha256": "7f04c9785c3b8e1ab902252d59707099c9c75a9fd9b65eda2e729279b4587564",
+        "cachedQueries": 4,
+        "indexPages": 2,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "resident-supplement",
+          "queries": 0,
+          "decodedBytes": 0,
+          "byteLimit": 262144,
+          "queryLimit": 32,
+          "typeNodes": 0,
+          "failure": null
+        },
+        "useSiteSupplement": {
+          "queries": 4,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 2,
+        "typeNodes": 223,
+        "typeDecodedBytes": 10952
+      }
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_6206",
+      "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+      "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+      "sites": 24,
+      "comparisons": 72,
+      "newApplicationFrames": 20,
+      "nonconstantHeads": 0,
+      "typeOverlaps": 36,
+      "priorRules": {
+        "kernel-structure": 20,
+        "application": 4
+      },
+      "newRules": {
+        "application": 24
+      },
+      "sourceCache": {
+        "pageLoads": 20,
+        "indexLoads": 12,
+        "faults": 20,
+        "evictions": 4,
+        "peakCachedPages": 16,
+        "peakCachedNodes": 3872,
+        "peakCachedDecodedBytes": 138798,
+        "cachedPages": 16,
+        "cachedNodes": 3872,
+        "indexPages": 2,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+        "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 28,
+        "evictions": 0,
+        "decodedBytes": 230100,
+        "peakQueries": 28,
+        "peakBytes": 230100,
+        "indexLoads": 12,
+        "source": {
+          "name": "lean_workbook_plus_6206",
+          "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+          "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5"
+        },
+        "manifestSha256": "2d886c9aba6691ff02fea90f0f48a5289b6ed0c3d2b90f6f401c245572180be2",
+        "cachedQueries": 28,
+        "indexPages": 12,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "query-pages",
+          "queries": 50,
+          "decodedBytes": 0,
+          "byteLimit": 16777216,
+          "queryLimit": 128,
+          "typeNodes": 934,
+          "failure": null,
+          "usesNativeQueryCache": true,
+          "indexedQueryLimit": 512
+        },
+        "useSiteSupplement": {
+          "queries": 24,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 5,
+        "typeNodes": 2573,
+        "typeDecodedBytes": 123859
+      }
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_62755",
+      "indexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+      "sourceSha256": "7e270522ac93030b71efabbf6d3ffd84407805aa1cee8348a6fd427c86aa423c",
+      "sites": 12,
+      "comparisons": 36,
+      "newApplicationFrames": 12,
+      "nonconstantHeads": 0,
+      "typeOverlaps": 2,
+      "priorRules": {
+        "kernel-structure": 12
+      },
+      "newRules": {
+        "application": 12
+      },
+      "sourceCache": {
+        "pageLoads": 6,
+        "indexLoads": 1,
+        "faults": 6,
+        "evictions": 0,
+        "peakCachedPages": 6,
+        "peakCachedNodes": 1391,
+        "peakCachedDecodedBytes": 50470,
+        "cachedPages": 6,
+        "cachedNodes": 1391,
+        "indexPages": 1,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+        "manifestSha256": "6d632b791dbd94dafd3c5dc42681b47ebd36041957d997ccb3968de30882cad9",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 14,
+        "evictions": 0,
+        "decodedBytes": 78380,
+        "peakQueries": 14,
+        "peakBytes": 78380,
+        "indexLoads": 5,
+        "source": {
+          "name": "lean_workbook_plus_62755",
+          "indexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+          "sourceSha256": "7e270522ac93030b71efabbf6d3ffd84407805aa1cee8348a6fd427c86aa423c"
+        },
+        "manifestSha256": "2beb1284cba2f3107de6953ebe25f563b77831b633a1e5a4f8a6e589e0b489f9",
+        "cachedQueries": 14,
+        "indexPages": 5,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "resident-supplement",
+          "queries": 0,
+          "decodedBytes": 0,
+          "byteLimit": 262144,
+          "queryLimit": 32,
+          "typeNodes": 0,
+          "failure": null
+        },
+        "useSiteSupplement": {
+          "queries": 12,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 4,
+        "typeNodes": 1751,
+        "typeDecodedBytes": 84648
+      }
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_63081",
+      "indexSha256": "e8a13f9af176053ae5b0220fc5a1526de1e937ca2e8972035dcc70ee1da74217",
+      "sourceSha256": "8edd950efcaed46473a9cfeb1000b7b4bac0782c105ab3054360e50515846287",
+      "sites": 8,
+      "comparisons": 24,
+      "newApplicationFrames": 8,
+      "nonconstantHeads": 0,
+      "typeOverlaps": 0,
+      "priorRules": {
+        "kernel-structure": 8
+      },
+      "newRules": {
+        "application": 8
+      },
+      "sourceCache": {
+        "pageLoads": 3,
+        "indexLoads": 1,
+        "faults": 3,
+        "evictions": 0,
+        "peakCachedPages": 3,
+        "peakCachedNodes": 626,
+        "peakCachedDecodedBytes": 25400,
+        "cachedPages": 3,
+        "cachedNodes": 626,
+        "indexPages": 1,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "e8a13f9af176053ae5b0220fc5a1526de1e937ca2e8972035dcc70ee1da74217",
+        "manifestSha256": "5df253f5f8d87473b35517f7f843ed78cead47723c8dd0441854452326959942",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 8,
+        "evictions": 0,
+        "decodedBytes": 46791,
+        "peakQueries": 8,
+        "peakBytes": 46791,
+        "indexLoads": 4,
+        "source": {
+          "name": "lean_workbook_plus_63081",
+          "indexSha256": "e8a13f9af176053ae5b0220fc5a1526de1e937ca2e8972035dcc70ee1da74217",
+          "sourceSha256": "8edd950efcaed46473a9cfeb1000b7b4bac0782c105ab3054360e50515846287"
+        },
+        "manifestSha256": "6524c7f89f0ab6abb269920dc2ec400fced9972d2f1025a6610ab1dfcc70563a",
+        "cachedQueries": 8,
+        "indexPages": 4,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "resident-supplement",
+          "queries": 0,
+          "decodedBytes": 0,
+          "byteLimit": 262144,
+          "queryLimit": 32,
+          "typeNodes": 0,
+          "failure": null
+        },
+        "useSiteSupplement": {
+          "queries": 8,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 2,
+        "typeNodes": 274,
+        "typeDecodedBytes": 14391
+      }
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_68077",
+      "indexSha256": "501dba70283e270631eba54e85d5f16c3ca44cfaba068ea4f39a45b550997e62",
+      "sourceSha256": "bc81bd2c7804c444b05280db621904637eb34d360fc5952bcb10850e82f38a62",
+      "sites": 16,
+      "comparisons": 48,
+      "newApplicationFrames": 16,
+      "nonconstantHeads": 0,
+      "typeOverlaps": 3,
+      "priorRules": {
+        "kernel-structure": 16
+      },
+      "newRules": {
+        "application": 16
+      },
+      "sourceCache": {
+        "pageLoads": 4,
+        "indexLoads": 1,
+        "faults": 4,
+        "evictions": 0,
+        "peakCachedPages": 4,
+        "peakCachedNodes": 1022,
+        "peakCachedDecodedBytes": 43110,
+        "cachedPages": 4,
+        "cachedNodes": 1022,
+        "indexPages": 1,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "501dba70283e270631eba54e85d5f16c3ca44cfaba068ea4f39a45b550997e62",
+        "manifestSha256": "bcae60ecc4dc97be71fef2b0807651994a440ac8680125c8d190e986d5556edd",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 19,
+        "evictions": 0,
+        "decodedBytes": 122676,
+        "peakQueries": 19,
+        "peakBytes": 122676,
+        "indexLoads": 5,
+        "source": {
+          "name": "lean_workbook_plus_68077",
+          "indexSha256": "501dba70283e270631eba54e85d5f16c3ca44cfaba068ea4f39a45b550997e62",
+          "sourceSha256": "bc81bd2c7804c444b05280db621904637eb34d360fc5952bcb10850e82f38a62"
+        },
+        "manifestSha256": "013f9a5db33abdf5c105f78cf65f083b32dffad33cd3eac664ba01c91965747f",
+        "cachedQueries": 19,
+        "indexPages": 5,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "resident-supplement",
+          "queries": 0,
+          "decodedBytes": 0,
+          "byteLimit": 262144,
+          "queryLimit": 32,
+          "typeNodes": 0,
+          "failure": null
+        },
+        "useSiteSupplement": {
+          "queries": 16,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 2,
+        "typeNodes": 658,
+        "typeDecodedBytes": 32405
+      }
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_68616",
+      "indexSha256": "2f1f6523063a579076448d2a6caa42d496003a1be382692e8747442b1d9aef83",
+      "sourceSha256": "b3845eec83a376e18ca1fb1429d5408c6673462fff37088173770e1535254968",
+      "sites": 7,
+      "comparisons": 21,
+      "newApplicationFrames": 7,
+      "nonconstantHeads": 0,
+      "typeOverlaps": 1,
+      "priorRules": {
+        "kernel-structure": 7
+      },
+      "newRules": {
+        "application": 7
+      },
+      "sourceCache": {
+        "pageLoads": 2,
+        "indexLoads": 1,
+        "faults": 2,
+        "evictions": 0,
+        "peakCachedPages": 2,
+        "peakCachedNodes": 362,
+        "peakCachedDecodedBytes": 17606,
+        "cachedPages": 2,
+        "cachedNodes": 362,
+        "indexPages": 1,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "2f1f6523063a579076448d2a6caa42d496003a1be382692e8747442b1d9aef83",
+        "manifestSha256": "dc56a8515c326c5df25fcbb0150310767b0ef288e8245f9266e2733e57e8e057",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 8,
+        "evictions": 0,
+        "decodedBytes": 26165,
+        "peakQueries": 8,
+        "peakBytes": 26165,
+        "indexLoads": 2,
+        "source": {
+          "name": "lean_workbook_plus_68616",
+          "indexSha256": "2f1f6523063a579076448d2a6caa42d496003a1be382692e8747442b1d9aef83",
+          "sourceSha256": "b3845eec83a376e18ca1fb1429d5408c6673462fff37088173770e1535254968"
+        },
+        "manifestSha256": "858171fa846766dae2cb158e90baac157fa2ecf5e803ccc5e823962dd26e874e",
+        "cachedQueries": 8,
+        "indexPages": 2,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "resident-supplement",
+          "queries": 0,
+          "decodedBytes": 0,
+          "byteLimit": 262144,
+          "queryLimit": 32,
+          "typeNodes": 0,
+          "failure": null
+        },
+        "useSiteSupplement": {
+          "queries": 7,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 2,
+        "typeNodes": 189,
+        "typeDecodedBytes": 10274
+      }
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_68794",
+      "indexSha256": "17a8502769796c60075b569ccf17b5bf99c47c12e6e1771705ae3eb540656f3b",
+      "sourceSha256": "9f309029babdfcee078518fe49ca92d664fa885eb45b3483068b1b5656f00586",
+      "sites": 8,
+      "comparisons": 24,
+      "newApplicationFrames": 8,
+      "nonconstantHeads": 0,
+      "typeOverlaps": 0,
+      "priorRules": {
+        "kernel-structure": 8
+      },
+      "newRules": {
+        "application": 8
+      },
+      "sourceCache": {
+        "pageLoads": 4,
+        "indexLoads": 1,
+        "faults": 4,
+        "evictions": 0,
+        "peakCachedPages": 4,
+        "peakCachedNodes": 779,
+        "peakCachedDecodedBytes": 30613,
+        "cachedPages": 4,
+        "cachedNodes": 779,
+        "indexPages": 1,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "17a8502769796c60075b569ccf17b5bf99c47c12e6e1771705ae3eb540656f3b",
+        "manifestSha256": "f3f5e87eac51b89cd2039502fb4dd7581bc2f4b49c245595965faad3d93b961e",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 8,
+        "evictions": 0,
+        "decodedBytes": 44482,
+        "peakQueries": 8,
+        "peakBytes": 44482,
+        "indexLoads": 4,
+        "source": {
+          "name": "lean_workbook_plus_68794",
+          "indexSha256": "17a8502769796c60075b569ccf17b5bf99c47c12e6e1771705ae3eb540656f3b",
+          "sourceSha256": "9f309029babdfcee078518fe49ca92d664fa885eb45b3483068b1b5656f00586"
+        },
+        "manifestSha256": "597e63a7b1d48d8f1dbf87b445bf6810c2f9a98b9e5ee4eab0c458a4a3ca1dbd",
+        "cachedQueries": 8,
+        "indexPages": 4,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "resident-supplement",
+          "queries": 0,
+          "decodedBytes": 0,
+          "byteLimit": 262144,
+          "queryLimit": 32,
+          "typeNodes": 0,
+          "failure": null
+        },
+        "useSiteSupplement": {
+          "queries": 8,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 2,
+        "typeNodes": 229,
+        "typeDecodedBytes": 10983
+      }
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_70240",
+      "indexSha256": "cbc4fcc25f7b3decb12c29ac4d90e9f01671a2bfcce24e948c9af0445a387290",
+      "sourceSha256": "4ba4a3343641286d44918d602cbab2e6c47e4a07ca166d8d41d0791c92d98378",
+      "sites": 8,
+      "comparisons": 24,
+      "newApplicationFrames": 8,
+      "nonconstantHeads": 0,
+      "typeOverlaps": 0,
+      "priorRules": {
+        "kernel-structure": 8
+      },
+      "newRules": {
+        "application": 8
+      },
+      "sourceCache": {
+        "pageLoads": 4,
+        "indexLoads": 1,
+        "faults": 4,
+        "evictions": 0,
+        "peakCachedPages": 4,
+        "peakCachedNodes": 966,
+        "peakCachedDecodedBytes": 34993,
+        "cachedPages": 4,
+        "cachedNodes": 966,
+        "indexPages": 1,
+        "pageLimit": 16,
+        "indexLimit": 2,
+        "nodeLimit": 4096,
+        "originalIndexSha256": "cbc4fcc25f7b3decb12c29ac4d90e9f01671a2bfcce24e948c9af0445a387290",
+        "manifestSha256": "38bca9e00856d285e988c6bb3535d9e371a5619d45915ae2abe469b18c382fbd",
+        "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+      },
+      "nativeCache": {
+        "loads": 8,
+        "evictions": 0,
+        "decodedBytes": 47369,
+        "peakQueries": 8,
+        "peakBytes": 47369,
+        "indexLoads": 4,
+        "source": {
+          "name": "lean_workbook_plus_70240",
+          "indexSha256": "cbc4fcc25f7b3decb12c29ac4d90e9f01671a2bfcce24e948c9af0445a387290",
+          "sourceSha256": "4ba4a3343641286d44918d602cbab2e6c47e4a07ca166d8d41d0791c92d98378"
+        },
+        "manifestSha256": "82ee5fffe0c54ce3ae3d9f5c0dd2dd2c4a210d5133fa718ff4a6b82087aa2cb0",
+        "cachedQueries": 8,
+        "indexPages": 4,
+        "queryLimit": 128,
+        "byteLimit": 16777216,
+        "indexLimit": 16,
+        "packetSupplement": {
+          "mode": "resident-supplement",
+          "queries": 0,
+          "decodedBytes": 0,
+          "byteLimit": 262144,
+          "queryLimit": 32,
+          "typeNodes": 0,
+          "failure": null
+        },
+        "useSiteSupplement": {
+          "queries": 8,
+          "failure": null,
+          "usesNativeQueryCache": true
+        },
+        "typeNodeLimit": 65536,
+        "typeGraphByteLimit": 16777216,
+        "typeGraphs": 2,
+        "typeNodes": 299,
+        "typeDecodedBytes": 14718
+      }
+    }
+  ],
+  "scope": "General construction cuts use all recorded native packages under one explicit selection policy. Frozen 283-site subset in 22 profiles; not all occurrences, a new native extraction, semantic compression or comprehension result. Source and native caches and type graphs have separate fixed bounds."
+}

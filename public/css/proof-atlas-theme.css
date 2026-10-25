@@ -149,3 +149,15 @@
 :root .proof-atlas-theme :is(.pa-dot-const,.pa-dot-bvar,.pa-dot-lit){background:var(--text-light)}
 :root .proof-atlas-theme .pa-dot-binder{background:var(--accent-warm)}
 :root .proof-atlas-theme .pa-syntax-legend .pa-legend-note{color:var(--text-light)}
+
+/* Recorded rule diagrams share the article's light/dark paper and ink. */
+:root .proof-atlas-theme .pl-judgment-viewport{background:var(--fig-bg);border:1px solid var(--border)}
+:root .proof-atlas-theme .pl-judgment-port-label{color:var(--text-light)}
+:root .proof-atlas-theme .pl-judgment-premises{border-color:var(--text-light)}
+:root .proof-atlas-theme .pl-judgment-scope{border-color:var(--text-light)}
+:root .proof-atlas-theme .pl-judgment-card{background:var(--bg);color:var(--text);border-color:var(--border);border-top-color:var(--accent)}
+:root .proof-atlas-theme .pl-judgment-card[data-judgment-role="value"]{border-top-color:var(--accent-warm)}
+:root .proof-atlas-theme .pl-judgment-card:is([data-judgment-role="type"],[data-judgment-role="unrecorded"]){border-top-color:var(--text-light)}
+:root .proof-atlas-theme .pl-judgment-card[aria-pressed="true"]{background:var(--accent-light);color:var(--text);outline-color:var(--accent)}
+:root .proof-atlas-theme :is(.pl-judgment-context-label,.pl-judgment-card small){color:var(--text-light)}
+:root .proof-atlas-theme .pl-judgment-frontier{background:var(--bg);color:var(--text);border-color:var(--text-light)}
