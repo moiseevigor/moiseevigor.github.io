@@ -1,0 +1,21 @@
+{
+  "format": "ProofAtlasEqualityBrowserAudit/1",
+  "status": "PASS",
+  "profiles": 17,
+  "queries": 58,
+  "sourceClicks": 179,
+  "computedClicks": 174,
+  "unavailableProfiles": 3,
+  "keyboardChecks": 1,
+  "axeAudits": 4,
+  "staleControls": 1,
+  "hashRefusals": 1,
+  "releaseChecks": 1,
+  "builtFiles": {
+    "public/js/proof-atlas-equality-transport.js": "6c57f60c25886c358473ef132369151e3fdc29667b743f13171ed1571664760e",
+    "public/js/proof-atlas-equality-view.js": "44cf3f5362dfec91048caa886b9c505519dd24520f282dff58de97dd5fcdea0b",
+    "public/css/proof-atlas-equality.css": "ff5ef006fb5af529ebfc4c2a0d13528c4432f05d93459efdff15857a0922c9bf",
+    "public/data/proof-atlas/equality-transport-manifest.js": "fee38c530e705ad47b8ec256c7a1f398d720d700d2d494f29d2a848d488c0e51"
+  },
+  "checkerSha256": "6a26d1cee0517fa3f84562c4642f811761bc7b043229c0d753d9230832717298"
+}

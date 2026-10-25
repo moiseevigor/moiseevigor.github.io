@@ -1,0 +1,603 @@
+{
+  "format": "ProofAtlasMethodCheckpoints/1",
+  "checkpoints": [
+    {
+      "name": "branch-interfaces",
+      "sourceRevision": "ec766430d7c71d024f733e06eff6cb17cd05499a",
+      "revisionFilesVerified": true,
+      "bundle": "research/proof-atlas/branch-interfaces/method-interface-evidence.json",
+      "bundleSha256": "d1b0ef379936aca5c3fe8672248892d18382cd7c470d45c868dd1720f8547f8b",
+      "files": [
+        {
+          "file": "research/proof-atlas/branch-interfaces/method-interface-evidence.json",
+          "sha256": "d1b0ef379936aca5c3fe8672248892d18382cd7c470d45c868dd1720f8547f8b"
+        },
+        {
+          "file": "research/proof-atlas/branch-interfaces/native-verification.json",
+          "sha256": "cc7cb2b581b8924f909c74f1f66477ec1e1a2dfe82611fbdf0c371bcef02931d"
+        },
+        {
+          "file": "research/proof-atlas/branch-interfaces/audit.json",
+          "sha256": "e01f8165ad17fdbdaad2927a42b73eb284482c33f23cdb76a0efc70f2788a5a7"
+        },
+        {
+          "file": "research/proof-atlas/branch-interfaces/browser-audit.json",
+          "sha256": "822e230adec6374131762dd60426fd4107c95b6138ae5362e3fc7f4e9298bc5c"
+        },
+        {
+          "file": "research/proof-atlas/branch-interfaces/regressions.json",
+          "sha256": "a204d1336e53869031370f6beff01c11c9070727437ecaa77f491aec6763dd00"
+        }
+      ]
+    },
+    {
+      "name": "method-replay",
+      "sourceRevision": "d15c49c901a64715b2ba2826bb951fbfd201fdc0",
+      "revisionFilesVerified": true,
+      "bundle": "research/proof-atlas/method-replay/method-replay-evidence.json",
+      "bundleSha256": "b2e4e108961b157235c3bcb713654491257eea2427b39f6c5f5d7b385415c23c",
+      "files": [
+        {
+          "file": "research/proof-atlas/method-replay/method-replay-evidence.json",
+          "sha256": "b2e4e108961b157235c3bcb713654491257eea2427b39f6c5f5d7b385415c23c"
+        },
+        {
+          "file": "research/proof-atlas/method-replay/native-verification.json",
+          "sha256": "ab056acc4a17b574687163b8fbbdd70c9c8332cde82c3e7b48a854f691476cb0"
+        },
+        {
+          "file": "research/proof-atlas/method-replay/audit.json",
+          "sha256": "886f801b9773a4b97ef487b70f01e34579afc230b85f6079dbe12ad388c8cc2b"
+        },
+        {
+          "file": "research/proof-atlas/method-replay/compatibility.json",
+          "sha256": "2f0c6ec2c57a6b0f20e62c57d5b6448381f2837a2c65569ba2ed409e55b7be20"
+        },
+        {
+          "file": "research/proof-atlas/method-replay/browser-audit.json",
+          "sha256": "619fdad08edfaf80ab2ffee33013c1386f7d92cd3822b28670ac68b29c9cd853"
+        },
+        {
+          "file": "research/proof-atlas/method-replay/predecessor-browser-compatibility.json",
+          "sha256": "9d0001089b3904e5ba59358a752ce3419ca643df19ce171c0a7419aa92b4576d"
+        },
+        {
+          "file": "research/proof-atlas/method-replay/regressions.json",
+          "sha256": "40f877e67317ee3a4fe8363e7c71e58c313a95655d28b73288ccecac5ec921e1"
+        }
+      ]
+    },
+    {
+      "name": "method-pages",
+      "sourceRevision": "4401069d3625cb5868517ee4b3e4047e911a6737",
+      "revisionFilesVerified": true,
+      "bundle": "research/proof-atlas/method-pages/method-source-evidence.json",
+      "bundleSha256": "6168c7ddd352c3cdcadab7d8079439a88f76b66f94043ff61ce5d667df548e82",
+      "files": [
+        {
+          "file": "research/proof-atlas/method-pages/method-source-evidence.json",
+          "sha256": "6168c7ddd352c3cdcadab7d8079439a88f76b66f94043ff61ce5d667df548e82"
+        },
+        {
+          "file": "research/proof-atlas/method-pages/audit.json",
+          "sha256": "563694fdc5a847d733d98f988b7c6f890a99f78e047ca4ab6a5d931159e9435e"
+        },
+        {
+          "file": "research/proof-atlas/method-pages/browser-audit.json",
+          "sha256": "c269200428da9be2f18e8a03fd12d3d80958e3b224d761f7969ccd4bcba90336"
+        },
+        {
+          "file": "research/proof-atlas/method-pages/regressions.json",
+          "sha256": "87ea406f6dfadcfa830047bb355ebdabbd63840a1a4596e713daf17b355070a9"
+        }
+      ]
+    },
+    {
+      "name": "method-query-pages",
+      "sourceRevision": "e5c8934854cb16f1fbc76343ec67652c44ebb768",
+      "revisionFilesVerified": true,
+      "bundle": "research/proof-atlas/method-query-pages/method-query-evidence.json",
+      "bundleSha256": "e21e74c74b18cfba0ec507df330bda10a7341d28963e0621049f5d387f8688aa",
+      "files": [
+        {
+          "file": "research/proof-atlas/method-query-pages/method-query-evidence.json",
+          "sha256": "e21e74c74b18cfba0ec507df330bda10a7341d28963e0621049f5d387f8688aa"
+        },
+        {
+          "file": "research/proof-atlas/method-query-pages/producer.json",
+          "sha256": "4d306b677a790489aaefa63dddbac22a8965d90607995621bed6203d0a879622"
+        },
+        {
+          "file": "research/proof-atlas/method-query-pages/audit.json",
+          "sha256": "267210a9b7d9be11976c625fc2f9d82f96ccfd07baf0dd9ceb76a6531616c014"
+        },
+        {
+          "file": "research/proof-atlas/method-query-pages/browser-audit.json",
+          "sha256": "de41eb24d431722f786d5ee4f208a557fabf9e957e4e63e62ad243e384d5d1f5"
+        },
+        {
+          "file": "research/proof-atlas/method-query-pages/branch-interfaces-compatibility.json",
+          "sha256": "c99e2e31d93f01c2f5fd609121f7082420a855054530647661b0acad0309e773"
+        },
+        {
+          "file": "research/proof-atlas/method-query-pages/method-replay-compatibility.json",
+          "sha256": "fc2f3e03d3dbbb2e8c1fc5615ca1aed84cae0c2aba35e624d5cf0b2d2dc711af"
+        },
+        {
+          "file": "research/proof-atlas/method-query-pages/method-pages-compatibility.json",
+          "sha256": "95b799d1fdc80dde7e5dfaea197d8e8da825adaf8c9db319885017d932b363ee"
+        },
+        {
+          "file": "research/proof-atlas/method-query-pages/regressions.json",
+          "sha256": "a9644841ce712b80303c9ec7ac6c6520d2f7c14a4d5a20dbed248a46550c54c8"
+        }
+      ]
+    },
+    {
+      "name": "method-streaming",
+      "sourceRevision": "cf37bb6f60deb8be0f6435e7bcc96510a2b2f6f3",
+      "revisionFilesVerified": true,
+      "bundle": "research/proof-atlas/method-streaming/method-streaming-evidence.json",
+      "bundleSha256": "ec98224cf60ae73e6b24737ac3ebfdbdcf2f3d74fa5d4819dc08e6c843128cb7",
+      "files": [
+        {
+          "file": "research/proof-atlas/method-streaming/method-streaming-evidence.json",
+          "sha256": "ec98224cf60ae73e6b24737ac3ebfdbdcf2f3d74fa5d4819dc08e6c843128cb7"
+        },
+        {
+          "file": "research/proof-atlas/method-streaming/native-verification.json",
+          "sha256": "164f227aaf2e7a2f5291153da67196cb6924048df39d569f001da293bbfe5a8e"
+        },
+        {
+          "file": "research/proof-atlas/method-streaming/audit.json",
+          "sha256": "5bd6d8645d7063f94d645f7cd596e5dc379a7ed9ffaf0f94277e571307624b9a"
+        },
+        {
+          "file": "research/proof-atlas/method-streaming/browser-audit.json",
+          "sha256": "f34b35273a84bfdb254a41d2b9e51949d4f8e74ec59c6a6235dd0880e4c5c8c1"
+        },
+        {
+          "file": "research/proof-atlas/method-streaming/fixture-browser-audit.json",
+          "sha256": "8c18a93ac0b5ba4b93b958e6599fffe7f0d4b9fedfebe707ffdf3ee833860b7b"
+        },
+        {
+          "file": "research/proof-atlas/method-streaming/original-browser-regression.json",
+          "sha256": "19f61764eec129d83030293e1df83216da78aa5b9554cdd3449114f3d1fc3e0c"
+        },
+        {
+          "file": "research/proof-atlas/method-streaming/ai-browser-regression.json",
+          "sha256": "04d3f67ced2ab2d50c496e2e79f2099a08572263795fac75df1e5a90078fe51b"
+        },
+        {
+          "file": "research/proof-atlas/method-streaming/manual-browser-regression.json",
+          "sha256": "4e54fee90da59e00cb095b619607a776e749a66e497d87b506e1d24b7fbf4575"
+        },
+        {
+          "file": "research/proof-atlas/method-streaming/branch-interfaces-compatibility.json",
+          "sha256": "52ceb3a0cdfb07d7eacdf2682c36e34951ebae5946c005c24a6274b47ed22694"
+        },
+        {
+          "file": "research/proof-atlas/method-streaming/method-replay-compatibility.json",
+          "sha256": "3c208479588c92660c3cc4718fcd21c5f1c502385e03dcdc5d34222ab0e207c1"
+        },
+        {
+          "file": "research/proof-atlas/method-streaming/method-pages-compatibility.json",
+          "sha256": "6169194beee60aa3c9e59ebff26f12058bf56ca128d7dab9143762386bb0b944"
+        },
+        {
+          "file": "research/proof-atlas/method-streaming/method-query-pages-compatibility.json",
+          "sha256": "e63fef7ba89ad2a2e9af98949e514207b34972c731f7c018b1fd2a8c5ff85a02"
+        },
+        {
+          "file": "research/proof-atlas/method-streaming/checkpoints.json",
+          "sha256": "aedb73bb25bd974f0e5823578d7bc292c9cb88b9a82d32ef466cababb8142830"
+        }
+      ]
+    },
+    {
+      "name": "method-flow",
+      "sourceRevision": "238b5e52e8a7bca89085077adbedfa24d8d53d64",
+      "revisionFilesVerified": true,
+      "bundle": "research/proof-atlas/method-flow/method-flow-evidence.json",
+      "bundleSha256": "72a3a2135b432a72f63b7122746094fc5d9502d33ca3e8895bc57019f5707cf1",
+      "files": [
+        {
+          "file": "research/proof-atlas/method-flow/method-flow-evidence.json",
+          "sha256": "72a3a2135b432a72f63b7122746094fc5d9502d33ca3e8895bc57019f5707cf1"
+        },
+        {
+          "file": "research/proof-atlas/method-flow/audit.json",
+          "sha256": "965ee62fd10e5007581d8584bd6739edb30857219b2de05f5129e42ff3809184"
+        },
+        {
+          "file": "research/proof-atlas/method-flow/browser-audit.json",
+          "sha256": "dcb67ef2b36918841c1c17d4b6bdcdc4166b75a5588a07401d20d94d6fd45906"
+        },
+        {
+          "file": "research/proof-atlas/method-flow/source-browser-regression.json",
+          "sha256": "c17ab24f7a2dca116e49d5743f615c555ec1acc4b430bc8b4973f35e9ee54733"
+        },
+        {
+          "file": "research/proof-atlas/method-flow/original-browser-regression.json",
+          "sha256": "224c7ea94439c031790e43d2dc97e393aecb4bce1efa766b748d5f6dfad0cece"
+        },
+        {
+          "file": "research/proof-atlas/method-flow/ai-browser-regression.json",
+          "sha256": "a74c1a0b752e5656445437e64bb7bf264d2c470f1d2772a69addfd7ec071016a"
+        },
+        {
+          "file": "research/proof-atlas/method-flow/stress-browser-regression.json",
+          "sha256": "57a9645298f203681aa3bb969944ebd34f52839c2b08376e9081cbc02c435ff5"
+        },
+        {
+          "file": "research/proof-atlas/method-flow/manual-browser-regression.json",
+          "sha256": "0f8bbcf6618087c88bf1801c6335c2dd250d8398f4e7a89b3cee0398297000cc"
+        },
+        {
+          "file": "research/proof-atlas/method-flow/branch-interfaces-compatibility.json",
+          "sha256": "086f4e7ee69b1a14da3e40ee629179d4a1c717570b67a396c576ba0295e75ee7"
+        },
+        {
+          "file": "research/proof-atlas/method-flow/method-replay-compatibility.json",
+          "sha256": "90a88ff9523952231352e3f23981b446d4f683e032fcf0b90e1019fc6af8bc61"
+        },
+        {
+          "file": "research/proof-atlas/method-flow/method-pages-compatibility.json",
+          "sha256": "e9102e6ef1facb1f4651312aaa98dd55a205388eb751f2ac19da14f63f91306d"
+        },
+        {
+          "file": "research/proof-atlas/method-flow/method-query-pages-compatibility.json",
+          "sha256": "d07282f4aed29c2ace2e525cc2fe114ca04b82eeeee92d298281e5b9afb6e3f0"
+        },
+        {
+          "file": "research/proof-atlas/method-flow/method-streaming-compatibility.json",
+          "sha256": "890257ba9354c6e6a5527dcb44f0ec33e16863bd8e68999dc8509a9c673a378e"
+        },
+        {
+          "file": "research/proof-atlas/method-flow/checkpoints.json",
+          "sha256": "887c4a13ee1215abfcc1576496c69c5db7869ad1bb71f9baf1364d209ade97ad"
+        }
+      ]
+    },
+    {
+      "name": "method-origins",
+      "sourceRevision": "97ff928e233ac35392ee3f594caf2983b501d4db",
+      "revisionFilesVerified": true,
+      "bundle": "research/proof-atlas/method-origins/method-origins-evidence.json",
+      "bundleSha256": "18ef8b88033dcd9bfad22808f80fc9ab6745a7c4e2efea49056ab5536a27b015",
+      "files": [
+        {
+          "file": "research/proof-atlas/method-origins/method-origins-evidence.json",
+          "sha256": "18ef8b88033dcd9bfad22808f80fc9ab6745a7c4e2efea49056ab5536a27b015"
+        },
+        {
+          "file": "research/proof-atlas/method-origins/browser-stress.json",
+          "sha256": "7604196d613294a5a4d12e3621c2ef089a669a47aa5b0093b4ab789a032d5013"
+        },
+        {
+          "file": "research/proof-atlas/method-origins/checkpoints.json",
+          "sha256": "db8c6420693b78946a0820157f6f8e0e7072208cc1ebbab74ce57cfcc25ab65f"
+        },
+        {
+          "file": "research/proof-atlas/method-origins/browser-origins.json",
+          "sha256": "4be7abb7e18e3b5dc056531e886723892b4bc95b8c230c74bab9819b1196e364"
+        },
+        {
+          "file": "research/proof-atlas/method-origins/audit.json",
+          "sha256": "487a3ca4d80069466fd1cc56a3cac658a18418b189ddb392610e370abc85e72c"
+        },
+        {
+          "file": "research/proof-atlas/method-origins/native-verification.json",
+          "sha256": "8f549f55e8345fb64af071ca36e21343f7274bd84a09d9caa8cd240435972b9e"
+        },
+        {
+          "file": "research/proof-atlas/method-origins/counterexample.json",
+          "sha256": "f835bebe3d4d27a67f614cf4d246e04e79a7fd5cd5b7fe26b8d6df05fafc86d0"
+        },
+        {
+          "file": "research/proof-atlas/method-origins/browser-ai.json",
+          "sha256": "f1c5a0833b8b7f58f353bb341fd135ba1bd24ce5c5ca4bb71c3dca03c42cbe3f"
+        },
+        {
+          "file": "research/proof-atlas/method-origins/branch-interfaces-compatibility.json",
+          "sha256": "c5cd799bfa1b029abd5b2712a3a7978b58b1317e0a53e3e6847d4bfe09d1d55b"
+        },
+        {
+          "file": "research/proof-atlas/method-origins/method-pages-compatibility.json",
+          "sha256": "00d06a138f848ab68c571e2f952f665c584d108756edc3e061ccdb73bca742b2"
+        },
+        {
+          "file": "research/proof-atlas/method-origins/method-streaming-compatibility.json",
+          "sha256": "8883e0a40a3300674cb1c8c8c151ba3f8ecd56488227d8ffe8ca35e225b234fb"
+        },
+        {
+          "file": "research/proof-atlas/method-origins/method-flow-compatibility.json",
+          "sha256": "51260749dd8e65ab15b9c2a6cf8f4d7d370937f77444ad630bba2c5dd4520d36"
+        },
+        {
+          "file": "research/proof-atlas/method-origins/method-replay-compatibility.json",
+          "sha256": "c4731d7d78d8bebe6bef89c19354d5554a471f180620ce595aaea4449d5aa68f"
+        },
+        {
+          "file": "research/proof-atlas/method-origins/browser-original.json",
+          "sha256": "420c880c33ad8efffcc5754752f15a9fa34e7858401cd4b70f96ccf140c0209c"
+        },
+        {
+          "file": "research/proof-atlas/method-origins/browser-source.json",
+          "sha256": "b5f4fc2ed6cb98a51c7bf924aba99f81be9126ef706643567e9a1413b73fe23d"
+        },
+        {
+          "file": "research/proof-atlas/method-origins/browser-manual.json",
+          "sha256": "869158897528be0b18d88944cd64b0ad74c3170c11a11ef68797a4a857d0cbec"
+        },
+        {
+          "file": "research/proof-atlas/method-origins/method-query-pages-compatibility.json",
+          "sha256": "11a4d6d69526c32ea4b8e4b89849a121cd62403a47e75188a0c318591e390475"
+        },
+        {
+          "file": "research/proof-atlas/method-origins/browser-flow.json",
+          "sha256": "cb2816e2644b3a3905aeba6124154fbdb5160af31a94b9119049ce58225e8763"
+        },
+        {
+          "file": "research/proof-atlas/method-origins/browser-recursive.json",
+          "sha256": "903481041c30e4e52f3fd3b80487c4fae7637564a9f48d2e6c6fe4dc2c460ed2"
+        }
+      ]
+    },
+    {
+      "name": "method-indices",
+      "sourceRevision": "5ff747e7ff47c2be589b4247d5c877b838570152",
+      "revisionFilesVerified": true,
+      "bundle": "research/proof-atlas/method-indices/method-indices-evidence.json",
+      "bundleSha256": "0d22234e0d1993590dfb2c763c99763061965148da402cfd35dd5346528f3c9d",
+      "files": [
+        {
+          "file": "research/proof-atlas/method-indices/method-indices-evidence.json",
+          "sha256": "0d22234e0d1993590dfb2c763c99763061965148da402cfd35dd5346528f3c9d"
+        },
+        {
+          "file": "research/proof-atlas/method-indices/browser-stress.json",
+          "sha256": "abe36f69839d4dc80fc57215d102142b82e73c8f3cacc34b86f0beff7aada219"
+        },
+        {
+          "file": "research/proof-atlas/method-indices/checkpoints.json",
+          "sha256": "e0a0015425550d8b1326cbd70fc4d2ab95d377e9276b6d6b1b4bbb236f77a685"
+        },
+        {
+          "file": "research/proof-atlas/method-indices/browser-origins.json",
+          "sha256": "c81a40ae5616eff189d4f2f86163fe43b690334d42ee38f1c40a78ef76a495be"
+        },
+        {
+          "file": "research/proof-atlas/method-indices/audit.json",
+          "sha256": "3c6e2c9fcb7c7b8a7880a22b988cc59ac6f4bd18a45328d2324966db0af11ebf"
+        },
+        {
+          "file": "research/proof-atlas/method-indices/native-verification.json",
+          "sha256": "2a9eabb2c60f1c03e8422e35a522f3ccf05cecf20bb6e8f20c819474932dd5ce"
+        },
+        {
+          "file": "research/proof-atlas/method-indices/browser-ai.json",
+          "sha256": "8415910848640cad2a7c8c84000f09b50827f54e8712f636fdc63fdd8391459b"
+        },
+        {
+          "file": "research/proof-atlas/method-indices/browser-indices.json",
+          "sha256": "c4e068a4548c41aa819f02dfb5aa221341db5dd307735621caf1634cf983ec98"
+        },
+        {
+          "file": "research/proof-atlas/method-indices/branch-interfaces-compatibility.json",
+          "sha256": "9211c79bc8793bfe48876412048a00183824dc9db553cb68548c94a83c9094d0"
+        },
+        {
+          "file": "research/proof-atlas/method-indices/method-pages-compatibility.json",
+          "sha256": "a505a40f757c6dc1937b75305c960cbd90212c0fcedd0d01fb96181eb93480fc"
+        },
+        {
+          "file": "research/proof-atlas/method-indices/method-streaming-compatibility.json",
+          "sha256": "aed2c998595a6b2234480ef46d267eff388dd89d7b8bf5b9d5ce757b97d74b67"
+        },
+        {
+          "file": "research/proof-atlas/method-indices/method-flow-compatibility.json",
+          "sha256": "837b377098680e74ae1cc73c2c8bed8ad12e70603e73de417221a90cb09bd9c8"
+        },
+        {
+          "file": "research/proof-atlas/method-indices/method-replay-compatibility.json",
+          "sha256": "20a3518d9bcdfb674fa8ef73cd0fbe6fd13d475a21b55f6cc32aaa39853aba67"
+        },
+        {
+          "file": "research/proof-atlas/method-indices/browser-original.json",
+          "sha256": "342b35fc7657e4e70ccf503fb21c2b6ae32b180895779df30089c7e3b9d7bd8f"
+        },
+        {
+          "file": "research/proof-atlas/method-indices/browser-source.json",
+          "sha256": "30741dd994cca76969b639bf8941c450340ac3520125417215f819ad5deff3a4"
+        },
+        {
+          "file": "research/proof-atlas/method-indices/browser-manual.json",
+          "sha256": "2caf98cbc0342c54ff90bac66e439afc5d0cf39c2bf04a50888aa026d4c6c125"
+        },
+        {
+          "file": "research/proof-atlas/method-indices/method-query-pages-compatibility.json",
+          "sha256": "0d8cf4b29e8a92b1575f77a5ef27d67c1d8e6575f9d81b54459faa9aa4daad77"
+        },
+        {
+          "file": "research/proof-atlas/method-indices/browser-flow.json",
+          "sha256": "504e1e0627dfce3b088d72eb2a135ad4eef3e7ff81d79ede3fdc9b5d0c671200"
+        },
+        {
+          "file": "research/proof-atlas/method-indices/browser-recursive.json",
+          "sha256": "903481041c30e4e52f3fd3b80487c4fae7637564a9f48d2e6c6fe4dc2c460ed2"
+        },
+        {
+          "file": "research/proof-atlas/method-indices/method-origins-compatibility.json",
+          "sha256": "9c6697974bf57d26ef1fd16f5d9e2dc1896ede8237a8a75a57acf2967e79700f"
+        }
+      ]
+    },
+    {
+      "name": "method-parameters",
+      "sourceRevision": "351462850365ec49529f1d0207eb1762f0325043",
+      "revisionFilesVerified": true,
+      "bundle": "research/proof-atlas/method-parameters/method-parameters-evidence.json",
+      "bundleSha256": "b2b3776884c18d48c4f071f3080ab5ce01c5014f1f799d5409f675c4348c1515",
+      "files": [
+        {
+          "file": "research/proof-atlas/method-parameters/method-parameters-evidence.json",
+          "sha256": "b2b3776884c18d48c4f071f3080ab5ce01c5014f1f799d5409f675c4348c1515"
+        },
+        {
+          "file": "research/proof-atlas/method-parameters/browser-stress.json",
+          "sha256": "04a67bdfd7c70285a7b21840d6009eb7d9b98e7040552a84df3ffc9e979215c5"
+        },
+        {
+          "file": "research/proof-atlas/method-parameters/checkpoints.json",
+          "sha256": "fd904fbbd21d9bdc9b346343df7f912e044e9833850de94809d89e372fca4251"
+        },
+        {
+          "file": "research/proof-atlas/method-parameters/browser-origins.json",
+          "sha256": "3c03f23d35681da862d62e750d7d01031c229f915403eb6407e2b693c0d989f8"
+        },
+        {
+          "file": "research/proof-atlas/method-parameters/browser-parameters.json",
+          "sha256": "600585bdba71736349c9815a9d5da01b29989c549631e0976024fac1effa9954"
+        },
+        {
+          "file": "research/proof-atlas/method-parameters/audit.json",
+          "sha256": "ddc519c7062fcd925af3945e87fb9cd62ca892562ee278bb5e7434a90b14ebd1"
+        },
+        {
+          "file": "research/proof-atlas/method-parameters/native-verification.json",
+          "sha256": "86de6b99bbaba8dc91927457d3f46db44a8694069f5dc5150abc55372fc60645"
+        },
+        {
+          "file": "research/proof-atlas/method-parameters/browser-ai.json",
+          "sha256": "8b9589ec10f86b9a95a1fed9a87528936354c1a90fec8924aa4caa0fbaaf48dc"
+        },
+        {
+          "file": "research/proof-atlas/method-parameters/browser-indices.json",
+          "sha256": "8fb87f0988316c32197d05b86d16e8d183102ec05f333a65aa28164f7bae7a92"
+        },
+        {
+          "file": "research/proof-atlas/method-parameters/branch-interfaces-compatibility.json",
+          "sha256": "6d4915f0259d76893bddff7133f552f86576424105fda9d5442cb6613bdeb716"
+        },
+        {
+          "file": "research/proof-atlas/method-parameters/method-pages-compatibility.json",
+          "sha256": "3da67bebdc3aa7ea53a117615ea0e2708da9aaef722b7452960a0cd28b02a5eb"
+        },
+        {
+          "file": "research/proof-atlas/method-parameters/method-streaming-compatibility.json",
+          "sha256": "e305dc5ac83d86d0c6b68cb08c987049bcd641a0d5931ccaf3ea6bf774164377"
+        },
+        {
+          "file": "research/proof-atlas/method-parameters/method-flow-compatibility.json",
+          "sha256": "b0c9976267512503a2008617116442c77d30782f888832547d9f01b558881988"
+        },
+        {
+          "file": "research/proof-atlas/method-parameters/method-replay-compatibility.json",
+          "sha256": "cf215652ec9ceeac99df7afa83b1212c1adc588c79893269f4ed75f67c21114b"
+        },
+        {
+          "file": "research/proof-atlas/method-parameters/browser-original.json",
+          "sha256": "50caa17141af144d21d3c898cf061e917736f05ef8df54c2b3a50c21fc59288d"
+        },
+        {
+          "file": "research/proof-atlas/method-parameters/browser-source.json",
+          "sha256": "9daa0323b727297f5ead98010b09d81071ade78b51f8cde8d0c843eb83cceaa1"
+        },
+        {
+          "file": "research/proof-atlas/method-parameters/browser-manual.json",
+          "sha256": "12e1a9c94f83ac45e0bbaa6dc8a952296f024d1f31593add25c3b2385e434e19"
+        },
+        {
+          "file": "research/proof-atlas/method-parameters/method-query-pages-compatibility.json",
+          "sha256": "a19759d1d8db65a7170a4398bde4e627f8f0b8da974d34cafc61d36c5766d8b4"
+        },
+        {
+          "file": "research/proof-atlas/method-parameters/browser-flow.json",
+          "sha256": "7e49a51074c5baf5af98e796cc7ba5b4f4f666d7f7ca400c02f7807d804fa0f6"
+        },
+        {
+          "file": "research/proof-atlas/method-parameters/method-indices-compatibility.json",
+          "sha256": "3e3b9d0b97adc6c2c0a64626b1bffa7283a60599743f28c890870087f268e192"
+        },
+        {
+          "file": "research/proof-atlas/method-parameters/browser-recursive.json",
+          "sha256": "903481041c30e4e52f3fd3b80487c4fae7637564a9f48d2e6c6fe4dc2c460ed2"
+        },
+        {
+          "file": "research/proof-atlas/method-parameters/method-origins-compatibility.json",
+          "sha256": "568614afddc83d260fde517cf52ac043189656a55ec6c682ea0418a77bb2072e"
+        }
+      ]
+    },
+    {
+      "name": "method-mutual",
+      "sourceRevision": "66346353fc53a1a00f54d5e3e848c7cca7470c48",
+      "revisionFilesVerified": true,
+      "bundle": "research/proof-atlas/method-mutual/method-mutual-evidence.json",
+      "bundleSha256": "07f49802c3220b046d328e7d0aec7c579536e372eaa79aaf3fcf0b9ec9541c0e",
+      "files": [
+        {
+          "file": "research/proof-atlas/method-mutual/method-mutual-evidence.json",
+          "sha256": "07f49802c3220b046d328e7d0aec7c579536e372eaa79aaf3fcf0b9ec9541c0e"
+        },
+        {
+          "file": "research/proof-atlas/method-mutual/audit.json",
+          "sha256": "c6a540ed1d245b64fda33771faf10d76fda57c9c4ec2a198620c1ddb5f55aaf2"
+        },
+        {
+          "file": "research/proof-atlas/method-mutual/native-verification.json",
+          "sha256": "a0e978e5852d3528899d239f7f43cb57597d0456bf824f4a49d4887dd372b731"
+        },
+        {
+          "file": "research/proof-atlas/method-mutual/legacy-boundary.json",
+          "sha256": "b4692cfe19a56d03eb264fd53beac6cb4ce39235dbb08a1715a366c847363cba"
+        },
+        {
+          "file": "research/proof-atlas/method-mutual/browser-ai.json",
+          "sha256": "13dfd695e2963259a6520607fa258efe251d701d443730c4f3c8441b7a4702f8"
+        },
+        {
+          "file": "research/proof-atlas/method-mutual/browser-flow.json",
+          "sha256": "19281ffcd5c1be02ef97d4b087a864fe8b7c73c3d3051d83e0fde5721016b7ed"
+        },
+        {
+          "file": "research/proof-atlas/method-mutual/browser-indices.json",
+          "sha256": "ea03626a5705968ce473a4b5102238972e9277945c290bdbe5a9f777073f1cc7"
+        },
+        {
+          "file": "research/proof-atlas/method-mutual/browser-manual.json",
+          "sha256": "2b6a0fb21bd84bd3474d14125e053e3ca230a3338827a4ca1d25269f61b733fa"
+        },
+        {
+          "file": "research/proof-atlas/method-mutual/browser-mutual.json",
+          "sha256": "7de3e99b66141ce58a3de7ad531eeee00b5480bf99dd06788ecb6d4d18e7f8f4"
+        },
+        {
+          "file": "research/proof-atlas/method-mutual/browser-original.json",
+          "sha256": "864a43448e381ff4aa9d5ce6974900f8b4fed27c24609b3ac6d8b59df8919dfa"
+        },
+        {
+          "file": "research/proof-atlas/method-mutual/browser-origins.json",
+          "sha256": "7597146069d99c79a866da8b5e7d88b313200e02b15134b1f23c6e3e20186674"
+        },
+        {
+          "file": "research/proof-atlas/method-mutual/browser-parameters.json",
+          "sha256": "ee3241630817d2a1d3c7a9ebb9db45d0920ce3b831487762bb9f19eb71e61480"
+        },
+        {
+          "file": "research/proof-atlas/method-mutual/browser-recursive.json",
+          "sha256": "903481041c30e4e52f3fd3b80487c4fae7637564a9f48d2e6c6fe4dc2c460ed2"
+        },
+        {
+          "file": "research/proof-atlas/method-mutual/browser-source.json",
+          "sha256": "1d12e4ee0588a7cfccc86e05ab02e4ab2b1f271c4b70fc0ad2c2d75987843c86"
+        },
+        {
+          "file": "research/proof-atlas/method-mutual/browser-stress.json",
+          "sha256": "b81b91706cd5adcc3fd7915aba5c22f7fa5feb28cd4dbaa2d2d02a6d1990690d"
+        }
+      ]
+    }
+  ]
+}

@@ -147,6 +147,11 @@ on:
       - 'research/proof-atlas/method-origins/**'
       - 'research/proof-atlas/method-indices/**'
       - 'research/proof-atlas/method-parameters/**'
+      - 'research/proof-atlas/equality-transport/**'
+      - 'public/js/proof-atlas-equality-*.js'
+      - 'public/css/proof-atlas-equality.css'
+      - 'public/data/proof-atlas/equality-*'
+      - 'scripts/*proof-atlas-equality*'
       - 'research/proof-atlas/method-mutual/**'
       - 'public/data/proof-atlas/method-mutual*'
       - 'public/data/proof-atlas/method-mutual/**'
@@ -470,6 +475,11 @@ on:
       - 'research/proof-atlas/method-origins/**'
       - 'research/proof-atlas/method-indices/**'
       - 'research/proof-atlas/method-parameters/**'
+      - 'research/proof-atlas/equality-transport/**'
+      - 'public/js/proof-atlas-equality-*.js'
+      - 'public/css/proof-atlas-equality.css'
+      - 'public/data/proof-atlas/equality-*'
+      - 'scripts/*proof-atlas-equality*'
       - 'research/proof-atlas/method-mutual/**'
       - 'public/data/proof-atlas/method-mutual*'
       - 'public/data/proof-atlas/method-mutual/**'
@@ -770,6 +780,9 @@ jobs:
           ATLAS_MUTUAL_CHECK=1 node scripts/test-proof-atlas-method-mutual.cjs
           node scripts/test-proof-atlas-method-mutual-browser.cjs
           node scripts/build-proof-atlas-method-mutual-evidence.cjs --check
+          ATLAS_EQUALITY_CHECK=1 node scripts/test-proof-atlas-equality-transport.cjs
+          node scripts/test-proof-atlas-equality-transport-browser.cjs
+          node scripts/build-proof-atlas-equality-evidence.cjs --check
           ATLAS_RECORDED_UNION_CHECK=1 node scripts/test-proof-atlas-recorded-union.cjs
           node scripts/build-proof-atlas-recorded-union-evidence.cjs --check
           node scripts/test-proof-atlas-recorded-union-browser.cjs

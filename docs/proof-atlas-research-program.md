@@ -48,6 +48,8 @@ The [argument-group collar](/research/proof-atlas/method-parameters/README.md) s
 
 The [mutual-family extension](/research/proof-atlas/method-mutual/README.md) records the enclosing proof call, reduction-rule owner and recursive target separately. Target-specific signatures determine indices and selected motives; fresh controls include different sibling index arities and a function-valued recursive field.
 
+The [equality-transport square](/projects/proof-atlas/manual/equality-transport/) separates original values/equalities from computed motives and endpoint types. Thirty-four stored complete Riccati calls match the pinned compiled module. Sixteen previously unavailable AI-source candidate occurrences pass packet-only kernel checks; they identify thirteen exact source cores. These are finite structural and typing results, with separate provenance for imported-module comparison and source-free replay. They do not measure human comprehension or semantic compression.
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?

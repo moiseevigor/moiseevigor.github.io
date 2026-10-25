@@ -106,6 +106,7 @@ include:
   - "method-indices-evidence.json"
   - "method-parameters-evidence.json"
   - "method-mutual-evidence.json"
+  - "equality-transport-evidence.json"
   - "compiled-term-checks.json"
   - "proof-step-map.json"
   # Frozen Proof Atlas compiled-query policies used by the public method.

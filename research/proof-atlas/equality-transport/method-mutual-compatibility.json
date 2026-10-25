@@ -1,0 +1,266 @@
+{
+  "format": "ProofAtlasMethodMutualAudit/1",
+  "status": "PASS",
+  "profiles": 3,
+  "frames": 11,
+  "inputs": 27,
+  "recursivePremises": 8,
+  "siblingCalls": 6,
+  "selfCalls": 2,
+  "functionalFamilies": 1,
+  "indexArguments": 12,
+  "prefixArguments": 54,
+  "kernelCuts": 129,
+  "signatureChecks": 6,
+  "motiveTypeChecks": 8,
+  "sourceOwnerDifferences": 5,
+  "pagedFrames": 11,
+  "pagedCalls": 3,
+  "recordRoundtrips": 3,
+  "rejections": 64,
+  "wholeArchiveRequests": 0,
+  "rows": [
+    {
+      "name": "AtlasMutualControls.tree",
+      "query": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 1,
+      "computedInput": 2,
+      "enclosingRecursor": "AtlasMutualControls.Tree.rec",
+      "ruleOwner": "AtlasMutualControls.Tree.rec",
+      "target": "AtlasMutualControls.Forest.rec",
+      "motive": 1,
+      "indices": 2,
+      "majorSlot": 10,
+      "recursion": "sibling",
+      "familyArity": 0
+    },
+    {
+      "name": "AtlasMutualControls.tree",
+      "query": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 3,
+      "computedInput": 4,
+      "enclosingRecursor": "AtlasMutualControls.Tree.rec",
+      "ruleOwner": "AtlasMutualControls.Forest.rec",
+      "target": "AtlasMutualControls.Tree.rec",
+      "motive": 0,
+      "indices": 1,
+      "majorSlot": 9,
+      "recursion": "sibling",
+      "familyArity": 0
+    },
+    {
+      "name": "AtlasMutualControls.tree",
+      "query": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 3,
+      "computedInput": 5,
+      "enclosingRecursor": "AtlasMutualControls.Tree.rec",
+      "ruleOwner": "AtlasMutualControls.Forest.rec",
+      "target": "AtlasMutualControls.Forest.rec",
+      "motive": 1,
+      "indices": 2,
+      "majorSlot": 10,
+      "recursion": "self",
+      "familyArity": 0
+    },
+    {
+      "name": "AtlasMutualControls.forest",
+      "query": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 1,
+      "computedInput": 2,
+      "enclosingRecursor": "AtlasMutualControls.Forest.rec",
+      "ruleOwner": "AtlasMutualControls.Tree.rec",
+      "target": "AtlasMutualControls.Forest.rec",
+      "motive": 1,
+      "indices": 2,
+      "majorSlot": 10,
+      "recursion": "sibling",
+      "familyArity": 0
+    },
+    {
+      "name": "AtlasMutualControls.forest",
+      "query": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 3,
+      "computedInput": 4,
+      "enclosingRecursor": "AtlasMutualControls.Forest.rec",
+      "ruleOwner": "AtlasMutualControls.Forest.rec",
+      "target": "AtlasMutualControls.Tree.rec",
+      "motive": 0,
+      "indices": 1,
+      "majorSlot": 9,
+      "recursion": "sibling",
+      "familyArity": 0
+    },
+    {
+      "name": "AtlasMutualControls.forest",
+      "query": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 3,
+      "computedInput": 5,
+      "enclosingRecursor": "AtlasMutualControls.Forest.rec",
+      "ruleOwner": "AtlasMutualControls.Forest.rec",
+      "target": "AtlasMutualControls.Forest.rec",
+      "motive": 1,
+      "indices": 2,
+      "majorSlot": 10,
+      "recursion": "self",
+      "familyArity": 0
+    },
+    {
+      "name": "AtlasMutualControls.family",
+      "query": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 1,
+      "computedInput": 2,
+      "enclosingRecursor": "AtlasMutualControls.Rose.rec",
+      "ruleOwner": "AtlasMutualControls.Rose.rec",
+      "target": "AtlasMutualControls.Grove.rec",
+      "motive": 1,
+      "indices": 1,
+      "majorSlot": 8,
+      "recursion": "sibling",
+      "familyArity": 1
+    },
+    {
+      "name": "AtlasMutualControls.family",
+      "query": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 2,
+      "computedInput": 2,
+      "enclosingRecursor": "AtlasMutualControls.Rose.rec",
+      "ruleOwner": "AtlasMutualControls.Grove.rec",
+      "target": "AtlasMutualControls.Rose.rec",
+      "motive": 0,
+      "indices": 1,
+      "majorSlot": 8,
+      "recursion": "sibling",
+      "familyArity": 0
+    }
+  ],
+  "checkerSha256": "224323c64b8720d1c28484d9a9f97883795bdd157604b57d0e4fbc068bd17194",
+  "files": [
+    {
+      "file": "public/js/proof-atlas-mutual-recursors.js",
+      "sha256": "152dd6a937bf138f6163c210334fe650c77034c3593cb872077a3a1b7f50a6ad"
+    },
+    {
+      "file": "public/js/proof-atlas-elimination.js",
+      "sha256": "4a2c842a5245827c4ab4d1d2028c6119d5735cda588009454c3a25db5beccd22"
+    },
+    {
+      "file": "public/js/proof-atlas-recursive-inputs.js",
+      "sha256": "0f0c4eeea0e48269dd6e4cfc35d500e638f50bec9f19f32814051d713c792233"
+    },
+    {
+      "file": "public/js/proof-atlas-method-interfaces.js",
+      "sha256": "fd2eb4d02ced57e88474edb16923eb34930968869e85d5909a44bd3fd132762e"
+    },
+    {
+      "file": "public/js/proof-atlas-method-origins.js",
+      "sha256": "59648b019aca919dc63ca3304942fb84106f6aa835796bada1293569cea9f4cb"
+    },
+    {
+      "file": "public/js/proof-atlas-method-indices.js",
+      "sha256": "564cc28410e07fa60108eab2e69fce951001b73e49b3832f5676df409d5a17e5"
+    },
+    {
+      "file": "public/js/proof-atlas-recursor-arguments.js",
+      "sha256": "933631bc7a7578424b57b5af090fcd496169b9bd3a95f04bac1d928775af0edd"
+    },
+    {
+      "file": "public/data/proof-atlas/method-mutual-manifest.js",
+      "sha256": "50f0e828758418ee1ac24625b1f2d8bba109e3ef71fe16b401061d8f64932b16"
+    }
+  ],
+  "scope": "Three fresh authored mutual controls, explicit family ownership and target-specific motive/index signatures. Literal unchanged family-prefix forwarding, including one function-valued sibling field. No changing parameters, arbitrary eliminator coverage, extra source recursion, semantic compression or comprehension result.",
+  "checkpointComparison": {
+    "auditSha256": "c6a540ed1d245b64fda33771faf10d76fda57c9c4ec2a198620c1ddb5f55aaf2",
+    "sameFunctionalObservations": true,
+    "fingerprintsComparedSeparately": []
+  }
+}

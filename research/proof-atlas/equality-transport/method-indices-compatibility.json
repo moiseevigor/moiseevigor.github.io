@@ -1,0 +1,742 @@
+{
+  "format": "ProofAtlasMethodIndicesAudit/1",
+  "status": "PASS",
+  "frames": 46,
+  "inputs": 66,
+  "indexedMethods": 3,
+  "indices": 7,
+  "indexViews": 14,
+  "kernelCuts": 56,
+  "lexicalReferences": 8,
+  "familyLocalReferences": 1,
+  "nonIndexedRefusals": 63,
+  "pagedFrames": 6,
+  "pagedCalls": 3,
+  "recordRoundtrips": 3,
+  "rejections": 82,
+  "wholeArchiveRequests": 0,
+  "rows": [
+    {
+      "name": "AtlasIndexControls.chain",
+      "source": {
+        "name": "AtlasIndexControls.chain",
+        "indexSha256": "8819a60467a478947054f1b847c8e320e174bd22b9ef871d5541b7b88c8d2d9b",
+        "sourceSha256": "fe427693eebec6daf8efd900bf09e463b371fef4f091a0d4c86c5aa088afcfd8",
+        "query": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "method": {
+          "namespace": "source-expression",
+          "node": 17,
+          "path": "root.value.body.body.body.body.fn.fn.arg",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "evidenceSha256": "e42b21e8a6278177ae0a6820026503ad9edc550d702bdf8d569b2014a72d132c",
+      "computedInput": 2,
+      "recursiveIndices": [
+        {
+          "index": 0,
+          "argumentSlot": 4,
+          "address": {
+            "namespace": "kernel-rule",
+            "component": "recursor-reduction-schema",
+            "evidenceSha256": "e42b21e8a6278177ae0a6820026503ad9edc550d702bdf8d569b2014a72d132c",
+            "query": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "minor": 1,
+            "schemaRoot": 69,
+            "node": 18,
+            "route": {
+              "root": 0,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "references": [
+            {
+              "node": 18,
+              "route": {
+                "root": 0,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  0,
+                  1
+                ]
+              },
+              "binder": {
+                "node": 66,
+                "route": {
+                  "root": 0,
+                  "slots": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AtlasIndexControls.grid",
+      "source": {
+        "name": "AtlasIndexControls.grid",
+        "indexSha256": "7af8b5f25f103e897c4a4897f7568543387dd080994d42de9dc8e82b4a422a8b",
+        "sourceSha256": "fe427693eebec6daf8efd900bf09e463b371fef4f091a0d4c86c5aa088afcfd8",
+        "query": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "method": {
+          "namespace": "source-expression",
+          "node": 37,
+          "path": "root.value.body.body.body.body.body.body.body.body.fn.fn.fn.fn.fn.fn.arg",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "evidenceSha256": "c003f6859d87782dbb7540ac7e932ecb08c19c4fba42b78bd275992458431fb4",
+      "computedInput": 6,
+      "recursiveIndices": [
+        {
+          "index": 0,
+          "argumentSlot": 4,
+          "address": {
+            "namespace": "kernel-rule",
+            "component": "recursor-reduction-schema",
+            "evidenceSha256": "c003f6859d87782dbb7540ac7e932ecb08c19c4fba42b78bd275992458431fb4",
+            "query": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "minor": 1,
+            "schemaRoot": 121,
+            "node": 34,
+            "route": {
+              "root": 0,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "references": [
+            {
+              "node": 34,
+              "route": {
+                "root": 0,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              "binder": {
+                "node": 118,
+                "route": {
+                  "root": 0,
+                  "slots": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "argumentSlot": 5,
+          "address": {
+            "namespace": "kernel-rule",
+            "component": "recursor-reduction-schema",
+            "evidenceSha256": "c003f6859d87782dbb7540ac7e932ecb08c19c4fba42b78bd275992458431fb4",
+            "query": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "minor": 1,
+            "schemaRoot": 121,
+            "node": 2,
+            "route": {
+              "root": 0,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "references": [
+            {
+              "node": 2,
+              "route": {
+                "root": 0,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              "binder": {
+                "node": 117,
+                "route": {
+                  "root": 0,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "argumentSlot": 6,
+          "address": {
+            "namespace": "kernel-rule",
+            "component": "recursor-reduction-schema",
+            "evidenceSha256": "c003f6859d87782dbb7540ac7e932ecb08c19c4fba42b78bd275992458431fb4",
+            "query": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "minor": 1,
+            "schemaRoot": 121,
+            "node": 4,
+            "route": {
+              "root": 0,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "references": [
+            {
+              "node": 4,
+              "route": {
+                "root": 0,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              "binder": {
+                "node": 116,
+                "route": {
+                  "root": 0,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "argumentSlot": 7,
+          "address": {
+            "namespace": "kernel-rule",
+            "component": "recursor-reduction-schema",
+            "evidenceSha256": "c003f6859d87782dbb7540ac7e932ecb08c19c4fba42b78bd275992458431fb4",
+            "query": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "minor": 1,
+            "schemaRoot": 121,
+            "node": 6,
+            "route": {
+              "root": 0,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "references": [
+            {
+              "node": 6,
+              "route": {
+                "root": 0,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              "binder": {
+                "node": 115,
+                "route": {
+                  "root": 0,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "argumentSlot": 8,
+          "address": {
+            "namespace": "kernel-rule",
+            "component": "recursor-reduction-schema",
+            "evidenceSha256": "c003f6859d87782dbb7540ac7e932ecb08c19c4fba42b78bd275992458431fb4",
+            "query": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "minor": 1,
+            "schemaRoot": 121,
+            "node": 8,
+            "route": {
+              "root": 0,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "references": [
+            {
+              "node": 8,
+              "route": {
+                "root": 0,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  0,
+                  1
+                ]
+              },
+              "binder": {
+                "node": 114,
+                "route": {
+                  "root": 0,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AtlasIndexControls.family",
+      "source": {
+        "name": "AtlasIndexControls.family",
+        "indexSha256": "7cf25ad185cce2e7ffa878f7a213fa1341a5b17fedf8dbe16bd7b3de97666063",
+        "sourceSha256": "fe427693eebec6daf8efd900bf09e463b371fef4f091a0d4c86c5aa088afcfd8",
+        "query": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "method": {
+          "namespace": "source-expression",
+          "node": 27,
+          "path": "root.value.body.body.body.body.fn.fn.arg",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "evidenceSha256": "fe291f0f2455d0cbd8769baacea753b5d8f9a12863ddb4d158644bd6803a6183",
+      "computedInput": 2,
+      "recursiveIndices": [
+        {
+          "index": 0,
+          "argumentSlot": 4,
+          "address": {
+            "namespace": "kernel-rule",
+            "component": "recursor-reduction-schema",
+            "evidenceSha256": "fe291f0f2455d0cbd8769baacea753b5d8f9a12863ddb4d158644bd6803a6183",
+            "query": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "minor": 1,
+            "schemaRoot": 83,
+            "node": 29,
+            "route": {
+              "root": 0,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "references": [
+            {
+              "node": 27,
+              "route": {
+                "root": 0,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  0,
+                  1,
+                  0,
+                  1
+                ]
+              },
+              "binder": {
+                "node": 80,
+                "route": {
+                  "root": 0,
+                  "slots": [
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            },
+            {
+              "node": 2,
+              "route": {
+                "root": 0,
+                "slots": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  0,
+                  1,
+                  1
+                ]
+              },
+              "binder": {
+                "node": 77,
+                "route": {
+                  "root": 0,
+                  "slots": [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "checkerSha256": "798683154333b3cf0cce7a62305173a12f2aefad966abe19bbce5c2f138d317b",
+  "files": [
+    {
+      "file": "public/js/proof-atlas-method-indices.js",
+      "sha256": "564cc28410e07fa60108eab2e69fce951001b73e49b3832f5676df409d5a17e5"
+    },
+    {
+      "file": "public/js/proof-atlas-method-flow.js",
+      "sha256": "d75bbce09a20615929bc3903f28fb69f7c26aec0b4b81ed10ea3379b13be11e4"
+    },
+    {
+      "file": "public/js/proof-atlas-method-interfaces.js",
+      "sha256": "fd2eb4d02ced57e88474edb16923eb34930968869e85d5909a44bd3fd132762e"
+    },
+    {
+      "file": "public/data/proof-atlas/method-indices-manifest.js",
+      "sha256": "31376a075322d4d81738a955f3e002d156b0771d2932f777da986b83c36ff742"
+    }
+  ],
+  "scope": "Ordered recursive index arguments of three freshly kernel-checked authored controls; lexical field/local-binder links, exact bounded cuts and paged delivery. Forty earlier frames retain their explicit no-index state. No normalization, index equality, arbitrary elimination, execution or comprehension claim.",
+  "checkpointComparison": {
+    "auditSha256": "3c6e2c9fcb7c7b8a7880a22b988cc59ac6f4bd18a45328d2324966db0af11ebf",
+    "sameFunctionalObservations": true,
+    "fingerprintsComparedSeparately": [
+      "checkerSha256",
+      "modelSha256",
+      "files.sha256"
+    ]
+  }
+}

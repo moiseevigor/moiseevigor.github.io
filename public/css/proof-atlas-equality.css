@@ -1,0 +1,21 @@
+.pe-square { overflow-x: auto; margin: 1.5rem 0; background: var(--fig-bg, #f7f7f5); border-radius: .4rem; }
+.pe-square svg { display: block; min-width: 30rem; width: 100%; max-height: 20rem; color: var(--text, #222); }
+.pe-square text { fill: currentColor; font: 19px "Source Serif 4", Georgia, serif; }
+.pe-wire { fill: none; stroke: currentColor; stroke-width: 1.5;  }
+.pe-nodes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+.pe-node { text-align: left; display: grid; align-content: start; gap: .35rem; min-width: 0; padding: .9rem; color: inherit; background: transparent; border: 1px solid var(--border, #aaa); border-radius: .3rem; }
+.pe-node strong { font: 600 1rem "IBM Plex Sans", sans-serif; }
+.pe-node span { font: .8rem "IBM Plex Sans", sans-serif; color: inherit; }
+.pe-node code { white-space: pre-wrap; overflow-wrap: anywhere; color: inherit; font-size: .83rem; line-height: 1.5; }
+.pe-node[data-namespace="equality-transport"] { border-style: dashed; }
+.pe-node[aria-pressed="true"] { outline: 2px solid currentColor; outline-offset: 2px; }
+.pe-node:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
+#pm-equality-lab [data-detail] { overflow-wrap: anywhere; }
+#pm-equality-lab [data-detail] pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 26rem; overflow: auto; font-size: .8rem; }
+#pm-equality-lab .pm-controls { display: flex; flex-wrap: wrap; gap: .8rem; align-items: end; }
+#pm-equality-lab label { display: grid; grid-template-columns: minmax(0, 1fr); gap: .3rem; min-width: 0; max-width: 100%; }
+#pm-equality-lab select { width: 100%; min-width: 0; max-width: 100%; box-sizing: border-box; }
+#pm-equality-lab .pm-controls { font-family: var(--sans, sans-serif); font-size: .9rem; }
+#pm-equality-lab .pm-controls :is(select, button) { font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: .25rem; min-height: 44px; padding: .5rem .65rem; }
+#pm-equality-lab .pm-controls :disabled { opacity: .6; }
+@media (max-width: 42rem) { .pe-nodes { grid-template-columns: 1fr; } }

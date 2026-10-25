@@ -660,6 +660,10 @@ The fixed extraction limits are 128 core arguments, 32 minor premises/rules, 128
 
 <!-- atlas-original-end -->
 
+<span id="equality-transport"></span>
+
+The [equality-transport square](/projects/proof-atlas/manual/equality-transport/) separates the source value and equality from the computed family and endpoint types. It checks 34 stored complete forward/reverse applications against the published Riccati packet and its pinned compiled module. Packet-only replay adds 16 AI-source candidate occurrences with 13 exact source cores; nine authored controls provide eight checked queries and two unavailable queries. The selected continuation and the transport core retain separate source routes. These are finite structural/typing checks, not semantic compression or a comprehension result. [Rule, provenance and bounds](/research/proof-atlas/equality-transport/README.md).
+
 <span id="computed-method-interfaces"></span>
 
 Computed method interfaces expose recursor inputs without requiring source lambda prefixes. The method's original source address is retained; fresh binders and the method application occupy a separate computed namespace. Native eta typing and conversion checks cover 16 methods with 24 inputs: eight methods from the Riccati proof and eight from five authored controls. Six control methods have required inputs with no source lambdas, including a let-bound method application. Domain references preserve original and computed contexts, including a dependent `P n` input. Function-valued results stop at the constructor rule's input count. These finite checks do not provide unrecorded method bodies or a general elimination-coverage result.
