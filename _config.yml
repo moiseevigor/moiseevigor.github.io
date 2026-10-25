@@ -103,6 +103,7 @@ include:
   - "method-streaming-evidence.json"
   - "method-flow-evidence.json"
   - "method-origins-evidence.json"
+  - "method-indices-evidence.json"
   - "compiled-term-checks.json"
   - "proof-step-map.json"
   # Frozen Proof Atlas compiled-query policies used by the public method.

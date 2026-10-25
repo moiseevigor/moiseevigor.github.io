@@ -145,6 +145,9 @@ on:
       - 'research/proof-atlas/method-streaming/**'
       - 'research/proof-atlas/method-flow/**'
       - 'research/proof-atlas/method-origins/**'
+      - 'research/proof-atlas/method-indices/**'
+      - 'public/data/proof-atlas/method-indices*'
+      - 'public/data/proof-atlas/method-indices/**'
       - 'public/data/proof-atlas/method-origins*'
       - 'public/data/proof-atlas/method-origins/**'
       - 'public/data/proof-atlas/method-streaming*'
@@ -457,6 +460,9 @@ on:
       - 'research/proof-atlas/method-streaming/**'
       - 'research/proof-atlas/method-flow/**'
       - 'research/proof-atlas/method-origins/**'
+      - 'research/proof-atlas/method-indices/**'
+      - 'public/data/proof-atlas/method-indices*'
+      - 'public/data/proof-atlas/method-indices/**'
       - 'public/data/proof-atlas/method-origins*'
       - 'public/data/proof-atlas/method-origins/**'
       - 'public/data/proof-atlas/method-streaming*'
@@ -739,6 +745,9 @@ jobs:
           ATLAS_ORIGINS_CHECK=1 node scripts/test-proof-atlas-method-origins.cjs
           node scripts/test-proof-atlas-method-origins-browser.cjs
           node scripts/build-proof-atlas-method-origins-evidence.cjs --check
+          ATLAS_INDICES_CHECK=1 node scripts/test-proof-atlas-method-indices.cjs
+          node scripts/test-proof-atlas-method-indices-browser.cjs
+          node scripts/build-proof-atlas-method-indices-evidence.cjs --check
           ATLAS_RECORDED_UNION_CHECK=1 node scripts/test-proof-atlas-recorded-union.cjs
           node scripts/build-proof-atlas-recorded-union-evidence.cjs --check
           node scripts/test-proof-atlas-recorded-union-browser.cjs

@@ -81,8 +81,8 @@
  }
  let methodModule=null;
  async function methodsReady(){
-  if(host.ProofAtlasMethodInterfaces?.kernelMethodOrigins)return host.ProofAtlasMethodInterfaces;
-  if(!methodModule)methodModule=(async()=>{try{for(const [ok,url]of [[host.ProofAtlasMethodInterfaces?.kernelMethodOrigins,'/public/js/proof-atlas-method-interfaces.js?v=6']])if(!ok)await new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=url;script.onload=resolve;script.onerror=()=>{script.remove();reject(Error('Method interface module unavailable'));};document.head.append(script);});return host.ProofAtlasMethodInterfaces;}catch(error){methodModule=null;throw error;}})();return methodModule;
+  if(host.ProofAtlasMethodInterfaces?.recursiveIndexPorts)return host.ProofAtlasMethodInterfaces;
+  if(!methodModule)methodModule=(async()=>{try{for(const [ok,url]of [[host.ProofAtlasMethodInterfaces?.recursiveIndexPorts,'/public/js/proof-atlas-method-interfaces.js?v=7']])if(!ok)await new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=url;script.onload=resolve;script.onerror=()=>{script.remove();reject(Error('Method interface module unavailable'));};document.head.append(script);});return host.ProofAtlasMethodInterfaces;}catch(error){methodModule=null;throw error;}})();return methodModule;
  }
  function methodDescriptor(record,typing,route,minor){const records=[host.PROOF_ATLAS_METHOD_INTERFACES,host.PROOF_ATLAS_METHOD_REPLAY].filter(i=>i?.format==='ProofAtlasMethodInterfaceInventory/1'&&Array.isArray(i.records)&&i.records.length<=64).flatMap(i=>i.records);return records.find(d=>d.name===record.name&&d.indexSha256===record.indexSha256&&d.sourceSha256===record.sourceSha256&&d.edition===typing.source.edition&&d.queries.some(q=>key(q.route)===key(route)&&q.minors.includes(minor)));}
  function mount(container,config){
