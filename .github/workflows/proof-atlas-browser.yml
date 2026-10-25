@@ -150,6 +150,12 @@ on:
       - 'research/proof-atlas/equality-transport/**'
       - 'research/proof-atlas/equality-streaming/**'
       - 'research/proof-atlas/construction-composition/**'
+      - 'research/proof-atlas/application-ports/**'
+      - 'public/data/proof-atlas/application-ports*'
+      - 'public/data/proof-atlas/application-ports/**'
+      - 'public/js/proof-atlas-application-port*.js'
+      - 'public/css/proof-atlas-application-ports.css'
+      - 'scripts/*proof-atlas-application-ports*'
       - 'public/data/proof-atlas/construction-composition*'
       - 'public/data/proof-atlas/construction-composition/**'
       - 'public/js/proof-atlas-construction-composition*.js'
@@ -488,6 +494,12 @@ on:
       - 'research/proof-atlas/equality-transport/**'
       - 'research/proof-atlas/equality-streaming/**'
       - 'research/proof-atlas/construction-composition/**'
+      - 'research/proof-atlas/application-ports/**'
+      - 'public/data/proof-atlas/application-ports*'
+      - 'public/data/proof-atlas/application-ports/**'
+      - 'public/js/proof-atlas-application-port*.js'
+      - 'public/css/proof-atlas-application-ports.css'
+      - 'scripts/*proof-atlas-application-ports*'
       - 'public/data/proof-atlas/construction-composition*'
       - 'public/data/proof-atlas/construction-composition/**'
       - 'public/js/proof-atlas-construction-composition*.js'
@@ -809,6 +821,9 @@ jobs:
           ATLAS_COMPOSITION_CHECK=1 node scripts/test-proof-atlas-construction-composition.cjs
           node scripts/test-proof-atlas-construction-composition-browser.cjs
           node scripts/build-proof-atlas-construction-composition-evidence.cjs --check
+          ATLAS_APPLICATION_PORT_CHECK=1 node scripts/test-proof-atlas-application-ports.cjs
+          node scripts/test-proof-atlas-application-ports-browser.cjs
+          node scripts/build-proof-atlas-application-ports-evidence.cjs --check
           ATLAS_RECORDED_UNION_CHECK=1 node scripts/test-proof-atlas-recorded-union.cjs
           node scripts/build-proof-atlas-recorded-union-evidence.cjs --check
           node scripts/test-proof-atlas-recorded-union-browser.cjs

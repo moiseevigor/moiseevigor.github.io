@@ -1,0 +1,247 @@
+{
+  "format": "ProofAtlasEqualityStreamingBrowser/1",
+  "status": "PASS",
+  "manualProfiles": 18,
+  "manualQueries": 59,
+  "manualSourceSelections": 182,
+  "manualComputedSelections": 177,
+  "libraryQueries": 50,
+  "librarySourceJumps": 50,
+  "computedSelectionPreserved": 50,
+  "unavailableCandidates": 18,
+  "axeAudits": 8,
+  "keyboardChecks": 3,
+  "staleSelectionChecks": 1,
+  "optionalComponentFailures": 1,
+  "wholeArchiveAttempts": 0,
+  "stress": {
+    "format": "ProofAtlasEqualityPageState/1",
+    "phase": "ready",
+    "disposed": false,
+    "sourceRows": 13,
+    "rowLimit": 4096,
+    "sourceRowJsonBytes": 660,
+    "jsonByteLimit": 4194304,
+    "peakSourceRows": 13,
+    "peakSourceRowJsonBytes": 660,
+    "nativeNodes": 41016,
+    "sourcePageCache": {
+      "pageLoads": 247,
+      "indexLoads": 114,
+      "faults": 247,
+      "evictions": 246,
+      "peakCachedPages": 1,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 8859,
+      "cachedPages": 1,
+      "cachedNodes": 256,
+      "indexPages": 2,
+      "pageLimit": 1,
+      "indexLimit": 2,
+      "nodeLimit": 256,
+      "originalIndexSha256": "a0baa9aad5f3968145d1353663406709a49ef5438dd5ee4372a9fd484d2dafa9",
+      "manifestSha256": "6e27089f44ff7d4710e50d3a14d25a708401cd95279dad4aed00b96a1d3637cc",
+      "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+    },
+    "comparisons": [
+      {
+        "format": "ProofAtlasSourceComparison/1",
+        "source": {
+          "name": "AtlasTransportStress.balanced",
+          "indexSha256": "a0baa9aad5f3968145d1353663406709a49ef5438dd5ee4372a9fd484d2dafa9",
+          "sourceSha256": "8ced97a2ba446c1a95806b72481c17d4539f91283f0f96f46bf47ce4508e0ba9",
+          "manifestSha256": "6e27089f44ff7d4710e50d3a14d25a708401cd95279dad4aed00b96a1d3637cc",
+          "root": 0
+        },
+        "nativeRoot": 34,
+        "shift": 0,
+        "relation": "exact-source-syntax",
+        "state": {
+          "pairs": 1,
+          "memoHits": 0,
+          "pendingHits": 0,
+          "evictions": 0,
+          "peakMemoEntries": 1,
+          "peakStackFrames": 1,
+          "memoEntries": 0,
+          "stackFrames": 0,
+          "memoLimit": 1024,
+          "stackLimit": 4096,
+          "workLimit": 262144,
+          "schedule": "page-aware-depth-first"
+        },
+        "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+      },
+      {
+        "format": "ProofAtlasSourceComparison/1",
+        "source": {
+          "name": "AtlasTransportStress.balanced",
+          "indexSha256": "a0baa9aad5f3968145d1353663406709a49ef5438dd5ee4372a9fd484d2dafa9",
+          "sourceSha256": "8ced97a2ba446c1a95806b72481c17d4539f91283f0f96f46bf47ce4508e0ba9",
+          "manifestSha256": "6e27089f44ff7d4710e50d3a14d25a708401cd95279dad4aed00b96a1d3637cc",
+          "root": 12
+        },
+        "nativeRoot": 41,
+        "shift": 0,
+        "relation": "exact-source-syntax",
+        "state": {
+          "pairs": 8,
+          "memoHits": 1,
+          "pendingHits": 0,
+          "evictions": 0,
+          "peakMemoEntries": 8,
+          "peakStackFrames": 4,
+          "memoEntries": 0,
+          "stackFrames": 0,
+          "memoLimit": 1024,
+          "stackLimit": 4096,
+          "workLimit": 262144,
+          "schedule": "page-aware-depth-first"
+        },
+        "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+      },
+      {
+        "format": "ProofAtlasSourceComparison/1",
+        "source": {
+          "name": "AtlasTransportStress.balanced",
+          "indexSha256": "a0baa9aad5f3968145d1353663406709a49ef5438dd5ee4372a9fd484d2dafa9",
+          "sourceSha256": "8ced97a2ba446c1a95806b72481c17d4539f91283f0f96f46bf47ce4508e0ba9",
+          "manifestSha256": "6e27089f44ff7d4710e50d3a14d25a708401cd95279dad4aed00b96a1d3637cc",
+          "root": 40975
+        },
+        "nativeRoot": 28715,
+        "shift": 2,
+        "relation": "exact-source-syntax-under-binder-lifting",
+        "state": {
+          "pairs": 28686,
+          "memoHits": 4444,
+          "pendingHits": 16033,
+          "evictions": 27662,
+          "peakMemoEntries": 1024,
+          "peakStackFrames": 2237,
+          "memoEntries": 0,
+          "stackFrames": 0,
+          "memoLimit": 1024,
+          "stackLimit": 4096,
+          "workLimit": 262144,
+          "schedule": "page-aware-depth-first"
+        },
+        "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+      },
+      {
+        "format": "ProofAtlasSourceComparison/1",
+        "source": {
+          "name": "AtlasTransportStress.balanced",
+          "indexSha256": "a0baa9aad5f3968145d1353663406709a49ef5438dd5ee4372a9fd484d2dafa9",
+          "sourceSha256": "8ced97a2ba446c1a95806b72481c17d4539f91283f0f96f46bf47ce4508e0ba9",
+          "manifestSha256": "6e27089f44ff7d4710e50d3a14d25a708401cd95279dad4aed00b96a1d3637cc",
+          "root": 12
+        },
+        "nativeRoot": 41,
+        "shift": 1,
+        "relation": "exact-source-syntax-under-binder-lifting",
+        "state": {
+          "pairs": 8,
+          "memoHits": 1,
+          "pendingHits": 0,
+          "evictions": 0,
+          "peakMemoEntries": 8,
+          "peakStackFrames": 4,
+          "memoEntries": 0,
+          "stackFrames": 0,
+          "memoLimit": 1024,
+          "stackLimit": 4096,
+          "workLimit": 262144,
+          "schedule": "page-aware-depth-first"
+        },
+        "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+      },
+      {
+        "format": "ProofAtlasSourceComparison/1",
+        "source": {
+          "name": "AtlasTransportStress.balanced",
+          "indexSha256": "a0baa9aad5f3968145d1353663406709a49ef5438dd5ee4372a9fd484d2dafa9",
+          "sourceSha256": "8ced97a2ba446c1a95806b72481c17d4539f91283f0f96f46bf47ce4508e0ba9",
+          "manifestSha256": "6e27089f44ff7d4710e50d3a14d25a708401cd95279dad4aed00b96a1d3637cc",
+          "root": 0
+        },
+        "nativeRoot": 34,
+        "shift": 1,
+        "relation": "exact-source-syntax-under-binder-lifting",
+        "state": {
+          "pairs": 1,
+          "memoHits": 0,
+          "pendingHits": 0,
+          "evictions": 0,
+          "peakMemoEntries": 1,
+          "peakStackFrames": 1,
+          "memoEntries": 0,
+          "stackFrames": 0,
+          "memoLimit": 1024,
+          "stackLimit": 4096,
+          "workLimit": 262144,
+          "schedule": "page-aware-depth-first"
+        },
+        "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+      },
+      {
+        "format": "ProofAtlasSourceComparison/1",
+        "source": {
+          "name": "AtlasTransportStress.balanced",
+          "indexSha256": "a0baa9aad5f3968145d1353663406709a49ef5438dd5ee4372a9fd484d2dafa9",
+          "sourceSha256": "8ced97a2ba446c1a95806b72481c17d4539f91283f0f96f46bf47ce4508e0ba9",
+          "manifestSha256": "6e27089f44ff7d4710e50d3a14d25a708401cd95279dad4aed00b96a1d3637cc",
+          "root": 40982
+        },
+        "nativeRoot": 28723,
+        "shift": 0,
+        "relation": "exact-source-syntax",
+        "state": {
+          "pairs": 11,
+          "memoHits": 2,
+          "pendingHits": 0,
+          "evictions": 0,
+          "peakMemoEntries": 11,
+          "peakStackFrames": 4,
+          "memoEntries": 0,
+          "stackFrames": 0,
+          "memoLimit": 1024,
+          "stackLimit": 4096,
+          "workLimit": 262144,
+          "schedule": "page-aware-depth-first"
+        },
+        "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+      }
+    ],
+    "delivery": {
+      "format": "ProofAtlasEqualityQueryDelivery/1",
+      "originalEvidenceSha256": "eec10344a6113a23c3edd1809a45fc648c89141c5bd125d31e421bd01d137f73",
+      "originalRecordBytes": 1311764,
+      "manifestSha256": "d5109cfdd40baa1d42e0a9dc7cbf6893171d997fd539b57f4873886b484f926c",
+      "headerSha256": "4a9f9274c53578f1e54e1744c8fdfd44e0fca0f921981be0cc4755b637f70707",
+      "headerDecodedBytes": 1012,
+      "queryPageSha256": "124ddc1533302933c4834cbe573a944865fcd24caee3cdd69431c9314c1fb7ff",
+      "queryOrdinal": 0,
+      "queryDecodedBytes": 1311354,
+      "entrySha256": "0400e2aab04214b6145570005a8aed748f220459a14d48456388d0cb5c668763",
+      "inventoriedQueries": 1,
+      "wholeNativeRecordRequested": false
+    },
+    "validatedQueries": 1,
+    "wholeSourceArchiveRequested": false,
+    "validation": "One native query; source syntax/lifting streamed through authenticated pages. Native graph loads fully. Artifact and traversal bounds are not total heap measurements."
+  },
+  "builtFiles": {
+    "public/js/proof-atlas-equality-transport.js": "ff1e188466f418d431a42a8f41e3c4a7b9da70b8de0836fc19540f2b9c91d15a",
+    "public/js/proof-atlas-equality-pages.js": "3c02646ec5184f7fe73fc44d1a7eac3964fdee2e63a9aeef00936c64916d3daf",
+    "public/js/proof-atlas-equality-diagram.js": "42f28feef0c78ee285aef18686c9e4351fe0f25085d4eefe3c689256663457e9",
+    "public/js/proof-atlas-equality-view.js": "6f7d0bc0c681737e049d66ecb9bce5079346ab359d81f497de530489cb8311cc",
+    "public/js/proof-atlas-equality-source-view.js": "1b996bd39802b44dea1255f728e66771e4579e5b424930dc6a31dce40538b2fa",
+    "public/js/proof-atlas-source-comparison.js": "ada6fd61d8e414e0ccca777373d631a0c182b03dfb71e30e1cb3e832a4f38e00",
+    "public/js/proof-atlas-paged-library.js": "02893807808ccabcb6a7fb4159976fe69cc6f2ea73600afdfcf23b7d8accbdf6",
+    "public/js/proof-atlas-library.js": "c434630b62a74adffacbc77ecaa51fa516a1384ce0eae0556a2e79e859a2116c",
+    "public/css/proof-atlas-equality.css": "4194f3597ab6f30277c1b5b925bf969abeebf4b1a6befac3a3d9922349802da4",
+    "public/data/proof-atlas/equality-streaming-manifest.js": "9532db606658dd30f06716c25c9e158ecd0815fb428c4c75e00452e0de463db9"
+  },
+  "checkerSha256": "dbaee3e003af2bff532cf238f9995d8329f93bb1551b09eb9693edfed3519905"
+}

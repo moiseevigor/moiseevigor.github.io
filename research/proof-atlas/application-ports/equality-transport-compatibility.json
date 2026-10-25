@@ -1,0 +1,285 @@
+{
+  "format": "ProofAtlasEqualityAudit/1",
+  "status": "PASS",
+  "profiles": 17,
+  "aiOccurrences": 16,
+  "aiCores": 13,
+  "riccatiOccurrences": 34,
+  "controlOccurrences": 8,
+  "controlUnavailable": 2,
+  "maximumVertices": 7,
+  "rejections": 268,
+  "sourceSelections": 179,
+  "computedSelections": 174,
+  "rows": [
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "kind": "native-riccati",
+      "candidates": 34,
+      "checked": 34,
+      "exactSourceCores": 34,
+      "recordSha256": "df22473856eb7b514bc2e3f99d44d92828cc4e3a960c0ad134a9b21057db4225"
+    },
+    {
+      "name": "AtlasTransportControls.simple",
+      "kind": "authored-control",
+      "candidates": 1,
+      "checked": 1,
+      "exactSourceCores": 1,
+      "recordSha256": "90c63517f0d4ad8ed2928f1f8da0618f77b8182288986bf4f3d053a0044dbb7d"
+    },
+    {
+      "name": "AtlasTransportControls.dependent",
+      "kind": "authored-control",
+      "candidates": 1,
+      "checked": 1,
+      "exactSourceCores": 1,
+      "recordSha256": "1182bc511adf268723069d54d9c4782f9854c3fe6a0140d975f2026b9510b8bc"
+    },
+    {
+      "name": "AtlasTransportControls.proofDependent",
+      "kind": "authored-control",
+      "candidates": 1,
+      "checked": 1,
+      "exactSourceCores": 1,
+      "recordSha256": "6dadea99c1c5ffa1ea55ab998219f211ef8738c51cac5691c520b1368fb4856f"
+    },
+    {
+      "name": "AtlasTransportControls.trailing",
+      "kind": "authored-control",
+      "candidates": 2,
+      "checked": 2,
+      "exactSourceCores": 1,
+      "recordSha256": "94cbc18d8fa551861dca85693ccafee7cad26f2d46f5c0020986806408cc0647"
+    },
+    {
+      "name": "AtlasTransportControls.same",
+      "kind": "authored-control",
+      "candidates": 1,
+      "checked": 1,
+      "exactSourceCores": 1,
+      "recordSha256": "49891a952adef3e9360e389642c8e2a6025f2699ee6804844079e81998f1d3ed"
+    },
+    {
+      "name": "AtlasTransportControls.reordered",
+      "kind": "authored-control",
+      "candidates": 1,
+      "checked": 1,
+      "exactSourceCores": 1,
+      "recordSha256": "a808ea73c1d613e9842366d5c248ad79945e1def444a4a23d319c83f08416d5d"
+    },
+    {
+      "name": "AtlasTransportControls.reverse",
+      "kind": "authored-control",
+      "candidates": 1,
+      "checked": 1,
+      "exactSourceCores": 1,
+      "recordSha256": "26d093808c8dd3621ae1edc5960b1b01a37b70e9a9b77c83b9a51fd236fc5acc"
+    },
+    {
+      "name": "AtlasTransportControls.ordinary",
+      "kind": "authored-control",
+      "candidates": 1,
+      "checked": 0,
+      "exactSourceCores": 0,
+      "recordSha256": "9d3da8ea1af3c94dd38d8b4b9527fdc3f9d7146d114c8d1b4775f7ce7cef6d2c"
+    },
+    {
+      "name": "AtlasTransportControls.partialCall",
+      "kind": "authored-control",
+      "candidates": 1,
+      "checked": 0,
+      "exactSourceCores": 0,
+      "recordSha256": "fe4c7716da9c679311aa964789932fa6ce0119c8ae8201fe3bdc0e0fbb08a3d5"
+    },
+    {
+      "name": "lean_workbook_20418",
+      "kind": "publisher-attributed-ai-source",
+      "candidates": 9,
+      "checked": 4,
+      "exactSourceCores": 1,
+      "recordSha256": "914a975604460ef1e8252babee7a756d91d90ff7dbf55bffd45ae181aa27f648"
+    },
+    {
+      "name": "lean_workbook_4274",
+      "kind": "publisher-attributed-ai-source",
+      "candidates": 2,
+      "checked": 2,
+      "exactSourceCores": 2,
+      "recordSha256": "fcda06474f76d4a0648e00b5f3bb69d8bcbf01cc9cdda6c540e82b25ee6d5744"
+    },
+    {
+      "name": "lean_workbook_plus_15068",
+      "kind": "publisher-attributed-ai-source",
+      "candidates": 2,
+      "checked": 2,
+      "exactSourceCores": 2,
+      "recordSha256": "58baeb5edb755b9c4f7d30fa5e551159dd5271a3d67649f818d454b037d92a28"
+    },
+    {
+      "name": "lean_workbook_plus_19617",
+      "kind": "publisher-attributed-ai-source",
+      "candidates": 3,
+      "checked": 2,
+      "exactSourceCores": 2,
+      "recordSha256": "36b40b9593e40f3797947354995ec113fd33b77683277421f9904eeb327d1360"
+    },
+    {
+      "name": "lean_workbook_plus_39831",
+      "kind": "publisher-attributed-ai-source",
+      "candidates": 2,
+      "checked": 2,
+      "exactSourceCores": 2,
+      "recordSha256": "084aee90e7f6ab976eff8639b85041feff34511b477c4177893f775d6497eab4"
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "kind": "publisher-attributed-ai-source",
+      "candidates": 15,
+      "checked": 4,
+      "exactSourceCores": 4,
+      "recordSha256": "edc52babb0aad1ba7a15c11ee9261437d101a84606639df99cce56f3b379fee0"
+    },
+    {
+      "name": "lean_workbook_plus_62755",
+      "kind": "publisher-attributed-ai-source",
+      "candidates": 1,
+      "checked": 0,
+      "exactSourceCores": 0,
+      "recordSha256": "4f6d5556aa1caf4fa9a943d9a15fc8d5b1c82fd784356cbe69e6dcc4ff1af4d4"
+    }
+  ],
+  "checkerSha256": "4a137d3f4fafb3fa407a2fb33cfd05ec9a6dc0611624675121328a2a48479aa9",
+  "files": [
+    {
+      "file": "public/js/proof-atlas-equality-transport.js",
+      "sha256": "ff1e188466f418d431a42a8f41e3c4a7b9da70b8de0836fc19540f2b9c91d15a"
+    },
+    {
+      "file": "public/js/proof-atlas-equality-view.js",
+      "sha256": "6f7d0bc0c681737e049d66ecb9bce5079346ab359d81f497de530489cb8311cc"
+    },
+    {
+      "file": "public/css/proof-atlas-equality.css",
+      "sha256": "4194f3597ab6f30277c1b5b925bf969abeebf4b1a6befac3a3d9922349802da4"
+    },
+    {
+      "file": "public/data/proof-atlas/equality-transport-manifest.js",
+      "sha256": "fee38c530e705ad47b8ec256c7a1f398d720d700d2d494f29d2a848d488c0e51"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-native-df22473856eb7b514bc2e3f99d44d92828cc4e3a960c0ad134a9b21057db4225.json.gz",
+      "sha256": "8bb2b429176e4c5eada88358c4b8deff5e6065aa9573cbba560af3dbd76630a8"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-native-90c63517f0d4ad8ed2928f1f8da0618f77b8182288986bf4f3d053a0044dbb7d.json.gz",
+      "sha256": "44ae4c8d58f232a45e549668060ad6651c2ebc30daccae25858c604a863918c8"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-source-1884ff1d2a463be258a27a4487ae83afcd0f7237636975bcd72c74b18128ecc2.json.gz",
+      "sha256": "c2c515944801ad4926c5bfa704302aa26f80f49c92fc4df166bf5da66bafa329"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-native-1182bc511adf268723069d54d9c4782f9854c3fe6a0140d975f2026b9510b8bc.json.gz",
+      "sha256": "397a31f45bb437a520e29541781fd6fa410268432f8743f74b3bcbac8e26ea25"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-source-9d6027e1c4236e349c4ece751ec87c624803e6004de9d7399a943cab4219558e.json.gz",
+      "sha256": "cd338783d7b935a1a5756e401522eb61f64692f6f617c694e3ce8db89d8e9a7a"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-native-6dadea99c1c5ffa1ea55ab998219f211ef8738c51cac5691c520b1368fb4856f.json.gz",
+      "sha256": "99cfd9f0fbd423a18d5afea015fcff9f1af2b3f92ca2d94e67cbcdcdf6cf4218"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-source-eb374d618bc2a5e9bc4bda68dfdcb2397808be685df3c0997ab4f7e4f016d26d.json.gz",
+      "sha256": "d2e0d05af46c56632afe7620c899f89434592185df3fb3f243361653a11c5103"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-native-94cbc18d8fa551861dca85693ccafee7cad26f2d46f5c0020986806408cc0647.json.gz",
+      "sha256": "888f44fc534c12cb7705f681def16b778b92da259e7840ca2a7d993ca7af559c"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-source-977d4904a0f5596ed06d0ef5cc9796688b84d66e4ce7b021299589f33f649d52.json.gz",
+      "sha256": "39599d414c006ff0439309faba2c8fc3b37425c5085a81a4f41efb27f4eb6f72"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-native-49891a952adef3e9360e389642c8e2a6025f2699ee6804844079e81998f1d3ed.json.gz",
+      "sha256": "0eef579c5962922481ef2be93895af437d05607bb2f051cdf9ba6dea0bb5f057"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-source-dc46fa73198156f1c18ec58a9b6882968a85f765b1c0a5975f7a1039afe83035.json.gz",
+      "sha256": "63a066a02bb0d7e953cf47878ca1b8fe0718589ce4b064262fce8956891d7997"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-native-a808ea73c1d613e9842366d5c248ad79945e1def444a4a23d319c83f08416d5d.json.gz",
+      "sha256": "cebc8e4d36b3554b94ee0be7fd8f31c3b2c78a35fe3f3b768dfde5ebc0074814"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-source-a4b09e16906d5ae5481bb094ca9586728cc0059b57a4cf96e58eb14c7cd9b425.json.gz",
+      "sha256": "646f04218d76c5468f1f63d61749d8d8c66e84f0085fb9f7f094d6059fa5cdf3"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-native-26d093808c8dd3621ae1edc5960b1b01a37b70e9a9b77c83b9a51fd236fc5acc.json.gz",
+      "sha256": "a71e3e525ca41fcef02e81babb2c10d36f71eaf0918e7c9f412feae7979b884e"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-source-7230301a294058c5c4f776f0cd93dd946b8633a13ccdefd386496be1e8d2e3ea.json.gz",
+      "sha256": "b0c859756e9efdc063e70c82a25c59a01f7dff358ed79f5abdaff358367e75f1"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-native-9d3da8ea1af3c94dd38d8b4b9527fdc3f9d7146d114c8d1b4775f7ce7cef6d2c.json.gz",
+      "sha256": "5798dc7bd893e7c0f699297b398958ec6e4bcc0c5722ad56a19cd705c12c2fb4"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-source-a6ef0d59978724f7c608c14cd786faffcb158d8ec157ac437e8f6b33ac377f97.json.gz",
+      "sha256": "1fd147a5d555586942669a819a316c15fcf8459fc1234c9b05ef8bc1cab76b80"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-native-fe4c7716da9c679311aa964789932fa6ce0119c8ae8201fe3bdc0e0fbb08a3d5.json.gz",
+      "sha256": "fef13d0ed2d60adf7cbef8c8a0161bfee3384d6398b9ba74fe837af6a29bc8a2"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-source-7c961f055fc91d779448eb354de3384b68b4a44873ed12f218bb0a55cfda8d3d.json.gz",
+      "sha256": "5eec137af0e9597d7733f4447abcd54e54042c24734e3e8e4a118f4a7a116a1c"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-native-914a975604460ef1e8252babee7a756d91d90ff7dbf55bffd45ae181aa27f648.json.gz",
+      "sha256": "e085e41737afca3f3919aff5cc20f9b599f35808b688d6290ca9687982d4d7a3"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-native-fcda06474f76d4a0648e00b5f3bb69d8bcbf01cc9cdda6c540e82b25ee6d5744.json.gz",
+      "sha256": "b17125871dff65175b7f3e0d2bd5aa5e6294de3b6c214b7fa123b6bd415bf06e"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-native-58baeb5edb755b9c4f7d30fa5e551159dd5271a3d67649f818d454b037d92a28.json.gz",
+      "sha256": "b4f041db83004175aa9a1523ab6669845eaf967a84db897835ca8155688c465d"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-native-36b40b9593e40f3797947354995ec113fd33b77683277421f9904eeb327d1360.json.gz",
+      "sha256": "03cc6620b14c189ad45c7953f6ca654bc294c23a903452a78dd93e1af3e8a88e"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-native-084aee90e7f6ab976eff8639b85041feff34511b477c4177893f775d6497eab4.json.gz",
+      "sha256": "6e4175c1e5f6198d28caf701371dbcf5e59986dc023fe05120af36ac20f5fb76"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-native-edc52babb0aad1ba7a15c11ee9261437d101a84606639df99cce56f3b379fee0.json.gz",
+      "sha256": "050dca1490d7313e2e60a92c9bb486ad8c82168ae359c736cab83cb09b2d2a88"
+    },
+    {
+      "file": "./public/data/proof-atlas/equality-native-4f6d5556aa1caf4fa9a943d9a15fc8d5b1c82fd784356cbe69e6dcc4ff1af4d4.json.gz",
+      "sha256": "a288189b71d10461178a1624fb15d3a2eb4df3f713e2119dbf2f43f45e2ea923"
+    }
+  ],
+  "scope": "Finite transport candidates: native typing/conversion plus independent literal source/template checks. Exact core routes deduplicate continuations. No all-Lean coverage, semantic proof compression or comprehension claim.",
+  "checkpointComparison": {
+    "auditSha256": "27cd35ce918f3d92b975a8584b00831072d9b829eb0c34dcb18eec9877bf69d6",
+    "sameFunctionalObservations": true,
+    "fingerprintsComparedSeparately": [
+      "checkerSha256",
+      "modelSha256",
+      "files.sha256"
+    ]
+  }
+}

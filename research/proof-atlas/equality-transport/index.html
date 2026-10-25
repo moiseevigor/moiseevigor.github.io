@@ -21,6 +21,19 @@ p:C(a,\mathrm{refl}_a),\qquad h:a=b,
 <p><strong>Trace source inputs</strong> switches the square to a three-box construction collar. Solid connectors follow exact source arguments; dashed connectors pass through recorded local bindings. Dotted boxes are context inputs. Each port retains its ordered argument slot, producer context, checked type conversion and original occurrence. Nondependent bindings keep their flag; a connector records their source value and a checked closed binding conversion, rather than claiming a recovered tactic. Fragments can overlap, so their sizes are not additive. <a href="/research/proof-atlas/construction-composition/README.md">Composition checks and limits</a>.</p>
 <p>Click a value or equality card for its exact original route. Click an endpoint or family for its separate computed address. Further applications remain distinct from the transport core: several selected occurrences can refer to the same source core.</p>
 <p>The records cover a finite candidate inventory and authored controls. Unsupported candidates retain their reasons. This rule does not establish semantic proof compression, complete Lean coverage or improved human comprehension.</p>
+<link rel="stylesheet" href="/public/css/proof-atlas-application-ports.css?v=1">
+<section id="application-ports" aria-labelledby="application-ports-title">
+<h2 id="application-ports-title">Application inputs beyond transport</h2>
+<p>An ordinary application has a function field and an ordered sequence of actual arguments. The arguments include types, instances and proofs supplied by elaboration. These are compiled expression fields; they do not reconstruct the original surface syntax or tactic script.</p>
+\[
+ f : \Pi(x_1:A_1)\cdots(x_n:A_n),R,\qquad
+ f\,a_1\cdots a_n : R[a_1/x_1,\ldots,a_n/x_n].
+\]
+<p>The view retains one function port and at most four argument ports at a time. It marks proof, type and value roles separately from explicit, implicit, strict implicit and instance binder visibility. A callable result is a function-typed result, not evidence that the source call is missing an argument.</p>
+<div id="pm-application-lab"><div class="pm-controls"><label>Recorded proof or authored control <select data-app-profile></select></label><label>Application occurrence <select data-app-call></select></label><button data-app-load type="button">Load application</button><button data-app-release type="button">Release data</button></div><div data-app-view></div></div>
+<p>Solid connectors denote the selected source fields. A dashed first segment follows a recorded local binding. The separate type-reference list refers to bound variables in the literal function-type telescope, with a native checked instantiation bridge. It does not infer which argument values are used, which premises are necessary, or the mathematical strategy. An unavailable literal type prefix remains marked.</p>
+<p><a href="/research/proof-atlas/application-ports/README.md">Application rule, native checks and current limits</a>.</p>
+</section>
 <script src="/public/js/proof-atlas-library-data.js?v=3" defer></script>
 <script src="/public/js/proof-atlas-occurrence-types.js?v=5" defer></script>
 <script src="/public/js/proof-atlas-source-pages.js?v=3" defer></script>
@@ -31,3 +44,7 @@ p:C(a,\mathrm{refl}_a),\qquad h:a=b,
 <script src="/public/js/proof-atlas-equality-diagram.js?v=2" defer></script>
 <script src="/public/data/proof-atlas/construction-composition-manifest.js?v=1" defer></script>
 <script src="/public/js/proof-atlas-equality-view.js?v=3" defer></script>
+
+<script src="/public/data/proof-atlas/application-ports-manifest.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-application-port-view.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-application-port-manual.js?v=1" defer></script>

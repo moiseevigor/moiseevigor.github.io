@@ -505,6 +505,20 @@ compression, or measure comprehension.
 
 <section class="atlas-evidence-group" data-evidence-group="typing" markdown="1">
 
+<details class="atlas-evidence-entry" data-evidence-order="76" markdown="1">
+<summary>General application inputs and formal-type references</summary>
+
+## General application inputs and formal-type references
+
+The general application interface retains a separate function port and every actual supplied argument. Native role and binder visibility distinguish proofs, types, values, implicit and instance inputs. The finite inventory contains 787 ports at 162 occurrences, including 87 applications in the Riccati proof. All 207 bounded argument windows match complete-data scenes.
+
+Formal-domain references to earlier arguments have separate computed addresses and a kernel-checked instantiation bridge. They are not source value-use or premise-necessity links. A nine-argument lambda retains all source arguments although its body returns only the last; a local type alias keeps successful application typing separate from an unavailable literal Π prefix.
+
+[Visual application experiment](/projects/proof-atlas/manual/equality-transport/#application-ports) · [Native controls, evidence and limits](/research/proof-atlas/application-ports/README.md)
+
+</details>
+
+
 <details class="atlas-evidence-entry" data-evidence-order="75" markdown="1">
 <summary>Typed source-input composition</summary>
 

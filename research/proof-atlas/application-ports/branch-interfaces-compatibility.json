@@ -1,0 +1,86 @@
+{
+  "format": "ProofAtlasMethodInterfaceAudit/1",
+  "status": "PASS",
+  "checkerSha256": "8993ad7fc399b3a440026057498e5945bcd8875d12b119cb33eece444f655833",
+  "modelSha256": "fd2eb4d02ced57e88474edb16923eb34930968869e85d5909a44bd3fd132762e",
+  "nativeVerificationSha256": "cc7cb2b581b8924f909c74f1f66477ec1e1a2dfe82611fbdf0c371bcef02931d",
+  "baseline": {
+    "profiles": 15,
+    "calls": 32,
+    "branches": 49,
+    "missingSourcePrefixes": 0
+  },
+  "profiles": 6,
+  "queries": 12,
+  "methods": 16,
+  "inputs": 24,
+  "missingSourcePrefixes": 6,
+  "zeroInputMethods": 2,
+  "storedMethodChecks": 1,
+  "sourceTypePeerChecks": 8,
+  "functionValuedResults": 2,
+  "originalContextReferenceChecks": 35,
+  "computedInputReferenceChecks": 1,
+  "rejections": 16,
+  "inputRecordsUnchanged": true,
+  "callerObjectsNotFrozen": true,
+  "rows": [
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "edition": "published-15",
+      "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+      "evidenceSha256": "ab7dff22cce3ab068a08a56cce0b109dbd819c40f79ced2a67edd42cfce5761a",
+      "queries": 7,
+      "interfaces": 8
+    },
+    {
+      "name": "AtlasMethodControls.conjunction",
+      "edition": "branch-method-controls",
+      "indexSha256": "03248be95a62060342042ca649cad79dc6ca303ec3f7982b39ea92c7238a2d9d",
+      "evidenceSha256": "1e31a9871a371ad71decfaae31da1e6a14bac8f42ba1abf12cf9680f410fe207",
+      "queries": 1,
+      "interfaces": 1
+    },
+    {
+      "name": "AtlasMethodControls.dependent",
+      "edition": "branch-method-controls",
+      "indexSha256": "e0edf503d1b25d23fefdcba3125eff3b165a090e9052469bcb6b16c21b1eee45",
+      "evidenceSha256": "e6c63b7a3d46bf410aa8d7255625d0686bffb9ba8dd63abc1cc6213f1e3795a4",
+      "queries": 1,
+      "interfaces": 2
+    },
+    {
+      "name": "AtlasMethodControls.disjunction",
+      "edition": "branch-method-controls",
+      "indexSha256": "456eb2c0b523cf1178df7eede0e3974c6258d3ae34f18571b7543480720693b5",
+      "evidenceSha256": "3e662100314cf544590f77f8fc6a66577e22510e892baeadc891e823fce5edba",
+      "queries": 1,
+      "interfaces": 2
+    },
+    {
+      "name": "AtlasMethodControls.functionValued",
+      "edition": "branch-method-controls",
+      "indexSha256": "181a4689ebe011fd1e2346a0342920374098635c639150b6ac5c679fe59bae46",
+      "evidenceSha256": "d9fbdd6acb671855a00b74a324766535e2c3d116b1d02e144fa5793dea006d15",
+      "queries": 1,
+      "interfaces": 2
+    },
+    {
+      "name": "AtlasMethodControls.storedMethod",
+      "edition": "branch-method-controls",
+      "indexSha256": "0ae464557c41b4acc41e8555734cd89cb0073159a4d09434b2e2eb1654a8321a",
+      "evidenceSha256": "917732525c2233fd4509c5e273867bf98fb89cc070b85da8e6b5b8fb318ef0fd",
+      "queries": 1,
+      "interfaces": 1
+    }
+  ],
+  "scope": "Finite native eta interfaces, source attachment and independent lexical comparisons. Forged capture/order trees are negative controls only. No source lambda is invented, no unrecorded proof body is supplied, and no comprehension result is claimed.",
+  "checkpointComparison": {
+    "auditSha256": "e01f8165ad17fdbdaad2927a42b73eb284482c33f23cdb76a0efc70f2788a5a7",
+    "sameFunctionalObservations": true,
+    "changedImplementationHashes": [
+      "checkerSha256",
+      "modelSha256"
+    ]
+  }
+}

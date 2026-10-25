@@ -54,6 +54,8 @@ The [equality-transport square](/projects/proof-atlas/manual/equality-transport/
 
 The [source-input collar](/projects/proof-atlas/manual/equality-transport/) connects recorded constructions through exact ordered arguments and bounded local-binding paths. Native checks cover 142 input ports at 71 transport cores; fifteen direct Riccati transport-to-transport uses are identified by occurrence. Authored controls distinguish conversion from source use, shared storage from occurrence, and separate lexical contexts. Nondependent binding flags remain explicit. This is a finite composition rule for two transport inputs, not a whole-proof semantic abstraction. [Protocol and checks](/research/proof-atlas/construction-composition/README.md).
 
+The [general application interface](/projects/proof-atlas/manual/equality-transport/#application-ports) retains the function and every supplied argument, including types and instances. Native checks cover 787 ports at 162 explicit occurrences, including 87 Riccati applications. Four-argument windows separate source uses from references in a literal function-type telescope, with an independently checked instantiation bridge and an explicit type-alias boundary. This extends structural/typed composition; value use and mathematical premise necessity remain distinct. [Checks and limits](/research/proof-atlas/application-ports/README.md).
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?
