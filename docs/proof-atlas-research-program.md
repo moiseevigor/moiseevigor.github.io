@@ -38,6 +38,8 @@ The [SE(2) article reader](/projects/proof-atlas/article/) is a separate applica
 
 Computed method inputs are available in the [paged Riccati reader](/projects/proof-atlas/library/?loading=paged&proof=JacobiData.slope_bound_abs&route=1:1.1.1.1.1.1.2.2.2.2.2.1). Exact source equality and outer-variable lifting are checked through pages without retaining entire method subtrees. Original paths and application spines remain bounded at 4,096 rows, with a separate 256-row page cache and bounded comparison memo/frontier; native/type graphs keep separate bounds. Method observations load one recorded call at a time, while unvisited calls remain listed with their original evidence owner. [Streamed comparison rule, native control and limits](/research/proof-atlas/method-streaming/README.md).
 
+Method dependency wires distinguish constructor fields and recursive premises using the recorded reduction rule, and connect input/result types to their original or computed binders. This is syntactic type support, not proof-premise necessity. The [finite checks and visual rule](/research/proof-atlas/method-flow/README.md) retain separate source, computed and kernel-rule addresses.
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?

@@ -184,3 +184,28 @@
 /* Long packet names and occurrence routes stay within the manual column. */
 :root .proof-atlas-theme #pm-method-lab .pm-controls label {max-width:100%;min-width:0;flex-wrap:wrap}
 :root .proof-atlas-theme #pm-method-lab select {max-width:100%;min-width:0}
+
+/* Computed method dependencies: source boxes, computed frames, reference wires. */
+:root .proof-atlas-theme .pl-method-wires {margin:1rem 0;padding:.75rem;border:1px solid var(--border);min-width:0;background:var(--fig-bg)}
+:root .proof-atlas-theme .pl-method-wires .pl-actions {display:flex;flex-wrap:wrap;gap:.4rem;margin:.7rem 0}
+:root .proof-atlas-theme .pl-wire-viewport {overflow:auto;max-width:100%;height:510px;border:1px solid var(--border);background:var(--bg);touch-action:pan-x pan-y}
+:root .proof-atlas-theme .pl-wire-sizer {position:relative;min-width:1px;min-height:1px}
+:root .proof-atlas-theme .pl-wire-world {position:absolute;width:960px;height:492px;transform-origin:0 0}
+:root .proof-atlas-theme .pl-wire-world svg {position:absolute;inset:0;width:960px;height:492px;overflow:visible;pointer-events:none}
+:root .proof-atlas-theme .pl-wire-world path {fill:none;stroke:var(--text-light);stroke-width:1.5}
+:root .proof-atlas-theme .pl-wire-world marker path {fill:var(--text-light);stroke:none}
+:root .proof-atlas-theme .pl-wire-world [data-wire-kind="type-reference"] {stroke:var(--accent);stroke-width:2;stroke-dasharray:5 4}
+:root .proof-atlas-theme .pl-wire-cards button {position:absolute;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:.3rem;padding:.55rem .65rem;background:var(--bg);color:var(--text);border:1px solid var(--text-light);border-radius:0;overflow:hidden;white-space:normal;text-align:left;box-sizing:border-box}
+:root .proof-atlas-theme .pl-wire-cards :is(strong,small) {display:block;max-width:100%;font:500 13px/1.35 var(--sans);overflow-wrap:anywhere;color:var(--text)}
+:root .proof-atlas-theme .pl-wire-cards small {font-size:12px;font-weight:400;color:var(--text-light)}
+:root .proof-atlas-theme .pl-wire-cards :is([data-wire-kind="computed-input"],[data-wire-kind="computed-boundary"],[data-wire-kind="computed-application"],[data-wire-kind="body-type"]) {border-style:dashed;border-color:var(--accent-warm)}
+:root .proof-atlas-theme .pl-wire-cards button[aria-pressed="true"] {background:var(--accent-light);outline:2px solid var(--accent);outline-offset:2px}
+:root .proof-atlas-theme .pl-method-wires :focus-visible {outline:2px solid var(--accent);outline-offset:3px}
+:root .proof-atlas-theme .pl-method-wires ol {padding-left:1.25rem}
+:root .proof-atlas-theme .pl-method-wires li {margin:.25rem 0}
+@media(max-width:600px){:root .proof-atlas-theme .pl-method-wires {padding:.5rem}:root .proof-atlas-theme .pl-wire-viewport {height:420px}}
+
+:root .proof-atlas-theme .pl-wire-cards strong {white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:100%}
+:root .proof-atlas-theme .pl-wire-cards code {display:block;width:100%;font:12px/1.35 var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text);background:transparent;padding:0}
+
+:root .proof-atlas-theme .pl-wire-world [data-wire-kind="recorded-typing"] {stroke:var(--text-light);stroke-dasharray:2 3}

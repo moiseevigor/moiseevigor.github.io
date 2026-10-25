@@ -38,10 +38,10 @@
    const data={...cursor.manifest.header};for(const [index,field]of fields.entries())data[field]=new Proxy([],{get(target,key,receiver){if(key==='length')return n;if(typeof key==='string'&&/^(0|[1-9]\d*)$/.test(key)){check(signal);demand(!disposed,'disposed');const value=rows.get(Number(key));demand(value,'source row outside checked closure');return value[index];}return Reflect.get(target,key,receiver);},has(target,key){return typeof key==='string'&&/^(0|[1-9]\d*)$/.test(key)?Number(key)<n:Reflect.has(target,key);},set(){throw Error('Method source: read-only closure');},ownKeys(){throw Error('Method source: whole-source enumeration unavailable');}});Object.freeze(data);
    phase='validating';announce();methods=query?M.openQuery(evidence,entries[0],query.inventory,data,r,d,streaming?{cursor,receipts:comparisonReceipts}:null):M.open(evidence,data,r,d);evidence=null;entries=null;query=null;comparisonReceipts=[];check(signal);phase='ready';announce();
    const live=()=>{check(signal);demand(!disposed&&methods,'disposed');};
-   return Object.freeze({create:(at,minor)=>{live();return methods.create(at,minor);},verifySource:(typing,at,minor)=>{live();return methods.verifySource(typing,at,minor);},has:(at,minor)=>{live();return methods.has(at,minor);},state,dispose,source:Object.freeze({...methods.source}),sourcePagesSha256:identity.manifestSha256,evidenceSha256:d.sha256});
+   return Object.freeze({create:(at,minor)=>{live();return methods.create(at,minor);},flow:(at,minor)=>{live();return methods.flow(at,minor);},verifySource:(typing,at,minor)=>{live();return methods.verifySource(typing,at,minor);},has:(at,minor)=>{live();return methods.has(at,minor);},state,dispose,source:Object.freeze({...methods.source}),sourcePagesSha256:identity.manifestSha256,evidenceSha256:d.sha256});
   }catch(error){dispose();throw error;}
  }
  async function open(sourceDescriptor,methodDescriptor,record,options={}){return prepare(sourceDescriptor,methodDescriptor,record,options);}
  async function fromQuery(sourceDescriptor,methodDescriptor,record,parts,options={}){return prepare(sourceDescriptor,methodDescriptor,record,options,parts);}
- const api={streamedComparisons:true,open,fromQuery};if(node)module.exports=api;else host.ProofAtlasMethodSource=api;
+ const api={typedMethodFlow:true,streamedComparisons:true,open,fromQuery};if(node)module.exports=api;else host.ProofAtlasMethodSource=api;
 })(typeof window==='undefined'?globalThis:window);
