@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "examples": 4,
+  "cutStates": 40,
+  "scopeSelections": 4,
+  "externalBinderJumps": 2,
+  "keyboard": 1,
+  "accessibility": 9,
+  "fieldDiagrams": 12,
+  "links": 29,
+  "compiledNavigation": 1,
+  "failureStates": 1,
+  "scope": "Actual rendered manual and shared constructor gallery: finite examples, exact field presentation, selection, keyboard, external binders, mobile/dark accessibility, links, compiled proof navigation and optional-script failure. No comprehension measurement."
+}

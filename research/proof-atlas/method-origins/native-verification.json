@@ -1,0 +1,102 @@
+{
+  "format": "ProofAtlasMethodOriginsNative/1",
+  "status": "PASS",
+  "compiler": "Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+  "dependencyRecovery": {
+    "kind": "mathlib-cache-attribution/1",
+    "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+    "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+    "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+    "artifactCount": 43450,
+    "allBinaryHashesVerified": true,
+    "originalGitCheckoutsVerified": false,
+    "independentlyRebuilt": false
+  },
+  "producerFiles": {
+    "research/proof-atlas/method-origins/verify.py": "7d28bd4d9289c0911195da2fb0fc352f413607022a8b09d3a6e4df1b08699912",
+    "research/proof-atlas/branch-interfaces/BranchInterfaces.lean": "b70c1a5ff9a977b241f943e32bb7e588d625fcb7dac95257b5222c91081f0cce",
+    "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+    "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+    "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+    "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+    "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+    "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+  },
+  "records": [
+    {
+      "ordinal": 0,
+      "record": {
+        "name": "AtlasOriginControls.natural",
+        "module": "Runtime",
+        "kind": "def",
+        "sourceSha256": "b67b2f30dafc2874b72c587ca8f58377d634bf39365719a771a385ddcf379ef1",
+        "indexSha256": "5521141193dc1bdc4123c3a7e919b20cec7f9831b711e1c90aaecd054a2efcda",
+        "uniqueNodes": 23,
+        "occurrences": "44"
+      },
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "packetSha256": "5521141193dc1bdc4123c3a7e919b20cec7f9831b711e1c90aaecd054a2efcda"
+    },
+    {
+      "ordinal": 1,
+      "record": {
+        "name": "AtlasOriginControls.product",
+        "module": "Runtime",
+        "kind": "def",
+        "sourceSha256": "b67b2f30dafc2874b72c587ca8f58377d634bf39365719a771a385ddcf379ef1",
+        "indexSha256": "287e7623fcb8f60aebd5264d7e0d8a9260c4fb710822329ee149eb5b66a6e2cb",
+        "uniqueNodes": 23,
+        "occurrences": "50"
+      },
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "packetSha256": "287e7623fcb8f60aebd5264d7e0d8a9260c4fb710822329ee149eb5b66a6e2cb"
+    },
+    {
+      "ordinal": 2,
+      "record": {
+        "name": "AtlasOriginControls.family",
+        "module": "Runtime",
+        "kind": "def",
+        "sourceSha256": "b67b2f30dafc2874b72c587ca8f58377d634bf39365719a771a385ddcf379ef1",
+        "indexSha256": "51a6f9926baee4ca5d1b676566ee70c48f7aa20bef214a03e48444e4370be33f",
+        "uniqueNodes": 20,
+        "occurrences": "46"
+      },
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1
+        ]
+      },
+      "packetSha256": "51a6f9926baee4ca5d1b676566ee70c48f7aa20bef214a03e48444e4370be33f"
+    }
+  ],
+  "fixtureSourceSha256": "b67b2f30dafc2874b72c587ca8f58377d634bf39365719a771a385ddcf379ef1",
+  "runtimeSha256": "bf464d1b93cfd236391c847a73f62b2c9ba89d09159ac12d40eb430b6ecc8da5",
+  "nativeOutputSha256": "9fe3c00eac20b989b770ef4a8044f33c420d84c0e3deffd4ac3b9390582ddb6b",
+  "imports": [
+    "Mathlib",
+    "Aesop"
+  ],
+  "privateRiccatiModulesImported": false,
+  "familyDefinitionNoncomputable": true,
+  "scope": "Three authored controls, fresh kernel declaration typing and eta-method observations. Method-interface identity and origin differences are checked separately against the output. No AI-source attribution, new mathematical theorem or independent dependency rebuild."
+}

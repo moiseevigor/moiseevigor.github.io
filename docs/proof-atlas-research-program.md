@@ -40,6 +40,8 @@ Computed method inputs are available in the [paged Riccati reader](/projects/pro
 
 Method dependency wires distinguish constructor fields and recursive premises using the recorded reduction rule, and connect input/result types to their original or computed binders. This is syntactic type support, not proof-premise necessity. The [finite checks and visual rule](/research/proof-atlas/method-flow/README.md) retain separate source, computed and kernel-rule addresses.
 
+The [kernel-origin view](/research/proof-atlas/method-origins/README.md) maps computed input positions to a separate reduction-schema namespace. Fresh controls have identical method/context/eta graphs but different input roles, demonstrating why type information alone is insufficient. A five-input functional-family control tests a cross-window field boundary and a recursive call beneath a schema lambda.
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?

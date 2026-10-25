@@ -1,0 +1,49 @@
+{
+  "format": "ProofAtlasKernelOriginCounterexample/1",
+  "status": "PASS",
+  "nativeOutputSha256": "9fe3c00eac20b989b770ef4a8044f33c420d84c0e3deffd4ac3b9390582ddb6b",
+  "interfaces": [
+    {
+      "name": "AtlasOriginControls.natural",
+      "minor": 1,
+      "evidenceSha256": "95e7397b959d8a476044753892f296e8d7f2d1200f171a1efa25158ee1458880"
+    },
+    {
+      "name": "AtlasOriginControls.product",
+      "minor": 0,
+      "evidenceSha256": "6ec0ad8db180191194aa8216e14c7d63e7e0bc7618365123fd84456f82cf5365"
+    }
+  ],
+  "common": {
+    "sameContextType": true,
+    "sameMethodTerm": true,
+    "sameMethodType": true,
+    "sameEta": true,
+    "sameInterfaceGraphBytes": true,
+    "sameAmbientContextLength": true
+  },
+  "methodGraphSha256": "79d08f25859cb65396a1865fb1a5dc055e6a1e8ef426be4f242b3e863c6d51ef",
+  "roles": [
+    [
+      {
+        "kind": "constructor-field",
+        "field": 0
+      },
+      {
+        "kind": "recursive-premise",
+        "field": 0
+      }
+    ],
+    [
+      {
+        "kind": "constructor-field",
+        "field": 0
+      },
+      {
+        "kind": "constructor-field",
+        "field": 1
+      }
+    ]
+  ],
+  "conclusion": "The common context, local method term/type and computed eta graph do not determine kernel input origin. The recursor reduction schema is additional information. This is not a novelty or comprehension claim."
+}

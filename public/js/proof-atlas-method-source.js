@@ -43,5 +43,5 @@
  }
  async function open(sourceDescriptor,methodDescriptor,record,options={}){return prepare(sourceDescriptor,methodDescriptor,record,options);}
  async function fromQuery(sourceDescriptor,methodDescriptor,record,parts,options={}){return prepare(sourceDescriptor,methodDescriptor,record,options,parts);}
- const api={typedMethodFlow:true,streamedComparisons:true,open,fromQuery};if(node)module.exports=api;else host.ProofAtlasMethodSource=api;
+ const api={kernelMethodOrigins:true,typedMethodFlow:true,streamedComparisons:true,open,fromQuery};if(node)module.exports=api;else host.ProofAtlasMethodSource=api;
 })(typeof window==='undefined'?globalThis:window);

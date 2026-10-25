@@ -1,0 +1,189 @@
+{
+  "format": "ProofAtlasMethodStreamingBrowserAudit/1",
+  "status": "PASS",
+  "scenes": 2,
+  "inputs": 2,
+  "sourceSelections": 2,
+  "axeAudits": 4,
+  "releaseChecks": 1,
+  "failureControls": 1,
+  "staleControls": 1,
+  "state": {
+    "format": "ProofAtlasMethodSourceState/1",
+    "phase": "ready",
+    "disposed": false,
+    "sourceRows": 11,
+    "rowLimit": 4096,
+    "sourceRowJsonBytes": 787,
+    "jsonByteLimit": 4194304,
+    "peakSourceRows": 11,
+    "peakSourceRowJsonBytes": 787,
+    "nativeRecordDecodedBytes": 326933,
+    "nativeRecordByteLimit": 8388608,
+    "sourcePageCache": {
+      "pageLoads": 70,
+      "indexLoads": 1,
+      "faults": 70,
+      "evictions": 69,
+      "peakCachedPages": 1,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 8563,
+      "cachedPages": 1,
+      "cachedNodes": 256,
+      "indexPages": 1,
+      "pageLimit": 1,
+      "indexLimit": 2,
+      "nodeLimit": 256,
+      "originalIndexSha256": "9620a73f6f84db0bd278527c4235b7b29b015b13b811c0c1cd95bae111ce0a18",
+      "manifestSha256": "ae779cff7c22f0b36eab15387c14633e8e7fbcdecab4062658048416e3c9ba1b",
+      "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+    },
+    "wholeSourceArchiveRequested": false,
+    "sourceStrategy": "stream",
+    "comparisons": [
+      {
+        "minor": 0,
+        "format": "ProofAtlasSourceComparison/1",
+        "source": {
+          "name": "AtlasMethodControls.largeStream",
+          "indexSha256": "9620a73f6f84db0bd278527c4235b7b29b015b13b811c0c1cd95bae111ce0a18",
+          "sourceSha256": "f9472a846b8dbf434398b30ac93ba03a6f940f737e4e16dd38c194daf91ff07c",
+          "manifestSha256": "ae779cff7c22f0b36eab15387c14633e8e7fbcdecab4062658048416e3c9ba1b",
+          "root": 6
+        },
+        "nativeRoot": 0,
+        "shift": 0,
+        "relation": "exact-source-syntax",
+        "state": {
+          "pairs": 1,
+          "memoHits": 0,
+          "pendingHits": 0,
+          "evictions": 0,
+          "peakMemoEntries": 1,
+          "peakStackFrames": 1,
+          "memoEntries": 0,
+          "stackFrames": 0,
+          "memoLimit": 1024,
+          "stackLimit": 4096,
+          "workLimit": 262144,
+          "schedule": "descending-source-DAG-node"
+        },
+        "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+      },
+      {
+        "minor": 0,
+        "format": "ProofAtlasSourceComparison/1",
+        "source": {
+          "name": "AtlasMethodControls.largeStream",
+          "indexSha256": "9620a73f6f84db0bd278527c4235b7b29b015b13b811c0c1cd95bae111ce0a18",
+          "sourceSha256": "f9472a846b8dbf434398b30ac93ba03a6f940f737e4e16dd38c194daf91ff07c",
+          "manifestSha256": "ae779cff7c22f0b36eab15387c14633e8e7fbcdecab4062658048416e3c9ba1b",
+          "root": 6
+        },
+        "nativeRoot": 0,
+        "shift": 0,
+        "relation": "exact-source-syntax",
+        "state": {
+          "pairs": 1,
+          "memoHits": 0,
+          "pendingHits": 0,
+          "evictions": 0,
+          "peakMemoEntries": 1,
+          "peakStackFrames": 1,
+          "memoEntries": 0,
+          "stackFrames": 0,
+          "memoLimit": 1024,
+          "stackLimit": 4096,
+          "workLimit": 262144,
+          "schedule": "descending-source-DAG-node"
+        },
+        "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+      },
+      {
+        "minor": 1,
+        "format": "ProofAtlasSourceComparison/1",
+        "source": {
+          "name": "AtlasMethodControls.largeStream",
+          "indexSha256": "9620a73f6f84db0bd278527c4235b7b29b015b13b811c0c1cd95bae111ce0a18",
+          "sourceSha256": "f9472a846b8dbf434398b30ac93ba03a6f940f737e4e16dd38c194daf91ff07c",
+          "manifestSha256": "ae779cff7c22f0b36eab15387c14633e8e7fbcdecab4062658048416e3c9ba1b",
+          "root": 8210
+        },
+        "nativeRoot": 11284,
+        "shift": 0,
+        "relation": "exact-source-syntax",
+        "state": {
+          "pairs": 8207,
+          "memoHits": 0,
+          "pendingHits": 6141,
+          "evictions": 7183,
+          "peakMemoEntries": 1024,
+          "peakStackFrames": 18,
+          "memoEntries": 0,
+          "stackFrames": 0,
+          "memoLimit": 1024,
+          "stackLimit": 4096,
+          "workLimit": 262144,
+          "schedule": "descending-source-DAG-node"
+        },
+        "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+      },
+      {
+        "minor": 1,
+        "format": "ProofAtlasSourceComparison/1",
+        "source": {
+          "name": "AtlasMethodControls.largeStream",
+          "indexSha256": "9620a73f6f84db0bd278527c4235b7b29b015b13b811c0c1cd95bae111ce0a18",
+          "sourceSha256": "f9472a846b8dbf434398b30ac93ba03a6f940f737e4e16dd38c194daf91ff07c",
+          "manifestSha256": "ae779cff7c22f0b36eab15387c14633e8e7fbcdecab4062658048416e3c9ba1b",
+          "root": 8210
+        },
+        "nativeRoot": 8204,
+        "shift": 2,
+        "relation": "exact-source-syntax-under-binder-lifting",
+        "state": {
+          "pairs": 8207,
+          "memoHits": 0,
+          "pendingHits": 6141,
+          "evictions": 7183,
+          "peakMemoEntries": 1024,
+          "peakStackFrames": 18,
+          "memoEntries": 0,
+          "stackFrames": 0,
+          "memoLimit": 1024,
+          "stackLimit": 4096,
+          "workLimit": 262144,
+          "schedule": "descending-source-DAG-node"
+        },
+        "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+      }
+    ],
+    "delivery": {
+      "format": "ProofAtlasMethodQueryDelivery/1",
+      "originalEvidenceSha256": "8f54f65bc11da4400de2d0b83c26dae064188d4ea47bace8fbc8318bd58bcb4d",
+      "originalRecordBytes": 329339,
+      "manifestSha256": "5ce2051e5fc9d81a05cc14d1cd2dfbeefa4a77156d337cb6bef885a754d6b067",
+      "headerSha256": "bbd572093a7aaa272815aad19d5cf1c25df8f00385ee1c4276ddd3742210dc0d",
+      "headerDecodedBytes": 3055,
+      "queryPageSha256": "1432f1e65b65b86aa6a35e6a8ac387908e1959de55043d970db4087552d8d963",
+      "queryOrdinal": 0,
+      "entrySha256": "a38ec25efc3053b31423fe1ae044d2cd62d6915701546d712f15923cc178dc36",
+      "inventoriedQueries": 1,
+      "wholeNativeRecordRequested": false,
+      "scope": "One original call validated. Unvisited calls remain inventoried. Producer-attested roundtrip to the original native owner; the client does not reassemble unvisited pages."
+    },
+    "validatedQueries": 1,
+    "selectedQueryDecodedBytes": 326933,
+    "validation": "Selected original native query; exact source syntax and binder lifting streamed through hash-checked pages. Only source paths/spines remain retained; this query’s native/type graphs load fully. Logical bounds are not heap measurements."
+  },
+  "fullSourceOrNativeArchiveRequests": 0,
+  "builtFiles": {
+    "public/js/proof-atlas-stream-example.js": "e59adbebb4ae61bd90b0a1828b1bd221e3104ea159e307ef59350e023ddb0284",
+    "public/js/proof-atlas-source-comparison.js": "66a594674c5f564a164e4065e6d6212284d445319ac16f8b93bd66b2e671cc7f",
+    "public/js/proof-atlas-method-source.js": "6f4c20d73405d9a5fe8bdb6d9c458573a039c3edde45b226a7155a18ee413245",
+    "public/js/proof-atlas-method-query-pages.js": "4ae984d88bd8f8fe3e11f0e94f58ca9cfa53cc484273e7c34c614df62099e947",
+    "public/js/proof-atlas-method-interfaces.js": "a93bb3c50b17eeac7a231b8c3b4a4092367df8190a8accc17f441e0d39fd2192",
+    "public/data/proof-atlas/method-streaming-manifest.js": "124d04abb5a6305835d5847f19297ce9e99b6c7770ce67bd3e047d361f4fd2c3"
+  },
+  "checkerSha256": "3154d10c4d650585dd64897d0451c547f54b649dceb267ee20388c8a6196cf6f"
+}

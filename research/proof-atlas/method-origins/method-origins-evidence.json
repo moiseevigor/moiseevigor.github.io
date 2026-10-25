@@ -1,0 +1,4652 @@
+{
+  "format": "ProofAtlasMethodOriginsEvidence/1",
+  "status": "PASS",
+  "scope": "Finite recorded reduction-schema input-position bridges, direct field references and unchanged self-recursion including one functional family. No expression equality across source/computed/schema namespaces, added source calls, arbitrary-recursion coverage, new mathematical theorem or comprehension result.",
+  "publication": "Local research iteration; no blog post or deployment.",
+  "native": {
+    "format": "ProofAtlasMethodOriginsNative/1",
+    "status": "PASS",
+    "compiler": "Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+    "dependencyRecovery": {
+      "kind": "mathlib-cache-attribution/1",
+      "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+      "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+      "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+      "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+      "artifactCount": 43450,
+      "allBinaryHashesVerified": true,
+      "originalGitCheckoutsVerified": false,
+      "independentlyRebuilt": false
+    },
+    "producerFiles": {
+      "research/proof-atlas/method-origins/verify.py": "7d28bd4d9289c0911195da2fb0fc352f413607022a8b09d3a6e4df1b08699912",
+      "research/proof-atlas/branch-interfaces/BranchInterfaces.lean": "b70c1a5ff9a977b241f943e32bb7e588d625fcb7dac95257b5222c91081f0cce",
+      "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+      "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+      "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+      "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+      "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+      "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+    },
+    "records": [
+      {
+        "ordinal": 0,
+        "record": {
+          "name": "AtlasOriginControls.natural",
+          "module": "Runtime",
+          "kind": "def",
+          "sourceSha256": "b67b2f30dafc2874b72c587ca8f58377d634bf39365719a771a385ddcf379ef1",
+          "indexSha256": "5521141193dc1bdc4123c3a7e919b20cec7f9831b711e1c90aaecd054a2efcda",
+          "uniqueNodes": 23,
+          "occurrences": "44"
+        },
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "packetSha256": "5521141193dc1bdc4123c3a7e919b20cec7f9831b711e1c90aaecd054a2efcda"
+      },
+      {
+        "ordinal": 1,
+        "record": {
+          "name": "AtlasOriginControls.product",
+          "module": "Runtime",
+          "kind": "def",
+          "sourceSha256": "b67b2f30dafc2874b72c587ca8f58377d634bf39365719a771a385ddcf379ef1",
+          "indexSha256": "287e7623fcb8f60aebd5264d7e0d8a9260c4fb710822329ee149eb5b66a6e2cb",
+          "uniqueNodes": 23,
+          "occurrences": "50"
+        },
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "packetSha256": "287e7623fcb8f60aebd5264d7e0d8a9260c4fb710822329ee149eb5b66a6e2cb"
+      },
+      {
+        "ordinal": 2,
+        "record": {
+          "name": "AtlasOriginControls.family",
+          "module": "Runtime",
+          "kind": "def",
+          "sourceSha256": "b67b2f30dafc2874b72c587ca8f58377d634bf39365719a771a385ddcf379ef1",
+          "indexSha256": "51a6f9926baee4ca5d1b676566ee70c48f7aa20bef214a03e48444e4370be33f",
+          "uniqueNodes": 20,
+          "occurrences": "46"
+        },
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1
+          ]
+        },
+        "packetSha256": "51a6f9926baee4ca5d1b676566ee70c48f7aa20bef214a03e48444e4370be33f"
+      }
+    ],
+    "fixtureSourceSha256": "b67b2f30dafc2874b72c587ca8f58377d634bf39365719a771a385ddcf379ef1",
+    "runtimeSha256": "bf464d1b93cfd236391c847a73f62b2c9ba89d09159ac12d40eb430b6ecc8da5",
+    "nativeOutputSha256": "9fe3c00eac20b989b770ef4a8044f33c420d84c0e3deffd4ac3b9390582ddb6b",
+    "imports": [
+      "Mathlib",
+      "Aesop"
+    ],
+    "privateRiccatiModulesImported": false,
+    "familyDefinitionNoncomputable": true,
+    "scope": "Three authored controls, fresh kernel declaration typing and eta-method observations. Method-interface identity and origin differences are checked separately against the output. No AI-source attribution, new mathematical theorem or independent dependency rebuild."
+  },
+  "counterexample": {
+    "format": "ProofAtlasKernelOriginCounterexample/1",
+    "status": "PASS",
+    "nativeOutputSha256": "9fe3c00eac20b989b770ef4a8044f33c420d84c0e3deffd4ac3b9390582ddb6b",
+    "interfaces": [
+      {
+        "name": "AtlasOriginControls.natural",
+        "minor": 1,
+        "evidenceSha256": "95e7397b959d8a476044753892f296e8d7f2d1200f171a1efa25158ee1458880"
+      },
+      {
+        "name": "AtlasOriginControls.product",
+        "minor": 0,
+        "evidenceSha256": "6ec0ad8db180191194aa8216e14c7d63e7e0bc7618365123fd84456f82cf5365"
+      }
+    ],
+    "common": {
+      "sameContextType": true,
+      "sameMethodTerm": true,
+      "sameMethodType": true,
+      "sameEta": true,
+      "sameInterfaceGraphBytes": true,
+      "sameAmbientContextLength": true
+    },
+    "methodGraphSha256": "79d08f25859cb65396a1865fb1a5dc055e6a1e8ef426be4f242b3e863c6d51ef",
+    "roles": [
+      [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        },
+        {
+          "kind": "recursive-premise",
+          "field": 0
+        }
+      ],
+      [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        },
+        {
+          "kind": "constructor-field",
+          "field": 1
+        }
+      ]
+    ],
+    "conclusion": "The common context, local method term/type and computed eta graph do not determine kernel input origin. The recursor reduction schema is additional information. This is not a novelty or comprehension claim."
+  },
+  "unit": {
+    "format": "ProofAtlasMethodOriginsAudit/1",
+    "status": "PASS",
+    "checkerSha256": "4613cd27005001e706520e58cb5a567fb564fd835bb1871df247da4460967886",
+    "frames": 40,
+    "inputs": 53,
+    "originViews": 106,
+    "kernelCuts": 224,
+    "recursivePremises": 5,
+    "functionalFamilies": 1,
+    "computedBoundaries": 6,
+    "pagedFrames": 32,
+    "pagedCalls": 20,
+    "rejections": 766,
+    "zeroInputOriginsRefused": 4,
+    "wholeArchiveRequests": 0,
+    "nativeRecordsReassembled": 13,
+    "identicalMethodGraphBytes": true,
+    "identicalContextType": true,
+    "differentSecondInputOrigins": true,
+    "files": [
+      {
+        "file": "public/js/proof-atlas-method-origins.js",
+        "sha256": "756660d8dad8cd3c93f5fe7666b74a6c30865201103c385be30cf8b8f8bba943"
+      },
+      {
+        "file": "public/js/proof-atlas-method-flow.js",
+        "sha256": "87acbc8bcdd60695fea938f23dd9347321f0f8da106524ad71efb08ff43c2b4b"
+      },
+      {
+        "file": "public/js/proof-atlas-method-interfaces.js",
+        "sha256": "a93bb3c50b17eeac7a231b8c3b4a4092367df8190a8accc17f441e0d39fd2192"
+      },
+      {
+        "file": "public/js/proof-atlas-recursive-inputs.js",
+        "sha256": "b6453bc2364dcdfbdd129eddabf6e27eefecf84ee8f8bdd12b38f11378457d10"
+      },
+      {
+        "file": "public/data/proof-atlas/method-origins-manifest.js",
+        "sha256": "9ebc7dfce4cd6ac77b5be75f5e22118f1d1f2ee3533f24c77437569add8aafc9"
+      }
+    ],
+    "rows": [
+      {
+        "name": "JacobiData.slope_bound_abs",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1
+          ]
+        },
+        "minor": 0,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "JacobiData.slope_bound_abs",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1
+          ]
+        },
+        "minor": 1,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "JacobiData.slope_bound_abs",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 0,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          },
+          {
+            "kind": "constructor-field",
+            "field": 1
+          }
+        ]
+      },
+      {
+        "name": "JacobiData.slope_bound_abs",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 0,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          },
+          {
+            "kind": "constructor-field",
+            "field": 1
+          }
+        ]
+      },
+      {
+        "name": "JacobiData.slope_bound_abs",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            0,
+            1,
+            1
+          ]
+        },
+        "minor": 0,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          },
+          {
+            "kind": "constructor-field",
+            "field": 1
+          }
+        ]
+      },
+      {
+        "name": "JacobiData.slope_bound_abs",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 0,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          },
+          {
+            "kind": "constructor-field",
+            "field": 1
+          }
+        ]
+      },
+      {
+        "name": "JacobiData.slope_bound_abs",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 0,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          },
+          {
+            "kind": "constructor-field",
+            "field": 1
+          }
+        ]
+      },
+      {
+        "name": "JacobiData.slope_bound_abs",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 0,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          },
+          {
+            "kind": "constructor-field",
+            "field": 1
+          }
+        ]
+      },
+      {
+        "name": "AtlasMethodControls.conjunction",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 0,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          },
+          {
+            "kind": "constructor-field",
+            "field": 1
+          }
+        ]
+      },
+      {
+        "name": "AtlasMethodControls.dependent",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 0,
+        "roles": []
+      },
+      {
+        "name": "AtlasMethodControls.dependent",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 1,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          },
+          {
+            "kind": "recursive-premise",
+            "field": 0,
+            "familyArity": 0
+          }
+        ]
+      },
+      {
+        "name": "AtlasMethodControls.disjunction",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 0,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "AtlasMethodControls.disjunction",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 1,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "AtlasMethodControls.functionValued",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 0,
+        "roles": []
+      },
+      {
+        "name": "AtlasMethodControls.functionValued",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 1,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          },
+          {
+            "kind": "recursive-premise",
+            "field": 0,
+            "familyArity": 0
+          }
+        ]
+      },
+      {
+        "name": "AtlasMethodControls.storedMethod",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2
+          ]
+        },
+        "minor": 0,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          },
+          {
+            "kind": "constructor-field",
+            "field": 1
+          }
+        ]
+      },
+      {
+        "name": "lean_workbook_20418",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2
+          ]
+        },
+        "minor": 0,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "lean_workbook_20418",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2
+          ]
+        },
+        "minor": 1,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "lean_workbook_plus_6206",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2
+          ]
+        },
+        "minor": 0,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "lean_workbook_plus_6206",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2
+          ]
+        },
+        "minor": 1,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "lean_workbook_plus_6206",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            0,
+            1,
+            1
+          ]
+        },
+        "minor": 0,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "lean_workbook_plus_6206",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            0,
+            1,
+            1
+          ]
+        },
+        "minor": 1,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "lean_workbook_plus_6206",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            1,
+            1
+          ]
+        },
+        "minor": 0,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "lean_workbook_plus_6206",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            1,
+            1
+          ]
+        },
+        "minor": 1,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "lean_workbook_plus_6206",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            0,
+            1,
+            1,
+            0,
+            1,
+            1
+          ]
+        },
+        "minor": 0,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "lean_workbook_plus_6206",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            0,
+            1,
+            1,
+            0,
+            1,
+            1
+          ]
+        },
+        "minor": 1,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "lean_workbook_plus_6206",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            0,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 0,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "lean_workbook_plus_6206",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            0,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 1,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "lean_workbook_plus_6206",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            1,
+            1,
+            0,
+            1,
+            1
+          ]
+        },
+        "minor": 0,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "lean_workbook_plus_6206",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            1,
+            1,
+            0,
+            1,
+            1
+          ]
+        },
+        "minor": 1,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "lean_workbook_plus_6206",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 0,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "lean_workbook_plus_6206",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 1,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "lean_workbook_plus_62755",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            2,
+            2
+          ]
+        },
+        "minor": 0,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "lean_workbook_plus_62755",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            2,
+            2
+          ]
+        },
+        "minor": 1,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          }
+        ]
+      },
+      {
+        "name": "AtlasMethodControls.largeStream",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1
+          ]
+        },
+        "minor": 0,
+        "roles": []
+      },
+      {
+        "name": "AtlasMethodControls.largeStream",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1
+          ]
+        },
+        "minor": 1,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          },
+          {
+            "kind": "recursive-premise",
+            "field": 0,
+            "familyArity": 0
+          }
+        ]
+      },
+      {
+        "name": "AtlasOriginControls.natural",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 0,
+        "roles": []
+      },
+      {
+        "name": "AtlasOriginControls.natural",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 1,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          },
+          {
+            "kind": "recursive-premise",
+            "field": 0,
+            "familyArity": 0
+          }
+        ]
+      },
+      {
+        "name": "AtlasOriginControls.product",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "minor": 0,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          },
+          {
+            "kind": "constructor-field",
+            "field": 1
+          }
+        ]
+      },
+      {
+        "name": "AtlasOriginControls.family",
+        "route": {
+          "root": 1,
+          "slots": [
+            1,
+            1
+          ]
+        },
+        "minor": 0,
+        "roles": [
+          {
+            "kind": "constructor-field",
+            "field": 0
+          },
+          {
+            "kind": "constructor-field",
+            "field": 1
+          },
+          {
+            "kind": "constructor-field",
+            "field": 2
+          },
+          {
+            "kind": "constructor-field",
+            "field": 3
+          },
+          {
+            "kind": "recursive-premise",
+            "field": 0,
+            "familyArity": 1
+          }
+        ]
+      }
+    ],
+    "scope": "Finite recorded reduction-schema input-position bridges, direct field references and unchanged self-recursion including one functional family. No expression equality across source/computed/schema namespaces, added source calls, arbitrary-recursion coverage, new mathematical theorem or comprehension result."
+  },
+  "browser": {
+    "origins": {
+      "format": "ProofAtlasMethodOriginsBrowserAudit/1",
+      "status": "PASS",
+      "frames": 40,
+      "originSelections": 53,
+      "kernelCuts": 112,
+      "schemaClicksPreserveSource": 112,
+      "zeroInputControls": 4,
+      "boundaryJumps": 1,
+      "inputWindowChecks": 1,
+      "keyboardChecks": 1,
+      "kernelNavigationChecks": 1,
+      "axeAudits": 4,
+      "wireRouteChecks": 53,
+      "sampledWirePoints": 19881,
+      "modeReleaseChecks": 36,
+      "optionalFailureControls": 1,
+      "staleControls": 1,
+      "wholeForbiddenArchiveRequests": 0,
+      "builtFiles": {
+        "public/js/proof-atlas-method-origins.js": "756660d8dad8cd3c93f5fe7666b74a6c30865201103c385be30cf8b8f8bba943",
+        "public/js/proof-atlas-method-flow.js": "87acbc8bcdd60695fea938f23dd9347321f0f8da106524ad71efb08ff43c2b4b",
+        "public/js/proof-atlas-method-interfaces.js": "a93bb3c50b17eeac7a231b8c3b4a4092367df8190a8accc17f441e0d39fd2192",
+        "public/js/proof-atlas-recursive-inputs.js": "b6453bc2364dcdfbdd129eddabf6e27eefecf84ee8f8bdd12b38f11378457d10",
+        "public/js/proof-atlas-method-source.js": "6f4c20d73405d9a5fe8bdb6d9c458573a039c3edde45b226a7155a18ee413245",
+        "public/js/proof-atlas-method-query-pages.js": "4ae984d88bd8f8fe3e11f0e94f58ca9cfa53cc484273e7c34c614df62099e947",
+        "public/js/proof-atlas-method-source-view.js": "8344af52ac90a32a6f22b3718207ce9aad68c0fd5c2651421304ce2b5bf2c113",
+        "public/js/proof-atlas-method-examples.js": "b6060d2250005974d46815b94e7639d8e86e1eeca149c5e9ef635a5b442cab9e",
+        "public/js/proof-atlas-stream-example.js": "e59adbebb4ae61bd90b0a1828b1bd221e3104ea159e307ef59350e023ddb0284",
+        "public/js/proof-atlas-library.js": "b1951db31063c632417de9cdc1e49901b3cd7a18eed9704d95313b57a1f267f6",
+        "public/js/proof-atlas-paged-library.js": "8882fb58695b2de937209c80b7c3d363ec7247e5902ad95b8e735caa3372e0cb",
+        "public/js/proof-atlas-elimination.js": "89c72f4aa7d8607ee15990cea6f6426f2677e4beedccdb11a4ae59e509099b71",
+        "public/css/proof-atlas-theme.css": "70fd5599cbbc519cc11326e188b9503ea6f603a1230a88628ac595d6d8e96eb0",
+        "public/data/proof-atlas/method-origins-manifest.js": "9ebc7dfce4cd6ac77b5be75f5e22118f1d1f2ee3533f24c77437569add8aafc9"
+      },
+      "checkerSha256": "f924dda006e19811b875c9478557efaa522d1aa640e2d67bb31543a431db0e8b"
+    },
+    "flow": {
+      "format": "ProofAtlasMethodFlowBrowserAudit/1",
+      "status": "PASS",
+      "pagedFrames": 26,
+      "controlFrames": 8,
+      "stressFrames": 2,
+      "inputSelections": 44,
+      "sourceContextJumps": 4,
+      "sourceMethodJumps": 4,
+      "computedReferenceJumps": 1,
+      "keyboardSelections": 1,
+      "axeAudits": 4,
+      "zoomChecks": 1,
+      "wireRouteChecks": 80,
+      "sampledWirePoints": 53603,
+      "completeReaderWireChecks": 1,
+      "completeReaderSourceJumps": 1,
+      "releaseChecks": 37,
+      "optionalFailureControls": 1,
+      "staleControls": 1,
+      "wholeForbiddenArchiveRequests": 0,
+      "builtFiles": {
+        "public/js/proof-atlas-method-flow.js": "87acbc8bcdd60695fea938f23dd9347321f0f8da106524ad71efb08ff43c2b4b",
+        "public/js/proof-atlas-method-interfaces.js": "a93bb3c50b17eeac7a231b8c3b4a4092367df8190a8accc17f441e0d39fd2192",
+        "public/js/proof-atlas-method-source.js": "6f4c20d73405d9a5fe8bdb6d9c458573a039c3edde45b226a7155a18ee413245",
+        "public/js/proof-atlas-method-source-view.js": "8344af52ac90a32a6f22b3718207ce9aad68c0fd5c2651421304ce2b5bf2c113",
+        "public/js/proof-atlas-method-examples.js": "b6060d2250005974d46815b94e7639d8e86e1eeca149c5e9ef635a5b442cab9e",
+        "public/js/proof-atlas-stream-example.js": "e59adbebb4ae61bd90b0a1828b1bd221e3104ea159e307ef59350e023ddb0284",
+        "public/js/proof-atlas-library.js": "b1951db31063c632417de9cdc1e49901b3cd7a18eed9704d95313b57a1f267f6",
+        "public/js/proof-atlas-paged-library.js": "8882fb58695b2de937209c80b7c3d363ec7247e5902ad95b8e735caa3372e0cb",
+        "public/js/proof-atlas-elimination.js": "89c72f4aa7d8607ee15990cea6f6426f2677e4beedccdb11a4ae59e509099b71",
+        "public/css/proof-atlas-theme.css": "70fd5599cbbc519cc11326e188b9503ea6f603a1230a88628ac595d6d8e96eb0"
+      },
+      "checkerSha256": "9a59b0e3a6a2fb31187679692775c8ec7d93f23ffc89f959a39f180a6924d637"
+    },
+    "source": {
+      "format": "ProofAtlasMethodQueryPagesBrowserAudit/1",
+      "status": "PASS",
+      "profiles": 4,
+      "calls": 16,
+      "methodScenes": 26,
+      "inputSelections": 32,
+      "sourceTypeAgreements": 26,
+      "sourceJumps": 4,
+      "contextJumps": 4,
+      "releaseChecks": 16,
+      "axeAudits": 4,
+      "failureControls": 1,
+      "staleControls": 1,
+      "queryOnlyChecks": 16,
+      "rows": [
+        {
+          "name": "JacobiData.slope_bound_abs",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 25,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 2149,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 25,
+            "peakSourceRowJsonBytes": 2149,
+            "nativeRecordDecodedBytes": 133692,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 37,
+              "indexLoads": 1,
+              "faults": 37,
+              "evictions": 36,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 11983,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+              "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "sourceStrategy": "stream",
+            "comparisons": [
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "JacobiData.slope_bound_abs",
+                  "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+                  "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+                  "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+                  "root": 1779
+                },
+                "nativeRoot": 1245,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 1250,
+                  "memoHits": 0,
+                  "pendingHits": 633,
+                  "evictions": 226,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 160,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "JacobiData.slope_bound_abs",
+                  "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+                  "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+                  "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+                  "root": 1779
+                },
+                "nativeRoot": 909,
+                "shift": 1,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 1250,
+                  "memoHits": 0,
+                  "pendingHits": 633,
+                  "evictions": 226,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 160,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 1,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "JacobiData.slope_bound_abs",
+                  "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+                  "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+                  "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+                  "root": 2193
+                },
+                "nativeRoot": 1457,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 1587,
+                  "memoHits": 0,
+                  "pendingHits": 872,
+                  "evictions": 563,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 189,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 1,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "JacobiData.slope_bound_abs",
+                  "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+                  "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+                  "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+                  "root": 2193
+                },
+                "nativeRoot": 1078,
+                "shift": 1,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 1587,
+                  "memoHits": 0,
+                  "pendingHits": 872,
+                  "evictions": 563,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 189,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              }
+            ],
+            "delivery": {
+              "format": "ProofAtlasMethodQueryDelivery/1",
+              "originalEvidenceSha256": "ab7dff22cce3ab068a08a56cce0b109dbd819c40f79ced2a67edd42cfce5761a",
+              "originalRecordBytes": 568387,
+              "manifestSha256": "95049e3fbff28d57df5b67fc3e45b573cf00529030f92a9e74b2675c73b97a19",
+              "headerSha256": "6b550d472e84796ce0ddf79f98b42f33266bc05d97f715309c50618b95e73887",
+              "headerDecodedBytes": 3348,
+              "queryPageSha256": "17be4e012add77497ef584d6d23e70663d205248f2ec59a3c254d3869c0a9423",
+              "queryOrdinal": 0,
+              "entrySha256": "a255675aae9d9b46fb2a05369b3f17ffb216c8890bdb7f99ca25543bbe718b6e",
+              "inventoriedQueries": 7,
+              "wholeNativeRecordRequested": false,
+              "scope": "One original call validated. Unvisited calls remain inventoried. Producer-attested roundtrip to the original native owner; the client does not reassemble unvisited pages."
+            },
+            "validatedQueries": 1,
+            "selectedQueryDecodedBytes": 133692,
+            "validation": "Selected original native query; exact source syntax and binder lifting streamed through hash-checked pages. Only source paths/spines remain retained; this query’s native/type graphs load fully. Logical bounds are not heap measurements."
+          }
+        },
+        {
+          "name": "JacobiData.slope_bound_abs",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 32,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 3193,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 32,
+            "peakSourceRowJsonBytes": 3193,
+            "nativeRecordDecodedBytes": 63911,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 20,
+              "indexLoads": 1,
+              "faults": 20,
+              "evictions": 19,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 11983,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+              "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "sourceStrategy": "stream",
+            "comparisons": [
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "JacobiData.slope_bound_abs",
+                  "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+                  "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+                  "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+                  "root": 1771
+                },
+                "nativeRoot": 1075,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 937,
+                  "memoHits": 0,
+                  "pendingHits": 528,
+                  "evictions": 0,
+                  "peakMemoEntries": 937,
+                  "peakStackFrames": 113,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "JacobiData.slope_bound_abs",
+                  "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+                  "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+                  "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+                  "root": 1771
+                },
+                "nativeRoot": 759,
+                "shift": 2,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 937,
+                  "memoHits": 0,
+                  "pendingHits": 528,
+                  "evictions": 0,
+                  "peakMemoEntries": 937,
+                  "peakStackFrames": 113,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              }
+            ],
+            "delivery": {
+              "format": "ProofAtlasMethodQueryDelivery/1",
+              "originalEvidenceSha256": "ab7dff22cce3ab068a08a56cce0b109dbd819c40f79ced2a67edd42cfce5761a",
+              "originalRecordBytes": 568387,
+              "manifestSha256": "95049e3fbff28d57df5b67fc3e45b573cf00529030f92a9e74b2675c73b97a19",
+              "headerSha256": "6b550d472e84796ce0ddf79f98b42f33266bc05d97f715309c50618b95e73887",
+              "headerDecodedBytes": 3348,
+              "queryPageSha256": "d57d6f10b9f4d2235365d342f1e9a52845422b47f13eb8d0af71d5ed064755e5",
+              "queryOrdinal": 1,
+              "entrySha256": "1e3bafdc23f5e5c4445c9b0362133bc3a98e0e263669e412df71c2575ed99237",
+              "inventoriedQueries": 7,
+              "wholeNativeRecordRequested": false,
+              "scope": "One original call validated. Unvisited calls remain inventoried. Producer-attested roundtrip to the original native owner; the client does not reassemble unvisited pages."
+            },
+            "validatedQueries": 1,
+            "selectedQueryDecodedBytes": 63911,
+            "validation": "Selected original native query; exact source syntax and binder lifting streamed through hash-checked pages. Only source paths/spines remain retained; this query’s native/type graphs load fully. Logical bounds are not heap measurements."
+          }
+        },
+        {
+          "name": "JacobiData.slope_bound_abs",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 29,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 2780,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 29,
+            "peakSourceRowJsonBytes": 2780,
+            "nativeRecordDecodedBytes": 68721,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 20,
+              "indexLoads": 1,
+              "faults": 20,
+              "evictions": 19,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 11983,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+              "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "sourceStrategy": "stream",
+            "comparisons": [
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "JacobiData.slope_bound_abs",
+                  "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+                  "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+                  "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+                  "root": 1774
+                },
+                "nativeRoot": 1139,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 1032,
+                  "memoHits": 0,
+                  "pendingHits": 555,
+                  "evictions": 8,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 125,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "JacobiData.slope_bound_abs",
+                  "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+                  "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+                  "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+                  "root": 1774
+                },
+                "nativeRoot": 807,
+                "shift": 2,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 1032,
+                  "memoHits": 0,
+                  "pendingHits": 555,
+                  "evictions": 8,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 125,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              }
+            ],
+            "delivery": {
+              "format": "ProofAtlasMethodQueryDelivery/1",
+              "originalEvidenceSha256": "ab7dff22cce3ab068a08a56cce0b109dbd819c40f79ced2a67edd42cfce5761a",
+              "originalRecordBytes": 568387,
+              "manifestSha256": "95049e3fbff28d57df5b67fc3e45b573cf00529030f92a9e74b2675c73b97a19",
+              "headerSha256": "6b550d472e84796ce0ddf79f98b42f33266bc05d97f715309c50618b95e73887",
+              "headerDecodedBytes": 3348,
+              "queryPageSha256": "98439260e6c257aa586b52c974d95c119dc635759cc7c0020af3f9faebcfb0ed",
+              "queryOrdinal": 2,
+              "entrySha256": "6fd6d1e6de1c4938fd8c511e0bda4d3767aebd8c0a8db2cfbad4a24d6191677b",
+              "inventoriedQueries": 7,
+              "wholeNativeRecordRequested": false,
+              "scope": "One original call validated. Unvisited calls remain inventoried. Producer-attested roundtrip to the original native owner; the client does not reassemble unvisited pages."
+            },
+            "validatedQueries": 1,
+            "selectedQueryDecodedBytes": 68721,
+            "validation": "Selected original native query; exact source syntax and binder lifting streamed through hash-checked pages. Only source paths/spines remain retained; this query’s native/type graphs load fully. Logical bounds are not heap measurements."
+          }
+        },
+        {
+          "name": "JacobiData.slope_bound_abs",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              0,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 26,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 2194,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 26,
+            "peakSourceRowJsonBytes": 2194,
+            "nativeRecordDecodedBytes": 71795,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 20,
+              "indexLoads": 1,
+              "faults": 20,
+              "evictions": 19,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 11983,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+              "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "sourceStrategy": "stream",
+            "comparisons": [
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "JacobiData.slope_bound_abs",
+                  "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+                  "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+                  "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+                  "root": 1777
+                },
+                "nativeRoot": 1203,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 1146,
+                  "memoHits": 0,
+                  "pendingHits": 591,
+                  "evictions": 122,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 142,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "JacobiData.slope_bound_abs",
+                  "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+                  "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+                  "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+                  "root": 1777
+                },
+                "nativeRoot": 858,
+                "shift": 2,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 1146,
+                  "memoHits": 0,
+                  "pendingHits": 591,
+                  "evictions": 122,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 142,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              }
+            ],
+            "delivery": {
+              "format": "ProofAtlasMethodQueryDelivery/1",
+              "originalEvidenceSha256": "ab7dff22cce3ab068a08a56cce0b109dbd819c40f79ced2a67edd42cfce5761a",
+              "originalRecordBytes": 568387,
+              "manifestSha256": "95049e3fbff28d57df5b67fc3e45b573cf00529030f92a9e74b2675c73b97a19",
+              "headerSha256": "6b550d472e84796ce0ddf79f98b42f33266bc05d97f715309c50618b95e73887",
+              "headerDecodedBytes": 3348,
+              "queryPageSha256": "997e6bdddcd36b68dcb091bd51c2f0a9c575ae2e9760196cd59eb055fd1fe16b",
+              "queryOrdinal": 3,
+              "entrySha256": "3491c7543f3fe75c36aad2eefa2318ed625fa250d7811832f9cc7bf90dcf8ee3",
+              "inventoriedQueries": 7,
+              "wholeNativeRecordRequested": false,
+              "scope": "One original call validated. Unvisited calls remain inventoried. Producer-attested roundtrip to the original native owner; the client does not reassemble unvisited pages."
+            },
+            "validatedQueries": 1,
+            "selectedQueryDecodedBytes": 71795,
+            "validation": "Selected original native query; exact source syntax and binder lifting streamed through hash-checked pages. Only source paths/spines remain retained; this query’s native/type graphs load fully. Logical bounds are not heap measurements."
+          }
+        },
+        {
+          "name": "JacobiData.slope_bound_abs",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 31,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 3160,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 31,
+            "peakSourceRowJsonBytes": 3160,
+            "nativeRecordDecodedBytes": 71628,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 22,
+              "indexLoads": 1,
+              "faults": 22,
+              "evictions": 21,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 11983,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+              "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "sourceStrategy": "stream",
+            "comparisons": [
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "JacobiData.slope_bound_abs",
+                  "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+                  "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+                  "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+                  "root": 2185
+                },
+                "nativeRoot": 1359,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 1266,
+                  "memoHits": 0,
+                  "pendingHits": 759,
+                  "evictions": 242,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 148,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "JacobiData.slope_bound_abs",
+                  "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+                  "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+                  "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+                  "root": 2185
+                },
+                "nativeRoot": 910,
+                "shift": 2,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 1266,
+                  "memoHits": 0,
+                  "pendingHits": 759,
+                  "evictions": 242,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 148,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              }
+            ],
+            "delivery": {
+              "format": "ProofAtlasMethodQueryDelivery/1",
+              "originalEvidenceSha256": "ab7dff22cce3ab068a08a56cce0b109dbd819c40f79ced2a67edd42cfce5761a",
+              "originalRecordBytes": 568387,
+              "manifestSha256": "95049e3fbff28d57df5b67fc3e45b573cf00529030f92a9e74b2675c73b97a19",
+              "headerSha256": "6b550d472e84796ce0ddf79f98b42f33266bc05d97f715309c50618b95e73887",
+              "headerDecodedBytes": 3348,
+              "queryPageSha256": "64743d4c151293909da73161def2b356782c645afecb91fd676a07d5a4f20718",
+              "queryOrdinal": 4,
+              "entrySha256": "7acd148bb45f7e3b123e6ef1299279dd7f735706d756ac542035f6288d20663d",
+              "inventoriedQueries": 7,
+              "wholeNativeRecordRequested": false,
+              "scope": "One original call validated. Unvisited calls remain inventoried. Producer-attested roundtrip to the original native owner; the client does not reassemble unvisited pages."
+            },
+            "validatedQueries": 1,
+            "selectedQueryDecodedBytes": 71628,
+            "validation": "Selected original native query; exact source syntax and binder lifting streamed through hash-checked pages. Only source paths/spines remain retained; this query’s native/type graphs load fully. Logical bounds are not heap measurements."
+          }
+        },
+        {
+          "name": "JacobiData.slope_bound_abs",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 28,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 2751,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 28,
+            "peakSourceRowJsonBytes": 2751,
+            "nativeRecordDecodedBytes": 76720,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 24,
+              "indexLoads": 1,
+              "faults": 24,
+              "evictions": 23,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 11983,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+              "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "sourceStrategy": "stream",
+            "comparisons": [
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "JacobiData.slope_bound_abs",
+                  "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+                  "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+                  "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+                  "root": 2188
+                },
+                "nativeRoot": 1429,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 1363,
+                  "memoHits": 0,
+                  "pendingHits": 788,
+                  "evictions": 339,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 161,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "JacobiData.slope_bound_abs",
+                  "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+                  "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+                  "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+                  "root": 2188
+                },
+                "nativeRoot": 962,
+                "shift": 2,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 1363,
+                  "memoHits": 0,
+                  "pendingHits": 788,
+                  "evictions": 339,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 161,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              }
+            ],
+            "delivery": {
+              "format": "ProofAtlasMethodQueryDelivery/1",
+              "originalEvidenceSha256": "ab7dff22cce3ab068a08a56cce0b109dbd819c40f79ced2a67edd42cfce5761a",
+              "originalRecordBytes": 568387,
+              "manifestSha256": "95049e3fbff28d57df5b67fc3e45b573cf00529030f92a9e74b2675c73b97a19",
+              "headerSha256": "6b550d472e84796ce0ddf79f98b42f33266bc05d97f715309c50618b95e73887",
+              "headerDecodedBytes": 3348,
+              "queryPageSha256": "e021322dc3a098769622c58fcf33b0c7da7799d44f0c12a5042d37048e76c95f",
+              "queryOrdinal": 5,
+              "entrySha256": "d0f01376af952c547110feb866a6bdc40a582f31f4bc2952ac4e32d0c0c90369",
+              "inventoriedQueries": 7,
+              "wholeNativeRecordRequested": false,
+              "scope": "One original call validated. Unvisited calls remain inventoried. Producer-attested roundtrip to the original native owner; the client does not reassemble unvisited pages."
+            },
+            "validatedQueries": 1,
+            "selectedQueryDecodedBytes": 76720,
+            "validation": "Selected original native query; exact source syntax and binder lifting streamed through hash-checked pages. Only source paths/spines remain retained; this query’s native/type graphs load fully. Logical bounds are not heap measurements."
+          }
+        },
+        {
+          "name": "JacobiData.slope_bound_abs",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 25,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 2165,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 25,
+            "peakSourceRowJsonBytes": 2165,
+            "nativeRecordDecodedBytes": 80097,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 25,
+              "indexLoads": 1,
+              "faults": 25,
+              "evictions": 24,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 11983,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+              "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "sourceStrategy": "stream",
+            "comparisons": [
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "JacobiData.slope_bound_abs",
+                  "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+                  "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+                  "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+                  "root": 2191
+                },
+                "nativeRoot": 1501,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 1479,
+                  "memoHits": 0,
+                  "pendingHits": 826,
+                  "evictions": 455,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 178,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "JacobiData.slope_bound_abs",
+                  "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+                  "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+                  "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+                  "root": 2191
+                },
+                "nativeRoot": 1020,
+                "shift": 2,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 1479,
+                  "memoHits": 0,
+                  "pendingHits": 826,
+                  "evictions": 455,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 178,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              }
+            ],
+            "delivery": {
+              "format": "ProofAtlasMethodQueryDelivery/1",
+              "originalEvidenceSha256": "ab7dff22cce3ab068a08a56cce0b109dbd819c40f79ced2a67edd42cfce5761a",
+              "originalRecordBytes": 568387,
+              "manifestSha256": "95049e3fbff28d57df5b67fc3e45b573cf00529030f92a9e74b2675c73b97a19",
+              "headerSha256": "6b550d472e84796ce0ddf79f98b42f33266bc05d97f715309c50618b95e73887",
+              "headerDecodedBytes": 3348,
+              "queryPageSha256": "a1be98576917ecb31028b9e7b3b478cb8bbf3590e3f7af231793ed494e4c1752",
+              "queryOrdinal": 6,
+              "entrySha256": "6d253b2881823c3e444811de48bedd9354912f48aa242b5e9f182041eb8c5d56",
+              "inventoriedQueries": 7,
+              "wholeNativeRecordRequested": false,
+              "scope": "One original call validated. Unvisited calls remain inventoried. Producer-attested roundtrip to the original native owner; the client does not reassemble unvisited pages."
+            },
+            "validatedQueries": 1,
+            "selectedQueryDecodedBytes": 80097,
+            "validation": "Selected original native query; exact source syntax and binder lifting streamed through hash-checked pages. Only source paths/spines remain retained; this query’s native/type graphs load fully. Logical bounds are not heap measurements."
+          }
+        },
+        {
+          "name": "lean_workbook_20418",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 23,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 2058,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 23,
+            "peakSourceRowJsonBytes": 2058,
+            "nativeRecordDecodedBytes": 131325,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 81,
+              "indexLoads": 27,
+              "faults": 81,
+              "evictions": 80,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 13317,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 2,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+              "manifestSha256": "a3525f4c281e8e9afd0cc28004fca7757bc929432731e696fbc0ca2b02bb1ab5",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "sourceStrategy": "stream",
+            "comparisons": [
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_20418",
+                  "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+                  "sourceSha256": "44d7d19cff28d5b75dc33d21733bf14cb764e765f493ca46cf2a66345b8a3d07",
+                  "manifestSha256": "a3525f4c281e8e9afd0cc28004fca7757bc929432731e696fbc0ca2b02bb1ab5",
+                  "root": 86243
+                },
+                "nativeRoot": 1257,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 2343,
+                  "memoHits": 0,
+                  "pendingHits": 1214,
+                  "evictions": 1319,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 279,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_20418",
+                  "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+                  "sourceSha256": "44d7d19cff28d5b75dc33d21733bf14cb764e765f493ca46cf2a66345b8a3d07",
+                  "manifestSha256": "a3525f4c281e8e9afd0cc28004fca7757bc929432731e696fbc0ca2b02bb1ab5",
+                  "root": 86243
+                },
+                "nativeRoot": 1039,
+                "shift": 1,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 2343,
+                  "memoHits": 0,
+                  "pendingHits": 1214,
+                  "evictions": 1319,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 279,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 1,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_20418",
+                  "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+                  "sourceSha256": "44d7d19cff28d5b75dc33d21733bf14cb764e765f493ca46cf2a66345b8a3d07",
+                  "manifestSha256": "a3525f4c281e8e9afd0cc28004fca7757bc929432731e696fbc0ca2b02bb1ab5",
+                  "root": 86575
+                },
+                "nativeRoot": 1243,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 2516,
+                  "memoHits": 0,
+                  "pendingHits": 1275,
+                  "evictions": 1492,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 329,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 1,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_20418",
+                  "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+                  "sourceSha256": "44d7d19cff28d5b75dc33d21733bf14cb764e765f493ca46cf2a66345b8a3d07",
+                  "manifestSha256": "a3525f4c281e8e9afd0cc28004fca7757bc929432731e696fbc0ca2b02bb1ab5",
+                  "root": 86575
+                },
+                "nativeRoot": 1025,
+                "shift": 1,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 2516,
+                  "memoHits": 0,
+                  "pendingHits": 1275,
+                  "evictions": 1492,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 329,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              }
+            ],
+            "delivery": {
+              "format": "ProofAtlasMethodQueryDelivery/1",
+              "originalEvidenceSha256": "bff138a44a4d19d5b90942dec2b99593c3e1c6d42f3d7376bb3c890ba321bde6",
+              "originalRecordBytes": 136954,
+              "manifestSha256": "4098a022c5200743a1669087e2103160053a4afc42a9ed0d94110dae14bd5af1",
+              "headerSha256": "034ddb26ad563273a5e9e0962fb10c2aa5ca210c68ab5ff3e50caccc5e6189db",
+              "headerDecodedBytes": 6454,
+              "queryPageSha256": "891746e7d4d284f416be9309dbb7c1ea3aab03af0b3740e6bb4cfe58f4b796ae",
+              "queryOrdinal": 0,
+              "entrySha256": "340b038a08f0a9aaa5463273e849a0d81a382a9079a2f222976e6e2ec1cdca09",
+              "inventoriedQueries": 1,
+              "wholeNativeRecordRequested": false,
+              "scope": "One original call validated. Unvisited calls remain inventoried. Producer-attested roundtrip to the original native owner; the client does not reassemble unvisited pages."
+            },
+            "validatedQueries": 1,
+            "selectedQueryDecodedBytes": 131325,
+            "validation": "Selected original native query; exact source syntax and binder lifting streamed through hash-checked pages. Only source paths/spines remain retained; this query’s native/type graphs load fully. Logical bounds are not heap measurements."
+          }
+        },
+        {
+          "name": "lean_workbook_plus_6206",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 23,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 1686,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 23,
+            "peakSourceRowJsonBytes": 1686,
+            "nativeRecordDecodedBytes": 106062,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 71,
+              "indexLoads": 19,
+              "faults": 71,
+              "evictions": 70,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 12089,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 2,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+              "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "sourceStrategy": "stream",
+            "comparisons": [
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91047
+                },
+                "nativeRoot": 1098,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 936,
+                  "memoHits": 0,
+                  "pendingHits": 605,
+                  "evictions": 0,
+                  "peakMemoEntries": 936,
+                  "peakStackFrames": 100,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91047
+                },
+                "nativeRoot": 785,
+                "shift": 1,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 936,
+                  "memoHits": 0,
+                  "pendingHits": 605,
+                  "evictions": 0,
+                  "peakMemoEntries": 936,
+                  "peakStackFrames": 100,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 1,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91412
+                },
+                "nativeRoot": 1238,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 1066,
+                  "memoHits": 0,
+                  "pendingHits": 707,
+                  "evictions": 42,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 171,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 1,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91412
+                },
+                "nativeRoot": 877,
+                "shift": 1,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 1066,
+                  "memoHits": 0,
+                  "pendingHits": 707,
+                  "evictions": 42,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 171,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              }
+            ],
+            "delivery": {
+              "format": "ProofAtlasMethodQueryDelivery/1",
+              "originalEvidenceSha256": "679d1701c242dc4a0b4e4f24920d34b6152e781513d7b40298e3626c81ba52d8",
+              "originalRecordBytes": 546399,
+              "manifestSha256": "cf152d4156fd5672c6b5f0d5cfe042f47744b812ca2f538e9660c3ec2bbfa6df",
+              "headerSha256": "3c9e5e0af6ca23074394d259c0efcf1db38e459ab56bc18441bc3428b1c37ea2",
+              "headerDecodedBytes": 6878,
+              "queryPageSha256": "020f456e589563c96abf88653e36a5a3aacaf87b18548e8c030ba372a2ef5189",
+              "queryOrdinal": 0,
+              "entrySha256": "7f816e7812ba19ef270f34dc3d76b7ec6febc5b9da9db2185ec218423d19f386",
+              "inventoriedQueries": 7,
+              "wholeNativeRecordRequested": false,
+              "scope": "One original call validated. Unvisited calls remain inventoried. Producer-attested roundtrip to the original native owner; the client does not reassemble unvisited pages."
+            },
+            "validatedQueries": 1,
+            "selectedQueryDecodedBytes": 106062,
+            "validation": "Selected original native query; exact source syntax and binder lifting streamed through hash-checked pages. Only source paths/spines remain retained; this query’s native/type graphs load fully. Logical bounds are not heap measurements."
+          }
+        },
+        {
+          "name": "lean_workbook_plus_6206",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              0,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 26,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 1853,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 26,
+            "peakSourceRowJsonBytes": 1853,
+            "nativeRecordDecodedBytes": 82910,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 62,
+              "indexLoads": 19,
+              "faults": 62,
+              "evictions": 61,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 12089,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 2,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+              "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "sourceStrategy": "stream",
+            "comparisons": [
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 90848
+                },
+                "nativeRoot": 789,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 639,
+                  "memoHits": 0,
+                  "pendingHits": 397,
+                  "evictions": 0,
+                  "peakMemoEntries": 639,
+                  "peakStackFrames": 85,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 90848
+                },
+                "nativeRoot": 565,
+                "shift": 1,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 639,
+                  "memoHits": 0,
+                  "pendingHits": 397,
+                  "evictions": 0,
+                  "peakMemoEntries": 639,
+                  "peakStackFrames": 85,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 1,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91045
+                },
+                "nativeRoot": 724,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 670,
+                  "memoHits": 0,
+                  "pendingHits": 376,
+                  "evictions": 0,
+                  "peakMemoEntries": 670,
+                  "peakStackFrames": 88,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 1,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91045
+                },
+                "nativeRoot": 558,
+                "shift": 1,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 670,
+                  "memoHits": 0,
+                  "pendingHits": 376,
+                  "evictions": 0,
+                  "peakMemoEntries": 670,
+                  "peakStackFrames": 88,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              }
+            ],
+            "delivery": {
+              "format": "ProofAtlasMethodQueryDelivery/1",
+              "originalEvidenceSha256": "679d1701c242dc4a0b4e4f24920d34b6152e781513d7b40298e3626c81ba52d8",
+              "originalRecordBytes": 546399,
+              "manifestSha256": "cf152d4156fd5672c6b5f0d5cfe042f47744b812ca2f538e9660c3ec2bbfa6df",
+              "headerSha256": "3c9e5e0af6ca23074394d259c0efcf1db38e459ab56bc18441bc3428b1c37ea2",
+              "headerDecodedBytes": 6878,
+              "queryPageSha256": "4ad9e7091b05ee679a1a63968fa98ed04f9e6ff14521e30f6637385e8f1493ef",
+              "queryOrdinal": 1,
+              "entrySha256": "12ad3b82c8b9cbddbd0fa82749217b4828cdd9b95e45c732fab68d2725f421cf",
+              "inventoriedQueries": 7,
+              "wholeNativeRecordRequested": false,
+              "scope": "One original call validated. Unvisited calls remain inventoried. Producer-attested roundtrip to the original native owner; the client does not reassemble unvisited pages."
+            },
+            "validatedQueries": 1,
+            "selectedQueryDecodedBytes": 82910,
+            "validation": "Selected original native query; exact source syntax and binder lifting streamed through hash-checked pages. Only source paths/spines remain retained; this query’s native/type graphs load fully. Logical bounds are not heap measurements."
+          }
+        },
+        {
+          "name": "lean_workbook_plus_6206",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 25,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 1823,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 25,
+            "peakSourceRowJsonBytes": 1823,
+            "nativeRecordDecodedBytes": 84532,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 71,
+              "indexLoads": 19,
+              "faults": 71,
+              "evictions": 70,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 12089,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 2,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+              "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "sourceStrategy": "stream",
+            "comparisons": [
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91164
+                },
+                "nativeRoot": 727,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 632,
+                  "memoHits": 0,
+                  "pendingHits": 362,
+                  "evictions": 0,
+                  "peakMemoEntries": 632,
+                  "peakStackFrames": 101,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91164
+                },
+                "nativeRoot": 558,
+                "shift": 1,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 632,
+                  "memoHits": 0,
+                  "pendingHits": 362,
+                  "evictions": 0,
+                  "peakMemoEntries": 632,
+                  "peakStackFrames": 101,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 1,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91410
+                },
+                "nativeRoot": 852,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 724,
+                  "memoHits": 0,
+                  "pendingHits": 454,
+                  "evictions": 0,
+                  "peakMemoEntries": 724,
+                  "peakStackFrames": 119,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 1,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91410
+                },
+                "nativeRoot": 613,
+                "shift": 1,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 724,
+                  "memoHits": 0,
+                  "pendingHits": 454,
+                  "evictions": 0,
+                  "peakMemoEntries": 724,
+                  "peakStackFrames": 119,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              }
+            ],
+            "delivery": {
+              "format": "ProofAtlasMethodQueryDelivery/1",
+              "originalEvidenceSha256": "679d1701c242dc4a0b4e4f24920d34b6152e781513d7b40298e3626c81ba52d8",
+              "originalRecordBytes": 546399,
+              "manifestSha256": "cf152d4156fd5672c6b5f0d5cfe042f47744b812ca2f538e9660c3ec2bbfa6df",
+              "headerSha256": "3c9e5e0af6ca23074394d259c0efcf1db38e459ab56bc18441bc3428b1c37ea2",
+              "headerDecodedBytes": 6878,
+              "queryPageSha256": "edd60a7ea767d29be418a419667855088e365c684ed5e88fe85878b809d48cf6",
+              "queryOrdinal": 2,
+              "entrySha256": "3178302922c4157d9de768b70733afb3b877a8befdfd43bf3b69b27f5ba3bc20",
+              "inventoriedQueries": 7,
+              "wholeNativeRecordRequested": false,
+              "scope": "One original call validated. Unvisited calls remain inventoried. Producer-attested roundtrip to the original native owner; the client does not reassemble unvisited pages."
+            },
+            "validatedQueries": 1,
+            "selectedQueryDecodedBytes": 84532,
+            "validation": "Selected original native query; exact source syntax and binder lifting streamed through hash-checked pages. Only source paths/spines remain retained; this query’s native/type graphs load fully. Logical bounds are not heap measurements."
+          }
+        },
+        {
+          "name": "lean_workbook_plus_6206",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 29,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 2020,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 29,
+            "peakSourceRowJsonBytes": 2020,
+            "nativeRecordDecodedBytes": 64080,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 56,
+              "indexLoads": 19,
+              "faults": 56,
+              "evictions": 55,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 12089,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 2,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+              "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "sourceStrategy": "stream",
+            "comparisons": [
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 90702
+                },
+                "nativeRoot": 475,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 369,
+                  "memoHits": 0,
+                  "pendingHits": 232,
+                  "evictions": 0,
+                  "peakMemoEntries": 369,
+                  "peakStackFrames": 60,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 90702
+                },
+                "nativeRoot": 358,
+                "shift": 1,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 369,
+                  "memoHits": 0,
+                  "pendingHits": 232,
+                  "evictions": 0,
+                  "peakMemoEntries": 369,
+                  "peakStackFrames": 60,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 1,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 90846
+                },
+                "nativeRoot": 464,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 419,
+                  "memoHits": 0,
+                  "pendingHits": 207,
+                  "evictions": 0,
+                  "peakMemoEntries": 419,
+                  "peakStackFrames": 62,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 1,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 90846
+                },
+                "nativeRoot": 368,
+                "shift": 1,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 419,
+                  "memoHits": 0,
+                  "pendingHits": 207,
+                  "evictions": 0,
+                  "peakMemoEntries": 419,
+                  "peakStackFrames": 62,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              }
+            ],
+            "delivery": {
+              "format": "ProofAtlasMethodQueryDelivery/1",
+              "originalEvidenceSha256": "679d1701c242dc4a0b4e4f24920d34b6152e781513d7b40298e3626c81ba52d8",
+              "originalRecordBytes": 546399,
+              "manifestSha256": "cf152d4156fd5672c6b5f0d5cfe042f47744b812ca2f538e9660c3ec2bbfa6df",
+              "headerSha256": "3c9e5e0af6ca23074394d259c0efcf1db38e459ab56bc18441bc3428b1c37ea2",
+              "headerDecodedBytes": 6878,
+              "queryPageSha256": "52b6b763b05e6d9abad4485c58f396fc96ce9dd011e21741ae6b6a7920904a2a",
+              "queryOrdinal": 3,
+              "entrySha256": "5318e9dbf5b23f4dd406b0b3b16a48377cb7be62965b89afa16a906dbc14613e",
+              "inventoriedQueries": 7,
+              "wholeNativeRecordRequested": false,
+              "scope": "One original call validated. Unvisited calls remain inventoried. Producer-attested roundtrip to the original native owner; the client does not reassemble unvisited pages."
+            },
+            "validatedQueries": 1,
+            "selectedQueryDecodedBytes": 64080,
+            "validation": "Selected original native query; exact source syntax and binder lifting streamed through hash-checked pages. Only source paths/spines remain retained; this query’s native/type graphs load fully. Logical bounds are not heap measurements."
+          }
+        },
+        {
+          "name": "lean_workbook_plus_6206",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              0,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 28,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 1990,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 28,
+            "peakSourceRowJsonBytes": 1990,
+            "nativeRecordDecodedBytes": 69200,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 63,
+              "indexLoads": 19,
+              "faults": 63,
+              "evictions": 62,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 12089,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 2,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+              "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "sourceStrategy": "stream",
+            "comparisons": [
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91016
+                },
+                "nativeRoot": 531,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 447,
+                  "memoHits": 0,
+                  "pendingHits": 235,
+                  "evictions": 0,
+                  "peakMemoEntries": 447,
+                  "peakStackFrames": 68,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91016
+                },
+                "nativeRoot": 435,
+                "shift": 1,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 447,
+                  "memoHits": 0,
+                  "pendingHits": 235,
+                  "evictions": 0,
+                  "peakMemoEntries": 447,
+                  "peakStackFrames": 68,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 1,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91043
+                },
+                "nativeRoot": 471,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 424,
+                  "memoHits": 0,
+                  "pendingHits": 212,
+                  "evictions": 0,
+                  "peakMemoEntries": 424,
+                  "peakStackFrames": 62,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 1,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91043
+                },
+                "nativeRoot": 373,
+                "shift": 1,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 424,
+                  "memoHits": 0,
+                  "pendingHits": 212,
+                  "evictions": 0,
+                  "peakMemoEntries": 424,
+                  "peakStackFrames": 62,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              }
+            ],
+            "delivery": {
+              "format": "ProofAtlasMethodQueryDelivery/1",
+              "originalEvidenceSha256": "679d1701c242dc4a0b4e4f24920d34b6152e781513d7b40298e3626c81ba52d8",
+              "originalRecordBytes": 546399,
+              "manifestSha256": "cf152d4156fd5672c6b5f0d5cfe042f47744b812ca2f538e9660c3ec2bbfa6df",
+              "headerSha256": "3c9e5e0af6ca23074394d259c0efcf1db38e459ab56bc18441bc3428b1c37ea2",
+              "headerDecodedBytes": 6878,
+              "queryPageSha256": "6e1f5505fba13b3b038f48e7ff559741e5d4f30acab6edce2a06e68bf067bcfe",
+              "queryOrdinal": 4,
+              "entrySha256": "b63350ca299d227fe5413535ef430c761202f8431ef280d5d28f846a1c62ccff",
+              "inventoriedQueries": 7,
+              "wholeNativeRecordRequested": false,
+              "scope": "One original call validated. Unvisited calls remain inventoried. Producer-attested roundtrip to the original native owner; the client does not reassemble unvisited pages."
+            },
+            "validatedQueries": 1,
+            "selectedQueryDecodedBytes": 69200,
+            "validation": "Selected original native query; exact source syntax and binder lifting streamed through hash-checked pages. Only source paths/spines remain retained; this query’s native/type graphs load fully. Logical bounds are not heap measurements."
+          }
+        },
+        {
+          "name": "lean_workbook_plus_6206",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 28,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 1989,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 28,
+            "peakSourceRowJsonBytes": 1989,
+            "nativeRecordDecodedBytes": 69262,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 66,
+              "indexLoads": 19,
+              "faults": 66,
+              "evictions": 65,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 12089,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 2,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+              "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "sourceStrategy": "stream",
+            "comparisons": [
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91107
+                },
+                "nativeRoot": 530,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 447,
+                  "memoHits": 0,
+                  "pendingHits": 235,
+                  "evictions": 0,
+                  "peakMemoEntries": 447,
+                  "peakStackFrames": 75,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91107
+                },
+                "nativeRoot": 434,
+                "shift": 1,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 447,
+                  "memoHits": 0,
+                  "pendingHits": 235,
+                  "evictions": 0,
+                  "peakMemoEntries": 447,
+                  "peakStackFrames": 75,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 1,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91162
+                },
+                "nativeRoot": 475,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 424,
+                  "memoHits": 0,
+                  "pendingHits": 212,
+                  "evictions": 0,
+                  "peakMemoEntries": 424,
+                  "peakStackFrames": 55,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 1,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91162
+                },
+                "nativeRoot": 374,
+                "shift": 1,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 424,
+                  "memoHits": 0,
+                  "pendingHits": 212,
+                  "evictions": 0,
+                  "peakMemoEntries": 424,
+                  "peakStackFrames": 55,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              }
+            ],
+            "delivery": {
+              "format": "ProofAtlasMethodQueryDelivery/1",
+              "originalEvidenceSha256": "679d1701c242dc4a0b4e4f24920d34b6152e781513d7b40298e3626c81ba52d8",
+              "originalRecordBytes": 546399,
+              "manifestSha256": "cf152d4156fd5672c6b5f0d5cfe042f47744b812ca2f538e9660c3ec2bbfa6df",
+              "headerSha256": "3c9e5e0af6ca23074394d259c0efcf1db38e459ab56bc18441bc3428b1c37ea2",
+              "headerDecodedBytes": 6878,
+              "queryPageSha256": "27858a1e82023e2e8b2663fc3af758c1eaed37ec6a242c60ad1c7c0dc8eeb279",
+              "queryOrdinal": 5,
+              "entrySha256": "dd2ab7abd38ca48c81059b8dd95868a3be9c9917566aefbd36f2a4d93e276c84",
+              "inventoriedQueries": 7,
+              "wholeNativeRecordRequested": false,
+              "scope": "One original call validated. Unvisited calls remain inventoried. Producer-attested roundtrip to the original native owner; the client does not reassemble unvisited pages."
+            },
+            "validatedQueries": 1,
+            "selectedQueryDecodedBytes": 69262,
+            "validation": "Selected original native query; exact source syntax and binder lifting streamed through hash-checked pages. Only source paths/spines remain retained; this query’s native/type graphs load fully. Logical bounds are not heap measurements."
+          }
+        },
+        {
+          "name": "lean_workbook_plus_6206",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 27,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 1961,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 27,
+            "peakSourceRowJsonBytes": 1961,
+            "nativeRecordDecodedBytes": 65176,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 67,
+              "indexLoads": 19,
+              "faults": 67,
+              "evictions": 66,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 12089,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 2,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+              "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "sourceStrategy": "stream",
+            "comparisons": [
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91237
+                },
+                "nativeRoot": 470,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 386,
+                  "memoHits": 0,
+                  "pendingHits": 198,
+                  "evictions": 0,
+                  "peakMemoEntries": 386,
+                  "peakStackFrames": 59,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91237
+                },
+                "nativeRoot": 374,
+                "shift": 1,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 386,
+                  "memoHits": 0,
+                  "pendingHits": 198,
+                  "evictions": 0,
+                  "peakMemoEntries": 386,
+                  "peakStackFrames": 59,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 1,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91408
+                },
+                "nativeRoot": 518,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 439,
+                  "memoHits": 0,
+                  "pendingHits": 274,
+                  "evictions": 0,
+                  "peakMemoEntries": 439,
+                  "peakStackFrames": 75,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 1,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_6206",
+                  "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+                  "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5",
+                  "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+                  "root": 91408
+                },
+                "nativeRoot": 390,
+                "shift": 1,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 439,
+                  "memoHits": 0,
+                  "pendingHits": 274,
+                  "evictions": 0,
+                  "peakMemoEntries": 439,
+                  "peakStackFrames": 75,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              }
+            ],
+            "delivery": {
+              "format": "ProofAtlasMethodQueryDelivery/1",
+              "originalEvidenceSha256": "679d1701c242dc4a0b4e4f24920d34b6152e781513d7b40298e3626c81ba52d8",
+              "originalRecordBytes": 546399,
+              "manifestSha256": "cf152d4156fd5672c6b5f0d5cfe042f47744b812ca2f538e9660c3ec2bbfa6df",
+              "headerSha256": "3c9e5e0af6ca23074394d259c0efcf1db38e459ab56bc18441bc3428b1c37ea2",
+              "headerDecodedBytes": 6878,
+              "queryPageSha256": "e6146a7df913ac3ca283791084fc1b491f40c294ba7326d2bbd82b78048ed409",
+              "queryOrdinal": 6,
+              "entrySha256": "e282c8f0c071ff70425bb7b985eb8cb0acdc23743be5ddfcd4b3aff5665dc9e9",
+              "inventoriedQueries": 7,
+              "wholeNativeRecordRequested": false,
+              "scope": "One original call validated. Unvisited calls remain inventoried. Producer-attested roundtrip to the original native owner; the client does not reassemble unvisited pages."
+            },
+            "validatedQueries": 1,
+            "selectedQueryDecodedBytes": 65176,
+            "validation": "Selected original native query; exact source syntax and binder lifting streamed through hash-checked pages. Only source paths/spines remain retained; this query’s native/type graphs load fully. Logical bounds are not heap measurements."
+          }
+        },
+        {
+          "name": "lean_workbook_plus_62755",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              2,
+              2
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 19,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 1267,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 19,
+            "peakSourceRowJsonBytes": 1267,
+            "nativeRecordDecodedBytes": 109013,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 39,
+              "indexLoads": 1,
+              "faults": 39,
+              "evictions": 38,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 12184,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+              "manifestSha256": "6d632b791dbd94dafd3c5dc42681b47ebd36041957d997ccb3968de30882cad9",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "sourceStrategy": "stream",
+            "comparisons": [
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_62755",
+                  "indexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+                  "sourceSha256": "7e270522ac93030b71efabbf6d3ffd84407805aa1cee8348a6fd427c86aa423c",
+                  "manifestSha256": "6d632b791dbd94dafd3c5dc42681b47ebd36041957d997ccb3968de30882cad9",
+                  "root": 1932
+                },
+                "nativeRoot": 1047,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 982,
+                  "memoHits": 0,
+                  "pendingHits": 559,
+                  "evictions": 0,
+                  "peakMemoEntries": 982,
+                  "peakStackFrames": 113,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 0,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_62755",
+                  "indexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+                  "sourceSha256": "7e270522ac93030b71efabbf6d3ffd84407805aa1cee8348a6fd427c86aa423c",
+                  "manifestSha256": "6d632b791dbd94dafd3c5dc42681b47ebd36041957d997ccb3968de30882cad9",
+                  "root": 1932
+                },
+                "nativeRoot": 790,
+                "shift": 1,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 982,
+                  "memoHits": 0,
+                  "pendingHits": 559,
+                  "evictions": 0,
+                  "peakMemoEntries": 982,
+                  "peakStackFrames": 113,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 1,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_62755",
+                  "indexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+                  "sourceSha256": "7e270522ac93030b71efabbf6d3ffd84407805aa1cee8348a6fd427c86aa423c",
+                  "manifestSha256": "6d632b791dbd94dafd3c5dc42681b47ebd36041957d997ccb3968de30882cad9",
+                  "root": 2149
+                },
+                "nativeRoot": 1089,
+                "shift": 0,
+                "relation": "exact-source-syntax",
+                "state": {
+                  "pairs": 1059,
+                  "memoHits": 0,
+                  "pendingHits": 612,
+                  "evictions": 35,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 122,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              },
+              {
+                "minor": 1,
+                "format": "ProofAtlasSourceComparison/1",
+                "source": {
+                  "name": "lean_workbook_plus_62755",
+                  "indexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+                  "sourceSha256": "7e270522ac93030b71efabbf6d3ffd84407805aa1cee8348a6fd427c86aa423c",
+                  "manifestSha256": "6d632b791dbd94dafd3c5dc42681b47ebd36041957d997ccb3968de30882cad9",
+                  "root": 2149
+                },
+                "nativeRoot": 832,
+                "shift": 1,
+                "relation": "exact-source-syntax-under-binder-lifting",
+                "state": {
+                  "pairs": 1059,
+                  "memoHits": 0,
+                  "pendingHits": 612,
+                  "evictions": 35,
+                  "peakMemoEntries": 1024,
+                  "peakStackFrames": 122,
+                  "memoEntries": 0,
+                  "stackFrames": 0,
+                  "memoLimit": 1024,
+                  "stackLimit": 4096,
+                  "workLimit": 262144,
+                  "schedule": "descending-source-DAG-node"
+                },
+                "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+              }
+            ],
+            "delivery": {
+              "format": "ProofAtlasMethodQueryDelivery/1",
+              "originalEvidenceSha256": "558bd3f7d039fffb248c80e8e4b90dd7921aaa505c1433911593b0a2fbc48572",
+              "originalRecordBytes": 113162,
+              "manifestSha256": "56bbd67b87c1797f6f35e56bb8ebab586d225a3a337310d5619b82758e23494b",
+              "headerSha256": "00f7e1189ccc0a0545e8b80bddda034c2668407dd2f17163e91f577d3193c73b",
+              "headerDecodedBytes": 4974,
+              "queryPageSha256": "51e6915092c16be47b43cd33e25b82b8fb20f4d343655d7e03b96255906f1c73",
+              "queryOrdinal": 0,
+              "entrySha256": "54fac7c7fc8c124b7ee62c13baaf793eb2d36a248a5a7de4a634ffb81c5fba56",
+              "inventoriedQueries": 1,
+              "wholeNativeRecordRequested": false,
+              "scope": "One original call validated. Unvisited calls remain inventoried. Producer-attested roundtrip to the original native owner; the client does not reassemble unvisited pages."
+            },
+            "validatedQueries": 1,
+            "selectedQueryDecodedBytes": 109013,
+            "validation": "Selected original native query; exact source syntax and binder lifting streamed through hash-checked pages. Only source paths/spines remain retained; this query’s native/type graphs load fully. Logical bounds are not heap measurements."
+          }
+        }
+      ],
+      "fullSourceArchiveRequests": 0,
+      "fullNativeRecordRequests": 0,
+      "checkerSha256": "2f2616f27339cefee7311a457eab7094a027fca07edc50d9511c028136faaaf7",
+      "builtFiles": {
+        "public/js/proof-atlas-source-comparison.js": "66a594674c5f564a164e4065e6d6212284d445319ac16f8b93bd66b2e671cc7f",
+        "public/js/proof-atlas-method-query-pages.js": "4ae984d88bd8f8fe3e11f0e94f58ca9cfa53cc484273e7c34c614df62099e947",
+        "public/data/proof-atlas/method-query-pages-manifest.js": "c326ecf2cdc8799e5568e811f125faf41d9ebd2036af56b09c34c2b0f98567a8",
+        "public/js/proof-atlas-method-source.js": "6f4c20d73405d9a5fe8bdb6d9c458573a039c3edde45b226a7155a18ee413245",
+        "public/js/proof-atlas-method-source-view.js": "8344af52ac90a32a6f22b3718207ce9aad68c0fd5c2651421304ce2b5bf2c113",
+        "public/js/proof-atlas-paged-library.js": "8882fb58695b2de937209c80b7c3d363ec7247e5902ad95b8e735caa3372e0cb",
+        "public/js/proof-atlas-method-interfaces.js": "a93bb3c50b17eeac7a231b8c3b4a4092367df8190a8accc17f441e0d39fd2192",
+        "public/js/proof-atlas-source-pages.js": "b9af2065260c5eecd4cee53aa82016a53ce7aac7305a9a10307def811d480c28",
+        "public/js/proof-atlas-native-pages.js": "48ae41afe4297b191cf5b576a04e498e287e791ae5074bf0b41a78b7d18df65b",
+        "public/js/proof-atlas-library-data.js": "a4a01e2e93d015397eb6a8d6fd677e6b788e079440c3e206c43b8c56e06161e9",
+        "public/js/proof-atlas-occurrence-types.js": "b80d43d682d3a4b7f99e284a09a6249e11ca24197e1901158caa723dcf0f6c8f",
+        "public/js/proof-atlas-elimination.js": "89c72f4aa7d8607ee15990cea6f6426f2677e4beedccdb11a4ae59e509099b71"
+      }
+    },
+    "original": {
+      "status": "PASS",
+      "methodScenes": 16,
+      "riccatiScenes": 8,
+      "controlScenes": 8,
+      "inputSelections": 24,
+      "computedReferenceJumps": 1,
+      "originalReferenceJumps": 7,
+      "originalMethodJumps": 9,
+      "axeAudits": 4,
+      "failureControls": 2,
+      "staleControls": 1,
+      "checkerSha256": "43f0eb9b58c7ae384fefde9627cbcc6faa90d337f154af42b8b0b831a43e9d8d",
+      "builtFiles": {
+        "public/js/proof-atlas-method-interfaces.js": "a93bb3c50b17eeac7a231b8c3b4a4092367df8190a8accc17f441e0d39fd2192",
+        "public/js/proof-atlas-method-examples.js": "b6060d2250005974d46815b94e7639d8e86e1eeca149c5e9ef635a5b442cab9e",
+        "public/js/proof-atlas-elimination.js": "89c72f4aa7d8607ee15990cea6f6426f2677e4beedccdb11a4ae59e509099b71",
+        "public/js/proof-atlas-library.js": "b1951db31063c632417de9cdc1e49901b3cd7a18eed9704d95313b57a1f267f6",
+        "public/css/proof-atlas-theme.css": "70fd5599cbbc519cc11326e188b9503ea6f603a1230a88628ac595d6d8e96eb0",
+        "public/data/proof-atlas/method-interfaces-manifest.js": "35545092727a15db1c18536f31361c0fab98ab132610ab375eeb242216e8b0d7"
+      }
+    },
+    "ai": {
+      "format": "ProofAtlasMethodReplayBrowserAudit/1",
+      "status": "PASS",
+      "profiles": 3,
+      "calls": 9,
+      "methodScenes": 18,
+      "inputSelections": 18,
+      "originalReferenceJumps": 18,
+      "originalMethodJumps": 18,
+      "librarySourceJumps": 1,
+      "libraryMethodScenes": 2,
+      "axeAudits": 4,
+      "failureControls": 2,
+      "staleControls": 1,
+      "checkerSha256": "de59a22c82d3fa3e69bd73d28e8aecd5b33c9fdba6d67661170ac3e2a4757462",
+      "builtFiles": {
+        "public/js/proof-atlas-method-interfaces.js": {
+          "sourceSha256": "a93bb3c50b17eeac7a231b8c3b4a4092367df8190a8accc17f441e0d39fd2192",
+          "servedSha256": "a93bb3c50b17eeac7a231b8c3b4a4092367df8190a8accc17f441e0d39fd2192"
+        },
+        "public/js/proof-atlas-method-examples.js": {
+          "sourceSha256": "b6060d2250005974d46815b94e7639d8e86e1eeca149c5e9ef635a5b442cab9e",
+          "servedSha256": "b6060d2250005974d46815b94e7639d8e86e1eeca149c5e9ef635a5b442cab9e"
+        },
+        "public/js/proof-atlas-elimination.js": {
+          "sourceSha256": "89c72f4aa7d8607ee15990cea6f6426f2677e4beedccdb11a4ae59e509099b71",
+          "servedSha256": "89c72f4aa7d8607ee15990cea6f6426f2677e4beedccdb11a4ae59e509099b71"
+        },
+        "public/js/proof-atlas-sync.js": {
+          "sourceSha256": "0b746f649c0b8b76b683300b045f1efcec0897c1d3bc2a802fe4b5296fbf5303",
+          "servedSha256": "0b746f649c0b8b76b683300b045f1efcec0897c1d3bc2a802fe4b5296fbf5303"
+        },
+        "public/js/proof-atlas-library.js": {
+          "sourceSha256": "b1951db31063c632417de9cdc1e49901b3cd7a18eed9704d95313b57a1f267f6",
+          "servedSha256": "b1951db31063c632417de9cdc1e49901b3cd7a18eed9704d95313b57a1f267f6"
+        },
+        "public/js/proof-atlas-library-data.js": {
+          "sourceSha256": "a4a01e2e93d015397eb6a8d6fd677e6b788e079440c3e206c43b8c56e06161e9",
+          "servedSha256": "a4a01e2e93d015397eb6a8d6fd677e6b788e079440c3e206c43b8c56e06161e9"
+        },
+        "public/js/proof-atlas-occurrence-types.js": {
+          "sourceSha256": "b80d43d682d3a4b7f99e284a09a6249e11ca24197e1901158caa723dcf0f6c8f",
+          "servedSha256": "b80d43d682d3a4b7f99e284a09a6249e11ca24197e1901158caa723dcf0f6c8f"
+        },
+        "public/js/proof-atlas-recursive-inputs.js": {
+          "sourceSha256": "b6453bc2364dcdfbdd129eddabf6e27eefecf84ee8f8bdd12b38f11378457d10",
+          "servedSha256": "b6453bc2364dcdfbdd129eddabf6e27eefecf84ee8f8bdd12b38f11378457d10"
+        },
+        "public/css/proof-atlas-theme.css": {
+          "sourceSha256": "70fd5599cbbc519cc11326e188b9503ea6f603a1230a88628ac595d6d8e96eb0",
+          "servedSha256": "70fd5599cbbc519cc11326e188b9503ea6f603a1230a88628ac595d6d8e96eb0"
+        },
+        "public/data/proof-atlas/method-interfaces-ai-manifest.js": {
+          "sourceSha256": "e53ce10c4751c239432372b32fc2e8b90d11a85a5d66e5e08646f03dd0f67285",
+          "servedSha256": "e53ce10c4751c239432372b32fc2e8b90d11a85a5d66e5e08646f03dd0f67285"
+        },
+        "projects/proof-atlas/manual/index.html": {
+          "sourceSha256": "acd7896b21158e074df58738e88415ea78597ab66387c0117984652091057734",
+          "servedSha256": "9b1dc21e3fce18d2d04e2dfc0bb74562d09b1cc05ff6f2b187f0785d4ed520d7",
+          "htmlComparison": {
+            "normalization": "Only four shared CSS build-time query versions",
+            "styles": [
+              "site",
+              "distill",
+              "syntax",
+              "theme"
+            ],
+            "normalizedSha256": "83eb1b3d85181daee22bdd8e807077d4aebc637a89f937f0b9aa58b1ce7d0375"
+          }
+        },
+        "projects/proof-atlas/library/index.html": {
+          "sourceSha256": "b6d852cbfd76d9b467f0329c2f3993db51a4c253702a66d8f5ba034ed6d2e917",
+          "servedSha256": "2904c4e1ccf919abd06571d38d783fde1142adc4acb156273b71acccbe6a3970",
+          "htmlComparison": {
+            "normalization": "Only four shared CSS build-time query versions",
+            "styles": [
+              "site",
+              "distill",
+              "syntax",
+              "theme"
+            ],
+            "normalizedSha256": "aca495ba39d9802cd91fae94b72e91b2aa5d81f5a5b66a2f53c12427df2653b3"
+          }
+        }
+      },
+      "librarySourceTarget": "/projects/proof-atlas/library/?edition=goedel-sample-4331&proof=lean_workbook_plus_62755&route=1%3A1.1.2.2.0.0.1"
+    },
+    "stress": {
+      "format": "ProofAtlasMethodStreamingBrowserAudit/1",
+      "status": "PASS",
+      "scenes": 2,
+      "inputs": 2,
+      "sourceSelections": 2,
+      "axeAudits": 4,
+      "releaseChecks": 1,
+      "failureControls": 1,
+      "staleControls": 1,
+      "state": {
+        "format": "ProofAtlasMethodSourceState/1",
+        "phase": "ready",
+        "disposed": false,
+        "sourceRows": 11,
+        "rowLimit": 4096,
+        "sourceRowJsonBytes": 787,
+        "jsonByteLimit": 4194304,
+        "peakSourceRows": 11,
+        "peakSourceRowJsonBytes": 787,
+        "nativeRecordDecodedBytes": 326933,
+        "nativeRecordByteLimit": 8388608,
+        "sourcePageCache": {
+          "pageLoads": 70,
+          "indexLoads": 1,
+          "faults": 70,
+          "evictions": 69,
+          "peakCachedPages": 1,
+          "peakCachedNodes": 256,
+          "peakCachedDecodedBytes": 8563,
+          "cachedPages": 1,
+          "cachedNodes": 256,
+          "indexPages": 1,
+          "pageLimit": 1,
+          "indexLimit": 2,
+          "nodeLimit": 256,
+          "originalIndexSha256": "9620a73f6f84db0bd278527c4235b7b29b015b13b811c0c1cd95bae111ce0a18",
+          "manifestSha256": "ae779cff7c22f0b36eab15387c14633e8e7fbcdecab4062658048416e3c9ba1b",
+          "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+        },
+        "wholeSourceArchiveRequested": false,
+        "sourceStrategy": "stream",
+        "comparisons": [
+          {
+            "minor": 0,
+            "format": "ProofAtlasSourceComparison/1",
+            "source": {
+              "name": "AtlasMethodControls.largeStream",
+              "indexSha256": "9620a73f6f84db0bd278527c4235b7b29b015b13b811c0c1cd95bae111ce0a18",
+              "sourceSha256": "f9472a846b8dbf434398b30ac93ba03a6f940f737e4e16dd38c194daf91ff07c",
+              "manifestSha256": "ae779cff7c22f0b36eab15387c14633e8e7fbcdecab4062658048416e3c9ba1b",
+              "root": 6
+            },
+            "nativeRoot": 0,
+            "shift": 0,
+            "relation": "exact-source-syntax",
+            "state": {
+              "pairs": 1,
+              "memoHits": 0,
+              "pendingHits": 0,
+              "evictions": 0,
+              "peakMemoEntries": 1,
+              "peakStackFrames": 1,
+              "memoEntries": 0,
+              "stackFrames": 0,
+              "memoLimit": 1024,
+              "stackLimit": 4096,
+              "workLimit": 262144,
+              "schedule": "descending-source-DAG-node"
+            },
+            "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+          },
+          {
+            "minor": 0,
+            "format": "ProofAtlasSourceComparison/1",
+            "source": {
+              "name": "AtlasMethodControls.largeStream",
+              "indexSha256": "9620a73f6f84db0bd278527c4235b7b29b015b13b811c0c1cd95bae111ce0a18",
+              "sourceSha256": "f9472a846b8dbf434398b30ac93ba03a6f940f737e4e16dd38c194daf91ff07c",
+              "manifestSha256": "ae779cff7c22f0b36eab15387c14633e8e7fbcdecab4062658048416e3c9ba1b",
+              "root": 6
+            },
+            "nativeRoot": 0,
+            "shift": 0,
+            "relation": "exact-source-syntax",
+            "state": {
+              "pairs": 1,
+              "memoHits": 0,
+              "pendingHits": 0,
+              "evictions": 0,
+              "peakMemoEntries": 1,
+              "peakStackFrames": 1,
+              "memoEntries": 0,
+              "stackFrames": 0,
+              "memoLimit": 1024,
+              "stackLimit": 4096,
+              "workLimit": 262144,
+              "schedule": "descending-source-DAG-node"
+            },
+            "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+          },
+          {
+            "minor": 1,
+            "format": "ProofAtlasSourceComparison/1",
+            "source": {
+              "name": "AtlasMethodControls.largeStream",
+              "indexSha256": "9620a73f6f84db0bd278527c4235b7b29b015b13b811c0c1cd95bae111ce0a18",
+              "sourceSha256": "f9472a846b8dbf434398b30ac93ba03a6f940f737e4e16dd38c194daf91ff07c",
+              "manifestSha256": "ae779cff7c22f0b36eab15387c14633e8e7fbcdecab4062658048416e3c9ba1b",
+              "root": 8210
+            },
+            "nativeRoot": 11284,
+            "shift": 0,
+            "relation": "exact-source-syntax",
+            "state": {
+              "pairs": 8207,
+              "memoHits": 0,
+              "pendingHits": 6141,
+              "evictions": 7183,
+              "peakMemoEntries": 1024,
+              "peakStackFrames": 18,
+              "memoEntries": 0,
+              "stackFrames": 0,
+              "memoLimit": 1024,
+              "stackLimit": 4096,
+              "workLimit": 262144,
+              "schedule": "descending-source-DAG-node"
+            },
+            "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+          },
+          {
+            "minor": 1,
+            "format": "ProofAtlasSourceComparison/1",
+            "source": {
+              "name": "AtlasMethodControls.largeStream",
+              "indexSha256": "9620a73f6f84db0bd278527c4235b7b29b015b13b811c0c1cd95bae111ce0a18",
+              "sourceSha256": "f9472a846b8dbf434398b30ac93ba03a6f940f737e4e16dd38c194daf91ff07c",
+              "manifestSha256": "ae779cff7c22f0b36eab15387c14633e8e7fbcdecab4062658048416e3c9ba1b",
+              "root": 8210
+            },
+            "nativeRoot": 8204,
+            "shift": 2,
+            "relation": "exact-source-syntax-under-binder-lifting",
+            "state": {
+              "pairs": 8207,
+              "memoHits": 0,
+              "pendingHits": 6141,
+              "evictions": 7183,
+              "peakMemoEntries": 1024,
+              "peakStackFrames": 18,
+              "memoEntries": 0,
+              "stackFrames": 0,
+              "memoLimit": 1024,
+              "stackLimit": 4096,
+              "workLimit": 262144,
+              "schedule": "descending-source-DAG-node"
+            },
+            "guarantee": "Every compared constructor, payload, ordered child, count and scope matched. Memo eviction only repeats work; exceeding a bound fails."
+          }
+        ],
+        "delivery": {
+          "format": "ProofAtlasMethodQueryDelivery/1",
+          "originalEvidenceSha256": "8f54f65bc11da4400de2d0b83c26dae064188d4ea47bace8fbc8318bd58bcb4d",
+          "originalRecordBytes": 329339,
+          "manifestSha256": "5ce2051e5fc9d81a05cc14d1cd2dfbeefa4a77156d337cb6bef885a754d6b067",
+          "headerSha256": "bbd572093a7aaa272815aad19d5cf1c25df8f00385ee1c4276ddd3742210dc0d",
+          "headerDecodedBytes": 3055,
+          "queryPageSha256": "1432f1e65b65b86aa6a35e6a8ac387908e1959de55043d970db4087552d8d963",
+          "queryOrdinal": 0,
+          "entrySha256": "a38ec25efc3053b31423fe1ae044d2cd62d6915701546d712f15923cc178dc36",
+          "inventoriedQueries": 1,
+          "wholeNativeRecordRequested": false,
+          "scope": "One original call validated. Unvisited calls remain inventoried. Producer-attested roundtrip to the original native owner; the client does not reassemble unvisited pages."
+        },
+        "validatedQueries": 1,
+        "selectedQueryDecodedBytes": 326933,
+        "validation": "Selected original native query; exact source syntax and binder lifting streamed through hash-checked pages. Only source paths/spines remain retained; this query’s native/type graphs load fully. Logical bounds are not heap measurements."
+      },
+      "fullSourceOrNativeArchiveRequests": 0,
+      "builtFiles": {
+        "public/js/proof-atlas-stream-example.js": "e59adbebb4ae61bd90b0a1828b1bd221e3104ea159e307ef59350e023ddb0284",
+        "public/js/proof-atlas-source-comparison.js": "66a594674c5f564a164e4065e6d6212284d445319ac16f8b93bd66b2e671cc7f",
+        "public/js/proof-atlas-method-source.js": "6f4c20d73405d9a5fe8bdb6d9c458573a039c3edde45b226a7155a18ee413245",
+        "public/js/proof-atlas-method-query-pages.js": "4ae984d88bd8f8fe3e11f0e94f58ca9cfa53cc484273e7c34c614df62099e947",
+        "public/js/proof-atlas-method-interfaces.js": "a93bb3c50b17eeac7a231b8c3b4a4092367df8190a8accc17f441e0d39fd2192",
+        "public/data/proof-atlas/method-streaming-manifest.js": "124d04abb5a6305835d5847f19297ce9e99b6c7770ce67bd3e047d361f4fd2c3"
+      },
+      "checkerSha256": "3154d10c4d650585dd64897d0451c547f54b649dceb267ee20388c8a6196cf6f"
+    },
+    "manual": {
+      "status": "PASS",
+      "examples": 4,
+      "cutStates": 40,
+      "scopeSelections": 4,
+      "externalBinderJumps": 2,
+      "keyboard": 1,
+      "accessibility": 9,
+      "fieldDiagrams": 12,
+      "links": 29,
+      "compiledNavigation": 1,
+      "failureStates": 1,
+      "scope": "Actual rendered manual and shared constructor gallery: finite examples, exact field presentation, selection, keyboard, external binders, mobile/dark accessibility, links, compiled proof navigation and optional-script failure. No comprehension measurement."
+    },
+    "recursive": {
+      "status": "PASS",
+      "recursiveCaseViews": 13,
+      "metadataLocalNavigation": true,
+      "exactSourceBinderJump": true,
+      "recursiveFamily": true,
+      "indexedConstructor": true,
+      "zeroUsePremise": true,
+      "massiveSharedProof": {
+        "edition": "recursion-controls",
+        "name": "AtlasExamples.shared_induction_64",
+        "selected": 420,
+        "root": 420,
+        "mode": "geometry",
+        "occurrences": "12912720851596686131202",
+        "uniqueNodes": 421,
+        "path": "root.value",
+        "route": {
+          "root": 1,
+          "slots": []
+        },
+        "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+        "indexSha256": "2ab1d320fb4c5ec7290b1bf1b64c4538cc65835717dee405192ce9b3daa30ca3",
+        "rendered": 24
+      },
+      "staleGeometryDoesNotRestoreSource": true,
+      "optionalFailuresPreserveOriginalCorpus": true,
+      "accessibilityAudits": 4
+    }
+  },
+  "checkpoints": [
+    {
+      "status": "PASS",
+      "checkpoint": "branch-interfaces",
+      "sourceRevision": "ec766430d7c71d024f733e06eff6cb17cd05499a",
+      "historicalBytesRewritten": false,
+      "currentFunctionalCompatibility": "PASS"
+    },
+    {
+      "status": "PASS",
+      "checkpoint": "method-replay",
+      "sourceRevision": "d15c49c901a64715b2ba2826bb951fbfd201fdc0",
+      "historicalBytesRewritten": false,
+      "currentFunctionalCompatibility": "PASS"
+    },
+    {
+      "status": "PASS",
+      "checkpoint": "method-pages",
+      "sourceRevision": "4401069d3625cb5868517ee4b3e4047e911a6737",
+      "historicalBytesRewritten": false,
+      "currentFunctionalCompatibility": "PASS"
+    },
+    {
+      "status": "PASS",
+      "checkpoint": "method-query-pages",
+      "sourceRevision": "e5c8934854cb16f1fbc76343ec67652c44ebb768",
+      "historicalBytesRewritten": false,
+      "currentFunctionalCompatibility": "PASS"
+    },
+    {
+      "status": "PASS",
+      "checkpoint": "method-streaming",
+      "sourceRevision": "cf37bb6f60deb8be0f6435e7bcc96510a2b2f6f3",
+      "historicalBytesRewritten": false,
+      "currentFunctionalCompatibility": "PASS"
+    },
+    {
+      "status": "PASS",
+      "checkpoint": "method-flow",
+      "sourceRevision": "238b5e52e8a7bca89085077adbedfa24d8d53d64",
+      "historicalBytesRewritten": false,
+      "currentFunctionalCompatibility": "PASS"
+    }
+  ],
+  "files": [
+    {
+      "file": ".github/workflows/proof-atlas-browser.yml",
+      "sha256": "0cbe8612dbea9cc69d31cdc46b78b928bf7561c3064b255c79c99c00b5329181"
+    },
+    {
+      "file": "_config.yml",
+      "sha256": "1233363f548758f28858d686c1f7a4751fa97191f4af665695ecb112e21d27a3"
+    },
+    {
+      "file": "_layouts/default.html",
+      "sha256": "a7cf04106030190d4804bafb83d619bd574a36eae004b67d7226adb4b3af1f63"
+    },
+    {
+      "file": "docs/proof-atlas-research-program.md",
+      "sha256": "ce5f829c6f657f86c4e4f98b72928a9ae8ed1b3a0e78a9c848d833f3c562d032"
+    },
+    {
+      "file": "projects/proof-atlas/library/index.html",
+      "sha256": "b6d852cbfd76d9b467f0329c2f3993db51a4c253702a66d8f5ba034ed6d2e917"
+    },
+    {
+      "file": "projects/proof-atlas/manual/index.html",
+      "sha256": "acd7896b21158e074df58738e88415ea78597ab66387c0117984652091057734"
+    },
+    {
+      "file": "public/css/proof-atlas-theme.css",
+      "sha256": "70fd5599cbbc519cc11326e188b9503ea6f603a1230a88628ac595d6d8e96eb0"
+    },
+    {
+      "file": "public/data/proof-atlas/method-origins-manifest.js",
+      "sha256": "9ebc7dfce4cd6ac77b5be75f5e22118f1d1f2ee3533f24c77437569add8aafc9"
+    },
+    {
+      "file": "public/js/proof-atlas-elimination.js",
+      "sha256": "89c72f4aa7d8607ee15990cea6f6426f2677e4beedccdb11a4ae59e509099b71"
+    },
+    {
+      "file": "public/js/proof-atlas-library.js",
+      "sha256": "b1951db31063c632417de9cdc1e49901b3cd7a18eed9704d95313b57a1f267f6"
+    },
+    {
+      "file": "public/js/proof-atlas-method-examples.js",
+      "sha256": "b6060d2250005974d46815b94e7639d8e86e1eeca149c5e9ef635a5b442cab9e"
+    },
+    {
+      "file": "public/js/proof-atlas-method-flow.js",
+      "sha256": "87acbc8bcdd60695fea938f23dd9347321f0f8da106524ad71efb08ff43c2b4b"
+    },
+    {
+      "file": "public/js/proof-atlas-method-interfaces.js",
+      "sha256": "a93bb3c50b17eeac7a231b8c3b4a4092367df8190a8accc17f441e0d39fd2192"
+    },
+    {
+      "file": "public/js/proof-atlas-method-origins.js",
+      "sha256": "756660d8dad8cd3c93f5fe7666b74a6c30865201103c385be30cf8b8f8bba943"
+    },
+    {
+      "file": "public/js/proof-atlas-method-query-pages.js",
+      "sha256": "4ae984d88bd8f8fe3e11f0e94f58ca9cfa53cc484273e7c34c614df62099e947"
+    },
+    {
+      "file": "public/js/proof-atlas-method-source-view.js",
+      "sha256": "8344af52ac90a32a6f22b3718207ce9aad68c0fd5c2651421304ce2b5bf2c113"
+    },
+    {
+      "file": "public/js/proof-atlas-method-source.js",
+      "sha256": "6f4c20d73405d9a5fe8bdb6d9c458573a039c3edde45b226a7155a18ee413245"
+    },
+    {
+      "file": "public/js/proof-atlas-paged-library.js",
+      "sha256": "8882fb58695b2de937209c80b7c3d363ec7247e5902ad95b8e735caa3372e0cb"
+    },
+    {
+      "file": "public/js/proof-atlas-recursive-inputs.js",
+      "sha256": "b6453bc2364dcdfbdd129eddabf6e27eefecf84ee8f8bdd12b38f11378457d10"
+    },
+    {
+      "file": "public/js/proof-atlas-stream-example.js",
+      "sha256": "e59adbebb4ae61bd90b0a1828b1bd221e3104ea159e307ef59350e023ddb0284"
+    },
+    {
+      "file": "research/proof-atlas/method-origins/README.md",
+      "sha256": "c5994fb01729bd839b4b7ecd498bbb200eddbba5a8db3ba885bef9ac34b23362"
+    },
+    {
+      "file": "research/proof-atlas/method-origins/audit.json",
+      "sha256": "487a3ca4d80069466fd1cc56a3cac658a18418b189ddb392610e370abc85e72c"
+    },
+    {
+      "file": "research/proof-atlas/method-origins/branch-interfaces-compatibility.json",
+      "sha256": "c5cd799bfa1b029abd5b2712a3a7978b58b1317e0a53e3e6847d4bfe09d1d55b"
+    },
+    {
+      "file": "research/proof-atlas/method-origins/browser-ai.json",
+      "sha256": "f1c5a0833b8b7f58f353bb341fd135ba1bd24ce5c5ca4bb71c3dca03c42cbe3f"
+    },
+    {
+      "file": "research/proof-atlas/method-origins/browser-flow.json",
+      "sha256": "cb2816e2644b3a3905aeba6124154fbdb5160af31a94b9119049ce58225e8763"
+    },
+    {
+      "file": "research/proof-atlas/method-origins/browser-manual.json",
+      "sha256": "869158897528be0b18d88944cd64b0ad74c3170c11a11ef68797a4a857d0cbec"
+    },
+    {
+      "file": "research/proof-atlas/method-origins/browser-original.json",
+      "sha256": "420c880c33ad8efffcc5754752f15a9fa34e7858401cd4b70f96ccf140c0209c"
+    },
+    {
+      "file": "research/proof-atlas/method-origins/browser-origins.json",
+      "sha256": "4be7abb7e18e3b5dc056531e886723892b4bc95b8c230c74bab9819b1196e364"
+    },
+    {
+      "file": "research/proof-atlas/method-origins/browser-recursive.json",
+      "sha256": "903481041c30e4e52f3fd3b80487c4fae7637564a9f48d2e6c6fe4dc2c460ed2"
+    },
+    {
+      "file": "research/proof-atlas/method-origins/browser-source.json",
+      "sha256": "b5f4fc2ed6cb98a51c7bf924aba99f81be9126ef706643567e9a1413b73fe23d"
+    },
+    {
+      "file": "research/proof-atlas/method-origins/browser-stress.json",
+      "sha256": "7604196d613294a5a4d12e3621c2ef089a669a47aa5b0093b4ab789a032d5013"
+    },
+    {
+      "file": "research/proof-atlas/method-origins/checkpoints.json",
+      "sha256": "db8c6420693b78946a0820157f6f8e0e7072208cc1ebbab74ce57cfcc25ab65f"
+    },
+    {
+      "file": "research/proof-atlas/method-origins/counterexample.json",
+      "sha256": "f835bebe3d4d27a67f614cf4d246e04e79a7fd5cd5b7fe26b8d6df05fafc86d0"
+    },
+    {
+      "file": "research/proof-atlas/method-origins/method-flow-compatibility.json",
+      "sha256": "51260749dd8e65ab15b9c2a6cf8f4d7d370937f77444ad630bba2c5dd4520d36"
+    },
+    {
+      "file": "research/proof-atlas/method-origins/method-pages-compatibility.json",
+      "sha256": "00d06a138f848ab68c571e2f952f665c584d108756edc3e061ccdb73bca742b2"
+    },
+    {
+      "file": "research/proof-atlas/method-origins/method-query-pages-compatibility.json",
+      "sha256": "11a4d6d69526c32ea4b8e4b89849a121cd62403a47e75188a0c318591e390475"
+    },
+    {
+      "file": "research/proof-atlas/method-origins/method-replay-compatibility.json",
+      "sha256": "c4731d7d78d8bebe6bef89c19354d5554a471f180620ce595aaea4449d5aa68f"
+    },
+    {
+      "file": "research/proof-atlas/method-origins/method-streaming-compatibility.json",
+      "sha256": "8883e0a40a3300674cb1c8c8c151ba3f8ecd56488227d8ffe8ca35e225b234fb"
+    },
+    {
+      "file": "research/proof-atlas/method-origins/native-verification.json",
+      "sha256": "8f549f55e8345fb64af071ca36e21343f7274bd84a09d9caa8cd240435972b9e"
+    },
+    {
+      "file": "research/proof-atlas/method-origins/publish.cjs",
+      "sha256": "b9a3151ac249e3edc7aa4255c8ce46645420097a51525eca8ad1dff92c866586"
+    },
+    {
+      "file": "scripts/build-proof-atlas-method-origins-evidence.cjs",
+      "sha256": "69d07ebcd4bffe18830611d4339b955a6e49ce2800b7eea6533380d01bd1dd75"
+    },
+    {
+      "file": "scripts/proof-atlas-method-checkpoint.cjs",
+      "sha256": "8b0f2f4b9ff1055e42bc77215055d5ee07167f5b0883e94182c6a996200eab5e"
+    },
+    {
+      "file": "scripts/test-proof-atlas-manual-browser.cjs",
+      "sha256": "f25981e4b37f1ef3567f00091cce47738c2eb82c0f3fafcd95ad733f91a6eb15"
+    },
+    {
+      "file": "scripts/test-proof-atlas-method-flow-browser.cjs",
+      "sha256": "9a59b0e3a6a2fb31187679692775c8ec7d93f23ffc89f959a39f180a6924d637"
+    },
+    {
+      "file": "scripts/test-proof-atlas-method-interfaces-browser.cjs",
+      "sha256": "43f0eb9b58c7ae384fefde9627cbcc6faa90d337f154af42b8b0b831a43e9d8d"
+    },
+    {
+      "file": "scripts/test-proof-atlas-method-origins-browser.cjs",
+      "sha256": "f924dda006e19811b875c9478557efaa522d1aa640e2d67bb31543a431db0e8b"
+    },
+    {
+      "file": "scripts/test-proof-atlas-method-origins.cjs",
+      "sha256": "4613cd27005001e706520e58cb5a567fb564fd835bb1871df247da4460967886"
+    },
+    {
+      "file": "scripts/test-proof-atlas-method-replay-browser.cjs",
+      "sha256": "de59a22c82d3fa3e69bd73d28e8aecd5b33c9fdba6d67661170ac3e2a4757462"
+    },
+    {
+      "file": "scripts/test-proof-atlas-method-source-browser.cjs",
+      "sha256": "2f2616f27339cefee7311a457eab7094a027fca07edc50d9511c028136faaaf7"
+    },
+    {
+      "file": "scripts/test-proof-atlas-method-streaming-browser.cjs",
+      "sha256": "3154d10c4d650585dd64897d0451c547f54b649dceb267ee20388c8a6196cf6f"
+    },
+    {
+      "file": "scripts/test-proof-atlas-recursive-inputs-browser.cjs",
+      "sha256": "258965568eef86c8db660c86a8de2a6fcb472a8371d853820dd47d8a61451af0"
+    }
+  ]
+}
