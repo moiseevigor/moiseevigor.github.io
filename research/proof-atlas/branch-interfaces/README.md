@@ -1,6 +1,6 @@
 # Method interfaces without source lambda prefixes
 
-Status: local research prototype. No blog post or deployment.
+Status: frozen `ec766430d` native/model/browser checkpoint. No blog post or deployment. Current model compatibility is checked separately in [the public replay record](../method-replay/README.md); the four original reports and their evidence bundle retain their original bytes.
 
 ## Problem and rule
 

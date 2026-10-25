@@ -1,0 +1,46 @@
+{
+  "format": "ProofAtlasMethodReplayRegressions/1",
+  "status": "PASS",
+  "checks": [
+    {
+      "command": "node scripts/test-proof-atlas-elimination.cjs",
+      "exitCode": 0,
+      "checkerSha256": "167d23139e3cb0e0d394c33fed2dca688958c53eb41c8e6f83aa3fafc63b72d5",
+      "observations": {
+        "completeEliminations": 16,
+        "partialCallsWithheld": 8,
+        "negativeControls": 304
+      }
+    },
+    {
+      "command": "node scripts/test-proof-atlas-elimination-composition.cjs",
+      "exitCode": 0,
+      "checkerSha256": "6d2d29d3d6848005d3646feac48a656e901b5df4442d64a0c4e9e5c576f30eaf",
+      "observations": {
+        "completeQueryStarts": 29,
+        "checkedContinuationJoins": 165,
+        "negativeControls": 298
+      }
+    },
+    {
+      "command": "node scripts/test-proof-atlas-manual.cjs",
+      "exitCode": 0,
+      "checkerSha256": "4a82cc6296954d4df584d6aa8221d59dda83c70118809e85a8d38dd9c5a68e47",
+      "observations": {
+        "constructors": 12,
+        "semanticFields": 27,
+        "negativeControls": 81
+      }
+    },
+    {
+      "command": "node scripts/test-proof-atlas-structure.cjs",
+      "exitCode": 0,
+      "checkerSha256": "3f19d7e89830011075057202ad3f6fe3451b9712d443ec4b149f2c214f208b74",
+      "observations": {
+        "preservedSections": 63,
+        "stableAnchors": 75
+      }
+    }
+  ],
+  "scope": "Focused constructor, elimination, composition and preservation regressions; not a claim that the entire repository test suite passed."
+}

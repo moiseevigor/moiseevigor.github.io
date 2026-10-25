@@ -1,0 +1,53 @@
+{
+  "format": "ProofAtlasMethodReplayAudit/1",
+  "status": "PASS",
+  "checkerSha256": "e774c51c18af564cd6b890c985df42fba064665226fc9cfc22aff4064355997d",
+  "modelSha256": "85ab03b85723a649733cae034eede70fc1a7f447eb435ff871553dfae5fc8cde",
+  "nativeVerificationSha256": "ab056acc4a17b574687163b8fbbdd70c9c8332cde82c3e7b48a854f691476cb0",
+  "inspectedProfiles": 20,
+  "replayedProfiles": 7,
+  "queries": 34,
+  "checked": 9,
+  "unavailable": 25,
+  "methods": 18,
+  "inputs": 18,
+  "peerChecks": 18,
+  "references": 18,
+  "rejections": 20,
+  "recursors": [
+    "Or.rec"
+  ],
+  "rows": [
+    {
+      "name": "lean_workbook_20418",
+      "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+      "evidenceSha256": "bff138a44a4d19d5b90942dec2b99593c3e1c6d42f3d7376bb3c890ba321bde6",
+      "storedNodes": 86587,
+      "expandedOccurrences": "29795398",
+      "queries": 1,
+      "methods": 2,
+      "inputs": 2
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+      "evidenceSha256": "679d1701c242dc4a0b4e4f24920d34b6152e781513d7b40298e3626c81ba52d8",
+      "storedNodes": 91424,
+      "expandedOccurrences": "31753364",
+      "queries": 7,
+      "methods": 14,
+      "inputs": 14
+    },
+    {
+      "name": "lean_workbook_plus_62755",
+      "indexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+      "evidenceSha256": "558bd3f7d039fffb248c80e8e4b90dd7921aaa505c1433911593b0a2fbc48572",
+      "storedNodes": 2159,
+      "expandedOccurrences": "147823",
+      "queries": 1,
+      "methods": 2,
+      "inputs": 2
+    }
+  ],
+  "scope": "Finite public packet replay and exact method geometry. Publisher attribution only; no new recursor schemes, all-occurrence coverage or comprehension measurement."
+}

@@ -1,0 +1,831 @@
+{
+  "format": "ProofAtlasMethodReplayEvidence/1",
+  "status": "PASS",
+  "publication": "LOCAL_NOT_DEPLOYED_NO_BLOG_POST",
+  "predecessor": {
+    "format": "ProofAtlasMethodCheckpoint/1",
+    "sourceRevision": "ec766430d7c71d024f733e06eff6cb17cd05499a",
+    "sourceRevisionFilesVerified": true,
+    "bundle": {
+      "file": "research/proof-atlas/branch-interfaces/method-interface-evidence.json",
+      "sha256": "d1b0ef379936aca5c3fe8672248892d18382cd7c470d45c868dd1720f8547f8b"
+    },
+    "audit": {
+      "file": "research/proof-atlas/branch-interfaces/audit.json",
+      "sha256": "e01f8165ad17fdbdaad2927a42b73eb284482c33f23cdb76a0efc70f2788a5a7"
+    },
+    "scope": "Frozen sixteen-method native/model/browser checkpoint. Current implementation compatibility is recorded separately."
+  },
+  "reports": {
+    "native-verification": {
+      "status": "PASS",
+      "format": "ProofAtlasPublicMethodNativeVerification/1",
+      "compiler": "Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      },
+      "producerFiles": {
+        "research/proof-atlas/method-replay/verify.py": "bb8bcc83e769a77e744dcd64e4a0ce9cacc5473626de16baddf3f01a81419071",
+        "research/proof-atlas/method-replay/prepare.cjs": "ade4faf461cdaf2164051c153b6a53e58e8e92a573a9ea90d93d9af92a7b9533",
+        "research/proof-atlas/method-replay/MethodReplay.lean": "5124775738bd73d64aed614dc1d1adc88dfb235fc9f38398eeaa6872d31ef3fe",
+        "research/proof-atlas/branch-interfaces/BranchInterfaces.lean": "b70c1a5ff9a977b241f943e32bb7e588d625fcb7dac95257b5222c91081f0cce",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+        "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+        "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+        "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+        "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+      },
+      "planSha256": "8e7ea4bd079c28afe3f91a955ffabcfc9f8642f6e8c7a2d4b114b9e47f2f6d3f",
+      "inspectedProfiles": 20,
+      "replayedProfiles": 7,
+      "queries": 34,
+      "checked": 9,
+      "unavailable": 25,
+      "methodInterfaces": 18,
+      "profiles": [
+        {
+          "status": "PASS",
+          "source": {
+            "edition": "goedel-sample-4331",
+            "name": "lean_workbook_20418",
+            "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+            "sourceSha256": "44d7d19cff28d5b75dc33d21733bf14cb764e765f493ca46cf2a66345b8a3d07"
+          },
+          "compiler": "Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+          "nativeOutputSha256": "faef0df187219bd9a8b1c4ec40b19a6d4bff4d519b25bb8bff7ca3e30dac2e68",
+          "runtimeSha256": "7a591c5d2b122d8def7e2a8a521f74ba99ae5cc4613a723fba7461984e533119",
+          "queryInventorySha256": "95ea55a81922c7ec59f3f7cec5084975a7269f3e6f80895bf3774e09e21e76aa",
+          "baselineProofSha256": "3f09fe95bb22031d3719253bdcfe4a5858da121bc188220c0bbd0438ff3c78f4",
+          "baselineProof": {
+            "axioms": [
+              "propext",
+              "Classical.choice",
+              "Quot.sound"
+            ],
+            "illTypedBinderRejectedByKernel": true,
+            "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+            "kernelExpectedType": "PASS",
+            "kernelExpectedTypeConversion": "PASS",
+            "kernelExpectedTypeIsProposition": "PASS",
+            "kernelProof": "PASS",
+            "knownBaselineConstantNodes": 288,
+            "name": "lean_workbook_20418",
+            "originalModuleAbsentFromEnvironment": true,
+            "originalTheoremAbsentFromEnvironment": true,
+            "roundtripFields": [
+              "kind",
+              "children",
+              "payloads",
+              "expanded",
+              "neededScope",
+              "roots"
+            ],
+            "storedNodes": 86587,
+            "wrongProofRejectedByKernel": true
+          },
+          "queries": 9,
+          "checked": 1,
+          "unavailable": 8,
+          "methodInterfaces": 2,
+          "originalTheoremAbsent": true,
+          "originalModuleAbsent": true,
+          "privateRiccatiModulesAbsent": true
+        },
+        {
+          "status": "PASS",
+          "source": {
+            "edition": "goedel-sample-4331",
+            "name": "lean_workbook_4274",
+            "indexSha256": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+            "sourceSha256": "761ccc0ee9e693f87eabfca7b94449ec8ebe1c5293ddd528bed8eade57ca74a4"
+          },
+          "compiler": "Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+          "nativeOutputSha256": "1e543fa2cc88fec1a12102a4a14607d11e5375fba58d990e2d3d815080c7b5d6",
+          "runtimeSha256": "0679933244bcaa39c4ef7eecd5659ec15a66a033325e335cb26f36d0012f1420",
+          "queryInventorySha256": "705c0a834dd1f24a39744bfd24ef7a4ab31a4a592f7c942d50ac51fd5dd59b39",
+          "baselineProofSha256": "1cb95ca854547a09b5f489517b107653f9a4f95a2f35b2844e0ab0fa42c7f22a",
+          "baselineProof": {
+            "axioms": [
+              "propext",
+              "Classical.choice",
+              "Quot.sound"
+            ],
+            "illTypedBinderRejectedByKernel": true,
+            "indexSha256": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+            "kernelExpectedType": "PASS",
+            "kernelExpectedTypeConversion": "PASS",
+            "kernelExpectedTypeIsProposition": "PASS",
+            "kernelProof": "PASS",
+            "knownBaselineConstantNodes": 176,
+            "name": "lean_workbook_4274",
+            "originalModuleAbsentFromEnvironment": true,
+            "originalTheoremAbsentFromEnvironment": true,
+            "roundtripFields": [
+              "kind",
+              "children",
+              "payloads",
+              "expanded",
+              "neededScope",
+              "roots"
+            ],
+            "storedNodes": 1451,
+            "wrongProofRejectedByKernel": true
+          },
+          "queries": 2,
+          "checked": 0,
+          "unavailable": 2,
+          "methodInterfaces": 0,
+          "originalTheoremAbsent": true,
+          "originalModuleAbsent": true,
+          "privateRiccatiModulesAbsent": true
+        },
+        {
+          "status": "PASS",
+          "source": {
+            "edition": "goedel-sample-4331",
+            "name": "lean_workbook_plus_15068",
+            "indexSha256": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+            "sourceSha256": "c8a09c1ece2d7fc13d9ef4d0979c71870e9e97202f8bed0df415a5c52788c2b5"
+          },
+          "compiler": "Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+          "nativeOutputSha256": "6d50c987a30c7d2bd03d8354cd9b1dfc7c224f3c781fdc540203ae6f84c2ff19",
+          "runtimeSha256": "8a7e644629f0d4b77a5fc21dbc6b8cf2424b72773f04b32581a169847e76b135",
+          "queryInventorySha256": "6d58e8969d32e26daee27c42d12c89b7491a70b8b9d3c99814224694b53b9a23",
+          "baselineProofSha256": "39cd0a5f71b2896d91c8ed371d46f3037b97bbc6296886dbfeba8edefd7f360d",
+          "baselineProof": {
+            "axioms": [
+              "propext",
+              "Classical.choice",
+              "Quot.sound"
+            ],
+            "illTypedBinderRejectedByKernel": true,
+            "indexSha256": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+            "kernelExpectedType": "PASS",
+            "kernelExpectedTypeConversion": "PASS",
+            "kernelExpectedTypeIsProposition": "PASS",
+            "kernelProof": "PASS",
+            "knownBaselineConstantNodes": 271,
+            "name": "lean_workbook_plus_15068",
+            "originalModuleAbsentFromEnvironment": true,
+            "originalTheoremAbsentFromEnvironment": true,
+            "roundtripFields": [
+              "kind",
+              "children",
+              "payloads",
+              "expanded",
+              "neededScope",
+              "roots"
+            ],
+            "storedNodes": 18255,
+            "wrongProofRejectedByKernel": true
+          },
+          "queries": 2,
+          "checked": 0,
+          "unavailable": 2,
+          "methodInterfaces": 0,
+          "originalTheoremAbsent": true,
+          "originalModuleAbsent": true,
+          "privateRiccatiModulesAbsent": true
+        },
+        {
+          "status": "PASS",
+          "source": {
+            "edition": "goedel-sample-4331",
+            "name": "lean_workbook_plus_19617",
+            "indexSha256": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+            "sourceSha256": "0c75bdffb8429241e73c9e4f375bd15130b2c5a19855281071b9706b89478578"
+          },
+          "compiler": "Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+          "nativeOutputSha256": "dfec7298d403330f8543d8e32043c9dffaf46603624e8495ac6ac14b276df055",
+          "runtimeSha256": "36a90ad2e0ebadc91ce0ed4aeabc4e88416917d72e11e0fe74c4d69a11b3b98d",
+          "queryInventorySha256": "065831fd76255ecfb2060aa0016121a67dc8e85a9a21a709597398b8a15ad86b",
+          "baselineProofSha256": "def2f5011dc22d8be7f258709dc04173c8807a23df27ebc6042a1bc192e9b6a1",
+          "baselineProof": {
+            "axioms": [
+              "propext",
+              "Classical.choice",
+              "Quot.sound"
+            ],
+            "illTypedBinderRejectedByKernel": true,
+            "indexSha256": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+            "kernelExpectedType": "PASS",
+            "kernelExpectedTypeConversion": "PASS",
+            "kernelExpectedTypeIsProposition": "PASS",
+            "kernelProof": "PASS",
+            "knownBaselineConstantNodes": 76,
+            "name": "lean_workbook_plus_19617",
+            "originalModuleAbsentFromEnvironment": true,
+            "originalTheoremAbsentFromEnvironment": true,
+            "roundtripFields": [
+              "kind",
+              "children",
+              "payloads",
+              "expanded",
+              "neededScope",
+              "roots"
+            ],
+            "storedNodes": 563,
+            "wrongProofRejectedByKernel": true
+          },
+          "queries": 3,
+          "checked": 0,
+          "unavailable": 3,
+          "methodInterfaces": 0,
+          "originalTheoremAbsent": true,
+          "originalModuleAbsent": true,
+          "privateRiccatiModulesAbsent": true
+        },
+        {
+          "status": "PASS",
+          "source": {
+            "edition": "goedel-sample-4331",
+            "name": "lean_workbook_plus_39831",
+            "indexSha256": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+            "sourceSha256": "ceca77661c386d820b66fac94e6e1e4ebbb18d894f0b6a79c37f6cd2f425c9cf"
+          },
+          "compiler": "Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+          "nativeOutputSha256": "c2de455e99c09d72a8b9a0f013266cb6c75f06ca064b0278b2a0dfa3892d0309",
+          "runtimeSha256": "fffce9bd38cd0d75475e745059eec6a8b8fc3c7a711c1ac0bb188ccc56aea0c6",
+          "queryInventorySha256": "ca018d2decfb069477922b40c56b4a515cebded14e5a76a9b38d62805a704cd6",
+          "baselineProofSha256": "1a1665dbcbda250c88eaab2e1dead448acc411081cf2bf595cc84ab5e206cfa1",
+          "baselineProof": {
+            "axioms": [
+              "propext",
+              "Classical.choice",
+              "Quot.sound"
+            ],
+            "illTypedBinderRejectedByKernel": true,
+            "indexSha256": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+            "kernelExpectedType": "PASS",
+            "kernelExpectedTypeConversion": "PASS",
+            "kernelExpectedTypeIsProposition": "PASS",
+            "kernelProof": "PASS",
+            "knownBaselineConstantNodes": 189,
+            "name": "lean_workbook_plus_39831",
+            "originalModuleAbsentFromEnvironment": true,
+            "originalTheoremAbsentFromEnvironment": true,
+            "roundtripFields": [
+              "kind",
+              "children",
+              "payloads",
+              "expanded",
+              "neededScope",
+              "roots"
+            ],
+            "storedNodes": 3847,
+            "wrongProofRejectedByKernel": true
+          },
+          "queries": 2,
+          "checked": 0,
+          "unavailable": 2,
+          "methodInterfaces": 0,
+          "originalTheoremAbsent": true,
+          "originalModuleAbsent": true,
+          "privateRiccatiModulesAbsent": true
+        },
+        {
+          "status": "PASS",
+          "source": {
+            "edition": "goedel-sample-4331",
+            "name": "lean_workbook_plus_6206",
+            "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+            "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5"
+          },
+          "compiler": "Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+          "nativeOutputSha256": "aec6fc4b88d5372381ea08a51df46ee060151332d0a6c59295487ff7748d12a5",
+          "runtimeSha256": "a2e79f06eaf3204ec910dcd0e556f10603bbdfe4d40fdaa9883ade7f14280431",
+          "queryInventorySha256": "6054becccb7c84cfb5ee8893ccc3fd469d44b355992057bdc8883690594941c1",
+          "baselineProofSha256": "220ba3a9df4cb204fcf1b850581236f71724833f5cfef43ced4517e8006115ec",
+          "baselineProof": {
+            "axioms": [
+              "propext",
+              "Classical.choice",
+              "Quot.sound"
+            ],
+            "illTypedBinderRejectedByKernel": true,
+            "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+            "kernelExpectedType": "PASS",
+            "kernelExpectedTypeConversion": "PASS",
+            "kernelExpectedTypeIsProposition": "PASS",
+            "kernelProof": "PASS",
+            "knownBaselineConstantNodes": 286,
+            "name": "lean_workbook_plus_6206",
+            "originalModuleAbsentFromEnvironment": true,
+            "originalTheoremAbsentFromEnvironment": true,
+            "roundtripFields": [
+              "kind",
+              "children",
+              "payloads",
+              "expanded",
+              "neededScope",
+              "roots"
+            ],
+            "storedNodes": 91424,
+            "wrongProofRejectedByKernel": true
+          },
+          "queries": 15,
+          "checked": 7,
+          "unavailable": 8,
+          "methodInterfaces": 14,
+          "originalTheoremAbsent": true,
+          "originalModuleAbsent": true,
+          "privateRiccatiModulesAbsent": true
+        },
+        {
+          "status": "PASS",
+          "source": {
+            "edition": "goedel-sample-4331",
+            "name": "lean_workbook_plus_62755",
+            "indexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+            "sourceSha256": "7e270522ac93030b71efabbf6d3ffd84407805aa1cee8348a6fd427c86aa423c"
+          },
+          "compiler": "Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+          "nativeOutputSha256": "2f49e2d77fe3d9ece7a1cacab1bc779467c07addb17ab228bc247906a3728d12",
+          "runtimeSha256": "ba0ca416dff5027cb37f4cf12d674ab99c67e5804a70a1d7aa6aaea8f44b0038",
+          "queryInventorySha256": "acf8435a15adc2ee3c767737022e975ec2cbb8edfecca575b9f7d986282436a9",
+          "baselineProofSha256": "b2032dfa41b6344916250ad08ca741859c33c5e8179fe9a902c6317f039eddfa",
+          "baselineProof": {
+            "axioms": [
+              "propext",
+              "Classical.choice",
+              "Quot.sound"
+            ],
+            "illTypedBinderRejectedByKernel": true,
+            "indexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+            "kernelExpectedType": "PASS",
+            "kernelExpectedTypeConversion": "PASS",
+            "kernelExpectedTypeIsProposition": "PASS",
+            "kernelProof": "PASS",
+            "knownBaselineConstantNodes": 161,
+            "name": "lean_workbook_plus_62755",
+            "originalModuleAbsentFromEnvironment": true,
+            "originalTheoremAbsentFromEnvironment": true,
+            "roundtripFields": [
+              "kind",
+              "children",
+              "payloads",
+              "expanded",
+              "neededScope",
+              "roots"
+            ],
+            "storedNodes": 2159,
+            "wrongProofRejectedByKernel": true
+          },
+          "queries": 1,
+          "checked": 1,
+          "unavailable": 0,
+          "methodInterfaces": 2,
+          "originalTheoremAbsent": true,
+          "originalModuleAbsent": true,
+          "privateRiccatiModulesAbsent": true
+        }
+      ],
+      "originalProofSourcesRead": false,
+      "originalProofModulesImported": false,
+      "privateRiccatiModulesImported": false,
+      "scope": "Fresh closed public-packet proofs and contextual method interfaces. Recorded finite candidates only; no original source compilation or independent Git/rebuild verification."
+    },
+    "audit": {
+      "format": "ProofAtlasMethodReplayAudit/1",
+      "status": "PASS",
+      "checkerSha256": "e774c51c18af564cd6b890c985df42fba064665226fc9cfc22aff4064355997d",
+      "modelSha256": "85ab03b85723a649733cae034eede70fc1a7f447eb435ff871553dfae5fc8cde",
+      "nativeVerificationSha256": "ab056acc4a17b574687163b8fbbdd70c9c8332cde82c3e7b48a854f691476cb0",
+      "inspectedProfiles": 20,
+      "replayedProfiles": 7,
+      "queries": 34,
+      "checked": 9,
+      "unavailable": 25,
+      "methods": 18,
+      "inputs": 18,
+      "peerChecks": 18,
+      "references": 18,
+      "rejections": 20,
+      "recursors": [
+        "Or.rec"
+      ],
+      "rows": [
+        {
+          "name": "lean_workbook_20418",
+          "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+          "evidenceSha256": "bff138a44a4d19d5b90942dec2b99593c3e1c6d42f3d7376bb3c890ba321bde6",
+          "storedNodes": 86587,
+          "expandedOccurrences": "29795398",
+          "queries": 1,
+          "methods": 2,
+          "inputs": 2
+        },
+        {
+          "name": "lean_workbook_plus_6206",
+          "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+          "evidenceSha256": "679d1701c242dc4a0b4e4f24920d34b6152e781513d7b40298e3626c81ba52d8",
+          "storedNodes": 91424,
+          "expandedOccurrences": "31753364",
+          "queries": 7,
+          "methods": 14,
+          "inputs": 14
+        },
+        {
+          "name": "lean_workbook_plus_62755",
+          "indexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+          "evidenceSha256": "558bd3f7d039fffb248c80e8e4b90dd7921aaa505c1433911593b0a2fbc48572",
+          "storedNodes": 2159,
+          "expandedOccurrences": "147823",
+          "queries": 1,
+          "methods": 2,
+          "inputs": 2
+        }
+      ],
+      "scope": "Finite public packet replay and exact method geometry. Publisher attribution only; no new recursor schemes, all-occurrence coverage or comprehension measurement."
+    },
+    "compatibility": {
+      "format": "ProofAtlasMethodInterfaceAudit/1",
+      "status": "PASS",
+      "checkerSha256": "8993ad7fc399b3a440026057498e5945bcd8875d12b119cb33eece444f655833",
+      "modelSha256": "85ab03b85723a649733cae034eede70fc1a7f447eb435ff871553dfae5fc8cde",
+      "nativeVerificationSha256": "cc7cb2b581b8924f909c74f1f66477ec1e1a2dfe82611fbdf0c371bcef02931d",
+      "baseline": {
+        "profiles": 15,
+        "calls": 32,
+        "branches": 49,
+        "missingSourcePrefixes": 0
+      },
+      "profiles": 6,
+      "queries": 12,
+      "methods": 16,
+      "inputs": 24,
+      "missingSourcePrefixes": 6,
+      "zeroInputMethods": 2,
+      "storedMethodChecks": 1,
+      "sourceTypePeerChecks": 8,
+      "functionValuedResults": 2,
+      "originalContextReferenceChecks": 35,
+      "computedInputReferenceChecks": 1,
+      "rejections": 16,
+      "inputRecordsUnchanged": true,
+      "callerObjectsNotFrozen": true,
+      "rows": [
+        {
+          "name": "JacobiData.slope_bound_abs",
+          "edition": "published-15",
+          "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+          "evidenceSha256": "ab7dff22cce3ab068a08a56cce0b109dbd819c40f79ced2a67edd42cfce5761a",
+          "queries": 7,
+          "interfaces": 8
+        },
+        {
+          "name": "AtlasMethodControls.conjunction",
+          "edition": "branch-method-controls",
+          "indexSha256": "03248be95a62060342042ca649cad79dc6ca303ec3f7982b39ea92c7238a2d9d",
+          "evidenceSha256": "1e31a9871a371ad71decfaae31da1e6a14bac8f42ba1abf12cf9680f410fe207",
+          "queries": 1,
+          "interfaces": 1
+        },
+        {
+          "name": "AtlasMethodControls.dependent",
+          "edition": "branch-method-controls",
+          "indexSha256": "e0edf503d1b25d23fefdcba3125eff3b165a090e9052469bcb6b16c21b1eee45",
+          "evidenceSha256": "e6c63b7a3d46bf410aa8d7255625d0686bffb9ba8dd63abc1cc6213f1e3795a4",
+          "queries": 1,
+          "interfaces": 2
+        },
+        {
+          "name": "AtlasMethodControls.disjunction",
+          "edition": "branch-method-controls",
+          "indexSha256": "456eb2c0b523cf1178df7eede0e3974c6258d3ae34f18571b7543480720693b5",
+          "evidenceSha256": "3e662100314cf544590f77f8fc6a66577e22510e892baeadc891e823fce5edba",
+          "queries": 1,
+          "interfaces": 2
+        },
+        {
+          "name": "AtlasMethodControls.functionValued",
+          "edition": "branch-method-controls",
+          "indexSha256": "181a4689ebe011fd1e2346a0342920374098635c639150b6ac5c679fe59bae46",
+          "evidenceSha256": "d9fbdd6acb671855a00b74a324766535e2c3d116b1d02e144fa5793dea006d15",
+          "queries": 1,
+          "interfaces": 2
+        },
+        {
+          "name": "AtlasMethodControls.storedMethod",
+          "edition": "branch-method-controls",
+          "indexSha256": "0ae464557c41b4acc41e8555734cd89cb0073159a4d09434b2e2eb1654a8321a",
+          "evidenceSha256": "917732525c2233fd4509c5e273867bf98fb89cc070b85da8e6b5b8fb318ef0fd",
+          "queries": 1,
+          "interfaces": 1
+        }
+      ],
+      "scope": "Finite native eta interfaces, source attachment and independent lexical comparisons. Forged capture/order trees are negative controls only. No source lambda is invented, no unrecorded proof body is supplied, and no comprehension result is claimed.",
+      "checkpointComparison": {
+        "auditSha256": "e01f8165ad17fdbdaad2927a42b73eb284482c33f23cdb76a0efc70f2788a5a7",
+        "sameFunctionalObservations": true,
+        "changedImplementationHashes": [
+          "checkerSha256",
+          "modelSha256"
+        ]
+      }
+    },
+    "browser-audit": {
+      "format": "ProofAtlasMethodReplayBrowserAudit/1",
+      "status": "PASS",
+      "profiles": 3,
+      "calls": 9,
+      "methodScenes": 18,
+      "inputSelections": 18,
+      "originalReferenceJumps": 18,
+      "originalMethodJumps": 18,
+      "librarySourceJumps": 1,
+      "libraryMethodScenes": 2,
+      "axeAudits": 4,
+      "failureControls": 2,
+      "staleControls": 1,
+      "checkerSha256": "de59a22c82d3fa3e69bd73d28e8aecd5b33c9fdba6d67661170ac3e2a4757462",
+      "builtFiles": {
+        "public/js/proof-atlas-method-interfaces.js": {
+          "sourceSha256": "85ab03b85723a649733cae034eede70fc1a7f447eb435ff871553dfae5fc8cde",
+          "servedSha256": "85ab03b85723a649733cae034eede70fc1a7f447eb435ff871553dfae5fc8cde"
+        },
+        "public/js/proof-atlas-method-examples.js": {
+          "sourceSha256": "8a46cb390581b861208e56c560ea88ef4e4df6e52580c6159ddef02db9b56e0c",
+          "servedSha256": "8a46cb390581b861208e56c560ea88ef4e4df6e52580c6159ddef02db9b56e0c"
+        },
+        "public/js/proof-atlas-elimination.js": {
+          "sourceSha256": "9099bcfdab1635441af870ecae543e29ccd1f46e71eab299b54e399f31d014c9",
+          "servedSha256": "9099bcfdab1635441af870ecae543e29ccd1f46e71eab299b54e399f31d014c9"
+        },
+        "public/js/proof-atlas-sync.js": {
+          "sourceSha256": "0b746f649c0b8b76b683300b045f1efcec0897c1d3bc2a802fe4b5296fbf5303",
+          "servedSha256": "0b746f649c0b8b76b683300b045f1efcec0897c1d3bc2a802fe4b5296fbf5303"
+        },
+        "public/js/proof-atlas-library.js": {
+          "sourceSha256": "1449b513cc6f5b4c3b26ee8f45ab9b6dfe33345f666b4cab3cbe544727ce0056",
+          "servedSha256": "1449b513cc6f5b4c3b26ee8f45ab9b6dfe33345f666b4cab3cbe544727ce0056"
+        },
+        "public/js/proof-atlas-library-data.js": {
+          "sourceSha256": "a4a01e2e93d015397eb6a8d6fd677e6b788e079440c3e206c43b8c56e06161e9",
+          "servedSha256": "a4a01e2e93d015397eb6a8d6fd677e6b788e079440c3e206c43b8c56e06161e9"
+        },
+        "public/js/proof-atlas-occurrence-types.js": {
+          "sourceSha256": "b80d43d682d3a4b7f99e284a09a6249e11ca24197e1901158caa723dcf0f6c8f",
+          "servedSha256": "b80d43d682d3a4b7f99e284a09a6249e11ca24197e1901158caa723dcf0f6c8f"
+        },
+        "public/js/proof-atlas-recursive-inputs.js": {
+          "sourceSha256": "a2aa2cd18602d8a3acbfb9ad2cf331964a06d18f1bdc472730424f0205adf862",
+          "servedSha256": "a2aa2cd18602d8a3acbfb9ad2cf331964a06d18f1bdc472730424f0205adf862"
+        },
+        "public/css/proof-atlas-theme.css": {
+          "sourceSha256": "a63cab151db80389ffc61e64221258c309f7da951c183c9a879a409e5fa90c27",
+          "servedSha256": "a63cab151db80389ffc61e64221258c309f7da951c183c9a879a409e5fa90c27"
+        },
+        "public/data/proof-atlas/method-interfaces-ai-manifest.js": {
+          "sourceSha256": "e53ce10c4751c239432372b32fc2e8b90d11a85a5d66e5e08646f03dd0f67285",
+          "servedSha256": "e53ce10c4751c239432372b32fc2e8b90d11a85a5d66e5e08646f03dd0f67285"
+        },
+        "projects/proof-atlas/manual/index.html": {
+          "sourceSha256": "86d203f26ee4f27b61cf80593ae989353afb94e840dfe9e63407229cf8f0f724",
+          "servedSha256": "595c51ffc043c05bef686e1d866e9d3c1fa382f7c9b26a4864d9a27459fddbc6",
+          "htmlComparison": {
+            "normalization": "Only four shared CSS build-time query versions",
+            "styles": [
+              "site",
+              "distill",
+              "syntax",
+              "theme"
+            ],
+            "normalizedSha256": "95330c4741946d3f856abbf9afdee7bab92f8c80dab5330c406bcd84d26e1071"
+          }
+        },
+        "projects/proof-atlas/library/index.html": {
+          "sourceSha256": "e683404f639b144389cdca76157f93cc7c0badaf9e54c82e1e4d2fbfaeec2c39",
+          "servedSha256": "be462d4fff700ab5a63f5fe053b6cd6e653ceba753f02a853e6107da6d722292",
+          "htmlComparison": {
+            "normalization": "Only four shared CSS build-time query versions",
+            "styles": [
+              "site",
+              "distill",
+              "syntax",
+              "theme"
+            ],
+            "normalizedSha256": "f187b34f68894d1e6127f342196ffbee3c960f3b9138d73877ec2506c3d09768"
+          }
+        }
+      },
+      "librarySourceTarget": "/projects/proof-atlas/library/?edition=goedel-sample-4331&proof=lean_workbook_plus_62755&route=1%3A1.1.2.2.0.0.1"
+    },
+    "predecessor-browser-compatibility": {
+      "status": "PASS",
+      "methodScenes": 16,
+      "riccatiScenes": 8,
+      "controlScenes": 8,
+      "inputSelections": 24,
+      "computedReferenceJumps": 1,
+      "originalReferenceJumps": 7,
+      "originalMethodJumps": 9,
+      "axeAudits": 4,
+      "failureControls": 2,
+      "staleControls": 1,
+      "checkerSha256": "43f0eb9b58c7ae384fefde9627cbcc6faa90d337f154af42b8b0b831a43e9d8d",
+      "builtFiles": {
+        "public/js/proof-atlas-method-interfaces.js": "85ab03b85723a649733cae034eede70fc1a7f447eb435ff871553dfae5fc8cde",
+        "public/js/proof-atlas-method-examples.js": "8a46cb390581b861208e56c560ea88ef4e4df6e52580c6159ddef02db9b56e0c",
+        "public/js/proof-atlas-elimination.js": "9099bcfdab1635441af870ecae543e29ccd1f46e71eab299b54e399f31d014c9",
+        "public/js/proof-atlas-library.js": "1449b513cc6f5b4c3b26ee8f45ab9b6dfe33345f666b4cab3cbe544727ce0056",
+        "public/css/proof-atlas-theme.css": "a63cab151db80389ffc61e64221258c309f7da951c183c9a879a409e5fa90c27",
+        "public/data/proof-atlas/method-interfaces-manifest.js": "35545092727a15db1c18536f31361c0fab98ab132610ab375eeb242216e8b0d7"
+      }
+    },
+    "regressions": {
+      "format": "ProofAtlasMethodReplayRegressions/1",
+      "status": "PASS",
+      "checks": [
+        {
+          "command": "node scripts/test-proof-atlas-elimination.cjs",
+          "exitCode": 0,
+          "checkerSha256": "167d23139e3cb0e0d394c33fed2dca688958c53eb41c8e6f83aa3fafc63b72d5",
+          "observations": {
+            "completeEliminations": 16,
+            "partialCallsWithheld": 8,
+            "negativeControls": 304
+          }
+        },
+        {
+          "command": "node scripts/test-proof-atlas-elimination-composition.cjs",
+          "exitCode": 0,
+          "checkerSha256": "6d2d29d3d6848005d3646feac48a656e901b5df4442d64a0c4e9e5c576f30eaf",
+          "observations": {
+            "completeQueryStarts": 29,
+            "checkedContinuationJoins": 165,
+            "negativeControls": 298
+          }
+        },
+        {
+          "command": "node scripts/test-proof-atlas-manual.cjs",
+          "exitCode": 0,
+          "checkerSha256": "4a82cc6296954d4df584d6aa8221d59dda83c70118809e85a8d38dd9c5a68e47",
+          "observations": {
+            "constructors": 12,
+            "semanticFields": 27,
+            "negativeControls": 81
+          }
+        },
+        {
+          "command": "node scripts/test-proof-atlas-structure.cjs",
+          "exitCode": 0,
+          "checkerSha256": "3f19d7e89830011075057202ad3f6fe3451b9712d443ec4b149f2c214f208b74",
+          "observations": {
+            "preservedSections": 63,
+            "stableAnchors": 75
+          }
+        }
+      ],
+      "scope": "Focused constructor, elimination, composition and preservation regressions; not a claim that the entire repository test suite passed."
+    }
+  },
+  "files": [
+    {
+      "file": "research/proof-atlas/method-replay/verify.py",
+      "sha256": "bb8bcc83e769a77e744dcd64e4a0ce9cacc5473626de16baddf3f01a81419071"
+    },
+    {
+      "file": "research/proof-atlas/method-replay/prepare.cjs",
+      "sha256": "ade4faf461cdaf2164051c153b6a53e58e8e92a573a9ea90d93d9af92a7b9533"
+    },
+    {
+      "file": "research/proof-atlas/method-replay/MethodReplay.lean",
+      "sha256": "5124775738bd73d64aed614dc1d1adc88dfb235fc9f38398eeaa6872d31ef3fe"
+    },
+    {
+      "file": "research/proof-atlas/branch-interfaces/BranchInterfaces.lean",
+      "sha256": "b70c1a5ff9a977b241f943e32bb7e588d625fcb7dac95257b5222c91081f0cce"
+    },
+    {
+      "file": "research/proof-atlas/ExportLibrary.lean",
+      "sha256": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1"
+    },
+    {
+      "file": "research/proof-atlas/ExportOccurrenceTypes.lean",
+      "sha256": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102"
+    },
+    {
+      "file": "research/proof-atlas/LevelTransportControls.lean",
+      "sha256": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9"
+    },
+    {
+      "file": "research/proof-atlas/compiled-replay/Replay.lean",
+      "sha256": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935"
+    },
+    {
+      "file": "research/proof-atlas/packet-typing/PacketTyping.lean",
+      "sha256": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a"
+    },
+    {
+      "file": "research/proof-atlas/packet-typing/verify.py",
+      "sha256": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+    },
+    {
+      "file": "research/proof-atlas/method-replay/publish.cjs",
+      "sha256": "8bc055758c816d6bde0500c22c585bdb92068c9117bdc56a937b1fc8d20d6ac7"
+    },
+    {
+      "file": "research/proof-atlas/method-replay/README.md",
+      "sha256": "a5036eb1ef1654b5c603b169ed76e78cd9c593f0a60c7b59202d53fa4747220c"
+    },
+    {
+      "file": "research/proof-atlas/method-replay/predecessor.json",
+      "sha256": "7f64199a604b3bfe5ae999482c7b7c27090925894969d33aaa6ee1be3bfbcd73"
+    },
+    {
+      "file": "public/js/proof-atlas-method-interfaces.js",
+      "sha256": "85ab03b85723a649733cae034eede70fc1a7f447eb435ff871553dfae5fc8cde"
+    },
+    {
+      "file": "public/js/proof-atlas-method-examples.js",
+      "sha256": "8a46cb390581b861208e56c560ea88ef4e4df6e52580c6159ddef02db9b56e0c"
+    },
+    {
+      "file": "public/js/proof-atlas-elimination.js",
+      "sha256": "9099bcfdab1635441af870ecae543e29ccd1f46e71eab299b54e399f31d014c9"
+    },
+    {
+      "file": "public/js/proof-atlas-sync.js",
+      "sha256": "0b746f649c0b8b76b683300b045f1efcec0897c1d3bc2a802fe4b5296fbf5303"
+    },
+    {
+      "file": "public/js/proof-atlas-library.js",
+      "sha256": "1449b513cc6f5b4c3b26ee8f45ab9b6dfe33345f666b4cab3cbe544727ce0056"
+    },
+    {
+      "file": "public/js/proof-atlas-library-data.js",
+      "sha256": "a4a01e2e93d015397eb6a8d6fd677e6b788e079440c3e206c43b8c56e06161e9"
+    },
+    {
+      "file": "public/js/proof-atlas-occurrence-types.js",
+      "sha256": "b80d43d682d3a4b7f99e284a09a6249e11ca24197e1901158caa723dcf0f6c8f"
+    },
+    {
+      "file": "public/js/proof-atlas-recursive-inputs.js",
+      "sha256": "a2aa2cd18602d8a3acbfb9ad2cf331964a06d18f1bdc472730424f0205adf862"
+    },
+    {
+      "file": "public/css/proof-atlas-theme.css",
+      "sha256": "a63cab151db80389ffc61e64221258c309f7da951c183c9a879a409e5fa90c27"
+    },
+    {
+      "file": "projects/proof-atlas/manual/index.html",
+      "sha256": "86d203f26ee4f27b61cf80593ae989353afb94e840dfe9e63407229cf8f0f724"
+    },
+    {
+      "file": "projects/proof-atlas/library/index.html",
+      "sha256": "e683404f639b144389cdca76157f93cc7c0badaf9e54c82e1e4d2fbfaeec2c39"
+    },
+    {
+      "file": "_includes/head.html",
+      "sha256": "d4252044f11e88888f32a3e3c537976ea6d50b1a70e07f44461721fcb8041241"
+    },
+    {
+      "file": "docs/proof-atlas-evidence.md",
+      "sha256": "3367aa63a60a44991eded3d5f7202a8596fb1035f2a323d4c30e1f8014a8775e"
+    },
+    {
+      "file": "scripts/test-proof-atlas-method-replay.cjs",
+      "sha256": "e774c51c18af564cd6b890c985df42fba064665226fc9cfc22aff4064355997d"
+    },
+    {
+      "file": "scripts/test-proof-atlas-method-replay-browser.cjs",
+      "sha256": "de59a22c82d3fa3e69bd73d28e8aecd5b33c9fdba6d67661170ac3e2a4757462"
+    },
+    {
+      "file": "scripts/test-proof-atlas-method-interfaces.cjs",
+      "sha256": "8993ad7fc399b3a440026057498e5945bcd8875d12b119cb33eece444f655833"
+    },
+    {
+      "file": "scripts/test-proof-atlas-method-interfaces-browser.cjs",
+      "sha256": "43f0eb9b58c7ae384fefde9627cbcc6faa90d337f154af42b8b0b831a43e9d8d"
+    },
+    {
+      "file": "scripts/build-proof-atlas-method-evidence.cjs",
+      "sha256": "6235faf81a0e8f132a53b7bd1bf82f35b6f4ffbf02af97efa934f8e6a16c66f5"
+    },
+    {
+      "file": "scripts/build-proof-atlas-method-replay-evidence.cjs",
+      "sha256": "129ff9e17ee7402590d1dae280b4027a4d7c07d1179b5b376cfb7eb4ba0c19c8"
+    },
+    {
+      "file": "public/data/proof-atlas/method-interfaces-manifest.js",
+      "sha256": "35545092727a15db1c18536f31361c0fab98ab132610ab375eeb242216e8b0d7"
+    },
+    {
+      "file": "public/data/proof-atlas/method-interfaces-ai-manifest.js",
+      "sha256": "e53ce10c4751c239432372b32fc2e8b90d11a85a5d66e5e08646f03dd0f67285"
+    }
+  ],
+  "scope": "Fresh public packet method replay on the fixed AI-attributed sample. Nine Or.rec calls, eighteen interfaces, twenty-five unavailable candidates. No general elimination, paged method delivery or comprehension claim."
+}

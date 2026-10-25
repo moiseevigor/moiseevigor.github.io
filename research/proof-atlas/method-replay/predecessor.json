@@ -1,0 +1,14 @@
+{
+  "format": "ProofAtlasMethodCheckpoint/1",
+  "sourceRevision": "ec766430d7c71d024f733e06eff6cb17cd05499a",
+  "sourceRevisionFilesVerified": true,
+  "bundle": {
+    "file": "research/proof-atlas/branch-interfaces/method-interface-evidence.json",
+    "sha256": "d1b0ef379936aca5c3fe8672248892d18382cd7c470d45c868dd1720f8547f8b"
+  },
+  "audit": {
+    "file": "research/proof-atlas/branch-interfaces/audit.json",
+    "sha256": "e01f8165ad17fdbdaad2927a42b73eb284482c33f23cdb76a0efc70f2788a5a7"
+  },
+  "scope": "Frozen sixteen-method native/model/browser checkpoint. Current implementation compatibility is recorded separately."
+}

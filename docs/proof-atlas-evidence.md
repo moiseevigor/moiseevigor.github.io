@@ -666,6 +666,12 @@ Computed method interfaces expose recursor inputs without requiring source lambd
 
 [Rule, examples and limits](/research/proof-atlas/branch-interfaces/README.md) · [Native, model and browser evidence](/research/proof-atlas/branch-interfaces/method-interface-evidence.json)
 
+<span id="public-packet-method-interfaces"></span>
+
+The same computed interface rule also passed fresh public-packet replay for nine recorded `Or.rec` calls, producing 18 method interfaces in three publisher-attributed AI-source profiles. The original theorem, original proof module and private Riccati modules were absent. The fixed twenty-profile inventory contains 34 recorded candidates across seven profiles; the other 25 candidates remain unavailable. All seven closed proof packets passed kernel typing and wrong-proof/binder refusal controls. Independent source/type/context comparisons cover all 18 interfaces. This is transfer of the existing rule within one recursor scheme, not general elimination coverage or a comprehension result. The manual exposes each recorded call and exact source jumps. Complete bounded source packets are loaded for these method views; paged delivery remains a limitation.
+
+[Public replay method and limits](/research/proof-atlas/method-replay/README.md) · [Scoped verification bundle](/research/proof-atlas/method-replay/method-replay-evidence.json)
+
 </details>
 
 <details class="atlas-evidence-entry" data-evidence-order="9" markdown="1">

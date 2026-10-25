@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "methodScenes": 16,
+  "riccatiScenes": 8,
+  "controlScenes": 8,
+  "inputSelections": 24,
+  "computedReferenceJumps": 1,
+  "originalReferenceJumps": 7,
+  "originalMethodJumps": 9,
+  "axeAudits": 4,
+  "failureControls": 2,
+  "staleControls": 1,
+  "checkerSha256": "43f0eb9b58c7ae384fefde9627cbcc6faa90d337f154af42b8b0b831a43e9d8d",
+  "builtFiles": {
+    "public/js/proof-atlas-method-interfaces.js": "85ab03b85723a649733cae034eede70fc1a7f447eb435ff871553dfae5fc8cde",
+    "public/js/proof-atlas-method-examples.js": "8a46cb390581b861208e56c560ea88ef4e4df6e52580c6159ddef02db9b56e0c",
+    "public/js/proof-atlas-elimination.js": "9099bcfdab1635441af870ecae543e29ccd1f46e71eab299b54e399f31d014c9",
+    "public/js/proof-atlas-library.js": "1449b513cc6f5b4c3b26ee8f45ab9b6dfe33345f666b4cab3cbe544727ce0056",
+    "public/css/proof-atlas-theme.css": "a63cab151db80389ffc61e64221258c309f7da951c183c9a879a409e5fa90c27",
+    "public/data/proof-atlas/method-interfaces-manifest.js": "35545092727a15db1c18536f31361c0fab98ab132610ab375eeb242216e8b0d7"
+  }
+}

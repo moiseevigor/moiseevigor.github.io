@@ -180,3 +180,7 @@
 :root .proof-atlas-theme .pl-method-interface :is(.pl-method-source,.pl-method-body) {margin:0;padding:.8rem;border:1px solid var(--accent)}
 :root .proof-atlas-theme .pl-method-interface .pl-method-body {margin-top:1rem;border:1px dashed var(--accent-warm)}
 :root .proof-atlas-theme .pl-method-interface p {font-family:var(--sans);font-size:.9rem;line-height:1.6;margin:.65rem 0}
+
+/* Long packet names and occurrence routes stay within the manual column. */
+:root .proof-atlas-theme #pm-method-lab .pm-controls label {max-width:100%;min-width:0;flex-wrap:wrap}
+:root .proof-atlas-theme #pm-method-lab select {max-width:100%;min-width:0}

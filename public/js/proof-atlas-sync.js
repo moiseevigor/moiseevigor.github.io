@@ -65,7 +65,8 @@
     if(!window.PROOF_ATLAS_ELIMINATIONS)await script('/public/data/proof-atlas/eliminations-manifest.js?v=1');
     if(!window.ProofAtlasRecursiveInputs)await script('/public/js/proof-atlas-recursive-inputs.js?v=3');
     if(!window.PROOF_ATLAS_METHOD_INTERFACES)await script('/public/data/proof-atlas/method-interfaces-manifest.js?v=1');
-    if(!window.ProofAtlasElimination)await script('/public/js/proof-atlas-elimination.js?v=6');
+    try{if(!window.PROOF_ATLAS_METHOD_REPLAY)await script('/public/data/proof-atlas/method-interfaces-ai-manifest.js?v=1');}catch(_){/* Optional public replay must not block original elimination records. */}
+    if(!window.ProofAtlasElimination)await script('/public/js/proof-atlas-elimination.js?v=7');
    }catch(_){/* Optional elimination evidence must not block the original reader. */}
    try{if(!window.PROOF_ATLAS_PROJECTIONS)await script('/public/data/proof-atlas/projections-manifest.js?v=1');}catch(_){/* Optional projection evidence leaves the source graph available. */}
    try{if(!window.ProofAtlasBindingUses&&window.ProofAtlasRecursiveInputs)await script('/public/js/proof-atlas-binding-uses.js?v=4');}catch(_){/* Optional reference counts do not block the source reader. */}

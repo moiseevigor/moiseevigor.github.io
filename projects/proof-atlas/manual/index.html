@@ -82,10 +82,11 @@ computed identity = evidence/derivation hash + namespace + computed route</code>
     <details id="method-interface-lab"><summary>Inspect kernel-checked method interfaces</summary>
       <p>A branch may be supplied by a function reference without source lambdas. The computed interface exposes its inputs through \(f \equiv \lambda x_1\ldots x_n, f\,x_1\ldots x_n\). Its binders belong to a computed namespace; the original method keeps its source address. Domains see only the original context and earlier computed inputs. A method returning a function stops after the recursor rule's input count.</p>
       <div id="pm-method-lab">
-        <div class="pm-controls"><label>Native control <select id="pm-method-example"><option value="AtlasMethodControls.conjunction">Conjunction · two proof inputs</option><option value="AtlasMethodControls.disjunction">Disjunction · branch methods</option><option value="AtlasMethodControls.storedMethod">Let-bound method application</option><option value="AtlasMethodControls.dependent">Dependent recursion · P n</option><option value="AtlasMethodControls.functionValued">Function-valued recursion</option></select></label><label>Case <select id="pm-method-minor" disabled><option>Load a control</option></select></label><button id="pm-method-load" type="button">Load recorded method interface</button></div>
+        <div class="pm-controls"><label>Recorded proof or control <select id="pm-method-example"><option value="AtlasMethodControls.conjunction">Conjunction · two proof inputs</option><option value="AtlasMethodControls.disjunction">Disjunction · branch methods</option><option value="AtlasMethodControls.storedMethod">Let-bound method application</option><option value="AtlasMethodControls.dependent">Dependent recursion · P n</option><option value="AtlasMethodControls.functionValued">Function-valued recursion</option></select></label><label>Call <select id="pm-method-query" disabled><option>Load a record</option></select></label><label>Case <select id="pm-method-minor" disabled><option>Load a control</option></select></label><button id="pm-method-load" type="button">Load recorded method interface</button></div>
         <p id="pm-method-status" role="status">Five authored controls isolate method representation. The original Riccati checks remain separately source-bound.</p><div id="pm-method-example-view"></div><div id="pm-method-source-view"></div>
       </div>
       <p>All eight methods in seven recorded Riccati recursor calls have checked interfaces. Five controls add eight interfaces, including six methods whose required source lambda prefix is absent. This does not supply unrecorded proof bodies. <a href="/research/proof-atlas/branch-interfaces/README.md">Rule and finite checks</a>. In the <a href="/projects/proof-atlas/library/?proof=JacobiData.slope_bound_abs&amp;route=1:1.1.1.1.1.1.2.2.2.2.2.1">Riccati sign split</a>, choose “Show case elimination”, then “Show computed method interface”.</p>
+      <p>Public-packet replay adds 18 interfaces from nine recorded <code>Or.rec</code> calls in three AI-attributed proofs. Across the fixed twenty-profile inventory, 25 other recorded candidates remain unavailable. All seven affected closed proof packets passed fresh kernel replay without their original theorem, original proof module or private Riccati modules. Attribution comes from the dataset publisher. These examples currently load a complete bounded source packet; paged delivery of method interfaces remains open. <a href="/research/proof-atlas/method-replay/README.md">Scope and verification</a>.</p>
     </details>
     <p>A native extraction record ties a finite judgment to a specific environment, packet and context. The browser validates that identity; it does not run Lean. An article correspondence is a separate reviewed relation and is not implied by a typing rule.</p>
   </section>
@@ -142,7 +143,8 @@ Level.mvar id       unresolved universe metavariable</code></pre>
 
 <script src="/public/js/proof-atlas-occurrence-types.js?v=13" defer></script>
 <script src="/public/js/proof-atlas-recursive-inputs.js?v=3" defer></script>
-<script src="/public/js/proof-atlas-elimination.js?v=6" defer></script>
+<script src="/public/js/proof-atlas-elimination.js?v=7" defer></script>
 <script src="/public/data/proof-atlas/method-interfaces-manifest.js?v=1" defer></script>
-<script src="/public/js/proof-atlas-method-interfaces.js?v=1" defer></script>
-<script src="/public/js/proof-atlas-method-examples.js?v=1" defer></script>
+<script src="/public/data/proof-atlas/method-interfaces-ai-manifest.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-method-interfaces.js?v=2" defer></script>
+<script src="/public/js/proof-atlas-method-examples.js?v=2" defer></script>
