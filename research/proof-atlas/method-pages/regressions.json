@@ -1,0 +1,92 @@
+{
+  "format": "ProofAtlasMethodSourceRegressions/1",
+  "status": "PASS",
+  "checkers": [
+    {
+      "file": "scripts/test-proof-atlas-source-context-modules-browser.cjs",
+      "sha256": "27701a38e8c66b912a05a711572e0097774416b1c41d1b1ca1385f9cdc5f3a22"
+    },
+    {
+      "file": "scripts/test-proof-atlas-source-pages-browser.cjs",
+      "sha256": "4fbb706d8970a7e95624452a7ca9f97f09fb7cb03736631f040f412977e81a46"
+    },
+    {
+      "file": "scripts/test-proof-atlas-structure.cjs",
+      "sha256": "3f19d7e89830011075057202ad3f6fe3451b9712d443ec4b149f2c214f208b74"
+    }
+  ],
+  "browserReports": [
+    {
+      "checker": "scripts/test-proof-atlas-source-context-modules-browser.cjs",
+      "report": {
+        "status": "PASS",
+        "sourceBodyOccurrences": "31752787",
+        "largeBorrowedLetOccurrences": "10844757",
+        "oneSourceCursor": true,
+        "noCompleteSourceIndexInPagedMode": true,
+        "lazyNativeContextPackage": true,
+        "computedRefinementPreservesSource": true,
+        "canonicalComputedPathStableAcrossUses": true,
+        "originalUseMapChanges": true,
+        "rawTypeNamespaceAndBindingJump": true,
+        "sourceHeaderFieldJump": true,
+        "unsupportedRouteClearsModule": true,
+        "sealedSnapshotRendersAfterEviction": true,
+        "corruptSourcePagePreservesCurrentCut": true,
+        "failedPackageCanRetry": true,
+        "latePreparationIgnored": true,
+        "lateScriptCannotRestoreOldProof": true,
+        "completeReaderUsesSameControl": true,
+        "existingOwnModuleIndependentOfNewAssets": true,
+        "zoomAndPan": true,
+        "accessibilityAudits": 4,
+        "scope": "Existing finite native observations in one publisher-attributed AI proof. Browser source pages and native-type residency have separate bounds; the offline reference fixture is resident in the test process. No new native typing, all-context coverage, AI proof-module reuse or comprehension claim."
+      }
+    },
+    {
+      "checker": "scripts/test-proof-atlas-source-pages-browser.cjs",
+      "report": {
+        "status": "PASS",
+        "liveSceneMatchesCompleteReference": true,
+        "sourceOnlyFieldsNavigable": true,
+        "localFocusPreservesSelection": true,
+        "sourceJumpExact": true,
+        "modeAndDepthCancellation": true,
+        "proofSwitchCancelsStaleLoad": true,
+        "damagedManifestExplicitlyUnavailable": true,
+        "missingModuleRecoveryLink": true,
+        "unsupportedDeclarationExplicit": true,
+        "completeSourceRequests": 0,
+        "sourceCacheLimit": 4096,
+        "completeNativeEvidenceRequests": 0,
+        "largeAISourceBodyOccurrences": "29794821",
+        "accessibilityAudits": 4,
+        "rows": [
+          {
+            "width": 1700,
+            "theme": "light"
+          },
+          {
+            "width": 1700,
+            "theme": "dark"
+          },
+          {
+            "width": 390,
+            "theme": "light"
+          },
+          {
+            "width": 390,
+            "theme": "dark"
+          }
+        ],
+        "scope": "Paged source and native-query geometry in the existing library; shared type graphs have separate residency. Not a total browser-memory or comprehension result."
+      }
+    }
+  ],
+  "structure": {
+    "status": "PASS",
+    "preservedSections": 63,
+    "stableAnchors": 75
+  },
+  "scope": "Existing paged source navigation and the context-module tool with no method interface opened. Their source/native caches retain their own original bounds; these reports do not count the additional method-source lease."
+}

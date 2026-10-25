@@ -36,6 +36,8 @@ The [SE(2) article reader](/projects/proof-atlas/article/) is a separate applica
 | Semantic abstraction and evaluation | Finite structural and native checks, including a separately attributed AI-source sample. | Semantic compression and improved human comprehension remain unmeasured. |
 {: tabindex="0" aria-label="Current capabilities and remaining questions"}
 
+Computed method inputs are available in the [paged Riccati reader](/projects/proof-atlas/library/?loading=paged&proof=JacobiData.slope_bound_abs&route=1:1.1.1.1.1.1.2.2.2.2.2.1). The source closure is capped at 4,096 rows, with a separate 256-row fetch cache; native/type graphs keep separate bounds. [Finite scope and evidence](/research/proof-atlas/method-pages/README.md).
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?

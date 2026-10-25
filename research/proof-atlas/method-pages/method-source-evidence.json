@@ -1,0 +1,1535 @@
+{
+  "format": "ProofAtlasMethodSourceEvidence/1",
+  "status": "PASS",
+  "publication": "LOCAL_NOT_DEPLOYED_NO_BLOG_POST",
+  "predecessors": {
+    "format": "ProofAtlasMethodSourcePredecessors/1",
+    "sourceRevision": "d15c49c901a64715b2ba2826bb951fbfd201fdc0",
+    "checkpoints": [
+      {
+        "file": "research/proof-atlas/branch-interfaces/method-interface-evidence.json",
+        "sha256": "d1b0ef379936aca5c3fe8672248892d18382cd7c470d45c868dd1720f8547f8b"
+      },
+      {
+        "file": "research/proof-atlas/method-replay/method-replay-evidence.json",
+        "sha256": "b2e4e108961b157235c3bcb713654491257eea2427b39f6c5f5d7b385415c23c"
+      }
+    ],
+    "scope": "Earlier native/model/browser checkpoints remain frozen. This iteration changes source delivery and paged interaction, not native method derivations."
+  },
+  "reports": {
+    "audit": {
+      "format": "ProofAtlasMethodSourceAudit/1",
+      "status": "PASS",
+      "checkerSha256": "289baaa2791d17db5d1ccb430f8cca40dae09a58959719d56246f1c2ee32b6ae",
+      "files": [
+        {
+          "file": "public/js/proof-atlas-method-source.js",
+          "sha256": "9e33cab8b597a4a4d5ac2fdc2b66e92d85abc8e01550ece7770527ef2c1b53f3"
+        },
+        {
+          "file": "public/js/proof-atlas-method-interfaces.js",
+          "sha256": "85ab03b85723a649733cae034eede70fc1a7f447eb435ff871553dfae5fc8cde"
+        },
+        {
+          "file": "public/js/proof-atlas-source-pages.js",
+          "sha256": "b9af2065260c5eecd4cee53aa82016a53ce7aac7305a9a10307def811d480c28"
+        },
+        {
+          "file": "public/js/proof-atlas-library-data.js",
+          "sha256": "a4a01e2e93d015397eb6a8d6fd677e6b788e079440c3e206c43b8c56e06161e9"
+        },
+        {
+          "file": "public/js/proof-atlas-occurrence-types.js",
+          "sha256": "b80d43d682d3a4b7f99e284a09a6249e11ca24197e1901158caa723dcf0f6c8f"
+        },
+        {
+          "file": "public/js/proof-atlas-elimination.js",
+          "sha256": "9099bcfdab1635441af870ecae543e29ccd1f46e71eab299b54e399f31d014c9"
+        },
+        {
+          "file": "public/data/proof-atlas/source-pages-manifest.js",
+          "sha256": "0ed6f4cb93056505e1766bc3bef93cd39ebeebb96a26d7c22ba4b6b4377721bd"
+        },
+        {
+          "file": "public/data/proof-atlas/method-interfaces-manifest.js",
+          "sha256": "35545092727a15db1c18536f31361c0fab98ab132610ab375eeb242216e8b0d7"
+        },
+        {
+          "file": "public/data/proof-atlas/method-interfaces-ai-manifest.js",
+          "sha256": "e53ce10c4751c239432372b32fc2e8b90d11a85a5d66e5e08646f03dd0f67285"
+        }
+      ],
+      "profiles": 4,
+      "authoredControlProfiles": 5,
+      "authoredControlScenes": 8,
+      "authoredControlInputs": 10,
+      "dependentComputedReferences": 1,
+      "methodsWithoutSourceLambdaPrefixes": 6,
+      "zeroInputMethods": 2,
+      "functionValuedResults": 2,
+      "calls": 16,
+      "methodScenes": 26,
+      "inputs": 32,
+      "sourceTypePeerChecks": 26,
+      "sourceTupleFieldChecks": 69745,
+      "rejectionControls": 11,
+      "disposalChecks": 10,
+      "callerMutationSnapshotChecks": 1,
+      "sourceRowCap": 4096,
+      "sourcePageCacheNodeCap": 256,
+      "sourceRowJsonByteCap": 4194304,
+      "fullSourceArchiveRequests": 0,
+      "uniqueRequestedFiles": 79,
+      "rows": [
+        {
+          "name": "JacobiData.slope_bound_abs",
+          "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+          "evidenceSha256": "ab7dff22cce3ab068a08a56cce0b109dbd819c40f79ced2a67edd42cfce5761a",
+          "sourcePagesSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+          "packetNodes": 3251,
+          "expandedOccurrences": "165921",
+          "calls": 7,
+          "methods": 8,
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 1355,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 51907,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 1355,
+            "peakSourceRowJsonBytes": 51907,
+            "nativeRecordDecodedBytes": 568387,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 21,
+              "indexLoads": 1,
+              "faults": 21,
+              "evictions": 20,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 11983,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+              "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          },
+          "uniqueFetchedSourceRows": 2483,
+          "requests": 24
+        },
+        {
+          "name": "lean_workbook_20418",
+          "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+          "evidenceSha256": "bff138a44a4d19d5b90942dec2b99593c3e1c6d42f3d7376bb3c890ba321bde6",
+          "sourcePagesSha256": "a3525f4c281e8e9afd0cc28004fca7757bc929432731e696fbc0ca2b02bb1ab5",
+          "packetNodes": 86587,
+          "expandedOccurrences": "29795398",
+          "calls": 1,
+          "methods": 2,
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 1386,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 60747,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 1386,
+            "peakSourceRowJsonBytes": 60747,
+            "nativeRecordDecodedBytes": 136954,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 34,
+              "indexLoads": 9,
+              "faults": 34,
+              "evictions": 33,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 13317,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 2,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+              "manifestSha256": "a3525f4c281e8e9afd0cc28004fca7757bc929432731e696fbc0ca2b02bb1ab5",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          },
+          "uniqueFetchedSourceRows": 4923,
+          "requests": 45
+        },
+        {
+          "name": "lean_workbook_plus_6206",
+          "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+          "evidenceSha256": "679d1701c242dc4a0b4e4f24920d34b6152e781513d7b40298e3626c81ba52d8",
+          "sourcePagesSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+          "packetNodes": 91424,
+          "expandedOccurrences": "31753364",
+          "calls": 7,
+          "methods": 14,
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 1169,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 42822,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 1169,
+            "peakSourceRowJsonBytes": 42822,
+            "nativeRecordDecodedBytes": 546399,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 38,
+              "indexLoads": 7,
+              "faults": 38,
+              "evictions": 37,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 12089,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 2,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+              "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          },
+          "uniqueFetchedSourceRows": 4384,
+          "requests": 47
+        },
+        {
+          "name": "lean_workbook_plus_62755",
+          "indexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+          "evidenceSha256": "558bd3f7d039fffb248c80e8e4b90dd7921aaa505c1433911593b0a2fbc48572",
+          "sourcePagesSha256": "6d632b791dbd94dafd3c5dc42681b47ebd36041957d997ccb3968de30882cad9",
+          "packetNodes": 2159,
+          "expandedOccurrences": "147823",
+          "calls": 1,
+          "methods": 2,
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 1075,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 41664,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 1075,
+            "peakSourceRowJsonBytes": 41664,
+            "nativeRecordDecodedBytes": 113162,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 14,
+              "indexLoads": 1,
+              "faults": 14,
+              "evictions": 13,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 12184,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+              "manifestSha256": "6d632b791dbd94dafd3c5dc42681b47ebd36041957d997ccb3968de30882cad9",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          },
+          "uniqueFetchedSourceRows": 2159,
+          "requests": 17
+        }
+      ],
+      "controlRows": [
+        {
+          "name": "AtlasMethodControls.conjunction",
+          "packetNodes": 30,
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 16,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 1004,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 16,
+            "peakSourceRowJsonBytes": 1004,
+            "nativeRecordDecodedBytes": 21158,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 1,
+              "indexLoads": 1,
+              "faults": 1,
+              "evictions": 0,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 30,
+              "peakCachedDecodedBytes": 2181,
+              "cachedPages": 1,
+              "cachedNodes": 30,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "03248be95a62060342042ca649cad79dc6ca303ec3f7982b39ea92c7238a2d9d",
+              "manifestSha256": "ff9d63516734cb5ab2812b477058e2a9354cbb34bba016a71ca7db123402aeda",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          }
+        },
+        {
+          "name": "AtlasMethodControls.dependent",
+          "packetNodes": 50,
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 13,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 895,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 13,
+            "peakSourceRowJsonBytes": 895,
+            "nativeRecordDecodedBytes": 20292,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 1,
+              "indexLoads": 1,
+              "faults": 1,
+              "evictions": 0,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 50,
+              "peakCachedDecodedBytes": 3108,
+              "cachedPages": 1,
+              "cachedNodes": 50,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "e0edf503d1b25d23fefdcba3125eff3b165a090e9052469bcb6b16c21b1eee45",
+              "manifestSha256": "ac261db9c6a9beb07f984ad36318abc17b87e838bc25a193cf7f709814603c3e",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          }
+        },
+        {
+          "name": "AtlasMethodControls.disjunction",
+          "packetNodes": 34,
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 19,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 1128,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 19,
+            "peakSourceRowJsonBytes": 1128,
+            "nativeRecordDecodedBytes": 25417,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 1,
+              "indexLoads": 1,
+              "faults": 1,
+              "evictions": 0,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 34,
+              "peakCachedDecodedBytes": 2402,
+              "cachedPages": 1,
+              "cachedNodes": 34,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "456eb2c0b523cf1178df7eede0e3974c6258d3ae34f18571b7543480720693b5",
+              "manifestSha256": "b6a2a7d8bd60432162060c5593fd1f48151976585772001794c64d9793e4e551",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          }
+        },
+        {
+          "name": "AtlasMethodControls.functionValued",
+          "packetNodes": 19,
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 12,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 782,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 12,
+            "peakSourceRowJsonBytes": 782,
+            "nativeRecordDecodedBytes": 17332,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 1,
+              "indexLoads": 1,
+              "faults": 1,
+              "evictions": 0,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 19,
+              "peakCachedDecodedBytes": 1793,
+              "cachedPages": 1,
+              "cachedNodes": 19,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "181a4689ebe011fd1e2346a0342920374098635c639150b6ac5c679fe59bae46",
+              "manifestSha256": "4b07a580d67bf191282cf84bd9bb26f8615ac4e1d17b8f045c9719bd8d55ff11",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          }
+        },
+        {
+          "name": "AtlasMethodControls.storedMethod",
+          "packetNodes": 39,
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 22,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 1415,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 22,
+            "peakSourceRowJsonBytes": 1415,
+            "nativeRecordDecodedBytes": 21156,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 1,
+              "indexLoads": 1,
+              "faults": 1,
+              "evictions": 0,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 39,
+              "peakCachedDecodedBytes": 2968,
+              "cachedPages": 1,
+              "cachedNodes": 39,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "0ae464557c41b4acc41e8555734cd89cb0073159a4d09434b2e2eb1654a8321a",
+              "manifestSha256": "b18611af55449d289b7599a5804cff07660ed9ebe7b65671c0662851e558296e",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          }
+        }
+      ],
+      "scope": "Complete native records, unchanged method scenes, original source/type peers and fetched tuple fields in four finite live profiles; eight further scenes use test-only pages of five existing native controls. Source closure and fetch-cache bounds only; native/computed graphs remain resident. No new Lean replay, recursor coverage, semantic compression, whole-application heap bound or comprehension measurement."
+    },
+    "browser-audit": {
+      "format": "ProofAtlasMethodSourceBrowserAudit/1",
+      "status": "PASS",
+      "profiles": 4,
+      "calls": 16,
+      "methodScenes": 26,
+      "inputSelections": 32,
+      "sourceTypeAgreements": 26,
+      "sourceJumps": 4,
+      "contextJumps": 4,
+      "releaseChecks": 16,
+      "axeAudits": 4,
+      "failureControls": 1,
+      "staleControls": 1,
+      "rows": [
+        {
+          "name": "JacobiData.slope_bound_abs",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 1355,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 51907,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 1355,
+            "peakSourceRowJsonBytes": 51907,
+            "nativeRecordDecodedBytes": 568387,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 21,
+              "indexLoads": 1,
+              "faults": 21,
+              "evictions": 20,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 11983,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+              "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          }
+        },
+        {
+          "name": "JacobiData.slope_bound_abs",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 1355,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 51907,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 1355,
+            "peakSourceRowJsonBytes": 51907,
+            "nativeRecordDecodedBytes": 568387,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 21,
+              "indexLoads": 1,
+              "faults": 21,
+              "evictions": 20,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 11983,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+              "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          }
+        },
+        {
+          "name": "JacobiData.slope_bound_abs",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 1355,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 51907,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 1355,
+            "peakSourceRowJsonBytes": 51907,
+            "nativeRecordDecodedBytes": 568387,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 21,
+              "indexLoads": 1,
+              "faults": 21,
+              "evictions": 20,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 11983,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+              "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          }
+        },
+        {
+          "name": "JacobiData.slope_bound_abs",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              0,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 1355,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 51907,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 1355,
+            "peakSourceRowJsonBytes": 51907,
+            "nativeRecordDecodedBytes": 568387,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 21,
+              "indexLoads": 1,
+              "faults": 21,
+              "evictions": 20,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 11983,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+              "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          }
+        },
+        {
+          "name": "JacobiData.slope_bound_abs",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 1355,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 51907,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 1355,
+            "peakSourceRowJsonBytes": 51907,
+            "nativeRecordDecodedBytes": 568387,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 21,
+              "indexLoads": 1,
+              "faults": 21,
+              "evictions": 20,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 11983,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+              "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          }
+        },
+        {
+          "name": "JacobiData.slope_bound_abs",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 1355,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 51907,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 1355,
+            "peakSourceRowJsonBytes": 51907,
+            "nativeRecordDecodedBytes": 568387,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 21,
+              "indexLoads": 1,
+              "faults": 21,
+              "evictions": 20,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 11983,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+              "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          }
+        },
+        {
+          "name": "JacobiData.slope_bound_abs",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 1355,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 51907,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 1355,
+            "peakSourceRowJsonBytes": 51907,
+            "nativeRecordDecodedBytes": 568387,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 21,
+              "indexLoads": 1,
+              "faults": 21,
+              "evictions": 20,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 11983,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+              "manifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          }
+        },
+        {
+          "name": "lean_workbook_20418",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 1386,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 60747,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 1386,
+            "peakSourceRowJsonBytes": 60747,
+            "nativeRecordDecodedBytes": 136954,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 34,
+              "indexLoads": 9,
+              "faults": 34,
+              "evictions": 33,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 13317,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 2,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+              "manifestSha256": "a3525f4c281e8e9afd0cc28004fca7757bc929432731e696fbc0ca2b02bb1ab5",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          }
+        },
+        {
+          "name": "lean_workbook_plus_6206",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 1169,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 42822,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 1169,
+            "peakSourceRowJsonBytes": 42822,
+            "nativeRecordDecodedBytes": 546399,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 38,
+              "indexLoads": 7,
+              "faults": 38,
+              "evictions": 37,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 12089,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 2,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+              "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          }
+        },
+        {
+          "name": "lean_workbook_plus_6206",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              0,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 1169,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 42822,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 1169,
+            "peakSourceRowJsonBytes": 42822,
+            "nativeRecordDecodedBytes": 546399,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 38,
+              "indexLoads": 7,
+              "faults": 38,
+              "evictions": 37,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 12089,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 2,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+              "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          }
+        },
+        {
+          "name": "lean_workbook_plus_6206",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 1169,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 42822,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 1169,
+            "peakSourceRowJsonBytes": 42822,
+            "nativeRecordDecodedBytes": 546399,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 38,
+              "indexLoads": 7,
+              "faults": 38,
+              "evictions": 37,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 12089,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 2,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+              "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          }
+        },
+        {
+          "name": "lean_workbook_plus_6206",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 1169,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 42822,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 1169,
+            "peakSourceRowJsonBytes": 42822,
+            "nativeRecordDecodedBytes": 546399,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 38,
+              "indexLoads": 7,
+              "faults": 38,
+              "evictions": 37,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 12089,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 2,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+              "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          }
+        },
+        {
+          "name": "lean_workbook_plus_6206",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              0,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 1169,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 42822,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 1169,
+            "peakSourceRowJsonBytes": 42822,
+            "nativeRecordDecodedBytes": 546399,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 38,
+              "indexLoads": 7,
+              "faults": 38,
+              "evictions": 37,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 12089,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 2,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+              "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          }
+        },
+        {
+          "name": "lean_workbook_plus_6206",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 1169,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 42822,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 1169,
+            "peakSourceRowJsonBytes": 42822,
+            "nativeRecordDecodedBytes": 546399,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 38,
+              "indexLoads": 7,
+              "faults": 38,
+              "evictions": 37,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 12089,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 2,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+              "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          }
+        },
+        {
+          "name": "lean_workbook_plus_6206",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 1169,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 42822,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 1169,
+            "peakSourceRowJsonBytes": 42822,
+            "nativeRecordDecodedBytes": 546399,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 38,
+              "indexLoads": 7,
+              "faults": 38,
+              "evictions": 37,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 12089,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 2,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+              "manifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          }
+        },
+        {
+          "name": "lean_workbook_plus_62755",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              2,
+              2
+            ]
+          },
+          "state": {
+            "format": "ProofAtlasMethodSourceState/1",
+            "phase": "ready",
+            "disposed": false,
+            "sourceRows": 1075,
+            "rowLimit": 4096,
+            "sourceRowJsonBytes": 41664,
+            "jsonByteLimit": 4194304,
+            "peakSourceRows": 1075,
+            "peakSourceRowJsonBytes": 41664,
+            "nativeRecordDecodedBytes": 113162,
+            "nativeRecordByteLimit": 8388608,
+            "sourcePageCache": {
+              "pageLoads": 14,
+              "indexLoads": 1,
+              "faults": 14,
+              "evictions": 13,
+              "peakCachedPages": 1,
+              "peakCachedNodes": 256,
+              "peakCachedDecodedBytes": 12184,
+              "cachedPages": 1,
+              "cachedNodes": 256,
+              "indexPages": 1,
+              "pageLimit": 1,
+              "indexLimit": 2,
+              "nodeLimit": 256,
+              "originalIndexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+              "manifestSha256": "6d632b791dbd94dafd3c5dc42681b47ebd36041957d997ccb3968de30882cad9",
+              "validation": "full-source producer attestation; fetched pages checked by hash and local shape"
+            },
+            "wholeSourceArchiveRequested": false,
+            "validation": "Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements."
+          }
+        }
+      ],
+      "fullSourceArchiveRequests": 0,
+      "checkerSha256": "438ceba369e8553bc37c816e065a6f2941c85fc7d344bd737fa7cbe6bc74df93",
+      "builtFiles": {
+        "public/js/proof-atlas-method-source.js": "9e33cab8b597a4a4d5ac2fdc2b66e92d85abc8e01550ece7770527ef2c1b53f3",
+        "public/js/proof-atlas-method-source-view.js": "b12c3995d9ddc4bc33026ac6c48ca2f3041064baa76e6aec803614369ece7ede",
+        "public/js/proof-atlas-paged-library.js": "64f309513f7616f9202be9bdd49989b37278bc81bc08a7d4cb9c29f323ed6fba",
+        "public/js/proof-atlas-method-interfaces.js": "85ab03b85723a649733cae034eede70fc1a7f447eb435ff871553dfae5fc8cde",
+        "public/js/proof-atlas-source-pages.js": "b9af2065260c5eecd4cee53aa82016a53ce7aac7305a9a10307def811d480c28",
+        "public/js/proof-atlas-native-pages.js": "48ae41afe4297b191cf5b576a04e498e287e791ae5074bf0b41a78b7d18df65b",
+        "public/js/proof-atlas-library-data.js": "a4a01e2e93d015397eb6a8d6fd677e6b788e079440c3e206c43b8c56e06161e9",
+        "public/js/proof-atlas-occurrence-types.js": "b80d43d682d3a4b7f99e284a09a6249e11ca24197e1901158caa723dcf0f6c8f",
+        "public/js/proof-atlas-elimination.js": "9099bcfdab1635441af870ecae543e29ccd1f46e71eab299b54e399f31d014c9"
+      }
+    },
+    "regressions": {
+      "format": "ProofAtlasMethodSourceRegressions/1",
+      "status": "PASS",
+      "checkers": [
+        {
+          "file": "scripts/test-proof-atlas-source-context-modules-browser.cjs",
+          "sha256": "27701a38e8c66b912a05a711572e0097774416b1c41d1b1ca1385f9cdc5f3a22"
+        },
+        {
+          "file": "scripts/test-proof-atlas-source-pages-browser.cjs",
+          "sha256": "4fbb706d8970a7e95624452a7ca9f97f09fb7cb03736631f040f412977e81a46"
+        },
+        {
+          "file": "scripts/test-proof-atlas-structure.cjs",
+          "sha256": "3f19d7e89830011075057202ad3f6fe3451b9712d443ec4b149f2c214f208b74"
+        }
+      ],
+      "browserReports": [
+        {
+          "checker": "scripts/test-proof-atlas-source-context-modules-browser.cjs",
+          "report": {
+            "status": "PASS",
+            "sourceBodyOccurrences": "31752787",
+            "largeBorrowedLetOccurrences": "10844757",
+            "oneSourceCursor": true,
+            "noCompleteSourceIndexInPagedMode": true,
+            "lazyNativeContextPackage": true,
+            "computedRefinementPreservesSource": true,
+            "canonicalComputedPathStableAcrossUses": true,
+            "originalUseMapChanges": true,
+            "rawTypeNamespaceAndBindingJump": true,
+            "sourceHeaderFieldJump": true,
+            "unsupportedRouteClearsModule": true,
+            "sealedSnapshotRendersAfterEviction": true,
+            "corruptSourcePagePreservesCurrentCut": true,
+            "failedPackageCanRetry": true,
+            "latePreparationIgnored": true,
+            "lateScriptCannotRestoreOldProof": true,
+            "completeReaderUsesSameControl": true,
+            "existingOwnModuleIndependentOfNewAssets": true,
+            "zoomAndPan": true,
+            "accessibilityAudits": 4,
+            "scope": "Existing finite native observations in one publisher-attributed AI proof. Browser source pages and native-type residency have separate bounds; the offline reference fixture is resident in the test process. No new native typing, all-context coverage, AI proof-module reuse or comprehension claim."
+          }
+        },
+        {
+          "checker": "scripts/test-proof-atlas-source-pages-browser.cjs",
+          "report": {
+            "status": "PASS",
+            "liveSceneMatchesCompleteReference": true,
+            "sourceOnlyFieldsNavigable": true,
+            "localFocusPreservesSelection": true,
+            "sourceJumpExact": true,
+            "modeAndDepthCancellation": true,
+            "proofSwitchCancelsStaleLoad": true,
+            "damagedManifestExplicitlyUnavailable": true,
+            "missingModuleRecoveryLink": true,
+            "unsupportedDeclarationExplicit": true,
+            "completeSourceRequests": 0,
+            "sourceCacheLimit": 4096,
+            "completeNativeEvidenceRequests": 0,
+            "largeAISourceBodyOccurrences": "29794821",
+            "accessibilityAudits": 4,
+            "rows": [
+              {
+                "width": 1700,
+                "theme": "light"
+              },
+              {
+                "width": 1700,
+                "theme": "dark"
+              },
+              {
+                "width": 390,
+                "theme": "light"
+              },
+              {
+                "width": 390,
+                "theme": "dark"
+              }
+            ],
+            "scope": "Paged source and native-query geometry in the existing library; shared type graphs have separate residency. Not a total browser-memory or comprehension result."
+          }
+        }
+      ],
+      "structure": {
+        "status": "PASS",
+        "preservedSections": 63,
+        "stableAnchors": 75
+      },
+      "scope": "Existing paged source navigation and the context-module tool with no method interface opened. Their source/native caches retain their own original bounds; these reports do not count the additional method-source lease."
+    }
+  },
+  "files": [
+    {
+      "file": "public/js/proof-atlas-method-source.js",
+      "sha256": "9e33cab8b597a4a4d5ac2fdc2b66e92d85abc8e01550ece7770527ef2c1b53f3"
+    },
+    {
+      "file": "public/js/proof-atlas-method-source-view.js",
+      "sha256": "b12c3995d9ddc4bc33026ac6c48ca2f3041064baa76e6aec803614369ece7ede"
+    },
+    {
+      "file": "public/js/proof-atlas-paged-library.js",
+      "sha256": "64f309513f7616f9202be9bdd49989b37278bc81bc08a7d4cb9c29f323ed6fba"
+    },
+    {
+      "file": "public/js/proof-atlas-method-interfaces.js",
+      "sha256": "85ab03b85723a649733cae034eede70fc1a7f447eb435ff871553dfae5fc8cde"
+    },
+    {
+      "file": "public/js/proof-atlas-source-pages.js",
+      "sha256": "b9af2065260c5eecd4cee53aa82016a53ce7aac7305a9a10307def811d480c28"
+    },
+    {
+      "file": "public/js/proof-atlas-native-pages.js",
+      "sha256": "48ae41afe4297b191cf5b576a04e498e287e791ae5074bf0b41a78b7d18df65b"
+    },
+    {
+      "file": "public/js/proof-atlas-library-data.js",
+      "sha256": "a4a01e2e93d015397eb6a8d6fd677e6b788e079440c3e206c43b8c56e06161e9"
+    },
+    {
+      "file": "public/js/proof-atlas-occurrence-types.js",
+      "sha256": "b80d43d682d3a4b7f99e284a09a6249e11ca24197e1901158caa723dcf0f6c8f"
+    },
+    {
+      "file": "public/js/proof-atlas-elimination.js",
+      "sha256": "9099bcfdab1635441af870ecae543e29ccd1f46e71eab299b54e399f31d014c9"
+    },
+    {
+      "file": "scripts/test-proof-atlas-method-source.cjs",
+      "sha256": "289baaa2791d17db5d1ccb430f8cca40dae09a58959719d56246f1c2ee32b6ae"
+    },
+    {
+      "file": "scripts/test-proof-atlas-method-source-browser.cjs",
+      "sha256": "438ceba369e8553bc37c816e065a6f2941c85fc7d344bd737fa7cbe6bc74df93"
+    },
+    {
+      "file": "scripts/build-proof-atlas-method-source-evidence.cjs",
+      "sha256": "069a77989d8ab342a7ab3110c4fdd9c6a4afd40b0187905e18774ffce11714d2"
+    },
+    {
+      "file": "research/proof-atlas/method-pages/README.md",
+      "sha256": "b8203aab0900c21f3ebf6b2458cf41901ea3d9af88f57c92190aaca5789fd9b6"
+    },
+    {
+      "file": "research/proof-atlas/method-pages/predecessors.json",
+      "sha256": "d087d8be5de14dcec7efa8fa224d0956bfa590f2a4439b3ddc66f6eec8897eaa"
+    },
+    {
+      "file": "docs/proof-atlas-research-program.md",
+      "sha256": "e009d6602bd8dc50ff692b3aa4a6cccc31f9438cdbd9f7c99a5b3c930f9baa0d"
+    },
+    {
+      "file": "public/data/proof-atlas/source-pages-manifest.js",
+      "sha256": "0ed6f4cb93056505e1766bc3bef93cd39ebeebb96a26d7c22ba4b6b4377721bd"
+    },
+    {
+      "file": "public/data/proof-atlas/method-interfaces-manifest.js",
+      "sha256": "35545092727a15db1c18536f31361c0fab98ab132610ab375eeb242216e8b0d7"
+    },
+    {
+      "file": "public/data/proof-atlas/method-interfaces-ai-manifest.js",
+      "sha256": "e53ce10c4751c239432372b32fc2e8b90d11a85a5d66e5e08646f03dd0f67285"
+    }
+  ],
+  "scope": "Delivery of unchanged native method records with bounded source closure. Four live profiles and five test-only authored control page fixtures. No new Lean derivation, native-query paging, recursor coverage, whole-application heap bound, semantic compression or comprehension result."
+}

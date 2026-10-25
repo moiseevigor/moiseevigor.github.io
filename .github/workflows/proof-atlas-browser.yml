@@ -140,6 +140,7 @@ on:
       - 'public/data/proof-atlas/method-interfaces-ai-manifest.js'
       - 'public/data/proof-atlas/method-replay/**'
       - 'research/proof-atlas/method-replay/**'
+      - 'research/proof-atlas/method-pages/**'
       - 'scripts/*proof-atlas-method-replay*'
       - 'public/js/proof-atlas-method-*.js'
       - 'scripts/*proof-atlas-method-*.cjs'
@@ -438,6 +439,7 @@ on:
       - 'public/data/proof-atlas/method-interfaces-ai-manifest.js'
       - 'public/data/proof-atlas/method-replay/**'
       - 'research/proof-atlas/method-replay/**'
+      - 'research/proof-atlas/method-pages/**'
       - 'scripts/*proof-atlas-method-replay*'
       - 'public/js/proof-atlas-method-*.js'
       - 'scripts/*proof-atlas-method-*.cjs'
@@ -696,6 +698,9 @@ jobs:
           ATLAS_REPLAY_CHECK=1 node scripts/test-proof-atlas-method-replay.cjs
           node scripts/test-proof-atlas-method-replay-browser.cjs
           node scripts/build-proof-atlas-method-replay-evidence.cjs --check
+          ATLAS_METHOD_SOURCE_CHECK=1 node scripts/test-proof-atlas-method-source.cjs
+          node scripts/test-proof-atlas-method-source-browser.cjs
+          node scripts/build-proof-atlas-method-source-evidence.cjs --check
           ATLAS_RECORDED_UNION_CHECK=1 node scripts/test-proof-atlas-recorded-union.cjs
           node scripts/build-proof-atlas-recorded-union-evidence.cjs --check
           node scripts/test-proof-atlas-recorded-union-browser.cjs

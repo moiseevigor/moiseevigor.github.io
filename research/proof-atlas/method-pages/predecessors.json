@@ -1,0 +1,15 @@
+{
+  "format": "ProofAtlasMethodSourcePredecessors/1",
+  "sourceRevision": "d15c49c901a64715b2ba2826bb951fbfd201fdc0",
+  "checkpoints": [
+    {
+      "file": "research/proof-atlas/branch-interfaces/method-interface-evidence.json",
+      "sha256": "d1b0ef379936aca5c3fe8672248892d18382cd7c470d45c868dd1720f8547f8b"
+    },
+    {
+      "file": "research/proof-atlas/method-replay/method-replay-evidence.json",
+      "sha256": "b2e4e108961b157235c3bcb713654491257eea2427b39f6c5f5d7b385415c23c"
+    }
+  ],
+  "scope": "Earlier native/model/browser checkpoints remain frozen. This iteration changes source delivery and paged interaction, not native method derivations."
+}
