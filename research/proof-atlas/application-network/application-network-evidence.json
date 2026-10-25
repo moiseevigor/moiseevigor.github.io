@@ -1,0 +1,305 @@
+{
+  "format": "ProofAtlasApplicationNetworkEvidence/1",
+  "status": "PASS",
+  "publication": "Local research experiment. No blog, PR, push or public deployment.",
+  "scope": "Exact occurrence composition over the earlier finite application inventory. Native observations are reused by immutable hash, not re-executed. No semantic necessity, whole-proof completeness, arbitrary-corpus topology scaling or human-comprehension claim.",
+  "native": {
+    "file": "research/proof-atlas/application-ports/application-ports-evidence.json",
+    "sha256": "e05e41158a85e91bfb856aa5b50e8ac74e1679242b879847a75b7dff3ef72a3a",
+    "unchangedSourceAssets": 2084,
+    "leanVersion": "4.33.1",
+    "newKernelRuns": 0
+  },
+  "derivation": {
+    "format": "ProofAtlasApplicationNetworkDerivation/1",
+    "status": "PASS",
+    "profiles": 31,
+    "calls": 162,
+    "ports": 787,
+    "connections": 101,
+    "bindingConnections": 7,
+    "unrecordedPorts": 686,
+    "sharedResults": 1,
+    "sourceInventorySha256": "dbece0e885bd25a31d93c9871f8c0124aee18e64acfb5bf1956c407f65dbc50d",
+    "nativeEvidenceSha256": "e05e41158a85e91bfb856aa5b50e8ac74e1679242b879847a75b7dff3ef72a3a",
+    "producerSha256": "2e7afa5f843975558bd93685fe600aae9ba085f7811274055563096fc8e43439",
+    "manifestSha256": "4a826bff4fac9649aeb2e1fb95c569e4072de8a692093ae398ff2ef049ec7060",
+    "maxTopologyBytes": 212804,
+    "scope": "Every port of the earlier explicit application inventory. Exact-source composition and literal output/input type bridge only; no new Lean checks or whole-proof coverage claim."
+  },
+  "unit": {
+    "format": "ProofAtlasApplicationNetworkAudit/1",
+    "status": "PASS",
+    "profiles": 31,
+    "calls": 162,
+    "ports": 787,
+    "connections": 101,
+    "bindingConnections": 7,
+    "sharedResults": 1,
+    "cuts": 1122,
+    "expansions": 476,
+    "collapseRoundtrips": 476,
+    "typedPortSelections": 787,
+    "sourceSelections": 1604,
+    "typeSelections": 2361,
+    "contextSelections": 132,
+    "refusals": 438,
+    "staleRefusals": 1,
+    "peakTopologyBytes": 212804,
+    "peakSourceRows": 115,
+    "peakNativeNodes": 204885,
+    "wholeArchiveRequests": 0,
+    "scope": "All finite inventoried ports; independent cut partition, refinement/coarsening, exact native/source selections, one-window lifetime and adversarial occurrence controls. No whole-proof completeness or semantic necessity claim.",
+    "files": [
+      {
+        "file": "public/js/proof-atlas-application-network.js",
+        "sha256": "46fca09cff6abbc49e44bc981ca75200f7133348297096cc69222b4bd916fcee"
+      },
+      {
+        "file": "public/js/proof-atlas-application-network-pages.js",
+        "sha256": "7e7e1527bcac209a7289004ac5bed62ae9419228782c58e0650d08d4af345197"
+      },
+      {
+        "file": "public/data/proof-atlas/application-network-manifest.js",
+        "sha256": "4a826bff4fac9649aeb2e1fb95c569e4072de8a692093ae398ff2ef049ec7060"
+      },
+      {
+        "file": "research/proof-atlas/application-network/build.cjs",
+        "sha256": "2e7afa5f843975558bd93685fe600aae9ba085f7811274055563096fc8e43439"
+      },
+      {
+        "file": "research/proof-atlas/application-network/derivation.json",
+        "sha256": "eaefd517a94effdbbdc866864ac3c6c24e469afe5e2e41852c6ce0dd4ddc499d"
+      },
+      {
+        "file": "scripts/test-proof-atlas-application-network.cjs",
+        "sha256": "1c333ea4865b1def3b80a93a315a1576f415d70de01d50d3e3ff5aac288f6b29"
+      }
+    ]
+  },
+  "browser": {
+    "format": "ProofAtlasApplicationNetworkBrowser/1",
+    "status": "PASS",
+    "profiles": 31,
+    "callSelections": 162,
+    "wireSelections": 101,
+    "computedSelections": 101,
+    "bindingSelections": 7,
+    "expansions": 7,
+    "collapseRoundtrips": 1,
+    "sharedResultChecks": 1,
+    "distinctOccurrenceChecks": 1,
+    "axeAudits": 4,
+    "keyboardChecks": 1,
+    "staleRefusals": 1,
+    "topologyHashRefusals": 1,
+    "nativeHashRefusals": 1,
+    "releases": 1,
+    "downloadChecks": 2,
+    "wholeArchiveAttempts": 0,
+    "builtFiles": {
+      "public/js/proof-atlas-application-network.js": "46fca09cff6abbc49e44bc981ca75200f7133348297096cc69222b4bd916fcee",
+      "public/js/proof-atlas-application-network-pages.js": "7e7e1527bcac209a7289004ac5bed62ae9419228782c58e0650d08d4af345197",
+      "public/js/proof-atlas-application-network-view.js": "a86f9e53a3fd37c1fed08258081e6575c491cafc06a22f1f6bd6816f3071db0e",
+      "public/css/proof-atlas-application-network.css": "56901dfa0572ead984b5b4a70f483ad753e04eaad5e7707716881187ab4c9b67",
+      "public/data/proof-atlas/application-network-manifest.js": "4a826bff4fac9649aeb2e1fb95c569e4072de8a692093ae398ff2ef049ec7060"
+    },
+    "html": {
+      "source": "research/proof-atlas/application-network/index.html",
+      "sourceSha256": "992b8fb759c3744991ce98759594ab2f11359228089d0eb972ef746c13ea0219",
+      "normalization": "Only four shared CSS build-time query versions",
+      "normalizedSha256": "79978f2c17aa10eac2aa492cd4d21ef56e2cf6b071ae01a40a4b2db76325ce8a"
+    },
+    "checkerSha256": "2e20527bb59b9e03b63a52ad2631bb42541bc308e2dded5bae241ad96df3bf46"
+  },
+  "files": [
+    {
+      "file": "public/css/proof-atlas-application-network.css",
+      "sha256": "56901dfa0572ead984b5b4a70f483ad753e04eaad5e7707716881187ab4c9b67"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network-audit.json.gz",
+      "sha256": "07aea0720fab7e21699ecf8ffc3546751712385519038904f81f10e6f8539167"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network-manifest.js",
+      "sha256": "4a826bff4fac9649aeb2e1fb95c569e4072de8a692093ae398ff2ef049ec7060"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/01f46de836929ea82b28aefe89a71cc6b487eea44a79c8b67921a7a1cdc3efdc.json.gz",
+      "sha256": "a5099bee75ba4eab8eb279497a6d9dd912c56f0242bb3cf5a008ea5bddd5b68f"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/053fa36b00b7b3fb5aa7cb2dfce3a4f4392d2b9a097e1cf07a754fdaedb9edc9.json.gz",
+      "sha256": "466db7fa160a81d81cb6af6b3dfdca22302f2f513ece3ae20cfd2a327c5082d5"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/099e9e791083aa335e8eb548152ee7ee88bddee03eb105cc1fec0be2d347e8a5.json.gz",
+      "sha256": "df5838c41d54b2035891ccc2d7741f5ec15e35cb22c4f45872c3ead8726a68ab"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/0e2ee4a27c9843a1dc33c39deef5c4c9184c70ecc8d32469a54e475e5a66c621.json.gz",
+      "sha256": "b94869d59490f101b009250348d18d3b21eeba34bc0700bf5c297c4a01d47d59"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/1acff40610699d958d6dfd9a9a0353267b246d2fd4f8abffcaa6dbd85ff09b4b.json.gz",
+      "sha256": "da8d0347306da444f90c22db81707ebd2b00e1e732adfa63480148ca299786a1"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/2365b186ae275c077f8ece652d546e4f2cb2ba1ad38ea51577e3e3d5ef5d1af8.json.gz",
+      "sha256": "d0238f35c889854779d971b5ac75117860040a614ff4d5fcc8c9b9506fa34f2e"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/2a9da0844262907c85548c2786ce27b7f50095968caf2bbf18b9eb9f2924f052.json.gz",
+      "sha256": "5f58b5e659b7c72b92c1d1f393793770ca01fb85e6ff1f90e93bff6da029de55"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/2f4b11f293c2ed503eb04c4baecb81e715b4fbd0ba575eb0fafa885ab29b331b.json.gz",
+      "sha256": "0872902cd4f7f61fe9c1e8dad10a1c7b67fb3c3bff2c6ff41ea2a2106e8e7f33"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/3494fcf43819043e02fca810354880a1fea1a3bc3472758ddf8c717dd0d29092.json.gz",
+      "sha256": "bfcdd917cd56a6b5a5ad200b754701144f8c0ebf696fad0aec8ad98ba6ff8989"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/39ca850d450895d4b9b0ca3700412006e796265e50e8d8d6efae41b001b2840e.json.gz",
+      "sha256": "a66a61a8fbe0b20ed9b39dee9642931c5dbe358243a644558cb3812c994f225f"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/40a0c8bae8774bb3d265648ee2fd42550d171d86a9ee67cd12159056e103a346.json.gz",
+      "sha256": "04da3fdf23bf1a9113823a8f86835226b0065cb092648a76ef9ee0aa7f364d8c"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/44c20b79e0ab7307ea9442a8b8c039c8230c9d2a4a3997b961d7dee25846c619.json.gz",
+      "sha256": "41d4de006fd03c652f5207d1c5c3cd923d35330b0ef50e326c69a32173bceb95"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/470e64c55842fb1ba70441ae04bef5498e1be7322ab529adfd1dfbe2ce377fad.json.gz",
+      "sha256": "15652fbbd9bc02c27cc0c29cf55b6380c68173261446892bff3d0030a2fd52b2"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/536691c286f6babc51fa01c1faef7513ca41f7b5e5bc9105f5f6ed8e34db0abe.json.gz",
+      "sha256": "8ffaa7037af480b700f651a981b1ba4165de1cd267679f0873bc3e57a4adbfea"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/5ef4ee57f819ec1c366d4295c5c1a1f134a422afa6595daf3367f034b5b6eccf.json.gz",
+      "sha256": "f73cfa60204f980c00bb70bb688f0bbc14266fd8254ff59fe7c62e8f1a67b113"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/6076611e67f66f33c009aecb921b7c29a87cf03ee40b1b5488ddca2216f72b17.json.gz",
+      "sha256": "6a38755e4db2a0aa94690794ada371c54207d5d56fb2e689bdec0709c971db7a"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/60e1caac1a5d0ea37bb631cd8c2ff440d11af74bebca24e35a569ec73b9de418.json.gz",
+      "sha256": "685c800d5798206c8d36103c0b46203d1717a2deadb30745d61d0e4e1d931923"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/79943384788e7406305a2025ed743c1e539acce772e5ccb0e8572aba64d4c271.json.gz",
+      "sha256": "59832032412a49a7d1e04dc9f78574d929bf635fe6201a240dcbe44a22a903c7"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/7b4a60418bd5ad0663f3530362949f115cc768828c77cec4192275f2c3e3a4de.json.gz",
+      "sha256": "6a30a9db5dc5f7cfc50bbbcab084da34a5f77ef48c629abd908e8d1021596aea"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/8135a07d544c3cd0d3192da3da6be8c333d275c2bea3c71cd7ec16eb4e9e9959.json.gz",
+      "sha256": "58fb2f54768ce1457406b4e70e2a7e6a9b7f5b7ac13b049af15d2c9ca836f77a"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/bea938b5cf17d847a5bf78c6256fedab759c5ab0cd3da86cbd0e8cddc98b9418.json.gz",
+      "sha256": "fe9708a2aa921acbeefa9474dbb49a387cab62f689e33a8b9676b28854ed2b94"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/c19eddc9ac047dd509ef9e6ea4e77c38bea568bb9ff239e40b37cff1f8688602.json.gz",
+      "sha256": "7c9f9e5e61a49005a36aface3fdb10731c4806353da1b65d247d70dfe3a86cc5"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/c65c16f8fc7e7efb590950ef6472f43db37f6a51b780e96bf836078190b30748.json.gz",
+      "sha256": "b17d06fc6f3588572d345a71f10119326d507cd6bb688182380f993849f49b76"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/d565cae098ab8a5e714b8580879c74195663e73812751610172101e1e9d26288.json.gz",
+      "sha256": "f396964079be67a46bc5b07c9489dcbdf44b7249de1631505f12cb3be831570e"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/d72cfdd0c8cbb85cb2dd53d1dfe4d07dc7b84bc9709032313c9130a0098e3a61.json.gz",
+      "sha256": "24284eb561b24ed1d38efd32cc448649dca4f333e1df7a816f506f00035b0e31"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/dd78177f1f18d2a7a0b7f28ef8bc689d621c00c4c11737140f201d191ae1526a.json.gz",
+      "sha256": "2693fbfa062c319c2454311481e1a0e744f870a07b95214c24720535c29150d1"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/e02b81ab42f2d0ef024838cc427bfc9d3f9c0ee0f4fa7a05a57235e05500528a.json.gz",
+      "sha256": "7521e8dc67d32b8da363b62666d6225ad0d99ca909595f79e810ddae164eb9cf"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/e3a73179ec3204dd5e6c0e994bf7ee5c64c5ad4ed5ac32b48cb833a2e4c3afde.json.gz",
+      "sha256": "0c6a9d783dc49e1aa2c5cc75c7395134beeaac70b86f2e06c5a3cdd25e768098"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/e4a6ceb075096d2eb8d30ea581d010dd2c6242fc01e321b40f515b2b09f90de7.json.gz",
+      "sha256": "860d3e3bcc0542145f6952aa85b6607df64309046a92191321d36cfa635d4b20"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/e8f968dacc6f77c7128913c51e3166b198e51f2be074a946dafd9a89b7555390.json.gz",
+      "sha256": "31a6f411fcd0cf262845b2fb3506186f19dbab8638f75cb532e0c7d8d13db6ac"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network/fe470354f87e528daeed338e43d20a34b8fe7c906ef708ba25657d92dd152225.json.gz",
+      "sha256": "791edf5fd772a4613cd21ad9b119e350052c9ca90ca0ad083f0739c92bdf9594"
+    },
+    {
+      "file": "public/js/proof-atlas-application-network-pages.js",
+      "sha256": "7e7e1527bcac209a7289004ac5bed62ae9419228782c58e0650d08d4af345197"
+    },
+    {
+      "file": "public/js/proof-atlas-application-network-view.js",
+      "sha256": "a86f9e53a3fd37c1fed08258081e6575c491cafc06a22f1f6bd6816f3071db0e"
+    },
+    {
+      "file": "public/js/proof-atlas-application-network.js",
+      "sha256": "46fca09cff6abbc49e44bc981ca75200f7133348297096cc69222b4bd916fcee"
+    },
+    {
+      "file": "research/proof-atlas/application-network/README.md",
+      "sha256": "ae547270088ce2b5a5bab17b206a276fa525fa410081e8f78f2bc2ef64e1e666"
+    },
+    {
+      "file": "research/proof-atlas/application-network/audit.json",
+      "sha256": "6e464c322f730657aade4036fce8a7bf213e2fe77bc81158a83ff33bf40685a4"
+    },
+    {
+      "file": "research/proof-atlas/application-network/browser-audit.json",
+      "sha256": "4b467c40314fa82b5f000ad9fd36429f8d754c3c6ffd4bb866546d1c8d3ecf10"
+    },
+    {
+      "file": "research/proof-atlas/application-network/build.cjs",
+      "sha256": "2e7afa5f843975558bd93685fe600aae9ba085f7811274055563096fc8e43439"
+    },
+    {
+      "file": "research/proof-atlas/application-network/derivation.json",
+      "sha256": "eaefd517a94effdbbdc866864ac3c6c24e469afe5e2e41852c6ce0dd4ddc499d"
+    },
+    {
+      "file": "research/proof-atlas/application-network/index.html",
+      "sha256": "992b8fb759c3744991ce98759594ab2f11359228089d0eb972ef746c13ea0219"
+    },
+    {
+      "file": "research/proof-atlas/application-ports/application-ports-evidence.json",
+      "sha256": "e05e41158a85e91bfb856aa5b50e8ac74e1679242b879847a75b7dff3ef72a3a"
+    },
+    {
+      "file": "scripts/build-proof-atlas-application-network-evidence.cjs",
+      "sha256": "36b4229d9547b1bacdbf2af75c74c0dac7b84c0003577018354b6af2e4b24f9f"
+    },
+    {
+      "file": "scripts/test-proof-atlas-application-network-browser.cjs",
+      "sha256": "2e20527bb59b9e03b63a52ad2631bb42541bc308e2dded5bae241ad96df3bf46"
+    },
+    {
+      "file": "scripts/test-proof-atlas-application-network.cjs",
+      "sha256": "1c333ea4865b1def3b80a93a315a1576f415d70de01d50d3e3ff5aac288f6b29"
+    }
+  ]
+}

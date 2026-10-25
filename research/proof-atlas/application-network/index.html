@@ -1,0 +1,42 @@
+---
+layout: default
+math: true
+title: "Proof Atlas: connected application cuts"
+permalink: /projects/proof-atlas/manual/application-network/
+---
+<link rel="stylesheet" href="/public/css/proof-atlas-manual.css?v=1">
+<link rel="stylesheet" href="/public/css/proof-atlas-application-network.css?v=1">
+<main class="pa-manual">
+  <header><p><a href="/projects/proof-atlas/manual/">Visual notation manual</a> / Connected applications · local research experiment</p><h1>Compose applications through source uses</h1>
+    <p>A function application has a result and ordered inputs. If an input's source producer is another recorded application occurrence, the two figures can share that result box. Each destination port remains separate. A local-definition path stays explicit.</p>
+    <p>This experiment covers 162 recorded application occurrences and 787 actual input positions, with 101 application-to-application uses. It includes 87 Riccati applications and 68 uses. The other 686 inputs remain context, unrecorded-fragment or definition boundaries; they are not omitted arguments. This selected inventory is not the complete Riccati proof.</p>
+  </header>
+  <section><h2>The composition rule</h2>
+    <div class="pm-math" role="region" tabindex="0" aria-label="Source-use composition rule">$$\begin{gathered}\text{producer occurrence }p\;\xrightarrow{\text{ordered input }j}\;\text{consumer occurrence }c\\\Gamma_p\vdash p:A,\qquad\Gamma_c\vdash a_j:B\\\text{recorded source-use path }a_j\rightsquigarrow p,\quad\Gamma_p\preceq\Gamma_c\end{gathered}$$</div>
+    <p>The native observations already check the input domain, context extension and type conversion. The new derivation also compares the producer's type with that same occurrence's result type in its original context. Names, equal types, proof conversion and shared storage do not select the endpoint. An arrow records a source use; it does not assert that a premise is mathematically necessary.</p>
+    <p>Solid lines represent direct source fields. A dashed line passes through recorded local definitions. Read each line's destination slot in the connection list. Layout columns are presentational. Types and instances remain in the ordered input list; formal type references are a separate relation in the <a href="/projects/proof-atlas/manual/equality-transport/#application-ports">individual application view</a>.</p>
+  </section>
+  <section class="an-lab" id="an-lab" aria-labelledby="an-title"><h2 id="an-title">Inspect a bounded cut</h2>
+    <p>Start with the AM–GM application in Lemma 3.2. Expand its consumer, then inspect argument 4 to follow the nondependent local binding. Expand other frontier calls to continue. At most eight call boxes are retained; every crossing port remains in the connection inventory. Inspecting one input loads one checked four-argument window and releases the preceding one.</p>
+    <div class="an-controls"><label>Proof <select data-an-profile></select></label><label>Focus call <select data-an-call></select></label><button type="button" data-an-load>Load recorded cut</button><button type="button" data-an-release>Release cut</button></div>
+    <p data-an-status role="status">Loading the recorded inventory.</p>
+    <div data-an-drawing class="an-scroll" tabindex="0" role="region" aria-label="Connected application cut; scroll to pan; equivalent connections follow below"></div>
+    <div data-an-frontier></div><div data-an-ports></div><div data-an-detail></div>
+    <noscript><p>The interactive cut requires JavaScript. The rule and limits remain readable.</p></noscript>
+  </section>
+  <section><h2>What the cut preserves</h2><p>Retained and hidden calls partition the explicit call inventory. Internal, incoming, outgoing and hidden uses partition the known source connections. The remaining input positions are counted separately. Expanding a call moves its ports between these classes; collapsing it reverses that change. These are counts of actual application fields, not a disjoint partition of expression subtrees: source fragments can overlap.</p>
+    <p>The complete compact topology for one profile is loaded within a 2 MiB decoded bound, with at most 128 calls and 1,024 ports. This finite inventory does not establish topology delivery for arbitrary massive corpora. Original expression paths and selected native type graphs retain their existing separate bounds. No original private Lean scripts or tactic histories are included.</p>
+    <p><a href="/research/proof-atlas/application-network/README.md">Derivation, checks and limitations</a> · <a href="/public/data/proof-atlas/application-network-audit.json.gz">Model checks (gzip)</a> · <a href="/projects/proof-atlas/program/">General research program</a></p>
+  </section>
+</main>
+<script src="/public/js/proof-atlas-library-data.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-occurrence-types.js?v=13" defer></script>
+<script src="/public/js/proof-atlas-equality-transport.js?v=2" defer></script>
+<script src="/public/js/proof-atlas-construction-composition.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-source-pages.js?v=3" defer></script>
+<script src="/public/js/proof-atlas-application-ports.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-application-port-pages.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-application-network.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-application-network-pages.js?v=1" defer></script>
+<script src="/public/data/proof-atlas/application-network-manifest.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-application-network-view.js?v=1" defer></script>

@@ -1,0 +1,17 @@
+{
+  "format": "ProofAtlasApplicationNetworkDerivation/1",
+  "status": "PASS",
+  "profiles": 31,
+  "calls": 162,
+  "ports": 787,
+  "connections": 101,
+  "bindingConnections": 7,
+  "unrecordedPorts": 686,
+  "sharedResults": 1,
+  "sourceInventorySha256": "dbece0e885bd25a31d93c9871f8c0124aee18e64acfb5bf1956c407f65dbc50d",
+  "nativeEvidenceSha256": "e05e41158a85e91bfb856aa5b50e8ac74e1679242b879847a75b7dff3ef72a3a",
+  "producerSha256": "2e7afa5f843975558bd93685fe600aae9ba085f7811274055563096fc8e43439",
+  "manifestSha256": "4a826bff4fac9649aeb2e1fb95c569e4072de8a692093ae398ff2ef049ec7060",
+  "maxTopologyBytes": 212804,
+  "scope": "Every port of the earlier explicit application inventory. Exact-source composition and literal output/input type bridge only; no new Lean checks or whole-proof coverage claim."
+}

@@ -1,0 +1,50 @@
+{
+  "format": "ProofAtlasApplicationNetworkAudit/1",
+  "status": "PASS",
+  "profiles": 31,
+  "calls": 162,
+  "ports": 787,
+  "connections": 101,
+  "bindingConnections": 7,
+  "sharedResults": 1,
+  "cuts": 1122,
+  "expansions": 476,
+  "collapseRoundtrips": 476,
+  "typedPortSelections": 787,
+  "sourceSelections": 1604,
+  "typeSelections": 2361,
+  "contextSelections": 132,
+  "refusals": 438,
+  "staleRefusals": 1,
+  "peakTopologyBytes": 212804,
+  "peakSourceRows": 115,
+  "peakNativeNodes": 204885,
+  "wholeArchiveRequests": 0,
+  "scope": "All finite inventoried ports; independent cut partition, refinement/coarsening, exact native/source selections, one-window lifetime and adversarial occurrence controls. No whole-proof completeness or semantic necessity claim.",
+  "files": [
+    {
+      "file": "public/js/proof-atlas-application-network.js",
+      "sha256": "46fca09cff6abbc49e44bc981ca75200f7133348297096cc69222b4bd916fcee"
+    },
+    {
+      "file": "public/js/proof-atlas-application-network-pages.js",
+      "sha256": "7e7e1527bcac209a7289004ac5bed62ae9419228782c58e0650d08d4af345197"
+    },
+    {
+      "file": "public/data/proof-atlas/application-network-manifest.js",
+      "sha256": "4a826bff4fac9649aeb2e1fb95c569e4072de8a692093ae398ff2ef049ec7060"
+    },
+    {
+      "file": "research/proof-atlas/application-network/build.cjs",
+      "sha256": "2e7afa5f843975558bd93685fe600aae9ba085f7811274055563096fc8e43439"
+    },
+    {
+      "file": "research/proof-atlas/application-network/derivation.json",
+      "sha256": "eaefd517a94effdbbdc866864ac3c6c24e469afe5e2e41852c6ce0dd4ddc499d"
+    },
+    {
+      "file": "scripts/test-proof-atlas-application-network.cjs",
+      "sha256": "1c333ea4865b1def3b80a93a315a1576f415d70de01d50d3e3ff5aac288f6b29"
+    }
+  ]
+}

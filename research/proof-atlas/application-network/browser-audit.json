@@ -1,0 +1,35 @@
+{
+  "format": "ProofAtlasApplicationNetworkBrowser/1",
+  "status": "PASS",
+  "profiles": 31,
+  "callSelections": 162,
+  "wireSelections": 101,
+  "computedSelections": 101,
+  "bindingSelections": 7,
+  "expansions": 7,
+  "collapseRoundtrips": 1,
+  "sharedResultChecks": 1,
+  "distinctOccurrenceChecks": 1,
+  "axeAudits": 4,
+  "keyboardChecks": 1,
+  "staleRefusals": 1,
+  "topologyHashRefusals": 1,
+  "nativeHashRefusals": 1,
+  "releases": 1,
+  "downloadChecks": 2,
+  "wholeArchiveAttempts": 0,
+  "builtFiles": {
+    "public/js/proof-atlas-application-network.js": "46fca09cff6abbc49e44bc981ca75200f7133348297096cc69222b4bd916fcee",
+    "public/js/proof-atlas-application-network-pages.js": "7e7e1527bcac209a7289004ac5bed62ae9419228782c58e0650d08d4af345197",
+    "public/js/proof-atlas-application-network-view.js": "a86f9e53a3fd37c1fed08258081e6575c491cafc06a22f1f6bd6816f3071db0e",
+    "public/css/proof-atlas-application-network.css": "56901dfa0572ead984b5b4a70f483ad753e04eaad5e7707716881187ab4c9b67",
+    "public/data/proof-atlas/application-network-manifest.js": "4a826bff4fac9649aeb2e1fb95c569e4072de8a692093ae398ff2ef049ec7060"
+  },
+  "html": {
+    "source": "research/proof-atlas/application-network/index.html",
+    "sourceSha256": "992b8fb759c3744991ce98759594ab2f11359228089d0eb972ef746c13ea0219",
+    "normalization": "Only four shared CSS build-time query versions",
+    "normalizedSha256": "79978f2c17aa10eac2aa492cd4d21ef56e2cf6b071ae01a40a4b2db76325ce8a"
+  },
+  "checkerSha256": "2e20527bb59b9e03b63a52ad2631bb42541bc308e2dded5bae241ad96df3bf46"
+}
