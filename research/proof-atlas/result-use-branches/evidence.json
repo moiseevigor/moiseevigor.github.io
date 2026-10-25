@@ -1,0 +1,44 @@
+{
+  "format": "ProofAtlasResultUsesEvidence/1",
+  "status": "PASS",
+  "checkedAtUtc": "2026-10-25T22:40:59.766323+00:00",
+  "baselineCommit": "f8fd5ac444229f65edd241ff26a776c26c06fe8e",
+  "deployment": "LOCAL_NOT_PUBLISHED",
+  "sourceFiles": {
+    "public/js/proof-atlas-network-stream-pages.js": "bc90bbe5092146183d42d8e37bc09e7d43d9c4fac169d65eb8f6958bc0bae48f",
+    "public/js/proof-atlas-network-stream-view.js": "8848c2ed193badb9677965c2f9de26c4f5ac4fecea0744d75fcd3e36a6e38b24",
+    "public/js/proof-atlas-result-path.js": "6a6ad5aee2b22d51aa901a3799e0a6a1626155ce5c7f9a3e4bbd520c090faf85",
+    "public/js/proof-atlas-result-path-view.js": "39bdf25ac5f28034afb94c6f2f6753d6d3f6233e68a5d093d60f7859a7a3120b",
+    "public/css/proof-atlas-result-path.css": "be39a8368b63b5b5c59145bddc25c4d203b1ac85eeac1b8a8f0bf7f80ced4d68",
+    "research/proof-atlas/network-streaming/index.html": "c7fba4d178761801c5abd701c3fedcfbedbcb41c314b015f775c6db62f9828f2",
+    "projects/proof-atlas/manual/index.html": "ecb43852f2fff9d17d22f627d43128bafea3f11ea81cb1ff66721f2da7492011",
+    "docs/proof-atlas-research-program.md": "5e5996531a2fd15c7ab71db2bfb96366750caca88cc2cc67a8eb74cc5f28ee25",
+    "research/proof-atlas/visual-clarity-review/README.md": "587a97b715b9901f650f55ebcacc22561d292c7188fc33e6dc92834501f5954c",
+    "research/proof-atlas/result-use-branches/README.md": "04246a1bee077c8c07f53518739fd7fccd605a5fa67e72a69041d73d8497d611",
+    "scripts/test-proof-atlas-result-uses.cjs": "f37f2d2a06583f63506aea5a42c80ce66212cbdb8f17fa1d57700c28be50af74",
+    "scripts/test-proof-atlas-result-uses-browser.cjs": "f96631456732af5eeed240d4548509087246ae1bb8f34556b4f6eb4d1039931c",
+    "scripts/test-proof-atlas-result-path.cjs": "bda00a61dcb86c7c37fea66be3645be24ac397ff7e8864fd8fdebb1c88bd70ed"
+  },
+  "reports": {
+    "browser-check.json": "b9a03075613e72dd392c916e5c7efbd7ce947923d9a57c3437676737186c11d2",
+    "compatibility.json": "2457ab74ce16fb687fcf0b7dd4d61a191a3403ca7f51963f81d94e4c338c6d94",
+    "model-check.json": "dfe6d3513d109fc232941d92acf5a7eb3b1fef566c99126dde7a74d144256c18",
+    "network-model-compatibility.json": "feb16f6db14ea39e56a81b00d5cf2a9e889f480435fcb9c2f6e0e3d530b91662",
+    "path-model-compatibility.json": "d7f1e32d036aa86039572b456cda78651465133af64670c30efbad8c2bd84ad1"
+  },
+  "build": {
+    "command": "docker compose run --rm --no-deps --pull never build",
+    "exitCode": 0,
+    "reportedSeconds": 262.219,
+    "servedOrigin": "http://127.0.0.1:8866",
+    "htmlSha256": "9a0faf4c551f0ddbe8d7db7787772ae5295e012b186c9a8b130c67a175de45d9",
+    "scriptAndStyleBytesMatchBrowser": true
+  },
+  "immutableInventoryManifests": {
+    "public/data/proof-atlas/network-streaming-manifest.js": "5768d4f66ce01a092b5e126512998264502bd92b7c15caae8c79a60702e3087b",
+    "public/data/proof-atlas/application-network-manifest.js": "4a826bff4fac9649aeb2e1fb95c569e4072de8a692093ae398ff2ef049ec7060"
+  },
+  "compiledDataChanges": [],
+  "blogChanges": [],
+  "scope": "Bounded original result-use pages and exact consumer navigation. The native inventory has one two-use producer; two routes with shared stored IDs remain separate. The larger source-only branch has 14 uses and no per-call native typing. Protocol-only fixtures are separate from native evidence. Structural checks and browser tasks do not measure mathematical comprehension or establish complete-use coverage."
+}

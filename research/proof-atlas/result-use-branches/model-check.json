@@ -1,0 +1,94 @@
+{
+  "format": "ProofAtlasResultUsesCheck/1",
+  "status": "PASS",
+  "nativeProfiles": 31,
+  "nativeProducerQueries": 162,
+  "nativeUses": 101,
+  "nativeInputSelections": 101,
+  "bindingUses": 7,
+  "sourceOnlyPages": 2,
+  "sourceOnlyUses": 14,
+  "internalUseChecks": 1,
+  "protocolOnlyControls": 1,
+  "negativeControls": 10,
+  "staleRefusals": 2,
+  "peakPageBytes": 10365,
+  "peakRetainedCalls": 8,
+  "nativeBranch": {
+    "name": "lean_workbook_4274",
+    "producer": 2,
+    "uses": [
+      {
+        "to": 0,
+        "slot": 4,
+        "input": {
+          "namespace": "source-expression",
+          "name": "lean_workbook_4274",
+          "indexSha256": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+          "sourceSha256": "761ccc0ee9e693f87eabfca7b94449ec8ebe1c5293ddd528bed8eade57ca74a4",
+          "node": 174,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "to": 1,
+        "slot": 4,
+        "input": {
+          "namespace": "source-expression",
+          "name": "lean_workbook_4274",
+          "indexSha256": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+          "sourceSha256": "761ccc0ee9e693f87eabfca7b94449ec8ebe1c5293ddd528bed8eade57ca74a4",
+          "node": 174,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    ],
+    "sameStoredConsumerNode": 1428
+  },
+  "distinctStoredNodeOccurrences": true,
+  "fullCutContinuation": true,
+  "scope": "All 162 native producer occurrences and 101 inventoried uses, plus the 14-use source-only branch. Wire-format controls are not Lean observations. Every continuation selects an original ordered input; no global-use completeness or comprehension claim."
+}

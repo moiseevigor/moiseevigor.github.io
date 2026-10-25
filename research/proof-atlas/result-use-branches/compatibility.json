@@ -1,0 +1,213 @@
+{
+  "format": "ProofAtlasResultUsesCompatibility/1",
+  "status": "PASS",
+  "sourceOverride": false,
+  "suites": [
+    {
+      "name": "result-uses",
+      "checker": "scripts/test-proof-atlas-result-uses-browser.cjs",
+      "exitCode": 0,
+      "report": {
+        "format": "ProofAtlasResultUsesBrowser/1",
+        "status": "PASS",
+        "sourceOverride": false,
+        "nativeEntrySelections": 2,
+        "sourceOnlyEntrySelections": 2,
+        "pageChecks": 2,
+        "keyboardChecks": 1,
+        "axeAudits": 4,
+        "staleRefusals": 1,
+        "corruptionRefusals": 1,
+        "retries": 1,
+        "files": {
+          "public/js/proof-atlas-network-stream-pages.js": "bc90bbe5092146183d42d8e37bc09e7d43d9c4fac169d65eb8f6958bc0bae48f",
+          "public/js/proof-atlas-network-stream-view.js": "8848c2ed193badb9677965c2f9de26c4f5ac4fecea0744d75fcd3e36a6e38b24",
+          "public/js/proof-atlas-result-path-view.js": "39bdf25ac5f28034afb94c6f2f6753d6d3f6233e68a5d093d60f7859a7a3120b",
+          "public/css/proof-atlas-result-path.css": "be39a8368b63b5b5c59145bddc25c4d203b1ac85eeac1b8a8f0bf7f80ced4d68"
+        },
+        "wholeArchiveAttempts": 0
+      }
+    },
+    {
+      "name": "result-path",
+      "checker": "scripts/test-proof-atlas-result-path-browser.cjs",
+      "exitCode": 0,
+      "report": {
+        "format": "ProofAtlasResultPathBrowser/1",
+        "status": "PASS",
+        "profiles": 31,
+        "resultSelections": 36,
+        "sideInputSelections": 17,
+        "groupChecks": 5,
+        "selectionRoundTrips": 1,
+        "budgetContinuations": 1,
+        "branchStops": 1,
+        "sourceOnlyRefusals": 1,
+        "axeAudits": 4,
+        "staleRefusals": 1,
+        "corruptionRefusals": 1,
+        "optionalFailures": 1,
+        "zoomChecks": 2,
+        "keyboardChecks": 1,
+        "files": {
+          "public/js/proof-atlas-result-path.js": "6a6ad5aee2b22d51aa901a3799e0a6a1626155ce5c7f9a3e4bbd520c090faf85",
+          "public/js/proof-atlas-result-path-view.js": "39bdf25ac5f28034afb94c6f2f6753d6d3f6233e68a5d093d60f7859a7a3120b",
+          "public/js/proof-atlas-network-stream-pages.js": "bc90bbe5092146183d42d8e37bc09e7d43d9c4fac169d65eb8f6958bc0bae48f",
+          "public/js/proof-atlas-network-stream-view.js": "8848c2ed193badb9677965c2f9de26c4f5ac4fecea0744d75fcd3e36a6e38b24",
+          "public/css/proof-atlas-result-path.css": "be39a8368b63b5b5c59145bddc25c4d203b1ac85eeac1b8a8f0bf7f80ced4d68"
+        }
+      }
+    },
+    {
+      "name": "network",
+      "checker": "scripts/test-proof-atlas-network-streaming-browser.cjs",
+      "exitCode": 0,
+      "report": {
+        "format": "ProofAtlasNetworkStreamingBrowser/1",
+        "status": "PASS",
+        "nativeProfiles": 31,
+        "nativeCalls": 162,
+        "nativeWires": 101,
+        "nativeTypeSelections": 101,
+        "bindingSelections": 7,
+        "largeCalls": 11,
+        "unavailableTypes": 11,
+        "expansions": 1,
+        "consumerPages": 1,
+        "zoomChecks": 3,
+        "panChecks": 2,
+        "axeAudits": 4,
+        "keyboardChecks": 1,
+        "staleRefusals": 1,
+        "hashRefusals": 1,
+        "releases": 1,
+        "wholeArchiveAttempts": 0,
+        "builtFiles": {
+          "public/js/proof-atlas-network-page-store.js": "8653362782be9b69eaba6c4b67962200685ea00d363c71c373db04b22ff5855a",
+          "public/js/proof-atlas-network-streaming.js": "0c871f8ffd713581717f31a07e99606ec46e4db9f5642706596d0744e84482ba",
+          "public/js/proof-atlas-network-stream-pages.js": "bc90bbe5092146183d42d8e37bc09e7d43d9c4fac169d65eb8f6958bc0bae48f",
+          "public/js/proof-atlas-network-port-inspector.js": "04ddbe608d77c623aad81fb4a79da0654e80390b8e7f057ae9a58fb8367b5d98",
+          "public/js/proof-atlas-network-stream-view.js": "8848c2ed193badb9677965c2f9de26c4f5ac4fecea0744d75fcd3e36a6e38b24",
+          "public/data/proof-atlas/network-streaming-manifest.js": "5768d4f66ce01a092b5e126512998264502bd92b7c15caae8c79a60702e3087b"
+        },
+        "html": {
+          "source": "research/proof-atlas/network-streaming/index.html",
+          "sourceSha256": "c7fba4d178761801c5abd701c3fedcfbedbcb41c314b015f775c6db62f9828f2",
+          "normalizedSha256": "ab1b7ca7f9d29c569c6ba461e109bc73db74c1b1812f11c517e9d826a8168058"
+        },
+        "checkerSha256": "685c6312221b7ae6d3eaf0f62083658c293fe884a9d8836b8b57fcc6b9ad776f"
+      }
+    },
+    {
+      "name": "manual",
+      "checker": "scripts/test-proof-atlas-manual-browser.cjs",
+      "exitCode": 0,
+      "report": {
+        "status": "PASS",
+        "examples": 4,
+        "cutStates": 40,
+        "scopeSelections": 4,
+        "externalBinderJumps": 2,
+        "keyboard": 1,
+        "accessibility": 9,
+        "fieldDiagrams": 12,
+        "links": 41,
+        "compiledNavigation": 1,
+        "failureStates": 1,
+        "scope": "Actual rendered manual and shared constructor gallery: finite examples, exact field presentation, selection, keyboard, external binders, mobile/dark accessibility, links, compiled proof navigation and optional-script failure. No comprehension measurement."
+      }
+    },
+    {
+      "name": "visual-clarity",
+      "checker": "scripts/test-proof-atlas-visual-clarity-browser.cjs",
+      "exitCode": 0,
+      "report": {
+        "format": "ProofAtlasVisualClarityBrowser/1",
+        "status": "PASS",
+        "tasks": [
+          "Original SBracket deep link opens a labeled local cut and statement; absent typing stays unavailable.",
+          "Keyboard child selection and Parent preserve the original lexical route.",
+          "Declaration uses has labeled directions and selecting a local reference opens its declaration.",
+          "A variable link opens its exact lexical binder, independent of shared stored IDs.",
+          "Optional scoped geometry and its exact occurrence list remain available.",
+          "Current 26-module edition uses the same local reader.",
+          "A native Riccati application still opens its checked rule at the same source occurrence.",
+          "Long mobile statements can receive keyboard focus and scroll with arrow keys.",
+          "Article proof-step highlighting survives a child click in the new default reader.",
+          "Manual has five question-based routes and retains all twelve constructor diagrams.",
+          "Bounded occurrence diagram remains separate and renders actual source cards.",
+          "A missing local reader refuses clearly without falling back to a hairball; retry recovers."
+        ],
+        "accessibility": [
+          {
+            "view": "local",
+            "width": 1500,
+            "theme": "light",
+            "violations": 0
+          },
+          {
+            "view": "local",
+            "width": 1500,
+            "theme": "dark",
+            "violations": 0
+          },
+          {
+            "view": "local",
+            "width": 390,
+            "theme": "light",
+            "violations": 0
+          },
+          {
+            "view": "local",
+            "width": 390,
+            "theme": "dark",
+            "violations": 0
+          },
+          {
+            "view": "native-Riccati",
+            "width": 1500,
+            "theme": "light",
+            "violations": 0
+          },
+          {
+            "view": "native-Riccati",
+            "width": 1500,
+            "theme": "dark",
+            "violations": 0
+          },
+          {
+            "view": "native-Riccati",
+            "width": 390,
+            "theme": "light",
+            "violations": 0
+          },
+          {
+            "view": "native-Riccati",
+            "width": 390,
+            "theme": "dark",
+            "violations": 0
+          }
+        ],
+        "screenshots": [
+          "/private/tmp/atlas-result-uses-final/visual-clarity/local-1500-light.png",
+          "/private/tmp/atlas-result-uses-final/visual-clarity/local-1500-dark.png",
+          "/private/tmp/atlas-result-uses-final/visual-clarity/local-390-light.png",
+          "/private/tmp/atlas-result-uses-final/visual-clarity/local-390-dark.png",
+          "/private/tmp/atlas-result-uses-final/visual-clarity/declaration-uses.png",
+          "/private/tmp/atlas-result-uses-final/visual-clarity/scoped-geometry.png",
+          "/private/tmp/atlas-result-uses-final/visual-clarity/riccati-application.png",
+          "/private/tmp/atlas-result-uses-final/visual-clarity/synchronized-article.png",
+          "/private/tmp/atlas-result-uses-final/visual-clarity/view-guide.png",
+          "/private/tmp/atlas-result-uses-final/visual-clarity/occurrence-reader.png"
+        ],
+        "scope": "Reading interactions and presentation checks, not a measured human comprehension result.",
+        "files": {
+          "public/js/proof-atlas-local-reader.js": "f4290858553338a6df4ece8b199f87c0ff1daec51c49b9ce5354aa7ceea1756c",
+          "public/js/proof-atlas-library.js": "f0d9bd80aa3409ad5cb18e3773d520a962e82e1a507e8424e8155f0b2ccc4107",
+          "public/js/proof-atlas-sync.js": "d775ea71b1981568de16e34205cc42ff1c6de6593e50c818c3771298f96f04af",
+          "public/css/proof-atlas-library.css": "3ec3f9022b70e087a2ce80c680a89080be2f10c72643847cf6ea8790040a8424"
+        }
+      }
+    }
+  ]
+}

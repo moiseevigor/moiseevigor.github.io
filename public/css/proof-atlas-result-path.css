@@ -24,3 +24,22 @@
 .rp-path .rp-collar{margin:1.5rem 0;padding:1rem 0 0;border-top:1px solid var(--border)}
 .rp-path-arrow{display:grid;gap:.3rem}.rp-direction{font-size:1.4rem}.rp-direction::after{content:'→'}
 @media(max-width:700px){.rp-direction::after{content:'↓'}.an-lab .rp-path{padding:.75rem}}
+
+.rp-fanout{margin:1.5rem 0;padding:1rem 0;border-top:1px solid var(--border)}
+.rp-consumers{margin:.75rem 0 .75rem .5rem;border-left:2px solid var(--accent);padding-left:1rem;display:grid;gap:1rem}
+.rp-consumer{position:relative;min-width:0;border:1px solid var(--border);padding:.75rem;background:var(--fig-bg)}
+.rp-consumer::before{content:'';position:absolute;left:calc(-1rem - 2px);top:1.5rem;width:1rem;border-top:2px solid var(--accent)}
+.rp-path .rp-consumer h5{margin:0 0 .5rem;font:600 .95rem/1.5 var(--sans,system-ui);overflow-wrap:anywhere}
+.rp-consumer ul{padding-left:1.25rem;margin:.5rem 0}
+.rp-consumer li{margin:.5rem 0}
+.rp-entry{padding:.6rem;border-left:3px solid var(--accent);background:var(--fig-bg)}
+
+/* Article section spacing must not spread the nested proof interface apart. */
+:root .proof-atlas-theme .an-lab .rp-path{margin:0;padding:1rem;border:0}
+:root .proof-atlas-theme .an-lab .rp-path p{font-family:var(--sans,system-ui);line-height:1.5;max-width:none;margin:.4rem 0 .65rem}
+:root .proof-atlas-theme .an-lab .rp-path :is(.rp-fanout,.rp-collar){margin:1rem 0;padding:1rem 0 0;border-top:1px solid var(--border)}
+.rp-endpoints{margin:1rem 0}
+.rp-path .rp-endpoint pre{margin:.4rem 0 0}
+.rp-path .rp-consumer pre{margin:.4rem 0}
+.rp-path .rp-consumer ul{margin:.4rem 0 0}
+@media(max-width:700px){:root .proof-atlas-theme .an-lab .rp-path{padding:.75rem}}

@@ -40,3 +40,7 @@ No new semantic abstraction, Lean theorem, extraction coverage or storage scalin
 - Existing manual, proof-step, application-rule and network suites are rerun as current compatibility checks. Original evidence bundles and native artifacts remain historical; their old hashes of mutable presentation files are not claimed to match this revision.
 
 Current outputs are recorded separately in this directory. Public deployment is not part of this local review.
+
+## Branch navigation follow-up
+
+The folded application path had a further dead end: it stopped at a shared result while hiding the general connection list. Its branch boundary now exposes a bounded, labeled page of consumer input positions. Consumer result summaries supply local reading context; the exact entry use remains inspectable after following it. The [rule and checks](../result-use-branches/README.md) distinguish shared source results from repeated stored nodes. This is a navigation change, not a measured improvement in comprehension.

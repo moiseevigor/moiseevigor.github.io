@@ -1,0 +1,59 @@
+{
+  "format": "ProofAtlasResultPathCheck/1",
+  "status": "PASS",
+  "profiles": 31,
+  "nativeSeeds": 162,
+  "limits": 486,
+  "roundTrips": 688,
+  "sideInputs": 6310,
+  "nativeResultSelections": 162,
+  "largeSeeds": 40,
+  "ends": 509,
+  "branches": 6,
+  "budgets": 173,
+  "negativeControls": 13,
+  "staleRefusals": 2,
+  "peakCalls": 8,
+  "peakDerivedBytes": 72127,
+  "riccati": {
+    "stages": [
+      75,
+      25,
+      26,
+      27
+    ],
+    "counts": {
+      "calls": 4,
+      "actualPorts": 20,
+      "pathUses": 3,
+      "sideInputs": 17,
+      "resultPortals": 4,
+      "roles": {
+        "proof": 9,
+        "type": 6,
+        "value": 2,
+        "unobserved": 0
+      },
+      "inputKinds": {
+        "function": 4,
+        "proof": 5,
+        "type": 6,
+        "value": 2,
+        "unobserved": 0
+      },
+      "visibility": {
+        "default": 5,
+        "implicit": 8,
+        "strictImplicit": 0,
+        "instImplicit": 0,
+        "function": 4,
+        "unobserved": 0
+      }
+    },
+    "firstType": "2 * √(|J.T1 p| * |J.T2 p|) ≤ |J.T1 p| + |J.T2 p|",
+    "lastType": "2 * (J.d p * |J.s p| * √(J.z p * (1 - J.z p) * J.Dz p)) ≤ |J.T1 p| + |J.T2 p|",
+    "roleFilterRemoves": 0
+  },
+  "requests": 5786,
+  "scope": "Finite original native inventory plus bounded paths from the 201,340-call source-only index. Source uses and native observations retain their separate guarantees; no global-use completeness or comprehension result."
+}
