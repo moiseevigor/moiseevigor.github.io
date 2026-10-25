@@ -1,0 +1,61 @@
+{
+  "format": "ProofAtlasImmediateUseVerificationIndex/1",
+  "status": "PASS",
+  "baseCommit": "78ecfbab",
+  "release": "Local research prototype; no push, deployment or new blog post",
+  "records": {
+    "README.md": "665fbdf0bf6b0c5ef0681c1af4ea20b6aa589834d8042a52766fc6d8d82b8486",
+    "plan.json": "2a348eb3b6555ce7b95a537e747cbe72790eed1ac6cd5a52b27e9477f2e3eec9",
+    "audit.json": "f9aaf651f7961b2170cd66f460354d7eee7f05623161e34222c23b41a5ba113a",
+    "native-verification.json": "adb0657605fc74ab083c9242ec1a35b4d15fd11ee659564b9c3ccbb301f542e7",
+    "browser-audit.json": "75a8d7379534a608a64cb3b489981700782d4129e60c4d997696cd68f59fa612",
+    "regressions.json": "67ba1618bd54e685a54fbb040a2ee07e01ddb03c55bf9945680a71962b8387d3"
+  },
+  "sourceFiles": {
+    "public/js/proof-atlas-occurrence-types.js": "b80d43d682d3a4b7f99e284a09a6249e11ca24197e1901158caa723dcf0f6c8f",
+    "public/js/proof-atlas-native-pages.js": "48ae41afe4297b191cf5b576a04e498e287e791ae5074bf0b41a78b7d18df65b",
+    "public/js/proof-atlas-use-inputs.js": "8950046a6a17eab740a75d2768d273c0656bde3e7ec884eb4b1dc8426bd920d8",
+    "public/js/proof-atlas-binding-uses.js": "b27373fad2f156b75240a622399c99485c9fce920c0fa36d3f0d6887f3eaaee6",
+    "public/js/proof-atlas-library.js": "3358569a0d2dd3b84c1d9a00a3b656dd88683ad161ee246c61731f543c30281d",
+    "public/js/proof-atlas-paged-library.js": "7fad10b2524540f9d5dad73043862550a41d97eececce06f6590189621cccd7b",
+    "public/js/proof-atlas-sync.js": "3dc8b3d5db24a3cd3d3f1a03396555cb94e473ee824470f2e3ffebf603846a14",
+    "public/js/proof-atlas-occurrence-view.js": "5d1a97c5b8dae2f4c0c3a037927e3c1f29a6451327f655260fb0ccd6b0c3a7ec",
+    "projects/proof-atlas/library/index.html": "5fdf7fee6f249e7689af4d79180b1d3a94aa3eaa14d936e2df2c6a23badac49e",
+    "projects/proof-atlas/manual/index.html": "a4355ca9de6c937145df6f5b0d3bfed61fd66f26a9496ded860db9c5b9a2a26c",
+    "_includes/proof-atlas-reading-tools.html": "f5d38b7c8cb980409952083f6f416beab2a163ea9e7b9c511be5c7bcf85878c1",
+    "docs/proof-atlas-evidence.md": "578883461fe44ecb6167a7d4c9e4911ea48a4ce0c6c1e8c8288d4cd74e9f59a4",
+    ".github/workflows/proof-atlas-browser.yml": "33550a3e297e204884e8d6db01a4f8f298e8bc4a1ece010834f25da927748172",
+    "scripts/build-proof-atlas-use-site-pages.cjs": "924be531561d44e6980c87058f05b1c6a40f473e603c8392c02411a567c9a15f",
+    "scripts/test-proof-atlas-use-sites.cjs": "7ea4792efd749c82484c5cd22f506f385fcc8f671e08c236295c19da97c326ab",
+    "scripts/test-proof-atlas-use-inputs-browser.cjs": "c382ae1e8c78ff5723795826e8e0429ddf03ad7bfb5b80df8558f020d2afcc1c",
+    "scripts/test-proof-atlas-native-pages.cjs": "ca18caa0c20758e8a2d7ad1e242c7ec0e7afc06ef90e584c4488a33d42f2db0e",
+    "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+    "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+    "research/proof-atlas/use-sites/publish.cjs": "76c1ae4e7c02efb169d5b808a0a8f232e598a273911f4f6b9568b3d99af33410",
+    "public/data/proof-atlas/use-site-types-manifest.js": "3d9de80dc0db6a2cfcfa4658fcc49444db6fd2c1bcc0c4b71a221ab57232ebb9",
+    "public/data/proof-atlas/use-site-query-pages-manifest.js": "da50c5e6f307612b46ffd3ca9dd79596ab0a257f5fa5a41339a96f6af6796c34"
+  },
+  "builtAssetSha256": {
+    "public/js/proof-atlas-occurrence-types.js": "b80d43d682d3a4b7f99e284a09a6249e11ca24197e1901158caa723dcf0f6c8f",
+    "public/js/proof-atlas-native-pages.js": "48ae41afe4297b191cf5b576a04e498e287e791ae5074bf0b41a78b7d18df65b",
+    "public/js/proof-atlas-use-inputs.js": "8950046a6a17eab740a75d2768d273c0656bde3e7ec884eb4b1dc8426bd920d8",
+    "public/js/proof-atlas-binding-uses.js": "b27373fad2f156b75240a622399c99485c9fce920c0fa36d3f0d6887f3eaaee6",
+    "public/js/proof-atlas-library.js": "3358569a0d2dd3b84c1d9a00a3b656dd88683ad161ee246c61731f543c30281d",
+    "public/js/proof-atlas-paged-library.js": "7fad10b2524540f9d5dad73043862550a41d97eececce06f6590189621cccd7b",
+    "public/js/proof-atlas-sync.js": "3dc8b3d5db24a3cd3d3f1a03396555cb94e473ee824470f2e3ffebf603846a14",
+    "public/js/proof-atlas-occurrence-view.js": "5d1a97c5b8dae2f4c0c3a037927e3c1f29a6451327f655260fb0ccd6b0c3a7ec",
+    "public/data/proof-atlas/use-site-types-manifest.js": "3d9de80dc0db6a2cfcfa4658fcc49444db6fd2c1bcc0c4b71a221ab57232ebb9",
+    "public/data/proof-atlas/use-site-query-pages-manifest.js": "da50c5e6f307612b46ffd3ca9dd79596ab0a257f5fa5a41339a96f6af6796c34"
+  },
+  "checks": {
+    "newNativeQueries": 283,
+    "newNativeProfiles": 22,
+    "sampledUses": 469,
+    "directInputs": 327,
+    "insideInputs": 118,
+    "notRecorded": 24,
+    "independentComparisons": 1035,
+    "negativeControls": 113
+  },
+  "scope": "Binding-to-immediate-input evidence; general graph cuts keep their existing query policy. Cache-attributed recovered dependencies are explicitly distinguished from independent Git or rebuild verification. Private original source and raw logs remain unpublished."
+}

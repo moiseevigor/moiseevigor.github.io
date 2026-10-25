@@ -445,7 +445,15 @@ The independent finite audit checks source ordering and original binder identity
 
 A binding wire can continue to a recorded Π-application input. An exact input match carries the existing native argument/function judgment. A use strictly inside an input carries a separate source context; intermediate typing is not inferred. The selected stage remains a curried application stage, with its proof/type/value role and original native evidence namespace.
 
-The finite audit checks 469 selected use occurrences across 35 recorded profiles: 334 have a containing recorded input and 135 have no matching trace in the searched packages. Complete and bounded paged consumers agree. In the Riccati proof, the three uses of `hd : 0 < J.d p` connect to `mul_pos` stage 7 directly, `Or.casesOn` stage 4 through two source fields, and `Eq.mpr` stage 3 through three source fields. These are exact recorded-input relations; the latter two do not identify an unrecorded inner inference or establish premise necessity.
+<span id="immediate-use-inputs"></span>
+
+The fixed sample has 469 selected use occurrences across 35 recorded profiles. Additional native queries at 283 immediate application parents, in two Riccati snapshots and twenty released AI-attributed proofs, increase direct typed input matches from 44 to 327. Another 118 uses retain containing-input matches with explicit source gaps; 24 have no recorded match. Complete and bounded paged consumers agree.
+
+All three uses of the Riccati hypothesis `hd : 0 < J.d p` now meet direct recorded proof inputs: `mul_pos` stage 7, `JacobiData.T1_T2_same_sign` stage 5 and `abs_of_pos` stage 6. The latter two replace enclosing `Or.casesOn` and `Eq.mpr` matches with gaps of two and three source fields. Each stage retains its source route, lexical context, six type components and native conversions. This identifies an immediate typed consumer; it does not establish premise necessity or semantic compression.
+
+Riccati's original compiled graph is matched field for field after privately recompiling three matching source modules. The AI-attributed packets are replayed with their original proof modules absent. Recovered dependency binaries are hash-verified and retain their compiler-cache attribution; their Git checkouts were not independently recovered or rebuilt. The two project snapshots share the matching Riccati module environment. The [earlier audit](/research/proof-atlas/use-inputs/audit.json) remains a frozen baseline.
+
+[Immediate-site protocol](/research/proof-atlas/use-sites/README.md) · [Native verification](/research/proof-atlas/use-sites/native-verification.json) · [Current finite audit](/research/proof-atlas/use-sites/audit.json)
 
 [Protocol and limits](/research/proof-atlas/use-inputs/README.md) · [Independent audit](/research/proof-atlas/use-inputs/audit.json) · [Model](/public/js/proof-atlas-use-inputs.js)
 

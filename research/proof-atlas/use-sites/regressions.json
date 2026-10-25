@@ -1,0 +1,103 @@
+{
+  "status": "PASS",
+  "productionBuild": {
+    "status": "PASS",
+    "method": "docker compose production build",
+    "destination": "_site_production"
+  },
+  "checks": [
+    {
+      "script": "scripts/test-proof-atlas-use-sites.cjs",
+      "status": "PASS",
+      "comparisons": 1035,
+      "negativeControls": 113,
+      "profiles": 35,
+      "newNativeProfiles": 22,
+      "newNativeQueries": 283
+    },
+    {
+      "script": "scripts/build-proof-atlas-use-site-pages.cjs --check",
+      "status": "PASS",
+      "profiles": 22,
+      "queries": 283,
+      "indexedObservations": 2463
+    },
+    {
+      "script": "scripts/test-proof-atlas-use-navigation.cjs",
+      "status": "PASS",
+      "mode": "frozen baseline report comparison",
+      "selectedBinders": 317,
+      "rankAndBindingChecks": 4413
+    },
+    {
+      "script": "scripts/test-proof-atlas-use-inputs.cjs",
+      "status": "PASS",
+      "mode": "frozen baseline report comparison",
+      "comparisons": 939,
+      "negativeControls": 48
+    },
+    {
+      "script": "scripts/test-proof-atlas-native-pages.cjs",
+      "status": "PASS",
+      "mode": "initial cuts plus all original lookup comparisons",
+      "profiles": 35,
+      "positiveGets": 3239,
+      "positiveQueries": 1195,
+      "observations": 5863,
+      "cutComparisons": 630
+    },
+    {
+      "script": "scripts/test-proof-atlas-native-page-controls.cjs",
+      "status": "PASS",
+      "negativeControls": 38
+    },
+    {
+      "script": "scripts/test-proof-atlas-application-judgments.cjs",
+      "status": "PASS",
+      "existingApplicationTraces": 399,
+      "existingStages": 2784,
+      "negativeControls": 80
+    },
+    {
+      "script": "scripts/test-proof-atlas-native-context-publication.cjs",
+      "status": "PASS",
+      "scope": "Compiled-input projection/refusal controls for the earlier producer; does not describe this iteration as importing no private modules.",
+      "refusals": 26
+    },
+    {
+      "script": "scripts/test-proof-atlas-use-inputs-browser.cjs",
+      "status": "PASS",
+      "completeAndPaged": true,
+      "articleIntegration": true,
+      "accessibilityAudits": 8,
+      "exactKeyboardSourceJumps": 2
+    },
+    {
+      "script": "scripts/test-proof-atlas-use-navigation-browser.cjs",
+      "status": "PASS",
+      "accessibilityAudits": 8,
+      "allDirections": true,
+      "articleIntegration": true
+    },
+    {
+      "script": "scripts/test-proof-atlas-native-pages-browser.cjs",
+      "status": "PASS",
+      "scope": "Original scene/reference agreement, stale loads, damaged queries and explicit recovery."
+    },
+    {
+      "script": "scripts/test-proof-atlas-source-pages-browser.cjs",
+      "status": "PASS",
+      "accessibilityAudits": 4,
+      "scope": "Original graph query policy and source/reference agreement; extra typing remains in the binding inspector."
+    },
+    {
+      "script": "scripts/test-proof-atlas-scientific-theme-browser.cjs",
+      "status": "PASS",
+      "responsiveStates": 34,
+      "accessibilityAudits": 20,
+      "renderedMathFigures": 9,
+      "preservedAnchors": 75
+    }
+  ],
+  "scope": "Finite native/source correspondence and software behavior. Not all-use coverage, a portable kernel certificate, semantic necessity or measured comprehension."
+}

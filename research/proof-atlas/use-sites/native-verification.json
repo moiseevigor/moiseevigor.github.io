@@ -1,0 +1,1380 @@
+{
+  "status": "PASS",
+  "planSha256": "2a348eb3b6555ce7b95a537e747cbe72790eed1ac6cd5a52b27e9477f2e3eec9",
+  "previousAuditSha256": "375c38f736bda8984ed9582b4c6797b55a122a40db026de182e1f3c9a21ed371",
+  "profiles": 22,
+  "queries": 283,
+  "checks": [
+    {
+      "source": {
+        "edition": "published-15",
+        "name": "JacobiData.slope_bound_abs",
+        "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+        "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7"
+      },
+      "mode": "riccati",
+      "queries": 29,
+      "checked": 29,
+      "applicationTraces": 29,
+      "nativeOutputSha256": "00a1b60e7de47ddc31595bc69118a4df2448003180d7e4422a005b0ab2ef87e7",
+      "queryInventorySha256": "aee164d0a3ae4c20b1dcdb384f38335778b38597b673c2c8d0709b3783af2d1d",
+      "runtimeSha256": "47f13b5e74ce0052cc92957bf3160e71c61169cd72e5e184a1d3279d946d769a",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102"
+      },
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      },
+      "sourceModules": {
+        "SE2Conjugate.Jacobi": {
+          "sourceSha256": "30a398ea15a163df4b8520be9bcc9755cfd1f2271f18172b559c6a617c41d1af",
+          "compiledModuleSha256": "17e153288fc83998623e8cd35f7b4c7d79911408e97fd4734f1002057b10934a"
+        },
+        "SE2Conjugate.Identities": {
+          "sourceSha256": "e2660b362273952060cf9cb4081d3e2b61f70eac5b99e02c860f63806bf23788",
+          "compiledModuleSha256": "05698e16f303f7eb126cf9e0844fe0edb44d98e4014f6c820bdc97d3fe10452c"
+        },
+        "SE2Conjugate.Riccati": {
+          "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+          "compiledModuleSha256": "5d43e49880bc35c48d6e6ea7d0378e2042a6d46b8820a4f98d162d87111290da"
+        }
+      }
+    },
+    {
+      "source": {
+        "edition": "working-26",
+        "name": "JacobiData.slope_bound_abs",
+        "indexSha256": "a786a311ffd35d388b79b4af11a5d733dde834f8e0fe7967b74ad07d4dea15e4",
+        "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7"
+      },
+      "mode": "riccati",
+      "queries": 20,
+      "checked": 20,
+      "applicationTraces": 20,
+      "nativeOutputSha256": "0b71c9997176564da739e4bfb34919bb13dfed18a4c69f2e72363b4085ccd598",
+      "queryInventorySha256": "d7050fe24f10dcb721e663576f2674f4c08b4e814ba5c1a652ab90b8b0ceb02e",
+      "runtimeSha256": "47f13b5e74ce0052cc92957bf3160e71c61169cd72e5e184a1d3279d946d769a",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102"
+      },
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      },
+      "sourceModules": {
+        "SE2Conjugate.Jacobi": {
+          "sourceSha256": "30a398ea15a163df4b8520be9bcc9755cfd1f2271f18172b559c6a617c41d1af",
+          "compiledModuleSha256": "17e153288fc83998623e8cd35f7b4c7d79911408e97fd4734f1002057b10934a"
+        },
+        "SE2Conjugate.Identities": {
+          "sourceSha256": "e2660b362273952060cf9cb4081d3e2b61f70eac5b99e02c860f63806bf23788",
+          "compiledModuleSha256": "05698e16f303f7eb126cf9e0844fe0edb44d98e4014f6c820bdc97d3fe10452c"
+        },
+        "SE2Conjugate.Riccati": {
+          "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+          "compiledModuleSha256": "5d43e49880bc35c48d6e6ea7d0378e2042a6d46b8820a4f98d162d87111290da"
+        }
+      }
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_20418",
+        "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+        "sourceSha256": "44d7d19cff28d5b75dc33d21733bf14cb764e765f493ca46cf2a66345b8a3d07"
+      },
+      "mode": "ai",
+      "queries": 22,
+      "checked": 22,
+      "applicationTraces": 22,
+      "nativeOutputSha256": "1294b179c086b29f3eefbd171bb0c68b0c53b50d4abe8bba93a122262149890b",
+      "queryInventorySha256": "0c67270d2577bd6b8ce3d309037e6d1642fde19c6db4a4174a73a7e06ec05824",
+      "runtimeSha256": "9fc72cb623335daf13904d3d22eb494da61a49cc3211693783ab6dda0017e565",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+        "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+        "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+        "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+        "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+      },
+      "baselineProof": {
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "illTypedBinderRejectedByKernel": true,
+        "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+        "kernelExpectedType": "PASS",
+        "kernelExpectedTypeConversion": "PASS",
+        "kernelExpectedTypeIsProposition": "PASS",
+        "kernelProof": "PASS",
+        "knownBaselineConstantNodes": 288,
+        "name": "lean_workbook_20418",
+        "originalModuleAbsentFromEnvironment": true,
+        "originalTheoremAbsentFromEnvironment": true,
+        "roundtripFields": [
+          "kind",
+          "children",
+          "payloads",
+          "expanded",
+          "neededScope",
+          "roots"
+        ],
+        "storedNodes": 86587,
+        "wrongProofRejectedByKernel": true
+      },
+      "baselineProofSha256": "3f09fe95bb22031d3719253bdcfe4a5858da121bc188220c0bbd0438ff3c78f4",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      }
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_3485",
+        "indexSha256": "bd496000a8da7ce06393d1cdd66b86c1a76aa6004c6eca19c36e083a3082948c",
+        "sourceSha256": "ace2b6ea44489642395660c0e4dff53ee2c2d870ebc437b25e38c9b6cb929f93"
+      },
+      "mode": "ai",
+      "queries": 10,
+      "checked": 10,
+      "applicationTraces": 10,
+      "nativeOutputSha256": "6e075a5701074bda16887a8dbd85bf0430e5468fcfe80edfffd951bc3d77e52e",
+      "queryInventorySha256": "b5c020cfe625d10bfe232bdcfdab613852bc792acc3e939cf092925f9979fcfe",
+      "runtimeSha256": "9fc72cb623335daf13904d3d22eb494da61a49cc3211693783ab6dda0017e565",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+        "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+        "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+        "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+        "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+      },
+      "baselineProof": {
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "illTypedBinderRejectedByKernel": true,
+        "indexSha256": "bd496000a8da7ce06393d1cdd66b86c1a76aa6004c6eca19c36e083a3082948c",
+        "kernelExpectedType": "PASS",
+        "kernelExpectedTypeConversion": "PASS",
+        "kernelExpectedTypeIsProposition": "PASS",
+        "kernelProof": "PASS",
+        "knownBaselineConstantNodes": 209,
+        "name": "lean_workbook_3485",
+        "originalModuleAbsentFromEnvironment": true,
+        "originalTheoremAbsentFromEnvironment": true,
+        "roundtripFields": [
+          "kind",
+          "children",
+          "payloads",
+          "expanded",
+          "neededScope",
+          "roots"
+        ],
+        "storedNodes": 2677,
+        "wrongProofRejectedByKernel": true
+      },
+      "baselineProofSha256": "1c97c7f09a2d97dcd1b4df831c6696cd8a4403eb976ff4a104bbf19c54b22722",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      }
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_4274",
+        "indexSha256": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+        "sourceSha256": "761ccc0ee9e693f87eabfca7b94449ec8ebe1c5293ddd528bed8eade57ca74a4"
+      },
+      "mode": "ai",
+      "queries": 10,
+      "checked": 10,
+      "applicationTraces": 10,
+      "nativeOutputSha256": "b38d1864cf71ded241108382727cb7a764321c00b7c7412d977e558067dcb38a",
+      "queryInventorySha256": "7896417c65dcd4cee28388176eb0d8e8f221fdcdbd27f0d4f11d36ee41ba0095",
+      "runtimeSha256": "9fc72cb623335daf13904d3d22eb494da61a49cc3211693783ab6dda0017e565",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+        "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+        "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+        "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+        "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+      },
+      "baselineProof": {
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "illTypedBinderRejectedByKernel": true,
+        "indexSha256": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+        "kernelExpectedType": "PASS",
+        "kernelExpectedTypeConversion": "PASS",
+        "kernelExpectedTypeIsProposition": "PASS",
+        "kernelProof": "PASS",
+        "knownBaselineConstantNodes": 176,
+        "name": "lean_workbook_4274",
+        "originalModuleAbsentFromEnvironment": true,
+        "originalTheoremAbsentFromEnvironment": true,
+        "roundtripFields": [
+          "kind",
+          "children",
+          "payloads",
+          "expanded",
+          "neededScope",
+          "roots"
+        ],
+        "storedNodes": 1451,
+        "wrongProofRejectedByKernel": true
+      },
+      "baselineProofSha256": "1cb95ca854547a09b5f489517b107653f9a4f95a2f35b2844e0ab0fa42c7f22a",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      }
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_49456",
+        "indexSha256": "66459f55804e8ae09fc9a8615191fba8f5277f1fb0831c1bb132e1bc60552b38",
+        "sourceSha256": "feb8f7b2ab730b0efdee245bd28e648ffb3ca004c15f1deeb6b0754f8a478434"
+      },
+      "mode": "ai",
+      "queries": 5,
+      "checked": 5,
+      "applicationTraces": 5,
+      "nativeOutputSha256": "1d11d2afb1292ae54ac24709798c1dfa819847935e4f579aa0693f13639ed121",
+      "queryInventorySha256": "51ed295ced0be887fcce242919c8e49cb3187266c2392015c99b3039164cdb4f",
+      "runtimeSha256": "9fc72cb623335daf13904d3d22eb494da61a49cc3211693783ab6dda0017e565",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+        "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+        "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+        "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+        "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+      },
+      "baselineProof": {
+        "axioms": [
+          "propext",
+          "Quot.sound"
+        ],
+        "illTypedBinderRejectedByKernel": true,
+        "indexSha256": "66459f55804e8ae09fc9a8615191fba8f5277f1fb0831c1bb132e1bc60552b38",
+        "kernelExpectedType": "PASS",
+        "kernelExpectedTypeConversion": "PASS",
+        "kernelExpectedTypeIsProposition": "PASS",
+        "kernelProof": "PASS",
+        "knownBaselineConstantNodes": 10,
+        "name": "lean_workbook_49456",
+        "originalModuleAbsentFromEnvironment": true,
+        "originalTheoremAbsentFromEnvironment": true,
+        "roundtripFields": [
+          "kind",
+          "children",
+          "payloads",
+          "expanded",
+          "neededScope",
+          "roots"
+        ],
+        "storedNodes": 42,
+        "wrongProofRejectedByKernel": true
+      },
+      "baselineProofSha256": "5ea565da8e1d877a8b2938c54a31374f61a0d8f7839358fc13dd1ca72c3c75fe",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      }
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_56144",
+        "indexSha256": "60ff188d4edd927f72c0393d678f5a9cfb80d344d3ec459aec958443f07dc256",
+        "sourceSha256": "88f54d38e9c49131cb291df6527bc9e47ed5fb946c46ee0901c938b18297c55c"
+      },
+      "mode": "ai",
+      "queries": 8,
+      "checked": 8,
+      "applicationTraces": 8,
+      "nativeOutputSha256": "f9641c034bd88bca3436b6ef6cae2f013d79be39f849d483ca1b070f6f9160c9",
+      "queryInventorySha256": "8257aa061aff9f955da2cd46038a4c273a5c81dcf78a7dc8faf46e1e0a68b777",
+      "runtimeSha256": "9fc72cb623335daf13904d3d22eb494da61a49cc3211693783ab6dda0017e565",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+        "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+        "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+        "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+        "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+      },
+      "baselineProof": {
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "illTypedBinderRejectedByKernel": true,
+        "indexSha256": "60ff188d4edd927f72c0393d678f5a9cfb80d344d3ec459aec958443f07dc256",
+        "kernelExpectedType": "PASS",
+        "kernelExpectedTypeConversion": "PASS",
+        "kernelExpectedTypeIsProposition": "PASS",
+        "kernelProof": "PASS",
+        "knownBaselineConstantNodes": 184,
+        "name": "lean_workbook_56144",
+        "originalModuleAbsentFromEnvironment": true,
+        "originalTheoremAbsentFromEnvironment": true,
+        "roundtripFields": [
+          "kind",
+          "children",
+          "payloads",
+          "expanded",
+          "neededScope",
+          "roots"
+        ],
+        "storedNodes": 8236,
+        "wrongProofRejectedByKernel": true
+      },
+      "baselineProofSha256": "ce1c05838f2594ad8d9d60be648e81399eb28ea33cc364d7381032865bd2a2a2",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      }
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_plus_15068",
+        "indexSha256": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+        "sourceSha256": "c8a09c1ece2d7fc13d9ef4d0979c71870e9e97202f8bed0df415a5c52788c2b5"
+      },
+      "mode": "ai",
+      "queries": 14,
+      "checked": 14,
+      "applicationTraces": 14,
+      "nativeOutputSha256": "fa685a6a8aa189d0da4fb17cc32737d99a46d92d6e77fa17616a72a9c0fba2c8",
+      "queryInventorySha256": "0ae5c7b01f26a9e36ad86ccf98514ea72d51814ae2d276b8d5951003f77ab185",
+      "runtimeSha256": "9fc72cb623335daf13904d3d22eb494da61a49cc3211693783ab6dda0017e565",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+        "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+        "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+        "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+        "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+      },
+      "baselineProof": {
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "illTypedBinderRejectedByKernel": true,
+        "indexSha256": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+        "kernelExpectedType": "PASS",
+        "kernelExpectedTypeConversion": "PASS",
+        "kernelExpectedTypeIsProposition": "PASS",
+        "kernelProof": "PASS",
+        "knownBaselineConstantNodes": 271,
+        "name": "lean_workbook_plus_15068",
+        "originalModuleAbsentFromEnvironment": true,
+        "originalTheoremAbsentFromEnvironment": true,
+        "roundtripFields": [
+          "kind",
+          "children",
+          "payloads",
+          "expanded",
+          "neededScope",
+          "roots"
+        ],
+        "storedNodes": 18255,
+        "wrongProofRejectedByKernel": true
+      },
+      "baselineProofSha256": "39cd0a5f71b2896d91c8ed371d46f3037b97bbc6296886dbfeba8edefd7f360d",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      }
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_plus_16912",
+        "indexSha256": "6c061155ccb98286c7608ad3bfbd316714aea3a1b33817720b3c4b2846c39510",
+        "sourceSha256": "a88efcf7a6eb35f44a480e3b787ef5bb7b2a47d877b72b181acb737e831828a2"
+      },
+      "mode": "ai",
+      "queries": 16,
+      "checked": 16,
+      "applicationTraces": 16,
+      "nativeOutputSha256": "425eac0dfba5c32fdc36ff27a76a10011279be28dafb6c1b4494903b40143733",
+      "queryInventorySha256": "ba13888c0a60eca7fd99673fa563086666a36e9b918f20c50e0379444a93cc02",
+      "runtimeSha256": "9fc72cb623335daf13904d3d22eb494da61a49cc3211693783ab6dda0017e565",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+        "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+        "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+        "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+        "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+      },
+      "baselineProof": {
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "illTypedBinderRejectedByKernel": true,
+        "indexSha256": "6c061155ccb98286c7608ad3bfbd316714aea3a1b33817720b3c4b2846c39510",
+        "kernelExpectedType": "PASS",
+        "kernelExpectedTypeConversion": "PASS",
+        "kernelExpectedTypeIsProposition": "PASS",
+        "kernelProof": "PASS",
+        "knownBaselineConstantNodes": 197,
+        "name": "lean_workbook_plus_16912",
+        "originalModuleAbsentFromEnvironment": true,
+        "originalTheoremAbsentFromEnvironment": true,
+        "roundtripFields": [
+          "kind",
+          "children",
+          "payloads",
+          "expanded",
+          "neededScope",
+          "roots"
+        ],
+        "storedNodes": 14878,
+        "wrongProofRejectedByKernel": true
+      },
+      "baselineProofSha256": "d7d3154f0ad9767cbbee80855a098fb56c7f77bb61d77388c43bba1dd645cdd3",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      }
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_plus_19617",
+        "indexSha256": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+        "sourceSha256": "0c75bdffb8429241e73c9e4f375bd15130b2c5a19855281071b9706b89478578"
+      },
+      "mode": "ai",
+      "queries": 8,
+      "checked": 8,
+      "applicationTraces": 8,
+      "nativeOutputSha256": "4b6555c83dc8ddc6952e510947a15caaa86a62b4879120ea46106a47cc98d950",
+      "queryInventorySha256": "35d793f295b8e1110526a67727162f73de3f4e5c6dbc1f923ec6502ec2680027",
+      "runtimeSha256": "9fc72cb623335daf13904d3d22eb494da61a49cc3211693783ab6dda0017e565",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+        "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+        "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+        "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+        "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+      },
+      "baselineProof": {
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "illTypedBinderRejectedByKernel": true,
+        "indexSha256": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+        "kernelExpectedType": "PASS",
+        "kernelExpectedTypeConversion": "PASS",
+        "kernelExpectedTypeIsProposition": "PASS",
+        "kernelProof": "PASS",
+        "knownBaselineConstantNodes": 76,
+        "name": "lean_workbook_plus_19617",
+        "originalModuleAbsentFromEnvironment": true,
+        "originalTheoremAbsentFromEnvironment": true,
+        "roundtripFields": [
+          "kind",
+          "children",
+          "payloads",
+          "expanded",
+          "neededScope",
+          "roots"
+        ],
+        "storedNodes": 563,
+        "wrongProofRejectedByKernel": true
+      },
+      "baselineProofSha256": "def2f5011dc22d8be7f258709dc04173c8807a23df27ebc6042a1bc192e9b6a1",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      }
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_plus_39831",
+        "indexSha256": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+        "sourceSha256": "ceca77661c386d820b66fac94e6e1e4ebbb18d894f0b6a79c37f6cd2f425c9cf"
+      },
+      "mode": "ai",
+      "queries": 12,
+      "checked": 12,
+      "applicationTraces": 12,
+      "nativeOutputSha256": "88eaaadc3cc6e3eb4f09bf2ae1fd0d6144156b56100db2402ba55a01843de923",
+      "queryInventorySha256": "5a3d262ef91b21e924570e0bec849b21f6d7b2d947878275e2dc146d29aa3fae",
+      "runtimeSha256": "9fc72cb623335daf13904d3d22eb494da61a49cc3211693783ab6dda0017e565",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+        "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+        "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+        "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+        "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+      },
+      "baselineProof": {
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "illTypedBinderRejectedByKernel": true,
+        "indexSha256": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+        "kernelExpectedType": "PASS",
+        "kernelExpectedTypeConversion": "PASS",
+        "kernelExpectedTypeIsProposition": "PASS",
+        "kernelProof": "PASS",
+        "knownBaselineConstantNodes": 189,
+        "name": "lean_workbook_plus_39831",
+        "originalModuleAbsentFromEnvironment": true,
+        "originalTheoremAbsentFromEnvironment": true,
+        "roundtripFields": [
+          "kind",
+          "children",
+          "payloads",
+          "expanded",
+          "neededScope",
+          "roots"
+        ],
+        "storedNodes": 3847,
+        "wrongProofRejectedByKernel": true
+      },
+      "baselineProofSha256": "1a1665dbcbda250c88eaab2e1dead448acc411081cf2bf595cc84ab5e206cfa1",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      }
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_plus_43987",
+        "indexSha256": "159699ca3f1d90ccd733d2a5fe4c0541ae4c785b8cb942333058b16653cef385",
+        "sourceSha256": "182370b92c287cb5f51d7e5f0caeb77eb22d79fd67dbff75acbbbb371d4552b8"
+      },
+      "mode": "ai",
+      "queries": 9,
+      "checked": 9,
+      "applicationTraces": 9,
+      "nativeOutputSha256": "cbbf406492f989fd82120fd5cedd018c26ca2b845e081fe56f5d7d6a22ee8492",
+      "queryInventorySha256": "62d959be22f999111918fdad66e661ef7c3b93d155c79d96d0d6d5e2ea5c0ed5",
+      "runtimeSha256": "9fc72cb623335daf13904d3d22eb494da61a49cc3211693783ab6dda0017e565",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+        "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+        "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+        "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+        "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+      },
+      "baselineProof": {
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "illTypedBinderRejectedByKernel": true,
+        "indexSha256": "159699ca3f1d90ccd733d2a5fe4c0541ae4c785b8cb942333058b16653cef385",
+        "kernelExpectedType": "PASS",
+        "kernelExpectedTypeConversion": "PASS",
+        "kernelExpectedTypeIsProposition": "PASS",
+        "kernelProof": "PASS",
+        "knownBaselineConstantNodes": 38,
+        "name": "lean_workbook_plus_43987",
+        "originalModuleAbsentFromEnvironment": true,
+        "originalTheoremAbsentFromEnvironment": true,
+        "roundtripFields": [
+          "kind",
+          "children",
+          "payloads",
+          "expanded",
+          "neededScope",
+          "roots"
+        ],
+        "storedNodes": 204,
+        "wrongProofRejectedByKernel": true
+      },
+      "baselineProofSha256": "3a3cc0f7b3606fe0ab7c37a79201ad6d5b68cf32818e8bc71cba922b886be9b9",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      }
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_plus_54159",
+        "indexSha256": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+        "sourceSha256": "6e775cf687f0ff3c190bb091692f5a795294f4ae6bc17173df1744ba26042859"
+      },
+      "mode": "ai",
+      "queries": 17,
+      "checked": 17,
+      "applicationTraces": 17,
+      "nativeOutputSha256": "2e3b1a65f53d6f8284b36c81105352cdcb9c6463a6c32dd1954e1a659068fb0b",
+      "queryInventorySha256": "53a4e4a908173f1358b06a6d256591075754b9cfe819855d1c01883b2b1a2980",
+      "runtimeSha256": "9fc72cb623335daf13904d3d22eb494da61a49cc3211693783ab6dda0017e565",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+        "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+        "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+        "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+        "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+      },
+      "baselineProof": {
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "illTypedBinderRejectedByKernel": true,
+        "indexSha256": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+        "kernelExpectedType": "PASS",
+        "kernelExpectedTypeConversion": "PASS",
+        "kernelExpectedTypeIsProposition": "PASS",
+        "kernelProof": "PASS",
+        "knownBaselineConstantNodes": 234,
+        "name": "lean_workbook_plus_54159",
+        "originalModuleAbsentFromEnvironment": true,
+        "originalTheoremAbsentFromEnvironment": true,
+        "roundtripFields": [
+          "kind",
+          "children",
+          "payloads",
+          "expanded",
+          "neededScope",
+          "roots"
+        ],
+        "storedNodes": 6479,
+        "wrongProofRejectedByKernel": true
+      },
+      "baselineProofSha256": "d08f7752c457f0c10902e381cf9c1ed420936a527e3fdc2cf52789a8a6cc94b9",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      }
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_plus_54622",
+        "indexSha256": "0b128b2e4d02870a974f0f00684ea058eded20eed8f15f32e84872e4bca50d73",
+        "sourceSha256": "7af1d5d69178702a11b13d77dad54ca31956e713a16ec2047a0899281db245ec"
+      },
+      "mode": "ai",
+      "queries": 16,
+      "checked": 16,
+      "applicationTraces": 16,
+      "nativeOutputSha256": "c5a4aa13ce6f4d3347ee74629ee5c42b2e7e3e95de347ee702ee3c2518913ebb",
+      "queryInventorySha256": "37a06291897d3fbc686162e80ef5165a65d762831c49ad63b761aaa7dcc4d6db",
+      "runtimeSha256": "9fc72cb623335daf13904d3d22eb494da61a49cc3211693783ab6dda0017e565",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+        "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+        "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+        "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+        "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+      },
+      "baselineProof": {
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "illTypedBinderRejectedByKernel": true,
+        "indexSha256": "0b128b2e4d02870a974f0f00684ea058eded20eed8f15f32e84872e4bca50d73",
+        "kernelExpectedType": "PASS",
+        "kernelExpectedTypeConversion": "PASS",
+        "kernelExpectedTypeIsProposition": "PASS",
+        "kernelProof": "PASS",
+        "knownBaselineConstantNodes": 195,
+        "name": "lean_workbook_plus_54622",
+        "originalModuleAbsentFromEnvironment": true,
+        "originalTheoremAbsentFromEnvironment": true,
+        "roundtripFields": [
+          "kind",
+          "children",
+          "payloads",
+          "expanded",
+          "neededScope",
+          "roots"
+        ],
+        "storedNodes": 9838,
+        "wrongProofRejectedByKernel": true
+      },
+      "baselineProofSha256": "cb68bc822737773be737304e5f1a75b430ac127e8414ba806d28eaedf2480382",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      }
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_plus_61403",
+        "indexSha256": "a52afaeee83e9f155855d77dc8f906f03abf8da6038abde95c7dc6e104568459",
+        "sourceSha256": "a12e28fcab85c77a9d2d398c937206a56f55c9666ca90ccb446bb0415be80371"
+      },
+      "mode": "ai",
+      "queries": 4,
+      "checked": 4,
+      "applicationTraces": 4,
+      "nativeOutputSha256": "32af9151f739560194b8602cb2a47bfe72f99d1986c7c1434fd50e321a9a5942",
+      "queryInventorySha256": "191b74de1a10c2346ad9a7d1414e294627c3deff6375ac7c0779bc6002feba33",
+      "runtimeSha256": "9fc72cb623335daf13904d3d22eb494da61a49cc3211693783ab6dda0017e565",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+        "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+        "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+        "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+        "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+      },
+      "baselineProof": {
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "illTypedBinderRejectedByKernel": true,
+        "indexSha256": "a52afaeee83e9f155855d77dc8f906f03abf8da6038abde95c7dc6e104568459",
+        "kernelExpectedType": "PASS",
+        "kernelExpectedTypeConversion": "PASS",
+        "kernelExpectedTypeIsProposition": "PASS",
+        "kernelProof": "PASS",
+        "knownBaselineConstantNodes": 140,
+        "name": "lean_workbook_plus_61403",
+        "originalModuleAbsentFromEnvironment": true,
+        "originalTheoremAbsentFromEnvironment": true,
+        "roundtripFields": [
+          "kind",
+          "children",
+          "payloads",
+          "expanded",
+          "neededScope",
+          "roots"
+        ],
+        "storedNodes": 2089,
+        "wrongProofRejectedByKernel": true
+      },
+      "baselineProofSha256": "e5e5ef4f3ed0f66ae433f5bfc523a85e046b30f682f439488f344c81bb3f23a8",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      }
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_plus_6206",
+        "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+        "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5"
+      },
+      "mode": "ai",
+      "queries": 24,
+      "checked": 24,
+      "applicationTraces": 24,
+      "nativeOutputSha256": "82f279a4bfa4e269dc3d23dd69881a38c2514fd521f0e9eae3a91c493147bb7e",
+      "queryInventorySha256": "8af489e40b18427685c6c9b994e4c6abe9d8264afb5d68bf783634ecb6020c7b",
+      "runtimeSha256": "9fc72cb623335daf13904d3d22eb494da61a49cc3211693783ab6dda0017e565",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+        "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+        "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+        "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+        "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+      },
+      "baselineProof": {
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "illTypedBinderRejectedByKernel": true,
+        "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+        "kernelExpectedType": "PASS",
+        "kernelExpectedTypeConversion": "PASS",
+        "kernelExpectedTypeIsProposition": "PASS",
+        "kernelProof": "PASS",
+        "knownBaselineConstantNodes": 286,
+        "name": "lean_workbook_plus_6206",
+        "originalModuleAbsentFromEnvironment": true,
+        "originalTheoremAbsentFromEnvironment": true,
+        "roundtripFields": [
+          "kind",
+          "children",
+          "payloads",
+          "expanded",
+          "neededScope",
+          "roots"
+        ],
+        "storedNodes": 91424,
+        "wrongProofRejectedByKernel": true
+      },
+      "baselineProofSha256": "220ba3a9df4cb204fcf1b850581236f71724833f5cfef43ced4517e8006115ec",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      }
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_plus_62755",
+        "indexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+        "sourceSha256": "7e270522ac93030b71efabbf6d3ffd84407805aa1cee8348a6fd427c86aa423c"
+      },
+      "mode": "ai",
+      "queries": 12,
+      "checked": 12,
+      "applicationTraces": 12,
+      "nativeOutputSha256": "9fdee65d9694c790c9f7189f4ab7e872b8164eb024596bb45a2993bbd9359e56",
+      "queryInventorySha256": "16068b0939a36d5da896b71960bdfb44aca426366d35b2f8e4f63bccdb821ed5",
+      "runtimeSha256": "9fc72cb623335daf13904d3d22eb494da61a49cc3211693783ab6dda0017e565",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+        "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+        "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+        "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+        "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+      },
+      "baselineProof": {
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "illTypedBinderRejectedByKernel": true,
+        "indexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+        "kernelExpectedType": "PASS",
+        "kernelExpectedTypeConversion": "PASS",
+        "kernelExpectedTypeIsProposition": "PASS",
+        "kernelProof": "PASS",
+        "knownBaselineConstantNodes": 161,
+        "name": "lean_workbook_plus_62755",
+        "originalModuleAbsentFromEnvironment": true,
+        "originalTheoremAbsentFromEnvironment": true,
+        "roundtripFields": [
+          "kind",
+          "children",
+          "payloads",
+          "expanded",
+          "neededScope",
+          "roots"
+        ],
+        "storedNodes": 2159,
+        "wrongProofRejectedByKernel": true
+      },
+      "baselineProofSha256": "b2032dfa41b6344916250ad08ca741859c33c5e8179fe9a902c6317f039eddfa",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      }
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_plus_63081",
+        "indexSha256": "e8a13f9af176053ae5b0220fc5a1526de1e937ca2e8972035dcc70ee1da74217",
+        "sourceSha256": "8edd950efcaed46473a9cfeb1000b7b4bac0782c105ab3054360e50515846287"
+      },
+      "mode": "ai",
+      "queries": 8,
+      "checked": 8,
+      "applicationTraces": 8,
+      "nativeOutputSha256": "e9b4e8fe939c91f738404ae2fc9436642931562435d0163991d03b0e04466428",
+      "queryInventorySha256": "094579d95c705aed49e8b40af574887bc267ac4b381ceb3d255d0dbf8a2f9d69",
+      "runtimeSha256": "9fc72cb623335daf13904d3d22eb494da61a49cc3211693783ab6dda0017e565",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+        "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+        "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+        "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+        "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+      },
+      "baselineProof": {
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "illTypedBinderRejectedByKernel": true,
+        "indexSha256": "e8a13f9af176053ae5b0220fc5a1526de1e937ca2e8972035dcc70ee1da74217",
+        "kernelExpectedType": "PASS",
+        "kernelExpectedTypeConversion": "PASS",
+        "kernelExpectedTypeIsProposition": "PASS",
+        "kernelProof": "PASS",
+        "knownBaselineConstantNodes": 181,
+        "name": "lean_workbook_plus_63081",
+        "originalModuleAbsentFromEnvironment": true,
+        "originalTheoremAbsentFromEnvironment": true,
+        "roundtripFields": [
+          "kind",
+          "children",
+          "payloads",
+          "expanded",
+          "neededScope",
+          "roots"
+        ],
+        "storedNodes": 5234,
+        "wrongProofRejectedByKernel": true
+      },
+      "baselineProofSha256": "8d74c2a5f300e209ec6b19c1bb8185cce4dba4940339804bce4e8eb128c26725",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      }
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_plus_68077",
+        "indexSha256": "501dba70283e270631eba54e85d5f16c3ca44cfaba068ea4f39a45b550997e62",
+        "sourceSha256": "bc81bd2c7804c444b05280db621904637eb34d360fc5952bcb10850e82f38a62"
+      },
+      "mode": "ai",
+      "queries": 16,
+      "checked": 16,
+      "applicationTraces": 16,
+      "nativeOutputSha256": "f35d84f070555f001a4013dc5d55f8c32e818d585d08a02baccac155dcfddfdd",
+      "queryInventorySha256": "9c48394408cbfc486bf42fc78a0420ebc6553fd15a349c0a410986ae3e2d0488",
+      "runtimeSha256": "9fc72cb623335daf13904d3d22eb494da61a49cc3211693783ab6dda0017e565",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+        "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+        "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+        "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+        "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+      },
+      "baselineProof": {
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "illTypedBinderRejectedByKernel": true,
+        "indexSha256": "501dba70283e270631eba54e85d5f16c3ca44cfaba068ea4f39a45b550997e62",
+        "kernelExpectedType": "PASS",
+        "kernelExpectedTypeConversion": "PASS",
+        "kernelExpectedTypeIsProposition": "PASS",
+        "kernelProof": "PASS",
+        "knownBaselineConstantNodes": 192,
+        "name": "lean_workbook_plus_68077",
+        "originalModuleAbsentFromEnvironment": true,
+        "originalTheoremAbsentFromEnvironment": true,
+        "roundtripFields": [
+          "kind",
+          "children",
+          "payloads",
+          "expanded",
+          "neededScope",
+          "roots"
+        ],
+        "storedNodes": 7678,
+        "wrongProofRejectedByKernel": true
+      },
+      "baselineProofSha256": "76b86af73927a3277ebde971fdaf805878a2fff3e7f240ea3d4f16d6f8422194",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      }
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_plus_68616",
+        "indexSha256": "2f1f6523063a579076448d2a6caa42d496003a1be382692e8747442b1d9aef83",
+        "sourceSha256": "b3845eec83a376e18ca1fb1429d5408c6673462fff37088173770e1535254968"
+      },
+      "mode": "ai",
+      "queries": 7,
+      "checked": 7,
+      "applicationTraces": 7,
+      "nativeOutputSha256": "aa73a21ee592250ccb6024ac9b46e511a7b91b8a46d7425b0c6f411c8a73730a",
+      "queryInventorySha256": "a5733624f31e9a58db00ce592df2736a1748fef332fbd3f49923d12e5739cb9e",
+      "runtimeSha256": "9fc72cb623335daf13904d3d22eb494da61a49cc3211693783ab6dda0017e565",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+        "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+        "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+        "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+        "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+      },
+      "baselineProof": {
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "illTypedBinderRejectedByKernel": true,
+        "indexSha256": "2f1f6523063a579076448d2a6caa42d496003a1be382692e8747442b1d9aef83",
+        "kernelExpectedType": "PASS",
+        "kernelExpectedTypeConversion": "PASS",
+        "kernelExpectedTypeIsProposition": "PASS",
+        "kernelProof": "PASS",
+        "knownBaselineConstantNodes": 69,
+        "name": "lean_workbook_plus_68616",
+        "originalModuleAbsentFromEnvironment": true,
+        "originalTheoremAbsentFromEnvironment": true,
+        "roundtripFields": [
+          "kind",
+          "children",
+          "payloads",
+          "expanded",
+          "neededScope",
+          "roots"
+        ],
+        "storedNodes": 362,
+        "wrongProofRejectedByKernel": true
+      },
+      "baselineProofSha256": "1d1531120115095d5f27db988bd74659259a67371bf87f52b3425204bcb65457",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      }
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_plus_68794",
+        "indexSha256": "17a8502769796c60075b569ccf17b5bf99c47c12e6e1771705ae3eb540656f3b",
+        "sourceSha256": "9f309029babdfcee078518fe49ca92d664fa885eb45b3483068b1b5656f00586"
+      },
+      "mode": "ai",
+      "queries": 8,
+      "checked": 8,
+      "applicationTraces": 8,
+      "nativeOutputSha256": "42c8ac0afac072814c2d6f2b866ede1fb25e124782f24417cbafa191b6c138ac",
+      "queryInventorySha256": "43592d2d1ec35ef261eb6d18c3c578bbb5a9a3ae479e6ca2ca823f7a2b0cf6e9",
+      "runtimeSha256": "9fc72cb623335daf13904d3d22eb494da61a49cc3211693783ab6dda0017e565",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+        "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+        "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+        "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+        "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+      },
+      "baselineProof": {
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "illTypedBinderRejectedByKernel": true,
+        "indexSha256": "17a8502769796c60075b569ccf17b5bf99c47c12e6e1771705ae3eb540656f3b",
+        "kernelExpectedType": "PASS",
+        "kernelExpectedTypeConversion": "PASS",
+        "kernelExpectedTypeIsProposition": "PASS",
+        "kernelProof": "PASS",
+        "knownBaselineConstantNodes": 163,
+        "name": "lean_workbook_plus_68794",
+        "originalModuleAbsentFromEnvironment": true,
+        "originalTheoremAbsentFromEnvironment": true,
+        "roundtripFields": [
+          "kind",
+          "children",
+          "payloads",
+          "expanded",
+          "neededScope",
+          "roots"
+        ],
+        "storedNodes": 3083,
+        "wrongProofRejectedByKernel": true
+      },
+      "baselineProofSha256": "1e65cc5b4a7515ea67d3deefdaf279a6661692b5e95a8e8cf1a6f79a27b70651",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      }
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "name": "lean_workbook_plus_70240",
+        "indexSha256": "cbc4fcc25f7b3decb12c29ac4d90e9f01671a2bfcce24e948c9af0445a387290",
+        "sourceSha256": "4ba4a3343641286d44918d602cbab2e6c47e4a07ca166d8d41d0791c92d98378"
+      },
+      "mode": "ai",
+      "queries": 8,
+      "checked": 8,
+      "applicationTraces": 8,
+      "nativeOutputSha256": "5bba25914060a3d846c2d418db46659b90ac6190e1c30ed08dec88a5ac300c44",
+      "queryInventorySha256": "26b10366e47baa37ce63277b498f822fb3b9ccbe1a995b3ddf13e45432846d4b",
+      "runtimeSha256": "9fc72cb623335daf13904d3d22eb494da61a49cc3211693783ab6dda0017e565",
+      "producerFiles": {
+        "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+        "research/proof-atlas/use-sites/prepare.cjs": "b10025d7ab0cb6cc6e055bc8382a0ac56ef71273cdf7677805da42b2f5f4229b",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+        "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+        "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+        "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+        "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+      },
+      "baselineProof": {
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "illTypedBinderRejectedByKernel": true,
+        "indexSha256": "cbc4fcc25f7b3decb12c29ac4d90e9f01671a2bfcce24e948c9af0445a387290",
+        "kernelExpectedType": "PASS",
+        "kernelExpectedTypeConversion": "PASS",
+        "kernelExpectedTypeIsProposition": "PASS",
+        "kernelProof": "PASS",
+        "knownBaselineConstantNodes": 195,
+        "name": "lean_workbook_plus_70240",
+        "originalModuleAbsentFromEnvironment": true,
+        "originalTheoremAbsentFromEnvironment": true,
+        "roundtripFields": [
+          "kind",
+          "children",
+          "payloads",
+          "expanded",
+          "neededScope",
+          "roots"
+        ],
+        "storedNodes": 3270,
+        "wrongProofRejectedByKernel": true
+      },
+      "baselineProofSha256": "0eb84a2bbc4802e78dc00d13067d7c00841c05e0132f4ef2598a8e7dfb6e357d",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      }
+    }
+  ]
+}

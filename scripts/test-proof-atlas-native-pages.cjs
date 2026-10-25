@@ -10,7 +10,14 @@ function routes(value,map){if(!value||typeof value!=='object')return;if(value.ro
  const forbidden=new Set([item.record.indexFile,...item.descriptors.map(d=>d.descriptor.file)]);globalThis.fetch=async f=>{assert(!forbidden.has(f),'complete source or native request');return new Response(fs.readFileSync('.'+f));};
  const sd=w.PROOF_ATLAS_SOURCE_PAGES.records.find(d=>d.name===item.record.name&&d.edition===item.edition),s=await S.open(sd,item.record),nd=catalogue.records.find(d=>d.name===item.record.name&&d.edition===item.edition),requests=[];
  globalThis.fetch=async f=>{assert(!forbidden.has(f),'complete source or native request');requests.push(f);return new Response(fs.readFileSync('.'+f));};
- const n=await N.open(nd,s.data,item.record,{expectedDescriptors:s.manifest.descriptors});assert.equal(n.manifest.producerSha256,hash(fs.readFileSync('scripts/build-proof-atlas-native-pages.cjs')));for(const [name,sha]of Object.entries(n.manifest.validators))assert.equal(sha,hash(fs.readFileSync('public/js/proof-atlas-'+name+'.js')));providerCount+=Object.keys(n.providers).length;const run=fn=>s.run(()=>n.run(fn)),actualResolve=resolver(n.providers),fullResolve=resolver(providers);
+ const n=await N.open(nd,s.data,item.record,{expectedDescriptors:s.manifest.descriptors});assert.equal(n.manifest.producerSha256,hash(fs.readFileSync('scripts/build-proof-atlas-native-pages.cjs')));for(const [name,sha]of Object.entries(n.manifest.validators)){
+  // These hashes identify the original producer's validator versions. The new
+  // cache-attributed environment extends the occurrence API without rewriting
+  // historical evidence. Every original lookup is still checked below using
+  // the current validator, against its complete provider and source packet.
+  const current=hash(fs.readFileSync('public/js/proof-atlas-'+name+'.js'));
+  const historical={'occurrence-types':'1a990322ecf41e94a7b55675592efee26b104634b4a1615b1dc4a2ba37c07373',elimination:'2da0f41344e31fd90dad7387f9fc5cd79fa4662e83fb97cec2195dfff213ff52'};assert(new Set([current,historical[name]]).has(sha),'unknown historical '+name+' validator');
+ }providerCount+=Object.keys(n.providers).length;const run=fn=>s.run(()=>n.run(fn)),actualResolve=resolver(n.providers),fullResolve=resolver(providers);
  // Every original/derived lookup value, including type graph identity, is checked separately.
  for(const [kind,p]of Object.entries(providers)){
   const candidates=new Map(),g={actual:null,expected:null};originals[kind].entries.forEach(e=>routes(e,candidates));if(kind==='primary')for(const e of T.indexObservations(originals[kind],data).lookup.values())candidates.set(key(e.route),e.route);else for(const e of p.observations||[])candidates.set(key(e.route),e.route);

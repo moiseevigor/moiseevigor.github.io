@@ -102,7 +102,7 @@
    if(record&&!control){
     const d=host.PROOF_ATLAS_OCCURRENCE_TYPES?.records.find(d=>d.edition===edition.id&&d.name===record.name&&d.indexSha256===record.indexSha256&&d.sourceSha256===record.sourceSha256);
     if(!d)return {cases:[],attach:async()=>null};
-    await component('ProofAtlasOccurrenceTypes','/public/js/proof-atlas-occurrence-types.js?v=12');
+    await component('ProofAtlasOccurrenceTypes','/public/js/proof-atlas-occurrence-types.js?v=13');
     await component('ProofAtlasLibraryBytes','/public/js/proof-atlas-library-bytes.js?v=1');
     sourceBytes??=await host.ProofAtlasLibraryBytes.compressedBytes(record.indexFile,record.indexSha256,{maxBytes:67108864,signal:nativeController.signal});
     const bytes=await host.ProofAtlasLibraryBytes.compressedBytes(d.file,d.sha256,{maxBytes:67108864,signal:nativeController.signal});

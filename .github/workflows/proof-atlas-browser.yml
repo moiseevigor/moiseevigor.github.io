@@ -130,6 +130,9 @@ on:
       - 'public/js/proof-atlas-use-inputs.js'
       - 'scripts/test-proof-atlas-use-inputs*.cjs'
       - 'research/proof-atlas/use-inputs/**'
+      - 'research/proof-atlas/use-sites/**'
+      - 'scripts/*proof-atlas-use-site*.cjs'
+      - 'public/data/proof-atlas/use-site*'
       - 'research/proof-atlas/use-navigation/**'
       - 'scripts/test-proof-atlas-use-navigation*.cjs'
       - 'scripts/test-proof-atlas-source-corridor*.cjs'
@@ -408,6 +411,9 @@ on:
       - 'public/js/proof-atlas-use-inputs.js'
       - 'scripts/test-proof-atlas-use-inputs*.cjs'
       - 'research/proof-atlas/use-inputs/**'
+      - 'research/proof-atlas/use-sites/**'
+      - 'scripts/*proof-atlas-use-site*.cjs'
+      - 'public/data/proof-atlas/use-site*'
       - 'research/proof-atlas/use-navigation/**'
       - 'scripts/test-proof-atlas-use-navigation*.cjs'
       - 'scripts/test-proof-atlas-source-corridor*.cjs'
@@ -648,6 +654,8 @@ jobs:
           ATLAS_USE_CHECK_REPORT=1 node scripts/test-proof-atlas-use-navigation.cjs
           node scripts/test-proof-atlas-use-navigation-maximum.cjs
           ATLAS_USE_INPUT_CHECK_REPORT=1 node scripts/test-proof-atlas-use-inputs.cjs
+          ATLAS_USE_SITE_CHECK_REPORT=1 node scripts/test-proof-atlas-use-sites.cjs
+          node scripts/build-proof-atlas-use-site-pages.cjs --check
           node scripts/test-proof-atlas-elimination-browser.cjs
           node scripts/test-proof-atlas-elimination-composition-browser.cjs
           node scripts/test-proof-atlas-source-corridor-browser.cjs

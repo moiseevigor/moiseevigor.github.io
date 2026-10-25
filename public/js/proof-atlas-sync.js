@@ -51,7 +51,7 @@
    await metadataReady();if(!window.ProofAtlasLibraryData)await script('/public/js/proof-atlas-library-data.js?v=3');
    try{
     if(!window.PROOF_ATLAS_OCCURRENCE_TYPES)await script('/public/data/proof-atlas/occurrence-types-manifest.js?v=4');
-    if(!window.ProofAtlasOccurrenceTypes)await script('/public/js/proof-atlas-occurrence-types.js?v=12');
+    if(!window.ProofAtlasOccurrenceTypes)await script('/public/js/proof-atlas-occurrence-types.js?v=13');
    }catch(_){/* Optional type evidence must not block the original compiled reader. */}
    try{if(!window.ProofAtlasSourceCorridor)await script('/public/js/proof-atlas-source-corridor.js?v=1');}catch(_){/* Source context navigation is optional. */}
    try{if(!window.PROOF_ATLAS_PACKET_TYPES)await script('/public/data/proof-atlas/packet-types-manifest.js?v=4');}catch(_){/* Earlier judgments remain usable without the replay supplement. */}
@@ -67,7 +67,7 @@
     if(!window.ProofAtlasElimination)await script('/public/js/proof-atlas-elimination.js?v=5');
    }catch(_){/* Optional elimination evidence must not block the original reader. */}
    try{if(!window.PROOF_ATLAS_PROJECTIONS)await script('/public/data/proof-atlas/projections-manifest.js?v=1');}catch(_){/* Optional projection evidence leaves the source graph available. */}
-   try{if(!window.ProofAtlasBindingUses&&window.ProofAtlasRecursiveInputs)await script('/public/js/proof-atlas-binding-uses.js?v=3');}catch(_){/* Optional reference counts do not block the source reader. */}
+   try{if(!window.ProofAtlasBindingUses&&window.ProofAtlasRecursiveInputs)await script('/public/js/proof-atlas-binding-uses.js?v=4');}catch(_){/* Optional reference counts do not block the source reader. */}
    try{if(!window.PROOF_ATLAS_SOURCE_REFERENCES)await script('/public/data/proof-atlas/source-references-manifest.js?v=1');if(!window.ProofAtlasSourceReferenceExamples)await script('/public/js/proof-atlas-source-reference-examples.js?v=1');if(!window.PROOF_ATLAS_LIBRARY.editions.some(e=>e.id==='source-reference-controls'))window.PROOF_ATLAS_LIBRARY=window.ProofAtlasSourceReferenceExamples.register(window.PROOF_ATLAS_LIBRARY,window.PROOF_ATLAS_SOURCE_REFERENCES);}catch(_){/* Optional controls preserve the original inventories. */}
    try{for(const [name,url]of [['ProofAtlasExpressionViews','/public/js/proof-atlas-expression-views.js?v=1'],['ProofAtlasSourceReferences','/public/js/proof-atlas-source-references.js?v=1']])if(!window[name])await script(url);}catch(_){/* Optional source-backed types preserve source navigation. */}
    try{if(!window.PROOF_ATLAS_COMPOSITIONAL_TYPES)await script('/public/data/proof-atlas/compositional-types-manifest.js?v=1');}catch(_){/* Optional type compositions preserve the source reader. */}
@@ -78,7 +78,7 @@
    try{if(!window.PROOF_ATLAS_REDUCED_REPLAY)await script('/public/data/proof-atlas/reduced-replay-manifest.js?v=1');}catch(_){/* Existing recorded contexts remain available. */}
    try{if(!window.PROOF_ATLAS_COMPILED_REPLAY)await script('/public/data/proof-atlas/compiled-replay-manifest.js?v=1');}catch(_){/* Optional replay metadata leaves the compiled reader available. */}
    try{for(const [name,url]of [['ProofAtlasPackedRoutes','/public/js/proof-atlas-packed-routes.js?v=1'],['ProofAtlasScopeInterfaces','/public/js/proof-atlas-scope-interfaces.js?v=1'],['ProofAtlasUseNavigation','/public/js/proof-atlas-use-navigation.js?v=1'],['ProofAtlasApplicationJudgment','/public/js/proof-atlas-application-judgment.js?v=1'],['ProofAtlasUseInputs','/public/js/proof-atlas-use-inputs.js?v=1']])if(!window[name])await script(url);}catch(_){/* Exact source navigation remains usable without optional use discovery. */}
-   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=80');
+   if(!window.ProofAtlasLibrary)await script('/public/js/proof-atlas-library.js?v=81');
    if(!$('pl-provenance').closest('details')){const details=document.createElement('details'),summary=document.createElement('summary');summary.textContent='Provenance and axiom dependencies';$('pl-provenance').before(details);details.append(summary,$('pl-provenance'));}
    return window.ProofAtlasLibrary;
   })().catch(e=>{engine=null;throw e;});return engine;
