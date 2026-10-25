@@ -1,0 +1,14 @@
+/* Shared typed-square renderer; callers own query validation and navigation. */
+(function(host){
+ 'use strict';const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
+ function mount(out,options){const scene=options.scene;out.replaceChildren();
+  const formula=el('div',undefined,'pe-square');formula.tabIndex=0;formula.setAttribute('role','region');formula.setAttribute('aria-label','Transport square');const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 640 250');svg.setAttribute('role','img');svg.setAttribute('aria-label','Equality transport square: an equality joins endpoints a and b; the kernel transports p from C a rfl to C b witness.');
+  const shape=(tag,attrs,text)=>{const n=document.createElementNS(svg.namespaceURI,tag);for(const [k,v]of Object.entries(attrs))n.setAttribute(k,String(v));if(text)n.textContent=text;svg.append(n);return n;};
+  const defs=document.createElementNS(svg.namespaceURI,'defs'),marker=document.createElementNS(svg.namespaceURI,'marker'),arrow=document.createElementNS(svg.namespaceURI,'path');marker.id='pe-arrow';for(const [k,v]of Object.entries({viewBox:'0 0 10 10',refX:9,refY:5,markerWidth:6,markerHeight:6,orient:'auto-start-reverse'}))marker.setAttribute(k,v);arrow.setAttribute('d','M0 0 L10 5 L0 10 Z');arrow.setAttribute('fill','currentColor');marker.append(arrow);defs.append(marker);svg.append(defs);
+  for(const [x1,y1,x2,y2]of [[100,50,540,50],[100,200,540,200],[100,64,100,184],[540,64,540,184]])shape('path',{d:'M'+x1+','+y1+' L'+x2+','+y2,class:'pe-wire',...(y1===y2?{'marker-end':'url(#pe-arrow)'}:{'stroke-dasharray':'5 4'})});
+  for(const [x,y,t]of [[100,35,'a'],[540,35,'b'],[100,226,'p : C a rfl'],[540,226,'result : C b witness'],[320,42,scene.equalityWitness==='symmetry-of-source'?'Eq.symm h':'h'],[320,191,'Eq.rec'],[320,122,'Family C']])shape('text',{x,y,'text-anchor':'middle'},t);
+  formula.append(svg);out.append(formula);const cards=el('div',undefined,'pe-nodes');for(const n of scene.nodes){const button=el('button',undefined,'pe-node');button.type='button';button.dataset.node=n.id;button.dataset.namespace=n.address.namespace;button.append(el('strong',n.label),el('span',n.address.namespace==='source-expression'?'Source occurrence':'Computed expression'),el('code',n.text));button.onclick=()=>{cards.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));options.onAddress?.(n.address);};button.setAttribute('aria-pressed','false');cards.append(button);}out.append(cards,el('p',scene.guarantee));
+ return Object.freeze({getScene:()=>JSON.parse(JSON.stringify(scene)),dispose:()=>out.replaceChildren()});
+ }
+ host.ProofAtlasEqualityDiagram={mount};
+})(window);

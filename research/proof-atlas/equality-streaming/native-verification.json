@@ -1,0 +1,53 @@
+{
+  "format": "ProofAtlasEqualityStressNative/1",
+  "status": "PASS",
+  "compiler": "Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+  "dependencyRecovery": {
+    "kind": "mathlib-cache-attribution/1",
+    "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+    "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+    "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+    "artifactCount": 43450,
+    "allBinaryHashesVerified": true,
+    "originalGitCheckoutsVerified": false,
+    "independentlyRebuilt": false
+  },
+  "source": {
+    "edition": "equality-transport-controls",
+    "name": "AtlasTransportStress.balanced",
+    "sourceSha256": "8ced97a2ba446c1a95806b72481c17d4539f91283f0f96f46bf47ce4508e0ba9",
+    "indexSha256": "a0baa9aad5f3968145d1353663406709a49ef5438dd5ee4372a9fd484d2dafa9"
+  },
+  "record": {
+    "name": "AtlasTransportStress.balanced",
+    "module": "AtlasTransportStressFixture",
+    "sourceSha256": "8ced97a2ba446c1a95806b72481c17d4539f91283f0f96f46bf47ce4508e0ba9",
+    "indexSha256": "a0baa9aad5f3968145d1353663406709a49ef5438dd5ee4372a9fd484d2dafa9",
+    "uniqueNodes": 40985,
+    "occurrences": "327724"
+  },
+  "route": {
+    "root": 1,
+    "slots": [
+      1
+    ]
+  },
+  "producerFiles": {
+    "research/proof-atlas/equality-streaming/verify_stress.py": "1985df11a2b346b7d3f2b04a69fd5d9ae5b77dbe600f221e62bc134f4c1a448b",
+    "research/proof-atlas/equality-streaming/Stress.lean": "8ced97a2ba446c1a95806b72481c17d4539f91283f0f96f46bf47ce4508e0ba9",
+    "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+    "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567",
+    "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+    "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+    "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+    "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+    "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+    "research/proof-atlas/equality-transport/EqualityTransport.lean": "7de6a9822093692a09b9ed1d6d822aadd6b1325527b8c3c20f5bfb8c7ef5cd31"
+  },
+  "runtimeSha256": "d44d479f10b84dceb4bab274cbcb1478f8616a3b0bcaf58670ade7659929ed38",
+  "nativeOutputSha256": "a6a9a6a7756e91628e9aba01e5f73be80da77b59a3f5eeebb107e2006ad164d1",
+  "originalProofSourcesRead": false,
+  "privateRiccatiModulesImported": false,
+  "scope": "Authored balanced dependent-family control. Fresh kernel typing and packet-only replay; not an AI-source proof or comprehension result."
+}

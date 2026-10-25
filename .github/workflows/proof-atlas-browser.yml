@@ -148,6 +148,8 @@ on:
       - 'research/proof-atlas/method-indices/**'
       - 'research/proof-atlas/method-parameters/**'
       - 'research/proof-atlas/equality-transport/**'
+      - 'research/proof-atlas/equality-streaming/**'
+      - 'public/data/proof-atlas/equality-streaming/**'
       - 'public/js/proof-atlas-equality-*.js'
       - 'public/css/proof-atlas-equality.css'
       - 'public/data/proof-atlas/equality-*'
@@ -476,6 +478,8 @@ on:
       - 'research/proof-atlas/method-indices/**'
       - 'research/proof-atlas/method-parameters/**'
       - 'research/proof-atlas/equality-transport/**'
+      - 'research/proof-atlas/equality-streaming/**'
+      - 'public/data/proof-atlas/equality-streaming/**'
       - 'public/js/proof-atlas-equality-*.js'
       - 'public/css/proof-atlas-equality.css'
       - 'public/data/proof-atlas/equality-*'
@@ -783,6 +787,9 @@ jobs:
           ATLAS_EQUALITY_CHECK=1 node scripts/test-proof-atlas-equality-transport.cjs
           node scripts/test-proof-atlas-equality-transport-browser.cjs
           node scripts/build-proof-atlas-equality-evidence.cjs --check
+          ATLAS_EQUALITY_STREAM_CHECK=1 node scripts/test-proof-atlas-equality-streaming.cjs
+          node scripts/test-proof-atlas-equality-streaming-browser.cjs
+          node scripts/build-proof-atlas-equality-streaming-evidence.cjs --check
           ATLAS_RECORDED_UNION_CHECK=1 node scripts/test-proof-atlas-recorded-union.cjs
           node scripts/build-proof-atlas-recorded-union-evidence.cjs --check
           node scripts/test-proof-atlas-recorded-union-browser.cjs

@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "recursiveCaseViews": 13,
+  "metadataLocalNavigation": true,
+  "exactSourceBinderJump": true,
+  "recursiveFamily": true,
+  "indexedConstructor": true,
+  "zeroUsePremise": true,
+  "massiveSharedProof": {
+    "edition": "recursion-controls",
+    "name": "AtlasExamples.shared_induction_64",
+    "selected": 420,
+    "root": 420,
+    "mode": "geometry",
+    "occurrences": "12912720851596686131202",
+    "uniqueNodes": 421,
+    "path": "root.value",
+    "route": {
+      "root": 1,
+      "slots": []
+    },
+    "sourceSha256": "5b0f1e25c28e7488b9218c5b7c56b5b9f544c3620295955232c5a3e798b4c3db",
+    "indexSha256": "2ab1d320fb4c5ec7290b1bf1b64c4538cc65835717dee405192ce9b3daa30ca3",
+    "rendered": 24
+  },
+  "staleGeometryDoesNotRestoreSource": true,
+  "optionalFailuresPreserveOriginalCorpus": true,
+  "accessibilityAudits": 4
+}

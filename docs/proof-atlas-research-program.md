@@ -50,6 +50,8 @@ The [mutual-family extension](/research/proof-atlas/method-mutual/README.md) rec
 
 The [equality-transport square](/projects/proof-atlas/manual/equality-transport/) separates original values/equalities from computed motives and endpoint types. Thirty-four stored complete Riccati calls match the pinned compiled module. Sixteen previously unavailable AI-source candidate occurrences pass packet-only kernel checks; they identify thirteen exact source cores. These are finite structural and typing results, with separate provenance for imported-module comparison and source-free replay. They do not measure human comprehension or semantic compression.
 
+[Paged transport delivery](/research/proof-atlas/equality-streaming/README.md) preserves those original native owners while checking one selected query through source pages. All 58 earlier scenes match complete-data results; an authored 40,985-node dependent-family control adds a source-lifting test beyond the retained-path limit. The control retains 13 source-path rows and a 256-row fetch cache. The selected computed graph remains fully resident.
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?

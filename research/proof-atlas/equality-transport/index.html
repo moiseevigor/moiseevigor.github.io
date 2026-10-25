@@ -5,7 +5,7 @@ math: true
 permalink: /projects/proof-atlas/manual/equality-transport/
 ---
 <link rel="stylesheet" href="/public/css/proof-atlas-equality.css?v=1">
-<p><a href="/projects/proof-atlas/manual/">Visual notation manual</a> · <a href="/research/proof-atlas/equality-transport/README.md">Checks and limits</a></p>
+<p><a href="/projects/proof-atlas/manual/">Visual notation manual</a> · <a href="/research/proof-atlas/equality-streaming/README.md">Checks and limits</a></p>
 <p>Equality transport moves a value between fibers of a family. In the kernel, a motive may depend on both the endpoint and the equality witness:</p>
 \[
 C : (b:A)\to(a=b)\to\mathrm{Sort}_v,\qquad
@@ -15,13 +15,17 @@ p:C(a,\mathrm{refl}_a),\qquad h:a=b,
 <p>For <code>Eq.ndrec</code>, the family ignores the witness. <code>Eq.mp</code> transports between equal types; <code>Eq.mpr</code> uses the reversed equality. These wrappers are expanded by a bounded, kernel-checked template. The square represents typed transport, not a branch in a proof or a recovered tactic.</p>
 <section id="pm-equality-lab" aria-label="Equality transport experiment">
   <div class="pm-controls"><label>Compiled proof or authored control <select data-profile></select></label><button data-load type="button">Load transport</button><button data-release type="button" disabled>Release</button><label>Recorded occurrence <select data-query disabled></select></label></div>
-  <p data-status role="status">Load one compiled packet and its native observations. Source packet limit: 16 MiB; native record: 8 MiB. No expanded occurrence tree is loaded.</p>
+  <p data-status role="status">Load one original native query and its source pages. Retained source paths: at most 4,096 rows; fetch cache: 256 rows. The selected computed graph loads fully within its own limit.</p>
   <div data-view></div><div data-detail aria-live="polite"></div>
 </section>
 <p>Click a value or equality card for its exact original route. Click an endpoint or family for its separate computed address. Further applications remain distinct from the transport core: several selected occurrences can refer to the same source core.</p>
 <p>The records cover a finite candidate inventory and authored controls. Unsupported candidates retain their reasons. This rule does not establish semantic proof compression, complete Lean coverage or improved human comprehension.</p>
 <script src="/public/js/proof-atlas-library-data.js?v=3" defer></script>
 <script src="/public/js/proof-atlas-occurrence-types.js?v=5" defer></script>
-<script src="/public/data/proof-atlas/equality-transport-manifest.js?v=1" defer></script>
-<script src="/public/js/proof-atlas-equality-transport.js?v=1" defer></script>
-<script src="/public/js/proof-atlas-equality-view.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-source-pages.js?v=3" defer></script>
+<script src="/public/js/proof-atlas-source-comparison.js?v=2" defer></script>
+<script src="/public/data/proof-atlas/equality-streaming-manifest.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-equality-transport.js?v=2" defer></script>
+<script src="/public/js/proof-atlas-equality-pages.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-equality-diagram.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-equality-view.js?v=2" defer></script>

@@ -19,3 +19,7 @@
 #pm-equality-lab .pm-controls :is(select, button) { font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: .25rem; min-height: 44px; padding: .5rem .65rem; }
 #pm-equality-lab .pm-controls :disabled { opacity: .6; }
 @media (max-width: 42rem) { .pe-nodes { grid-template-columns: 1fr; } }
+
+#pl-paged-equality-section { min-width: 0; overflow-wrap: anywhere; }
+#pl-paged-equality-section pre { color: var(--text); background: var(--fig-bg); white-space: pre-wrap; overflow-wrap: anywhere; max-height: 26rem; overflow: auto; }
+#pl-paged-equality-section [data-equality-toggle] { min-height: 44px; padding: .5rem .75rem; }

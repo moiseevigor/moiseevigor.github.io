@@ -1,0 +1,151 @@
+{
+  "status": "PASS",
+  "producerSha256": "cb47ce5b2b54e68a51065a0cee6b4cff355353e81c3340cc95480b19bf17befa",
+  "records": [
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "originalSha256": "df22473856eb7b514bc2e3f99d44d92828cc4e3a960c0ad134a9b21057db4225",
+      "roundtripSha256": "df22473856eb7b514bc2e3f99d44d92828cc4e3a960c0ad134a9b21057db4225",
+      "entries": 34,
+      "sourceManifestSha256": "736bddf0fc14126bb318707362ea48cecfe550821c86ae150a3a6abbc7e36bad",
+      "manifestSha256": "116dcb8629d69a88634b3babd25b6e9539e2c7f9fc374df1a4d5b379aeb68381"
+    },
+    {
+      "name": "AtlasTransportControls.simple",
+      "originalSha256": "90c63517f0d4ad8ed2928f1f8da0618f77b8182288986bf4f3d053a0044dbb7d",
+      "roundtripSha256": "90c63517f0d4ad8ed2928f1f8da0618f77b8182288986bf4f3d053a0044dbb7d",
+      "entries": 1,
+      "sourceManifestSha256": "49ab73f88e38393dd7e27671901ea29cb75d6d2076c815c480a487d58980ab1e",
+      "manifestSha256": "d445942e107cce287e8d9851b1bb0343d7e37109ad361cbe66b3a6d0234ba030"
+    },
+    {
+      "name": "AtlasTransportControls.dependent",
+      "originalSha256": "1182bc511adf268723069d54d9c4782f9854c3fe6a0140d975f2026b9510b8bc",
+      "roundtripSha256": "1182bc511adf268723069d54d9c4782f9854c3fe6a0140d975f2026b9510b8bc",
+      "entries": 1,
+      "sourceManifestSha256": "afa72fcfbc3a98db70f13ac5e669700958350fb1e35c17da93c5f82a28caec24",
+      "manifestSha256": "087b325e726105076d74420faa975cd952c180796850eb7e8bc32aac06c79330"
+    },
+    {
+      "name": "AtlasTransportControls.proofDependent",
+      "originalSha256": "6dadea99c1c5ffa1ea55ab998219f211ef8738c51cac5691c520b1368fb4856f",
+      "roundtripSha256": "6dadea99c1c5ffa1ea55ab998219f211ef8738c51cac5691c520b1368fb4856f",
+      "entries": 1,
+      "sourceManifestSha256": "5b5b1915511d6e4ae3c39691c588c58ff097c478e6f57377fb8a72c86c94976b",
+      "manifestSha256": "cd40a404cb2edd8e9decd46be1184b20cb48e6662db897fb454a9f8b7e339b71"
+    },
+    {
+      "name": "AtlasTransportControls.trailing",
+      "originalSha256": "94cbc18d8fa551861dca85693ccafee7cad26f2d46f5c0020986806408cc0647",
+      "roundtripSha256": "94cbc18d8fa551861dca85693ccafee7cad26f2d46f5c0020986806408cc0647",
+      "entries": 2,
+      "sourceManifestSha256": "2984da5d4f74ba0a7aa5a80f6e69c2618a73d1f24f6dd96df56e28784236c970",
+      "manifestSha256": "1f08e4736b2e6db2ad143ad83890d110861b823a1ff5beed256680aeee462eb1"
+    },
+    {
+      "name": "AtlasTransportControls.same",
+      "originalSha256": "49891a952adef3e9360e389642c8e2a6025f2699ee6804844079e81998f1d3ed",
+      "roundtripSha256": "49891a952adef3e9360e389642c8e2a6025f2699ee6804844079e81998f1d3ed",
+      "entries": 1,
+      "sourceManifestSha256": "46ea4354aeb0eedffaa0c0cfa99547e325bb039675e305b46fcdbbc1ce2ad84a",
+      "manifestSha256": "e99e2e7403cde4ce3e20202ceccd94e596d3df215083c4a6b0f30d44a88b3a98"
+    },
+    {
+      "name": "AtlasTransportControls.reordered",
+      "originalSha256": "a808ea73c1d613e9842366d5c248ad79945e1def444a4a23d319c83f08416d5d",
+      "roundtripSha256": "a808ea73c1d613e9842366d5c248ad79945e1def444a4a23d319c83f08416d5d",
+      "entries": 1,
+      "sourceManifestSha256": "1ee49f7cf24053c3b85c145787cc35083a6542d7ce97b044d3d7fc751ae38ab4",
+      "manifestSha256": "5c5e9927b3756d5b21bcba5ff2fc4135ce54a58d0b87498fa86c9f2d81cdb4c8"
+    },
+    {
+      "name": "AtlasTransportControls.reverse",
+      "originalSha256": "26d093808c8dd3621ae1edc5960b1b01a37b70e9a9b77c83b9a51fd236fc5acc",
+      "roundtripSha256": "26d093808c8dd3621ae1edc5960b1b01a37b70e9a9b77c83b9a51fd236fc5acc",
+      "entries": 1,
+      "sourceManifestSha256": "9eb96f76603caa8c6433cf1e79336e3a7446c1f0023b46b79108f26d53d1b68d",
+      "manifestSha256": "23afdecf1117ceb9b641f2971431db941b9aa8fd9f9f6e957f0e1193fd21d7fb"
+    },
+    {
+      "name": "AtlasTransportControls.ordinary",
+      "originalSha256": "9d3da8ea1af3c94dd38d8b4b9527fdc3f9d7146d114c8d1b4775f7ce7cef6d2c",
+      "roundtripSha256": "9d3da8ea1af3c94dd38d8b4b9527fdc3f9d7146d114c8d1b4775f7ce7cef6d2c",
+      "entries": 0,
+      "sourceManifestSha256": "7222c404b0593d799d35ed0070275a64f7e21fb6d654da61992086bec33212a8",
+      "manifestSha256": "caffca8a3eb66f18e7c51fb82a40471c24d422bd5364333408b210201d500258"
+    },
+    {
+      "name": "AtlasTransportControls.partialCall",
+      "originalSha256": "fe4c7716da9c679311aa964789932fa6ce0119c8ae8201fe3bdc0e0fbb08a3d5",
+      "roundtripSha256": "fe4c7716da9c679311aa964789932fa6ce0119c8ae8201fe3bdc0e0fbb08a3d5",
+      "entries": 0,
+      "sourceManifestSha256": "c957f63a8cb3e9c4c059083d3e4cff987f54e787bf481b9fb3218de9f0ea130c",
+      "manifestSha256": "0a5a3e9235cf6541dd89783b1bb7418fb38249b90684c67967f7f654fc3b67c6"
+    },
+    {
+      "name": "lean_workbook_20418",
+      "originalSha256": "914a975604460ef1e8252babee7a756d91d90ff7dbf55bffd45ae181aa27f648",
+      "roundtripSha256": "914a975604460ef1e8252babee7a756d91d90ff7dbf55bffd45ae181aa27f648",
+      "entries": 4,
+      "sourceManifestSha256": "a3525f4c281e8e9afd0cc28004fca7757bc929432731e696fbc0ca2b02bb1ab5",
+      "manifestSha256": "85d06e807e538258e1a1db7385e68cf8ef835fa2a92cf08fa05463f7b6dd4349"
+    },
+    {
+      "name": "lean_workbook_4274",
+      "originalSha256": "fcda06474f76d4a0648e00b5f3bb69d8bcbf01cc9cdda6c540e82b25ee6d5744",
+      "roundtripSha256": "fcda06474f76d4a0648e00b5f3bb69d8bcbf01cc9cdda6c540e82b25ee6d5744",
+      "entries": 2,
+      "sourceManifestSha256": "8445a143694429ffce96fc4afeca0b1c36282063a37462e5876f510854146c7f",
+      "manifestSha256": "4a46a0f9f115b4b2f6f8edc4c75c7d7df8281870caa0b51b096ba82c447c6157"
+    },
+    {
+      "name": "lean_workbook_plus_15068",
+      "originalSha256": "58baeb5edb755b9c4f7d30fa5e551159dd5271a3d67649f818d454b037d92a28",
+      "roundtripSha256": "58baeb5edb755b9c4f7d30fa5e551159dd5271a3d67649f818d454b037d92a28",
+      "entries": 2,
+      "sourceManifestSha256": "548d26b53b9ecdddba03b0f96c828548f3a5bd66936990923913d27a1070aba6",
+      "manifestSha256": "4be78dee7ce370f44e2d31269b67f6e2cb3f4ddcf086f284831e07bf0c7b4b84"
+    },
+    {
+      "name": "lean_workbook_plus_19617",
+      "originalSha256": "36b40b9593e40f3797947354995ec113fd33b77683277421f9904eeb327d1360",
+      "roundtripSha256": "36b40b9593e40f3797947354995ec113fd33b77683277421f9904eeb327d1360",
+      "entries": 2,
+      "sourceManifestSha256": "da084009994f6aefbabbd9d45f5054c3516b6014c8c155d0642b3553ab6da1f7",
+      "manifestSha256": "bee86056ecae0a39442acc406b3ba49475ff6aaff6f4af9edb095aea67fc26cd"
+    },
+    {
+      "name": "lean_workbook_plus_39831",
+      "originalSha256": "084aee90e7f6ab976eff8639b85041feff34511b477c4177893f775d6497eab4",
+      "roundtripSha256": "084aee90e7f6ab976eff8639b85041feff34511b477c4177893f775d6497eab4",
+      "entries": 2,
+      "sourceManifestSha256": "265d25f3d7fe247e7ef06a6b0089fb4a1da2acd75e02a0e1cb034a4dd7372685",
+      "manifestSha256": "34860dcbad6a965ce506213ce3977d69d363a277884816a17da8b93a2ed1f5c6"
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "originalSha256": "edc52babb0aad1ba7a15c11ee9261437d101a84606639df99cce56f3b379fee0",
+      "roundtripSha256": "edc52babb0aad1ba7a15c11ee9261437d101a84606639df99cce56f3b379fee0",
+      "entries": 4,
+      "sourceManifestSha256": "eaeb802bd232dc339b4a42e9f897eb8278ded4086b42278184d5c0ae4d3d429e",
+      "manifestSha256": "59b63c03d506dd99b268d0deda64dbd6c35c34da0dd7d4db87fc762acde9d846"
+    },
+    {
+      "name": "lean_workbook_plus_62755",
+      "originalSha256": "4f6d5556aa1caf4fa9a943d9a15fc8d5b1c82fd784356cbe69e6dcc4ff1af4d4",
+      "roundtripSha256": "4f6d5556aa1caf4fa9a943d9a15fc8d5b1c82fd784356cbe69e6dcc4ff1af4d4",
+      "entries": 0,
+      "sourceManifestSha256": "6d632b791dbd94dafd3c5dc42681b47ebd36041957d997ccb3968de30882cad9",
+      "manifestSha256": "2dbf16ef5f35d77b5793fbdb31e3f66a47f9ea841d7468a8005bf753425c4222"
+    },
+    {
+      "name": "AtlasTransportStress.balanced",
+      "originalSha256": "eec10344a6113a23c3edd1809a45fc648c89141c5bd125d31e421bd01d137f73",
+      "roundtripSha256": "eec10344a6113a23c3edd1809a45fc648c89141c5bd125d31e421bd01d137f73",
+      "entries": 1,
+      "sourceManifestSha256": "6e27089f44ff7d4710e50d3a14d25a708401cd95279dad4aed00b96a1d3637cc",
+      "manifestSha256": "d5109cfdd40baa1d42e0a9dc7cbf6893171d997fd539b57f4873886b484f926c"
+    }
+  ],
+  "scope": "Exact emitted-page reassembly to every original native owner. Complete source validation happens offline; selected-client validation is separate."
+}
