@@ -1,0 +1,195 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "suite": "result-path",
+      "script": "scripts/test-proof-atlas-result-path-browser.cjs",
+      "checkerSha256": "af53e4cc883fa6c61df431e719c95c9afdca7c0f06294dbcfb2e511e24d21441",
+      "status": "PASS",
+      "result": {
+        "format": "ProofAtlasResultPathBrowser/1",
+        "status": "PASS",
+        "profiles": 31,
+        "resultSelections": 36,
+        "sideInputSelections": 17,
+        "groupChecks": 5,
+        "selectionRoundTrips": 1,
+        "budgetContinuations": 1,
+        "branchStops": 1,
+        "sourceOnlyRefusals": 1,
+        "axeAudits": 4,
+        "staleRefusals": 1,
+        "corruptionRefusals": 1,
+        "optionalFailures": 1,
+        "zoomChecks": 2,
+        "keyboardChecks": 1,
+        "files": {
+          "public/js/proof-atlas-result-path.js": "6a6ad5aee2b22d51aa901a3799e0a6a1626155ce5c7f9a3e4bbd520c090faf85",
+          "public/js/proof-atlas-result-path-view.js": "f7b6ac9729c0b493b08779db1176aeebbe5452604ed609f22bff2246237f7190",
+          "public/js/proof-atlas-network-stream-pages.js": "f4b94aba42e76aa64bd3990ab5ec01a4c92eaa263c8709a87d2b6b79c3b8be04",
+          "public/js/proof-atlas-network-stream-view.js": "eb58b5eff6428e770aa0730ab977a58fd65d77f8255893c131f73f9618db332c",
+          "public/css/proof-atlas-result-path.css": "ad7aa3c3f5f5149752f4c8b0b5768f36529fe7374d18cf7a7c25f5dd30560fa3"
+        }
+      },
+      "stdout": "/private/tmp/atlas-result-path-final/result-path/stdout.log"
+    },
+    {
+      "suite": "network-streaming",
+      "script": "scripts/test-proof-atlas-network-streaming-browser.cjs",
+      "checkerSha256": "685c6312221b7ae6d3eaf0f62083658c293fe884a9d8836b8b57fcc6b9ad776f",
+      "status": "PASS",
+      "result": {
+        "format": "ProofAtlasNetworkStreamingBrowser/1",
+        "status": "PASS",
+        "nativeProfiles": 31,
+        "nativeCalls": 162,
+        "nativeWires": 101,
+        "nativeTypeSelections": 101,
+        "bindingSelections": 7,
+        "largeCalls": 11,
+        "unavailableTypes": 11,
+        "expansions": 1,
+        "consumerPages": 1,
+        "zoomChecks": 3,
+        "panChecks": 2,
+        "axeAudits": 4,
+        "keyboardChecks": 1,
+        "staleRefusals": 1,
+        "hashRefusals": 1,
+        "releases": 1,
+        "wholeArchiveAttempts": 0,
+        "builtFiles": {
+          "public/js/proof-atlas-network-page-store.js": "8653362782be9b69eaba6c4b67962200685ea00d363c71c373db04b22ff5855a",
+          "public/js/proof-atlas-network-streaming.js": "0c871f8ffd713581717f31a07e99606ec46e4db9f5642706596d0744e84482ba",
+          "public/js/proof-atlas-network-stream-pages.js": "f4b94aba42e76aa64bd3990ab5ec01a4c92eaa263c8709a87d2b6b79c3b8be04",
+          "public/js/proof-atlas-network-port-inspector.js": "04ddbe608d77c623aad81fb4a79da0654e80390b8e7f057ae9a58fb8367b5d98",
+          "public/js/proof-atlas-network-stream-view.js": "eb58b5eff6428e770aa0730ab977a58fd65d77f8255893c131f73f9618db332c",
+          "public/data/proof-atlas/network-streaming-manifest.js": "5768d4f66ce01a092b5e126512998264502bd92b7c15caae8c79a60702e3087b"
+        },
+        "html": {
+          "source": "research/proof-atlas/network-streaming/index.html",
+          "sourceSha256": "b722c9e6e6aaccf05e9df5f804a19f7b822652ad42cfe12b2f6715a2599ae86b",
+          "normalizedSha256": "1bcd3dfff441dd4531fa5bdd52a56ce88dc25f043bd754a74fe16eb2278e6a4a"
+        },
+        "checkerSha256": "685c6312221b7ae6d3eaf0f62083658c293fe884a9d8836b8b57fcc6b9ad776f"
+      },
+      "stdout": "/private/tmp/atlas-result-path-final/network-streaming/stdout.log"
+    },
+    {
+      "suite": "manual",
+      "script": "scripts/test-proof-atlas-manual-browser.cjs",
+      "checkerSha256": "f25981e4b37f1ef3567f00091cce47738c2eb82c0f3fafcd95ad733f91a6eb15",
+      "status": "PASS",
+      "result": {
+        "status": "PASS",
+        "examples": 4,
+        "cutStates": 40,
+        "scopeSelections": 4,
+        "externalBinderJumps": 2,
+        "keyboard": 1,
+        "accessibility": 9,
+        "fieldDiagrams": 12,
+        "links": 41,
+        "compiledNavigation": 1,
+        "failureStates": 1,
+        "scope": "Actual rendered manual and shared constructor gallery: finite examples, exact field presentation, selection, keyboard, external binders, mobile/dark accessibility, links, compiled proof navigation and optional-script failure. No comprehension measurement."
+      },
+      "stdout": "/private/tmp/atlas-result-path-final/manual/stdout.log"
+    },
+    {
+      "suite": "visual-clarity",
+      "script": "scripts/test-proof-atlas-visual-clarity-browser.cjs",
+      "checkerSha256": "92cd0bc25b6d047724fbf7ed8f8bae813632ac9a00e3740c03c94f266b7c6ecf",
+      "status": "PASS",
+      "result": {
+        "format": "ProofAtlasVisualClarityBrowser/1",
+        "status": "PASS",
+        "tasks": [
+          "Original SBracket deep link opens a labeled local cut and statement; absent typing stays unavailable.",
+          "Keyboard child selection and Parent preserve the original lexical route.",
+          "Declaration uses has labeled directions and selecting a local reference opens its declaration.",
+          "A variable link opens its exact lexical binder, independent of shared stored IDs.",
+          "Optional scoped geometry and its exact occurrence list remain available.",
+          "Current 26-module edition uses the same local reader.",
+          "A native Riccati application still opens its checked rule at the same source occurrence.",
+          "Long mobile statements can receive keyboard focus and scroll with arrow keys.",
+          "Article proof-step highlighting survives a child click in the new default reader.",
+          "Manual has five question-based routes and retains all twelve constructor diagrams.",
+          "Bounded occurrence diagram remains separate and renders actual source cards.",
+          "A missing local reader refuses clearly without falling back to a hairball; retry recovers."
+        ],
+        "accessibility": [
+          {
+            "view": "local",
+            "width": 1500,
+            "theme": "light",
+            "violations": 0
+          },
+          {
+            "view": "local",
+            "width": 1500,
+            "theme": "dark",
+            "violations": 0
+          },
+          {
+            "view": "local",
+            "width": 390,
+            "theme": "light",
+            "violations": 0
+          },
+          {
+            "view": "local",
+            "width": 390,
+            "theme": "dark",
+            "violations": 0
+          },
+          {
+            "view": "native-Riccati",
+            "width": 1500,
+            "theme": "light",
+            "violations": 0
+          },
+          {
+            "view": "native-Riccati",
+            "width": 1500,
+            "theme": "dark",
+            "violations": 0
+          },
+          {
+            "view": "native-Riccati",
+            "width": 390,
+            "theme": "light",
+            "violations": 0
+          },
+          {
+            "view": "native-Riccati",
+            "width": 390,
+            "theme": "dark",
+            "violations": 0
+          }
+        ],
+        "screenshots": [
+          "/private/tmp/atlas-result-path-final/visual-clarity/local-1500-light.png",
+          "/private/tmp/atlas-result-path-final/visual-clarity/local-1500-dark.png",
+          "/private/tmp/atlas-result-path-final/visual-clarity/local-390-light.png",
+          "/private/tmp/atlas-result-path-final/visual-clarity/local-390-dark.png",
+          "/private/tmp/atlas-result-path-final/visual-clarity/declaration-uses.png",
+          "/private/tmp/atlas-result-path-final/visual-clarity/scoped-geometry.png",
+          "/private/tmp/atlas-result-path-final/visual-clarity/riccati-application.png",
+          "/private/tmp/atlas-result-path-final/visual-clarity/synchronized-article.png",
+          "/private/tmp/atlas-result-path-final/visual-clarity/view-guide.png",
+          "/private/tmp/atlas-result-path-final/visual-clarity/occurrence-reader.png"
+        ],
+        "scope": "Reading interactions and presentation checks, not a measured human comprehension result.",
+        "files": {
+          "public/js/proof-atlas-local-reader.js": "f4290858553338a6df4ece8b199f87c0ff1daec51c49b9ce5354aa7ceea1756c",
+          "public/js/proof-atlas-library.js": "f0d9bd80aa3409ad5cb18e3773d520a962e82e1a507e8424e8155f0b2ccc4107",
+          "public/js/proof-atlas-sync.js": "d775ea71b1981568de16e34205cc42ff1c6de6593e50c818c3771298f96f04af",
+          "public/css/proof-atlas-library.css": "3ec3f9022b70e087a2ce80c680a89080be2f10c72643847cf6ea8790040a8424"
+        }
+      },
+      "stdout": "/private/tmp/atlas-result-path-final/visual-clarity/stdout.log"
+    }
+  ],
+  "scope": "Final production build; sequential browser checks of the new fold and existing readers."
+}

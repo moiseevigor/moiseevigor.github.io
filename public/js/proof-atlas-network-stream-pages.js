@@ -8,9 +8,9 @@
   demand(header.format==='ProofAtlasPagedNetwork/1'&&header.scope===d.scope&&hash(header.scope)&&['native','source-only','control'].includes(header.mode)&&header.mode===d.mode&&M.same(header.source,d.source)&&M.same(header.owner,d.owner)&&M.same(header.counts,d.counts),'source and coverage owner');
   const c=header.counts;demand(Object.values(c).every(integer)&&c.calls>0&&c.calls<=1000000000&&c.ports>=2*c.calls&&c.ports<=65*c.calls&&c.ports===c.known+c.unrecorded,'inventory counts');
   P.reference(header.callRoot);demand(header.callRoot.first===0&&header.callRoot.count===c.calls,'complete call range');if(c.known){P.reference(header.outgoingRoot);demand(header.outgoingRoot.first===0&&header.outgoingRoot.count===c.known,'complete reverse range');}else demand(header.outgoingRoot===null,'empty reverse range');
-  let calls=P.open(header.callRoot,'calls',header.scope),outgoing=P.open(header.outgoingRoot,'outgoing',header.scope),selected=new Map(),scene=null,disposed=false,serial=0,controller=null,tickets=[],connectionRows=0,peakRows=0,peakBytes=0,portLease=null,connectionController=null,connectionSerial=0;
+  let calls=P.open(header.callRoot,'calls',header.scope),outgoing=P.open(header.outgoingRoot,'outgoing',header.scope),selected=new Map(),scene=null,disposed=false,serial=0,controller=null,tickets=[],connectionRows=0,peakRows=0,peakBytes=0,portLease=null,connectionController=null,connectionSerial=0,successorTicket=null;
   const live=()=>{demand(!disposed,'disposed');if(options.signal?.aborted)throw options.signal.reason||Error('Network cancelled');};
-  function cancel(clearTickets=true){serial++;connectionSerial++;connectionController?.abort();connectionController=null;controller?.abort();controller=null;if(clearTickets){tickets=[];connectionRows=0;}portLease?.dispose();portLease=null;}
+  function cancel(clearTickets=true){successorTicket=null;serial++;connectionSerial++;connectionController?.abort();connectionController=null;controller?.abort();controller=null;if(clearTickets){tickets=[];connectionRows=0;}portLease?.dispose();portLease=null;}
   function dispose(){if(disposed)return;cancel();disposed=true;selected.clear();scene=header=null;calls.dispose();outgoing.dispose();options.signal?.removeEventListener('abort',dispose);}
   options.signal?.addEventListener('abort',dispose,{once:true});
   function account(){const bytes=new TextEncoder().encode(JSON.stringify([...selected.values()])).length;demand(selected.size<=8&&bytes<=4194304,'retained call bound');peakRows=Math.max(peakRows,selected.size);peakBytes=Math.max(peakBytes,bytes);return bytes;}
@@ -27,16 +27,26 @@
    }
    live();demand(current===serial&&request===connectionSerial,'stale connection page');connectionRows=rows.length;tickets=copy(rows);return{offset,total,rows,limit:8};
   }
-  async function expand(id){live();demand(selected.size<8&&!selected.has(id),'call budget or already retained');const incoming=scene.incoming.find(e=>e.from===id),reverse=tickets.find(e=>e.direction==='outgoing'&&e.to===id);demand(incoming||reverse,'expand a currently exposed frontier');cancel();const current=serial;controller=new AbortController();const c=await row(id,controller.signal);live();demand(current===serial,'stale expansion');
-   if(reverse){const p=c.ports[reverse.slot];demand(p&&p.knownProducer===reverse.from&&p.outOrdinal===reverse.ordinal&&M.same(N.address(header,p.input),reverse.input)&&M.same(N.address(header,p.producer),reverse.producer),'reverse/input witness agreement');}
+  // One reverse-index row is enough to follow an unambiguous inventoried use.
+  // This is separate from the eight-row connection page; it never scans hidden consumers.
+  async function successor(id){
+   live();demand(selected.has(id),'successor of a retained call');successorTicket=null;
+   connectionController?.abort();connectionController=new AbortController();const request=++connectionSerial,current=serial,signal=connectionController.signal;
+   const c=selected.get(id);if(c.outCount!==1)return{kind:c.outCount?'branch':'end',count:c.outCount};
+   const e=await outgoing.get(c.outStart,signal);live();demand(current===serial&&request===connectionSerial,'stale successor');
+   demand(e.ordinal===c.outStart&&e.from===id&&integer(e.to)&&e.to<header.counts.calls&&integer(e.slot)&&e.slot<=64&&M.same(e.producer,c.anchor),'unique reverse source-use endpoint');
+   const edge=N.wire(header,e);successorTicket={...edge,direction:'outgoing'};return{kind:'unique',count:1,edge:copy(edge)};
+  }
+  async function expand(id){live();demand(selected.size<8&&!selected.has(id),'call budget or already retained');const incoming=scene.incoming.find(e=>e.from===id),reverse=tickets.find(e=>e.direction==='outgoing'&&e.to===id)|| (successorTicket?.to===id?successorTicket:null);demand(incoming||reverse,'expand a currently exposed frontier');cancel();const current=serial;controller=new AbortController();const c=await row(id,controller.signal);live();demand(current===serial,'stale expansion');
+   if(reverse){const p=c.ports[reverse.slot];demand(p&&p.knownProducer===reverse.from&&p.outOrdinal===reverse.ordinal&&M.same(N.address(header,p.input),reverse.input)&&M.same(N.address(header,p.producer),reverse.producer)&&p.role===reverse.role&&p.visibility===reverse.visibility&&p.hops.length===reverse.hops,'reverse/input witness agreement');}
    const next=new Map(selected);next.set(id,c);const model=N.create(header,[...next.values()],scene.focus);selected=next;scene=model;account();return copy(scene);
   }
   function collapse(id){live();demand(id!==scene.focus&&selected.has(id),'cannot collapse focus or absent call');cancel();selected.delete(id);scene=N.create(header,[...selected.values()],scene.focus);account();return copy(scene);}
   function getCall(id){live();demand(selected.has(id),'call outside retained cut');return copy(selected.get(id));}
   function release(){live();cancel(false);}
   async function inspect(id,slot){live();demand(selected.has(id)&&selected.get(id).ports[slot],'visible actual input');cancel(false);const current=serial;controller=new AbortController();demand(options.inspect,'source inspector unavailable');const lease=await options.inspect(d,copy(selected.get(id)),slot,{signal:controller.signal});if(disposed||current!==serial){lease.dispose();throw Error('Streamed network pages: stale inspector');}portLease=lease;return lease.getDetail();}
-  const state=()=>({format:'ProofAtlasStreamedNetworkState/1',disposed,mode:d.mode,inventoryCalls:d.counts.calls,retainedCalls:selected.size,retainedBytes:disposed?0:account(),callLimit:8,callByteLimit:4194304,peakRows,peakBytes,connectionRows,connectionLimit:8,callPages:calls.state(),outgoingPages:outgoing.state(),selectedPort:portLease?.state()||null,wholeTopologyRequested:false,wholeSourceArchiveRequested:false,wholeNativeRecordRequested:false});
-  try{await focus(options.focus??d.focus??0);return Object.freeze({getScene:()=>{live();return copy(scene);},getCall,focus,expand,collapse,connections,inspect,getDetail:()=>portLease?.getDetail()||null,info:a=>{live();demand(portLease,'no selected port');return portLease.info(a);},state,release,dispose});}catch(error){dispose();throw error;}
+  const state=()=>({format:'ProofAtlasStreamedNetworkState/1',disposed,mode:d.mode,inventoryCalls:d.counts.calls,retainedCalls:selected.size,retainedBytes:disposed?0:account(),callLimit:8,callByteLimit:4194304,peakRows,peakBytes,connectionRows,connectionLimit:8,successorRows:successorTicket?1:0,successorLimit:1,callPages:calls.state(),outgoingPages:outgoing.state(),selectedPort:portLease?.state()||null,wholeTopologyRequested:false,wholeSourceArchiveRequested:false,wholeNativeRecordRequested:false});
+  try{await focus(options.focus??d.focus??0);return Object.freeze({getScene:()=>{live();return copy(scene);},getCall,getIdentity:()=>{live();return{scope:header.scope,headerSha256:p.sha256};},focus,expand,collapse,connections,successor,inspect,getDetail:()=>portLease?.getDetail()||null,info:a=>{live();demand(portLease,'no selected port');return portLease.info(a);},state,release,dispose});}catch(error){dispose();throw error;}
  }
  const api={open};if(node)module.exports=api;else host.ProofAtlasNetworkStreamPages=api;
 })(typeof window==='undefined'?globalThis:window);

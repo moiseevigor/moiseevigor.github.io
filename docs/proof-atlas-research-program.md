@@ -56,6 +56,8 @@ The [source-input collar](/projects/proof-atlas/manual/equality-transport/) conn
 
 The [general application interface](/projects/proof-atlas/manual/equality-transport/#application-ports) retains the function and every supplied argument, including types and instances. Native checks cover 787 ports at 162 explicit occurrences, including 87 Riccati applications. Four-argument windows separate source uses from references in a literal function-type telescope, with an independently checked instantiation bridge and an explicit type-alias boundary. This extends structural/typed composition; value use and mathematical premise necessity remain distinct. [Checks and limits](/research/proof-atlas/application-ports/README.md).
 
+A [result-use path fold](/projects/proof-atlas/manual/paged-network/#ns-lab) follows a selected result through a unique inventoried consumer, retaining every side input and every original result portal. Its inverse reconstructs the application cut, including lexical binding paths and distinct original contexts. The fold stops at branches and its call budget; uses outside the inventory remain unknown. Native observations stay attached to the individual stages, while source-only paths have no inferred types. This is a typed/structural composition rule, not a new composite typing judgment or measured semantic compression. [Rule and finite checks](/research/proof-atlas/result-use-paths/README.md).
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?

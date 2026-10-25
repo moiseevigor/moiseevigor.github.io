@@ -1,0 +1,25 @@
+{
+  "format": "ProofAtlasResultPathBrowser/1",
+  "status": "PASS",
+  "profiles": 31,
+  "resultSelections": 36,
+  "sideInputSelections": 17,
+  "groupChecks": 5,
+  "selectionRoundTrips": 1,
+  "budgetContinuations": 1,
+  "branchStops": 1,
+  "sourceOnlyRefusals": 1,
+  "axeAudits": 4,
+  "staleRefusals": 1,
+  "corruptionRefusals": 1,
+  "optionalFailures": 1,
+  "zoomChecks": 2,
+  "keyboardChecks": 1,
+  "files": {
+    "public/js/proof-atlas-result-path.js": "6a6ad5aee2b22d51aa901a3799e0a6a1626155ce5c7f9a3e4bbd520c090faf85",
+    "public/js/proof-atlas-result-path-view.js": "f7b6ac9729c0b493b08779db1176aeebbe5452604ed609f22bff2246237f7190",
+    "public/js/proof-atlas-network-stream-pages.js": "f4b94aba42e76aa64bd3990ab5ec01a4c92eaa263c8709a87d2b6b79c3b8be04",
+    "public/js/proof-atlas-network-stream-view.js": "eb58b5eff6428e770aa0730ab977a58fd65d77f8255893c131f73f9618db332c",
+    "public/css/proof-atlas-result-path.css": "ad7aa3c3f5f5149752f4c8b0b5768f36529fe7374d18cf7a7c25f5dd30560fa3"
+  }
+}

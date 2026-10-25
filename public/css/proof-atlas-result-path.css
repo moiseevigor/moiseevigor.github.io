@@ -1,0 +1,26 @@
+.rp-path{padding:1rem;max-width:100%;box-sizing:border-box;background:var(--bg);color:var(--text);font:.95rem/1.6 var(--sans,system-ui)}
+.rp-path h3,.rp-path h4{margin:.25rem 0 .75rem;font:600 1.1rem/1.5 var(--sans,system-ui)}
+.rp-accounting{font-variant-numeric:tabular-nums}
+.rp-endpoints{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:1rem;align-items:center;margin:1.5rem 0}
+.rp-endpoint{min-width:0;padding:.8rem;border:1px solid var(--text-muted);border-left:3px solid var(--accent)}
+.rp-path pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:16rem;overflow:auto;font:.8rem/1.65 var(--mono,monospace);background:var(--fig-bg);padding:.6rem;color:var(--text)}
+.rp-path pre:focus-visible,.rp-path summary:focus-visible,.rp-path select:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.rp-path button{min-height:44px;max-width:100%;text-align:left}
+.rp-path-arrow{font:.85rem/1.5 var(--sans,system-ui);max-width:7rem;text-align:center;color:var(--text-muted)}
+.rp-boundary{border-left:2px dashed var(--text-muted);padding-left:.8rem}
+.rp-path summary{cursor:pointer;padding:.65rem 0;font-weight:600;min-height:44px;box-sizing:border-box}
+.rp-path details li{margin:.75rem 0}
+.rp-collar{margin:1.5rem 0;border-top:1px solid var(--border);padding-top:1rem}
+.rp-collar label{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.rp-collar ol{padding-left:1.5rem}
+.rp-collar li{margin:.65rem 0}
+.rp-collar .an-caption{margin-bottom:.25rem}
+@media(max-width:700px){.rp-endpoints{grid-template-columns:minmax(0,1fr)}.rp-path-arrow{max-width:none;text-align:left}.rp-path{padding:.75rem}.rp-endpoint{padding:.65rem}}
+
+.rp-endpoints[data-single=true]{grid-template-columns:minmax(0,1fr)}
+
+.an-lab .rp-path{margin:0;border:0;padding:1rem}
+.rp-path p{font-family:var(--sans,system-ui)}
+.rp-path .rp-collar{margin:1.5rem 0;padding:1rem 0 0;border-top:1px solid var(--border)}
+.rp-path-arrow{display:grid;gap:.3rem}.rp-direction{font-size:1.4rem}.rp-direction::after{content:'→'}
+@media(max-width:700px){.rp-direction::after{content:'↓'}.an-lab .rp-path{padding:.75rem}}

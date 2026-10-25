@@ -1,0 +1,27 @@
+{
+  "format": "ProofAtlasResultPathEvidence/1",
+  "status": "PASS",
+  "checkedAtUtc": "2026-10-25T22:13:16.985977+00:00",
+  "baselineCommit": "f40d7a487904f9244f2c3c93576984a8b6c1c15d",
+  "deployment": "LOCAL_NOT_PUBLISHED",
+  "sourceFiles": {
+    "public/js/proof-atlas-result-path.js": "6a6ad5aee2b22d51aa901a3799e0a6a1626155ce5c7f9a3e4bbd520c090faf85",
+    "public/js/proof-atlas-result-path-view.js": "f7b6ac9729c0b493b08779db1176aeebbe5452604ed609f22bff2246237f7190",
+    "public/js/proof-atlas-network-stream-pages.js": "f4b94aba42e76aa64bd3990ab5ec01a4c92eaa263c8709a87d2b6b79c3b8be04",
+    "public/js/proof-atlas-network-stream-view.js": "eb58b5eff6428e770aa0730ab977a58fd65d77f8255893c131f73f9618db332c",
+    "public/css/proof-atlas-result-path.css": "ad7aa3c3f5f5149752f4c8b0b5768f36529fe7374d18cf7a7c25f5dd30560fa3",
+    "research/proof-atlas/network-streaming/index.html": "b722c9e6e6aaccf05e9df5f804a19f7b822652ad42cfe12b2f6715a2599ae86b",
+    "docs/proof-atlas-research-program.md": "b5ebc4cb3c709c80311922440a9ac7137e4308b604e7ec3382682d2489b19283",
+    "projects/proof-atlas/manual/index.html": "841f6b90e9f04ce49893df7af1a39ddacd780d6d61348a6efc563650a9d9266a",
+    "scripts/test-proof-atlas-result-path.cjs": "47247340bfef0318007ade77f6fc9f4c876669f0cb55e6efb1db30c0480fe1c7",
+    "scripts/test-proof-atlas-result-path-browser.cjs": "af53e4cc883fa6c61df431e719c95c9afdca7c0f06294dbcfb2e511e24d21441"
+  },
+  "reports": {
+    "model-check.json": "d7f1e32d036aa86039572b456cda78651465133af64670c30efbad8c2bd84ad1",
+    "browser-check.json": "c07340e356668867edbcb2cd008c73ef4cc53e2b972c5ac9490d82c850c39088",
+    "legacy-model-check.json": "324f8a0342dccd94171c4ef2a7329372e03fccff43b026ed530f45dcce206b61",
+    "compatibility.json": "8b4d7e9ad450afbd7741e47f36c6c9dfc841eb1dffe2e5f5e497040ce7cfa0cd"
+  },
+  "compiledDataChanges": [],
+  "scope": "A reversible source-use path fold with original native observations, all side inputs and all result portals. A finite application inventory does not prove complete-use coverage, premise necessity, a composite typing judgment, semantic compression or improved human comprehension."
+}
