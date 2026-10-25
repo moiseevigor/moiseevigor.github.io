@@ -1,0 +1,152 @@
+{
+  "format": "ProofAtlasMethodQueryRegressions/1",
+  "status": "PASS",
+  "checkers": [
+    {
+      "file": "scripts/test-proof-atlas-method-interfaces-browser.cjs",
+      "sha256": "43f0eb9b58c7ae384fefde9627cbcc6faa90d337f154af42b8b0b831a43e9d8d"
+    },
+    {
+      "file": "scripts/test-proof-atlas-method-replay-browser.cjs",
+      "sha256": "de59a22c82d3fa3e69bd73d28e8aecd5b33c9fdba6d67661170ac3e2a4757462"
+    },
+    {
+      "file": "scripts/test-proof-atlas-manual.cjs",
+      "sha256": "4a82cc6296954d4df584d6aa8221d59dda83c70118809e85a8d38dd9c5a68e47"
+    },
+    {
+      "file": "scripts/test-proof-atlas-elimination.cjs",
+      "sha256": "167d23139e3cb0e0d394c33fed2dca688958c53eb41c8e6f83aa3fafc63b72d5"
+    },
+    {
+      "file": "scripts/test-proof-atlas-structure.cjs",
+      "sha256": "3f19d7e89830011075057202ad3f6fe3451b9712d443ec4b149f2c214f208b74"
+    }
+  ],
+  "browserReports": [
+    {
+      "status": "PASS",
+      "methodScenes": 16,
+      "riccatiScenes": 8,
+      "controlScenes": 8,
+      "inputSelections": 24,
+      "computedReferenceJumps": 1,
+      "originalReferenceJumps": 7,
+      "originalMethodJumps": 9,
+      "axeAudits": 4,
+      "failureControls": 2,
+      "staleControls": 1,
+      "checkerSha256": "43f0eb9b58c7ae384fefde9627cbcc6faa90d337f154af42b8b0b831a43e9d8d",
+      "builtFiles": {
+        "public/js/proof-atlas-method-interfaces.js": "7dbc64012f56a5b72536dadd47abb6d2cff9d72e481a23752afbe966375a05e3",
+        "public/js/proof-atlas-method-examples.js": "8a46cb390581b861208e56c560ea88ef4e4df6e52580c6159ddef02db9b56e0c",
+        "public/js/proof-atlas-elimination.js": "c349b65a5126566716a64c5b6925b17709c71e0bd574a7c0e0957fef96d87127",
+        "public/js/proof-atlas-library.js": "0c23a313356a5d31eb6470a75d1a7bcefadffdafc2751b19c6e6e7906a264cf4",
+        "public/css/proof-atlas-theme.css": "a63cab151db80389ffc61e64221258c309f7da951c183c9a879a409e5fa90c27",
+        "public/data/proof-atlas/method-interfaces-manifest.js": "35545092727a15db1c18536f31361c0fab98ab132610ab375eeb242216e8b0d7"
+      }
+    },
+    {
+      "format": "ProofAtlasMethodReplayBrowserAudit/1",
+      "status": "PASS",
+      "profiles": 3,
+      "calls": 9,
+      "methodScenes": 18,
+      "inputSelections": 18,
+      "originalReferenceJumps": 18,
+      "originalMethodJumps": 18,
+      "librarySourceJumps": 1,
+      "libraryMethodScenes": 2,
+      "axeAudits": 4,
+      "failureControls": 2,
+      "staleControls": 1,
+      "checkerSha256": "de59a22c82d3fa3e69bd73d28e8aecd5b33c9fdba6d67661170ac3e2a4757462",
+      "builtFiles": {
+        "public/js/proof-atlas-method-interfaces.js": {
+          "sourceSha256": "7dbc64012f56a5b72536dadd47abb6d2cff9d72e481a23752afbe966375a05e3",
+          "servedSha256": "7dbc64012f56a5b72536dadd47abb6d2cff9d72e481a23752afbe966375a05e3"
+        },
+        "public/js/proof-atlas-method-examples.js": {
+          "sourceSha256": "8a46cb390581b861208e56c560ea88ef4e4df6e52580c6159ddef02db9b56e0c",
+          "servedSha256": "8a46cb390581b861208e56c560ea88ef4e4df6e52580c6159ddef02db9b56e0c"
+        },
+        "public/js/proof-atlas-elimination.js": {
+          "sourceSha256": "c349b65a5126566716a64c5b6925b17709c71e0bd574a7c0e0957fef96d87127",
+          "servedSha256": "c349b65a5126566716a64c5b6925b17709c71e0bd574a7c0e0957fef96d87127"
+        },
+        "public/js/proof-atlas-sync.js": {
+          "sourceSha256": "0b746f649c0b8b76b683300b045f1efcec0897c1d3bc2a802fe4b5296fbf5303",
+          "servedSha256": "0b746f649c0b8b76b683300b045f1efcec0897c1d3bc2a802fe4b5296fbf5303"
+        },
+        "public/js/proof-atlas-library.js": {
+          "sourceSha256": "0c23a313356a5d31eb6470a75d1a7bcefadffdafc2751b19c6e6e7906a264cf4",
+          "servedSha256": "0c23a313356a5d31eb6470a75d1a7bcefadffdafc2751b19c6e6e7906a264cf4"
+        },
+        "public/js/proof-atlas-library-data.js": {
+          "sourceSha256": "a4a01e2e93d015397eb6a8d6fd677e6b788e079440c3e206c43b8c56e06161e9",
+          "servedSha256": "a4a01e2e93d015397eb6a8d6fd677e6b788e079440c3e206c43b8c56e06161e9"
+        },
+        "public/js/proof-atlas-occurrence-types.js": {
+          "sourceSha256": "b80d43d682d3a4b7f99e284a09a6249e11ca24197e1901158caa723dcf0f6c8f",
+          "servedSha256": "b80d43d682d3a4b7f99e284a09a6249e11ca24197e1901158caa723dcf0f6c8f"
+        },
+        "public/js/proof-atlas-recursive-inputs.js": {
+          "sourceSha256": "a2aa2cd18602d8a3acbfb9ad2cf331964a06d18f1bdc472730424f0205adf862",
+          "servedSha256": "a2aa2cd18602d8a3acbfb9ad2cf331964a06d18f1bdc472730424f0205adf862"
+        },
+        "public/css/proof-atlas-theme.css": {
+          "sourceSha256": "a63cab151db80389ffc61e64221258c309f7da951c183c9a879a409e5fa90c27",
+          "servedSha256": "a63cab151db80389ffc61e64221258c309f7da951c183c9a879a409e5fa90c27"
+        },
+        "public/data/proof-atlas/method-interfaces-ai-manifest.js": {
+          "sourceSha256": "e53ce10c4751c239432372b32fc2e8b90d11a85a5d66e5e08646f03dd0f67285",
+          "servedSha256": "e53ce10c4751c239432372b32fc2e8b90d11a85a5d66e5e08646f03dd0f67285"
+        },
+        "projects/proof-atlas/manual/index.html": {
+          "sourceSha256": "86d203f26ee4f27b61cf80593ae989353afb94e840dfe9e63407229cf8f0f724",
+          "servedSha256": "8413314b2a3c6cef217198f9dc62bf413ac04088ac42d3d7a3c77c9f819acf52",
+          "htmlComparison": {
+            "normalization": "Only four shared CSS build-time query versions",
+            "styles": [
+              "site",
+              "distill",
+              "syntax",
+              "theme"
+            ],
+            "normalizedSha256": "95330c4741946d3f856abbf9afdee7bab92f8c80dab5330c406bcd84d26e1071"
+          }
+        },
+        "projects/proof-atlas/library/index.html": {
+          "sourceSha256": "e683404f639b144389cdca76157f93cc7c0badaf9e54c82e1e4d2fbfaeec2c39",
+          "servedSha256": "3cf1e45d78ede32ec528144461e9a3061f1db3231016b5a046768dd1092bd3f9",
+          "htmlComparison": {
+            "normalization": "Only four shared CSS build-time query versions",
+            "styles": [
+              "site",
+              "distill",
+              "syntax",
+              "theme"
+            ],
+            "normalizedSha256": "f187b34f68894d1e6127f342196ffbee3c960f3b9138d73877ec2506c3d09768"
+          }
+        }
+      },
+      "librarySourceTarget": "/projects/proof-atlas/library/?edition=goedel-sample-4331&proof=lean_workbook_plus_62755&route=1%3A1.1.2.2.0.0.1"
+    }
+  ],
+  "manual": {
+    "constructors": 12,
+    "semanticFields": 27,
+    "negativeControls": 81
+  },
+  "elimination": {
+    "completeEliminations": 16,
+    "partialCallsWithheld": 8,
+    "negativeControls": 304
+  },
+  "preservation": {
+    "sections": 63,
+    "stableAnchors": 75
+  },
+  "scope": "Current complete-reader regression checks after factoring per-query validation. Historical reports and native inputs remain frozen; these reports do not add kernel or comprehension evidence."
+}

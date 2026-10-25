@@ -1,0 +1,207 @@
+{
+  "format": "ProofAtlasMethodQueryPageProducer/1",
+  "status": "PASS",
+  "producerSha256": "4d0149bbedd673a9c2fe008f5c9da14aa49ce2ff7e3281d44e0a0905cbe8c57d",
+  "validatorSha256": "7dbc64012f56a5b72536dadd47abb6d2cff9d72e481a23752afbe966375a05e3",
+  "profiles": 9,
+  "queries": 21,
+  "methods": 34,
+  "rows": [
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "edition": "published-15",
+      "originalRecord": {
+        "file": "/public/data/proof-atlas/branch-interfaces/ab7dff22cce3ab068a08a56cce0b109dbd819c40f79ced2a67edd42cfce5761a.json.gz",
+        "sha256": "ab7dff22cce3ab068a08a56cce0b109dbd819c40f79ced2a67edd42cfce5761a",
+        "bytes": 568387
+      },
+      "headerBytes": 3348,
+      "queries": 7,
+      "methods": 8,
+      "queryBytes": [
+        133692,
+        63911,
+        68721,
+        71795,
+        71628,
+        76720,
+        80097
+      ],
+      "entrySha256": [
+        "a255675aae9d9b46fb2a05369b3f17ffb216c8890bdb7f99ca25543bbe718b6e",
+        "1e3bafdc23f5e5c4445c9b0362133bc3a98e0e263669e412df71c2575ed99237",
+        "6fd6d1e6de1c4938fd8c511e0bda4d3767aebd8c0a8db2cfbad4a24d6191677b",
+        "3491c7543f3fe75c36aad2eefa2318ed625fa250d7811832f9cc7bf90dcf8ee3",
+        "7acd148bb45f7e3b123e6ef1299279dd7f735706d756ac542035f6288d20663d",
+        "d0f01376af952c547110feb866a6bdc40a582f31f4bc2952ac4e32d0c0c90369",
+        "6d253b2881823c3e444811de48bedd9354912f48aa242b5e9f182041eb8c5d56"
+      ],
+      "roundtrip": true
+    },
+    {
+      "name": "AtlasMethodControls.conjunction",
+      "edition": "branch-method-controls",
+      "originalRecord": {
+        "file": "/public/data/proof-atlas/branch-interfaces/1e31a9871a371ad71decfaae31da1e6a14bac8f42ba1abf12cf9680f410fe207.json.gz",
+        "sha256": "1e31a9871a371ad71decfaae31da1e6a14bac8f42ba1abf12cf9680f410fe207",
+        "bytes": 21158
+      },
+      "headerBytes": 3443,
+      "queries": 1,
+      "methods": 1,
+      "queryBytes": [
+        18363
+      ],
+      "entrySha256": [
+        "e50517e99cbf8aa2990523dfa548dd50f7060c67352aa5da372753575f63bbcf"
+      ],
+      "roundtrip": true
+    },
+    {
+      "name": "AtlasMethodControls.dependent",
+      "edition": "branch-method-controls",
+      "originalRecord": {
+        "file": "/public/data/proof-atlas/branch-interfaces/e6c63b7a3d46bf410aa8d7255625d0686bffb9ba8dd63abc1cc6213f1e3795a4.json.gz",
+        "sha256": "e6c63b7a3d46bf410aa8d7255625d0686bffb9ba8dd63abc1cc6213f1e3795a4",
+        "bytes": 20292
+      },
+      "headerBytes": 3439,
+      "queries": 1,
+      "methods": 2,
+      "queryBytes": [
+        17501
+      ],
+      "entrySha256": [
+        "c8ef4ec9a496ddddc1b7d3f77740f209299efb6148a948c85eb036fdb9ceecbc"
+      ],
+      "roundtrip": true
+    },
+    {
+      "name": "AtlasMethodControls.disjunction",
+      "edition": "branch-method-controls",
+      "originalRecord": {
+        "file": "/public/data/proof-atlas/branch-interfaces/3e662100314cf544590f77f8fc6a66577e22510e892baeadc891e823fce5edba.json.gz",
+        "sha256": "3e662100314cf544590f77f8fc6a66577e22510e892baeadc891e823fce5edba",
+        "bytes": 25417
+      },
+      "headerBytes": 3443,
+      "queries": 1,
+      "methods": 2,
+      "queryBytes": [
+        22622
+      ],
+      "entrySha256": [
+        "1ca5969c40ed39b793dba6c2f32e046a208e96869983961a7bb7761c42ac9fe3"
+      ],
+      "roundtrip": true
+    },
+    {
+      "name": "AtlasMethodControls.functionValued",
+      "edition": "branch-method-controls",
+      "originalRecord": {
+        "file": "/public/data/proof-atlas/branch-interfaces/d9fbdd6acb671855a00b74a324766535e2c3d116b1d02e144fa5793dea006d15.json.gz",
+        "sha256": "d9fbdd6acb671855a00b74a324766535e2c3d116b1d02e144fa5793dea006d15",
+        "bytes": 17332
+      },
+      "headerBytes": 3449,
+      "queries": 1,
+      "methods": 2,
+      "queryBytes": [
+        14531
+      ],
+      "entrySha256": [
+        "6d849c2ed49c129bcfe47417df348ef570e398ec0bfa815ccb1f811dae2824ce"
+      ],
+      "roundtrip": true
+    },
+    {
+      "name": "AtlasMethodControls.storedMethod",
+      "edition": "branch-method-controls",
+      "originalRecord": {
+        "file": "/public/data/proof-atlas/branch-interfaces/917732525c2233fd4509c5e273867bf98fb89cc070b85da8e6b5b8fb318ef0fd.json.gz",
+        "sha256": "917732525c2233fd4509c5e273867bf98fb89cc070b85da8e6b5b8fb318ef0fd",
+        "bytes": 21156
+      },
+      "headerBytes": 3445,
+      "queries": 1,
+      "methods": 1,
+      "queryBytes": [
+        18359
+      ],
+      "entrySha256": [
+        "d7b1909051bf8d85ad693833b0c54f0ae1bb4d631289fe1beefe9ddc411f9afa"
+      ],
+      "roundtrip": true
+    },
+    {
+      "name": "lean_workbook_20418",
+      "edition": "goedel-sample-4331",
+      "originalRecord": {
+        "file": "/public/data/proof-atlas/method-replay/bff138a44a4d19d5b90942dec2b99593c3e1c6d42f3d7376bb3c890ba321bde6.json.gz",
+        "sha256": "bff138a44a4d19d5b90942dec2b99593c3e1c6d42f3d7376bb3c890ba321bde6",
+        "bytes": 136954
+      },
+      "headerBytes": 6454,
+      "queries": 1,
+      "methods": 2,
+      "queryBytes": [
+        131325
+      ],
+      "entrySha256": [
+        "340b038a08f0a9aaa5463273e849a0d81a382a9079a2f222976e6e2ec1cdca09"
+      ],
+      "roundtrip": true
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "edition": "goedel-sample-4331",
+      "originalRecord": {
+        "file": "/public/data/proof-atlas/method-replay/679d1701c242dc4a0b4e4f24920d34b6152e781513d7b40298e3626c81ba52d8.json.gz",
+        "sha256": "679d1701c242dc4a0b4e4f24920d34b6152e781513d7b40298e3626c81ba52d8",
+        "bytes": 546399
+      },
+      "headerBytes": 6878,
+      "queries": 7,
+      "methods": 14,
+      "queryBytes": [
+        106062,
+        82910,
+        84532,
+        64080,
+        69200,
+        69262,
+        65176
+      ],
+      "entrySha256": [
+        "7f816e7812ba19ef270f34dc3d76b7ec6febc5b9da9db2185ec218423d19f386",
+        "12ad3b82c8b9cbddbd0fa82749217b4828cdd9b95e45c732fab68d2725f421cf",
+        "3178302922c4157d9de768b70733afb3b877a8befdfd43bf3b69b27f5ba3bc20",
+        "5318e9dbf5b23f4dd406b0b3b16a48377cb7be62965b89afa16a906dbc14613e",
+        "b63350ca299d227fe5413535ef430c761202f8431ef280d5d28f846a1c62ccff",
+        "dd2ab7abd38ca48c81059b8dd95868a3be9c9917566aefbd36f2a4d93e276c84",
+        "e282c8f0c071ff70425bb7b985eb8cb0acdc23743be5ddfcd4b3aff5665dc9e9"
+      ],
+      "roundtrip": true
+    },
+    {
+      "name": "lean_workbook_plus_62755",
+      "edition": "goedel-sample-4331",
+      "originalRecord": {
+        "file": "/public/data/proof-atlas/method-replay/558bd3f7d039fffb248c80e8e4b90dd7921aaa505c1433911593b0a2fbc48572.json.gz",
+        "sha256": "558bd3f7d039fffb248c80e8e4b90dd7921aaa505c1433911593b0a2fbc48572",
+        "bytes": 113162
+      },
+      "headerBytes": 4974,
+      "queries": 1,
+      "methods": 2,
+      "queryBytes": [
+        109013
+      ],
+      "entrySha256": [
+        "54fac7c7fc8c124b7ee62c13baaf793eb2d36a248a5a7de4a634ffb81c5fba56"
+      ],
+      "roundtrip": true
+    }
+  ],
+  "scope": "Derived pages of unchanged compiled method records, not new native judgments. Full source and native records are read on the offline producer/reference side only."
+}

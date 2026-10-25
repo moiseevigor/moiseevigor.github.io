@@ -3,19 +3,20 @@
  'use strict';
  const node=typeof module!=='undefined'&&module.exports,A=node?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData,P=node?require('./proof-atlas-source-pages'):host.ProofAtlasSourcePages,M=node?require('./proof-atlas-method-interfaces'):host.ProofAtlasMethodInterfaces;
  const fields=['kind','children','payloads','expanded','neededScope'],hash=x=>typeof x==='string'&&/^[a-f0-9]{64}$/.test(x),same=(a,b)=>JSON.stringify(a)===JSON.stringify(b),demand=(ok,m)=>{if(!ok)throw Error('Method source: '+m);},check=s=>{if(s?.aborted)throw s.reason||new DOMException('Method source cancelled','AbortError');};
- async function open(sourceDescriptor,methodDescriptor,record,options={}){
+ async function prepare(sourceDescriptor,methodDescriptor,record,options={},queryParts=null){
   const sd=JSON.parse(JSON.stringify(sourceDescriptor)),d=JSON.parse(JSON.stringify(methodDescriptor)),r=JSON.parse(JSON.stringify(record)),signal=options.signal,rowLimit=options.rowLimit??4096,jsonByteLimit=options.jsonByteLimit??4194304;
+  let query=queryParts?JSON.parse(JSON.stringify(queryParts)):null;const delivery=query?.delivery||null,queryBytes=query?.decodedBytes||0;
   demand(Number.isInteger(rowLimit)&&rowLimit>=1&&rowLimit<=4096&&Number.isInteger(jsonByteLimit)&&jsonByteLimit>=1&&jsonByteLimit<=4194304,'source closure bounds');
   demand(d.name===r.name&&d.indexSha256===r.indexSha256&&d.sourceSha256===r.sourceSha256&&sd.edition===d.edition&&sd.name===r.name&&sd.indexSha256===r.indexSha256&&sd.sourceSha256===r.sourceSha256,'descriptor identity');demand(hash(sd.sha256)&&sd.file==='/public/data/proof-atlas/source-pages/'+r.indexSha256+'/manifest-'+sd.sha256+'.json.gz','source manifest address');const directory=d.edition==='goedel-sample-4331'?'method-replay':'branch-interfaces';
-  demand(hash(d.sha256)&&d.file==='/public/data/proof-atlas/'+directory+'/'+d.sha256+'.json.gz'&&Number.isInteger(d.bytes)&&d.bytes>0&&d.bytes<=8388608,'native record descriptor');
+  demand(hash(d.sha256)&&d.file==='/public/data/proof-atlas/'+directory+'/'+d.sha256+'.json.gz'&&Number.isInteger(d.bytes)&&d.bytes>0&&d.bytes<=(query?67108864:8388608),'native record descriptor');
   const rows=new Map();let cursor=null,methods=null,disposed=false,jsonBytes=0,peakRows=0,peakJsonBytes=0,nativeBytes=0,phase='loading';
-  const state=()=>({format:'ProofAtlasMethodSourceState/1',phase,disposed,sourceRows:rows.size,rowLimit,sourceRowJsonBytes:jsonBytes,jsonByteLimit,peakSourceRows:peakRows,peakSourceRowJsonBytes:peakJsonBytes,nativeRecordDecodedBytes:nativeBytes,nativeRecordByteLimit:8388608,sourcePageCache:cursor?.state()||null,wholeSourceArchiveRequested:false,validation:'Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements.'});
+  const state=()=>({format:'ProofAtlasMethodSourceState/1',phase,disposed,sourceRows:rows.size,rowLimit,sourceRowJsonBytes:jsonBytes,jsonByteLimit,peakSourceRows:peakRows,peakSourceRowJsonBytes:peakJsonBytes,nativeRecordDecodedBytes:nativeBytes,nativeRecordByteLimit:8388608,sourcePageCache:cursor?.state()||null,wholeSourceArchiveRequested:false,...(delivery?{delivery,validatedQueries:phase==='ready'?1:0,selectedQueryDecodedBytes:nativeBytes}:{}),validation:delivery?'Selected original native query; other queries remain inventoried but unvalidated by this lease. Hash-checked bounded source closure; type/computed graphs for this query load fully. JSON bytes are not heap measurements.':'Original full native record; hash-checked source pages and bounded source closure. Computed/type graphs remain fully resident; JSON byte counts are not heap measurements.'});
   function announce(){options.onState?.(state());}
   function dispose(){if(disposed)return;disposed=true;phase='disposed';methods=null;rows.clear();jsonBytes=0;nativeBytes=0;cursor?.dispose();announce();}
   try{
-   check(signal);let evidence=await A.compressed(d.file,d.sha256,{maxBytes:8388608,expectedBytes:d.bytes,signal});nativeBytes=d.bytes;check(signal);
-   demand(Array.isArray(evidence.entries)&&evidence.entries.length>0&&evidence.entries.length<=64,'query count');
-   demand(same(d.queries,evidence.entries.map(q=>({route:q.parent.route,node:q.parent.node,minors:q.branches.map(b=>b.minor)}))),'native query inventory');
+   check(signal);let evidence=query?query.metadata:await A.compressed(d.file,d.sha256,{maxBytes:8388608,expectedBytes:d.bytes,signal});nativeBytes=query?queryBytes:d.bytes;check(signal);
+   let entries=query?[query.entry]:evidence.entries;demand(Array.isArray(entries)&&entries.length>0&&entries.length<=64,'query count');
+   if(query){demand(!Object.hasOwn(evidence,'entries')&&Number.isInteger(queryBytes)&&queryBytes>0&&queryBytes<=8388608&&same(d.queries,query.inventory),'original query inventory');M.validateProvenance(evidence,r);M.validateInventory(evidence,query.inventory);}else demand(same(d.queries,entries.map(q=>({route:q.parent.route,node:q.parent.node,minors:q.branches.map(b=>b.minor)}))),'native query inventory');
    cursor=await P.open(sd,r,{signal,pageLimit:1,indexLimit:2});const identity=P.identity(cursor);demand(identity.name===d.name&&identity.indexSha256===d.indexSha256&&identity.sourceSha256===d.sourceSha256,'source page owner');phase='source-closure';announce();
    const n=cursor.data.kind.length;
    async function row(id){check(signal);demand(Number.isInteger(id)&&id>=0&&id<n,'source address');if(rows.has(id))return rows.get(id);demand(rows.size<rowLimit,'source row limit exceeded; no full-packet fallback');
@@ -25,8 +26,8 @@
    const pending=new Set(),expanded=new Set();
    // Ancestor paths and application spines retain the original context and
    // source argument addresses. Only method subterms acquire full DAG closure.
-   const outcomes=evidence.outcomes||[];demand(Array.isArray(outcomes)&&outcomes.length<=64,'outcome count');for(const o of outcomes)await route(o.route);
-   for(const q of evidence.entries){const p=q.parent;let id=await route(p.route,p.node);for(let depth=0;;depth++){demand(depth<=128,'application spine bound');const tuple=await row(id);if(tuple[0]!==5)break;await row(tuple[1][1]);id=tuple[1][0];}
+   const outcomes=query?[]:evidence.outcomes||[];demand(Array.isArray(outcomes)&&outcomes.length<=64,'outcome count');for(const o of outcomes)await route(o.route);
+   for(const q of entries){const p=q.parent;let id=await route(p.route,p.node);for(let depth=0;;depth++){demand(depth<=128,'application spine bound');const tuple=await row(id);if(tuple[0]!==5)break;await row(tuple[1][1]);id=tuple[1][0];}
     demand(Array.isArray(p.arguments)&&p.arguments.length<=256&&Array.isArray(q.branches)&&q.branches.length<=32,'argument/branch count');for(const a of p.arguments)await route(a.route,a.node);
     for(const b of q.branches){const a=p.eliminationJudgment?.arguments?.find(a=>a.sourceSlot===b.sourceSlot);demand(a,'method source slot');pending.add(await route(a.route,a.node));}
    }
@@ -34,10 +35,12 @@
    // the one-page fetch cache useful without expanding shared occurrences.
    while(pending.size){check(signal);let id=-1;for(const candidate of pending)if(candidate>id)id=candidate;pending.delete(id);if(expanded.has(id))continue;const tuple=await row(id);expanded.add(id);for(const child of tuple[1])if(!expanded.has(child))pending.add(child);demand(pending.size<=rowLimit,'source frontier bound');}
    const data={...cursor.manifest.header};for(const [index,field]of fields.entries())data[field]=new Proxy([],{get(target,key,receiver){if(key==='length')return n;if(typeof key==='string'&&/^(0|[1-9]\d*)$/.test(key)){check(signal);demand(!disposed,'disposed');const value=rows.get(Number(key));demand(value,'source row outside checked closure');return value[index];}return Reflect.get(target,key,receiver);},has(target,key){return typeof key==='string'&&/^(0|[1-9]\d*)$/.test(key)?Number(key)<n:Reflect.has(target,key);},set(){throw Error('Method source: read-only closure');},ownKeys(){throw Error('Method source: whole-source enumeration unavailable');}});Object.freeze(data);
-   phase='validating';announce();methods=M.open(evidence,data,r,d);evidence=null;check(signal);phase='ready';announce();
+   phase='validating';announce();methods=query?M.openQuery(evidence,entries[0],query.inventory,data,r,d):M.open(evidence,data,r,d);evidence=null;entries=null;query=null;check(signal);phase='ready';announce();
    const live=()=>{check(signal);demand(!disposed&&methods,'disposed');};
    return Object.freeze({create:(at,minor)=>{live();return methods.create(at,minor);},verifySource:(typing,at,minor)=>{live();return methods.verifySource(typing,at,minor);},has:(at,minor)=>{live();return methods.has(at,minor);},state,dispose,source:Object.freeze({...methods.source}),sourcePagesSha256:identity.manifestSha256,evidenceSha256:d.sha256});
   }catch(error){dispose();throw error;}
  }
- const api={open};if(node)module.exports=api;else host.ProofAtlasMethodSource=api;
+ async function open(sourceDescriptor,methodDescriptor,record,options={}){return prepare(sourceDescriptor,methodDescriptor,record,options);}
+ async function fromQuery(sourceDescriptor,methodDescriptor,record,parts,options={}){return prepare(sourceDescriptor,methodDescriptor,record,options,parts);}
+ const api={open,fromQuery};if(node)module.exports=api;else host.ProofAtlasMethodSource=api;
 })(typeof window==='undefined'?globalThis:window);

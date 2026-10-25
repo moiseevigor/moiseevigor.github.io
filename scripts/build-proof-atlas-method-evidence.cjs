@@ -1,8 +1,3 @@
-/* Verify the immutable earlier checkpoint; current compatibility is separate. */
+/* Frozen checkpoint verification; current compatibility is recorded separately. */
 'use strict';
-const fs=require('fs'),crypto=require('crypto'),assert=require('assert/strict'),base='research/proof-atlas/branch-interfaces/',sha=b=>crypto.createHash('sha256').update(b).digest('hex'),checkpoint=JSON.parse(fs.readFileSync('research/proof-atlas/method-replay/predecessor.json'));
-assert.equal(checkpoint.format,'ProofAtlasMethodCheckpoint/1');assert.equal(checkpoint.sourceRevisionFilesVerified,true);assert.equal(checkpoint.bundle.file,base+'method-interface-evidence.json');assert.equal(checkpoint.audit.file,base+'audit.json');
-const bytes=fs.readFileSync(checkpoint.bundle.file);assert.equal(sha(bytes),checkpoint.bundle.sha256);assert.equal(sha(fs.readFileSync(checkpoint.audit.file)),checkpoint.audit.sha256);const bundle=JSON.parse(bytes);assert.equal(bundle.status,'PASS');
-for(const [name,report]of Object.entries(bundle.reports)){assert.equal(report.status,'PASS');assert.deepEqual(JSON.parse(fs.readFileSync(base+name+'.json')),report);}
-const compatibility=JSON.parse(fs.readFileSync('research/proof-atlas/method-replay/compatibility.json'));assert.equal(compatibility.status,'PASS');assert.equal(compatibility.checkpointComparison.auditSha256,checkpoint.audit.sha256);assert.equal(compatibility.checkpointComparison.sameFunctionalObservations,true);assert.equal(compatibility.modelSha256,sha(fs.readFileSync('public/js/proof-atlas-method-interfaces.js')));assert.equal(compatibility.checkerSha256,sha(fs.readFileSync('scripts/test-proof-atlas-method-interfaces.cjs')));
-console.log(JSON.stringify({status:'PASS',sourceRevision:checkpoint.sourceRevision,frozenReports:Object.keys(bundle.reports).length,currentCompatibility:'PASS',historicalBytesRewritten:false}));
+console.log(JSON.stringify(require('./proof-atlas-method-checkpoint.cjs').verify('branch-interfaces')));

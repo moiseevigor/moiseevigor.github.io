@@ -99,6 +99,7 @@ include:
   - "method-interface-evidence.json"
   - "method-replay-evidence.json"
   - "method-source-evidence.json"
+  - "method-query-evidence.json"
   - "compiled-term-checks.json"
   - "proof-step-map.json"
   # Frozen Proof Atlas compiled-query policies used by the public method.

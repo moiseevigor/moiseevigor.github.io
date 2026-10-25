@@ -11,7 +11,7 @@
    for(let n=0;n<cs.length;n++)todo.push([cs[n],ds[n],depth+(([6,7].includes(kind)&&n===1||kind===8&&n===2)?1:0)]);
   }return true;
  }
- function validate(evidence,data,record){
+ function validateProvenance(evidence,record){
   demand(evidence?.format==='ProofAtlasBranchInterfaces/1'&&evidence.nativeDagMatchesPacket===true&&evidence.leanVersion==='4.33.1','format/native version');const source=evidence.source,env=evidence.environment;
   demand(source?.name===record.name&&source.indexSha256===record.indexSha256&&source.sourceSha256===record.sourceSha256&&evidence.sourceAttachmentVerified===true,'source attachment');
   const replay=env?.kind==='public-packet-method-interface/1';
@@ -31,10 +31,20 @@
    if(source.edition==='published-15'){const m=env.sourceModules?.[record.module];demand(evidence.sourceModuleHashVerified===true&&evidence.controlFixtureHashVerified===false&&m?.sourceSha256===source.sourceSha256&&hash(m.compiledModuleSha256)&&record.name==='JacobiData.slope_bound_abs','Riccati module provenance');}
    else demand(source.edition==='branch-method-controls'&&evidence.sourceModuleHashVerified===false&&evidence.controlFixtureHashVerified===true&&env.controlSourceSha256===source.sourceSha256&&record.module===evidence.nativeMainModule,'control source provenance');
   }
-  demand(Array.isArray(evidence.entries)&&evidence.entries.length>0&&evidence.entries.length<=64,'query bound');const queries=new Set();
-  if(replay){const outcomes=evidence.outcomes;demand(Array.isArray(outcomes)&&outcomes.length>0&&outcomes.length<=64,'replay outcome bound');const seen=new Set();for(const o of outcomes){demand(o.route&&Number.isInteger(o.route.root)&&Array.isArray(o.route.slots)&&o.route.slots.length<=512&&o.route.slots.every(n=>Number.isInteger(n)&&n>=0)&&['checked','unavailable'].includes(o.status),'replay outcome route/status');A.walk(data,o.route);demand(!seen.has(key(o.route)),'duplicate replay outcome');seen.add(key(o.route));if(o.status==='unavailable')demand(typeof o.reason==='string'&&o.reason.length>0,'unavailable outcome reason');}demand(same(outcomes.filter(o=>o.status==='checked').map(o=>o.route),evidence.entries.map(q=>q.parent.route)),'replay checked outcome coverage');}
-  for(const q of evidence.entries){const p=q.parent,at=T.context(data,p.route),g=p.typeGraph,t=p.eliminationJudgment;
-   demand(p.status==='checked'&&p.kernelCheck==='PASS'&&p.contextWellFormed===true&&p.typeAbstractionRoundtrip===true&&p.node===at.node&&p.path===A.path(data,p.route)&&same(p.context,at.binders)&&roles.includes(p.role)&&!queries.has(key(p.route)),'parent source/context');queries.add(key(p.route));
+  return replay;
+ }
+ function inventoryOf(entries){demand(Array.isArray(entries)&&entries.length>0&&entries.length<=64,'query bound');return entries.map(q=>({route:q.parent.route,node:q.parent.node,minors:q.branches.map(b=>b.minor)}));}
+ function validateInventory(evidence,inventory){
+  demand(Array.isArray(inventory)&&inventory.length>0&&inventory.length<=64,'query bound');const seen=new Set(),validRoute=r=>Number.isInteger(r?.root)&&r.root>=0&&r.root<=1&&Array.isArray(r.slots)&&r.slots.length<=512&&r.slots.every(n=>Number.isInteger(n)&&n>=0&&n<=2);
+  for(const q of inventory){demand(validRoute(q.route)&&Number.isInteger(q.node)&&q.node>=0&&Array.isArray(q.minors)&&q.minors.length<=32&&q.minors.every(n=>Number.isInteger(n)&&n>=0&&n<32)&&new Set(q.minors).size===q.minors.length&&!seen.has(key(q.route)),'query inventory identity');seen.add(key(q.route));}
+  if(evidence.environment.kind==='public-packet-method-interface/1'){const outcomes=evidence.outcomes;demand(Array.isArray(outcomes)&&outcomes.length>0&&outcomes.length<=64,'replay outcome bound');const seen=new Set();for(const o of outcomes){demand(validRoute(o.route)&&['checked','unavailable'].includes(o.status),'replay outcome route/status');demand(!seen.has(key(o.route)),'duplicate replay outcome');seen.add(key(o.route));if(o.status==='unavailable')demand(typeof o.reason==='string'&&o.reason.length>0,'unavailable outcome reason');}demand(same(outcomes.filter(o=>o.status==='checked').map(o=>o.route),inventory.map(q=>q.route)),'replay checked outcome coverage');}
+  return true;
+ }
+ function validate(evidence,data,record){
+  validateProvenance(evidence,record);validateInventory(evidence,inventoryOf(evidence.entries));if(evidence.environment.kind==='public-packet-method-interface/1')for(const o of evidence.outcomes)A.walk(data,o.route);for(const q of evidence.entries)validateQuery(q,data);return true;
+ }
+ function validateQuery(q,data){const p=q.parent,at=T.context(data,p.route),g=p.typeGraph,t=p.eliminationJudgment;
+   demand(p.status==='checked'&&p.kernelCheck==='PASS'&&p.contextWellFormed===true&&p.typeAbstractionRoundtrip===true&&p.node===at.node&&p.path===A.path(data,p.route)&&same(p.context,at.binders)&&roles.includes(p.role),'parent source/context');
    const roots=[p.typeRoot,...p.arguments.flatMap(a=>[a.typeRoot,a.expectedRoot]),...T.applicationRoots(p)];T.validateExpressionGraph(g,roots,p.context.length,65536);T.validateApplication(p,data,g);E.validateEntry(p,data,g);demand(t?.status==='checked'&&q.branches?.length===t.minors,'complete method inventory');
    const minors=new Set();for(const b of q.branches){const rule=t.rules.find(r=>r.minor===b.minor),slot=t.argumentOrder[t.parameters+t.motives+b.minor],a=t.arguments.find(a=>a.sourceSlot===slot),m=b.interface,h=m?.graph;
     demand(rule&&!minors.has(b.minor)&&b.sourceSlot===slot&&a,'constructor/method mapping');minors.add(b.minor);
@@ -47,7 +57,7 @@
     let fn=body;for(let i=m.inputCount-1;i>=0;i--){demand(h.kind[fn]===5,'eta application spine');const arg=h.children[fn][1];demand(h.kind[arg]===0&&h.payloads[arg].index===m.inputCount-1-i,'eta argument order/capture');fn=h.children[fn][0];}
     demand(shiftedEqual(data,a.node,h,fn,m.inputCount),'eta source lifting/capture');
    }
-  }return true;
+  return true;
  }
  function references(g,root,contextLength,sourceContext){
   const todo=[[root,0]],seen=new Set(),targets=new Map();while(todo.length){const [id,depth]=todo.pop(),k=id+':'+depth;if(seen.has(k))continue;seen.add(k);demand(seen.size<=262144,'domain reference work bound');const kind=g.kind[id];
@@ -56,8 +66,12 @@
   }return[...targets.values()].sort((a,b)=>a.namespace.localeCompare(b.namespace)||a.ordinal-b.ordinal);
  }
  function frozen(value){const todo=[value],seen=new Set();while(todo.length){const v=todo.pop();if(!v||typeof v!=='object'||seen.has(v))continue;seen.add(v);todo.push(...Object.values(v));Object.freeze(v);}return value;}
- function open(evidence,data,record,descriptor){
-  demand(hash(descriptor?.sha256),'evidence owner');validate(evidence,data,record);evidence=frozen(JSON.parse(JSON.stringify(evidence)));record=frozen(JSON.parse(JSON.stringify(record)));descriptor=frozen(JSON.parse(JSON.stringify(descriptor)));const queries=new Map(evidence.entries.map(q=>[key(q.parent.route),q]));
+ function open(evidence,data,record,descriptor){demand(hash(descriptor?.sha256),'evidence owner');validate(evidence,data,record);return model(evidence,evidence.entries,data,record,descriptor);}
+ function openQuery(metadata,entry,inventory,data,record,descriptor){
+  demand(hash(descriptor?.sha256)&&!Object.hasOwn(metadata,'entries'),'query evidence owner/header');validateProvenance(metadata,record);validateInventory(metadata,inventory);const selected=inventory.find(q=>key(q.route)===key(entry.parent.route));demand(selected&&selected.node===entry.parent.node&&same(selected.minors,entry.branches.map(b=>b.minor)),'selected original query inventory');validateQuery(entry,data);return model(metadata,[entry],data,record,descriptor);
+ }
+ function model(evidence,entries,data,record,descriptor){
+  evidence=frozen(JSON.parse(JSON.stringify({source:evidence.source,environment:{kind:evidence.environment.kind},...(evidence.replay?{replay:{sourceOrigin:evidence.replay.sourceOrigin,baselineProofSha256:evidence.replay.baselineProofSha256}}:{})})));entries=frozen(JSON.parse(JSON.stringify(entries)));record=frozen(JSON.parse(JSON.stringify(record)));descriptor=frozen(JSON.parse(JSON.stringify(descriptor)));const queries=new Map(entries.map(q=>[key(q.parent.route),q]));
   function create(route,minor){route={root:route.root,slots:[...route.slots]};const q=queries.get(key(route)),b=q?.branches.find(b=>b.minor===minor);demand(b,'no recorded method interface');const p=q.parent,t=p.eliminationJudgment,rule=t.rules.find(r=>r.minor===minor),a=t.arguments.find(a=>a.sourceSlot===b.sourceSlot),m=b.interface;
    let cursor=m.etaRoot;const inputs=m.inputs.map((input,i)=>{const root=cursor;cursor=m.graph.children[cursor][1];return{...input,namespace:'computed-method-interface',address:{evidenceSha256:descriptor.sha256,query:route,minor,etaRoot:m.etaRoot,slots:Array(i).fill(1)},binderRoot:root,domain:{namespace:'computed-method-interface',root:input.domainRoot,contextLength:input.contextLength},references:references(m.graph,input.domainRoot,input.contextLength,p.context)};});
    return frozen({format:'ProofAtlasMethodInterfaceScene/1',source:{name:record.name,indexSha256:record.indexSha256,sourceSha256:record.sourceSha256,query:route,method:{namespace:'source-expression',node:a.node,path:a.path,route:a.route}},evidenceSha256:descriptor.sha256,...(evidence.environment.kind==='public-packet-method-interface/1'?{recording:{kind:'public-packet-method-interface/1',originalTheoremImported:false,originalModuleImported:false,privateRiccatiModulesImported:false,publisherAttributionOnly:true,sourceOrigin:evidence.replay.sourceOrigin,baselineProofSha256:evidence.replay.baselineProofSha256}}:{}),minor,constructor:rule.constructor,recursor:t.recursor,context:p.context,methodType:{namespace:'recorded-parent-type',root:a.typeRoot,text:a.typeText},expectedType:{namespace:'recorded-parent-type',root:a.expectedRoot,text:a.expectedText,relation:'native-domain-conversion'},inputs,body:{...m.body,namespace:'computed-method-interface'},computed:{namespace:'computed-method-interface',etaRoot:m.etaRoot,typeRoot:m.etaTypeRoot,storedNodes:m.graph.kind.length},checks:m.checks,sourceOccurrenceInvented:false,guarantee:'Kernel-checked eta interface. Computed input binders and method application are separate from original source lambda occurrences. Type equality uses the recorded native conversion, not a semantic explanation of the branch.'});
@@ -81,5 +95,5 @@
   const provenance=el('details');provenance.append(el('summary','Source and computed addresses'),el('pre',JSON.stringify({source:scene.source,originalContext:scene.context,evidenceSha256:scene.evidenceSha256,...(scene.recording?{recording:scene.recording}:{}),computed:scene.computed,...(agreement?{sourceAgreement:agreement}:{}),inputAddresses:scene.inputs.map(i=>({name:i.name,...i.address})),bodyRoot:scene.body.root,bodyTypeRoot:scene.body.typeRoot,checks:scene.checks},null,2)));container.append(provenance);
   return{getScene:()=>scene,getState:()=>({offset,limit,selected,disposed}),dispose:()=>{disposed=true;container.replaceChildren();}};
  }
- const api={shiftedEqual,references,validate,open,load,mount};if(node)module.exports=api;else host.ProofAtlasMethodInterfaces=api;
+ const api={shiftedEqual,references,validateProvenance,validateInventory,validateQuery,validate,open,openQuery,load,mount};if(node)module.exports=api;else host.ProofAtlasMethodInterfaces=api;
 })(typeof window==='undefined'?globalThis:window);

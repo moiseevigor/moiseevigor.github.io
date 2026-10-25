@@ -1,0 +1,96 @@
+{
+  "format": "ProofAtlasMethodCheckpoints/1",
+  "checkpoints": [
+    {
+      "name": "branch-interfaces",
+      "sourceRevision": "ec766430d7c71d024f733e06eff6cb17cd05499a",
+      "revisionFilesVerified": true,
+      "bundle": "research/proof-atlas/branch-interfaces/method-interface-evidence.json",
+      "bundleSha256": "d1b0ef379936aca5c3fe8672248892d18382cd7c470d45c868dd1720f8547f8b",
+      "files": [
+        {
+          "file": "research/proof-atlas/branch-interfaces/method-interface-evidence.json",
+          "sha256": "d1b0ef379936aca5c3fe8672248892d18382cd7c470d45c868dd1720f8547f8b"
+        },
+        {
+          "file": "research/proof-atlas/branch-interfaces/native-verification.json",
+          "sha256": "cc7cb2b581b8924f909c74f1f66477ec1e1a2dfe82611fbdf0c371bcef02931d"
+        },
+        {
+          "file": "research/proof-atlas/branch-interfaces/audit.json",
+          "sha256": "e01f8165ad17fdbdaad2927a42b73eb284482c33f23cdb76a0efc70f2788a5a7"
+        },
+        {
+          "file": "research/proof-atlas/branch-interfaces/browser-audit.json",
+          "sha256": "822e230adec6374131762dd60426fd4107c95b6138ae5362e3fc7f4e9298bc5c"
+        },
+        {
+          "file": "research/proof-atlas/branch-interfaces/regressions.json",
+          "sha256": "a204d1336e53869031370f6beff01c11c9070727437ecaa77f491aec6763dd00"
+        }
+      ]
+    },
+    {
+      "name": "method-replay",
+      "sourceRevision": "d15c49c901a64715b2ba2826bb951fbfd201fdc0",
+      "revisionFilesVerified": true,
+      "bundle": "research/proof-atlas/method-replay/method-replay-evidence.json",
+      "bundleSha256": "b2e4e108961b157235c3bcb713654491257eea2427b39f6c5f5d7b385415c23c",
+      "files": [
+        {
+          "file": "research/proof-atlas/method-replay/method-replay-evidence.json",
+          "sha256": "b2e4e108961b157235c3bcb713654491257eea2427b39f6c5f5d7b385415c23c"
+        },
+        {
+          "file": "research/proof-atlas/method-replay/native-verification.json",
+          "sha256": "ab056acc4a17b574687163b8fbbdd70c9c8332cde82c3e7b48a854f691476cb0"
+        },
+        {
+          "file": "research/proof-atlas/method-replay/audit.json",
+          "sha256": "886f801b9773a4b97ef487b70f01e34579afc230b85f6079dbe12ad388c8cc2b"
+        },
+        {
+          "file": "research/proof-atlas/method-replay/compatibility.json",
+          "sha256": "2f0c6ec2c57a6b0f20e62c57d5b6448381f2837a2c65569ba2ed409e55b7be20"
+        },
+        {
+          "file": "research/proof-atlas/method-replay/browser-audit.json",
+          "sha256": "619fdad08edfaf80ab2ffee33013c1386f7d92cd3822b28670ac68b29c9cd853"
+        },
+        {
+          "file": "research/proof-atlas/method-replay/predecessor-browser-compatibility.json",
+          "sha256": "9d0001089b3904e5ba59358a752ce3419ca643df19ce171c0a7419aa92b4576d"
+        },
+        {
+          "file": "research/proof-atlas/method-replay/regressions.json",
+          "sha256": "40f877e67317ee3a4fe8363e7c71e58c313a95655d28b73288ccecac5ec921e1"
+        }
+      ]
+    },
+    {
+      "name": "method-pages",
+      "sourceRevision": "4401069d3625cb5868517ee4b3e4047e911a6737",
+      "revisionFilesVerified": true,
+      "bundle": "research/proof-atlas/method-pages/method-source-evidence.json",
+      "bundleSha256": "6168c7ddd352c3cdcadab7d8079439a88f76b66f94043ff61ce5d667df548e82",
+      "files": [
+        {
+          "file": "research/proof-atlas/method-pages/method-source-evidence.json",
+          "sha256": "6168c7ddd352c3cdcadab7d8079439a88f76b66f94043ff61ce5d667df548e82"
+        },
+        {
+          "file": "research/proof-atlas/method-pages/audit.json",
+          "sha256": "563694fdc5a847d733d98f988b7c6f890a99f78e047ca4ab6a5d931159e9435e"
+        },
+        {
+          "file": "research/proof-atlas/method-pages/browser-audit.json",
+          "sha256": "c269200428da9be2f18e8a03fd12d3d80958e3b224d761f7969ccd4bcba90336"
+        },
+        {
+          "file": "research/proof-atlas/method-pages/regressions.json",
+          "sha256": "87ea406f6dfadcfa830047bb355ebdabbd63840a1a4596e713daf17b355070a9"
+        }
+      ]
+    }
+  ]
+}
