@@ -1,0 +1,68 @@
+{
+  "format": "ProofAtlasMutualLegacyBoundary/1",
+  "status": "PASS",
+  "nativeOutputSha256": "84eb6974c38db18fd9e3d1be9a2ea42de5a9756684efc134f59d6e498c3e6091",
+  "baselineSourceSha256": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+  "producerSha256": "8d96e43c07e6d7651674f562b2381d7b783af751cf14c55fbea665b413b66582",
+  "runtimeSha256": "e5b54f9babeac8c883db7d6a9a72775f0c3aaf88786154c7509b729384a39020",
+  "observations": [
+    {
+      "name": "AtlasMutualControls.tree",
+      "observation": {
+        "reason": "Some minor premises have no mapped constructor rule",
+        "status": "unavailable"
+      },
+      "query": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "AtlasMutualControls.forest",
+      "observation": {
+        "reason": "Some minor premises have no mapped constructor rule",
+        "status": "unavailable"
+      },
+      "query": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "AtlasMutualControls.family",
+      "observation": {
+        "reason": "Some minor premises have no mapped constructor rule",
+        "status": "unavailable"
+      },
+      "query": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    }
+  ],
+  "scope": "The unchanged single-recursor observer refuses these three valid mutual calls because its own rules do not cover all family methods. This is a representation boundary, not an invalid proof or a general impossibility result."
+}

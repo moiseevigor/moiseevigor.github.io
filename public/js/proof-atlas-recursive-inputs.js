@@ -3,7 +3,7 @@
  'use strict';
  const node=typeof module!=='undefined'&&module.exports;
  const A=node?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData;
- const G=node?require('./proof-atlas-geometry-core'):null;
+ const G=node?require('./proof-atlas-geometry-core'):null,V=node?require('./proof-atlas-mutual-recursors'):host.ProofAtlasMutualRecursors;
  const demand=(ok,m)=>{if(!ok)throw Error('Recursive inputs: '+m);};
  const same=(x,y)=>JSON.stringify(x)===JSON.stringify(y);
  const binds=(kind,slot)=>(kind===6||kind===7)&&slot===1||kind===8&&slot===2;
@@ -16,13 +16,13 @@
   if(g.kind[input.node]===0){const index=g.payloads[input.node].index;if(index<r.constructorFields){const field=r.constructorFields-1-index;return{slot,kind:'constructor-field',field,expression:result.expression,fieldBinder:{node:A.walk({...g,roots:[r.rhsRoot]},{root:0,slots:Array(base+field).fill(1)}),route:{root:0,slots:Array(base+field).fill(1)},namespace:'kernel-rule'}};}return result;}
   let id=input.node,route=input.route,depth=0;while(g.kind[id]===6){if(++depth>64)return{...result,reason:'Recursive-family binder limit'};id=g.children[id][1];route={root:0,slots:[...route.slots,1]};}
   const call=spine(g,id,route),head=g.payloads[call.head.node];
-  if(g.kind[call.head.node]!==4||head.name!==t.recursor||A.levelsKey(head.levels)!==A.levelsKey(t.recursorLevels)||call.args.length!==t.majorSlot)return result;
+  if(g.kind[call.head.node]!==4)return result;const target=V?V.target(t,head):(head.name===t.recursor&&A.levelsKey(head.levels)===A.levelsKey(t.recursorLevels)?t:null);if(!target||call.args.length!==target.majorSlot)return result;
   for(let j=0;j<base;j++){const a=call.args[j].node;if(g.kind[a]!==0||g.payloads[a].index!==b+depth-1-j)return{...result,reason:'Recursive call changes a parameter, motive or minor premise'};}
-  const major=call.args[t.majorSlot-1],fieldCall=spine(g,major.node,major.route),p=g.payloads[fieldCall.head.node];
+  const major=call.args[target.majorSlot-1],fieldCall=spine(g,major.node,major.route),p=g.payloads[fieldCall.head.node];
   if(g.kind[fieldCall.head.node]!==0||p.index<depth||p.index>=depth+r.constructorFields||fieldCall.args.length!==depth)return{...result,reason:'Recursive major is not the corresponding constructor field/family'};
   for(let j=0;j<depth;j++){const a=fieldCall.args[j].node;if(g.kind[a]!==0||g.payloads[a].index!==depth-1-j)return{...result,reason:'Constructor family arguments are not forwarded in order'};}
   const field=r.constructorFields-1-(p.index-depth),fieldRoute={root:0,slots:Array(base+field).fill(1)};
-  return{slot,kind:'recursive-premise',field,familyArity:depth,expression:result.expression,call:{node:id,route,namespace:'kernel-rule'},major:{...major,namespace:'kernel-rule'},indices:call.args.slice(base,t.majorSlot-1).map(a=>({...a,namespace:'kernel-rule'})),fieldBinder:{node:A.walk({...g,roots:[r.rhsRoot]},fieldRoute),route:fieldRoute,namespace:'kernel-rule'}};
+  return{slot,kind:'recursive-premise',field,familyArity:depth,...(t.format==='ProofAtlasElimination/2'?{target,ownerRecursor:r.recursor,recursionKind:target.recursor===r.recursor?'self':'sibling'}:{}),expression:result.expression,call:{node:id,route,namespace:'kernel-rule'},major:{...major,namespace:'kernel-rule'},indices:call.args.slice(base,target.majorSlot-1).map(a=>({...a,namespace:'kernel-rule'})),fieldBinder:{node:A.walk({...g,roots:[r.rhsRoot]},fieldRoute),route:fieldRoute,namespace:'kernel-rule'}};
  }
  // A bounded support table is computed once per immutable, postorder source DAG.
  // Domains and let values stay outside their own binder; only body masks shift.
@@ -61,13 +61,13 @@
   demand(typing?.source.name===record.name&&typing.source.indexSha256===record.indexSha256&&typing.source.sourceSha256===record.sourceSha256&&/^[a-f0-9]{64}$/.test(typing.sha256),'source/evidence identity');
   demand(e?.status==='checked','no exact judgment');C.validateEntry(e,data,e.typeGraph);const t=e.eliminationJudgment,r=t?.rules.find(r=>r.minor===minor);demand(r,'missing kernel rule');
   const ruleData={...t.metadataGraph,serialization:'ExprDAG/1',declaration:{name:record.name,rootPaths:['rule.'+r.constructor]},roots:[r.rhsRoot]};
-  return{entry:e,trace:t,rule:r,ruleData,origin:{kind:'native-kernel-rule',typeEvidenceSha256:typing.sha256,judgment:{node:e.node,path:e.path,route:judgmentRoute},recursor:t.recursor,constructor:r.constructor,minor,metadataRoot:r.rhsRoot,namespace:'kernel-rule'}};
+  return{entry:e,trace:t,rule:r,ruleData,origin:{kind:'native-kernel-rule',typeEvidenceSha256:typing.sha256,judgment:{node:e.node,path:e.path,route:judgmentRoute},recursor:r.recursor??t.recursor,constructor:r.constructor,minor,metadataRoot:r.rhsRoot,namespace:'kernel-rule'}};
  }
  function create(data,record,typing,options){const p=prepare(data,record,typing,options.judgmentRoute,options.minor);return(G||host.ProofAtlasGeometry).createRule(p.ruleData,record,p.origin,{route:{root:0,slots:options.slots||[]},maxNodes:32,maxDepth:3,maxLayerNodes:6,maxApplicationChildren:4,foldBinders:true,foldApplications:true});}
  function validate(scene,data,record,typing){const p=prepare(data,record,typing,scene.source.judgment.route,scene.source.minor);return(G||host.ProofAtlasGeometry).validateRule(scene,p.ruleData,record,p.origin);}
  function mount(container,config){const {data,record,typing,judgmentRoute,minor}=config;return mountGraph(container,{...prepare(data,record,typing,judgmentRoute,minor),record,slot:config.slot});}
  function mountGraph(container,config){
-  const p=config,{record}=config;demand(p.ruleData.roots.length===1&&p.ruleData.roots[0]===p.rule.rhsRoot&&p.origin.metadataRoot===p.rule.rhsRoot&&p.origin.constructor===p.rule.constructor&&p.origin.recursor===p.trace.recursor&&p.origin.minor===p.rule.minor,'kernel viewport owner');const el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;},button=(title,fn)=>{const n=el('button',title);n.type='button';n.onclick=fn;return n;},ns='http://www.w3.org/2000/svg';
+  const p=config,{record}=config;demand(p.ruleData.roots.length===1&&p.ruleData.roots[0]===p.rule.rhsRoot&&p.origin.metadataRoot===p.rule.rhsRoot&&p.origin.constructor===p.rule.constructor&&p.origin.recursor===(p.rule.recursor??p.trace.recursor)&&p.origin.minor===p.rule.minor,'kernel viewport owner');const el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;},button=(title,fn)=>{const n=el('button',title);n.type='button';n.onclick=fn;return n;},ns='http://www.w3.org/2000/svg';
   container.replaceChildren();container.classList.add('pl-kernel-rule');container.append(el('h5','Kernel reduction rule · '+p.rule.constructor),el('p','This is the compiled reduction schema. Its binders and recursive calls are in the kernel-rule namespace; they are not added calls in the original proof.'));
   const select=el('select');select.setAttribute('aria-label','Kernel minor input');for(let j=1;j<=p.rule.inputCount;j++){const option=el('option','Minor input '+j);option.value=String(j);select.append(option);}select.disabled=!p.rule.inputCount;container.append(select);
   const flow=document.createElementNS(ns,'svg');flow.classList.add('pl-rule-flow');flow.setAttribute('aria-hidden','true');container.append(flow);const explanation=el('p'),actions=el('div');actions.className='pl-actions';container.append(explanation,actions);
@@ -82,7 +82,7 @@
    if(input.call)q.push({x:width*.48,y:45,label:input.familyArity?'λ → @':'@',title:input.familyArity?'Recursive family':'Recursive call',route:input.call.route});
    q.push({x:width-42,y:45,label:'in '+selected,title:'Minor input '+selected,route:input.expression.route});for(let j=1;j<q.length;j++)shape(flow,'path',{d:`M ${q[j-1].x+19} 45 L ${q[j].x-24} 45 l -6 -4 m 6 4 l -6 4`,class:'pl-rule-wire'});
    for(const v of q){const b=shape(flow,'rect',{x:v.x-24,y:31,width:48,height:28,rx:3,fill:v.title.startsWith('Constructor')?'#e9bf76':'#8dacde'});b.onclick=()=>focus(v.route.slots);shape(flow,'text',{x:v.x,y:49,'text-anchor':'middle',class:'pl-rule-flow-glyph'},v.label);actions.append(button(v.title,()=>focus(v.route.slots)));}
-   explanation.textContent=input.kind==='constructor-field'?'Minor input '+selected+' receives constructor field '+(input.field+1)+'.':input.kind==='recursive-premise'?'Minor input '+selected+' receives '+(input.familyArity?'a '+input.familyArity+'-binder family of recursive results':'a recursive result')+' for constructor field '+(input.field+1)+'.':input.reason;
+   explanation.textContent=input.kind==='constructor-field'?'Minor input '+selected+' receives constructor field '+(input.field+1)+'.':input.kind==='recursive-premise'?'Minor input '+selected+' receives '+(input.familyArity?'a '+input.familyArity+'-binder family of recursive results':'a recursive result')+' for constructor field '+(input.field+1)+'.':input.reason;if(input.target)explanation.textContent+=' Rule owner '+input.ownerRecursor+'; '+input.recursionKind+' call to '+input.target.recursor+'; motive '+(input.target.motive+1)+'.';
   }
   function render(){if(disposed)return;width=Math.max(260,canvas.clientWidth||600);scene=(G||host.ProofAtlasGeometry).createRule(p.ruleData,record,p.origin,{route:{root:0,slots},maxNodes:32,maxDepth:3,maxLayerNodes:6,maxApplicationChildren:4,foldBinders:true,foldApplications:true});canvas.replaceChildren();list.replaceChildren();regions.replaceChildren();parent.disabled=!slots.length;const layers=new Map(),by=new Map(),max=Math.max(1,...scene.nodes.map(n=>n.depth));for(const n of scene.nodes){if(!layers.has(n.depth))layers.set(n.depth,[]);layers.get(n.depth).push(n);}
    for(const n of scene.nodes){const layer=layers.get(n.depth);by.set(n.id,{...n,x:24+n.depth/(max+1)*(width-70),y:25+(layer.indexOf(n)+.5)/layer.length*270,glyph:n.members?(n.abstraction==='binder-telescope'?'T':'@')+n.members.length:n.glyph});}
@@ -94,5 +94,5 @@
   }
   select.onchange=()=>{selected=Number(select.value);drawFlow();};canvas.onpointerdown=e=>{suppress=false;drag={x:e.clientX,y:e.clientY,start:{...pan},moved:false};};canvas.onpointermove=e=>{if(!drag)return;const scale=width/canvas.getBoundingClientRect().width/zoom,dx=e.clientX-drag.x,dy=e.clientY-drag.y;drag.moved=drag.moved||Math.hypot(dx,dy)>4;if(drag.moved){pan={x:drag.start.x+dx*scale,y:drag.start.y+dy*scale};viewport();}};canvas.onpointerup=()=>{suppress=!!drag?.moved;drag=null;};canvas.onpointerleave=()=>{drag=null;};const observer=new ResizeObserver(()=>{if(Math.abs(Math.max(260,canvas.clientWidth||600)-width)>1)render();});observer.observe(canvas);render();return{getScene:()=>scene,getInput:()=>p.rule.inputCount?role(p.trace,p.rule,selected):null,focus,dispose:()=>{disposed=true;observer.disconnect();container.replaceChildren();}};
  }
- const api={role,describe,countReferences,prepare,create,validate,mount,mountGraph};if(node)module.exports=api;else host.ProofAtlasRecursiveInputs=api;
+ const api={mutualRecursors:true,role,describe,countReferences,prepare,create,validate,mount,mountGraph};if(node)module.exports=api;else host.ProofAtlasRecursiveInputs=api;
 })(typeof window==='undefined'?globalThis:window);

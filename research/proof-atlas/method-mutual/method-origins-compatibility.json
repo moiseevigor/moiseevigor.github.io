@@ -1,0 +1,1110 @@
+{
+  "format": "ProofAtlasMethodOriginsAudit/1",
+  "status": "PASS",
+  "checkerSha256": "7ab5d157691b4c690165990cf0caff76d44a9a5cd5f1c01225fc7a47e93b6b80",
+  "frames": 40,
+  "inputs": 53,
+  "originViews": 106,
+  "kernelCuts": 224,
+  "recursivePremises": 5,
+  "functionalFamilies": 1,
+  "computedBoundaries": 6,
+  "pagedFrames": 32,
+  "pagedCalls": 20,
+  "rejections": 766,
+  "zeroInputOriginsRefused": 4,
+  "wholeArchiveRequests": 0,
+  "nativeRecordsReassembled": 13,
+  "identicalMethodGraphBytes": true,
+  "identicalContextType": true,
+  "differentSecondInputOrigins": true,
+  "files": [
+    {
+      "file": "public/js/proof-atlas-method-origins.js",
+      "sha256": "59648b019aca919dc63ca3304942fb84106f6aa835796bada1293569cea9f4cb"
+    },
+    {
+      "file": "public/js/proof-atlas-method-flow.js",
+      "sha256": "d75bbce09a20615929bc3903f28fb69f7c26aec0b4b81ed10ea3379b13be11e4"
+    },
+    {
+      "file": "public/js/proof-atlas-method-interfaces.js",
+      "sha256": "fd2eb4d02ced57e88474edb16923eb34930968869e85d5909a44bd3fd132762e"
+    },
+    {
+      "file": "public/js/proof-atlas-recursive-inputs.js",
+      "sha256": "0f0c4eeea0e48269dd6e4cfc35d500e638f50bec9f19f32814051d713c792233"
+    },
+    {
+      "file": "public/data/proof-atlas/method-origins-manifest.js",
+      "sha256": "9ebc7dfce4cd6ac77b5be75f5e22118f1d1f2ee3533f24c77437569add8aafc9"
+    }
+  ],
+  "rows": [
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1
+        ]
+      },
+      "minor": 0,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1
+        ]
+      },
+      "minor": 1,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 0,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        },
+        {
+          "kind": "constructor-field",
+          "field": 1
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 0,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        },
+        {
+          "kind": "constructor-field",
+          "field": 1
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "minor": 0,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        },
+        {
+          "kind": "constructor-field",
+          "field": 1
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 0,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        },
+        {
+          "kind": "constructor-field",
+          "field": 1
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 0,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        },
+        {
+          "kind": "constructor-field",
+          "field": 1
+        }
+      ]
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 0,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        },
+        {
+          "kind": "constructor-field",
+          "field": 1
+        }
+      ]
+    },
+    {
+      "name": "AtlasMethodControls.conjunction",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 0,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        },
+        {
+          "kind": "constructor-field",
+          "field": 1
+        }
+      ]
+    },
+    {
+      "name": "AtlasMethodControls.dependent",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 0,
+      "roles": []
+    },
+    {
+      "name": "AtlasMethodControls.dependent",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 1,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        },
+        {
+          "kind": "recursive-premise",
+          "field": 0,
+          "familyArity": 0
+        }
+      ]
+    },
+    {
+      "name": "AtlasMethodControls.disjunction",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 0,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "AtlasMethodControls.disjunction",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 1,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "AtlasMethodControls.functionValued",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 0,
+      "roles": []
+    },
+    {
+      "name": "AtlasMethodControls.functionValued",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 1,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        },
+        {
+          "kind": "recursive-premise",
+          "field": 0,
+          "familyArity": 0
+        }
+      ]
+    },
+    {
+      "name": "AtlasMethodControls.storedMethod",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          2
+        ]
+      },
+      "minor": 0,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        },
+        {
+          "kind": "constructor-field",
+          "field": 1
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_20418",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2
+        ]
+      },
+      "minor": 0,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_20418",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2
+        ]
+      },
+      "minor": 1,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2
+        ]
+      },
+      "minor": 0,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2
+        ]
+      },
+      "minor": 1,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          0,
+          1,
+          1
+        ]
+      },
+      "minor": 0,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          0,
+          1,
+          1
+        ]
+      },
+      "minor": 1,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          1
+        ]
+      },
+      "minor": 0,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          1
+        ]
+      },
+      "minor": 1,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          0,
+          1,
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "minor": 0,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          0,
+          1,
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "minor": 1,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          0,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 0,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          0,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 1,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "minor": 0,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "minor": 1,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 0,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 1,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_62755",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          2,
+          2
+        ]
+      },
+      "minor": 0,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "lean_workbook_plus_62755",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          2,
+          2
+        ]
+      },
+      "minor": 1,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        }
+      ]
+    },
+    {
+      "name": "AtlasMethodControls.largeStream",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1
+        ]
+      },
+      "minor": 0,
+      "roles": []
+    },
+    {
+      "name": "AtlasMethodControls.largeStream",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1
+        ]
+      },
+      "minor": 1,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        },
+        {
+          "kind": "recursive-premise",
+          "field": 0,
+          "familyArity": 0
+        }
+      ]
+    },
+    {
+      "name": "AtlasOriginControls.natural",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 0,
+      "roles": []
+    },
+    {
+      "name": "AtlasOriginControls.natural",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 1,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        },
+        {
+          "kind": "recursive-premise",
+          "field": 0,
+          "familyArity": 0
+        }
+      ]
+    },
+    {
+      "name": "AtlasOriginControls.product",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "minor": 0,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        },
+        {
+          "kind": "constructor-field",
+          "field": 1
+        }
+      ]
+    },
+    {
+      "name": "AtlasOriginControls.family",
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1
+        ]
+      },
+      "minor": 0,
+      "roles": [
+        {
+          "kind": "constructor-field",
+          "field": 0
+        },
+        {
+          "kind": "constructor-field",
+          "field": 1
+        },
+        {
+          "kind": "constructor-field",
+          "field": 2
+        },
+        {
+          "kind": "constructor-field",
+          "field": 3
+        },
+        {
+          "kind": "recursive-premise",
+          "field": 0,
+          "familyArity": 1
+        }
+      ]
+    }
+  ],
+  "scope": "Finite recorded reduction-schema input-position bridges, direct field references and unchanged self-recursion including one functional family. No expression equality across source/computed/schema namespaces, added source calls, arbitrary-recursion coverage, new mathematical theorem or comprehension result.",
+  "checkpointComparison": {
+    "auditSha256": "487a3ca4d80069466fd1cc56a3cac658a18418b189ddb392610e370abc85e72c",
+    "sameFunctionalObservations": true,
+    "fingerprintsComparedSeparately": [
+      "checkerSha256",
+      "modelSha256",
+      "files.sha256"
+    ]
+  }
+}

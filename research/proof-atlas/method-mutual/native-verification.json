@@ -1,0 +1,114 @@
+{
+  "format": "ProofAtlasMethodMutualNative/1",
+  "status": "PASS",
+  "compiler": "Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+  "dependencyRecovery": {
+    "kind": "mathlib-cache-attribution/1",
+    "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+    "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+    "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+    "artifactCount": 43450,
+    "allBinaryHashesVerified": true,
+    "originalGitCheckoutsVerified": false,
+    "independentlyRebuilt": false
+  },
+  "producerFiles": {
+    "research/proof-atlas/method-mutual/verify.py": "06c8a6f5e20c1ba712d1457a29972eff276b9f0abc3223ebba4fef55db26cab0",
+    "research/proof-atlas/method-mutual/MutualElimination.lean": "5897129eafa27f50805243f983328ef4516b45e2c713a77d4629e6426337721a",
+    "research/proof-atlas/branch-interfaces/BranchInterfaces.lean": "b70c1a5ff9a977b241f943e32bb7e588d625fcb7dac95257b5222c91081f0cce",
+    "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+    "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+    "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+    "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+    "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a",
+    "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567"
+  },
+  "records": [
+    {
+      "ordinal": 0,
+      "record": {
+        "name": "AtlasMutualControls.tree",
+        "module": "Runtime",
+        "kind": "definition",
+        "sourceSha256": "ed994ad2021f1f4b02aa74b17f8a5e44026aa34f9370cfa15d053b7ca1c9edde",
+        "indexSha256": "56b0d4866faa5b333ae8cfb590e6e9df16248ded19c63fcca8999d5477cf4bc9",
+        "uniqueNodes": 67,
+        "occurrences": "148"
+      },
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "packetSha256": "56b0d4866faa5b333ae8cfb590e6e9df16248ded19c63fcca8999d5477cf4bc9"
+    },
+    {
+      "ordinal": 1,
+      "record": {
+        "name": "AtlasMutualControls.forest",
+        "module": "Runtime",
+        "kind": "definition",
+        "sourceSha256": "ed994ad2021f1f4b02aa74b17f8a5e44026aa34f9370cfa15d053b7ca1c9edde",
+        "indexSha256": "4c3e756ca39eae8e6d1832b22d51b8917a9de2dabf2ef66373223d73b6b20570",
+        "uniqueNodes": 72,
+        "occurrences": "158"
+      },
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "packetSha256": "4c3e756ca39eae8e6d1832b22d51b8917a9de2dabf2ef66373223d73b6b20570"
+    },
+    {
+      "ordinal": 2,
+      "record": {
+        "name": "AtlasMutualControls.family",
+        "module": "Runtime",
+        "kind": "definition",
+        "sourceSha256": "ed994ad2021f1f4b02aa74b17f8a5e44026aa34f9370cfa15d053b7ca1c9edde",
+        "indexSha256": "620b3a9abd4ec41fd9f1526a93f631c1e6316932c9d0c92b01cdc9fad908dbf1",
+        "uniqueNodes": 62,
+        "occurrences": "134"
+      },
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "packetSha256": "620b3a9abd4ec41fd9f1526a93f631c1e6316932c9d0c92b01cdc9fad908dbf1"
+    }
+  ],
+  "fixtureSourceSha256": "ed994ad2021f1f4b02aa74b17f8a5e44026aa34f9370cfa15d053b7ca1c9edde",
+  "runtimeSha256": "7f1d7e38b52336427234a5f99616e3b9ad31a7cf9a6f418a2be6fdca1c4c50d2",
+  "nativeOutputSha256": "84eb6974c38db18fd9e3d1be9a2ea42de5a9756684efc134f59d6e498c3e6091",
+  "imports": [
+    "Mathlib",
+    "Aesop"
+  ],
+  "privateRiccatiModulesImported": false,
+  "computationalDefinitionsNoncomputable": true,
+  "scope": "Three authored controls, fresh kernel declaration typing and eta-method observations. Mutual rule ownership, sibling target signatures and lexical scope are checked separately against the output. No AI-source attribution, new mathematical theorem or independent dependency rebuild."
+}

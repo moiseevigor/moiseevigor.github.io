@@ -46,6 +46,8 @@ The [recursive-index ports](/research/proof-atlas/method-indices/README.md) expo
 
 The [argument-group collar](/research/proof-atlas/method-parameters/README.md) separates parameters, motives, branch methods and indices of recorded indexed self-recursive calls. Fresh polymorphic controls test dependent parameters, a five-parameter window and separate universe-level payloads.
 
+The [mutual-family extension](/research/proof-atlas/method-mutual/README.md) records the enclosing proof call, reduction-rule owner and recursive target separately. Target-specific signatures determine indices and selected motives; fresh controls include different sibling index arities and a function-valued recursive field.
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?
