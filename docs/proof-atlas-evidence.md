@@ -439,6 +439,17 @@ The independent finite audit checks source ordering and original binder identity
 
 [Protocol and reproduction](/research/proof-atlas/use-navigation/README.md) · [Finite audit](/research/proof-atlas/use-navigation/audit.json) · [Lean laws](/research/proof-atlas/context-projection/UseNavigation.lean) · [Native verification](/research/proof-atlas/use-navigation/native-verification.json)
 
+<span id="recorded-input-sockets"></span>
+
+### From a use to a recorded application input
+
+A binding wire can continue to a recorded Π-application input. An exact input match carries the existing native argument/function judgment. A use strictly inside an input carries a separate source context; intermediate typing is not inferred. The selected stage remains a curried application stage, with its proof/type/value role and original native evidence namespace.
+
+The finite audit checks 469 selected use occurrences across 35 recorded profiles: 334 have a containing recorded input and 135 have no matching trace in the searched packages. Complete and bounded paged consumers agree. In the Riccati proof, the three uses of `hd : 0 < J.d p` connect to `mul_pos` stage 7 directly, `Or.casesOn` stage 4 through two source fields, and `Eq.mpr` stage 3 through three source fields. These are exact recorded-input relations; the latter two do not identify an unrecorded inner inference or establish premise necessity.
+
+[Protocol and limits](/research/proof-atlas/use-inputs/README.md) · [Independent audit](/research/proof-atlas/use-inputs/audit.json) · [Model](/public/js/proof-atlas-use-inputs.js)
+
+
 
 
 </details>

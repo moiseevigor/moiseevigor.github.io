@@ -127,6 +127,9 @@ on:
       - 'scripts/*proof-atlas-scope*.cjs'
       - 'public/js/proof-atlas-source-corridor.js'
       - 'public/js/proof-atlas-use-navigation.js'
+      - 'public/js/proof-atlas-use-inputs.js'
+      - 'scripts/test-proof-atlas-use-inputs*.cjs'
+      - 'research/proof-atlas/use-inputs/**'
       - 'research/proof-atlas/use-navigation/**'
       - 'scripts/test-proof-atlas-use-navigation*.cjs'
       - 'scripts/test-proof-atlas-source-corridor*.cjs'
@@ -402,6 +405,9 @@ on:
       - 'scripts/*proof-atlas-scope*.cjs'
       - 'public/js/proof-atlas-source-corridor.js'
       - 'public/js/proof-atlas-use-navigation.js'
+      - 'public/js/proof-atlas-use-inputs.js'
+      - 'scripts/test-proof-atlas-use-inputs*.cjs'
+      - 'research/proof-atlas/use-inputs/**'
       - 'research/proof-atlas/use-navigation/**'
       - 'scripts/test-proof-atlas-use-navigation*.cjs'
       - 'scripts/test-proof-atlas-source-corridor*.cjs'
@@ -641,10 +647,12 @@ jobs:
           node scripts/test-proof-atlas-source-corridor.cjs
           ATLAS_USE_CHECK_REPORT=1 node scripts/test-proof-atlas-use-navigation.cjs
           node scripts/test-proof-atlas-use-navigation-maximum.cjs
+          ATLAS_USE_INPUT_CHECK_REPORT=1 node scripts/test-proof-atlas-use-inputs.cjs
           node scripts/test-proof-atlas-elimination-browser.cjs
           node scripts/test-proof-atlas-elimination-composition-browser.cjs
           node scripts/test-proof-atlas-source-corridor-browser.cjs
           node scripts/test-proof-atlas-use-navigation-browser.cjs
+          node scripts/test-proof-atlas-use-inputs-browser.cjs
           node scripts/test-proof-atlas-recursive-inputs.cjs
           node scripts/test-proof-atlas-recursion-examples.cjs
           node scripts/test-proof-atlas-recursive-inputs-browser.cjs

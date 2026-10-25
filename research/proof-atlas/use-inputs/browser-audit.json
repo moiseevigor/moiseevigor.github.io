@@ -1,0 +1,34 @@
+{
+  "format": "ProofAtlasUseInputBrowserAudit/1",
+  "status": "PASS",
+  "moduleSha256": "8950046a6a17eab740a75d2768d273c0656bde3e7ec884eb4b1dc8426bd920d8",
+  "checkerSha256": "fbf2facc6cee9c35d4a91b41cba879dfb080dd5c49b6ba45845d68c841e99942",
+  "riccati": [
+    [
+      "mul_pos",
+      7,
+      0
+    ],
+    [
+      "Or.casesOn",
+      4,
+      2
+    ],
+    [
+      "Eq.mpr",
+      3,
+      3
+    ]
+  ],
+  "completeAndPaged": true,
+  "pagedCompleteEvidenceRequests": 0,
+  "inspectionPreservesSelection": true,
+  "sourceJumps": 2,
+  "accessibilityAudits": 8,
+  "stalePreparationIgnored": true,
+  "missingTraceNotInvented": true,
+  "articleIntegration": true,
+  "pageErrors": [],
+  "screenshots": "/private/tmp/proof-atlas-use-inputs",
+  "scope": "Riccati source-use to recorded Pi-input navigation. Nonempty gaps remain source-only; no new native typing or comprehension result."
+}

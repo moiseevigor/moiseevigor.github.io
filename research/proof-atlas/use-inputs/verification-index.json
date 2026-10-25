@@ -1,0 +1,47 @@
+{
+  "format": "ProofAtlasUseInputVerificationIndex/1",
+  "status": "PASS",
+  "release": "Local prototype; no push, deployment or new blog post",
+  "baseCommit": "f70d0eb2",
+  "moduleSha256": "8950046a6a17eab740a75d2768d273c0656bde3e7ec884eb4b1dc8426bd920d8",
+  "records": {
+    "browser-audit.json": "4fc27f027f88a8487f690dcf29b645e2191856cfd1e99d53234a01ac93decf0e",
+    "audit.json": "375c38f736bda8984ed9582b4c6797b55a122a40db026de182e1f3c9a21ed371",
+    "README.md": "d4a2367c8d1dc75fc9ee7b244a6363aa68943fbbe91acc111d16be4e171d2247",
+    "regressions.json": "6ba83d065e80c1fabb0ee001009536f59d45733cc104c04a2373e62f979d84f8"
+  },
+  "sourceFiles": {
+    "public/js/proof-atlas-use-inputs.js": "8950046a6a17eab740a75d2768d273c0656bde3e7ec884eb4b1dc8426bd920d8",
+    "public/js/proof-atlas-application-judgment.js": "5c50dd8b744f47d441c80784c45abc554388e407c9be32f9041aab24481edb94",
+    "public/js/proof-atlas-use-navigation.js": "ed7c3dc7bcc6b2fb355281280ebfa8445f504a4360737260feb9f54349d1805c",
+    "public/js/proof-atlas-binding-uses.js": "934568043ef04a5b5d360195d489d0011106eb3fd5fa793d63810351454bdb77",
+    "public/js/proof-atlas-library.js": "37e8ffe75e620c406b3965453596e11154ec560b976b8369a7c0fe98ed58fb3d",
+    "public/js/proof-atlas-paged-library.js": "721b010537f7c64b783ba702fb843cf3d86cae9a58b2fa13ece2cebce012f667",
+    "public/js/proof-atlas-sync.js": "f0c84654c6e34b8482d5f92707853da66ecb04f20c1fbc40835e05f0719176d3",
+    "public/css/proof-atlas-library.css": "7eae8099931841cc84acd4b2dfa4aeee0a61a659d0a750abd399d2e797ce721d",
+    "projects/proof-atlas/library/index.html": "e92d9230179662a650841ca7fc1767a5fbd4a706ca3b4a966745bcf2fcd8a764",
+    "_includes/proof-atlas-reading-tools.html": "270fbf8d8c38508af1cffbb5f43c4944b29a8110197d8d408816285cea4cee2d"
+  },
+  "builtAssetSha256": {
+    "public/js/proof-atlas-use-inputs.js": "8950046a6a17eab740a75d2768d273c0656bde3e7ec884eb4b1dc8426bd920d8",
+    "public/js/proof-atlas-application-judgment.js": "5c50dd8b744f47d441c80784c45abc554388e407c9be32f9041aab24481edb94",
+    "public/js/proof-atlas-use-navigation.js": "ed7c3dc7bcc6b2fb355281280ebfa8445f504a4360737260feb9f54349d1805c",
+    "public/js/proof-atlas-binding-uses.js": "934568043ef04a5b5d360195d489d0011106eb3fd5fa793d63810351454bdb77",
+    "public/js/proof-atlas-library.js": "37e8ffe75e620c406b3965453596e11154ec560b976b8369a7c0fe98ed58fb3d",
+    "public/js/proof-atlas-paged-library.js": "721b010537f7c64b783ba702fb843cf3d86cae9a58b2fa13ece2cebce012f667",
+    "public/js/proof-atlas-sync.js": "f0c84654c6e34b8482d5f92707853da66ecb04f20c1fbc40835e05f0719176d3",
+    "public/css/proof-atlas-library.css": "7eae8099931841cc84acd4b2dfa4aeee0a61a659d0a750abd399d2e797ce721d"
+  },
+  "checks": {
+    "profiles": 35,
+    "sampledUses": 469,
+    "directInputs": 44,
+    "insideInputs": 290,
+    "notRecorded": 135,
+    "independentChecks": 939,
+    "negativeControls": 48,
+    "newBrowserAccessibilityAudits": 8,
+    "existingBrowserSuites": 7
+  },
+  "scope": "Finite recorded Pi-input/source-containment relation. Existing native evidence reused. No new native corpus extraction, all-use coverage, semantic necessity or comprehension claim."
+}
