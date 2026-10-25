@@ -60,3 +60,5 @@ body.layout-distill .d-article .pa-sync-panel h2::before{content:none;counter-in
 .pa-argument-graph svg path.is-selected{stroke-width:3.5}
 .pa-argument-graph svg path.pa-argument-hit{stroke:transparent;stroke-width:18;pointer-events:stroke;cursor:pointer}
 .pa-argument-selection{font:600 12px/1.5 var(--sans,system-ui)!important;min-height:3em;border-left:3px solid var(--accent,#28756e);padding-left:9px}
+
+.pa-sync-panel .pl-inventory-stats{display:none}

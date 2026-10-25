@@ -19,3 +19,7 @@
 .an-row span { flex:1 1 18rem; }
 .an-lab pre { white-space:pre-wrap; overflow-wrap:anywhere; max-height:24rem; overflow:auto; background:var(--fig-bg); color:var(--text); }
 @media(max-width:600px) { .an-controls { align-items:stretch; } .an-controls label { flex:1 1 100%; } .an-row span { flex-basis:100%; } }
+
+/* The input number and direction remain readable without following a legend. */
+.an-wire-label{fill:var(--text);font:12px "IBM Plex Sans",sans-serif;paint-order:stroke;stroke:var(--fig-bg);stroke-width:4px;stroke-linejoin:round}
+.an-arrow-tip{fill:var(--text-muted)}

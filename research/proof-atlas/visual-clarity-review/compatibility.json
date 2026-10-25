@@ -1,0 +1,465 @@
+{
+  "format": "ProofAtlasVisualizationCompatibility/1",
+  "status": "PASS",
+  "build": "Production Jekyll build completed before these sequential browser checks",
+  "sourceHashes": {
+    "_includes/proof-atlas-compiled-workspace.html": "93e2ed46daa5044d591750f299dfb92d03ecbb51cd6b34ab7c9a2821389cc1e7",
+    "_includes/proof-atlas-reading-tools.html": "98778e46842d967880f22ed87e5ba5e3e6eb0673d9426be5cc12a7c18412dee7",
+    "projects/proof-atlas/library/index.html": "733aa2b3a85de9b98a985a246a837c330413154b76475d0b5cb9537be312c891",
+    "projects/proof-atlas/manual/index.html": "ae240915f23a542fca79183c7e7a1a23a2931b6795f82bae75ed89988e543a13",
+    "public/js/proof-atlas-local-reader.js": "f4290858553338a6df4ece8b199f87c0ff1daec51c49b9ce5354aa7ceea1756c",
+    "public/js/proof-atlas-library.js": "f0d9bd80aa3409ad5cb18e3773d520a962e82e1a507e8424e8155f0b2ccc4107",
+    "public/js/proof-atlas-sync.js": "d775ea71b1981568de16e34205cc42ff1c6de6593e50c818c3771298f96f04af",
+    "public/css/proof-atlas-library.css": "3ec3f9022b70e087a2ce80c680a89080be2f10c72643847cf6ea8790040a8424",
+    "public/css/proof-atlas-sync.css": "90d655e59ca067c358885a1ede24f735bf2308fe1801ffa6b519ef20da2415c3",
+    "public/css/proof-atlas-application-network.css": "e6100720a5e18f55231f8f061598639bcaac5479c9b8bc858911f647a075b72e",
+    "public/js/proof-atlas-application-network-view.js": "ce843ed91dd27cef260a00092ea8cb9120d9082bb2d6fa87b98df52dda8c3a48",
+    "public/js/proof-atlas-network-stream-view.js": "9700abcfc3f605ee6a1cff971ea9b0c9899ad1d2f65ca8658ef507ab6497c547"
+  },
+  "checks": [
+    {
+      "suite": "visual-clarity",
+      "script": "scripts/test-proof-atlas-visual-clarity-browser.cjs",
+      "scriptSha256": "92cd0bc25b6d047724fbf7ed8f8bae813632ac9a00e3740c03c94f266b7c6ecf",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": "/private/tmp/atlas-viz-review-verified/visual-clarity/stdout.log",
+      "result": {
+        "format": "ProofAtlasVisualClarityBrowser/1",
+        "status": "PASS",
+        "tasks": [
+          "Original SBracket deep link opens a labeled local cut and statement; absent typing stays unavailable.",
+          "Keyboard child selection and Parent preserve the original lexical route.",
+          "Declaration uses has labeled directions and selecting a local reference opens its declaration.",
+          "A variable link opens its exact lexical binder, independent of shared stored IDs.",
+          "Optional scoped geometry and its exact occurrence list remain available.",
+          "Current 26-module edition uses the same local reader.",
+          "A native Riccati application still opens its checked rule at the same source occurrence.",
+          "Long mobile statements can receive keyboard focus and scroll with arrow keys.",
+          "Article proof-step highlighting survives a child click in the new default reader.",
+          "Manual has five question-based routes and retains all twelve constructor diagrams.",
+          "Bounded occurrence diagram remains separate and renders actual source cards.",
+          "A missing local reader refuses clearly without falling back to a hairball; retry recovers."
+        ],
+        "accessibility": [
+          {
+            "view": "local",
+            "width": 1500,
+            "theme": "light",
+            "violations": 0
+          },
+          {
+            "view": "local",
+            "width": 1500,
+            "theme": "dark",
+            "violations": 0
+          },
+          {
+            "view": "local",
+            "width": 390,
+            "theme": "light",
+            "violations": 0
+          },
+          {
+            "view": "local",
+            "width": 390,
+            "theme": "dark",
+            "violations": 0
+          },
+          {
+            "view": "native-Riccati",
+            "width": 1500,
+            "theme": "light",
+            "violations": 0
+          },
+          {
+            "view": "native-Riccati",
+            "width": 1500,
+            "theme": "dark",
+            "violations": 0
+          },
+          {
+            "view": "native-Riccati",
+            "width": 390,
+            "theme": "light",
+            "violations": 0
+          },
+          {
+            "view": "native-Riccati",
+            "width": 390,
+            "theme": "dark",
+            "violations": 0
+          }
+        ],
+        "screenshots": [
+          "/private/tmp/atlas-viz-review-verified/visual-clarity/local-1500-light.png",
+          "/private/tmp/atlas-viz-review-verified/visual-clarity/local-1500-dark.png",
+          "/private/tmp/atlas-viz-review-verified/visual-clarity/local-390-light.png",
+          "/private/tmp/atlas-viz-review-verified/visual-clarity/local-390-dark.png",
+          "/private/tmp/atlas-viz-review-verified/visual-clarity/declaration-uses.png",
+          "/private/tmp/atlas-viz-review-verified/visual-clarity/scoped-geometry.png",
+          "/private/tmp/atlas-viz-review-verified/visual-clarity/riccati-application.png",
+          "/private/tmp/atlas-viz-review-verified/visual-clarity/synchronized-article.png",
+          "/private/tmp/atlas-viz-review-verified/visual-clarity/view-guide.png",
+          "/private/tmp/atlas-viz-review-verified/visual-clarity/occurrence-reader.png"
+        ],
+        "scope": "Reading interactions and presentation checks, not a measured human comprehension result.",
+        "files": {
+          "public/js/proof-atlas-local-reader.js": "f4290858553338a6df4ece8b199f87c0ff1daec51c49b9ce5354aa7ceea1756c",
+          "public/js/proof-atlas-library.js": "f0d9bd80aa3409ad5cb18e3773d520a962e82e1a507e8424e8155f0b2ccc4107",
+          "public/js/proof-atlas-sync.js": "d775ea71b1981568de16e34205cc42ff1c6de6593e50c818c3771298f96f04af",
+          "public/css/proof-atlas-library.css": "3ec3f9022b70e087a2ce80c680a89080be2f10c72643847cf6ea8790040a8424"
+        }
+      }
+    },
+    {
+      "suite": "manual",
+      "script": "scripts/test-proof-atlas-manual-browser.cjs",
+      "scriptSha256": "f25981e4b37f1ef3567f00091cce47738c2eb82c0f3fafcd95ad733f91a6eb15",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": "/private/tmp/atlas-viz-review-verified/manual/stdout.log",
+      "result": {
+        "status": "PASS",
+        "examples": 4,
+        "cutStates": 40,
+        "scopeSelections": 4,
+        "externalBinderJumps": 2,
+        "keyboard": 1,
+        "accessibility": 9,
+        "fieldDiagrams": 12,
+        "links": 40,
+        "compiledNavigation": 1,
+        "failureStates": 1,
+        "scope": "Actual rendered manual and shared constructor gallery: finite examples, exact field presentation, selection, keyboard, external binders, mobile/dark accessibility, links, compiled proof navigation and optional-script failure. No comprehension measurement."
+      }
+    },
+    {
+      "suite": "proof-steps",
+      "script": "scripts/test-proof-atlas-proof-steps-browser.cjs",
+      "scriptSha256": "a9c7ff243305d5a8338da3b65bd399f21c030d1bdfb6b7aca54142fe140f0247",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": "/private/tmp/atlas-viz-review-verified/proof-steps/stdout.log",
+      "result": {
+        "status": "PASS",
+        "articleSteps": 55,
+        "paths": 94,
+        "preciseProofStepClicks": true,
+        "lemmaClickJourneys": 4,
+        "riccatiArgumentNodes": 9,
+        "riccatiCallEdges": 6,
+        "actualArrowClicks": 6,
+        "statementAndProofDistinguished": true,
+        "descendantsKeepStep": true,
+        "sharedHelperChoices": true,
+        "savedPath": true,
+        "standaloneLibraryLink": true,
+        "explicitUnmapped": 13,
+        "formulas": 916,
+        "argumentAndReaderAccessibilityAudits": 4
+      }
+    },
+    {
+      "suite": "application-judgments",
+      "script": "scripts/test-proof-atlas-application-judgments-browser.cjs",
+      "scriptSha256": "42d29c66124e425bdefca616a45c3a61bc3d5c486e01e53776a6ce1f1a5df54c",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": "/private/tmp/atlas-viz-review-verified/application-judgments/stdout.log",
+      "result": {
+        "status": "PASS",
+        "threeExactTermJumps": true,
+        "contextKeyboardJump": true,
+        "exactTraceObservationTypeAndOrigin": true,
+        "stageNavigationKeepsProof": true,
+        "normalizedPiTypeDiagram": true,
+        "stageChangeClearsOldType": true,
+        "delayedTypeDoesNotRestoreOldStage": true,
+        "complete59StageNavigation": true,
+        "articleSelectionPreserved": true,
+        "nonApplicationAnchorUnannotated": true,
+        "unsupportedClearsViews": true,
+        "failedOptionalViewKeepsProof": true,
+        "accessibilityAudits": 4
+      }
+    },
+    {
+      "suite": "application-network",
+      "script": "scripts/test-proof-atlas-application-network-browser.cjs",
+      "scriptSha256": "2e20527bb59b9e03b63a52ad2631bb42541bc308e2dded5bae241ad96df3bf46",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": "/private/tmp/atlas-viz-review-verified/application-network/stdout.log",
+      "result": {
+        "format": "ProofAtlasApplicationNetworkBrowser/1",
+        "status": "PASS",
+        "profiles": 31,
+        "callSelections": 162,
+        "wireSelections": 101,
+        "computedSelections": 101,
+        "bindingSelections": 7,
+        "expansions": 7,
+        "collapseRoundtrips": 1,
+        "sharedResultChecks": 1,
+        "distinctOccurrenceChecks": 1,
+        "axeAudits": 4,
+        "keyboardChecks": 1,
+        "staleRefusals": 1,
+        "topologyHashRefusals": 1,
+        "nativeHashRefusals": 1,
+        "releases": 1,
+        "downloadChecks": 2,
+        "wholeArchiveAttempts": 0,
+        "builtFiles": {
+          "public/js/proof-atlas-application-network.js": "46fca09cff6abbc49e44bc981ca75200f7133348297096cc69222b4bd916fcee",
+          "public/js/proof-atlas-application-network-pages.js": "7e7e1527bcac209a7289004ac5bed62ae9419228782c58e0650d08d4af345197",
+          "public/js/proof-atlas-application-network-view.js": "ce843ed91dd27cef260a00092ea8cb9120d9082bb2d6fa87b98df52dda8c3a48",
+          "public/css/proof-atlas-application-network.css": "e6100720a5e18f55231f8f061598639bcaac5479c9b8bc858911f647a075b72e",
+          "public/data/proof-atlas/application-network-manifest.js": "4a826bff4fac9649aeb2e1fb95c569e4072de8a692093ae398ff2ef049ec7060"
+        },
+        "html": {
+          "source": "research/proof-atlas/application-network/index.html",
+          "sourceSha256": "5768fda0c7b726eb9a6f91d37b89587b220ffddf677ad3acf9497d43646de83b",
+          "normalization": "Only four shared CSS build-time query versions",
+          "normalizedSha256": "615dd92c4263958c679e41ae4f594264f18c156208d5a96ac1536f21cc5cfea1"
+        },
+        "checkerSha256": "2e20527bb59b9e03b63a52ad2631bb42541bc308e2dded5bae241ad96df3bf46"
+      }
+    },
+    {
+      "suite": "network-streaming",
+      "script": "scripts/test-proof-atlas-network-streaming-browser.cjs",
+      "scriptSha256": "685c6312221b7ae6d3eaf0f62083658c293fe884a9d8836b8b57fcc6b9ad776f",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": "/private/tmp/atlas-viz-review-verified/network-streaming/stdout.log",
+      "result": {
+        "format": "ProofAtlasNetworkStreamingBrowser/1",
+        "status": "PASS",
+        "nativeProfiles": 31,
+        "nativeCalls": 162,
+        "nativeWires": 101,
+        "nativeTypeSelections": 101,
+        "bindingSelections": 7,
+        "largeCalls": 11,
+        "unavailableTypes": 11,
+        "expansions": 1,
+        "consumerPages": 1,
+        "zoomChecks": 3,
+        "panChecks": 2,
+        "axeAudits": 4,
+        "keyboardChecks": 1,
+        "staleRefusals": 1,
+        "hashRefusals": 1,
+        "releases": 1,
+        "wholeArchiveAttempts": 0,
+        "builtFiles": {
+          "public/js/proof-atlas-network-page-store.js": "8653362782be9b69eaba6c4b67962200685ea00d363c71c373db04b22ff5855a",
+          "public/js/proof-atlas-network-streaming.js": "0c871f8ffd713581717f31a07e99606ec46e4db9f5642706596d0744e84482ba",
+          "public/js/proof-atlas-network-stream-pages.js": "0dcd3c2fc7f9ce2a117cc78eea862d5a907328b43174311aa0c79c5c720bffe5",
+          "public/js/proof-atlas-network-port-inspector.js": "04ddbe608d77c623aad81fb4a79da0654e80390b8e7f057ae9a58fb8367b5d98",
+          "public/js/proof-atlas-network-stream-view.js": "9700abcfc3f605ee6a1cff971ea9b0c9899ad1d2f65ca8658ef507ab6497c547",
+          "public/data/proof-atlas/network-streaming-manifest.js": "5768d4f66ce01a092b5e126512998264502bd92b7c15caae8c79a60702e3087b"
+        },
+        "html": {
+          "source": "research/proof-atlas/network-streaming/index.html",
+          "sourceSha256": "cbbf177bbfb05edc10fb0da1bbc1aa0a3ff602ba843950a086d6827d4e43e07b",
+          "normalizedSha256": "3ec6076e7a883e0f7fb1e32fb38a5ff868ec7a8d17356765ada9adcab31eb3c8"
+        },
+        "checkerSha256": "685c6312221b7ae6d3eaf0f62083658c293fe884a9d8836b8b57fcc6b9ad776f"
+      }
+    },
+    {
+      "suite": "article",
+      "script": "scripts/test-proof-atlas-article-browser.cjs",
+      "scriptSha256": "f18749c57e7703b83b3c337741a164e3906362586d385f815c7fe01e88bff31d",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": "/private/tmp/atlas-viz-review-verified/article/stdout.log",
+      "result": {
+        "status": "PASS",
+        "bidirectional": true,
+        "inheritedContext": true,
+        "scopeBoundary": true,
+        "typesetMath": true,
+        "accessibility": true,
+        "responsive": true
+      }
+    },
+    {
+      "suite": "scope",
+      "script": "scripts/test-proof-atlas-scope-browser.cjs",
+      "scriptSha256": "9367144bc26eac267cff170d2f95c201896fd2e981631f61c55d3ea8bfa8d1c5",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": "/private/tmp/atlas-viz-review-verified/scope/stdout.log",
+      "result": {
+        "status": "PASS",
+        "exact57TargetsInFourFrames": [
+          16,
+          16,
+          16,
+          9
+        ],
+        "keyboardSelection": true,
+        "sourceJumpExact": true,
+        "localRefinementPreservesSelection": true,
+        "scopeState": {
+          "pageLoads": 16,
+          "indexLoads": 1,
+          "evictions": 0,
+          "peakEntries": 85,
+          "entries": 85,
+          "entryLimit": 4096,
+          "indexPages": 1,
+          "indexLimit": 4,
+          "transientNodes": 256,
+          "width": 512,
+          "sourceIndexSha256": "39dbe3b524a288ceb58009e86becc10331d8bbd3e230306d727649e9da8c6d76",
+          "manifestSha256": "d04174464ae500534b8842470dc0b6b7a0805369372c5e60aefebc62cef961e8"
+        },
+        "optionalFailurePreservesBaseGeometry": true,
+        "lateSummaryCannotChangeProof": true,
+        "missingModulePreservesBaseGeometry": true,
+        "accessibilityAudits": 4,
+        "completeSourceOrNativeRequests": 0,
+        "scope": "Browser integrity and source-scope navigation. No logical necessity or comprehension result."
+      }
+    },
+    {
+      "suite": "type-conversions",
+      "script": "scripts/test-proof-atlas-type-conversions-browser.cjs",
+      "scriptSha256": "82b8a33cdda7a40b933b23bc11901f36c3cbdc8ae67d828a065df3f55516e9d3",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": "/private/tmp/atlas-viz-review-verified/type-conversions/stdout.log",
+      "result": {
+        "status": "PASS",
+        "conversionFamilies": 14,
+        "conversionViews": 254,
+        "letPremiseObservationViews": 32,
+        "pairedStructuralRefinement": true,
+        "independentTypeNavigation": true,
+        "nativeRelationStaysAtRoots": true,
+        "externalContextAndInternalBinderJumps": true,
+        "exactSubjectAndRecordJumps": true,
+        "delayedModuleCannotRestoreSelection": true,
+        "moduleFailureKeepsSourceAndTypes": true,
+        "unrelatedViewsRemainIndependent": true,
+        "poolRequests": 0,
+        "accessibilityAudits": 4
+      }
+    },
+    {
+      "suite": "occurrence-types",
+      "script": "scripts/test-proof-atlas-occurrence-types-browser.cjs",
+      "scriptSha256": "ef3ca87e46aecc4a995c29bfa3b79cbac6b014ae2dee5f29d6fd97f5ad85f479",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": "/private/tmp/atlas-viz-review-verified/occurrence-types/stdout.log",
+      "result": {
+        "status": "PASS",
+        "declarations": 6,
+        "checkedOccurrences": 960,
+        "unrecordedArgumentsRemainUnavailable": true,
+        "distinctSharedVariableContexts": 2,
+        "actualProofArgumentClick": true,
+        "unknownPathUnannotated": true,
+        "changedTypePayloadRejected": true,
+        "originalGraphSurvivesRejectedTypes": true,
+        "articleTypedPath": true,
+        "unsupportedClearsTypes": true,
+        "accessibilityAudits": 4
+      }
+    },
+    {
+      "suite": "universes",
+      "script": "scripts/test-proof-atlas-universes-browser.cjs",
+      "scriptSha256": "4ef17bc7da4216e28900e4f8d28218d73472e0ff16e322b91cb68ad0f4d6f63b",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": "/private/tmp/atlas-viz-review-verified/universes/stdout.log",
+      "result": {
+        "status": "PASS",
+        "sourceUniverseFields": 5,
+        "sourceConstructorKinds": [
+          "imax",
+          "max",
+          "param",
+          "succ",
+          "zero"
+        ],
+        "recordedTypeNamespace": true,
+        "twoConversionNamespaces": true,
+        "betaAndLetComputedNamespaces": true,
+        "noExtraLetPoolLoad": true,
+        "allSixNativeLevelConstructors": true,
+        "referenceRoots": 18,
+        "imaxZeroBranch": true,
+        "unresolvedUniverseNotAssigned": true,
+        "sharedDepth80KeyboardJump": true,
+        "pagedNodesAndParameters": true,
+        "sourceSelectionPreserved": true,
+        "delayedOrMissingComponentKeepsProof": true,
+        "accessibilityAudits": 4
+      }
+    },
+    {
+      "suite": "method-interfaces",
+      "script": "scripts/test-proof-atlas-method-interfaces-browser.cjs",
+      "scriptSha256": "43f0eb9b58c7ae384fefde9627cbcc6faa90d337f154af42b8b0b831a43e9d8d",
+      "exitCode": 0,
+      "status": "PASS",
+      "output": "/private/tmp/atlas-viz-review-verified/method-interfaces/stdout.log",
+      "result": {
+        "status": "PASS",
+        "methodScenes": 16,
+        "riccatiScenes": 8,
+        "controlScenes": 8,
+        "inputSelections": 24,
+        "computedReferenceJumps": 1,
+        "originalReferenceJumps": 7,
+        "originalMethodJumps": 9,
+        "axeAudits": 4,
+        "failureControls": 2,
+        "staleControls": 1,
+        "checkerSha256": "43f0eb9b58c7ae384fefde9627cbcc6faa90d337f154af42b8b0b831a43e9d8d",
+        "builtFiles": {
+          "public/js/proof-atlas-method-interfaces.js": "fd2eb4d02ced57e88474edb16923eb34930968869e85d5909a44bd3fd132762e",
+          "public/js/proof-atlas-method-examples.js": "ea5b595e4dcd7ce15c7c660dc74abc93eeb8e1da86b3e5c356aca7dce8a114b0",
+          "public/js/proof-atlas-elimination.js": "4a2c842a5245827c4ab4d1d2028c6119d5735cda588009454c3a25db5beccd22",
+          "public/js/proof-atlas-library.js": "f0d9bd80aa3409ad5cb18e3773d520a962e82e1a507e8424e8155f0b2ccc4107",
+          "public/css/proof-atlas-theme.css": "bb6a9f8dd30b2e238178a63f62d4eeabfaf48b55ffe03bad3dc64b8359b090cf",
+          "public/data/proof-atlas/method-interfaces-manifest.js": "35545092727a15db1c18536f31361c0fab98ab132610ab375eeb242216e8b0d7"
+        }
+      }
+    }
+  ],
+  "localReader": {
+    "format": "ProofAtlasLocalReaderCheck/1",
+    "status": "PASS",
+    "declarations": 2098,
+    "roots": 4164,
+    "sampledInteriorCuts": 14080,
+    "bindingChecks": 4319,
+    "maxRetained": 10,
+    "editions": [
+      {
+        "id": "published-15",
+        "declarations": 739
+      },
+      {
+        "id": "working-26",
+        "declarations": 1359
+      }
+    ],
+    "controls": [
+      "scope",
+      "let",
+      "application",
+      "scale"
+    ],
+    "scope": "Complete roots of both inventoried project editions; one representative interior cut per present constructor per declaration; authored scope, let, sharing and huge-count controls. No comprehension or mathematical-equivalence claim."
+  }
+}

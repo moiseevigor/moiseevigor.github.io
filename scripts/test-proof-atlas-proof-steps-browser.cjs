@@ -1,4 +1,4 @@
-/* Actual article, compiled-line, canvas and standalone-library proof-step journeys. */
+/* Actual article, compiled-line, local-tree and standalone-library proof-step journeys. */
 'use strict';
 const {chromium}=require('playwright'),assert=require('assert/strict'),fs=require('fs'),path=require('path'),vm=require('vm');
 const w={};vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../public/data/proof-atlas/article-proof-steps.js'),'utf8'),{window:w});const I=w.PROOF_ATLAS_PROOF_STEPS;
@@ -36,15 +36,15 @@ const w={};vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../public/dat
     await p.waitForFunction(a=>ProofAtlasSync.getSnapshot().compiled?.path===a.path&&ProofAtlasSync.getSnapshot().article===a.step,anchor);const s=await snapshot();assert.equal(s.match,'indexed');
    }
   }
-  // Actual compiled-line and canvas clicks inside each new argument family.
+  // Actual compiled-line and local-tree clicks inside each new argument family.
   let lemmaClickJourneys=0;
   for(const id of ['step-identities-beta','step-identities-alpha-derivative','step-riccati-cancellation','step-riccati-amgm']){
    await p.evaluate(id=>ProofAtlasSync.selectArticle(id),id);await settled();
    const child=await p.evaluate(()=>{const d=ProofAtlasLibrary.getData(),s=ProofAtlasLibrary.getSnapshot();return d.children[s.selected][0];});
-   await p.locator('#pl-rows button[data-occurrence="'+child+'"]').click();
+   if(!await p.locator('#pl-rows').isVisible())await p.getByText('Complete selected term, with sharing retained',{exact:true}).click();await p.locator('#pl-rows button[data-occurrence="'+child+'"]').click();
    await p.waitForFunction(id=>ProofAtlasSync.getSnapshot().article===id&&ProofAtlasSync.getSnapshot().match==='step-context',id);
-   const point=await p.evaluate(()=>{const d=ProofAtlasLibrary.getData(),s=ProofAtlasLibrary.getSnapshot();return d.children[s.selected].map(i=>ProofAtlasLibrary.getPoint(i)).find(Boolean);});assert(point,'Indexed lemma step needs a visible graph child');
-   await p.locator('#pl-canvas').click({position:{x:point.x,y:point.y}});await p.waitForFunction(i=>ProofAtlasLibrary.getSnapshot().selected===i,point.id);assert.equal((await snapshot()).article,id);lemmaClickJourneys++;
+   const point=await p.evaluate(()=>{const d=ProofAtlasLibrary.getData(),s=ProofAtlasLibrary.getSnapshot(),id=d.children[s.selected][0];if(id===undefined)return null;const route={root:s.route.root,slots:[...s.route.slots,0]};return{id,path:ProofAtlasLibraryData.path(d,route)};});assert(point,'Indexed lemma step needs a visible graph child');
+   await p.locator('[data-local-path="'+point.path+'"]').click();await p.waitForFunction(i=>ProofAtlasLibrary.getSnapshot().selected===i,point.id);assert.equal((await snapshot()).article,id);lemmaClickJourneys++;
   }
   // Clicking the Riccati-pair call from the mixed-derivative proof changes the
   // article highlight to the pair, rather than retaining the whole z argument.
@@ -53,9 +53,9 @@ const w={};vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../public/dat
   await p.evaluate(async a=>{const api=ProofAtlasLibrary,m=ProofAtlasSync.routeFromPath(api.getData(),a.path);await api.selectOccurrence(m.node,true,false,m.route);},pair);await p.waitForFunction(()=>window.ProofAtlasSync?.getSnapshot()?.article==='step-riccati-pair');
   await p.evaluate(()=>ProofAtlasSync.selectArticle('step-cells-gap'));await settled();const before=await snapshot();
   const child=await p.evaluate(()=>{const d=ProofAtlasLibrary.getData(),s=ProofAtlasLibrary.getSnapshot();return d.children[s.selected].find(i=>d.children[i].length>0)||d.children[s.selected][0];});
-  await p.locator('#pl-rows button[data-occurrence="'+child+'"]').click();await p.waitForFunction(()=>window.ProofAtlasSync?.getSnapshot().match==='step-context');assert.equal((await snapshot()).article,'step-cells-gap');assert((await p.locator('#pa-sync-status').textContent()).includes('Within indexed proof step'));
-  // A real canvas child keeps the gap branch, rather than the enclosing theorem.
-  const point=await p.evaluate(()=>{const d=ProofAtlasLibrary.getData(),s=ProofAtlasLibrary.getSnapshot();return d.children[s.selected].map(i=>ProofAtlasLibrary.getPoint(i)).find(Boolean);});assert(point,'Gap branch must contain a visible graph child');{await p.locator('#pl-canvas').click({position:{x:point.x,y:point.y}});await p.waitForFunction(i=>ProofAtlasLibrary.getSnapshot().selected===i,point.id);assert.equal((await snapshot()).article,'step-cells-gap');}
+  if(!await p.locator('#pl-rows').isVisible())await p.getByText('Complete selected term, with sharing retained',{exact:true}).click();await p.locator('#pl-rows button[data-occurrence="'+child+'"]').click();await p.waitForFunction(()=>window.ProofAtlasSync?.getSnapshot().match==='step-context');assert.equal((await snapshot()).article,'step-cells-gap');assert((await p.locator('#pa-sync-status').textContent()).includes('Within indexed proof step'));
+  // A real local-tree child keeps the gap branch, rather than the enclosing theorem.
+  const point=await p.evaluate(()=>{const d=ProofAtlasLibrary.getData(),s=ProofAtlasLibrary.getSnapshot(),id=d.children[s.selected][0];if(id===undefined)return null;const route={root:s.route.root,slots:[...s.route.slots,0]};return{id,path:ProofAtlasLibraryData.path(d,route)};});assert(point,'Gap branch must contain a visible graph child');{await p.locator('[data-local-path="'+point.path+'"]').click();await p.waitForFunction(i=>ProofAtlasLibrary.getSnapshot().selected===i,point.id);assert.equal((await snapshot()).article,'step-cells-gap');}
   await p.evaluate(()=>ProofAtlasSync.selectArticle('step-first-lift','SBracket.one_le_ε_deriv_u'));await settled();await p.evaluate(()=>ProofAtlasLibrary.selectOccurrence(ProofAtlasLibrary.getSnapshot().selected,true,false));
   // Explicit path selection (direct numeric jumps use a representative path).
   await p.evaluate(async()=>{const s=ProofAtlasLibrary.getSnapshot();await ProofAtlasLibrary.selectOccurrence(s.selected,true,false,s.route);});await p.waitForFunction(()=>!document.getElementById('pa-sync-step-choices').hidden);assert(await p.locator('#pa-sync-step-choices button').count()>=2);

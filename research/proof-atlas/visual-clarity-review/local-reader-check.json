@@ -1,0 +1,26 @@
+{
+  "format": "ProofAtlasLocalReaderCheck/1",
+  "status": "PASS",
+  "declarations": 2098,
+  "roots": 4164,
+  "sampledInteriorCuts": 14080,
+  "bindingChecks": 4319,
+  "maxRetained": 10,
+  "editions": [
+    {
+      "id": "published-15",
+      "declarations": 739
+    },
+    {
+      "id": "working-26",
+      "declarations": 1359
+    }
+  ],
+  "controls": [
+    "scope",
+    "let",
+    "application",
+    "scale"
+  ],
+  "scope": "Complete roots of both inventoried project editions; one representative interior cut per present constructor per declaration; authored scope, let, sharing and huge-count controls. No comprehension or mathematical-equivalence claim."
+}

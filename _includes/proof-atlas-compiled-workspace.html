@@ -4,24 +4,24 @@
   <label>Find a declaration<input id="pl-search" type="search" placeholder="Theorem, definition or generated helper"></label>
   <label class="pl-declaration-select">Declaration<select id="pl-declaration"></select></label>
  </section>
- <div id="pl-coverage" class="pl-coverage"></div>
+ <details class="pl-advanced pl-inventory-stats"><summary>Edition inventory and counts</summary><div id="pl-coverage" class="pl-coverage"></div></details>
  <section class="pl-workspace" aria-label="Complete proof explorer">
   <div class="pl-graph-panel">
-   <header><h2 id="pl-title">Select a declaration</h2><div class="pl-actions"><button id="pl-term-view" type="button" aria-pressed="true">Term structure</button><button id="pl-geometry-view" type="button" aria-pressed="false">Scoped geometry · prototype</button><button id="pl-deps-view" type="button" aria-pressed="false">All declaration links</button></div></header>
+   <header><h2 id="pl-title">Select a declaration</h2><div class="pl-actions"><button id="pl-term-view" type="button" aria-pressed="true">Local term</button><button id="pl-geometry-view" type="button" aria-pressed="false">Scoped geometry · prototype</button><button id="pl-deps-view" type="button" aria-pressed="false">Declaration uses</button></div></header>
    <div class="pl-actions" id="pl-roots"></div>
    <div class="pl-actions" id="pl-scene-controls" hidden><button id="pl-telescope-toggle" type="button" aria-pressed="false">Fold binder contexts</button><button id="pl-application-toggle" type="button" aria-pressed="false">Group applications</button></div>
-   <p id="pl-typing-note"></p>
-   <div class="pl-canvas-wrap"><canvas id="pl-canvas" tabindex="0" aria-label="Navigable proof expression tree; an equivalent node list follows"></canvas></div>
    <div class="pl-actions"><button id="pl-minus" type="button" aria-label="Zoom out">−</button><button id="pl-fit" type="button">Fit graph</button><button id="pl-plus" type="button" aria-label="Zoom in">+</button><button id="pl-parent" type="button">Parent</button><label>Shared node<input id="pl-occurrence" type="number" min="0" value="0"></label><button id="pl-go" type="button">Go</button></div>
+   <details class="pl-mobile-statement" open><summary>Declaration statement</summary><pre id="pl-mobile-source" tabindex="0" role="region" aria-label="Scrollable declaration statement"></pre></details>
+   <div id="pl-local-view" class="pl-local-view" aria-label="Selected occurrence and ordered fields"></div><div id="pl-dependency-view" class="pl-dependency-view" hidden></div><details class="pl-advanced"><summary>Graph diagnostics and evidence coverage</summary><button id="pl-shared-view" type="button" aria-pressed="false">Stored expression graph · diagnostic</button><p id="pl-typing-note"></p></details>
+   <div class="pl-canvas-wrap" hidden><canvas id="pl-canvas" tabindex="0" aria-label="Navigable proof expression tree; an equivalent node list follows"></canvas></div>
+
    <p id="pl-graph-note"></p><div id="pl-telescope-headers"></div><div id="pl-application-headers"></div><details id="pl-scene-details" hidden><summary>Visible scoped occurrences and boundaries</summary><p>Each row identifies an occurrence path, rather than merging shared nodes. Collapsed descendants remain recoverable from their packet and route. λ/∀/let have separate domain, value and body ports; dashed links identify lexical binders. This prototype does not infer the type of every expression.</p><ol id="pl-scene-rows"></ol></details><div id="pl-legend" class="pl-legend"></div>
    <details><summary>Every declaration in this edition</summary><div id="pl-inventory"></div></details>
   </div>
   <aside class="pl-reader" aria-label="Compiled proof and expression details">
-   <h2>Compiled proof and expression details</h2><div id="pl-provenance"></div>
-   <div id="pl-downloads" class="pl-actions"></div>
-   <div id="pl-expression"></div>
-   <details id="pl-source-details" open><summary>Declaration type decoded by Lean</summary><div id="pl-source" class="pl-source" tabindex="0" role="region" aria-label="Scrollable decoded declaration type"></div></details>
+   <h2>Statement and selected term</h2><details id="pl-source-details" open><summary>Declaration type decoded by Lean</summary><div id="pl-source" class="pl-source" tabindex="0" role="region" aria-label="Scrollable decoded declaration type"></div></details><div id="pl-expression"></div><details class="pl-advanced"><summary>Declaration provenance and downloads</summary><div id="pl-provenance"></div>
+   </details><div id="pl-downloads" class="pl-actions" aria-label="Article links and compiled data"></div>
    <details><summary>Exact referenced declarations</summary><div id="pl-references"></div></details>
-   <details open><summary>Complete selected term, with sharing retained</summary><p>eN identifies a shared subterm. Bound-variable indices follow the selected path. This decodes the kernel graph; original tactic scripts remain private.</p><button id="pl-term-download" type="button">Download complete decoded term</button><p id="pl-row-count"></p><ol id="pl-rows"></ol><button id="pl-more" type="button">Show next 200</button></details>
+   <details><summary>Complete selected term, with sharing retained</summary><p>eN identifies a shared subterm. Bound-variable indices follow the selected path. This decodes the kernel graph; original tactic scripts remain private.</p><button id="pl-term-download" type="button">Download complete decoded term</button><p id="pl-row-count"></p><ol id="pl-rows"></ol><button id="pl-more" type="button">Show next 200</button></details>
   </aside>
  </section>

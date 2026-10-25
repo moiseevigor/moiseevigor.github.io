@@ -1,0 +1,25 @@
+{
+  "format": "ProofAtlasVisualizationReview/1",
+  "status": "PASS",
+  "checkedAtUtc": "2026-10-25T21:15:14.745395+00:00",
+  "baselineCommit": "4e6a51cb118c03b6399effb868398c5c90746be4",
+  "deployment": "LOCAL_PREVIEW_ONLY",
+  "compiledDataChanges": [],
+  "validation": {
+    "declarations": 2098,
+    "roots": 4164,
+    "interiorCuts": 14080,
+    "bindingChecks": 4319,
+    "browserSuites": 12
+  },
+  "reports": {
+    "research/proof-atlas/visual-clarity-review/local-reader-check.json": "d22ff9b23207e1002883a4aac4c5a7483f04b582aa00ebb069f8b0599977533a",
+    "research/proof-atlas/visual-clarity-review/compatibility.json": "612b3adafc172a2185bc4bb5e5be73290e1df67c46f2a66828442f63f152bc4a",
+    "research/proof-atlas/visual-clarity-review/browser-report.json": "d552cab56bfc1c4d7a79dd8c516697b9a8fa921711cd6ea0322faacd36db4c4a"
+  },
+  "resolvedRegressions": [
+    "Long mobile declaration statements require keyboard focus and a visible focus indicator.",
+    "Direct article/proof-step links must remain visible outside the collapsed provenance disclosure."
+  ],
+  "scope": "Structural integrity and reading interactions. No new native Lean observations, semantic compression result or reader-comprehension study. Historical scientific evidence remains immutable; mutable presentation hashes are evaluated by this separate compatibility record."
+}
