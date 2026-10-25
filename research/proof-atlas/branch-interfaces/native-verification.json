@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "compiler": "Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+  "dependencyRecovery": {
+    "kind": "mathlib-cache-attribution/1",
+    "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+    "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+    "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+    "artifactCount": 43450,
+    "allBinaryHashesVerified": true,
+    "originalGitCheckoutsVerified": false,
+    "independentlyRebuilt": false
+  },
+  "sourceModules": {
+    "SE2Conjugate.Jacobi": {
+      "sourceSha256": "30a398ea15a163df4b8520be9bcc9755cfd1f2271f18172b559c6a617c41d1af",
+      "compiledModuleSha256": "17e153288fc83998623e8cd35f7b4c7d79911408e97fd4734f1002057b10934a"
+    },
+    "SE2Conjugate.Identities": {
+      "sourceSha256": "e2660b362273952060cf9cb4081d3e2b61f70eac5b99e02c860f63806bf23788",
+      "compiledModuleSha256": "05698e16f303f7eb126cf9e0844fe0edb44d98e4014f6c820bdc97d3fe10452c"
+    },
+    "SE2Conjugate.Riccati": {
+      "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+      "compiledModuleSha256": "5d43e49880bc35c48d6e6ea7d0378e2042a6d46b8820a4f98d162d87111290da"
+    }
+  },
+  "producerFiles": {
+    "research/proof-atlas/branch-interfaces/BranchInterfaces.lean": "b70c1a5ff9a977b241f943e32bb7e588d625fcb7dac95257b5222c91081f0cce",
+    "research/proof-atlas/branch-interfaces/Controls.lean": "2ef3b0c1dc1cbb5ea02c12941b1e5eccc92dbff85a9453dad77399487e8ce8ae",
+    "research/proof-atlas/branch-interfaces/prepare.cjs": "6687b9be052204366b9bfaf987cbae15be3fdf70161fd2eb7f3d78ade005c735",
+    "research/proof-atlas/branch-interfaces/verify.py": "1cbfa936564a74840d83455bbc25f8597cc9c9728d17cff498aba0185f3310b8",
+    "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+    "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102"
+  },
+  "runtimeSha256": "2f477a201251b34de9025c08194a466966bcdd34e6599f1ea033084749be043d",
+  "nativeOutputSha256": "0dc9db44c40f1161ebde27b97dfa4587e4dc1334ec48a06f940085939a84b066",
+  "profiles": 6,
+  "queries": 12,
+  "interfaces": 16,
+  "originalPrivateSourcePublished": false,
+  "originalRiccatiModulesRecompiledThisRun": false
+}

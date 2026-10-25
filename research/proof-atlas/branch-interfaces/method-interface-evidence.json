@@ -1,0 +1,433 @@
+{
+  "format": "ProofAtlasMethodInterfaceEvidence/1",
+  "status": "PASS",
+  "publication": "LOCAL_NOT_DEPLOYED_NO_BLOG_POST",
+  "reports": {
+    "native-verification": {
+      "status": "PASS",
+      "compiler": "Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+      "dependencyRecovery": {
+        "kind": "mathlib-cache-attribution/1",
+        "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+        "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+        "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+        "artifactCount": 43450,
+        "allBinaryHashesVerified": true,
+        "originalGitCheckoutsVerified": false,
+        "independentlyRebuilt": false
+      },
+      "sourceModules": {
+        "SE2Conjugate.Jacobi": {
+          "sourceSha256": "30a398ea15a163df4b8520be9bcc9755cfd1f2271f18172b559c6a617c41d1af",
+          "compiledModuleSha256": "17e153288fc83998623e8cd35f7b4c7d79911408e97fd4734f1002057b10934a"
+        },
+        "SE2Conjugate.Identities": {
+          "sourceSha256": "e2660b362273952060cf9cb4081d3e2b61f70eac5b99e02c860f63806bf23788",
+          "compiledModuleSha256": "05698e16f303f7eb126cf9e0844fe0edb44d98e4014f6c820bdc97d3fe10452c"
+        },
+        "SE2Conjugate.Riccati": {
+          "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+          "compiledModuleSha256": "5d43e49880bc35c48d6e6ea7d0378e2042a6d46b8820a4f98d162d87111290da"
+        }
+      },
+      "producerFiles": {
+        "research/proof-atlas/branch-interfaces/BranchInterfaces.lean": "b70c1a5ff9a977b241f943e32bb7e588d625fcb7dac95257b5222c91081f0cce",
+        "research/proof-atlas/branch-interfaces/Controls.lean": "2ef3b0c1dc1cbb5ea02c12941b1e5eccc92dbff85a9453dad77399487e8ce8ae",
+        "research/proof-atlas/branch-interfaces/prepare.cjs": "6687b9be052204366b9bfaf987cbae15be3fdf70161fd2eb7f3d78ade005c735",
+        "research/proof-atlas/branch-interfaces/verify.py": "1cbfa936564a74840d83455bbc25f8597cc9c9728d17cff498aba0185f3310b8",
+        "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+        "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102"
+      },
+      "runtimeSha256": "2f477a201251b34de9025c08194a466966bcdd34e6599f1ea033084749be043d",
+      "nativeOutputSha256": "0dc9db44c40f1161ebde27b97dfa4587e4dc1334ec48a06f940085939a84b066",
+      "profiles": 6,
+      "queries": 12,
+      "interfaces": 16,
+      "originalPrivateSourcePublished": false,
+      "originalRiccatiModulesRecompiledThisRun": false
+    },
+    "audit": {
+      "format": "ProofAtlasMethodInterfaceAudit/1",
+      "status": "PASS",
+      "checkerSha256": "5f9fb0d38ff303589a56dacdc46075f36e70f0aaacc1912878d78eff174e3d9e",
+      "modelSha256": "eed97a2e630a93845e50a6b38cc1417ca2d8ac114c74297586357e6625541fe4",
+      "nativeVerificationSha256": "cc7cb2b581b8924f909c74f1f66477ec1e1a2dfe82611fbdf0c371bcef02931d",
+      "baseline": {
+        "profiles": 15,
+        "calls": 32,
+        "branches": 49,
+        "missingSourcePrefixes": 0
+      },
+      "profiles": 6,
+      "queries": 12,
+      "methods": 16,
+      "inputs": 24,
+      "missingSourcePrefixes": 6,
+      "zeroInputMethods": 2,
+      "storedMethodChecks": 1,
+      "sourceTypePeerChecks": 8,
+      "functionValuedResults": 2,
+      "originalContextReferenceChecks": 35,
+      "computedInputReferenceChecks": 1,
+      "rejections": 16,
+      "inputRecordsUnchanged": true,
+      "callerObjectsNotFrozen": true,
+      "rows": [
+        {
+          "name": "JacobiData.slope_bound_abs",
+          "edition": "published-15",
+          "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+          "evidenceSha256": "ab7dff22cce3ab068a08a56cce0b109dbd819c40f79ced2a67edd42cfce5761a",
+          "queries": 7,
+          "interfaces": 8
+        },
+        {
+          "name": "AtlasMethodControls.conjunction",
+          "edition": "branch-method-controls",
+          "indexSha256": "03248be95a62060342042ca649cad79dc6ca303ec3f7982b39ea92c7238a2d9d",
+          "evidenceSha256": "1e31a9871a371ad71decfaae31da1e6a14bac8f42ba1abf12cf9680f410fe207",
+          "queries": 1,
+          "interfaces": 1
+        },
+        {
+          "name": "AtlasMethodControls.dependent",
+          "edition": "branch-method-controls",
+          "indexSha256": "e0edf503d1b25d23fefdcba3125eff3b165a090e9052469bcb6b16c21b1eee45",
+          "evidenceSha256": "e6c63b7a3d46bf410aa8d7255625d0686bffb9ba8dd63abc1cc6213f1e3795a4",
+          "queries": 1,
+          "interfaces": 2
+        },
+        {
+          "name": "AtlasMethodControls.disjunction",
+          "edition": "branch-method-controls",
+          "indexSha256": "456eb2c0b523cf1178df7eede0e3974c6258d3ae34f18571b7543480720693b5",
+          "evidenceSha256": "3e662100314cf544590f77f8fc6a66577e22510e892baeadc891e823fce5edba",
+          "queries": 1,
+          "interfaces": 2
+        },
+        {
+          "name": "AtlasMethodControls.functionValued",
+          "edition": "branch-method-controls",
+          "indexSha256": "181a4689ebe011fd1e2346a0342920374098635c639150b6ac5c679fe59bae46",
+          "evidenceSha256": "d9fbdd6acb671855a00b74a324766535e2c3d116b1d02e144fa5793dea006d15",
+          "queries": 1,
+          "interfaces": 2
+        },
+        {
+          "name": "AtlasMethodControls.storedMethod",
+          "edition": "branch-method-controls",
+          "indexSha256": "0ae464557c41b4acc41e8555734cd89cb0073159a4d09434b2e2eb1654a8321a",
+          "evidenceSha256": "917732525c2233fd4509c5e273867bf98fb89cc070b85da8e6b5b8fb318ef0fd",
+          "queries": 1,
+          "interfaces": 1
+        }
+      ],
+      "scope": "Finite native eta interfaces, source attachment and independent lexical comparisons. Forged capture/order trees are negative controls only. No source lambda is invented, no unrecorded proof body is supplied, and no comprehension result is claimed."
+    },
+    "browser-audit": {
+      "status": "PASS",
+      "methodScenes": 16,
+      "riccatiScenes": 8,
+      "controlScenes": 8,
+      "inputSelections": 24,
+      "computedReferenceJumps": 1,
+      "originalReferenceJumps": 7,
+      "originalMethodJumps": 9,
+      "axeAudits": 4,
+      "failureControls": 2,
+      "staleControls": 1,
+      "checkerSha256": "43f0eb9b58c7ae384fefde9627cbcc6faa90d337f154af42b8b0b831a43e9d8d",
+      "builtFiles": {
+        "public/js/proof-atlas-method-interfaces.js": "eed97a2e630a93845e50a6b38cc1417ca2d8ac114c74297586357e6625541fe4",
+        "public/js/proof-atlas-method-examples.js": "1322ee4e0267502f120d7bab0cd7c75d4baa35a778510703e3318f75f1eff323",
+        "public/js/proof-atlas-elimination.js": "77db724abcfe99e1546c9f180d6c43c150b1eb3c8a18d355abb9bf88308c1c97",
+        "public/js/proof-atlas-library.js": "1449b513cc6f5b4c3b26ee8f45ab9b6dfe33345f666b4cab3cbe544727ce0056",
+        "public/css/proof-atlas-theme.css": "5f36b75f624069f2a5c4b27ce077d3389c421a49efdff7caf36e612472c72df8",
+        "public/data/proof-atlas/method-interfaces-manifest.js": "35545092727a15db1c18536f31361c0fab98ab132610ab375eeb242216e8b0d7"
+      }
+    },
+    "regressions": {
+      "status": "PASS",
+      "reports": {
+        "manual": {
+          "status": "PASS",
+          "constructors": 12,
+          "semanticFields": 27,
+          "examples": 4,
+          "cuts": 80,
+          "scopeLinks": 60,
+          "negativeControls": 81,
+          "scope": "Authored structural controls and pinned-field presentation. No new native checks, semantic equivalence or comprehension measurements."
+        },
+        "recursion": {
+          "status": "PASS",
+          "controlledDeclarations": 85,
+          "nativeQueries": 88,
+          "completeEliminations": 13,
+          "constructorFieldInputs": 22,
+          "recursivePremises": 16,
+          "exactSourceBinders": 38,
+          "missingSourceBinders": 0,
+          "zeroUseInputs": 9,
+          "kernelRuleCuts": 140,
+          "negativeControls": 90,
+          "rebuiltPackets": 0,
+          "nativeExprInputsCompared": 0,
+          "scale": [
+            {
+              "depth": 8,
+              "nodes": 85,
+              "occurrences": "35842",
+              "sourceReferences": "4352",
+              "referenceStates": 54,
+              "vertices": 24
+            },
+            {
+              "depth": 24,
+              "nodes": 181,
+              "occurrences": "5033164802",
+              "sourceReferences": "822083584",
+              "referenceStates": 150,
+              "vertices": 24
+            },
+            {
+              "depth": 64,
+              "nodes": 421,
+              "occurrences": "12912720851596686131202",
+              "sourceReferences": "2379629985508532158464",
+              "referenceStates": 390,
+              "vertices": 24
+            }
+          ],
+          "scope": "Small assistant-authored formal controls plus deterministic shared-expression amplification. Not an AI theorem-solving benchmark, independently sourced corpus or comprehension study."
+        },
+        "judgmentGeometry": {
+          "status": "PASS",
+          "introductionComparison": {
+            "proof-first": {
+              "cuts": 1300,
+              "moreNonIntroductionProofRules": 99,
+              "sameNonIntroductionProofRules": 1201,
+              "fewerNonIntroductionProofRules": 0,
+              "baselineNonIntroductionProofRules": 610,
+              "groupedNonIntroductionProofRules": 766,
+              "groups": 296,
+              "members": 1990
+            },
+            "proof-focus": {
+              "cuts": 1300,
+              "moreNonIntroductionProofRules": 134,
+              "sameNonIntroductionProofRules": 1166,
+              "fewerNonIntroductionProofRules": 0,
+              "baselineNonIntroductionProofRules": 640,
+              "groupedNonIntroductionProofRules": 903,
+              "groups": 332,
+              "members": 2321
+            }
+          },
+          "groupedCuts": 2600,
+          "groupedBindings": 101,
+          "proofFocusComparison": {
+            "proofVertices": {
+              "baseline": 2705,
+              "focused": 2808,
+              "more": 34,
+              "same": 1266,
+              "fewer": 0
+            },
+            "proofRules": {
+              "baseline": 1425,
+              "focused": 1467,
+              "more": 20,
+              "same": 1280,
+              "fewer": 0
+            }
+          },
+          "foldedInputRegions": 555,
+          "foldedInputOccurrences": "35999",
+          "sources": 35,
+          "composedCuts": 1300,
+          "ruleVertices": {
+            "boundary": 4850,
+            "application": 998,
+            "introduction": 962,
+            "let": 234,
+            "recursor": 86
+          },
+          "recordedStageRules": {
+            "Π application": 2255,
+            "∀ elimination": 2893,
+            "→ elimination": 363
+          },
+          "sourceRegions": {
+            "declaration-type": 1007,
+            "body-term-or-argument": 4770,
+            "type-region": 1353
+          },
+          "scopeLinks": 1112,
+          "negativeControls": 424,
+          "sourcePartAccounting": true,
+          "allApplicationArgumentsRetained": true,
+          "domainAndValueBeforeBinder": true,
+          "caseAndLetUseMetadataOnly": true,
+          "noResultPoolLoad": true,
+          "scope": "Finite compiled typing records and bounded source cuts; not all-occurrence rule coverage, article equivalence or comprehension evidence."
+        },
+        "elimination": {
+          "status": "PASS",
+          "completeEliminations": 16,
+          "partialCallsWithheld": 8,
+          "sourceLambdaFrames": 32,
+          "typeCuts": 242,
+          "constructorKinds": [
+            "Exists.intro",
+            "And.intro",
+            "Or.inl",
+            "Or.inr"
+          ],
+          "overlappingTypeObservations": 46,
+          "negativeControls": 304,
+          "scope": "Finite exact representatives, native recursor attestations and independent wrapper/rule structure checks. No portable kernel certificate or all-occurrence coverage."
+        },
+        "caseComposition": {
+          "status": "PASS",
+          "format": "ProofAtlasCaseCompositionAudit/1",
+          "implementationSha256": "77db724abcfe99e1546c9f180d6c43c150b1eb3c8a18d355abb9bf88308c1c97",
+          "checkerSha256": "6d2d29d3d6848005d3646feac48a656e901b5df4442d64a0c4e9e5c576f30eaf",
+          "completeQueryStarts": 29,
+          "caseCuts": 232,
+          "budgetRefinements": 203,
+          "checkedContinuationJoins": 165,
+          "checkedInputFrames": 890,
+          "repeatedSharedNodePositions": 103,
+          "negativeControls": 298,
+          "separateTypeTablesPreserveJudgments": true,
+          "riccatiComparison": {
+            "individual": {
+              "displayedRegions": 13,
+              "recursorRecords": 3
+            },
+            "contextFrames": {
+              "displayedRegions": 13,
+              "recursorRecords": 7
+            },
+            "caseComposition": {
+              "recursorCells": 7,
+              "terminalBodies": 2
+            }
+          },
+          "scope": "Finite serialized native corpus: two project declarations and nine synthetic recursion profiles. Repeated cuts overlap; sums are not distinct source inventories. No fresh Lean replay, arbitrary elimination coverage, normalization trace, semantic importance or comprehension claim."
+        },
+        "manualBrowser": {
+          "status": "PASS",
+          "examples": 4,
+          "cutStates": 40,
+          "scopeSelections": 4,
+          "externalBinderJumps": 2,
+          "keyboard": 1,
+          "accessibility": 9,
+          "fieldDiagrams": 12,
+          "links": 25,
+          "compiledNavigation": 1,
+          "failureStates": 1,
+          "scope": "Actual rendered manual and shared constructor gallery: finite examples, exact field presentation, selection, keyboard, external binders, mobile/dark accessibility, links, compiled proof navigation and optional-script failure. No comprehension measurement."
+        },
+        "eliminationBrowser": {
+          "status": "PASS",
+          "caseRulesVisible": 16,
+          "wrapperSourceOrder": true,
+          "preBinderDomain": true,
+          "extendedBodyContext": true,
+          "sevenExactJumps": true,
+          "partialCallWithheld": true,
+          "branchAndInputPaging": true,
+          "articleIsolation": true,
+          "unsupportedClearsViews": true,
+          "staleTypeDoesNotRestoreBranch": true,
+          "staleDataDoesNotRestoreProof": true,
+          "optionalFailuresPreserveReader": true,
+          "accessibilityAudits": 4
+        },
+        "evidenceStructure": {
+          "status": "PASS",
+          "preservedSections": 63,
+          "formerTechnicalRecordSha256": "f467d72dbda2e3f853c9dcd69715ee37f41b8e55ac192db87162fd59213ba2f7",
+          "stableAnchors": 75,
+          "researchLayers": 5,
+          "projectEntries": 4,
+          "mathFigures": 9,
+          "scope": "Verbatim technical evidence retained and original program anchors mapped; presentation and navigation only."
+        }
+      },
+      "scope": "Unchanged structural and existing elimination/recursion behavior; finite browser regression checks. No new comprehension measurement."
+    }
+  },
+  "files": [
+    {
+      "file": "public/js/proof-atlas-method-interfaces.js",
+      "sha256": "eed97a2e630a93845e50a6b38cc1417ca2d8ac114c74297586357e6625541fe4"
+    },
+    {
+      "file": "public/js/proof-atlas-method-examples.js",
+      "sha256": "1322ee4e0267502f120d7bab0cd7c75d4baa35a778510703e3318f75f1eff323"
+    },
+    {
+      "file": "public/js/proof-atlas-elimination.js",
+      "sha256": "77db724abcfe99e1546c9f180d6c43c150b1eb3c8a18d355abb9bf88308c1c97"
+    },
+    {
+      "file": "research/proof-atlas/branch-interfaces/BranchInterfaces.lean",
+      "sha256": "b70c1a5ff9a977b241f943e32bb7e588d625fcb7dac95257b5222c91081f0cce"
+    },
+    {
+      "file": "research/proof-atlas/branch-interfaces/Controls.lean",
+      "sha256": "2ef3b0c1dc1cbb5ea02c12941b1e5eccc92dbff85a9453dad77399487e8ce8ae"
+    },
+    {
+      "file": "research/proof-atlas/branch-interfaces/prepare.cjs",
+      "sha256": "6687b9be052204366b9bfaf987cbae15be3fdf70161fd2eb7f3d78ade005c735"
+    },
+    {
+      "file": "research/proof-atlas/branch-interfaces/verify.py",
+      "sha256": "1cbfa936564a74840d83455bbc25f8597cc9c9728d17cff498aba0185f3310b8"
+    },
+    {
+      "file": "research/proof-atlas/branch-interfaces/publish.cjs",
+      "sha256": "700161c16d790cbd6c2f60380a153f703433f2cb180f9e31333b7612b41c52c0"
+    },
+    {
+      "file": "scripts/test-proof-atlas-method-interfaces.cjs",
+      "sha256": "5f9fb0d38ff303589a56dacdc46075f36e70f0aaacc1912878d78eff174e3d9e"
+    },
+    {
+      "file": "scripts/test-proof-atlas-method-interfaces-browser.cjs",
+      "sha256": "43f0eb9b58c7ae384fefde9627cbcc6faa90d337f154af42b8b0b831a43e9d8d"
+    },
+    {
+      "file": "public/css/proof-atlas-theme.css",
+      "sha256": "5f36b75f624069f2a5c4b27ce077d3389c421a49efdff7caf36e612472c72df8"
+    },
+    {
+      "file": "public/js/proof-atlas-library.js",
+      "sha256": "1449b513cc6f5b4c3b26ee8f45ab9b6dfe33345f666b4cab3cbe544727ce0056"
+    },
+    {
+      "file": "public/js/proof-atlas-sync.js",
+      "sha256": "a8d12717d191cf5cd20232cc3bff3d831d4e08c95ef515276d596715b7f692d2"
+    },
+    {
+      "file": "projects/proof-atlas/manual/index.html",
+      "sha256": "58216827774daeab2cfad51f584cd93defc5aa6301bdca0f35605aebc38f5eea"
+    },
+    {
+      "file": "scripts/build-proof-atlas-method-evidence.cjs",
+      "sha256": "4d2c33418b032b0a9eda4fcca9a0c51a0f8e77d59f364cb102a6deb3ed4e1e0a"
+    },
+    {
+      "file": "public/data/proof-atlas/method-interfaces-manifest.js",
+      "sha256": "35545092727a15db1c18536f31361c0fab98ab132610ab375eeb242216e8b0d7"
+    }
+  ],
+  "scope": "Finite native eta interfaces and source/computed scope checks. No general recursor coverage, unrecorded method-body derivation or comprehension result."
+}

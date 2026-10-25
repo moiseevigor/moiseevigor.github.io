@@ -466,6 +466,9 @@ The complete and sparse occurrence readers share 5,568 recorded positions and 2,
 [Union rule and limits](/research/proof-atlas/recorded-union/README.md) · [Audit reports and verification index](/research/proof-atlas/recorded-union/recorded-union-evidence.json)
 
 
+
+
+
 [Protocol and limits](/research/proof-atlas/use-inputs/README.md) · [Independent audit](/research/proof-atlas/use-inputs/audit.json) · [Model](/public/js/proof-atlas-use-inputs.js)
 
 
@@ -656,6 +659,12 @@ The fixed extraction limits are 128 core arguments, 32 minor premises/rules, 128
 
 
 <!-- atlas-original-end -->
+
+<span id="computed-method-interfaces"></span>
+
+Computed method interfaces expose recursor inputs without requiring source lambda prefixes. The method's original source address is retained; fresh binders and the method application occupy a separate computed namespace. Native eta typing and conversion checks cover 16 methods with 24 inputs: eight methods from the Riccati proof and eight from five authored controls. Six control methods have required inputs with no source lambdas, including a let-bound method application. Domain references preserve original and computed contexts, including a dependent `P n` input. Function-valued results stop at the constructor rule's input count. These finite checks do not provide unrecorded method bodies or a general elimination-coverage result.
+
+[Rule, examples and limits](/research/proof-atlas/branch-interfaces/README.md) · [Native, model and browser evidence](/research/proof-atlas/branch-interfaces/method-interface-evidence.json)
 
 </details>
 

@@ -1,0 +1,215 @@
+{
+  "status": "PASS",
+  "reports": {
+    "manual": {
+      "status": "PASS",
+      "constructors": 12,
+      "semanticFields": 27,
+      "examples": 4,
+      "cuts": 80,
+      "scopeLinks": 60,
+      "negativeControls": 81,
+      "scope": "Authored structural controls and pinned-field presentation. No new native checks, semantic equivalence or comprehension measurements."
+    },
+    "recursion": {
+      "status": "PASS",
+      "controlledDeclarations": 85,
+      "nativeQueries": 88,
+      "completeEliminations": 13,
+      "constructorFieldInputs": 22,
+      "recursivePremises": 16,
+      "exactSourceBinders": 38,
+      "missingSourceBinders": 0,
+      "zeroUseInputs": 9,
+      "kernelRuleCuts": 140,
+      "negativeControls": 90,
+      "rebuiltPackets": 0,
+      "nativeExprInputsCompared": 0,
+      "scale": [
+        {
+          "depth": 8,
+          "nodes": 85,
+          "occurrences": "35842",
+          "sourceReferences": "4352",
+          "referenceStates": 54,
+          "vertices": 24
+        },
+        {
+          "depth": 24,
+          "nodes": 181,
+          "occurrences": "5033164802",
+          "sourceReferences": "822083584",
+          "referenceStates": 150,
+          "vertices": 24
+        },
+        {
+          "depth": 64,
+          "nodes": 421,
+          "occurrences": "12912720851596686131202",
+          "sourceReferences": "2379629985508532158464",
+          "referenceStates": 390,
+          "vertices": 24
+        }
+      ],
+      "scope": "Small assistant-authored formal controls plus deterministic shared-expression amplification. Not an AI theorem-solving benchmark, independently sourced corpus or comprehension study."
+    },
+    "judgmentGeometry": {
+      "status": "PASS",
+      "introductionComparison": {
+        "proof-first": {
+          "cuts": 1300,
+          "moreNonIntroductionProofRules": 99,
+          "sameNonIntroductionProofRules": 1201,
+          "fewerNonIntroductionProofRules": 0,
+          "baselineNonIntroductionProofRules": 610,
+          "groupedNonIntroductionProofRules": 766,
+          "groups": 296,
+          "members": 1990
+        },
+        "proof-focus": {
+          "cuts": 1300,
+          "moreNonIntroductionProofRules": 134,
+          "sameNonIntroductionProofRules": 1166,
+          "fewerNonIntroductionProofRules": 0,
+          "baselineNonIntroductionProofRules": 640,
+          "groupedNonIntroductionProofRules": 903,
+          "groups": 332,
+          "members": 2321
+        }
+      },
+      "groupedCuts": 2600,
+      "groupedBindings": 101,
+      "proofFocusComparison": {
+        "proofVertices": {
+          "baseline": 2705,
+          "focused": 2808,
+          "more": 34,
+          "same": 1266,
+          "fewer": 0
+        },
+        "proofRules": {
+          "baseline": 1425,
+          "focused": 1467,
+          "more": 20,
+          "same": 1280,
+          "fewer": 0
+        }
+      },
+      "foldedInputRegions": 555,
+      "foldedInputOccurrences": "35999",
+      "sources": 35,
+      "composedCuts": 1300,
+      "ruleVertices": {
+        "boundary": 4850,
+        "application": 998,
+        "introduction": 962,
+        "let": 234,
+        "recursor": 86
+      },
+      "recordedStageRules": {
+        "\u03a0 application": 2255,
+        "\u2200 elimination": 2893,
+        "\u2192 elimination": 363
+      },
+      "sourceRegions": {
+        "declaration-type": 1007,
+        "body-term-or-argument": 4770,
+        "type-region": 1353
+      },
+      "scopeLinks": 1112,
+      "negativeControls": 424,
+      "sourcePartAccounting": true,
+      "allApplicationArgumentsRetained": true,
+      "domainAndValueBeforeBinder": true,
+      "caseAndLetUseMetadataOnly": true,
+      "noResultPoolLoad": true,
+      "scope": "Finite compiled typing records and bounded source cuts; not all-occurrence rule coverage, article equivalence or comprehension evidence."
+    },
+    "elimination": {
+      "status": "PASS",
+      "completeEliminations": 16,
+      "partialCallsWithheld": 8,
+      "sourceLambdaFrames": 32,
+      "typeCuts": 242,
+      "constructorKinds": [
+        "Exists.intro",
+        "And.intro",
+        "Or.inl",
+        "Or.inr"
+      ],
+      "overlappingTypeObservations": 46,
+      "negativeControls": 304,
+      "scope": "Finite exact representatives, native recursor attestations and independent wrapper/rule structure checks. No portable kernel certificate or all-occurrence coverage."
+    },
+    "caseComposition": {
+      "status": "PASS",
+      "format": "ProofAtlasCaseCompositionAudit/1",
+      "implementationSha256": "77db724abcfe99e1546c9f180d6c43c150b1eb3c8a18d355abb9bf88308c1c97",
+      "checkerSha256": "6d2d29d3d6848005d3646feac48a656e901b5df4442d64a0c4e9e5c576f30eaf",
+      "completeQueryStarts": 29,
+      "caseCuts": 232,
+      "budgetRefinements": 203,
+      "checkedContinuationJoins": 165,
+      "checkedInputFrames": 890,
+      "repeatedSharedNodePositions": 103,
+      "negativeControls": 298,
+      "separateTypeTablesPreserveJudgments": true,
+      "riccatiComparison": {
+        "individual": {
+          "displayedRegions": 13,
+          "recursorRecords": 3
+        },
+        "contextFrames": {
+          "displayedRegions": 13,
+          "recursorRecords": 7
+        },
+        "caseComposition": {
+          "recursorCells": 7,
+          "terminalBodies": 2
+        }
+      },
+      "scope": "Finite serialized native corpus: two project declarations and nine synthetic recursion profiles. Repeated cuts overlap; sums are not distinct source inventories. No fresh Lean replay, arbitrary elimination coverage, normalization trace, semantic importance or comprehension claim."
+    },
+    "manualBrowser": {
+      "status": "PASS",
+      "examples": 4,
+      "cutStates": 40,
+      "scopeSelections": 4,
+      "externalBinderJumps": 2,
+      "keyboard": 1,
+      "accessibility": 9,
+      "fieldDiagrams": 12,
+      "links": 25,
+      "compiledNavigation": 1,
+      "failureStates": 1,
+      "scope": "Actual rendered manual and shared constructor gallery: finite examples, exact field presentation, selection, keyboard, external binders, mobile/dark accessibility, links, compiled proof navigation and optional-script failure. No comprehension measurement."
+    },
+    "eliminationBrowser": {
+      "status": "PASS",
+      "caseRulesVisible": 16,
+      "wrapperSourceOrder": true,
+      "preBinderDomain": true,
+      "extendedBodyContext": true,
+      "sevenExactJumps": true,
+      "partialCallWithheld": true,
+      "branchAndInputPaging": true,
+      "articleIsolation": true,
+      "unsupportedClearsViews": true,
+      "staleTypeDoesNotRestoreBranch": true,
+      "staleDataDoesNotRestoreProof": true,
+      "optionalFailuresPreserveReader": true,
+      "accessibilityAudits": 4
+    },
+    "evidenceStructure": {
+      "status": "PASS",
+      "preservedSections": 63,
+      "formerTechnicalRecordSha256": "f467d72dbda2e3f853c9dcd69715ee37f41b8e55ac192db87162fd59213ba2f7",
+      "stableAnchors": 75,
+      "researchLayers": 5,
+      "projectEntries": 4,
+      "mathFigures": 9,
+      "scope": "Verbatim technical evidence retained and original program anchors mapped; presentation and navigation only."
+    }
+  },
+  "scope": "Unchanged structural and existing elimination/recursion behavior; finite browser regression checks. No new comprehension measurement."
+}

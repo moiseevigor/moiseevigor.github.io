@@ -11,7 +11,7 @@ description: "A visual manual for occurrence paths, ordered ports, lexical scope
     <p><a href="/projects/proof-atlas/">Proof Atlas</a> / Visual manual · notation revision 1</p>
     <h1>Reading the geometry of a Lean proof</h1>
     <p>The drawing starts from an expression occurrence, its ordered fields and its binding context. Larger figures compose these objects into applications, introductions and local definitions. This manual explains what each connection means, what folding preserves, and where the language remains incomplete.</p>
-    <p class="pm-caption">The interactive examples below are authored structural controls. They use the production scene model, but have no native typing certificate. Links to recorded compiled proofs are provided separately.</p>
+    <p class="pm-caption">The scope-and-scale examples are authored structural controls without native typing certificates. The separate method-interface experiment includes finite native checks and links to compiled proofs.</p>
     <nav aria-label="Manual contents"><a href="#connections">Connections</a><a href="#scope-lab">Scope and scale</a><a href="#constructors">12 constructors</a><a href="#composition">Composition</a><a href="#judgments">Checked rules</a><a href="#universes">Universes</a><a href="#assessment">Assessment</a><a href="#practice">Compiled examples</a></nav>
   </header>
 
@@ -79,6 +79,14 @@ computed identity = evidence/derivation hash + namespace + computed route</code>
       <article><h3>Local definition</h3><div class="pm-math" role="region" tabindex="0" aria-label="Schematic notation 7">$$\frac{\begin{gathered}\Gamma\vdash A:\operatorname{Sort}u\quad\Gamma\vdash v:A\\ \Gamma,x:A:=v\vdash t:B\end{gathered}}{\Gamma\vdash(\mathbf{let}\ x:A:=v;\ t):B[v/x]}$$</div><p>The type and value precede the binder. The body sees both its type and value. Native records may expose separate type-conversion and computed substitution views; their roots and evidence remain distinct from source routes.</p></article>
       <article><h3>Elimination and recursive premises</h3><div class="pm-math" role="region" tabindex="0" aria-label="Schematic notation 8">$$\frac{\begin{gathered}\text{parameters, motive, branch methods}\\\text{indices, major premise}\end{gathered}}{\text{recursor application}:\text{instantiated motive}}$$</div><p>A recursor needs its actual signature, constructor fields and branch contexts. This is an interface sketch, not a universal recursor typing rule. Recorded cases and recursive premises have dedicated views; arbitrary recursors and every tactic strategy are not covered by a complete automatic interpretation.</p></article>
     </div>
+    <details id="method-interface-lab"><summary>Inspect kernel-checked method interfaces</summary>
+      <p>A branch may be supplied by a function reference without source lambdas. The computed interface exposes its inputs through \(f \equiv \lambda x_1\ldots x_n, f\,x_1\ldots x_n\). Its binders belong to a computed namespace; the original method keeps its source address. Domains see only the original context and earlier computed inputs. A method returning a function stops after the recursor rule's input count.</p>
+      <div id="pm-method-lab">
+        <div class="pm-controls"><label>Native control <select id="pm-method-example"><option value="AtlasMethodControls.conjunction">Conjunction · two proof inputs</option><option value="AtlasMethodControls.disjunction">Disjunction · branch methods</option><option value="AtlasMethodControls.storedMethod">Let-bound method application</option><option value="AtlasMethodControls.dependent">Dependent recursion · P n</option><option value="AtlasMethodControls.functionValued">Function-valued recursion</option></select></label><label>Case <select id="pm-method-minor" disabled><option>Load a control</option></select></label><button id="pm-method-load" type="button">Load recorded method interface</button></div>
+        <p id="pm-method-status" role="status">Five authored controls isolate method representation. The original Riccati checks remain separately source-bound.</p><div id="pm-method-example-view"></div><div id="pm-method-source-view"></div>
+      </div>
+      <p>All eight methods in seven recorded Riccati recursor calls have checked interfaces. Five controls add eight interfaces, including six methods whose required source lambda prefix is absent. This does not supply unrecorded proof bodies. <a href="/research/proof-atlas/branch-interfaces/README.md">Rule and finite checks</a>. In the <a href="/projects/proof-atlas/library/?proof=JacobiData.slope_bound_abs&amp;route=1:1.1.1.1.1.1.2.2.2.2.2.1">Riccati sign split</a>, choose “Show case elimination”, then “Show computed method interface”.</p>
+    </details>
     <p>A native extraction record ties a finite judgment to a specific environment, packet and context. The browser validates that identity; it does not run Lean. An article correspondence is a separate reviewed relation and is not implied by a typing rule.</p>
   </section>
 
@@ -131,3 +139,10 @@ Level.mvar id       unresolved universe metavariable</code></pre>
 <script src="/public/js/proof-atlas-constructor-diagram.js?v=1" defer></script>
 <script src="/public/js/proof-atlas-manual-examples.js?v=1" defer></script>
 <script src="/public/js/proof-atlas-manual.js?v=1" defer></script>
+
+<script src="/public/js/proof-atlas-occurrence-types.js?v=13" defer></script>
+<script src="/public/js/proof-atlas-recursive-inputs.js?v=3" defer></script>
+<script src="/public/js/proof-atlas-elimination.js?v=6" defer></script>
+<script src="/public/data/proof-atlas/method-interfaces-manifest.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-method-interfaces.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-method-examples.js?v=1" defer></script>

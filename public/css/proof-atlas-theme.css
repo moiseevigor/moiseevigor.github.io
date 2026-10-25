@@ -161,3 +161,22 @@
 :root .proof-atlas-theme .pl-judgment-card[aria-pressed="true"]{background:var(--accent-light);color:var(--text);outline-color:var(--accent)}
 :root .proof-atlas-theme :is(.pl-judgment-context-label,.pl-judgment-card small){color:var(--text-light)}
 :root .proof-atlas-theme .pl-judgment-frontier{background:var(--bg);color:var(--text);border-color:var(--text-light)}
+
+/* Computed recursor methods retain a visible boundary from source objects. */
+:root .proof-atlas-theme .pl-method-interface {margin:1rem 0;padding:1rem;border:1px solid var(--border);font-family:var(--sans);color:var(--text);background:var(--bg);min-width:0}
+:root .proof-atlas-theme .pl-method-interface :is(pre,button) {white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%;font-family:var(--mono)}
+:root .proof-atlas-theme .pl-method-interface pre {padding:.6rem;background:var(--fig-bg);color:var(--text);font-size:.85rem;line-height:1.55}
+:root .proof-atlas-theme .pl-method-interface button {min-height:44px;font-family:var(--sans);text-align:left}
+:root .proof-atlas-theme .pl-method-source {padding:.8rem;border:1px solid var(--accent);min-width:0}
+:root .proof-atlas-theme .pl-method-relation {padding:.7rem 0;font-size:.85rem;color:var(--text-light)}
+:root .proof-atlas-theme .pl-method-inputs {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1rem;margin:0;padding:0;list-style-position:inside}
+:root .proof-atlas-theme .pl-method-input {padding:.8rem;border:1px dashed var(--accent-warm);min-width:0}
+:root .proof-atlas-theme .pl-method-input :is(button,pre,small) {display:block}
+:root .proof-atlas-theme .pl-method-interface :is(small,p) {color:var(--text-light);line-height:1.6}
+:root .proof-atlas-theme .pl-method-selection:not(:empty),:root .proof-atlas-theme .pl-method-body {padding:.8rem;margin-top:1rem;border-top:1px dashed var(--accent-warm);min-width:0}
+:root .proof-atlas-theme .pl-method-selection button {display:block;margin-top:.5rem}
+:root .proof-atlas-theme .pl-method-input button[aria-pressed="true"] {background:var(--accent-light);border-color:var(--accent);color:var(--text)}
+:root .proof-atlas-theme .pl-method-interface > h6 {font:600 1rem/1.4 var(--sans);margin:0 0 .75rem}
+:root .proof-atlas-theme .pl-method-interface :is(.pl-method-source,.pl-method-body) {margin:0;padding:.8rem;border:1px solid var(--accent)}
+:root .proof-atlas-theme .pl-method-interface .pl-method-body {margin-top:1rem;border:1px dashed var(--accent-warm)}
+:root .proof-atlas-theme .pl-method-interface p {font-family:var(--sans);font-size:.9rem;line-height:1.6;margin:.65rem 0}

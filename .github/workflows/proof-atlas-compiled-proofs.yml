@@ -95,6 +95,8 @@ jobs:
       - run: node scripts/test-proof-atlas-type-pages.cjs
       - run: node scripts/test-proof-atlas-type-query-controls.cjs
       - run: node scripts/test-proof-atlas-type-query-pages.cjs
+      - run: ATLAS_METHOD_CHECK=1 node scripts/test-proof-atlas-method-interfaces.cjs
+      - run: node scripts/build-proof-atlas-method-evidence.cjs --check
       - run: ATLAS_RECORDED_UNION_CHECK=1 node scripts/test-proof-atlas-recorded-union.cjs
       - run: node scripts/build-proof-atlas-recorded-union-evidence.cjs --check
       - run: node scripts/test-proof-atlas-library-bytes.cjs

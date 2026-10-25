@@ -31,7 +31,7 @@ The [SE(2) article reader](/projects/proof-atlas/article/) is a separate applica
 |---|---|---|
 | Kernel vocabulary | Twelve constructor forms, ordered fields, levels and lexical references. | How should richer payloads be presented consistently? |
 | Scoped composition | Exact cuts, reversible telescopes/application spines, [source context paths](/projects/proof-atlas/evidence/#source-context-paths) and shared storage. | How broadly can paged delivery be provided without expanding the occurrence tree? |
-| Typed constructions | Recorded applications, introductions, local definitions and selected elimination cases. | A general readable notation for arbitrary elimination remains incomplete. |
+| Typed constructions | Recorded applications, introductions, local definitions, selected elimination cases and [computed method inputs](/projects/proof-atlas/evidence/#computed-method-interfaces). | A general readable notation for arbitrary elimination remains incomplete. |
 | Context interfaces | Original binder/use links, [use discovery along collapsed wires](/projects/proof-atlas/evidence/#binder-use-navigation), explicit boundaries and recorded native context observations. | Syntactic support is distinct from mathematical premise necessity. |
 | Semantic abstraction and evaluation | Finite structural and native checks, including a separately attributed AI-source sample. | Semantic compression and improved human comprehension remain unmeasured. |
 {: tabindex="0" aria-label="Current capabilities and remaining questions"}

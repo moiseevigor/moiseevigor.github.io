@@ -134,6 +134,11 @@ on:
       - 'research/proof-atlas/construction-union/**'
       - 'research/proof-atlas/recorded-union*'
       - 'research/proof-atlas/recorded-union/**'
+      - 'research/proof-atlas/branch-interfaces/**'
+      - 'public/data/proof-atlas/branch-interfaces/**'
+      - 'public/data/proof-atlas/method-interfaces-manifest.js'
+      - 'public/js/proof-atlas-method-*.js'
+      - 'scripts/*proof-atlas-method-*.cjs'
       - 'scripts/test-proof-atlas-recorded-union*.cjs'
       - 'public/data/proof-atlas/recorded-unions-manifest.js'
       - 'scripts/build-proof-atlas-recorded-union-evidence.cjs'
@@ -423,6 +428,11 @@ on:
       - 'research/proof-atlas/construction-union/**'
       - 'research/proof-atlas/recorded-union*'
       - 'research/proof-atlas/recorded-union/**'
+      - 'research/proof-atlas/branch-interfaces/**'
+      - 'public/data/proof-atlas/branch-interfaces/**'
+      - 'public/data/proof-atlas/method-interfaces-manifest.js'
+      - 'public/js/proof-atlas-method-*.js'
+      - 'scripts/*proof-atlas-method-*.cjs'
       - 'scripts/test-proof-atlas-recorded-union*.cjs'
       - 'public/data/proof-atlas/recorded-unions-manifest.js'
       - 'scripts/build-proof-atlas-recorded-union-evidence.cjs'
@@ -672,6 +682,9 @@ jobs:
           ATLAS_USE_INPUT_CHECK_REPORT=1 node scripts/test-proof-atlas-use-inputs.cjs
           ATLAS_USE_SITE_CHECK_REPORT=1 node scripts/test-proof-atlas-use-sites.cjs
           node scripts/build-proof-atlas-use-site-pages.cjs --check
+          ATLAS_METHOD_CHECK=1 node scripts/test-proof-atlas-method-interfaces.cjs
+          node scripts/test-proof-atlas-method-interfaces-browser.cjs
+          node scripts/build-proof-atlas-method-evidence.cjs --check
           ATLAS_RECORDED_UNION_CHECK=1 node scripts/test-proof-atlas-recorded-union.cjs
           node scripts/build-proof-atlas-recorded-union-evidence.cjs --check
           node scripts/test-proof-atlas-recorded-union-browser.cjs
