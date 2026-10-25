@@ -14,8 +14,8 @@
  function validateProvenance(evidence,record){
   demand(evidence?.format==='ProofAtlasBranchInterfaces/1'&&evidence.nativeDagMatchesPacket===true&&evidence.leanVersion==='4.33.1','format/native version');const source=evidence.source,env=evidence.environment;
   demand(source?.name===record.name&&source.indexSha256===record.indexSha256&&source.sourceSha256===record.sourceSha256&&evidence.sourceAttachmentVerified===true,'source attachment');
-  const replay=env?.kind==='public-packet-method-interface/1';
-  demand((replay||env?.kind==='native-method-interface/1')&&env.mainModule===evidence.nativeMainModule&&typeof env.compiler==='string'&&env.compiler.includes('version 4.33.1,')&&hash(env.nativeOutputSha256)&&hash(env.runtimeSha256)&&Object.keys(env.producerFiles||{}).length>=6&&Object.values(env.producerFiles).every(hash),'native provenance');
+  const replay=env?.kind==='public-packet-method-interface/1',fixture=env?.kind==='public-fixture-method-interface/1';
+  demand((replay||fixture||env?.kind==='native-method-interface/1')&&env.mainModule===evidence.nativeMainModule&&typeof env.compiler==='string'&&env.compiler.includes('version 4.33.1,')&&hash(env.nativeOutputSha256)&&hash(env.runtimeSha256)&&Object.keys(env.producerFiles||{}).length>=6&&Object.values(env.producerFiles).every(hash),'native provenance');
   const recovery=env.dependencyRecovery;demand(recovery?.allBinaryHashesVerified===true&&recovery.originalGitCheckoutsVerified===false&&recovery.independentlyRebuilt===false&&recovery.kind==='mathlib-cache-attribution/1'&&recovery.archiveComment==='git=mathlib4@'+recovery.mathlibRevision&&Number.isInteger(recovery.artifactCount)&&recovery.artifactCount>0&&recovery.artifactCount<=100000&&recovery.mathlibRevision==='0df444a360eaa60ab8c11dca51a86af692955474'&&hash(recovery.binaryInventorySha256)&&hash(recovery.restorationManifestSha256),'checking cache attribution');
   if(replay){
    const r=evidence.replay,b=r?.baselineProof,origin=record.origin;
@@ -26,6 +26,8 @@
    demand(b?.name===record.name&&b.indexSha256===record.indexSha256&&b.storedNodes===record.uniqueNodes&&same(b.roundtripFields,['kind','children','payloads','expanded','neededScope','roots'])&&Array.isArray(b.axioms)&&!b.axioms.includes('sorryAx')&&same([...b.axioms].sort(),[...record.axioms].sort()),'closed proof baseline');
    for(const k of ['kernelExpectedType','kernelProof','kernelExpectedTypeIsProposition','kernelExpectedTypeConversion'])demand(b[k]==='PASS','baseline kernel check');
    for(const k of ['originalTheoremAbsentFromEnvironment','originalModuleAbsentFromEnvironment','wrongProofRejectedByKernel','illTypedBinderRejectedByKernel'])demand(b[k]===true,'baseline refusal/absence check');
+  }else if(fixture){
+   demand(source.edition==='branch-method-controls'&&same(env.imports,['Mathlib','Aesop'])&&env.privateRiccatiModulesImported===false&&evidence.sourceModuleHashVerified===false&&evidence.controlFixtureHashVerified===true&&env.controlSourceSha256===source.sourceSha256&&evidence.nativeDeclarationModule===record.module&&record.module===evidence.nativeMainModule,'public fixture provenance');
   }else{
    demand(same(env.imports,['SE2Conjugate.Riccati'])&&evidence.nativeDeclarationModule===record.module,'native declaration ownership');
    if(source.edition==='published-15'){const m=env.sourceModules?.[record.module];demand(evidence.sourceModuleHashVerified===true&&evidence.controlFixtureHashVerified===false&&m?.sourceSha256===source.sourceSha256&&hash(m.compiledModuleSha256)&&record.name==='JacobiData.slope_bound_abs','Riccati module provenance');}
@@ -43,7 +45,7 @@
  function validate(evidence,data,record){
   validateProvenance(evidence,record);validateInventory(evidence,inventoryOf(evidence.entries));if(evidence.environment.kind==='public-packet-method-interface/1')for(const o of evidence.outcomes)A.walk(data,o.route);for(const q of evidence.entries)validateQuery(q,data);return true;
  }
- function validateQuery(q,data){const p=q.parent,at=T.context(data,p.route),g=p.typeGraph,t=p.eliminationJudgment;
+ function validateQuery(q,data,stream=null,record=null){const p=q.parent,at=T.context(data,p.route),g=p.typeGraph,t=p.eliminationJudgment;
    demand(p.status==='checked'&&p.kernelCheck==='PASS'&&p.contextWellFormed===true&&p.typeAbstractionRoundtrip===true&&p.node===at.node&&p.path===A.path(data,p.route)&&same(p.context,at.binders)&&roles.includes(p.role),'parent source/context');
    const roots=[p.typeRoot,...p.arguments.flatMap(a=>[a.typeRoot,a.expectedRoot]),...T.applicationRoots(p)];T.validateExpressionGraph(g,roots,p.context.length,65536);T.validateApplication(p,data,g);E.validateEntry(p,data,g);demand(t?.status==='checked'&&q.branches?.length===t.minors,'complete method inventory');
    const minors=new Set();for(const b of q.branches){const rule=t.rules.find(r=>r.minor===b.minor),slot=t.argumentOrder[t.parameters+t.motives+b.minor],a=t.arguments.find(a=>a.sourceSlot===slot),m=b.interface,h=m?.graph;
@@ -51,13 +53,14 @@
     demand(m.format==='ProofAtlasComputedMethodInterface/1'&&m.namespace==='computed-method-interface'&&m.sourceOccurrenceInvented===false&&m.inputCount===rule.inputCount&&m.ambientContextLength===p.context.length&&m.inputs?.length===m.inputCount,'computed method identity');
     demand(m.checks?.kernelTyping==='PASS'&&m.checks.kernelTypeConversion==='PASS'&&m.checks.kernelTermConversion==='PASS'&&m.checks.exactEtaBodyRoundtrip===true,'native eta checks');
    const n=m.ambientContextLength,ambient=[m.etaRoot,m.sourceMethodRoot,m.sourceMethodTypeRoot,m.etaTypeRoot],all=[...ambient,m.body.root,m.body.typeRoot,...m.inputs.flatMap(i=>[i.domainRoot,i.domainTypeRoot])];T.validateExpressionGraph(h,all,n+m.inputCount,65536);
-    for(const root of ambient)demand(h.neededScope[root]<=n,'ambient scope');demand(E.equal(data,a.node,h,m.sourceMethodRoot)&&E.equal(g,a.typeRoot,h,m.sourceMethodTypeRoot),'original method/type syntax');
+    for(const root of ambient)demand(h.neededScope[root]<=n,'ambient scope');demand(sourceEqual(a.node,h,m.sourceMethodRoot,0)&&E.equal(g,a.typeRoot,h,m.sourceMethodTypeRoot),'original method/type syntax');
     let body=m.etaRoot;for(const [i,input]of m.inputs.entries()){demand(h.kind[body]===6&&input.ordinal===i&&input.contextLength===n+i&&roles.includes(input.role)&&h.payloads[body].binderName===input.name&&h.payloads[body].binderInfo===input.binderInfo&&h.neededScope[input.domainRoot]<=n+i&&h.neededScope[input.domainTypeRoot]<=n+i&&E.equal(h,h.children[body][0],h,input.domainRoot),'computed input domain/context');body=h.children[body][1];}
     demand(body===m.body.root&&m.body.contextLength===n+m.inputCount&&roles.includes(m.body.role),'computed body scope');
     let fn=body;for(let i=m.inputCount-1;i>=0;i--){demand(h.kind[fn]===5,'eta application spine');const arg=h.children[fn][1];demand(h.kind[arg]===0&&h.payloads[arg].index===m.inputCount-1-i,'eta argument order/capture');fn=h.children[fn][0];}
-    demand(shiftedEqual(data,a.node,h,fn,m.inputCount),'eta source lifting/capture');
+    demand(sourceEqual(a.node,h,fn,m.inputCount),'eta source lifting/capture');
    }
   return true;
+  function sourceEqual(sourceRoot,graph,nativeRoot,shift){if(!stream)return shift?shiftedEqual(data,sourceRoot,graph,nativeRoot,shift):E.equal(data,sourceRoot,graph,nativeRoot);const C=node?require('./proof-atlas-source-comparison'):host.ProofAtlasSourceComparison;demand(C&&record,'streamed comparison code/owner');const receipt=stream.receipts.find(r=>C.matches(r,stream.cursor,sourceRoot,graph,nativeRoot,shift));return C.accepts(receipt,stream.cursor,sourceRoot,graph,nativeRoot,shift,record);}
  }
  function references(g,root,contextLength,sourceContext){
   const todo=[[root,0]],seen=new Set(),targets=new Map();while(todo.length){const [id,depth]=todo.pop(),k=id+':'+depth;if(seen.has(k))continue;seen.add(k);demand(seen.size<=262144,'domain reference work bound');const kind=g.kind[id];
@@ -67,8 +70,8 @@
  }
  function frozen(value){const todo=[value],seen=new Set();while(todo.length){const v=todo.pop();if(!v||typeof v!=='object'||seen.has(v))continue;seen.add(v);todo.push(...Object.values(v));Object.freeze(v);}return value;}
  function open(evidence,data,record,descriptor){demand(hash(descriptor?.sha256),'evidence owner');validate(evidence,data,record);return model(evidence,evidence.entries,data,record,descriptor);}
- function openQuery(metadata,entry,inventory,data,record,descriptor){
-  demand(hash(descriptor?.sha256)&&!Object.hasOwn(metadata,'entries'),'query evidence owner/header');validateProvenance(metadata,record);validateInventory(metadata,inventory);const selected=inventory.find(q=>key(q.route)===key(entry.parent.route));demand(selected&&selected.node===entry.parent.node&&same(selected.minors,entry.branches.map(b=>b.minor)),'selected original query inventory');validateQuery(entry,data);return model(metadata,[entry],data,record,descriptor);
+ function openQuery(metadata,entry,inventory,data,record,descriptor,stream=null){
+  demand(hash(descriptor?.sha256)&&!Object.hasOwn(metadata,'entries'),'query evidence owner/header');validateProvenance(metadata,record);validateInventory(metadata,inventory);const selected=inventory.find(q=>key(q.route)===key(entry.parent.route));demand(selected&&selected.node===entry.parent.node&&same(selected.minors,entry.branches.map(b=>b.minor)),'selected original query inventory');validateQuery(entry,data,stream,record);return model(metadata,[entry],data,record,descriptor);
  }
  function model(evidence,entries,data,record,descriptor){
   evidence=frozen(JSON.parse(JSON.stringify({source:evidence.source,environment:{kind:evidence.environment.kind},...(evidence.replay?{replay:{sourceOrigin:evidence.replay.sourceOrigin,baselineProofSha256:evidence.replay.baselineProofSha256}}:{})})));entries=frozen(JSON.parse(JSON.stringify(entries)));record=frozen(JSON.parse(JSON.stringify(record)));descriptor=frozen(JSON.parse(JSON.stringify(descriptor)));const queries=new Map(entries.map(q=>[key(q.parent.route),q]));
@@ -95,5 +98,5 @@
   const provenance=el('details');provenance.append(el('summary','Source and computed addresses'),el('pre',JSON.stringify({source:scene.source,originalContext:scene.context,evidenceSha256:scene.evidenceSha256,...(scene.recording?{recording:scene.recording}:{}),computed:scene.computed,...(agreement?{sourceAgreement:agreement}:{}),inputAddresses:scene.inputs.map(i=>({name:i.name,...i.address})),bodyRoot:scene.body.root,bodyTypeRoot:scene.body.typeRoot,checks:scene.checks},null,2)));container.append(provenance);
   return{getScene:()=>scene,getState:()=>({offset,limit,selected,disposed}),dispose:()=>{disposed=true;container.replaceChildren();}};
  }
- const api={shiftedEqual,references,validateProvenance,validateInventory,validateQuery,validate,open,openQuery,load,mount};if(node)module.exports=api;else host.ProofAtlasMethodInterfaces=api;
+ const api={streamedSourceComparisons:true,shiftedEqual,references,validateProvenance,validateInventory,validateQuery,validate,open,openQuery,load,mount};if(node)module.exports=api;else host.ProofAtlasMethodInterfaces=api;
 })(typeof window==='undefined'?globalThis:window);

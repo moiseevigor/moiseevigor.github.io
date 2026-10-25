@@ -82,7 +82,7 @@
  let methodModule=null;
  async function methodsReady(){
   if(host.ProofAtlasMethodInterfaces)return host.ProofAtlasMethodInterfaces;
-  methodModule??=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='/public/js/proof-atlas-method-interfaces.js?v=3';script.onload=()=>resolve(host.ProofAtlasMethodInterfaces);script.onerror=()=>{methodModule=null;script.remove();reject(Error('Method interface module unavailable'));};document.head.append(script);});return methodModule;
+  methodModule??=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='/public/js/proof-atlas-method-interfaces.js?v=4';script.onload=()=>resolve(host.ProofAtlasMethodInterfaces);script.onerror=()=>{methodModule=null;script.remove();reject(Error('Method interface module unavailable'));};document.head.append(script);});return methodModule;
  }
  function methodDescriptor(record,typing,route,minor){const records=[host.PROOF_ATLAS_METHOD_INTERFACES,host.PROOF_ATLAS_METHOD_REPLAY].filter(i=>i?.format==='ProofAtlasMethodInterfaceInventory/1'&&Array.isArray(i.records)&&i.records.length<=64).flatMap(i=>i.records);return records.find(d=>d.name===record.name&&d.indexSha256===record.indexSha256&&d.sourceSha256===record.sourceSha256&&d.edition===typing.source.edition&&d.queries.some(q=>key(q.route)===key(route)&&q.minors.includes(minor)));}
  function mount(container,config){

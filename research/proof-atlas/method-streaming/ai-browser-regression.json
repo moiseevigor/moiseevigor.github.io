@@ -1,0 +1,87 @@
+{
+  "format": "ProofAtlasMethodReplayBrowserAudit/1",
+  "status": "PASS",
+  "profiles": 3,
+  "calls": 9,
+  "methodScenes": 18,
+  "inputSelections": 18,
+  "originalReferenceJumps": 18,
+  "originalMethodJumps": 18,
+  "librarySourceJumps": 1,
+  "libraryMethodScenes": 2,
+  "axeAudits": 4,
+  "failureControls": 2,
+  "staleControls": 1,
+  "checkerSha256": "de59a22c82d3fa3e69bd73d28e8aecd5b33c9fdba6d67661170ac3e2a4757462",
+  "builtFiles": {
+    "public/js/proof-atlas-method-interfaces.js": {
+      "sourceSha256": "2a2d67b0b24dc0a99d78dc60b7303af254670ee6d71550d164972aa42a047243",
+      "servedSha256": "2a2d67b0b24dc0a99d78dc60b7303af254670ee6d71550d164972aa42a047243"
+    },
+    "public/js/proof-atlas-method-examples.js": {
+      "sourceSha256": "8a46cb390581b861208e56c560ea88ef4e4df6e52580c6159ddef02db9b56e0c",
+      "servedSha256": "8a46cb390581b861208e56c560ea88ef4e4df6e52580c6159ddef02db9b56e0c"
+    },
+    "public/js/proof-atlas-elimination.js": {
+      "sourceSha256": "e8dd62cd1250807e9ee000011b45c7673f8b9bd03d3cadc3c3e4fbc28680ff51",
+      "servedSha256": "e8dd62cd1250807e9ee000011b45c7673f8b9bd03d3cadc3c3e4fbc28680ff51"
+    },
+    "public/js/proof-atlas-sync.js": {
+      "sourceSha256": "0b746f649c0b8b76b683300b045f1efcec0897c1d3bc2a802fe4b5296fbf5303",
+      "servedSha256": "0b746f649c0b8b76b683300b045f1efcec0897c1d3bc2a802fe4b5296fbf5303"
+    },
+    "public/js/proof-atlas-library.js": {
+      "sourceSha256": "9f9268dc39763084485e28bba74802f5af29dbb5fdf5befd604f41751e8b3895",
+      "servedSha256": "9f9268dc39763084485e28bba74802f5af29dbb5fdf5befd604f41751e8b3895"
+    },
+    "public/js/proof-atlas-library-data.js": {
+      "sourceSha256": "a4a01e2e93d015397eb6a8d6fd677e6b788e079440c3e206c43b8c56e06161e9",
+      "servedSha256": "a4a01e2e93d015397eb6a8d6fd677e6b788e079440c3e206c43b8c56e06161e9"
+    },
+    "public/js/proof-atlas-occurrence-types.js": {
+      "sourceSha256": "b80d43d682d3a4b7f99e284a09a6249e11ca24197e1901158caa723dcf0f6c8f",
+      "servedSha256": "b80d43d682d3a4b7f99e284a09a6249e11ca24197e1901158caa723dcf0f6c8f"
+    },
+    "public/js/proof-atlas-recursive-inputs.js": {
+      "sourceSha256": "a2aa2cd18602d8a3acbfb9ad2cf331964a06d18f1bdc472730424f0205adf862",
+      "servedSha256": "a2aa2cd18602d8a3acbfb9ad2cf331964a06d18f1bdc472730424f0205adf862"
+    },
+    "public/css/proof-atlas-theme.css": {
+      "sourceSha256": "a63cab151db80389ffc61e64221258c309f7da951c183c9a879a409e5fa90c27",
+      "servedSha256": "a63cab151db80389ffc61e64221258c309f7da951c183c9a879a409e5fa90c27"
+    },
+    "public/data/proof-atlas/method-interfaces-ai-manifest.js": {
+      "sourceSha256": "e53ce10c4751c239432372b32fc2e8b90d11a85a5d66e5e08646f03dd0f67285",
+      "servedSha256": "e53ce10c4751c239432372b32fc2e8b90d11a85a5d66e5e08646f03dd0f67285"
+    },
+    "projects/proof-atlas/manual/index.html": {
+      "sourceSha256": "698d1257e6ac92b40df717ce97fdfced70161a5757d09ffa92dbca19b807e394",
+      "servedSha256": "abd32d0142c5a9d8d167b26bcaa34c6543449c5c3ffc7d142804d76e5da6ee64",
+      "htmlComparison": {
+        "normalization": "Only four shared CSS build-time query versions",
+        "styles": [
+          "site",
+          "distill",
+          "syntax",
+          "theme"
+        ],
+        "normalizedSha256": "e8e18d3ba88abd99a3b5b0bef3858f5c61758096c6100b9d27277dec085644b0"
+      }
+    },
+    "projects/proof-atlas/library/index.html": {
+      "sourceSha256": "59ab36b6bc32e5c875d3ae920be4fabb951adb7cb6c6e1e7d7768877cb6ce3c9",
+      "servedSha256": "fb58f09854215c7dc3ac750457be9b1083687e0d4e06760a17642e0c322be17d",
+      "htmlComparison": {
+        "normalization": "Only four shared CSS build-time query versions",
+        "styles": [
+          "site",
+          "distill",
+          "syntax",
+          "theme"
+        ],
+        "normalizedSha256": "02252e598ff08569332f91d9b04964a8d7619ff5648b2fe2c16423ac0c24c3b0"
+      }
+    }
+  },
+  "librarySourceTarget": "/projects/proof-atlas/library/?edition=goedel-sample-4331&proof=lean_workbook_plus_62755&route=1%3A1.1.2.2.0.0.1"
+}
