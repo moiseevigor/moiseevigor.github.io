@@ -1,0 +1,61 @@
+<section class="sb-results" id="results" aria-labelledby="sb-results-heading">
+  <header>
+    <p class="sb-kicker">Research results · published evidence</p>
+    <h2 id="sb-results-heading">What the surveys tell us</h2>
+    <p>Start with the catalogue finding, then inspect the comparisons that limit its interpretation.</p>
+    <div id="sb-result-picker" hidden>
+      <label for="sb-result-select">Choose a research result</label>
+      <select id="sb-result-select" aria-controls="sb-result-panels">
+        <option value="counterparts">1. Infrared counterparts</option>
+        <option value="enrichment">2. Candidate young-star associations</option>
+        <option value="ranking">3. The embedding comparison</option>
+        <option value="controls">4. The uncertainty gate</option>
+      </select>
+    </div>
+  </header>
+  <div id="sb-result-panels">
+    <section class="sb-result-panel" data-result="counterparts" aria-labelledby="sb-counterparts-title">
+      <p class="sb-result-kind">Measured catalogue association</p>
+      <h3 id="sb-counterparts-title">2,465 clumps have an infrared counterpart</h3>
+      <p class="sb-result-number">12.8% <span>of 19,219 searched catalogue-prestellar clumps</span></p>
+      <div class="sb-result-track" aria-hidden="true"><span style="width:12.82584942%"></span></div>
+      <p class="sb-result-scale">0–100% of the searched sample · 22/24 μm counterparts</p>
+      <p><strong>Why it matters.</strong> This gives us a defined population in which to investigate hidden activity. The other 16,754 have no counterpart in this comparison; that does not establish that they contain no protostar.</p>
+      <p class="sb-result-limit"><strong>Limit.</strong> An object along the same sightline may lie in front of or behind the clump. Physical membership remains unverified.</p>
+      <a href="/public/data/starbirth/starbirth-e15.json">Exact E15 counts and selection →</a>
+    </section>
+    <section class="sb-result-panel" data-result="enrichment" aria-labelledby="sb-enrichment-title">
+      <p class="sb-result-kind">Measured association with candidate young stellar objects</p>
+      <h3 id="sb-enrichment-title">The infrared subset is enriched in SPICY candidates</h3>
+      <div class="sb-result-row"><span>With infrared counterpart</span><b>230 / 2,465 · 9.3%</b><div class="sb-result-track" aria-hidden="true"><span style="width:93.306288%"></span></div></div>
+      <div class="sb-result-row"><span>Remaining clumps</span><b>63 / 16,754 · 0.38%</b><div class="sb-result-track" aria-hidden="true"><span style="width:3.760296%"></span></div></div>
+      <p class="sb-result-scale">Both bars use the same 0–10% scale.</p>
+      <p><strong>Why it matters.</strong> The subset is worth targeted follow-up: it more often coincides with an independently compiled catalogue of candidate young stellar objects.</p>
+      <p class="sb-result-limit"><strong>Limit.</strong> SPICY also uses infrared information. This is corroborating catalogue evidence, not independent physical truth, clump membership or birth confirmation.</p>
+      <a href="/public/data/starbirth/starbirth-e15.json">Exact contingency table →</a>
+    </section>
+    <section class="sb-result-panel" data-result="ranking" aria-labelledby="sb-ranking-title">
+      <p class="sb-result-kind">Retrospective chemistry-proxy comparison · 18 reviews per method</p>
+      <h3 id="sb-ranking-title">The embedding did not beat the stronger baseline</h3>
+      <div class="sb-result-row"><span>Shared embedding</span><b>14 / 27</b><div class="sb-result-track" aria-hidden="true"><span style="width:51.85185185%"></span></div></div>
+      <div class="sb-result-row"><span>Linear baseline</span><b>14 / 27</b><div class="sb-result-track" aria-hidden="true"><span style="width:51.85185185%"></span></div></div>
+      <div class="sb-result-row"><span>Nonlinear baseline</span><b>15 / 27</b><div class="sb-result-track" aria-hidden="true"><span style="width:55.55555556%"></span></div></div>
+      <div class="sb-result-row"><span>Infrared only</span><b>13 / 27</b><div class="sb-result-track" aria-hidden="true"><span style="width:48.14814815%"></span></div></div>
+      <p class="sb-result-scale">Same 0–27 scale · qualifying chemistry positives recovered</p>
+      <p><strong>What we learned.</strong> A larger representation has not yet demonstrated useful added evidence at this review budget. The frozen benefit gate failed.</p>
+      <p class="sb-result-limit"><strong>Limit.</strong> These labels were already consumed in development. The counts are not physical protostar precision or recall, and do not rule out future cross-survey representations.</p>
+      <a href="/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/">Methods, denominators and missing views →</a>
+    </section>
+    <section class="sb-result-panel" data-result="controls" aria-labelledby="sb-controls-title">
+      <p class="sb-result-kind">Failed observational-support gate · occurrence remains unmeasured</p>
+      <h3 id="sb-controls-title">Matching profiles was easier than establishing uncertainty</h3>
+      <div class="sb-result-row"><span>Possible profile match</span><b>939 / 1,000</b><div class="sb-result-track" aria-hidden="true"><span style="width:93.9%"></span></div></div>
+      <div class="sb-result-row"><span>Passes uncertainty gate</span><b>333 / 1,000</b><div class="sb-result-track sb-result-threshold" aria-hidden="true"><span style="width:33.3%"></span><i></i></div></div>
+      <p class="sb-result-scale">Both bars use 0–1,000 clumps · marker: required 800 / 1,000.</p>
+      <p><strong>What we learned.</strong> The frozen study lacks the uncertainty support required to compare compact-source occurrence at clumps and controls.</p>
+      <p class="sb-result-limit"><strong>Limit.</strong> This is insufficient evidence, not a measured absence of hidden protostars. The primary occurrence excess remains unmeasured.</p>
+      <a href="/astrophysics/2026/10/11/hidden-protostars-column-uncertainty/">The error model and the failed gate →</a>
+    </section>
+  </div>
+  <noscript><p>All four results are shown below one another without JavaScript.</p></noscript>
+</section>
