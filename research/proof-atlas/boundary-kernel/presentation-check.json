@@ -1,0 +1,42 @@
+{
+  "format": "ProofAtlasBoundaryPresentation/1",
+  "status": "PRODUCTION_PAGE_AND_DOWNLOADS_PASS_NOT_PUBLISHED",
+  "sourceOverrides": false,
+  "layouts": [
+    {
+      "width": 1500,
+      "theme": "light",
+      "noDocumentOverflow": true
+    },
+    {
+      "width": 1500,
+      "theme": "dark",
+      "noDocumentOverflow": true
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "noDocumentOverflow": true
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "noDocumentOverflow": true
+    }
+  ],
+  "downloads": {
+    "research/proof-atlas/boundary-kernel/README.md": "9cc3cd15a8450ef2fab798d87f64ecd1a644955c6f0f678bf03404a5990a2843",
+    "research/proof-atlas/boundary-kernel/Boundary.lean": "709cb26542043dd0ae9b0a7e46f10abcf46ee2b946704fbb87ef22b70ee3c89e",
+    "research/proof-atlas/boundary-kernel/verify.py": "0420877e40e05290b73abb09063c348581293e2852517d535a9b51fee9cb52f1",
+    "research/proof-atlas/boundary-kernel/export-cases.cjs": "d46a701374eca57d2da494c2a50bd8661841fac4d4ed1fc39c6458c0b4c92363",
+    "research/proof-atlas/boundary-kernel/kernel-check.json.gz": "a0496d8c318c0dc50f3b0d823c8c1fd4bb0f0a2708006e3de09660ce7a8e6dcc"
+  },
+  "programHtmlSha256": "19996c639d68d80060c8c0e20f1437af054d241fcbbee0466f3563efc2b392ed",
+  "staticReferenceRefreshAfterBuild": true,
+  "kernelEvidenceSha256": "a0496d8c318c0dc50f3b0d823c8c1fd4bb0f0a2708006e3de09660ce7a8e6dcc",
+  "presentationProducerHashes": {
+    "docs/proof-atlas-research-program.md": "fa3aad2093e25a8e288d7804f69be221334aeeb883a93f9ed7286ae591a18013",
+    "research/proof-atlas/boundary-kernel/README.md": "9cc3cd15a8450ef2fab798d87f64ecd1a644955c6f0f678bf03404a5990a2843",
+    "research/proof-atlas/boundary-kernel/check-presentation.cjs": "58e268532df1691c94eb19848574fb0664dfeaff504b6b4a575fe8332083ef78"
+  }
+}

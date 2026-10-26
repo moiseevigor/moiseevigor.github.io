@@ -2,7 +2,9 @@
 'use strict';
 const fs=require('fs'),crypto=require('crypto'),assert=require('assert/strict');
 const source=fs.readFileSync('docs/proof-atlas-evidence.md','utf8'),program=fs.readFileSync('docs/proof-atlas-research-program.md','utf8');
-const rows=[...source.matchAll(/<details class="atlas-evidence-entry" data-evidence-order="(\d+)" markdown="1">[\s\S]*?<!-- atlas-original-start -->\n([\s\S]*?)<!-- atlas-original-end -->/g)].map(m=>({order:+m[1],text:m[2]})).sort((a,b)=>a.order-b.order);
+// Read preserved blocks first: newer entries need not contain a historical block.
+// An unbounded match from a newer entry could otherwise consume the following one.
+const rows=[...source.matchAll(/<!-- atlas-original-start -->\n([\s\S]*?)<!-- atlas-original-end -->/g)].map(m=>{const start=source.lastIndexOf('<details class="atlas-evidence-entry"',m.index),tag=source.slice(start,source.indexOf('>',start)+1),order=tag.match(/data-evidence-order="(\d+)"/);assert(order,'original block has an evidence entry');return{order:+order[1],text:m[1]};}).sort((a,b)=>a.order-b.order);
 assert.equal(rows.length,63);assert.deepEqual(rows.map(r=>r.order),Array.from({length:63},(_,i)=>i));
 const sha=crypto.createHash('sha256').update(rows.map(r=>r.text).join('')).digest('hex');assert.equal(sha,'f467d72dbda2e3f853c9dcd69715ee37f41b8e55ac192db87162fd59213ba2f7');assert(source.includes('data-original-sha256="'+sha+'"'));
 const aliases=[...program.matchAll(/<a id="([^"]+)" data-evidence-anchor href="([^"]+)"/g)];assert.equal(aliases.length,75);assert.equal(new Set(aliases.map(m=>m[1])).size,75);for(const m of aliases)assert.equal(m[2],'/projects/proof-atlas/evidence/#'+m[1]);
