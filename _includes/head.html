@@ -62,6 +62,18 @@
   <meta property="og:type"           content="website">
   {% endif %}
 
+  {% if page.collection == 'articles' %}
+  <!-- Google Scholar: Highwire Press tags (title, author, date required; one author per tag) -->
+  <meta name="citation_title"            content="{{ page.title | escape }}">
+  {% assign authors = page.authors | default: site.author.name %}
+  {% if authors.first %}{% for a in authors %}<meta name="citation_author" content="{{ a | escape }}">
+  {% endfor %}{% else %}<meta name="citation_author"           content="{{ authors | escape }}">{% endif %}
+  <meta name="citation_publication_date" content="{{ page.date | date: '%Y/%m/%d' }}">
+  <meta name="citation_abstract_html_url" content="{{ canonical_url }}">
+  {% if page.pdf %}<meta name="citation_pdf_url"          content="{{ page.pdf | absolute_url }}">{% endif %}
+  <meta name="citation_language"         content="en">
+  {% endif %}
+
   <!-- Twitter Card -->
   <meta name="twitter:card"          content="summary_large_image">
   <meta name="twitter:site"          content="@moiseev_igor">

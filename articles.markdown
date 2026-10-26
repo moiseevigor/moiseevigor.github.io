@@ -9,8 +9,8 @@ comments: false
 
 ## Publications
 
-Peer-reviewed journal and conference papers, with the published version first
-and an open PDF where one exists. Company research reports are listed on
+Peer-reviewed journal and conference papers in order of appearance, each with
+its published version and an open PDF where one exists. Company research reports are listed on
 <a href="https://labs.standard.ai/research">Standard Labs</a>.
 
 {% include publications_list.html %}
@@ -22,7 +22,7 @@ Companion pages explain selected results and their hypotheses; their linked
 manuscripts contain the complete statements and proofs. Each page distinguishes
 proved results, numerical evidence, and open questions.
 
-{% assign articles_sorted = site.articles | sort: "date" | reverse %}
+{% assign articles_sorted = site.articles | sort: "date" %}
 {% if articles_sorted.size > 0 %}
 <ul class="posts">
   {% for article in articles_sorted %}

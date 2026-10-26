@@ -10,6 +10,7 @@ tags: [SE2, sub-riemannian, geodesics, elliptic-functions]
 permalink: /articles/se2-conjugate-times/
 published: true
 comments: false
+pdf: /public/research/se2/conjugate_times_se2.pdf
 manuscript_status: "manuscript candidate; final review open"
 ---
 
