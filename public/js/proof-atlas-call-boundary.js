@@ -39,5 +39,19 @@
   }
   try{live();}catch(error){dispose();throw error;}return Object.freeze({page,dispose,state:()=>({disposed,busy,mode:model.mode,call:callId,counts:copy(counts),retainedRows:last?.rows.length||0,retainedBytes:last?.bytes||0,rowLimit:4,byteLimit:4194304,activeNativeLeases:active?1:0,peakNativeLeases:peakLeases,peakRows,peakBytes,retainedNativeGraphs:active?'one existing inspector window':0,wholeNativeRecordRequested:false,wholeSourceArchiveRequested:false})});
  }
- const api={open};if(node)module.exports=api;else host.ProofAtlasCallBoundary=api;
+ async function referencePath(model,unitId,callId,slot,offset=0){
+  await R.unfold(model);const unit=model.units.find(u=>u.id===unitId),call=model.records.find(c=>c.index===callId),port=call?.ports[slot];
+  demand(unit&&unit.members.includes(callId)&&port&&port.slot===slot,'reference path input in selected region');
+  demand(Number.isSafeInteger(offset)&&offset>=0&&offset%4===0&&(offset<port.hops.length||offset===0),'reference path page offset');
+  let at=port.input,context=port.consumerContextLength;for(const hop of port.hops){
+   demand(M.same(at,hop.use)&&Number.isSafeInteger(hop.index)&&hop.index>=0&&Number.isSafeInteger(hop.position)&&hop.position>=0&&hop.position+hop.index+1===context,'ordered lexical reference context');
+   demand(M.same(hop.value.route,{root:hop.binder.route.root,slots:[...hop.binder.route.slots,1]}),'original let value field');at=hop.value;context=hop.position;
+  }
+  demand(M.same(at,port.producer)&&context===port.producerContextLength,'original producer endpoint and context');
+  const inside=unit.internalUses.filter(e=>e.to===callId&&e.slot===slot),boundary=unit.inputs.filter(r=>r.call===callId&&r.slot===slot);demand(inside.length+boundary.length===1,'one original input position');
+  const source=a=>N.address({source:model.identity.source},a),rows=port.hops.slice(offset,offset+4).map((h,i)=>({ordinal:offset+i,use:source(h.use),binder:source(h.binder),value:source(h.value),index:h.index,position:h.position,nondep:h.nondep,useContextLength:h.position+h.index+1,valueContextLength:h.position}));
+  const result={format:'ProofAtlasInputReferencePath/1',identity:{namespace:'input-reference-path',source:copy(model.identity.source),nativeOwner:model.identity.nativeOwner,inventory:copy(model.identity.inventory),regionId:unitId,call:source(call.anchor),slot},call:callId,slot,role:port.role,visibility:port.visibility,location:inside.length?'internal':'boundary',input:source(port.input),consumerContextLength:port.consumerContextLength,producer:source(port.producer),producerContextLength:port.producerContextLength,knownProducer:port.knownProducer,externalBinder:port.externalBinder?source(port.externalBinder):null,definitionBoundary:port.definitionBoundary,offset,total:port.hops.length,limit:4,rows,previous:offset?offset-4:null,next:offset+4<port.hops.length?offset+4:null,scope:'Read backwards from the original consumer input through recorded lexical definitions. These are original source references, not evaluation steps, type conversion or a common-context typing judgment.'};
+  demand(bytes(result).length<=4194304,'reference path byte bound');return result;
+ }
+ const api={open,referencePath};if(node)module.exports=api;else host.ProofAtlasCallBoundary=api;
 })(typeof window==='undefined'?globalThis:window);

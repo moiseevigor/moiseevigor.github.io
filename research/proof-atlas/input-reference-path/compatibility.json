@@ -1,0 +1,168 @@
+{
+  "format": "ProofAtlasInputReferenceCompatibility/1",
+  "status": "PASS",
+  "scope": "Current boundary model and eight existing production-browser suites; source overrides disabled. Historical reports unchanged.",
+  "model": {
+    "file": "compatibility/boundary-model.json.gz",
+    "sha256": "f79a0de0989850d7aff4ddf2e456d5e07089f47d88932f8f1b93e0d1dac27bc7"
+  },
+  "suites": {
+    "call-boundary": {
+      "status": "PRODUCTION_CALL_BOUNDARY_BROWSER_PASS_NOT_PUBLISHED",
+      "file": "compatibility/call-boundary.json.gz",
+      "sha256": "7a09828a11a7b02fe0fad2bba573503bbe36c520415142c719f0baa16c59ecd7",
+      "counters": {
+        "sourceOverride": false,
+        "typedRows": 43,
+        "inputSelections": 32,
+        "contextChecks": 1,
+        "axeAudits": 4,
+        "pagingPreservesSelection": true,
+        "computedSelectionRoundTrip": true,
+        "literalAliases": 2,
+        "dualRoleIdentity": true,
+        "shadowedSourcesSeparate": true,
+        "changedCallCancelsOldPage": true,
+        "sourceOnlyNoTypes": true,
+        "staleRefusal": true,
+        "optionalRefusal": true,
+        "wholeRuntimeArchiveRequests": 0
+      }
+    },
+    "step-reading": {
+      "status": "PRODUCTION_BROWSER_AND_NATIVE_SUMMARY_PASS_NOT_PUBLISHED",
+      "file": "compatibility/step-reading.json.gz",
+      "sha256": "ffc1fa2f5a5591b71f0f46db2fb51c5a4f46c7a57a5da5561ec7ea5554cea3f9",
+      "counters": {
+        "sourceOverride": false,
+        "wholeRuntimeArchiveRequests": 0
+      }
+    },
+    "application-regions": {
+      "status": "PASS",
+      "file": "compatibility/application-regions.json.gz",
+      "sha256": "1b308d367d25a53d012620ee90501119f7a48486c7599f67ea1c27ca1a100cab",
+      "counters": {
+        "sourceOverride": false,
+        "authoredProfiles": 4,
+        "inputSelections": 16,
+        "resultSelections": 12,
+        "internalSelections": 12,
+        "miniResultSelections": 12,
+        "miniBusChecks": 4,
+        "panChecks": 1,
+        "zoomChecks": 2,
+        "partialRegions": 1,
+        "cycleWitnessSelections": 2,
+        "selectionRoundTrips": 4,
+        "sourceOnlyRefusals": 1,
+        "axeAudits": 4,
+        "keyboardChecks": 1,
+        "staleRefusals": 1,
+        "optionalFailures": 1,
+        "wholeArchiveAttempts": 0
+      }
+    },
+    "premise-sources": {
+      "status": "PASS",
+      "file": "compatibility/premise-sources.json.gz",
+      "sha256": "c2572faa39f4841615111ce1a642670fd8275ea2b6f0eab90e71121c5782bb71",
+      "counters": {
+        "sourceOverride": false,
+        "controlProfiles": 2,
+        "premiseSelections": 9,
+        "computedSelections": 9,
+        "miniatureHighlights": 9,
+        "riccatiPropositions": 5,
+        "inputModeRoundTrips": 1,
+        "sourceOnlyRefusals": 1,
+        "axeAudits": 4,
+        "persistentDiagramChecks": 2,
+        "staleRefusals": 1,
+        "optionalRefusals": 1,
+        "wholeArchiveAttempts": 0
+      }
+    },
+    "rule-support": {
+      "status": "PASS",
+      "file": "compatibility/rule-support.json.gz",
+      "sha256": "b17c9c9bce59403447bb42b203ca2f1d5e279600c6b440970a362638b588b5b3",
+      "counters": {
+        "sourceOverride": false,
+        "inputModeRoundTrips": 1,
+        "sourceOnlyRefusals": 1,
+        "axeAudits": 4,
+        "staleRefusals": 1,
+        "optionalRefusals": 1,
+        "aliasCases": 2,
+        "headSelections": 11,
+        "normalizedSelections": 11,
+        "dualRoleMatches": 1,
+        "headPages": 6,
+        "wholeArchiveAttempts": 0
+      }
+    },
+    "inventory-regions": {
+      "status": "PASS",
+      "file": "compatibility/inventory-regions.json.gz",
+      "sha256": "898ef683b230eef916c514d1061ebcb20252adc0bd57aaba57e57d016441fe36",
+      "counters": {
+        "hiddenRefusals": 1,
+        "witnessPages": 2,
+        "witnessSelections": 13,
+        "nativeOwnerChecks": 13,
+        "globalPasses": 2,
+        "missingIndexRefusals": 1,
+        "corruptIndexRefusals": 1,
+        "staleScanRefusals": 1,
+        "axeAudits": 4,
+        "wholeArchiveAttempts": 0
+      }
+    },
+    "network-streaming": {
+      "status": "PASS",
+      "file": "compatibility/network-streaming.json.gz",
+      "sha256": "e06caaba94a9c9c63adace5f19488cb1308e47ac04083936c14f9d52c1b4adcf",
+      "counters": {
+        "nativeProfiles": 31,
+        "nativeCalls": 162,
+        "nativeWires": 101,
+        "nativeTypeSelections": 101,
+        "bindingSelections": 7,
+        "largeCalls": 11,
+        "unavailableTypes": 11,
+        "expansions": 1,
+        "consumerPages": 1,
+        "zoomChecks": 3,
+        "panChecks": 2,
+        "axeAudits": 4,
+        "keyboardChecks": 1,
+        "staleRefusals": 1,
+        "hashRefusals": 1,
+        "releases": 1,
+        "wholeArchiveAttempts": 0
+      }
+    },
+    "result-path": {
+      "status": "PASS",
+      "file": "compatibility/result-path.json.gz",
+      "sha256": "e8fea7b71bf40309ce432c0dc4d8ddade176fb753f49d595a0e751d177b7bf3e",
+      "counters": {
+        "profiles": 31,
+        "resultSelections": 36,
+        "sideInputSelections": 17,
+        "groupChecks": 5,
+        "selectionRoundTrips": 1,
+        "budgetContinuations": 1,
+        "branchStops": 1,
+        "sourceOnlyRefusals": 1,
+        "axeAudits": 4,
+        "staleRefusals": 1,
+        "corruptionRefusals": 1,
+        "optionalFailures": 1,
+        "zoomChecks": 2,
+        "keyboardChecks": 1
+      }
+    }
+  }
+}

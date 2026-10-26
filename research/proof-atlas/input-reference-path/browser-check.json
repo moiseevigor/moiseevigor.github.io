@@ -1,0 +1,75 @@
+{
+  "format": "ProofAtlasInputReferencePathBrowser/1",
+  "status": "PRODUCTION_REFERENCE_PATH_BROWSER_PASS_NOT_PUBLISHED",
+  "sourceOverride": false,
+  "referenceSelections": 37,
+  "nativeInputs": 9,
+  "sourceOnlyInputs": 4,
+  "authoredPages": 7,
+  "axeAudits": 4,
+  "riccatiContextPath": {
+    "namespace": "input-reference-path",
+    "source": {
+      "edition": "published-15",
+      "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+      "name": "JacobiData.slope_bound_abs",
+      "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7"
+    },
+    "nativeOwner": "7a995a4a5559be0a3f1778357ac9a9b696cc0bf446e7513f6a3d52822035af35",
+    "inventory": {
+      "scope": "39c7a5191d3eb257ffdfa30fb10c0245812f1ded7bfe967394878dee8f35246a",
+      "headerSha256": "4a978b79ec87b900cdda0cfaadda15e741d89c00abda00eed0c7db61e40cb638"
+    },
+    "regionId": "84527de935464589a91f6da33543b878efb5932f22660699458279ae52f35915",
+    "call": {
+      "namespace": "source-expression",
+      "name": "JacobiData.slope_bound_abs",
+      "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+      "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7",
+      "node": 3221,
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "slot": 4
+  },
+  "resultPanelRoundTrip": true,
+  "shadowedBinderIdentity": true,
+  "retiredPathRefused": true,
+  "wholeRuntimeArchiveRequests": 0,
+  "files": {
+    "public/js/proof-atlas-call-boundary.js": "046eefff021e505cd25f655cb6ff596b5c8d62ab6e5b8bd27c37c6e5b9ed9a5a",
+    "public/js/proof-atlas-application-region-view.js": "faa0aeb81547c715d34a34b304b4f34bce1675e0193272f742147c276194d7de",
+    "public/js/proof-atlas-network-stream-view.js": "7c9ffbf26b8243430c2c44366a09c6a092ac887f24839075b0c0031c1e6bc22e",
+    "public/css/proof-atlas-application-regions.css": "856016edaaf3c497c616b815dcc68d4d5b6af7620120464cf747379f34217cfc",
+    "research/proof-atlas/input-reference-path/check-browser.cjs": "de9336b65cbb5bb9d538c920f2d3aa1abb9032f2629887f7f7c58a9ef9c2d3f5"
+  }
+}
