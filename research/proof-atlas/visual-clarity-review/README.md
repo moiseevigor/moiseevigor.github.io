@@ -44,3 +44,7 @@ Current outputs are recorded separately in this directory. Public deployment is 
 ## Branch navigation follow-up
 
 The folded application path had a further dead end: it stopped at a shared result while hiding the general connection list. Its branch boundary now exposes a bounded, labeled page of consumer input positions. Consumer result summaries supply local reading context; the exact entry use remains inspectable after following it. The [rule and checks](../result-use-branches/README.md) distinguish shared source results from repeated stored nodes. This is a navigation change, not a measured improvement in comprehension.
+
+## Hidden-path follow-up
+
+A region that looks acyclic in a small cut can become cyclic when hidden uses are included. The reader now refuses such a fold before display, explains the path and opens its original consumer input positions in bounded pages. It also checks simultaneous groups. The [finite-inventory rule and counterexamples](../inventory-region-checks/README.md) preserve the distinction between original native typing and graph validity. This addresses misleading grouping; it does not measure comprehension.

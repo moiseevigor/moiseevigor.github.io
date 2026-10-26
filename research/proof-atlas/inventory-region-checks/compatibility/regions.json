@@ -1,0 +1,32 @@
+{
+  "format": "ProofAtlasApplicationRegionsBrowser/1",
+  "status": "PASS",
+  "sourceOverride": false,
+  "authoredProfiles": 4,
+  "inputSelections": 16,
+  "resultSelections": 12,
+  "internalSelections": 12,
+  "miniResultSelections": 12,
+  "miniBusChecks": 4,
+  "panChecks": 1,
+  "zoomChecks": 2,
+  "partialRegions": 1,
+  "cycleWitnessSelections": 2,
+  "selectionRoundTrips": 4,
+  "sourceOnlyRefusals": 1,
+  "axeAudits": 4,
+  "keyboardChecks": 1,
+  "staleRefusals": 1,
+  "optionalFailures": 1,
+  "files": {
+    "public/js/proof-atlas-inventory-region-check.js": "63eda69ebfa20ed7eb83ce1d8732d2ea01b93717aeb48a7264058fe03f51ec27",
+    "public/data/proof-atlas/inventory-graph-manifest.js": "cd6ba1da55612d78a77796b2ede6ea459f6bb829dbf5f19e3b009b9603dbf08a",
+    "public/data/proof-atlas/inventory-region-controls-manifest.js": "120cdbf5b025b4bfbac1b89122442047fafea1e0df57ff5c7527a7cf2532e95a",
+    "public/js/proof-atlas-application-regions.js": "61cd59797b73ab38075cfacf55355cd6a3ccfceaa8be4bbf46c6a84b7d36575b",
+    "public/js/proof-atlas-application-region-view.js": "e943efd421891a3e473bebf5ba4c036db9664134dff020e98561c33a172bf30f",
+    "public/js/proof-atlas-network-stream-view.js": "a0ac4755b50b834673b4aa56b3c98aa0bd9b83480f3d7619fa9c555a5dca5753",
+    "public/css/proof-atlas-application-regions.css": "e6db2c4b87cd089dc1378a356055e156591aa2378b42815766fa48fd63bda97c",
+    "public/data/proof-atlas/application-region-controls-manifest.js": "8d1c8742f466b0adc810124b6cc8da0ee785904e36b51d7b066f0f6a4dff261b"
+  },
+  "wholeArchiveAttempts": 0
+}

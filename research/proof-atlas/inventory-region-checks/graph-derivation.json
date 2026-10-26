@@ -1,0 +1,388 @@
+{
+  "status": "PASS",
+  "producerSha256": "4697675755015c788dc76c21a184af3064bd10c61ce59072fd3f9e208319472c",
+  "manifestSha256": "cd6ba1da55612d78a77796b2ede6ea459f6bb829dbf5f19e3b009b9603dbf08a",
+  "profiles": [
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "mode": "native",
+      "calls": 87,
+      "ports": 394,
+      "uses": 68,
+      "order": "topological-rank",
+      "graphSha256": "8f5567db615b0c6aaf7707b17a6e0e571c20e13792b6ff2cb369d6c1f35d6b4b",
+      "rootSha256": "cbe16d209a157ea1fb804176bc121f7bfeb124fdbc87cfbeb726b4b1a980c067"
+    },
+    {
+      "name": "AtlasTransportControls.simple",
+      "mode": "native",
+      "calls": 1,
+      "ports": 5,
+      "uses": 0,
+      "order": "call-id",
+      "graphSha256": "ecce48b7fd5ccbba84c30413dde69d2b7fe5953ba407da041015710a1f386d8b",
+      "rootSha256": "fb4c98499ca05254375bac270b6c3077ecd6da97f5e7003027400494a8f51fa9"
+    },
+    {
+      "name": "AtlasTransportControls.dependent",
+      "mode": "native",
+      "calls": 1,
+      "ports": 7,
+      "uses": 0,
+      "order": "call-id",
+      "graphSha256": "ad58d614b6429d711ef8d144755c9f2970c9eb2a8f31a5feba2ec031364a36af",
+      "rootSha256": "ff393b0014820e6b71bc1d6c9f02fa8603b12fa69b0ce2448f423b36584f9a7e"
+    },
+    {
+      "name": "AtlasTransportControls.proofDependent",
+      "mode": "native",
+      "calls": 1,
+      "ports": 7,
+      "uses": 0,
+      "order": "call-id",
+      "graphSha256": "03910c9984bd1b7617c3737ae1aae681aa9e6c15a6af756ac282f64f066f5495",
+      "rootSha256": "7d64b25dd63fe3743e5d2e84d17f5160b015efac68d75e1cf4eb80ab9aaa9785"
+    },
+    {
+      "name": "AtlasTransportControls.trailing",
+      "mode": "native",
+      "calls": 1,
+      "ports": 5,
+      "uses": 0,
+      "order": "call-id",
+      "graphSha256": "a70a89398397c6b7d5edbb071065e2cb1658a4ba2897685c8967c037c59df586",
+      "rootSha256": "772dd3a0407653058058e7b1e306368f85bad8cdbfa1d0698371c853d50546f5"
+    },
+    {
+      "name": "AtlasTransportControls.same",
+      "mode": "native",
+      "calls": 1,
+      "ports": 5,
+      "uses": 0,
+      "order": "call-id",
+      "graphSha256": "ded859b1bc9c67711b053c4c323599475e33dcbe228176f4108d66a99eda775d",
+      "rootSha256": "0d31d98eb36ff64bb73d5f6da7d6fb8207987a02c8991d949f9355f4a89b6260"
+    },
+    {
+      "name": "AtlasTransportControls.reordered",
+      "mode": "native",
+      "calls": 1,
+      "ports": 7,
+      "uses": 0,
+      "order": "call-id",
+      "graphSha256": "35713c688f0e6fa7ffe97edc1a14609398a8ea01e8a170ff99f15df15cb2b1db",
+      "rootSha256": "495b6b614f3ee13915df618aa9a5f875d2b7d1e260f2e88c1c32d8b497a5020a"
+    },
+    {
+      "name": "AtlasTransportControls.reverse",
+      "mode": "native",
+      "calls": 1,
+      "ports": 5,
+      "uses": 0,
+      "order": "call-id",
+      "graphSha256": "47e9a9c4e6457753a6f93d2abfaa77dd857cbeff3aa6f8afd65b8408f5434046",
+      "rootSha256": "edbffdcd415951bb56aaa35919fb34b862e0e02b8910f927c381fe1e9f63802e"
+    },
+    {
+      "name": "lean_workbook_20418",
+      "mode": "native",
+      "calls": 2,
+      "ports": 12,
+      "uses": 1,
+      "order": "topological-rank",
+      "graphSha256": "f3d18be698c785f17d49f4e76d53919e983417c9039c4d5b508f68077f31638c",
+      "rootSha256": "4b916078ae113964812f348c69c54fff134a32360522408ef4aaf6acf0b5af34"
+    },
+    {
+      "name": "lean_workbook_4274",
+      "mode": "native",
+      "calls": 5,
+      "ports": 26,
+      "uses": 4,
+      "order": "topological-rank",
+      "graphSha256": "8c3155b9ed8f9d737e954d8931298ed64d057ede1a9d9088f8a54fba92918824",
+      "rootSha256": "ba37e1dc1344f51755e52173b62a2d93970e99e1d3ee0c16e107c21c0d219739"
+    },
+    {
+      "name": "lean_workbook_plus_15068",
+      "mode": "native",
+      "calls": 4,
+      "ports": 34,
+      "uses": 2,
+      "order": "topological-rank",
+      "graphSha256": "d826f1e66d191cc108967b7696d35e833b5d756fabd993b4eab5cae2539ddc05",
+      "rootSha256": "01386a7b3080eb47b0f1b7390cae94d1789d73834f9b06b7fdf403b3200a9027"
+    },
+    {
+      "name": "lean_workbook_plus_19617",
+      "mode": "native",
+      "calls": 5,
+      "ports": 27,
+      "uses": 3,
+      "order": "topological-rank",
+      "graphSha256": "2a1a95d276cb0fc9ae4df39683279088621d572f184bb3ee11538d59efed634a",
+      "rootSha256": "5b9b5109db452e5d24c448ec3b67e04d3bd8d41b218aeb0ab9c8fe453ceadfce"
+    },
+    {
+      "name": "lean_workbook_plus_39831",
+      "mode": "native",
+      "calls": 4,
+      "ports": 24,
+      "uses": 2,
+      "order": "topological-rank",
+      "graphSha256": "6b5d22132d4a27b07d080b9cb249604d48b8a4cddbcb668987fa1d54aaf2a9c3",
+      "rootSha256": "26804d40814d6192c5e593cf2a0caaaf40222562baca6ed3ba28c2c56eb81b0a"
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "mode": "native",
+      "calls": 8,
+      "ports": 48,
+      "uses": 4,
+      "order": "topological-rank",
+      "graphSha256": "30ba85fbb2d8bbca1af347385556a21986c4dd33015ead9b874854177c3d5813",
+      "rootSha256": "279947884abac3ca17e5b8ea633af7fb7f7f406aadebb67422293ff81dd93e3a"
+    },
+    {
+      "name": "AtlasTransportStress.balanced",
+      "mode": "native",
+      "calls": 3,
+      "ports": 13,
+      "uses": 2,
+      "order": "topological-rank",
+      "graphSha256": "b6e74e2a961086d0c543caa96bfcdcc198ec5d91ee33cad6298ef27c6608f4f9",
+      "rootSha256": "1669dbeacbf9fe3cf8ba716c2b290164f7218670ed6cadaf475de8c94a474749"
+    },
+    {
+      "name": "AtlasComposeControls.inlineCalls",
+      "mode": "native",
+      "calls": 2,
+      "ports": 10,
+      "uses": 1,
+      "order": "topological-rank",
+      "graphSha256": "b9924cd694b70202b5254405b1fcb8e0b17d7dd107504b16b91e44b8f173b45e",
+      "rootSha256": "a66dc86b4ac3a921f393da528a220ed03c52f056f2c9b989137bc56e2e9a1026"
+    },
+    {
+      "name": "AtlasComposeControls.aliases",
+      "mode": "native",
+      "calls": 2,
+      "ports": 10,
+      "uses": 1,
+      "order": "call-id",
+      "graphSha256": "934fa55c85b0ee7b9c93df82a48cbccea9e062f1fe173ed2802a2bde7be768b4",
+      "rootSha256": "a0d745daf1cff09953d1baecd6237603ff06627eb974c78eef9b01a4b8a73413"
+    },
+    {
+      "name": "AtlasComposeControls.weakening",
+      "mode": "native",
+      "calls": 2,
+      "ports": 10,
+      "uses": 1,
+      "order": "call-id",
+      "graphSha256": "a7e83c899c495b6f08038c9e54c032fd2382292058973750b04d93b5a70bf316",
+      "rootSha256": "1762c9c735fe0fa0abf840f04e1cf8cfb2ba0fc42e2ec76cc1f74620e740d3ee"
+    },
+    {
+      "name": "AtlasComposeControls.parallel",
+      "mode": "native",
+      "calls": 3,
+      "ports": 15,
+      "uses": 1,
+      "order": "topological-rank",
+      "graphSha256": "05caadfdabd27c2574003bc340c88f6ef92ecd3e50e716ee697b6ed43608bacb",
+      "rootSha256": "fdb69838824b68453197f4647ce254c93c6ba351469d28a7aa8b59d7bddd7902"
+    },
+    {
+      "name": "AtlasComposeControls.shared",
+      "mode": "native",
+      "calls": 3,
+      "ports": 15,
+      "uses": 1,
+      "order": "topological-rank",
+      "graphSha256": "c0d418c656d642b91bf89ca6aa30fda4767479a46d04952e447d2904fd1e0750",
+      "rootSha256": "8ddbd87b77dc4696a6caed99256e866429f5bacd9bfca1b740250b3cb077ef2b"
+    },
+    {
+      "name": "AtlasComposeControls.crossContext",
+      "mode": "native",
+      "calls": 2,
+      "ports": 10,
+      "uses": 0,
+      "order": "call-id",
+      "graphSha256": "a47f53dd0c086c25566dfcbf0a53d173caaa3890eb7d284f0f32f0fee5fcc1dc",
+      "rootSha256": "a6000e997530b98bc33f5ecd8fa1056baa92ed2e0f9b4c5c8c5ea09deaef2436"
+    },
+    {
+      "name": "AtlasComposeControls.samePorts",
+      "mode": "native",
+      "calls": 3,
+      "ports": 13,
+      "uses": 2,
+      "order": "topological-rank",
+      "graphSha256": "e6e08f808342dd0d89d7020676ab39a5c8e490a81cedaaf5c2fc18cb44e1262a",
+      "rootSha256": "e8c380d63032f3a7be3b91f761aa4a8e83416c9fcffaa0b4dd1a476d2324e901"
+    },
+    {
+      "name": "AtlasComposeControls.nondepValue",
+      "mode": "native",
+      "calls": 2,
+      "ports": 14,
+      "uses": 1,
+      "order": "topological-rank",
+      "graphSha256": "0ab6760b4b70587f75a7bf24c14e012654b55169219ddc8f62107fb7708d198d",
+      "rootSha256": "6dd5fe1680c020b5c5cd1ee595263155ec06426e31ee823851cb89c7d9bd7548"
+    },
+    {
+      "name": "AtlasApplicationPorts.dependent",
+      "mode": "native",
+      "calls": 3,
+      "ports": 9,
+      "uses": 0,
+      "order": "call-id",
+      "graphSha256": "ed65f875385ef6191e8b6bf1f911dd8c13e695d41eb68af72b29c0e9d935df21",
+      "rootSha256": "159fdb36f7e6a8a4dc7e87c8e77129146eaf808a0b7bf1c2081673483e54c219"
+    },
+    {
+      "name": "AtlasApplicationPorts.functions",
+      "mode": "native",
+      "calls": 1,
+      "ports": 7,
+      "uses": 0,
+      "order": "call-id",
+      "graphSha256": "013cfbcd07ea72a327abc695168497e043d8721cb78bf95ade00217e6c6de2d0",
+      "rootSha256": "aae82cbb141d0cc3bbd6207ad02bfcf89ce067d560e5d18b4ccde39fd3575ca8"
+    },
+    {
+      "name": "AtlasApplicationPorts.instances",
+      "mode": "native",
+      "calls": 2,
+      "ports": 10,
+      "uses": 1,
+      "order": "topological-rank",
+      "graphSha256": "e0d44b467f8014b8f668b754599ab134b848a0557750553907ab2625e23d917c",
+      "rootSha256": "530bca9ecb9e92a1168233906c0804182b63657adee2f1d94b6953cecd8f120d"
+    },
+    {
+      "name": "AtlasApplicationPorts.partialUse",
+      "mode": "native",
+      "calls": 1,
+      "ports": 6,
+      "uses": 0,
+      "order": "call-id",
+      "graphSha256": "fd118d2827e2fef44903f0502f6b1ab3896831f2cf822115fa68400545ba922f",
+      "rootSha256": "c3e820e2b0ecb6c3852b33071a137b0553c8e900071ac211a40054b3afca75e0"
+    },
+    {
+      "name": "AtlasApplicationPorts.binding",
+      "mode": "native",
+      "calls": 1,
+      "ports": 2,
+      "uses": 0,
+      "order": "call-id",
+      "graphSha256": "9f065a8a58ee6c615d01396479699caeb523d119f4490521e07306d081db6326",
+      "rootSha256": "111794a648b1844f1353311e4089510bdc7f200981aaa2187843687c22d0c329"
+    },
+    {
+      "name": "AtlasApplicationPorts.wide",
+      "mode": "native",
+      "calls": 1,
+      "ports": 10,
+      "uses": 0,
+      "order": "call-id",
+      "graphSha256": "13cd3636ddcb3f966e7320edf8e5fb47e94f2d1f0bebadc070f6f46734d0c01b",
+      "rootSha256": "2deec4bdcb98d1a7712cad6a229ec7250996b4583b5c72462b29e5e84c53af8a"
+    },
+    {
+      "name": "AtlasApplicationPorts.visibility",
+      "mode": "native",
+      "calls": 6,
+      "ports": 19,
+      "uses": 4,
+      "order": "topological-rank",
+      "graphSha256": "c8ba99b18fcab8d7551aaa0ca369a30eb65b7d531f056caed8322fb0fdbd92ab",
+      "rootSha256": "610d1074065ece685b696577e4fdb90b0dc52b9e6d32d7725dd1eaab21546acb"
+    },
+    {
+      "name": "AtlasApplicationPorts.aliasType",
+      "mode": "native",
+      "calls": 3,
+      "ports": 8,
+      "uses": 2,
+      "order": "topological-rank",
+      "graphSha256": "26bc9f3972e06d45094c45ad57ad860e126ce1fc3f346e1644108175194d5b25",
+      "rootSha256": "d3701913f5933ad06e9a7cbd56002afabd627e07a48ca52a74d4bbf7d6c8f4ad"
+    },
+    {
+      "name": "lean_workbook_plus_54159",
+      "mode": "source-only",
+      "calls": 201340,
+      "ports": 699453,
+      "uses": 201190,
+      "order": "call-id",
+      "graphSha256": "0ff960bbd63e4961d27682903ed335006868d980751a036e40625c185d8fa35a",
+      "rootSha256": "9d7fe986fc7c4e64c8f7ea0cec4667ccd66d9a1204913be9545f1944f10613c5"
+    },
+    {
+      "name": "AtlasRegionControls.diamond",
+      "mode": "native",
+      "calls": 4,
+      "ports": 9,
+      "uses": 4,
+      "order": "call-id",
+      "graphSha256": "420e09c57ccb1f033e6a62bec69a4deff80593a3188b5c6acaf0b264318b3162",
+      "rootSha256": "ecb9bedaf22804804eedf059398e9359da2f54995924be3a2038fb5e4ff0c28c"
+    },
+    {
+      "name": "AtlasRegionControls.shortcut",
+      "mode": "native",
+      "calls": 3,
+      "ports": 7,
+      "uses": 3,
+      "order": "call-id",
+      "graphSha256": "f239b908160f3f3f24c0662ad1126f3c1728f4d1e49aa92d86b5f24946d46a78",
+      "rootSha256": "1d51f0068b3039568ad9e4a2e353cf2ce8d496a1763705114d0f520aa04b1d85"
+    },
+    {
+      "name": "AtlasRegionControls.twoPorts",
+      "mode": "native",
+      "calls": 2,
+      "ports": 5,
+      "uses": 2,
+      "order": "call-id",
+      "graphSha256": "bfd227304b4861697dfd101ec4faf503bde4e59e091bf1b21d9e7c76bc9bf20c",
+      "rootSha256": "79ecdeadb5ee3e9fda9cd779919f2b102ae181dbd82e02e573dcbf2c7230020f"
+    },
+    {
+      "name": "AtlasRegionControls.proofShortcut",
+      "mode": "native",
+      "calls": 3,
+      "ports": 7,
+      "uses": 3,
+      "order": "call-id",
+      "graphSha256": "ccd94ed3d0d6702a460adacc370805307ccc6ea001a29e206f5b3ffb48b471a2",
+      "rootSha256": "178b3dc341b8214c27a96c4a192e751450211199dfd16267bd60cbb84b2b0b61"
+    },
+    {
+      "name": "AtlasInventoryRegionControls.crossedGroups",
+      "mode": "native",
+      "calls": 5,
+      "ports": 15,
+      "uses": 6,
+      "order": "call-id",
+      "graphSha256": "0a11c19fcc1922937770319a5427210681c42735940840ad8543e1c4f857d817",
+      "rootSha256": "f87a4fb5af9e208b1b7f491567fde0ca84c73ce34b0bda07beb7a83e0aac7aae"
+    },
+    {
+      "name": "AtlasInventoryRegionControls.longReturn",
+      "mode": "native",
+      "calls": 14,
+      "ports": 29,
+      "uses": 14,
+      "order": "call-id",
+      "graphSha256": "aac642704a0d6d6f08d876a86e73b3b1f588fe192ec7b74e140103aa477c8194",
+      "rootSha256": "4c6d7ac0f0988336c7af02a60f4bbc6fee77d87e3359eaf6e3337807642b125f"
+    }
+  ],
+  "scope": "Every compact edge matches its original call input, reverse ordinal and original producer occurrence/context. Global topological order and count conservation are checked with bounded SQLite/page working sets."
+}

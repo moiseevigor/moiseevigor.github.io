@@ -22,7 +22,7 @@ Merging legal regions agrees with folding their combined original members direct
 
 The authored `shortcut` control has the exact uses `0 → 1`, `0 → 2` and `1 → 2`. Folding calls `{0, 2}` is connected, but the quotient is `region → 1 → region`. The rule rejects it and provides the two original consumer input positions as a witness. The proof-valued control exhibits the same failure with native proof roles; classifying calls as proofs does not repair the fold.
 
-A two-call cut containing only `{0, 2}` cannot see the path through hidden call 1. Its local fold is permitted with **outside paths unverified**. Revealing call 1 makes that proposed grouping fail. This counterexample limits the guarantee: the rule does not establish global convexity, a closed module or an acyclic whole-proof quotient. A certificate of global region validity remains further work. The reader states the local scope visibly and retains every result portal and all external counts.
+A two-call cut containing only `{0, 2}` cannot see the path through hidden call 1. Its local fold is permitted with **outside paths unverified**. Revealing call 1 makes that proposed grouping fail. This counterexample limits the guarantee: the rule does not establish global convexity, a closed module or an acyclic whole-proof quotient. This remains the guarantee of the local codec. The subsequent [inventory-wide check](../inventory-region-checks/README.md) now gates displayed folds against every indexed source use, including hidden return paths. It is a separate finite graph check, not a portable Lean certificate or complete-use coverage. All original result portals and external counts remain available.
 
 ## Native controls and scope
 

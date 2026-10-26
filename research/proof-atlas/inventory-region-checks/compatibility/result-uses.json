@@ -1,0 +1,20 @@
+{
+  "format": "ProofAtlasResultUsesBrowser/1",
+  "status": "PASS",
+  "sourceOverride": false,
+  "nativeEntrySelections": 2,
+  "sourceOnlyEntrySelections": 2,
+  "pageChecks": 2,
+  "keyboardChecks": 1,
+  "axeAudits": 4,
+  "staleRefusals": 1,
+  "corruptionRefusals": 1,
+  "retries": 1,
+  "files": {
+    "public/js/proof-atlas-network-stream-pages.js": "bc90bbe5092146183d42d8e37bc09e7d43d9c4fac169d65eb8f6958bc0bae48f",
+    "public/js/proof-atlas-network-stream-view.js": "a0ac4755b50b834673b4aa56b3c98aa0bd9b83480f3d7619fa9c555a5dca5753",
+    "public/js/proof-atlas-result-path-view.js": "39bdf25ac5f28034afb94c6f2f6753d6d3f6233e68a5d093d60f7859a7a3120b",
+    "public/css/proof-atlas-result-path.css": "be39a8368b63b5b5c59145bddc25c4d203b1ac85eeac1b8a8f0bf7f80ced4d68"
+  },
+  "wholeArchiveAttempts": 0
+}

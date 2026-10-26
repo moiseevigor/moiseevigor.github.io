@@ -1,0 +1,87 @@
+{
+  "format": "ProofAtlasVisualClarityBrowser/1",
+  "status": "PASS",
+  "tasks": [
+    "Original SBracket deep link opens a labeled local cut and statement; absent typing stays unavailable.",
+    "Keyboard child selection and Parent preserve the original lexical route.",
+    "Declaration uses has labeled directions and selecting a local reference opens its declaration.",
+    "A variable link opens its exact lexical binder, independent of shared stored IDs.",
+    "Optional scoped geometry and its exact occurrence list remain available.",
+    "Current 26-module edition uses the same local reader.",
+    "A native Riccati application still opens its checked rule at the same source occurrence.",
+    "Long mobile statements can receive keyboard focus and scroll with arrow keys.",
+    "Article proof-step highlighting survives a child click in the new default reader.",
+    "Manual has five question-based routes and retains all twelve constructor diagrams.",
+    "Bounded occurrence diagram remains separate and renders actual source cards.",
+    "A missing local reader refuses clearly without falling back to a hairball; retry recovers."
+  ],
+  "accessibility": [
+    {
+      "view": "local",
+      "width": 1500,
+      "theme": "light",
+      "violations": 0
+    },
+    {
+      "view": "local",
+      "width": 1500,
+      "theme": "dark",
+      "violations": 0
+    },
+    {
+      "view": "local",
+      "width": 390,
+      "theme": "light",
+      "violations": 0
+    },
+    {
+      "view": "local",
+      "width": 390,
+      "theme": "dark",
+      "violations": 0
+    },
+    {
+      "view": "native-Riccati",
+      "width": 1500,
+      "theme": "light",
+      "violations": 0
+    },
+    {
+      "view": "native-Riccati",
+      "width": 1500,
+      "theme": "dark",
+      "violations": 0
+    },
+    {
+      "view": "native-Riccati",
+      "width": 390,
+      "theme": "light",
+      "violations": 0
+    },
+    {
+      "view": "native-Riccati",
+      "width": 390,
+      "theme": "dark",
+      "violations": 0
+    }
+  ],
+  "screenshots": [
+    "/private/tmp/atlas-inventory-compat-visual-clarity/local-1500-light.png",
+    "/private/tmp/atlas-inventory-compat-visual-clarity/local-1500-dark.png",
+    "/private/tmp/atlas-inventory-compat-visual-clarity/local-390-light.png",
+    "/private/tmp/atlas-inventory-compat-visual-clarity/local-390-dark.png",
+    "/private/tmp/atlas-inventory-compat-visual-clarity/declaration-uses.png",
+    "/private/tmp/atlas-inventory-compat-visual-clarity/scoped-geometry.png",
+    "/private/tmp/atlas-inventory-compat-visual-clarity/riccati-application.png",
+    "/private/tmp/atlas-inventory-compat-visual-clarity/synchronized-article.png",
+    "/private/tmp/atlas-inventory-compat-visual-clarity/view-guide.png",
+    "/private/tmp/atlas-inventory-compat-visual-clarity/occurrence-reader.png"
+  ],
+  "scope": "Reading interactions and presentation checks, not a measured human comprehension result.",
+  "files": {
+    "public/js/proof-atlas-local-reader.js": "f4290858553338a6df4ece8b199f87c0ff1daec51c49b9ce5354aa7ceea1756c",
+    "public/js/proof-atlas-library.js": "f0d9bd80aa3409ad5cb18e3773d520a962e82e1a507e8424e8155f0b2ccc4107",
+    "public/js/proof-atlas-sync.js": "d775ea71b1981568de16e34205cc42ff1c6de6593e50c818c3771298f96f04af",
+    "public/css/proof-atlas-library.css": "3ec3f9022b70e087a2ce80c680a89080be2f10c72643847cf6ea8790040a8424"
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "format": "ProofAtlasInventoryRegionsEvidence/1",
+  "status": "LOCAL_NATIVE_MODEL_AND_PRODUCTION_BROWSER_PASS_NOT_PUBLISHED",
+  "baselineCommit": "45a63c2953c3366afd9399a0a49783887b3d0e1e",
+  "branch": "research/riccati-proof-interfaces",
+  "files": {
+    "docs/proof-atlas-research-program.md": "a39bb9bc721877935700d237df9b1fabda52917cfeb23110b4294f869f234b40",
+    "public/data/proof-atlas/inventory-graph-manifest.js": "cd6ba1da55612d78a77796b2ede6ea459f6bb829dbf5f19e3b009b9603dbf08a",
+    "public/data/proof-atlas/inventory-region-controls-manifest.js": "120cdbf5b025b4bfbac1b89122442047fafea1e0df57ff5c7527a7cf2532e95a",
+    "public/js/proof-atlas-application-region-view.js": "e943efd421891a3e473bebf5ba4c036db9664134dff020e98561c33a172bf30f",
+    "public/js/proof-atlas-inventory-region-check.js": "63eda69ebfa20ed7eb83ce1d8732d2ea01b93717aeb48a7264058fe03f51ec27",
+    "public/js/proof-atlas-network-stream-view.js": "a0ac4755b50b834673b4aa56b3c98aa0bd9b83480f3d7619fa9c555a5dca5753",
+    "research/proof-atlas/application-regions/README.md": "2f74a6eaff2b36c4112df7d14b570920e821d3b0879f8394409f6d228d353799",
+    "research/proof-atlas/inventory-region-checks/Controls.lean": "0bb077e50c7579ea257bda26a130ca42988a6519a14d82c3cb6a31766130b2c7",
+    "research/proof-atlas/inventory-region-checks/build-graph.cjs": "4697675755015c788dc76c21a184af3064bd10c61ce59072fd3f9e208319472c",
+    "research/proof-atlas/inventory-region-checks/prepare-controls.cjs": "3224c2e84e5e9e3d52e3857cf0a5212887d4ac2b390dfa2dedab144b864c444b",
+    "research/proof-atlas/inventory-region-checks/publish-controls.cjs": "84720c5c95e5f5a2f5fec27042517c735a78f3b9e4012edabd3d3792778f1ca1",
+    "research/proof-atlas/inventory-region-checks/verify-controls.py": "4f20d764a4cf7a9b9a02012bb260e8249d4929a7bd5ade336833c1b3e05847c8",
+    "research/proof-atlas/network-streaming/index.html": "82faaa04d182c7a5d2ee94c64d5c9e626b32a77f4b25586003922aa2eee1927a",
+    "research/proof-atlas/visual-clarity-review/README.md": "16400610b8416aa66d5dcb6e52d2bf85778b8c87e6345680f37fe7b9efad2fff",
+    "scripts/test-proof-atlas-application-regions-browser.cjs": "fb7fdaa12b7bdd1809111fa463316233fd4d689f418c586945bebafc25b015f5",
+    "scripts/test-proof-atlas-inventory-regions-browser.cjs": "5cd8ae64dddc83f3717e05371ef74842f9c9d1a8f0edca40c6b8c3cb2f1fbe74",
+    "scripts/test-proof-atlas-inventory-regions.cjs": "48aeeb5036632a753ab84546728b028f2f2c0efde58af391bcd650b9b710117c"
+  },
+  "checks": {
+    "research/proof-atlas/inventory-region-checks/native-verification.json": {
+      "sha256": "cd91d63bac038bef1a2057673d522ed6a435c46c4d7d16eda14fbb6d98a488be",
+      "status": "PASS"
+    },
+    "research/proof-atlas/inventory-region-checks/controls-derivation.json": {
+      "sha256": "24099d874b753b481357985eb8fe4ac3749d91537639e69481716ed0d90d9b2e",
+      "status": "PASS"
+    },
+    "research/proof-atlas/inventory-region-checks/graph-derivation.json": {
+      "sha256": "e6aef68a8c430f21d681478eb0641f7acd0d90f299669698de303606c5c5defc",
+      "status": "PASS"
+    },
+    "research/proof-atlas/inventory-region-checks/model-check.json": {
+      "sha256": "ccaf52943c63e84847eb399edef6d20a176ed7c4e4ff9032ba895b03d10a8df2",
+      "status": "PASS"
+    },
+    "research/proof-atlas/inventory-region-checks/browser-check.json": {
+      "sha256": "2c2a568c872d9fc745cd14655dd77ac73c57d68680505d4ff496943be51d62e6",
+      "status": "PASS"
+    },
+    "research/proof-atlas/inventory-region-checks/asset-check.json": {
+      "sha256": "b9f1459f7a6f9a6cd14bf149700cda36aa0111880ffa323fb4557744e964120f",
+      "status": "PASS"
+    },
+    "research/proof-atlas/inventory-region-checks/compatibility/result-uses.json": {
+      "sha256": "c3e72e63356e8c045ba15b663cf259f5b7f7e00a1db2788e98e57d3a1f8bcde3",
+      "status": "PASS"
+    },
+    "research/proof-atlas/inventory-region-checks/compatibility/manual.json": {
+      "sha256": "b240f0fe9cd0d5e8dfb3bde0d19bc8874a60bcf07a95befc7659186798dfecaa",
+      "status": "PASS"
+    },
+    "research/proof-atlas/inventory-region-checks/compatibility/visual-clarity.json": {
+      "sha256": "d12eb481c9bf5d3aed17956d9ad9c95c9f21563d72eaf9dbbbfce227dda7f221",
+      "status": "PASS"
+    },
+    "research/proof-atlas/inventory-region-checks/compatibility/network-streaming.json": {
+      "sha256": "1e9c8ff02b1d7c8eb3b6ae8fc3de2027775e1e68402dfbd6399dec777171b9dd",
+      "status": "PASS"
+    },
+    "research/proof-atlas/inventory-region-checks/compatibility/regions.json": {
+      "sha256": "97fd9a356fd37639913037e0eb9e5f3f335666e6599256e24c6da659808ee7d1",
+      "status": "PASS"
+    },
+    "research/proof-atlas/inventory-region-checks/compatibility/result-path.json": {
+      "sha256": "d98df9c19c59f6b53ad3453fb351758149825c539d497d365caeb60188e99cae",
+      "status": "PASS"
+    },
+    "research/proof-atlas/inventory-region-checks/compatibility.json": {
+      "status": "PASS",
+      "sha256": "a4eec78f549a4c65d3d4d5ae6d34ab55bf28821fea52a6c4dc8c99ce24834adb"
+    }
+  },
+  "priorInventoriesUnchanged": {
+    "public/data/proof-atlas/application-ports-manifest.js": "dbece0e885bd25a31d93c9871f8c0124aee18e64acfb5bf1956c407f65dbc50d",
+    "public/data/proof-atlas/application-network-manifest.js": "4a826bff4fac9649aeb2e1fb95c569e4072de8a692093ae398ff2ef049ec7060",
+    "public/data/proof-atlas/network-streaming-manifest.js": "5768d4f66ce01a092b5e126512998264502bd92b7c15caae8c79a60702e3087b",
+    "public/data/proof-atlas/application-region-controls-manifest.js": "8d1c8742f466b0adc810124b6cc8da0ee785904e36b51d7b066f0f6a4dff261b"
+  },
+  "productionBuild": {
+    "command": "docker compose run --rm --no-deps --pull never build",
+    "exit": 0,
+    "generationSeconds": 261.587,
+    "sourceOverride": false,
+    "runtimeFilesComparedToBuiltAndServedBytes": true
+  },
+  "inAppReview": {
+    "profile": "JacobiData.slope_bound_abs",
+    "members": [
+      25,
+      26,
+      27,
+      75,
+      76,
+      77,
+      78
+    ],
+    "callsChecked": 87,
+    "usesChecked": 68,
+    "allSevenMiniatureCallButtonsVisible": true,
+    "screenshot": "/private/tmp/atlas-inventory-region-final-r2/in-app-riccati.png"
+  },
+  "publication": {
+    "deployed": false,
+    "pushed": false,
+    "pullRequestCreated": false,
+    "blogChanged": false,
+    "privateResearchProofScriptsAdded": false,
+    "rawExecutionLogsAdded": false,
+    "newSource": "Only authored synthetic controls and their tooling; private proof data remain compiled observations"
+  },
+  "scope": "Complete finite inventoried source-use graph check, separate from local reversible codec and original per-call native typing. Not a portable Lean certificate, closed typed interface, complete-use claim beyond the index or measured comprehension result.",
+  "postBuildStaticEvidence": {
+    "reason": "Jekyll excludes plain JSON by basename. Compressed review reports are static downloadable evidence. Only these reports and the technical README were copied after verification; application HTML, JavaScript, CSS and graph data are the tested build.",
+    "compression": "gzip, deterministic mtime 0",
+    "files": [
+      "native-verification.json",
+      "controls-derivation.json",
+      "graph-derivation.json",
+      "model-check.json",
+      "browser-check.json",
+      "asset-check.json",
+      "compatibility.json",
+      "evidence.json"
+    ],
+    "baseDataAssetCheck": "553 compiled source, native and graph assets; compressed technical reports are separate"
+  }
+}

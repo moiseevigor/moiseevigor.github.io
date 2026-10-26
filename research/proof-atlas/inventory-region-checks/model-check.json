@@ -1,0 +1,234 @@
+{
+  "format": "ProofAtlasInventoryRegionChecks/1",
+  "status": "PASS",
+  "profiles": 38,
+  "nativeProfiles": 37,
+  "originalCallsCompared": 201533,
+  "originalUsesCompared": 201323,
+  "originalPortsCompared": 700312,
+  "queries": 42,
+  "partitions": 1029,
+  "passes": 667,
+  "refusals": 362,
+  "firstHitComparisons": 42,
+  "negativeControls": 16,
+  "witnessPages": 2,
+  "witnessEdges": 13,
+  "riccati": {
+    "calls": 87,
+    "uses": 68,
+    "members": [
+      25,
+      26,
+      27,
+      75,
+      76,
+      77,
+      78
+    ],
+    "boundary": {
+      "calls": 7,
+      "actualPorts": 41,
+      "inputs": 35,
+      "internalUses": 6,
+      "resultPortals": 7,
+      "locallyTerminalResults": 1,
+      "outsideInventoriedUses": 0,
+      "inputKinds": {
+        "function": 7,
+        "proof": 5,
+        "type": 12,
+        "value": 11,
+        "unobserved": 0
+      }
+    },
+    "checkSha256": "baaca12a7d5b83624d83123320add2b74508b4788777b80e61101d71a6e39259",
+    "graphSha256": "8f5567db615b0c6aaf7707b17a6e0e571c20e13792b6ff2cb369d6c1f35d6b4b"
+  },
+  "large": {
+    "calls": 201340,
+    "uses": 201190,
+    "ports": 699453,
+    "queryCalls": 3,
+    "bounds": {
+      "scratchBytes": 2038549,
+      "scratchByteLimit": 67108864,
+      "retainedScratchBytes": 402680,
+      "graphLeafRows": 512,
+      "graphLeafBytes": 2097152,
+      "graphBranchRecords": 2,
+      "witnessPageRows": 8
+    },
+    "state": {
+      "disposed": false,
+      "loads": 828,
+      "leafRows": 124,
+      "branchRecords": 2,
+      "leafLimit": 512,
+      "branchLimit": 2,
+      "peakRows": 512,
+      "peakBranches": 2,
+      "peakScratchBytes": 2038549,
+      "wholeOriginalTopologyRequested": false,
+      "wholeSourceArchiveRequested": false,
+      "wholeNativeRecordRequested": false
+    }
+  },
+  "simultaneousCounterexample": {
+    "source": {
+      "edition": "inventory-region-controls",
+      "name": "AtlasInventoryRegionControls.crossedGroups",
+      "indexSha256": "9fe6dc4254161095833dbef7209282506f861de003d6ff8b47a1a98aff7b3576",
+      "sourceSha256": "0bb077e50c7579ea257bda26a130ca42988a6519a14d82c3cb6a31766130b2c7"
+    },
+    "separate": [
+      "PASS",
+      "PASS"
+    ],
+    "simultaneous": "FAIL",
+    "partition": [
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        4
+      ]
+    ],
+    "cycle": [
+      {
+        "id": "direct:0",
+        "kind": "direct",
+        "from": 0,
+        "to": 2,
+        "slot": 1,
+        "ordinal": 0
+      },
+      {
+        "id": "direct:3",
+        "kind": "direct",
+        "from": 1,
+        "to": 3,
+        "slot": 2,
+        "ordinal": 3
+      }
+    ]
+  },
+  "hiddenReturn": {
+    "original": {
+      "edition": "inventory-region-controls",
+      "name": "AtlasInventoryRegionControls.longReturn",
+      "indexSha256": "6d98cfc68e6a088660afafa26efb0c5e3de336cca94721e7c5571f05864822e5",
+      "sourceSha256": "0bb077e50c7579ea257bda26a130ca42988a6519a14d82c3cb6a31766130b2c7"
+    },
+    "partition": [
+      [
+        0,
+        13
+      ]
+    ],
+    "cycle": [
+      {
+        "id": "hidden:0:13",
+        "kind": "hidden-path",
+        "from": 0,
+        "to": 13,
+        "lastEdge": {
+          "from": 12,
+          "to": 13,
+          "slot": 2,
+          "ordinal": 13
+        }
+      }
+    ],
+    "pathPages": [
+      8,
+      5
+    ],
+    "edges": [
+      {
+        "from": 12,
+        "to": 13,
+        "slot": 2,
+        "ordinal": 13
+      },
+      {
+        "from": 11,
+        "to": 12,
+        "slot": 1,
+        "ordinal": 12
+      },
+      {
+        "from": 10,
+        "to": 11,
+        "slot": 1,
+        "ordinal": 11
+      },
+      {
+        "from": 9,
+        "to": 10,
+        "slot": 1,
+        "ordinal": 10
+      },
+      {
+        "from": 8,
+        "to": 9,
+        "slot": 1,
+        "ordinal": 9
+      },
+      {
+        "from": 7,
+        "to": 8,
+        "slot": 1,
+        "ordinal": 8
+      },
+      {
+        "from": 6,
+        "to": 7,
+        "slot": 1,
+        "ordinal": 7
+      },
+      {
+        "from": 5,
+        "to": 6,
+        "slot": 1,
+        "ordinal": 6
+      },
+      {
+        "from": 4,
+        "to": 5,
+        "slot": 1,
+        "ordinal": 5
+      },
+      {
+        "from": 3,
+        "to": 4,
+        "slot": 1,
+        "ordinal": 4
+      },
+      {
+        "from": 2,
+        "to": 3,
+        "slot": 1,
+        "ordinal": 3
+      },
+      {
+        "from": 1,
+        "to": 2,
+        "slot": 1,
+        "ordinal": 2
+      },
+      {
+        "from": 0,
+        "to": 1,
+        "slot": 1,
+        "ordinal": 0
+      }
+    ]
+  },
+  "scope": "All compact vertices and original ordered uses independently compared; forward BFS and full-graph contraction oracle. Complete source-only graph resident in this offline checker, unlike the bounded runtime scan. Finite graph check, not Lean metatheory or semantic necessity."
+}

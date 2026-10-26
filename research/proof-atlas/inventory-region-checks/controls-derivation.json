@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "profiles": 2,
+  "calls": 19,
+  "ports": 44,
+  "uses": 20,
+  "bindingUses": 18,
+  "producerSha256": "84720c5c95e5f5a2f5fec27042517c735a78f3b9e4012edabd3d3792778f1ca1",
+  "nativeEvidenceSha256": "cd91d63bac038bef1a2057673d522ed6a435c46c4d7d16eda14fbb6d98a488be",
+  "priorInventoriesUnchanged": [
+    "public/data/proof-atlas/application-ports-manifest.js",
+    "public/data/proof-atlas/application-network-manifest.js",
+    "public/data/proof-atlas/network-streaming-manifest.js"
+  ],
+  "manifestSha256": "120cdbf5b025b4bfbac1b89122442047fafea1e0df57ff5c7527a7cf2532e95a"
+}
