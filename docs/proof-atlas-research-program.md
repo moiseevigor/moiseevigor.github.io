@@ -62,6 +62,8 @@ A branch now exposes a bounded page of all inventoried input uses of its last re
 
 A [reversible application region](/projects/proof-atlas/manual/paged-network/#ns-lab) can contain branches and joins while preserving every input position and result portal. Connectedness alone is insufficient: fresh native controls demonstrate a fold whose quotient becomes cyclic. The reversible local codec satisfies finite merge/split checks. Before displaying a region, a separate bounded scan now checks the entire pinned source-use inventory, including hidden paths and simultaneous groups. Acyclicity remains relative to that finite inventory; it creates no closed typed module. [Local rule](/research/proof-atlas/application-regions/README.md) · [Inventory-wide rule, counterexamples and checks](/research/proof-atlas/inventory-region-checks/README.md).
 
+A proof-input projection now separates recorded proof-valued arguments from function heads, types and values while retaining every original boundary position. Source bundles use exact original binder/producer identity; fresh controls distinguish one binder used in two contexts from two shadowed binders with equal proposition text. The Riccati region exposes five recorded propositions and keeps its other thirty inputs available. This is a multi-context source projection, not a minimal assumption list or common-context sequent. [Rule and checks](/research/proof-atlas/premise-sources/README.md).
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?

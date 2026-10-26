@@ -1,0 +1,213 @@
+{
+  "status": "PASS",
+  "assets": 34,
+  "compressedBytes": 24276,
+  "decodedBytes": 99200,
+  "matchesProductionBuild": true,
+  "files": [
+    {
+      "file": "public/data/proof-atlas/application-ports/021813c109cb37669767a7e349c89657377aca43bd6174d9f6683b1f071e686e.json.gz",
+      "sha256": "021813c109cb37669767a7e349c89657377aca43bd6174d9f6683b1f071e686e",
+      "compressedBytes": 574,
+      "decodedBytes": 2434
+    },
+    {
+      "file": "public/data/proof-atlas/application-ports/3bdbaddc45182ae68486eb4f0bc3f137958597ad6e58ed911023694bf8df930a.json.gz",
+      "sha256": "3bdbaddc45182ae68486eb4f0bc3f137958597ad6e58ed911023694bf8df930a",
+      "compressedBytes": 538,
+      "decodedBytes": 2128
+    },
+    {
+      "file": "public/data/proof-atlas/application-ports/55404239e5ca3d0c64b794d9f125e1d4e0eb41d24749065b605680b8e195a99f.json.gz",
+      "sha256": "55404239e5ca3d0c64b794d9f125e1d4e0eb41d24749065b605680b8e195a99f",
+      "compressedBytes": 1679,
+      "decodedBytes": 16725
+    },
+    {
+      "file": "public/data/proof-atlas/application-ports/55404239e5ca3d0c64b794d9f125e1d4e0eb41d24749065b605680b8e195a99f/08a3ad347c5a2bc07e3010034c8682342779d2d98721b71643e155e542ac2b99.json.gz",
+      "sha256": "08a3ad347c5a2bc07e3010034c8682342779d2d98721b71643e155e542ac2b99",
+      "compressedBytes": 888,
+      "decodedBytes": 3083
+    },
+    {
+      "file": "public/data/proof-atlas/application-ports/55404239e5ca3d0c64b794d9f125e1d4e0eb41d24749065b605680b8e195a99f/3821d13baaeb05be3915f2d9c4f67c5d20678aa54ca5d274e9c0a07ecf3d9137.json.gz",
+      "sha256": "3821d13baaeb05be3915f2d9c4f67c5d20678aa54ca5d274e9c0a07ecf3d9137",
+      "compressedBytes": 924,
+      "decodedBytes": 3589
+    },
+    {
+      "file": "public/data/proof-atlas/application-ports/55404239e5ca3d0c64b794d9f125e1d4e0eb41d24749065b605680b8e195a99f/476b3d6f4226a3ffe0210287a1e3895201590488d43cfdc0a654b6f101c7991e.json.gz",
+      "sha256": "476b3d6f4226a3ffe0210287a1e3895201590488d43cfdc0a654b6f101c7991e",
+      "compressedBytes": 490,
+      "decodedBytes": 936
+    },
+    {
+      "file": "public/data/proof-atlas/application-ports/55404239e5ca3d0c64b794d9f125e1d4e0eb41d24749065b605680b8e195a99f/4ce0da9cc07642eeb1a4224520c9d83aca23b3883760bb58fe515ad1217314b0.json.gz",
+      "sha256": "4ce0da9cc07642eeb1a4224520c9d83aca23b3883760bb58fe515ad1217314b0",
+      "compressedBytes": 933,
+      "decodedBytes": 3712
+    },
+    {
+      "file": "public/data/proof-atlas/application-ports/55404239e5ca3d0c64b794d9f125e1d4e0eb41d24749065b605680b8e195a99f/bc59892bb37bef19915114f87945f2fa41671f63b64e9e477a2a03f318e1ce27.json.gz",
+      "sha256": "bc59892bb37bef19915114f87945f2fa41671f63b64e9e477a2a03f318e1ce27",
+      "compressedBytes": 981,
+      "decodedBytes": 3546
+    },
+    {
+      "file": "public/data/proof-atlas/application-ports/55404239e5ca3d0c64b794d9f125e1d4e0eb41d24749065b605680b8e195a99f/c8615f3f624efc8df4a567921df1e7859018beda232eebec49c6c681672d3871.json.gz",
+      "sha256": "c8615f3f624efc8df4a567921df1e7859018beda232eebec49c6c681672d3871",
+      "compressedBytes": 877,
+      "decodedBytes": 3066
+    },
+    {
+      "file": "public/data/proof-atlas/application-ports/55404239e5ca3d0c64b794d9f125e1d4e0eb41d24749065b605680b8e195a99f/cd6b1746239a6712fb0d88365a2e1ae60720fd783e694ae9622672109efb62c8.json.gz",
+      "sha256": "cd6b1746239a6712fb0d88365a2e1ae60720fd783e694ae9622672109efb62c8",
+      "compressedBytes": 887,
+      "decodedBytes": 3021
+    },
+    {
+      "file": "public/data/proof-atlas/application-ports/798b1445451e5ee111c5338aa95e0e360f716ee017a781892b62b575becff686.json.gz",
+      "sha256": "798b1445451e5ee111c5338aa95e0e360f716ee017a781892b62b575becff686",
+      "compressedBytes": 1641,
+      "decodedBytes": 16053
+    },
+    {
+      "file": "public/data/proof-atlas/application-ports/798b1445451e5ee111c5338aa95e0e360f716ee017a781892b62b575becff686/65a029131c04f8a5b1dfdc27f026df4049b643e3848660201084f5c815965cc0.json.gz",
+      "sha256": "65a029131c04f8a5b1dfdc27f026df4049b643e3848660201084f5c815965cc0",
+      "compressedBytes": 491,
+      "decodedBytes": 937
+    },
+    {
+      "file": "public/data/proof-atlas/application-ports/798b1445451e5ee111c5338aa95e0e360f716ee017a781892b62b575becff686/6cb158235efff1c46d4f995b8d9895d747d921a00ee63383f40de35deb77f7ee.json.gz",
+      "sha256": "6cb158235efff1c46d4f995b8d9895d747d921a00ee63383f40de35deb77f7ee",
+      "compressedBytes": 909,
+      "decodedBytes": 3323
+    },
+    {
+      "file": "public/data/proof-atlas/application-ports/798b1445451e5ee111c5338aa95e0e360f716ee017a781892b62b575becff686/a81b22a7afd667cb16b87cf277b64ae8fe81c61e99de16243060a9a0ac8c8810.json.gz",
+      "sha256": "a81b22a7afd667cb16b87cf277b64ae8fe81c61e99de16243060a9a0ac8c8810",
+      "compressedBytes": 886,
+      "decodedBytes": 3021
+    },
+    {
+      "file": "public/data/proof-atlas/application-ports/798b1445451e5ee111c5338aa95e0e360f716ee017a781892b62b575becff686/b9a4e85a487fdd737a7731ee2506515ca29610703f4727cb589ee14b29b5b7da.json.gz",
+      "sha256": "b9a4e85a487fdd737a7731ee2506515ca29610703f4727cb589ee14b29b5b7da",
+      "compressedBytes": 867,
+      "decodedBytes": 3059
+    },
+    {
+      "file": "public/data/proof-atlas/application-ports/798b1445451e5ee111c5338aa95e0e360f716ee017a781892b62b575becff686/ea3bbb775d797355f84c01bb61111ba4b4f2e294569141897b197ad0f475d665.json.gz",
+      "sha256": "ea3bbb775d797355f84c01bb61111ba4b4f2e294569141897b197ad0f475d665",
+      "compressedBytes": 887,
+      "decodedBytes": 3083
+    },
+    {
+      "file": "public/data/proof-atlas/application-ports/798b1445451e5ee111c5338aa95e0e360f716ee017a781892b62b575becff686/eb55b66c660e5af723fb68d2e2d1454bed2435fa8aaf87cff2f978296594e052.json.gz",
+      "sha256": "eb55b66c660e5af723fb68d2e2d1454bed2435fa8aaf87cff2f978296594e052",
+      "compressedBytes": 919,
+      "decodedBytes": 3460
+    },
+    {
+      "file": "public/data/proof-atlas/application-ports/798b1445451e5ee111c5338aa95e0e360f716ee017a781892b62b575becff686/f34f6924c6b0c67a9058a78fc9e3f640f01d40707aab8e39a33d5ca656ee05c3.json.gz",
+      "sha256": "f34f6924c6b0c67a9058a78fc9e3f640f01d40707aab8e39a33d5ca656ee05c3",
+      "compressedBytes": 952,
+      "decodedBytes": 3391
+    },
+    {
+      "file": "public/data/proof-atlas/inventory-graph/20b5ba8419b273e19c2554e9315de7da569131801632f863fb8c8149b1d316b1.json.gz",
+      "sha256": "20b5ba8419b273e19c2554e9315de7da569131801632f863fb8c8149b1d316b1",
+      "compressedBytes": 725,
+      "decodedBytes": 1345
+    },
+    {
+      "file": "public/data/proof-atlas/inventory-graph/339d8d03ad22904ad21b77e9e7d11f7c357bc501852ff506ccb8aec5860386f6.json.gz",
+      "sha256": "339d8d03ad22904ad21b77e9e7d11f7c357bc501852ff506ccb8aec5860386f6",
+      "compressedBytes": 173,
+      "decodedBytes": 190
+    },
+    {
+      "file": "public/data/proof-atlas/inventory-graph/3c3f9bfdc8959c5f7c219d721696ea1840965a3f3d1c781562d9d0ec83c7ebe9.json.gz",
+      "sha256": "3c3f9bfdc8959c5f7c219d721696ea1840965a3f3d1c781562d9d0ec83c7ebe9",
+      "compressedBytes": 723,
+      "decodedBytes": 1346
+    },
+    {
+      "file": "public/data/proof-atlas/inventory-graph/96e35b47ee4f7b6e0bfc51c464017ef9befd477d1c5941f4d25678e14e49d5fc.json.gz",
+      "sha256": "96e35b47ee4f7b6e0bfc51c464017ef9befd477d1c5941f4d25678e14e49d5fc",
+      "compressedBytes": 171,
+      "decodedBytes": 190
+    },
+    {
+      "file": "public/data/proof-atlas/network-streaming/579f3287ef0deacbbfeb45fa506ce462b08ad7cfc2bb3e6d453920c836209947.json.gz",
+      "sha256": "579f3287ef0deacbbfeb45fa506ce462b08ad7cfc2bb3e6d453920c836209947",
+      "compressedBytes": 634,
+      "decodedBytes": 1286
+    },
+    {
+      "file": "public/data/proof-atlas/network-streaming/779b631406de8698bd332304b6557c0e48d605361e4fb70a417b5bc1d32e2728.json.gz",
+      "sha256": "779b631406de8698bd332304b6557c0e48d605361e4fb70a417b5bc1d32e2728",
+      "compressedBytes": 777,
+      "decodedBytes": 2557
+    },
+    {
+      "file": "public/data/proof-atlas/network-streaming/825ed0995cdc769bde90cc4c9898bc63ef298af50889b7bc2812d286de698cb6.json.gz",
+      "sha256": "825ed0995cdc769bde90cc4c9898bc63ef298af50889b7bc2812d286de698cb6",
+      "compressedBytes": 634,
+      "decodedBytes": 1287
+    },
+    {
+      "file": "public/data/proof-atlas/network-streaming/bc30d84eceac1728f227e3389067b13f178ac52a6a25dac2355d59affe124897.json.gz",
+      "sha256": "bc30d84eceac1728f227e3389067b13f178ac52a6a25dac2355d59affe124897",
+      "compressedBytes": 261,
+      "decodedBytes": 391
+    },
+    {
+      "file": "public/data/proof-atlas/network-streaming/c310a50ff6593fa8014372ee6ad2029fdde467dd61f7d71efafab0cb46839670.json.gz",
+      "sha256": "c310a50ff6593fa8014372ee6ad2029fdde467dd61f7d71efafab0cb46839670",
+      "compressedBytes": 261,
+      "decodedBytes": 389
+    },
+    {
+      "file": "public/data/proof-atlas/network-streaming/dc5f99f8341cd845503b03effa86dfb4ab0951875a99e603dfda44ea66e300cb.json.gz",
+      "sha256": "dc5f99f8341cd845503b03effa86dfb4ab0951875a99e603dfda44ea66e300cb",
+      "compressedBytes": 656,
+      "decodedBytes": 3218
+    },
+    {
+      "file": "public/data/proof-atlas/network-streaming/e5788469b4ed6a44167f69cb7e6435f445c7e03c7ff21b937604329c729ed096.json.gz",
+      "sha256": "e5788469b4ed6a44167f69cb7e6435f445c7e03c7ff21b937604329c729ed096",
+      "compressedBytes": 662,
+      "decodedBytes": 3246
+    },
+    {
+      "file": "public/data/proof-atlas/network-streaming/f3463744885e0cc4824c4114fdaa08be744ef1eba17464a6baf3ea34dc516c46.json.gz",
+      "sha256": "f3463744885e0cc4824c4114fdaa08be744ef1eba17464a6baf3ea34dc516c46",
+      "compressedBytes": 780,
+      "decodedBytes": 2562
+    },
+    {
+      "file": "public/data/proof-atlas/source-pages/021813c109cb37669767a7e349c89657377aca43bd6174d9f6683b1f071e686e/4410f68465136ea07a9894facfb3c5e9de9aa36a7e927871a1299b94a4f92f35.json.gz",
+      "sha256": "4410f68465136ea07a9894facfb3c5e9de9aa36a7e927871a1299b94a4f92f35",
+      "compressedBytes": 138,
+      "decodedBytes": 136
+    },
+    {
+      "file": "public/data/proof-atlas/source-pages/021813c109cb37669767a7e349c89657377aca43bd6174d9f6683b1f071e686e/manifest-d5e776555ef171699ce4d4bee716163aa567db014b73b5d012672edf4e060528.json.gz",
+      "sha256": "d5e776555ef171699ce4d4bee716163aa567db014b73b5d012672edf4e060528",
+      "compressedBytes": 610,
+      "decodedBytes": 1176
+    },
+    {
+      "file": "public/data/proof-atlas/source-pages/3bdbaddc45182ae68486eb4f0bc3f137958597ad6e58ed911023694bf8df930a/b9131733e33c1705b623ff3ac64bcc2098330b9401cf0750e2261770e3675abc.json.gz",
+      "sha256": "b9131733e33c1705b623ff3ac64bcc2098330b9401cf0750e2261770e3675abc",
+      "compressedBytes": 138,
+      "decodedBytes": 136
+    },
+    {
+      "file": "public/data/proof-atlas/source-pages/3bdbaddc45182ae68486eb4f0bc3f137958597ad6e58ed911023694bf8df930a/manifest-80ea9757277634ca0690a52a1008ee8dec4a14f5d2ba287b9dfb9863b62906d6.json.gz",
+      "sha256": "80ea9757277634ca0690a52a1008ee8dec4a14f5d2ba287b9dfb9863b62906d6",
+      "compressedBytes": 610,
+      "decodedBytes": 1178
+    }
+  ]
+}

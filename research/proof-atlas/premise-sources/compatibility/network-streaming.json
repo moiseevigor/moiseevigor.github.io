@@ -1,0 +1,35 @@
+{
+  "format": "ProofAtlasNetworkStreamingBrowser/1",
+  "status": "PASS",
+  "nativeProfiles": 31,
+  "nativeCalls": 162,
+  "nativeWires": 101,
+  "nativeTypeSelections": 101,
+  "bindingSelections": 7,
+  "largeCalls": 11,
+  "unavailableTypes": 11,
+  "expansions": 1,
+  "consumerPages": 1,
+  "zoomChecks": 3,
+  "panChecks": 2,
+  "axeAudits": 4,
+  "keyboardChecks": 1,
+  "staleRefusals": 1,
+  "hashRefusals": 1,
+  "releases": 1,
+  "wholeArchiveAttempts": 0,
+  "builtFiles": {
+    "public/js/proof-atlas-network-page-store.js": "8653362782be9b69eaba6c4b67962200685ea00d363c71c373db04b22ff5855a",
+    "public/js/proof-atlas-network-streaming.js": "0c871f8ffd713581717f31a07e99606ec46e4db9f5642706596d0744e84482ba",
+    "public/js/proof-atlas-network-stream-pages.js": "bc90bbe5092146183d42d8e37bc09e7d43d9c4fac169d65eb8f6958bc0bae48f",
+    "public/js/proof-atlas-network-port-inspector.js": "04ddbe608d77c623aad81fb4a79da0654e80390b8e7f057ae9a58fb8367b5d98",
+    "public/js/proof-atlas-network-stream-view.js": "5d7a38e2e3ea9ffac17a9968a5b22766633c5e77d89bd85db78d4f199691517d",
+    "public/data/proof-atlas/network-streaming-manifest.js": "5768d4f66ce01a092b5e126512998264502bd92b7c15caae8c79a60702e3087b"
+  },
+  "html": {
+    "source": "research/proof-atlas/network-streaming/index.html",
+    "sourceSha256": "58c71b353e96bc7eee5a7a17a03c7f35f7f2dda55f7df19c2e1a0df8f50617b0",
+    "normalizedSha256": "989d7a2afec9053f83262f0ad3056d6255d06a506ca0821ccf67628fb19d2828"
+  },
+  "checkerSha256": "685c6312221b7ae6d3eaf0f62083658c293fe884a9d8836b8b57fcc6b9ad776f"
+}

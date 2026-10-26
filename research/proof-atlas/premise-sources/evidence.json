@@ -1,0 +1,179 @@
+{
+  "format": "ProofAtlasPremiseSourcesEvidence/1",
+  "status": "LOCAL_NATIVE_MODEL_AND_PRODUCTION_BROWSER_PASS_NOT_PUBLISHED",
+  "baselineCommit": "d2e09e58392164798ea1947d0bdf3a56d01608d2",
+  "branch": "research/riccati-proof-interfaces",
+  "files": {
+    "docs/proof-atlas-research-program.md": "602d503c5fa99c86c3ba49d40b1c6e7e029a83d0b4358127975c11ec6555984a",
+    "public/css/proof-atlas-application-regions.css": "a52a5d257e6f1b8263184ed25745b56ed92b38fc4795f26f4870e53841a7f7e6",
+    "public/data/proof-atlas/premise-source-controls-manifest.js": "7e625f5811104c20e5503625879fbf38ae6aa3751f34ab14a3e7a02fae1a2bea",
+    "public/data/proof-atlas/premise-source-graphs-manifest.js": "dfd5717c6c62fd0043e3fd93a636e7a8319f21b5692d8f7ffab71e623d63bc15",
+    "public/js/proof-atlas-application-region-view.js": "9f92f89323482cebadb6d8061f9f18b74760a7c1e3571364a2336fd2ddeae943",
+    "public/js/proof-atlas-network-stream-view.js": "5d7a38e2e3ea9ffac17a9968a5b22766633c5e77d89bd85db78d4f199691517d",
+    "public/js/proof-atlas-premise-sources.js": "d09cfd875be4a66e67dece929a25c403210178fe4ffcc7a72ed06ac6f59746b1",
+    "research/proof-atlas/network-streaming/index.html": "58c71b353e96bc7eee5a7a17a03c7f35f7f2dda55f7df19c2e1a0df8f50617b0",
+    "research/proof-atlas/premise-sources/Controls.lean": "0db3a1831ef7ebc58e00334e8196ec8d678c50848f3886acab327bd1b46c5c7c",
+    "research/proof-atlas/premise-sources/build-graph.cjs": "d9cdb313b043110c3a631ef7dead14180f7575689ece8fd093eba4beb47302e0",
+    "research/proof-atlas/premise-sources/prepare-controls.cjs": "9710af9e4be145b089a6b3be6e1669b9002e10c0d6d37c7383a674e5be8dbf30",
+    "research/proof-atlas/premise-sources/publish-controls.cjs": "eeab0544a33cef2edfbb83729e8b1e2570af59c25a23e4c0db8543ef879ee3e6",
+    "research/proof-atlas/premise-sources/verify-controls.py": "5098b81a0b9b02e3833346d9fd9c4f00ca958a6a040a5abc21c41965e2064a56",
+    "scripts/test-proof-atlas-application-regions-browser.cjs": "d29610e1fbb0b687c680abb03fe40b3fa25b84f299dc322831ab928880ede446",
+    "scripts/test-proof-atlas-premise-sources-browser.cjs": "2eb4d370e4bedd1f8cb97a1c770484d2e431286f10cce58e2d1d58f94bff39a2",
+    "scripts/test-proof-atlas-premise-sources.cjs": "2ec9d5541236e4b32e8b5957e172a425a5160ca80a61e18d08b367e3b7513ee0"
+  },
+  "checks": {
+    "research/proof-atlas/premise-sources/native-verification.json": {
+      "status": "PASS",
+      "sha256": "6a5ab0da2b6bcdc5e1428ad434af98f8cbda85772d568c5c632df2eb93873364"
+    },
+    "research/proof-atlas/premise-sources/controls-derivation.json": {
+      "status": "PASS",
+      "sha256": "e31cf81de88e05558d0fd918a2d825fba2d16ff1039670138fd87b3123fad215"
+    },
+    "research/proof-atlas/premise-sources/graph-derivation.json": {
+      "status": "PASS",
+      "sha256": "5a55e2343116a5df27034ca4d310a58b6b4194c620e715a4d2a246ce1daebc22"
+    },
+    "research/proof-atlas/premise-sources/model-check.json": {
+      "status": "PASS",
+      "sha256": "eb5da66899af2d3c741933974e710503522a780f06a083b8249408c38bdb1bbc"
+    },
+    "research/proof-atlas/premise-sources/browser-check.json": {
+      "status": "PASS",
+      "sha256": "1cd2c8a757019683ad1be0a8f77065b272e5438ecc18d184d4b13bac986105a1"
+    },
+    "research/proof-atlas/premise-sources/asset-check.json": {
+      "status": "PASS",
+      "sha256": "005cf30a2503b9dbae215b2c52de50f0c8f89a1945b86bfb96b1860c73f1523a"
+    },
+    "research/proof-atlas/premise-sources/compatibility/result-uses.json": {
+      "status": "PASS",
+      "sha256": "5751957568524850e78a80e37bf3753457266cb6c8ce5b0f6be8f701705811ca"
+    },
+    "research/proof-atlas/premise-sources/compatibility/manual.json": {
+      "status": "PASS",
+      "sha256": "b240f0fe9cd0d5e8dfb3bde0d19bc8874a60bcf07a95befc7659186798dfecaa"
+    },
+    "research/proof-atlas/premise-sources/compatibility/inventory-regions.json": {
+      "status": "PASS",
+      "sha256": "36d9844b2bd66643fa64e90212efabc892c9949948aa85265808f0307dffe1c3"
+    },
+    "research/proof-atlas/premise-sources/compatibility/visual-clarity.json": {
+      "status": "PASS",
+      "sha256": "d09e95c067e99c679f498ce1a5f999109e0a7f60d1eaa2e6b5d5bba221a85acd"
+    },
+    "research/proof-atlas/premise-sources/compatibility/network-streaming.json": {
+      "status": "PASS",
+      "sha256": "c76039e0545a1d7b7cd91814ab555c8becc5c410fa4b0d305b0098c2268d68e6"
+    },
+    "research/proof-atlas/premise-sources/compatibility/regions.json": {
+      "status": "PASS",
+      "sha256": "2db09ae87378d4d6336b96299f7e7ae856a40aacbca0bf9d375654652c071341"
+    },
+    "research/proof-atlas/premise-sources/compatibility/result-path.json": {
+      "status": "PASS",
+      "sha256": "3056b904afb0316ac321b83e57fa5acebfa3515af65c33bd593e81f1d0d41985"
+    },
+    "research/proof-atlas/premise-sources/compatibility.json": {
+      "status": "PASS",
+      "sha256": "1beafc3ffad8114e633ca73043e4a4bfc7584d294bdee28325a8a6e7216b4b83"
+    }
+  },
+  "priorInventoriesUnchanged": {
+    "public/data/proof-atlas/application-ports-manifest.js": "dbece0e885bd25a31d93c9871f8c0124aee18e64acfb5bf1956c407f65dbc50d",
+    "public/data/proof-atlas/application-network-manifest.js": "4a826bff4fac9649aeb2e1fb95c569e4072de8a692093ae398ff2ef049ec7060",
+    "public/data/proof-atlas/network-streaming-manifest.js": "5768d4f66ce01a092b5e126512998264502bd92b7c15caae8c79a60702e3087b",
+    "public/data/proof-atlas/application-region-controls-manifest.js": "8d1c8742f466b0adc810124b6cc8da0ee785904e36b51d7b066f0f6a4dff261b",
+    "public/data/proof-atlas/inventory-region-controls-manifest.js": "120cdbf5b025b4bfbac1b89122442047fafea1e0df57ff5c7527a7cf2532e95a",
+    "public/data/proof-atlas/inventory-graph-manifest.js": "cd6ba1da55612d78a77796b2ede6ea459f6bb829dbf5f19e3b009b9603dbf08a"
+  },
+  "productionBuild": {
+    "command": "docker compose run --rm --no-deps --pull never build",
+    "exit": 0,
+    "generationSeconds": 266.039,
+    "sourceOverride": false,
+    "finalRuntimeAssetsComparedWithServedBytes": true,
+    "postBuildLayoutRefinement": {
+      "file": "public/css/proof-atlas-application-regions.css",
+      "reason": "The longer proof-input column pushed the diagram down. Desktop diagram/result alignment now stays at the top while inputs scroll. Mobile retains ordinary stacked flow.",
+      "staticStylesheetCopiedAfterBuild": true,
+      "targetedSuitesRerun": [
+        "premise-sources",
+        "application-regions"
+      ],
+      "persistentDiagramAndResultChecks": 2,
+      "otherCompatibilityFileHashesStillMatch": true
+    }
+  },
+  "inAppReview": {
+    "profile": "JacobiData.slope_bound_abs",
+    "members": [
+      25,
+      26,
+      27,
+      75,
+      76,
+      77,
+      78
+    ],
+    "proofPositions": 5,
+    "otherBoundaryPositions": 30,
+    "selectedInput": "75:3",
+    "inputOccurrenceNode": 1224,
+    "allSevenMiniatureCallsVisible": true,
+    "screenshot": "/private/tmp/atlas-premise-final-layout/in-app-riccati.png"
+  },
+  "nativeCounterexamples": {
+    "contexts": {
+      "producerNodeIds": [
+        13,
+        15
+      ],
+      "sourceBundles": 1,
+      "originalContexts": [
+        6,
+        7
+      ]
+    },
+    "shadows": {
+      "producerNodeIds": [
+        15,
+        15
+      ],
+      "binderNodeIds": [
+        23,
+        21
+      ],
+      "sourceBundles": 2,
+      "originalContexts": [
+        6,
+        8
+      ]
+    },
+    "qualification": "Node IDs are local to each pinned control packet; group identity uses the original lexical route and packet/native owner."
+  },
+  "publication": {
+    "deployed": false,
+    "pushed": false,
+    "pullRequestCreated": false,
+    "blogChanged": false,
+    "privateResearchProofScriptsAdded": false,
+    "rawExecutionLogsAdded": false,
+    "newSource": "Authored synthetic controls and implementation only; private proof data remain compiled observations"
+  },
+  "scope": "Reversible source-bundle projection of proof-valued actual boundary arguments and recorded original propositions. Not a common-context sequent, minimal assumptions, semantic compression or measured human comprehension.",
+  "postBuildStaticEvidence": {
+    "files": [
+      "native-verification.json",
+      "controls-derivation.json",
+      "graph-derivation.json",
+      "model-check.json",
+      "browser-check.json",
+      "asset-check.json",
+      "compatibility.json",
+      "evidence.json"
+    ],
+    "encoding": "gzip, deterministic mtime 0",
+    "reason": "The site excludes plain JSON. Completed compressed review reports and the technical README are copied after verification. Application HTML, JavaScript and data are the production build; the separately recorded stylesheet refinement was served and retested."
+  }
+}

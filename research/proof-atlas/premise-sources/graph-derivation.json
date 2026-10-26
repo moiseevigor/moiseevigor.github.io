@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "producerSha256": "d9cdb313b043110c3a631ef7dead14180f7575689ece8fd093eba4beb47302e0",
+  "manifestSha256": "dfd5717c6c62fd0043e3fd93a636e7a8319f21b5692d8f7ffab71e623d63bc15",
+  "profiles": [
+    {
+      "name": "AtlasPremiseSources.contexts",
+      "mode": "native",
+      "calls": 2,
+      "ports": 5,
+      "uses": 1,
+      "order": "call-id",
+      "graphSha256": "3c3f9bfdc8959c5f7c219d721696ea1840965a3f3d1c781562d9d0ec83c7ebe9",
+      "rootSha256": "96e35b47ee4f7b6e0bfc51c464017ef9befd477d1c5941f4d25678e14e49d5fc"
+    },
+    {
+      "name": "AtlasPremiseSources.shadows",
+      "mode": "native",
+      "calls": 2,
+      "ports": 5,
+      "uses": 1,
+      "order": "call-id",
+      "graphSha256": "20b5ba8419b273e19c2554e9315de7da569131801632f863fb8c8149b1d316b1",
+      "rootSha256": "339d8d03ad22904ad21b77e9e7d11f7c357bc501852ff506ccb8aec5860386f6"
+    }
+  ],
+  "scope": "Every compact edge matches its original call input, reverse ordinal and original producer occurrence/context. Global topological order and count conservation are checked with bounded SQLite/page working sets."
+}

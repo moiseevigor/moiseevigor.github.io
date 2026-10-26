@@ -1,0 +1,713 @@
+{
+  "format": "ProofAtlasPremiseSourcesCheck/1",
+  "status": "PASS",
+  "nativeProfiles": 39,
+  "cuts": 102,
+  "inverseChecks": 102,
+  "proofPositions": 150,
+  "nativeRows": 150,
+  "sourceBundles": 148,
+  "negativeControls": 113,
+  "peakRows": 4,
+  "peakSummaryBytes": 9644,
+  "peakNativeLeases": 1,
+  "riccati": {
+    "counts": {
+      "boundaryPositions": 35,
+      "proofPositions": 5,
+      "proofSources": 5,
+      "otherPositions": 30,
+      "inputKinds": {
+        "function": 7,
+        "proof": 5,
+        "type": 12,
+        "value": 11,
+        "unobserved": 0
+      }
+    },
+    "rows": [
+      {
+        "port": "75:3",
+        "proposition": "0 ≤ |J.T1 p|",
+        "originalContext": 10,
+        "consumerContext": 10,
+        "nativeOwner": "7a995a4a5559be0a3f1778357ac9a9b696cc0bf446e7513f6a3d52822035af35"
+      },
+      {
+        "port": "75:4",
+        "proposition": "0 ≤ |J.T2 p|",
+        "originalContext": 10,
+        "consumerContext": 10,
+        "nativeOwner": "7a995a4a5559be0a3f1778357ac9a9b696cc0bf446e7513f6a3d52822035af35"
+      },
+      {
+        "port": "76:6",
+        "proposition": "|J.T1 p| * |J.T2 p| = (J.d p * |J.s p|) ^ 2 * (J.z p * (1 - J.z p) * J.Dz p)",
+        "originalContext": 9,
+        "consumerContext": 13,
+        "nativeOwner": "7a995a4a5559be0a3f1778357ac9a9b696cc0bf446e7513f6a3d52822035af35"
+      },
+      {
+        "port": "77:6",
+        "proposition": "√((J.d p * |J.s p|) ^ 2 * (J.z p * (1 - J.z p) * J.Dz p)) = √((J.d p * |J.s p|) ^ 2) * √(J.z p * (1 - J.z p) * J.Dz p)",
+        "originalContext": 13,
+        "consumerContext": 13,
+        "nativeOwner": "7a995a4a5559be0a3f1778357ac9a9b696cc0bf446e7513f6a3d52822035af35"
+      },
+      {
+        "port": "78:6",
+        "proposition": "√((J.d p * |J.s p|) ^ 2) = J.d p * |J.s p|",
+        "originalContext": 13,
+        "consumerContext": 13,
+        "nativeOwner": "7a995a4a5559be0a3f1778357ac9a9b696cc0bf446e7513f6a3d52822035af35"
+      }
+    ],
+    "scope": "Proof-valued actual arguments at this region boundary, grouped only by their exact original lexical binder or producer occurrence. Every use keeps its consumer slot and its original contexts. Function heads are separate even when proof-valued. Equal type text, definitional equality and stored node identity alone do not identify sources. No common-context sequent, premise necessity or minimal mathematical interface is inferred."
+  },
+  "contexts": {
+    "source": {
+      "edition": "premise-source-controls",
+      "name": "AtlasPremiseSources.contexts",
+      "indexSha256": "3bdbaddc45182ae68486eb4f0bc3f137958597ad6e58ed911023694bf8df930a",
+      "sourceSha256": "0db3a1831ef7ebc58e00334e8196ec8d678c50848f3886acab327bd1b46c5c7c"
+    },
+    "counts": {
+      "boundaryPositions": 4,
+      "proofPositions": 2,
+      "proofSources": 1,
+      "otherPositions": 2,
+      "inputKinds": {
+        "function": 2,
+        "proof": 2,
+        "type": 0,
+        "value": 0,
+        "unobserved": 0
+      }
+    },
+    "groups": [
+      {
+        "source": {
+          "kind": "original-binder",
+          "address": {
+            "namespace": "source-expression",
+            "name": "AtlasPremiseSources.contexts",
+            "indexSha256": "3bdbaddc45182ae68486eb4f0bc3f137958597ad6e58ed911023694bf8df930a",
+            "sourceSha256": "0db3a1831ef7ebc58e00334e8196ec8d678c50848f3886acab327bd1b46c5c7c",
+            "node": 19,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          },
+          "contextLength": null
+        },
+        "uses": [
+          {
+            "call": 0,
+            "slot": 1,
+            "producerContextLength": 6,
+            "consumerContextLength": 6
+          },
+          {
+            "call": 1,
+            "slot": 1,
+            "producerContextLength": 7,
+            "consumerContextLength": 7
+          }
+        ],
+        "id": "cf8683f15786e1d79de8c5124e6f7508f9cff17d98fba24ed6f909ef24413fe3"
+      }
+    ],
+    "rows": [
+      {
+        "call": 0,
+        "slot": 1,
+        "groupId": "cf8683f15786e1d79de8c5124e6f7508f9cff17d98fba24ed6f909ef24413fe3",
+        "source": {
+          "kind": "original-binder",
+          "address": {
+            "namespace": "source-expression",
+            "name": "AtlasPremiseSources.contexts",
+            "indexSha256": "3bdbaddc45182ae68486eb4f0bc3f137958597ad6e58ed911023694bf8df930a",
+            "sourceSha256": "0db3a1831ef7ebc58e00334e8196ec8d678c50848f3886acab327bd1b46c5c7c",
+            "node": 19,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          },
+          "contextLength": null
+        },
+        "sourceUses": 2,
+        "address": {
+          "namespace": "source-expression",
+          "name": "AtlasPremiseSources.contexts",
+          "indexSha256": "3bdbaddc45182ae68486eb4f0bc3f137958597ad6e58ed911023694bf8df930a",
+          "sourceSha256": "0db3a1831ef7ebc58e00334e8196ec8d678c50848f3886acab327bd1b46c5c7c",
+          "node": 13,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "inputAddress": {
+          "namespace": "source-expression",
+          "name": "AtlasPremiseSources.contexts",
+          "indexSha256": "3bdbaddc45182ae68486eb4f0bc3f137958597ad6e58ed911023694bf8df930a",
+          "sourceSha256": "0db3a1831ef7ebc58e00334e8196ec8d678c50848f3886acab327bd1b46c5c7c",
+          "node": 13,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "typeAddress": {
+          "namespace": "application-ports",
+          "evidenceSha256": "798b1445451e5ee111c5338aa95e0e360f716ee017a781892b62b575becff686",
+          "sourceIndexSha256": "3bdbaddc45182ae68486eb4f0bc3f137958597ad6e58ed911023694bf8df930a",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "input": "0:1",
+          "component": "producerType",
+          "node": 0,
+          "route": {
+            "root": "producerType",
+            "slots": []
+          }
+        },
+        "expectedTypeAddress": {
+          "namespace": "application-ports",
+          "evidenceSha256": "798b1445451e5ee111c5338aa95e0e360f716ee017a781892b62b575becff686",
+          "sourceIndexSha256": "3bdbaddc45182ae68486eb4f0bc3f137958597ad6e58ed911023694bf8df930a",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "input": "0:1",
+          "component": "inputType",
+          "node": 0,
+          "route": {
+            "root": "inputType",
+            "slots": []
+          }
+        },
+        "typeText": "P",
+        "producerContextLength": 6,
+        "consumerContextLength": 6,
+        "nativeOwner": "798b1445451e5ee111c5338aa95e0e360f716ee017a781892b62b575becff686",
+        "definitionHops": []
+      },
+      {
+        "call": 1,
+        "slot": 1,
+        "groupId": "cf8683f15786e1d79de8c5124e6f7508f9cff17d98fba24ed6f909ef24413fe3",
+        "source": {
+          "kind": "original-binder",
+          "address": {
+            "namespace": "source-expression",
+            "name": "AtlasPremiseSources.contexts",
+            "indexSha256": "3bdbaddc45182ae68486eb4f0bc3f137958597ad6e58ed911023694bf8df930a",
+            "sourceSha256": "0db3a1831ef7ebc58e00334e8196ec8d678c50848f3886acab327bd1b46c5c7c",
+            "node": 19,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          },
+          "contextLength": null
+        },
+        "sourceUses": 2,
+        "address": {
+          "namespace": "source-expression",
+          "name": "AtlasPremiseSources.contexts",
+          "indexSha256": "3bdbaddc45182ae68486eb4f0bc3f137958597ad6e58ed911023694bf8df930a",
+          "sourceSha256": "0db3a1831ef7ebc58e00334e8196ec8d678c50848f3886acab327bd1b46c5c7c",
+          "node": 15,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              0,
+              1
+            ]
+          }
+        },
+        "inputAddress": {
+          "namespace": "source-expression",
+          "name": "AtlasPremiseSources.contexts",
+          "indexSha256": "3bdbaddc45182ae68486eb4f0bc3f137958597ad6e58ed911023694bf8df930a",
+          "sourceSha256": "0db3a1831ef7ebc58e00334e8196ec8d678c50848f3886acab327bd1b46c5c7c",
+          "node": 15,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              0,
+              1
+            ]
+          }
+        },
+        "typeAddress": {
+          "namespace": "application-ports",
+          "evidenceSha256": "798b1445451e5ee111c5338aa95e0e360f716ee017a781892b62b575becff686",
+          "sourceIndexSha256": "3bdbaddc45182ae68486eb4f0bc3f137958597ad6e58ed911023694bf8df930a",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2
+            ]
+          },
+          "input": "1:1",
+          "component": "producerType",
+          "node": 0,
+          "route": {
+            "root": "producerType",
+            "slots": []
+          }
+        },
+        "expectedTypeAddress": {
+          "namespace": "application-ports",
+          "evidenceSha256": "798b1445451e5ee111c5338aa95e0e360f716ee017a781892b62b575becff686",
+          "sourceIndexSha256": "3bdbaddc45182ae68486eb4f0bc3f137958597ad6e58ed911023694bf8df930a",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2
+            ]
+          },
+          "input": "1:1",
+          "component": "inputType",
+          "node": 0,
+          "route": {
+            "root": "inputType",
+            "slots": []
+          }
+        },
+        "typeText": "P",
+        "producerContextLength": 7,
+        "consumerContextLength": 7,
+        "nativeOwner": "798b1445451e5ee111c5338aa95e0e360f716ee017a781892b62b575becff686",
+        "definitionHops": []
+      }
+    ]
+  },
+  "shadows": {
+    "source": {
+      "edition": "premise-source-controls",
+      "name": "AtlasPremiseSources.shadows",
+      "indexSha256": "021813c109cb37669767a7e349c89657377aca43bd6174d9f6683b1f071e686e",
+      "sourceSha256": "0db3a1831ef7ebc58e00334e8196ec8d678c50848f3886acab327bd1b46c5c7c"
+    },
+    "counts": {
+      "boundaryPositions": 4,
+      "proofPositions": 2,
+      "proofSources": 2,
+      "otherPositions": 2,
+      "inputKinds": {
+        "function": 2,
+        "proof": 2,
+        "type": 0,
+        "value": 0,
+        "unobserved": 0
+      }
+    },
+    "groups": [
+      {
+        "source": {
+          "kind": "original-binder",
+          "address": {
+            "namespace": "source-expression",
+            "name": "AtlasPremiseSources.shadows",
+            "indexSha256": "021813c109cb37669767a7e349c89657377aca43bd6174d9f6683b1f071e686e",
+            "sourceSha256": "0db3a1831ef7ebc58e00334e8196ec8d678c50848f3886acab327bd1b46c5c7c",
+            "node": 23,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          },
+          "contextLength": null
+        },
+        "uses": [
+          {
+            "call": 0,
+            "slot": 1,
+            "producerContextLength": 6,
+            "consumerContextLength": 6
+          }
+        ],
+        "id": "389833665af5fe0b023d52609bbd679bd8dc9bdac1e1663b4668176be821a22b"
+      },
+      {
+        "source": {
+          "kind": "original-binder",
+          "address": {
+            "namespace": "source-expression",
+            "name": "AtlasPremiseSources.shadows",
+            "indexSha256": "021813c109cb37669767a7e349c89657377aca43bd6174d9f6683b1f071e686e",
+            "sourceSha256": "0db3a1831ef7ebc58e00334e8196ec8d678c50848f3886acab327bd1b46c5c7c",
+            "node": 21,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                2
+              ]
+            }
+          },
+          "contextLength": null
+        },
+        "uses": [
+          {
+            "call": 1,
+            "slot": 1,
+            "producerContextLength": 8,
+            "consumerContextLength": 8
+          }
+        ],
+        "id": "cadb2c7cf246bc96e307dc0c8db81085322b0a8b6f91b8f9c5175549041b785a"
+      }
+    ],
+    "rows": [
+      {
+        "call": 0,
+        "slot": 1,
+        "groupId": "389833665af5fe0b023d52609bbd679bd8dc9bdac1e1663b4668176be821a22b",
+        "source": {
+          "kind": "original-binder",
+          "address": {
+            "namespace": "source-expression",
+            "name": "AtlasPremiseSources.shadows",
+            "indexSha256": "021813c109cb37669767a7e349c89657377aca43bd6174d9f6683b1f071e686e",
+            "sourceSha256": "0db3a1831ef7ebc58e00334e8196ec8d678c50848f3886acab327bd1b46c5c7c",
+            "node": 23,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          },
+          "contextLength": null
+        },
+        "sourceUses": 1,
+        "address": {
+          "namespace": "source-expression",
+          "name": "AtlasPremiseSources.shadows",
+          "indexSha256": "021813c109cb37669767a7e349c89657377aca43bd6174d9f6683b1f071e686e",
+          "sourceSha256": "0db3a1831ef7ebc58e00334e8196ec8d678c50848f3886acab327bd1b46c5c7c",
+          "node": 15,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "inputAddress": {
+          "namespace": "source-expression",
+          "name": "AtlasPremiseSources.shadows",
+          "indexSha256": "021813c109cb37669767a7e349c89657377aca43bd6174d9f6683b1f071e686e",
+          "sourceSha256": "0db3a1831ef7ebc58e00334e8196ec8d678c50848f3886acab327bd1b46c5c7c",
+          "node": 15,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "typeAddress": {
+          "namespace": "application-ports",
+          "evidenceSha256": "55404239e5ca3d0c64b794d9f125e1d4e0eb41d24749065b605680b8e195a99f",
+          "sourceIndexSha256": "021813c109cb37669767a7e349c89657377aca43bd6174d9f6683b1f071e686e",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "input": "0:1",
+          "component": "producerType",
+          "node": 0,
+          "route": {
+            "root": "producerType",
+            "slots": []
+          }
+        },
+        "expectedTypeAddress": {
+          "namespace": "application-ports",
+          "evidenceSha256": "55404239e5ca3d0c64b794d9f125e1d4e0eb41d24749065b605680b8e195a99f",
+          "sourceIndexSha256": "021813c109cb37669767a7e349c89657377aca43bd6174d9f6683b1f071e686e",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "input": "0:1",
+          "component": "inputType",
+          "node": 0,
+          "route": {
+            "root": "inputType",
+            "slots": []
+          }
+        },
+        "typeText": "P",
+        "producerContextLength": 6,
+        "consumerContextLength": 6,
+        "nativeOwner": "55404239e5ca3d0c64b794d9f125e1d4e0eb41d24749065b605680b8e195a99f",
+        "definitionHops": []
+      },
+      {
+        "call": 1,
+        "slot": 1,
+        "groupId": "cadb2c7cf246bc96e307dc0c8db81085322b0a8b6f91b8f9c5175549041b785a",
+        "source": {
+          "kind": "original-binder",
+          "address": {
+            "namespace": "source-expression",
+            "name": "AtlasPremiseSources.shadows",
+            "indexSha256": "021813c109cb37669767a7e349c89657377aca43bd6174d9f6683b1f071e686e",
+            "sourceSha256": "0db3a1831ef7ebc58e00334e8196ec8d678c50848f3886acab327bd1b46c5c7c",
+            "node": 21,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                2
+              ]
+            }
+          },
+          "contextLength": null
+        },
+        "sourceUses": 1,
+        "address": {
+          "namespace": "source-expression",
+          "name": "AtlasPremiseSources.shadows",
+          "indexSha256": "021813c109cb37669767a7e349c89657377aca43bd6174d9f6683b1f071e686e",
+          "sourceSha256": "0db3a1831ef7ebc58e00334e8196ec8d678c50848f3886acab327bd1b46c5c7c",
+          "node": 15,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1,
+              0,
+              1
+            ]
+          }
+        },
+        "inputAddress": {
+          "namespace": "source-expression",
+          "name": "AtlasPremiseSources.shadows",
+          "indexSha256": "021813c109cb37669767a7e349c89657377aca43bd6174d9f6683b1f071e686e",
+          "sourceSha256": "0db3a1831ef7ebc58e00334e8196ec8d678c50848f3886acab327bd1b46c5c7c",
+          "node": 15,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1,
+              0,
+              1
+            ]
+          }
+        },
+        "typeAddress": {
+          "namespace": "application-ports",
+          "evidenceSha256": "55404239e5ca3d0c64b794d9f125e1d4e0eb41d24749065b605680b8e195a99f",
+          "sourceIndexSha256": "021813c109cb37669767a7e349c89657377aca43bd6174d9f6683b1f071e686e",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          },
+          "input": "1:1",
+          "component": "producerType",
+          "node": 0,
+          "route": {
+            "root": "producerType",
+            "slots": []
+          }
+        },
+        "expectedTypeAddress": {
+          "namespace": "application-ports",
+          "evidenceSha256": "55404239e5ca3d0c64b794d9f125e1d4e0eb41d24749065b605680b8e195a99f",
+          "sourceIndexSha256": "021813c109cb37669767a7e349c89657377aca43bd6174d9f6683b1f071e686e",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          },
+          "input": "1:1",
+          "component": "inputType",
+          "node": 0,
+          "route": {
+            "root": "inputType",
+            "slots": []
+          }
+        },
+        "typeText": "P",
+        "producerContextLength": 8,
+        "consumerContextLength": 8,
+        "nativeOwner": "55404239e5ca3d0c64b794d9f125e1d4e0eb41d24749065b605680b8e195a99f",
+        "definitionHops": []
+      }
+    ]
+  },
+  "sourceOnlyUnavailability": true,
+  "scope": "Finite original native observations, original lexical-source grouping, complete position recovery and bounded summary leases; not necessity, a common-context sequent, semantic compression or a measured comprehension result."
+}

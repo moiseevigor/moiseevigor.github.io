@@ -23,3 +23,8 @@
 .rr-mini:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 @media(max-width:760px){.rr-core::before,.rr-core::after{display:none}}
 .rr-mini-tip{fill:var(--text-muted)}
+
+.rr-inputs>select{margin-bottom:.65rem}.rr-premise{margin:0 0 1rem;padding:0 0 1rem;border-bottom:1px solid var(--border)}
+.rr-premise .rr-label{margin-bottom:.2rem}.rr-premise pre{font-size:.82rem;line-height:1.6}.rr-mini .rr-selected-call{outline:3px solid var(--accent);outline-offset:2px}
+.rr-premise button[aria-pressed="true"]{outline:2px solid var(--accent);outline-offset:2px}
+@media(min-width:761px){.rr-core,.rr-outputs{position:sticky;top:.6rem;align-self:start}}
