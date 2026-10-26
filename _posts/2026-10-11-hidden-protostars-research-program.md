@@ -1,9 +1,9 @@
 ---
 layout: distill
-last_modified_at: 2026-10-14
+last_modified_at: 2026-10-26
 title: "Hidden Protostars: Survey Evidence and Its Limits"
 subtitle: >
-  Reproducible catalogue associations, a non-identifiability result, and failed ranking and uncertainty gates define what the present surveys establish.
+  Infrared counterparts identify a useful search population. What can multiple surveys establish about the objects hidden inside dust clumps?
 date: 2026-10-11 12:00:00 +0200
 categories: [astrophysics]
 tags: [star-formation, infrared, Hi-GAL, inference]
@@ -12,7 +12,7 @@ series_title: "Hidden protostars"
 series_part: 1
 permalink: /astrophysics/2026/10/11/hidden-protostars-research-program/
 image: /public/img/posts/hidden-protostars-1.svg
-result: '14/27 vs 15/27 positives at 18 reviews'
+result: '2,465 infrared counterparts · 12.8% of 19,219 clumps'
 published: true
 comments: false
 reference_style: bibliography
@@ -20,16 +20,28 @@ description: >
   Measured limits of dust-cloud controls and multi-survey ranking, with source-specific positional and colour evidence kept distinct from physical classification.
 ---
 
-<link rel="stylesheet" href="/public/css/starbirth-program.css?v=20261011">
+<link rel="stylesheet" href="/public/css/starbirth-program.css?v=20261026">
 <link rel="stylesheet" href="/public/css/starbirth-formation.css?v=20261011-2">
 
 <div class="l-body sb-program" markdown="1">
 
-<div class="sb-status"><strong>Scientific scope.</strong> Survey associations are reproducible, but neither a physical hidden-protostar fraction nor a stellar birth is established. The ranking comparison and matched-control uncertainty gate both failed. <a href="/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/">Read the measured outcomes and exact evidence.</a></div>
+<div class="sb-status"><strong>Current conclusion.</strong> Infrared catalogue associations identify a useful follow-up population. Physical clump membership, the hidden-protostar fraction and a reliable detector remain unestablished. <a href="#results">Explore the measured results.</a></div>
 
-Stars form inside clouds that hide the process from view. A patch of cold dust can look quiet while a compact object is already accreting material inside it. Our current question is observational and computational: **can infrared emission, variability and molecular evidence together rank embedded-protostar candidates better than simple physical features?** The earlier compact-source occurrence question remains unanswered after its frozen uncertainty gate failed.
+A cold dust clump can hide an accreting protostar. Finding one requires connecting evidence at different wavelengths, angular resolutions and epochs—and checking that the observations belong to the same physical system.
 
-<nav class="sb-jump" aria-label="On this page"><a href="#physics">The physics</a><a href="#star-formation">Explore formation</a><a href="#ledger">What we found</a><a href="#comparison">Why controls matter</a><a href="#week">Ranking and coverage</a><a href="#birth">Interpretation limits</a><a href="#sources">Sources &amp; evidence</a></nav>
+**Our research question is whether a general cross-survey representation can make that search more comprehensive and efficient.** Specialized physical methods provide interpretation and refinement. Learned integration must show useful retrieval, coverage, transfer or review-cost gains against simple joins using the same data. A richer embedding alone is not a result.
+
+<nav class="sb-jump" aria-label="On this page"><a href="#results">Results</a><a href="#program">Research question</a><a href="#physics">The physics</a><a href="#star-formation">Explore formation</a><a href="#comparison">Why controls matter</a><a href="#week">Detailed studies</a><a href="#sources">Sources &amp; evidence</a></nav>
+
+{% include starbirth-results.html %}
+
+<h2 id="program">What a general cross-survey method could contribute</h2>
+
+The goal is to connect far-infrared dust emission, mid-infrared sources, molecular gas and time-domain observations without forcing them into a one-source-per-clump table. A clump may contain several cores; a beam can blend several emitters; a missing measurement can mean no coverage, poor sensitivity or an unresolved source.
+
+A useful method would retrieve complementary evidence across surveys, preserve uncertain associations, and transfer to other sky regions or epochs. We will compare learned representations with non-learned integration of the same inputs. Better coverage or lower review cost could be valuable even where a specialized physical method is more accurate. These are research hypotheses: an independently validated benefit has not yet been demonstrated.
+
+Physical confirmation is a separate step. Candidate ranking, source membership, stellar youth and the observation of a birth need different evidence. The [fixed ablations](/astrophysics/2026/10/14/hidden-protostars-ablation/) explain why independent outcomes and usable complementary views matter before another fit.
 
 <h2 id="physics">What is born, and what a telescope sees</h2>
 
@@ -53,6 +65,9 @@ This is already supported by targeted observations: Traficante and colleagues fo
 
 The following are **our historical measurements and checks**, reviewed through 8 October 2026. They are not results of the stopped matched-control study or the new multi-survey ranking program. Each row links to a compact source snapshot; the [evidence inventory](/public/data/starbirth/source-inventory.csv) records original paths, byte counts, hashes and the source revision.
 
+<details class="sb-history" markdown="1">
+<summary>Full historical findings and exact sources</summary>
+
 <div class="sb-ledger" role="region" aria-label="Reviewed findings" tabindex="0" markdown="1">
 
 | Result | What it supports | What remains unresolved |
@@ -66,7 +81,9 @@ The following are **our historical measurements and checks**, reviewed through 8
 
 </div>
 
-The main positive result is the first row. The positional and velocity agreement is measurable; physical membership remains unverified. Red colour and a learned embedding do not resolve a mismatched comparison.
+</details>
+
+The strongest positive evidence here is the first row: a defined infrared-associated population with SPICY enrichment. Neither the catalogue association nor a red colour establishes physical membership.
 
 <h2 id="comparison">The sky is not a neutral background</h2>
 
@@ -89,7 +106,9 @@ We need column-density evidence **at both positions**, not just the clump's cata
 
 <h2 id="week">Measured ranking and observational support</h2>
 
-<span id="multisurvey"></span><h3 id="ranking-result">The embedding did not beat the stronger baseline</h3>
+<span id="multisurvey"></span>
+
+<h3 id="ranking-result">The embedding did not beat the stronger baseline</h3>
 
 At the same **18 reviews**, the shared embedding recovered **14/27** qualifying chemistry positives, the linear baseline **14/27**, the nonlinear baseline **15/27** and the infrared-only ablation **13/27**. The frozen benefit gate failed. This is a retrospective chemistry-proxy comparison, not physical protostar recall. All **19,328** requested identities and **19,066** unknown proxies remain in the ledger. None of the 27 positives has the registered temporal view. [Comparison and support limits](/astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/).
 
@@ -99,7 +118,7 @@ One known infrared source agrees with **21/21** query-visit medians, but positio
 
 **14 October ablation:** sixteen fixed contrasts do not establish clear underfitting or uniform severe overfitting on consumed proxies. The embedding remains 14/27 versus raw nonlinear 15/27; availability alone recovers 7/27 and no positive proxy has temporal support. Independent validation and coverage now take priority over model capacity. [Read every contrast, learning-curve limitation and numerical correction](/astrophysics/2026/10/14/hidden-protostars-ablation/).
 
-**Independent-evidence cohort:** a frozen 223-clump sample includes agreements, disagreements and sources selected by neither method. Zero has certified independent truth or retained molecular support. Ownership and exposure coverage remain unresolved. [The cohort and its limits](/astrophysics/2026/10/14/hidden-protostars-ablation/#validation-cohort).
+**Independent-evidence cohort (14 October snapshot):** a frozen 223-clump sample includes agreements, disagreements and sources selected by neither method. In that published snapshot, zero had certified independent truth or retained molecular support. It documents the validation design; it does not establish present physical membership. [The cohort and its limits](/astrophysics/2026/10/14/hidden-protostars-ablation/#validation-cohort).
 
 <details markdown="1">
 <summary>Data coverage and retained history</summary>
@@ -130,5 +149,5 @@ Download the [evidence inventory](/public/data/starbirth/source-inventory.csv), 
 
 </div>
 
-<script src="/public/js/starbirth-program.js?v=20261011" defer></script>
+<script src="/public/js/starbirth-program.js?v=20261026" defer></script>
 <script src="/public/js/starbirth-formation.js?v=20261011-2" defer></script>
