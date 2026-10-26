@@ -1,0 +1,44 @@
+{
+  "format": "ProofAtlasRuleSupportNative/1",
+  "status": "PASS",
+  "compiler": "Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+  "dependencyRecovery": {
+    "kind": "mathlib-cache-attribution/1",
+    "mathlibRevision": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "archiveComment": "git=mathlib4@0df444a360eaa60ab8c11dca51a86af692955474",
+    "restorationManifestSha256": "a13304fc2a231bbe67366b31c6c2c630871112047544b8db96a6543c80091469",
+    "binaryInventorySha256": "95dac3c29dacd74eaacfb89c27178b15beb6d2fe795e008f9f0e475c0fb44841",
+    "artifactCount": 43450,
+    "allBinaryHashesVerified": true,
+    "originalGitCheckoutsVerified": false,
+    "independentlyRebuilt": false
+  },
+  "producerFiles": {
+    "research/proof-atlas/rule-support/verify-controls.py": "ec77a51e71a8f8dc754e607f93646b8ba8e7b1367b54f325df6099a06ac90fa8",
+    "research/proof-atlas/rule-support/Controls.lean": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e",
+    "research/proof-atlas/rule-support/prepare-controls.cjs": "c6475f70bc39590603c1e10616f7b1b7323eebad67344f45fb87ed31503691a0",
+    "research/proof-atlas/application-ports/Ports.lean": "1de1c8cc3786bc04c4f4183ce18f984deca8f36cce1f0f6425c3a17841a2a450",
+    "research/proof-atlas/application-ports/prepare.cjs": "a845ada511d7e8c97a6d55590530a0bf6da66a18c557ebd7b45102a23c785600",
+    "research/proof-atlas/construction-composition/prepare.cjs": "a772a83f1cd5d345cec9700210c91db410498d30a7a3d5b2ea7c92f607179402",
+    "research/proof-atlas/use-sites/verify.py": "56a9a78497fd3cbd04956fd779e884cd6ad13efbf363b9b5aacf6fd202e01eff",
+    "research/proof-atlas/packet-typing/verify.py": "5ad45144299404cb9dc4ac84dd45c2f2bfeac64aaa283931fbcf5322efd88567",
+    "research/proof-atlas/ExportLibrary.lean": "3653ae06436ef216b5c3438386f3456ec280c1e515cb98e50a0d5786a30bfdc1",
+    "research/proof-atlas/ExportOccurrenceTypes.lean": "d27cf8a19c61ea58387bb1f77d49e653b8f59e9c1d7868d9d77e034132880102",
+    "research/proof-atlas/LevelTransportControls.lean": "d1af9f78c844bce3b19726f7be5b7a30a1711f06064293a79c27bcce6bcb8bd9",
+    "research/proof-atlas/compiled-replay/Replay.lean": "a9779319abec258c33151c212dfa7cd39000994c58e31b8cf62c015673314935",
+    "research/proof-atlas/packet-typing/PacketTyping.lean": "5521ac9afa430c56ea9f5c951f8a2f5220c3692a0ac0e9720bf6019a3f9e546a"
+  },
+  "runtimeBaseSha256": "74fc70004965a13ad5aaf4888a6153e3aecd13a7d00954bf7e8e555b9857d20e",
+  "planSha256": "ae220d19d9ca5c2f577676b4efa871704fa43a772e293676e03ade436de845e7",
+  "nativeOutputSha256": "cb947306091b921a101e950fd0d5074349d34f9db35f69ebd4c194afb5789ff9",
+  "packets": {
+    "aliasProof": "ec5868bcc041d5d17bb1580f4607a0ca0e70f8723199981636bc0c16da8bf7b2",
+    "aliasValue": "1942a964e8293a2a6e5a3736ea8d6cc036f8719284b8a305e54f4aaea5d740ed",
+    "bothRoles": "df0644ea324ed9c268bf1cc6ec4ea35d1937865d3b4f0c9568a29fa539eddc27"
+  },
+  "profiles": 3,
+  "calls": 4,
+  "ports": 8,
+  "originalPrivateSourcesRead": false,
+  "scope": "Authored controls, fresh root typing and exact native port observations from packet replay without original declarations. No private project rebuild or general proof of the rule-support projection."
+}

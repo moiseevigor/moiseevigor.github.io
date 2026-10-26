@@ -1,0 +1,28 @@
+{
+  "format": "ProofAtlasRuleSupportBrowser/1",
+  "status": "PASS",
+  "sourceOverride": false,
+  "inputModeRoundTrips": 1,
+  "sourceOnlyRefusals": 1,
+  "axeAudits": 4,
+  "staleRefusals": 1,
+  "optionalRefusals": 1,
+  "aliasCases": 2,
+  "headSelections": 11,
+  "normalizedSelections": 11,
+  "dualRoleMatches": 1,
+  "headPages": 6,
+  "wholeArchiveAttempts": 0,
+  "files": {
+    "public/js/proof-atlas-rule-support.js": "1582a16639cac5518918e3a0e74af2222f878919eea2050b96e812bcea91b0a4",
+    "public/js/proof-atlas-network-port-inspector.js": "c4f28e0c2f89f24b730ffcd43c538b34f55a1428967ab57d7297ada953d804b5",
+    "public/data/proof-atlas/rule-support-controls-manifest.js": "60b555513fc896c03f8368d64bbb253332d46cf1db7d2f7639cf72b1755ad6a7",
+    "public/data/proof-atlas/rule-support-graphs-manifest.js": "6bfd3cccf03a7ac433973412995d2ca2ab4a4263ea27283246d0bac6f93c53c9",
+    "public/js/proof-atlas-premise-sources.js": "d09cfd875be4a66e67dece929a25c403210178fe4ffcc7a72ed06ac6f59746b1",
+    "public/js/proof-atlas-network-stream-view.js": "7212aadde36da93ae096fb82f68d85b9324cbf3c204bc801e46b21ed92139282",
+    "public/js/proof-atlas-application-region-view.js": "b6e2b5190361de8a567c8cc6b904657eb772a657ffc5ed39384a85d02c4efa76",
+    "public/css/proof-atlas-application-regions.css": "a52a5d257e6f1b8263184ed25745b56ed92b38fc4795f26f4870e53841a7f7e6",
+    "public/data/proof-atlas/premise-source-controls-manifest.js": "7e625f5811104c20e5503625879fbf38ae6aa3751f34ab14a3e7a02fae1a2bea",
+    "public/data/proof-atlas/premise-source-graphs-manifest.js": "dfd5717c6c62fd0043e3fd93a636e7a8319f21b5692d8f7ffab71e623d63bc15"
+  }
+}

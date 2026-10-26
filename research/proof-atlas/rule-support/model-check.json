@@ -1,0 +1,850 @@
+{
+  "format": "ProofAtlasRuleSupportCheck/1",
+  "status": "PASS",
+  "nativeProfiles": 42,
+  "cuts": 106,
+  "inverseChecks": 106,
+  "proofPositions": 311,
+  "nativeRows": 282,
+  "sourceBundles": 307,
+  "negativeControls": 134,
+  "peakRows": 4,
+  "peakSummaryBytes": 11684,
+  "peakNativeLeases": 1,
+  "riccati": {
+    "counts": {
+      "boundaryPositions": 35,
+      "functionHeads": 7,
+      "proofArgumentPositions": 5,
+      "otherArgumentPositions": 23,
+      "proofHeadPositions": 7,
+      "proofSupportPositions": 12,
+      "proofSources": 12
+    },
+    "heads": [
+      {
+        "call": 25,
+        "role": "proof",
+        "applicationKind": "proof-application",
+        "originalContext": 13,
+        "consumerContext": 13,
+        "normalizedType": "∀ {α β : Prop}, α = β → α → β",
+        "nativeOwner": "7a995a4a5559be0a3f1778357ac9a9b696cc0bf446e7513f6a3d52822035af35"
+      },
+      {
+        "call": 26,
+        "role": "proof",
+        "applicationKind": "proof-application",
+        "originalContext": 13,
+        "consumerContext": 13,
+        "normalizedType": "∀ {α β : Prop}, α = β → α → β",
+        "nativeOwner": "7a995a4a5559be0a3f1778357ac9a9b696cc0bf446e7513f6a3d52822035af35"
+      },
+      {
+        "call": 27,
+        "role": "proof",
+        "applicationKind": "proof-application",
+        "originalContext": 13,
+        "consumerContext": 13,
+        "normalizedType": "∀ {α β : Prop}, α = β → α → β",
+        "nativeOwner": "7a995a4a5559be0a3f1778357ac9a9b696cc0bf446e7513f6a3d52822035af35"
+      },
+      {
+        "call": 75,
+        "role": "proof",
+        "applicationKind": "proof-application",
+        "originalContext": 10,
+        "consumerContext": 10,
+        "normalizedType": "∀ {x y : ℝ}, 0 ≤ x → 0 ≤ y → 2 * √(x * y) ≤ x + y",
+        "nativeOwner": "7a995a4a5559be0a3f1778357ac9a9b696cc0bf446e7513f6a3d52822035af35"
+      },
+      {
+        "call": 76,
+        "role": "proof",
+        "applicationKind": "proof-application",
+        "originalContext": 13,
+        "consumerContext": 13,
+        "normalizedType": "∀ {α β : Type} {a₁ a₂ : α} (f : α → β), a₁ = a₂ → f a₁ = f a₂",
+        "nativeOwner": "7a995a4a5559be0a3f1778357ac9a9b696cc0bf446e7513f6a3d52822035af35"
+      },
+      {
+        "call": 77,
+        "role": "proof",
+        "applicationKind": "proof-application",
+        "originalContext": 13,
+        "consumerContext": 13,
+        "normalizedType": "∀ {α β : Type} {a₁ a₂ : α} (f : α → β), a₁ = a₂ → f a₁ = f a₂",
+        "nativeOwner": "7a995a4a5559be0a3f1778357ac9a9b696cc0bf446e7513f6a3d52822035af35"
+      },
+      {
+        "call": 78,
+        "role": "proof",
+        "applicationKind": "proof-application",
+        "originalContext": 13,
+        "consumerContext": 13,
+        "normalizedType": "∀ {α β : Type} {a₁ a₂ : α} (f : α → β), a₁ = a₂ → f a₁ = f a₂",
+        "nativeOwner": "7a995a4a5559be0a3f1778357ac9a9b696cc0bf446e7513f6a3d52822035af35"
+      }
+    ]
+  },
+  "aliasProof": {
+    "source": {
+      "edition": "rule-support-controls",
+      "name": "AtlasRuleSupport.aliasProof",
+      "indexSha256": "ec5868bcc041d5d17bb1580f4607a0ca0e70f8723199981636bc0c16da8bf7b2",
+      "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e"
+    },
+    "counts": {
+      "boundaryPositions": 2,
+      "functionHeads": 1,
+      "proofArgumentPositions": 1,
+      "otherArgumentPositions": 0,
+      "proofHeadPositions": 1,
+      "proofSupportPositions": 2,
+      "proofSources": 2
+    },
+    "proofGroups": [
+      {
+        "source": {
+          "kind": "original-binder",
+          "address": {
+            "namespace": "source-expression",
+            "name": "AtlasRuleSupport.aliasProof",
+            "indexSha256": "ec5868bcc041d5d17bb1580f4607a0ca0e70f8723199981636bc0c16da8bf7b2",
+            "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e",
+            "node": 12,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1
+              ]
+            }
+          },
+          "contextLength": null
+        },
+        "uses": [
+          {
+            "call": 0,
+            "slot": 1,
+            "kind": "proof-argument",
+            "producerContextLength": 5,
+            "consumerContextLength": 5
+          }
+        ],
+        "id": "1e547e09ec530f2e01930f1d22412f7728bf35e40d4cc16237d771c318d0856d"
+      },
+      {
+        "source": {
+          "kind": "original-binder",
+          "address": {
+            "namespace": "source-expression",
+            "name": "AtlasRuleSupport.aliasProof",
+            "indexSha256": "ec5868bcc041d5d17bb1580f4607a0ca0e70f8723199981636bc0c16da8bf7b2",
+            "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e",
+            "node": 10,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                2
+              ]
+            }
+          },
+          "contextLength": null
+        },
+        "uses": [
+          {
+            "call": 0,
+            "slot": 0,
+            "kind": "function-head",
+            "producerContextLength": 5,
+            "consumerContextLength": 5
+          }
+        ],
+        "id": "f4d99552f5d78db02819617ef6f2f2208982ed8e7275ae71d8135aa0d3215e96"
+      }
+    ],
+    "rows": [
+      {
+        "call": 0,
+        "slot": 0,
+        "label": "f",
+        "role": "proof",
+        "resultRole": "proof",
+        "applicationKind": "proof-application",
+        "source": {
+          "kind": "original-binder",
+          "address": {
+            "namespace": "source-expression",
+            "name": "AtlasRuleSupport.aliasProof",
+            "indexSha256": "ec5868bcc041d5d17bb1580f4607a0ca0e70f8723199981636bc0c16da8bf7b2",
+            "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e",
+            "node": 10,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                2
+              ]
+            }
+          },
+          "contextLength": null
+        },
+        "proofGroupId": "f4d99552f5d78db02819617ef6f2f2208982ed8e7275ae71d8135aa0d3215e96",
+        "proofSourceUses": 1,
+        "address": {
+          "namespace": "source-expression",
+          "name": "AtlasRuleSupport.aliasProof",
+          "indexSha256": "ec5868bcc041d5d17bb1580f4607a0ca0e70f8723199981636bc0c16da8bf7b2",
+          "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e",
+          "node": 8,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              2,
+              1,
+              0
+            ]
+          }
+        },
+        "inputAddress": {
+          "namespace": "source-expression",
+          "name": "AtlasRuleSupport.aliasProof",
+          "indexSha256": "ec5868bcc041d5d17bb1580f4607a0ca0e70f8723199981636bc0c16da8bf7b2",
+          "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e",
+          "node": 8,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              2,
+              1,
+              0
+            ]
+          }
+        },
+        "producerTypeAddress": {
+          "namespace": "application-ports",
+          "evidenceSha256": "0d26bad876e259896b2906b4999dc4eb5840d73286ff29a377927a4bdf3bd566",
+          "sourceIndexSha256": "ec5868bcc041d5d17bb1580f4607a0ca0e70f8723199981636bc0c16da8bf7b2",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          },
+          "input": "0:0",
+          "component": "producerType",
+          "node": 0,
+          "route": {
+            "root": "producerType",
+            "slots": []
+          }
+        },
+        "producerTypeText": "F",
+        "producerContextLength": 5,
+        "consumerContextLength": 5,
+        "literalTypeAddress": {
+          "namespace": "application-ports",
+          "evidenceSha256": "0d26bad876e259896b2906b4999dc4eb5840d73286ff29a377927a4bdf3bd566",
+          "sourceIndexSha256": "ec5868bcc041d5d17bb1580f4607a0ca0e70f8723199981636bc0c16da8bf7b2",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          },
+          "input": "0:0",
+          "component": "inputType",
+          "node": 0,
+          "route": {
+            "root": "inputType",
+            "slots": []
+          }
+        },
+        "literalTypeText": "F",
+        "normalizedTypeAddress": {
+          "namespace": "application-ports",
+          "evidenceSha256": "0d26bad876e259896b2906b4999dc4eb5840d73286ff29a377927a4bdf3bd566",
+          "sourceIndexSha256": "ec5868bcc041d5d17bb1580f4607a0ca0e70f8723199981636bc0c16da8bf7b2",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          },
+          "input": "0:0",
+          "component": "normalizedInputType",
+          "node": 3,
+          "route": {
+            "root": "normalizedInputType",
+            "slots": []
+          }
+        },
+        "normalizedTypeText": "P → Q",
+        "normalizedKind": "forallE",
+        "observedArgumentSlots": [
+          1
+        ],
+        "formalBoundaries": [
+          {
+            "slot": 1,
+            "reason": "Literal head-type Pi prefix ends before this slot"
+          }
+        ],
+        "definitionHops": [],
+        "nativeOwner": "0d26bad876e259896b2906b4999dc4eb5840d73286ff29a377927a4bdf3bd566"
+      }
+    ]
+  },
+  "aliasValue": {
+    "source": {
+      "edition": "rule-support-controls",
+      "name": "AtlasRuleSupport.aliasValue",
+      "indexSha256": "1942a964e8293a2a6e5a3736ea8d6cc036f8719284b8a305e54f4aaea5d740ed",
+      "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e"
+    },
+    "counts": {
+      "boundaryPositions": 2,
+      "functionHeads": 1,
+      "proofArgumentPositions": 0,
+      "otherArgumentPositions": 1,
+      "proofHeadPositions": 0,
+      "proofSupportPositions": 0,
+      "proofSources": 0
+    },
+    "proofGroups": [],
+    "rows": [
+      {
+        "call": 0,
+        "slot": 0,
+        "label": "f",
+        "role": "value",
+        "resultRole": "value",
+        "applicationKind": "typed-application",
+        "source": {
+          "kind": "original-binder",
+          "address": {
+            "namespace": "source-expression",
+            "name": "AtlasRuleSupport.aliasValue",
+            "indexSha256": "1942a964e8293a2a6e5a3736ea8d6cc036f8719284b8a305e54f4aaea5d740ed",
+            "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e",
+            "node": 8,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                2
+              ]
+            }
+          },
+          "contextLength": null
+        },
+        "proofGroupId": null,
+        "proofSourceUses": 0,
+        "address": {
+          "namespace": "source-expression",
+          "name": "AtlasRuleSupport.aliasValue",
+          "indexSha256": "1942a964e8293a2a6e5a3736ea8d6cc036f8719284b8a305e54f4aaea5d740ed",
+          "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e",
+          "node": 5,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              2,
+              1,
+              0
+            ]
+          }
+        },
+        "inputAddress": {
+          "namespace": "source-expression",
+          "name": "AtlasRuleSupport.aliasValue",
+          "indexSha256": "1942a964e8293a2a6e5a3736ea8d6cc036f8719284b8a305e54f4aaea5d740ed",
+          "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e",
+          "node": 5,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              2,
+              1,
+              0
+            ]
+          }
+        },
+        "producerTypeAddress": {
+          "namespace": "application-ports",
+          "evidenceSha256": "4e51e0ff28f19404f838aa7411fd90f8749e94258b42cae345fc2a71c66dbc0f",
+          "sourceIndexSha256": "1942a964e8293a2a6e5a3736ea8d6cc036f8719284b8a305e54f4aaea5d740ed",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              2,
+              1
+            ]
+          },
+          "input": "0:0",
+          "component": "producerType",
+          "node": 0,
+          "route": {
+            "root": "producerType",
+            "slots": []
+          }
+        },
+        "producerTypeText": "F",
+        "producerContextLength": 3,
+        "consumerContextLength": 3,
+        "literalTypeAddress": {
+          "namespace": "application-ports",
+          "evidenceSha256": "4e51e0ff28f19404f838aa7411fd90f8749e94258b42cae345fc2a71c66dbc0f",
+          "sourceIndexSha256": "1942a964e8293a2a6e5a3736ea8d6cc036f8719284b8a305e54f4aaea5d740ed",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              2,
+              1
+            ]
+          },
+          "input": "0:0",
+          "component": "inputType",
+          "node": 0,
+          "route": {
+            "root": "inputType",
+            "slots": []
+          }
+        },
+        "literalTypeText": "F",
+        "normalizedTypeAddress": {
+          "namespace": "application-ports",
+          "evidenceSha256": "4e51e0ff28f19404f838aa7411fd90f8749e94258b42cae345fc2a71c66dbc0f",
+          "sourceIndexSha256": "1942a964e8293a2a6e5a3736ea8d6cc036f8719284b8a305e54f4aaea5d740ed",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              2,
+              1
+            ]
+          },
+          "input": "0:0",
+          "component": "normalizedInputType",
+          "node": 2,
+          "route": {
+            "root": "normalizedInputType",
+            "slots": []
+          }
+        },
+        "normalizedTypeText": "ℕ → ℕ",
+        "normalizedKind": "forallE",
+        "observedArgumentSlots": [
+          1
+        ],
+        "formalBoundaries": [
+          {
+            "slot": 1,
+            "reason": "Literal head-type Pi prefix ends before this slot"
+          }
+        ],
+        "definitionHops": [],
+        "nativeOwner": "4e51e0ff28f19404f838aa7411fd90f8749e94258b42cae345fc2a71c66dbc0f"
+      }
+    ]
+  },
+  "bothRoles": {
+    "source": {
+      "edition": "rule-support-controls",
+      "name": "AtlasRuleSupport.bothRoles",
+      "indexSha256": "df0644ea324ed9c268bf1cc6ec4ea35d1937865d3b4f0c9568a29fa539eddc27",
+      "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e"
+    },
+    "counts": {
+      "boundaryPositions": 3,
+      "functionHeads": 2,
+      "proofArgumentPositions": 1,
+      "otherArgumentPositions": 0,
+      "proofHeadPositions": 2,
+      "proofSupportPositions": 3,
+      "proofSources": 2
+    },
+    "proofGroups": [
+      {
+        "source": {
+          "kind": "original-binder",
+          "address": {
+            "namespace": "source-expression",
+            "name": "AtlasRuleSupport.bothRoles",
+            "indexSha256": "df0644ea324ed9c268bf1cc6ec4ea35d1937865d3b4f0c9568a29fa539eddc27",
+            "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e",
+            "node": 13,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1
+              ]
+            }
+          },
+          "contextLength": null
+        },
+        "uses": [
+          {
+            "call": 0,
+            "slot": 1,
+            "kind": "proof-argument",
+            "producerContextLength": 4,
+            "consumerContextLength": 4
+          },
+          {
+            "call": 1,
+            "slot": 0,
+            "kind": "function-head",
+            "producerContextLength": 4,
+            "consumerContextLength": 4
+          }
+        ],
+        "id": "972de0d434266e87a8b95ec1e3c300740d4b8454cb2259113f92526883412464"
+      },
+      {
+        "source": {
+          "kind": "original-binder",
+          "address": {
+            "namespace": "source-expression",
+            "name": "AtlasRuleSupport.bothRoles",
+            "indexSha256": "df0644ea324ed9c268bf1cc6ec4ea35d1937865d3b4f0c9568a29fa539eddc27",
+            "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e",
+            "node": 14,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1
+              ]
+            }
+          },
+          "contextLength": null
+        },
+        "uses": [
+          {
+            "call": 0,
+            "slot": 0,
+            "kind": "function-head",
+            "producerContextLength": 4,
+            "consumerContextLength": 4
+          }
+        ],
+        "id": "5b59ef10bfc67bdaffb59e5152188208f8795283f547086b3fcd4db6fecc9a6e"
+      }
+    ],
+    "rows": [
+      {
+        "call": 0,
+        "slot": 0,
+        "label": "h",
+        "role": "proof",
+        "resultRole": "proof",
+        "applicationKind": "proof-application",
+        "source": {
+          "kind": "original-binder",
+          "address": {
+            "namespace": "source-expression",
+            "name": "AtlasRuleSupport.bothRoles",
+            "indexSha256": "df0644ea324ed9c268bf1cc6ec4ea35d1937865d3b4f0c9568a29fa539eddc27",
+            "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e",
+            "node": 14,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1
+              ]
+            }
+          },
+          "contextLength": null
+        },
+        "proofGroupId": "5b59ef10bfc67bdaffb59e5152188208f8795283f547086b3fcd4db6fecc9a6e",
+        "proofSourceUses": 1,
+        "address": {
+          "namespace": "source-expression",
+          "name": "AtlasRuleSupport.bothRoles",
+          "indexSha256": "df0644ea324ed9c268bf1cc6ec4ea35d1937865d3b4f0c9568a29fa539eddc27",
+          "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e",
+          "node": 1,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          }
+        },
+        "inputAddress": {
+          "namespace": "source-expression",
+          "name": "AtlasRuleSupport.bothRoles",
+          "indexSha256": "df0644ea324ed9c268bf1cc6ec4ea35d1937865d3b4f0c9568a29fa539eddc27",
+          "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e",
+          "node": 1,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          }
+        },
+        "producerTypeAddress": {
+          "namespace": "application-ports",
+          "evidenceSha256": "70c3dd94e0c71149cdd0c360b72bfd3161467194f695b7985126d7b4a4bf27d5",
+          "sourceIndexSha256": "df0644ea324ed9c268bf1cc6ec4ea35d1937865d3b4f0c9568a29fa539eddc27",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "input": "0:0",
+          "component": "producerType",
+          "node": 3,
+          "route": {
+            "root": "producerType",
+            "slots": []
+          }
+        },
+        "producerTypeText": "(P → Q) → P",
+        "producerContextLength": 4,
+        "consumerContextLength": 4,
+        "literalTypeAddress": {
+          "namespace": "application-ports",
+          "evidenceSha256": "70c3dd94e0c71149cdd0c360b72bfd3161467194f695b7985126d7b4a4bf27d5",
+          "sourceIndexSha256": "df0644ea324ed9c268bf1cc6ec4ea35d1937865d3b4f0c9568a29fa539eddc27",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "input": "0:0",
+          "component": "inputType",
+          "node": 3,
+          "route": {
+            "root": "inputType",
+            "slots": []
+          }
+        },
+        "literalTypeText": "(P → Q) → P",
+        "normalizedTypeAddress": {
+          "namespace": "application-ports",
+          "evidenceSha256": "70c3dd94e0c71149cdd0c360b72bfd3161467194f695b7985126d7b4a4bf27d5",
+          "sourceIndexSha256": "df0644ea324ed9c268bf1cc6ec4ea35d1937865d3b4f0c9568a29fa539eddc27",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "input": "0:0",
+          "component": "normalizedInputType",
+          "node": 3,
+          "route": {
+            "root": "normalizedInputType",
+            "slots": []
+          }
+        },
+        "normalizedTypeText": "(P → Q) → P",
+        "normalizedKind": "forallE",
+        "observedArgumentSlots": [
+          1
+        ],
+        "formalBoundaries": [],
+        "definitionHops": [],
+        "nativeOwner": "70c3dd94e0c71149cdd0c360b72bfd3161467194f695b7985126d7b4a4bf27d5"
+      },
+      {
+        "call": 1,
+        "slot": 0,
+        "label": "f",
+        "role": "proof",
+        "resultRole": "proof",
+        "applicationKind": "proof-application",
+        "source": {
+          "kind": "original-binder",
+          "address": {
+            "namespace": "source-expression",
+            "name": "AtlasRuleSupport.bothRoles",
+            "indexSha256": "df0644ea324ed9c268bf1cc6ec4ea35d1937865d3b4f0c9568a29fa539eddc27",
+            "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e",
+            "node": 13,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1
+              ]
+            }
+          },
+          "contextLength": null
+        },
+        "proofGroupId": "972de0d434266e87a8b95ec1e3c300740d4b8454cb2259113f92526883412464",
+        "proofSourceUses": 2,
+        "address": {
+          "namespace": "source-expression",
+          "name": "AtlasRuleSupport.bothRoles",
+          "indexSha256": "df0644ea324ed9c268bf1cc6ec4ea35d1937865d3b4f0c9568a29fa539eddc27",
+          "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e",
+          "node": 10,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          }
+        },
+        "inputAddress": {
+          "namespace": "source-expression",
+          "name": "AtlasRuleSupport.bothRoles",
+          "indexSha256": "df0644ea324ed9c268bf1cc6ec4ea35d1937865d3b4f0c9568a29fa539eddc27",
+          "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e",
+          "node": 10,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          }
+        },
+        "producerTypeAddress": {
+          "namespace": "application-ports",
+          "evidenceSha256": "70c3dd94e0c71149cdd0c360b72bfd3161467194f695b7985126d7b4a4bf27d5",
+          "sourceIndexSha256": "df0644ea324ed9c268bf1cc6ec4ea35d1937865d3b4f0c9568a29fa539eddc27",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "input": "1:0",
+          "component": "producerType",
+          "node": 1,
+          "route": {
+            "root": "producerType",
+            "slots": []
+          }
+        },
+        "producerTypeText": "P → Q",
+        "producerContextLength": 4,
+        "consumerContextLength": 4,
+        "literalTypeAddress": {
+          "namespace": "application-ports",
+          "evidenceSha256": "70c3dd94e0c71149cdd0c360b72bfd3161467194f695b7985126d7b4a4bf27d5",
+          "sourceIndexSha256": "df0644ea324ed9c268bf1cc6ec4ea35d1937865d3b4f0c9568a29fa539eddc27",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "input": "1:0",
+          "component": "inputType",
+          "node": 1,
+          "route": {
+            "root": "inputType",
+            "slots": []
+          }
+        },
+        "literalTypeText": "P → Q",
+        "normalizedTypeAddress": {
+          "namespace": "application-ports",
+          "evidenceSha256": "70c3dd94e0c71149cdd0c360b72bfd3161467194f695b7985126d7b4a4bf27d5",
+          "sourceIndexSha256": "df0644ea324ed9c268bf1cc6ec4ea35d1937865d3b4f0c9568a29fa539eddc27",
+          "query": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "input": "1:0",
+          "component": "normalizedInputType",
+          "node": 1,
+          "route": {
+            "root": "normalizedInputType",
+            "slots": []
+          }
+        },
+        "normalizedTypeText": "P → Q",
+        "normalizedKind": "forallE",
+        "observedArgumentSlots": [
+          1
+        ],
+        "formalBoundaries": [],
+        "definitionHops": [],
+        "nativeOwner": "70c3dd94e0c71149cdd0c360b72bfd3161467194f695b7985126d7b4a4bf27d5"
+      }
+    ]
+  },
+  "sourceOnlyUnavailability": true,
+  "scope": "Complete finite retained-boundary role partition and exact original source bundles, including callable proofs; original and normalized native function types compared with pinned observations. Not a common-context sequent, necessity or human comprehension result."
+}

@@ -1,0 +1,21 @@
+{
+  "format": "ProofAtlasInventoryRegionsBrowser/1",
+  "status": "PASS",
+  "hiddenRefusals": 1,
+  "witnessPages": 2,
+  "witnessSelections": 13,
+  "nativeOwnerChecks": 13,
+  "globalPasses": 2,
+  "missingIndexRefusals": 1,
+  "corruptIndexRefusals": 1,
+  "staleScanRefusals": 1,
+  "axeAudits": 4,
+  "wholeArchiveAttempts": 0,
+  "files": {
+    "public/js/proof-atlas-inventory-region-check.js": "63eda69ebfa20ed7eb83ce1d8732d2ea01b93717aeb48a7264058fe03f51ec27",
+    "public/js/proof-atlas-network-stream-view.js": "7212aadde36da93ae096fb82f68d85b9324cbf3c204bc801e46b21ed92139282",
+    "public/js/proof-atlas-application-region-view.js": "b6e2b5190361de8a567c8cc6b904657eb772a657ffc5ed39384a85d02c4efa76",
+    "public/data/proof-atlas/inventory-graph-manifest.js": "cd6ba1da55612d78a77796b2ede6ea459f6bb829dbf5f19e3b009b9603dbf08a",
+    "public/data/proof-atlas/inventory-region-controls-manifest.js": "120cdbf5b025b4bfbac1b89122442047fafea1e0df57ff5c7527a7cf2532e95a"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "producerSha256": "877fb1fe1bf894b552d0b5f8f88c598cfff46ca7ba39751fa448f366fe3f13d7",
+  "manifestSha256": "6bfd3cccf03a7ac433973412995d2ca2ab4a4263ea27283246d0bac6f93c53c9",
+  "profiles": [
+    {
+      "name": "AtlasRuleSupport.aliasProof",
+      "mode": "native",
+      "calls": 1,
+      "ports": 2,
+      "uses": 0,
+      "order": "call-id",
+      "graphSha256": "43fd40e3cdf304f68513e65bb09d4640380df026728e2b3a83b80a85438366b1",
+      "rootSha256": "518218be40b60faa94e79427d4fdeb72ad191da799eb4f6cdfd3471392e16adf"
+    },
+    {
+      "name": "AtlasRuleSupport.aliasValue",
+      "mode": "native",
+      "calls": 1,
+      "ports": 2,
+      "uses": 0,
+      "order": "call-id",
+      "graphSha256": "a27b2fe7ffe317c9331a6ca7c70e6875a54f90980b0730a0f506ec3f71cb4c45",
+      "rootSha256": "2efcf0c0eb1cb9e89d2e3a07f77d7a8ce630abd30cdd5e5d714df458d2e457bd"
+    },
+    {
+      "name": "AtlasRuleSupport.bothRoles",
+      "mode": "native",
+      "calls": 2,
+      "ports": 4,
+      "uses": 1,
+      "order": "call-id",
+      "graphSha256": "15feb8f794d4af13eaf0e72a2a6b1ea6042bad9cc024744595f8bcf09f17660f",
+      "rootSha256": "d42e6e431d98aeadf6f95766da826a94c572a27d107b4d8660b5baaf8d3e2b3b"
+    }
+  ],
+  "scope": "Every compact edge matches its original call input, reverse ordinal and original producer occurrence/context. Global topological order and count conservation are checked with bounded SQLite/page working sets."
+}

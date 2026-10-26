@@ -1,0 +1,152 @@
+{
+  "format": "ProofAtlasRuleSupportEvidence/1",
+  "status": "LOCAL_NATIVE_MODEL_AND_PRODUCTION_BROWSER_PASS_NOT_PUBLISHED",
+  "baselineCommit": "0e5895d384b185a1383f640144d284c550cba784",
+  "branch": "research/riccati-proof-interfaces",
+  "files": {
+    "docs/proof-atlas-research-program.md": "0feb73d0fd79f3eb4a85814ad4935e03d81e671e20fac106da1e915940d2324b",
+    "public/data/proof-atlas/rule-support-controls-manifest.js": "60b555513fc896c03f8368d64bbb253332d46cf1db7d2f7639cf72b1755ad6a7",
+    "public/data/proof-atlas/rule-support-graphs-manifest.js": "6bfd3cccf03a7ac433973412995d2ca2ab4a4263ea27283246d0bac6f93c53c9",
+    "public/js/proof-atlas-application-region-view.js": "b6e2b5190361de8a567c8cc6b904657eb772a657ffc5ed39384a85d02c4efa76",
+    "public/js/proof-atlas-network-port-inspector.js": "c4f28e0c2f89f24b730ffcd43c538b34f55a1428967ab57d7297ada953d804b5",
+    "public/js/proof-atlas-network-stream-view.js": "7212aadde36da93ae096fb82f68d85b9324cbf3c204bc801e46b21ed92139282",
+    "public/js/proof-atlas-rule-support.js": "1582a16639cac5518918e3a0e74af2222f878919eea2050b96e812bcea91b0a4",
+    "research/proof-atlas/network-streaming/index.html": "1fae9dc02a724518636f6cd61e48106712306833a02b5bdd40a472b0c5719434",
+    "research/proof-atlas/rule-support/Controls.lean": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e",
+    "research/proof-atlas/rule-support/build-graph.cjs": "877fb1fe1bf894b552d0b5f8f88c598cfff46ca7ba39751fa448f366fe3f13d7",
+    "research/proof-atlas/rule-support/prepare-controls.cjs": "c6475f70bc39590603c1e10616f7b1b7323eebad67344f45fb87ed31503691a0",
+    "research/proof-atlas/rule-support/publish-controls.cjs": "e1d1cc3a1495c4c4d1d26e2c0acdd4266ea5ea891dd9ed31e58c914187a41152",
+    "research/proof-atlas/rule-support/verify-controls.py": "ec77a51e71a8f8dc754e607f93646b8ba8e7b1367b54f325df6099a06ac90fa8",
+    "scripts/test-proof-atlas-application-regions-browser.cjs": "410afa9790fae5461af84cde91bda43b00e66b7f3ca9d1a33bf2e57d59976ab1",
+    "scripts/test-proof-atlas-rule-support-browser.cjs": "41b231d6338b2ea7945127ccdd59f3ee955026ab935be7f85e75071b52e66f4e",
+    "scripts/test-proof-atlas-rule-support.cjs": "4573173af21655a90839ed5b4b6b3ea5a0c3b07399e9081deb680671c3491672"
+  },
+  "checks": {
+    "research/proof-atlas/rule-support/native-verification.json": {
+      "status": "PASS",
+      "sha256": "399250024e987305329c3023c37b9f2c2c33708861acd1ac9ef8a85e8250e9f3"
+    },
+    "research/proof-atlas/rule-support/controls-derivation.json": {
+      "status": "PASS",
+      "sha256": "97d2e826ca1dab47721d3d5ff5f394455d625b232eeec5beb5f87f29c8c6ed46"
+    },
+    "research/proof-atlas/rule-support/graph-derivation.json": {
+      "status": "PASS",
+      "sha256": "e4396b5f37669196908fbeff71246b7e0a42a7aaf7afca95f99781282e4d5780"
+    },
+    "research/proof-atlas/rule-support/model-check.json": {
+      "status": "PASS",
+      "sha256": "9c511b412ed45e3118963b52b51bde6f80e525db513e2e8d99c144687db9747a"
+    },
+    "research/proof-atlas/rule-support/browser-check.json": {
+      "status": "PASS",
+      "sha256": "fc6211b1061f34ec05a86e6056352845419b4a34724e7384085eaaf34f0599f7"
+    },
+    "research/proof-atlas/rule-support/asset-check.json": {
+      "status": "PASS",
+      "sha256": "150d96c0a79feeb65643d7dbc3d4ca0a31cfd2ee00ee88f62f9e812fa1a2fa44"
+    },
+    "research/proof-atlas/rule-support/compatibility/result-uses.json": {
+      "status": "PASS",
+      "sha256": "a729aa02accfac73d5447aae73a55e686f95aeb561ed0c42f92d421cb53b851b"
+    },
+    "research/proof-atlas/rule-support/compatibility/manual.json": {
+      "status": "PASS",
+      "sha256": "b240f0fe9cd0d5e8dfb3bde0d19bc8874a60bcf07a95befc7659186798dfecaa"
+    },
+    "research/proof-atlas/rule-support/compatibility/inventory-regions.json": {
+      "status": "PASS",
+      "sha256": "2af8bec40a5bd9967ee792229a130f981a443f3b2588e70d98c8365d56b7eba2"
+    },
+    "research/proof-atlas/rule-support/compatibility/visual-clarity.json": {
+      "status": "PASS",
+      "sha256": "2df50bae81399c76420a2d7aa7ec13fbcb280697572e1c21b42e6d019e352478"
+    },
+    "research/proof-atlas/rule-support/compatibility/network-streaming.json": {
+      "status": "PASS",
+      "sha256": "d30028c99f8e20d0ebf98b94d831a48f487d5a62dea65a19e72f763fe20f10f6"
+    },
+    "research/proof-atlas/rule-support/compatibility/premise-sources.json": {
+      "status": "PASS",
+      "sha256": "3986ed87026bdfe1cc05a9d85fa5db72e1c8f4d40b19a055707e912ae6bac1d9"
+    },
+    "research/proof-atlas/rule-support/compatibility/regions.json": {
+      "status": "PASS",
+      "sha256": "86b8a2fb05e50335639719e7ae5179c0894bda865b8ae7123f2554b0c7fdd5a5"
+    },
+    "research/proof-atlas/rule-support/compatibility/result-path.json": {
+      "status": "PASS",
+      "sha256": "4d9eaeca4baf0c884c2e8b072522010dfbceeb531abdcada7710fbed830bafec"
+    },
+    "research/proof-atlas/rule-support/compatibility.json": {
+      "status": "PASS",
+      "sha256": "2c23258a11df20215e610d5edbf4f79073625bac9e72eb61463d2224ed507c37"
+    }
+  },
+  "priorInventoriesUnchanged": {
+    "public/data/proof-atlas/application-ports-manifest.js": "dbece0e885bd25a31d93c9871f8c0124aee18e64acfb5bf1956c407f65dbc50d",
+    "public/data/proof-atlas/application-network-manifest.js": "4a826bff4fac9649aeb2e1fb95c569e4072de8a692093ae398ff2ef049ec7060",
+    "public/data/proof-atlas/network-streaming-manifest.js": "5768d4f66ce01a092b5e126512998264502bd92b7c15caae8c79a60702e3087b",
+    "public/data/proof-atlas/application-region-controls-manifest.js": "8d1c8742f466b0adc810124b6cc8da0ee785904e36b51d7b066f0f6a4dff261b",
+    "public/data/proof-atlas/inventory-region-controls-manifest.js": "120cdbf5b025b4bfbac1b89122442047fafea1e0df57ff5c7527a7cf2532e95a",
+    "public/data/proof-atlas/inventory-graph-manifest.js": "cd6ba1da55612d78a77796b2ede6ea459f6bb829dbf5f19e3b009b9603dbf08a",
+    "public/data/proof-atlas/premise-source-controls-manifest.js": "7e625f5811104c20e5503625879fbf38ae6aa3751f34ab14a3e7a02fae1a2bea",
+    "public/data/proof-atlas/premise-source-graphs-manifest.js": "dfd5717c6c62fd0043e3fd93a636e7a8319f21b5692d8f7ffab71e623d63bc15"
+  },
+  "productionBuild": {
+    "command": "docker compose run --rm --no-deps --pull never build",
+    "exit": 0,
+    "generationSeconds": 266.788,
+    "sourceOverride": false,
+    "runtimeAssetsComparedWithBuiltAndServedBytes": true,
+    "applicationAssetsRefreshedAfterBuild": false
+  },
+  "inAppReview": {
+    "profile": "AtlasRuleSupport.bothRoles",
+    "applications": 2,
+    "boundaryPositions": 3,
+    "proofSources": 2,
+    "sharedSourcePositions": [
+      "0:1",
+      "1:0"
+    ],
+    "selectedHead": "1:0",
+    "selectedSourceNode": 10,
+    "originalContext": 4,
+    "sourceRoute": {
+      "root": 1,
+      "slots": [
+        1,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    "screenshot": "/private/tmp/atlas-rule-support-verified-rule-support/in-app-dual-role.png"
+  },
+  "publication": {
+    "deployed": false,
+    "pushed": false,
+    "pullRequestCreated": false,
+    "blogChanged": false,
+    "privateResearchProofScriptsAdded": false,
+    "rawExecutionLogsAdded": false,
+    "newSource": "Authored synthetic controls and implementation only; private proof data remain compiled observations"
+  },
+  "scope": "Complete role partition of a selected retained boundary, exact source bundling across proof-head/argument roles and separately addressed native original/literal/weak-head-normalized function types. Not a common-context sequent, full logical premise set, necessity or measured comprehension.",
+  "postBuildStaticEvidence": {
+    "files": [
+      "native-verification.json",
+      "controls-derivation.json",
+      "graph-derivation.json",
+      "model-check.json",
+      "browser-check.json",
+      "asset-check.json",
+      "compatibility.json",
+      "evidence.json"
+    ],
+    "encoding": "gzip with deterministic mtime 0",
+    "reason": "Plain JSON is excluded by the site. Completed compressed review reports and the technical README are copied after verification; application HTML, JavaScript, styles and data are the tested production build."
+  }
+}
