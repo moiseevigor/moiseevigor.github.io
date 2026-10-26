@@ -1,0 +1,25 @@
+{
+  "format": "ProofAtlasPremiseSourcesBrowser/1",
+  "status": "PASS",
+  "sourceOverride": false,
+  "controlProfiles": 2,
+  "premiseSelections": 9,
+  "computedSelections": 9,
+  "miniatureHighlights": 9,
+  "riccatiPropositions": 5,
+  "inputModeRoundTrips": 1,
+  "sourceOnlyRefusals": 1,
+  "axeAudits": 4,
+  "persistentDiagramChecks": 2,
+  "staleRefusals": 1,
+  "optionalRefusals": 1,
+  "wholeArchiveAttempts": 0,
+  "files": {
+    "public/js/proof-atlas-premise-sources.js": "d09cfd875be4a66e67dece929a25c403210178fe4ffcc7a72ed06ac6f59746b1",
+    "public/js/proof-atlas-network-stream-view.js": "7d66b0a7dc9335a30e71e4e21f368f53c3842a45c28537fc02661745211476c9",
+    "public/js/proof-atlas-application-region-view.js": "092e48a8428fc2a877d7cec1717f7305c9e341028c9692d19d8353e7abd94640",
+    "public/css/proof-atlas-application-regions.css": "2d62d3f285eb58722acad5df1b9d75becf270f82402830567f4b64a5eca98db3",
+    "public/data/proof-atlas/premise-source-controls-manifest.js": "7e625f5811104c20e5503625879fbf38ae6aa3751f34ab14a3e7a02fae1a2bea",
+    "public/data/proof-atlas/premise-source-graphs-manifest.js": "dfd5717c6c62fd0043e3fd93a636e7a8319f21b5692d8f7ffab71e623d63bc15"
+  }
+}

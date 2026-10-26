@@ -1,7 +1,7 @@
 :root .proof-atlas-theme .an-lab .rr-region{margin:0;padding:1rem;border:0;background:var(--bg);color:var(--text);font:.9rem/1.5 var(--sans,system-ui)}
 :root .proof-atlas-theme .an-lab .rr-region p{font-family:var(--sans,system-ui);line-height:1.5;max-width:none;margin:.4rem 0 .65rem}
 .rr-region h3,.rr-region h4{font:600 1rem/1.5 var(--sans,system-ui);margin:.25rem 0 .65rem}
-.rr-interface{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr) minmax(0,1.1fr);grid-template-areas:'inputs core outputs';gap:1rem;align-items:start;margin:1rem 0}
+.rr-interface{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.25fr) minmax(0,1fr);grid-template-areas:'inputs core outputs';gap:1rem;align-items:start;margin:1rem 0}
 .rr-inputs{grid-area:inputs;min-width:0}.rr-outputs{grid-area:outputs;min-width:0}
 .rr-core{grid-area:core;min-width:0;align-self:center;border:2px solid var(--accent);padding:.8rem;text-align:center}
 .rr-core strong,.rr-label{display:block}.rr-label{font-size:.75rem;color:var(--text-muted);margin-bottom:.5rem}
@@ -28,3 +28,12 @@
 .rr-premise .rr-label{margin-bottom:.2rem}.rr-premise pre{font-size:.82rem;line-height:1.6}.rr-mini .rr-selected-call{outline:3px solid var(--accent);outline-offset:2px}
 .rr-premise button[aria-pressed="true"]{outline:2px solid var(--accent);outline-offset:2px}
 @media(min-width:761px){.rr-core,.rr-outputs{position:sticky;top:.6rem;align-self:start}}
+@media(min-width:761px){.rr-core{max-height:min(46rem,calc(100dvh - 8rem));overflow:auto;scrollbar-gutter:stable}}
+.rr-step-summary,.rr-step-uses{text-align:left;min-width:0}
+.rr-step-summary{border-bottom:1px solid var(--border);padding-bottom:.6rem;margin:.75rem 0;scroll-margin-top:4rem}
+.rr-step-summary h4{overflow-wrap:anywhere}.rr-step-summary pre{font-size:.85rem;line-height:1.6}
+.rr-step-summary>button{width:100%}
+.rr-step-summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.rr-step-connections{border-top:1px solid var(--border);padding-top:.6rem;margin-top:.8rem}
+.rr-step-use{margin:.5rem 0 .8rem;padding:.45rem;border-left:2px solid var(--accent);background:var(--fig-bg)}
+.rr-step-use>button{display:inline-block;margin:.25rem .35rem .25rem 0}
