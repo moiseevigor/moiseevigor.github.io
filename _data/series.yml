@@ -265,9 +265,9 @@
   title: "Hidden protostars"
   subtitle: "Embedded activity in apparently prestellar Hi-GAL clumps: reviewed evidence, multiple survey views, and the limits of birth detection."
   status: active
-  question: "Can shared infrared, variability and molecular representations improve embedded-protostar candidate ranking over strong physical baselines at equal review cost?"
+  question: "Can uncertainty-aware integration across surveys improve evidence retrieval, coverage, transfer or review efficiency when searching for prestellar structures and embedded protostars?"
   outcome: "Catalogue associations are reproducible, but the physical hidden fraction is not identified. Ranking benefit, matched-control uncertainty and native quality/cadence gates failed. Fixed ablations recover 7/27 proxies from availability alone and establish no capacity cure; independent physical validation remains missing. No stellar birth or physical detector is established."
-  result: '14/27 vs 15/27 positives at 18 reviews · 333/800 controls pass'
+  result: '2,465 infrared counterparts · 12.8% of 19,219 clumps'
   limits: "Source ownership and physical truth remain unresolved. No qualifying positive has the registered temporal view; no stellar birth or physical detector is validated."
   code: research/starbirth/
   verdicts:
@@ -290,7 +290,7 @@
       url: /astrophysics/2026/10/12/hidden-protostars-missing-view-ranking/
       status: published
     - part: 4
-      title: "More model capacity is not the missing evidence"
+      title: "What sixteen ablations tell us about the embedding"
       url: /astrophysics/2026/10/14/hidden-protostars-ablation/
       status: published
 

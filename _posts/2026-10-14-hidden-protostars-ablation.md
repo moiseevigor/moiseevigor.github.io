@@ -1,9 +1,9 @@
 ---
 layout: distill
-last_modified_at: 2026-10-14
-title: "More model capacity is not the missing evidence"
+last_modified_at: 2026-10-26
+title: "What sixteen ablations tell us about the embedding"
 subtitle: >
-  Sixteen ablations separate physical features, observation availability and learned representations. The bottleneck is validation and coverage, with label-sensitive embeddings.
+  Sixteen fixed comparisons found no clear capacity cure. Missing observations and reused chemistry labels limit what the model scores can establish.
 date: 2026-10-14 20:00:00 +0200
 categories: [astrophysics]
 tags: [star-formation, unsupervised-learning, Hi-GAL, validation]
@@ -83,17 +83,17 @@ An independent checker caught a subtle error: identical input vectors acquired t
 
 The independent replay verifies every identity, score, selection, model fit, label subset and control. Reproduction details and retained execution records are in the linked evidence packet.
 
-<h2 id="next">The revised research target</h2>
+<h2 id="next">What this diagnostic required next</h2>
 
 **Establish incremental evidence beyond physical covariates and observation availability using independent, spatially held-out outcomes.** Before another fit, make a source-bound eligibility and adjudication ledger: ownership, usable complementary measurements, physical covariates and independent validation. Audit below-threshold sources as well as shortlisted ones; a shortlist cannot measure recall. Freeze a power and review-cost calculation before fixing the validation cohort.
 
 The learned representation is unsupervised; the downstream proxy ranker is supervised. Dust emission and an embedded star can coexist. Association, proxy activity, physical youth, discovery and an observed stellar transition remain distinct claims.
 
-If suitable validation or temporal support cannot be established within the next bounded week, the result should state that limitation. A larger architecture, a relaxed quality cut or another consumed-label win would not resolve it. The original ranking improvement gate and the earlier **333-of-800** control gate remain failed. The corrected NEOWISE quality/cadence support remains **0/3**. **No new star or birth is confirmed.**
+These were the requirements for the validation design below. The [current program](/astrophysics/2026/10/11/hidden-protostars-research-program/#program) also asks whether general cross-survey integration can improve retrieval, coverage, transfer or review cost. That hypothesis remains unvalidated. A larger architecture, a relaxed quality cut or another consumed-label win would not supply independent physical evidence. The original ranking improvement gate and the earlier **333-of-800** control gate remain failed. The corrected NEOWISE quality/cadence support remains **0/3**. **No new star or birth is confirmed.**
 
 <h2 id="validation-cohort">Independent evidence: a cohort with explicit limits</h2>
 
-We can now inspect a fixed **223-clump prospective cohort**, with known inclusion fractions and a record for every parent. It contains **60** sources selected by both methods, **103** where they disagree, and **60** selected by neither. Including the last group matters: examining only high scores cannot measure how many true protostars the methods miss.
+The published 14 October design defines a fixed **223-clump prospective cohort**, with known inclusion fractions and a record for every parent. It contains **60** sources selected by both methods, **103** where they disagree, and **60** selected by neither. Including the last group matters: examining only high scores cannot measure how many true protostars the methods miss.
 
 The conservative frame retains **14,980 of 19,328** clumps after excluding groups with previously consumed outcome/sample evidence or protected matched-control membership. Every exclusion is recorded. The existing unlabelled feature values were already inspected; this is a prospective assessment of frozen scores against future external evidence, not a new untouched training/test split.
 
