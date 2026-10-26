@@ -1,0 +1,50 @@
+{
+  "format": "ProofAtlasCallBoundaryBrowser/1",
+  "status": "PRODUCTION_CALL_BOUNDARY_BROWSER_PASS_NOT_PUBLISHED",
+  "sourceOverride": false,
+  "typedRows": 43,
+  "inputSelections": 32,
+  "contextChecks": 1,
+  "axeAudits": 4,
+  "pagingPreservesSelection": true,
+  "riccatiCall25": {
+    "source": {
+      "edition": "published-15",
+      "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+      "name": "JacobiData.slope_bound_abs",
+      "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7"
+    },
+    "nativeOwner": "7a995a4a5559be0a3f1778357ac9a9b696cc0bf446e7513f6a3d52822035af35",
+    "boundarySlots": [
+      0,
+      1,
+      2
+    ],
+    "internalSlots": [
+      3,
+      4
+    ]
+  },
+  "computedSelectionRoundTrip": true,
+  "literalAliases": 2,
+  "dualRoleIdentity": true,
+  "shadowedSourcesSeparate": true,
+  "changedCallCancelsOldPage": true,
+  "sourceOnlyNoTypes": true,
+  "staleRefusal": true,
+  "optionalRefusal": true,
+  "files": {
+    "public/js/proof-atlas-call-boundary.js": "3634b40fbdaf19108a222d6be052ee277ffafef04589ae96b6ab6eed55f2b8b1",
+    "public/js/proof-atlas-application-region-view.js": "1ee7541f3affe9034a03a3dd30b5535a90586f31900af3a91f66d9c91d427032",
+    "public/js/proof-atlas-network-stream-view.js": "cd750acb61dbfedeb2aee3eff74a8e2615374ccadcf761916502a7fa96d431df",
+    "public/css/proof-atlas-application-regions.css": "f5e9731a24bdfcd7db3b420b6cd9052c2ccdafd447d716def188cfd7d7571a55",
+    "public/data/proof-atlas/network-streaming-manifest.js": "5768d4f66ce01a092b5e126512998264502bd92b7c15caae8c79a60702e3087b",
+    "public/data/proof-atlas/application-region-controls-manifest.js": "8d1c8742f466b0adc810124b6cc8da0ee785904e36b51d7b066f0f6a4dff261b",
+    "public/data/proof-atlas/inventory-region-controls-manifest.js": "120cdbf5b025b4bfbac1b89122442047fafea1e0df57ff5c7527a7cf2532e95a",
+    "public/data/proof-atlas/premise-source-controls-manifest.js": "7e625f5811104c20e5503625879fbf38ae6aa3751f34ab14a3e7a02fae1a2bea",
+    "public/data/proof-atlas/rule-support-controls-manifest.js": "60b555513fc896c03f8368d64bbb253332d46cf1db7d2f7639cf72b1755ad6a7",
+    "research/proof-atlas/network-streaming/index.html": "250e653d0ae28a0a6a36bbcbfa37194c89d8461a449894e71df964cf0b3dad6a",
+    "research/proof-atlas/call-boundary/check-browser.cjs": "f846028f553103029c0888d9f559c46b6f86328d61fb2c68ca0c2c1c0f8c4cfe"
+  },
+  "wholeRuntimeArchiveRequests": 0
+}

@@ -1,0 +1,120 @@
+{
+  "format": "ProofAtlasCallBoundaryEvidence/1",
+  "status": "LOCAL_PRODUCTION_MODEL_AND_EIGHT_BROWSER_SUITES_PASS_NOT_PUBLISHED",
+  "producerHashes": {
+    "public/js/proof-atlas-call-boundary.js": "3634b40fbdaf19108a222d6be052ee277ffafef04589ae96b6ab6eed55f2b8b1",
+    "public/js/proof-atlas-application-region-view.js": "1ee7541f3affe9034a03a3dd30b5535a90586f31900af3a91f66d9c91d427032",
+    "public/js/proof-atlas-network-stream-view.js": "cd750acb61dbfedeb2aee3eff74a8e2615374ccadcf761916502a7fa96d431df",
+    "public/css/proof-atlas-application-regions.css": "f5e9731a24bdfcd7db3b420b6cd9052c2ccdafd447d716def188cfd7d7571a55",
+    "projects/proof-atlas/manual/index.html": "b1c469a8dedda054674e0eec6f83ccab68b49835d54b8ea7cbdd976e85e9e9b7",
+    "research/proof-atlas/network-streaming/index.html": "250e653d0ae28a0a6a36bbcbfa37194c89d8461a449894e71df964cf0b3dad6a",
+    "research/proof-atlas/call-boundary/README.md": "db5afc9378e3d00657814966258467fc2ae22fbce55d993552eaed5fd939ba18",
+    "research/proof-atlas/call-boundary/check-model.cjs": "f534d9332f61e283296b44e31a16be129a6f3333866fbd9cd53596d27357259f",
+    "research/proof-atlas/call-boundary/check-browser.cjs": "f846028f553103029c0888d9f559c46b6f86328d61fb2c68ca0c2c1c0f8c4cfe",
+    "scripts/test-proof-atlas-premise-sources-browser.cjs": "0b0a2bb22adbd6e66eba5580823de4f98bcc443449e8aa86f9363da1e4114580",
+    "scripts/test-proof-atlas-rule-support-browser.cjs": "d3755c002798efce3a26f6fa6b94bf5373b38cef745855952b9f84dbfdbc935e"
+  },
+  "reportHashes": {
+    "model-check.json": "d76e6842dfa9dab9ae6ddb6f1a079ed8e565b69fc4376cc80d42da582d6c402a",
+    "browser-check.json": "ee8b4921c1da2b1162e41e7dd717c60b408eab9322153e4838280e7fdf571140",
+    "compatibility.json": "fdbcf466d6a0c2dc5158a30fa519efe09596fdbbfa74cf7a9bac59081810cc42"
+  },
+  "productionBuildLogSha256": "8d004abecde9ace9f4eba6c7e21aa3a27e40072c9a5f7ddea07c2a5d564f90ff",
+  "builtReaderHtmlSha256": "92b8b668ee4dbd9d74f252482da51830217cfb489f60206aa5a28ed2ecb327c2",
+  "nativeOwners": [
+    "047af6080cb8745c50da556d2abcc71711ab2283d7499dfcc5e405a7a8dc3fbc",
+    "09894921b6e663399765b9446041d983162c698b38f434a3f7737ded5581d643",
+    "0d26bad876e259896b2906b4999dc4eb5840d73286ff29a377927a4bdf3bd566",
+    "128765b9ec9d98b83142a22b4f15faddebae53f80111d544008a0ef41e5bdd89",
+    "1d05bb9f7043366f3c0f2d2c8cfc01088decb111ff5be4713e2eb6bbf75dad4c",
+    "20a896b31dd0d3588140aaf2cb53832ec160b44b9dc4e774eca87d9e80a21181",
+    "31dbcdb4f5a26b873776ccf61a4bbad6c84c72fbadb4a958a789cebff8e7690c",
+    "41d2c12a83e39f4106af44f986507a26ef12e9cebeaa45d7ffb5043b4dd5481f",
+    "4249637cf30ba42946fb366fdd7f9e66f67d472d52347d5380ca370abc86befa",
+    "45e1adffeb9d0d3536b2b2fb62b9ddc6ea8e6424a954144ff299daded02104c4",
+    "49a42668bc0e682e7c4abbd75012dd5ebbab4f20d351d03537ca705a57ff6bf5",
+    "4e51e0ff28f19404f838aa7411fd90f8749e94258b42cae345fc2a71c66dbc0f",
+    "55404239e5ca3d0c64b794d9f125e1d4e0eb41d24749065b605680b8e195a99f",
+    "638e817b9e49341891b2aa520459fa99429aca57c37bc1edcb4dbd9feed1636c",
+    "669cabe0f43873946e63751a53f6aae43e0a3cdd566eaf164273ba2608dc252a",
+    "68b3f9aed9840e192856e9d292884a7e2ce60a2bb508369d71e0b42c51669a2b",
+    "6afa4767dd651e79b3a9ec4a00dbcb26bf3e61fcbe29ecb82b77728147883acb",
+    "70c3dd94e0c71149cdd0c360b72bfd3161467194f695b7985126d7b4a4bf27d5",
+    "73e03a0a9161eb682938490480d60cfc3ad59b6fa402dce8face828afbf66a8c",
+    "74ecaf668865e6a6cff8d9507d26951a79b4c2e080a5d1f8207ba7de61f058ea",
+    "79719592d4d29af1daf8ca702e5e3b3c98e3dc1e25a921aecf54a5cd5122e803",
+    "798b1445451e5ee111c5338aa95e0e360f716ee017a781892b62b575becff686",
+    "79f7e10659b28b898e07d8d09f698a3ff261fe490cbb09ec757c4535611dceab",
+    "7a995a4a5559be0a3f1778357ac9a9b696cc0bf446e7513f6a3d52822035af35",
+    "7d15705a5135472f893c578c0b89095f71f7df70c29bc8cde62863826a2a803d",
+    "88ae8a4649858d974d6625cff41cbd614c64037fab48e46367b45104712f2ecb",
+    "8953774ee08fd4c850e5a9da614ac3cb1432c49059ff1ebaef5ec888bc670a4a",
+    "8dec38424bb08a5c96bd3d22a4a64b9354322054ad228b2eacdadebf09b8d50d",
+    "92f9539805923baff5887be36081e997f0215d43329d5eda7cc7bec72acefc83",
+    "96f309321350677523f7d32e0fa1894624b4fe20c3e78205045bc7bdbfc13137",
+    "9894bfd2df2f124b135445279ac95068417206e569cda38ade1e6fd940ba05cc",
+    "a37f446d087e88ed153b11a451fefaa22957175c32b2ea4ab9da87ce66586829",
+    "a8d4f55dcd8822f8518b16acd66f2bf19f18c96e4278e84645455288841d5656",
+    "b4a4cf051c2b93f42c82d82bdc8e1df68890e0c971f867e8e88ac9a6bf1b4c29",
+    "b5962876ca5cb0031e5fa1785270a6246f694e42aaa09568ef2ac6b5f41f85b6",
+    "cac18fa83153dc15df3e3c635bae4b739f7de32353d82bddbd0dd32f3521ea90",
+    "d1915c984d7dba28269f143a8db75c029d5bf19e827fd6855a7c4828a946fee3",
+    "d6197a16fcb5c369efdf8588b0e3604d5f2de37ce07d83600b3dc9e1a86146f8",
+    "d7e0b5d2d6e2dfbdca48075c8955a7a6b3b3afbaa52da3536f35a08b0157c9dd",
+    "ec1a1a7011bf00f14bac877967d16439804c320cdfe65c8cdf9f2f4b9f6d6102",
+    "f264b5022e930f2393c6dbc63108062ca3d15c1822e50ebe702f53a59f0dcfd0",
+    "f441c1be3c49a24fc059c36868562acf1bf06ea43478641b0f8952f5acca4c27"
+  ],
+  "nativeProfiles": 42,
+  "cuts": 106,
+  "boundaryPositionAppearances": 983,
+  "negativeControls": 17,
+  "sourceOnly": {
+    "source": {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_54159",
+      "indexSha256": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+      "sourceSha256": "6e775cf687f0ff3c190bb091692f5a795294f4ae6bc17173df1744ba26042859"
+    },
+    "members": [
+      47,
+      48,
+      4061,
+      6233,
+      6234,
+      6235,
+      6236,
+      6241
+    ],
+    "positions": 25,
+    "nativeRequests": 0
+  },
+  "inAppReview": {
+    "status": "PASS",
+    "sequence": [
+      "load Riccati call 75",
+      "expand its connected calls",
+      "fold seven-call region",
+      "read call 25",
+      "confirm boundary slots 0, 1, 2 and internal slots 3, 4"
+    ],
+    "sourceNode": 3221,
+    "captureSha256": "e9904339f01c31a0e3e803b63131a5f3ced824f37d8d3f3e47099897eb0bd3ab",
+    "screenshotSha256": "d1e91fd59c3efdcd42c0fa340f99921198d3b725caf806d9b7ea735a9c4672bb",
+    "screenshotDelivery": "Native screenshot exported as PNG without content changes; chat deliverable, not a public site asset."
+  },
+  "scopes": [
+    "All roles at the selected call boundary; internal inputs remain separate source-use wires.",
+    "Expected types retain consumer contexts; producer types retain original contexts.",
+    "No new native extraction or private proof-script publication.",
+    "No common-context judgment, minimal-premise or measured-comprehension result.",
+    "Local prototype; no blog entry, public deployment or PR."
+  ],
+  "servedVerification": {
+    "status": "PASS",
+    "exactAssetAndEvidenceFiles": 16,
+    "manualAnchor": "construction-step-reading",
+    "readerHtmlMatchesBuiltFile": true,
+    "sourceOverrides": false
+  }
+}
