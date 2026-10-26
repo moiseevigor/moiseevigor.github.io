@@ -1,8 +1,9 @@
-# Peer-reviewed and conference publications, newest first. Rendered on /articles/ and
+# Peer-reviewed and conference publications; `date` orders them oldest first. Rendered on /articles/ and
 # /about/ by _includes/publications_list.html. Bibliographic data verified against
 # Crossref (DOI records), IEEE CSDL, arXiv and the venue pages on 2026-10-26.
 - year: 2026
   authors: "C. Breseman, F. Zanlungo, I. Moiseev, D. M. Woollard"
+  date: 2026-06-16
   title: "Micro-scale spatial modification and pedestrian behavior"
   venue: "Acta Polytechnica CTU Proceedings 57, 42–51 (Proceedings of the 12th International Conference on Pedestrian and Evacuation Dynamics, PED 2025, Prague, 9–12 September 2025)"
   doi: 10.14311/app.2026.57.0042
@@ -13,6 +14,7 @@
 
 - year: 2026
   authors: "C. Breseman, I. Moiseev, D. M. Woollard"
+  date: 2026-06-01
   title: "Temporal Specification Construct Undercoverage in Pedestrian Behavioral Modeling"
   venue: "Short paper, Workshop on Pedestrian Behaviour Prediction at the IEEE International Conference on Robotics and Automation (ICRA 2026), Vienna, 1 June 2026"
   links:
@@ -22,6 +24,7 @@
 
 - year: 2025
   authors: "C. Breseman, I. Moiseev, B. Abbate, D. M. Woollard"
+  date: 2025-11-13
   title: "BETWEEN: Boundary Estimation through Time Warping, Energy, & Entropy Neutralization"
   venue: "2025 IEEE International Conference on Knowledge Graph (ICKG), Limassol, Cyprus, 13–14 November 2025, pp. 17–26. IEEE"
   doi: 10.1109/ICKG66886.2025.00010
@@ -33,6 +36,7 @@
 
 - year: 2010
   authors: "I. Moiseev, Yu. L. Sachkov"
+  date: 2010-04-01
   title: "Maxwell strata in sub-Riemannian problem on the group of motions of a plane"
   venue: "ESAIM: Control, Optimisation and Calculus of Variations 16(2), 380–399"
   doi: 10.1051/cocv/2009004
@@ -42,6 +46,7 @@
 
 - year: 2006
   authors: "E. Sokolova, A. Skorinkin, I. Moiseev, A. Agrachev, A. Nistri, R. Giniatullin"
+  date: 2006-07-01
   title: "Experimental and Modeling Studies of Desensitization of P2X3 Receptors"
   venue: "Molecular Pharmacology 70(1), 373–382"
   doi: 10.1124/mol.106.023564

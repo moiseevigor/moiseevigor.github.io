@@ -10,6 +10,7 @@ tags: [SE2, sub-riemannian, geodesics, elliptic-functions]
 permalink: /articles/se2-conjugate-locus/
 published: true
 comments: false
+pdf: /public/research/se2/first_caustic_se2.pdf
 manuscript_status: "research draft; excluded-domain arguments open"
 ---
 

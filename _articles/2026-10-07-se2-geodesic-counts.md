@@ -10,6 +10,7 @@ tags: [SE2, sub-riemannian, geodesics, elliptic-functions]
 permalink: /articles/se2-geodesic-counts/
 published: true
 comments: false
+pdf: /public/research/se2/inversion_counts_se2.pdf
 manuscript_status: "manuscript candidate; final proof and novelty review open"
 ---
 
