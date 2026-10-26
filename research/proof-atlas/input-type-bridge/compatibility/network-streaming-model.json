@@ -1,0 +1,51 @@
+{
+  "format": "ProofAtlasNetworkStreamingAudit/1",
+  "status": "PASS",
+  "nativeProfiles": 31,
+  "nativeCuts": 305,
+  "nativePortSelections": 787,
+  "exactPortAddresses": 1574,
+  "computedContexts": 2361,
+  "collapseRoundtrips": 144,
+  "connectionPages": 469,
+  "largeCuts": 207,
+  "largeSourceInspections": 31,
+  "sourceOnlyTypeRefusals": 31,
+  "rankSelectChecks": 71478,
+  "staleRefusals": 1,
+  "corruptionRefusals": 1,
+  "budgetRefusals": 1,
+  "peakRetainedCalls": 8,
+  "peakRetainedBytes": 27276,
+  "peakCallCacheRows": 4,
+  "peakOutgoingCacheRows": 32,
+  "peakConnectionRows": 8,
+  "wholeArchivesRequested": 0,
+  "files": [
+    {
+      "file": "public/js/proof-atlas-network-page-store.js",
+      "sha256": "8653362782be9b69eaba6c4b67962200685ea00d363c71c373db04b22ff5855a"
+    },
+    {
+      "file": "public/js/proof-atlas-network-streaming.js",
+      "sha256": "0c871f8ffd713581717f31a07e99606ec46e4db9f5642706596d0744e84482ba"
+    },
+    {
+      "file": "public/js/proof-atlas-network-stream-pages.js",
+      "sha256": "bc90bbe5092146183d42d8e37bc09e7d43d9c4fac169d65eb8f6958bc0bae48f"
+    },
+    {
+      "file": "public/js/proof-atlas-network-port-inspector.js",
+      "sha256": "5be15833dd0f6bf61ac0af7798ec1aa2eb747553cf54616c993a2d6537dc7a89"
+    },
+    {
+      "file": "public/data/proof-atlas/network-streaming-manifest.js",
+      "sha256": "5768d4f66ce01a092b5e126512998264502bd92b7c15caae8c79a60702e3087b"
+    },
+    {
+      "file": "scripts/test-proof-atlas-network-streaming.cjs",
+      "sha256": "8ba5e7fec1681953bb687bc8960638adde8e3402da4f87e5fc9e8d8e5df5f2a1"
+    }
+  ],
+  "scope": "All earlier native ports retain addresses and contexts; actual large-packet cuts use bounded pages and refuse unobserved types. Numeric high-degree controls test rank/select arithmetic, not a million-call Lean proof or a full high-degree browser benchmark."
+}

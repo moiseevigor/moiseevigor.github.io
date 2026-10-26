@@ -1,0 +1,29 @@
+{
+  "format": "ProofAtlasInputTypeBridgeBrowser/1",
+  "status": "PRODUCTION_SHARED_TYPE_BRIDGE_BROWSER_PASS_NOT_PUBLISHED",
+  "sourceOverride": false,
+  "networkInputs": 3,
+  "typeRootSelections": 18,
+  "individualInputs": 3,
+  "librarySourcePreserved": 3,
+  "axeAudits": 8,
+  "rendererRefusals": 6,
+  "readabilityChecks": 33,
+  "identicalPrintDifferentStructure": true,
+  "rendererBudgetFixture": "Authored presentation state; not a native comparison result.",
+  "sourceOnlyBoundary": true,
+  "optionalNetworkFallback": true,
+  "optionalIndividualFallback": true,
+  "wholeRuntimeArchiveRequests": 0,
+  "files": {
+    "public/js/proof-atlas-application-ports.js": "03599f7bbdf8d9b5728bf516355e5fcb05bf65c4006f403d188cabd218e7bdf8",
+    "public/js/proof-atlas-application-port-pages.js": "2168f8755bdc55d845f338f20d4f93f7571227cad32334264a674ca7333d40e2",
+    "public/js/proof-atlas-application-port-view.js": "d97f950abf164f4d0ee09b425a9a5026e1338460b890d28955f766440f21644b",
+    "public/js/proof-atlas-network-port-inspector.js": "5be15833dd0f6bf61ac0af7798ec1aa2eb747553cf54616c993a2d6537dc7a89",
+    "public/js/proof-atlas-network-stream-view.js": "724fce9c9039bc582618e43c7936a453a83549076e556e8f4ca49ee924baeaaa",
+    "public/js/proof-atlas-application-region-view.js": "c5ec36c5b20398d6d0df4c8575c314b8efb6e67f81064e1e94440a73e52bdba7",
+    "public/js/proof-atlas-input-type-bridge-view.js": "0560709a5ff6f0d0eb00432ad4ff118f79aa219956ad3dddfd64289d96942548",
+    "public/css/proof-atlas-input-type-bridge.css": "27152d59b642010eac66b384846d2a9c13e3ca14695e26ad23c3d7bbcaf19766",
+    "research/proof-atlas/input-type-bridge/check-browser.cjs": "69f00b38076576cdadbd6335ed493b0431a2d94bbcf4b88b6bb54964652d025d"
+  }
+}

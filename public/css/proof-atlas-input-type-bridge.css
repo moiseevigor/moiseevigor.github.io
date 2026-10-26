@@ -1,0 +1,15 @@
+:root .atlas-type-bridge{margin:1rem 0;padding:1rem 0;border-block:1px solid var(--border);scroll-margin-top:5rem;font:.9rem/1.5 var(--sans,system-ui);color:var(--text)}
+.atlas-type-bridge:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+:root .atlas-type-bridge h4{font:600 1rem/1.5 var(--sans,system-ui)}
+:root .atlas-type-bridge p{font:.85rem/1.5 var(--sans,system-ui)}
+.atlas-type-flow{display:grid;grid-template-columns:minmax(0,1fr) 7.5rem minmax(0,1fr) 7.5rem minmax(0,1fr);gap:.65rem;align-items:start;margin:1rem 0}
+.atlas-type-identity{grid-template-columns:minmax(0,1fr) 7.5rem minmax(0,1fr)}
+.atlas-type-context-pair{min-width:0;border:1px solid var(--border);padding:.6rem;background:var(--fig-bg)}.atlas-type-context-pair .atlas-type-stage{border:0;padding:0;background:transparent}
+.atlas-type-stage{min-width:0;padding:.6rem;border:1px solid var(--border);background:var(--fig-bg)}
+.atlas-type-bridge button{min-height:44px;font:.85rem/1.5 var(--sans,system-ui);max-width:100%;overflow-wrap:anywhere}
+.atlas-type-stage button{width:100%;text-align:left}.atlas-type-stage pre{white-space:pre-wrap;overflow-wrap:anywhere;overflow:auto;max-height:15rem;font:.8rem/1.6 var(--mono,monospace)}
+.atlas-type-relation{text-align:center;display:grid;gap:.35rem;font:.8rem/1.5 var(--sans,system-ui);padding-top:.65rem}.atlas-type-relation strong{font-size:1.5rem}.atlas-type-relation small{font-size:.75rem}
+@media(max-width:900px){.atlas-type-flow,.atlas-type-identity{grid-template-columns:minmax(0,1fr)}.atlas-type-relation{grid-template-columns:2rem minmax(0,1fr);text-align:left;padding:.2rem 0}.atlas-type-relation small{grid-column:2}.atlas-type-relation strong{grid-row:span 2}}
+:root .proof-atlas-theme :is(.pa-manual,.ap-panel) .atlas-type-bridge{margin:1rem 0;padding:1rem 0;scroll-margin-top:5rem}
+:root .proof-atlas-theme :is(.pa-manual,.ap-panel) .atlas-type-bridge p{font:.85rem/1.5 var(--sans,system-ui);line-height:1.5}
+.atlas-type-bridge [data-type-select][aria-pressed="true"]{outline:2px solid var(--accent);outline-offset:2px}

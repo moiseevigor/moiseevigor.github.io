@@ -1,0 +1,506 @@
+{
+  "format": "ProofAtlasInputTypeBridgeEvidence/1",
+  "status": "LOCAL_PRODUCTION_NATIVE_FINGERPRINTS_AND_ELEVEN_BROWSER_SUITES_PASS_NOT_PUBLISHED",
+  "producerHashes": {
+    "public/js/proof-atlas-application-ports.js": "03599f7bbdf8d9b5728bf516355e5fcb05bf65c4006f403d188cabd218e7bdf8",
+    "public/js/proof-atlas-application-port-pages.js": "2168f8755bdc55d845f338f20d4f93f7571227cad32334264a674ca7333d40e2",
+    "public/js/proof-atlas-application-port-view.js": "d97f950abf164f4d0ee09b425a9a5026e1338460b890d28955f766440f21644b",
+    "public/js/proof-atlas-network-port-inspector.js": "5be15833dd0f6bf61ac0af7798ec1aa2eb747553cf54616c993a2d6537dc7a89",
+    "public/js/proof-atlas-network-stream-view.js": "724fce9c9039bc582618e43c7936a453a83549076e556e8f4ca49ee924baeaaa",
+    "public/js/proof-atlas-application-region-view.js": "c5ec36c5b20398d6d0df4c8575c314b8efb6e67f81064e1e94440a73e52bdba7",
+    "public/js/proof-atlas-input-type-bridge-view.js": "0560709a5ff6f0d0eb00432ad4ff118f79aa219956ad3dddfd64289d96942548",
+    "public/css/proof-atlas-input-type-bridge.css": "27152d59b642010eac66b384846d2a9c13e3ca14695e26ad23c3d7bbcaf19766",
+    "research/proof-atlas/network-streaming/index.html": "7a559f83c66f728c3d2b90eb7a7fc01fc09f6848a8b10bec3de6966a6bf2a6fe",
+    "projects/proof-atlas/manual/index.html": "e6b1c646aaff917f07a04a242a05d9283f9c1027879bcc22737c11945027d93e",
+    "research/proof-atlas/input-type-bridge/README.md": "58ff54785994597de46737dcacee871fb73616d1328493822b9ef1daf7833528",
+    "research/proof-atlas/input-type-bridge/check-model.cjs": "45e44c30e1474a43fc244ee5847daf09c118a72f93ea4414acbe7eafdab9f5d8",
+    "research/proof-atlas/input-type-bridge/check-browser.cjs": "69f00b38076576cdadbd6335ed493b0431a2d94bbcf4b88b6bb54964652d025d"
+  },
+  "reportHashes": {
+    "model-check.json": "56938d903a9e894f8619c2cebb1f15c82f2ae1c15e1a2c9fb8b3d872b9e95888",
+    "browser-check.json": "4b329f76d5d2417212201f48a2cf24ad0d3bbfa911bd9a870f799d6d0ad6438e",
+    "compatibility.json": "83c2842c5ce095fc532bdc58b76d2f5fb3b1f70ea78bd3b8725aeb7e29b5b7fb"
+  },
+  "productionBuildLogSha256": "43a8c94a3ee255e5cd577a31d0a2d6742c9c69c2490d8faf2c31b4e9b33ee342",
+  "builtReaderHtmlSha256": "08e7518cea8ddc1ad465005495cd030d0dd5c4cb74e2407f543d455a7942e442",
+  "nativeSources": [
+    {
+      "source": {
+        "edition": "published-15",
+        "indexSha256": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+        "name": "JacobiData.slope_bound_abs",
+        "sourceSha256": "6e1abe12147f9e611cea370501a12c89bf53ec0bb7a113d4658cb794822b4aa7"
+      },
+      "nativeOwner": "7a995a4a5559be0a3f1778357ac9a9b696cc0bf446e7513f6a3d52822035af35",
+      "inputs": 394
+    },
+    {
+      "source": {
+        "edition": "equality-transport-controls",
+        "indexSha256": "1884ff1d2a463be258a27a4487ae83afcd0f7237636975bcd72c74b18128ecc2",
+        "name": "AtlasTransportControls.simple",
+        "sourceSha256": "e0581a59e2ad4cf295d4b723b3d607a9d69a097c3e6a265cca1b3cb76cd1cdb8"
+      },
+      "nativeOwner": "a8d4f55dcd8822f8518b16acd66f2bf19f18c96e4278e84645455288841d5656",
+      "inputs": 5
+    },
+    {
+      "source": {
+        "edition": "equality-transport-controls",
+        "indexSha256": "9d6027e1c4236e349c4ece751ec87c624803e6004de9d7399a943cab4219558e",
+        "name": "AtlasTransportControls.dependent",
+        "sourceSha256": "e0581a59e2ad4cf295d4b723b3d607a9d69a097c3e6a265cca1b3cb76cd1cdb8"
+      },
+      "nativeOwner": "8953774ee08fd4c850e5a9da614ac3cb1432c49059ff1ebaef5ec888bc670a4a",
+      "inputs": 7
+    },
+    {
+      "source": {
+        "edition": "equality-transport-controls",
+        "indexSha256": "eb374d618bc2a5e9bc4bda68dfdcb2397808be685df3c0997ab4f7e4f016d26d",
+        "name": "AtlasTransportControls.proofDependent",
+        "sourceSha256": "e0581a59e2ad4cf295d4b723b3d607a9d69a097c3e6a265cca1b3cb76cd1cdb8"
+      },
+      "nativeOwner": "d7e0b5d2d6e2dfbdca48075c8955a7a6b3b3afbaa52da3536f35a08b0157c9dd",
+      "inputs": 7
+    },
+    {
+      "source": {
+        "edition": "equality-transport-controls",
+        "indexSha256": "977d4904a0f5596ed06d0ef5cc9796688b84d66e4ce7b021299589f33f649d52",
+        "name": "AtlasTransportControls.trailing",
+        "sourceSha256": "e0581a59e2ad4cf295d4b723b3d607a9d69a097c3e6a265cca1b3cb76cd1cdb8"
+      },
+      "nativeOwner": "45e1adffeb9d0d3536b2b2fb62b9ddc6ea8e6424a954144ff299daded02104c4",
+      "inputs": 5
+    },
+    {
+      "source": {
+        "edition": "equality-transport-controls",
+        "indexSha256": "dc46fa73198156f1c18ec58a9b6882968a85f765b1c0a5975f7a1039afe83035",
+        "name": "AtlasTransportControls.same",
+        "sourceSha256": "e0581a59e2ad4cf295d4b723b3d607a9d69a097c3e6a265cca1b3cb76cd1cdb8"
+      },
+      "nativeOwner": "79f7e10659b28b898e07d8d09f698a3ff261fe490cbb09ec757c4535611dceab",
+      "inputs": 5
+    },
+    {
+      "source": {
+        "edition": "equality-transport-controls",
+        "indexSha256": "a4b09e16906d5ae5481bb094ca9586728cc0059b57a4cf96e58eb14c7cd9b425",
+        "name": "AtlasTransportControls.reordered",
+        "sourceSha256": "e0581a59e2ad4cf295d4b723b3d607a9d69a097c3e6a265cca1b3cb76cd1cdb8"
+      },
+      "nativeOwner": "79719592d4d29af1daf8ca702e5e3b3c98e3dc1e25a921aecf54a5cd5122e803",
+      "inputs": 7
+    },
+    {
+      "source": {
+        "edition": "equality-transport-controls",
+        "indexSha256": "7230301a294058c5c4f776f0cd93dd946b8633a13ccdefd386496be1e8d2e3ea",
+        "name": "AtlasTransportControls.reverse",
+        "sourceSha256": "e0581a59e2ad4cf295d4b723b3d607a9d69a097c3e6a265cca1b3cb76cd1cdb8"
+      },
+      "nativeOwner": "6afa4767dd651e79b3a9ec4a00dbcb26bf3e61fcbe29ecb82b77728147883acb",
+      "inputs": 5
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+        "name": "lean_workbook_20418",
+        "sourceSha256": "44d7d19cff28d5b75dc33d21733bf14cb764e765f493ca46cf2a66345b8a3d07"
+      },
+      "nativeOwner": "41d2c12a83e39f4106af44f986507a26ef12e9cebeaa45d7ffb5043b4dd5481f",
+      "inputs": 12
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "indexSha256": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+        "name": "lean_workbook_4274",
+        "sourceSha256": "761ccc0ee9e693f87eabfca7b94449ec8ebe1c5293ddd528bed8eade57ca74a4"
+      },
+      "nativeOwner": "b5962876ca5cb0031e5fa1785270a6246f694e42aaa09568ef2ac6b5f41f85b6",
+      "inputs": 26
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "indexSha256": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+        "name": "lean_workbook_plus_15068",
+        "sourceSha256": "c8a09c1ece2d7fc13d9ef4d0979c71870e9e97202f8bed0df415a5c52788c2b5"
+      },
+      "nativeOwner": "f441c1be3c49a24fc059c36868562acf1bf06ea43478641b0f8952f5acca4c27",
+      "inputs": 34
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "indexSha256": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+        "name": "lean_workbook_plus_19617",
+        "sourceSha256": "0c75bdffb8429241e73c9e4f375bd15130b2c5a19855281071b9706b89478578"
+      },
+      "nativeOwner": "d1915c984d7dba28269f143a8db75c029d5bf19e827fd6855a7c4828a946fee3",
+      "inputs": 27
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "indexSha256": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+        "name": "lean_workbook_plus_39831",
+        "sourceSha256": "ceca77661c386d820b66fac94e6e1e4ebbb18d894f0b6a79c37f6cd2f425c9cf"
+      },
+      "nativeOwner": "68b3f9aed9840e192856e9d292884a7e2ce60a2bb508369d71e0b42c51669a2b",
+      "inputs": 24
+    },
+    {
+      "source": {
+        "edition": "goedel-sample-4331",
+        "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+        "name": "lean_workbook_plus_6206",
+        "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5"
+      },
+      "nativeOwner": "92f9539805923baff5887be36081e997f0215d43329d5eda7cc7bec72acefc83",
+      "inputs": 48
+    },
+    {
+      "source": {
+        "edition": "equality-transport-controls",
+        "indexSha256": "a0baa9aad5f3968145d1353663406709a49ef5438dd5ee4372a9fd484d2dafa9",
+        "name": "AtlasTransportStress.balanced",
+        "sourceSha256": "8ced97a2ba446c1a95806b72481c17d4539f91283f0f96f46bf47ce4508e0ba9"
+      },
+      "nativeOwner": "9894bfd2df2f124b135445279ac95068417206e569cda38ade1e6fd940ba05cc",
+      "inputs": 13
+    },
+    {
+      "source": {
+        "edition": "construction-composition-controls",
+        "indexSha256": "d103c773f0970a2395dee6852bd0c1704180f2377677f7b5010222a8845a8c51",
+        "name": "AtlasComposeControls.inlineCalls",
+        "sourceSha256": "14fda69fda6a9601fc288056df7c7dc6014addd0e66a77aed12b7e808e221d39"
+      },
+      "nativeOwner": "d6197a16fcb5c369efdf8588b0e3604d5f2de37ce07d83600b3dc9e1a86146f8",
+      "inputs": 10
+    },
+    {
+      "source": {
+        "edition": "construction-composition-controls",
+        "indexSha256": "3d0318b2bb63638991f34b7744472aa34fc5b1d76277697d68966bad9c68ddd3",
+        "name": "AtlasComposeControls.aliases",
+        "sourceSha256": "14fda69fda6a9601fc288056df7c7dc6014addd0e66a77aed12b7e808e221d39"
+      },
+      "nativeOwner": "74ecaf668865e6a6cff8d9507d26951a79b4c2e080a5d1f8207ba7de61f058ea",
+      "inputs": 10
+    },
+    {
+      "source": {
+        "edition": "construction-composition-controls",
+        "indexSha256": "6158ada685fe132b395d22b477973ebcc94ae7643445bcc16df25e205f0e7602",
+        "name": "AtlasComposeControls.weakening",
+        "sourceSha256": "14fda69fda6a9601fc288056df7c7dc6014addd0e66a77aed12b7e808e221d39"
+      },
+      "nativeOwner": "047af6080cb8745c50da556d2abcc71711ab2283d7499dfcc5e405a7a8dc3fbc",
+      "inputs": 10
+    },
+    {
+      "source": {
+        "edition": "construction-composition-controls",
+        "indexSha256": "ccadd94c7553fc27ce8d9a1f9e0783b8a9ae1b8cc93ffab233f3ec7b4b2af43d",
+        "name": "AtlasComposeControls.parallel",
+        "sourceSha256": "14fda69fda6a9601fc288056df7c7dc6014addd0e66a77aed12b7e808e221d39"
+      },
+      "nativeOwner": "b4a4cf051c2b93f42c82d82bdc8e1df68890e0c971f867e8e88ac9a6bf1b4c29",
+      "inputs": 15
+    },
+    {
+      "source": {
+        "edition": "construction-composition-controls",
+        "indexSha256": "5bfcfaf10f2b18b5a526a081cb8c9d8ee6222f36da78695f7bcddf7bb8b3e4ba",
+        "name": "AtlasComposeControls.shared",
+        "sourceSha256": "14fda69fda6a9601fc288056df7c7dc6014addd0e66a77aed12b7e808e221d39"
+      },
+      "nativeOwner": "88ae8a4649858d974d6625cff41cbd614c64037fab48e46367b45104712f2ecb",
+      "inputs": 15
+    },
+    {
+      "source": {
+        "edition": "construction-composition-controls",
+        "indexSha256": "98334325c3b378f8530c60902e8f8ef1fad049eba477cb6325aa732c1d1863ac",
+        "name": "AtlasComposeControls.crossContext",
+        "sourceSha256": "14fda69fda6a9601fc288056df7c7dc6014addd0e66a77aed12b7e808e221d39"
+      },
+      "nativeOwner": "669cabe0f43873946e63751a53f6aae43e0a3cdd566eaf164273ba2608dc252a",
+      "inputs": 10
+    },
+    {
+      "source": {
+        "edition": "construction-composition-controls",
+        "indexSha256": "913bff062a1cfdfceafc3002e6e83dc5ffb1f8d83976d267987c695832e32622",
+        "name": "AtlasComposeControls.samePorts",
+        "sourceSha256": "14fda69fda6a9601fc288056df7c7dc6014addd0e66a77aed12b7e808e221d39"
+      },
+      "nativeOwner": "96f309321350677523f7d32e0fa1894624b4fe20c3e78205045bc7bdbfc13137",
+      "inputs": 13
+    },
+    {
+      "source": {
+        "edition": "construction-composition-controls",
+        "indexSha256": "9497ff68cdbc00976a2d646d0cb9ba21457d110ef60a94a982fafac3865573a1",
+        "name": "AtlasComposeControls.nondepValue",
+        "sourceSha256": "14fda69fda6a9601fc288056df7c7dc6014addd0e66a77aed12b7e808e221d39"
+      },
+      "nativeOwner": "09894921b6e663399765b9446041d983162c698b38f434a3f7737ded5581d643",
+      "inputs": 14
+    },
+    {
+      "source": {
+        "edition": "application-port-controls",
+        "name": "AtlasApplicationPorts.dependent",
+        "indexSha256": "e476a4f0e6bc510e477a1b2139f4e8eb3ba35af1483a10f99aacfa84fb8b0eba",
+        "sourceSha256": "d274508f46bb25a56846b615e2cf51a65cefd74f223482cf648b5f9539b44992"
+      },
+      "nativeOwner": "1d05bb9f7043366f3c0f2d2c8cfc01088decb111ff5be4713e2eb6bbf75dad4c",
+      "inputs": 9
+    },
+    {
+      "source": {
+        "edition": "application-port-controls",
+        "name": "AtlasApplicationPorts.functions",
+        "indexSha256": "b8dc6049b71ce9c28d40c198efab6922fbbd8302e51b15934efb5181541f2243",
+        "sourceSha256": "d274508f46bb25a56846b615e2cf51a65cefd74f223482cf648b5f9539b44992"
+      },
+      "nativeOwner": "128765b9ec9d98b83142a22b4f15faddebae53f80111d544008a0ef41e5bdd89",
+      "inputs": 7
+    },
+    {
+      "source": {
+        "edition": "application-port-controls",
+        "name": "AtlasApplicationPorts.instances",
+        "indexSha256": "e275084ceeabe654527b4fb481f54a4fb0fc957d0dc9c901ebf758a1ab93a3c3",
+        "sourceSha256": "d274508f46bb25a56846b615e2cf51a65cefd74f223482cf648b5f9539b44992"
+      },
+      "nativeOwner": "638e817b9e49341891b2aa520459fa99429aca57c37bc1edcb4dbd9feed1636c",
+      "inputs": 10
+    },
+    {
+      "source": {
+        "edition": "application-port-controls",
+        "name": "AtlasApplicationPorts.partialUse",
+        "indexSha256": "b40e524f2fbc99dce9aa5013d8aac3820f5a429650294d1ef77ff5ca7d62190f",
+        "sourceSha256": "d274508f46bb25a56846b615e2cf51a65cefd74f223482cf648b5f9539b44992"
+      },
+      "nativeOwner": "cac18fa83153dc15df3e3c635bae4b739f7de32353d82bddbd0dd32f3521ea90",
+      "inputs": 6
+    },
+    {
+      "source": {
+        "edition": "application-port-controls",
+        "name": "AtlasApplicationPorts.binding",
+        "indexSha256": "7b47587bbe92aa9bdd6390507a382e487ac74d128b4384dc7561f310bdcb2c7e",
+        "sourceSha256": "d274508f46bb25a56846b615e2cf51a65cefd74f223482cf648b5f9539b44992"
+      },
+      "nativeOwner": "73e03a0a9161eb682938490480d60cfc3ad59b6fa402dce8face828afbf66a8c",
+      "inputs": 2
+    },
+    {
+      "source": {
+        "edition": "application-port-controls",
+        "name": "AtlasApplicationPorts.wide",
+        "indexSha256": "6f39e61f647922beb34e83afa2281c002217952fb0bd548e58ab46da1671a914",
+        "sourceSha256": "d274508f46bb25a56846b615e2cf51a65cefd74f223482cf648b5f9539b44992"
+      },
+      "nativeOwner": "31dbcdb4f5a26b873776ccf61a4bbad6c84c72fbadb4a958a789cebff8e7690c",
+      "inputs": 10
+    },
+    {
+      "source": {
+        "edition": "application-port-controls",
+        "name": "AtlasApplicationPorts.visibility",
+        "indexSha256": "2c0d7e2c293145519029dc152654f0ab47d377f86b13e3e938c6ea5efc19edea",
+        "sourceSha256": "d274508f46bb25a56846b615e2cf51a65cefd74f223482cf648b5f9539b44992"
+      },
+      "nativeOwner": "f264b5022e930f2393c6dbc63108062ca3d15c1822e50ebe702f53a59f0dcfd0",
+      "inputs": 19
+    },
+    {
+      "source": {
+        "edition": "application-port-controls",
+        "name": "AtlasApplicationPorts.aliasType",
+        "indexSha256": "6e00e2ea6bb0666b12febd4bf84d2707f9bb07a0c526986ca714c360df1c21eb",
+        "sourceSha256": "d274508f46bb25a56846b615e2cf51a65cefd74f223482cf648b5f9539b44992"
+      },
+      "nativeOwner": "7d15705a5135472f893c578c0b89095f71f7df70c29bc8cde62863826a2a803d",
+      "inputs": 8
+    },
+    {
+      "source": {
+        "edition": "application-region-controls",
+        "name": "AtlasRegionControls.diamond",
+        "indexSha256": "dd404836f8498f8ab1225abd13c3d1a7ee42a54631785db4ef90fc2aa6d83016",
+        "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda"
+      },
+      "nativeOwner": "49a42668bc0e682e7c4abbd75012dd5ebbab4f20d351d03537ca705a57ff6bf5",
+      "inputs": 9
+    },
+    {
+      "source": {
+        "edition": "application-region-controls",
+        "name": "AtlasRegionControls.shortcut",
+        "indexSha256": "e76ed433811b4ac2e4af546b17d23e450e7b44c639c22824eb49d67a28a0162f",
+        "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda"
+      },
+      "nativeOwner": "ec1a1a7011bf00f14bac877967d16439804c320cdfe65c8cdf9f2f4b9f6d6102",
+      "inputs": 7
+    },
+    {
+      "source": {
+        "edition": "application-region-controls",
+        "name": "AtlasRegionControls.twoPorts",
+        "indexSha256": "2afaa7703e0423b03f60a4fad408ea878410e858dbba0f46c1d1d2803caccc4a",
+        "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda"
+      },
+      "nativeOwner": "4249637cf30ba42946fb366fdd7f9e66f67d472d52347d5380ca370abc86befa",
+      "inputs": 5
+    },
+    {
+      "source": {
+        "edition": "application-region-controls",
+        "name": "AtlasRegionControls.proofShortcut",
+        "indexSha256": "0ac17626bab6e383f875b1d78d02f0bffac5645bf796a40d590c7a09c2f71508",
+        "sourceSha256": "3af9221958e779685e5e58bbe3b6d0e0634e146351a78004c0dda7cce7f3cfda"
+      },
+      "nativeOwner": "20a896b31dd0d3588140aaf2cb53832ec160b44b9dc4e774eca87d9e80a21181",
+      "inputs": 7
+    },
+    {
+      "source": {
+        "edition": "inventory-region-controls",
+        "name": "AtlasInventoryRegionControls.crossedGroups",
+        "indexSha256": "9fe6dc4254161095833dbef7209282506f861de003d6ff8b47a1a98aff7b3576",
+        "sourceSha256": "0bb077e50c7579ea257bda26a130ca42988a6519a14d82c3cb6a31766130b2c7"
+      },
+      "nativeOwner": "8dec38424bb08a5c96bd3d22a4a64b9354322054ad228b2eacdadebf09b8d50d",
+      "inputs": 15
+    },
+    {
+      "source": {
+        "edition": "inventory-region-controls",
+        "name": "AtlasInventoryRegionControls.longReturn",
+        "indexSha256": "6d98cfc68e6a088660afafa26efb0c5e3de336cca94721e7c5571f05864822e5",
+        "sourceSha256": "0bb077e50c7579ea257bda26a130ca42988a6519a14d82c3cb6a31766130b2c7"
+      },
+      "nativeOwner": "a37f446d087e88ed153b11a451fefaa22957175c32b2ea4ab9da87ce66586829",
+      "inputs": 29
+    },
+    {
+      "source": {
+        "edition": "premise-source-controls",
+        "name": "AtlasPremiseSources.contexts",
+        "indexSha256": "3bdbaddc45182ae68486eb4f0bc3f137958597ad6e58ed911023694bf8df930a",
+        "sourceSha256": "0db3a1831ef7ebc58e00334e8196ec8d678c50848f3886acab327bd1b46c5c7c"
+      },
+      "nativeOwner": "798b1445451e5ee111c5338aa95e0e360f716ee017a781892b62b575becff686",
+      "inputs": 5
+    },
+    {
+      "source": {
+        "edition": "premise-source-controls",
+        "name": "AtlasPremiseSources.shadows",
+        "indexSha256": "021813c109cb37669767a7e349c89657377aca43bd6174d9f6683b1f071e686e",
+        "sourceSha256": "0db3a1831ef7ebc58e00334e8196ec8d678c50848f3886acab327bd1b46c5c7c"
+      },
+      "nativeOwner": "55404239e5ca3d0c64b794d9f125e1d4e0eb41d24749065b605680b8e195a99f",
+      "inputs": 5
+    },
+    {
+      "source": {
+        "edition": "rule-support-controls",
+        "name": "AtlasRuleSupport.aliasProof",
+        "indexSha256": "ec5868bcc041d5d17bb1580f4607a0ca0e70f8723199981636bc0c16da8bf7b2",
+        "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e"
+      },
+      "nativeOwner": "0d26bad876e259896b2906b4999dc4eb5840d73286ff29a377927a4bdf3bd566",
+      "inputs": 2
+    },
+    {
+      "source": {
+        "edition": "rule-support-controls",
+        "name": "AtlasRuleSupport.aliasValue",
+        "indexSha256": "1942a964e8293a2a6e5a3736ea8d6cc036f8719284b8a305e54f4aaea5d740ed",
+        "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e"
+      },
+      "nativeOwner": "4e51e0ff28f19404f838aa7411fd90f8749e94258b42cae345fc2a71c66dbc0f",
+      "inputs": 2
+    },
+    {
+      "source": {
+        "edition": "rule-support-controls",
+        "name": "AtlasRuleSupport.bothRoles",
+        "indexSha256": "df0644ea324ed9c268bf1cc6ec4ea35d1937865d3b4f0c9568a29fa539eddc27",
+        "sourceSha256": "e1d109d55c42a318a01d12eda185484d14a801f0d5929a296dd772a41d347f5e"
+      },
+      "nativeOwner": "70c3dd94e0c71149cdd0c360b72bfd3161467194f695b7985126d7b4a4bf27d5",
+      "inputs": 4
+    }
+  ],
+  "observations": {
+    "nativeInputs": 877,
+    "nativeProfiles": 42,
+    "sameStructure": 792,
+    "differentStructure": 85,
+    "samePrintedTextDifferentStructure": 37,
+    "contextExtensions": 37,
+    "typeRootSelections": 2631,
+    "negativeControls": 15,
+    "peakPairs": 13,
+    "sourceOnlyInputs": 6
+  },
+  "sharedStructuralControl": {
+    "storedNodes": 2050,
+    "representedOccurrences": "53631231719770388398296099992823384509917463282369573510894245774887056120294187907207497192667613710760127432745944203415015531247786279785734596024336381",
+    "comparison": {
+      "status": "same",
+      "pairs": 1025,
+      "pairLimit": 262144
+    },
+    "reducedBudgetStatus": "unavailable",
+    "oldDepthComparisonStatus": "budget exceeded",
+    "scope": "Authored, structurally validated DAG; no native typing or kernel-replay claim."
+  },
+  "inAppReview": {
+    "status": "PASS",
+    "sequence": [
+      "fold seven-call Riccati region",
+      "read call 25",
+      "inspect input 25:3",
+      "compare input types",
+      "select expected input type and verify its active state"
+    ],
+    "nativeOwner": "7a995a4a5559be0a3f1778357ac9a9b696cc0bf446e7513f6a3d52822035af35",
+    "input": "25:3",
+    "selectedComponent": "inputType",
+    "selectedComputedNode": 162,
+    "captureSha256": "4496ccb71d7312151a26626d2ab6b825cd7790939e2ab52870fc4366e539fb49",
+    "screenshotSha256": "a67ed7f1f3af80559c1dca4c7c51004467c83bcffd5c7bcd2fcf15b2cae0fa1f",
+    "screenshotDelivery": "Native screenshot exported as PNG without content changes; chat deliverable, not a public asset."
+  },
+  "scopes": [
+    "Recorded type roots and kernel-conversion attestations; no new kernel replay.",
+    "Common-context literal comparison is separate from native weakening validation and source-use selection.",
+    "Original producer contexts and full computed component identities remain distinct.",
+    "Six selected source-only inputs remain untyped; no whole-corpus typing claim.",
+    "Shared-term scale control and unavailable renderer fixture have no native typing claim.",
+    "No measured comprehension, semantic-compression or premise-necessity result.",
+    "No original private Lean/tactic scripts or extraction logs published.",
+    "Local prototype; blog, deployment and PR state unchanged."
+  ],
+  "servedVerification": {
+    "status": "PASS",
+    "exactAssetAndEvidenceFiles": 26,
+    "manualAnchor": "construction-step-reading",
+    "readerHtmlMatchesBuiltFile": true,
+    "sourceOverrides": false
+  }
+}
