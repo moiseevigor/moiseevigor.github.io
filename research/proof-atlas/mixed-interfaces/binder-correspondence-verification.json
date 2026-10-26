@@ -1,0 +1,3986 @@
+{
+  "status": "PASS",
+  "profiles": 26,
+  "introductions": 209,
+  "syntaxPairs": 55443,
+  "scopeStates": 127984,
+  "innerBinderStates": 5110,
+  "introducedBinderStates": 341,
+  "outerContextStates": 3696,
+  "sameRootDifferentBinderNamespaces": 123,
+  "maxScopeStates": 3111,
+  "rows": [
+    {
+      "name": "JacobiCore.E_pos",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 60,
+      "observedRoot": 60,
+      "scopeStates": 25,
+      "counts": {
+        "inner": 0,
+        "introduced": 1,
+        "outer": 0
+      }
+    },
+    {
+      "name": "JacobiCore.E_pos",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 6,
+        "slots": "SQQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 0,
+      "observedRoot": 0,
+      "scopeStates": 1,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 0
+      }
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 317,
+      "observedRoot": 317,
+      "scopeStates": 225,
+      "counts": {
+        "inner": 5,
+        "introduced": 5,
+        "outer": 0
+      }
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 316,
+      "observedRoot": 316,
+      "scopeStates": 223,
+      "counts": {
+        "inner": 0,
+        "introduced": 5,
+        "outer": 5
+      }
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 2,
+        "slots": "BQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 315,
+      "observedRoot": 315,
+      "scopeStates": 187,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 8
+      }
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 3,
+        "slots": "FQ"
+      },
+      "contextLength": 3,
+      "expectedRoot": 314,
+      "observedRoot": 314,
+      "scopeStates": 165,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 6
+      }
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 4,
+        "slots": "VQ"
+      },
+      "contextLength": 4,
+      "expectedRoot": 313,
+      "observedRoot": 313,
+      "scopeStates": 143,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 4
+      }
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 5,
+        "slots": "VQE"
+      },
+      "contextLength": 5,
+      "expectedRoot": 312,
+      "observedRoot": 312,
+      "scopeStates": 123,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 2
+      }
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 17,
+        "slots": "VaWqFAE"
+      },
+      "contextLength": 12,
+      "expectedRoot": 0,
+      "observedRoot": 0,
+      "scopeStates": 1,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 0
+      }
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 16,
+        "slots": "VaVqQA"
+      },
+      "contextLength": 11,
+      "expectedRoot": 0,
+      "observedRoot": 0,
+      "scopeStates": 1,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 0
+      }
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 14,
+        "slots": "VaVqBA"
+      },
+      "contextLength": 11,
+      "expectedRoot": 902,
+      "observedRoot": 902,
+      "scopeStates": 35,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 2
+      }
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 13,
+        "slots": "VaVqAQ"
+      },
+      "contextLength": 11,
+      "expectedRoot": 902,
+      "observedRoot": 902,
+      "scopeStates": 35,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 2
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 833,
+      "observedRoot": 833,
+      "scopeStates": 3111,
+      "counts": {
+        "inner": 190,
+        "introduced": 15,
+        "outer": 0
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 832,
+      "observedRoot": 832,
+      "scopeStates": 3109,
+      "counts": {
+        "inner": 185,
+        "introduced": 5,
+        "outer": 15
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 2,
+        "slots": "BQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 831,
+      "observedRoot": 831,
+      "scopeStates": 3091,
+      "counts": {
+        "inner": 184,
+        "introduced": 1,
+        "outer": 19
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 3,
+        "slots": "FQ"
+      },
+      "contextLength": 3,
+      "expectedRoot": 830,
+      "observedRoot": 830,
+      "scopeStates": 3089,
+      "counts": {
+        "inner": 173,
+        "introduced": 11,
+        "outer": 20
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 4,
+        "slots": "VQ"
+      },
+      "contextLength": 4,
+      "expectedRoot": 829,
+      "observedRoot": 829,
+      "scopeStates": 3087,
+      "counts": {
+        "inner": 162,
+        "introduced": 11,
+        "outer": 31
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 5,
+        "slots": "VQE"
+      },
+      "contextLength": 5,
+      "expectedRoot": 828,
+      "observedRoot": 828,
+      "scopeStates": 3077,
+      "counts": {
+        "inner": 161,
+        "introduced": 1,
+        "outer": 40
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 6,
+        "slots": "VQU"
+      },
+      "contextLength": 6,
+      "expectedRoot": 827,
+      "observedRoot": 827,
+      "scopeStates": 3075,
+      "counts": {
+        "inner": 154,
+        "introduced": 7,
+        "outer": 41
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 7,
+        "slots": "VRU"
+      },
+      "contextLength": 7,
+      "expectedRoot": 826,
+      "observedRoot": 826,
+      "scopeStates": 3050,
+      "counts": {
+        "inner": 153,
+        "introduced": 1,
+        "outer": 47
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 8,
+        "slots": "VVU"
+      },
+      "contextLength": 8,
+      "expectedRoot": 825,
+      "observedRoot": 825,
+      "scopeStates": 3048,
+      "counts": {
+        "inner": 146,
+        "introduced": 7,
+        "outer": 48
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 9,
+        "slots": "VVUB"
+      },
+      "contextLength": 9,
+      "expectedRoot": 824,
+      "observedRoot": 824,
+      "scopeStates": 3023,
+      "counts": {
+        "inner": 145,
+        "introduced": 1,
+        "outer": 54
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 10,
+        "slots": "VVUF"
+      },
+      "contextLength": 10,
+      "expectedRoot": 823,
+      "observedRoot": 823,
+      "scopeStates": 3000,
+      "counts": {
+        "inner": 143,
+        "introduced": 1,
+        "outer": 54
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 11,
+        "slots": "VVUV"
+      },
+      "contextLength": 11,
+      "expectedRoot": 822,
+      "observedRoot": 822,
+      "scopeStates": 2957,
+      "counts": {
+        "inner": 140,
+        "introduced": 1,
+        "outer": 52
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 12,
+        "slots": "VVVV"
+      },
+      "contextLength": 12,
+      "expectedRoot": 821,
+      "observedRoot": 821,
+      "scopeStates": 2903,
+      "counts": {
+        "inner": 137,
+        "introduced": 1,
+        "outer": 50
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 13,
+        "slots": "VVVVAQ"
+      },
+      "contextLength": 13,
+      "expectedRoot": 820,
+      "observedRoot": 820,
+      "scopeStates": 2822,
+      "counts": {
+        "inner": 134,
+        "introduced": 1,
+        "outer": 47
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 14,
+        "slots": "VVVVBQ"
+      },
+      "contextLength": 14,
+      "expectedRoot": 819,
+      "observedRoot": 819,
+      "scopeStates": 2743,
+      "counts": {
+        "inner": 131,
+        "introduced": 1,
+        "outer": 44
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 15,
+        "slots": "VVVVFQ"
+      },
+      "contextLength": 15,
+      "expectedRoot": 818,
+      "observedRoot": 818,
+      "scopeStates": 2688,
+      "counts": {
+        "inner": 128,
+        "introduced": 1,
+        "outer": 41
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 16,
+        "slots": "VVVVVQ"
+      },
+      "contextLength": 16,
+      "expectedRoot": 817,
+      "observedRoot": 817,
+      "scopeStates": 2579,
+      "counts": {
+        "inner": 125,
+        "introduced": 1,
+        "outer": 39
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 17,
+        "slots": "VVVVVQE"
+      },
+      "contextLength": 17,
+      "expectedRoot": 816,
+      "observedRoot": 816,
+      "scopeStates": 2508,
+      "counts": {
+        "inner": 124,
+        "introduced": 1,
+        "outer": 37
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 18,
+        "slots": "VVVVVQU"
+      },
+      "contextLength": 18,
+      "expectedRoot": 815,
+      "observedRoot": 815,
+      "scopeStates": 2374,
+      "counts": {
+        "inner": 123,
+        "introduced": 1,
+        "outer": 35
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 19,
+        "slots": "VVVVVRU"
+      },
+      "contextLength": 19,
+      "expectedRoot": 814,
+      "observedRoot": 814,
+      "scopeStates": 2245,
+      "counts": {
+        "inner": 122,
+        "introduced": 1,
+        "outer": 33
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 20,
+        "slots": "VVVVVVU"
+      },
+      "contextLength": 20,
+      "expectedRoot": 813,
+      "observedRoot": 813,
+      "scopeStates": 2165,
+      "counts": {
+        "inner": 121,
+        "introduced": 1,
+        "outer": 31
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 21,
+        "slots": "VVVVVVUB"
+      },
+      "contextLength": 21,
+      "expectedRoot": 812,
+      "observedRoot": 812,
+      "scopeStates": 2162,
+      "counts": {
+        "inner": 115,
+        "introduced": 6,
+        "outer": 32
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 22,
+        "slots": "VVVVVVUF"
+      },
+      "contextLength": 22,
+      "expectedRoot": 811,
+      "observedRoot": 811,
+      "scopeStates": 1910,
+      "counts": {
+        "inner": 112,
+        "introduced": 1,
+        "outer": 37
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 23,
+        "slots": "VVVVVVUV"
+      },
+      "contextLength": 23,
+      "expectedRoot": 810,
+      "observedRoot": 810,
+      "scopeStates": 1871,
+      "counts": {
+        "inner": 111,
+        "introduced": 1,
+        "outer": 37
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 24,
+        "slots": "VVVVVVVV"
+      },
+      "contextLength": 24,
+      "expectedRoot": 809,
+      "observedRoot": 809,
+      "scopeStates": 1854,
+      "counts": {
+        "inner": 110,
+        "introduced": 1,
+        "outer": 37
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 25,
+        "slots": "VVVVVVVVAQ"
+      },
+      "contextLength": 25,
+      "expectedRoot": 808,
+      "observedRoot": 808,
+      "scopeStates": 1836,
+      "counts": {
+        "inner": 109,
+        "introduced": 1,
+        "outer": 36
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 26,
+        "slots": "VVVVVVVVBQ"
+      },
+      "contextLength": 26,
+      "expectedRoot": 807,
+      "observedRoot": 807,
+      "scopeStates": 1762,
+      "counts": {
+        "inner": 106,
+        "introduced": 1,
+        "outer": 35
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 27,
+        "slots": "VVVVVVVVFQ"
+      },
+      "contextLength": 27,
+      "expectedRoot": 806,
+      "observedRoot": 806,
+      "scopeStates": 1639,
+      "counts": {
+        "inner": 101,
+        "introduced": 1,
+        "outer": 34
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 28,
+        "slots": "VVVVVVVVVQ"
+      },
+      "contextLength": 28,
+      "expectedRoot": 805,
+      "observedRoot": 805,
+      "scopeStates": 1637,
+      "counts": {
+        "inner": 88,
+        "introduced": 13,
+        "outer": 35
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 29,
+        "slots": "VVVVVVVVVQE"
+      },
+      "contextLength": 29,
+      "expectedRoot": 804,
+      "observedRoot": 804,
+      "scopeStates": 1635,
+      "counts": {
+        "inner": 83,
+        "introduced": 5,
+        "outer": 48
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 30,
+        "slots": "VVVVVVVVVQU"
+      },
+      "contextLength": 30,
+      "expectedRoot": 803,
+      "observedRoot": 803,
+      "scopeStates": 1617,
+      "counts": {
+        "inner": 82,
+        "introduced": 1,
+        "outer": 52
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 31,
+        "slots": "VVVVVVVVVRU"
+      },
+      "contextLength": 31,
+      "expectedRoot": 802,
+      "observedRoot": 802,
+      "scopeStates": 1615,
+      "counts": {
+        "inner": 71,
+        "introduced": 11,
+        "outer": 53
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 32,
+        "slots": "VVVVVVVVVVU"
+      },
+      "contextLength": 32,
+      "expectedRoot": 801,
+      "observedRoot": 801,
+      "scopeStates": 1613,
+      "counts": {
+        "inner": 60,
+        "introduced": 11,
+        "outer": 64
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 33,
+        "slots": "VVVVVVVVVVUB"
+      },
+      "contextLength": 33,
+      "expectedRoot": 800,
+      "observedRoot": 800,
+      "scopeStates": 1603,
+      "counts": {
+        "inner": 59,
+        "introduced": 1,
+        "outer": 73
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 34,
+        "slots": "VVVVVVVVVVUF"
+      },
+      "contextLength": 34,
+      "expectedRoot": 799,
+      "observedRoot": 799,
+      "scopeStates": 1601,
+      "counts": {
+        "inner": 52,
+        "introduced": 7,
+        "outer": 74
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 35,
+        "slots": "VVVVVVVVVVUV"
+      },
+      "contextLength": 35,
+      "expectedRoot": 798,
+      "observedRoot": 798,
+      "scopeStates": 1576,
+      "counts": {
+        "inner": 51,
+        "introduced": 1,
+        "outer": 80
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 36,
+        "slots": "VVVVVVVVVVVV"
+      },
+      "contextLength": 36,
+      "expectedRoot": 797,
+      "observedRoot": 797,
+      "scopeStates": 1574,
+      "counts": {
+        "inner": 44,
+        "introduced": 7,
+        "outer": 81
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 37,
+        "slots": "VVVVVVVVVVVVAQ"
+      },
+      "contextLength": 37,
+      "expectedRoot": 796,
+      "observedRoot": 796,
+      "scopeStates": 1549,
+      "counts": {
+        "inner": 43,
+        "introduced": 1,
+        "outer": 87
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 38,
+        "slots": "VVVVVVVVVVVVBQ"
+      },
+      "contextLength": 38,
+      "expectedRoot": 795,
+      "observedRoot": 795,
+      "scopeStates": 1526,
+      "counts": {
+        "inner": 41,
+        "introduced": 1,
+        "outer": 87
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 39,
+        "slots": "VVVVVVVVVVVVFQ"
+      },
+      "contextLength": 39,
+      "expectedRoot": 794,
+      "observedRoot": 794,
+      "scopeStates": 1483,
+      "counts": {
+        "inner": 38,
+        "introduced": 1,
+        "outer": 85
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 40,
+        "slots": "VVVVVVVVVVVVVQ"
+      },
+      "contextLength": 40,
+      "expectedRoot": 793,
+      "observedRoot": 793,
+      "scopeStates": 1429,
+      "counts": {
+        "inner": 35,
+        "introduced": 1,
+        "outer": 83
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 41,
+        "slots": "VVVVVVVVVVVVVQE"
+      },
+      "contextLength": 41,
+      "expectedRoot": 792,
+      "observedRoot": 792,
+      "scopeStates": 1348,
+      "counts": {
+        "inner": 32,
+        "introduced": 1,
+        "outer": 80
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 42,
+        "slots": "VVVVVVVVVVVVVQU"
+      },
+      "contextLength": 42,
+      "expectedRoot": 791,
+      "observedRoot": 791,
+      "scopeStates": 1269,
+      "counts": {
+        "inner": 29,
+        "introduced": 1,
+        "outer": 77
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 43,
+        "slots": "VVVVVVVVVVVVVRU"
+      },
+      "contextLength": 43,
+      "expectedRoot": 790,
+      "observedRoot": 790,
+      "scopeStates": 1214,
+      "counts": {
+        "inner": 26,
+        "introduced": 1,
+        "outer": 74
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 44,
+        "slots": "VVVVVVVVVVVVVVU"
+      },
+      "contextLength": 44,
+      "expectedRoot": 789,
+      "observedRoot": 789,
+      "scopeStates": 1105,
+      "counts": {
+        "inner": 23,
+        "introduced": 1,
+        "outer": 72
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 45,
+        "slots": "VVVVVVVVVVVVVVUB"
+      },
+      "contextLength": 45,
+      "expectedRoot": 788,
+      "observedRoot": 788,
+      "scopeStates": 1034,
+      "counts": {
+        "inner": 22,
+        "introduced": 1,
+        "outer": 70
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 46,
+        "slots": "VVVVVVVVVVVVVVUF"
+      },
+      "contextLength": 46,
+      "expectedRoot": 787,
+      "observedRoot": 787,
+      "scopeStates": 900,
+      "counts": {
+        "inner": 21,
+        "introduced": 1,
+        "outer": 68
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 47,
+        "slots": "VVVVVVVVVVVVVVUV"
+      },
+      "contextLength": 47,
+      "expectedRoot": 786,
+      "observedRoot": 786,
+      "scopeStates": 771,
+      "counts": {
+        "inner": 20,
+        "introduced": 1,
+        "outer": 66
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 48,
+        "slots": "VVVVVVVVVVVVVVVV"
+      },
+      "contextLength": 48,
+      "expectedRoot": 785,
+      "observedRoot": 785,
+      "scopeStates": 691,
+      "counts": {
+        "inner": 19,
+        "introduced": 1,
+        "outer": 64
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 49,
+        "slots": "VVVVVVVVVVVVVVVVAQ"
+      },
+      "contextLength": 49,
+      "expectedRoot": 784,
+      "observedRoot": 784,
+      "scopeStates": 688,
+      "counts": {
+        "inner": 14,
+        "introduced": 5,
+        "outer": 65
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 50,
+        "slots": "VVVVVVVVVVVVVVVVBQ"
+      },
+      "contextLength": 50,
+      "expectedRoot": 783,
+      "observedRoot": 783,
+      "scopeStates": 436,
+      "counts": {
+        "inner": 11,
+        "introduced": 1,
+        "outer": 69
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 51,
+        "slots": "VVVVVVVVVVVVVVVVFQ"
+      },
+      "contextLength": 51,
+      "expectedRoot": 782,
+      "observedRoot": 782,
+      "scopeStates": 397,
+      "counts": {
+        "inner": 10,
+        "introduced": 1,
+        "outer": 69
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 52,
+        "slots": "VVVVVVVVVVVVVVVVVQ"
+      },
+      "contextLength": 52,
+      "expectedRoot": 781,
+      "observedRoot": 781,
+      "scopeStates": 380,
+      "counts": {
+        "inner": 9,
+        "introduced": 1,
+        "outer": 69
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 53,
+        "slots": "VVVVVVVVVVVVVVVVVQE"
+      },
+      "contextLength": 53,
+      "expectedRoot": 780,
+      "observedRoot": 780,
+      "scopeStates": 362,
+      "counts": {
+        "inner": 8,
+        "introduced": 1,
+        "outer": 68
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 54,
+        "slots": "VVVVVVVVVVVVVVVVVQU"
+      },
+      "contextLength": 54,
+      "expectedRoot": 779,
+      "observedRoot": 779,
+      "scopeStates": 292,
+      "counts": {
+        "inner": 6,
+        "introduced": 1,
+        "outer": 69
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 55,
+        "slots": "VVVVVVVVVVVVVVVVVRU"
+      },
+      "contextLength": 55,
+      "expectedRoot": 778,
+      "observedRoot": 778,
+      "scopeStates": 168,
+      "counts": {
+        "inner": 0,
+        "introduced": 1,
+        "outer": 69
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 56,
+        "slots": "VVVVVVVVVVVVVVVVVVU"
+      },
+      "contextLength": 56,
+      "expectedRoot": 777,
+      "observedRoot": 777,
+      "scopeStates": 49,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 14
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 58,
+        "slots": "VVVVVVVVVVVVVVVVVVUF"
+      },
+      "contextLength": 57,
+      "expectedRoot": 1381,
+      "observedRoot": 1381,
+      "scopeStates": 98,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 26
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 59,
+        "slots": "VVVVVVVVVVVVVVVVVVUV"
+      },
+      "contextLength": 58,
+      "expectedRoot": 1380,
+      "observedRoot": 1380,
+      "scopeStates": 90,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 24
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 60,
+        "slots": "VVVVVVVVVVVVVVVVVVVV"
+      },
+      "contextLength": 59,
+      "expectedRoot": 1379,
+      "observedRoot": 1379,
+      "scopeStates": 82,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 22
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 61,
+        "slots": "VVVVVVVVVVVVVVVVVVVVAQ"
+      },
+      "contextLength": 60,
+      "expectedRoot": 1378,
+      "observedRoot": 1378,
+      "scopeStates": 74,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 20
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 62,
+        "slots": "VVVVVVVVVVVVVVVVVVVVBQ"
+      },
+      "contextLength": 61,
+      "expectedRoot": 1377,
+      "observedRoot": 1377,
+      "scopeStates": 66,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 18
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 63,
+        "slots": "VVVVVVVVVVVVVVVVVVVVFQ"
+      },
+      "contextLength": 62,
+      "expectedRoot": 1376,
+      "observedRoot": 1376,
+      "scopeStates": 58,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 16
+      }
+    },
+    {
+      "name": "SBracket.mk.inj",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 64,
+        "slots": "VVVVVVVVVVVVVVVVVVVVVQ"
+      },
+      "contextLength": 63,
+      "expectedRoot": 1375,
+      "observedRoot": 1375,
+      "scopeStates": 49,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 14
+      }
+    },
+    {
+      "name": "CrossingData.crossing",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 0,
+        "depth": 3,
+        "slots": "FQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 0,
+      "observedRoot": 0,
+      "scopeStates": 1,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 0
+      }
+    },
+    {
+      "name": "CrossingData.crossing",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 0,
+        "depth": 6,
+        "slots": "VQU"
+      },
+      "contextLength": 3,
+      "expectedRoot": 0,
+      "observedRoot": 0,
+      "scopeStates": 1,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 0
+      }
+    },
+    {
+      "name": "CrossingData.crossing",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 172,
+      "observedRoot": 172,
+      "scopeStates": 141,
+      "counts": {
+        "inner": 6,
+        "introduced": 2,
+        "outer": 0
+      }
+    },
+    {
+      "name": "CrossingData.crossing",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 171,
+      "observedRoot": 171,
+      "scopeStates": 139,
+      "counts": {
+        "inner": 5,
+        "introduced": 1,
+        "outer": 2
+      }
+    },
+    {
+      "name": "CrossingData.crossing",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 6,
+        "slots": "BQQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 0,
+      "observedRoot": 0,
+      "scopeStates": 1,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 0
+      }
+    },
+    {
+      "name": "CrossingData.crossing",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 5,
+        "slots": "BQE"
+      },
+      "contextLength": 2,
+      "expectedRoot": 0,
+      "observedRoot": 0,
+      "scopeStates": 1,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 0
+      }
+    },
+    {
+      "name": "CrossingData.crossing",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 3,
+        "slots": "FQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 236,
+      "observedRoot": 236,
+      "scopeStates": 270,
+      "counts": {
+        "inner": 7,
+        "introduced": 2,
+        "outer": 5
+      }
+    },
+    {
+      "name": "CrossingData.crossing",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 4,
+        "slots": "VQ"
+      },
+      "contextLength": 3,
+      "expectedRoot": 235,
+      "observedRoot": 235,
+      "scopeStates": 139,
+      "counts": {
+        "inner": 5,
+        "introduced": 0,
+        "outer": 3
+      }
+    },
+    {
+      "name": "CrossingData.crossing",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 7,
+        "slots": "BRE"
+      },
+      "contextLength": 2,
+      "expectedRoot": 0,
+      "observedRoot": 0,
+      "scopeStates": 1,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 0
+      }
+    },
+    {
+      "name": "CrossingData.crossing",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 7,
+        "slots": "BRU"
+      },
+      "contextLength": 3,
+      "expectedRoot": 0,
+      "observedRoot": 0,
+      "scopeStates": 1,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 0
+      }
+    },
+    {
+      "name": "CrossingData.crossing",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 8,
+        "slots": "VUE"
+      },
+      "contextLength": 4,
+      "expectedRoot": 0,
+      "observedRoot": 0,
+      "scopeStates": 1,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 0
+      }
+    },
+    {
+      "name": "CrossingData.crossing",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 6,
+        "slots": "VQU"
+      },
+      "contextLength": 4,
+      "expectedRoot": 401,
+      "observedRoot": 401,
+      "scopeStates": 245,
+      "counts": {
+        "inner": 7,
+        "introduced": 0,
+        "outer": 5
+      }
+    },
+    {
+      "name": "CrossingData.crossing",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 9,
+        "slots": "BVQB"
+      },
+      "contextLength": 3,
+      "expectedRoot": 0,
+      "observedRoot": 0,
+      "scopeStates": 1,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 0
+      }
+    },
+    {
+      "name": "CrossingData.crossing",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 7,
+        "slots": "VRU"
+      },
+      "contextLength": 5,
+      "expectedRoot": 339,
+      "observedRoot": 339,
+      "scopeStates": 139,
+      "counts": {
+        "inner": 5,
+        "introduced": 0,
+        "outer": 3
+      }
+    },
+    {
+      "name": "CrossingData.crossing",
+      "edition": "published-15",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 10,
+        "slots": "VQEF"
+      },
+      "contextLength": 4,
+      "expectedRoot": 0,
+      "observedRoot": 0,
+      "scopeStates": 1,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 0
+      }
+    },
+    {
+      "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
+      "edition": "working-26",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 275,
+      "observedRoot": 275,
+      "scopeStates": 401,
+      "counts": {
+        "inner": 16,
+        "introduced": 3,
+        "outer": 0
+      }
+    },
+    {
+      "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
+      "edition": "working-26",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 274,
+      "observedRoot": 274,
+      "scopeStates": 399,
+      "counts": {
+        "inner": 13,
+        "introduced": 3,
+        "outer": 3
+      }
+    },
+    {
+      "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
+      "edition": "working-26",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 2,
+        "slots": "BQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 273,
+      "observedRoot": 273,
+      "scopeStates": 397,
+      "counts": {
+        "inner": 11,
+        "introduced": 2,
+        "outer": 6
+      }
+    },
+    {
+      "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
+      "edition": "working-26",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 3,
+        "slots": "FQ"
+      },
+      "contextLength": 3,
+      "expectedRoot": 272,
+      "observedRoot": 272,
+      "scopeStates": 395,
+      "counts": {
+        "inner": 9,
+        "introduced": 2,
+        "outer": 8
+      }
+    },
+    {
+      "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
+      "edition": "working-26",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 4,
+        "slots": "VQ"
+      },
+      "contextLength": 4,
+      "expectedRoot": 271,
+      "observedRoot": 271,
+      "scopeStates": 393,
+      "counts": {
+        "inner": 6,
+        "introduced": 3,
+        "outer": 10
+      }
+    },
+    {
+      "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
+      "edition": "working-26",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 5,
+        "slots": "VQE"
+      },
+      "contextLength": 5,
+      "expectedRoot": 270,
+      "observedRoot": 270,
+      "scopeStates": 391,
+      "counts": {
+        "inner": 4,
+        "introduced": 2,
+        "outer": 13
+      }
+    },
+    {
+      "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
+      "edition": "working-26",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 6,
+        "slots": "VQU"
+      },
+      "contextLength": 6,
+      "expectedRoot": 269,
+      "observedRoot": 269,
+      "scopeStates": 389,
+      "counts": {
+        "inner": 2,
+        "introduced": 2,
+        "outer": 15
+      }
+    },
+    {
+      "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
+      "edition": "working-26",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 7,
+        "slots": "VRU"
+      },
+      "contextLength": 7,
+      "expectedRoot": 268,
+      "observedRoot": 268,
+      "scopeStates": 387,
+      "counts": {
+        "inner": 1,
+        "introduced": 1,
+        "outer": 17
+      }
+    },
+    {
+      "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
+      "edition": "working-26",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 8,
+        "slots": "VVU"
+      },
+      "contextLength": 8,
+      "expectedRoot": 267,
+      "observedRoot": 267,
+      "scopeStates": 385,
+      "counts": {
+        "inner": 0,
+        "introduced": 1,
+        "outer": 18
+      }
+    },
+    {
+      "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
+      "edition": "working-26",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 9,
+        "slots": "VVUB"
+      },
+      "contextLength": 9,
+      "expectedRoot": 266,
+      "observedRoot": 266,
+      "scopeStates": 316,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 16
+      }
+    },
+    {
+      "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
+      "edition": "working-26",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 10,
+        "slots": "VVUF"
+      },
+      "contextLength": 10,
+      "expectedRoot": 265,
+      "observedRoot": 265,
+      "scopeStates": 247,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 13
+      }
+    },
+    {
+      "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
+      "edition": "working-26",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 11,
+        "slots": "VVUV"
+      },
+      "contextLength": 11,
+      "expectedRoot": 264,
+      "observedRoot": 264,
+      "scopeStates": 192,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 11
+      }
+    },
+    {
+      "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
+      "edition": "working-26",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 12,
+        "slots": "VVVV"
+      },
+      "contextLength": 12,
+      "expectedRoot": 263,
+      "observedRoot": 263,
+      "scopeStates": 137,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 9
+      }
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "edition": "working-26",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 165,
+      "observedRoot": 165,
+      "scopeStates": 225,
+      "counts": {
+        "inner": 5,
+        "introduced": 5,
+        "outer": 0
+      }
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "edition": "working-26",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 164,
+      "observedRoot": 164,
+      "scopeStates": 223,
+      "counts": {
+        "inner": 0,
+        "introduced": 5,
+        "outer": 5
+      }
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "edition": "working-26",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 2,
+        "slots": "BQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 163,
+      "observedRoot": 163,
+      "scopeStates": 187,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 8
+      }
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "edition": "working-26",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 3,
+        "slots": "FQ"
+      },
+      "contextLength": 3,
+      "expectedRoot": 162,
+      "observedRoot": 162,
+      "scopeStates": 165,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 6
+      }
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "edition": "working-26",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 4,
+        "slots": "VQ"
+      },
+      "contextLength": 4,
+      "expectedRoot": 161,
+      "observedRoot": 161,
+      "scopeStates": 143,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 4
+      }
+    },
+    {
+      "name": "JacobiData.slope_bound_abs",
+      "edition": "working-26",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 5,
+        "slots": "VQE"
+      },
+      "contextLength": 5,
+      "expectedRoot": 160,
+      "observedRoot": 160,
+      "scopeStates": 123,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 2
+      }
+    },
+    {
+      "name": "lean_workbook_20418",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 153,
+      "observedRoot": 153,
+      "scopeStates": 283,
+      "counts": {
+        "inner": 10,
+        "introduced": 5,
+        "outer": 0
+      }
+    },
+    {
+      "name": "lean_workbook_20418",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 152,
+      "observedRoot": 152,
+      "scopeStates": 281,
+      "counts": {
+        "inner": 5,
+        "introduced": 5,
+        "outer": 5
+      }
+    },
+    {
+      "name": "lean_workbook_20418",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 2,
+        "slots": "BQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 151,
+      "observedRoot": 151,
+      "scopeStates": 279,
+      "counts": {
+        "inner": 0,
+        "introduced": 5,
+        "outer": 10
+      }
+    },
+    {
+      "name": "lean_workbook_20418",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 3,
+        "slots": "FQ"
+      },
+      "contextLength": 3,
+      "expectedRoot": 150,
+      "observedRoot": 150,
+      "scopeStates": 252,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 12
+      }
+    },
+    {
+      "name": "lean_workbook_20418",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 4,
+        "slots": "VQ"
+      },
+      "contextLength": 4,
+      "expectedRoot": 149,
+      "observedRoot": 149,
+      "scopeStates": 195,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 9
+      }
+    },
+    {
+      "name": "lean_workbook_20418",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 5,
+        "slots": "VQE"
+      },
+      "contextLength": 5,
+      "expectedRoot": 148,
+      "observedRoot": 148,
+      "scopeStates": 138,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 6
+      }
+    },
+    {
+      "name": "lean_workbook_20418",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 6,
+        "slots": "VQU"
+      },
+      "contextLength": 6,
+      "expectedRoot": 147,
+      "observedRoot": 147,
+      "scopeStates": 81,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 3
+      }
+    },
+    {
+      "name": "lean_workbook_20418",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 12,
+        "slots": "VZVK"
+      },
+      "contextLength": 10,
+      "expectedRoot": 231,
+      "observedRoot": 231,
+      "scopeStates": 81,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 3
+      }
+    },
+    {
+      "name": "lean_workbook_20418",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 11,
+        "slots": "VZUa"
+      },
+      "contextLength": 10,
+      "expectedRoot": 231,
+      "observedRoot": 231,
+      "scopeStates": 81,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 3
+      }
+    },
+    {
+      "name": "lean_workbook_3485",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 111,
+      "observedRoot": 111,
+      "scopeStates": 143,
+      "counts": {
+        "inner": 3,
+        "introduced": 3,
+        "outer": 0
+      }
+    },
+    {
+      "name": "lean_workbook_3485",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 110,
+      "observedRoot": 110,
+      "scopeStates": 141,
+      "counts": {
+        "inner": 0,
+        "introduced": 3,
+        "outer": 3
+      }
+    },
+    {
+      "name": "lean_workbook_3485",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 2,
+        "slots": "BQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 109,
+      "observedRoot": 109,
+      "scopeStates": 123,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 5
+      }
+    },
+    {
+      "name": "lean_workbook_3485",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 3,
+        "slots": "FQ"
+      },
+      "contextLength": 3,
+      "expectedRoot": 108,
+      "observedRoot": 108,
+      "scopeStates": 105,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 4
+      }
+    },
+    {
+      "name": "lean_workbook_3485",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 4,
+        "slots": "VQ"
+      },
+      "contextLength": 4,
+      "expectedRoot": 107,
+      "observedRoot": 107,
+      "scopeStates": 77,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 2
+      }
+    },
+    {
+      "name": "lean_workbook_4274",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 144,
+      "observedRoot": 144,
+      "scopeStates": 214,
+      "counts": {
+        "inner": 3,
+        "introduced": 1,
+        "outer": 0
+      }
+    },
+    {
+      "name": "lean_workbook_4274",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 143,
+      "observedRoot": 143,
+      "scopeStates": 210,
+      "counts": {
+        "inner": 1,
+        "introduced": 2,
+        "outer": 1
+      }
+    },
+    {
+      "name": "lean_workbook_4274",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 2,
+        "slots": "BQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 142,
+      "observedRoot": 142,
+      "scopeStates": 129,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 3
+      }
+    },
+    {
+      "name": "lean_workbook_4274",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 3,
+        "slots": "FQ"
+      },
+      "contextLength": 3,
+      "expectedRoot": 141,
+      "observedRoot": 141,
+      "scopeStates": 105,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 2
+      }
+    },
+    {
+      "name": "lean_workbook_49456",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 23,
+      "observedRoot": 23,
+      "scopeStates": 24,
+      "counts": {
+        "inner": 2,
+        "introduced": 1,
+        "outer": 0
+      }
+    },
+    {
+      "name": "lean_workbook_49456",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 22,
+      "observedRoot": 22,
+      "scopeStates": 22,
+      "counts": {
+        "inner": 1,
+        "introduced": 1,
+        "outer": 1
+      }
+    },
+    {
+      "name": "lean_workbook_56144",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 134,
+      "observedRoot": 134,
+      "scopeStates": 174,
+      "counts": {
+        "inner": 4,
+        "introduced": 2,
+        "outer": 0
+      }
+    },
+    {
+      "name": "lean_workbook_56144",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 133,
+      "observedRoot": 133,
+      "scopeStates": 172,
+      "counts": {
+        "inner": 2,
+        "introduced": 2,
+        "outer": 2
+      }
+    },
+    {
+      "name": "lean_workbook_56144",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 2,
+        "slots": "BQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 132,
+      "observedRoot": 132,
+      "scopeStates": 170,
+      "counts": {
+        "inner": 0,
+        "introduced": 2,
+        "outer": 4
+      }
+    },
+    {
+      "name": "lean_workbook_56144",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 3,
+        "slots": "FQ"
+      },
+      "contextLength": 3,
+      "expectedRoot": 131,
+      "observedRoot": 131,
+      "scopeStates": 152,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 5
+      }
+    },
+    {
+      "name": "lean_workbook_56144",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 4,
+        "slots": "VQ"
+      },
+      "contextLength": 4,
+      "expectedRoot": 130,
+      "observedRoot": 130,
+      "scopeStates": 134,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 4
+      }
+    },
+    {
+      "name": "lean_workbook_56144",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 5,
+        "slots": "VQE"
+      },
+      "contextLength": 5,
+      "expectedRoot": 129,
+      "observedRoot": 129,
+      "scopeStates": 116,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 3
+      }
+    },
+    {
+      "name": "lean_workbook_plus_15068",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 179,
+      "observedRoot": 179,
+      "scopeStates": 335,
+      "counts": {
+        "inner": 6,
+        "introduced": 6,
+        "outer": 0
+      }
+    },
+    {
+      "name": "lean_workbook_plus_15068",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 178,
+      "observedRoot": 178,
+      "scopeStates": 333,
+      "counts": {
+        "inner": 0,
+        "introduced": 6,
+        "outer": 6
+      }
+    },
+    {
+      "name": "lean_workbook_plus_15068",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 2,
+        "slots": "BQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 177,
+      "observedRoot": 177,
+      "scopeStates": 315,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 11
+      }
+    },
+    {
+      "name": "lean_workbook_plus_15068",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 3,
+        "slots": "FQ"
+      },
+      "contextLength": 3,
+      "expectedRoot": 176,
+      "observedRoot": 176,
+      "scopeStates": 297,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 10
+      }
+    },
+    {
+      "name": "lean_workbook_plus_15068",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 4,
+        "slots": "VQ"
+      },
+      "contextLength": 4,
+      "expectedRoot": 175,
+      "observedRoot": 175,
+      "scopeStates": 269,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 8
+      }
+    },
+    {
+      "name": "lean_workbook_plus_15068",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 5,
+        "slots": "VQE"
+      },
+      "contextLength": 5,
+      "expectedRoot": 174,
+      "observedRoot": 174,
+      "scopeStates": 232,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 6
+      }
+    },
+    {
+      "name": "lean_workbook_plus_15068",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 6,
+        "slots": "VQU"
+      },
+      "contextLength": 6,
+      "expectedRoot": 173,
+      "observedRoot": 173,
+      "scopeStates": 178,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 4
+      }
+    },
+    {
+      "name": "lean_workbook_plus_15068",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 7,
+        "slots": "VRU"
+      },
+      "contextLength": 7,
+      "expectedRoot": 172,
+      "observedRoot": 172,
+      "scopeStates": 89,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 2
+      }
+    },
+    {
+      "name": "lean_workbook_plus_16912",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 195,
+      "observedRoot": 195,
+      "scopeStates": 261,
+      "counts": {
+        "inner": 6,
+        "introduced": 3,
+        "outer": 0
+      }
+    },
+    {
+      "name": "lean_workbook_plus_16912",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 194,
+      "observedRoot": 194,
+      "scopeStates": 259,
+      "counts": {
+        "inner": 3,
+        "introduced": 3,
+        "outer": 3
+      }
+    },
+    {
+      "name": "lean_workbook_plus_16912",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 2,
+        "slots": "BQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 193,
+      "observedRoot": 193,
+      "scopeStates": 257,
+      "counts": {
+        "inner": 0,
+        "introduced": 3,
+        "outer": 6
+      }
+    },
+    {
+      "name": "lean_workbook_plus_16912",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 3,
+        "slots": "FQ"
+      },
+      "contextLength": 3,
+      "expectedRoot": 192,
+      "observedRoot": 192,
+      "scopeStates": 239,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 8
+      }
+    },
+    {
+      "name": "lean_workbook_plus_16912",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 4,
+        "slots": "VQ"
+      },
+      "contextLength": 4,
+      "expectedRoot": 191,
+      "observedRoot": 191,
+      "scopeStates": 221,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 7
+      }
+    },
+    {
+      "name": "lean_workbook_plus_16912",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 5,
+        "slots": "VQE"
+      },
+      "contextLength": 5,
+      "expectedRoot": 190,
+      "observedRoot": 190,
+      "scopeStates": 203,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 6
+      }
+    },
+    {
+      "name": "lean_workbook_plus_16912",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 6,
+        "slots": "VQU"
+      },
+      "contextLength": 6,
+      "expectedRoot": 189,
+      "observedRoot": 189,
+      "scopeStates": 157,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 3
+      }
+    },
+    {
+      "name": "lean_workbook_plus_19617",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 191,
+      "observedRoot": 191,
+      "scopeStates": 317,
+      "counts": {
+        "inner": 10,
+        "introduced": 6,
+        "outer": 0
+      }
+    },
+    {
+      "name": "lean_workbook_plus_19617",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 190,
+      "observedRoot": 190,
+      "scopeStates": 201,
+      "counts": {
+        "inner": 8,
+        "introduced": 0,
+        "outer": 5
+      }
+    },
+    {
+      "name": "lean_workbook_plus_19617",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 2,
+        "slots": "BQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 189,
+      "observedRoot": 189,
+      "scopeStates": 182,
+      "counts": {
+        "inner": 8,
+        "introduced": 0,
+        "outer": 4
+      }
+    },
+    {
+      "name": "lean_workbook_plus_19617",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 3,
+        "slots": "FQ"
+      },
+      "contextLength": 3,
+      "expectedRoot": 188,
+      "observedRoot": 188,
+      "scopeStates": 180,
+      "counts": {
+        "inner": 7,
+        "introduced": 1,
+        "outer": 4
+      }
+    },
+    {
+      "name": "lean_workbook_plus_39831",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 98,
+      "observedRoot": 98,
+      "scopeStates": 126,
+      "counts": {
+        "inner": 3,
+        "introduced": 3,
+        "outer": 0
+      }
+    },
+    {
+      "name": "lean_workbook_plus_39831",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 97,
+      "observedRoot": 97,
+      "scopeStates": 124,
+      "counts": {
+        "inner": 0,
+        "introduced": 3,
+        "outer": 3
+      }
+    },
+    {
+      "name": "lean_workbook_plus_39831",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 2,
+        "slots": "BQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 96,
+      "observedRoot": 96,
+      "scopeStates": 108,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 5
+      }
+    },
+    {
+      "name": "lean_workbook_plus_39831",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 3,
+        "slots": "FQ"
+      },
+      "contextLength": 3,
+      "expectedRoot": 95,
+      "observedRoot": 95,
+      "scopeStates": 92,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 4
+      }
+    },
+    {
+      "name": "lean_workbook_plus_39831",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 4,
+        "slots": "VQ"
+      },
+      "contextLength": 4,
+      "expectedRoot": 94,
+      "observedRoot": 94,
+      "scopeStates": 7,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 2
+      }
+    },
+    {
+      "name": "lean_workbook_plus_43987",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 100,
+      "observedRoot": 100,
+      "scopeStates": 129,
+      "counts": {
+        "inner": 8,
+        "introduced": 5,
+        "outer": 0
+      }
+    },
+    {
+      "name": "lean_workbook_plus_43987",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 99,
+      "observedRoot": 99,
+      "scopeStates": 123,
+      "counts": {
+        "inner": 5,
+        "introduced": 3,
+        "outer": 4
+      }
+    },
+    {
+      "name": "lean_workbook_plus_43987",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 2,
+        "slots": "BQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 98,
+      "observedRoot": 98,
+      "scopeStates": 117,
+      "counts": {
+        "inner": 3,
+        "introduced": 2,
+        "outer": 6
+      }
+    },
+    {
+      "name": "lean_workbook_plus_43987",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 3,
+        "slots": "FQ"
+      },
+      "contextLength": 3,
+      "expectedRoot": 97,
+      "observedRoot": 97,
+      "scopeStates": 95,
+      "counts": {
+        "inner": 2,
+        "introduced": 0,
+        "outer": 5
+      }
+    },
+    {
+      "name": "lean_workbook_plus_43987",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 4,
+        "slots": "VQ"
+      },
+      "contextLength": 4,
+      "expectedRoot": 96,
+      "observedRoot": 96,
+      "scopeStates": 66,
+      "counts": {
+        "inner": 1,
+        "introduced": 0,
+        "outer": 3
+      }
+    },
+    {
+      "name": "lean_workbook_plus_54159",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 83,
+      "observedRoot": 83,
+      "scopeStates": 96,
+      "counts": {
+        "inner": 3,
+        "introduced": 2,
+        "outer": 0
+      }
+    },
+    {
+      "name": "lean_workbook_plus_54159",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 82,
+      "observedRoot": 82,
+      "scopeStates": 94,
+      "counts": {
+        "inner": 0,
+        "introduced": 3,
+        "outer": 2
+      }
+    },
+    {
+      "name": "lean_workbook_plus_54159",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 2,
+        "slots": "BQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 81,
+      "observedRoot": 81,
+      "scopeStates": 84,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 3
+      }
+    },
+    {
+      "name": "lean_workbook_plus_54159",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 3,
+        "slots": "FQ"
+      },
+      "contextLength": 3,
+      "expectedRoot": 80,
+      "observedRoot": 80,
+      "scopeStates": 66,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 2
+      }
+    },
+    {
+      "name": "lean_workbook_plus_54622",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 142,
+      "observedRoot": 142,
+      "scopeStates": 207,
+      "counts": {
+        "inner": 6,
+        "introduced": 3,
+        "outer": 0
+      }
+    },
+    {
+      "name": "lean_workbook_plus_54622",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 141,
+      "observedRoot": 141,
+      "scopeStates": 205,
+      "counts": {
+        "inner": 3,
+        "introduced": 3,
+        "outer": 3
+      }
+    },
+    {
+      "name": "lean_workbook_plus_54622",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 2,
+        "slots": "BQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 140,
+      "observedRoot": 140,
+      "scopeStates": 203,
+      "counts": {
+        "inner": 0,
+        "introduced": 3,
+        "outer": 6
+      }
+    },
+    {
+      "name": "lean_workbook_plus_54622",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 3,
+        "slots": "FQ"
+      },
+      "contextLength": 3,
+      "expectedRoot": 139,
+      "observedRoot": 139,
+      "scopeStates": 154,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 6
+      }
+    },
+    {
+      "name": "lean_workbook_plus_54622",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 4,
+        "slots": "VQ"
+      },
+      "contextLength": 4,
+      "expectedRoot": 138,
+      "observedRoot": 138,
+      "scopeStates": 136,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 5
+      }
+    },
+    {
+      "name": "lean_workbook_plus_54622",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 5,
+        "slots": "VQE"
+      },
+      "contextLength": 5,
+      "expectedRoot": 137,
+      "observedRoot": 137,
+      "scopeStates": 118,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 4
+      }
+    },
+    {
+      "name": "lean_workbook_plus_54622",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 6,
+        "slots": "VQU"
+      },
+      "contextLength": 6,
+      "expectedRoot": 136,
+      "observedRoot": 136,
+      "scopeStates": 100,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 3
+      }
+    },
+    {
+      "name": "lean_workbook_plus_61403",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 130,
+      "observedRoot": 130,
+      "scopeStates": 130,
+      "counts": {
+        "inner": 0,
+        "introduced": 1,
+        "outer": 0
+      }
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 153,
+      "observedRoot": 153,
+      "scopeStates": 283,
+      "counts": {
+        "inner": 10,
+        "introduced": 5,
+        "outer": 0
+      }
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 152,
+      "observedRoot": 152,
+      "scopeStates": 281,
+      "counts": {
+        "inner": 5,
+        "introduced": 5,
+        "outer": 5
+      }
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 2,
+        "slots": "BQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 151,
+      "observedRoot": 151,
+      "scopeStates": 279,
+      "counts": {
+        "inner": 0,
+        "introduced": 5,
+        "outer": 10
+      }
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 3,
+        "slots": "FQ"
+      },
+      "contextLength": 3,
+      "expectedRoot": 150,
+      "observedRoot": 150,
+      "scopeStates": 252,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 12
+      }
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 4,
+        "slots": "VQ"
+      },
+      "contextLength": 4,
+      "expectedRoot": 149,
+      "observedRoot": 149,
+      "scopeStates": 195,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 9
+      }
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 5,
+        "slots": "VQE"
+      },
+      "contextLength": 5,
+      "expectedRoot": 148,
+      "observedRoot": 148,
+      "scopeStates": 138,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 6
+      }
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 6,
+        "slots": "VQU"
+      },
+      "contextLength": 6,
+      "expectedRoot": 147,
+      "observedRoot": 147,
+      "scopeStates": 81,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 3
+      }
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 12,
+        "slots": "VZVK"
+      },
+      "contextLength": 10,
+      "expectedRoot": 231,
+      "observedRoot": 231,
+      "scopeStates": 81,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 3
+      }
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 11,
+        "slots": "VZUa"
+      },
+      "contextLength": 10,
+      "expectedRoot": 231,
+      "observedRoot": 231,
+      "scopeStates": 81,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 3
+      }
+    },
+    {
+      "name": "lean_workbook_plus_62755",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 118,
+      "observedRoot": 118,
+      "scopeStates": 148,
+      "counts": {
+        "inner": 0,
+        "introduced": 2,
+        "outer": 0
+      }
+    },
+    {
+      "name": "lean_workbook_plus_62755",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 117,
+      "observedRoot": 117,
+      "scopeStates": 44,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 1
+      }
+    },
+    {
+      "name": "lean_workbook_plus_62755",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 7,
+        "slots": "pRA"
+      },
+      "contextLength": 4,
+      "expectedRoot": 447,
+      "observedRoot": 447,
+      "scopeStates": 117,
+      "counts": {
+        "inner": 0,
+        "introduced": 1,
+        "outer": 3
+      }
+    },
+    {
+      "name": "lean_workbook_plus_62755",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 6,
+        "slots": "pQQ"
+      },
+      "contextLength": 4,
+      "expectedRoot": 457,
+      "observedRoot": 457,
+      "scopeStates": 117,
+      "counts": {
+        "inner": 0,
+        "introduced": 1,
+        "outer": 3
+      }
+    },
+    {
+      "name": "lean_workbook_plus_63081",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 100,
+      "observedRoot": 100,
+      "scopeStates": 102,
+      "counts": {
+        "inner": 2,
+        "introduced": 1,
+        "outer": 0
+      }
+    },
+    {
+      "name": "lean_workbook_plus_63081",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 99,
+      "observedRoot": 99,
+      "scopeStates": 100,
+      "counts": {
+        "inner": 1,
+        "introduced": 1,
+        "outer": 1
+      }
+    },
+    {
+      "name": "lean_workbook_plus_63081",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 2,
+        "slots": "BQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 98,
+      "observedRoot": 98,
+      "scopeStates": 98,
+      "counts": {
+        "inner": 0,
+        "introduced": 1,
+        "outer": 2
+      }
+    },
+    {
+      "name": "lean_workbook_plus_68077",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 127,
+      "observedRoot": 127,
+      "scopeStates": 180,
+      "counts": {
+        "inner": 6,
+        "introduced": 3,
+        "outer": 0
+      }
+    },
+    {
+      "name": "lean_workbook_plus_68077",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 126,
+      "observedRoot": 126,
+      "scopeStates": 178,
+      "counts": {
+        "inner": 3,
+        "introduced": 3,
+        "outer": 3
+      }
+    },
+    {
+      "name": "lean_workbook_plus_68077",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 2,
+        "slots": "BQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 125,
+      "observedRoot": 125,
+      "scopeStates": 176,
+      "counts": {
+        "inner": 0,
+        "introduced": 3,
+        "outer": 6
+      }
+    },
+    {
+      "name": "lean_workbook_plus_68077",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 3,
+        "slots": "FQ"
+      },
+      "contextLength": 3,
+      "expectedRoot": 124,
+      "observedRoot": 124,
+      "scopeStates": 158,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 8
+      }
+    },
+    {
+      "name": "lean_workbook_plus_68077",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 4,
+        "slots": "VQ"
+      },
+      "contextLength": 4,
+      "expectedRoot": 123,
+      "observedRoot": 123,
+      "scopeStates": 140,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 7
+      }
+    },
+    {
+      "name": "lean_workbook_plus_68077",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 5,
+        "slots": "VQE"
+      },
+      "contextLength": 5,
+      "expectedRoot": 122,
+      "observedRoot": 122,
+      "scopeStates": 122,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 6
+      }
+    },
+    {
+      "name": "lean_workbook_plus_68077",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 6,
+        "slots": "VQU"
+      },
+      "contextLength": 6,
+      "expectedRoot": 121,
+      "observedRoot": 121,
+      "scopeStates": 51,
+      "counts": {
+        "inner": 0,
+        "introduced": 0,
+        "outer": 3
+      }
+    },
+    {
+      "name": "lean_workbook_plus_68616",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 80,
+      "observedRoot": 80,
+      "scopeStates": 104,
+      "counts": {
+        "inner": 7,
+        "introduced": 2,
+        "outer": 0
+      }
+    },
+    {
+      "name": "lean_workbook_plus_68616",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 79,
+      "observedRoot": 79,
+      "scopeStates": 102,
+      "counts": {
+        "inner": 4,
+        "introduced": 3,
+        "outer": 2
+      }
+    },
+    {
+      "name": "lean_workbook_plus_68616",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 2,
+        "slots": "BQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 78,
+      "observedRoot": 78,
+      "scopeStates": 92,
+      "counts": {
+        "inner": 4,
+        "introduced": 0,
+        "outer": 3
+      }
+    },
+    {
+      "name": "lean_workbook_plus_68794",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 90,
+      "observedRoot": 90,
+      "scopeStates": 92,
+      "counts": {
+        "inner": 2,
+        "introduced": 1,
+        "outer": 0
+      }
+    },
+    {
+      "name": "lean_workbook_plus_68794",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 89,
+      "observedRoot": 89,
+      "scopeStates": 90,
+      "counts": {
+        "inner": 1,
+        "introduced": 1,
+        "outer": 1
+      }
+    },
+    {
+      "name": "lean_workbook_plus_68794",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 2,
+        "slots": "BQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 88,
+      "observedRoot": 88,
+      "scopeStates": 88,
+      "counts": {
+        "inner": 0,
+        "introduced": 1,
+        "outer": 2
+      }
+    },
+    {
+      "name": "lean_workbook_plus_70240",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 0,
+        "slots": ""
+      },
+      "contextLength": 0,
+      "expectedRoot": 143,
+      "observedRoot": 143,
+      "scopeStates": 145,
+      "counts": {
+        "inner": 2,
+        "introduced": 1,
+        "outer": 0
+      }
+    },
+    {
+      "name": "lean_workbook_plus_70240",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 1,
+        "slots": "AQ"
+      },
+      "contextLength": 1,
+      "expectedRoot": 142,
+      "observedRoot": 142,
+      "scopeStates": 143,
+      "counts": {
+        "inner": 1,
+        "introduced": 1,
+        "outer": 1
+      }
+    },
+    {
+      "name": "lean_workbook_plus_70240",
+      "edition": "goedel-sample-4331",
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 2,
+        "slots": "BQ"
+      },
+      "contextLength": 2,
+      "expectedRoot": 141,
+      "observedRoot": 141,
+      "scopeStates": 141,
+      "counts": {
+        "inner": 0,
+        "introduced": 1,
+        "outer": 2
+      }
+    }
+  ],
+  "scope": "Finite symbolic de Bruijn scope-state check. Expected D uses original Γ+x; the observed codomain uses a computed Pi-local binder plus Γ. Matching syntax/root IDs do not identify those binders. Repeated DAG node/depth states are memoized; this is not an enumeration of every expanded occurrence, a new typing judgment or general preservation theorem."
+}

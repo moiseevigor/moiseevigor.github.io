@@ -1,0 +1,127 @@
+---
+layout: default
+math: true
+title: "Proof Atlas geometric syntax: visual manual"
+permalink: /projects/proof-atlas/manual/
+description: "A visual manual for occurrence paths, ordered ports, lexical scope, folds, typing rules and evidence boundaries in Proof Atlas."
+---
+<link rel="stylesheet" href="/public/css/proof-atlas-manual.css?v=1">
+<main class="pa-manual" id="geometric-manual">
+  <header>
+    <p><a href="/projects/proof-atlas/">Proof Atlas</a> / Visual manual · notation revision 1</p>
+    <h1>Reading the geometry of a Lean proof</h1>
+    <p>The drawing starts from an expression occurrence, its ordered fields and its binding context. Larger figures compose these objects into applications, introductions and local definitions. This manual explains what each connection means, what folding preserves, and where the language remains incomplete.</p>
+    <p class="pm-caption">The interactive examples below are authored structural controls. They use the production scene model, but have no native typing certificate. Links to recorded compiled proofs are provided separately.</p>
+    <nav aria-label="Manual contents"><a href="#connections">Connections</a><a href="#scope-lab">Scope and scale</a><a href="#constructors">12 constructors</a><a href="#composition">Composition</a><a href="#judgments">Checked rules</a><a href="#universes">Universes</a><a href="#assessment">Assessment</a><a href="#practice">Compiled examples</a></nav>
+  </header>
+
+  <section id="connections" aria-labelledby="connections-title">
+    <h2 id="connections-title">1. Read the relation before the shape</h2>
+    <ul class="pm-key">
+      <li><span class="pm-wire" aria-hidden="true"></span><span><strong>Solid / field:</strong> an ordered expression child. The label names its constructor port.</span></li>
+      <li><span class="pm-wire scope" aria-hidden="true"></span><span><strong>Dashed / bound-to:</strong> a variable refers to its lexical binder. It is not another child.</span></li>
+      <li><span class="pm-wire reference" aria-hidden="true"></span><span><strong>Dotted / attribute or reference:</strong> a name, level, metadata value or context identifier. Read the explicit relation label.</span></li>
+      <li><span class="pm-wire rule" aria-hidden="true"></span><span><strong>Rule bar:</strong> premises and conclusion of a typing judgment. Native evidence is required for an instantiated checked rule.</span></li>
+    </ul>
+    <p>The source viewer also has <strong>frontier ports</strong>: a retained root with hidden descendants and an exact count. An external <strong>Γ boundary</strong> identifies a binder outside the cut. Neither means “missing proof”. Position and distance carry no mathematical meaning. Existing specialist views use their own labelled layouts; the key describes relations, not a metric embedding or a new proof calculus.</p>
+    <pre><code>source identity = packet hash + root + ordered child route
+computed identity = evidence/derivation hash + namespace + computed route</code></pre>
+    <p>A stored DAG node may occur more than once, under different binders. Select an occurrence route, not just a node number. A type or substitution result has its own namespace; it does not acquire a source location merely by looking similar.</p>
+  </section>
+
+  <section id="scope-lab" aria-labelledby="scope-title">
+    <h2 id="scope-title">2. Inspect scope, then change scale</h2>
+    <p>Select an occurrence to inspect its original path and outgoing fields. For a bound variable, follow its binder. Focus a subtree to move that binder outside the cut. Toggle folding and depth to check the accounting identity.</p>
+    <div class="pm-controls">
+      <label>Example <select id="pm-example"><option value="scope">Dependent binders</option><option value="let">Local definition</option><option value="application">Shared application</option><option value="scale">Large shared term</option></select></label>
+      <label>Depth <select id="pm-depth"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option></select></label>
+      <label><input id="pm-fold" type="checkbox"> Fold binders and applications</label>
+      <button type="button" id="pm-reset">Whole example</button>
+    </div>
+    <pre id="pm-term"></pre><p id="pm-note" class="pm-caption"></p>
+    <div class="pm-controls" role="group" aria-label="Diagram zoom"><button id="pm-minus" type="button" aria-label="Zoom out">−</button><button id="pm-fit" type="button">100%</button><button id="pm-plus" type="button" aria-label="Zoom in">+</button><span class="pm-caption">Scroll to pan. Nodes support Tab and Enter.</span></div>
+    <div id="pm-diagram" class="pm-scroll" role="region" tabindex="0" aria-label="Interactive structural example"></div>
+    <p id="pm-accounting" class="pm-accounting" role="status"></p>
+    <div id="pm-selection" class="pm-inspector" aria-live="polite"></div>
+    <noscript><p>Interactive controls require JavaScript. The notation and assessment below remain readable.</p></noscript>
+  </section>
+
+  <section id="constructors" aria-labelledby="constructors-title">
+    <h2 id="constructors-title">3. The complete expression alphabet</h2>
+    <p>These are the twelve semantic <code>Lean.Expr</code> forms in the pinned exporter. Every semantic field is listed in constructor order. Solid connectors are <code>Expr</code> children; other fields retain their declared relation. <code>domain</code> in exported routes is the display alias for <code>binderType</code>. Cached implementation data are excluded.</p>
+    <p class="pm-caption">Field definition: <a href="https://github.com/leanprover/lean4/blob/v4.33.1/src/Lean/Expr.lean">Lean v4.33.1 Expr.lean</a>. A constructor shape alone supplies no inferred type.</p>
+    <div class="pm-constructor-grid" id="pm-constructors"><p>Loading the pinned field catalogue. The <a href="/projects/proof-atlas/grammar/">language reference</a> provides the full schema and surface-language families.</p></div>
+  </section>
+
+  <section id="composition" aria-labelledby="composition-title">
+    <h2 id="composition-title">4. Composition without losing the term</h2>
+    <div class="pm-rule-grid">
+      <article><h3>Ordered binder telescope Tₙ</h3><div class="pm-math" role="region" tabindex="0" aria-label="Schematic notation 1">$$\begin{gathered}\underbrace{\lambda (x_1:A_1)\ldots\lambda(x_n:A_n),\,t}_{n\text{ retained binders}}\\\longmapsto\quad T_n\,[x_1:A_1,\ldots,x_n:A_n]\ ;\ t\end{gathered}$$</div><p>Retain each binder's original route, kind, visibility and header regions. Headers use the context before their binder; the continuation sees the extended context. The same rule can retain mixed <code>lam</code>, <code>forallE</code> and <code>letE</code> prefixes. A folded <code>forallE</code> remains a type binder.</p></article>
+      <article><h3>Application spine @ₙ</h3><div class="pm-math" role="region" tabindex="0" aria-label="Schematic notation 2">$$\begin{gathered}(((h\,a_1)\,a_2)\ldots a_n)\\\longmapsto\quad\mathbin{@}_n(h; a_1,\ldots,a_n)\end{gathered}$$</div><p>Keep all original application occurrences and arguments in order. <code>head</code> and <code>argN</code> are abstract ports. Grouping performs no substitution, hides no implicit argument and proves no saturation or logical inference. A capped spine explicitly retains the remaining function region.</p></article>
+      <article><h3>Exact cut and frontier</h3><div class="pm-math" role="region" tabindex="0" aria-label="Schematic notation 3">$$N_{\mathrm{retained}}+\sum_{R\in\mathcal F}|R|=|t|$$</div><p>A large count is stored exactly. Expanding a frontier refines one region while preserving the selected root and its scope interface. Counts measure syntax occurrences, not proof difficulty, premise necessity or time to understand a proof.</p></article>
+      <article><h3>Shared terms, separate occurrences</h3><div class="pm-math" role="region" tabindex="0" aria-label="Schematic notation 4">$$\begin{gathered}e_k\text{ at }r_1\text{ in }\Gamma_1\\ e_k\text{ at }r_2\text{ in }\Gamma_2\end{gathered}$$</div><p>Storage sharing does not merge lexical meaning. A source reference or context module keeps its own provenance and explicit original-use mapping. Computed substitution must avoid capture; descendants do not inherit a new native judgment.</p></article>
+    </div>
+    <p>Syntax-use counts and native recorded-use counts answer different questions. The first counts occurrences in the complete stored body. The second counts the finite native observations retained in an evidence package. A syntactically unused binder is not a proof that an assumption is mathematically unnecessary.</p>
+  </section>
+
+  <section id="judgments" aria-labelledby="judgments-title">
+    <h2 id="judgments-title">5. From syntax to a checked construction</h2>
+    <p>Read \(\Gamma\vdash t:A\) as “in context Γ, term t has type A”. The schemata below explain the notation; each concrete viewer instance needs a matching recorded judgment. \(\equiv\) denotes definitional conversion, distinct from structural identity and a proof of equality.</p>
+    <div class="pm-rule-grid">
+      <article><h3>Π application</h3><div class="pm-math" role="region" tabindex="0" aria-label="Schematic notation 5">$$\frac{\begin{gathered}\Gamma\vdash f:\tau\quad\tau\equiv\Pi(x:A),B\\ \Gamma\vdash a:A'\quad A'\equiv A\end{gathered}}{\Gamma\vdash f\,a:\tau'\quad\tau'\equiv B[a/x]}$$</div><p>The argument type is compared with the expected domain; the result is instantiated in order. Proof/type/value roles come from recorded type information. A proof argument may become a premise, while a value argument remains a parameter.</p></article>
+      <article><h3>Lambda introduction</h3><div class="pm-math" role="region" tabindex="0" aria-label="Schematic notation 6">$$\frac{\Gamma\vdash A:\operatorname{Sort}u\qquad\Gamma,x:A\vdash t:B}{\Gamma\vdash(\lambda(x:A),t):\Pi(x:A),B}$$</div><p>The domain is outside x's scope; the body is inside. The interface discharges x at the conclusion. It is an implication introduction only in the appropriate propositional case.</p></article>
+      <article><h3>Local definition</h3><div class="pm-math" role="region" tabindex="0" aria-label="Schematic notation 7">$$\frac{\begin{gathered}\Gamma\vdash A:\operatorname{Sort}u\quad\Gamma\vdash v:A\\ \Gamma,x:A:=v\vdash t:B\end{gathered}}{\Gamma\vdash(\mathbf{let}\ x:A:=v;\ t):B[v/x]}$$</div><p>The type and value precede the binder. The body sees both its type and value. Native records may expose separate type-conversion and computed substitution views; their roots and evidence remain distinct from source routes.</p></article>
+      <article><h3>Elimination and recursive premises</h3><div class="pm-math" role="region" tabindex="0" aria-label="Schematic notation 8">$$\frac{\begin{gathered}\text{parameters, motive, branch methods}\\\text{indices, major premise}\end{gathered}}{\text{recursor application}:\text{instantiated motive}}$$</div><p>A recursor needs its actual signature, constructor fields and branch contexts. This is an interface sketch, not a universal recursor typing rule. Recorded cases and recursive premises have dedicated views; arbitrary recursors and every tactic strategy are not covered by a complete automatic interpretation.</p></article>
+    </div>
+    <p>A native extraction record ties a finite judgment to a specific environment, packet and context. The browser validates that identity; it does not run Lean. An article correspondence is a separate reviewed relation and is not implied by a typing rule.</p>
+  </section>
+
+  <section id="universes" aria-labelledby="universes-title">
+    <h2 id="universes-title">6. Universes and the boundary with source syntax</h2>
+    <pre><code>Level.zero          0
+Level.succ u        u + 1
+Level.max u v       maximum of u and v
+Level.imax u v      0 when v = 0; otherwise max u v
+Level.param n       named universe parameter
+Level.mvar id       unresolved universe metavariable</code></pre>
+    <p>Universe edges form a separate level graph attached to <code>sort</code> and <code>const</code>. They are not term-child ports or de Bruijn binder links. \(\operatorname{Prop}=\operatorname{Sort}0\) and \(\operatorname{Type}u=\operatorname{Sort}(u+1)\). See the <a href="https://github.com/leanprover/lean4/blob/v4.33.1/src/Lean/Level.lean">pinned level definition</a> and <a href="/projects/proof-atlas/grammar/">layered Lean reference</a>.</p>
+    <div class="pm-table-scroll" tabindex="0" role="region" aria-label="Lean layers and representation coverage"><table><thead><tr><th>Layer</th><th>Examples</th><th>What the geometry can recover</th></tr></thead><tbody>
+      <tr><td>Kernel expressions</td><td>All 12 forms above</td><td>Ordered structure, payloads, exact occurrence routes and lexical scope.</td></tr>
+      <tr><td>Surface terms</td><td>Notation, <code>fun</code>, <code>match</code>, <code>do</code>, coercions</td><td>The elaborated expression, when exported. Original spelling and desugaring history need source maps.</td></tr>
+      <tr><td>Tactics</td><td><code>intro</code>, <code>simp</code>, <code>aesop</code>, <code>omega</code></td><td>The resulting term; the final term does not uniquely reconstruct the tactic execution.</td></tr>
+      <tr><td>Commands and macros</td><td><code>theorem</code>, <code>def</code>, <code>inductive</code>, syntax extensions</td><td>Exported declarations and environment relationships. No complete command/macro execution trace.</td></tr>
+      <tr><td>Elaborator state</td><td>Goals, local contexts, assignments</td><td>Only explicitly retained records. An unresolved metavariable is not an accepted closed proof.</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section id="assessment" aria-labelledby="assessment-title">
+    <h2 id="assessment-title">7. What the language can currently do</h2>
+    <p>This is an evidence-based assessment by task, without a numerical “power” score. Structural correctness, useful abstraction and human comprehension require different tests.</p>
+    <div class="pm-table-scroll" tabindex="0" role="region" aria-label="Capability assessment"><table><thead><tr><th>Task</th><th>Supported result</th><th>Weakness / next test</th></tr></thead><tbody>
+      <tr><td>Recover syntax and binding</td><td>All 12 constructor forms; 6,166 audited cuts over the 2,098-packet inventory; 4,972 checked lexical links. <a href="/projects/proof-atlas/program/#first-structural-implementation">Evidence</a>.</td><td>These are serialized representation checks. They do not independently rebuild every original proof.</td></tr>
+      <tr><td>Inspect a very large term</td><td>The recorded largest body has 462,476,271 expanded occurrences. A composed initial cut has 21 vertices with exact retained/hidden accounting. <a href="/projects/proof-atlas/program/#application-spine-composition">Evidence</a>.</td><td>Access is bounded; useful semantic compression and comprehension are unmeasured. Paged source delivery covers 35 profiles, not all 2,118 count profiles.</td></tr>
+      <tr><td>Follow assumptions to uses</td><td>152 public indexed variable uses in 26 profiles, with exact binder/context/type links; syntax counts cover 44,887 stored binders in 2,118 packets. <a href="/projects/proof-atlas/program/#recorded-uses-in-ordinary-source-cuts">Use evidence</a> · <a href="/projects/proof-atlas/program/#syntax-multiplicities-under-source-cut-refinement">Count evidence</a>.</td><td>Native observations are sparse and differ from complete syntactic occurrence counts. No premise-necessity conclusion.</td></tr>
+      <tr><td>Read a proof construction</td><td>Recorded applications, introductions, local definitions and selected recursor/constructor/projection cases retain typed interfaces. <a href="/projects/proof-atlas/program/#checked-application-rule">Evidence</a>.</td><td>A generic automatic semantic notation for arbitrary elimination and proof strategy remains incomplete.</td></tr>
+      <tr><td>Inspect AI-source proofs</td><td>A frozen attributed sample is included separately from project proofs. <a href="/projects/proof-atlas/program/#evaluation-on-released-ai-source-proofs">Dataset and limits</a>.</td><td>It does not establish performance or comprehension across massive AI-generated proofs.</td></tr>
+      <tr><td>Learn the notation</td><td>This manual and the corrected field diagrams expose every semantic field, including all three <code>letE</code> children. The scope lab uses the existing scene model.</td><td>Browser and schema tests measure faithful presentation. A timed study of scope tracing, premise finding and error localization remains necessary.</td></tr>
+    </tbody></table></div>
+    <p><strong>Improvement in this iteration:</strong> the old constructor gallery used a generic two-input picture. It omitted fields and blurred child/reference roles. The gallery and this manual now share a field-driven renderer, explicit relation labels and pre-/post-binder contexts. The interactive controls expose the shared-node/different-binder counterexample and exact folding identities. No new semantic or comprehension claim follows.</p>
+  </section>
+
+  <section id="practice" aria-labelledby="practice-title">
+    <h2 id="practice-title">8. Use the notation on recorded proofs</h2>
+    <ol>
+      <li><a href="/projects/proof-atlas/library/?view=occurrence&amp;loading=paged&amp;diagram=construction&amp;group=interfaces&amp;members=8&amp;counts=syntax&amp;edition=published-15&amp;proof=JacobiData.slope_bound_abs">Lemma 3.2 / Riccati bound</a>: inspect an introduction or local definition, then select a recorded use and follow its original binder. Count provenance is a separate annotation.</li>
+      <li><a href="/projects/proof-atlas/library/?proof=JacobiCore.E_pos&amp;geometry=scoped&amp;fold=binders,applications">Positivity proof</a>: compare raw syntax, folded telescopes and grouped application spines. Use source routes to return to the same occurrence.</li>
+      <li><a href="/projects/proof-atlas/library/?edition=working-26&amp;proof=JacobiConcrete.AmplitudeChart.midpoint_polynomial&amp;geometry=scoped&amp;fold=binders,applications">Large compiled proof</a>: inspect the finite frontier rather than expanding the complete occurrence tree.</li>
+    </ol>
+    <p>At an unrecorded path, keep the structural view and the explicit “not queried” state. It must not inherit the enclosing node's type evidence. For source alignment, use the <a href="/projects/proof-atlas/article/">synchronized article reader</a>; unsupported passages remain marked separately.</p>
+    <p class="pm-caption">Reproduction: <a href="/scripts/test-proof-atlas-manual.cjs">schema and scope/partition checks</a> · <a href="/scripts/test-proof-atlas-manual-browser.cjs">browser checks</a> · <a href="/projects/proof-atlas/program/">research program</a>. The general language and its evaluation remain work in progress.</p>
+  </section>
+</main>
+<script src="/public/data/proof-atlas/lean-expr-grammar.js" defer></script>
+<script src="/public/js/proof-atlas-library-data.js" defer></script>
+<script src="/public/js/proof-atlas-geometry-core.js" defer></script>
+<script src="/public/js/proof-atlas-constructor-diagram.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-manual-examples.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-manual.js?v=1" defer></script>

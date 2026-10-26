@@ -11,15 +11,18 @@ vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/local-cut-context-ma
   const response=await page.request.get(origin+descriptor.file),raw=z.gunzipSync(await response.body());assert.equal(sha(raw),descriptor.sha256);const checked=audit(JSON.parse(raw));
   let accessibilityAudits=0,keyboardFocusChecks=0,keyboardScrollChecks=0;
   for(const width of [1440,390])for(const theme of ['light','dark']){
-   await page.setViewportSize({width,height:1000});await page.goto(origin+'/projects/proof-atlas/program/');await page.locator('#locality-and-nested-composition').waitFor();assert.equal(await page.locator('#locality-and-nested-composition').count(),1);
+   await page.setViewportSize({width,height:1000});await page.goto(origin+'/projects/proof-atlas/program/#locality-and-nested-composition');await page.waitForURL('**/evidence/#locality-and-nested-composition');await page.locator('#locality-and-nested-composition').waitFor();assert.equal(await page.locator('#locality-and-nested-composition').count(),1);
    assert.equal(await page.locator('a[href="/research/proof-atlas/local-cut-context/README.md"]').count(),1);await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
    // The shared navigation has a 120 ms color transition on theme changes.
    await page.waitForTimeout(250);
    await page.addScriptTag({path:require.resolve('axe-core/axe.min.js')});const violations=await page.evaluate(async()=>(await axe.run({include:[['.d-article'],['.site-nav']]},{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}})).violations.map(v=>({id:v.id,targets:v.nodes.map(n=>n.target)})));assert.deepEqual(violations,[]);assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+3));
    const regions=page.locator('.d-article pre[tabindex="0"], .d-article table[tabindex="0"]');assert.equal(await regions.count(),5);
+   // Preserved scrollable rules now live in separate evidence entries. Open
+   // each enclosing entry before checking its keyboard scrolling behavior.
+   await regions.evaluateAll(nodes=>{for(const node of nodes)for(let parent=node.parentElement;parent;parent=parent.parentElement)if(parent.tagName==='DETAILS')parent.open=true;});
    for(let i=0;i<await regions.count();i++){const region=regions.nth(i);await region.focus();assert(await region.evaluate(e=>document.activeElement===e));keyboardFocusChecks++;if(await region.evaluate(e=>e.scrollWidth>e.clientWidth+2)){await region.evaluate(e=>e.scrollLeft=0);await region.press('ArrowRight');await page.waitForFunction(e=>e.scrollLeft>0,await region.elementHandle());keyboardScrollChecks++;}}
    await page.locator('#locality-and-nested-composition').scrollIntoViewIfNeeded();await page.screenshot({path:dir+'/locality-'+width+'-'+theme+'.png'});accessibilityAudits++;
   }
-  assert.deepEqual(errors,[]);const report={status:'PASS',renderedProgramAnchor:true,methodAndCompiledFiles:files.size,allServedBytesMatch:true,compiledFixtureAudit:checked,accessibilityAudits,keyboardFocusChecks,keyboardScrollChecks};fs.writeFileSync(dir+'/local-cut-context-browser.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
+  assert.deepEqual(errors,[]);const report={status:'PASS',legacyProgramAnchorForwarded:true,methodAndCompiledFiles:files.size,allServedBytesMatch:true,compiledFixtureAudit:checked,accessibilityAudits,keyboardFocusChecks,keyboardScrollChecks};fs.writeFileSync(dir+'/local-cut-context-browser.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
  }finally{await browser.close();}
 })().catch(e=>{console.error(e.stack);process.exit(1)});

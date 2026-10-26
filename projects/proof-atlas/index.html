@@ -4,43 +4,18 @@ math: true
 title: Proof Atlas
 permalink: /projects/proof-atlas/
 page_class: proof-atlas-page
-description: Research toward a consistent geometric language for Lean proofs, including massive AI-generated proofs. Structural prototypes, compiled proof inventories and article applications.
+description: A geometric language for Lean proofs. Start with notation, inspect a compiled proof, then read the research program and its evidence.
 ---
 <main class="research-hub" id="proof-atlas">
-  <header>
-    <p class="research-kicker">Proof Atlas</p>
-    <h1>A geometric language for Lean proofs.</h1>
-    <p>The research goal is a consistent visual language for proof structure, binding and abstraction, including massive AI-generated proofs. Every representation must retain its connection to the formal Lean term. The article reader is one application and testbed.</p>
-    <div class="research-links"><a href="/projects/proof-atlas/program/">Research program →</a><a href="/projects/proof-atlas/library/?proof=JacobiCore.E_pos&amp;geometry=scoped">Test scoped geometry →</a></div>
-  </header>
-  <p class="research-scope">The compiled inventories refer to the released 12 October snapshots. Their exact editions and validation scope are recorded in the <a href="/projects/proof-atlas/coverage/">coverage report</a>.</p>
-  <div class="research-hub-stats" aria-label="Working compiled corpus">
-    <div><strong>1,359</strong>declarations in the working snapshot</div>
-    <div><strong>1,083</strong>complete compiled theorem bodies</div>
-    <div><strong>1,277,896</strong>shared expression nodes</div>
-  </div>
-  <section class="research-section" aria-labelledby="atlas-start">
-    <h2 id="atlas-start">Application: article and proof</h2>
-    <div class="research-hub-tasks">
-      <article class="research-hub-task"><h3>Read the article</h3><p>The full SE(2) manuscript, with formulas, proofs and figures. Read the article by default. Select a passage to open its graph and compiled Lean counterpart on the same page. Indexed expression matches and broader proof context are labelled separately.</p><a href="/projects/proof-atlas/article/">Read article →</a></article>
-
-    </div>
-  </section>
-<details class="research-section"><summary>Separate explorers</summary>      <article class="research-hub-advanced"><h3>Follow the crossing proof</h3><p>An interactive map of <code>CrossingData.crossing</code>. Select declarations or any of its 7,288 expression occurrences to read the term and its linked article passage.</p><a href="/projects/proof-atlas/app/">Explore proof →</a></article>
-      <article class="research-hub-advanced"><h3>Browse the Lean corpus</h3><p>Every owned declaration in the published and working snapshots. Open complete types, proof bodies, shared subterms and local dependency links.</p><a href="/projects/proof-atlas/library/">Browse Lean →</a></article></details>
-  <section class="research-section" aria-labelledby="atlas-result">
-    <h2 id="atlas-result">Established structural result</h2>
-    <p>The two extracted inventories cover 739 and 1,359 declarations. In the working corpus, 670,018,056 expanded expression occurrences are represented by 1,277,896 shared nodes, retaining ordered children, payloads and contextual binding.</p>
-    <p>Five article proof blocks link to complete supporting compiled proofs. The nine numbered statements retain their audited status: five partial, conditional counterparts and four unformalized. Complete corpus coverage does not mean that the whole article is formalized.</p>
-    <div class="research-links"><a href="/mathematics/2026/10/11/proof-atlas-research-program/">Read the research result →</a><a href="/projects/proof-atlas/coverage/">Coverage and provenance</a></div>
-  </section>
-  <section class="research-section" aria-labelledby="atlas-help">
-    <h2 id="atlas-help">Reference and evidence</h2>
-    <p>The <a href="/projects/proof-atlas/grammar/">Lean language reference</a> separates kernel expressions, universes, syntax trees and major surface-language families. The <a href="/projects/proof-atlas/coverage/">coverage report</a> records exact inventories, validation and the boundaries of the article correspondence.</p>
-    <p class="research-scope">Graph layout is a reading aid. Mathematical explanations remain authored interpretations. Original tactic scripts remain private; public packet checks do not constitute an independent project-source kernel rebuild.</p>
-  </section>
+<header><p class="research-kicker">Proof Atlas</p><h1>A geometric language for Lean proofs</h1><p>The program studies how a fixed visual vocabulary can represent proof structure, binding and typed constructions, including large AI-generated proofs. Every source object keeps its exact compiled identity. Begin with the notation, then inspect a recorded proof.</p></header>
+<section class="atlas-overview-route" aria-label="Read in order">
+<article><small>1 / Learn the notation</small><h2><a href="/projects/proof-atlas/manual/">Visual manual</a></h2><p>Constructor fields, scope links, folds and typing rules. Four interactive examples show how the representation works.</p></article>
+<article><small>2 / Inspect a proof</small><h2><a href="/projects/proof-atlas/library/?view=occurrence&amp;loading=paged&amp;diagram=construction&amp;group=interfaces&amp;proof=JacobiData.slope_bound_abs">The Riccati bound</a></h2><p>Follow a compiled proof through its original occurrences, local context and recorded native judgments. The complete library is available in the same reader.</p></article>
+<article><small>3 / Assess the language</small><h2><a href="/projects/proof-atlas/program/">Research program</a></h2><p>The questions, current capabilities and unresolved gaps. The <a href="/projects/proof-atlas/evidence/">evidence index</a> groups detailed checks by research layer.</p></article>
+</section>
+<section class="research-section" aria-labelledby="atlas-established"><h2 id="atlas-established">Established structural result</h2><p>The two project snapshots contain 739 and 1,359 declarations. In the working corpus, 670,018,056 expanded expression occurrences are represented by 1,277,896 shared nodes, retaining ordered children, payloads and contextual binding.</p><p>Exact structure and bounded navigation are supported by finite audits. General semantic compression and improved human comprehension remain unmeasured.</p><div class="research-links"><a href="/mathematics/2026/10/11/proof-atlas-research-program/">Published finding</a><a href="/projects/proof-atlas/coverage/">Coverage and provenance</a></div></section>
+<section class="research-section" aria-labelledby="atlas-applications"><h2 id="atlas-applications">Applications and reference</h2><p>The <a href="/projects/proof-atlas/article/">SE(2) article reader</a> synchronizes prose, compiled Lean and graph selections. Precise proof-step matches and broader context are labelled separately. Five numbered article statements have partial, conditional counterparts; four remain unformalized.</p><div class="research-links"><a href="/projects/proof-atlas/app/">Crossing microscope</a><a href="/projects/proof-atlas/grammar/">Lean language reference</a><a href="/projects/proof-atlas/library/">Complete compiled library</a></div></section>
 </main>
 <script>
-/* Existing shared occurrence/declaration links now open the single microscope. */
 (function(){var h=location.hash;if(/^#(?:expr-|decl-|article-)/.test(h)||h==='#pa-explorer')location.replace('/projects/proof-atlas/app/'+location.search+(h==='#pa-explorer'?'':h));else if(h==='#visual-grammar')location.replace('/projects/proof-atlas/grammar/');})();
 </script>

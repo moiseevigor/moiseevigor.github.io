@@ -3,7 +3,51 @@ on:
   push:
     branches: [master]
     paths:
+      - 'public/js/proof-atlas-syntax-counts.js'
+      - 'public/data/proof-atlas/syntax-count*'
+      - 'public/data/proof-atlas/syntax-count-pages/**'
+      - 'scripts/*proof-atlas-syntax-count*.cjs'
+      - 'research/proof-atlas/free-index-multiplicity/**'
+      - 'public/js/proof-atlas-construction-pages.js'
+      - 'public/js/proof-atlas-cursor-constructions.js'
+      - 'public/js/proof-atlas-cursor-context-frame.js'
+      - 'public/js/proof-atlas-cursor-local-definitions.js'
+      - 'public/js/proof-atlas-*mixed-interface*.js'
+      - 'scripts/test-proof-atlas-*mixed-interfaces*.cjs'
+      - 'research/proof-atlas/mixed-interfaces/**'
+      - 'public/js/proof-atlas-local-definition-*.js'
+      - 'scripts/test-proof-atlas-local-definitions*.cjs'
+      - 'scripts/test-proof-atlas-cursor-local-definitions.cjs'
+      - 'scripts/test-proof-atlas-cursor-context-frame*.cjs'
+      - 'scripts/test-proof-atlas-riccati-context-continuation*.cjs'
+      - 'public/js/proof-atlas-recorded-captions.js'
+      - 'public/js/proof-atlas-construction-captions.js'
+      - 'scripts/test-proof-atlas-recorded-captions*.cjs'
+      - 'scripts/test-proof-atlas-construction-captions*.cjs'
+      - 'research/proof-atlas/construction-pages/**'
+      - 'public/data/proof-atlas/construction-pages/**'
+      - 'public/data/proof-atlas/construction-pages-manifest.js'
+      - 'scripts/*proof-atlas-construction-page*.cjs'
+      - 'scripts/build-proof-atlas-construction-pages.cjs'
       - '_config.yml'
+      - 'public/data/proof-atlas/occurrence-focus-laws.js'
+      - 'public/js/proof-atlas-packed-routes.js'
+      - 'public/js/proof-atlas-occurrence-*.js'
+      - 'public/js/proof-atlas-deep-context.js'
+      - 'public/js/proof-atlas-library-bytes.js'
+      - 'public/js/proof-atlas-compact-type-view.js'
+      - 'scripts/test-proof-atlas-source-variable-uses*.cjs'
+      - 'scripts/test-proof-atlas-occurrence-*.cjs'
+      - 'public/data/proof-atlas/occurrence-constructions*'
+      - 'public/data/proof-atlas/occurrence-constructions/**'
+      - 'public/data/proof-atlas/deep-typing*'
+      - 'public/data/proof-atlas/deep-typing/**'
+      - 'scripts/test-proof-atlas-deep-context*.cjs'
+      - 'scripts/test-proof-atlas-recorded-context*.cjs'
+      - 'scripts/test-proof-atlas-library-bytes.cjs'
+      - 'public/css/proof-atlas-occurrence-window.css'
+      - 'scripts/test-proof-atlas-occurrence-window*.cjs'
+      - 'research/proof-atlas/occurrence-focus/**'
       - 'public/js/proof-atlas-cut-certificate.js'
       - 'scripts/*proof-atlas-cut-certificate*.cjs'
       - 'research/proof-atlas/cut-records/**'
@@ -229,7 +273,51 @@ on:
       - '.github/workflows/proof-atlas-browser.yml'
   pull_request:
     paths:
+      - 'public/js/proof-atlas-syntax-counts.js'
+      - 'public/data/proof-atlas/syntax-count*'
+      - 'public/data/proof-atlas/syntax-count-pages/**'
+      - 'scripts/*proof-atlas-syntax-count*.cjs'
+      - 'research/proof-atlas/free-index-multiplicity/**'
+      - 'public/js/proof-atlas-construction-pages.js'
+      - 'public/js/proof-atlas-cursor-constructions.js'
+      - 'public/js/proof-atlas-cursor-context-frame.js'
+      - 'public/js/proof-atlas-cursor-local-definitions.js'
+      - 'public/js/proof-atlas-*mixed-interface*.js'
+      - 'scripts/test-proof-atlas-*mixed-interfaces*.cjs'
+      - 'research/proof-atlas/mixed-interfaces/**'
+      - 'public/js/proof-atlas-local-definition-*.js'
+      - 'scripts/test-proof-atlas-local-definitions*.cjs'
+      - 'scripts/test-proof-atlas-cursor-local-definitions.cjs'
+      - 'scripts/test-proof-atlas-cursor-context-frame*.cjs'
+      - 'scripts/test-proof-atlas-riccati-context-continuation*.cjs'
+      - 'public/js/proof-atlas-recorded-captions.js'
+      - 'public/js/proof-atlas-construction-captions.js'
+      - 'scripts/test-proof-atlas-recorded-captions*.cjs'
+      - 'scripts/test-proof-atlas-construction-captions*.cjs'
+      - 'research/proof-atlas/construction-pages/**'
+      - 'public/data/proof-atlas/construction-pages/**'
+      - 'public/data/proof-atlas/construction-pages-manifest.js'
+      - 'scripts/*proof-atlas-construction-page*.cjs'
+      - 'scripts/build-proof-atlas-construction-pages.cjs'
       - '_config.yml'
+      - 'public/data/proof-atlas/occurrence-focus-laws.js'
+      - 'public/js/proof-atlas-packed-routes.js'
+      - 'public/js/proof-atlas-occurrence-*.js'
+      - 'public/js/proof-atlas-deep-context.js'
+      - 'public/js/proof-atlas-library-bytes.js'
+      - 'public/js/proof-atlas-compact-type-view.js'
+      - 'scripts/test-proof-atlas-source-variable-uses*.cjs'
+      - 'scripts/test-proof-atlas-occurrence-*.cjs'
+      - 'public/data/proof-atlas/occurrence-constructions*'
+      - 'public/data/proof-atlas/occurrence-constructions/**'
+      - 'public/data/proof-atlas/deep-typing*'
+      - 'public/data/proof-atlas/deep-typing/**'
+      - 'scripts/test-proof-atlas-deep-context*.cjs'
+      - 'scripts/test-proof-atlas-recorded-context*.cjs'
+      - 'scripts/test-proof-atlas-library-bytes.cjs'
+      - 'public/css/proof-atlas-occurrence-window.css'
+      - 'scripts/test-proof-atlas-occurrence-window*.cjs'
+      - 'research/proof-atlas/occurrence-focus/**'
       - 'public/js/proof-atlas-cut-certificate.js'
       - 'scripts/*proof-atlas-cut-certificate*.cjs'
       - 'research/proof-atlas/cut-records/**'
@@ -376,8 +464,10 @@ on:
   workflow_dispatch:
 jobs:
   chromium:
+    env:
+      ATLAS_ORIGIN: http://127.0.0.1:8833
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -484,6 +574,24 @@ jobs:
           node scripts/test-proof-atlas-local-refinement.cjs
           node scripts/test-proof-atlas-local-refinement-browser.cjs
           node scripts/test-proof-atlas-type-interface-browser.cjs
+          node scripts/test-proof-atlas-occurrence-window-browser.cjs
+          node scripts/test-proof-atlas-deep-context-browser.cjs
+          node scripts/test-proof-atlas-occurrence-constructions-browser.cjs
+          node scripts/test-proof-atlas-occurrence-application-fold-browser.cjs
+          node scripts/test-proof-atlas-occurrence-let-bindings-browser.cjs
+          node scripts/test-proof-atlas-occurrence-context-frame-browser.cjs
+          node scripts/test-proof-atlas-cursor-context-frame-browser.cjs
+          node scripts/test-proof-atlas-riccati-context-continuation-browser.cjs
+          node scripts/test-proof-atlas-recorded-captions-browser.cjs
+          node scripts/test-proof-atlas-construction-captions-browser.cjs
+          node scripts/test-proof-atlas-local-definitions-browser.cjs
+          node scripts/test-proof-atlas-mixed-interfaces-browser.cjs
+          node scripts/test-proof-atlas-variable-uses-browser.cjs
+          node scripts/test-proof-atlas-source-variable-uses-browser.cjs
+          node scripts/test-proof-atlas-syntax-counts-browser.cjs
+          node scripts/test-proof-atlas-type-pages-browser.cjs
+          node scripts/test-proof-atlas-construction-pages-browser.cjs
+          node scripts/test-proof-atlas-recorded-context-browser.cjs
           node scripts/test-proof-atlas-cut-certificate-browser.cjs
           node scripts/test-proof-atlas-cut-native-browser.cjs
           node scripts/test-proof-atlas-local-cut-context.cjs
@@ -540,6 +648,18 @@ jobs:
           node scripts/test-proof-atlas-geometry-browser.cjs
           node scripts/test-proof-atlas-proof-steps.cjs
           node scripts/test-proof-atlas-proof-steps-browser.cjs
+        env:
+          ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
+      - name: Scientific theme, program structure and Projects
+        run: |
+          node scripts/test-proof-atlas-structure.cjs
+          node scripts/test-proof-atlas-scientific-theme-browser.cjs
+        env:
+          ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
+      - name: Visual manual — scope, fields and browser
+        run: |
+          node scripts/test-proof-atlas-manual.cjs
+          node scripts/test-proof-atlas-manual-browser.cjs
         env:
           ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
       - name: Browser regression — complete Lean.Expr visual grammar
@@ -607,6 +727,10 @@ jobs:
           sh /tmp/elan-init.sh -y --default-toolchain leanprover/lean4:v4.33.1
       - name: Check reference fields, source examples and small kernel terms
         run: python3 research/proof-atlas/verify_lean_reference.py --lean "$HOME/.elan/bin/lean"
+      - name: Kernel-check application-spine reassembly and occurrence partition
+        run: |
+          application_prefix="$("$HOME/.elan/bin/lean" --print-prefix)"
+          python3 research/proof-atlas/occurrence-constructions/verify_application_fold.py --lean "$application_prefix/bin/lean" --workdir "$RUNNER_TEMP/atlas-application-fold" --reserve-gib 5 --check
       - name: Kernel-check context projection laws and regenerate bridge fixtures
         run: |
           theory_prefix="$("$HOME/.elan/bin/lean" --print-prefix)"

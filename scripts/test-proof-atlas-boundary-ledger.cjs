@@ -31,7 +31,7 @@ function audit(ledger,scene,data){
    if(!example&&ledger.rows.length>1)example={ledger,scene,data:x.data};
   }
  }
- assert.equal(inventories,34);assert.equal(cuts,612);
+ assert.equal(inventories,35);assert.equal(cuts,630);
  const w={};for(const f of ['goedel-sample-manifest.js','packet-types-manifest.js'])vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/'+f,'utf8'),{window:w});
  const d=w.PROOF_ATLAS_PACKET_TYPES.records[0],record=w.PROOF_ATLAS_AI_SAMPLE.edition.declarations.find(r=>r.name===d.name),data=A.validateIndex(JSON.parse(z.gunzipSync(fs.readFileSync('.'+record.indexFile))),record),evidence=JSON.parse(z.gunzipSync(fs.readFileSync('.'+d.file))),provider=T.provider(evidence,data,record,d);let currentCuts=0;
  for(const e of evidence.entries)for(const policy of ['proof-first','proof-focus','source-order']){const scene=J.create(data,record,r=>provider.get(r)?provider:null,{judgmentRoute:e.route,policy,sourceFallback:true}),ledger=L.create(scene,data);regions+=audit(ledger,scene,data);currentCuts++;}

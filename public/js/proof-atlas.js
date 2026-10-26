@@ -9,6 +9,7 @@
   const host = document.getElementById('pa-explorer');
   if (!host) return;
   const canvas = document.getElementById('pa-canvas'), ctx = canvas.getContext('2d');
+  const drawing=window.ProofAtlasDrawingTheme?.read(canvas)||{paper:'#ffffff',surface:'#f6f6f3',ink:'#1c1d1f',muted:'#3f4349',border:'#e6e5e1',accent:'#2d5b8c',selected:'#e9eff6',warm:'#b4652e',sans:'system-ui'};
   if (!D || !ctx || !Array.isArray(D.parent) || D.parent.length !== 7288) {
     document.getElementById('pa-canvas-status').textContent = 'Measured graph data could not be loaded';
     return;
@@ -29,7 +30,7 @@
       children[i].reduce((n,j)=>n+terminalCounts[j],0):1;
   }
   const TERMINAL_PREVIEW_LIMIT=24;
-  const palette = ['#6e91c7','#4fc8b4','#bb9ce6','#e4b468','#e4b468','#d89c83'];
+  const palette = [drawing.accent,drawing.accent,drawing.warm,drawing.warm,drawing.warm,drawing.warm];
   const namedNodes = S && Array.isArray(S.nodes) ? S.nodes : [];
   const namedById = new Map(namedNodes.map(n=>[n.short,n]));
   const namedEdges = S && Array.isArray(S.edges) ? S.edges : [];
@@ -41,8 +42,8 @@
     }
   }
   const groupColors={
-    hypotheses:'#8baccb',definitions:'#62c7b5',endpoints:'#a6c2cc',monotonicity:'#c4a3df',
-    range:'#8fa9e2',gluing:'#e0bc83',existence:'#84dec7',uniqueness:'#eac989',conclusion:'#ffdfa4'
+    hypotheses:drawing.muted,definitions:drawing.accent,endpoints:drawing.muted,monotonicity:drawing.warm,
+    range:drawing.muted,gluing:drawing.warm,existence:drawing.accent,uniqueness:drawing.warm,conclusion:drawing.warm
   };
   const namedDepth=new Map(),namedCoordinates=new Map();
   function declarationDepth(id){
@@ -120,9 +121,7 @@
   }
   function paintBackground(){
     ctx.clearRect(0,0,width,height);
-    const g=ctx.createRadialGradient(width*.46,height*.47,30,width*.46,height*.47,Math.max(width,height)*.85);
-    g.addColorStop(0,'#163144');g.addColorStop(1,'#0b1a2b');
-    ctx.fillStyle=g;ctx.fillRect(0,0,width,height);
+    ctx.fillStyle=drawing.paper;ctx.fillRect(0,0,width,height);
   }
   // Sizes and stroke widths are expressed in screen pixels, not in zoomed
   // world units. Hover never makes a node grow with the zoom level.
@@ -130,11 +129,11 @@
   function plotPoint(x,y,r,col,opacity=1) {
     ctx.globalAlpha=opacity;ctx.fillStyle=col;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
   }
-  function segment(x1,y1,x2,y2,color='#839cab',alpha=.3,lw=1) {
+  function segment(x1,y1,x2,y2,color=drawing.border,alpha=.3,lw=1) {
     ctx.globalAlpha=alpha;ctx.strokeStyle=color;ctx.lineWidth=lw;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.globalAlpha=1;
   }
-  function label(x,y,text,size=12,color='#bfd2de',align='center',weight=500) {
-    ctx.fillStyle=color;ctx.font=weight+' '+size+'px system-ui, sans-serif';ctx.textAlign=align;
+  function label(x,y,text,size=12,color=drawing.ink,align='center',weight=500) {
+    ctx.fillStyle=color;ctx.font=weight+' '+size+'px '+drawing.sans;ctx.textAlign=align;
     ctx.fillText(text,x,y,Math.max(20,width-30));
   }
   function sceneStart() {
@@ -193,7 +192,7 @@
     const showLineage=isTerminal||state.selectionScope==='lineage'||!subtreeValid;
     const count=D.size[selected];
     ctx.save();
-    ctx.strokeStyle=showLineage?'#f5d8a3':'#86dbc7';
+    ctx.strokeStyle=showLineage?drawing.warm:drawing.accent;
     ctx.globalAlpha=showLineage?.67:(count<=350?.42:.15);
     ctx.lineWidth=(showLineage?1.25:.9)*su;
     ctx.beginPath();
@@ -207,17 +206,17 @@
     ctx.stroke();ctx.globalAlpha=1;
     if(showLineage){
       let i=selected;while(i>=0){
-        const q=coord(i);plotPoint(q.x,q.y,(i===selected?3.45:2)*su,'#f1d39f',.88);
+        const q=coord(i);plotPoint(q.x,q.y,(i===selected?3.45:2)*su,drawing.warm,.88);
         i=D.parent[i];
       }
     }else{
       for(let i=selected;i<selected+count;i++){
         if(children[i].length)continue;
         const q=coord(i);
-        plotPoint(q.x,q.y,(count<=100?2.7:1.85)*su,'#a8ecd1',.84);
+        plotPoint(q.x,q.y,(count<=100?2.7:1.85)*su,drawing.accent,.84);
       }
     }
-    const q=coord(selected);plotPoint(q.x,q.y,3.8*su,'#ffe0a0');
+    const q=coord(selected);plotPoint(q.x,q.y,3.8*su,drawing.warm);
     ctx.restore();
   }
   function drawWhole(){
@@ -225,7 +224,7 @@
     // The base network and highlighted network follow the exact same path.
     // Faint curves avoid visual spokes and retain the radial proof structure.
     ctx.lineWidth=.62*screenUnit();
-    ctx.strokeStyle='rgba(146,183,192,.19)';
+    ctx.strokeStyle=drawing.border;
     ctx.beginPath();
     for(let i=0;i<N;i++){
       const p=D.parent[i];if(p<0)continue;
@@ -246,7 +245,7 @@
       const alpha=Math.min(.51,Math.max(.21,.64/Math.sqrt(Math.max(1,h.adj.size)/5)))*e;
       ctx.globalAlpha=alpha;
       ctx.lineWidth=1.18*su;
-      ctx.strokeStyle='#addfda';
+      ctx.strokeStyle=drawing.accent;
       ctx.beginPath();
       for(const [neighbour,relations] of h.adj){
         // Scope/binder references are real semantic links but are NOT drawn
@@ -260,15 +259,15 @@
       for(const [neighbour,relations] of h.adj){
         const q=coord(neighbour);
         const binder=relations.includes('binder')||relations.includes('bound variable');
-        const color=binder?'#ceb3e1':'#a1e4d0';
+        const color=binder?drawing.accent:drawing.muted;
         plotPoint(q.x,q.y,2.35*su,color,.55+.4*e);
         if(binder){
           ctx.globalAlpha=.53*e;ctx.strokeStyle=color;ctx.lineWidth=.8*su;
           ctx.beginPath();ctx.arc(q.x,q.y,3.75*su,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;
         }
       }
-      plotPoint(origin.x,origin.y,3.55*su,'#ffe3a7',.9);
-      ctx.globalAlpha=.68*e;ctx.strokeStyle='#f7dfae';ctx.lineWidth=.95*su;
+      plotPoint(origin.x,origin.y,3.55*su,drawing.warm,.9);
+      ctx.globalAlpha=.68*e;ctx.strokeStyle=drawing.warm;ctx.lineWidth=.95*su;
       ctx.beginPath();ctx.arc(origin.x,origin.y,5.65*su,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;
     }
     sceneEnd();
@@ -277,7 +276,7 @@
   function drawMap(){
     sceneStart();
     if(!namedNodes.length){
-      label(width/2,height/2,'Named declaration data unavailable',17,'#efdfbd');sceneEnd();return;
+      label(width/2,height/2,'Named declaration data unavailable',17,drawing.warm);sceneEnd();return;
     }
     const marginX=Math.max(70,Math.min(120,width*.085));
     const marginTop=80,marginBottom=48;
@@ -305,13 +304,13 @@
     const captions=['Inputs','Endpoint lemmas','Ranges & gluing','Combining cases','Uniqueness','Conclusion'];
     for(let layer=0;layer<=maxLayer;layer++){
       const x=marginX+layer*xScale;
-      label(x,33,captions[layer]||('Level '+layer),Math.min(12,Math.max(9,xScale*.085)),'#99b8c4');
+      label(x,33,captions[layer]||('Level '+layer),Math.min(12,Math.max(9,xScale*.085)),drawing.muted);
     }
     const active=state.hover?.type==='decl' ? state.hover.id : state.namedSelected;
     const highlighted=new Set([active,...(namedIncoming.get(active)||[]),...(namedOutgoing.get(active)||[])]);
     // Draw all source-level references quietly, then bring the local one-hop
     // dependencies forward. No edges are invented by the graph layout.
-    ctx.beginPath();ctx.strokeStyle='rgba(114,157,174,.13)';ctx.lineWidth=.85*screenUnit();
+    ctx.beginPath();ctx.strokeStyle=drawing.border;ctx.lineWidth=.85*screenUnit();
     for(const e of namedEdges){
       const a=namedCoordinates.get(e.from),b=namedCoordinates.get(e.to);
       if(!a||!b)continue;
@@ -327,26 +326,26 @@
       const bend=Math.max(18,(b.x-a.x)*.38);
       ctx.beginPath();ctx.moveTo(a.x+a.w/2,a.y);
       ctx.bezierCurveTo(a.x+a.w/2+bend,a.y,b.x-b.w/2-bend,b.y,b.x-b.w/2,b.y);
-      ctx.strokeStyle=e.to===active?'#e8bf80':'#90e2cd';
+      ctx.strokeStyle=e.to===active?drawing.warm:drawing.accent;
       ctx.globalAlpha=.92;ctx.lineWidth=1.7*screenUnit();ctx.stroke();ctx.globalAlpha=1;
     }
     for(const n of namedNodes){
       const p=namedCoordinates.get(n.short),sel=n.short===active;
       const dim=!!active&&!highlighted.has(n.short);
       const major=['crossing','unique_branch','exists_branch','eq_of_branch_eq'].includes(n.short);
-      ctx.fillStyle=sel?'#325967':(major?'#244b58':'#18384a');
+      ctx.fillStyle=sel?drawing.selected:drawing.surface;
       ctx.globalAlpha=dim?.51:1;
       ctx.fillRect(p.x-p.w/2,p.y-p.h/2,p.w,p.h);
-      ctx.strokeStyle=sel?'#ffd69a':major?'#82c8bd':'#4b6976';
+      ctx.strokeStyle=sel?drawing.warm:major?drawing.accent:drawing.border;
       ctx.lineWidth=(sel?2.1:major?1.5:.8)*screenUnit();
       ctx.strokeRect(p.x-p.w/2,p.y-p.h/2,p.w,p.h);
-      ctx.fillStyle=groupColors[n.group]||'#90b9c2';
+      ctx.fillStyle=groupColors[n.group]||drawing.muted;
       ctx.fillRect(p.x-p.w/2,p.y-p.h/2,3.1*screenUnit(),p.h);
       ctx.globalAlpha=dim?.65:1;
       // Centered names—not numerical expression identifiers.
       const limit=Math.max(7,Math.floor((p.w-12)/7.05));
       const shown=n.short.length>limit?n.short.slice(0,limit-1)+'…':n.short;
-      label(p.x,p.y+4*screenUnit(),shown,Math.max(9,Math.min(12,xScale*.083)),'#e5f0f3','center',major?700:550);
+      label(p.x,p.y+4*screenUnit(),shown,Math.max(9,Math.min(12,xScale*.083)),drawing.ink,'center',major?700:550);
       ctx.globalAlpha=1;
       register(p.x,p.y,n.short,'decl',Math.max(p.w,p.h)/2,p.w,p.h);
     }
@@ -364,25 +363,25 @@
       const {d,i}=sorted[j],a=2*Math.PI*j/sorted.length-Math.PI/2;
       const r=R*(.85+.12*Math.sin(3*a)),x=center.x+r*Math.cos(a),y=center.y+r*Math.sin(a);
       const bubble=4+Math.min(18,Math.sqrt(d.count)*.47);
-      segment(center.x,center.y,x,y,d.local?'#e6bb72':'#66acc4',d.local?.52:.23,.65+Math.log1p(d.count)/4);
+      segment(center.x,center.y,x,y,d.local?drawing.warm:drawing.muted,d.local?.52:.23,.65+Math.log1p(d.count)/4);
       const isHover=state.hover && state.hover.type==='dep'&&state.hover.id===i;
       const lift=isHover?state.hoverPower:0;
-      plotPoint(x,y,bubble,d.local?'#e6bc79':'#50beb4',.88);
+      plotPoint(x,y,bubble,d.local?drawing.warm:drawing.accent,.88);
       if(lift>.02){
         // Existing dependency connection, highlighted at original geometry.
-        segment(center.x,center.y,x,y,'#bcf4d8',.43*lift,1.05*screenUnit());
-        ctx.globalAlpha=.65*lift;ctx.strokeStyle='#f6dba0';ctx.lineWidth=1.1*screenUnit();
+        segment(center.x,center.y,x,y,drawing.accent,.43*lift,1.05*screenUnit());
+        ctx.globalAlpha=.65*lift;ctx.strokeStyle=drawing.warm;ctx.lineWidth=1.1*screenUnit();
         ctx.beginPath();ctx.arc(x,y,bubble+1.9*screenUnit(),0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;
       }
       register(x,y,i,'dep',bubble+6);
-      if(j<8 || d.local) label(x,y+(bubble+15),depName(d,i).slice(0,26),10.5,'#d5e1e7');
+      if(j<8 || d.local) label(x,y+(bubble+15),depName(d,i).slice(0,26),10.5,drawing.ink);
     }
-    plotPoint(center.x,center.y,32,'#2a5b65');
-    label(center.x,center.y-4,'crossing',13,'#fff');label(center.x,center.y+12,'theorem',11,'#d5ece9');
+    plotPoint(center.x,center.y,32,drawing.surface);
+    label(center.x,center.y-4,'crossing',13,drawing.ink);label(center.x,center.y+12,'theorem',11,drawing.ink);
     register(center.x,center.y,'theorem','theorem',35);
     if(state.hover&&state.hover.type==='theorem'&&state.hoverPower>.01){
-      plotPoint(center.x,center.y,34+7*state.hoverPower,'#a4e5d8',.3*state.hoverPower);
-      label(center.x,center.y+4,'42 links',12,'#fff');
+      plotPoint(center.x,center.y,34+7*state.hoverPower,drawing.accent,.3*state.hoverPower);
+      label(center.x,center.y+4,'42 links',12,drawing.ink);
     }
     sceneEnd();$('pa-stage-count').textContent='42 distinct directly referenced declarations';
   }
@@ -404,8 +403,8 @@
       const ids=byLayer.get(n.level),index=ids.indexOf(n.i);
       coordMap.set(n.i,{x:65+(width-130)*n.level/Math.max(1,layers-1),y:72+(height-145)*(index+.5)/ids.length});
     }
-    for(const n of v){if(!coordMap.has(n.parent))continue;const a=coordMap.get(n.i),b=coordMap.get(n.parent);segment(a.x,a.y,b.x,b.y,'#94bac3',.54,1.55);}
-    for(const n of v){const p=coordMap.get(n.i),r=4+Math.min(9,Math.log2(1+D.size[n.i]));plotPoint(p.x,p.y,r,n.i===state.selected?'#f1ce8a':palette[Number(D.kind[n.i])]);register(p.x,p.y,n.i,'expr',r+6);}
+    for(const n of v){if(!coordMap.has(n.parent))continue;const a=coordMap.get(n.i),b=coordMap.get(n.parent);segment(a.x,a.y,b.x,b.y,drawing.muted,.54,1.55);}
+    for(const n of v){const p=coordMap.get(n.i),r=4+Math.min(9,Math.log2(1+D.size[n.i]));plotPoint(p.x,p.y,r,n.i===state.selected?drawing.warm:palette[Number(D.kind[n.i])]);register(p.x,p.y,n.i,'expr',r+6);}
     if(state.hover&&state.hover.type==='expr'&&state.hoverPower>.01){
       const h=state.hover,center=coordMap.get(h.id),su=screenUnit();
       if(center){
@@ -414,11 +413,11 @@
           const q=coordMap.get(other),isBinder=rel.includes('binder')||rel.includes('bound variable');
           // Only retrace structural links. Scope links get a small ring.
           if(D.parent[other]===h.id || D.parent[h.id]===other){
-            segment(center.x,center.y,q.x,q.y,'#b9f1d9',.42*state.hoverPower,1.15*su);
+            segment(center.x,center.y,q.x,q.y,drawing.accent,.42*state.hoverPower,1.15*su);
           }
-          plotPoint(q.x,q.y,(isBinder?3.45:2.75)*su,isBinder?'#c9b0e5':'#a8efdb',.8);
+          plotPoint(q.x,q.y,(isBinder?3.45:2.75)*su,isBinder?drawing.warm:drawing.accent,.8);
         }
-        plotPoint(center.x,center.y,3.8*su,'#ffe2a3');
+        plotPoint(center.x,center.y,3.8*su,drawing.warm);
       }
     }
     sceneEnd();$('pa-stage-count').textContent=v.length+' shown · '+fmt(D.size[state.root])+' in selected subtree';
@@ -433,19 +432,19 @@
     sceneStart();
     const pos=new Map(reasons.map(x=>[x.id,{x:width*x.x,y:height*x.y}]));
     for(const [a,b] of [['phase','exists'],['phase','unique'],['exists','crossing'],['unique','crossing']]){
-      const A=pos.get(a),B=pos.get(b);segment(A.x,A.y,B.x,B.y,'#7ed0bf',.8,2.5);
+      const A=pos.get(a),B=pos.get(b);segment(A.x,A.y,B.x,B.y,drawing.accent,.8,2.5);
     }
     for(const it of reasons){
-      const p=pos.get(it.id),col=it.id==='crossing'?'#e5ba72':'#69cbbd';
+      const p=pos.get(it.id),col=it.id==='crossing'?drawing.warm:drawing.accent;
       const raised=state.hover&&state.hover.type==='idea'&&state.hover.id===it.id;
-      plotPoint(p.x,p.y,Math.min(25,width*.043)+(raised?1.2*screenUnit()*state.hoverPower:0),raised?'#f9d89c':col,.95);
-      label(p.x,p.y+5,it.symbol,15,'#0d2434', 'center',700);
-      label(p.x,p.y+46,it.title,Math.min(13,width*.024),'#e9f0f5','center',600);
+      plotPoint(p.x,p.y,Math.min(25,width*.043)+(raised?1.2*screenUnit()*state.hoverPower:0),raised?drawing.warm:col,.95);
+      label(p.x,p.y+5,it.symbol,15,drawing.paper, 'center',700);
+      label(p.x,p.y+46,it.title,Math.min(13,width*.024),drawing.ink,'center',600);
       register(p.x,p.y,it.id,'idea',30);
     }
     sceneEnd();$('pa-stage-count').textContent='Interpretation by the researchers · not inferred by the compiler';
   }
-  function draw(){if(!canvas.width)return; if(state.mode==='map')drawMap();else if(state.mode==='whole')drawWhole();else if(state.mode==='deps')drawDeps();else if(state.mode==='recursive')drawRecursive();else drawMeaning();}
+  function draw(){Object.assign(drawing,window.ProofAtlasDrawingTheme?.read(canvas)||{});palette.splice(0,palette.length,drawing.accent,drawing.muted,drawing.muted,drawing.warm,drawing.warm,drawing.muted);Object.keys(groupColors).forEach((k,i)=>groupColors[k]=[drawing.accent,drawing.muted,drawing.warm][i%3]);if(!canvas.width)return; if(state.mode==='map')drawMap();else if(state.mode==='whole')drawWhole();else if(state.mode==='deps')drawDeps();else if(state.mode==='recursive')drawRecursive();else drawMeaning();}
   function announceSelection(type,id){
     window.dispatchEvent(new CustomEvent('proof-atlas:selection',{
       detail:{type,id,mode:state.mode}
@@ -908,6 +907,7 @@
     getChildIds(i){return i>=0&&i<N?children[i].slice():[];}
   };
   fillHoverDetails(null);
+  window.ProofAtlasDrawingTheme?.subscribe(()=>draw());
   if(namedNodes.length){updateMode('map');resize();selectDeclaration('crossing');}
   else{updateMode('whole');resize();selectExpr(D.roots[1]);}
 })();
