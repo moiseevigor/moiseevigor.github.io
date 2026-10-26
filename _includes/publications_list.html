@@ -1,0 +1,10 @@
+{% comment %}Renders _data/publications.yml; used by /articles/ and /about/.{% endcomment %}
+<ul class="about-pubs">
+{% for p in site.data.publications %}
+  <li>{{ p.authors | replace: "I. Moiseev", "<b>I. Moiseev</b>" }}, “{{ p.title }},”
+  <em>{{ p.venue }}</em> ({{ p.year }}).
+  {%- if p.doi %} <a href="https://doi.org/{{ p.doi }}">doi:{{ p.doi }}</a>.{% endif %}
+  {%- for l in p.links %} <a href="{{ l.url }}">{{ l.label }}</a>{% unless forloop.last %} ·{% endunless %}{% endfor %}
+  {%- if p.note %} {{ p.note }}{% endif %}</li>
+{% endfor %}
+</ul>

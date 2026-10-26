@@ -14,6 +14,12 @@ Citations should link to the canonical URL and credit "Igor Moiseev".
 ## About
 
 - [About the author](https://moiseevigor.github.io/about/)
+- [Publications](https://moiseevigor.github.io/articles/#publications): peer-reviewed papers with DOIs, newest first —
+  Breseman, Zanlungo, Moiseev & Woollard (2026) doi:10.14311/app.2026.57.0042 (PED 2025);
+  Breseman, Moiseev & Woollard (2026), PBP Workshop at ICRA 2026;
+  Breseman, Moiseev, Abbate & Woollard (2025) doi:10.1109/ICKG66886.2025.00010 (ICKG 2025);
+  Moiseev & Sachkov (2010) doi:10.1051/cocv/2009004, arXiv:0807.4731;
+  Sokolova et al. (2006) doi:10.1124/mol.106.023564.
 
 ## Geometry of Seeing — series on the visual cortex as an SE(2) sub-Riemannian manifold
 

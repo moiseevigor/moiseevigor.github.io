@@ -14,8 +14,6 @@ group: navigation
 .about-hero .about-links { font-family: var(--sans); font-size: 0.9rem; display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0; padding: 0; list-style: none; }
 .about-links li { margin: 0; }
 .about-section h2 { margin-top: 44px; }
-.about-section .about-pubs { padding-left: 1.2em; }
-.about-pubs li { margin-bottom: 0.7em; }
 .about-talks { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 1.2em 0 0; }
 .about-talks figure { margin: 0; counter-increment: none; }
 .about-talks figcaption { font-family: var(--sans); font-size: 0.85rem; color: var(--text-muted); margin-top: 6px; }
@@ -60,17 +58,10 @@ motions of the plane.</p>
 
 <h2>Publications</h2>
 
-<ul class="about-pubs">
-  <li>I. Moiseev and Yu. L. Sachkov, “Maxwell strata in sub-Riemannian problem on the
-  group of motions of a plane,”
-  <a href="https://www.esaim-cocv.org/articles/cocv/abs/2010/02/cocv0862/cocv0862.html"><em>ESAIM:
-  Control, Optimisation and Calculus of Variations</em> 16 (2010)</a>;
-  <a href="https://arxiv.org/abs/0807.4731">arXiv:0807.4731</a>.</li>
-  <li>A paper in <a href="https://molpharm.aspetjournals.org/content/70/1/373"><em>Molecular
-  Pharmacology</em> 70(1), 373 (2006)</a>.</li>
-  <li>Long-form <a href="/articles/">articles</a> with the full statements and proofs
-  behind the Lab programs.</li>
-</ul>
+{% include publications_list.html %}
+
+<p>Long-form <a href="/articles/">articles</a> give the full statements and proofs behind
+the Lab programs.</p>
 
 <h2>Software</h2>
 

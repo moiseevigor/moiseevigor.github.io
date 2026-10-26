@@ -204,3 +204,7 @@
 /* Dark mode: card thumbnails sit directly on the page (no white tile behind
    letterboxed raster images; SVG line-art keeps site.css's invert rule). */
 :root[data-theme="dark"] .hc-fig img:not([src$=".svg"]) { background-color: transparent; }
+
+/* Publication list (_includes/publications_list.html), on /about/ and /articles/. */
+.about-pubs { padding-left: 1.2em; }
+.about-pubs li { margin-bottom: .7em; }

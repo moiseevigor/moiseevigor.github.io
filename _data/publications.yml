@@ -1,0 +1,49 @@
+# Peer-reviewed and conference publications, newest first. Rendered on /articles/ and
+# /about/ by _includes/publications_list.html. Bibliographic data verified against
+# Crossref (DOI records), IEEE CSDL, arXiv and the venue pages on 2026-10-26.
+- year: 2026
+  authors: "C. Breseman, F. Zanlungo, I. Moiseev, D. M. Woollard"
+  title: "Micro-scale spatial modification and pedestrian behavior"
+  venue: "Acta Polytechnica CTU Proceedings 57, 42–51 (Proceedings of the 12th International Conference on Pedestrian and Evacuation Dynamics, PED 2025, Prague, 9–12 September 2025)"
+  doi: 10.14311/app.2026.57.0042
+  links:
+    - {label: "PDF", url: "https://labs.standard.ai/papers/ped_2025.pdf"}
+    - {label: "Standard Labs", url: "https://labs.standard.ai/research/ped_2025"}
+  note: "Open access, CC BY 4.0."
+
+- year: 2026
+  authors: "C. Breseman, I. Moiseev, D. M. Woollard"
+  title: "Temporal Specification Construct Undercoverage in Pedestrian Behavioral Modeling"
+  venue: "Short paper, Workshop on Pedestrian Behaviour Prediction at the IEEE International Conference on Robotics and Automation (ICRA 2026), Vienna, 1 June 2026"
+  links:
+    - {label: "PDF", url: "https://labs.standard.ai/papers/PBP26.pdf"}
+    - {label: "Workshop", url: "https://workshop-pbp2026.github.io/"}
+    - {label: "Standard Labs", url: "https://labs.standard.ai/research/pbp_2026"}
+
+- year: 2025
+  authors: "C. Breseman, I. Moiseev, B. Abbate, D. M. Woollard"
+  title: "BETWEEN: Boundary Estimation through Time Warping, Energy, & Entropy Neutralization"
+  venue: "2025 IEEE International Conference on Knowledge Graph (ICKG), Limassol, Cyprus, 13–14 November 2025, pp. 17–26. IEEE"
+  doi: 10.1109/ICKG66886.2025.00010
+  links:
+    - {label: "IEEE Xplore", url: "https://ieeexplore.ieee.org/document/11391944"}
+    - {label: "IEEE CSDL", url: "https://www.computer.org/csdl/proceedings-article/ickg/2025/668900a017/2eqaIiJ6UA8"}
+    - {label: "PDF", url: "https://labs.standard.ai/papers/ickg_2025_between.pdf"}
+    - {label: "Standard Labs", url: "https://labs.standard.ai/research/between"}
+
+- year: 2010
+  authors: "I. Moiseev, Yu. L. Sachkov"
+  title: "Maxwell strata in sub-Riemannian problem on the group of motions of a plane"
+  venue: "ESAIM: Control, Optimisation and Calculus of Variations 16(2), 380–399"
+  doi: 10.1051/cocv/2009004
+  links:
+    - {label: "arXiv:0807.4731", url: "https://arxiv.org/abs/0807.4731"}
+    - {label: "Journal", url: "https://www.esaim-cocv.org/articles/cocv/abs/2010/02/cocv0862/cocv0862.html"}
+
+- year: 2006
+  authors: "E. Sokolova, A. Skorinkin, I. Moiseev, A. Agrachev, A. Nistri, R. Giniatullin"
+  title: "Experimental and Modeling Studies of Desensitization of P2X3 Receptors"
+  venue: "Molecular Pharmacology 70(1), 373–382"
+  doi: 10.1124/mol.106.023564
+  links:
+    - {label: "Journal", url: "https://molpharm.aspetjournals.org/content/70/1/373"}
