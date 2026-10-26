@@ -16,3 +16,22 @@
   input.addEventListener('input', update);
   update();
 }());
+
+/* Progressive enhancement: all source-bound results remain readable without JS. */
+(function () {
+  'use strict';
+  const root = document.getElementById('results');
+  if (!root) return;
+  const picker = root.querySelector('#sb-result-picker');
+  const select = root.querySelector('#sb-result-select');
+  const panels = Array.from(root.querySelectorAll('[data-result]'));
+  if (!picker || !select || panels.length !== select.options.length) return;
+  function update() {
+    const selected = panels.find(panel => panel.dataset.result === select.value);
+    if (!selected) return;
+    panels.forEach(panel => { panel.hidden = panel !== selected; });
+  }
+  select.addEventListener('change', update);
+  update();
+  picker.hidden = false;
+}());
