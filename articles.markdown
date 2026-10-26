@@ -7,6 +7,16 @@ permalink: /articles/
 comments: false
 ---
 
+## Publications
+
+Peer-reviewed journal and conference papers, with the published version first
+and an open PDF where one exists. Company research reports are listed on
+<a href="https://labs.standard.ai/research">Standard Labs</a>.
+
+{% include publications_list.html %}
+
+## Manuscript companions
+
 Mathematical articles and manuscript companions behind the blog programs.
 Companion pages explain selected results and their hypotheses; their linked
 manuscripts contain the complete statements and proofs. Each page distinguishes
