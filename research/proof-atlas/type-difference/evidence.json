@@ -1,0 +1,77 @@
+{
+  "format": "ProofAtlasTypeDifferenceEvidence/1",
+  "status": "LOCAL_PRODUCTION_NATIVE_WITNESSES_AND_BROWSER_CHECKS_PASS_NOT_DEPLOYED",
+  "producerHashes": {
+    "public/js/proof-atlas-application-ports.js": "7b882ae685e5bd1a68af1cdb9909c69d463d5dde8b86747f4c53f7109e0e5f2e",
+    "public/js/proof-atlas-input-type-bridge-view.js": "9f8c1fbc153077ef75eb7163b787599071308c06463fab4aa350906e84e22e1b",
+    "public/css/proof-atlas-input-type-bridge.css": "5489aff87d5a5486a4acd226bf37fa004a669654e44e7c726270a7dc338cf9bf",
+    "public/js/proof-atlas-application-port-view.js": "093c52531e2f8fd3fc4331baa723b4c23fa7757c03b00e246b7dc7746935f6d8",
+    "public/js/proof-atlas-library.js": "82a275dd6653bdebcc9b4997aa37548275567da9eca3defe5871bec1a2056c0f",
+    "public/js/proof-atlas-paged-library.js": "f375a57a3520a36090a953f08ab382dea20cbe543ebcf50bb86c5d5a2064d4f0",
+    "research/proof-atlas/network-streaming/index.html": "09e493a6c985921150e04a96bf29f9b77bfa04f9c82555d8d10c028ad3ebf467",
+    "research/proof-atlas/equality-transport/index.html": "9ad442764c49e15234fe391d79fa0bfa0ff363554b1e5743622b7ca51a53c31b",
+    "projects/proof-atlas/manual/index.html": "f09c3544d8bb99c28db842b91c8294c54f660dba84105998905545ab08f9789c",
+    "research/proof-atlas/type-difference/check-model.cjs": "6c2d8f147e0bd37ff58683439fd3bbcf73efe88b0894fc900ab9ca7c489b9367",
+    "research/proof-atlas/type-difference/check-browser.cjs": "61ab5e6c6bf3833a0f9bdf3ce5231fcd1f179da559a9709070dd2b547084179c",
+    "research/proof-atlas/input-type-bridge/check-browser.cjs": "1d76bef39bcbdac36d3c2c468c1ce03deb5939fbb696562f9538daa1cc099d26"
+  },
+  "reportHashes": {
+    "model-check.json": "a0a0ffc654ddc2836d185c17bd9adf58b040ae4dc9b8a135ec82d4879f82ba06",
+    "browser-check.json": "b1697c361f53f8c9a10dd4447cb6db697b263feffb951e18d7033accbe209483",
+    "compatibility/type-bridge-model.json": "52b197f2c7a443c53867a9e667c4c27647afef4110ceef9e163c3c5662c00fc6",
+    "compatibility/application-ports-model.json": "57f98af51c6703321f3cbc8c72146114afee90bdb59286cb8e98b3f541b97780",
+    "compatibility/network-streaming-model.json": "8f0def43194efdc568ebaa656d9812075d8120a27b06e29c487a8f1e6ca09465",
+    "compatibility/call-boundary-model.json": "7251f662d1bb365dc98f4b659567a57d5471b1f2a05db1efae5c989e146e2dce",
+    "compatibility/type-bridge-browser.json": "69a8d9fcb93008ae57601dbc22b506ce5233343ab3cf982342475ecc600f8df3",
+    "compatibility/application-ports-browser.json": "d013825c1fc718f9f3c6a590bb09cb90144995bca2ea8f617502e31a6bac4b51",
+    "compatibility/network-streaming-browser.json": "202663b38be24c604b732b948a0dfcda702173657286fc4f3bf1e85cce12f37a",
+    "compatibility/call-boundary-browser.json": "22ea5c4c24befdc3fffc4628c3cca23d6662b99a24a0e77b38102d2e5b461576"
+  },
+  "build": {
+    "ruby": "3.4.4",
+    "jekyll": "3.9.2",
+    "repositoryGemfileSha256": "d886448d7e001aa0dab119ddff360158c557c8efa58dab84973c4a448b3c0a51",
+    "repositoryLockSha256": "62a3a6aac4edda934b00ed3a2ff61946426aaaf0ac9a144e92624b045eb5237c",
+    "temporaryGemfileSha256": "e14027987cc2466679fed793b79d4935b25c8c88c6c56a87938e6a9351c23c69",
+    "temporaryLockSha256": "86b5d28dc116285e668d3f40e4eb8f5428fd430bce6a21662735de867efac3ca",
+    "platformVariant": {
+      "nokogiri": {
+        "repository": "1.13.9-x86_64-linux",
+        "local": "1.13.9"
+      }
+    },
+    "additionalLibraries": {
+      "abbrev": "0.1.2",
+      "base64": "0.3.0",
+      "benchmark": "0.5.0",
+      "bigdecimal": "4.1.3",
+      "csv": "3.3.7",
+      "drb": "2.2.3",
+      "logger": "1.7.0",
+      "mini_portile2": "2.8.9",
+      "mutex_m": "0.3.0",
+      "ostruct": "0.6.3"
+    },
+    "liquidCompatibilitySource": "# Ruby 3.1 retained these no-op methods; Liquid 4.0.3 calls tainted?.\nclass Object\n  def tainted?; false; end\n  def taint; self; end\n  def untaint; self; end\n  def untrusted?; false; end\n  def untrust; self; end\n  def trust; self; end\nend\n",
+    "nokogiriCompilerOption": "--with-cflags=-I<temporary nokogiri>/gumbo-parser/src",
+    "buildLogSha256": "13daa1aa5d50881827ecf75006b396da1fe4680c7f9fadffdd155cd1fdb9f238",
+    "buildExitCode": 0,
+    "repositoryDependenciesChanged": false
+  },
+  "scope": "One literal mismatch witness for two recorded roots in the common consumer context. No subexpression conversion, error attribution, kernel replay, semantic compression or human-comprehension claim.",
+  "sourcePublication": "Compiled term observations and authored test code only; no private original Lean scripts or raw native logs.",
+  "blogChanged": false,
+  "servedVerification": {
+    "status": "PASS",
+    "sha256": {
+      "public/js/proof-atlas-application-ports.js": "7b882ae685e5bd1a68af1cdb9909c69d463d5dde8b86747f4c53f7109e0e5f2e",
+      "public/js/proof-atlas-input-type-bridge-view.js": "9f8c1fbc153077ef75eb7163b787599071308c06463fab4aa350906e84e22e1b",
+      "public/css/proof-atlas-input-type-bridge.css": "5489aff87d5a5486a4acd226bf37fa004a669654e44e7c726270a7dc338cf9bf",
+      "public/js/proof-atlas-application-port-view.js": "093c52531e2f8fd3fc4331baa723b4c23fa7757c03b00e246b7dc7746935f6d8",
+      "public/js/proof-atlas-library.js": "82a275dd6653bdebcc9b4997aa37548275567da9eca3defe5871bec1a2056c0f",
+      "public/js/proof-atlas-paged-library.js": "f375a57a3520a36090a953f08ab382dea20cbe543ebcf50bb86c5d5a2064d4f0",
+      "research/proof-atlas/type-difference/README.md": "2d54043eee9c7adb6e7dcd2a52ecce872d31c3de2619ba78380fc3e2c153f406",
+      "projects/proof-atlas/manual/": "b68cfb7a83740d4c8f2de61a51df2a1753178f6ebd756121c9a308e00887f94f"
+    }
+  }
+}

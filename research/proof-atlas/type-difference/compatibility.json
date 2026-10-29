@@ -1,0 +1,82 @@
+{
+  "format": "ProofAtlasTypeDifferenceCompatibility/1",
+  "status": "FIVE_PRODUCTION_BROWSER_AND_FIVE_MODEL_SUITES_PASS_NOT_DEPLOYED",
+  "browserSuites": [
+    {
+      "name": "type-difference",
+      "command": [
+        "node",
+        "research/proof-atlas/type-difference/check-browser.cjs",
+        "/private/tmp/atlas-type-difference-production/type-difference"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "type-bridge",
+      "command": [
+        "node",
+        "research/proof-atlas/input-type-bridge/check-browser.cjs",
+        "/private/tmp/atlas-type-difference-production/type-bridge"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "application-ports",
+      "command": [
+        "node",
+        "scripts/test-proof-atlas-application-ports-browser.cjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "network-streaming",
+      "command": [
+        "node",
+        "scripts/test-proof-atlas-network-streaming-browser.cjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "call-boundary",
+      "command": [
+        "node",
+        "research/proof-atlas/call-boundary/check-browser.cjs",
+        "/private/tmp/atlas-type-difference-production/call-boundary"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "modelSuites": [
+    "atlas-type-difference-model-final.json",
+    "atlas-difference-bridge-regression-final.json",
+    "atlas-difference-ports-model.json",
+    "atlas-difference-network-model.json",
+    "atlas-difference-boundary-model.json"
+  ],
+  "producerHashes": {
+    "public/js/proof-atlas-application-ports.js": "7b882ae685e5bd1a68af1cdb9909c69d463d5dde8b86747f4c53f7109e0e5f2e",
+    "public/js/proof-atlas-input-type-bridge-view.js": "9f8c1fbc153077ef75eb7163b787599071308c06463fab4aa350906e84e22e1b",
+    "public/css/proof-atlas-input-type-bridge.css": "5489aff87d5a5486a4acd226bf37fa004a669654e44e7c726270a7dc338cf9bf",
+    "public/js/proof-atlas-application-port-view.js": "093c52531e2f8fd3fc4331baa723b4c23fa7757c03b00e246b7dc7746935f6d8",
+    "public/js/proof-atlas-library.js": "82a275dd6653bdebcc9b4997aa37548275567da9eca3defe5871bec1a2056c0f",
+    "public/js/proof-atlas-paged-library.js": "f375a57a3520a36090a953f08ab382dea20cbe543ebcf50bb86c5d5a2064d4f0",
+    "research/proof-atlas/network-streaming/index.html": "09e493a6c985921150e04a96bf29f9b77bfa04f9c82555d8d10c028ad3ebf467",
+    "research/proof-atlas/equality-transport/index.html": "9ad442764c49e15234fe391d79fa0bfa0ff363554b1e5743622b7ca51a53c31b",
+    "projects/proof-atlas/manual/index.html": "f09c3544d8bb99c28db842b91c8294c54f660dba84105998905545ab08f9789c",
+    "research/proof-atlas/type-difference/check-model.cjs": "6c2d8f147e0bd37ff58683439fd3bbcf73efe88b0894fc900ab9ca7c489b9367",
+    "research/proof-atlas/type-difference/check-browser.cjs": "61ab5e6c6bf3833a0f9bdf3ce5231fcd1f179da559a9709070dd2b547084179c",
+    "research/proof-atlas/input-type-bridge/check-browser.cjs": "1d76bef39bcbdac36d3c2c468c1ce03deb5939fbb696562f9538daa1cc099d26"
+  },
+  "reports": {
+    "model-check.json": "a0a0ffc654ddc2836d185c17bd9adf58b040ae4dc9b8a135ec82d4879f82ba06",
+    "browser-check.json": "b1697c361f53f8c9a10dd4447cb6db697b263feffb951e18d7033accbe209483",
+    "compatibility/type-bridge-model.json": "52b197f2c7a443c53867a9e667c4c27647afef4110ceef9e163c3c5662c00fc6",
+    "compatibility/application-ports-model.json": "57f98af51c6703321f3cbc8c72146114afee90bdb59286cb8e98b3f541b97780",
+    "compatibility/network-streaming-model.json": "8f0def43194efdc568ebaa656d9812075d8120a27b06e29c487a8f1e6ca09465",
+    "compatibility/call-boundary-model.json": "7251f662d1bb365dc98f4b659567a57d5471b1f2a05db1efae5c989e146e2dce",
+    "compatibility/type-bridge-browser.json": "69a8d9fcb93008ae57601dbc22b506ce5233343ab3cf982342475ecc600f8df3",
+    "compatibility/application-ports-browser.json": "d013825c1fc718f9f3c6a590bb09cb90144995bca2ea8f617502e31a6bac4b51",
+    "compatibility/network-streaming-browser.json": "202663b38be24c604b732b948a0dfcda702173657286fc4f3bf1e85cce12f37a",
+    "compatibility/call-boundary-browser.json": "22ea5c4c24befdc3fffc4628c3cca23d6662b99a24a0e77b38102d2e5b461576"
+  }
+}

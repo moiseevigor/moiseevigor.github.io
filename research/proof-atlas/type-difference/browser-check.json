@@ -1,0 +1,36 @@
+{
+  "format": "ProofAtlasTypeDifferenceBrowser/1",
+  "status": "PRODUCTION_TYPE_DIFFERENCE_BROWSER_PASS_NOT_DEPLOYED",
+  "sourceOverride": false,
+  "networkInputs": 3,
+  "typeRootSelections": 18,
+  "differencePairs": 5,
+  "differenceSelections": 10,
+  "individualInputs": 3,
+  "librarySourcePreserved": 3,
+  "axeAudits": 8,
+  "rendererRefusals": 6,
+  "readabilityChecks": 33,
+  "identicalPrintDifferentStructure": true,
+  "witnessFixtures": {
+    "rejected": 6,
+    "deepBoundary": true,
+    "legacyNoWitness": true
+  },
+  "rendererBudgetFixture": "Authored presentation state; not a native comparison result.",
+  "sourceOnlyBoundary": true,
+  "optionalNetworkFallback": true,
+  "optionalIndividualFallback": true,
+  "wholeRuntimeArchiveRequests": 0,
+  "files": {
+    "public/js/proof-atlas-application-ports.js": "7b882ae685e5bd1a68af1cdb9909c69d463d5dde8b86747f4c53f7109e0e5f2e",
+    "public/js/proof-atlas-application-port-pages.js": "2168f8755bdc55d845f338f20d4f93f7571227cad32334264a674ca7333d40e2",
+    "public/js/proof-atlas-application-port-view.js": "093c52531e2f8fd3fc4331baa723b4c23fa7757c03b00e246b7dc7746935f6d8",
+    "public/js/proof-atlas-network-port-inspector.js": "5be15833dd0f6bf61ac0af7798ec1aa2eb747553cf54616c993a2d6537dc7a89",
+    "public/js/proof-atlas-network-stream-view.js": "724fce9c9039bc582618e43c7936a453a83549076e556e8f4ca49ee924baeaaa",
+    "public/js/proof-atlas-application-region-view.js": "c5ec36c5b20398d6d0df4c8575c314b8efb6e67f81064e1e94440a73e52bdba7",
+    "public/js/proof-atlas-input-type-bridge-view.js": "9f8c1fbc153077ef75eb7163b787599071308c06463fab4aa350906e84e22e1b",
+    "public/css/proof-atlas-input-type-bridge.css": "5489aff87d5a5486a4acd226bf37fa004a669654e44e7c726270a7dc338cf9bf",
+    "research/proof-atlas/type-difference/check-browser.cjs": "61ab5e6c6bf3833a0f9bdf3ce5231fcd1f179da559a9709070dd2b547084179c"
+  }
+}
