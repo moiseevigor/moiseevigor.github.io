@@ -1,0 +1,17 @@
+:root .atlas-type-neighborhood{margin:1rem 0;padding:1rem 0;border-block:1px solid var(--border);font:.85rem/1.5 var(--sans,system-ui);color:var(--text);min-width:0}
+:root .atlas-type-neighborhood h5{font:600 1rem/1.5 var(--sans,system-ui);margin:0 0 .5rem}
+:root .atlas-type-neighborhood p{font:.85rem/1.5 var(--sans,system-ui)}
+.atlas-type-neighborhood button{min-height:44px;max-width:100%;font:inherit;white-space:normal;overflow-wrap:anywhere}
+.atlas-type-neighborhood-tools{display:flex;flex-wrap:wrap;gap:.5rem;margin:.75rem 0}
+.atlas-type-neighborhood-diagram{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:1rem;align-items:start}
+.atlas-type-neighborhood-card{min-width:0;border:1px solid var(--border);padding:.65rem;background:var(--fig-bg)}
+.atlas-type-neighborhood-card>strong{display:block;overflow-wrap:anywhere}.atlas-type-neighborhood-card>button{display:block;margin:.4rem 0}
+.atlas-type-neighborhood-card [data-type-neighborhood-binding]{border-style:dashed}
+.atlas-type-neighborhood-fields{list-style:none;padding:0;margin:0;display:grid;gap:.75rem;min-width:0}
+.atlas-type-neighborhood-fields>li{min-width:0}.atlas-type-neighborhood-fields>li>strong{display:block;font:.8rem/1.5 var(--mono,monospace)}
+:root .atlas-type-neighborhood pre{max-height:8rem;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font:.8rem/1.5 var(--mono,monospace);padding:.5rem}
+@media(max-width:650px){.atlas-type-neighborhood-diagram{grid-template-columns:minmax(0,1fr)}.atlas-type-neighborhood-fields{padding-left:.65rem;border-left:1px solid var(--border)}}
+
+.atlas-type-neighborhood:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+:root .proof-atlas-theme :is(.pa-manual,.ap-panel,.an-lab) .atlas-type-neighborhood p{font:.85rem/1.5 var(--sans,system-ui)}

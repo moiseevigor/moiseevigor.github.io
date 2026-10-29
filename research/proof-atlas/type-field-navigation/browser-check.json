@@ -1,0 +1,32 @@
+{
+  "format": "ProofAtlasTypeFieldNavigationBrowser/1",
+  "status": "PRODUCTION_TYPE_FIELDS_AND_BINDER_NAVIGATION_PASS_NOT_DEPLOYED",
+  "sourceOverride": false,
+  "fieldClicks": 24,
+  "binderClicks": 5,
+  "componentReturns": 3,
+  "libraryPreserved": 12,
+  "axeAudits": 8,
+  "staleControlsIgnored": 4,
+  "networkOriginalContextJump": true,
+  "libraryOriginalContextJump": true,
+  "rendererRefusals": 8,
+  "sourceOnlyBoundary": true,
+  "optionalNetworkFallback": true,
+  "optionalIndividualFallback": true,
+  "files": {
+    "public/js/proof-atlas-computed-type-neighborhood.js": "20e508c24341005e9d64e654f8c6a750486fcbcb3a960927a52314691168c3a4",
+    "public/js/proof-atlas-computed-type-neighborhood-view.js": "d8e0e7aa98b981fc7eded41197d006549dc0c5fa24c75e759f81372ec932e101",
+    "public/css/proof-atlas-computed-type-neighborhood.css": "bb2d240718b2b610a21b88770002cb59baba7ae0c74a4711825c6c80cd068f5e",
+    "public/js/proof-atlas-geometry-core.js": "043f76279a3c2362121048cebc5ea32b83fa8e36b4744c5893eb25085f1ebdec",
+    "public/js/proof-atlas-application-port-pages.js": "bb378379d390a069ccecb55a1c5cd94dfd6c13eaf0643739f03cf7c898c86cee",
+    "public/js/proof-atlas-network-port-inspector.js": "ec6b71b42719f1edad6388f4afd2f69f2a7f1dd6c6aa55ec96f41b7089b23f39",
+    "public/js/proof-atlas-network-stream-pages.js": "dc4e3a59c908301d9104fcb51c12102f2e71508f0b78bd22c62040f287449ba3",
+    "public/js/proof-atlas-application-port-view.js": "ff7870098f049a7f1cc8e248682e9345f28e547a93011b1fcec7806664f2be99",
+    "public/js/proof-atlas-network-stream-view.js": "d5321647c9f31c03d83f0a4e7e40f35a53291bbcdcf39f57d38744aadc39f32f",
+    "public/js/proof-atlas-paged-library.js": "f02aaf42f0d0cb750816856a9f6c8f48c8a0a01a323c6d3b8635344497ab9309",
+    "public/js/proof-atlas-library.js": "650596c4334a37945746f67559cf4d13c2e5891319824f47e1ad226fb68ec55c",
+    "research/proof-atlas/type-field-navigation/check-browser.cjs": "eb117a4d3de454a6ed54f77c36a6b07f431e7c1473d7447952e25d99831b5419"
+  },
+  "wholeRuntimeArchiveRequests": 0
+}

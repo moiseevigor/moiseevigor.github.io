@@ -1,0 +1,149 @@
+{
+  "format": "ProofAtlasTypeFieldNavigationCompatibility/1",
+  "status": "SIX_PRODUCTION_BROWSER_AND_FIVE_MODEL_SUITES_PASS_NOT_DEPLOYED",
+  "browserSuites": [
+    {
+      "name": "type-field-navigation",
+      "exitCode": 0,
+      "report": "browser-check.json"
+    },
+    {
+      "name": "type-difference",
+      "command": [
+        "node",
+        "research/proof-atlas/type-difference/check-browser.cjs",
+        "/private/tmp/atlas-type-fields-final/compatibility/type-difference"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "type-bridge",
+      "command": [
+        "node",
+        "research/proof-atlas/input-type-bridge/check-browser.cjs",
+        "/private/tmp/atlas-type-fields-final/compatibility/type-bridge"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "application-ports",
+      "command": [
+        "node",
+        "scripts/test-proof-atlas-application-ports-browser.cjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "network-streaming",
+      "command": [
+        "node",
+        "scripts/test-proof-atlas-network-streaming-browser.cjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "call-boundary",
+      "command": [
+        "node",
+        "research/proof-atlas/call-boundary/check-browser.cjs",
+        "/private/tmp/atlas-type-fields-final/compatibility/call-boundary"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "modelSuites": [
+    "atlas-type-fields-model-current.json",
+    "atlas-type-fields-bridge-model-current.json",
+    "atlas-type-fields-ports-model-current.json",
+    "atlas-type-fields-network-model.json",
+    "atlas-type-fields-boundary-model.json"
+  ],
+  "producerHashes": {
+    "projects/proof-atlas/manual/index.html": "2b00adda0aacdc791c43e45b71365db6b88f11bfb1fd01d801ae385137b83877",
+    "public/css/proof-atlas-computed-type-neighborhood.css": "bb2d240718b2b610a21b88770002cb59baba7ae0c74a4711825c6c80cd068f5e",
+    "public/js/proof-atlas-application-port-pages.js": "bb378379d390a069ccecb55a1c5cd94dfd6c13eaf0643739f03cf7c898c86cee",
+    "public/js/proof-atlas-application-port-view.js": "ff7870098f049a7f1cc8e248682e9345f28e547a93011b1fcec7806664f2be99",
+    "public/js/proof-atlas-computed-type-neighborhood-view.js": "d8e0e7aa98b981fc7eded41197d006549dc0c5fa24c75e759f81372ec932e101",
+    "public/js/proof-atlas-computed-type-neighborhood.js": "20e508c24341005e9d64e654f8c6a750486fcbcb3a960927a52314691168c3a4",
+    "public/js/proof-atlas-library.js": "650596c4334a37945746f67559cf4d13c2e5891319824f47e1ad226fb68ec55c",
+    "public/js/proof-atlas-network-port-inspector.js": "ec6b71b42719f1edad6388f4afd2f69f2a7f1dd6c6aa55ec96f41b7089b23f39",
+    "public/js/proof-atlas-network-stream-pages.js": "dc4e3a59c908301d9104fcb51c12102f2e71508f0b78bd22c62040f287449ba3",
+    "public/js/proof-atlas-network-stream-view.js": "d5321647c9f31c03d83f0a4e7e40f35a53291bbcdcf39f57d38744aadc39f32f",
+    "public/js/proof-atlas-paged-library.js": "f02aaf42f0d0cb750816856a9f6c8f48c8a0a01a323c6d3b8635344497ab9309",
+    "research/proof-atlas/equality-transport/index.html": "44abd670374811e8094a8db11571f4a31f2aedaec0b3a3122c759d11785ffc82",
+    "research/proof-atlas/network-streaming/index.html": "5612a29cf5ab80c73465303052957be04ac91f266d1354fb3b622084c82bebb1",
+    "research/proof-atlas/type-field-navigation/check-browser.cjs": "eb117a4d3de454a6ed54f77c36a6b07f431e7c1473d7447952e25d99831b5419",
+    "research/proof-atlas/type-field-navigation/check-model.cjs": "aa1913dee3a9002f0987de50e453bcc95fcf8cb46b416f6ca9c25e3b4ccb1b87"
+  },
+  "reports": {
+    "model-check.json": "4bc74086d5443f7db4a1aa3c2b24270c28f72c15074fa09f62de68f2077a89fe",
+    "browser-check.json": "5d53f29638151ed289ace16d3d66aa7e6a0bc766a647d8c4512a92de0ab3a7d7",
+    "compatibility/type-bridge-model.json": "553304dac0844334c6b6b1806585718852797c052bc8f199f526e278d5d48c84",
+    "compatibility/application-ports-model.json": "f8266fb58bbbd52a23e836f0651810e23d85c35c3b130dd52e100af84d82fbd3",
+    "compatibility/network-streaming-model.json": "915d60c0fe666834b1c9bee31c7f57325f352abe7a86f411e2b9ac3943ee3fe2",
+    "compatibility/call-boundary-model.json": "26db45b7a4b5aee1241ce8bb156e04f488a8ecf3f1bea2a5d35d62c6cba9bcaa",
+    "compatibility/type-difference-browser.json": "82d9657fe85b4e7e7a6bd64ad07c6ad584124641e4191fc35311b9c791855dad",
+    "compatibility/type-bridge-browser.json": "de70a280872c42fd1a9deb3f137f710d3d8216dbe80fa8ea4f2de5039b15fdd9",
+    "compatibility/application-ports-browser.json": "5402cd1f251db39cc481f6c9e3caae38b0f5226fbd473fe5496eadbe1d0d542e",
+    "compatibility/network-streaming-browser.json": "82b84010227a3c726a825b5517e40dc533af3753ad4fb531ccff245a7345c76f",
+    "compatibility/call-boundary-browser.json": "0be2453240c6717e6f6fc4a77d5284aa0877a242b5d93c875601d80fddb02173"
+  },
+  "reportArtifacts": {
+    "model-check.json": {
+      "file": "model-check.json.gz",
+      "decodedSha256": "4bc74086d5443f7db4a1aa3c2b24270c28f72c15074fa09f62de68f2077a89fe",
+      "gzipSha256": "ef2961a5fdf745bbe32884ae79c8a01ea4c19bd25e3c3194e8fb8533e5cd7ab6"
+    },
+    "browser-check.json": {
+      "file": "browser-check.json.gz",
+      "decodedSha256": "5d53f29638151ed289ace16d3d66aa7e6a0bc766a647d8c4512a92de0ab3a7d7",
+      "gzipSha256": "19c563fa5e4d8966a89921daf6bfdd01cd57f4a3c31adfea6ec9230c15561e05"
+    },
+    "compatibility/type-bridge-model.json": {
+      "file": "compatibility/type-bridge-model.json.gz",
+      "decodedSha256": "553304dac0844334c6b6b1806585718852797c052bc8f199f526e278d5d48c84",
+      "gzipSha256": "a6b3f2cf1bf77b19918acf2578b2a565c686e45e46401fa2f03a044fa9b3b3f6"
+    },
+    "compatibility/application-ports-model.json": {
+      "file": "compatibility/application-ports-model.json.gz",
+      "decodedSha256": "f8266fb58bbbd52a23e836f0651810e23d85c35c3b130dd52e100af84d82fbd3",
+      "gzipSha256": "6e369488f5290eda804b0fe3f0a355c2b7c6c60a95e6c49d1027b5fa9d2c6194"
+    },
+    "compatibility/network-streaming-model.json": {
+      "file": "compatibility/network-streaming-model.json.gz",
+      "decodedSha256": "915d60c0fe666834b1c9bee31c7f57325f352abe7a86f411e2b9ac3943ee3fe2",
+      "gzipSha256": "164bceae493d869bfd8c3a5d0b43a94b597774b55e68b1bfda4399dc08eab07a"
+    },
+    "compatibility/call-boundary-model.json": {
+      "file": "compatibility/call-boundary-model.json.gz",
+      "decodedSha256": "26db45b7a4b5aee1241ce8bb156e04f488a8ecf3f1bea2a5d35d62c6cba9bcaa",
+      "gzipSha256": "ab58f4b2bae7ed3728a89f3d73ed335c9d03c9e5764e95281722afaf222a00c8"
+    },
+    "compatibility/type-difference-browser.json": {
+      "file": "compatibility/type-difference-browser.json.gz",
+      "decodedSha256": "82d9657fe85b4e7e7a6bd64ad07c6ad584124641e4191fc35311b9c791855dad",
+      "gzipSha256": "b9e601af22ffb5bada245a1aed9e6e6ceb9cd9567e2b89600735dde283d0c95d"
+    },
+    "compatibility/type-bridge-browser.json": {
+      "file": "compatibility/type-bridge-browser.json.gz",
+      "decodedSha256": "de70a280872c42fd1a9deb3f137f710d3d8216dbe80fa8ea4f2de5039b15fdd9",
+      "gzipSha256": "81c2e425a666fc7b8ed6725ef2fe2e252ef586a25a9dcced7fc44f7462b61e76"
+    },
+    "compatibility/application-ports-browser.json": {
+      "file": "compatibility/application-ports-browser.json.gz",
+      "decodedSha256": "5402cd1f251db39cc481f6c9e3caae38b0f5226fbd473fe5496eadbe1d0d542e",
+      "gzipSha256": "094e17868de702dcf532b282910bd3045d5cbede7fc089ba8f5a8916892f26f4"
+    },
+    "compatibility/network-streaming-browser.json": {
+      "file": "compatibility/network-streaming-browser.json.gz",
+      "decodedSha256": "82b84010227a3c726a825b5517e40dc533af3753ad4fb531ccff245a7345c76f",
+      "gzipSha256": "f46797e46e514b74948e9149ce131e682b1d034f85aef8329072bdc12a4939e2"
+    },
+    "compatibility/call-boundary-browser.json": {
+      "file": "compatibility/call-boundary-browser.json.gz",
+      "decodedSha256": "0be2453240c6717e6f6fc4a77d5284aa0877a242b5d93c875601d80fddb02173",
+      "gzipSha256": "104bcf0799ece5569d21aaf232249f10e5ab276e7a06e78e404ec4dafce9c492"
+    }
+  },
+  "hashConvention": "Report keys name decoded JSON; gzip artifacts retain the complete report."
+}
