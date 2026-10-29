@@ -1,0 +1,79 @@
+{
+  "format": "ProofAtlasNativeTypePagingEvidence/1",
+  "status": "LOCAL_MODEL_AND_PRODUCTION_BROWSER_CHECKS_PASS_NOT_INTEGRATED_NOT_DEPLOYED",
+  "scope": "Experimental transport only. Application readers still load complete native graphs. No independent original-archive membership, new typing, semantic compression or whole-browser memory claim.",
+  "producerHashes": {
+    "research/proof-atlas/native-type-paging/check-browser.cjs": "daef084547d2276041cc2b9982b4a1ede741032bf9038dee7b212f1ea1a4245b",
+    "research/proof-atlas/native-type-paging/check-controls.cjs": "8a891c856bcb70927c2fc3ed10234ec944a541f88d25085f943b2c8454a5ea52",
+    "research/proof-atlas/native-type-paging/check-model.cjs": "dff4302ce706627201d02f250bef3441ff04f017267b031ac2dc9e14fd960384",
+    "research/proof-atlas/native-type-paging/pack.cjs": "1300ead42ddeef8ca1f0b6ecfd93fd7c66fcd587f8e43d483d0958fa4388665b",
+    "public/js/proof-atlas-computed-type-neighborhood.js": "d7bd1ced848591590c8f18539a8816e909ae1227b851f28fa1b5ba1c9e3d6c7a",
+    "public/js/proof-atlas-type-pages.js": "aa2b5901458b0a2b714090ec8a470c3bb073c50f56f3e77fb926247d5f3be184",
+    "public/js/proof-atlas-application-type-pages.js": "7000c5ab9b31191f630d8afbcf4e58028a0221241c63a4a83e13efb758118a32",
+    "scripts/test-proof-atlas-type-pages.cjs": "9c6c1956d9f654eccdb04bf154027ba515d7424f67e12603e9480b29c3871912",
+    "research/proof-atlas/type-field-navigation/check-model.cjs": "aa1913dee3a9002f0987de50e453bcc95fcf8cb46b416f6ca9c25e3b4ccb1b87",
+    "research/proof-atlas/type-field-navigation/check-browser.cjs": "eb117a4d3de454a6ed54f77c36a6b07f431e7c1473d7447952e25d99831b5419",
+    "public/data/proof-atlas/network-streaming-manifest.js": "5768d4f66ce01a092b5e126512998264502bd92b7c15caae8c79a60702e3087b",
+    "public/data/proof-atlas/application-region-controls-manifest.js": "8d1c8742f466b0adc810124b6cc8da0ee785904e36b51d7b066f0f6a4dff261b",
+    "public/data/proof-atlas/inventory-region-controls-manifest.js": "120cdbf5b025b4bfbac1b89122442047fafea1e0df57ff5c7527a7cf2532e95a",
+    "public/data/proof-atlas/premise-source-controls-manifest.js": "7e625f5811104c20e5503625879fbf38ae6aa3751f34ab14a3e7a02fae1a2bea",
+    "public/data/proof-atlas/rule-support-controls-manifest.js": "60b555513fc896c03f8368d64bbb253332d46cf1db7d2f7639cf72b1755ad6a7"
+  },
+  "reports": {
+    "model-check.json": {
+      "file": "model-check.json",
+      "decodedSha256": "36ec3c42d8c4eb4bda435d75162811c676ad4ad2cc1c557794d2ff1971407b80",
+      "storedSha256": "36ec3c42d8c4eb4bda435d75162811c676ad4ad2cc1c557794d2ff1971407b80",
+      "status": "ALL_NATIVE_PORT_ARRAY_ROUNDTRIPS_AND_PAGED_CUTS_PASS_NOT_INTEGRATED"
+    },
+    "controls-check.json": {
+      "file": "controls-check.json",
+      "decodedSha256": "a6e8c4eafea72f09c94a5faf81a100af6d13dad966a9dd0d1d5de32a51f53a6f",
+      "storedSha256": "a6e8c4eafea72f09c94a5faf81a100af6d13dad966a9dd0d1d5de32a51f53a6f",
+      "status": "STRUCTURAL_CONTROL_AND_REFUSALS_PASS"
+    },
+    "browser-check.json": {
+      "file": "browser-check.json",
+      "decodedSha256": "700ac3db7e737998ffaf952efdf30c17307b58fae70e1734fc1f999a976ee85c",
+      "storedSha256": "700ac3db7e737998ffaf952efdf30c17307b58fae70e1734fc1f999a976ee85c",
+      "status": "PRODUCTION_RUNTIME_WITH_NATIVE_DATA_FIXTURES_PASS_NOT_INTEGRATED"
+    },
+    "compatibility/field-model.json": {
+      "file": "compatibility/field-model.json.gz",
+      "decodedSha256": "83546499ea1c7794f66de7100c130495b513f0f1759e48444b2771c286ad81e4",
+      "storedSha256": "9a71daee275c960e868f6e124ee28370e34835283f669964a30e3b109827aa1e",
+      "status": "NATIVE_FIELD_ADDRESSES_AND_LEXICAL_TARGETS_PASS_NOT_DEPLOYED"
+    },
+    "compatibility/field-browser.json": {
+      "file": "compatibility/field-browser.json.gz",
+      "decodedSha256": "3a0417d6b993d45eb3431a0862523ea9ae64c1910c987714b362e685f998479e",
+      "storedSha256": "5911cc5286857c3a2876bf07f2970b77bb11cfc5a8617ac09c2dbd5e8acc7c4f",
+      "status": "PRODUCTION_TYPE_FIELDS_AND_BINDER_NAVIGATION_PASS_NOT_DEPLOYED"
+    },
+    "compatibility/type-pages-model.json": {
+      "file": "compatibility/type-pages-model.json",
+      "decodedSha256": "1a2f90199425c94769baefef1215b437045a1c708f90b8d5ec40395ead8e5b56",
+      "storedSha256": "1a2f90199425c94769baefef1215b437045a1c708f90b8d5ec40395ead8e5b56",
+      "status": "PASS"
+    }
+  },
+  "productionBuild": {
+    "log": "production-build.log.gz",
+    "sha256": "967326ab9243c0b35d13aad258bd08c067cd50611ce9b303348154720eb9fb39",
+    "runtimeBuildHashes": {
+      "public/js/proof-atlas-computed-type-neighborhood.js": "d7bd1ced848591590c8f18539a8816e909ae1227b851f28fa1b5ba1c9e3d6c7a",
+      "public/js/proof-atlas-type-pages.js": "aa2b5901458b0a2b714090ec8a470c3bb073c50f56f3e77fb926247d5f3be184",
+      "public/js/proof-atlas-application-type-pages.js": "7000c5ab9b31191f630d8afbcf4e58028a0221241c63a4a83e13efb758118a32"
+    },
+    "runtimeSourceOverrides": false,
+    "browserDataFixtures": true,
+    "environmentRecord": "../type-field-navigation/evidence.json",
+    "gzipSha256": "ed4eef58ff84fef8e0ebf167c014438d353b35731063a7b4562e84e5566780f9"
+  },
+  "publication": {
+    "blogChanged": false,
+    "packedCorpusInstalled": false,
+    "merged": false,
+    "deployed": false
+  }
+}

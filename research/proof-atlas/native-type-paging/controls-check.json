@@ -1,0 +1,28 @@
+{
+  "format": "ProofAtlasNativeTypePagingControls/1",
+  "status": "STRUCTURAL_CONTROL_AND_REFUSALS_PASS",
+  "storedNodes": 32770,
+  "pageCount": 513,
+  "pathFields": 511,
+  "sceneVertices": 3,
+  "stressState": {
+    "pageLoads": 513,
+    "indexLoads": 10,
+    "observationLoads": 0,
+    "evictions": 512,
+    "faults": 513,
+    "peakCachedNodes": 64,
+    "peakCachedBytes": 6059,
+    "cachedPages": 1,
+    "cachedNodes": 64,
+    "completeTableResident": false,
+    "indexPages": 2,
+    "pageLimit": 1,
+    "indexLimit": 2,
+    "nodeLimit": 64,
+    "fullTableArchiveRequests": 0,
+    "validation": "Producer-validated table; fetched pages checked by hash and local shape. The scene API additionally verifies visible recurrences and original source context."
+  },
+  "refusals": 8,
+  "scope": "Authored structural graph, not a kernel-checked proof or AI benchmark. Whole-reader integration remains open."
+}
