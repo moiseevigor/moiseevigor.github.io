@@ -11,6 +11,9 @@ const refusals=[];let sharedOccurrence=null;
 async function reject(label,descriptor,options={},pattern){await assert.rejects(()=>R.open(descriptor,{fetcher,...options}),pattern);assert.equal(liveSources,0,label+' leaked source cursor');assert.equal(liveTypes,0,label+' leaked type cursor');refusals.push(label);}
 (async()=>{
  for(const [name,change]of [
+  ['unchecked-native-port',j=>j.checks.kernelInputDomain='unchecked'],
+  ['callable-input',j=>j.callableInput=!j.callableInput],
+  ['callable-result',j=>j.callableResult=!j.callableResult],
   ['consumer-context-route',j=>j.consumer.context[0].route.slots.push(0)],
   ['consumer-context-node',j=>j.consumer.context[0].node++],
   ['consumer-context-path',j=>j.consumer.context[0].path+='\u002eforged'],
@@ -22,19 +25,22 @@ async function reject(label,descriptor,options={},pattern){await assert.rejects(
   ['producer-count',j=>j.producer.expanded=String(BigInt(j.producer.expanded)+1n)],
   ['consumer-arity',j=>j.consumer.arguments++],
   ['input-occurrence',j=>j.consumer.input.route.slots.push(0)]
- ])await reject(name,forge('0:0',change),{},/Application source paths:|Application ports:/);
+ ])await reject(name,forge('0:0',change),{},/Application source paths:|Application ports:|Application type pages:/);
  for(const [name,change]of [
   ['binding-index',j=>j.definitionHops[0].index++],
   ['binding-nondep',j=>j.definitionHops[0].nondep=!j.definitionHops[0].nondep],
   ['binding-value-occurrence',j=>j.definitionHops[0].value.route.slots.push(0)],
   ['binding-removed',j=>j.definitionHops=[]]
- ])await reject(name,forge('25:4',change),{},/Application source paths:|Application ports:/);
+ ])await reject(name,forge('25:4',change),{},/Application source paths:|Application ports:|Application type pages:/);
  const uses=new Map();for(const e of prepared.batch.entries){const at=e.junction.consumer.input,prior=uses.get(at.node);if(prior&&JSON.stringify(prior.junction.consumer.input.route)!==JSON.stringify(at.route)){sharedOccurrence={node:at.node,original:prior.junction.consumer.input.route,foreign:at.route};await reject('same-node-different-input-occurrence',forge(prior.id,j=>j.consumer.input=copy(at)),{},/actual function\/argument port/);break;}uses.set(at.node,e);}assert(sharedOccurrence,'shared occurrence control unavailable');
+ const unequal=prepared.batch.entries.find(e=>require('../../../public/js/proof-atlas-application-ports').typeStructure(e.junction.graph,e.junction.roots.producerTypeInConsumer,e.junction.roots.inputType).status==='different');assert(unequal);await reject('false-literal-weakening',forge(unequal.id,j=>j.roots.producerTypeInConsumer=j.roots.inputType),{},/literal type weakening/);
  active=K.pack(prepared,'0:0');await reject('source-row-bound',active.descriptor,{rowLimit:1},/source path row bound/);
  active=K.pack(prepared,'0:0');await reject('source-byte-bound',active.descriptor,{byteLimit:1},/source path byte bound/);
  active=K.pack(prepared,'0:0');const foreign=copy(active.descriptor);foreign.sourcePages.file=d.record.indexFile;await reject('whole-source-substitution',foreign,{},/source manifest address/);
  active=K.pack(prepared,'0:0');hook=async f=>{if(!f.startsWith('/public/data/proof-atlas/source-pages/')||f.endsWith('.json.gz'))return null;const b=z.gunzipSync(fs.readFileSync('.'+f));b[10]^=1;return new Response(z.gzipSync(b));};await reject('source-page-hash',active.descriptor,{},/hash/);hook=null;
  active=K.pack(prepared,'0:0');const controller=new AbortController();hook=async f=>{if(f.startsWith('/public/data/proof-atlas/source-pages/')){controller.abort(Error('cancel source read'));throw controller.signal.reason;}return null;};await reject('source-read-cancellation',active.descriptor,{signal:controller.signal},/cancel source read/);hook=null;
+ const fp=K.pack(prepared,'0:0'),ap=K.pack(prepared,'0:1'),foreignPort=K.pack(prepared,'25:4');active=fp;for(const pack of [ap,foreignPort])for(const [f,b]of pack.files)active.files.set(f,b);const fn=await R.open(fp.descriptor,{fetcher}),arg=await R.open(ap.descriptor,{fetcher}),foreignArg=await R.open(foreignPort.descriptor,{fetcher});try{for(const [label,run,pattern]of [['foreign-call-formal',()=>fn.formalFor(foreignArg),/same native call/],['argument-as-function',()=>arg.formalFor(fn),/original function/],['foreign-reader',()=>fn.formalFor({}),/original function/]]){await assert.rejects(run,pattern);refusals.push(label);}arg.dispose();await assert.rejects(()=>fn.formalFor(arg),/disposed/);refusals.push('disposed-argument-formal');}finally{fn.dispose();arg.dispose();foreignArg.dispose();}assert.equal(liveSources,0);assert.equal(liveTypes,0);
+ const forged=forge('0:1',j=>j.formal.dependencies=[99]),functionPack=K.pack(prepared,'0:0');for(const [f,b]of functionPack.files)active.files.set(f,b);const functionReader=await R.open(functionPack.descriptor,{fetcher}),badArgument=await R.open(forged,{fetcher});try{await assert.rejects(()=>functionReader.formalFor(badArgument),/formal-domain/);refusals.push('forged-formal-dependency');}finally{functionReader.dispose();badArgument.dispose();}assert.equal(liveSources,0);assert.equal(liveTypes,0);
  active=K.pack(prepared,'25:4');const reader=await R.open(active.descriptor,{fetcher}),j=active.original.junction;
  for(const a of [j.producer.anchor,j.consumer.anchor,...j.definitionHops.flatMap(h=>[h.use,h.binder,h.value])])assert(reader.inspectSource({namespace:'source-expression',name:d.source.name,indexSha256:d.source.indexSha256,sourceSha256:d.source.sourceSha256,...a}).kind);
  const at={namespace:'source-expression',name:d.source.name,indexSha256:d.source.indexSha256,sourceSha256:d.source.sourceSha256,...j.producer.anchor};assert.throws(()=>reader.inspectSource({...at,indexSha256:'0'.repeat(64)}),/foreign source selection/);refusals.push('foreign-source-inspection');

@@ -2,6 +2,9 @@
   "format": "ProofAtlasPagedTypeSourceWitnessControls/1",
   "status": "REHASHED_SOURCE_METADATA_REFUSALS_AND_RELEASES_PASS",
   "refusals": [
+    "unchecked-native-port",
+    "callable-input",
+    "callable-result",
     "consumer-context-route",
     "consumer-context-node",
     "consumer-context-path",
@@ -18,11 +21,17 @@
     "binding-value-occurrence",
     "binding-removed",
     "same-node-different-input-occurrence",
+    "false-literal-weakening",
     "source-row-bound",
     "source-byte-bound",
     "whole-source-substitution",
     "source-page-hash",
     "source-read-cancellation",
+    "foreign-call-formal",
+    "argument-as-function",
+    "foreign-reader",
+    "disposed-argument-formal",
+    "forged-formal-dependency",
     "foreign-source-inspection",
     "disposed-source-inspection"
   ],
@@ -98,7 +107,7 @@
       ]
     }
   },
-  "requests": 186,
+  "requests": 387,
   "wholeArchiveRequests": 0,
   "sourceState": {
     "disposed": false,

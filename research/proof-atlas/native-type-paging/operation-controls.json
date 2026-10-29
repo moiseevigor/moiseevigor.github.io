@@ -1,0 +1,49 @@
+{
+  "format": "ProofAtlasPagedTypeOperationControls/1",
+  "status": "LITERAL_OPERATIONS_DEPTH_BUDGET_AND_EVICTION_CONTROLS_PASS",
+  "storedNodes": 33810,
+  "pages": 529,
+  "checks": [
+    "same-structure",
+    "deep-difference",
+    "local-binding-difference",
+    "free-variable-lift",
+    "incorrect-lift",
+    "same-pair-distinct-depths",
+    "large-formal-domain",
+    "same-node-distinct-depths",
+    "comparison-budget",
+    "weakening-budget",
+    "dependency-budget",
+    "formal-budget",
+    "false-formal-dependency",
+    "formal-alias-boundary",
+    "cancellation",
+    "missing-row"
+  ],
+  "deepDifference": {
+    "status": "unavailable",
+    "reason": "selection-path-bound",
+    "pathLength": 600,
+    "pathLimit": 512
+  },
+  "cache": {
+    "pageLoads": 8578,
+    "indexLoads": 5430,
+    "observationLoads": 0,
+    "evictions": 8577,
+    "faults": 8578,
+    "peakCachedNodes": 64,
+    "peakCachedBytes": 6286,
+    "cachedPages": 1,
+    "cachedNodes": 64,
+    "completeTableResident": false,
+    "indexPages": 2,
+    "pageLimit": 1,
+    "indexLimit": 2,
+    "nodeLimit": 64,
+    "fullTableArchiveRequests": 0,
+    "validation": "Producer-validated table; fetched pages checked by hash and local shape. The scene API additionally verifies visible recurrences and original source context."
+  },
+  "scope": "Authored expression graph, not a native typing observation or an AI benchmark. State/depth budgets give explicit unavailable results, never equality or absent references."
+}
