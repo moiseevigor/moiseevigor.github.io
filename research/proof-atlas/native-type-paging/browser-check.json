@@ -1,18 +1,21 @@
 {
   "format": "ProofAtlasNativeTypePagingBrowser/1",
-  "status": "PRODUCTION_RUNTIME_WITH_NATIVE_DATA_FIXTURES_PASS_NOT_INTEGRATED",
+  "status": "SOURCE_CHECKED_PRODUCTION_RUNTIME_WITH_NATIVE_DATA_FIXTURES_PASS_NOT_INTEGRATED",
   "dataFixtures": true,
   "runtimeSourceOverride": false,
   "ports": 4,
   "cuts": 48,
   "peakCachedNodes": 64,
+  "sourceInspections": 18,
   "wholeArchiveRequests": 0,
   "files": {
+    "public/js/proof-atlas-application-source-paths.js": "0c8b79c3a9a7c257af80c4c3122fdcd0c58a5462c196a7b1c00b5c69b5e0a493",
+    "public/js/proof-atlas-application-ports.js": "ba3ca07a26345e129cadcd870bca55d92ebe46f28525266f67605748ff1a4f17",
     "public/js/proof-atlas-computed-type-neighborhood.js": "d7bd1ced848591590c8f18539a8816e909ae1227b851f28fa1b5ba1c9e3d6c7a",
-    "public/js/proof-atlas-application-type-pages.js": "7000c5ab9b31191f630d8afbcf4e58028a0221241c63a4a83e13efb758118a32",
+    "public/js/proof-atlas-application-type-pages.js": "1c1801780f5c1d9e1f1cfbe879f851ca296c31de7b801a64d5ebec4420c68f5f",
     "public/js/proof-atlas-type-pages.js": "aa2b5901458b0a2b714090ec8a470c3bb073c50f56f3e77fb926247d5f3be184",
-    "research/proof-atlas/native-type-paging/pack.cjs": "1300ead42ddeef8ca1f0b6ecfd93fd7c66fcd587f8e43d483d0958fa4388665b",
-    "research/proof-atlas/native-type-paging/check-browser.cjs": "daef084547d2276041cc2b9982b4a1ede741032bf9038dee7b212f1ea1a4245b"
+    "research/proof-atlas/native-type-paging/pack.cjs": "6fd290f1bb2573b63d6587ad9d9cde827db49d447a6f4a9850445d78529592bc",
+    "research/proof-atlas/native-type-paging/check-browser.cjs": "89ecf71b1c2c9315802f5590bbf5d8b7f95967c9c5936d0479ab8f47e0c35c82"
   },
-  "scope": "Chromium transport/scene execution with exact compiled fixture data; application readers still load complete native graphs."
+  "scope": "Chromium transport/scene execution and original binder-source checks with exact compiled fixture data; application readers still load complete native graphs."
 }
