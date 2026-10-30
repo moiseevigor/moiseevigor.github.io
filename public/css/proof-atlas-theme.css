@@ -226,3 +226,8 @@
 :root .proof-atlas-theme .pl-method-indices .pl-actions label {display:flex;flex-wrap:wrap;gap:.3rem;max-width:100%;align-items:center}
 :root .proof-atlas-theme .pl-method-indices select {max-width:100%}
 :root .proof-atlas-theme :is(.pl-method-owner,.pl-method-indices > p) {overflow-wrap:anywhere}
+
+:root .proof-atlas-theme .pl-instantiation-chain {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;padding:0;list-style:none}
+:root .proof-atlas-theme .pl-instantiation-chain li {min-width:0;border:1px solid var(--border);padding:.75rem}
+:root .proof-atlas-theme .pl-instantiation-chain pre {max-height:12rem;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}
+@media(max-width:700px){:root .proof-atlas-theme .pl-instantiation-chain {grid-template-columns:1fr}}
