@@ -70,6 +70,8 @@ The boundary rule now also includes callable proof heads. Its source pool can re
 
 The optional [shared-prefix output reader](/projects/proof-atlas/manual/paged-network/#ns-lab) exposes original and closed result types for three recorded collections (18 positions). Exact source binder prefixes, retained let definitions and projection/recovery records remain distinct from structural region folding. Disconnected result selections keep their original graph components. [Rule, bounds and checks](/research/proof-atlas/region-output-view/README.md).
 
+The [scope/product composition rule](/research/proof-atlas/region-output-composition/README.md) adds explicit typed maps between flat and grouped output tuples. Four standard dependent-function/product laws and 27 finite native cases check both adapter directions; independent reconstruction matches all 108 computed graphs. Grouping preserves exact source ports and let definitions. Seven cases reject direct reuse at the flat type. This closes an output-regrouping gap; it does not supply an independent boundary-input function.
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?

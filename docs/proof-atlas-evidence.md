@@ -534,6 +534,14 @@ The selected collar loads one pair of native observations through authenticated 
 
 ## 3. Typed constructions
 
+<details class="atlas-evidence-entry" data-evidence-order="101" markdown="1">
+<summary>Typed regrouping across exact source scopes</summary>
+
+<span id="scope-output-composition"></span>
+Explicit typed adapters relate flat and scope-grouped output tuples while retaining all original result positions. Four general dependent-function/product laws have empty axiom lists. Twenty-seven native cases cover 93 output appearances in eight compiled packets; independent reconstruction matches all 108 graphs. Seven cases reject direct reuse without an adapter. Separate public replay reproduces 21 cases without private Riccati support. The source-linked diagram is a static notation experiment. Independent boundary-input functions, arbitrary quotient substitution and human comprehension remain unproved. [Rule, diagram, qualified provenance and checks](/research/proof-atlas/region-output-composition/README.md).
+
+</details>
+
 <details class="atlas-evidence-entry" data-evidence-order="100" markdown="1">
 <summary>Recorded output tuples at exact common source prefixes</summary>
 

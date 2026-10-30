@@ -1,0 +1,37 @@
+/* Independent de Bruijn reconstruction. No Lean evaluator or expanded tree. */
+'use strict';
+const assert=require('assert/strict'),A=require('../../../public/js/proof-atlas-library-data');
+const {table,compact,sha}=require('../method-context/catalogue.cjs');
+const canonical=x=>Array.isArray(x)?x.map(canonical):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,canonical(x[k])])):x;
+const digest=x=>sha(Buffer.from(JSON.stringify(canonical(x)))),same=(a,b)=>digest(a)===digest(b),binds=(k,s)=>(k===6||k===7)&&s===1||k===8&&s===2;
+function importer(t,g,shift=0,cutoff=0){const memo=new Map();function visit(id,depth=0){const key=id+':'+depth;if(memo.has(key))return memo.get(key);assert(t.g.kind.length<131072,'reconstruction bound');const kind=g.kind[id],payload=kind===0&&g.payloads[id].index>=depth+cutoff?{index:g.payloads[id].index+shift}:g.payloads[id],node=t.add(kind,payload,g.children[id].map((c,s)=>visit(c,depth+(binds(kind,s)?1:0))));memo.set(key,node);return node;}return visit;}
+function context(g,at){let node=g.roots[at.route.root];const frames=[];for(const [i,s]of at.route.slots.entries()){const kind=A.kinds[g.kind[node]],route={root:at.route.root,slots:at.route.slots.slice(0,i)};if(binds(g.kind[node],s))frames.push({node,kind,route,path:A.path(g,route)});node=g.children[node][s];}assert.equal(node,at.node,'source occurrence');return frames;}
+function common(calls){let out=calls[0].context.slice();for(const c of calls){let n=0;while(n<out.length&&n<c.context.length&&same(out[n],c.context[n]))n++;out=out.slice(0,n);}return out;}
+function wrap(t,g,frames,start,value,type=null,input=false){for(let i=frames.length-1;i>=start;i--){const id=frames[i].node,k=g.kind[id],p=g.payloads[id],cs=g.children[id],src=importer(t,g,input?1:0,input?i-start:0),domain=src(cs[0]);if(k===6||k===7){value=t.add(6,p,[domain,value]);if(type!==null)type=t.add(7,p,[domain,type]);}else{assert.equal(k,8);const v=src(cs[1]);value=t.add(8,p,[domain,v,value]);if(type!==null)type=t.add(8,p,[domain,v,type]);}}return[value,type];}
+function close(g,call,start,raw){const t=table(),src=importer(t,g),types=importer(t,raw),roots=wrap(t,g,call.context,start,src(call.anchor.node),types(raw.roots[0]));return compact(t.g,roots);}
+function reclose(g,graph,frames,start){const t=table(),src=importer(t,graph),roots=wrap(t,g,frames,start,src(graph.roots[0]),src(graph.roots[1]));return compact(t.g,roots);}
+function pack(t,values,types,steps){assert(values.length&&values.length===types.length);assert.equal(steps.length,values.length-1);let value=values.at(-1),type=types.at(-1);for(let i=values.length-2;i>=0;i--){const step=steps.find(s=>s.ordinal===i);assert(step);const u=step.levels;assert.equal(u.roots.length,2);assert(u.roots.every(r=>u.kind[r]===3));const levels=u.roots.map(r=>u.payloads[r].level),head=name=>t.add(4,{name,nameParts:name.split('.').map(str=>({str})),levels}),app=(f,args)=>args.reduce((f,a)=>t.add(5,{},[f,a]),f);value=app(head('PProd.mk'),[types[i],type,values[i],value]);type=app(head('PProd'),[types[i],type]);}return[value,type];}
+function tuple(graphs,steps){const t=table(),ports=graphs.map(g=>{const read=importer(t,g);return g.roots.map(read);});return compact(t.g,pack(t,ports.map(p=>p[0]),ports.map(p=>p[1]),steps));}
+function project(t,input,n,position){assert(position>=0&&position<n);let v=input;const proj=(value,index)=>t.add(11,{typeName:'PProd',typeNameParts:[{str:'PProd'}],index},[value]);for(let i=0;i<position;i++)v=proj(v,1);return position+1===n?v:proj(v,0);}
+function apply(t,g,input,frames,start,stop,depth){let v=input;for(let i=start;i<stop;i++){if(g.kind[frames[i].node]!==8)v=t.add(5,{},[v,t.add(0,{index:depth-1-i})]);}return v;}
+function adapter(g,group,observed,flatPorts,flat,hier,inner){const shared=group.commonContext.length,partition=group.subgroups.map(s=>s.positions);
+ const outputs={};for(const direction of ['flatten','gather']){const t=table(),domain=direction==='flatten'?hier:flat,codomain=direction==='flatten'?flat:hier,values=[],types=[];
+  if(direction==='flatten')for(let i=0;i<group.calls.length;i++){
+   const gi=partition.findIndex(p=>p.includes(i)),sub=group.subgroups[gi],ordinal=sub.positions.indexOf(i),call=group.calls[i],depth=call.context.length;
+   let value=project(t,t.add(0,{index:depth-shared}),partition.length,gi);value=apply(t,g,value,call.context,shared,sub.commonContext.length,depth);value=project(t,value,sub.positions.length,ordinal);value=apply(t,g,value,call.context,sub.commonContext.length,depth,depth);value=wrap(t,g,call.context,shared,value,null,true)[0];values.push(value);types.push(importer(t,flatPorts[i],1)(flatPorts[i].roots[1]));
+  }else for(const [gi,sub]of group.subgroups.entries()){
+   const depth=sub.commonContext.length,localValues=[],localTypes=[];for(const [j,position]of sub.positions.entries()){const value=apply(t,g,project(t,t.add(0,{index:depth-shared}),group.calls.length,position),sub.commonContext,shared,depth,depth);localValues.push(value);localTypes.push(importer(t,inner[gi][j],1,depth-shared)(inner[gi][j].roots[1]));}
+   const [body,type]=pack(t,localValues,localTypes,observed.subgroupSteps[gi]),closed=wrap(t,g,sub.commonContext,shared,body,type,true);values.push(closed[0]);types.push(closed[1]);
+  }
+  // Both bodies use the canonical target component types, not an inferred
+  // normal form with silently unfolded lets.
+  const targetTypes=direction==='flatten'?flatPorts.map(p=>importer(t,p,1)(p.roots[1])):group.subgroups.map((_,gi)=>types[gi]);
+  const [body]=pack(t,values,targetTypes,direction==='flatten'?observed.flatSteps:observed.hierarchicalSteps),dom=importer(t,domain)(domain.roots[1]),cod=importer(t,codomain,1)(codomain.roots[1]),name=direction==='flatten'?'atlasHierInput':'atlasFlatInput',payload={binderName:name,binderNameParts:[{str:name}],binderInfo:'default'};
+  outputs[direction]=compact(t.g,[t.add(6,payload,[dom,body]),t.add(7,payload,[dom,cod])]);
+ }return outputs;}
+function reconstruct(g,group,out){assert.deepEqual(group.commonContext,common(group.calls));const n=group.calls.length;assert(n>0&&n<=8);assert.equal(out.ports.length,n);for(const [i,c]of group.calls.entries()){assert.deepEqual(context(g,c.anchor),c.context);const p=out.ports[i];assert.equal(p.call,c.id);assert.deepEqual(p.source,{...c.anchor,path:A.path(g,c.anchor.route)});assert.deepEqual(p.context,c.context);assert.equal(p.commonContextLength,group.commonContext.length);}
+ const positions=group.subgroups.flatMap(s=>s.positions);assert.deepEqual(positions.slice().sort((a,b)=>a-b),Array.from({length:n},(_,i)=>i));assert.deepEqual(out.partition,group.subgroups.map(s=>s.positions));
+ const flatPorts=group.calls.map((c,i)=>close(g,c,group.commonContext.length,out.ports[i].originalType)),flat=tuple(flatPorts,out.flatSteps),inner=[],subgraphs=[];
+ for(const [gi,sub]of group.subgroups.entries()){assert.deepEqual(sub.commonContext,common(sub.calls));assert.deepEqual(sub.calls,sub.positions.map(p=>group.calls[p]));assert.deepEqual(out.subgroupContexts[gi],sub.commonContext);const ports=sub.calls.map((c,j)=>close(g,c,sub.commonContext.length,out.ports[sub.positions[j]].originalType));inner.push(ports);subgraphs.push(reclose(g,tuple(ports,out.subgroupSteps[gi]),sub.commonContext,group.commonContext.length));}
+ const hierarchical=tuple(subgraphs,out.hierarchicalSteps),adapters=adapter(g,group,out,flatPorts,flat,hierarchical,inner);return{flat,hierarchical,...adapters};}
+module.exports={reconstruct,digest,same,context,common,close,tuple};
