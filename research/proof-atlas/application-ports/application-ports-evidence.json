@@ -7720,7 +7720,7 @@
       },
       {
         "file": "public/js/proof-atlas-application-port-view.js",
-        "sha256": "b33b4741661f5ab89a1e6f65d4dcdd462782bdb44ad0f91dec86b33f1d38c1eb"
+        "sha256": "a58506da0e92957f961be97b732cbd61b784f9d1911e3bf7802af18433f2f796"
       },
       {
         "file": "public/js/proof-atlas-application-port-manual.js",
@@ -7768,17 +7768,24 @@
       "hashRefusals": 1,
       "optionalComponentFailures": 1,
       "wholeArchiveAttempts": 0,
+      "pagedWindows": 207,
+      "peakTypeRows": 320,
       "builtFiles": {
+        "public/js/proof-atlas-application-paged-provider.js": "27e96d2bc97b92bd60e6c3c581a6da62e82eb4a635ec3c9d89bb1f8a7d801084",
+        "public/js/proof-atlas-application-type-pages.js": "ff1c1e65a04891cd6dbb80ca0abdc35ea631c850cc25e322199ec237e2d28fb5",
+        "public/js/proof-atlas-application-source-paths.js": "b220a86bb4aaa88234554e0a152a7631563f7d7ad5ecd043a22803a6b8ae5ff2",
+        "public/js/proof-atlas-paged-type-operations.js": "158bc045d5be534edffdb388fce27658a935fcedb27b28c2279cece7f319f45c",
+        "public/data/proof-atlas/application-type-index-manifest.js": "e9e1ddf5c4d56f5caa36e92ae7eb28e41b668ccc4b872580ae0d06f2595a49c8",
         "public/js/proof-atlas-application-ports.js": "c3a6a73c27a9fe8e5fc2f06a8a57405d4163edda9b8cf5bac3714ab9a6d7cec7",
         "public/js/proof-atlas-application-port-pages.js": "bb378379d390a069ccecb55a1c5cd94dfd6c13eaf0643739f03cf7c898c86cee",
-        "public/js/proof-atlas-application-port-view.js": "b33b4741661f5ab89a1e6f65d4dcdd462782bdb44ad0f91dec86b33f1d38c1eb",
+        "public/js/proof-atlas-application-port-view.js": "a58506da0e92957f961be97b732cbd61b784f9d1911e3bf7802af18433f2f796",
         "public/js/proof-atlas-application-port-manual.js": "3dfb2dd2c15bddf86e5f66781fc061496ff5ca0daeae15c0cc5fe57d43f66838",
         "public/css/proof-atlas-application-ports.css": "0adf0101aec3e5bf5b88c40ad18179316b9e3cb82d7c72add11230423a50ebcf",
         "public/data/proof-atlas/application-ports-manifest.js": "dbece0e885bd25a31d93c9871f8c0124aee18e64acfb5bf1956c407f65dbc50d",
-        "public/js/proof-atlas-paged-library.js": "f02aaf42f0d0cb750816856a9f6c8f48c8a0a01a323c6d3b8635344497ab9309",
-        "public/js/proof-atlas-library.js": "650596c4334a37945746f67559cf4d13c2e5891319824f47e1ad226fb68ec55c"
+        "public/js/proof-atlas-paged-library.js": "3df44f197bb0e6aa9ded436fd34f663b6d100fb1f3cb76463aa0ece1916d4e26",
+        "public/js/proof-atlas-library.js": "41a96884ca4d901bdf0dc85148138d10a16ee704f92ffd8b27b893286d11e905"
       },
-      "checkerSha256": "7505066f95c410003d590f74e27b54f553440b47acea8ee1903cb049358cba0b"
+      "checkerSha256": "24ae13944c5f7710e5048e03695f4067cb9179c07ddaa4763fa3b7551172f32c"
     },
     "composition": {
       "format": "ProofAtlasConstructionCompositionBrowser/1",
@@ -7808,8 +7815,8 @@
         "public/js/proof-atlas-equality-diagram.js": "42f28feef0c78ee285aef18686c9e4351fe0f25085d4eefe3c689256663457e9",
         "public/js/proof-atlas-equality-view.js": "6f7d0bc0c681737e049d66ecb9bce5079346ab359d81f497de530489cb8311cc",
         "public/js/proof-atlas-equality-source-view.js": "1b996bd39802b44dea1255f728e66771e4579e5b424930dc6a31dce40538b2fa",
-        "public/js/proof-atlas-paged-library.js": "f02aaf42f0d0cb750816856a9f6c8f48c8a0a01a323c6d3b8635344497ab9309",
-        "public/js/proof-atlas-library.js": "650596c4334a37945746f67559cf4d13c2e5891319824f47e1ad226fb68ec55c"
+        "public/js/proof-atlas-paged-library.js": "3df44f197bb0e6aa9ded436fd34f663b6d100fb1f3cb76463aa0ece1916d4e26",
+        "public/js/proof-atlas-library.js": "41a96884ca4d901bdf0dc85148138d10a16ee704f92ffd8b27b893286d11e905"
       },
       "checkerSha256": "e01aa0b88c207aa1f5fd5d412e5c0b1a67f3cba10f0c12643794a65b4cb97f37"
     },
@@ -8053,8 +8060,8 @@
         "public/js/proof-atlas-equality-view.js": "6f7d0bc0c681737e049d66ecb9bce5079346ab359d81f497de530489cb8311cc",
         "public/js/proof-atlas-equality-source-view.js": "1b996bd39802b44dea1255f728e66771e4579e5b424930dc6a31dce40538b2fa",
         "public/js/proof-atlas-source-comparison.js": "ada6fd61d8e414e0ccca777373d631a0c182b03dfb71e30e1cb3e832a4f38e00",
-        "public/js/proof-atlas-paged-library.js": "f02aaf42f0d0cb750816856a9f6c8f48c8a0a01a323c6d3b8635344497ab9309",
-        "public/js/proof-atlas-library.js": "650596c4334a37945746f67559cf4d13c2e5891319824f47e1ad226fb68ec55c",
+        "public/js/proof-atlas-paged-library.js": "3df44f197bb0e6aa9ded436fd34f663b6d100fb1f3cb76463aa0ece1916d4e26",
+        "public/js/proof-atlas-library.js": "41a96884ca4d901bdf0dc85148138d10a16ee704f92ffd8b27b893286d11e905",
         "public/css/proof-atlas-equality.css": "4194f3597ab6f30277c1b5b925bf969abeebf4b1a6befac3a3d9922349802da4",
         "public/data/proof-atlas/equality-streaming-manifest.js": "9532db606658dd30f06716c25c9e158ecd0815fb428c4c75e00452e0de463db9"
       },
@@ -8197,8 +8204,8 @@
         "public/js/proof-atlas-method-source-view.js": "0a65969384c87679911f82dad0eb9824936751b502b5b54ba309f1b54dfa48db",
         "public/js/proof-atlas-method-examples.js": "ea5b595e4dcd7ce15c7c660dc74abc93eeb8e1da86b3e5c356aca7dce8a114b0",
         "public/js/proof-atlas-stream-example.js": "bb1c4ea7af7fee358d2e8d3592c3b1e6a10811c1d6412906d59df02a40976598",
-        "public/js/proof-atlas-library.js": "650596c4334a37945746f67559cf4d13c2e5891319824f47e1ad226fb68ec55c",
-        "public/js/proof-atlas-paged-library.js": "f02aaf42f0d0cb750816856a9f6c8f48c8a0a01a323c6d3b8635344497ab9309",
+        "public/js/proof-atlas-library.js": "41a96884ca4d901bdf0dc85148138d10a16ee704f92ffd8b27b893286d11e905",
+        "public/js/proof-atlas-paged-library.js": "3df44f197bb0e6aa9ded436fd34f663b6d100fb1f3cb76463aa0ece1916d4e26",
         "public/js/proof-atlas-elimination.js": "4a2c842a5245827c4ab4d1d2028c6119d5735cda588009454c3a25db5beccd22",
         "public/css/proof-atlas-theme.css": "bb6a9f8dd30b2e238178a63f62d4eeabfaf48b55ffe03bad3dc64b8359b090cf",
         "public/data/proof-atlas/method-origins-manifest.js": "9ebc7dfce4cd6ac77b5be75f5e22118f1d1f2ee3533f24c77437569add8aafc9"
@@ -8233,8 +8240,8 @@
         "public/js/proof-atlas-method-source-view.js": "0a65969384c87679911f82dad0eb9824936751b502b5b54ba309f1b54dfa48db",
         "public/js/proof-atlas-method-examples.js": "ea5b595e4dcd7ce15c7c660dc74abc93eeb8e1da86b3e5c356aca7dce8a114b0",
         "public/js/proof-atlas-stream-example.js": "bb1c4ea7af7fee358d2e8d3592c3b1e6a10811c1d6412906d59df02a40976598",
-        "public/js/proof-atlas-library.js": "650596c4334a37945746f67559cf4d13c2e5891319824f47e1ad226fb68ec55c",
-        "public/js/proof-atlas-paged-library.js": "f02aaf42f0d0cb750816856a9f6c8f48c8a0a01a323c6d3b8635344497ab9309",
+        "public/js/proof-atlas-library.js": "41a96884ca4d901bdf0dc85148138d10a16ee704f92ffd8b27b893286d11e905",
+        "public/js/proof-atlas-paged-library.js": "3df44f197bb0e6aa9ded436fd34f663b6d100fb1f3cb76463aa0ece1916d4e26",
         "public/js/proof-atlas-elimination.js": "4a2c842a5245827c4ab4d1d2028c6119d5735cda588009454c3a25db5beccd22",
         "public/css/proof-atlas-theme.css": "bb6a9f8dd30b2e238178a63f62d4eeabfaf48b55ffe03bad3dc64b8359b090cf"
       },
@@ -10960,7 +10967,7 @@
         "public/data/proof-atlas/method-query-pages-manifest.js": "c326ecf2cdc8799e5568e811f125faf41d9ebd2036af56b09c34c2b0f98567a8",
         "public/js/proof-atlas-method-source.js": "6f4c20d73405d9a5fe8bdb6d9c458573a039c3edde45b226a7155a18ee413245",
         "public/js/proof-atlas-method-source-view.js": "0a65969384c87679911f82dad0eb9824936751b502b5b54ba309f1b54dfa48db",
-        "public/js/proof-atlas-paged-library.js": "f02aaf42f0d0cb750816856a9f6c8f48c8a0a01a323c6d3b8635344497ab9309",
+        "public/js/proof-atlas-paged-library.js": "3df44f197bb0e6aa9ded436fd34f663b6d100fb1f3cb76463aa0ece1916d4e26",
         "public/js/proof-atlas-method-interfaces.js": "fd2eb4d02ced57e88474edb16923eb34930968869e85d5909a44bd3fd132762e",
         "public/js/proof-atlas-source-pages.js": "b9af2065260c5eecd4cee53aa82016a53ce7aac7305a9a10307def811d480c28",
         "public/js/proof-atlas-native-pages.js": "48ae41afe4297b191cf5b576a04e498e287e791ae5074bf0b41a78b7d18df65b",
@@ -10986,7 +10993,7 @@
         "public/js/proof-atlas-method-interfaces.js": "fd2eb4d02ced57e88474edb16923eb34930968869e85d5909a44bd3fd132762e",
         "public/js/proof-atlas-method-examples.js": "ea5b595e4dcd7ce15c7c660dc74abc93eeb8e1da86b3e5c356aca7dce8a114b0",
         "public/js/proof-atlas-elimination.js": "4a2c842a5245827c4ab4d1d2028c6119d5735cda588009454c3a25db5beccd22",
-        "public/js/proof-atlas-library.js": "650596c4334a37945746f67559cf4d13c2e5891319824f47e1ad226fb68ec55c",
+        "public/js/proof-atlas-library.js": "41a96884ca4d901bdf0dc85148138d10a16ee704f92ffd8b27b893286d11e905",
         "public/css/proof-atlas-theme.css": "bb6a9f8dd30b2e238178a63f62d4eeabfaf48b55ffe03bad3dc64b8359b090cf",
         "public/data/proof-atlas/method-interfaces-manifest.js": "35545092727a15db1c18536f31361c0fab98ab132610ab375eeb242216e8b0d7"
       }
@@ -11024,8 +11031,8 @@
           "servedSha256": "d775ea71b1981568de16e34205cc42ff1c6de6593e50c818c3771298f96f04af"
         },
         "public/js/proof-atlas-library.js": {
-          "sourceSha256": "650596c4334a37945746f67559cf4d13c2e5891319824f47e1ad226fb68ec55c",
-          "servedSha256": "650596c4334a37945746f67559cf4d13c2e5891319824f47e1ad226fb68ec55c"
+          "sourceSha256": "41a96884ca4d901bdf0dc85148138d10a16ee704f92ffd8b27b893286d11e905",
+          "servedSha256": "41a96884ca4d901bdf0dc85148138d10a16ee704f92ffd8b27b893286d11e905"
         },
         "public/js/proof-atlas-library-data.js": {
           "sourceSha256": "a4a01e2e93d015397eb6a8d6fd677e6b788e079440c3e206c43b8c56e06161e9",
@@ -11049,7 +11056,7 @@
         },
         "projects/proof-atlas/manual/index.html": {
           "sourceSha256": "2b00adda0aacdc791c43e45b71365db6b88f11bfb1fd01d801ae385137b83877",
-          "servedSha256": "beb5454474950df19d6963e91f760ecfa5766b8870167f131cbe1dcbed885a6b",
+          "servedSha256": "4e0199073dad4e76e4444a5c3f94ee576f0d797c304723e1f139eb6716248eb4",
           "htmlComparison": {
             "normalization": "Only four shared CSS build-time query versions",
             "styles": [
@@ -11062,8 +11069,8 @@
           }
         },
         "projects/proof-atlas/library/index.html": {
-          "sourceSha256": "733aa2b3a85de9b98a985a246a837c330413154b76475d0b5cb9537be312c891",
-          "servedSha256": "437c8c802790bcc7dd058bcf11694196af78097ef08f6d748f1faf91a275f888",
+          "sourceSha256": "21848ff731e277ee25080114939cdf224e642e40152f849a3e580c2f9b1db7f3",
+          "servedSha256": "ed79c354bedc410ebeffd66d71f0c92be0ae0a1d34b8adf1e33fc630ae0f1ff2",
           "htmlComparison": {
             "normalization": "Only four shared CSS build-time query versions",
             "styles": [
@@ -11072,7 +11079,7 @@
               "syntax",
               "theme"
             ],
-            "normalizedSha256": "ee3f760ecdb27a332f7e221ef0dd285db87c660d4cba56fb11de39f1bca3fc99"
+            "normalizedSha256": "d2d7a464da5a95072c08f95bde2d31623a0e4b8377a00edefccf896c68e74f3d"
           }
         }
       },
@@ -11423,7 +11430,7 @@
     },
     {
       "file": "projects/proof-atlas/library/index.html",
-      "sha256": "733aa2b3a85de9b98a985a246a837c330413154b76475d0b5cb9537be312c891"
+      "sha256": "21848ff731e277ee25080114939cdf224e642e40152f849a3e580c2f9b1db7f3"
     },
     {
       "file": "projects/proof-atlas/manual/index.html",
@@ -14988,6 +14995,10 @@
     {
       "file": "public/data/proof-atlas/application-ports/f441c1be3c49a24fc059c36868562acf1bf06ea43478641b0f8952f5acca4c27/f545daf2fc92296c32a108969b3866fd1b6ea75ba4575544ec98c2f5dae0d374.json.gz",
       "sha256": "783a8e5d5b1ea674a54667003d7209ee269c20332b859ec8e3b4e4130aee56d0"
+    },
+    {
+      "file": "public/data/proof-atlas/application-type-index-manifest.js",
+      "sha256": "e9e1ddf5c4d56f5caa36e92ae7eb28e41b668ccc4b872580ae0d06f2595a49c8"
     },
     {
       "file": "public/data/proof-atlas/construction-composition/3d0318b2bb63638991f34b7744472aa34fc5b1d76277697d68966bad9c68ddd3.json.gz",
@@ -19474,6 +19485,10 @@
       "sha256": "ff192b3eb48c87ecfbb8275ca2b3fd09928f3f1a1d6d37737ad1454488bf62c4"
     },
     {
+      "file": "public/js/proof-atlas-application-paged-provider.js",
+      "sha256": "27e96d2bc97b92bd60e6c3c581a6da62e82eb4a635ec3c9d89bb1f8a7d801084"
+    },
+    {
       "file": "public/js/proof-atlas-application-port-manual.js",
       "sha256": "3dfb2dd2c15bddf86e5f66781fc061496ff5ca0daeae15c0cc5fe57d43f66838"
     },
@@ -19483,19 +19498,31 @@
     },
     {
       "file": "public/js/proof-atlas-application-port-view.js",
-      "sha256": "b33b4741661f5ab89a1e6f65d4dcdd462782bdb44ad0f91dec86b33f1d38c1eb"
+      "sha256": "a58506da0e92957f961be97b732cbd61b784f9d1911e3bf7802af18433f2f796"
     },
     {
       "file": "public/js/proof-atlas-application-ports.js",
       "sha256": "c3a6a73c27a9fe8e5fc2f06a8a57405d4163edda9b8cf5bac3714ab9a6d7cec7"
     },
     {
+      "file": "public/js/proof-atlas-application-source-paths.js",
+      "sha256": "b220a86bb4aaa88234554e0a152a7631563f7d7ad5ecd043a22803a6b8ae5ff2"
+    },
+    {
+      "file": "public/js/proof-atlas-application-type-pages.js",
+      "sha256": "ff1c1e65a04891cd6dbb80ca0abdc35ea631c850cc25e322199ec237e2d28fb5"
+    },
+    {
       "file": "public/js/proof-atlas-library.js",
-      "sha256": "650596c4334a37945746f67559cf4d13c2e5891319824f47e1ad226fb68ec55c"
+      "sha256": "41a96884ca4d901bdf0dc85148138d10a16ee704f92ffd8b27b893286d11e905"
     },
     {
       "file": "public/js/proof-atlas-paged-library.js",
-      "sha256": "f02aaf42f0d0cb750816856a9f6c8f48c8a0a01a323c6d3b8635344497ab9309"
+      "sha256": "3df44f197bb0e6aa9ded436fd34f663b6d100fb1f3cb76463aa0ece1916d4e26"
+    },
+    {
+      "file": "public/js/proof-atlas-paged-type-operations.js",
+      "sha256": "158bc045d5be534edffdb388fce27658a935fcedb27b28c2279cece7f319f45c"
     },
     {
       "file": "research/proof-atlas/application-ports/Controls.lean",
@@ -19515,7 +19542,7 @@
     },
     {
       "file": "research/proof-atlas/application-ports/audit.json",
-      "sha256": "51ec575cebacf8a042e3189a39689faba2a25b8fb46103f027e844d9f62f41eb"
+      "sha256": "9ecc624798246230bc6b6bc929f6861bff859e600a1c5c760859c757ba870594"
     },
     {
       "file": "research/proof-atlas/application-ports/branch-interfaces-compatibility.json",
@@ -19523,15 +19550,15 @@
     },
     {
       "file": "research/proof-atlas/application-ports/browser-ai.json",
-      "sha256": "928f5e16f0df1b06e6ff4524e2871e979c6137f481812ea758127f6818f60da6"
+      "sha256": "32805591f156d4bf8e703228f281daeb97ee24ddb4de190ccdd6ec981494f8b2"
     },
     {
       "file": "research/proof-atlas/application-ports/browser-application.json",
-      "sha256": "eec8a92c50ea33b2051ddd7a8838d2a6fe9e6b6fd528d9c6f7567fe871d26d62"
+      "sha256": "5112bb283d9e539be025345de50a58f40511ab2a39634424e04d2fb98dce139f"
     },
     {
       "file": "research/proof-atlas/application-ports/browser-composition.json",
-      "sha256": "bad88cf30b657b8450f923a879896fc17c6a15562f574503252d202e2fda5db8"
+      "sha256": "0e4f83001f060cd6ed410fa4341c29afa710b1d6a2c11e5d0c5a236a0a9aab97"
     },
     {
       "file": "research/proof-atlas/application-ports/browser-equality.json",
@@ -19539,7 +19566,7 @@
     },
     {
       "file": "research/proof-atlas/application-ports/browser-flow.json",
-      "sha256": "0cd9600bf7ce9b60a2ad7162a90fd022ad81ea4fa6e7ffaa370105c5c0d5ad49"
+      "sha256": "8d477d94ea59fcc21eaa92428f7d91e556cfa54be2bba388ddc58e0f573a2d98"
     },
     {
       "file": "research/proof-atlas/application-ports/browser-indices.json",
@@ -19555,11 +19582,11 @@
     },
     {
       "file": "research/proof-atlas/application-ports/browser-original.json",
-      "sha256": "9f2e538ac3bf7b14d3150a3c99b00eed69226cb99f2effce93b605042b434a14"
+      "sha256": "9d3b6f07ed2f8106f44bc76144ced4121be04780d50b7f1e0a6e82a3f1b67116"
     },
     {
       "file": "research/proof-atlas/application-ports/browser-origins.json",
-      "sha256": "1e0e7a74b4fcf75f34c62b3a07ee5eb327003f93ad02e4dface6b5fbafe04ef9"
+      "sha256": "37e0e6f533df952e617fd0c25da0e55b2832d48c58b062345bd50e5d130ee110"
     },
     {
       "file": "research/proof-atlas/application-ports/browser-parameters.json",
@@ -19571,11 +19598,11 @@
     },
     {
       "file": "research/proof-atlas/application-ports/browser-source.json",
-      "sha256": "0ef98380a29298a6b87637d880a99204e2816c7d93b38ccaf5f86bdc3f79dca6"
+      "sha256": "249088baa26c15bc1f36131aacd349036187f7bb7371a8821ba35ab1187e2d8f"
     },
     {
       "file": "research/proof-atlas/application-ports/browser-streaming.json",
-      "sha256": "cf5b739b666cd5092a709893582dd5e9ead0238a545ecfbca09c84d3c6df7f3c"
+      "sha256": "e35d278496fdfa62f1a623de78d46a610383e1691cb76536a5ba603871b9ea0f"
     },
     {
       "file": "research/proof-atlas/application-ports/browser-stress.json",
@@ -19659,7 +19686,7 @@
     },
     {
       "file": "research/proof-atlas/equality-transport/index.html",
-      "sha256": "44abd670374811e8094a8db11571f4a31f2aedaec0b3a3122c759d11785ffc82"
+      "sha256": "4f944c4f11c7a7830f98341034e29a4e8b4b76a2b621585b82cb785ba702582b"
     },
     {
       "file": "scripts/build-proof-atlas-application-ports-evidence.cjs",
@@ -19679,7 +19706,7 @@
     },
     {
       "file": "scripts/test-proof-atlas-application-ports-browser.cjs",
-      "sha256": "7505066f95c410003d590f74e27b54f553440b47acea8ee1903cb049358cba0b"
+      "sha256": "24ae13944c5f7710e5048e03695f4067cb9179c07ddaa4763fa3b7551172f32c"
     },
     {
       "file": "scripts/test-proof-atlas-application-ports.cjs",

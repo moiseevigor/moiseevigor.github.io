@@ -1,76 +1,78 @@
-# Paged native type fields: transport experiment
+# Paged native type fields and application windows
 
-The default application readers load up to five complete native type graphs before exposing small field cuts. The experimental provider now assembles the same application windows through bounded type pages and supports asynchronous field selection in the existing renderer. It is tested with compiled data fixtures; there is no installed packed corpus or default-reader switch.
+The manual and compiled-library application views use bounded type pages by default. The installed index covers 877 recorded inputs at 201 calls across 42 native profiles. The existing renderer keeps the same application scenes and exact source/type selections. The separate network port inspector still uses its earlier complete-graph loader.
+
+The general geometric-language goal remains active. This package changes representation and delivery; it does not establish semantic compression or improved human comprehension. The blog is unchanged. No site deployment is recorded here.
 
 ## Identity and validation
 
-The producer verifies the complete native archive and compiled source packet hashes, then runs the existing native header and application-port validators. It preserves all original graph arrays, node IDs, six component roots, query/input identity and original contexts. A round-trip reconstructs all five arrays from emitted pages and compares them with the original graph.
+The producer verifies the original native archive and compiled source packet hashes, then runs the existing header, source-witness and application-port validators. Every emitted table reconstructs all five original arrays, preserving node IDs and six component roots. Only compiled term/type records and existing native attestations are installed; original Lean/tactic source scripts are excluded.
 
-The graph-table hash uses JSON fields in the fixed order `kind`, `children`, `payloads`, `expanded`, `neededScope`. This normalized table identity is separate from the original native-archive hash. The native owner remains the original archive; no packed page acquires a new kernel observation.
+The table hash uses JSON fields in the order `kind`, `children`, `payloads`, `expanded`, `neededScope`. This normalized table identity is separate from the original native-archive hash. Computed addresses retain the original native owner, source index, query, input slot, component and ordered route. A stored node ID alone does not identify an occurrence or its lexical context.
 
-The existing type-page protocol supplies 64-row pages and a bounded index cache. The new metadata record is pinned by the table manifest and descriptor. The runtime checks those hashes and identities, validates its selected address, and checks the selected node's occurrence/scope recurrence. Before exposing a type cut, the runtime now opens the original source-page manifest, walks the consumer and producer application spines, and recomputes contexts, the literal argument position and every local-definition hop. It uses the same extracted source-witness rule as the complete-data port validator. An original-context binder portal can be inspected against those retained paths. This transport is not an independent proof of membership in the original archive, a new kernel check or a reduction trace.
+Before exposing a port, the runtime recomputes its consumer/producer paths, original contexts, literal argument position and definition hops through source pages. Only `producerType` uses the original producer context; lifted, expected and normalized types use the consumer context. It checks recorded port attestations, six root scopes, callable-root shapes and literal producer-type weakening. Selected cuts additionally check visible occurrence/scope recurrences.
 
-## Resumable field rule
+Complete native-table validation and typing remain producer attestations. The browser does not independently prove original-archive membership, replay kernel typing or infer new typing judgments for descendants. Source roles, literal references and recorded conversion are distinct from mathematical premise necessity or recovered tactics.
 
-The synchronous and paged field models share their final scene-construction rule. The paged walker completes one row access at a time and retains only local binder node/depth pairs while traversing. Page eviction does not restart the accumulated route. At the selected root it retains at most four row tuples for rendering. The resulting scene, computed addresses, local/source binder targets and exact retained/hidden counts match the complete-data field model.
+## Index and scene rules
 
-The tested runtime uses one page: at most 64 cached type rows, plus two index records and at most four selected-cut row tuples. Metadata is independently capped at 2 MiB; a type page at 1 MiB; a manifest at 256 KiB. Tables retain the existing 65,536-node limit, and encoded occurrence counts have at most 4,096 digits. Paths and local binder stacks retain the earlier 512-field limit. Small graphs can fit completely in one page. Source verification separately retains at most 4,096 path rows / 4 MiB of encoded tuples, with a 256-row fetch cache and two source-index records. These are component bounds, not whole-browser heap measurements. The producer and test harness read complete original archives outside these runtime cache bounds.
+Lookup reads a catalog, one exact native profile and one exact call. The catalog identifies profiles by original owner and full source identity. A profile lists at most 128 recorded call routes; a call supplies at most 65 ordered port descriptors. The reader selects the function and up to four arguments. Missing, foreign or corrupt indexes/pages leave this interface unavailable, without loading legacy port files as a fallback. The surrounding source reader is preserved.
 
-## Finite observations
+`openWindow` assembles scenes through paged comparison, weakening and formal-domain reference discovery. Complete-data and paged producers share presentation assembly; that assembly is not itself a validator. Every scene address comes from a recorded root, located comparison endpoint or checked formal-domain route. The renderer accepts asynchronous information/cuts, snapshots selections and checks window/selection generations before installing their results.
 
-All 877 native inputs in the existing 42-profile inventory round-trip their original graph arrays. The model compares 10,524 root/descendant cut appearances with the complete-data model. The tested cache peaks at 64 rows; 461 ports cause eviction. The largest fetched native page in these tests is 4,069 decoded bytes and the largest metadata record is 173,296 decoded bytes. The runtime source check retains at most 87 path rows across this inventory. Those observed sizes do not replace the protocol's larger hard caps.
+The four-vertex field rule preserves ordered constructor fields, lexical binder targets and exact retained/hidden counts. Row reads finish independently, so eviction does not restart an accumulated route. A difference beyond the 512-field selection limit remains a structural difference with an unavailable navigation witness.
 
-An authored structural control has 32,770 stored nodes and 513 pages. It traverses a 511-field path with 512 evictions, retains three expression vertices, and also checks the exact local binder at depth 512. This is not a kernel-checked proof or an AI benchmark. Corrupt and missing pages, cancellation, foreign owners/queries and disposed readers have separate refusal checks. Source-only inputs have no native port descriptor.
+Weakening and dependency memo keys include binder depth. Authored controls demonstrate that one shared node pair can compare differently at different depths, and one stored variable can refer to different formal parameters. A missing literal function-type prefix, exhausted work budget and empty dependency list remain distinct outcomes. Budget exhaustion never establishes equality or absent references.
+
+## Component bounds
+
+| Component | Bound |
+|---|---|
+| Type table | 65,536 nodes; occurrence counts at most 4,096 digits |
+| Type cursor | One 64-row page and two index records |
+| Retained field cut | At most four row tuples; 512-field route/local-binder limit |
+| Primitive type walk | At most two row tuples; 262,144 memo states/pairs; 524,289 frontier records |
+| Formal bridge | Function and argument readers; one additional retained telescope row |
+| Port metadata | 2 MiB decoded JSON |
+| Port source paths | 4,096 retained rows / 4 MiB encoded tuples; 256-row fetch cache; two index records |
+| Application window | At most five port readers: 320 cached type rows, 1,280 cached source rows, 20,480 retained source rows / 20 MiB encoded tuples, 10 MiB metadata |
+| Index lookup | Catalog 128 KiB; profile 256 KiB; call 256 KiB; total 640 KiB decoded JSON |
+
+Type pages have a 1 MiB decoded cap and type manifests a 256 KiB cap. Comparison predecessors retain node IDs, depths and fields, not ancestor expression rows. Their chains are bounded by processed states. Small graphs can fit entirely in one page. Work metadata can exceed a small complete graph's size; these are component bounds, not total browser-heap measurements. Producers and baseline harnesses retain complete original data separately.
+
+## Checked observations
+
+The [evidence manifest](evidence.json) pins source, inventory, report and production-build hashes. The [publication inventory](publication.json.gz) lists 8,969 immutable assets occupying 7,143,999 compressed bytes. Existing hash-addressed assets are verified without replacement.
+
+| Check | Observation and scope |
+|---|---|
+| [Native port model](model-check.json) | All 877 arrays round-trip; 10,524 sampled root/descendant cut appearances match complete data. All 877 type comparisons and 676 formal bridges match; all recorded weakenings pass. |
+| [Window model](window-model.json.gz) | All 246 windows at 201 calls match the pre-refactor implementation at commit `fe6057ade17bf6040d5975dd4f2e46920bf44be2`; 3,173 computed selections/cuts and 2,981 source selections, including binding hops, are checked. |
+| [Installed-index model](installed-index.json) | All 246 installed scenes match; fourteen refusal controls cover owners, occurrences, bounds, missing/corrupt assets and cancellation. Maximum decoded index lookup is 70,962 bytes. |
+| [Default browser](default-browser.json) | Normal controls, without a provider override: 207 paged windows, 115 library producer jumps, 45 argument-page transitions, exact selections, stale responses, corruption and component failure. No legacy port or whole-source archive requests. Four accessibility audits. |
+| [Field/browser regression](compatibility/field-browser.json.gz) | Twenty-four field selections, five binder selections, source preservation, optional-component boundaries and eight accessibility audits. |
+| [Source/metadata controls](source-witness-controls.json) | Thirty-two refusal/release controls, including re-hashed false source metadata, same-node/different-occurrence input, false weakening, foreign call readers and forged formal dependencies. |
+| [Structural paging control](controls-check.json) | Authored 32,770-node graph, 513 pages, 511-field path and exact local binder at depth 512, with 512 evictions. |
+| [Operation controls](operation-controls.json) | Authored 33,810-node graph over 529 pages; a 600-field difference, depth-sensitive sharing, lifting, budgets, alias boundaries, cancellation and a missing row. Cache remains at 64 rows through 8,577 evictions. |
+
+Observed window peaks are 320 cached type rows, 1,280 cached source rows, 367 retained source rows and 458,732 metadata bytes. These finite inventory checks are not all applications in every source proof. Structural controls are not kernel-checked proofs or AI benchmarks.
+
+The [aggregate application gate](aggregate-check.json) also passes: current unit observations, fifteen fingerprint-checked browser records and thirteen immutable checkpoints remain consistent. Historical checkpoint bytes are not rewritten. Earlier primitive/window fixture browser records remain available and are identified separately in the evidence manifest; the default-browser record above is the installed transport check.
 
 ## Reproduction
 
+Run from the repository root, with the baseline Git object available:
+
 ```sh
-node research/proof-atlas/native-type-paging/check-model.cjs /tmp/native-type-paging.json
-node research/proof-atlas/native-type-paging/check-controls.cjs /tmp/native-type-paging-controls.json
-node research/proof-atlas/native-type-paging/check-source.cjs /tmp/native-type-source-controls.json
-node research/proof-atlas/native-type-paging/check-operations.cjs /tmp/native-type-operation-controls.json
+node research/proof-atlas/native-type-paging/publish.cjs --check
+node research/proof-atlas/native-type-paging/check-installed.cjs /tmp/installed-type-index.json
+node research/proof-atlas/native-type-paging/check-model.cjs /tmp/native-type-model.json
 node research/proof-atlas/native-type-paging/check-windows.cjs /tmp/native-type-windows.json
-node scripts/test-proof-atlas-type-pages.cjs
-node research/proof-atlas/type-field-navigation/check-model.cjs /tmp/complete-field-regression.json
-# With a production build served locally; Playwright and an installed Chromium:
-ATLAS_ORIGIN=http://127.0.0.1:8866 node research/proof-atlas/native-type-paging/check-browser.cjs /tmp/native-type-paging-browser
-ATLAS_ORIGIN=http://127.0.0.1:8866 node research/proof-atlas/native-type-paging/check-window-browser.cjs /tmp/native-type-window-browser
+node research/proof-atlas/native-type-paging/check-source.cjs /tmp/native-type-source-controls.json
+node research/proof-atlas/native-type-paging/check-controls.cjs /tmp/native-type-controls.json
+node research/proof-atlas/native-type-paging/check-operations.cjs /tmp/native-type-operations.json
+ATLAS_APPLICATION_PORT_CHECK=1 node scripts/test-proof-atlas-application-ports.cjs
+node scripts/build-proof-atlas-application-ports-evidence.cjs --check
+# With a production build served locally, Playwright and Chromium installed:
+ATLAS_ORIGIN=http://127.0.0.1:8866 node scripts/test-proof-atlas-application-ports-browser.cjs
 ```
-
-The browser check executes the served runtime in Chromium with compiled data fixtures supplied by the test harness. It does not mount a new proof reader or establish an application memory improvement. No permanent packed corpus is added before integration. The blog is unchanged. The general geometric-language goal remains active.
-
-The [evidence manifest](evidence.json) pins the producer, runtime, inventory and report hashes. Recorded checks: [native model](model-check.json), [structural controls](controls-check.json), [historical primitive transport](browser-check.json), [source-witness refusals](source-witness-controls.json), [operation controls](operation-controls.json), [application-model regression](compatibility/application-model.json.gz), [field-model regression](compatibility/field-model.json.gz), [reader/browser regression](compatibility/field-browser.json.gz), and [existing type-page model](compatibility/type-pages-model.json). The reader regression includes 24 field selections, five binder selections and eight accessibility audits. The production build and served runtime bytes match the pinned source; compiled data fixtures are used only for the experimental transport check. No merge or deployment is recorded here.
-
-## Source-witness boundary
-
-Re-hashed metadata controls preserve valid transport hashes while altering source contexts, producer shape, argument occurrence and definition hops. The runtime must reject these by recomputing the source witness. A separate control supplies a different occurrence of the same stored input node. All 32 source/metadata and reader-ownership refusal controls pass. The model inspects 1,238 original binder portals in root-cut appearances, and Chromium checks 18 original binder portals in its selected four-port fixture. Bounds, corrupt source pages, cancellation and cursor release are tested separately. These checks establish source-path consistency against the pinned source-page protocol. They do not independently prove original native-archive membership or replay native typing.
-
-The default application window still uses complete graphs. The experimental `openWindow` provider now assembles the same scene through paged comparison, weakening and formal dependencies, and the existing renderer accepts that provider through `openApplication`. A public packed-data index and default-loader integration remain open. No total-heap measurement or default-application memory improvement is claimed.
-
-## Literal type operations
-
-The service now checks six root scopes, callable-root shapes, recorded port attestations and literal producer-type weakening before exposing a reader. Weakening compares the original producer type with its recorded lift into the consumer context. This is a structural check over recorded expressions, not fresh kernel typing or normalization.
-
-`proof-atlas-paged-type-operations.js` implements row-at-a-time structural comparison, weakening and formal-domain reference discovery. Comparison preserves the complete-data model's traversal order, pair counts and exact first difference; a difference beyond the 512-field selection limit remains a proved structural difference with an unavailable navigation witness. The weakening and dependency memo keys include local binder depth. Sharing storage does not erase lexical context.
-
-The primitive walks keep at most two row tuples while awaiting data, separately from their cursor's 64-row page cache. A formal bridge additionally retains one telescope row during its dependency walk. Ordered work records and a bounded memo retain node IDs, depths and predecessor fields, without retaining expression rows. The state budget is at most 262,144 distinct pairs/states; the frontier bound is 524,289 records (arity at most three). Comparison predecessor chains are separately bounded by the processed-state budget. These bounds can be larger than a small complete graph; they are not a claim about total heap reduction. A formal bridge uses a function reader and an argument reader, each with its own source/metadata/type cache; the combined observed type cache peaks at 128 rows.
-
-All 877 native input comparisons match the complete-data model, and all 877 literal weakening checks pass. The 676 recorded argument positions recover the same formal domain and dependency list as the complete-data model, including explicit literal-signature boundaries. An unavailable formal domain remains distinct from an empty dependency list. Source roles and kernel instantiation remain recorded attestations; literal references do not establish mathematical premise necessity.
-
-An authored 33,810-node control uses 529 type pages. It tests a 600-field difference, free-variable lifting, the same node pair at distinct binder depths, formal-reference budgets, alias boundaries, cancellation and a missing row. Its paged operations keep 64 cached rows through 8,577 evictions. It is a structural expression control, not a kernel-checked proof or an AI benchmark. [Operation controls](operation-controls.json).
-
-Complete table validation remains producer-owned. The runtime checks page hashes/local shapes, root scopes, original source witnesses, literal weakening and selected recurrences. It does not independently validate original-archive membership or replay the native typing judgments.
-
-## Application windows in the existing renderer
-
-`openWindow` takes one function and at most four ordered argument descriptors. It checks the original native owner, source identity, call route, slot identity, literal source witnesses and type operations before assembling the scene. Complete-data and paged producers share a presentation rule; presentation assembly itself is not a validator. The paged provider resolves every scene address from recorded roots, located comparison endpoints or checked formal-domain routes.
-
-The [window model](window-model.json.gz) uses the complete-data implementation at commit `fe6057ade17bf6040d5975dd4f2e46920bf44be2`, before that presentation refactor. Reproduction requires this Git object in the checkout. All 246 windows at 201 inventoried calls across 42 profiles match that independent baseline. The model checks 3,173 computed selections/field cuts and 2,981 source selections, including binding-hop portals. This inventory is finite; it is not all applications in every source proof.
-
-The window keeps at most five port readers. Each has its earlier 64-row type cache, 256-row source cache, 4,096-row / 4 MiB retained source-path bound, two source and two type index records, and 2 MiB metadata bound. Aggregate window limits are 320 cached type rows, 1,280 cached source rows, 20,480 retained source rows / 20 MiB of encoded tuples, and 10 MiB metadata. Observed peaks are 320 type rows, 1,280 source-cache rows, 367 retained source rows and 458,732 metadata bytes. These are component bounds, not browser-heap measurements. Small tables can fit in a single page. There are no complete native type-array allocations in the paged provider; producers and baseline checks retain complete data separately.
-
-The [window browser check](window-browser.json) mounts this provider in the existing application renderer, using served production JavaScript and compiled data fixtures. It checks ten field selections, local and original-source binder portals, a binding-use portal, three argument-page transitions, stale controls and release during an observed in-flight fetch. Four accessibility audits cover both themes and desktop/mobile widths. The default-reader regression retains its eight separate audits. Type/source requests use pages; the fixture-mounted window makes no legacy native-port or whole-source archive requests.
-
-The renderer snapshots selections and checks their window/selection generations after asynchronous reads. Retired type-field controls and controls from replaced windows cannot install late type fields or source highlights. A pending load can be released without restoring its scene. The blog and public default loader are unchanged.
-
-The [aggregate application gate](aggregate-check.json) also passes: its current unit audit, fifteen fingerprint-checked browser records and thirteen immutable checkpoints remain consistent. Reproduce with `ATLAS_APPLICATION_PORT_CHECK=1 node scripts/test-proof-atlas-application-ports.cjs` and `node scripts/build-proof-atlas-application-ports-evidence.cjs --check`. The window browser report above is the current combined renderer check; the earlier primitive-only browser report remains pinned to its historical commit in the evidence manifest.

@@ -1,6 +1,6 @@
 {
   "format": "ProofAtlasNativeTypePagingModel/1",
-  "status": "PAGED_COMPARISON_WEAKENING_FORMALS_AND_SOURCE_CUTS_PASS_NOT_INTEGRATED",
+  "status": "PAGED_COMPARISON_WEAKENING_FORMALS_AND_SOURCE_CUTS_PASS_NOT_DEPLOYED",
   "profiles": 42,
   "ports": 877,
   "cuts": 10524,
@@ -503,7 +503,7 @@
         "fullTableArchiveRequests": 0,
         "validation": "Producer-validated table; fetched pages checked by hash and local shape. The scene API additionally verifies visible recurrences and original source context."
       },
-      "scope": "Original source witnesses and literal type weakening checked through pages. No normalization, new typing or independent archive-membership proof. Current application-reader integration remains open."
+      "scope": "Original source witnesses and literal type weakening checked through pages. No normalization, new typing or independent archive-membership proof. Unvisited inputs and other proof occurrences remain outside this reader."
     }
   },
   "formalBridges": 676,
@@ -516,8 +516,8 @@
     "public/js/proof-atlas-application-ports.js": "c3a6a73c27a9fe8e5fc2f06a8a57405d4163edda9b8cf5bac3714ab9a6d7cec7",
     "public/js/proof-atlas-computed-type-neighborhood.js": "d7bd1ced848591590c8f18539a8816e909ae1227b851f28fa1b5ba1c9e3d6c7a",
     "public/js/proof-atlas-type-pages.js": "aa2b5901458b0a2b714090ec8a470c3bb073c50f56f3e77fb926247d5f3be184",
-    "public/js/proof-atlas-application-type-pages.js": "de6dcda0144bfd10615fb5a412f7c07b8e9fdedf0032b2d673d478893b1aba4b",
+    "public/js/proof-atlas-application-type-pages.js": "ff1c1e65a04891cd6dbb80ca0abdc35ea631c850cc25e322199ec237e2d28fb5",
     "research/proof-atlas/native-type-paging/pack.cjs": "697b4d89843434b1092f7980a94b5d1c051c9a9b5a66dcd87cf2e22648359b47",
-    "research/proof-atlas/native-type-paging/check-model.cjs": "9da0c82c58fbb567ce41defb686d8feb17b00b78c39c3f1f4ff80cdf637a47e7"
+    "research/proof-atlas/native-type-paging/check-model.cjs": "4740b5322d880425c363447da276e247d49051d54f7f146789026ff7f8e6b733"
   }
 }

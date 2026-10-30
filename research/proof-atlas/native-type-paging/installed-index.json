@@ -1,0 +1,21 @@
+{
+  "format": "ProofAtlasInstalledApplicationTypeIndex/1",
+  "status": "INSTALLED_INDEX_SCENES_AND_NO_FALLBACK_REFUSALS_PASS",
+  "profiles": 42,
+  "calls": 201,
+  "windows": 246,
+  "sceneMatches": 246,
+  "peakTypeRows": 320,
+  "peakIndexBytes": 70962,
+  "refusals": 14,
+  "wholeOrLegacyArchiveRequests": 0,
+  "baselineSha256": "1f1cb5e2be801bea0372fcb7b3a23f533a8dcf3656f17a73b3f91d012cb95b9e",
+  "requests": 17315,
+  "files": {
+    "public/js/proof-atlas-application-paged-provider.js": "27e96d2bc97b92bd60e6c3c581a6da62e82eb4a635ec3c9d89bb1f8a7d801084",
+    "public/js/proof-atlas-application-type-pages.js": "ff1c1e65a04891cd6dbb80ca0abdc35ea631c850cc25e322199ec237e2d28fb5",
+    "public/data/proof-atlas/application-type-index-manifest.js": "e9e1ddf5c4d56f5caa36e92ae7eb28e41b668ccc4b872580ae0d06f2595a49c8",
+    "research/proof-atlas/native-type-paging/publication.json.gz": "880baf19856beebd08f2e847033560c72da1af4b48f8173aa4c3d42f2b37bdcd",
+    "research/proof-atlas/native-type-paging/check-installed.cjs": "b574464e84787a418a4168dab01d1427cf90f184c19da9a66195b2cfd9691b49"
+  }
+}

@@ -31,8 +31,8 @@
       "servedSha256": "d775ea71b1981568de16e34205cc42ff1c6de6593e50c818c3771298f96f04af"
     },
     "public/js/proof-atlas-library.js": {
-      "sourceSha256": "650596c4334a37945746f67559cf4d13c2e5891319824f47e1ad226fb68ec55c",
-      "servedSha256": "650596c4334a37945746f67559cf4d13c2e5891319824f47e1ad226fb68ec55c"
+      "sourceSha256": "41a96884ca4d901bdf0dc85148138d10a16ee704f92ffd8b27b893286d11e905",
+      "servedSha256": "41a96884ca4d901bdf0dc85148138d10a16ee704f92ffd8b27b893286d11e905"
     },
     "public/js/proof-atlas-library-data.js": {
       "sourceSha256": "a4a01e2e93d015397eb6a8d6fd677e6b788e079440c3e206c43b8c56e06161e9",
@@ -56,7 +56,7 @@
     },
     "projects/proof-atlas/manual/index.html": {
       "sourceSha256": "2b00adda0aacdc791c43e45b71365db6b88f11bfb1fd01d801ae385137b83877",
-      "servedSha256": "beb5454474950df19d6963e91f760ecfa5766b8870167f131cbe1dcbed885a6b",
+      "servedSha256": "4e0199073dad4e76e4444a5c3f94ee576f0d797c304723e1f139eb6716248eb4",
       "htmlComparison": {
         "normalization": "Only four shared CSS build-time query versions",
         "styles": [
@@ -69,8 +69,8 @@
       }
     },
     "projects/proof-atlas/library/index.html": {
-      "sourceSha256": "733aa2b3a85de9b98a985a246a837c330413154b76475d0b5cb9537be312c891",
-      "servedSha256": "437c8c802790bcc7dd058bcf11694196af78097ef08f6d748f1faf91a275f888",
+      "sourceSha256": "21848ff731e277ee25080114939cdf224e642e40152f849a3e580c2f9b1db7f3",
+      "servedSha256": "ed79c354bedc410ebeffd66d71f0c92be0ae0a1d34b8adf1e33fc630ae0f1ff2",
       "htmlComparison": {
         "normalization": "Only four shared CSS build-time query versions",
         "styles": [
@@ -79,7 +79,7 @@
           "syntax",
           "theme"
         ],
-        "normalizedSha256": "ee3f760ecdb27a332f7e221ef0dd285db87c660d4cba56fb11de39f1bca3fc99"
+        "normalizedSha256": "d2d7a464da5a95072c08f95bde2d31623a0e4b8377a00edefccf896c68e74f3d"
       }
     }
   },
