@@ -1,0 +1,25 @@
+.sa-view{color:var(--text);font:.9rem/1.5 var(--sans,system-ui);min-width:0}
+:root .sa-view :is(h3,h4){font:600 1.05rem/1.5 var(--sans,system-ui);margin:1.2rem 0 .5rem}
+:root .sa-view :is(p,li,button){font-family:var(--sans,system-ui)}
+.sa-view button,.sa-view a{min-height:44px;max-width:100%;overflow-wrap:anywhere}
+.sa-view a{display:inline-block;padding-block:.5rem}
+.sa-note{font-size:.85rem;color:var(--text-muted)}
+.sa-viewport{max-width:100%;max-height:40rem;overflow:auto;overscroll-behavior:contain;touch-action:pan-x pan-y;border:1px solid var(--border);background:var(--bg);cursor:grab;margin:1rem 0}
+.sa-viewport:focus-visible{outline:3px solid var(--accent);outline-offset:2px}.sa-dragging{cursor:grabbing;user-select:none}
+.sa-canvas{position:relative;isolation:isolate}
+.sa-band{position:absolute;left:0;right:0;box-sizing:border-box;background:var(--fig-bg);border-block:1px solid var(--border);z-index:-1}
+.sa-band>button{position:absolute;top:58px;left:12px;width:152px;text-align:left;font-weight:600}
+.sa-canvas>svg{position:absolute;inset:0;pointer-events:none;overflow:visible}
+.sa-wire{stroke:var(--text-muted);fill:none;stroke-width:1.5;opacity:.7}.sa-wire-selected{stroke:var(--accent);stroke-width:3;opacity:1}.sa-arrow{fill:var(--text-muted)}
+.an-lab .sa-call{position:absolute;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;gap:.25rem;padding:.6rem;text-align:left;overflow:hidden;background:var(--bg);border:1px solid var(--text-muted)}
+.sa-call strong{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;line-height:1.3;width:100%}
+.sa-call code{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;white-space:pre-wrap;width:100%;font:12.5px/1.25 "IBM Plex Mono",monospace;background:transparent;color:var(--text);border:0;padding:0}
+.sa-crossing-label{fill:var(--text);font:12px var(--sans,system-ui);paint-order:stroke;stroke:var(--bg);stroke-width:4px;stroke-linejoin:round}
+.sa-call span{font-size:.75rem;line-height:1.35;color:var(--text-muted)}
+.sa-view button[aria-pressed=true]{border-color:var(--accent);outline:2px solid var(--accent);outline-offset:1px}
+.sa-connections{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(18rem,100%),1fr));gap:.5rem;margin:.5rem 0}
+.sa-connections button{text-align:left}.sa-input{display:flex;flex-wrap:wrap;align-items:center;gap:.7rem;margin:.65rem 0}
+.sa-view ol{padding-left:1.5rem}.sa-view li{padding-block:.5rem}.sa-view li p{margin:.4rem 0}
+/* The scoped view owns its pan viewport; its controls stay outside the canvas. */
+.an-scroll:has(>.sa-view){border:0;background:transparent;overflow:visible;max-height:none}
+@media(max-width:600px){.sa-viewport{max-height:32rem}.sa-input{align-items:stretch;flex-direction:column}.sa-input button{text-align:left}.sa-view ol{padding-left:1.2rem}}
