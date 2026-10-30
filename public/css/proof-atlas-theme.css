@@ -239,4 +239,11 @@
 :root .proof-atlas-theme :is(.pl-context-pair,.pl-context-inspection) pre {max-height:16rem;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}
 :root .proof-atlas-theme .pl-context-pair button {max-width:100%;white-space:normal;overflow-wrap:anywhere;min-height:44px}
 :root .proof-atlas-theme .pl-context-relation {text-align:center;align-self:center;font-family:"IBM Plex Sans",sans-serif}
+:root .proof-atlas-theme .pl-context-kernel {min-width:0;margin:1rem 0;padding:.85rem;border:1px solid var(--border)}
+:root .proof-atlas-theme .pl-context-kernel h5 {margin:0;font-size:1rem}
+:root .proof-atlas-theme .pl-context-kernel-link {display:grid;grid-template-columns:minmax(0,1fr) minmax(8rem,1fr) minmax(0,1fr);align-items:center;gap:.75rem;border-block:3px double var(--border);padding:.75rem 0}
+:root .proof-atlas-theme .pl-context-kernel-link strong {text-align:center;font-family:"IBM Plex Sans",sans-serif;font-size:.9rem}
+:root .proof-atlas-theme .pl-context-kernel button {min-height:44px;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+:root .proof-atlas-theme .pl-context-kernel pre {max-height:20rem;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}
 @media(max-width:700px){:root .proof-atlas-theme .pl-context-pair {grid-template-columns:1fr}}
+@media(max-width:700px){:root .proof-atlas-theme .pl-context-kernel-link {grid-template-columns:1fr}}

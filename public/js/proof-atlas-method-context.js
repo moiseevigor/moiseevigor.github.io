@@ -135,6 +135,27 @@
   }
   function accepts(receipt,data,parent) {const v=owned.get(receipt);demand(v&&v.data===data&&v.parent===parent,'foreign or cloned context receipt');I.accepts(parent,data);return true;}
   function details(receipt) {const v=owned.get(receipt);demand(v,'owned context receipt');return v;}
+  // Exact endpoints only. The caller separately validates the native record's
+  // owner and context; matching forms alone do not establish kernel conversion.
+  function matchNativeEndpoints(receipt, graph) {
+    const {value}=details(receipt),g=value.graph,n=graph?.kind?.length;
+    demand(Number.isInteger(n)&&n>0&&n<=2048,'native endpoint graph bound');
+    demand(new TextEncoder().encode(JSON.stringify(graph)).length<=262144,'native endpoint bytes');
+    demand(graph.serialization==='ExprDAG/1'&&Array.isArray(graph.kind)&&Object.keys(graph).every(k=>['serialization','kind','children','payloads','neededScope','expanded','roots'].includes(k))&&Array.isArray(graph.roots)&&graph.roots.length===2&&
+      ['children','payloads','neededScope','expanded'].every(k=>Array.isArray(graph[k])&&graph[k].length===n),'native endpoint shape');
+    for(let i=0;i<n;i++)demand(Number.isInteger(graph.kind[i])&&graph.kind[i]>=0&&graph.kind[i]<12&&
+      Array.isArray(graph.children[i])&&graph.children[i].every(c=>Number.isInteger(c)&&c>=0&&c<i),'native endpoint postorder');
+    const seen=new Set(),reached=new Set(),todo=[[value.expectedRoot,graph.roots[0]],[value.actualRoot,graph.roots[1]]];
+    while(todo.length){demand(todo.length<=8192&&seen.size<8192,'native endpoint comparison bound');
+      const [a,b]=todo.pop(),key=a+':'+b;demand(Number.isInteger(b)&&b>=0&&b<n,'native endpoint root');
+      if(seen.has(key))continue;seen.add(key);reached.add(b);
+      demand(g.kind[a]===graph.kind[b]&&g.children[a].length===graph.children[b].length&&
+        A.payloadKey(g.kind[a],g.payloads[a])===A.payloadKey(graph.kind[b],graph.payloads[b])&&
+        g.neededScope[a]===graph.neededScope[b]&&g.expanded[a]===graph.expanded[b],'native endpoint differs');
+      g.children[a].forEach((c,s)=>todo.push([c,graph.children[b][s]]));
+    }
+    demand(reached.size===n,'unreachable native endpoint row');return true;
+  }
   function inspect(receipt,side,slots=[]) {
     const {value,data}=details(receipt),g=value.graph,root=side==='expected'?value.expectedRoot:side==='computed'?value.actualRoot:null;
     demand(root!==null&&Array.isArray(slots)&&slots.length<=512&&slots.every(s=>Number.isInteger(s)&&s>=0&&s<=2),'normal-form selection');
@@ -158,12 +179,17 @@
       fields:g.children[id].map((_,slot)=>({field:A.fields[A.kinds[g.kind[id]]][slot],slots:[...slots,slot]}))};
     demand(new TextEncoder().encode(JSON.stringify(result)).length<=limits.bytes,'selection bytes');return freeze(result);
   }
+  let conversionJob=null;
+  async function conversionReady(){if(host.ProofAtlasMethodConversion)return host.ProofAtlasMethodConversion;
+    if(!conversionJob)conversionJob=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='/public/js/proof-atlas-method-conversion.js?v=1';
+      script.onload=()=>{if(host.ProofAtlasMethodConversion)resolve(host.ProofAtlasMethodConversion);else{conversionJob=null;reject(Error('Kernel record component unavailable'));}};
+      script.onerror=()=>{script.remove();conversionJob=null;reject(Error('Kernel record component unavailable'));};document.head.append(script);});return conversionJob;}
   function mount(container,{data,parent,onInput=()=>{},onSource=()=>{},live=()=>true}) {
-    I.accepts(parent,data);let focus={kind:'body'},first=0,disposed=false,serial=0,receipt=null;
+    I.accepts(parent,data);let focus={kind:'body'},first=0,disposed=false,serial=0,receipt=null,nativeController=null;
     const el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
     const button=(text,action)=>{const b=el('button',text),epoch=serial;b.type='button';b.onclick=()=>{if(!disposed&&live()&&epoch===serial)action();};return b;};
     container.className='pl-method-context';
-    function draw(){if(disposed||!live())return;const epoch=++serial;
+    function draw(){if(disposed||!live())return;nativeController?.abort();nativeController=null;const epoch=++serial;
       const controls=el('div');controls.className='pl-actions';
       const body=button('Compare computed body type',()=>{focus={kind:'body'};draw();});body.dataset.contextBody='';body.setAttribute('aria-pressed',String(focus.kind==='body'));controls.append(body);
       for(const input of data.inputs.slice(first,first+4)){const b=button('Compare input '+(input.ordinal+1)+' · '+input.name,()=>{focus={kind:'input',ordinal:input.ordinal};draw();});b.dataset.contextFocus=String(input.ordinal);b.setAttribute('aria-pressed',String(focus.kind==='input'&&focus.ordinal===input.ordinal));controls.append(b);}
@@ -181,6 +207,29 @@
         const value=inspect(r,side),pre=el('pre',value.preview);pre.tabIndex=0;pre.setAttribute('aria-label',label);const b=button('Inspect '+side+' normal form',()=>{if(valid())inspectAt(side);});b.dataset.contextSide=side;
         item.append(el('strong',label),pre,b);pair.append(item);}
       container.append(pair);
+      const kernel=el('section');kernel.className='pl-context-kernel';kernel.dataset.contextKernelState='idle';
+      const kernelStatus=el('p',focus.kind==='body'?'Separate native evidence has not been loaded.':'No separate kernel record for this input domain.');kernelStatus.setAttribute('role','status');
+      kernel.append(el('h5','Recorded kernel conversion'),kernelStatus);
+      if(focus.kind==='body'){
+        const nativeButton=button('Check recorded kernel conversion',async()=>{
+          if(!valid())return;nativeButton.disabled=true;nativeController?.abort();const controller=new AbortController();nativeController=controller;
+          kernel.dataset.contextKernelState='loading';kernelStatus.textContent='Loading native evidence for this selected pair…';
+          try{const N=await conversionReady();if(!valid()||controller.signal.aborted)return;
+            const result=await N.load(data,parent,r,{signal:controller.signal});if(!valid()||controller.signal.aborted)return;
+            if(result.status==='unavailable'){kernel.dataset.contextKernelState='unavailable';kernelStatus.textContent=result.reason;return;}
+            N.accepts(result,data,parent,r);kernel.dataset.contextKernelState='checked';
+            kernelStatus.textContent='Recorded kernel conversion and typed-term check passed in Γ'+result.context.original+' + '+result.context.computedInputs+' computed input binders. The β/α result above is unchanged.';
+            const bridge=el('div');bridge.className='pl-context-kernel-link';
+            const left=button('Inspect expected endpoint',()=>{if(valid())inspectAt('expected');}),right=button('Inspect computed endpoint',()=>{if(valid())inspectAt('computed');});
+            left.dataset.contextKernelEndpoint='expected';right.dataset.contextKernelEndpoint='computed';
+            bridge.append(left,el('strong','≡ · recorded kernel conversion'),right);
+            const details=el('details');details.dataset.contextKernelReceipt='';details.append(el('summary','Exact conversion endpoints and native evidence owner'),el('pre',JSON.stringify(result,null,2)));
+            kernel.replaceChildren(el('h5','Recorded kernel conversion'),kernelStatus,bridge,details,el('p',result.guarantee));
+          }catch(error){if(valid()&&!controller.signal.aborted){kernel.dataset.contextKernelState='error';kernelStatus.textContent='Kernel record unavailable: '+error.message;}}
+          finally{if(valid()&&!controller.signal.aborted)nativeButton.disabled=false;}
+        });nativeButton.dataset.contextKernelLoad='';kernel.append(nativeButton);
+      }
+      container.append(kernel);
       if(r.status==='unavailable')container.append(el('p','This local β/α comparison is unavailable. The existing whole-method kernel conversion remains a separate observation.'));
       else if(r.renamings.length)container.append(el('p',r.renamings.length+' distinct binder-node pair(s) differ only in names. Their names and occurrence witnesses are retained.'));
       const actions=el('div');actions.className='pl-actions';
@@ -188,8 +237,8 @@
       if(focus.kind==='input'){const ordinal=focus.ordinal,b=button('Open recorded computed input '+(ordinal+1),()=>{if(valid())onInput(ordinal);});b.dataset.contextRecordedInput=String(ordinal);actions.append(b);}
       const details=el('details');details.append(el('summary','Exact original and derived type owners'),el('pre',JSON.stringify(r,null,2)));details.dataset.contextReceipt='';container.append(actions,inspection,details,el('p',r.guarantee));
     }
-    draw();return{getReceipt:()=>receipt,dispose:()=>{disposed=true;serial++;receipt=null;container.replaceChildren();}};
+    draw();return{getReceipt:()=>receipt,dispose:()=>{disposed=true;serial++;nativeController?.abort();receipt=null;container.replaceChildren();}};
   }
-  const api={normalizePair,compare,accepts,inspect,mount,limits};
+  const api={normalizePair,compare,accepts,inspect,matchNativeEndpoints,mount,limits};
   if(node){api.exportRecord=receipt=>copy(details(receipt).value);module.exports=api;}else host.ProofAtlasMethodContext=api;
 })(typeof window==='undefined'?globalThis:window);

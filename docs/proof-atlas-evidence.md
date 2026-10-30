@@ -707,6 +707,10 @@ The same computed interface rule also passed fresh public-packet replay for nine
 
 [Public replay method and limits](/research/proof-atlas/method-replay/README.md) · [Scoped verification bundle](/research/proof-atlas/method-replay/method-replay-evidence.json)
 
+<span id="method-port-conversion"></span>
+
+The method-type inspector retains two distinct relations between its selected expected and computed endpoints: beta/explicit-alpha correspondence, and a separately loaded recorded kernel conversion. Six body-type pairs unavailable under the first rule pass fresh kernel conversion and typed-term checks; their exact contexts, endpoint graphs and native evidence owners remain inspectable. The conversion link opens both derived endpoints and creates no original source occurrence. Unrecorded ports remain explicit. The checking binaries are cache-attributed; original environment identity and an independent dependency rebuild are not established. [Native evidence](/research/proof-atlas/method-conversion/README.md) · [Visual rule and delivery checks](/research/proof-atlas/method-conversion-view/README.md).
+
 </details>
 
 <details class="atlas-evidence-entry" data-evidence-order="9" markdown="1">
