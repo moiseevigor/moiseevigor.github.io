@@ -21,4 +21,9 @@ function pack(original,input){
  const restored=Object.fromEntries(fields.map(f=>[f,[]]));for(const [file,bytes]of files)if(file.endsWith('.page.gz'))for(const row of JSON.parse(bytes).nodes)fields.forEach((f,i)=>restored[f].push(row[i]));assert.deepEqual(restored,j.graph);assert.equal(sha(encode(restored)),tableSha256);
  return{descriptor,files,original:e};
 }
-module.exports={prepare,pack,encode,sha};
+function packWindow(original,callIndex,first=0){
+ assert(prepared.has(original));const entry=original.batch.entries.find(e=>e.id===callIndex+':0');assert(entry);const j=entry.junction;assert(Number.isInteger(first)&&first>=0&&first%4===0&&first<j.consumer.arguments);const slots=[0,...Array.from({length:Math.min(4,j.consumer.arguments-first)},(_,i)=>first+i+1)],files=new Map(),descriptors=[],entries=[];
+ for(const slot of slots){const part=pack(original,callIndex+':'+slot);descriptors.push(part.descriptor);entries.push(part.original);for(const [file,bytes]of part.files){if(files.has(file))assert.deepEqual(files.get(file),bytes);files.set(file,bytes);}}
+ return{descriptors,files,entries,call:{index:callIndex,anchor:j.consumer.anchor,arguments:j.consumer.arguments}};
+}
+module.exports={prepare,pack,packWindow,encode,sha};

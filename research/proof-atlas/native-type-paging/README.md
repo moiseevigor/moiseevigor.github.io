@@ -1,6 +1,6 @@
 # Paged native type fields: transport experiment
 
-The application readers currently load up to five complete native type graphs before exposing their small field cuts. This experiment separates the existing port metadata from its type graph and reproduces the same cuts through bounded pages. It is a transport component, not yet a replacement for the complete-graph application-window loader.
+The default application readers load up to five complete native type graphs before exposing small field cuts. The experimental provider now assembles the same application windows through bounded type pages and supports asynchronous field selection in the existing renderer. It is tested with compiled data fixtures; there is no installed packed corpus or default-reader switch.
 
 ## Identity and validation
 
@@ -29,21 +29,23 @@ node research/proof-atlas/native-type-paging/check-model.cjs /tmp/native-type-pa
 node research/proof-atlas/native-type-paging/check-controls.cjs /tmp/native-type-paging-controls.json
 node research/proof-atlas/native-type-paging/check-source.cjs /tmp/native-type-source-controls.json
 node research/proof-atlas/native-type-paging/check-operations.cjs /tmp/native-type-operation-controls.json
+node research/proof-atlas/native-type-paging/check-windows.cjs /tmp/native-type-windows.json
 node scripts/test-proof-atlas-type-pages.cjs
 node research/proof-atlas/type-field-navigation/check-model.cjs /tmp/complete-field-regression.json
 # With a production build served locally; Playwright and an installed Chromium:
 ATLAS_ORIGIN=http://127.0.0.1:8866 node research/proof-atlas/native-type-paging/check-browser.cjs /tmp/native-type-paging-browser
+ATLAS_ORIGIN=http://127.0.0.1:8866 node research/proof-atlas/native-type-paging/check-window-browser.cjs /tmp/native-type-window-browser
 ```
 
 The browser check executes the served runtime in Chromium with compiled data fixtures supplied by the test harness. It does not mount a new proof reader or establish an application memory improvement. No permanent packed corpus is added before integration. The blog is unchanged. The general geometric-language goal remains active.
 
-The [evidence manifest](evidence.json) pins the producer, runtime, inventory and report hashes. Recorded checks: [native model](model-check.json), [structural controls](controls-check.json), [Chromium transport](browser-check.json), [source-witness refusals](source-witness-controls.json), [operation controls](operation-controls.json), [application-model regression](compatibility/application-model.json.gz), [field-model regression](compatibility/field-model.json.gz), [reader/browser regression](compatibility/field-browser.json.gz), and [existing type-page model](compatibility/type-pages-model.json). The reader regression includes 24 field selections, five binder selections and eight accessibility audits. The production build and served runtime bytes match the pinned source; compiled data fixtures are used only for the experimental transport check. No merge or deployment is recorded here.
+The [evidence manifest](evidence.json) pins the producer, runtime, inventory and report hashes. Recorded checks: [native model](model-check.json), [structural controls](controls-check.json), [historical primitive transport](browser-check.json), [source-witness refusals](source-witness-controls.json), [operation controls](operation-controls.json), [application-model regression](compatibility/application-model.json.gz), [field-model regression](compatibility/field-model.json.gz), [reader/browser regression](compatibility/field-browser.json.gz), and [existing type-page model](compatibility/type-pages-model.json). The reader regression includes 24 field selections, five binder selections and eight accessibility audits. The production build and served runtime bytes match the pinned source; compiled data fixtures are used only for the experimental transport check. No merge or deployment is recorded here.
 
 ## Source-witness boundary
 
 Re-hashed metadata controls preserve valid transport hashes while altering source contexts, producer shape, argument occurrence and definition hops. The runtime must reject these by recomputing the source witness. A separate control supplies a different occurrence of the same stored input node. All 32 source/metadata and reader-ownership refusal controls pass. The model inspects 1,238 original binder portals in root-cut appearances, and Chromium checks 18 original binder portals in its selected four-port fixture. Bounds, corrupt source pages, cancellation and cursor release are tested separately. These checks establish source-path consistency against the pinned source-page protocol. They do not independently prove original native-archive membership or replay native typing.
 
-The production application window still assembles its scene synchronously from complete graphs. Paged comparison, weakening and formal dependencies are now available in the experimental service; connecting them to that scene assembly and its selection lifecycle remains unimplemented. No application memory improvement is claimed.
+The default application window still uses complete graphs. The experimental `openWindow` provider now assembles the same scene through paged comparison, weakening and formal dependencies, and the existing renderer accepts that provider through `openApplication`. A public packed-data index and default-loader integration remain open. No total-heap measurement or default-application memory improvement is claimed.
 
 ## Literal type operations
 
@@ -58,3 +60,17 @@ All 877 native input comparisons match the complete-data model, and all 877 lite
 An authored 33,810-node control uses 529 type pages. It tests a 600-field difference, free-variable lifting, the same node pair at distinct binder depths, formal-reference budgets, alias boundaries, cancellation and a missing row. Its paged operations keep 64 cached rows through 8,577 evictions. It is a structural expression control, not a kernel-checked proof or an AI benchmark. [Operation controls](operation-controls.json).
 
 Complete table validation remains producer-owned. The runtime checks page hashes/local shapes, root scopes, original source witnesses, literal weakening and selected recurrences. It does not independently validate original-archive membership or replay the native typing judgments.
+
+## Application windows in the existing renderer
+
+`openWindow` takes one function and at most four ordered argument descriptors. It checks the original native owner, source identity, call route, slot identity, literal source witnesses and type operations before assembling the scene. Complete-data and paged producers share a presentation rule; presentation assembly itself is not a validator. The paged provider resolves every scene address from recorded roots, located comparison endpoints or checked formal-domain routes.
+
+The [window model](window-model.json.gz) uses the complete-data implementation at commit `fe6057ade17bf6040d5975dd4f2e46920bf44be2`, before that presentation refactor. Reproduction requires this Git object in the checkout. All 246 windows at 201 inventoried calls across 42 profiles match that independent baseline. The model checks 3,173 computed selections/field cuts and 2,981 source selections, including binding-hop portals. This inventory is finite; it is not all applications in every source proof.
+
+The window keeps at most five port readers. Each has its earlier 64-row type cache, 256-row source cache, 4,096-row / 4 MiB retained source-path bound, two source and two type index records, and 2 MiB metadata bound. Aggregate window limits are 320 cached type rows, 1,280 cached source rows, 20,480 retained source rows / 20 MiB of encoded tuples, and 10 MiB metadata. Observed peaks are 320 type rows, 1,280 source-cache rows, 367 retained source rows and 458,732 metadata bytes. These are component bounds, not browser-heap measurements. Small tables can fit in a single page. There are no complete native type-array allocations in the paged provider; producers and baseline checks retain complete data separately.
+
+The [window browser check](window-browser.json) mounts this provider in the existing application renderer, using served production JavaScript and compiled data fixtures. It checks ten field selections, local and original-source binder portals, a binding-use portal, three argument-page transitions, stale controls and release during an observed in-flight fetch. Four accessibility audits cover both themes and desktop/mobile widths. The default-reader regression retains its eight separate audits. Type/source requests use pages; the fixture-mounted window makes no legacy native-port or whole-source archive requests.
+
+The renderer snapshots selections and checks their window/selection generations after asynchronous reads. Retired type-field controls and controls from replaced windows cannot install late type fields or source highlights. A pending load can be released without restoring its scene. The blog and public default loader are unchanged.
+
+The [aggregate application gate](aggregate-check.json) also passes: its current unit audit, fifteen fingerprint-checked browser records and thirteen immutable checkpoints remain consistent. Reproduce with `ATLAS_APPLICATION_PORT_CHECK=1 node scripts/test-proof-atlas-application-ports.cjs` and `node scripts/build-proof-atlas-application-ports-evidence.cjs --check`. The window browser report above is the current combined renderer check; the earlier primitive-only browser report remains pinned to its historical commit in the evidence manifest.

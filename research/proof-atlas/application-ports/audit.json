@@ -7299,15 +7299,15 @@
   "files": [
     {
       "file": "public/js/proof-atlas-application-ports.js",
-      "sha256": "ba70cc8c65d05248bfe65629c30e3a9da928e4737ec2f140fb17004ff88a49d8"
+      "sha256": "c3a6a73c27a9fe8e5fc2f06a8a57405d4163edda9b8cf5bac3714ab9a6d7cec7"
     },
     {
       "file": "public/js/proof-atlas-application-port-pages.js",
-      "sha256": "5b42a12fee059d9e6f24e957eb199609700aaf351ec94651e26c8e64fe0f37df"
+      "sha256": "bb378379d390a069ccecb55a1c5cd94dfd6c13eaf0643739f03cf7c898c86cee"
     },
     {
       "file": "public/js/proof-atlas-application-port-view.js",
-      "sha256": "9ac2d006a26c40891056df3f92525e2e71b29865156f209f483152f9c2b9060d"
+      "sha256": "b33b4741661f5ab89a1e6f65d4dcdd462782bdb44ad0f91dec86b33f1d38c1eb"
     },
     {
       "file": "public/js/proof-atlas-application-port-manual.js",

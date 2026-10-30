@@ -27,12 +27,12 @@
       "servedSha256": "4a2c842a5245827c4ab4d1d2028c6119d5735cda588009454c3a25db5beccd22"
     },
     "public/js/proof-atlas-sync.js": {
-      "sourceSha256": "0b746f649c0b8b76b683300b045f1efcec0897c1d3bc2a802fe4b5296fbf5303",
-      "servedSha256": "0b746f649c0b8b76b683300b045f1efcec0897c1d3bc2a802fe4b5296fbf5303"
+      "sourceSha256": "d775ea71b1981568de16e34205cc42ff1c6de6593e50c818c3771298f96f04af",
+      "servedSha256": "d775ea71b1981568de16e34205cc42ff1c6de6593e50c818c3771298f96f04af"
     },
     "public/js/proof-atlas-library.js": {
-      "sourceSha256": "c434630b62a74adffacbc77ecaa51fa516a1384ce0eae0556a2e79e859a2116c",
-      "servedSha256": "c434630b62a74adffacbc77ecaa51fa516a1384ce0eae0556a2e79e859a2116c"
+      "sourceSha256": "650596c4334a37945746f67559cf4d13c2e5891319824f47e1ad226fb68ec55c",
+      "servedSha256": "650596c4334a37945746f67559cf4d13c2e5891319824f47e1ad226fb68ec55c"
     },
     "public/js/proof-atlas-library-data.js": {
       "sourceSha256": "a4a01e2e93d015397eb6a8d6fd677e6b788e079440c3e206c43b8c56e06161e9",
@@ -55,8 +55,8 @@
       "servedSha256": "e53ce10c4751c239432372b32fc2e8b90d11a85a5d66e5e08646f03dd0f67285"
     },
     "projects/proof-atlas/manual/index.html": {
-      "sourceSha256": "af83025d982f149b401901cb90e03d31e811b07bfc7f69cc4d71d415fbca47da",
-      "servedSha256": "e0daf02576e72c6de8e6ce35b5bcde894478405537eae08bdcde0397528594e9",
+      "sourceSha256": "2b00adda0aacdc791c43e45b71365db6b88f11bfb1fd01d801ae385137b83877",
+      "servedSha256": "beb5454474950df19d6963e91f760ecfa5766b8870167f131cbe1dcbed885a6b",
       "htmlComparison": {
         "normalization": "Only four shared CSS build-time query versions",
         "styles": [
@@ -65,12 +65,12 @@
           "syntax",
           "theme"
         ],
-        "normalizedSha256": "2d1fb1865f69ac608728135b0491adab7ac752e9534cc93fed59ebe110a743e8"
+        "normalizedSha256": "c2acd4dd404aca00f116c00b6b9c994e7ce5ff733cd226a4b1cd086ccdb5cde8"
       }
     },
     "projects/proof-atlas/library/index.html": {
-      "sourceSha256": "004ff5d013def988d709fdf6b35ef6c6b8a6153a7ee8a868f1e45380346cbbc7",
-      "servedSha256": "fa6886fa95849add637035ccfa9acd9d4e9cde94365e48723c864a6240eec16a",
+      "sourceSha256": "733aa2b3a85de9b98a985a246a837c330413154b76475d0b5cb9537be312c891",
+      "servedSha256": "437c8c802790bcc7dd058bcf11694196af78097ef08f6d748f1faf91a275f888",
       "htmlComparison": {
         "normalization": "Only four shared CSS build-time query versions",
         "styles": [
@@ -79,7 +79,7 @@
           "syntax",
           "theme"
         ],
-        "normalizedSha256": "b6583fa84d0e50a6827df5cf530b8fa183f2a9f8dd9b87210d8090f1046c3841"
+        "normalizedSha256": "ee3f760ecdb27a332f7e221ef0dd285db87c660d4cba56fb11de39f1bca3fc99"
       }
     }
   },
