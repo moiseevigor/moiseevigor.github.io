@@ -45,8 +45,10 @@ sum of those shifted frontier vectors and the free bound-variable occurrences
 retained in the cut equals the root vector. This is the proposed multiplicity
 annotation under refinement. It adds no source occurrences and does not replace
 the cut's existing retained/hidden expression accounting. The finite checker
-here exercises coefficient zero at selected original binder bodies. A general
-Lean proof of this identity is not supplied.
+here exercises coefficient zero at selected original binder bodies. This
+checkpoint supplies no general proof. The later [source-reference laws](../source-reference-laws/README.md)
+prove the coefficient identity and its exact transfer under refinement in core
+Lean, with a separate finite comparison against this unchanged evaluator.
 
 ## Evaluation and resource contract
 
