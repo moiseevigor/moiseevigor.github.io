@@ -5,7 +5,7 @@
  const copy=x=>JSON.parse(JSON.stringify(x)),demand=(ok,m)=>{if(!ok)throw Error('Computed type neighborhood: '+m);},binds=(kind,slot)=>(kind===6||kind===7)&&slot===1||kind===8&&slot===2;
  const clipped=text=>({text:text.slice(0,1024),truncated:text.length>1024});
  function create(g,roots,address,ambient,contextSource){
-  demand(address?.namespace==='application-ports'&&Object.hasOwn(roots,address.component)&&address.route?.root===address.component&&Array.isArray(address.route.slots)&&address.route.slots.length<=512,'component address');
+  demand(['application-ports','common-prefix-output-types'].includes(address?.namespace)&&Object.hasOwn(roots,address.component)&&address.route?.root===address.component&&Array.isArray(address.route.slots)&&address.route.slots.length<=512,'component address');
   demand(Array.isArray(ambient)&&ambient.length<=512&&contextSource?.namespace==='source-expression'&&contextSource.indexSha256===address.sourceIndexSha256,'original context');
   const local=[];let id=roots[address.component],parentNode=null;
   for(const [depth,slot]of address.route.slots.entries()){
@@ -37,7 +37,7 @@
  }
 
  async function createPaged(read,roots,address,ambient,contextSource,options={}){
-  demand(typeof read==='function'&&address?.namespace==='application-ports'&&Object.hasOwn(roots,address.component)&&address.route?.root===address.component&&Array.isArray(address.route.slots)&&address.route.slots.length<=512,'paged component address');
+  demand(typeof read==='function'&&['application-ports','common-prefix-output-types'].includes(address?.namespace)&&Object.hasOwn(roots,address.component)&&address.route?.root===address.component&&Array.isArray(address.route.slots)&&address.route.slots.length<=512,'paged component address');
   demand(Array.isArray(ambient)&&ambient.length<=512&&contextSource?.namespace==='source-expression'&&contextSource.indexSha256===address.sourceIndexSha256,'paged original context');
   const check=()=>{if(options.signal?.aborted)throw options.signal.reason||Error('Type navigation cancelled');};
   let id=roots[address.component],parentNode=null;const local=[];

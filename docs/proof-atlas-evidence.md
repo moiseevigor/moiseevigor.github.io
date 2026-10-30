@@ -534,6 +534,15 @@ The selected collar loads one pair of native observations through authenticated 
 
 ## 3. Typed constructions
 
+<details class="atlas-evidence-entry" data-evidence-order="100" markdown="1">
+<summary>Recorded output tuples at exact common source prefixes</summary>
+
+<span id="common-prefix-outputs"></span>
+The paged reader exposes two result-type contexts and exact closure headers for three recorded collections: 18 output positions in Riccati and one AI-source proof. Only the selected output's two bounded type graphs load. The source-use graph retains disconnected components. Kernel typing and projection/instantiation recovery belong to the pinned native closure experiment; the browser separately checks source paths, header syntax and the residual type. This does not make original boundary inputs independent and does not measure proof comprehension. [Rule, qualified native provenance and checks](/research/proof-atlas/region-output-view/README.md).
+
+</details>
+
+
 <details class="atlas-evidence-entry" data-evidence-order="3" markdown="1">
 <summary>Checked occurrence types</summary>
 

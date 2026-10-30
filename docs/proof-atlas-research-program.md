@@ -68,6 +68,8 @@ A proof-input projection now separates recorded proof-valued arguments from func
 
 The boundary rule now also includes callable proof heads. Its source pool can relate a proof used both as a function head and as an argument while retaining both original type queries. Original producer types, literal input types and recorded weak-head-normalized callable types keep separate contexts and addresses. Fresh alias controls distinguish proof and value functions with the same surface type spelling, without inventing missing literal formal-domain links. [Rule and finite checks](/research/proof-atlas/rule-support/README.md). A [Lean-checked reference model](/research/proof-atlas/boundary-kernel/README.md) proves general position conservation, source membership and ordered metadata recovery for supplied roles and source keys; a finite encoded bridge checks the current runtime outputs separately.
 
+The optional [shared-prefix output reader](/projects/proof-atlas/manual/paged-network/#ns-lab) exposes original and closed result types for three recorded collections (18 positions). Exact source binder prefixes, retained let definitions and projection/recovery records remain distinct from structural region folding. Disconnected result selections keep their original graph components. [Rule, bounds and checks](/research/proof-atlas/region-output-view/README.md).
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?

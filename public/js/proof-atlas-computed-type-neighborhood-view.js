@@ -6,7 +6,7 @@
   const same=host.ProofAtlasApplicationPorts.same,A=host.ProofAtlasLibraryData,G=host.ProofAtlasGeometry,fail=()=>{throw Error('Invalid computed type neighborhood');};
   if(scene?.format!=='ProofAtlasComputedTypeNeighborhood/1'||!Array.isArray(scene.children)||scene.children.length>3||scene.stats.vertexLimit!==4||scene.stats.pathLimit!==512||scene.stats.retained!==scene.children.length+1||scene.root.expanded!==scene.stats.represented||BigInt(scene.stats.retained)+BigInt(scene.stats.hidden)!==BigInt(scene.stats.represented))fail();
   const rootAddress=scene.root.address;
-  if(rootAddress.namespace!=='application-ports'||rootAddress.route.root!==rootAddress.component||!Array.isArray(rootAddress.route.slots)||rootAddress.route.slots.length>512||scene.context.source.namespace!=='source-expression'||scene.context.source.indexSha256!==rootAddress.sourceIndexSha256)fail();
+  if(!['application-ports','common-prefix-output-types'].includes(rootAddress.namespace)||rootAddress.route.root!==rootAddress.component||!Array.isArray(rootAddress.route.slots)||rootAddress.route.slots.length>512||scene.context.source.namespace!=='source-expression'||scene.context.source.indexSha256!==rootAddress.sourceIndexSha256)fail();
   const equivalent=(address,slots)=>address&&same(address,{...rootAddress,node:address.node,route:{root:rootAddress.component,slots}});
   if(!equivalent(scene.componentRoot,[])||!same(scene.parent,rootAddress.route.slots.length?{...rootAddress,node:scene.parent?.node,route:{root:rootAddress.component,slots:rootAddress.route.slots.slice(0,-1)}}:null))fail();
   for(const record of [scene.root,...scene.children]){
