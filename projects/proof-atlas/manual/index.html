@@ -104,6 +104,7 @@ computed identity = evidence/derivation hash + namespace + computed route</code>
       <p>Choose “Show method dependency wires” inside a loaded interface. Solid wires retain the function and ordered inputs of the computed η application; a short dotted wire connects it to its recorded result type. Dashed arrows point from an input domain or result type to its referenced binder. Original Γ binders open their exact source occurrences; computed inputs stay in their native-record namespace. The view distinguishes constructor fields, recursive premises and unclassified rule inputs.</p>
       <p>In the dependent-recursion control, the step has inputs \(n:\mathbb{N}\) and \(a:P(n)\), and result type \(P(n+1)\). The first input is a constructor field; the second is a recursive premise for that field. The second domain refers to \(P\) and the earlier input \(n\); the result type refers to \(P\) and \(n\). Its lack of a reference to \(a\) does not show that the proof can omit that premise. These are syntactic type dependencies, not necessity judgments.</p>
       <p>The diagram displays at most four computed input ports and eight distinct type-reference targets at once, with exact visible/hidden interface counts. These counts are separate from source-expression occurrence counts. <a href="/research/proof-atlas/method-flow/README.md">Rule, checks and limits</a>.</p>
+      <p>Choose “Inspect branch conclusion” to see the generic signature's result motive, constructor instance and ordered result indices beside the separately recorded computed body type. In natural-number recursion, \(n\) is a major argument, while indexed families have additional index ports. Signature binders use their own \(\kappa\) context; a position bridge to a computed input does not identify the two expressions. <a href="/research/proof-atlas/branch-conclusion/README.md">Rule, scope and checks</a>.</p>
       <h4 id="kernel-input-origins">Kernel origins are additional information</h4>
       <p>The new natural-recursion and product-elimination controls use the same \(\mathbb{N}\to\mathbb{N}\to\mathbb{N}\) method under the same context. Their method expressions, types and computed η graphs are identical. The second input is a recursive premise for <code>Nat.rec</code>, but a second constructor field for <code>Prod.rec</code>. This role cannot be recovered from the method interface alone.</p>
       <p>Choose “Inspect kernel input origin”. Double-border nodes belong to the recorded kernel reduction schema. Dash-dot bridges identify input positions; they do not assert expression equality. Selecting a schema node opens its bounded Expr view with exact metadata routes. Those rule binders and recursive calls are not additional occurrences in the source proof.</p>
@@ -187,15 +188,15 @@ Level.mvar id       unresolved universe metavariable</code></pre>
 <script src="/public/js/proof-atlas-occurrence-types.js?v=13" defer></script>
 <script src="/public/js/proof-atlas-mutual-recursors.js?v=1" defer></script>
 <script src="/public/js/proof-atlas-recursive-inputs.js?v=5" defer></script>
-<script src="/public/js/proof-atlas-elimination.js?v=12" defer></script>
+<script src="/public/js/proof-atlas-elimination.js?v=13" defer></script>
 <script src="/public/data/proof-atlas/method-interfaces-manifest.js?v=1" defer></script>
 <script src="/public/data/proof-atlas/method-interfaces-ai-manifest.js?v=1" defer></script>
-<script src="/public/js/proof-atlas-method-interfaces.js?v=9" defer></script>
-<script src="/public/js/proof-atlas-method-flow.js?v=5" defer></script>
+<script src="/public/js/proof-atlas-method-interfaces.js?v=10" defer></script>
+<script src="/public/js/proof-atlas-method-flow.js?v=6" defer></script>
 <script src="/public/data/proof-atlas/method-origins-manifest.js?v=1" defer></script>
 <script src="/public/data/proof-atlas/method-indices-manifest.js?v=1" defer></script>
 <script src="/public/data/proof-atlas/method-parameters-manifest.js?v=1" defer></script>
 <script src="/public/data/proof-atlas/method-mutual-manifest.js?v=1" defer></script>
 <script src="/public/js/proof-atlas-method-examples.js?v=7" defer></script>
 
-<script src="/public/js/proof-atlas-stream-example.js?v=7" defer></script>
+<script src="/public/js/proof-atlas-stream-example.js?v=8" defer></script>
