@@ -1,0 +1,12 @@
+.atlas-region-contexts{margin:1.5rem 0;padding-block:1rem;border-block:1px solid var(--border);color:var(--text);font:.9rem/1.5 var(--sans,system-ui)}
+:root .atlas-region-contexts h3{font:600 1.1rem/1.5 var(--sans,system-ui)}
+:root .atlas-region-contexts :is(p,li,button){font:.85rem/1.5 var(--sans,system-ui)}
+.atlas-region-contexts a{display:inline-block;min-height:44px;padding-block:.6rem;overflow-wrap:anywhere}
+.atlas-region-contexts button{min-height:44px;max-width:100%;overflow-wrap:anywhere}
+.atlas-region-contexts [data-context-call][aria-pressed=true]{outline:2px solid var(--accent);outline-offset:2px}
+.rc-tree,.rc-tree ol{list-style:none;padding-inline-start:.8rem;margin:.75rem 0;border-inline-start:1px solid var(--text-muted)}
+.rc-tree>li{margin:0}.rc-tree li{min-width:0}
+.rc-context{display:flex;align-items:center;flex-wrap:wrap;gap:.6rem;margin:.65rem 0;padding:.65rem;border:1px solid var(--border);background:var(--fig-bg);overflow-wrap:anywhere}
+.rc-context.rc-selected{border-color:var(--accent)}.rc-context>strong{min-width:6rem}.rc-calls{display:flex;flex-wrap:wrap;gap:.5rem}
+.atlas-region-contexts ol:not(.rc-tree):not(.rc-tree ol){padding-inline-start:1.5rem}
+@media(max-width:600px){.rc-tree,.rc-tree ol{padding-inline-start:.35rem}.rc-context{gap:.4rem;padding:.5rem}.rc-calls{width:100%}}
