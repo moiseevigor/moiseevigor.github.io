@@ -1,0 +1,7 @@
+.atlas-type-support{font:.9rem/1.5 var(--sans,system-ui);color:var(--text);overflow-wrap:anywhere}
+:root .atlas-type-support h5{font:600 1rem/1.5 var(--sans,system-ui)}
+.atlas-type-support select{min-height:44px;max-width:100%;font:inherit}
+.ts-link{display:flex;flex-wrap:wrap;align-items:center;gap:.65rem;padding:.75rem;margin-block:.5rem;background:var(--fig-bg);border:1px solid var(--border)}
+.ts-link>strong{flex:1 1 100%}.ts-link button{min-height:44px;max-width:100%}
+.ts-relation{font-size:.8rem;color:var(--text-muted)}
+@media(max-width:600px){.ts-link{align-items:stretch;flex-direction:column}.ts-link>strong{flex-basis:auto}.ts-link button{text-align:left}}
