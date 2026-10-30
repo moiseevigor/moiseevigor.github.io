@@ -24,6 +24,7 @@
 .pow-sizing{position:relative;min-width:100%;min-height:100%}.pow-stage{position:absolute;left:0;top:0;transform-origin:0 0}
 .pow-edges{position:absolute;inset:0;pointer-events:none;overflow:visible}.pow-edges path{stroke:#6b8b94;stroke-width:1.7;fill:none}
 .pow-card{position:absolute;box-sizing:border-box;width:245px;min-height:205px;max-height:245px;overflow:auto;background:var(--bg,#fff);border:1px solid var(--border,#a4b4b8);border-top:3px solid #427b8a;border-radius:5px;padding:.6rem;box-shadow:none}
+.pow-card[data-syntax-counts-active="true"]{max-height:340px}
 .pow-card[data-constructor="bvar"]{border-top-color:#9b79c4}.pow-card[data-constructor="lam"],.pow-card[data-constructor="forallE"],.pow-card[data-constructor="letE"]{border-top-color:#b68b42}
 .pow-card>[data-occurrence-node]{width:100%;text-align:left;font-size:1rem;background:transparent;border:0;padding:0;min-height:36px}.pow-card>[aria-pressed="true"]{outline:2px solid #348a85;outline-offset:3px}
 .pow-card small{display:block;font-weight:400;font-size:.75rem;padding-top:.2rem;color:var(--text-light,#566e78)}
@@ -69,4 +70,4 @@
 
 .pow-stage button[data-use-highlight]{outline:2px dashed var(--accent,#327879);outline-offset:2px}.pow-edges path[data-use-highlight]{stroke:var(--accent,#327879);stroke-width:3}.pvu-panel button[aria-pressed="true"]{outline:2px solid var(--accent,#327879);outline-offset:2px}
 
-.pow-syntax-count{font:.8rem/1.5 system-ui;padding:8px 0;margin:8px 0 0;border-top:1px solid var(--border,#a4b4b8);overflow-wrap:anywhere}.pow-card [data-syntax-count-note],.pdu-binding [data-syntax-count-note]{font:.75rem/1.5 system-ui}.pow-card [data-syntax-count-note] pre,.pdu-binding [data-syntax-count-note] pre{font:.7rem/1.5 ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere;max-height:200px;overflow:auto}
+.pow-syntax-count{font:.8rem/1.5 system-ui;padding:8px 0;margin:8px 0 0;border-top:1px solid var(--border,#a4b4b8);overflow-wrap:anywhere}.pow-card [data-syntax-count-note],.pdu-binding [data-syntax-count-note]{font:.75rem/1.5 system-ui}.pow-card [data-syntax-count-note] pre,.pdu-binding [data-syntax-count-note] pre{font:.7rem/1.5 ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere;max-height:200px;overflow:auto}.pow-reference-partition{display:block;margin-top:3px;overflow-wrap:anywhere}

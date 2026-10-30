@@ -14,6 +14,13 @@ provenance** exposes those fields. The graph scene, source partition, binding
 links and recorded native judgments remain unchanged. The annotation contributes
 zero source occurrences.
 
+The current layer also shows an [exposed/folded split](../reference-partition/README.md)
+for each retained binder. Exposed means retained source-variable constructors;
+formula previews and computed types are separate. The current exact cut and
+authenticated body total determine the remainder, without another source scan.
+An unavailable projection preserves the total; an unavailable total yields no
+split. The linked record gives its separate finite checks and trust boundary.
+
 Recorded typed-use counts stay separate. While the new layer is enabled, the
 existing variable-use panel shows its recorded count beside the new syntax
 annotation. Turning the layer off restores its previous scalar count display,

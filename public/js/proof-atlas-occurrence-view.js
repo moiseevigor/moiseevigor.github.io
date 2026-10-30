@@ -29,7 +29,7 @@
   let constructionInterfaces=initial.searchParams.get('group')==='interfaces',interfaceRules=null,interfaceRulesLabel=null;
   let sourceUseView=null,sourceUseButton=null,sourceUseController=null,sourceUseEpoch=0,sourceUseAction=0,sourceUseLoading=false,sourceUseError=null,sourceUseLayout=null;
   let syntaxEnabled=initial.searchParams.get('counts')==='syntax',syntaxToggle=null,syntaxLabel=null,syntaxRetry=null,syntaxProvider=null,syntaxLoad=null,syntaxController=null,syntaxEpoch=0,sourceCountTargets=null,constructionCountTargets=null;
-  let syntaxState={loading:false,error:null,annotations:[]};
+  let syntaxState={loading:false,error:null,annotations:[],partitions:[],partitionError:null};
   let constructionDefinitions=initial.searchParams.get('group')==='definitions',definitionControl=null,definitionLabel=null,definitionModel=null;
   const frameBudget=el('select');frameBudget.setAttribute('aria-label','Context frame members');for(const n of [1,4,8,13,32,64]){const o=el('option',String(n));o.value=n;frameBudget.append(o);}frameBudget.value=['1','4','8','13','32','64'].includes(initial.searchParams.get('members'))?initial.searchParams.get('members'):'32';
   const frameBudgetLabel=el('label','Frame members ');frameBudgetLabel.append(frameBudget);
@@ -194,9 +194,10 @@
   function rememberType(entry){const key=W.id(entry.route);observedTypes.delete(key);observedTypes.set(key,entry);while(observedTypes.size>4)observedTypes.delete(observedTypes.keys().next().value);}
   function sourcePoint(route){return W.create(data,record,route,{maxNodes:1,maxDepth:0}).nodes[0];}
   function retireSyntaxAnnotations(){
-   syntaxEpoch++;syntaxController?.abort();syntaxController=null;syntaxState={loading:false,error:null,annotations:[]};
+   syntaxEpoch++;syntaxController?.abort();syntaxController=null;syntaxState={loading:false,error:null,annotations:[],partitions:[],partitionError:null};
    root.querySelectorAll('[data-syntax-count-note]').forEach(n=>n.remove());root.querySelectorAll('[data-syntax-counts-active]').forEach(n=>delete n.dataset.syntaxCountsActive);
    root.querySelectorAll('[data-scalar-count-text]').forEach(n=>n.textContent=n.dataset.scalarCountText);
+   redrawSourcePaths?.();
   }
   async function syntaxCursor(){
    if(syntaxProvider)return syntaxProvider;
@@ -211,20 +212,25 @@
   async function refreshSyntaxCounts(){
    retireSyntaxAnnotations();modeControls();const targets=syntaxTargets();if(!syntaxEnabled||!targets||!targets.items.length||disposed)return;
    const epoch=syntaxEpoch,originalScene=scene;syntaxController=new AbortController();const signal=syntaxController.signal,live=()=>!disposed&&!signal.aborted&&epoch===syntaxEpoch&&syntaxEnabled&&scene===originalScene&&syntaxTargets()===targets;
-   syntaxState={loading:true,error:null,annotations:[]};const notes=targets.items.map(item=>{const note=el('p','Loading syntax count…','pow-syntax-count');note.dataset.syntaxCountNote='';item.holder.dataset.syntaxCountsActive='true';item.holder.querySelectorAll('[data-recorded-use-label]').forEach(n=>n.textContent=n.dataset.recordedUseLabel);item.holder.append(note);return note;});
+   syntaxState={loading:true,error:null,annotations:[],partitions:[],partitionError:null};const notes=targets.items.map(item=>{const note=el('p','Loading syntax count…','pow-syntax-count');note.dataset.syntaxCountNote='';item.holder.dataset.syntaxCountsActive='true';item.holder.querySelectorAll('[data-recorded-use-label]').forEach(n=>n.textContent=n.dataset.recordedUseLabel);item.holder.append(note);return note;});let referenceModel=null;
    try{const cursor=await syntaxCursor();if(!live())return;
+    try{await component('ProofAtlasReferencePartition','/public/js/proof-atlas-reference-partition.js?v=1');if(!live())return;referenceModel=await host.ProofAtlasReferencePartition.open(targets.cut,{signal});if(!live())return;}catch(error){if(live())syntaxState.partitionError=error.message;}
     for(const [i,item]of targets.items.entries()){
      const snapshot=item.point?{point:item.point}:await targets.pointFor(item.route,signal);if(!live())return;
      const annotation=await cursor.forPoint(snapshot.point,targets.source,{signal});if(!live())return;
      const note=notes[i];note.dataset.countStatus=annotation?.status||'unavailable';note.dataset.countMethod=host.ProofAtlasSyntaxCounts.algorithm;
      note.textContent=annotation?.status==='complete'?'Syntax uses in body: '+shortCount(annotation.count):'Syntax count unavailable';note.title='Expanded source-syntax multiplicity. This does not count recorded type judgments or necessary assumptions.';
-     if(annotation){syntaxState.annotations.push(annotation);const details=el('details');details.dataset.syntaxCountNote='';details.append(el('summary','Count provenance'),el('pre',JSON.stringify(annotation,null,2)));item.holder.append(details);}
+     let partition=null;if(annotation?.status==='complete'){
+      try{if(referenceModel)partition=referenceModel.forAnnotation(annotation);}catch(error){syntaxState.partitionError=error.message;}
+      const split=el('span',partition?shortCount(partition.exposed)+' exposed + '+shortCount(partition.folded)+' folded':'Cut reference split unavailable','pow-reference-partition');split.dataset.syntaxCountNote='';split.dataset.referencePartition=partition?'complete':'unavailable';split.title='Exposed counts retained source-variable constructors. Formula previews and computed types are separate.';note.append(split);if(partition)syntaxState.partitions.push(partition);
+     }
+     if(annotation){syntaxState.annotations.push(annotation);const details=el('details');details.dataset.syntaxCountNote='';details.append(el('summary','Count provenance'),el('pre',JSON.stringify({...annotation,referencePartition:partition||{status:'unavailable',reason:syntaxState.partitionError}},null,2)));item.holder.append(details);}
     }
    }catch(error){if(live()){syntaxState.error=error.message;notes.forEach(n=>{n.dataset.countStatus='unavailable';n.textContent='Syntax count unavailable';n.title=error.message;});}}
-   finally{if(live()){syntaxState.loading=false;modeControls();redrawSourcePaths?.();}}
+   finally{referenceModel?.dispose();if(live()){syntaxState.loading=false;modeControls();redrawSourcePaths?.();}}
   }
   function modeControls(){
-   if(syntaxLabel)syntaxLabel.hidden=constructionMode&&!constructionDefinitions&&!constructionInterfaces;if(syntaxToggle)syntaxToggle.checked=syntaxEnabled;if(syntaxRetry)syntaxRetry.hidden=!syntaxEnabled||!syntaxState.error||syntaxLabel.hidden;
+   if(syntaxLabel)syntaxLabel.hidden=constructionMode&&!constructionDefinitions&&!constructionInterfaces;if(syntaxToggle)syntaxToggle.checked=syntaxEnabled;if(syntaxRetry)syntaxRetry.hidden=!syntaxEnabled||!(syntaxState.error||syntaxState.partitionError)||syntaxLabel.hidden;
    if(sourceUseButton){sourceUseButton.hidden=constructionMode;sourceUseButton.disabled=sourceUseLoading;sourceUseButton.setAttribute('aria-expanded',String(!!sourceUseView));sourceUseButton.textContent=sourceUseLoading?'Loading recorded uses…':sourceUseView?'Hide recorded variable uses':sourceUseError?'Retry recorded variable uses':'Recorded variable uses';}
    if(definitionLabel)definitionLabel.hidden=!constructionMode;if(definitionControl)definitionControl.checked=constructionDefinitions||constructionInterfaces;if(interfaceRulesLabel)interfaceRulesLabel.hidden=!constructionMode||(!constructionDefinitions&&!constructionInterfaces);if(interfaceRules)interfaceRules.value=constructionInterfaces?'interfaces':constructionDefinitions?'definitions':interfaceRules.value;
    for(const o of frameBudget.options)o.disabled=(constructionDefinitions||constructionInterfaces)&&Number(o.value)>8;if((constructionDefinitions||constructionInterfaces)&&Number(frameBudget.value)>8)frameBudget.value='4';frameBudgetLabel.firstChild.textContent=constructionInterfaces?'Interfaces per chunk ':constructionDefinitions?'Definitions per chunk ':'Frame members ';
@@ -311,7 +317,7 @@
      }
     }:{};
     constructionView=(mixed?host.ProofAtlasMixedInterfaceView:host.ProofAtlasLocalDefinitionView).mount(constructionHost,adapter,null,cut,{
-     ...useCallbacks,lazyTypes:paged,onSelect,onType,onSource:route=>safe(()=>navigate(route)),onRender:()=>queueMicrotask(()=>{if(live()&&constructionView?.getScene()===cut){constructionCountTargets={source:cut.source,items:cut.units.map((u,i)=>({route:u.root.route,holder:constructionHost.querySelector('[data-definition-unit="'+i+'"] .pdu-binding')})),pointFor:async(route,s)=>paged?model.sourcePoint(route,{signal:s}):{point:sourcePoint(route)}};refreshSyntaxCounts();}}),
+     ...useCallbacks,lazyTypes:paged,onSelect,onType,onSource:route=>safe(()=>navigate(route)),onRender:()=>queueMicrotask(()=>{if(live()&&constructionView?.getScene()===cut){constructionCountTargets={source:cut.source,cut,items:cut.units.map((u,i)=>({route:u.root.route,holder:constructionHost.querySelector('[data-definition-unit="'+i+'"] .pdu-binding')})),pointFor:async(route,s)=>paged?model.sourcePoint(route,{signal:s}):{point:sourcePoint(route)}};refreshSyntaxCounts();}}),
      onOriginalSource:route=>safe(async()=>{await setConstructionMode(false);await navigate(route);}),
      onTypeStart:()=>{constructionSelection++;inspection++;pagedController?.abort();pagedSession?.cursor.dispose();pagedSession=null;registry.releaseType();selectedTyping=null;pagedPending=false;typeView?.dispose();typeView=null;typeHost.hidden=true;typeHost.replaceChildren();}
     });
@@ -455,6 +461,9 @@
    external.forEach((ref,i)=>{const pos={x:20+cols*330,y:20+i*180},card=el('article',undefined,'pow-context-card'),payload=(displayData||data).payloads[ref.node],kind=W.kinds[(displayData||data).kind[ref.node]];positions.set(ref.to,pos);card.style.left=pos.x+'px';card.style.top=pos.y+'px';card.append(el('small','CONTEXT · OUTSIDE THIS CUT'));const pick=button(kind+' '+(payload.binderName||payload.declName||'_')+' · e'+ref.node,()=>safe(()=>navigate(ref.route)));pick.dataset.contextReference=ref.to;card.append(pick,el('p','Original binder at depth '+ref.route.depth+'. Not included in the subtree count.'));stage.append(card);cards.set(ref.to,{card,pick});});
    function paths(){
     if(viewport.hidden||scene!==next)return;
+    const rowStep=syntaxEnabled?360:260;
+    for(const n of next.nodes){const p=positions.get(n.id);p.y=20+n.row*rowStep;cards.get(n.id).card.style.top=p.y+'px';}
+    baseHeight=Math.max(rows*rowStep,external.length*180)+30;stageHeight=baseHeight;stage.style.height=stageHeight+'px';svg.setAttribute('height',stageHeight);viewport.style.height=Math.min(650,Math.max(310,stageHeight+20))+'px';scaled();
     svg.replaceChildren();
     function line(from,to,control,cls,slot){const a=positions.get(from),b=positions.get(to),target=cards.get(to).pick,right=b.x>=a.x,s=stage.getBoundingClientRect(),factor=s.width/stageWidth,sourceBox=cards.get(from).card.getBoundingClientRect(),targetBox=cards.get(to).card.getBoundingClientRect(),c=control.getBoundingClientRect(),t=target.getBoundingClientRect(),sx=((right?sourceBox.right:sourceBox.left)-s.left)/factor,sy=(c.top+c.height/2-s.top)/factor,tx=((right?targetBox.left:targetBox.right)-s.left)/factor,ty=(t.top+t.height/2-s.top)/factor,p=document.createElementNS(svg.namespaceURI,'path');p.setAttribute('d','M '+sx+' '+sy+' C '+(sx+(right?40:-40))+' '+sy+' '+(tx+(right?-40:40))+' '+ty+' '+tx+' '+ty);if(cls)p.classList.add(cls);p.dataset.relation=cls?'source-bound-to':'source-field';p.dataset.sourceFrom=from;p.dataset.sourceTo=to;if(slot!==undefined)p.dataset.slot=slot;svg.append(p);}
     for(const edge of scene.edges)line(edge.from,edge.to,cards.get(edge.from).ports[edge.slot],null,edge.slot);
@@ -462,7 +471,7 @@
     sourceUseView?.redraw();
    }
    for(const {card}of cards.values())card.addEventListener('scroll',paths);
-   const baseWidth=stageWidth,baseHeight=stageHeight;
+   const baseWidth=stageWidth;let baseHeight=stageHeight;
    const retainedBinders=scene.nodes.filter(n=>['lam','forallE','letE'].includes(n.kind)).map(n=>({root:{route:n.route,node:n.node},binding:{name:(displayData||data).payloads[n.node].binderName||(displayData||data).payloads[n.node].declName||'_'}}));
    const endpoint=ref=>{if(ref.sourceUseId)return cards.get(ref.sourceUseId)?.pick;for(const n of next.nodes){const port=n.ports.find(p=>W.id(p.route)===W.id(ref.region.route));if(port)return cards.get(n.id).ports[port.slot];}return null;};
    const target=ref=>cards.get(W.id(ref.use.binder.route))?.pick||null;
@@ -473,7 +482,7 @@
     reveal:(ref,mode)=>{const node=mode==='binder'?target(ref):endpoint(ref),card=node?.closest('.pow-card');if(card){const top=node.offsetTop,bottom=top+node.offsetHeight;if(top<card.scrollTop)card.scrollTop=top;if(bottom>card.scrollTop+card.clientHeight-8)card.scrollTop=Math.max(0,bottom-card.clientHeight+8);}paths();},
     dispose:()=>{if(scene===next){stageWidth=baseWidth;stageHeight=baseHeight;stage.style.width=stageWidth+'px';scaled();}}
    };
-   sourceCountTargets={source:next.source,items:next.nodes.filter(n=>['lam','forallE','letE'].includes(n.kind)).map(n=>({point:n,route:n.route,holder:cards.get(n.id).card}))};redrawSourcePaths=paths;paths();document.fonts?.ready.then(()=>{if(scene===next&&!disposed)paths();});if(!constructionMode)refreshSyntaxCounts();
+   sourceCountTargets={source:next.source,cut:next,items:next.nodes.filter(n=>['lam','forallE','letE'].includes(n.kind)).map(n=>({point:n,route:n.route,holder:cards.get(n.id).card}))};redrawSourcePaths=paths;paths();document.fonts?.ready.then(()=>{if(scene===next&&!disposed)paths();});if(!constructionMode)refreshSyntaxCounts();
    summary.textContent=scene.stats.retained+' retained + '+shortCount(scene.stats.hidden)+' hidden = '+shortCount(scene.stats.represented)+' occurrences. '+external.length+' source-context cards lie outside this count.';
    inspect(scene.nodes[0]);scaled();viewport.scrollTo(0,0);status.textContent='Original occurrence structure. '+(nativeControl?'Synthetic core control; native typing is available only at recorded positions.':control?'Serialized syntax control; original producer typing is not claimed.':'Compiled declaration; mathematical interpretation and typing queries are separate.');if(constructionMode&&constructionModel)renderConstructions();
   }
