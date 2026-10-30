@@ -15,6 +15,7 @@ permalink: /projects/proof-atlas/manual/paged-network/
 <link rel="stylesheet" href="/public/css/proof-atlas-type-support.css?v=1">
 <link rel="stylesheet" href="/public/css/proof-atlas-source-support.css?v=1">
 <link rel="stylesheet" href="/public/css/proof-atlas-region-outputs.css?v=1">
+<link rel="stylesheet" href="/public/css/proof-atlas-output-composition.css?v=1">
 <style>#ns-lab input{min-height:44px;padding:.45rem;color:var(--text);background:var(--bg);border:1px solid var(--text-muted);border-radius:3px;font:inherit}</style>
 <main class="pa-manual">
  <header><p><a href="/projects/proof-atlas/manual/">Visual notation manual</a> / <a href="/projects/proof-atlas/manual/application-network/">Application cuts</a> / Paged delivery · local experiment</p><h1>Keep the cut, page the surrounding graph</h1><p>The source-use rule is unchanged: connect an ordered input to its exact source producer, retaining local-definition paths. The viewport now loads selected call records and a page of consumer connections rather than a complete topology. Layout and colors carry no mathematical metric.</p></header>
@@ -30,6 +31,7 @@ permalink: /projects/proof-atlas/manual/paged-network/
  <section><h2>Read a construction</h2><p>Fold a region and select a call to read its recorded result statement and ordered boundary inputs. The sheet includes the function and implicit arguments; internal inputs remain source-use wires. Inspect an input to trace its original use through recorded local definitions to its producer without changing the current construction. The adjacent pane shows four definitions at a time; Show region results restores the result list. Each recorded expected type belongs to the consumer context, while original producer details retain their own context. A result used twice keeps two input positions. Source-only calls retain their source-use links with per-call types marked unobserved. <a href="/research/proof-atlas/step-reading/README.md">Result reading</a> · <a href="/research/proof-atlas/call-boundary/README.md">Boundary inputs</a> · <a href="/research/proof-atlas/input-reference-path/README.md">Reference path rule and checks</a>.</p></section>
  <section><h2>Compare input types</h2><p>The selected native input retains three type observations: its producer type in the original context, that type after context extension, and the expected domain at the consumer. The shared type bridge distinguishes literal structure from recorded kernel conversion. A literal mismatch exposes one paired field path and the exact computed endpoints. It is also available in the individual-application reader. Source-only inputs have no type bridge. <a href="/research/proof-atlas/input-type-bridge/README.md">Rule, finite observations and checks</a>.</p></section>
  <section><h2>Outputs in one source context</h2><p>The optional output reader compares each recorded result type in its original context with its closure at the exact common binder prefix. Lambda frames become inputs; local let definitions retain their original values. Eighteen output positions in three recorded collections are available: two Riccati selections and one eight-call AI-source selection. Loading a collection preserves disconnected source-use components. It does not fold them into a region. The output tuple has recorded kernel typing and recovery checks; boundary inputs remain dependent on their original contexts. <a href="/research/proof-atlas/region-output-view/README.md">Rule, checks and limits</a>.</p></section>
+ <section><h2>Regroup outputs across scopes</h2><p>After loading a recorded collection, choose <strong>Group output collection</strong>. Flat and grouped positions keep their original source addresses. Different source contexts have distinct local labels even at the same depth. The typed <code>flatten</code> and <code>gather</code> maps retain both computed term/type roots; selected fields use the kernel constructor notation and exact lexical links. Only one computed component loads at a time. The source-use graph keeps its original connections. <a href="/research/proof-atlas/region-composition-view/README.md">Delivery, finite coverage and checks</a>.</p></section>
  <section><h2>Coverage and limits</h2><p>The larger packet has 6,479 stored expression nodes. Indexing its occurrence routes separately is a deliberate scale test, not a compressed representation of all shared proof instances. Its index grows with the number of call occurrences. The source-only layer does not recover tactics, prove premise necessity or provide new typing observations.</p><p>The reader retains at most eight call records, one four-row call-page cache, one 32-row reverse-page cache and two branch records per cursor. Connection lists show eight rows. Native types retain their original evidence owners and existing separate bounds. Source-only selections use bounded original paths and explicitly refuse computed-type selection.</p><p><a href="/research/proof-atlas/network-streaming/README.md">Protocol, checks and limitations</a> · <a href="/public/data/proof-atlas/network-streaming-audit.json.gz">Model record (gzip)</a> · <a href="/projects/proof-atlas/program/">General research program</a></p></section>
 </main>
 <script src="/public/js/proof-atlas-library-data.js?v=1" defer></script>
@@ -39,8 +41,8 @@ permalink: /projects/proof-atlas/manual/paged-network/
 <script src="/public/js/proof-atlas-source-pages.js?v=3" defer></script>
 <script src="/public/js/proof-atlas-application-ports.js?v=2" defer></script>
 <script src="/public/js/proof-atlas-geometry-core.js?v=1" defer></script>
-<script src="/public/js/proof-atlas-computed-type-neighborhood.js?v=2" defer></script>
-<script src="/public/js/proof-atlas-computed-type-neighborhood-view.js?v=2" defer></script>
+<script src="/public/js/proof-atlas-computed-type-neighborhood.js?v=3" defer></script>
+<script src="/public/js/proof-atlas-computed-type-neighborhood-view.js?v=3" defer></script>
 <script src="/public/js/proof-atlas-packed-routes.js?v=1" defer></script>
 <script src="/public/js/proof-atlas-occurrence-window.js?v=1" defer></script>
 <script src="/public/js/proof-atlas-type-pages.js?v=2" defer></script>
@@ -82,6 +84,9 @@ permalink: /projects/proof-atlas/manual/paged-network/
 <script src="/public/js/proof-atlas-scoped-applications-view.js?v=2" defer></script>
 <script src="/public/js/proof-atlas-source-comparison.js?v=1" defer></script>
 <script src="/public/data/proof-atlas/region-outputs-manifest.js?v=1" defer></script>
-<script src="/public/js/proof-atlas-region-outputs.js?v=1" defer></script>
-<script src="/public/js/proof-atlas-region-output-view.js?v=1" defer></script>
-<script src="/public/js/proof-atlas-network-stream-view.js?v=16" defer></script>
+<script src="/public/js/proof-atlas-region-outputs.js?v=2" defer></script>
+<script src="/public/data/proof-atlas/output-compositions-manifest.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-output-composition.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-output-composition-view.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-region-output-view.js?v=2" defer></script>
+<script src="/public/js/proof-atlas-network-stream-view.js?v=17" defer></script>

@@ -72,6 +72,8 @@ The optional [shared-prefix output reader](/projects/proof-atlas/manual/paged-ne
 
 The [scope/product composition rule](/research/proof-atlas/region-output-composition/README.md) adds explicit typed maps between flat and grouped output tuples. Four standard dependent-function/product laws and 27 finite native cases check both adapter directions; independent reconstruction matches all 108 computed graphs. Grouping preserves exact source ports and let definitions. Seven cases reject direct reuse at the flat type. This closes an output-regrouping gap; it does not supply an independent boundary-input function.
 
+The same [output-regrouping rule is navigable in the paged reader](/research/proof-atlas/region-composition-view/README.md). Nine recorded groupings expose flat/grouped positions and typed adapter fields through one bounded computed component. Exact source contexts remain distinct, graph/source selections retain their own namespaces, and missing records remain unavailable. This is an implementation of the finite rule, not new kernel evidence or a measured comprehension result.
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?

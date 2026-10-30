@@ -9,6 +9,7 @@
  const copy=x=>JSON.parse(JSON.stringify(x)),size=x=>new TextEncoder().encode(JSON.stringify(x)).length,same=M.same;
  const limits=Object.freeze({indexBytes:262144,typeBytes:1048576,graphRows:2048,contextBytes:1048576,work:262144,pairs:8192,path:512});
  const demand=(ok,m)=>{if(!ok)throw Error('Region outputs: '+m);},freeze=x=>{if(x&&typeof x==='object'&&!Object.isFrozen(x)){Object.values(x).forEach(freeze);Object.freeze(x);}return x;};
+ const leases=new WeakMap();
  const plain=f=>({node:f.address.node,kind:f.kind,route:f.address.route});
  function available(d,inventory=host.PROOF_ATLAS_REGION_OUTPUTS){
   if(d.mode!=='native')return[];demand(inventory?.format==='ProofAtlasRegionOutputInventory/1'&&Array.isArray(inventory.records)&&inventory.records.length<=64,'inventory unavailable');
@@ -87,9 +88,12 @@
     return G.create(g,{[component]:g.roots[0]},address,ambient,receipt.source);
    }
    function sourceHeader(receipt,address){const value=owned(receipt);demand(address?.namespace==='common-prefix-output-types'&&address.evidenceSha256===receipt.nativeTypeSha256&&address.call===receipt.call,'type header owner');demand(same(neighborhood(receipt,address.component,address.route.slots).root.address,address),'exact type address');if(address.component!=='closedResultType')return null;return copy(value.headerLinks.find(h=>same(h.slots,address.route.slots))?.source||null);}
-   return Object.freeze({status:'recorded',identity,summary:()=>{check();return copy({commonContextLength:common.length,ports:index.ports.map(p=>({call:p.call,originalContextLength:p.context.length,suffixLength:p.suffixLength,argumentCount:p.argumentCount})),provenance:index.provenance});},select,neighborhood,sourceHeader,
+   const lease=Object.freeze({status:'recorded',identity,releaseTypes(){check();demand(!loading,'type load active');serial++;typeController?.abort();selected=null;workingGraphs=null;},summary:()=>{check();return copy({commonContextLength:common.length,ports:index.ports.map(p=>({call:p.call,originalContextLength:p.context.length,suffixLength:p.suffixLength,argumentCount:p.argumentCount})),provenance:index.provenance});},select,neighborhood,sourceHeader,
     state:()=>({disposed,loading,indexBytes:disposed?0:descriptor.bytes,contextBytes:disposed?0:size([...frames]),residentTypeGraphs:selected||workingGraphs?2:0,residentGraphRows:selected||workingGraphs?Object.values(selected?.graphs||workingGraphs).reduce((n,g)=>n+g.kind.length,0):0,peakGraphRows,peakWork,sourceCursorClosed:!activeCursor,contextSourceRows:0,peakContextSourceRows:contextState.peakSourceRows,sourcePageLimit:1}),dispose});
+   leases.set(lease,{live:check,signal:controller.signal,snapshot:()=>{check();return copy({identity,ports:index.ports.map(p=>({call:p.call,source:{namespace:'source-expression',name:d.source.name,indexSha256:d.source.indexSha256,sourceSha256:d.source.sourceSha256,node:p.source.node,route:p.source.route},context:frames.get(p.call),originalRole:p.originalRole,originalTypeText:p.originalTypeText,closedTypeText:p.closedTypeText}))});}});return lease;
   }catch(error){dispose();throw error;}
  }
- const api={available,open,limits};if(node)module.exports=api;else host.ProofAtlasRegionOutputs=api;
+ function owned(lease){const entry=leases.get(lease);demand(entry,'owned output collection');entry.live();return entry;}
+ const scope=lease=>owned(lease).snapshot(),signal=lease=>owned(lease).signal;
+ const api={available,open,limits,scope,signal};if(node)module.exports=api;else host.ProofAtlasRegionOutputs=api;
 })(typeof window==='undefined'?globalThis:window);

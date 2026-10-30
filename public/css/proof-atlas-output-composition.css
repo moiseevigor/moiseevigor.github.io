@@ -1,0 +1,11 @@
+/* Exact source contexts and typed maps use the site's reading theme. */
+.oc-view{margin:1rem 0;color:var(--text)}.oc-view h4{margin:.8rem 0}.oc-pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem;margin:1rem 0}.oc-side{padding:1rem;border:1px solid var(--border);min-width:0}.oc-side h5{margin:0 0 .5rem;font-size:1.05rem}.oc-caption{font-size:.9rem;color:var(--text-muted);margin:.5rem 0}.oc-ports{display:flex;flex-wrap:wrap;gap:.45rem;margin:.75rem 0}.oc-ports button{flex:1 1 5rem}.oc-group{padding:.8rem;margin:.75rem 0;border:1px solid var(--border);background:var(--bg)}.oc-group>strong{font-family:var(--font-sans,sans-serif);font-size:.95rem}.oc-view button,.oc-view select{min-height:44px;max-width:100%;white-space:normal;overflow-wrap:anywhere}.oc-view [aria-pressed=true]{outline:2px solid var(--accent);outline-offset:1px;font-weight:600}.oc-view :focus-visible{outline:2px solid var(--accent);outline-offset:3px}.oc-view pre{max-height:18rem;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;padding:.7rem;border:1px solid var(--border);font-size:.85rem}.oc-comparison{padding:.6rem 0;font-weight:600}.oc-context{padding:1rem 0;border-top:1px solid var(--border)}.oc-context>button{display:block;margin:.5rem 0}.oc-view [data-type-neighborhood]{margin:1rem 0}
+@media(max-width:850px){.oc-pair{grid-template-columns:minmax(0,1fr)}.oc-side{padding:.75rem}.oc-view .an-controls{align-items:stretch}.oc-view select{width:100%}}
+/* Keep article section spacing out of the nested notation boxes. */
+:root .proof-atlas-theme .pa-manual .oc-view{margin:1rem 0;padding:0;border:0}
+:root .proof-atlas-theme .pa-manual .oc-view .oc-side{margin:0;padding:1rem;border:1px solid var(--border)}
+:root .proof-atlas-theme .pa-manual .oc-view .oc-group{margin:.75rem 0;padding:.8rem;border:1px solid var(--border)}
+:root .proof-atlas-theme .pa-manual .oc-view .oc-context{margin:1rem 0;padding:.75rem 0;border:0;border-top:1px solid var(--border)}
+:root .proof-atlas-theme .pa-manual .oc-view .atlas-type-neighborhood{margin:1rem 0;padding:0;border:0}
+.oc-pair{align-items:start}.oc-ports{display:grid;grid-template-columns:repeat(auto-fit,minmax(5.5rem,1fr))}
+@media(max-width:850px){:root .proof-atlas-theme .pa-manual .oc-view .oc-side{padding:.75rem}}
