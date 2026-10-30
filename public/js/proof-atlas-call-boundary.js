@@ -26,7 +26,7 @@
        demand(M.same(n.address,row.producerAddress)&&M.same(n.inputAddress,row.inputAddress)&&M.same(n.externalBinder,row.binderAddress)&&M.same(n.hops,row.definitionHops)&&n.contextLength===row.producerContextLength&&n.role===p.role&&n.visibility===p.visibility,'source/role/visibility/context bridge');
        const producer=n.typeAddress,expected=n.inputTypeAddress;
        for(const [at,component]of[[producer,'producerType'],[expected,'inputType']])demand(at?.namespace==='application-ports'&&at.evidenceSha256===model.identity.nativeOwner&&at.sourceIndexSha256===model.identity.source.indexSha256&&at.input===callId+':'+ref.slot&&at.component===component&&M.same(at.query,call.anchor.route)&&at.route.root===component&&at.route.slots.length===0,'separate original computed type roots');
-       const pi=lease.info(producer),ei=lease.info(expected);
+       const pi=await lease.info(producer),ei=await lease.info(expected);
        demand(pi.ambientContextLength===row.producerContextLength&&ei.ambientContextLength===row.consumerContextLength&&pi.text===n.typeText&&typeof ei.text==='string','original and consumer type contexts');
        demand(typeof n.text==='string'&&typeof n.inputText==='string'&&(ref.slot===0?n.parameter===null:typeof n.parameter==='string'),'recorded term text and parameter');
        Object.assign(row,{typeStatus:'recorded-native',parameter:n.parameter,inputText:n.inputText,producerText:n.text,producerTypeText:pi.text,expectedTypeText:ei.text,producerTypeAddress:copy(producer),expectedTypeAddress:copy(expected)});

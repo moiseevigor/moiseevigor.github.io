@@ -1,2 +1,2 @@
 /* Compiled native type pages; original native owners retained. */
-window.PROOF_ATLAS_PAGED_APPLICATIONS = {"format":"ProofAtlasApplicationTypeCatalogRef/1","file":"/public/data/proof-atlas/application-type-index/e2cd4f9423cedd1dad96461ddf5a8b722992d2e1445a170e72ca5b1dee45cb58.catalog.gz","sha256":"e2cd4f9423cedd1dad96461ddf5a8b722992d2e1445a170e72ca5b1dee45cb58","bytes":24079};
+window.PROOF_ATLAS_PAGED_APPLICATIONS = {"format":"ProofAtlasApplicationTypeCatalogRef/1","file":"/public/data/proof-atlas/application-type-index/5e607068ff858e85b7ac6c6278d885196ac906c96152a9f1cb19a0c89d6efd4e.catalog.gz","sha256":"5e607068ff858e85b7ac6c6278d885196ac906c96152a9f1cb19a0c89d6efd4e","bytes":24079};

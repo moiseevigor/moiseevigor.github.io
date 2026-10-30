@@ -1,0 +1,203 @@
+{
+  "format": "ProofAtlasNetworkPagedTypesEvidence/1",
+  "status": "PASS",
+  "scope": "Bounded native-type transport for the installed network inspector, exact source/type selection and downstream compatibility. Finite corpus checks; no kernel replay, semantic compression, total-heap or comprehension claim. Feature branch only; no deployment.",
+  "baselineCommit": "2c728c590c4cf33a5fdb917a052da3ab8f2a64e4",
+  "reports": [
+    {
+      "file": "research/proof-atlas/native-type-paging/network-model.json",
+      "sha256": "cb10b8f0eda3b5d2bcdb8c7aafb2b376e01dc764f6040320d9e7dfde55e79abc",
+      "status": "PASS"
+    },
+    {
+      "file": "research/proof-atlas/native-type-paging/network-fields-model.json.gz",
+      "sha256": "feb1242c9b2fd0abba992c9143f3fcd1adf7c50c164536b294d04b346ee21541",
+      "status": "NATIVE_FIELD_ADDRESSES_AND_LEXICAL_TARGETS_PASS_NOT_DEPLOYED"
+    },
+    {
+      "file": "research/proof-atlas/native-type-paging/network-bridge-model.json.gz",
+      "sha256": "6dbade854aba4c59c8d15a10736a42c195de307a3fcdb90ef2b4afa35916360c",
+      "status": "NATIVE_TYPE_ROOTS_AND_INDEPENDENT_FINGERPRINTS_PASS_NOT_PUBLISHED"
+    },
+    {
+      "file": "research/proof-atlas/native-type-paging/network-difference-model.json.gz",
+      "sha256": "9c9c76c432c9efe6e91bc54056bb07fc3206d4c1069a11a1929509ac0b796aaf",
+      "status": "NATIVE_WITNESS_ADDRESSES_AND_INDEPENDENT_DIGEST_PATHS_PASS_NOT_DEPLOYED"
+    },
+    {
+      "file": "research/proof-atlas/native-type-paging/network-regions-model.json.gz",
+      "sha256": "ef6924eb231d45f462cb1207eb87c40c18a02db4bdd570322c684e44cbb48cdc",
+      "status": "PASS"
+    },
+    {
+      "file": "research/proof-atlas/native-type-paging/network-rules-model.json.gz",
+      "sha256": "72d3e249efb60eea8ec22c98425972cc6c1201a8897a3cdfc9026267856bcb26",
+      "status": "PASS"
+    },
+    {
+      "file": "research/proof-atlas/native-type-paging/network-path-model.json.gz",
+      "sha256": "a2e8c2b32673fa5e8103c0a5a364c381663a2825500ae0535e1355d0c8c992a3",
+      "status": "PASS"
+    },
+    {
+      "file": "research/proof-atlas/native-type-paging/network-uses-model.json.gz",
+      "sha256": "9b4cc7e54d787b89c28b61988718eea672104652d711f730a24161dc22befb1c",
+      "status": "PASS"
+    },
+    {
+      "file": "research/proof-atlas/native-type-paging/network-boundary-model.json.gz",
+      "sha256": "bc942ee0133acc72a011249e84916ecd9ee9e3caeb5dbd73c6101213e282e180",
+      "status": "PASS"
+    },
+    {
+      "file": "research/proof-atlas/native-type-paging/network-browser.json",
+      "sha256": "a8b347bf248559527cd49a088609413c51520efcbb8e0fa10eb8ca22b22c9074",
+      "status": "PASS"
+    },
+    {
+      "file": "research/proof-atlas/native-type-paging/network-fields-browser.json.gz",
+      "sha256": "e09ef2732a8b6717bf2cbf08de73d11e3ef2c736596afa4feda9519924991bc5",
+      "status": "PRODUCTION_TYPE_FIELDS_AND_BINDER_NAVIGATION_PASS_NOT_DEPLOYED"
+    },
+    {
+      "file": "research/proof-atlas/native-type-paging/network-default-browser.json",
+      "sha256": "0b239b8e929eb3c1c9e92f6e9a0a447bbbdd572d221b7cec3e717bf1e1f1f948",
+      "status": "PASS"
+    }
+  ],
+  "files": [
+    {
+      "file": "./public/data/proof-atlas/application-type-index/5e607068ff858e85b7ac6c6278d885196ac906c96152a9f1cb19a0c89d6efd4e.catalog.gz",
+      "sha256": "cd8992594b495bf92ec9beb2942c2563c2e7c0466f88427eab7a221f940d5521"
+    },
+    {
+      "file": "public/data/proof-atlas/application-type-index-manifest.js",
+      "sha256": "b908adb3f4b6611c3d70dbe48173a529e2e056ff3ea18d1c93196c6703f20355"
+    },
+    {
+      "file": "public/data/proof-atlas/application-type-index-ref.json",
+      "sha256": "785772ed4cf7bd9407479347c1e010d679d7449af4ccc1a9e3a5a21633204fa5"
+    },
+    {
+      "file": "public/js/proof-atlas-application-paged-provider.js",
+      "sha256": "df0a12d922d831408343c7634908c078c81f3111a3fb5a0ae349048ce1a95a8f"
+    },
+    {
+      "file": "public/js/proof-atlas-application-source-paths.js",
+      "sha256": "b220a86bb4aaa88234554e0a152a7631563f7d7ad5ecd043a22803a6b8ae5ff2"
+    },
+    {
+      "file": "public/js/proof-atlas-application-type-pages.js",
+      "sha256": "ff1c1e65a04891cd6dbb80ca0abdc35ea631c850cc25e322199ec237e2d28fb5"
+    },
+    {
+      "file": "public/js/proof-atlas-call-boundary.js",
+      "sha256": "8ebd7c4c1565854857e41c572720542901b59f8497888193826e5e4f4691541d"
+    },
+    {
+      "file": "public/js/proof-atlas-network-port-inspector.js",
+      "sha256": "6d65cb6cae467376dce49dbe2f2296820893b3e0de0e047bccab10fc6dfb63d6"
+    },
+    {
+      "file": "public/js/proof-atlas-network-stream-pages.js",
+      "sha256": "dc4e3a59c908301d9104fcb51c12102f2e71508f0b78bd22c62040f287449ba3"
+    },
+    {
+      "file": "public/js/proof-atlas-network-stream-view.js",
+      "sha256": "bbfbfec34d1257684b8a890dfbbb8c0a63ea69f446d9007c552ba61c0ac9c94e"
+    },
+    {
+      "file": "public/js/proof-atlas-paged-type-operations.js",
+      "sha256": "158bc045d5be534edffdb388fce27658a935fcedb27b28c2279cece7f319f45c"
+    },
+    {
+      "file": "public/js/proof-atlas-rule-support.js",
+      "sha256": "a5f05452f6ab71ac03831f851561764baa36f3f40bec7923f9578668566fe28d"
+    },
+    {
+      "file": "public/js/proof-atlas-type-pages.js",
+      "sha256": "aa2b5901458b0a2b714090ec8a470c3bb073c50f56f3e77fb926247d5f3be184"
+    },
+    {
+      "file": "research/proof-atlas/input-type-bridge/check-model.cjs",
+      "sha256": "825b25023d0f041c747b3a1d3513aaaeda2585fa9129fc6953a4d3890e85d81e"
+    },
+    {
+      "file": "research/proof-atlas/native-type-paging/README.md",
+      "sha256": "4142dcdb57e56192d408b08ce649e8563617062c7f560ed6e180138d904a02c7"
+    },
+    {
+      "file": "research/proof-atlas/native-type-paging/check-network-evidence.cjs",
+      "sha256": "4df1d2d0310fc5d4a1861723f36f9dc922587a9b3312e7ca24c67e5684cd0c25"
+    },
+    {
+      "file": "research/proof-atlas/native-type-paging/publication.json.gz",
+      "sha256": "48254d98f89de2eb6da899cbb29497eee49956298871428790d59dcc72bd67ac"
+    },
+    {
+      "file": "research/proof-atlas/native-type-paging/publish.cjs",
+      "sha256": "86590686b17d660bd7dbae9268137789b0076919b99e87befe20079b64ce53f3"
+    },
+    {
+      "file": "research/proof-atlas/network-streaming/index.html",
+      "sha256": "4b6b6fc12c34b91ac7b28cb730255d6e3468e5a4f66bbf11c35f70e23742d055"
+    },
+    {
+      "file": "research/proof-atlas/type-difference/check-model.cjs",
+      "sha256": "da1123bfd63c61fe7379ee9bb45718912b075305e4ab135919dfd5b6a0296151"
+    },
+    {
+      "file": "research/proof-atlas/type-field-navigation/check-browser.cjs",
+      "sha256": "64978b95d3b0249ab1fee07d5a3d8d1b567de8e61966e2127b93c4accd4bbf6f"
+    },
+    {
+      "file": "research/proof-atlas/type-field-navigation/check-model.cjs",
+      "sha256": "fcfa3de25778d489b7bc28a326373f84187a4eb87172ef4b5d99e5882f1f68b1"
+    },
+    {
+      "file": "scripts/test-proof-atlas-application-ports-browser.cjs",
+      "sha256": "24ae13944c5f7710e5048e03695f4067cb9179c07ddaa4763fa3b7551172f32c"
+    },
+    {
+      "file": "scripts/test-proof-atlas-application-regions.cjs",
+      "sha256": "55aa04b2e8e1ad484034865f99fc3c6888b71f8909c1a7c78aca6f3108bfeccf"
+    },
+    {
+      "file": "scripts/test-proof-atlas-boundary-ledger.cjs",
+      "sha256": "5c4f152a459b4cce61e287843f6c5026154c27b037453bcc35cbffbcd464e92d"
+    },
+    {
+      "file": "scripts/test-proof-atlas-network-streaming-browser.cjs",
+      "sha256": "e3cbcc6f6c79cce250fe93a13576a856e40d70ef93357f69292ee71d730ed993"
+    },
+    {
+      "file": "scripts/test-proof-atlas-network-streaming.cjs",
+      "sha256": "ac32c2064c38cf27fc3a1063e51c68a7702c2e4c55440d6793d10b42cdafc273"
+    },
+    {
+      "file": "scripts/test-proof-atlas-result-path.cjs",
+      "sha256": "a5fbaac9c08a6c29f59cdc76597c6c64eef07bf8e20721e9d8ea96d23de2eb18"
+    },
+    {
+      "file": "scripts/test-proof-atlas-result-uses.cjs",
+      "sha256": "c323670fb6f0b5ce8fd835b1a5b5ea3a00b26d9298a1f0cd377445fbebdb539f"
+    },
+    {
+      "file": "scripts/test-proof-atlas-rule-support.cjs",
+      "sha256": "aa97f4c345cae4b78f28e8151da4c5784f00a999138f0df4a91744f2f2069458"
+    }
+  ],
+  "observations": {
+    "nativeProfiles": 31,
+    "nativeInputs": 787,
+    "computedContexts": 2361,
+    "fieldInputs": 877,
+    "fieldCuts": 8962,
+    "browserCalls": 162,
+    "browserWires": 101,
+    "axeAudits": 16,
+    "peakTypeRows": 319,
+    "peakSourceRows": 1280,
+    "peakIndexBytes": 70962
+  }
+}

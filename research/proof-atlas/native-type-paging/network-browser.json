@@ -1,0 +1,41 @@
+{
+  "format": "ProofAtlasNetworkStreamingBrowser/1",
+  "status": "PASS",
+  "nativeProfiles": 31,
+  "nativeCalls": 162,
+  "nativeWires": 101,
+  "nativeTypeSelections": 101,
+  "bindingSelections": 7,
+  "largeCalls": 11,
+  "unavailableTypes": 11,
+  "expansions": 1,
+  "consumerPages": 1,
+  "zoomChecks": 3,
+  "panChecks": 2,
+  "axeAudits": 4,
+  "keyboardChecks": 1,
+  "staleRefusals": 1,
+  "hashRefusals": 1,
+  "releases": 1,
+  "wholeArchiveAttempts": 0,
+  "nativeTypeStaleRefusals": 1,
+  "nativeTypeHashRefusals": 1,
+  "builtFiles": {
+    "public/js/proof-atlas-network-page-store.js": "8653362782be9b69eaba6c4b67962200685ea00d363c71c373db04b22ff5855a",
+    "public/js/proof-atlas-network-streaming.js": "0c871f8ffd713581717f31a07e99606ec46e4db9f5642706596d0744e84482ba",
+    "public/js/proof-atlas-network-stream-pages.js": "dc4e3a59c908301d9104fcb51c12102f2e71508f0b78bd22c62040f287449ba3",
+    "public/js/proof-atlas-network-port-inspector.js": "6d65cb6cae467376dce49dbe2f2296820893b3e0de0e047bccab10fc6dfb63d6",
+    "public/js/proof-atlas-application-paged-provider.js": "df0a12d922d831408343c7634908c078c81f3111a3fb5a0ae349048ce1a95a8f",
+    "public/js/proof-atlas-application-type-pages.js": "ff1c1e65a04891cd6dbb80ca0abdc35ea631c850cc25e322199ec237e2d28fb5",
+    "public/js/proof-atlas-type-pages.js": "aa2b5901458b0a2b714090ec8a470c3bb073c50f56f3e77fb926247d5f3be184",
+    "public/data/proof-atlas/application-type-index-manifest.js": "b908adb3f4b6611c3d70dbe48173a529e2e056ff3ea18d1c93196c6703f20355",
+    "public/js/proof-atlas-network-stream-view.js": "bbfbfec34d1257684b8a890dfbbb8c0a63ea69f446d9007c552ba61c0ac9c94e",
+    "public/data/proof-atlas/network-streaming-manifest.js": "5768d4f66ce01a092b5e126512998264502bd92b7c15caae8c79a60702e3087b"
+  },
+  "html": {
+    "source": "research/proof-atlas/network-streaming/index.html",
+    "sourceSha256": "4b6b6fc12c34b91ac7b28cb730255d6e3468e5a4f66bbf11c35f70e23742d055",
+    "normalizedSha256": "3efb0aad50ed9fa05acd03ad3a52402fd4974fc91f2eb1abe9d4e191c4338bff"
+  },
+  "checkerSha256": "e3cbcc6f6c79cce250fe93a13576a856e40d70ef93357f69292ee71d730ed993"
+}

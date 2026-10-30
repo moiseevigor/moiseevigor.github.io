@@ -1,6 +1,6 @@
 # Paged native type fields and application windows
 
-The manual and compiled-library application views use bounded type pages by default. The installed index covers 877 recorded inputs at 201 calls across 42 native profiles. The existing renderer keeps the same application scenes and exact source/type selections. The separate network port inspector still uses its earlier complete-graph loader.
+The manual and compiled-library application views use bounded type pages by default. The installed index covers 877 recorded inputs at 201 calls across 42 native profiles. The existing renderer keeps the same application scenes and exact source/type selections. The network port inspector now uses the same bounded provider. Its information and field selections are asynchronous; controls retain their original source/type addresses and reject retired selections.
 
 The general geometric-language goal remains active. This package changes representation and delivery; it does not establish semantic compression or improved human comprehension. The blog is unchanged. No site deployment is recorded here.
 
@@ -42,7 +42,7 @@ Type pages have a 1 MiB decoded cap and type manifests a 256 KiB cap. Comparison
 
 ## Checked observations
 
-The [evidence manifest](evidence.json) pins source, inventory, report and production-build hashes. The [publication inventory](publication.json.gz) lists 8,969 immutable assets occupying 7,143,999 compressed bytes. Existing hash-addressed assets are verified without replacement.
+The [application checkpoint](evidence.json) pins its source, inventory, report and production-build hashes at the earlier application-view revision. The [network extension](network-evidence.json) records the current inspector and downstream checks; historical checkpoint bytes are retained. The [publication inventory](publication.json.gz) lists 8,969 immutable assets occupying 7,143,999 compressed bytes. Existing hash-addressed assets are verified without replacement.
 
 | Check | Observation and scope |
 |---|---|
@@ -57,7 +57,7 @@ The [evidence manifest](evidence.json) pins source, inventory, report and produc
 
 Observed window peaks are 320 cached type rows, 1,280 cached source rows, 367 retained source rows and 458,732 metadata bytes. These finite inventory checks are not all applications in every source proof. Structural controls are not kernel-checked proofs or AI benchmarks.
 
-The [aggregate application gate](aggregate-check.json) also passes: current unit observations, fifteen fingerprint-checked browser records and thirteen immutable checkpoints remain consistent. Historical checkpoint bytes are not rewritten. Earlier primitive/window fixture browser records remain available and are identified separately in the evidence manifest; the default-browser record above is the installed transport check.
+The earlier [aggregate application gate](aggregate-check.json) passed at its pinned revision: unit observations, fifteen fingerprint-checked browser records and thirteen immutable checkpoints were consistent. Historical checkpoint bytes are not rewritten. Earlier primitive/window fixture browser records remain available and are identified separately in the evidence manifest; the default-browser record above is the installed transport check.
 
 ## Reproduction
 
@@ -76,3 +76,18 @@ node scripts/build-proof-atlas-application-ports-evidence.cjs --check
 # With a production build served locally, Playwright and Chromium installed:
 ATLAS_ORIGIN=http://127.0.0.1:8866 node scripts/test-proof-atlas-application-ports-browser.cjs
 ```
+
+## Network inspector extension
+
+The inspector reads installed catalog/profile/call indexes and bounded source/type pages. It no longer opens complete native graphs. Both native and source-only `info` operations return promises; native `neighborhood` operations return promises. The network view, retained-boundary ledger and rule-support reader await these operations. Source-only inputs remain untyped. Cancellation and selection generations prevent old responses or detached controls from changing a newer selection.
+
+[Current checks](network-evidence.json) pin the inspector, provider, consumers, HTML and reports. The network model checks 787 inputs across 31 network profiles, 2,361 computed contexts and 31 source-only inspections. Its observed peaks are 319 cached type rows, 1,280 cached source rows and 70,962 decoded index bytes. The field model checks all 877 recorded inputs across 42 profiles and 8,962 root/child cuts, including lexical binder destinations. These observations concern the finite installed inventory, not all Lean proofs or total browser memory. Browser records cover exact port/type selections, source-only boundaries, keyboard navigation, optional field-view failure, stale/corrupt native type loads and responsive light/dark accessibility.
+
+```sh
+ATLAS_NETWORK_STREAM_AUDIT=/tmp/atlas-network-model.json node scripts/test-proof-atlas-network-streaming.cjs
+node research/proof-atlas/type-field-navigation/check-model.cjs /tmp/atlas-network-fields.json
+# After the production build and the recorded browser/model executions:
+node research/proof-atlas/native-type-paging/check-network-evidence.cjs --check
+```
+
+No blog post, merge or deployment is part of this extension.
