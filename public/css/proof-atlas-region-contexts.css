@@ -10,3 +10,6 @@
 .rc-context.rc-selected{border-color:var(--accent)}.rc-context>strong{min-width:6rem}.rc-calls{display:flex;flex-wrap:wrap;gap:.5rem}
 .atlas-region-contexts ol:not(.rc-tree):not(.rc-tree ol){padding-inline-start:1.5rem}
 @media(max-width:600px){.rc-tree,.rc-tree ol{padding-inline-start:.35rem}.rc-context{gap:.4rem;padding:.5rem}.rc-calls{width:100%}}
+
+:root .atlas-input-contexts :is(h4,h5){font:600 1rem/1.5 var(--sans,system-ui)}
+.atlas-input-contexts [data-input-scope-hop]{margin:.25rem}
