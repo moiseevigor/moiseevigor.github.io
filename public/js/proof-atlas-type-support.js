@@ -2,16 +2,16 @@
 (function(host){
  'use strict';
  const node=typeof module!=='undefined'&&module.exports,A=node?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData;
- const limits=Object.freeze({nodes:65536,context:512,states:262144,memo:4096,frontier:4096,path:512,bytes:2097152});
+ const limits=Object.freeze({nodes:65536,sourceNodes:2147483647,context:512,states:262144,memo:4096,frontier:4096,path:512,bytes:2097152});
  const demand=(v,m)=>{if(!v)throw Error('Type support: '+m);},natural=x=>Number.isSafeInteger(x)&&x>=0,binds=(k,s)=>(k===6||k===7)&&s===1||k===8&&s===2;
  async function scan(read,n,root,ambient,options={}){
-  const stateLimit=options.stateLimit??limits.states,memoLimit=options.memoLimit??limits.memo,frontierLimit=options.frontierLimit??limits.frontier;
-  demand(typeof read==='function'&&natural(n)&&n>0&&n<=limits.nodes&&natural(root)&&root<n&&natural(ambient)&&ambient<=limits.context,'root/context bounds');
+  const nodeLimit=options.nodeLimit??limits.nodes,stateLimit=options.stateLimit??limits.states,memoLimit=options.memoLimit??limits.memo,frontierLimit=options.frontierLimit??limits.frontier;
+  demand(typeof read==='function'&&natural(nodeLimit)&&nodeLimit>0&&nodeLimit<=limits.sourceNodes&&natural(n)&&n>0&&n<=nodeLimit&&natural(root)&&root<n&&natural(ambient)&&ambient<=limits.context,'root/context bounds');
   demand([[stateLimit,limits.states],[memoLimit,limits.memo],[frontierLimit,limits.frontier]].every(([v,max])=>natural(v)&&v>0&&v<=max),'work bounds');
   const live=()=>{if(options.signal?.aborted)throw options.signal.reason||Error('Type support cancelled');};
   const work=[{node:root,binders:0,length:0,path:new Uint8Array(0)}],memo=new Map(),found=new Map();
   let states=0,evictions=0,peakMemo=0,peakFrontier=1,pathBytes=0,peakPathBytes=0,localVariableStates=0;
-  const stats=()=>({states,stateLimit,memoLimit,frontierLimit,peakMemo,peakFrontier,peakFrontierPathBytes:peakPathBytes,memoEvictions:evictions,localVariableStates,pathLimit:limits.path});
+  const stats=()=>({states,stateLimit,nodeLimit,memoLimit,frontierLimit,peakMemo,peakFrontier,peakFrontierPathBytes:peakPathBytes,memoEvictions:evictions,localVariableStates,pathLimit:limits.path});
   const unavailable=reason=>({format:'ProofAtlasTypeSupportScan/1',status:'unavailable',reason,ambientLength:ambient,stats:stats()});
   function witness(frame,index){
    if(frame.length>limits.path)return{status:'outside-path-bound',node:frame.node,pathLength:frame.length,formalBinders:frame.binders,bvarIndex:index};
