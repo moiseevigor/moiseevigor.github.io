@@ -1,0 +1,9 @@
+:root .fp-reader{min-width:0;margin-block:1.5rem;color:var(--text)}
+.fp-reader :is(select,button){max-width:100%;min-height:44px;overflow-wrap:anywhere}
+.fp-reader .an-controls label{min-width:0;max-width:100%}
+.fp-reader select{width:100%;white-space:normal}
+.fp-ports{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:.75rem;margin-block:1rem}
+.fp-port{min-width:0;padding:.75rem;border:1px solid var(--border);border-left:3px solid var(--border);background:var(--fig-bg)}
+.fp-port.fp-active{border-left-color:var(--accent)}
+.fp-port :is(strong,a){display:block;overflow-wrap:anywhere}.fp-port button{margin:.4rem 0}
+:root .fp-reader pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:14rem;overflow:auto;font:.8rem/1.5 var(--mono,monospace)}

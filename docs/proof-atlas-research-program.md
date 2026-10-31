@@ -74,6 +74,8 @@ The [scope/product composition rule](/research/proof-atlas/region-output-composi
 
 The same [output-regrouping rule is navigable in the paged reader](/research/proof-atlas/region-composition-view/README.md). Nine recorded groupings expose flat/grouped positions and typed adapter fields through one bounded computed component. Exact source contexts remain distinct, graph/source selections retain their own namespaces, and missing records remain unavailable. This is an implementation of the finite rule, not new kernel evidence or a measured comprehension result.
 
+The nineteen checked source-frontier functions now have a [paged component reader](/research/proof-atlas/frontier-pages/README.md) beside the source-use graph. Named components keep closed, original-source and computed-parameter scopes distinct. Constructor fields and binder portals load through one 64-row cache; exact counts account for hidden structure. This delivers the existing finite native rule at larger stored sizes, without supplying arbitrary graph-region interfaces or new descendant typing judgments.
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?

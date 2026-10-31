@@ -4,9 +4,15 @@
  const node=typeof module!=='undefined'&&module.exports,A=node?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData,G=node?require('./proof-atlas-geometry-core'):host.ProofAtlasGeometry;
  const copy=x=>JSON.parse(JSON.stringify(x)),demand=(ok,m)=>{if(!ok)throw Error('Computed type neighborhood: '+m);},binds=(kind,slot)=>(kind===6||kind===7)&&slot===1||kind===8&&slot===2;
  const clipped=text=>({text:text.slice(0,1024),truncated:text.length>1024});
+ const namespaces=['application-ports','common-prefix-output-types','scope-output-composition','frontier-components'];
+ function validContext(address,ambient,source){
+  if(!Array.isArray(ambient)||ambient.length>512)return false;
+  if(source?.namespace==='source-expression')return source.indexSha256===address.sourceIndexSha256;
+  return address.namespace==='frontier-components'&&source?.namespace==='computed-parameter-prefix'&&source.sourceIndexSha256===address.sourceIndexSha256&&JSON.stringify(source.bindings)===JSON.stringify(ambient)&&ambient.every((a,i)=>a.component==='function.term'&&a.namespace===address.namespace&&a.nativeCaseSha256===address.nativeCaseSha256&&a.manifestSha256===address.manifestSha256&&a.route?.root==='function.term'&&a.route.slots.length===i&&a.route.slots.every(s=>s===1));
+ }
  function create(g,roots,address,ambient,contextSource){
-  demand(['application-ports','common-prefix-output-types','scope-output-composition'].includes(address?.namespace)&&Object.hasOwn(roots,address.component)&&address.route?.root===address.component&&Array.isArray(address.route.slots)&&address.route.slots.length<=512,'component address');
-  demand(Array.isArray(ambient)&&ambient.length<=512&&contextSource?.namespace==='source-expression'&&contextSource.indexSha256===address.sourceIndexSha256,'original context');
+  demand(namespaces.includes(address?.namespace)&&Object.hasOwn(roots,address.component)&&address.route?.root===address.component&&Array.isArray(address.route.slots)&&address.route.slots.length<=512,'component address');
+  demand(validContext(address,ambient,contextSource),'component context');
   const local=[];let id=roots[address.component],parentNode=null;
   for(const [depth,slot]of address.route.slots.entries()){
    demand(Number.isInteger(slot)&&slot>=0&&slot<g.children[id].length,'ordered field path');parentNode=id;if(binds(g.kind[id],slot))local.push({node:id,depth});id=g.children[id][slot];
@@ -22,7 +28,10 @@
    if(kind==='bvar'){
     const index=g.payloads[n].index;demand(Number.isInteger(index)&&index>=0&&index<scope.length+ambient.length,'lexical bound-variable target');
     if(index<scope.length){const binder=scope[scope.length-1-index];value.binding={relation:'computed-local-binder',address:at(binder.node,slots.slice(0,binder.depth))};}
-    else{const ordinal=ambient.length-1-(index-scope.length),binder=ambient[ordinal];demand(['lam','forallE','letE'].includes(binder.kind),'original context binder');value.binding={relation:'original-context-binder',ordinal,address:{...copy(contextSource),node:binder.node,route:copy(binder.route)}};}
+    else{const ordinal=ambient.length-1-(index-scope.length),binder=ambient[ordinal];
+     if(contextSource.namespace==='computed-parameter-prefix')value.binding={relation:'computed-parameter-binder',ordinal,address:copy(binder)};
+     else{demand(['lam','forallE','letE'].includes(binder.kind),'original context binder');value.binding={relation:'original-context-binder',ordinal,address:{...copy(contextSource),node:binder.node,route:copy(binder.route)}};}
+    }
    }
    return value;
   }
@@ -37,8 +46,8 @@
  }
 
  async function createPaged(read,roots,address,ambient,contextSource,options={}){
-  demand(typeof read==='function'&&['application-ports','common-prefix-output-types','scope-output-composition'].includes(address?.namespace)&&Object.hasOwn(roots,address.component)&&address.route?.root===address.component&&Array.isArray(address.route.slots)&&address.route.slots.length<=512,'paged component address');
-  demand(Array.isArray(ambient)&&ambient.length<=512&&contextSource?.namespace==='source-expression'&&contextSource.indexSha256===address.sourceIndexSha256,'paged original context');
+  demand(typeof read==='function'&&namespaces.includes(address?.namespace)&&Object.hasOwn(roots,address.component)&&address.route?.root===address.component&&Array.isArray(address.route.slots)&&address.route.slots.length<=512,'paged component address');
+  demand(validContext(address,ambient,contextSource),'paged component context');
   const check=()=>{if(options.signal?.aborted)throw options.signal.reason||Error('Type navigation cancelled');};
   let id=roots[address.component],parentNode=null;const local=[];
   check();let first=await read(id,{signal:options.signal});demand(first[4]<=ambient.length,'component root scope');
