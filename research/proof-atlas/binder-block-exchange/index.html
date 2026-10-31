@@ -10,6 +10,7 @@ permalink: /projects/proof-atlas/manual/binder-blocks/
 <link rel="stylesheet" href="/research/proof-atlas/corpus-definition-boundaries/view.css?v=1">
 <link rel="stylesheet" href="/research/proof-atlas/binder-support/view.css?v=1">
 <link rel="stylesheet" href="/research/proof-atlas/expr-reference-laws/view.css?v=1">
+<link rel="stylesheet" href="/research/proof-atlas/region-binding-ports/view.css?v=1">
 <main class="pa-manual" data-binder-blocks>
 <header><p><a href="/projects/proof-atlas/manual/#binder-exchange">Visual manual</a> / Input and computation order</p>
 <h1>Compose local exchanges</h1>
@@ -54,11 +55,13 @@ permalink: /projects/proof-atlas/manual/binder-blocks/
 <div data-cb-diagram class="bb-diagram"></div>
 <div class="pm-controls"><label>Inspect component <select data-cb-component disabled></select></label></div>
 <p data-cb-cache role="status"></p><div data-cb-inspector tabindex="-1"></div>
+<section data-cb-region-boundary aria-label="Enclosing binders of selected region"></section>
 <section data-cb-support class="bs-inspector" aria-label="References of selected binder"></section>
 <details><summary>Inferred signature and native provenance</summary><pre data-cb-inferred></pre><pre data-cb-provenance></pre></details>
 </details>
 <p>The two columns show the primary binder spine. A selected original computation becomes a boundary proof input; the other computations remain inside the function. Inspect a field to follow its exact lexical binder. Source selections link to the original graph occurrence; computed selections retain their own component and native-record address.</p>
-<p>The largest joint native table has 124,355 stored expressions. The reader retains one 64-row page and two index pages; each field neighborhood shows at most four vertices. Proof-value previews may be truncated; the complete constructor fields remain paged. These are cache and view bounds, not a total-browser-memory or comprehension result.</p>
+<p>The largest joint native table has 124,355 stored expressions. The constructor reader and reference-coefficient reader each retain one 64-row page and two index pages. A field neighborhood shows at most four vertices; its boundary diagram shows one region and at most four enclosing binders. Proof-value previews may be truncated; the complete constructor fields remain paged. These are cache and view bounds, not a total-browser-memory or comprehension result.</p>
+<p>Use “Remaining body” or select any constructor field to see its references to enclosing binders. Each dashed wire aggregates exact variable occurrences inside that region; four binders are shown per page. Open a binder and use “Return to region” to keep the selected cut. <a href="/research/proof-atlas/region-binding-ports/README.md">Boundary rule and complete-row checks</a>.</p>
 <p>Select a binder to inspect exact references in its type or defining value, or the fields that use it. Each reference keeps its original binder identity through reordering. Only four links are shown at a time. <a href="/research/proof-atlas/binder-support/README.md">Reference-count rule and exchange checks</a>.</p>
 <p>This covers eleven fixed plans over nine original local definitions in two proofs. It does not construct arbitrary graph-region interfaces or find minimal premises. <a href="/research/proof-atlas/corpus-definition-boundaries/README.md">Native checks, original-source mapping and reproduction</a>.</p>
 </section>
@@ -81,9 +84,12 @@ permalink: /projects/proof-atlas/manual/binder-blocks/
 <script src="/research/proof-atlas/definition-boundaries/view.js?v=1" defer></script>
 
 <script src="/public/js/proof-atlas-packed-routes.js?v=1" defer></script>
-<script src="/public/js/proof-atlas-corpus-boundary-pages.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-corpus-boundary-pages.js?v=2" defer></script>
 <script src="/public/data/proof-atlas/corpus-boundaries-manifest.js?v=1" defer></script>
 <script src="/public/data/proof-atlas/binder-support-manifest.js?v=1" defer></script>
 <script src="/public/js/proof-atlas-binder-support.js?v=1" defer></script>
 <script src="/research/proof-atlas/binder-support/view.js?v=1" defer></script>
-<script src="/research/proof-atlas/corpus-definition-boundaries/view.js?v=2" defer></script>
+<script src="/public/data/proof-atlas/region-bindings-manifest.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-region-binding-pages.js?v=1" defer></script>
+<script src="/research/proof-atlas/region-binding-ports/view.js?v=1" defer></script>
+<script src="/research/proof-atlas/corpus-definition-boundaries/view.js?v=3" defer></script>
