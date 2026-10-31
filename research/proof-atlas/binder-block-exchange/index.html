@@ -7,6 +7,7 @@ permalink: /projects/proof-atlas/manual/binder-blocks/
 <link rel="stylesheet" href="/public/css/proof-atlas-manual.css?v=1">
 <link rel="stylesheet" href="/research/proof-atlas/binder-block-exchange/view.css?v=1">
 <link rel="stylesheet" href="/research/proof-atlas/definition-boundaries/view.css?v=1">
+<link rel="stylesheet" href="/research/proof-atlas/corpus-definition-boundaries/view.css?v=1">
 <main class="pa-manual" data-binder-blocks>
 <header><p><a href="/projects/proof-atlas/manual/#binder-exchange">Visual manual</a> / Input and computation order</p>
 <h1>Compose local exchanges</h1>
@@ -38,8 +39,24 @@ permalink: /projects/proof-atlas/manual/binder-blocks/
 <details><summary>Complete recorded source and candidate terms</summary><div data-db-terms></div></details>
 </details>
 <p>Both programs <code>let k := 1; fun i : Fin k =&gt; k + i.val</code> and <code>let k := 2; fun i : Fin k =&gt; k + i.val</code> have the same promoted function. Their original values and source owners remain distinct. The representation therefore retains those values for specialization and literal recovery.</p>
-<p>The structural probe covers each single let and the full let set on the primary body spines of the Riccati and selected AI-source proof: eleven plans over nine original definition positions. Their new typing remains unavailable. A shared computed DAG reaches at most 98,826 rows; source packets and recovery residuals are separate. This is a finite storage result, not semantic compression or a whole-process memory bound.</p>
+<p>The structural probe covers each single let and the full let set on the primary body spines of the Riccati and selected AI-source proof: eleven plans over nine original definition positions. Fresh native checks now cover all eleven plans in the compiled-proof view below. A shared computed DAG in the earlier structural model reaches at most 98,826 rows; source packets and recovery residuals are separate. This is a finite storage result, not semantic compression or a whole-process memory bound.</p>
 <p><a href="/research/proof-atlas/definition-boundaries/README.md">Boundary rule, kernel rejections, sharing and evidence</a>. Arbitrary graph-region interfaces and broader proof evaluation remain open.</p>
+</section>
+<section id="compiled-definition-boundaries" aria-labelledby="cb-title">
+<h2 id="cb-title">Checked boundaries in compiled proofs</h2>
+<p>Seven boundary functions from the Riccati bound and four from the released AI-source proof now have fresh Lean checks. All selected inputs are proofs. Every interface is checked at a type ending in the original declared conclusion; supplying the original proof values specializes back to the original complete proof.</p>
+<details data-corpus-boundaries><summary>Inspect the checked Riccati and AI-source interfaces</summary>
+<div class="pm-controls"><label>Boundary proofs <select data-cb-case></select></label><button type="button" data-cb-load>Load checked interface</button><button type="button" data-cb-release disabled>Release</button></div>
+<p data-cb-status class="cb-state" role="status">One checked header loads on request. Constructor fields load through a bounded page cache.</p>
+<h3>Checked interface signature</h3><pre data-cb-type></pre>
+<div data-cb-diagram class="bb-diagram"></div>
+<div class="pm-controls"><label>Inspect component <select data-cb-component disabled></select></label></div>
+<p data-cb-cache role="status"></p><div data-cb-inspector tabindex="-1"></div>
+<details><summary>Inferred signature and native provenance</summary><pre data-cb-inferred></pre><pre data-cb-provenance></pre></details>
+</details>
+<p>The two columns show the primary binder spine. A selected original computation becomes a boundary proof input; the other computations remain inside the function. Inspect a field to follow its exact lexical binder. Source selections link to the original graph occurrence; computed selections retain their own component and native-record address.</p>
+<p>The largest joint native table has 124,355 stored expressions. The reader retains one 64-row page and two index pages; each field neighborhood shows at most four vertices. Proof-value previews may be truncated; the complete constructor fields remain paged. These are cache and view bounds, not a total-browser-memory or comprehension result.</p>
+<p>This covers eleven fixed plans over nine original local definitions in two proofs. It does not construct arbitrary graph-region interfaces or find minimal premises. <a href="/research/proof-atlas/corpus-definition-boundaries/README.md">Native checks, original-source mapping and reproduction</a>.</p>
 </section>
 </main>
 <script src="/public/js/proof-atlas-library-data.js?v=3" defer></script>
@@ -49,3 +66,8 @@ permalink: /projects/proof-atlas/manual/binder-blocks/
 
 <script src="/public/data/proof-atlas/definition-boundaries-manifest.js?v=1" defer></script>
 <script src="/research/proof-atlas/definition-boundaries/view.js?v=1" defer></script>
+
+<script src="/public/js/proof-atlas-packed-routes.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-corpus-boundary-pages.js?v=1" defer></script>
+<script src="/public/data/proof-atlas/corpus-boundaries-manifest.js?v=1" defer></script>
+<script src="/research/proof-atlas/corpus-definition-boundaries/view.js?v=1" defer></script>

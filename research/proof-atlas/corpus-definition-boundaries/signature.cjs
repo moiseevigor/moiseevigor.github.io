@@ -1,0 +1,7 @@
+/* Independent de Bruijn construction of the original declared-goal bridge. */
+'use strict';
+const assert=require('assert/strict'),F=require('../binder-computation-exchange/model.cjs'),B=require('../binder-block-exchange/model.cjs');
+function declaredGoal(source,term,declared,normal,root,added){let originalInputs=0;while(source.kind[term]===6){while(source.kind[declared]===10)declared=source.children[declared][0];assert.equal(source.kind[declared],7,'declared input telescope');term=source.children[term][1];declared=source.children[declared][1];originalInputs++;}
+const t=F.table(),caches=new Map();function copy(g,n,by=0,depth=0){const k=n+':'+by+':'+depth;if(!caches.has(g))caches.set(g,new Map());const m=caches.get(g);if(m.has(k))return m.get(k);assert(m.size<262144);const kind=g.kind[n],p=g.payloads[n],id=kind===0?t.add(0,{index:p.index<depth?p.index:p.index+by}):t.add(kind,p,g.children[n].map((c,s)=>copy(g,c,by,depth+Number(F.binds(kind,s)))));m.set(k,id);return id;}
+const rows=[];let n=root;while(normal.kind[n]===6){rows.push(n);n=normal.children[n][1];}assert.equal(rows.length,originalInputs+added,'normalized input count');let result=copy(source,declared,added);for(const lambda of rows.reverse())result=t.add(7,normal.payloads[lambda],[copy(normal,normal.children[lambda][0]),result]);t.g.roots=[result];return{graph:t.g,root:result,originalInputs};}
+module.exports={declaredGoal};

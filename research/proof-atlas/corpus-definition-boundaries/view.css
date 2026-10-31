@@ -1,0 +1,4 @@
+[data-corpus-boundaries] :is(button,select){min-height:44px;max-width:100%}[data-corpus-boundaries] pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:18rem;overflow:auto}
+[data-cb-inspector]{margin-block:1rem;overflow-wrap:anywhere}[data-cb-inspector]:focus-visible{outline:2px solid var(--pm-accent)}
+[data-corpus-boundaries] [data-boundary-input="true"]{border-width:3px;border-color:var(--pm-accent)}[data-cb-diagram] details{padding:.3rem .5rem;overflow-wrap:anywhere}
+.cb-state{padding:.6rem;border-left:3px solid var(--pm-accent);background:var(--pm-surface)}
