@@ -4,7 +4,7 @@
  const node=typeof module!=='undefined'&&module.exports,A=node?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData,G=node?require('./proof-atlas-geometry-core'):host.ProofAtlasGeometry;
  const copy=x=>JSON.parse(JSON.stringify(x)),demand=(ok,m)=>{if(!ok)throw Error('Computed type neighborhood: '+m);},binds=(kind,slot)=>(kind===6||kind===7)&&slot===1||kind===8&&slot===2;
  const clipped=text=>({text:text.slice(0,1024),truncated:text.length>1024});
- const namespaces=['application-ports','common-prefix-output-types','scope-output-composition','frontier-components','binder-computation-exchange'];
+ const namespaces=['application-ports','common-prefix-output-types','scope-output-composition','frontier-components','binder-computation-exchange','region-input-components'];
  function validContext(address,ambient,source){
   if(!Array.isArray(ambient)||ambient.length>512)return false;
   if(source?.namespace==='source-expression')return source.indexSha256===address.sourceIndexSha256;
