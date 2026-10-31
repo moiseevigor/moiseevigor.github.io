@@ -1,0 +1,32 @@
+---
+layout: default
+math: true
+title: "Proof Atlas: composing binder exchanges"
+permalink: /projects/proof-atlas/manual/binder-blocks/
+---
+<link rel="stylesheet" href="/public/css/proof-atlas-manual.css?v=1">
+<link rel="stylesheet" href="/research/proof-atlas/binder-block-exchange/view.css?v=1">
+<main class="pa-manual" data-binder-blocks>
+<header><p><a href="/projects/proof-atlas/manual/#binder-exchange">Visual manual</a> / Input and computation order</p>
+<h1>Compose local exchanges</h1>
+<p>Move inputs before local computations along one binder spine. Each step substitutes the computed value into the input domain and changes the two binders in the body. The original domain and let annotation remain in an ordered recovery record.</p></header>
+<section aria-labelledby="bb-controls-title"><h2 id="bb-controls-title">Inspect a checked sequence</h2>
+<p>Eight authored controls have 48 intermediate kernel checks across two rewrite orders. Both orders reach the same literal term in these controls. This is finite evidence, not a general confluence theorem.</p>
+<div class="pm-controls"><label>Control <select data-block-case></select></label><label>Rewrite order <select data-block-schedule><option value="outermost">Outermost pair first</option><option value="deepest">Deepest pair first</option></select></label><button type="button" data-block-load>Load control</button><button type="button" data-block-release disabled>Release</button></div>
+<p data-block-status role="status">One compiled control loads on request. The browser checks the packet and trace structure; Lean typing comes from the pinned native record.</p>
+<div class="pm-controls"><button type="button" data-block-prev disabled>Previous exchange</button><label>Exchange <input data-block-step type="range" min="1" max="1" value="1" disabled></label><output data-block-position>—</output><button type="button" data-block-next disabled>Next exchange</button></div>
+<div data-block-diagram class="bb-diagram"></div><div data-block-inspector tabindex="-1"></div>
+<details><summary>Complete recorded terms</summary><div data-block-terms></div></details>
+</section>
+<section><h2>What the ordering means</h2>
+<p>A solid box is an input; a dashed box is a local computation. The two marked boxes are the adjacent pair being exchanged. Vertical order is lexical scope. It is not evaluation time or a proof-dependency edge. Binder names may repeat: an address includes its state and field path.</p>
+<p>Each exchange decreases the number of let-before-input pairs by one. Inputs retain their relative order, as do computations. The body and domain changes are capture avoiding. The inverse consumes the recorded steps in reverse order, checking each intermediate owner. Removing or reordering a residual does not establish source recovery.</p>
+<p>The view retains one small control, with at most 4,096 source rows, 4,096 native rows, 4,096 steps and 128 binder rows per column. Constructor inspection retains one selected node and at most three children. This does not establish a bound for all browser memory or a paged normalization of arbitrary proofs.</p>
+</section>
+<section><h2>Corpus boundary</h2><p>All 18 recorded output closures of the selected Riccati and AI-source proofs were checked structurally. Six Riccati closures require two exchanges each; their two schedules agree literally and reverse exactly. New typing of those corpus terms remains unavailable. The original two proof-body spines and the eight AI-source closures have no exchanges. They are not substitutes for wider corpus evaluation.</p>
+<p><a href="/research/proof-atlas/binder-block-exchange/README.md">Construction, evidence and reproduction</a> · <a href="/projects/proof-atlas/manual/">Visual vocabulary</a></p></section>
+</main>
+<script src="/public/js/proof-atlas-library-data.js?v=3" defer></script>
+<script src="/public/js/proof-atlas-occurrence-types.js?v=3" defer></script>
+<script src="/public/data/proof-atlas/binder-blocks-manifest.js?v=1" defer></script>
+<script src="/research/proof-atlas/binder-block-exchange/view.js?v=1" defer></script>

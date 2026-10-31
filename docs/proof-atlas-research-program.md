@@ -78,6 +78,8 @@ The nineteen checked source-frontier functions now have a [paged component reade
 
 A [let/input exchange rule](/research/proof-atlas/binder-computation-exchange/README.md) transports a dependent input domain when moving it past a local computation. Two general typed laws and eleven authored native controls separate original-type assignment, conversion and literal recovery. A collision shows why the original domain must remain attached to the record. Six Riccati closure exchanges have structural inverses; their new typing remains unavailable. This is a local operation toward typed graph-region interfaces, not their general construction.
 
+The [composed binder-spine rule](/projects/proof-atlas/manual/binder-blocks/) moves multiple inputs past dependent local computations. Eight authored controls have 48 intermediate native checks across two deterministic rewrite orders; their final terms agree literally and both traces invert exactly. All 18 recorded output closures of the two selected corpus proofs have structural probes; six Riccati closures need two exchanges each, with new typing still unavailable. This is finite sequence coherence, not a general confluence theorem or arbitrary graph-region interface.
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?

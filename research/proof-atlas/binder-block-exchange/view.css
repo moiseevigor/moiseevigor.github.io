@@ -1,0 +1,8 @@
+.bb-diagram{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem;margin:1rem 0}
+.bb-diagram section{min-width:0}.bb-diagram ol{list-style:none;padding:0;margin:0;display:grid;gap:.65rem}
+.bb-diagram li{min-width:0}.bb-card{display:block;width:100%;text-align:left;border:1px solid var(--pm-line);background:var(--pm-surface);padding:.7rem;color:var(--pm-ink);font:inherit;overflow-wrap:anywhere}
+.bb-card[data-kind="letE"]{border-style:dashed}.bb-card[data-crossed="true"]{border:3px solid var(--pm-accent)}.bb-card[data-kind="letE"][data-crossed="true"]{border-style:dashed}
+.bb-card small,.bb-card code{display:block;color:var(--pm-ink);white-space:pre-wrap}.bb-residual{grid-column:1/-1;border-left:3px dashed var(--pm-accent);padding:1rem;background:var(--pm-surface);overflow-wrap:anywhere}
+[data-binder-blocks] pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:18rem;overflow:auto}[data-binder-blocks] :is(button,select){min-height:44px;max-width:100%}[data-binder-blocks] input[type="range"]{width:10rem;min-height:44px}
+[data-block-inspector]{padding:1rem 0;overflow-wrap:anywhere}[data-block-inspector]:focus-visible{outline:2px solid var(--pm-accent)}
+@media(max-width:650px){.bb-diagram{grid-template-columns:minmax(0,1fr)}}
