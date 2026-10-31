@@ -1,12 +1,13 @@
 (function(host){
  'use strict';
  const el=(tag,text)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;return e;};
- function draw(container,{scene,onSelect,onExpand,isCurrent}){
+ function draw(container,{scene,onSelect,onExpand,isCurrent,occurrenceLabel='source'}){
   const expression=el('div');expression.className='tn-expression';expression.tabIndex=0;expression.setAttribute('role','group');expression.setAttribute('aria-label','Recoverable type notation');
   const punctuation=text=>el('span',text),button=(text,slots,label)=>{const b=el('button',text);b.type='button';b.className='tn-atom';b.dataset.tnPick=JSON.stringify(slots);b.setAttribute('aria-label',label);b.title=label;b.onclick=()=>{if(isCurrent())onSelect(slots);};return b;};
   function render(node){
    const group=el('span');group.className='tn-term';group.dataset.tnKind=node.kind;
-   const pick=button(node.form==='absolute'?'|':node.label,node.slots,node.label+(node.signature?' · '+node.signature.name:'')+' · '+node.rawKind+' · '+(node.hiddenPorts?.length||0)+' retained arguments'+(node.metadata?' · metadata retained':''));
+   const pick=button(node.form==='absolute'?'|':node.label+(node.labelTruncated?'…':''),node.slots,node.label+(node.labelTruncated?' · label clipped; constructor payload retained':'')+(node.signature?' · '+node.signature.name:'')+' · '+node.rawKind+' · '+(node.hiddenPorts?.length||0)+' retained arguments'+(node.metadata?' · metadata retained':''));
+   if(node.rawKind==='bvar')pick.classList.add('tn-variable');
    const parts=node.children.map(c=>render(c.value));
    if(node.kind==='notation'&&node.form==='binary'){group.append(punctuation('('),parts[0],pick,parts[1],punctuation(')'));}
    else if(node.kind==='notation'&&node.form==='prefix'){group.append(pick,punctuation('('),parts[0],punctuation(')'));}
@@ -21,7 +22,7 @@
   }
   expression.append(render(scene.root));container.append(expression);
   const note=el('p','Select a symbol to inspect its compiled region. Use + to open a frontier in place. Type and instance arguments remain in the notation record.');note.className='tn-caption';container.append(note);
-  const counts=el('p',scene.stats.nodes+' notation objects · '+scene.stats.retained+' source occurrences retained in records · '+scene.stats.hidden+' collapsed.');counts.className='tn-caption';container.append(counts);
+  const counts=el('p',scene.stats.nodes+' notation objects · '+scene.stats.retained+' '+occurrenceLabel+' occurrences retained in records · '+scene.stats.hidden+' collapsed.');counts.className='tn-caption';container.append(counts);
   const root=scene.root,ports=[...(root.hiddenPorts||[]),...(root.foldedPorts||[])].sort((a,b)=>a.slot-b.slot);
   if(ports.length){
    const panel=el('div');panel.className='tn-ports';panel.dataset.tnPorts='';panel.append(el('h5','Retained arguments of this symbol'));let page=0;

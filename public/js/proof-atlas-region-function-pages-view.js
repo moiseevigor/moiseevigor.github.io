@@ -31,8 +31,14 @@
     policyOptions();
     let disposed = false, lease = null, wanted = null, current = null, controller = null, fieldController = null;
     let version = 0, fieldVersion = 0, activeCall = selectedCall, requestedCall = selectedCall, loading = false, scene = null, sourceTarget = null;
+    let notationWanted = false, notationCursor = null, notationScene = null, notationController = null, notationVersion = 0, notationLoading = false, readCurrentNotation = null;
     const live = value => !disposed && value === version;
+    function retireNotation() {
+      notationVersion++; notationController?.abort(); notationController = null; notationCursor?.dispose(); notationCursor = null; notationScene = null; notationLoading = false;
+    }
     function retire() {
+      retireNotation();
+      readCurrentNotation = null;
       version++; fieldVersion++; controller?.abort(); fieldController?.abort(); lease?.dispose(); lease = null; current = null; scene = null; sourceTarget = null;
       ports.replaceChildren(); fields.replaceChildren(); sourceBox.replaceChildren(); evidence.replaceChildren(); componentSelect.replaceChildren();
       bindingList.hidden = true; loadCalls.disabled = true;
@@ -51,6 +57,8 @@
     }
     async function navigate(component, slots = [], focus = false) {
       if (!lease?.neighborhood || disposed) return;
+      retireNotation();
+      readCurrentNotation = null;
       fieldController?.abort(); fieldController = new AbortController();
       const value = version, field = ++fieldVersion, owner = lease;
       loading = true; scene = null; sourceTarget = null; fields.replaceChildren(); sourceBox.replaceChildren(); componentSelect.value = component;
@@ -65,10 +73,61 @@
           else navigate(address.component, address.route.slots, true);
         });
         const detail = el('details'); detail.append(el('summary', 'Exact computed address'), el('pre', JSON.stringify(cut.root.address, null, 2)));
-        fields.replaceChildren(view, detail);
+        const modes = el('div', undefined, 'an-controls'), notation = el('div'), notationStatus = el('p');
+        const readNotation = button('Read field notation', () => openNotation()), constructors = button('Constructor fields', () => {
+          notationWanted = false; retireNotation(); notation.hidden = true; notationStatus.textContent = ''; view.hidden = false;
+          readNotation.disabled = false; constructors.disabled = true; view.focus({ preventScroll: true });
+        });
+        notation.dataset.regionFunctionNotation = ''; notation.hidden = true; notationStatus.dataset.regionFunctionNotationStatus = ''; notationStatus.setAttribute('role', 'status');
+        modes.append(readNotation, constructors); constructors.disabled = true;
+        fields.replaceChildren(modes, notationStatus, notation, view, detail);
+        const currentField = () => live(value) && field === fieldVersion && owner === lease;
+        function drawNotation(next, request) {
+          notationScene = next; notation.replaceChildren();
+          host.ProofAtlasTypeNotationView.draw(notation, { scene: next, occurrenceLabel: 'computed',
+            isCurrent: () => currentField() && notationWanted && !notationLoading && request === notationVersion,
+            onSelect: path => navigate(component, path, true),
+            onExpand: path => expandNotation(path) });
+        }
+        async function expandNotation(path) {
+          if (!currentField() || notationLoading || !notationCursor || !notationScene) return;
+          const request = ++notationVersion, previous = notationScene, cursor = notationCursor; notationLoading = true;
+          notationStatus.textContent = 'Opening the selected notation frontier…';
+          try {
+            const next = await cursor.expand(previous, path, { signal: notationController.signal });
+            if (!currentField() || request !== notationVersion) return;
+            drawNotation(next, request); notationStatus.textContent = 'The surrounding inspected expression is retained. Counts belong to this computed component.';
+          } catch (error) {
+            if (currentField() && request === notationVersion) { drawNotation(previous, request); notationStatus.textContent = 'Frontier unchanged: ' + error.message; }
+          } finally {
+            if (currentField() && request === notationVersion) {
+              notationLoading = false;
+              [...notation.querySelectorAll('[data-tn-pick]')].find(button => button.dataset.tnPick === JSON.stringify(path))?.focus({ preventScroll: true });
+            }
+          }
+        }
+        async function openNotation() {
+          if (!currentField() || notationLoading) return;
+          notationWanted = true; const request = ++notationVersion; notationLoading = true;
+          notationController?.abort(); notationController = new AbortController();
+          notationCursor?.dispose(); notationCursor = null; notationScene = null; notation.replaceChildren();
+          readNotation.disabled = true; constructors.disabled = false; notation.hidden = false; view.hidden = true;
+          notationStatus.textContent = 'Loading recoverable notation through bounded pages…';
+          try {
+            if (!host.ProofAtlasTypeNotationView || !owner.openNotation) throw Error('Optional notation component unavailable');
+            const cursor = await owner.openNotation(component, slots, { signal: notationController.signal });
+            if (!currentField() || request !== notationVersion) { cursor.dispose(); return; }
+            notationCursor = cursor; drawNotation(cursor.scene, request);
+            notationStatus.textContent = 'Notation of the recorded expression. Type and instance arguments remain available; no new typing judgment.';
+          } catch (error) {
+            if (currentField() && request === notationVersion) { notationWanted = false; notation.hidden = true; view.hidden = false; readNotation.disabled = false; constructors.disabled = true; notationStatus.textContent = 'Notation unavailable: ' + error.message + '. Constructor fields remain available.'; }
+          } finally { if (currentField() && request === notationVersion) notationLoading = false; }
+        }
+        readCurrentNotation = openNotation;
         const m = owner.manifest;
         status.textContent = 'Recorded closed typing and source recovery: PASS. ' + (m.boundaryInputs ?? m.independentInputs) + ' supplied inputs; ' + (m.adapterInputs ? m.adapterInputs + ' additional adapter functions; ' : '') + (m.boundaryPositions - (m.boundaryInputs ?? m.independentInputs)) + ' fixed boundary positions. Original Γ' + m.context.original.length + ' → retained Γ' + m.context.reduced.length + '. Fields show syntax and binding only.';
-        if (focus) view.focus({ preventScroll: true });
+        if (notationWanted) await openNotation();
+        if (focus) (notationWanted && !notation.hidden ? notation.querySelector('.tn-expression') : view)?.focus({ preventScroll: true });
       } catch (error) { if (live(value) && field === fieldVersion) { scene = null; status.textContent = 'Computed fields unavailable: ' + error.message + '. Retry preserves the original source graph.'; } }
       finally { if (live(value) && field === fieldVersion) loading = false; }
     }
@@ -124,7 +183,7 @@
     ruleSelect.onchange=()=>{profile=ruleSelect.value==='adapters'?adapterProfile:directProfile;policyOptions();choose('all-boundary-positions');};
     select.onchange = () => choose(select.value); componentSelect.onchange = () => navigate(componentSelect.value);
     requestedCall = undefined; markCall(selectedCall);
-    return { markCall, async selectCase(id, index = null, field = 'domain', tail = [], rule = null) {
+    return { markCall, async showNotation() { if (!scene || !readCurrentNotation) return false; await readCurrentNotation(); return !!notationScene; }, async selectCase(id, index = null, field = 'domain', tail = [], rule = null) {
       if(rule!==null){const next=rule==='adapters'?adapterProfile:rule==='direct'?directProfile:null;if(!next){retire();loading=false;status.textContent='The requested interface rule is unavailable.';return false;}profile=next;ruleSelect.value=rule;policyOptions();}
       const opening=choose(id),ownVersion=version;await opening; if(!live(ownVersion) || !lease) return false;
       if(index === null) return true;
@@ -134,7 +193,8 @@
       if(!address){scene=null;fields.replaceChildren();sourceBox.replaceChildren();sourceTarget=null;status.textContent='The requested computed binding field is unavailable in this record.';return false;}
       if(!Array.isArray(tail)||tail.length+address.route.slots.length>512||!tail.every(slot=>Number.isInteger(slot)&&slot>=0&&slot<3)){scene=null;fields.replaceChildren();sourceBox.replaceChildren();sourceTarget=null;status.textContent='The requested computed field path is outside its bounds.';return false;}
       await navigate(address.component,[...address.route.slots,...tail]);return !disposed && !!scene;
-    }, state: () => ({ status: disposed ? 'disposed' : lease ? lease.manifest.status === 'PASS' ? 'ready' : 'kernel-rejected' : current ? 'loading' : 'unavailable', loading, rule:ruleSelect.value, case: current?.id || null, activeCall, selection: scene?.root.address || null, sourceTarget, lease: lease?.state() || null }),
+    }, state: () => ({ status: disposed ? 'disposed' : lease ? lease.manifest.status === 'PASS' ? 'ready' : 'kernel-rejected' : current ? 'loading' : 'unavailable', loading, rule:ruleSelect.value, case: current?.id || null, activeCall, selection: scene?.root.address || null, sourceTarget, lease: lease?.state() || null,
+      notation: notationWanted ? { loading: notationLoading, owner: notationScene?.root.origin || null, stats: notationScene?.stats || null, lease: notationCursor?.state() || null } : null }),
       dispose: () => { if (disposed) return; retire(); disposed = true; root.replaceChildren(); } };
   }
   host.ProofAtlasRegionFunctionPagesView = { mount };

@@ -1,5 +1,9 @@
-.tn-expression { max-width: 50rem; padding: .8rem; margin-block: 1rem; border: 1px solid var(--pm-accent); border-radius: 3px; background: var(--pm-surface); font: 1.1rem/2.8 var(--serif); overflow-wrap: anywhere; }
-.tn-expression .tn-atom { font: inherit; line-height: 1.5; vertical-align: baseline; background: transparent; color: inherit; border: 0; border-bottom: 1px dotted var(--pm-muted); border-radius: 2px; min-width: 2.5rem; min-height: 2.75rem; padding: .2rem .3rem; margin: .1rem; overflow-wrap: anywhere; max-width: 100%; white-space: normal; }
+.tn-expression { max-width: 50rem; padding: .8rem; margin-block: 1rem; border: 1px solid var(--pm-accent); border-radius: 3px; background: var(--pm-surface); font: 1.15rem/1.8 var(--serif); overflow-wrap: anywhere; }
+/* Inline mathematical tokens keep their natural text widths. Separate port and
+   expansion controls retain their full-size targets. */
+.tn-expression .tn-atom { font: inherit; line-height: 1.5; vertical-align: baseline; background: transparent; color: inherit; border: 0; border-bottom: 1px dotted var(--pm-muted); border-radius: 2px; min-width: 0; min-height: 2.75rem; padding: .1rem .12rem; margin: 0; overflow-wrap: anywhere; max-width: 100%; white-space: normal; }
+:root .proof-atlas-theme .tn-expression .tn-atom { font-family: var(--serif); }
+.tn-expression .tn-variable { font-style: italic; }
 .tn-expression .tn-atom:hover { background: var(--bg); border-bottom-color: var(--pm-accent); }
 .tn-expression .tn-metadata { font: .8rem/1.5 var(--sans); color: var(--pm-muted); }
 .tn-expression .tn-expand { min-width: 2.75rem; min-height: 2.75rem; margin: .1rem; padding: .2rem .5rem; font: 1rem/1.5 var(--sans); color: var(--text); background: var(--bg); border: 1px solid var(--pm-muted); border-radius: 3px; }

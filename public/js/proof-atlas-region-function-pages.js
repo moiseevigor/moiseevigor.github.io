@@ -20,7 +20,7 @@
     const adapted = d.adapterRule === 'explicit-function/1';
     const base = adapted ? '/public/data/proof-atlas/region-adapter-function-pages/' : expected.edition === 'dependent-region-controls' ? '/public/data/proof-atlas/dependent-region-function-pages/' : '/public/data/proof-atlas/region-function-pages/';
     const pages = new Map(), indices = new Map();
-    let disposed = false, active = false, pending = null;
+    let disposed = false, active = false, pending = null, notationLease = null;
     const stats = { pageLoads: 0, indexLoads: 0, evictions: 0, peakCachedRows: 0, peakCachedBytes: 0, peakIndexPages: 0 };
     const live = current => { if (signal?.aborted || current?.aborted) throw signal?.reason || current.reason || Error('Navigation cancelled'); demand(!disposed, 'disposed'); };
     async function read(ref, extension, cap, current) {
@@ -53,8 +53,8 @@
     }
     const sourceAddress = anchor => freeze({ namespace: 'source-expression', name: expected.name,
       indexSha256: expected.indexSha256, sourceSha256: expected.sourceSha256, node: anchor.node, route: copy(anchor.route) });
-    const state = () => ({ ...stats, status: m.status, cachedRows: [...pages.values()].reduce((n, page) => n + page.value.nodes.length, 0), cachedPages: pages.size, indexPages: indices.size, rowLimit: 64, indexLimit: 2, nodeCount: m.nodeCount, disposed, activeOperation: active, pendingOperations: pending ? 1 : 0, fullTableArchiveRequests: 0 });
-    const dispose = () => { disposed = true; pending?.reject(Error('Region function pages: disposed')); pending = null; pages.clear(); indices.clear(); };
+    const state = () => ({ ...stats, status: m.status, cachedRows: [...pages.values()].reduce((n, page) => n + page.value.nodes.length, 0), cachedPages: pages.size, indexPages: indices.size, rowLimit: 64, indexLimit: 2, nodeCount: m.nodeCount, disposed, activeOperation: active, pendingOperations: pending ? 1 : 0, fullTableArchiveRequests: 0, ...(notationLease ? { notation: notationLease.state() } : {}) });
+    const dispose = () => { disposed = true; pending?.reject(Error('Region function pages: disposed')); pending = null; notationLease?.dispose(); notationLease = null; pages.clear(); indices.clear(); };
     if (m.status === 'KERNEL_REJECTED') {
       demand(m.nodeCount === 0 && Array.isArray(m.components) && m.components.length === 0 && Array.isArray(m.bindings) && m.bindings.length === 0 && m.members.includes(m.rejection?.call) && nat(m.rejection.slot) && m.rejection.slot <= 64 && m.rejection.kernelInputTypeNonconversion === 'PASS' && anchorValid(m.rejection.source), 'recorded rejection');
       return Object.freeze({ manifest: m, state, dispose, rejectionAddress: () => { live(); return sourceAddress(m.rejection.source); } });
@@ -143,7 +143,33 @@
         return N.createPaged(id => row(id, options.signal), roots, address(component, id, selectedPath), m.context[owners[component]], sourceAddress(m.sourceAnchor), options);
       }, options.signal);
     }
-    return Object.freeze({ manifest: m, roots: freeze(roots), bindings: freeze(bindings), neighborhood,
+    async function openNotation(component, path = [], options = {}) {
+      live(options.signal);
+      const engine = node ? require('./proof-atlas-paged-notation') : host.ProofAtlasPagedNotation;
+      const catalog = options.catalog || host.PROOF_ATLAS_TYPE_NOTATION, registry = options.registry || host.PROOF_ATLAS_PAGED_NOTATION_BINDINGS;
+      demand(engine && catalog && registry?.format === 'ProofAtlasPagedNotationBindings/1' && Array.isArray(registry.registries) && registry.registries.length <= 16, 'notation catalogue binding unavailable');
+      const componentIndex = m.components.findIndex(c => c.component === component); demand(componentIndex >= 0, 'notation component');
+      demand(hex(registry.catalogueObjectSha256) && hex(registry.environmentSha256) && await A.digest(new TextEncoder().encode(JSON.stringify(catalog))) === registry.catalogueObjectSha256 && registry.catalogueNativeSha256 === catalog.nativeSha256 && registry.extraNativeSha256 === catalog.extraNativeSha256, 'notation catalogue identity');
+      const binding = registry.registries.find(r => r.nativeInventorySha256 === d.nativeInventorySha256);
+      demand(binding && ['core', 'full'].includes(binding.mode) && Array.isArray(binding.sources) && binding.sources.length <= 256, 'native notation environment');
+      const source = binding.sources.find(s => sourceEqual(s.source, expected)); demand(source && Array.isArray(source.context) && source.context.length === m.commonContext.length, 'notation original context');
+      source.context.forEach((frame, i) => demand(same({ node: frame.node, kind: frame.kind, route: frame.route }, m.commonContext[i]) && typeof frame.name === 'string' && frame.name.length <= 4096, 'original compiled binder name'));
+      const frames = owners[component] === 'original' ? source.context : owners[component] === 'reduced' ? m.keptContextSlots.map(i => source.context[i]) : [];
+      demand(Array.isArray(registry.coreNames) && registry.coreNames.length === 20 && new Set(registry.coreNames).size === 20, 'core signature inventory');
+      const activeCatalog = binding.mode === 'full' ? catalog : { ...catalog, entries: catalog.entries.filter(e => registry.coreNames.includes(e.name)) };
+      const owner = { namespace: 'region-input-notation', sourceIndexSha256: expected.indexSha256, nativeInventorySha256: d.nativeInventorySha256, nativeCaseSha256: d.nativeCaseSha256, manifestSha256: d.sha256, case: m.id, component, typeRoot: componentIndex,
+        catalogueObjectSha256: registry.catalogueObjectSha256, environmentSha256: registry.environmentSha256 };
+      notationLease?.dispose();
+      const next = engine.open({ read: (id, request) => run(() => row(id, request.signal), request.signal), nodeCount: n, roots: m.components.map(c => c.root), owner, catalog: activeCatalog,
+        context: frames.map(frame => ({ name: frame.name, address: sourceAddress(frame) })), signal: options.signal });
+      notationLease = next;
+      try {
+        const scene = await next.inspect(path, { signal: options.signal }); live(options.signal);
+        return Object.freeze({ scene, expand: (current, slots, request = {}) => next.expand(current, slots, request), state: next.state,
+          dispose: () => { next.dispose(); if (notationLease === next) notationLease = null; } });
+      } catch (error) { next.dispose(); if (notationLease === next) notationLease = null; throw error; }
+    }
+    return Object.freeze({ manifest: m, roots: freeze(roots), bindings: freeze(bindings), neighborhood, openNotation,
       readNode: (id, { signal: current } = {}) => run(() => row(id, current), current), state, dispose });
   }
   const api = { open, limits, base, sourceEqual };
