@@ -114,6 +114,24 @@ An individual Level DAG is bounded to 4,096 nodes and depth 512, with bounded de
 
 ## 2. Scoped composition and scale
 
+
+<details class="atlas-evidence-entry" data-evidence-order="102" markdown="1">
+<summary>Captured source templates: recovery, scope and composition</summary>
+
+<span id="source-template-recovery"></span>
+
+## Captured source templates: recovery, scope and composition
+
+A constructor certificate over actual `Lean.Expr` values relates a source $E$ to its template $T$ and recovery map $\sigma$. It proves $\operatorname{plug}_{\sigma}(T)=E$, scope preservation under explicit binders, composition of maps and exact weighted occurrence accounting. Capture images must have no loose de Bruijn references; named external variables retain their separate context ownership. An enclosing bound variable cannot be replaced by an argument-free capture.
+
+The finite bridge covers all three recorded Riccati source lambdas, four preceding authored native controls and one all-twelve-constructor data control. All eight pass context opening, literal native recovery and 1,557 constructor-row roundtrips. The 39 proof declarations depend on at most `propext`. Eleven damaged model records and three altered Lean certificates are refused. The amplified shared control has 167 reachable template nodes; it is authored data, not a massive AI proof benchmark.
+
+For the first Riccati lambda, the template has 81 occurrences and two capture variables used once each. Its two recovery images have 13 occurrences each: $81-2+13+13=105$. These are compiled expression counts, including implicit arguments and type fields. The map is necessary: identical templates can recover different sources under different maps. These laws do not establish typing preservation, general executable/codec refinement, semantic compression or measured comprehension.
+
+[Visual rule](/projects/proof-atlas/manual/paged-network/#source-recovery-law) · [Definitions and checks](/research/proof-atlas/source-template-laws/README.md) · [Lean laws](/research/proof-atlas/source-template-laws/Recovery.lean) · [Native verification](/research/proof-atlas/source-template-laws/verification.json.gz) · [Evidence bundle](/research/proof-atlas/source-template-laws/evidence.json.gz)
+
+</details>
+
 <details class="atlas-evidence-entry" data-evidence-order="1" markdown="1">
 <summary>Binder-telescope abstraction</summary>
 
