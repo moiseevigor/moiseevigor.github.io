@@ -17,7 +17,8 @@
   const anchorValid = anchor => nat(anchor?.node) && pathValid(anchor.route);
   async function open(input, expectedSource, { fetcher = host.fetch.bind(host), signal } = {}) {
     const d = freeze(copy(input)), expected = freeze(copy(expectedSource));
-    const base = expected.edition === 'dependent-region-controls' ? '/public/data/proof-atlas/dependent-region-function-pages/' : '/public/data/proof-atlas/region-function-pages/';
+    const adapted = d.adapterRule === 'explicit-function/1';
+    const base = adapted ? '/public/data/proof-atlas/region-adapter-function-pages/' : expected.edition === 'dependent-region-controls' ? '/public/data/proof-atlas/dependent-region-function-pages/' : '/public/data/proof-atlas/region-function-pages/';
     const pages = new Map(), indices = new Map();
     let disposed = false, active = false, pending = null;
     const stats = { pageLoads: 0, indexLoads: 0, evictions: 0, peakCachedRows: 0, peakCachedBytes: 0, peakIndexPages: 0 };
@@ -41,7 +42,7 @@
     }
     demand(sourceEqual(d.source, expected) && hex(expected.indexSha256) && hex(expected.sourceSha256) && hex(d.nativeInventorySha256) && hex(d.nativeCaseSha256), 'source/native identity');
     const m = await read(d, 'manifest', limits.manifestBytes, signal);
-    demand(m.format === 'ProofAtlasRegionFunctionPages/1' && m.id === d.id && m.status === d.status && sourceEqual(m.source, expected) && m.nativeInventorySha256 === d.nativeInventorySha256 && m.nativeCaseSha256 === d.nativeCaseSha256, 'manifest owner');
+    demand(m.format === (adapted ? 'ProofAtlasRegionFunctionPages/2' : 'ProofAtlasRegionFunctionPages/1') && (!adapted || m.adapterRule === d.adapterRule) && m.id === d.id && m.status === d.status && sourceEqual(m.source, expected) && m.nativeInventorySha256 === d.nativeInventorySha256 && m.nativeCaseSha256 === d.nativeCaseSha256, 'manifest owner');
     demand(Array.isArray(m.members) && m.members.length > 0 && m.members.length <= 8 && new Set(m.members).size === m.members.length && m.members.every(nat) && same(m.members, d.members), 'region members');
     demand(Array.isArray(m.order) && m.order.length === m.members.length && new Set(m.order).size === m.order.length && m.order.every(id => m.members.includes(id)), 'region order');
     demand(anchorValid(m.sourceAnchor) && Array.isArray(m.commonContext) && m.commonContext.length <= 512, 'original context');
@@ -108,14 +109,20 @@
       nativeInventorySha256: d.nativeInventorySha256, nativeCaseSha256: d.nativeCaseSha256, manifestSha256: d.sha256, case: m.id, component, node, route: { root: component, slots: [...slots] } });
     const bindings = []; let binder = roots['function.original'], slots = [];
     for (const binding of m.bindings) {
-      const tuple = await row(binder, signal), input = binding.kind === 'input';
-      demand((input || binding.kind === 'result') && m.members.includes(binding.call) && (input ? nat(binding.slot) && binding.slot <= 64 : !Object.hasOwn(binding, 'slot')) && anchorValid(binding.source), 'binding source');
+      const tuple = await row(binder, signal), adapter = binding.kind === 'adapter', input = binding.kind === 'input' || adapter;
+      demand((input || binding.kind === 'result') && m.members.includes(binding.call) && (input ? nat(binding.slot) && binding.slot <= 64 : !Object.hasOwn(binding, 'slot')), 'binding position');
+      if (adapter) demand(adapted && !Object.hasOwn(binding, 'source') && anchorValid(binding.inputSource) && anchorValid(binding.producerSource) && nat(binding.adapterIndex) && binding.originalSpecialization === 'identity' && binding.kernelInputTypeNonconversion === 'PASS', 'computed adapter and original connection');
+      else demand(anchorValid(binding.source), 'binding source');
       demand(binding.node === binder && same(binding.slots, slots) && tuple[0] === (input ? 6 : 8), 'binding/function path');
+      if (adapter) demand((await row(tuple[1][0], signal))[0] === 7, 'adapter function domain');
       bindings.push(freeze({ ...binding, binder: address('function.original', binder, slots), domain: address('function.original', tuple[1][0], [...slots, 0]),
-        ...(input ? {} : { value: address('function.original', tuple[1][1], [...slots, 1]) }), original: sourceAddress(binding.source) }));
+        ...(input ? {} : { value: address('function.original', tuple[1][1], [...slots, 1]) }),
+        ...(adapter ? { originalInput: sourceAddress(binding.inputSource), originalProducer: sourceAddress(binding.producerSource) } : { original: sourceAddress(binding.source) }) }));
       slots.push(input ? 1 : 2); binder = tuple[1][input ? 1 : 2];
     }
-    demand(bindings.filter(binding => binding.kind === 'input').length === m.independentInputs && bindings.filter(binding => binding.kind === 'result').length === m.members.length && same(bindings.filter(binding => binding.kind === 'result').map(binding => binding.call), m.order), 'input/result counts and order');
+    const adapterBindings = bindings.filter(binding => binding.kind === 'adapter'), boundaryInputs = bindings.filter(binding => binding.kind === 'input').length;
+    demand(boundaryInputs + adapterBindings.length === m.independentInputs && bindings.filter(binding => binding.kind === 'result').length === m.members.length && same(bindings.filter(binding => binding.kind === 'result').map(binding => binding.call), m.order), 'input/result counts and order');
+    if (adapted) demand(m.boundaryInputs === boundaryInputs && m.adapterInputs === adapterBindings.length && adapterBindings.every((binding, i) => binding.adapterIndex === i), 'additional adapter inventory');
     for (const component of m.components) demand((await row(component.root, signal))[4] <= m.context[component.scope].length, 'component root scope');
     function start(task) {
       active = true;

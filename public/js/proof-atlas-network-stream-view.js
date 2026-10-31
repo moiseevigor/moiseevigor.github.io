@@ -173,13 +173,13 @@
   if(!record||slot>record.arguments){status.textContent='Source link unavailable: input is outside this recorded call.';return;}
   showPorts(id);await inspect(id,slot,rawInput===null);
   if(policy){
-   const registry=[...(host.PROOF_ATLAS_REGION_FUNCTION_PAGES?.profiles||[]),...(host.PROOF_ATLAS_DEPENDENT_REGION_FUNCTION_PAGES?.profiles||[])],native=registry.find(p=>host.ProofAtlasRegionFunctionPages?.sourceEqual(p.source,descriptor.source)),candidate=native?.cases.find(c=>c.id===policy),caseHash=linkParams.get('nativeCase');
+   const rule=linkParams.get('rule')||'direct',registry=rule==='adapters'?(host.PROOF_ATLAS_REGION_ADAPTER_FUNCTION_PAGES?.profiles||[]):rule==='direct'?[...(host.PROOF_ATLAS_REGION_FUNCTION_PAGES?.profiles||[]),...(host.PROOF_ATLAS_DEPENDENT_REGION_FUNCTION_PAGES?.profiles||[])]:[],native=registry.find(p=>host.ProofAtlasRegionFunctionPages?.sourceEqual(p.source,descriptor.source)),candidate=native?.cases.find(c=>c.id===policy),caseHash=linkParams.get('nativeCase');
    if(!candidate||(caseHash&&candidate.nativeCaseSha256!==caseHash)){status.textContent='The original source is selected; the linked computed-function record is unavailable.';return;}
    const binding=linkParams.get('binding'),field=linkParams.get('field')||'domain';
    if(binding!==null&&(!/^(0|[1-9]\d*)$/.test(binding)||Number(binding)>511)){status.textContent='The original source is selected; the computed binding link is outside its bounds.';return;}
    const within=linkParams.get('within');if(within!==null&&(within.length>1023||!/^([012])(\.[012])*$/.test(within))){status.textContent='The original source is selected; the computed field path is outside its bounds.';return;}
-   if(!['binder','domain','value'].includes(field)||(within!==null&&binding===null)){status.textContent='The original source is selected; the computed binding field is unavailable.';return;}
-   regionFunctionWanted=true;refreshRegionFunction();await regionFunctionView?.selectCase(policy,binding===null?null:Number(binding),field,within===null?[]:within.split('.').map(Number));
+   if(!['binder','domain','value','actual','required'].includes(field)||(within!==null&&binding===null)){status.textContent='The original source is selected; the computed binding field is unavailable.';return;}
+   regionFunctionWanted=true;refreshRegionFunction();await regionFunctionView?.selectCase(policy,binding===null?null:Number(binding),field,within===null?[]:within.split('.').map(Number),rule);
   }
  })().catch(error=>{status.textContent='Source link unavailable: '+error.message;});
 })(window);

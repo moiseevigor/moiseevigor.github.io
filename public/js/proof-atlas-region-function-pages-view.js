@@ -7,15 +7,19 @@
   function mount(root, { descriptor, selectedCall = null, onCalls = () => {}, onSource = () => {} }) {
     const box = el('section', undefined, 'fp-reader'); box.dataset.regionFunctionReader = ''; root.replaceChildren(box);
     box.append(el('h3', 'A source-use region as a checked function'));
-    const profile = [...(host.PROOF_ATLAS_REGION_FUNCTION_PAGES?.profiles || []), ...(host.PROOF_ATLAS_DEPENDENT_REGION_FUNCTION_PAGES?.profiles || [])].find(item => P?.sourceEqual(item.source, descriptor.source));
+    const directProfile = [...(host.PROOF_ATLAS_REGION_FUNCTION_PAGES?.profiles || []), ...(host.PROOF_ATLAS_DEPENDENT_REGION_FUNCTION_PAGES?.profiles || [])].find(item => P?.sourceEqual(item.source, descriptor.source));
+    const adapterProfile = host.PROOF_ATLAS_REGION_ADAPTER_FUNCTION_PAGES?.profiles.find(item => P?.sourceEqual(item.source, descriptor.source));
+    let profile = directProfile;
     if (!P || !V || !profile) {
       box.append(el('p', 'No checked region function is recorded for this source packet. Original source geometry remains available.'));
       return { markCall: () => {}, state: () => ({ status: 'unavailable' }), dispose: () => root.replaceChildren() };
     }
+    const ruleLabel=el('label','Interface rule '),ruleSelect=el('select');ruleSelect.dataset.regionFunctionRule='';ruleLabel.append(ruleSelect);
+    for(const [id,text] of [['direct','Direct inputs'],...(adapterProfile?[['adapters','Additional adapter inputs']]:[])]){const option=el('option',text);option.value=id;ruleSelect.append(option);}
     const controls = el('div', undefined, 'an-controls'), label = el('label', 'Recorded input policy '), select = el('select');
     select.dataset.regionFunctionCase = ''; label.append(select);
     const componentLabel = el('label', 'Computed component '), componentSelect = el('select'); componentSelect.dataset.regionFunctionComponent = ''; componentLabel.append(componentSelect);
-    const retry = button('Retry region function', () => choose(wanted)); controls.append(label, componentLabel, retry);
+    const retry = button('Retry region function', () => choose(wanted)); controls.append(ruleLabel, label, componentLabel, retry);
     const status = el('p'), ports = el('div', undefined, 'fp-ports'), fields = el('div'), sourceBox = el('div'), evidence = el('details');
     const bindingList = el('details'), bindingSummary = el('summary', 'Inputs, computations and source portals'), bindingDescription = el('p');
     bindingList.dataset.regionFunctionBindings = ''; bindingList.append(bindingSummary, bindingDescription, ports);
@@ -23,7 +27,8 @@
     status.setAttribute('role', 'status'); status.dataset.regionFunctionStatus = '';
     box.append(el('p', 'Recorded region: calls ' + profile.members.join(', ') + '. Original, reduced and closed scopes remain separate. Inspecting a field adds no new typing judgment and supplies no new source-use edge.'), controls, status, loadCalls, fields, bindingList, sourceBox, evidence);
     const labels = { 'proof-arguments': 'Proof arguments', 'proof-and-function-inputs': 'Proof arguments and proof-valued heads', 'all-boundary-positions': 'All boundary positions' };
-    for (const item of profile.cases) { const option = el('option', labels[item.id] + (item.status === 'KERNEL_REJECTED' ? ' · kernel rejected' : '')); option.value = item.id; select.append(option); }
+    function policyOptions(){select.replaceChildren();for (const item of profile.cases) { const option = el('option', labels[item.id] + (item.status === 'KERNEL_REJECTED' ? ' · kernel rejected' : '')); option.value = item.id; select.append(option); }}
+    policyOptions();
     let disposed = false, lease = null, wanted = null, current = null, controller = null, fieldController = null;
     let version = 0, fieldVersion = 0, activeCall = selectedCall, requestedCall = selectedCall, loading = false, scene = null, sourceTarget = null;
     const live = value => !disposed && value === version;
@@ -62,7 +67,7 @@
         const detail = el('details'); detail.append(el('summary', 'Exact computed address'), el('pre', JSON.stringify(cut.root.address, null, 2)));
         fields.replaceChildren(view, detail);
         const m = owner.manifest;
-        status.textContent = 'Recorded closed typing and source recovery: PASS. ' + m.independentInputs + ' supplied inputs; ' + (m.boundaryPositions - m.independentInputs) + ' fixed boundary positions. Original Γ' + m.context.original.length + ' → retained Γ' + m.context.reduced.length + '. Fields show syntax and binding only.';
+        status.textContent = 'Recorded closed typing and source recovery: PASS. ' + (m.boundaryInputs ?? m.independentInputs) + ' supplied inputs; ' + (m.adapterInputs ? m.adapterInputs + ' additional adapter functions; ' : '') + (m.boundaryPositions - (m.boundaryInputs ?? m.independentInputs)) + ' fixed boundary positions. Original Γ' + m.context.original.length + ' → retained Γ' + m.context.reduced.length + '. Fields show syntax and binding only.';
         if (focus) view.focus({ preventScroll: true });
       } catch (error) { if (live(value) && field === fieldVersion) { scene = null; status.textContent = 'Computed fields unavailable: ' + error.message + '. Retry preserves the original source graph.'; } }
       finally { if (live(value) && field === fieldVersion) loading = false; }
@@ -91,17 +96,19 @@
           return;
         }
         for (const component of m.components) { const option = el('option', component.component + ' · ' + component.scope + ' Γ' + m.context[component.scope].length); option.value = component.component; componentSelect.append(option); }
-        const inputs = loaded.bindings.filter(binding => binding.kind === 'input');
-        bindingList.hidden = false; bindingSummary.textContent = inputs.length + ' supplied inputs · ' + m.members.length + ' result computations';
+        const inputs = loaded.bindings.filter(binding => binding.kind === 'input'), adapters = loaded.bindings.filter(binding => binding.kind === 'adapter');
+        bindingList.hidden = false; bindingSummary.textContent = inputs.length + ' supplied inputs · ' + (adapters.length ? adapters.length + ' additional adapters · ' : '') + m.members.length + ' result computations';
         bindingDescription.textContent = inputs.length ? inputs.length + ' independent input positions. Their domains are inspected inside the recorded function, with earlier binders retained.' : 'This policy supplies no new inputs; it is a fixed-input closure.';
+        if(adapters.length)bindingDescription.textContent+=' Adapters are supplied functions from produced types to required types. Their existence is not inferred. Identity specialization recovers the original source.';
         for (const [i, binding] of loaded.bindings.entries()) {
-          const input = binding.kind === 'input', row = el('div', undefined, 'fp-port');
+          const input = binding.kind === 'input', adapter = binding.kind === 'adapter', row = el('div', undefined, 'fp-port');
           row.dataset.regionFunctionCall = String(binding.call); row.dataset.regionFunctionBinding = String(i);
-          row.append(el('strong', input ? 'Input ' + binding.call + ':' + binding.slot : 'Result call ' + binding.call),
-            button('Inspect ' + (input ? 'input' : 'result') + ' binder ' + i, () => { if (live(value)) navigate(binding.binder.component, binding.binder.route.slots, true); }),
+          row.append(el('strong', adapter ? 'Adapter for input ' + binding.call + ':' + binding.slot : input ? 'Input ' + binding.call + ':' + binding.slot : 'Result call ' + binding.call),
+            button('Inspect ' + (adapter ? 'adapter' : input ? 'input' : 'result') + ' binder ' + i, () => { if (live(value)) navigate(binding.binder.component, binding.binder.route.slots, true); }),
             button('Inspect domain ' + i, () => { if (live(value)) navigate(binding.domain.component, binding.domain.route.slots, true); }));
-          if (!input) row.append(button('Inspect computation ' + binding.call, () => { if (live(value)) navigate(binding.value.component, binding.value.route.slots, true); }));
-          row.append(button('Select original ' + (input ? 'input ' + binding.call + ':' + binding.slot : 'result ' + binding.call), () => { if (live(value)) onSource(binding.call, input ? binding.slot : 0, binding.original, !input); }), sourceLink(binding.original, 'Open exact original occurrence', binding.call, input ? binding.slot : 0, !input));
+          if(adapter){row.append(button('Produced type for adapter '+i,()=>{if(live(value))navigate(binding.domain.component,[...binding.domain.route.slots,0],true);}),button('Required type for adapter '+i,()=>{if(live(value))navigate(binding.domain.component,[...binding.domain.route.slots,1],true);}),button('Select source input for adapter '+i,()=>{if(live(value))onSource(binding.call,binding.slot,binding.originalInput,false);}),sourceLink(binding.originalInput,'Open source input requiring this adapter',binding.call,binding.slot));}
+          if (!input && !adapter) row.append(button('Inspect computation ' + binding.call, () => { if (live(value)) navigate(binding.value.component, binding.value.route.slots, true); }));
+          if(!adapter)row.append(button('Select original ' + (input ? 'input ' + binding.call + ':' + binding.slot : 'result ' + binding.call), () => { if (live(value)) onSource(binding.call, input ? binding.slot : 0, binding.original, !input); }), sourceLink(binding.original, 'Open exact original occurrence', binding.call, input ? binding.slot : 0, !input));
           ports.append(row);
         }
         markPorts();
@@ -114,17 +121,20 @@
       if (profile.members.includes(call)) { if (current) markPorts(); else choose('proof-arguments'); }
       else { retire(); wanted = null; loading = false; select.selectedIndex = -1; retry.disabled = true; status.textContent = 'No recorded region contains source call ' + call + '. Choose an input policy explicitly; the previous computed component is cleared.'; }
     }
+    ruleSelect.onchange=()=>{profile=ruleSelect.value==='adapters'?adapterProfile:directProfile;policyOptions();choose('all-boundary-positions');};
     select.onchange = () => choose(select.value); componentSelect.onchange = () => navigate(componentSelect.value);
     requestedCall = undefined; markCall(selectedCall);
-    return { markCall, async selectCase(id, index = null, field = 'domain', tail = []) {
+    return { markCall, async selectCase(id, index = null, field = 'domain', tail = [], rule = null) {
+      if(rule!==null){const next=rule==='adapters'?adapterProfile:rule==='direct'?directProfile:null;if(!next){retire();loading=false;status.textContent='The requested interface rule is unavailable.';return false;}profile=next;ruleSelect.value=rule;policyOptions();}
       const opening=choose(id),ownVersion=version;await opening; if(!live(ownVersion) || !lease) return false;
       if(index === null) return true;
       const binding = Number.isSafeInteger(index) && index >= 0 ? lease.bindings?.[index] : null;
-      const address = ['binder','domain','value'].includes(field) ? binding?.[field] : null;
+      let address = ['binder','domain','value'].includes(field) ? binding?.[field] : null;
+      if(binding?.kind==='adapter'&&['actual','required'].includes(field))address={...binding.domain,route:{...binding.domain.route,slots:[...binding.domain.route.slots,field==='actual'?0:1]}};
       if(!address){scene=null;fields.replaceChildren();sourceBox.replaceChildren();sourceTarget=null;status.textContent='The requested computed binding field is unavailable in this record.';return false;}
       if(!Array.isArray(tail)||tail.length+address.route.slots.length>512||!tail.every(slot=>Number.isInteger(slot)&&slot>=0&&slot<3)){scene=null;fields.replaceChildren();sourceBox.replaceChildren();sourceTarget=null;status.textContent='The requested computed field path is outside its bounds.';return false;}
       await navigate(address.component,[...address.route.slots,...tail]);return !disposed && !!scene;
-    }, state: () => ({ status: disposed ? 'disposed' : lease ? lease.manifest.status === 'PASS' ? 'ready' : 'kernel-rejected' : current ? 'loading' : 'unavailable', loading, case: current?.id || null, activeCall, selection: scene?.root.address || null, sourceTarget, lease: lease?.state() || null }),
+    }, state: () => ({ status: disposed ? 'disposed' : lease ? lease.manifest.status === 'PASS' ? 'ready' : 'kernel-rejected' : current ? 'loading' : 'unavailable', loading, rule:ruleSelect.value, case: current?.id || null, activeCall, selection: scene?.root.address || null, sourceTarget, lease: lease?.state() || null }),
       dispose: () => { if (disposed) return; retire(); disposed = true; root.replaceChildren(); } };
   }
   host.ProofAtlasRegionFunctionPagesView = { mount };
