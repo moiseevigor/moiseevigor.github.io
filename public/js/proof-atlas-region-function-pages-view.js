@@ -7,7 +7,7 @@
   function mount(root, { descriptor, selectedCall = null, onCalls = () => {}, onSource = () => {} }) {
     const box = el('section', undefined, 'fp-reader'); box.dataset.regionFunctionReader = ''; root.replaceChildren(box);
     box.append(el('h3', 'A source-use region as a checked function'));
-    const profile = host.PROOF_ATLAS_REGION_FUNCTION_PAGES?.profiles.find(item => P?.sourceEqual(item.source, descriptor.source));
+    const profile = [...(host.PROOF_ATLAS_REGION_FUNCTION_PAGES?.profiles || []), ...(host.PROOF_ATLAS_DEPENDENT_REGION_FUNCTION_PAGES?.profiles || [])].find(item => P?.sourceEqual(item.source, descriptor.source));
     if (!P || !V || !profile) {
       box.append(el('p', 'No checked region function is recorded for this source packet. Original source geometry remains available.'));
       return { markCall: () => {}, state: () => ({ status: 'unavailable' }), dispose: () => root.replaceChildren() };
@@ -116,7 +116,15 @@
     }
     select.onchange = () => choose(select.value); componentSelect.onchange = () => navigate(componentSelect.value);
     requestedCall = undefined; markCall(selectedCall);
-    return { markCall, state: () => ({ status: disposed ? 'disposed' : lease ? lease.manifest.status === 'PASS' ? 'ready' : 'kernel-rejected' : current ? 'loading' : 'unavailable', loading, case: current?.id || null, activeCall, selection: scene?.root.address || null, sourceTarget, lease: lease?.state() || null }),
+    return { markCall, async selectCase(id, index = null, field = 'domain', tail = []) {
+      const opening=choose(id),ownVersion=version;await opening; if(!live(ownVersion) || !lease) return false;
+      if(index === null) return true;
+      const binding = Number.isSafeInteger(index) && index >= 0 ? lease.bindings?.[index] : null;
+      const address = ['binder','domain','value'].includes(field) ? binding?.[field] : null;
+      if(!address){scene=null;fields.replaceChildren();sourceBox.replaceChildren();sourceTarget=null;status.textContent='The requested computed binding field is unavailable in this record.';return false;}
+      if(!Array.isArray(tail)||tail.length+address.route.slots.length>512||!tail.every(slot=>Number.isInteger(slot)&&slot>=0&&slot<3)){scene=null;fields.replaceChildren();sourceBox.replaceChildren();sourceTarget=null;status.textContent='The requested computed field path is outside its bounds.';return false;}
+      await navigate(address.component,[...address.route.slots,...tail]);return !disposed && !!scene;
+    }, state: () => ({ status: disposed ? 'disposed' : lease ? lease.manifest.status === 'PASS' ? 'ready' : 'kernel-rejected' : current ? 'loading' : 'unavailable', loading, case: current?.id || null, activeCall, selection: scene?.root.address || null, sourceTarget, lease: lease?.state() || null }),
       dispose: () => { if (disposed) return; retire(); disposed = true; root.replaceChildren(); } };
   }
   host.ProofAtlasRegionFunctionPagesView = { mount };

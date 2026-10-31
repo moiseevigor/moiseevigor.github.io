@@ -17,6 +17,7 @@
   const anchorValid = anchor => nat(anchor?.node) && pathValid(anchor.route);
   async function open(input, expectedSource, { fetcher = host.fetch.bind(host), signal } = {}) {
     const d = freeze(copy(input)), expected = freeze(copy(expectedSource));
+    const base = expected.edition === 'dependent-region-controls' ? '/public/data/proof-atlas/dependent-region-function-pages/' : '/public/data/proof-atlas/region-function-pages/';
     const pages = new Map(), indices = new Map();
     let disposed = false, active = false, pending = null;
     const stats = { pageLoads: 0, indexLoads: 0, evictions: 0, peakCachedRows: 0, peakCachedBytes: 0, peakIndexPages: 0 };
