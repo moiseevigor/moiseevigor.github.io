@@ -1,0 +1,22 @@
+'use strict';
+const fs=require('fs'),path=require('path'),z=require('zlib'),crypto=require('crypto'),assert=require('assert/strict'),cp=require('child_process');process.chdir(path.resolve(__dirname,'../../..'));
+const base='research/proof-atlas/frontier-functions/',sha=b=>crypto.createHash('sha256').update(b).digest('hex'),read=name=>JSON.parse(z.gunzipSync(fs.readFileSync(base+name+'.json.gz')));
+const native=read('native-check'),model=read('model-check'),corpus=read('corpus-candidates'),presentation=read('presentation-check'),production=read('production-check');
+for(const r of[native,model,corpus,presentation,production])assert.equal(r.status,'PASS');
+for(const r of[native,model,corpus,presentation,production])for(const [f,digest]of Object.entries(r.producerFiles||r.files||{}))assert.equal(sha(fs.readFileSync(f)),digest,f);
+assert.equal(model.nativeEvidenceSha256,sha(z.gunzipSync(fs.readFileSync(base+'native-check.json.gz'))));
+assert.equal(model.accepted,8);assert.equal(model.kernelRejected,3);assert.equal(model.rejectedFunctionReconstructions,3);assert.equal(model.rejectedParameterDomains,6);assert.equal(model.sourceHoles,12);assert.equal(model.parameterDomains,12);assert.equal(model.proofPermutationRefused,true);assert.equal(model.sharedOccurrencesPreserved,true);assert.equal(native.nativeRefusals.length,3);
+for(const r of corpus.rows){assert.equal(r.nativeFunctionTyping,'UNAVAILABLE');assert.equal(r.newRootClosureTyping,'UNAVAILABLE');assert.equal(r.sourceCodecRecovery,'PASS');}
+assert.equal(corpus.rows[1].selectedExpanded,'31752787');assert.equal(corpus.rows[1].sourceRows,91424);assert.equal(corpus.rows[1].candidateRows,91374);
+assert.equal(presentation.svgSha256,sha(fs.readFileSync(base+'frontier-functions.svg')));assert.equal(presentation.pngSha256,sha(fs.readFileSync(base+'frontier-functions.png')));assert.equal(presentation.textOverflow,0);assert.equal(presentation.accessibilityViolations,0);
+assert.equal(production.checkerSha256,sha(fs.readFileSync(base+'check-production.cjs')));assert.equal(production.audits.length,4);assert(production.audits.every(a=>a.violations===0));assert.equal(production.programHtmlSha256,sha(fs.readFileSync('_site_production/projects/proof-atlas/program/index.html')));
+cp.execFileSync(process.execPath,[base+'check.cjs'],{stdio:'pipe'});cp.execFileSync(process.execPath,[base+'check-corpus-candidates.cjs'],{stdio:'pipe'});cp.execFileSync(process.execPath,[base+'figure.cjs','--check'],{stdio:'pipe'});
+const local=['README.md','Controls.lean','Frontier.lean','prepare.cjs','verify.py','model.cjs','check.cjs','check-corpus-candidates.cjs','figure.cjs','render.cjs','check-production.cjs','evidence.cjs','frontier-functions.svg','frontier-functions.png',...['native-check','model-check','corpus-candidates','presentation-check','production-check'].map(n=>n+'.json.gz')];
+const files=[...new Set([...Object.keys(native.producerFiles),...local.map(f=>base+f),'docs/proof-atlas-research-program.md'])];
+const report={format:'ProofAtlasFrontierFunctionEvidence/1',status:'PASS',nativeKernelRerun:true,nativeScope:'Authored core-only control packets; eight accepted functions, three candidate-body kernel rejections, three source-metadata refusals',nativeFunctionTermsReconstructed:11,acceptedParameterDomains:12,rejectedParameterDomains:6,
+ corpusScope:{newFunctionTyping:'UNAVAILABLE',newRootClosureTyping:'UNAVAILABLE',sourceCodecRecovery:'PASS',packets:corpus.rows.map(r=>({name:r.source.name,bodyOccurrences:r.selectedExpanded,candidateRows:r.candidateRows,trieVisits:r.trieVisits}))},
+ interface:{kind:'nonoverlapping-source-tree-frontier',completeApplicationRegionBoundary:false,ambientContextGeneralized:false,typeDependencyPolicy:'ordered literal closed-fragment substitution; kernel admission required'},
+ production:{status:'PASS',programHtmlSha256:production.programHtmlSha256,applicationAssetsChanged:false},
+ files:Object.fromEntries(files.map(f=>[f,sha(fs.readFileSync(f))])),limits:['No general verified compiler theorem','No independent arbitrary graph-region interface','No new corpus-function typing','No measured comprehension or semantic compression','No blog update, merge or public deployment']};
+if(process.argv.includes('--check'))assert.deepEqual(read('evidence'),report,'current evidence fingerprints');else fs.writeFileSync(base+'evidence.json.gz',z.gzipSync(Buffer.from(JSON.stringify(report,null,2)+'\n')));
+console.log(JSON.stringify({status:'PASS',nativeFunctions:8,nativeRejections:3,reconstructedTerms:11,corpusCandidates:2,files:files.length}));
