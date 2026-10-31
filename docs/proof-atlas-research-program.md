@@ -135,6 +135,8 @@ A [source-specializing boundary-equation rule](/research/proof-atlas/boundary-co
 5. **Source and elaboration:** surface syntax, tactics, commands, macros and elaborator traces, attached through explicit provenance. Kernel expressions do not reconstruct missing tactic histories.
 6. **Applications:** article correspondence, proof auditing, generated-proof inspection and eventually visually constructed proofs checked by Lean.
 
+A [source-lambda extension](/research/proof-atlas/source-template-inputs/README.md) closes the remaining Riccati candidate by reconstructing three whole source functions and explicitly reordering dependent declarations. All thirty fixed region/policy candidates pass native typing and source recovery; the twenty-nine earlier accepted function graphs remain literally unchanged. Riccati has 17 independent inputs, 18 derived positions and retained `J,p`, without adapter assumptions. Independent reconstruction checks complete functions, assignment-context traces, source-pattern rewrites and the permutation. Original source-use edges, derived pattern relations and declaration order remain distinct. This is a finite construction, not arbitrary independent input replacement or a general higher-order preservation theorem. [Source-linked visual rule](/projects/proof-atlas/manual/paged-network/#source-lambdas); this policy is not yet in the interactive function selector.
+
 ## Evaluation and evidence
 
 Use synthetic adversarial controls, small kernel-checked examples, the published compiled corpus and its separately labelled working snapshot. Include shared terms used under different binders, shadowing, dependent domains, let bindings, projections, universe parameters, open contexts and extreme expansion ratios.
