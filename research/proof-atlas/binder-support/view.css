@@ -1,0 +1,8 @@
+.bs-inspector { margin-block: 1.5rem; }
+.bs-focus { padding: .75rem; border-inline-start: 3px solid var(--link-color, #3a64a5); font-weight: 600; }
+.bs-links { list-style: none; padding: 0; display: grid; gap: .5rem; }
+.bs-links li { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,.8fr) minmax(0,1fr); align-items: center; gap: .5rem; overflow-wrap: anywhere; }
+.bs-links button { max-width: 100%; overflow-wrap: anywhere; text-align: start; }
+.bs-inspector button[aria-pressed="true"] { outline: 2px solid currentColor; outline-offset: 2px; }
+
+.bs-count { text-align: center; font-size: .9em; }
