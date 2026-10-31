@@ -1,0 +1,10 @@
+'use strict';
+const fs=require('fs'),path=require('path'),cp=require('child_process'),z=require('zlib'),crypto=require('crypto'),assert=require('assert/strict');
+process.chdir(path.resolve(__dirname,'../../..'));
+const base='research/proof-atlas/boundary-constraints/',script='scripts/test-proof-atlas-network-streaming-browser.cjs',temp=fs.mkdtempSync('/private/tmp/atlas-boundary-network-'),sha=b=>crypto.createHash('sha256').update(b).digest('hex'),before=sha(fs.readFileSync(script));
+console.log('Network regression output: '+temp);
+cp.execFileSync(process.execPath,[script],{env:{...process.env,ATLAS_NETWORK_STREAM_SCREENSHOTS:temp},maxBuffer:4194304});
+const raw=fs.readFileSync(temp+'/audit.json'),report=JSON.parse(raw);assert.equal(report.status,'PASS');assert.equal(report.checkerSha256,before);assert.equal(sha(fs.readFileSync(script)),before);
+fs.writeFileSync(base+'network-browser.json.gz',z.gzipSync(raw,{mtime:0}));
+const record={format:'ProofAtlasBoundaryNetworkRun/1',status:'PASS',originalChecker:script,originalCheckerSha256:before,checkerSha256:sha(fs.readFileSync(__filename)),reportSha256:sha(fs.readFileSync(base+'network-browser.json.gz')),scope:'Unmodified preceding network-browser assertions against the actual built page; output directory only is redirected. Historical reports remain unchanged.'};
+fs.writeFileSync(base+'network-run.json.gz',z.gzipSync(Buffer.from(JSON.stringify(record,null,2)+'\n'),{mtime:0}));console.log(JSON.stringify({status:'PASS',calls:report.nativeCalls,wires:report.nativeWires,audits:report.axeAudits}));

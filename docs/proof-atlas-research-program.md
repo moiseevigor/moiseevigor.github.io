@@ -106,6 +106,8 @@ A [recoverable type notation](/projects/proof-atlas/manual/binder-blocks/#recove
 
 The [page-fed type notation](/research/proof-atlas/paged-type-notation/README.md) applies the existing recoverable grammar to recorded region components without complete table arrays. Its scenes agree on all 11,324 preceding type cuts and 971 selected component/field cuts in 57 accepted recorded variants. Literal operators, retained type/instance ports and qualified binder targets remain distinct. The [Riccati example](/projects/proof-atlas/manual/paged-network/#readable-fields) shows its five fact-input domains as formulas. This extends delivery and presentation; it adds no typing judgments, semantic compression or measured comprehension result.
 
+A [source-specializing boundary-equation rule](/research/proof-atlas/boundary-constraints/README.md) derives selected boundary positions instead of treating them as independent inputs. Twenty-nine of the same thirty candidates pass closed typing and source recovery; the twenty-seven earlier accepted function graphs are literally unchanged. The AI-source region needs three derived positions and the dependent join two, with no adapter assumptions. The Riccati all-position case remains rejected at a function-application constraint. Assignments preserve earlier scope and original source values; an authored predicate pair shows why agreement at one application is insufficient. This is a restricted finite rule, not a general higher-order interface theorem. [Diagram](/projects/proof-atlas/manual/paged-network/#boundary-equations).
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?
