@@ -18,7 +18,9 @@
   async function open(input, expectedSource, { fetcher = host.fetch.bind(host), signal } = {}) {
     const d = freeze(copy(input)), expected = freeze(copy(expectedSource));
     const adapted = d.adapterRule === 'explicit-function/1';
-    const base = adapted ? '/public/data/proof-atlas/region-adapter-function-pages/' : expected.edition === 'dependent-region-controls' ? '/public/data/proof-atlas/dependent-region-function-pages/' : '/public/data/proof-atlas/region-function-pages/';
+    const specializing = d.constraintRule === 'source-lambda-order/1';
+    demand((d.constraintRule === undefined || specializing) && !(adapted && specializing), 'interface rule');
+    const base = specializing ? '/public/data/proof-atlas/region-function-pages/' : adapted ? '/public/data/proof-atlas/region-adapter-function-pages/' : expected.edition === 'dependent-region-controls' ? '/public/data/proof-atlas/dependent-region-function-pages/' : '/public/data/proof-atlas/region-function-pages/';
     const pages = new Map(), indices = new Map();
     let disposed = false, active = false, pending = null, notationLease = null;
     const stats = { pageLoads: 0, indexLoads: 0, evictions: 0, peakCachedRows: 0, peakCachedBytes: 0, peakIndexPages: 0 };
@@ -42,7 +44,7 @@
     }
     demand(sourceEqual(d.source, expected) && hex(expected.indexSha256) && hex(expected.sourceSha256) && hex(d.nativeInventorySha256) && hex(d.nativeCaseSha256), 'source/native identity');
     const m = await read(d, 'manifest', limits.manifestBytes, signal);
-    demand(m.format === (adapted ? 'ProofAtlasRegionFunctionPages/2' : 'ProofAtlasRegionFunctionPages/1') && (!adapted || m.adapterRule === d.adapterRule) && m.id === d.id && m.status === d.status && sourceEqual(m.source, expected) && m.nativeInventorySha256 === d.nativeInventorySha256 && m.nativeCaseSha256 === d.nativeCaseSha256, 'manifest owner');
+    demand(m.format === (specializing ? 'ProofAtlasRegionFunctionPages/3' : adapted ? 'ProofAtlasRegionFunctionPages/2' : 'ProofAtlasRegionFunctionPages/1') && (!adapted || m.adapterRule === d.adapterRule) && (!specializing || m.constraintRule === d.constraintRule) && m.id === d.id && m.status === d.status && sourceEqual(m.source, expected) && m.nativeInventorySha256 === d.nativeInventorySha256 && m.nativeCaseSha256 === d.nativeCaseSha256, 'manifest owner');
     demand(Array.isArray(m.members) && m.members.length > 0 && m.members.length <= 8 && new Set(m.members).size === m.members.length && m.members.every(nat) && same(m.members, d.members), 'region members');
     demand(Array.isArray(m.order) && m.order.length === m.members.length && new Set(m.order).size === m.order.length && m.order.every(id => m.members.includes(id)), 'region order');
     demand(anchorValid(m.sourceAnchor) && Array.isArray(m.commonContext) && m.commonContext.length <= 512, 'original context');
@@ -69,10 +71,11 @@
     demand(m.context && same(m.context.original, m.commonContext) && same(m.context.reduced, m.keptContextSlots.map(slot => m.commonContext[slot])) && same(m.context.closed, []), 'component context owners');
     const names = ['function.original', 'function.originalType', 'function.reduced', 'function.reducedType', 'function.closed', 'function.closedType', 'source.specialization', 'source.results', 'recovery.witness', 'recovery.type'];
     const scopes = ['original', 'original', 'reduced', 'reduced', 'closed', 'closed', 'original', 'original', 'closed', 'closed'];
-    demand(Array.isArray(m.components) && m.components.length === 10 && Array.isArray(m.bindings) && m.bindings.length <= limits.bindings, 'component/binding inventory');
+    demand(Array.isArray(m.components) && m.components.length >= 10 && m.components.length <= (specializing ? 256 : 10) && new Set(m.components.map(c => c.component)).size === m.components.length && Array.isArray(m.bindings) && m.bindings.length <= limits.bindings, 'component/binding inventory');
     const roots = {}, owners = {};
     for (const [i, component] of m.components.entries()) {
-      demand(component.component === names[i] && component.scope === scopes[i] && nat(component.root) && component.root < n, 'component root/scope');
+      demand((i < 10 ? component.component === names[i] && component.scope === scopes[i] : specializing && component.scope === 'original' && /^(derivation\.\d+\.(specialized|original|domain|witness|equality)|template\.\d+\.(original|pattern\.\d+))$/.test(component.component) && typeof component.label === 'string' && component.label.length <= 256 && ['constraint','template'].includes(component.nativeOwner?.kind) && nat(component.nativeOwner.index) && nat(component.nativeOwner.root)) && nat(component.root) && component.root < n, 'component root/scope');
+      if (specializing && i < 10) demand(same(component.nativeOwner, {kind:'function',root:i}), 'main native component owner');
       roots[component.component] = component.root; owners[component.component] = component.scope;
     }
     async function index(sha, current) {
@@ -109,8 +112,9 @@
       nativeInventorySha256: d.nativeInventorySha256, nativeCaseSha256: d.nativeCaseSha256, manifestSha256: d.sha256, case: m.id, component, node, route: { root: component, slots: [...slots] } });
     const bindings = []; let binder = roots['function.original'], slots = [];
     for (const binding of m.bindings) {
-      const tuple = await row(binder, signal), adapter = binding.kind === 'adapter', input = binding.kind === 'input' || adapter;
-      demand((input || binding.kind === 'result') && m.members.includes(binding.call) && (input ? nat(binding.slot) && binding.slot <= 64 : !Object.hasOwn(binding, 'slot')), 'binding position');
+      const tuple = await row(binder, signal), adapter = binding.kind === 'adapter', derived = binding.kind === 'derived-input', input = binding.kind === 'input' || adapter, boundary = input || derived;
+      demand((input || binding.kind === 'result' || specializing && derived) && m.members.includes(binding.call) && (boundary ? nat(binding.slot) && binding.slot <= 64 : !Object.hasOwn(binding, 'slot')), 'binding position');
+      if (specializing) demand(typeof binding.key === 'string' && (derived ? nat(binding.constraint) : !Object.hasOwn(binding, 'constraint')), 'stable binding key and derivation');
       if (adapter) demand(adapted && !Object.hasOwn(binding, 'source') && anchorValid(binding.inputSource) && anchorValid(binding.producerSource) && nat(binding.adapterIndex) && binding.originalSpecialization === 'identity' && binding.kernelInputTypeNonconversion === 'PASS', 'computed adapter and original connection');
       else demand(anchorValid(binding.source), 'binding source');
       demand(binding.node === binder && same(binding.slots, slots) && tuple[0] === (input ? 6 : 8), 'binding/function path');
@@ -121,8 +125,74 @@
       slots.push(input ? 1 : 2); binder = tuple[1][input ? 1 : 2];
     }
     const adapterBindings = bindings.filter(binding => binding.kind === 'adapter'), boundaryInputs = bindings.filter(binding => binding.kind === 'input').length;
-    demand(boundaryInputs + adapterBindings.length === m.independentInputs && bindings.filter(binding => binding.kind === 'result').length === m.members.length && same(bindings.filter(binding => binding.kind === 'result').map(binding => binding.call), m.order), 'input/result counts and order');
+    const results = bindings.filter(binding => binding.kind === 'result');
+    demand(boundaryInputs + adapterBindings.length === m.independentInputs && results.length === m.members.length && new Set(results.map(b => b.call)).size === results.length && (!specializing ? same(results.map(binding => binding.call), m.order) : results.every(b => m.members.includes(b.call))), 'input/result counts and order');
     if (adapted) demand(m.boundaryInputs === boundaryInputs && m.adapterInputs === adapterBindings.length && adapterBindings.every((binding, i) => binding.adapterIndex === i), 'additional adapter inventory');
+    if (specializing) {
+      const byKey = new Map(bindings.map(b => [b.key, b])), derived = bindings.filter(b => b.kind === 'derived-input');
+      demand(byKey.size === bindings.length && Array.isArray(m.creationOrder) && m.creationOrder.length === bindings.length && new Set(m.creationOrder).size === bindings.length && m.creationOrder.every(key => byKey.has(key)), 'creation/declaration identity');
+      const creation = m.creationOrder.map(key => byKey.get(key));
+      demand(same(creation.filter(b => b.kind === 'result').map(b => b.call), m.order), 'original result creation order');
+      const positions = new Set(); let callIndex = 0, previousSlot = -1;
+      creation.forEach((binding, index) => {
+        demand(binding.call === m.order[callIndex] && binding.key === (binding.kind === 'result' ? 'atlasRegionResult.' + binding.call : 'atlasRegionInput.' + index), 'source creation key');
+        if (binding.kind === 'result') { callIndex++; previousSlot = -1; }
+        else { demand(binding.slot > previousSlot && !positions.has(binding.call + ':' + binding.slot), 'original port order'); previousSlot = binding.slot; positions.add(binding.call + ':' + binding.slot); }
+      });
+      demand(nat(m.derivedInputs) && m.derivedInputs === derived.length && m.independentInputs + m.derivedInputs <= m.boundaryPositions && m.originalResultPortals === m.members.length, 'derived boundary counts');
+      demand(Array.isArray(m.derivations) && m.derivations.length === derived.length && Array.isArray(m.templates) && m.templates.length <= derived.length && Array.isArray(m.permutations) && m.permutations.length <= derived.length, 'source-specializing inventory');
+      const usedComponents = new Set(names);
+      function observation(name, kind, index, root) {
+        const component = m.components.find(c => c.component === name);
+        demand(component && component.scope === 'original' && same(component.nativeOwner, {kind, index, root}) && !usedComponents.has(name), 'native observation component owner');
+        usedComponents.add(name);
+      }
+      m.derivations.forEach((record, index) => {
+        const binding = byKey.get(record.bindingKey);
+        demand(binding?.kind === 'derived-input' && binding.constraint === index && record.index === index && m.members.includes(record.trigger?.call) && nat(record.trigger.slot) && record.trigger.slot <= 64 && Array.isArray(record.predecessorKeys) && record.predecessorKeys.length <= 512 && new Set(record.predecessorKeys).size === record.predecessorKeys.length && record.predecessorKeys.every(key => key !== record.bindingKey && byKey.has(key)), 'recorded assignment owner/context');
+        demand(['kernelAssignmentTyping','kernelSourceSpecialization','kernelSourceEqualityWitness'].every(key => record[key] === 'PASS'), 'recorded source recovery');
+        for (const [key, root] of [['specialized',1],['original',2],['domain',4],['witness',5],['equality',6]]) observation(record.components?.[key], 'constraint', index, root);
+      });
+      demand(new Set(m.templates.map(t => t.bindingKey)).size === m.templates.length, 'template identities');
+      m.templates.forEach((record, index) => {
+        const binding = byKey.get(record.bindingKey);
+        demand(record.index === index && binding?.kind === 'derived-input' && binding.constraint === record.constraint && record.relation === 'derived-source-value-pattern/1' && Array.isArray(record.patterns) && record.patterns.length <= 512 && new Set(record.patterns.map(p => p.group)).size === record.patterns.length, 'source template relation');
+        observation(record.originalComponent, 'template', index, 0);
+        for (const pattern of record.patterns) {
+          demand(nat(pattern.group) && Array.isArray(pattern.targets) && pattern.targets.length > 0 && pattern.targets.length <= 512 && new Set(pattern.targets).size === pattern.targets.length && pattern.targets.every(key => byKey.has(key) && key !== record.bindingKey), 'source pattern targets');
+          const component = m.components.find(c => c.component === pattern.sourceComponent);
+          demand(component?.nativeOwner?.root === 2 + 2 * pattern.group, 'native pattern root');
+          observation(pattern.sourceComponent, 'template', index, component.nativeOwner.root);
+        }
+      });
+      demand(usedComponents.size === m.components.length, 'unowned observation component');
+      let declarationOrder = [], created = 0, previousCause = -1;
+      for (const permutation of m.permutations) {
+        const binding = byKey.get(permutation.cause);
+        demand(binding?.kind === 'derived-input' && binding.constraint > previousCause && permutation.kernelContextTyping === 'PASS' && Array.isArray(permutation.old) && Array.isArray(permutation.new) && permutation.old.length >= created && permutation.old.length <= bindings.length && permutation.old.length === permutation.new.length && new Set(permutation.old).size === permutation.old.length && new Set(permutation.new).size === permutation.new.length && permutation.new.every(key => permutation.old.includes(key)), 'recorded declaration permutation');
+        previousCause = binding.constraint;
+        declarationOrder.push(...m.creationOrder.slice(created, permutation.old.length)); created = permutation.old.length;
+        demand(same(declarationOrder, permutation.old), 'pre-permutation order'); declarationOrder = [...permutation.new];
+      }
+      declarationOrder.push(...m.creationOrder.slice(created)); demand(same(declarationOrder, bindings.map(b => b.key)), 'final declaration order');
+      demand(Array.isArray(m.portMap) && m.portMap.length <= 520 && m.portMap.length === m.boundaryPositions + m.internalPositions, 'source port inventory');
+      const portCalls = new Map();
+      for (const port of m.portMap) { demand(m.members.includes(port.call), 'source port call'); if (!portCalls.has(port.call)) portCalls.set(port.call, []); portCalls.get(port.call).push(port); }
+      demand(same([...portCalls.keys()], m.order), 'source port call order');
+      let internal = 0, supplied = 0, computed = 0;
+      for (const [call, ports] of portCalls) {
+        const result = results.find(row => row.call === call); demand(ports.length > 0 && ports.length <= 65, 'complete call ports');
+        ports.forEach((port, slot) => {
+          const tail = slot === 0 ? Array(ports.length - 1).fill(0) : [...Array(ports.length - 1 - slot).fill(0), 1];
+          demand(port.slot === slot && anchorValid(port.source) && nat(port.node) && port.node < n && Array.isArray(port.slots) && port.slots.length <= 512 && same(port.slots, [...result.value.route.slots, ...tail]), 'ordered computed input counterpart');
+          const binding = byKey.get(port.bindingKey);
+          if (port.relation === 'internal-source-use') { demand(binding?.kind === 'result', 'internal result reference'); internal++; }
+          else if (port.relation === 'fixed-boundary') demand(port.bindingKey === null, 'fixed source port');
+          else { demand(binding && binding.call === call && binding.slot === slot && same(binding.source, port.source) && (port.relation === 'independent-boundary' ? binding.kind === 'input' : port.relation === 'derived-boundary' && binding.kind === 'derived-input'), 'boundary counterpart'); if (binding.kind === 'input') supplied++; else computed++; }
+        });
+      }
+      demand(internal === m.internalPositions && supplied === m.independentInputs && computed === m.derivedInputs, 'source counterpart counts');
+    }
     for (const component of m.components) demand((await row(component.root, signal))[4] <= m.context[component.scope].length, 'component root scope');
     function start(task) {
       active = true;
@@ -146,7 +216,7 @@
     async function openNotation(component, path = [], options = {}) {
       live(options.signal);
       const engine = node ? require('./proof-atlas-paged-notation') : host.ProofAtlasPagedNotation;
-      const catalog = options.catalog || host.PROOF_ATLAS_TYPE_NOTATION, registry = options.registry || host.PROOF_ATLAS_PAGED_NOTATION_BINDINGS;
+      const catalog = options.catalog || host.PROOF_ATLAS_TYPE_NOTATION, registry = options.registry || (specializing ? host.PROOF_ATLAS_SOURCE_TEMPLATE_NOTATION_BINDINGS : host.PROOF_ATLAS_PAGED_NOTATION_BINDINGS);
       demand(engine && catalog && registry?.format === 'ProofAtlasPagedNotationBindings/1' && Array.isArray(registry.registries) && registry.registries.length <= 16, 'notation catalogue binding unavailable');
       const componentIndex = m.components.findIndex(c => c.component === component); demand(componentIndex >= 0, 'notation component');
       demand(hex(registry.catalogueObjectSha256) && hex(registry.environmentSha256) && await A.digest(new TextEncoder().encode(JSON.stringify(catalog))) === registry.catalogueObjectSha256 && registry.catalogueNativeSha256 === catalog.nativeSha256 && registry.extraNativeSha256 === catalog.extraNativeSha256, 'notation catalogue identity');
@@ -169,7 +239,8 @@
           dispose: () => { next.dispose(); if (notationLease === next) notationLease = null; } });
       } catch (error) { next.dispose(); if (notationLease === next) notationLease = null; throw error; }
     }
-    return Object.freeze({ manifest: m, roots: freeze(roots), bindings: freeze(bindings), neighborhood, openNotation,
+    const portMap = specializing ? freeze(m.portMap.map(port => ({...port, original:sourceAddress(port.source), counterpart:address('function.original',port.node,port.slots)}))) : null;
+    return Object.freeze({ manifest: m, roots: freeze(roots), bindings: freeze(bindings), portMap, neighborhood, openNotation,
       readNode: (id, { signal: current } = {}) => run(() => row(id, current), current), state, dispose });
   }
   const api = { open, limits, base, sourceEqual };
