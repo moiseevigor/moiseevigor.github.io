@@ -1,0 +1,2 @@
+#expr-reference-laws .pm-equation { max-width: 100%; overflow-x: auto; padding: .25rem .5rem; }
+#expr-reference-laws .pm-equation .katex-display { width: max-content; min-width: 100%; overflow: visible; }

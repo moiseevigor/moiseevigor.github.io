@@ -9,6 +9,7 @@ permalink: /projects/proof-atlas/manual/binder-blocks/
 <link rel="stylesheet" href="/research/proof-atlas/definition-boundaries/view.css?v=1">
 <link rel="stylesheet" href="/research/proof-atlas/corpus-definition-boundaries/view.css?v=1">
 <link rel="stylesheet" href="/research/proof-atlas/binder-support/view.css?v=1">
+<link rel="stylesheet" href="/research/proof-atlas/expr-reference-laws/view.css?v=1">
 <main class="pa-manual" data-binder-blocks>
 <header><p><a href="/projects/proof-atlas/manual/#binder-exchange">Visual manual</a> / Input and computation order</p>
 <h1>Compose local exchanges</h1>
@@ -60,6 +61,15 @@ permalink: /projects/proof-atlas/manual/binder-blocks/
 <p>The largest joint native table has 124,355 stored expressions. The reader retains one 64-row page and two index pages; each field neighborhood shows at most four vertices. Proof-value previews may be truncated; the complete constructor fields remain paged. These are cache and view bounds, not a total-browser-memory or comprehension result.</p>
 <p>Select a binder to inspect exact references in its type or defining value, or the fields that use it. Each reference keeps its original binder identity through reordering. Only four links are shown at a time. <a href="/research/proof-atlas/binder-support/README.md">Reference-count rule and exchange checks</a>.</p>
 <p>This covers eleven fixed plans over nine original local definitions in two proofs. It does not construct arbitrary graph-region interfaces or find minimal premises. <a href="/research/proof-atlas/corpus-definition-boundaries/README.md">Native checks, original-source mapping and reproduction</a>.</p>
+</section>
+<section id="expr-reference-laws" aria-labelledby="expr-reference-title">
+<h2 id="expr-reference-title">Scope-aware reference laws</h2>
+<p>The reference counting rule now has sixteen kernel-checked structural laws over <code>Lean.Expr</code>, covering all twelve constructors. Lifting preserves expression size and transports outer references without capturing inner binders. Swapping adjacent binders is an involution and preserves size and reference multiplicities.</p>
+<p>Write \(c_k(e)\) for the occurrences of loose bound variable \(k\), and \(S_d(e,v)\) for substitution at depth \(d\). The substitution rule is</p>
+<div class="pm-equation" tabindex="0" role="region" aria-label="Substitution reference formula">\[c_k(S_d(e,v))=c_{k+1}(e)+c_d(e)c_{k-d}(v)\qquad(k\ge d),\]</div>
+<p>while references with \(k&lt;d\) stay unchanged. The indices are local to the selected expression. The reader resolves them to the exact enclosing binders; names and stored row IDs alone do not identify those binders.</p>
+<p>Finite comparisons cover all 100 recorded exchange steps and 17 raw syntax controls spanning all constructors. The structural laws are general; the bridges to the memoized evaluator, opaque native operations and wire codec remain finite. This is not a general typing-preservation theorem.</p>
+<p><a href="/research/proof-atlas/expr-reference-laws/Reference.lean">Structural definitions and proofs</a> · <a href="/research/proof-atlas/expr-reference-laws/README.md">Native comparisons, scope and reproduction</a></p>
 </section>
 </main>
 <script src="/public/js/proof-atlas-library-data.js?v=3" defer></script>
