@@ -1,0 +1,10 @@
+'use strict';
+const fs=require('fs'),path=require('path'),cp=require('child_process'),z=require('zlib'),crypto=require('crypto'),assert=require('assert/strict');
+process.chdir(path.resolve(__dirname,'../../..'));
+const base='research/proof-atlas/notation-refinement/',script='research/proof-atlas/type-notation/check-compatibility.cjs',file=path.resolve(script),original=fs.readFileSync(file,'utf8'),sha=b=>crypto.createHash('sha256').update(b).digest('hex'),needle="const base='research/proof-atlas/type-notation/'";
+assert.equal(original.split(needle).length-1,1);const code=original.replace(needle,'const base='+JSON.stringify(base));
+const oldFolder='research/proof-atlas/type-notation/',frozen=Object.fromEntries(fs.readdirSync(oldFolder).filter(f=>/\.(gz|png)$/.test(f)).map(f=>[f,sha(fs.readFileSync(oldFolder+f))]));
+cp.execFileSync(process.execPath,['-e',`const Module=require('module'),m=new Module(${JSON.stringify(file)});m.filename=${JSON.stringify(file)};m.paths=Module._nodeModulePaths(${JSON.stringify(path.dirname(file))});m._compile(${JSON.stringify(code)},${JSON.stringify(file)});`],{env:process.env,stdio:'inherit'});
+for(const[f,h]of Object.entries(frozen))assert.equal(sha(fs.readFileSync(oldFolder+f)),h,f);
+const report=JSON.parse(z.gunzipSync(fs.readFileSync(base+'compatibility.json.gz')));report.checkerSha256=sha(fs.readFileSync(__filename));report.originalChecker=script;report.originalCheckerSha256=sha(Buffer.from(original));report.executedCheckerSha256=sha(Buffer.from(code));report.outputPathsOnly=true;
+fs.writeFileSync(base+'compatibility.json.gz',z.gzipSync(Buffer.from(JSON.stringify(report,null,2)+'\n'),{mtime:0}));

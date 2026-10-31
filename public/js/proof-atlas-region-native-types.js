@@ -97,7 +97,15 @@
    }
    return freeze({root,children,binding,relativeSlots:copy(slots),parent:slots.length?slots.slice(0,-1):null,contextDepth:(typeRoot===0?packet.originalDepth:packet.retainedDepth)+scope.length,stats:{vertices:1+children.length,represented:root.expanded,hiddenOccurrences:String(BigInt(root.expanded)-BigInt(1+children.length))},preview:{text:parts.join('')+(truncated?'…':''),truncated,visited:visits},notation,typing:'type-syntax-only'});
   }
-  return Object.freeze({match,load,record,inspect,release,state:()=>({disposed,loaded:!!packet,query:packet?.query.id??null,cachedRows:packet?.types.kind.length||0,cachedBytes:packet?loaded.bytes:0,loads,peakRows,peakBytes,active:!!active,pending:!!pending,limits}),dispose:()=>{release();disposed=true;}});
+  function expandNotation(current,slots){
+   live();demand(packet,'no loaded record');const owner=current?.root?.origin;
+   demand(owner&&(owner.typeRoot===0||owner.typeRoot===1),'notation source root');
+   const original=inspect(owner.slots,{typeRoot:owner.typeRoot});demand(same(original.root.address,owner)&&current.catalogNativeSha256===original.notation?.catalogNativeSha256,'exact loaded notation owner');
+   const engine=isNode?require('./proof-atlas-notation-refinement'):host.ProofAtlasNotationRefinement;demand(engine,'notation refinement unavailable');
+   let replacement=inspect(slots,{typeRoot:owner.typeRoot}).notation;demand(replacement,'notation unavailable');if(replacement.root.kind==='frontier')replacement=engine.openConstructor(packet.types,replacement);
+   return engine.refine(packet.types,current,slots,replacement);
+  }
+  return Object.freeze({match,load,record,inspect,expandNotation,release,state:()=>({disposed,loaded:!!packet,query:packet?.query.id??null,cachedRows:packet?.types.kind.length||0,cachedBytes:packet?loaded.bytes:0,loads,peakRows,peakBytes,active:!!active,pending:!!pending,limits}),dispose:()=>{release();disposed=true;}});
  }
  const api={open,limits,base};if(isNode)module.exports=api;else host.ProofAtlasRegionNativeTypes=api;
 })(typeof window==='undefined'?globalThis:window);

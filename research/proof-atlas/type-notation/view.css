@@ -2,6 +2,7 @@
 .tn-expression .tn-atom { font: inherit; line-height: 1.5; vertical-align: baseline; background: transparent; color: inherit; border: 0; border-bottom: 1px dotted var(--pm-muted); border-radius: 2px; min-width: 2.5rem; min-height: 2.75rem; padding: .2rem .3rem; margin: .1rem; overflow-wrap: anywhere; max-width: 100%; white-space: normal; }
 .tn-expression .tn-atom:hover { background: var(--bg); border-bottom-color: var(--pm-accent); }
 .tn-expression .tn-metadata { font: .8rem/1.5 var(--sans); color: var(--pm-muted); }
+.tn-expression .tn-expand { min-width: 2.75rem; min-height: 2.75rem; margin: .1rem; padding: .2rem .5rem; font: 1rem/1.5 var(--sans); color: var(--text); background: var(--bg); border: 1px solid var(--pm-muted); border-radius: 3px; }
 .tn-binder { display: grid; grid-template-columns: minmax(0,1fr); gap: .4rem; border-inline-start: 1px solid var(--pm-muted); padding-inline-start: .5rem; }
 .tn-binder-head { display: block; }
 .tn-binder-field { display: block; min-width: 0; }

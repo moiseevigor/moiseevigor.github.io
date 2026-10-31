@@ -1,7 +1,7 @@
 (function(host){
  'use strict';
  const el=(tag,text)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;return e;};
- function draw(container,{scene,onSelect,isCurrent}){
+ function draw(container,{scene,onSelect,onExpand,isCurrent}){
   const expression=el('div');expression.className='tn-expression';expression.tabIndex=0;expression.setAttribute('role','group');expression.setAttribute('aria-label','Recoverable type notation');
   const punctuation=text=>el('span',text),button=(text,slots,label)=>{const b=el('button',text);b.type='button';b.className='tn-atom';b.dataset.tnPick=JSON.stringify(slots);b.setAttribute('aria-label',label);b.title=label;b.onclick=()=>{if(isCurrent())onSelect(slots);};return b;};
   function render(node){
@@ -16,10 +16,11 @@
     const names=node.form==='let'?['Type','Value','Body']:['Domain','Body'];parts.forEach((part,i)=>{const row=el('span');row.className='tn-binder-field';const caption=el('small',names[i]);row.append(caption,part);group.append(row);});
    }else if(node.kind==='annotated'){group.append(...parts);const marker=button('⋯',node.slots,'Retained metadata wrapper');marker.classList.add('tn-metadata');group.append(marker);}
    else{group.append(pick);if(parts.length){group.append(punctuation('('));parts.forEach((p,i)=>{if(i)group.append(punctuation(', '));group.append(p);});group.append(punctuation(')'));}}
+   if(node.kind==='frontier'&&onExpand){const expand=el('button','+');expand.type='button';expand.className='tn-expand';expand.dataset.tnExpand=JSON.stringify(node.slots);expand.setAttribute('aria-label','Expand this frontier in place');expand.title='Expand this frontier in place';expand.onclick=()=>{if(isCurrent())onExpand(node.slots);};group.append(expand);}
    return group;
   }
   expression.append(render(scene.root));container.append(expression);
-  const note=el('p','Select a symbol to inspect its compiled region. Type and instance arguments remain in the notation record.');note.className='tn-caption';container.append(note);
+  const note=el('p','Select a symbol to inspect its compiled region. Use + to open a frontier in place. Type and instance arguments remain in the notation record.');note.className='tn-caption';container.append(note);
   const counts=el('p',scene.stats.nodes+' notation objects · '+scene.stats.retained+' source occurrences retained in records · '+scene.stats.hidden+' collapsed.');counts.className='tn-caption';container.append(counts);
   const root=scene.root,ports=[...(root.hiddenPorts||[]),...(root.foldedPorts||[])].sort((a,b)=>a.slot-b.slot);
   if(ports.length){
