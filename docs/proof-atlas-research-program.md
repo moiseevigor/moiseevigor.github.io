@@ -90,6 +90,8 @@ Three [protected-subtree laws and a row/depth evaluator](/research/proof-atlas/s
 
 The [context projection and substitution laws](/projects/proof-atlas/manual/binder-blocks/#projection-substitution) specify when a region can reduce context before or after replacing an input. General laws on actual `Lean.Expr` cover lifting and substitution, with an explicit replacement-projection premise and a counterexample to unconditional eager projection. Independent reconstruction matches 49,312 raw-syntax/native comparisons; two closed controls retain kernel typing and recovery witnesses, including a dependent family. These are structural compatibility laws, not a general typing-preservation theorem or an arbitrary graph-region interface. [Proofs, scope and checks](/research/proof-atlas/projection-substitution/README.md).
 
+An optional [lexical context projection](/projects/proof-atlas/manual/binder-blocks/#lexical-context-projection) applies ordered context reduction to selected subtrees in all 88 compiled interface components. Term and header-field constructors load on demand, with reindexed variables and exact original binder links. Independent fixed-point closure and cut checks cover 924 selected regions; 273 have fewer context entries, while 563 nonempty contexts need every entry. Eighty entries are retained through header dependencies beyond direct term references. These derived regions have no new inferred typing judgment. [Rule, finite checks and limits](/research/proof-atlas/region-context-projection/README.md).
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?

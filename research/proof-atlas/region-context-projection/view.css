@@ -1,0 +1,23 @@
+[data-rc-projection] { margin-block: 1rem; }
+[data-rc-projection]>div { padding-block: .75rem; }
+.rc-scene { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 3rem; align-items: center; max-width: 50rem; margin-block: 1rem; }
+.rc-node { position: relative; border: 1px solid var(--pm-accent); background: var(--pm-surface); padding: .8rem; border-radius: 3px; overflow-wrap: anywhere; }
+.rc-node strong,.rc-node small { display: block; }
+.rc-node strong { font: 600 .95rem/1.5 var(--sans); }
+.rc-node small { font: .8rem/1.5 var(--mono); }
+.rc-node:has(+ul)::after { content: ''; position: absolute; top: 50%; left: 100%; width: 3rem; border-top: 1px solid var(--pm-accent); }
+.rc-fields { list-style: none; padding: 0 0 0 1.5rem; margin: 0; display: grid; gap: .6rem; border-inline-start: 1px solid var(--pm-accent); }
+.rc-fields li { position: relative; min-width: 0; }
+.rc-fields li::before { content: ''; position: absolute; top: 50%; right: 100%; width: 1.5rem; border-top: 1px solid var(--pm-accent); }
+.rc-fields button { width: 100%; text-align: start; min-height: 2.8rem; overflow-wrap: anywhere; }
+.rc-context-list { padding-left: 1.5rem; max-width: 50rem; }
+.rc-context-list li { margin-block: .75rem; }
+.rc-context-list button { margin: .2rem .4rem .2rem 0; text-align: start; overflow-wrap: anywhere; }
+.rc-context-list small { display: block; color: var(--pm-muted); font: .8rem/1.5 var(--sans); margin-top: .3rem; }
+.rc-scene:focus-visible { outline: 2px solid var(--pm-accent); outline-offset: 3px; }
+@media(max-width:600px) {
+ .rc-scene { display: block; }
+ .rc-node { margin-bottom: 1rem; }
+ .rc-node:has(+ul)::after { top: 100%; left: 1.25rem; height: 1rem; width: 0; border-top: 0; border-left: 1px solid var(--pm-accent); }
+ .rc-fields { margin-inline-start: 1.25rem; }
+}

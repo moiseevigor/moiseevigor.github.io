@@ -1,0 +1,27 @@
+'use strict';
+const fs=require('fs'),path=require('path'),z=require('zlib'),crypto=require('crypto'),assert=require('assert/strict');
+process.chdir(path.resolve(__dirname,'../../..'));
+const base='research/proof-atlas/region-context-projection/',sha=b=>crypto.createHash('sha256').update(b).digest('hex'),hash=f=>sha(fs.readFileSync(f)),read=f=>JSON.parse(z.gunzipSync(fs.readFileSync(f)));
+const model=read(base+'model.json.gz'),browser=read(base+'browser.json.gz'),compat=read(base+'compatibility.json.gz'),production=read(base+'production.json.gz');
+for(const record of[model,browser,compat,production])assert.equal(record.status,'PASS');
+for(const record of[model,browser,production])for(const[f,h]of Object.entries(record.files))assert.equal(hash(f),h,f);
+for(const[k,n]of Object.entries({cases:11,components:88,regions:924,cuts:5488,headerCuts:3128,headers:2099,changedIndices:100,changedHeaderIndices:8,reducedRegions:273,closureAdds:80,noReductionRegions:563,emptyContexts:88,refusals:3751,peakHeaderBytes:25673,peakRows:64,peakIndices:2}))assert.equal(model[k],n,k);
+assert.equal(model.bodySelections.length,22);assert.equal(browser.sourceOverride,false);assert.equal(production.sourceOverride,false);assert.equal(browser.checkerSha256,hash(base+'check-browser.cjs'));assert.equal(production.checkerSha256,hash(base+'check-production.cjs'));
+for(const[k,n]of Object.entries({cases:11,regions:22,changedReferences:22,binderJumps:22,headerJumps:22,returns:44,wholeArchiveRequests:0}))assert.equal(browser[k],n,k);assert(browser.headerFields>=22);
+for(const k of['staleField','staleRelease','failureRetry','pendingRelease','keyboard'])assert.equal(browser[k],true,k);
+assert.equal(browser.audits.length,4);for(const audit of browser.audits){assert.equal(audit.violations,0);assert.equal(audit.horizontalScrollRequired,false);assert.equal(audit.keyboardScene,true);assert.equal(audit.sha256,hash(base+audit.file));}
+assert.equal(browser.productionHtmlSha256,hash('_site_production/projects/proof-atlas/manual/binder-blocks/index.html'));assert.equal(production.manualHtmlSha256,browser.productionHtmlSha256);assert.equal(production.programHtmlSha256,hash('_site_production/projects/proof-atlas/program/index.html'));
+for(const[f,h]of Object.entries(browser.files))assert.equal(hash('_site_production/'+f),h,f);
+assert.equal(compat.checkerSha256,hash(base+'check-compatibility.cjs'));assert.deepEqual(Object.keys(compat.reports),['authored','exchange','corpus','references','boundary','fusion']);
+for(const[name,item]of Object.entries(compat.reports)){
+ assert.equal(item.outputPathsOnly,true);assert.equal(item.originalCheckerSha256,hash(item.originalChecker));assert.equal(item.sha256,hash(item.file));const r=read(item.file);assert.equal(r.status,'PASS');assert.equal(r.sourceOverride,false);assert.equal(r.checkerSha256,item.originalCheckerSha256);assert.equal(r.productionHtmlSha256||r.manualHtmlSha256,browser.productionHtmlSha256);assert.equal(r.audits.length,4);
+ for(const[f,h]of Object.entries(r.files)){assert.equal(hash(f),h,f);if(!f.startsWith('docs/')&&!f.endsWith('index.html'))assert.equal(hash('_site_production/'+f),h,f);}
+ for(const audit of r.audits){assert.equal(audit.violations,0);assert.equal(item.images[audit.file].sha256,audit.sha256);assert.equal(hash(item.images[audit.file].file),audit.sha256);}
+ if(name==='boundary'){assert.equal(r.cases,11);assert.equal(r.regions,22);assert.equal(r.wholeArchiveRequests,0);}if(name==='fusion')assert.equal(r.readerNavigation,true);
+}
+const old=compat.pageConsumer;assert.equal(old.outputPathsOnly,true);assert.equal(hash(old.originalChecker),old.originalCheckerSha256);assert.equal(hash(old.file),old.sha256);const pages=read(old.file);assert.equal(pages.status,'PASS');assert.equal(pages.cases,11);assert.equal(pages.components,88);for(const[f,h]of Object.entries(pages.files))assert.equal(hash(f),h,f);
+const files=Object.fromEntries(['docs/proof-atlas-research-program.md','research/proof-atlas/binder-block-exchange/index.html','public/js/proof-atlas-corpus-boundary-pages.js','public/js/proof-atlas-region-context.js','research/proof-atlas/region-binding-ports/view.js',...fs.readdirSync(base).filter(n=>/\.(cjs|js|css|md|gz|png)$/.test(n)&&n!=='evidence.json.gz').sort().map(n=>base+n)].map(f=>[f,hash(f)]));
+const report={format:'ProofAtlasRegionContextEvidence/1',status:'PASS',coverage:{cases:11,components:88,regions:924,termCuts:5488,headerCuts:3128,retainedHeaders:2099,reducedRegions:273,nonemptyUnreducedRegions:563,headerDependencyAdditions:80},
+ browser:{cases:11,regions:22,changedReferences:22,headerFields:browser.headerFields,audits:4,compatibilitySuites:6,sourceOverride:false,manualHtmlSha256:browser.productionHtmlSha256},files,
+ scope:'Optional lazy lexical projection of selected term regions and retained header fields, with occurrence-qualified inverse binder navigation. No new inferred descendant typing, arbitrary graph-region module, minimal mathematical premises, general runtime refinement, semantic compression or comprehension claim. Not merged or deployed.'};
+const bytes=Buffer.from(JSON.stringify(report,null,2)+'\n');if(process.argv.includes('--check'))assert(z.gunzipSync(fs.readFileSync(base+'evidence.json.gz')).equals(bytes));else fs.writeFileSync(base+'evidence.json.gz',z.gzipSync(bytes,{mtime:0}));console.log(JSON.stringify({status:'PASS',coverage:report.coverage,browser:report.browser,files:Object.keys(files).length}));
