@@ -94,6 +94,8 @@ An optional [lexical context projection](/projects/proof-atlas/manual/binder-blo
 
 For 22 predetermined proof-body regions and their 128 retained header fields, [native region typing](/research/proof-atlas/region-native-types/README.md) checks the original and reduced open contexts, closed typing, recovery conversion and literal inverses. The same geometric view can follow a recorded type through its constructor fields and exact original context references. One bounded type packet is loaded at a time; other selected constructors remain syntax only. This is 150 finite queries in the same two proofs, not a general typing-preservation result or measured improvement in proof comprehension.
 
+A [recoverable type notation](/projects/proof-atlas/manual/binder-blocks/#recoverable-type-notation) folds applications and metadata using 53 literal declaration signatures. Four general laws on actual `Lean.Expr` establish spine reconstruction and occurrence accounting; independent reconstruction checks 11,324 cuts in the 150 recorded type packets. Hidden type/instance arguments retain exact ports. A typed counterexample gives the same `+` glyph and operands different results under different supplied instances, so rendered text is not a proof or operation identity. The view remains bounded at 48 notation objects; general evaluator refinement and measured comprehension remain open. [Rule, counterexample and checks](/research/proof-atlas/type-notation/README.md).
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?

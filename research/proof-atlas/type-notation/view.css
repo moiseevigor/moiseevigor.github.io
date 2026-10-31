@@ -1,0 +1,15 @@
+.tn-expression { max-width: 50rem; padding: .8rem; margin-block: 1rem; border: 1px solid var(--pm-accent); border-radius: 3px; background: var(--pm-surface); font: 1.1rem/2.8 var(--serif); overflow-wrap: anywhere; }
+.tn-expression .tn-atom { font: inherit; line-height: 1.5; vertical-align: baseline; background: transparent; color: inherit; border: 0; border-bottom: 1px dotted var(--pm-muted); border-radius: 2px; min-width: 2.5rem; min-height: 2.75rem; padding: .2rem .3rem; margin: .1rem; overflow-wrap: anywhere; max-width: 100%; white-space: normal; }
+.tn-expression .tn-atom:hover { background: var(--bg); border-bottom-color: var(--pm-accent); }
+.tn-expression .tn-metadata { font: .8rem/1.5 var(--sans); color: var(--pm-muted); }
+.tn-binder { display: grid; grid-template-columns: minmax(0,1fr); gap: .4rem; border-inline-start: 1px solid var(--pm-muted); padding-inline-start: .5rem; }
+.tn-binder-head { display: block; }
+.tn-binder-field { display: block; min-width: 0; }
+.tn-binder-field>small { display: block; font: .75rem/1.5 var(--sans); color: var(--pm-muted); }
+.tn-expression:focus-visible { outline: 2px solid var(--pm-accent); outline-offset: 3px; }
+.tn-caption { max-width: 50rem; font: .8rem/1.6 var(--sans); color: var(--pm-muted); }
+.tn-ports { max-width: 50rem; margin-block: 1rem; }
+.tn-ports ul { padding-inline-start: 1.5rem; }
+.tn-ports li { margin-block: .4rem; }
+.tn-ports button { text-align: start; overflow-wrap: anywhere; max-width: 100%; }
+@media(max-width:600px) { .tn-expression { padding: .5rem; font-size: 1rem; } }

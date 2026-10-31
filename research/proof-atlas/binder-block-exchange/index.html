@@ -12,6 +12,7 @@ permalink: /projects/proof-atlas/manual/binder-blocks/
 <link rel="stylesheet" href="/research/proof-atlas/expr-reference-laws/view.css?v=1">
 <link rel="stylesheet" href="/research/proof-atlas/region-binding-ports/view.css?v=1">
 <link rel="stylesheet" href="/research/proof-atlas/region-context-projection/view.css?v=2">
+<link rel="stylesheet" href="/research/proof-atlas/type-notation/view.css?v=1">
 <main class="pa-manual" data-binder-blocks>
 <header><p><a href="/projects/proof-atlas/manual/#binder-exchange">Visual manual</a> / Input and computation order</p>
 <h1>Compose local exchanges</h1>
@@ -64,6 +65,7 @@ permalink: /projects/proof-atlas/manual/binder-blocks/
 <p>The largest joint native table has 124,355 stored expressions. The constructor reader and reference-coefficient reader each retain one 64-row page and two index pages. A field neighborhood shows at most four vertices; its boundary diagram shows one region and at most four enclosing binders. Proof-value previews may be truncated; the complete constructor fields remain paged. These are cache and view bounds, not a total-browser-memory or comprehension result.</p>
 <p>Use “Remaining body” or select any constructor field to see its references to enclosing binders. Each dashed wire aggregates exact variable occurrences inside that region; four binders are shown per page. Open a binder and use “Return to region” to keep the selected cut. <a href="/research/proof-atlas/region-binding-ports/README.md">Boundary rule and complete-row checks</a>.</p>
 <p id="lexical-context-projection">The optional “Project into required lexical context” view retains the selected term’s references and dependencies in retained header types and let values. In the Riccati <code>promote-10</code> interface, choose Remaining body → fn: its context reduces from twelve entries to two. Projected constructor fields, header types and let values keep exact original binder links. Native typing is available for 150 exact region/header queries; “Inspect recorded type” follows the type relation in the same constructor view. Other selections remain syntax only. <a href="/research/proof-atlas/region-context-projection/README.md">Projection rule, coverage and limits</a> · <a href="/research/proof-atlas/region-native-types/README.md">Native judgments and finite scope</a>.</p>
+<p id="recoverable-type-notation">Within a recorded type, <strong>Read type notation</strong> shows operators and their explicit operands. Type/instance arguments and metadata remain recoverable; selecting a symbol exposes its exact region and retained ports. Binder domains and bodies stay separate. <strong>Constructor fields</strong> returns to raw syntax. The notation has a 48-object budget with refinable frontiers. <a href="/research/proof-atlas/type-notation/README.md">Reconstruction laws, signature scope and instance counterexample</a>.</p>
 <p>Select a binder to inspect exact references in its type or defining value, or the fields that use it. Each reference keeps its original binder identity through reordering. Only four links are shown at a time. <a href="/research/proof-atlas/binder-support/README.md">Reference-count rule and exchange checks</a>.</p>
 <p>This covers eleven fixed plans over nine original local definitions in two proofs. It does not construct arbitrary graph-region interfaces or find minimal premises. <a href="/research/proof-atlas/corpus-definition-boundaries/README.md">Native checks, original-source mapping and reproduction</a>.</p>
 </section>
@@ -102,7 +104,10 @@ permalink: /projects/proof-atlas/manual/binder-blocks/
 <script src="/public/js/proof-atlas-region-binding-pages.js?v=1" defer></script>
 <script src="/public/js/proof-atlas-region-context.js?v=1" defer></script>
 <script src="/public/data/proof-atlas/region-types-manifest.js?v=1" defer></script>
-<script src="/public/js/proof-atlas-region-native-types.js?v=1" defer></script>
-<script src="/research/proof-atlas/region-context-projection/view.js?v=2" defer></script>
+<script src="/public/data/proof-atlas/type-notation-catalog.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-type-notation.js?v=1" defer></script>
+<script src="/research/proof-atlas/type-notation/view.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-region-native-types.js?v=2" defer></script>
+<script src="/research/proof-atlas/region-context-projection/view.js?v=3" defer></script>
 <script src="/research/proof-atlas/region-binding-ports/view.js?v=2" defer></script>
 <script src="/research/proof-atlas/corpus-definition-boundaries/view.js?v=3" defer></script>

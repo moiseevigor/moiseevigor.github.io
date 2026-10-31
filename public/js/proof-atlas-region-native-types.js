@@ -9,7 +9,7 @@
  const freeze=v=>{if(v&&typeof v==='object'&&!Object.isFrozen(v)){Object.values(v).forEach(freeze);Object.freeze(v);}return v;};
  const binds=(k,s)=>(k===6||k===7)&&s===1||k===8&&s===2;
  const judgments=['kernelOriginalTyping','kernelProjectedOpenTyping','kernelClosedExpectedType','kernelRecoveryConversion','kernelEqualityWitness','literalInverse'];
- function open(registry,header,{fetcher=host.fetch.bind(host),signal}={}){
+ function open(registry,header,{fetcher=host.fetch.bind(host),signal,notationCatalog=host.PROOF_ATLAS_TYPE_NOTATION}={}){
   demand(registry?.format==='ProofAtlasRegionTypeRegistry/1'&&Array.isArray(registry.profiles)&&registry.profiles.length<=32,'registry');
   demand(new TextEncoder().encode(JSON.stringify(registry)).length<=limits.registryBytes,'registry byte bound');
   const profiles=registry.profiles.filter(p=>p.nativeCaseSha256===header.nativeCaseSha256&&p.nativeInventorySha256===header.nativeInventorySha256&&same(p.source,header.source)&&p.id===header.id);
@@ -90,7 +90,12 @@
     else emit(A.kinds[k]+' '+p.id);
    }
    if(todo.length)truncated=true;
-   return freeze({root,children,binding,relativeSlots:copy(slots),parent:slots.length?slots.slice(0,-1):null,contextDepth:(typeRoot===0?packet.originalDepth:packet.retainedDepth)+scope.length,stats:{vertices:1+children.length,represented:root.expanded,hiddenOccurrences:String(BigInt(root.expanded)-BigInt(1+children.length))},preview:{text:parts.join('')+(truncated?'…':''),truncated,visited:visits},typing:'type-syntax-only'});
+   const notationEngine=isNode?require('./proof-atlas-type-notation'):host.ProofAtlasTypeNotation;
+   let notation=null;if(notationEngine&&notationCatalog?.parentNativeVerificationSha256===packet.evidence.nativeVerificationSha256){
+    const ambient=(typeRoot===0?packet.frames:packet.query.keptSlots.map(s=>packet.frames[s])).map(f=>({name:f.name,address:f.address,locator:f.locator,relation:'original-context-binder'})),local=scope.map(s=>({name:g.payloads[s.node].binderName||g.payloads[s.node].declName||'_',address:address(s.node,s.slots),slots:s.slots,relation:'type-local-binder'}));
+    notation=notationEngine.scene(g,node,notationCatalog,{slots,context:[...ambient,...local],address});
+   }
+   return freeze({root,children,binding,relativeSlots:copy(slots),parent:slots.length?slots.slice(0,-1):null,contextDepth:(typeRoot===0?packet.originalDepth:packet.retainedDepth)+scope.length,stats:{vertices:1+children.length,represented:root.expanded,hiddenOccurrences:String(BigInt(root.expanded)-BigInt(1+children.length))},preview:{text:parts.join('')+(truncated?'…':''),truncated,visited:visits},notation,typing:'type-syntax-only'});
   }
   return Object.freeze({match,load,record,inspect,release,state:()=>({disposed,loaded:!!packet,query:packet?.query.id??null,cachedRows:packet?.types.kind.length||0,cachedBytes:packet?loaded.bytes:0,loads,peakRows,peakBytes,active:!!active,pending:!!pending,limits}),dispose:()=>{release();disposed=true;}});
  }
