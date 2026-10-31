@@ -80,6 +80,8 @@ A [let/input exchange rule](/research/proof-atlas/binder-computation-exchange/RE
 
 The [composed binder-spine rule](/projects/proof-atlas/manual/binder-blocks/) moves multiple inputs past dependent local computations. Eight authored controls have 48 intermediate native checks across two deterministic rewrite orders; their final terms agree literally and both traces invert exactly. All 18 recorded output closures of the two selected corpus proofs have structural probes; six Riccati closures need two exchanges each, with new typing still unavailable. This is finite sequence coherence, not a general confluence theorem or arbitrary graph-region interface.
 
+A [definition-boundary rule](/projects/proof-atlas/manual/binder-blocks/#definition-boundaries) promotes selected local computations to independent inputs, preserving the original values for recovery and specialization. Ten authored interfaces pass fresh kernel checks; two fixed-value-dependent candidates are rejected. Computed specialization adapters clear let annotations: two copied source flags fail lambda expansion despite kernel typing. A shared-node model handles eleven structural plans across the Riccati and selected AI-source proof, with at most 98,826 retained computed rows. New corpus typing remains unavailable. This connects typed inputs to retained computations along a primary binder spine; arbitrary graph-region interfaces remain open.
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?

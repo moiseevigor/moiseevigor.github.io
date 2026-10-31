@@ -1,0 +1,4 @@
+[data-definition-boundaries] .db-status{padding:.8rem;border-left:3px solid var(--pm-accent);background:var(--pm-surface)}
+[data-definition-boundaries] pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:18rem;overflow:auto}[data-definition-boundaries] :is(button,select){min-height:44px;max-width:100%}
+[data-db-inspector]{margin:1rem 0;overflow-wrap:anywhere}[data-db-inspector]:focus-visible{outline:2px solid var(--pm-accent)}
+[data-definition-boundaries] [data-selected-boundary="true"]{border-width:3px;border-color:var(--pm-accent)}

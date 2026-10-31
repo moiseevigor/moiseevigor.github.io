@@ -6,6 +6,7 @@ permalink: /projects/proof-atlas/manual/binder-blocks/
 ---
 <link rel="stylesheet" href="/public/css/proof-atlas-manual.css?v=1">
 <link rel="stylesheet" href="/research/proof-atlas/binder-block-exchange/view.css?v=1">
+<link rel="stylesheet" href="/research/proof-atlas/definition-boundaries/view.css?v=1">
 <main class="pa-manual" data-binder-blocks>
 <header><p><a href="/projects/proof-atlas/manual/#binder-exchange">Visual manual</a> / Input and computation order</p>
 <h1>Compose local exchanges</h1>
@@ -25,8 +26,26 @@ permalink: /projects/proof-atlas/manual/binder-blocks/
 </section>
 <section><h2>Corpus boundary</h2><p>All 18 recorded output closures of the selected Riccati and AI-source proofs were checked structurally. Six Riccati closures require two exchanges each; their two schedules agree literally and reverse exactly. New typing of those corpus terms remains unavailable. The original two proof-body spines and the eight AI-source closures have no exchanges. They are not substitutes for wider corpus evaluation.</p>
 <p><a href="/research/proof-atlas/binder-block-exchange/README.md">Construction, evidence and reproduction</a> · <a href="/projects/proof-atlas/manual/">Visual vocabulary</a></p></section>
+<section id="definition-boundaries" aria-labelledby="db-title">
+<h2 id="db-title">From local definitions to boundary inputs</h2>
+<p>A retained computation stays inside the function. A selected external definition becomes an independently supplied input, at its original type. Normalization then transports the input domains past retained computations. Supplying the original values recovers the original declared goal; arbitrary new values can change the result family.</p>
+<p>Ten authored interfaces pass fresh kernel checks. Two other original programs pass, but their promoted interfaces are rejected: one relies on a fixed finite index, the other on a type alias being concretely <code>Nat</code>. Rejected candidates have no inferred interface typing.</p>
+<details data-definition-boundaries><summary>Inspect definition boundaries and rejection cases</summary>
+<div class="pm-controls"><label>Control <select data-db-case></select></label><label>Stage <select data-db-stage><option value="promoted">Promoted function</option><option value="interface" selected>Normalized interface</option></select></label><button type="button" data-db-load>Load boundary control</button><button type="button" data-db-release disabled>Release</button></div>
+<p data-db-status class="db-status" role="status">One small authored control loads on request. The independent native checks are linked below.</p>
+<h3>Original declared type</h3><pre data-db-source-type></pre><h3>Computed interface type</h3><pre data-db-type></pre>
+<div data-db-diagram class="bb-diagram"></div><div data-db-components></div><div data-db-inspector tabindex="-1"></div>
+<details><summary>Complete recorded source and candidate terms</summary><div data-db-terms></div></details>
+</details>
+<p>Both programs <code>let k := 1; fun i : Fin k =&gt; k + i.val</code> and <code>let k := 2; fun i : Fin k =&gt; k + i.val</code> have the same promoted function. Their original values and source owners remain distinct. The representation therefore retains those values for specialization and literal recovery.</p>
+<p>The structural probe covers each single let and the full let set on the primary body spines of the Riccati and selected AI-source proof: eleven plans over nine original definition positions. Their new typing remains unavailable. A shared computed DAG reaches at most 98,826 rows; source packets and recovery residuals are separate. This is a finite storage result, not semantic compression or a whole-process memory bound.</p>
+<p><a href="/research/proof-atlas/definition-boundaries/README.md">Boundary rule, kernel rejections, sharing and evidence</a>. Arbitrary graph-region interfaces and broader proof evaluation remain open.</p>
+</section>
 </main>
 <script src="/public/js/proof-atlas-library-data.js?v=3" defer></script>
 <script src="/public/js/proof-atlas-occurrence-types.js?v=3" defer></script>
 <script src="/public/data/proof-atlas/binder-blocks-manifest.js?v=1" defer></script>
 <script src="/research/proof-atlas/binder-block-exchange/view.js?v=1" defer></script>
+
+<script src="/public/data/proof-atlas/definition-boundaries-manifest.js?v=1" defer></script>
+<script src="/research/proof-atlas/definition-boundaries/view.js?v=1" defer></script>
