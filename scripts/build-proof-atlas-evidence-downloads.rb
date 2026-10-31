@@ -23,7 +23,8 @@ reports.each do |report|
   source = File.join('research/proof-atlas', report)
   abort "Evidence report exceeds 2 MiB: #{source}" if File.size(source) > 2 * 1024 * 1024
   bytes = File.binread(source)
-  JSON.parse(bytes)
+  # Older JSON parsers can change the input string's encoding.
+  JSON.parse(bytes.dup)
   target = "#{source}.gz"
   if mode == '--write'
     Zlib::GzipWriter.open(target, Zlib::BEST_COMPRESSION) do |writer|
@@ -32,7 +33,7 @@ reports.each do |report|
     end
   end
   Zlib::GzipReader.open(target) do |reader|
-    abort "Published evidence differs from source: #{target}" unless reader.read(bytes.bytesize + 1) == bytes && reader.eof?
+    abort "Published evidence differs from source: #{target}" unless reader.read(bytes.bytesize + 1).b == bytes.b && reader.eof?
   end
 end
 
