@@ -73,6 +73,13 @@ permalink: /projects/proof-atlas/manual/binder-blocks/
 <p>while references with \(k&lt;d\) stay unchanged. The indices are local to the selected expression. The reader resolves them to the exact enclosing binders; names and stored row IDs alone do not identify those binders.</p>
 <p>Finite comparisons cover all 100 recorded exchange steps and 17 raw syntax controls spanning all constructors. The structural laws are general; the bridges to the memoized evaluator, opaque native operations and wire codec remain finite. This is not a general typing-preservation theorem.</p>
 <p><a href="/research/proof-atlas/expr-reference-laws/Reference.lean">Structural definitions and proofs</a> · <a href="/research/proof-atlas/expr-reference-laws/README.md">Native comparisons, scope and reproduction</a></p>
+<div id="projection-substitution">
+<h3>Reducing context before or after substitution</h3>
+<p>A compact region may omit context entries and later substitute a value for an input. These operations must preserve the same references. Write \(R_\rho\) for partial context projection and \(\rho^\uparrow\) for the map that protects the input binder while renaming outer indices. When \(R_\rho(v)=\operatorname{some}(v')\), both routes agree:</p>
+<div class="pm-equation" tabindex="0" role="region" aria-label="Context projection and substitution composition">\[R_\rho(S_0(e,v))=\operatorname{map}\bigl(u\mapsto S_0(u,v'),\ R_{\rho^\uparrow}(e)\bigr).\]</div>
+<p>For example, drop an unused \(\mathrm{Nat}\) variable and substitute \(a\) for \(x\) in \(x+a\). Both routes produce \(a+a\). A second checked example preserves the type parameter in \(\mathrm{fun}\ y:A\Rightarrow x\) while replacing \(x\) by \(a:A\).</p>
+<p>The lifting and substitution laws cover all twelve constructors, including unavailable projection. An unused replacement may fail projection even when the substituted term succeeds; the condition above cannot be omitted. Two closed controls have fresh kernel typing and recovery witnesses. The 49,312 raw-syntax/native comparisons are finite implementation checks, not a general typing-preservation result. <a href="/research/proof-atlas/projection-substitution/README.md">Exact rules, counterexample and reproduction</a> · <a href="/research/proof-atlas/projection-substitution/Fusion.lean">Lean proofs</a>.</p>
+</div>
 </section>
 </main>
 <script src="/public/js/proof-atlas-library-data.js?v=3" defer></script>

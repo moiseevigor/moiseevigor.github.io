@@ -88,6 +88,8 @@ The [reference inspector](/projects/proof-atlas/manual/binder-blocks/#compiled-d
 
 Three [protected-subtree laws and a row/depth evaluator](/research/proof-atlas/scoped-dag-rewrite/README.md) extend these checks to heavily shared rewrites. A 107,044-row authored value program passes complete native/model reconstruction, closed-function typing and recovery conversions; all 100 corpus/control exchanges also match. A counterexample retains kernel typing while a row-only cache changes binding and kernel meaning. This does not establish a general evaluator proof or an AI stress benchmark.
 
+The [context projection and substitution laws](/projects/proof-atlas/manual/binder-blocks/#projection-substitution) specify when a region can reduce context before or after replacing an input. General laws on actual `Lean.Expr` cover lifting and substitution, with an explicit replacement-projection premise and a counterexample to unconditional eager projection. Independent reconstruction matches 49,312 raw-syntax/native comparisons; two closed controls retain kernel typing and recovery witnesses, including a dependent family. These are structural compatibility laws, not a general typing-preservation theorem or an arbitrary graph-region interface. [Proofs, scope and checks](/research/proof-atlas/projection-substitution/README.md).
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?
