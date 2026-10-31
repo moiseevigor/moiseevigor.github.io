@@ -427,7 +427,7 @@ The finite adapter audit checks 1,300 recorded endpoints in 35 profiles, includi
 
 The source protocol has 512-member/512-slot and 128-KiB metadata limits. The separate transfer operation has its own entry, trie and byte limits. This adds no kernel theorem, arbitrary elimination coverage, semantic abstraction or measured comprehension result. The earlier one-hole laws remain its structural basis; the JavaScript adapter has finite independent checks.
 
-[Protocol and reproduction](/research/proof-atlas/source-corridor/README.md) · [Source model](/public/js/proof-atlas-source-corridor.js) · [Finite audit](/research/proof-atlas/source-corridor/audit.json)
+[Protocol and reproduction](/research/proof-atlas/source-corridor/README.md) · [Source model](/public/js/proof-atlas-source-corridor.js) · [Finite audit](/research/proof-atlas/source-corridor/audit.json.gz)
 
 <span id="binder-use-navigation"></span>
 
@@ -437,7 +437,7 @@ The complete and paged readers can find a selected binder’s first, last, next 
 
 The independent finite audit checks source ordering and original binder identity on the Riccati proof, the other recorded profiles and small constructor controls. A 10,000-binder source control exercises paths beyond the bitset width. Six fresh kernel-checked support laws justify the index bounds and field shifts. They do not verify the JavaScript algorithm or assign types to discovered uses. Mathematical relevance and improved comprehension remain unmeasured.
 
-[Protocol and reproduction](/research/proof-atlas/use-navigation/README.md) · [Finite audit](/research/proof-atlas/use-navigation/audit.json) · [Lean laws](/research/proof-atlas/context-projection/UseNavigation.lean) · [Native verification](/research/proof-atlas/use-navigation/native-verification.json)
+[Protocol and reproduction](/research/proof-atlas/use-navigation/README.md) · [Finite audit](/research/proof-atlas/use-navigation/audit.json.gz) · [Lean laws](/research/proof-atlas/context-projection/UseNavigation.lean) · [Native verification](/research/proof-atlas/use-navigation/native-verification.json.gz)
 
 <span id="recorded-input-sockets"></span>
 
@@ -451,13 +451,13 @@ The fixed sample has 469 selected use occurrences across 35 recorded profiles. A
 
 All three uses of the Riccati hypothesis `hd : 0 < J.d p` now meet direct recorded proof inputs: `mul_pos` stage 7, `JacobiData.T1_T2_same_sign` stage 5 and `abs_of_pos` stage 6. The latter two replace enclosing `Or.casesOn` and `Eq.mpr` matches with gaps of two and three source fields. Each stage retains its source route, lexical context, six type components and native conversions. This identifies an immediate typed consumer; it does not establish premise necessity or semantic compression.
 
-Riccati's original compiled graph is matched field for field after privately recompiling three matching source modules. The AI-attributed packets are replayed with their original proof modules absent. Recovered dependency binaries are hash-verified and retain their compiler-cache attribution; their Git checkouts were not independently recovered or rebuilt. The two project snapshots share the matching Riccati module environment. The [earlier audit](/research/proof-atlas/use-inputs/audit.json) remains a frozen baseline.
+Riccati's original compiled graph is matched field for field after privately recompiling three matching source modules. The AI-attributed packets are replayed with their original proof modules absent. Recovered dependency binaries are hash-verified and retain their compiler-cache attribution; their Git checkouts were not independently recovered or rebuilt. The two project snapshots share the matching Riccati module environment. The [earlier audit](/research/proof-atlas/use-inputs/audit.json.gz) remains a frozen baseline.
 
-[Immediate-site protocol](/research/proof-atlas/use-sites/README.md) · [Native verification](/research/proof-atlas/use-sites/native-verification.json) · [Current finite audit](/research/proof-atlas/use-sites/audit.json)
+[Immediate-site protocol](/research/proof-atlas/use-sites/README.md) · [Native verification](/research/proof-atlas/use-sites/native-verification.json.gz) · [Current finite audit](/research/proof-atlas/use-sites/audit.json.gz)
 
 The ordinary library construction diagrams also use the additional records. In the same 283-site subset, 279 application frames become available and four earlier replay frames are retained. Across 849 complete/paged cuts, source partitions, original contexts and all six application-type components agree. Fifteen variable-headed calls include declaration types, body type regions and proof/value applications; those regions remain distinct. The occurrence-window indexes now use a separate finite union with original ownership retained; see below.
 
-[Construction integration and limits](/research/proof-atlas/construction-union/README.md) · [Cut audit](/research/proof-atlas/construction-union/audit.json)
+[Construction integration and limits](/research/proof-atlas/construction-union/README.md) · [Cut audit](/research/proof-atlas/construction-union/audit.json.gz)
 
 <span id="recorded-position-union"></span>
 
@@ -469,7 +469,7 @@ The complete and sparse occurrence readers share 5,568 recorded positions and 2,
 
 
 
-[Protocol and limits](/research/proof-atlas/use-inputs/README.md) · [Independent audit](/research/proof-atlas/use-inputs/audit.json) · [Model](/public/js/proof-atlas-use-inputs.js)
+[Protocol and limits](/research/proof-atlas/use-inputs/README.md) · [Independent audit](/research/proof-atlas/use-inputs/audit.json.gz) · [Model](/public/js/proof-atlas-use-inputs.js)
 
 
 

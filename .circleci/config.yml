@@ -28,6 +28,9 @@ jobs:
           paths:
             - vendor/bundle
       - run:
+          name: Check published Proof Atlas evidence downloads
+          command: ruby scripts/build-proof-atlas-evidence-downloads.rb --check
+      - run:
           name: Jekyll build
           command: bundle exec jekyll build
       - run:
