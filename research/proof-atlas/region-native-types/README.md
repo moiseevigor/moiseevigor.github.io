@@ -2,9 +2,11 @@
 
 All **150 predetermined queries** pass direct Lean kernel checks in their original and reconstructed reduced contexts. The queries cover the 22 selected proof-body regions of the [lexical projection census](../region-context-projection/README.md), together with all 128 retained header type/value fields in those views. They span the same eleven definition-boundary plans: seven on `JacobiData.slope_bound_abs` and four on `lean_workbook_plus_6206`. No failed query was replaced or removed.
 
-This is a finite typing result for those exact regions. The existing visual projection remains unchanged and continues to report typing unavailable; these records have not been attached to its browser views. There is no new blog result or deployment in this change.
+This is a finite typing result for those exact regions. The [existing projection view](/projects/proof-atlas/manual/binder-blocks/#lexical-context-projection) attaches these records only to matching region/header roots. Other selections continue to report typing unavailable. No blog article is added.
 
 ## Construction and judgments
+
+Here `Γ` belongs to the addressed compiled component. For a computed interface, “original” means before this projection; links retain the computed namespace and do not acquire original Lean-source occurrences.
 
 For a selected expression `e` in its exact original ordered lexical context `Γ`, the checker:
 
@@ -54,9 +56,38 @@ Dependency artifacts are verified before and after the run and attributed to the
 
 This is not an independent dependency rebuild or verification of the original extraction environment. Original research proof scripts and support binaries are not published here. Fresh native replay requires the fingerprinted dependency artifacts, reference cache inventories and existing private Riccati support binaries; it is not a self-contained public replay. Public structural replay uses only the committed compiled data and tools. AI attribution remains that of the [dataset publisher](../../../public/data/proof-atlas/goedel-sample/NOTICE.txt).
 
-The 150 queries do not cover arbitrary descendant expressions, every region of these two proofs, other corpus proofs, general typing preservation, minimal mathematical premises or human understanding. A matching declaration/section name is insufficient to transfer these judgments to another occurrence. Any future UI attachment must match the original component, complete path, retained context, selected part and native owner. A type graph is a derived object and must not acquire an invented source occurrence.
+The 150 queries do not cover arbitrary descendant expressions, every region of these two proofs, other corpus proofs, general typing preservation, minimal mathematical premises or human understanding. A matching declaration/section name is insufficient to transfer these judgments to another occurrence. The UI attachment must match the original component, complete path, retained context, selected part and native owner. A type graph is a derived object and must not acquire an invented source occurrence.
 
 ## Evidence and reproduction
+
+### Geometric reader
+
+“Inspect recorded type” follows the type relation in the same four-vertex constructor view. The type is a derived expression in a separate namespace; its own fields receive no new inferred-type judgment. Enclosing references return to exact original binders, while a type-local binder remains inside the type view. Returning to the projected expression preserves its selected header/term part. The optional raw preview keeps explicit arguments and variable indices, caps output at 640 characters plus a truncation marker and visits at most 512 expression occurrences. It does not recover Lean notation or hide implicit arguments.
+
+The consumer matches the native owner, original region address, complete retained context, part, original selected expression and empty relative path. A descendant, adjacent header or changed context does not inherit its enclosing query. Packet failures leave the syntax projection available. Navigation cancels stale requests; one active request and the latest pending request share one retained packet. Releasing the projection clears that packet.
+
+The generated registry is 118,467 bytes; the largest current type packet is 19,818 decoded bytes and 246 stored rows. The input caps are 512 KiB for the registry, 1 MiB/32,768 rows for a packet and 512 constructor fields per path. A visible cut has at most four vertices, with exact hidden occurrence accounting. These are representation/cache bounds, not a browser-process memory theorem. Full native record archives are not fetched by the reader.
+
+The consumer audit checks all 150 queries, both raw/projected type roots and 11,324 constructor cuts, including 218 enclosing-reference selections. No reference in this finite sample targets a binder introduced inside its recorded type; two separately labelled structural fixture cuts check that route-qualified case. They are not additional native judgments.
+
+```sh
+node research/proof-atlas/region-native-types/pack.cjs --check
+node research/proof-atlas/region-native-types/check-types.cjs --check
+```
+
+[Packet inventory](packets.json.gz) · [Consumer checks](consumer.json.gz) · [Production browser checks](browser.json.gz) · [Predecessor compatibility](compatibility.json.gz)
+
+The production browser checks all 150 attachments, 22 original-binder jumps and 118 type-constructor navigation steps. They check unsupported descendants, corrupted packets/retry, stale controls and release during an actual pending request. Four desktop/phone, light/dark layouts pass keyboard, overflow and WCAG A/AA checks. The seven predecessor browser suites and the original 88-component page-model checks retain their original assertions and frozen reports; only output destinations change.
+
+After building the production site and serving `_site_production`, run with the repository's Playwright environment:
+
+```sh
+node research/proof-atlas/region-native-types/check-browser.cjs
+node research/proof-atlas/region-native-types/check-compatibility.cjs
+```
+
+
+### Native and structural replay
 
 Run from the repository root:
 

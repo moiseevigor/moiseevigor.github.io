@@ -15,6 +15,14 @@
 .rc-context-list button { margin: .2rem .4rem .2rem 0; text-align: start; overflow-wrap: anywhere; }
 .rc-context-list small { display: block; color: var(--pm-muted); font: .8rem/1.5 var(--sans); margin-top: .3rem; }
 .rc-scene:focus-visible { outline: 2px solid var(--pm-accent); outline-offset: 3px; }
+.rc-typing { border-inline-start: 2px solid var(--pm-muted); padding: .6rem 1rem; max-width: 50rem; }
+.rc-typing[data-rt-status="available"] { border-color: var(--pm-accent); }
+.rc-typing strong { font: 600 .9rem/1.5 var(--sans); }
+.rc-typing p { margin-block: .5rem; }
+.rc-type-relation { font: .85rem/1.6 var(--sans); overflow-wrap: anywhere; }
+.rc-type-preview { max-width: 50rem; margin-block: 1rem; }
+.rc-type-preview small { display: block; font: .75rem/1.5 var(--sans); color: var(--pm-muted); }
+.rc-type-preview code { display: block; white-space: pre-wrap; overflow-wrap: anywhere; font: .8rem/1.65 var(--mono); padding: .6rem; background: var(--pm-surface); }
 @media(max-width:600px) {
  .rc-scene { display: block; }
  .rc-node { margin-bottom: 1rem; }
