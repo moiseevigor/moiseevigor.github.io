@@ -7,7 +7,7 @@
   if(scene?.format!=='ProofAtlasComputedTypeNeighborhood/1'||!Array.isArray(scene.children)||scene.children.length>3||scene.stats.vertexLimit!==4||scene.stats.pathLimit!==512||scene.stats.retained!==scene.children.length+1||scene.root.expanded!==scene.stats.represented||BigInt(scene.stats.retained)+BigInt(scene.stats.hidden)!==BigInt(scene.stats.represented))fail();
   const rootAddress=scene.root.address;
   const parameterContext=rootAddress.namespace==='frontier-components'&&scene.context.source.namespace==='computed-parameter-prefix';
-  if(!['application-ports','common-prefix-output-types','scope-output-composition','frontier-components'].includes(rootAddress.namespace)||rootAddress.route.root!==rootAddress.component||!Array.isArray(rootAddress.route.slots)||rootAddress.route.slots.length>512)fail();
+  if(!['application-ports','common-prefix-output-types','scope-output-composition','frontier-components','binder-computation-exchange'].includes(rootAddress.namespace)||rootAddress.route.root!==rootAddress.component||!Array.isArray(rootAddress.route.slots)||rootAddress.route.slots.length>512)fail();
   if(parameterContext){if(scene.context.source.sourceIndexSha256!==rootAddress.sourceIndexSha256||!Array.isArray(scene.context.source.bindings)||scene.context.source.bindings.length!==scene.context.length)fail();}
   else if(scene.context.source.namespace!=='source-expression'||scene.context.source.indexSha256!==rootAddress.sourceIndexSha256)fail();
   const equivalent=(address,slots)=>address&&same(address,{...rootAddress,node:address.node,route:{root:rootAddress.component,slots}});
@@ -27,7 +27,7 @@
    if(rootAddress.route.slots.length===512){if(port.status!=='unavailable'||port.reason!=='selection-path-bound'||port.address!==null||scene.children.length)fail();}
    else{const child=scene.children[slot];if(!child||port.status!=='shown'||!equivalent(child.address,[...rootAddress.route.slots,slot])||!same(port.address,child.address)||port.expanded!==child.expanded)fail();}
   }
-  const composed=['scope-output-composition','frontier-components'].includes(rootAddress.namespace);
+  const composed=['scope-output-composition','frontier-components','binder-computation-exchange'].includes(rootAddress.namespace);
   const box=el('section',undefined,'atlas-type-neighborhood');box.dataset.typeNeighborhood=scene.root.address.component;box.tabIndex=-1;box.setAttribute('aria-label',composed?'Fields inside the recorded component':'Fields inside the recorded type');box.append(el('h5',composed?'Inside the recorded component':'Inside the recorded type'),el('p',(parameterContext?'Computed parameter prefix ':'Original Γ')+scene.context.length+' · '+scene.root.localBinders+(composed?' local binders.':' local type binders.')+' Syntax only; no additional typing judgment.'));
   const pick=(label,address,role)=>{const b=el('button',label);b.type='button';b.dataset.typeNeighborhoodSelect=role;if(address){b.dataset.typeNeighborhoodAddress=JSON.stringify(address);b.onclick=()=>onSelect(address);}else b.disabled=true;return b;};
   const tools=el('div',undefined,'atlas-type-neighborhood-tools');tools.append(pick('Component root',scene.componentRoot,'root'),pick(composed?'Component parent':'Type parent',scene.parent,'parent'));box.append(tools);

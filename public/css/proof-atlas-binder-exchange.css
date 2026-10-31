@@ -1,0 +1,8 @@
+.be-diagram{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;min-width:0;margin-block:1rem}
+.be-program{min-width:0;padding:.8rem;background:var(--fig-bg);border:1px solid var(--border)}
+.be-program ol{margin:0;padding-left:1.4rem}.be-program li{padding:.4rem;overflow-wrap:anywhere}.be-program code{display:block;white-space:pre-wrap;margin:.3rem 0}
+.be-collar{grid-column:1/-1;padding:.75rem;border-left:3px dashed var(--accent)}
+[data-binder-exchange] :is(button,select){min-height:44px;max-width:100%;overflow-wrap:anywhere}
+[data-binder-exchange] pre{max-height:15rem;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}
+.be-diagram>.pm-controls,.be-diagram>details{grid-column:1/-1}
+@media(max-width:650px){.be-diagram{grid-template-columns:minmax(0,1fr)}}

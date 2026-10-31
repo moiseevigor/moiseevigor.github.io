@@ -76,6 +76,8 @@ The same [output-regrouping rule is navigable in the paged reader](/research/pro
 
 The nineteen checked source-frontier functions now have a [paged component reader](/research/proof-atlas/frontier-pages/README.md) beside the source-use graph. Named components keep closed, original-source and computed-parameter scopes distinct. Constructor fields and binder portals load through one 64-row cache; exact counts account for hidden structure. This delivers the existing finite native rule at larger stored sizes, without supplying arbitrary graph-region interfaces or new descendant typing judgments.
 
+A [let/input exchange rule](/research/proof-atlas/binder-computation-exchange/README.md) transports a dependent input domain when moving it past a local computation. Two general typed laws and eleven authored native controls separate original-type assignment, conversion and literal recovery. A collision shows why the original domain must remain attached to the record. Six Riccati closure exchanges have structural inverses; their new typing remains unavailable. This is a local operation toward typed graph-region interfaces, not their general construction.
+
 ## Scientific questions
 
 1. Can a fixed vocabulary of visual primitives represent Lean's kernel expressions and their binding, type and declaration relationships compositionally?
