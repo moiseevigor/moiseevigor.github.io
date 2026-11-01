@@ -163,6 +163,8 @@ Prioritize general language rules and falsifiable tests over article-specific st
 
 Current priorities: extend the compositional notation for elimination, broaden bounded source delivery and define measured tasks for tracing assumptions, finding premises and localizing errors. A release is one test of the language, not completion of the program.
 
+A checked [scope-range comparison prototype](/research/proof-atlas/scope-comparison/README.md) addresses a remaining shared-term limit in producer-to-input type bridges. It keeps one depth range per paired storage row, with general Lean certificate laws and a reordered-context counterexample. Finite checks cover all 877 recorded inputs and three shared-syntax scale controls. The production weakening gate is not yet replaced; original context identity, kernel conversion and human comprehension remain separate obligations.
+
 
 
 ## Technical evidence
