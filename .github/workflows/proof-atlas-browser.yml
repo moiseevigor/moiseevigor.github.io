@@ -308,6 +308,7 @@ on:
       - 'scripts/test-proof-atlas-judgment-*.cjs'
       - 'scripts/test-proof-atlas-context-frames*.cjs'
       - 'scripts/proof-atlas-judgment-fixtures.cjs'
+      - 'scripts/proof-atlas-reader-fixtures.cjs'
       - 'scripts/check-proof-atlas-native-judgment-models.cjs'
       - 'scripts/check-proof-atlas-native-level-transport.cjs'
       - 'scripts/test-proof-atlas-level-transport*.cjs'
@@ -621,6 +622,7 @@ on:
       - 'scripts/test-proof-atlas-judgment-*.cjs'
       - 'scripts/test-proof-atlas-context-frames*.cjs'
       - 'scripts/proof-atlas-judgment-fixtures.cjs'
+      - 'scripts/proof-atlas-reader-fixtures.cjs'
       - 'scripts/check-proof-atlas-native-judgment-models.cjs'
       - 'scripts/check-proof-atlas-native-level-transport.cjs'
       - 'scripts/check-proof-atlas-native-lambda-models.cjs'
@@ -649,7 +651,7 @@ jobs:
     env:
       ATLAS_ORIGIN: http://127.0.0.1:8833
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

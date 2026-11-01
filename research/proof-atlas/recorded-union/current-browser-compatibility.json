@@ -1,0 +1,137 @@
+{
+  "status": "PASS",
+  "sourceSites": 3,
+  "sceneComparisons": 6,
+  "typeComparisons": 14,
+  "sourceSelections": 14,
+  "provenanceSelections": 14,
+  "transportPairs": 3,
+  "pagedCompleteArchiveRequests": 0,
+  "failureControls": 1,
+  "rows": [
+    {
+      "edition": "published-15",
+      "name": "JacobiData.slope_bound_abs",
+      "node": 2333,
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 18,
+        "slots": "VaWqRQU"
+      },
+      "loading": "complete",
+      "constructionOwner": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+      "alternatives": [
+        {
+          "kind": "useSites",
+          "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520"
+        }
+      ]
+    },
+    {
+      "edition": "published-15",
+      "name": "JacobiData.slope_bound_abs",
+      "node": 2333,
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 18,
+        "slots": "VaWqRQU"
+      },
+      "loading": "paged",
+      "constructionOwner": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+      "alternatives": [
+        {
+          "kind": "useSites",
+          "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520"
+        }
+      ]
+    },
+    {
+      "edition": "published-15",
+      "name": "JacobiData.slope_bound_abs",
+      "node": 1298,
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 16,
+        "slots": "VaVqEA"
+      },
+      "loading": "complete",
+      "constructionOwner": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+      "alternatives": [
+        {
+          "kind": "useSites",
+          "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520"
+        }
+      ]
+    },
+    {
+      "edition": "published-15",
+      "name": "JacobiData.slope_bound_abs",
+      "node": 1298,
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 16,
+        "slots": "VaVqEA"
+      },
+      "loading": "paged",
+      "constructionOwner": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520",
+      "alternatives": [
+        {
+          "kind": "useSites",
+          "evidenceSha256": "7144b1596bc596677a9d9e9946cceeee7178478b590757b3a522a0f2e5b75520"
+        }
+      ]
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_43987",
+      "node": 78,
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 19,
+        "slots": "VUVURRE"
+      },
+      "loading": "complete",
+      "constructionOwner": "0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77",
+      "alternatives": [
+        {
+          "kind": "useSites",
+          "evidenceSha256": "0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77"
+        }
+      ]
+    },
+    {
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_43987",
+      "node": 78,
+      "route": {
+        "format": "ProofAtlasPackedRoute/1",
+        "root": 1,
+        "depth": 19,
+        "slots": "VUVURRE"
+      },
+      "loading": "paged",
+      "constructionOwner": "0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77",
+      "alternatives": [
+        {
+          "kind": "useSites",
+          "evidenceSha256": "0ce596f1e991a9b297fd652bed6acd941f1af88f7864d23f6879401c21d03b77"
+        }
+      ]
+    }
+  ],
+  "checkerSha256": "c9de52c972cd4e7bff31644a630e33fe5f6a9189622c5651be9a9a3199dc7806",
+  "files": {
+    "public/js/proof-atlas-occurrence-view.js": "416f6ea500d6c454428432b250b5302916d22a1521ab314885604c47770626c9",
+    "public/js/proof-atlas-deep-context.js": "141773a7d2b19b763f21597bdd13e670ffd041b1ea2e17f726ad389ee16c486b",
+    "public/js/proof-atlas-occurrence-constructions.js": "6d00edcdde0f082f9ba6859a2536a1b575089c8fa2171d53f2a514b66ea73e92"
+  },
+  "tooling": {
+    "scripts/build-proof-atlas-recorded-union-evidence.cjs": "e38562c92fccd35fbb00faa81ab83daa69e231766f58d3a42be34fbf703c3fdf",
+    "scripts/test-proof-atlas-recorded-union-browser.cjs": "c9de52c972cd4e7bff31644a630e33fe5f6a9189622c5651be9a9a3199dc7806"
+  }
+}

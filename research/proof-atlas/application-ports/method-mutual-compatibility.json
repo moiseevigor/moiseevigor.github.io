@@ -222,7 +222,7 @@
       "familyArity": 0
     }
   ],
-  "checkerSha256": "224323c64b8720d1c28484d9a9f97883795bdd157604b57d0e4fbc068bd17194",
+  "checkerSha256": "5e19e689ac8b1dbbc4733b32fe41ccc4ca3dc865f1047a5272ae6fb2d52c8658",
   "files": [
     {
       "file": "public/js/proof-atlas-mutual-recursors.js",
@@ -230,7 +230,7 @@
     },
     {
       "file": "public/js/proof-atlas-elimination.js",
-      "sha256": "4a2c842a5245827c4ab4d1d2028c6119d5735cda588009454c3a25db5beccd22"
+      "sha256": "1301e9c3dd98095fea63debb0b5cf73a67f8b772b76a62704f21c9ba09d075bf"
     },
     {
       "file": "public/js/proof-atlas-recursive-inputs.js",
@@ -238,7 +238,7 @@
     },
     {
       "file": "public/js/proof-atlas-method-interfaces.js",
-      "sha256": "fd2eb4d02ced57e88474edb16923eb34930968869e85d5909a44bd3fd132762e"
+      "sha256": "1adaeeb086ffef7dee4541742fd033946d501d3674f1d88b811a4bd4299c6f7a"
     },
     {
       "file": "public/js/proof-atlas-method-origins.js",
@@ -264,7 +264,15 @@
     "fingerprintsComparedSeparately": [
       "checkerSha256",
       "modelSha256",
-      "files.sha256"
-    ]
+      "public/js/proof-atlas-mutual-recursors.js.sha256",
+      "public/js/proof-atlas-elimination.js.sha256",
+      "public/js/proof-atlas-recursive-inputs.js.sha256",
+      "public/js/proof-atlas-method-interfaces.js.sha256",
+      "public/js/proof-atlas-method-origins.js.sha256",
+      "public/js/proof-atlas-method-indices.js.sha256",
+      "public/js/proof-atlas-recursor-arguments.js.sha256"
+    ],
+    "nativeMetadataChangeRefused": true,
+    "functionalChangeRefused": true
   }
 }

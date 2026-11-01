@@ -3264,7 +3264,7 @@
     "syntheticStructuralOnly": true
   },
   "scope": "Finite typed source-use composition: 71 selected collars, two original application ports each. Source argument paths and binding values choose edges; native type/term conversion and shared storage cannot choose them. No tactic reconstruction, semantic compression, total-heap or completeness claim.",
-  "checkerSha256": "5c18a193f6a2dbeb24054524a0b93abed798b5f0ab0482d771876b1a110e8326",
+  "checkerSha256": "f9e50c09df230d5b6582bd28bad2c1dd5382d37a8d31adc370054038adf0675b",
   "files": [
     {
       "file": "public/js/proof-atlas-construction-composition.js",
@@ -3308,8 +3308,7 @@
     "sameFunctionalObservations": true,
     "fingerprintsComparedSeparately": [
       "checkerSha256",
-      "modelSha256",
-      "files.sha256"
+      "modelSha256"
     ]
   }
 }

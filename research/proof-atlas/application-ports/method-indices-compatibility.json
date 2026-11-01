@@ -718,11 +718,11 @@
     },
     {
       "file": "public/js/proof-atlas-method-flow.js",
-      "sha256": "d75bbce09a20615929bc3903f28fb69f7c26aec0b4b81ed10ea3379b13be11e4"
+      "sha256": "e3a4d81474746e927bb0afec8ae0307fb55bef02962efe0fc514a86b9fb435d0"
     },
     {
       "file": "public/js/proof-atlas-method-interfaces.js",
-      "sha256": "fd2eb4d02ced57e88474edb16923eb34930968869e85d5909a44bd3fd132762e"
+      "sha256": "1adaeeb086ffef7dee4541742fd033946d501d3674f1d88b811a4bd4299c6f7a"
     },
     {
       "file": "public/data/proof-atlas/method-indices-manifest.js",

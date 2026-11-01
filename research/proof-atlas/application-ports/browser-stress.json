@@ -174,15 +174,15 @@
     },
     "validatedQueries": 1,
     "selectedQueryDecodedBytes": 326933,
-    "validation": "Selected original native query; exact source syntax and binder lifting streamed through hash-checked pages. Only source paths/spines remain retained; this query’s native/type graphs load fully. Logical bounds are not heap measurements."
+    "validation": "Selected original native query; exact source syntax and binder lifting streamed through hash-checked pages. Only source paths/spines remain retained; this query\u2019s native/type graphs load fully. Logical bounds are not heap measurements."
   },
   "fullSourceOrNativeArchiveRequests": 0,
   "builtFiles": {
-    "public/js/proof-atlas-stream-example.js": "bb1c4ea7af7fee358d2e8d3592c3b1e6a10811c1d6412906d59df02a40976598",
+    "public/js/proof-atlas-stream-example.js": "0dce8a8dac16414db07c756e90a4a81883c1a21b7ce485a28820527a47881a9e",
     "public/js/proof-atlas-source-comparison.js": "ada6fd61d8e414e0ccca777373d631a0c182b03dfb71e30e1cb3e832a4f38e00",
     "public/js/proof-atlas-method-source.js": "6f4c20d73405d9a5fe8bdb6d9c458573a039c3edde45b226a7155a18ee413245",
     "public/js/proof-atlas-method-query-pages.js": "4ae984d88bd8f8fe3e11f0e94f58ca9cfa53cc484273e7c34c614df62099e947",
-    "public/js/proof-atlas-method-interfaces.js": "fd2eb4d02ced57e88474edb16923eb34930968869e85d5909a44bd3fd132762e",
+    "public/js/proof-atlas-method-interfaces.js": "1adaeeb086ffef7dee4541742fd033946d501d3674f1d88b811a4bd4299c6f7a",
     "public/data/proof-atlas/method-streaming-manifest.js": "124d04abb5a6305835d5847f19297ce9e99b6c7770ce67bd3e047d361f4fd2c3"
   },
   "checkerSha256": "3154d10c4d650585dd64897d0451c547f54b649dceb267ee20388c8a6196cf6f"
