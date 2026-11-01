@@ -721,6 +721,7 @@ jobs:
       - name: Verify actual-term decoder and selected subtree browser
         if: matrix.suite == 'reader'
         run: |
+          set -x
           node scripts/test-proof-atlas-decoder.cjs
           node scripts/test-proof-atlas-subtree.cjs
           node scripts/test-proof-atlas-article-index.cjs
@@ -817,6 +818,7 @@ jobs:
       - name: Verify context modules and proof interfaces
         if: matrix.suite == 'interfaces'
         run: |
+          set -x
           node scripts/test-proof-atlas-context-modules-browser.cjs
           node scripts/test-proof-atlas-context-interface-browser.cjs
           node scripts/test-proof-atlas-context-witnesses.cjs

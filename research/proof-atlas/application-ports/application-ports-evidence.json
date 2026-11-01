@@ -11426,7 +11426,7 @@
   "files": [
     {
       "file": ".github/workflows/proof-atlas-browser.yml",
-      "sha256": "c47689739ca8abe9f80d66ddb628312c1f9a9402215db58a75e46aa9878c9801"
+      "sha256": "2efd3d3ab30dd3810df8fa59296374ccbd7466806789dc351ebc87194d15fb8e"
     },
     {
       "file": "_config.yml",
