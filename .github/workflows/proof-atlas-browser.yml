@@ -652,6 +652,10 @@ jobs:
       ATLAS_ORIGIN: http://127.0.0.1:8833
     runs-on: ubuntu-latest
     timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [reader, interfaces]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -711,6 +715,7 @@ jobs:
         env:
           ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
       - name: Verify actual-term decoder and selected subtree browser
+        if: matrix.suite == 'reader'
         run: |
           node scripts/test-proof-atlas-decoder.cjs
           node scripts/test-proof-atlas-subtree.cjs
@@ -803,6 +808,11 @@ jobs:
           node scripts/test-proof-atlas-packet-types-browser.cjs
           node scripts/test-proof-atlas-proof-frontier-browser.cjs
           node scripts/test-proof-atlas-compiled-replay-browser.cjs
+        env:
+          ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
+      - name: Verify context modules and proof interfaces
+        if: matrix.suite == 'interfaces'
+        run: |
           node scripts/test-proof-atlas-context-modules-browser.cjs
           node scripts/test-proof-atlas-context-interface-browser.cjs
           node scripts/test-proof-atlas-context-witnesses.cjs
@@ -943,13 +953,13 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: proof-atlas-browser-screenshots
+          name: proof-atlas-browser-screenshots-${{ matrix.suite }}
           path: /tmp/proof-atlas-browser
       - name: Retain source-cut evaluation evidence
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: proof-atlas-scene-audits
+          name: proof-atlas-scene-audits-${{ matrix.suite }}
           path: |
             /tmp/atlas-reduced-replay.json
             /tmp/atlas-replay-context-loading.json
