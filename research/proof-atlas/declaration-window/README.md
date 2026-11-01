@@ -8,6 +8,8 @@ The vertical line denotes telescope order. At declaration i, the context consist
 
 Each type uses the existing recoverable notation. Literal operator signatures, hidden type/instance arguments and constructor ports retain their exact records. Select a symbol or **Inspect declared type** for the full field inspector. **Inspect computation** opens a result or definition value. The original occurrence link keeps the source packet identity and path, separately from the computed component/native owner.
 
+**Show value structure** opens one [application-port interface](../application-collar/README.md) beneath a result or definition. It keeps the declared type above the function and argument ports, with exact lexical targets and separately recorded original input correspondences. Other value structures close when another is opened.
+
 Visible variable occurrences link to their actual earlier declaration, a binder inside the type, or an original-context binder. These targets come from de Bruijn scope resolution and qualified addresses, never matching printed names. Only references exposed by the current notation cut are listed. Hidden arguments and frontiers can contain further references. No link denotes a necessary mathematical premise, tactic history or logical implication.
 
 ## Bounds and checks

@@ -50,6 +50,7 @@
     let version = 0, fieldVersion = 0, activeCall = selectedCall, requestedCall = selectedCall, loading = false, scene = null, sourceTarget = null;
     let notationWanted = false, notationCursor = null, notationScene = null, notationController = null, notationVersion = 0, notationLoading = false, readCurrentNotation = null;
     let windowOffset = 0, windowSnapshot = null, windowController = null, windowVersion = 0, windowLoading = false;
+    let valueControl = null, valueRoot = null, valueDetails = null, readCurrentConstructors = null;
     const live = value => !disposed && value === version;
     function retireNotation() {
       notationVersion++; notationController?.abort(); notationController = null; notationCursor?.dispose(); notationCursor = null; notationScene = null; notationLoading = false;
@@ -59,7 +60,22 @@
       if (windowLoading) windowStatus.textContent = 'Reading cancelled. Use Read these declarations to retry.';
       windowLoading = false;
       previousWindow.disabled = !lease?.bindings || windowOffset === 0; nextWindow.disabled = !lease?.bindings || windowOffset + 4 >= lease.bindings.length; retryWindow.disabled = false;
-      if (clear) { windowSnapshot = null; windowBody.replaceChildren(); windowStatus.textContent = ''; }
+      if (clear) { closeValue(); windowSnapshot = null; windowBody.replaceChildren(); windowStatus.textContent = ''; }
+    }
+    function closeValue(root = valueRoot) {
+      if (root !== valueRoot) return; valueControl?.dispose(); valueControl = null; valueRoot = null;
+      if (valueDetails) valueDetails.open = false; valueDetails = null;
+    }
+    function openValue(entry, root, detail, data) {
+      if (!lease || disposed || windowSnapshot !== data || windowLoading) return;
+      closeValue(); notationWanted = false; readCurrentConstructors?.(false); retireNotation(); valueRoot = root; valueDetails = detail;
+      const owner = lease, value = version;
+      if (!host.ProofAtlasApplicationCollar) { root.replaceChildren(el('p', 'Value structure reader unavailable. Exact constructor fields remain available.')); return; }
+      valueControl = host.ProofAtlasApplicationCollar.mount(root, { lease: owner, index: entry.index, isCurrent: () => live(value) && owner === lease && windowSnapshot === data && valueRoot === root,
+        beforePreview: () => { notationWanted = false; readCurrentConstructors?.(false); retireNotation(); },
+        onField: address => { selectedBindingKey = entry.binding.key || null; sourceMatch = null; navigate(address.component, address.route.slots, true); },
+        onBinder: ref => { if (ref.target.namespace === 'source-expression') showSource(ref.target); else { const b = owner.bindings[ref.targetIndex]; selectedBindingKey = b.key || null; sourceMatch = null; if (owner.manifest.constraintRule) showBinding(b); navigate(ref.target.component, ref.target.route.slots, true); } },
+        sourceLink: (address, slot) => sourceLink(address, 'Original input ' + entry.binding.call + ':' + slot, entry.binding.call, slot) });
     }
     async function readWindow(start) {
       if (!lease?.bindings || disposed || !Number.isInteger(start) || start < 0 || start >= lease.bindings.length) return;
@@ -67,7 +83,7 @@
       const value = version, owner = lease;
       // The parent provider admits one notation cache. Return an open field
       // to constructors before borrowing that cache for the declaration types.
-      if (notationWanted && scene) { notationWanted = false; await navigate(scene.root.address.component, scene.root.address.route.slots); }
+      if (notationWanted && scene) readCurrentConstructors?.(false);
       if (!live(value) || owner !== lease) return;
       retireWindow(); windowOffset = start; windowController = new AbortController();
       const request = windowVersion;
@@ -79,6 +95,7 @@
         if (!live(value) || request !== windowVersion || owner !== lease) return;
         windowSnapshot = data;
         host.ProofAtlasDeclarationWindow.draw(windowBody, { window: data, isCurrent: () => live(value) && windowSnapshot === data && !windowLoading,
+          onValue: (entry, root, detail) => openValue(entry, root, detail, data), onCloseValue: root => closeValue(root),
           onField: (entry, address) => { selectedBindingKey = entry.binding.key || null; sourceMatch = null; if (owner.manifest.constraintRule) showBinding(entry.binding); navigate(address.component, address.route.slots, true); },
           onBinder: ref => { if (ref.target.namespace === 'source-expression') showSource(ref.target); else { const b = ref.declaration === null ? null : owner.bindings[ref.declaration]; selectedBindingKey = b?.key || null; sourceMatch = null; if (b && owner.manifest.constraintRule) showBinding(b); navigate(ref.target.component, ref.target.route.slots, true); } },
           sourceLink: binding => sourceLink(binding.original || binding.originalInput, binding.kind === 'result' ? 'Original result occurrence' : 'Original input occurrence', binding.call, binding.slot ?? 0, binding.kind === 'result') });
@@ -93,12 +110,12 @@
     function retire() {
       retireWindow(); windowDetails.hidden = true; windowDetails.open = false;
       retireNotation();
-      readCurrentNotation = null;
+      readCurrentNotation = null; readCurrentConstructors = null;
       version++; fieldVersion++; controller?.abort(); fieldController?.abort(); lease?.dispose(); lease = null; current = null; scene = null; sourceTarget = null;
       ports.replaceChildren(); ordering.replaceChildren(); bindingControls.hidden=true; ordering.hidden=true; selectedBindingKey=null; sourceMatch=null; fields.replaceChildren(); sourceBox.replaceChildren(); evidence.replaceChildren(); componentSelect.replaceChildren();
       bindingList.hidden = true; loadCalls.disabled = true;
     }
-    function clearField(message){fieldController?.abort();retireWindow();retireNotation();readCurrentNotation=null;fieldVersion++;loading=false;scene=null;selectedBindingKey=null;sourceMatch=null;sourceTarget=null;fields.replaceChildren();sourceBox.replaceChildren();status.textContent=message;}
+    function clearField(message){fieldController?.abort();retireWindow();retireNotation();readCurrentNotation=null;readCurrentConstructors=null;fieldVersion++;loading=false;scene=null;selectedBindingKey=null;sourceMatch=null;sourceTarget=null;fields.replaceChildren();sourceBox.replaceChildren();status.textContent=message;}
     function sourceLink(address, text = 'Open exact original occurrence', call = activeCall ?? profile.members[0], slot = 0, result = false) {
       const explorer = ['published-15', 'working-26', 'goedel-sample-4331'].includes(profile.source.edition);
       const ownerVersion = version;
@@ -113,9 +130,10 @@
     }
     async function navigate(component, slots = [], focus = false, expectedAddress = null) {
       if (!lease?.neighborhood || disposed) return;
+      valueControl?.cancel();
       retireWindow(false);
       retireNotation();
-      readCurrentNotation = null;
+      readCurrentNotation = null; readCurrentConstructors = null;
       fieldController?.abort(); fieldController = new AbortController();
       const value = version, field = ++fieldVersion, owner = lease;
       loading = true; scene = null; sourceTarget = null; fields.replaceChildren(); sourceBox.replaceChildren(); componentSelect.value = component;
@@ -132,11 +150,13 @@
         });
         const detail = el('details'); detail.append(el('summary', 'Exact computed address'), el('pre', JSON.stringify(cut.root.address, null, 2)));
         const modes = el('div', undefined, 'an-controls'), notation = el('div'), notationStatus = el('p');
-        const readNotation = button('Read field notation', () => openNotation()), constructors = button('Constructor fields', () => {
+        const readNotation = button('Read field notation', () => openNotation()), constructors = button('Constructor fields', () => showConstructors(true));
+        function showConstructors(focus = false) {
           if (!currentField()) return;
           notationWanted = false; retireNotation(); notation.hidden = true; notationStatus.textContent = ''; view.hidden = false;
-          readNotation.disabled = false; constructors.disabled = true; view.focus({ preventScroll: true });
-        });
+          readNotation.disabled = false; constructors.disabled = true; if (focus) view.focus({ preventScroll: true });
+        }
+        readCurrentConstructors = showConstructors;
         notation.dataset.regionFunctionNotation = ''; notation.hidden = true; notationStatus.dataset.regionFunctionNotationStatus = ''; notationStatus.setAttribute('role', 'status');
         modes.append(readNotation, constructors); constructors.disabled = true;
         fields.replaceChildren(modes, notationStatus, notation, view, detail);
@@ -167,6 +187,7 @@
         }
         async function openNotation() {
           if (!currentField() || notationLoading) return;
+          valueControl?.cancel();
           retireWindow(false);
           notationWanted = true; const request = ++notationVersion; notationLoading = true;
           notationController?.abort(); notationController = new AbortController();
@@ -303,6 +324,7 @@
       await navigate(address.component,[...address.route.slots,...tail]);return !disposed && !!scene;
     }, state: () => ({ status: disposed ? 'disposed' : lease ? lease.manifest.status === 'PASS' ? 'ready' : 'kernel-rejected' : current ? 'loading' : 'unavailable', loading, rule:ruleSelect.value, case: current?.id || null, activeCall, selection: scene?.root.address || null, sourceTarget, bindingKey:selectedBindingKey,bindingOrder,bindingOffset,sourceMatch:sourceMatch&&scene&&JSON.stringify(sourceMatch.counterpart)===JSON.stringify(scene.root.address)?sourceMatch:null, lease: lease?.state() || null,
       declarationWindow: { loading: windowLoading, offset: windowOffset, ready: !!windowSnapshot, stats: windowSnapshot?.stats || null, declarations: windowSnapshot?.entries.map(entry => ({ index: entry.index, role: entry.role, binder: entry.binding.binder, domain: entry.binding.domain, references: entry.references })) || [] },
+      valueStructure: valueControl?.state() || null,
       notation: notationWanted ? { loading: notationLoading, owner: notationScene?.root.origin || null, stats: notationScene?.stats || null, lease: notationCursor?.state() || null } : null }),
       dispose: () => { if (disposed) return; retire(); disposed = true; root.replaceChildren(); } };
   }

@@ -59,7 +59,7 @@
     return { format: 'ProofAtlasDeclarationWindow/1', start, end: start + entries.length, total: all.length, originalContext: m.context.original.length, entries, stats,
       scope: 'Declared annotations inside the recorded function, in computed declaration order. Only references exposed by these notation cuts are listed; collapsed arguments may contain others. No new typing or premise-necessity judgment.' };
   }
-  function draw(root, { window: data, onField, onBinder, sourceLink, isCurrent }) {
+  function draw(root, { window: data, onField, onBinder, sourceLink, isCurrent, onValue = () => {}, onCloseValue = () => {} }) {
     const el = (tag, text, cls) => { const e = document.createElement(tag); if (text !== undefined) e.textContent = text; if (cls) e.className = cls; return e; };
     const button = (text, action) => { const b = el('button', text); b.type = 'button'; b.onclick = () => { if (isCurrent()) action(); }; return b; };
     root.replaceChildren();
@@ -78,6 +78,12 @@
       tools.append(button('Inspect declared type', () => onField(entry, b.domain)));
       if (b.value) tools.append(button('Inspect computation', () => onField(entry, b.value)));
       tools.append(sourceLink(b)); card.append(tools);
+      if (b.value) {
+        const detail = el('details'), valueRoot = el('div'); detail.dataset.dwValue = String(entry.index);
+        detail.append(el('summary', 'Show value structure'), valueRoot);
+        detail.ontoggle = () => { if (!isCurrent()) return; if (detail.open) onValue(entry, valueRoot, detail); else onCloseValue(valueRoot); };
+        card.append(detail);
+      }
       const references = el('div', undefined, 'dw-references'), distinct = [];
       for (const ref of entry.references) if (!distinct.some(old => same(old.target, ref.target))) distinct.push(ref);
       references.append(el('span', 'Visible type references: '));
