@@ -10,7 +10,15 @@ assert.equal(current.sourceSites,3);assert.equal(current.transportPairs,3);asser
 for(const[file,hash]of Object.entries(current.files))assert.equal(sha(fs.readFileSync(file)),hash,'current implementation differs: '+file);
 assert.equal(current.files[runtime],sha(fs.readFileSync(runtime)));
 const tooling=['scripts/build-proof-atlas-recorded-union-evidence.cjs','scripts/test-proof-atlas-recorded-union-browser.cjs'];for(const file of tooling)assert.equal(current.tooling[file],sha(fs.readFileSync(file)),'current tooling differs: '+file);
-for(const row of index.files)if(row.file!==runtime&&!tooling.includes(row.file))assert.equal(sha(fs.readFileSync(row.file)),row.sha256,'stale evidence: '+row.file);
+const constructionChecker='scripts/test-proof-atlas-construction-pages-browser.cjs',construction=JSON.parse(fs.readFileSync(folder+'current-construction-browser.json'));
+assert.equal(construction.status,'PASS');assert.equal(construction.checkerSha256,sha(fs.readFileSync(constructionChecker)));
+for(const[key,value]of Object.entries({profiles:35,sceneComparisons:51,typeComparisons:46,failureControls:7,axeAudits:4,completeArchiveRequests:0}))assert.equal(construction[key],value,'current construction browser: '+key);
+assert(construction.typePageHashRefusals>0,'current corruption control did not run');
+for(const row of index.files){
+ // Keep the original checker bytes under the original checkpoint digest.
+ const file=row.file===constructionChecker?folder+'construction-pages-browser.checkpoint.cjs':row.file;
+ if(row.file!==runtime&&!tooling.includes(row.file))assert.equal(sha(fs.readFileSync(file)),row.sha256,'stale evidence: '+row.file);
+}
 const reports={};for(const name of ['audit','browser-audit','complete-browser-audit','construction-transport','let-browser-audit','regressions','transport-browser-audit','type-browser-audit','type-query-transport']){const file=name+'.json',bytes=fs.readFileSync(folder+file),recorded=index.files.find(x=>x.file===folder+file);assert(recorded);assert.equal(sha(bytes),recorded.sha256);reports[file]=JSON.parse(bytes);assert.equal(reports[file].status,'PASS');}
 const bytes=Buffer.from(JSON.stringify({format:'ProofAtlasRecordedUnionPublicEvidence/1',index,reports},null,2)+'\n'),file=folder+'recorded-union-evidence.json';
 if(check)assert(fs.readFileSync(file).equals(bytes),'public evidence bundle differs');else fs.writeFileSync(file,bytes);
