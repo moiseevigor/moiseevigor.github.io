@@ -650,6 +650,10 @@ jobs:
   chromium:
     env:
       ATLAS_ORIGIN: http://127.0.0.1:8833
+      ATLAS_EQUALITY_SCREENSHOTS: /tmp/proof-atlas-browser/equality
+      ATLAS_EQUALITY_STREAM_SCREENSHOTS: /tmp/proof-atlas-browser/equality-streaming
+      ATLAS_COMPOSITION_SCREENSHOTS: /tmp/proof-atlas-browser/composition
+      ATLAS_APPLICATION_PORT_SCREENSHOTS: /tmp/proof-atlas-browser/application-ports
     runs-on: ubuntu-latest
     timeout-minutes: 90
     strategy:
