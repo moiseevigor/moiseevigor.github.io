@@ -60,6 +60,7 @@ const check=(ok,message)=>{if(!ok)throw Error(message)};
   await page.waitForFunction(()=>window.ProofAtlasLibrary?.getSnapshot()?.name);
   check(await page.locator('.pl-workspace[aria-label="Complete proof explorer"]').count()===1,'Complete proof explorer missing');
   check(await page.locator('#pl-term-view').getAttribute('aria-pressed')==='true','Local term must be the initial view');
+  await page.locator('#pl-local-view .pl-local-tree').waitFor({state:'visible'});
   check(await page.locator('#pl-local-view .pl-local-tree').isVisible(),'Selected proof structure unavailable');
   await page.goto(origin+'/projects/proof-atlas/#expr-1852',{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>document.querySelector('#pa-inspector-heading')?.textContent.includes('1852'));
