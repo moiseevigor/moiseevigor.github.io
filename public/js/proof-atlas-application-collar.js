@@ -6,6 +6,22 @@
   const limits = Object.freeze({ arguments: 64, visibleArguments: 4, vertices: 6, path: 512, metadataBytes: 1048576, previewCharacters: 96 });
   const demand = (ok, message) => { if (!ok) throw Error('Application collar: ' + message); };
   const same = (a, b) => JSON.stringify(a) === JSON.stringify(b), copy = value => JSON.parse(JSON.stringify(value));
+  // One literal-spine rule for both source expressions and computed values.
+  // The owner supplies exact addresses, lexical interpretation and row delivery.
+  async function spine(root, { row, point, port }) {
+    const argumentsReversed = [], wrappers = []; let at = root;
+    for (;;) {
+      const tuple = await row(at.node);
+      if (tuple[0] !== 5) break;
+      demand(wrappers.length < limits.arguments, 'application spine exceeds 64 positions; constructor fields remain available');
+      wrappers.push(at); argumentsReversed.push(point(tuple[1][1], [...at.route.slots, 1])); at = point(tuple[1][0], [...at.route.slots, 0]);
+    }
+    const ports = [];
+    for (const [slot, address] of [at, ...argumentsReversed.reverse()].entries()) ports.push(await port(slot, address));
+    const tuple = await row(root.node), sum = BigInt(wrappers.length) + ports.reduce((n, p) => n + BigInt(p.expanded), 0n);
+    demand(sum === BigInt(tuple[3]), 'application occurrence partition');
+    return { wrappers, ports, expanded: tuple[3] };
+  }
   async function read(lease, index, { signal } = {}) {
     const all = lease?.bindings, m = lease?.manifest;
     demand(m?.status === 'PASS' && Number.isSafeInteger(index) && index >= 0 && index < all?.length && all[index].value, 'no recorded value');
@@ -19,15 +35,7 @@
     async function row(id) { live(); const tuple = await lease.readNode(id, { signal }); live(); return tuple; }
     const header = await row(binding.binder.node);
     demand(header[0] === 8 && header[1][1] === root.node && same(root.route.slots, [...binding.binder.route.slots, 1]), 'value field occurrence');
-    const argumentsReversed = [], wrappers = []; let at = root;
-    for (;;) {
-      const tuple = await row(at.node);
-      if (tuple[0] !== 5) break;
-      demand(wrappers.length < limits.arguments, 'application spine exceeds 64 positions; constructor fields remain available');
-      wrappers.push(at); argumentsReversed.push(point(tuple[1][1], [...at.route.slots, 1])); at = point(tuple[1][0], [...at.route.slots, 0]);
-    }
-    const points = [at, ...argumentsReversed.reverse()], ports = [];
-    for (const [slot, address] of points.entries()) {
+    const { wrappers, ports, expanded } = await spine(root, { row, point, port: async (slot, address) => {
       const tuple = await row(address.node), kind = A.kinds[tuple[0]], payload = tuple[2]; let reference = null;
       if (tuple[0] === 0) {
         const n = payload.index;
@@ -38,8 +46,8 @@
         }
       }
       let label = reference?.relation === 'computed-binder-use' ? 'declaration ' + (reference.targetIndex + 1) : reference ? 'original Γ slot ' + (reference.ordinal + 1) : tuple[0] === 4 ? payload.name : tuple[0] === 9 ? String(payload.value) : kind;
-      label = String(label); const port = { slot, address, kind, expanded: tuple[3], label: label.slice(0, 96), labelTruncated: label.length > 96, reference }; account(port); ports.push(port);
-    }
+      label = String(label); const port = { slot, address, kind, expanded: tuple[3], label: label.slice(0, 96), labelTruncated: label.length > 96, reference }; account(port); return port;
+    } });
     if (binding.kind === 'result' && lease.portMap) {
       const mapped = lease.portMap.filter(p => p.call === binding.call); demand(mapped.length === ports.length, 'source input count');
       for (const port of ports) {
@@ -49,10 +57,9 @@
         account(port.original);
       }
     }
-    const rootTuple = await row(root.node), sum = BigInt(wrappers.length) + ports.reduce((n, p) => n + BigInt(p.expanded), 0n);
-    demand(sum === BigInt(rootTuple[3]), 'application occurrence partition'); live();
+    live();
     const data = { format: 'ProofAtlasApplicationCollar/1', rule: 'curried-application-ports/1', index, bindingKey: binding.key || null, bindingKind: binding.kind, root, wrappers, ports,
-      arguments: ports.length - 1, expanded: rootTuple[3], originalContext: m.context.original.length, application: wrappers.length > 0,
+      arguments: ports.length - 1, expanded, originalContext: m.context.original.length, application: wrappers.length > 0,
       scope: 'Literal app spine inside the recorded function. Metadata and all other constructors remain opaque endpoints. Root-variable links are lexical uses; inner references and logical necessity are not inferred. No new typing judgments.' };
     const metadataBytes = new TextEncoder().encode(JSON.stringify(data)).length; demand(metadataBytes <= limits.metadataBytes, 'metadata bound');
     return { ...data, metadataBytes };
@@ -63,7 +70,12 @@
     return { offset, ports, arguments: data.arguments, previous: offset ? offset - 4 : null, next: offset + 4 < data.arguments ? offset + 4 : null,
       vertices: data.application ? ports.length + 1 : 1, retained: String(retained), hidden: String(BigInt(data.expanded) - retained), represented: data.expanded };
   }
-  function mount(root, { lease, index, isCurrent, onField, onBinder, sourceLink, beforePreview = () => {} }) {
+  function mount(root, { lease, index, isCurrent, onField, onBinder, sourceLink, beforePreview = () => {},
+    readModel = signal => read(lease, index, { signal }),
+    openPreview = (address, signal) => lease.openNotation(address.component, address.route.slots, { signal }),
+    previewAddress = (origin, address) => host.ProofAtlasDeclarationWindow.componentAddress(origin, address),
+    resultLabel = value => 'Value of declaration ' + (value.index + 1),
+    resultNote = 'The declared result type is above.' }) {
     const el = (tag, text, cls) => { const e = document.createElement(tag); if (text !== undefined) e.textContent = text; if (cls) e.className = cls; return e; };
     let disposed = false, controller = null, version = 0, pageVersion = 0, data = null, currentPage = null, loading = false;
     let previewVersion = 0, previewController = null, previewCursor = null, previewLoading = false, previews = [], previewError = null;
@@ -83,15 +95,15 @@
         const card = el('div', undefined, 'ac-port'); card.dataset.acPort = String(port.slot);
         card.append(el('strong', port.slot === 0 ? data.application ? 'Function · slot 0' : 'Value root' : 'Argument · slot ' + port.slot));
         const pick = pickCurrent(port.label + (port.labelTruncated ? '…' : ''), () => onField(port.address)); pick.dataset.acInspect = ''; pick.dataset.acAddress = JSON.stringify(port.address); card.append(pick);
-        if (port.reference) { const ref = port.reference, target = pickCurrent(ref.relation === 'computed-binder-use' ? 'Uses declaration ' + (ref.targetIndex + 1) : 'Uses original context binder', () => onBinder(ref)); target.dataset.acReference = ref.relation; card.append(target); }
-        else card.append(el('small', 'Nested references remain in the exact field inspector.'));
+        if (port.reference) { const ref = port.reference, target = pickCurrent(ref.label || (ref.relation === 'computed-binder-use' ? 'Uses declaration ' + (ref.targetIndex + 1) : 'Uses original context binder'), () => onBinder(ref)); target.dataset.acReference = ref.relation; card.append(target); }
+        else if (['app', 'lam', 'forallE', 'letE', 'mdata', 'proj'].includes(port.kind)) card.append(el('small', 'Nested references remain in the exact field inspector.'));
         if (port.original) { const link = sourceLink(port.original, port.slot, data); link.dataset.acOriginal = ''; link.addEventListener('click', event => { if (disposed || !isCurrent() || revision !== pageVersion) { event.preventDefault(); event.stopImmediatePropagation(); } }, true); card.append(link, el('small', port.sourceRelation === 'internal-source-use' ? 'Recorded original source-use position' : 'Original specialization position · ' + port.sourceRelation)); }
         inputs.append(card);
       }
       diagram.append(inputs);
       if (data.application) {
         const join = el('div', undefined, 'ac-join'); join.append(el('span', '→'), el('small', 'apply in order'));
-        const output = el('div', undefined, 'ac-output'), pick = pickCurrent('Value of declaration ' + (data.index + 1), () => onField(data.root)); pick.dataset.acResult = ''; output.append(pick, el('small', data.wrappers.length + ' app occurrences folded into this join. The declared result type is above.'));
+        const output = el('div', undefined, 'ac-output'), pick = pickCurrent(resultLabel(data), () => onField(data.root)); pick.dataset.acResult = ''; output.append(pick, el('small', data.wrappers.length + ' app occurrences folded into this join. ' + resultNote));
         diagram.append(join, output);
       }
       drawing.append(diagram, el('p', currentPage.retained + ' occurrence records + ' + currentPage.hidden + ' collapsed = ' + currentPage.represented + '. ' + (data.arguments - (currentPage.ports.length - 1)) + ' argument positions outside this page. Binder links are references, not implication arrows.', 'dw-scope'), el('p', 'Expression previews abbreviate the shared notation. Inspect a port for its complete fields and hidden type/instance arguments.', 'dw-scope'));
@@ -106,11 +118,14 @@
       try {
         for (const port of composite) {
           if (!live()) return;
-          const cursor = await lease.openNotation(port.address.component, port.address.route.slots, { signal: previewController.signal });
+          const cursor = await openPreview(port.address, previewController.signal);
           if (!live()) { cursor.dispose(); return; } previewCursor = cursor;
           try {
-            demand(same(host.ProofAtlasDeclarationWindow.componentAddress(cursor.scene.root.origin, port.address), port.address), 'preview occurrence');
+            demand(same(previewAddress(cursor.scene.root.origin, port.address), port.address), 'preview occurrence');
             const temporary = el('div'); host.ProofAtlasTypeNotationView.draw(temporary, { scene: cursor.scene, onSelect: () => {}, isCurrent: () => false });
+            // Field captions use block layout in the full notation. Preserve
+            // those boundaries when taking a short text-only port preview.
+            for (const caption of temporary.querySelectorAll('.tn-binder-field > small')) { caption.append(': '); caption.parentElement.prepend(document.createTextNode(' · ')); }
             const full = temporary.querySelector('.tn-expression').textContent, text = full.slice(0, limits.previewCharacters), truncated = full.length > limits.previewCharacters;
             const pick = drawing.querySelector('[data-ac-port="' + port.slot + '"] [data-ac-inspect]');
             if (pick && live()) { pick.textContent = text + (truncated ? '…' : ''); pick.classList.add('ac-preview'); previews.push({ slot: port.slot, address: port.address, text, truncated, objects: cursor.scene.stats.nodes, notationRows: cursor.state().peakRows, notationBytes: cursor.state().peakBytes }); }
@@ -128,7 +143,7 @@
       cancelPreviews(); previews = []; previewError = null;
       const focused = tools.contains(document.activeElement) ? document.activeElement : null; pageVersion++;
       loading = true; data = null; currentPage = null; drawing.replaceChildren(); previous.disabled = next.disabled = retry.disabled = true; status.textContent = 'Reading the value’s exact application spine…';
-      try { const result = await read(lease, index, { signal: controller.signal }); if (disposed || request !== version || !isCurrent()) return; data = result; draw(); }
+      try { const result = await readModel(controller.signal); if (disposed || request !== version || !isCurrent()) return; data = result; draw(); }
       catch (error) { if (!disposed && request === version && isCurrent()) status.textContent = 'Value structure unavailable: ' + error.message + '. Exact constructor fields remain available.'; }
       finally { if (!disposed && request === version && isCurrent()) { loading = false; retry.disabled = false; if (focused && [document.body, focused].includes(document.activeElement)) (focused.disabled ? retry : focused).focus({ preventScroll: true }); } }
     }
@@ -136,5 +151,5 @@
     load();
     return { cancel, state: () => ({ loading, index, offset: currentPage?.offset ?? 0, data, page: currentPage, previewLoading, previews, previewError }), dispose: () => { if (disposed) return; disposed = true; version++; controller?.abort(); cancelPreviews(); data = null; currentPage = null; root.replaceChildren(); } };
   }
-  const api = { read, page, mount, limits }; if (node) module.exports = api; else host.ProofAtlasApplicationCollar = api;
+  const api = { spine, read, page, mount, limits }; if (node) module.exports = api; else host.ProofAtlasApplicationCollar = api;
 })(typeof window === 'undefined' ? globalThis : window);

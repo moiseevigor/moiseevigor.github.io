@@ -29,13 +29,17 @@ assert.deepEqual(A.binding(sharedBinder,{root:1,slots:[1]}).route,{root:1,slots:
   assert.equal((await p.evaluate(()=>ProofAtlasLibrary.getSnapshot())).occurrences,'7288','Focused benchmark and complete library differ');
   const a=await p.locator('#pl-expression .pl-actions button').first();await a.click();const selected=await p.evaluate(()=>ProofAtlasLibrary.getSnapshot());assert(selected.path.endsWith('.domain')||selected.path.endsWith('.fn'));
   await p.getByRole('button',{name:'Parent',exact:true}).click();assert((await p.evaluate(()=>ProofAtlasLibrary.getSnapshot())).path==='root.value');
-  await p.getByRole('button',{name:'All declaration links',exact:true}).click();assert((await p.locator('#pl-graph-note').textContent()).includes('739 / 739'));
-  await p.getByRole('button',{name:'Term structure',exact:true}).click();
-  const point=await p.evaluate(()=>ProofAtlasLibrary.getPoint(ProofAtlasLibrary.getSnapshot().selected));assert(point&&Number.isFinite(point.x)&&Number.isFinite(point.y));
+  const dependencies=await p.evaluate(()=>({uses:ProofAtlasLibrary.getData().dependencies.map(d=>d.name),usedBy:PROOF_ATLAS_LIBRARY.editions[0].edges.filter(e=>e.to==='CrossingData.crossing').map(e=>e.from)}));
+  await p.getByRole('button',{name:'Declaration uses',exact:true}).click();assert.equal((await p.evaluate(()=>ProofAtlasLibrary.getSnapshot())).mode,'dependencies');
+  const groups=p.locator('#pl-dependency-view > section');assert.equal(await groups.count(),2);
+  for(const[index,names]of[dependencies.uses,dependencies.usedBy].entries()){const group=groups.nth(index),more=group.getByRole('button',{name:'Show next 12',exact:true});assert.equal(await group.locator('li').count(),Math.min(12,names.length));while(await more.isVisible())await more.click();assert.deepEqual(await group.locator('li > a, li > code').allTextContents(),names);}
+  assert((await p.locator('#pl-graph-note').textContent()).includes('Only direct references'));
+  await p.getByRole('button',{name:'Local term',exact:true}).click();await p.locator('#pl-local-view .pl-local-tree').waitFor();assert.equal((await p.evaluate(()=>ProofAtlasLibrary.getSnapshot())).mode,'term');
+  assert.equal(await p.locator('#pl-local-view [data-local-path]').first().getAttribute('data-local-path'),'root.value');assert(await p.locator('#pl-local-view .pl-local-card').count()<=13);
   await p.screenshot({path:path.join(dir,'complete-crossing-proof.png')});
   await p.locator('#pl-edition').selectOption('working-26');await p.waitForFunction(()=>ProofAtlasLibrary.getSnapshot()?.edition==='working-26'&&!document.getElementById('pl-library').matches('[aria-busy=true]'));
   await p.evaluate(()=>ProofAtlasLibrary.selectDeclaration('JacobiConcrete.AmplitudeChart.midpoint_polynomial'));
-  const largest=await p.evaluate(()=>ProofAtlasLibrary.getSnapshot());assert.equal(largest.occurrences,'462477126');assert.equal(largest.uniqueNodes,121568);assert(largest.rendered<=800);
+  const largest=await p.evaluate(()=>ProofAtlasLibrary.getSnapshot());assert.equal(largest.occurrences,'462477126');assert.equal(largest.uniqueNodes,121568);assert(largest.rendered<=13);
   await p.screenshot({path:path.join(dir,'shared-large-proof.png')});
   for(const width of [1280,768,390]){await p.setViewportSize({width,height:950});assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+3),'Library overflow '+width);}
   await p.addScriptTag({path:require.resolve('axe-core/axe.min.js')});
@@ -48,6 +52,7 @@ assert.deepEqual(A.binding(sharedBinder,{root:1,slots:[1]}).route,{root:1,slots:
   await p.locator('.pa-row-connections a[data-lean-name="JacobiFull.exact_first_time"]').last().click();await p.waitForURL('**/library/**');await p.waitForFunction(()=>ProofAtlasLibrary.getSnapshot()?.name==='JacobiFull.exact_first_time');
   const bad=await browser.newPage();await bad.route('**/library/published-15/*.gz',r=>r.fulfill({status:200,contentType:'application/octet-stream',body:Buffer.from([31,139,8,0,0])}));await bad.goto(base+'/projects/proof-atlas/library/?proof=CrossingData.crossing');await bad.waitForFunction(()=>!document.getElementById('pl-library').matches('[aria-busy=true]'));assert.equal(await bad.locator('#pl-source pre').count(),0,'Corrupt proof packet must fail closed');await bad.close();
   const textDownload=await p.goto(base+'/projects/proof-atlas/library/?proof=CrossingData.crossing');await p.waitForFunction(()=>ProofAtlasLibrary.getSnapshot()?.name==='CrossingData.crossing');
+  await p.getByText('Complete selected term, with sharing retained',{exact:true}).click();
   const download=await Promise.all([p.waitForEvent('download'),p.getByRole('button',{name:'Download complete decoded term'}).click()]);const downloaded=fs.readFileSync(await download[0].path(),'utf8');assert(downloaded.includes('Root: e'));assert(downloaded.includes('CrossingData.exists_branch'));assert(downloaded.includes('bound variable ['));
   assert.equal((await p.request.get(base+'/public/research/proof-atlas/formal/working-26/complete-project.zip')).status(),404);
   assert(await p.evaluate(()=>PROOF_ATLAS_LIBRARY.editions.every(e=>!e.sourceArchive&&!e.sourceProject&&e.declarations.every(r=>!r.sourceUrl))), 'Private sources in public manifest');

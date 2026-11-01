@@ -5,6 +5,8 @@ on:
     paths:
       - 'research/proof-atlas/declaration-window/**'
       - 'research/proof-atlas/application-collar/**'
+      - 'research/proof-atlas/source-applications/**'
+      - 'public/js/proof-atlas-source-applications.js'
       - 'public/js/proof-atlas-application-collar.js'
       - 'public/js/proof-atlas-declaration-window.js'
       - 'public/js/proof-atlas-region-function-pages-view.js'
@@ -364,6 +366,8 @@ on:
     paths:
       - 'research/proof-atlas/declaration-window/**'
       - 'research/proof-atlas/application-collar/**'
+      - 'research/proof-atlas/source-applications/**'
+      - 'public/js/proof-atlas-source-applications.js'
       - 'public/js/proof-atlas-application-collar.js'
       - 'public/js/proof-atlas-declaration-window.js'
       - 'public/js/proof-atlas-region-function-pages-view.js'
@@ -661,6 +665,8 @@ jobs:
         run: node research/proof-atlas/declaration-window/check.cjs --check
       - name: Check value application ports and their occurrence partition
         run: node research/proof-atlas/application-collar/check.cjs --check
+      - name: Verify original source application structure
+        run: node research/proof-atlas/source-applications/check.cjs --check
       - name: Verify complete substitution correspondence and paged cuts
         run: |
           node research/proof-atlas/substitution-geometry/pack.cjs --check
@@ -804,6 +810,7 @@ jobs:
           node research/proof-atlas/declaration-window/browser.cjs
           node research/proof-atlas/application-collar/browser.cjs
           node research/proof-atlas/application-collar/lifecycle.cjs
+          node research/proof-atlas/source-applications/browser.cjs
           node research/proof-atlas/certified-substitution/browser.cjs
           node research/proof-atlas/substitution-geometry/browser.cjs
           node research/proof-atlas/substitution-geometry/check.cjs --integration

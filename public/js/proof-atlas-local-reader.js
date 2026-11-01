@@ -15,7 +15,11 @@
   if(BigInt(nodes.length)+hidden!==BigInt(data.expanded[tree.node]))throw Error('Local occurrence accounting differs');
   return{tree,nodes,frontiers,retained:nodes.length,hidden:hidden.toString(),represented:data.expanded[tree.node]};
  }
- function mount(container,data,route,select){
+ const active = new WeakMap(); let sourceLoad = null;
+ function mount(container,data,route,select,{record,isCurrent=()=>true}={}){
+  active.get(container)?.dispose(); let sourceView=null,retired=false;
+  const current=()=>!retired&&isCurrent()&&container.isConnected&&!container.hidden;
+  const dispose=()=>{retired=true;sourceView?.dispose();};active.set(container,{dispose});
   const model=create(data,route),el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
   const count=x=>BigInt(x).toLocaleString('en-US');
   function pick(text,row,cls){const b=el('button',text,cls);b.type='button';b.title=row.path||A.path(data,row.route);b.onclick=()=>select(row.node,row.route);return b;}
@@ -31,7 +35,15 @@
   }
   const list=el('ol',undefined,'pl-local-tree');list.append(render(model.tree));
   container.replaceChildren(el('p','Read from the selected occurrence down through its ordered fields. Select a child to continue; Parent returns along the same source path. Node-number jumps choose one representative use.','pl-local-help'),list,el('p',count(model.retained)+' shown + '+count(model.hidden)+' folded = '+count(model.represented)+' occurrences. Source structure; types appear only where separately recorded.','pl-local-accounting'));
-  return model;
+  if(record&&model.tree.kind==='app'&&['root.type','root.value'].includes(data.declaration.rootPaths[route.root])){
+   const host=document.createElement('div');container.prepend(host);
+   (async()=>{try{
+    if(!window.ProofAtlasSourceApplications){if(!sourceLoad)sourceLoad=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='/public/js/proof-atlas-source-applications.js?v=1';script.onload=resolve;script.onerror=()=>{script.remove();sourceLoad=null;reject(Error('Source application component unavailable'));};document.head.append(script);});await sourceLoad;}
+    if(!current())return;const S=window.ProofAtlasSourceApplications;
+    sourceView=S.control(host,{prepare:()=>({owner:S.complete(data,record),route}),isCurrent:current,onSource:select});
+   }catch(error){if(current())host.textContent=error.message;}})();
+  }
+  return {...model,dispose,getSourceApplicationScene:()=>sourceView?.getScene()||null,getSourceApplicationState:()=>sourceView?.getState()||null};
  }
  const api={create,mount};if(typeof module==='object'&&module.exports)module.exports=api;else host.ProofAtlasLocalReader=api;
 })(typeof window==='undefined'?globalThis:window);
