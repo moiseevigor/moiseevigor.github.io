@@ -32,9 +32,15 @@
     bindingRange.setAttribute('role','status');bindingRange.dataset.regionFunctionBindingRange='';bindingControls.append(orderLabel,previousBindings,nextBindings,bindingRange);
     const ordering=el('details');ordering.dataset.regionFunctionPermutations='';
     bindingList.append(bindingSummary,bindingDescription,bindingControls,ordering,ports);
+    const windowDetails = el('details', undefined, 'dw-reader'), windowTools = el('div', undefined, 'dw-controls'), windowStatus = el('p'), windowBody = el('div');
+    windowDetails.dataset.declarationWindow = ''; windowStatus.setAttribute('role', 'status'); windowStatus.dataset.dwStatus = '';
+    const previousWindow = button('Previous declarations', () => readWindow(windowOffset - 4)), nextWindow = button('Next declarations', () => readWindow(windowOffset + 4)), retryWindow = button('Read these declarations', () => readWindow(windowOffset));
+    windowTools.append(previousWindow, nextWindow, retryWindow);
+    windowDetails.append(el('summary', 'Read declarations together'), el('p', 'Four declared types at a time, in computed declaration order. Supplied inputs, derived definitions and result computations keep their distinct roles. Visible binder references identify scope; they do not measure premise necessity.'), windowTools, windowStatus, windowBody);
+    windowDetails.hidden = true;
     const loadCalls = button('Load recorded region calls', () => { if (!disposed && lease) onCalls([...profile.members]); });
     status.setAttribute('role', 'status'); status.dataset.regionFunctionStatus = '';
-    box.append(el('p', 'Recorded region: calls ' + profile.members.join(', ') + '. Original, reduced and closed scopes remain separate. Inspecting a field adds no new typing judgment and supplies no new source-use edge.'), controls, status, loadCalls, fields, bindingList, sourceBox, evidence);
+    box.append(el('p', 'Recorded region: calls ' + profile.members.join(', ') + '. Original, reduced and closed scopes remain separate. Inspecting a field adds no new typing judgment and supplies no new source-use edge.'), controls, status, loadCalls, windowDetails, fields, bindingList, sourceBox, evidence);
     const labels = { 'proof-arguments': 'Proof arguments', 'proof-and-function-inputs': 'Proof arguments and proof-valued heads', 'all-boundary-positions': 'All boundary positions' };
     function policyOptions(){select.replaceChildren();for (const item of profile.cases) { const option = el('option', labels[item.id] + (item.status === 'KERNEL_REJECTED' ? ' · kernel rejected' : '')); option.value = item.id; select.append(option); }}
     policyOptions();
@@ -43,18 +49,56 @@
     let bindingOffset=0, bindingOrder='declaration', renderedOrder=null, selectedBindingKey=null, sourceMatch=null, lastSource=null;
     let version = 0, fieldVersion = 0, activeCall = selectedCall, requestedCall = selectedCall, loading = false, scene = null, sourceTarget = null;
     let notationWanted = false, notationCursor = null, notationScene = null, notationController = null, notationVersion = 0, notationLoading = false, readCurrentNotation = null;
+    let windowOffset = 0, windowSnapshot = null, windowController = null, windowVersion = 0, windowLoading = false;
     const live = value => !disposed && value === version;
     function retireNotation() {
       notationVersion++; notationController?.abort(); notationController = null; notationCursor?.dispose(); notationCursor = null; notationScene = null; notationLoading = false;
     }
+    function retireWindow(clear = true) {
+      windowVersion++; windowController?.abort(); windowController = null;
+      if (windowLoading) windowStatus.textContent = 'Reading cancelled. Use Read these declarations to retry.';
+      windowLoading = false;
+      previousWindow.disabled = !lease?.bindings || windowOffset === 0; nextWindow.disabled = !lease?.bindings || windowOffset + 4 >= lease.bindings.length; retryWindow.disabled = false;
+      if (clear) { windowSnapshot = null; windowBody.replaceChildren(); windowStatus.textContent = ''; }
+    }
+    async function readWindow(start) {
+      if (!lease?.bindings || disposed || !Number.isInteger(start) || start < 0 || start >= lease.bindings.length) return;
+      const focusedControl = windowTools.contains(document.activeElement) ? document.activeElement : null;
+      const value = version, owner = lease;
+      // The parent provider admits one notation cache. Return an open field
+      // to constructors before borrowing that cache for the declaration types.
+      if (notationWanted && scene) { notationWanted = false; await navigate(scene.root.address.component, scene.root.address.route.slots); }
+      if (!live(value) || owner !== lease) return;
+      retireWindow(); windowOffset = start; windowController = new AbortController();
+      const request = windowVersion;
+      windowLoading = true; previousWindow.disabled = nextWindow.disabled = retryWindow.disabled = true;
+      windowStatus.textContent = 'Reading declared types through bounded pages…';
+      try {
+        if (!host.ProofAtlasDeclarationWindow) throw Error('Declaration reader unavailable');
+        const data = await host.ProofAtlasDeclarationWindow.read(owner, start, { signal: windowController.signal });
+        if (!live(value) || request !== windowVersion || owner !== lease) return;
+        windowSnapshot = data;
+        host.ProofAtlasDeclarationWindow.draw(windowBody, { window: data, isCurrent: () => live(value) && windowSnapshot === data && !windowLoading,
+          onField: (entry, address) => { selectedBindingKey = entry.binding.key || null; sourceMatch = null; if (owner.manifest.constraintRule) showBinding(entry.binding); navigate(address.component, address.route.slots, true); },
+          onBinder: ref => { if (ref.target.namespace === 'source-expression') showSource(ref.target); else { const b = ref.declaration === null ? null : owner.bindings[ref.declaration]; selectedBindingKey = b?.key || null; sourceMatch = null; if (b && owner.manifest.constraintRule) showBinding(b); navigate(ref.target.component, ref.target.route.slots, true); } },
+          sourceLink: binding => sourceLink(binding.original || binding.originalInput, binding.kind === 'result' ? 'Original result occurrence' : 'Original input occurrence', binding.call, binding.slot ?? 0, binding.kind === 'result') });
+        windowStatus.textContent = 'Declarations ' + (data.start + 1) + '–' + data.end + ' of ' + data.total + '. Declared types in the recorded function; no new typing judgment.';
+      } catch (error) { if (live(value) && request === windowVersion) windowStatus.textContent = 'Declaration types unavailable: ' + error.message + '. Exact constructor fields remain available.'; }
+      finally { if (live(value) && request === windowVersion) {
+        windowLoading = false; previousWindow.disabled = start === 0; nextWindow.disabled = start + 4 >= owner.bindings.length; retryWindow.disabled = false;
+        if (focusedControl && windowDetails.open && [document.body, focusedControl].includes(document.activeElement)) (focusedControl.disabled ? previousWindow.disabled ? retryWindow : previousWindow : focusedControl).focus({ preventScroll: true });
+      } }
+    }
+    windowDetails.ontoggle = () => { if (windowDetails.open && !windowSnapshot && !windowLoading && lease?.bindings) readWindow(windowOffset); };
     function retire() {
+      retireWindow(); windowDetails.hidden = true; windowDetails.open = false;
       retireNotation();
       readCurrentNotation = null;
       version++; fieldVersion++; controller?.abort(); fieldController?.abort(); lease?.dispose(); lease = null; current = null; scene = null; sourceTarget = null;
       ports.replaceChildren(); ordering.replaceChildren(); bindingControls.hidden=true; ordering.hidden=true; selectedBindingKey=null; sourceMatch=null; fields.replaceChildren(); sourceBox.replaceChildren(); evidence.replaceChildren(); componentSelect.replaceChildren();
       bindingList.hidden = true; loadCalls.disabled = true;
     }
-    function clearField(message){fieldController?.abort();retireNotation();readCurrentNotation=null;fieldVersion++;loading=false;scene=null;selectedBindingKey=null;sourceMatch=null;sourceTarget=null;fields.replaceChildren();sourceBox.replaceChildren();status.textContent=message;}
+    function clearField(message){fieldController?.abort();retireWindow();retireNotation();readCurrentNotation=null;fieldVersion++;loading=false;scene=null;selectedBindingKey=null;sourceMatch=null;sourceTarget=null;fields.replaceChildren();sourceBox.replaceChildren();status.textContent=message;}
     function sourceLink(address, text = 'Open exact original occurrence', call = activeCall ?? profile.members[0], slot = 0, result = false) {
       const explorer = ['published-15', 'working-26', 'goedel-sample-4331'].includes(profile.source.edition);
       const ownerVersion = version;
@@ -69,6 +113,7 @@
     }
     async function navigate(component, slots = [], focus = false, expectedAddress = null) {
       if (!lease?.neighborhood || disposed) return;
+      retireWindow(false);
       retireNotation();
       readCurrentNotation = null;
       fieldController?.abort(); fieldController = new AbortController();
@@ -122,6 +167,7 @@
         }
         async function openNotation() {
           if (!currentField() || notationLoading) return;
+          retireWindow(false);
           notationWanted = true; const request = ++notationVersion; notationLoading = true;
           notationController?.abort(); notationController = new AbortController();
           notationCursor?.dispose(); notationCursor = null; notationScene = null; notation.replaceChildren();
@@ -174,6 +220,7 @@
         bindingDescription.textContent = inputs.length ? inputs.length + ' independent input positions. Their domains are inspected inside the recorded function, with earlier binders retained.' : 'This policy supplies no new inputs; it is a fixed-input closure.';
         if(adapters.length)bindingDescription.textContent+=' Adapters are supplied functions from produced types to required types. Their existence is not inferred. Identity specialization recovers the original source.';
         bindingOffset=0;bindingOrder='declaration';orderSelect.value=bindingOrder;
+        windowOffset=0;windowDetails.hidden=false;previousWindow.disabled=true;nextWindow.disabled=loaded.bindings.length<=4;retryWindow.disabled=false;
         if(m.constraintRule){bindingSummary.textContent=m.independentInputs+' independent inputs · '+m.derivedInputs+' derived definitions · '+m.members.length+' results';bindingDescription.textContent='Source call and slot identities stay fixed. Port creation order and computed declaration order are separate. Four bindings are shown at a time.';
           ordering.hidden=!m.permutations.length;if(m.permutations.length){ordering.append(el('summary','Recorded declaration order changes'));for(const permutation of m.permutations){const target=loaded.bindings.find(b=>b.key===permutation.cause);ordering.append(el('p',bindingLabel(target)+': declaration '+(permutation.old.indexOf(target.key)+1)+' → '+(permutation.new.indexOf(target.key)+1)+'. Original source port unchanged.'),button('Inspect moved '+bindingLabel(target),()=>inspectBinding(target,'value')));}}
         }
@@ -255,6 +302,7 @@
       if(!Array.isArray(tail)||tail.length+address.route.slots.length>512||!tail.every(slot=>Number.isInteger(slot)&&slot>=0&&slot<3)){clearField('The requested computed field path is outside its bounds.');return false;}
       await navigate(address.component,[...address.route.slots,...tail]);return !disposed && !!scene;
     }, state: () => ({ status: disposed ? 'disposed' : lease ? lease.manifest.status === 'PASS' ? 'ready' : 'kernel-rejected' : current ? 'loading' : 'unavailable', loading, rule:ruleSelect.value, case: current?.id || null, activeCall, selection: scene?.root.address || null, sourceTarget, bindingKey:selectedBindingKey,bindingOrder,bindingOffset,sourceMatch:sourceMatch&&scene&&JSON.stringify(sourceMatch.counterpart)===JSON.stringify(scene.root.address)?sourceMatch:null, lease: lease?.state() || null,
+      declarationWindow: { loading: windowLoading, offset: windowOffset, ready: !!windowSnapshot, stats: windowSnapshot?.stats || null, declarations: windowSnapshot?.entries.map(entry => ({ index: entry.index, role: entry.role, binder: entry.binding.binder, domain: entry.binding.domain, references: entry.references })) || [] },
       notation: notationWanted ? { loading: notationLoading, owner: notationScene?.root.origin || null, stats: notationScene?.stats || null, lease: notationCursor?.state() || null } : null }),
       dispose: () => { if (disposed) return; retire(); disposed = true; root.replaceChildren(); } };
   }
