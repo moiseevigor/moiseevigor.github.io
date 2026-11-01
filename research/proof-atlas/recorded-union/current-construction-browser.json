@@ -17,13 +17,14 @@
   "failureControls": 7,
   "peakSourceNodes": 1971,
   "peakTypeNodes": 320,
-  "peakRecordBytes": 70811,
+  "peakRecordBytes": 70427,
   "completeArchiveRequests": 0,
-  "typePageHashRefusals": 1,
+  "typeHashFaultAfterCaptions": true,
+  "typeManifestHashRefusals": 1,
   "moduleLoadRequests": 1,
   "delayedNativeTypeOperation": true,
   "typeCachePrewarmed": true,
   "nativeResultSettledBeforeSourceSelection": true,
   "gatesBounded": true,
-  "checkerSha256": "cf50a0b2a2ac0449c1ed01c79a696e707123b742f5f6b7d05582439db32fa7c3"
+  "checkerSha256": "f0a0e513b5a58dbbdb491454f44ae0003ae553d80958419c33a7387116bb748f"
 }
