@@ -1,0 +1,32 @@
+name: Proof Atlas scope comparison
+on:
+  push:
+    paths:
+      - 'public/js/proof-atlas-scope-comparison.js'
+      - 'public/js/proof-atlas-application-ports.js'
+      - 'public/js/proof-atlas-paged-type-operations.js'
+      - 'research/proof-atlas/scope-comparison/**'
+      - '.github/workflows/proof-atlas-scope-comparison.yml'
+  pull_request:
+    paths:
+      - 'public/js/proof-atlas-scope-comparison.js'
+      - 'public/js/proof-atlas-application-ports.js'
+      - 'public/js/proof-atlas-paged-type-operations.js'
+      - 'research/proof-atlas/scope-comparison/**'
+      - '.github/workflows/proof-atlas-scope-comparison.yml'
+jobs:
+  scope-certificates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check formal evidence identities and candidate runtime records
+        run: node research/proof-atlas/scope-comparison/check-evidence.cjs --runtime
+      - name: Replay complete and paged scope controls
+        run: node --max-old-space-size=256 research/proof-atlas/scope-comparison/check-runtime.cjs /tmp/scope-runtime.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: proof-atlas-scope-runtime
+          path: /tmp/scope-runtime.json

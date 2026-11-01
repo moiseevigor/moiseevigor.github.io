@@ -3,6 +3,8 @@ on:
   push:
     branches: [master]
     paths:
+      - 'research/proof-atlas/scope-comparison/**'
+      - 'public/js/proof-atlas-scope-comparison.js'
       - 'research/proof-atlas/declaration-window/**'
       - 'research/proof-atlas/application-collar/**'
       - 'research/proof-atlas/source-applications/**'
@@ -365,6 +367,8 @@ on:
       - '.github/workflows/proof-atlas-browser.yml'
   pull_request:
     paths:
+      - 'research/proof-atlas/scope-comparison/**'
+      - 'public/js/proof-atlas-scope-comparison.js'
       - 'research/proof-atlas/declaration-window/**'
       - 'research/proof-atlas/application-collar/**'
       - 'research/proof-atlas/source-applications/**'
@@ -916,6 +920,9 @@ jobs:
           ATLAS_APPLICATION_PORT_CHECK=1 node scripts/test-proof-atlas-application-ports.cjs
           node scripts/test-proof-atlas-application-ports-browser.cjs
           node scripts/build-proof-atlas-application-ports-evidence.cjs --check
+          node --max-old-space-size=256 research/proof-atlas/scope-comparison/check-runtime.cjs /tmp/proof-atlas-browser/scope-runtime.json
+          node research/proof-atlas/scope-comparison/check-browser-runtime.cjs /tmp/proof-atlas-browser/scope-wiring
+          node research/proof-atlas/input-type-bridge/check-browser.cjs /tmp/proof-atlas-browser/scope-bridge
           ATLAS_RECORDED_UNION_CHECK=1 node scripts/test-proof-atlas-recorded-union.cjs
           node scripts/build-proof-atlas-recorded-union-evidence.cjs --check
           node scripts/test-proof-atlas-recorded-union-browser.cjs

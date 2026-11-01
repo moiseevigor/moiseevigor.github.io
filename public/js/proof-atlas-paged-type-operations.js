@@ -1,7 +1,7 @@
 /* Literal type operations through row reads; no normalization or kernel judgments. */
 (function(host){
  'use strict';
- const node=typeof module!=='undefined'&&module.exports,A=node?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData,M=node?require('./proof-atlas-application-ports'):host.ProofAtlasApplicationPorts;
+ const node=typeof module!=='undefined'&&module.exports,A=node?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData,M=node?require('./proof-atlas-application-ports'):host.ProofAtlasApplicationPorts,W=node?require('./proof-atlas-scope-comparison'):host.ProofAtlasScopeComparison;
  const demand=(ok,m)=>{if(!ok)throw Error('Paged type operations: '+m);},binds=(k,s)=>(k===6||k===7)&&s===1||k===8&&s===2;
  const limits=Object.freeze({states:262144,frontier:524289,path:512,arguments:64});
  function setup(read,n,options){
@@ -28,18 +28,8 @@
   }return result('same');
  }
  async function equalShifted(read,n,a,b,shift=0,options={}){
-  const {limit,live,row}=setup(read,n,options);demand([a,b].every(i=>Number.isInteger(i)&&i>=0&&i<n)&&Number.isInteger(shift)&&shift>=0&&shift<=512,'weakening roots/shift');
-  const work=[[a,b,0]],seen=new Set();let pairs=0;
-  const result=status=>({status,pairs,pairLimit:limit});
-  while(work.length){
-   live();const [i,j,depth]=work.pop(),tag=i+':'+j+':'+depth;if(seen.has(tag))continue;
-   if(pairs===limit)return{...result('unavailable'),reason:'weakening-comparison-budget'};seen.add(tag);pairs++;
-   const left=await row(i),right=await row(j);if(left[0]!==right[0]||left[1].length!==right[1].length)return result('different');
-   if(left[0]===0){const index=left[2].index;if(index+(index>=depth?shift:0)!==right[2].index)return result('different');}
-   else if(A.payloadKey(left[0],left[2])!==A.payloadKey(right[0],right[2]))return result('different');
-   for(const [s,c]of left[1].entries())work.push([c,right[1][s],depth+(binds(left[0],s)?1:0)]);
-   demand(work.length<=limits.frontier,'weakening frontier bound');
-  }return result('same');
+  setup(read,n,options);demand([a,b].every(i=>Number.isInteger(i)&&i>=0&&i<n)&&Number.isInteger(shift)&&shift>=0&&shift<=512,'weakening roots/shift');
+  demand(W,'scope comparison component unavailable');return W.comparePaged(read,n,a,b,shift,options);
  }
  async function dependencies(read,n,root,previous,options={}){
   const {limit,live,row}=setup(read,n,options);demand(Number.isInteger(previous)&&previous>=0&&previous<=limits.arguments&&Number.isInteger(root)&&root>=0&&root<n,'formal dependency roots/arity');

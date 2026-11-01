@@ -1,6 +1,6 @@
 # Scope ranges for shared-term comparison
 
-Status: checked research prototype. The production reader still uses its preceding literal-weakening gate. This record changes neither the recorded native judgments nor the public deployment.
+Status: checked rule with candidate integration in the production reader's complete and paged weakening gates. This record changes neither the recorded native judgments nor the public deployment. Browser and compatibility checks are recorded separately below.
 
 ## Representation problem
 
@@ -10,7 +10,7 @@ The proposed annotation belongs to a **paired storage row**, not to a source occ
 
 [![One shared source variable requires two target rows under context extension](scope-sharing.svg)](scope-sharing.svg)
 
-The figure is generated from a checked, authored syntax control. Source `e0` occurs as the application's function at depth zero and as the lambda body at depth one. Under extension by one, the first becomes `bvar 1`; the second stays `bvar 0`. The source storage row is shared, but its two target pairs and scope paths remain distinct. [Exact figure data and certificate](scope-sharing.json) · [Figure producer](diagram.cjs). This illustration has no mathematical typing claim or original corpus address.
+The figure is generated from a checked, authored syntax control. Source `e0` occurs as the application's function at depth zero and as the lambda body at depth one. Under extension by one, the first becomes `bvar 1`; the second stays `bvar 0`. The source storage row is shared, but its two target pairs and scope paths remain distinct. [Exact figure data and certificate](scope-sharing.json.gz) · [Figure producer](diagram.cjs). This illustration has no mathematical typing claim or original corpus address.
 
 ## Exact rule and its boundary
 
@@ -76,7 +76,19 @@ For `P` reachable row pairs, the implementation retains `O(P)` pair/edge/range s
 
 Current limits are 65,536 rows per already resident input graph and 262,144 paired rows. Indices, shifts and propagated depths must be nonnegative safe JavaScript integers. A budget exhaustion returns unavailable. Mismatch occurrence witnesses have a separate 512-port path limit; two boundary controls check a located 512-port path and an explicitly unavailable 513-port path. Source delivery, native graph residency, payload costs and total browser heap remain separate limits. There is no complete-proof memory bound here.
 
-The next application is the existing source-to-consumer type bridge. Integration must preserve its exact native owners, uniform-context prefix gate and recorded kernel-conversion relation, then exercise the new cases through the actual reader. The prototype is not yet connected to that production gate. General decoder/implementation refinement, paged pair delivery, arbitrary context maps and human tracing/error-localization measurements remain open. The geometric-language program stays active.
+## Complete and paged reader integration
+
+The candidate [production engine](/public/js/proof-atlas-scope-comparison.js) shares its paired-row/range state between complete arrays and asynchronous row reads. It retains ordered pair edges and variable indices, rather than fetched expression payloads or complete type-graph arrays. The complete application gate and paged type-operation gate call this same engine. The original context-prefix/source-owner checks still run before it; kernel typing and conversion remain independent recorded observations.
+
+[Runtime checks](check-runtime.cjs) compare all 877 recorded inputs against the frozen reference model and independently check their 49,065 certificate rows. A foreign producer-context owner is refused by the actual source gate even though its unchanged type graphs still compare equal. Three scale controls pass through the actual hash-checking type-page cursor with one 64-row cache and no whole-table archive request. They use the same 1,026–1,538 pair counts as the complete rule. An eight-pair budget is unavailable, missing rows fail, and cancellation during a row read propagates. The test harness runs with a 256 MiB V8 heap flag; this is a finite run, not a total process-memory guarantee.
+
+The native inventory has a specific gap: among its 37 nonzero extensions, 36 contain shifted external references and one has no bound-variable reference. None exercises a preserved local reference under a nonzero extension. That case is covered by the general Expr theorem and authored structural controls, not by this native sample. Additional kernel-typed dependent controls are needed before claiming native coverage of both sides of the rule.
+
+The page cache can still churn when the two selected sides occupy different pages: these controls record about two page loads per stored pair. Bounded comparison state does not imply fewer page requests or a general speed improvement. The `bvar 512` fixture exercises the row comparator beyond the application's separate 512-entry context limit; it is not an admitted native-port observation. All three scale fixtures remain syntax data without mathematical typing attestations.
+
+Fresh compatibility checks retain the existing 207 complete application windows, 877 native paged ports and 10,524 type cuts. The existing bridge inventory remains 792 structurally equal pairs and 85 structurally different pairs with recorded conversion. Browser evidence checks the network, individual and library presentations, including sixteen desktop/phone and light/dark accessibility audits of both folded and nonzero-extension layouts. [Runtime report](runtime.json.gz) · [Integration evidence](runtime-evidence.json.gz). These reports distinguish locally tested code from public deployment.
+
+General decoder/implementation refinement, paged pair-state delivery beyond the retained pair budget, arbitrary context maps and human tracing/error-localization measurements remain open. The geometric-language program stays active.
 
 ## Reproduction
 
@@ -84,6 +96,8 @@ The next application is the existing source-to-consumer type bridge. Integration
 node research/proof-atlas/scope-comparison/check.cjs /private/tmp/atlas-scope-model.json
 node research/proof-atlas/scope-comparison/diagram.cjs /private/tmp
 node research/proof-atlas/scope-comparison/check-evidence.cjs
+node research/proof-atlas/scope-comparison/check-evidence.cjs --runtime
+node --max-old-space-size=256 research/proof-atlas/scope-comparison/check-runtime.cjs /private/tmp/atlas-scope-runtime.json
 ```
 
 Use the official Lean 4.33.1 macOS ARM release from the URL and SHA-256 pinned in [prepare_core.py](prepare_core.py). Given a downloaded archive, extract the core runtime without Mathlib, static libraries or unrelated tools:

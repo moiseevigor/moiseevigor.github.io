@@ -17,4 +17,18 @@ assert.equal(theory.generalJavaScriptOrDecoderRefinementProved,false);assert.equ
 const illustration=JSON.parse(fs.readFileSync(path.join(__dirname,'scope-sharing.json'))),K=require('./certificate.cjs');
 assert.equal(illustration.mathematicalTyping,'not-asserted');K.check(illustration.source,illustration.sourceRoot,illustration.target,illustration.targetRoot,illustration.shift,illustration.result.certificate);
 require('child_process').execFileSync(process.execPath,[path.join(__dirname,'diagram.cjs'),'--check']);
-console.log(JSON.stringify({status:'PASS',theorems:theory.theorems,nativeInputs:model.nativeInputs,localCertificates:model.certificatesChecked,generalJavaScriptRefinement:false,productionIntegrated:false}));
+let runtimeChecked=false;
+if(process.argv.includes('--runtime')){
+ const runtime=read('runtime.json.gz'),evidence=read('runtime-evidence.json.gz');assert.equal(runtime.status,'PASS');assert.equal(evidence.status,'PASS');
+ for(const report of [runtime,evidence])for(const[file,digest]of Object.entries(report.files))assert.equal(sha(fs.readFileSync(file)),digest,file);
+ assert.equal(runtime.nativeInputs,877);assert.equal(runtime.nativeProfiles,42);assert.equal(runtime.contextExtensions,37);assert.equal(runtime.certificateRows,49065);
+ assert.deepEqual(runtime.extensionCoverage,{withShiftedExternalReferences:36,withPreservedLocalReferences:0,withoutBoundVariableReferences:1});
+ assert.deepEqual([...new Set(runtime.nativeOwners.map(row=>row.owner))].sort(),[...new Set(model.cases.map(row=>row.owner))].sort());
+ assert(runtime.refusals.includes('foreign-original-context-owner-with-equal-type-graphs'));
+ assert.deepEqual(runtime.scales.map(row=>row.pairs),[1026,1538,1026]);
+ for(const row of runtime.scales){assert.equal(row.cache.peakCachedNodes,64);assert.equal(row.cache.fullTableArchiveRequests,0);assert.equal(row.reducedBudget,'unavailable');assert(row.midReadCancellation&&row.missingRowRejected);}
+ assert.equal(evidence.completeApplicationWindows,207);assert.equal(evidence.nativePagedPorts,877);assert.equal(evidence.nativeTypeCuts,10524);
+ assert.equal(evidence.bridgeBrowser.axeAudits,16);assert.equal(evidence.bridgeBrowser.typeRootSelections,18);assert.equal(evidence.bridgeBrowser.librarySourcePreserved,3);
+ assert.equal(evidence.wiringBrowser.status,'PASS');assert.equal(evidence.sourceOverrides,false);assert.equal(evidence.publicDeployment,false);runtimeChecked=true;
+}
+console.log(JSON.stringify({status:'PASS',theorems:theory.theorems,nativeInputs:model.nativeInputs,localCertificates:model.certificatesChecked,generalJavaScriptRefinement:false,runtimeEvidenceChecked:runtimeChecked}));

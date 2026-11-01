@@ -1,6 +1,6 @@
 /* Authored syntax control. Figure labels come from its checked graph rows. */
 'use strict';
-const fs=require('fs'),path=require('path'),assert=require('assert/strict'),C=require('./model.cjs'),K=require('./certificate.cjs');
+const fs=require('fs'),path=require('path'),z=require('zlib'),assert=require('assert/strict'),C=require('./model.cjs'),K=require('./certificate.cjs');
 const source={kind:[0,4,6,5],payloads:[{index:0},{name:'P',levels:[]},{binderName:'x',binderInfo:'default'},{}],children:[[],[],[1,0],[0,2]]};
 const target={kind:[0,4,0,6,5],payloads:[{index:1},{name:'P',levels:[]},{index:0},{binderName:'x',binderInfo:'default'},{}],children:[[],[],[],[1,2],[0,3]]};
 const result=C.compare(source,3,target,4,1,{includeCertificate:true});assert.equal(result.status,'same');K.check(source,3,target,4,1,result.certificate);
@@ -36,8 +36,10 @@ const data=JSON.stringify({format:'ProofAtlasScopeIllustration/1',source,sourceR
 if(process.argv[2]==='--check'){
  assert.equal(fs.readFileSync(path.join(__dirname,'scope-sharing.svg'),'utf8'),svg);
  assert.equal(fs.readFileSync(path.join(__dirname,'scope-sharing.json'),'utf8'),data);
+ assert.equal(z.gunzipSync(fs.readFileSync(path.join(__dirname,'scope-sharing.json.gz'))).toString(),data);
 }else{
  const folder=process.argv[2]?path.resolve(process.argv[2]):__dirname;
  fs.writeFileSync(path.join(folder,'scope-sharing.svg'),svg);fs.writeFileSync(path.join(folder,'scope-sharing.json'),data);
+ fs.writeFileSync(path.join(folder,'scope-sharing.json.gz'),z.gzipSync(data));
 }
 console.log(JSON.stringify({status:'PASS',pairedRows:result.pairs,variablePairs:leaves.length}));

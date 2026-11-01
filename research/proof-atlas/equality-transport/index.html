@@ -32,6 +32,7 @@ p:C(a,\mathrm{refl}_a),\qquad h:a=b,
 <p>The view retains one function port and at most four argument ports at a time. It marks proof, type and value roles separately from explicit, implicit, strict implicit and instance binder visibility. A callable result is a function-typed result, not evidence that the source call is missing an argument.</p>
 <div id="pm-application-lab"><div class="pm-controls"><label>Recorded proof or authored control <select data-app-profile></select></label><label>Application occurrence <select data-app-call></select></label><button data-app-load type="button">Load application</button><button data-app-release type="button">Release data</button></div><div data-app-view></div></div>
 <p>Solid connectors denote the selected source fields. A dashed first segment follows a recorded local binding. The separate type-reference list refers to bound variables in the literal function-type telescope, with a native checked instantiation bridge. It does not infer which argument values are used, which premises are necessary, or the mathematical strategy. An unavailable literal type prefix remains marked.</p>
+<p>The type bridge keeps the original producer context separate from the consumer context. Uniform context extension shifts external variable references while preserving references bound inside the type. A shared storage row can be local on one path and external on another; those occurrences keep separate targets. <a href="/research/proof-atlas/scope-comparison/README.md">Scope-range rule, diagram and checks</a>.</p>
 <p><a href="/research/proof-atlas/application-ports/README.md">Application rule, native checks and current limits</a>.</p>
 </section>
 <script src="/public/js/proof-atlas-library-data.js?v=3" defer></script>
@@ -46,5 +47,5 @@ p:C(a,\mathrm{refl}_a),\qquad h:a=b,
 <script src="/public/js/proof-atlas-equality-view.js?v=3" defer></script>
 
 <script src="/public/data/proof-atlas/application-ports-manifest.js?v=1" defer></script>
-<script src="/public/js/proof-atlas-application-port-view.js?v=4" defer></script>
+<script src="/public/js/proof-atlas-application-port-view.js?v=5" defer></script>
 <script src="/public/js/proof-atlas-application-port-manual.js?v=1" defer></script>
