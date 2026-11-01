@@ -11,10 +11,10 @@ let browser, paged = true;
 const out = {status:'RUNNING',pagedFrames:0,completeFrames:0,sourcePortSelections:0,sourceSnapshots:0,joinSelections:0,typeViews:0,sameSourceOriginPairs:0,sharingModes:0,continuationChunks:0,continuedUnits:0,modeTransitions:0,accessibilityAudits:0,failureControls:0,staleControls:0,retiredEvents:0,keyboardSelections:0,completeArchiveRequestsInPagedMode:0,peakSourceNodes:0,peakSelectedTypeNodes:0};
 (async () => {
   const cases = [];
+  const U=require('../research/proof-atlas/recorded-union.cjs'),unions=U.inventory();
   for (const d of types.records) {
-    const record = library.editions.find(e => e.id === d.edition).declarations.find(r => r.name === d.name), b = raw(record.indexFile); let pkg = await T.recorded(b,raw(d.file),d,record);
-    const ld = h.PROOF_ATLAS_LET_REDUCTIONS.records.find(x => x.name === d.name && x.edition === d.edition && x.indexSha256 === d.indexSha256); if (ld) pkg = T.mergeRecorded(pkg,await T.recordedLets(b,raw(ld.file),ld,record));
-    const c = pkg.case(record.name), model = F.open(c,producer.open(c,e => raw(e.evidenceFile)),d.edition), starts = c.entries.filter(e => T.construction(e,c.data)?.rule === 'let-binding'); if (starts.length) cases.push({d,record,c,model,starts});
+    const item=unions.find(x=>x.edition===d.edition&&x.record.name===d.name);assert(item,'Definition source union unavailable');
+    const record=item.record,{case:c}=await U.open(item),model=F.open(c,producer.open(c,e=>raw(e.evidenceFile)),d.edition),starts=c.entries.filter(e=>T.construction(e,c.data)?.rule==='let-binding');if(starts.length)cases.push({d,record,c,model,starts});
   }
   browser = await chromium.launch({headless:true,...(process.env.ATLAS_CHROMIUM_PATH ? {executablePath:process.env.ATLAS_CHROMIUM_PATH} : {})});
   const page = await browser.newPage({viewport:{width:1700,height:1100}}), errors = [], forbidden = [];

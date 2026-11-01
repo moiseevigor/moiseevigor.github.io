@@ -31,26 +31,30 @@ for(const anchor of index.anchors){assert.equal(decoder.path(anchor.occurrence),
   assert.equal(s.article,'passage-phase-equation');assert.equal(s.compiled.name,'CrossingData.crossing');assert.equal(s.match,'indexed');
   assert.equal(s.compiled.path,index.anchors.find(a=>a.passage==='phase-equation'&&a.path.startsWith('root.value')).path);
   const fields=await page.evaluate(()=>{const d=ProofAtlasLibrary.getData(),s=ProofAtlasLibrary.getSnapshot();return ProofAtlasLibraryData.children(d,s.selected);});
+  await page.getByText('Complete selected term, with sharing retained',{exact:true}).click();
   const selectedLine=page.locator('#pl-rows button[aria-pressed="true"]');assert(await selectedLine.textContent());
-  const child=fields.find(i=>data.children[i].length)||fields[0];await page.locator('#pl-rows button[data-occurrence="'+child+'"]').click();await page.waitForFunction(i=>ProofAtlasLibrary.getSnapshot().selected===i,child);await settled();s=await snap();
+  const child=fields.find(i=>data.children[i].length)||fields[0];await page.locator('#pl-rows button[data-occurrence="'+child+'"]').click();await page.waitForFunction(i=>window.ProofAtlasLibrary?.getSnapshot()?.selected===i,child);await settled();s=await snap();
   assert.equal(s.compiled.root,child);assert.equal(s.article,'passage-phase-equation');assert.equal(s.match,index.anchors.some(a=>a.path===s.compiled.path)?'indexed':'context');
   assert.equal(await page.locator('#pl-rows button[aria-pressed="true"]').getAttribute('data-occurrence'),String(child));
-  // Actual canvas hit, not an API-only selection.
-  const next=await page.evaluate(()=>{const d=ProofAtlasLibrary.getData(),s=ProofAtlasLibrary.getSnapshot();const id=ProofAtlasLibraryData.children(d,s.selected).find(i=>ProofAtlasLibrary.getPoint(i));return id===undefined?null:ProofAtlasLibrary.getPoint(id);});assert(next,'Expected a visible graph child');
+  // Choose scoped geometry explicitly; the default is a bounded local tree.
+  // A canvas click retains the exact occurrence path even for a shared row.
+  await page.getByRole('button',{name:'Scoped geometry · prototype',exact:true}).click();
+  await page.waitForFunction(()=>ProofAtlasLibrary.getSnapshot()?.mode==='geometry'&&ProofAtlasLibrary.getScene());
+  const next=await page.evaluate(()=>{const api=ProofAtlasLibrary,s=api.getSnapshot(),scene=api.getScene(),child=scene.nodes.find(n=>n.depth===1&&n.id.startsWith(s.path+'.'));return child?api.getOccurrencePoint(child.id):null;});assert(next,'Expected a visible scoped graph child');
   await page.locator('#pl-canvas').click({position:{x:next.x,y:next.y}});
-  await page.waitForFunction(i=>ProofAtlasLibrary.getSnapshot().selected===i,next.id);await settled();
+  await page.waitForFunction(n=>window.ProofAtlasLibrary?.getSnapshot()?.selected===n.id&&window.ProofAtlasLibrary?.getSnapshot()?.path===n.path,next);await settled();
   assert.equal(await page.locator('#pl-rows button[aria-pressed="true"]').getAttribute('data-occurrence'),String(next.id));
   assert(await page.locator('#passage-phase-equation').evaluate(n=>n.classList.contains('pa-sync-selected')));
   await page.locator('#thm\\:first').focus();await page.keyboard.press('Enter');await settled();s=await snap();assert.equal(s.compiled.name,'JacobiFull.exact_first_time');assert.equal(s.article,'thm:first');assert.equal(s.match,'context');
-  await page.locator('#pa-sync-declaration').selectOption('JacobiFull.first_time_complete');await page.waitForFunction(()=>ProofAtlasLibrary.getSnapshot().name==='JacobiFull.first_time_complete');await settled();
+  await page.locator('#pa-sync-declaration').selectOption('JacobiFull.first_time_complete');await page.waitForFunction(()=>window.ProofAtlasLibrary?.getSnapshot()?.name==='JacobiFull.first_time_complete');await settled();
   await page.locator('#proof-thm-cells').click({position:{x:8,y:12}});await settled();s=await snap();assert.equal(s.article,'proof-thm-cells');assert(s.compiled.name.startsWith('JacobiFull.'));
   await page.locator('#thm\\:floquet').click({position:{x:8,y:12}});await settled();s=await snap();assert.equal(s.match,'unmapped');assert(await page.locator('#pa-sync-proof').isHidden());assert((await page.locator('#pa-sync-status').textContent()).includes('Not formalized'));
   // Rapid changes must leave the most recent unformalized selection visible.
   await page.evaluate(()=>{ProofAtlasSync.selectArticle('thm:first');ProofAtlasSync.selectArticle('thm:floquet');});await settled();assert.equal((await snap()).article,'thm:floquet');assert(await page.locator('#pa-sync-proof').isHidden());
   await page.locator('#passage-counting').focus();await page.keyboard.press('Enter');await settled();s=await snap();assert.equal(s.compiled.path,'root.value');
   // All 84 old occurrence anchors are bridged to the DAG by their full path.
-  for(const anchor of index.anchors){await page.evaluate(async a=>{const api=ProofAtlasLibrary,m=ProofAtlasSync.routeFromPath(api.getData(),a.path);await api.selectOccurrence(m.node,true,false,m.route);},anchor);await page.waitForFunction(id=>ProofAtlasSync.getSnapshot().article===id,index.passages.find(p=>p.id===anchor.passage).htmlAnchor);s=await snap();assert.equal(s.compiled.path,anchor.path);assert.equal(s.match,'indexed');}
-  const shared=page.url(),saved=(await snap()).compiled.path;await page.goto(shared);await page.waitForFunction(p=>ProofAtlasSync.getSnapshot().compiled?.path===p,saved);assert.equal((await snap()).match,'indexed');
+  for(const anchor of index.anchors){await page.evaluate(async a=>{const api=ProofAtlasLibrary,m=ProofAtlasSync.routeFromPath(api.getData(),a.path);await api.selectOccurrence(m.node,true,false,m.route);},anchor);await page.waitForFunction(id=>window.ProofAtlasSync?.getSnapshot()?.article===id,index.passages.find(p=>p.id===anchor.passage).htmlAnchor);s=await snap();assert.equal(s.compiled.path,anchor.path);assert.equal(s.match,'indexed');}
+  const shared=page.url(),saved=(await snap()).compiled.path;await page.goto(shared);await page.waitForFunction(p=>window.ProofAtlasSync?.getSnapshot()?.compiled?.path===p,saved);assert.equal((await snap()).match,'indexed');
   await page.evaluate(()=>ProofAtlasSync.selectArticle('passage-counting'));await settled();
   await page.screenshot({path:path.join(shots,'reader-wide.png')});
   await page.addScriptTag({path:require.resolve('axe-core/axe.min.js')});

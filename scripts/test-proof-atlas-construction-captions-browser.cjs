@@ -6,10 +6,11 @@ const producer=require('../research/proof-atlas/construction-pages/captions.cjs'
 for(const name of ['library-manifest','occurrence-types-manifest','goedel-sample-manifest','let-result-pools-manifest'])vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/'+name+'.js','utf8'),{window:h});
 const{library,types}=require('../public/js/proof-atlas-ai-sample').register(h.PROOF_ATLAS_LIBRARY,h.PROOF_ATLAS_OCCURRENCE_TYPES,null,h.PROOF_ATLAS_AI_SAMPLE);
 const raw=file=>z.gunzipSync(fs.readFileSync('.'+file),{maxOutputLength:67108864}),origin=process.env.ATLAS_ORIGIN||'http://127.0.0.1:8833',folder=process.env.ATLAS_SCREENSHOTS||'/tmp/atlas-construction-captions-browser';
-async function load(d){const record=library.editions.find(e=>e.id===d.edition).declarations.find(r=>r.name===d.name),bytes=raw(record.indexFile);let pkg=await T.recorded(bytes,raw(d.file),d,record);const ld=h.PROOF_ATLAS_LET_REDUCTIONS.records.find(x=>x.name===record.name&&x.edition===d.edition&&x.indexSha256===record.indexSha256);if(ld)pkg=T.mergeRecorded(pkg,await T.recordedLets(bytes,raw(ld.file),ld,record));return{d,record,c:pkg.case(record.name)};}
+const U=require('../research/proof-atlas/recorded-union.cjs'),unions=U.inventory();
+async function load(d){const item=unions.find(x=>x.edition===d.edition&&x.record.name===d.name);assert(item,'Caption source union unavailable');const {case:c}=await U.open(item);return{d,record:item.record,c};}
 (async()=>{
  fs.mkdirSync(folder,{recursive:true});const browser=await chromium.launch({headless:true,executablePath:process.env.ATLAS_CHROMIUM_PATH}),page=await browser.newPage({viewport:{width:1700,height:1100}}),errors=[],forbidden=[];let paged=false;
- const complete=new Set(types.records.flatMap(d=>{const record=library.editions.find(e=>e.id===d.edition).declarations.find(r=>r.name===d.name);return[record.indexFile,d.file,...h.PROOF_ATLAS_LET_REDUCTIONS.records.filter(x=>x.name===d.name&&x.edition===d.edition).map(x=>x.file)];}));
+ const complete=new Set(unions.flatMap(item=>[item.record.indexFile,...item.inputs.map(p=>p.descriptor.file)]));
  const report={status:'RUNNING',profiles:0,frameComparisons:0,captionTextComparisons:0,sourceSelections:0,typeViews:0,sourceFocuses:0,groupedCuts:0,recordedOnlyBoundaries:0,failureControls:0,staleControls:0,sameDocumentModeTransitions:0,accessibilityAudits:0,completeArchiveRequestsInPagedMode:0};
  await page.addInitScript(()=>{if(/^https?:$/.test(location.protocol)){localStorage.setItem('analytics-consent','no');localStorage.setItem('theme','light');}});
  page.on('pageerror',e=>errors.push(e.stack));page.on('request',r=>{if(paged&&complete.has(new URL(r.url()).pathname))forbidden.push(r.url());});
