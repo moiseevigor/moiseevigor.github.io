@@ -115,6 +115,21 @@ An individual Level DAG is bounded to 4,096 nodes and depth 512, with bounded de
 ## 2. Scoped composition and scale
 
 
+<details class="atlas-evidence-entry" data-evidence-order="105" markdown="1">
+<summary>Occurrence correspondence through substitution</summary>
+
+<span id="substitution-geometry"></span>
+
+## Occurrence correspondence through substitution
+
+Source, replacement and result retain separate occurrence addresses. A selected external source reference determines one image insertion and its binder shift; selecting an image alone does not choose a use. Local binding portals and exact hidden-occurrence counts remain available in small constructor cuts.
+
+The independent complete stored relation check covers all 2,835 recorded queries, including all six Riccati source/template openings. The view separates shared syntax from occurrence ownership and normalized native values from original proof context. It adds no kernel typing, general visual-compiler theorem or comprehension measurement.
+
+[Interactive rule](/projects/proof-atlas/manual/substitution/) · [Protocol and limitations](/research/proof-atlas/substitution-geometry/README.md) · [Finite audit](/research/proof-atlas/substitution-geometry/audit.json.gz)
+
+</details>
+
 <details class="atlas-evidence-entry" data-evidence-order="104" markdown="1">
 <summary>Certified memoized substitution</summary>
 

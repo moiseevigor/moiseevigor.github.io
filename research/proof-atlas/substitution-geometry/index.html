@@ -1,0 +1,31 @@
+---
+layout: default
+math: true
+title: "Proof Atlas: substitution and binding"
+permalink: /projects/proof-atlas/manual/substitution/
+---
+<link rel="stylesheet" href="/public/css/proof-atlas-manual.css?v=1">
+<link rel="stylesheet" href="/research/proof-atlas/substitution-geometry/view.css?v=1">
+<main class="pa-manual">
+ <header><p><a href="/projects/proof-atlas/manual/">Visual notation manual</a> / Substitution</p><h1>Follow a replacement through its binders</h1><p>Substitution replaces an external reference with an expression. A replacement entering local binders must keep its own bindings and shift its external indices. The same stored variable can therefore mean different things at different occurrences.</p></header>
+ <div class="pm-math" role="region" tabindex="0" aria-label="Substitution at a selected source occurrence">$$\operatorname{subst}_{\sigma,d}(\operatorname{bvar} i)=\begin{cases}\operatorname{bvar}i&i&lt;d,\\\operatorname{shift}_{d}(\sigma_{m-1-(i-d)})&d\leq i&lt;d+m,\\\operatorname{bvar}(i-m)&i\geq d+m.\end{cases}$$</div>
+ <p>Here <em>d</em> counts binders below the selected source root; the <em>m</em> replacements are ordered from the oldest context entry to the newest. Lambda and Π bodies, and let bodies, add a binder. Their domains and let values do not. A shift also respects binders inside its replacement.</p>
+ <section id="reader" class="sg-reader" data-substitution-reader aria-labelledby="reader-title">
+  <h2 id="reader-title">Source → replacement → result</h2>
+  <p>The default uses a recorded opening of a Riccati source function from Lemma 3.2. Select a field to descend, or follow a dashed binding link. Each pane shows one constructor and its ordered children. Solid tree lines are fields; dashed links identify local binders. The middle pane appears when a source reference is replaced.</p>
+  <div class="sg-controls"><label>Recorded example <select data-preset aria-label="Recorded example"><option value="" disabled>Custom query</option></select></label><label>Query, 0–2834 <input data-query aria-label="Query number" type="number" min="0" max="2834" step="1"></label><button type="button" data-load>Load query</button></div>
+  <div class="sg-controls"><button type="button" data-root>Source root</button><button type="button" data-external>First external reference</button><button type="button" data-shifted disabled>First shifted image reference</button><button type="button" data-release>Release reader</button></div>
+  <p data-status role="status">Loading the query catalogue…</p>
+  <div data-relation class="sg-relation"></div>
+  <div data-panes class="sg-panes"></div>
+  <div data-images class="sg-controls"></div>
+  <div data-origin></div>
+ </section>
+ <section><h2>Two scope controls</h2><p><strong>One row, two scopes.</strong> In <code>app (bvar 0) (λ x : Nat, bvar 0)</code>, the first reference takes the supplied replacement. The second is bound by <code>x</code>. Sharing their stored row does not identify their occurrences.</p><p><strong>An open image.</strong> Insert <code>λ z : Nat, B₉₀ (bvar 1) (bvar 0)</code> under <code>λ y : Nat</code>. The result keeps the image-local <code>bvar 0</code> and shifts its external reference to <code>bvar 2</code>. Here <code>B₀(a,b) = app a b</code> and <code>Bₙ₊₁ = app Bₙ Bₙ</code>. The result has exactly 2⁹² + 3 occurrences in 96 reachable stored rows. This authored expression-data control has no asserted mathematical typing.</p></section>
+ <section><h2>Evidence and scope</h2><p>All 2,835 queries from the <a href="/research/proof-atlas/certified-substitution/README.md">certified substitution experiment</a> are available, including all six Riccati source/template openings. Query indices are examples and repeated views, not independent proofs. Only one publisher-attributed AI proof is included.</p><p>The executor's general successful-output theorem concerns actual <code>Lean.Expr</code>. Its native return proofs were erased; per-input proof terms were not independently rechecked. This browser checks hashes, visible field correspondence, binding paths and exact occurrence accounting. It supplies no new descendant typing or claim about mathematical necessity or readability.</p><p>The reader keeps one 64-row syntax cache, two index pages and one query record. Visible cuts have at most twelve vertices; paths stop at 512 fields. Reference discovery uses a separate bounded row/depth search. These are explicit retained-data limits, not a measured bound on total browser memory. Original query and proof-context identities remain separate from pooled syntax.</p><p><a href="/research/proof-atlas/substitution-geometry/README.md">Rule, reproduction and limitations</a> · <a href="/projects/proof-atlas/program/">Research program</a></p></section>
+</main>
+<script src="/public/js/proof-atlas-library-data.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-geometry-core.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-substitution-geometry.js?v=1" defer></script>
+<script src="/public/data/proof-atlas/substitution-geometry-manifest.js?v=1" defer></script>
+<script src="/research/proof-atlas/substitution-geometry/view.js?v=1" defer></script>

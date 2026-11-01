@@ -145,6 +145,8 @@ The [scoped-module instantiation laws](/research/proof-atlas/context-instantiati
 
 A [different, total memoized row executor](/research/proof-atlas/certified-substitution/README.md) now has a general successful-output theorem: its accepted results equal capture-avoiding substitution on the interpreted `Lean.Expr`. Proof-carrying caches retain the graph, image map, row and binder depth. All 2,835 finite queries match native instantiation, including the preceding 29 unexpanded cases and six Riccati source/template openings. A general decoding theorem and mathematical typing preservation remain open; native execution erases the proofs rather than independently rechecking one proof term per input.
 
+The [substitution reader](/projects/proof-atlas/manual/substitution/) presents source, replacement and result as occurrence-qualified constructor cuts. A selected use determines the image/result alignment; an image without a use clears those counterparts. Binding portals separate preserved local references from shifted external references. The finite audit covers all 2,835 preceding queries and all twelve constructors, with complete stored row/depth relation checks and selected interactive cuts. This is syntax correspondence and bounded delivery, not new descendant typing or measured comprehension. [Protocol and limits](/research/proof-atlas/substitution-geometry/README.md).
+
 ## Evaluation and evidence
 
 Use synthetic adversarial controls, small kernel-checked examples, the published compiled corpus and its separately labelled working snapshot. Include shared terms used under different binders, shadowing, dependent domains, let bindings, projections, universe parameters, open contexts and extreme expansion ratios.
