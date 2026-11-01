@@ -12,8 +12,9 @@ assert.equal(current.files[runtime],sha(fs.readFileSync(runtime)));
 const tooling=['scripts/build-proof-atlas-recorded-union-evidence.cjs','scripts/test-proof-atlas-recorded-union-browser.cjs'];for(const file of tooling)assert.equal(current.tooling[file],sha(fs.readFileSync(file)),'current tooling differs: '+file);
 const constructionChecker='scripts/test-proof-atlas-construction-pages-browser.cjs',construction=JSON.parse(fs.readFileSync(folder+'current-construction-browser.json'));
 assert.equal(construction.status,'PASS');assert.equal(construction.checkerSha256,sha(fs.readFileSync(constructionChecker)));
-for(const[key,value]of Object.entries({profiles:35,sceneComparisons:51,typeComparisons:46,failureControls:7,axeAudits:4,completeArchiveRequests:0}))assert.equal(construction[key],value,'current construction browser: '+key);
+for(const[key,value]of Object.entries({profiles:35,sceneComparisons:51,typeComparisons:47,failureControls:7,axeAudits:4,completeArchiveRequests:0}))assert.equal(construction[key],value,'current construction browser: '+key);
 assert(construction.typePageHashRefusals>0,'current corruption control did not run');
+for(const key of ['delayedNativeTypeOperation','typeCachePrewarmed','nativeResultSettledBeforeSourceSelection','gatesBounded'])assert.equal(construction[key],true,'current asynchronous control: '+key);
 for(const row of index.files){
  // Keep the original checker bytes under the original checkpoint digest.
  const file=row.file===constructionChecker?folder+'construction-pages-browser.checkpoint.cjs':row.file;

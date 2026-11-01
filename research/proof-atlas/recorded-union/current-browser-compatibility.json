@@ -131,7 +131,7 @@
     "public/js/proof-atlas-occurrence-constructions.js": "6d00edcdde0f082f9ba6859a2536a1b575089c8fa2171d53f2a514b66ea73e92"
   },
   "tooling": {
-    "scripts/build-proof-atlas-recorded-union-evidence.cjs": "cf194edcbb66355b952b091abe091ef13a5238a70801c02751d40d39cb4cee17",
+    "scripts/build-proof-atlas-recorded-union-evidence.cjs": "a545d66abbfdcc09cfcb995ab1268aafee299ee3c391508a0b924af0e7a833a3",
     "scripts/test-proof-atlas-recorded-union-browser.cjs": "c9de52c972cd4e7bff31644a630e33fe5f6a9189622c5651be9a9a3199dc7806"
   }
 }

@@ -4,7 +4,7 @@
   "statementComparisons": 3,
   "defaultProofFocus": 1,
   "sceneComparisons": 51,
-  "typeComparisons": 46,
+  "typeComparisons": 47,
   "nodeSelections": 35,
   "sharedNodeSelections": 2,
   "recordedBoundaryTypes": 2,
@@ -21,5 +21,9 @@
   "completeArchiveRequests": 0,
   "typePageHashRefusals": 1,
   "moduleLoadRequests": 1,
-  "checkerSha256": "ae3b15b48b984ff6ef6bbe1bcdcecaaeb51df8941f4e9e1772cb7d8a2bc42f53"
+  "delayedNativeTypeOperation": true,
+  "typeCachePrewarmed": true,
+  "nativeResultSettledBeforeSourceSelection": true,
+  "gatesBounded": true,
+  "checkerSha256": "cf50a0b2a2ac0449c1ed01c79a696e707123b742f5f6b7d05582439db32fa7c3"
 }
