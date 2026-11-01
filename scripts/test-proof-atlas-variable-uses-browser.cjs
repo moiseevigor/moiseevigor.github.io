@@ -21,6 +21,7 @@ let browser;const out={status:'RUNNING',fullCorpus:!focused,frames:0,batches:0,r
   for(const[j,o]of ref.use.observations.entries()){
    await row.locator('[data-use-type][data-observation="'+j+'"]').click();await page.waitForFunction(w=>{const n=ProofAtlasOccurrenceView.getSnapshot();return n&&JSON.stringify(n.route)===JSON.stringify(w.route)&&n.native?.evidenceSha256===w.evidence&&n.native.typeComponentSha256===w.component&&ProofAtlasOccurrenceView.getTypeScene();},{route:ref.use.route,evidence:o.owner.evidenceSha256,component:o.owner.typeIdentity.typeComponentSha256});
    n=await page.evaluate(()=>ProofAtlasOccurrenceView.getSnapshot());assert.equal(n.native.contextLength,ref.use.contextLength);assert.equal(n.native.role,ref.use.role);assert.deepEqual(n.native.recording,o.owner.recording);assert.equal((await page.evaluate(()=>ProofAtlasOccurrenceView.getTypeScene())).root.node,o.owner.typeRoot);out.typeSelections++;
+   if(paged){const r=await page.evaluate(()=>ProofAtlasOccurrenceView.getResidency()),owners=r.recordedUseOwners;assert(owners&&owners.indexPages<=4&&owners.recordPages<=8);assert.equal(owners.activeTypeTables,1);assert.equal(r.construction.activeTypeTables,0);}
   }
  }
  if(!focused)for(const x of cases){if(!x.starts.length)continue;await go(x,x.starts[0]);for(const e of x.starts){
