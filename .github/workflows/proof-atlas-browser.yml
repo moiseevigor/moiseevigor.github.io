@@ -120,6 +120,7 @@ on:
       - 'research/proof-atlas/context-instantiation/**'
       - 'research/proof-atlas/certified-substitution/**'
       - 'research/proof-atlas/substitution-geometry/**'
+      - 'research/proof-atlas/substitution-path-laws/**'
       - 'public/js/proof-atlas-substitution-geometry.js'
       - 'public/data/proof-atlas/substitution-geometry*'
       - 'public/data/proof-atlas/substitution-geometry/**'
@@ -472,6 +473,7 @@ on:
       - 'research/proof-atlas/context-instantiation/**'
       - 'research/proof-atlas/certified-substitution/**'
       - 'research/proof-atlas/substitution-geometry/**'
+      - 'research/proof-atlas/substitution-path-laws/**'
       - 'public/js/proof-atlas-substitution-geometry.js'
       - 'public/data/proof-atlas/substitution-geometry*'
       - 'public/data/proof-atlas/substitution-geometry/**'
@@ -647,6 +649,10 @@ jobs:
         run: |
           node research/proof-atlas/substitution-geometry/pack.cjs --check
           node research/proof-atlas/substitution-geometry/check.cjs
+      - name: Check occurrence-path law bridge and regenerate address requests
+        run: |
+          node research/proof-atlas/substitution-path-laws/prepare.cjs --output "$RUNNER_TEMP/atlas-substitution-path-inputs"
+          node research/proof-atlas/substitution-path-laws/check.cjs
       - name: Install Chromium test dependencies
         run: |
           npm install --no-save playwright@1.57.0 axe-core@4.11.0
@@ -782,6 +788,7 @@ jobs:
           node research/proof-atlas/certified-substitution/browser.cjs
           node research/proof-atlas/substitution-geometry/browser.cjs
           node research/proof-atlas/substitution-geometry/check.cjs --integration
+          node research/proof-atlas/substitution-path-laws/check.cjs --integration
           node scripts/test-proof-atlas-context-type-loading.cjs
           node scripts/test-proof-atlas-context-types-browser.cjs
           node scripts/test-proof-atlas-application-types.cjs
@@ -994,5 +1001,9 @@ jobs:
         run: |
           certified_prefix="$("$HOME/.elan/bin/lean" --print-prefix)"
           python3 research/proof-atlas/certified-substitution/verify_theory.py --lean "$certified_prefix/bin/lean" --workdir "$RUNNER_TEMP/atlas-certified-substitution-theory"
+      - name: Kernel-check source paths, image suffixes and binder-owner laws
+        run: |
+          paths_prefix="$("$HOME/.elan/bin/lean" --print-prefix)"
+          python3 research/proof-atlas/substitution-path-laws/verify_theory.py --lean "$paths_prefix/bin/lean" --workdir "$RUNNER_TEMP/atlas-substitution-path-theory" --reserve-gib 5
       - name: Audit the unchanged public graph topology
         run: python3 research/proof-atlas/verify_public_data.py

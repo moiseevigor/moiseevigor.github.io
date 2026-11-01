@@ -66,7 +66,8 @@
   if(p.index<t.binders.length)return{kind:'local',...t.binders[t.binders.length-1-p.index]};
   const outside=p.index-t.binders.length;
   if(part==='source'&&outside<q.transport.images.length)return{kind:'substitution-input',image:q.transport.images.length-1-outside};
-  return{kind:'target-context',relativeIndex:outside,slot:outside<q.query.targetScope?q.query.targetScope-1-outside:null,exactBinderAvailable:false};
+  const relativeIndex=outside-(part==='source'?q.transport.images.length:0);
+  return{kind:'target-context',relativeIndex,...(part==='source'?{sourceRelativeIndex:outside}:{}),slot:relativeIndex<q.query.targetScope?q.query.targetScope-1-relativeIndex:null,exactBinderAvailable:false};
  }
  function shallow(source,result,mode,depth,images){
   if(source[0]===0){const i=source[2].index;let expected=i;if(mode==='image')expected=i<depth.local?i:i+depth.shift;else if(i>=depth.local){demand(i-depth.local>=images,'replacement boundary not entered');expected=i-images;}

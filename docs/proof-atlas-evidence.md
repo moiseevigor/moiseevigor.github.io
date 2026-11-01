@@ -115,6 +115,23 @@ An individual Level DAG is bounded to 4,096 nodes and depth 512, with bounded de
 ## 2. Scoped composition and scale
 
 
+<details class="atlas-evidence-entry" data-evidence-order="106" markdown="1">
+<summary>Source paths, image suffixes and binder-owner preservation</summary>
+
+<span id="substitution-path-laws"></span>
+
+## Source paths, image suffixes and binder-owner preservation
+
+Twenty-six general/helper laws and two concrete counterexamples on actual `Lean.Expr` connect valid source paths, inserted image suffixes, postorder-row selection and local binder-owner paths. Accepted memoized executor outputs inherit these structural relations. An image-local owner acquires the source-use prefix; names alone do not identify its occurrence.
+
+The finite bridge checks all 2,835 preceding queries and three separate authored controls, with 26,834 path observations and 438 owner witnesses. All 3,331,147 batch-local rows roundtrip; four field probes per row calibrate all twelve constructors. A coherent application-port swap still passes the path laws but fails the independent wire-format check. Equal-image/wrong-use and same-name/wrong-binder records are rejected.
+
+These are syntax laws with finite decoder/renderer calibration. General JavaScript/JSON refinement, mathematical typing preservation, broader AI evaluation and comprehension remain open. Native return proofs are erased; per-input proof terms are not independently rechecked.
+
+[Laws and scope](/research/proof-atlas/substitution-path-laws/README.md) · [Lean proofs](/research/proof-atlas/substitution-path-laws/Paths.lean) · [Verification](/research/proof-atlas/substitution-path-laws/verification.json.gz) · [Visual rule](/projects/proof-atlas/manual/substitution/#occurrence-path-laws)
+
+</details>
+
 <details class="atlas-evidence-entry" data-evidence-order="105" markdown="1">
 <summary>Occurrence correspondence through substitution</summary>
 

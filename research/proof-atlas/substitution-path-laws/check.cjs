@@ -1,0 +1,25 @@
+'use strict';
+const fs=require('fs'),path=require('path'),z=require('zlib'),crypto=require('crypto'),assert=require('assert/strict');
+process.chdir(path.resolve(__dirname,'../../..'));
+const base='research/proof-atlas/substitution-path-laws/',sha=b=>crypto.createHash('sha256').update(b).digest('hex'),read=f=>JSON.parse(z.gunzipSync(fs.readFileSync(base+f)));
+const inputs=read('inputs.json.gz'),theory=read('theory.json.gz'),native=read('native.json.gz'),verification=read('verification.json.gz');
+for(const r of[theory,native,verification])assert.equal(r.status,'PASS');
+for(const r of[theory,verification])for(const[f,h]of Object.entries(r.producerFiles))assert.equal(sha(fs.readFileSync(f)),h,f);
+for(const[f,h]of Object.entries(inputs.files))assert.equal(sha(fs.readFileSync(f)),h,f);
+assert.equal(theory.theorems,28);assert.equal(theory.declarations,33);assert.equal(Object.keys(theory.axioms).length,33);assert.deepEqual(theory.axioms,verification.axioms);
+assert(Object.values(theory.axioms).every(a=>a.every(x=>['propext','Quot.sound'].includes(x))));
+assert.equal(theory.refusals.length,4);assert(theory.refusals.every(r=>r.kernelAccepted===false));assert.equal(theory.runs.length,8);assert(theory.runs.slice(0,4).every(r=>r.exitCode===0));assert(theory.runs.slice(4).every(r=>r.exitCode!==0));
+assert.equal(verification.nativeSha256,sha(z.gunzipSync(fs.readFileSync(base+'native.json.gz'))));assert.deepEqual(verification.counts,inputs.counts);
+assert.equal(inputs.counts.legacyQueries,2835);assert.equal(inputs.counts.newQueries,3);assert.equal(inputs.counts.queries,2838);assert.equal(inputs.counts.legacyScenes,7410);assert.equal(inputs.counts.legacyVertices,26761);assert.equal(inputs.counts.riccatiQueries,6);
+assert.equal(inputs.counts.scenes,7426);assert.equal(inputs.counts.vertices,26834);assert.equal(inputs.counts.localOwners,438);assert.equal(inputs.counts.invalidPaths,1);
+assert.equal(inputs.shards.length,39);assert.equal(verification.batches.length,39);assert.equal(verification.rowRoundtrips,3331147);assert.equal(verification.fieldChecks,13324588);assert.deepEqual(verification.kernelKinds,Array.from({length:12},(_,i)=>i));
+assert.equal(native.queries.length,2838);
+for(const [i,b]of verification.batches.entries()){const s=inputs.shards[i];assert.equal(b.status,'PASS');assert.equal(b.inputSha256,s.sha256);assert.equal(b.queries,s.queries);assert.equal(b.observations,s.observations);assert.equal(b.rowRoundtrips,s.rows);assert.equal(b.fieldChecks,s.rows*4);}
+for(const [i,q]of native.queries.entries()){assert.equal(q.index,i);assert.equal(q.status,'PASS');assert.equal(q.nativeInstantiation,'PASS');assert(q.cacheStates<=262144);assert(inputs.shards.some(s=>s.sha256===q.inputSha256&&s.parentInputSha256===q.parentInputSha256));}
+for(const [name,value]of Object.entries({observations:26834,sourceRelations:inputs.counts.sourceRelations,imageRelations:inputs.counts.imageRelations,resultOrigins:inputs.counts.resultOrigins,localOwners:438,invalidPaths:1}))assert.equal(native.queries.reduce((n,q)=>n+q[name],0),value,name);
+assert.deepEqual(native.queries.slice(2835).map(q=>q.owner.name),['created-image-field','repeated-image-uses','residual-target-context']);assert(native.queries.slice(2835).every(q=>q.owner.mathematicalTyping===false));
+const refusals=verification.dataRefusals;assert.deepEqual(refusals.map(r=>r.name),['coherent-port-swap','wrong-recorded-depth','equal-image-wrong-use-owner','same-name-wrong-binder-owner']);assert.equal(refusals[0].theoryAccepted,true);assert.equal(refusals[3].sameBinderName,true);assert(refusals.every(r=>r.nativeAccepted===false&&r.resources.exitCode!==0&&r.resources.stopReason===null));
+assert(verification.resources.every(r=>r.exitCode===0&&r.stopReason===null&&r.maxScratchBytes<=verification.resourcePolicy.maximumScratchBytes&&r.maxProcessGroupRssBytes<=verification.resourcePolicy.maximumProcessGroupRssBytes));
+assert.equal(verification.proofsErasedDuringNativeExecution,true);for(const flag of['perInputProofTermsRechecked','generalJavaScriptOrDecoderRefinementProved','mathematicalTypingPreservationProved','originalProofScriptsRead','dependencyCacheRestored'])assert.equal(verification[flag],false);
+if(process.argv.includes('--integration')){const r=JSON.parse(z.gunzipSync(fs.readFileSync('research/proof-atlas/substitution-geometry/integration.json.gz'))),b=r.browser;assert.equal(r.status,'PASS');assert.equal(b.pathLawEquations,2);assert.equal(b.pathLawTheorems,28);assert.equal(b.pathLawAnchorOpens,true);assert.equal(b.manualLawAnchorPreserved,true);assert.equal(b.residualContextModelInBrowser,true);for(const f of['Paths.lean','theory.json.gz','verification.json.gz','native.json.gz','README.md'])assert.equal(b.files[base+f],sha(fs.readFileSync(base+f)));}
+console.log(JSON.stringify({status:'PASS',theorems:28,declarations:33,queries:2838,legacyQueries:2835,newControls:3,pathObservations:26834,rowRoundtrips:3331147,fieldChecks:13324588,localOwnerWitnesses:438,proofRefusals:4,dataRefusals:4,scope:verification.scope}));
