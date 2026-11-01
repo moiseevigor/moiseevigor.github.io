@@ -115,6 +115,21 @@ An individual Level DAG is bounded to 4,096 nodes and depth 512, with bounded de
 ## 2. Scoped composition and scale
 
 
+<details class="atlas-evidence-entry" data-evidence-order="104" markdown="1">
+<summary>Certified memoized substitution</summary>
+
+<span id="certified-substitution"></span>
+
+## Certified memoized substitution
+
+A total postorder-row executor now carries proofs in its copying, renaming and substitution caches. Accepted outputs equal capture-avoiding substitution on actual `Lean.Expr` values. The invariant uses natural-number addresses and binder depth, with the graph and image map fixed by the cache family. It does not assume correctness of opaque Expr equality.
+
+All 2,835 queries pass the finite native bridge, including the 29 previously unexpanded cases, six Riccati source/template openings and a large shared open image beneath destination and image-local binders. Four damaged implementations are rejected by Lean. The proofs are erased during native execution; there is no independently rechecked proof term per input. General decoding refinement, completeness for arbitrary budgets, mathematical typing preservation and comprehension remain unproved.
+
+[Theorem, scope and reproduction](/research/proof-atlas/certified-substitution/README.md) · [Lean implementation](/research/proof-atlas/certified-substitution/Certified.lean) · [Verification](/research/proof-atlas/certified-substitution/verification.json.gz) · [Visual rule](/projects/proof-atlas/manual/paged-network/#certified-substitution)
+
+</details>
+
 <details class="atlas-evidence-entry" data-evidence-order="103" markdown="1">
 <summary>Capture-avoiding module instantiation</summary>
 

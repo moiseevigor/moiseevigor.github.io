@@ -118,6 +118,7 @@ on:
       - 'public/data/proof-atlas/context-modules*'
       - 'public/data/proof-atlas/context-modules/**'
       - 'research/proof-atlas/context-instantiation/**'
+      - 'research/proof-atlas/certified-substitution/**'
       - 'research/proof-atlas/context-modules/Instantiation.lean'
       - 'research/proof-atlas/occurrence-constructions/ContextFrame.lean'
       - 'scripts/*proof-atlas-context-module*.cjs'
@@ -465,6 +466,7 @@ on:
       - 'public/data/proof-atlas/context-modules*'
       - 'public/data/proof-atlas/context-modules/**'
       - 'research/proof-atlas/context-instantiation/**'
+      - 'research/proof-atlas/certified-substitution/**'
       - 'research/proof-atlas/context-modules/Instantiation.lean'
       - 'research/proof-atlas/occurrence-constructions/ContextFrame.lean'
       - 'scripts/*proof-atlas-context-module*.cjs'
@@ -631,6 +633,8 @@ jobs:
         run: node scripts/test-proof-atlas-applications.cjs
       - name: Check scoped-module instantiation evidence
         run: node research/proof-atlas/context-instantiation/check.cjs --rebuild
+      - name: Check certified substitution evidence
+        run: node research/proof-atlas/certified-substitution/check.cjs
       - name: Install Chromium test dependencies
         run: |
           npm install --no-save playwright@1.57.0 axe-core@4.11.0
@@ -763,6 +767,7 @@ jobs:
           node scripts/test-proof-atlas-context-witnesses-browser.cjs
           node scripts/test-proof-atlas-source-context-modules-browser.cjs
           node scripts/test-proof-atlas-context-module-use-browser.cjs
+          node research/proof-atlas/certified-substitution/browser.cjs
           node scripts/test-proof-atlas-context-type-loading.cjs
           node scripts/test-proof-atlas-context-types-browser.cjs
           node scripts/test-proof-atlas-application-types.cjs
@@ -971,5 +976,9 @@ jobs:
         run: |
           instantiation_prefix="$("$HOME/.elan/bin/lean" --print-prefix)"
           python3 research/proof-atlas/context-instantiation/verify_theory.py --lean "$instantiation_prefix/bin/lean" --workdir "$RUNNER_TEMP/atlas-context-instantiation-theory"
+      - name: Kernel-check the certified substitution executor
+        run: |
+          certified_prefix="$("$HOME/.elan/bin/lean" --print-prefix)"
+          python3 research/proof-atlas/certified-substitution/verify_theory.py --lean "$certified_prefix/bin/lean" --workdir "$RUNNER_TEMP/atlas-certified-substitution-theory"
       - name: Audit the unchanged public graph topology
         run: python3 research/proof-atlas/verify_public_data.py
