@@ -26,7 +26,13 @@ jobs:
         run: node research/proof-atlas/scope-comparison/check-evidence.cjs --runtime
       - name: Replay complete and paged scope controls
         run: node --max-old-space-size=256 research/proof-atlas/scope-comparison/check-runtime.cjs /tmp/scope-runtime.json
+      - name: Check recorded kernel controls and replay native scope comparisons
+        run: |
+          node research/proof-atlas/scope-comparison/native/check-evidence.cjs
+          node --max-old-space-size=256 research/proof-atlas/scope-comparison/native/check.cjs /tmp/scope-native.json
       - uses: actions/upload-artifact@v4
         with:
           name: proof-atlas-scope-runtime
-          path: /tmp/scope-runtime.json
+          path: |
+            /tmp/scope-runtime.json
+            /tmp/scope-native.json

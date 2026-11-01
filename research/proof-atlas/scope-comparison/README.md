@@ -66,7 +66,9 @@ The supplied graphs must already satisfy the application's validated payload con
 | Damaged certificates refused | 4 |
 | Invalid arguments/cyclic graph controls refused | 8 |
 
-The generated syntax covers all twelve constructors. These finite payload checks do not replace the separate general codec/refinement obligation. The native cases reuse pinned compiled observations; this iteration adds no native typing replay or new original proof extraction. [Model report](model.json.gz).
+The generated syntax covers all twelve constructors. These finite payload checks do not replace the separate general codec/refinement obligation. The baseline native cases reuse pinned compiled observations. [Model report](model.json.gz).
+
+A separate [kernel-typed extension](native/README.md) adds three authored Lean-core controls and nine native inputs. Six inputs have nonzero context extension; three retain local references and two also shift external references. The earlier 877-input inventory is unchanged. A typed shared control passes the complete and paged weakening gate with 1,545 pairs at local depths 1–513; its full application scene still exceeds the separate formal-dependency scan budget. The extension retains that boundary rather than claiming an end-to-end reader success. [Compiled controls, native replay and finite checks](native/evidence.json.gz).
 
 Three scale controls each have **1,026 source rows** and a 155-digit expanded occurrence count. Targets have 1,026, 1,538 and 1,026 rows for a closed constant, a mixed local/external `bvar 0`, and an always-external `bvar 512`, respectively. The preceding depth-tracking comparator exceeds its 262,144-state work budget on all three. The range comparator and independent certificate gate pass using 1,026, 1,538 and 1,026 pairs. An eight-pair limit returns unavailable. These are shared syntax graphs, not kernel-typed mathematical proofs or an AI-generation benchmark.
 
