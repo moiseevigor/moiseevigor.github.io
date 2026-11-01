@@ -115,6 +115,21 @@ An individual Level DAG is bounded to 4,096 nodes and depth 512, with bounded de
 ## 2. Scoped composition and scale
 
 
+<details class="atlas-evidence-entry" data-evidence-order="103" markdown="1">
+<summary>Capture-avoiding module instantiation</summary>
+
+<span id="scoped-module-instantiation"></span>
+
+## Capture-avoiding module instantiation
+
+Twenty-seven general/helper laws on actual `Lean.Expr`, with six concrete boundary equations, establish sequential/simultaneous syntax recovery, explicit-binder scope preservation, assumption-only arity and context composition. Definitions use their preceding environment and consume no argument. Equal closed term/type syntax does not determine a module boundary.
+
+All 1,376 overlapping recorded full/reduced uses and seven authored controls pass symbolic native instantiation comparisons. In 1,354 cases the recursive specification is evaluated too; 28 AI-use representations and the shared control use bounded native comparisons without that expansion. The sample still contains one publisher-attributed AI proof. These are structural laws and finite implementation checks, not general mathematical typing preservation, executor refinement or measured comprehension.
+
+[Rule and reproduction](/research/proof-atlas/context-instantiation/README.md) · [Lean laws](/research/proof-atlas/context-modules/Instantiation.lean) · [Verification metadata](/research/proof-atlas/context-instantiation/verification.json.gz) · [Visual rule](/projects/proof-atlas/manual/paged-network/#contextual-module-use)
+
+</details>
+
 <details class="atlas-evidence-entry" data-evidence-order="102" markdown="1">
 <summary>Captured source templates: recovery, scope and composition</summary>
 

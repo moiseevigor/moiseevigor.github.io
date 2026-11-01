@@ -117,6 +117,9 @@ on:
       - 'public/js/proof-atlas-dependent-interface.js'
       - 'public/data/proof-atlas/context-modules*'
       - 'public/data/proof-atlas/context-modules/**'
+      - 'research/proof-atlas/context-instantiation/**'
+      - 'research/proof-atlas/context-modules/Instantiation.lean'
+      - 'research/proof-atlas/occurrence-constructions/ContextFrame.lean'
       - 'scripts/*proof-atlas-context-module*.cjs'
       - 'scripts/test-proof-atlas-dependent-interfaces.cjs'
       - 'public/js/proof-atlas-source-template*.js'
@@ -461,6 +464,9 @@ on:
       - 'public/js/proof-atlas-dependent-interface.js'
       - 'public/data/proof-atlas/context-modules*'
       - 'public/data/proof-atlas/context-modules/**'
+      - 'research/proof-atlas/context-instantiation/**'
+      - 'research/proof-atlas/context-modules/Instantiation.lean'
+      - 'research/proof-atlas/occurrence-constructions/ContextFrame.lean'
       - 'scripts/*proof-atlas-context-module*.cjs'
       - 'scripts/test-proof-atlas-dependent-interfaces.cjs'
       - 'public/js/proof-atlas-source-template*.js'
@@ -623,6 +629,8 @@ jobs:
           node-version: '22'
       - name: Audit all exact constant references and application spines
         run: node scripts/test-proof-atlas-applications.cjs
+      - name: Check scoped-module instantiation evidence
+        run: node research/proof-atlas/context-instantiation/check.cjs --rebuild
       - name: Install Chromium test dependencies
         run: |
           npm install --no-save playwright@1.57.0 axe-core@4.11.0
@@ -959,5 +967,9 @@ jobs:
         run: |
           accounting_prefix="$("$HOME/.elan/bin/lean" --print-prefix)"
           python3 research/proof-atlas/context-accounting/verify.py --lean "$accounting_prefix/bin/lean" --workdir "$RUNNER_TEMP/atlas-context-accounting" --check
+      - name: Kernel-check scoped-module instantiation laws
+        run: |
+          instantiation_prefix="$("$HOME/.elan/bin/lean" --print-prefix)"
+          python3 research/proof-atlas/context-instantiation/verify_theory.py --lean "$instantiation_prefix/bin/lean" --workdir "$RUNNER_TEMP/atlas-context-instantiation-theory"
       - name: Audit the unchanged public graph topology
         run: python3 research/proof-atlas/verify_public_data.py

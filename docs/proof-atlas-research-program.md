@@ -141,6 +141,8 @@ A [source-lambda extension](/research/proof-atlas/source-template-inputs/README.
 
 The [context-module application diagram](/research/proof-atlas/context-modules/module-use.md) keeps local-binder dependence at an explicit interface: ordered assumption arguments, retained let definitions and exact original header links. It distinguishes existing recorded kernel conversions from structurally derived applications. The current finite mapping covers 1,376 overlapping full/reduced representations, including both views of all 149 frozen routes in one AI-attributed proof. It adds no new native typing observations or arbitrary argument-replacement rule.
 
+The [scoped-module instantiation laws](/research/proof-atlas/context-instantiation/README.md) prove capture-avoiding syntax composition, assumption-only arity and explicit-binder scope preservation on actual `Lean.Expr`. All 1,376 existing full/reduced uses and seven authored controls pass symbolic native probes; 1,354 cases also evaluate the recursive specification. The remaining 29 cases use bounded native comparisons. This strengthens the structural rule behind module applications; general mathematical typing preservation and executor refinement remain open.
+
 ## Evaluation and evidence
 
 Use synthetic adversarial controls, small kernel-checked examples, the published compiled corpus and its separately labelled working snapshot. Include shared terms used under different binders, shadowing, dependent domains, let bindings, projections, universe parameters, open contexts and extreme expansion ratios.

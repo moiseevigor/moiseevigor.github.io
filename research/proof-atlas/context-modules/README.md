@@ -18,6 +18,8 @@ The context boundary matters. Closing an entire function, its open body and a mo
 
 The [closure-application diagram](module-use.md) exposes the recorded module interface in the same reader. Assumptions supply ordered arguments; retained lets remain internal definitions. Source binders, computed lambda/Pi/let wrappers and the selected original result keep separate addresses. This uses existing native records and does not extend their typing coverage. It is the scoped alternative to replacing an open subterm by an argument-free capture.
 
+The [general instantiation laws](../context-instantiation/README.md) now state this syntax operation on actual `Lean.Expr`: ordered assumption arguments, prefix-evaluated lets, a separate expected-type operation and explicit-binder scope preservation. A finite symbolic bridge covers all 1,376 recorded full/reduced uses. It adds no mathematical source typing or arbitrary replacement guarantee.
+
 ## Geometry and navigation
 
 `ProofAtlasGeometricScene/10` draws the same constructor glyphs, ordered ports, binder links, telescopes and application spines as existing scenes. It has separate `checked-module-term` and `checked-module-type` categories in the `checked-context-module` namespace. A cut has at most 64 vertices and depth six; defaults are 32 vertices and depth three. Retained plus hidden occurrences account for the selected computed subtree. Root typing evidence does not supply inferred judgments for descendants.
