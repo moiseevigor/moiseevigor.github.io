@@ -15,9 +15,13 @@ assert.equal(construction.status,'PASS');assert.equal(construction.checkerSha256
 for(const[key,value]of Object.entries({profiles:35,sceneComparisons:51,typeComparisons:47,failureControls:7,axeAudits:4,completeArchiveRequests:0}))assert.equal(construction[key],value,'current construction browser: '+key);
 assert(construction.typeManifestHashRefusals>0,'current corruption control did not run');
 for(const key of ['delayedNativeTypeOperation','typeCachePrewarmed','nativeResultSettledBeforeSourceSelection','gatesBounded','typeHashFaultAfterCaptions'])assert.equal(construction[key],true,'current asynchronous control: '+key);
+const typeChecker='scripts/test-proof-atlas-type-pages-browser.cjs',types=JSON.parse(fs.readFileSync(folder+'current-type-browser.json'));
+assert.equal(types.status,'PASS');assert.equal(types.checkerSha256,sha(fs.readFileSync(typeChecker)));
+for(const[key,value]of Object.entries({profiles:35,sourceComparisons:38,typeComparisons:38,sharedNodeSelections:2,refinements:35,positionSelections:35,failureControls:6,axeAudits:4,completeArchiveRequests:0}))assert.equal(types[key],value,'current type browser: '+key);
+const historicalCheckers=new Map([[constructionChecker,folder+'construction-pages-browser.checkpoint.cjs'],[typeChecker,folder+'type-pages-browser.checkpoint.cjs']]);
 for(const row of index.files){
- // Keep the original checker bytes under the original checkpoint digest.
- const file=row.file===constructionChecker?folder+'construction-pages-browser.checkpoint.cjs':row.file;
+ // Keep each original checker under its original checkpoint digest.
+ const file=historicalCheckers.get(row.file)||row.file;
  if(row.file!==runtime&&!tooling.includes(row.file))assert.equal(sha(fs.readFileSync(file)),row.sha256,'stale evidence: '+row.file);
 }
 const reports={};for(const name of ['audit','browser-audit','complete-browser-audit','construction-transport','let-browser-audit','regressions','transport-browser-audit','type-browser-audit','type-query-transport']){const file=name+'.json',bytes=fs.readFileSync(folder+file),recorded=index.files.find(x=>x.file===folder+file);assert(recorded);assert.equal(sha(bytes),recorded.sha256);reports[file]=JSON.parse(bytes);assert.equal(reports[file].status,'PASS');}
