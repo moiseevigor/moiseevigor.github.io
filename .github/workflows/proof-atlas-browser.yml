@@ -659,7 +659,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        suite: [reader, interfaces]
+        suite: [source, contexts, interfaces, applications]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -718,8 +718,8 @@ jobs:
         run: node scripts/test-proof-atlas-browser.cjs
         env:
           ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
-      - name: Verify actual-term decoder and selected subtree browser
-        if: matrix.suite == 'reader'
+      - name: Verify decoder and original source geometry
+        if: matrix.suite == 'source'
         run: |
           set -x
           node scripts/test-proof-atlas-decoder.cjs
@@ -793,6 +793,12 @@ jobs:
           node scripts/test-proof-atlas-occurrence-application-fold-browser.cjs
           node scripts/test-proof-atlas-occurrence-let-bindings-browser.cjs
           node scripts/test-proof-atlas-occurrence-context-frame-browser.cjs
+        env:
+          ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
+      - name: Verify recorded contexts and proof frontiers
+        if: matrix.suite == 'contexts'
+        run: |
+          set -x
           node scripts/test-proof-atlas-cursor-context-frame-browser.cjs
           node scripts/test-proof-atlas-riccati-context-continuation-browser.cjs
           node scripts/test-proof-atlas-recorded-captions-browser.cjs
@@ -815,7 +821,7 @@ jobs:
           node scripts/test-proof-atlas-compiled-replay-browser.cjs
         env:
           ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
-      - name: Verify context modules and proof interfaces
+      - name: Verify context modules and method interfaces
         if: matrix.suite == 'interfaces'
         run: |
           set -x
@@ -901,6 +907,12 @@ jobs:
           ATLAS_COMPOSITION_CHECK=1 node scripts/test-proof-atlas-construction-composition.cjs
           node scripts/test-proof-atlas-construction-composition-browser.cjs
           node scripts/build-proof-atlas-construction-composition-evidence.cjs --check
+        env:
+          ATLAS_SCREENSHOTS: /tmp/proof-atlas-browser
+      - name: Verify application ports and source composition
+        if: matrix.suite == 'applications'
+        run: |
+          set -x
           ATLAS_APPLICATION_PORT_CHECK=1 node scripts/test-proof-atlas-application-ports.cjs
           node scripts/test-proof-atlas-application-ports-browser.cjs
           node scripts/build-proof-atlas-application-ports-evidence.cjs --check
