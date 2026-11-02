@@ -1,6 +1,6 @@
 # Kernel-typed scope extension controls
 
-Status: three authored Lean-core controls pass declaration typing and source-free application-input replay. The complete and paged weakening checks pass all nine inputs. Two complete application scenes pass; the shared scale control still exceeds a separate formal-dependency scan budget. No public deployment or blog post is included.
+Status: three authored Lean-core controls pass declaration typing and source-free application-input replay. The complete and paged weakening checks pass all nine inputs. All three complete scenes pass; the [exact formal-reference reader](../../formal-support/README.md) also checks their paged scenes. No public deployment or blog post is included.
 
 ## What these controls add
 
@@ -37,13 +37,13 @@ The figure is generated from `dependentLet`'s native type table. Its source `bva
 | Paged comparisons through the actual hash-checking type cursor | 9 |
 | Altered original context owners refused | 9 |
 | Wrong variable shifts refused | 7 |
-| Complete application scenes | 2 |
+| Complete application scenes | 3 |
 
 The local/external counts overlap. The paged checks use one 64-row cache, retain the original native owners and release their fetched rows on disposal. The checker keeps its complete reference graphs for comparison; this is not a total-memory measurement.
 
 The shared type `P₅₁₂` has 1,545 distinct reachable type rows and a **156-digit** expanded occurrence count. Its local reference has exact depth range `[1, 513]`. The preceding depth-indexed weakening checker exceeds its 262,144-state budget; the range checker and independent certificate checker pass with 1,545 pairs. The native declaration and its nine-input package are well typed; the shared control itself contributes three of those inputs.
 
-The **complete application scene for this control remains unavailable**: its separate formal-dependency scanner exceeds the work bound while scanning the first argument's domain, despite that argument having no earlier arguments. The weakening comparison succeeds, and must not be reported as an end-to-end reader success. This is a concrete remaining composition problem. [Runtime check and exact boundary](runtime.json.gz).
+The earlier depth-indexed formal scanner exceeded its work bound while scanning this first argument's domain, despite that argument having no earlier arguments. That failure is preserved in [commit 0899c8504](https://github.com/moiseevigor/moiseevigor.github.io/tree/0899c8504b3b5a4809c03b9638484e7f131e3c31/research/proof-atlas/scope-comparison/native). The current [exact support-set scan](../../formal-support/README.md) removes this particular failure; both complete and paged application scenes now pass. Its independent support-set budget can still make other domains unavailable. [Current complete-scene check](runtime.json.gz) · [Paged scenes](../../formal-support/views.json.gz).
 
 These checks extend the native applicability of the existing scope rule. They establish neither a general implementation/decoder refinement nor improved human comprehension, semantic compression or performance on massive AI-generated proofs.
 

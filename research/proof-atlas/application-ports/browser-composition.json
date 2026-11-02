@@ -26,8 +26,8 @@
     "public/js/proof-atlas-equality-diagram.js": "42f28feef0c78ee285aef18686c9e4351fe0f25085d4eefe3c689256663457e9",
     "public/js/proof-atlas-equality-view.js": "6f7d0bc0c681737e049d66ecb9bce5079346ab359d81f497de530489cb8311cc",
     "public/js/proof-atlas-equality-source-view.js": "1b996bd39802b44dea1255f728e66771e4579e5b424930dc6a31dce40538b2fa",
-    "public/js/proof-atlas-paged-library.js": "0b84d5aa95e34635dd49236c882682e012c6059d8c5147f908235714087310dd",
-    "public/js/proof-atlas-library.js": "63b3614a2018e498a2ae8d0a897160028f0fb7b2b43a6d867f29c5a5adf93644"
+    "public/js/proof-atlas-paged-library.js": "231e24dac9ec481d4e4864314b01b046c8ba81d018e41fe9c4fca14f3f893190",
+    "public/js/proof-atlas-library.js": "a23b2493ecd828694acdb7b7482afa960687916b073c67f2075f422d9d7fb0da"
   },
   "checkerSha256": "e01aa0b88c207aa1f5fd5d412e5c0b1a67f3cba10f0c12643794a65b4cb97f37"
 }

@@ -1,6 +1,6 @@
 /* The general application experiment uses the same component as the proof explorer. */
 (function(host){
- 'use strict';const panel=document.getElementById('pm-application-lab');if(!panel)return;const records=host.PROOF_ATLAS_APPLICATION_PORTS.records,profile=panel.querySelector('[data-app-profile]'),call=panel.querySelector('[data-app-call]'),load=panel.querySelector('[data-app-load]'),release=panel.querySelector('[data-app-release]'),out=panel.querySelector('[data-app-view]');let view=null;
+ 'use strict';const panel=document.getElementById('pm-application-lab');if(!panel)return;const records=[...host.PROOF_ATLAS_APPLICATION_PORTS.records,...(host.PROOF_ATLAS_FORMAL_SUPPORT_CONTROLS?.records||[])],profile=panel.querySelector('[data-app-profile]'),call=panel.querySelector('[data-app-call]'),load=panel.querySelector('[data-app-load]'),release=panel.querySelector('[data-app-release]'),out=panel.querySelector('[data-app-view]');let view=null;
  for(const [index,d]of records.entries()){const option=document.createElement('option');option.value=String(index);option.textContent=d.record.name+' · '+d.calls.length+' recorded applications';profile.append(option);}
  function clear(){view?.dispose();view=null;out.replaceChildren();}
  function open(){clear();const d=records[Number(profile.value)],c=d.calls[Number(call.value)];view=host.ProofAtlasApplicationPortView.mount(out,{descriptor:d,route:c.anchor.route});}

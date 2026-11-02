@@ -33,6 +33,7 @@ p:C(a,\mathrm{refl}_a),\qquad h:a=b,
 <div id="pm-application-lab"><div class="pm-controls"><label>Recorded proof or authored control <select data-app-profile></select></label><label>Application occurrence <select data-app-call></select></label><button data-app-load type="button">Load application</button><button data-app-release type="button">Release data</button></div><div data-app-view></div></div>
 <p>Solid connectors denote the selected source fields. A dashed first segment follows a recorded local binding. The separate type-reference list refers to bound variables in the literal function-type telescope, with a native checked instantiation bridge. It does not infer which argument values are used, which premises are necessary, or the mathematical strategy. An unavailable literal type prefix remains marked.</p>
 <p>The type bridge keeps the original producer context separate from the consumer context. Uniform context extension shifts external variable references while preserving references bound inside the type. A shared storage row can be local on one path and external on another; those occurrences keep separate targets. <a href="/research/proof-atlas/scope-comparison/README.md">Scope-range rule, diagram and checks</a>.</p>
+<p>The three <code>AtlasScopeNative</code> profiles are authored kernel-typed controls. They test dependent domains, local definitions and a shared type with 1,545 reachable rows. The formal-reference list uses exact free-index sets, preserving gaps between referenced positions; it does not infer premise necessity. <a href="/research/proof-atlas/formal-support/README.md">Rule, checks and bounds</a>.</p>
 <p><a href="/research/proof-atlas/application-ports/README.md">Application rule, native checks and current limits</a>.</p>
 </section>
 <script src="/public/js/proof-atlas-library-data.js?v=3" defer></script>
@@ -47,5 +48,6 @@ p:C(a,\mathrm{refl}_a),\qquad h:a=b,
 <script src="/public/js/proof-atlas-equality-view.js?v=3" defer></script>
 
 <script src="/public/data/proof-atlas/application-ports-manifest.js?v=1" defer></script>
-<script src="/public/js/proof-atlas-application-port-view.js?v=5" defer></script>
-<script src="/public/js/proof-atlas-application-port-manual.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-application-port-view.js?v=6" defer></script>
+<script src="/public/data/proof-atlas/formal-support-controls-manifest.js?v=1" defer></script>
+<script src="/public/js/proof-atlas-application-port-manual.js?v=2" defer></script>

@@ -27,9 +27,9 @@ const files=['public/js/proof-atlas-scope-comparison.js','public/js/proof-atlas-
   assert.equal(report.adapters.completeCalls,1);assert.equal(report.adapters.pagedCalls,2);assert.deepEqual(report.adapters.complete,report.adapters.paged);assert.equal(report.adapters.complete.status,'same');assert.equal(report.adapters.reducedBudget.status,'unavailable');
   await page.goto(origin+'/projects/proof-atlas/manual/equality-transport/',{waitUntil:'domcontentloaded'});
   assert((await page.locator('body').innerText()).includes('Uniform context extension shifts external variable references'));
-  assert(await page.locator('script[src="/public/js/proof-atlas-application-port-view.js?v=5"]').count());
+  assert(await page.locator('script[src="/public/js/proof-atlas-application-port-view.js?v=6"]').count());
   await page.goto(origin+'/projects/proof-atlas/library/',{waitUntil:'domcontentloaded'});
-  assert(await page.locator('script[src="/public/js/proof-atlas-library.js?v=104"]').count());
+  assert(await page.locator('script[src="/public/js/proof-atlas-library.js?v=105"]').count());
   assert.deepEqual(errors,[]);report.status='PASS';report.publicDeployment=false;report.scope='Real built assets and complete/paged gate wiring; illustration is syntax data. Native-reader selections and accessibility are checked in the separate bridge browser report.';
   report.checkerSha256=sha(fs.readFileSync(__filename));fs.writeFileSync(path.join(folder,'browser.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
  }finally{await browser.close();}

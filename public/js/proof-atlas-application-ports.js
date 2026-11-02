@@ -32,8 +32,44 @@
   if(slot===0)demand(j.binderInfo===null&&j.binderName===null&&j.laterTypeUsesInput===null&&j.formal===null,'separate function port');else demand(['default','implicit','strictImplicit','instImplicit'].includes(j.binderInfo)&&typeof j.binderName==='string'&&typeof j.laterTypeUsesInput==='boolean','argument visibility');return true;
  }
 
- // References in a literal formal domain, including binders nested in that domain.
- function dependencies(g,root,previous){const work=[[root,0]],seen=new Set(),refs=new Set();while(work.length){const [n,depth]=work.pop(),tag=n+':'+depth;if(seen.has(tag))continue;seen.add(tag);demand(seen.size<=262144,'formal-reference work bound');const k=g.kind[n];if(k===0){const index=g.payloads[n].index-depth;if(index>=0&&index<previous)refs.add(previous-index);}for(const [i,c]of g.children[n].entries())work.push([c,depth+(binds(k,i)?1:0)]);}return [...refs].sort((a,b)=>a-b);}
+ // Exact free indices at each stored row. Binder-body edges remove index zero
+ // and decrement the rest; other fields preserve them. No occurrence-depth
+ // expansion or interval filling is used. Native/source typing stays separate.
+ function dependencyScan(size,root,previous,options={}){
+  const limit=options.pairLimit??262144,supportLimit=options.supportLimit??262144;
+  demand(Number.isInteger(size)&&size>0&&size<=65536&&Number.isInteger(root)&&root>=0&&root<size&&Number.isInteger(previous)&&previous>=0&&previous<=64,'formal dependency roots/arity');
+  demand(Number.isInteger(limit)&&limit>=1&&limit<=262144&&Number.isInteger(supportLimit)&&supportLimit>=1&&supportLimit<=262144,'formal dependency bounds');
+  const memo=new Map(),stack=[],empty=[];let wanted=root,states=0,supportEntries=0,peakFrames=0,finished=null;
+  const snapshot=()=>({states,stateLimit:limit,supportEntries,supportLimit,peakFrames});
+  const stop=reason=>{finished={status:'unavailable',reason,...snapshot()};wanted=null;stack.length=0;memo.clear();};
+  function advance(){
+   while(stack.length){const frame=stack.at(-1);let missing=null;
+    for(const child of frame.children)if(!memo.has(child)){missing=child;break;}
+    if(missing!==null){wanted=missing;return;}
+    // Reuse an unchanged support vector through metadata/projection and other
+    // nonbinding fields. Repeated wrappers must not duplicate its stored cells.
+    const inputs=frame.children.map((child,slot)=>({refs:memo.get(child),bind:binds(frame.kind,slot)})).filter(input=>input.refs.length);
+    const alias=frame.kind!==0&&(inputs.length===0||inputs.every(input=>!input.bind&&input.refs===inputs[0].refs));
+    if(alias){memo.set(frame.id,inputs.length?inputs[0].refs:empty);stack.pop();continue;}
+    const refs=new Set();
+    const include=index=>{if(index<0||refs.has(index))return true;if(supportEntries+refs.size===supportLimit){stop('formal-support-budget');return false;}refs.add(index);return true;};
+    if(frame.kind===0&&!include(frame.index))return;
+    for(const [slot,child]of frame.children.entries())for(const index of memo.get(child))if(!include(index-(binds(frame.kind,slot)?1:0)))return;
+    const support=[...refs].sort((a,b)=>a-b);supportEntries+=support.length;memo.set(frame.id,support);stack.pop();
+   }
+   finished={status:'available',dependencies:memo.get(root).filter(index=>index<previous).map(index=>previous-index).sort((a,b)=>a-b),...snapshot()};wanted=null;memo.clear();
+  }
+  return Object.freeze({next:()=>{if(wanted!==null&&states===limit)stop('formal-reference-budget');return wanted;},accept:(id,tuple)=>{
+   demand(!finished&&id===wanted,'formal dependency read order');
+   if(states===limit){stop('formal-reference-budget');return;}
+   const kind=tuple?.[0],children=tuple?.[1],index=tuple?.[2]?.index;
+   demand(Number.isInteger(kind)&&kind>=0&&kind<12&&Array.isArray(children)&&children.length===(A.fields[A.kinds[kind]]||[]).length,'formal dependency row');
+   demand(children.every(child=>Number.isInteger(child)&&child>=0&&child<id),'formal dependency postorder child');
+   if(kind===0)demand(Number.isSafeInteger(index)&&index>=0,'formal dependency variable index');
+   states++;stack.push({id,kind,children:[...children],index:kind===0?index:null});peakFrames=Math.max(peakFrames,stack.length);advance();
+  },finish:()=>{demand(finished,'unfinished formal dependency scan');return finished;}});
+ }
+ function dependencies(g,root,previous,options={}){const scan=dependencyScan(g.kind.length,root,previous,options);for(let id=scan.next();id!==null;id=scan.next())scan.accept(id,[g.kind[id],g.children[id],g.payloads[id]]);const result=scan.finish();demand(result.status==='available',result.reason==='formal-support-budget'?'formal-support work bound':'formal-reference work bound');return result.dependencies;}
  function formal(functionPort,j,slot){const g=functionPort.graph;let n=functionPort.roots.inputType;for(let i=1;i<=slot;i++){if(g.kind[n]!==7){demand(j.formal?.available===false&&typeof j.formal.reason==='string'&&j.formal.reason.length>0,'explicit formal-prefix boundary');return null;}if(i===slot){const f=j.formal,domain=g.children[n][0],slots=[...Array(slot-1).fill(1),0],deps=dependencies(g,domain,slot-1);demand(f?.available===true&&f.functionPort===0&&f.previousArguments===slot-1&&f.binderInfo===g.payloads[n].binderInfo&&f.binderName===g.payloads[n].binderName&&same(f.domainRoute,{root:'inputType',slots})&&same(f.dependencies,deps)&&f.kernelInstantiatedDomain==='PASS','formal-domain/source-slot bridge');return{node:domain,slots,dependencies:deps};}n=g.children[n][1];}throw Error('Application ports: formal slot');}
  // Both roots already live in the same consumer context; no index shifting occurs here.
  function typeStructure(g,a,b,options={}){
@@ -63,5 +99,5 @@
   for(const slot of slots){const j=checked.get(slot),p=j.producer,id=slot===0?'function':'argument:'+slot,comparison=tools.comparison(slot);if(comparison.witness?.status==='located'){comparison.witness.left.address=computed(slot,'producerTypeInConsumer',comparison.witness.slots);comparison.witness.right.address=computed(slot,'inputType',comparison.witness.slots);}nodes.push({id,slot,label:slot===0?'Function':('Argument '+slot),text:j.display.producerTerm,inputText:j.display.inputTerm,typeText:j.display.producerType,typeAddress:computed(slot,'producerType'),inputTypeAddress:computed(slot,'inputType'),address:source(p.anchor),inputAddress:source(j.consumer.input),role:p.role,callable:j.callableInput,visibility:j.binderInfo,parameter:j.binderName,contextLength:p.context.length,externalBinder:j.externalBinder?source(j.externalBinder):null,boundary:j.definitionBoundary,hops:j.definitionHops.map(h=>({...copy(h),use:source(h.use),binder:source(h.binder),value:source(h.value)})),typeBridge:{format:'ProofAtlasInputTypeBridge/1',identity:{namespace:'application-input-type-bridge',nativeOwner:owner,source:copy(d.source),query:copy(call.anchor.route),input:call.index+':'+slot},producerSource:source(p.anchor),inputSource:source(j.consumer.input),contextExtension:j.consumer.context.length-p.context.length,stages:[['original','producerType',p.context.length],['lifted','producerTypeInConsumer',j.consumer.context.length],['expected','inputType',j.consumer.context.length]].map(([id,component,contextLength])=>({id,address:computed(slot,component),contextLength,contextSource:source(id==='original'?p.anchor:j.consumer.anchor),text:j.display[component]})),comparison,checks:{originalContextTyping:j.checks.originalContextTyping,consumerContextTyping:j.checks.consumerContextTyping,literalTypeWeakening:j.checks.literalTypeWeakening,kernelInputDomain:j.checks.kernelInputDomain,kernelPortTypeConversion:j.checks.kernelPortTypeConversion}}});links.push({from:id,to:'result',slot,relation:j.definitionHops.length?'binding-mediated-source-use':'direct-source-use'});if(slot>0){const f=tools.formal(slot);if(!f||f.status==='unavailable')formalBoundaries.push({slot,reason:f?.reason||j.formal.reason});if(f&&f.status!=='unavailable')for(const previous of f.dependencies)typeLinks.push({fromSlot:previous,toSlot:slot,relation:'literal-formal-type-reference',fromSource:source(tools.sourceInput(previous)),domain:computed(0,'inputType',f.slots),offWindow:!slots.includes(previous),kernelInstantiation:'PASS'});}}
   return{format:'ProofAtlasApplicationPortScene/1',owner,source:copy(d.source),call:copy(call.anchor),arguments:call.arguments,firstArgument:first,shownArguments:slots.length-1,unvisitedArguments:call.arguments-(slots.length-1),boxBudget:6,nodes,links,typeLinks,formalBoundaries,signature:computed(0,'inputType'),signatureText:fn.display.inputType,normalizedSignature:computed(0,'normalizedInputType'),normalizedSignatureText:fn.display.normalizedInputType,guarantee:'Source wires follow the exact function and ordered argument occurrences, through explicit local bindings when present. Formal-type links refer to the literal function-type telescope and a native checked instantiation bridge. They do not mean value use, mathematical premise necessity or recovered tactics. Fragments can overlap.'};
  }
- const api={same,key,route,sourceInput,validateHeader,validateSourcePort,validatePortMetadata,validatePort,validateWeakening,dependencies,formal,typeStructure,create,assemble};if(node)module.exports=api;else host.ProofAtlasApplicationPorts=api;
+ const api={same,key,route,sourceInput,validateHeader,validateSourcePort,validatePortMetadata,validatePort,validateWeakening,dependencyScan,dependencies,formal,typeStructure,create,assemble};if(node)module.exports=api;else host.ProofAtlasApplicationPorts=api;
 })(typeof window==='undefined'?globalThis:window);

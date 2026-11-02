@@ -25,7 +25,7 @@
   }
   async function applicationControl(owner,ownerRecord,at,epoch){
    try{
-    if(!applicationLoad)applicationLoad=(async()=>{for(const[name,url]of[['PROOF_ATLAS_APPLICATION_PORTS','/public/data/proof-atlas/application-ports-manifest.js?v=1'],['ProofAtlasApplicationPortView','/public/js/proof-atlas-application-port-view.js?v=5']])if(!host[name])await new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=url;script.onload=resolve;script.onerror=()=>{script.remove();reject(Error('Application port component unavailable'));};document.head.append(script);});})();
+    if(!applicationLoad)applicationLoad=(async()=>{for(const[name,url]of[['PROOF_ATLAS_APPLICATION_PORTS','/public/data/proof-atlas/application-ports-manifest.js?v=1'],['ProofAtlasApplicationPortView','/public/js/proof-atlas-application-port-view.js?v=6']])if(!host[name])await new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=url;script.onload=resolve;script.onerror=()=>{script.remove();reject(Error('Application port component unavailable'));};document.head.append(script);});})();
     await applicationLoad;if(owner!==cursor||epoch!==sourceEpoch)return;
     const descriptor=host.PROOF_ATLAS_APPLICATION_PORTS.records.find(d=>d.source.edition===edition.id&&d.record.name===ownerRecord.name&&d.record.indexSha256===ownerRecord.indexSha256&&d.record.sourceSha256===ownerRecord.sourceSha256);
     if(descriptor?.calls.some(c=>JSON.stringify(c.anchor.route)===JSON.stringify(at))){applicationView=host.ProofAtlasApplicationPortView.control(applicationSection,{descriptor,route:at,onSource:(node,route)=>{if(owner===cursor&&epoch===sourceEpoch)selectOccurrence(node,true,true,route).catch(error=>status(error.message));}});return;}

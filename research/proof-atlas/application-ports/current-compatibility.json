@@ -7299,7 +7299,7 @@
   "files": [
     {
       "file": "public/js/proof-atlas-application-ports.js",
-      "sha256": "24fc0ecd45829543672b8cc9b5861473580f8c37e745b015b06fdf7575c20007"
+      "sha256": "8981baef4ea96f3b4b52e139408a6daa72c6fb584ef2e2211b61a6f90115cf17"
     },
     {
       "file": "public/js/proof-atlas-application-port-pages.js",
@@ -7307,11 +7307,11 @@
     },
     {
       "file": "public/js/proof-atlas-application-port-view.js",
-      "sha256": "1b0621a849da93c2d913522e55ca109097340aba84efcaecc4feec5f18eb7f13"
+      "sha256": "e2b7b1a85975b9fe9862bf800395033005c16da9abfe225662b4e31fb749bde4"
     },
     {
       "file": "public/js/proof-atlas-application-port-manual.js",
-      "sha256": "3dfb2dd2c15bddf86e5f66781fc061496ff5ca0daeae15c0cc5fe57d43f66838"
+      "sha256": "c209afc2d8c915e9a50d77629a6103a40e9074bd494bd95f300cf4a79c5612bf"
     },
     {
       "file": "public/css/proof-atlas-application-ports.css",

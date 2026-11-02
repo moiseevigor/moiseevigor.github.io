@@ -39,19 +39,16 @@ const report={format:'ProofAtlasScopeNativeRuntime/1',status:'RUNNING',execution
   if(d.source.name.endsWith('sharedLocal')){
    const j=row.entries[1].junction,g=j.graph;
    assert.throws(()=>E.equal(g,j.roots.producerType,g,j.roots.producerTypeInConsumer,2),/comparison work bound/);
-   assert.throws(()=>M.create(row,row.entries,data,d,d.calls[0]),/formal-reference work bound/);
    assert.equal(summary.ports[1].pairs,1545);assert.equal(summary.ports[1].expanded.length,156);
    assert.deepEqual(summary.ports[1].variables.map(r=>[g.payloads[r.left].index,r.minimum,r.maximum]),[[0,1,513]]);
-   report.readerBoundaries.push({name:d.source.name,reason:'formal-reference work bound',stage:'formal dependency scan of first argument',weakeningGate:'PASS',endToEndApplicationScene:'unavailable'});
   }else{
-   const scene=M.create(row,row.entries,data,d,d.calls[0]);assert.equal(scene.nodes.length,4);assert.equal(scene.nodes.find(n=>n.slot===1).typeBridge.contextExtension,2);
-   report.completeScenes.push({name:d.source.name,nodes:scene.nodes.length});
    // The same source storage row is local along one path and external along another.
    const variables=summary.ports[1].variables;assert(variables.some(a=>variables.some(b=>a.left===b.left&&a.right!==b.right)));
   }
+  const scene=M.create(row,row.entries,data,d,d.calls[0]);assert.equal(scene.nodes.length,4);assert.equal(scene.nodes.find(n=>n.slot===1).typeBridge.contextExtension,2);report.completeScenes.push({name:d.source.name,nodes:scene.nodes.length});
   report.profiles.push(summary);
  }
- assert.equal(report.ports,9);assert.equal(report.nonzeroExtensions,6);assert.equal(report.preservedLocalPorts,3);assert.equal(report.shiftedExternalPorts,2);assert.equal(report.withoutVariablePorts,3);assert.equal(report.sourceContextRefusals,9);assert.equal(report.variableMutationsRefused,7);assert.equal(report.pagedComparisons,9);assert.equal(report.completeScenes.length,2);assert.equal(report.readerBoundaries.length,1);
+ assert.equal(report.ports,9);assert.equal(report.nonzeroExtensions,6);assert.equal(report.preservedLocalPorts,3);assert.equal(report.shiftedExternalPorts,2);assert.equal(report.withoutVariablePorts,3);assert.equal(report.sourceContextRefusals,9);assert.equal(report.variableMutationsRefused,7);assert.equal(report.pagedComparisons,9);assert.equal(report.completeScenes.length,3);assert.equal(report.readerBoundaries.length,0);
  report.status='PASS';report.files=Object.fromEntries(['check.cjs','inventory.json.gz','verification.json.gz','native-batch.json.gz',...inventory.profiles.flatMap(d=>[path.basename(d.record.indexFile),path.basename(d.owner.file)])].map(file=>['research/proof-atlas/scope-comparison/native/'+file,sha(fs.readFileSync(path.join(__dirname,file)))]));
  for(const file of ['public/js/proof-atlas-library-data.js','public/js/proof-atlas-application-ports.js','public/js/proof-atlas-scope-comparison.js','public/js/proof-atlas-paged-type-operations.js','public/js/proof-atlas-type-pages.js','public/js/proof-atlas-equality-transport.js','research/proof-atlas/native-type-paging/pack.cjs','research/proof-atlas/scope-comparison/model.cjs','research/proof-atlas/scope-comparison/certificate.cjs'])report.files[file]=sha(fs.readFileSync(file));
  if(process.argv[2])fs.writeFileSync(process.argv[2],JSON.stringify(report,null,2)+'\n');

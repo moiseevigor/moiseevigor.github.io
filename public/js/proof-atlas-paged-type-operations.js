@@ -32,15 +32,8 @@
   demand(W,'scope comparison component unavailable');return W.comparePaged(read,n,a,b,shift,options);
  }
  async function dependencies(read,n,root,previous,options={}){
-  const {limit,live,row}=setup(read,n,options);demand(Number.isInteger(previous)&&previous>=0&&previous<=limits.arguments&&Number.isInteger(root)&&root>=0&&root<n,'formal dependency roots/arity');
-  const work=[[root,0]],seen=new Set(),refs=new Set();let states=0;
-  while(work.length){
-   live();const [id,depth]=work.pop(),tag=id+':'+depth;if(seen.has(tag))continue;
-   if(states===limit)return{status:'unavailable',reason:'formal-reference-budget',states,stateLimit:limit};seen.add(tag);states++;
-   const tuple=await row(id);if(tuple[0]===0){const index=tuple[2].index-depth;if(index>=0&&index<previous)refs.add(previous-index);}
-   for(const [s,c]of tuple[1].entries())work.push([c,depth+(binds(tuple[0],s)?1:0)]);
-   demand(work.length<=limits.frontier,'formal-reference frontier bound');
-  }return{status:'available',dependencies:[...refs].sort((a,b)=>a-b),states,stateLimit:limit};
+  const {live,row}=setup(read,n,options),scan=M.dependencyScan(n,root,previous,options);
+  for(let id=scan.next();id!==null;id=scan.next()){live();scan.accept(id,await row(id));}live();return scan.finish();
  }
  async function formal(read,n,root,argument,slot,options={}){
   const {live,row}=setup(read,n,options);demand(Number.isInteger(slot)&&slot>=1&&slot<=limits.arguments,'formal slot');let id=root;

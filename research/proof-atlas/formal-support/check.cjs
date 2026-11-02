@@ -1,0 +1,50 @@
+/* Exact support sets versus an independent depth-sensitive occurrence oracle. */
+'use strict';
+const fs=require('fs'),path=require('path'),z=require('zlib'),assert=require('assert/strict'),crypto=require('crypto'),vm=require('vm'),{createRequire}=require('module');
+process.chdir(path.resolve(__dirname,'../../..'));
+const M=require('../../../public/js/proof-atlas-application-ports'),O=require('../../../public/js/proof-atlas-paged-type-operations'),A=require('../../../public/js/proof-atlas-library-data'),D=require('./depth-oracle.cjs');
+const fields=['kind','children','payloads','expanded','neededScope'],graph=()=>Object.fromEntries(fields.map(f=>[f,[]])),sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+function add(g,k,p,cs=[]){const id=g.kind.length;g.kind.push(k);g.children.push(cs);g.payloads.push(p);g.expanded.push((1n+cs.reduce((n,c)=>n+BigInt(g.expanded[c]),0n)).toString());g.neededScope.push(k===0?p.index+1:Math.max(0,...cs.map((c,s)=>g.neededScope[c]-(((k===6||k===7)&&s===1||k===8&&s===2)?1:0))));return id;}
+function scan(g,root,previous,options={}){const s=M.dependencyScan(g.kind.length,root,previous,options);for(let id=s.next();id!==null;id=s.next())s.accept(id,[g.kind[id],g.children[id],g.payloads[id]]);return s.finish();}
+const report={format:'ProofAtlasFormalSupportCheck/1',status:'RUNNING',randomCases:0,constructors:[],nativePorts:0,scales:[],refusals:[],scope:'Finite exact literal-reference checks, not a general implementation refinement, proof-premise necessity or human-comprehension result.'};
+(async()=>{
+ let seed=0x3a2f17;const random=n=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed%n;},seen=new Set();
+ for(let trial=0;trial<240;trial++){
+  const g=graph();add(g,4,{name:'T',levels:[]});add(g,0,{index:random(8)});
+  for(let n=0;n<22;n++){const k=(trial+n)%12,arity=(A.fields[A.kinds[k]]||[]).length,cs=Array.from({length:arity},()=>random(g.kind.length));add(g,k,k===0?{index:random(8)}:{},cs);seen.add(k);}
+  for(let root=0;root<g.kind.length;root++)for(const previous of [0,1,2,4,64]){const expected=D.dependencies(g,root,previous),actual=scan(g,root,previous);assert.equal(actual.status,'available');assert.deepEqual(actual.dependencies,expected.dependencies);assert.deepEqual(M.dependencies(g,root,previous),expected.dependencies);report.randomCases++;}
+ }
+ report.constructors=[...seen].sort((a,b)=>a-b);assert.deepEqual(report.constructors,Array.from({length:12},(_,i)=>i));assert.equal(report.randomCases,28800);
+ const gap=graph(),t=add(gap,4,{name:'T',levels:[]}),v=add(gap,0,{index:2}),inner=add(gap,6,{binderName:'y',binderInfo:'default'},[t,v]),outer=add(gap,6,{binderName:'x',binderInfo:'default'},[t,inner]),r=add(gap,5,{},[v,outer]);
+ assert.deepEqual(M.dependencies(gap,r,3),[1,3]);assert.deepEqual((await O.dependencies(async id=>[gap.kind[id],gap.children[id],gap.payloads[id]],gap.kind.length,r,3)).dependencies,[1,3]);report.gappedDepths={depths:[0,2],sourceIndex:2,previous:3,dependencies:[1,3],interiorPositionNotInvented:true};
+ const fixed=graph(),ft=add(fixed,4,{name:'T',levels:[]}),f0=add(fixed,0,{index:0}),f1=add(fixed,0,{index:1}),bind={binderName:'x',binderInfo:'default'},cases=[];
+ const local=add(fixed,6,bind,[ft,f0]);cases.push(['local-lambda',local,1,[]],['forall-domain',add(fixed,7,bind,[f0,f0]),1,[1]],['forall-domain-only',add(fixed,7,bind,[f0,ft]),1,[1]],['forall-body-only',add(fixed,7,bind,[ft,f0]),1,[]],['let-value',add(fixed,8,{declName:'x',nondep:false},[ft,f0,f1]),1,[1]],['let-type',add(fixed,8,{declName:'x',nondep:false},[f0,ft,ft]),1,[1]],['nondependent-let',add(fixed,8,{declName:'x',nondep:true},[ft,ft,f1]),1,[1]],['shared-local-external',add(fixed,5,{},[local,f0]),1,[1]],['metadata-field',add(fixed,10,{metadata:[]},[f0]),1,[1]],['projection-field',add(fixed,11,{typeName:'T',index:0},[f0]),1,[1]],['older-ambient',add(fixed,0,{index:64}),64,[]],['last-formal',add(fixed,0,{index:63}),64,[1]]);
+ for(const [label,root,previous,expected]of cases)assert.deepEqual(M.dependencies(fixed,root,previous),expected,label);report.fixedBindingCases=cases.map(([name])=>name);
+ const source=fs.readFileSync('public/js/proof-atlas-application-ports.js','utf8'),binding="binds=(k,i)=>(k===6||k===7)&&i===1||k===8&&i===2",mutations=[['drop-lambda-body',binding,'binds=(k,i)=>k===7&&i===1||k===8&&i===2'],['bind-forall-domain',binding,'binds=(k,i)=>k===6&&i===1||k===7&&i===0||k===8&&i===2'],['bind-let-value',binding,'binds=(k,i)=>(k===6||k===7)&&i===1||k===8&&i===1'],['bind-projection-field',binding,binding+'||k===11&&i===0'],['fill-support-gaps','const support=[...refs].sort((a,b)=>a-b);','const exact=[...refs].sort((a,b)=>a-b),support=exact.length?Array.from({length:exact.at(-1)-exact[0]+1},(_,i)=>exact[0]+i):[];']];
+ report.mutationsRefused=[];
+ for(const [label,before,after]of mutations){assert(source.includes(before));const sandbox={module:{exports:{}},require:createRequire(path.resolve('public/js/proof-atlas-application-ports.js'))};vm.runInNewContext(source.replace(before,after),sandbox);const mutant=sandbox.module.exports;let differs=false;for(const [,root,previous,expected]of cases)if(JSON.stringify(mutant.dependencies(fixed,root,previous))!==JSON.stringify(expected))differs=true;if(JSON.stringify(mutant.dependencies(gap,r,3))!=='[1,3]')differs=true;assert(differs,label+' escaped fixed controls');report.mutationsRefused.push(label);}
+ const mixed=graph();let root=add(mixed,0,{index:1});const type=add(mixed,4,{name:'T',levels:[]});for(let n=0;n<512;n++)root=add(mixed,5,{},[root,add(mixed,6,{binderName:'x',binderInfo:'default'},[type,root])]);
+ assert.throws(()=>D.dependencies(mixed,root,4),/depth-oracle work bound/);const support=scan(mixed,root,4);assert.equal(support.status,'available');assert.deepEqual(support.dependencies,[3,4]);assert.equal(support.states,1026);
+ const paged=await O.dependencies(async id=>[mixed.kind[id],mixed.children[id],mixed.payloads[id]],mixed.kind.length,root,4);assert.deepEqual(paged,support);
+ report.scales.push({kind:'authored-untyped-mixed-local-external',storedRows:mixed.kind.length,expanded:mixed.expanded[root],previous:4,...support,precedingDepthScan:'work-budget-exceeded'});
+ const wrappers=graph();let wrapped=add(wrappers,0,{index:0});for(let index=1;index<32;index++)wrapped=add(wrappers,5,{},[wrapped,add(wrappers,0,{index})]);for(let n=0;n<10000;n++)wrapped=add(wrappers,10,{metadata:[]},[wrapped]);
+ const wrapperSupport=scan(wrappers,wrapped,64);assert.equal(wrapperSupport.status,'available');assert.deepEqual(wrapperSupport.dependencies,D.dependencies(wrappers,wrapped,64).dependencies);assert(wrapperSupport.supportEntries<1024);assert.equal(wrapperSupport.dependencies.length,32);report.scales.push({kind:'authored-untyped-unchanged-vector-alias',storedRows:wrappers.kind.length,...wrapperSupport});
+ const native='research/proof-atlas/scope-comparison/native/',inventory=JSON.parse(z.gunzipSync(fs.readFileSync(native+'inventory.json.gz')));
+ for(const d of inventory.profiles){const row=JSON.parse(z.gunzipSync(fs.readFileSync('.'+d.owner.file)));
+  for(const entry of row.entries){const j=entry.junction;for(const component of ['producerType','producerTypeInConsumer','inputType']){
+    const g=j.graph,at=j.roots[component];if(d.source.name.endsWith('sharedLocal')&&j.consumer.slot<=1){
+     for(const previous of [0,1,4,64]){const result=scan(g,at,previous);assert.deepEqual(result.dependencies,[]);assert.equal(result.status,'available');assert.throws(()=>D.dependencies(g,at,previous),/depth-oracle work bound/);if(entry.id==='0:1'&&component==='producerType'&&previous===1)report.scales.push({kind:'kernel-typed-authored-closed',owner:d.owner.sha256,input:entry.id,component,previous,...result});}
+    }else for(const previous of [0,1,4,64])assert.deepEqual(M.dependencies(g,at,previous),D.dependencies(g,at,previous).dependencies);
+   }report.nativePorts++;
+  }
+ }
+ assert.equal(report.nativePorts,9);
+ let reads=0;const reader=async id=>{reads++;return[mixed.kind[id],mixed.children[id],mixed.payloads[id]];};const limited=await O.dependencies(reader,mixed.kind.length,root,4,{pairLimit:1});assert.equal(limited.status,'unavailable');assert.equal(limited.reason,'formal-reference-budget');assert.equal(reads,1);report.refusals.push('node-budget-before-second-read');
+ const cells=await O.dependencies(reader,mixed.kind.length,root,4,{supportLimit:1});assert.equal(cells.status,'unavailable');assert.equal(cells.reason,'formal-support-budget');assert.throws(()=>M.dependencies(mixed,root,4,{supportLimit:1}),/formal-support work bound/);report.refusals.push('support-cell-budget');
+ for(const options of [{pairLimit:0},{pairLimit:262145},{supportLimit:0},{supportLimit:262145}])assert.throws(()=>scan(gap,r,3,options));report.refusals.push('invalid-bounds');
+ for(const [tuple,message]of [[[5,[0,0],{}],'postorder child'],[[0,[],{index:-1}],'variable index'],[[6,[],{}],'dependency row']])await assert.rejects(()=>O.dependencies(async()=>tuple,1,0,1),new RegExp(message));report.refusals.push('cycles-negative-index-and-arity');
+ const controller=new AbortController();controller.abort(Error('support cancelled'));await assert.rejects(()=>O.dependencies(reader,mixed.kind.length,root,0,{signal:controller.signal}),/support cancelled/);report.refusals.push('cancelled-zero-previous-scan');
+ let count=0;await assert.rejects(()=>O.dependencies(async id=>{if(++count===3)throw Error('missing support row');return reader(id);},mixed.kind.length,root,4),/missing support row/);report.refusals.push('missing-row');
+ report.status='PASS';report.files=Object.fromEntries(['research/proof-atlas/formal-support/check.cjs','research/proof-atlas/formal-support/depth-oracle.cjs','public/js/proof-atlas-application-ports.js','public/js/proof-atlas-paged-type-operations.js',native+'inventory.json.gz',...inventory.profiles.map(d=>d.owner.file.slice(1))].map(file=>[file,sha(fs.readFileSync(file))]));
+ if(process.argv[2])fs.writeFileSync(process.argv[2],JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({...report,files:undefined}));
+})().catch(e=>{console.error(e.stack);process.exit(1)});

@@ -5,6 +5,8 @@ on:
     paths:
       - 'research/proof-atlas/scope-comparison/**'
       - 'public/js/proof-atlas-scope-comparison.js'
+      - 'research/proof-atlas/formal-support/**'
+      - 'public/data/proof-atlas/formal-support-controls-manifest.js'
       - 'research/proof-atlas/declaration-window/**'
       - 'research/proof-atlas/application-collar/**'
       - 'research/proof-atlas/source-applications/**'
@@ -369,6 +371,8 @@ on:
     paths:
       - 'research/proof-atlas/scope-comparison/**'
       - 'public/js/proof-atlas-scope-comparison.js'
+      - 'research/proof-atlas/formal-support/**'
+      - 'public/data/proof-atlas/formal-support-controls-manifest.js'
       - 'research/proof-atlas/declaration-window/**'
       - 'research/proof-atlas/application-collar/**'
       - 'research/proof-atlas/source-applications/**'
@@ -922,6 +926,11 @@ jobs:
           node scripts/build-proof-atlas-application-ports-evidence.cjs --check
           node --max-old-space-size=256 research/proof-atlas/scope-comparison/check-runtime.cjs /tmp/proof-atlas-browser/scope-runtime.json
           node research/proof-atlas/scope-comparison/check-browser-runtime.cjs /tmp/proof-atlas-browser/scope-wiring
+          node research/proof-atlas/formal-support/check-evidence.cjs
+          node --max-old-space-size=256 research/proof-atlas/formal-support/check.cjs /tmp/proof-atlas-browser/formal-support.json
+          node research/proof-atlas/formal-support/publish.cjs --check
+          node --max-old-space-size=256 research/proof-atlas/formal-support/check-views.cjs /tmp/proof-atlas-browser/formal-support-views.json
+          node research/proof-atlas/formal-support/check-browser.cjs /tmp/proof-atlas-browser/formal-support-browser
           node research/proof-atlas/input-type-bridge/check-browser.cjs /tmp/proof-atlas-browser/scope-bridge
           ATLAS_RECORDED_UNION_CHECK=1 node scripts/test-proof-atlas-recorded-union.cjs
           node scripts/build-proof-atlas-recorded-union-evidence.cjs --check

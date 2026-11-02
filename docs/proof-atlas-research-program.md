@@ -165,6 +165,8 @@ Current priorities: extend the compositional notation for elimination, broaden b
 
 A checked [scope-range comparison rule](/research/proof-atlas/scope-comparison/README.md) addresses a remaining shared-term limit in producer-to-input type bridges. It keeps one depth range per paired storage row, with general Lean certificate laws and a reordered-context counterexample. Its candidate integration shares one engine between complete and paged reader gates. Finite checks cover all 877 recorded inputs and three shared-syntax scale controls. Original context identity, kernel conversion and human comprehension remain separate obligations; local candidate verification does not establish public deployment.
 
+An [exact formal-reference rule](/research/proof-atlas/formal-support/README.md) computes free-index sets once per shared type row. It preserves gaps in the referenced formal positions and removes a separate depth-walk failure on a kernel-typed shared control. The existing application inspector includes three authored controls with their unchanged compiled/native owners. Node and support-set bounds remain explicit; literal type references do not establish premise necessity or a whole-region typing judgment.
+
 
 
 ## Technical evidence
