@@ -1,0 +1,322 @@
+{
+  "edition": "published-15",
+  "results": [
+    {
+      "step": "step-first-crossing",
+      "declaration": "JacobiFull.exact_first_time",
+      "callee": "JacobiFull.left_exact_time",
+      "node": 82,
+      "path": "root.value.body.body.body",
+      "arity": 4,
+      "status": "no native declaration record"
+    },
+    {
+      "step": "step-first-crossing",
+      "declaration": "JacobiFull.first_time_complete",
+      "callee": "JacobiFull.exact_first_time",
+      "node": 147,
+      "path": "root.value.body.body.body.fn.arg",
+      "arity": 3,
+      "status": "no native declaration record"
+    },
+    {
+      "step": "step-first-crossing",
+      "declaration": "JacobiFull.first_time_complete",
+      "callee": "And.intro",
+      "node": 934,
+      "path": "root.value.body.body.body.arg.body.body.arg.body.body.arg.body.body.arg.fn.arg",
+      "arity": 4,
+      "status": "no native declaration record"
+    },
+    {
+      "step": "step-first-exclusion",
+      "declaration": "JacobiFull.first_time_complete",
+      "callee": "JacobiFull.J2_pos_before_p0",
+      "node": 1015,
+      "path": "root.value.body.body.body.arg.body.body.arg.body.body.arg.body.body.arg.arg.body.body.arg.body.body.fn.arg.body.arg.arg",
+      "arity": 4,
+      "status": "no native declaration record"
+    },
+    {
+      "step": "step-cells-after",
+      "declaration": "JacobiFull.cell_roots",
+      "callee": "JacobiFull.J2_pos_after_bR",
+      "node": 1387,
+      "path": "root.value.body.body.body.body.body.arg.body.body.arg.body.body.arg.body.body.arg.body.body.arg.body.body.arg.body.body.body.body.body.arg.arg.arg.arg.fn.arg.arg.body.arg.fn.arg.body.arg.body.body.arg.body.arg.body.arg.body.arg.arg",
+      "arity": 5,
+      "status": "no native declaration record"
+    },
+    {
+      "step": "step-cells-gap",
+      "declaration": "JacobiFull.cell_roots",
+      "callee": "JacobiFull.J2_neg_gap",
+      "node": 1287,
+      "path": "root.value.body.body.body.body.body.arg.body.body.arg.body.body.arg.body.body.arg.body.body.arg.body.body.arg.body.body.body.body.body.arg.arg.arg.arg.fn.arg.arg.body.arg.fn.arg.body.arg.body.body.arg.body.fn.arg.body.arg.arg",
+      "arity": 5,
+      "status": "no native declaration record"
+    },
+    {
+      "step": "step-cells-crossing",
+      "declaration": "JacobiFull.cell_roots",
+      "callee": "JacobiFull.left_exact_time",
+      "node": 314,
+      "path": "root.value.body.body.body.body.body.fn.arg",
+      "arity": 4,
+      "status": "no native declaration record"
+    },
+    {
+      "step": "step-cells-crossing",
+      "declaration": "JacobiFull.cell_roots",
+      "callee": "JacobiFull.right_exact_time",
+      "node": 617,
+      "path": "root.value.body.body.body.body.body.arg.body.body.arg.body.body.arg.body.body.fn.arg",
+      "arity": 4,
+      "status": "no native declaration record"
+    },
+    {
+      "step": "step-cells-exhaustion",
+      "declaration": "JacobiFull.cell_roots",
+      "callee": "Set.ext",
+      "node": 3601,
+      "path": "root.value.body.body.body.body.body.arg.body.body.arg.body.body.arg.body.body.arg.body.body.arg.body.body.arg.body.body.body.body.body.arg.arg.arg.arg.fn.arg",
+      "arity": 4,
+      "status": "no native declaration record"
+    },
+    {
+      "step": "step-cells-exhaustion",
+      "declaration": "JacobiFull.coincide_imp",
+      "callee": "JacobiFull.cell_roots",
+      "node": 286,
+      "path": "root.value.body.body.body.body.body.fn.arg",
+      "arity": 5,
+      "status": "no native declaration record"
+    },
+    {
+      "step": "step-cells-contact",
+      "declaration": "JacobiFull.coincide_imp",
+      "callee": "JacobiFull.eL_eq_eR_iff",
+      "node": 900,
+      "path": "root.value.body.body.body.body.body.arg.body.body.arg.body.body.arg.body.body.arg.body.body.arg.body.body.arg.arg.arg.arg.arg.body.arg.fn.arg",
+      "arity": 2,
+      "status": "no native declaration record"
+    },
+    {
+      "step": "step-identities-f-zero",
+      "declaration": "JacobiPeriodic.exists_unique_f1_zero",
+      "callee": "JacobiPeriodic.f1_div_c_strictAntiOn_I",
+      "node": 7997,
+      "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.arg.body.body.arg.body.body.body.body.arg.arg.body.body.arg.body.body.body.body.fn.fn.fn.fn.fn.arg",
+      "arity": 2,
+      "status": "no native declaration record"
+    },
+    {
+      "step": "step-identities-beta-mono",
+      "declaration": "JacobiPeriodic.exists_unique_β1_zero",
+      "callee": "JacobiPeriodic.signed_β1_strictAntiOn",
+      "node": 178,
+      "path": "root.value.body.body.body.body.value",
+      "arity": 3,
+      "status": "no native declaration record"
+    },
+    {
+      "step": "step-identities-beta-endpoints",
+      "declaration": "JacobiPeriodic.exists_unique_β1_zero",
+      "callee": "JacobiPeriodic.β1_even",
+      "node": 1772,
+      "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.arg.arg.fn.arg.arg.arg",
+      "arity": 2,
+      "status": "no native declaration record"
+    },
+    {
+      "step": "step-identities-beta-endpoints",
+      "declaration": "JacobiPeriodic.exists_unique_β1_zero",
+      "callee": "JacobiPeriodic.β1_odd",
+      "node": 2769,
+      "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.body.value.arg.arg.fn.arg.arg.arg",
+      "arity": 2,
+      "status": "no native declaration record"
+    },
+    {
+      "step": "step-identities-alpha-unique",
+      "declaration": "JacobiFull.α1_zero_unique",
+      "callee": "JacobiFull.signed_α1_div_d_strictAntiOn",
+      "node": 177,
+      "path": "root.value.body.body.body.body.body.body.body.body.fn.fn.fn.fn.fn.arg",
+      "arity": 2,
+      "status": "no native declaration record"
+    },
+    {
+      "step": "step-riccati-sign",
+      "declaration": "JacobiData.slope_bound_abs",
+      "callee": "JacobiData.T1_T2_same_sign",
+      "node": 1299,
+      "path": "root.value.body.body.body.body.body.body.body.body.body.body.body.value.fn.fn.arg",
+      "arity": 6,
+      "status": "no checked trace at exact call"
+    },
+    {
+      "step": "step-riccati-pair",
+      "declaration": "JacobiData.hasDerivAt_z",
+      "callee": "JacobiData.a_deriv_form",
+      "node": 701,
+      "path": "root.value.body.body.body.body.body.body.body.arg.arg.fn.arg.arg.arg",
+      "arity": 5,
+      "status": "no native declaration record"
+    },
+    {
+      "step": "step-riccati-pair",
+      "declaration": "JacobiData.hasDerivAt_z",
+      "callee": "JacobiData.b_deriv_form",
+      "node": 753,
+      "path": "root.value.body.body.body.body.body.body.body.arg.arg.arg.fn.arg.arg.arg",
+      "arity": 5,
+      "status": "no native declaration record"
+    },
+    {
+      "step": "step-riccati-product",
+      "declaration": "JacobiData.slope_bound_abs",
+      "callee": "JacobiData.T1_mul_T2",
+      "node": 950,
+      "path": "root.value.body.body.body.body.body.body.body.body.body.value.body.arg.fn.arg.arg.arg",
+      "arity": 2,
+      "status": "no checked trace at exact call"
+    },
+    {
+      "step": "step-riccati-amgm",
+      "declaration": "JacobiData.slope_bound_abs",
+      "callee": "JacobiData.two_sqrt_mul_le_add",
+      "node": 1227,
+      "path": "root.value.body.body.body.body.body.body.body.body.body.body.value",
+      "arity": 4,
+      "status": "checked trace",
+      "result": "2 * √(|J.T1 p| * |J.T2 p|) ≤ |J.T1 p| + |J.T2 p|",
+      "inputs": [
+        {
+          "slot": 1,
+          "role": "value",
+          "type": "ℝ",
+          "node": 840,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        {
+          "slot": 2,
+          "role": "value",
+          "type": "ℝ",
+          "node": 844,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              1,
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        {
+          "slot": 3,
+          "role": "proof",
+          "type": "0 ≤ |J.T1 p|",
+          "node": 1224,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              1,
+              0,
+              1
+            ]
+          }
+        },
+        {
+          "slot": 4,
+          "role": "proof",
+          "type": "0 ≤ |J.T2 p|",
+          "node": 1226,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              1,
+              1
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "step": "step-riccati-amgm",
+      "declaration": "SBracket.one_le_ε_deriv_u",
+      "callee": "JacobiData.slope_bound_abs",
+      "node": 356,
+      "path": "root.value.body.body.body.body.value",
+      "arity": 6,
+      "status": "no native declaration record"
+    },
+    {
+      "step": "step-total-count",
+      "declaration": "JacobiFull.roots_ncard",
+      "callee": "JacobiFull.two_per_cell_of_ne",
+      "node": 1780,
+      "path": "root.value.body.body.body.body.body.body.fn.arg.body.body.arg.body.body.arg.body.body.arg.body.body.arg.body.body.arg.body.body.body.body.arg.arg.arg.arg.fn.arg.arg.arg",
+      "arity": 6,
+      "status": "no native declaration record"
+    },
+    {
+      "step": "step-total-count",
+      "declaration": "JacobiFull.roots_ncard",
+      "callee": "JacobiFull.roots_succ",
+      "node": 1682,
+      "path": "root.value.body.body.body.body.body.body.fn.arg.body.body.arg.body.body.arg.body.body.arg.body.body.arg.body.body.arg.body.body.body.body.fn.arg.arg.arg",
+      "arity": 3,
+      "status": "no native declaration record"
+    }
+  ]
+}
