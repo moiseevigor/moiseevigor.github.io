@@ -18,6 +18,7 @@ const root = path.resolve(__dirname, '../../..');
 const rows = [];
 let inputs = 0;
 let references = 0;
+const headCounts = new Map();
 for (const anchor of article.anchors.filter(a => a.callee && a.kind === 'app')) {
   const owner = records.get(anchor.declaration);
   const packet = article.packets.find(p => p.name === owner.name);
@@ -74,6 +75,27 @@ for (const anchor of article.anchors.filter(a => a.callee && a.kind === 'app')) 
       assert.equal(nested, term.payloads[arg].index);
       item += ' → ' + link(term.payloads[binder.node].binderName || 'binder', binder.node, binder.route);
       references++;
+    } else {
+      let head = arg;
+      const headSlots = [...route.slots];
+      while (data.kinds[term.kind[head]] === 'app') {
+        head = term.children[head][0];
+        headSlots.push(0);
+      }
+      const kind = data.kinds[term.kind[head]];
+      headCounts.set(kind, (headCounts.get(kind) || 0) + 1);
+      const label = kind === 'const' ? term.payloads[head].name : kind === 'lam' ? 'λ' : kind;
+      const headRoute = {root: route.root, slots: headSlots};
+      item += ' (' + link(label, head, headRoute);
+      if (kind === 'bvar') {
+        const binder = data.binding(term, headRoute);
+        assert(binder);
+        item += ' → ' + link(term.payloads[binder.node].binderName || 'binder', binder.node, binder.route);
+      } else if (kind === 'lam') {
+        const body = {root: route.root, slots: headSlots.concat(1)};
+        item += ', ' + link('body', term.children[head][1], body);
+      }
+      item += ')';
     }
     args.unshift(item);
     slots.push(0);
@@ -86,7 +108,8 @@ for (const anchor of article.anchors.filter(a => a.callee && a.kind === 'app')) 
   rows.push('| ' + article.passages.find(p => p.id === anchor.step).title + ' | ' + call + ' | ' + args.join(' · ') + ' |');
 }
 console.log('# Input positions at article-linked calls\n');
-console.log('Each call opens the compiled result. Each numbered input opens its occurrence. An arrow follows a bound variable to its introducing binder. Value and proof labels appear where the occurrence-type manifest supplies a checked trace.\n');
+console.log('Each call opens the compiled result. Each numbered input opens its occurrence. An arrow follows a bound variable to its introducing binder. Parentheses identify the head of each remaining input, reached by following function fields. Value and proof labels appear where the occurrence-type manifest supplies a checked trace.\n');
 console.log(rows.length + ' calls, ' + inputs + ' input positions, ' + references + ' direct bound-variable inputs.\n');
+console.log('Heads of other inputs: ' + [...headCounts].map(([kind, count]) => count + ' ' + kind).join(', ') + '.\n');
 console.log('| Passage | Compiled call | Inputs in application order |\n|---|---|---|');
 console.log(rows.join('\n'));
