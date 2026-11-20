@@ -22,7 +22,9 @@ const {open}=require('./model.cjs');
       const data=atlas.validateIndex(JSON.parse(z.gunzipSync(fs.readFileSync('.'+record.indexFile))),record);
       const model=open(data,example.binder.route);
       await page.locator('#proof').selectOption(String(i));
-      assert.equal(await page.locator('#denominator').isVisible(),example.source.name==='lean_workbook_plus_15068');
+      await page.waitForFunction(i=>active===examples[i],i);
+      assert.equal(await page.locator('#denominator').isVisible(),example.source.name==='lean_workbook_plus_15068' && example.callId===2);
+      assert.equal(await page.locator('#trace').isVisible(),example.table.total!=='0');
       assert(await page.locator('#witness').isHidden());
       const rows=page.locator('#matrix tbody tr');
       const columns=[...example.ports.filter(p=>p.role==='proof'),{slot:example.ports.length,dependencies:example.resultDependencies,input:example.call}];
@@ -55,7 +57,7 @@ const {open}=require('./model.cjs');
       }
       await page.locator('#details > summary').click();
       for(const p of example.ports){
-        const row=page.locator('.premise').filter({has:page.getByRole('link',{name:p.text,exact:true})});
+        const row=page.locator('.premise[data-slot="'+p.slot+'"]');
         const anchor=new URL(await row.locator('a').first().getAttribute('href'));
         assert.equal(anchor.searchParams.get('route'),p.input.route.root+':'+p.input.route.slots.join('.'));
         assert.equal(anchor.hash,'#expr-'+p.input.node);
@@ -71,6 +73,16 @@ const {open}=require('./model.cjs');
             assert.equal(href.hash,'#expr-'+target.node);
             assert.equal(await edge.locator('code').textContent(),w.root+'.'+w.slots.join('.')+' · row '+w.node);
           }
+        }
+        if(p.origin){
+          await row.locator('a[href^="#"]').click();
+          await page.waitForFunction(x=>active.source.indexSha256===x.hash && active.callId===x.id,{hash:example.source.indexSha256,id:p.origin.callId});
+          const result=new URL(await page.locator('#result a').getAttribute('href'));
+          assert.equal(result.hash,'#expr-'+p.origin.anchor.node);
+          assert.equal(result.searchParams.get('route'),p.origin.anchor.route.root+':'+p.origin.anchor.route.slots.join('.'));
+          await page.goBack();
+          await page.waitForFunction(i=>active===examples[i],i);
+          await page.locator('#details > summary').click();
         }
         if(!Number(p.count))continue;
         await page.getByRole('button',{name:'Inspect input '+p.slot,exact:true}).click();
@@ -91,6 +103,6 @@ const {open}=require('./model.cjs');
     }
   }
   assert.deepEqual(errors,[]);
-  console.log('Pass: four proof switches, 33 inputs, positive upper endpoints and invalid ordinals at both widths.');
+  console.log('Pass: all recorded applications, input links, matrix cells and positive upper endpoints at both widths.');
  } finally {await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});

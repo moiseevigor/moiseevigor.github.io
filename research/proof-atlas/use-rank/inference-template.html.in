@@ -3,7 +3,7 @@
 :root{color-scheme:light dark}*{box-sizing:border-box}body{max-width:48rem;margin:2rem auto;padding:0 1rem;font:1.1rem/1.5 Georgia,serif}h1,h2{line-height:1.15}h2{font-size:1.35rem}label,summary,button,select,.meta{font:1rem/1.45 system-ui}select,input,button{font:inherit;max-width:100%;padding:.3rem}.formula,a,code{overflow-wrap:anywhere}.premise{padding:.6rem 0}.premise p{margin:.25rem 0}.result{border-top:2px solid;padding-top:.65rem}.choice{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap}input{width:6em}a{color:LinkText}:focus-visible{outline:2px solid currentColor;outline-offset:2px}
 
 .matrix-scroll{overflow-x:auto;padding:.25rem}.matrix{border-collapse:collapse;font:1rem/1.4 system-ui}.matrix th,.matrix td{padding:.25rem .45rem;text-align:center}.matrix th:first-child{text-align:left;max-width:15rem;overflow-wrap:anywhere}.matrix thead{border-bottom:1px solid GrayText}.matrix tr>:last-child{border-left:1px solid GrayText}.matrix button{min-width:2.3rem;min-height:2.3rem;border:1px solid transparent;background:none;color:LinkText;cursor:pointer}.matrix button:hover,.matrix button[aria-pressed=true]{border-color:currentColor;background:ButtonFace}.matrix-key{font:1rem/1.45 system-ui}#witness{border-inline-start:2px solid GrayText;padding-inline-start:.7rem}
-</style></head><body><main><h1>Reading a Lean inference</h1><label>Compiled proof <select id="proof"></select></label>
+</style></head><body><main><h1>Reading a Lean inference</h1><label>Compiled application <select id="proof"></select></label>
 <p id="intro"></p><section aria-labelledby="map-heading"><h2 id="map-heading">Which arguments occur in each type?</h2>
 <p class="matrix-key">Columns are proof inputs and the conclusion. Select a dot to trace its reference. A dash means the formal argument is absent from that type. A blank falls outside its scope.</p>
 <div class="matrix-scroll" tabindex="0" role="region" aria-label="Argument references by premise and conclusion"><table class="matrix" id="matrix" aria-labelledby="map-heading"></table></div><p id="witness" aria-live="polite" hidden></p></section><h2>Proof arguments</h2><div id="premises"></div><section class="result"><h2>Conclusion</h2><div id="denominator" hidden><p>Clearing denominators turns the fractional equation</p>
@@ -94,19 +94,39 @@ function show(i){
  el('premises').replaceChildren();el('other').replaceChildren();
  for(const p of active.ports){
   const box=document.createElement('div'),caption=document.createElement('p'),expr=document.createElement('p');
-  box.className='premise';caption.className='meta';expr.className='formula';
+  box.dataset.slot=p.slot;box.className='premise';caption.className='meta';expr.className='formula';
   caption.textContent='Input '+p.slot+' · '+p.role+' · '+p.count+' uses of '+active.variable;
   if(premiseName(p.slot))caption.textContent=premiseName(p.slot)+' · '+caption.textContent;
   expr.append(link(p.text,p.input));box.append(caption,expr);if(p.slot)box.append(typeInputs(p));
+  if(p.origin){
+   const a=document.createElement('a');a.href='#'+active.source.indexSha256+'-'+p.origin.callId;
+   a.textContent='Read producing call '+p.origin.callId+(p.origin.hops?' via local definition':'');
+   const line=document.createElement('p');line.append(a);box.append(line);
+  }
   if(BigInt(p.count)){const b=document.createElement('button');b.textContent='Inspect input '+p.slot;
    b.onclick=()=>{choose(p);el('ordinal').focus();};box.append(b);}
   el(p.role==='proof'?'premises':'other').append(box);
  }
- choose(active.ports.find(p=>p.role==='proof' && BigInt(p.count)));
+ const first=active.ports.find(p=>p.role==='proof' && BigInt(p.count))||active.ports.find(p=>BigInt(p.count));
+ el('trace').hidden=!first;
+ if(first)choose(first);
+ else{port=null;el('intro').append(' This application contains no direct uses of '+active.variable+'.');el('occurrence').removeAttribute('href');}
+ if(!active.ports.some(p=>p.role==='proof'))el('premises').textContent='This application takes no proof-valued argument.';
 }
-for(const [i,x] of examples.entries()){const o=document.createElement('option');o.value=i;o.textContent=x.source.name;el('proof').append(o);}
-el('proof').value=String(examples.findIndex(x=>x.source.name==='lean_workbook_plus_15068'));
-el('proof').onchange=e=>show(Number(e.target.value));
+const groups=new Map();
+for(const [i,x] of examples.entries()){
+ const name=x.source.name;
+ if(!groups.has(name)){const group=document.createElement('optgroup');group.label=name;groups.set(name,group);el('proof').append(group);}
+ const option=document.createElement('option');option.value=i;option.textContent='Call '+x.callId+' · '+x.rule;
+ groups.get(name).append(option);
+}
+const defaultProof=examples.findIndex(x=>x.source.name==='lean_workbook_plus_15068' && x.callId===2);
+function follow(){
+ const index=examples.findIndex(x=>location.hash==='#'+x.source.indexSha256+'-'+x.callId);
+ el('proof').value=String(index>=0?index:defaultProof);show(Number(el('proof').value));
+}
+el('proof').onchange=e=>{const x=examples[Number(e.target.value)];location.hash=x.source.indexSha256+'-'+x.callId;};
+window.addEventListener('hashchange',follow);
 document.querySelector('form').onsubmit=e=>{e.preventDefault();const v=el('ordinal');if(v.validity.valid)locate(BigInt(Number(v.value)));};
-show(Number(el('proof').value));
+follow();
 </script></body></html>
