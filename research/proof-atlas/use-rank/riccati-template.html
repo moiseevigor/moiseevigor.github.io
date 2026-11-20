@@ -1,0 +1,52 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tracing J in the Riccati bound</title><style>
+:root{color-scheme:light dark}*{box-sizing:border-box}.bar{overflow:hidden}.inference{border-block:1px solid GrayText;padding:.75rem 0}.port{margin:.45rem 0}.port button{margin-left:.5rem}body{max-width:46rem;margin:2rem auto;padding:0 1rem;font:1.15rem/1.5 Georgia,serif}h1{font-size:clamp(2rem,5vw,2.8rem);line-height:1.1}h2{font-size:1.4rem}button,input,output,label,summary{font:1rem/1.5 system-ui}input{width:6em}button,input{padding:.35em .6em}:focus-visible{outline:2px solid currentColor;outline-offset:2px}a{color:LinkText}.bar{height:.9em;background:Canvas;display:flex;border:1px solid GrayText}.mark{background:LinkText;min-width:2px}.step{padding:.6rem 0}.note{font-size:1rem}code{overflow-wrap:anywhere}form{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+</style><main><h1>Tracing <i>J</i> in the Riccati bound</h1><p>The compiled proof of Lemma 3.2 refers to its Jacobi data 2,204 times. Choose a use to follow it through the proof.</p>
+<section aria-labelledby="estimate"><h2 id="estimate">Where does J enter the AM–GM estimate?</h2><div class="inference" id="inference"></div><p class="note">Each numbered use opens the corresponding occurrence below. Counts refer to the compiled arguments of this application.</p></section><form><label>Use <input required type="number" min="1" max="2204" value="1102" id="number"></label><button>Trace</button><button type="button" id="prev">Previous</button><button type="button" id="next">Next</button></form>
+<h2 id="title" aria-live="polite"></h2><p class="note">Each bar spans all 2,204 uses in Lean field order. The highlighted interval contains the selected use. Below one pixel its mark is enlarged for visibility.</p><div id="plot"></div><p><a id="link">Open this occurrence in the compiled proof</a></p><details><summary>Full field path and packet identity</summary><code id="address"></code></details></main>
+<script>/* INSERT SELECTOR */
+const packet=/* INSERT PACKET */;
+const el=id=>document.getElementById(id),input=el('number'),total=BigInt(packet.table.total);
+let active;
+function show(n){
+ const hit=selectBranch(packet.table,n);active=n;input.setCustomValidity('');input.value=String(n);el('title').textContent='Use '+n+' of '+total;
+ el('prev').disabled=n===1n;el('next').disabled=n===total;el('plot').replaceChildren();
+ const labels=['body'];
+ let oldFirst=1n,oldLast=total;
+ for(const s of hit.steps){
+  const field=packet.fields[s.kind][s.slot];labels.push(field);
+  if(s.first===oldFirst&&s.last===oldLast)continue;
+  oldFirst=s.first;oldLast=s.last;
+  const box=document.createElement('div'),caption=document.createElement('div'),bar=document.createElement('div'),mark=document.createElement('div');
+  box.className='step';bar.className='bar';mark.className='mark';bar.setAttribute('aria-hidden','true');
+  const owner=s.name||({5:'application',11:'projection'}[s.kind]||'expression');
+  caption.textContent=owner+' · '+field+' · '+(s.first===s.last?'use '+s.first:'uses '+s.first+'–'+s.last);
+  mark.style.marginLeft=(100*Number(s.first-1n)/Number(total))+'%';mark.style.width=(100*Number(s.last-s.first+1n)/Number(total))+'%';
+  bar.append(mark);box.append(caption,bar);el('plot').append(box);
+ }
+ const url=new URL('https://moiseevigor.github.io/projects/proof-atlas/library/');
+ url.search=new URLSearchParams({edition:packet.edition,proof:packet.name,route:packet.root+':'+hit.slots.join('.')});url.hash='expr-'+hit.node;
+ el('link').href=url.href;el('address').textContent='root.value.'+labels.join('.')+' · #'+hit.node+' · SHA-256 '+packet.hash;
+}
+document.querySelector('form').onsubmit=e=>{e.preventDefault();if(!/^\d+$/.test(input.value)){input.setCustomValidity('Enter a whole use number.');input.reportValidity();return;}show(BigInt(input.value));};
+input.oninput=()=>input.setCustomValidity('');el('prev').onclick=()=>show(active-1n);el('next').onclick=()=>show(active+1n);const proofLink=({route,node},label)=>{
+ const a=document.createElement('a'),url=new URL('https://moiseevigor.github.io/projects/proof-atlas/library/');
+ url.search=new URLSearchParams({edition:packet.edition,proof:packet.name,route:route.root+':'+route.slots.join('.')});
+ url.hash='expr-'+node;a.href=url.href;a.textContent=label;return a;
+};
+const estimate=packet.inference,region=el('inference');
+function renderPort(port,parent,label){
+ const row=document.createElement('p');row.className='port';
+ row.append(label+' ',proofLink(port.anchor,port.term));
+ for(const n of port.uses){
+  const b=document.createElement('button');b.type='button';b.textContent='Use '+n;
+  b.onclick=()=>{show(BigInt(n));el('title').scrollIntoView({block:'nearest'});};row.append(b);
+ }
+ parent.append(row);
+}
+for(const p of estimate.inputs.slice(3))renderPort({...p,term:p.type},region,'Premise');
+const result=document.createElement('p');result.append('Therefore ',proofLink(estimate.call,estimate.conclusion));region.append(result);
+const detail=document.createElement('details'),summary=document.createElement('summary');summary.textContent='Rule and implicit arguments';detail.append(summary);
+estimate.inputs.slice(0,3).forEach((p,i)=>renderPort(p,detail,i?'Argument '+i:'Rule'));region.append(detail);
+show(BigInt(estimate.inputs[3].uses[0]));
+</script></html>

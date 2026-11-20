@@ -142,6 +142,26 @@ function open(data, binder, options = {}) {
     if (data.kind[node] !== 0 || data.payloads[node].index !== index) throw Error('Expected use of selected binder');
     return ordinal;
   }
-  return {select,rank,total,states:queries.length,...table.stats()};
+  function branchTable() {
+    const rows=[], ids=new Map(), pending=[];
+    function intern(node,index,mass) {
+      const key=keyOf(node,index);
+      if (ids.has(key)) return ids.get(key);
+      const id=pending.length;
+      ids.set(key,id);pending.push({node,index,mass});return id;
+    }
+    if (total) intern(body,0,total);
+    for (let i=0;i<pending.length;i++) {
+      const {node,index,mass}=pending[i], kind=data.kind[node], children=data.children[node];
+      const edges=[];
+      weights(node,index,mass).forEach((size,slot)=>{
+        if (size>0n) edges.push([slot,intern(children[slot],index+Number(binds(kind,slot)),size),String(size)]);
+      });
+      const p=data.payloads[node];
+      rows.push([node,kind,p.binderName||p.declName||'',edges]);
+    }
+    return {prefix,total:String(total),rows};
+  }
+  return {select,rank,branchTable,total,states:queries.length,...table.stats()};
 }
 module.exports = {open,makeSplits,binds};
