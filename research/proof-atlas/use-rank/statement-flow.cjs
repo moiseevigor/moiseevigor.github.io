@@ -9,12 +9,25 @@ module.exports=function statementFlow(data,calls){
   while(data.kind[statement]===7 && data.kind[proof]===6 &&
         data.children[statement][0]===data.children[proof][0]){
     const uses=open(data,{root:1,slots:prefix});
-    const bodySlots=[...prefix,1],containing=[];
+    const bodySlots=[...prefix,1],containing=[],ranges=[];
     for(const c of calls){
       if(c.call.route.root!==1 || !bodySlots.every((v,i)=>c.call.route.slots[i]===v))continue;
       const hit=uses.interval(c.call.route);
-      if(hit.count)containing.push({call:c.callId,count:String(hit.count),first:uses.select(hit.first)});
+      if(hit.count){
+        containing.push({call:c.callId,count:String(hit.count),first:uses.select(hit.first)});
+        ranges.push({start:hit.first,end:hit.first+hit.count});
+      }
     }
+    ranges.sort((a,b)=>a.start<b.start?-1:a.start>b.start?1:0);
+    let covered=0n,cursor=1n,gap=null;
+    for(const {start,end} of ranges){
+      if(end<=cursor)continue;
+      if(start>cursor && gap===null)gap=cursor;
+      covered+=end-(start>cursor?start:cursor);
+      cursor=end;
+    }
+    if(gap===null && cursor<=uses.total)gap=cursor;
+    const coverage={total:String(uses.total),covered:String(covered),firstOutside:gap===null?null:uses.select(gap)};
     const direct=[],subsequent=[],queue=[],seen=new Set();
     function enqueue(id){if(!seen.has(id)){seen.add(id);queue.push(id);}}
     for(const c of calls)for(const p of c.ports){
@@ -31,7 +44,7 @@ module.exports=function statementFlow(data,calls){
       }
     }
     clauses.push({name:data.payloads[statement].binderName,
-      domain:{node:data.children[statement][0],route:{root:0,slots:[...prefix,0]}},containing,direct,subsequent});
+      domain:{node:data.children[statement][0],route:{root:0,slots:[...prefix,0]}},coverage,containing,direct,subsequent});
     prefix.push(1);statement=data.children[statement][1];proof=data.children[proof][1];
   }
   return clauses;

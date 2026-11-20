@@ -122,6 +122,11 @@ function traceClause(){
  const clause=flows[active.source.indexSha256][Number(el('clause').value)],area=el('flow');
  area.replaceChildren(link('Open declared type of '+clause.name,clause.domain));
  const note=document.createElement('p');note.textContent=clause.containing.length+' recorded call subtrees contain a lexical reference to this binder. A direct input supplies the binder itself.';area.append(note);
+ const coverage=document.createElement('p'),c=clause.coverage;
+ coverage.className='coverage';
+ coverage.append(c.total==='0'?'The binder has no lexical uses in its proof body.':c.covered+' of '+c.total+' uses in the binder body lie inside the recorded calls, counting each occurrence once.');
+ if(c.firstOutside)coverage.append(' ',link('Inspect first use outside the recorded calls',c.firstOutside));
+ area.append(coverage);
  if(clause.containing.length){
   const detail=document.createElement('details'),title=document.createElement('summary'),list=document.createElement('ul');
   title.textContent='Inspect occurrences inside calls';detail.append(title,list);

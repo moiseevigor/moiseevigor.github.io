@@ -6,7 +6,410 @@
     "direct": 2,
     "subsequent": 1,
     "onlyNested": 2,
-    "noReference": 4
+    "noReference": 4,
+    "coverage": [
+      {
+        "binder": {
+          "root": 1,
+          "slots": []
+        },
+        "name": "a",
+        "total": "90194",
+        "covered": "2",
+        "summed": "3",
+        "firstOutside": {
+          "node": 16,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              0,
+              0,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1
+          ]
+        },
+        "name": "b",
+        "total": "82817",
+        "covered": "24",
+        "summed": "24",
+        "firstOutside": {
+          "node": 19,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1
+          ]
+        },
+        "name": "c",
+        "total": "78056",
+        "covered": "62",
+        "summed": "62",
+        "firstOutside": {
+          "node": 22,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1
+          ]
+        },
+        "name": "h₀",
+        "total": "43",
+        "covered": "0",
+        "summed": "0",
+        "firstOutside": {
+          "node": 80,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "name": "h₁",
+        "total": "32",
+        "covered": "0",
+        "summed": "0",
+        "firstOutside": {
+          "node": 78,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "name": "h₂",
+        "total": "35",
+        "covered": "0",
+        "summed": "0",
+        "firstOutside": {
+          "node": 54,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "name": "h₃",
+        "total": "40",
+        "covered": "0",
+        "summed": "0",
+        "firstOutside": {
+          "node": 16,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    ]
   },
   {
     "name": "lean_workbook_4274",
@@ -15,7 +418,138 @@
     "direct": 1,
     "subsequent": 2,
     "onlyNested": 1,
-    "noReference": 2
+    "noReference": 2,
+    "coverage": [
+      {
+        "binder": {
+          "root": 1,
+          "slots": []
+        },
+        "name": "n",
+        "total": "15",
+        "covered": "0",
+        "summed": "0",
+        "firstOutside": {
+          "node": 214,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              0,
+              0,
+              0,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1
+          ]
+        },
+        "name": "b",
+        "total": "336",
+        "covered": "20",
+        "summed": "32",
+        "firstOutside": {
+          "node": 5,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1
+          ]
+        },
+        "name": "h₁",
+        "total": "4",
+        "covered": "1",
+        "summed": "1",
+        "firstOutside": {
+          "node": 103,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              1,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1
+          ]
+        },
+        "name": "h₂",
+        "total": "2",
+        "covered": "0",
+        "summed": "0",
+        "firstOutside": {
+          "node": 190,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    ]
   },
   {
     "name": "lean_workbook_plus_15068",
@@ -24,7 +558,386 @@
     "direct": 2,
     "subsequent": 0,
     "onlyNested": 5,
-    "noReference": 2
+    "noReference": 2,
+    "coverage": [
+      {
+        "binder": {
+          "root": 1,
+          "slots": []
+        },
+        "name": "a",
+        "total": "30284",
+        "covered": "1350",
+        "summed": "2686",
+        "firstOutside": {
+          "node": 15,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1
+          ]
+        },
+        "name": "b",
+        "total": "26423",
+        "covered": "1228",
+        "summed": "2442",
+        "firstOutside": {
+          "node": 15,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1
+          ]
+        },
+        "name": "ha",
+        "total": "21",
+        "covered": "8",
+        "summed": "16",
+        "firstOutside": {
+          "node": 93,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1
+          ]
+        },
+        "name": "hb",
+        "total": "21",
+        "covered": "8",
+        "summed": "16",
+        "firstOutside": {
+          "node": 48,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "name": "hab",
+        "total": "15",
+        "covered": "6",
+        "summed": "12",
+        "firstOutside": {
+          "node": 34,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "name": "hab'",
+        "total": "0",
+        "covered": "0",
+        "summed": "0",
+        "firstOutside": null
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "name": "hab''",
+        "total": "0",
+        "covered": "0",
+        "summed": "0",
+        "firstOutside": null
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "name": "h",
+        "total": "5",
+        "covered": "2",
+        "summed": "2",
+        "firstOutside": {
+          "node": 15,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    ]
   },
   {
     "name": "lean_workbook_plus_19617",
@@ -33,7 +946,110 @@
     "direct": 2,
     "subsequent": 1,
     "onlyNested": 1,
-    "noReference": 1
+    "noReference": 1,
+    "coverage": [
+      {
+        "binder": {
+          "root": 1,
+          "slots": []
+        },
+        "name": "f",
+        "total": "76",
+        "covered": "51",
+        "summed": "192",
+        "firstOutside": {
+          "node": 13,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1
+          ]
+        },
+        "name": "h₀",
+        "total": "4",
+        "covered": "1",
+        "summed": "1",
+        "firstOutside": {
+          "node": 130,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              1,
+              0,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1
+          ]
+        },
+        "name": "h₁",
+        "total": "1",
+        "covered": "1",
+        "summed": "1",
+        "firstOutside": null
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1
+          ]
+        },
+        "name": "x",
+        "total": "17",
+        "covered": "0",
+        "summed": "0",
+        "firstOutside": {
+          "node": 14,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    ]
   },
   {
     "name": "lean_workbook_plus_39831",
@@ -42,7 +1058,155 @@
     "direct": 2,
     "subsequent": 0,
     "onlyNested": 4,
-    "noReference": 0
+    "noReference": 0,
+    "coverage": [
+      {
+        "binder": {
+          "root": 1,
+          "slots": []
+        },
+        "name": "a",
+        "total": "1716",
+        "covered": "540",
+        "summed": "1070",
+        "firstOutside": {
+          "node": 13,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1
+          ]
+        },
+        "name": "b",
+        "total": "1456",
+        "covered": "828",
+        "summed": "1648",
+        "firstOutside": {
+          "node": 13,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1
+          ]
+        },
+        "name": "ha",
+        "total": "11",
+        "covered": "4",
+        "summed": "8",
+        "firstOutside": {
+          "node": 43,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1
+          ]
+        },
+        "name": "hb",
+        "total": "7",
+        "covered": "4",
+        "summed": "8",
+        "firstOutside": {
+          "node": 63,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "name": "hab",
+        "total": "2",
+        "covered": "2",
+        "summed": "2",
+        "firstOutside": null
+      }
+    ]
   },
   {
     "name": "lean_workbook_plus_6206",
@@ -51,6 +1215,400 @@
     "direct": 3,
     "subsequent": 0,
     "onlyNested": 3,
-    "noReference": 1
+    "noReference": 1,
+    "coverage": [
+      {
+        "binder": {
+          "root": 1,
+          "slots": []
+        },
+        "name": "a",
+        "total": "80812",
+        "covered": "41",
+        "summed": "76",
+        "firstOutside": {
+          "node": 16,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              0,
+              0,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1
+          ]
+        },
+        "name": "b",
+        "total": "91321",
+        "covered": "35",
+        "summed": "66",
+        "firstOutside": {
+          "node": 19,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1
+          ]
+        },
+        "name": "c",
+        "total": "96925",
+        "covered": "35",
+        "summed": "66",
+        "firstOutside": {
+          "node": 22,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1
+          ]
+        },
+        "name": "h₀",
+        "total": "41",
+        "covered": "0",
+        "summed": "0",
+        "firstOutside": {
+          "node": 80,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "name": "h₁",
+        "total": "41",
+        "covered": "1",
+        "summed": "1",
+        "firstOutside": {
+          "node": 78,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "name": "h₂",
+        "total": "38",
+        "covered": "1",
+        "summed": "1",
+        "firstOutside": {
+          "node": 54,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "name": "h₃",
+        "total": "34",
+        "covered": "1",
+        "summed": "1",
+        "firstOutside": {
+          "node": 16,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    ]
   }
 ]

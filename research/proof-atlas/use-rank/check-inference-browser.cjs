@@ -28,6 +28,15 @@ const {open}=require('./model.cjs');
         await page.locator('#statement-flow > summary').click();
         for(const [k,c] of clauses.entries()){
           await page.locator('#clause').selectOption(String(k));
+          const coverage=page.locator('#flow .coverage');
+          assert((await coverage.textContent()).includes(c.coverage.total==='0'?'no lexical uses':c.coverage.covered+' of '+c.coverage.total+' uses'));
+          const outside=c.coverage.firstOutside, gap=coverage.locator('a');
+          assert.equal(await gap.count(),outside?1:0);
+          if(outside){
+            const url=new URL(await gap.getAttribute('href'));
+            assert.equal(url.searchParams.get('route'),outside.route.root+':'+outside.route.slots.join('.'));
+            assert.equal(url.hash,'#expr-'+outside.node);
+          }
           const edges=[...c.direct,...c.subsequent];
           const links=page.locator('#flow a[href^="#"]');
           assert.equal(await links.count(),edges.length);
