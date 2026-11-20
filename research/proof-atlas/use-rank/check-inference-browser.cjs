@@ -174,6 +174,29 @@ const {open}=require('./model.cjs');
         assert.equal(anchor.searchParams.get('route'),p.input.route.root+':'+p.input.route.slots.join('.'));
         assert.equal(anchor.hash,'#expr-'+p.input.node);
         if(p.slot){
+          const head=p.head;
+          assert.equal(head.route.root,p.input.route.root);
+          assert.deepEqual(head.route.slots.slice(0,p.input.route.slots.length),p.input.route.slots);
+          const suffix=head.route.slots.slice(p.input.route.slots.length);
+          assert(suffix.every(slot=>slot===0));
+          assert.equal(atlas.walk(data,head.route),head.node);
+          assert.equal(atlas.kinds[data.kind[head.node]],head.kind);
+          assert.notEqual(head.kind,'app');
+          const expected=[];
+          if(suffix.length || head.kind==='lam'){
+            expected.push(head);
+            if(head.kind==='bvar')expected.push(atlas.binding(data,head.route));
+            if(head.kind==='lam')expected.push({node:data.children[head.node][1],route:{root:head.route.root,slots:head.route.slots.concat(1)}});
+          }
+          const links=await row.locator('.input-head a').evaluateAll(nodes=>nodes.map(a=>a.href));
+          assert.equal(links.length,expected.length);
+          for(const [index,target] of expected.entries()){
+            const url=new URL(links[index]);
+            assert.equal(url.searchParams.get('proof'),example.source.name);
+            assert.equal(url.searchParams.get('edition'),example.source.edition);
+            assert.equal(url.searchParams.get('route'),target.route.root+':'+target.route.slots.join('.'));
+            assert.equal(url.hash,'#expr-'+target.node);
+          }
           const detail=row.locator('details:not(.definition):not(.declared-domain)');
           await detail.locator('summary').click();
           const edges=detail.locator('li');

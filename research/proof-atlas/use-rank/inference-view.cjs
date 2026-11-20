@@ -10,6 +10,7 @@ const {inventory} = require('../../../scripts/proof-atlas-judgment-fixtures.cjs'
 const {open} = require('./model.cjs');
 const select = require('./select-branch.js');
 const declaredDomain=require('./declared-domain.cjs');
+const inputHead = require('../step-reading/input-head.cjs');
 const lexicalInputs=require('./lexical-inputs.cjs');
 const definitionPath=require('./definition-path.cjs');
 const {validateSourcePort}=require('../../../public/js/proof-atlas-application-ports');
@@ -71,7 +72,7 @@ for(const item of require('./port-results.json')) {
       const binderAddress=entry.externalBinder;
       const binding=binderAddress ? {anchor:binderAddress,name:data.payloads[binderAddress.node].binderName,...declaredDomain(data,binderAddress)} : null;
       const resolution=definitionPath(data,entry);
-      ports.push({slot,input,origin,binding,resolution,formalName:entry.formal?.binderName,dependencies:dependencies(entries[0],entry),role:slot ? entry.producer.role : 'function',offset:String(before),
+      ports.push({slot,input,head:slot ? inputHead(data,input) : null,origin,binding,resolution,formalName:entry.formal?.binderName,dependencies:dependencies(entries[0],entry),role:slot ? entry.producer.role : 'function',offset:String(before),
         count:String(hit.count),text:entry.producer.role==='proof' && slot ? entry.display.inputType : entry.display.inputTerm});
       before+=hit.count;
     }

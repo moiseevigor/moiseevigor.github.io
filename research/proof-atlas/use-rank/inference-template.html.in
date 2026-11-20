@@ -234,6 +234,13 @@ function show(i){
   caption.textContent='Input '+p.slot+' · '+p.role+' · '+p.count+' uses of '+active.variable;
   if(premiseName(p.slot))caption.textContent=premiseName(p.slot)+' · '+caption.textContent;
   expr.append(link(p.text,p.input));box.append(caption,expr);if(p.slot)box.append(typeInputs(p));showBinding(box,p);
+  if(p.head && (p.head.route.slots.length > p.input.route.slots.length || p.head.body)){
+   const line=document.createElement('p');line.className='input-head';
+   line.append('Head of input · ',link(p.head.label,p.head));
+   if(p.head.binder)line.append(' · bound by ',link(p.head.binder.name||'binder',p.head.binder));
+   if(p.head.body)line.append(' · ',link('Open body',p.head.body));
+   box.append(line);
+  }
   if(p.origin){
    const a=document.createElement('a');a.href='#'+active.source.indexSha256+'-'+p.origin.callId;
    a.textContent='Read producing call '+p.origin.callId+(p.origin.hops?' via local definition':'');

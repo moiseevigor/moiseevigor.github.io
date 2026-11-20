@@ -12,6 +12,7 @@ require('../../../public/data/proof-atlas/article-proof-steps.js');
 const article = window.PROOF_ATLAS_PROOF_STEPS;
 const edition = window.PROOF_ATLAS_LIBRARY.editions.find(e => e.id === article.edition);
 const records = new Map(edition.declarations.map(r => [r.name, r]));
+const inputHead = require('./input-head.cjs');
 const traces = require('./article-call-traces.json');
 assert.equal(traces.edition, edition.id);
 const root = path.resolve(__dirname, '../../..');
@@ -76,25 +77,14 @@ for (const anchor of article.anchors.filter(a => a.callee && a.kind === 'app')) 
       item += ' → ' + link(term.payloads[binder.node].binderName || 'binder', binder.node, binder.route);
       references++;
     } else {
-      let head = arg;
-      const headSlots = [...route.slots];
-      while (data.kinds[term.kind[head]] === 'app') {
-        head = term.children[head][0];
-        headSlots.push(0);
+      const head = inputHead(term, {node: arg, route});
+      headCounts.set(head.kind, (headCounts.get(head.kind) || 0) + 1);
+      item += ' (' + link(head.kind === 'lam' ? 'λ' : head.label, head.node, head.route);
+      if (head.kind === 'bvar') {
+        assert(head.binder);
+        item += ' → ' + link(head.binder.name || 'binder', head.binder.node, head.binder.route);
       }
-      const kind = data.kinds[term.kind[head]];
-      headCounts.set(kind, (headCounts.get(kind) || 0) + 1);
-      const label = kind === 'const' ? term.payloads[head].name : kind === 'lam' ? 'λ' : kind;
-      const headRoute = {root: route.root, slots: headSlots};
-      item += ' (' + link(label, head, headRoute);
-      if (kind === 'bvar') {
-        const binder = data.binding(term, headRoute);
-        assert(binder);
-        item += ' → ' + link(term.payloads[binder.node].binderName || 'binder', binder.node, binder.route);
-      } else if (kind === 'lam') {
-        const body = {root: route.root, slots: headSlots.concat(1)};
-        item += ', ' + link('body', term.children[head][1], body);
-      }
+      if (head.body) item += ', ' + link('body', head.body.node, head.body.route);
       item += ')';
     }
     args.unshift(item);
