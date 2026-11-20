@@ -1,0 +1,968 @@
+[
+  {
+    "edition": "published-15",
+    "name": "CrossingData.mk.inj",
+    "occurrences": 8,
+    "sizes": {
+      "full": {
+        "json": 286,
+        "gzip": 151
+      },
+      "relative": {
+        "json": 241,
+        "gzip": 150
+      },
+      "fullDelta": {
+        "json": 231,
+        "gzip": 157
+      },
+      "relativeDelta": {
+        "json": 263,
+        "gzip": 156
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "CrossingData.mk.injEq",
+    "occurrences": 30,
+    "sizes": {
+      "full": {
+        "json": 1754,
+        "gzip": 231
+      },
+      "relative": {
+        "json": 1258,
+        "gzip": 239
+      },
+      "fullDelta": {
+        "json": 594,
+        "gzip": 237
+      },
+      "relativeDelta": {
+        "json": 754,
+        "gzip": 254
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "CrossingData.mk.sizeOf_spec",
+    "occurrences": 8,
+    "sizes": {
+      "full": {
+        "json": 265,
+        "gzip": 151
+      },
+      "relative": {
+        "json": 239,
+        "gzip": 155
+      },
+      "fullDelta": {
+        "json": 225,
+        "gzip": 159
+      },
+      "relativeDelta": {
+        "json": 235,
+        "gzip": 163
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiCore.E_lt_K",
+    "occurrences": 2,
+    "sizes": {
+      "full": {
+        "json": 138,
+        "gzip": 133
+      },
+      "relative": {
+        "json": 145,
+        "gzip": 137
+      },
+      "fullDelta": {
+        "json": 143,
+        "gzip": 135
+      },
+      "relativeDelta": {
+        "json": 156,
+        "gzip": 138
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiCore.Sol.mk.congr_simp",
+    "occurrences": 99,
+    "sizes": {
+      "full": {
+        "json": 4104,
+        "gzip": 380
+      },
+      "relative": {
+        "json": 3778,
+        "gzip": 477
+      },
+      "fullDelta": {
+        "json": 1580,
+        "gzip": 347
+      },
+      "relativeDelta": {
+        "json": 3158,
+        "gzip": 501
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiCore.Sol.mk.inj",
+    "occurrences": 18,
+    "sizes": {
+      "full": {
+        "json": 461,
+        "gzip": 173
+      },
+      "relative": {
+        "json": 437,
+        "gzip": 176
+      },
+      "fullDelta": {
+        "json": 344,
+        "gzip": 187
+      },
+      "relativeDelta": {
+        "json": 497,
+        "gzip": 192
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiCore.Sol.mk.injEq",
+    "occurrences": 60,
+    "sizes": {
+      "full": {
+        "json": 2703,
+        "gzip": 295
+      },
+      "relative": {
+        "json": 2276,
+        "gzip": 322
+      },
+      "fullDelta": {
+        "json": 911,
+        "gzip": 302
+      },
+      "relativeDelta": {
+        "json": 1473,
+        "gzip": 348
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiCore.Sol.mk.sizeOf_spec",
+    "occurrences": 9,
+    "sizes": {
+      "full": {
+        "json": 246,
+        "gzip": 151
+      },
+      "relative": {
+        "json": 261,
+        "gzip": 163
+      },
+      "fullDelta": {
+        "json": 225,
+        "gzip": 159
+      },
+      "relativeDelta": {
+        "json": 291,
+        "gzip": 175
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiCore.eps_reflect",
+    "occurrences": 2,
+    "sizes": {
+      "full": {
+        "json": 133,
+        "gzip": 130
+      },
+      "relative": {
+        "json": 140,
+        "gzip": 134
+      },
+      "fullDelta": {
+        "json": 137,
+        "gzip": 135
+      },
+      "relativeDelta": {
+        "json": 150,
+        "gzip": 140
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiCore.eps_shift",
+    "occurrences": 2,
+    "sizes": {
+      "full": {
+        "json": 133,
+        "gzip": 130
+      },
+      "relative": {
+        "json": 140,
+        "gzip": 133
+      },
+      "fullDelta": {
+        "json": 137,
+        "gzip": 133
+      },
+      "relativeDelta": {
+        "json": 150,
+        "gzip": 139
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiCore.mk.inj",
+    "occurrences": 26,
+    "sizes": {
+      "full": {
+        "json": 849,
+        "gzip": 198
+      },
+      "relative": {
+        "json": 676,
+        "gzip": 204
+      },
+      "fullDelta": {
+        "json": 451,
+        "gzip": 217
+      },
+      "relativeDelta": {
+        "json": 714,
+        "gzip": 220
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiCore.mk.injEq",
+    "occurrences": 86,
+    "sizes": {
+      "full": {
+        "json": 6187,
+        "gzip": 400
+      },
+      "relative": {
+        "json": 4862,
+        "gzip": 441
+      },
+      "fullDelta": {
+        "json": 1289,
+        "gzip": 398
+      },
+      "relativeDelta": {
+        "json": 2411,
+        "gzip": 475
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiCore.mk.sizeOf_spec",
+    "occurrences": 23,
+    "sizes": {
+      "full": {
+        "json": 719,
+        "gzip": 192
+      },
+      "relative": {
+        "json": 674,
+        "gzip": 215
+      },
+      "fullDelta": {
+        "json": 423,
+        "gzip": 206
+      },
+      "relativeDelta": {
+        "json": 562,
+        "gzip": 235
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiCore.sc",
+    "occurrences": 2,
+    "sizes": {
+      "full": {
+        "json": 133,
+        "gzip": 130
+      },
+      "relative": {
+        "json": 140,
+        "gzip": 134
+      },
+      "fullDelta": {
+        "json": 137,
+        "gzip": 134
+      },
+      "relativeDelta": {
+        "json": 150,
+        "gzip": 139
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiCore.sd",
+    "occurrences": 2,
+    "sizes": {
+      "full": {
+        "json": 133,
+        "gzip": 131
+      },
+      "relative": {
+        "json": 140,
+        "gzip": 135
+      },
+      "fullDelta": {
+        "json": 137,
+        "gzip": 134
+      },
+      "relativeDelta": {
+        "json": 150,
+        "gzip": 139
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiData.mk.inj",
+    "occurrences": 22,
+    "sizes": {
+      "full": {
+        "json": 673,
+        "gzip": 190
+      },
+      "relative": {
+        "json": 559,
+        "gzip": 191
+      },
+      "fullDelta": {
+        "json": 413,
+        "gzip": 205
+      },
+      "relativeDelta": {
+        "json": 597,
+        "gzip": 204
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiData.mk.injEq",
+    "occurrences": 86,
+    "sizes": {
+      "full": {
+        "json": 5363,
+        "gzip": 390
+      },
+      "relative": {
+        "json": 4234,
+        "gzip": 423
+      },
+      "fullDelta": {
+        "json": 1313,
+        "gzip": 388
+      },
+      "relativeDelta": {
+        "json": 2114,
+        "gzip": 451
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiData.mk.sizeOf_spec",
+    "occurrences": 11,
+    "sizes": {
+      "full": {
+        "json": 321,
+        "gzip": 160
+      },
+      "relative": {
+        "json": 316,
+        "gzip": 174
+      },
+      "fullDelta": {
+        "json": 260,
+        "gzip": 170
+      },
+      "relativeDelta": {
+        "json": 335,
+        "gzip": 187
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiFull.cell_roots",
+    "occurrences": 2,
+    "sizes": {
+      "full": {
+        "json": 212,
+        "gzip": 142
+      },
+      "relative": {
+        "json": 230,
+        "gzip": 148
+      },
+      "fullDelta": {
+        "json": 180,
+        "gzip": 144
+      },
+      "relativeDelta": {
+        "json": 246,
+        "gzip": 154
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiFull.coincide_imp",
+    "occurrences": 1,
+    "sizes": {
+      "full": {
+        "json": 143,
+        "gzip": 125
+      },
+      "relative": {
+        "json": 152,
+        "gzip": 131
+      },
+      "fullDelta": {
+        "json": 147,
+        "gzip": 128
+      },
+      "relativeDelta": {
+        "json": 160,
+        "gzip": 134
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiFull.exists_α1_zero",
+    "occurrences": 79,
+    "sizes": {
+      "full": {
+        "json": 2122,
+        "gzip": 344
+      },
+      "relative": {
+        "json": 1672,
+        "gzip": 355
+      },
+      "fullDelta": {
+        "json": 1108,
+        "gzip": 349
+      },
+      "relativeDelta": {
+        "json": 1140,
+        "gzip": 365
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiFull.mk.inj",
+    "occurrences": 6,
+    "sizes": {
+      "full": {
+        "json": 212,
+        "gzip": 143
+      },
+      "relative": {
+        "json": 210,
+        "gzip": 148
+      },
+      "fullDelta": {
+        "json": 198,
+        "gzip": 154
+      },
+      "relativeDelta": {
+        "json": 228,
+        "gzip": 154
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiFull.mk.injEq",
+    "occurrences": 16,
+    "sizes": {
+      "full": {
+        "json": 662,
+        "gzip": 179
+      },
+      "relative": {
+        "json": 550,
+        "gzip": 188
+      },
+      "fullDelta": {
+        "json": 369,
+        "gzip": 191
+      },
+      "relativeDelta": {
+        "json": 467,
+        "gzip": 199
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiFull.mk.sizeOf_spec",
+    "occurrences": 7,
+    "sizes": {
+      "full": {
+        "json": 226,
+        "gzip": 148
+      },
+      "relative": {
+        "json": 229,
+        "gzip": 153
+      },
+      "fullDelta": {
+        "json": 208,
+        "gzip": 160
+      },
+      "relativeDelta": {
+        "json": 221,
+        "gzip": 163
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiFull.roots_ncard",
+    "occurrences": 4,
+    "sizes": {
+      "full": {
+        "json": 230,
+        "gzip": 144
+      },
+      "relative": {
+        "json": 245,
+        "gzip": 160
+      },
+      "fullDelta": {
+        "json": 189,
+        "gzip": 148
+      },
+      "relativeDelta": {
+        "json": 252,
+        "gzip": 163
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiInit.f1_div_c_strictAntiOn",
+    "occurrences": 2,
+    "sizes": {
+      "full": {
+        "json": 143,
+        "gzip": 132
+      },
+      "relative": {
+        "json": 149,
+        "gzip": 137
+      },
+      "fullDelta": {
+        "json": 147,
+        "gzip": 136
+      },
+      "relativeDelta": {
+        "json": 160,
+        "gzip": 140
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiInit.α1_div_d_strictAntiOn",
+    "occurrences": 1,
+    "sizes": {
+      "full": {
+        "json": 126,
+        "gzip": 125
+      },
+      "relative": {
+        "json": 135,
+        "gzip": 130
+      },
+      "fullDelta": {
+        "json": 130,
+        "gzip": 127
+      },
+      "relativeDelta": {
+        "json": 143,
+        "gzip": 134
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiInit.α1_div_d_strictMonoOn",
+    "occurrences": 1,
+    "sizes": {
+      "full": {
+        "json": 126,
+        "gzip": 124
+      },
+      "relative": {
+        "json": 135,
+        "gzip": 130
+      },
+      "fullDelta": {
+        "json": 130,
+        "gzip": 127
+      },
+      "relativeDelta": {
+        "json": 143,
+        "gzip": 134
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiInit.β1_strictAntiOn",
+    "occurrences": 1,
+    "sizes": {
+      "full": {
+        "json": 127,
+        "gzip": 125
+      },
+      "relative": {
+        "json": 136,
+        "gzip": 130
+      },
+      "fullDelta": {
+        "json": 131,
+        "gzip": 127
+      },
+      "relativeDelta": {
+        "json": 144,
+        "gzip": 134
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiInit.β1_strictMonoOn",
+    "occurrences": 1,
+    "sizes": {
+      "full": {
+        "json": 127,
+        "gzip": 124
+      },
+      "relative": {
+        "json": 136,
+        "gzip": 130
+      },
+      "fullDelta": {
+        "json": 131,
+        "gzip": 126
+      },
+      "relativeDelta": {
+        "json": 144,
+        "gzip": 134
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiPeriodic.exists_unique_f1_zero",
+    "occurrences": 65,
+    "sizes": {
+      "full": {
+        "json": 2124,
+        "gzip": 335
+      },
+      "relative": {
+        "json": 1903,
+        "gzip": 352
+      },
+      "fullDelta": {
+        "json": 1028,
+        "gzip": 323
+      },
+      "relativeDelta": {
+        "json": 1075,
+        "gzip": 341
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "JacobiPeriodic.exists_unique_β1_zero",
+    "occurrences": 67,
+    "sizes": {
+      "full": {
+        "json": 2463,
+        "gzip": 346
+      },
+      "relative": {
+        "json": 1978,
+        "gzip": 355
+      },
+      "fullDelta": {
+        "json": 1066,
+        "gzip": 331
+      },
+      "relativeDelta": {
+        "json": 1113,
+        "gzip": 346
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "SBracket.exact_time",
+    "occurrences": 2,
+    "sizes": {
+      "full": {
+        "json": 189,
+        "gzip": 139
+      },
+      "relative": {
+        "json": 181,
+        "gzip": 143
+      },
+      "fullDelta": {
+        "json": 170,
+        "gzip": 141
+      },
+      "relativeDelta": {
+        "json": 183,
+        "gzip": 145
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "SBracket.mk.inj",
+    "occurrences": 6,
+    "sizes": {
+      "full": {
+        "json": 392,
+        "gzip": 148
+      },
+      "relative": {
+        "json": 270,
+        "gzip": 151
+      },
+      "fullDelta": {
+        "json": 241,
+        "gzip": 157
+      },
+      "relativeDelta": {
+        "json": 288,
+        "gzip": 158
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "SBracket.mk.injEq",
+    "occurrences": 16,
+    "sizes": {
+      "full": {
+        "json": 2012,
+        "gzip": 203
+      },
+      "relative": {
+        "json": 1258,
+        "gzip": 216
+      },
+      "fullDelta": {
+        "json": 542,
+        "gzip": 218
+      },
+      "relativeDelta": {
+        "json": 856,
+        "gzip": 231
+      }
+    }
+  },
+  {
+    "edition": "published-15",
+    "name": "SBracket.mk.sizeOf_spec",
+    "occurrences": 7,
+    "sizes": {
+      "full": {
+        "json": 366,
+        "gzip": 154
+      },
+      "relative": {
+        "json": 249,
+        "gzip": 158
+      },
+      "fullDelta": {
+        "json": 232,
+        "gzip": 162
+      },
+      "relativeDelta": {
+        "json": 241,
+        "gzip": 165
+      }
+    }
+  },
+  {
+    "edition": "goedel-sample-4331",
+    "name": "lean_workbook_20418",
+    "occurrences": 0,
+    "sizes": {
+      "full": {
+        "json": 113,
+        "gzip": 120
+      },
+      "relative": {
+        "json": 113,
+        "gzip": 119
+      },
+      "fullDelta": {
+        "json": 113,
+        "gzip": 120
+      },
+      "relativeDelta": {
+        "json": 113,
+        "gzip": 120
+      }
+    }
+  },
+  {
+    "edition": "goedel-sample-4331",
+    "name": "lean_workbook_4274",
+    "occurrences": 334,
+    "sizes": {
+      "full": {
+        "json": 11397,
+        "gzip": 966
+      },
+      "relative": {
+        "json": 11073,
+        "gzip": 971
+      },
+      "fullDelta": {
+        "json": 5050,
+        "gzip": 835
+      },
+      "relativeDelta": {
+        "json": 5061,
+        "gzip": 840
+      }
+    }
+  },
+  {
+    "edition": "goedel-sample-4331",
+    "name": "lean_workbook_plus_15068",
+    "occurrences": 0,
+    "sizes": {
+      "full": {
+        "json": 113,
+        "gzip": 121
+      },
+      "relative": {
+        "json": 113,
+        "gzip": 119
+      },
+      "fullDelta": {
+        "json": 113,
+        "gzip": 121
+      },
+      "relativeDelta": {
+        "json": 113,
+        "gzip": 121
+      }
+    }
+  },
+  {
+    "edition": "goedel-sample-4331",
+    "name": "lean_workbook_plus_19617",
+    "occurrences": 74,
+    "sizes": {
+      "full": {
+        "json": 1881,
+        "gzip": 309
+      },
+      "relative": {
+        "json": 1890,
+        "gzip": 314
+      },
+      "fullDelta": {
+        "json": 1003,
+        "gzip": 333
+      },
+      "relativeDelta": {
+        "json": 1016,
+        "gzip": 337
+      }
+    }
+  },
+  {
+    "edition": "goedel-sample-4331",
+    "name": "lean_workbook_plus_39831",
+    "occurrences": 0,
+    "sizes": {
+      "full": {
+        "json": 113,
+        "gzip": 120
+      },
+      "relative": {
+        "json": 113,
+        "gzip": 119
+      },
+      "fullDelta": {
+        "json": 113,
+        "gzip": 119
+      },
+      "relativeDelta": {
+        "json": 113,
+        "gzip": 120
+      }
+    }
+  },
+  {
+    "edition": "goedel-sample-4331",
+    "name": "lean_workbook_plus_6206",
+    "occurrences": 0,
+    "sizes": {
+      "full": {
+        "json": 113,
+        "gzip": 120
+      },
+      "relative": {
+        "json": 113,
+        "gzip": 120
+      },
+      "fullDelta": {
+        "json": 113,
+        "gzip": 120
+      },
+      "relativeDelta": {
+        "json": 113,
+        "gzip": 120
+      }
+    }
+  }
+]

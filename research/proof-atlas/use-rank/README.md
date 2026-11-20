@@ -242,3 +242,18 @@ The [relative-path experiment](relative-bindings.cjs) enumerates every compound 
 There are 538 distinct (binder row, argument row) pairs within declarations. Of these, 81 require more than one binder-to-argument suffix. A row pair therefore cannot in general select a use inside the binder. The 766 distinct relative templates reconstruct 780 occurrences. Nine templates apply to more than one binder copy, all in JacobiCore.Sol.mk.congr_simp. In the [worked figure](local-function-scopes.html#repeated-scope), selecting a binder copy supplies the prefix and both links are generated from the same two suffixes.
 
 Writing each full input route separately takes 30,231 child-slot entries. Storing one prefix per distinct binder occurrence and one input suffix per template takes 2,939 + 19,889 = 22,828 entries. This counts input path slots under the stated representations. It excludes identifiers, function suffixes, lookup tables and encoding overhead; it is not a serialized byte or memory benchmark. [Per-theorem measurements](relative-bindings.json).
+
+### Serialized size of the input routes
+
+We compared four encodings of the same sorted input-occurrence paths. Full stores one digit per child slot in a string per path. Relative stores one list of binder prefixes and one list of input suffixes per binder row; decoding takes their Cartesian product. The two delta variants encode each string relative to its predecessor within its own sorted list. Each declaration has its own JSON envelope with the same SHA-256 owner, proof root and a single-digit layout identifier. The table gives sums of independent declaration payload sizes, before and after gzip at level 9.
+
+| Input path layout | Published · JSON bytes | Published · gzip bytes | AI · JSON bytes | AI · gzip bytes |
+|---|---:|---:|---:|---:|
+| Full | 36,603 | 6,896 | 13,730 | 1,756 |
+| Relative to binder | 30,334 | 7,318 | 13,415 | 1,762 |
+| Full with prefix deltas | 15,297 | 7,052 | 6,505 | 1,648 |
+| Relative with prefix deltas | 21,364 | 7,650 | 6,529 | 1,658 |
+
+The published set includes the 36 nonempty theorem bodies (780 positions); the AI set includes all six previously measured bodies (408 positions), including four empty lists. All four layouts reproduced the exact sorted paths after serialization, compression, decompression and decoding. The binder-relative layout saved raw JSON bytes in aggregate but increased the gzip total for both sets. The six-byte difference on the AI set is too small to motivate a transport choice. Binding-relative links remain useful for navigation; these measurements supply no size advantage for switching the existing transport to that layout.
+
+Reproduce from the repository root with `node research/proof-atlas/use-rank/relative-bindings.cjs --bytes`. The benchmark includes route payloads and their envelope. Source packets, function suffixes, type evidence, renderer state and allocation costs are outside the comparison. [Encoder and round-trip check](path-bytes.cjs) · [Per-declaration results](path-bytes.json).

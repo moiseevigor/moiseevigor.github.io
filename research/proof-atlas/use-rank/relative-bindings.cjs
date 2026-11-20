@@ -10,9 +10,17 @@ global.window = {};
 require('../../../public/data/proof-atlas/library-manifest.js');
 const edition = window.PROOF_ATLAS_LIBRARY.editions.find(e => e.id === census.edition);
 const records = new Map(edition.declarations.map(r => [r.name,r]));
+const benchmark = process.argv.includes('--bytes');
+const cases = census.results.filter(t => t.hasLocalFunctionArgument).map(t => ({theorem:t,record:records.get(t.name),edition:edition.id}));
+if (benchmark) {
+  const inventory = require('../../../scripts/proof-atlas-judgment-fixtures.cjs').inventory();
+  for (const {source} of require('./port-results.json')) {
+    const {record} = inventory.find(item => item.edition === source.edition && item.record.indexSha256 === source.indexSha256);
+    cases.push({theorem:source,record,edition:source.edition});
+  }
+}
 const results = [];
-for (const theorem of census.results.filter(t => t.hasLocalFunctionArgument)) {
-  const record = records.get(theorem.name);
+for (const {theorem,record,edition:editionId} of cases) {
   const bytes = zlib.gunzipSync(fs.readFileSync('.' + record.indexFile));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),theorem.indexSha256);
   const term = atlas.validateIndex(JSON.parse(bytes),record), root = term.roots[1];
@@ -82,6 +90,11 @@ for (const theorem of census.results.filter(t => t.hasLocalFunctionArgument)) {
   }
   assert.deepEqual(unique,observed);
   assert.equal(recovered,occurrences);
+  if (benchmark) {
+    const sizes = require('./path-bytes.cjs')(theorem.indexSha256,observed,grouped,binders);
+    results.push({edition:editionId,name:theorem.name,occurrences,sizes});
+    continue;
+  }
   results.push({name:theorem.name,indexSha256:theorem.indexSha256,occurrences,rowPairs:grouped.size,templates,shared,ambiguous,recovered,fullSlots,prefixSlots,suffixSlots,example});
 }
 console.log(JSON.stringify(results,null,2));
