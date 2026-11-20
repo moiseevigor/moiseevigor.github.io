@@ -1,0 +1,2925 @@
+[
+  {
+    "name": "lean_workbook_20418",
+    "hash": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+    "rows": [
+      {
+        "binder": "a",
+        "root": {
+          "node": 85376,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "32394",
+        "groups": [
+          "14734",
+          "46",
+          "16735",
+          "879"
+        ],
+        "optimalMaximum": "16735",
+        "visited": 10
+      },
+      {
+        "binder": "a",
+        "root": {
+          "node": 58150,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "29058",
+        "groups": [
+          "10035",
+          "47",
+          "18049",
+          "927"
+        ],
+        "optimalMaximum": "18049",
+        "visited": 10
+      },
+      {
+        "binder": "a",
+        "root": {
+          "node": 30807,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "28723",
+        "groups": [
+          "6",
+          "1",
+          "5",
+          "28711"
+        ],
+        "optimalMaximum": "28711",
+        "visited": 9
+      },
+      {
+        "binder": "b",
+        "root": {
+          "node": 58150,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "29570",
+        "groups": [
+          "6",
+          "1",
+          "5",
+          "29558"
+        ],
+        "optimalMaximum": "29558",
+        "visited": 9
+      },
+      {
+        "binder": "b",
+        "root": {
+          "node": 85376,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "29234",
+        "groups": [
+          "14001",
+          "36",
+          "14547",
+          "650"
+        ],
+        "optimalMaximum": "14547",
+        "visited": 10
+      },
+      {
+        "binder": "b",
+        "root": {
+          "node": 30807,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "23956",
+        "groups": [
+          "8549",
+          "41",
+          "14622",
+          "744"
+        ],
+        "optimalMaximum": "14622",
+        "visited": 10
+      },
+      {
+        "binder": "c",
+        "root": {
+          "node": 85376,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "27450",
+        "groups": [
+          "6",
+          "1",
+          "5",
+          "27438"
+        ],
+        "optimalMaximum": "27438",
+        "visited": 9
+      },
+      {
+        "binder": "c",
+        "root": {
+          "node": 30807,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "27066",
+        "groups": [
+          "9823",
+          "41",
+          "16417",
+          "785"
+        ],
+        "optimalMaximum": "16417",
+        "visited": 10
+      },
+      {
+        "binder": "c",
+        "root": {
+          "node": 58150,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "23407",
+        "groups": [
+          "9102",
+          "44",
+          "13391",
+          "870"
+        ],
+        "optimalMaximum": "13391",
+        "visited": 10
+      },
+      {
+        "binder": "h₀",
+        "root": {
+          "node": 85376,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "16",
+        "groups": [
+          "7",
+          "1",
+          "7",
+          "1"
+        ],
+        "optimalMaximum": "7",
+        "visited": 8
+      },
+      {
+        "binder": "h₀",
+        "root": {
+          "node": 58150,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "13",
+        "groups": [
+          "5",
+          "1",
+          "1",
+          "6"
+        ],
+        "optimalMaximum": "6",
+        "visited": 8
+      },
+      {
+        "binder": "h₀",
+        "root": {
+          "node": 30807,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "12",
+        "groups": [
+          "5",
+          "5",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "5",
+        "visited": 8
+      },
+      {
+        "binder": "h₁",
+        "root": {
+          "node": 30807,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "11",
+        "groups": [
+          "4",
+          "1",
+          "1",
+          "5"
+        ],
+        "optimalMaximum": "5",
+        "visited": 8
+      },
+      {
+        "binder": "h₁",
+        "root": {
+          "node": 85376,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "11",
+        "groups": [
+          "4",
+          "5",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "5",
+        "visited": 8
+      },
+      {
+        "binder": "h₁",
+        "root": {
+          "node": 58150,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "8",
+        "groups": [
+          "2",
+          "4",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "4",
+        "visited": 7
+      },
+      {
+        "binder": "h₂",
+        "root": {
+          "node": 30807,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "12",
+        "groups": [
+          "5",
+          "5",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "5",
+        "visited": 8
+      },
+      {
+        "binder": "h₂",
+        "root": {
+          "node": 85376,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "11",
+        "groups": [
+          "4",
+          "1",
+          "1",
+          "5"
+        ],
+        "optimalMaximum": "5",
+        "visited": 8
+      },
+      {
+        "binder": "h₂",
+        "root": {
+          "node": 58150,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "10",
+        "groups": [
+          "4",
+          "1",
+          "4",
+          "1"
+        ],
+        "optimalMaximum": "4",
+        "visited": 8
+      },
+      {
+        "binder": "h₃",
+        "root": {
+          "node": 58150,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "15",
+        "groups": [
+          "6",
+          "1",
+          "7",
+          "1"
+        ],
+        "optimalMaximum": "7",
+        "visited": 8
+      },
+      {
+        "binder": "h₃",
+        "root": {
+          "node": 85376,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "13",
+        "groups": [
+          "5",
+          "1",
+          "1",
+          "6"
+        ],
+        "optimalMaximum": "6",
+        "visited": 8
+      },
+      {
+        "binder": "h₃",
+        "root": {
+          "node": 30807,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "10",
+        "groups": [
+          "3",
+          "5",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "5",
+        "visited": 8
+      }
+    ]
+  },
+  {
+    "name": "lean_workbook_4274",
+    "hash": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+    "rows": [
+      {
+        "binder": "n",
+        "root": {
+          "node": 225,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              0,
+              0
+            ]
+          }
+        },
+        "uses": "3",
+        "groups": [
+          "1",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 3
+      },
+      {
+        "binder": "n",
+        "root": {
+          "node": 250,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              0,
+              1,
+              0
+            ]
+          }
+        },
+        "uses": "3",
+        "groups": [
+          "1",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 3
+      },
+      {
+        "binder": "n",
+        "root": {
+          "node": 249,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              0,
+              1,
+              1,
+              0
+            ]
+          }
+        },
+        "uses": "3",
+        "groups": [
+          "1",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 3
+      },
+      {
+        "binder": "b",
+        "root": {
+          "node": 1171,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              0,
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          }
+        },
+        "uses": "133",
+        "groups": [
+          "3",
+          "3",
+          "3",
+          "124"
+        ],
+        "optimalMaximum": "124",
+        "visited": 9
+      },
+      {
+        "binder": "b",
+        "root": {
+          "node": 1171,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          }
+        },
+        "uses": "133",
+        "groups": [
+          "3",
+          "3",
+          "3",
+          "124"
+        ],
+        "optimalMaximum": "124",
+        "visited": 9
+      },
+      {
+        "binder": "b",
+        "root": {
+          "node": 1284,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          }
+        },
+        "uses": "9",
+        "groups": [
+          "3",
+          "1",
+          "1",
+          "4"
+        ],
+        "optimalMaximum": "4",
+        "visited": 8
+      },
+      {
+        "binder": "h₁",
+        "root": {
+          "node": 173,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "1",
+        "groups": [
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 1
+      },
+      {
+        "binder": "h₁",
+        "root": {
+          "node": 189,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "1",
+        "groups": [
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 1
+      },
+      {
+        "binder": "h₁",
+        "root": {
+          "node": 208,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "1",
+        "groups": [
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 1
+      },
+      {
+        "binder": "h₂",
+        "root": {
+          "node": 1284,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          }
+        },
+        "uses": "1",
+        "groups": [
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 1
+      },
+      {
+        "binder": "h₂",
+        "root": {
+          "node": 1284,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          }
+        },
+        "uses": "1",
+        "groups": [
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 1
+      }
+    ]
+  },
+  {
+    "name": "lean_workbook_plus_15068",
+    "hash": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+    "rows": [
+      {
+        "binder": "a",
+        "root": {
+          "node": 15200,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          }
+        },
+        "uses": "19865",
+        "groups": [
+          "58",
+          "58",
+          "58",
+          "19691"
+        ],
+        "optimalMaximum": "19691",
+        "visited": 10
+      },
+      {
+        "binder": "a",
+        "root": {
+          "node": 18163,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "2016",
+        "groups": [
+          "9",
+          "27",
+          "9",
+          "1971"
+        ],
+        "optimalMaximum": "1971",
+        "visited": 9
+      },
+      {
+        "binder": "a",
+        "root": {
+          "node": 18126,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "1989",
+        "groups": [
+          "9",
+          "9",
+          "11",
+          "1960"
+        ],
+        "optimalMaximum": "1960",
+        "visited": 9
+      },
+      {
+        "binder": "b",
+        "root": {
+          "node": 15200,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          }
+        },
+        "uses": "17015",
+        "groups": [
+          "58",
+          "58",
+          "58",
+          "16841"
+        ],
+        "optimalMaximum": "16841",
+        "visited": 10
+      },
+      {
+        "binder": "b",
+        "root": {
+          "node": 18163,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "1809",
+        "groups": [
+          "9",
+          "27",
+          "9",
+          "1764"
+        ],
+        "optimalMaximum": "1764",
+        "visited": 9
+      },
+      {
+        "binder": "b",
+        "root": {
+          "node": 18056,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "1782",
+        "groups": [
+          "9",
+          "9",
+          "11",
+          "1753"
+        ],
+        "optimalMaximum": "1753",
+        "visited": 9
+      },
+      {
+        "binder": "ha",
+        "root": {
+          "node": 18056,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "4",
+        "groups": [
+          "1",
+          "1",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 4
+      },
+      {
+        "binder": "ha",
+        "root": {
+          "node": 18126,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "4",
+        "groups": [
+          "1",
+          "1",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 4
+      },
+      {
+        "binder": "ha",
+        "root": {
+          "node": 18163,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "4",
+        "groups": [
+          "1",
+          "1",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 4
+      },
+      {
+        "binder": "hb",
+        "root": {
+          "node": 18056,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "4",
+        "groups": [
+          "1",
+          "1",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 4
+      },
+      {
+        "binder": "hb",
+        "root": {
+          "node": 18126,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "4",
+        "groups": [
+          "1",
+          "1",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 4
+      },
+      {
+        "binder": "hb",
+        "root": {
+          "node": 18163,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "4",
+        "groups": [
+          "1",
+          "1",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 4
+      },
+      {
+        "binder": "hab",
+        "root": {
+          "node": 18056,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "3",
+        "groups": [
+          "1",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 3
+      },
+      {
+        "binder": "hab",
+        "root": {
+          "node": 18126,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "3",
+        "groups": [
+          "1",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 3
+      },
+      {
+        "binder": "hab",
+        "root": {
+          "node": 18163,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "3",
+        "groups": [
+          "1",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 3
+      },
+      {
+        "binder": "h",
+        "root": {
+          "node": 18056,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "1",
+        "groups": [
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 1
+      },
+      {
+        "binder": "h",
+        "root": {
+          "node": 18126,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "1",
+        "groups": [
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 1
+      },
+      {
+        "binder": "h",
+        "root": {
+          "node": 18163,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "1",
+        "groups": [
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 1
+      }
+    ]
+  },
+  {
+    "name": "lean_workbook_plus_19617",
+    "hash": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+    "rows": [
+      {
+        "binder": "f",
+        "root": {
+          "node": 115,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              0
+            ]
+          }
+        },
+        "uses": "4",
+        "groups": [
+          "1",
+          "1",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 6
+      },
+      {
+        "binder": "f",
+        "root": {
+          "node": 211,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          }
+        },
+        "uses": "4",
+        "groups": [
+          "1",
+          "1",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 6
+      },
+      {
+        "binder": "f",
+        "root": {
+          "node": 234,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              0
+            ]
+          }
+        },
+        "uses": "4",
+        "groups": [
+          "1",
+          "1",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 6
+      },
+      {
+        "binder": "h₀",
+        "root": {
+          "node": 235,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "1",
+        "groups": [
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 1
+      },
+      {
+        "binder": "h₀",
+        "root": {
+          "node": 259,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "1",
+        "groups": [
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 1
+      },
+      {
+        "binder": "h₀",
+        "root": {
+          "node": 283,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "1",
+        "groups": [
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 1
+      },
+      {
+        "binder": "x",
+        "root": {
+          "node": 281,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              0
+            ]
+          }
+        },
+        "uses": "6",
+        "groups": [
+          "1",
+          "1",
+          "2",
+          "2"
+        ],
+        "optimalMaximum": "2",
+        "visited": 8
+      },
+      {
+        "binder": "x",
+        "root": {
+          "node": 234,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              0
+            ]
+          }
+        },
+        "uses": "3",
+        "groups": [
+          "1",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 3
+      },
+      {
+        "binder": "x",
+        "root": {
+          "node": 257,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              0
+            ]
+          }
+        },
+        "uses": "3",
+        "groups": [
+          "1",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 3
+      }
+    ]
+  },
+  {
+    "name": "lean_workbook_plus_39831",
+    "hash": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+    "rows": [
+      {
+        "binder": "a",
+        "root": {
+          "node": 1963,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          }
+        },
+        "uses": "543",
+        "groups": [
+          "7",
+          "7",
+          "7",
+          "522"
+        ],
+        "optimalMaximum": "522",
+        "visited": 9
+      },
+      {
+        "binder": "a",
+        "root": {
+          "node": 3757,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          }
+        },
+        "uses": "533",
+        "groups": [
+          "6",
+          "6",
+          "6",
+          "515"
+        ],
+        "optimalMaximum": "515",
+        "visited": 9
+      },
+      {
+        "binder": "a",
+        "root": {
+          "node": 3005,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "12",
+        "groups": [
+          "2",
+          "2",
+          "4",
+          "4"
+        ],
+        "optimalMaximum": "4",
+        "visited": 8
+      },
+      {
+        "binder": "b",
+        "root": {
+          "node": 3757,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          }
+        },
+        "uses": "311",
+        "groups": [
+          "4",
+          "4",
+          "4",
+          "299"
+        ],
+        "optimalMaximum": "299",
+        "visited": 9
+      },
+      {
+        "binder": "b",
+        "root": {
+          "node": 1963,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          }
+        },
+        "uses": "259",
+        "groups": [
+          "3",
+          "3",
+          "3",
+          "250"
+        ],
+        "optimalMaximum": "250",
+        "visited": 9
+      },
+      {
+        "binder": "b",
+        "root": {
+          "node": 3803,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0
+            ]
+          }
+        },
+        "uses": "8",
+        "groups": [
+          "2",
+          "1",
+          "1",
+          "4"
+        ],
+        "optimalMaximum": "4",
+        "visited": 7
+      },
+      {
+        "binder": "ha",
+        "root": {
+          "node": 3005,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "2",
+        "groups": [
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 2
+      },
+      {
+        "binder": "ha",
+        "root": {
+          "node": 3005,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "2",
+        "groups": [
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 2
+      },
+      {
+        "binder": "ha",
+        "root": {
+          "node": 2091,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0
+            ]
+          }
+        },
+        "uses": "1",
+        "groups": [
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 1
+      },
+      {
+        "binder": "hb",
+        "root": {
+          "node": 3025,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "1",
+        "groups": [
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 1
+      },
+      {
+        "binder": "hb",
+        "root": {
+          "node": 3803,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0
+            ]
+          }
+        },
+        "uses": "1",
+        "groups": [
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 1
+      },
+      {
+        "binder": "hb",
+        "root": {
+          "node": 3025,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "1",
+        "groups": [
+          "1"
+        ],
+        "optimalMaximum": "1",
+        "visited": 1
+      }
+    ]
+  },
+  {
+    "name": "lean_workbook_plus_6206",
+    "hash": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+    "rows": [
+      {
+        "binder": "a",
+        "root": {
+          "node": 30854,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "27526",
+        "groups": [
+          "6",
+          "1",
+          "5",
+          "27514"
+        ],
+        "optimalMaximum": "27514",
+        "visited": 9
+      },
+      {
+        "binder": "a",
+        "root": {
+          "node": 59989,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "26837",
+        "groups": [
+          "12343",
+          "43",
+          "13654",
+          "797"
+        ],
+        "optimalMaximum": "13654",
+        "visited": 10
+      },
+      {
+        "binder": "a",
+        "root": {
+          "node": 90416,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "26278",
+        "groups": [
+          "12628",
+          "42",
+          "12850",
+          "758"
+        ],
+        "optimalMaximum": "12850",
+        "visited": 10
+      },
+      {
+        "binder": "b",
+        "root": {
+          "node": 90416,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "33214",
+        "groups": [
+          "39",
+          "16545",
+          "741",
+          "15889"
+        ],
+        "optimalMaximum": "16545",
+        "visited": 10
+      },
+      {
+        "binder": "b",
+        "root": {
+          "node": 59989,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "32998",
+        "groups": [
+          "6",
+          "1",
+          "5",
+          "32986"
+        ],
+        "optimalMaximum": "32986",
+        "visited": 9
+      },
+      {
+        "binder": "b",
+        "root": {
+          "node": 30854,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "24931",
+        "groups": [
+          "7676",
+          "44",
+          "16360",
+          "851"
+        ],
+        "optimalMaximum": "16360",
+        "visited": 10
+      },
+      {
+        "binder": "c",
+        "root": {
+          "node": 90416,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "37431",
+        "groups": [
+          "6",
+          "1",
+          "5",
+          "37419"
+        ],
+        "optimalMaximum": "37419",
+        "visited": 9
+      },
+      {
+        "binder": "c",
+        "root": {
+          "node": 59989,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "32322",
+        "groups": [
+          "15108",
+          "43",
+          "16317",
+          "854"
+        ],
+        "optimalMaximum": "16317",
+        "visited": 10
+      },
+      {
+        "binder": "c",
+        "root": {
+          "node": 30854,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "27009",
+        "groups": [
+          "9381",
+          "40",
+          "16820",
+          "768"
+        ],
+        "optimalMaximum": "16820",
+        "visited": 10
+      },
+      {
+        "binder": "h₀",
+        "root": {
+          "node": 90416,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "15",
+        "groups": [
+          "6",
+          "1",
+          "7",
+          "1"
+        ],
+        "optimalMaximum": "7",
+        "visited": 8
+      },
+      {
+        "binder": "h₀",
+        "root": {
+          "node": 59989,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "14",
+        "groups": [
+          "6",
+          "6",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "6",
+        "visited": 8
+      },
+      {
+        "binder": "h₀",
+        "root": {
+          "node": 30854,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "12",
+        "groups": [
+          "5",
+          "5",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "5",
+        "visited": 8
+      },
+      {
+        "binder": "h₁",
+        "root": {
+          "node": 30854,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "13",
+        "groups": [
+          "5",
+          "1",
+          "1",
+          "6"
+        ],
+        "optimalMaximum": "6",
+        "visited": 8
+      },
+      {
+        "binder": "h₁",
+        "root": {
+          "node": 59989,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "13",
+        "groups": [
+          "5",
+          "1",
+          "1",
+          "6"
+        ],
+        "optimalMaximum": "6",
+        "visited": 8
+      },
+      {
+        "binder": "h₁",
+        "root": {
+          "node": 90416,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "12",
+        "groups": [
+          "4",
+          "6",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "6",
+        "visited": 8
+      },
+      {
+        "binder": "h₂",
+        "root": {
+          "node": 30854,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "13",
+        "groups": [
+          "5",
+          "6",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "6",
+        "visited": 8
+      },
+      {
+        "binder": "h₂",
+        "root": {
+          "node": 59989,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "12",
+        "groups": [
+          "5",
+          "1",
+          "1",
+          "5"
+        ],
+        "optimalMaximum": "5",
+        "visited": 8
+      },
+      {
+        "binder": "h₂",
+        "root": {
+          "node": 90416,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "11",
+        "groups": [
+          "5",
+          "1",
+          "1",
+          "4"
+        ],
+        "optimalMaximum": "5",
+        "visited": 8
+      },
+      {
+        "binder": "h₃",
+        "root": {
+          "node": 59989,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "13",
+        "groups": [
+          "5",
+          "6",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "6",
+        "visited": 8
+      },
+      {
+        "binder": "h₃",
+        "root": {
+          "node": 90416,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              1
+            ]
+          }
+        },
+        "uses": "13",
+        "groups": [
+          "5",
+          "1",
+          "1",
+          "6"
+        ],
+        "optimalMaximum": "6",
+        "visited": 8
+      },
+      {
+        "binder": "h₃",
+        "root": {
+          "node": 30854,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "uses": "7",
+        "groups": [
+          "2",
+          "3",
+          "1",
+          "1"
+        ],
+        "optimalMaximum": "3",
+        "visited": 7
+      }
+    ]
+  }
+]

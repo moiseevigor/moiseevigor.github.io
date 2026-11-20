@@ -37,6 +37,24 @@ module.exports=function uncoveredBranches(data,body,callRoutes,uses,uncovered){
   }
   assert.equal(total,uncovered);
   regions.sort((a,b)=>a.count>b.count?-1:a.count<b.count?1:a.first<b.first?-1:1);
+  function firstSplit(r){
+    const first=uses.select(r.first),last=uses.select(r.first+r.count-1n);
+    // A subtree occupies a contiguous interval in field order. Its first and
+    // last uses have exactly the same common prefix as the whole interval.
+    const slots=first.route.slots;
+    let end=r.route.slots.length;
+    while(end<slots.length && slots[end]===last.route.slots[end])end++;
+    const route={root:body.root,slots:slots.slice(0,end)},node=atlas.walk(data,route);
+    const stop={anchor:{node,route},steps:end-r.route.slots.length,expressions:String(data.expanded[node]),
+      kind:atlas.kinds[data.kind[node]],children:[]};
+    data.children[node].forEach((child,i)=>{
+      const path={root:body.root,slots:route.slots.concat(i)};
+      const count=uses.interval(path).count;
+      if(count)stop.children.push({field:atlas.fields[stop.kind][i],anchor:{node:child,route:path},count:String(count)});
+    });
+    assert(stop.children.length>=2 || (r.count===1n && stop.kind==='bvar'));
+    return stop;
+  }
   const largest=regions.slice(0,3).map(r=>{
     const fieldNames=atlas.fields[atlas.kinds[data.kind[r.node]]]||[];
     const fields=data.children[r.node].map((node,i)=>{
@@ -59,23 +77,24 @@ module.exports=function uncoveredBranches(data,body,callRoutes,uses,uncovered){
       const name=binding?(data.payloads[binding.node].binderName??data.payloads[binding.node].declName):data.payloads[node].name;
       head={anchor:{node,route},label:name||kind,arguments:application.args.length};
     }
-    const first=uses.select(r.first),last=uses.select(r.first+r.count-1n);
-    // A subtree occupies a contiguous interval in field order. Its first and
-    // last uses have exactly the same common prefix as the whole interval.
-    const slots=first.route.slots;
-    let end=r.route.slots.length;
-    while(end<slots.length && slots[end]===last.route.slots[end])end++;
-    const route={root:body.root,slots:slots.slice(0,end)},node=atlas.walk(data,route);
-    const stop={anchor:{node,route},steps:end-r.route.slots.length,expressions:String(data.expanded[node]),
-      kind:atlas.kinds[data.kind[node]],children:[]};
-    data.children[node].forEach((child,i)=>{
-      const path={root:body.root,slots:route.slots.concat(i)};
-      const count=uses.interval(path).count;
-      if(count)stop.children.push({field:atlas.fields[stop.kind][i],anchor:{node:child,route:path},count:String(count)});
-    });
-    assert(stop.children.length>=2 || (r.count===1n && stop.kind==='bvar'));
-    return {anchor:{node:r.node,route:r.route},kind:atlas.kinds[data.kind[r.node]],path:atlas.path(data,r.route),
-      count:String(r.count),first,stop,expressions:String(data.expanded[r.node]),sourceRows:seen.size,fields,head};
+    const first=uses.select(r.first),stop=firstSplit(r);
+    const frontier=[{anchor:{node:r.node,route:r.route},count:String(r.count)}];
+    while(frontier.length<4){
+      let best=-1,children;
+      for(const [i,part] of frontier.entries()){
+        const count=BigInt(part.count);
+        if(count<=1n || (best>=0 && count<=BigInt(frontier[best].count)))continue;
+        const interval=uses.interval(part.anchor.route);
+        const split=firstSplit({...part.anchor,count,first:interval.first});
+        if(frontier.length-1+split.children.length<=4){best=i;children=split.children;}
+      }
+      if(best<0)break;
+      frontier.splice(best,1,...children.map(c=>({anchor:c.anchor,count:c.count})));
+    }
+    const rootPath=atlas.path(data,r.route);
+    for(const p of frontier)p.fields=atlas.path(data,p.anchor.route).slice(rootPath.length+1);
+    return {anchor:{node:r.node,route:r.route},kind:atlas.kinds[data.kind[r.node]],path:rootPath,
+      count:String(r.count),first,stop,frontier,expressions:String(data.expanded[r.node]),sourceRows:seen.size,fields,head};
   });
   return {regions:regions.length,largest};
 };

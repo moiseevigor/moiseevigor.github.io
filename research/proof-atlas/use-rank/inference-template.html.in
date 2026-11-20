@@ -152,6 +152,16 @@ function traceClause(){
     line.append(meter,link(child.field,child.anchor),' · '+child.count+' of '+b.count+' uses');focus.append(line);
    }
    row.append(focus);
+   if(b.frontier.length>1){
+    const groups=document.createElement('details'),title=document.createElement('summary');
+    groups.className='branch-groups';title.textContent='Partition into '+b.frontier.length+' subtrees';groups.append(title);
+    for(const part of b.frontier){
+     const line=document.createElement('p'),bar=document.createElement('meter');
+     bar.max=1000000;bar.value=Number(BigInt(part.count)*1000000n/BigInt(b.count));bar.setAttribute('aria-hidden','true');
+     line.append(bar,' ',link(part.fields,part.anchor),' · '+part.count+' of '+b.count+' uses');groups.append(line);
+    }
+    row.append(groups);
+   }
    const path=document.createElement('code');path.textContent=b.path;row.append(path);list.append(row);
   }
   panel.append(heading,list);area.append(panel);
