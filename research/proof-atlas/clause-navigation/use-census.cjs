@@ -36,7 +36,7 @@ const result = [];
 const excludedControls = [];
 for (const edition of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAMPLE.edition,
   window.PROOF_ATLAS_RECURSION_EXAMPLES.edition]) {
-  const stats = {crossChecked:0,edition:edition.id,theorems:0,paired:0,outsideExplicitTypes:0,typeFieldsOnly:0,unused:0};
+  const stats = {crossChecked:0,edition:edition.id,theorems:0,proofsWithAliasedWitness:0,bindersWithAliasedWitness:0,paired:0,outsideExplicitTypes:0,typeFieldsOnly:0,unused:0};
   for (const fixture of controls.filter(x => x.edition === edition.id)) {
     const record = edition.declarations.find(r => r.name === fixture.name);
     assert(record && record.indexSha256 === fixture.indexSha256);
@@ -50,6 +50,9 @@ for (const edition of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS
     const all = support(data,false), limited = support(data,true);
     const fixture = controls.find(x => x.edition === edition.id && x.name === record.name);
     let [type,proof] = data.roots;
+    // Compare only the selected shortest witnesses within this one proof.
+    // A group of size two certifies distinct binders with the same stored use row.
+    const witnessGroups = new Map();
     let depth = 0;
     stats.theorems++;
     while (data.kind[type] === 7 && data.kind[proof] === 6 && data.children[type][0] === data.children[proof][0]) {
@@ -59,6 +62,11 @@ for (const edition of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS
       const introduction = {root:1,slots:Array(depth).fill(1)};
       const witness = firstUse(data,introduction);
       assert.equal(any,Boolean(witness));
+      if (witness) {
+        const group = witnessGroups.get(witness.node) || [];
+        group.push({name:data.payloads[proof].binderName,introduction,use:witness.route});
+        witnessGroups.set(witness.node,group);
+      }
       assert.equal(outside,Boolean(firstUse(data,introduction,true)));
       stats.crossChecked++;
       if (fixture) {
@@ -81,6 +89,13 @@ for (const edition of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS
       proof = body;
     }
     if (fixture) assert.equal(depth,fixture.binders.length);
+    const aliases = [...witnessGroups.entries()].filter(([,uses]) => uses.length > 1);
+    if (aliases.length) {
+      stats.proofsWithAliasedWitness++;
+      stats.bindersWithAliasedWitness += aliases.reduce((n,[,uses]) => n + uses.length, 0);
+      const [node, uses] = aliases[0];
+      stats.aliasExample ??= {name:record.name,indexSha256:record.indexSha256,node,uses:uses.slice(0,2)};
+    }
   }
   assert.equal(stats.paired,stats.outsideExplicitTypes+stats.typeFieldsOnly+stats.unused);
   result.push(stats);

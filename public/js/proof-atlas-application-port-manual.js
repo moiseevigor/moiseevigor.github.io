@@ -5,5 +5,5 @@
  function clear(){view?.dispose();view=null;out.replaceChildren();}
  function open(){clear();const d=records[Number(profile.value)],c=d.calls[Number(call.value)];view=host.ProofAtlasApplicationPortView.mount(out,{descriptor:d,route:c.anchor.route});}
  function choose(){clear();call.replaceChildren();const d=records[Number(profile.value)];for(const c of d.calls){const o=document.createElement('option');o.value=String(c.index);o.textContent=c.functionLabel+' · e'+c.anchor.node+' · '+c.arguments+' supplied arguments';call.append(o);}const worked=d.calls.find(c=>c.functionLabel.replace(/^@/,'')==='JacobiData.two_sqrt_mul_le_add');call.value=String(worked?.index||0);}
- profile.onchange=choose;call.onchange=()=>{if(view)open();};load.onclick=open;release.onclick=clear;choose();host.ProofAtlasApplicationManual={getScene:()=>view?.getScene()||null,getSelection:()=>view?.getSelection()||null,getState:()=>view?.getState()||null};
+ profile.onchange=choose;call.onchange=()=>{if(view)open();};load.onclick=open;release.onclick=clear;choose();host.ProofAtlasApplicationManual={getScene:()=>view?.getScene()||null,getSelection:()=>view?.getSelection()||null,getState:()=>view?.getState()||null,getTypeSharingScene:()=>view?.getTypeSharingScene()||null};
 })(window);

@@ -13,10 +13,61 @@
       "crossChecked": 2059,
       "edition": "published-15",
       "theorems": 561,
+      "proofsWithAliasedWitness": 274,
+      "bindersWithAliasedWitness": 951,
       "paired": 2059,
       "outsideExplicitTypes": 1993,
       "typeFieldsOnly": 14,
       "unused": 52,
+      "aliasExample": {
+        "name": "CrossingData.branch_range",
+        "indexSha256": "08ce18c599668f141b3f072f1cc29b5916a9bb2ba4b1ccd5becd6c8bc7475e54",
+        "node": 5,
+        "uses": [
+          {
+            "name": "σ",
+            "introduction": {
+              "root": 1,
+              "slots": [
+                1
+              ]
+            },
+            "use": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "name": "p",
+            "introduction": {
+              "root": 1,
+              "slots": [
+                1,
+                1
+              ]
+            },
+            "use": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                1
+              ]
+            }
+          }
+        ]
+      },
       "example": {
         "name": "JacobiCore.Sol.bC",
         "indexSha256": "b9446310569894d0975539e97cdc9903f20fa5c5e56755c25a9ab3d91c129029",
@@ -43,10 +94,61 @@
       "crossChecked": 4002,
       "edition": "working-26",
       "theorems": 1083,
+      "proofsWithAliasedWitness": 600,
+      "bindersWithAliasedWitness": 2061,
       "paired": 4002,
       "outsideExplicitTypes": 3934,
       "typeFieldsOnly": 14,
       "unused": 54,
+      "aliasExample": {
+        "name": "CrossingData.branch_range",
+        "indexSha256": "17bd8310414a1f2c441507802e37f118a939ba170bf1eb696b91c96d7017180c",
+        "node": 5,
+        "uses": [
+          {
+            "name": "σ",
+            "introduction": {
+              "root": 1,
+              "slots": [
+                1
+              ]
+            },
+            "use": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "name": "p",
+            "introduction": {
+              "root": 1,
+              "slots": [
+                1,
+                1
+              ]
+            },
+            "use": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                1
+              ]
+            }
+          }
+        ]
+      },
       "example": {
         "name": "JacobiCore.Sol.bC",
         "indexSha256": "74fc1b1b23febb4cb96b7ac9301abda340ef99ada92dc6df6d70fea143ee7cda",
@@ -73,19 +175,119 @@
       "crossChecked": 93,
       "edition": "goedel-sample-4331",
       "theorems": 20,
+      "proofsWithAliasedWitness": 13,
+      "bindersWithAliasedWitness": 37,
       "paired": 93,
       "outsideExplicitTypes": 87,
       "typeFieldsOnly": 0,
-      "unused": 6
+      "unused": 6,
+      "aliasExample": {
+        "name": "lean_workbook_20418",
+        "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+        "node": 19,
+        "uses": [
+          {
+            "name": "b",
+            "introduction": {
+              "root": 1,
+              "slots": [
+                1
+              ]
+            },
+            "use": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1
+              ]
+            }
+          },
+          {
+            "name": "c",
+            "introduction": {
+              "root": 1,
+              "slots": [
+                1,
+                1
+              ]
+            },
+            "use": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                1
+              ]
+            }
+          }
+        ]
+      }
     },
     {
       "crossChecked": 59,
       "edition": "recursion-controls",
       "theorems": 23,
+      "proofsWithAliasedWitness": 8,
+      "bindersWithAliasedWitness": 22,
       "paired": 59,
       "outsideExplicitTypes": 56,
       "typeFieldsOnly": 1,
       "unused": 2,
+      "aliasExample": {
+        "name": "AtlasExamples.Fan.node.inj",
+        "indexSha256": "c9513a192465b550256023e9177069674a656be7ab235c879aab75fd30d9824a",
+        "node": 9,
+        "uses": [
+          {
+            "name": "children",
+            "introduction": {
+              "root": 1,
+              "slots": [
+                1
+              ]
+            },
+            "use": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                0,
+                1,
+                1
+              ]
+            }
+          },
+          {
+            "name": "x._@.ProofAtlasExamples.Recursion.4172205792._hygCtx._hyg.11",
+            "introduction": {
+              "root": 1,
+              "slots": [
+                1,
+                1
+              ]
+            },
+            "use": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                0,
+                1
+              ]
+            }
+          }
+        ]
+      },
       "example": {
         "name": "AtlasExamples.Sized.nil.sizeOf_spec",
         "indexSha256": "d4484b0b60ced15b82274a7197488b9a6141ccfb733ce66ac42068246a94a8fc",

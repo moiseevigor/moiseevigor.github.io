@@ -12,6 +12,8 @@ A variable use links back through its lexical context. In a lambda, its binder e
 
 The [pairing census](census.json) covers all theorem packets in the four named inventories. Two editions are overlapping snapshots. Twenty released packets form the AI sample. The [use census](use-census.json) covers the paired outer binders in those inventories. A bottom-up calculation of free-variable indices and a search for original occurrence witnesses agreed on the presence or absence of a use for each binder.
 
+The use census also groups one shortest witness per paired binder by its stored variable row, separately within each theorem packet. In 13 of the 20 released AI proofs, witnesses for two or more distinct proof introductions land on the same row. The published SE(2) snapshot has 274 such theorems among 561, and the working snapshot has 600 among 1,083. These are lower bounds on ambiguity across all occurrences. Choosing a single witness can miss other collisions. The example routes in the census resolve to their own original binders even when the selected node numbers coincide.
+
 An explicit type field here means a binder domain or a local definition’s type. Skipping such fields still permits paths through implicit type arguments to applications. Absence of a direct variable occurrence concerns the compiled body. It does not imply that the assumption can be removed from the theorem.
 
 The [page comparison](paged-comparison.json) counts page loads for identical ordered queries with one and two source pages retained in the cache. It covers 35 declarations with paged evidence. It measures cached decoded page bytes separately from index pages, parsed JavaScript objects, the rendering process and the complete packet used by the test oracle.

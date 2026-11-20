@@ -7,6 +7,11 @@ on:
       - 'public/js/proof-atlas-paged-type-operations.js'
       - 'research/proof-atlas/scope-comparison/**'
       - 'research/proof-atlas/formal-support/**'
+      - 'research/proof-atlas/type-sharing/**'
+      - 'research/proof-atlas/clause-navigation/**'
+      - 'public/js/proof-atlas-clause-navigation.js'
+      - 'public/js/proof-atlas-type-sharing*.js'
+      - 'public/js/proof-atlas-application-type-pages.js'
       - 'public/data/proof-atlas/formal-support-controls-manifest.js'
       - '.github/workflows/proof-atlas-scope-comparison.yml'
   pull_request:
@@ -16,6 +21,11 @@ on:
       - 'public/js/proof-atlas-paged-type-operations.js'
       - 'research/proof-atlas/scope-comparison/**'
       - 'research/proof-atlas/formal-support/**'
+      - 'research/proof-atlas/type-sharing/**'
+      - 'research/proof-atlas/clause-navigation/**'
+      - 'public/js/proof-atlas-clause-navigation.js'
+      - 'public/js/proof-atlas-type-sharing*.js'
+      - 'public/js/proof-atlas-application-type-pages.js'
       - 'public/data/proof-atlas/formal-support-controls-manifest.js'
       - '.github/workflows/proof-atlas-scope-comparison.yml'
 jobs:
@@ -40,6 +50,23 @@ jobs:
           node --max-old-space-size=256 research/proof-atlas/formal-support/check.cjs /tmp/formal-support.json
           node research/proof-atlas/formal-support/publish.cjs --check
           node --max-old-space-size=256 research/proof-atlas/formal-support/check-views.cjs /tmp/formal-support-views.json
+      - name: Check parameterized recorded-type sharing
+        run: |
+          node research/proof-atlas/type-sharing/check-evidence.cjs
+          node --max-old-space-size=256 research/proof-atlas/type-sharing/check-model.cjs /tmp/type-sharing-model.json
+          node --max-old-space-size=256 research/proof-atlas/type-sharing/check-corpus.cjs /tmp/type-sharing-corpus.json
+      - name: Reproduce statement and use links from compiled packets
+        run: |
+          dir=research/proof-atlas/clause-navigation
+          node "$dir/check.cjs" > /tmp/clause-witnesses.json
+          node "$dir/census.cjs" | diff "$dir/census.json" -
+          node "$dir/use-census.cjs" /tmp/clause-witnesses.json | diff "$dir/use-census.json" -
+          node "$dir/use-positions.cjs" < /tmp/clause-witnesses.json | diff "$dir/use-positions.json" -
+          node "$dir/check-paged.cjs" 1 > /tmp/clause-one-page.json
+          node "$dir/check-paged.cjs" 2 > /tmp/clause-two-pages.json
+          node -e "require('node:assert/strict').deepEqual(require('./$dir/paged-comparison.json'), {onePage:require('/tmp/clause-one-page.json'), twoPages:require('/tmp/clause-two-pages.json')})"
+          node "$dir/riccati.cjs" < /tmp/clause-witnesses.json | diff "$dir/riccati.html" -
+          node "$dir/projection-example.cjs" | diff "$dir/projection-example.html" -
       - uses: actions/upload-artifact@v4
         with:
           name: proof-atlas-scope-runtime
@@ -48,3 +75,5 @@ jobs:
             /tmp/scope-native.json
             /tmp/formal-support.json
             /tmp/formal-support-views.json
+            /tmp/type-sharing-model.json
+            /tmp/type-sharing-corpus.json

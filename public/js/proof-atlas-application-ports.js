@@ -37,9 +37,10 @@
  // expansion or interval filling is used. Native/source typing stays separate.
  function dependencyScan(size,root,previous,options={}){
   const limit=options.pairLimit??262144,supportLimit=options.supportLimit??262144;
+  demand(options.includeSupport===undefined||typeof options.includeSupport==='boolean','formal support option');
   demand(Number.isInteger(size)&&size>0&&size<=65536&&Number.isInteger(root)&&root>=0&&root<size&&Number.isInteger(previous)&&previous>=0&&previous<=64,'formal dependency roots/arity');
   demand(Number.isInteger(limit)&&limit>=1&&limit<=262144&&Number.isInteger(supportLimit)&&supportLimit>=1&&supportLimit<=262144,'formal dependency bounds');
-  const memo=new Map(),stack=[],empty=[];let wanted=root,states=0,supportEntries=0,peakFrames=0,finished=null;
+  const memo=new Map(),stack=[],empty=[];let wanted=root,states=0,supportEntries=0,peakFrames=0,finished=null,unresolvedIdentifiers=false;
   const snapshot=()=>({states,stateLimit:limit,supportEntries,supportLimit,peakFrames});
   const stop=reason=>{finished={status:'unavailable',reason,...snapshot()};wanted=null;stack.length=0;memo.clear();};
   function advance(){
@@ -57,7 +58,7 @@
     for(const [slot,child]of frame.children.entries())for(const index of memo.get(child))if(!include(index-(binds(frame.kind,slot)?1:0)))return;
     const support=[...refs].sort((a,b)=>a-b);supportEntries+=support.length;memo.set(frame.id,support);stack.pop();
    }
-   finished={status:'available',dependencies:memo.get(root).filter(index=>index<previous).map(index=>previous-index).sort((a,b)=>a-b),...snapshot()};wanted=null;memo.clear();
+   finished={status:'available',dependencies:memo.get(root).filter(index=>index<previous).map(index=>previous-index).sort((a,b)=>a-b),...snapshot(),...(options.includeSupport?{indices:[...memo.get(root)],unresolvedIdentifiers}:{})};wanted=null;memo.clear();
   }
   return Object.freeze({next:()=>{if(wanted!==null&&states===limit)stop('formal-reference-budget');return wanted;},accept:(id,tuple)=>{
    demand(!finished&&id===wanted,'formal dependency read order');
@@ -66,6 +67,7 @@
    demand(Number.isInteger(kind)&&kind>=0&&kind<12&&Array.isArray(children)&&children.length===(A.fields[A.kinds[kind]]||[]).length,'formal dependency row');
    demand(children.every(child=>Number.isInteger(child)&&child>=0&&child<id),'formal dependency postorder child');
    if(kind===0)demand(Number.isSafeInteger(index)&&index>=0,'formal dependency variable index');
+   if(kind===1||kind===2)unresolvedIdentifiers=true;
    states++;stack.push({id,kind,children:[...children],index:kind===0?index:null});peakFrames=Math.max(peakFrames,stack.length);advance();
   },finish:()=>{demand(finished,'unfinished formal dependency scan');return finished;}});
  }

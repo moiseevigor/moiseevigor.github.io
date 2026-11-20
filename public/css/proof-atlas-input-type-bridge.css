@@ -20,3 +20,5 @@
 .atlas-type-difference-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem;margin:.75rem 0}
 .atlas-type-difference-pair pre{max-height:9rem}
 @media(max-width:600px){.atlas-type-difference-pair{grid-template-columns:minmax(0,1fr)}}
+
+.atlas-type-stage summary { min-height: 2.75rem; padding-block: .35rem; cursor: pointer; font: .85rem/1.5 var(--sans); }

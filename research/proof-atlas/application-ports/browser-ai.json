@@ -31,8 +31,8 @@
       "servedSha256": "4999941ec3b90f9122ba107e3cd8689c52d287e5f31b17d76d3d9f0da270c03e"
     },
     "public/js/proof-atlas-library.js": {
-      "sourceSha256": "a23b2493ecd828694acdb7b7482afa960687916b073c67f2075f422d9d7fb0da",
-      "servedSha256": "a23b2493ecd828694acdb7b7482afa960687916b073c67f2075f422d9d7fb0da"
+      "sourceSha256": "b0c1b2ed51fe56defa96a68181d5d744a483f9443c2e30c3fa234fcab293acf1",
+      "servedSha256": "b0c1b2ed51fe56defa96a68181d5d744a483f9443c2e30c3fa234fcab293acf1"
     },
     "public/js/proof-atlas-library-data.js": {
       "sourceSha256": "a4a01e2e93d015397eb6a8d6fd677e6b788e079440c3e206c43b8c56e06161e9",
@@ -55,8 +55,8 @@
       "servedSha256": "e53ce10c4751c239432372b32fc2e8b90d11a85a5d66e5e08646f03dd0f67285"
     },
     "projects/proof-atlas/manual/index.html": {
-      "sourceSha256": "7da6a084b8794207f0707bb208eea977e1229e85c0ab64d9346ff2a5821709d7",
-      "servedSha256": "8367c9c4ccdc40e4607662ddb8b27a29bf9df352e4517af3f2d26a990f9e2d03",
+      "sourceSha256": "266c2890c0faaf2707450046415e1c3190553cbee5f52bc229f37ae707b7ee45",
+      "servedSha256": "934c8877b9e5c6ebb8a0d815387e56426a0e9aa5224adf5b1a9f30b2339c1d0d",
       "htmlComparison": {
         "normalization": "Only four shared CSS build-time query versions",
         "styles": [
@@ -65,12 +65,12 @@
           "syntax",
           "theme"
         ],
-        "normalizedSha256": "da3938975ff865c7aac6e0a217240e2ab9bdb9388c8808ca6f5e0a642a2a2a7f"
+        "normalizedSha256": "17100392d0d99d27bc26f11c88173a0c14de837a0b08080a4656c28c8d71038d"
       }
     },
     "projects/proof-atlas/library/index.html": {
-      "sourceSha256": "e5c1498604053a8d17e10cde4735695d297a81b7e62c9585838269b989352a20",
-      "servedSha256": "c2a097e49ee7d15ba5c4c8f51d9a786c8ada3349db0fbab7a1ccedcab065d8f8",
+      "sourceSha256": "d0f0cf4ea17ecd10d5b6ec759787352bef576cd6e1b71c8997b4ece45fa7edb4",
+      "servedSha256": "ca64fc42eaf839c5b3410c97a44a602c4c9e33b21277266194b7c436765894d9",
       "htmlComparison": {
         "normalization": "Only four shared CSS build-time query versions",
         "styles": [
@@ -79,7 +79,7 @@
           "syntax",
           "theme"
         ],
-        "normalizedSha256": "e53343c82531767bf566b077d7f250d7835fe4f27c1607c43b96cc6e356a8f8b"
+        "normalizedSha256": "ce371deef498e9fe5af62d2ed59e0ab226186fd89ab434c96c4ad2035944959f"
       }
     }
   },
