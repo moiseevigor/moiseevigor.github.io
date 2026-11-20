@@ -9,6 +9,7 @@ const atlas = require('../../../public/js/proof-atlas-library-data');
 const {inventory} = require('../../../scripts/proof-atlas-judgment-fixtures.cjs');
 const {open} = require('./model.cjs');
 const select = require('./select-branch.js');
+const {dependencies} = require('./formal-edges.cjs');
 
 function packet(file,hash) {
   const bytes=z.gunzipSync(fs.readFileSync(file));
@@ -42,7 +43,7 @@ for(const item of require('./port-results.json').filter(d=>d.example)) {
       assert.deepEqual(found.slots,expected.route.slots);
       assert.deepEqual(atlas.binding(data,expected.route).route,example.binder);
     }
-    ports.push({slot,input,role:slot ? entry.producer.role : 'function',offset:String(before),
+    ports.push({slot,input,formalName:entry.formal?.binderName,dependencies:dependencies(entries[0],entry),role:slot ? entry.producer.role : 'function',offset:String(before),
       count:String(hit.count),text:entry.producer.role==='proof' && slot ? entry.display.inputType : entry.display.inputTerm});
     before+=hit.count;
   }

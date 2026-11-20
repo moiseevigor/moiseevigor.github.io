@@ -27,6 +27,22 @@ function choose(p){
  port=p;el('context').textContent='Input '+p.slot+' contains '+p.count+' direct uses of '+active.variable+'.';
  el('ordinal').value='1';el('ordinal').max=p.count;locate(1n);
 }
+function typeInputs(p){
+ const detail=document.createElement('details'),title=document.createElement('summary');
+ title.textContent='Earlier arguments in the expected type';detail.append(title);
+ if(p.dependencies===null){detail.append('Formal domain unavailable for this argument.');return detail;}
+ if(!p.dependencies.length){detail.append('The recorded domain contains no earlier argument.');return detail;}
+ const list=document.createElement('ul');
+ for(const witness of p.dependencies){
+  const target=active.ports[witness.slot],row=document.createElement('li');
+  const name=target.formalName||'argument';
+  row.append(link(name+' · input '+target.slot,target.input));
+  const path=document.createElement('code');
+  path.textContent=witness.root+'.'+witness.slots.join('.')+' · row '+witness.node;
+  row.append(' · function type occurrence ',path);list.append(row);
+ }
+ detail.append(list);return detail;
+}
 function show(i){
  active=examples[i];el('details').open=false;
  el('intro').replaceChildren('Rule ',link(active.rule,active.ports[0].input),'. Tracing the bound variable ',link(active.variable,active.binder),'.');
@@ -40,7 +56,7 @@ function show(i){
   box.className='premise';caption.className='meta';expr.className='formula';
   caption.textContent='Input '+p.slot+' · '+p.role+' · '+p.count+' uses of '+active.variable;
   if(denominator && p.slot>=9)caption.textContent=['Left-side factorization','Right-side factorization','Nonzero common factor'][p.slot-9]+' · '+caption.textContent;
-  expr.append(link(p.text,p.input));box.append(caption,expr);
+  expr.append(link(p.text,p.input));box.append(caption,expr);if(p.slot)box.append(typeInputs(p));
   if(BigInt(p.count)){const b=document.createElement('button');b.textContent='Inspect input '+p.slot;
    b.onclick=()=>{choose(p);el('ordinal').focus();};box.append(b);}
   el(p.role==='proof'?'premises':'other').append(box);

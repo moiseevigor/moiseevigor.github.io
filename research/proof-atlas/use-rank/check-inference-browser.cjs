@@ -23,12 +23,25 @@ const {open}=require('./model.cjs');
       const model=open(data,example.binder.route);
       await page.locator('#proof').selectOption(String(i));
       assert.equal(await page.locator('#denominator').isVisible(),example.source.name==='lean_workbook_plus_15068');
-      await page.locator('#details summary').click();
+      await page.locator('#details > summary').click();
       for(const p of example.ports){
         const row=page.locator('.premise').filter({has:page.getByRole('link',{name:p.text,exact:true})});
         const anchor=new URL(await row.locator('a').first().getAttribute('href'));
         assert.equal(anchor.searchParams.get('route'),p.input.route.root+':'+p.input.route.slots.join('.'));
         assert.equal(anchor.hash,'#expr-'+p.input.node);
+        if(p.slot){
+          const detail=row.locator('details');
+          await detail.locator('summary').click();
+          const edges=detail.locator('li');
+          assert.equal(await edges.count(),p.dependencies.length);
+          for(const [k,w] of p.dependencies.entries()){
+            const edge=edges.nth(k), target=example.ports[w.slot].input;
+            const href=new URL(await edge.locator('a').getAttribute('href'));
+            assert.equal(href.searchParams.get('route'),target.route.root+':'+target.route.slots.join('.'));
+            assert.equal(href.hash,'#expr-'+target.node);
+            assert.equal(await edge.locator('code').textContent(),w.root+'.'+w.slots.join('.')+' · row '+w.node);
+          }
+        }
         if(!Number(p.count))continue;
         await page.getByRole('button',{name:'Inspect input '+p.slot,exact:true}).click();
         await page.locator('#ordinal').fill(p.count);
