@@ -268,3 +268,20 @@ Open **Enclosing binders** in a partition member of the h₁ or h₀ statement f
 The independent check scans the enclosing binders from innermost to outermost, counting the external indices in each required domain by propagating multiplicities down the source DAG. It compares the complete set with the reader and resolves each displayed witness back to its binder. [Per-proof counts](group-binding-results.json) · [Reader](inferences.html).
 
 A [structural control](check-type-context-control.cjs) uses h of type P x, where P has domain A and x has type A. Starting from h adds P and x, then A once. This exercises a second dependency step absent from the six measured additions. The control constructs expression rows locally; it is outside the compiled corpus.
+
+## Local statements and their proof inputs in Lemma 3.2
+
+Following the outer lambda bodies and successive let bodies of JacobiData.slope_bound_abs encounters six local definitions. For each one, the Riccati reader compares the enclosing binders referenced in its defining value with those referenced in its declared type. It matches exact binder routes and displays the set difference. Five definitions have additional inputs.
+
+| Local definition | Binders used in its proof and absent from its statement |
+|---|---|
+| hz | hab |
+| hD | hz |
+| hds | hd, hs |
+| hprod | hz1, hz, hD |
+| amgm | none |
+| hsum | hab, hz1, hd, hs |
+
+For example, following hprod to hD and then to hz exposes how local proofs are assembled. The reader links the statement, defining value, each additional binder and a reference in the proof. An earlier local binder also links to its own defining proof. The empty difference for amgm means only that the same enclosing variables are already present in its statement. The AM–GM application still has the two nonnegativity proof arguments shown above it.
+
+These are direct lexical dependencies on the outer binding spine of one theorem. The count excludes definitions nested inside the displayed values and does not establish logical necessity. The [independent checker](check-riccati-local-inputs.cjs) enumerates occurrence paths separately for type and value, resolves every bound reference, and verifies all 11 additional input positions across the six definitions. [Riccati reader](riccati.html) · [Browser check](check-riccati-local-browser.cjs).

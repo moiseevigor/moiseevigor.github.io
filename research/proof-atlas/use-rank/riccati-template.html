@@ -2,7 +2,8 @@
 <title>Tracing J in the Riccati bound</title><style>
 :root{color-scheme:light dark}*{box-sizing:border-box}.bar{overflow:hidden}.inference{border-block:1px solid GrayText;padding:.75rem 0}.port{margin:.45rem 0}.port button{margin-left:.5rem}body{max-width:46rem;margin:2rem auto;padding:0 1rem;font:1.15rem/1.5 Georgia,serif}h1{font-size:clamp(2rem,5vw,2.8rem);line-height:1.1}h2{font-size:1.4rem}button,input,output,label,summary{font:1rem/1.5 system-ui}input{width:6em}button,input{padding:.35em .6em}:focus-visible{outline:2px solid currentColor;outline-offset:2px}a{color:LinkText}.bar{height:.9em;background:Canvas;display:flex;border:1px solid GrayText}.mark{background:LinkText;min-width:2px}.step{padding:.6rem 0}.note{font-size:1rem}code{overflow-wrap:anywhere}form{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
 </style><main><h1>Tracing <i>J</i> in the Riccati bound</h1><p>The compiled proof of Lemma 3.2 refers to its Jacobi data 2,204 times. Choose a use to follow it through the proof.</p>
-<section aria-labelledby="estimate"><h2 id="estimate">Where does J enter the AM–GM estimate?</h2><div class="inference" id="inference"></div><p class="note">Each numbered use opens the corresponding occurrence below. Counts refer to the compiled arguments of this application.</p></section><form><label>Use <input required type="number" min="1" max="2204" value="1102" id="number"></label><button>Trace</button><button type="button" id="prev">Previous</button><button type="button" id="next">Next</button></form>
+<section aria-labelledby="estimate"><h2 id="estimate">Where does J enter the AM–GM estimate?</h2><div class="inference" id="inference"></div><p class="note">Each numbered use opens the corresponding occurrence below. Counts refer to the compiled arguments of this application.</p></section><details id="definitions"><summary>Which hypotheses build the six local steps?</summary>
+<p>Each row links a local statement to its proof. The inputs shown are enclosing variables used directly in the proof that are absent from the statement.</p><div id="local-steps"></div></details><form><label>Use <input required type="number" min="1" max="2204" value="1102" id="number"></label><button>Trace</button><button type="button" id="prev">Previous</button><button type="button" id="next">Next</button></form>
 <h2 id="title" aria-live="polite"></h2><p class="note">Each bar spans all 2,204 uses in Lean field order. The highlighted interval contains the selected use. Below one pixel its mark is enlarged for visibility.</p><div id="plot"></div><p><a id="link">Open this occurrence in the compiled proof</a></p><details><summary>Full field path and packet identity</summary><code id="address"></code></details></main>
 <script>/* INSERT SELECTOR */
 const packet=/* INSERT PACKET */;
@@ -34,6 +35,25 @@ input.oninput=()=>input.setCustomValidity('');el('prev').onclick=()=>show(active
  url.search=new URLSearchParams({edition:packet.edition,proof:packet.name,route:route.root+':'+route.slots.join('.')});
  url.hash='expr-'+node;a.href=url.href;a.textContent=label;return a;
 };
+const steps=el('local-steps');
+for(const step of packet.localSteps){
+ const box=document.createElement('section'),title=document.createElement('h3');
+ title.textContent=step.name;box.append(title,proofLink(step.type,'Statement'),' · ',proofLink(step.value,'Proof'));
+ if(step.extra?.length){
+  const list=document.createElement('ul');
+  for(const ref of step.extra){
+   const row=document.createElement('li');row.append(proofLink(ref.binder,ref.name),' · ',proofLink(ref.use,'use in proof'));
+   const prior=packet.localSteps.find(s=>s.value.route.slots.length===ref.binder.route.slots.length+1 &&
+    ref.binder.route.slots.every((v,i)=>s.value.route.slots[i]===v));
+   if(prior)row.append(' · ',proofLink(prior.value,'proof of '+prior.name));
+   list.append(row);
+  }
+  box.append(list);
+ }else{
+  const note=document.createElement('p');note.textContent=step.extra===null?'Input evidence unavailable.':'Every enclosing variable used in this proof also occurs in its statement.';box.append(note);
+ }
+ steps.append(box);
+}
 const estimate=packet.inference,region=el('inference');
 function renderPort(port,parent,label){
  const row=document.createElement('p');row.className='port';
