@@ -79,7 +79,7 @@ const {open}=require('./model.cjs');
         assert.equal(anchor.searchParams.get('route'),p.input.route.root+':'+p.input.route.slots.join('.'));
         assert.equal(anchor.hash,'#expr-'+p.input.node);
         if(p.slot){
-          const detail=row.locator('details');
+          const detail=row.locator('details:not(.definition)');
           await detail.locator('summary').click();
           const edges=detail.locator('li');
           assert.equal(await edges.count(),p.dependencies.length);
@@ -90,6 +90,30 @@ const {open}=require('./model.cjs');
             assert.equal(href.hash,'#expr-'+target.node);
             assert.equal(await edge.locator('code').textContent(),w.root+'.'+w.slots.join('.')+' · row '+w.node);
           }
+        }
+        if(p.binding){
+          const actual=atlas.binding(data,p.input.route);
+          const url=new URL(await row.getByRole('link',{name:p.binding.name,exact:true}).last().getAttribute('href'));
+          assert.equal(url.searchParams.get('route'),actual.route.root+':'+actual.route.slots.join('.'));
+          assert.equal(url.hash,'#expr-'+actual.node);
+        }
+        if(p.resolution){
+          const panel=row.locator('.definition');await panel.locator('summary').click();
+          let use=p.input;
+          for(const [i,h] of p.resolution.definitions.entries()){
+            const binder=atlas.binding(data,use.route),route={root:binder.route.root,slots:[...binder.route.slots,1]};
+            const value={node:atlas.walk(data,route),route};
+            assert.equal(atlas.kinds[data.kind[binder.node]],'letE');
+            const links=panel.locator('li').nth(i).locator('a');
+            assert.equal(await links.nth(1).textContent(),'let '+data.payloads[binder.node].declName);
+            for(const [j,hit] of [use,binder,value].entries()){
+              const url=new URL(await links.nth(j).getAttribute('href'));
+              assert.equal(url.searchParams.get('route'),hit.route.root+':'+hit.route.slots.join('.'));
+              assert.equal(url.hash,'#expr-'+hit.node);
+            }
+            use=value;
+          }
+          assert.deepEqual(use,p.origin.anchor);
         }
         if(p.origin){
           await row.locator('a[href^="#"]').click();

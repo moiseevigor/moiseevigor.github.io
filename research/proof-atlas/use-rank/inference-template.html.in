@@ -84,6 +84,24 @@ function renderMatrix(){
   }
  }
 }
+function showBinding(box,p){
+ if(p.binding){
+  const line=document.createElement('p');line.append('Bound by ',link(p.binding.name||'enclosing binder',p.binding.anchor));box.append(line);
+ }
+ if(!p.resolution)return;
+ const r=p.resolution,detail=document.createElement('details'),title=document.createElement('summary');
+ detail.className='definition';title.textContent='Follow local definition '+r.inputTerm;detail.append(title);
+ const steps=document.createElement('ol');
+ for(const h of r.definitions){
+  const step=document.createElement('li');step.append(link('Reference to '+h.name,h.use),' → ',link('let '+h.name,h.binder),' → ',link('defining value',h.value));steps.append(step);
+ }
+ detail.append(steps);
+ const caption=document.createElement('p');
+ caption.textContent=r.inputTerm+' resolves to '+r.valueTerm+'. Local context: '+r.inputContext+' binders at the reference, '+r.valueContext+' at the value.';
+ detail.append(caption);
+ if(r.boundary)detail.append('Further local-definition resolution is unavailable.');
+ box.append(detail);
+}
 function show(i){
  active=examples[i];renderMatrix();el('details').open=false;
  el('intro').replaceChildren('Rule ',link(active.rule,active.ports[0].input),'. Tracing the bound variable ',link(active.variable,active.binder),'.');
@@ -110,7 +128,7 @@ function show(i){
   box.dataset.slot=p.slot;box.className='premise';caption.className='meta';expr.className='formula';
   caption.textContent='Input '+p.slot+' · '+p.role+' · '+p.count+' uses of '+active.variable;
   if(premiseName(p.slot))caption.textContent=premiseName(p.slot)+' · '+caption.textContent;
-  expr.append(link(p.text,p.input));box.append(caption,expr);if(p.slot)box.append(typeInputs(p));
+  expr.append(link(p.text,p.input));box.append(caption,expr);if(p.slot)box.append(typeInputs(p));showBinding(box,p);
   if(p.origin){
    const a=document.createElement('a');a.href='#'+active.source.indexSha256+'-'+p.origin.callId;
    a.textContent='Read producing call '+p.origin.callId+(p.origin.hops?' via local definition':'');

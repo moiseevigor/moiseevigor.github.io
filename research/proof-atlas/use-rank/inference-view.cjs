@@ -9,6 +9,8 @@ const atlas = require('../../../public/js/proof-atlas-library-data');
 const {inventory} = require('../../../scripts/proof-atlas-judgment-fixtures.cjs');
 const {open} = require('./model.cjs');
 const select = require('./select-branch.js');
+const definitionPath=require('./definition-path.cjs');
+const {validateSourcePort}=require('../../../public/js/proof-atlas-application-ports');
 const {dependencies,conclusion} = require('./formal-edges.cjs');
 
 function packet(file,hash) {
@@ -50,6 +52,7 @@ for(const item of require('./port-results.json')) {
     for(const [slot,entry] of entries.entries()) {
       assert.equal(entry.consumer.slot,slot);
       assert.deepEqual(entry.consumer.anchor,call);
+      validateSourcePort(entry,data,{anchor:call,arguments:entries.length-1},slot);
       const input=entry.consumer.input;
       const hit=model.interval(input.route);
       assert.equal(hit.node,input.node);
@@ -63,7 +66,10 @@ for(const item of require('./port-results.json')) {
       const producerCall=producers.get(addressKey(entry.producer.anchor));
       const origin=producerCall===undefined ? null : {callId:producerCall,anchor:entry.producer.anchor,hops:entry.definitionHops.length};
       if(origin)consumers.get(producerCall).push({callId,slot,hops:origin.hops});
-      ports.push({slot,input,origin,formalName:entry.formal?.binderName,dependencies:dependencies(entries[0],entry),role:slot ? entry.producer.role : 'function',offset:String(before),
+      const binderAddress=entry.externalBinder;
+      const binding=binderAddress ? {anchor:binderAddress,name:data.payloads[binderAddress.node].binderName} : null;
+      const resolution=definitionPath(data,entry);
+      ports.push({slot,input,origin,binding,resolution,formalName:entry.formal?.binderName,dependencies:dependencies(entries[0],entry),role:slot ? entry.producer.role : 'function',offset:String(before),
         count:String(hit.count),text:entry.producer.role==='proof' && slot ? entry.display.inputType : entry.display.inputTerm});
       before+=hit.count;
     }

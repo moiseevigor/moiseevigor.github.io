@@ -1,0 +1,117 @@
+{
+  "control": "AtlasComposeControls.aliases",
+  "owner": "74ecaf668865e6a6cff8d9507d26951a79b4c2e080a5d1f8207ba7de61f058ea",
+  "slot": 4,
+  "path": {
+    "definitions": [
+      {
+        "use": {
+          "node": 20,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              1
+            ]
+          }
+        },
+        "binder": {
+          "kind": "letE",
+          "node": 27,
+          "path": "root.value.body.body.body.body.body.body.body",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2
+            ]
+          }
+        },
+        "value": {
+          "node": 20,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          }
+        },
+        "name": "copyOfQ"
+      },
+      {
+        "use": {
+          "node": 20,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          }
+        },
+        "binder": {
+          "kind": "letE",
+          "node": 28,
+          "path": "root.value.body.body.body.body.body.body",
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "value": {
+          "node": 21,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "name": "q"
+      }
+    ],
+    "inputTerm": "copyOfQ",
+    "valueTerm": "Eq.mp h p",
+    "inputContext": 8,
+    "valueContext": 6,
+    "boundary": false
+  }
+}
