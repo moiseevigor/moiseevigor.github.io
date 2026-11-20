@@ -45,14 +45,20 @@ const {open}=require('./model.cjs');
             for(const [j,b] of c.coverage.branches.largest.entries()){
               assert.equal(await rows.nth(j).locator('code').textContent(),b.path);
               const partition=rows.nth(j).locator('.branch-groups');
-              if(b.frontier.length>1){
-                await partition.locator('summary').click();
-                const links=partition.locator('a');
+              if(b.frontier.length){
+                await partition.locator(':scope > summary').click();
+                const links=partition.locator(':scope > p > a');
                 assert.equal(await links.count(),b.frontier.length);
                 for(const [k,part] of b.frontier.entries()){
-                  assert.equal(await links.nth(k).textContent(),part.fields);
+                  assert.equal(await links.nth(k).textContent(),part.fields||'Branch root');
                   assert.equal(await partition.locator('meter').nth(k).evaluate(m=>m.value),Number(BigInt(part.count)*1000000n/BigInt(b.count)));
                   const url=new URL(await links.nth(k).getAttribute('href'));
+                  const refs=await partition.locator('.group-inputs').nth(k).evaluate((panel,slots)=>{
+                    panel.open=true;
+                    return {expected:groupBindings[active.source.indexSha256][slots].map(r=>[address(r.binder),address(r.use)]),
+                      actual:[...panel.querySelectorAll('p')].map(row=>[...row.querySelectorAll('a')].map(a=>a.href))};
+                  },part.anchor.route.slots.join('.'));
+                  assert.deepEqual(refs.actual,refs.expected);
                   assert.equal(url.hash,'#expr-'+part.anchor.node);
                   assert.equal(url.searchParams.get('route'),part.anchor.route.root+':'+part.anchor.route.slots.join('.'));
                 }
@@ -77,7 +83,7 @@ const {open}=require('./model.cjs');
                 assert.equal(url.searchParams.get('route'),b.head.anchor.route.root+':'+b.head.anchor.route.slots.join('.'));
               }
               if(b.fields.length){
-                await rows.nth(j).locator('details:not(.branch-groups) > summary').click();
+                await rows.nth(j).locator(':scope > details:not(.branch-groups) > summary').click();
                 const links=rows.nth(j).locator('ul a');
                 assert.equal(await links.count(),b.fields.length);
                 for(const [k,f] of b.fields.entries()){

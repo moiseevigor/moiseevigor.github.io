@@ -16,6 +16,7 @@
 <details><summary>Compiled provenance</summary><p id="identity" class="meta"></p></details></main>
 <script>/* SELECTOR */
 const examples=/* EXAMPLES */;
+const groupBindings=/* GROUP BINDINGS */;
 const flows=/* FLOWS */;
 const el=id=>document.getElementById(id);
 let active,port;
@@ -152,13 +153,20 @@ function traceClause(){
     line.append(meter,link(child.field,child.anchor),' · '+child.count+' of '+b.count+' uses');focus.append(line);
    }
    row.append(focus);
-   if(b.frontier.length>1){
+   if(b.frontier.length){
     const groups=document.createElement('details'),title=document.createElement('summary');
-    groups.className='branch-groups';title.textContent='Partition into '+b.frontier.length+' subtrees';groups.append(title);
+    groups.className='branch-groups';title.textContent=b.frontier.length===1?'Inspect subtree inputs':'Partition into '+b.frontier.length+' subtrees';groups.append(title);
     for(const part of b.frontier){
      const line=document.createElement('p'),bar=document.createElement('meter');
      bar.max=1000000;bar.value=Number(BigInt(part.count)*1000000n/BigInt(b.count));bar.setAttribute('aria-hidden','true');
-     line.append(bar,' ',link(part.fields,part.anchor),' · '+part.count+' of '+b.count+' uses');groups.append(line);
+     line.append(bar,' ',link(part.fields||'Branch root',part.anchor),' · '+part.count+' of '+b.count+' uses');groups.append(line);
+     const refs=groupBindings[active.source.indexSha256][part.anchor.route.slots.join('.')];
+     const panel=document.createElement('details'),caption=document.createElement('summary');panel.className='group-inputs';
+     caption.textContent=refs===null?'Enclosing binder references unavailable':'Enclosing binders ('+refs.length+')';panel.append(caption);
+     for(const ref of refs||[]){
+      const entry=document.createElement('p');entry.append(link(ref.name,ref.binder),' · '+ref.count+' uses · ',link('First use',ref.use));panel.append(entry);
+     }
+     groups.append(panel);
     }
     row.append(groups);
    }

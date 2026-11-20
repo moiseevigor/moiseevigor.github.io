@@ -10,6 +10,7 @@ const {inventory} = require('../../../scripts/proof-atlas-judgment-fixtures.cjs'
 const {open} = require('./model.cjs');
 const select = require('./select-branch.js');
 const declaredDomain=require('./declared-domain.cjs');
+const lexicalInputs=require('./lexical-inputs.cjs');
 const definitionPath=require('./definition-path.cjs');
 const {validateSourcePort}=require('../../../public/js/proof-atlas-application-ports');
 const {dependencies,conclusion} = require('./formal-edges.cjs');
@@ -19,7 +20,7 @@ function packet(file,hash) {
   assert.equal(createHash('sha256').update(bytes).digest('hex'),hash);
   return JSON.parse(bytes);
 }
-const examples=[],flows={};
+const examples=[],flows={},groupBindings={};
 for(const item of require('./port-results.json')) {
   const {example,source,nativeOwner}=item;
   const {record}=inventory().find(x=>x.record.indexSha256===source.indexSha256 && x.edition===source.edition);
@@ -81,9 +82,18 @@ for(const item of require('./port-results.json')) {
       resultDependencies:conclusion(entries),rule:entries[0].display.inputTerm,conclusion:entries[0].display.consumerType});
   }
   flows[source.indexSha256]=require('./statement-flow.cjs')(data,examples.filter(x=>x.source.indexSha256===source.indexSha256));
+  const bindings={};
+  for(const clause of flows[source.indexSha256])for(const branch of clause.coverage.branches.largest){
+    for(const part of branch.frontier){
+      const key=part.anchor.route.slots.join('.');
+      if(!Object.hasOwn(bindings,key))bindings[key]=lexicalInputs(data,part.anchor);
+    }
+  }
+  groupBindings[source.indexSha256]=bindings;
 }
 const local=file=>fs.readFileSync(path.join(__dirname,file),'utf8');
 process.stdout.write(local('inference-template.html.in')
   .replace('/* SELECTOR */',()=>local('select-branch.js'))
+  .replace('/* GROUP BINDINGS */',()=>JSON.stringify(groupBindings).replaceAll('<','\\u003c'))
   .replace('/* FLOWS */',()=>JSON.stringify(flows).replaceAll('<','\\u003c'))
   .replace('/* EXAMPLES */',()=>JSON.stringify(examples).replaceAll('<','\\u003c')));
