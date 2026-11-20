@@ -40,6 +40,7 @@ for(const item of require('./port-results.json')) {
     assert(!producers.has(addressKey(anchor)));
     producers.set(addressKey(anchor),id);
   }
+  const consumers=new Map([...calls.keys()].map(id=>[id,[]]));
   for(const [callId,entries] of calls){
     entries.sort((a,b)=>a.consumer.slot-b.consumer.slot);
     const call=entries[0].consumer.anchor;
@@ -61,13 +62,14 @@ for(const item of require('./port-results.json')) {
       }
       const producerCall=producers.get(addressKey(entry.producer.anchor));
       const origin=producerCall===undefined ? null : {callId:producerCall,anchor:entry.producer.anchor,hops:entry.definitionHops.length};
+      if(origin)consumers.get(producerCall).push({callId,slot,hops:origin.hops});
       ports.push({slot,input,origin,formalName:entry.formal?.binderName,dependencies:dependencies(entries[0],entry),role:slot ? entry.producer.role : 'function',offset:String(before),
         count:String(hit.count),text:entry.producer.role==='proof' && slot ? entry.display.inputType : entry.display.inputTerm});
       before+=hit.count;
     }
     assert.equal(String(before),table.total);
     const binderNode=atlas.walk(data,binder);
-    examples.push({source,nativeOwner,call,callId,table,ports,
+    examples.push({source,nativeOwner,call,callId,table,ports,consumers:consumers.get(callId),
       binder:{route:binder,node:binderNode},variable:data.payloads[binderNode].binderName,
       resultDependencies:conclusion(entries),rule:entries[0].display.inputTerm,conclusion:entries[0].display.consumerType});
   }

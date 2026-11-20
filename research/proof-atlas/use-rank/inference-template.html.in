@@ -3,12 +3,13 @@
 :root{color-scheme:light dark}*{box-sizing:border-box}body{max-width:48rem;margin:2rem auto;padding:0 1rem;font:1.1rem/1.5 Georgia,serif}h1,h2{line-height:1.15}h2{font-size:1.35rem}label,summary,button,select,.meta{font:1rem/1.45 system-ui}select,input,button{font:inherit;max-width:100%;padding:.3rem}.formula,a,code{overflow-wrap:anywhere}.premise{padding:.6rem 0}.premise p{margin:.25rem 0}.result{border-top:2px solid;padding-top:.65rem}.choice{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap}input{width:6em}a{color:LinkText}:focus-visible{outline:2px solid currentColor;outline-offset:2px}
 
 .matrix-scroll{overflow-x:auto;padding:.25rem}.matrix{border-collapse:collapse;font:1rem/1.4 system-ui}.matrix th,.matrix td{padding:.25rem .45rem;text-align:center}.matrix th:first-child{text-align:left;max-width:15rem;overflow-wrap:anywhere}.matrix thead{border-bottom:1px solid GrayText}.matrix tr>:last-child{border-left:1px solid GrayText}.matrix button{min-width:2.3rem;min-height:2.3rem;border:1px solid transparent;background:none;color:LinkText;cursor:pointer}.matrix button:hover,.matrix button[aria-pressed=true]{border-color:currentColor;background:ButtonFace}.matrix-key{font:1rem/1.45 system-ui}#witness{border-inline-start:2px solid GrayText;padding-inline-start:.7rem}
+.premise[data-selected]{border-inline-start:3px solid LinkText;padding-inline-start:.7rem}
 </style></head><body><main><h1>Reading a Lean inference</h1><label>Compiled application <select id="proof"></select></label>
 <p id="intro"></p><section aria-labelledby="map-heading"><h2 id="map-heading">Which arguments occur in each type?</h2>
 <p class="matrix-key">Columns are proof inputs and the conclusion. Select a dot to trace its reference. A dash means the formal argument is absent from that type. A blank falls outside its scope.</p>
 <div class="matrix-scroll" tabindex="0" role="region" aria-label="Argument references by premise and conclusion"><table class="matrix" id="matrix" aria-labelledby="map-heading"></table></div><p id="witness" aria-live="polite" hidden></p></section><h2>Proof arguments</h2><div id="premises"></div><section class="result"><h2>Conclusion</h2><div id="denominator" hidden><p>Clearing denominators turns the fractional equation</p>
 <math display="block" aria-label="one over a plus one, plus one over b plus one, plus one over a plus b, equals three halves"><mrow><mfrac><mn>1</mn><mrow><mi>a</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mi>b</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></mfrac><mo>=</mo><mfrac><mn>3</mn><mn>2</mn></mfrac></mrow></math>
-<p>into the polynomial equation below. The call establishes equality of the two propositions.</p></div><p id="result" class="formula"></p><div id="result-inputs"></div></section>
+<p>into the polynomial equation below. The call establishes equality of the two propositions.</p></div><p id="result" class="formula"></p><div id="result-inputs"></div><h3>Recorded uses of this result</h3><div id="consumers"></div></section>
 <details id="details"><summary>Function, types and values</summary><div id="other"></div></details>
 <section id="trace"><h2>Inspect a variable use</h2><p id="context"></p><form class="choice"><label>Use <input id="ordinal" required type="number" min="1" step="1"></label><button>Locate</button></form><p aria-live="polite"><a id="occurrence">Open compiled occurrence</a></p></section>
 <details><summary>Compiled provenance</summary><p id="identity" class="meta"></p></details></main>
@@ -28,7 +29,7 @@ function locate(n){
  a.textContent='Open use '+n+' of '+port.count+' in input '+port.slot+' · expression '+hit.node;
 }
 function choose(p){
- port=p;el('context').textContent='Input '+p.slot+' contains '+p.count+' direct uses of '+active.variable+'.';
+ el('trace').hidden=false;port=p;el('context').textContent='Input '+p.slot+' contains '+p.count+' direct uses of '+active.variable+'.';
  el('ordinal').value='1';el('ordinal').max=p.count;locate(1n);
 }
 function typeInputs(p,result=false){
@@ -90,6 +91,18 @@ function show(i){
  const denominator=active.source.name==='lean_workbook_plus_15068' && active.callId===2;
  el('denominator').hidden=!denominator;
  el('result').replaceChildren(link(active.conclusion,active.call));
+ const uses=el('consumers');uses.replaceChildren();
+ if(!active.consumers.length)uses.textContent='No consuming input is recorded in this inventory.';
+ else{
+  const list=document.createElement('ul');
+  for(const use of active.consumers){
+   const item=document.createElement('li'),a=document.createElement('a');
+   a.href='#'+active.source.indexSha256+'-'+use.callId+'/input/'+use.slot;
+   a.textContent='Call '+use.callId+' · input '+use.slot+(use.hops?' via local definition':'');
+   item.append(a);list.append(item);
+  }
+  uses.append(list);
+ }
  el('result-inputs').replaceChildren(typeInputs({dependencies:active.resultDependencies},true));
  el('premises').replaceChildren();el('other').replaceChildren();
  for(const p of active.ports){
@@ -122,8 +135,18 @@ for(const [i,x] of examples.entries()){
 }
 const defaultProof=examples.findIndex(x=>x.source.name==='lean_workbook_plus_15068' && x.callId===2);
 function follow(){
- const index=examples.findIndex(x=>location.hash==='#'+x.source.indexSha256+'-'+x.callId);
+ const [callHash,field,slot]=location.hash.split('/');
+ const index=examples.findIndex(x=>callHash==='#'+x.source.indexSha256+'-'+x.callId);
  el('proof').value=String(index>=0?index:defaultProof);show(Number(el('proof').value));
+ if(index>=0 && field==='input' && /^(0|[1-9]\d*)$/.test(slot)){
+  const target=active.ports[Number(slot)];
+  if(!target)return;
+  if(target.role!=='proof')el('details').open=true;
+  const box=document.querySelector('.premise[data-slot="'+slot+'"]');
+  box.dataset.selected='';box.tabIndex=-1;box.focus();
+  if(BigInt(target.count))choose(target);
+  else{port=null;el('trace').hidden=true;el('occurrence').removeAttribute('href');}
+ }
 }
 el('proof').onchange=e=>{const x=examples[Number(e.target.value)];location.hash=x.source.indexSha256+'-'+x.callId;};
 window.addEventListener('hashchange',follow);

@@ -46,6 +46,23 @@ const {open}=require('./model.cjs');
           }
         }
       }
+      const consumers=page.locator('#consumers a');
+      assert.equal(await consumers.count(),example.consumers.length);
+      for(const [k,use] of example.consumers.entries()){
+        await consumers.nth(k).click();
+        const target=page.locator('.premise[data-selected]');
+        await page.waitForFunction(x=>active.source.indexSha256===x.hash && active.callId===x.id &&
+          document.activeElement?.dataset.slot===String(x.slot),{hash:example.source.indexSha256,id:use.callId,slot:use.slot});
+        const sourceLink=new URL(await target.locator('a').first().getAttribute('href'));
+        const input=await page.evaluate(slot=>active.ports[slot],use.slot);
+        assert.equal(sourceLink.searchParams.get('route'),input.input.route.root+':'+input.input.route.slots.join('.'));
+        assert.equal(sourceLink.hash,'#expr-'+input.input.node);
+        assert.equal(await page.locator('#trace').isVisible(),input.count!=='0');
+        await page.reload();
+        assert.equal(await target.getAttribute('data-slot'),String(use.slot));
+        await page.goBack();
+        await page.waitForFunction(i=>active===examples[i],i);
+      }
       await page.locator('#result-inputs summary').click();
       const resultLinks=page.locator('#result-inputs li');
       assert.equal(await resultLinks.count(),example.resultDependencies.length);
