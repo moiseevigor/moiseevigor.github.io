@@ -125,7 +125,7 @@ function open(data, binder, options = {}) {
     if (data.payloads[node].index !== index) throw Error('Unexpected variable');
     return {node,route:{root:at.root,slots}};
   }
-  function interval(route) {
+  function locate(route) {
     if (route.root !== at.root || prefix.length > route.slots.length ||
         !prefix.every((slot,i) => slot === route.slots[i])) throw Error('Outside binder body');
     let ordinal = 1n, node = body, index = 0, mass = total;
@@ -137,16 +137,20 @@ function open(data, binder, options = {}) {
       mass=sizes[slot];
       index += Number(binds(kind,slot));
       node = children[slot];
-
     }
-    return {node, first:mass ? ordinal : null, count:mass};
+    return {node,index,first:mass ? ordinal : null,count:mass};
+  }
+  function interval(route) {
+    const {node,first,count}=locate(route);
+    return {node,first,count};
   }
   function rank(route) {
     const hit = interval(route);
     if (hit.count !== 1n || data.kind[hit.node] !== 0) throw Error('Expected use of selected binder');
     return hit.first;
   }
-  function branchTable() {
+  function branchTable(route={root:at.root,slots:prefix}) {
+    const start=locate(route);
     const rows=[], ids=new Map(), pending=[];
     function intern(node,index,mass) {
       const key=keyOf(node,index);
@@ -154,7 +158,7 @@ function open(data, binder, options = {}) {
       const id=pending.length;
       ids.set(key,id);pending.push({node,index,mass});return id;
     }
-    if (total) intern(body,0,total);
+    if (start.count) intern(start.node,start.index,start.count);
     for (let i=0;i<pending.length;i++) {
       const {node,index,mass}=pending[i], kind=data.kind[node], children=data.children[node];
       const edges=[];
@@ -164,7 +168,7 @@ function open(data, binder, options = {}) {
       const p=data.payloads[node];
       rows.push([node,kind,p.binderName||p.declName||'',edges]);
     }
-    return {prefix,total:String(total),rows};
+    return {prefix:[...route.slots],total:String(start.count),rows};
   }
   return {select,rank,interval,branchTable,total,states:queries.length,...table.stats()};
 }

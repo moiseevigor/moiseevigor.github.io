@@ -1,0 +1,55 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reading a Lean inference · Proof Atlas</title><style>
+:root{color-scheme:light dark}*{box-sizing:border-box}body{max-width:48rem;margin:2rem auto;padding:0 1rem;font:1.1rem/1.5 Georgia,serif}h1,h2{line-height:1.15}h2{font-size:1.35rem}label,summary,button,select,.meta{font:1rem/1.45 system-ui}select,input,button{font:inherit;max-width:100%;padding:.3rem}.formula,a,code{overflow-wrap:anywhere}.premise{padding:.6rem 0}.premise p{margin:.25rem 0}.result{border-top:2px solid;padding-top:.65rem}.choice{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap}input{width:6em}a{color:LinkText}:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+</style></head><body><main><h1>Reading a Lean inference</h1><label>Compiled proof <select id="proof"></select></label>
+<p id="intro"></p><h2>Proof arguments</h2><div id="premises"></div><section class="result"><h2>Conclusion</h2><div id="denominator" hidden><p>Clearing denominators turns the fractional equation</p>
+<math display="block" aria-label="one over a plus one, plus one over b plus one, plus one over a plus b, equals three halves"><mrow><mfrac><mn>1</mn><mrow><mi>a</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mi>b</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></mfrac><mo>=</mo><mfrac><mn>3</mn><mn>2</mn></mfrac></mrow></math>
+<p>into the polynomial equation below. The call establishes equality of the two propositions.</p></div><p id="result" class="formula"></p></section>
+<details id="details"><summary>Function, types and values</summary><div id="other"></div></details>
+<section id="trace"><h2>Inspect a variable use</h2><p id="context"></p><form class="choice"><label>Use <input id="ordinal" required type="number" min="1" step="1"></label><button>Locate</button></form><p aria-live="polite"><a id="occurrence">Open compiled occurrence</a></p></section>
+<details><summary>Compiled provenance</summary><p id="identity" class="meta"></p></details></main>
+<script>/* SELECTOR */
+const examples=/* EXAMPLES */;
+const el=id=>document.getElementById(id);
+let active,port;
+function address(hit) {
+ const url=new URL('https://moiseevigor.github.io/projects/proof-atlas/library/');
+ url.search=new URLSearchParams({edition:active.source.edition,proof:active.source.name,route:hit.route.root+':'+hit.route.slots.join('.')});
+ url.hash='expr-'+hit.node;return url.href;
+}
+function link(text,hit){const a=document.createElement('a');a.textContent=text;a.href=address(hit);return a;}
+function locate(n){
+ const hit=selectBranch(active.table,BigInt(port.offset)+n);
+ const a=el('occurrence');a.href=address({node:hit.node,route:{root:active.call.route.root,slots:hit.slots}});
+ a.textContent='Open use '+n+' of '+port.count+' in input '+port.slot+' · expression '+hit.node;
+}
+function choose(p){
+ port=p;el('context').textContent='Input '+p.slot+' contains '+p.count+' direct uses of '+active.variable+'.';
+ el('ordinal').value='1';el('ordinal').max=p.count;locate(1n);
+}
+function show(i){
+ active=examples[i];el('details').open=false;
+ el('intro').replaceChildren('Rule ',link(active.rule,active.ports[0].input),'. Tracing the bound variable ',link(active.variable,active.binder),'.');
+ el('identity').textContent=active.source.edition+' · source '+active.source.indexSha256+' · native observations '+active.nativeOwner;
+ const denominator=active.source.name==='lean_workbook_plus_15068' && active.callId===2;
+ el('denominator').hidden=!denominator;
+ el('result').replaceChildren(link(active.conclusion,active.call));
+ el('premises').replaceChildren();el('other').replaceChildren();
+ for(const p of active.ports){
+  const box=document.createElement('div'),caption=document.createElement('p'),expr=document.createElement('p');
+  box.className='premise';caption.className='meta';expr.className='formula';
+  caption.textContent='Input '+p.slot+' · '+p.role+' · '+p.count+' uses of '+active.variable;
+  if(denominator && p.slot>=9)caption.textContent=['Left-side factorization','Right-side factorization','Nonzero common factor'][p.slot-9]+' · '+caption.textContent;
+  expr.append(link(p.text,p.input));box.append(caption,expr);
+  if(BigInt(p.count)){const b=document.createElement('button');b.textContent='Inspect input '+p.slot;
+   b.onclick=()=>{choose(p);el('ordinal').focus();};box.append(b);}
+  el(p.role==='proof'?'premises':'other').append(box);
+ }
+ choose(active.ports.find(p=>p.role==='proof' && BigInt(p.count)));
+}
+for(const [i,x] of examples.entries()){const o=document.createElement('option');o.value=i;o.textContent=x.source.name;el('proof').append(o);}
+el('proof').value=String(examples.findIndex(x=>x.source.name==='lean_workbook_plus_15068'));
+el('proof').onchange=e=>show(Number(e.target.value));
+document.querySelector('form').onsubmit=e=>{e.preventDefault();const v=el('ordinal');if(v.validity.valid)locate(BigInt(Number(v.value)));};
+show(Number(el('proof').value));
+</script></body></html>
