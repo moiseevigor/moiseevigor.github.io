@@ -29,13 +29,14 @@ function count(data,root){
   }
   return out;
 }
+const typeContexts=JSON.parse(html.match(/^const typeContexts=(.*);$/m)[1]);
 const results=[];
 for(const [hash,bindings] of Object.entries(groups)){
   const {record}=inventory().find(x=>x.record.indexSha256===hash);
   const bytes=z.gunzipSync(fs.readFileSync('.'+record.indexFile));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),hash);
   const data=atlas.validateIndex(JSON.parse(bytes),record);
-  const result={name:record.name,hash,uniqueGroups:0,multipleBinders:0,largestInterface:0,displayedGroups:0,unavailable:0};
+  const result={name:record.name,hash,uniqueGroups:0,multipleBinders:0,largestInterface:0,displayedGroups:0,unavailable:0,groupsWithTypeAdditions:0,typeAdditions:0};
   const visited=new Set();
   for(const clause of flows[hash])for(const branch of clause.coverage.branches.largest)for(const part of branch.frontier){
     const {node,route}=part.anchor,key=route.slots.join('.'),refs=bindings[key];
@@ -55,6 +56,30 @@ for(const [hash,bindings] of Object.entries(groups)){
         assert.deepEqual(atlas.binding(data,ref.use.route),{node:ref.binder.node,route:ref.binder.route});
       }
       assert.equal(expected.size,0);
+      const identify = r => r.root + ':' + r.slots.join('.');
+      const direct = new Set(refs.map(ref=>identify(ref.binder.route)));
+      const needed = new Set(direct);
+      const owners = new Set();
+      // From innermost to outermost: a binder domain can use only earlier binders.
+      for(const binder of scope){
+        if(!needed.has(identify(binder.route)))continue;
+        const domain = {root:binder.route.root,slots:binder.route.slots.concat(0)};
+        owners.add(identify(domain));
+        const before = context(data,domain).binders.reverse();
+        for(const index of count(data,atlas.walk(data,domain)).keys())needed.add(identify(before[index].route));
+      }
+      const extra = typeContexts[hash][key];
+      assert.deepEqual(extra.map(e=>identify(e.binder.route)).sort(),[...needed].filter(k=>!direct.has(k)).sort());
+      for(const e of extra){
+        assert(owners.has(identify(e.domain.route)));
+        assert.equal(atlas.walk(data,e.domain.route),e.domain.node);
+        assert.equal(e.use.route.root,e.domain.route.root);
+        assert.deepEqual(e.use.route.slots.slice(0,e.domain.route.slots.length),e.domain.route.slots);
+        assert.equal(atlas.walk(data,e.use.route),e.use.node);
+        assert.deepEqual(atlas.binding(data,e.use.route),{node:e.binder.node,route:e.binder.route});
+      }
+      if(extra.length)result.groupsWithTypeAdditions++;
+      result.typeAdditions+=extra.length;
       if(refs.length>1)result.multipleBinders++;
       result.largestInterface=Math.max(refs.length,result.largestInterface);
     }

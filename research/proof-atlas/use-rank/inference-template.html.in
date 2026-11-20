@@ -16,6 +16,7 @@
 <details><summary>Compiled provenance</summary><p id="identity" class="meta"></p></details></main>
 <script>/* SELECTOR */
 const examples=/* EXAMPLES */;
+const typeContexts=/* TYPE CONTEXTS */;
 const groupBindings=/* GROUP BINDINGS */;
 const flows=/* FLOWS */;
 const el=id=>document.getElementById(id);
@@ -165,6 +166,19 @@ function traceClause(){
      caption.textContent=refs===null?'Enclosing binder references unavailable':'Enclosing binders ('+refs.length+')';panel.append(caption);
      for(const ref of refs||[]){
       const entry=document.createElement('p');entry.append(link(ref.name,ref.binder),' · '+ref.count+' uses · ',link('First use',ref.use));panel.append(entry);
+     }
+     const extra=typeContexts[active.source.indexSha256][part.anchor.route.slots.join('.')];
+     if(extra===null)panel.append('Binder type dependencies unavailable.');
+     else if(extra.length){
+      const detail=document.createElement('details'),heading=document.createElement('summary');
+      detail.className='type-context';heading.textContent='Additional variables used in binder types ('+extra.length+')';detail.append(heading);
+      const list=document.createElement('ul');detail.append(list);
+      for(const item of extra){
+       const row=document.createElement('li');
+       row.append(link(item.name,item.binder),' occurs in ',link('the type of '+item.owner,item.domain),' · ',link('Inspect reference',item.use));
+       list.append(row);
+      }
+      panel.append(detail);
      }
      groups.append(panel);
     }

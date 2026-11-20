@@ -21,7 +21,7 @@ function packet(file,hash) {
   assert.equal(createHash('sha256').update(bytes).digest('hex'),hash);
   return JSON.parse(bytes);
 }
-const examples=[],flows={},groupBindings={};
+const examples=[],flows={},groupBindings={},typeContexts={};
 for(const item of require('./port-results.json')) {
   const {example,source,nativeOwner}=item;
   const {record}=inventory().find(x=>x.record.indexSha256===source.indexSha256 && x.edition===source.edition);
@@ -91,10 +91,12 @@ for(const item of require('./port-results.json')) {
     }
   }
   groupBindings[source.indexSha256]=bindings;
+  typeContexts[source.indexSha256]=require('./group-type-context.cjs')(data,bindings);
 }
 const local=file=>fs.readFileSync(path.join(__dirname,file),'utf8');
 process.stdout.write(local('inference-template.html.in')
   .replace('/* SELECTOR */',()=>local('select-branch.js'))
+  .replace('/* TYPE CONTEXTS */',()=>JSON.stringify(typeContexts).replaceAll('<','\\u003c'))
   .replace('/* GROUP BINDINGS */',()=>JSON.stringify(groupBindings).replaceAll('<','\\u003c'))
   .replace('/* FLOWS */',()=>JSON.stringify(flows).replaceAll('<','\\u003c'))
   .replace('/* EXAMPLES */',()=>JSON.stringify(examples).replaceAll('<','\\u003c')));

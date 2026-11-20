@@ -6,7 +6,9 @@
     "multipleBinders": 55,
     "largestInterface": 8,
     "displayedGroups": 84,
-    "unavailable": 0
+    "unavailable": 0,
+    "groupsWithTypeAdditions": 0,
+    "typeAdditions": 0
   },
   {
     "name": "lean_workbook_4274",
@@ -15,7 +17,9 @@
     "multipleBinders": 6,
     "largestInterface": 2,
     "displayedGroups": 26,
-    "unavailable": 0
+    "unavailable": 0,
+    "groupsWithTypeAdditions": 3,
+    "typeAdditions": 3
   },
   {
     "name": "lean_workbook_plus_15068",
@@ -24,7 +28,9 @@
     "multipleBinders": 34,
     "largestInterface": 6,
     "displayedGroups": 60,
-    "unavailable": 0
+    "unavailable": 0,
+    "groupsWithTypeAdditions": 0,
+    "typeAdditions": 0
   },
   {
     "name": "lean_workbook_plus_19617",
@@ -33,7 +39,9 @@
     "multipleBinders": 18,
     "largestInterface": 3,
     "displayedGroups": 25,
-    "unavailable": 0
+    "unavailable": 0,
+    "groupsWithTypeAdditions": 3,
+    "typeAdditions": 3
   },
   {
     "name": "lean_workbook_plus_39831",
@@ -42,7 +50,9 @@
     "multipleBinders": 19,
     "largestInterface": 4,
     "displayedGroups": 32,
-    "unavailable": 0
+    "unavailable": 0,
+    "groupsWithTypeAdditions": 0,
+    "typeAdditions": 0
   },
   {
     "name": "lean_workbook_plus_6206",
@@ -51,6 +61,8 @@
     "multipleBinders": 57,
     "largestInterface": 8,
     "displayedGroups": 84,
-    "unavailable": 0
+    "unavailable": 0,
+    "groupsWithTypeAdditions": 0,
+    "typeAdditions": 0
   }
 ]

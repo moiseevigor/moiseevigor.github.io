@@ -55,10 +55,15 @@ const {open}=require('./model.cjs');
                   const url=new URL(await links.nth(k).getAttribute('href'));
                   const refs=await partition.locator('.group-inputs').nth(k).evaluate((panel,slots)=>{
                     panel.open=true;
-                    return {expected:groupBindings[active.source.indexSha256][slots].map(r=>[address(r.binder),address(r.use)]),
+                    const extra=typeContexts[active.source.indexSha256][slots], detail=panel.querySelector('.type-context');
+                    if(detail)detail.open=true;
+                    return {extra:extra.map(r=>[address(r.binder),address(r.domain),address(r.use)]),
+                      shown:[...panel.querySelectorAll('.type-context li')].map(li=>[...li.querySelectorAll('a')].map(a=>a.href)),
+                      expected:groupBindings[active.source.indexSha256][slots].map(r=>[address(r.binder),address(r.use)]),
                       actual:[...panel.querySelectorAll('p')].map(row=>[...row.querySelectorAll('a')].map(a=>a.href))};
                   },part.anchor.route.slots.join('.'));
                   assert.deepEqual(refs.actual,refs.expected);
+                  assert.deepEqual(refs.shown,refs.extra);
                   assert.equal(url.hash,'#expr-'+part.anchor.node);
                   assert.equal(url.searchParams.get('route'),part.anchor.route.root+':'+part.anchor.route.slots.join('.'));
                 }
@@ -84,7 +89,7 @@ const {open}=require('./model.cjs');
               }
               if(b.fields.length){
                 await rows.nth(j).locator(':scope > details:not(.branch-groups) > summary').click();
-                const links=rows.nth(j).locator('ul a');
+                const links=rows.nth(j).locator(':scope > details:not(.branch-groups) > ul a');
                 assert.equal(await links.count(),b.fields.length);
                 for(const [k,f] of b.fields.entries()){
                   const url=new URL(await links.nth(k).getAttribute('href'));

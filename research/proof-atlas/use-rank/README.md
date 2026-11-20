@@ -182,7 +182,7 @@ The largest group shrinks relative to the first split in 75 of the 77 cases with
 
 ## Lexical inputs of a folded group
 
-Open **Enclosing binders** below a partition member to see which variables bound outside that subtree occur inside it. Each row gives an expanded direct use count and two original occurrence links: the binder and its first use in source field order. Internally bound references drop out when computing the interface. References inside type fields count. The named declaration and full root/slot route identify a group; different partitions can contain the same group. This describes direct lexical references, including local definitions. It does not close their types transitively or identify a minimal set of mathematical hypotheses.
+Open **Enclosing binders** below a partition member to see which variables bound outside that subtree occur inside it. Each row gives an expanded direct use count and two original occurrence links: the binder and its first use in source field order. Internally bound references drop out when computing the interface. References inside type fields count. The named declaration and full root/slot route identify a group; different partitions can contain the same group. This describes direct lexical references, including local definitions. The direct-use counts describe syntax inside the group. The separate binder-type expansion below follows dependencies outside it.
 
 Across six AI proofs the 311 group appearances correspond to 230 distinct source occurrences. Of those, 189 reference at least two enclosing binders. The largest observed interface has eight. In the Iff.mpr example, the group with 12,850 uses of a mentions three enclosing binders (a, b and c), while the group with 758 uses of a mentions eight. Balancing by one binder's frequency can therefore put the larger lexical interface in the smaller group.
 
@@ -257,3 +257,14 @@ We compared four encodings of the same sorted input-occurrence paths. Full store
 The published set includes the 36 nonempty theorem bodies (780 positions); the AI set includes all six previously measured bodies (408 positions), including four empty lists. All four layouts reproduced the exact sorted paths after serialization, compression, decompression and decoding. The binder-relative layout saved raw JSON bytes in aggregate but increased the gzip total for both sets. The six-byte difference on the AI set is too small to motivate a transport choice. Binding-relative links remain useful for navigation; these measurements supply no size advantage for switching the existing transport to that layout.
 
 Reproduce from the repository root with `node research/proof-atlas/use-rank/relative-bindings.cjs --bytes`. The benchmark includes route payloads and their envelope. Source packets, function suffixes, type evidence, renderer state and allocation costs are outside the comparison. [Encoder and round-trip check](path-bytes.cjs) · [Per-declaration results](path-bytes.json).
+
+
+## Variables required to read binder types
+
+In six of the 230 distinct folded subtrees, reading the declared types of the directly used variables introduces an additional variable. In lean_workbook_4274, rows 173, 189 and 208 each refer directly to h₁; its declared type mentions b. In lean_workbook_plus_19617, rows 235, 259 and 283 mention h₀ and x; the type of h₀ also mentions f. For the remaining 224 groups, following binder types to closure introduces no additional enclosing variable.
+
+Open **Enclosing binders** in a partition member of the h₁ or h₀ statement flow to inspect these cases. Each added variable has links to the binder, the original type that uses it and the reference inside that type. The search follows type fields transitively, deduplicating by occurrence route, and keeps one discovery witness per addition. Its scope excludes dependencies in the values of local definitions and semantic necessity.
+
+The independent check scans the enclosing binders from innermost to outermost, counting the external indices in each required domain by propagating multiplicities down the source DAG. It compares the complete set with the reader and resolves each displayed witness back to its binder. [Per-proof counts](group-binding-results.json) · [Reader](inferences.html).
+
+A [structural control](check-type-context-control.cjs) uses h of type P x, where P has domain A and x has type A. Starting from h adds P and x, then A once. This exercises a second dependency step absent from the six measured additions. The control constructs expression rows locally; it is outside the compiled corpus.
