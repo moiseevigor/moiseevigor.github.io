@@ -4,6 +4,62 @@ const atlas = require('../../../public/js/proof-atlas-library-data');
 const multiplicity = require('../free-index-multiplicity/model.cjs');
 const binds = (kind,slot) => ((kind === 6 || kind === 7) && slot === 1) || (kind === 8 && slot === 2);
 
+function makeSplits(refs,limits) {
+  const live=new Map(), splits=new Map();
+  let cells=0, digits=0, peakCells=0, peakDigits=0;
+  function account(value,direction) {
+    cells+=direction;
+    digits+=direction*value.toString().length;
+    if (cells>limits.coefficientCells) throw Error('Ordinal count unavailable: coefficient-cell-bound');
+    if (digits>limits.decimalDigits) throw Error('Ordinal count unavailable: decimal-digit-bound');
+    peakCells=Math.max(peakCells,cells);
+    peakDigits=Math.max(peakDigits,digits);
+  }
+  function consume(key,children,isUse) {
+    let value=isUse ? 1n : 0n;
+    let mask=0;
+    const parts=[];
+    for (const [slot,child] of children.entries()) {
+      const weight=live.get(child);
+      if (weight!==undefined) {
+        mask |= 1<<slot;
+        value+=weight;
+        parts.push(weight);
+      }
+    }
+    if (value>0n) {
+      account(value,1);
+      live.set(key,value);
+      if (children.length) {
+        parts.pop();
+        for (const part of parts) account(part,1);
+        splits.set(key,{mask,parts});
+      }
+    }
+    for (const child of children) {
+      if (!refs.has(child)) continue;
+      const remaining=refs.get(child)-1;
+      if (remaining) refs.set(child,remaining);
+      else {
+        refs.delete(child);
+        if (live.has(child)) { account(live.get(child),-1); live.delete(child); }
+      }
+    }
+  }
+  function totalAt(key) {return live.get(key) ?? 0n;}
+  function weights(key,children,parentTotal) {
+    const split=splits.get(key);
+    let offset=0,remainder=parentTotal;
+    return children.map((_,slot)=>{
+      if (!split || !(split.mask & (1<<slot))) return 0n;
+      const weight=offset<split.parts.length ? split.parts[offset++] : remainder;
+      remainder-=weight;
+      return weight;
+    });
+  }
+  return {consume,weights,totalAt,stats:()=>({peakCells,peakDigits,splitStates:splits.size})};
+}
+
 function open(data, binder, options = {}) {
   const limits = {...multiplicity.limits,...options};
   for (const [key,value] of Object.entries(limits)) {
@@ -35,7 +91,7 @@ function open(data, binder, options = {}) {
   // field mask and only the counts before the last positive field, whose size
   // follows from the parent total. Unary paths therefore need no coefficients.
   queries.sort((a,b) => a.node-b.node);
-  const refs = new Map(), live = new Map(), splits = new Map();
+  const refs = new Map();
   const keyOf = (node,index) => node+':'+index;
   function childKeys(node,index) {
     return data.children[node].map((child,slot) =>
@@ -46,58 +102,12 @@ function open(data, binder, options = {}) {
       if (seen.has(key)) refs.set(key,(refs.get(key) || 0)+1);
     }
   }
-  let cells=0, digits=0, peakCells=0, peakDigits=0, total=0n;
-  function account(value,direction) {
-    cells+=direction;
-    digits+=direction*value.toString().length;
-    if (cells>limits.coefficientCells) throw Error('Ordinal count unavailable: coefficient-cell-bound');
-    if (digits>limits.decimalDigits) throw Error('Ordinal count unavailable: decimal-digit-bound');
-    peakCells=Math.max(peakCells,cells);
-    peakDigits=Math.max(peakDigits,digits);
-  }
+  const table=makeSplits(refs,limits);
   for (const {node,index} of queries) {
-    const key=keyOf(node,index), children=childKeys(node,index);
-    let value=data.kind[node]===0 && data.payloads[node].index===index ? 1n : 0n;
-    let mask=0;
-    const parts=[];
-    for (const [slot,child] of children.entries()) {
-      const weight=live.get(child);
-      if (weight!==undefined) {
-        mask |= 1<<slot;
-        value+=weight;
-        parts.push(weight);
-      }
-    }
-    if (value>0n) {
-      account(value,1);
-      live.set(key,value);
-      if (children.length) {
-        parts.pop();
-        for (const part of parts) account(part,1);
-        splits.set(key,{mask,parts});
-      }
-    }
-    for (const child of children) {
-      if (!refs.has(child)) continue;
-      const remaining=refs.get(child)-1;
-      if (remaining) refs.set(child,remaining);
-      else {
-        refs.delete(child);
-        if (live.has(child)) { account(live.get(child),-1); live.delete(child); }
-      }
-    }
+    table.consume(keyOf(node,index),childKeys(node,index),data.kind[node]===0 && data.payloads[node].index===index);
   }
-  total=live.get(keyOf(body,0)) ?? 0n;
-  function weights(node,index,parentTotal) {
-    const split=splits.get(keyOf(node,index));
-    let offset=0,remainder=parentTotal;
-    return data.children[node].map((_,slot)=>{
-      if (!split || !(split.mask & (1<<slot))) return 0n;
-      const weight=offset<split.parts.length ? split.parts[offset++] : remainder;
-      remainder-=weight;
-      return weight;
-    });
-  }
+  const total=table.totalAt(keyOf(body,0));
+  const weights=(node,index,mass)=>table.weights(keyOf(node,index),data.children[node],mass);
   function select(ordinal) {
     if (typeof ordinal !== 'bigint' || ordinal < 1n || ordinal > total) throw RangeError('Ordinal outside binder uses');
     const slots = [...prefix];
@@ -132,6 +142,6 @@ function open(data, binder, options = {}) {
     if (data.kind[node] !== 0 || data.payloads[node].index !== index) throw Error('Expected use of selected binder');
     return ordinal;
   }
-  return {select,rank,total,states:queries.length,peakCells,peakDigits,splitStates:splits.size};
+  return {select,rank,total,states:queries.length,...table.stats()};
 }
-module.exports = {open};
+module.exports = {open,makeSplits,binds};
