@@ -127,6 +127,17 @@ function traceClause(){
  coverage.append(c.total==='0'?'The binder has no lexical uses in its proof body.':c.covered+' of '+c.total+' uses in the binder body lie inside the recorded calls, counting each occurrence once.');
  if(c.firstOutside)coverage.append(' ',link('Inspect first use outside the recorded calls',c.firstOutside));
  area.append(coverage);
+ if(c.branches.regions){
+  const panel=document.createElement('details'),heading=document.createElement('summary'),list=document.createElement('ol');
+  panel.className='outside-branches';
+  heading.textContent='Largest uncovered branches ('+c.branches.largest.length+' of '+c.branches.regions+')';
+  for(const b of c.branches.largest){
+   const row=document.createElement('li');
+   row.append(link(b.kind+' · '+b.count+' uses',b.anchor),' · ',link('First occurrence',b.first));
+   const path=document.createElement('code');path.textContent=b.path;row.append(document.createElement('br'),path);list.append(row);
+  }
+  panel.append(heading,list);area.append(panel);
+ }
  if(clause.containing.length){
   const detail=document.createElement('details'),title=document.createElement('summary'),list=document.createElement('ul');
   title.textContent='Inspect occurrences inside calls';detail.append(title,list);

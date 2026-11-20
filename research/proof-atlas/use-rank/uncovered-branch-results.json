@@ -1,0 +1,283 @@
+[
+  {
+    "name": "lean_workbook_20418",
+    "hash": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+    "rows": [
+      {
+        "binder": "a",
+        "uncovered": "90192",
+        "regions": 10,
+        "displayed": 3,
+        "topThree": "90175"
+      },
+      {
+        "binder": "b",
+        "uncovered": "82793",
+        "regions": 9,
+        "displayed": 3,
+        "topThree": "82760"
+      },
+      {
+        "binder": "c",
+        "uncovered": "77994",
+        "regions": 9,
+        "displayed": 3,
+        "topThree": "77923"
+      },
+      {
+        "binder": "h₀",
+        "uncovered": "43",
+        "regions": 5,
+        "displayed": 3,
+        "topThree": "41"
+      },
+      {
+        "binder": "h₁",
+        "uncovered": "32",
+        "regions": 5,
+        "displayed": 3,
+        "topThree": "30"
+      },
+      {
+        "binder": "h₂",
+        "uncovered": "35",
+        "regions": 5,
+        "displayed": 3,
+        "topThree": "33"
+      },
+      {
+        "binder": "h₃",
+        "uncovered": "40",
+        "regions": 5,
+        "displayed": 3,
+        "topThree": "38"
+      }
+    ]
+  },
+  {
+    "name": "lean_workbook_4274",
+    "hash": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+    "rows": [
+      {
+        "binder": "n",
+        "uncovered": "15",
+        "regions": 5,
+        "displayed": 3,
+        "topThree": "9"
+      },
+      {
+        "binder": "b",
+        "uncovered": "316",
+        "regions": 19,
+        "displayed": 3,
+        "topThree": "275"
+      },
+      {
+        "binder": "h₁",
+        "uncovered": "3",
+        "regions": 3,
+        "displayed": 3,
+        "topThree": "3"
+      },
+      {
+        "binder": "h₂",
+        "uncovered": "2",
+        "regions": 2,
+        "displayed": 2,
+        "topThree": "2"
+      }
+    ]
+  },
+  {
+    "name": "lean_workbook_plus_15068",
+    "hash": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+    "rows": [
+      {
+        "binder": "a",
+        "uncovered": "28934",
+        "regions": 40,
+        "displayed": 3,
+        "topThree": "23870"
+      },
+      {
+        "binder": "b",
+        "uncovered": "25195",
+        "regions": 40,
+        "displayed": 3,
+        "topThree": "20606"
+      },
+      {
+        "binder": "ha",
+        "uncovered": "13",
+        "regions": 4,
+        "displayed": 3,
+        "topThree": "12"
+      },
+      {
+        "binder": "hb",
+        "uncovered": "13",
+        "regions": 4,
+        "displayed": 3,
+        "topThree": "12"
+      },
+      {
+        "binder": "hab",
+        "uncovered": "9",
+        "regions": 3,
+        "displayed": 3,
+        "topThree": "9"
+      },
+      {
+        "binder": "hab'",
+        "uncovered": "0",
+        "regions": 0,
+        "displayed": 0,
+        "topThree": "0"
+      },
+      {
+        "binder": "hab''",
+        "uncovered": "0",
+        "regions": 0,
+        "displayed": 0,
+        "topThree": "0"
+      },
+      {
+        "binder": "h",
+        "uncovered": "3",
+        "regions": 3,
+        "displayed": 3,
+        "topThree": "3"
+      }
+    ]
+  },
+  {
+    "name": "lean_workbook_plus_19617",
+    "hash": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+    "rows": [
+      {
+        "binder": "f",
+        "uncovered": "25",
+        "regions": 7,
+        "displayed": 3,
+        "topThree": "12"
+      },
+      {
+        "binder": "h₀",
+        "uncovered": "3",
+        "regions": 3,
+        "displayed": 3,
+        "topThree": "3"
+      },
+      {
+        "binder": "h₁",
+        "uncovered": "0",
+        "regions": 0,
+        "displayed": 0,
+        "topThree": "0"
+      },
+      {
+        "binder": "x",
+        "uncovered": "17",
+        "regions": 7,
+        "displayed": 3,
+        "topThree": "12"
+      }
+    ]
+  },
+  {
+    "name": "lean_workbook_plus_39831",
+    "hash": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+    "rows": [
+      {
+        "binder": "a",
+        "uncovered": "1176",
+        "regions": 25,
+        "displayed": 3,
+        "topThree": "1088"
+      },
+      {
+        "binder": "b",
+        "uncovered": "628",
+        "regions": 23,
+        "displayed": 3,
+        "topThree": "578"
+      },
+      {
+        "binder": "ha",
+        "uncovered": "7",
+        "regions": 5,
+        "displayed": 3,
+        "topThree": "5"
+      },
+      {
+        "binder": "hb",
+        "uncovered": "3",
+        "regions": 3,
+        "displayed": 3,
+        "topThree": "3"
+      },
+      {
+        "binder": "hab",
+        "uncovered": "0",
+        "regions": 0,
+        "displayed": 0,
+        "topThree": "0"
+      }
+    ]
+  },
+  {
+    "name": "lean_workbook_plus_6206",
+    "hash": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+    "rows": [
+      {
+        "binder": "a",
+        "uncovered": "80771",
+        "regions": 26,
+        "displayed": 3,
+        "topThree": "80641"
+      },
+      {
+        "binder": "b",
+        "uncovered": "91286",
+        "regions": 23,
+        "displayed": 3,
+        "topThree": "91143"
+      },
+      {
+        "binder": "c",
+        "uncovered": "96890",
+        "regions": 25,
+        "displayed": 3,
+        "topThree": "96762"
+      },
+      {
+        "binder": "h₀",
+        "uncovered": "41",
+        "regions": 3,
+        "displayed": 3,
+        "topThree": "41"
+      },
+      {
+        "binder": "h₁",
+        "uncovered": "40",
+        "regions": 4,
+        "displayed": 3,
+        "topThree": "38"
+      },
+      {
+        "binder": "h₂",
+        "uncovered": "37",
+        "regions": 4,
+        "displayed": 3,
+        "topThree": "36"
+      },
+      {
+        "binder": "h₃",
+        "uncovered": "33",
+        "regions": 3,
+        "displayed": 3,
+        "topThree": "33"
+      }
+    ]
+  }
+]

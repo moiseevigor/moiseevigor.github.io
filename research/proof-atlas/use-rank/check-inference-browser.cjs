@@ -37,6 +37,20 @@ const {open}=require('./model.cjs');
             assert.equal(url.searchParams.get('route'),outside.route.root+':'+outside.route.slots.join('.'));
             assert.equal(url.hash,'#expr-'+outside.node);
           }
+          const branches=page.locator('#flow .outside-branches');
+          assert.equal(await branches.count(),c.coverage.branches.regions?1:0);
+          if(c.coverage.branches.regions){
+            await branches.locator('summary').click();
+            const rows=branches.locator('li');assert.equal(await rows.count(),c.coverage.branches.largest.length);
+            for(const [j,b] of c.coverage.branches.largest.entries()){
+              assert.equal(await rows.nth(j).locator('code').textContent(),b.path);
+              for(const [k,hit] of [b.anchor,b.first].entries()){
+                const url=new URL(await rows.nth(j).locator('a').nth(k).getAttribute('href'));
+                assert.equal(url.searchParams.get('route'),hit.route.root+':'+hit.route.slots.join('.'));
+                assert.equal(url.hash,'#expr-'+hit.node);
+              }
+            }
+          }
           const edges=[...c.direct,...c.subsequent];
           const links=page.locator('#flow a[href^="#"]');
           assert.equal(await links.count(),edges.length);
@@ -45,7 +59,7 @@ const {open}=require('./model.cjs');
             await page.waitForFunction(e=>active.callId===e.call && document.querySelector('.premise[data-selected]')?.dataset.slot===String(e.slot),e);
             await page.goBack();await page.waitForFunction(i=>active===examples[i],i);
           }
-          const occurrences=page.locator('#flow details a');
+          const occurrences=page.locator('#flow details:not(.outside-branches) a');
           assert.equal(await occurrences.count(),c.containing.length);
           for(const [j,hit] of c.containing.entries()){
             const url=new URL(await occurrences.nth(j).getAttribute('href'));

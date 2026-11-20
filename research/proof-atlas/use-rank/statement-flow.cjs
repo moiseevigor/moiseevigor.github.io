@@ -1,6 +1,7 @@
 // Trace exact input positions forward through the recorded source-use graph.
 'use strict';
 const {open}=require('./model.cjs');
+const uncoveredBranches=require('./uncovered-branches.cjs');
 module.exports=function statementFlow(data,calls){
   const clauses=[];
   let [statement,proof]=data.roots;
@@ -11,8 +12,9 @@ module.exports=function statementFlow(data,calls){
     const uses=open(data,{root:1,slots:prefix});
     const bodySlots=[...prefix,1],containing=[],ranges=[];
     for(const c of calls){
-      if(c.call.route.root!==1 || !bodySlots.every((v,i)=>c.call.route.slots[i]===v))continue;
-      const hit=uses.interval(c.call.route);
+      const r=c.call.route;
+      if(r.root!==1 || !r.slots.slice(0,bodySlots.length).every((v,i)=>v===bodySlots[i]))continue;
+      const hit=r.slots.length<bodySlots.length ? {first:1n,count:uses.total} : uses.interval(r);
       if(hit.count){
         containing.push({call:c.callId,count:String(hit.count),first:uses.select(hit.first)});
         ranges.push({start:hit.first,end:hit.first+hit.count});
@@ -28,6 +30,7 @@ module.exports=function statementFlow(data,calls){
     }
     if(gap===null && cursor<=uses.total)gap=cursor;
     const coverage={total:String(uses.total),covered:String(covered),firstOutside:gap===null?null:uses.select(gap)};
+    coverage.branches=uncoveredBranches(data,{root:1,slots:bodySlots},calls.map(c=>c.call.route),uses,uses.total-covered);
     const direct=[],subsequent=[],queue=[],seen=new Set();
     function enqueue(id){if(!seen.has(id)){seen.add(id);queue.push(id);}}
     for(const c of calls)for(const p of c.ports){
