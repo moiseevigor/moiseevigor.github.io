@@ -1,0 +1,786 @@
+[
+  {
+    "name": "lean_workbook_20418",
+    "packet": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+    "binder": {
+      "root": 1,
+      "slots": []
+    },
+    "call": 0,
+    "order": "field",
+    "totalUses": 2,
+    "local": [
+      {
+        "slot": 0,
+        "sourceLoads": 4,
+        "bytes": 18822
+      },
+      {
+        "slot": 1,
+        "sourceLoads": 9,
+        "bytes": 37456
+      },
+      {
+        "slot": 2,
+        "sourceLoads": 13,
+        "bytes": 52631
+      },
+      {
+        "slot": 3,
+        "sourceLoads": 16,
+        "bytes": 62114
+      },
+      {
+        "slot": 4,
+        "sourceLoads": 17,
+        "bytes": 64310
+      },
+      {
+        "slot": 5,
+        "sourceLoads": 18,
+        "bytes": 69125
+      },
+      {
+        "slot": 6,
+        "sourceLoads": 26,
+        "bytes": 103797
+      }
+    ],
+    "shared": [
+      {
+        "slot": 0,
+        "sourceLoads": 10,
+        "bytes": 44851
+      },
+      {
+        "slot": 1,
+        "sourceLoads": 14,
+        "bytes": 58116
+      },
+      {
+        "slot": 2,
+        "sourceLoads": 17,
+        "bytes": 67922
+      },
+      {
+        "slot": 3,
+        "sourceLoads": 19,
+        "bytes": 73946
+      },
+      {
+        "slot": 4,
+        "sourceLoads": 19,
+        "bytes": 73946
+      },
+      {
+        "slot": 5,
+        "sourceLoads": 20,
+        "bytes": 78761
+      },
+      {
+        "slot": 6,
+        "sourceLoads": 22,
+        "bytes": 87404
+      }
+    ]
+  },
+  {
+    "name": "lean_workbook_20418",
+    "packet": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+    "binder": {
+      "root": 1,
+      "slots": []
+    },
+    "call": 0,
+    "order": "proof-first",
+    "totalUses": 2,
+    "local": [
+      {
+        "slot": 4,
+        "sourceLoads": 1,
+        "bytes": 7753
+      },
+      {
+        "slot": 6,
+        "sourceLoads": 9,
+        "bytes": 42425
+      },
+      {
+        "slot": 0,
+        "sourceLoads": 13,
+        "bytes": 55690
+      },
+      {
+        "slot": 1,
+        "sourceLoads": 18,
+        "bytes": 74324
+      },
+      {
+        "slot": 2,
+        "sourceLoads": 22,
+        "bytes": 89499
+      },
+      {
+        "slot": 3,
+        "sourceLoads": 25,
+        "bytes": 98982
+      },
+      {
+        "slot": 5,
+        "sourceLoads": 27,
+        "bytes": 105993
+      }
+    ],
+    "shared": [
+      {
+        "slot": 4,
+        "sourceLoads": 8,
+        "bytes": 37610
+      },
+      {
+        "slot": 6,
+        "sourceLoads": 9,
+        "bytes": 42425
+      },
+      {
+        "slot": 0,
+        "sourceLoads": 13,
+        "bytes": 55690
+      },
+      {
+        "slot": 1,
+        "sourceLoads": 17,
+        "bytes": 68955
+      },
+      {
+        "slot": 2,
+        "sourceLoads": 20,
+        "bytes": 78761
+      },
+      {
+        "slot": 3,
+        "sourceLoads": 22,
+        "bytes": 84785
+      },
+      {
+        "slot": 5,
+        "sourceLoads": 23,
+        "bytes": 89600
+      }
+    ]
+  },
+  {
+    "name": "lean_workbook_4274",
+    "packet": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+    "binder": {
+      "root": 1,
+      "slots": [
+        1
+      ]
+    },
+    "call": 3,
+    "order": "field",
+    "totalUses": 6,
+    "local": [
+      {
+        "slot": 0,
+        "sourceLoads": 2,
+        "bytes": 8168
+      },
+      {
+        "slot": 1,
+        "sourceLoads": 3,
+        "bytes": 10405
+      },
+      {
+        "slot": 2,
+        "sourceLoads": 5,
+        "bytes": 14549
+      },
+      {
+        "slot": 3,
+        "sourceLoads": 6,
+        "bytes": 16786
+      },
+      {
+        "slot": 4,
+        "sourceLoads": 8,
+        "bytes": 21352
+      },
+      {
+        "slot": 5,
+        "sourceLoads": 13,
+        "bytes": 31785
+      },
+      {
+        "slot": 6,
+        "sourceLoads": 18,
+        "bytes": 42218
+      }
+    ],
+    "shared": [
+      {
+        "slot": 0,
+        "sourceLoads": 4,
+        "bytes": 12220
+      },
+      {
+        "slot": 1,
+        "sourceLoads": 4,
+        "bytes": 12220
+      },
+      {
+        "slot": 2,
+        "sourceLoads": 4,
+        "bytes": 12220
+      },
+      {
+        "slot": 3,
+        "sourceLoads": 5,
+        "bytes": 14457
+      },
+      {
+        "slot": 4,
+        "sourceLoads": 7,
+        "bytes": 19023
+      },
+      {
+        "slot": 5,
+        "sourceLoads": 10,
+        "bytes": 25404
+      },
+      {
+        "slot": 6,
+        "sourceLoads": 13,
+        "bytes": 31785
+      }
+    ]
+  },
+  {
+    "name": "lean_workbook_4274",
+    "packet": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+    "binder": {
+      "root": 1,
+      "slots": [
+        1
+      ]
+    },
+    "call": 3,
+    "order": "proof-first",
+    "totalUses": 6,
+    "local": [
+      {
+        "slot": 6,
+        "sourceLoads": 5,
+        "bytes": 14457
+      },
+      {
+        "slot": 0,
+        "sourceLoads": 7,
+        "bytes": 18601
+      },
+      {
+        "slot": 1,
+        "sourceLoads": 8,
+        "bytes": 20838
+      },
+      {
+        "slot": 2,
+        "sourceLoads": 10,
+        "bytes": 24982
+      },
+      {
+        "slot": 3,
+        "sourceLoads": 11,
+        "bytes": 27219
+      },
+      {
+        "slot": 4,
+        "sourceLoads": 13,
+        "bytes": 31785
+      },
+      {
+        "slot": 5,
+        "sourceLoads": 18,
+        "bytes": 42218
+      }
+    ],
+    "shared": [
+      {
+        "slot": 6,
+        "sourceLoads": 5,
+        "bytes": 14457
+      },
+      {
+        "slot": 0,
+        "sourceLoads": 7,
+        "bytes": 18601
+      },
+      {
+        "slot": 1,
+        "sourceLoads": 7,
+        "bytes": 18601
+      },
+      {
+        "slot": 2,
+        "sourceLoads": 7,
+        "bytes": 18601
+      },
+      {
+        "slot": 3,
+        "sourceLoads": 8,
+        "bytes": 20838
+      },
+      {
+        "slot": 4,
+        "sourceLoads": 10,
+        "bytes": 25404
+      },
+      {
+        "slot": 5,
+        "sourceLoads": 13,
+        "bytes": 31785
+      }
+    ]
+  },
+  {
+    "name": "lean_workbook_plus_15068",
+    "packet": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+    "binder": {
+      "root": 1,
+      "slots": []
+    },
+    "call": 2,
+    "order": "field",
+    "totalUses": 668,
+    "local": [
+      {
+        "slot": 0,
+        "sourceLoads": 5,
+        "bytes": 18123
+      },
+      {
+        "slot": 1,
+        "sourceLoads": 11,
+        "bytes": 36280
+      },
+      {
+        "slot": 2,
+        "sourceLoads": 16,
+        "bytes": 49361
+      },
+      {
+        "slot": 3,
+        "sourceLoads": 21,
+        "bytes": 62442
+      },
+      {
+        "slot": 4,
+        "sourceLoads": 29,
+        "bytes": 87972
+      },
+      {
+        "slot": 5,
+        "sourceLoads": 35,
+        "bytes": 106129
+      },
+      {
+        "slot": 6,
+        "sourceLoads": 44,
+        "bytes": 139076
+      },
+      {
+        "slot": 7,
+        "sourceLoads": 53,
+        "bytes": 172023
+      },
+      {
+        "slot": 8,
+        "sourceLoads": 64,
+        "bytes": 212343
+      },
+      {
+        "slot": 9,
+        "sourceLoads": 87,
+        "bytes": 293989
+      },
+      {
+        "slot": 10,
+        "sourceLoads": 112,
+        "bytes": 383844
+      },
+      {
+        "slot": 11,
+        "sourceLoads": 128,
+        "bytes": 440374
+      }
+    ],
+    "shared": [
+      {
+        "slot": 0,
+        "sourceLoads": 23,
+        "bytes": 85138
+      },
+      {
+        "slot": 1,
+        "sourceLoads": 26,
+        "bytes": 93768
+      },
+      {
+        "slot": 2,
+        "sourceLoads": 29,
+        "bytes": 102398
+      },
+      {
+        "slot": 3,
+        "sourceLoads": 32,
+        "bytes": 111028
+      },
+      {
+        "slot": 4,
+        "sourceLoads": 39,
+        "bytes": 132992
+      },
+      {
+        "slot": 5,
+        "sourceLoads": 42,
+        "bytes": 141622
+      },
+      {
+        "slot": 6,
+        "sourceLoads": 50,
+        "bytes": 168629
+      },
+      {
+        "slot": 7,
+        "sourceLoads": 58,
+        "bytes": 195636
+      },
+      {
+        "slot": 8,
+        "sourceLoads": 65,
+        "bytes": 217600
+      },
+      {
+        "slot": 9,
+        "sourceLoads": 70,
+        "bytes": 233615
+      },
+      {
+        "slot": 10,
+        "sourceLoads": 75,
+        "bytes": 252004
+      },
+      {
+        "slot": 11,
+        "sourceLoads": 79,
+        "bytes": 267574
+      }
+    ]
+  },
+  {
+    "name": "lean_workbook_plus_15068",
+    "packet": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+    "binder": {
+      "root": 1,
+      "slots": []
+    },
+    "call": 2,
+    "order": "proof-first",
+    "totalUses": 668,
+    "local": [
+      {
+        "slot": 3,
+        "sourceLoads": 5,
+        "bytes": 18123
+      },
+      {
+        "slot": 9,
+        "sourceLoads": 28,
+        "bytes": 99769
+      },
+      {
+        "slot": 10,
+        "sourceLoads": 53,
+        "bytes": 189624
+      },
+      {
+        "slot": 11,
+        "sourceLoads": 69,
+        "bytes": 246154
+      },
+      {
+        "slot": 0,
+        "sourceLoads": 74,
+        "bytes": 259235
+      },
+      {
+        "slot": 1,
+        "sourceLoads": 80,
+        "bytes": 277392
+      },
+      {
+        "slot": 2,
+        "sourceLoads": 85,
+        "bytes": 290473
+      },
+      {
+        "slot": 4,
+        "sourceLoads": 93,
+        "bytes": 316003
+      },
+      {
+        "slot": 5,
+        "sourceLoads": 99,
+        "bytes": 334160
+      },
+      {
+        "slot": 6,
+        "sourceLoads": 108,
+        "bytes": 367107
+      },
+      {
+        "slot": 7,
+        "sourceLoads": 117,
+        "bytes": 400054
+      },
+      {
+        "slot": 8,
+        "sourceLoads": 128,
+        "bytes": 440374
+      }
+    ],
+    "shared": [
+      {
+        "slot": 3,
+        "sourceLoads": 23,
+        "bytes": 85138
+      },
+      {
+        "slot": 9,
+        "sourceLoads": 28,
+        "bytes": 101153
+      },
+      {
+        "slot": 10,
+        "sourceLoads": 33,
+        "bytes": 119542
+      },
+      {
+        "slot": 11,
+        "sourceLoads": 37,
+        "bytes": 135112
+      },
+      {
+        "slot": 0,
+        "sourceLoads": 40,
+        "bytes": 143742
+      },
+      {
+        "slot": 1,
+        "sourceLoads": 43,
+        "bytes": 152372
+      },
+      {
+        "slot": 2,
+        "sourceLoads": 46,
+        "bytes": 161002
+      },
+      {
+        "slot": 4,
+        "sourceLoads": 53,
+        "bytes": 182966
+      },
+      {
+        "slot": 5,
+        "sourceLoads": 56,
+        "bytes": 191596
+      },
+      {
+        "slot": 6,
+        "sourceLoads": 64,
+        "bytes": 218603
+      },
+      {
+        "slot": 7,
+        "sourceLoads": 72,
+        "bytes": 245610
+      },
+      {
+        "slot": 8,
+        "sourceLoads": 79,
+        "bytes": 267574
+      }
+    ]
+  },
+  {
+    "name": "lean_workbook_plus_39831",
+    "packet": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+    "binder": {
+      "root": 1,
+      "slots": []
+    },
+    "call": 2,
+    "order": "field",
+    "totalUses": 265,
+    "local": [
+      {
+        "slot": 0,
+        "sourceLoads": 4,
+        "bytes": 11519
+      },
+      {
+        "slot": 1,
+        "sourceLoads": 9,
+        "bytes": 20996
+      },
+      {
+        "slot": 2,
+        "sourceLoads": 13,
+        "bytes": 28021
+      },
+      {
+        "slot": 3,
+        "sourceLoads": 19,
+        "bytes": 39580
+      },
+      {
+        "slot": 4,
+        "sourceLoads": 23,
+        "bytes": 46915
+      },
+      {
+        "slot": 5,
+        "sourceLoads": 31,
+        "bytes": 62828
+      },
+      {
+        "slot": 6,
+        "sourceLoads": 51,
+        "bytes": 103615
+      }
+    ],
+    "shared": [
+      {
+        "slot": 0,
+        "sourceLoads": 20,
+        "bytes": 45245
+      },
+      {
+        "slot": 1,
+        "sourceLoads": 23,
+        "bytes": 51982
+      },
+      {
+        "slot": 2,
+        "sourceLoads": 26,
+        "bytes": 58719
+      },
+      {
+        "slot": 3,
+        "sourceLoads": 29,
+        "bytes": 65456
+      },
+      {
+        "slot": 4,
+        "sourceLoads": 31,
+        "bytes": 70051
+      },
+      {
+        "slot": 5,
+        "sourceLoads": 32,
+        "bytes": 72228
+      },
+      {
+        "slot": 6,
+        "sourceLoads": 36,
+        "bytes": 80901
+      }
+    ]
+  },
+  {
+    "name": "lean_workbook_plus_39831",
+    "packet": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+    "binder": {
+      "root": 1,
+      "slots": []
+    },
+    "call": 2,
+    "order": "proof-first",
+    "totalUses": 265,
+    "local": [
+      {
+        "slot": 6,
+        "sourceLoads": 20,
+        "bytes": 45281
+      },
+      {
+        "slot": 0,
+        "sourceLoads": 24,
+        "bytes": 52306
+      },
+      {
+        "slot": 1,
+        "sourceLoads": 29,
+        "bytes": 61783
+      },
+      {
+        "slot": 2,
+        "sourceLoads": 33,
+        "bytes": 68808
+      },
+      {
+        "slot": 3,
+        "sourceLoads": 39,
+        "bytes": 80367
+      },
+      {
+        "slot": 4,
+        "sourceLoads": 43,
+        "bytes": 87702
+      },
+      {
+        "slot": 5,
+        "sourceLoads": 51,
+        "bytes": 103615
+      }
+    ],
+    "shared": [
+      {
+        "slot": 6,
+        "sourceLoads": 20,
+        "bytes": 45281
+      },
+      {
+        "slot": 0,
+        "sourceLoads": 23,
+        "bytes": 52018
+      },
+      {
+        "slot": 1,
+        "sourceLoads": 26,
+        "bytes": 58755
+      },
+      {
+        "slot": 2,
+        "sourceLoads": 29,
+        "bytes": 65492
+      },
+      {
+        "slot": 3,
+        "sourceLoads": 32,
+        "bytes": 72229
+      },
+      {
+        "slot": 4,
+        "sourceLoads": 34,
+        "bytes": 76824
+      },
+      {
+        "slot": 5,
+        "sourceLoads": 35,
+        "bytes": 79001
+      }
+    ]
+  }
+]

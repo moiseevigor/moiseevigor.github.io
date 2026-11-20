@@ -62,3 +62,18 @@ A caller can supply a binder occurrence and an input occurrence in its body to t
 [Cold-cache measurements](local-port-results.json) cover every input, including the function head, of one example call in each of the four AI proofs with a measured value/proof split. The 33 inputs include 17 with zero direct references. For all 941 remaining references, the [checker](check-local-ports.cjs) compared the exact selected path with the whole-binder index, independently resolved its lexical binder, and recovered its input-local ordinal. The whole source packet is available only to the comparison. The paged reader's fetcher allows only the selected declaration's page directory.
 
 For the left-side factorization in the denominator example, building the input index took 21 source-page loads against 141 for the whole binder with the same cold cache. Selecting the middle of its 543 uses took two additional page loads. The right-side factorization and nonzero input took 22 and 13 loads to index. All 33 scoped constructions used fewer source-page loads than their respective whole-binder constructions. These measurements count loads, including repeats, with two source pages and one index page allowed. They exclude native input discovery and network latency. Reopening many different inputs can repeat work. No break-even point for repeated navigation or reader comprehension was measured.
+
+## Visiting several inputs of one inference
+
+The paged index now returns the ordinal interval below any original descendant route inside its selected region. When built at an application, it can serve every argument of that occurrence. For a nonempty input interval starting at application-local ordinal *f*, the input's *k*th use is application-local use *f + k − 1*. A zero interval has no first ordinal. Both strategies return the original full occurrence path.
+
+The [comparison](check-visit.cjs) opens each of the 33 inputs once in each of two orders, using the same four applications and binders as the single-input experiment. Each visit requests the input count and, when positive, the middle occurrence. One strategy builds an index for each input. The other builds one application index and requests intervals from it. Both start cold, reuse one two-source-page cursor across the visit sequence, and have the same one-page index cache. The check compares every count and full occurrence address and records cumulative source-page loads and compressed file bytes read after each visit. Bytes include repeated reads and page-directory metadata. The experiment starts with known input addresses and roles.
+
+| AI proof | Visit order | All inputs, separate indices | All inputs, shared application index | First visit at which sharing has fewer cumulative loads |
+| --- | --- | ---: | ---: | ---: |
+| 20418 | Field / proof first | 26 / 27 | 22 / 23 | 7 / 4 |
+| 4274 | Field / proof first | 18 / 18 | 13 / 13 | 3 / 3 |
+| plus 15068 | Field / proof first | 128 / 128 | 79 / 79 | 10 / 3 |
+| plus 39831 | Field / proof first | 51 / 51 | 36 / 35 | 7 / 2 |
+
+In the denominator-clearing case, the shared index reduced the complete traversal from 440,374 to 267,574 compressed bytes in both orders. The first visit alone cost 5 source-page loads with its own index and 23 with the application index. Visiting proof-valued inputs first changed **when** the application index started saving loads. This ordering includes proof-valued instance arguments; its labels come from the recorded argument roles. The four applications were selected for mixed value/proof uses. This comparison does not establish a universal switching threshold, measure elapsed browser time, or test which visit sequence people naturally choose. [Complete measurements by input](visit-results.json).

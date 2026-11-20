@@ -92,7 +92,7 @@ async function open(cursor,binder,{signal,within}={}) {
       node=row.children[slot];index+=Number(binds(row.kind,slot));mass=weights[slot];slots.push(slot);
     }
   }
-  async function rank(route) {
+  async function interval(route) {
     if (route.root!==at.root || prefix.length>route.slots.length ||
         !prefix.every((slot,i)=>slot===route.slots[i])) throw Error('Outside binder body');
     let node=body,index=initialIndex,mass=total,ordinal=1n;
@@ -102,13 +102,15 @@ async function open(cursor,binder,{signal,within}={}) {
       const weights=table.weights(key(node,index),row.children,mass);
       for (let i=0;i<slot;i++) ordinal+=weights[i];
       mass=weights[slot];
-      if (mass===0n) throw Error('No use of this binder on this path');
       node=row.children[slot];index+=Number(binds(row.kind,slot));
     }
-    const leaf=await read(node);
-    if (leaf.kind!==0 || leaf.index!==index) throw Error('Expected use of selected binder');
-    return ordinal;
+    return {node,count:mass,first:mass ? ordinal : null};
   }
-  return {select,rank,source,total,scheduled,evaluated,...table.stats()};
+  async function rank(route) {
+    const hit=await interval(route);
+    if (hit.count!==1n || (await read(hit.node)).kind!==0) throw Error('Expected use of selected binder');
+    return hit.first;
+  }
+  return {select,rank,interval,source,total,scheduled,evaluated,...table.stats()};
 }
 module.exports={open};
