@@ -1,6 +1,6 @@
 # Statement clauses and proof occurrences
 
-[Trace the Riccati bound](riccati.html) follows a statement into its explicit proof introductions. [Read a field projection](projection-example.html) shows a quantified claim supplied by a structure field. Both examples link to original occurrences in a named, compiled packet.
+[Trace the Riccati bound](riccati.html) follows a statement into its explicit proof introductions. [Read a field projection](projection-example.html) shows a quantified claim supplied by a structure field. [Compare two uses of a shared variable](shared-variable.html) switches between one measured example from each inventory. The stem gives the shared proof path. Each branch lists its remaining constructor fields and links to its own use and binder. All three diagrams link to original occurrences in a named, compiled packet.
 
 ## Rule
 
@@ -34,6 +34,7 @@ node "$dir/check-paged.cjs" 1
 node "$dir/check-paged.cjs" 2
 node "$dir/riccati.cjs" < /tmp/atlas-clause-witnesses.json
 node "$dir/projection-example.cjs"
+node "$dir/shared-variable.cjs"
 ```
 
-The two diagram generators emit HTML to standard output. The browser check uses Playwright and the site served at `ATLAS_ORIGIN`. Set `ATLAS_CHROMIUM_PATH` to use an installed Chrome. These checks inspect recorded compiled expressions and interactions. They do not replay Lean or measure reader comprehension.
+The three diagram generators emit HTML to standard output. The browser check uses Playwright and the site served at `ATLAS_ORIGIN`. Set `ATLAS_CHROMIUM_PATH` to use an installed Chrome. These checks inspect recorded compiled expressions and interactions. They do not replay Lean or measure reader comprehension.
