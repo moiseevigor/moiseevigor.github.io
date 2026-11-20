@@ -23,6 +23,27 @@ const {open}=require('./model.cjs');
       const model=open(data,example.binder.route);
       await page.locator('#proof').selectOption(String(i));
       assert.equal(await page.locator('#denominator').isVisible(),example.source.name==='lean_workbook_plus_15068');
+      assert(await page.locator('#witness').isHidden());
+      const rows=page.locator('#matrix tbody tr');
+      const columns=[...example.ports.filter(p=>p.role==='proof'),{slot:example.ports.length,dependencies:example.resultDependencies,input:example.call}];
+      assert.equal(await rows.count(),example.ports.length-1);
+      for(const p of example.ports.slice(1)){
+        for(const [k,c] of columns.entries()){
+          const cell=rows.nth(p.slot-1).locator('td').nth(k);
+          if(p.slot>=c.slot){assert.equal(await cell.getAttribute('aria-label'),'Outside scope');continue;}
+          const w=c.dependencies.find(w=>w.slot===p.slot);
+          if(!w){assert.equal(await cell.getAttribute('aria-label'),'Absent');continue;}
+          await cell.locator('button').click();
+          assert.equal(await page.locator('#matrix [aria-pressed=true]').count(),1);
+          const readout=page.locator('#witness');
+          assert.equal(await readout.locator('code').textContent(),w.root+'.'+w.slots.join('.')+' · row '+w.node);
+          for(const [index,hit] of [p.input,c.input].entries()){
+            const url=new URL(await readout.locator('a').nth(index).getAttribute('href'));
+            assert.equal(url.searchParams.get('route'),hit.route.root+':'+hit.route.slots.join('.'));
+            assert.equal(url.hash,'#expr-'+hit.node);
+          }
+        }
+      }
       await page.locator('#result-inputs summary').click();
       const resultLinks=page.locator('#result-inputs li');
       assert.equal(await resultLinks.count(),example.resultDependencies.length);
