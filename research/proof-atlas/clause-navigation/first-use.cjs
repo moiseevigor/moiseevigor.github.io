@@ -5,7 +5,7 @@ const atlas = require('../../../public/js/proof-atlas-library-data');
 // Inside one introduction, an occurrence refers to it exactly when its de
 // Bruijn index equals the number of intervening lexical binders. The same
 // stored row at two such depths can have different answers.
-function firstUse(data, binderRoute, skipExplicitTypeFields = false) {
+function* useRows(data, binderRoute, skipExplicitTypeFields = false) {
   const body = { root: binderRoute.root, slots: [...binderRoute.slots, 1] };
   const queue = [];
   const seen = new Set();
@@ -26,7 +26,7 @@ function firstUse(data, binderRoute, skipExplicitTypeFields = false) {
       const route = { root: body.root, slots: body.slots.concat(suffix.reverse()) };
       assert.equal(atlas.walk(data, route), node);
       assert.deepEqual(atlas.binding(data, route), { node: atlas.walk(data, binderRoute), route: binderRoute });
-      return { node, route };
+      yield { node, route };
     }
     data.children[node].forEach((child, slot) => {
       const field = atlas.fields[kind][slot];
@@ -35,7 +35,11 @@ function firstUse(data, binderRoute, skipExplicitTypeFields = false) {
       offer(child, depth + Number(binds), i, slot);
     });
   }
+}
+
+function firstUse(data, binderRoute, skipExplicitTypeFields = false) {
+  for (const witness of useRows(data, binderRoute, skipExplicitTypeFields)) return witness;
   return null;
 }
 
-module.exports = {firstUse};
+module.exports = {firstUse, useRows};

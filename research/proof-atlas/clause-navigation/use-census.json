@@ -13,6 +13,8 @@
       "crossChecked": 2059,
       "edition": "published-15",
       "theorems": 561,
+      "proofsWithAliasedUse": 376,
+      "bindersWithAliasedUse": 1755,
       "proofsWithAliasedWitness": 274,
       "bindersWithAliasedWitness": 951,
       "paired": 2059,
@@ -68,6 +70,64 @@
           }
         ]
       },
+      "missedByNearest": {
+        "name": "CrossingData.crossing",
+        "indexSha256": "b1f3867250131bf76d40e9dca395e29595ccf8d4bb49c8e075ba40213b33057a",
+        "node": 71,
+        "uses": [
+          {
+            "name": "C",
+            "introduction": {
+              "root": 1,
+              "slots": []
+            },
+            "use": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                1,
+                1,
+                1
+              ]
+            }
+          },
+          {
+            "name": "ψ",
+            "introduction": {
+              "root": 1,
+              "slots": [
+                1
+              ]
+            },
+            "use": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1
+              ]
+            }
+          }
+        ]
+      },
       "example": {
         "name": "JacobiCore.Sol.bC",
         "indexSha256": "b9446310569894d0975539e97cdc9903f20fa5c5e56755c25a9ab3d91c129029",
@@ -94,6 +154,8 @@
       "crossChecked": 4002,
       "edition": "working-26",
       "theorems": 1083,
+      "proofsWithAliasedUse": 753,
+      "bindersWithAliasedUse": 3432,
       "proofsWithAliasedWitness": 600,
       "bindersWithAliasedWitness": 2061,
       "paired": 4002,
@@ -149,6 +211,64 @@
           }
         ]
       },
+      "missedByNearest": {
+        "name": "CrossingData.crossing",
+        "indexSha256": "9147b48b57a447db20a2abff419de14fb33f212ba2f212a4acb6d5af390c7f87",
+        "node": 71,
+        "uses": [
+          {
+            "name": "C",
+            "introduction": {
+              "root": 1,
+              "slots": []
+            },
+            "use": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                1,
+                1,
+                1
+              ]
+            }
+          },
+          {
+            "name": "ψ",
+            "introduction": {
+              "root": 1,
+              "slots": [
+                1
+              ]
+            },
+            "use": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1
+              ]
+            }
+          }
+        ]
+      },
       "example": {
         "name": "JacobiCore.Sol.bC",
         "indexSha256": "74fc1b1b23febb4cb96b7ac9301abda340ef99ada92dc6df6d70fea143ee7cda",
@@ -175,6 +295,8 @@
       "crossChecked": 93,
       "edition": "goedel-sample-4331",
       "theorems": 20,
+      "proofsWithAliasedUse": 19,
+      "bindersWithAliasedUse": 84,
       "proofsWithAliasedWitness": 13,
       "bindersWithAliasedWitness": 37,
       "paired": 93,
@@ -230,18 +352,117 @@
             }
           }
         ]
+      },
+      "missedByNearest": {
+        "name": "lean_workbook_49456",
+        "indexSha256": "66459f55804e8ae09fc9a8615191fba8f5277f1fb0831c1bb132e1bc60552b38",
+        "node": 16,
+        "uses": [
+          {
+            "name": "n",
+            "introduction": {
+              "root": 1,
+              "slots": []
+            },
+            "use": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                0,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "name": "r",
+            "introduction": {
+              "root": 1,
+              "slots": [
+                1
+              ]
+            },
+            "use": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                0,
+                0,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          }
+        ]
       }
     },
     {
       "crossChecked": 59,
       "edition": "recursion-controls",
       "theorems": 23,
+      "proofsWithAliasedUse": 11,
+      "bindersWithAliasedUse": 45,
       "proofsWithAliasedWitness": 8,
       "bindersWithAliasedWitness": 22,
       "paired": 59,
       "outsideExplicitTypes": 56,
       "typeFieldsOnly": 1,
       "unused": 2,
+      "missedByNearest": {
+        "name": "AtlasExamples.Fan.brecOn.eq",
+        "indexSha256": "b5f6e42d5c97262c7c6f54300a4d886057fa3564718c63e08ba22dc61ceb9f27",
+        "node": 9,
+        "uses": [
+          {
+            "name": "t",
+            "introduction": {
+              "root": 1,
+              "slots": [
+                1
+              ]
+            },
+            "use": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "name": "F_1",
+            "introduction": {
+              "root": 1,
+              "slots": [
+                1,
+                1
+              ]
+            },
+            "use": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          }
+        ]
+      },
       "aliasExample": {
         "name": "AtlasExamples.Fan.node.inj",
         "indexSha256": "c9513a192465b550256023e9177069674a656be7ab235c879aab75fd30d9824a",

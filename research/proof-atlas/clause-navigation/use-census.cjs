@@ -6,7 +6,7 @@ const zlib = require('node:zlib');
 const assert = require('node:assert/strict');
 const {createHash} = require('node:crypto');
 const atlas = require('../../../public/js/proof-atlas-library-data');
-const {firstUse} = require('./first-use.cjs');
+const {firstUse,useRows} = require('./first-use.cjs');
 const rawFixtures = process.argv[2];
 const controls = rawFixtures ? JSON.parse(fs.readFileSync(rawFixtures, 'utf8')) : [];
 const window = {};
@@ -31,12 +31,29 @@ function support(data, skipTypeFields) {
   return rows;
 }
 
+// Propagate all possible lexical depths down the DAG in descending row order.
+function reachableUses(data, body) {
+  const depths = Array(body + 1).fill(0n);
+  depths[body] = 1n;
+  const used = [];
+  for (let i = body; i >= 0; i--) {
+    if (depths[i] === 0n) continue;
+    const kind = atlas.kinds[data.kind[i]];
+    if (kind === 'bvar' && ((depths[i] >> BigInt(data.payloads[i].index)) & 1n) === 1n) used.push(i);
+    data.children[i].forEach((child,j) => {
+      const binds = (['lam','forallE'].includes(kind) && j === 1) || (kind === 'letE' && j === 2);
+      depths[child] |= binds ? depths[i] << 1n : depths[i];
+    });
+  }
+  return used.sort((a,b) => a-b);
+}
+
 let comparisons = 0;
 const result = [];
 const excludedControls = [];
 for (const edition of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAMPLE.edition,
   window.PROOF_ATLAS_RECURSION_EXAMPLES.edition]) {
-  const stats = {crossChecked:0,edition:edition.id,theorems:0,proofsWithAliasedWitness:0,bindersWithAliasedWitness:0,paired:0,outsideExplicitTypes:0,typeFieldsOnly:0,unused:0};
+  const stats = {crossChecked:0,edition:edition.id,theorems:0,proofsWithAliasedUse:0,bindersWithAliasedUse:0,proofsWithAliasedWitness:0,bindersWithAliasedWitness:0,paired:0,outsideExplicitTypes:0,typeFieldsOnly:0,unused:0};
   for (const fixture of controls.filter(x => x.edition === edition.id)) {
     const record = edition.declarations.find(r => r.name === fixture.name);
     assert(record && record.indexSha256 === fixture.indexSha256);
@@ -53,6 +70,7 @@ for (const edition of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS
     // Compare only the selected shortest witnesses within this one proof.
     // A group of size two certifies distinct binders with the same stored use row.
     const witnessGroups = new Map();
+    const fullGroups = new Map();
     let depth = 0;
     stats.theorems++;
     while (data.kind[type] === 7 && data.kind[proof] === 6 && data.children[type][0] === data.children[proof][0]) {
@@ -60,7 +78,14 @@ for (const edition of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS
       const any = Boolean(all[body] & 1n), outside = Boolean(limited[body] & 1n);
       assert(!outside || any);
       const introduction = {root:1,slots:Array(depth).fill(1)};
-      const witness = firstUse(data,introduction);
+      const uses = [...useRows(data,introduction)];
+      assert.deepEqual(uses.map(x => x.node).sort((a,b) => a-b),reachableUses(data,body));
+      for (const use of uses) {
+        const group = fullGroups.get(use.node) || [];
+        group.push(depth);
+        fullGroups.set(use.node,group);
+      }
+      const witness = uses[0];
       assert.equal(any,Boolean(witness));
       if (witness) {
         const group = witnessGroups.get(witness.node) || [];
@@ -90,7 +115,24 @@ for (const edition of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS
     }
     if (fixture) assert.equal(depth,fixture.binders.length);
     const aliases = [...witnessGroups.entries()].filter(([,uses]) => uses.length > 1);
+    const sharedBinders = new Set();
+    for (const group of fullGroups.values()) {
+      if (group.length > 1) for (const binder of group) sharedBinders.add(binder);
+    }
+    if (sharedBinders.size) stats.proofsWithAliasedUse++;
+    if (sharedBinders.size && !aliases.length && !stats.missedByNearest) {
+      const [node, depths] = [...fullGroups].find(([,group]) => group.length > 1);
+      const uses = depths.slice(0,2).map(depth => {
+        const introduction = {root:1,slots:Array(depth).fill(1)};
+        const name = data.payloads[atlas.walk(data,introduction)].binderName;
+        const witness = [...useRows(data,introduction)].find(use => use.node === node);
+        return {name,introduction,use:witness.route};
+      });
+      stats.missedByNearest = {name:record.name,indexSha256:record.indexSha256,node,uses};
+    }
+    stats.bindersWithAliasedUse += sharedBinders.size;
     if (aliases.length) {
+      assert(sharedBinders.size);
       stats.proofsWithAliasedWitness++;
       stats.bindersWithAliasedWitness += aliases.reduce((n,[,uses]) => n + uses.length, 0);
       const [node, uses] = aliases[0];
