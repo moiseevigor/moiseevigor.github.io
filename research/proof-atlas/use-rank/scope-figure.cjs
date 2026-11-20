@@ -7,7 +7,7 @@ function link(source, target, label) {
   return '<a href="https://moiseevigor.github.io/projects/proof-atlas/library/?' + escape(query) + '#expr-' + target.node + '">' + escape(label) + '</a>';
 }
 console.log(`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Local functions and binding in Lean proofs</title>
-<style>*{box-sizing:border-box}body{font:1.05rem/1.55 Georgia,serif;color:#242424;background:#faf9f6;max-width:48rem;margin:3rem auto;padding:0 1rem}h1{line-height:1.15}h2{font:600 1.1rem system-ui;overflow-wrap:anywhere}a{color:#194978;text-underline-offset:.16em}summary{cursor:pointer;padding:.5rem 0}section{margin:2rem 0}li{margin:.6rem 0}meter{width:min(8rem,25vw);vertical-align:middle}small{color:#474747}</style>
+<style>*{box-sizing:border-box}body{font:1.05rem/1.55 Georgia,serif;color:#242424;background:#faf9f6;max-width:48rem;margin:3rem auto;padding:0 1rem}h1{line-height:1.15}h2{font:600 1.1rem system-ui;overflow-wrap:anywhere}a{color:#194978;text-underline-offset:.16em}h3{overflow-wrap:anywhere}fieldset{min-inline-size:0}label{margin-inline-end:.75rem}summary{cursor:pointer;padding:.5rem 0}section{margin:2rem 0}li{margin:.6rem 0}meter{width:min(8rem,25vw);vertical-align:middle}small{color:#474747}</style>
 <main><h1>Where local function calls lead</h1>
 <p>Each group starts at one binder in a compiled proof. Expand it to inspect the expressions that use the binder as a function. Counts include repeated occurrences of a shared expression.</p>`);
 for (const r of rows.filter(r => r.positions)) {
@@ -45,4 +45,27 @@ for (const name of ['JacobiCore.Sol.mk.inj','CrossingData.mk.inj']) {
   }
   console.log('</ol>');
 }
-console.log('</section></main></html>');
+console.log('</section><section id="repeated-scope"><h2>One binder row in two places</h2>');
+for (const result of aliases.results.filter(r => r.repeatedBinder)) {
+  const source = {name:result.name,edition:aliases.edition};
+  console.log('<h3>' + escape(result.name) + '</h3><p>The two paths first separate at ' +
+    link(source,result.fork,'application ' + result.fork.node) +
+    '. Select a field to follow its binding links.</p><fieldset><legend>Path from the shared ancestor</legend>');
+  for (const [i,w] of result.repeatedBinder.entries()) {
+    const field = result.fork.branches[i];
+    console.log('<label><input type="radio" name="' + escape(result.name) + '" ' + (i ? '' : 'checked ') +
+      'value="' + i + '">' + escape(field === 'arg' ? 'Argument' : 'Function') + '</label>');
+  }
+  for (const [i,w] of result.repeatedBinder.entries()) {
+    console.log('<p data-branch="' + i + '"' + (i ? ' hidden' : '') + '>' +
+      link(source,w.input,'Argument ' + w.input.node) + ' → ' + link(source,w.head,'function ' + w.head.node) +
+      ' → ' + link(source,w.head.binder,w.head.binder.name + ' (binder ' + w.head.binder.node + ')') +
+      '<br><small>Binder depth ' + w.head.binder.route.slots.length + ' from the proof root</small></p>');
+  }
+  console.log('</fieldset>');
+}
+console.log(`</section></main><script>document.querySelectorAll('fieldset').forEach(group => {
+  group.addEventListener('change', event => {
+    for (const branch of group.querySelectorAll('[data-branch]')) branch.hidden = branch.dataset.branch !== event.target.value;
+  });
+});</script></html>`);

@@ -1,4 +1,4 @@
-// Existential test per theorem. Stop only on an exact pair with distinct binder rows.
+// Keep one witness per theorem for each of two independent binding ambiguities.
 'use strict';
 const fs = require('node:fs'), zlib = require('node:zlib');
 const {createHash} = require('node:crypto');
@@ -21,9 +21,11 @@ for (const r of edition.declarations.filter(r => r.kind === 'theorem' && r.bodyA
     inside[row] = Number(eligible[row] || term.children[row].some(child => inside[child]));
   }
   const seen = new Map();
+  const byRowPair = new Map();
   const stack = inside[root] ? [{node:root, slots:[]}] : [];
   let pair = null;
-  while (stack.length && !pair) {
+  let repeatedBinder = null;
+  while (stack.length && !(pair && repeatedBinder)) {
     const {node, slots} = stack.pop();
     if (eligible[node]) {
       const arg = term.children[node][1];
@@ -32,17 +34,27 @@ for (const r of edition.declarations.filter(r => r.kind === 'theorem' && r.bodyA
       assert(head.binder);
       const earlier = seen.get(arg);
       if (!earlier) seen.set(arg,{input,head});
-      else if (earlier.head.binder.node !== head.binder.node) pair = [earlier,{input,head}];
+      else if (!pair && earlier.head.binder.node !== head.binder.node) pair = [earlier,{input,head}];
+      const rowKey = arg + '/' + head.binder.node;
+      const first = byRowPair.get(rowKey);
+      if (!first) byRowPair.set(rowKey,{input,head});
+      else if (!repeatedBinder && first.head.binder.route.slots.join('.') !== head.binder.route.slots.join('.')) {
+        repeatedBinder = [first,{input,head}];
+      }
     }
     term.children[node].forEach((child,i) => {
       if (inside[child]) stack.push({node:child, slots:slots.concat(i)});
     });
   }
-  if (pair) {
-    assert.equal(pair[0].input.node,pair[1].input.node);
-    assert.equal(pair[0].head.node,pair[1].head.node);
-    assert.notDeepEqual(pair[0].input.route,pair[1].input.route);
-    for (const {input,head} of pair) {
+  if (repeatedBinder) {
+    assert.equal(repeatedBinder[0].head.binder.node,repeatedBinder[1].head.binder.node);
+    assert.notDeepEqual(repeatedBinder[0].head.binder.route,repeatedBinder[1].head.binder.route);
+  }
+  for (const evidence of [pair,repeatedBinder].filter(Boolean)) {
+    assert.equal(evidence[0].input.node,evidence[1].input.node);
+    assert.equal(evidence[0].head.node,evidence[1].head.node);
+    assert.notDeepEqual(evidence[0].input.route,evidence[1].input.route);
+    for (const {input,head} of evidence) {
       assert.equal(atlas.walk(term,input.route),input.node);
       let node = root;
       const binders = [];
@@ -59,7 +71,17 @@ for (const r of edition.declarations.filter(r => r.kind === 'theorem' && r.bodyA
       assert.deepEqual(owner.route,head.binder.route);
     }
   }
-  results.push({name:r.name,indexSha256:r.indexSha256,hasLocalFunctionArgument:Boolean(inside[root]),pair});
+  let fork;
+  if (repeatedBinder) {
+    const [a,b] = repeatedBinder.map(w => w.head.binder.route.slots);
+    const depth = a.findIndex((slot,i) => slot !== b[i]);
+    assert(depth >= 0 && depth < b.length);
+    const route = {root:1, slots:a.slice(0,depth)};
+    const node = atlas.walk(term,route);
+    const fields = atlas.fields[atlas.kinds[term.kind[node]]];
+    fork = {node,route,branches:[fields[a[depth]],fields[b[depth]]]};
+  }
+  results.push({name:r.name,indexSha256:r.indexSha256,hasLocalFunctionArgument:Boolean(inside[root]),pair,repeatedBinder,fork});
 }
 assert(results.length);
 console.log('{"edition":' + JSON.stringify(edition.id) + ',"results":[\n' + results.map(r => JSON.stringify(r)).join(',\n') + '\n]}');

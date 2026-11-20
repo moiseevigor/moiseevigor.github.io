@@ -228,3 +228,9 @@ Among all 561 theorem declarations with an available body in published-15, 36 co
 In JacobiCore.Sol.mk.inj, argument row 211 resolves to D at binder row 357 and C at binder row 358. In CrossingData.mk.inj, row 86 resolves to two binders both printed as u (rows 244 and 255). An expression-row key loses the former distinction; adding the printed binder name still loses the latter. Sharing the expression drawing remains valid if its outgoing binding link depends on the selected occurrence. [Inspect both pairs](local-function-scopes.html#scope-pairs).
 
 The [existence test](check-fold-aliases.cjs) prunes branches without a matching argument, compares full occurrence routes and independently checks each witness against the binding bodies on its path. It stops at the first qualifying pair per declaration. The [report](fold-aliases.json) includes every theorem in the denominator and one pair for each positive result.
+
+## When the binder row is shared as well
+
+The second test keeps the argument row and the binder row fixed, then compares the complete binder routes. Exactly one of the 561 published theorem bodies has such a pair for a compound argument with a local function head. That theorem, JacobiCore.Sol.mk.congr_simp, also belongs to the 16 with distinct binder rows. The four identifiers agree at both sites: argument row 282, function row 4, binder row 398 and printed name D. The binder occurs at depth 34 down the argument branch of application 791 and depth 31 down its function branch. Depth is descriptive; identity uses the full occurrence route.
+
+[Switch between the two occurrences](local-function-scopes.html#repeated-scope). The row labels stay fixed while the selection changes all three destination routes. The checker verifies the first diverging field and reconstructs both binding contexts from the original packet. This demonstrates a provenance distinction. It does not establish different mathematical meanings for the two copies.
