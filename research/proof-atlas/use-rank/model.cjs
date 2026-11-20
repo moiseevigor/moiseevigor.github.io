@@ -125,7 +125,7 @@ function open(data, binder, options = {}) {
     if (data.payloads[node].index !== index) throw Error('Unexpected variable');
     return {node,route:{root:at.root,slots}};
   }
-  function rank(route) {
+  function interval(route) {
     if (route.root !== at.root || prefix.length > route.slots.length ||
         !prefix.every((slot,i) => slot === route.slots[i])) throw Error('Outside binder body');
     let ordinal = 1n, node = body, index = 0, mass = total;
@@ -137,10 +137,14 @@ function open(data, binder, options = {}) {
       mass=sizes[slot];
       index += Number(binds(kind,slot));
       node = children[slot];
-      if (mass === 0n) throw Error('No use of this binder on this path');
+
     }
-    if (data.kind[node] !== 0 || data.payloads[node].index !== index) throw Error('Expected use of selected binder');
-    return ordinal;
+    return {node, first:mass ? ordinal : null, count:mass};
+  }
+  function rank(route) {
+    const hit = interval(route);
+    if (hit.count !== 1n || data.kind[hit.node] !== 0) throw Error('Expected use of selected binder');
+    return hit.first;
   }
   function branchTable() {
     const rows=[], ids=new Map(), pending=[];
@@ -162,6 +166,6 @@ function open(data, binder, options = {}) {
     }
     return {prefix,total:String(total),rows};
   }
-  return {select,rank,branchTable,total,states:queries.length,...table.stats()};
+  return {select,rank,interval,branchTable,total,states:queries.length,...table.stats()};
 }
 module.exports = {open,makeSplits,binds};
