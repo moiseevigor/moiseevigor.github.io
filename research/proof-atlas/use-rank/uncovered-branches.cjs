@@ -2,6 +2,7 @@
 'use strict';
 const assert=require('node:assert/strict');
 const atlas=require('../../../public/js/proof-atlas-library-data');
+const {spine}=require('../../../public/js/proof-atlas-equality-transport');
 module.exports=function uncoveredBranches(data,body,callRoutes,uses,uncovered){
   const branch=()=>({excluded:false,fields:new Map()});
   const trie=branch();
@@ -36,8 +37,30 @@ module.exports=function uncoveredBranches(data,body,callRoutes,uses,uncovered){
   }
   assert.equal(total,uncovered);
   regions.sort((a,b)=>a.count>b.count?-1:a.count<b.count?1:a.first<b.first?-1:1);
-  return {regions:regions.length,largest:regions.slice(0,3).map(r=>({
-    anchor:{node:r.node,route:r.route},kind:atlas.kinds[data.kind[r.node]],path:atlas.path(data,r.route),
-    count:String(r.count),first:uses.select(r.first)
-  }))};
+  const largest=regions.slice(0,3).map(r=>{
+    const fieldNames=atlas.fields[atlas.kinds[data.kind[r.node]]]||[];
+    const fields=data.children[r.node].map((node,i)=>{
+      const route={root:body.root,slots:r.route.slots.concat(i)};
+      return {field:fieldNames[i],anchor:{node,route},expressions:String(data.expanded[node]),uses:String(uses.interval(route).count)};
+    });
+    const seen=new Set(),pending=[r.node];
+    while(pending.length){
+      const node=pending.pop();
+      if(seen.has(node))continue;
+      seen.add(node);pending.push(...data.children[node]);
+    }
+    let head=null;
+    if(data.kind[r.node]===5){
+      const application=spine(data,r.node);
+      const route={root:body.root,slots:r.route.slots.concat(Array(application.args.length).fill(0))};
+      assert.equal(atlas.walk(data,route),application.head);
+      const node=application.head,kind=atlas.kinds[data.kind[node]];
+      const binding=kind==='bvar'?atlas.binding(data,route):null;
+      const name=binding?(data.payloads[binding.node].binderName??data.payloads[binding.node].declName):data.payloads[node].name;
+      head={anchor:{node,route},label:name||kind,arguments:application.args.length};
+    }
+    return {anchor:{node:r.node,route:r.route},kind:atlas.kinds[data.kind[r.node]],path:atlas.path(data,r.route),
+      count:String(r.count),first:uses.select(r.first),expressions:String(data.expanded[r.node]),sourceRows:seen.size,fields,head};
+  });
+  return {regions:regions.length,largest};
 };

@@ -8,6 +8,68 @@
         "uncovered": "90192",
         "regions": 10,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.1.1.2.2.1",
+            "node": 85376,
+            "expressions": "10505601",
+            "sourceRows": 31117,
+            "uses": "32394",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "10505317",
+                "32394"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.2.1",
+            "node": 58150,
+            "expressions": "9780593",
+            "sourceRows": 31400,
+            "uses": "29058",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "9780309",
+                "29058"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1",
+            "node": 30807,
+            "expressions": "9439747",
+            "sourceRows": 30765,
+            "uses": "28723",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "6"
+              ],
+              [
+                "arg",
+                "9439463",
+                "28717"
+              ]
+            ]
+          }
+        ],
         "topThree": "90175"
       },
       {
@@ -15,6 +77,68 @@
         "uncovered": "82793",
         "regions": 9,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.1.1.2.1",
+            "node": 58150,
+            "expressions": "9780593",
+            "sourceRows": 31400,
+            "uses": "29570",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "6"
+              ],
+              [
+                "arg",
+                "9780309",
+                "29564"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.2.2.1",
+            "node": 85376,
+            "expressions": "10505601",
+            "sourceRows": 31117,
+            "uses": "29234",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "10505317",
+                "29234"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1",
+            "node": 30807,
+            "expressions": "9439747",
+            "sourceRows": 30765,
+            "uses": "23956",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "9439463",
+                "23956"
+              ]
+            ]
+          }
+        ],
         "topThree": "82760"
       },
       {
@@ -22,6 +146,68 @@
         "uncovered": "77994",
         "regions": 9,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.1.1.2.2.1",
+            "node": 85376,
+            "expressions": "10505601",
+            "sourceRows": 31117,
+            "uses": "27450",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "6"
+              ],
+              [
+                "arg",
+                "10505317",
+                "27444"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1",
+            "node": 30807,
+            "expressions": "9439747",
+            "sourceRows": 30765,
+            "uses": "27066",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "9439463",
+                "27066"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.2.1",
+            "node": 58150,
+            "expressions": "9780593",
+            "sourceRows": 31400,
+            "uses": "23407",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "9780309",
+                "23407"
+              ]
+            ]
+          }
+        ],
         "topThree": "77923"
       },
       {
@@ -29,6 +215,68 @@
         "uncovered": "43",
         "regions": 5,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.1.1.2.2.1",
+            "node": 85376,
+            "expressions": "10505601",
+            "sourceRows": 31117,
+            "uses": "16",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "10505317",
+                "16"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.2.1",
+            "node": 58150,
+            "expressions": "9780593",
+            "sourceRows": 31400,
+            "uses": "13",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "9780309",
+                "13"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1",
+            "node": 30807,
+            "expressions": "9439747",
+            "sourceRows": 30765,
+            "uses": "12",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "9439463",
+                "12"
+              ]
+            ]
+          }
+        ],
         "topThree": "41"
       },
       {
@@ -36,6 +284,68 @@
         "uncovered": "32",
         "regions": 5,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.1.1.1",
+            "node": 30807,
+            "expressions": "9439747",
+            "sourceRows": 30765,
+            "uses": "11",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "9439463",
+                "11"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.2.2.1",
+            "node": 85376,
+            "expressions": "10505601",
+            "sourceRows": 31117,
+            "uses": "11",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "10505317",
+                "11"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.2.1",
+            "node": 58150,
+            "expressions": "9780593",
+            "sourceRows": 31400,
+            "uses": "8",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "9780309",
+                "8"
+              ]
+            ]
+          }
+        ],
         "topThree": "30"
       },
       {
@@ -43,6 +353,68 @@
         "uncovered": "35",
         "regions": 5,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.1.1.1",
+            "node": 30807,
+            "expressions": "9439747",
+            "sourceRows": 30765,
+            "uses": "12",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "9439463",
+                "12"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.2.2.1",
+            "node": 85376,
+            "expressions": "10505601",
+            "sourceRows": 31117,
+            "uses": "11",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "10505317",
+                "11"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.2.1",
+            "node": 58150,
+            "expressions": "9780593",
+            "sourceRows": 31400,
+            "uses": "10",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "9780309",
+                "10"
+              ]
+            ]
+          }
+        ],
         "topThree": "33"
       },
       {
@@ -50,6 +422,68 @@
         "uncovered": "40",
         "regions": 5,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.1.1.2.1",
+            "node": 58150,
+            "expressions": "9780593",
+            "sourceRows": 31400,
+            "uses": "15",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "9780309",
+                "15"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.2.2.1",
+            "node": 85376,
+            "expressions": "10505601",
+            "sourceRows": 31117,
+            "uses": "13",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "10505317",
+                "13"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1",
+            "node": 30807,
+            "expressions": "9439747",
+            "sourceRows": 30765,
+            "uses": "10",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "9439463",
+                "10"
+              ]
+            ]
+          }
+        ],
         "topThree": "38"
       }
     ]
@@ -63,6 +497,68 @@
         "uncovered": "15",
         "regions": 5,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.2.2.2.2.0.0",
+            "node": 225,
+            "expressions": "199",
+            "sourceRows": 107,
+            "uses": "3",
+            "function": "Mathlib.Tactic.Linarith.eq_of_not_lt_of_not_gt",
+            "fields": [
+              [
+                "fn",
+                "9",
+                "1"
+              ],
+              [
+                "arg",
+                "189",
+                "2"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.2.2.2.2.0.1.0",
+            "node": 250,
+            "expressions": "225",
+            "sourceRows": 127,
+            "uses": "3",
+            "function": "Not.intro",
+            "fields": [
+              [
+                "fn",
+                "1",
+                "0"
+              ],
+              [
+                "arg",
+                "223",
+                "3"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.2.2.2.2.0.1.1.0",
+            "node": 249,
+            "expressions": "223",
+            "sourceRows": 125,
+            "uses": "3",
+            "function": "LT.lt",
+            "fields": [
+              [
+                "fn",
+                "33",
+                "1"
+              ],
+              [
+                "arg",
+                "189",
+                "2"
+              ]
+            ]
+          }
+        ],
         "topThree": "9"
       },
       {
@@ -70,6 +566,68 @@
         "uncovered": "316",
         "regions": 19,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.2.2.2.2.0.1.1.1.1.0",
+            "node": 1171,
+            "expressions": "27347",
+            "sourceRows": 984,
+            "uses": "133",
+            "function": "Eq.mp",
+            "fields": [
+              [
+                "fn",
+                "605",
+                "3"
+              ],
+              [
+                "arg",
+                "26741",
+                "130"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.2.2.2.2.1.1.1.1.0",
+            "node": 1171,
+            "expressions": "27347",
+            "sourceRows": 984,
+            "uses": "133",
+            "function": "Eq.mp",
+            "fields": [
+              [
+                "fn",
+                "605",
+                "3"
+              ],
+              [
+                "arg",
+                "26741",
+                "130"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.2.2.2.2.0.1.1.1.1.1.0",
+            "node": 1284,
+            "expressions": "1677",
+            "sourceRows": 300,
+            "uses": "9",
+            "function": "Mathlib.Tactic.Linarith.lt_of_lt_of_eq",
+            "fields": [
+              [
+                "fn",
+                "421",
+                "3"
+              ],
+              [
+                "arg",
+                "1255",
+                "6"
+              ]
+            ]
+          }
+        ],
         "topThree": "275"
       },
       {
@@ -77,6 +635,68 @@
         "uncovered": "3",
         "regions": 3,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.2.1",
+            "node": 173,
+            "expressions": "11",
+            "sourceRows": 10,
+            "uses": "1",
+            "function": "h₁",
+            "fields": [
+              [
+                "fn",
+                "1",
+                "1"
+              ],
+              [
+                "arg",
+                "9",
+                "0"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.2.2.1",
+            "node": 189,
+            "expressions": "11",
+            "sourceRows": 10,
+            "uses": "1",
+            "function": "h₁",
+            "fields": [
+              [
+                "fn",
+                "1",
+                "1"
+              ],
+              [
+                "arg",
+                "9",
+                "0"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.2.2.2.1",
+            "node": 208,
+            "expressions": "11",
+            "sourceRows": 10,
+            "uses": "1",
+            "function": "h₁",
+            "fields": [
+              [
+                "fn",
+                "1",
+                "1"
+              ],
+              [
+                "arg",
+                "9",
+                "0"
+              ]
+            ]
+          }
+        ],
         "topThree": "3"
       },
       {
@@ -84,6 +704,48 @@
         "uncovered": "2",
         "regions": 2,
         "displayed": 2,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.2.2.2.2.0.1.1.1.1.1.0",
+            "node": 1284,
+            "expressions": "1677",
+            "sourceRows": 300,
+            "uses": "1",
+            "function": "Mathlib.Tactic.Linarith.lt_of_lt_of_eq",
+            "fields": [
+              [
+                "fn",
+                "421",
+                "0"
+              ],
+              [
+                "arg",
+                "1255",
+                "1"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.2.2.2.2.1.1.1.1.1.0",
+            "node": 1284,
+            "expressions": "1677",
+            "sourceRows": 300,
+            "uses": "1",
+            "function": "Mathlib.Tactic.Linarith.lt_of_lt_of_eq",
+            "fields": [
+              [
+                "fn",
+                "421",
+                "0"
+              ],
+              [
+                "arg",
+                "1255",
+                "1"
+              ]
+            ]
+          }
+        ],
         "topThree": "2"
       }
     ]
@@ -97,6 +759,68 @@
         "uncovered": "28934",
         "regions": 40,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.1.0",
+            "node": 15200,
+            "expressions": "4843585",
+            "sourceRows": 15101,
+            "uses": "19865",
+            "function": "Eq.mp",
+            "fields": [
+              [
+                "fn",
+                "15383",
+                "58"
+              ],
+              [
+                "arg",
+                "4828201",
+                "19807"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.1.1.0.1.0.1.0.1.1",
+            "node": 18163,
+            "expressions": "429321",
+            "sourceRows": 3500,
+            "uses": "2016",
+            "function": "Mathlib.Tactic.Linarith.mul_eq",
+            "fields": [
+              [
+                "fn",
+                "429099",
+                "2016"
+              ],
+              [
+                "arg",
+                "221",
+                "0"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.1.1.0.1.0.1.0.1.0.1.1",
+            "node": 18126,
+            "expressions": "422571",
+            "sourceRows": 3479,
+            "uses": "1989",
+            "function": "Mathlib.Tactic.Linarith.mul_eq",
+            "fields": [
+              [
+                "fn",
+                "422349",
+                "1989"
+              ],
+              [
+                "arg",
+                "221",
+                "0"
+              ]
+            ]
+          }
+        ],
         "topThree": "23870"
       },
       {
@@ -104,6 +828,68 @@
         "uncovered": "25195",
         "regions": 40,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.1.0",
+            "node": 15200,
+            "expressions": "4843585",
+            "sourceRows": 15101,
+            "uses": "17015",
+            "function": "Eq.mp",
+            "fields": [
+              [
+                "fn",
+                "15383",
+                "58"
+              ],
+              [
+                "arg",
+                "4828201",
+                "16957"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.1.1.0.1.0.1.0.1.1",
+            "node": 18163,
+            "expressions": "429321",
+            "sourceRows": 3500,
+            "uses": "1809",
+            "function": "Mathlib.Tactic.Linarith.mul_eq",
+            "fields": [
+              [
+                "fn",
+                "429099",
+                "1809"
+              ],
+              [
+                "arg",
+                "221",
+                "0"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.1.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.1",
+            "node": 18056,
+            "expressions": "422571",
+            "sourceRows": 3479,
+            "uses": "1782",
+            "function": "Mathlib.Tactic.Linarith.mul_eq",
+            "fields": [
+              [
+                "fn",
+                "422349",
+                "1782"
+              ],
+              [
+                "arg",
+                "221",
+                "0"
+              ]
+            ]
+          }
+        ],
         "topThree": "20606"
       },
       {
@@ -111,6 +897,68 @@
         "uncovered": "13",
         "regions": 4,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.1.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.1",
+            "node": 18056,
+            "expressions": "422571",
+            "sourceRows": 3479,
+            "uses": "4",
+            "function": "Mathlib.Tactic.Linarith.mul_eq",
+            "fields": [
+              [
+                "fn",
+                "422349",
+                "4"
+              ],
+              [
+                "arg",
+                "221",
+                "0"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.1.1.0.1.0.1.0.1.0.1.1",
+            "node": 18126,
+            "expressions": "422571",
+            "sourceRows": 3479,
+            "uses": "4",
+            "function": "Mathlib.Tactic.Linarith.mul_eq",
+            "fields": [
+              [
+                "fn",
+                "422349",
+                "4"
+              ],
+              [
+                "arg",
+                "221",
+                "0"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.1.1.0.1.0.1.0.1.1",
+            "node": 18163,
+            "expressions": "429321",
+            "sourceRows": 3500,
+            "uses": "4",
+            "function": "Mathlib.Tactic.Linarith.mul_eq",
+            "fields": [
+              [
+                "fn",
+                "429099",
+                "4"
+              ],
+              [
+                "arg",
+                "221",
+                "0"
+              ]
+            ]
+          }
+        ],
         "topThree": "12"
       },
       {
@@ -118,6 +966,68 @@
         "uncovered": "13",
         "regions": 4,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.1.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.1",
+            "node": 18056,
+            "expressions": "422571",
+            "sourceRows": 3479,
+            "uses": "4",
+            "function": "Mathlib.Tactic.Linarith.mul_eq",
+            "fields": [
+              [
+                "fn",
+                "422349",
+                "4"
+              ],
+              [
+                "arg",
+                "221",
+                "0"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.1.1.0.1.0.1.0.1.0.1.1",
+            "node": 18126,
+            "expressions": "422571",
+            "sourceRows": 3479,
+            "uses": "4",
+            "function": "Mathlib.Tactic.Linarith.mul_eq",
+            "fields": [
+              [
+                "fn",
+                "422349",
+                "4"
+              ],
+              [
+                "arg",
+                "221",
+                "0"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.1.1.0.1.0.1.0.1.1",
+            "node": 18163,
+            "expressions": "429321",
+            "sourceRows": 3500,
+            "uses": "4",
+            "function": "Mathlib.Tactic.Linarith.mul_eq",
+            "fields": [
+              [
+                "fn",
+                "429099",
+                "4"
+              ],
+              [
+                "arg",
+                "221",
+                "0"
+              ]
+            ]
+          }
+        ],
         "topThree": "12"
       },
       {
@@ -125,6 +1035,68 @@
         "uncovered": "9",
         "regions": 3,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.1.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.1",
+            "node": 18056,
+            "expressions": "422571",
+            "sourceRows": 3479,
+            "uses": "3",
+            "function": "Mathlib.Tactic.Linarith.mul_eq",
+            "fields": [
+              [
+                "fn",
+                "422349",
+                "3"
+              ],
+              [
+                "arg",
+                "221",
+                "0"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.1.1.0.1.0.1.0.1.0.1.1",
+            "node": 18126,
+            "expressions": "422571",
+            "sourceRows": 3479,
+            "uses": "3",
+            "function": "Mathlib.Tactic.Linarith.mul_eq",
+            "fields": [
+              [
+                "fn",
+                "422349",
+                "3"
+              ],
+              [
+                "arg",
+                "221",
+                "0"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.1.1.0.1.0.1.0.1.1",
+            "node": 18163,
+            "expressions": "429321",
+            "sourceRows": 3500,
+            "uses": "3",
+            "function": "Mathlib.Tactic.Linarith.mul_eq",
+            "fields": [
+              [
+                "fn",
+                "429099",
+                "3"
+              ],
+              [
+                "arg",
+                "221",
+                "0"
+              ]
+            ]
+          }
+        ],
         "topThree": "9"
       },
       {
@@ -132,6 +1104,7 @@
         "uncovered": "0",
         "regions": 0,
         "displayed": 0,
+        "shapes": [],
         "topThree": "0"
       },
       {
@@ -139,6 +1112,7 @@
         "uncovered": "0",
         "regions": 0,
         "displayed": 0,
+        "shapes": [],
         "topThree": "0"
       },
       {
@@ -146,6 +1120,68 @@
         "uncovered": "3",
         "regions": 3,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.1.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.1",
+            "node": 18056,
+            "expressions": "422571",
+            "sourceRows": 3479,
+            "uses": "1",
+            "function": "Mathlib.Tactic.Linarith.mul_eq",
+            "fields": [
+              [
+                "fn",
+                "422349",
+                "1"
+              ],
+              [
+                "arg",
+                "221",
+                "0"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.1.1.0.1.0.1.0.1.0.1.1",
+            "node": 18126,
+            "expressions": "422571",
+            "sourceRows": 3479,
+            "uses": "1",
+            "function": "Mathlib.Tactic.Linarith.mul_eq",
+            "fields": [
+              [
+                "fn",
+                "422349",
+                "1"
+              ],
+              [
+                "arg",
+                "221",
+                "0"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.1.1.0.1.0.1.0.1.1",
+            "node": 18163,
+            "expressions": "429321",
+            "sourceRows": 3500,
+            "uses": "1",
+            "function": "Mathlib.Tactic.Linarith.mul_eq",
+            "fields": [
+              [
+                "fn",
+                "429099",
+                "1"
+              ],
+              [
+                "arg",
+                "221",
+                "0"
+              ]
+            ]
+          }
+        ],
         "topThree": "3"
       }
     ]
@@ -159,6 +1195,68 @@
         "uncovered": "25",
         "regions": 7,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.0",
+            "node": 115,
+            "expressions": "263",
+            "sourceRows": 115,
+            "uses": "4",
+            "function": null,
+            "fields": [
+              [
+                "domain",
+                "1",
+                "0"
+              ],
+              [
+                "body",
+                "261",
+                "4"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.0",
+            "node": 211,
+            "expressions": "319",
+            "sourceRows": 116,
+            "uses": "4",
+            "function": "Eq",
+            "fields": [
+              [
+                "fn",
+                "45",
+                "2"
+              ],
+              [
+                "arg",
+                "273",
+                "2"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.2.0",
+            "node": 234,
+            "expressions": "289",
+            "sourceRows": 118,
+            "uses": "4",
+            "function": "Eq",
+            "fields": [
+              [
+                "fn",
+                "35",
+                "2"
+              ],
+              [
+                "arg",
+                "253",
+                "2"
+              ]
+            ]
+          }
+        ],
         "topThree": "12"
       },
       {
@@ -166,6 +1264,68 @@
         "uncovered": "3",
         "regions": 3,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.2.1",
+            "node": 235,
+            "expressions": "15",
+            "sourceRows": 14,
+            "uses": "1",
+            "function": "h₀",
+            "fields": [
+              [
+                "fn",
+                "13",
+                "1"
+              ],
+              [
+                "arg",
+                "1",
+                "0"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.2.2.1",
+            "node": 259,
+            "expressions": "15",
+            "sourceRows": 14,
+            "uses": "1",
+            "function": "h₀",
+            "fields": [
+              [
+                "fn",
+                "3",
+                "1"
+              ],
+              [
+                "arg",
+                "11",
+                "0"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.2.2.2.1",
+            "node": 283,
+            "expressions": "5",
+            "sourceRows": 4,
+            "uses": "1",
+            "function": "h₀",
+            "fields": [
+              [
+                "fn",
+                "3",
+                "1"
+              ],
+              [
+                "arg",
+                "1",
+                "0"
+              ]
+            ]
+          }
+        ],
         "topThree": "3"
       },
       {
@@ -173,6 +1333,7 @@
         "uncovered": "0",
         "regions": 0,
         "displayed": 0,
+        "shapes": [],
         "topThree": "0"
       },
       {
@@ -180,6 +1341,68 @@
         "uncovered": "17",
         "regions": 7,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.2.2.2.0",
+            "node": 281,
+            "expressions": "259",
+            "sourceRows": 111,
+            "uses": "6",
+            "function": "Eq",
+            "fields": [
+              [
+                "fn",
+                "25",
+                "2"
+              ],
+              [
+                "arg",
+                "233",
+                "4"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.2.0",
+            "node": 234,
+            "expressions": "289",
+            "sourceRows": 118,
+            "uses": "3",
+            "function": "Eq",
+            "fields": [
+              [
+                "fn",
+                "35",
+                "1"
+              ],
+              [
+                "arg",
+                "253",
+                "2"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.2.2.0",
+            "node": 257,
+            "expressions": "289",
+            "sourceRows": 118,
+            "uses": "3",
+            "function": "Eq",
+            "fields": [
+              [
+                "fn",
+                "35",
+                "1"
+              ],
+              [
+                "arg",
+                "253",
+                "2"
+              ]
+            ]
+          }
+        ],
         "topThree": "12"
       }
     ]
@@ -193,6 +1416,68 @@
         "uncovered": "1176",
         "regions": 25,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.0.1.1.1.1.0",
+            "node": 1963,
+            "expressions": "123711",
+            "sourceRows": 1894,
+            "uses": "543",
+            "function": "Eq.mp",
+            "fields": [
+              [
+                "fn",
+                "1161",
+                "7"
+              ],
+              [
+                "arg",
+                "122549",
+                "536"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.0",
+            "node": 3757,
+            "expressions": "132715",
+            "sourceRows": 2097,
+            "uses": "533",
+            "function": "Eq.mp",
+            "fields": [
+              [
+                "fn",
+                "1267",
+                "6"
+              ],
+              [
+                "arg",
+                "131447",
+                "527"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.0.1.1.1.1.1.0.1.1",
+            "node": 3005,
+            "expressions": "987",
+            "sourceRows": 234,
+            "uses": "12",
+            "function": "Mathlib.Tactic.Linarith.sub_nonpos_of_le",
+            "fields": [
+              [
+                "fn",
+                "225",
+                "2"
+              ],
+              [
+                "arg",
+                "761",
+                "10"
+              ]
+            ]
+          }
+        ],
         "topThree": "1088"
       },
       {
@@ -200,6 +1485,68 @@
         "uncovered": "628",
         "regions": 23,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.0",
+            "node": 3757,
+            "expressions": "132715",
+            "sourceRows": 2097,
+            "uses": "311",
+            "function": "Eq.mp",
+            "fields": [
+              [
+                "fn",
+                "1267",
+                "4"
+              ],
+              [
+                "arg",
+                "131447",
+                "307"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.0.1.1.1.1.0",
+            "node": 1963,
+            "expressions": "123711",
+            "sourceRows": 1894,
+            "uses": "259",
+            "function": "Eq.mp",
+            "fields": [
+              [
+                "fn",
+                "1161",
+                "3"
+              ],
+              [
+                "arg",
+                "122549",
+                "256"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.0.1.0.1.0.1.0",
+            "node": 3803,
+            "expressions": "1395",
+            "sourceRows": 317,
+            "uses": "8",
+            "function": "Mathlib.Tactic.Linarith.lt_of_lt_of_eq",
+            "fields": [
+              [
+                "fn",
+                "361",
+                "2"
+              ],
+              [
+                "arg",
+                "1033",
+                "6"
+              ]
+            ]
+          }
+        ],
         "topThree": "578"
       },
       {
@@ -207,6 +1554,68 @@
         "uncovered": "7",
         "regions": 5,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.0.1.1.1.1.1.0.1.1",
+            "node": 3005,
+            "expressions": "987",
+            "sourceRows": 234,
+            "uses": "2",
+            "function": "Mathlib.Tactic.Linarith.sub_nonpos_of_le",
+            "fields": [
+              [
+                "fn",
+                "225",
+                "0"
+              ],
+              [
+                "arg",
+                "761",
+                "2"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.0.1.1",
+            "node": 3005,
+            "expressions": "987",
+            "sourceRows": 234,
+            "uses": "2",
+            "function": "Mathlib.Tactic.Linarith.sub_nonpos_of_le",
+            "fields": [
+              [
+                "fn",
+                "225",
+                "0"
+              ],
+              [
+                "arg",
+                "761",
+                "2"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.0.1.1.1.1.1.0.1.0.1.0.1.0",
+            "node": 2091,
+            "expressions": "1395",
+            "sourceRows": 302,
+            "uses": "1",
+            "function": "Mathlib.Tactic.Linarith.lt_of_lt_of_eq",
+            "fields": [
+              [
+                "fn",
+                "361",
+                "0"
+              ],
+              [
+                "arg",
+                "1033",
+                "1"
+              ]
+            ]
+          }
+        ],
         "topThree": "5"
       },
       {
@@ -214,6 +1623,68 @@
         "uncovered": "3",
         "regions": 3,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.0.1.1.1.1.1.1",
+            "node": 3025,
+            "expressions": "987",
+            "sourceRows": 246,
+            "uses": "1",
+            "function": "Mathlib.Tactic.Linarith.sub_nonpos_of_le",
+            "fields": [
+              [
+                "fn",
+                "225",
+                "0"
+              ],
+              [
+                "arg",
+                "761",
+                "1"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.0.1.0.1.0.1.0",
+            "node": 3803,
+            "expressions": "1395",
+            "sourceRows": 317,
+            "uses": "1",
+            "function": "Mathlib.Tactic.Linarith.lt_of_lt_of_eq",
+            "fields": [
+              [
+                "fn",
+                "361",
+                "0"
+              ],
+              [
+                "arg",
+                "1033",
+                "1"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1.1.1.1",
+            "node": 3025,
+            "expressions": "987",
+            "sourceRows": 246,
+            "uses": "1",
+            "function": "Mathlib.Tactic.Linarith.sub_nonpos_of_le",
+            "fields": [
+              [
+                "fn",
+                "225",
+                "0"
+              ],
+              [
+                "arg",
+                "761",
+                "1"
+              ]
+            ]
+          }
+        ],
         "topThree": "3"
       },
       {
@@ -221,6 +1692,7 @@
         "uncovered": "0",
         "regions": 0,
         "displayed": 0,
+        "shapes": [],
         "topThree": "0"
       }
     ]
@@ -234,6 +1706,68 @@
         "uncovered": "80771",
         "regions": 26,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.1.1.1",
+            "node": 30854,
+            "expressions": "9439277",
+            "sourceRows": 30812,
+            "uses": "27526",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "6"
+              ],
+              [
+                "arg",
+                "9438993",
+                "27520"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.2.1",
+            "node": 59989,
+            "expressions": "10844757",
+            "sourceRows": 33450,
+            "uses": "26837",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "10844473",
+                "26837"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.2.2.1",
+            "node": 90416,
+            "expressions": "11433633",
+            "sourceRows": 33742,
+            "uses": "26278",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "11433349",
+                "26278"
+              ]
+            ]
+          }
+        ],
         "topThree": "80641"
       },
       {
@@ -241,6 +1775,68 @@
         "uncovered": "91286",
         "regions": 23,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.1.1.2.2.1",
+            "node": 90416,
+            "expressions": "11433633",
+            "sourceRows": 33742,
+            "uses": "33214",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "11433349",
+                "33214"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.2.1",
+            "node": 59989,
+            "expressions": "10844757",
+            "sourceRows": 33450,
+            "uses": "32998",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "6"
+              ],
+              [
+                "arg",
+                "10844473",
+                "32992"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1",
+            "node": 30854,
+            "expressions": "9439277",
+            "sourceRows": 30812,
+            "uses": "24931",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "9438993",
+                "24931"
+              ]
+            ]
+          }
+        ],
         "topThree": "91143"
       },
       {
@@ -248,6 +1844,68 @@
         "uncovered": "96890",
         "regions": 25,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.1.1.2.2.1",
+            "node": 90416,
+            "expressions": "11433633",
+            "sourceRows": 33742,
+            "uses": "37431",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "6"
+              ],
+              [
+                "arg",
+                "11433349",
+                "37425"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.2.1",
+            "node": 59989,
+            "expressions": "10844757",
+            "sourceRows": 33450,
+            "uses": "32322",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "10844473",
+                "32322"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1",
+            "node": 30854,
+            "expressions": "9439277",
+            "sourceRows": 30812,
+            "uses": "27009",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "9438993",
+                "27009"
+              ]
+            ]
+          }
+        ],
         "topThree": "96762"
       },
       {
@@ -255,6 +1913,68 @@
         "uncovered": "41",
         "regions": 3,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.1.1.2.2.1",
+            "node": 90416,
+            "expressions": "11433633",
+            "sourceRows": 33742,
+            "uses": "15",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "11433349",
+                "15"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.2.1",
+            "node": 59989,
+            "expressions": "10844757",
+            "sourceRows": 33450,
+            "uses": "14",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "10844473",
+                "14"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1",
+            "node": 30854,
+            "expressions": "9439277",
+            "sourceRows": 30812,
+            "uses": "12",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "9438993",
+                "12"
+              ]
+            ]
+          }
+        ],
         "topThree": "41"
       },
       {
@@ -262,6 +1982,68 @@
         "uncovered": "40",
         "regions": 4,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.1.1.1",
+            "node": 30854,
+            "expressions": "9439277",
+            "sourceRows": 30812,
+            "uses": "13",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "9438993",
+                "13"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.2.1",
+            "node": 59989,
+            "expressions": "10844757",
+            "sourceRows": 33450,
+            "uses": "13",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "10844473",
+                "13"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.2.2.1",
+            "node": 90416,
+            "expressions": "11433633",
+            "sourceRows": 33742,
+            "uses": "12",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "11433349",
+                "12"
+              ]
+            ]
+          }
+        ],
         "topThree": "38"
       },
       {
@@ -269,6 +2051,68 @@
         "uncovered": "37",
         "regions": 4,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.1.1.1",
+            "node": 30854,
+            "expressions": "9439277",
+            "sourceRows": 30812,
+            "uses": "13",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "9438993",
+                "13"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.2.1",
+            "node": 59989,
+            "expressions": "10844757",
+            "sourceRows": 33450,
+            "uses": "12",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "10844473",
+                "12"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.2.2.1",
+            "node": 90416,
+            "expressions": "11433633",
+            "sourceRows": 33742,
+            "uses": "11",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "11433349",
+                "11"
+              ]
+            ]
+          }
+        ],
         "topThree": "36"
       },
       {
@@ -276,6 +2120,68 @@
         "uncovered": "33",
         "regions": 3,
         "displayed": 3,
+        "shapes": [
+          {
+            "root": "1:1.1.1.1.1.1.1.2.1",
+            "node": 59989,
+            "expressions": "10844757",
+            "sourceRows": 33450,
+            "uses": "13",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "10844473",
+                "13"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.2.2.1",
+            "node": 90416,
+            "expressions": "11433633",
+            "sourceRows": 33742,
+            "uses": "13",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "11433349",
+                "13"
+              ]
+            ]
+          },
+          {
+            "root": "1:1.1.1.1.1.1.1.1",
+            "node": 30854,
+            "expressions": "9439277",
+            "sourceRows": 30812,
+            "uses": "7",
+            "function": "Iff.mpr",
+            "fields": [
+              [
+                "fn",
+                "283",
+                "0"
+              ],
+              [
+                "arg",
+                "9438993",
+                "7"
+              ]
+            ]
+          }
+        ],
         "topThree": "33"
       }
     ]

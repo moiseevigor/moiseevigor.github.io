@@ -134,7 +134,15 @@ function traceClause(){
   for(const b of c.branches.largest){
    const row=document.createElement('li');
    row.append(link(b.kind+' · '+b.count+' uses',b.anchor),' · ',link('First occurrence',b.first));
-   const path=document.createElement('code');path.textContent=b.path;row.append(document.createElement('br'),path);list.append(row);
+   const size=document.createElement('p');size.textContent=b.expressions+' expression occurrences · '+b.sourceRows+' distinct stored rows';row.append(size);
+   if(b.head){const rule=document.createElement('p');rule.append('Function ',link(b.head.label,b.head.anchor),' · '+b.head.arguments+' supplied arguments');row.append(rule);}
+   const fields=document.createElement('details'),title=document.createElement('summary');title.textContent='Inspect structural fields';fields.append(title);
+   if(b.fields.length){
+    const children=document.createElement('ul');
+    for(const f of b.fields){const child=document.createElement('li');child.append(link(f.field,f.anchor),' · '+f.uses+' binder uses in '+f.expressions+' expression occurrences');children.append(child);}
+    fields.append(children);row.append(fields);
+   }
+   const path=document.createElement('code');path.textContent=b.path;row.append(path);list.append(row);
   }
   panel.append(heading,list);area.append(panel);
  }

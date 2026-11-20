@@ -40,10 +40,27 @@ const {open}=require('./model.cjs');
           const branches=page.locator('#flow .outside-branches');
           assert.equal(await branches.count(),c.coverage.branches.regions?1:0);
           if(c.coverage.branches.regions){
-            await branches.locator('summary').click();
-            const rows=branches.locator('li');assert.equal(await rows.count(),c.coverage.branches.largest.length);
+            await branches.locator(':scope > summary').click();
+            const rows=branches.locator(':scope > ol > li');assert.equal(await rows.count(),c.coverage.branches.largest.length);
             for(const [j,b] of c.coverage.branches.largest.entries()){
               assert.equal(await rows.nth(j).locator('code').textContent(),b.path);
+              if(b.head){
+                const head=rows.nth(j).getByRole('link',{name:b.head.label,exact:true}).first();
+                const url=new URL(await head.getAttribute('href'));
+                assert.equal(url.hash,'#expr-'+b.head.anchor.node);
+                assert.equal(url.searchParams.get('route'),b.head.anchor.route.root+':'+b.head.anchor.route.slots.join('.'));
+              }
+              if(b.fields.length){
+                await rows.nth(j).locator('summary').click();
+                const links=rows.nth(j).locator('ul a');
+                assert.equal(await links.count(),b.fields.length);
+                for(const [k,f] of b.fields.entries()){
+                  const url=new URL(await links.nth(k).getAttribute('href'));
+                  assert.equal(url.hash,'#expr-'+f.anchor.node);
+                  assert.equal(url.searchParams.get('route'),f.anchor.route.root+':'+f.anchor.route.slots.join('.'));
+                  assert.equal(await links.nth(k).textContent(),f.field);
+                }
+              }
               for(const [k,hit] of [b.anchor,b.first].entries()){
                 const url=new URL(await rows.nth(j).locator('a').nth(k).getAttribute('href'));
                 assert.equal(url.searchParams.get('route'),hit.route.root+':'+hit.route.slots.join('.'));
@@ -59,7 +76,7 @@ const {open}=require('./model.cjs');
             await page.waitForFunction(e=>active.callId===e.call && document.querySelector('.premise[data-selected]')?.dataset.slot===String(e.slot),e);
             await page.goBack();await page.waitForFunction(i=>active===examples[i],i);
           }
-          const occurrences=page.locator('#flow details:not(.outside-branches) a');
+          const occurrences=page.locator('#flow > details:not(.outside-branches) a');
           assert.equal(await occurrences.count(),c.containing.length);
           for(const [j,hit] of c.containing.entries()){
             const url=new URL(await occurrences.nth(j).getAttribute('href'));
