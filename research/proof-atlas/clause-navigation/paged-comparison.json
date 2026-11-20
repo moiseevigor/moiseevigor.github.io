@@ -1,0 +1,636 @@
+{
+  "onePage": [
+    {
+      "pageLimit": 1,
+      "edition": "published-15",
+      "name": "JacobiCore.E_pos",
+      "comparisons": 5,
+      "pageLoads": 1,
+      "peakCachedNodes": 74,
+      "peakCachedDecodedBytes": 3470
+    },
+    {
+      "pageLimit": 1,
+      "edition": "published-15",
+      "name": "JacobiData.slope_bound_abs",
+      "comparisons": 20,
+      "pageLoads": 151,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 11983
+    },
+    {
+      "pageLimit": 1,
+      "edition": "published-15",
+      "name": "SBracket.mk.inj",
+      "comparisons": 173,
+      "pageLoads": 3104,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 14424
+    },
+    {
+      "pageLimit": 1,
+      "edition": "published-15",
+      "name": "CrossingData.crossing",
+      "comparisons": 8,
+      "pageLoads": 27,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 10605
+    },
+    {
+      "pageLimit": 1,
+      "edition": "working-26",
+      "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
+      "comparisons": 41,
+      "pageLoads": 599,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 10364
+    },
+    {
+      "pageLimit": 1,
+      "edition": "working-26",
+      "name": "JacobiData.slope_bound_abs",
+      "comparisons": 20,
+      "pageLoads": 151,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 11983
+    },
+    {
+      "pageLimit": 1,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_20418",
+      "comparisons": 23,
+      "pageLoads": 197,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 12089
+    },
+    {
+      "pageLimit": 1,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_3485",
+      "comparisons": 17,
+      "pageLoads": 111,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 12669
+    },
+    {
+      "pageLimit": 1,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_4274",
+      "comparisons": 14,
+      "pageLoads": 77,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 10178
+    },
+    {
+      "pageLimit": 1,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_49456",
+      "comparisons": 8,
+      "pageLoads": 1,
+      "peakCachedNodes": 42,
+      "peakCachedDecodedBytes": 2143
+    },
+    {
+      "pageLimit": 1,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_56144",
+      "comparisons": 20,
+      "pageLoads": 151,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 11692
+    },
+    {
+      "pageLimit": 1,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_15068",
+      "comparisons": 26,
+      "pageLoads": 249,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 11732
+    },
+    {
+      "pageLimit": 1,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_16912",
+      "comparisons": 23,
+      "pageLoads": 197,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 11171
+    },
+    {
+      "pageLimit": 1,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_19617",
+      "comparisons": 14,
+      "pageLoads": 77,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 10184
+    },
+    {
+      "pageLimit": 1,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_39831",
+      "comparisons": 17,
+      "pageLoads": 111,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 13259
+    },
+    {
+      "pageLimit": 1,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_43987",
+      "comparisons": 17,
+      "pageLoads": 1,
+      "peakCachedNodes": 204,
+      "peakCachedDecodedBytes": 10052
+    },
+    {
+      "pageLimit": 1,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_54159",
+      "comparisons": 14,
+      "pageLoads": 77,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 12949
+    },
+    {
+      "pageLimit": 1,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_54622",
+      "comparisons": 23,
+      "pageLoads": 197,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 12166
+    },
+    {
+      "pageLimit": 1,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_61403",
+      "comparisons": 5,
+      "pageLoads": 11,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 10802
+    },
+    {
+      "pageLimit": 1,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_6206",
+      "comparisons": 23,
+      "pageLoads": 197,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 12089
+    },
+    {
+      "pageLimit": 1,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_62755",
+      "comparisons": 8,
+      "pageLoads": 27,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 12184
+    },
+    {
+      "pageLimit": 1,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_63081",
+      "comparisons": 11,
+      "pageLoads": 49,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 11421
+    },
+    {
+      "pageLimit": 1,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_68077",
+      "comparisons": 23,
+      "pageLoads": 197,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 11920
+    },
+    {
+      "pageLimit": 1,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_68616",
+      "comparisons": 11,
+      "pageLoads": 49,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 12257
+    },
+    {
+      "pageLimit": 1,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_68794",
+      "comparisons": 11,
+      "pageLoads": 49,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 11362
+    },
+    {
+      "pageLimit": 1,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_70240",
+      "comparisons": 11,
+      "pageLoads": 49,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 11736
+    },
+    {
+      "pageLimit": 1,
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.fan_holds",
+      "comparisons": 5,
+      "pageLoads": 1,
+      "peakCachedNodes": 22,
+      "peakCachedDecodedBytes": 1933
+    },
+    {
+      "pageLimit": 1,
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.fork_holds",
+      "comparisons": 5,
+      "pageLoads": 1,
+      "peakCachedNodes": 42,
+      "peakCachedDecodedBytes": 3546
+    },
+    {
+      "pageLimit": 1,
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.ignored_premise",
+      "comparisons": 3,
+      "pageLoads": 0,
+      "peakCachedNodes": 0,
+      "peakCachedDecodedBytes": 0
+    },
+    {
+      "pageLimit": 1,
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.list_copy_eq",
+      "comparisons": 8,
+      "pageLoads": 1,
+      "peakCachedNodes": 77,
+      "peakCachedDecodedBytes": 4591
+    },
+    {
+      "pageLimit": 1,
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.nat_self",
+      "comparisons": 5,
+      "pageLoads": 1,
+      "peakCachedNodes": 35,
+      "peakCachedDecodedBytes": 2131
+    },
+    {
+      "pageLimit": 1,
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.shared_induction_24",
+      "comparisons": 5,
+      "pageLoads": 1,
+      "peakCachedNodes": 181,
+      "peakCachedDecodedBytes": 6057
+    },
+    {
+      "pageLimit": 1,
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.shared_induction_64",
+      "comparisons": 5,
+      "pageLoads": 11,
+      "peakCachedNodes": 256,
+      "peakCachedDecodedBytes": 8565
+    },
+    {
+      "pageLimit": 1,
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.shared_induction_8",
+      "comparisons": 5,
+      "pageLoads": 1,
+      "peakCachedNodes": 85,
+      "peakCachedDecodedBytes": 3386
+    },
+    {
+      "pageLimit": 1,
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.sized_copy_eq",
+      "comparisons": 11,
+      "pageLoads": 1,
+      "peakCachedNodes": 131,
+      "peakCachedDecodedBytes": 7252
+    }
+  ],
+  "twoPages": [
+    {
+      "pageLimit": 2,
+      "edition": "published-15",
+      "name": "JacobiCore.E_pos",
+      "comparisons": 5,
+      "pageLoads": 1,
+      "peakCachedNodes": 74,
+      "peakCachedDecodedBytes": 3470
+    },
+    {
+      "pageLimit": 2,
+      "edition": "published-15",
+      "name": "JacobiData.slope_bound_abs",
+      "comparisons": 20,
+      "pageLoads": 2,
+      "peakCachedNodes": 435,
+      "peakCachedDecodedBytes": 18342
+    },
+    {
+      "pageLimit": 2,
+      "edition": "published-15",
+      "name": "SBracket.mk.inj",
+      "comparisons": 173,
+      "pageLoads": 2,
+      "peakCachedNodes": 463,
+      "peakCachedDecodedBytes": 25286
+    },
+    {
+      "pageLimit": 2,
+      "edition": "published-15",
+      "name": "CrossingData.crossing",
+      "comparisons": 8,
+      "pageLoads": 2,
+      "peakCachedNodes": 409,
+      "peakCachedDecodedBytes": 18657
+    },
+    {
+      "pageLimit": 2,
+      "edition": "working-26",
+      "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
+      "comparisons": 41,
+      "pageLoads": 2,
+      "peakCachedNodes": 480,
+      "peakCachedDecodedBytes": 19350
+    },
+    {
+      "pageLimit": 2,
+      "edition": "working-26",
+      "name": "JacobiData.slope_bound_abs",
+      "comparisons": 20,
+      "pageLoads": 2,
+      "peakCachedNodes": 435,
+      "peakCachedDecodedBytes": 18342
+    },
+    {
+      "pageLimit": 2,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_20418",
+      "comparisons": 23,
+      "pageLoads": 2,
+      "peakCachedNodes": 315,
+      "peakCachedDecodedBytes": 16528
+    },
+    {
+      "pageLimit": 2,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_3485",
+      "comparisons": 17,
+      "pageLoads": 2,
+      "peakCachedNodes": 373,
+      "peakCachedDecodedBytes": 17355
+    },
+    {
+      "pageLimit": 2,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_4274",
+      "comparisons": 14,
+      "pageLoads": 2,
+      "peakCachedNodes": 427,
+      "peakCachedDecodedBytes": 17500
+    },
+    {
+      "pageLimit": 2,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_49456",
+      "comparisons": 8,
+      "pageLoads": 1,
+      "peakCachedNodes": 42,
+      "peakCachedDecodedBytes": 2143
+    },
+    {
+      "pageLimit": 2,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_56144",
+      "comparisons": 20,
+      "pageLoads": 2,
+      "peakCachedNodes": 300,
+      "peakCachedDecodedBytes": 13619
+    },
+    {
+      "pageLimit": 2,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_15068",
+      "comparisons": 26,
+      "pageLoads": 2,
+      "peakCachedNodes": 335,
+      "peakCachedDecodedBytes": 14904
+    },
+    {
+      "pageLimit": 2,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_16912",
+      "comparisons": 23,
+      "pageLoads": 2,
+      "peakCachedNodes": 286,
+      "peakCachedDecodedBytes": 12846
+    },
+    {
+      "pageLimit": 2,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_19617",
+      "comparisons": 14,
+      "pageLoads": 2,
+      "peakCachedNodes": 307,
+      "peakCachedDecodedBytes": 13138
+    },
+    {
+      "pageLimit": 2,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_39831",
+      "comparisons": 17,
+      "pageLoads": 2,
+      "peakCachedNodes": 263,
+      "peakCachedDecodedBytes": 13959
+    },
+    {
+      "pageLimit": 2,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_43987",
+      "comparisons": 17,
+      "pageLoads": 1,
+      "peakCachedNodes": 204,
+      "peakCachedDecodedBytes": 10052
+    },
+    {
+      "pageLimit": 2,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_54159",
+      "comparisons": 14,
+      "pageLoads": 2,
+      "peakCachedNodes": 335,
+      "peakCachedDecodedBytes": 18059
+    },
+    {
+      "pageLimit": 2,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_54622",
+      "comparisons": 23,
+      "pageLoads": 2,
+      "peakCachedNodes": 366,
+      "peakCachedDecodedBytes": 16077
+    },
+    {
+      "pageLimit": 2,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_61403",
+      "comparisons": 5,
+      "pageLoads": 2,
+      "peakCachedNodes": 297,
+      "peakCachedDecodedBytes": 12190
+    },
+    {
+      "pageLimit": 2,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_6206",
+      "comparisons": 23,
+      "pageLoads": 2,
+      "peakCachedNodes": 288,
+      "peakCachedDecodedBytes": 14225
+    },
+    {
+      "pageLimit": 2,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_62755",
+      "comparisons": 8,
+      "pageLoads": 2,
+      "peakCachedNodes": 367,
+      "peakCachedDecodedBytes": 16289
+    },
+    {
+      "pageLimit": 2,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_63081",
+      "comparisons": 11,
+      "pageLoads": 2,
+      "peakCachedNodes": 370,
+      "peakCachedDecodedBytes": 17357
+    },
+    {
+      "pageLimit": 2,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_68077",
+      "comparisons": 23,
+      "pageLoads": 2,
+      "peakCachedNodes": 510,
+      "peakCachedDecodedBytes": 20931
+    },
+    {
+      "pageLimit": 2,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_68616",
+      "comparisons": 11,
+      "pageLoads": 2,
+      "peakCachedNodes": 362,
+      "peakCachedDecodedBytes": 17606
+    },
+    {
+      "pageLimit": 2,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_68794",
+      "comparisons": 11,
+      "pageLoads": 2,
+      "peakCachedNodes": 267,
+      "peakCachedDecodedBytes": 12170
+    },
+    {
+      "pageLimit": 2,
+      "edition": "goedel-sample-4331",
+      "name": "lean_workbook_plus_70240",
+      "comparisons": 11,
+      "pageLoads": 2,
+      "peakCachedNodes": 454,
+      "peakCachedDecodedBytes": 17794
+    },
+    {
+      "pageLimit": 2,
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.fan_holds",
+      "comparisons": 5,
+      "pageLoads": 1,
+      "peakCachedNodes": 22,
+      "peakCachedDecodedBytes": 1933
+    },
+    {
+      "pageLimit": 2,
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.fork_holds",
+      "comparisons": 5,
+      "pageLoads": 1,
+      "peakCachedNodes": 42,
+      "peakCachedDecodedBytes": 3546
+    },
+    {
+      "pageLimit": 2,
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.ignored_premise",
+      "comparisons": 3,
+      "pageLoads": 0,
+      "peakCachedNodes": 0,
+      "peakCachedDecodedBytes": 0
+    },
+    {
+      "pageLimit": 2,
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.list_copy_eq",
+      "comparisons": 8,
+      "pageLoads": 1,
+      "peakCachedNodes": 77,
+      "peakCachedDecodedBytes": 4591
+    },
+    {
+      "pageLimit": 2,
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.nat_self",
+      "comparisons": 5,
+      "pageLoads": 1,
+      "peakCachedNodes": 35,
+      "peakCachedDecodedBytes": 2131
+    },
+    {
+      "pageLimit": 2,
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.shared_induction_24",
+      "comparisons": 5,
+      "pageLoads": 1,
+      "peakCachedNodes": 181,
+      "peakCachedDecodedBytes": 6057
+    },
+    {
+      "pageLimit": 2,
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.shared_induction_64",
+      "comparisons": 5,
+      "pageLoads": 2,
+      "peakCachedNodes": 421,
+      "peakCachedDecodedBytes": 15048
+    },
+    {
+      "pageLimit": 2,
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.shared_induction_8",
+      "comparisons": 5,
+      "pageLoads": 1,
+      "peakCachedNodes": 85,
+      "peakCachedDecodedBytes": 3386
+    },
+    {
+      "pageLimit": 2,
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.sized_copy_eq",
+      "comparisons": 11,
+      "pageLoads": 1,
+      "peakCachedNodes": 131,
+      "peakCachedDecodedBytes": 7252
+    }
+  ]
+}

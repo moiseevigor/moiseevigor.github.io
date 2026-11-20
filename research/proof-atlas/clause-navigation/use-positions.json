@@ -1,0 +1,136 @@
+{
+  "totals": {
+    "crossesTypeField": 107,
+    "noExplicitTypeField": 77,
+    "noUse": 6,
+    "alternativesOutsideTypeFields": 107
+  },
+  "riccati": [
+    {
+      "binder": "J",
+      "use": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          1
+        ]
+      },
+      "crossed": [
+        {
+          "kind": "lam",
+          "field": "domain",
+          "node": 3248
+        }
+      ]
+    },
+    {
+      "binder": "p",
+      "use": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ]
+      },
+      "crossed": [
+        {
+          "kind": "lam",
+          "field": "domain",
+          "node": 3248
+        }
+      ]
+    },
+    {
+      "binder": "hab",
+      "use": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "crossed": []
+    },
+    {
+      "binder": "hz1",
+      "use": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "crossed": []
+    },
+    {
+      "binder": "hd",
+      "use": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          1,
+          0,
+          1
+        ]
+      },
+      "crossed": []
+    },
+    {
+      "binder": "hs",
+      "use": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          1,
+          1,
+          1
+        ]
+      },
+      "crossed": []
+    }
+  ]
+}

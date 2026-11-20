@@ -1,0 +1,80 @@
+[
+  {
+    "edition": "published-15",
+    "theorems": 561,
+    "noLeadingBinders": 10,
+    "allLeadingBindersPaired": 503,
+    "stopped": 48,
+    "pairs": 2059,
+    "remaining": 77,
+    "stoppingReasons": {
+      "proj": {
+        "count": 44,
+        "example": "JacobiCore.Sol.bC",
+        "indexSha256": "b9446310569894d0975539e97cdc9903f20fa5c5e56755c25a9ab3d91c129029",
+        "firstUnpairedDepth": 2
+      },
+      "app": {
+        "count": 3,
+        "example": "JacobiCore.Sol.mk.congr_simp",
+        "indexSha256": "577f0fc361ef0646d19d527feda814da36447bcc939af76c7b20ba3e10693428",
+        "firstUnpairedDepth": 4
+      },
+      "letE": {
+        "count": 1,
+        "example": "JacobiCore.Φ_eq_zero_of_eq",
+        "indexSha256": "5495b3ebfb1ac7154cd8e2c122a7dff0904c066f6b77b463c71f247cdafd4b2e",
+        "firstUnpairedDepth": 9
+      }
+    }
+  },
+  {
+    "edition": "working-26",
+    "theorems": 1083,
+    "noLeadingBinders": 62,
+    "allLeadingBindersPaired": 968,
+    "stopped": 53,
+    "pairs": 4002,
+    "remaining": 99,
+    "stoppingReasons": {
+      "app": {
+        "count": 8,
+        "example": "JacobiConcrete.amplitude.congr_simp",
+        "indexSha256": "e825205554179de710cc37911dcd9cb520670628d31589e32f8a95be74200298",
+        "firstUnpairedDepth": 3
+      },
+      "proj": {
+        "count": 44,
+        "example": "JacobiCore.Sol.bC",
+        "indexSha256": "74fc1b1b23febb4cb96b7ac9301abda340ef99ada92dc6df6d70fea143ee7cda",
+        "firstUnpairedDepth": 2
+      },
+      "letE": {
+        "count": 1,
+        "example": "JacobiCore.Φ_eq_zero_of_eq",
+        "indexSha256": "03eaf548aee65e0b2f25f7d1ea73867472a9963384a5937b01ac4da9f37e8d48",
+        "firstUnpairedDepth": 9
+      }
+    }
+  },
+  {
+    "edition": "goedel-sample-4331",
+    "theorems": 20,
+    "noLeadingBinders": 0,
+    "allLeadingBindersPaired": 20,
+    "stopped": 0,
+    "pairs": 93,
+    "remaining": 0,
+    "stoppingReasons": {}
+  },
+  {
+    "edition": "recursion-controls",
+    "theorems": 23,
+    "noLeadingBinders": 2,
+    "allLeadingBindersPaired": 21,
+    "stopped": 0,
+    "pairs": 59,
+    "remaining": 0,
+    "stoppingReasons": {}
+  }
+]

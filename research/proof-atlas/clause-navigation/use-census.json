@@ -1,0 +1,112 @@
+{
+  "witnessComparisons": 189,
+  "excludedControls": [
+    {
+      "edition": "recursion-controls",
+      "name": "AtlasExamples.ignored_premise",
+      "kind": "definition",
+      "binders": 1
+    }
+  ],
+  "editions": [
+    {
+      "crossChecked": 2059,
+      "edition": "published-15",
+      "theorems": 561,
+      "paired": 2059,
+      "outsideExplicitTypes": 1993,
+      "typeFieldsOnly": 14,
+      "unused": 52,
+      "example": {
+        "name": "JacobiCore.Sol.bC",
+        "indexSha256": "b9446310569894d0975539e97cdc9903f20fa5c5e56755c25a9ab3d91c129029",
+        "binder": "k",
+        "introduction": {
+          "root": 1,
+          "slots": []
+        },
+        "node": 37,
+        "witness": {
+          "node": 2,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              0,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "crossChecked": 4002,
+      "edition": "working-26",
+      "theorems": 1083,
+      "paired": 4002,
+      "outsideExplicitTypes": 3934,
+      "typeFieldsOnly": 14,
+      "unused": 54,
+      "example": {
+        "name": "JacobiCore.Sol.bC",
+        "indexSha256": "74fc1b1b23febb4cb96b7ac9301abda340ef99ada92dc6df6d70fea143ee7cda",
+        "binder": "k",
+        "introduction": {
+          "root": 1,
+          "slots": []
+        },
+        "node": 37,
+        "witness": {
+          "node": 2,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              0,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "crossChecked": 93,
+      "edition": "goedel-sample-4331",
+      "theorems": 20,
+      "paired": 93,
+      "outsideExplicitTypes": 87,
+      "typeFieldsOnly": 0,
+      "unused": 6
+    },
+    {
+      "crossChecked": 59,
+      "edition": "recursion-controls",
+      "theorems": 23,
+      "paired": 59,
+      "outsideExplicitTypes": 56,
+      "typeFieldsOnly": 1,
+      "unused": 2,
+      "example": {
+        "name": "AtlasExamples.Sized.nil.sizeOf_spec",
+        "indexSha256": "d4484b0b60ced15b82274a7197488b9a6141ccfb733ce66ac42068246a94a8fc",
+        "binder": "α",
+        "introduction": {
+          "root": 1,
+          "slots": []
+        },
+        "node": 40,
+        "witness": {
+          "node": 2,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              0,
+              1
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
