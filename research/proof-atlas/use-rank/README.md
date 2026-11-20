@@ -195,3 +195,20 @@ The reader applies the same [function-field traversal](../step-reading/input-hea
 Across all 143 supplied positions in the 28 recorded calls from six AI proofs, the head is a constant at 114 positions, a bound variable at 15, a universe sort at 10 and a lambda at four. All 97 arguments with an application at their root lead to a constant. This count uses argument positions, so repeated terms at different inputs count separately. The 28 calls are the existing recorded selection, not a random sample of these proofs.
 
 The native roles show a limit of using a head shape as an explanation. At call 0 in lean_workbook_20418, input 3 is a lambda with a value role and input 4 is a lambda with a proof role. Across the sample three lambda positions are value inputs and one is a proof input. The reader takes the role from the recorded observation and the body link from the compiled term. The browser check resolves every input head against its packet and checks generated links at both supported test widths.
+
+## Whole-proof test of argument heads
+
+The 28 recorded calls above contained 97 compound arguments, all headed by constants. Counting every argument position in the six compiled proof bodies gives a different result. Of 13,643,790 compound argument occurrences, 408 have a bound variable in function position. They occur in two proofs. The remaining 13,643,382 have constant heads. Here a compound argument is an application in the argument field of another application. The count includes type fields and implicit arguments inside the proof root, and counts each use of a shared row at its occurrence multiplicity.
+
+| Proof | Expanded argument positions | Applied bound-variable heads | Example from original term |
+|---|---:|---:|---|
+| lean_workbook_20418 | 14,887,306 | 0 |  |
+| lean_workbook_4274 | 33,234 | 334 | [Argument](https://moiseevigor.github.io/projects/proof-atlas/library/?edition=goedel-sample-4331&proof=lean_workbook_4274&route=1%3A1.1.1.1.2.2.2.2.1.1.0.1#expr-215) → [Function](https://moiseevigor.github.io/projects/proof-atlas/library/?edition=goedel-sample-4331&proof=lean_workbook_4274&route=1%3A1.1.1.1.2.2.2.2.1.1.0.1.0#expr-213) → [Binder b](https://moiseevigor.github.io/projects/proof-atlas/library/?edition=goedel-sample-4331&proof=lean_workbook_4274&route=1%3A1#expr-1449) |
+| lean_workbook_plus_15068 | 3,536,537 | 0 |  |
+| lean_workbook_plus_19617 | 3,473 | 74 | [Argument](https://moiseevigor.github.io/projects/proof-atlas/library/?edition=goedel-sample-4331&proof=lean_workbook_plus_19617&route=1%3A1.1.1.1.2.2.2.2.1.0.1.0.1.1.0.1.0.1.1.1#expr-318) → [Function](https://moiseevigor.github.io/projects/proof-atlas/library/?edition=goedel-sample-4331&proof=lean_workbook_plus_19617&route=1%3A1.1.1.1.2.2.2.2.1.0.1.0.1.1.0.1.0.1.1.1.0#expr-163) → [Binder f](https://moiseevigor.github.io/projects/proof-atlas/library/?edition=goedel-sample-4331&proof=lean_workbook_plus_19617&route=1%3A#expr-562) |
+| lean_workbook_plus_39831 | 236,561 | 0 |  |
+| lean_workbook_plus_6206 | 15,866,163 | 0 |  |
+
+The six proof bodies contain 69,173,537 expanded expressions and 34,563,274 argument positions. Direct arguments also include 1,377,273 literal, 11,342 universal-binder and 13 metadata occurrences. None of these three shapes appeared among the 143 selected argument positions. Metadata is counted at its original constructor without silently unwrapping it.
+
+The [census](full-input-heads.cjs) processes one checksum-verified packet at a time. It propagates incoming counts down the shared graph, then independently adds per-category counts up from children and verifies the total number of applications. It retains one exact argument and head route per observed category per proof. These structural counts do not assign proof roles or estimate frequencies beyond these six declarations. [Counts and occurrence witnesses](full-input-heads.json).
