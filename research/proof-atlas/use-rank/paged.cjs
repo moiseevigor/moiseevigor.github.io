@@ -4,7 +4,7 @@ const pages=require('../../../public/js/proof-atlas-source-pages');
 const {limits}=require('../free-index-multiplicity/model.cjs');
 const {makeSplits,binds}=require('./model.cjs');
 
-async function open(cursor,binder,{signal}={}) {
+async function open(cursor,binder,{signal,within}={}) {
   const source=pages.identity(cursor), data=cursor.data;
   if (data.kind.length>limits.sourceNodes) throw Error('Ordinal source row bound');
   const at={root:binder.root,slots:[...binder.slots]};
@@ -19,7 +19,21 @@ async function open(cursor,binder,{signal}={}) {
   }
   const intro=await read(id);
   if (![6,7,8].includes(intro.kind)) throw Error('Expected original binder');
-  const field=intro.kind===8?2:1, body=intro.children[field], prefix=[...at.slots,field];
+  const field=intro.kind===8?2:1, prefix=[...at.slots,field];
+  let body=intro.children[field], initialIndex=0;
+  // A folded input inherits the binder depth accumulated on its original path.
+  // Local ordinals start at one even when earlier siblings use the same binder.
+  if (within !== undefined) {
+    if (!within || within.root!==at.root || !Array.isArray(within.slots) ||
+        !prefix.every((slot,i)=>slot===within.slots[i])) throw Error('Outside binder body');
+    for (const slot of within.slots.slice(prefix.length)) {
+      const row=await read(body);
+      if (!Number.isInteger(slot) || slot<0 || slot>=row.children.length) throw Error('Invalid subtree field');
+      initialIndex+=Number(binds(row.kind,slot));
+      body=row.children[slot];
+      prefix.push(slot);
+    }
+  }
   const key=(node,index)=>node+':'+index;
   const requested=new Map(), refs=new Map();
   let scheduled=0, evaluated=0;
@@ -30,7 +44,7 @@ async function open(cursor,binder,{signal}={}) {
     if (scheduled>=limits.queryRows) throw Error('Ordinal query state bound');
     indices.add(index);scheduled++;
   }
-  schedule(body,0);
+  schedule(body,initialIndex);
   // Children have lower row numbers. All demands on a row are known when
   // reached, including several depths inherited through different parents.
   for (let node=body;node>=0;node--) {
@@ -60,11 +74,11 @@ async function open(cursor,binder,{signal}={}) {
     requested.delete(node);
   }
   if (refs.size) throw Error('Unconsumed field references');
-  const total=table.totalAt(key(body,0));
+  const total=table.totalAt(key(body,initialIndex));
   async function select(ordinal) {
     if (typeof ordinal!=='bigint' || ordinal<1n || ordinal>total) throw RangeError('Ordinal outside binder uses');
     const slots=[...prefix];
-    let node=body,index=0,mass=total;
+    let node=body,index=initialIndex,mass=total;
     while (true) {
       const row=await read(node);
       if (row.kind===0) {
@@ -81,7 +95,7 @@ async function open(cursor,binder,{signal}={}) {
   async function rank(route) {
     if (route.root!==at.root || prefix.length>route.slots.length ||
         !prefix.every((slot,i)=>slot===route.slots[i])) throw Error('Outside binder body');
-    let node=body,index=0,mass=total,ordinal=1n;
+    let node=body,index=initialIndex,mass=total,ordinal=1n;
     for (const slot of route.slots.slice(prefix.length)) {
       const row=await read(node);
       if (!Number.isInteger(slot) || slot<0 || slot>=row.children.length) throw Error('Invalid field slot');
