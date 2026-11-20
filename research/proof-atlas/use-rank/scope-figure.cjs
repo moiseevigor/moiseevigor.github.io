@@ -1,5 +1,6 @@
 // Render recorded occurrence groups without merging distinct binder routes.
 'use strict';
+const assert = require('node:assert/strict');
 const rows = require('./local-function-scopes.json');
 const escape = x => String(x).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 function link(source, target, label) {
@@ -56,12 +57,23 @@ for (const result of aliases.results.filter(r => r.repeatedBinder)) {
     console.log('<label><input type="radio" name="' + escape(result.name) + '" ' + (i ? '' : 'checked ') +
       'value="' + i + '">' + escape(field === 'arg' ? 'Argument' : 'Function') + '</label>');
   }
+  const first = result.repeatedBinder[0];
+  const toInput = first.input.route.slots.slice(first.head.binder.route.slots.length);
+  const toHead = first.head.route.slots.slice(first.input.route.slots.length);
   for (const [i,w] of result.repeatedBinder.entries()) {
+    const base = w.head.binder.route;
+    const input = {node:first.input.node, route:{root:base.root,slots:base.slots.concat(toInput)}};
+    const head = {node:first.head.node, route:{root:base.root,slots:input.route.slots.concat(toHead)}};
+    assert.deepEqual(input,w.input);
+    assert.deepEqual(head.route,w.head.route);
+    assert.equal(head.node,w.head.node);
     console.log('<p data-branch="' + i + '"' + (i ? ' hidden' : '') + '>' +
-      link(source,w.input,'Argument ' + w.input.node) + ' → ' + link(source,w.head,'function ' + w.head.node) +
+      link(source,input,'Argument ' + input.node) + ' → ' + link(source,head,'function ' + head.node) +
       ' → ' + link(source,w.head.binder,w.head.binder.name + ' (binder ' + w.head.binder.node + ')') +
-      '<br><small>Binder depth ' + w.head.binder.route.slots.length + ' from the proof root</small></p>');
+      '<br><small>Binder depth ' + base.slots.length + ' from the proof root</small></p>');
   }
+  console.log('<p>From either binder, child slots <code>' + toInput.join('.') +
+    '</code> reach the argument. Slot <code>' + toHead.join('.') + '</code> then reaches its function.</p>');
   console.log('</fieldset>');
 }
 console.log(`</section></main><script>document.querySelectorAll('fieldset').forEach(group => {

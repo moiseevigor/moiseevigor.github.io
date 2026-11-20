@@ -1,0 +1,606 @@
+[
+  {
+    "name": "CrossingData.mk.inj",
+    "indexSha256": "9a3563fa5735dfbd744d05dc2d0ab6f830aaba0350910d58562d69050f8ee027",
+    "occurrences": 8,
+    "rowPairs": 8,
+    "templates": 8,
+    "shared": 0,
+    "ambiguous": 0,
+    "recovered": 8,
+    "fullSlots": 150,
+    "prefixSlots": 21,
+    "suffixSlots": 66
+  },
+  {
+    "name": "CrossingData.mk.injEq",
+    "indexSha256": "50b24f97460a608758171e1b114647edec87e2d9f59f630512be4c6dd22082d3",
+    "occurrences": 30,
+    "rowPairs": 28,
+    "templates": 30,
+    "shared": 0,
+    "ambiguous": 2,
+    "recovered": 30,
+    "fullSlots": 1552,
+    "prefixSlots": 93,
+    "suffixSlots": 936,
+    "example": {
+      "binderRow": 656,
+      "inputRow": 426,
+      "suffixes": [
+        "1.1.1.1.1.1.1.1.1.0.0.0.0.1.1.1.1.1.0.0.0.0.0.0.0.1.1.1.1.1.1.1.1.0.0.0.0.0.0.0.1.1.1.1.1.0.0.1.1.0.1.1",
+        "1.1.1.1.1.1.1.1.1.0.0.0.0.1.1.1.1.1.0.0.0.0.0.0.0.1.1.1.1.1.1.1.1.0.0.0.0.0.0.0.0.1.1.1.1.1.0.0.1.1.0.1"
+      ]
+    }
+  },
+  {
+    "name": "CrossingData.mk.sizeOf_spec",
+    "indexSha256": "8f037967c73229bb6b5630b4a3203a4324d2fd4dd9d041a71722c71310597c40",
+    "occurrences": 8,
+    "rowPairs": 6,
+    "templates": 8,
+    "shared": 0,
+    "ambiguous": 2,
+    "recovered": 8,
+    "fullSlots": 129,
+    "prefixSlots": 5,
+    "suffixSlots": 89,
+    "example": {
+      "binderRow": 201,
+      "inputRow": 173,
+      "suffixes": [
+        "1.1.1.1.1.1.1.1.0.1.1.0.1",
+        "1.1.1.1.1.1.1.1.0.0.1.0.1"
+      ]
+    }
+  },
+  {
+    "name": "JacobiCore.E_lt_K",
+    "indexSha256": "47fa9966c4aaafbafc71e88bf751adbae8e935215a41254e4433c2168295fad5",
+    "occurrences": 2,
+    "rowPairs": 1,
+    "templates": 2,
+    "shared": 0,
+    "ambiguous": 1,
+    "recovered": 2,
+    "fullSlots": 20,
+    "prefixSlots": 2,
+    "suffixSlots": 16,
+    "example": {
+      "binderRow": 1717,
+      "inputRow": 439,
+      "suffixes": [
+        "2.1.1.1.0.1.1.1.1",
+        "2.0.1.1.1.1.1"
+      ]
+    }
+  },
+  {
+    "name": "JacobiCore.Sol.mk.congr_simp",
+    "indexSha256": "577f0fc361ef0646d19d527feda814da36447bcc939af76c7b20ba3e10693428",
+    "occurrences": 99,
+    "rowPairs": 45,
+    "templates": 85,
+    "shared": 9,
+    "ambiguous": 14,
+    "recovered": 99,
+    "fullSlots": 3695,
+    "prefixSlots": 1108,
+    "suffixSlots": 2045,
+    "example": {
+      "binderRow": 796,
+      "inputRow": 164,
+      "suffixes": [
+        "1.1.1.0.0.1.1.1.1.0.0.1.1.1.1.1.0.1.0.1.1",
+        "1.1.1.0.0.1.1.1.1.0.0.0.1.1.1.1.1.0.1.0.1.1.1"
+      ]
+    }
+  },
+  {
+    "name": "JacobiCore.Sol.mk.inj",
+    "indexSha256": "8ab9b7bb7cd03bbc772fef2a11b38217a62ae40efd0a25e7d2ba44f73a372651",
+    "occurrences": 18,
+    "rowPairs": 18,
+    "templates": 18,
+    "shared": 0,
+    "ambiguous": 0,
+    "recovered": 18,
+    "fullSlots": 295,
+    "prefixSlots": 39,
+    "suffixSlots": 178
+  },
+  {
+    "name": "JacobiCore.Sol.mk.injEq",
+    "indexSha256": "f28c8bfbc20580015aa9f26708de603a8bf79148bf52dc69c777004d59eb8321",
+    "occurrences": 60,
+    "rowPairs": 56,
+    "templates": 60,
+    "shared": 0,
+    "ambiguous": 4,
+    "recovered": 60,
+    "fullSlots": 2411,
+    "prefixSlots": 167,
+    "suffixSlots": 1736,
+    "example": {
+      "binderRow": 726,
+      "inputRow": 580,
+      "suffixes": [
+        "1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.0.0.0.0.0.0.1.1.1.1.1.1.1.0.0.0.0.0.0.1.1.1.1.1.1.0.0.0.0.0.0.1.1.1.1.0.1.0.1.1.0.1.1",
+        "1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.0.0.0.0.0.0.1.1.1.1.1.1.1.0.0.0.0.0.0.1.1.1.1.1.1.0.0.0.0.0.0.0.1.1.1.1.0.1.0.1.1.0.1"
+      ]
+    }
+  },
+  {
+    "name": "JacobiCore.Sol.mk.sizeOf_spec",
+    "indexSha256": "480ac8aefe8cab1f7f4f2760f0bbba71732bacfa3383fda98b4690dd79991819",
+    "occurrences": 9,
+    "rowPairs": 9,
+    "templates": 9,
+    "shared": 0,
+    "ambiguous": 0,
+    "recovered": 9,
+    "fullSlots": 107,
+    "prefixSlots": 6,
+    "suffixSlots": 89
+  },
+  {
+    "name": "JacobiCore.eps_reflect",
+    "indexSha256": "96f950ddf29096275062de18ba7943ce93369a11893a26e8c796ebb3002560fa",
+    "occurrences": 2,
+    "rowPairs": 1,
+    "templates": 2,
+    "shared": 0,
+    "ambiguous": 1,
+    "recovered": 2,
+    "fullSlots": 15,
+    "prefixSlots": 2,
+    "suffixSlots": 11,
+    "example": {
+      "binderRow": 1476,
+      "inputRow": 1046,
+      "suffixes": [
+        "2.1.1.1.1",
+        "2.1.0.1.1.1"
+      ]
+    }
+  },
+  {
+    "name": "JacobiCore.eps_shift",
+    "indexSha256": "ac22f9f8ff8f5f09efbee338a2cb48d5992e1c66b11be153dca5e6c49492a24b",
+    "occurrences": 2,
+    "rowPairs": 1,
+    "templates": 2,
+    "shared": 0,
+    "ambiguous": 1,
+    "recovered": 2,
+    "fullSlots": 15,
+    "prefixSlots": 2,
+    "suffixSlots": 11,
+    "example": {
+      "binderRow": 1894,
+      "inputRow": 1019,
+      "suffixes": [
+        "2.1.1.1.1",
+        "2.1.0.1.1.1"
+      ]
+    }
+  },
+  {
+    "name": "JacobiCore.mk.inj",
+    "indexSha256": "4830f641c583b0ef651ea37eed5145066e496f6cc4afb8394d5c235d92dc6439",
+    "occurrences": 26,
+    "rowPairs": 26,
+    "templates": 26,
+    "shared": 0,
+    "ambiguous": 0,
+    "recovered": 26,
+    "fullSlots": 659,
+    "prefixSlots": 112,
+    "suffixSlots": 302
+  },
+  {
+    "name": "JacobiCore.mk.injEq",
+    "indexSha256": "d861c2708d1186d6b9d041c0025ae4f17ee79a9d3778f07e3597a375fa132cd2",
+    "occurrences": 86,
+    "rowPairs": 82,
+    "templates": 86,
+    "shared": 0,
+    "ambiguous": 4,
+    "recovered": 86,
+    "fullSlots": 5817,
+    "prefixSlots": 441,
+    "suffixSlots": 3943,
+    "example": {
+      "binderRow": 1406,
+      "inputRow": 984,
+      "suffixes": [
+        "1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.0.0.0.0.0.1.1.1.1.1.1.0.0.0.0.0.0.1.1.1.1.1.1.1.0.0.0.0.0.0.0.0.1.1.1.1.1.1.1.1.1.0.0.0.0.0.0.0.1.1.1.1.1.0.1.0.1.1.0.1.1",
+        "1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.0.0.0.0.0.1.1.1.1.1.1.0.0.0.0.0.0.1.1.1.1.1.1.1.0.0.0.0.0.0.0.0.1.1.1.1.1.1.1.1.1.0.0.0.0.0.0.0.0.1.1.1.1.1.0.1.0.1.1.0.1"
+      ]
+    }
+  },
+  {
+    "name": "JacobiCore.mk.sizeOf_spec",
+    "indexSha256": "9e70a96c1627fe7ec48a143c7326db719d457267c72806f806b7e79b65066413",
+    "occurrences": 23,
+    "rowPairs": 18,
+    "templates": 23,
+    "shared": 0,
+    "ambiguous": 5,
+    "recovered": 23,
+    "fullSlots": 538,
+    "prefixSlots": 18,
+    "suffixSlots": 439,
+    "example": {
+      "binderRow": 425,
+      "inputRow": 380,
+      "suffixes": [
+        "1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.0.1.1.0.1",
+        "1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.0.0.1.0.1"
+      ]
+    }
+  },
+  {
+    "name": "JacobiCore.sc",
+    "indexSha256": "0d038474fdce2736dbd25828296101d45e591f9d2ed89371db330e46d11e1bfa",
+    "occurrences": 2,
+    "rowPairs": 1,
+    "templates": 2,
+    "shared": 0,
+    "ambiguous": 1,
+    "recovered": 2,
+    "fullSlots": 15,
+    "prefixSlots": 2,
+    "suffixSlots": 11,
+    "example": {
+      "binderRow": 1626,
+      "inputRow": 1422,
+      "suffixes": [
+        "2.1.1.1.1",
+        "2.1.0.1.1.1"
+      ]
+    }
+  },
+  {
+    "name": "JacobiCore.sd",
+    "indexSha256": "d5fd4678e31ba4d7bb89707a6c5522163297c426622e40d2b23f05741061639c",
+    "occurrences": 2,
+    "rowPairs": 1,
+    "templates": 2,
+    "shared": 0,
+    "ambiguous": 1,
+    "recovered": 2,
+    "fullSlots": 15,
+    "prefixSlots": 2,
+    "suffixSlots": 11,
+    "example": {
+      "binderRow": 3005,
+      "inputRow": 1831,
+      "suffixes": [
+        "2.1.1.1.1",
+        "2.1.0.1.1.1"
+      ]
+    }
+  },
+  {
+    "name": "JacobiData.mk.inj",
+    "indexSha256": "3b77cf38bac3133c9d848c1712a541639e1be92e3c53099e6f43bde00963f900",
+    "occurrences": 22,
+    "rowPairs": 22,
+    "templates": 22,
+    "shared": 0,
+    "ambiguous": 0,
+    "recovered": 22,
+    "fullSlots": 495,
+    "prefixSlots": 63,
+    "suffixSlots": 264
+  },
+  {
+    "name": "JacobiData.mk.injEq",
+    "indexSha256": "ec1b6ec38ae233477a11a20b104f6259f3ce913aacd3048bcbbfea005e5e2d6f",
+    "occurrences": 86,
+    "rowPairs": 79,
+    "templates": 86,
+    "shared": 0,
+    "ambiguous": 7,
+    "recovered": 86,
+    "fullSlots": 4993,
+    "prefixSlots": 258,
+    "suffixSlots": 3525,
+    "example": {
+      "binderRow": 1141,
+      "inputRow": 909,
+      "suffixes": [
+        "1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.0.0.0.0.0.0.1.1.1.1.1.1.1.0.0.0.0.0.0.0.1.1.1.1.1.1.1.1.0.0.0.0.0.0.1.1.1.1.1.1.1.0.0.0.0.0.0.0.1.1.1.1.1.0.1.0.1.1.0.1.1",
+        "1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.0.0.0.0.0.0.1.1.1.1.1.1.1.0.0.0.0.0.0.0.1.1.1.1.1.1.1.1.0.0.0.0.0.0.1.1.1.1.1.1.1.0.0.0.0.0.0.0.0.1.1.1.1.1.0.1.0.1.1.0.1"
+      ]
+    }
+  },
+  {
+    "name": "JacobiData.mk.sizeOf_spec",
+    "indexSha256": "120728f05728517c60d4b704df9e3336497117bbefe9c8f7a43bee3a86a8a736",
+    "occurrences": 11,
+    "rowPairs": 11,
+    "templates": 11,
+    "shared": 0,
+    "ambiguous": 0,
+    "recovered": 11,
+    "fullSlots": 176,
+    "prefixSlots": 12,
+    "suffixSlots": 132
+  },
+  {
+    "name": "JacobiFull.cell_roots",
+    "indexSha256": "8b9b85e812597c464d74b10014a2df8e8591ae943aeb67e7edc431aa9ed509a2",
+    "occurrences": 2,
+    "rowPairs": 2,
+    "templates": 2,
+    "shared": 0,
+    "ambiguous": 0,
+    "recovered": 2,
+    "fullSlots": 94,
+    "prefixSlots": 29,
+    "suffixSlots": 65
+  },
+  {
+    "name": "JacobiFull.coincide_imp",
+    "indexSha256": "546326cb55b631104c99b4952b1fbb8f269bb3eace2e47bea0299d88d265ba62",
+    "occurrences": 1,
+    "rowPairs": 1,
+    "templates": 1,
+    "shared": 0,
+    "ambiguous": 0,
+    "recovered": 1,
+    "fullSlots": 28,
+    "prefixSlots": 19,
+    "suffixSlots": 9
+  },
+  {
+    "name": "JacobiFull.exists_α1_zero",
+    "indexSha256": "73f34663b09db600556e5f4b9c72e9ee69631fcd964ed54273621087ff9a0098",
+    "occurrences": 79,
+    "rowPairs": 19,
+    "templates": 79,
+    "shared": 0,
+    "ambiguous": 14,
+    "recovered": 79,
+    "fullSlots": 1773,
+    "prefixSlots": 15,
+    "suffixSlots": 1290,
+    "example": {
+      "binderRow": 2433,
+      "inputRow": 2377,
+      "suffixes": [
+        "2.2.2.2.1.1.1.1.2.1.1.1.0.0.1.0.1.0.1",
+        "2.2.2.2.1.1.1.1.2.1.1.1.0.0.0.1.0.1"
+      ]
+    }
+  },
+  {
+    "name": "JacobiFull.mk.inj",
+    "indexSha256": "4d9e95dfbbf0db9af3adbfb86d619d6b18d6bdaa329eb8ede7545c3b71e9fa25",
+    "occurrences": 6,
+    "rowPairs": 6,
+    "templates": 6,
+    "shared": 0,
+    "ambiguous": 0,
+    "recovered": 6,
+    "fullSlots": 82,
+    "prefixSlots": 10,
+    "suffixSlots": 52
+  },
+  {
+    "name": "JacobiFull.mk.injEq",
+    "indexSha256": "c635898c5482f80cf1bd49d2e9a99345a7520bc1f03b18f671f03caaa33b2db9",
+    "occurrences": 16,
+    "rowPairs": 16,
+    "templates": 16,
+    "shared": 0,
+    "ambiguous": 0,
+    "recovered": 16,
+    "fullSlots": 502,
+    "prefixSlots": 50,
+    "suffixSlots": 313
+  },
+  {
+    "name": "JacobiFull.mk.sizeOf_spec",
+    "indexSha256": "b67fec5851159192ca4cd7f78666b0293f7282876c896e0c15051e8e5e25e2db",
+    "occurrences": 7,
+    "rowPairs": 5,
+    "templates": 7,
+    "shared": 0,
+    "ambiguous": 2,
+    "recovered": 7,
+    "fullSlots": 93,
+    "prefixSlots": 1,
+    "suffixSlots": 86,
+    "example": {
+      "binderRow": 432,
+      "inputRow": 405,
+      "suffixes": [
+        "1.1.1.1.1.1.1.1.1.0.1.1.0.1",
+        "1.1.1.1.1.1.1.1.1.0.0.1.0.1"
+      ]
+    }
+  },
+  {
+    "name": "JacobiFull.roots_ncard",
+    "indexSha256": "6def609f71f4d867b9d2a6d666876f1ba193c543667cdaa26ba1fe342ded9425",
+    "occurrences": 4,
+    "rowPairs": 4,
+    "templates": 4,
+    "shared": 0,
+    "ambiguous": 0,
+    "recovered": 4,
+    "fullSlots": 106,
+    "prefixSlots": 3,
+    "suffixSlots": 100
+  },
+  {
+    "name": "JacobiInit.f1_div_c_strictAntiOn",
+    "indexSha256": "7762fbd737bff13b4b7fd3bdeb70fbc65cebb7a8a188762601d049a1e204aff0",
+    "occurrences": 2,
+    "rowPairs": 2,
+    "templates": 2,
+    "shared": 0,
+    "ambiguous": 0,
+    "recovered": 2,
+    "fullSlots": 25,
+    "prefixSlots": 3,
+    "suffixSlots": 19
+  },
+  {
+    "name": "JacobiInit.α1_div_d_strictAntiOn",
+    "indexSha256": "002764b0bf833524ad9dc5f793eb2979411385a3f15b415d58c33b7c4a787391",
+    "occurrences": 1,
+    "rowPairs": 1,
+    "templates": 1,
+    "shared": 0,
+    "ambiguous": 0,
+    "recovered": 1,
+    "fullSlots": 11,
+    "prefixSlots": 3,
+    "suffixSlots": 8
+  },
+  {
+    "name": "JacobiInit.α1_div_d_strictMonoOn",
+    "indexSha256": "21030e0ed9f74aca0cfe1331358d9260e92c39025796b2f6b54a0b6cd00a0455",
+    "occurrences": 1,
+    "rowPairs": 1,
+    "templates": 1,
+    "shared": 0,
+    "ambiguous": 0,
+    "recovered": 1,
+    "fullSlots": 11,
+    "prefixSlots": 3,
+    "suffixSlots": 8
+  },
+  {
+    "name": "JacobiInit.β1_strictAntiOn",
+    "indexSha256": "792473f64f3519479b8c717f52f7d7d6073d47bec538bcfc6d7b0c41f977ec4c",
+    "occurrences": 1,
+    "rowPairs": 1,
+    "templates": 1,
+    "shared": 0,
+    "ambiguous": 0,
+    "recovered": 1,
+    "fullSlots": 12,
+    "prefixSlots": 3,
+    "suffixSlots": 9
+  },
+  {
+    "name": "JacobiInit.β1_strictMonoOn",
+    "indexSha256": "a320d59995ebd7189e9ee7ab1f5328c21ba71c509aabb4732f0d8d16bf67aa31",
+    "occurrences": 1,
+    "rowPairs": 1,
+    "templates": 1,
+    "shared": 0,
+    "ambiguous": 0,
+    "recovered": 1,
+    "fullSlots": 12,
+    "prefixSlots": 3,
+    "suffixSlots": 9
+  },
+  {
+    "name": "JacobiPeriodic.exists_unique_f1_zero",
+    "indexSha256": "ebb0f065c09d301b2b8d4760c859b1cec87d2bdc2ce800f4607eff916d3292d0",
+    "occurrences": 65,
+    "rowPairs": 18,
+    "templates": 65,
+    "shared": 0,
+    "ambiguous": 10,
+    "recovered": 65,
+    "fullSlots": 1817,
+    "prefixSlots": 32,
+    "suffixSlots": 1537,
+    "example": {
+      "binderRow": 8155,
+      "inputRow": 6274,
+      "suffixes": [
+        "2.2.2.2.2.2.2.2.1.1.1.1.1.1.1.1.1.0.1.1.1.1.1.1.1.1.0.0.1.0.1",
+        "2.2.2.2.2.2.2.2.1.1.1.1.1.1.1.1.1.0.1.1.1.1.1.1.1.0.0.1"
+      ]
+    }
+  },
+  {
+    "name": "JacobiPeriodic.exists_unique_β1_zero",
+    "indexSha256": "1ec5ff4c96f8b206b65785fe8cadd808ab3493fe775e48074cdfe6a7ed91624b",
+    "occurrences": 67,
+    "rowPairs": 19,
+    "templates": 67,
+    "shared": 0,
+    "ambiguous": 10,
+    "recovered": 67,
+    "fullSlots": 2150,
+    "prefixSlots": 43,
+    "suffixSlots": 1595,
+    "example": {
+      "binderRow": 5664,
+      "inputRow": 4951,
+      "suffixes": [
+        "2.2.2.2.2.2.2.2.1.1.1.1.1.1.1.1.1.0.1.1.1.1.1.1.1.1.1.0.0.1.0.1",
+        "2.2.2.2.2.2.2.2.1.1.1.1.1.1.1.1.1.0.1.1.1.1.1.1.1.1.0.0.1"
+      ]
+    }
+  },
+  {
+    "name": "SBracket.exact_time",
+    "indexSha256": "aed7bba8bad0f58a4f5984ab85bf3755aeeec87c4c48c7b12cd53388a877ed10",
+    "occurrences": 2,
+    "rowPairs": 2,
+    "templates": 2,
+    "shared": 0,
+    "ambiguous": 0,
+    "recovered": 2,
+    "fullSlots": 71,
+    "prefixSlots": 17,
+    "suffixSlots": 37
+  },
+  {
+    "name": "SBracket.mk.inj",
+    "indexSha256": "39dbe3b524a288ceb58009e86becc10331d8bbd3e230306d727649e9da8c6d76",
+    "occurrences": 6,
+    "rowPairs": 6,
+    "templates": 6,
+    "shared": 0,
+    "ambiguous": 0,
+    "recovered": 6,
+    "fullSlots": 262,
+    "prefixSlots": 70,
+    "suffixSlots": 52
+  },
+  {
+    "name": "SBracket.mk.injEq",
+    "indexSha256": "5dfc0704c8a7cb42819bb6eb84a88ed812dc9cf698fb7d3112cbb3d449b95fed",
+    "occurrences": 16,
+    "rowPairs": 16,
+    "templates": 16,
+    "shared": 0,
+    "ambiguous": 0,
+    "recovered": 16,
+    "fullSlots": 1852,
+    "prefixSlots": 261,
+    "suffixSlots": 810
+  },
+  {
+    "name": "SBracket.mk.sizeOf_spec",
+    "indexSha256": "7424eac1a54cfa7504cd6924b56f5233f51bb944c58c83a706462cfbd468094a",
+    "occurrences": 7,
+    "rowPairs": 5,
+    "templates": 7,
+    "shared": 0,
+    "ambiguous": 2,
+    "recovered": 7,
+    "fullSlots": 233,
+    "prefixSlots": 21,
+    "suffixSlots": 86,
+    "example": {
+      "binderRow": 782,
+      "inputRow": 736,
+      "suffixes": [
+        "1.1.1.1.1.1.1.1.1.0.1.1.0.1",
+        "1.1.1.1.1.1.1.1.1.0.0.1.0.1"
+      ]
+    }
+  }
+]
