@@ -1,56 +1,167 @@
-[
-  {
-    "name": "lean_workbook_20418",
-    "nativeOwner": "41d2c12a83e39f4106af44f986507a26ef12e9cebeaa45d7ffb5043b4dd5481f",
-    "calls": 2,
-    "available": 10,
-    "empty": 2,
-    "unavailable": 0,
-    "edges": 13
-  },
-  {
-    "name": "lean_workbook_4274",
-    "nativeOwner": "b5962876ca5cb0031e5fa1785270a6246f694e42aaa09568ef2ac6b5f41f85b6",
-    "calls": 5,
-    "available": 21,
-    "empty": 9,
-    "unavailable": 0,
-    "edges": 20
-  },
-  {
-    "name": "lean_workbook_plus_15068",
-    "nativeOwner": "f441c1be3c49a24fc059c36868562acf1bf06ea43478641b0f8952f5acca4c27",
-    "calls": 4,
-    "available": 30,
-    "empty": 6,
-    "unavailable": 0,
-    "edges": 48
-  },
-  {
-    "name": "lean_workbook_plus_19617",
-    "nativeOwner": "d1915c984d7dba28269f143a8db75c029d5bf19e827fd6855a7c4828a946fee3",
-    "calls": 5,
-    "available": 22,
-    "empty": 8,
-    "unavailable": 0,
-    "edges": 24
-  },
-  {
-    "name": "lean_workbook_plus_39831",
-    "nativeOwner": "68b3f9aed9840e192856e9d292884a7e2ce60a2bb508369d71e0b42c51669a2b",
-    "calls": 4,
-    "available": 20,
-    "empty": 8,
-    "unavailable": 0,
-    "edges": 20
-  },
-  {
-    "name": "lean_workbook_plus_6206",
-    "nativeOwner": "92f9539805923baff5887be36081e997f0215d43329d5eda7cc7bec72acefc83",
-    "calls": 8,
-    "available": 40,
-    "empty": 13,
-    "unavailable": 0,
-    "edges": 46
-  }
-]
+{
+  "records": [
+    {
+      "name": "lean_workbook_20418",
+      "nativeOwner": "41d2c12a83e39f4106af44f986507a26ef12e9cebeaa45d7ffb5043b4dd5481f",
+      "calls": 2,
+      "available": 10,
+      "empty": 2,
+      "unavailable": 0,
+      "edges": 13,
+      "conclusions": 2,
+      "resultEdges": 5,
+      "proofResultEdges": 0
+    },
+    {
+      "name": "lean_workbook_4274",
+      "nativeOwner": "b5962876ca5cb0031e5fa1785270a6246f694e42aaa09568ef2ac6b5f41f85b6",
+      "calls": 5,
+      "available": 21,
+      "empty": 9,
+      "unavailable": 0,
+      "edges": 20,
+      "conclusions": 5,
+      "resultEdges": 11,
+      "proofResultEdges": 0
+    },
+    {
+      "name": "lean_workbook_plus_15068",
+      "nativeOwner": "f441c1be3c49a24fc059c36868562acf1bf06ea43478641b0f8952f5acca4c27",
+      "calls": 4,
+      "available": 30,
+      "empty": 6,
+      "unavailable": 0,
+      "edges": 48,
+      "conclusions": 4,
+      "resultEdges": 12,
+      "proofResultEdges": 0
+    },
+    {
+      "name": "lean_workbook_plus_19617",
+      "nativeOwner": "d1915c984d7dba28269f143a8db75c029d5bf19e827fd6855a7c4828a946fee3",
+      "calls": 5,
+      "available": 22,
+      "empty": 8,
+      "unavailable": 0,
+      "edges": 24,
+      "conclusions": 5,
+      "resultEdges": 10,
+      "proofResultEdges": 0
+    },
+    {
+      "name": "lean_workbook_plus_39831",
+      "nativeOwner": "68b3f9aed9840e192856e9d292884a7e2ce60a2bb508369d71e0b42c51669a2b",
+      "calls": 4,
+      "available": 20,
+      "empty": 8,
+      "unavailable": 0,
+      "edges": 20,
+      "conclusions": 4,
+      "resultEdges": 10,
+      "proofResultEdges": 0
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "nativeOwner": "92f9539805923baff5887be36081e997f0215d43329d5eda7cc7bec72acefc83",
+      "calls": 8,
+      "available": 40,
+      "empty": 13,
+      "unavailable": 0,
+      "edges": 46,
+      "conclusions": 8,
+      "resultEdges": 17,
+      "proofResultEdges": 0
+    }
+  ],
+  "controls": [
+    {
+      "name": "AtlasTransportControls.proofDependent",
+      "owner": "d7e0b5d2d6e2dfbdca48075c8955a7a6b3b3afbaa52da3536f35a08b0157c9dd",
+      "result": "C b h",
+      "inputs": [
+        {
+          "slot": 3,
+          "node": 16,
+          "root": "inputType",
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          "role": "value"
+        },
+        {
+          "slot": 5,
+          "node": 2,
+          "root": "inputType",
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          "role": "value"
+        },
+        {
+          "slot": 6,
+          "node": 1,
+          "root": "inputType",
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "role": "proof"
+        }
+      ]
+    },
+    {
+      "name": "AtlasApplicationPorts.partialUse",
+      "owner": "cac18fa83153dc15df3e3c635bae4b739f7de32353d82bddbd0dd32f3521ea90",
+      "result": "A → B",
+      "inputs": [
+        {
+          "slot": 1,
+          "node": 5,
+          "root": "inputType",
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0
+          ],
+          "role": "type"
+        },
+        {
+          "slot": 3,
+          "node": 3,
+          "root": "inputType",
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "role": "type"
+        }
+      ]
+    }
+  ]
+}

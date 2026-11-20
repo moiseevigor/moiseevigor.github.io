@@ -10,10 +10,27 @@ function dependencies(head,entry) {
   assert.equal(formal.functionPort,0);
   assert.equal(formal.previousArguments,slot-1);
   assert.equal(formal.kernelInstantiatedDomain,'PASS');
-  const {root,slots}=formal.domainRoute, graph=head.graph;
+  const {root,slots}=formal.domainRoute;
+  assert.deepEqual(slots,[...Array(slot-1).fill(1),0]);
+  const witnesses=references(head,root,slots,slot-1);
+  assert.deepEqual(witnesses.map(w=>w.slot),formal.dependencies);
+  return witnesses;
+}
+
+// Follow precisely the applied prefix. A partially applied function may
+// retain further binders, which belong inside the residual result.
+function conclusion(ports) {
+  const arity=ports.length-1;
+  assert.equal(ports[0].consumer.arguments,arity);
+  if(!arity || ports.slice(1).some((p,i)=>!p.formal?.available ||
+      p.formal.domainRoute.root!=='inputType' || p.consumer.slot!==i+1))return null;
+  return references(ports[0],'inputType',Array(arity).fill(1),arity);
+}
+
+function references(head,root,slots,bound) {
+  const graph=head.graph;
   let node=head.roots[root];
   assert(Number.isInteger(node));
-  assert.deepEqual(slots,[...Array(slot-1).fill(1),0]);
   for(const field of slots){
     assert.equal(graph.kind[node],7);
     node=graph.children[node][field];
@@ -27,7 +44,7 @@ function dependencies(head,entry) {
     const kind=graph.kind[state.node];
     if(kind===0){
       const relative=graph.payloads[state.node].index-state.depth;
-      const target=slot-1-relative;
+      const target=bound-relative;
       if(relative>=0 && target>=1 && !found.has(target)){
         found.set(target,{slot:target,node:state.node,root,slots:slots.concat(state.path)});
       }
@@ -37,8 +54,6 @@ function dependencies(head,entry) {
       pending.push({node:children[field],depth:state.depth+Number(binds(kind,field)),path:state.path.concat(field)});
     }
   }
-  const witnesses=[...found.values()].sort((a,b)=>a.slot-b.slot);
-  assert.deepEqual(witnesses.map(w=>w.slot),formal.dependencies);
-  return witnesses;
+  return [...found.values()].sort((a,b)=>a.slot-b.slot);
 }
-module.exports={dependencies};
+module.exports={dependencies,conclusion};

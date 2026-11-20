@@ -4,7 +4,7 @@
 </style></head><body><main><h1>Reading a Lean inference</h1><label>Compiled proof <select id="proof"></select></label>
 <p id="intro"></p><h2>Proof arguments</h2><div id="premises"></div><section class="result"><h2>Conclusion</h2><div id="denominator" hidden><p>Clearing denominators turns the fractional equation</p>
 <math display="block" aria-label="one over a plus one, plus one over b plus one, plus one over a plus b, equals three halves"><mrow><mfrac><mn>1</mn><mrow><mi>a</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mi>b</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></mfrac><mo>=</mo><mfrac><mn>3</mn><mn>2</mn></mfrac></mrow></math>
-<p>into the polynomial equation below. The call establishes equality of the two propositions.</p></div><p id="result" class="formula"></p></section>
+<p>into the polynomial equation below. The call establishes equality of the two propositions.</p></div><p id="result" class="formula"></p><div id="result-inputs"></div></section>
 <details id="details"><summary>Function, types and values</summary><div id="other"></div></details>
 <section id="trace"><h2>Inspect a variable use</h2><p id="context"></p><form class="choice"><label>Use <input id="ordinal" required type="number" min="1" step="1"></label><button>Locate</button></form><p aria-live="polite"><a id="occurrence">Open compiled occurrence</a></p></section>
 <details><summary>Compiled provenance</summary><p id="identity" class="meta"></p></details></main>
@@ -27,11 +27,11 @@ function choose(p){
  port=p;el('context').textContent='Input '+p.slot+' contains '+p.count+' direct uses of '+active.variable+'.';
  el('ordinal').value='1';el('ordinal').max=p.count;locate(1n);
 }
-function typeInputs(p){
+function typeInputs(p,result=false){
  const detail=document.createElement('details'),title=document.createElement('summary');
- title.textContent='Earlier arguments in the expected type';detail.append(title);
- if(p.dependencies===null){detail.append('Formal domain unavailable for this argument.');return detail;}
- if(!p.dependencies.length){detail.append('The recorded domain contains no earlier argument.');return detail;}
+ title.textContent=result?'Arguments in the rule’s result type':'Earlier arguments in the expected type';detail.append(title);
+ if(p.dependencies===null){detail.append('Formal type structure unavailable.');return detail;}
+ if(!p.dependencies.length){detail.append('No supplied argument occurs here.');return detail;}
  const list=document.createElement('ul');
  for(const witness of p.dependencies){
   const target=active.ports[witness.slot],row=document.createElement('li');
@@ -50,6 +50,7 @@ function show(i){
  const denominator=active.source.name==='lean_workbook_plus_15068' && active.callId===2;
  el('denominator').hidden=!denominator;
  el('result').replaceChildren(link(active.conclusion,active.call));
+ el('result-inputs').replaceChildren(typeInputs({dependencies:active.resultDependencies},true));
  el('premises').replaceChildren();el('other').replaceChildren();
  for(const p of active.ports){
   const box=document.createElement('div'),caption=document.createElement('p'),expr=document.createElement('p');

@@ -9,7 +9,7 @@ const atlas = require('../../../public/js/proof-atlas-library-data');
 const {inventory} = require('../../../scripts/proof-atlas-judgment-fixtures.cjs');
 const {open} = require('./model.cjs');
 const select = require('./select-branch.js');
-const {dependencies} = require('./formal-edges.cjs');
+const {dependencies,conclusion} = require('./formal-edges.cjs');
 
 function packet(file,hash) {
   const bytes=z.gunzipSync(fs.readFileSync(file));
@@ -51,7 +51,7 @@ for(const item of require('./port-results.json').filter(d=>d.example)) {
   const binderNode=atlas.walk(data,example.binder);
   examples.push({source,nativeOwner,call,callId:example.call,table,ports,
     binder:{route:example.binder,node:binderNode},variable:data.payloads[binderNode].binderName,
-    rule:entries[0].display.inputTerm,conclusion:entries[0].display.consumerType});
+    resultDependencies:conclusion(entries),rule:entries[0].display.inputTerm,conclusion:entries[0].display.consumerType});
 }
 const local=file=>fs.readFileSync(path.join(__dirname,file),'utf8');
 process.stdout.write(local('inference-template.html.in')

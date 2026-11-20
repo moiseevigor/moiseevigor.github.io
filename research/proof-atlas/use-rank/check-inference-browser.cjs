@@ -23,6 +23,15 @@ const {open}=require('./model.cjs');
       const model=open(data,example.binder.route);
       await page.locator('#proof').selectOption(String(i));
       assert.equal(await page.locator('#denominator').isVisible(),example.source.name==='lean_workbook_plus_15068');
+      await page.locator('#result-inputs summary').click();
+      const resultLinks=page.locator('#result-inputs li');
+      assert.equal(await resultLinks.count(),example.resultDependencies.length);
+      for(const [k,witness] of example.resultDependencies.entries()){
+        const href=new URL(await resultLinks.nth(k).locator('a').getAttribute('href'));
+        const target=example.ports[witness.slot].input;
+        assert.equal(href.searchParams.get('route'),target.route.root+':'+target.route.slots.join('.'));
+        assert.equal(href.hash,'#expr-'+target.node);
+      }
       await page.locator('#details > summary').click();
       for(const p of example.ports){
         const row=page.locator('.premise').filter({has:page.getByRole('link',{name:p.text,exact:true})});
