@@ -6,7 +6,7 @@ function link(source, target, label) {
   const query = new URLSearchParams({edition:source.edition,proof:source.name,route:target.route.root + ':' + target.route.slots.join('.')});
   return '<a href="https://moiseevigor.github.io/projects/proof-atlas/library/?' + escape(query) + '#expr-' + target.node + '">' + escape(label) + '</a>';
 }
-console.log(`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Local functions in six Lean proofs</title>
+console.log(`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Local functions and binding in Lean proofs</title>
 <style>*{box-sizing:border-box}body{font:1.05rem/1.55 Georgia,serif;color:#242424;background:#faf9f6;max-width:48rem;margin:3rem auto;padding:0 1rem}h1{line-height:1.15}h2{font:600 1.1rem system-ui;overflow-wrap:anywhere}a{color:#194978;text-underline-offset:.16em}summary{cursor:pointer;padding:.5rem 0}section{margin:2rem 0}li{margin:.6rem 0}meter{width:min(8rem,25vw);vertical-align:middle}small{color:#474747}</style>
 <main><h1>Where local function calls lead</h1>
 <p>Each group starts at one binder in a compiled proof. Expand it to inspect the expressions that use the binder as a function. Counts include repeated occurrences of a shared expression.</p>`);
@@ -30,4 +30,19 @@ for (const r of rows.filter(r => r.positions)) {
   }
   console.log('</section>');
 }
-console.log('<p><small>Each argument link opens one representative occurrence. Four of the six proof bodies contain no compound argument with a bound-variable head. The grouping records lexical binding.</small></p></main></html>');
+console.log('<p><small>Each argument link opens one representative occurrence. Four of the six proof bodies contain no compound argument with a bound-variable head. The grouping records lexical binding.</small></p>');
+
+const aliases = require('./fold-aliases.json');
+console.log('<section id="scope-pairs"><h2>One expression in two scopes</h2><p>In each example, the two arguments have the same compiled row. Follow each occurrence through its function to the binder in scope there.</p>');
+for (const name of ['JacobiCore.Sol.mk.inj','CrossingData.mk.inj']) {
+  const result = aliases.results.find(r => r.name === name);
+  const source = {name,edition:aliases.edition};
+  console.log('<h3>' + escape(name) + '</h3><ol>');
+  for (const w of result.pair) {
+    console.log('<li>' + link(source,w.input,'Argument ' + w.input.node) + ' → ' +
+      link(source,w.head,'function ' + w.head.node) + ' → ' +
+      link(source,w.head.binder,w.head.binder.name + ' (binder ' + w.head.binder.node + ')') + '</li>');
+  }
+  console.log('</ol>');
+}
+console.log('</section></main></html>');
