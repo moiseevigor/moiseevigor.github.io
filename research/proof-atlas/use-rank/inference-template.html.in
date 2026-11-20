@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Reading a Lean inference · Proof Atlas</title><style>
-:root{color-scheme:light dark}*{box-sizing:border-box}body{max-width:48rem;margin:2rem auto;padding:0 1rem;font:1.1rem/1.5 Georgia,serif}h1,h2{line-height:1.15}h2{font-size:1.35rem}label,summary,button,select,.meta{font:1rem/1.45 system-ui}select,input,button{font:inherit;max-width:100%;padding:.3rem}.formula,a,code{overflow-wrap:anywhere}.premise{padding:.6rem 0}.premise p{margin:.25rem 0}.result{border-top:2px solid;padding-top:.65rem}.choice{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap}input{width:6em}a{color:LinkText}:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+:root{color-scheme:light dark}*{box-sizing:border-box}body{max-width:48rem;margin:2rem auto;padding:0 1rem;font:1.1rem/1.5 Georgia,serif}h1,h2{line-height:1.15}h2{font-size:1.35rem}label,summary,button,select,.meta{font:1rem/1.45 system-ui}select,input,button{font:inherit;max-width:100%;padding:.3rem}.formula,a,code,summary{overflow-wrap:anywhere}.premise{padding:.6rem 0}.premise p{margin:.25rem 0}.result{border-top:2px solid;padding-top:.65rem}.choice{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap}input{width:6em}a{color:LinkText}:focus-visible{outline:2px solid currentColor;outline-offset:2px}
 
 .matrix-scroll{overflow-x:auto;padding:.25rem}.matrix{border-collapse:collapse;font:1rem/1.4 system-ui}.matrix th,.matrix td{padding:.25rem .45rem;text-align:center}.matrix th:first-child{text-align:left;max-width:15rem;overflow-wrap:anywhere}.matrix thead{border-bottom:1px solid GrayText}.matrix tr>:last-child{border-left:1px solid GrayText}.matrix button{min-width:2.3rem;min-height:2.3rem;border:1px solid transparent;background:none;color:LinkText;cursor:pointer}.matrix button:hover,.matrix button[aria-pressed=true]{border-color:currentColor;background:ButtonFace}.matrix-key{font:1rem/1.45 system-ui}#witness{border-inline-start:2px solid GrayText;padding-inline-start:.7rem}
 .premise[data-selected]{border-inline-start:3px solid LinkText;padding-inline-start:.7rem}
@@ -87,6 +87,21 @@ function renderMatrix(){
 function showBinding(box,p){
  if(p.binding){
   const line=document.createElement('p');line.append('Bound by ',link(p.binding.name||'enclosing binder',p.binding.anchor));box.append(line);
+  const detail=document.createElement('details'),title=document.createElement('summary');
+  detail.className='declared-domain';title.textContent='Declared type of '+p.binding.name;detail.append(title);
+  detail.append(link('Type at the proof binder',p.binding.domain));
+  if(p.binding.statement)detail.append(' · ',link('Matching theorem hypothesis or parameter type',p.binding.statement));
+  else detail.append(' · No paired theorem binder recorded.');
+  if(p.binding.references===null)detail.append(' · Variable references unavailable.');
+  else if(!p.binding.references.length)detail.append(' · No enclosing variable occurs in this type.');
+  else{
+   const list=document.createElement('ul');
+   for(const ref of p.binding.references){
+    const li=document.createElement('li');li.append(link(ref.name,ref.binder),' · '+ref.count+(ref.count==='1'?' occurrence':' occurrences')+' · ',link('Inspect first occurrence',ref.use));list.append(li);
+   }
+   detail.append(list);
+  }
+  box.append(detail);
  }
  if(!p.resolution)return;
  const r=p.resolution,detail=document.createElement('details'),title=document.createElement('summary');

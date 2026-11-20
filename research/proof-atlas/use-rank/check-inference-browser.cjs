@@ -79,7 +79,7 @@ const {open}=require('./model.cjs');
         assert.equal(anchor.searchParams.get('route'),p.input.route.root+':'+p.input.route.slots.join('.'));
         assert.equal(anchor.hash,'#expr-'+p.input.node);
         if(p.slot){
-          const detail=row.locator('details:not(.definition)');
+          const detail=row.locator('details:not(.definition):not(.declared-domain)');
           await detail.locator('summary').click();
           const edges=detail.locator('li');
           assert.equal(await edges.count(),p.dependencies.length);
@@ -93,9 +93,28 @@ const {open}=require('./model.cjs');
         }
         if(p.binding){
           const actual=atlas.binding(data,p.input.route);
-          const url=new URL(await row.getByRole('link',{name:p.binding.name,exact:true}).last().getAttribute('href'));
+          const url=new URL(await row.locator(':scope > p').getByRole('link',{name:p.binding.name,exact:true}).last().getAttribute('href'));
           assert.equal(url.searchParams.get('route'),actual.route.root+':'+actual.route.slots.join('.'));
           assert.equal(url.hash,'#expr-'+actual.node);
+          const detail=row.locator('.declared-domain');await detail.locator('summary').click();
+          const domain={root:actual.route.root,slots:[...actual.route.slots,0]};
+          const domainURL=new URL(await detail.locator('a').first().getAttribute('href'));
+          assert.equal(domainURL.hash,'#expr-'+atlas.walk(data,domain));
+          assert.equal(domainURL.searchParams.get('route'),domain.root+':'+domain.slots.join('.'));
+          const statementLink=detail.getByRole('link',{name:'Matching theorem hypothesis or parameter type'});
+          if(p.binding.statement){
+            const url=new URL(await statementLink.getAttribute('href'));
+            assert.equal(url.searchParams.get('route'),'0:'+domain.slots.join('.'));
+            assert.equal(url.hash,'#expr-'+atlas.walk(data,{root:0,slots:domain.slots}));
+          }else assert.equal(await statementLink.count(),0);
+          for(const [k,r] of p.binding.references.entries()){
+            const links=detail.locator('li').nth(k).locator('a'), bound=atlas.binding(data,r.use.route);
+            for(const [j,hit] of [bound,r.use].entries()){
+              const href=new URL(await links.nth(j).getAttribute('href'));
+              assert.equal(href.hash,'#expr-'+atlas.walk(data,hit.route));
+              assert.equal(href.searchParams.get('route'),hit.route.root+':'+hit.route.slots.join('.'));
+            }
+          }
         }
         if(p.resolution){
           const panel=row.locator('.definition');await panel.locator('summary').click();

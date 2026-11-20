@@ -1,0 +1,318 @@
+[
+  {
+    "packet": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+    "call": 0,
+    "slot": 5,
+    "paired": true,
+    "domain": {
+      "node": 0,
+      "route": {
+        "root": 1,
+        "slots": [
+          0
+        ]
+      }
+    },
+    "visited": 1,
+    "internal": 0,
+    "outerReferences": 0
+  },
+  {
+    "packet": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+    "call": 1,
+    "slot": 2,
+    "paired": true,
+    "domain": {
+      "node": 0,
+      "route": {
+        "root": 1,
+        "slots": [
+          0
+        ]
+      }
+    },
+    "visited": 1,
+    "internal": 0,
+    "outerReferences": 0
+  },
+  {
+    "packet": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+    "call": 1,
+    "slot": 4,
+    "paired": false,
+    "domain": {
+      "node": 85381,
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          0
+        ]
+      }
+    },
+    "visited": 73,
+    "internal": 0,
+    "outerReferences": 1
+  },
+  {
+    "packet": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+    "call": 2,
+    "slot": 0,
+    "paired": true,
+    "domain": {
+      "node": 95,
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          0
+        ]
+      }
+    },
+    "visited": 163,
+    "internal": 4,
+    "outerReferences": 2
+  },
+  {
+    "packet": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+    "call": 0,
+    "slot": 4,
+    "paired": true,
+    "domain": {
+      "node": 120,
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      }
+    },
+    "visited": 289,
+    "internal": 0,
+    "outerReferences": 4
+  },
+  {
+    "packet": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+    "call": 1,
+    "slot": 4,
+    "paired": true,
+    "domain": {
+      "node": 120,
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      }
+    },
+    "visited": 289,
+    "internal": 0,
+    "outerReferences": 4
+  },
+  {
+    "packet": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+    "call": 0,
+    "slot": 4,
+    "paired": true,
+    "domain": {
+      "node": 128,
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          0
+        ]
+      }
+    },
+    "visited": 31,
+    "internal": 0,
+    "outerReferences": 1
+  },
+  {
+    "packet": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+    "call": 3,
+    "slot": 0,
+    "paired": true,
+    "domain": {
+      "node": 115,
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          0
+        ]
+      }
+    },
+    "visited": 263,
+    "internal": 6,
+    "outerReferences": 4
+  },
+  {
+    "packet": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+    "call": 0,
+    "slot": 4,
+    "paired": true,
+    "domain": {
+      "node": 90,
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      }
+    },
+    "visited": 211,
+    "internal": 0,
+    "outerReferences": 6
+  },
+  {
+    "packet": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+    "call": 1,
+    "slot": 4,
+    "paired": true,
+    "domain": {
+      "node": 90,
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      }
+    },
+    "visited": 211,
+    "internal": 0,
+    "outerReferences": 6
+  },
+  {
+    "packet": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+    "call": 0,
+    "slot": 4,
+    "paired": true,
+    "domain": {
+      "node": 77,
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      }
+    },
+    "visited": 73,
+    "internal": 0,
+    "outerReferences": 4
+  },
+  {
+    "packet": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+    "call": 1,
+    "slot": 4,
+    "paired": true,
+    "domain": {
+      "node": 79,
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      }
+    },
+    "visited": 73,
+    "internal": 0,
+    "outerReferences": 4
+  },
+  {
+    "packet": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+    "call": 2,
+    "slot": 4,
+    "paired": true,
+    "domain": {
+      "node": 84,
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      }
+    },
+    "visited": 73,
+    "internal": 0,
+    "outerReferences": 4
+  },
+  {
+    "packet": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+    "call": 3,
+    "slot": 4,
+    "paired": false,
+    "domain": {
+      "node": 90421,
+      "route": {
+        "root": 1,
+        "slots": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          1,
+          0
+        ]
+      }
+    },
+    "visited": 73,
+    "internal": 0,
+    "outerReferences": 1
+  }
+]
