@@ -1,0 +1,2660 @@
+[
+  {
+    "source": {
+      "edition": "goedel-sample-4331",
+      "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+      "name": "lean_workbook_20418",
+      "sourceSha256": "44d7d19cff28d5b75dc33d21733bf14cb764e765f493ca46cf2a66345b8a3d07"
+    },
+    "positions": 0,
+    "inputRows": 0,
+    "binderOccurrences": 0,
+    "rowsWithMultipleBinderOccurrences": 0,
+    "rowsWithMultipleBinderRows": 0,
+    "groups": [],
+    "maxBindersPerInputRow": 0,
+    "witness": null
+  },
+  {
+    "source": {
+      "edition": "goedel-sample-4331",
+      "indexSha256": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+      "name": "lean_workbook_4274",
+      "sourceSha256": "761ccc0ee9e693f87eabfca7b94449ec8ebe1c5293ddd528bed8eade57ca74a4"
+    },
+    "positions": 334,
+    "inputRows": 16,
+    "binderOccurrences": 1,
+    "rowsWithMultipleBinderOccurrences": 0,
+    "rowsWithMultipleBinderRows": 0,
+    "groups": [
+      [
+        {
+          "input": {
+            "node": 380,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                1,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 214,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                1,
+                0,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 1449,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1
+                ]
+              },
+              "name": "b"
+            }
+          },
+          "uses": 32
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 1295,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                1,
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 214,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                1,
+                0,
+                0,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 1449,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1
+                ]
+              },
+              "name": "b"
+            }
+          },
+          "uses": 6
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 356,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 214,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 1449,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1
+                ]
+              },
+              "name": "b"
+            }
+          },
+          "uses": 268
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 759,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 758,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 1449,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1
+                ]
+              },
+              "name": "b"
+            }
+          },
+          "uses": 12
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 215,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                1,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 213,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                1,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 1449,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1
+                ]
+              },
+              "name": "b"
+            }
+          },
+          "uses": 5
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 205,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                0,
+                1,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 190,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 1449,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1
+                ]
+              },
+              "name": "b"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 194,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 190,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                0,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 1449,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1
+                ]
+              },
+              "name": "b"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 186,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                0,
+                1,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 174,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 1449,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1
+                ]
+              },
+              "name": "b"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 175,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 174,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                0,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 1449,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1
+                ]
+              },
+              "name": "b"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 170,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                0,
+                1,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 104,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 1449,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1
+                ]
+              },
+              "name": "b"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 159,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 104,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                0,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 1449,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1
+                ]
+              },
+              "name": "b"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 156,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 103,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 1449,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1
+                ]
+              },
+              "name": "b"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 145,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 103,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 1449,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1
+                ]
+              },
+              "name": "b"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 100,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 5,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                0,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 1449,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1
+                ]
+              },
+              "name": "b"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 92,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                0,
+                1,
+                1,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 5,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                0,
+                1,
+                1,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 1449,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1
+                ]
+              },
+              "name": "b"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 7,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                0,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 5,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 1449,
+              "route": {
+                "root": 1,
+                "slots": [
+                  1
+                ]
+              },
+              "name": "b"
+            }
+          },
+          "uses": 1
+        }
+      ]
+    ],
+    "maxBindersPerInputRow": 1,
+    "witness": null
+  },
+  {
+    "source": {
+      "edition": "goedel-sample-4331",
+      "indexSha256": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+      "name": "lean_workbook_plus_15068",
+      "sourceSha256": "c8a09c1ece2d7fc13d9ef4d0979c71870e9e97202f8bed0df415a5c52788c2b5"
+    },
+    "positions": 0,
+    "inputRows": 0,
+    "binderOccurrences": 0,
+    "rowsWithMultipleBinderOccurrences": 0,
+    "rowsWithMultipleBinderRows": 0,
+    "groups": [],
+    "maxBindersPerInputRow": 0,
+    "witness": null
+  },
+  {
+    "source": {
+      "edition": "goedel-sample-4331",
+      "indexSha256": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+      "name": "lean_workbook_plus_19617",
+      "sourceSha256": "0c75bdffb8429241e73c9e4f375bd15130b2c5a19855281071b9706b89478578"
+    },
+    "positions": 74,
+    "inputRows": 27,
+    "binderOccurrences": 1,
+    "rowsWithMultipleBinderOccurrences": 0,
+    "rowsWithMultipleBinderRows": 0,
+    "groups": [
+      [
+        {
+          "input": {
+            "node": 318,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                1,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 163,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                1,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 22
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 414,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 163,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 10
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 352,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 163,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 8
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 348,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 163,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 9
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 300,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                0,
+                1,
+                0,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 299,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                0,
+                1,
+                0,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 295,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                0,
+                1,
+                0,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 294,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                0,
+                1,
+                0,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 290,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                0,
+                1,
+                0,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 289,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                0,
+                1,
+                0,
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 285,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 163,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 277,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                0,
+                1,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 260,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 269,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 260,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 261,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                0,
+                0,
+                1,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 260,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                0,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 2
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 253,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                0,
+                1,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 144,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 245,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 144,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 238,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                0,
+                0,
+                1,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 144,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                0,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 236,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                0,
+                0,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 144,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                0,
+                0,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 230,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                0,
+                1,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 214,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 223,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 214,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 217,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                0,
+                0,
+                1,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 214,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                0,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 215,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                0,
+                0,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 214,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                0,
+                0,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 207,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 130,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 199,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 130,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 191,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                1,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 130,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 2
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 127,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 14,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 109,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                0,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 13,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                0,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 98,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                0,
+                1,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 13,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                0,
+                1,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 18,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 13,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 1
+        }
+      ],
+      [
+        {
+          "input": {
+            "node": 15,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "head": {
+            "kind": "bvar",
+            "label": "bvar",
+            "node": 13,
+            "route": {
+              "root": 1,
+              "slots": [
+                1,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ]
+            },
+            "binder": {
+              "node": 562,
+              "route": {
+                "root": 1,
+                "slots": []
+              },
+              "name": "f"
+            }
+          },
+          "uses": 1
+        }
+      ]
+    ],
+    "maxBindersPerInputRow": 1,
+    "witness": null
+  },
+  {
+    "source": {
+      "edition": "goedel-sample-4331",
+      "indexSha256": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+      "name": "lean_workbook_plus_39831",
+      "sourceSha256": "ceca77661c386d820b66fac94e6e1e4ebbb18d894f0b6a79c37f6cd2f425c9cf"
+    },
+    "positions": 0,
+    "inputRows": 0,
+    "binderOccurrences": 0,
+    "rowsWithMultipleBinderOccurrences": 0,
+    "rowsWithMultipleBinderRows": 0,
+    "groups": [],
+    "maxBindersPerInputRow": 0,
+    "witness": null
+  },
+  {
+    "source": {
+      "edition": "goedel-sample-4331",
+      "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+      "name": "lean_workbook_plus_6206",
+      "sourceSha256": "2a3526bb9f81af698af149affbf40b722c5b2e6137e352433e91bd4d34f83ba5"
+    },
+    "positions": 0,
+    "inputRows": 0,
+    "binderOccurrences": 0,
+    "rowsWithMultipleBinderOccurrences": 0,
+    "rowsWithMultipleBinderRows": 0,
+    "groups": [],
+    "maxBindersPerInputRow": 0,
+    "witness": null
+  }
+]
