@@ -59,8 +59,23 @@ module.exports=function uncoveredBranches(data,body,callRoutes,uses,uncovered){
       const name=binding?(data.payloads[binding.node].binderName??data.payloads[binding.node].declName):data.payloads[node].name;
       head={anchor:{node,route},label:name||kind,arguments:application.args.length};
     }
+    const first=uses.select(r.first),last=uses.select(r.first+r.count-1n);
+    // A subtree occupies a contiguous interval in field order. Its first and
+    // last uses have exactly the same common prefix as the whole interval.
+    const slots=first.route.slots;
+    let end=r.route.slots.length;
+    while(end<slots.length && slots[end]===last.route.slots[end])end++;
+    const route={root:body.root,slots:slots.slice(0,end)},node=atlas.walk(data,route);
+    const stop={anchor:{node,route},steps:end-r.route.slots.length,expressions:String(data.expanded[node]),
+      kind:atlas.kinds[data.kind[node]],children:[]};
+    data.children[node].forEach((child,i)=>{
+      const path={root:body.root,slots:route.slots.concat(i)};
+      const count=uses.interval(path).count;
+      if(count)stop.children.push({field:atlas.fields[stop.kind][i],anchor:{node:child,route:path},count:String(count)});
+    });
+    assert(stop.children.length>=2 || (r.count===1n && stop.kind==='bvar'));
     return {anchor:{node:r.node,route:r.route},kind:atlas.kinds[data.kind[r.node]],path:atlas.path(data,r.route),
-      count:String(r.count),first:uses.select(r.first),expressions:String(data.expanded[r.node]),sourceRows:seen.size,fields,head};
+      count:String(r.count),first,stop,expressions:String(data.expanded[r.node]),sourceRows:seen.size,fields,head};
   });
   return {regions:regions.length,largest};
 };

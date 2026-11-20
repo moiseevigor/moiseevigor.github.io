@@ -44,6 +44,19 @@ const {open}=require('./model.cjs');
             const rows=branches.locator(':scope > ol > li');assert.equal(await rows.count(),c.coverage.branches.largest.length);
             for(const [j,b] of c.coverage.branches.largest.entries()){
               assert.equal(await rows.nth(j).locator('code').textContent(),b.path);
+              const focus=rows.nth(j).locator('.branch-focus a');
+              const hits=[b.stop.anchor,...b.stop.children.map(c=>c.anchor)];
+              const bars=rows.nth(j).locator('.branch-focus meter');
+              assert.equal(await bars.count(),b.stop.children.length);
+              for(const [k,c] of b.stop.children.entries()){
+                assert.equal(await bars.nth(k).evaluate(m=>m.value),Number(BigInt(c.count)*1000000n/BigInt(b.count)));
+              }
+              assert.equal(await focus.count(),hits.length);
+              for(const [k,hit] of hits.entries()){
+                const u=new URL(await focus.nth(k).getAttribute('href'));
+                assert.equal(u.hash,'#expr-'+hit.node);
+                assert.equal(u.searchParams.get('route'),hit.route.root+':'+hit.route.slots.join('.'));
+              }
               if(b.head){
                 const head=rows.nth(j).getByRole('link',{name:b.head.label,exact:true}).first();
                 const url=new URL(await head.getAttribute('href'));

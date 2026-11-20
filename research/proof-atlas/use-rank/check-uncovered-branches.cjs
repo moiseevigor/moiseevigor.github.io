@@ -94,6 +94,29 @@ for(const [hash,clauses] of Object.entries(flows)){
       assert.deepEqual(b.fields.map(f=>f.uses),refs.map(q=>mass.get(key(q))));
       assert.equal(BigInt(b.expressions),b.fields.reduce((n,f)=>n+BigInt(f.expressions),1n));
       if(b.fields.length)assert.equal(BigInt(b.count),b.fields.reduce((n,f)=>n+BigInt(f.uses),0n));
+      // Independent descent: count references in every field, descend only
+      // when a single child contains them all. Batch checks at each depth.
+      let current=r.node,index=r.index,steps=0;
+      const slots=[...r.route.slots];
+      while(true){
+        const names=atlas.fields[atlas.kinds[data.kind[current]]]||[];
+        const children=data.children[current].map((node,k)=>({node,index:index+Number(names[k]==='body')}));
+        const calc=evaluate(data,[...new Map(children.map(q=>[key(q),q])).values()]);
+        assert.equal(calc.status,'complete');
+        const fieldMass=new Map(calc.rows.map(q=>[key(q),q.count]));
+        const live=children.map((q,i)=>({i,q,count:fieldMass.get(key(q))})).filter(f=>BigInt(f.count)>0n);
+        if(live.length!==1){
+          assert.deepEqual(b.stop.anchor,{node:current,route:{root:1,slots}});
+          assert.equal(b.stop.steps,steps);
+          assert.equal(b.stop.expressions,measure(current).expressions);
+          assert.deepEqual(b.stop.children,live.map(f=>({field:names[f.i],count:f.count,
+            anchor:{node:f.q.node,route:{root:1,slots:slots.concat(f.i)}}})));
+          if(!live.length)assert.deepEqual(atlas.binding(data,b.stop.anchor.route).route,{root:1,slots:binder});
+          break;
+        }
+        assert.equal(live[0].count,b.count);
+        slots.push(live[0].i);steps++;current=live[0].q.node;index=live[0].q.index;
+      }
       assert.equal(b.count,String(counts.get(key(r))));
       assert(prefix(r.route.slots,b.first.route.slots));
       assert.equal(atlas.walk(data,b.first.route),b.first.node);
@@ -102,7 +125,7 @@ for(const [hash,clauses] of Object.entries(flows)){
     rows.push({binder:c.name,uncovered:String(uncovered),regions:positive.length,
       displayed:output.largest.length,
       shapes:output.largest.map(b=>({root:b.anchor.route.root+':'+b.anchor.route.slots.join('.'),node:b.anchor.node,
-        expressions:b.expressions,sourceRows:b.sourceRows,uses:b.count,function:b.head?.label??null,
+        expressions:b.expressions,sourceRows:b.sourceRows,uses:b.count,function:b.head?.label??null,foldedFields:b.stop.steps,stopSize:b.stop.expressions,stopKind:b.stop.kind,split:b.stop.children.map(c=>[c.field,c.count]),
         fields:b.fields.map(f=>[f.field,f.expressions,f.uses])})),topThree:String(positive.slice(0,3).reduce((n,r)=>n+counts.get(key(r)),0n))});
   }
   report.push({name:record.name,hash,rows});
