@@ -19,7 +19,7 @@ function packet(file,hash) {
   assert.equal(createHash('sha256').update(bytes).digest('hex'),hash);
   return JSON.parse(bytes);
 }
-const examples=[];
+const examples=[],flows={};
 for(const item of require('./port-results.json')) {
   const {example,source,nativeOwner}=item;
   const {record}=inventory().find(x=>x.record.indexSha256===source.indexSha256 && x.edition===source.edition);
@@ -80,8 +80,10 @@ for(const item of require('./port-results.json')) {
       binder:{route:binder,node:binderNode},variable:data.payloads[binderNode].binderName,
       resultDependencies:conclusion(entries),rule:entries[0].display.inputTerm,conclusion:entries[0].display.consumerType});
   }
+  flows[source.indexSha256]=require('./statement-flow.cjs')(data,examples.filter(x=>x.source.indexSha256===source.indexSha256));
 }
 const local=file=>fs.readFileSync(path.join(__dirname,file),'utf8');
 process.stdout.write(local('inference-template.html.in')
   .replace('/* SELECTOR */',()=>local('select-branch.js'))
+  .replace('/* FLOWS */',()=>JSON.stringify(flows).replaceAll('<','\\u003c'))
   .replace('/* EXAMPLES */',()=>JSON.stringify(examples).replaceAll('<','\\u003c')));

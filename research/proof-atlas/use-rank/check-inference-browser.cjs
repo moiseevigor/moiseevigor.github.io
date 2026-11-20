@@ -23,6 +23,29 @@ const {open}=require('./model.cjs');
       const model=open(data,example.binder.route);
       await page.locator('#proof').selectOption(String(i));
       await page.waitForFunction(i=>active===examples[i],i);
+      if(!example.callId){
+        const clauses=await page.evaluate(()=>flows[active.source.indexSha256]);
+        await page.locator('#statement-flow > summary').click();
+        for(const [k,c] of clauses.entries()){
+          await page.locator('#clause').selectOption(String(k));
+          const edges=[...c.direct,...c.subsequent];
+          const links=page.locator('#flow a[href^="#"]');
+          assert.equal(await links.count(),edges.length);
+          for(const [j,e] of edges.entries()){
+            await links.nth(j).click();
+            await page.waitForFunction(e=>active.callId===e.call && document.querySelector('.premise[data-selected]')?.dataset.slot===String(e.slot),e);
+            await page.goBack();await page.waitForFunction(i=>active===examples[i],i);
+          }
+          const occurrences=page.locator('#flow details a');
+          assert.equal(await occurrences.count(),c.containing.length);
+          for(const [j,hit] of c.containing.entries()){
+            const url=new URL(await occurrences.nth(j).getAttribute('href'));
+            assert.equal(url.hash,'#expr-'+hit.first.node);
+            assert.equal(url.searchParams.get('route'),hit.first.route.root+':'+hit.first.route.slots.join('.'));
+          }
+        }
+        await page.locator('#statement-flow > summary').click();
+      }
       assert.equal(await page.locator('#denominator').isVisible(),example.source.name==='lean_workbook_plus_15068' && example.callId===2);
       assert.equal(await page.locator('#trace').isVisible(),example.table.total!=='0');
       assert(await page.locator('#witness').isHidden());

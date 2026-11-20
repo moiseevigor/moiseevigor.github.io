@@ -5,7 +5,7 @@
 .matrix-scroll{overflow-x:auto;padding:.25rem}.matrix{border-collapse:collapse;font:1rem/1.4 system-ui}.matrix th,.matrix td{padding:.25rem .45rem;text-align:center}.matrix th:first-child{text-align:left;max-width:15rem;overflow-wrap:anywhere}.matrix thead{border-bottom:1px solid GrayText}.matrix tr>:last-child{border-left:1px solid GrayText}.matrix button{min-width:2.3rem;min-height:2.3rem;border:1px solid transparent;background:none;color:LinkText;cursor:pointer}.matrix button:hover,.matrix button[aria-pressed=true]{border-color:currentColor;background:ButtonFace}.matrix-key{font:1rem/1.45 system-ui}#witness{border-inline-start:2px solid GrayText;padding-inline-start:.7rem}
 .premise[data-selected]{border-inline-start:3px solid LinkText;padding-inline-start:.7rem}
 </style></head><body><main><h1>Reading a Lean inference</h1><label>Compiled application <select id="proof"></select></label>
-<p id="intro"></p><section aria-labelledby="map-heading"><h2 id="map-heading">Which arguments occur in each type?</h2>
+<p id="intro"></p><details id="statement-flow"><summary>Trace a theorem parameter or hypothesis</summary><label>Statement binder <select id="clause"></select></label><div id="flow"></div></details><section aria-labelledby="map-heading"><h2 id="map-heading">Which arguments occur in each type?</h2>
 <p class="matrix-key">Columns are proof inputs and the conclusion. Select a dot to trace its reference. A dash means the formal argument is absent from that type. A blank falls outside its scope.</p>
 <div class="matrix-scroll" tabindex="0" role="region" aria-label="Argument references by premise and conclusion"><table class="matrix" id="matrix" aria-labelledby="map-heading"></table></div><p id="witness" aria-live="polite" hidden></p></section><h2>Proof arguments</h2><div id="premises"></div><section class="result"><h2>Conclusion</h2><div id="denominator" hidden><p>Clearing denominators turns the fractional equation</p>
 <math display="block" aria-label="one over a plus one, plus one over b plus one, plus one over a plus b, equals three halves"><mrow><mfrac><mn>1</mn><mrow><mi>a</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mi>b</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></mfrac><mo>=</mo><mfrac><mn>3</mn><mn>2</mn></mfrac></mrow></math>
@@ -15,6 +15,7 @@
 <details><summary>Compiled provenance</summary><p id="identity" class="meta"></p></details></main>
 <script>/* SELECTOR */
 const examples=/* EXAMPLES */;
+const flows=/* FLOWS */;
 const el=id=>document.getElementById(id);
 let active,port;
 function address(hit) {
@@ -117,8 +118,45 @@ function showBinding(box,p){
  if(r.boundary)detail.append('Further local-definition resolution is unavailable.');
  box.append(detail);
 }
+function traceClause(){
+ const clause=flows[active.source.indexSha256][Number(el('clause').value)],area=el('flow');
+ area.replaceChildren(link('Open declared type of '+clause.name,clause.domain));
+ const note=document.createElement('p');note.textContent=clause.containing.length+' recorded call subtrees contain a lexical reference to this binder. A direct input supplies the binder itself.';area.append(note);
+ if(clause.containing.length){
+  const detail=document.createElement('details'),title=document.createElement('summary'),list=document.createElement('ul');
+  title.textContent='Inspect occurrences inside calls';detail.append(title,list);
+  for(const c of clause.containing){const row=document.createElement('li');row.append(link('Call '+c.call+' · first of '+c.count,c.first));list.append(row);}
+  area.append(detail);
+ }
+ for(const [heading,edges] of [['Inputs supplied by this binder',clause.direct],['Inputs supplied by a reached call result',clause.subsequent]]){
+  const title=document.createElement('h3');title.textContent=heading;area.append(title);
+  if(!edges.length){area.append('None in the recorded calls.');continue;}
+  const list=document.createElement('ul');
+  for(const e of edges){
+   const row=document.createElement('li'),a=document.createElement('a');
+   a.href='#'+active.source.indexSha256+'-'+e.call+'/input/'+e.slot;
+   a.textContent='Call '+e.call+' · input '+e.slot;
+   if(e.from!==undefined)row.append('Result of call '+e.from+' → ');
+   row.append(a);list.append(row);
+  }
+  area.append(list);
+ }
+}
+el('clause').onchange=traceClause;
 function show(i){
- active=examples[i];renderMatrix();el('details').open=false;
+ const previous=active?.source.indexSha256;
+ active=examples[i];
+ if(previous!==active.source.indexSha256){
+  const clauses=flows[active.source.indexSha256],picker=el('clause');
+  picker.replaceChildren();
+  for(const [k,clause] of clauses.entries()){
+   const option=document.createElement('option');option.value=k;option.textContent=clause.name+' · binder '+(k+1);picker.append(option);
+  }
+  picker.value=String(Math.max(0,clauses.findIndex(c=>c.direct.length)));
+  el('statement-flow').hidden=!clauses.length;
+  if(clauses.length)traceClause();
+ }
+ renderMatrix();el('details').open=false;
  el('intro').replaceChildren('Rule ',link(active.rule,active.ports[0].input),'. Tracing the bound variable ',link(active.variable,active.binder),'.');
  el('identity').textContent=active.source.edition+' · source '+active.source.indexSha256+' · native observations '+active.nativeOwner;
  const denominator=active.source.name==='lean_workbook_plus_15068' && active.callId===2;
