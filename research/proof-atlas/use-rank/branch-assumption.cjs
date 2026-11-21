@@ -3,6 +3,7 @@
 const assert=require('node:assert/strict');
 const atlas=require('../../../public/js/proof-atlas-library-data');
 const {open}=require('./model.cjs');
+const useConsumer=require('./use-consumer.cjs');
 module.exports=function branchAssumption(data,binder,body){
   const model=open(data,binder.route);
   let cursor=body;
@@ -14,12 +15,15 @@ module.exports=function branchAssumption(data,binder,body){
   }
   const parts=[cursor,...args.reverse()].map((anchor,slot)=>{
     const {first,count}=model.interval(anchor.route);
-    const witness=count?model.select(first):null;
-    if(witness){
-      assert.deepEqual(witness.route.slots.slice(0,anchor.route.slots.length),anchor.route.slots);
-      assert.deepEqual(atlas.binding(data,witness.route),binder);
+    const examples=[];
+    for(let k=0n;k<count && k<8n;k++){
+      const {node,route}=model.select(first+k);
+      const use={node,route};
+      assert.deepEqual(route.slots.slice(0,anchor.route.slots.length),anchor.route.slots);
+      assert.deepEqual(atlas.binding(data,route),binder);
+      examples.push({use,consumer:useConsumer(data,use,body)});
     }
-    return {slot,anchor,count:String(count),first:witness?{node:witness.node,route:witness.route}:null};
+    return {slot,anchor,examples,count:String(count),first:examples[0]?.use??null};
   });
   const total=model.interval(body.route).count;
   assert.equal(parts.reduce((n,p)=>n+BigInt(p.count),0n),total);

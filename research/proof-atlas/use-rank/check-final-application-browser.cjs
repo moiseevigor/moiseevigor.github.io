@@ -19,7 +19,7 @@ const {chromium}=require('playwright');
     await page.waitForFunction(h=>active.source.indexSha256===h,hash);
     const panel=page.locator('#final-application');
     await page.waitForFunction(()=>document.querySelector('#final-application').open);
-    await panel.locator('details').evaluate(d=>d.open=true);
+    await panel.locator('#final-body > details').evaluate(d=>d.open=true);
     assert.equal(await panel.locator('[data-final-slot]').count(),f.args.length);
     if(f.cases?.checked){
      const cases=f.cases;
@@ -32,7 +32,7 @@ const {chromium}=require('playwright');
       assert.equal(url.searchParams.get('route'),t.route.root+':'+t.route.slots.join('.'));
      };
      await verify(major.getByRole('link',{name:'Defining proof'}),cases.origin.value);
-     const bounds=[];
+
      for(const branch of cases.branches){
       const row=panel.locator('.case-branches [data-final-slot="'+branch.slot+'"]');
       assert.equal(await row.locator('h3').textContent(),branch.constructor);
@@ -47,11 +47,22 @@ const {chromium}=require('playwright');
        for(const [j,p] of positive.entries()){
         const li=group.locator('li').nth(j);
         await verify(li.locator('a').first(),p.anchor);
-        await verify(li.locator('a').last(),p.first);
+        await verify(li.locator(':scope > a').last(),p.first);
+        await li.locator('summary').click();
+        const sites=li.locator('.case-use-site');
+        assert.equal(await sites.count(),p.examples.length);
+        for(const sample of p.examples){
+         const n=p.examples.indexOf(sample);
+         const ref=li.getByRole('link',{name:'Reference '+(n+1),exact:true});
+         await verify(ref,sample.use);
+         if(sample.consumer)await verify(ref.locator('..').getByRole('link',{name:'Application',exact:true}),sample.consumer.call);
+        }
+        await li.locator('summary').click();
        }
       }
-      bounds.push(await row.boundingBox());
+
      }
+     const bounds=await panel.locator('.case-branches > div').evaluateAll(ns=>ns.map(n=>n.getBoundingClientRect().toJSON()));
      if(width===320)assert(bounds[1].y>=bounds[0].y+bounds[0].height-1);
      else assert(bounds[1].x>=bounds[0].x+bounds[0].width-1);
     }else assert.equal(await panel.locator('.case-branches').count(),0);

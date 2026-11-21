@@ -26,6 +26,30 @@ for(const [hash,f] of Object.entries(finals)){
       const matching=u.parts.filter(p=>p.anchor.route.slots.every((v,i)=>hit.route.slots[i]===v));
       assert.equal(matching.length,1);
       const slot=matching[0].slot;
+      const sample=matching[0].examples[counts[slot]];
+      if(counts[slot]<8){
+       assert.deepEqual(sample.use,hit);
+       const c=sample.consumer;
+       if(c){
+        let at=c.call.node,route=c.call.route.slots.slice(),args=[];
+        assert.equal(atlas.walk(d,c.call.route),at);
+        if(route.length>branch.body.route.slots.length){
+         const parent={root:1,slots:route.slice(0,-1)};
+         assert(route.at(-1)!==0 || d.kind[atlas.walk(d,parent)]!==5);
+        }
+        while(d.kind[at]===5){
+         args.unshift({node:d.children[at][1],route:{root:1,slots:route.concat(1)}});
+         at=d.children[at][0];route.push(0);
+        }
+        assert.equal(args.length,c.arity);
+        assert.deepEqual(args[c.slot-1],hit);
+        assert.equal(at,c.head.node);assert.deepEqual(route,c.head.route.slots);
+        assert.equal(d.payloads[at].name,c.head.label);
+       }else{
+        const parent={root:1,slots:hit.route.slots.slice(0,-1)};
+        assert(hit.route.slots.at(-1)!==1 || d.kind[atlas.walk(d,parent)]!==5);
+       }
+      }
       counts[slot]++;firsts[slot]??=hit;
      }
     }

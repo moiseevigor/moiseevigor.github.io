@@ -241,7 +241,26 @@ function showFinal(){
     for(const part of uses.parts.filter(p=>p.first)){
      const row=document.createElement('li');
      row.append(link(part.slot?'Input '+part.slot:'Function',part.anchor),' · '+part.count+' · ',link('First reference',part.first));
-     list.append(row);
+     const detail=document.createElement('details'),summary=document.createElement('summary');
+     summary.textContent='Inspect '+part.examples.length+' of '+part.count+' uses';detail.append(summary);
+     const sets=new Map();
+     for(const sample of part.examples){
+      const c=sample.consumer,label=c?c.head.label+' · input '+c.slot+' of '+c.arity:'Reference without a direct application input';
+      if(!sets.has(label))sets.set(label,[]);
+      sets.get(label).push(sample);
+     }
+     for(const [label,samples] of sets){
+      const block=document.createElement('div'),heading=document.createElement('strong');
+      heading.textContent=label;block.append(heading);
+      for(const sample of samples){
+       const line=document.createElement('div');line.className='case-use-site';
+       line.append(link('Reference '+(part.examples.indexOf(sample)+1),sample.use));
+       if(sample.consumer)line.append(' → ',link('Application',sample.consumer.call));
+       block.append(line);
+      }
+      detail.append(block);
+     }
+     row.append(detail);list.append(row);
     }
     group.append(list);box.append(group);
    }
