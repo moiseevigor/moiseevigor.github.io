@@ -97,6 +97,24 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
     }
     const recursor=roles.getByRole('link',{name:'Eq.ndrec · argument 5 / 10',exact:true}).locator('..');
     await recursor.getByText('Explore proof branches',{exact:true}).click();
+    const caseSummary=recursor.getByText('Case inputs and selected uses',{exact:true});
+    await caseSummary.click();
+    const cases=caseSummary.locator('..');
+    await cases.getByRole('link',{name:'a = 0 ∨ a = 1 / 2',exact:true}).waitFor();
+    const descriptor=window.PROOF_ATLAS_AI_SAMPLE.eliminations.find(d=>d.name===record.name);
+    const evidence=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+descriptor.file)));
+    for(const [ctor,hypothesis] of [['Or.inl','a = 0'],['Or.inr','a = 1 / 2']]){
+     const method=cases.getByRole('link',{name:ctor,exact:true});
+     const target=new URL(await method.evaluate(a=>a.href));
+     const frame=evidence.entries.find(e=>e.route.root===1 && '1:'+e.route.slots.join('.')===target.searchParams.get('route')).lambdaJudgment;
+     const expected=frame.domain,branch=method.locator('..');
+     assert((await branch.innerText()).includes('1 selected use'));
+     const binderLink=branch.getByRole('link',{name:'1 reference to this input',exact:true});
+     assert.equal(await binderLink.evaluate(a=>a.href),target.href);
+     const u=new URL(await branch.getByRole('link',{name:hypothesis,exact:true}).evaluate(a=>a.href));
+     assert.equal(u.searchParams.get('route'),'1:'+expected.route.slots.join('.'));
+     assert.equal(u.hash,'#expr-'+expected.node);
+    }
     const recorded=recursor.getByText('Recorded result at this call',{exact:true});
     await recorded.click();
     const native=recorded.locator('..');

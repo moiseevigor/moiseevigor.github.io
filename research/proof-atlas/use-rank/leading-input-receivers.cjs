@@ -30,8 +30,9 @@ const nativeInventories=[
  ...(published?window.PROOF_ATLAS_OCCURRENCE_TYPES.records:window.PROOF_ATLAS_AI_SAMPLE.types).map(d=>({d,kind:'primary'})),
  ...(published?window.PROOF_ATLAS_ELIMINATIONS.records:window.PROOF_ATLAS_AI_SAMPLE.eliminations).map(d=>({d,kind:'case'}))
 ];
+const caseRoutes=new Set();
 const formalCache=new Map(),missingSignatures=new Map();
-const splitStats={groups:0,twoChildren:0,threeChildren:0,nineTenthsInOneChild:0,applicationSplits:0,threeOrMoreOccupiedPorts:0,maxOccupiedPorts:0,occupiedArguments:0,formalSlots:0,dependentSlots:0,parameterEdges:0,recordedCallTypes:0,lambdaResultUnused:0,withDeclaredAndRecorded:0,resultTypes:0,dependentResults:0,resultEdges:0,residualForalls:0,formalSplits:0,importedSlots:0,externalConstantArguments:0,otherHeadArguments:0,beyondLiteralPrefix:0};
+const splitStats={groups:0,twoChildren:0,threeChildren:0,nineTenthsInOneChild:0,applicationSplits:0,threeOrMoreOccupiedPorts:0,maxOccupiedPorts:0,occupiedArguments:0,formalSlots:0,dependentSlots:0,parameterEdges:0,casePositions:0,handlerPositions:0,occupiedHandlers:0,checkedHandlerInputs:0,unusedHandlerInputs:0,recordedCallTypes:0,lambdaResultUnused:0,withDeclaredAndRecorded:0,resultTypes:0,dependentResults:0,resultEdges:0,residualForalls:0,formalSplits:0,importedSlots:0,externalConstantArguments:0,otherHeadArguments:0,beyondLiteralPrefix:0};
 function audit(record) {
   const bytes=zlib.gunzipSync(fs.readFileSync('.'+record.indexFile));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),record.indexSha256);
@@ -188,6 +189,28 @@ function audit(record) {
           params=roles.formalParameters(data,{root:1,slots:bound.route.slots.concat(0)},flat.call.arity);
         }
         const result=formalData && roles.declaredResult(formalData,params,flat.call.arity);
+        const cases=observations.find(p=>p.get(flat.route)?.eliminationJudgment?.status==='checked');
+        if(cases){
+          const scene=E.create(data,record,cases,flat.route);
+          caseRoutes.add(record.indexSha256+'@'+flat.route.slots.join('.'));
+          splitStats.casePositions++;
+          for(const branch of scene.branches){
+            const arg=branch.argument,actual=sourceInput(data,{node:flat.call.node,route:flat.route},arg.sourceSlot);
+            assert.deepEqual(actual,{node:arg.node,route:arg.route});
+            splitStats.handlerPositions++;
+            if(flat.branches.some(b=>b.slot===arg.sourceSlot))splitStats.occupiedHandlers++;
+            for(const f of branch.frames){
+              assert.deepEqual(f.domain.route.slots,f.binder.route.slots.concat(0));
+              assert.equal(A.walk(data,f.domain.route),f.domain.node);
+              const count=countReferences(data,f.body.node,0);
+              assert.equal(count.status,'counted');
+              if(count.occurrences==='0')splitStats.unusedHandlerInputs++;
+              splitStats.checkedHandlerInputs++;
+            }
+          }
+          if(process.env.ATLAS_FORMAL_EXAMPLE && !splitStats.caseExample)
+           splitStats.caseExample={proof:record.name,label,major:scene.major.typeText,handlers:scene.branches.map(b=>({ctor:b.constructor,slot:b.argument.sourceSlot,inputs:b.frames.map(f=>[f.domain.text,countReferences(data,f.body.node,0).occurrences]),count:String(flat.branches.filter(x=>x.slot===b.argument.sourceSlot).reduce((n,x)=>n+x.last-x.first+1n,0n))}))};
+        }
         const native=observations.map(p=>p.get(flat.route)).find(o=>o?.status==='checked');
         if(native){
           assert.equal(native.node,flat.call.node);assert.deepEqual(native.route,flat.route);
@@ -283,7 +306,7 @@ function audit(record) {
 const reports=edition.declarations.filter(r=>r.kind==='theorem').map(audit);
 if(process.argv.includes('--branch-summary')){
   const missing=[...missingSignatures].sort((a,b)=>b[1]-a[1]);
-  console.log(JSON.stringify({edition:edition.id,...splitStats,missingNames:missing.length,mostFrequentMissing:process.argv.includes('--all-missing')?missing:missing.slice(0,5)}));return;
+  console.log(JSON.stringify({edition:edition.id,...splitStats,distinctCaseCalls:caseRoutes.size,missingNames:missing.length,mostFrequentMissing:process.argv.includes('--all-missing')?missing:missing.slice(0,5)}));return;
 }
 if (process.argv.includes('--write-packets')) {
   const dir='public/data/proof-atlas/input-roles';

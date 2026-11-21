@@ -271,6 +271,29 @@
           list.append(item);
          }
          if(part.call){
+          if(caseTyping?.get(part.route)?.eliminationJudgment?.status==='checked'){
+           const scene=window.ProofAtlasElimination.create(owner.data,owner.record,caseTyping,part.route);
+           const cases=el('details'),handlers=el('ul');
+           cases.append(el('summary','Case inputs and selected uses'),
+            link(scene.major.typeText,url(owner.record.name,scene.major.node,scene.major.route)),handlers);
+           for(const branch of scene.branches){
+            const arg=branch.argument,interval=part.branches.find(b=>b.slot===arg.sourceSlot);
+            const count=interval?interval.last-interval.first+1n:0n;
+            const item=el('li');
+            item.append(link(branch.constructor,url(owner.record.name,arg.node,arg.route)),
+             ' · '+number(count)+(count===1n?' selected use':' selected uses'));
+            for(const frame of branch.frames){
+             const domain=frame.domain;
+             item.append(el('br'),link(domain.text,url(owner.record.name,domain.node,domain.route)));
+             const uses=window.ProofAtlasRecursiveInputs.countReferences(owner.data,frame.body.node,0);
+             if(uses.status==='counted')item.append(' · ',link(number(uses.occurrences)+(uses.occurrences==='1'?' reference to this input':' references to this input'),
+              url(owner.record.name,frame.binder.node,frame.binder.route)));
+            }
+            if(branch.missingSourceLambdas)item.append(el('p',number(branch.missingSourceLambdas)+' handler inputs lack a recorded source binder.'));
+            handlers.append(item);
+           }
+           display.append(cases);
+          }
           const provider=[typing,caseTyping].find(p=>p?.get(part.route)?.status==='checked');
           const observation=provider?.get(part.route);
           if(observation?.kernelCheck==='PASS' && observation.node===parent){
