@@ -198,3 +198,6 @@
 .pl-reference-tree a[aria-current="location"] { font-weight: bold; outline: 1px solid currentColor; outline-offset: 1px; }
 .pl-reference-tree + .pl-actions[hidden] { display: none; }
 .pl-arithmetic-expression { font-family: "STIX Two Text", Georgia, serif; font-size: 1.2em; line-height: 1.65; overflow-wrap: anywhere; }
+.pl-local-layer { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr)); gap: .75rem; }
+.pl-local-result { border-inline-start: 2px solid currentColor; padding-inline-start: .65rem; min-width: 0; overflow-wrap: anywhere; }
+.pl-local-result > a:first-child { font-weight: 650; }

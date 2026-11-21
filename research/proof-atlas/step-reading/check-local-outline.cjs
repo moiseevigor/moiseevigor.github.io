@@ -1,7 +1,7 @@
 'use strict';
 const fs=require('node:fs'),z=require('node:zlib'),crypto=require('node:crypto'),assert=require('node:assert/strict');
 const A=require('../../../public/js/proof-atlas-library-data');
-const {outline,inputs}=require('../../../public/js/proof-atlas-local-outline');
+const {outline,inputs,layers}=require('../../../public/js/proof-atlas-local-outline');
 const ranked=require('./ranked-binder-uses.cjs');
 global.window={};require('../../../public/data/proof-atlas/library-manifest');require('../../../public/data/proof-atlas/goedel-sample-manifest');
 const ai=window.PROOF_ATLAS_AI_SAMPLE.edition;
@@ -13,6 +13,13 @@ for(const edition of [...window.PROOF_ATLAS_LIBRARY.editions,ai]){
   assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),d.indexSha256);
   const g=A.validateIndex(JSON.parse(raw),d),m=outline(g);if(!m)continue;
   matched++;if(m.limited)limited++;
+  const rowsByLevel=layers(g,m);assert(rowsByLevel);
+  const depths=new Map();
+  rowsByLevel.forEach((row,i)=>row.forEach(entry=>depths.set(entry.step,i)));
+  assert.equal(depths.size,m.steps.length+1);
+  for(const row of rowsByLevel)for(const entry of row){
+   for(const edge of entry.edges)assert(depths.get(edge.source)<depths.get(entry.step));
+  }
   for(let i=0;i<=m.steps.length;i++){
    const here=m.steps[i]?.value||m.end,found=inputs(g,m,i);
    for(const edge of found){
@@ -20,6 +27,14 @@ for(const edition of [...window.PROOF_ATLAS_LIBRARY.editions,ai]){
     edges++;
     assert.equal(A.walk(g,edge.use.route),edge.use.node);
     assert.deepEqual(A.binding(g,edge.use.route),edge.source.binder);
+   }
+   if(m.steps[i]){
+    const type=m.steps[i].type,record=rowsByLevel.flat().find(r=>r.step===m.steps[i]);
+    for(const step of m.steps.slice(0,i)){
+     const all=ranked(g,step.binder.route);let count=0;
+     for(let k=0n;k<all.total;k++)if(all.select(k).route.slots.join('').startsWith(type.route.slots.join('')))count++;
+     assert.equal(Number(record.edges.find(e=>e.source===step && e.field==='type')?.count||0),count);
+    }
    }
    for(const step of m.steps.slice(0,i)){
      pairs++;

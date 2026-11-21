@@ -19,8 +19,8 @@
   }
   return {steps,end:site(node,slots),limited:data.kind[node]===8};
  }
- function inputs(data,outline,i){
-  const target=outline.steps[i]?.value||outline.end,edges=[];
+ function inputs(data,outline,i,field='value'){
+  const target=outline.steps[i]?.[field]||outline.end,edges=[];
   for(let j=0;j<i;j++){
    const source=outline.steps[j],r=refs.countReferences(data,target.node,i-1-j,
     {maxStates:8192,maxWork:16384,firstIfPresent:true,useSupport:true});
@@ -33,6 +33,22 @@
    edges.push({source,use,count:r.occurrences});
   }
   return edges;
+ }
+ function layers(data,model){
+  const rows=[],levels=new Map();
+  for(let i=0;i<=model.steps.length;i++){
+   const step=model.steps[i],edges=[];
+   for(const field of step?['type','value']:['body']){
+    for(const e of inputs(data,model,i,field)){
+     if(e.unavailable)return null;
+     edges.push({...e,field});
+    }
+   }
+   const level=edges.reduce((n,e)=>Math.max(n,levels.get(e.source)+1),0);
+   if(step)levels.set(step,level);
+   (rows[level]??=[]).push({step,edges});
+  }
+  return rows;
  }
  function mount(container,data,at,link){
   if(at.route.slots.length)return;
@@ -66,7 +82,39 @@
     list.append(row);
    }
   };
+  if(model.steps.length>=2 && model.steps.length<=8){
+   const diagram=el('details'),body=el('div');diagram.dataset.localLayers='';
+   diagram.append(el('summary','Local results by dependency'),body);
+   diagram.ontoggle=()=>{
+    if(!diagram.open || body.childNodes.length)return;
+    const rows=layers(data,model);
+    if(!rows){body.textContent='Some dependencies exceed the traversal limit. Open the individual definitions for available references.';return;}
+    body.append(el('p','References between the displayed local results run from earlier rows to later rows. Links on incoming references open their first occurrence.'));
+    for(const [i,row] of rows.entries()){
+     const group=el('section'),cards=el('div');cards.className='pl-local-layer';
+     group.append(el('h5','Dependency level '+i),cards);
+     for(const {step,edges} of row){
+      const card=el('div');card.className='pl-local-result';
+      card.append(link(step?step.name:'Remaining proof body',step?step.value:model.end));
+      if(step){
+       const t=arithmetic.formula(data,step.type,3);
+       card.append(el('br'),link(t?arithmetic.caption(t):'Type · e'+step.type.node,step.type));
+      }
+      if(edges.length){
+       const uses=el('ul');
+       for(const e of edges){
+        const item=el('li');item.append(link(e.source.name+' → '+e.field+' · '+e.count,e.use));uses.append(item);
+       }
+       card.append(uses);
+      }
+      cards.append(card);
+     }
+     body.append(group);
+    }
+   };
+   container.append(diagram);
+  }
   container.append(panel);
  }
- if(common)module.exports={outline,inputs};else host.ProofAtlasLocalOutline={mount};
+ if(common)module.exports={outline,inputs,layers};else host.ProofAtlasLocalOutline={mount};
 })(typeof window==='undefined'?globalThis:window);
