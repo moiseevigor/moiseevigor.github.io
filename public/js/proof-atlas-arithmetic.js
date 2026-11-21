@@ -8,6 +8,7 @@
   ...[['HPow.hPow','^'],['HAdd.hAdd','+'],['HSub.hSub','−'],['HMul.hMul','×'],['HDiv.hDiv','/']]
    .map(([name,symbol])=>[name,{symbol,parameters:binaryTypes}]),
   ['Eq',{symbol:'=',parameters:['type'],relation:true}],
+  ['Ne',{symbol:'≠',parameters:['type'],relation:true}],
   ['LE.le',{symbol:'≤',parameters:['type','order instance'],relation:true}],
   ['LT.lt',{symbol:'<',parameters:['type','order instance'],relation:true}],
   ['Real.sqrt',{symbol:'√',parameters:[],unary:true}],
@@ -55,15 +56,29 @@
   }
   return read(at,0);
  }
- function mount(container,data,at,link){
-  let focus=at,binders=0;
+ function statement(data,at){
+  const binders=[];
+  let focus=at;
   if(at.route.root===0 && !at.route.slots.length){
-   while(data.kind[focus.node]===7 && binders<128){
-    focus={node:data.children[focus.node][1],route:{root:0,slots:focus.route.slots.concat(1)}};
-    binders++;
+   while(data.kind[focus.node]===7 && binders.length<128){
+    const [domain,body]=data.children[focus.node],slots=focus.route.slots;
+    binders.push({site:focus,name:data.payloads[focus.node].binderName||'_',
+     domain:{node:domain,route:{root:0,slots:slots.concat(0)}}});
+    focus={node:body,route:{root:0,slots:slots.concat(1)}};
    }
   }
-  const tree=formula(data,focus);if(!tree || (binders && !tree.relation))return;
+  return {focus,binders};
+ }
+ function caption(t){
+  if(t.variables)return t.label+'('+t.variables.map(v=>v.label).join(', ')+')';
+  if(!t.symbol)return t.label;
+  if(!t.right)return t.symbol+'('+caption(t.left)+')';
+  const operand=v=>v.right?'('+caption(v)+')':caption(v);
+  return operand(t.left)+' '+t.symbol+' '+operand(t.right);
+ }
+ function mount(container,data,at,link){
+  const {focus,binders}=statement(data,at);
+  const tree=formula(data,focus);if(!tree || (binders.length && !tree.relation))return;
   const el=(tag,text)=>{const e=document.createElement(tag);if(text)e.textContent=text;return e;};
   const panel=el('section'),line=el('p'),detail=el('details'),list=el('ul');
   panel.dataset.arithmeticFormula='';line.className='pl-arithmetic-expression';
@@ -88,8 +103,22 @@
    return span;
   }
   line.append(draw(tree,0));detail.append(el('summary','Types and instances'),list);
-  panel.append(el('h4',binders?'Conclusion':tree.relation?'Relation':'Arithmetic expression'));
-  if(binders)panel.append(link('Under '+binders+' binders',focus));
+  panel.append(el('h4',binders.length?'Conclusion':tree.relation?'Relation':'Arithmetic expression'));
+  if(binders.length){
+   panel.append(link('Open conclusion',focus));
+   const context=el('details'),rows=el('ol');
+   context.dataset.formulaContext='';
+   context.append(el('summary','Parameters and hypotheses ('+binders.length+')'),rows);
+   context.ontoggle=()=>{
+    if(!context.open || rows.childElementCount)return;
+    for(const b of binders){
+     const t=formula(data,b.domain);
+     const name=t?caption(t):data.kind[b.domain.node]===4?data.payloads[b.domain.node].name:'e'+b.domain.node;
+     const row=el('li');row.append(link(b.name,b.site),' : ',link(name,b.domain));rows.append(row);
+    }
+   };
+   panel.append(context);
+  }
   panel.append(line);
   if(truncated){
    const toggle=el('button','Expand formula');toggle.type='button';toggle.setAttribute('aria-expanded','false');
@@ -103,5 +132,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={formula};else host.ProofAtlasArithmetic={mount};
+ if(common)module.exports={formula,statement,caption};else host.ProofAtlasArithmetic={mount};
 })(typeof window==='undefined'?globalThis:window);

@@ -2,10 +2,10 @@
 const fs=require('node:fs'),z=require('node:zlib'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 const A=require('../../../public/js/proof-atlas-library-data');
 const {spine}=require('../../../public/js/proof-atlas-elimination');
-const {formula}=require('../../../public/js/proof-atlas-arithmetic');
+const {formula,statement,caption}=require('../../../public/js/proof-atlas-arithmetic');
 const ports=require('./distinct-call-ports.cjs');
 global.window={};require('../../../public/data/proof-atlas/goedel-sample-manifest');
-const arities={'HPow.hPow':6,'HMul.hMul':6,'HSub.hSub':6,'HAdd.hAdd':6,'HDiv.hDiv':6,Eq:3,'LE.le':4,'LT.lt':4,'Real.sqrt':1,abs:4},counts={},examples={};
+const arities={'HPow.hPow':6,'HMul.hMul':6,'HSub.hSub':6,'HAdd.hAdd':6,'HDiv.hDiv':6,Eq:3,Ne:3,'LE.le':4,'LT.lt':4,'Real.sqrt':1,abs:4},counts={},examples={};
   function check(g,t){
    assert.equal(A.walk(g,t.site.route),t.site.node);
    if(t.variables){
@@ -57,6 +57,13 @@ for(const edition of window.PROOF_ATLAS_LIBRARY.editions){
  while(g.kind[node]===7){slots.push(1);node=g.children[node][1];}
  const at={node,route:{root:0,slots}},t=formula(g,at);
  check(g,t);
+ const context=statement(g,{node:g.roots[0],route:{root:0,slots:[]}});
+ assert.deepEqual(context.focus,at);
+ assert.deepEqual(context.binders.map(b=>b.name),['J','p','hab','hz1','hd','hs']);
+ for(const b of context.binders){
+  assert.equal(A.walk(g,b.site.route),b.site.node);assert.equal(A.walk(g,b.domain.route),g.children[b.site.node][0]);
+  const t=formula(g,b.domain);if(t){check(g,t);assert(caption(t).includes(t.symbol));}
+ }
  const expanded=formula(g,at,6);check(g,expanded);
  const names=[];
  function inspect(t){if(t.variables)names.push(t.label);if(t.left)inspect(t.left);if(t.right)inspect(t.right);}
