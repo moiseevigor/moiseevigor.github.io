@@ -495,6 +495,44 @@
     const role=equality && c.slot===2?'Left side of equality':equality && c.slot===3?'Right side of equality':
      c.slot===0?'Function applied to '+c.arity+' arguments':'Argument '+c.slot+' of '+c.arity;
     line.append(role+' · ',sourceLink(c.label,c.call));
+    if(window.ProofAtlasRepeatedReceiver && c.call.route.slots.length>binding.route.slots.length){
+     const detail=el('details'),content=el('div');
+     detail.dataset.repeatedReceiver='';
+     detail.append(el('summary','Find occurrences of this call using the same binder'),content);
+     target.append(detail);
+     let loaded=false;
+     detail.ontoggle=()=>{
+      if(!detail.open || loaded)return;
+      loaded=true;
+      const suffix=nextRoute.slots.slice(c.call.route.slots.length);
+      try{
+       const query=window.ProofAtlasRepeatedReceiver(owner.data,binding.route,c.call.node,suffix);
+       const currentRank=query.rankOf(c.call.route);
+       if(currentRank===null)throw Error('Selected call outside binder scope');
+       const input=el('input'),label=el('label','Occurrence '),result=el('p');
+       input.type='text';input.inputMode='numeric';input.size=5;input.value=String(currentRank+1n);
+       result.setAttribute('aria-live','polite');
+       function show(rank){
+        const route=query.select(rank),operand={root:route.root,slots:route.slots.concat(suffix)};
+        result.replaceChildren(sourceLink(c.label,{node:c.call.node,route}),' · ',
+         sourceLink('Variable use',{node:i,route:operand}));
+       }
+       show(currentRank);
+       if(query.total===1n){content.append(el('p','One occurrence in this binder’s body.'),result);return;}
+       const go=el('button','Show');go.type='button';label.append(input,' of '+query.total);
+       function choose(){
+        const value=input.value.trim();
+        if(!/^[1-9][0-9]*$/.test(value)||value.length>String(query.total).length||BigInt(value)>query.total){
+         input.setCustomValidity('Choose an occurrence from 1 to '+query.total);input.reportValidity();return;
+        }
+        input.setCustomValidity('');show(BigInt(value)-1n);
+       }
+       go.onclick=choose;input.oninput=()=>input.setCustomValidity('');
+       input.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();choose();}};
+       content.append(label,' ',go,result);
+      }catch(error){content.textContent='Occurrence lookup unavailable. '+error.message;}
+     };
+    }
     if(equality && (c.slot===2 || c.slot===3)){
      const opposite=equalitySides(owner.data,c.call)[c.slot===2?1:0];
      line.append(' · ',sourceLink(c.slot===2?'Open right side':'Open left side',opposite));

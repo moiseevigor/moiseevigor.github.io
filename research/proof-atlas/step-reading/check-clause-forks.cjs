@@ -9,7 +9,7 @@ require('../../../public/data/proof-atlas/library-manifest');
 require('../../../public/data/proof-atlas/goedel-sample-manifest');
 require('../../../public/data/proof-atlas/clause-forks');
 const editions=[...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAMPLE.edition];
-const repeated=require('./repeated-receiver.cjs');
+const repeated=require('../../../public/js/proof-atlas-repeated-receiver');
 let verified=0,queries=0,maxStates=0,repeatedQueries=0;
 for(const fork of window.PROOF_ATLAS_CLAUSE_FORKS){
  const d=editions.find(e=>e.id===fork.edition).declarations.find(x=>x.name===fork.declaration);
@@ -48,7 +48,7 @@ for(const fork of window.PROOF_ATLAS_CLAUSE_FORKS){
   for(const pattern of patterns.values()){
    const query=repeated(data,binder,pattern.node,[...pattern.suffix].map(Number));
    assert.equal(query.total,BigInt(pattern.paths.length));
-   pattern.paths.sort().forEach((path,i)=>assert.equal(query.select(BigInt(i)).slots.join(''),path));
+   pattern.paths.sort().forEach((path,i)=>{assert.equal(query.select(BigInt(i)).slots.join(''),path);assert.equal(query.rankOf(route(path)),BigInt(i));});
    queries++;if(query.total>1n)repeatedQueries++;maxStates=Math.max(maxStates,query.states);
   }
  }
@@ -72,7 +72,7 @@ for(const binder of [outer,inner]){
  const q=repeated(dag,binder,2,[1]),total=1n<<64n;
  assert.equal(q.total,total);
  for(const i of [0n,1n,total/3n,total/2n,total-1n]){
-  const path=q.select(i);
+  const path=q.select(i);assert.equal(q.rankOf(path),i);
   const prefix=binder===outer?[1,0]:[1,1,1];
   assert.deepEqual(path.slots,prefix.concat([...i.toString(2).padStart(64,'0')].map(Number)));
   assert.deepEqual(A.binding(dag,{root:0,slots:path.slots.concat(1)}).route,binder);

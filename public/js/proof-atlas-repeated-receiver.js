@@ -1,7 +1,9 @@
 // Recover receiver occurrences under one binder from a single operand witness.
 'use strict';
-const A=require('../../../public/js/proof-atlas-library-data');
-module.exports=function repeatedReceiver(data,binderRoute,receiver,operandSlots,{maxStates=200000,maxDepth=512}={}){
+(function(host){
+const common=typeof module!=='undefined' && module.exports;
+const A=common?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData;
+function repeatedReceiver(data,binderRoute,receiver,operandSlots,{maxStates=200000,maxDepth=512}={}){
  const bodySlot=(id)=>[6,7].includes(data.kind[id])?1:data.kind[id]===8?2:-1;
  const binder=A.walk(data,binderRoute),slot=bodySlot(binder);
  if(slot<0)throw Error('Expected a binder');
@@ -45,5 +47,20 @@ module.exports=function repeatedReceiver(data,binderRoute,receiver,operandSlots,
   }
   return {root:binderRoute.root,slots};
  }
- return {total,select,states:cache.size};
-};
+ function rankOf(route){
+  const prefix=binderRoute.slots.concat(slot);
+  if(route.root!==binderRoute.root || !prefix.every((v,i)=>route.slots[i]===v))return null;
+  let node=body,depth=0,level=0,rank=0n;
+  for(const field of route.slots.slice(prefix.length)){
+   const children=data.children[node];
+   if(!Number.isInteger(field) || field<0 || field>=children.length)return null;
+   for(let k=0;k<field;k++)rank+=count(children[k],depth+Number(k===bodySlot(node)),level+1);
+   depth+=Number(field===bodySlot(node));node=children[field];level++;
+   if(!count(node,depth,level))return null;
+  }
+  return node===receiver && depth===depthAtReceiver?rank:null;
+ }
+ return {total,select,rankOf,states:cache.size};
+}
+if(common)module.exports=repeatedReceiver;else host.ProofAtlasRepeatedReceiver=repeatedReceiver;
+})(typeof window==='undefined'?globalThis:window);
