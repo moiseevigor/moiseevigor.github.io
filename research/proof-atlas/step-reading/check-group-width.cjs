@@ -79,6 +79,24 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
         assert.deepEqual(await statement.allTextContents(),input.role==='proof'?[input.type]:[]);
         await checkRoute(i+1,packed.encode(input.route.root,input.route.slots));
       }
+      const paged=new URL(url);
+      paged.searchParams.delete('group');paged.searchParams.set('loading','paged');
+      const requested=[];
+      page.on('request',request=>requested.push(new URL(request.url()).pathname));
+      await page.goto(paged.href);
+      for(const proof of call.inputs.filter(input=>input.role==='proof')){
+        const caption=page.locator('[data-construction-field="arg"] [data-proof-input-statement]').filter({hasText:proof.type});
+        await caption.waitFor();
+        const origin=await caption.getAttribute('data-caption-origin');
+        assert(origin);
+        assert.equal(await page.locator('[data-recorded-caption][data-caption-origin="'+origin+'"]').textContent(),proof.type);
+        await caption.click();
+        await page.waitForFunction(r=>{
+          const s=window.ProofAtlasOccurrenceView.getSnapshot();
+          return s.route.root===r.root && s.route.depth===r.depth && s.route.slots===r.slots;
+        },packed.encode(proof.route.root,proof.route.slots));
+      }
+      assert(!requested.some(path=>path.includes('/library/published-15/')&&path.endsWith('.json.gz')));
       const ai=new URL(url);
       ai.searchParams.set('edition','goedel-sample-4331');ai.searchParams.set('proof','lean_workbook_20418');
       ai.hash='occurrence=8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d.1.18.VZVaAAA';
@@ -88,8 +106,20 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
         const type=window.ProofAtlasOccurrenceView.getTypeScene(),route=type?.origin.sourceRoute;
         return type?.root.node===256 && route.root===1 && route.depth===19 && route.slots==='VZVaABA';
       });
+      ai.searchParams.delete('group');ai.searchParams.set('loading','paged');
+      await page.goto(ai.href);
+      await page.waitForFunction(()=>window.ProofAtlasOccurrenceView?.getCaptionState().status==='ready');
+      const rootCard=page.locator('article').filter({has:page.locator('[data-construction-point="n0"]')});
+      const longPort=rootCard.locator('[data-construction-field="arg"]');
+      assert.equal(await longPort.count(),1);
+      assert.equal(await longPort.locator('[data-proof-input-statement]').count(),0);
+      await longPort.click();
+      await page.waitForFunction(()=>{
+        const s=window.ProofAtlasOccurrenceView.getSnapshot();
+        return s.route.depth===19 && s.route.slots==='VZVaABA';
+      });
       await page.close();
     }
-    console.log('Verified compact/full Riccati argument routes at 360 and 1280 pixels.');
+    console.log('Verified complete and paged Riccati and AI premise selections at 360 and 1280 pixels.');
   } finally { await browser.close(); }
 })().catch(error=>{console.error(error);process.exitCode=1;});

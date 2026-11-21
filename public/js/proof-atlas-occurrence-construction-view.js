@@ -15,7 +15,7 @@
  };
  function mount(parent,model,data,scene,callbacks,presentation=null){
   const A=host.ProofAtlasLibraryData,P=host.ProofAtlasPackedRoutes;
-  let disposed=false,scale=1,selected=null,action=0,hasCaptions=false;const captionItems=new Map();
+  let disposed=false,scale=1,selected=null,action=0,hasCaptions=false;const captionItems=new Map(),pagedProofPorts=new Map();
   const shell=el('section',undefined,'poc-view'),heading=el('h2','Recorded proof constructions'),caption=el('p','Ordered ports are original source fields. Γ labels retain the original lexical context. Dashed connections identify binders.','pow-help'),viewport=el('div',undefined,'pow-viewport'),sizing=el('div',undefined,'pow-sizing'),stage=el('div',undefined,'pow-stage'),summary=el('p',undefined,'pow-summary'),status=el('p',undefined,'pow-help');
   shell.dataset.constructionView='';viewport.tabIndex=0;viewport.setAttribute('aria-label','Recorded construction diagram. Scroll or drag empty space to pan.');status.setAttribute('role','status');viewport.append(sizing);sizing.append(stage);shell.append(heading,caption,viewport,summary,status);parent.replaceChildren(shell);parent.hidden=false;
   const folded=['ProofAtlasApplicationSpineCut/1','ProofAtlasApplicationSpineCut/2'].includes(scene.format);
@@ -73,6 +73,9 @@
     }
    }
    const ports=new Map();for(const edge of scene.edges.filter(e=>e.from===p.id)){const child=points.find(p=>p.id===edge.to),field=edge.field==='head'?(p.headIsApplication?'Earlier application':'Head'):/^arg\d+$/.test(edge.field)?'Argument '+(earlierArguments+Number(edge.field.slice(3))):edge.field,b=button(field+(parameterLabels.get(edge.field)||'')+' · '+child.role+' · Γ'+child.contextLength,()=>pick(child));b.className='pow-port';b.dataset.constructionField=edge.field;card.append(b);ports.set(edge.field,b);
+    if(presentation&&p.rule==='Pi-application'&&edge.field==='arg'&&child.role==='proof'){
+     pagedProofPorts.set(child.id,b);
+    }
     const premise=proofInputs.get(edge.field);
     if(premise){
      if(premise.statement.length<=120){
@@ -113,7 +116,19 @@
   const resize=new ResizeObserver(reflow);for(const item of cards.values())resize.observe(item.card);host.addEventListener('resize',reflow);
   const captionRetry=button('Retry captions',()=>{});captionRetry.hidden=true;captionRetry.dataset.captionRetry='';shell.append(captionRetry);
   function captionStatus(message,retry){status.textContent=message;captionRetry.hidden=!retry;captionRetry.onclick=async()=>{const focused=document.activeElement===captionRetry;captionRetry.disabled=true;try{await retry?.();}finally{if(!disposed){captionRetry.disabled=false;if(focused&&captionRetry.hidden)(shell.querySelector('[data-construction-point][aria-pressed="true"]')||viewport).focus();}}};}
-  function setCaptions(presentation,retry){if(disposed)return false;host.ProofAtlasConstructionCaptions.assertFor(presentation,scene);for(const[id,item]of captionItems){const caption=presentation.captions[id];if(!caption)continue;item.badge.hidden=false;item.badge.textContent=caption.category==='recorded-source-expression'?'Source expression':caption.presentation==='compiled-constructor-summary'?'Recorded type · constructor summary':'Recorded type';item.preview.textContent=caption.text;item.preview.dataset.recordedCaption=caption.category;item.preview.dataset.captionOrigin=caption.originKey;hasCaptions=true;}captionStatus(presentation.counts.refused?'Some captions are unavailable. Original source and type controls remain usable.':'Recorded text retains its original context and may omit details.',presentation.counts.refused?retry:null);reflow();return true;}
+  function showPagedPremises(captions){
+   for(const [child,port] of pagedProofPorts){
+    port.querySelector('[data-proof-input-statement]')?.remove();
+    const caption=captions[child];
+    if(caption?.category!=='recorded-inferred-type'||caption.presentation!=='recorded-native-text'||
+       caption.truncated||!caption.text||caption.text.length>120)continue;
+    const statement=el('small',caption.text);
+    statement.dataset.proofInputStatement='';
+    statement.dataset.captionOrigin=caption.originKey;
+    port.append(statement);
+   }
+  }
+  function setCaptions(presentation,retry){if(disposed)return false;host.ProofAtlasConstructionCaptions.assertFor(presentation,scene);showPagedPremises(presentation.captions);for(const[id,item]of captionItems){const caption=presentation.captions[id];if(!caption)continue;item.badge.hidden=false;item.badge.textContent=caption.category==='recorded-source-expression'?'Source expression':caption.presentation==='compiled-constructor-summary'?'Recorded type · constructor summary':'Recorded type';item.preview.textContent=caption.text;item.preview.dataset.recordedCaption=caption.category;item.preview.dataset.captionOrigin=caption.originKey;hasCaptions=true;}captionStatus(presentation.counts.refused?'Some captions are unavailable. Original source and type controls remain usable.':'Recorded text retains its original context and may omit details.',presentation.counts.refused?retry:null);reflow();return true;}
   return{getScene:()=>scene,setCaptions,setCaptionPending:()=>{if(!disposed)captionStatus('Loading recorded text…',null);},setCaptionError:(message,retry)=>{if(!disposed)captionStatus('Recorded captions unavailable: '+message+'. Constructor previews and source/type controls remain usable.',retry);},select:route=>{for(const p of points){const members=p.members||[null];for(const m of members){const r=model.routeFor(scene,p.id,m?.id);if(r.root===route.root&&r.depth===route.depth&&r.slots===route.slots){if(m&&m!==p.members.at(-1))pickMember(p,m);else pick(p);return;}}}},setScale,dispose:()=>{disposed=true;action++;resize.disconnect();host.removeEventListener('resize',reflow);shell.remove();parent.hidden=true;}};
  }
  host.ProofAtlasOccurrenceConstructionView={mount};
