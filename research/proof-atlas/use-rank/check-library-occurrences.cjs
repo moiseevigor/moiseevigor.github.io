@@ -121,6 +121,8 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
     assert.equal((await trace.innerText()).includes('Different compiled start'),boundary);
     if(boundary){
      const reason=trace.locator('p').filter({hasText:'Different compiled start'});
+     await reason.getByRole('link',{name:'Kernel replay record'}).waitFor();
+     assert.match(await reason.innerText(),/definitionally equal/);
      for(const [index,node] of [85996,86092,85974,86082].entries()){
       const link=reason.getByRole('link').nth(index);
       const u=new URL(await link.evaluate(a=>a.href)),path=u.searchParams.get('route').split(':');

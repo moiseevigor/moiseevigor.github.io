@@ -541,3 +541,17 @@ The same census checks the six arguments of fully applied Lean `Eq.trans` agains
 Nested `Eq.trans` calls can be displayed in proof order when the child carrier and both endpoints occupy the expected rows. Both applications occur in the same lexical context along these argument paths. Of the 561 call occurrences, 116 expand to more than two visible steps. The longest has nine. Five contain at least one nested call with a different carrier or endpoint row. The reader retains that whole proof step and its route. The counts describe selected call occurrences and can include a call inside another counted call. The display caps the list at 16 steps. A two-step control verifies that folding retains the original proof arguments.
 
 All five folded call occurrences disagree only at the start term. In four, the first structural difference is between the constants `DivInvMonoid.toMonoid` and `MonoidWithZero.toMonoid`. In one it is between `instLTNat` and an application headed by `Preorder.toLT`. The weights count occurrences of the enclosing call; nested selections can refer to the same inner call. The reader links the enclosing and nested start terms and the two sites of the first difference. These observations identify a difference in the supplied structures. A separate conversion check would be required to explain how Lean reconciles the endpoints.
+
+### Kernel check of the five folded start terms
+
+Lean 4.33.1 accepted reflexivity at the equality between the complete enclosing and nested endpoints at all five call occurrences (three declarations). This establishes definitional equality in the reconstructed local contexts of sizes 25, 25, 13, 13 and 4. The kernel rejected reflexivity at `0 = 1` in each context. The comparison does not record the kernel's reduction sequence. The four monoid cases include repeated selections, so the five observations are not independent proofs.
+
+From the repository root, reproduce the public JSON record using the existing pinned dependency build. The driver checks the recorded Lake manifest and package revisions, decodes and round-trips each compiled term packet, checks the entire proof against its theorem type, and reconstructs the local declarations on each selected route before checking the two endpoints.
+
+```sh
+python3 research/proof-atlas/use-rank/replay-endpoints.py \
+  --lean /path/to/lean-4.33.1/bin/lean --project /path/to/pinned/lake/project \
+  --output /tmp/chain-endpoint-conversions.json
+```
+
+The reader matches the report digest, declaration index, enclosing call and both endpoint routes before displaying the result.

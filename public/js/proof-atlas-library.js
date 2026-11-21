@@ -170,6 +170,29 @@
   }catch(e){if(token===serial){declarationLoading=false;setStatus(e.message);}throw e;}
  }
  function label(i){const k=current.kind(i),p=current.payload(i)||{};return k+(p.name?' '+p.name:p.binderName?' '+p.binderName:p.declName?' '+p.declName:k==='bvar'?' '+p.index:k==='lit'?' '+(p.value??p.repr):k==='proj'?' '+p.typeName+'['+p.index+']':'');}
+ let chainConversions;
+ async function showChainConversion(detail,record,call,mismatch){
+  const file='/public/data/proof-atlas/chain-endpoint-conversions.json';
+  if(!chainConversions){
+   chainConversions=(async()=>{
+    const response=await fetch(file);
+    if(!response.ok)throw Error('Endpoint report unavailable');
+    const bytes=await response.arrayBuffer();
+    if(await A.digest(bytes)!=='3921318e4fafc4019716b8872d3b372c7fa431c97792f93b71e51d6c9a967f21')throw Error('Endpoint report changed');
+    return JSON.parse(new TextDecoder().decode(bytes)).entries;
+   })().catch(error=>{chainConversions=null;throw error;});
+  }
+  const same=(a,b)=>a.node===b.node && a.route.root===b.route.root &&
+    a.route.slots.join('.')===b.route.slots.join('.');
+  try{
+   const entries=await chainConversions;
+   const match=entries.find(e=>e.name===record.name && e.indexSha256===record.indexSha256 &&
+    same(e.call,call) && e.field===mismatch.field && same(e.outer,mismatch.outer) &&
+    same(e.nested,mismatch.nested) && e.kernelReflexivity==='PASS');
+   if(match)detail.append(el('br'),'Lean checked that these terms are definitionally equal. ',
+    link('Kernel replay record',file));
+  }catch{ /* The structural comparison remains available without the replay record. */ }
+ }
  // Eq has three compiled arguments: the carrier, the left side and the right side.
  function equalitySides(data,at){
   let fn=at.node;
@@ -232,6 +255,7 @@
         ' / ',sourceLink(termLabel(m.nestedSite),m.nestedSite));
        else detail.append(m.difference==='limit'?' · Comparison limit reached':' · Matching expression structure');
        row.append(detail);
+       if(edition.id==='goedel-sample-4331')showChainConversion(detail,owner.record,{node:i,route:nextRoute},m);
       }
      }else if(step.boundary)row.append(' · '+step.boundary);
      list.append(row);

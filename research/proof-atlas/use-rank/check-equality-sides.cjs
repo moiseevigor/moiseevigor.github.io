@@ -50,6 +50,8 @@ assert.deepEqual(firstStructuralDifference(chains,1026,1026),{status:'identical'
   assert.deepEqual(mismatches.map(m=>[m.field,atlas.walk(data,m.outerSite.route),atlas.walk(data,m.nestedSite.route)]),
     [['carrier',1,2],['start',2,3],['end',3,5]]);
 }
+const requests=[];
+const {index:rowOccurrences}=require('../../../public/js/proof-atlas-row-occurrences');
 const mismatchLabels=new Map();
 let nested=0n,maximum=0,boundaries=0n;
 let transCalls=0n, transRows=0, transProofs=0;
@@ -92,6 +94,18 @@ for (const record of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations) {
           const folded=equalitySegments(data,inputs,2);
           assert.deepEqual(folded.map(s=>s.proof),inputs.slice(4));
           assert(folded.some(s=>s.boundary==='display limit'));
+        }
+        if(segments.some(s=>s.mismatches) && process.argv[2]==='--conversion-requests'){
+          assert.equal(at.route.root,1);
+          const occurrences=rowOccurrences(data,row,at.route);
+          assert.equal(occurrences.total,count);
+          for(let ordinal=1n;ordinal<=count;ordinal++){
+            const call={node:row,route:occurrences.select(ordinal)};
+            const parts=equalitySegments(data,exactCallInputs(data,call,'Eq.trans',6));
+            for(const part of parts) for(const m of part.mismatches??[])
+              requests.push({name:record.name,indexSha256:record.indexSha256,call,field:m.field,
+                outer:m.outer,nested:m.nested});
+          }
         }
         if(segments.some(s=>s.boundary))boundaries+=count;
         for(const segment of segments){
@@ -138,3 +152,4 @@ console.log('Different operand rows:',differences,'below root:',String(belowRoot
 console.log('Eq.trans calls:',String(transCalls),'distinct rows:',transRows,'proofs:',transProofs);
 console.log('Expanded chains:',String(nested),'maximum steps:',maximum,'calls with boundaries:',String(boundaries));
 for(const [pair,count] of mismatchLabels) console.log(pair,String(count));
+if(process.argv[2]==='--conversion-requests') fs.writeFileSync(process.argv[3],JSON.stringify(requests));
