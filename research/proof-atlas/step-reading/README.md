@@ -57,3 +57,22 @@ Across all 20 Goedel sample theorem bodies, 16,240,679 occurrences are applicati
 Of 80,824 distinct rows occurring at such endpoints (summed within declarations), 31,222 enter at least two different immediate parent-row/field pairs. Together these account for 7,833,155 endpoint occurrences. Selecting only the shared row therefore leaves even the immediate destination ambiguous for these occurrences. Repetitions of a single parent-row/field pair can have different enclosing routes too, so this is a lower bound on occurrence ambiguity. A folded glyph can represent a shared expression, but following a particular consumer requires a selected occurrence or a choice of destinations.
 
 [Per-proof counts and packet identities](ai-call-destinations.json). Run `node research/proof-atlas/step-reading/call-destinations.cjs` from the repository root. The checker weights edges by path multiplicity while holding one proof packet at a time, verifies the total against the packet's expanded body size, and checks its destination counts against explicit enumeration of one bounded subterm per proof. A shared-row control exercises the same expression as both a function prefix and two separate arguments.
+
+### How much enclosing context identifies one occurrence?
+
+Fix a declaration and a shared application row. Restrict its candidate occurrences to endpoints of function spines inside the theorem body. Reveal the exact parent row and field, then the grandparent row and field, continuing outward. Count a selection as resolved when exactly one candidate has that suffix. An exact parent row is more specific than a displayed lemma name and argument number.
+
+| Enclosing fields revealed | Occurrences still ambiguous, out of 16,240,679 |
+|---:|---:|
+| 0 | 16,206,339 |
+| 1 | 16,097,207 |
+| 4 | 15,472,515 |
+| 16 | 5,818,631 |
+| 32 | 447,890 |
+| 64 | 842 |
+| 69 | 3 |
+| 70 | 0 |
+
+The 20 Goedel proofs have a substantial tail of repeated contexts. Even the exact immediate parent and slot identify only 143,472 occurrences uniquely. A compact reader can display a short context for orientation while carrying the full occurrence route through every interaction. Resolving the route from the visible labels alone would require arbitrarily choosing among candidates in many of these cases. These numbers apply to compiled expression occurrences, including type and instance terms. They measure uniqueness under this particular suffix rule; a human may recognize a mathematical step with less information.
+
+[Per-proof depth curves](ai-context-depth.json) · [Reproduction script](context-depth.cjs). A fixed field suffix beneath a particular ancestor repeats once per occurrence of that ancestor. The calculation weights suffix counts by these multiplicities and retains two successive depth layers for one declaration at a time. Direct enumeration on a bounded subtree of each proof reproduces its entire depth curve. Depth is counted in kernel fields, including the function fields inside curried applications.
