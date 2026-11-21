@@ -75,9 +75,13 @@ function* matches(db,root){
 async function main(){
  const window={};
  require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/source-pages-manifest.js','utf8'),{window});
+ require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/type-notation-catalog.js','utf8'),{window});
  const items=inventory();
  const args=process.argv.slice(2);
- const lookup=args.length>0;
+ const output='public/data/proof-atlas/substitution-routes.json';
+ const build=args.length===1 && args[0]==='--build';
+ const catalog=[];
+ const lookup=args.length>0 && !build;
  if(lookup && (args[0]!=='--proof' || args.length!==3))throw Error('Usage: --proof EDITION DECLARATION');
  const descriptors=window.PROOF_ATLAS_SOURCE_PAGES.records.filter(d=>!lookup || (d.edition===args[1] && d.name===args[2]));
  if(!descriptors.length)throw Error('No paged source for this declaration and edition');
@@ -114,12 +118,26 @@ async function main(){
     }
     stack.push(...data.children[id]);
    }
+   const entries=[];
    let count=0;
    for(const {node,route} of matches(db,stats.root)){
     assert(expected.delete(node));
     assert.equal(atlas.walk(data,route),node);
+    const fn=spine(data,node).args[4],kind=atlas.kinds[data.kind[fn]];
+    let term=kind==='lam'?data.children[fn][1]:fn;
+    while(data.kind[term]===10)term=data.children[term][0];
+    const {head,args}=spine(data,term);
+    const payload=data.payloads[head];
+    const op=data.kind[head]===4 && window.PROOF_ATLAS_TYPE_NOTATION.entries.find(e=>e.name===payload.name &&
+     JSON.stringify(e.nameParts)===JSON.stringify(payload.nameParts) && e.levelParams.length===payload.levels.length &&
+     e.arity===args.length+(kind==='app'?1:0));
+    const rawName=data.kind[head]===4?payload.name:atlas.kinds[data.kind[head]];
+    const name=op && op.glyph!==rawName?op.glyph+' ('+rawName+')':rawName;
+    const label=kind==='lam'?'Lambda body headed by '+name:kind==='app'?'Partial application of '+name:'Function '+name;
+    entries.push([node,route.slots.join(''),label]);
     count++;
    }
+   catalog.push({edition:descriptor.edition,name:record.name,indexSha256:record.indexSha256,sourceSha256:record.sourceSha256,entries});
    assert.equal(expected.size,0);
    assert.equal(db.prepare('SELECT count(*) AS n FROM reach').get().n,seen.size);
    results.push({name:record.name,edition:descriptor.edition,rows:record.uniqueNodes,count,loads:stats.loads,peak:stats.peak,
@@ -127,6 +145,9 @@ async function main(){
   }finally{db.close();fs.rmSync(dir,{recursive:true,force:true});}
  }
  if(lookup)return;
+ const encoded=JSON.stringify({format:'ProofAtlasSubstitutionRoutes/1',records:catalog})+'\n';
+ if(build)fs.writeFileSync(output,encoded);
+ else assert.equal(fs.readFileSync(output,'utf8'),encoded,'published substitution routes differ from checked sources');
  console.table(results);
  console.log('Packets:',results.length,'with matches:',results.filter(r=>r.count).length,'distinct matching rows across packets:',results.reduce((n,r)=>n+r.count,0));
 }

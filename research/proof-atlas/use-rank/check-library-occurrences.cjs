@@ -700,6 +700,28 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
    await pagedRule.getByRole('link',{name:'s1',exact:true}).click();
    await page.waitForFunction(id=>window.ProofAtlasLibrary?.getSnapshot()?.selected===id,destinationAnchor.node);
    assert.deepEqual(await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot().route),destinationAnchor.route);
+   const finder=page.getByText('Find equality substitutions',{exact:true});
+   await page.route('**/substitution-routes.json*',r=>r.fulfill({status:503,body:''}),{times:1});
+   await finder.click();
+   await page.getByText('Substitution routes unavailable · Route index unavailable').waitFor();
+   await finder.click();await finder.click();
+   const picker=page.getByLabel('Substitution',{exact:true});
+   await picker.waitFor();
+   assert.equal(await picker.locator('option').count(),41);
+   await picker.selectOption({index:40});
+   const open=page.getByRole('link',{name:'Open substitution',exact:true});
+   const url=new URL(await open.evaluate(a=>a.href));
+   const id=Number(url.hash.slice(6)),route={root:1,slots:url.searchParams.get('route').slice(2).split('.').map(Number)};
+   assert.equal(atlas.walk(largeData,route),id);
+   await open.click();
+   await page.getByRole('region',{name:'Equality under a function'}).getByRole('link',{name:'Proof of a = b'}).waitFor();
+   const pickedCall=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
+   assert.deepEqual(pickedCall.route,route);
+   assert.equal(pickedCall.selected,id);
+   await page.goto('http://localhost/projects/proof-atlas/library/?loading=paged&edition=published-15&proof=CrossingData.crossing');
+   await finder.click();
+   await page.getByText('No fully applied congrArg occurs in this proof body.').waitFor();
+   assert.equal(await open.count(),0);
    await page.close();
   }
   console.log('Occurrence switching and all 24 omitted references passed at 320 and 1280 pixels.');

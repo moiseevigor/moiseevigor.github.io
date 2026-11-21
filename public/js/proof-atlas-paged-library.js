@@ -73,6 +73,48 @@
     }
    }
   }
+  const indexArea=el('div');
+  workspace.insertBefore(indexArea,cache);
+  let substitutionCatalog;
+  function substitutionIndex(descriptor){
+   const panel=el('details'),summary=el('summary','Find equality substitutions');
+   panel.append(summary);
+   let loaded=false;
+   panel.ontoggle=async()=>{
+    if(!panel.open||loaded)return;
+    loaded=true;
+    const message=el('p','Loading substitution routes…');
+    panel.replaceChildren(summary,message);
+    try{
+     substitutionCatalog??=fetch('/public/data/proof-atlas/substitution-routes.json?v=1').then(async response=>{
+      if(!response.ok)throw Error('Route index unavailable');
+      const catalog=await response.json();
+      if(catalog.format!=='ProofAtlasSubstitutionRoutes/1')throw Error('Unknown route index format');
+      return catalog;
+     }).catch(error=>{substitutionCatalog=null;throw error;});
+     const catalog=await substitutionCatalog;
+     if(!panel.isConnected)return;
+     const entry=catalog.records.find(r=>r.name===descriptor.name && r.edition===descriptor.edition &&
+      r.indexSha256===descriptor.indexSha256 && r.sourceSha256===descriptor.sourceSha256);
+     if(!entry)throw Error('This proof version has no checked route index');
+     if(!entry.entries.length){message.textContent='No fully applied congrArg occurs in this proof body.';return;}
+     message.textContent=entry.entries.length+' distinct compiled calls to congrArg. Each link selects one occurrence in the proof.';
+     const label=el('label','Substitution '),picker=el('select'),open=el('a','Open substitution');
+     picker.id='pl-substitution-picker';label.htmlFor=picker.id;
+     for(const [node,,description] of entry.entries)picker.append(el('option',description+' · #'+node));
+     function destination(){
+      const [node,slots]=entry.entries[picker.selectedIndex],u=new URL(full.href);
+      u.searchParams.set('loading','paged');u.searchParams.set('route','1:'+Array.from(slots).join('.'));
+      u.hash='expr-'+node;open.href=u.href;
+     }
+     picker.onchange=destination;destination();panel.append(label,picker,' ',open);
+    }catch(error){
+     message.textContent='Substitution routes unavailable · '+error.message;
+     loaded=false;
+    }
+   };
+   return panel;
+  }
   const substitutionSection=el('section');
   substitutionSection.hidden=true;
   substitutionSection.setAttribute('aria-label','Equality under a function');
@@ -125,8 +167,10 @@
   }
   async function selectDeclaration(name,node,write=true,route){
    substitutionSection.hidden=true;substitutionSection.replaceChildren();
+   indexArea.replaceChildren();
    const epoch=++selectionEpoch;sourceEpoch++;useInputControl?.dispose();useInputControl=null;useNavigation?.dispose();useNavigation=null;resetModules();proofController?.abort();proofController=new AbortController();const signal=proofController.signal;view?.dispose();view=null;cursor?.dispose();cursor=null;nativeCursor?.dispose();nativeCursor=null;scopeCursor?.dispose();scopeCursor=null;scopeReason=null;resolve=null;snapshot=null;record=edition.declarations.find(r=>r.name===name);hostView.replaceChildren();cache.textContent='';title.textContent=name;tools.replaceChildren(full);const replay=compiledReplayLink(record);if(replay)tools.append(replay);completeLink(name,route,node);status('Loading source and native query indexes…',true);
    const descriptor=inventory.records.find(d=>d.edition===edition.id&&d.name===name);if(!record||!descriptor){status('Paged geometry is unavailable for this declaration. Use the complete view.');return false;}
+   indexArea.replaceChildren(substitutionIndex(descriptor));
    try{const opened=await P.open(descriptor,record,{signal});if(signal.aborted||epoch!==selectionEpoch){opened.dispose();return false;}cursor=opened;const nd=host.PROOF_ATLAS_NATIVE_PAGES?.records.find(d=>d.edition===edition.id&&d.name===name);if(!nd)throw Error('Native query index unavailable for this declaration');const native=await N.open(nd,opened.data,record,{signal,expectedDescriptors:opened.manifest.descriptors,useSiteQueryDescriptor:host.PROOF_ATLAS_USE_SITE_PAGES?.records.find(d=>d.edition===edition.id&&d.name===name),packetTypingDescriptor:host.PROOF_ATLAS_PACKET_TYPES?.records.find(d=>d.edition===edition.id&&d.name===name),packetQueryDescriptor:host.PROOF_ATLAS_PACKET_QUERY_PAGES?.records.find(d=>d.edition===edition.id&&d.name===name)});
     if(signal.aborted||epoch!==selectionEpoch){native.dispose();return false;}nativeCursor=native;scopeReason=scopeFailure;const qd=host.PROOF_ATLAS_SCOPE_PAGES?.records.find(d=>d.edition===edition.id&&d.name===name);if(!scopeFailure&&I&&Q&&qd){try{const openedScope=await Q.open(qd,record,{signal});if(signal.aborted||epoch!==selectionEpoch){openedScope.dispose();return false;}scopeCursor=openedScope;}catch(error){if(signal.aborted||epoch!==selectionEpoch)return false;scopeReason=error.message;}}else scopeReason=scopeReason||'No scope summary for this declaration.';resolve=types(native.providers);const value=opened.data.declaration.rootPaths.indexOf('root.value'),selected=route||{root:value<0?0:value,slots:[]};return await selectOccurrence(node,write,true,selected);
    }catch(error){if(!signal.aborted&&epoch===selectionEpoch){clearMethod();view?.dispose();view=null;cursor?.dispose();cursor=null;nativeCursor?.dispose();nativeCursor=null;scopeCursor?.dispose();scopeCursor=null;scopeReason=null;resolve=null;snapshot=null;hostView.replaceChildren();status('Paged geometry unavailable: '+error.message);}return false;}
