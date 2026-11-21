@@ -6,7 +6,7 @@ const atlas=require('../../../public/js/proof-atlas-library-data');
 const {inventory}=require('../../../scripts/proof-atlas-judgment-fixtures.cjs');
 const html=fs.readFileSync(__dirname+'/inferences.html','utf8');
 const finals=JSON.parse(html.match(/^const finalApplications=(.*);$/m)[1]);
-let branches=0,uses=0,observations=0;
+let branches=0,uses=0,observations=0,related=0;
 const ports=require('./port-results.json');
 for(const [hash,f] of Object.entries(finals)){
  if(!f.cases?.checked)continue;
@@ -18,6 +18,17 @@ for(const [hash,f] of Object.entries(finals)){
  const raw=z.gunzipSync(fs.readFileSync('public/data/proof-atlas/application-ports/'+nativeOwner+'.json.gz'));
  assert.equal(createHash('sha256').update(raw).digest('hex'),nativeOwner);
  const native=JSON.parse(raw);assert.equal(native.source.indexSha256,hash);
+ function binderPaths(route){
+  const paths=[];
+  let node=d.roots[route.root];
+  for(const [depth,slot] of route.slots.entries()){
+   const kind=atlas.kinds[d.kind[node]];
+   if(((kind==='lam'||kind==='forallE') && slot===1) || (kind==='letE' && slot===2))
+    paths.push(route.slots.slice(0,depth).join('.'));
+   node=d.children[node][slot];
+  }
+  return paths;
+ }
  for(const branch of f.cases.branches){
   branches++;
   for(const u of branch.assumptionUses){
@@ -50,6 +61,14 @@ for(const [hash,f] of Object.entries(finals)){
           j.consumer.anchor.node===c.call.node && j.consumer.anchor.route.root===c.call.route.root &&
           String(j.consumer.anchor.route.slots)===String(c.call.route.slots));
         assert.equal(matches.length,sample.judgment?1:0);
+        if(!matches.length){
+         const peer=native.entries.find(({junction:j})=>j.producer.role==='proof' &&
+          j.consumer.slot===c.slot && j.consumer.input.node===hit.node &&
+          j.consumer.anchor.node===c.call.node && j.consumer.anchor.route.root===c.call.route.root &&
+          JSON.stringify(binderPaths(j.consumer.anchor.route))===JSON.stringify(binderPaths(c.call.route)));
+         assert.deepEqual(sample.relatedRecording,peer?{callId:Number(peer.id.split(':')[0]),owner:nativeOwner}:undefined);
+         if(peer)related++;
+        }else assert.equal(sample.relatedRecording,undefined);
         if(matches.length){
          const {id,junction:j}=matches[0];
          assert.equal(j.consumer.input.node,hit.node);
@@ -83,4 +102,5 @@ for(const [hash,f] of Object.entries(finals)){
  }
 }
 assert.equal(branches,4);
-console.log(branches+' branches, '+uses+' references independently verified, '+observations+' exact port judgments');
+assert.equal(related,1);assert.equal(observations,2);
+console.log(related+' same-context peer, '+branches+' branches, '+uses+' references independently verified, '+observations+' exact port judgments');

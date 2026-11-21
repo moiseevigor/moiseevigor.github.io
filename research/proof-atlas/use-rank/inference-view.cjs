@@ -94,7 +94,7 @@ for(const item of require('./port-results.json')) {
     const evidence=packet('.'+caseDesc.file,caseDesc.sha256);
     const provider=elimination.provider(evidence,data,record,caseDesc.sha256,caseDesc.file);
     final.cases=require('./final-cases.cjs')(data,record,provider,final);
-    if(final.cases.checked)require('./case-use-judgments.cjs')(final.cases,examples.filter(x=>x.source.indexSha256===source.indexSha256));
+    if(final.cases.checked)require('./case-use-judgments.cjs')(data,final.cases,examples.filter(x=>x.source.indexSha256===source.indexSha256));
   }
   flows[source.indexSha256]=require('./statement-flow.cjs')(data,examples.filter(x=>x.source.indexSha256===source.indexSha256));
   const bindings={};

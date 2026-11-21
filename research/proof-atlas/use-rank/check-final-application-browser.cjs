@@ -55,6 +55,9 @@ const {chromium}=require('playwright');
          const n=p.examples.indexOf(sample);
          const ref=li.getByRole('link',{name:'Reference '+(n+1),exact:true});
          await verify(ref,sample.use);
+         const peerLink=ref.locator('..').getByRole('link',{name:'Inspect the recorded occurrence'});
+         assert.equal(await peerLink.count(),sample.relatedRecording?1:0);
+         if(sample.relatedRecording)assert.equal(await peerLink.getAttribute('href'),'#'+hash+'-'+sample.relatedRecording.callId+'/read');
          const judgment=ref.locator('..').locator('.use-judgment');
          assert.equal(await judgment.count(),sample.judgment?1:0);
          if(sample.judgment){

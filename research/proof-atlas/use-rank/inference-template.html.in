@@ -268,6 +268,14 @@ function showFinal(){
         for(const peer of j.otherProofs)proof.append(document.createElement('br'),'Other proof input '+peer.slot+' · ',link(peer.type,peer.anchor));
         proof.append(document.createElement('br'),'Recorded result · '+j.conclusion+' · ',a);line.append(proof);
        }
+       if(sample.relatedRecording){
+        const a=document.createElement('a'),p=document.createElement('p');
+        a.href='#'+hash+'-'+sample.relatedRecording.callId+'/read';
+        a.textContent='Inspect the recorded occurrence';
+        a.onclick=e=>{if(a.hash===location.hash){e.preventDefault();follow();}};
+        p.className='related-recording';
+        p.append('Same application and binders at another occurrence. ',a);line.append(p);
+       }
        block.append(line);
       }
       detail.append(block);
