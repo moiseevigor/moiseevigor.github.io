@@ -8,6 +8,7 @@ const {applicationAtUse} = require('../../../public/js/proof-atlas-omitted-refer
 const {sourceInput} = require('../../../public/js/proof-atlas-application-ports');
 const E = require('../../../public/js/proof-atlas-elimination');
 const {countReferences} = require('../../../public/js/proof-atlas-recursive-inputs');
+const roles=require('../../../public/js/proof-atlas-role-occurrences');
 const prior = require('./ai-local-flow.json');
 const window = {};
 vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/goedel-sample-manifest.js','utf8'),{window});
@@ -19,7 +20,7 @@ function audit(record) {
   assert.equal(createHash('sha256').update(bytes).digest('hex'),record.indexSha256);
   const data=A.validateIndex(JSON.parse(bytes),record);
   const inputs=[], slots=[], parents=[], scope=[], spines=new Map();
-  function classify(node,input) {
+  function classify(node,input,offset) {
     let depth=slots.length-1;
     const parent=parents[depth];
     let label;
@@ -47,12 +48,13 @@ function audit(record) {
     if (!input.groups.has(label)) {
       const witness={root:1,slots:[...slots]};
       assert.deepEqual(A.binding(data,witness),{node:input.node,route:input.route});
-      input.groups.set(label,{count:0,node,route:witness});
+      input.groups.set(label,{count:0,node,route:witness,bytes:[],last:0});
     }
-    input.groups.get(label).count++;
+    const group=input.groups.get(label);
+    roles.addOffset(group.bytes,offset-group.last);group.last=offset;group.count++;
     input.count++;
   }
-  function walk(node,leading) {
+  function walk(node,leading,offset) {
     if (!leading && data.neededScope[node]===0) return;
     const kind=A.kinds[data.kind[node]];
     let input=null;
@@ -62,25 +64,45 @@ function audit(record) {
     }
     if (kind==='bvar') {
       const binder=scope.at(-1-data.payloads[node].index);
-      if (binder) classify(node,binder);
+      if (binder) classify(node,binder,offset);
     }
     parents.push(node);
+    let childOffset=offset+1;
     data.children[node].forEach((child,i)=>{
       const body=A.fields[kind][i]==='body' && ['lam','forallE','letE'].includes(kind);
       if (body) scope.push(input);
       slots.push(i);
-      walk(child,leading && kind==='lam' && body);
+      walk(child,leading && kind==='lam' && body,childOffset);
+      childOffset+=Number(data.expanded[child]);
       slots.pop();
       if (body) scope.pop();
     });
     parents.pop();
   }
-  walk(data.roots[1],true);
+  walk(data.roots[1],true,0);
   for (const input of inputs) {
     const refs=countReferences(data,data.children[input.node][1],0);
     assert.equal(refs.status,'counted');
     assert.equal(BigInt(refs.occurrences),BigInt(input.count));
     assert.equal([...input.groups.values()].reduce((sum,g)=>sum+g.count,0),input.count);
+  }
+  for(const input of inputs)for(const [label,g] of input.groups){
+    g.offsets=Buffer.from(g.bytes).toString('base64');
+    for(const ordinal of new Set([1,Math.ceil(g.count/2),g.count])){
+      const hit=roles.select(data,g,ordinal);
+      if(ordinal===1)assert.deepEqual(hit,{node:g.node,route:g.route});
+      assert.deepEqual(A.binding(data,hit.route),{node:input.node,route:input.route});
+      const app=applicationAtUse(data,hit);
+      if(app){
+        const kind=A.kinds[data.kind[app.head.node]];
+        const name=kind==='const'?app.label:'('+kind+' head)';
+        assert.equal(label,name+' · '+(app.slot===0?'function':'argument '+app.slot)+' / '+app.arity);
+      }else{
+        const slots=hit.route.slots,parent=A.walk(data,{root:1,slots:slots.slice(0,-1)}),kind=A.kinds[data.kind[parent]];
+        assert.equal(label,kind+' · '+A.fields[kind][slots.at(-1)]);
+      }
+    }
+    delete g.bytes;
   }
   const total=inputs.reduce((n,i)=>n+i.count,0);
   if (!published) assert.equal(total,prior.find(r=>r.indexSha256===record.indexSha256).lambdaUses.leading);
@@ -95,7 +117,7 @@ if (process.argv.includes('--write-packets')) {
     const entries=inputs.map(input=>({
       node:input.node,depth:input.route.slots.length,count:input.count,
       groups:[...input.groups].sort((a,b)=>b[1].count-a[1].count).map(([label,g])=>({
-        label,count:g.count,node:g.node,slots:g.route.slots.join('.')
+        label,count:g.count,node:g.node,slots:g.route.slots.join('.'),...(g.count>1?{offsets:g.offsets}:{})
       }))
     }));
     fs.writeFileSync(dir+'/'+record.indexSha256+'.json',JSON.stringify({indexSha256:record.indexSha256,entries})+'\n');
