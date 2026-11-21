@@ -15,7 +15,7 @@
  };
  async function loadCalleeIndex(owner){
   const shard=owner.indexSha256[0];
-  const response=await fetch('/public/data/proof-atlas/callee-uses/'+shard+'.json?v=3');
+  const response=await fetch('/public/data/proof-atlas/callee-uses/'+shard+'.json?v=4');
   if(!response.ok)throw Error('Parameter index unavailable');
   return response.json();
  }
@@ -50,7 +50,11 @@
      if(Number.isInteger(typeBinder)){
       item.append(' · ',link('Declaration type, parameter '+slot,{node:typeBinder,slots:Array(slot-1).fill(1)},0));
      }
-     if(!p&&!Number.isInteger(typeBinder))item.append(callerInput(slot));
+     if(!p&&!Number.isInteger(typeBinder)){
+      const role=record.result.roles?.[slot-record.signature.length-1];
+      if(role)item.textContent='Argument '+slot+' · '+role+' in '+record.result.head+'. ';
+      item.append(callerInput(slot));
+     }
      list.append(item);
     }
     body.replaceChildren(list);

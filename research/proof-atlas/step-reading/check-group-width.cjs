@@ -116,7 +116,18 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
       await page.goto(signatureExample.href);
       const monotone=group.locator('[data-callee-uses="JacobiCore.eps_strictMono"]');
       await monotone.locator('summary').click();
-      await monotone.getByRole('button',{name:'Inspect caller argument 4 type',exact:true}).click();
+      for(const [i,role] of ['first point','second point','order premise'].entries()){
+        const slot=i+2;
+        const button=monotone.getByRole('button',{name:'Inspect caller argument '+slot+' type',exact:true});
+        assert((await button.locator('..').innerText()).includes('Argument '+slot+' · '+role+' in StrictMono.'));
+        await button.click();
+        const expected=require('./residual-stages.json').find(s=>s.slot===slot);
+        await page.waitForFunction(s=>{
+          const t=window.ProofAtlasOccurrenceView.getTypeScene(),r=t?.origin.sourceRoute;
+          return t?.root.node===s.actualTypeRoot && r.root===s.argument.root &&
+            r.depth===s.argument.depth && r.slots===s.argument.slots;
+        },expected);
+      }
       await page.waitForFunction(()=>{
         const t=window.ProofAtlasOccurrenceView.getTypeScene();
         return t?.root.node===68 && t.origin.sourceRoute.root===1 && t.origin.sourceRoute.depth===3 &&

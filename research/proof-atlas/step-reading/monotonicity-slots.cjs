@@ -28,14 +28,29 @@ for(const name of Object.keys(expected)){
   assert.deepEqual(term.payloads[head].nameParts,[{str:predicate}]);
   const restricted=predicate.endsWith('On');
   assert.equal(args.length,restricted?6:5);
-  targets.set(name,{predicate,prefix,roles:restricted?
+  targets.set(name,{predicate,prefix,result,roles:restricted?
     ['first point','first membership','second point','second membership','order premise']:
     ['first point','second point','order premise']});
 }
+for(const [name,target] of targets){
+  const digest=owners.get(name).indexSha256;
+  const shard=require('../../../public/data/proof-atlas/callee-uses/'+digest[0]+'.json');
+  const record=shard.records.find(r=>r.name===name);
+  assert.equal(record.indexSha256,digest);
+  assert.equal(record.signature.length,target.prefix);
+  assert.equal(record.result.head,target.predicate);
+  assert.deepEqual(record.result.roles,target.roles);
+}
 const counts={},byCallee={};
+const links=[];
+function link(label,name,root,slots,node){
+  const query=new URLSearchParams({edition:edition.id,proof:name,route:root+':'+slots.join('.')});
+  return '['+label+'](https://moiseevigor.github.io/projects/proof-atlas/library/?'+query+'#expr-'+node+')';
+}
 for(const owner of edition.declarations.filter(r=>r.kind==='theorem' && r.bodyAvailable)){
   const term=load(owner),root=term.roots[1],visits=Array(root+1).fill(0),prefixes=Array(root+1).fill(0);
   visits[root]=1;
+  const hits=new Map();
   for(let id=root;id>=0;id--){
     if(!visits[id])continue;
     const app=term.kind[id]===5;
@@ -45,6 +60,7 @@ for(const owner of edition.declarations.filter(r=>r.kind==='theorem' && r.bodyAv
       const target=term.kind[head]===4?targets.get(name):null;
       if(target && args.length>target.prefix){
         assert.deepEqual(term.payloads[head].nameParts,name.split('.').map(str=>({str})));
+        hits.set(id,{name,target,args});
         for(let slot=target.prefix;slot<args.length;slot++){
           const role=target.roles[slot-target.prefix];assert(role);
           counts[role]=(counts[role]||0)+weight;
@@ -54,6 +70,34 @@ for(const owner of edition.declarations.filter(r=>r.kind==='theorem' && r.bodyAv
     }
     term.children[id].forEach((c,i)=>{visits[c]+=visits[id];assert(Number.isSafeInteger(visits[c]));if(app&&i===0)prefixes[c]+=visits[id];});
   }
+  if(process.argv.includes('--links') && hits.size){
+    // Visit only branches that can contain one of the measured application rows.
+    const reachable=[];
+    for(let id=0;id<=root;id++)reachable[id]=hits.has(id)||term.children[id].some(c=>reachable[c]);
+    function visit(id,path,inFunction){
+      if(!reachable[id])return;
+      const hit=hits.get(id);
+      if(hit&&!inFunction){
+        const {name,target,args}=hit;
+        for(let i=target.prefix;i<args.length;i++){
+          const slots=path.concat(Array(args.length-1-i).fill(0),1);
+          assert.equal(data.walk(term,{root:1,slots}),args[i]);
+          const caller=link(owner.name,owner.name,1,path,id);
+          const arg=link('Argument '+(i+1),owner.name,1,slots,args[i]);
+          const result=link(target.predicate,name,0,Array(target.prefix).fill(1),target.result);
+          links.push('| '+caller+' | '+arg+' | '+target.roles[i-target.prefix]+' | '+result+' |');
+        }
+      }
+      term.children[id].forEach((c,i)=>visit(c,path.concat(i),term.kind[id]===5&&i===0));
+    }
+    visit(root,[],false);
+  }
 }
 assert.deepEqual(byCallee,Object.fromEntries(Object.entries(expected).map(([k,v])=>[k,Number(v)])));
-console.log(JSON.stringify({edition:edition.id,byCallee,counts},null,2));
+if(process.argv.includes('--links')){
+  assert.equal(links.length,Object.values(counts).reduce((a,b)=>a+b,0));
+  console.log('# Arguments supplied to monotonicity results\n');
+  console.log('The caller link opens the complete call. The argument link selects the supplied expression. The final link opens the named result in the called declaration. Roles follow the four Lean-checked predicate definitions.\n');
+  console.log('| Caller | Compiled argument | Role in the unfolded result | Declared result |\n|---|---|---|');
+  console.log(links.join('\n'));
+}else console.log(JSON.stringify({edition:edition.id,byCallee,counts},null,2));

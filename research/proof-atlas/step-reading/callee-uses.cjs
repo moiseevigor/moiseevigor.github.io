@@ -166,8 +166,19 @@ if(process.argv.includes('--all-bodies')){
       type=term.children[type][1];
     }
     assert.equal(atlas.walk(term,{root:0,slots:Array(signature.length).fill(1)}),type);
-    const {head}=spine(term,type);
+    const {head,args}=spine(term,type);
     const result={node:type,head:atlas.kinds[term.kind[head]]==='const'?term.payloads[head].name:null};
+    const predicate=result.head;
+    if(['Monotone','StrictMono','StrictMonoOn','StrictAntiOn'].includes(predicate)){
+      const payload=term.payloads[head];
+      const restricted=predicate.endsWith('On');
+      if(args.length===(restricted?6:5) && payload.nameParts.length===1 &&
+         payload.nameParts[0].str===predicate && payload.levels.length===2){
+        result.roles=restricted?
+          ['first point','first membership','second point','second membership','order premise']:
+          ['first point','second point','order premise'];
+      }
+    }
     const parameters=params.map(({node,slots,first,count})=>({node,slots,first,count}));
     shards[parseInt(owner.indexSha256[0],16)].push({name:owner.name,indexSha256:owner.indexSha256,parameters,signature,result});
   }
