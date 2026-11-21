@@ -17,7 +17,7 @@
   ['Real.sqrt',{symbol:'√',parameters:[],unary:true}],
   ['abs',{symbol:'abs',parameters:['type','lattice instance','group instance'],unary:true}]
  ]);
- function formula(data,at,maxDepth=3){
+ function formula(data,at,maxDepth=3,allowAtomicRoot=false){
   if(![3,6].includes(maxDepth))throw RangeError('Unsupported formula depth');
   function child(site,slot){
    return {node:data.children[site.node][slot],route:{root:site.route.root,slots:site.route.slots.concat(slot)}};
@@ -36,7 +36,7 @@
      parameters:args.slice(0,op.parameters.length),left:read(args[op.parameters.length],depth+1),
      right:op.unary?null:read(args.at(-1),depth+1)};
    }
-   if(!depth)return null;
+   if(!depth && !allowAtomicRoot)return null;
    let label='e'+site.node;
    const p=data.payloads[site.node];
    if(data.kind[site.node]===0){
@@ -171,10 +171,20 @@
   const equality=namedArguments(data,witness,'congrArg',6);
   if(!equality)return null;
   for(const [side,other] of [['left','right'],['right','left']]){
-   const from=before[side].site,to=after[side].site;
-   if(from.node!==to.node && before[other].site.node===after[other].site.node &&
-      equality[reverse?3:2].node===from.node && equality[reverse?2:3].node===to.node)
-    return {side,from,to,witness,context:equality[4],certificate:equality[5]};
+   if(before[other].site.node!==after[other].site.node)continue;
+   let from=before[side].site,to=after[side].site;
+   const path=[];
+   while(from.node!==to.node){
+    if(equality[reverse?3:2].node===from.node && equality[reverse?2:3].node===to.node)
+     return {side,path,from,to,witness,context:equality[4],certificate:equality[5]};
+    if(path.length===32 || data.kind[from.node]!==5 || data.kind[to.node]!==5)break;
+    const a=data.children[from.node],b=data.children[to.node];
+    const slot=a[0]===b[0]?1:0;
+    if(a[1-slot]!==b[1-slot] || a[slot]===b[slot])break;
+    path.push(slot);
+    from={node:a[slot],route:{root:from.route.root,slots:from.route.slots.concat(slot)}};
+    to={node:b[slot],route:{root:to.route.root,slots:to.route.slots.concat(slot)}};
+   }
   }
   return null;
  }
@@ -245,7 +255,9 @@
   const el=(tag,text)=>{const e=document.createElement(tag);if(text)e.textContent=text;return e;};
   function operandChange(t){
    const c=t.change,p=el('p');p.dataset.rewriteSide=c.side;
-   p.append('The '+c.side+' operand changes from ',link(caption(t.before[c.side]),c.from),' to ',link(caption(t.after[c.side]),c.to),
+   const label=(tree,site)=>tree.site.node===site.node?caption(tree):caption(formula(data,site,3,true));
+   p.append(c.path.length?'Inside the '+c.side+' operand, replace ':'The '+c.side+' operand changes from ',
+    link(label(t.before[c.side],c.from),c.from),c.path.length?' with ':' to ',link(label(t.after[c.side],c.to),c.to),
     '. ',link(t.reverse?'Operand equality (used in reverse)':'Operand equality',c.certificate),' · ',link('Function applied to both sides',c.context));
    return p;
   }
