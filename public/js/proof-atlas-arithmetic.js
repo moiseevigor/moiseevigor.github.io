@@ -197,6 +197,17 @@
   if(!before || !after)return null;
   return {before,after,equality:cast[2],premise:cast[3],reverse,change:rewriteSide(data,cast,before,after,reverse)};
  }
+ function rewriteSequence(data,at,selected){
+  const steps=[{at,term:selected}];
+  let current=selected;
+  while(steps.length<8){
+   const previous=formulaTransport(data,current.premise);
+   if(!previous?.change || previous.after.site.node!==current.before.site.node)break;
+   steps.push({at:current.premise,term:previous});
+   current=previous;
+  }
+  return steps.reverse();
+ }
  function closingOrderArgument(data){
   if(data.roots[1]==null)return null;
   const child=(site,slot)=>({node:data.children[site.node][slot],route:{root:site.route.root,slots:site.route.slots.concat(slot)}});
@@ -266,6 +277,18 @@
    const panel=el('section');panel.dataset.selectedRewrite='';
    panel.append(el('h4','Rewrite an operand'),link(caption(selected.before),selected.before.site),' → ',
     link(caption(selected.after),selected.after.site),operandChange(selected));container.append(panel);
+   const steps=rewriteSequence(data,at,selected);
+   if(steps.length>1){
+    const trail=el('details'),list=el('ol'),first=steps[0].term;
+    trail.dataset.rewriteSequence='';
+    trail.append(el('summary',steps.length+' consecutive rewrites ending here'),
+     link(caption(first.before),first.before.site), ' · ',link('Starting proof',first.premise),list);
+    for(const step of steps){
+     const row=el('li');row.append(link(caption(step.term.after),step.term.after.site),' · ',link('Inspect rewrite',step.at));
+     list.append(row);
+    }
+    container.append(trail);
+   }
   }
   if(!at.route.slots.length){
    const o=closingOrderArgument(data);
@@ -444,5 +467,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
+ if(common)module.exports={rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
 })(typeof window==='undefined'?globalThis:window);

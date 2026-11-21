@@ -2,16 +2,17 @@
 const fs=require('node:fs'), z=require('node:zlib'), crypto=require('node:crypto'), assert=require('node:assert/strict');
 const A=require('../../../public/js/proof-atlas-library-data');
 const {spine}=require('../../../public/js/proof-atlas-elimination');
-const {formulaTransport}=require('../../../public/js/proof-atlas-arithmetic');
+const {rewriteSequence,formulaTransport}=require('../../../public/js/proof-atlas-arithmetic');
 global.window={};
 require('../../../public/data/proof-atlas/library-manifest');
+require('../../../public/data/proof-atlas/goedel-sample-manifest');
 
 function scan(d){
  const raw=z.gunzipSync(fs.readFileSync('.'+d.indexFile));
  assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),d.indexSha256);
  const g=A.validateIndex(JSON.parse(raw),d), root=g.roots[1];
  assert(Number.isInteger(root));
- const examples=[];let nested=0;
+ const examples=[];let nested=0;const lengths={};
  const visited=new Set(), stack=[{node:root,parent:null}];
  const counts={mp:0,mpr:0,left:0,right:0,reverseLeft:0,reverseRight:0}, operators={};
  while(stack.length){
@@ -67,7 +68,19 @@ function scan(d){
      assert.deepEqual(site.route.slots.slice(0,slots.length),slots);
     }
     assert.equal(A.walk(g,c.witness.route),wrapped?wrapper.args[1]:call.args[2]);
-    if(d.name==='JacobiData.slope_bound_abs')examples.push({route,path:c.path,side:c.side,reverse,node,links:[t.before.site,t.after.site,c.from,c.to,c.certificate,c.context]});
+    const steps=rewriteSequence(g,{node,route},t);
+    assert.deepEqual(steps.at(-1).at,{node,route});assert(steps.length<=8);
+    lengths[steps.length]=(lengths[steps.length]||0)+1;
+    for(let i=1;i<steps.length;i++){
+     const prev=steps[i-1],next=steps[i];
+     const prevCall=spine(g,prev.at.node),nextCall=spine(g,next.at.node);
+     assert.equal(nextCall.args[3],prev.at.node);
+     assert.deepEqual(prev.at.route.slots,next.at.route.slots.concat(1));
+     const output=prevCall.args[g.payloads[prevCall.head].name==='Eq.mp'?1:0];
+     const input=nextCall.args[g.payloads[nextCall.head].name==='Eq.mp'?0:1];
+     assert.equal(output,input);
+    }
+    if(d.name==='JacobiData.slope_bound_abs')examples.push({sequence:steps.length>1?[steps[0].term.before.site,steps[0].term.premise,...steps.flatMap(s=>[s.term.after.site,s.at])]:[],route,path:c.path,side:c.side,reverse,node,links:[t.before.site,t.after.site,c.from,c.to,c.certificate,c.context]});
     counts[reverse?(c.side==='left'?'reverseLeft':'reverseRight'):c.side]++;
     const operator=g.payloads[before.head].name;
     operators[operator]=(operators[operator]||0)+1;
@@ -75,21 +88,23 @@ function scan(d){
   }
   g.children[node].forEach((child,slot)=>stack.push({node:child,parent:item,slot}));
  }
- return {counts,operators,examples,nested};
+ return {counts,operators,examples,nested,lengths};
 }
 
-for(const edition of window.PROOF_ATLAS_LIBRARY.editions){
+for(const edition of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAMPLE.edition]){
  const rows=edition.declarations.filter(d=>d.kind==='theorem'&&d.bodyAvailable);
  const totals={mp:0,mpr:0,left:0,right:0,reverseLeft:0,reverseRight:0},operators={};
+ const lengths={};
  let matchedProofs=0,nested=0,riccati,examples;
  for(const d of rows){
   const result=scan(d);nested+=result.nested;
+  for(const [k,n] of Object.entries(result.lengths))lengths[k]=(lengths[k]||0)+n;
   for(const [k,n] of Object.entries(result.counts))totals[k]+=n;
   for(const [k,n] of Object.entries(result.operators))operators[k]=(operators[k]||0)+n;
   if(result.counts.left+result.counts.right+result.counts.reverseLeft+result.counts.reverseRight)matchedProofs++;
   if(d.name==='JacobiData.slope_bound_abs'){riccati=result.counts;examples=result.examples;}
  }
 
- assert.deepEqual(riccati,{mp:7,mpr:27,left:7,right:0,reverseLeft:2,reverseRight:4});
- console.log(JSON.stringify({edition:edition.id,theorems:rows.length,totals,matchedProofs,nested,operators,riccati,examples}));
+ if(edition!==window.PROOF_ATLAS_AI_SAMPLE.edition)assert.deepEqual(riccati,{mp:7,mpr:27,left:7,right:0,reverseLeft:2,reverseRight:4});
+ console.log(JSON.stringify({edition:edition.id,theorems:rows.length,totals,matchedProofs,nested,lengths,operators,riccati,examples}));
 }
