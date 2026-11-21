@@ -1,0 +1,319 @@
+{
+  "edition": "goedel-sample-4331",
+  "proofs": [
+    {
+      "name": "lean_workbook_20418",
+      "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+      "expanded": "29794821",
+      "maximal": "5872391",
+      "rows": 26779,
+      "ambiguousRows": 10435,
+      "ambiguousOccurrences": "2812553",
+      "counts": {
+        "lam.domain": "90",
+        "letE.type": "3",
+        "letE.value": "3",
+        "letE.body": "1",
+        "lam.body": "1115",
+        "argument": "5871090",
+        "mdata.expr": "27",
+        "forallE.domain": "59",
+        "forallE.body": "3"
+      }
+    },
+    {
+      "name": "lean_workbook_3485",
+      "indexSha256": "bd496000a8da7ce06393d1cdd66b86c1a76aa6004c6eca19c36e083a3082948c",
+      "expanded": "168846",
+      "maximal": "33749",
+      "rows": 723,
+      "ambiguousRows": 240,
+      "ambiguousOccurrences": "16360",
+      "counts": {
+        "lam.domain": "4",
+        "letE.type": "1",
+        "letE.value": "1",
+        "letE.body": "1",
+        "lam.body": "15",
+        "argument": "33727"
+      }
+    },
+    {
+      "name": "lean_workbook_4274",
+      "indexSha256": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+      "expanded": "66609",
+      "maximal": "13735",
+      "rows": 456,
+      "ambiguousRows": 123,
+      "ambiguousOccurrences": "5878",
+      "counts": {
+        "lam.domain": "3",
+        "letE.type": "4",
+        "letE.value": "4",
+        "letE.body": "1",
+        "argument": "13712",
+        "lam.body": "10",
+        "forallE.body": "1"
+      }
+    },
+    {
+      "name": "lean_workbook_49456",
+      "indexSha256": "66459f55804e8ae09fc9a8615191fba8f5277f1fb0831c1bb132e1bc60552b38",
+      "expanded": "85",
+      "maximal": "15",
+      "rows": 10,
+      "ambiguousRows": 2,
+      "ambiguousOccurrences": "7",
+      "counts": {
+        "lam.body": "2",
+        "argument": "13"
+      }
+    },
+    {
+      "name": "lean_workbook_56144",
+      "indexSha256": "60ff188d4edd927f72c0393d678f5a9cfb80d344d3ec459aec958443f07dc256",
+      "expanded": "1645081",
+      "maximal": "323028",
+      "rows": 2293,
+      "ambiguousRows": 882,
+      "ambiguousOccurrences": "154342",
+      "counts": {
+        "lam.domain": "4",
+        "lam.body": "54",
+        "argument": "322970"
+      }
+    },
+    {
+      "name": "lean_workbook_plus_15068",
+      "indexSha256": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+      "expanded": "7078505",
+      "maximal": "1407225",
+      "rows": 5384,
+      "ambiguousRows": 2140,
+      "ambiguousOccurrences": "727241",
+      "counts": {
+        "lam.domain": "7",
+        "lam.body": "289",
+        "argument": "1406929"
+      }
+    },
+    {
+      "name": "lean_workbook_plus_16912",
+      "indexSha256": "6c061155ccb98286c7608ad3bfbd316714aea3a1b33817720b3c4b2846c39510",
+      "expanded": "4811655",
+      "maximal": "939834",
+      "rows": 4202,
+      "ambiguousRows": 1728,
+      "ambiguousOccurrences": "444290",
+      "counts": {
+        "lam.domain": "5",
+        "lam.body": "153",
+        "argument": "939676"
+      }
+    },
+    {
+      "name": "lean_workbook_plus_19617",
+      "indexSha256": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+      "expanded": "6994",
+      "maximal": "1321",
+      "rows": 200,
+      "ambiguousRows": 31,
+      "ambiguousOccurrences": "377",
+      "counts": {
+        "lam.domain": "1",
+        "letE.type": "4",
+        "letE.value": "4",
+        "letE.body": "1",
+        "argument": "1304",
+        "mdata.expr": "1",
+        "lam.body": "2",
+        "forallE.body": "4"
+      }
+    },
+    {
+      "name": "lean_workbook_plus_39831",
+      "indexSha256": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+      "expanded": "473821",
+      "maximal": "94513",
+      "rows": 1080,
+      "ambiguousRows": 389,
+      "ambiguousOccurrences": "45331",
+      "counts": {
+        "lam.domain": "9",
+        "lam.body": "75",
+        "argument": "94429"
+      }
+    },
+    {
+      "name": "lean_workbook_plus_43987",
+      "indexSha256": "159699ca3f1d90ccd733d2a5fe4c0541ae4c785b8cb942333058b16653cef385",
+      "expanded": "1295",
+      "maximal": "267",
+      "rows": 60,
+      "ambiguousRows": 12,
+      "ambiguousOccurrences": "116",
+      "counts": {
+        "lam.body": "17",
+        "argument": "227",
+        "lam.domain": "17",
+        "forallE.domain": "4",
+        "forallE.body": "2"
+      }
+    },
+    {
+      "name": "lean_workbook_plus_54159",
+      "indexSha256": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+      "expanded": "997276",
+      "maximal": "201318",
+      "rows": 1842,
+      "ambiguousRows": 670,
+      "ambiguousOccurrences": "99571",
+      "counts": {
+        "lam.domain": "10",
+        "letE.type": "31",
+        "letE.value": "30",
+        "letE.body": "1",
+        "lam.body": "107",
+        "argument": "201139"
+      }
+    },
+    {
+      "name": "lean_workbook_plus_54622",
+      "indexSha256": "0b128b2e4d02870a974f0f00684ea058eded20eed8f15f32e84872e4bca50d73",
+      "expanded": "2229667",
+      "maximal": "440817",
+      "rows": 2818,
+      "ambiguousRows": 1107,
+      "ambiguousOccurrences": "211870",
+      "counts": {
+        "lam.domain": "5",
+        "lam.body": "81",
+        "argument": "440731"
+      }
+    },
+    {
+      "name": "lean_workbook_plus_61403",
+      "indexSha256": "a52afaeee83e9f155855d77dc8f906f03abf8da6038abde95c7dc6e104568459",
+      "expanded": "110541",
+      "maximal": "22092",
+      "rows": 579,
+      "ambiguousRows": 180,
+      "ambiguousOccurrences": "10971",
+      "counts": {
+        "lam.body": "8",
+        "argument": "22084"
+      }
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+      "expanded": "31752787",
+      "maximal": "6257505",
+      "rows": 28317,
+      "ambiguousRows": 11066,
+      "ambiguousOccurrences": "2998780",
+      "counts": {
+        "lam.domain": "34",
+        "letE.type": "3",
+        "letE.value": "3",
+        "letE.body": "1",
+        "lam.body": "1119",
+        "argument": "6256326",
+        "mdata.expr": "13",
+        "forallE.domain": "3",
+        "forallE.body": "3"
+      }
+    },
+    {
+      "name": "lean_workbook_plus_62755",
+      "indexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+      "expanded": "147586",
+      "maximal": "29519",
+      "rows": 605,
+      "ambiguousRows": 189,
+      "ambiguousOccurrences": "14159",
+      "counts": {
+        "lam.domain": "12",
+        "letE.type": "2",
+        "letE.value": "2",
+        "letE.body": "1",
+        "argument": "29468",
+        "lam.body": "32",
+        "forallE.domain": "1",
+        "mdata.expr": "1"
+      }
+    },
+    {
+      "name": "lean_workbook_plus_63081",
+      "indexSha256": "e8a13f9af176053ae5b0220fc5a1526de1e937ca2e8972035dcc70ee1da74217",
+      "expanded": "621879",
+      "maximal": "122528",
+      "rows": 1464,
+      "ambiguousRows": 543,
+      "ambiguousOccurrences": "59294",
+      "counts": {
+        "lam.body": "54",
+        "lam.domain": "1",
+        "argument": "122473"
+      }
+    },
+    {
+      "name": "lean_workbook_plus_68077",
+      "indexSha256": "501dba70283e270631eba54e85d5f16c3ca44cfaba068ea4f39a45b550997e62",
+      "expanded": "1802589",
+      "maximal": "355829",
+      "rows": 2175,
+      "ambiguousRows": 856,
+      "ambiguousOccurrences": "170256",
+      "counts": {
+        "lam.domain": "5",
+        "lam.body": "116",
+        "argument": "355708"
+      }
+    },
+    {
+      "name": "lean_workbook_plus_68616",
+      "indexSha256": "2f1f6523063a579076448d2a6caa42d496003a1be382692e8747442b1d9aef83",
+      "expanded": "1967",
+      "maximal": "349",
+      "rows": 105,
+      "ambiguousRows": 22,
+      "ambiguousOccurrences": "149",
+      "counts": {
+        "lam.domain": "1",
+        "lam.body": "4",
+        "argument": "327",
+        "forallE.domain": "9",
+        "forallE.body": "8"
+      }
+    },
+    {
+      "name": "lean_workbook_plus_68794",
+      "indexSha256": "17a8502769796c60075b569ccf17b5bf99c47c12e6e1771705ae3eb540656f3b",
+      "expanded": "331563",
+      "maximal": "65427",
+      "rows": 844,
+      "ambiguousRows": 300,
+      "ambiguousOccurrences": "31940",
+      "counts": {
+        "lam.body": "33",
+        "lam.domain": "1",
+        "argument": "65393"
+      }
+    },
+    {
+      "name": "lean_workbook_plus_70240",
+      "indexSha256": "cbc4fcc25f7b3decb12c29ac4d90e9f01671a2bfcce24e948c9af0445a387290",
+      "expanded": "297413",
+      "maximal": "59217",
+      "rows": 888,
+      "ambiguousRows": 307,
+      "ambiguousOccurrences": "29670",
+      "counts": {
+        "lam.body": "31",
+        "lam.domain": "4",
+        "argument": "59182"
+      }
+    }
+  ]
+}
