@@ -2,6 +2,16 @@
 namespace ProofAtlas.CallerDomains
 open Lean Elab Command Meta AtlasLibrary AtlasOccurrenceTypes
 
+-- Follow the only differing child while both sides are applications.
+partial def conversionSite (a b : Expr) (path : Array Nat) : MetaM Json := do
+  if let .app f x := a then
+    if let .app g y := b then
+      if (⟨f⟩ : ExprStructEq) == ⟨g⟩ then return ← conversionSite x y (path.push 1)
+      if (⟨x⟩ : ExprStructEq) == ⟨y⟩ then return ← conversionSite f g (path.push 0)
+  let .ok true := Kernel.isDefEq (← getEnv) (← getLCtx) a b
+    | return Json.null
+  return Json.mkObj [("fields",toJson path),("kernelDefEq",toJson true)]
+
 syntax "#caller_domains " str str str : command
 elab_rules : command
  | `(#caller_domains $packetFile:str $requestFile:str $outFile:str) => do
@@ -29,7 +39,8 @@ elab_rules : command
         let (a,s) ← internScoped inferred xs compact
         let (b,s) ← internScoped domain xs s
         compact := s
-        arguments := arguments.push <| Json.mkObj [("slot",toJson (j+1)),("node",toJson (← sourceId owner arg)),
+        let conversion ← if a == b then pure Json.null else conversionSite domain inferred #[]
+        arguments := arguments.push <| Json.mkObj [("conversionSite",conversion),("slot",toJson (j+1)),("node",toJson (← sourceId owner arg)),
           ("inferred",toJson (← ppExpr inferred).pretty),("expected",toJson (← ppExpr domain).pretty),
           ("inferredRoot",toJson a),("expectedRoot",toJson b),("structurallyIdentical",toJson (actual==expected))]
       return Json.mkObj [("call",request),("context",toJson ctx),("arguments",toJson arguments),

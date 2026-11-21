@@ -11,17 +11,6 @@
    .catch(error=>{wideSignatures=null;throw error;});
   return wideSignatures;
  }
- // This replay covers one occurrence. Shared expression numbers alone cannot identify it.
- async function checkedCallDomains(record,call){
-  if(record.indexSha256!=='8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d' ||
-    call.node!==2181 || call.route.root!==1 || call.route.slots.join('')!=='11111112111111110110101010010100100110011')return null;
-  const report=await A.compressed('/public/data/proof-atlas/ai-caller-domains.json.gz',
-   '877952c3d07b59f47bd7609622d83674194510c48129af82faa5448639ca334c',{maxBytes:7918,expectedBytes:7918});
-  demand(report.call.indexSha256===record.indexSha256 && report.call.declaration===record.name &&
-   report.call.node===call.node && report.call.root===call.route.root &&
-   String(report.call.slots)===String(call.route.slots),'caller type address');
-  return report.arguments;
- }
  function describe(data,record,route,options={}){
   demand(data.declaration?.name===record.name&&(data.declaration.sourceSha256===undefined||data.declaration.sourceSha256===record.sourceSha256)&&data.kind.length===record.uniqueNodes&&JSON.stringify(data.declaration.rootPaths)===JSON.stringify(record.rootPaths)&&/^[a-f0-9]{64}$/.test(record.indexSha256)&&/^[a-f0-9]{64}$/.test(record.sourceSha256),'source packet identity');
   const id=A.walk(data,route),kind=A.kinds[data.kind[id]];demand(['lam','forallE','letE'].includes(kind),'selection is not a source binder');
@@ -132,7 +121,7 @@
         if(!parameter){content.textContent='This position has no recorded binder in the declared signature.';return;}
         const generated=parameter.name.includes('._@.') || parameter.name==='_';
         content.replaceChildren(el('code',(generated?'':parameter.name+' : ')+parameter.domain));
-        const checked=await checkedCallDomains(config.record,receiver.call);
+        const checked=(await host.ProofAtlasCallerDomains?.load(config.record,receiver.call))?.arguments;
         function showCallerType(parent,slot){
          if(!checked)return;
          const row=checked[slot-1];

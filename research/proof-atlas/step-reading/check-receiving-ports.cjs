@@ -58,6 +58,17 @@ async function checkWideCall(page) {
   assert.match(await dependent.getAttribute('href'),/#expr-2143$/);
   assert.equal(await signature.locator('p code').textContent(),'xa₁ ^ c₁ * Nat.rawCast 1 = c₃');
   await signature.getByText('c ^ Nat.rawCast 2 * Nat.rawCast 1 = c ^ Nat.rawCast 2 * Nat.rawCast 1',{exact:true}).waitFor();
+  await page.goto(call.href);
+  const comparison=page.locator('[data-caller-domains]');
+  await comparison.locator('summary').click();
+  await comparison.getByText(/Lean also checked the two subterms/).waitFor();
+  assert.equal(await comparison.getByRole('combobox').inputValue(),'11');
+  assert.match(await comparison.innerText(),/instMulNat/);
+  assert.match(await comparison.innerText(),/Distrib.toMul/);
+  await comparison.getByRole('combobox').selectOption('13');
+  assert.match(await comparison.innerText(),/share the same compiled expression/);
+  assert.match(await comparison.getByRole('link').getAttribute('href'),/#expr-2143$/);
+
 }
 (async()=>{
   const browser=await chromium.launch({executablePath:process.env.ATLAS_CHROMIUM_PATH});

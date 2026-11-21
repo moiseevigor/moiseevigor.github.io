@@ -220,6 +220,7 @@
   const actions=el('div',undefined,'pl-actions');cs.forEach((c,j)=>{const b=el('button',A.fields[current.kind(i)][j]+' · #'+c+' · '+current.kind(c));b.type='button';b.onclick=()=>selectOccurrence(c,true,true,{root:selectedRoute.root,slots:[...selectedRoute.slots,j]});actions.append(b);});
   if(binder!==undefined){const b=el('button','Enclosing binder #'+binder+' · '+label(binder));b.type='button';b.onclick=()=>selectOccurrence(binder,true,true,binding.route);actions.append(b);}
   const sourceLink=(label,at)=>link(label,url(owner.record.name,at.node,at.route));
+  window.ProofAtlasCallerDomains?.mount(target,owner.record,{node:i,route:nextRoute},owner.data,sourceLink);
   const sides=equalitySides(owner.data,{node:i,route:nextRoute});
    function termLabel(at){
     const spine=window.ProofAtlasElimination.spine(owner.data,at.node);
