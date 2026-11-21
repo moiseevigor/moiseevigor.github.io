@@ -2,7 +2,7 @@
 const fs=require('node:fs'),z=require('node:zlib'),crypto=require('node:crypto'),assert=require('node:assert/strict');
 const A=require('../../../public/js/proof-atlas-library-data');
 const {spine}=require('../../../public/js/proof-atlas-elimination');
-const {binderArgument,statementOrigin,boundPremise,zeroDifference,logicalInference,arithmeticInference,numeralComparison}=require('../../../public/js/proof-atlas-arithmetic');
+const {derivationInputs,binderArgument,statementOrigin,boundPremise,zeroDifference,logicalInference,arithmeticInference,numeralComparison}=require('../../../public/js/proof-atlas-arithmetic');
 global.window={};require('../../../public/data/proof-atlas/goedel-sample-manifest');
 const edition=window.PROOF_ATLAS_AI_SAMPLE.edition;
 const report=fs.readFileSync(0,'utf8').trim().split('\n').map(line=>JSON.parse(line)).find(x=>x.edition===edition.id);
@@ -19,7 +19,7 @@ const folded=process.argv.includes('--fold-zero');
 let foldedBranches=0;const zeroProducts={};
 const scopes={visits:0,variableRows:0,binderOccurrences:0,ambiguousVariableRows:0,ambiguousInferenceRows:0,examples:[],inferenceExamples:[]};
 const endpoints={statement:0,localLambda:0,letValue:0,otherBinder:0,closedAtStatement:0,closedInScope:0,scopeClosures:[],localCalls:{},callExamples:{},examples:{}};
-let fullyRead=0;
+let fullyRead=0;const summaries=[];
 let steps=0,leaves=0,maxDepth=0,longest;
 for(const d of edition.declarations){
  const selected=roots.filter(r=>r.proof===d.name);
@@ -37,7 +37,8 @@ for(const d of edition.declarations){
  }
  for(const {premise} of selected){
   let unresolved=0,statementInputs=0,scopeInputs=0;
-  const localInputs=new Map();
+  const localInputs=new Map(),inputCounts=new Map();
+  let inputSteps=0,inputCerts=0;
   const todo=[{site:premise,depth:0,parent:null}];
   while(todo.length){
    const item=todo.pop(),{site,depth}=item;
@@ -69,7 +70,11 @@ for(const d of edition.declarations){
      endpoints.localCalls[call.label]=(endpoints.localCalls[call.label]||0)+1;
     }
     if(kind==='localLambda')localInputs.set(b.binder.route.slots.join('.'),{binder:b.binder,name:b.name});
-    if(origin || kind==='localLambda')scopeInputs++;
+    if(origin || kind==='localLambda'){
+     scopeInputs++;
+     const key=b.binder.route.slots.join('.');
+     inputCounts.set(key,(inputCounts.get(key)||0)+1);
+    }
     if(!endpoints.examples[kind])endpoints.examples[kind]={proof:d.name,at:site,name:b.name,origin,call,binder:b.binder,domain:b.domain};
     const key=b.binder.route.slots.join('.');
     introductions.add(key);scopes.visits++;
@@ -90,7 +95,7 @@ for(const d of edition.declarations){
    }
    const cert=numeralComparison(g,site);
    if(cert){
-    certificateVisits++;
+    certificateVisits++;inputCerts++;
     const label=cert.values.map(v=>v.text).join(' < ');
     inequalities[label]=(inequalities[label]||0)+1;
     const sites=cert.values.flatMap(v=>[v.literal,v.term,v.proof]).concat(cert.comparison,cert.carrier);
@@ -171,7 +176,7 @@ for(const d of edition.declarations){
     if(!zeroProducts[name])zeroProducts[name]={proof:d.name,site,primary:rule.proofs[1-k],terms:rule.terms,extra:rule.proofs[k],relation:rule.relation};
    }
    if(!rule.proofs.length)recordPath(item,depth+1);
-   distinct.add(site.node);
+   distinct.add(site.node);inputSteps++;
    rules[name]=(rules[name]||0)+1;steps++;maxDepth=Math.max(maxDepth,depth+1);
    rule.proofs.forEach((child,i)=>{
     const offset=rule.proofs.length-i;
@@ -180,6 +185,16 @@ for(const d of edition.declarations){
     if(folded && i===rule.extra){foldedBranches++;return;}
     todo.push({site:child,depth:depth+1,parent:item});
    });
+  }
+  if(!arithmeticOnly && !folded){
+   const r=derivationInputs(g,premise);
+   assert(!r.limited);
+   assert.equal(r.steps,inputSteps);assert.equal(r.certificates,inputCerts);
+   assert.equal(r.unread,unresolved-scopeInputs);
+   assert.deepEqual(new Map(r.inputs.map(x=>[x.binding.binder.route.slots.join('.'),x.uses])),inputCounts);
+   assert(derivationInputs(g,premise,1).limited||inputSteps===1);
+   summaries.push({proof:d.name,premise,steps:r.steps,visits:r.visits,unread:r.unread,
+    inputs:r.inputs.map(x=>[x.binding.binder,x.binding.domain,x.binding.site]),firstUnread:r.firstUnread});
   }
   if(!unresolved)fullyRead++;
   if(unresolved===statementInputs)endpoints.closedAtStatement++;
@@ -199,4 +214,4 @@ for(const d of edition.declarations){
 assert.equal(longest.depth,maxDepth);
 assert.equal(certificateVisits,frontier['Mathlib.Meta.NormNum.isNat_lt_true']);
 if(linarithOnly && !baseline)assert.equal(certificates.length,272);
-console.log(JSON.stringify({endpoints,scopes,uniqueLeaves,foldedBranches,zeroProducts,zeroVisits,zeroExamples,fullyRead,equivalenceUses,logicalExamples,logicalProofs:logicalProofs.size,signExamples,certificateVisits,certificates,inequalities,uniqueSteps,roots:roots.length,steps,leaves,maxDepth,rules,frontier,longest},null,2));
+console.log(JSON.stringify({summaries,endpoints,scopes,uniqueLeaves,foldedBranches,zeroProducts,zeroVisits,zeroExamples,fullyRead,equivalenceUses,logicalExamples,logicalProofs:logicalProofs.size,signExamples,certificateVisits,certificates,inequalities,uniqueSteps,roots:roots.length,steps,leaves,maxDepth,rules,frontier,longest},null,2));

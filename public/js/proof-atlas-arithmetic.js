@@ -434,6 +434,25 @@
   }
   return {uses,total:String(total),limited:BigInt(uses.length)<total};
  }
+ function derivationInputs(data,root,limit=1024){
+  const todo=[root],inputs=new Map();
+  let visits=0,steps=0,certificates=0,unread=0,firstUnread=null;
+  while(todo.length && visits<limit){
+   const site=todo.pop();visits++;
+   const b=boundPremise(data,site);
+   if(b && data.kind[b.binder.node]===6){
+    const key=b.binder.route.slots.join('.');
+    if(!inputs.has(key))inputs.set(key,{binding:b,origin:statementOrigin(data,b),uses:0});
+    inputs.get(key).uses++;continue;
+   }
+   if(numeralComparison(data,site)){certificates++;continue;}
+   const rule=logicalInference(data,site)||arithmeticInference(data,site);
+   if(!rule){unread++;firstUnread??=site;continue;}
+   steps++;
+   for(let i=rule.proofs.length-1;i>=0;i--)todo.push(rule.proofs[i]);
+  }
+  return {inputs:[...inputs.values()],visits,steps,certificates,unread,firstUnread,limited:todo.length>0};
+ }
  function mount(container,data,at,link){
   const el=(tag,text)=>{const e=document.createElement(tag);if(text)e.textContent=text;return e;};
   function premiseLink(label,site){
@@ -561,6 +580,26 @@
     terms.append(el('dt',['a','b','c'][i]),value);
    }
    panel.append(inputs,terms);if(fold)panel.append(fold);container.append(panel);
+   const overview=el('details');overview.dataset.derivationInputs='';
+   overview.append(el('summary','Trace this derivation to its inputs'));
+   overview.ontoggle=()=>{
+    if(!overview.open||overview.childElementCount>1)return;
+    const r=derivationInputs(data,chainAt),list=el('ul');
+    const status=r.limited?'Traversal limit reached':r.unread?'Partially traced':'Traced to inputs in scope';
+    const count=el('p',status+' · '+r.steps+' inference visits · '+r.certificates+' numeral certificates · ');
+    count.append(link('Starting inference',chainAt));overview.append(count);
+    for(const {binding:b,origin,uses} of r.inputs.slice(0,8)){
+     const row=el('li');
+     row.append(origin?'Statement input ':'Local assumption ',link(b.name,b.binder),' · ',
+      link(caption(formula(data,b.domain,3,true)),b.domain),' · ',link('Reference',b.site),' ('+uses+(uses===1?' use)':' uses)'));
+     list.append(row);
+    }
+    if(list.childNodes.length)overview.append(list);
+    if(r.inputs.length>8)overview.append(el('p','Showing 8 of '+r.inputs.length+' observed inputs.'));
+    if(r.unread)overview.append(link('First of '+r.unread+' unexplained premise visits',r.firstUnread));
+    if(r.limited)overview.append(el('p','Only the first '+r.visits+' visits were inspected.'));
+   };
+   container.append(overview);
   }
   const chain=equalityChain(data,chainAt,selected?.change?selected.before:null);
   if(chain){
@@ -767,5 +806,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={binderArgument,statementOrigin,binderCopies,zeroDifference,logicalInference,numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
+ if(common)module.exports={derivationInputs,binderArgument,statementOrigin,binderCopies,zeroDifference,logicalInference,numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
 })(typeof window==='undefined'?globalThis:window);
