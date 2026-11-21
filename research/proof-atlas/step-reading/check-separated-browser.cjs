@@ -27,17 +27,53 @@ const edition = {id:'browser-control',modules:{SeparatedAssumptions:{}},edges:[]
 const libraryPath='/projects/proof-atlas/library/';
 const pageHtml=fs.readFileSync(path.join(repo,libraryPath,'index.html'),'utf8').split('---').slice(2).join('---')
   .replace('{% include proof-atlas-compiled-workspace.html %}',fs.readFileSync(path.join(repo,'_includes/proof-atlas-compiled-workspace.html'),'utf8'));
+// Record visible glyph centers at draw time. Click through the real canvas hit tester.
+async function enableCanvasProbe(page) {
+  await page.addInitScript(() => {
+    const proto=CanvasRenderingContext2D.prototype;
+    const fillRect=proto.fillRect, fillText=proto.fillText;
+    window.glyphCenters=[];
+    proto.fillRect=function(x,y,w,h) {
+      if (this.canvas.id==='pl-canvas' && x===0 && y===0) window.glyphCenters=[];
+      return fillRect.call(this,x,y,w,h);
+    };
+    proto.fillText=function(text,x,y,...rest) {
+      if (this.canvas.id==='pl-canvas' && this.font.startsWith('bold 12px'))
+        window.glyphCenters.push({x,y:y-4});
+      return fillText.call(this,text,x,y,...rest);
+    };
+  });
+}
+
+async function clickDrawnOccurrence(page,slots,context=false) {
+  const path=A.path({...graph,declaration},{root:1,slots});
+  const canvas=page.locator('#pl-canvas');
+  await canvas.scrollIntoViewIfNeeded();
+  const positions=await page.evaluate(()=>window.glyphCenters.slice());
+  for (const position of positions) {
+    await canvas.hover({position});
+    const title=await canvas.getAttribute('title');
+    if (context ? title==='Context binder · '+path : title?.includes(' · '+path+' · ')) {
+      await canvas.click({position});
+      await page.waitForFunction(expected=>JSON.stringify(window.ProofAtlasLibrary.getSnapshot()?.route)===expected,
+        JSON.stringify({root:1,slots}));
+      return;
+    }
+  }
+  throw Error('No selectable canvas glyph at '+path);
+}
 async function main() {
   const browser=await chromium.launch({executablePath:process.env.ATLAS_CHROMIUM_PATH});
   try {
     const page=await browser.newPage();
+    await enableCanvasProbe(page);
     const errors=[];
     page.on('pageerror',err=>errors.push(err.message));
     await page.route('**/*',route=>{
       const url=new URL(route.request().url());
       const p=url.pathname;
       if (url.origin!=='http://localhost') return route.abort();
-      if (p===libraryPath) return route.fulfill({contentType:'text/html',body:pageHtml});
+      if (p===libraryPath) return route.fulfill({contentType:'text/html; charset=utf-8',body:pageHtml});
       if (p===file) return route.fulfill({body:gzipSync(bytes)});
       if (p==='/public/data/proof-atlas/library-manifest.js') return route.fulfill({
         contentType:'application/javascript',body:'window.PROOF_ATLAS_LIBRARY='+JSON.stringify({editions:[edition]})});
@@ -68,9 +104,20 @@ async function main() {
         await page.waitForFunction(()=>window.ProofAtlasLibrary?.getSnapshot());
         assert.deepEqual((await snapshot()).route,selected.route);
       }
+      for (const branch of [[1,0,1],[1,1]]) for (const premise of [[1,0,1],[1,1]]) {
+        const url=new URL(body);
+        url.searchParams.set('geometry','scoped');
+        url.searchParams.set('fold','binders,applications');
+        await page.goto(url.href);
+        await page.waitForFunction(()=>window.ProofAtlasLibrary?.getScene()?.nodes?.some(n=>n.abstraction==='application-spine') && window.glyphCenters.length);
+        await clickDrawnOccurrence(page,branch);
+        await clickDrawnOccurrence(page,branch.concat(premise));
+        await clickDrawnOccurrence(page,branch,true);
+        assert.equal(new URL(page.url()).searchParams.get('route'),'1:'+branch.join('.'));
+      }
     }
     assert.deepEqual(errors,[]);
-    console.log('All four premise selections, binder jumps and URL reloads passed at both widths.');
+    console.log('Four inspector paths and four folded canvas paths passed at both widths.');
   } finally {await browser.close();}
 }
 main().catch(err=>{console.error(err);process.exitCode=1;});
