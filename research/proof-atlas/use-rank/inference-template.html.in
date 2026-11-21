@@ -249,6 +249,10 @@ function showFinal(){
       if(!sets.has(label))sets.set(label,[]);
       sets.get(label).push(sample);
      }
+     const typed=part.examples.filter(s=>s.judgment).length;
+     const coverage=document.createElement('p');coverage.className='meta';
+     coverage.textContent='Recorded premise and result for '+typed+' of '+part.examples.length+' displayed uses in the port inventory.';
+     detail.append(coverage);
      for(const [label,samples] of sets){
       const block=document.createElement('div'),heading=document.createElement('strong');
       heading.textContent=label;block.append(heading);
@@ -256,6 +260,14 @@ function showFinal(){
        const line=document.createElement('div');line.className='case-use-site';
        line.append(link('Reference '+(part.examples.indexOf(sample)+1),sample.use));
        if(sample.consumer)line.append(' → ',link('Application',sample.consumer.call));
+       if(sample.judgment){
+        const j=sample.judgment,proof=document.createElement('p'),a=document.createElement('a');
+        a.href='#'+hash+'-'+j.callId+'/read';a.textContent='Read inference';
+        a.onclick=e=>{if(a.hash===location.hash){e.preventDefault();follow();}};
+        proof.className='use-judgment';proof.append('Selected premise · '+j.premise);
+        for(const peer of j.otherProofs)proof.append(document.createElement('br'),'Other proof input '+peer.slot+' · ',link(peer.type,peer.anchor));
+        proof.append(document.createElement('br'),'Recorded result · '+j.conclusion+' · ',a);line.append(proof);
+       }
        block.append(line);
       }
       detail.append(block);

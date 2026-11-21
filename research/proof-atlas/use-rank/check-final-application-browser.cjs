@@ -55,6 +55,15 @@ const {chromium}=require('playwright');
          const n=p.examples.indexOf(sample);
          const ref=li.getByRole('link',{name:'Reference '+(n+1),exact:true});
          await verify(ref,sample.use);
+         const judgment=ref.locator('..').locator('.use-judgment');
+         assert.equal(await judgment.count(),sample.judgment?1:0);
+         if(sample.judgment){
+          const j=sample.judgment;
+          for(const peer of j.otherProofs)await verify(judgment.getByRole('link',{name:peer.type,exact:true}),peer.anchor);
+          assert((await judgment.textContent()).includes('Selected premise · '+j.premise));
+          assert((await judgment.textContent()).includes('Recorded result · '+j.conclusion));
+          assert.equal(await judgment.getByRole('link',{name:'Read inference',exact:true}).getAttribute('href'),'#'+hash+'-'+j.callId+'/read');
+         }
          if(sample.consumer)await verify(ref.locator('..').getByRole('link',{name:'Application',exact:true}),sample.consumer.call);
         }
         await li.locator('summary').click();

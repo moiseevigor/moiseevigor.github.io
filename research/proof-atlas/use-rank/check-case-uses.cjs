@@ -6,13 +6,18 @@ const atlas=require('../../../public/js/proof-atlas-library-data');
 const {inventory}=require('../../../scripts/proof-atlas-judgment-fixtures.cjs');
 const html=fs.readFileSync(__dirname+'/inferences.html','utf8');
 const finals=JSON.parse(html.match(/^const finalApplications=(.*);$/m)[1]);
-let branches=0,uses=0;
+let branches=0,uses=0,observations=0;
+const ports=require('./port-results.json');
 for(const [hash,f] of Object.entries(finals)){
  if(!f.cases?.checked)continue;
  const {record}=inventory().find(i=>i.record.indexSha256===hash);
  const bytes=z.gunzipSync(fs.readFileSync('.'+record.indexFile));
  assert.equal(createHash('sha256').update(bytes).digest('hex'),hash);
  const d=atlas.validateIndex(JSON.parse(bytes),record);
+ const {nativeOwner}=ports.find(p=>p.source.indexSha256===hash);
+ const raw=z.gunzipSync(fs.readFileSync('public/data/proof-atlas/application-ports/'+nativeOwner+'.json.gz'));
+ assert.equal(createHash('sha256').update(raw).digest('hex'),nativeOwner);
+ const native=JSON.parse(raw);assert.equal(native.source.indexSha256,hash);
  for(const branch of f.cases.branches){
   branches++;
   for(const u of branch.assumptionUses){
@@ -41,6 +46,21 @@ for(const [hash,f] of Object.entries(finals)){
          args.unshift({node:d.children[at][1],route:{root:1,slots:route.concat(1)}});
          at=d.children[at][0];route.push(0);
         }
+        const matches=native.entries.filter(({junction:j})=>j.consumer.slot===c.slot &&
+          j.consumer.anchor.node===c.call.node && j.consumer.anchor.route.root===c.call.route.root &&
+          String(j.consumer.anchor.route.slots)===String(c.call.route.slots));
+        assert.equal(matches.length,sample.judgment?1:0);
+        if(matches.length){
+         const {id,junction:j}=matches[0];
+         assert.equal(j.consumer.input.node,hit.node);
+         assert.deepEqual(j.consumer.input.route,hit.route);
+         assert.equal(j.producer.role,'proof');
+         const otherProofs=native.entries.filter(e=>e.id.split(':')[0]===id.split(':')[0] && e.junction.consumer.slot>0 &&
+          e.junction.consumer.slot!==c.slot && e.junction.producer.role==='proof').map(({junction:p})=>({slot:p.consumer.slot,type:p.display.inputType,anchor:p.consumer.input})).sort((a,b)=>a.slot-b.slot);
+         assert.deepEqual(sample.judgment,{owner:nativeOwner,callId:Number(id.split(':')[0]),slot:c.slot,
+          premise:j.display.inputType,conclusion:j.display.consumerType,otherProofs});
+         observations++;
+        }
         assert.equal(args.length,c.arity);
         assert.deepEqual(args[c.slot-1],hit);
         assert.equal(at,c.head.node);assert.deepEqual(route,c.head.route.slots);
@@ -63,4 +83,4 @@ for(const [hash,f] of Object.entries(finals)){
  }
 }
 assert.equal(branches,4);
-console.log(branches+' branches, '+uses+' references independently verified');
+console.log(branches+' branches, '+uses+' references independently verified, '+observations+' exact port judgments');
