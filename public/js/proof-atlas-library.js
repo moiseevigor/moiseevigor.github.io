@@ -967,6 +967,19 @@
   if(!windowControls.hidden){
    $('pl-window-range').textContent=(call.truncated?'Trailing slots ':'Arguments ')+(offset+1)+'–'+(offset+shown)+' of '+ports.length;
    const earlier=$('pl-earlier-arguments'),later=$('pl-later-arguments');
+   const jump=$('pl-jump-window'),choice=$('pl-window-choice');
+   jump.hidden=ports.length<=2*shown;
+   if(!jump.hidden){
+    const starts=new Set([offset]);
+    for(let i=0;i<ports.length;i+=shown)starts.add(Math.min(i,ports.length-shown));
+    choice.replaceChildren();
+    for(const i of [...starts].sort((a,b)=>a-b)){
+     const option=el('option',(i+1)+'–'+(i+shown));
+     option.value=String(i);choice.append(option);
+    }
+    choice.value=String(offset);
+    choice.onchange=()=>{argumentOffset=Number(choice.value);safely(layout());};
+   }
    earlier.disabled=offset===0;later.disabled=offset+shown===ports.length;
    earlier.onclick=()=>{argumentOffset=Math.max(0,offset-shown);safely(layout());};
    later.onclick=()=>{argumentOffset=Math.min(ports.length-shown,offset+shown);safely(layout());};

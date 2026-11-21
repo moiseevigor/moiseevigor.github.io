@@ -154,6 +154,17 @@ async function main() {
       assert.deepEqual(selected.route,{root:1,slots:route});
       if(slot>=10) assert.equal(selected.selected,42907);
     }
+    const wide=new URL(example.href);
+    wide.searchParams.set('edition','published-15');
+    wide.searchParams.set('proof','SBracket.mk.inj');
+    const wideRoute=Array(57).fill(1);
+    wide.searchParams.set('route','1:'+wideRoute.join('.'));
+    wide.hash='';
+    await page.goto(wide.href);
+    await page.getByText('Arguments 55–59 of 59',{exact:true}).waitFor();
+    await page.getByLabel('Jump to slots').selectOption('0');
+    await page.getByText('Arguments 1–5 of 59',{exact:true}).waitFor();
+    await clickDrawnOccurrence(page,wideRoute.concat(Array(55).fill(0),1));
     assert.deepEqual(errors,[]);
     console.log('Four inspector paths and four folded canvas paths passed at both widths.');
   } finally {await browser.close();}

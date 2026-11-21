@@ -1014,3 +1014,17 @@ For each of the 191 maximal calls with complete recorded argument roles, the vis
 The four omitted positions are all argument 4. One is the explicit input of a ten-argument `Eq.ndrec` in `lean_workbook_20418`, a proof of an implication with several hypotheses. Three are instance-implicit proofs of `IsLeftCancelMulZero ℝ` at nine-argument calls of `mul_left_cancel₀` in `lean_workbook_plus_6206`. For each occurrence the checker rebuilt the initial geometry, verified the absence of its edge, moved one five-slot window earlier, and matched the newly visible edge to the exact native argument route. The example distinguishes a missed explicit proof from a missed proposition-valued typeclass instance.
 
 If arbitrary, nonconsecutive slots could be selected with complete knowledge of their roles, the five-slot ceiling rises to 223 of 224 (sum of the smaller of five and the proof-input count for each call). That ceiling assumes evidence unavailable for most calls. These measurements concern premise counts; they do not rank mathematical importance or establish an optimal layout for understanding proofs.
+
+#### Transfer to the SE(2) proofs and recursion controls
+
+We applied the unchanged five-slot rule to every other declaration in the recorded application inventory. The [transfer checker](check-window-transfer.cjs) uses only maximal calls in the body with complete native argument-role records. The two project snapshots overlap and are reported separately.
+
+| Edition | Recorded calls | Wider than five | Proof inputs | Visible first / last five | Best contiguous five per call |
+|---|---:|---:|---:|---:|---:|
+| Published SE(2) | 125 | 23 | 126 | 67 / 87 | 87 |
+| Working SE(2) | 40 | 18 | 28 | 17 / 28 | 28 |
+| Recursion controls | 13 | 2 | 16 | 16 / 16 | 16 |
+
+The published Riccati proof alone has 60 recorded proof inputs, of which the first five positions expose 45 and the final five expose 60. In contrast, all 39 hidden proof inputs in the published sample occur in one 59-argument application of `SBracket.mk.noConfusion` in `SBracket.mk.inj`. The fourth argument proves positivity of K. Starting from the final five, reaching it with **Earlier arguments** takes eleven moves. The checker reconstructs every omitted edge at its original route. Optimality among contiguous five-slot windows therefore coexists with poor absolute coverage on this proof.
+
+Wide focused calls now offer **Jump to slots** when more than two windows are needed. The browser regression opens the actual 59-argument call, selects slots 1–5 from the final window, and clicks argument 4 on the canvas. Run `node research/proof-atlas/step-reading/check-window-transfer.cjs` from the repository root for per-declaration counts, packet identities and omitted argument routes. The inventory samples calls with recorded evidence; the counts do not measure all steps in either project.
