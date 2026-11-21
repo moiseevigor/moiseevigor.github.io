@@ -1,0 +1,224 @@
+{
+  "ai": [
+    {
+      "name": "lean_workbook_20418",
+      "source": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+      "total": "252668",
+      "visible": 13,
+      "omittedOperands": "0",
+      "collapsed": "252655",
+      "groups": 2,
+      "tested": 7
+    },
+    {
+      "name": "lean_workbook_3485",
+      "source": "bd496000a8da7ce06393d1cdd66b86c1a76aa6004c6eca19c36e083a3082948c",
+      "total": "1267",
+      "visible": 12,
+      "omittedOperands": "0",
+      "collapsed": "1255",
+      "groups": 1,
+      "tested": 5
+    },
+    {
+      "name": "lean_workbook_4274",
+      "source": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+      "total": "371",
+      "visible": 8,
+      "omittedOperands": "0",
+      "collapsed": "363",
+      "groups": 3,
+      "tested": 363
+    },
+    {
+      "name": "lean_workbook_49456",
+      "source": "66459f55804e8ae09fc9a8615191fba8f5277f1fb0831c1bb132e1bc60552b38",
+      "total": "11",
+      "visible": 11,
+      "omittedOperands": "0",
+      "collapsed": "0",
+      "groups": 0,
+      "tested": 0
+    },
+    {
+      "name": "lean_workbook_56144",
+      "source": "60ff188d4edd927f72c0393d678f5a9cfb80d344d3ec459aec958443f07dc256",
+      "total": "13708",
+      "visible": 7,
+      "omittedOperands": "0",
+      "collapsed": "13701",
+      "groups": 3,
+      "tested": 7
+    },
+    {
+      "name": "lean_workbook_plus_15068",
+      "source": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+      "total": "57091",
+      "visible": 8,
+      "omittedOperands": "0",
+      "collapsed": "57083",
+      "groups": 4,
+      "tested": 9
+    },
+    {
+      "name": "lean_workbook_plus_16912",
+      "source": "6c061155ccb98286c7608ad3bfbd316714aea3a1b33817720b3c4b2846c39510",
+      "total": "45195",
+      "visible": 13,
+      "omittedOperands": "0",
+      "collapsed": "45182",
+      "groups": 3,
+      "tested": 19
+    },
+    {
+      "name": "lean_workbook_plus_19617",
+      "source": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+      "total": "117",
+      "visible": 11,
+      "omittedOperands": "0",
+      "collapsed": "106",
+      "groups": 3,
+      "tested": 106
+    },
+    {
+      "name": "lean_workbook_plus_39831",
+      "source": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+      "total": "3284",
+      "visible": 12,
+      "omittedOperands": "0",
+      "collapsed": "3272",
+      "groups": 3,
+      "tested": 12
+    },
+    {
+      "name": "lean_workbook_plus_43987",
+      "source": "159699ca3f1d90ccd733d2a5fe4c0541ae4c785b8cb942333058b16653cef385",
+      "total": "117",
+      "visible": 10,
+      "omittedOperands": "0",
+      "collapsed": "107",
+      "groups": 3,
+      "tested": 107
+    },
+    {
+      "name": "lean_workbook_plus_54159",
+      "source": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+      "total": "7829",
+      "visible": 11,
+      "omittedOperands": "0",
+      "collapsed": "7818",
+      "groups": 2,
+      "tested": 164
+    },
+    {
+      "name": "lean_workbook_plus_54622",
+      "source": "0b128b2e4d02870a974f0f00684ea058eded20eed8f15f32e84872e4bca50d73",
+      "total": "18239",
+      "visible": 12,
+      "omittedOperands": "0",
+      "collapsed": "18227",
+      "groups": 1,
+      "tested": 5
+    },
+    {
+      "name": "lean_workbook_plus_61403",
+      "source": "a52afaeee83e9f155855d77dc8f906f03abf8da6038abde95c7dc6e104568459",
+      "total": "701",
+      "visible": 7,
+      "omittedOperands": "0",
+      "collapsed": "694",
+      "groups": 5,
+      "tested": 14
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "source": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+      "total": "270540",
+      "visible": 13,
+      "omittedOperands": "0",
+      "collapsed": "270527",
+      "groups": 2,
+      "tested": 7
+    },
+    {
+      "name": "lean_workbook_plus_62755",
+      "source": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+      "total": "977",
+      "visible": 8,
+      "omittedOperands": "0",
+      "collapsed": "969",
+      "groups": 3,
+      "tested": 969
+    },
+    {
+      "name": "lean_workbook_plus_63081",
+      "source": "e8a13f9af176053ae5b0220fc5a1526de1e937ca2e8972035dcc70ee1da74217",
+      "total": "4676",
+      "visible": 9,
+      "omittedOperands": "0",
+      "collapsed": "4667",
+      "groups": 4,
+      "tested": 14
+    },
+    {
+      "name": "lean_workbook_plus_68077",
+      "source": "501dba70283e270631eba54e85d5f16c3ca44cfaba068ea4f39a45b550997e62",
+      "total": "15262",
+      "visible": 12,
+      "omittedOperands": "0",
+      "collapsed": "15250",
+      "groups": 2,
+      "tested": 8
+    },
+    {
+      "name": "lean_workbook_plus_68616",
+      "source": "2f1f6523063a579076448d2a6caa42d496003a1be382692e8747442b1d9aef83",
+      "total": "143",
+      "visible": 11,
+      "omittedOperands": "0",
+      "collapsed": "132",
+      "groups": 4,
+      "tested": 132
+    },
+    {
+      "name": "lean_workbook_plus_68794",
+      "source": "17a8502769796c60075b569ccf17b5bf99c47c12e6e1771705ae3eb540656f3b",
+      "total": "2423",
+      "visible": 9,
+      "omittedOperands": "0",
+      "collapsed": "2414",
+      "groups": 3,
+      "tested": 14
+    },
+    {
+      "name": "lean_workbook_plus_70240",
+      "source": "cbc4fcc25f7b3decb12c29ac4d90e9f01671a2bfcce24e948c9af0445a387290",
+      "total": "2198",
+      "visible": 12,
+      "omittedOperands": "0",
+      "collapsed": "2186",
+      "groups": 4,
+      "tested": 13
+    }
+  ],
+  "riccati": {
+    "name": "JacobiData.slope_bound_abs",
+    "source": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+    "total": "4496",
+    "visible": 15,
+    "omittedOperands": "0",
+    "collapsed": "4481",
+    "groups": 2,
+    "tested": 10
+  },
+  "large": {
+    "name": "AtlasExamples.shared_induction_64",
+    "source": "2ab1d320fb4c5ec7290b1bf1b64c4538cc65835717dee405192ce9b3daa30ca3",
+    "total": "2508757194024499019776",
+    "visible": 0,
+    "omittedOperands": "0",
+    "collapsed": "2508757194024499019776",
+    "groups": 24,
+    "tested": 145
+  }
+}

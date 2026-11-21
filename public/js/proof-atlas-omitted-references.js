@@ -1,23 +1,21 @@
-// References under operands suppressed in the initial theorem-statement notation.
+// Resolve references in disjoint regions omitted from a bounded notation scene.
 (function(host){
  'use strict';
  const local=typeof module!=='undefined'&&module.exports;
  const A=local?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData;
  const notation=local?require('./proof-atlas-type-notation'):host.ProofAtlasTypeNotation;
- function inspect(data,catalog){
-  const root=data.roots[0],counts=[],groups=[];
+ function inspect(data,catalog,rootIndex=0){
+  const root=data.roots[rootIndex],counts=[],groups=[];
   for(let row=0;row<=root;row++)
    counts[row]=data.children[row].reduce((sum,c)=>sum+counts[c],data.kind[row]===0?1n:0n);
-  const address=(node,slots)=>({namespace:'statement',node,route:{root:0,slots}});
+  const address=(node,slots)=>({namespace:'source',node,route:{root:rootIndex,slots}});
   const scene=notation.scene(data,root,catalog,{address});
-  function visit(term){
-   for(const port of [...(term.hiddenPorts??[]),...(term.foldedPorts??[])]){
-    const total=counts[port.node];
-    if(!total)continue;
-    groups.push({symbol:term.label,operator:term.origin,name:port.name,slot:port.slot,
-     operand:port.origin,total,select(n){
+  function add(region,operand){
+   const total=counts[operand.node];
+   if(!total)return;
+   groups.push({...region,operand,total,select(n){
       if(typeof n!=='bigint'||n<1n||n>total)throw RangeError('Reference outside operand');
-      const slots=[...port.slots];let node=port.node;
+      const slots=[...operand.route.slots];let node=operand.node;
       while(data.kind[node]!==0){
        const field=data.children[node].findIndex(child=>{
         if(n<=counts[child])return true;
@@ -30,23 +28,28 @@
       if(!binder)throw Error('Reference has no enclosing binder');
       return {use,binder};
      }});
-   }
+  }
+  function visit(term){
+   if(term.kind==='frontier')add({kind:'collapsed',symbol:term.label},term.origin);
+   for(const port of [...(term.hiddenPorts??[]),...(term.foldedPorts??[])])
+    add({kind:'notation',symbol:term.label,operator:term.origin,name:port.name,slot:port.slot},port.origin);
    term.children.forEach(c=>visit(c.value));
   }
   visit(scene.root);return groups;
  }
- function control(data,catalog,url){
+ function control(data,catalog,url,rootIndex=0){
   const el=(tag,text)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;return e;};
   const link=(text,hit)=>{const a=el('a',text);a.href=url(hit);return a;};
   const panel=el('details');panel.id='pl-omitted-references';
-  panel.append(el('summary','Trace variables in operands omitted by notation'));
+  panel.append(el('summary','Trace variables in collapsed regions and omitted operands'));
   panel.ontoggle=()=>{
    if(!panel.open||panel.children.length>1)return;
-   const groups=inspect(data,catalog);
-   if(!groups.length){panel.append(el('p','The initial statement notation omits no operands containing variable references.'));return;}
+   const groups=inspect(data,catalog,rootIndex);
+   if(!groups.length){panel.append(el('p','All variable references are visible in the initial notation.'));return;}
    for(const g of groups){
     const section=el('section'),heading=el('p');
-    heading.append(link(g.symbol,g.operator),' · ',link('operand '+(g.slot+1)+' ('+g.name+')',g.operand));
+    if(g.kind==='collapsed')heading.append('Collapsed region · ',link(g.symbol,g.operand));
+    else heading.append(link(g.symbol,g.operator),' · ',link('operand '+(g.slot+1)+' ('+g.name+')',g.operand));
     const label=el('label','Reference '),input=el('input'),form=el('form'),result=el('p');
     input.value='1';input.required=true;input.inputMode='numeric';input.pattern='[1-9][0-9]*';input.size=6;
     input.maxLength=String(g.total).length;

@@ -79,6 +79,28 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
    await page.waitForFunction(id=>document.querySelector('#pl-expression h3')?.textContent.endsWith(' · e'+id),destination.node);
    assert.equal(new URL(page.url()).searchParams.get('route'),'0:'+destination.route.slots.join('.'));
    assert.equal(new URL(page.url()).searchParams.get('proof'),example.name);
+   const riccati=window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id==='published-15').declarations.find(r=>r.name==='JacobiData.slope_bound_abs');
+   const body=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+riccati.indexFile)));
+   await page.goto('http://localhost/projects/proof-atlas/library/?edition=published-15&proof='+riccati.name+'&route=1:#expr-'+body.roots[1]);
+   await panel.locator('summary').click();
+   const regions=require('../../../public/js/proof-atlas-omitted-references').inspect(body,window.PROOF_ATLAS_TYPE_NOTATION,1);
+   assert.equal(regions.length,2);
+   for(const [i,g] of regions.entries()){
+    assert.equal(g.kind,'collapsed');
+    const section=panel.locator('section').nth(i);
+    await section.getByLabel('Reference').fill(String(g.total));
+    await section.getByRole('button',{name:'Trace'}).click();
+    const {use,binder}=g.select(g.total),links=section.locator('[aria-live] a');
+    for(const [j,hit] of [use,binder].entries()){
+     const u=new URL(await links.nth(j).evaluate(a=>a.href));
+     assert.equal(u.searchParams.get('route'),'1:'+hit.route.slots.join('.'));
+     assert.equal(u.hash,'#expr-'+hit.node);
+    }
+   }
+   const last=regions.at(-1),use=last.select(last.total).use;
+   await panel.locator('section').last().locator('[aria-live] a').first().click();
+   await page.waitForFunction(id=>document.querySelector('#pl-expression h3')?.textContent.endsWith(' · e'+id),use.node);
+   assert.equal(new URL(page.url()).searchParams.get('route'),'1:'+use.route.slots.join('.'));
    await page.close();
   }
   console.log('Occurrence switching and all 24 omitted references passed at 320 and 1280 pixels.');

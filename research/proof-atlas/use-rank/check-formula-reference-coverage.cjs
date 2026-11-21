@@ -22,7 +22,7 @@ function measure(record){
  enumerate(root,[]);assert.equal(inventory.size,mass[root]);
  const address=(node,slots)=>({namespace:'statement',node,route:{root:0,slots}});
  const queue=[{node:root,slots:[],depth:0}];
- const omitted=new Set();
+ const omitted={notation:new Set(),collapsed:new Set()};
  let first,maxDepth=0,visibleNodes=0;
  for(let i=0;i<queue.length;i++){
   const region=queue[i];
@@ -34,9 +34,9 @@ function measure(record){
   visibleNodes+=scene.stats.nodes;
   function hidden(node,slots,kind){
    assert.equal(A.walk(data,{root:0,slots}),node);
-   if(i===0 && kind==='notation')for(const path of inventory.keys()){
+   if(i===0)for(const path of inventory.keys()){
     const prefix=slots.join('.');
-    if(path===prefix||path.startsWith(prefix+'.'))omitted.add(path);
+    if(path===prefix||path.startsWith(prefix+'.'))omitted[kind].add(path);
    }
    counts[kind]+=mass[node];
    if(!mass[node])return;
@@ -61,10 +61,10 @@ function measure(record){
  const groups=require('../../../public/js/proof-atlas-omitted-references').inspect(data,window.PROOF_ATLAS_TYPE_NOTATION);
  for(const g of groups)for(let n=1n;n<=g.total;n++){
   const {use,binder}=g.select(n),path=use.route.slots.join('.');
-  assert(omitted.delete(path));assert.equal(use.node,A.walk(data,use.route));
+  assert(omitted[g.kind].delete(path));assert.equal(use.node,A.walk(data,use.route));
   assert.deepEqual(binder,inventory.get(path));
  }
- assert.equal(omitted.size,0);
+ assert.equal(omitted.notation.size,0);assert.equal(omitted.collapsed.size,0);
  return {name:record.name,source:record.indexSha256,total:inventory.size,first,panels:queue.length,maxDepth,visibleNodes};
 }
 const sample=window.PROOF_ATLAS_AI_SAMPLE.edition.declarations;
