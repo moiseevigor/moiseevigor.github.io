@@ -4,9 +4,10 @@
  const A=common?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData;
  const arithmetic=common?require('./proof-atlas-arithmetic'):host.ProofAtlasArithmetic;
  const refs=common?require('./proof-atlas-recursive-inputs'):host.ProofAtlasRecursiveInputs;
- function outline(data){
+ function outline(data,at){
   if(data.roots[1]==null)return null;
-  let node=data.roots[1],slots=[];
+  if(at?.route.slots.length && (at.route.root!==1 || data.kind[at.node]!==8))return null;
+  let node=at?.route.slots.length?at.node:data.roots[1],slots=at?.route.slots.slice()||[];
   while(data.kind[node]===6 && slots.length<128){node=data.children[node][1];slots.push(1);}
   if(data.kind[node]!==8)return null;
   const steps=[];
@@ -18,6 +19,29 @@
    node=body;slots=slots.concat(2);
   }
   return {steps,end:site(node,slots),limited:data.kind[node]===8};
+ }
+ function nestedStarts(data){
+  const root=data.roots[1],entries=[],singles=[],seen=new Set([root]),queue=[{node:root,parent:null,leading:true}],limit=16384;
+  let truncated=false;
+  for(let i=0;i<queue.length;i++){
+   const at=queue[i],node=at.node;
+   if(!at.leading && data.kind[node]===8 &&
+      !(at.parent && data.kind[at.parent.node]===8 && at.slot===2)){
+    const slots=[];
+    for(let p=at;p.parent;p=p.parent)slots.push(p.slot);
+    slots.reverse();
+    const candidates=data.kind[data.children[node][2]]===8?entries:singles;
+     if(candidates.length<6)candidates.push({node,route:{root:1,slots}});
+     else truncated=true;
+    if(entries.length===6){truncated=true;break;}
+   }
+   for(const [slot,child] of data.children[node].entries()){
+    if(seen.has(child))continue;
+    if(seen.size===limit){truncated=true;continue;}
+    seen.add(child);queue.push({node:child,parent:at,slot,leading:at.leading && data.kind[node]===6 && slot===1});
+   }
+  }
+  return {entries:entries.concat(singles).slice(0,6),truncated:truncated||entries.length+singles.length>6};
  }
  function reference(data,target,index,binder){
   const r=refs.countReferences(data,target.node,index,{maxStates:8192,maxWork:16384,firstIfPresent:true,useSupport:true});
@@ -37,9 +61,16 @@
   return edges;
  }
  function hypothesisUse(data,model,step,hypothesis){
-  const i=step?model.steps.indexOf(step):model.steps.length;
-  const depth=model.steps[0].binder.route.slots.length+i;
-  return reference(data,step?.value||model.end,depth-1-hypothesis.proofBinder.route.slots.length,hypothesis.proofBinder);
+  const target=step?.value||model.end,binder=hypothesis.proofBinder;
+  const start=binder.route.slots.length,slots=target.route.slots;
+  if(!binder.route.slots.every((v,i)=>slots[i]===v) || slots[start]!==1)return null;
+  let node=data.children[binder.node][1],index=0;
+  for(const slot of slots.slice(start+1)){
+   const kind=data.kind[node];
+   if(((kind===6||kind===7)&&slot===1)||(kind===8&&slot===2))index++;
+   node=data.children[node][slot];
+  }
+  return reference(data,target,index,binder);
  }
  function layers(data,model){
   const rows=[],levels=new Map();
@@ -58,9 +89,25 @@
   return rows;
  }
  function mount(container,data,at,link){
-  if(at.route.slots.length)return;
-  const model=outline(data);if(!model)return;
+  if(data.roots[1]==null)return;
+  const model=outline(data,at);
   const el=(tag,text)=>{const n=document.createElement(tag);if(text)n.textContent=text;return n;};
+  const leading=new Set(model?.steps.map(s=>s.binder.node)||[]);
+  if(!at.route.slots.length && data.kind.some((kind,node)=>kind===8 && !leading.has(node))){
+   const browse=el('details'),list=el('ul');browse.dataset.nestedLocals='';
+   browse.append(el('summary','Find nested local definitions'),list);
+   browse.ontoggle=()=>{
+    if(!browse.open||list.childElementCount)return;
+    const {entries,truncated}=nestedStarts(data);
+    for(const entry of entries){
+     const m=outline(data,entry),item=el('li');
+     item.append(link(m.steps.map(s=>s.name).join(', '),entry));list.append(item);
+    }
+    if(truncated||!entries.length)list.append(el('li',truncated?'Search limit reached.':'No nested local definition found in the visited rows.'));
+   };
+   container.append(browse);
+  }
+  if(!model)return;
   const panel=el('details'),list=el('ol');panel.dataset.localOutline='';
   panel.append(el('summary','Local definitions in the proof ('+model.steps.length+(model.limited?'+':'')+')'),list);
   panel.ontoggle=()=>{
@@ -99,6 +146,8 @@
     body.append(el('p','References between the displayed local results run from earlier rows to later rows. Links on incoming references open their first occurrence.'));
     const hypotheses=arithmetic.statement(data,{node:data.roots[0],route:{root:0,slots:[]}}).binders.filter(b=>{
      if(!b.proofBinder)return false;
+     const path=model.steps[0].binder.route.slots,base=b.proofBinder.route.slots;
+     if(!base.every((v,i)=>path[i]===v)||path[base.length]!==1)return false;
      const domain=arithmetic.formula(data,b.domain);
      return domain?.relation||domain?.logical;
     });
@@ -150,5 +199,5 @@
   }
   container.append(panel);
  }
- if(common)module.exports={outline,inputs,layers,hypothesisUse};else host.ProofAtlasLocalOutline={mount};
+ if(common)module.exports={outline,inputs,layers,hypothesisUse,nestedStarts};else host.ProofAtlasLocalOutline={mount};
 })(typeof window==='undefined'?globalThis:window);
