@@ -17,6 +17,30 @@ const {chromium} = require('playwright');
       assert(await sections.last().isVisible());
       assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
       const steps = await page.evaluate(()=>packet.localSteps);
+      const flow=page.locator('#proof-flow'),final=await page.evaluate(()=>packet.finalBody);
+      async function walk(source){
+        assert.equal(await flow.locator('h3').innerText(),source.name||'Final proof expression');
+        const anchors=await flow.locator('a').evaluateAll(ns=>ns.map(n=>n.href));
+        const targets=[source.value,...source.uses.map(e=>e.use)];
+        assert.equal(anchors.length,targets.length);
+        for(const [index,t] of targets.entries()){
+          const u=new URL(anchors[index]);
+          assert.equal(u.searchParams.get('proof'),'JacobiData.slope_bound_abs');
+          assert.equal(u.searchParams.get('edition'),'published-15');
+          assert.equal(u.searchParams.get('route'),t.route.root+':'+t.route.slots.join('.'));
+          assert.equal(u.hash,'#expr-'+t.node);
+        }
+        for(const e of source.uses){
+          const producer=steps[e.producer];
+          const row=flow.locator('li').filter({has:page.getByRole('button',{name:producer.name,exact:true})});
+          assert((await row.innerText()).includes(e.count+(e.count==='1'?' reference':' references')));
+          await row.getByRole('button').click();
+          await walk(producer);
+          await flow.getByRole('button',{name:'Back to '+(source.name||'final proof'),exact:true}).click();
+          assert.equal(await flow.locator('h3').innerText(),source.name||'Final proof expression');
+        }
+      }
+      await walk(final);
       for (const [i,s] of steps.entries()) {
         const targets=[s.type,s.value];
         for (const r of s.extra) {

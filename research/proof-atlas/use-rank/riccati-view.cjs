@@ -18,7 +18,7 @@ for(let n=1n;n<=model.total;n++) {
   assert.deepEqual(atlas.binding(data,expected.route).route,example.binder);
   assert.equal(model.rank(expected.route),n);
 }
-const packet={localSteps:require('./riccati-local-inputs.cjs')(data),edition,name:record.name,hash:example.packet,root:example.binder.root,inference:require("./riccati-call.cjs")(data,model,example.packet),table,fields:atlas.kinds.map(k=>atlas.fields[k]||[])};
+const packet={...require('./riccati-local-inputs.cjs')(data),edition,name:record.name,hash:example.packet,root:example.binder.root,inference:require("./riccati-call.cjs")(data,model,example.packet),table,fields:atlas.kinds.map(k=>atlas.fields[k]||[])};
 const html=fs.readFileSync(path.join(__dirname,'riccati-template.html'),'utf8');
 process.stdout.write(html.replace('/* INSERT SELECTOR */',()=>fs.readFileSync(path.join(__dirname,'select-branch.js'),'utf8'))
   .replace('/* INSERT PACKET */',()=>JSON.stringify(packet).replaceAll('<','\\u003c')));

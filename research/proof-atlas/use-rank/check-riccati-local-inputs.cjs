@@ -10,7 +10,7 @@ const {record} = inventory().find(r=>r.edition===packet.edition && r.record.name
 const bytes = z.gunzipSync(fs.readFileSync('.'+record.indexFile));
 assert.equal(createHash('sha256').update(bytes).digest('hex'),packet.hash);
 const data = atlas.validateIndex(JSON.parse(bytes),record);
-function external(field) {
+function external(field,firstUses) {
   const counts = new Map(), pending = [field];
   while (pending.length) {
     const {node,route} = pending.pop();
@@ -18,12 +18,22 @@ function external(field) {
       const binder = atlas.binding(data,route);
       if (binder.route.slots.length < field.route.slots.length) {
         const key = binder.route.slots.join('.');
+        if(firstUses){
+          const prior=firstUses.get(key);
+          if(!prior || route.slots.join('.') < prior.route.slots.join('.'))firstUses.set(key,{node,route});
+        }
         counts.set(key,1+(counts.get(key)||0));
       }
     }
     data.children[node].forEach((child,i)=>pending.push({node:child,route:{root:1,slots:route.slots.concat(i)}}));
   }
   return counts;
+}
+const owners = [];
+function checkEdges(step) {
+  const first=new Map(),counts=external(step.value,first);
+  const expected=owners.flatMap((key,producer)=>counts.has(key)?[{producer,count:String(counts.get(key)),use:first.get(key)}]:[]);
+  assert.deepEqual([...step.uses].sort((a,b)=>a.producer-b.producer),expected);
 }
 let node = data.roots[1], slots = [], i = 0, additions = 0;
 while ([6,8].includes(data.kind[node])) {
@@ -34,6 +44,8 @@ while ([6,8].includes(data.kind[node])) {
     for (const [s,field] of [step.type,step.value].entries()) {
       assert.deepEqual(field,{node:data.children[node][s],route:{root:1,slots:slots.concat(s)}});
     }
+    checkEdges(step);
+    owners.push(slots.join('.'));
     const value = external(step.value);
     for (const k of external(step.type).keys()) value.delete(k);
     for (const r of step.extra) {
@@ -49,4 +61,6 @@ while ([6,8].includes(data.kind[node])) {
   const body = local ? 2 : 1; slots.push(body);node=data.children[node][body];
 }
 assert.equal(i,packet.localSteps.length);
+assert.deepEqual(packet.finalBody.value,{node,route:{root:1,slots}});
+checkEdges(packet.finalBody);
 console.log(i+' local definitions, '+additions+' value-only input links verified');
