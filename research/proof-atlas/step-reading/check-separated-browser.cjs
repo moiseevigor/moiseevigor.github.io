@@ -46,7 +46,7 @@ async function enableCanvasProbe(page) {
 }
 
 async function clickDrawnOccurrence(page,slots,context=false) {
-  const path=A.path({...graph,declaration},{root:1,slots});
+  const path=await page.evaluate(slots=>window.ProofAtlasLibraryData.path(window.ProofAtlasLibrary.getData(),{root:1,slots}),slots);
   const canvas=page.locator('#pl-canvas');
   await canvas.scrollIntoViewIfNeeded();
   const positions=await page.evaluate(()=>window.glyphCenters.slice());
@@ -135,6 +135,24 @@ async function main() {
       const selected=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
       assert.equal(selected.selected,42907);
       assert.deepEqual(selected.route,{root:1,slots:callSlots.concat(slot===10?[0,1]:[1])});
+    }
+    for (const slot of [1,6,10,11]) {
+      await page.goto(example.href);
+      const range=page.locator('#pl-window-range');
+      await page.getByText('Arguments 7–11 of 11',{exact:true}).waitFor();
+      if (slot<=6) await page.locator('#pl-earlier-arguments').click();
+      if (slot===1) await page.locator('#pl-earlier-arguments').click();
+      if (slot===11) {
+        await page.locator('#pl-earlier-arguments').click();
+        await page.locator('#pl-later-arguments').click();
+      }
+      const expectedRange=slot===1?'1–5':slot===6?'2–6':'7–11';
+      assert.equal(await range.innerText(),'Arguments '+expectedRange+' of 11');
+      const route=callSlots.concat(Array(11-slot).fill(0),1);
+      await clickDrawnOccurrence(page,route);
+      const selected=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
+      assert.deepEqual(selected.route,{root:1,slots:route});
+      if(slot>=10) assert.equal(selected.selected,42907);
     }
     assert.deepEqual(errors,[]);
     console.log('Four inspector paths and four folded canvas paths passed at both widths.');

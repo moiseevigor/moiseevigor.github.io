@@ -987,16 +987,22 @@ The folded application inspector now identifies repeated argument terms within e
 
 #### Which premises fit in a six-port diagram?
 
-With a call selected as the root of a folded scene, the default drawing reserves one port for the function and displays the first five arguments of a wide call. The [visibility check](check-premise-visibility.cjs) rebuilt the actual scenes for the 98 matched call rows, verified each root edge against its original argument route, and counted how many repeated premise positions appeared. The default showed **neither use in all 98 rows**. At the same port budget, taking the final five arguments, or the first two and final three, would show every matched group in full. The complete ordered argument list remains available in all cases.
+With a call selected as the root of a folded scene, the original drawing reserved one port for the function and displayed the first five arguments of a wide call. The [visibility check](check-premise-visibility.cjs) rebuilt the actual scenes for the 98 matched call rows, verified each root edge against its original argument route, and counted how many repeated premise positions appeared. The default showed **neither use in all 98 rows**. At the same port budget, taking the final five arguments, or the first two and final three, would show every matched group in full. The complete ordered argument list remains available in all cases.
 
 A second comparison counts individual proof arguments at the 191 maximal call occurrences with complete native role observations. These contain 224 proof arguments and 59 calls wider than five arguments. Short calls retain all positions.
 
 | Five argument positions displayed | Complete repeated groups (98) | Recorded proof arguments visible (224) | Previously visible proof arguments lost |
 |---|---:|---:|---:|
-| First five (current when focused) | 0 | 160 | 0 |
+| First five (original) | 0 | 160 | 0 |
 | Final five | 98 | 220 | 4 |
 | First two and final three | 98 | 194 | 28 |
 
-The alternative layouts are offline slot selections. The counts assume the call is in focus with the full six-port allowance; nested calls can receive less space. The 98 groups come from the signature search and the 224 individual arguments from sparse caller-local observations. Neither sample is representative of all mathematical proof steps. The four lost arguments give a reason to retain access to earlier positions even when displaying the final arguments. Reader comprehension is unmeasured.
+The original comparison evaluated the two alternative layouts offline. The counts assume the call is in focus with the full six-port allowance; nested calls can receive less space. The 98 groups come from the signature search and the 224 individual arguments from sparse caller-local observations. Neither sample is representative of all mathematical proof steps. The four lost arguments give a reason to retain access to earlier positions even when displaying the final arguments. Reader comprehension is unmeasured.
 
 To reproduce, pass the complete JSON output of `check-repeated-proof-parameters.cjs` on standard input to `node research/proof-atlas/step-reading/check-premise-visibility.cjs` from the repository root.
+
+#### Moving the argument window
+
+A wide application at the root of the folded library diagram now starts with its function and its final five argument positions. **Earlier arguments** and **Later arguments** move the window while keeping the same selected call. Argument numbers retain their original positions. A partial spine labels its positions as trailing slots. Nested applications retain their existing bounded expansion. Each argument remains separately selectable even when two positions contain the same compiled term.
+
+The visibility checker rebuilt and replay-validated the final-window geometry for all 98 matched call rows in the signature sample. Its drawn edges matched the original argument routes for every row, with the same represented occurrence count as the first-window geometry. On the 11-argument multiplication call, the browser check moved in both directions and clicked arguments 1, 6, 10 and 11 directly on the canvas. The latter two clicks opened separate occurrences of row 42907. The call’s head remained in the diagram across windows. These are local reader checks on the research branch.

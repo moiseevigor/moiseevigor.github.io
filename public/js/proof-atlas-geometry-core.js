@@ -49,6 +49,9 @@
   const folded=options.foldBinders===true,telescopeLimit=options.telescopeLimit??64,grouped=options.foldApplications===true,applicationLimit=options.applicationLimit??64,applicationChildren=options.maxApplicationChildren??6,maxLayerNodes=options.maxLayerNodes??8,abstracted=folded||grouped;
   if(folded)demand(Number.isInteger(telescopeLimit)&&telescopeLimit>=2&&telescopeLimit<=128,'telescope limit must be 2–128');
   if(grouped){demand(Number.isInteger(applicationLimit)&&applicationLimit>=2&&applicationLimit<=128,'application limit must be 2–128');demand(Number.isInteger(applicationChildren)&&applicationChildren>=1&&applicationChildren<=129,'application child budget must be 1–129');demand(Number.isInteger(maxLayerNodes)&&maxLayerNodes>=1&&maxLayerNodes<=10000,'layer budget must be 1–10000');}
+  const windowStart=options.rootArgumentOffset??0;
+  demand(windowStart===0 || (!origin && grouped && (windowStart==='last' || Number.isSafeInteger(windowStart)&&windowStart>0)), 'invalid source argument window');
+  let actualOffset=0;
   let initialScope=null;for(const b of ambient)initialScope={...b,target:b.path,external:true,outer:initialScope};
   const start=checkedRoute(data,route,initialScope),work=[{id:start.id,scope:start.scope,route:{root:route.root,slots:[...route.slots]},depth:0,parent:null,field:null}],nodes=[],edges=[],links=[];
   const layers=new Map([[0,1]]),enqueue=item=>{work.push(item);layers.set(item.depth,(layers.get(item.depth)||0)+1);};
@@ -68,7 +71,10 @@
    }else if(group){
     const regions=[{...spine.head,field:spine.truncated?'remaining-function':'head'},...spine.arguments.map(a=>({...a,field:'arg'+a.slot}))];
     const open=item.depth<depthLimit?Math.min(regions.length,applicationChildren,budget-work.length,layerRoom):0;
-    regions.forEach((r,j)=>{r.displayed=j<open;if(r.displayed){node.children.push(r.path);enqueue({id:r.node,route:r.route,scope:item.scope,depth:item.depth+1,parent:path,field:r.field,relation:j===0?'application-head':'application-argument'});}});
+    const capacity=Math.max(0,open-1),maxOffset=spine.arguments.length-capacity;
+    const offset=item.depth===0 && capacity ? (windowStart==='last'?maxOffset:Math.min(windowStart,maxOffset)) : 0;
+    if(item.depth===0)actualOffset=offset;
+    regions.forEach((r,j)=>{r.displayed=open>0 && (j===0 || j>offset && j<=offset+capacity);if(r.displayed){node.children.push(r.path);enqueue({id:r.node,route:r.route,scope:item.scope,depth:item.depth+1,parent:path,field:r.field,relation:j===0?'application-head':'application-argument'});}});
     Object.assign(node,{abstraction:'application-spine',sourceRole:rule.role,role:'ordered-application-spine',glyph:'@',members:spine.members,head:spine.head,arguments:spine.arguments,regions,truncated:spine.truncated,spineComplete:spine.spineComplete,saturation:spine.saturation,ports:regions.map(r=>r.field),retainedOccurrences:spine.members.length,hidden:regions.filter(r=>!r.displayed).reduce((s,r)=>s+BigInt(r.expanded),0n).toString(),frontier:open<regions.length});
    }else if(abstracted)node.retainedOccurrences=1;
    nodes.push(node);
@@ -87,6 +93,7 @@
   }
   const total=BigInt(data.expanded[start.id]),hidden=nodes.reduce((s,n)=>s+BigInt(n.hidden),0n),retained=nodes.reduce((s,n)=>s+BigInt(n.retainedOccurrences??1),0n);demand(retained+hidden===total,'frontier accounting failed');
   const result={format:grouped?'ProofAtlasGeometricScene/3':folded?'ProofAtlasGeometricScene/2':'ProofAtlasGeometricScene/1',source:{name:record.name,indexSha256:record.indexSha256,sourceSha256:record.sourceSha256},root:{node:start.id,route:{root:route.root,slots:[...route.slots]},path:A.path(data,route),category:route.slots.length?'expression':data.declaration.rootPaths[route.root]==='root.type'?'declaration-type':data.declaration.rootPaths[route.root]==='root.value'?(record.kind==='theorem'?'proof-body':'definition-body'):'reduction-or-other-root'},budget,depthLimit,nodes,edges,links,stats:{displayed:nodes.length,hidden:hidden.toString(),represented:total.toString(),frontiers:nodes.filter(n=>n.frontier).length,scopeBoundaries:links.filter(l=>l.relation==='bound-to'&&l.boundary).length},guarantee:'Occurrence structure and lexical binding against the identified packet. No inferred occurrence types, semantic equivalence, tactic reconstruction or human comprehension claim.'};
+  if(actualOffset)result.rootArgumentOffset=actualOffset;
   if(abstracted)result.stats.retainedOccurrences=retained.toString();
   if(folded){const ts=nodes.filter(n=>n.abstraction==='binder-telescope');result.telescopeLimit=telescopeLimit;result.stats.foldedTelescopes=ts.length;result.stats.hiddenHeaderRegions=ts.reduce((s,n)=>s+n.regions.length,0);result.stats.foldedBinders=ts.reduce((s,n)=>s+n.members.length,0);}
   if(grouped){const apps=nodes.filter(n=>n.abstraction==='application-spine');Object.assign(result,{foldBinders:folded,applicationLimit,maxApplicationChildren:applicationChildren,maxLayerNodes});result.stats.foldedApplications=apps.length;result.stats.retainedApplications=apps.reduce((s,n)=>s+n.members.length,0);result.stats.hiddenApplicationRegions=apps.reduce((s,n)=>s+n.regions.filter(r=>!r.displayed).length,0);}
@@ -140,7 +147,7 @@
  function validateRule(scene,data,record,origin){demand(scene.format==='ProofAtlasGeometricScene/6','kernel rule format');const expected=createRule(data,record,origin,{route:scene.root.route,maxNodes:scene.budget,maxDepth:scene.depthLimit,foldBinders:scene.openOptions.foldBinders,foldApplications:scene.openOptions.foldApplications,telescopeLimit:scene.telescopeLimit,applicationLimit:scene.applicationLimit,maxApplicationChildren:scene.maxApplicationChildren,maxLayerNodes:scene.maxLayerNodes});demand(JSON.stringify(scene)===JSON.stringify(expected),'changed kernel rule cut');return true;}
  function validate(scene,data,record){
   demand(['ProofAtlasGeometricScene/1','ProofAtlasGeometricScene/2','ProofAtlasGeometricScene/3'].includes(scene.format),'unknown format');demand(scene.source.name===record.name&&scene.source.indexSha256===record.indexSha256&&scene.source.sourceSha256===record.sourceSha256,'stale packet');
-  const expected=create(data,record,{route:scene.root.route,maxNodes:scene.budget,maxDepth:scene.depthLimit,foldBinders:scene.format==='ProofAtlasGeometricScene/2'||scene.foldBinders===true,telescopeLimit:scene.telescopeLimit,foldApplications:scene.format==='ProofAtlasGeometricScene/3',applicationLimit:scene.applicationLimit,maxApplicationChildren:scene.maxApplicationChildren,maxLayerNodes:scene.maxLayerNodes});demand(JSON.stringify(scene)===JSON.stringify(expected),'changed scene or scope');return true;
+  const expected=create(data,record,{route:scene.root.route,maxNodes:scene.budget,maxDepth:scene.depthLimit,foldBinders:scene.format==='ProofAtlasGeometricScene/2'||scene.foldBinders===true,telescopeLimit:scene.telescopeLimit,foldApplications:scene.format==='ProofAtlasGeometricScene/3',rootArgumentOffset:scene.rootArgumentOffset,applicationLimit:scene.applicationLimit,maxApplicationChildren:scene.maxApplicationChildren,maxLayerNodes:scene.maxLayerNodes});demand(JSON.stringify(scene)===JSON.stringify(expected),'changed scene or scope');return true;
  }
  const api={vocabulary,create,validate,createOpen,validateOpen,createReduction,validateReduction,createRule,validateRule,createExpected,validateExpected,createReference,validateReference,createModule,validateModule,telescope,application};if(typeof module!=='undefined'&&module.exports)module.exports=api;else host.ProofAtlasGeometry=api;
 })(typeof window==='undefined'?globalThis:window);

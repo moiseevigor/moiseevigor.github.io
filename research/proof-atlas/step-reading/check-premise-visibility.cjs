@@ -36,6 +36,11 @@ for (const item of union.inventory().filter(i => i.edition === 'goedel-sample-43
     assert.deepEqual(edges.map(e => e.to),visible.map(slot => root.arguments[slot-1].path));
     assert.deepEqual(visible,slots.slice(0,5));
     const layouts = layoutsFor(slots);
+    const last=geometry.create(graph,item.record,{route:hit.route,foldApplications:true,foldBinders:true,rootArgumentOffset:'last'});
+    assert(geometry.validate(last,graph,item.record));
+    const drawn=last.edges.filter(e=>e.from===root.id && e.relation==='application-argument');
+    assert.deepEqual(drawn.map(e=>e.to),layouts[1].map(slot=>root.arguments[slot-1].path));
+    assert.equal(last.stats.represented,scene.stats.represented);
     const weight = Number(hit.weight);
     assert(Number.isSafeInteger(weight));
     calls++;
