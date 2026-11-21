@@ -284,6 +284,18 @@ async function main() {
       assert.equal(snapshot.selected,node);
       assert.deepEqual(snapshot.route,{root:1,slots:lambdaCall.concat(suffix)});
     }
+    for(const [structure,width,callNode,headNode] of [['JacobiCore',38,1371,401],['SBracket',56,3732,799]]){
+      const route=Array(width).fill(1);
+      rewrite.searchParams.set('proof',structure+'.mk.injEq');
+      rewrite.searchParams.set('route','1:'+route.join('.'));rewrite.hash='expr-'+callNode;
+      await page.goto(rewrite.href);
+      const panel=page.locator('#pl-application-headers details').first();
+      await panel.locator('summary').click();
+      await panel.locator('ol > li').nth(2).getByRole('button',{name:'Applied function · '+structure+'.mk.inj',exact:true}).click();
+      const selection=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
+      assert.equal(selection.selected,headNode);
+      assert.deepEqual(selection.route,{root:1,slots:route.concat(0,1,Array(width).fill(0))});
+    }
     assert.deepEqual(errors,[]);
     console.log('Four inspector paths and four folded canvas paths passed at both widths.');
   } finally {await browser.close();}

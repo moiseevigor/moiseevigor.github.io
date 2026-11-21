@@ -7,10 +7,18 @@ const atlas=require('../../../public/js/proof-atlas-library-data');
 const {measure}=require('./call-destinations.cjs');
 const {spine}=require('../../../public/js/proof-atlas-elimination');
 const results=[];
-for(const item of inventory().filter(i=>i.edition==='goedel-sample-4331')){
-  const bytes=raw(item.record.indexFile);
-  assert.equal(createHash('sha256').update(bytes).digest('hex'),item.record.indexSha256);
-  const g=atlas.validateIndex(JSON.parse(bytes),item.record);
+function records(){
+  const editionId=process.argv.includes('--working')?'working-26':process.argv.includes('--published')?'published-15':null;
+  if(!editionId)return inventory().filter(i=>i.edition==='goedel-sample-4331').map(i=>i.record);
+  const context={window:{}};
+  require('node:vm').runInNewContext(require('node:fs').readFileSync('public/data/proof-atlas/library-manifest.js','utf8'),context);
+  const edition=context.window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id===editionId);
+  return edition.declarations.filter(d=>d.kind==='theorem' && d.bodyAvailable);
+}
+for(const record of records()){
+  const bytes=raw(record.indexFile);
+  assert.equal(createHash('sha256').update(bytes).digest('hex'),record.indexSha256);
+  const g=atlas.validateIndex(JSON.parse(bytes),record);
   let positions=0,expanded=0n,local=0,expandedLocal=0n,maxLocalWidth=0;
   const heads={}, lambdaParents=new Set();
   const destinations=measure(g,g.roots[1],new Set(),(node,weight)=>{
@@ -33,7 +41,8 @@ for(const item of inventory().filter(i=>i.edition==='goedel-sample-4331')){
   assert.equal(Object.values(heads).reduce((sum,h)=>sum+h.positions,0),positions);
   assert.equal(Object.values(heads).reduce((sum,h)=>sum+h.expanded,0n),expanded);
   let lambdaUses=0,identityUses=0;
-  if(lambdaParents.size){
+  const replayLambda=!process.argv.includes('--counts-only');
+  if(replayLambda && lambdaParents.size){
     const relevant=[];
     for(let i=0;i<g.kind.length;i++)relevant.push(lambdaParents.has(i)||g.children[i].some(c=>relevant[c]));
     const slots=[];
@@ -61,8 +70,8 @@ for(const item of inventory().filter(i=>i.edition==='goedel-sample-4331')){
     }
     replay(g.roots[1],false);
   }
-  assert.equal(BigInt(lambdaUses),heads.lam?.expanded||0n);
-  results.push({proof:item.record.name,indexSha256:item.record.indexSha256,positions,expanded:String(expanded),
-    local,expandedLocal:String(expandedLocal),maxLocalWidth,heads,lambdaUses,identityUses});
+  if(replayLambda)assert.equal(BigInt(lambdaUses),heads.lam?.expanded||0n);
+  results.push({proof:record.name,indexSha256:record.indexSha256,positions,expanded:String(expanded),
+    local,expandedLocal:String(expandedLocal),maxLocalWidth,heads,...(replayLambda?{lambdaUses,identityUses}:{})});
 }
 console.log(JSON.stringify(results,(_,v)=>typeof v==='bigint'?String(v):v,2));

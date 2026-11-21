@@ -954,10 +954,10 @@
   await geometryLoad;
  }
  // Follow only the original function fields; a longer spine has no local caption.
- function inputFunction(arg){
+ function inputFunction(arg,limit){
   if(current.kind(arg.node)!=='app')return null;
   let node=arg.node,depth=0;
-  while(depth<32 && current.kind(node)==='app'){
+  while(depth<limit && current.kind(node)==='app'){
    node=current.children(node)[0];depth++;
   }
   const route={root:arg.route.root,slots:arg.route.slots.concat(Array(depth).fill(0))};
@@ -1021,7 +1021,7 @@
   }
   const inputHeads=new Map();
   for(const arg of ports){
-   const head=inputFunction(arg);
+   const head=inputFunction(arg,scene.applicationLimit);
    if(head)inputHeads.set(arg.path,head);
   }
   const byPath=new Map(),groups=new Map(),max=Math.max(1,...scene.nodes.map(n=>n.depth));
