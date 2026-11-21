@@ -12,14 +12,21 @@ const {countReferences}=require('../../../public/js/proof-atlas-recursive-inputs
 const cases={leftOnly:0,rightOnly:0,both:0,neither:0,unavailable:0};
 const edition=[ai,...window.PROOF_ATLAS_LIBRARY.editions].find(e=>e.id===(process.argv[2]||ai.id));
 const nested=process.argv.includes('--all-lambdas');
+const follow=process.argv.includes('--follow-helpers');
+assert(!follow||nested,'Following helper bodies requires --all-lambdas');
 assert(edition,'Unknown edition');
 let theorems=0,parameters=0;
-const records=[],types=[];
+const records=[],types=[],leadingArities=new Map();
 for(const d of edition.declarations.filter(x=>x.kind==='theorem'&&x.bodyAvailable)){
  theorems++;
  const raw=z.gunzipSync(fs.readFileSync('.'+d.indexFile));
  assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),d.indexSha256);
  const g=A.validateIndex(JSON.parse(raw),d);
+ if(follow){
+  let body=g.roots[1],arity=0;
+  while(g.kind[body]===6){arity++;body=g.children[body][1];}
+  leadingArities.set(d.name,arity);
+ }
  const addr=(node,slots)=>({node,path:slots.join('')});
 
  function conjunction(node){
@@ -71,6 +78,9 @@ for(const d of edition.declarations.filter(x=>x.kind==='theorem'&&x.bodyAvailabl
      A.binding(g,c.head.route).route.slots:c.head.route.slots):null;
     const key=JSON.stringify([steps,identity,receiver]);
     if(!groups.has(key))groups.set(key,{steps,receiver,clause:addr(clause,clauseSlots),target,slot:c?.slot,use:addr(at.node,at.route.slots),count:0});
+    if(follow && !steps && c?.slot>0 && g.kind[c.head.node]===4){
+     Object.assign(groups.get(key),{callee:g.payloads[c.head.node].name,arity:c.arity,head:addr(c.head.node,c.head.route.slots)});
+    }
     groups.get(key).count++;
    }
    if(edition===ai&&!nested)types.push([g,g.roots[0]]);
@@ -94,6 +104,26 @@ for(const d of edition.declarations.filter(x=>x.kind==='theorem'&&x.bodyAvailabl
 }
 const summary={edition:edition.id,theorems,parameters};
 if(nested)summary.jointBranches=cases;
+if(follow){
+ // A named theorem transports a clause only when its entire returned term
+ // projects that clause directly from the corresponding positional binder.
+ const byName=new Map();
+ for(const r of records){
+  if(/^1*$/.test(r.binder.path))byName.set(JSON.stringify([r.declaration,r.binder.path.length+1]),r);
+ }
+ const transfers=[];
+ for(const caller of records)for(const group of caller.groups){
+  if(!group.callee)continue;
+  const callee=byName.get(JSON.stringify([group.callee,group.slot]));
+  if(!callee || callee.total!==1 || leadingArities.get(group.callee)!==group.arity)continue;
+  const [result]=callee.groups;
+  if(!result.steps || result.use.path!=='1'.repeat(group.arity))continue;
+  transfers.push({caller:caller.declaration,callerDigest:caller.indexSha256,argument:group.use,call:group.target,
+   head:group.head,slot:group.slot,callee:callee.declaration,calleeDigest:callee.indexSha256,
+   parameter:callee.binder,returned:result.use,clause:result.steps,count:group.count});
+ }
+ summary.helperTransfers=transfers;
+}
 if(edition===ai&&!nested){
  assert.equal(records.length,2);
  summary.identicalTypes=equal(types[0][0],types[0][1],types[1][0],types[1][1]);

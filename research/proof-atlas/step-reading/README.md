@@ -395,3 +395,9 @@ Run conjunct-uses.cjs with the edition ID and `--all-lambdas` to include nested 
 | AI sample | 464 | 16 | 8 | 82 | 14 | 0 |
 
 The published cases unpack both fields in a joint branch. Counting references after both branch binders gives 49 branches referencing both components, four only the left, ten only the right. The corresponding working counts are 55, four and twelve. All were within the bounded query. A reference can occur inside a type or local definition. Selecting a bound variable in the major-premise position of a saturated And.casesOn now links to the exact split and its explicit branch binders. Two routes to expression 25 in CrossingData.crossing were tested separately.
+
+### Following a conjunction through a named helper
+
+Run `node research/proof-atlas/step-reading/conjunct-uses.cjs working-26 --all-lambdas --follow-helpers` from the repository root. Each transfer records one representative caller route per group, its multiplicity, the receiving declaration and positional lambda, the returned projection route, and both declaration index digests. The test requires a saturated call, a complete leading lambda chain, and a returned term that directly projects the identified parameter. It does not unfold arbitrary definitions.
+
+In the 26-module edition, six amplitude-chart theorems pass a whole conjunction to two generated helpers at 24 counted occurrences. Following the second argument into the compiled helper bodies resolves 12 to the left clause and 12 to the right clause. In each helper the returned projection is the entire lambda body. This permits folding the two calls into labelled clause arrows while retaining both declaration owners for inspection. The same test found zero transfers in the 15-module edition and the 20-proof AI sample. Counts use one representative per distinct lambda row per declaration and include embedded type terms.
