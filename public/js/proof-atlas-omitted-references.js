@@ -17,6 +17,18 @@
   return args.reverse().map((node,slot)=>({node,route:{root:at.route.root,
    slots:at.route.slots.concat(Array(arity-slot-1).fill(0),1)}}));
  }
+ // Keep the unexpanded function prefix selectable even in a very wide call.
+ function fixedArguments(data,at,limit=6){
+  let node=at.node;
+  const args=[],slots=at.route.slots.slice(),root=at.route.root;
+  while(data.kind[node]===5 && args.length<limit){
+   const [fn,arg]=data.children[node];
+   args.push({node:arg,route:{root,slots:slots.concat(1)}});
+   slots.push(0);
+   node=fn;
+  }
+  return {prefix:{node,route:{root,slots}},args:args.reverse(),folded:data.kind[node]===5};
+ }
  // Expand only directly supplied transitivity proofs with literal endpoint agreement.
  function equalitySegments(data,inputs,limit=16){
   const [carrier,start,middle,end,first,second]=inputs;
@@ -318,6 +330,6 @@
   };
   return panel;
  }
- const api={inspect,control,parameterContext,exactCallInputs,equalitySegments,firstStructuralDifference,applicationAtUse,resultDestination};
+ const api={inspect,control,parameterContext,exactCallInputs,fixedArguments,equalitySegments,firstStructuralDifference,applicationAtUse,resultDestination};
  if(local)module.exports=api;else host.ProofAtlasOmittedReferences=api;
 })(typeof window==='undefined'?globalThis:window);

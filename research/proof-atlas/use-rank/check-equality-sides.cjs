@@ -8,7 +8,7 @@ const atlas = require('../../../public/js/proof-atlas-library-data');
 const {spine} = require('../../../public/js/proof-atlas-elimination');
 const window = {};
 require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/goedel-sample-manifest.js','utf8'),{window});
-const {parameterContext,exactCallInputs,equalitySegments,firstStructuralDifference} = require('../../../public/js/proof-atlas-omitted-references');
+const {parameterContext,exactCallInputs,fixedArguments,equalitySegments,firstStructuralDifference} = require('../../../public/js/proof-atlas-omitted-references');
 require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/type-notation-catalog.js','utf8'),{window});
 const contextShapes=new Map();
 const localPositions=new Map();
@@ -60,6 +60,7 @@ const requests=[];
 const {index:rowOccurrences}=require('../../../public/js/proof-atlas-row-occurrences');
 const mismatchLabels=new Map();
 let nested=0n,maximum=0,boundaries=0n;
+const fixedArities=new Map(),fixedOperators=new Map();
 const congrFunctions=new Map();
 let congrCalls=0n,congrProofs=0;
 let transCalls=0n, transRows=0, transProofs=0;
@@ -95,6 +96,33 @@ for (const record of records) {
       assert.deepEqual(inputs.map(a=>atlas.walk(data,a.route)),args);
       const fn=inputs[4];
       let key=atlas.kinds[data.kind[fn.node]];
+      if(key==='app'){
+        const actual=spine(data,fn.node);
+        for(const limit of [1,6]){
+          const {prefix,args:shown,folded}=fixedArguments(data,fn,limit);
+          assert.deepEqual(shown.map(a=>atlas.walk(data,a.route)),actual.args.slice(-limit));
+          let rebuilt=atlas.walk(data,prefix.route);
+          assert.equal(rebuilt,prefix.node);
+          for(const a of shown){
+            const parent=atlas.walk(data,{root:a.route.root,slots:a.route.slots.slice(0,-1)});
+            assert.deepEqual(data.children[parent],[rebuilt,a.node]);
+            rebuilt=parent;
+          }
+          assert.equal(rebuilt,fn.node);
+          assert.equal(folded,actual.args.length>limit);
+        }
+        const op=window.PROOF_ATLAS_TYPE_NOTATION.entries.find(entry=>entry.form==='binary' &&
+          data.kind[actual.head]===4 && entry.name===data.payloads[actual.head].name &&
+          entry.arity===actual.args.length+1 && entry.visibleSlots[1]===actual.args.length);
+        if(op){
+          assert.equal(JSON.stringify(op.nameParts),JSON.stringify(data.payloads[actual.head].nameParts));
+          assert.equal(op.levelParams.length,data.payloads[actual.head].levels.length);
+          assert.equal(op.visibleSlots.length,2);
+          assert(op.visibleSlots[0]>=0 && op.visibleSlots[0]<actual.args.length);
+          fixedOperators.set(op.glyph,(fixedOperators.get(op.glyph)??0n)+count);
+        }
+        fixedArities.set(actual.args.length,(fixedArities.get(actual.args.length)??0n)+count);
+      }
       if(key==='lam'){
         const body=data.children[fn.node][1],counter=require('../../../public/js/proof-atlas-recursive-inputs').countReferences;
         const opts={useSupport:false,maxStates:4096},refs=counter(data,body,0,opts);
@@ -302,6 +330,8 @@ if(!published){
   if(process.argv[2]==='--conversion-requests') fs.writeFileSync(process.argv[3],JSON.stringify(requests));
 }
 console.log('congrArg calls:',String(congrCalls),'proofs:',congrProofs,'function forms:',Object.fromEntries(congrFunctions));
+console.log('Fixed binary operators:',Object.fromEntries(fixedOperators));
+console.log('Fixed argument arities:',Object.fromEntries(fixedArities));
 console.log('Single-use lambda contexts:',contexts);
 console.log('Context shapes:',Object.fromEntries(contextShapes));
 console.log('Unsupported paths:',Object.fromEntries(missing));

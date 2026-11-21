@@ -431,6 +431,33 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
    const published=window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id==='published-15');
    const crossing=published.declarations.find(r=>r.name==='CrossingData.exists_branch');
    const crossingData=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+crossing.indexFile)));
+   {
+    const source=require('../../../public/js/proof-atlas-application-ports').sourceInput;
+    const call={node:3558,route:atlas.routes(crossingData).route(3558)};
+    const fn=source(crossingData,call,5);
+    await page.goto('http://localhost/projects/proof-atlas/library/?edition=published-15&proof='+crossing.name+'&route='+call.route.root+':'+call.route.slots.join('.')+'#expr-3558');
+    const panel=page.getByRole('region',{name:'Equality under a function'});
+    const formula=panel.getByText('Function context: x ↦ s · x',{exact:true});
+    await formula.waitFor();
+    for(const [symbol,slot] of [['s',5],['·',0]]){
+     const expected=source(crossingData,fn,slot);
+     const href=new URL(await formula.getByRole('link',{name:symbol,exact:true}).evaluate(a=>a.href));
+     assert.equal(href.hash,'#expr-'+expected.node);
+     assert.equal(href.searchParams.get('route'),expected.route.root+':'+expected.route.slots.join('.'));
+    }
+    await panel.getByText('Fixed arguments in compiled order').click();
+    const fixed=panel.locator('ol a');
+    assert.equal(await fixed.count(),5);
+    const head=panel.getByRole('link',{name:'HMul.hMul',exact:true});
+    for(let slot=0;slot<=5;slot++){
+     const at=source(crossingData,fn,slot);
+     const href=new URL(await (slot?fixed.nth(slot-1):head).evaluate(a=>a.href));
+     assert.equal(href.hash,'#expr-'+at.node);
+     assert.equal(href.searchParams.get('route'),at.route.root+':'+at.route.slots.join('.'));
+    }
+    const dest=await fixed.last().evaluate(a=>a.href);
+    await fixed.last().click();await page.waitForURL(dest);
+   }
    for(const [node,expected] of [[3956,'Function context: x ↦ @Membership.mem(s4, s5, s6, @Set.Icc(s1, s2, x, s3), s7)'],[3035,'Function context: x ↦ x']]){
     const at=atlas.routes(crossingData).route(node);
     await page.goto('http://localhost/projects/proof-atlas/library/?edition=published-15&proof='+crossing.name+'&route='+at.root+':'+at.slots.join('.')+'#expr-'+node);

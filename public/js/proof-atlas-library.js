@@ -239,6 +239,33 @@
     const row=el('li');row.append(sourceLink(role+' · '+termLabel(at),at));inputs.append(row);
    }
    panel.append(el('h4','Equality under a function'),rule,inputs);
+   if(owner.kind(fn.node)==='app'){
+    const {prefix,args,folded}=window.ProofAtlasOmittedReferences.fixedArguments(owner.data,fn);
+    const context=el('p'),fixed=el('ol');
+    const headName=folded?'f':(owner.payload(prefix.node)?.name??termLabel(prefix));
+    context.append('Function context: x ↦ ',sourceLink(headName,prefix),'(');
+    for(const [index,arg] of args.entries()){
+     const symbol='s'+(index+1);
+     context.append(sourceLink(symbol,arg),', ');
+     const item=el('li');item.append(sourceLink(symbol+' · '+termLabel(arg),arg));fixed.append(item);
+    }
+    context.append('x)');
+    const details=el('details');
+    details.append(el('summary','Fixed arguments in compiled order'),fixed);
+    if(folded)details.append(el('p','Earlier arguments are included in f.'));
+    const payload=owner.payload(prefix.node);
+    const binary=owner.kind(prefix.node)==='const' && window.PROOF_ATLAS_TYPE_NOTATION?.entries.find(op=>
+     op.name===payload.name && JSON.stringify(op.nameParts)===JSON.stringify(payload.nameParts) &&
+     op.levelParams.length===payload.levels.length && op.form==='binary' && op.arity===args.length+1 &&
+     op.visibleSlots.length===2 && op.visibleSlots[1]===args.length && op.visibleSlots[0]<args.length);
+    if(binary){
+     const operand=args[binary.visibleSlots[0]],expression=el('p');
+     expression.append('Function context: x ↦ ',sourceLink('s',operand),' ',sourceLink(binary.glyph,prefix),' x');
+     const legend=el('p');legend.append(sourceLink('s · '+termLabel(operand),operand));
+     details.append(context);
+     panel.append(expression,legend,details);
+    }else panel.append(context,details);
+   }
    if(owner.kind(fn.node)==='lam' && window.ProofAtlasRecursiveInputs){
     const body=owner.data.children[fn.node][1],counter=window.ProofAtlasRecursiveInputs.countReferences;
     const opts={useSupport:false,maxStates:4096},refs=counter(owner.data,body,0,opts);
