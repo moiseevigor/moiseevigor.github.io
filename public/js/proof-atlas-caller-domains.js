@@ -5,11 +5,13 @@
  const packets=[
   {node:2181,path:'11111112111111110110101010010100100110011',file:'ai-caller-domains',
    hash:'b68b4a4283bd1eeff9bfa1009198ef17add44724906a23ff6a911c47411981ab',bytes:8265},
-  {node:86574,path:'111111122211',file:'ai-ndrec-domains',hash:'0eddb02598f66eaeae34fdc66d36c78ef02ab77abf2036efcc81061d47ea9334',bytes:13137}
+
  ];
  function packetFor(record,call){
   if(record.indexSha256!=='8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d' || call.route.root!==1)return;
-  return packets.find(p=>p.node===call.node && p.path.split('').join('.')===call.route.slots.join('.'));
+  const index=host.PROOF_ATLAS_TRANSPORT_DOMAINS;
+  const available=index?.indexSha256===record.indexSha256?packets.concat(index.records):packets;
+  return available.find(p=>p.node===call.node && p.path.split('').join('.')===call.route.slots.join('.'));
  }
  async function load(record,call){
   const packet=packetFor(record,call);
@@ -33,8 +35,33 @@
   return {fields,left,right};
  }
  function mount(container,record,call,data,sourceLink){
-  if(!packetFor(record,call))return;
   const el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
+  function mountOutline(target){
+    const index=host.PROOF_ATLAS_TRANSPORT_DOMAINS;
+    if(index?.indexSha256===record.indexSha256){
+     const outline=el('details');
+     outline.append(el('summary','Nested equality transports in this proof'),
+      el('p','Each label is the equality supplied to a transport. Indentation places a call inside the fourth argument of its parent.'));
+     function branches(parent){
+      const list=el('ul');
+      for(const entry of index.records.filter(r=>r.parent===parent)){
+       const route={root:1,slots:Array.from(entry.path,Number)};
+       if(A.walk(data,route)!==entry.node)throw Error('Transport outline address mismatch');
+       const line=el('li'),label=sourceLink(entry.equality,{node:entry.node,route});
+       if(entry.node===call.node)label.setAttribute('aria-current','location');
+       line.append(label);
+       const children=branches(entry.node);if(children.children.length)line.append(children);
+       list.append(line);
+      }
+      return list;
+     }
+     outline.append(branches(null));target.append(outline);
+    }
+  }
+  if(!packetFor(record,call)){
+   if(call.route.root===1 && !call.route.slots.length)mountOutline(container);
+   return;
+  }
   const details=el('details'),content=el('div');
   details.dataset.callerDomains='';
   details.append(el('summary','Compare kernel-checked argument types'),content);container.append(details);
@@ -60,6 +87,7 @@
       ' returns a function. Arguments '+(returned.declaredBinders+1)+'–'+rows.length+' supply its premises.');
      intro.append(description,el('pre',returned.type),el('p','Conclusion after all premises'),el('code',returned.result));
     }
+    if(returned)mountOutline(intro);
     function draw(){
      const row=rows[Number(select.value)-1];
      const route={root:call.route.root,slots:call.route.slots.concat(Array(rows.length-row.slot).fill(0),1)};

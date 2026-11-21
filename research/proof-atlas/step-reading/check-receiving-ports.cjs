@@ -72,6 +72,14 @@ async function checkWideCall(page) {
 }
 async function checkReturnedFunction(page){
   const query=new URLSearchParams({edition:'goedel-sample-4331',proof:'lean_workbook_20418',route:'1:1.1.1'});
+  const rootQuery=new URLSearchParams(query);rootQuery.set('route','1:');
+  await page.goto(origin+'/projects/proof-atlas/library/?'+rootQuery+'#expr-86586');
+  const outline=page.locator('#pl-expression details').filter({has:page.getByText('Nested equality transports in this proof',{exact:true})}).first();
+  await outline.locator('summary').first().click();
+  assert.equal(await outline.getByRole('link').count(),14);
+  assert.equal(await outline.locator('li:not(:has(ul))').count(),8);
+  await outline.getByRole('link',{name:'0 = a',exact:true}).click();
+  await page.locator('[data-caller-domains] summary').first().waitFor();
   await page.goto(origin+'/projects/proof-atlas/library/?'+query+'#expr-86583');
   await page.locator('#pl-binding-toggle').click();
   const form=page.locator('#pl-binding-uses form').first();
