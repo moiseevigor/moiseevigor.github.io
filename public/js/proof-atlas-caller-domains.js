@@ -11,7 +11,8 @@
   if(record.indexSha256!=='8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d' || call.route.root!==1)return;
   const index=host.PROOF_ATLAS_TRANSPORT_DOMAINS;
   const available=index?.indexSha256===record.indexSha256?packets.concat(index.records):packets;
-  return available.find(p=>p.node===call.node && p.path.split('').join('.')===call.route.slots.join('.'));
+  const cases=(host.PROOF_ATLAS_TRANSPORT_CASES||[]).filter(c=>c.indexSha256===record.indexSha256);
+  return available.concat(cases).find(p=>p.node===call.node && p.path.split('').join('.')===call.route.slots.join('.'));
  }
  async function load(record,call){
   const packet=packetFor(record,call);
@@ -36,6 +37,37 @@
  }
  function mount(container,record,call,data,sourceLink){
   const el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
+  const cases=(host.PROOF_ATLAS_TRANSPORT_CASES||[]).filter(c=>c.indexSha256===record.indexSha256);
+  function addressLink(label,node,path){
+   const route={root:1,slots:Array.from(path,Number)};
+   if(A.walk(data,route)!==node)throw Error('Case evidence address mismatch');
+   return sourceLink(label,{node,route});
+  }
+  function caseEvidence(){
+   const branchCase=cases.find(c=>c.branches.some(b=>b.transport===call.node));
+   if(branchCase && packetFor(record,call)){
+    const branch=branchCase.branches.find(b=>b.transport===call.node);
+    const box=el('p');
+    box.append('This branch uses ',addressLink(branchCase.disjunction,branchCase.node,branchCase.path),
+     '. Its equality is reversed by ',addressLink('Eq.symm',branch.symmetry,call.route.slots.join('')+'00001'),'.');
+    container.append(box);
+   }
+   if(cases.length && call.route.root===1 && !call.route.slots.length){
+    const box=el('details'),list=el('ul'),seen=new Set();
+    box.append(el('summary','Disjunctions used in the proof'),list);
+    for(const c of cases){
+     if(seen.has(c.majorBinderPath))continue;
+     seen.add(c.majorBinderPath);
+     const uses=cases.filter(x=>x.majorBinderPath===c.majorBinderPath);
+     const row=el('li');
+     row.append(addressLink(c.name+' · '+c.disjunction,c.value,c.majorBinderPath+'1'),' · case splits ');
+     uses.forEach((x,i)=>{if(i)row.append(', ');row.append(addressLink(String(i+1),x.node,x.path));});
+     list.append(row);
+    }
+    container.append(box);
+   }
+  }
+  caseEvidence();
   function mountOutline(target){
     const index=host.PROOF_ATLAS_TRANSPORT_DOMAINS;
     if(index?.indexSha256===record.indexSha256){
