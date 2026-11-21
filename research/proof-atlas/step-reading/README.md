@@ -887,3 +887,19 @@ The two unused-assumption cases in `lean_workbook_4274` share the same contradic
 This also exposes a defect in the mathematical example. Its recurrence is quantified over all natural n, including zero, with b mapping naturals to reals. The recorded input h₃ specializes the recurrence to b(0) = ((0 + 3)/(0 + 1)) b(0 − 1). Natural subtraction gives 0 − 1 = 0, hence b(0) = 3b(0). The other recorded input h₂ is b(0) = 1. Together they imply 1 = 3. Thus no function satisfies the stated hypotheses, and the conclusion holds vacuously. The binder counts locate the exact inputs; the elementary specialization explains their inconsistency. This verdict concerns one theorem statement in the sampled data. No additional Lean replay was performed here.
 
 An independent [Lean certificate](Recurrence4274.lean) now proves that the recurrence and the initial value imply False. Removing either premise makes the remaining premise satisfiable: the constant zero function satisfies the recurrence, and the constant one function satisfies the initial value. The [statement check](check-recurrence-4274.cjs) reconstructs the original type from the pinned compiled expression table, including the coercions, implicit instances and universe levels, then asks Lean to compare it by definitional equality with the statement using the certificate's recurrence. This avoids guessing coercion targets from printed Lean notation. The check passed under Lean 4.33.1 and Mathlib revision `0df444a360eaa60ab8c11dca51a86af692955474`. Lean reports only propext, Classical.choice and Quot.sound for the contradiction. Run `node research/proof-atlas/step-reading/check-recurrence-4274.cjs` from the repository root with that Lean on PATH and the existing Mathlib build on LEAN_PATH. The check establishes inconsistency directly from the hypotheses without loading the generated proof body into Lean.
+
+#### Contradictions inside proofs and consistency of theorem premises
+
+All five declarations with fully applied `Not.intro` in the 20-theorem sample now have an independent Lean check of joint satisfiability or inconsistency of their theorem premises. Each certificate's statement was compared by definitional equality to the reconstructed compiled type. Two declarations have the same cyclic system, so five declarations represent four distinct statements.
+
+| Declaration | Uses of the temporary assumption per negation | Theorem premises |
+| --- | --- | --- |
+| lean_workbook_4274 | 0, 0 | Inconsistent by specializing the recurrence at zero. |
+| lean_workbook_plus_39831 | 1, 1 | Inconsistent by positivity of the left side of the assumed equality. |
+| lean_workbook_plus_62755 | 1 in each of six branches | Satisfied by either real root, 1 or 3. |
+| lean_workbook_20418 | 4, 1, 3, 1, 3, 1 | Satisfied by both constant triples, zero and one half. |
+| lean_workbook_plus_6206 | 4, 2, 3, 1, 3, 1 | The same two triples satisfy this copy of the cyclic system. |
+
+For `39831` the compiled equality is a² + ab + (1 % (b² + ab + 1)) = 0 over positive integers a and b. Only 1 is the dividend. The modulus is positive, hence the remainder is nonnegative, while ab is positive. Lean proves False from the premises even though both interior contradictions use their local hypothesis. Thus counting uses alone misses an inconsistent statement; a single use also occurs in the satisfiable quadratic example. Keep binder-use edges and theorem-level satisfiability certificates as separate evidence. These five were selected by term shape and do not estimate prevalence across generated mathematics.
+
+[Lean controls](NegationControls.lean) · [Compiled statement comparison](check-negation-controls.cjs). Run the control checker with the same environment as the recurrence certificate.
