@@ -91,6 +91,7 @@ async function main() {
         const panel=page.locator('#pl-application-headers details').first();
         await panel.locator('summary').click();
         const row=panel.locator('ol > li').nth(2+index);
+        assert.equal(await row.getByRole('button',{name:/^Defining value/}).count(),0);
         const binderSlots=Array(index+1).fill(1);
         const use=call.concat(index===0?[0,1]:[1]);
         assert.deepEqual(A.binding(graph,{root:1,slots:use}).route.slots,binderSlots);
@@ -236,6 +237,17 @@ async function main() {
     assert.equal(await unique.count(),1);
     await unique.locator('[data-application-argument]').click();
     assert.deepEqual((await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot())).route,{root:1,slots:rewriteRoute.concat(1)});
+    const transportRoute=[1,1,1,1,1,1,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,0,1,1,1,1];
+    rewrite.searchParams.set('route','1:'+transportRoute.join('.'));
+    rewrite.hash='expr-3221';
+    await page.goto(rewrite.href);
+    const transport=page.locator('#pl-application-headers details').first();
+    await transport.locator('summary').click();
+    const fourth=transport.locator('ol > li').nth(3);
+    await fourth.getByRole('button',{name:/^Defining value/}).click();
+    const producer=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
+    assert.equal(producer.selected,1227);
+    assert.deepEqual(producer.route,{root:1,slots:[1,1,1,1,1,1,2,2,2,2,1]});
     assert.deepEqual(errors,[]);
     console.log('Four inspector paths and four folded canvas paths passed at both widths.');
   } finally {await browser.close();}

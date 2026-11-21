@@ -1028,6 +1028,14 @@
       link.title=link.dataset.argumentBinder;
       link.onclick=()=>selectOccurrence(binder.node,true,true,binder.route);
       row.append(link);
+      if(current.kind(binder.node)==='letE'){
+       const route={root:binder.route.root,slots:binder.route.slots.concat(1)};
+       const value=current.children(binder.node)[1];
+       const open=el('button','Defining value · '+(payload.declName||'_'));
+       open.type='button';open.title=A.path(current.data,route);
+       open.onclick=()=>selectOccurrence(value,true,true,route);
+       row.append(open);
+      }
      }
     }
     if(n===call && checked?.role==='proof'){

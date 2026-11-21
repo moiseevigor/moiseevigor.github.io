@@ -10,7 +10,8 @@ async function main() {
   const editions={};
   for (const item of inventory()) {
     const stats=editions[item.edition]??={calls:0, proofSlots:0, directBound:0, withText:0, ambiguous:0,
-      identical:0, differentTerm:0, examples:[]};
+      identical:0, differentTerm:0, binderKinds:{}, letChains:{}, distinctDefinitions:0, definitionsUsedMoreThanOnce:0, letExamples:[], examples:[]};
+    const definitions=new Map();
     await measure(item,null,(inputs,n,args,graph)=>{
       stats.calls++;
       const proof=inputs.filter(p=>p.role==='proof');
@@ -24,6 +25,27 @@ async function main() {
         const binder=atlas.binding(graph,route);
         assert(binder);
         assert.equal(atlas.walk(graph,binder.route),binder.node);
+        const kind=atlas.kinds[graph.kind[binder.node]];
+        stats.binderKinds[kind]=(stats.binderKinds[kind]||0)+1;
+        if(kind==='letE'){
+          const ownerPath=binder.route.slots.join('.');
+          definitions.set(ownerPath,(definitions.get(ownerPath)||0)+1);
+          let owner=binder,value,steps=0;
+          do{
+            const slots=owner.route.slots.concat(1);
+            assert(slots.length<route.slots.length || steps===0);
+            value={node:graph.children[owner.node][1],route:{root:1,slots}};
+            assert.equal(atlas.walk(graph,value.route),value.node);
+            steps++;
+            if(atlas.kinds[graph.kind[value.node]]!=='bvar')break;
+            const next=atlas.binding(graph,value.route);
+            assert(next && next.route.slots.length<owner.route.slots.length);
+            owner=next;
+          }while(atlas.kinds[graph.kind[owner.node]]==='letE');
+          stats.letChains[steps]=(stats.letChains[steps]||0)+1;
+          if(stats.letExamples.length<3)stats.letExamples.push({proof:item.record.name,arity:n,slot:input.position,
+            input:route,binder,value,steps});
+        }
         stats.directBound++;
       }
       stats.withText+=searchable.length;
@@ -42,6 +64,8 @@ async function main() {
         });
       }
     });
+    stats.distinctDefinitions+=definitions.size;
+    stats.definitionsUsedMoreThanOnce+=[...definitions.values()].filter(n=>n>1).length;
   }
   console.log(JSON.stringify(editions,null,2));
 }
