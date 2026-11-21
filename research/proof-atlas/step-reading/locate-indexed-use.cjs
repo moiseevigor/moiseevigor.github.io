@@ -11,8 +11,7 @@ module.exports=async function locate(cursor,index,binder,rank,countReferences){
   return cursor.run(()=>{
    if(g.neededScope[node]<=target)return 0n;
    if(BigInt(g.expanded[node])>BigInt(index.cutoff)){
-    const stored=index.weights[node+'/'+target];
-    return BigInt(stored??0);
+    return index.weightAt?index.weightAt(node,target):BigInt(index.weights[node+'/'+target]??0);
    }
    const result=countReferences(g,node,target,{useSupport:false,maxStates:index.cutoff});
    if(result.status!=='counted')throw Error('Local count unavailable');

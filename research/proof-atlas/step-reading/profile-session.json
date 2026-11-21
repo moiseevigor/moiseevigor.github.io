@@ -1,0 +1,158 @@
+{
+  "format": "ScopedWeightProfiles/1",
+  "storedWeights": 102579,
+  "nodeRows": 44836,
+  "profiles": 9167,
+  "packedGzip": 109817,
+  "originalGzip": 328612,
+  "full": 506140,
+  "series": [
+    {
+      "query": 1,
+      "binder": "a",
+      "rank": "1",
+      "bytes": 122928,
+      "uniqueBytes": 122928
+    },
+    {
+      "query": 2,
+      "binder": "a",
+      "rank": "40406",
+      "bytes": 169157,
+      "uniqueBytes": 166608
+    },
+    {
+      "query": 3,
+      "binder": "a",
+      "rank": "80812",
+      "bytes": 195546,
+      "uniqueBytes": 175182
+    },
+    {
+      "query": 4,
+      "binder": "b",
+      "rank": "1",
+      "bytes": 195546,
+      "uniqueBytes": 175182
+    },
+    {
+      "query": 5,
+      "binder": "b",
+      "rank": "45661",
+      "bytes": 279389,
+      "uniqueBytes": 221338
+    },
+    {
+      "query": 6,
+      "binder": "b",
+      "rank": "91321",
+      "bytes": 307800,
+      "uniqueBytes": 223360
+    },
+    {
+      "query": 7,
+      "binder": "c",
+      "rank": "1",
+      "bytes": 307800,
+      "uniqueBytes": 223360
+    },
+    {
+      "query": 8,
+      "binder": "c",
+      "rank": "48463",
+      "bytes": 384757,
+      "uniqueBytes": 223360
+    },
+    {
+      "query": 9,
+      "binder": "c",
+      "rank": "96925",
+      "bytes": 409155,
+      "uniqueBytes": 225400
+    },
+    {
+      "query": 10,
+      "binder": "h₀",
+      "rank": "1",
+      "bytes": 421510,
+      "uniqueBytes": 233555
+    },
+    {
+      "query": 11,
+      "binder": "h₀",
+      "rank": "21",
+      "bytes": 438363,
+      "uniqueBytes": 239301
+    },
+    {
+      "query": 12,
+      "binder": "h₀",
+      "rank": "41",
+      "bytes": 457017,
+      "uniqueBytes": 249556
+    },
+    {
+      "query": 13,
+      "binder": "h₁",
+      "rank": "1",
+      "bytes": 465355,
+      "uniqueBytes": 249556
+    },
+    {
+      "query": 14,
+      "binder": "h₁",
+      "rank": "21",
+      "bytes": 480059,
+      "uniqueBytes": 249556
+    },
+    {
+      "query": 15,
+      "binder": "h₁",
+      "rank": "41",
+      "bytes": 495031,
+      "uniqueBytes": 251846
+    },
+    {
+      "query": 16,
+      "binder": "h₂",
+      "rank": "1",
+      "bytes": 507948,
+      "uniqueBytes": 256608
+    },
+    {
+      "query": 17,
+      "binder": "h₂",
+      "rank": "19",
+      "bytes": 521886,
+      "uniqueBytes": 262173
+    },
+    {
+      "query": 18,
+      "binder": "h₂",
+      "rank": "38",
+      "bytes": 536858,
+      "uniqueBytes": 262173
+    },
+    {
+      "query": 19,
+      "binder": "h₃",
+      "rank": "1",
+      "bytes": 544508,
+      "uniqueBytes": 262173
+    },
+    {
+      "query": 20,
+      "binder": "h₃",
+      "rank": "17",
+      "bytes": 558441,
+      "uniqueBytes": 262173
+    },
+    {
+      "query": 21,
+      "binder": "h₃",
+      "rank": "34",
+      "bytes": 573413,
+      "uniqueBytes": 262173
+    }
+  ]
+}
