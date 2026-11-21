@@ -8,10 +8,15 @@ const {createHash} = require('node:crypto');
 const atlas = require('../../../public/js/proof-atlas-library-data');
 const baseline = require('./ai-call-destinations.json');
 
+const widthStudy = process.argv.includes('--compare-widths');
 const grouped = process.argv.includes('--whole-calls');
+const argumentLimits = [1, 2, 3, 4, 8, Infinity];
+const widthTotals = new Map(argumentLimits.map(limit => [limit, []]));
+const arityHistogram = {};
+let endpointCount = 0n;
 const {spine} = require('../../../public/js/proof-atlas-elimination');
 
-function wholeCallGraph(term) {
+function wholeCallGraph(term, limit = Infinity) {
   const children = term.children.map((fields, id) => {
     if (atlas.kinds[term.kind[id]] !== 'app') return fields;
     const {head,args} = spine(term,id);
@@ -22,6 +27,11 @@ function wholeCallGraph(term) {
       source = term.children[source][0];
     }
     assert.equal(source,head);
+    if (args.length > limit) {
+      let prefix = id;
+      for (let i = 0; i < limit; i++) prefix = term.children[prefix][0];
+      return [prefix,...args.slice(-limit)];
+    }
     return [head,...args];
   });
   return {children,kind:term.kind};
@@ -96,6 +106,26 @@ for (const owner of edition.declarations.filter(r => r.kind === 'theorem' && r.b
     sample = term.children[sample].reduce((a,b) => BigInt(term.expanded[a]) >= BigInt(term.expanded[b]) ? a : b);
   }
   const raw = unresolved(term,root);
+  if (widthStudy) {
+    const prior = baseline.proofs.find(p => p.name === owner.name);
+    assert.equal(prior.indexSha256, owner.indexSha256);
+    assert.equal(raw.calls.reduce((a,b) => a+b,0n),BigInt(prior.maximal));
+    endpointCount += BigInt(prior.maximal);
+    raw.calls.forEach((weight,id) => {
+      if (!weight) return;
+      const arity = spine(term,id).args.length;
+      arityHistogram[arity] = (arityHistogram[arity] || 0n) + weight;
+    });
+    for (const limit of argumentLimits) {
+      const graph = wholeCallGraph(term,limit);
+      const {curve} = unresolved(graph,root,raw.calls);
+      assert.deepEqual(unresolved(graph,sample).curve,enumerate(graph,sample));
+      if (limit === 1) assert.deepEqual(curve,raw.curve);
+      const aggregate = widthTotals.get(limit);
+      curve.forEach((count,i) => { aggregate[i] = (aggregate[i] || 0n) + count; });
+    }
+    continue;
+  }
   const graph = grouped ? wholeCallGraph(term) : term;
   const counts = grouped ? unresolved(graph,root,raw.calls).curve : raw.curve;
   assert.deepEqual(unresolved(graph,sample).curve,enumerate(graph,sample));
@@ -111,4 +141,11 @@ for (const owner of edition.declarations.filter(r => r.kind === 'theorem' && r.b
   counts.forEach((n,i) => { totals[i] = (totals[i] || 0n) + n; });
   proofs.push({name:owner.name,indexSha256:owner.indexSha256,endpoints:prior.maximal,unresolved:counts});
 }
-console.log(JSON.stringify({edition:edition.id,...(grouped ? {unit:'whole-call port or non-application field'} : {}),totals,proofs},(_,v) => typeof v === 'bigint' ? v.toString() : v,2));
+const comparison = [...widthTotals].map(([limit,curve]) => ({
+  argumentsPerGroup:Number.isFinite(limit) ? limit : 'all',
+  extraEnclosingSteps:curve.reduce((sum,n) => sum+n,0n) - widthTotals.get(Infinity).reduce((sum,n) => sum+n,0n),
+  depthsAtPercent:[50,90,99,100].map(percent => curve.findIndex(n => (endpointCount-n)*100n >= BigInt(percent)*endpointCount))
+}));
+const report = widthStudy ? {edition:edition.id,endpointCount,arityHistogram,comparison} :
+  {edition:edition.id,...(grouped ? {unit:'whole-call port or non-application field'} : {}),totals,proofs};
+console.log(JSON.stringify(report,(_,v) => typeof v === 'bigint' ? v.toString() : v,2));

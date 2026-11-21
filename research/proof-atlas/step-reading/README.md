@@ -91,3 +91,20 @@ Treat a complete application as one call with a function port and an ordered por
 The change helps most at greater depth. One whole-call port still leaves 16,069,418 occurrences ambiguous. Grouping shortens an exact navigation path while retaining the need to carry the selected occurrence. These are logical steps in a representation. The experiment does not compare screen area, reading time, or comprehension.
 
 [Per-proof grouped curves](ai-whole-call-depth.json). Reproduce with `node research/proof-atlas/step-reading/context-depth.cjs --whole-calls`. For each proof the checker compares endpoint multiplicities row by row before and after grouping, replays every argument and head against the original function spine, and compares the grouped depth curve with explicit enumeration for a bounded subterm. The ungrouped command still reproduces the earlier report byte for byte.
+
+### How many argument ports must a group show?
+
+At a call, expose its last *k* arguments in order and give the remaining function prefix one separate port. Following the prefix repeats the rule. Thus a group with *k* = 3 has at most four outgoing choices. This groups consecutive fields without discarding implicit arguments. The unbounded case exposes every argument at once and reaches 18 ports in this sample.
+
+| Argument limit | Median depth | 90th percentile | 99th percentile | Maximum | Mean extra steps vs. unbounded |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 13 | 25 | 40 | 70 | 5.27 |
+| 2 | 10 | 18 | 27 | 40 | 1.40 |
+| 3 | 9 | 16 | 25 | 40 | 0.30 |
+| 4 | 9 | 16 | 25 | 40 | 0.16 |
+| 8 | 9 | 16 | 25 | 40 | 0.02 |
+| All | 9 | 16 | 25 | 40 | 0 |
+
+Three is the smallest tested integer limit matching the four reported depth thresholds of whole calls. The full distributions differ. Summing unresolved counts over depths gives the total minimum identifying depth across occurrences; dividing its difference by 16,240,679 gives the final column. This comparison measures an explicit width/depth tradeoff for this AI sample. Port labels, layout and retrieval time remain untested.
+
+[Arity counts and grouped results](ai-call-widths.json). Reproduce with `node research/proof-atlas/step-reading/context-depth.cjs --compare-widths`. Each grouping preserves all endpoint multiplicities row by row and is checked by explicit traversal on a bounded subterm of every proof.

@@ -1,0 +1,83 @@
+{
+  "edition": "goedel-sample-4331",
+  "endpointCount": "16240679",
+  "arityHistogram": {
+    "1": "743138",
+    "2": "11597200",
+    "3": "2088934",
+    "4": "63787",
+    "5": "31178",
+    "6": "1644570",
+    "7": "19787",
+    "8": "17710",
+    "9": "3693",
+    "10": "5980",
+    "11": "12696",
+    "12": "11428",
+    "13": "25",
+    "14": "434",
+    "17": "119"
+  },
+  "comparison": [
+    {
+      "argumentsPerGroup": 1,
+      "extraEnclosingSteps": "85644989",
+      "depthsAtPercent": [
+        13,
+        25,
+        40,
+        70
+      ]
+    },
+    {
+      "argumentsPerGroup": 2,
+      "extraEnclosingSteps": "22704278",
+      "depthsAtPercent": [
+        10,
+        18,
+        27,
+        40
+      ]
+    },
+    {
+      "argumentsPerGroup": 3,
+      "extraEnclosingSteps": "4901724",
+      "depthsAtPercent": [
+        9,
+        16,
+        25,
+        40
+      ]
+    },
+    {
+      "argumentsPerGroup": 4,
+      "extraEnclosingSteps": "2626529",
+      "depthsAtPercent": [
+        9,
+        16,
+        25,
+        40
+      ]
+    },
+    {
+      "argumentsPerGroup": 8,
+      "extraEnclosingSteps": "388917",
+      "depthsAtPercent": [
+        9,
+        16,
+        25,
+        40
+      ]
+    },
+    {
+      "argumentsPerGroup": "all",
+      "extraEnclosingSteps": "0",
+      "depthsAtPercent": [
+        9,
+        16,
+        25,
+        40
+      ]
+    }
+  ]
+}
