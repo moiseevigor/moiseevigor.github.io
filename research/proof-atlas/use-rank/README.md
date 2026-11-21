@@ -529,3 +529,9 @@ In the left equality case of `lean_workbook_20418`, the four domains named h₀,
 Run `node research/proof-atlas/use-rank/check-ai-local-flow.cjs --consumers` from the repository root to emit each binder, its value row, and every receiving field or application slot with occurrence routes and the declaration index hash. The traversal resolves each reference against the binding stack, compares it with the source binder lookup, and compares per-definition totals with the compiled reference index.
 
 Across 20 proof bodies (82,340,980 expanded occurrences), seven contain local definitions. Of 48 definition occurrences, 33 have zero explicit uses, six have one, and nine have multiple uses (maximum 14). Of 56 explicit uses, 55 are direct arguments to named constants. One reference occupies a let body. Some named calls construct propositions: the three inputs to `Eq` in `lean_workbook_plus_62755` cannot be presented as three deductions. This supports showing a selectable set of exact uses, including an empty set, while retaining each destination’s role. No occurrence-level typing or reader comprehension was measured by this census.
+
+### Comparing the two sides of an equality
+
+In the 20 AI proof bodies, 3,909 of 16,586 fully applied Eq occurrences have different operand rows. A comparison in constructor-field order locates a difference inside the operands for 3,307 occurrences, with maximum relative depth 13. The other 602 differ at the operand root. The 512-pair budget suffices for every case in this sample. The witness records a constructor or payload difference in the stored expressions. It makes no claim about definitional equality, the proof of the equality or which difference a mathematician would emphasize.
+
+Run `node research/proof-atlas/use-rank/check-equality-sides.cjs` to recompute expanded counts and compare the bounded traversal with a recursive control.

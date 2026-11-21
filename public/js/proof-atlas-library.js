@@ -202,6 +202,23 @@
    comparison.append(sourceLink('Left side · '+label(sides[0].node),sides[0]),' = ',
     sourceLink('Right side · '+label(sides[1].node),sides[1]));
    target.append(comparison);
+   const compare=window.ProofAtlasOmittedReferences?.firstStructuralDifference;
+   if(compare && sides[0].node!==sides[1].node){
+    const difference=compare(owner.data,sides[0].node,sides[1].node);
+    if(difference.slots){
+     const detail=el('p');
+     detail.append('First difference in '+(difference.status==='constructor'?'constructor':'constructor data')+' · ');
+     sides.forEach((side,index)=>{
+      const route={root:side.route.root,slots:side.route.slots.concat(difference.slots)};
+      const node=index?difference.right:difference.left;
+      if(index)detail.append(' / ');
+      detail.append(sourceLink((index?'Right':'Left')+' · '+label(node),{route,node}));
+     });
+     target.append(detail);
+    }else{
+     comparison.append(difference.status==='limit'?' · Comparison limit reached':' · Matching expression structure');
+    }
+   }
   }
   if(binding && window.ProofAtlasOmittedReferences){
    const destination=window.ProofAtlasOmittedReferences.resultDestination(owner.data,{node:i,route:nextRoute});

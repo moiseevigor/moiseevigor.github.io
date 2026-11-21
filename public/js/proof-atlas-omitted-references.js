@@ -5,6 +5,28 @@
  const A=local?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData;
  const notation=local?require('./proof-atlas-type-notation'):host.ProofAtlasTypeNotation;
  const E=local?require('./proof-atlas-elimination'):host.ProofAtlasElimination;
+ // Compare literal expression records in field order, skipping shared subtrees.
+ function firstStructuralDifference(data,left,right){
+  const pending=[{left,right,slots:[]}],seen=new Set();
+  while(pending.length){
+   const pair=pending.pop();
+   if(pair.left===pair.right)continue;
+   const key=pair.left+':'+pair.right;
+   if(seen.has(key))continue;
+   if(seen.size===512)return {status:'limit'};
+   seen.add(key);
+   const kind=data.kind[pair.left];
+   if(kind!==data.kind[pair.right])return {...pair,status:'constructor'};
+   if(A.payloadKey(kind,data.payloads[pair.left])!==A.payloadKey(kind,data.payloads[pair.right]))
+    return {...pair,status:'payload'};
+   const children=data.children[pair.left];
+   for(let slot=children.length-1;slot>=0;slot--){
+    const l=children[slot],r=data.children[pair.right][slot];
+    if(l!==r)pending.push({left:l,right:r,slots:pair.slots.concat(slot)});
+   }
+  }
+  return {status:'identical'};
+ }
  function applicationAtUse(data,use){
   const {root,slots}=use.route,nodes=[data.roots[root]];
   for(const slot of slots)nodes.push(data.children[nodes.at(-1)][slot]);
@@ -207,6 +229,6 @@
   };
   return panel;
  }
- const api={inspect,control,applicationAtUse,resultDestination};
+ const api={inspect,control,firstStructuralDifference,applicationAtUse,resultDestination};
  if(local)module.exports=api;else host.ProofAtlasOmittedReferences=api;
 })(typeof window==='undefined'?globalThis:window);

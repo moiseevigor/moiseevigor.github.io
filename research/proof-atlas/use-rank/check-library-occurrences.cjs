@@ -93,6 +93,17 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
     await page.locator('#pl-expression h3').filter({hasText:' · e1968'}).waitFor();
     assert.equal(new URL(page.url()).searchParams.get('route'),eqRoute.root+':'+path.join('.'));
    }
+   const nestedEq=atlas.routes(eqData).route(14452);
+   for(const [side,prefix,node] of [['Left',[0,1],330],['Right',[1],6]]){
+    await page.goto('http://localhost/projects/proof-atlas/library/?edition='+aiEdition.id+'&proof='+eqProof.name+'&route='+nestedEq.root+':'+nestedEq.slots.join('.')+'#expr-14452');
+    const detail=page.locator('#pl-expression p').filter({hasText:'First difference in constructor data'});
+    await detail.getByRole('link',{name:new RegExp('^'+side+' · ')}).click();
+    const path=nestedEq.slots.concat(prefix,0,0,0);
+    assert.equal(atlas.walk(eqData,{root:nestedEq.root,slots:path}),node);
+    await page.locator('#pl-expression h3').filter({hasText:' · e'+node}).waitFor();
+    assert.equal(new URL(page.url()).searchParams.get('route'),nestedEq.root+':'+path.join('.'));
+    assert.equal(new URL(page.url()).hash,'#expr-'+node);
+   }
    const inputs=aiEdition.declarations.flatMap(record=>{
     const packet=JSON.parse(fs.readFileSync('public/data/proof-atlas/input-roles/'+record.indexSha256+'.json'));
     return packet.entries.map(entry=>({entry,record}));
