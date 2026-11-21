@@ -103,6 +103,49 @@
   if(new Set(inputs.map(input=>input.binder)).size<2)return null;
   return {name:data.payloads[node].name,head:{node,route:{root:1,slots:slots.concat(Array(args.length).fill(0))}},inputs};
  }
+ function resultFlow(data,site){
+  const refs=common?require('./proof-atlas-omitted-references'):host.ProofAtlasOmittedReferences;
+  const count=common?require('./proof-atlas-recursive-inputs').countReferences:host.ProofAtlasRecursiveInputs.countReferences;
+  const receiver=refs.applicationAtUse(data,site,{includePeers:false}),value=receiver?.call||site;
+  const result={receiver};
+  if(receiver?.label==='Or.casesOn' && data.kind[receiver.head.node]===4 && receiver.slot===4 && receiver.arity===6){
+   function argument(i){
+    const route={root:value.route.root,slots:value.route.slots.concat(Array(6-i).fill(0),1)};
+    return {route,node:A.walk(data,route)};
+   }
+   function condition(at,depth){
+    const [fn,right]=data.children[at.node];
+    if(depth<3 && data.kind[at.node]===5 && data.kind[fn]===5){
+     const [head,left]=data.children[fn];
+     if(data.kind[head]===4 && data.payloads[head].name==='And'){
+      const part=(node,path)=>condition({node,route:{root:at.route.root,slots:at.route.slots.concat(path)}},depth+1);
+      return '('+part(left,[0,1])+' ∧ '+part(right,[1])+')';
+     }
+    }
+    const t=formula(data,at);return t?caption(t):'e'+at.node;
+   }
+   result.cases=[1,2].map(i=>{
+    const domain=argument(i);
+    return {domain,label:condition(domain,0),branch:argument(i+4)};
+   });
+  }
+  if(value.route.slots.at(-1)!==1)return result;
+  const route={root:value.route.root,slots:value.route.slots.slice(0,-1)},node=A.walk(data,route);
+  if(data.kind[node]!==8 || data.children[node][1]!==value.node)return result;
+  const type={node:data.children[node][0],route:{root:route.root,slots:route.slots.concat(0)}};
+  const t=formula(data,type,6);
+  result.local={name:data.payloads[node].declName||'local result',site:{node,route},type,label:t?caption(t):'e'+type.node};
+  const found=count(data,data.children[node][2],0,{maxStates:8192,maxWork:16384,useSupport:false,firstIfPresent:true});
+  if(found.status!=='counted')return result;
+  result.local.references=found.occurrences;
+  if(found.witness){
+   const use={node:found.witness.node,route:{root:route.root,slots:route.slots.concat(2,found.witness.slots)}};
+   const binding=A.binding(data,use.route);
+   if(binding?.node!==node || String(binding.route.slots)!==String(route.slots))throw Error('Local result binder mismatch');
+   result.local.use=use;result.local.next=refs.applicationAtUse(data,use,{includePeers:false});
+  }
+  return result;
+ }
  function mount(container,data,at,link){
   const el=(tag,text)=>{const e=document.createElement(tag);if(text)e.textContent=text;return e;};
   const receiving=hypothesisInputs(data,at);
@@ -115,6 +158,33 @@
     row.append(link(input.label,input.binder.domain),' → ',link(input.binder.name+' · argument '+input.slot,input.site));
     branches.append(row);
    }
+   const output=el('details'),trail=el('div');
+   output.append(el('summary','Follow the result'),trail);panel.append(output);
+   output.ontoggle=()=>{
+    if(!output.open || trail.childNodes.length)return;
+    const flow=resultFlow(data,at),c=flow.receiver;
+    if(c){
+     const line=el('p');line.append('Used by ',link(c.label,c.call),' · '+(c.slot?'argument '+c.slot+' of '+c.arity:'function position'));
+     trail.append(line);
+    }
+    if(flow.cases){
+     const cases=el('ul');cases.className='pl-reference-tree';
+     flow.cases.forEach((c,i)=>{
+      const row=el('li');row.append(link(c.label,c.domain),' → ',link(i?'Right case':'Left case',c.branch));cases.append(row);
+     });
+     trail.append(cases);
+    }
+    if(flow.local){
+     const l=flow.local,line=el('p');line.append(link(l.name,l.site),' : ',link(l.label,l.type));trail.append(line);
+     if(l.references!==undefined){
+      const next=el('p',l.references+' local reference'+(l.references==='1'?'':'s'));
+      if(l.use)next.append(' · ',link('First use',l.use));
+      if(l.next)next.append(' → ',link(l.next.label,l.next.call));
+      trail.append(next);
+     }
+    }
+    if(!c && !flow.local)trail.append('No immediate receiving application or local value at this occurrence.');
+   };
    container.append(panel);
   }
   const {focus,binders}=statement(data,at);
@@ -205,5 +275,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={formula,statement,caption,hypothesisInputs};else host.ProofAtlasArithmetic={mount};
+ if(common)module.exports={formula,statement,caption,hypothesisInputs,resultFlow};else host.ProofAtlasArithmetic={mount};
 })(typeof window==='undefined'?globalThis:window);

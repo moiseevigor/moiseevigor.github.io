@@ -2,7 +2,7 @@
 const fs=require('node:fs'),z=require('node:zlib'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 const A=require('../../../public/js/proof-atlas-library-data');
 const {spine}=require('../../../public/js/proof-atlas-elimination');
-const {formula,statement,caption,hypothesisInputs}=require('../../../public/js/proof-atlas-arithmetic');
+const {formula,statement,caption,hypothesisInputs,resultFlow}=require('../../../public/js/proof-atlas-arithmetic');
 const ports=require('./distinct-call-ports.cjs');
 global.window={};require('../../../public/data/proof-atlas/goedel-sample-manifest');
 const arities={'HPow.hPow':6,'HMul.hMul':6,'HSub.hSub':6,'HAdd.hAdd':6,'HDiv.hDiv':6,Eq:3,Ne:3,'LE.le':4,'LT.lt':4,'Real.sqrt':1,abs:4},counts={},examples={};
@@ -96,6 +96,13 @@ for(const edition of window.PROOF_ATLAS_LIBRARY.editions){
  assert.equal(sameSign.size,1);
  const callRoute=JSON.parse([...sameSign][0]),call={node:A.walk(g,callRoute),route:callRoute};
  const receiving=hypothesisInputs(g,call);
+ const flow=resultFlow(g,call);
+ assert.deepEqual([flow.receiver.label,flow.receiver.slot,flow.receiver.arity],['Or.casesOn',4,6]);
+ assert.equal(flow.local.name,'hsum');assert.equal(flow.local.references,'1');
+ assert.equal(flow.local.next.label,'congrArg');assert.equal(flow.local.next.slot,6);
+ for(const site of [flow.receiver.call,flow.local.site,flow.local.type,flow.local.use,flow.local.next.call])
+  assert.equal(A.walk(g,site.route),site.node);
+ assert.deepEqual(A.binding(g,flow.local.use.route).route,flow.local.site.route);
  assert.equal(receiving.name,'JacobiData.T1_T2_same_sign');
  assert.deepEqual(receiving.inputs.map(input=>input.slot),[3,4,5,6]);
  for(const [i,input] of receiving.inputs.entries()){
