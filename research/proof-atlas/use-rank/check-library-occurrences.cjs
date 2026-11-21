@@ -125,9 +125,29 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
      if(ctor==='Or.inl'){
       assert.equal(receiver.label,'Eq.symm');assert.equal(dest?.label,'Eq.ndrec');assert.equal(dest.slot,6);
       await branch.getByText('Arguments of Eq.ndrec',{exact:true}).click();
-      const positions=branch.locator('ol li');
+      const positions=branch.locator('ol > li');
       assert.equal(await positions.count(),10);
       await branch.getByRole('link',{name:'7 references to the motive input',exact:true}).waitFor();
+      const motiveDetails=branch.getByText('Where the motive input occurs',{exact:true});
+      await motiveDetails.click();
+      const regions=motiveDetails.locator('..').locator('ul > li');
+      await regions.first().waitFor();
+      assert.equal(await regions.count(),5);
+      const motive=require('../../../public/js/proof-atlas-application-ports').sourceInput(term,dest.call,3);
+      const independent=require('./model.cjs').open(term,motive.route);
+      for(let j=0;j<5;j++){
+       const row=regions.nth(j),domain=row.getByRole('link').first();
+       const u=new URL(await domain.evaluate(a=>a.href));
+       const slots=motive.route.slots.concat(1,Array(j).fill(1),j<4?[0]:[]);
+       assert.equal(u.searchParams.get('route'),'1:'+slots.join('.'));
+       const n=independent.interval({root:1,slots}).count;
+       assert.equal(n,BigInt([1,2,1,1,2][j]));assert((await row.innerText()).includes(' · '+n+(n===1n?' use':' uses')));
+       if(j<4){
+        const actual=require('../../../public/js/proof-atlas-application-ports').sourceInput(term,dest.call,7+j);
+        const arg=new URL(await row.getByRole('link',{name:'Supplied argument '+(7+j)}).evaluate(a=>a.href));
+        assert.equal(arg.searchParams.get('route'),'1:'+actual.route.slots.join('.'));assert.equal(arg.hash,'#expr-'+actual.node);
+       }
+      }
       for(const [k,label] of ['α','a','motive','m','b','h',null,null,null,null].entries()){
        const title=label?label+' · argument '+(k+1):'Result applied to argument '+(k+1);
        const u=new URL(await positions.nth(k).getByRole('link',{name:title,exact:true}).evaluate(a=>a.href));

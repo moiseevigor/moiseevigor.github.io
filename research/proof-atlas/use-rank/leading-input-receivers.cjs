@@ -222,11 +222,20 @@ function audit(record) {
                   const next=step.call;
                   if(next)assert.deepEqual(sourceInput(data,next.call,next.slot),receiving.call);
                   if(next?.label==='Eq.ndrec' && receiving.label==='Eq.symm' && next.slot===6){
+                    const sig=window.PROOF_ATLAS_CORE_SIGNATURES.entries.find(s=>s.name==='Eq.ndrec');
+                    assert.equal(roles.resultMotiveSlot(sig),3);
                     const motive=sourceInput(data,next.call,3);
                     if(data.kind[motive.node]===6){
                       const body=data.children[motive.node][1],uses=countReferences(data,body,0);
                       assert.equal(uses.status,'counted');
-                      if(process.env.ATLAS_FORMAL_EXAMPLE && !splitStats.transportExample)splitStats.transportExample={proof:record.name,motiveRow:motive.node,argumentName:data.payloads[motive.node].binderName,bodyKind:A.kinds[data.kind[body]],uses:uses.occurrences};
+                      const regions=require('../../../public/js/proof-atlas-recursive-inputs').motiveRegions(data,motive);
+                      const tally=require('./model.cjs').open(data,motive.route);
+                      for(const r of regions){
+                        assert.equal(A.walk(data,r.route),r.node);
+                        assert.equal(r.count.occurrences,String(tally.interval(r.route).count));
+                      }
+                      assert.equal(regions.reduce((n,r)=>n+BigInt(r.count.occurrences),0n),BigInt(uses.occurrences));
+                      if(process.env.ATLAS_FORMAL_EXAMPLE && !splitStats.transportExample)splitStats.transportExample={proof:record.name,regions:regions.map(r=>[r.label,r.count.occurrences]),motiveRow:motive.node,argumentName:data.payloads[motive.node].binderName,bodyKind:A.kinds[data.kind[body]],uses:uses.occurrences};
                     }
                   }
                   const key=record.indexSha256+'@'+use.route.root+':'+use.route.slots.join('.');

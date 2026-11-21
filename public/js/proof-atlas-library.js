@@ -316,10 +316,27 @@
                    const node=A.walk(owner.data,path),param=sig.binders[k-1],li=el('li');
                    li.append(link(param?param.name+' · argument '+k:'Result applied to argument '+k,url(owner.record.name,node,path)));
                    if(k===call.slot)li.append(' · receives '+receiver.label);
-                   if(param?.name==='motive' && owner.data.kind[node]===6){
+                   if(k===window.ProofAtlasRoleOccurrences.resultMotiveSlot(sig) && owner.data.kind[node]===6){
                     const body=owner.data.children[node][1],count=window.ProofAtlasRecursiveInputs.countReferences(owner.data,body,0);
                     if(count.status==='counted')li.append(' · ',link(number(count.occurrences)+' references to the motive input',
                      url(owner.record.name,body,{root:path.root,slots:path.slots.concat(1)})));
+                    const coverage=el('details'),regions=el('ul');
+                    coverage.append(el('summary','Where the motive input occurs'),regions);li.append(coverage);
+                    coverage.ontoggle=()=>{
+                     if(!coverage.open || regions.children.length)return;
+                     const parts=window.ProofAtlasRecursiveInputs.motiveRegions(owner.data,{node,route:path});
+                     parts.forEach((part,j)=>{
+                      const row=el('li');
+                      row.append(link(part.label,url(owner.record.name,part.node,part.route)),
+                       part.count.status==='counted'?' · '+number(part.count.occurrences)+(part.count.occurrences==='1'?' use':' uses'):' · count unavailable');
+                      const applied=sig.arity+j+1;
+                      if(j<parts.length-1 && applied<=call.arity){
+                       const route={root:path.root,slots:call.call.route.slots.concat(Array(call.arity-applied).fill(0),1)};
+                       row.append(' · ',link('Supplied argument '+applied,url(owner.record.name,A.walk(owner.data,route),route)));
+                      }
+                      regions.append(row);
+                     });
+                    };
                    }
                    args.append(li);
                   }

@@ -73,6 +73,23 @@
   return {...result,witness:{node,slots}};
 
  }
+ // Split a unary motive's body along its literal forall prefix.
+ function motiveRegions(data,motive){
+  demand(data.kind[motive.node]===6,'expected lambda motive');
+  const regions=[],root=motive.route.root;
+  let node=data.children[motive.node][1],slots=motive.route.slots.concat(1),depth=0;
+  function add(label,node,slots){
+   const count=countReferences(data,node,depth);
+   regions.push({label,node,route:{root,slots},index:depth,count});
+  }
+  while(data.kind[node]===7 && depth<64){
+   const name=data.payloads[node].binderName;
+   add('Domain '+(depth+1)+(name && name!=='_'?' · '+name:''),data.children[node][0],slots.concat(0));
+   node=data.children[node][1];slots=slots.concat(1);depth++;
+  }
+  add(data.kind[node]===7?'Remaining type':'Conclusion',node,slots);
+  return regions;
+ }
  function describe(t,r,data,frames){
   return Array.from({length:r.inputCount},(_,j)=>{const input=role(t,r,j+1),source=frames[j]?.binder||null,complete=frames.length===r.inputCount;
    return{...input,sourceBinder:source,sourceBodyReferences:complete?countReferences(data,frames.at(-1).body.node,r.inputCount-1-j):{status:'unavailable',reason:'No complete source lambda prefix'},guarantee:'Input role belongs to the compiled reduction rule. A source binder is an exact minor-premise input, not a new recursive call in the proof packet.'};});
@@ -115,5 +132,5 @@
   }
   select.onchange=()=>{selected=Number(select.value);drawFlow();};canvas.onpointerdown=e=>{suppress=false;drag={x:e.clientX,y:e.clientY,start:{...pan},moved:false};};canvas.onpointermove=e=>{if(!drag)return;const scale=width/canvas.getBoundingClientRect().width/zoom,dx=e.clientX-drag.x,dy=e.clientY-drag.y;drag.moved=drag.moved||Math.hypot(dx,dy)>4;if(drag.moved){pan={x:drag.start.x+dx*scale,y:drag.start.y+dy*scale};viewport();}};canvas.onpointerup=()=>{suppress=!!drag?.moved;drag=null;};canvas.onpointerleave=()=>{drag=null;};const observer=new ResizeObserver(()=>{if(Math.abs(Math.max(260,canvas.clientWidth||600)-width)>1)render();});observer.observe(canvas);render();return{getScene:()=>scene,getInput:()=>p.rule.inputCount?role(p.trace,p.rule,selected):null,focus,dispose:()=>{disposed=true;observer.disconnect();container.replaceChildren();}};
  }
- const api={mutualRecursors:true,role,describe,countReferences,prepare,create,validate,mount,mountGraph};if(node)module.exports=api;else host.ProofAtlasRecursiveInputs=api;
+ const api={mutualRecursors:true,role,describe,countReferences,motiveRegions,prepare,create,validate,mount,mountGraph};if(node)module.exports=api;else host.ProofAtlasRecursiveInputs=api;
 })(typeof window==='undefined'?globalThis:window);
