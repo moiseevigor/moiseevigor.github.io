@@ -198,3 +198,15 @@ The [corpus check](check-ranked-corpus.cjs) covers the literal leading lambda pa
 In the AI sample, 58 parameters returned the same expression number at two or more distinct sampled ranks. All selected paths resolved to the original binder. This tests occurrence identity through sharing. Human interpretation of a folded step requires separate evaluation. [Machine-readable counts](ranked-corpus.json). Reproduce with `node research/proof-atlas/step-reading/check-ranked-corpus.cjs` from the repository root.
 
 The library reader exposes direct ordinal selection under **Show binding references** when the bounded source count succeeds. Enter a one-based reference number to open either the variable occurrence or the expression receiving it. The existing sequential navigation remains available. In the [AI example](https://moiseevigor.github.io/projects/proof-atlas/library/?edition=goedel-sample-4331&proof=lean_workbook_plus_6206&route=1%3A1.1#expr-91421), reference 48,463 of 96,925 is e159 in argument 5 of `HPow.hPow`. The local browser check also followed reference 5 in the Riccati example to its own occurrence of e382.
+
+#### Coverage under the interactive reader’s limits
+
+Running the reader’s binding panel model on the same theorem bodies gives two different coverage measures. Counting parameters measures how often a selected binder can be inspected. Weighting each parameter by its number of uses measures how much of the expanded proof remains accessible by reference number.
+
+| Edition | Parameters counted | Uses under counted parameters | Sampled reader paths matched |
+|---|---:|---:|---:|
+| Published SE(2) | 2,076 / 2,076 | 697,014 / 697,014 | 4,958 / 4,958 |
+| Working SE(2) | 4,015 / 4,022 | 2,813,605 / 7,094,467 | 9,461 / 9,482 |
+| Goedel AI sample | 93 / 93 | 692,587 / 692,587 | 250 / 250 |
+
+Seven parameters in `JacobiConcrete.AmplitudeChart.midpoint_polynomial` exhaust the 65,536-state counting budget. They account for 60.34% of the working snapshot's leading-parameter uses. These references remain in the compiled term. The numbered lookup is unavailable for their binders. Each available first, middle and last address was checked against the expanded traversal. Counts cover literal leading parameters of theorem bodies, including references inside later parameter domains. The test invokes the reader model in Node and does not measure browser latency.

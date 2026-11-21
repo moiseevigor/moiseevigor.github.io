@@ -5,6 +5,8 @@ const path = require('node:path');
 const {gunzipSync} = require('node:zlib');
 const {createHash} = require('node:crypto');
 const atlas = require('../../../public/js/proof-atlas-library-data');
+const bindingUses = require('../../../public/js/proof-atlas-binding-uses');
+const {countReferences} = require('../../../public/js/proof-atlas-recursive-inputs');
 const ranked = require('./ranked-binder-uses.cjs');
 global.window = {};
 require('../../../public/data/proof-atlas/library-manifest');
@@ -78,6 +80,8 @@ function checkOrdinals(term, samples, totals) {
 function census(edition) {
   const result = {edition:edition.id,bodies:0,withoutLeadingLambda:0,parameters:0,unused:0,
     uses:0n,verifiedRoutes:0,sharedIndexAtSampledRanks:0,largestUseCount:0n};
+  const reader = {counted:0,largestStates:0,verifiedRoutes:0,unavailable:[]};
+  result.reader = reader;
   for (const owner of edition.declarations.filter(r=>r.bodyAvailable && r.kind==='theorem')) {
     const bytes = gunzipSync(fs.readFileSync(path.join(__dirname,'../../..',owner.indexFile)));
     assert.equal(createHash('sha256').update(bytes).digest('hex'),owner.indexSha256);
@@ -98,6 +102,17 @@ function census(edition) {
       const route = {root:1,slots:Array(i).fill(1)};
       const index = ranked(term,route);
       assert.equal(index.total,expected);
+      const scene = bindingUses.describe(term,owner,route);
+      const coverage = scene.references;
+      if (coverage.status === 'counted') {
+        assert.equal(BigInt(coverage.occurrences),expected);
+        reader.counted++;
+        reader.largestStates = Math.max(reader.largestStates,coverage.states);
+      } else {
+        assert.equal(coverage.status,'unavailable');
+        reader.unavailable.push({name:owner.name,indexSha256:owner.indexSha256,
+          parameter:i+1,uses:expected,reason:coverage.reason,states:coverage.states});
+      }
       result.parameters++;
       result.uses += expected;
       if (!expected) {
@@ -110,6 +125,13 @@ function census(edition) {
       let previous;
       for (const rank of new Set([0n,expected/2n,expected-1n])) {
         const entry = index.select(rank);
+        if (coverage.status === 'counted') {
+          const selection = countReferences(term,scene.body.node,0,{...scene.budget,ordinal:rank+1n});
+          assert.equal(selection.status,'counted');
+          assert.equal(selection.witness.node,entry.node);
+          assert.deepEqual(scene.body.route.slots.concat(selection.witness.slots),entry.route.slots);
+          reader.verifiedRoutes++;
+        }
         assert.equal(atlas.walk(term,entry.route),entry.node);
         assert.deepEqual(atlas.binding(term,entry.route),{node:binders[i],route});
         // Field slots range from 0 to 2. String order agrees with field order.
