@@ -1,0 +1,226 @@
+{
+  "counts": {
+    "bodyBinder": 594,
+    "returnedConstant": 113,
+    "returnedProjection": 20,
+    "constructor": 20
+  },
+  "returned": [
+    {
+      "name": "Eq.ndrec",
+      "slot": 7,
+      "occurrences": 1,
+      "head": "Eq.rec",
+      "headKind": "const",
+      "receivingSlot": 7
+    },
+    {
+      "name": "Eq.ndrec",
+      "slot": 8,
+      "occurrences": 1,
+      "head": "Eq.rec",
+      "headKind": "const",
+      "receivingSlot": 8
+    },
+    {
+      "name": "Eq.ndrec",
+      "slot": 9,
+      "occurrences": 1,
+      "head": "Eq.rec",
+      "headKind": "const",
+      "receivingSlot": 9
+    },
+    {
+      "name": "Eq.ndrec",
+      "slot": 10,
+      "occurrences": 1,
+      "head": "Eq.rec",
+      "headKind": "const",
+      "receivingSlot": 10
+    },
+    {
+      "name": "Iff.mpr",
+      "slot": 4,
+      "occurrences": 17,
+      "head": null,
+      "headKind": "proj",
+      "receivingSlot": 1
+    },
+    {
+      "name": "Mathlib.Tactic.Linarith.sub_neg_of_lt",
+      "slot": 7,
+      "occurrences": 9,
+      "head": "sub_neg_of_lt",
+      "headKind": "const",
+      "receivingSlot": 7
+    },
+    {
+      "name": "Mathlib.Tactic.Linarith.sub_nonpos_of_le",
+      "slot": 7,
+      "occurrences": 12,
+      "head": "sub_nonpos_of_le",
+      "headKind": "const",
+      "receivingSlot": 7
+    },
+    {
+      "name": "NoZeroDivisors.eq_zero_or_eq_zero_of_mul_eq_zero",
+      "slot": 5,
+      "occurrences": 1,
+      "head": null,
+      "headKind": "proj",
+      "receivingSlot": 1
+    },
+    {
+      "name": "NoZeroDivisors.eq_zero_or_eq_zero_of_mul_eq_zero",
+      "slot": 6,
+      "occurrences": 1,
+      "head": null,
+      "headKind": "proj",
+      "receivingSlot": 2
+    },
+    {
+      "name": "NoZeroDivisors.eq_zero_or_eq_zero_of_mul_eq_zero",
+      "slot": 7,
+      "occurrences": 1,
+      "head": null,
+      "headKind": "proj",
+      "receivingSlot": 3
+    },
+    {
+      "name": "Or.casesOn",
+      "slot": 7,
+      "occurrences": 1,
+      "head": "Or.rec",
+      "headKind": "const",
+      "receivingSlot": 7
+    },
+    {
+      "name": "add_pos'",
+      "slot": 1,
+      "occurrences": 4,
+      "head": "Left.add_pos'",
+      "headKind": "const",
+      "receivingSlot": 1
+    },
+    {
+      "name": "add_pos'",
+      "slot": 2,
+      "occurrences": 4,
+      "head": "Left.add_pos'",
+      "headKind": "const",
+      "receivingSlot": 2
+    },
+    {
+      "name": "add_pos'",
+      "slot": 3,
+      "occurrences": 4,
+      "head": "Left.add_pos'",
+      "headKind": "const",
+      "receivingSlot": 3
+    },
+    {
+      "name": "add_pos'",
+      "slot": 4,
+      "occurrences": 4,
+      "head": "Left.add_pos'",
+      "headKind": "const",
+      "receivingSlot": 4
+    },
+    {
+      "name": "add_pos'",
+      "slot": 5,
+      "occurrences": 4,
+      "head": "Left.add_pos'",
+      "headKind": "const",
+      "receivingSlot": 5
+    },
+    {
+      "name": "add_pos'",
+      "slot": 6,
+      "occurrences": 4,
+      "head": "Left.add_pos'",
+      "headKind": "const",
+      "receivingSlot": 6
+    },
+    {
+      "name": "add_pos'",
+      "slot": 7,
+      "occurrences": 4,
+      "head": "Left.add_pos'",
+      "headKind": "const",
+      "receivingSlot": 7
+    },
+    {
+      "name": "mul_pos",
+      "slot": 1,
+      "occurrences": 5,
+      "head": "Left.mul_pos",
+      "headKind": "const",
+      "receivingSlot": 1
+    },
+    {
+      "name": "mul_pos",
+      "slot": 2,
+      "occurrences": 5,
+      "head": "Left.mul_pos",
+      "headKind": "const",
+      "receivingSlot": 2
+    },
+    {
+      "name": "mul_pos",
+      "slot": 3,
+      "occurrences": 5,
+      "head": "Left.mul_pos",
+      "headKind": "const",
+      "receivingSlot": 3
+    },
+    {
+      "name": "mul_pos",
+      "slot": 4,
+      "occurrences": 5,
+      "head": "Left.mul_pos",
+      "headKind": "const",
+      "receivingSlot": 4
+    },
+    {
+      "name": "mul_pos",
+      "slot": 5,
+      "occurrences": 5,
+      "head": "Left.mul_pos",
+      "headKind": "const",
+      "receivingSlot": 5
+    },
+    {
+      "name": "mul_pos",
+      "slot": 6,
+      "occurrences": 5,
+      "head": "Left.mul_pos",
+      "headKind": "const",
+      "receivingSlot": 6
+    },
+    {
+      "name": "mul_pos",
+      "slot": 7,
+      "occurrences": 5,
+      "head": "Left.mul_pos",
+      "headKind": "const",
+      "receivingSlot": 7
+    },
+    {
+      "name": "mul_pos",
+      "slot": 8,
+      "occurrences": 4,
+      "head": "Left.mul_pos",
+      "headKind": "const",
+      "receivingSlot": 8
+    },
+    {
+      "name": "sub_eq_zero_of_eq",
+      "slot": 5,
+      "occurrences": 20,
+      "head": "Iff.mpr",
+      "headKind": "const",
+      "receivingSlot": 4
+    }
+  ]
+}

@@ -1,0 +1,288 @@
+[
+  {
+    "bodyBinders": 3,
+    "kind": "theorem",
+    "name": "And.right",
+    "resultHead": null,
+    "resultHeadKind": "proj",
+    "signatureBinders": 3,
+    "supplied": 0
+  },
+  {
+    "bodyBinders": 2,
+    "kind": "theorem",
+    "name": "Classical.or_iff_not_imp_left",
+    "resultHead": "Decidable.or_iff_not_imp_left",
+    "resultHeadKind": "const",
+    "signatureBinders": 2,
+    "supplied": 3
+  },
+  {
+    "bodyBinders": 4,
+    "kind": "definition",
+    "name": "Eq.mp",
+    "resultHead": "Eq.rec",
+    "resultHeadKind": "const",
+    "signatureBinders": 4,
+    "supplied": 6
+  },
+  {
+    "bodyBinders": 6,
+    "kind": "definition",
+    "name": "Eq.ndrec",
+    "resultHead": "Eq.rec",
+    "resultHeadKind": "const",
+    "signatureBinders": 6,
+    "supplied": 6
+  },
+  {
+    "kind": "constructor",
+    "name": "Eq.refl",
+    "signatureBinders": 2
+  },
+  {
+    "bodyBinders": 4,
+    "kind": "theorem",
+    "name": "Eq.symm",
+    "resultHead": "Eq.rec",
+    "resultHeadKind": "const",
+    "signatureBinders": 4,
+    "supplied": 6
+  },
+  {
+    "bodyBinders": 6,
+    "kind": "theorem",
+    "name": "Eq.trans",
+    "resultHead": "Eq.rec",
+    "resultHeadKind": "const",
+    "signatureBinders": 6,
+    "supplied": 6
+  },
+  {
+    "kind": "constructor",
+    "name": "Exists.intro",
+    "signatureBinders": 4
+  },
+  {
+    "bodyBinders": 2,
+    "kind": "definition",
+    "name": "False.elim",
+    "resultHead": "False.rec",
+    "resultHeadKind": "const",
+    "signatureBinders": 2,
+    "supplied": 2
+  },
+  {
+    "kind": "constructor",
+    "name": "Iff.intro",
+    "signatureBinders": 4
+  },
+  {
+    "bodyBinders": 3,
+    "kind": "theorem",
+    "name": "Iff.mpr",
+    "resultHead": null,
+    "resultHeadKind": "proj",
+    "signatureBinders": 4,
+    "supplied": 0
+  },
+  {
+    "bodyBinders": 2,
+    "kind": "theorem",
+    "name": "Int.add_one_le_iff",
+    "resultHead": "Iff.rfl",
+    "resultHeadKind": "const",
+    "signatureBinders": 2,
+    "supplied": 1
+  },
+  {
+    "bodyBinders": 4,
+    "kind": "theorem",
+    "name": "IsCancelMulZero.toIsLeftCancelMulZero",
+    "resultHead": null,
+    "resultHeadKind": "proj",
+    "signatureBinders": 4,
+    "supplied": 0
+  },
+  {
+    "bodyBinders": 3,
+    "kind": "theorem",
+    "name": "IsDomain.toIsCancelMulZero",
+    "resultHead": null,
+    "resultHeadKind": "proj",
+    "signatureBinders": 3,
+    "supplied": 0
+  },
+  {
+    "bodyBinders": 7,
+    "kind": "theorem",
+    "name": "Mathlib.Tactic.FieldSimp.NF.cons_ne_zero",
+    "resultHead": "id",
+    "resultHeadKind": "const",
+    "signatureBinders": 7,
+    "supplied": 2
+  },
+  {
+    "bodyBinders": 9,
+    "kind": "theorem",
+    "name": "Mathlib.Tactic.FieldSimp.NF.eval_cons_mul_eval_cons_neg",
+    "resultHead": "Eq.mpr",
+    "resultHeadKind": "const",
+    "signatureBinders": 9,
+    "supplied": 4
+  },
+  {
+    "bodyBinders": 6,
+    "kind": "theorem",
+    "name": "Mathlib.Tactic.Linarith.eq_of_not_lt_of_not_gt",
+    "resultHead": "le_antisymm",
+    "resultHeadKind": "const",
+    "signatureBinders": 6,
+    "supplied": 6
+  },
+  {
+    "bodyBinders": 6,
+    "kind": "theorem",
+    "name": "Mathlib.Tactic.Linarith.sub_neg_of_lt",
+    "resultHead": "sub_neg_of_lt",
+    "resultHeadKind": "const",
+    "signatureBinders": 7,
+    "supplied": 6
+  },
+  {
+    "bodyBinders": 6,
+    "kind": "theorem",
+    "name": "Mathlib.Tactic.Linarith.sub_nonpos_of_le",
+    "resultHead": "sub_nonpos_of_le",
+    "resultHeadKind": "const",
+    "signatureBinders": 7,
+    "supplied": 6
+  },
+  {
+    "bodyBinders": 4,
+    "kind": "theorem",
+    "name": "NoZeroDivisors.eq_zero_or_eq_zero_of_mul_eq_zero",
+    "resultHead": null,
+    "resultHeadKind": "proj",
+    "signatureBinders": 7,
+    "supplied": 0
+  },
+  {
+    "bodyBinders": 2,
+    "kind": "theorem",
+    "name": "Not.intro",
+    "resultHead": null,
+    "resultHeadKind": "bvar",
+    "signatureBinders": 2,
+    "supplied": 0
+  },
+  {
+    "bodyBinders": 6,
+    "kind": "definition",
+    "name": "Or.casesOn",
+    "resultHead": "Or.rec",
+    "resultHeadKind": "const",
+    "signatureBinders": 6,
+    "supplied": 6
+  },
+  {
+    "kind": "constructor",
+    "name": "Or.inl",
+    "signatureBinders": 3
+  },
+  {
+    "kind": "constructor",
+    "name": "Or.inr",
+    "signatureBinders": 3
+  },
+  {
+    "bodyBinders": 0,
+    "kind": "theorem",
+    "name": "add_pos'",
+    "resultHead": "Left.add_pos'",
+    "resultHeadKind": "const",
+    "signatureBinders": 8,
+    "supplied": 0
+  },
+  {
+    "bodyBinders": 6,
+    "kind": "theorem",
+    "name": "congrArg",
+    "resultHead": "Eq.rec",
+    "resultHeadKind": "const",
+    "signatureBinders": 6,
+    "supplied": 6
+  },
+  {
+    "bodyBinders": 2,
+    "kind": "theorem",
+    "name": "eq_true",
+    "resultHead": "propext",
+    "resultHeadKind": "const",
+    "signatureBinders": 2,
+    "supplied": 3
+  },
+  {
+    "bodyBinders": 5,
+    "kind": "theorem",
+    "name": "le_of_not_gt",
+    "resultHead": "Or.resolve_right",
+    "resultHeadKind": "const",
+    "signatureBinders": 5,
+    "supplied": 4
+  },
+  {
+    "bodyBinders": 9,
+    "kind": "theorem",
+    "name": "mul_left_cancel₀",
+    "resultHead": "IsLeftCancelMulZero.mul_left_cancel_of_ne_zero",
+    "resultHeadKind": "const",
+    "signatureBinders": 9,
+    "supplied": 9
+  },
+  {
+    "bodyBinders": 0,
+    "kind": "theorem",
+    "name": "mul_pos",
+    "resultHead": "Left.mul_pos",
+    "resultHeadKind": "const",
+    "signatureBinders": 8,
+    "supplied": 0
+  },
+  {
+    "bodyBinders": 2,
+    "kind": "theorem",
+    "name": "of_eq_true",
+    "resultHead": "Eq.rec",
+    "resultHeadKind": "const",
+    "signatureBinders": 2,
+    "supplied": 6
+  },
+  {
+    "bodyBinders": 7,
+    "kind": "theorem",
+    "name": "sq_nonneg",
+    "resultHead": "Or.casesOn",
+    "resultHeadKind": "const",
+    "signatureBinders": 7,
+    "supplied": 6
+  },
+  {
+    "bodyBinders": 4,
+    "kind": "theorem",
+    "name": "sub_eq_zero_of_eq",
+    "resultHead": "Iff.mpr",
+    "resultHeadKind": "const",
+    "signatureBinders": 5,
+    "supplied": 3
+  },
+  {
+    "bodyBinders": 4,
+    "kind": "theorem",
+    "name": "sub_ne_zero",
+    "resultHead": "not_congr",
+    "resultHeadKind": "const",
+    "signatureBinders": 4,
+    "supplied": 3
+  }
+]
