@@ -252,6 +252,29 @@
       const receiver=window.ProofAtlasOmittedReferences.applicationAtUse(owner.data,site);
       if(receiver)note.append(receiver.slot?' · Argument '+receiver.slot+' of '+receiver.arity+' to ':' · Function in ',
        sourceLink(receiver.label,receiver.call));
+      if(BigInt(refs.occurrences)>1n){
+       const form=el('form'),label=el('label','Parameter use number '),input=el('input');
+       input.value='1';input.required=true;input.inputMode='numeric';input.pattern='[1-9][0-9]*';
+       input.maxLength=refs.occurrences.length;input.size=Math.min(8,input.maxLength+1);
+       label.append(input);const submit=el('button','Find use'),result=el('p');
+       result.setAttribute('aria-live','polite');
+       form.append(label,' of '+refs.occurrences+' ',submit);
+       form.onsubmit=e=>{
+        e.preventDefault();
+        if(!/^[1-9][0-9]*$/.test(input.value)||BigInt(input.value)>BigInt(refs.occurrences)){
+         input.setCustomValidity('Enter a use number between 1 and '+refs.occurrences+'.');
+         input.reportValidity();return;
+        }
+        const found=counter(owner.data,body,0,{...opts,ordinal:BigInt(input.value)}).witness;
+        const target={node:found.node,route:{root:fn.route.root,slots:fn.route.slots.concat(1,found.slots)}};
+        result.replaceChildren(sourceLink('Open use '+input.value,target));
+        const receiver=window.ProofAtlasOmittedReferences.applicationAtUse(owner.data,target);
+        if(receiver)result.append(receiver.slot?' · Argument '+receiver.slot+' of '+receiver.arity+' to ':' · Function in ',
+         sourceLink(receiver.label,receiver.call));
+       };
+       input.oninput=()=>input.setCustomValidity('');
+       panel.append(form,result);
+      }
       if(refs.occurrences==='1' && window.PROOF_ATLAS_TYPE_NOTATION){
        const frames=window.ProofAtlasOmittedReferences.parameterContext(owner.data,window.PROOF_ATLAS_TYPE_NOTATION,
         {node:body,route:{root:fn.route.root,slots:fn.route.slots.concat(1)}},site);
@@ -271,6 +294,10 @@
         formula.append('Function context: x ↦ ',...expression);
         panel.append(formula);
         if(count)panel.append(fixed);
+       }else if(frames){
+        const formula=el('p');formula.append('Function context: x ↦ ',sourceLink('x',site));panel.append(formula);
+       }else{
+        note.append(' The operator context is unavailable for this path.');
        }
       }
      }

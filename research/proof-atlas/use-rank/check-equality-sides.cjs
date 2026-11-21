@@ -61,7 +61,16 @@ const congrFunctions=new Map();
 let congrCalls=0n,congrProofs=0;
 let transCalls=0n, transRows=0, transProofs=0;
 let equalities = 0n, shared = 0n, affected = 0;
-for (const record of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations) {
+const published=process.argv.includes('--published-contexts');
+let records=window.PROOF_ATLAS_AI_SAMPLE.edition.declarations;
+if(published){
+  require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/library-manifest.js','utf8'),{window});
+  records=window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id==='published-15').declarations
+    .filter(r=>r.kind==='theorem' && r.bodyAvailable);
+}
+console.log('Theorem bodies:',records.length);
+const missing=new Map();
+for (const record of records) {
   const bytes = gunzipSync(fs.readFileSync('.'+record.indexFile));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),record.indexSha256);
   const data = atlas.validateIndex(JSON.parse(bytes),record);
@@ -87,16 +96,27 @@ for (const record of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations) {
         const opts={useSupport:false,maxStates:4096},refs=counter(data,body,0,opts);
         // Count against the expanded body with a lexical stack, independently of the DAG counter.
         let total=0n;
+        const repeatedPaths=[],path=[];
         function visit(node,depth){
           const kind=data.kind[node];
-          if(kind===0 && data.payloads[node].index===depth)total++;
+          if(kind===0 && data.payloads[node].index===depth){
+            total++;
+            if(refs.status==='counted' && BigInt(refs.occurrences)>1n)repeatedPaths.push(path.slice());
+          }
           data.children[node].forEach((child,slot)=>{
             const binds=((kind===6||kind===7)&&slot===1)||(kind===8&&slot===2);
-            visit(child,depth+Number(binds));
+            path.push(slot);visit(child,depth+Number(binds));path.pop();
           });
         }
         visit(body,0);
         assert.equal(refs.occurrences,total.toString());
+        for(const [i,slots] of repeatedPaths.entries()){
+          const witness=counter(data,body,0,{...opts,ordinal:BigInt(i+1)}).witness;
+          assert.deepEqual(witness.slots,slots);
+          const route={root:fn.route.root,slots:fn.route.slots.concat(1,slots)};
+          assert.equal(atlas.walk(data,route),witness.node);
+          assert.deepEqual(atlas.binding(data,route),fn);
+        }
         key+=' '+(refs.occurrences??refs.status);
         if(refs.status==='counted' && refs.occurrences!=='0'){
           const use=counter(data,body,0,{...opts,ordinal:1n}).witness;
@@ -104,33 +124,51 @@ for (const record of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations) {
           assert.equal(atlas.walk(data,route),use.node);
           assert.deepEqual(atlas.binding(data,route),fn);
           const at={node:body,route:{root:fn.route.root,slots:fn.route.slots.concat(1)}};
-          const frames=parameterContext(data,window.PROOF_ATLAS_TYPE_NOTATION,at,{node:use.node,route});
-          contexts[frames?(frames.length?'operators':'identity'):'unsupported']+=count;
-          if(frames){
-            const shape=frames.map(f=>f.glyph+'['+(f.operands.indexOf(null)+1)+']').join(' → ');
-            contextShapes.set(shape,(contextShapes.get(shape)??0n)+count);
-            let path=at.route.slots.slice(),row=body;
-            for(const f of frames.slice().reverse()){
-              while(data.kind[row]===10){row=data.children[row][0];path.push(0);}
-              assert.deepEqual(f.call,{node:row,route:{root:route.root,slots:path}});
-              const {head,args}=spine(data,row);
-              const op=window.PROOF_ATLAS_TYPE_NOTATION.entries.find(e=>e.name===data.payloads[head].name);
-              assert.equal(f.operands.filter(a=>a===null).length,1);
-              for(const [i,slot] of op.visibleSlots.entries()){
-                const childPath=path.concat(Array(args.length-1-slot).fill(0),1);
-                if(f.operands[i])assert.deepEqual(f.operands[i],{node:args[slot],route:{root:route.root,slots:childPath}});
+          if(refs.occurrences==='1'){
+            const frames=parameterContext(data,window.PROOF_ATLAS_TYPE_NOTATION,at,{node:use.node,route});
+            const category=frames?(frames.length?'operators':'identity'):'unsupported';
+            if(published && category!=='operators' && !contexts[category])
+              console.log(category+' example:',record.name,row);
+            contexts[category]+=count;
+            if(!frames){
+              const path=[];
+              let from={node:use.node,route};
+              while(from.route.slots.length>at.route.slots.length){
+                const dest=require('../../../public/js/proof-atlas-omitted-references').resultDestination(data,from);
+                const call=dest.call;
+                path.push(call?call.label+'['+call.slot+'/'+call.arity+']':dest.kind+'.'+dest.field);
+                from=call?call.call:dest.at;
               }
-              const slot=op.visibleSlots[f.operands.indexOf(null)];
-              row=args[slot];path=path.concat(Array(args.length-1-slot).fill(0),1);
+              const name=path.join(' → ');
+              missing.set(name,(missing.get(name)??0n)+count);
             }
-            while(data.kind[row]===10){row=data.children[row][0];path.push(0);}
-            assert.equal(row,use.node);assert.deepEqual(path,route.slots);
+            if(frames){
+              const shape=frames.map(f=>f.glyph+'['+(f.operands.indexOf(null)+1)+']').join(' → ');
+              contextShapes.set(shape,(contextShapes.get(shape)??0n)+count);
+              let path=at.route.slots.slice(),row=body;
+              for(const f of frames.slice().reverse()){
+                while(data.kind[row]===10){row=data.children[row][0];path.push(0);}
+                assert.deepEqual(f.call,{node:row,route:{root:route.root,slots:path}});
+                const {head,args}=spine(data,row);
+                const op=window.PROOF_ATLAS_TYPE_NOTATION.entries.find(e=>e.name===data.payloads[head].name);
+                assert.equal(f.operands.filter(a=>a===null).length,1);
+                for(const [i,slot] of op.visibleSlots.entries()){
+                  const childPath=path.concat(Array(args.length-1-slot).fill(0),1);
+                  if(f.operands[i])assert.deepEqual(f.operands[i],{node:args[slot],route:{root:route.root,slots:childPath}});
+                }
+                const slot=op.visibleSlots[f.operands.indexOf(null)];
+                row=args[slot];path=path.concat(Array(args.length-1-slot).fill(0),1);
+              }
+              while(data.kind[row]===10){row=data.children[row][0];path.push(0);}
+              assert.equal(row,use.node);assert.deepEqual(path,route.slots);
+            }
           }
         }
       }
       congrFunctions.set(key,(congrFunctions.get(key)??0n)+count);
       congrHere+=count;
     }
+    if(published)continue;
     if (data.kind[head]===4 && data.payloads[head].name==='Eq.trans') {
       const at={node:row,route:routes.route(row)};
       const inputs=exactCallInputs(data,at,'Eq.trans',6);
@@ -206,14 +244,17 @@ for (const record of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations) {
   equalities += pairs;
   shared += same;
   if (same) affected++;
-  console.log(record.name,String(pairs),String(same));
+  if(!published)console.log(record.name,String(pairs),String(same));
 }
-console.log('Equality occurrences:',String(equalities),'with identical operand rows:',String(shared),'in proofs:',affected);
-console.log('Different operand rows:',differences,'below root:',String(belowRoot),'maximum field depth:',maxDepth);
-console.log('Eq.trans calls:',String(transCalls),'distinct rows:',transRows,'proofs:',transProofs);
-console.log('Expanded chains:',String(nested),'maximum steps:',maximum,'calls with boundaries:',String(boundaries));
-for(const [pair,count] of mismatchLabels) console.log(pair,String(count));
-if(process.argv[2]==='--conversion-requests') fs.writeFileSync(process.argv[3],JSON.stringify(requests));
+if(!published){
+  console.log('Equality occurrences:',String(equalities),'with identical operand rows:',String(shared),'in proofs:',affected);
+  console.log('Different operand rows:',differences,'below root:',String(belowRoot),'maximum field depth:',maxDepth);
+  console.log('Eq.trans calls:',String(transCalls),'distinct rows:',transRows,'proofs:',transProofs);
+  console.log('Expanded chains:',String(nested),'maximum steps:',maximum,'calls with boundaries:',String(boundaries));
+  for(const [pair,count] of mismatchLabels) console.log(pair,String(count));
+  if(process.argv[2]==='--conversion-requests') fs.writeFileSync(process.argv[3],JSON.stringify(requests));
+}
 console.log('congrArg calls:',String(congrCalls),'proofs:',congrProofs,'function forms:',Object.fromEntries(congrFunctions));
 console.log('Single-use lambda contexts:',contexts);
 console.log('Context shapes:',Object.fromEntries(contextShapes));
+console.log('Unsupported paths:',Object.fromEntries(missing));

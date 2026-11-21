@@ -429,6 +429,36 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
     }
    }
    const published=window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id==='published-15');
+   const crossing=published.declarations.find(r=>r.name==='CrossingData.exists_branch');
+   const crossingData=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+crossing.indexFile)));
+   for(const [node,expected] of [[3956,'The operator context is unavailable for this path.'],[3035,'Function context: x ↦ x']]){
+    const at=atlas.routes(crossingData).route(node);
+    await page.goto('http://localhost/projects/proof-atlas/library/?edition=published-15&proof='+crossing.name+'&route='+at.root+':'+at.slots.join('.')+'#expr-'+node);
+    await page.getByRole('region',{name:'Equality under a function'}).getByText(expected,{exact:false}).waitFor();
+   }
+   const repeated=published.declarations.find(r=>r.name==='JacobiCore.Sol.eq_of_eq_at');
+   const graph=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+repeated.indexFile)));
+   const repeatAt={node:1462,route:atlas.routes(graph).route(1462)};
+   const fnArg=require('../../../public/js/proof-atlas-application-ports').sourceInput(graph,repeatAt,5);
+   const paths=[];
+   function walkFn(node,slots){
+    if(graph.kind[node]===0 && atlas.binding(graph,{root:fnArg.route.root,slots}).route.slots.join('.')===fnArg.route.slots.join('.'))
+     paths.push(slots);
+    graph.children[node].forEach((c,i)=>walkFn(c,slots.concat(i)));
+   }
+   walkFn(graph.children[fnArg.node][1],fnArg.route.slots.concat(1));
+   assert.equal(paths.length,6);
+   await page.goto('http://localhost/projects/proof-atlas/library/?edition=published-15&proof='+repeated.name+'&route='+repeatAt.route.root+':'+repeatAt.route.slots.join('.')+'#expr-1462');
+   const selector=page.getByRole('region',{name:'Equality under a function'});
+   const input=selector.getByLabel('Parameter use number');
+   await input.fill('7');await selector.getByRole('button',{name:'Find use'}).click();
+   assert.equal(await input.evaluate(i=>i.checkValidity()),false);
+   for(const [index,slots] of paths.entries()){
+    await input.fill(String(index+1));await selector.getByRole('button',{name:'Find use'}).click();
+    const href=new URL(await selector.getByRole('link',{name:'Open use '+(index+1),exact:true}).evaluate(a=>a.href));
+    assert.equal(href.searchParams.get('route'),fnArg.route.root+':'+slots.join('.'));
+    assert.equal(href.hash,'#expr-'+atlas.walk(graph,{root:fnArg.route.root,slots}));
+   }
    const range=published.declarations.find(d=>d.name==='CrossingData.branch_range');
    const rangeData=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+range.indexFile)));
    const rangeNode=atlas.walk(rangeData,{root:1,slots:[1]});
