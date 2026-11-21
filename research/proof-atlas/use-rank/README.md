@@ -301,3 +301,16 @@ All six AI final applications have a checked trace in the primary occurrence-typ
 The [builder](final-application.cjs) checks the selected full application, every stage's three recorded conversion results, actual type, slot and original argument route. The [browser check](check-final-application-browser.cjs) exercises every nested call link and checks its resulting selection and focus at 320 and 1280 pixels. The primary trace owner hash is retained with each theorem.
 
 The two remaining recorded calls are inside defining values of outer lets. In lean_workbook_4274, final inputs 5 and 6 each reference h₃, whose defining value contains call 2. In lean_workbook_plus_19617, final input 2 references h₂, whose defining value contains call 3. These three one-definition paths expose the remaining two calls. Each path includes the original binder, a reference within that particular final argument and the defining value. This accounts for all 28 selected calls while preserving the distinction between containment and a link through a local definition.
+
+## Reading the two final disjunction eliminations
+
+Four final proof arguments in the six-theorem sample contain no selected port call. All four occur in two applications of Or.casesOn: the scrutinized disjunction and the left branch of each. The public elimination records project the wrapper onto Or.rec. The major premise occupies recursor slot 6 but original source slot 4. Constructor order assigns the left and right methods to source slots 5 and 6. Joining by the recursor slot alone would label the right branch as the disjunction.
+
+The reader groups the branches using the validated constructor map. In both proofs the local result h₄ establishes the split between a = 0 and a = 1/2. Each branch links to its original assumption field, body and function head, even when the port inventory has no inner call there. The body head is a structural observation; the branch assignment comes from the recorded eliminator metadata. The two proofs have different immediate constructions:
+
+| AI proof | Left branch body head | Right branch body head |
+|---|---|---|
+| [lean_workbook_20418](inferences.html#8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d-0/final) | Eq.ndrec | Eq.ndrec |
+| [lean_workbook_plus_6206](inferences.html#2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6-0/final) | Or.casesOn | Or.casesOn |
+
+The third final application with an elimination packet, False.elim, has an unavailable constructor projection in that packet. Its independently recorded application arguments remain visible. The [adapter](final-cases.cjs) uses the existing elimination validator, checks that the mapped argument routes agree with the primary application record and follows the lambda fields directly in the compiled term. The [browser check](check-final-application-browser.cjs) verifies both branch layouts and their links. These examples do not measure reader comprehension.

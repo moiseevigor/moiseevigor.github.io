@@ -5,6 +5,7 @@
 .matrix-scroll{overflow-x:auto;padding:.25rem}.matrix{border-collapse:collapse;font:1rem/1.4 system-ui}.matrix th,.matrix td{padding:.25rem .45rem;text-align:center}.matrix th:first-child{text-align:left;max-width:15rem;overflow-wrap:anywhere}.matrix thead{border-bottom:1px solid GrayText}.matrix tr>:last-child{border-left:1px solid GrayText}.matrix button{min-width:2.3rem;min-height:2.3rem;border:1px solid transparent;background:none;color:LinkText;cursor:pointer}.matrix button:hover,.matrix button[aria-pressed=true]{border-color:currentColor;background:ButtonFace}.matrix-key{font:1rem/1.45 system-ui}#witness{border-inline-start:2px solid GrayText;padding-inline-start:.7rem}
 .premise[data-selected]{border-inline-start:3px solid LinkText;padding-inline-start:.7rem}
 .branch-focus{margin:.6rem 0}.branch-focus meter{width:min(8rem,33%);margin-right:.5rem;vertical-align:middle}
+.case-branches{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:1rem}.case-branches>div{min-width:0;border-inline-start:2px solid GrayText;padding-inline-start:.7rem}.case-branches h3{margin:0}
 </style></head><body><main><h1>Reading a Lean inference</h1><label>Compiled application <select id="proof"></select></label>
 <p id="intro"></p><details id="final-application"><summary>Read backward from the theorem result</summary><div id="final-body"></div></details><details id="statement-flow"><summary>Trace a theorem parameter or hypothesis</summary><label>Statement binder <select id="clause"></select></label><div id="flow"></div></details><section aria-labelledby="map-heading"><h2 id="map-heading">Which arguments occur in each type?</h2>
 <p class="matrix-key">Columns are proof inputs and the conclusion. Select a dot to trace its reference. A dash means the formal argument is absent from that type. A blank falls outside its scope.</p>
@@ -217,10 +218,23 @@ function showFinal(){
  const formula=document.createElement('p');formula.className='formula';formula.textContent=f.type;
  host.append(' · ',link(f.rule,f.head),formula);
  const other=document.createElement('details'),label=document.createElement('summary');
+ const cases=f.cases?.checked?f.cases:null,branches=document.createElement('div');
+ branches.className='case-branches';
+ if(f.cases && !cases)host.append(' No checked constructor mapping at this occurrence.');
  label.textContent='Type and value arguments';other.append(label);
  for(const arg of f.args){
   const box=document.createElement('div'),p=document.createElement('p');box.className='formula';box.dataset.finalSlot=arg.slot;
   p.append('Input '+arg.slot+' · '+arg.role+' · ',link(arg.type,arg.anchor));box.append(p);
+  const branch=cases?.branches.find(b=>b.slot===arg.slot);
+  if(cases?.major===arg.slot){
+   const title=document.createElement('h3');title.textContent=cases.recursor==='Or.rec'?'Disjunction used for the split':'Input to the case split';box.prepend(title);
+   if(cases.origin)box.append('Local result ',link(cases.origin.name,cases.origin.binder),' · ',link('Defining proof',cases.origin.value));
+  }
+  if(branch){
+   const title=document.createElement('h3');title.textContent=branch.constructor;box.prepend(title);
+   for(const d of branch.domains)box.append(link('Assumption',d),' · ');
+   box.append(link('Branch body',branch.body),' · head ',link(branch.head.label,branch.head));
+  }
   function callList(calls){
    const list=document.createElement('ul');
    for(const call of calls){
@@ -239,8 +253,9 @@ function showFinal(){
    box.append(segment);
   }
   if(arg.localLinksIncomplete)box.append('Local definition links incomplete.');
-  (arg.role==='proof'?host:other).append(box);
+  (branch?branches:arg.role==='proof'?host:other).append(box);
  }
+ if(branches.children.length)host.append(branches);
  if(other.children.length>1)host.append(other);
 }
 function show(i){
@@ -317,6 +332,9 @@ function follow(){
  const [callHash,field,slot]=location.hash.split('/');
  const index=examples.findIndex(x=>callHash==='#'+x.source.indexSha256+'-'+x.callId);
  el('proof').value=String(index>=0?index:defaultProof);show(Number(el('proof').value));
+ if(index>=0 && field==='final'){
+  const final=el('final-application');final.open=true;final.querySelector('summary').focus();
+ }
  if(index>=0 && field==='read'){
   el('final-application').open=false;
   el('intro').tabIndex=-1;el('intro').focus();

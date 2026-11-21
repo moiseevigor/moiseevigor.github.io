@@ -87,6 +87,14 @@ for(const item of require('./port-results.json')) {
   assert.equal(descriptor.sourceSha256,source.sourceSha256);
   const checked=packet('.'+descriptor.file,descriptor.sha256);
   finalApplications[source.indexSha256]={...require('./final-application.cjs')(data,checked,examples.filter(x=>x.source.indexSha256===source.indexSha256)),owner:descriptor.sha256};
+  const caseDesc=descriptors.find(d=>d.kind==='case')?.descriptor;
+  const final=finalApplications[source.indexSha256];
+  if(caseDesc && final.checked){
+    const elimination=require('../../../public/js/proof-atlas-elimination');
+    const evidence=packet('.'+caseDesc.file,caseDesc.sha256);
+    const provider=elimination.provider(evidence,data,record,caseDesc.sha256,caseDesc.file);
+    final.cases=require('./final-cases.cjs')(data,record,provider,final);
+  }
   flows[source.indexSha256]=require('./statement-flow.cjs')(data,examples.filter(x=>x.source.indexSha256===source.indexSha256));
   const bindings={};
   for(const clause of flows[source.indexSha256])for(const branch of clause.coverage.branches.largest){

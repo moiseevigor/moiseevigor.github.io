@@ -15,12 +15,35 @@ const {chromium}=require('playwright');
     const spine=require('./spine-transfer.json').find(s=>s.source.indexSha256===hash);
     assert.deepEqual(f.anchor,spine.finalBody.value);
     const calls=examples.filter(x=>x.source.indexSha256===hash), first=calls[0];
-    await page.evaluate(h=>location.hash=h,hash+'-'+first.callId);
+    await page.evaluate(h=>location.hash=h,hash+'-'+first.callId+'/final');
     await page.waitForFunction(h=>active.source.indexSha256===h,hash);
     const panel=page.locator('#final-application');
-    await panel.evaluate(d=>d.open=true);
+    await page.waitForFunction(()=>document.querySelector('#final-application').open);
     await panel.locator('details').evaluate(d=>d.open=true);
     assert.equal(await panel.locator('[data-final-slot]').count(),f.args.length);
+    if(f.cases?.checked){
+     const cases=f.cases;
+     assert.deepEqual(cases.branches.map(b=>b.constructor),['Or.inl','Or.inr']);
+     assert.equal(cases.major,4);
+     const major=panel.locator('[data-final-slot="4"]');
+     const verify=async (a,t)=>{
+      const url=new URL(await a.getAttribute('href'));
+      assert.equal(url.hash,'#expr-'+t.node);
+      assert.equal(url.searchParams.get('route'),t.route.root+':'+t.route.slots.join('.'));
+     };
+     await verify(major.getByRole('link',{name:'Defining proof'}),cases.origin.value);
+     const bounds=[];
+     for(const branch of cases.branches){
+      const row=panel.locator('.case-branches [data-final-slot="'+branch.slot+'"]');
+      assert.equal(await row.locator('h3').textContent(),branch.constructor);
+      await verify(row.getByRole('link',{name:'Assumption',exact:true}),branch.domains[0]);
+      await verify(row.getByRole('link',{name:'Branch body',exact:true}),branch.body);
+      await verify(row.getByRole('link',{name:branch.head.label,exact:true}),branch.head);
+      bounds.push(await row.boundingBox());
+     }
+     if(width===320)assert(bounds[1].y>=bounds[0].y+bounds[0].height-1);
+     else assert(bounds[1].x>=bounds[0].x+bounds[0].width-1);
+    }else assert.equal(await panel.locator('.case-branches').count(),0);
     for(const arg of f.args){
      const row=panel.locator('[data-final-slot="'+arg.slot+'"]');
      const url=new URL(await row.locator('p a').getAttribute('href'));
