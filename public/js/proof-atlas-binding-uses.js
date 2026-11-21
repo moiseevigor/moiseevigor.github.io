@@ -27,14 +27,17 @@
   const actions=el('div');actions.className='pl-actions';actions.append(button('Open body region',scene.body));for(const h of scene.headers)actions.append(button('Open '+h.field+' · before binder',h));container.append(actions,el('p','The body is collapsed. Each button opens its exact source region. Counts include references in type annotations.'));
   if(counted && count!=='0' && config.sourceLink){
    const form=el('form'),label=el('label','Reference number '),input=el('input');
-   const find=el('button','Locate reference'),result=el('p');
+   const find=el('button','Locate reference'),result=el('div');
    input.type='text';input.inputMode='numeric';input.pattern='[1-9][0-9]*';
    input.required=true;input.value='1';input.maxLength=count.length;input.size=Math.min(count.length+1,12);
    find.type='submit';result.setAttribute('aria-live','polite');label.append(input);
    form.append(label,' of '+count+' ',find);container.append(form,result);
-   input.oninput=()=>{input.setCustomValidity('');result.replaceChildren();};
+   function clearLocatedUse(){
+    result.replaceChildren();result.classList.remove('pl-located-use');svg.style.display='';
+   }
+   input.oninput=()=>{input.setCustomValidity('');clearLocatedUse();};
    form.onsubmit=event=>{
-    event.preventDefault();
+    event.preventDefault();clearLocatedUse();
     if(!/^[1-9][0-9]*$/.test(input.value)||BigInt(input.value)>BigInt(count)){
      input.setCustomValidity('Enter a reference number from 1 to '+count+'.');input.reportValidity();return;
     }
@@ -42,15 +45,44 @@
     if(found.status!=='counted'){result.textContent=found.reason;return;}
     const route={root:scene.body.route.root,slots:scene.body.route.slots.concat(found.witness.slots)};
     const use={node:found.witness.node,route};
-    result.replaceChildren(config.sourceLink('Reference '+input.value+' · e'+use.node,use));
+    svg.style.display='none';
+    result.classList.add('pl-located-use');
+    const origin=el('div');
+    origin.append(config.sourceLink('Reference '+input.value+' · e'+use.node,use),' to ',el('code',scene.selection.name));
+    result.append(origin);
+    const receiving=el('div');receiving.className='pl-receiving-expression';result.append(receiving);
     const receiver=host.ProofAtlasOmittedReferences?.applicationAtUse(config.data,use,{includePeers:false});
     if(receiver){
-     result.append(receiver.slot?' · argument '+receiver.slot+' of ':' · function in ',
+     receiving.append(receiver.slot?'Argument '+receiver.slot+' of '+receiver.arity+' in ':'Function in ',
       config.sourceLink(receiver.label,receiver.call));
+     const ports=el('div');ports.className='pl-receiving-ports';
+     ports.setAttribute('role','group');ports.setAttribute('aria-label','Compiled application inputs');
+     // Keep the head, endpoints and a small neighbourhood of the selected input.
+     const positions=new Set([0,1,receiver.arity]);
+     const first=receiver.arity<=7?1:Math.max(1,receiver.slot-2);
+     const last=receiver.arity<=7?receiver.arity:Math.min(receiver.arity,receiver.slot+2);
+     for(let j=first;j<=last;j++)positions.add(j);
+     let previous=-1;
+     for(const position of [...positions].sort((a,b)=>a-b)){
+      if(position>previous+1){
+       const gap=el('span','…');gap.title='Arguments '+(previous+1)+'–'+(position-1);ports.append(gap);
+      }
+      const slots=receiver.call.route.slots.concat(Array(receiver.arity-position).fill(0));
+      if(position)slots.push(1);
+      const portRoute={root:receiver.call.route.root,slots};
+      const port=config.sourceLink(position?String(position):'fn',{node:A.walk(config.data,portRoute),route:portRoute});
+      port.setAttribute('aria-label',position?'Argument '+position:'Function');
+      if(position===receiver.slot){
+       demand(portRoute.root===route.root && String(slots)===String(route.slots),'selected input address');
+       port.setAttribute('aria-current','true');
+      }
+      ports.append(port);previous=position;
+     }
+     receiving.append(ports);
     }else{
      const parent={root:route.root,slots:route.slots.slice(0,-1)};
      const node=A.walk(config.data,parent),kind=A.kinds[config.data.kind[node]];
-     result.append(' · ',config.sourceLink(kind+'.'+A.fields[kind][route.slots.at(-1)],{node,route:parent}));
+     receiving.append('Constructor field ',config.sourceLink(kind+'.'+A.fields[kind][route.slots.at(-1)],{node,route:parent}));
     }
    };
   }

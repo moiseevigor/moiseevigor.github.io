@@ -183,3 +183,9 @@
 .pl-module-use-fixed{border:0;font-style:italic}
 .pl-module-use-fixed::after{content:''}
 @media(max-width:560px){.pl-module-use{padding:.65rem}.pl-module-use-row{grid-template-columns:minmax(0,1fr) 3.8rem minmax(0,1fr);gap:.35rem}.pl-module-use-port{padding:.35rem}.pl-module-use-row button{font-size:.8rem}}
+
+.pl-located-use { margin: .8rem 0 1.2rem; overflow-wrap: anywhere; }
+.pl-receiving-expression { margin: .35rem 0 0 .5rem; padding: .4rem .75rem; border-inline-start: 2px solid currentColor; }
+.pl-receiving-ports { display: flex; align-items: center; flex-wrap: wrap; gap: .35rem; margin-top: .5rem; }
+.pl-receiving-ports a { display: inline-grid; place-items: center; min-width: 2rem; min-height: 2rem; padding-inline: .25rem; border: 1px solid currentColor; border-radius: .2rem; font-variant-numeric: tabular-nums; }
+.pl-receiving-ports a[aria-current="true"] { font-weight: bold; outline: 2px solid currentColor; outline-offset: 1px; }
