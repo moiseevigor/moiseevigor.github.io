@@ -291,3 +291,15 @@ Run `node research/proof-atlas/step-reading/conjunction-census.cjs` from the sit
 The last column follows outer forall binders in the theorem type and requires a literal binary And. In the proof it follows leading lambda and let bodies. It counts generated theorems too. A case split, forwarded hypothesis or named lemma may prove both conjuncts without exposing a pair at that location. The JSON records each such conclusion and its actual proof head.
 
 In the working edition, 25 distinct And.intro rows in `JacobiConcrete.AmplitudeChart.source_inverse` account for 479 paths. A multiscale diagram can group these by compiled row while retaining occurrence routes for binder lookup. Row and path counts measure structure; neither estimates the number of mathematical ideas. The census validates each index digest, reconciles expanded body sizes against the manifest and cross-checks positive occurrence counts by summing in both directions through the shared graph.
+
+### Case assumptions and actual references
+
+For each distinct saturated Or.casesOn or And.casesOn row in an available theorem body, count each introduced assumption in the body after opening all branch lambdas. This includes nested type and value expressions. The reader counts on demand, with at most 8,192 scoped states per traversal and a depth limit of 512. A positive count links to a specific occurrence and checks the enclosing binder route. A traversal limit leaves the count unavailable.
+
+| Edition | Zero | One | Multiple | Outside reader limit |
+| --- | ---: | ---: | ---: | ---: |
+| Published SE(2) | 30 | 243 | 79 | 6 |
+| Working SE(2) | 32 | 269 | 81 | 10 |
+| Gödel sample | 0 | 19 | 11 | 0 |
+
+Run `node research/proof-atlas/step-reading/case-assumptions.cjs` from the site root. The independent expanded traversal found one or three references in every limit-exceeding case. Counts measure lexical references. They do not establish that a hypothesis can be removed from the mathematical argument.

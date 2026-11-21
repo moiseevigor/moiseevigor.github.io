@@ -135,6 +135,34 @@
     let opened=0;
     while(opened<arity && data.kind[node]===6){slots.push(1);node=data.children[node][1];opened++;}
     if(opened===arity){
+     const body=node,bodySlots=slots.slice(),uses=el('details');
+     uses.append(el('summary','References to the branch assumptions'));
+     let counted=false;
+     uses.ontoggle=()=>{
+      if(!uses.open || counted)return;
+      counted=true;
+      const budget={maxStates:8192,maxDepth:512,useSupport:false};
+      for(let k=0;k<arity;k++){
+       const index=arity-1-k;
+       const result=host.ProofAtlasRecursiveInputs.countReferences(data,body,index,budget);
+       const line=el('p'),label=arity===1?'Assumption':k===0?'Left assumption':'Right assumption';
+       const binderRoute={root:branch.route.root,slots:branch.route.slots.concat(Array(k).fill(1))};
+       line.append(sourceLink(label,{node:A.walk(data,binderRoute),route:binderRoute}));
+       if(result.status==='counted'){
+        const n=result.occurrences;
+        line.append(' · '+n+' syntactic reference'+(n==='1'?'':'s')+' in the branch body');
+        if(n!=='0'){
+         const {witness}=host.ProofAtlasRecursiveInputs.countReferences(data,body,index,{...budget,ordinal:1n});
+         const route={root:branch.route.root,slots:bodySlots.concat(witness.slots)};
+         const binding=A.binding(data,route);
+         if(!binding || String(binding.route.slots)!==String(binderRoute.slots))throw Error('Branch reference scope mismatch');
+         line.append(' · ',sourceLink('First reference',{node:witness.node,route}));
+        }
+       }else line.append(' · reference count unavailable within the traversal limit');
+       uses.append(line);
+      }
+     };
+     row.append(uses);
      let lets=0;
      while(lets<8 && data.kind[node]===8){slots.push(2);node=data.children[node][2];lets++;}
      let head=node;
