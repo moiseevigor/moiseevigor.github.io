@@ -2,7 +2,7 @@
 const fs=require('node:fs'),z=require('node:zlib'),vm=require('node:vm'),assert=require('node:assert/strict');
 const {createHash}=require('node:crypto');
 const A=require('../../../public/js/proof-atlas-library-data'),N=require('../../../public/js/proof-atlas-type-notation');
-const {inspect}=require('../../../public/js/proof-atlas-omitted-references');
+const {inspect,applicationAtUse}=require('../../../public/js/proof-atlas-omitted-references');
 const window={};
 for(const f of ['type-notation-catalog','library-manifest','goedel-sample-manifest','recursion-examples-manifest'])
  vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/'+f+'.js','utf8'),{window});
@@ -33,6 +33,30 @@ function audit(record){
  const intervals=[...visible],hidden={notation:0n,collapsed:0n};let tested=0;
  let outsideTotal=0n,externalChecks=0;
  const scopeCounts=[];
+ const rareUses=[],checkedUses=new Set();
+ function checkCall(use){
+  const app=applicationAtUse(data,use);
+  const slots=use.route.slots,parent={root:1,slots:slots.slice(0,-1)};
+  const applicable=slots.length>0&&data.kind[A.walk(data,parent)]===5;
+  assert.equal(Boolean(app),applicable);
+  if(app){
+   const {call,head,slot,arity}=app;
+   const port=require('../../../public/js/proof-atlas-application-ports').sourceInput(data,call,slot);
+   assert.deepEqual(port.route,use.route);assert.equal(port.node,use.node);
+   assert.equal(A.walk(data,head.route),head.node);assert(data.kind[head.node]!==5);
+   assert.equal(A.walk(data,call.route),call.node);
+   assert.equal(head.route.slots.length-call.route.slots.length,arity);
+   for(const peer of app.peers){
+    const supplied=require('../../../public/js/proof-atlas-application-ports').sourceInput(data,call,peer.slot);
+    assert.deepEqual(peer.use,supplied);
+    assert.deepEqual(peer.binder,interval(supplied.route.slots).binders.at(-1-data.payloads[supplied.node].index));
+   }
+   if(call.route.slots.at(-1)===0)
+    assert(data.kind[A.walk(data,{root:1,slots:call.route.slots.slice(0,-1)})]!==5);
+  }
+  checkedUses.add(slots.join('.'));
+  return app;
+ }
  const groups=inspect(data,catalog,1);
  for(const g of groups){
   const region=interval(g.operand.route.slots);
@@ -51,11 +75,22 @@ function audit(record){
     if(n===1n)assert.deepEqual(ref.use.route,oracle.use.route);
    }
   }
+  if(record.name==='JacobiData.slope_bound_abs'){
+   for(const item of named){
+    if(item.count>10n)continue;
+    const payload=data.payloads[item.binder.node];
+    for(let n=1n;n<=item.count;n++){
+     const {use}=g.select(n,true,item.index),app=checkCall(use);
+     rareUses.push({name:payload.binderName??payload.declName,binder:item.binder.route,use:use.route,
+      ...(app?{head:app.label,slot:app.slot,arity:app.arity,call:app.call}: {})});
+    }
+   }
+  }
   scopeCounts.push({total:String(g.total),outside:String(outside),binders:inputs.map(r=>({name:r.name,count:r.count}))});
   const expected=[];
   if(g.total<=5000n){
    for(let n=1n;n<=g.total;n++){
-    const ref=g.select(n);
+    const ref=g.select(n);checkCall(ref.use);
     if(ref.binder.route.slots.length<g.operand.route.slots.length)expected.push(ref);
    }
    assert.equal(BigInt(expected.length),outside);
@@ -77,7 +112,7 @@ function audit(record){
    [...new Set([1n,2n,g.total/2n,g.total-1n,g.total,...(g.total>2n**53n?[2n**53n,2n**53n+1n]:[])])];
   for(const n of ordinals){
    const {use,binder}=g.select(n),selected=interval(use.route.slots);
-   assert.equal(use.route.root,1);assert.equal(selected.node,use.node);assert.equal(data.kind[use.node],0);
+   checkCall(use);assert.equal(use.route.root,1);assert.equal(selected.node,use.node);assert.equal(data.kind[use.node],0);
    assert.equal(selected.first,region.first+n-1n);
    assert.deepEqual(binder,selected.binders.at(-1-data.payloads[use.node].index));tested++;
   }
@@ -87,8 +122,8 @@ function audit(record){
  for(const hit of intervals){assert.equal(hit.first,next);next+=hit.count;}
  assert.equal(next-1n,counts[root]);
  return {name:record.name,source:record.indexSha256,total:String(counts[root]),visible:visible.length,
-  omittedOperands:String(hidden.notation),collapsed:String(hidden.collapsed),groups:groups.length,tested,outside:String(outsideTotal),externalChecks,
-  ...(record.name==='JacobiData.slope_bound_abs'?{scopeCounts}:{})};
+  omittedOperands:String(hidden.notation),collapsed:String(hidden.collapsed),groups:groups.length,tested,outside:String(outsideTotal),externalChecks,distinctUsesCheckedForApplication:checkedUses.size,
+  ...(record.name==='JacobiData.slope_bound_abs'?{scopeCounts,rareUses}:{})};
 }
 const ai=window.PROOF_ATLAS_AI_SAMPLE.edition.declarations;
 const riccati=window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id==='published-15').declarations.find(r=>r.name==='JacobiData.slope_bound_abs');

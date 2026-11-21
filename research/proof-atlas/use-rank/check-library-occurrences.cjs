@@ -97,11 +97,26 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
      assert.equal(u.hash,'#expr-'+hit.node);
     }
    }
-   const largeRegion=panel.locator('section').last(),scope=largeRegion.locator('details');
+   const largeRegion=panel.locator('section').last(),scope=largeRegion.locator(':scope > details');
    await scope.locator('summary').click();
    const hd=regions.at(-1).inputs().find(item=>body.payloads[item.binder.node].binderName==='hd');
    assert.equal(hd.count,3n);
    const filter=scope.locator('select');await filter.selectOption(String(hd.index));
+   for(const [i,head] of ['mul_pos','JacobiData.T1_T2_same_sign','abs_of_pos'].entries()){
+    await largeRegion.getByLabel('Reference',{exact:true}).fill(String(i+1));
+    await largeRegion.getByRole('button',{name:'Trace',exact:true}).click();
+    const selected=regions.at(-1).select(BigInt(i+1),true,hd.index);
+    const expected=require('./use-consumer.cjs')(body,selected.use,{route:{root:1,slots:[]}});
+    const callUrl=new URL(await largeRegion.getByRole('link',{name:'Open application',exact:true}).evaluate(a=>a.href));
+    assert.equal(expected.head.label,head);
+    assert.equal(callUrl.searchParams.get('route'),'1:'+expected.call.route.slots.join('.'));
+    if(i===1){
+     const peers=largeRegion.locator('details').filter({has:page.getByText(/^Other variable arguments/)});
+     await peers.locator('summary').click();
+     const labels=await peers.locator('li a:first-child').allTextContents();
+     assert.deepEqual(labels,['J','p','hab','hz1','hs']);
+    }
+   }
    await largeRegion.getByLabel('Reference',{exact:true}).fill('3');
    await largeRegion.getByRole('button',{name:'Trace',exact:true}).click();
    const hdUse=regions.at(-1).select(3n,true,hd.index);

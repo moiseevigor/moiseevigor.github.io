@@ -10,7 +10,8 @@
       "groups": 2,
       "tested": 7,
       "outside": "251204",
-      "externalChecks": 5
+      "externalChecks": 5,
+      "distinctUsesCheckedForApplication": 7
     },
     {
       "name": "lean_workbook_3485",
@@ -22,7 +23,8 @@
       "groups": 1,
       "tested": 5,
       "outside": "1240",
-      "externalChecks": 1240
+      "externalChecks": 1240,
+      "distinctUsesCheckedForApplication": 1255
     },
     {
       "name": "lean_workbook_4274",
@@ -34,7 +36,8 @@
       "groups": 3,
       "tested": 363,
       "outside": "355",
-      "externalChecks": 355
+      "externalChecks": 355,
+      "distinctUsesCheckedForApplication": 363
     },
     {
       "name": "lean_workbook_49456",
@@ -46,7 +49,8 @@
       "groups": 0,
       "tested": 0,
       "outside": "0",
-      "externalChecks": 0
+      "externalChecks": 0,
+      "distinctUsesCheckedForApplication": 0
     },
     {
       "name": "lean_workbook_56144",
@@ -58,7 +62,8 @@
       "groups": 3,
       "tested": 7,
       "outside": "13636",
-      "externalChecks": 5
+      "externalChecks": 5,
+      "distinctUsesCheckedForApplication": 7
     },
     {
       "name": "lean_workbook_plus_15068",
@@ -70,7 +75,8 @@
       "groups": 4,
       "tested": 9,
       "outside": "56761",
-      "externalChecks": 7
+      "externalChecks": 7,
+      "distinctUsesCheckedForApplication": 9
     },
     {
       "name": "lean_workbook_plus_16912",
@@ -82,7 +88,8 @@
       "groups": 3,
       "tested": 19,
       "outside": "44994",
-      "externalChecks": 17
+      "externalChecks": 17,
+      "distinctUsesCheckedForApplication": 19
     },
     {
       "name": "lean_workbook_plus_19617",
@@ -94,7 +101,8 @@
       "groups": 3,
       "tested": 106,
       "outside": "94",
-      "externalChecks": 94
+      "externalChecks": 94,
+      "distinctUsesCheckedForApplication": 106
     },
     {
       "name": "lean_workbook_plus_39831",
@@ -106,7 +114,8 @@
       "groups": 3,
       "tested": 12,
       "outside": "3181",
-      "externalChecks": 3181
+      "externalChecks": 3181,
+      "distinctUsesCheckedForApplication": 3272
     },
     {
       "name": "lean_workbook_plus_43987",
@@ -118,7 +127,8 @@
       "groups": 3,
       "tested": 107,
       "outside": "86",
-      "externalChecks": 86
+      "externalChecks": 86,
+      "distinctUsesCheckedForApplication": 107
     },
     {
       "name": "lean_workbook_plus_54159",
@@ -130,7 +140,8 @@
       "groups": 2,
       "tested": 164,
       "outside": "7671",
-      "externalChecks": 157
+      "externalChecks": 157,
+      "distinctUsesCheckedForApplication": 164
     },
     {
       "name": "lean_workbook_plus_54622",
@@ -142,7 +153,8 @@
       "groups": 1,
       "tested": 5,
       "outside": "18123",
-      "externalChecks": 3
+      "externalChecks": 3,
+      "distinctUsesCheckedForApplication": 5
     },
     {
       "name": "lean_workbook_plus_61403",
@@ -154,7 +166,8 @@
       "groups": 5,
       "tested": 14,
       "outside": "687",
-      "externalChecks": 687
+      "externalChecks": 687,
+      "distinctUsesCheckedForApplication": 694
     },
     {
       "name": "lean_workbook_plus_6206",
@@ -166,7 +179,8 @@
       "groups": 2,
       "tested": 7,
       "outside": "269199",
-      "externalChecks": 5
+      "externalChecks": 5,
+      "distinctUsesCheckedForApplication": 7
     },
     {
       "name": "lean_workbook_plus_62755",
@@ -178,7 +192,8 @@
       "groups": 3,
       "tested": 969,
       "outside": "927",
-      "externalChecks": 927
+      "externalChecks": 927,
+      "distinctUsesCheckedForApplication": 969
     },
     {
       "name": "lean_workbook_plus_63081",
@@ -190,7 +205,8 @@
       "groups": 4,
       "tested": 14,
       "outside": "4603",
-      "externalChecks": 4603
+      "externalChecks": 4603,
+      "distinctUsesCheckedForApplication": 4667
     },
     {
       "name": "lean_workbook_plus_68077",
@@ -202,7 +218,8 @@
       "groups": 2,
       "tested": 8,
       "outside": "15100",
-      "externalChecks": 6
+      "externalChecks": 6,
+      "distinctUsesCheckedForApplication": 8
     },
     {
       "name": "lean_workbook_plus_68616",
@@ -214,7 +231,8 @@
       "groups": 4,
       "tested": 132,
       "outside": "25",
-      "externalChecks": 25
+      "externalChecks": 25,
+      "distinctUsesCheckedForApplication": 132
     },
     {
       "name": "lean_workbook_plus_68794",
@@ -226,7 +244,8 @@
       "groups": 3,
       "tested": 14,
       "outside": "2383",
-      "externalChecks": 2383
+      "externalChecks": 2383,
+      "distinctUsesCheckedForApplication": 2414
     },
     {
       "name": "lean_workbook_plus_70240",
@@ -238,7 +257,8 @@
       "groups": 4,
       "tested": 13,
       "outside": "2157",
-      "externalChecks": 2157
+      "externalChecks": 2157,
+      "distinctUsesCheckedForApplication": 2186
     }
   ],
   "riccati": {
@@ -252,6 +272,7 @@
     "tested": 10,
     "outside": "4405",
     "externalChecks": 4405,
+    "distinctUsesCheckedForApplication": 4481,
     "scopeCounts": [
       {
         "total": "5",
@@ -309,6 +330,851 @@
           }
         ]
       }
+    ],
+    "rareUses": [
+      {
+        "name": "hz",
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "use": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1
+          ]
+        },
+        "head": "LT.lt.le",
+        "slot": 5,
+        "arity": 5,
+        "call": {
+          "node": 182,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "name": "p",
+        "binder": {
+          "root": 1,
+          "slots": [
+            1
+          ]
+        },
+        "use": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            1
+          ]
+        },
+        "head": "JacobiData.Dz_pos",
+        "slot": 2,
+        "arity": 3,
+        "call": {
+          "node": 183,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "name": "p",
+        "binder": {
+          "root": 1,
+          "slots": [
+            1
+          ]
+        },
+        "use": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            1,
+            1
+          ]
+        },
+        "head": "JacobiData.z",
+        "slot": 2,
+        "arity": 2,
+        "call": {
+          "node": 180,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1,
+              1,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "name": "J",
+        "binder": {
+          "root": 1,
+          "slots": []
+        },
+        "use": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            0,
+            0,
+            1
+          ]
+        },
+        "head": "JacobiData.Dz_pos",
+        "slot": 1,
+        "arity": 3,
+        "call": {
+          "node": 183,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "name": "J",
+        "binder": {
+          "root": 1,
+          "slots": []
+        },
+        "use": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            0,
+            1,
+            0,
+            1
+          ]
+        },
+        "head": "JacobiData.z",
+        "slot": 1,
+        "arity": 2,
+        "call": {
+          "node": 180,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              1,
+              1,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "name": "hD",
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2
+          ]
+        },
+        "use": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            1,
+            2,
+            1,
+            1,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "head": "LT.lt.le",
+        "slot": 5,
+        "arity": 5,
+        "call": {
+          "node": 1044,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              1,
+              2,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "name": "hz",
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "use": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            1,
+            2,
+            1,
+            1,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            0,
+            1,
+            1
+          ]
+        },
+        "head": "LT.lt.le",
+        "slot": 5,
+        "arity": 5,
+        "call": {
+          "node": 1037,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              1,
+              2,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "name": "hs",
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "use": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            1,
+            1,
+            1
+          ]
+        },
+        "head": "Iff.mpr",
+        "slot": 4,
+        "arity": 4,
+        "call": {
+          "node": 270,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "name": "hs",
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "use": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            0,
+            0,
+            1,
+            1
+          ]
+        },
+        "head": "JacobiData.T1_T2_same_sign",
+        "slot": 6,
+        "arity": 6,
+        "call": {
+          "node": 1299,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "name": "hd",
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "use": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            1,
+            0,
+            1
+          ]
+        },
+        "head": "mul_pos",
+        "slot": 7,
+        "arity": 8,
+        "call": {
+          "node": 271,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "name": "hd",
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "use": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            0,
+            0,
+            1,
+            0,
+            1
+          ]
+        },
+        "head": "JacobiData.T1_T2_same_sign",
+        "slot": 5,
+        "arity": 6,
+        "call": {
+          "node": 1299,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "name": "hd",
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "use": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            1,
+            0,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "head": "abs_of_pos",
+        "slot": 6,
+        "arity": 6,
+        "call": {
+          "node": 2333,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              1,
+              0,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "name": "hz1",
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1
+          ]
+        },
+        "use": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            1
+          ]
+        },
+        "head": "Mathlib.Tactic.Linarith.sub_neg_of_lt",
+        "slot": 7,
+        "arity": 7,
+        "call": {
+          "node": 823,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "name": "hz1",
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1
+          ]
+        },
+        "use": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1
+          ]
+        },
+        "head": "JacobiData.T1_T2_same_sign",
+        "slot": 4,
+        "arity": 6,
+        "call": {
+          "node": 1299,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "name": "hab",
+        "binder": {
+          "root": 1,
+          "slots": [
+            1,
+            1
+          ]
+        },
+        "use": {
+          "root": 1,
+          "slots": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "head": "JacobiData.T1_T2_same_sign",
+        "slot": 3,
+        "arity": 6,
+        "call": {
+          "node": 1299,
+          "route": {
+            "root": 1,
+            "slots": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      }
     ]
   },
   "large": {
@@ -321,6 +1187,7 @@
     "groups": 24,
     "tested": 145,
     "outside": "2379629985508532158464",
-    "externalChecks": 72
+    "externalChecks": 72,
+    "distinctUsesCheckedForApplication": 145
   }
 }

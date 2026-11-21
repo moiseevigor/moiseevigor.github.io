@@ -4,6 +4,31 @@
  const local=typeof module!=='undefined'&&module.exports;
  const A=local?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData;
  const notation=local?require('./proof-atlas-type-notation'):host.ProofAtlasTypeNotation;
+ const E=local?require('./proof-atlas-elimination'):host.ProofAtlasElimination;
+ function applicationAtUse(data,use){
+  const {root,slots}=use.route,nodes=[data.roots[root]];
+  for(const slot of slots)nodes.push(data.children[nodes.at(-1)][slot]);
+  if(nodes.at(-1)!==use.node)throw Error('Variable occurrence mismatch');
+  let depth=slots.length-1;
+  if(depth<0||data.kind[nodes[depth]]!==5)return null;
+  const functionUse=slots[depth]===0;
+  while(depth>0&&slots[depth-1]===0&&data.kind[nodes[depth-1]]===5)depth--;
+  const call={node:nodes[depth],route:{root,slots:slots.slice(0,depth)}};
+  const {head,args}=E.spine(data,call.node),arity=args.length;
+  const headRoute={root,slots:call.route.slots.concat(Array(arity).fill(0))};
+  const slot=functionUse?0:arity-(slots.length-depth-1);
+  const kind=A.kinds[data.kind[head]],binder=kind==='bvar'?A.binding(data,headRoute):null;
+  const p=binder?data.payloads[binder.node]:data.payloads[head];
+  const label=kind==='const'?p.name:binder?(p.binderName??p.declName):kind;
+  const peers=[];
+  args.forEach((node,i)=>{
+   if(i+1===slot||data.kind[node]!==0)return;
+   const route={root,slots:call.route.slots.concat(Array(arity-i-1).fill(0),1)};
+   const binder=A.binding(data,route),p=data.payloads[binder.node];
+   peers.push({slot:i+1,use:{node,route},binder,name:p.binderName??p.declName});
+  });
+  return {call,head:{node:head,route:headRoute},label,slot,arity,peers};
+ }
  function inspect(data,catalog,rootIndex=0){
   const root=data.roots[rootIndex],counts=[],groups=[];
   for(let row=0;row<=root;row++)
@@ -87,8 +112,25 @@
     label.append(input);const go=el('button','Trace');
     const limit=el('span',' of '+g.total+' ');let outerOnly=false,selectedInput=null,available=g.total;
     form.append(label,limit,go);result.setAttribute('aria-live','polite');
+    const consumer=el('div');
     function show(n){
      const {use,binder}=g.select(n,outerOnly,selectedInput),p=data.payloads[binder.node];
+     const application=applicationAtUse(data,use);
+     consumer.replaceChildren();
+     if(application){
+      const role=application.slot?'Argument '+application.slot+' of '+application.arity+' to ':'Function applied to '+application.arity+' arguments · ';
+      consumer.append(role,link(application.label,application.head),' · ',link('Open application',application.call));
+      if(application.peers.length){
+       const details=el('details');details.append(el('summary','Other variable arguments ('+application.peers.length+')'));
+       const list=el('ol');
+       for(const peer of application.peers){
+        const item=el('li');item.value=peer.slot;
+        item.append(link(peer.name,peer.use),' · ',link('binder',peer.binder));list.append(item);
+       }
+       details.append(list);consumer.append(details);
+      }
+     }
+     consumer.hidden=!application;
      result.replaceChildren(link('Variable #'+data.payloads[use.node].index,use),' bound by ',link(p.binderName??p.declName,binder));
     }
     show(1n);section.append(heading);
@@ -117,7 +159,7 @@
     };
     section.append(scope);
     if(g.total>1n)section.append(form);
-    section.append(result);panel.append(section);
+    section.append(result,consumer);panel.append(section);
     input.oninput=()=>input.setCustomValidity('');
     form.onsubmit=e=>{
      e.preventDefault();if(!input.reportValidity())return;
@@ -129,6 +171,6 @@
   };
   return panel;
  }
- const api={inspect,control};
+ const api={inspect,control,applicationAtUse};
  if(local)module.exports=api;else host.ProofAtlasOmittedReferences=api;
 })(typeof window==='undefined'?globalThis:window);
