@@ -75,7 +75,7 @@ async function main() {
       if (url.origin!=='http://localhost') return route.abort();
       if (p===libraryPath) return route.fulfill({contentType:'text/html; charset=utf-8',body:pageHtml});
       if (p===file) return route.fulfill({body:gzipSync(bytes)});
-      if (p==='/public/data/proof-atlas/library-manifest.js') return route.fulfill({
+      if (p==='/public/data/proof-atlas/library-manifest.js' && page.url().includes('browser-control')) return route.fulfill({
         contentType:'application/javascript',body:'window.PROOF_ATLAS_LIBRARY='+JSON.stringify({editions:[edition]})});
       if (p.startsWith('/public/') && fs.existsSync(path.join(repo,p))) return route.fulfill({path:path.join(repo,p)});
       return route.fulfill({status:404});
@@ -115,6 +115,26 @@ async function main() {
         await clickDrawnOccurrence(page,branch,true);
         assert.equal(new URL(page.url()).searchParams.get('route'),'1:'+branch.join('.'));
       }
+    }
+    // Open the original corpus packet at the checked multiplication call.
+    const published=new URL('https://moiseevigor.github.io/projects/proof-atlas/library/?edition=goedel-sample-4331&proof=lean_workbook_20418&route=1%3A1.1.1.1.1.1.1.2.1.1.1.1.1.1.1.1.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.1.0.1.1#expr-57669');
+    const example=new URL(libraryPath+published.search+published.hash,'http://localhost');
+    example.searchParams.set('geometry','scoped');
+    example.searchParams.set('fold','applications');
+    const callSlots=published.searchParams.get('route').split(':')[1].split('.').map(Number);
+    for (const slot of [10,11]) {
+      await page.goto(example.href);
+      const call=page.locator('#pl-application-headers details').first();
+      await call.locator('summary').click();
+      const rows=call.locator('ol > li');
+      assert.equal(await rows.count(),11);
+      assert.equal(await rows.nth(10).locator('[data-shared-argument]').innerText(),'Same compiled term as argument 10 · e42907');
+      const port=rows.nth(slot-1).locator('[data-application-argument]');
+      console.log('Argument',slot,'recorded role:',await port.getAttribute('data-argument-role'));
+      await port.click();
+      const selected=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
+      assert.equal(selected.selected,42907);
+      assert.deepEqual(selected.route,{root:1,slots:callSlots.concat(slot===10?[0,1]:[1])});
     }
     assert.deepEqual(errors,[]);
     console.log('Four inspector paths and four folded canvas paths passed at both widths.');
