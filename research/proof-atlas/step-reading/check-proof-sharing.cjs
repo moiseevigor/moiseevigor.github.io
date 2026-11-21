@@ -5,7 +5,7 @@ const fs = require('node:fs');
 const crypto = require('node:crypto');
 const zlib = require('node:zlib');
 const A = require('../../../public/js/proof-atlas-library-data');
-const {firstBindingBody, nearestReference, rowCopies, matchingCopies} = require('../../../public/js/proof-atlas-arithmetic');
+const {firstBindingBody, nearestReference, rowCopies, matchingCopies, differentCopyRank} = require('../../../public/js/proof-atlas-arithmetic');
 global.window = {};
 require('../../../public/data/proof-atlas/library-manifest');
 require('../../../public/data/proof-atlas/goedel-sample-manifest');
@@ -46,6 +46,7 @@ function conflicts(g) {
   const ambiguous = new Set(), outerMiss = new Set(), classes = new Map();
   let childSlots = 0n, splitSlots = 0n, extraDestinations = 0n;
   const comparable = [];
+  let candidatePairs = 0n, differentPairs = 0n;
   let saturationDepth = 0, rows = 0, visits = 0n, ambiguousVisits = 0n;
   for (let n = root; n >= 0; n--) {
     if (!counts[n]) continue;
@@ -57,6 +58,16 @@ function conflicts(g) {
     childSlots += scoped * BigInt(g.children[n].length);
     assert(scoped >= 1n && scoped <= counts[n]);
     classes.set(n, scoped);
+    if ([5,6,7,8].includes(g.kind[n]) && counts[n] > 1n) {
+      const pairs = counts[n]*(counts[n]-1n)/2n;
+      candidatePairs += pairs;
+      if (scoped > 1n) {
+        let same = 0n;
+        for (const [binder, paths] of nearest) same += counts[binder]*paths*(paths-1n)/2n;
+        assert(same < pairs);
+        differentPairs += pairs-same;
+      }
+    }
     if (scoped < counts[n] && Number.isFinite(splitDepth[n])) {
       saturationDepth = Math.max(saturationDepth, splitDepth[n]);
       if ([5,6,7,8].includes(g.kind[n])) comparable.push(n);
@@ -98,7 +109,7 @@ function conflicts(g) {
     owners[n].clear();
   }
   assert.equal(visits, BigInt(g.expanded[root]));
-  return {comparable, navigable, saturationDepth, childSlots, splitSlots, extraDestinations, ambiguous, outerMiss, classes, rows, visits, ambiguousVisits};
+  return {candidatePairs, differentPairs, comparable, navigable, saturationDepth, childSlots, splitSlots, extraDestinations, ambiguous, outerMiss, classes, rows, visits, ambiguousVisits};
 }
 
 // Independent oracle. Every external binder use below a row contributes its actual
@@ -191,9 +202,10 @@ for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_S
   const navigable = depths.map(() => 0n);
   const totals = {edition:e.id, proofs:0, exhaustiveChecks:0, affectedProofs:0, proofsWithConflictingApplication:0, rows:0, conflictingRows:0, conflictingApplications:0, outerMissApplications:0, proofsWithOuterMiss:0};
   let childSlots = 0n, splitSlots = 0n, extraDestinations = 0n, affectedProofBodies = 0;
-  let example = null, deepest = null;
+  let example = null, deepest = null, candidatePairs = 0n, differentPairs = 0n;
   const shortcuts = {eligible:0, limited:0, shallow:0, shorter:0, largestSaving:0};
   let matchingGroups = 0, matchingMembers = 0, singletonGroups = 0, recoverableSelections = 0;
+  let complementRoutes = 0, hiddenDifferences = 0;
   let testedRows = 0, foundBodies = 0, shorterUseElsewhere = 0;
   let visits = 0n, affected = 0n, scopedRows = 0n, largestIncrease = null;
   for (const d of e.declarations.filter(x => x.kind === 'theorem' && x.bodyAvailable)) {
@@ -212,7 +224,11 @@ for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_S
       assert.deepEqual(r.navigable, observed.navigable);
       for (const field of ['childSlots','splitSlots','extraDestinations'])
         assert.equal(r[field], observed[field]);
+      let observedPairs = 0n, observedDifferent = 0n;
       for (const [node,groups] of observed.matchingRoutes) {
+        const size = [...groups.values()].reduce((s,list)=>s+BigInt(list.length),0n);
+        observedPairs += size*(size-1n)/2n;
+        for (const list of groups.values()) observedDifferent += BigInt(list.length)*(size-BigInt(list.length));
         if (groups.size === 1 && groups.values().next().value.length === 1) continue;
         for (const addresses of groups.values()) {
           const routes = addresses.map(s => ({root:1, slots:[...s].map(Number)}));
@@ -227,12 +243,26 @@ for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_S
             const initial = copies.select(rank === 0n ? 1n : 0n);
             if (routes.length > 1 && matches.rankOf(initial.route) === null) recoverableSelections++;
           }
+          const inGroup = new Set(addresses);
+          const otherRoutes = [...groups.values()].flat().filter(route=>!inGroup.has(route)).sort();
+          assert.equal(BigInt(otherRoutes.length), copies.total-matches.total);
+          for (const [i, address] of otherRoutes.entries()) {
+            const global = differentCopyRank(copies,matches,BigInt(i));
+            assert.deepEqual(copies.select(global).route.slots,[...address].map(Number));
+          }
+          complementRoutes += otherRoutes.length;
+          if (otherRoutes.length) for (const route of routes) {
+            const initial = copies.select(copies.rankOf(route) === 0n ? 1n : 0n);
+            if (matches.rankOf(initial.route) !== null) hiddenDifferences++;
+          }
           matchingGroups++;
           matchingMembers += routes.length;
           if (routes.length === 1) singletonGroups++;
         }
       }
       if (r.visits <= 1000n) {
+        assert.equal(observedPairs,r.candidatePairs);
+        assert.equal(observedDifferent,2n*r.differentPairs);
         for (const row of observed.classes.keys()) {
           const hit = firstBindingBody(g,row);
           assert(!hit.limited);
@@ -312,6 +342,8 @@ for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_S
     }
     r.navigable.forEach((count,i) => { navigable[i] += count; });
     assert.equal(r.navigable[1] - r.navigable[0], r.extraDestinations);
+    candidatePairs += r.candidatePairs;
+    differentPairs += r.differentPairs;
     childSlots += r.childSlots;
     splitSlots += r.splitSlots;
     extraDestinations += r.extraDestinations;
@@ -335,5 +367,5 @@ for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_S
     if (!largestIncrease || groups * BigInt(largestIncrease.rows) > BigInt(largestIncrease.groups) * BigInt(r.rows))
       largestIncrease = {name:d.name, rows:r.rows, groups:String(groups), occurrences:String(r.visits)};
   }
-  console.log(JSON.stringify({...totals, matchingGroups, matchingMembers, singletonGroups, recoverableSelections, shortcuts, testedRows, foundBodies, shorterUseElsewhere, deepest, groupsByDepth:Object.fromEntries(depths.map((d,i)=>[String(d),String(navigable[i])])), example, childSlots:String(childSlots), splitSlots:String(splitSlots), extraDestinations:String(extraDestinations), affectedProofBodies, largestIncrease, scopedRows:String(scopedRows), occurrences:String(visits), occurrencesInConflictingRows:String(affected)}));
+  console.log(JSON.stringify({...totals, candidatePairs:String(candidatePairs), differentPairs:String(differentPairs), complementRoutes, hiddenDifferences, matchingGroups, matchingMembers, singletonGroups, recoverableSelections, shortcuts, testedRows, foundBodies, shorterUseElsewhere, deepest, groupsByDepth:Object.fromEntries(depths.map((d,i)=>[String(d),String(navigable[i])])), example, childSlots:String(childSlots), splitSlots:String(splitSlots), extraDestinations:String(extraDestinations), affectedProofBodies, largestIncrease, scopedRows:String(scopedRows), occurrences:String(visits), occurrencesInConflictingRows:String(affected)}));
 }

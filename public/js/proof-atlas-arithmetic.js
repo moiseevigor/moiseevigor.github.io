@@ -411,6 +411,16 @@
   try{return query(data,witness.binder.route,site.node,suffix);}
   catch(error){if(error instanceof RangeError)return null;throw error;}
  }
+ // At matching rank i, globalRank(i)-i counts the nonmatches before that copy.
+ function differentCopyRank(copies,matches,index){
+  if(typeof index!=='bigint'||index<0n||index>=copies.total-matches.total)throw RangeError('Invalid differing copy ordinal');
+  let lo=0n,hi=matches.total;
+  while(lo<hi){
+   const mid=(lo+hi)/2n,rank=copies.rankOf(matches.select(mid));
+   if(rank-mid<=index)lo=mid+1n;else hi=mid;
+  }
+  return index+lo;
+ }
  function binderCopies(data,site){
   const bound=boundPremise(data,site);
   const copies=bound && rowCopies(data,bound.binder);
@@ -893,9 +903,21 @@
      input.value=String(copies.rankOf(matches.select(next))+1n);
      update();status.textContent=matches.total+' of '+copies.total+' occurrences share these external binders.';
     };
+    const different=el('button','Find a copy with a different binder');
+    different.type='button';different.dataset.findDifferentCopy='';
+    let nextDifferent=0n;
+    different.onclick=()=>{
+     matches??=matchingCopies(data,at,selected,copies);
+     if(!matches){status.textContent='Binder search reached the inspection limit.';return;}
+     const count=copies.total-matches.total;
+     if(count===0n){status.textContent='All occurrences share these external binders.';return;}
+     input.value=String(differentCopyRank(copies,matches,nextDifferent)+1n);
+     nextDifferent=(nextDifferent+1n)%count;
+     update();status.textContent=count+' of '+copies.total+' occurrences have a different external binder.';
+    };
     input.oninput=update;update();
     panel.append(el('p',selected?'The links follow the nearest enclosing binder used by this expression. Its location also fixes every farther enclosing binder.':'This expression uses no external variables.'),
-     show('Selected occurrence '+(copies.rank+1n)+' of '+copies.total,at,selected),label,find,status,output);
+     show('Selected occurrence '+(copies.rank+1n)+' of '+copies.total,at,selected),label,find,...(selected?[different]:[]),status,output);
    };
    container.append(panel);
   }
@@ -1264,5 +1286,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={matchingCopies,firstBindingBody,nearestReference,rowCopies,outerReference,congruenceCall,transportCall,derivationInputs,binderArgument,statementOrigin,binderCopies,zeroDifference,logicalInference,numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
+ if(common)module.exports={differentCopyRank,matchingCopies,firstBindingBody,nearestReference,rowCopies,outerReference,congruenceCall,transportCall,derivationInputs,binderArgument,statementOrigin,binderCopies,zeroDifference,logicalInference,numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
 })(typeof window==='undefined'?globalThis:window);

@@ -788,3 +788,17 @@ Local Chrome verified 114 intermediate link destinations across six occurrence p
 The comparison can count and select copies with exactly the selected occurrence's external binder targets. For an open expression the existing receiver query starts inside the nearest used binder and keeps the required nesting depth at the target row. The witness path fixes which variable use is being followed. The nearest-binder criterion then covers every farther external reference. For closed expressions every occurrence under the selected root qualifies. The button cycles through other members and reports when the selected occurrence is alone in its group. Manual selection remains available for looking at differences between groups.
 
 The independent expansion check grouped repeated supported expression rows by their full set of external binder routes in proofs up to 1,000 occurrences. It compared counts and every member's rank and route in both directions: 16,975 selections in 3,517 published groups, 27,771 in 6,039 working groups and 23 in six AI groups. Among these selections the default comparison missed an available match 13 times in the working edition and zero times in the other two. The SE(2) editions overlap. Local Chrome separately tested a larger crossing example: of 54 occurrences of expression 33, only occurrences 3 and 4 share the selected binding targets when starting at 3. The default opens occurrence 1; the matching-copy control selects 4. Browser checks also covered closed groups, repeated selection and singleton groups.
+
+### Selecting a copy with a different binder
+
+The comparison now offers the complementary selection for open expressions. It cycles through all copies with at least one different external binder in source order. If the matching copy of rank i has global rank g(i), then g(i) − i is the number of differing copies before it (zero-based). For differing ordinal k, binary search counts the matching ranks with g(i) − i ≤ k. Adding this count to k gives the requested global rank. The search uses exact integer counts and requires no list of the differing occurrences.
+
+How often would an unconstrained comparison exhibit a binder change? Count unordered pairs of distinct occurrences of the same application, lambda, dependent function type or local definition under one proof root. For a row with n occurrences there are n(n−1)/2 pairs. Subtract the pairs internal to each external-binding group, using its multiplicity per supplying binder occurrence. Counts sum across declarations and weight frequently repeated rows quadratically.
+
+| Edition | Same-row pairs | Pairs with differing binders | Share |
+|---|---:|---:|---:|
+| Published SE(2) | 250,069,105,441 | 3,387,292 | 0.00135% |
+| Working SE(2) | 534,936,818,906,574 | 4,348,645,980 | 0.000813% |
+| Gödel AI sample | 3,331,196,932,192 | 10,755,809,653 | 0.323% |
+
+These shares describe uniform sampling from occurrence pairs. They do not estimate how often users encounter a difference. Closed rows are included in the denominator. The SE(2) editions overlap. Independent full expansions for proofs up to 1,000 occurrences matched the per-proof pair totals and the complete ordered complement of each tested group. Local Chrome checked 121 differing-copy selections including wraparound in the crossing, Riccati and AI examples. In a synthetic alternating-rank control with 2^100 matching copies, selecting the last differing copy took 100 matching-rank probes.
