@@ -557,3 +557,9 @@ python3 research/proof-atlas/use-rank/replay-endpoints.py \
 The reader matches the report digest, declaration index, enclosing call and both endpoint routes before displaying the result.
 
 For each of these five recorded joins the reader can expand the nested transitivity proof into its two equalities. Each equality links its two operands and its proof at their own occurrence paths. The enclosing endpoints remain visible for comparison. The check requires a recorded conversion for every mismatched field of that step. An altered report leaves only the structural comparison available.
+
+### Applying a function to an equality
+
+The six-argument `congrArg` rule in Lean 4.33.1 yields `f a = f b` from a proof of `a = b`. The reader links each repeated symbol to its supplied argument. The conclusion shows the rule instantiated schematically; it has no invented source rows for the two derived applications. In the Riccati bound, the lambda in call 2358 places its parameter in argument five of `HDiv.hDiv`; in call 3219 it places the parameter under `Real.sqrt`.
+
+The equality census found 3,101 complete call occurrences in 19 of the 20 AI proof bodies. Of these, 2,644 supplied a literal lambda, and every such lambda had exactly one syntactic reference to its parameter. The other supplied functions were applications (419), constants (34), or bound variables (4). These counts are weighted by expanded occurrences; they measure explicit syntax without unfolding named definitions.

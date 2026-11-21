@@ -221,11 +221,6 @@
   if(binder!==undefined){const b=el('button','Enclosing binder #'+binder+' · '+label(binder));b.type='button';b.onclick=()=>selectOccurrence(binder,true,true,binding.route);actions.append(b);}
   const sourceLink=(label,at)=>link(label,url(owner.record.name,at.node,at.route));
   const sides=equalitySides(owner.data,{node:i,route:nextRoute});
-  const chain=window.ProofAtlasOmittedReferences?.exactCallInputs?.(owner.data,{node:i,route:nextRoute},'Eq.trans',6);
-  if(chain){
-   const [,start,middle,end,first,second]=chain;
-   const section=el('section'),terms=el('p'),steps=el('ol');
-   section.setAttribute('aria-label','Equality chain');
    function termLabel(at){
     const spine=window.ProofAtlasElimination.spine(owner.data,at.node);
     const headRoute={root:at.route.root,slots:at.route.slots.concat(Array(spine.args.length).fill(0))};
@@ -233,6 +228,41 @@
     const name=binder?(owner.payload(binder.node).binderName??owner.payload(binder.node).declName):null;
     return (spine.args.length?'application of ':'')+(name??label(spine.head));
    }
+  const congr=window.ProofAtlasOmittedReferences?.exactCallInputs?.(owner.data,{node:i,route:nextRoute},'congrArg',6);
+  if(congr){
+   const [, ,left,right,fn,premise]=congr;
+   const panel=el('section'),rule=el('p'),inputs=el('ul');
+   panel.setAttribute('aria-label','Equality under a function');
+   rule.append(sourceLink('a',left),' = ',sourceLink('b',right),'  ⇒  ',
+    sourceLink('f',fn),'(',sourceLink('a',left),') = ',sourceLink('f',fn),'(',sourceLink('b',right),')');
+   for(const [role,at] of [['a',left],['b',right],['f',fn],['Proof of a = b',premise]]){
+    const row=el('li');row.append(sourceLink(role+' · '+termLabel(at),at));inputs.append(row);
+   }
+   panel.append(el('h4','Equality under a function'),rule,inputs);
+   if(owner.kind(fn.node)==='lam' && window.ProofAtlasRecursiveInputs){
+    const body=owner.data.children[fn.node][1],counter=window.ProofAtlasRecursiveInputs.countReferences;
+    const opts={useSupport:false,maxStates:4096},refs=counter(owner.data,body,0,opts);
+    const note=el('p');
+    if(refs.status==='counted'){
+     note.append('Parameter references in the function body: '+refs.occurrences+'.');
+     if(refs.occurrences!=='0'){
+      const use=counter(owner.data,body,0,{...opts,ordinal:1n}).witness;
+      const site={node:use.node,route:{root:fn.route.root,slots:fn.route.slots.concat(1,use.slots)}};
+      note.append(' ',sourceLink('First parameter use',site));
+      const receiver=window.ProofAtlasOmittedReferences.applicationAtUse(owner.data,site);
+      if(receiver)note.append(receiver.slot?' · Argument '+receiver.slot+' of '+receiver.arity+' to ':' · Function in ',
+       sourceLink(receiver.label,receiver.call));
+     }
+    }else note.append('Parameter reference count unavailable.');
+    panel.append(note);
+   }
+   target.append(panel);
+  }
+  const chain=window.ProofAtlasOmittedReferences?.exactCallInputs?.(owner.data,{node:i,route:nextRoute},'Eq.trans',6);
+  if(chain){
+   const [,start,middle,end,first,second]=chain;
+   const section=el('section'),terms=el('p'),steps=el('ol');
+   section.setAttribute('aria-label','Equality chain');
    terms.append(sourceLink('Start · '+termLabel(start),start),' = ',
     sourceLink('Intermediate term · '+termLabel(middle),middle),' = ',sourceLink('End · '+termLabel(end),end));
    for(const [text,proof] of [['Start equals intermediate term',first],['Intermediate term equals end',second]]){

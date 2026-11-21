@@ -392,6 +392,37 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
    assert.equal(new URL(page.url()).searchParams.get('proof'),example.name);
    const riccati=window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id==='published-15').declarations.find(r=>r.name==='JacobiData.slope_bound_abs');
    const body=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+riccati.indexFile)));
+   for(const [g,edition,name,id] of [[body,'published-15',riccati.name,2358],[body,'published-15',riccati.name,3219],[eqData,aiEdition.id,eqProof.name,2024]]){
+    const at=atlas.routes(g).route(id);
+    await page.goto('http://localhost/projects/proof-atlas/library/?edition='+edition+'&proof='+name+'&route='+at.root+':'+at.slots.join('.')+'#expr-'+id);
+    const panel=page.getByRole('region',{name:'Equality under a function'});
+    await panel.waitFor();
+    const rule=panel.locator('p').first();
+    const hrefs=await rule.getByRole('link').evaluateAll(ns=>ns.map(n=>n.href));
+    const source=require('../../../public/js/proof-atlas-application-ports').sourceInput;
+    const verify=(href,input)=>{
+     const url=new URL(href);
+     assert.equal(url.hash,'#expr-'+input.node);
+     assert.equal(url.searchParams.get('route'),input.route.root+':'+input.route.slots.join('.'));
+    };
+    assert.equal(hrefs.length,6);
+    [3,4,5,3,5,4].forEach((slot,index)=>verify(hrefs[index],source(g,{node:id,route:at},slot)));
+    const premise=panel.getByRole('link',{name:/^Proof of a = b/});
+    verify(await premise.evaluate(a=>a.href),source(g,{node:id,route:at},6));
+    const fn=source(g,{node:id,route:at},5);
+    if(g.kind[fn.node]===6){
+     const use=panel.getByRole('link',{name:'First parameter use'});
+     const url=new URL(await use.evaluate(a=>a.href)),slots=url.searchParams.get('route').split(':')[1].split('.').map(Number);
+     assert.deepEqual(atlas.binding(g,{root:at.root,slots}),fn);
+     if(edition==='published-15'){
+      const call=panel.getByRole('link',{name:id===2358?'HDiv.hDiv':'Real.sqrt',exact:true});
+      const receiver=require('../../../public/js/proof-atlas-omitted-references').applicationAtUse(g,
+       {node:atlas.walk(g,{root:at.root,slots}),route:{root:at.root,slots}});
+      verify(await call.evaluate(a=>a.href),receiver.call);
+     }
+     await use.click();await page.waitForURL(url.href);
+    }
+   }
    const published=window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id==='published-15');
    const range=published.declarations.find(d=>d.name==='CrossingData.branch_range');
    const rangeData=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+range.indexFile)));

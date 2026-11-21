@@ -54,6 +54,8 @@ const requests=[];
 const {index:rowOccurrences}=require('../../../public/js/proof-atlas-row-occurrences');
 const mismatchLabels=new Map();
 let nested=0n,maximum=0,boundaries=0n;
+const congrFunctions=new Map();
+let congrCalls=0n,congrProofs=0;
 let transCalls=0n, transRows=0, transProofs=0;
 let equalities = 0n, shared = 0n, affected = 0;
 for (const record of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations) {
@@ -61,7 +63,7 @@ for (const record of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations) {
   assert.equal(createHash('sha256').update(bytes).digest('hex'),record.indexSha256);
   const data = atlas.validateIndex(JSON.parse(bytes),record);
   const routes=atlas.routes(data);
-  let chainsHere=0n;
+  let congrHere=0n,chainsHere=0n;
   const visits = Array(data.kind.length).fill(0n);
   visits[data.roots[1]] = 1n;
   let total = 0n, pairs = 0n, same = 0n;
@@ -72,6 +74,37 @@ for (const record of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations) {
     for (const child of data.children[row]) visits[child] += count;
     if (data.kind[row] !== 5) continue;
     const {head,args} = spine(data,row);
+    if(data.kind[head]===4 && data.payloads[head].name==='congrArg' && args.length===6){
+      const inputs=exactCallInputs(data,{node:row,route:routes.route(row)},'congrArg',6);
+      assert.deepEqual(inputs.map(a=>atlas.walk(data,a.route)),args);
+      const fn=inputs[4];
+      let key=atlas.kinds[data.kind[fn.node]];
+      if(key==='lam'){
+        const body=data.children[fn.node][1],counter=require('../../../public/js/proof-atlas-recursive-inputs').countReferences;
+        const opts={useSupport:false,maxStates:4096},refs=counter(data,body,0,opts);
+        // Count against the expanded body with a lexical stack, independently of the DAG counter.
+        let total=0n;
+        function visit(node,depth){
+          const kind=data.kind[node];
+          if(kind===0 && data.payloads[node].index===depth)total++;
+          data.children[node].forEach((child,slot)=>{
+            const binds=((kind===6||kind===7)&&slot===1)||(kind===8&&slot===2);
+            visit(child,depth+Number(binds));
+          });
+        }
+        visit(body,0);
+        assert.equal(refs.occurrences,total.toString());
+        key+=' '+(refs.occurrences??refs.status);
+        if(refs.status==='counted' && refs.occurrences!=='0'){
+          const use=counter(data,body,0,{...opts,ordinal:1n}).witness;
+          const route={root:fn.route.root,slots:fn.route.slots.concat(1,use.slots)};
+          assert.equal(atlas.walk(data,route),use.node);
+          assert.deepEqual(atlas.binding(data,route),fn);
+        }
+      }
+      congrFunctions.set(key,(congrFunctions.get(key)??0n)+count);
+      congrHere+=count;
+    }
     if (data.kind[head]===4 && data.payloads[head].name==='Eq.trans') {
       const at={node:row,route:routes.route(row)};
       const inputs=exactCallInputs(data,at,'Eq.trans',6);
@@ -140,6 +173,8 @@ for (const record of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations) {
     }
   }
   assert.equal(total,BigInt(data.expanded[data.roots[1]]));
+  congrCalls+=congrHere;
+  if(congrHere)congrProofs++;
   transCalls+=chainsHere;
   if(chainsHere)transProofs++;
   equalities += pairs;
@@ -153,3 +188,4 @@ console.log('Eq.trans calls:',String(transCalls),'distinct rows:',transRows,'pro
 console.log('Expanded chains:',String(nested),'maximum steps:',maximum,'calls with boundaries:',String(boundaries));
 for(const [pair,count] of mismatchLabels) console.log(pair,String(count));
 if(process.argv[2]==='--conversion-requests') fs.writeFileSync(process.argv[3],JSON.stringify(requests));
+console.log('congrArg calls:',String(congrCalls),'proofs:',congrProofs,'function forms:',Object.fromEntries(congrFunctions));
