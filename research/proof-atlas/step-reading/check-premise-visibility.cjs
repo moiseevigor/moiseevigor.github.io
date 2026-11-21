@@ -69,13 +69,33 @@ async function compareRecordedCalls() {
   const {measure} = require('./ai-inference-traces.cjs');
   const visibleProofPorts = [0,0,0];
   const lostVersusCurrent = [0,0,0];
+  const declarations=[], hiddenInputs=[];
+  let unrestrictedBest = 0;
   let completeCalls = 0, proofPorts = 0, wideCalls = 0;
   for (const item of union.inventory().filter(i=>i.edition==='goedel-sample-4331')) {
+    const tally={proof:item.record.name, calls:0, first:0, last:0, best:0};
+    declarations.push(tally);
     await measure(item,null,(inputs,n)=>{
+      tally.calls++;
+      const proofInputs=inputs.filter(p=>p.role==='proof');
+      const width=Math.min(n,5);
+      unrestrictedBest+=Math.min(width,proofInputs.length);
+      const offsets=Array.from({length:n-width+1},(_,offset)=>offset);
+      const scores=offsets.map(offset=>proofInputs.filter(p=>p.position>offset && p.position<=offset+width).length);
+      tally.first+=scores[0];
+      tally.last+=scores.at(-1);
+      tally.best+=Math.max(...scores);
       completeCalls++;
       if (n>5) wideCalls++;
       const layouts=layoutsFor(Array.from({length:n},(_,i)=>i+1));
-      for (const input of inputs.filter(p=>p.role==='proof')) {
+      for (const input of proofInputs) {
+        if (!layouts[1].includes(input.position)) {
+          let offset=n-width, moves=0;
+          while(offset>=input.position) {offset=Math.max(0,offset-width);moves++;}
+          assert(input.position>offset && input.position<=offset+width);
+          hiddenInputs.push({proof:item.record.name,indexSha256:item.record.indexSha256,arity:n,slot:input.position,
+            route:input.route,statement:input.statement,binderInfo:input.binderInfo,earlierMoves:moves});
+        }
         proofPorts++;
         layouts.forEach((ports,i)=>{
           if (ports.includes(input.position)) visibleProofPorts[i]++;
@@ -84,7 +104,31 @@ async function compareRecordedCalls() {
       }
     });
   }
-  return {completeCalls,wideCalls,proofPorts,lostVersusCurrent:Object.fromEntries(policies.map((p,i)=>[p,lostVersusCurrent[i]])),visibleProofPorts:Object.fromEntries(policies.map((p,i)=>[p,visibleProofPorts[i]]))};
+  for (const item of union.inventory().filter(i=>i.edition==='goedel-sample-4331')) {
+    const hidden=hiddenInputs.filter(h=>h.proof===item.record.name);
+    if (!hidden.length) continue;
+    const bytes=union.raw(item.record.indexFile);
+    assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),item.record.indexSha256);
+    const graph=library.validateIndex(JSON.parse(bytes),item.record);
+    for (const h of hidden) {
+      const suffix=Array(h.arity-h.slot).fill(0).concat(1);
+      assert.deepEqual(h.route.slice(-suffix.length),suffix);
+      const route={root:1,slots:h.route.slice(0,-suffix.length)};
+      let offset='last';
+      for (let move=0;move<=h.earlierMoves;move++) {
+        const scene=geometry.create(graph,item.record,{route,foldApplications:true,rootArgumentOffset:offset});
+        const root=scene.nodes[0];
+        const arg=root.arguments[h.slot-1];
+        assert.equal(root.arguments.length,h.arity);
+        assert.deepEqual(arg.route.slots,h.route);
+        const drawn=scene.edges.some(e=>e.from===root.id && e.to===arg.path);
+        assert.equal(drawn,move===h.earlierMoves);
+        offset=Math.max(0,(scene.rootArgumentOffset||0)-5);
+        h.callHead=graph.payloads[root.head.node].name || library.kinds[graph.kind[root.head.node]];
+      }
+    }
+  }
+  return {completeCalls,wideCalls,proofPorts,unrestrictedBest,declarations,hiddenInputs,lostVersusCurrent:Object.fromEntries(policies.map((p,i)=>[p,lostVersusCurrent[i]])),visibleProofPorts:Object.fromEntries(policies.map((p,i)=>[p,visibleProofPorts[i]]))};
 }
 compareRecordedCalls().then(recorded=>console.log(JSON.stringify({calls,occurrences,groups,totals,recorded,perHead:Object.fromEntries(perHead)},null,2)))
   .catch(error=>{console.error(error);process.exitCode=1;});
