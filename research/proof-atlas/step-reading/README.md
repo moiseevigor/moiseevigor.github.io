@@ -180,3 +180,19 @@ In the same Lean 4.33.1 replay environment, [inspect all 34 external declaration
 Of the 747 stages, 594 supply an argument to a literal leading body binder, 113 supply a further argument to a returned constant or constant application, 20 supply an argument to a returned projection, and 20 apply constructors. For example, the Mathlib tactic wrapper for sub_nonpos_of_le returns the root lemma with six arguments already supplied. Its seventh caller argument enters that returned lemma. For Iff.mpr the extra input goes to a function projected from the equivalence. A diagram that gives every supplied input its own binder in the imported body would misrepresent these cases. The receiving slot is the number of already supplied arguments plus the caller position minus the leading body binder count. No reductions inside the returned head are assumed.
 
 [Observed slot histogram](external-stage-slots.json) · [Lean body shapes](ImportedInterfaces.json) · [Joined evidence](imported-interface-coverage.json). From the repository root, regenerate the histogram with `node research/proof-atlas/step-reading/external-stage-slots.cjs`, run the Lean file with the pinned Mathlib libraries on LEAN_PATH, then run `node research/proof-atlas/step-reading/check-imported-interfaces.cjs`. Counts are recorded application stages, including partial applications; 13 nonconstant-headed stages are outside this external-declaration join. This checks imported body shapes and caller positions separately. It does not specialize and recheck each caller term in an imported binder context.
+
+### Selecting distinct uses of a folded input
+
+The [Riccati example](riccati-common-sign.html) opens the five uses of the third input to the common-sign lemma. Two links have the same expression number. Their field paths distinguish them.
+
+The [occurrence selector](ranked-binder-uses.cjs) counts uses of a chosen binder within its body. Counts are memoized by expression number and de Bruijn index. To select use number *k* in field order, it skips each child whose count fits entirely before *k*. The index holds the compiled term and the reached expression/index pairs. It does not store one path per use.
+
+The [corpus check](check-ranked-corpus.cjs) covers the literal leading lambda parameters of every available theorem body in three editions. Later binder domains are included. It independently counts incoming paths through the shared term, then streams the expanded tree in field order and checks the exact first, middle and last occurrence paths. A parameter with zero uses must reject selection. The two SE(2) snapshots overlap.
+
+| Corpus | Theorem bodies | Leading parameters | Unused | Parameter uses | Distinct ranks checked |
+|---|---:|---:|---:|---:|---:|
+| SE(2), published | 561 | 2,076 | 52 | 697,014 | 4,958 |
+| SE(2), working | 1,083 | 4,022 | 54 | 7,094,467 | 9,482 |
+| Goedel AI sample | 20 | 93 | 6 | 692,587 | 250 |
+
+In the AI sample, 58 parameters returned the same expression number at two or more distinct sampled ranks. All selected paths resolved to the original binder. This tests occurrence identity through sharing. Human interpretation of a folded step requires separate evaluation. [Machine-readable counts](ranked-corpus.json). Reproduce with `node research/proof-atlas/step-reading/check-ranked-corpus.cjs` from the repository root.

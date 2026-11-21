@@ -1,0 +1,35 @@
+[
+  {
+    "edition": "published-15",
+    "bodies": 561,
+    "withoutLeadingLambda": 10,
+    "parameters": 2076,
+    "unused": 52,
+    "uses": "697014",
+    "verifiedRoutes": 4958,
+    "sharedIndexAtSampledRanks": 826,
+    "largestUseCount": "77687"
+  },
+  {
+    "edition": "working-26",
+    "bodies": 1083,
+    "withoutLeadingLambda": 62,
+    "parameters": 4022,
+    "unused": 54,
+    "uses": "7094467",
+    "verifiedRoutes": 9482,
+    "sharedIndexAtSampledRanks": 1886,
+    "largestUseCount": "989476"
+  },
+  {
+    "edition": "goedel-sample-4331",
+    "bodies": 20,
+    "withoutLeadingLambda": 0,
+    "parameters": 93,
+    "unused": 6,
+    "uses": "692587",
+    "verifiedRoutes": 250,
+    "sharedIndexAtSampledRanks": 58,
+    "largestUseCount": "96925"
+  }
+]
