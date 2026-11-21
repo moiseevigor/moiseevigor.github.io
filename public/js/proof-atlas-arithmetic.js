@@ -3,7 +3,16 @@
  'use strict';
  const common=typeof module!=='undefined' && module.exports;
  const A=common?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData;
- const operators=new Map([['HPow.hPow','^'],['HAdd.hAdd','+'],['HSub.hSub','−'],['HMul.hMul','×']]);
+ const binaryTypes=['left type','right type','result type','instance'];
+ const operators=new Map([
+  ...[['HPow.hPow','^'],['HAdd.hAdd','+'],['HSub.hSub','−'],['HMul.hMul','×'],['HDiv.hDiv','/']]
+   .map(([name,symbol])=>[name,{symbol,parameters:binaryTypes}]),
+  ['Eq',{symbol:'=',parameters:['type'],relation:true}],
+  ['LE.le',{symbol:'≤',parameters:['type','order instance'],relation:true}],
+  ['LT.lt',{symbol:'<',parameters:['type','order instance'],relation:true}],
+  ['Real.sqrt',{symbol:'√',parameters:[],unary:true}],
+  ['abs',{symbol:'abs',parameters:['type','lattice instance','group instance'],unary:true}]
+ ]);
  function formula(data,at){
   function child(site,slot){
    return {node:data.children[site.node][slot],route:{root:site.route.root,slots:site.route.slots.concat(slot)}};
@@ -15,9 +24,11 @@
     args.unshift(child(head,1));head=child(head,0);
    }
    const name=data.kind[head.node]===4?data.payloads[head.node].name:null;
-   if(depth<3 && operators.has(name) && args.length===6){
-    return {site,name,head,symbol:operators.get(name),parameters:args.slice(0,4),
-     left:read(args[4],depth+1),right:read(args[5],depth+1)};
+   const op=operators.get(name);
+   if(depth<3 && op && args.length===op.parameters.length+(op.unary?1:2)){
+    return {site,name,head,symbol:op.symbol,relation:op.relation,parameterNames:op.parameters,
+     parameters:args.slice(0,op.parameters.length),left:read(args[op.parameters.length],depth+1),
+     right:op.unary?null:read(args.at(-1),depth+1)};
    }
    if(!depth)return null;
    let label='e'+site.node;
@@ -36,7 +47,14 @@
   return read(at,0);
  }
  function mount(container,data,at,link){
-  const tree=formula(data,at);if(!tree)return;
+  let focus=at,binders=0;
+  if(at.route.root===0 && !at.route.slots.length){
+   while(data.kind[focus.node]===7 && binders<128){
+    focus={node:data.children[focus.node][1],route:{root:0,slots:focus.route.slots.concat(1)}};
+    binders++;
+   }
+  }
+  const tree=formula(data,focus);if(!tree || (binders && !tree.relation))return;
   const el=(tag,text)=>{const e=document.createElement(tag);if(text)e.textContent=text;return e;};
   const panel=el('section'),line=el('p'),detail=el('details'),list=el('ul');
   panel.dataset.arithmeticFormula='';line.className='pl-arithmetic-expression';
@@ -44,16 +62,19 @@
    if(!t.symbol)return link(t.label,t.site);
    const span=el('span'),item=el('li');
    item.append(link(t.name,t.head));
-   ['left type','right type','result type','instance'].forEach((label,i)=>item.append(' · ',link(label,t.parameters[i])));
+   t.parameterNames.forEach((label,i)=>item.append(' · ',link(label,t.parameters[i])));
    list.append(item);
    const op=link(t.symbol,t.site);op.setAttribute('aria-label',t.name+' application');
+   if(!t.right){span.append(op,'(',draw(t.left,0),')');return span;}
    if(level)span.append('(');
    span.append(draw(t.left,level+1),' ',op,' ',draw(t.right,level+1));
    if(level)span.append(')');
    return span;
   }
   line.append(draw(tree,0));detail.append(el('summary','Types and instances'),list);
-  panel.append(el('h4','Arithmetic expression'),line,detail);container.append(panel);
+  panel.append(el('h4',binders?'Conclusion':tree.relation?'Relation':'Arithmetic expression'));
+  if(binders)panel.append(link('Under '+binders+' binders',focus));
+  panel.append(line,detail);container.append(panel);
  }
  if(common)module.exports={formula};else host.ProofAtlasArithmetic={mount};
 })(typeof window==='undefined'?globalThis:window);
