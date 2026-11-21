@@ -275,5 +275,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={formula,statement,caption,hypothesisInputs,resultFlow};else host.ProofAtlasArithmetic={mount};
+ if(common)module.exports={formula,statement,caption,hypothesisInputs,resultFlow};else host.ProofAtlasArithmetic={mount,formula,caption};
 })(typeof window==='undefined'?globalThis:window);

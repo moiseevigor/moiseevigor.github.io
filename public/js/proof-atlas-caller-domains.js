@@ -46,6 +46,7 @@
    return sourceLink(label,{node,route});
   }
   host.ProofAtlasArithmetic?.mount(container,data,call,sourceLink);
+  host.ProofAtlasLocalOutline?.mount(container,data,call,sourceLink);
   function showProjectionHelper(){
    if(data.kind[call.node]!==5)return;
    const entries=host.PROOF_ATLAS_PROJECTION_HELPERS;
