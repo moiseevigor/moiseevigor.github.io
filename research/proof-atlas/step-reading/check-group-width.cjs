@@ -40,6 +40,8 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
       await checkRoute(0,packed.append(root,[0,0,0]));
       for (const [i,input] of call.inputs.slice(-3).entries()) {
         assert.match(await ports.nth(i+1).innerText(),new RegExp("^Argument "+input.slot+" · "+["x","y","hx","hy"][input.slot-1]+" · "));
+        const statement=ports.nth(i+1).locator('[data-proof-input-statement]');
+        assert.deepEqual(await statement.allTextContents(),input.role==='proof'?[input.type]:[]);
         await checkRoute(i+1,packed.encode(input.route.root,input.route.slots));
       }
       const stages = group.locator('details[data-construction-stages]');
@@ -59,6 +61,8 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
       await checkRoute(0,packed.append(root,[0,0,0,0]));
       for (const [i,input] of call.inputs.entries()) {
         assert.match(await ports.nth(i+1).innerText(),new RegExp("^Argument "+input.slot+" · "+["x","y","hx","hy"][input.slot-1]+" · "));
+        const statement=ports.nth(i+1).locator('[data-proof-input-statement]');
+        assert.deepEqual(await statement.allTextContents(),input.role==='proof'?[input.type]:[]);
         await checkRoute(i+1,packed.encode(input.route.root,input.route.slots));
       }
       await selected();
@@ -71,8 +75,19 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
       await group.getByText('Showing arguments 2–4 of 4.',{exact:true}).waitFor();
       for (const [i,input] of call.inputs.slice(-3).entries()) {
         assert.match(await ports.nth(i+1).innerText(),new RegExp("^Argument "+input.slot+" · "+["x","y","hx","hy"][input.slot-1]+" · "));
+        const statement=ports.nth(i+1).locator('[data-proof-input-statement]');
+        assert.deepEqual(await statement.allTextContents(),input.role==='proof'?[input.type]:[]);
         await checkRoute(i+1,packed.encode(input.route.root,input.route.slots));
       }
+      const ai=new URL(url);
+      ai.searchParams.set('edition','goedel-sample-4331');ai.searchParams.set('proof','lean_workbook_20418');
+      ai.hash='occurrence=8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d.1.18.VZVaAAA';
+      await page.goto(ai.href);
+      await group.getByRole('button',{name:/^Read proposition for argument /}).last().click();
+      await page.waitForFunction(()=>{
+        const type=window.ProofAtlasOccurrenceView.getTypeScene(),route=type?.origin.sourceRoute;
+        return type?.root.node===256 && route.root===1 && route.depth===19 && route.slots==='VZVaABA';
+      });
       await page.close();
     }
     console.log('Verified compact/full Riccati argument routes at 360 and 1280 pixels.');

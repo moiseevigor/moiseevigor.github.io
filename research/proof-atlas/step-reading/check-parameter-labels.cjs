@@ -9,7 +9,7 @@ const fold = require('../../../public/js/proof-atlas-occurrence-application-fold
   for (const item of union.inventory()) {
     const {case:profile} = await union.open(item);
     const model = fold.open(profile);
-    const totals = counts[item.edition] ||= {recorded:0,named:0};
+    const totals = counts[item.edition] ||= {recorded:0,named:0,proofInputs:0,shortStatements:0};
     for (const entry of profile.entries) {
       const construction = typing.construction(entry,profile.data);
       if (construction?.rule !== 'Pi-application') continue;
@@ -24,6 +24,14 @@ const fold = require('../../../public/js/proof-atlas-occurrence-application-fold
         payload.binderName !== '_' && payload.binderNameParts?.length === 1 &&
         payload.binderNameParts[0].str === payload.binderName ? payload.binderName : null;
       assert.equal(model.parameterFor(scene,group.id,member.id),expected);
+      const stage=model.stageFor(scene,group.id,member.id);
+      const premise=construction.premises[1];
+      assert.equal(stage.roles.argument,premise.role);
+      assert.equal(stage.texts.argument,premise.typeText);
+      if(premise.role==='proof'){
+        totals.proofInputs++;
+        if(premise.typeText && premise.typeText.length<=120)totals.shortStatements++;
+      }
       totals.recorded++;
       if (expected) totals.named++;
     }
