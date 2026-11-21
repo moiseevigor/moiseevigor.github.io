@@ -9,7 +9,19 @@ const {spine} = require('../../../public/js/proof-atlas-elimination');
 
 const {measure:countDestinations} = require('./call-destinations.cjs');
 
-async function measure(item) {
+function countMatchingRoutes(graph,recordedRows) {
+  // Independent bottom-up count: a matching function child is a partial call here.
+  const copies = [];
+  for (let id=0; id<=graph.roots[1]; id++) {
+    let total = recordedRows.has(id) ? 1n : 0n;
+    for (const child of graph.children[id]) total += copies[child];
+    if (graph.kind[id]===5 && recordedRows.has(graph.children[id][0])) total--;
+    copies.push(total);
+  }
+  return copies[graph.roots[1]];
+}
+
+async function measure(item, uncovered) {
   const profile = (await union.open(item)).case;
   const graph = profile.data;
   const stages = new Map();
@@ -57,16 +69,13 @@ async function measure(item) {
     if (!example && parent !== null) example = {node:stage.node,route,head:graph.payloads[call.head],premises,
       destination:{node:parent,route:route.slice(0,-1),field:atlas.fields[atlas.kinds[graph.kind[parent]]][route.at(-1)]}};
   }
-  const population = countDestinations(graph,graph.roots[1],recordedRows);
-  // Independent bottom-up count: a matching function child is a partial call here.
-  const copies = [];
-  for (let id=0; id<=graph.roots[1]; id++) {
-    let total = recordedRows.has(id) ? 1n : 0n;
-    for (const child of graph.children[id]) total += copies[child];
-    if (graph.kind[id]===5 && recordedRows.has(graph.children[id][0])) total--;
-    copies.push(total);
-  }
-  const matchingRoutes = copies[graph.roots[1]];
+  const population = countDestinations(graph,graph.roots[1],recordedRows,(id,uses)=>{
+    if (!uncovered || recordedRows.has(id)) return;
+    const {head} = spine(graph,id);
+    const headName = graph.kind[head]===4 ? graph.payloads[head].name : atlas.kinds[graph.kind[head]];
+    uncovered.push({declaration:item.record.name,id,uses,headName,open:graph.neededScope[id]>0});
+  });
+  const matchingRoutes = countMatchingRoutes(graph,recordedRows);
   assert.equal(matchingRoutes,population.copiesOfRecordedRows ?? 0n);
   assert(BigInt(maximal) <= matchingRoutes);
   const coverage = {allRoutes:String(population.maximal), allRows:population.rows,
@@ -75,6 +84,31 @@ async function measure(item) {
 }
 (async()=>{
   const rows=[];
-  for(const item of union.inventory().filter(item=>item.edition==='goedel-sample-4331')) rows.push(await measure(item));
-  console.log(JSON.stringify(rows,null,2));
+  const uncovered = process.argv.includes('--concentration') ? [] : null;
+  for(const item of union.inventory().filter(item=>item.edition==='goedel-sample-4331')) rows.push(await measure(item,uncovered));
+  if (!uncovered) return console.log(JSON.stringify(rows,null,2));
+  uncovered.sort((a,b)=>a.uses>b.uses?-1:a.uses<b.uses?1:0);
+  const total = uncovered.reduce((sum,r)=>sum+r.uses,0n);
+  assert.equal(total,rows.reduce((sum,r)=>sum+BigInt(r.coverage.allRoutes)-BigInt(r.coverage.routesWithRecordedRow),0n));
+  const thresholds = [];
+  let cumulative = 0n, openUses = 0n;
+  const targets=[50,90,99,100];
+  for (const [index,row] of uncovered.entries()) {
+    cumulative += row.uses;
+    if (row.open) openUses += row.uses;
+    while (targets.length && 100n*cumulative >= BigInt(targets[0])*total) {
+      thresholds.push({percent:targets.shift(), rows:index+1, occurrences:String(cumulative), openOccurrences:String(openUses)});
+    }
+  }
+  const peak = uncovered[0];
+  const half = uncovered.slice(0,thresholds[0].rows);
+  const halfDeclarations = [...new Set(half.map(row=>row.declaration))];
+  for (const item of union.inventory().filter(i=>i.edition==='goedel-sample-4331' && halfDeclarations.includes(i.record.name))) {
+    const selected=half.filter(row=>row.declaration===item.record.name);
+    const profile=(await union.open(item)).case;
+    assert.equal(countMatchingRoutes(profile.data,new Set(selected.map(row=>row.id))),selected.reduce((sum,row)=>sum+row.uses,0n));
+  }
+  const halfHeads = [...new Set(half.map(row=>row.headName))];
+  console.log(JSON.stringify({unrecordedRows:uncovered.length, occurrences:String(total), thresholds, halfDeclarations, halfHeads,
+    mostFrequent:{...peak,uses:String(peak.uses)}},null,2));
 })().catch(error=>{console.error(error);process.exitCode=1;});

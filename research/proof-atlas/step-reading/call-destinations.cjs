@@ -8,7 +8,7 @@ const {createHash} = require('node:crypto');
 const atlas = require('../../../public/js/proof-atlas-library-data');
 const {spine} = require('../../../public/js/proof-atlas-elimination');
 
-function measure(term, root, recordedRows = new Set()) {
+function measure(term, root, recordedRows = new Set(), visitRow) {
   const weights = Array(root + 1).fill(0n);
   const destinations = new Map();
   const kind = id => atlas.kinds[term.kind[id]];
@@ -51,7 +51,8 @@ function measure(term, root, recordedRows = new Set()) {
   assert.equal(expanded, BigInt(term.expanded[root]));
   assert.equal(apps, maximal + prefixes);
   let ambiguousRows = 0, ambiguousOccurrences = 0n;
-  for (const row of destinations.values()) {
+  for (const [id,row] of destinations) {
+    if (visitRow) visitRow(id,row.uses);
     if (row.ports > 1) {
       ambiguousRows++;
       ambiguousOccurrences += row.uses;
@@ -89,7 +90,7 @@ function checkByEnumeration(term, root) {
     term.children[id].forEach((child, position) => walk(child, id, position));
   }
   walk(root, null, null);
-  const measured = measure(term, root);
+  const measured = measure(term, root, new Set(), (id,uses) => assert.equal(uses,rows.get(id).uses));
   const multiple = [...rows.values()].filter(r => r.ports.size > 1);
   assert.deepEqual(measured.counts, counts);
   assert.equal(measured.rows, rows.size);
