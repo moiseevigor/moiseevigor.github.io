@@ -116,6 +116,12 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
     await rows.first().waitFor();
     assert.equal(await rows.count(),[1,2,6][i]);
     assert.equal(await rows.last().textContent(),['Defines hds','Defines hsum','body of hsum'][i]);
+    if(i<2){
+     const fixture=require('./local-definition-uses.json').riccati.examples.find(e=>e.name===['hds','hsum'][i]);
+     const url=new URL(await rows.last().getByRole('link').evaluate(a=>a.href));
+     assert.equal(url.hash,'#expr-'+fixture.node);
+     assert.equal(url.searchParams.get('route'),'1:'+fixture.slots.join('.'));
+    }
     if(i===1){
      const step=rows.first();
      assert((await step.textContent()).includes('Argument 4 of 6 to Or.casesOn'));
