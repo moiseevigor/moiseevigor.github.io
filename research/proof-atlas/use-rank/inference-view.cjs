@@ -21,7 +21,7 @@ function packet(file,hash) {
   assert.equal(createHash('sha256').update(bytes).digest('hex'),hash);
   return JSON.parse(bytes);
 }
-const sharing={};
+const sharing={},sharingTables={};
 const contextResults=require("./shared-application-contexts.json");
 const examples=[],flows={},groupBindings={},typeContexts={},finalApplications={};
 for(const item of require('./port-results.json')) {
@@ -31,6 +31,7 @@ for(const item of require('./port-results.json')) {
   const result=contextResults.find(x=>x.source.indexSha256===source.indexSha256);
   assert.deepEqual(result.source,source);
   const witness=result.middleWitness ?? result.witness;
+  sharingTables[source.indexSha256]=require('./shared-row-table.cjs')(data,witness.row,witness.relative ?? witness.relativeReference);
   const positions=result.middleWitness ? ['first','middle','last'] : ['left','right'];
   sharing[source.indexSha256]=positions.map((side,i)=>{
     const route={root:1,slots:witness[side]};
@@ -135,6 +136,7 @@ process.stdout.write(local('inference-template.html.in')
   .replace('/* TYPE CONTEXTS */',()=>JSON.stringify(typeContexts).replaceAll('<','\\u003c'))
   .replace('/* GROUP BINDINGS */',()=>JSON.stringify(groupBindings).replaceAll('<','\\u003c'))
   .replace('/* FINALS */',()=>JSON.stringify(finalApplications).replaceAll('<','\\u003c'))
+  .replace('/* SHARING TABLES */',()=>JSON.stringify(sharingTables).replaceAll('<','\\u003c'))
   .replace('/* SHARING */',()=>JSON.stringify(sharing).replaceAll('<','\\u003c'))
   .replace('/* FLOWS */',()=>JSON.stringify(flows).replaceAll('<','\\u003c'))
   .replace('/* EXAMPLES */',()=>JSON.stringify(examples).replaceAll('<','\\u003c')));

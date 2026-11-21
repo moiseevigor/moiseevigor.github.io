@@ -43,6 +43,35 @@ const {chromium}=require('playwright');
     await page.reload();
     await control.waitFor({state:'visible'});
     assert.equal(await control.evaluate(s=>s.selectedIndex),sides.length-1);
+    // Enumerate the target routes in source order independently of interval counts.
+    const reachable=new Set([w.row]),routes=[];
+    for(let node=w.row+1;node<=data.roots[1];node++)
+     if(data.children[node].some(c=>reachable.has(c)))reachable.add(node);
+    function visit(node,slots){
+     if(node===w.row){routes.push(slots);return;}
+     data.children[node].forEach((c,j)=>{if(reachable.has(c))visit(c,slots.concat(j));});
+    }
+    visit(data.roots[1],[]);
+    assert.equal(await page.locator('#sharing-total').textContent(),'of '+routes.length);
+    const actual=await page.evaluate(n=>{
+     const paths=[];
+     for(let i=1;i<=n;i++){
+      el('sharing-number').value=String(i);el('sharing-form').requestSubmit();
+      paths.push([...el('sharing-path').querySelectorAll('a')].map(a=>a.href));
+     }
+     return paths;
+    },routes.length);
+    for(const [i,slots] of routes.entries()){
+     const variable={root:1,slots:slots.concat(w.relative ?? w.relativeReference)};
+     for(const [j,route] of [{root:1,slots},variable,atlas.binding(data,variable).route].entries()){
+      const url=new URL(actual[i][j]);
+      assert.equal(url.searchParams.get('route'),'1:'+route.slots.join('.'));
+      assert.equal(url.hash,'#expr-'+atlas.walk(data,route));
+     }
+    }
+    await page.reload();
+    await page.locator('#sharing-number').waitFor({state:'visible'});
+    assert.equal(await page.locator('#sharing-number').inputValue(),String(routes.length));
     await page.evaluate(h=>location.hash=h,hash+'-'+first.callId+'/final');
     await page.waitForFunction(h=>active.source.indexSha256===h,hash);
     const panel=page.locator('#final-application');

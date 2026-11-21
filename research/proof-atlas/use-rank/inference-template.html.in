@@ -18,7 +18,8 @@
 <details id="details"><summary>Function, types and values</summary><div id="other"></div></details>
 <section id="trace"><h2>Inspect a variable use</h2><p id="context"></p><form class="choice"><label>Use <input id="ordinal" required type="number" min="1" step="1"></label><button>Locate</button></form><p aria-live="polite"><a id="occurrence">Open compiled occurrence</a></p></section>
 <details id="sharing"><summary>Compare occurrences of a shared application in this theorem</summary>
-<label>Occurrence <select id="sharing-position"></select></label>
+<label>Example <select id="sharing-position"></select></label>
+<form id="sharing-form" class="choice"><label>Occurrence <input id="sharing-number" required inputmode="numeric" pattern="[1-9][0-9]*"></label><span id="sharing-total"></span><button>Trace</button></form>
 <p id="sharing-path" aria-live="polite"></p></details>
 <details><summary>Compiled provenance</summary><p id="identity" class="meta"></p></details></main>
 <script>/* SELECTOR */
@@ -26,6 +27,7 @@ const examples=/* EXAMPLES */;
 const finalApplications=/* FINALS */;
 const typeContexts=/* TYPE CONTEXTS */;
 const groupBindings=/* GROUP BINDINGS */;
+const sharingTables=/* SHARING TABLES */;
 const sharing=/* SHARING */;
 const flows=/* FLOWS */;
 const el=id=>document.getElementById(id);
@@ -36,13 +38,48 @@ function address(hit) {
  url.hash='expr-'+hit.node;return url.href;
 }
 function link(text,hit){const a=document.createElement('a');a.textContent=text;a.href=address(hit);return a;}
-function showSharedPath(){
- const site=sharing[active.source.indexSha256][el('sharing-position').selectedIndex];
+function showSharedPath(ordinal){
+ const hash=active.source.indexSha256,table=sharingTables[hash],examples=sharing[hash];
+ let site;
+ if(ordinal===undefined){
+  site=examples[el('sharing-position').selectedIndex];
+  // Recover the rank by summing preceding sibling intervals along the route.
+  ordinal=1n;
+  let row=0;
+  for(const slot of site.application.route.slots){
+   for(const [field,next,count] of table.rows[row][3]){
+    if(field===slot){row=next;break;}
+    ordinal+=BigInt(count);
+   }
+  }
+ }else{
+  const hit=selectBranch(table,ordinal);
+  const binders=hit.steps.map((s,i)=>({s,i})).filter(({s})=>
+    ((s.kind===6||s.kind===7)&&s.slot===1)||(s.kind===8&&s.slot===2));
+  const {s,i}=binders.at(-1-table.outerIndex);
+  site={application:{node:hit.node,route:{root:1,slots:hit.slots}},
+    variable:{node:table.variable,route:{root:1,slots:hit.slots.concat(table.relative)}},
+    index:table.index,name:s.name,binder:{node:s.node,route:{root:1,slots:hit.slots.slice(0,i)}}};
+  const preset=examples.findIndex(e=>String(e.application.route.slots)===String(hit.slots));
+  el('sharing-position').selectedIndex=preset<0?examples.length:preset;
+ }
+ el('sharing-number').setCustomValidity('');el('sharing-number').value=String(ordinal);
+ el('sharing-total').textContent='of '+table.total;
  const relation=text=>{const span=document.createElement('span');span.textContent=text;return span;};
  el('sharing-path').replaceChildren(link('Application '+site.application.node,site.application),
    relation('contains'),link('variable #'+site.index,site.variable),relation('bound by'),
    link(site.name+' (binder '+site.binder.node+')',site.binder));
 }
+el('sharing-form').onsubmit=e=>{
+ e.preventDefault();
+ const input=el('sharing-number'),table=sharingTables[active.source.indexSha256];
+ if(!input.checkValidity())return;
+ const n=BigInt(input.value);
+ if(n>BigInt(table.total)){input.setCustomValidity('Choose an occurrence from 1 to '+table.total+'.');input.reportValidity();return;}
+ history.replaceState(null,'','#'+active.source.indexSha256+'-'+active.callId+'/occurrence/'+n);
+ showSharedPath(n);
+};
+el('sharing-number').oninput=e=>e.target.setCustomValidity('');
 el('sharing-position').onchange=()=>{
  history.replaceState(null,'','#'+active.source.indexSha256+'-'+active.callId+'/sharing/'+el('sharing-position').selectedIndex);
  showSharedPath();
@@ -333,7 +370,8 @@ function show(i){
  const previous=active?.source.indexSha256;
  active=examples[i];
  el('sharing').open=false;
- el('sharing-position').replaceChildren(...sharing[active.source.indexSha256].map(s=>new Option(s.label)));
+ const custom=new Option('Selected by number');custom.disabled=true;
+ el('sharing-position').replaceChildren(...sharing[active.source.indexSha256].map(s=>new Option(s.label)),custom);
  showSharedPath();
  if(previous!==active.source.indexSha256){
   showFinal();
@@ -409,9 +447,12 @@ function follow(){
  if(index>=0 && field==='final'){
   const final=el('final-application');final.open=true;final.querySelector('summary').focus();
  }
- if(index>=0 && field==='sharing' && /^[012]$/.test(slot) && Number(slot)<el('sharing-position').length){
+ if(index>=0 && field==='sharing' && /^[012]$/.test(slot) && Number(slot)<sharing[active.source.indexSha256].length){
   el('sharing').open=true;el('sharing-position').selectedIndex=Number(slot);
   showSharedPath();el('sharing-position').focus();
+ }
+ if(index>=0 && field==='occurrence' && /^[1-9][0-9]*$/.test(slot) && BigInt(slot)<=BigInt(sharingTables[active.source.indexSha256].total)){
+  el('sharing').open=true;showSharedPath(BigInt(slot));el('sharing-number').focus();
  }
  if(index>=0 && field==='read'){
   el('final-application').open=false;
@@ -429,6 +470,6 @@ function follow(){
 }
 el('proof').onchange=e=>{const x=examples[Number(e.target.value)];location.hash=x.source.indexSha256+'-'+x.callId;};
 window.addEventListener('hashchange',follow);
-document.querySelector('form').onsubmit=e=>{e.preventDefault();const v=el('ordinal');if(v.validity.valid)locate(BigInt(Number(v.value)));};
+el('ordinal').form.onsubmit=e=>{e.preventDefault();const v=el('ordinal');if(v.validity.valid)locate(BigInt(Number(v.value)));};
 follow();
 </script></body></html>
