@@ -11,7 +11,7 @@ const added=new Set(['mul_eq','add_nonpos','le_of_le_of_eq','sub_nonpos_of_le','
 const baseline=process.argv.includes('--baseline');
 let uniqueLeaves=0,uniqueSteps=0,certificateVisits=0;const certificates=[],inequalities={};
 const theoremSlots={'Mathlib.Tactic.Linarith.zero_lt_one':[0],neg_eq_zero:[2],'Int.add_one_le_iff':[0,1],le_of_lt:[2,3],neg_neg_of_pos:[4],'Real.sq_sqrt':[0]};
-const normalizationSlots={'Mathlib.Meta.NormNum.isNat_eq_true':[2,3,4],'Mathlib.Meta.NormNum.isNNRat_div':[2,3,4,5],rfl:[1],'Eq.refl':[1],'Mathlib.Tactic.CancelDenoms.div_subst':[2,3,4,5,6,7],'Mathlib.Tactic.CancelDenoms.mul_subst':[2,3,4,5,6,7,8],'Mathlib.Meta.NormNum.IsNNRat.to_eq':[2,3,4,5,6],'Mathlib.Tactic.RingNF.add_assoc_rev':[2,3,4],'Mathlib.Tactic.CancelDenoms.derive_trans':[2,3,4,5],'Mathlib.Tactic.CancelDenoms.sub_subst':[2,3,4,5,6]};
+const normalizationSlots={mul_pos:[2,3],'Int.emod_eq_of_lt':[0,1],'Mathlib.Tactic.CancelDenoms.add_subst':[2,3,4,5,6],'Mathlib.Meta.NormNum.isNat_eq_true':[2,3,4],'Mathlib.Meta.NormNum.isNNRat_div':[2,3,4,5],rfl:[1],'Eq.refl':[1],'Mathlib.Tactic.CancelDenoms.div_subst':[2,3,4,5,6,7],'Mathlib.Tactic.CancelDenoms.mul_subst':[2,3,4,5,6,7,8],'Mathlib.Meta.NormNum.IsNNRat.to_eq':[2,3,4,5,6],'Mathlib.Tactic.RingNF.add_assoc_rev':[2,3,4],'Mathlib.Tactic.CancelDenoms.derive_trans':[2,3,4,5],'Mathlib.Tactic.CancelDenoms.sub_subst':[2,3,4,5,6]};
 const signExamples={},signSlots={...theoremSlots,...normalizationSlots,sub_eq_zero_of_eq:[2,3],mul_nonneg_of_nonpos_of_nonpos:[3,4],mul_pos_of_neg_of_neg:[7,8],sq_nonneg:[6]};
 const linarithOnly=baseline||process.argv.includes('--linarith-only');
 const arithmeticOnly=linarithOnly||process.argv.includes('--arithmetic-only');
@@ -42,7 +42,7 @@ for(const d of edition.declarations){
  for(const {premise} of selected){
   let unresolved=0,statementInputs=0,scopeInputs=0;
   const localInputs=new Map(),inputCounts=new Map();
-  const theoremCounts=new Map();let inputSteps=0,inputCerts=0;
+  const unreadSites=[],theoremCounts=new Map();let inputSteps=0,inputCerts=0;
   const todo=[{site:premise,depth:0,parent:null}];
   while(todo.length){
    const item=todo.pop(),{site,depth}=item;
@@ -174,7 +174,11 @@ for(const d of edition.declarations){
    }
    const rule=logical||arithmeticInference(g,site)||cast||congruence||(!skipTransport&&equalityChain(g,site));
    if(!rule || (skipTransport && Object.hasOwn(normalizationSlots,name)) || (arithmeticOnly && Object.hasOwn(theoremSlots,name)) || (arithmeticOnly && ['Mathlib.Tactic.Linarith.mul_zero_eq','Mathlib.Tactic.Linarith.zero_mul_eq'].includes(name)) || (arithmeticOnly && name==='sub_eq_zero_of_eq') || (linarithOnly && Object.hasOwn(signSlots,name)) || (baseline && added.has(rule.name.split('.').at(-1)))){frontier[name]=(frontier[name]||0)+1;leaves++;boundaryRows.add(site.node);
-    if(!cert)unresolved++;
+    if(!cert){
+     unresolved++;
+     const binding=g.kind[site.node]===0?boundPremise(g,site):null;
+     if(!binding||g.kind[binding.binder.node]!==6)unreadSites.push([name,site]);
+    }
     recordPath(item,depth);
     continue;}
    if(Object.hasOwn(signSlots,name)){
@@ -213,10 +217,16 @@ for(const d of edition.declarations){
    for(const t of r.theorems)assert.equal(g.payloads[spine(g,A.walk(g,t.site.route)).head].name,t.name);
    assert.equal(r.steps,inputSteps);assert.equal(r.certificates,inputCerts);
    assert.equal(r.unread,unresolved-scopeInputs);
+   const groups=new Map();
+   for(const [name,site] of unreadSites.reverse()){
+    if(!groups.has(name))groups.set(name,[]);
+    groups.get(name).push(site);
+   }
+   assert.deepEqual(r.unexplained,[...groups].sort((a,b)=>b[1].length-a[1].length));
    assert.deepEqual(new Map(r.inputs.map(x=>[x.binding.binder.route.slots.join('.'),x.uses])),inputCounts);
    assert(derivationInputs(g,premise,1).limited||inputSteps===1);
    summaries.push({proof:d.name,premise,steps:r.steps,visits:r.visits,unread:r.unread,
-    theorems:r.theorems,inputs:r.inputs.map(x=>[x.binding.binder,x.binding.domain,x.binding.site]),firstUnread:r.firstUnread});
+    unexplained:r.unexplained,theorems:r.theorems,inputs:r.inputs.map(x=>[x.binding.binder,x.binding.domain,x.binding.site]),firstUnread:r.firstUnread});
   }
   if(!unresolved)fullyRead++;
   if(unresolved===statementInputs)endpoints.closedAtStatement++;

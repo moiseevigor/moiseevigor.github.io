@@ -230,6 +230,10 @@
   ['Mathlib.Tactic.Linarith.zero_lt_one',{arity:4,terms:[0],labels:['Ordered type'],premises:[],conclusion:'0 < 1'}],
   ['Mathlib.Tactic.RingNF.add_assoc_rev',{arity:5,terms:[2,3,4],premises:[],conclusion:'a + (b + c) = (a + b) + c'}],
   ['Mathlib.Tactic.CancelDenoms.derive_trans',{arity:8,terms:[2,3,4,5],labels:['a','b','c','d'],premises:['a = b','c × b = d'],conclusion:'c × a = d'}],
+  ['mul_pos',{arity:8,terms:[2,3],premises:['0 < a','0 < b'],conclusion:'0 < a × b'}],
+  ['Int.emod_eq_of_lt',{arity:4,terms:[0,1],premises:['0 ≤ a','a < b'],conclusion:'a % b = a'}],
+  ['Mathlib.Tactic.CancelDenoms.add_subst',{arity:9,terms:[2,3,4,5,6],labels:['n','x','y','u','v'],
+   premises:['n × x = u','n × y = v'],conclusion:'n × (x + y) = u + v'}],
   ['rfl',{arity:2,terms:[1],premises:[],conclusion:'a = a'}],
   ['Eq.refl',{arity:2,terms:[1],premises:[],conclusion:'a = a'}],
   ['Mathlib.Tactic.CancelDenoms.div_subst',{arity:11,terms:[2,3,4,5,6,7],labels:['m','n','k','x','y','u'],
@@ -468,7 +472,7 @@
   return {uses,total:String(total),limited:BigInt(uses.length)<total};
  }
  function derivationInputs(data,root,limit=1024){
-  const todo=[root],inputs=new Map(),theorems=new Map();
+  const todo=[root],inputs=new Map(),theorems=new Map(),unexplained=new Map();
   let visits=0,steps=0,certificates=0,unread=0,firstUnread=null;
   while(todo.length && visits<limit){
    const site=todo.pop();visits++;
@@ -480,7 +484,15 @@
    }
    if(numeralComparison(data,site)){certificates++;continue;}
    const rule=logicalInference(data,site)||arithmeticInference(data,site)||transportCall(data,site)||congruenceCall(data,site)||equalityChain(data,site);
-   if(!rule){unread++;firstUnread??=site;continue;}
+   if(!rule){
+    unread++;firstUnread??=site;
+    let head=site.node;
+    for(let i=0;i<32 && data.kind[head]===5;i++)head=data.children[head][0];
+    const name=data.kind[head]===4?data.payloads[head].name:A.kinds[data.kind[head]];
+    if(!unexplained.has(name))unexplained.set(name,[]);
+    unexplained.get(name).push(site);
+    continue;
+   }
    steps++;
    if(!rule.proofs.length){
     if(!theorems.has(rule.name))theorems.set(rule.name,{name:rule.name,site,uses:0});
@@ -488,7 +500,7 @@
    }
    for(let i=rule.proofs.length-1;i>=0;i--)todo.push(rule.proofs[i]);
   }
-  return {inputs:[...inputs.values()],theorems:[...theorems.values()],visits,steps,certificates,unread,firstUnread,limited:todo.length>0};
+  return {inputs:[...inputs.values()],theorems:[...theorems.values()],visits,steps,certificates,unread,firstUnread,unexplained:[...unexplained].sort((a,b)=>b[1].length-a[1].length),limited:todo.length>0};
  }
  function mount(container,data,at,link){
   const el=(tag,text)=>{const e=document.createElement(tag);if(text)e.textContent=text;return e;};
@@ -681,7 +693,25 @@
      }
      overview.append(leaves);
     }
-    if(r.unread)overview.append(link('First of '+r.unread+' unexplained premise visits',r.firstUnread));
+    if(r.unread){
+     overview.append(link('First of '+r.unread+' unexplained premise visits',r.firstUnread));
+     const groups=el('details');groups.dataset.unexplainedPremises='';
+     groups.append(el('summary','Unexplained premises by head'));
+     for(const [name,sites] of r.unexplained){
+      const group=el('details');
+      group.append(el('summary',name+' · '+sites.length+(sites.length===1?' visit':' visits')));
+      group.ontoggle=()=>{
+       if(!group.open||group.childElementCount>1)return;
+       const list=el('ol');
+       for(const site of sites){
+        const row=el('li');row.append(link('Expression '+site.node,site));list.append(row);
+       }
+       group.append(list);
+      };
+      groups.append(group);
+     }
+     overview.append(groups);
+    }
     if(r.limited)overview.append(el('p','Only the first '+r.visits+' visits were inspected.'));
    };
    container.append(overview);
