@@ -851,3 +851,21 @@ The [outline extractor](explicit-premise-outline.cjs) uses recorded lambda bodie
 Below the two strict-order boundaries, a source-structure check finds a `Not.intro` in each branch. Its lambda assumes the disputed ordering. Both lambda bodies close with `Mathlib.Tactic.Linarith.lt_irrefl`; the argument to that call comes through `Eq.mp`. In the first branch the assumed L < R reaches `sub_neg_of_lt` at three occurrences, and in the reverse branch the assumed R < L reaches it once. Independent binder-use counts and ranked route selection agree on all four occurrences. These are compiled uses of the assumptions; they need not be distinct mathematical arguments.
 
 Both transported propositions display as a strict comparison between real zeros. The left and right operands use the same literal 0 and the same type, but have different compiled numeral-instance arguments (rows 13 and 456). The output preserves both operand routes and instance routes. This trace reads the term structure below the typed outline and does not independently check definitional equality of the two instances or reconstruct the arithmetic certificates.
+
+#### Where strictness enters the certificate
+
+For L < R the three references reach the final equality transport by chains of 31, 27 and 21 applications. One chain carries a strict inequality. The other two pass through `le_of_lt`, which retains a weak inequality. They feed the weak premise of `add_lt_of_neg_of_le` at different calls. In the figure each arrow summarizes a path through compiled applications. The two joins are identified by exact occurrence route and argument position.
+
+```mermaid
+flowchart LR
+  H["Assume L < R"] --> S["Strict contribution"]
+  H --> W1["Weak contribution 1"]
+  H --> W2["Weak contribution 2"]
+  S -->|"argument 8"| J1["Add · occurrence 77233"]
+  W1 -->|"argument 9"| J1
+  J1 -->|"argument 8"| J2["Add · occurrence 77364"]
+  W2 -->|"argument 9"| J2
+  J2 --> E["Transport to 0 < 0"]
+```
+
+[Inspect the first addition](https://moiseevigor.github.io/projects/proof-atlas/library/?edition=goedel-sample-4331&proof=lean_workbook_plus_6206&route=1%3A1.1.1.1.1.1.1.2.2.1.1.1.1.0.1.1.1.1.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1#expr-77233) and [the second addition](https://moiseevigor.github.io/projects/proof-atlas/library/?edition=goedel-sample-4331&proof=lean_workbook_plus_6206&route=1%3A1.1.1.1.1.1.1.2.2.1.1.1.1.0.1.1.1.1.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1.0.1#expr-77364). The reverse assumption R < L has one reference. Its 31-call path reaches the final transport without using `le_of_lt`. The extractor records each receiving call, slot and original route. The paths explain how the assumed inequality contributes to a contradiction; sibling inputs still carry additional arithmetic evidence.

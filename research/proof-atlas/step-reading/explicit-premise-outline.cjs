@@ -41,9 +41,29 @@ function contraryClosure(graph,route,node) {
     if (graph.kind[literal.node]!==9 || payload.literalKind!=='natVal') return null;
     return {value:payload.value,instance:field(s,1),type:field(field(field(s,0),0),1)};
   }
+  function trace(witness) {
+    let input=witness.site;
+    const steps=[];
+    for (const {call,head,label,arity,slot} of witness.chain) {
+      const application=spine(graph,call.node);
+      assert.equal(application.head,head.node);
+      assert.equal(application.args.length,arity);
+      const suffix=Array(slot===0 ? arity : arity-slot).fill(0);
+      if (slot!==0) suffix.push(1);
+      assert.deepEqual(input.route,{root:call.route.root,slots:call.route.slots.concat(suffix)});
+      assert.equal(atlas.walk(graph,input.route),input.node);
+      const inference=arithmetic.arithmeticInference(graph,call);
+      const index=inference?.proofs.findIndex(s=>s.node===input.node &&
+        String(s.route.slots)===String(input.route.slots)) ?? -1;
+      steps.push({call,label,slot,arity,...(index>=0 ? {premise:inference.premises[index],conclusion:inference.conclusion} : {})});
+      input=call;
+    }
+    if (witness.reached) assert.deepEqual(input,evidence);
+    return {site:witness.site,receiver:witness.first?.label??null,steps,reachedTransport:witness.reached};
+  }
   return {basis:'compiled structure',lambda,close,operand,evidence,
     transportTarget:[rewrite.after.left.site,rewrite.after.right.site].map(s=>({...s,numeral:numeral(s)})),
-    uses:references.total??null,witnesses:references.uses.map(u=>({site:u.site,receiver:u.first?.label??null})),
+    uses:references.total??null,witnesses:references.uses.map(trace),
     limited:references.limited};
 }
 
