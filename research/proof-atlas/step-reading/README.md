@@ -726,3 +726,19 @@ Count a child slot once per binder-preserving parent group and ordered field. A 
 | Gödel AI sample | 555,554 | 173 | 3,064 | 18 / 20 |
 
 To obtain multiplicities, propagate both the supplying binder row and the number of paths per occurrence of that binder. On proofs up to 10,000 expanded occurrences the independent traversal grouped actual child destinations by parent signature and slot. It matched all three slot and destination counts in each proof. The manual links both bodies of lambda 125 in CrossingData.crossing. In local Chrome both links opened expression 124, and the nearest used variable led back to the selected lambda occurrence. The counts concern immediate structural edges. Clicking through several edges requires preserving the selected route at every step.
+
+### Folding with deterministic navigation to a chosen depth
+
+Fix one proof root. Two occurrences may share a group when they have the same compiled row and external binder targets. At depth one also require the groups of their ordered children to agree. At depth two require this of their grandchildren, and so on. This counts the minimum groups for those observations. Recovering the original occurrence address from a group alone is a separate requirement.
+
+A row can be counted without expanding its occurrences. Find the shortest downward path that crosses into a binder body which uses the variable it introduces. If there is no such crossing within the chosen depth, the groups at depth zero already distinguish all reachable observations: each descendant's used external variables come from the parent context, or are introduced on a later edge. If a crossing is reachable, two distinct occurrences of the row lead to distinct introductions there. That row must split into one group per occurrence. This works because occurrences of the same finite row occupy distinct branches. A proper descendant cannot be the same row in the acyclic term representation.
+
+| Edition | Depth 0 | 1 | 2 | 4 | 8 | All depths |
+|---|---:|---:|---:|---:|---:|---:|
+| Published SE(2) | 542,307 | 546,396 | 549,917 | 556,497 | 567,284 | 571,274 |
+| Working SE(2) | 1,332,413 | 1,358,594 | 1,378,834 | 1,410,222 | 1,452,172 | 1,479,059 |
+| Gödel AI sample | 286,759 | 289,823 | 292,827 | 298,795 | 308,956 | 315,688 |
+
+For the 20 AI proof bodies the additional cost from depth zero to unrestricted child navigation is 28,929 groups, leaving 260.8 expanded occurrences per group. The last additional distinction appears at depth 21 in lean_workbook_plus_15068. The corresponding saturation depths are 19 for published SE(2) and 25 for working SE(2). The two SE(2) inventories overlap. No graph containing all these groups was rendered.
+
+The existing census now computes all six counts. For each proof of at most 10,000 occurrences the independent expansion interns the tuple of row, complete external binder signature and ordered child group identifiers. It compares the resulting partition size at each depth, including the recursively computed unlimited partition. Every proof also satisfies the identity between the depth-one increase and the additional child destinations counted in the preceding experiment.
