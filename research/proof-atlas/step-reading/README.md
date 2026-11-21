@@ -714,3 +714,15 @@ For a fixed proof root, group occurrences by compiled row and by the identities 
 The two SE(2) editions overlap. Corpus totals conceal variation: in the published edition, CrossingData.crossing has the largest proportional increase, from 662 proof rows to 1,223 groups for 7,085 proof occurrences. In the working edition, JacobiConcrete.hamiltonianField_smooth rises from 1,788 rows to 5,817 groups. Counts concern the identity of external variables at the selected row. A reader must still retain occurrence routes to expand binders introduced inside the group. The ratios measure logical objects, not bytes or readability.
 
 The census command above now propagates possible supplying binder rows and their multiplicities. On every proof with at most 10,000 occurrences an independent expansion collected the complete set of external binder routes at each occurrence, grouped these signatures per row, and matched every row's group count.
+
+### Which child links survive folding?
+
+Count a child slot once per binder-preserving parent group and ordered field. A slot splits when two occurrences in that parent group lead to different binder-preserving child groups. Every external variable of an ordinary child also occurs externally in its parent, so a fixed parent group determines its child group. A binder body can additionally use the variable introduced at this parent occurrence. If it does, each parent occurrence gives a distinct destination for that body. A body that ignores its new variable introduces no such split.
+
+| Edition | Child slots after grouping | Slots with multiple destinations | Additional destinations beyond one per slot | Proofs with a split |
+|---|---:|---:|---:|---:|
+| Published SE(2) | 954,523 | 1,802 | 4,089 | 218 / 561 |
+| Working SE(2) | 2,373,297 | 3,405 | 26,181 | 373 / 1,083 |
+| Gödel AI sample | 555,554 | 173 | 3,064 | 18 / 20 |
+
+To obtain multiplicities, propagate both the supplying binder row and the number of paths per occurrence of that binder. On proofs up to 10,000 expanded occurrences the independent traversal grouped actual child destinations by parent signature and slot. It matched all three slot and destination counts in each proof. The manual links both bodies of lambda 125 in CrossingData.crossing. In local Chrome both links opened expression 124, and the nearest used variable led back to the selected lambda occurrence. The counts concern immediate structural edges. Clicking through several edges requires preserving the selected route at every step.
