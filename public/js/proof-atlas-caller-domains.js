@@ -203,6 +203,8 @@
            input.setCustomValidity('');
            const rank=BigInt(value);
            drawReference(locate(rank),rank);
+           selectedRank=rank;
+           if(diagram.open)showSelectedPage();
           }
           input.oninput=()=>input.setCustomValidity('');
           input.onkeydown=event=>{if(event.key==='Enter'){event.preventDefault();select();}};
@@ -210,10 +212,24 @@
           const diagram=el('details'),tree=el('ul');
           tree.className='pl-reference-tree';
           diagram.append(el('summary','Group references by receiving role'),tree);overview=diagram;
-          let start=1n;
+          const total=BigInt(n),status=el('span');
+          status.setAttribute('aria-live','polite');
+          const nav=el('div');
+          nav.className='pl-actions';
+          const previous=el('button','Previous'),next=el('button','Next');
+          previous.type=next.type='button';
+          nav.append(previous,status,next);diagram.append(nav);
+          let start=1n,selectedRank=1n,pageSize=12n;
+          function showSelectedPage(){
+           pageSize=diagram.clientWidth<480?6n:12n;
+           start=((selectedRank-1n)/pageSize)*pageSize+1n;
+           page();
+          }
+          previous.onclick=()=>{if(start>1n){start-=pageSize;page();if(previous.disabled)next.focus();}};
+          next.onclick=()=>{if(start+pageSize<=total){start+=pageSize;page();if(next.disabled)previous.focus();}};
           function page(){
            tree.replaceChildren();
-           const groups=new Map(),end=start+11n<BigInt(n)?start+11n:BigInt(n);
+           const groups=new Map(),last=start+pageSize-1n,end=last<total?last:total;
            for(let rank=start;rank<=end;rank++){
             const port=describeUse(locate(rank)),key=port?.key??null;
             let item=groups.get(key);
@@ -224,19 +240,16 @@
             if(port){
              const a=sourceLink(String(rank),port.use);
              a.setAttribute('aria-label','Reference '+rank+' · '+port.label);
+             if(rank===selectedRank)a.setAttribute('aria-current','location');
              item.append(' ',a);
             }else item.append(' '+rank);
            }
-           if(BigInt(n)>12n){
-            const nav=el('li');
-            for(const [label,step,disabled] of [['Previous',-12n,start===1n],['Next',12n,end===BigInt(n)]]){
-             const b=el('button',label);b.type='button';b.disabled=disabled;
-             b.onclick=()=>{start+=step;page();};nav.append(b);
-            }
-            tree.append(nav);
-           }
+           nav.hidden=total<=pageSize;
+           status.textContent='References '+start+'–'+end+' of '+total;
+           previous.disabled=start===1n;
+           next.disabled=end===total;
           }
-          diagram.ontoggle=()=>{if(diagram.open && !tree.children.length)page();};
+          diagram.ontoggle=()=>{if(diagram.open)showSelectedPage();};
          }
         }
        }else line.append(' · reference count unavailable within the traversal limit');

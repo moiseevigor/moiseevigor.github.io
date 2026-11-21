@@ -194,3 +194,6 @@
 .pl-reference-tree li { position: relative; padding: .25rem 0; overflow-wrap: anywhere; }
 .pl-reference-tree li::before { content: ""; position: absolute; inset-inline-start: -.9rem; top: 1em; width: .6rem; border-top: 1px solid currentColor; }
 .pl-reference-tree a { display: inline-block; min-width: 1.5rem; text-align: center; }
+
+.pl-reference-tree a[aria-current="location"] { font-weight: bold; outline: 1px solid currentColor; outline-offset: 1px; }
+.pl-reference-tree + .pl-actions[hidden] { display: none; }
