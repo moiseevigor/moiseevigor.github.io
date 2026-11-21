@@ -1,0 +1,20 @@
+{
+  "edition": "published-15",
+  "byCallee": {
+    "CrossingData.psiP_strictMono": 5,
+    "JacobiCore.eps_strictMono": 3,
+    "JacobiCore.s_strictMonoOn": 10,
+    "JacobiFull.c_strictAntiOn": 5,
+    "JacobiInit.eps_strictMono": 3,
+    "JacobiInit.q_monotone": 9,
+    "JacobiInit.Γ_strictMono": 3,
+    "JacobiPeriodic.f1_div_c_strictAntiOn_I": 15
+  },
+  "counts": {
+    "first point": 13,
+    "first membership": 7,
+    "second point": 13,
+    "second membership": 7,
+    "order premise": 13
+  }
+}
