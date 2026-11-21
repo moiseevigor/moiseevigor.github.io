@@ -178,6 +178,29 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
         const s=window.ProofAtlasOccurrenceView.getSnapshot();
         return s.route.depth===19 && s.route.slots==='VZVaABA';
       });
+      async function checkProofFocus(control,route,node){
+        await control.click();
+        await page.waitForFunction(({route,node})=>{
+          const view=window.ProofAtlasOccurrenceView;
+          const root=view?.getScene()?.root;
+          return root?.node===node && root.route.root===route.root && root.route.depth===route.depth &&
+            root.route.slots===route.slots && location.hash.endsWith('.'+route.depth+'.'+route.slots);
+        },{route,node});
+      }
+      await checkProofFocus(rootCard.locator('[data-open-proof="arg"]'),{format:'ProofAtlasPackedRoute/1',root:1,depth:19,slots:'VZVaABA'},await page.evaluate(()=>window.ProofAtlasOccurrenceView.getSnapshot().node));
+      await page.goto(url);
+      await checkProofFocus(group.getByRole('button',{name:'Open proof for argument 4',exact:true}),target,argument.node);
+      const large=new URL(url);
+      large.searchParams.set('edition','goedel-sample-4331');
+      large.searchParams.set('proof','lean_workbook_plus_6206');
+      const largeArgument={format:'ProofAtlasPackedRoute/1',root:1,depth:11,slots:'VZUW'};
+      const caller=packed.prefix(largeArgument,10);
+      large.hash='occurrence=2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6.1.10.'+caller.slots;
+      await page.goto(large.href);
+      await checkProofFocus(group.locator('[data-open-proof]').last(),largeArgument,90415);
+      await page.goBack();
+      await page.waitForFunction(expected=>window.ProofAtlasOccurrenceView?.getScene()?.root.route.slots===expected,caller.slots);
+      assert.equal(new URL(page.url()).hash,large.hash);
       const positivity=new URL(url);
       positivity.searchParams.set('edition','goedel-sample-4331');
       positivity.searchParams.set('proof','lean_workbook_3485');

@@ -152,6 +152,13 @@
       card.append(inspect);
      }
     }
+    const proofArgument=(edge.field==='arg' && p.rule==='Pi-application' || folded && /^arg\d+$/.test(edge.field)) && child.role==='proof';
+    if(proofArgument && BigInt(child.expanded)>1n){
+     const label=edge.field==='arg'?'Open argument proof':'Open proof for '+field.toLowerCase();
+     const open=button(label,()=>callbacks.onSource(model.routeFor(scene,child.id)));
+     open.dataset.openProof=edge.field;
+     card.append(open);
+    }
    }
    if(p.typeReference){
     const b=button('Recorded type · Γ'+p.contextLength,async()=>{const epoch=++action;b.disabled=true;try{callbacks.onTypeStart?.();const type=await model.typeFor(scene,p.id);if(!disposed&&epoch===action){pick(p,false);callbacks.onType(model.routeFor(scene,p.id),type);}}catch(error){status.textContent=error.message;}finally{b.disabled=false;}});b.dataset.constructionType=p.id;card.append(b);
