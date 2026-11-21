@@ -11,6 +11,7 @@ require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/goed
 const {parameterContext,exactCallInputs,equalitySegments,firstStructuralDifference} = require('../../../public/js/proof-atlas-omitted-references');
 require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/type-notation-catalog.js','utf8'),{window});
 const contextShapes=new Map();
+const localPositions=new Map();
 let rawContexts=0n,namedContexts=0n;
 const contexts={operators:0n,identity:0n,unsupported:0n};
 const differences = {constructor:0n,payload:0n,identical:0n,limit:0n};
@@ -88,6 +89,7 @@ for (const record of records) {
     if (data.kind[row] !== 5) continue;
     const {head,args} = spine(data,row);
     if(data.kind[head]===4 && data.payloads[head].name==='congrArg' && args.length===6){
+      const congrRow=row;
       const inputs=exactCallInputs(data,{node:row,route:routes.route(row)},'congrArg',6);
       assert.deepEqual(inputs.map(a=>atlas.walk(data,a.route)),args);
       const fn=inputs[4];
@@ -153,6 +155,25 @@ for (const record of records) {
                 while(data.kind[row]===10){row=data.children[row][0];path.push(0);}
                 assert.deepEqual(f.call,{node:row,route:{root:route.root,slots:path}});
                 const {head,args}=spine(data,row);
+                if(f.form==='localCall'){
+                  assert.equal(data.kind[head],0);
+                  const headRoute={root:route.root,slots:path.concat(Array(args.length).fill(0))};
+                  assert.deepEqual(f.head,{node:head,route:headRoute});
+                  assert.deepEqual(f.binder,atlas.binding(data,headRoute));
+                  const slot=f.operands.indexOf(null);
+                  assert.equal(f.operands.length,args.length+1);
+                  assert.equal(f.operands.filter(a=>a===null).length,1);
+                  const all=[head,...args];
+                  for(const [i,operand] of f.operands.entries()){
+                    const expectedPath=i?path.concat(Array(args.length-i).fill(0),1):headRoute.slots;
+                    if(operand)assert.deepEqual(operand,{node:all[i],route:{root:route.root,slots:expectedPath}});
+                  }
+                  const position=slot?'argument':'function';
+                  if(!localPositions.has(position))console.log('Local '+position+' example:',record.name,congrRow);
+                  localPositions.set(position,(localPositions.get(position)??0n)+count);
+                  path=slot?path.concat(Array(args.length-slot).fill(0),1):headRoute.slots;
+                  row=all[slot];continue;
+                }
                 const op=window.PROOF_ATLAS_TYPE_NOTATION.entries.find(e=>e.name===data.payloads[head].name);
                 assert.equal(f.operands.filter(a=>a===null).length,1);
                 const visible=f.raw?args.map((_,i)=>i):op.visibleSlots;
@@ -264,3 +285,4 @@ console.log('Single-use lambda contexts:',contexts);
 console.log('Context shapes:',Object.fromEntries(contextShapes));
 console.log('Unsupported paths:',Object.fromEntries(missing));
 console.log('Including raw calls:',String(rawContexts),'catalogue applications only among new cases:',String(namedContexts));
+console.log('Local function positions:',Object.fromEntries(localPositions));

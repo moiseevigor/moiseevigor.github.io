@@ -111,6 +111,19 @@
    if(step.kind==='mdata'){at=step.at;continue;}
    if(step.kind!=='argument')return null;
    const c=step.call,p=data.payloads[c.head.node];
+   if(data.kind[c.head.node]===0 && c.arity<=6){
+    const binder=A.binding(data,c.head.route);
+    if(!binder)return null;
+    const inputs=[c.head];
+    const {args}=E.spine(data,c.call.node);
+    for(const [i,node] of args.entries()){
+     inputs.push({node,route:{root:c.call.route.root,slots:c.call.route.slots.concat(Array(args.length-i-1).fill(0),1)}});
+    }
+    if(inputs[c.slot].node!==at.node || inputs[c.slot].route.slots.join('.')!==at.route.slots.join('.'))return null;
+    frames.push({form:'localCall',glyph:c.label,call:c.call,binder,head:c.head,
+     operands:inputs.map((input,slot)=>slot===c.slot?null:input)});
+    at=c.call;continue;
+   }
    const op=catalog.entries.find(e=>data.kind[c.head.node]===4 && e.name===p.name &&
     JSON.stringify(e.nameParts)===JSON.stringify(p.nameParts) && e.arity===c.arity &&
     e.levelParams.length===p.levels.length);

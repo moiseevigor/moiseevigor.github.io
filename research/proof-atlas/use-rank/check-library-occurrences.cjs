@@ -449,6 +449,27 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
    const unsupportedAt=atlas.routes(raw).route(465);
    await page.goto('http://localhost/projects/proof-atlas/library/?edition=published-15&proof='+unsupported.name+'&route='+unsupportedAt.root+':'+unsupportedAt.slots.join('.')+'#expr-465');
    await page.getByText('The operator context is unavailable for this path.',{exact:false}).waitFor();
+   const periodic=published.declarations.find(r=>r.name==='JacobiPeriodic.exists_unique_f1_zero');
+   const periodicData=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+periodic.indexFile)));
+   for(const [row,formula] of [[6570,'(s1(x) = s2)'],[2514,'(x(s1) = s2)']]){
+    const at=atlas.routes(periodicData).route(row);
+    await page.goto('http://localhost/projects/proof-atlas/library/?edition=published-15&proof='+periodic.name+'&route='+at.root+':'+at.slots.join('.')+'#expr-'+row);
+    const panel=page.getByRole('region',{name:'Equality under a function'});
+    await panel.getByText('Function context: x ↦ '+formula,{exact:true}).waitFor();
+    const parse=async link=>{
+     const u=new URL(await link.evaluate(a=>a.href)),[root,slots]=u.searchParams.get('route').split(':');
+     return {node:Number(u.hash.slice(6)),route:{root:Number(root),slots:slots.split('.').map(Number)}};
+    };
+    const head=await parse(panel.getByRole('link',{name:'Function occurrence',exact:true}));
+    const owner=await parse(panel.getByRole('link',{name:/^Binder of /}));
+    assert.equal(atlas.walk(periodicData,head.route),head.node);
+    assert.deepEqual(owner,atlas.binding(periodicData,head.route));
+    const param=await parse(panel.getByRole('link',{name:'First parameter use'}));
+    assert.equal(JSON.stringify(param.route)===JSON.stringify(head.route),row===2514);
+    const call=await parse(panel.getByRole('link',{name:'Open application',exact:true}));
+    assert.deepEqual(head.route.slots,call.route.slots.concat(0));
+    assert.equal(atlas.walk(periodicData,call.route),call.node);
+   }
    const repeated=published.declarations.find(r=>r.name==='JacobiCore.Sol.eq_of_eq_at');
    const graph=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+repeated.indexFile)));
    const repeatAt={node:1462,route:atlas.routes(graph).route(1462)};

@@ -290,7 +290,12 @@
          });
          if(frame.form==='binary')expression=['(',...args[0],' ',op,' ',...args[1],')'];
          else{
-          expression=[op,'('];
+          if(frame.form==='localCall'){
+           const fn=args.shift(),row=el('li');
+           row.append(sourceLink('Function occurrence',frame.head),' · ',sourceLink('Binder of '+frame.glyph,frame.binder),
+            ' · ',sourceLink('Open application',frame.call));fixed.append(row);
+           expression=[...fn,'('];
+          }else expression=[op,'('];
           for(const [i,arg] of args.entries()){
            if(i)expression.push(', ');
            expression.push(...arg);
