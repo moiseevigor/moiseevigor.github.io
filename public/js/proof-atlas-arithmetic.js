@@ -180,7 +180,14 @@
   const numeral=application(end[2],'OfNat.ofNat',3);
   const literal=numeral && data.kind[numeral[1].node]===9?data.payloads[numeral[1].node]:null;
   const operandLabel=literal?.literalKind==='natVal'?'OfNat.ofNat('+literal.value+')':'e'+end[2].node;
-  return {goal,statement,proof,domain,contrary,close,operand:end[2],operandLabel,evidence:end[3]};
+  let transport=null;
+  const cast=application(end[3],'Eq.mp',4);
+  if(cast){
+   const before=formula(data,cast[0]),after=formula(data,cast[1]);
+   if(before?.name==='LT.lt' && after?.name==='LT.lt')
+    transport={before,after,equality:cast[2],premise:cast[3]};
+  }
+  return {goal,statement,proof,domain,contrary,close,operand:end[2],operandLabel,evidence:end[3],transport};
  }
  function contraryUses(data,order){
   const refs=common?require('./proof-atlas-recursive-inputs'):host.ProofAtlasRecursiveInputs;
@@ -196,9 +203,16 @@
    const site={node:result.witness.node,route:{root:1,slots:order.close.route.slots.concat(result.witness.slots)}};
    const binding=A.binding(data,site.route);
    if(!binding || String(binding.route.slots)!==String(binder))throw Error('Contrary assumption scope mismatch');
-   const firstCall=calls.applicationAtUse(data,site,{includePeers:false});
-   const next=firstCall && calls.applicationAtUse(data,firstCall.call,{includePeers:false});
-   uses.push({site,first:firstCall,next});
+   const chain=[],boundary=order.evidence.route.slots;
+   let cursor=site;
+   while(chain.length<32 && cursor.route.slots.length>boundary.length &&
+         boundary.every((v,i)=>cursor.route.slots[i]===v)){
+    const c=calls.applicationAtUse(data,cursor,{includePeers:false});
+    if(!c || c.call.route.slots.length<boundary.length)break;
+    chain.push(c);cursor=c.call;
+   }
+   const reached=cursor.node===order.evidence.node && String(cursor.route.slots)===String(boundary);
+   uses.push({site,first:chain[0],next:chain[1],chain,reached});
   }
   return {uses,total:String(total),limited:BigInt(uses.length)<total};
  }
@@ -226,12 +240,29 @@
        const action=link(named?readings[c.label]:c.label,c.call);action.title=c.label;
        row.append(' → ',action,' ('+role+')');
       }
+      if(u.chain.length>2){
+       const more=el('details'),path=el('ol');more.dataset.arithmeticPath='';
+       more.append(el('summary',u.reached?'Continue to the self-inequality':'Continue along the available calls'),path);
+       for(const c of u.chain.slice(2)){
+        const step=el('li');
+        step.append(link(c.label,c.call),' · '+(c.slot?'argument '+c.slot+' of '+c.arity:'function position'));
+        path.append(step);
+       }
+       row.append(more);
+      }
       list.append(row);
      }
      if(result.uses.length)trail.append(list);
      if(result.limited)trail.append('Further references outside the display or traversal limit.');
     };
     const end=el('li');end.append(link('Derive',o.evidence),' ',link(o.operandLabel,o.operand),' < ',o.operandLabel,'. ',link('Irreflexivity',o.close),' rules this out.');
+    if(o.transport){
+     const t=o.transport,detail=el('details'),line=el('p');
+     detail.dataset.contradictionRewrite='';
+     line.append(link(caption(t.before),t.before.site),' → ',link(caption(t.after),t.after.site));
+     detail.append(el('summary','Final rewrite'),line,link('Equality used',t.equality),' · ',link('Strict inequality before rewriting',t.premise));
+     end.append(detail);
+    }
     const conclusion=el('li');conclusion.append(link('le_of_not_gt',o.proof),' gives ',link(caption(o.statement),o.goal),'.');
     steps.append(assumption,end,conclusion);container.append(panel);
    }

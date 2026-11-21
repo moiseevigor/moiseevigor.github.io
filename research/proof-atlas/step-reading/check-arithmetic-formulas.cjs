@@ -37,6 +37,10 @@ for(const d of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations.filter(d=>d.kin
  if(order){
   for(const key of ['goal','proof','domain','close','operand','evidence'])assert.equal(A.walk(g,order[key].route),order[key].node);
   assert.equal(spine(g,order.close.node).args[3],order.evidence.node);
+  const t=order.transport;assert(t);
+  assert.deepEqual(spine(g,order.evidence.node).args,[t.before.site.node,t.after.site.node,t.equality.node,t.premise.node]);
+  assert.equal(g.payloads[spine(g,t.equality.node).head].name,'congrArg');
+  check(g,t.before);check(g,t.after);
   const binder={root:1,slots:order.close.route.slots.slice(0,-1)};
   const refs=require('./ranked-binder-uses.cjs')(g,binder);
   assert(refs.total>0n);assert.deepEqual(A.binding(g,refs.select(0n).route).route,binder);
@@ -47,14 +51,21 @@ for(const d of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations.filter(d=>d.kin
    assert.equal(u.first.label,'Mathlib.Tactic.Linarith.sub_neg_of_lt');
    assert.equal(u.first.slot,7);assert.equal(u.first.arity,7);
    assert.deepEqual(u.first.call.route.slots.concat(1),u.site.route.slots);
-   for(const c of [u.first,u.next]){
+   let previous=u.site;
+   assert(u.reached);assert.deepEqual(u.chain.at(-1).call,order.evidence);
+   for(const c of u.chain){
+    assert(c.slot>0);
+    const arg=c.call.route.slots.concat(Array(c.arity-c.slot).fill(0),1);
+    assert.deepEqual(arg,previous.route.slots);
+    assert.equal(spine(g,c.call.node).args[c.slot-1],previous.node);
+    previous=c.call;
     assert.equal(A.walk(g,c.call.route),c.call.node);assert.equal(A.walk(g,c.head.route),c.head.node);
    }
    assert.deepEqual(u.next.call.route.slots.concat(Array(u.next.arity-u.next.slot).fill(0),1),u.first.call.route.slots);
   });
   const children=g.children.slice();children[order.goal.node]=[children[order.goal.node][0],g.roots[0]===order.goal.node?order.operand.node:spine(g,order.goal.node).head];
   assert.equal(closingOrderArgument({...g,children}),null);
-  orderProofs.push({proof:d.name,order,assumptionReferences:String(refs.total)});
+  orderProofs.push({proof:d.name,order,paths:trace.uses.map(u=>u.chain.map(c=>c.call)),assumptionReferences:String(refs.total)});
  }
  for(const p of ports(g,Infinity).routes){
   if(seen.has(p.callNode))continue;
