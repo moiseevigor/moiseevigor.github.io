@@ -2,7 +2,7 @@
 const fs=require('node:fs'),z=require('node:zlib'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 const A=require('../../../public/js/proof-atlas-library-data');
 const {spine}=require('../../../public/js/proof-atlas-elimination');
-const {formula,statement,caption}=require('../../../public/js/proof-atlas-arithmetic');
+const {formula,statement,caption,hypothesisInputs}=require('../../../public/js/proof-atlas-arithmetic');
 const ports=require('./distinct-call-ports.cjs');
 global.window={};require('../../../public/data/proof-atlas/goedel-sample-manifest');
 const arities={'HPow.hPow':6,'HMul.hMul':6,'HSub.hSub':6,'HAdd.hAdd':6,'HDiv.hDiv':6,Eq:3,Ne:3,'LE.le':4,'LT.lt':4,'Real.sqrt':1,abs:4},counts={},examples={};
@@ -28,6 +28,7 @@ const arities={'HPow.hPow':6,'HMul.hMul':6,'HSub.hSub':6,'HAdd.hAdd':6,'HDiv.hDi
    check(g,t.left);if(t.right)check(g,t.right);
   }
 let absent=0,nested=0;
+const joins=[];
 for(const d of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations.filter(d=>d.kind==='theorem'&&d.bodyAvailable)){
  const raw=z.gunzipSync(fs.readFileSync('.'+d.indexFile));
  assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),d.indexSha256);
@@ -36,6 +37,18 @@ for(const d of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations.filter(d=>d.kin
   if(seen.has(p.callNode))continue;
   seen.add(p.callNode);
   const at={node:p.callNode,route:{root:1,slots:p.slots.slice(0,p.callLength)}};
+  const join=hypothesisInputs(g,at);
+  if(join){
+   const names=[];
+   for(const input of join.inputs){
+    assert.equal(A.walk(g,input.binder.domain.route),input.binder.domain.node);
+    const c=require('../../../public/js/proof-atlas-omitted-references').applicationAtUse(g,input.site,{includePeers:false});
+    assert.deepEqual(c.call.route,at.route);assert.equal(c.slot,input.slot);
+    assert.deepEqual(A.binding(g,input.site.route).route,input.binder.proofBinder.route);
+    names.push(input.binder.name);
+   }
+   joins.push({proof:d.name,at,name:join.name,names});
+  }
   const tree=formula(g,at),s=spine(g,at.node),name=g.payloads[s.head].name;
   if(s.args.length!==arities[name]){assert.equal(tree,null);absent++;continue;}
   counts[name]=(counts[name]||0)+1;
@@ -81,6 +94,15 @@ for(const edition of window.PROOF_ATLAS_LIBRARY.editions){
   assert.equal(hits,1);
  }
  assert.equal(sameSign.size,1);
+ const callRoute=JSON.parse([...sameSign][0]),call={node:A.walk(g,callRoute),route:callRoute};
+ const receiving=hypothesisInputs(g,call);
+ assert.equal(receiving.name,'JacobiData.T1_T2_same_sign');
+ assert.deepEqual(receiving.inputs.map(input=>input.slot),[3,4,5,6]);
+ for(const [i,input] of receiving.inputs.entries()){
+  assert.deepEqual(input.binder,context.binders[i+2]);
+  assert.deepEqual(A.binding(g,input.site.route).route,input.binder.proofBinder.route);
+  assert.equal(A.walk(g,input.site.route),input.site.node);
+ }
  const expanded=formula(g,at,6);check(g,expanded);
  const names=[];
  function inspect(t){if(t.variables)names.push(t.label);if(t.left)inspect(t.left);if(t.right)inspect(t.right);}
@@ -88,6 +110,6 @@ for(const edition of window.PROOF_ATLAS_LIBRARY.editions){
  assert.deepEqual(names,['z','z','Dz','T1','T2','d','s'].map(n=>'JacobiData.'+n));
  assert.deepEqual([t.name,t.left.name,t.left.right.name,t.right.name,t.right.left.name],
   ['LE.le','HMul.hMul','Real.sqrt','abs','HDiv.hDiv']);
- riccati.push({edition:edition.id,proof:d.name,at});
+ riccati.push({edition:edition.id,proof:d.name,at,call});
 }
-console.log(JSON.stringify({counts,absent,nested,examples,riccati},null,2));
+console.log(JSON.stringify({counts,absent,nested,examples,riccati,joins},null,2));

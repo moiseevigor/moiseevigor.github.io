@@ -80,10 +80,45 @@
   const operand=v=>v.right?'('+caption(v)+')':caption(v);
   return operand(t.left)+' '+t.symbol+' '+operand(t.right);
  }
+ function hypothesisInputs(data,at){
+  if(at.route.root!==1 || data.kind[at.node]!==5)return null;
+  const slots=at.route.slots;
+  if(slots.at(-1)===0 && data.kind[A.walk(data,{root:1,slots:slots.slice(0,-1)})]===5)return null;
+  let node=at.node;
+  const args=[];
+  while(data.kind[node]===5 && args.length<32){
+   args.unshift(data.children[node][1]);node=data.children[node][0];
+  }
+  if(data.kind[node]!==4 || args.filter(arg=>data.kind[arg]===0).length<2)return null;
+  const {binders}=statement(data,{node:data.roots[0],route:{root:0,slots:[]}}),inputs=[];
+  for(const [i,arg] of args.entries()){
+   if(data.kind[arg]!==0)continue;
+   const site={node:arg,route:{root:1,slots:slots.concat(Array(args.length-i-1).fill(0),1)}};
+   const binding=A.binding(data,site.route);
+   const b=binding && binders[binding.route.slots.length];
+   if(!b?.proofBinder || b.proofBinder.node!==binding.node || !binding.route.slots.every(k=>k===1))continue;
+   const condition=formula(data,b.domain);
+   if(condition?.relation)inputs.push({binder:b,site,slot:i+1,label:caption(condition)});
+  }
+  if(new Set(inputs.map(input=>input.binder)).size<2)return null;
+  return {name:data.payloads[node].name,head:{node,route:{root:1,slots:slots.concat(Array(args.length).fill(0))}},inputs};
+ }
  function mount(container,data,at,link){
+  const el=(tag,text)=>{const e=document.createElement(tag);if(text)e.textContent=text;return e;};
+  const receiving=hypothesisInputs(data,at);
+  if(receiving){
+   const panel=el('section'),branches=el('ul');panel.dataset.hypothesisInputs='';
+   branches.className='pl-reference-tree';
+   panel.append(el('h4','Hypotheses used together'),link(receiving.name,receiving.head),branches);
+   for(const input of receiving.inputs){
+    const row=el('li');
+    row.append(link(input.label,input.binder.domain),' → ',link(input.binder.name+' · argument '+input.slot,input.site));
+    branches.append(row);
+   }
+   container.append(panel);
+  }
   const {focus,binders}=statement(data,at);
   const tree=formula(data,focus);if(!tree || (binders.length && !tree.relation))return;
-  const el=(tag,text)=>{const e=document.createElement(tag);if(text)e.textContent=text;return e;};
   const panel=el('section'),line=el('p'),detail=el('details'),list=el('ul');
   panel.dataset.arithmeticFormula='';line.className='pl-arithmetic-expression';
   let truncated=false;
@@ -170,5 +205,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={formula,statement,caption};else host.ProofAtlasArithmetic={mount};
+ if(common)module.exports={formula,statement,caption,hypothesisInputs};else host.ProofAtlasArithmetic={mount};
 })(typeof window==='undefined'?globalThis:window);
