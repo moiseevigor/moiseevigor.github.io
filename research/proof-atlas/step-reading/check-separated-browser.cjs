@@ -81,6 +81,31 @@ async function main() {
       return route.fulfill({status:404});
     });
     const body='http://localhost'+libraryPath+'?edition=browser-control&proof='+name+'&route=1%3A#expr-'+graph.roots[1];
+    if(name==='letFunction'){
+      const call=[1,1,1,1],head=call.concat(0,1,0);
+      const url=new URL(body);
+      url.searchParams.set('geometry','scoped');url.searchParams.set('fold','applications');
+      url.searchParams.set('route','1:'+call.join('.'));url.hash='';
+      const headNode=A.walk(graph,{root:1,slots:head});
+      assert.equal(A.kinds[graph.kind[headNode]],'letE');
+      for(const [label,slot] of [['Applied function · let f',null],['Declared type',0],['Defining value · outer scope',1],['Let body · f in scope',2]]){
+        await page.goto(url.href);
+        const panel=page.locator('#pl-application-headers details').first();
+        await panel.locator('summary').click();
+        await panel.locator('ol > li').nth(2).getByRole('button',{name:label,exact:true}).click();
+        const selection=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
+        assert.deepEqual(selection.route,{root:1,slots:slot===null?head:head.concat(slot)});
+        assert.equal(selection.selected,slot===null?headNode:graph.children[headNode][slot]);
+        if(slot===1 || slot===2){
+          await page.getByRole('button',{name:/^Enclosing binder/}).click();
+          const binder=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
+          assert.deepEqual(binder.route,{root:1,slots:slot===1?[1,1]:head});
+        }
+      }
+      assert.deepEqual(errors,[]);
+      console.log('Let head, three fields and both shadowed binders passed.');
+      return;
+    }
     if(name==='projectedFunctions'){
       const url=new URL(body),call=[1,1,1,1];
       url.searchParams.set('geometry','scoped');url.searchParams.set('fold','applications');

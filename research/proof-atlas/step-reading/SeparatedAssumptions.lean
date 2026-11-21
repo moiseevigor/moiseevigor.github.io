@@ -14,11 +14,15 @@ elab "primitiveAndField" i:num t:term:max : term => do
 theorem projectedFunctions (P Q : Prop) (rules : (P → Q) ∧ (P → Q)) (p : P) : Q ∧ Q :=
   And.intro ((primitiveAndField 0 rules) p) ((primitiveAndField 1 rules) p)
 
+theorem letFunction (P Q : Prop) (f : P → Q) (p : P) : Q ∧ P :=
+  And.intro ((let f := f; f) p) p
+
 open Lean Elab Command AtlasLibrary in
 run_cmd do
   let env ← getEnv
   let name := match ← IO.getEnv "ATLAS_BINDER_CONTROL" with
     | some "distinct" => ``distinctPremises
+    | some "let" => ``letFunction
     | some "projected" => ``projectedFunctions
     | _ => ``separatedAssumptions
   let some (.thmInfo decl) := env.find? name | throwError "Missing theorem"

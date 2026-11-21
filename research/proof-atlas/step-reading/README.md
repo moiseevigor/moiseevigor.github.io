@@ -1109,3 +1109,11 @@ The control `projectedFunctions` assumes `rules : (P → Q) ∧ (P → Q)` and `
 The argument list identifies `And[0]` and `And[1]` by structure name and zero-based kernel field index. For each input the reader can open the projection itself or the structure expression supplying its fields. The browser test selected all four occurrence paths. The two structure occurrences resolve to the same binder for `rules`, while the chosen fields are distinct despite having identical function types. The diagram retains the original application to `p` without reducing the projection.
 
 To reproduce, run `build-shared-case.py --projected-functions --output /tmp/projected.json` with Lean 4.33.1 and pass that packet to `check-separated-browser.cjs` on standard input.
+
+#### A let expression in function position
+
+In `(let f := f; f) p`, the two occurrences on opposite sides of the semicolon have the same printed name. The defining value refers to the enclosing function parameter. The body refers to the newly introduced local definition. Ordinary surface syntax preserves this distinction in the compiled `letFunction` theorem: given `f : P → Q` and `p : P`, it supplies that application as the first premise of `Q ∧ P`. Lean 4.33.1 kernel-checked the body and its declared type before export.
+
+A folded input with a `letE` function head exposes the original declared type, defining value and body. The local browser test opened the head and all three fields, then followed each same-named reference to its own binder. Selecting the value led to the outer lambda; selecting the body led back to the let head itself. The control establishes that an applied let expression is possible beyond the three head forms counted in the AI and SE(2) inventories.
+
+Reproduce with `build-shared-case.py --let-function --output /tmp/let-function.json` and pass the packet to `check-separated-browser.cjs` on standard input.

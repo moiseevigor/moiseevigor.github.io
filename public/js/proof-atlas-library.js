@@ -962,20 +962,19 @@
   }
   const route={root:arg.route.root,slots:arg.route.slots.concat(Array(depth).fill(0))};
   if(current.kind(node)==='const')return {node,route,name:current.payload(node).name};
-  if(current.kind(node)==='proj'){
-   const payload=current.payload(node);
-   const structure={node:current.children(node)[0],route:{root:route.root,slots:route.slots.concat(0)}};
-   return {node,route,name:payload.typeName+'['+payload.index+']',structure};
+  const kind=current.kind(node),payload=current.payload(node);
+  function field(label,slot){
+   return {label,node:current.children(node)[slot],route:{root:route.root,slots:route.slots.concat(slot)}};
   }
-  if(current.kind(node)==='lam'){
-   const body={node:current.children(node)[1],route:{root:route.root,slots:route.slots.concat(1)}};
-   return {node,route,name:'λ '+(current.payload(node).binderName||'_'),body};
-  }
+  if(kind==='proj')return {node,route,name:payload.typeName+'['+payload.index+']',fields:[field('Projected structure',0)]};
+  if(kind==='lam')return {node,route,name:'λ '+(payload.binderName||'_'),fields:[field('Lambda body',1)]};
+  if(kind==='letE')return {node,route,name:'let '+(payload.declName||'_'),
+   fields:[field('Declared type',0),field('Defining value · outer scope',1),field('Let body · '+(payload.declName||'_')+' in scope',2)]};
   if(current.kind(node)!=='bvar')return null;
   const binder=A.binding(current.data,route);
   if(!binder)return null;
-  const payload=current.payload(binder.node);
-  return {node,route,name:payload.binderName||payload.declName||'_',binder};
+  const owner=current.payload(binder.node);
+  return {node,route,name:owner.binderName||owner.declName||'_',binder};
  }
  let windowRoot=null,windowPacket=null,argumentOffset='last';
  function scopedLayout(){
@@ -1054,9 +1053,8 @@
      headButton.type='button';headButton.title=A.path(current.data,producer.route);
      headButton.onclick=()=>selectOccurrence(producer.node,true,true,producer.route);
      row.append(headButton);
-     const child=producer.body||producer.structure;
-     if(child){
-      const open=el('button',producer.body?'Lambda body':'Projected structure');
+     for(const child of producer.fields||[]){
+      const open=el('button',child.label);
       open.type='button';open.title=A.path(current.data,child.route);
       open.onclick=()=>selectOccurrence(child.node,true,true,child.route);
       row.append(open);
