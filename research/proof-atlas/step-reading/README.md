@@ -984,3 +984,19 @@ The same browser regression also starts at the proof body with binder and applic
 With Playwright available, run `node research/proof-atlas/step-reading/check-separated-browser.cjs < /tmp/atlas-separated.json`. Set `ATLAS_CHROMIUM_PATH` to use a local Chrome installation.
 
 The folded application inspector now identifies repeated argument terms within each displayed spine. In the multiplication call at row 57669 of `lean_workbook_20418`, argument 11 identifies argument 10 as its first use of row 42907. The local browser check opened both argument controls in the original corpus packet and verified distinct occurrence paths ending in `fn.arg` and `arg`. Both caller-local role records are unavailable. The separate signature experiment above establishes the propositional domains. The structural label also applies to repeated types and values, and compares only the slots in the current displayed spine.
+
+#### Which premises fit in a six-port diagram?
+
+With a call selected as the root of a folded scene, the default drawing reserves one port for the function and displays the first five arguments of a wide call. The [visibility check](check-premise-visibility.cjs) rebuilt the actual scenes for the 98 matched call rows, verified each root edge against its original argument route, and counted how many repeated premise positions appeared. The default showed **neither use in all 98 rows**. At the same port budget, taking the final five arguments, or the first two and final three, would show every matched group in full. The complete ordered argument list remains available in all cases.
+
+A second comparison counts individual proof arguments at the 191 maximal call occurrences with complete native role observations. These contain 224 proof arguments and 59 calls wider than five arguments. Short calls retain all positions.
+
+| Five argument positions displayed | Complete repeated groups (98) | Recorded proof arguments visible (224) | Previously visible proof arguments lost |
+|---|---:|---:|---:|
+| First five (current when focused) | 0 | 160 | 0 |
+| Final five | 98 | 220 | 4 |
+| First two and final three | 98 | 194 | 28 |
+
+The alternative layouts are offline slot selections. The counts assume the call is in focus with the full six-port allowance; nested calls can receive less space. The 98 groups come from the signature search and the 224 individual arguments from sparse caller-local observations. Neither sample is representative of all mathematical proof steps. The four lost arguments give a reason to retain access to earlier positions even when displaying the final arguments. Reader comprehension is unmeasured.
+
+To reproduce, pass the complete JSON output of `check-repeated-proof-parameters.cjs` on standard input to `node research/proof-atlas/step-reading/check-premise-visibility.cjs` from the repository root.

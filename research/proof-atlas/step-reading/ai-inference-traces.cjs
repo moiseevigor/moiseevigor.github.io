@@ -54,7 +54,7 @@ function foldSize(graph, selected, root = graph.roots[1]) {
   return {full,visible,boundaries,hidden,visibleAt:id=>selected.has(id) ? 1n : sizes[id]};
 }
 
-async function measure(item, uncovered) {
+async function measure(item, uncovered, onComplete) {
   const profile = (await union.open(item)).case;
   const graph = profile.data;
   const stages = new Map();
@@ -97,6 +97,7 @@ async function measure(item, uncovered) {
     }
     if (inputs.length !== call.args.length) continue;
     complete++;
+    onComplete?.(inputs,call.args.length);
     if(new Set(call.args).size < call.args.length) recordedRepeated++;
     const repeatedProofs=new Set(), repeatedExplicitProofs=new Set();
     for(const [i,first] of inputs.entries()){
@@ -140,7 +141,8 @@ async function measure(item, uncovered) {
   const repetition={rows:repeatedRows.size,occurrences:String(repeatedOccurrences),recordedRepeated,reusedProofCalls,explicitProofReuse,repeatedRolePairs};
   return {coverage,repetition,declaration:item.record.name,indexSha256:item.record.indexSha256,maximal,complete,twoPremises,twoExplicit,example};
 }
-(async()=>{
+module.exports = {measure};
+if (require.main === module) (async()=>{
   const rows=[];
   const uncovered = process.argv.includes('--concentration') ? [] : null;
   for(const item of union.inventory().filter(item=>item.edition==='goedel-sample-4331')) rows.push(await measure(item,uncovered));
