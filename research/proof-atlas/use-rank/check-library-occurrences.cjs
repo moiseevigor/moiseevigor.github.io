@@ -121,6 +121,20 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
      const receiver=require('../../../public/js/proof-atlas-omitted-references').applicationAtUse(term,expectedUse);
      const linkToCall=new URL(await branch.getByRole('link',{name:receiver.label,exact:true}).evaluate(a=>a.href));
      assert.equal(linkToCall.searchParams.get('route'),'1:'+receiver.call.route.slots.join('.'));
+     const dest=require('../../../public/js/proof-atlas-omitted-references').resultDestination(term,receiver.call).call;
+     if(ctor==='Or.inl'){
+      assert.equal(receiver.label,'Eq.symm');assert.equal(dest?.label,'Eq.ndrec');assert.equal(dest.slot,6);
+      await branch.getByText('Arguments of Eq.ndrec',{exact:true}).click();
+      const positions=branch.locator('ol li');
+      assert.equal(await positions.count(),10);
+      await branch.getByRole('link',{name:'7 references to the motive input',exact:true}).waitFor();
+      for(const [k,label] of ['α','a','motive','m','b','h',null,null,null,null].entries()){
+       const title=label?label+' · argument '+(k+1):'Result applied to argument '+(k+1);
+       const u=new URL(await positions.nth(k).getByRole('link',{name:title,exact:true}).evaluate(a=>a.href));
+       const actual=require('../../../public/js/proof-atlas-application-ports').sourceInput(term,dest.call,k+1);
+       assert.equal(u.hash,'#expr-'+actual.node);assert.equal(u.searchParams.get('route'),'1:'+actual.route.slots.join('.'));
+      }
+     }
      const u=new URL(await branch.getByRole('link',{name:hypothesis,exact:true}).evaluate(a=>a.href));
      assert.equal(u.searchParams.get('route'),'1:'+expected.route.slots.join('.'));
      assert.equal(u.hash,'#expr-'+expected.node);

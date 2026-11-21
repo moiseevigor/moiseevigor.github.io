@@ -300,6 +300,34 @@
                if(receiver){
                 result.append(receiver.slot?' · argument '+receiver.slot+' of '+receiver.arity+' to ':' · function of ',
                  link(receiver.label,url(owner.record.name,receiver.call.node,receiver.call.route)));
+                const next=window.ProofAtlasOmittedReferences.resultDestination(owner.data,receiver.call);
+                const line=el('div');
+                if(next.call){
+                 const call=next.call;
+                 line.append('Its result supplies '+(call.slot?'argument '+call.slot+' of '+call.arity:'the function')+' to ',
+                  link(call.label,url(owner.record.name,call.call.node,call.call.route)));
+                 const sig=owner.data.kind[call.head.node]===4 && window.ProofAtlasRoleOccurrences.importedSignature(
+                  window.PROOF_ATLAS_TYPE_NOTATION,edition.id,call.label,window.PROOF_ATLAS_AI_SAMPLE?.provenance.compiler,window.PROOF_ATLAS_CORE_SIGNATURES);
+                 if(sig){
+                  const signature=el('details'),args=el('ol');
+                  signature.append(el('summary','Arguments of '+call.label),args);
+                  for(let k=1;k<=call.arity;k++){
+                   const path={root:call.call.route.root,slots:call.call.route.slots.concat(Array(call.arity-k).fill(0),1)};
+                   const node=A.walk(owner.data,path),param=sig.binders[k-1],li=el('li');
+                   li.append(link(param?param.name+' · argument '+k:'Result applied to argument '+k,url(owner.record.name,node,path)));
+                   if(k===call.slot)li.append(' · receives '+receiver.label);
+                   if(param?.name==='motive' && owner.data.kind[node]===6){
+                    const body=owner.data.children[node][1],count=window.ProofAtlasRecursiveInputs.countReferences(owner.data,body,0);
+                    if(count.status==='counted')li.append(' · ',link(number(count.occurrences)+' references to the motive input',
+                     url(owner.record.name,body,{root:path.root,slots:path.slots.concat(1)})));
+                   }
+                   args.append(li);
+                  }
+                  signature.append(el('p','Signature SHA-256 '+sig.signatureSha256));
+                  line.append(signature);
+                 }
+                }else line.append('Its result reaches ',link(next.kind==='root'?'the expression root':next.kind+' · '+next.field,url(owner.record.name,next.at.node,next.at.route)));
+                result.append(line);
                }
               }
               if(BigInt(uses.occurrences)>1n){

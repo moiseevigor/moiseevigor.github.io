@@ -25,6 +25,8 @@ assert compiler == catalog['compiler']
 assert hashlib.sha256(lean.read_bytes()).hexdigest() == catalog['leanExecutableSha256']
 names = json.loads((base / 'core-signature-requests.json').read_text())
 assert names == sorted(set(names))
+# The six-argument transport prefix occurs inside a ten-argument case body.
+names = sorted(set(names) | {'Eq.ndrec'})
 # Reuse the native serializer and the existing kernel-checked binder extraction.
 exporter = (notation / 'Export.lean').read_text()
 start = exporter.index('      let info ← getConstInfo name')

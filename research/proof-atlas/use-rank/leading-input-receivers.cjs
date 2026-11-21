@@ -4,7 +4,7 @@ const fs = require('node:fs'), vm = require('node:vm'), zlib = require('node:zli
 const assert = require('node:assert/strict');
 const {createHash} = require('node:crypto');
 const A = require('../../../public/js/proof-atlas-library-data');
-const {applicationAtUse} = require('../../../public/js/proof-atlas-omitted-references');
+const {applicationAtUse,resultDestination} = require('../../../public/js/proof-atlas-omitted-references');
 const {sourceInput} = require('../../../public/js/proof-atlas-application-ports');
 const E = require('../../../public/js/proof-atlas-elimination');
 const {countReferences} = require('../../../public/js/proof-atlas-recursive-inputs');
@@ -30,7 +30,7 @@ const nativeInventories=[
  ...(published?window.PROOF_ATLAS_OCCURRENCE_TYPES.records:window.PROOF_ATLAS_AI_SAMPLE.types).map(d=>({d,kind:'primary'})),
  ...(published?window.PROOF_ATLAS_ELIMINATIONS.records:window.PROOF_ATLAS_AI_SAMPLE.eliminations).map(d=>({d,kind:'case'}))
 ];
-const caseRoutes=new Set(),handlerUseRoutes=new Set();
+const nextCalls=new Map(),caseRoutes=new Set(),handlerUseRoutes=new Set();
 const formalCache=new Map(),missingSignatures=new Map();
 const splitStats={groups:0,twoChildren:0,threeChildren:0,nineTenthsInOneChild:0,applicationSplits:0,threeOrMoreOccupiedPorts:0,maxOccupiedPorts:0,occupiedArguments:0,formalSlots:0,dependentSlots:0,parameterEdges:0,casePositions:0,handlerPositions:0,occupiedHandlers:0,checkedHandlerInputs:0,unusedHandlerInputs:0,handlerUses:0,handlerApplicationUses:0,recordedCallTypes:0,lambdaResultUnused:0,withDeclaredAndRecorded:0,resultTypes:0,dependentResults:0,resultEdges:0,residualForalls:0,formalSplits:0,importedSlots:0,externalConstantArguments:0,otherHeadArguments:0,beyondLiteralPrefix:0};
 function audit(record) {
@@ -218,6 +218,19 @@ function audit(record) {
                 if(receiving){
                   assert.deepEqual(sourceInput(data,receiving.call,receiving.slot),use);
                   splitStats.handlerApplicationUses++;
+                  const step=resultDestination(data,receiving.call);
+                  const next=step.call;
+                  if(next)assert.deepEqual(sourceInput(data,next.call,next.slot),receiving.call);
+                  if(next?.label==='Eq.ndrec' && receiving.label==='Eq.symm' && next.slot===6){
+                    const motive=sourceInput(data,next.call,3);
+                    if(data.kind[motive.node]===6){
+                      const body=data.children[motive.node][1],uses=countReferences(data,body,0);
+                      assert.equal(uses.status,'counted');
+                      if(process.env.ATLAS_FORMAL_EXAMPLE && !splitStats.transportExample)splitStats.transportExample={proof:record.name,motiveRow:motive.node,argumentName:data.payloads[motive.node].binderName,bodyKind:A.kinds[data.kind[body]],uses:uses.occurrences};
+                    }
+                  }
+                  const key=record.indexSha256+'@'+use.route.root+':'+use.route.slots.join('.');
+                  nextCalls.set(key,next?receiving.label+' → '+next.label+' ['+next.slot+'/'+next.arity+']':step.kind+'.'+step.field);
                   if(process.env.ATLAS_FORMAL_EXAMPLE && !splitStats.useExample)splitStats.useExample={label:receiving.label,slot:receiving.slot,arity:receiving.arity};
                 }
               }
@@ -323,7 +336,7 @@ function audit(record) {
 const reports=edition.declarations.filter(r=>r.kind==='theorem').map(audit);
 if(process.argv.includes('--branch-summary')){
   const missing=[...missingSignatures].sort((a,b)=>b[1]-a[1]);
-  console.log(JSON.stringify({edition:edition.id,...splitStats,distinctCaseCalls:caseRoutes.size,distinctHandlerUses:handlerUseRoutes.size,missingNames:missing.length,mostFrequentMissing:process.argv.includes('--all-missing')?missing:missing.slice(0,5)}));return;
+  console.log(JSON.stringify({edition:edition.id,...splitStats,destinations:[...new Set(nextCalls.values())].map(k=>[k,[...nextCalls.values()].filter(x=>x===k).length]),distinctCaseCalls:caseRoutes.size,distinctHandlerUses:handlerUseRoutes.size,missingNames:missing.length,mostFrequentMissing:process.argv.includes('--all-missing')?missing:missing.slice(0,5)}));return;
 }
 if (process.argv.includes('--write-packets')) {
   const dir='public/data/proof-atlas/input-roles';
