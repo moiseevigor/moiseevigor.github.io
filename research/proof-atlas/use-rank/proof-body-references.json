@@ -8,7 +8,9 @@
       "omittedOperands": "0",
       "collapsed": "252655",
       "groups": 2,
-      "tested": 7
+      "tested": 7,
+      "outside": "251204",
+      "externalChecks": 5
     },
     {
       "name": "lean_workbook_3485",
@@ -18,7 +20,9 @@
       "omittedOperands": "0",
       "collapsed": "1255",
       "groups": 1,
-      "tested": 5
+      "tested": 5,
+      "outside": "1240",
+      "externalChecks": 1240
     },
     {
       "name": "lean_workbook_4274",
@@ -28,7 +32,9 @@
       "omittedOperands": "0",
       "collapsed": "363",
       "groups": 3,
-      "tested": 363
+      "tested": 363,
+      "outside": "355",
+      "externalChecks": 355
     },
     {
       "name": "lean_workbook_49456",
@@ -38,7 +44,9 @@
       "omittedOperands": "0",
       "collapsed": "0",
       "groups": 0,
-      "tested": 0
+      "tested": 0,
+      "outside": "0",
+      "externalChecks": 0
     },
     {
       "name": "lean_workbook_56144",
@@ -48,7 +56,9 @@
       "omittedOperands": "0",
       "collapsed": "13701",
       "groups": 3,
-      "tested": 7
+      "tested": 7,
+      "outside": "13636",
+      "externalChecks": 5
     },
     {
       "name": "lean_workbook_plus_15068",
@@ -58,7 +68,9 @@
       "omittedOperands": "0",
       "collapsed": "57083",
       "groups": 4,
-      "tested": 9
+      "tested": 9,
+      "outside": "56761",
+      "externalChecks": 7
     },
     {
       "name": "lean_workbook_plus_16912",
@@ -68,7 +80,9 @@
       "omittedOperands": "0",
       "collapsed": "45182",
       "groups": 3,
-      "tested": 19
+      "tested": 19,
+      "outside": "44994",
+      "externalChecks": 17
     },
     {
       "name": "lean_workbook_plus_19617",
@@ -78,7 +92,9 @@
       "omittedOperands": "0",
       "collapsed": "106",
       "groups": 3,
-      "tested": 106
+      "tested": 106,
+      "outside": "94",
+      "externalChecks": 94
     },
     {
       "name": "lean_workbook_plus_39831",
@@ -88,7 +104,9 @@
       "omittedOperands": "0",
       "collapsed": "3272",
       "groups": 3,
-      "tested": 12
+      "tested": 12,
+      "outside": "3181",
+      "externalChecks": 3181
     },
     {
       "name": "lean_workbook_plus_43987",
@@ -98,7 +116,9 @@
       "omittedOperands": "0",
       "collapsed": "107",
       "groups": 3,
-      "tested": 107
+      "tested": 107,
+      "outside": "86",
+      "externalChecks": 86
     },
     {
       "name": "lean_workbook_plus_54159",
@@ -108,7 +128,9 @@
       "omittedOperands": "0",
       "collapsed": "7818",
       "groups": 2,
-      "tested": 164
+      "tested": 164,
+      "outside": "7671",
+      "externalChecks": 157
     },
     {
       "name": "lean_workbook_plus_54622",
@@ -118,7 +140,9 @@
       "omittedOperands": "0",
       "collapsed": "18227",
       "groups": 1,
-      "tested": 5
+      "tested": 5,
+      "outside": "18123",
+      "externalChecks": 3
     },
     {
       "name": "lean_workbook_plus_61403",
@@ -128,7 +152,9 @@
       "omittedOperands": "0",
       "collapsed": "694",
       "groups": 5,
-      "tested": 14
+      "tested": 14,
+      "outside": "687",
+      "externalChecks": 687
     },
     {
       "name": "lean_workbook_plus_6206",
@@ -138,7 +164,9 @@
       "omittedOperands": "0",
       "collapsed": "270527",
       "groups": 2,
-      "tested": 7
+      "tested": 7,
+      "outside": "269199",
+      "externalChecks": 5
     },
     {
       "name": "lean_workbook_plus_62755",
@@ -148,7 +176,9 @@
       "omittedOperands": "0",
       "collapsed": "969",
       "groups": 3,
-      "tested": 969
+      "tested": 969,
+      "outside": "927",
+      "externalChecks": 927
     },
     {
       "name": "lean_workbook_plus_63081",
@@ -158,7 +188,9 @@
       "omittedOperands": "0",
       "collapsed": "4667",
       "groups": 4,
-      "tested": 14
+      "tested": 14,
+      "outside": "4603",
+      "externalChecks": 4603
     },
     {
       "name": "lean_workbook_plus_68077",
@@ -168,7 +200,9 @@
       "omittedOperands": "0",
       "collapsed": "15250",
       "groups": 2,
-      "tested": 8
+      "tested": 8,
+      "outside": "15100",
+      "externalChecks": 6
     },
     {
       "name": "lean_workbook_plus_68616",
@@ -178,7 +212,9 @@
       "omittedOperands": "0",
       "collapsed": "132",
       "groups": 4,
-      "tested": 132
+      "tested": 132,
+      "outside": "25",
+      "externalChecks": 25
     },
     {
       "name": "lean_workbook_plus_68794",
@@ -188,7 +224,9 @@
       "omittedOperands": "0",
       "collapsed": "2414",
       "groups": 3,
-      "tested": 14
+      "tested": 14,
+      "outside": "2383",
+      "externalChecks": 2383
     },
     {
       "name": "lean_workbook_plus_70240",
@@ -198,7 +236,9 @@
       "omittedOperands": "0",
       "collapsed": "2186",
       "groups": 4,
-      "tested": 13
+      "tested": 13,
+      "outside": "2157",
+      "externalChecks": 2157
     }
   ],
   "riccati": {
@@ -209,7 +249,67 @@
     "omittedOperands": "0",
     "collapsed": "4481",
     "groups": 2,
-    "tested": 10
+    "tested": 10,
+    "outside": "4405",
+    "externalChecks": 4405,
+    "scopeCounts": [
+      {
+        "total": "5",
+        "outside": "5",
+        "binders": [
+          {
+            "name": "J",
+            "count": "2"
+          },
+          {
+            "name": "p",
+            "count": "2"
+          },
+          {
+            "name": "hz",
+            "count": "1"
+          }
+        ]
+      },
+      {
+        "total": "4476",
+        "outside": "4400",
+        "binders": [
+          {
+            "name": "J",
+            "count": "2195"
+          },
+          {
+            "name": "p",
+            "count": "2195"
+          },
+          {
+            "name": "hd",
+            "count": "3"
+          },
+          {
+            "name": "hs",
+            "count": "2"
+          },
+          {
+            "name": "hz1",
+            "count": "2"
+          },
+          {
+            "name": "hz",
+            "count": "1"
+          },
+          {
+            "name": "hD",
+            "count": "1"
+          },
+          {
+            "name": "hab",
+            "count": "1"
+          }
+        ]
+      }
+    ]
   },
   "large": {
     "name": "AtlasExamples.shared_induction_64",
@@ -219,6 +319,8 @@
     "omittedOperands": "0",
     "collapsed": "2508757194024499019776",
     "groups": 24,
-    "tested": 145
+    "tested": 145,
+    "outside": "2379629985508532158464",
+    "externalChecks": 72
   }
 }

@@ -97,6 +97,17 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
      assert.equal(u.hash,'#expr-'+hit.node);
     }
    }
+   const largeRegion=panel.locator('section').last(),scope=largeRegion.locator('details');
+   await scope.locator('summary').click();
+   const hd=regions.at(-1).inputs().find(item=>body.payloads[item.binder.node].binderName==='hd');
+   assert.equal(hd.count,3n);
+   const filter=scope.locator('select');await filter.selectOption(String(hd.index));
+   await largeRegion.getByLabel('Reference',{exact:true}).fill('3');
+   await largeRegion.getByRole('button',{name:'Trace',exact:true}).click();
+   const hdUse=regions.at(-1).select(3n,true,hd.index);
+   assert.equal(new URL(await largeRegion.locator('[aria-live] a').first().evaluate(a=>a.href)).searchParams.get('route'),'1:'+hdUse.use.route.slots.join('.'));
+   await filter.selectOption('all');await largeRegion.getByLabel('Reference',{exact:true}).fill(String(regions.at(-1).total));
+   await largeRegion.getByRole('button',{name:'Trace',exact:true}).click();
    const last=regions.at(-1),use=last.select(last.total).use;
    await panel.locator('section').last().locator('[aria-live] a').first().click();
    await page.waitForFunction(id=>document.querySelector('#pl-expression h3')?.textContent.endsWith(' · e'+id),use.node);

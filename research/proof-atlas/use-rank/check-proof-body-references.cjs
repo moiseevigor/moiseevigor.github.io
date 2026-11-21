@@ -31,10 +31,47 @@ function audit(record){
  }
  collect(N.scene(data,root,catalog,{address:(node,slots)=>({namespace:'source',node,route:{root:1,slots}})}).root);
  const intervals=[...visible],hidden={notation:0n,collapsed:0n};let tested=0;
+ let outsideTotal=0n,externalChecks=0;
+ const scopeCounts=[];
  const groups=inspect(data,catalog,1);
  for(const g of groups){
   const region=interval(g.operand.route.slots);
   assert.equal(region.node,g.operand.node);assert.equal(region.count,g.total);
+  const inputs=require('./lexical-inputs.cjs')(data,g.operand);
+  assert(inputs);
+  const outside=inputs.reduce((sum,r)=>sum+BigInt(r.count),0n);
+  assert.equal(g.externalTotal(),outside);outsideTotal+=outside;
+  const named=g.inputs();assert.equal(inputs.length,named.length);
+  for(const item of named){
+   const oracle=inputs.find(r=>r.binder.node===item.binder.node&&String(r.binder.route.slots)===String(item.binder.route.slots));
+   assert(oracle);assert.equal(String(item.count),oracle.count);
+   for(const n of new Set([1n,item.count])){
+    const ref=g.select(n,true,item.index);
+    assert.deepEqual(ref.binder,{node:oracle.binder.node,route:oracle.binder.route});
+    if(n===1n)assert.deepEqual(ref.use.route,oracle.use.route);
+   }
+  }
+  scopeCounts.push({total:String(g.total),outside:String(outside),binders:inputs.map(r=>({name:r.name,count:r.count}))});
+  const expected=[];
+  if(g.total<=5000n){
+   for(let n=1n;n<=g.total;n++){
+    const ref=g.select(n);
+    if(ref.binder.route.slots.length<g.operand.route.slots.length)expected.push(ref);
+   }
+   assert.equal(BigInt(expected.length),outside);
+   expected.forEach((ref,j)=>{assert.deepEqual(g.select(BigInt(j+1),true),ref);externalChecks++;});
+   for(const item of named){
+    const uses=expected.filter(ref=>String(ref.binder.route.slots)===String(item.binder.route.slots));
+    assert.equal(BigInt(uses.length),item.count);
+    uses.forEach((ref,j)=>assert.deepEqual(g.select(BigInt(j+1),true,item.index),ref));
+   }
+  }else if(outside){
+   for(const n of new Set([1n,(outside+1n)/2n,outside])){
+    const ref=g.select(n,true),hit=interval(ref.use.route.slots);
+    assert.deepEqual(ref.binder,hit.binders.at(-1-data.payloads[hit.node].index));
+    assert(ref.binder.route.slots.length<g.operand.route.slots.length);externalChecks++;
+   }
+  }
   intervals.push(region);hidden[g.kind]+=g.total;
   const ordinals=g.total<=512n?Array.from({length:Number(g.total)},(_,i)=>BigInt(i+1)):
    [...new Set([1n,2n,g.total/2n,g.total-1n,g.total,...(g.total>2n**53n?[2n**53n,2n**53n+1n]:[])])];
@@ -50,7 +87,8 @@ function audit(record){
  for(const hit of intervals){assert.equal(hit.first,next);next+=hit.count;}
  assert.equal(next-1n,counts[root]);
  return {name:record.name,source:record.indexSha256,total:String(counts[root]),visible:visible.length,
-  omittedOperands:String(hidden.notation),collapsed:String(hidden.collapsed),groups:groups.length,tested};
+  omittedOperands:String(hidden.notation),collapsed:String(hidden.collapsed),groups:groups.length,tested,outside:String(outsideTotal),externalChecks,
+  ...(record.name==='JacobiData.slope_bound_abs'?{scopeCounts}:{})};
 }
 const ai=window.PROOF_ATLAS_AI_SAMPLE.edition.declarations;
 const riccati=window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id==='published-15').declarations.find(r=>r.name==='JacobiData.slope_bound_abs');

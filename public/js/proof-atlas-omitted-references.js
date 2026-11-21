@@ -10,19 +10,50 @@
    counts[row]=data.children[row].reduce((sum,c)=>sum+counts[c],data.kind[row]===0?1n:0n);
   const address=(node,slots)=>({namespace:'source',node,route:{root:rootIndex,slots}});
   const scene=notation.scene(data,root,catalog,{address});
+  const externalCounts=new Map();
+  let queryKey=null;
+  function beginQuery(node,index){
+   const key=node+':'+index;
+   if(queryKey!==key){externalCounts.clear();queryKey=key;}
+  }
+  const enters=(kind,field)=>((kind===6||kind===7)&&field===1)||(kind===8&&field===2);
+  function external(node,depth,exact=false){
+   if(data.neededScope[node]<=depth)return 0n;
+   if(data.kind[node]===0)return !exact||data.payloads[node].index===depth?1n:0n;
+   const key=node+':'+depth+':'+Number(exact);
+   if(externalCounts.has(key))return externalCounts.get(key);
+   if(externalCounts.size>=262144)throw RangeError('Scope comparison exceeds the query limit');
+   let sum=0n;
+   data.children[node].forEach((child,j)=>{sum+=external(child,depth+Number(enters(data.kind[node],j)),exact);});
+   externalCounts.set(key,sum);return sum;
+  }
   function add(region,operand){
    const total=counts[operand.node];
    if(!total)return;
-   groups.push({...region,operand,total,select(n){
-      if(typeof n!=='bigint'||n<1n||n>total)throw RangeError('Reference outside operand');
-      const slots=[...operand.route.slots];let node=operand.node;
+   groups.push({...region,operand,total,externalTotal:()=>{beginQuery(operand.node,null);return external(operand.node,0);},inputs(){
+      const stack=[];let node=root;
+      operand.route.slots.forEach((slot,i)=>{
+       if(enters(data.kind[node],slot))stack.push(address(node,operand.route.slots.slice(0,i)));
+       node=data.children[node][slot];
+      });
+      return stack.reverse().flatMap((binder,index)=>{
+       beginQuery(node,index);
+       const count=external(node,index,true);
+       return count?[{binder,index,count}]:[];
+      });
+     },select(n,outerOnly=false,index=null){
+      if(outerOnly)beginQuery(operand.node,index);
+      const available=outerOnly?external(operand.node,index??0,index!==null):total;
+      if(typeof n!=='bigint'||n<1n||n>available)throw RangeError('Reference outside operand');
+      const slots=[...operand.route.slots];let node=operand.node,depth=index??0;
       while(data.kind[node]!==0){
-       const field=data.children[node].findIndex(child=>{
-        if(n<=counts[child])return true;
-        n-=counts[child];return false;
+       const field=data.children[node].findIndex((child,j)=>{
+        const count=outerOnly?external(child,depth+Number(enters(data.kind[node],j)),index!==null):counts[child];
+        if(n<=count)return true;
+        n-=count;return false;
        });
        if(field<0)throw Error('Incomplete reference counts');
-       slots.push(field);node=data.children[node][field];
+       depth+=Number(enters(data.kind[node],field));slots.push(field);node=data.children[node][field];
       }
       const use=address(node,slots),binder=A.binding(data,use.route);
       if(!binder)throw Error('Reference has no enclosing binder');
@@ -54,19 +85,44 @@
     input.value='1';input.required=true;input.inputMode='numeric';input.pattern='[1-9][0-9]*';input.size=6;
     input.maxLength=String(g.total).length;
     label.append(input);const go=el('button','Trace');
-    form.append(label,' of '+g.total+' ',go);result.setAttribute('aria-live','polite');
+    const limit=el('span',' of '+g.total+' ');let outerOnly=false,selectedInput=null,available=g.total;
+    form.append(label,limit,go);result.setAttribute('aria-live','polite');
     function show(n){
-     const {use,binder}=g.select(n),p=data.payloads[binder.node];
+     const {use,binder}=g.select(n,outerOnly,selectedInput),p=data.payloads[binder.node];
      result.replaceChildren(link('Variable #'+data.payloads[use.node].index,use),' bound by ',link(p.binderName??p.declName,binder));
     }
     show(1n);section.append(heading);
+    const scope=el('details');scope.append(el('summary','Which references come from outside this region?'));
+    scope.ontoggle=()=>{
+     if(!scope.open||scope.children.length>1)return;
+     let outside;
+     try{outside=g.externalTotal();}catch(error){if(!(error instanceof RangeError))throw error;scope.append(el('p','Scope breakdown unavailable for this region.'));return;}
+     scope.append(el('p',outside+' references use enclosing binders. '+(g.total-outside)+' use binders introduced in the region.'));
+     if(!outside)return;
+     let inputs;
+     try{inputs=g.inputs();}catch(error){if(!(error instanceof RangeError))throw error;scope.append(el('p','Individual binder counts exceed the query limit.'));return;}
+     const filter=el('select'),caption=el('label','Trace ');
+     filter.append(new Option('All references','all'),new Option('All enclosing binders','outer'));
+     for(const item of inputs){
+      const p=data.payloads[item.binder.node],name=p.binderName??p.declName;
+      filter.append(new Option(name+' · binder #'+item.binder.node+' · '+item.count+' uses',String(item.index)));
+     }
+     caption.append(filter);scope.append(caption);
+     filter.onchange=()=>{
+      outerOnly=filter.value!=='all';
+      const item=inputs.find(i=>String(i.index)===filter.value);
+      selectedInput=item?.index??null;available=item?.count??(outerOnly?outside:g.total);
+      limit.textContent=' of '+available+' ';input.value='1';input.maxLength=String(available).length;input.setCustomValidity('');show(1n);
+     };
+    };
+    section.append(scope);
     if(g.total>1n)section.append(form);
     section.append(result);panel.append(section);
     input.oninput=()=>input.setCustomValidity('');
     form.onsubmit=e=>{
      e.preventDefault();if(!input.reportValidity())return;
      const n=BigInt(input.value);
-     if(n>g.total){input.setCustomValidity('Enter a number up to '+g.total+'.');input.reportValidity();return;}
+     if(n>available){input.setCustomValidity('Enter a number up to '+available+'.');input.reportValidity();return;}
      show(n);
     };
    }
