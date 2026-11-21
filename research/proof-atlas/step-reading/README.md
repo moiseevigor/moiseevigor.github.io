@@ -343,3 +343,11 @@ Run `node research/proof-atlas/step-reading/page-tagged-case.cjs /tmp/shared-cas
 | 262,144 | 9 | 2,071 | 27,730 |
 
 The byte column excludes the one-time control file, HTTP headers and application assets. Cached rows measure source residency only. No whole-browser memory measurement or public UI integration is claimed.
+
+### Paged lookup in a compiled AI proof
+
+The largest Gödel sample theorem by distinct declaration rows is `lean_workbook_plus_6206` (91,424 rows; 31,752,787 expanded proof-body occurrences). Its leading binders have 80,812, 91,321, 96,925, 41, 41, 38 and 34 lexical references respectively. The source-page experiment selected the first, middle and last use of each. An independent depth-first walk produced all 21 expected occurrence paths and source nodes.
+
+For large children preceding a sibling, the auxiliary index stores positive counts keyed by source row and lexical depth. The remaining rank determines entry into the final child. Children with at most 64 expanded occurrences can be counted locally. The combined seven-binder index has 102,579 entries and takes 328,612 gzip bytes (1,469,531 raw). The full compiled index takes 506,140 gzip bytes. The auxiliary index therefore has a material startup cost. All 21 cold Chrome selections agreed with the oracle, loaded 2–44 source pages per query and transferred 13,111–107,835 compressed source bytes after the auxiliary index was available. At most 4,096 source rows were cached. These measurements exclude application assets, HTTP headers and the resident auxiliary index.
+
+From the site root run `node research/proof-atlas/step-reading/index-ai-binders.cjs /tmp/atlas-ai-weights.json /tmp/atlas-ai-oracle.json`, then `node research/proof-atlas/step-reading/check-ai-paged-ranks.cjs /tmp/atlas-ai-weights.json /tmp/atlas-ai-oracle.json`. Only the offline producer reads the complete compiled packet; the lookup process accepts the trusted verification metadata and accesses the existing source-page directory. This experiment reuses the compiled proof and adds no Lean theorem.
