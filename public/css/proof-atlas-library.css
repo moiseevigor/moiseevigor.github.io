@@ -197,3 +197,4 @@
 
 .pl-reference-tree a[aria-current="location"] { font-weight: bold; outline: 1px solid currentColor; outline-offset: 1px; }
 .pl-reference-tree + .pl-actions[hidden] { display: none; }
+.pl-arithmetic-expression { font-family: "STIX Two Text", Georgia, serif; font-size: 1.2em; line-height: 1.65; overflow-wrap: anywhere; }
