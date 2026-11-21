@@ -286,6 +286,24 @@
    }
    container.append(box);
   }
+  function showUnpackedUse(){
+   const {root,slots}=call.route;
+   if(data.kind[call.node]!==0 || slots.at(-2)!==0 || slots.at(-1)!==1)return;
+   const route={root,slots:slots.slice(0,-2)},parent={node:A.walk(data,route),route};
+   const args=host.ProofAtlasOmittedReferences?.exactCallInputs(data,parent,'And.casesOn',5);
+   if(!args || args[3].node!==call.node)return;
+   const box=el('section'),line=el('p');
+   box.dataset.unpackedUse='';
+   box.append(el('h4','This use unpacks the conjunction'));
+   line.append(sourceLink('Case analysis',parent));
+   const method=args[4],inner=data.children[method.node][1];
+   if(data.kind[method.node]===6 && data.kind[inner]===6){
+    line.append(' → ',sourceLink('Left branch assumption',method),' and ',
+     sourceLink('Right branch assumption',{node:inner,route:{root,slots:method.route.slots.concat(1)}}));
+   }
+   box.append(line);container.append(box);
+  }
+  showUnpackedUse();
   showLogicalCases();
   const conjunction=host.ProofAtlasConjunction?.(data,call.node);
   if(conjunction){

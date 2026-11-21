@@ -383,3 +383,15 @@ Run `node research/proof-atlas/step-reading/nonnegative-uses.cjs` from the site 
 Across 20 AI proof bodies, two of the 93 leading lambdas have a literal conjunction as their domain. The owners, lean_workbook_20418 and lean_workbook_plus_6206, have structurally equal compiled theorem types (checked recursively including payloads). The diagram therefore transfers between two derivations of one statement. In the former, the three separate projections feed the nonpositive-difference rule 21, 11 and 9 times, and the complete conjunction occurs twice as argument 7 of a ten-argument Eq.ndrec application. One representative per group was replayed. Lean confirms that argument 7 is the first premise of the returned function and has the entire conjunction as its type. In the latter the three projection counts are 21, 12 and 8, with no whole-conjunction references.
 
 Run `node research/proof-atlas/step-reading/conjunct-uses.cjs` to reproduce conjunct-uses.json. For the lean_workbook_20418 entry pass the four groups' target paths, in order, to replay-call.py in a batch. Supply that replay report as the third argument to publish-clause-uses.py. The census retains both the selected clause in the original binder domain and the representative occurrence in the proof.
+
+### A whole conjunction can be unpacked at its destination
+
+Run conjunct-uses.cjs with the edition ID and `--all-lambdas` to include nested lambda domains in the compiled theorem body. The census takes one representative path per distinct lambda row per declaration, counts expanded references relative to that binder, and requires a literal binary And in its domain. Counts include binders inside embedded types. This is not an expansion-weighted census of binder occurrences. Direct projection recognizes both named projection calls and native And projection fields.
+
+| Edition | Distinct lambda rows | With conjunction domain | Unreferenced | Projected uses | Whole uses | Whole into saturated And.casesOn |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Published SE(2) | 6,913 | 143 | 79 | 3 | 63 | 63 |
+| Working SE(2) | 15,582 | 173 | 91 | 11 | 95 | 71 |
+| AI sample | 464 | 16 | 8 | 82 | 14 | 0 |
+
+The published cases unpack both fields in a joint branch. Counting references after both branch binders gives 49 branches referencing both components, four only the left, ten only the right. The corresponding working counts are 55, four and twelve. All were within the bounded query. A reference can occur inside a type or local definition. Selecting a bound variable in the major-premise position of a saturated And.casesOn now links to the exact split and its explicit branch binders. Two routes to expression 25 in CrossingData.crossing were tested separately.
