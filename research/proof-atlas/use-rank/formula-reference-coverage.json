@@ -1,0 +1,347 @@
+{
+  "proofs": [
+    {
+      "name": "lean_workbook_20418",
+      "source": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+      "total": 21,
+      "first": {
+        "visible": 13,
+        "collapsed": 8,
+        "notation": 0
+      },
+      "panels": 3,
+      "maxDepth": 1,
+      "visibleNodes": 79,
+      "group": "development"
+    },
+    {
+      "name": "lean_workbook_3485",
+      "source": "bd496000a8da7ce06393d1cdd66b86c1a76aa6004c6eca19c36e083a3082948c",
+      "total": 6,
+      "first": {
+        "visible": 6,
+        "collapsed": 0,
+        "notation": 0
+      },
+      "panels": 1,
+      "maxDepth": 0,
+      "visibleNodes": 25,
+      "group": "held-out"
+    },
+    {
+      "name": "lean_workbook_4274",
+      "source": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+      "total": 11,
+      "first": {
+        "visible": 10,
+        "collapsed": 1,
+        "notation": 0
+      },
+      "panels": 2,
+      "maxDepth": 1,
+      "visibleNodes": 50,
+      "group": "development"
+    },
+    {
+      "name": "lean_workbook_49456",
+      "source": "66459f55804e8ae09fc9a8615191fba8f5277f1fb0831c1bb132e1bc60552b38",
+      "total": 3,
+      "first": {
+        "visible": 3,
+        "collapsed": 0,
+        "notation": 0
+      },
+      "panels": 1,
+      "maxDepth": 0,
+      "visibleNodes": 14,
+      "group": "held-out"
+    },
+    {
+      "name": "lean_workbook_56144",
+      "source": "60ff188d4edd927f72c0393d678f5a9cfb80d344d3ec459aec958443f07dc256",
+      "total": 9,
+      "first": {
+        "visible": 6,
+        "collapsed": 3,
+        "notation": 0
+      },
+      "panels": 2,
+      "maxDepth": 1,
+      "visibleNodes": 54,
+      "group": "held-out"
+    },
+    {
+      "name": "lean_workbook_plus_15068",
+      "source": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+      "total": 16,
+      "first": {
+        "visible": 8,
+        "collapsed": 8,
+        "notation": 0
+      },
+      "panels": 5,
+      "maxDepth": 1,
+      "visibleNodes": 76,
+      "group": "development"
+    },
+    {
+      "name": "lean_workbook_plus_16912",
+      "source": "6c061155ccb98286c7608ad3bfbd316714aea3a1b33817720b3c4b2846c39510",
+      "total": 27,
+      "first": {
+        "visible": 12,
+        "collapsed": 15,
+        "notation": 0
+      },
+      "panels": 4,
+      "maxDepth": 1,
+      "visibleNodes": 86,
+      "group": "held-out"
+    },
+    {
+      "name": "lean_workbook_plus_19617",
+      "source": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+      "total": 28,
+      "first": {
+        "visible": 11,
+        "collapsed": 17,
+        "notation": 0
+      },
+      "panels": 4,
+      "maxDepth": 2,
+      "visibleNodes": 108,
+      "group": "development"
+    },
+    {
+      "name": "lean_workbook_plus_39831",
+      "source": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+      "total": 10,
+      "first": {
+        "visible": 10,
+        "collapsed": 0,
+        "notation": 0
+      },
+      "panels": 1,
+      "maxDepth": 0,
+      "visibleNodes": 37,
+      "group": "development"
+    },
+    {
+      "name": "lean_workbook_plus_43987",
+      "source": "159699ca3f1d90ccd733d2a5fe4c0541ae4c785b8cb942333058b16653cef385",
+      "total": 22,
+      "first": {
+        "visible": 10,
+        "collapsed": 12,
+        "notation": 0
+      },
+      "panels": 3,
+      "maxDepth": 1,
+      "visibleNodes": 86,
+      "group": "held-out"
+    },
+    {
+      "name": "lean_workbook_plus_54159",
+      "source": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+      "total": 7,
+      "first": {
+        "visible": 7,
+        "collapsed": 0,
+        "notation": 0
+      },
+      "panels": 1,
+      "maxDepth": 0,
+      "visibleNodes": 27,
+      "group": "held-out"
+    },
+    {
+      "name": "lean_workbook_plus_54622",
+      "source": "0b128b2e4d02870a974f0f00684ea058eded20eed8f15f32e84872e4bca50d73",
+      "total": 12,
+      "first": {
+        "visible": 12,
+        "collapsed": 0,
+        "notation": 0
+      },
+      "panels": 1,
+      "maxDepth": 0,
+      "visibleNodes": 45,
+      "group": "held-out"
+    },
+    {
+      "name": "lean_workbook_plus_61403",
+      "source": "a52afaeee83e9f155855d77dc8f906f03abf8da6038abde95c7dc6e104568459",
+      "total": 5,
+      "first": {
+        "visible": 5,
+        "collapsed": 0,
+        "notation": 0
+      },
+      "panels": 1,
+      "maxDepth": 0,
+      "visibleNodes": 27,
+      "group": "held-out"
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "source": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+      "total": 21,
+      "first": {
+        "visible": 13,
+        "collapsed": 8,
+        "notation": 0
+      },
+      "panels": 3,
+      "maxDepth": 1,
+      "visibleNodes": 79,
+      "group": "development"
+    },
+    {
+      "name": "lean_workbook_plus_62755",
+      "source": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+      "total": 4,
+      "first": {
+        "visible": 4,
+        "collapsed": 0,
+        "notation": 0
+      },
+      "panels": 1,
+      "maxDepth": 0,
+      "visibleNodes": 21,
+      "group": "held-out"
+    },
+    {
+      "name": "lean_workbook_plus_63081",
+      "source": "e8a13f9af176053ae5b0220fc5a1526de1e937ca2e8972035dcc70ee1da74217",
+      "total": 9,
+      "first": {
+        "visible": 9,
+        "collapsed": 0,
+        "notation": 0
+      },
+      "panels": 1,
+      "maxDepth": 0,
+      "visibleNodes": 39,
+      "group": "held-out"
+    },
+    {
+      "name": "lean_workbook_plus_68077",
+      "source": "501dba70283e270631eba54e85d5f16c3ca44cfaba068ea4f39a45b550997e62",
+      "total": 15,
+      "first": {
+        "visible": 11,
+        "collapsed": 4,
+        "notation": 0
+      },
+      "panels": 3,
+      "maxDepth": 1,
+      "visibleNodes": 53,
+      "group": "held-out"
+    },
+    {
+      "name": "lean_workbook_plus_68616",
+      "source": "2f1f6523063a579076448d2a6caa42d496003a1be382692e8747442b1d9aef83",
+      "total": 15,
+      "first": {
+        "visible": 13,
+        "collapsed": 2,
+        "notation": 0
+      },
+      "panels": 2,
+      "maxDepth": 1,
+      "visibleNodes": 50,
+      "group": "held-out"
+    },
+    {
+      "name": "lean_workbook_plus_68794",
+      "source": "17a8502769796c60075b569ccf17b5bf99c47c12e6e1771705ae3eb540656f3b",
+      "total": 9,
+      "first": {
+        "visible": 9,
+        "collapsed": 0,
+        "notation": 0
+      },
+      "panels": 1,
+      "maxDepth": 0,
+      "visibleNodes": 43,
+      "group": "held-out"
+    },
+    {
+      "name": "lean_workbook_plus_70240",
+      "source": "cbc4fcc25f7b3decb12c29ac4d90e9f01671a2bfcce24e948c9af0445a387290",
+      "total": 10,
+      "first": {
+        "visible": 10,
+        "collapsed": 0,
+        "notation": 0
+      },
+      "panels": 1,
+      "maxDepth": 0,
+      "visibleNodes": 37,
+      "group": "held-out"
+    }
+  ],
+  "development": {
+    "theorems": 6,
+    "total": 107,
+    "visible": 65,
+    "collapsed": 42,
+    "notation": 0,
+    "panels": 18,
+    "maxPanels": 5,
+    "maxDepth": 2,
+    "withHiddenNotation": 0,
+    "fullyVisible": 1
+  },
+  "heldOut": {
+    "theorems": 14,
+    "total": 153,
+    "visible": 117,
+    "collapsed": 36,
+    "notation": 0,
+    "panels": 23,
+    "maxPanels": 4,
+    "maxDepth": 1,
+    "withHiddenNotation": 0,
+    "fullyVisible": 9
+  },
+  "published": {
+    "theorems": 561,
+    "total": 7848,
+    "visible": 3062,
+    "collapsed": 3574,
+    "notation": 1212,
+    "panels": 2278,
+    "maxPanels": 41,
+    "maxDepth": 18,
+    "withHiddenNotation": 85,
+    "fullyVisible": 360
+  },
+  "publishedResultDigest": "c6554304c0d59e9d9c62f8d679e29e916672b95f898d15e446730cc7485962b8",
+  "riccati": {
+    "name": "JacobiData.slope_bound_abs",
+    "source": "0dec5212099b579b1f2c3a0411d7b9e2fcd827f19142a595da0dbf13401779aa",
+    "total": 24,
+    "first": {
+      "visible": 12,
+      "collapsed": 12,
+      "notation": 0
+    },
+    "panels": 4,
+    "maxDepth": 1,
+    "visibleNodes": 69
+  },
+  "largestInitialNotationOmission": {
+    "name": "JacobiData.a_deriv_form._simp_1_5",
+    "source": "3a70a88ce1fc65dfe3c37529da8aa1bc236f4f53f027a337bee19c312a483a7d",
+    "total": 35,
+    "first": {
+      "visible": 11,
+      "collapsed": 0,
+      "notation": 24
+    },
+    "panels": 19,
+    "maxDepth": 3,
+    "visibleNodes": 71
+  }
+}
