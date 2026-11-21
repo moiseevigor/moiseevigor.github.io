@@ -46,11 +46,8 @@ function binderPaths(data, slots) {
   return binders.reverse();
 }
 
-function measure(data) {
-  const first = endpoints(data, false), last = endpoints(data, true);
+function freeIndexMasks(data) {
   const masks = [];
-  const counts = {repeated:0, sameContext:0, differentContextSameTargets:0, differentTargets:0};
-  let witness;
   for (let row = 0; row < data.kind.length; row++) {
     const kind = data.kind[row];
     let mask = kind === 0 ? 1n << BigInt(data.payloads[row].index) : 0n;
@@ -58,6 +55,18 @@ function measure(data) {
       mask |= masks[child] >> BigInt(binds(kind, slot));
     });
     masks.push(mask);
+  }
+  return masks;
+}
+
+function measure(data) {
+  const first = endpoints(data, false), last = endpoints(data, true);
+  const masks = freeIndexMasks(data);
+  const counts = {repeated:0, sameContext:0, differentContextSameTargets:0, differentTargets:0};
+  let witness;
+  for (let row = 0; row < data.kind.length; row++) {
+    const kind = data.kind[row];
+    let mask = masks[row];
     if (kind !== 5) continue;
     const left = first(row), right = last(row);
     if (!left || String(left) === String(right)) continue;
@@ -210,6 +219,8 @@ function checkExpanded(data, expected, all) {
   return middleWitness;
 }
 
+module.exports={freeIndexMasks,allOccurrenceTargets,measure,checkExpanded};
+if (require.main===module) {
 const records = inventory();
 for (const {source} of require('./port-results.json')) {
   const {record} = records.find(i=>i.record.indexSha256===source.indexSha256);
@@ -220,4 +231,5 @@ for (const {source} of require('./port-results.json')) {
   const expandedControl = BigInt(data.expanded[data.roots[1]]) <= 500000n;
   if (expandedControl) result.middleWitness=checkExpanded(data,result.counts,all);
   console.log(JSON.stringify({source,expandedControl,...result}));
+}
 }

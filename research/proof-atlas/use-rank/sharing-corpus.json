@@ -1,0 +1,54 @@
+[
+  {
+    "edition": "published-15",
+    "theorems": 561,
+    "unavailable": 0,
+    "fixtures": 0,
+    "tested": 561,
+    "expandedChecks": 315,
+    "withChangedTargets": 246,
+    "repeated": 250718,
+    "changed": 7239,
+    "bodyOccurrences": "49287630",
+    "declarationResultsSha256": "b59c17abb99e43616003a422569da2a0e768615f3c664668eacc9be1c226b47d"
+  },
+  {
+    "edition": "working-26",
+    "theorems": 1083,
+    "unavailable": 0,
+    "fixtures": 0,
+    "tested": 1083,
+    "expandedChecks": 668,
+    "withChangedTargets": 421,
+    "repeated": 582545,
+    "changed": 14452,
+    "bodyOccurrences": "669273380",
+    "declarationResultsSha256": "e37f8bf996f3b94e9cde7d7fa6326d399c39e4f1fde27b4b500f96f5c137a0bb"
+  },
+  {
+    "edition": "goedel-sample-4331",
+    "theorems": 20,
+    "unavailable": 0,
+    "fixtures": 6,
+    "tested": 14,
+    "expandedChecks": 3,
+    "withChangedTargets": 13,
+    "repeated": 30286,
+    "changed": 640,
+    "bodyOccurrences": "13167443",
+    "declarationResultsSha256": "b4aef9c94a3fb3fa0bcabf51e59c4aae3a4134f0a33ecac33f1610c67cb79ec2"
+  },
+  {
+    "edition": "recursion-controls",
+    "theorems": 23,
+    "unavailable": 0,
+    "fixtures": 0,
+    "tested": 23,
+    "expandedChecks": 20,
+    "withChangedTargets": 11,
+    "repeated": 782,
+    "changed": 34,
+    "bodyOccurrences": "12728253410864456044068",
+    "declarationResultsSha256": "892c11268bce0a91afe5b8f0574da06c278d9352943609f032e7b01a4eac1d1c"
+  }
+]

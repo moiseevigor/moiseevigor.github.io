@@ -363,3 +363,16 @@ The all-occurrence calculation finds **5,482 of 79,431** repeated applications w
 For the exact count, process reachable rows from parent to child. For each directly referenced free index, collect its possible binder occurrences, retaining a single identity or the fact that at least two exist. Entering a binder body introduces the parent occurrence at index zero and shifts the inherited indices. A parent row reached multiple times already denotes distinct binder occurrences. Every incoming edge contributes all its parent occurrences, so merging these summaries preserves whether each index has one target or several. The computation stores summaries on the compressed graph. The independent control expands the three proof bodies with at most 500,000 occurrences and checks the classification of each repeated application by resolving its variable references.
 
 The inference reader includes one switchable occurrence diagram per theorem. In the [intermediate occurrence of row 276](inferences.html#f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02-0/sharing/1), switch among First, Intermediate and Last to trace the same variable to its binder. Application, variable and binder each link to their own compiled occurrence. The example belongs to the selected theorem and can be inspected from any recorded call in it.
+
+### Binder sharing outside the six reader examples
+
+The [corpus check](check-sharing-corpus.cjs) classifies every repeated application row in the theorem bodies of four local edition manifests, excluding the six development indices. Each count refers to rows within a declaration. The two SE(2) editions overlap and are reported separately.
+
+| Edition | Theorems tested | Theorems with changing targets | Repeated application rows | Rows with changing targets | Theorems independently expanded |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Published SE(2) | 561 | 246 | 250,718 | 7,239 | 315 |
+| Working SE(2) | 1,083 | 421 | 582,545 | 14,452 | 668 |
+| Remaining Goedel sample | 14 | 13 | 30,286 | 640 | 3 |
+| Recursion controls | 23 | 11 | 782 | 34 | 20 |
+
+The verifier hashes each compiled index and checks its proof-body occurrence count before classifying its compressed graph. For every body with at most 2,000 expanded occurrences, it also visits every variable and compares the classification row by row. All theorems in these manifests had a body. Definitions and other declaration kinds are outside the denominator. The 14 Goedel proofs complete the available 20-proof sample alongside the six development examples. These are finite corpus measurements; their frequencies do not estimate prevalence in the parent AI dataset. [Per-edition counts and result digests](sharing-corpus.json).
