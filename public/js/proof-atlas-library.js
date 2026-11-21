@@ -278,12 +278,26 @@
       if(refs.occurrences==='1' && window.PROOF_ATLAS_TYPE_NOTATION){
        const frames=window.ProofAtlasOmittedReferences.parameterContext(owner.data,window.PROOF_ATLAS_TYPE_NOTATION,
         {node:body,route:{root:fn.route.root,slots:fn.route.slots.concat(1)}},site);
-       if(frames?.some(frame=>frame.form==='binder')){
+       if(frames?.some(frame=>frame.form==='binder' || frame.form==='wideCall')){
         const trace=el('details'),list=el('ol');
-        trace.append(el('summary','Trace parameter through binders'));
+        trace.append(el('summary',frames.some(frame=>frame.form==='binder')?'Trace parameter through binders':'Trace parameter through application'));
         for(const frame of frames.slice().reverse()){
          const row=el('li'),slot=frame.operands.indexOf(null);
-         if(frame.form==='binder'){
+         if(frame.form==='wideCall'){
+          row.append(sourceLink(frame.glyph,frame.call),' · Parameter in argument '+frame.slot+' of '+frame.arity);
+          const form=el('form'),label=el('label','Compiled argument number '),input=el('input');
+          input.type='number';input.min='1';input.max=String(frame.arity);input.required=true;input.value=String(frame.slot);
+          label.append(input);const result=el('p');result.setAttribute('aria-live','polite');
+          function showArgument(){
+           const n=input.valueAsNumber;
+           if(!Number.isSafeInteger(n)||n<1||n>frame.arity)return;
+           const route={root:frame.call.route.root,slots:frame.call.route.slots.concat(Array(frame.arity-n).fill(0),1)};
+           const target={node:A.walk(owner.data,route),route};
+           result.replaceChildren(sourceLink('Argument '+n+' · '+termLabel(target),target));
+          }
+          form.append(label,el('button','Find argument'));form.onsubmit=e=>{e.preventDefault();showArgument();};
+          showArgument();row.append(form,result);
+         }else if(frame.form==='binder'){
           const inBody=frame.field==='body',other=frame.operands[inBody?0:1];
           row.append(sourceLink(frame.glyph+' '+(owner.payload(frame.call.node).binderName||'_'),frame.call),
            inBody?' · Enter body within binder scope · ':' · Enter domain outside binder scope · ',

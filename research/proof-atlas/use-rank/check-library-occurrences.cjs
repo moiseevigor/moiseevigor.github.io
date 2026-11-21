@@ -465,11 +465,33 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
    }
    const occurrence=await readAnchor(traceBinder.getByRole('link',{name:'Parameter occurrence'}));
    assert.deepEqual(atlas.binding(quant,occurrence.route),await readAnchor(traceBinder.getByRole('link',{name:'Original parameter binder'})));
-   const unsupported=published.declarations.find(r=>r.name==='JacobiFull.signed_β1_neg_odd');
-   const raw=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+unsupported.indexFile)));
-   const unsupportedAt=atlas.routes(raw).route(892);
-   await page.goto('http://localhost/projects/proof-atlas/library/?edition=published-15&proof='+unsupported.name+'&route='+unsupportedAt.root+':'+unsupportedAt.slots.join('.')+'#expr-892');
-   await page.getByText('The operator context is unavailable for this path.',{exact:false}).waitFor();
+   for(const [name,row,callee,callRow,slot,arity] of [
+    ['JacobiFull.signed_β1_neg_odd',892,'HasDerivAt',882,9,10],
+    ['JacobiPeriodic.signed_β1_strictAntiOn',855,'HasDerivAt',845,9,10],
+    ['JacobiPeriodic.β1_ne_zero_on_odd_interval',882,'HasDerivAt',872,9,10],
+    ['SBracket.psiP_monotone',353,'DifferentiableOn',296,12,12]
+   ]){
+    const record=published.declarations.find(r=>r.name===name);
+    const graph=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+record.indexFile)));
+    const route=atlas.routes(graph).route(row);
+    await page.goto('http://localhost/projects/proof-atlas/library/?edition=published-15&proof='+name+'&route='+route.root+':'+route.slots.join('.')+'#expr-'+row);
+    const summary=page.getByText('Trace parameter through application',{exact:true});
+    await summary.click();
+    const trace=summary.locator('..'),input=trace.getByLabel('Compiled argument number');
+    assert.equal(await input.inputValue(),String(slot));
+    const base=new URL(await trace.getByRole('link',{name:callee,exact:true}).evaluate(a=>a.href));
+    assert.equal(base.hash,'#expr-'+callRow);
+    const call={node:callRow,route:{root:route.root,slots:base.searchParams.get('route').split(':')[1].split('.').map(Number)}};
+    assert.equal(atlas.walk(graph,call.route),callRow);
+    for(let n=1;n<=arity;n++){
+     await input.fill(String(n));await trace.getByRole('button',{name:'Find argument'}).click();
+     const href=new URL(await trace.getByRole('link',{name:new RegExp('^Argument '+n+' · ')}).evaluate(a=>a.href));
+     const arg=require('../../../public/js/proof-atlas-application-ports').sourceInput(graph,call,n);
+     assert.equal(href.searchParams.get('route'),arg.route.root+':'+arg.route.slots.join('.'));
+     assert.equal(href.hash,'#expr-'+arg.node);
+    }
+    await input.fill(String(arity+1));assert.equal(await input.evaluate(i=>i.checkValidity()),false);
+   }
    const periodic=published.declarations.find(r=>r.name==='JacobiPeriodic.exists_unique_f1_zero');
    const periodicData=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+periodic.indexFile)));
    for(const [row,formula] of [[6570,'(s1(x) = s2)'],[2514,'(x(s1) = s2)']]){

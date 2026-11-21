@@ -134,6 +134,10 @@
    const op=catalog.entries.find(e=>data.kind[c.head.node]===4 && e.name===p.name &&
     JSON.stringify(e.nameParts)===JSON.stringify(p.nameParts) && e.arity===c.arity &&
     e.levelParams.length===p.levels.length);
+   if(!op && data.kind[c.head.node]===4 && c.arity>6 && c.slot>0){
+    frames.push({form:'wideCall',glyph:p.name,call:c.call,arity:c.arity,slot:c.slot,operands:[null]});
+    at=c.call;continue;
+   }
    const raw=!op && data.kind[c.head.node]===4 && c.arity<=6;
    if(!raw && (!op || !['binary','absolute','prefix','application'].includes(op.form)))return null;
    const visible=raw?Array.from({length:c.arity},(_,i)=>i):op.visibleSlots;

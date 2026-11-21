@@ -14,7 +14,7 @@ const contextShapes=new Map();
 const localPositions=new Map();
 let binderContexts=0n;
 let rawContexts=0n,namedContexts=0n;
-const contexts={operators:0n,binders:0n,identity:0n,unsupported:0n};
+const contexts={operators:0n,wide:0n,binders:0n,identity:0n,unsupported:0n};
 const differences = {constructor:0n,payload:0n,identical:0n,limit:0n};
 let belowRoot = 0n, maxDepth = 0;
 function reference(data,left,right) {
@@ -130,7 +130,7 @@ for (const record of records) {
           const at={node:body,route:{root:fn.route.root,slots:fn.route.slots.concat(1)}};
           if(refs.occurrences==='1'){
             const frames=parameterContext(data,window.PROOF_ATLAS_TYPE_NOTATION,at,{node:use.node,route});
-            const category=!frames?'unsupported':frames.some(f=>f.form==='binder')?'binders':frames.length?'operators':'identity';
+            const category=!frames?'unsupported':frames.some(f=>f.form==='binder')?'binders':frames.some(f=>f.form==='wideCall')?'wide':frames.length?'operators':'identity';
             if(published && category!=='operators' && !contexts[category])
               console.log(category+' example:',record.name,row);
             contexts[category]+=count;
@@ -153,7 +153,7 @@ for (const record of records) {
               }
               if(frames.some(f=>f.raw))rawContexts+=count;
               else if(frames.some(f=>f.form==='application'))namedContexts+=count;
-              const shape=frames.map(f=>f.glyph+'['+(f.operands.indexOf(null)+1)+']').join(' → ');
+              const shape=frames.map(f=>f.glyph+'['+(f.form==='wideCall'?f.slot:f.operands.indexOf(null)+1)+']').join(' → ');
               contextShapes.set(shape,(contextShapes.get(shape)??0n)+count);
               let path=at.route.slots.slice(),row=body;
               for(const f of frames.slice().reverse()){
@@ -168,6 +168,14 @@ for (const record of records) {
                   path=path.concat(slot);row=data.children[row][slot];continue;
                 }
                 const {head,args}=spine(data,row);
+                if(f.form==='wideCall'){
+                  console.log('Wide argument:',record.name,congrRow,f.call.node,f.glyph,f.slot,f.arity,String(count));
+                  assert.equal(f.glyph,data.payloads[head].name);
+                  assert.equal(f.arity,args.length);
+                  assert(f.slot>0 && f.slot<=args.length);
+                  row=args[f.slot-1];path=path.concat(Array(args.length-f.slot).fill(0),1);
+                  continue;
+                }
                 if(f.form==='localCall'){
                   assert.equal(data.kind[head],0);
                   const headRoute={root:route.root,slots:path.concat(Array(args.length).fill(0))};
