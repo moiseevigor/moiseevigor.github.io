@@ -21,6 +21,40 @@ function countMatchingRoutes(graph,recordedRows) {
   return copies[graph.roots[1]];
 }
 
+// Keep one visible occurrence at the boundary of each outermost selected maximal call.
+function foldSize(graph, selected) {
+  const root = graph.roots[1];
+  const visits = Array(root+1).fill(0n), prefixes = Array(root+1).fill(0n);
+  let visible = 0n, boundaries = 0n, hidden = 0n;
+  visits[root] = 1n;
+  for (let id=root; id>=0; id--) {
+    const reached = visits[id];
+    if (!reached) continue;
+    const folded = selected.has(id) ? reached-prefixes[id] : 0n;
+    visible += reached;
+    boundaries += folded;
+    hidden += folded*(BigInt(graph.expanded[id])-1n);
+    for (const [slot,child] of graph.children[id].entries()) {
+      visits[child] += reached-folded;
+      if (graph.kind[id]===5 && slot===0) prefixes[child] += reached-folded;
+    }
+  }
+  const full = BigInt(graph.expanded[root]);
+  assert.equal(visible+hidden,full);
+  // Count the same visible tree from the leaves. A function child remains expanded.
+  const sizes = [];
+  for (let id=0; id<=root; id++) {
+    let size = 1n;
+    for (const [slot,child] of graph.children[id].entries()) {
+      const partial = graph.kind[id]===5 && slot===0;
+      size += selected.has(child) && !partial ? 1n : sizes[child];
+    }
+    sizes.push(size);
+  }
+  assert.equal(visible,selected.has(root) ? 1n : sizes[root]);
+  return {full,visible,boundaries,hidden};
+}
+
 async function measure(item, uncovered) {
   const profile = (await union.open(item)).case;
   const graph = profile.data;
@@ -103,12 +137,34 @@ async function measure(item, uncovered) {
   const peak = uncovered[0];
   const half = uncovered.slice(0,thresholds[0].rows);
   const halfDeclarations = [...new Set(half.map(row=>row.declaration))];
-  for (const item of union.inventory().filter(i=>i.edition==='goedel-sample-4331' && halfDeclarations.includes(i.record.name))) {
+  const observedCalls={total:0,insideFold:0};
+  const folded={full:0n,visible:0n,boundaries:0n,hidden:0n};
+  for (const item of union.inventory().filter(i=>i.edition==='goedel-sample-4331')) {
     const selected=half.filter(row=>row.declaration===item.record.name);
     const profile=(await union.open(item)).case;
-    assert.equal(countMatchingRoutes(profile.data,new Set(selected.map(row=>row.id))),selected.reduce((sum,row)=>sum+row.uses,0n));
+    const ids=new Set(selected.map(row=>row.id));
+    for (const entry of profile.entries) {
+      if (entry.route.root!==1 || typing.construction(entry,profile.data)?.rule!=='Pi-application') continue;
+      const path=packed.parse(entry.route);
+      let id=profile.data.roots[1], partial=false, inside=false;
+      for (let depth=0; depth<entry.route.depth; depth++) {
+        if (!partial && ids.has(id)) inside=true;
+        const slot=(path[depth>>2] >> (2*(depth%4))) & 3;
+        partial=profile.data.kind[id]===5 && slot===0;
+        id=profile.data.children[id][slot];
+      }
+      assert.equal(id,entry.node);
+      if (!partial) {
+        observedCalls.total++;
+        if (inside) observedCalls.insideFold++;
+      }
+    }
+    const size=foldSize(profile.data,ids);
+    for (const key of Object.keys(folded)) folded[key]+=size[key];
+    assert.equal(countMatchingRoutes(profile.data,ids),selected.reduce((sum,row)=>sum+row.uses,0n));
   }
+  assert.equal(observedCalls.total,rows.reduce((sum,row)=>sum+row.maximal,0));
   const halfHeads = [...new Set(half.map(row=>row.headName))];
-  console.log(JSON.stringify({unrecordedRows:uncovered.length, occurrences:String(total), thresholds, halfDeclarations, halfHeads,
-    mostFrequent:{...peak,uses:String(peak.uses)}},null,2));
+  console.log(JSON.stringify({unrecordedRows:uncovered.length, occurrences:String(total), thresholds, halfDeclarations, halfHeads, folded, observedCalls,
+    mostFrequent:{...peak,uses:String(peak.uses)}},(_,v)=>typeof v==='bigint'?String(v):v,2));
 })().catch(error=>{console.error(error);process.exitCode=1;});
