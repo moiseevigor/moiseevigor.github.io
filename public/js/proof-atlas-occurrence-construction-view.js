@@ -15,7 +15,7 @@
  };
  async function loadCalleeIndex(owner){
   const shard=owner.indexSha256[0];
-  const response=await fetch('/public/data/proof-atlas/callee-uses/'+shard+'.json?v=1');
+  const response=await fetch('/public/data/proof-atlas/callee-uses/'+shard+'.json?v=2');
   if(!response.ok)throw Error('Parameter index unavailable');
   return response.json();
  }
@@ -32,8 +32,8 @@
     if(!record||index.edition!==edition.id||record.indexSha256!==owner.indexSha256){
      body.textContent='No parameter-use index for this compiled declaration.';state='done';return;
     }
-    function link(text,position){
-     const a=el('a',text),query=new URLSearchParams({edition:edition.id,proof:owner.name,route:'1:'+position.slots.join('.')});
+    function link(text,position,root=1){
+     const a=el('a',text),query=new URLSearchParams({edition:edition.id,proof:owner.name,route:root+':'+position.slots.join('.')});
      a.href='/projects/proof-atlas/library/?'+query+'#expr-'+position.node;return a;
     }
     const list=el('ul');
@@ -43,7 +43,13 @@
       item.append(link('Parameter '+slot,p));
       if(p.first)item.append(' · ',link('First of '+p.count+' uses',p.first));
       else item.append(' · 0 uses');
-     }else item.textContent='Argument '+slot+' lies beyond the recorded leading parameters.';
+     }else item.textContent=Number.isInteger(record.signature?.[slot-1])?
+      'Argument '+slot+' lies beyond the leading body parameters.':
+      'Argument '+slot+' lies beyond the leading parameters of both the body and the declaration type.';
+     const typeBinder=record.signature?.[slot-1];
+     if(Number.isInteger(typeBinder)){
+      item.append(' · ',link('Declaration type, parameter '+slot,{node:typeBinder,slots:Array(slot-1).fill(1)},0));
+     }
      list.append(item);
     }
     body.replaceChildren(list);state='done';

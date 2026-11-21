@@ -82,7 +82,7 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
       const disclosure=group.locator('[data-callee-uses="JacobiData.two_sqrt_mul_le_add"]');
       await disclosure.locator('summary').click();
       const hx=disclosure.locator('li').filter({has:page.getByRole('link',{name:'Parameter 3',exact:true})});
-      const binderURL=new URL(await hx.getByRole('link',{name:'Parameter 3'}).getAttribute('href'),url);
+      const binderURL=new URL(await hx.getByRole('link',{name:'Parameter 3',exact:true}).getAttribute('href'),url);
       assert.equal(binderURL.hash,'#expr-1945');
       const use=hx.getByRole('link',{name:'First of 2 uses'});
       const useURL=new URL(await use.getAttribute('href'),url);
@@ -98,6 +98,20 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
       await disclosure.getByText('No parameter-use index for this compiled declaration.').waitFor();
       assert.equal(await disclosure.locator('a').count(),0);
       await page.unroute('**/callee-uses/*.json*');
+      const signatureExample=new URL(url);
+      signatureExample.searchParams.set('proof','JacobiCore.E_pos');
+      signatureExample.hash='occurrence=42c5264d2680fe256ee4bfc588ed1ed3d648f38eeb56916d2e1ce02e11ae0c33.1.8.CUQ';
+      await page.goto(signatureExample.href);
+      const eps=group.locator('[data-callee-uses="JacobiCore.eps"]');
+      await eps.locator('summary').click();
+      const typeParameter=eps.getByRole('link',{name:'Declaration type, parameter 2',exact:true});
+      assert.match(await typeParameter.locator('..').innerText(),/beyond the leading body parameters/);
+      await typeParameter.click();
+      await page.waitForFunction(()=>{
+        const s=window.ProofAtlasLibrary?.getSnapshot();
+        return s?.name==='JacobiCore.eps' && s.edition==='published-15' && s.selected===2 &&
+          s.route.root===0 && s.route.slots.join('.')==='1';
+      });
       const paged=new URL(url);
       paged.searchParams.delete('group');paged.searchParams.set('loading','paged');
       const requested=[];

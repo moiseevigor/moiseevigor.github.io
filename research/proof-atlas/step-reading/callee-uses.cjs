@@ -155,9 +155,18 @@ for (const anchor of article.anchors.filter(a=>a.kind==='app' && a.callee)) {
 if(process.argv.includes('--all-bodies')){
   const shards=Array.from({length:16},()=>[]);
   for(const owner of edition.declarations.filter(r=>r.bodyAvailable)){
-    const params=cache.get(owner.name)||leadingParameters(load(owner));
+    const term=load(owner);
+    const params=cache.get(owner.name)||leadingParameters(term);
+    const signature=[];
+    let type=term.roots[0];
+    while(atlas.kinds[term.kind[type]]==='forallE'){
+      const slots=Array(signature.length).fill(1);
+      assert.equal(atlas.walk(term,{root:0,slots}),type);
+      signature.push(type);
+      type=term.children[type][1];
+    }
     const parameters=params.map(({node,slots,first,count})=>({node,slots,first,count}));
-    shards[parseInt(owner.indexSha256[0],16)].push({name:owner.name,indexSha256:owner.indexSha256,parameters});
+    shards[parseInt(owner.indexSha256[0],16)].push({name:owner.name,indexSha256:owner.indexSha256,parameters,signature});
   }
   const dir='public/data/proof-atlas/callee-uses';
   fs.mkdirSync(dir,{recursive:true});

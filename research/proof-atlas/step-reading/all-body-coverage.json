@@ -14,6 +14,17 @@
       "localInputSlots": "733210",
       "matchedSlots": "551168",
       "usedSlots": "551166",
+      "signatureOnly": "181989",
+      "beyondPrefixes": {
+        "CrossingData.psiP_strictMono": "5",
+        "JacobiCore.eps_strictMono": "3",
+        "JacobiCore.s_strictMonoOn": "10",
+        "JacobiFull.c_strictAntiOn": "5",
+        "JacobiInit.eps_strictMono": "3",
+        "JacobiInit.q_monotone": "9",
+        "JacobiInit.Γ_strictMono": "3",
+        "JacobiPeriodic.f1_div_c_strictAntiOn_I": "15"
+      },
       "distinctExternalNames": 898,
       "leadingExternalNames": [
         [
@@ -66,6 +77,10 @@
       "localInputSlots": "1821",
       "matchedSlots": "1815",
       "usedSlots": "1815",
+      "signatureOnly": "0",
+      "beyondPrefixes": {
+        "JacobiCore.eps_strictMono": "6"
+      },
       "distinctExternalNames": 16,
       "leadingExternalNames": [
         [
@@ -124,6 +139,8 @@
       "localInputSlots": "0",
       "matchedSlots": "0",
       "usedSlots": "0",
+      "signatureOnly": "0",
+      "beyondPrefixes": {},
       "distinctExternalNames": 386,
       "leadingExternalNames": [
         [
@@ -176,6 +193,8 @@
       "localInputSlots": "0",
       "matchedSlots": "0",
       "usedSlots": "0",
+      "signatureOnly": "0",
+      "beyondPrefixes": {},
       "distinctExternalNames": 34,
       "leadingExternalNames": [
         [
