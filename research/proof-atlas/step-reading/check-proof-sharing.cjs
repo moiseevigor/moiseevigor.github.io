@@ -5,7 +5,7 @@ const fs = require('node:fs');
 const crypto = require('node:crypto');
 const zlib = require('node:zlib');
 const A = require('../../../public/js/proof-atlas-library-data');
-const {firstBindingBody, nearestReference} = require('../../../public/js/proof-atlas-arithmetic');
+const {firstBindingBody, nearestReference, rowCopies, matchingCopies} = require('../../../public/js/proof-atlas-arithmetic');
 global.window = {};
 require('../../../public/data/proof-atlas/library-manifest');
 require('../../../public/data/proof-atlas/goedel-sample-manifest');
@@ -105,7 +105,7 @@ function conflicts(g) {
 // owning route to the corresponding relative reference path within that row.
 function enumerate(g) {
   const first = new Map(), ambiguous = new Set(), outerChanges = new Set(), ancestors = [], scope = [], scopeDepth = [];
-  const firstUseDepth = new Map();
+  const firstUseDepth = new Map(), matchingRoutes = new Map();
   const signatures = new Map(), destinations = new Map(), firstBodyDepth = new Map(), nearestUse = new Map(), firstRoute = new Map();
   // Intern the actual row, lexical signature and ordered child groups at each horizon.
   const partitions = Array.from({length:unboundedLevel + 1}, () => new Map());
@@ -154,6 +154,12 @@ function enumerate(g) {
     if (!signatures.has(n)) signatures.set(n, new Set());
     const signature = JSON.stringify([...external].sort());
     signatures.get(n).add(signature);
+    if (BigInt(g.expanded[g.roots[1]]) <= 1000n && [5,6,7,8].includes(g.kind[n])) {
+      if (!matchingRoutes.has(n)) matchingRoutes.set(n, new Map());
+      const groups = matchingRoutes.get(n);
+      if (!groups.has(signature)) groups.set(signature, []);
+      groups.get(signature).push(route);
+    }
     children.forEach((child, slot) => {
       const key = JSON.stringify([n, signature, slot]);
       if (!destinations.has(key)) destinations.set(key, new Map());
@@ -178,7 +184,7 @@ function enumerate(g) {
     if (targets.size > 1) splitSlots++;
     extraDestinations += BigInt(targets.size - 1);
   }
-  return {example, firstBodyDepth, firstUseDepth, nearestUse, firstRoute, navigable: depths.map(d => BigInt(partitions[Number.isFinite(d) ? d : unboundedLevel].size)), childSlots:BigInt(destinations.size), splitSlots, extraDestinations, ambiguous, classes: new Map([...signatures].map(([n,s]) => [n, BigInt(s.size)])), outerMiss: new Set([...ambiguous].filter(n => !outerChanges.has(n)))};
+  return {matchingRoutes, example, firstBodyDepth, firstUseDepth, nearestUse, firstRoute, navigable: depths.map(d => BigInt(partitions[Number.isFinite(d) ? d : unboundedLevel].size)), childSlots:BigInt(destinations.size), splitSlots, extraDestinations, ambiguous, classes: new Map([...signatures].map(([n,s]) => [n, BigInt(s.size)])), outerMiss: new Set([...ambiguous].filter(n => !outerChanges.has(n)))};
 }
 
 for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_SAMPLE.edition]) {
@@ -187,6 +193,7 @@ for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_S
   let childSlots = 0n, splitSlots = 0n, extraDestinations = 0n, affectedProofBodies = 0;
   let example = null, deepest = null;
   const shortcuts = {eligible:0, limited:0, shallow:0, shorter:0, largestSaving:0};
+  let matchingGroups = 0, matchingMembers = 0, singletonGroups = 0, recoverableSelections = 0;
   let testedRows = 0, foundBodies = 0, shorterUseElsewhere = 0;
   let visits = 0n, affected = 0n, scopedRows = 0n, largestIncrease = null;
   for (const d of e.declarations.filter(x => x.kind === 'theorem' && x.bodyAvailable)) {
@@ -205,6 +212,26 @@ for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_S
       assert.deepEqual(r.navigable, observed.navigable);
       for (const field of ['childSlots','splitSlots','extraDestinations'])
         assert.equal(r[field], observed[field]);
+      for (const [node,groups] of observed.matchingRoutes) {
+        if (groups.size === 1 && groups.values().next().value.length === 1) continue;
+        for (const addresses of groups.values()) {
+          const routes = addresses.map(s => ({root:1, slots:[...s].map(Number)}));
+          const site = {node, route:routes[0]}, copies = rowCopies(g,site);
+          const matches = matchingCopies(g,site,nearestReference(g,site),copies);
+          assert.equal(matches.total, BigInt(routes.length));
+          for (const [i,route] of routes.entries()) {
+            assert.deepEqual(matches.select(BigInt(i)),route);
+            assert.equal(matches.rankOf(route),BigInt(i));
+            const rank = copies.rankOf(route);
+            assert.deepEqual(copies.select(rank),{node,route});
+            const initial = copies.select(rank === 0n ? 1n : 0n);
+            if (routes.length > 1 && matches.rankOf(initial.route) === null) recoverableSelections++;
+          }
+          matchingGroups++;
+          matchingMembers += routes.length;
+          if (routes.length === 1) singletonGroups++;
+        }
+      }
       if (r.visits <= 1000n) {
         for (const row of observed.classes.keys()) {
           const hit = firstBindingBody(g,row);
@@ -308,5 +335,5 @@ for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_S
     if (!largestIncrease || groups * BigInt(largestIncrease.rows) > BigInt(largestIncrease.groups) * BigInt(r.rows))
       largestIncrease = {name:d.name, rows:r.rows, groups:String(groups), occurrences:String(r.visits)};
   }
-  console.log(JSON.stringify({...totals, shortcuts, testedRows, foundBodies, shorterUseElsewhere, deepest, groupsByDepth:Object.fromEntries(depths.map((d,i)=>[String(d),String(navigable[i])])), example, childSlots:String(childSlots), splitSlots:String(splitSlots), extraDestinations:String(extraDestinations), affectedProofBodies, largestIncrease, scopedRows:String(scopedRows), occurrences:String(visits), occurrencesInConflictingRows:String(affected)}));
+  console.log(JSON.stringify({...totals, matchingGroups, matchingMembers, singletonGroups, recoverableSelections, shortcuts, testedRows, foundBodies, shorterUseElsewhere, deepest, groupsByDepth:Object.fromEntries(depths.map((d,i)=>[String(d),String(navigable[i])])), example, childSlots:String(childSlots), splitSlots:String(splitSlots), extraDestinations:String(extraDestinations), affectedProofBodies, largestIncrease, scopedRows:String(scopedRows), occurrences:String(visits), occurrencesInConflictingRows:String(affected)}));
 }

@@ -372,10 +372,16 @@
    for(const n of [...above].sort((a,b)=>a-b))countRow(n);
   }
   const total=ways.get(root);
-  let node=root,rank=0n;
-  for(const k of site.route.slots){
-   for(let i=0;i<k;i++)rank+=ways.get(data.children[node][i])||0n;
-   node=data.children[node][k];
+  function rankOf(route){
+   if(route.root!==site.route.root)return null;
+   let node=root,rank=0n;
+   for(const k of route.slots){
+    const children=data.children[node];
+    if(!Number.isInteger(k)||k<0||k>=children.length)return null;
+    for(let i=0;i<k;i++)rank+=ways.get(children[i])||0n;
+    node=children[k];
+   }
+   return node===target?rank:null;
   }
   function select(index){
    if(typeof index!=='bigint'||index<0n||index>=total)throw RangeError('Invalid occurrence');
@@ -393,7 +399,17 @@
    }
    return {node:target,route:{root:site.route.root,slots}};
   }
-  return {total,rank,select,visited};
+  return {total,rank:rankOf(site.route),rankOf,select,visited};
+ }
+ function matchingCopies(data,site,witness,copies){
+  if(!witness){
+   if(data.neededScope[site.node])return null;
+   return {total:copies.total,rankOf:copies.rankOf,select:index=>copies.select(index).route};
+  }
+  const query=common?require('./proof-atlas-repeated-receiver'):host.ProofAtlasRepeatedReceiver;
+  const suffix=witness.reference.route.slots.slice(site.route.slots.length);
+  try{return query(data,witness.binder.route,site.node,suffix);}
+  catch(error){if(error instanceof RangeError)return null;throw error;}
  }
  function binderCopies(data,site){
   const bound=boundPremise(data,site);
@@ -861,9 +877,25 @@
       }
      }
     }
+    const find=el('button','Find a copy with the same external binders'),status=el('p');
+    find.type='button';find.dataset.findMatchingCopy='';status.setAttribute('role','status');
+    let matches;
+    find.onclick=()=>{
+     matches??=matchingCopies(data,at,selected,copies);
+     if(!matches){status.textContent='Matching-copy search reached the inspection limit.';return;}
+     const rank=matches.rankOf(at.route);
+     if(matches.total===1n){status.textContent='Only the selected occurrence has these external binders.';return;}
+     const raw=input.value.trim();
+     const number=raw.length<=String(copies.total).length && /^[1-9][0-9]*$/.test(raw)?BigInt(raw):0n;
+     const current=number>0n && number<=copies.total?matches.rankOf(copies.select(number-1n).route):null;
+     let next=((current??rank)+1n)%matches.total;
+     if(next===rank)next=(next+1n)%matches.total;
+     input.value=String(copies.rankOf(matches.select(next))+1n);
+     update();status.textContent=matches.total+' of '+copies.total+' occurrences share these external binders.';
+    };
     input.oninput=update;update();
     panel.append(el('p',selected?'The links follow the nearest enclosing binder used by this expression. Its location also fixes every farther enclosing binder.':'This expression uses no external variables.'),
-     show('Selected occurrence '+(copies.rank+1n)+' of '+copies.total,at,selected),label,output);
+     show('Selected occurrence '+(copies.rank+1n)+' of '+copies.total,at,selected),label,find,status,output);
    };
    container.append(panel);
   }
@@ -1232,5 +1264,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={firstBindingBody,nearestReference,rowCopies,outerReference,congruenceCall,transportCall,derivationInputs,binderArgument,statementOrigin,binderCopies,zeroDifference,logicalInference,numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
+ if(common)module.exports={matchingCopies,firstBindingBody,nearestReference,rowCopies,outerReference,congruenceCall,transportCall,derivationInputs,binderArgument,statementOrigin,binderCopies,zeroDifference,logicalInference,numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
 })(typeof window==='undefined'?globalThis:window);
