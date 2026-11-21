@@ -288,6 +288,29 @@
              const uses=window.ProofAtlasRecursiveInputs.countReferences(owner.data,frame.body.node,0);
              if(uses.status==='counted')item.append(' · ',link(number(uses.occurrences)+(uses.occurrences==='1'?' reference to this input':' references to this input'),
               url(owner.record.name,frame.binder.node,frame.binder.route)));
+             if(uses.status==='counted' && uses.occurrences!=='0'){
+              const trace=el('details'),result=el('div');
+              trace.append(el('summary','Follow this input'),result);item.append(trace);
+              function showUse(n){
+               const picked=window.ProofAtlasRecursiveInputs.countReferences(owner.data,frame.body.node,0,{ordinal:n});
+               if(!picked.witness){result.textContent='Reference search limit reached.';return;}
+               const w=picked.witness,route={root:frame.body.route.root,slots:frame.body.route.slots.concat(w.slots)};
+               const receiver=window.ProofAtlasOmittedReferences.applicationAtUse(owner.data,{node:w.node,route});
+               result.replaceChildren(link('Use '+number(n),url(owner.record.name,w.node,route)));
+               if(receiver){
+                result.append(receiver.slot?' · argument '+receiver.slot+' of '+receiver.arity+' to ':' · function of ',
+                 link(receiver.label,url(owner.record.name,receiver.call.node,receiver.call.route)));
+               }
+              }
+              if(BigInt(uses.occurrences)>1n){
+               const form=el('form'),label=el('label','Input use number '),input=el('input'),go=el('button','Trace use');
+               input.type='text';input.inputMode='numeric';input.pattern='[1-9][0-9]*';input.required=true;
+               input.maxLength=uses.occurrences.length;input.value='1';go.type='submit';label.append(input);form.append(label,go);trace.insertBefore(form,result);
+               input.oninput=()=>input.setCustomValidity('');
+               form.onsubmit=event=>{event.preventDefault();const n=BigInt(input.value);if(n>BigInt(uses.occurrences)){input.setCustomValidity('Choose a number up to '+uses.occurrences);input.reportValidity();return;}showUse(n);};
+              }
+              trace.ontoggle=()=>{if(trace.open && !result.children.length)showUse(1n);};
+             }
             }
             if(branch.missingSourceLambdas)item.append(el('p',number(branch.missingSourceLambdas)+' handler inputs lack a recorded source binder.'));
             handlers.append(item);

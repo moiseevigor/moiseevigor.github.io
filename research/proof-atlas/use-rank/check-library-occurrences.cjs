@@ -111,6 +111,16 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
      assert((await branch.innerText()).includes('1 selected use'));
      const binderLink=branch.getByRole('link',{name:'1 reference to this input',exact:true});
      assert.equal(await binderLink.evaluate(a=>a.href),target.href);
+     await branch.getByText('Follow this input',{exact:true}).click();
+     const witness=new URL(await branch.getByRole('link',{name:'Use 1',exact:true}).evaluate(a=>a.href));
+     const term=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+record.indexFile)));
+     const binderRoute={root:1,slots:target.searchParams.get('route').slice(2).split('.').map(Number)};
+     const expectedUse=require('./model.cjs').open(term,binderRoute).select(1n);
+     assert.equal(witness.searchParams.get('route'),'1:'+expectedUse.route.slots.join('.'));
+     assert.equal(witness.hash,'#expr-'+expectedUse.node);
+     const receiver=require('../../../public/js/proof-atlas-omitted-references').applicationAtUse(term,expectedUse);
+     const linkToCall=new URL(await branch.getByRole('link',{name:receiver.label,exact:true}).evaluate(a=>a.href));
+     assert.equal(linkToCall.searchParams.get('route'),'1:'+receiver.call.route.slots.join('.'));
      const u=new URL(await branch.getByRole('link',{name:hypothesis,exact:true}).evaluate(a=>a.href));
      assert.equal(u.searchParams.get('route'),'1:'+expected.route.slots.join('.'));
      assert.equal(u.hash,'#expr-'+expected.node);

@@ -50,7 +50,28 @@
    if(data.neededScope[id]>target&&(known===undefined||((known>>BigInt(target))&1n)!==0n)){const kind=data.kind[id];if(kind===0)n=data.payloads[id].index===target?1n:0n;else data.children[id].forEach((c,j)=>{n+=visit(c,depth+(binds(kind,j)?1:0),distance+1);});}memo.set(key,n);return n;
   }
   const method=useSupport?'scoped-dag-reference-count/2':'scoped-dag-reference-count/1',supportInfo=useSupport?{supportAvailable:support?.[root]!==undefined,supportWidth,supportCacheLimit}:{};
-  try{return{status:'counted',occurrences:visit(root,0,0).toString(),states,method,...supportInfo};}catch(_){return{status:'unavailable',reason:'Scoped reference-count budget exceeded',states,method,...supportInfo};}
+  const ordinal=options.ordinal;
+  demand(ordinal===undefined || (typeof ordinal==='bigint' && ordinal>=1n),'reference ordinal');
+  let total;
+  try{total=visit(root,0,0);}catch(_){return{status:'unavailable',reason:'Scoped reference-count budget exceeded',states,method,...supportInfo};}
+  const result={status:'counted',occurrences:total.toString(),states,method,...supportInfo};
+  if(ordinal===undefined)return result;
+  demand(ordinal<=total,'reference outside body');
+  let remaining=ordinal,node=root,depth=0;
+  const slots=[];
+  while(data.kind[node]!==0){
+   const kind=data.kind[node],slot=data.children[node].findIndex((child,j)=>{
+    const weight=memo.get(child+':'+(depth+Number(binds(kind,j))));
+    demand(weight!==undefined,'missing reference count');
+    if(remaining<=weight)return true;
+    remaining-=weight;return false;
+   });
+   demand(slot>=0,'reference partition');
+   slots.push(slot);depth+=Number(binds(kind,slot));node=data.children[node][slot];
+  }
+  demand(data.payloads[node].index===index+depth,'reference binder depth');
+  return {...result,witness:{node,slots}};
+
  }
  function describe(t,r,data,frames){
   return Array.from({length:r.inputCount},(_,j)=>{const input=role(t,r,j+1),source=frames[j]?.binder||null,complete=frames.length===r.inputCount;

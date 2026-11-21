@@ -30,9 +30,9 @@ const nativeInventories=[
  ...(published?window.PROOF_ATLAS_OCCURRENCE_TYPES.records:window.PROOF_ATLAS_AI_SAMPLE.types).map(d=>({d,kind:'primary'})),
  ...(published?window.PROOF_ATLAS_ELIMINATIONS.records:window.PROOF_ATLAS_AI_SAMPLE.eliminations).map(d=>({d,kind:'case'}))
 ];
-const caseRoutes=new Set();
+const caseRoutes=new Set(),handlerUseRoutes=new Set();
 const formalCache=new Map(),missingSignatures=new Map();
-const splitStats={groups:0,twoChildren:0,threeChildren:0,nineTenthsInOneChild:0,applicationSplits:0,threeOrMoreOccupiedPorts:0,maxOccupiedPorts:0,occupiedArguments:0,formalSlots:0,dependentSlots:0,parameterEdges:0,casePositions:0,handlerPositions:0,occupiedHandlers:0,checkedHandlerInputs:0,unusedHandlerInputs:0,recordedCallTypes:0,lambdaResultUnused:0,withDeclaredAndRecorded:0,resultTypes:0,dependentResults:0,resultEdges:0,residualForalls:0,formalSplits:0,importedSlots:0,externalConstantArguments:0,otherHeadArguments:0,beyondLiteralPrefix:0};
+const splitStats={groups:0,twoChildren:0,threeChildren:0,nineTenthsInOneChild:0,applicationSplits:0,threeOrMoreOccupiedPorts:0,maxOccupiedPorts:0,occupiedArguments:0,formalSlots:0,dependentSlots:0,parameterEdges:0,casePositions:0,handlerPositions:0,occupiedHandlers:0,checkedHandlerInputs:0,unusedHandlerInputs:0,handlerUses:0,handlerApplicationUses:0,recordedCallTypes:0,lambdaResultUnused:0,withDeclaredAndRecorded:0,resultTypes:0,dependentResults:0,resultEdges:0,residualForalls:0,formalSplits:0,importedSlots:0,externalConstantArguments:0,otherHeadArguments:0,beyondLiteralPrefix:0};
 function audit(record) {
   const bytes=zlib.gunzipSync(fs.readFileSync('.'+record.indexFile));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),record.indexSha256);
@@ -204,6 +204,23 @@ function audit(record) {
               assert.equal(A.walk(data,f.domain.route),f.domain.node);
               const count=countReferences(data,f.body.node,0);
               assert.equal(count.status,'counted');
+              const binder={node:f.binder.node,route:f.binder.route};
+              const independent=require('./model.cjs').open(data,binder.route);
+              for(let n=1n;n<=BigInt(count.occurrences);n++){
+                const w=countReferences(data,f.body.node,0,{ordinal:n}).witness;
+                const use={node:w.node,route:{root:f.body.route.root,slots:f.body.route.slots.concat(w.slots)}};
+                const expected=independent.select(n);
+                assert.deepEqual(use,{node:expected.node,route:expected.route});
+                assert.deepEqual(A.binding(data,use.route),binder);
+                splitStats.handlerUses++;
+                handlerUseRoutes.add(record.indexSha256+'@'+use.route.root+':'+use.route.slots.join('.'));
+                const receiving=applicationAtUse(data,use);
+                if(receiving){
+                  assert.deepEqual(sourceInput(data,receiving.call,receiving.slot),use);
+                  splitStats.handlerApplicationUses++;
+                  if(process.env.ATLAS_FORMAL_EXAMPLE && !splitStats.useExample)splitStats.useExample={label:receiving.label,slot:receiving.slot,arity:receiving.arity};
+                }
+              }
               if(count.occurrences==='0')splitStats.unusedHandlerInputs++;
               splitStats.checkedHandlerInputs++;
             }
@@ -306,7 +323,7 @@ function audit(record) {
 const reports=edition.declarations.filter(r=>r.kind==='theorem').map(audit);
 if(process.argv.includes('--branch-summary')){
   const missing=[...missingSignatures].sort((a,b)=>b[1]-a[1]);
-  console.log(JSON.stringify({edition:edition.id,...splitStats,distinctCaseCalls:caseRoutes.size,missingNames:missing.length,mostFrequentMissing:process.argv.includes('--all-missing')?missing:missing.slice(0,5)}));return;
+  console.log(JSON.stringify({edition:edition.id,...splitStats,distinctCaseCalls:caseRoutes.size,distinctHandlerUses:handlerUseRoutes.size,missingNames:missing.length,mostFrequentMissing:process.argv.includes('--all-missing')?missing:missing.slice(0,5)}));return;
 }
 if (process.argv.includes('--write-packets')) {
   const dir='public/data/proof-atlas/input-roles';
