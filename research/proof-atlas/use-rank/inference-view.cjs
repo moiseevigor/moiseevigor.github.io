@@ -21,10 +21,10 @@ function packet(file,hash) {
   assert.equal(createHash('sha256').update(bytes).digest('hex'),hash);
   return JSON.parse(bytes);
 }
-const examples=[],flows={},groupBindings={},typeContexts={};
+const examples=[],flows={},groupBindings={},typeContexts={},finalApplications={};
 for(const item of require('./port-results.json')) {
   const {example,source,nativeOwner}=item;
-  const {record}=inventory().find(x=>x.record.indexSha256===source.indexSha256 && x.edition===source.edition);
+  const {record,descriptors}=inventory().find(x=>x.record.indexSha256===source.indexSha256 && x.edition===source.edition);
   const data=atlas.validateIndex(packet('.'+record.indexFile,source.indexSha256),record);
   const native=packet('public/data/proof-atlas/application-ports/'+nativeOwner+'.json.gz',nativeOwner);
   assert.deepEqual(native.source,source);
@@ -82,6 +82,11 @@ for(const item of require('./port-results.json')) {
       binder:{route:binder,node:binderNode},variable:data.payloads[binderNode].binderName,
       resultDependencies:conclusion(entries),rule:entries[0].display.inputTerm,conclusion:entries[0].display.consumerType});
   }
+  const descriptor=descriptors.find(d=>d.kind==='primary').descriptor;
+  assert.equal(descriptor.indexSha256,source.indexSha256);
+  assert.equal(descriptor.sourceSha256,source.sourceSha256);
+  const checked=packet('.'+descriptor.file,descriptor.sha256);
+  finalApplications[source.indexSha256]={...require('./final-application.cjs')(data,checked,examples.filter(x=>x.source.indexSha256===source.indexSha256)),owner:descriptor.sha256};
   flows[source.indexSha256]=require('./statement-flow.cjs')(data,examples.filter(x=>x.source.indexSha256===source.indexSha256));
   const bindings={};
   for(const clause of flows[source.indexSha256])for(const branch of clause.coverage.branches.largest){
@@ -98,5 +103,6 @@ process.stdout.write(local('inference-template.html.in')
   .replace('/* SELECTOR */',()=>local('select-branch.js'))
   .replace('/* TYPE CONTEXTS */',()=>JSON.stringify(typeContexts).replaceAll('<','\\u003c'))
   .replace('/* GROUP BINDINGS */',()=>JSON.stringify(groupBindings).replaceAll('<','\\u003c'))
+  .replace('/* FINALS */',()=>JSON.stringify(finalApplications).replaceAll('<','\\u003c'))
   .replace('/* FLOWS */',()=>JSON.stringify(flows).replaceAll('<','\\u003c'))
   .replace('/* EXAMPLES */',()=>JSON.stringify(examples).replaceAll('<','\\u003c')));

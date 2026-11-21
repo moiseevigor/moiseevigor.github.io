@@ -6,7 +6,7 @@
 .premise[data-selected]{border-inline-start:3px solid LinkText;padding-inline-start:.7rem}
 .branch-focus{margin:.6rem 0}.branch-focus meter{width:min(8rem,33%);margin-right:.5rem;vertical-align:middle}
 </style></head><body><main><h1>Reading a Lean inference</h1><label>Compiled application <select id="proof"></select></label>
-<p id="intro"></p><details id="statement-flow"><summary>Trace a theorem parameter or hypothesis</summary><label>Statement binder <select id="clause"></select></label><div id="flow"></div></details><section aria-labelledby="map-heading"><h2 id="map-heading">Which arguments occur in each type?</h2>
+<p id="intro"></p><details id="final-application"><summary>Read backward from the theorem result</summary><div id="final-body"></div></details><details id="statement-flow"><summary>Trace a theorem parameter or hypothesis</summary><label>Statement binder <select id="clause"></select></label><div id="flow"></div></details><section aria-labelledby="map-heading"><h2 id="map-heading">Which arguments occur in each type?</h2>
 <p class="matrix-key">Columns are proof inputs and the conclusion. Select a dot to trace its reference. A dash means the formal argument is absent from that type. A blank falls outside its scope.</p>
 <div class="matrix-scroll" tabindex="0" role="region" aria-label="Argument references by premise and conclusion"><table class="matrix" id="matrix" aria-labelledby="map-heading"></table></div><p id="witness" aria-live="polite" hidden></p></section><h2>Proof arguments</h2><div id="premises"></div><section class="result"><h2>Conclusion</h2><div id="denominator" hidden><p>Clearing denominators turns the fractional equation</p>
 <math display="block" aria-label="one over a plus one, plus one over b plus one, plus one over a plus b, equals three halves"><mrow><mfrac><mn>1</mn><mrow><mi>a</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mi>b</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></mfrac><mo>=</mo><mfrac><mn>3</mn><mn>2</mn></mfrac></mrow></math>
@@ -16,6 +16,7 @@
 <details><summary>Compiled provenance</summary><p id="identity" class="meta"></p></details></main>
 <script>/* SELECTOR */
 const examples=/* EXAMPLES */;
+const finalApplications=/* FINALS */;
 const typeContexts=/* TYPE CONTEXTS */;
 const groupBindings=/* GROUP BINDINGS */;
 const flows=/* FLOWS */;
@@ -209,10 +210,44 @@ function traceClause(){
  }
 }
 el('clause').onchange=traceClause;
+function showFinal(){
+ const hash=active.source.indexSha256,f=finalApplications[hash],host=el('final-body');
+ host.replaceChildren(link('Final proof expression',f.anchor));
+ if(!f.checked){host.append(' · Application trace unavailable.');return;}
+ const formula=document.createElement('p');formula.className='formula';formula.textContent=f.type;
+ host.append(' · ',link(f.rule,f.head),formula);
+ const other=document.createElement('details'),label=document.createElement('summary');
+ label.textContent='Type and value arguments';other.append(label);
+ for(const arg of f.args){
+  const box=document.createElement('div'),p=document.createElement('p');box.className='formula';box.dataset.finalSlot=arg.slot;
+  p.append('Input '+arg.slot+' · '+arg.role+' · ',link(arg.type,arg.anchor));box.append(p);
+  function callList(calls){
+   const list=document.createElement('ul');
+   for(const call of calls){
+    const li=document.createElement('li'),a=document.createElement('a');
+    a.href='#'+hash+'-'+call.id+'/read';a.textContent='Inspect '+call.rule+' · call '+call.id;
+    a.onclick=e=>{if(a.hash===location.hash){e.preventDefault();follow();}};
+    li.append(a);list.append(li);
+   }
+   return list;
+  }
+  if(arg.calls.length)box.append('Recorded calls inside this argument',callList(arg.calls));
+  for(const local of arg.viaLocal||[]){
+   const segment=document.createElement('div');segment.className='via-local';
+   segment.append('Via ',link(local.name,local.binder),' · ',link('use in this argument',local.use),' · ',
+    link('defining value',local.value),callList(local.calls));
+   box.append(segment);
+  }
+  if(arg.localLinksIncomplete)box.append('Local definition links incomplete.');
+  (arg.role==='proof'?host:other).append(box);
+ }
+ if(other.children.length>1)host.append(other);
+}
 function show(i){
  const previous=active?.source.indexSha256;
  active=examples[i];
  if(previous!==active.source.indexSha256){
+  showFinal();
   const clauses=flows[active.source.indexSha256],picker=el('clause');
   picker.replaceChildren();
   for(const [k,clause] of clauses.entries()){
@@ -282,6 +317,10 @@ function follow(){
  const [callHash,field,slot]=location.hash.split('/');
  const index=examples.findIndex(x=>callHash==='#'+x.source.indexSha256+'-'+x.callId);
  el('proof').value=String(index>=0?index:defaultProof);show(Number(el('proof').value));
+ if(index>=0 && field==='read'){
+  el('final-application').open=false;
+  el('intro').tabIndex=-1;el('intro').focus();
+ }
  if(index>=0 && field==='input' && /^(0|[1-9]\d*)$/.test(slot)){
   const target=active.ports[Number(slot)];
   if(!target)return;
