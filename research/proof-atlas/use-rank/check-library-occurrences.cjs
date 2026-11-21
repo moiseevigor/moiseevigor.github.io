@@ -109,6 +109,16 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
      const expected=require('../../../public/js/proof-atlas-application-ports').sourceInput(term,call,j+1);
      assert.equal(u.searchParams.get('route'),'1:'+expected.route.slots.join('.'));assert.equal(u.hash,'#expr-'+expected.node);
     }
+    const result=recursor.getByText('Declared result before substitution',{exact:true});
+    await result.click();
+    const resultView=result.locator('..');
+    assert.equal(await resultView.locator('code').textContent(),'motive t');
+    assert.equal(await resultView.getByRole('link').count(),2);
+    for(const [slot,name] of [[3,'motive'],[4,'t']]){
+     const u=new URL(await resultView.getByRole('link',{name:name+' · argument '+slot,exact:true}).evaluate(a=>a.href));
+     const expected=require('../../../public/js/proof-atlas-application-ports').sourceInput(term,call,slot);
+     assert.equal(u.searchParams.get('route'),'1:'+expected.route.slots.join('.'));assert.equal(u.hash,'#expr-'+expected.node);
+    }
     await recursor.getByText('Explore proof branches',{exact:true}).click();
     const first=entry.groups[0];
     await roles.getByText(first.label,{exact:true}).waitFor();

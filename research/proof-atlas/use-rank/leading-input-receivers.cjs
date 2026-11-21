@@ -25,7 +25,7 @@ for(const s of window.PROOF_ATLAS_CORE_SIGNATURES.entries){
 const native=JSON.parse(zlib.gunzipSync(fs.readFileSync('research/proof-atlas/type-notation/native.json.gz')));
 assert.deepEqual(catalog.entries.filter(e=>roles.importedSignature(catalog,'goedel-sample-4331',e.name,catalog.compiler)).map(e=>e.name).sort().join('|'),native.signatures.map(s=>s.name).sort().join('|'));
 const formalCache=new Map(),missingSignatures=new Map();
-const splitStats={groups:0,twoChildren:0,threeChildren:0,nineTenthsInOneChild:0,applicationSplits:0,threeOrMoreOccupiedPorts:0,maxOccupiedPorts:0,occupiedArguments:0,formalSlots:0,dependentSlots:0,parameterEdges:0,formalSplits:0,importedSlots:0,externalConstantArguments:0,otherHeadArguments:0,beyondLiteralPrefix:0};
+const splitStats={groups:0,twoChildren:0,threeChildren:0,nineTenthsInOneChild:0,applicationSplits:0,threeOrMoreOccupiedPorts:0,maxOccupiedPorts:0,occupiedArguments:0,formalSlots:0,dependentSlots:0,parameterEdges:0,resultTypes:0,dependentResults:0,resultEdges:0,residualForalls:0,formalSplits:0,importedSlots:0,externalConstantArguments:0,otherHeadArguments:0,beyondLiteralPrefix:0};
 function audit(record) {
   const bytes=zlib.gunzipSync(fs.readFileSync('.'+record.indexFile));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),record.indexSha256);
@@ -170,6 +170,22 @@ function audit(record) {
           const bound=A.binding(data,headRoute);
           formalData=data;
           params=roles.formalParameters(data,{root:1,slots:bound.route.slots.concat(0)},flat.call.arity);
+        }
+        const result=formalData && roles.declaredResult(formalData,params,flat.call.arity);
+        if(result){
+          splitStats.resultTypes++;
+          if(result.references.length)splitStats.dependentResults++;
+          if(formalData.kind[result.node]===7)splitStats.residualForalls++;
+          splitStats.resultEdges+=result.references.length;
+          assert.equal(A.walk(formalData,result.route),result.node);
+          const expected=require('../../../public/js/proof-atlas-application-ports').dependencies(formalData,result.node,params.length);
+          assert.deepEqual(result.references.map(ref=>ref.slot),expected);
+          for(const ref of result.references){
+            const f=params[ref.slot-1];
+            assert.deepEqual(A.binding(formalData,ref.route),{node:f.node,route:f.route});
+            const actual=sourceInput(data,{node:flat.call.node,route:flat.route},ref.slot);
+            assert.equal(A.walk(data,actual.route),actual.node);
+          }
         }
         let next=1n,previous=-1,hasFormal=false;
         for(const b of flat.branches){

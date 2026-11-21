@@ -157,18 +157,26 @@
  }
  // Keep one lexical witness for each earlier parameter mentioned in this domain.
  function domainReferences(data,parameters,slot){
-  const formal=parameters[slot-1],seen=new Set(),found=new Map();
-  const slots=formal.route.slots.concat(0);
+  return fieldReferences(data,parameters[slot-1],0,slot-1);
+ }
+ function declaredResult(data,parameters,arity){
+  if(!arity || parameters.length!==arity)return null;
+  const formal=parameters[arity-1];
+  return {node:data.children[formal.node][1],route:{root:formal.route.root,slots:formal.route.slots.concat(1)},
+   references:fieldReferences(data,formal,1,arity)};
+ }
+ function fieldReferences(data,formal,field,previous){
+  const seen=new Set(),found=new Map(),slots=formal.route.slots.concat(field);
   function visit(node,depth){
-   if(found.size===slot-1 || data.neededScope[node]<=depth)return;
+   if(found.size===previous || data.neededScope[node]<=depth)return;
    const key=node+':'+depth;
    if(seen.has(key))return;
    if(seen.size>=65536)throw RangeError('Formal domain traversal limit');
    seen.add(key);
    const kind=data.kind[node];
    if(kind===0){
-    const input=slot-1-(data.payloads[node].index-depth);
-    if(input>=1 && input<slot && !found.has(input))
+    const input=previous-(data.payloads[node].index-depth);
+    if(input>=1 && input<=previous && !found.has(input))
      found.set(input,{slot:input,node,route:{root:formal.route.root,slots:[...slots]}});
     return;
    }
@@ -177,7 +185,7 @@
     slots.push(i);visit(child,depth+Number(binds));slots.pop();
    });
   }
-  visit(data.children[formal.node][0],0);
+  visit(data.children[formal.node][field],0);
   return [...found.values()].sort((a,b)=>a.slot-b.slot);
  }
  // Names present in the Lean-only 4.33.1 signature export.
@@ -191,6 +199,6 @@
   if(!catalog || (edition!=='published-15' && (edition!=='goedel-sample-4331' || !coreNames.has(name) || compiler!==catalog.compiler)))return null;
   return catalog.entries.find(e=>e.name===name && e.kernelSignature==='PASS') || null;
  }
- const api={addOffset,select,constantArgumentIndex,partition,formalParameters,domainReferences,importedSignature};
+ const api={addOffset,select,constantArgumentIndex,partition,formalParameters,domainReferences,declaredResult,importedSignature};
  if(typeof module!=='undefined'&&module.exports)module.exports=api;else host.ProofAtlasRoleOccurrences=api;
 })(typeof window==='undefined'?globalThis:window);

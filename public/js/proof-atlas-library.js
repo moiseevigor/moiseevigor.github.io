@@ -285,6 +285,21 @@
              if(!list.isConnected)return;
              const typeRoute=(callee || signature)?{root:0,slots:[]}:{root:bound.route.root,slots:bound.route.slots.concat(0)};
              const params=roles.formalParameters(signature?signature.graph:source.data,typeRoute,part.call.arity);
+             const graph=signature?signature.graph:source.data;
+             function argumentLinks(refs){
+              const items=el('ul');
+              for(const ref of refs){
+               const earlier=params[ref.slot-1];
+               const slots=part.route.slots.concat(Array(part.call.arity-ref.slot).fill(0),1);
+               const at={root:part.route.root,slots},node=A.walk(owner.data,at);
+               const row=el('li'),label=(earlier.name||'_')+' · argument '+ref.slot;
+               row.append(link(label,url(owner.record.name,node,at)));
+               if(signature)row.append(' · signature reference e'+ref.node+' at '+ref.route.root+':'+ref.route.slots.join('.'));
+               else row.append(' · ',link('Reference in declared type',url(source.record.name,ref.node,ref.route)));
+               items.append(row);
+              }
+              return items;
+             }
              let shown=0;
              part.branches.forEach((b,j)=>{
               const f=params[b.slot-1];
@@ -299,22 +314,31 @@
               }else evidence.append(' ',link(text,url(source.record.name,f.node,f.route)));
               const refs=roles.domainReferences(signature?signature.graph:source.data,params,b.slot);
               if(refs.length){
-               const dependencies=el('details'),items=el('ul');
-               dependencies.append(el('summary','Earlier arguments in this parameter type'),items);
-               for(const ref of refs){
-                const earlier=params[ref.slot-1];
-                const slots=part.route.slots.concat(Array(part.call.arity-ref.slot).fill(0),1);
-                const at={root:part.route.root,slots},node=A.walk(owner.data,at);
-                const row=el('li'),label=(earlier.name||'_')+' · argument '+ref.slot;
-                row.append(link(label,url(owner.record.name,node,at)));
-                if(signature)row.append(' · signature reference e'+ref.node+' at '+ref.route.root+':'+ref.route.slots.join('.'));
-                else row.append(' · ',link('Reference in declared type',url(source.record.name,ref.node,ref.route)));
-                items.append(row);
-               }
+               const dependencies=el('details');
+               dependencies.append(el('summary','Earlier arguments in this parameter type'),argumentLinks(refs));
                evidence.append(dependencies);
               }
               shown++;
              });
+             const result=roles.declaredResult(graph,params,part.call.arity);
+             if(result){
+              const details=el('details');
+              details.append(el('summary','Declared result before substitution'));
+              const spine=window.ProofAtlasElimination.spine(graph,result.node);
+              const atoms=[spine.head,...spine.args].map(node=>{
+               if(graph.kind[node]===4)return graph.payloads[node].name;
+               if(graph.kind[node]===0)return params.at(-1-graph.payloads[node].index)?.name;
+              });
+              if(atoms.every(Boolean))details.append(el('code',atoms.join(' ')));
+              if(signature){
+               const raw=el('details');raw.append(el('summary','Compiled result expression'),el('pre',A.termLines(graph,result.node).join('\n')),el('p','Signature SHA-256 '+signature.signatureSha256));
+               details.append(raw);
+              }
+              else details.append(link('Result in the declared type',url(source.record.name,result.node,result.route)));
+              if(result.references.length)details.append(el('p','Supplied arguments referenced by this result'),argumentLinks(result.references));
+              else details.append(el('p','The result contains no reference to a supplied parameter.'));
+              display.append(details);
+             }else display.append(el('p','The recorded parameter list ends before the last supplied argument.'));
              status.textContent=shown?(signature?'Parameter details show the recorded imported signature and its domain.':'Parameter links open their binders in the declared type.'):'The declared type exposes no parameter at these positions.';
             }catch(error){show.disabled=false;status.textContent='Could not read the declared type. Select again to retry.';}
            };
