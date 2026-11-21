@@ -73,6 +73,9 @@ async function measure(item, uncovered) {
     stages.set(key, {slots, node:entry.node, binderInfo, premise:construction.premises[1]});
   }
   let maximal = 0, complete = 0, twoPremises = 0, twoExplicit = 0, example;
+  const repeatedRows = new Set();
+  let repeatedOccurrences=0n, recordedRepeated=0, reusedProofCalls=0, explicitProofReuse=0;
+  const repeatedRolePairs={};
   const recordedRows = new Set();
   for (const stage of stages.values()) {
     const route = stage.slots;
@@ -94,6 +97,22 @@ async function measure(item, uncovered) {
     }
     if (inputs.length !== call.args.length) continue;
     complete++;
+    if(new Set(call.args).size < call.args.length) recordedRepeated++;
+    const repeatedProofs=new Set(), repeatedExplicitProofs=new Set();
+    for(const [i,first] of inputs.entries()){
+      for(const second of inputs.slice(i+1)){
+        const arg=call.args[first.position-1];
+        if(arg!==call.args[second.position-1])continue;
+        const roles=[first.role,second.role].sort().join('/');
+        repeatedRolePairs[roles]=(repeatedRolePairs[roles]??0)+1;
+        if(roles==='proof/proof'){
+          repeatedProofs.add(arg);
+          if(first.binderInfo==='default' && second.binderInfo==='default') repeatedExplicitProofs.add(arg);
+        }
+      }
+    }
+    if(repeatedProofs.size)reusedProofCalls++;
+    if(repeatedExplicitProofs.size)explicitProofReuse++;
     const premises = inputs.reverse().filter(input=>input.role==='proof' && input.statement);
     if (premises.length < 2) continue;
     twoPremises++;
@@ -103,17 +122,23 @@ async function measure(item, uncovered) {
       destination:{node:parent,route:route.slice(0,-1),field:atlas.fields[atlas.kinds[graph.kind[parent]]][route.at(-1)]}};
   }
   const population = countDestinations(graph,graph.roots[1],recordedRows,(id,uses)=>{
+    const {head,args} = spine(graph,id);
+    if(new Set(args).size < args.length){
+      repeatedRows.add(id);
+      repeatedOccurrences+=uses;
+    }
     if (!uncovered || recordedRows.has(id)) return;
-    const {head} = spine(graph,id);
     const headName = graph.kind[head]===4 ? graph.payloads[head].name : atlas.kinds[graph.kind[head]];
     uncovered.push({declaration:item.record.name,id,uses,headName,open:graph.neededScope[id]>0});
   });
+  assert.equal(countMatchingRoutes(graph,repeatedRows),repeatedOccurrences);
   const matchingRoutes = countMatchingRoutes(graph,recordedRows);
   assert.equal(matchingRoutes,population.copiesOfRecordedRows ?? 0n);
   assert(BigInt(maximal) <= matchingRoutes);
   const coverage = {allRoutes:String(population.maximal), allRows:population.rows,
     recordedRows:recordedRows.size, routesWithRecordedRow:String(matchingRoutes)};
-  return {coverage,declaration:item.record.name,indexSha256:item.record.indexSha256,maximal,complete,twoPremises,twoExplicit,example};
+  const repetition={rows:repeatedRows.size,occurrences:String(repeatedOccurrences),recordedRepeated,reusedProofCalls,explicitProofReuse,repeatedRolePairs};
+  return {coverage,repetition,declaration:item.record.name,indexSha256:item.record.indexSha256,maximal,complete,twoPremises,twoExplicit,example};
 }
 (async()=>{
   const rows=[];
