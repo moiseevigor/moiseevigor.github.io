@@ -108,3 +108,11 @@ At a call, expose its last *k* arguments in order and give the remaining functio
 Three is the smallest tested integer limit matching the four reported depth thresholds of whole calls. The full distributions differ. Summing unresolved counts over depths gives the total minimum identifying depth across occurrences; dividing its difference by 16,240,679 gives the final column. This comparison measures an explicit width/depth tradeoff for this AI sample. Port labels, layout and retrieval time remain untested.
 
 [Arity counts and grouped results](ai-call-widths.json). Reproduce with `node research/proof-atlas/step-reading/context-depth.cjs --compare-widths`. Each grouping preserves all endpoint multiplicities row by row and is checked by explicit traversal on a bounded subterm of every proof.
+
+### Does the width result transfer to the SE(2) proofs?
+
+Applying the same six argument limits to all 561 published SE(2) theorem bodies gives 9,800,418 application endpoints. At the corpus median, 90th percentile, 99th percentile and maximum, three arguments per group and unbounded calls both require 8, 14, 23 and 42 enclosing steps respectively. With two arguments per group the depths are 9, 16, 24 and 43. Three arguments cost 0.34 extra steps per endpoint on average compared with unbounded calls (0.30 in the Goedel sample).
+
+The corpus thresholds conceal individual differences. Of 490 theorem bodies with at least one call, 295 agree at all four thresholds. The other 195 differ on at least one. The remaining 71 bodies have zero endpoints and their quantiles are undefined. In the Riccati proof, the median and 90th percentile agree at 6 and 10. The 99th percentile and maximum increase from 12 and 14 for whole calls to 13 and 15 for bounded groups. The width rule is a candidate for compact presentation with a measured local cost.
+
+[Per-declaration results](se2-call-widths.json). Run `node research/proof-atlas/step-reading/context-depth.cjs --published --compare-widths`. The checker independently counts endpoints from the leaves upward in each packet and checks the count against the forward path-multiplicity traversal. Each grouping also has a bounded expanded-tree check. Counts include value and type expressions occurring inside proof bodies.

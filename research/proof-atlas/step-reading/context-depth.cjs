@@ -8,6 +8,7 @@ const {createHash} = require('node:crypto');
 const atlas = require('../../../public/js/proof-atlas-library-data');
 const baseline = require('./ai-call-destinations.json');
 
+const published = process.argv.includes('--published');
 const widthStudy = process.argv.includes('--compare-widths');
 const grouped = process.argv.includes('--whole-calls');
 const argumentLimits = [1, 2, 3, 4, 8, Infinity];
@@ -91,9 +92,12 @@ function enumerate(term,root) {
 }
 
 const window = {};
-vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/goedel-sample-manifest.js','utf8'),{window});
-const edition = window.PROOF_ATLAS_AI_SAMPLE.edition;
-assert.equal(edition.id,baseline.edition);
+const manifest = published ? 'library-manifest' : 'goedel-sample-manifest';
+vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/'+manifest+'.js','utf8'),{window});
+const edition = published ? window.PROOF_ATLAS_LIBRARY.editions.find(e => e.id === 'published-15') :
+  window.PROOF_ATLAS_AI_SAMPLE.edition;
+if (published) assert(widthStudy, '--published requires --compare-widths');
+else assert.equal(edition.id,baseline.edition);
 const proofs = [];
 const totals = [];
 for (const owner of edition.declarations.filter(r => r.kind === 'theorem' && r.bodyAvailable)) {
@@ -107,10 +111,25 @@ for (const owner of edition.declarations.filter(r => r.kind === 'theorem' && r.b
   }
   const raw = unresolved(term,root);
   if (widthStudy) {
-    const prior = baseline.proofs.find(p => p.name === owner.name);
-    assert.equal(prior.indexSha256, owner.indexSha256);
-    assert.equal(raw.calls.reduce((a,b) => a+b,0n),BigInt(prior.maximal));
-    endpointCount += BigInt(prior.maximal);
+    const endpoints = raw.calls.reduce((a,b) => a+b,0n);
+    if (published) {
+      // Count from leaves upwards. Extending an application in function
+      // position replaces its previous endpoint with the enclosing call.
+      const inside = [];
+      for (let id = 0; id <= root; id++) {
+        const children = term.children[id];
+        const startsSpine = atlas.kinds[term.kind[id]] === 'app' &&
+          atlas.kinds[term.kind[children[0]]] !== 'app';
+        inside[id] = children.reduce((n,c) => n+inside[c],BigInt(startsSpine));
+      }
+      assert.equal(endpoints,inside[root]);
+    } else {
+      const prior = baseline.proofs.find(p => p.name === owner.name);
+      assert.equal(prior.indexSha256,owner.indexSha256);
+      assert.equal(endpoints,BigInt(prior.maximal));
+    }
+    endpointCount += endpoints;
+    const depths = {};
     raw.calls.forEach((weight,id) => {
       if (!weight) return;
       const arity = spine(term,id).args.length;
@@ -121,9 +140,14 @@ for (const owner of edition.declarations.filter(r => r.kind === 'theorem' && r.b
       const {curve} = unresolved(graph,root,raw.calls);
       assert.deepEqual(unresolved(graph,sample).curve,enumerate(graph,sample));
       if (limit === 1) assert.deepEqual(curve,raw.curve);
+      if (published && (limit === 3 || limit === Infinity)) {
+        depths[limit === 3 ? 'three' : 'all'] = endpoints === 0n ? null :
+          [50,90,99,100].map(percent => curve.findIndex(n => (endpoints-n)*100n >= BigInt(percent)*endpoints));
+      }
       const aggregate = widthTotals.get(limit);
       curve.forEach((count,i) => { aggregate[i] = (aggregate[i] || 0n) + count; });
     }
+    if (published) proofs.push({name:owner.name,indexSha256:owner.indexSha256,endpoints,depths});
     continue;
   }
   const graph = grouped ? wholeCallGraph(term) : term;
@@ -146,6 +170,6 @@ const comparison = [...widthTotals].map(([limit,curve]) => ({
   extraEnclosingSteps:curve.reduce((sum,n) => sum+n,0n) - widthTotals.get(Infinity).reduce((sum,n) => sum+n,0n),
   depthsAtPercent:[50,90,99,100].map(percent => curve.findIndex(n => (endpointCount-n)*100n >= BigInt(percent)*endpointCount))
 }));
-const report = widthStudy ? {edition:edition.id,endpointCount,arityHistogram,comparison} :
+const report = widthStudy ? {edition:edition.id,endpointCount,arityHistogram,comparison,...(published ? {proofs} : {})} :
   {edition:edition.id,...(grouped ? {unit:'whole-call port or non-application field'} : {}),totals,proofs};
 console.log(JSON.stringify(report,(_,v) => typeof v === 'bigint' ? v.toString() : v,2));
