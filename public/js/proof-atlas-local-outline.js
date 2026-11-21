@@ -19,20 +19,27 @@
   }
   return {steps,end:site(node,slots),limited:data.kind[node]===8};
  }
+ function reference(data,target,index,binder){
+  const r=refs.countReferences(data,target.node,index,{maxStates:8192,maxWork:16384,firstIfPresent:true,useSupport:true});
+  if(r.status!=='counted')return {unavailable:true};
+  if(!r.witness)return null;
+  const use={node:r.witness.node,route:{root:1,slots:target.route.slots.concat(r.witness.slots)}};
+  const b=A.binding(data,use.route);
+  if(b?.node!==binder.node || String(b.route.slots)!==String(binder.route.slots))throw Error('Dependency scope mismatch');
+  return {use,count:r.occurrences};
+ }
  function inputs(data,outline,i,field='value'){
   const target=outline.steps[i]?.[field]||outline.end,edges=[];
   for(let j=0;j<i;j++){
-   const source=outline.steps[j],r=refs.countReferences(data,target.node,i-1-j,
-    {maxStates:8192,maxWork:16384,firstIfPresent:true,useSupport:true});
-   if(r.status!=='counted'){edges.push({source,unavailable:true});continue;}
-   if(!r.witness)continue;
-   const use={node:r.witness.node,route:{root:1,slots:target.route.slots.concat(r.witness.slots)}};
-   const b=A.binding(data,use.route);
-   if(b?.node!==source.binder.node || String(b.route.slots)!==String(source.binder.route.slots))
-    throw Error('Local dependency scope mismatch');
-   edges.push({source,use,count:r.occurrences});
+   const source=outline.steps[j],edge=reference(data,target,i-1-j,source.binder);
+   if(edge)edges.push({source,...edge});
   }
   return edges;
+ }
+ function hypothesisUse(data,model,step,hypothesis){
+  const i=step?model.steps.indexOf(step):model.steps.length;
+  const depth=model.steps[0].binder.route.slots.length+i;
+  return reference(data,step?.value||model.end,depth-1-hypothesis.proofBinder.route.slots.length,hypothesis.proofBinder);
  }
  function layers(data,model){
   const rows=[],levels=new Map();
@@ -90,6 +97,11 @@
     const rows=layers(data,model);
     if(!rows){body.textContent='Some dependencies exceed the traversal limit. Open the individual definitions for available references.';return;}
     body.append(el('p','References between the displayed local results run from earlier rows to later rows. Links on incoming references open their first occurrence.'));
+    const hypotheses=arithmetic.statement(data,{node:data.roots[0],route:{root:0,slots:[]}}).binders.filter(b=>{
+     if(!b.proofBinder)return false;
+     const domain=arithmetic.formula(data,b.domain);
+     return domain?.relation||domain?.logical;
+    });
     for(const [i,row] of rows.entries()){
      const group=el('section'),cards=el('div');cards.className='pl-local-layer';
      group.append(el('h5','Dependency level '+i),cards);
@@ -109,6 +121,28 @@
       }
       cards.append(card);
      }
+     if(hypotheses.length){
+      const sources=el('details'),sourceList=el('ul');sources.dataset.levelHypotheses='';
+      sources.append(el('summary','Trace a statement hypothesis at this level'),sourceList);group.append(sources);
+      sources.ontoggle=()=>{
+       if(!sources.open || sourceList.childElementCount)return;
+       for(const h of hypotheses){
+        const entry=el('li'),inspect=el('details'),uses=el('ul');
+        inspect.append(el('summary',h.name+' · '+arithmetic.caption(arithmetic.formula(data,h.domain))),uses);
+        entry.append(inspect);sourceList.append(entry);
+        inspect.ontoggle=()=>{
+         if(!inspect.open || uses.childElementCount)return;
+         for(const {step} of row){
+          const edge=hypothesisUse(data,model,step,h),item=el('li'),name=step?.name||'Remaining proof body';
+          if(edge?.unavailable)item.textContent=name+' · count unavailable';
+          else if(edge)item.append(link(name+' · '+edge.count+' direct reference'+(edge.count==='1'?'':'s'),edge.use));
+          else item.textContent=name+' · 0 direct references';
+          uses.append(item);
+         }
+        };
+       }
+      };
+     }
      body.append(group);
     }
    };
@@ -116,5 +150,5 @@
   }
   container.append(panel);
  }
- if(common)module.exports={outline,inputs,layers};else host.ProofAtlasLocalOutline={mount};
+ if(common)module.exports={outline,inputs,layers,hypothesisUse};else host.ProofAtlasLocalOutline={mount};
 })(typeof window==='undefined'?globalThis:window);

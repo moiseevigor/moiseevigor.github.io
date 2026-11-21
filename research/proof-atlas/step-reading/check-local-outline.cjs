@@ -1,7 +1,7 @@
 'use strict';
 const fs=require('node:fs'),z=require('node:zlib'),crypto=require('node:crypto'),assert=require('node:assert/strict');
 const A=require('../../../public/js/proof-atlas-library-data');
-const {outline,inputs,layers}=require('../../../public/js/proof-atlas-local-outline');
+const {outline,inputs,layers,hypothesisUse}=require('../../../public/js/proof-atlas-local-outline');
 const ranked=require('./ranked-binder-uses.cjs');
 global.window={};require('../../../public/data/proof-atlas/library-manifest');require('../../../public/data/proof-atlas/goedel-sample-manifest');
 const ai=window.PROOF_ATLAS_AI_SAMPLE.edition;
@@ -14,6 +14,21 @@ for(const edition of [...window.PROOF_ATLAS_LIBRARY.editions,ai]){
   const g=A.validateIndex(JSON.parse(raw),d),m=outline(g);if(!m)continue;
   matched++;if(m.limited)limited++;
   const rowsByLevel=layers(g,m);assert(rowsByLevel);
+  const F=require('../../../public/js/proof-atlas-arithmetic');
+  for(const h of F.statement(g,{node:g.roots[0],route:{root:0,slots:[]}}).binders){
+   const f=F.formula(g,h.domain);if(!h.proofBinder||!(f?.relation||f?.logical))continue;
+   const all=ranked(g,h.proofBinder.route);
+   const paths=[];
+   for(let k=0n;k<all.total;k++)paths.push(all.select(k).route.slots.join(''));
+   for(const entry of rowsByLevel.flat()){
+    const edge=hypothesisUse(g,m,entry.step,h);
+    if(edge?.unavailable)continue;
+    const prefix=(entry.step?.value||m.end).route.slots.join('');
+    const matches=paths.filter(p=>p.startsWith(prefix));
+    assert.equal(matches.length,Number(edge?.count||0));
+    if(edge)assert.equal(edge.use.route.slots.join(''),matches[0]);
+   }
+  }
   const depths=new Map();
   rowsByLevel.forEach((row,i)=>row.forEach(entry=>depths.set(entry.step,i)));
   assert.equal(depths.size,m.steps.length+1);

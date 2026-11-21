@@ -277,5 +277,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={formula,statement,caption,hypothesisInputs,resultFlow};else host.ProofAtlasArithmetic={mount,formula,caption};
+ if(common)module.exports={formula,statement,caption,hypothesisInputs,resultFlow};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
 })(typeof window==='undefined'?globalThis:window);
