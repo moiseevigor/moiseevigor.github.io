@@ -206,6 +206,8 @@
   add_lt_of_neg_of_le:[9,'a < 0','b ≤ c','a + b < c'],
   mul_neg:[8,'a < 0','0 < b','b × a < 0'],
   mul_nonpos:[8,'a ≤ 0','0 < b','b × a ≤ 0'],
+  mul_zero_eq:[7,'R a 0','b = 0','a × b = 0'],
+  zero_mul_eq:[7,'a = 0','R b 0','a × b = 0'],
   mul_eq:[8,'a = 0','0 < b','b × a = 0'],
   add_nonpos:[8,'a ≤ 0','b ≤ 0','a + b ≤ 0'],
   le_of_le_of_eq:[7,'a ≤ 0','b = 0','a + b ≤ 0'],
@@ -235,7 +237,10 @@
   if(!Array.isArray(rule)||arity!==rule[0])return null;
   const args=namedArguments(data,at,name,arity),count=arity===9?3:2;
   const premises=rule.slice(1,-1),n=premises.length;
-  return {name,terms:args.slice(-n-count,-n),proofs:args.slice(-n),premises,conclusion:rule.at(-1)};
+  const helper=name.slice(prefix.length);
+  const extra=helper==='mul_zero_eq'?0:(helper==='zero_mul_eq'||helper==='mul_eq'?1:null);
+  const relation=helper==='mul_zero_eq'||helper==='zero_mul_eq'?args[1]:null;
+  return {name,extra,relation,terms:args.slice(-n-count,-n),proofs:args.slice(-n),premises,conclusion:rule.at(-1)};
  }
  function numeralComparison(data,at){
   const args=namedArguments(data,at,'Mathlib.Meta.NormNum.isNat_lt_true',12);
@@ -428,20 +433,25 @@
    const panel=el('section'),inputs=el('p'),terms=el('dl');
    panel.dataset.arithmeticInference='';
    panel.append(el('h4',selected?.change?'Arithmetic before the rewrite':'Arithmetic inference'));
+   let shown=0,fold=null;
    inference.proofs.forEach((proof,i)=>{
-    if(i)inputs.append(' and ');
     const cert=numeralComparison(data,proof);
     const label=cert?inference.premises[i]+' ('+cert.values.map(v=>v.text).join(' < ')+')':inference.premises[i];
+    if(i===inference.extra){
+     fold=el('details');fold.dataset.extraPremise='';
+     fold.append(el('summary','Additional supplied premise'),link(label,proof));
+     if(inference.relation)fold.append(' · ',link('Relation R',inference.relation));
+     return;
+    }
+    if(shown++)inputs.append(' and ');
     inputs.append(link(label,proof));
    });
-   inputs.append((inference.proofs.length?' ⇒ ':'')+inference.conclusion);
-   if(inference.name==='Mathlib.Tactic.Linarith.mul_eq')
-    inputs.append(' (the helper accepts the positivity premise and proves the equality from the zero factor alone)');
+   inputs.append((shown?' ⇒ ':'')+inference.conclusion);
    for(const [i,site] of inference.terms.entries()){
     const value=el('dd');value.append(link(caption(formula(data,site,3,true)),site));
     terms.append(el('dt',['a','b','c'][i]),value);
    }
-   panel.append(inputs,terms);container.append(panel);
+   panel.append(inputs,terms);if(fold)panel.append(fold);container.append(panel);
   }
   const chain=equalityChain(data,chainAt,selected?.change?selected.before:null);
   if(chain){
