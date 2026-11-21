@@ -1,0 +1,83 @@
+[
+  {
+    "caller": "JacobiCore.E_pos",
+    "callerIndex": "42c5264d2680fe256ee4bfc588ed1ed3d648f38eeb56916d2e1ce02e11ae0c33",
+    "stage": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 2,
+      "slots": "BQ"
+    },
+    "callee": "JacobiCore.eps_strictMono",
+    "calleeIndex": "2b3cf3e63770ff30b929d9dd3945d974ee08a8f62da6b0d83f40ae8d6251974d",
+    "declaredResult": "StrictMono",
+    "slot": 4,
+    "binder": "a._@._internal._hyg.0",
+    "binderInfo": "default",
+    "actualArgumentType": "0 < J.K",
+    "argument": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 3,
+      "slots": "FQ"
+    },
+    "recording": "7651b9d50e36a7267c9652b7cbf92062cac865ac32d0c43be107e829ab8afe61",
+    "pi": 102,
+    "expectedDomain": 69,
+    "actualTypeRoot": 68
+  },
+  {
+    "caller": "JacobiCore.E_pos",
+    "callerIndex": "42c5264d2680fe256ee4bfc588ed1ed3d648f38eeb56916d2e1ce02e11ae0c33",
+    "stage": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 4,
+      "slots": "BQ"
+    },
+    "callee": "JacobiCore.eps_strictMono",
+    "calleeIndex": "2b3cf3e63770ff30b929d9dd3945d974ee08a8f62da6b0d83f40ae8d6251974d",
+    "declaredResult": "StrictMono",
+    "slot": 2,
+    "binder": "a",
+    "binderInfo": "strictImplicit",
+    "actualArgumentType": "ℝ",
+    "argument": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 5,
+      "slots": "BQE"
+    },
+    "recording": "7651b9d50e36a7267c9652b7cbf92062cac865ac32d0c43be107e829ab8afe61",
+    "pi": 87,
+    "expectedDomain": 3,
+    "actualTypeRoot": 3
+  },
+  {
+    "caller": "JacobiCore.E_pos",
+    "callerIndex": "42c5264d2680fe256ee4bfc588ed1ed3d648f38eeb56916d2e1ce02e11ae0c33",
+    "stage": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 3,
+      "slots": "BQ"
+    },
+    "callee": "JacobiCore.eps_strictMono",
+    "calleeIndex": "2b3cf3e63770ff30b929d9dd3945d974ee08a8f62da6b0d83f40ae8d6251974d",
+    "declaredResult": "StrictMono",
+    "slot": 3,
+    "binder": "b",
+    "binderInfo": "strictImplicit",
+    "actualArgumentType": "ℝ",
+    "argument": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 4,
+      "slots": "RQ"
+    },
+    "recording": "7651b9d50e36a7267c9652b7cbf92062cac865ac32d0c43be107e829ab8afe61",
+    "pi": 95,
+    "expectedDomain": 3,
+    "actualTypeRoot": 3
+  }
+]

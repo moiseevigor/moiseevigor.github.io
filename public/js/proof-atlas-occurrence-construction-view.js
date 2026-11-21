@@ -19,7 +19,7 @@
   if(!response.ok)throw Error('Parameter index unavailable');
   return response.json();
  }
- function calleeUses(card,owner,edition,start,end){
+ function calleeUses(card,owner,edition,start,end,callerInput){
   const details=el('details'),body=el('div');
   details.dataset.calleeUses=owner.name;
   details.append(el('summary','Follow arguments into '+owner.name),body);card.append(details);
@@ -50,6 +50,7 @@
      if(Number.isInteger(typeBinder)){
       item.append(' · ',link('Declaration type, parameter '+slot,{node:typeBinder,slots:Array(slot-1).fill(1)},0));
      }
+     if(!p&&!Number.isInteger(typeBinder))item.append(callerInput(slot));
      list.append(item);
     }
     body.replaceChildren(list);
@@ -113,7 +114,11 @@
      const owner=edition.declarations.find(r=>r.name===head.name);
      const parts=owner?.name.split('.');
      if(owner?.bodyAvailable&&head.nameParts?.length===parts.length&&
-        head.nameParts.every((part,i)=>part.str===parts[i]))calleeUses(card,owner,edition,earlierArguments+1,last);
+        head.nameParts.every((part,i)=>part.str===parts[i]))calleeUses(card,owner,edition,earlierArguments+1,last,slot=>{
+         const member=p.members[slot-earlierArguments-1];
+         const read=button('Inspect caller argument '+slot+' type',()=>memberType(p,member,'arg',read));
+         return read;
+        });
     }
    }
    if(!p.rule)card.append(el('p',p.expanded+' source occurrence'+(p.expanded==='1'?'':'s')+' inside this boundary.','poc-context'));

@@ -116,6 +116,12 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
       await page.goto(signatureExample.href);
       const monotone=group.locator('[data-callee-uses="JacobiCore.eps_strictMono"]');
       await monotone.locator('summary').click();
+      await monotone.getByRole('button',{name:'Inspect caller argument 4 type',exact:true}).click();
+      await page.waitForFunction(()=>{
+        const t=window.ProofAtlasOccurrenceView.getTypeScene();
+        return t?.root.node===68 && t.origin.sourceRoute.root===1 && t.origin.sourceRoute.depth===3 &&
+          t.origin.sourceRoute.slots==='FQ';
+      });
       await monotone.getByRole('link',{name:'Declared result · StrictMono',exact:true}).click();
       await page.waitForFunction(()=>{
         const s=window.ProofAtlasLibrary?.getSnapshot();
