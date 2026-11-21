@@ -1,0 +1,382 @@
+[
+  {
+    "caller": "lean_workbook_20418",
+    "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+    "route": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 57,
+      "slots": "VVUVVRERERERERERUVQB"
+    },
+    "node": 15099,
+    "arity": 5,
+    "lastInput": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 58,
+      "slots": "VVUVVRERERERERERUVQF"
+    },
+    "lastInputType": "a ^ 2 + a * b = c"
+  },
+  {
+    "caller": "lean_workbook_20418",
+    "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+    "route": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 62,
+      "slots": "VVUVVRERERERERERERERBQ"
+    },
+    "node": 14467,
+    "arity": 5,
+    "lastInput": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 63,
+      "slots": "VVUVVRERERERERERERERFQ"
+    },
+    "lastInputType": "b ^ 2 + b * c = a"
+  },
+  {
+    "caller": "lean_workbook_20418",
+    "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+    "route": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 43,
+      "slots": "VVUVVRERERERRRU"
+    },
+    "node": 15279,
+    "arity": 5,
+    "lastInput": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 44,
+      "slots": "VVUVVRERERERRVU"
+    },
+    "lastInputType": "c ^ 2 + c * a = b"
+  },
+  {
+    "caller": "lean_workbook_3485",
+    "indexSha256": "bd496000a8da7ce06393d1cdd66b86c1a76aa6004c6eca19c36e083a3082948c",
+    "route": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 17,
+      "slots": "VVlFRAE"
+    },
+    "node": 2234,
+    "arity": 5,
+    "lastInput": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 18,
+      "slots": "VVlFRAU"
+    },
+    "lastInputType": "a + b = 1"
+  },
+  {
+    "caller": "lean_workbook_3485",
+    "indexSha256": "bd496000a8da7ce06393d1cdd66b86c1a76aa6004c6eca19c36e083a3082948c",
+    "route": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 14,
+      "slots": "VVlVBQ"
+    },
+    "node": 2234,
+    "arity": 5,
+    "lastInput": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 15,
+      "slots": "VVlVFQ"
+    },
+    "lastInputType": "a + b = 1"
+  },
+  {
+    "caller": "lean_workbook_4274",
+    "indexSha256": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+    "route": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 20,
+      "slots": "VapURVE"
+    },
+    "node": 1279,
+    "arity": 5,
+    "lastInput": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 21,
+      "slots": "VapURVEB"
+    },
+    "lastInputType": "b 0 = 1"
+  },
+  {
+    "caller": "lean_workbook_4274",
+    "indexSha256": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+    "route": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 19,
+      "slots": "VapVURQ"
+    },
+    "node": 1279,
+    "arity": 5,
+    "lastInput": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 20,
+      "slots": "VapVUVQ"
+    },
+    "lastInputType": "b 0 = 1"
+  },
+  {
+    "caller": "lean_workbook_plus_16912",
+    "indexSha256": "6c061155ccb98286c7608ad3bfbd316714aea3a1b33817720b3c4b2846c39510",
+    "route": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 41,
+      "slots": "VVUVERERERFRVAE"
+    },
+    "node": 14495,
+    "arity": 5,
+    "lastInput": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 42,
+      "slots": "VVUVERERERFRVAU"
+    },
+    "lastInputType": "a * b + b * c + c * a = 1"
+  },
+  {
+    "caller": "lean_workbook_plus_16912",
+    "indexSha256": "6c061155ccb98286c7608ad3bfbd316714aea3a1b33817720b3c4b2846c39510",
+    "route": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 22,
+      "slots": "VVUVEUUF"
+    },
+    "node": 14495,
+    "arity": 5,
+    "lastInput": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 23,
+      "slots": "VVUVEUUV"
+    },
+    "lastInputType": "a * b + b * c + c * a = 1"
+  },
+  {
+    "caller": "lean_workbook_plus_54622",
+    "indexSha256": "0b128b2e4d02870a974f0f00684ea058eded20eed8f15f32e84872e4bca50d73",
+    "route": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 38,
+      "slots": "VVUVERERERFRBA"
+    },
+    "node": 9432,
+    "arity": 5,
+    "lastInput": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 39,
+      "slots": "VVUVERERERFRFA"
+    },
+    "lastInputType": "x + y + z = 3"
+  },
+  {
+    "caller": "lean_workbook_plus_54622",
+    "indexSha256": "0b128b2e4d02870a974f0f00684ea058eded20eed8f15f32e84872e4bca50d73",
+    "route": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 22,
+      "slots": "VVUVEUUF"
+    },
+    "node": 9432,
+    "arity": 5,
+    "lastInput": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 23,
+      "slots": "VVUVEUUV"
+    },
+    "lastInputType": "x + y + z = 3"
+  },
+  {
+    "caller": "lean_workbook_plus_6206",
+    "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+    "route": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 59,
+      "slots": "VVUVVREREREREREREUUV"
+    },
+    "node": 14708,
+    "arity": 5,
+    "lastInput": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 60,
+      "slots": "VVUVVREREREREREREUVV"
+    },
+    "lastInputType": "a ^ 2 + a * b = c"
+  },
+  {
+    "caller": "lean_workbook_plus_6206",
+    "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+    "route": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 62,
+      "slots": "VVUVVRERERERERERERERBQ"
+    },
+    "node": 14115,
+    "arity": 5,
+    "lastInput": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 63,
+      "slots": "VVUVVRERERERERERERERFQ"
+    },
+    "lastInputType": "b ^ 2 + b * c = a"
+  },
+  {
+    "caller": "lean_workbook_plus_6206",
+    "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+    "route": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 36,
+      "slots": "VVUVVREREVFU"
+    },
+    "node": 14996,
+    "arity": 5,
+    "lastInput": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 37,
+      "slots": "VVUVVREREVFUAQ"
+    },
+    "lastInputType": "c ^ 2 + c * a = b"
+  },
+  {
+    "caller": "lean_workbook_plus_62755",
+    "indexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+    "route": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 12,
+      "slots": "FVVR"
+    },
+    "node": 1404,
+    "arity": 5,
+    "lastInput": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 13,
+      "slots": "FVVRAQ"
+    },
+    "lastInputType": "a ^ 2 - 4 * a + 3 = 0"
+  },
+  {
+    "caller": "lean_workbook_plus_62755",
+    "indexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+    "route": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 10,
+      "slots": "VVUE"
+    },
+    "node": 1404,
+    "arity": 5,
+    "lastInput": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 11,
+      "slots": "VVUU"
+    },
+    "lastInputType": "a ^ 2 - 4 * a + 3 = 0"
+  },
+  {
+    "caller": "lean_workbook_plus_62755",
+    "indexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+    "route": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 17,
+      "slots": "pVBVFQE"
+    },
+    "node": 1840,
+    "arity": 5,
+    "lastInput": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 18,
+      "slots": "pVBVFQU"
+    },
+    "lastInputType": "a - 1 = 0"
+  },
+  {
+    "caller": "lean_workbook_plus_62755",
+    "indexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+    "route": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 16,
+      "slots": "pVRVRQ"
+    },
+    "node": 2060,
+    "arity": 5,
+    "lastInput": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 17,
+      "slots": "pVRVRQE"
+    },
+    "lastInputType": "a - 3 = 0"
+  },
+  {
+    "caller": "lean_workbook_plus_68077",
+    "indexSha256": "501dba70283e270631eba54e85d5f16c3ca44cfaba068ea4f39a45b550997e62",
+    "route": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 27,
+      "slots": "VVUVERFFFQ"
+    },
+    "node": 7562,
+    "arity": 5,
+    "lastInput": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 28,
+      "slots": "VVUVERFFVQ"
+    },
+    "lastInputType": "a ^ 2 + b ^ 2 + c ^ 2 = 3"
+  },
+  {
+    "caller": "lean_workbook_plus_68077",
+    "indexSha256": "501dba70283e270631eba54e85d5f16c3ca44cfaba068ea4f39a45b550997e62",
+    "route": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 19,
+      "slots": "VVUVRRU"
+    },
+    "node": 7562,
+    "arity": 5,
+    "lastInput": {
+      "format": "ProofAtlasPackedRoute/1",
+      "root": 1,
+      "depth": 20,
+      "slots": "VVUVRVU"
+    },
+    "lastInputType": "a ^ 2 + b ^ 2 + c ^ 2 = 3"
+  }
+]
