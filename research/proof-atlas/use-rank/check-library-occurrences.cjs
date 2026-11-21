@@ -110,6 +110,27 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
     const callUrl=new URL(await largeRegion.getByRole('link',{name:'Open application',exact:true}).evaluate(a=>a.href));
     assert.equal(expected.head.label,head);
     assert.equal(callUrl.searchParams.get('route'),'1:'+expected.call.route.slots.join('.'));
+    const chain=largeRegion.locator('details').filter({has:page.getByText('Follow the result',{exact:true})});
+    await chain.locator('summary').click();
+    const rows=chain.locator('ol > li');
+    await rows.first().waitFor();
+    assert.equal(await rows.count(),[1,2,6][i]);
+    assert.equal(await rows.last().textContent(),['Defines hds','Defines hsum','body of hsum'][i]);
+    if(i===1){
+     const step=rows.first();
+     assert((await step.textContent()).includes('Argument 4 of 6 to Or.casesOn'));
+     assert((await step.textContent()).includes('Checked case split on 0 < J.a p'));
+     const casePkg=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('public/data/proof-atlas/eliminations/published-15-JacobiData_slope_bound_abs.json.gz')));
+     const judgment=casePkg.entries.find(e=>e.eliminationJudgment?.recursor==='Or.rec').eliminationJudgment;
+     const major=judgment.arguments[judgment.majorSlot-1];
+     assert.deepEqual(major.route,expected.call.route);
+     for(const rule of judgment.rules){
+      const arg=judgment.arguments[judgment.parameters+judgment.motives+rule.minor];
+      assert((await step.textContent()).includes(arg.typeText));
+      const u=new URL(await step.getByRole('link',{name:rule.constructor,exact:true}).evaluate(a=>a.href));
+      assert.equal(u.searchParams.get('route'),'1:'+arg.route.slots.join('.'));assert.equal(u.hash,'#expr-'+arg.node);
+     }
+    }
     if(i===1){
      const peers=largeRegion.locator('details').filter({has:page.getByText(/^Other variable arguments/)});
      await peers.locator('summary').click();

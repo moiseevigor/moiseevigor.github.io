@@ -29,6 +29,15 @@
   });
   return {call,head:{node:head,route:headRoute},label,slot,arity,peers};
  }
+ function resultDestination(data,from){
+  const slots=from.route.slots,root=from.route.root;
+  if(!slots.length)return {kind:'root',at:from};
+  const call=applicationAtUse(data,from);
+  if(call)return {kind:'argument',call};
+  const route={root,slots:slots.slice(0,-1)},node=A.walk(data,route),kind=A.kinds[data.kind[node]];
+  return {kind,field:A.fields[kind][slots.at(-1)],at:{node,route},
+   name:data.payloads[node].declName??data.payloads[node].binderName};
+ }
  function inspect(data,catalog,rootIndex=0){
   const root=data.roots[rootIndex],counts=[],groups=[];
   for(let row=0;row<=root;row++)
@@ -93,7 +102,7 @@
   }
   visit(scene.root);return groups;
  }
- function control(data,catalog,url,rootIndex=0){
+ function control(data,catalog,url,rootIndex=0,checkedCase){
   const el=(tag,text)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;return e;};
   const link=(text,hit)=>{const a=el('a',text);a.href=url(hit);return a;};
   const panel=el('details');panel.id='pl-omitted-references';
@@ -129,6 +138,33 @@
        }
        details.append(list);consumer.append(details);
       }
+      const chain=el('details');chain.append(el('summary','Follow the result'));
+      chain.ontoggle=()=>{
+       if(!chain.open||chain.children.length>1)return;
+       const list=el('ol');chain.append(list);
+       let from=application.call;
+       while(true){
+        const step=resultDestination(data,from),item=el('li');list.append(item);
+        if(step.kind==='argument'){
+         const c=step.call;
+         item.append('Argument '+c.slot+' of '+c.arity+' to ',link(c.label,c.call));
+         const evidence=checkedCase?.(c.call.route),major=evidence?.major;
+         if(major?.sourceSlot===c.slot && major.node===from.node && major.route.root===from.route.root &&
+            major.route.slots.join('.')===from.route.slots.join('.')){
+          item.append(el('p','Checked case split on '+major.typeText));
+          for(const branch of evidence.branches){
+           const row=el('p');row.append(link(branch.constructor,branch.argument),' · '+branch.argument.typeText);item.append(row);
+          }
+         }
+         from=c.call;continue;
+        }
+        if(step.kind==='root')item.append(link('Root of the selected expression',step.at));
+        else if(step.kind==='letE' && step.field==='value')item.append('Defines ',link(step.name,step.at));
+        else item.append(step.field+' of ',link(step.name??step.kind,step.at));
+        break;
+       }
+      };
+      consumer.append(chain);
      }
      consumer.hidden=!application;
      result.replaceChildren(link('Variable #'+data.payloads[use.node].index,use),' bound by ',link(p.binderName??p.declName,binder));
@@ -171,6 +207,6 @@
   };
   return panel;
  }
- const api={inspect,control,applicationAtUse};
+ const api={inspect,control,applicationAtUse,resultDestination};
  if(local)module.exports=api;else host.ProofAtlasOmittedReferences=api;
 })(typeof window==='undefined'?globalThis:window);

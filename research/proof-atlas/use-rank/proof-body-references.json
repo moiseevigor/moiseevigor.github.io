@@ -11,7 +11,8 @@
       "tested": 7,
       "outside": "251204",
       "externalChecks": 5,
-      "distinctUsesCheckedForApplication": 7
+      "distinctUsesCheckedForApplication": 7,
+      "resultChainsChecked": 5
     },
     {
       "name": "lean_workbook_3485",
@@ -24,7 +25,8 @@
       "tested": 5,
       "outside": "1240",
       "externalChecks": 1240,
-      "distinctUsesCheckedForApplication": 1255
+      "distinctUsesCheckedForApplication": 1255,
+      "resultChainsChecked": 1175
     },
     {
       "name": "lean_workbook_4274",
@@ -37,7 +39,8 @@
       "tested": 363,
       "outside": "355",
       "externalChecks": 355,
-      "distinctUsesCheckedForApplication": 363
+      "distinctUsesCheckedForApplication": 363,
+      "resultChainsChecked": 358
     },
     {
       "name": "lean_workbook_49456",
@@ -50,7 +53,8 @@
       "tested": 0,
       "outside": "0",
       "externalChecks": 0,
-      "distinctUsesCheckedForApplication": 0
+      "distinctUsesCheckedForApplication": 0,
+      "resultChainsChecked": 0
     },
     {
       "name": "lean_workbook_56144",
@@ -63,7 +67,8 @@
       "tested": 7,
       "outside": "13636",
       "externalChecks": 5,
-      "distinctUsesCheckedForApplication": 7
+      "distinctUsesCheckedForApplication": 7,
+      "resultChainsChecked": 6
     },
     {
       "name": "lean_workbook_plus_15068",
@@ -76,7 +81,8 @@
       "tested": 9,
       "outside": "56761",
       "externalChecks": 7,
-      "distinctUsesCheckedForApplication": 9
+      "distinctUsesCheckedForApplication": 9,
+      "resultChainsChecked": 8
     },
     {
       "name": "lean_workbook_plus_16912",
@@ -89,7 +95,8 @@
       "tested": 19,
       "outside": "44994",
       "externalChecks": 17,
-      "distinctUsesCheckedForApplication": 19
+      "distinctUsesCheckedForApplication": 19,
+      "resultChainsChecked": 14
     },
     {
       "name": "lean_workbook_plus_19617",
@@ -102,7 +109,8 @@
       "tested": 106,
       "outside": "94",
       "externalChecks": 94,
-      "distinctUsesCheckedForApplication": 106
+      "distinctUsesCheckedForApplication": 106,
+      "resultChainsChecked": 90
     },
     {
       "name": "lean_workbook_plus_39831",
@@ -115,7 +123,8 @@
       "tested": 12,
       "outside": "3181",
       "externalChecks": 3181,
-      "distinctUsesCheckedForApplication": 3272
+      "distinctUsesCheckedForApplication": 3272,
+      "resultChainsChecked": 3175
     },
     {
       "name": "lean_workbook_plus_43987",
@@ -128,7 +137,8 @@
       "tested": 107,
       "outside": "86",
       "externalChecks": 86,
-      "distinctUsesCheckedForApplication": 107
+      "distinctUsesCheckedForApplication": 107,
+      "resultChainsChecked": 88
     },
     {
       "name": "lean_workbook_plus_54159",
@@ -141,7 +151,8 @@
       "tested": 164,
       "outside": "7671",
       "externalChecks": 157,
-      "distinctUsesCheckedForApplication": 164
+      "distinctUsesCheckedForApplication": 164,
+      "resultChainsChecked": 149
     },
     {
       "name": "lean_workbook_plus_54622",
@@ -154,7 +165,8 @@
       "tested": 5,
       "outside": "18123",
       "externalChecks": 3,
-      "distinctUsesCheckedForApplication": 5
+      "distinctUsesCheckedForApplication": 5,
+      "resultChainsChecked": 4
     },
     {
       "name": "lean_workbook_plus_61403",
@@ -167,7 +179,8 @@
       "tested": 14,
       "outside": "687",
       "externalChecks": 687,
-      "distinctUsesCheckedForApplication": 694
+      "distinctUsesCheckedForApplication": 694,
+      "resultChainsChecked": 694
     },
     {
       "name": "lean_workbook_plus_6206",
@@ -180,7 +193,8 @@
       "tested": 7,
       "outside": "269199",
       "externalChecks": 5,
-      "distinctUsesCheckedForApplication": 7
+      "distinctUsesCheckedForApplication": 7,
+      "resultChainsChecked": 6
     },
     {
       "name": "lean_workbook_plus_62755",
@@ -193,7 +207,8 @@
       "tested": 969,
       "outside": "927",
       "externalChecks": 927,
-      "distinctUsesCheckedForApplication": 969
+      "distinctUsesCheckedForApplication": 969,
+      "resultChainsChecked": 964
     },
     {
       "name": "lean_workbook_plus_63081",
@@ -206,7 +221,8 @@
       "tested": 14,
       "outside": "4603",
       "externalChecks": 4603,
-      "distinctUsesCheckedForApplication": 4667
+      "distinctUsesCheckedForApplication": 4667,
+      "resultChainsChecked": 4601
     },
     {
       "name": "lean_workbook_plus_68077",
@@ -219,7 +235,8 @@
       "tested": 8,
       "outside": "15100",
       "externalChecks": 6,
-      "distinctUsesCheckedForApplication": 8
+      "distinctUsesCheckedForApplication": 8,
+      "resultChainsChecked": 6
     },
     {
       "name": "lean_workbook_plus_68616",
@@ -232,7 +249,8 @@
       "tested": 132,
       "outside": "25",
       "externalChecks": 25,
-      "distinctUsesCheckedForApplication": 132
+      "distinctUsesCheckedForApplication": 132,
+      "resultChainsChecked": 82
     },
     {
       "name": "lean_workbook_plus_68794",
@@ -245,7 +263,8 @@
       "tested": 14,
       "outside": "2383",
       "externalChecks": 2383,
-      "distinctUsesCheckedForApplication": 2414
+      "distinctUsesCheckedForApplication": 2414,
+      "resultChainsChecked": 2414
     },
     {
       "name": "lean_workbook_plus_70240",
@@ -258,7 +277,8 @@
       "tested": 13,
       "outside": "2157",
       "externalChecks": 2157,
-      "distinctUsesCheckedForApplication": 2186
+      "distinctUsesCheckedForApplication": 2186,
+      "resultChainsChecked": 2139
     }
   ],
   "riccati": {
@@ -273,6 +293,7 @@
     "outside": "4405",
     "externalChecks": 4405,
     "distinctUsesCheckedForApplication": 4481,
+    "resultChainsChecked": 2277,
     "scopeCounts": [
       {
         "total": "5",
@@ -866,7 +887,15 @@
               1
             ]
           }
-        }
+        },
+        "result": [
+          {
+            "kind": "letE",
+            "field": "value",
+            "name": "hds",
+            "row": 3242
+          }
+        ]
       },
       {
         "name": "hd",
@@ -926,7 +955,21 @@
               1
             ]
           }
-        }
+        },
+        "result": [
+          {
+            "head": "Or.casesOn",
+            "sourceSlot": 4,
+            "arity": 6,
+            "row": 2194
+          },
+          {
+            "kind": "letE",
+            "field": "value",
+            "name": "hsum",
+            "row": 3239
+          }
+        ]
       },
       {
         "name": "hd",
@@ -991,7 +1034,45 @@
               1
             ]
           }
-        }
+        },
+        "result": [
+          {
+            "head": "congrArg",
+            "sourceSlot": 6,
+            "arity": 6,
+            "row": 2334
+          },
+          {
+            "head": "id",
+            "sourceSlot": 2,
+            "arity": 2,
+            "row": 2335
+          },
+          {
+            "head": "Eq.mpr",
+            "sourceSlot": 3,
+            "arity": 4,
+            "row": 3236
+          },
+          {
+            "head": "Eq.mpr",
+            "sourceSlot": 4,
+            "arity": 4,
+            "row": 3237
+          },
+          {
+            "head": "Eq.mpr",
+            "sourceSlot": 4,
+            "arity": 4,
+            "row": 3238
+          },
+          {
+            "kind": "letE",
+            "field": "body",
+            "name": "hsum",
+            "row": 3239
+          }
+        ]
       },
       {
         "name": "hz1",
@@ -1188,6 +1269,7 @@
     "tested": 145,
     "outside": "2379629985508532158464",
     "externalChecks": 72,
-    "distinctUsesCheckedForApplication": 145
+    "distinctUsesCheckedForApplication": 145,
+    "resultChainsChecked": 99
   }
 }

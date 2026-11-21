@@ -186,7 +186,10 @@
   if(window.ProofAtlasPackedRoutes&&owner.record.uniqueNodes<=window.ProofAtlasPackedRoutes.limits.sourceNodes){const packed=window.ProofAtlasPackedRoutes.encode(selectedRoute.root,selectedRoute.slots),u=new URL('/projects/proof-atlas/library/',location.origin);u.searchParams.set('view','occurrence');u.searchParams.set('edition',edition.id);u.searchParams.set('proof',owner.record.name);u.hash='occurrence='+owner.record.indexSha256+'.'+packed.root+'.'+packed.depth+'.'+packed.slots;const a=link('Open occurrence geometry',u.pathname+u.search+u.hash);a.dataset.occurrenceWindowLink='';actions.append(a);}
   if(window.ProofAtlasSourceCorridor&&selectedRoute.slots.length){const host=el('div'),at={root:selectedRoute.root,slots:[...selectedRoute.slots]},Q=window.ProofAtlasSourceCorridor;target.append(host);corridorControl=Q.control(host,{prepare:signal=>Q.create(Q.open(owner.data,owner.record),{root:at.root,slots:[]},at,{signal}),onSource:(node,route)=>safely(selectOccurrence(node,true,true,route)),isCurrent:()=>owner===current&&selectionToken===selectionSerial});}
   if(nextRoute.root<=1 && !nextRoute.slots.length && owner.record.kind==='theorem' && window.ProofAtlasOmittedReferences)
-   target.append(window.ProofAtlasOmittedReferences.control(owner.data,window.PROOF_ATLAS_TYPE_NOTATION,hit=>url(owner.record.name,hit.node,hit.route),nextRoute.root));
+   target.append(window.ProofAtlasOmittedReferences.control(owner.data,window.PROOF_ATLAS_TYPE_NOTATION,hit=>url(owner.record.name,hit.node,hit.route),nextRoute.root,route=>{
+    if(caseTyping?.get(route)?.eliminationJudgment?.status==='checked')
+     return window.ProofAtlasElimination.create(owner.data,owner.record,caseTyping,route);
+   }));
   if(current.kind(i)==='app' && window.ProofAtlasRowOccurrences){
    const chooser=window.ProofAtlasRowOccurrences.control(owner.data,i,nextRoute,route=>safely(selectOccurrence(i,true,true,route)));
    target.append(chooser);
