@@ -43,7 +43,24 @@ elab_rules : command
         arguments := arguments.push <| Json.mkObj [("conversionSite",conversion),("slot",toJson (j+1)),("node",toJson (← sourceId owner arg)),
           ("inferred",toJson (← ppExpr inferred).pretty),("expected",toJson (← ppExpr domain).pretty),
           ("inferredRoot",toJson a),("expectedRoot",toJson b),("structurallyIdentical",toJson (actual==expected))]
-      return Json.mkObj [("call",request),("context",toJson ctx),("arguments",toJson arguments),
+      let mut extra := []
+      if let .const name _ := term.getAppFn then
+        let mut declared := (← getConstInfo name).type
+        let mut declaredCount := 0
+        while let .forallE _ _ body _ := declared do
+          declaredCount := declaredCount + 1
+          declared := body
+        if declaredCount < stages.size then
+          let applied := mkAppN term.getAppFn (term.getAppArgs.extract 0 declaredCount)
+          let returned ← whnf (← kernelType applied)
+          kernelAs applied returned
+          let originalPrefix := mkAppN original.getAppFn (original.getAppArgs.extract 0 declaredCount)
+          let prefixNode ← sourceId owner originalPrefix
+          extra := [("returnedFunction",Json.mkObj [("declaredBinders",toJson declaredCount),
+            ("head",toJson name.toString),("node",toJson prefixNode),
+            ("type",toJson (← ppExpr returned).pretty),
+            ("result",toJson (← ppExpr (← kernelType term)).pretty)])]
+      return Json.mkObj <| extra ++ [("call",request),("context",toJson ctx),("arguments",toJson arguments),
         ("types",graphJson compact),("kernelDomainConversions",toJson stages.size)]
   liftIO <| IO.FS.writeFile outFile.getString report.compress
 

@@ -2,14 +2,20 @@
 (function(host){
  'use strict';
  const A=host.ProofAtlasLibraryData;
- function matches(record,call){
-  return record.indexSha256==='8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d' &&
-   call.node===2181 && call.route.root===1 && call.route.slots.join('.')==='11111112111111110110101010010100100110011'.split('').join('.');
+ const packets=[
+  {node:2181,path:'11111112111111110110101010010100100110011',file:'ai-caller-domains',
+   hash:'b68b4a4283bd1eeff9bfa1009198ef17add44724906a23ff6a911c47411981ab',bytes:8265},
+  {node:86574,path:'111111122211',file:'ai-ndrec-domains',hash:'0eddb02598f66eaeae34fdc66d36c78ef02ab77abf2036efcc81061d47ea9334',bytes:13137}
+ ];
+ function packetFor(record,call){
+  if(record.indexSha256!=='8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d' || call.route.root!==1)return;
+  return packets.find(p=>p.node===call.node && p.path.split('').join('.')===call.route.slots.join('.'));
  }
  async function load(record,call){
-  if(!matches(record,call))return null;
-  const report=await A.compressed('/public/data/proof-atlas/ai-caller-domains.json.gz',
-   'b68b4a4283bd1eeff9bfa1009198ef17add44724906a23ff6a911c47411981ab',{maxBytes:8265,expectedBytes:8265});
+  const packet=packetFor(record,call);
+  if(!packet)return null;
+  const report=await A.compressed('/public/data/proof-atlas/'+packet.file+'.json.gz',
+   packet.hash,{maxBytes:packet.bytes,expectedBytes:packet.bytes});
   if(report.call.indexSha256!==record.indexSha256 || report.call.declaration!==record.name ||
     report.call.node!==call.node || report.call.root!==call.route.root ||
     String(report.call.slots)!==String(call.route.slots))throw Error('Caller type address mismatch');
@@ -27,7 +33,7 @@
   return {fields,left,right};
  }
  function mount(container,record,call,data,sourceLink){
-  if(!matches(record,call))return;
+  if(!packetFor(record,call))return;
   const el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
   const details=el('details'),content=el('div');
   details.dataset.callerDomains='';
@@ -43,7 +49,17 @@
      const option=el('option',String(row.slot));option.value=String(row.slot);select.append(option);
     }
     label.append(select);
-    select.value=String((rows.find(r=>!r.structurallyIdentical)||rows[0]).slot);
+    const returned=report.returnedFunction;
+    select.value=String(returned?returned.declaredBinders+1:(rows.find(r=>!r.structurallyIdentical)||rows[0]).slot);
+    const intro=el('div');
+    if(returned){
+     const route={root:call.route.root,slots:call.route.slots.concat(Array(rows.length-returned.declaredBinders).fill(0))};
+     if(A.walk(data,route)!==returned.node)throw Error('Returned function address mismatch');
+     const description=el('p');
+     description.append(sourceLink(returned.head+' after '+returned.declaredBinders+' arguments',{node:returned.node,route}),
+      ' returns a function. Arguments '+(returned.declaredBinders+1)+'–'+rows.length+' supply its premises.');
+     intro.append(description,el('pre',returned.type),el('p','Conclusion after all premises'),el('code',returned.result));
+    }
     function draw(){
      const row=rows[Number(select.value)-1];
      const route={root:call.route.root,slots:call.route.slots.concat(Array(rows.length-row.slot).fill(0),1)};
@@ -58,7 +74,7 @@
       comparison.append(el('strong',name),el('pre',A.termLines(report.types,id).join('\n')));
      }
     }
-    content.replaceChildren(label,comparison);draw();select.onchange=draw;loaded=true;
+    content.replaceChildren(intro,label,comparison);draw();select.onchange=draw;loaded=true;
    }catch{content.textContent='Argument types unavailable. Close and reopen to retry.';}
    finally{pending=false;}
   };

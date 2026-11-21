@@ -238,3 +238,18 @@ At argument 13 (e2143), the formal equality `xa₁ ^ c₁ * Nat.rawCast 1 = c₃
 The reader displays these instantiated types only at the replayed call route. To reproduce, run `python3 research/proof-atlas/step-reading/replay-call.py --lean PATH_TO_LEAN --packages PATH_TO_LAKE_PACKAGES --output report.json` with the pinned dependencies. The output matches the decoded [caller-domain packet](../../../public/data/proof-atlas/ai-caller-domains.json.gz).
 
 At the replayed call, **Compare kernel-checked argument types** opens the 14 supplied arguments. Argument 11 is selected initially because its inferred and expected type trees differ. The replay descends through six application fields whose sibling subterms match structurally. At `fn.arg.fn.fn.arg.arg`, Lean separately checked definitional equality of the direct and projected natural-number multiplication instances in the caller’s local context. The panel shows both subgraphs from the type packet. Its argument link opens the corresponding occurrence in the original proof graph. Browser checks covered all 14 source addresses and verified that the neighbouring argument occurrence does not inherit the call’s evidence.
+
+### Equality transport returning a proof with four premises
+
+The widest observed application of `Eq.ndrec` in the 20-proof AI sample supplies ten arguments. At e86574 in `lean_workbook_20418`, the declaration’s six literal binders end at e86570. Lean checked the type of that partial application against its normalized function type in the exact caller context. The first six arguments transport a proof along the equality `1 / 2 = a`. The transported proof takes four further premises.
+
+| Slot | Supplied occurrence | Kernel-checked domain |
+|---:|---:|---|
+| 7 | e159 | `0 ≤ a ∧ 0 ≤ b ∧ 0 ≤ c` |
+| 8 | e86 | `a ^ 2 + a * b = c` |
+| 9 | e80 | `b ^ 2 + b * c = a` |
+| 10 | e78 | `c ^ 2 + c * a = b` |
+
+The resulting proposition states that the triple is all zeros or all halves. Each of the four inferred premise types shares its expression root with the corresponding expected type. All ten application stages passed the kernel conversion checks. This gives the diagram two levels of structure inside one application chain: the equality transport and the premises consumed by the proof it returns. The reader links to the boundary and each supplied premise. This replay covers the recorded occurrence; other uses of `Eq.ndrec` can return different types.
+
+Pass `--route 111111122211` to the replay command above to regenerate the [second packet](../../../public/data/proof-atlas/ai-ndrec-domains.json.gz). The browser check starts at use 43 of binder e86583, opens its receiving call, follows the four inputs, and checks the returned proof’s boundary.

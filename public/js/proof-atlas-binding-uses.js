@@ -118,10 +118,17 @@
         const signature=rows.find(r=>r.name===head.name && r.levelCount===head.levels.length);
         const parameters=signature?.parameters;
         const parameter=parameters?.[receiver.slot-1];
-        if(!parameter){content.textContent='This position has no recorded binder in the declared signature.';return;}
+        const report=await host.ProofAtlasCallerDomains?.load(config.record,receiver.call);
+        if(!parameter){
+         const row=report?.arguments[receiver.slot-1];
+         if(report?.returnedFunction && row?.node===use.node && row.slot===receiver.slot){
+          content.replaceChildren(el('p','Premise of the function returned by '+receiver.label),el('code',row.expected));
+         }else content.textContent='This position has no recorded binder in the declared signature.';
+         return;
+        }
         const generated=parameter.name.includes('._@.') || parameter.name==='_';
         content.replaceChildren(el('code',(generated?'':parameter.name+' : ')+parameter.domain));
-        const checked=(await host.ProofAtlasCallerDomains?.load(config.record,receiver.call))?.arguments;
+        const checked=report?.arguments;
         function showCallerType(parent,slot){
          if(!checked)return;
          const row=checked[slot-1];

@@ -70,6 +70,28 @@ async function checkWideCall(page) {
   assert.match(await comparison.getByRole('link').getAttribute('href'),/#expr-2143$/);
 
 }
+async function checkReturnedFunction(page){
+  const query=new URLSearchParams({edition:'goedel-sample-4331',proof:'lean_workbook_20418',route:'1:1.1.1'});
+  await page.goto(origin+'/projects/proof-atlas/library/?'+query+'#expr-86583');
+  await page.locator('#pl-binding-toggle').click();
+  const form=page.locator('#pl-binding-uses form').first();
+  await form.getByRole('textbox').fill('43');
+  await form.getByRole('button').click();
+  const output=page.locator('.pl-located-use');
+  await output.locator('summary').click();
+  await output.getByText('Premise of the function returned by Eq.ndrec',{exact:true}).waitFor();
+  await output.getByText('0 ≤ a ∧ 0 ≤ b ∧ 0 ≤ c',{exact:true}).waitFor();
+  await output.getByRole('link',{name:'Eq.ndrec',exact:true}).click();
+  const panel=page.locator('[data-caller-domains]');
+  await panel.locator('summary').click();
+  await panel.getByRole('link',{name:'Eq.ndrec after 6 arguments'}).waitFor();
+  assert.equal(await panel.getByRole('combobox').inputValue(),'7');
+  for(const [i,id] of [159,86,80,78].entries()){
+    await panel.getByRole('combobox').selectOption(String(i+7));
+    const link=panel.getByRole('link',{name:'Supplied argument '+(i+7)+' · e'+id});
+    assert.match(await link.getAttribute('href'),new RegExp('#expr-'+id+'$'));
+  }
+}
 (async()=>{
   const browser=await chromium.launch({executablePath:process.env.ATLAS_CHROMIUM_PATH});
   try{
@@ -79,5 +101,6 @@ async function checkWideCall(page) {
       [4,'Mathlib.Tactic.Linarith.sub_neg_of_lt',7,7],[5,'Mathlib.Tactic.Linarith.sub_neg_of_lt',7,7]]);
     await check(page,'lean_workbook_plus_6206','goedel-sample-4331',91421,'1:1.1',[[48463,'HPow.hPow',5,6]]);
     await checkWideCall(page);
+    await checkReturnedFunction(page);
   }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});
