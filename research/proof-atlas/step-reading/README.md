@@ -328,3 +328,18 @@ The tagged fixture constructs a balanced binary proof with a different local nat
 | 18 | 1,835,031 | 262,144 | 128 | 9,014 | 4,161,981 | 8,198 |
 
 Repeat the build above with `--tagged-depth 18` and run `node research/proof-atlas/step-reading/check-tagged-case.cjs /tmp/shared-case.json 18`. The check verifies each region's first and last rank, plus interior controls (258 distinct ranks at depth 18), against binary path digits, the leaf's literal tag and the introducing binder. Region lookup scans up to 128 counts in addition to the reported visits. The packet is loaded in memory in this experiment. The auxiliary size excludes the packet, parser and working memory. This is a synthetic structural stress test and an offline index experiment.
+
+### Cold paged lookup on the tagged fixture
+
+The same depth-18 packet produces 7,169 standard 256-row source pages. A finer partition splits at 4,096 expanded occurrences, yielding 1,024 positive regions. The control file, including region counts, paths and the source descriptor, occupies 81,945 bytes. The offline producer loads the full packet. A separate reader process and local Chrome receive only the control file and hash-addressed pages. The control file is a trusted experiment input.
+
+Run `node research/proof-atlas/step-reading/page-tagged-case.cjs /tmp/shared-case.json /tmp/tagged-pages` then `node research/proof-atlas/step-reading/check-paged-tagged-case.cjs /tmp/tagged-pages 18`. Eight cold selections check independent binary routes and leaf tags. The browser function in `check-paged-tagged-browser.cjs` uses the library source cursor and reference counter; serve the generated folder from the same origin. Each browser selection starts with an empty cursor and bypasses the HTTP cache.
+
+| Browser rank | Source page loads | Peak cached source rows | Compressed manifest, index and page bytes |
+| ---: | ---: | ---: | ---: |
+| 1 | 28 | 4,096 | 87,342 |
+| 131,072 | 10 | 2,327 | 27,392 |
+| 131,073 | 27 | 4,096 | 83,450 |
+| 262,144 | 9 | 2,071 | 27,730 |
+
+The byte column excludes the one-time control file, HTTP headers and application assets. Cached rows measure source residency only. No whole-browser memory measurement or public UI integration is claimed.
