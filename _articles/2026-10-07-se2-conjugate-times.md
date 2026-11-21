@@ -125,13 +125,21 @@ Write $p=2nK+s$. At a root, the determinant gives a quadratic weight multiplying
 
 The [November manuscript](/public/research/se2/conjugate-times-nov21.pdf) gives the proof. The [Lean source and axiom record](/public/research/se2/large-index-law.zip) reproduce the formal check.
 
-The [whole-paper statement review and Lean coverage ledger](/public/research/se2/conjugate-times-review.zip) lists all eleven numbered results and the evidence for 34 claim groups. Of 33 mathematical groups, 15 have full Lean coverage, 11 have partial coverage and seven retain analytic or external steps. The numerical group is reported separately.
+The [whole-paper statement review and Lean coverage ledger](/public/research/se2/conjugate-times-review.zip) lists all eleven numbered results and the evidence for 34 claim groups. Of 33 mathematical groups, 16 have full Lean coverage, 11 have partial coverage and six retain analytic or external steps. The numerical group is reported separately.
+
+### The three bracket endpoints
+
+Measured from $(2n-1)K$, $(2n+1)K$ and $2nK$, the Maxwell, beta and alpha endpoints have respective first corrections
+
+$$\frac{1}{2n(K-E)},\qquad -\frac{1}{2nE},\qquad \frac{2E-K}{2nE(K-E)}.$$
+
+The errors are bounded by $C/n^2$ with one constant for all three endpoints on each compact interior modulus set. The alpha correction changes sign at $K=2E$, where that endpoint is exactly the center. After shifting by a half-period multiple, each endpoint equation first places the root within order $1/n$ of a simple Jacobi zero. One Taylor expansion then gives the coefficient and the quadratic error. The [proof and its axiom audit](/public/research/se2/bracket-endpoints.zip) include the identification of the indexed alpha root.
 
 ## The formal proof boundary
 
 The November development constructs the Jacobi functions by inverting the elliptic integral and proves the first-time and noncritical counting theorems for these concrete functions. It also identifies the signed determinant of the actual rectified endpoint map and proves that this determinant has degree at most two in the period index.
 
-For the exceptional phase, Lean verifies the unique critical modulus, the scalar fourth-order coefficient and the fixed-cell splitting formula above, including its fifth-order error bound and local uniqueness. Lean also verifies the ordered-root estimate, joint compact uniformity and the improved rate at the critical modulus. The bracket endpoint expansions, the variational index theorem and geometric fold recognition retain analytic steps.
+For the exceptional phase, Lean verifies the unique critical modulus, the scalar fourth-order coefficient and the fixed-cell splitting formula above, including its fifth-order error bound and local uniqueness. Lean also verifies the ordered-root estimate, joint compact uniformity and the improved rate at the critical modulus. Lean now verifies the bracket endpoint expansions as well. The variational index theorem and geometric fold recognition retain analytic steps.
 
 ## Status and sources
 
