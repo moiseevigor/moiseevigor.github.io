@@ -814,6 +814,34 @@
      line.append(link(title,site),' · ',link('Variable',hit.reference),' → ',link(p.binderName||p.declName||'Binder',hit.binder));
      return line;
     }
+    function compareDomains(a,b){
+     const panel=el('details');
+     panel.dataset.binderDomains='';
+     panel.append(el('summary','Compare the declared types'));
+     panel.ontoggle=()=>{
+      if(!panel.open||panel.childElementCount>1)return;
+      const domain=binder=>({node:data.children[binder.node][0],route:{root:binder.route.root,slots:binder.route.slots.concat(0)}});
+      const left=domain(a),right=domain(b),sameRow=left.node===right.node;
+      const dependent=sameRow && data.neededScope[left.node]>0;
+      const first=dependent?nearestReference(data,left):null;
+      let second=null;
+      if(first){
+       const suffix=first.reference.route.slots.slice(left.route.slots.length);
+       const reference={node:first.reference.node,route:{root:right.route.root,slots:right.route.slots.concat(suffix)}};
+       second={reference,binder:A.binding(data,reference.route)};
+      }
+      let status='The declared types have different compiled expressions.';
+      if(sameRow){
+       if(!dependent)status='Both declarations use the same closed type expression.';
+       else if(!first)status='Both use the same type expression. Its external binder comparison reached the inspection limit.';
+       else status=String(first.binder.route.slots)===String(second.binder.route.slots)
+        ?'Both use the same type expression with the same external binders.'
+        :'The same type expression refers to different external binders.';
+      }
+      panel.append(el('p',status),show('Type at selected occurrence',left,first),show('Type at comparison occurrence',right,second));
+     };
+     return panel;
+    }
     function pathReader(other,path){
      const details=el('details');
      details.dataset.bindingPath='';
@@ -860,7 +888,8 @@
      const same=!selected || String(selected.binder.route.slots)===String(hit.binder.route.slots);
      output.append(show('Occurrence '+raw,other,hit));
      if(selected)output.append(el('p',same?'All external variables refer to the same binders at both occurrences.':'The selected variable refers to a different binder.'));
-     if(!same || BigInt(raw)===copies.rank+1n)return;
+     if(!same){output.append(compareDomains(selected.binder,hit.binder));return;}
+     if(BigInt(raw)===copies.rank+1n)return;
      bodyPath??=firstBindingBody(data,at.node);
      if(bodyPath.limited){output.append(el('p','Descendant comparison reached the inspection limit.'));return;}
      if(!bodyPath.slots){output.append(el('p','Binder targets agree along every child path.'));return;}

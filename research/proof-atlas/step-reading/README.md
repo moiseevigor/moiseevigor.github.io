@@ -802,3 +802,15 @@ How often would an unconstrained comparison exhibit a binder change? Count unord
 | Gödel AI sample | 3,331,196,932,192 | 10,755,809,653 | 0.323% |
 
 These shares describe uniform sampling from occurrence pairs. They do not estimate how often users encounter a difference. Closed rows are included in the denominator. The SE(2) editions overlap. Independent full expansions for proofs up to 1,000 occurrences matched the per-proof pair totals and the complete ordered complement of each tested group. Local Chrome checked 121 differing-copy selections including wraparound in the crossing, Riccati and AI examples. In a synthetic alternating-rank control with 2^100 matching copies, selecting the last differing copy took 100 matching-rank probes.
+
+### What changes in the declared type when a binder changes?
+
+For pairs with differing external binders, inspect the domain (field zero) of the nearest used external binder at each occurrence. The two domains are original occurrences of compiled expressions. The reader links both, and when they share an open row it compares their external binder routes. In the working JacobiInit.mk.injEq example both domains use row 48; the variable at row 44 resolves to binder 165 in one occurrence and 122 in the other. These comparisons describe lexical structure. No type-conversion test was run.
+
+| Edition | Differing-binder pairs | Same closed domain row | Same open domain row | Different domain rows |
+|---|---:|---:|---:|---:|
+| Published SE(2) | 3,387,292 | 3,387,195 | 97 | 0 |
+| Working SE(2) | 4,348,645,980 | 4,348,638,377 | 6,119 | 1,484 |
+| Gödel AI sample | 10,755,809,653 | 10,755,808,980 | 647 | 26 |
+
+The census groups the nearest supplying binders by their declared domain row. Within a common domain it subtracts pairs from the same binder occurrence; the remaining pairs change owner. Closed means no external de Bruijn index is needed at that row. The table concerns the nearest differing binder and pair weighting, so it cannot count changes in every assumption or identify distinct propositions. The overlapping SE(2) editions are reported separately. On small proofs, independent expansion grouped actual owner routes and read the longest route's domain, reproducing each count. Local Chrome followed 16 links across all four displayed outcomes, including both agreement and disagreement of external binders for a shared open domain.

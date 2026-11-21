@@ -46,7 +46,7 @@ function conflicts(g) {
   const ambiguous = new Set(), outerMiss = new Set(), classes = new Map();
   let childSlots = 0n, splitSlots = 0n, extraDestinations = 0n;
   const comparable = [];
-  let candidatePairs = 0n, differentPairs = 0n;
+  let candidatePairs = 0n, differentPairs = 0n, distinctDomains = 0n, sharedOpenDomains = 0n;
   let saturationDepth = 0, rows = 0, visits = 0n, ambiguousVisits = 0n;
   for (let n = root; n >= 0; n--) {
     if (!counts[n]) continue;
@@ -63,7 +63,22 @@ function conflicts(g) {
       candidatePairs += pairs;
       if (scoped > 1n) {
         let same = 0n;
-        for (const [binder, paths] of nearest) same += counts[binder]*paths*(paths-1n)/2n;
+        const domains = new Map();
+        for (const [binder, paths] of nearest) {
+          const domain = g.children[binder][0];
+          if (!domains.has(domain)) domains.set(domain,{visits:0n,sameOwner:0n});
+          const group = domains.get(domain);
+          group.visits += counts[binder]*paths;
+          group.sameOwner += counts[binder]*paths*(paths-1n)/2n;
+        }
+        let sameDomain = 0n;
+        for (const [domain, group] of domains) {
+          const within = group.visits*(group.visits-1n)/2n;
+          sameDomain += within;
+          same += group.sameOwner;
+          if (g.neededScope[domain]) sharedOpenDomains += within-group.sameOwner;
+        }
+        distinctDomains += pairs-sameDomain;
         assert(same < pairs);
         differentPairs += pairs-same;
       }
@@ -109,7 +124,7 @@ function conflicts(g) {
     owners[n].clear();
   }
   assert.equal(visits, BigInt(g.expanded[root]));
-  return {candidatePairs, differentPairs, comparable, navigable, saturationDepth, childSlots, splitSlots, extraDestinations, ambiguous, outerMiss, classes, rows, visits, ambiguousVisits};
+  return {candidatePairs, differentPairs, distinctDomains, sharedOpenDomains, comparable, navigable, saturationDepth, childSlots, splitSlots, extraDestinations, ambiguous, outerMiss, classes, rows, visits, ambiguousVisits};
 }
 
 // Independent oracle. Every external binder use below a row contributes its actual
@@ -202,7 +217,7 @@ for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_S
   const navigable = depths.map(() => 0n);
   const totals = {edition:e.id, proofs:0, exhaustiveChecks:0, affectedProofs:0, proofsWithConflictingApplication:0, rows:0, conflictingRows:0, conflictingApplications:0, outerMissApplications:0, proofsWithOuterMiss:0};
   let childSlots = 0n, splitSlots = 0n, extraDestinations = 0n, affectedProofBodies = 0;
-  let example = null, deepest = null, candidatePairs = 0n, differentPairs = 0n;
+  let example = null, deepest = null, candidatePairs = 0n, differentPairs = 0n, distinctDomains = 0n, sharedOpenDomains = 0n;
   const shortcuts = {eligible:0, limited:0, shallow:0, shorter:0, largestSaving:0};
   let matchingGroups = 0, matchingMembers = 0, singletonGroups = 0, recoverableSelections = 0;
   let complementRoutes = 0, hiddenDifferences = 0;
@@ -224,11 +239,22 @@ for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_S
       assert.deepEqual(r.navigable, observed.navigable);
       for (const field of ['childSlots','splitSlots','extraDestinations'])
         assert.equal(r[field], observed[field]);
-      let observedPairs = 0n, observedDifferent = 0n;
+      let observedPairs = 0n, observedDifferent = 0n, observedDomainChanges = 0n, observedOpen = 0n;
       for (const [node,groups] of observed.matchingRoutes) {
         const size = [...groups.values()].reduce((s,list)=>s+BigInt(list.length),0n);
         observedPairs += size*(size-1n)/2n;
         for (const list of groups.values()) observedDifferent += BigInt(list.length)*(size-BigInt(list.length));
+        // The innermost external owner is the longest actual binder route.
+        const types = [...groups].filter(([signature])=>JSON.parse(signature).length).map(([signature,list])=>{
+          const address = JSON.parse(signature).sort((a,b)=>b.length-a.length)[0];
+          const binder = A.walk(g,{root:1,slots:[...address].map(Number)});
+          return {domain:g.children[binder][0], size:BigInt(list.length)};
+        });
+        for (let i=0;i<types.length;i++) for (let j=0;j<i;j++) {
+          const weight = types[i].size*types[j].size;
+          if (types[i].domain!==types[j].domain) observedDomainChanges += weight;
+          else if (g.neededScope[types[i].domain]) observedOpen += weight;
+        }
         if (groups.size === 1 && groups.values().next().value.length === 1) continue;
         for (const addresses of groups.values()) {
           const routes = addresses.map(s => ({root:1, slots:[...s].map(Number)}));
@@ -263,6 +289,8 @@ for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_S
       if (r.visits <= 1000n) {
         assert.equal(observedPairs,r.candidatePairs);
         assert.equal(observedDifferent,2n*r.differentPairs);
+        assert.equal(observedDomainChanges,r.distinctDomains);
+        assert.equal(observedOpen,r.sharedOpenDomains);
         for (const row of observed.classes.keys()) {
           const hit = firstBindingBody(g,row);
           assert(!hit.limited);
@@ -342,6 +370,8 @@ for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_S
     }
     r.navigable.forEach((count,i) => { navigable[i] += count; });
     assert.equal(r.navigable[1] - r.navigable[0], r.extraDestinations);
+    distinctDomains += r.distinctDomains;
+    sharedOpenDomains += r.sharedOpenDomains;
     candidatePairs += r.candidatePairs;
     differentPairs += r.differentPairs;
     childSlots += r.childSlots;
@@ -367,5 +397,5 @@ for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_S
     if (!largestIncrease || groups * BigInt(largestIncrease.rows) > BigInt(largestIncrease.groups) * BigInt(r.rows))
       largestIncrease = {name:d.name, rows:r.rows, groups:String(groups), occurrences:String(r.visits)};
   }
-  console.log(JSON.stringify({...totals, candidatePairs:String(candidatePairs), differentPairs:String(differentPairs), complementRoutes, hiddenDifferences, matchingGroups, matchingMembers, singletonGroups, recoverableSelections, shortcuts, testedRows, foundBodies, shorterUseElsewhere, deepest, groupsByDepth:Object.fromEntries(depths.map((d,i)=>[String(d),String(navigable[i])])), example, childSlots:String(childSlots), splitSlots:String(splitSlots), extraDestinations:String(extraDestinations), affectedProofBodies, largestIncrease, scopedRows:String(scopedRows), occurrences:String(visits), occurrencesInConflictingRows:String(affected)}));
+  console.log(JSON.stringify({...totals, distinctDomains:String(distinctDomains), sharedOpenDomains:String(sharedOpenDomains), candidatePairs:String(candidatePairs), differentPairs:String(differentPairs), complementRoutes, hiddenDifferences, matchingGroups, matchingMembers, singletonGroups, recoverableSelections, shortcuts, testedRows, foundBodies, shorterUseElsewhere, deepest, groupsByDepth:Object.fromEntries(depths.map((d,i)=>[String(d),String(navigable[i])])), example, childSlots:String(childSlots), splitSlots:String(splitSlots), extraDestinations:String(extraDestinations), affectedProofBodies, largestIncrease, scopedRows:String(scopedRows), occurrences:String(visits), occurrencesInConflictingRows:String(affected)}));
 }
