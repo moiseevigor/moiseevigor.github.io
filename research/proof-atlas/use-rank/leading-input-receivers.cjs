@@ -24,12 +24,28 @@ for(const s of window.PROOF_ATLAS_CORE_SIGNATURES.entries){
 }
 const native=JSON.parse(zlib.gunzipSync(fs.readFileSync('research/proof-atlas/type-notation/native.json.gz')));
 assert.deepEqual(catalog.entries.filter(e=>roles.importedSignature(catalog,'goedel-sample-4331',e.name,catalog.compiler)).map(e=>e.name).sort().join('|'),native.signatures.map(s=>s.name).sort().join('|'));
+for(const f of ['occurrence-types-manifest','eliminations-manifest'])
+ vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/'+f+'.js','utf8'),{window});
+const nativeInventories=[
+ ...(published?window.PROOF_ATLAS_OCCURRENCE_TYPES.records:window.PROOF_ATLAS_AI_SAMPLE.types).map(d=>({d,kind:'primary'})),
+ ...(published?window.PROOF_ATLAS_ELIMINATIONS.records:window.PROOF_ATLAS_AI_SAMPLE.eliminations).map(d=>({d,kind:'case'}))
+];
 const formalCache=new Map(),missingSignatures=new Map();
-const splitStats={groups:0,twoChildren:0,threeChildren:0,nineTenthsInOneChild:0,applicationSplits:0,threeOrMoreOccupiedPorts:0,maxOccupiedPorts:0,occupiedArguments:0,formalSlots:0,dependentSlots:0,parameterEdges:0,resultTypes:0,dependentResults:0,resultEdges:0,residualForalls:0,formalSplits:0,importedSlots:0,externalConstantArguments:0,otherHeadArguments:0,beyondLiteralPrefix:0};
+const splitStats={groups:0,twoChildren:0,threeChildren:0,nineTenthsInOneChild:0,applicationSplits:0,threeOrMoreOccupiedPorts:0,maxOccupiedPorts:0,occupiedArguments:0,formalSlots:0,dependentSlots:0,parameterEdges:0,recordedCallTypes:0,lambdaResultUnused:0,withDeclaredAndRecorded:0,resultTypes:0,dependentResults:0,resultEdges:0,residualForalls:0,formalSplits:0,importedSlots:0,externalConstantArguments:0,otherHeadArguments:0,beyondLiteralPrefix:0};
 function audit(record) {
   const bytes=zlib.gunzipSync(fs.readFileSync('.'+record.indexFile));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),record.indexSha256);
   const data=A.validateIndex(JSON.parse(bytes),record);
+  const observations=[];
+  if(process.argv.includes('--branch-summary')){
+    for(const {d,kind} of nativeInventories.filter(x=>x.d.edition===edition.id && x.d.indexSha256===record.indexSha256)){
+      const bytes=zlib.gunzipSync(fs.readFileSync('.'+d.file));
+      assert.equal(createHash('sha256').update(bytes).digest('hex'),d.sha256);
+      const packet=JSON.parse(bytes);
+      observations.push(kind==='case'?E.provider(packet,data,record,d.sha256,d.file):
+       require('../../../public/js/proof-atlas-occurrence-types').provider(packet,data,record,d));
+    }
+  }
   const inputs=[], slots=[], parents=[], scope=[], spines=new Map();
   function classify(node,input,offset) {
     let depth=slots.length-1;
@@ -172,6 +188,23 @@ function audit(record) {
           params=roles.formalParameters(data,{root:1,slots:bound.route.slots.concat(0)},flat.call.arity);
         }
         const result=formalData && roles.declaredResult(formalData,params,flat.call.arity);
+        const native=observations.map(p=>p.get(flat.route)).find(o=>o?.status==='checked');
+        if(native){
+          assert.equal(native.node,flat.call.node);assert.deepEqual(native.route,flat.route);
+          assert.equal(native.kernelCheck,'PASS');
+          splitStats.recordedCallTypes++;
+          const graph=native.typeGraph,root=native.typeRoot;
+          if(graph.kind[root]===5 && graph.kind[graph.children[root][0]]===6){
+            const body=graph.children[graph.children[root][0]][1];
+            const deps=require('../../../public/js/proof-atlas-application-ports').dependencies(graph,body,1);
+            const count=countReferences(graph,body,0);
+            assert.equal(count.status,'counted');assert.equal(count.occurrences==='0',!deps.length);
+            if(!deps.length)splitStats.lambdaResultUnused++;
+          }
+          if(result)splitStats.withDeclaredAndRecorded++;
+          if(process.env.ATLAS_FORMAL_EXAMPLE && !splitStats.nativeExample)
+           splitStats.nativeExample={proof:record.name,binder:input.name,depth:input.route.slots.length,label,type:native.typeText};
+        }
         if(result){
           splitStats.resultTypes++;
           if(result.references.length)splitStats.dependentResults++;

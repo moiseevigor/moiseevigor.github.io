@@ -97,6 +97,13 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
     }
     const recursor=roles.getByRole('link',{name:'Eq.ndrec · argument 5 / 10',exact:true}).locator('..');
     await recursor.getByText('Explore proof branches',{exact:true}).click();
+    const recorded=recursor.getByText('Recorded result at this call',{exact:true});
+    await recorded.click();
+    const native=recorded.locator('..');
+    assert((await native.locator('pre').textContent()).includes('a = 0 ∧ b = 0 ∧ c = 0'));
+    await native.getByText('The lambda in this result has no reference to its bound variable.').waitFor();
+    const checkedCall=await native.getByRole('link',{name:'Inspect the checked call'}).evaluate(a=>a.href);
+    assert.equal(checkedCall,await recursor.getByRole('link',{name:/Or.casesOn · subtree/}).evaluate(a=>a.href));
     await recursor.getByRole('button',{name:'Show declared parameters'}).click();
     await recursor.getByText('inl · explicit',{exact:true}).click();
     const handler=recursor.getByText(/^Or.casesOn · signature binder e27/).locator('..');

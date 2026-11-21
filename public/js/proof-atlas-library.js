@@ -271,6 +271,20 @@
           list.append(item);
          }
          if(part.call){
+          const provider=[typing,caseTyping].find(p=>p?.get(part.route)?.status==='checked');
+          const observation=provider?.get(part.route);
+          if(observation?.kernelCheck==='PASS' && observation.node===parent){
+           const details=el('details'),g=observation.typeGraph,r=observation.typeRoot;
+           details.append(el('summary','Recorded result at this call'),el('pre',observation.typeText));
+           if(g.kind[r]===5 && g.kind[g.children[r][0]]===6){
+            const body=g.children[g.children[r][0]][1];
+            const refs=window.ProofAtlasRecursiveInputs.countReferences(g,body,0);
+            if(refs.status==='counted' && refs.occurrences==='0')
+             details.append(el('p','The lambda in this result has no reference to its bound variable.'));
+           }
+           details.append(link('Inspect the checked call',url(owner.record.name,parent,part.route)),el('p','Native record SHA-256 '+provider.sha256));
+           display.append(details);
+          }
           const callee=owner.data.kind[head]===4 && edition.declarations.find(d=>d.name===name);
           const headRoute={root:part.route.root,slots:part.route.slots.concat(Array(part.call.arity).fill(0))};
           const bound=owner.data.kind[head]===0 && A.binding(owner.data,headRoute);
