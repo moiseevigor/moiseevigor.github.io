@@ -11,6 +11,7 @@ require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/goed
 const {parameterContext,exactCallInputs,equalitySegments,firstStructuralDifference} = require('../../../public/js/proof-atlas-omitted-references');
 require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/type-notation-catalog.js','utf8'),{window});
 const contextShapes=new Map();
+let rawContexts=0n,namedContexts=0n;
 const contexts={operators:0n,identity:0n,unsupported:0n};
 const differences = {constructor:0n,payload:0n,identical:0n,limit:0n};
 let belowRoot = 0n, maxDepth = 0;
@@ -143,6 +144,8 @@ for (const record of records) {
               missing.set(name,(missing.get(name)??0n)+count);
             }
             if(frames){
+              if(frames.some(f=>f.raw))rawContexts+=count;
+              else if(frames.some(f=>f.form==='application'))namedContexts+=count;
               const shape=frames.map(f=>f.glyph+'['+(f.operands.indexOf(null)+1)+']').join(' → ');
               contextShapes.set(shape,(contextShapes.get(shape)??0n)+count);
               let path=at.route.slots.slice(),row=body;
@@ -152,11 +155,13 @@ for (const record of records) {
                 const {head,args}=spine(data,row);
                 const op=window.PROOF_ATLAS_TYPE_NOTATION.entries.find(e=>e.name===data.payloads[head].name);
                 assert.equal(f.operands.filter(a=>a===null).length,1);
-                for(const [i,slot] of op.visibleSlots.entries()){
+                const visible=f.raw?args.map((_,i)=>i):op.visibleSlots;
+                if(f.raw){assert(!op);assert.equal(f.glyph,'@'+data.payloads[head].name);}
+                for(const [i,slot] of visible.entries()){
                   const childPath=path.concat(Array(args.length-1-slot).fill(0),1);
                   if(f.operands[i])assert.deepEqual(f.operands[i],{node:args[slot],route:{root:route.root,slots:childPath}});
                 }
-                const slot=op.visibleSlots[f.operands.indexOf(null)];
+                const slot=visible[f.operands.indexOf(null)];
                 row=args[slot];path=path.concat(Array(args.length-1-slot).fill(0),1);
               }
               while(data.kind[row]===10){row=data.children[row][0];path.push(0);}
@@ -258,3 +263,4 @@ console.log('congrArg calls:',String(congrCalls),'proofs:',congrProofs,'function
 console.log('Single-use lambda contexts:',contexts);
 console.log('Context shapes:',Object.fromEntries(contextShapes));
 console.log('Unsupported paths:',Object.fromEntries(missing));
+console.log('Including raw calls:',String(rawContexts),'catalogue applications only among new cases:',String(namedContexts));

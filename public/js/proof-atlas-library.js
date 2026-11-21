@@ -288,12 +288,31 @@
           row.append(sourceLink(symbol+' · '+termLabel(at),at));fixed.append(row);
           return [sourceLink(symbol,at)];
          });
-         expression=frame.form==='binary'?['(',...args[0],' ',op,' ',...args[1],')']:
-          [op,'(',...args[0],')'];
+         if(frame.form==='binary')expression=['(',...args[0],' ',op,' ',...args[1],')'];
+         else{
+          expression=[op,'('];
+          for(const [i,arg] of args.entries()){
+           if(i)expression.push(', ');
+           expression.push(...arg);
+          }
+          expression.push(')');
+         }
         }
         formula.append('Function context: x ↦ ',...expression);
-        panel.append(formula);
-        if(count)panel.append(fixed);
+        let destination=panel;
+        if(frames.some(frame=>frame.raw)){
+         const trail=el('p');trail.append('From the parameter outward: ');
+         for(const [i,frame] of frames.entries()){
+          if(i)trail.append(' → ');
+          trail.append(sourceLink(frame.raw?frame.glyph.slice(1):frame.glyph,frame.call));
+         }
+         destination=el('details');
+         destination.append(el('summary','Show compiled arguments'),
+          el('p','@ shows all compiled arguments in Lean order, including implicit arguments.'));
+         panel.append(trail,destination);
+        }
+        destination.append(formula);
+        if(count)destination.append(fixed);
        }else if(frames){
         const formula=el('p');formula.append('Function context: x ↦ ',sourceLink('x',site));panel.append(formula);
        }else{

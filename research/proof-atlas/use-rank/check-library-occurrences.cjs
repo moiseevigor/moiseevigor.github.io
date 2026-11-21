@@ -431,11 +431,24 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
    const published=window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id==='published-15');
    const crossing=published.declarations.find(r=>r.name==='CrossingData.exists_branch');
    const crossingData=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+crossing.indexFile)));
-   for(const [node,expected] of [[3956,'The operator context is unavailable for this path.'],[3035,'Function context: x ↦ x']]){
+   for(const [node,expected] of [[3956,'Function context: x ↦ @Membership.mem(s4, s5, s6, @Set.Icc(s1, s2, x, s3), s7)'],[3035,'Function context: x ↦ x']]){
     const at=atlas.routes(crossingData).route(node);
     await page.goto('http://localhost/projects/proof-atlas/library/?edition=published-15&proof='+crossing.name+'&route='+at.root+':'+at.slots.join('.')+'#expr-'+node);
+    if(node===3956){
+     const congr=page.getByRole('region',{name:'Equality under a function'});
+     const trail=congr.locator('p').filter({hasText:'From the parameter outward'});
+     await trail.waitFor();
+     assert.deepEqual(await trail.getByRole('link').allTextContents(),['Set.Icc','Membership.mem']);
+     assert.deepEqual(await trail.getByRole('link').evaluateAll(ns=>ns.map(n=>new URL(n.href).hash)),['#expr-3949','#expr-3951']);
+     await congr.getByText('Show compiled arguments',{exact:true}).click();
+    }
     await page.getByRole('region',{name:'Equality under a function'}).getByText(expected,{exact:false}).waitFor();
    }
+   const unsupported=published.declarations.find(r=>r.name==='JacobiFull.c_strictAntiOn');
+   const raw=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+unsupported.indexFile)));
+   const unsupportedAt=atlas.routes(raw).route(465);
+   await page.goto('http://localhost/projects/proof-atlas/library/?edition=published-15&proof='+unsupported.name+'&route='+unsupportedAt.root+':'+unsupportedAt.slots.join('.')+'#expr-465');
+   await page.getByText('The operator context is unavailable for this path.',{exact:false}).waitFor();
    const repeated=published.declarations.find(r=>r.name==='JacobiCore.Sol.eq_of_eq_at');
    const graph=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+repeated.indexFile)));
    const repeatAt={node:1462,route:atlas.routes(graph).route(1462)};

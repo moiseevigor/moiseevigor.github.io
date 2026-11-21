@@ -113,11 +113,14 @@
    const c=step.call,p=data.payloads[c.head.node];
    const op=catalog.entries.find(e=>data.kind[c.head.node]===4 && e.name===p.name &&
     JSON.stringify(e.nameParts)===JSON.stringify(p.nameParts) && e.arity===c.arity &&
-    e.levelParams.length===p.levels.length && ['binary','absolute','prefix'].includes(e.form));
-   if(!op || !op.visibleSlots.includes(c.slot-1))return null;
+    e.levelParams.length===p.levels.length);
+   const raw=!op && data.kind[c.head.node]===4 && c.arity<=6;
+   if(!raw && (!op || !['binary','absolute','prefix','application'].includes(op.form)))return null;
+   const visible=raw?Array.from({length:c.arity},(_,i)=>i):op.visibleSlots;
+   if(!visible.includes(c.slot-1))return null;
    const args=exactCallInputs(data,c.call,p.name,c.arity);
-   frames.push({glyph:op.glyph,form:op.form,call:c.call,
-    operands:op.visibleSlots.map(slot=>slot===c.slot-1?null:args[slot])});
+   frames.push({glyph:raw?'@'+p.name:op.glyph,form:raw?'application':op.form,raw,call:c.call,
+    operands:visible.map(slot=>slot===c.slot-1?null:args[slot])});
    at=c.call;
   }
   return at.node===body.node && at.route.slots.length===body.route.slots.length?frames:null;
