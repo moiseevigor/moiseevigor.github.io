@@ -7,6 +7,10 @@ const assert = require('node:assert/strict');
 const {createHash} = require('node:crypto');
 const A = require('../../../public/js/proof-atlas-library-data');
 const B = require('../../../public/js/proof-atlas-binding-uses');
+const {resultDestination} = require('../../../public/js/proof-atlas-omitted-references');
+const {sourceInput} = require('../../../public/js/proof-atlas-application-ports');
+const {spine} = require('../../../public/js/proof-atlas-elimination');
+const traceConsumers = process.argv.includes('--consumers');
 const window = {};
 vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/goedel-sample-manifest.js','utf8'),{window});
 
@@ -27,6 +31,13 @@ function audit(record) {
       const route = {root:1,slots:[...slots]};
       local = {id:definitions.length,node,route,count:0};
       definitions.push(local);
+      if (traceConsumers) {
+        const value = data.children[node][1];
+        const head = spine(data,value).head;
+        local.value = {node:value,kind:A.kinds[data.kind[value]],headKind:A.kinds[data.kind[head]],
+          declaration:data.kind[head]===4 ? data.payloads[head].name : null};
+        local.uses = [];
+      }
     }
     if (kind === 'bvar') {
       const source = stack.at(-1-data.payloads[node].index);
@@ -38,6 +49,18 @@ function audit(record) {
         const route = {root:1,slots:[...slots]};
         assert.deepEqual(A.binding(data,route),{node:from.node,route:from.route});
         from.count++;
+        if (traceConsumers) {
+          const use = {node,route};
+          const destination = resultDestination(data,use);
+          if (destination.kind === 'argument') {
+            const {call,head,label,slot,arity} = destination.call;
+            assert.deepEqual(sourceInput(data,call,slot),use);
+            from.uses.push({use,call,headKind:A.kinds[data.kind[head.node]],label,slot,arity});
+          } else {
+            assert.equal(A.walk(data,destination.at.route),destination.at.node);
+            from.uses.push({use,field:destination.field,parent:destination.at,kind:destination.kind});
+          }
+        }
         const field = owner?.field ?? 'remaining';
         destinations[field]++;
         if (owner) {
@@ -74,7 +97,7 @@ function audit(record) {
     assert.equal(BigInt(d.count),BigInt(refs.occurrences));
   }
   return {name:record.name,indexSha256:record.indexSha256,bodyOccurrences:visited,localDefinitions:definitions.length,
-    binderUses,lambdaUses,destinations,edges:[...edges.values()]};
+    binderUses,lambdaUses,destinations,...(traceConsumers ? {definitions} : {}),edges:[...edges.values()]};
 }
 
 const result = window.PROOF_ATLAS_AI_SAMPLE.edition.declarations.map(audit);
@@ -83,4 +106,10 @@ for (const r of result) {
   const baseline = prior.find(p => p.source === r.indexSha256);
   assert.equal(BigInt(Object.values(r.binderUses).reduce((a,b)=>a+b,0)),BigInt(baseline.total));
 }
-console.log(JSON.stringify(result,null,2));
+if (traceConsumers) {
+  console.log(JSON.stringify(result.map(r => ({
+    name:r.name, indexSha256:r.indexSha256, bodyOccurrences:r.bodyOccurrences, definitions:r.definitions
+  })),null,2));
+} else {
+  console.log(JSON.stringify(result,null,2));
+}
