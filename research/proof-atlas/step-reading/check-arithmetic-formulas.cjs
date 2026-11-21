@@ -2,7 +2,7 @@
 const fs=require('node:fs'),z=require('node:zlib'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 const A=require('../../../public/js/proof-atlas-library-data');
 const {spine}=require('../../../public/js/proof-atlas-elimination');
-const {formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses}=require('../../../public/js/proof-atlas-arithmetic');
+const {formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses}=require('../../../public/js/proof-atlas-arithmetic');
 const ports=require('./distinct-call-ports.cjs');
 global.window={};require('../../../public/data/proof-atlas/goedel-sample-manifest');
 const arities={'HPow.hPow':6,'HMul.hMul':6,'HSub.hSub':6,'HAdd.hAdd':6,'HDiv.hDiv':6,Or:2,And:2,Eq:3,Ne:3,'LE.le':4,'GE.ge':4,'LT.lt':4,'Real.sqrt':1,abs:4},counts={},examples={};
@@ -28,11 +28,35 @@ const arities={'HPow.hPow':6,'HMul.hMul':6,'HSub.hSub':6,'HAdd.hAdd':6,'HDiv.hDi
    check(g,t.left);if(t.right)check(g,t.right);
   }
 let absent=0,nested=0;
-const joins=[],orderProofs=[];
+const joins=[],orderProofs=[],rewriteCoverage=[];
 for(const d of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations.filter(d=>d.kind==='theorem'&&d.bodyAvailable)){
  const raw=z.gunzipSync(fs.readFileSync('.'+d.indexFile));
  assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),d.indexSha256);
  const g=A.validateIndex(JSON.parse(raw),d),seen=new Set();
+ const visited=new Set(),stack=[{node:g.roots[1],parent:null}],coverage={proof:d.name,casts:0,left:0,right:0,examples:[]};
+ while(stack.length){
+  const item=stack.pop(),node=item.node;
+  if(visited.has(node))continue;
+  visited.add(node);
+  const spineAtNode=spine(g,node);
+  if(spineAtNode.args.length===4 && g.payloads[spineAtNode.head]?.name==='Eq.mp'){
+   coverage.casts++;
+   const slots=[];
+   for(let pos=item;pos.parent;pos=pos.parent)slots.push(pos.slot);
+   const at={node,route:{root:1,slots:slots.reverse()}};
+   const t=formulaTransport(g,at);
+   coverage.examples.push({at,side:t?.change?.side||null,links:t?.change?[t.before.site,t.after.site,t.change.from,t.change.to,t.change.certificate,t.change.context]:[]});
+   if(t?.change){
+    coverage[t.change.side]++;
+    check(g,t.before);check(g,t.after);
+    const eq=spine(g,t.equality.node);
+    assert.equal(g.payloads[eq.head].name,'congrArg');
+    assert.deepEqual([t.change.from,t.change.to,t.change.context,t.change.certificate].map(x=>A.walk(g,x.route)),eq.args.slice(2));
+   }
+  }
+  g.children[node].forEach((child,slot)=>stack.push({node:child,parent:item,slot}));
+ }
+ rewriteCoverage.push(coverage);
  const order=closingOrderArgument(g);
  if(order){
   for(const key of ['goal','proof','domain','close','operand','evidence'])assert.equal(A.walk(g,order[key].route),order[key].node);
@@ -40,6 +64,14 @@ for(const d of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations.filter(d=>d.kin
   const t=order.transport;assert(t);
   assert.deepEqual(spine(g,order.evidence.node).args,[t.before.site.node,t.after.site.node,t.equality.node,t.premise.node]);
   assert.equal(g.payloads[spine(g,t.equality.node).head].name,'congrArg');
+  const c=t.change,eq=spine(g,t.equality.node).args;
+  assert.equal(c.side,'left');assert.equal(t.before.right.site.node,t.after.right.site.node);
+  assert.equal(g.payloads[spine(g,c.certificate.node).head].name,'Mathlib.Tactic.Ring.of_eq');
+  for(const [i,site] of [c.from,c.to,c.context,c.certificate].entries()){
+   assert.equal(A.walk(g,site.route),eq[i+2]);
+  }
+  const corrupt=g.children.slice();corrupt[t.equality.node]=[spine(g,t.equality.node).head,c.certificate.node];
+  assert.equal(closingOrderArgument({...g,children:corrupt}).transport.change,null);
   check(g,t.before);check(g,t.after);
   const binder={root:1,slots:order.close.route.slots.slice(0,-1)};
   const refs=require('./ranked-binder-uses.cjs')(g,binder);
@@ -153,4 +185,4 @@ for(const edition of window.PROOF_ATLAS_LIBRARY.editions){
   ['LE.le','HMul.hMul','Real.sqrt','abs','HDiv.hDiv']);
  riccati.push({edition:edition.id,proof:d.name,at,call});
 }
-console.log(JSON.stringify({counts,absent,nested,examples,riccati,joins,orderProofs},null,2));
+console.log(JSON.stringify({rewriteCoverage,counts,absent,nested,examples,riccati,joins,orderProofs},null,2));

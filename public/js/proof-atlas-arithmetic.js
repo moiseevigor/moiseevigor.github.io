@@ -149,24 +149,45 @@
   }
   return result;
  }
+ function namedArguments(data,site,name,arity){
+  const child=(site,slot)=>({node:data.children[site.node][slot],route:{root:site.route.root,slots:site.route.slots.concat(slot)}});
+  const args=[];
+  for(let i=0;i<arity;i++){
+   if(data.kind[site.node]!==5)return null;
+   args.unshift(child(site,1));site=child(site,0);
+  }
+  return data.kind[site.node]===4 && data.payloads[site.node].name===name?args:null;
+ }
+ function rewriteSide(data,cast,before,after){
+  if(!before?.right || !after?.right || before.name!==after.name ||
+     before.parameters.some((p,i)=>p.node!==after.parameters[i].node))return null;
+  const equality=namedArguments(data,cast[2],'congrArg',6);
+  if(!equality)return null;
+  for(const [side,other] of [['left','right'],['right','left']]){
+   const from=before[side].site,to=after[side].site;
+   if(from.node!==to.node && before[other].site.node===after[other].site.node &&
+      equality[2].node===from.node && equality[3].node===to.node)
+    return {side,from,to,context:equality[4],certificate:equality[5]};
+  }
+  return null;
+ }
+ function formulaTransport(data,at){
+  const cast=namedArguments(data,at,'Eq.mp',4);
+  if(!cast)return null;
+  const before=formula(data,cast[0]),after=formula(data,cast[1]);
+  if(!before || !after)return null;
+  return {before,after,equality:cast[2],premise:cast[3],change:rewriteSide(data,cast,before,after)};
+ }
  function closingOrderArgument(data){
   if(data.roots[1]==null)return null;
   const child=(site,slot)=>({node:data.children[site.node][slot],route:{root:site.route.root,slots:site.route.slots.concat(slot)}});
-  function application(site,name,arity){
-   const args=[];
-   for(let i=0;i<arity;i++){
-    if(data.kind[site.node]!==5)return null;
-    args.unshift(child(site,1));site=child(site,0);
-   }
-   return data.kind[site.node]===4 && data.payloads[site.node].name===name?args:null;
-  }
   let goal={node:data.roots[0],route:{root:0,slots:[]}},proof={node:data.roots[1],route:{root:1,slots:[]}};
   while(data.kind[goal.node]===7 && goal.route.slots.length<128){
    if(data.kind[proof.node]!==6 || data.children[proof.node][0]!==data.children[goal.node][0] ||
       data.payloads[proof.node].binderInfo!==data.payloads[goal.node].binderInfo)return null;
    goal=child(goal,1);proof=child(proof,1);
   }
-  const args=application(proof,'le_of_not_gt',5);
+  const args=namedArguments(data,proof,'le_of_not_gt',5);
   if(!args||data.kind[args[4].node]!==6)return null;
   const statement=formula(data,goal),domain=child(args[4],0),contrary=formula(data,domain);
   const [a,b]=args.slice(2,4);
@@ -175,18 +196,13 @@
   if(statement.parameters[0].node!==args[0].node || contrary.parameters[0].node!==args[0].node ||
      statement.left.site.node!==left.node || statement.right.site.node!==right.node ||
      contrary.left.site.node!==b.node || contrary.right.site.node!==a.node)return null;
-  const close=child(args[4],1),end=application(close,'Mathlib.Tactic.Linarith.lt_irrefl',4);
+  const close=child(args[4],1),end=namedArguments(data,close,'Mathlib.Tactic.Linarith.lt_irrefl',4);
   if(!end)return null;
-  const numeral=application(end[2],'OfNat.ofNat',3);
+  const numeral=namedArguments(data,end[2],'OfNat.ofNat',3);
   const literal=numeral && data.kind[numeral[1].node]===9?data.payloads[numeral[1].node]:null;
   const operandLabel=literal?.literalKind==='natVal'?'OfNat.ofNat('+literal.value+')':'e'+end[2].node;
-  let transport=null;
-  const cast=application(end[3],'Eq.mp',4);
-  if(cast){
-   const before=formula(data,cast[0]),after=formula(data,cast[1]);
-   if(before?.name==='LT.lt' && after?.name==='LT.lt')
-    transport={before,after,equality:cast[2],premise:cast[3]};
-  }
+  const candidate=formulaTransport(data,end[3]);
+  const transport=candidate?.before.name==='LT.lt' && candidate.after.name==='LT.lt'?candidate:null;
   return {goal,statement,proof,domain,contrary,close,operand:end[2],operandLabel,evidence:end[3],transport};
  }
  function contraryUses(data,order){
@@ -218,6 +234,18 @@
  }
  function mount(container,data,at,link){
   const el=(tag,text)=>{const e=document.createElement(tag);if(text)e.textContent=text;return e;};
+  function operandChange(t){
+   const c=t.change,p=el('p');p.dataset.rewriteSide=c.side;
+   p.append('The '+c.side+' operand changes from ',link(caption(t.before[c.side]),c.from),' to ',link(caption(t.after[c.side]),c.to),
+    '. ',link('Operand equality',c.certificate),' · ',link('Function applied to both sides',c.context));
+   return p;
+  }
+  const selected=formulaTransport(data,at);
+  if(selected?.change){
+   const panel=el('section');panel.dataset.selectedRewrite='';
+   panel.append(el('h4','Rewrite an operand'),link(caption(selected.before),selected.before.site),' → ',
+    link(caption(selected.after),selected.after.site),operandChange(selected));container.append(panel);
+  }
   if(!at.route.slots.length){
    const o=closingOrderArgument(data);
    if(o){
@@ -261,6 +289,7 @@
      detail.dataset.contradictionRewrite='';
      line.append(link(caption(t.before),t.before.site),' → ',link(caption(t.after),t.after.site));
      detail.append(el('summary','Final rewrite'),line,link('Equality used',t.equality),' · ',link('Strict inequality before rewriting',t.premise));
+     if(t.change)detail.append(operandChange(t));
      end.append(detail);
     }
     const conclusion=el('li');conclusion.append(link('le_of_not_gt',o.proof),' gives ',link(caption(o.statement),o.goal),'.');
@@ -394,5 +423,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
+ if(common)module.exports={formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
 })(typeof window==='undefined'?globalThis:window);
