@@ -205,7 +205,12 @@
   add_lt_of_le_of_neg:[9,'b ≤ c','a < 0','b + a < c'],
   add_lt_of_neg_of_le:[9,'a < 0','b ≤ c','a + b < c'],
   mul_neg:[8,'a < 0','0 < b','b × a < 0'],
-  mul_nonpos:[8,'a ≤ 0','0 < b','b × a ≤ 0']
+  mul_nonpos:[8,'a ≤ 0','0 < b','b × a ≤ 0'],
+  mul_eq:[8,'a = 0','0 < b','b × a = 0'],
+  add_nonpos:[8,'a ≤ 0','b ≤ 0','a + b ≤ 0'],
+  le_of_le_of_eq:[7,'a ≤ 0','b = 0','a + b ≤ 0'],
+  sub_nonpos_of_le:[7,'a ≤ b','a − b ≤ 0'],
+  sub_neg_of_lt:[7,'a < b','a − b < 0']
  };
  function arithmeticInference(data,at){
   let head=at.node,arity=0;
@@ -216,7 +221,8 @@
   const rule=arithmeticRules[name.slice(prefix.length)];
   if(!Array.isArray(rule)||arity!==rule[0])return null;
   const args=namedArguments(data,at,name,arity),count=arity===9?3:2;
-  return {name,terms:args.slice(-2-count,-2),proofs:args.slice(-2),premises:rule.slice(1,3),conclusion:rule[3]};
+  const premises=rule.slice(1,-1),n=premises.length;
+  return {name,terms:args.slice(-n-count,-n),proofs:args.slice(-n),premises,conclusion:rule.at(-1)};
  }
  function boundPremise(data,site){
   if(data.kind[site.node]!==0)return null;
@@ -326,7 +332,13 @@
    const panel=el('section'),inputs=el('p'),terms=el('dl');
    panel.dataset.arithmeticInference='';
    panel.append(el('h4',selected?.change?'Arithmetic before the rewrite':'Arithmetic inference'));
-   inputs.append(link(inference.premises[0],inference.proofs[0]),'  and  ',link(inference.premises[1],inference.proofs[1]),'  ⇒  '+inference.conclusion);
+   inference.proofs.forEach((proof,i)=>{
+    if(i)inputs.append(' and ');
+    inputs.append(link(inference.premises[i],proof));
+   });
+   inputs.append(' ⇒ '+inference.conclusion);
+   if(inference.name==='Mathlib.Tactic.Linarith.mul_eq')
+    inputs.append(' (the helper accepts the positivity premise and proves the equality from the zero factor alone)');
    for(const [i,site] of inference.terms.entries()){
     const value=el('dd');value.append(link(caption(formula(data,site,3,true)),site));
     terms.append(el('dt',['a','b','c'][i]),value);
