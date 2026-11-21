@@ -274,7 +274,8 @@
           const callee=owner.data.kind[head]===4 && edition.declarations.find(d=>d.name===name);
           const headRoute={root:part.route.root,slots:part.route.slots.concat(Array(part.call.arity).fill(0))};
           const bound=owner.data.kind[head]===0 && A.binding(owner.data,headRoute);
-          if(callee || bound){
+          const signature=!callee && owner.data.kind[head]===4 && roles.importedSignature(window.PROOF_ATLAS_TYPE_NOTATION,edition.id,name,window.PROOF_ATLAS_AI_SAMPLE?.provenance.compiler);
+          if(callee || bound || signature){
            const show=el('button','Show declared parameters'),status=el('p');
            show.type='button';status.setAttribute('role','status');display.append(show,status);
            show.onclick=async()=>{
@@ -282,16 +283,22 @@
             try{
              const source=callee && callee.name!==owner.record.name ? await A.open(callee) : owner;
              if(!list.isConnected)return;
-             const typeRoute=callee?{root:0,slots:[]}:{root:bound.route.root,slots:bound.route.slots.concat(0)};
-             const params=roles.formalParameters(source.data,typeRoute,part.call.arity);
+             const typeRoute=(callee || signature)?{root:0,slots:[]}:{root:bound.route.root,slots:bound.route.slots.concat(0)};
+             const params=roles.formalParameters(signature?signature.graph:source.data,typeRoute,part.call.arity);
              let shown=0;
              part.branches.forEach((b,j)=>{
               const f=params[b.slot-1];
               if(!f)return;
               const text=(f.name || '_')+' · '+(f.info==='default'?'explicit':f.info);
-              list.children[j].append(' ',link(text,url(source.record.name,f.node,f.route)));shown++;
+              if(signature){
+               const details=el('details'),domain=signature.graph.children[f.node][0];
+               details.append(el('summary',text),el('p',name+' · signature binder e'+f.node+' · domain e'+domain),
+                el('pre',A.termLines(signature.graph,domain).join('\n')),el('p','Signature SHA-256 '+signature.signatureSha256));
+               list.children[j].append(details);
+              }else list.children[j].append(' ',link(text,url(source.record.name,f.node,f.route)));
+              shown++;
              });
-             status.textContent=shown?'Parameter links open their binders in the declared type.':'The declared type exposes no parameter at these positions.';
+             status.textContent=shown?(signature?'Parameter details show the recorded imported signature and its domain.':'Parameter links open their binders in the declared type.'):'The declared type exposes no parameter at these positions.';
             }catch(error){show.disabled=false;status.textContent='Could not read the declared type. Select again to retry.';}
            };
           }

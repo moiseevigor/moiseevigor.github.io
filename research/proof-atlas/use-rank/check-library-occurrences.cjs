@@ -179,6 +179,17 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
    const riccati=window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id==='published-15').declarations.find(r=>r.name==='JacobiData.slope_bound_abs');
    const body=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+riccati.indexFile)));
    const published=window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id==='published-15');
+   const range=published.declarations.find(d=>d.name==='CrossingData.branch_range');
+   const rangeData=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+range.indexFile)));
+   const rangeNode=atlas.walk(rangeData,{root:1,slots:[1]});
+   await page.goto('http://localhost/projects/proof-atlas/library/?edition=published-15&proof='+range.name+'&route=1:1#expr-'+rangeNode);
+   await page.getByText('Where this input is used',{exact:true}).click();
+   const branchRow=page.getByRole('link',{name:'CrossingData.branch · argument 2 / 3',exact:true}).locator('..');
+   await branchRow.getByText('Explore proof branches',{exact:true}).click();
+   await branchRow.getByRole('button',{name:'Show declared parameters'}).click();
+   await branchRow.getByText('a · explicit',{exact:true}).click();
+   await branchRow.getByText(/^And · signature binder e2/).waitFor();
+   assert((await branchRow.innerText()).includes('Signature SHA-256 '));
    const injection=published.declarations.find(d=>d.name==='CrossingData.mk.inj');
    const caller=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+injection.indexFile)));
    await page.goto('http://localhost/projects/proof-atlas/library/?edition=published-15&proof='+injection.name+'&route=1:#expr-'+caller.roots[1]);

@@ -155,6 +155,12 @@
   }
   return parameters;
  }
- const api={addOffset,select,constantArgumentIndex,partition,formalParameters};
+ // Names present in the Lean-only 4.33.1 signature export.
+ const coreNames=new Set('Eq HEq And Or Iff Not LE.le LT.lt HAdd.hAdd HMul.hMul HSub.hSub HDiv.hDiv HMod.hMod HPow.hPow Sub.sub Neg.neg OfNat.ofNat Nat.cast Int.cast Exists'.split(' '));
+ function importedSignature(catalog,edition,name,compiler){
+  if(!catalog || (edition!=='published-15' && (edition!=='goedel-sample-4331' || !coreNames.has(name) || compiler!==catalog.compiler)))return null;
+  return catalog.entries.find(e=>e.name===name && e.kernelSignature==='PASS') || null;
+ }
+ const api={addOffset,select,constantArgumentIndex,partition,formalParameters,importedSignature};
  if(typeof module!=='undefined'&&module.exports)module.exports=api;else host.ProofAtlasRoleOccurrences=api;
 })(typeof window==='undefined'?globalThis:window);

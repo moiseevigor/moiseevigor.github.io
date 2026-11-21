@@ -15,8 +15,12 @@ vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/goedel-sample-manife
 const published=process.argv.includes('--published');
 if (published) vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/library-manifest.js','utf8'),{window});
 const edition=published ? window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id==='published-15') : window.PROOF_ATLAS_AI_SAMPLE.edition;
-const formalCache=new Map();
-const splitStats={groups:0,twoChildren:0,threeChildren:0,nineTenthsInOneChild:0,applicationSplits:0,threeOrMoreOccupiedPorts:0,maxOccupiedPorts:0,occupiedArguments:0,formalSlots:0,formalSplits:0,externalConstantArguments:0,otherHeadArguments:0,beyondLiteralPrefix:0};
+vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/type-notation-catalog.js','utf8'),{window});
+const catalog=window.PROOF_ATLAS_TYPE_NOTATION;
+const native=JSON.parse(zlib.gunzipSync(fs.readFileSync('research/proof-atlas/type-notation/native.json.gz')));
+assert.deepEqual(catalog.entries.filter(e=>roles.importedSignature(catalog,'goedel-sample-4331',e.name,catalog.compiler)).map(e=>e.name).sort().join('|'),native.signatures.map(s=>s.name).sort().join('|'));
+const formalCache=new Map(),missingSignatures=new Map();
+const splitStats={groups:0,twoChildren:0,threeChildren:0,nineTenthsInOneChild:0,applicationSplits:0,threeOrMoreOccupiedPorts:0,maxOccupiedPorts:0,occupiedArguments:0,formalSlots:0,formalSplits:0,importedSlots:0,externalConstantArguments:0,otherHeadArguments:0,beyondLiteralPrefix:0};
 function audit(record) {
   const bytes=zlib.gunzipSync(fs.readFileSync('.'+record.indexFile));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),record.indexSha256);
@@ -143,6 +147,7 @@ function audit(record) {
         splitStats.maxOccupiedPorts=Math.max(splitStats.maxOccupiedPorts,flat.branches.length);
         const head=flat.call.head;
         const callee=data.kind[head]===4 && edition.declarations.find(d=>d.name===data.payloads[head].name);
+        const imported=!callee && data.kind[head]===4 && roles.importedSignature(catalog,edition.id,data.payloads[head].name,window.PROOF_ATLAS_AI_SAMPLE.provenance.compiler);
         let params=[],formalData;
         if(callee){
           if(!formalCache.has(callee.indexSha256)){
@@ -151,6 +156,9 @@ function audit(record) {
             formalCache.set(callee.indexSha256,A.validateIndex(JSON.parse(bytes),callee));
           }
           formalData=formalCache.get(callee.indexSha256);
+          params=roles.formalParameters(formalData,{root:0,slots:[]},flat.call.arity);
+        }else if(imported){
+          formalData=imported.graph;
           params=roles.formalParameters(formalData,{root:0,slots:[]},flat.call.arity);
         }else if(data.kind[head]===0){
           const headRoute=sourceInput(data,{node:flat.call.node,route:flat.route},0).route;
@@ -167,11 +175,21 @@ function audit(record) {
               assert.equal(A.walk(formalData,f.route),f.node);
               assert.equal(formalData.kind[f.node],7);
               splitStats.formalSlots++;hasFormal=true;
+              if(imported){
+                splitStats.importedSlots++;
+                assert.equal(f.name,imported.binders[b.slot-1].name);
+                assert.equal(f.info,imported.binders[b.slot-1].binderInfo);
+                if(process.env.ATLAS_FORMAL_EXAMPLE && !splitStats.importExample)splitStats.importExample={proof:record.name,depth:input.route.slots.length,label,name:imported.name,slot:b.slot,parameter:f.name};
+              }
               if(process.env.ATLAS_FORMAL_EXAMPLE && !splitStats.example && f.name && f.name!=='_'){
-                splitStats.example={proof:record.name,binder:input.name,depth:input.route.slots.length,label,callee:callee?.name??'bound function',slot:b.slot,formal:f};
+                splitStats.example={proof:record.name,binder:input.name,depth:input.route.slots.length,label,callee:callee?.name??imported?.name??'bound function',slot:b.slot,formal:f};
               }
             }else if(formalData)splitStats.beyondLiteralPrefix++;
-            else if(data.kind[head]===4)splitStats.externalConstantArguments++;
+            else if(data.kind[head]===4){
+              splitStats.externalConstantArguments++;
+              const name=data.payloads[head].name;
+              missingSignatures.set(name,(missingSignatures.get(name)||0)+1);
+            }
             else splitStats.otherHeadArguments++;
           }
           assert.equal(b.first,next);assert(b.slot>previous);
@@ -198,7 +216,8 @@ function audit(record) {
 }
 const reports=edition.declarations.filter(r=>r.kind==='theorem').map(audit);
 if(process.argv.includes('--branch-summary')){
-  console.log(JSON.stringify({edition:edition.id,...splitStats}));return;
+  const missing=[...missingSignatures].sort((a,b)=>b[1]-a[1]);
+  console.log(JSON.stringify({edition:edition.id,...splitStats,missingNames:missing.length,mostFrequentMissing:missing.slice(0,5)}));return;
 }
 if (process.argv.includes('--write-packets')) {
   const dir='public/data/proof-atlas/input-roles';
