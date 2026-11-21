@@ -680,20 +680,27 @@
   const transport=candidate?.before.name==='LT.lt' && candidate.after.name==='LT.lt'?candidate:null;
   return {goal,statement,proof,domain,contrary,close,operand:end[2],operandLabel,evidence:end[3],transport};
  }
- function contraryUses(data,order){
+ function bodyReferences(data,body){
   const refs=common?require('./proof-atlas-recursive-inputs'):host.ProofAtlasRecursiveInputs;
-  const calls=common?require('./proof-atlas-omitted-references'):host.ProofAtlasOmittedReferences;
   const budget={maxStates:8192,maxWork:16384,useSupport:true};
-  const count=options=>refs.countReferences(data,order.close.node,0,{...budget,...options});
+  const count=options=>refs.countReferences(data,body.node,0,{...budget,...options});
   const first=count({firstIfPresent:true}),uses=[];
   if(first.status!=='counted')return {uses,limited:true};
-  const total=BigInt(first.occurrences),binder=order.close.route.slots.slice(0,-1);
+  const total=BigInt(first.occurrences),binder=body.route.slots.slice(0,-1);
   for(let rank=1n;rank<=total && rank<=8n;rank++){
    const result=rank===1n?first:count({ordinal:rank});
    if(!result.witness)break;
-   const site={node:result.witness.node,route:{root:1,slots:order.close.route.slots.concat(result.witness.slots)}};
+   const site={node:result.witness.node,route:{root:body.route.root,slots:body.route.slots.concat(result.witness.slots)}};
    const binding=A.binding(data,site.route);
    if(!binding || String(binding.route.slots)!==String(binder))throw Error('Contrary assumption scope mismatch');
+   uses.push(site);
+  }
+  return {uses,total:String(total),limited:BigInt(uses.length)<total};
+ }
+ function contraryUses(data,order){
+  const calls=common?require('./proof-atlas-omitted-references'):host.ProofAtlasOmittedReferences;
+  const references=bodyReferences(data,order.close);
+  const uses=references.uses.map(site=>{
    const chain=[],boundary=order.evidence.route.slots;
    let cursor=site;
    while(chain.length<32 && cursor.route.slots.length>boundary.length &&
@@ -703,9 +710,9 @@
     chain.push(c);cursor=c.call;
    }
    const reached=cursor.node===order.evidence.node && String(cursor.route.slots)===String(boundary);
-   uses.push({site,first:chain[0],next:chain[1],chain,reached});
-  }
-  return {uses,total:String(total),limited:BigInt(uses.length)<total};
+   return {site,first:chain[0],next:chain[1],chain,reached};
+  });
+  return {...references,uses};
  }
  // Paths meet where distinct argument positions reach the same call occurrence.
  function contraryJoins(uses){
@@ -770,6 +777,27 @@
     link(label(t.before[c.side],c.from),c.from),c.path.length?' with ':' to ',link(label(t.after[c.side],c.to),c.to),
     '. ',link(t.reverse?'Operand equality (used in reverse)':'Operand equality',c.certificate),' · ',link('Function applied to both sides',c.context));
    return p;
+  }
+  const negation=namedArguments(data,at,'Not.intro',2);
+  if(negation && data.kind[negation[1].node]===6 && data.children[negation[1].node][0]===negation[0].node){
+   const binder=negation[1],body={node:data.children[binder.node][1],route:{root:binder.route.root,slots:binder.route.slots.concat(1)}};
+   const panel=el('section'),line=el('p'),details=el('details'),references=el('div');
+   panel.dataset.negationScope='';
+   const proposition=formula(data,negation[0],3,true);
+   line.append('Assume ',link(proposition?caption(proposition):'this proposition',negation[0]),' inside ',link('this proof body',body),'.');
+   details.append(el('summary','Uses of this assumption'),references);
+   details.ontoggle=()=>{
+    if(!details.open || references.childNodes.length)return;
+    const result=bodyReferences(data,body);
+    if(result.total===undefined){references.textContent='Reference count unavailable within the traversal limit.';return;}
+    if(result.total==='0'){references.textContent='The compiled body contains no reference to this assumption.';return;}
+    references.append(el('p',result.total+' compiled reference'+(result.total==='1'?'':'s')));
+    const list=el('ol');
+    result.uses.forEach((site,i)=>{const li=el('li');li.append(link('Reference '+(i+1),site));list.append(li);});
+    references.append(list);
+    if(result.limited)references.append('Only the available reference links are shown.');
+   };
+   panel.append(el('h4','Proof of negation'),line,link('Introducing lambda',binder),details);container.append(panel);
   }
   if(data.kind[at.node]===0){
    const binding=boundPremise(data,at),origin=binding && statementOrigin(data,binding);

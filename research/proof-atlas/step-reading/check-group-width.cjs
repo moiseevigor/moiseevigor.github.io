@@ -260,6 +260,30 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
         const selected=window.ProofAtlasLibrary?.getSnapshot();
         return selected?.selected===7666 && selected.route.root===1 && selected.route.slots.join('.')==='1.1.1.1.1.1.1.1.1.1.1';
       });
+      for(const [proof,node,depth,encoded,count] of [
+        ['lean_workbook_4274',1435,10,'VaoE',0],['lean_workbook_plus_6206',77683,15,'VZVWEQ',3]
+      ]){
+        const bytes=packed.parse({format:'ProofAtlasPackedRoute/1',root:1,depth,slots:encoded});
+        const slots=Array.from({length:depth},(_,i)=>(bytes[i>>2]>>((i%4)*2))&3);
+        const negationURL=new URL(joinURL);
+        negationURL.searchParams.set('proof',proof);
+        negationURL.searchParams.set('route','1:'+slots.join('.'));
+        negationURL.hash='expr-'+node;
+        await page.goto(negationURL.href);
+        const panel=page.locator('[data-negation-scope]');
+        await panel.locator('summary').click();
+        const detail=panel.locator('details');
+        await detail.getByText(count?'3 compiled references':'The compiled body contains no reference to this assumption.',{exact:true}).waitFor();
+        assert.equal(await detail.getByRole('link').count(),count);
+        if(count){
+          const last=detail.getByRole('link').last(),dest=new URL(await last.getAttribute('href'),url);
+          await last.click();
+          await page.waitForFunction(expected=>{
+            const s=window.ProofAtlasLibrary?.getSnapshot();
+            return s?.selected===22 && '1:'+s.route.slots.join('.')===expected;
+          },dest.searchParams.get('route'));
+        }
+      }
       await page.close();
     }
     console.log('Verified complete and paged Riccati and AI premise selections at 360 and 1280 pixels.');
