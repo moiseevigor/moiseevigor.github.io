@@ -1,6 +1,6 @@
 // Synthetic expression DAG: both arguments of each pair reuse the same child row.
 const assert=require('node:assert/strict');
-const {constantArgumentIndex}=require('../../../public/js/proof-atlas-role-occurrences');
+const {constantArgumentIndex,partition}=require('../../../public/js/proof-atlas-role-occurrences');
 const data={kind:[],children:[],payloads:[],neededScope:[]};
 function row(kind,children,payload={},scope=0){
  const id=data.kind.length;
@@ -19,6 +19,12 @@ for(const ordinal of [1n,2n**53n,2n**53n+1n,2n**63n+1n,index.total]){
  for(const bit of (ordinal-1n).toString(2).padStart(64,'0'))expected.push(...(bit==='0'?[0,1]:[1]));
  expected.push(1);
  assert.deepEqual(index.occurrence(ordinal),{node:x,route:{root:1,slots:expected}});
+}
+let lo=1n,hi=index.total;
+for(let level=0;level<64;level++){
+ const cut=partition(index.occurrence,lo,hi),mid=(lo+hi)/2n;
+ assert.deepEqual(cut.branches,[{slot:0,first:lo,last:mid},{slot:1,first:mid+1n,last:hi}]);
+ lo=mid+1n;
 }
 assert.throws(()=>index.occurrence(index.total+1n),RangeError);
 console.log(data.kind.length+' rows, '+index.total+' occurrences, '+index.states+' count states, '+index.spines+' cached spines');

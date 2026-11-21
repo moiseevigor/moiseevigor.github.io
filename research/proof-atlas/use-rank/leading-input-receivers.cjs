@@ -15,6 +15,7 @@ vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/goedel-sample-manife
 const published=process.argv.includes('--published');
 if (published) vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/library-manifest.js','utf8'),{window});
 const edition=published ? window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id==='published-15') : window.PROOF_ATLAS_AI_SAMPLE.edition;
+const splitStats={groups:0,twoChildren:0,threeChildren:0,nineTenthsInOneChild:0};
 function audit(record) {
   const bytes=zlib.gunzipSync(fs.readFileSync('.'+record.indexFile));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),record.indexSha256);
@@ -118,6 +119,26 @@ function audit(record) {
         assert.equal(label,kind+' · '+A.fields[kind][slots.at(-1)]);
       }
     }
+    if(g.count>1 && process.argv.includes('--branch-summary')){
+      const at=n=>index?index.occurrence(n):roles.select(data,g,Number(n));
+      const part=roles.partition(at,1n,BigInt(g.count));
+      assert([2,3].includes(part.branches.length));
+      let next=1n,largest=0n;
+      for(const branch of part.branches){
+        assert.equal(branch.first,next);
+        for(const n of [branch.first,branch.last]){
+          const hit=roles.select(data,g,Number(n));
+          assert.deepEqual(hit.route.slots.slice(0,part.route.slots.length+1),part.route.slots.concat(branch.slot));
+        }
+        const size=branch.last-branch.first+1n;
+        if(largest<size)largest=size;
+        next=branch.last+1n;
+      }
+      assert.equal(next,BigInt(g.count)+1n);
+      splitStats.groups++;
+      if(part.branches.length===2)splitStats.twoChildren++;else splitStats.threeChildren++;
+      if(10n*largest>=9n*BigInt(g.count))splitStats.nineTenthsInOneChild++;
+    }
     delete g.bytes;
   }
   const total=inputs.reduce((n,i)=>n+i.count,0);
@@ -125,6 +146,9 @@ function audit(record) {
   return {record,inputs,total};
 }
 const reports=edition.declarations.filter(r=>r.kind==='theorem').map(audit);
+if(process.argv.includes('--branch-summary')){
+  console.log(JSON.stringify({edition:edition.id,...splitStats}));return;
+}
 if (process.argv.includes('--write-packets')) {
   const dir='public/data/proof-atlas/input-roles';
   fs.mkdirSync(dir,{recursive:true});

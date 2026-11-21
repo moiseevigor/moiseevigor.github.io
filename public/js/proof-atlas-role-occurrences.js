@@ -96,6 +96,26 @@
   }
   return {total,occurrence,states:memo.size,spines:spines.size};
  }
- const api={addOffset,select,constantArgumentIndex};
+ // Source-order routes form contiguous intervals beneath each child.
+ function partition(at,first,last){
+  if(typeof first!=='bigint'||typeof last!=='bigint'||first<1n||first>=last)throw RangeError('Expected multiple uses');
+  const start=at(first).route,end=at(last).route;
+  let depth=0;
+  while(depth<start.slots.length && start.slots[depth]===end.slots[depth])depth++;
+  if(start.root!==end.root || depth>=Math.min(start.slots.length,end.slots.length))throw Error('Invalid use interval');
+  const route={root:start.root,slots:start.slots.slice(0,depth)},branches=[];
+  let left=first;
+  while(left<=last){
+   const slot=at(left).route.slots[depth];
+   let low=left,high=last+1n;
+   while(low+1n<high){
+    const mid=(low+high)/2n;
+    if(at(mid).route.slots[depth]===slot)low=mid;else high=mid;
+   }
+   branches.push({slot,first:left,last:low});left=low+1n;
+  }
+  return {route,branches};
+ }
+ const api={addOffset,select,constantArgumentIndex,partition};
  if(typeof module!=='undefined'&&module.exports)module.exports=api;else host.ProofAtlasRoleOccurrences=api;
 })(typeof window==='undefined'?globalThis:window);

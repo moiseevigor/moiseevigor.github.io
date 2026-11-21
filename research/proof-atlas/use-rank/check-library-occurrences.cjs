@@ -94,6 +94,30 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
     const roleIndex=require('../../../public/js/proof-atlas-role-occurrences').constantArgumentIndex(source,
      {node:entry.node,route:{root:1,slots:Array(entry.depth).fill(1)}},first.role);
     const last=roleIndex.occurrence(BigInt(first.count));
+    const branchTitle=firstRow.getByText('Explore proof branches',{exact:true});
+    await branchTitle.click();
+    const branchPanel=branchTitle.locator('..'),meters=branchPanel.locator('meter');
+    await meters.first().waitFor();
+    const sizes=await meters.evaluateAll(ms=>ms.map(m=>m.value));
+    assert(sizes.length>1);
+    assert.equal(sizes.reduce((a,b)=>a+b,0),first.count);
+    const rootLink=branchPanel.getByRole('link').first();
+    const parentRoute=new URL(await rootLink.evaluate(a=>a.href)).searchParams.get('route').slice(2);
+    const branchPrefix=parentRoute?parentRoute.split('.').map(Number):[];
+    let start=1n;
+    for(const [j,size] of sizes.entries()){
+     const child=branchPanel.locator('li').nth(j).getByRole('link').first();
+     const u=new URL(await child.evaluate(a=>a.href)),slots=u.searchParams.get('route').slice(2).split('.').map(Number);
+     assert.deepEqual(slots.slice(0,-1),branchPrefix);
+     assert.equal(u.hash,'#expr-'+atlas.walk(source,{root:1,slots}));
+     for(const n of [start,start+BigInt(size)-1n])
+      assert.deepEqual(roleIndex.occurrence(n).route.slots.slice(0,slots.length),slots);
+     start+=BigInt(size);
+    }
+    await branchPanel.getByRole('button',{name:/^Explore /}).first().click();
+    await branchPanel.getByRole('button',{name:'Previous branch'}).click();
+    assert.deepEqual(await meters.evaluateAll(ms=>ms.map(m=>m.value)),sizes);
+    await branchTitle.click();
     assert.notEqual(last.route.slots.join('.'),first.slots);
     await firstRow.getByRole('button',{name:'Open use',exact:true}).click();
     await page.waitForFunction(r=>new URL(location.href).searchParams.get('route')===r,'1:'+last.route.slots.join('.'));

@@ -229,23 +229,54 @@
         const more=el('details'),form=el('form'),label=el('label','Use number '),input=el('input'),go=el('button','Open use');
         input.type='number';input.min='1';input.max=String(group.count);input.required=true;input.value='1';
         label.append(input);go.type='submit';form.append(label,' ',go);
+        const roles=window.ProofAtlasRoleOccurrences;
+        let index;
+        function useAt(ordinal){
+         if(!group.role)return roles.select(owner.data,group,Number(ordinal));
+         index??=roles.constantArgumentIndex(owner.data,{node:i,route:nextRoute},group.role);
+         if(index.total!==BigInt(group.count))throw Error('Role count mismatch');
+         return index.occurrence(ordinal);
+        }
         form.onsubmit=event=>{
          event.preventDefault();
          if(!form.reportValidity())return;
          safely((async()=>{
-          const roles=window.ProofAtlasRoleOccurrences;
-          let hit;
-          if(group.role){
-           const index=roles.constantArgumentIndex(owner.data,{node:i,route:nextRoute},group.role);
-           if(index.total!==BigInt(group.count))throw Error('Role count mismatch');
-           hit=index.occurrence(BigInt(input.valueAsNumber));
-          }else hit=roles.select(owner.data,group,input.valueAsNumber);
+          const hit=useAt(BigInt(input.valueAsNumber));
           const binder=A.binding(owner.data,hit.route);
           if(binder?.node!==i || binder.route.slots.join('.')!==nextRoute.slots.join('.'))throw Error('Use belongs to a different binder');
           await selectOccurrence(hit.node,true,true,hit.route);
          })());
         };
         more.append(el('summary','Choose a use'),form);row.append(more);
+        const geometry=el('details'),display=el('div'),history=[];
+        geometry.append(el('summary','Explore proof branches'),display);row.append(geometry);
+        function drawBranches(first,last){
+         const part=roles.partition(useAt,first,last),parent=A.walk(owner.data,part.route);
+         const kind=A.kinds[owner.data.kind[parent]],list=el('ul');
+         display.replaceChildren(link(kind+' · subtree #'+parent,url(owner.record.name,parent,part.route)),list);
+         for(const branch of part.branches){
+          const size=branch.last-branch.first+1n,childRoute={root:part.route.root,slots:part.route.slots.concat(branch.slot)};
+          const child=A.walk(owner.data,childRoute),item=el('li'),meter=el('meter');
+          const field=A.fields[kind][branch.slot];
+          meter.max=Number(last-first+1n);meter.value=Number(size);meter.setAttribute('aria-label',field+' share of uses');
+          item.append(link(field,url(owner.record.name,child,childRoute)),' ',meter,' '+number(size)+' of '+number(last-first+1n)+' ');
+          if(size>1n){
+           const zoom=el('button','Explore '+field);zoom.type='button';
+           zoom.onclick=()=>{history.push([first,last]);drawBranches(branch.first,branch.last);display.querySelector('a').focus();};item.append(zoom);
+          }else{
+           const hit=useAt(branch.first);item.append(link('Open use '+number(branch.first),url(owner.record.name,hit.node,hit.route)));
+          }
+          list.append(item);
+         }
+         if(history.length){
+          const back=el('button','Previous branch');back.type='button';
+          back.onclick=()=>{drawBranches(...history.pop());display.querySelector('a').focus();};display.append(back);
+         }
+        }
+        geometry.ontoggle=()=>{
+         if(geometry.open && !display.children.length)drawBranches(1n,BigInt(group.count));
+         if(!geometry.open){history.length=0;display.replaceChildren();index=null;}
+        };
        }
        list.append(row);
       }
