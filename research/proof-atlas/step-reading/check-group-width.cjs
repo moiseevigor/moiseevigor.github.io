@@ -178,6 +178,20 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
         const s=window.ProofAtlasOccurrenceView.getSnapshot();
         return s.route.depth===19 && s.route.slots==='VZVaABA';
       });
+      const positivity=new URL(url);
+      positivity.searchParams.set('edition','goedel-sample-4331');
+      positivity.searchParams.set('proof','lean_workbook_3485');
+      const callSlots=[1,1,1,1,1,1],location=packed.encode(1,callSlots);
+      positivity.hash='occurrence=bd496000a8da7ce06393d1cdd66b86c1a76aa6004c6eca19c36e083a3082948c.1.6.'+location.slots;
+      await page.goto(positivity.href);
+      for(const [index,mode,statement] of [[6,'instance implicit','PosMulStrictMono ℝ'],[7,'explicit','0 < a'],[8,'explicit','0 < b']]){
+        const port=ports.filter({hasText:new RegExp('^Argument '+index+' ·')});
+        assert((await port.textContent()).includes(' · '+mode+' · proof'));
+        assert.equal(await port.locator('[data-proof-input-statement]').textContent(),statement);
+        await port.click();
+        const selected=await page.evaluate(()=>window.ProofAtlasOccurrenceView.getSnapshot().route);
+        assert.deepEqual(selected,packed.encode(1,[...callSlots,...Array(8-index).fill(0),1]));
+      }
       await page.close();
     }
     console.log('Verified complete and paged Riccati and AI premise selections at 360 and 1280 pixels.');
