@@ -15,7 +15,7 @@ vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/goedel-sample-manife
 const published=process.argv.includes('--published');
 if (published) vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/library-manifest.js','utf8'),{window});
 const edition=published ? window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id==='published-15') : window.PROOF_ATLAS_AI_SAMPLE.edition;
-const splitStats={groups:0,twoChildren:0,threeChildren:0,nineTenthsInOneChild:0};
+const splitStats={groups:0,twoChildren:0,threeChildren:0,nineTenthsInOneChild:0,applicationSplits:0,threeOrMoreOccupiedPorts:0,maxOccupiedPorts:0};
 function audit(record) {
   const bytes=zlib.gunzipSync(fs.readFileSync('.'+record.indexFile));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),record.indexSha256);
@@ -135,6 +135,24 @@ function audit(record) {
         next=branch.last+1n;
       }
       assert.equal(next,BigInt(g.count)+1n);
+      const flat=roles.partition(at,1n,BigInt(g.count),data);
+      if(flat.call){
+        splitStats.applicationSplits++;
+        if(flat.branches.length>=3)splitStats.threeOrMoreOccupiedPorts++;
+        splitStats.maxOccupiedPorts=Math.max(splitStats.maxOccupiedPorts,flat.branches.length);
+        let next=1n,previous=-1;
+        for(const b of flat.branches){
+          assert.equal(b.first,next);assert(b.slot>previous);
+          previous=b.slot;next=b.last+1n;
+          const operand=sourceInput(data,{node:flat.call.node,route:flat.route},b.slot);
+          assert.deepEqual(b.route,operand.route);
+          for(const n of [b.first,b.last]){
+            const path=roles.select(data,g,Number(n)).route.slots;
+            assert.deepEqual(path.slice(0,operand.route.slots.length),operand.route.slots);
+          }
+        }
+        assert.equal(next,BigInt(g.count)+1n);
+      }
       splitStats.groups++;
       if(part.branches.length===2)splitStats.twoChildren++;else splitStats.threeChildren++;
       if(10n*largest>=9n*BigInt(g.count))splitStats.nineTenthsInOneChild++;

@@ -97,24 +97,49 @@
   return {total,occurrence,states:memo.size,spines:spines.size};
  }
  // Source-order routes form contiguous intervals beneath each child.
- function partition(at,first,last){
+ function partition(at,first,last,data){
   if(typeof first!=='bigint'||typeof last!=='bigint'||first<1n||first>=last)throw RangeError('Expected multiple uses');
   const start=at(first).route,end=at(last).route;
   let depth=0;
   while(depth<start.slots.length && start.slots[depth]===end.slots[depth])depth++;
   if(start.root!==end.root || depth>=Math.min(start.slots.length,end.slots.length))throw Error('Invalid use interval');
   const route={root:start.root,slots:start.slots.slice(0,depth)},branches=[];
+  let port=slots=>slots[depth],call;
+  if(data){
+   const local=typeof module!=='undefined'&&module.exports;
+   const A=local?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData;
+   const E=local?require('./proof-atlas-elimination'):host.ProofAtlasElimination;
+   const path=[data.roots[start.root]];
+   for(const field of route.slots)path.push(data.children[path.at(-1)][field]);
+   if(data.kind[path.at(-1)]===5){
+    while(depth>0 && route.slots.at(-1)===0 && data.kind[path[depth-1]]===5){
+     route.slots.pop();path.pop();depth--;
+    }
+    const node=path.at(-1),{head,args}=E.spine(data,node),arity=args.length;
+    call={node,head,arity};
+    port=slots=>{
+     let zeros=0;
+     while(zeros<arity && slots[depth+zeros]===0)zeros++;
+     return arity-zeros;
+    };
+   }
+  }
   let left=first;
   while(left<=last){
-   const slot=at(left).route.slots[depth];
+   const witness=at(left).route.slots,slot=port(witness);
    let low=left,high=last+1n;
    while(low+1n<high){
     const mid=(low+high)/2n;
-    if(at(mid).route.slots[depth]===slot)low=mid;else high=mid;
+    if(port(at(mid).route.slots)===slot)low=mid;else high=mid;
    }
-   branches.push({slot,first:left,last:low});left=low+1n;
+   const branch={slot,first:left,last:low};
+   if(call){
+    const length=call.arity-slot+Number(slot>0);
+    branch.route={root:start.root,slots:witness.slice(0,depth+length)};
+   }
+   branches.push(branch);left=low+1n;
   }
-  return {route,branches};
+  return {route,branches,...(call?{call}:{})};
  }
  const api={addOffset,select,constantArgumentIndex,partition};
  if(typeof module!=='undefined'&&module.exports)module.exports=api;else host.ProofAtlasRoleOccurrences=api;

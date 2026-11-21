@@ -67,6 +67,22 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
     const packet=JSON.parse(fs.readFileSync('public/data/proof-atlas/input-roles/'+record.indexSha256+'.json'));
     return packet.entries.map(entry=>({entry,record}));
    });
+   const congr=inputs.find(x=>x.record.name==='lean_workbook_3485' && x.entry.depth===0);
+   await page.goto('http://localhost/projects/proof-atlas/library/?edition='+aiEdition.id+'&proof='+congr.record.name+'&route=1:#expr-'+congr.entry.node);
+   await page.getByText('Where this input is used',{exact:true}).click();
+   const power=page.getByRole('link',{name:'HPow.hPow · argument 5 / 6',exact:true}).locator('..');
+   await power.getByText('Explore proof branches',{exact:true}).click();
+   const call=power.getByRole('link',{name:/Mathlib.Tactic.Ring.Common.add_congr · subtree/});
+   const callUrl=new URL(await call.evaluate(a=>a.href));
+   const compiledCall={node:Number(callUrl.hash.slice(6)),route:{root:1,slots:callUrl.searchParams.get('route').slice(2).split('.').map(Number)}};
+   const congrData=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+congr.record.indexFile)));
+   assert.deepEqual(await power.locator('meter').evaluateAll(ms=>ms.map(m=>m.value)),[1,1,371,46,2]);
+   for(const slot of [4,6,8,9,10]){
+    const source=require('../../../public/js/proof-atlas-application-ports').sourceInput(congrData,compiledCall,slot);
+    const operand=power.getByRole('link',{name:'Argument '+slot+' of 10',exact:true});
+    const u=new URL(await operand.evaluate(a=>a.href));
+    assert.equal(u.hash,'#expr-'+source.node);assert.equal(u.searchParams.get('route'),'1:'+source.route.slots.join('.'));
+   }
    for(const {entry,record} of [inputs.find(x=>x.entry.count===90194),inputs.find(x=>!x.entry.count)]){
     const prefix=Array(entry.depth).fill(1).join('.');
     const path='http://localhost/projects/proof-atlas/library/?edition='+aiEdition.id+'&proof='+record.name;

@@ -251,13 +251,15 @@
         const geometry=el('details'),display=el('div'),history=[];
         geometry.append(el('summary','Explore proof branches'),display);row.append(geometry);
         function drawBranches(first,last){
-         const part=roles.partition(useAt,first,last),parent=A.walk(owner.data,part.route);
+         const part=roles.partition(useAt,first,last,owner.data),parent=A.walk(owner.data,part.route);
          const kind=A.kinds[owner.data.kind[parent]],list=el('ul');
-         display.replaceChildren(link(kind+' · subtree #'+parent,url(owner.record.name,parent,part.route)),list);
+         const head=part.call?.head;
+         const name=head===undefined?kind:owner.data.kind[head]===4?owner.data.payloads[head].name:A.kinds[owner.data.kind[head]]+' function';
+         display.replaceChildren(link(name+' · subtree #'+parent,url(owner.record.name,parent,part.route)),list);
          for(const branch of part.branches){
-          const size=branch.last-branch.first+1n,childRoute={root:part.route.root,slots:part.route.slots.concat(branch.slot)};
+          const size=branch.last-branch.first+1n,childRoute=branch.route || {root:part.route.root,slots:part.route.slots.concat(branch.slot)};
           const child=A.walk(owner.data,childRoute),item=el('li'),meter=el('meter');
-          const field=A.fields[kind][branch.slot];
+          const field=part.call?(branch.slot===0?'Function':'Argument '+branch.slot+' of '+part.call.arity):A.fields[kind][branch.slot];
           meter.max=Number(last-first+1n);meter.value=Number(size);meter.setAttribute('aria-label',field+' share of uses');
           item.append(link(field,url(owner.record.name,child,childRoute)),' ',meter,' '+number(size)+' of '+number(last-first+1n)+' ');
           if(size>1n){
