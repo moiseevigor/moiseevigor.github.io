@@ -197,6 +197,27 @@
   if(!before || !after)return null;
   return {before,after,equality:cast[2],premise:cast[3],reverse,change:rewriteSide(data,cast,before,after,reverse)};
  }
+ // Operand positions and premise order follow Mathlib.Tactic.Linarith.Lemmas.
+ const arithmeticRules={
+  lt_of_lt_of_eq:[7,'a < 0','b = 0','a + b < 0'],
+  lt_of_eq_of_lt:[7,'a = 0','b < 0','a + b < 0'],
+  add_neg:[8,'a < 0','b < 0','a + b < 0'],
+  add_lt_of_le_of_neg:[9,'b ≤ c','a < 0','b + a < c'],
+  add_lt_of_neg_of_le:[9,'a < 0','b ≤ c','a + b < c'],
+  mul_neg:[8,'a < 0','0 < b','b × a < 0'],
+  mul_nonpos:[8,'a ≤ 0','0 < b','b × a ≤ 0']
+ };
+ function arithmeticInference(data,at){
+  let head=at.node,arity=0;
+  while(data.kind[head]===5 && arity<10){head=data.children[head][0];arity++;}
+  if(data.kind[head]!==4)return null;
+  const name=data.payloads[head].name,prefix='Mathlib.Tactic.Linarith.';
+  if(!name.startsWith(prefix))return null;
+  const rule=arithmeticRules[name.slice(prefix.length)];
+  if(!Array.isArray(rule)||arity!==rule[0])return null;
+  const args=namedArguments(data,at,name,arity),count=arity===9?3:2;
+  return {name,terms:args.slice(-2-count,-2),proofs:args.slice(-2),premises:rule.slice(1,3),conclusion:rule[3]};
+ }
  function equalityChain(data,at,expected){
   const args=namedArguments(data,at,'Eq.trans',6);
   if(!args)return null;
@@ -282,6 +303,18 @@
   }
   const selected=formulaTransport(data,at);
   const chainAt=selected?.change?selected.premise:at;
+  const inference=arithmeticInference(data,chainAt);
+  if(inference){
+   const panel=el('section'),inputs=el('p'),terms=el('dl');
+   panel.dataset.arithmeticInference='';
+   panel.append(el('h4',selected?.change?'Arithmetic before the rewrite':'Arithmetic inference'));
+   inputs.append(link(inference.premises[0],inference.proofs[0]),'  and  ',link(inference.premises[1],inference.proofs[1]),'  ⇒  '+inference.conclusion);
+   for(const [i,site] of inference.terms.entries()){
+    const value=el('dd');value.append(link(caption(formula(data,site,3,true)),site));
+    terms.append(el('dt',['a','b','c'][i]),value);
+   }
+   panel.append(inputs,terms);container.append(panel);
+  }
   const chain=equalityChain(data,chainAt,selected?.change?selected.before:null);
   if(chain){
    const panel=el('section'),line=el('p'),proofs=el('p');panel.dataset.equalityChain='';
@@ -487,5 +520,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
+ if(common)module.exports={arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
 })(typeof window==='undefined'?globalThis:window);

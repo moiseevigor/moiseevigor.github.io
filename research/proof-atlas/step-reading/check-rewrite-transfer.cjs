@@ -2,7 +2,7 @@
 const fs=require('node:fs'), z=require('node:zlib'), crypto=require('node:crypto'), assert=require('node:assert/strict');
 const A=require('../../../public/js/proof-atlas-library-data');
 const {spine}=require('../../../public/js/proof-atlas-elimination');
-const {equalityChain,rewriteSequence,formulaTransport}=require('../../../public/js/proof-atlas-arithmetic');
+const {arithmeticInference,equalityChain,rewriteSequence,formulaTransport}=require('../../../public/js/proof-atlas-arithmetic');
 global.window={};
 require('../../../public/data/proof-atlas/library-manifest');
 require('../../../public/data/proof-atlas/goedel-sample-manifest');
@@ -12,7 +12,7 @@ function scan(d){
  assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),d.indexSha256);
  const g=A.validateIndex(JSON.parse(raw),d), root=g.roots[1];
  assert(Number.isInteger(root));
- const examples=[],premises={},chains=[];let nested=0,transitive=0;const lengths={};
+ const examples=[],premises={},chains=[],arithmetic=[];let nested=0,transitive=0;const lengths={};
  const visited=new Set(), stack=[{node:root,parent:null}];
  const counts={mp:0,mpr:0,left:0,right:0,reverseLeft:0,reverseRight:0}, operators={};
  while(stack.length){
@@ -40,6 +40,18 @@ function scan(d){
     const producer=spine(g,t.premise.node);
     const head=g.payloads[producer.head]?.name||'kind '+g.kind[producer.head];
     premises[head]=(premises[head]||0)+1;
+    const inference=arithmeticInference(g,t.premise);
+    if(inference){
+     const sites=[...inference.terms,...inference.proofs];
+     assert.equal(inference.name,head);
+     const partial={node:g.children[t.premise.node][0],route:{root:1,slots:t.premise.route.slots.concat(0)}};
+     assert.equal(arithmeticInference(g,partial),null);
+     sites.forEach((s,i)=>{
+      assert.equal(A.walk(g,s.route),producer.args.at(i-sites.length));
+      assert.deepEqual(s.route.slots,t.premise.route.slots.concat(Array(sites.length-i-1).fill(0),1));
+     });
+     arithmetic.push({proof:d.name,at:{node,route},premise:t.premise,sites:[...inference.proofs,...inference.terms],labels:inference.premises,conclusion:inference.conclusion});
+    }
     const chain=equalityChain(g,t.premise,t.before);
     if(chain){
      assert.equal(head,'Eq.trans');
@@ -114,16 +126,16 @@ function scan(d){
   }
   g.children[node].forEach((child,slot)=>stack.push({node:child,parent:item,slot}));
  }
- return {counts,operators,examples,nested,lengths,premises,chains,transitive};
+ return {counts,operators,examples,nested,lengths,premises,chains,arithmetic,transitive};
 }
 
 for(const edition of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAMPLE.edition]){
  const rows=edition.declarations.filter(d=>d.kind==='theorem'&&d.bodyAvailable);
  const totals={mp:0,mpr:0,left:0,right:0,reverseLeft:0,reverseRight:0},operators={};
- const lengths={},premises={},chains=[];let transitive=0;
+ const lengths={},premises={},chains=[],arithmetic=[];let transitive=0;
  let matchedProofs=0,nested=0,riccati,examples;
  for(const d of rows){
-  const result=scan(d);nested+=result.nested;transitive+=result.transitive;chains.push(...result.chains);
+  const result=scan(d);nested+=result.nested;transitive+=result.transitive;chains.push(...result.chains);arithmetic.push(...result.arithmetic);
   for(const [k,n] of Object.entries(result.premises))premises[k]=(premises[k]||0)+n;
   for(const [k,n] of Object.entries(result.lengths))lengths[k]=(lengths[k]||0)+n;
   for(const [k,n] of Object.entries(result.counts))totals[k]+=n;
@@ -132,6 +144,10 @@ for(const edition of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_
   if(d.name==='JacobiData.slope_bound_abs'){riccati=result.counts;examples=result.examples;}
  }
 
+ if(edition===window.PROOF_ATLAS_AI_SAMPLE.edition){
+  assert.equal(arithmetic.length,46);
+  assert.equal(new Set(arithmetic.map(x=>x.proof)).size,15);
+ }
  if(edition!==window.PROOF_ATLAS_AI_SAMPLE.edition)assert.deepEqual(riccati,{mp:7,mpr:27,left:7,right:0,reverseLeft:2,reverseRight:4});
- console.log(JSON.stringify({edition:edition.id,theorems:rows.length,totals,matchedProofs,nested,lengths,operators,riccati,examples,premises,transitive,joined:chains.length,aiChains:edition===window.PROOF_ATLAS_AI_SAMPLE.edition?chains:undefined}));
+ console.log(JSON.stringify({edition:edition.id,theorems:rows.length,totals,matchedProofs,nested,lengths,operators,riccati,examples,premises,transitive,joined:chains.length,arithmeticInputs:arithmetic.length,aiArithmetic:edition===window.PROOF_ATLAS_AI_SAMPLE.edition?arithmetic:undefined,aiChains:edition===window.PROOF_ATLAS_AI_SAMPLE.edition?chains:undefined}));
 }
