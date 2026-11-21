@@ -1,0 +1,225 @@
+{
+  "edition": "goedel-sample-4331",
+  "rows": [
+    {
+      "name": "lean_workbook_20418",
+      "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+      "nodes": 86587,
+      "queries": 21,
+      "full": 480309,
+      "auxiliary": 103205,
+      "first": 115996,
+      "cached": 257657,
+      "uncached": 594606
+    },
+    {
+      "name": "lean_workbook_3485",
+      "indexSha256": "bd496000a8da7ce06393d1cdd66b86c1a76aa6004c6eca19c36e083a3082948c",
+      "nodes": 2677,
+      "queries": 13,
+      "full": 20869,
+      "auxiliary": 1787,
+      "first": 10118,
+      "cached": 18753,
+      "uncached": 18753
+    },
+    {
+      "name": "lean_workbook_4274",
+      "indexSha256": "4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9",
+      "nodes": 1451,
+      "queries": 11,
+      "full": 12792,
+      "auxiliary": 644,
+      "first": 8720,
+      "cached": 13246,
+      "uncached": 13246
+    },
+    {
+      "name": "lean_workbook_49456",
+      "indexSha256": "66459f55804e8ae09fc9a8615191fba8f5277f1fb0831c1bb132e1bc60552b38",
+      "nodes": 42,
+      "queries": 6,
+      "full": 1171,
+      "auxiliary": 195,
+      "first": 2152,
+      "cached": 2152,
+      "uncached": 2152
+    },
+    {
+      "name": "lean_workbook_56144",
+      "indexSha256": "60ff188d4edd927f72c0393d678f5a9cfb80d344d3ec459aec958443f07dc256",
+      "nodes": 8236,
+      "queries": 9,
+      "full": 50535,
+      "auxiliary": 9529,
+      "first": 17567,
+      "cached": 43991,
+      "uncached": 43991
+    },
+    {
+      "name": "lean_workbook_plus_15068",
+      "indexSha256": "1067dfb81b5b5048f79bec3f2587f702d9ce9570ce29e13a73c4a0ec00d4446c",
+      "nodes": 18255,
+      "queries": 18,
+      "full": 108761,
+      "auxiliary": 14023,
+      "first": 25460,
+      "cached": 69163,
+      "uncached": 69163
+    },
+    {
+      "name": "lean_workbook_plus_16912",
+      "indexSha256": "6c061155ccb98286c7608ad3bfbd316714aea3a1b33817720b3c4b2846c39510",
+      "nodes": 14878,
+      "queries": 21,
+      "full": 86683,
+      "auxiliary": 18062,
+      "first": 27221,
+      "cached": 77514,
+      "uncached": 149789
+    },
+    {
+      "name": "lean_workbook_plus_19617",
+      "indexSha256": "ed55c89677706ba265b60ae2f7a52fef366257c9c36587db49cee038b9b2f9b1",
+      "nodes": 563,
+      "queries": 10,
+      "full": 5811,
+      "auxiliary": 461,
+      "first": 6279,
+      "cached": 8535,
+      "uncached": 8535
+    },
+    {
+      "name": "lean_workbook_plus_39831",
+      "indexSha256": "f596c3ecdbe411dbee9539b59d1010f6a711ff31f1e3eda778e45ac070641f02",
+      "nodes": 3847,
+      "queries": 14,
+      "full": 27097,
+      "auxiliary": 2934,
+      "first": 10168,
+      "cached": 26921,
+      "uncached": 26921
+    },
+    {
+      "name": "lean_workbook_plus_43987",
+      "indexSha256": "159699ca3f1d90ccd733d2a5fe4c0541ae4c785b8cb942333058b16653cef385",
+      "nodes": 204,
+      "queries": 10,
+      "full": 2930,
+      "auxiliary": 355,
+      "first": 4235,
+      "cached": 4235,
+      "uncached": 4235
+    },
+    {
+      "name": "lean_workbook_plus_54159",
+      "indexSha256": "e49aaa58558af0635d5f8128ce9d7c2d718c5fdf495e8af5833457d76c6745b6",
+      "nodes": 6479,
+      "queries": 12,
+      "full": 43881,
+      "auxiliary": 5652,
+      "first": 15141,
+      "cached": 50764,
+      "uncached": 64995
+    },
+    {
+      "name": "lean_workbook_plus_54622",
+      "indexSha256": "0b128b2e4d02870a974f0f00684ea058eded20eed8f15f32e84872e4bca50d73",
+      "nodes": 9838,
+      "queries": 21,
+      "full": 60471,
+      "auxiliary": 11777,
+      "first": 20830,
+      "cached": 51094,
+      "uncached": 51094
+    },
+    {
+      "name": "lean_workbook_plus_61403",
+      "indexSha256": "a52afaeee83e9f155855d77dc8f906f03abf8da6038abde95c7dc6e104568459",
+      "nodes": 2089,
+      "queries": 3,
+      "full": 15185,
+      "auxiliary": 1036,
+      "first": 7253,
+      "cached": 17465,
+      "uncached": 17465
+    },
+    {
+      "name": "lean_workbook_plus_6206",
+      "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+      "nodes": 91424,
+      "queries": 21,
+      "full": 506140,
+      "auxiliary": 109817,
+      "first": 122928,
+      "cached": 262173,
+      "uncached": 573413
+    },
+    {
+      "name": "lean_workbook_plus_62755",
+      "indexSha256": "6ddad1d9f4c6c2be27a802c254e8cff3a33443735e6672ce906fd6466ee7cbe0",
+      "nodes": 2159,
+      "queries": 5,
+      "full": 16606,
+      "auxiliary": 1152,
+      "first": 8817,
+      "cached": 19527,
+      "uncached": 19527
+    },
+    {
+      "name": "lean_workbook_plus_63081",
+      "indexSha256": "e8a13f9af176053ae5b0220fc5a1526de1e937ca2e8972035dcc70ee1da74217",
+      "nodes": 5234,
+      "queries": 9,
+      "full": 32815,
+      "auxiliary": 4766,
+      "first": 12988,
+      "cached": 35718,
+      "uncached": 35718
+    },
+    {
+      "name": "lean_workbook_plus_68077",
+      "indexSha256": "501dba70283e270631eba54e85d5f16c3ca44cfaba068ea4f39a45b550997e62",
+      "nodes": 7678,
+      "queries": 21,
+      "full": 48703,
+      "auxiliary": 10468,
+      "first": 20133,
+      "cached": 52915,
+      "uncached": 52915
+    },
+    {
+      "name": "lean_workbook_plus_68616",
+      "indexSha256": "2f1f6523063a579076448d2a6caa42d496003a1be382692e8747442b1d9aef83",
+      "nodes": 362,
+      "queries": 7,
+      "full": 4558,
+      "auxiliary": 306,
+      "first": 6426,
+      "cached": 6426,
+      "uncached": 6426
+    },
+    {
+      "name": "lean_workbook_plus_68794",
+      "indexSha256": "17a8502769796c60075b569ccf17b5bf99c47c12e6e1771705ae3eb540656f3b",
+      "nodes": 3083,
+      "queries": 9,
+      "full": 21436,
+      "auxiliary": 3018,
+      "first": 9626,
+      "cached": 27846,
+      "uncached": 27846
+    },
+    {
+      "name": "lean_workbook_plus_70240",
+      "indexSha256": "cbc4fcc25f7b3decb12c29ac4d90e9f01671a2bfcce24e948c9af0445a387290",
+      "nodes": 3270,
+      "queries": 9,
+      "full": 23693,
+      "auxiliary": 2772,
+      "first": 13346,
+      "cached": 19627,
+      "uncached": 19627
+    }
+  ]
+}

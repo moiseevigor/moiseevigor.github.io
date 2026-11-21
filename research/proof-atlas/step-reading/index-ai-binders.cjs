@@ -6,8 +6,9 @@ global.window={};
 require('../../../public/data/proof-atlas/goedel-sample-manifest');
 require('../../../public/data/proof-atlas/source-pages-manifest');
 const edition=window.PROOF_ATLAS_AI_SAMPLE.edition;
-const record=edition.declarations.filter(d=>d.kind==='theorem'&&d.bodyAvailable)
- .sort((a,b)=>b.uniqueNodes-a.uniqueNodes)[0];
+const candidates=edition.declarations.filter(d=>d.kind==='theorem'&&d.bodyAvailable);
+const record=process.argv[4]?candidates.find(d=>d.name===process.argv[4]):candidates.sort((a,b)=>b.uniqueNodes-a.uniqueNodes)[0];
+assert(record,'Unknown theorem');
 const descriptor=window.PROOF_ATLAS_SOURCE_PAGES.records.find(d=>d.indexSha256===record.indexSha256);
 const raw=z.gunzipSync(fs.readFileSync('.'+record.indexFile));
 assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),record.indexSha256);

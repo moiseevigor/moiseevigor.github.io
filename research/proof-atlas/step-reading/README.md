@@ -359,3 +359,15 @@ For the same seven parameters and first/middle/last ranks, keep a single source 
 Including the packed index, the first selection required 122,928 payload bytes. Across all 21 selections local Chrome received 573,413 bytes with HTTP caching bypassed, crossing the 506,140-byte full compiled index on selection 16. With immutable HTTP caching enabled and an initially cleared browser cache it received 262,173 bytes. Both runs retained at most 4,096 decoded source rows in the cursor and returned all 21 expected occurrence routes. HTTP cache storage and the resident profile index are separate. The comparison excludes common app assets and protocol overhead, uses one fixed sequence, and measures bytes rather than latency or comprehension.
 
 After the index producer above, run `node research/proof-atlas/step-reading/check-profile-session.cjs /tmp/atlas-ai-weights.json /tmp/atlas-ai-oracle.json /tmp/profile-index.gz`. The checked-in profile-session.json reports cumulative compressed bytes per selection. Its unique-file column models perfect HTTP reuse; a local Chrome run with immutable headers reproduced the final byte count. The packer and reader are research prototypes.
+
+### Transfer across the complete Gödel sample
+
+Run `node research/proof-atlas/step-reading/check-profile-corpus.cjs` from the site root to reproduce profile-corpus.json. The selection schedule is identical for all 20 proofs: first, middle and last distinct rank of each leading parameter with a reference. Each theorem starts with a cold browser cache and its own packed index. A local Chrome run checked all 250 expected occurrence paths twice and matched the stored per-proof byte totals under each cache policy.
+
+| Policy | Total compressed payload bytes | Theorems cheaper than the full index |
+| --- | ---: | ---: |
+| One complete compiled index per theorem | 1,570,446 | — |
+| Packed index and paged source, immutable HTTP caching | 1,065,722 | 9 of 20 |
+| Packed index and paged source, cache bypassed | 1,800,417 | 6 of 20 |
+
+The first lookup alone used fewer bytes than the full index in 16 proofs. By the end of each sequence this fell to nine with HTTP reuse. The two largest declarations contributed 466,619 of the aggregate 504,724 bytes saved. These measurements support paging for selective access to some large packets. They give no universal size cutoff: for example the 2,677-row proof saved bytes while the 3,083-row proof cost more. The workload is synthetic navigation over real compiled proofs. It excludes protocol overhead, app assets, timing and reader behavior.
