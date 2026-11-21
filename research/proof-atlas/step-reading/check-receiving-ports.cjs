@@ -57,6 +57,7 @@ async function checkWideCall(page) {
   const dependent=signature.getByRole('link',{name:'Argument 13',exact:true});
   assert.match(await dependent.getAttribute('href'),/#expr-2143$/);
   assert.equal(await signature.locator('p code').textContent(),'xa₁ ^ c₁ * Nat.rawCast 1 = c₃');
+  await signature.getByText('c ^ Nat.rawCast 2 * Nat.rawCast 1 = c ^ Nat.rawCast 2 * Nat.rawCast 1',{exact:true}).waitFor();
 }
 (async()=>{
   const browser=await chromium.launch({executablePath:process.env.ATLAS_CHROMIUM_PATH});
