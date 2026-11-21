@@ -37,11 +37,14 @@ elab_rules : command
           let prefixTerm := mkAppN term.getAppFn (args.extract 0 j)
           let .forallE _ domain _ _ ← whnf (← kernelType prefixTerm) | throwError "Expected function"
           let inferred ← kernelType args[j]!
+          let domainSort ← kernelType domain
+          let .ok proofInput := Kernel.isDefEq (← getEnv) (← getLCtx) domainSort (.sort .zero)
+            | throwError "Cannot classify argument domain"
           let (a,s) ← internScoped inferred xs compact
           let (b,s) ← internScoped domain xs s
           compact := s
           let conversion ← if a == b then pure Json.null else conversionSite domain inferred #[]
-          arguments := arguments.push <| Json.mkObj [("conversionSite",conversion),("slot",toJson (j+1)),("node",toJson (← sourceId owner arg)),
+          arguments := arguments.push <| Json.mkObj [("proofInput",toJson proofInput),("conversionSite",conversion),("slot",toJson (j+1)),("node",toJson (← sourceId owner arg)),
             ("inferred",toJson (← ppExpr inferred).pretty),("expected",toJson (← ppExpr domain).pretty),
             ("inferredRoot",toJson a),("expectedRoot",toJson b),("structurallyIdentical",toJson (actual==expected))]
         let mut extra := []

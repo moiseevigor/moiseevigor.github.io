@@ -25,14 +25,14 @@ def link(path, node, label):
             f'?edition={owner["edition"]}&amp;proof={owner["declaration"]}&amp;route=1%3A{route}'
             f'#expr-{node}">{escape(label)}</a>')
 
-# Editorial captions and the mathematical inputs to expose on first expansion.
+# Captions are editorial. The replay determines which inputs are proofs.
 steps = {
-    554: ('Conclude the goal from a contradiction', [2]),
-    553: ('Use positivity of f(0) to obtain False', [4, 3]),
-    551: ('Reduce positivity to the impossible inequality 0 < 0', [5, 6]),
-    544: ('Substitute f(0) = 0 in the inequality', [6]),
-    550: ('Apply irreflexivity of strict order at zero', []),
-    543: ('Derive f(0) = 0 from the specialized equation', [4, 3]),
+    554: 'Conclude the goal from a contradiction',
+    553: 'Use positivity of f(0) to obtain False',
+    551: 'Reduce positivity to the impossible inequality 0 < 0',
+    544: 'Substitute f(0) = 0 in the inequality',
+    550: 'Apply irreflexivity of strict order at zero',
+    543: 'Derive f(0) = 0 from the specialized equation',
 }
 
 def render(path):
@@ -40,7 +40,7 @@ def render(path):
     call = report['call']
     assert all(call[k] == owner[k] for k in ('edition', 'indexSha256', 'declaration', 'root'))
     node = call['node']
-    caption, slots = steps[node]
+    caption = steps[node]
     head = node
     while packet['kind'][head] == 5:
         head = packet['children'][head][0]
@@ -48,10 +48,14 @@ def render(path):
     args = report['arguments']
     parts = [f'<details{" open" if node in (554,553) else ""}><summary>{escape(caption)}</summary>',
              link(path, node, f'{name} · #{node}')]
-    for slot in slots:
-        arg = args[slot - 1]
+    other = []
+    for arg in args:
+        slot = arg['slot']
         branch = path + (0,) * (len(args) - slot) + (1,)
         child = arg['node']
+        if not arg['proofInput']:
+            other.append('<li>' + link(branch, child, f"Input {slot} · {arg['expected']}") + '</li>')
+            continue
         parts.append('<div class="input">' + link(branch, child, arg['expected']))
         if branch in by_route:
             parts.append(render(branch))
@@ -60,6 +64,8 @@ def render(path):
             name = packet['payloads'][binder['node']].get('binderName') or packet['payloads'][binder['node']]['declName']
             parts.append(' ← ' + link(binder['route']['slots'], binder['node'], name))
         parts.append('</div>')
+    if other:
+        parts.append(f'<details><summary>Other arguments ({len(other)})</summary><ol>' + ''.join(other) + '</ol></details>')
     return ''.join(parts) + '</details>'
 
 html = '''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
