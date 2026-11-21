@@ -182,6 +182,26 @@
   const operandLabel=literal?.literalKind==='natVal'?'OfNat.ofNat('+literal.value+')':'e'+end[2].node;
   return {goal,statement,proof,domain,contrary,close,operand:end[2],operandLabel,evidence:end[3]};
  }
+ function contraryUses(data,order){
+  const refs=common?require('./proof-atlas-recursive-inputs'):host.ProofAtlasRecursiveInputs;
+  const calls=common?require('./proof-atlas-omitted-references'):host.ProofAtlasOmittedReferences;
+  const budget={maxStates:8192,maxWork:16384,useSupport:true};
+  const count=options=>refs.countReferences(data,order.close.node,0,{...budget,...options});
+  const first=count({firstIfPresent:true}),uses=[];
+  if(first.status!=='counted')return {uses,limited:true};
+  const total=BigInt(first.occurrences),binder=order.close.route.slots.slice(0,-1);
+  for(let rank=1n;rank<=total && rank<=8n;rank++){
+   const result=rank===1n?first:count({ordinal:rank});
+   if(!result.witness)break;
+   const site={node:result.witness.node,route:{root:1,slots:order.close.route.slots.concat(result.witness.slots)}};
+   const binding=A.binding(data,site.route);
+   if(!binding || String(binding.route.slots)!==String(binder))throw Error('Contrary assumption scope mismatch');
+   const firstCall=calls.applicationAtUse(data,site,{includePeers:false});
+   const next=firstCall && calls.applicationAtUse(data,firstCall.call,{includePeers:false});
+   uses.push({site,first:firstCall,next});
+  }
+  return {uses,total:String(total),limited:BigInt(uses.length)<total};
+ }
  function mount(container,data,at,link){
   const el=(tag,text)=>{const e=document.createElement(tag);if(text)e.textContent=text;return e;};
   if(!at.route.slots.length){
@@ -190,6 +210,27 @@
     const panel=el('section'),steps=el('ol');panel.dataset.orderContradiction='';
     panel.append(el('h4','Proof by contradiction'),steps);
     const assumption=el('li');assumption.append('Assume ',link(caption(o.contrary),o.domain),'.');
+    const details=el('details'),trail=el('div');details.dataset.contraryUses='';
+    details.append(el('summary','Where the assumption enters the derivation'),trail);assumption.append(details);
+    details.ontoggle=()=>{
+     if(!details.open || trail.childNodes.length)return;
+     const result=contraryUses(data,o),list=el('ol');
+     if(result.total!==undefined)trail.append(result.total+' compiled reference'+(result.total==='1'?'':'s'));
+     for(const [i,u] of result.uses.entries()){
+      const row=el('li');row.append(link('Reference '+(i+1),u.site));
+      for(const c of [u.first,u.next])if(c){
+       const role=c.slot?'argument '+c.slot+' of '+c.arity:'function position';
+       const readings={'Mathlib.Tactic.Linarith.sub_neg_of_lt':'Take the negative difference',
+        'Mathlib.Tactic.Linarith.mul_neg':'Multiply by a positive factor','le_of_lt':'Pass to a weak inequality'};
+       const named=data.kind[c.head.node]===4 && Object.hasOwn(readings,c.label);
+       const action=link(named?readings[c.label]:c.label,c.call);action.title=c.label;
+       row.append(' → ',action,' ('+role+')');
+      }
+      list.append(row);
+     }
+     if(result.uses.length)trail.append(list);
+     if(result.limited)trail.append('Further references outside the display or traversal limit.');
+    };
     const end=el('li');end.append(link('Derive',o.evidence),' ',link(o.operandLabel,o.operand),' < ',o.operandLabel,'. ',link('Irreflexivity',o.close),' rules this out.');
     const conclusion=el('li');conclusion.append(link('le_of_not_gt',o.proof),' gives ',link(caption(o.statement),o.goal),'.');
     steps.append(assumption,end,conclusion);container.append(panel);
@@ -322,5 +363,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
+ if(common)module.exports={formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
 })(typeof window==='undefined'?globalThis:window);

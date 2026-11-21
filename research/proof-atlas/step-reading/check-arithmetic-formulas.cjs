@@ -2,7 +2,7 @@
 const fs=require('node:fs'),z=require('node:zlib'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 const A=require('../../../public/js/proof-atlas-library-data');
 const {spine}=require('../../../public/js/proof-atlas-elimination');
-const {formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument}=require('../../../public/js/proof-atlas-arithmetic');
+const {formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses}=require('../../../public/js/proof-atlas-arithmetic');
 const ports=require('./distinct-call-ports.cjs');
 global.window={};require('../../../public/data/proof-atlas/goedel-sample-manifest');
 const arities={'HPow.hPow':6,'HMul.hMul':6,'HSub.hSub':6,'HAdd.hAdd':6,'HDiv.hDiv':6,Or:2,And:2,Eq:3,Ne:3,'LE.le':4,'GE.ge':4,'LT.lt':4,'Real.sqrt':1,abs:4},counts={},examples={};
@@ -40,6 +40,18 @@ for(const d of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations.filter(d=>d.kin
   const binder={root:1,slots:order.close.route.slots.slice(0,-1)};
   const refs=require('./ranked-binder-uses.cjs')(g,binder);
   assert(refs.total>0n);assert.deepEqual(A.binding(g,refs.select(0n).route).route,binder);
+  const trace=contraryUses(g,order);
+  assert.equal(trace.limited,false);assert.equal(BigInt(trace.total),refs.total);
+  trace.uses.forEach((u,i)=>{
+   assert.deepEqual(u.site,refs.select(BigInt(i)));
+   assert.equal(u.first.label,'Mathlib.Tactic.Linarith.sub_neg_of_lt');
+   assert.equal(u.first.slot,7);assert.equal(u.first.arity,7);
+   assert.deepEqual(u.first.call.route.slots.concat(1),u.site.route.slots);
+   for(const c of [u.first,u.next]){
+    assert.equal(A.walk(g,c.call.route),c.call.node);assert.equal(A.walk(g,c.head.route),c.head.node);
+   }
+   assert.deepEqual(u.next.call.route.slots.concat(Array(u.next.arity-u.next.slot).fill(0),1),u.first.call.route.slots);
+  });
   const children=g.children.slice();children[order.goal.node]=[children[order.goal.node][0],g.roots[0]===order.goal.node?order.operand.node:spine(g,order.goal.node).head];
   assert.equal(closingOrderArgument({...g,children}),null);
   orderProofs.push({proof:d.name,order,assumptionReferences:String(refs.total)});
