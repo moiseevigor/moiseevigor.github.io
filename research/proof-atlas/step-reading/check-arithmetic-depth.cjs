@@ -11,7 +11,7 @@ const added=new Set(['mul_eq','add_nonpos','le_of_le_of_eq','sub_nonpos_of_le','
 const baseline=process.argv.includes('--baseline');
 let uniqueLeaves=0,uniqueSteps=0,certificateVisits=0;const certificates=[],inequalities={};
 const theoremSlots={'Mathlib.Tactic.Linarith.zero_lt_one':[0],neg_eq_zero:[2],'Int.add_one_le_iff':[0,1],le_of_lt:[2,3],neg_neg_of_pos:[4],'Real.sq_sqrt':[0]};
-const normalizationSlots={'Mathlib.Tactic.RingNF.add_assoc_rev':[2,3,4],'Mathlib.Tactic.CancelDenoms.derive_trans':[2,3,4,5],'Mathlib.Tactic.CancelDenoms.sub_subst':[2,3,4,5,6]};
+const normalizationSlots={'Mathlib.Meta.NormNum.isNat_eq_true':[2,3,4],'Mathlib.Meta.NormNum.isNNRat_div':[2,3,4,5],rfl:[1],'Eq.refl':[1],'Mathlib.Tactic.CancelDenoms.div_subst':[2,3,4,5,6,7],'Mathlib.Tactic.CancelDenoms.mul_subst':[2,3,4,5,6,7,8],'Mathlib.Meta.NormNum.IsNNRat.to_eq':[2,3,4,5,6],'Mathlib.Tactic.RingNF.add_assoc_rev':[2,3,4],'Mathlib.Tactic.CancelDenoms.derive_trans':[2,3,4,5],'Mathlib.Tactic.CancelDenoms.sub_subst':[2,3,4,5,6]};
 const signExamples={},signSlots={...theoremSlots,...normalizationSlots,sub_eq_zero_of_eq:[2,3],mul_nonneg_of_nonpos_of_nonpos:[3,4],mul_pos_of_neg_of_neg:[7,8],sq_nonneg:[6]};
 const linarithOnly=baseline||process.argv.includes('--linarith-only');
 const arithmeticOnly=linarithOnly||process.argv.includes('--arithmetic-only');

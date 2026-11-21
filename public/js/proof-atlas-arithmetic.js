@@ -230,6 +230,18 @@
   ['Mathlib.Tactic.Linarith.zero_lt_one',{arity:4,terms:[0],labels:['Ordered type'],premises:[],conclusion:'0 < 1'}],
   ['Mathlib.Tactic.RingNF.add_assoc_rev',{arity:5,terms:[2,3,4],premises:[],conclusion:'a + (b + c) = (a + b) + c'}],
   ['Mathlib.Tactic.CancelDenoms.derive_trans',{arity:8,terms:[2,3,4,5],labels:['a','b','c','d'],premises:['a = b','c × b = d'],conclusion:'c × a = d'}],
+  ['rfl',{arity:2,terms:[1],premises:[],conclusion:'a = a'}],
+  ['Eq.refl',{arity:2,terms:[1],premises:[],conclusion:'a = a'}],
+  ['Mathlib.Tactic.CancelDenoms.div_subst',{arity:11,terms:[2,3,4,5,6,7],labels:['m','n','k','x','y','u'],
+   premises:['m × x = u','n / y = 1','m × n = k'],conclusion:'k × (x / y) = u'}],
+  ['Mathlib.Tactic.CancelDenoms.mul_subst',{arity:12,terms:[2,3,4,5,6,7,8],labels:['m','n','k','x','y','u','v'],
+   premises:['m × x = u','n × y = v','m × n = k'],conclusion:'k × (x × y) = u × v'}],
+  ['Mathlib.Meta.NormNum.isNat_eq_true',{arity:7,terms:[2,3,4],labels:['a','b','n (natural)'],
+   premises:['IsNat a n','IsNat b n'],conclusion:'a = b'}],
+  ['Mathlib.Meta.NormNum.isNNRat_div',{arity:7,terms:[2,3,4,5],labels:['a','b','n (natural)','d (natural)'],
+   premises:['IsNNRat (a × b⁻¹) n d'],conclusion:'IsNNRat (a / b) n d'}],
+  ['Mathlib.Meta.NormNum.IsNNRat.to_eq',{arity:10,terms:[2,3,4,5,6],labels:['n (natural)','d (natural)','a','u','v'],
+   premises:['IsNNRat a n d','↑n = u','↑d = v'],conclusion:'a = u / v'}],
   ['Mathlib.Tactic.CancelDenoms.sub_subst',{arity:9,terms:[2,3,4,5,6],labels:['n','x','y','u','v'],premises:['n × x = u','n × y = v'],conclusion:'n × (x − y) = u − v'}],
   ['neg_eq_zero',{arity:3,terms:[2],premises:[],conclusion:'−a = 0 ↔ a = 0'}],
   ['Int.add_one_le_iff',{arity:2,terms:[0,1],premises:[],conclusion:'a + 1 ≤ b ↔ a < b'}],
@@ -243,7 +255,7 @@
  ]);
  function arithmeticInference(data,at){
   let head=at.node,arity=0;
-  while(data.kind[head]===5 && arity<11){head=data.children[head][0];arity++;}
+  while(data.kind[head]===5 && arity<12){head=data.children[head][0];arity++;}
   if(data.kind[head]!==4)return null;
   const name=data.payloads[head].name,prefix='Mathlib.Tactic.Linarith.';
   const sign=signRules.get(name);
@@ -608,7 +620,12 @@
   if(inference){
    const panel=el('section'),inputs=el('p'),terms=el('dl');
    panel.dataset.arithmeticInference='';
-   panel.append(el('h4',selected?.change?'Arithmetic before the rewrite':'Arithmetic inference'));
+   const reflexive=inference.name==='rfl'||inference.name==='Eq.refl';
+   panel.append(el('h4',reflexive?'Equality by reflexivity':selected?.change?'Arithmetic before the rewrite':'Arithmetic inference'));
+   if(inference.name==='Mathlib.Meta.NormNum.isNat_eq_true')
+    panel.append(el('p','Both operands represent the same natural number n. Each premise identifies one operand with its cast.'));
+   if(inference.name==='Mathlib.Meta.NormNum.isNNRat_div'||inference.name==='Mathlib.Meta.NormNum.IsNNRat.to_eq')
+    panel.append(el('p','IsNNRat records an invertible denominator and identifies the value with the numerator times its inverse.'));
    let shown=0,fold=null;
    inference.proofs.forEach((proof,i)=>{
     const cert=numeralComparison(data,proof);
