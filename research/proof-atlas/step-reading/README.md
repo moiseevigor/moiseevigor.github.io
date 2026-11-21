@@ -955,3 +955,24 @@ The [checker](check-repeated-proof-parameters.cjs) reconstructs an original maxi
 The [scope check](check-repeated-proof-scopes.cjs) replays every one of the 4,144 matched call occurrences from the preceding experiment. For each repeated argument it finds the external de Bruijn indices used inside the term, resolves a witness for each index at each input position, and compares the full routes of the introducing binders. It also compares occurrences of the same argument row across matched calls in each declaration. Pipe the JSON output of the preceding checker into this checker from the repository root.
 
 Among the 98 matched call rows there are 77 distinct declaration-local argument rows supplying repeated evidence. All 77 have a single observed assignment of external indices to binder occurrences. Only eight call rows (ten occurrences) actually reference an outer binder through their repeated argument. The remaining 4,134 occurrences therefore do not stress binder-sensitive folding. In this sample a shared evidence glyph can preserve the binding information with one assignment per argument row, provided every destination slot and occurrence route remains accessible. This checks syntactic binder identity only, and the count covers only the previously matched calls.
+
+#### One stored binder, two assumptions
+
+The [Lean control](SeparatedAssumptions.lean) proves `(P → P ∧ P) ∧ (P → P ∧ P)` by giving the same function twice. Each function introduces an assumption named `h` and uses it for both premises of `And.intro`. With Lean 4.33.1 the compiled body stores one lambda row (17), one inner call row (16) and one argument row (2) for both branches. Even the pair of argument and binder **row numbers** agrees. The assumption occurrences have distinct field paths from the proof-body root, respectively `1.0.1` and `1.1`.
+
+| In the expanded proof | Left branch | Right branch |
+|---|---|---|
+| Assumption supplying both premises | h at 1.0.1 | h at 1.1 |
+| Use at argument 3 | 1.0.1.1.0.1 | 1.1.1.0.1 |
+| Use at argument 4 | 1.0.1.1.1 | 1.1.1.1 |
+
+An overview can draw one function template with two applications of the template at the outer conjunction's premise positions. Opening either instance must resolve both internal wires to that instance's assumption. A diagram that draws a single assumption occurrence for the entire proof silently changes the source of two wires.
+
+Reproduce from the repository root with Lean 4.33.1:
+
+```sh
+python3 research/proof-atlas/step-reading/build-shared-case.py --separated-assumptions --output /tmp/atlas-separated.json
+node research/proof-atlas/step-reading/check-separated-assumptions.cjs < /tmp/atlas-separated.json
+```
+
+The builder kernel-checks the theorem body and its expected type before export. The [control](check-separated-assumptions.cjs) replays all four premise paths and passes the packet through the same scope checker used for the AI sample. This is a constructed counterexample to merging by row numbers, independent of prevalence in generated proofs.
