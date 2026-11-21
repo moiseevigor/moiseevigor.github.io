@@ -34,9 +34,19 @@ function audit(record) {
     free.set(row, counts);
     return counts;
   }
+  // Propagate route counts through each child slot, including duplicate edges.
+  const root = data.roots[1];
+  const visits = Array(root + 1).fill(0n);
+  visits[root] = 1n;
+  for (let row = root; row >= 0; row--) {
+    for (const child of data.children[row]) visits[child] += visits[row];
+  }
+  assert.equal(visits.reduce((a,b) => a+b), BigInt(data.expanded[root]));
+  const weight = {unused:0n, once:0n, repeated:0n, unavailable:0n};
+  let sharedRows = 0;
   const visited = new Set();
   const stats = {letRows:0, unused:0, once:0, repeated:0, unavailable:0};
-  const examples = [];
+  const examples = [], shared = [];
   function walk(node, slots) {
     if (visited.has(node)) return;
     visited.add(node);
@@ -44,13 +54,26 @@ function audit(record) {
     if (A.kinds[data.kind[node]] === 'letE') {
       stats.letRows++;
       const scene = B.describe(data, record, {root:1, slots});
-      if (scene.references.status !== 'counted') stats.unavailable++;
+      if (visits[node] > 1n) {
+        sharedRows++;
+        const table = require('../../../public/js/proof-atlas-row-occurrences').index(data,node,{root:1,slots});
+        assert.equal(table.total,visits[node]);
+        const first = table.select(1n), last = table.select(table.total);
+        assert.notDeepEqual(first,last);
+        assert.equal(A.walk(data,first),node);
+        assert.equal(A.walk(data,last),node);
+        shared.push({node,locations:String(table.total),first,last});
+      }
+      if (scene.references.status !== 'counted') {
+        stats.unavailable++;
+        weight.unavailable += visits[node];
+      }
       else {
         const n = BigInt(scene.references.occurrences);
         assert.equal(n, freeIndices(children[2]).get(0) || 0n);
-        if (n === 0n) stats.unused++;
-        else if (n === 1n) stats.once++;
-        else stats.repeated++;
+        const category = n === 0n ? 'unused' : n === 1n ? 'once' : 'repeated';
+        stats[category]++;
+        weight[category] += visits[node];
         if (record.name === 'JacobiData.slope_bound_abs' && ['hds','hsum'].includes(scene.selection.name)) {
           // Enumerate occurrences independently, retaining only those resolving to this binder.
           const uses = [];
@@ -70,8 +93,18 @@ function audit(record) {
     children.forEach((child,i) => walk(child,slots.concat(i)));
   }
   walk(data.roots[1],[]);
-  return {name:record.name,indexSha256:record.indexSha256,...stats,...(examples.length ? {examples} : {})};
+  // Independently count let occurrences bottom-up from subtrees.
+  const letCounts = [];
+  for (let row = 0; row <= root; row++) {
+    letCounts.push(data.children[row].reduce((n,c) => n + letCounts[c], BigInt(A.kinds[data.kind[row]] === 'letE')));
+  }
+  assert.equal(Object.values(weight).reduce((a,b) => a+b), letCounts[root]);
+  const occurrences = Object.fromEntries(Object.entries(weight).map(([key,n]) => [key,String(n)]));
+  return {sharedRows,...(shared.length ? {shared} : {}), occurrences, name:record.name,indexSha256:record.indexSha256,...stats,...(examples.length ? {examples} : {})};
 }
 
-const riccati = window.PROOF_ATLAS_LIBRARY.editions.find(e => e.id === 'published-15').declarations.find(r => r.name === 'JacobiData.slope_bound_abs');
-console.log(JSON.stringify({riccati:audit(riccati), ai:window.PROOF_ATLAS_AI_SAMPLE.edition.declarations.map(audit)},null,2));
+const published = window.PROOF_ATLAS_LIBRARY.editions.find(e => e.id === 'published-15').declarations.filter(r => r.kind === 'theorem');
+const se2 = published.map(audit);
+const riccati = se2.find(r => r.name === 'JacobiData.slope_bound_abs');
+assert(riccati);
+console.log(JSON.stringify({riccati, ai:window.PROOF_ATLAS_AI_SAMPLE.edition.declarations.map(audit), se2},null,2));

@@ -190,7 +190,7 @@
     if(caseTyping?.get(route)?.eliminationJudgment?.status==='checked')
      return window.ProofAtlasElimination.create(owner.data,owner.record,caseTyping,route);
    }));
-  if(current.kind(i)==='app' && window.ProofAtlasRowOccurrences){
+  if(['app','letE'].includes(current.kind(i)) && window.ProofAtlasRowOccurrences){
    const chooser=window.ProofAtlasRowOccurrences.control(owner.data,i,nextRoute,route=>safely(selectOccurrence(i,true,true,route)));
    target.append(chooser);
   }

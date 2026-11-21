@@ -35,7 +35,7 @@
  }
  function control(data,target,route,onSelect){
   const panel=document.createElement('details'),summary=document.createElement('summary');
-  summary.textContent='Find occurrences of this application';panel.append(summary);
+  summary.textContent=data.kind[target]===8?'Find occurrences of this local definition':'Find occurrences of this application';panel.append(summary);
   panel.ontoggle=()=>{
    if(!panel.open||panel.children.length>1)return;
    const table=index(data,target,route),info=document.createElement('p');

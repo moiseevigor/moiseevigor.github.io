@@ -46,6 +46,18 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
    await page.locator('#pl-expression').getByRole('button',{name:new RegExp('^Enclosing binder #'+binder.node+' ')}).click();
    await page.waitForFunction(r=>new URL(location).searchParams.get('route')===r,'1:'+binder.route.slots.join('.'));
    assert.equal(new URL(page.url()).hash,'#expr-'+binder.node);
+   for(const proof of require('./local-definition-uses.json').se2.filter(r=>r.sharedRows)){
+    for(const shared of proof.shared){
+     await page.goto('http://localhost/projects/proof-atlas/library/?edition=published-15&proof='+proof.name+'&route=1:'+shared.first.slots.join('.')+'#expr-'+shared.node);
+     const summary=page.getByText('Find occurrences of this local definition',{exact:true});
+     await summary.click();
+     const picker=summary.locator('..');
+     await picker.getByLabel('Occurrence number').fill(shared.locations);
+     await picker.getByRole('button',{name:'Go to occurrence'}).click();
+     await page.waitForFunction(r=>new URL(location).searchParams.get('route')===r,'1:'+shared.last.slots.join('.'));
+     assert.equal(new URL(page.url()).hash,'#expr-'+shared.node);
+    }
+   }
    const window={};
    for(const manifest of ['library-manifest','type-notation-catalog'])
     require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/'+manifest+'.js','utf8'),{window});
