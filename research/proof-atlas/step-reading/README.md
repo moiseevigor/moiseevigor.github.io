@@ -903,3 +903,33 @@ All five declarations with fully applied `Not.intro` in the 20-theorem sample no
 For `39831` the compiled equality is a² + ab + (1 % (b² + ab + 1)) = 0 over positive integers a and b. Only 1 is the dividend. The modulus is positive, hence the remainder is nonnegative, while ab is positive. Lean proves False from the premises even though both interior contradictions use their local hypothesis. Thus counting uses alone misses an inconsistent statement; a single use also occurs in the satisfiable quadratic example. Keep binder-use edges and theorem-level satisfiability certificates as separate evidence. These five were selected by term shape and do not estimate prevalence across generated mathematics.
 
 [Lean controls](NegationControls.lean) · [Compiled statement comparison](check-negation-controls.cjs). Run the control checker with the same environment as the recurrence certificate.
+
+#### The dividend changes which hypotheses can hold
+
+The three integer premises of `lean_workbook_plus_39831` form a minimal inconsistent set under deletion. Lean verifies the contradiction and a witness for each deletion:
+
+| Omitted premise | Witness (a, b) satisfying the other two |
+| --- | --- |
+| a > 0 | (−1, 2) |
+| b > 0 | (1, −1) |
+| The equality | (1, 1) |
+
+The following diagram compares the compiled left side with a separately defined expression. Write S = a² + ab and D = b² + ab + 1.
+
+```mermaid
+flowchart LR
+  subgraph O["Compiled expression"]
+    S1["S"] --> A["add"]
+    N["1"] -->|dividend| M["remainder"]
+    D1["D"] -->|modulus| M
+    M --> A
+  end
+  subgraph C["Regrouped comparison"]
+    S2["S"] --> B["add"]
+    N2["1"] --> B
+    B -->|dividend| P["remainder"]
+    D2["D"] -->|modulus| P
+  end
+```
+
+At (1, 1), the compiled expression evaluates to 3 and the regrouped expression evaluates to 0. More generally, the regrouped expression vanishes for every diagonal pair (n, n), since dividend and modulus then agree. This certifies satisfiability under regrouping. It leaves open what conclusion follows for off-diagonal inputs. [Original equality in the reader](https://moiseevigor.github.io/projects/proof-atlas/library/?edition=goedel-sample-4331&proof=lean_workbook_plus_39831&route=0%3A1.1.1.1.0#expr-90) · [Lean witnesses and comparison](NegationControls.lean)
