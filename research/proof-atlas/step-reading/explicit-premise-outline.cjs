@@ -5,6 +5,48 @@ const union = require('../recorded-union.cjs');
 const typing = require('../../../public/js/proof-atlas-deep-context');
 const packed = require('../../../public/js/proof-atlas-packed-routes');
 
+const arithmetic = require('../../../public/js/proof-atlas-arithmetic');
+const rankedUses = require('./ranked-binder-uses.cjs');
+const atlas = require('../../../public/js/proof-atlas-library-data');
+const {spine} = require('../../../public/js/proof-atlas-elimination');
+
+function contraryClosure(graph,route,node) {
+  const bytes=packed.parse(route);
+  const slots=Array.from({length:route.depth},(_,i)=>(bytes[i>>2]>>((i%4)*2))&3);
+  const site={node,route:{root:route.root,slots}};
+  const field=(s,i)=>({node:graph.children[s.node][i],route:{root:s.route.root,slots:s.route.slots.concat(i)}});
+  function matches(s,name,arity) {
+    const {head,args}=spine(graph,s.node);
+    return graph.kind[head]===4 && graph.payloads[head].name===name && args.length===arity;
+  }
+  if (!matches(site,'Not.intro',2)) return null;
+  const lambda=field(site,1);
+  if (graph.kind[lambda.node]!==6 || graph.children[lambda.node][0]!==graph.children[graph.children[node][0]][1]) return null;
+  const close=field(lambda,1);
+  if (!matches(close,'Mathlib.Tactic.Linarith.lt_irrefl',4)) return null;
+  const operand=field(field(close,0),1), evidence=field(close,1);
+  const rewrite=arithmetic.formulaTransport(graph,evidence);
+  if (rewrite?.after.name!=='LT.lt' || rewrite.after.left.site.node!==operand.node) return null;
+  const references=arithmetic.contraryUses(graph,{close,evidence});
+  for (const s of [lambda,close,operand,evidence,rewrite.after.left.site,rewrite.after.right.site])
+    assert.equal(atlas.walk(graph,s.route),s.node);
+  if (!references.limited) {
+    const count=rankedUses(graph,lambda.route);
+    assert.equal(String(count.total),references.total);
+    for (const [i,witness] of references.uses.entries()) assert.deepEqual(count.select(BigInt(i)),witness.site);
+  }
+  function numeral(s) {
+    if (!matches(s,'OfNat.ofNat',3)) return null;
+    const literal=field(field(s,0),1), payload=graph.payloads[literal.node];
+    if (graph.kind[literal.node]!==9 || payload.literalKind!=='natVal') return null;
+    return {value:payload.value,instance:field(s,1),type:field(field(field(s,0),0),1)};
+  }
+  return {basis:'compiled structure',lambda,close,operand,evidence,
+    transportTarget:[rewrite.after.left.site,rewrite.after.right.site].map(s=>({...s,numeral:numeral(s)})),
+    uses:references.total??null,witnesses:references.uses.map(u=>({site:u.site,receiver:u.first?.label??null})),
+    limited:references.limited};
+}
+
 async function main() {
   const [edition,name,token] = process.argv.slice(2);
   const item = union.inventory().find(row=>row.edition===edition && row.record.name===name);
@@ -26,6 +68,10 @@ async function main() {
     const query=new URLSearchParams({view:'occurrence',loading:'paged',diagram:'construction',edition,proof:name});
     result.href='/projects/proof-atlas/library/?'+query+'#occurrence='+[item.record.indexSha256,route.root,route.depth,route.slots].join('.');
     if (position.binding) result.binding=position.binding;
+    if (!rule) {
+      const closure=contraryClosure(graph,route,node);
+      if (closure) result.contradiction=closure;
+    }
     if (!rule || level===4) return {...result,boundary:rule?'depth limit':'construction unavailable'};
     const children=[];
     if (graph.kind[node]===6 && rule.premises?.[1]) {
