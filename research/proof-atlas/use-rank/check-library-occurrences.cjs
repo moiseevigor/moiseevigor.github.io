@@ -46,8 +46,41 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
    await page.locator('#pl-expression').getByRole('button',{name:new RegExp('^Enclosing binder #'+binder.node+' ')}).click();
    await page.waitForFunction(r=>new URL(location).searchParams.get('route')===r,'1:'+binder.route.slots.join('.'));
    assert.equal(new URL(page.url()).hash,'#expr-'+binder.node);
+   const window={};
+   for(const manifest of ['library-manifest','type-notation-catalog'])
+    require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/'+manifest+'.js','utf8'),{window});
+   const example=window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id==='published-15').declarations.find(r=>r.name==='JacobiData.a_deriv_form._simp_1_5');
+   const compiled=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+example.indexFile)));
+   const groups=require('../../../public/js/proof-atlas-omitted-references').inspect(compiled,window.PROOF_ATLAS_TYPE_NOTATION);
+   await page.goto('http://localhost/projects/proof-atlas/library/?edition=published-15&proof='+example.name+'&route=0:#expr-'+compiled.roots[0]);
+   const panel=page.locator('#pl-omitted-references');
+   await panel.locator('summary').click();
+   await panel.locator('section').first().waitFor();
+   assert.equal(await panel.locator('section').count(),groups.length);
+   let traced=0;
+   for(const [j,g] of groups.entries()){
+    const section=panel.locator('section').nth(j);
+    for(let n=1n;n<=g.total;n++){
+     if(g.total>1n){
+      await section.getByLabel('Reference').fill(String(n));await section.getByRole('button',{name:'Trace'}).click();
+     }
+     const expected=g.select(n),links=section.locator('[aria-live] a');
+     for(const [k,t] of [expected.use,expected.binder].entries()){
+      const url=new URL(await links.nth(k).evaluate(a=>a.href));
+      assert.equal(url.hash,'#expr-'+t.node);
+      assert.equal(url.searchParams.get('route'),'0:'+t.route.slots.join('.'));
+     }
+     traced++;
+    }
+   }
+   assert.equal(traced,24);
+   await panel.locator('section [aria-live] a').last().click();
+   const lastGroup=groups.at(-1),destination=lastGroup.select(lastGroup.total).binder;
+   await page.waitForFunction(id=>document.querySelector('#pl-expression h3')?.textContent.endsWith(' · e'+id),destination.node);
+   assert.equal(new URL(page.url()).searchParams.get('route'),'0:'+destination.route.slots.join('.'));
+   assert.equal(new URL(page.url()).searchParams.get('proof'),example.name);
    await page.close();
   }
-  console.log('Library application → occurrence 57 → variable → binder passed at 320 and 1280 pixels.');
+  console.log('Occurrence switching and all 24 omitted references passed at 320 and 1280 pixels.');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
