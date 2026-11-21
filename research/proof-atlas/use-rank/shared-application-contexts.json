@@ -40,7 +40,8 @@
         1,
         1
       ]
-    }
+    },
+    "changedRows": 2546
   },
   {
     "source": {
@@ -79,7 +80,8 @@
       "relativeReference": [
         0
       ]
-    }
+    },
+    "changedRows": 5
   },
   {
     "source": {
@@ -114,7 +116,8 @@
       "relativeReference": [
         1
       ]
-    }
+    },
+    "changedRows": 36
   },
   {
     "source": {
@@ -158,7 +161,8 @@
       "relativeReference": [
         0
       ]
-    }
+    },
+    "changedRows": 8
   },
   {
     "source": {
@@ -167,7 +171,7 @@
       "name": "lean_workbook_plus_39831",
       "sourceSha256": "ceca77661c386d820b66fac94e6e1e4ebbb18d894f0b6a79c37f6cd2f425c9cf"
     },
-    "expandedControl": false,
+    "expandedControl": true,
     "counts": {
       "repeated": 2426,
       "sameContext": 216,
@@ -191,6 +195,106 @@
       "leftBinder": "1",
       "rightBinder": "1.1",
       "relativeReference": [
+        1
+      ]
+    },
+    "changedRows": 220,
+    "middleWitness": {
+      "row": 276,
+      "first": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "middle": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        1
+      ],
+      "last": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "relative": [
+        1
+      ],
+      "endpointBinder": [],
+      "middleBinder": [
         1
       ]
     }
@@ -236,6 +340,7 @@
         1,
         1
       ]
-    }
+    },
+    "changedRows": 2667
   }
 ]
