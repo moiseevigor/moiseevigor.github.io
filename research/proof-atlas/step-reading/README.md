@@ -976,3 +976,7 @@ node research/proof-atlas/step-reading/check-separated-assumptions.cjs < /tmp/at
 ```
 
 The builder kernel-checks the theorem body and its expected type before export. The [control](check-separated-assumptions.cjs) replays all four premise paths and passes the packet through the same scope checker used for the AI sample. This is a constructed counterexample to merging by row numbers, independent of prevalence in generated proofs.
+
+The [browser regression](check-separated-browser.cjs) loads this compiled packet as a temporary edition in the repository's library page. Starting at the proof body, it clicks the labeled constructor fields to each of the four argument occurrences, activates **Enclosing binder**, and reloads the resulting URL. All four selections retained the expected binder occurrence at 1,280 and 390 CSS pixels. The desktop check activates the binder button with Enter. This exercises the occurrence inspector and URL restoration; the test does not exercise a canvas gesture or measure human comprehension.
+
+With Playwright available, run `node research/proof-atlas/step-reading/check-separated-browser.cjs < /tmp/atlas-separated.json`. Set `ATLAS_CHROMIUM_PATH` to use a local Chrome installation.
