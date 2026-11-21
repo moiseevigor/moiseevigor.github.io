@@ -113,6 +113,26 @@
    }
    container.append(box);
   }
+  const conjunction=host.ProofAtlasConjunction?.(data,call.node);
+  if(conjunction){
+   const box=el('section');box.dataset.conjunction=conjunction.kind;
+   const rewrite=conjunction.kind==='rewrite';
+   const checked=(host.PROOF_ATLAS_EXISTENTIAL_INTRODUCTIONS||[]).map(r=>r.conjunction).find(r=>
+    r && r.edition===call.edition && r.indexSha256===record.indexSha256 && r.declaration===record.name &&
+    r.root===call.route.root && r.node===call.node && String(r.slots)===String(call.route.slots));
+   box.append(el('h4',rewrite?'Rewrite each conjunct to True':'Prove both conjuncts'));
+   for(const side of ['left','right']){
+    const route={root:call.route.root,slots:call.route.slots.concat(conjunction[side])};
+    const node=A.walk(data,route),row=el('p');
+    row.append(sourceLink((side==='left'?'Left':'Right')+(rewrite?' equality':' proof'),{node,route}));
+    if(checked){
+     if(checked[side].node!==node)throw Error('Conjunct evidence address mismatch');
+     row.append(' · ',el('code',checked[side].expected));
+    }
+    box.append(row);
+   }
+   container.append(box);
+  }
   existentialIntroduction();
   terminalCases();
   caseEvidence();

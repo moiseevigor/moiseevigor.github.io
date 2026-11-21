@@ -38,6 +38,27 @@ window.PROOF_ATLAS_EXISTENTIAL_INTRODUCTIONS=[
       76,
       84,
       357
-    ]
+    ],
+    "conjunction": {
+      "declaration": "lean_workbook_plus_68616",
+      "edition": "goedel-sample-4331",
+      "indexSha256": "2f1f6523063a579076448d2a6caa42d496003a1be382692e8747442b1d9aef83",
+      "node": 357,
+      "root": 1,
+      "slots": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "left": {
+        "node": 346,
+        "expected": "(∀ (i : ℕ), 1 ≤ i ∧ i ≤ k → ↑((fun i => i) i) ≡ ↑i [ZMOD 2] ∧ (fun i => i) i < (fun i => i) (i + 1)) = True"
+      },
+      "right": {
+        "node": 353,
+        "expected": "((fun i => i) k ≤ n) = True"
+      }
+    }
   }
 ];
