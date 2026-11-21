@@ -22,8 +22,7 @@ function countMatchingRoutes(graph,recordedRows) {
 }
 
 // Keep one visible occurrence at the boundary of each outermost selected maximal call.
-function foldSize(graph, selected) {
-  const root = graph.roots[1];
+function foldSize(graph, selected, root = graph.roots[1]) {
   const visits = Array(root+1).fill(0n), prefixes = Array(root+1).fill(0n);
   let visible = 0n, boundaries = 0n, hidden = 0n;
   visits[root] = 1n;
@@ -52,7 +51,7 @@ function foldSize(graph, selected) {
     sizes.push(size);
   }
   assert.equal(visible,selected.has(root) ? 1n : sizes[root]);
-  return {full,visible,boundaries,hidden};
+  return {full,visible,boundaries,hidden,visibleAt:id=>selected.has(id) ? 1n : sizes[id]};
 }
 
 async function measure(item, uncovered) {
@@ -137,12 +136,15 @@ async function measure(item, uncovered) {
   const peak = uncovered[0];
   const half = uncovered.slice(0,thresholds[0].rows);
   const halfDeclarations = [...new Set(half.map(row=>row.declaration))];
+  const argumentGroups={}, affectedDeclarations=new Set(), checkedArguments=new Set();
+  let largestReduction=null;
   const observedCalls={total:0,insideFold:0};
   const folded={full:0n,visible:0n,boundaries:0n,hidden:0n};
   for (const item of union.inventory().filter(i=>i.edition==='goedel-sample-4331')) {
     const selected=half.filter(row=>row.declaration===item.record.name);
     const profile=(await union.open(item)).case;
     const ids=new Set(selected.map(row=>row.id));
+    const size=foldSize(profile.data,ids);
     for (const entry of profile.entries) {
       if (entry.route.root!==1 || typing.construction(entry,profile.data)?.rule!=='Pi-application') continue;
       const path=packed.parse(entry.route);
@@ -155,16 +157,48 @@ async function measure(item, uncovered) {
       }
       assert.equal(id,entry.node);
       if (!partial) {
+        // Recover the native judgment of every supplied argument from this exact call.
+        let stage=entry, route=entry.route;
+        while (true) {
+          const construction=typing.construction(stage,profile.data);
+          assert.equal(construction.rule,'Pi-application');
+          const premise=construction.premises[1], graph=profile.data;
+          const [fn,arg]=graph.children[stage.node];
+          assert.equal(arg,premise.node);
+          const mode=stage.typeData.payloads[construction.components.pi].binderInfo;
+          const key=mode+'/'+premise.role;
+          const group=argumentGroups[key] ||= {slots:0,affected:0,foldedRoot:0};
+          group.slots++;
+          const shown=size.visibleAt(arg), original=BigInt(graph.expanded[arg]);
+          assert(shown<=original);
+          if (shown<original) {
+            group.affected++;
+            if (ids.has(arg)) group.foldedRoot++;
+            affectedDeclarations.add(item.record.name);
+            const identity=item.record.indexSha256+'/'+arg;
+            if (!checkedArguments.has(identity)) {
+              assert.equal(shown,foldSize(graph,ids,arg).visible);
+              checkedArguments.add(identity);
+            }
+            if (!largestReduction || original-shown>largestReduction.hidden) {
+              largestReduction={proof:item.record.name,indexSha256:item.record.indexSha256,arg,
+                route:packed.append(route,[1]),statement:premise.typeText,original,shown,hidden:original-shown};
+            }
+          }
+          if (graph.kind[fn]!==5) break;
+          route=packed.append(route,[0]);
+          stage=profile.get(route);
+          assert.equal(stage.node,fn);
+        }
         observedCalls.total++;
         if (inside) observedCalls.insideFold++;
       }
     }
-    const size=foldSize(profile.data,ids);
     for (const key of Object.keys(folded)) folded[key]+=size[key];
     assert.equal(countMatchingRoutes(profile.data,ids),selected.reduce((sum,row)=>sum+row.uses,0n));
   }
   assert.equal(observedCalls.total,rows.reduce((sum,row)=>sum+row.maximal,0));
   const halfHeads = [...new Set(half.map(row=>row.headName))];
-  console.log(JSON.stringify({unrecordedRows:uncovered.length, occurrences:String(total), thresholds, halfDeclarations, halfHeads, folded, observedCalls,
+  console.log(JSON.stringify({unrecordedRows:uncovered.length, occurrences:String(total), thresholds, halfDeclarations, halfHeads, folded, observedCalls, argumentGroups, affectedDeclarations:[...affectedDeclarations], largestReduction,
     mostFrequent:{...peak,uses:String(peak.uses)}},(_,v)=>typeof v==='bigint'?String(v):v,2));
 })().catch(error=>{console.error(error);process.exitCode=1;});
