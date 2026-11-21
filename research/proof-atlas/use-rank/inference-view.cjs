@@ -21,11 +21,33 @@ function packet(file,hash) {
   assert.equal(createHash('sha256').update(bytes).digest('hex'),hash);
   return JSON.parse(bytes);
 }
+const sharing={};
+const contextResults=require("./shared-application-contexts.json");
 const examples=[],flows={},groupBindings={},typeContexts={},finalApplications={};
 for(const item of require('./port-results.json')) {
   const {example,source,nativeOwner}=item;
   const {record,descriptors}=inventory().find(x=>x.record.indexSha256===source.indexSha256 && x.edition===source.edition);
   const data=atlas.validateIndex(packet('.'+record.indexFile,source.indexSha256),record);
+  const result=contextResults.find(x=>x.source.indexSha256===source.indexSha256);
+  assert.deepEqual(result.source,source);
+  const witness=result.middleWitness ?? result.witness;
+  const positions=result.middleWitness ? ['first','middle','last'] : ['left','right'];
+  sharing[source.indexSha256]=positions.map((side,i)=>{
+    const route={root:1,slots:witness[side]};
+    assert.equal(atlas.walk(data,route),witness.row);
+    const relative=witness.relative ?? witness.relativeReference;
+    const variableRoute={root:1,slots:route.slots.concat(relative)};
+    const node=atlas.walk(data,variableRoute);
+    assert.equal(data.kind[node],0);
+    const binder=atlas.binding(data,variableRoute);
+    const expected=result.middleWitness ? witness[side==='middle'?'middleBinder':'endpointBinder']
+      : witness[side+'Binder'].split('.').slice(1).map(Number);
+    assert.deepEqual(binder.route,{root:1,slots:expected});
+    const payload=data.payloads[binder.node];
+    return {label:['First','Intermediate','Last'][i===positions.length-1?2:i],
+      application:{node:witness.row,route},variable:{node,route:variableRoute},
+      index:data.payloads[node].index,binder,name:payload.binderName ?? payload.declName};
+  });
   const native=packet('public/data/proof-atlas/application-ports/'+nativeOwner+'.json.gz',nativeOwner);
   assert.deepEqual(native.source,source);
   const binder=example?.binder ?? {root:1,slots:[]};
@@ -113,5 +135,6 @@ process.stdout.write(local('inference-template.html.in')
   .replace('/* TYPE CONTEXTS */',()=>JSON.stringify(typeContexts).replaceAll('<','\\u003c'))
   .replace('/* GROUP BINDINGS */',()=>JSON.stringify(groupBindings).replaceAll('<','\\u003c'))
   .replace('/* FINALS */',()=>JSON.stringify(finalApplications).replaceAll('<','\\u003c'))
+  .replace('/* SHARING */',()=>JSON.stringify(sharing).replaceAll('<','\\u003c'))
   .replace('/* FLOWS */',()=>JSON.stringify(flows).replaceAll('<','\\u003c'))
   .replace('/* EXAMPLES */',()=>JSON.stringify(examples).replaceAll('<','\\u003c')));

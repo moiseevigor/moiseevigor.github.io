@@ -6,6 +6,9 @@
 .premise[data-selected]{border-inline-start:3px solid LinkText;padding-inline-start:.7rem}
 .branch-focus{margin:.6rem 0}.branch-focus meter{width:min(8rem,33%);margin-right:.5rem;vertical-align:middle}
 .case-branches{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:1rem}.case-branches>div{min-width:0;border-inline-start:2px solid GrayText;padding-inline-start:.7rem}.case-branches h3{margin:0}
+#sharing-path{display:flex;align-items:center;gap:.5em;flex-wrap:wrap}
+#sharing-path a{border:1px solid GrayText;border-radius:.25rem;padding:.25rem .5rem}
+@media(max-width:36rem){#sharing-path{align-items:flex-start;flex-direction:column}#sharing-path span{margin-inline-start:.7rem;border-inline-start:1px solid GrayText;padding-inline-start:.6rem}}
 </style></head><body><main><h1>Reading a Lean inference</h1><label>Compiled application <select id="proof"></select></label>
 <p id="intro"></p><details id="final-application"><summary>Read backward from the theorem result</summary><div id="final-body"></div></details><details id="statement-flow"><summary>Trace a theorem parameter or hypothesis</summary><label>Statement binder <select id="clause"></select></label><div id="flow"></div></details><section aria-labelledby="map-heading"><h2 id="map-heading">Which arguments occur in each type?</h2>
 <p class="matrix-key">Columns are proof inputs and the conclusion. Select a dot to trace its reference. A dash means the formal argument is absent from that type. A blank falls outside its scope.</p>
@@ -14,12 +17,16 @@
 <p>into the polynomial equation below. The call establishes equality of the two propositions.</p></div><p id="result" class="formula"></p><div id="result-inputs"></div><h3>Recorded uses of this result</h3><div id="consumers"></div></section>
 <details id="details"><summary>Function, types and values</summary><div id="other"></div></details>
 <section id="trace"><h2>Inspect a variable use</h2><p id="context"></p><form class="choice"><label>Use <input id="ordinal" required type="number" min="1" step="1"></label><button>Locate</button></form><p aria-live="polite"><a id="occurrence">Open compiled occurrence</a></p></section>
+<details id="sharing"><summary>Compare occurrences of a shared application in this theorem</summary>
+<label>Occurrence <select id="sharing-position"></select></label>
+<p id="sharing-path" aria-live="polite"></p></details>
 <details><summary>Compiled provenance</summary><p id="identity" class="meta"></p></details></main>
 <script>/* SELECTOR */
 const examples=/* EXAMPLES */;
 const finalApplications=/* FINALS */;
 const typeContexts=/* TYPE CONTEXTS */;
 const groupBindings=/* GROUP BINDINGS */;
+const sharing=/* SHARING */;
 const flows=/* FLOWS */;
 const el=id=>document.getElementById(id);
 let active,port;
@@ -29,6 +36,17 @@ function address(hit) {
  url.hash='expr-'+hit.node;return url.href;
 }
 function link(text,hit){const a=document.createElement('a');a.textContent=text;a.href=address(hit);return a;}
+function showSharedPath(){
+ const site=sharing[active.source.indexSha256][el('sharing-position').selectedIndex];
+ const relation=text=>{const span=document.createElement('span');span.textContent=text;return span;};
+ el('sharing-path').replaceChildren(link('Application '+site.application.node,site.application),
+   relation('contains'),link('variable #'+site.index,site.variable),relation('bound by'),
+   link(site.name+' (binder '+site.binder.node+')',site.binder));
+}
+el('sharing-position').onchange=()=>{
+ history.replaceState(null,'','#'+active.source.indexSha256+'-'+active.callId+'/sharing/'+el('sharing-position').selectedIndex);
+ showSharedPath();
+};
 function locate(n){
  const hit=selectBranch(active.table,BigInt(port.offset)+n);
  const a=el('occurrence');a.href=address({node:hit.node,route:{root:active.call.route.root,slots:hit.slots}});
@@ -314,6 +332,9 @@ function showFinal(){
 function show(i){
  const previous=active?.source.indexSha256;
  active=examples[i];
+ el('sharing').open=false;
+ el('sharing-position').replaceChildren(...sharing[active.source.indexSha256].map(s=>new Option(s.label)));
+ showSharedPath();
  if(previous!==active.source.indexSha256){
   showFinal();
   const clauses=flows[active.source.indexSha256],picker=el('clause');
@@ -387,6 +408,10 @@ function follow(){
  el('proof').value=String(index>=0?index:defaultProof);show(Number(el('proof').value));
  if(index>=0 && field==='final'){
   const final=el('final-application');final.open=true;final.querySelector('summary').focus();
+ }
+ if(index>=0 && field==='sharing' && /^[012]$/.test(slot) && Number(slot)<el('sharing-position').length){
+  el('sharing').open=true;el('sharing-position').selectedIndex=Number(slot);
+  showSharedPath();el('sharing-position').focus();
  }
  if(index>=0 && field==='read'){
   el('final-application').open=false;

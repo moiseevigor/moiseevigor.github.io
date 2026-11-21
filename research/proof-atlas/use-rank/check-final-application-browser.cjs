@@ -15,6 +15,34 @@ const {chromium}=require('playwright');
     const spine=require('./spine-transfer.json').find(s=>s.source.indexSha256===hash);
     assert.deepEqual(f.anchor,spine.finalBody.value);
     const calls=examples.filter(x=>x.source.indexSha256===hash), first=calls[0];
+    const audit=require('./shared-application-contexts.json').find(x=>x.source.indexSha256===hash);
+    const w=audit.middleWitness ?? audit.witness;
+    const sides=audit.middleWitness?['first','middle','last']:['left','right'];
+    const {record}=require('../../../scripts/proof-atlas-judgment-fixtures.cjs').inventory().find(i=>i.record.indexSha256===hash);
+    const data=JSON.parse(require('node:zlib').gunzipSync(require('node:fs').readFileSync('.'+record.indexFile)));
+    const atlas=require('../../../public/js/proof-atlas-library-data');
+    const control=page.locator('#sharing-position');
+    await page.evaluate(h=>location.hash=h,hash+'-'+first.callId+'/sharing/0');
+    await control.waitFor({state:'visible'});
+    for(const [i,side] of sides.entries()){
+     await control.selectOption({index:i});
+     const variable={root:1,slots:w[side].concat(w.relative ?? w.relativeReference)};
+     const binder=atlas.binding(data,variable);
+     const targets=[{root:1,slots:w[side]},variable,binder.route];
+     const links=page.locator('#sharing-path a');
+     assert.equal(await links.count(),3);
+     for(const [j,route] of targets.entries()){
+      const url=new URL(await links.nth(j).getAttribute('href'));
+      assert.equal(url.searchParams.get('edition'),audit.source.edition);
+      assert.equal(url.searchParams.get('proof'),audit.source.name);
+      assert.equal(url.searchParams.get('route'),'1:'+route.slots.join('.'));
+      assert.equal(url.hash,'#expr-'+atlas.walk(data,route));
+     }
+     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+    }
+    await page.reload();
+    await control.waitFor({state:'visible'});
+    assert.equal(await control.evaluate(s=>s.selectedIndex),sides.length-1);
     await page.evaluate(h=>location.hash=h,hash+'-'+first.callId+'/final');
     await page.waitForFunction(h=>active.source.indexSha256===h,hash);
     const panel=page.locator('#final-application');
