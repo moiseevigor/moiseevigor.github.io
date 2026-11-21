@@ -275,6 +275,17 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
         const detail=panel.locator('details');
         await detail.getByText(count?'3 compiled references':'The compiled body contains no reference to this assumption.',{exact:true}).waitFor();
         assert.equal(await detail.getByRole('link').count(),count);
+        const certificate=page.locator('[data-inconsistent-premises]');
+        if(proof==='lean_workbook_4274'){
+          await certificate.getByRole('link',{name:'recurrence',exact:true}).click();
+          await page.waitForFunction(()=>window.ProofAtlasLibrary.getSnapshot()?.selected===95);
+          await certificate.getByRole('link',{name:'initial condition',exact:true}).click();
+          await page.waitForFunction(()=>{
+            const selected=window.ProofAtlasLibrary.getSnapshot();
+            return selected?.selected===102 && selected.route.root===0 && selected.route.slots.join('.')==='1.1.1.0';
+          });
+          assert.match(await certificate.getByRole('link',{name:'Lean certificate'}).getAttribute('href'),/bd9e2ba51/);
+        }else assert.equal(await certificate.count(),0);
         if(count){
           const last=detail.getByRole('link').last(),dest=new URL(await last.getAttribute('href'),url);
           await last.click();

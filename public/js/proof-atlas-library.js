@@ -220,6 +220,23 @@
   const actions=el('div',undefined,'pl-actions');cs.forEach((c,j)=>{const b=el('button',A.fields[current.kind(i)][j]+' · #'+c+' · '+current.kind(c));b.type='button';b.onclick=()=>selectOccurrence(c,true,true,{root:selectedRoute.root,slots:[...selectedRoute.slots,j]});actions.append(b);});
   if(binder!==undefined){const b=el('button','Enclosing binder #'+binder+' · '+label(binder));b.type='button';b.onclick=()=>selectOccurrence(binder,true,true,binding.route);actions.append(b);}
   const sourceLink=(label,at)=>link(label,url(owner.record.name,at.node,at.route));
+  if(edition.id==='goedel-sample-4331' && owner.record.indexSha256==='4738e6bbc69dc2ee6d52f05f1c8e39f0509d2ee051ffab8ecd3587f9025c73b9'){
+   const address=nextRoute.root+':'+nextRoute.slots.join('.');
+   const sites=['0:','1:','0:1.1.0','0:1.1.1.0','1:1.1.1.1.2.2.2.2.0.1','1:1.1.1.1.2.2.2.2.1'];
+   if(sites.includes(address)){
+    const panel=el('section'),reason=el('p'),controls=el('p');
+    const recurrence={root:0,slots:[1,1,0]},initial={root:0,slots:[1,1,1,0]};
+    panel.dataset.inconsistentPremises='';
+    reason.append('At n = 0, the ',sourceLink('recurrence',{node:A.walk(owner.data,recurrence),route:recurrence}),
+     ' gives b(0) = 3b(0), since natural subtraction gives 0 − 1 = 0. The ',
+     sourceLink('initial condition',{node:A.walk(owner.data,initial),route:initial}),' gives b(0) = 1. Together they imply 1 = 3.');
+    controls.textContent='Each assumption alone is satisfiable. The constant zero function satisfies the recurrence, and the constant one function satisfies the initial condition.';
+    const evidence='https://github.com/moiseevigor/moiseevigor.github.io/blob/bd9e2ba51/research/proof-atlas/step-reading/';
+    panel.append(el('h4','These hypotheses are inconsistent'),reason,controls,
+     link('Lean certificate',evidence+'Recurrence4274.lean'),' · ',link('Compiled statement check',evidence+'check-recurrence-4274.cjs'));
+    target.append(panel);
+   }
+  }
   if(binding && owner.kind(binder)==='letE'){
    const route={root:binding.route.root,slots:binding.route.slots.concat(1)};
    const value=owner.children(binder)[1];
