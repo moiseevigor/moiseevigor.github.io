@@ -157,7 +157,12 @@
  }
  // Names present in the Lean-only 4.33.1 signature export.
  const coreNames=new Set('Eq HEq And Or Iff Not LE.le LT.lt HAdd.hAdd HMul.hMul HSub.hSub HDiv.hDiv HMod.hMod HPow.hPow Sub.sub Neg.neg OfNat.ofNat Nat.cast Int.cast Exists'.split(' '));
- function importedSignature(catalog,edition,name,compiler){
+ function importedSignature(catalog,edition,name,compiler,core){
+  if(catalog && core && core.compiler===catalog.compiler && core.leanExecutableSha256===catalog.leanExecutableSha256 &&
+     (edition==='published-15' || (edition==='goedel-sample-4331' && compiler===core.compiler))){
+   const signature=core.entries.find(e=>e.name===name && e.kernelSignature==='PASS');
+   if(signature)return signature;
+  }
   if(!catalog || (edition!=='published-15' && (edition!=='goedel-sample-4331' || !coreNames.has(name) || compiler!==catalog.compiler)))return null;
   return catalog.entries.find(e=>e.name===name && e.kernelSignature==='PASS') || null;
  }

@@ -17,6 +17,11 @@ if (published) vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/libra
 const edition=published ? window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id==='published-15') : window.PROOF_ATLAS_AI_SAMPLE.edition;
 vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/type-notation-catalog.js','utf8'),{window});
 const catalog=window.PROOF_ATLAS_TYPE_NOTATION;
+vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/branch-core-signatures.js','utf8'),{window});
+for(const s of window.PROOF_ATLAS_CORE_SIGNATURES.entries){
+  const sha=createHash('sha256').update(JSON.stringify([s.nameParts,s.levelParams,s.graph])).digest('hex');
+  assert.equal(s.signatureSha256,sha);
+}
 const native=JSON.parse(zlib.gunzipSync(fs.readFileSync('research/proof-atlas/type-notation/native.json.gz')));
 assert.deepEqual(catalog.entries.filter(e=>roles.importedSignature(catalog,'goedel-sample-4331',e.name,catalog.compiler)).map(e=>e.name).sort().join('|'),native.signatures.map(s=>s.name).sort().join('|'));
 const formalCache=new Map(),missingSignatures=new Map();
@@ -147,7 +152,7 @@ function audit(record) {
         splitStats.maxOccupiedPorts=Math.max(splitStats.maxOccupiedPorts,flat.branches.length);
         const head=flat.call.head;
         const callee=data.kind[head]===4 && edition.declarations.find(d=>d.name===data.payloads[head].name);
-        const imported=!callee && data.kind[head]===4 && roles.importedSignature(catalog,edition.id,data.payloads[head].name,window.PROOF_ATLAS_AI_SAMPLE.provenance.compiler);
+        const imported=!callee && data.kind[head]===4 && roles.importedSignature(catalog,edition.id,data.payloads[head].name,window.PROOF_ATLAS_AI_SAMPLE.provenance.compiler,window.PROOF_ATLAS_CORE_SIGNATURES);
         let params=[],formalData;
         if(callee){
           if(!formalCache.has(callee.indexSha256)){
@@ -217,7 +222,7 @@ function audit(record) {
 const reports=edition.declarations.filter(r=>r.kind==='theorem').map(audit);
 if(process.argv.includes('--branch-summary')){
   const missing=[...missingSignatures].sort((a,b)=>b[1]-a[1]);
-  console.log(JSON.stringify({edition:edition.id,...splitStats,missingNames:missing.length,mostFrequentMissing:missing.slice(0,5)}));return;
+  console.log(JSON.stringify({edition:edition.id,...splitStats,missingNames:missing.length,mostFrequentMissing:process.argv.includes('--all-missing')?missing:missing.slice(0,5)}));return;
 }
 if (process.argv.includes('--write-packets')) {
   const dir='public/data/proof-atlas/input-roles';

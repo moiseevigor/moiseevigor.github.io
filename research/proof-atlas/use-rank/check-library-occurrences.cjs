@@ -95,6 +95,12 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
      assert.equal(await roles.getByRole('link').count(),0);
      continue;
     }
+    const recursor=roles.getByRole('link',{name:'Eq.ndrec · argument 5 / 10',exact:true}).locator('..');
+    await recursor.getByText('Explore proof branches',{exact:true}).click();
+    await recursor.getByRole('button',{name:'Show declared parameters'}).click();
+    await recursor.getByText('inl · explicit',{exact:true}).click();
+    await recursor.getByText(/^Or.casesOn · signature binder e27/).waitFor();
+    await recursor.getByText('Explore proof branches',{exact:true}).click();
     const first=entry.groups[0];
     await roles.getByText(first.label,{exact:true}).waitFor();
     assert.equal(await roles.getByRole('link').count(),31);

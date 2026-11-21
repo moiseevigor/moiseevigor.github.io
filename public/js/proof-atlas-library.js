@@ -274,7 +274,7 @@
           const callee=owner.data.kind[head]===4 && edition.declarations.find(d=>d.name===name);
           const headRoute={root:part.route.root,slots:part.route.slots.concat(Array(part.call.arity).fill(0))};
           const bound=owner.data.kind[head]===0 && A.binding(owner.data,headRoute);
-          const signature=!callee && owner.data.kind[head]===4 && roles.importedSignature(window.PROOF_ATLAS_TYPE_NOTATION,edition.id,name,window.PROOF_ATLAS_AI_SAMPLE?.provenance.compiler);
+          const signature=!callee && owner.data.kind[head]===4 && roles.importedSignature(window.PROOF_ATLAS_TYPE_NOTATION,edition.id,name,window.PROOF_ATLAS_AI_SAMPLE?.provenance.compiler,window.PROOF_ATLAS_CORE_SIGNATURES);
           if(callee || bound || signature){
            const show=el('button','Show declared parameters'),status=el('p');
            show.type='button';status.setAttribute('role','status');display.append(show,status);
