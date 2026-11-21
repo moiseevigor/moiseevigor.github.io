@@ -26,7 +26,7 @@ description: >
 
 <div class="l-body" markdown="1">
 
-<div class="se2-review"><strong>Research notes · published 8 October 2026.</strong> This is a reader's map to three author manuscripts. The geometric setting and the published cut-locus synthesis are established inputs; the new results, numerical evidence and unresolved claims are identified below. The linked author manuscripts retain the research status and open questions stated below; this web publication does not claim journal peer review.</div>
+<div class="se2-review"><strong>Conjugate-times update · 21 November 2026.</strong> This guide accompanies three author manuscripts on rotating geodesics. The linked PDFs preserve the October web edition. The conjugate-times section also reports subsequent results checked in Lean.</div>
 
 A point in the plane is not enough to describe a moving vehicle. We also need its heading. Write its state as $(x,y,\theta)$: a position and an angle. Together these states form **SE(2), the group of plane motions**.
 
@@ -81,7 +81,7 @@ $$\operatorname{sn}^2(\psi+p)=r(p),\qquad r(p)=-\frac{\beta(p)}{\alpha(p)-\beta(
 
 The useful step is to lift $r$ back to phase. A Riccati identity and the arithmetic–geometric mean inequality give a slope bound for the two lifted branches. Each line $\tau=\psi+p$ then crosses the appropriate closed branch exactly once. The manuscript proves one conjugate time in the first bracket and one root on each of two brackets in every later Maxwell cell.
 
-That does not always mean two **distinct** times. At the critical modulus $k_0\approx0.90890856$, where $K=2E$, and phase $\psi\equiv K\pmod{2K}$, the two bracket roots meet at $p=2nK$. The determinant touches zero without the usual sign change. The cells are assigned half-open endpoints, $[p_n^1,p_{n+1}^1)$, so a boundary root belongs to one cell.
+At one modulus, $k_0\approx0.90890856$, the complete elliptic integrals satisfy $K=2E$. At phase $\psi\equiv K\pmod{2K}$, the two roots then meet at $p=2nK$ and the determinant has a fourth-order zero. Keep that phase relation and vary $k$ slightly. One root stays at the moving cell center $2nK(k)$. The distance to the other scales as $\lvert k-k_0\rvert^{1/3}$ for each fixed $n\ge1$. Thus even a small error in the modulus can visibly separate the roots. The [conjugate-times companion](/articles/se2-conjugate-times/#how-the-two-times-separate) gives the signed displacement and its proof. The half-open convention $[p_n^1,p_{n+1}^1)$ assigns each boundary root to one cell.
 
 </div>
 
@@ -145,25 +145,25 @@ The program now has three manuscript snapshots, with different proof boundaries.
 
 | Layer | What the current record supports | Remaining boundary |
 |---|---|---|
-| Conjugate times | Analytical bracket/counting proofs and a conditional Lean development; the critical coalescence is explicit | Concrete existence of the abstract Jacobi core and finiteness of tangencies remain assumptions of the formal chain; asymptotics and full geometry are outside that chain |
+| Conjugate times | Lean verifies the first rotating conjugate time, the noncritical cell count, the exceptional modulus, fourth-order contact and the fixed-cell cube-root splitting | Late-time root asymptotics, geometric fold recognition and the variational index theorem retain analytic steps outside the formalization |
 | Caustic geometry | Exact fold identities and rational certificates, separate cusp/umbilic arguments and bounded independent differential checks | The global incidence/count conjecture is open; excluded endpoint domains require additional arguments |
-| Interval criterion | The current audit records semantic validation of all 38,400 cell checkpoints, leaving 304 unresolved boxes in 32 cells under the original exclusions | Those residual cells are now included in the fifth exclusion set. Closure outside the five sets does not establish the predicate inside them |
+| Interval criterion | All 38,400 grid cells are covered outside the four original analytic exclusions. Later analysis covers both corners and a neighborhood of the double flip. | The remaining slab, the full width of the double-flip tube and regimes outside the grid still limit the global count. |
 | Inversion and counts | Exact scalar reconstruction and domain-specific count statements in the manuscript, with stored symbolic, interval and ODE checks | General effective onset scales, full publication review and the stated novelty checks remain open |
 
 </div>
 
-The declared five excluded sets occupy approximately **2.56% of the ambient endpoint-coordinate box**. This is a coordinate-volume statement, not a probability, a fraction of physical targets, or a percentage of the theorem proved. The smaller 304-box residual set occupied about 0.049% before the broader fifth exclusion was declared.
+The October snapshot listed 304 residual boxes in 32 grid cells. A later audit found that six boxes lay outside the rounded rectangle used to describe the fifth exclusion. Subsequent interval proofs closed all 304 boxes. The earlier percentage estimate for the excluded volume was withdrawn. The [caustic companion](/articles/se2-conjugate-locus/#what-the-interval-run-establishes) distinguishes this grid result from the global incidence question.
 
-The formal work has also advanced. The latest reduction constructs the 31-field Jacobi structure from a **13-hypothesis core**: the differential equations, initial values and first positive zero of $\operatorname{cn}$. It derives algebraic relations, periodic and reflection identities, phase inversion and the phase congruence rule. This narrows the assumption base. It still does not formalize the entire three-paper program.
+The Lean construction starts with the real elliptic integral and its inverse. For every $0<k<1$ it produces the Jacobi functions used by the counting theorem and connects the reduced determinant to the derivative of the endpoint map. A separate interval calculation bounds the scaled profile error at every offset in every cell $n\ge5$ for two moduli. The bounds are $0.5700$ at $k=0.60$ and $0.0481$ at $k=0.95$.
 
 A useful negative finding survives the review: six selected targets have locally certified low-level dips in $N$. Unrestricted unimodality at all real levels is therefore false. These dips occur below one and do not settle the positive-integer-level conjecture. Several historical binary64 finite-difference signs were wrong in precisely these shallow regions; direct derivatives and higher precision were needed to distinguish them.
 
-The next analytical work is to control the low-modulus wedge and the remaining exclusions, then complete the article-level proof and novelty reviews. Browser experiments help identify questions and explain mechanisms. They remain a different evidence layer from exact identities, interval coverage and formal proofs.
+For incidence counts, the remaining tasks include controlling the width of the bisector slab and the double-flip tube, and treating targets outside the certified box. The interactive figures illustrate individual targets and geodesics.
 
 ## The three articles
 
 <div class="se2-articles">
-<section class="se2-article"><small>Article A · manuscript candidate · 16-page snapshot</small><h3><a href="/articles/se2-conjugate-times/">All Conjugate Times of Rotating Geodesics</a></h3><p>The bracket mechanism, the critical exception, the Floquet form and the reduced Lean trust base. Includes the full manuscript PDF.</p></section>
+<section class="se2-article"><small>Article A · manuscript candidate · 16-page snapshot</small><h3><a href="/articles/se2-conjugate-times/">All Conjugate Times of Rotating Geodesics</a></h3><p>The bracket mechanism, the critical exception, the Floquet form and the formal proof of the splitting. Includes the full manuscript PDF.</p></section>
 <section class="se2-article"><small>Article B · research draft · 31-page snapshot</small><h3><a href="/articles/se2-conjugate-locus/">The Conjugate Locus: Folds, Cusps and Incidence</a></h3><p>The image of the singular set, geometric recognition and the exact scope of the count certificate. Includes the full manuscript PDF.</p></section>
 <section class="se2-article"><small>Article C · manuscript candidate · 75-page snapshot</small><h3><a href="/articles/se2-geodesic-counts/">Inverting the Exponential Map and Counting Geodesics</a></h3><p>The scalar inverse, winding classes, exact ray counts and the stated asymptotic regimes. Includes the full manuscript PDF.</p></section>
 </div>
@@ -172,9 +172,9 @@ All three belong to this single SE(2) program. The model is the standard left-in
 
 ## Sources and reproducibility
 
-The primary literature is indexed in the project's 53-record Obsidian catalogue. Its notes distinguish selected-section reading, abstract-only coverage, unread sources and edition gaps. A catalogue entry does not establish that every theorem in a source has been read or checked.
+The project’s source catalogue tracks reading coverage and edition gaps. The October web snapshot used its original 53 records. The expanded catalogue has 775 entries, including three withdrawal notices. Inclusion records a source and its status, without implying that every theorem has been checked.
 
-The web edition snapshots research revision `5c304fd` from 27 September 2026. The [source repository](https://github.com/moiseevigor/se2-conjugate-locus) contains the canonical manuscripts, living notebook, formal development and audit records. The [snapshot manifest](/public/research/se2/se2-provenance.json) binds the copied manuscript PDFs, their TeX sources and the browser math module. This publishing pass checks the figures and records current claims; it does not rerun the full interval computation.
+The downloadable manuscript snapshots and browser figures correspond to research revision `5c304fd` from 27 September 2026. The [source repository](https://github.com/moiseevigor/se2-conjugate-locus) contains the canonical manuscripts, living notebook, formal development and audit records. The [snapshot manifest](/public/research/se2/se2-provenance.json) binds the copied manuscript PDFs, their TeX sources and the browser math module. This publishing pass checks the figures and records current claims; it does not rerun the full interval computation.
 
 [^maxwell]: I. Moiseev and Y. L. Sachkov, *Maxwell strata in the sub-Riemannian problem on the group of motions of a plane*, ESAIM: COCV 16 (2010). [DOI](https://doi.org/10.1051/cocv/2009004). Establishes the underlying parametrization and Maxwell structure used here.
 [^conjugate]: Y. L. Sachkov, *Conjugate and cut time in the sub-Riemannian problem on the group of motions of a plane*, ESAIM: COCV 16 (2010). [DOI](https://doi.org/10.1051/cocv/2009031). The known first-time bounds and rotating-stratum conjugate results are inputs to the new manuscript.

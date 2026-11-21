@@ -18,7 +18,7 @@ manuscript_status: "manuscript candidate; final review open"
 
 <div class="l-body" markdown="1">
 
-<div class="se2-review"><strong>Author manuscript · manuscript candidate; final review open.</strong> This web companion states the principal results and explains their arguments. The complete hypotheses, detailed proofs, figures and bibliography are in the full manuscript linked below. This page is an editorial adaptation; it adds no theorem and does not claim journal peer review.</div>
+<div class="se2-review"><strong>Author manuscript · manuscript candidate; final review open.</strong> This web companion states the principal results and explains their arguments. The complete hypotheses, detailed proofs, figures and bibliography are in the full manuscript linked below. The November update below includes the subsequent formal proof of the fixed-cell splitting.</div>
 
 <div class="se2-manuscript"><a href="/public/research/se2/conjugate_times_se2.pdf">Read the full manuscript · 16 pages</a><a href="/public/research/se2/conjugate_times_se2.tex">TeX snapshot</a><a href="/mathematics/2026/10/07/se2-geodesics-research-program/">The SE(2) program</a></div>
 
@@ -68,7 +68,7 @@ Let $u(p)\in[0,K]$ be the inverse phase with $\operatorname{sn}^2u=r$. The zero 
 
 The Riccati identities control the derivatives of the two coefficient ratios. Their product identity and the arithmetic–geometric mean inequality imply $\lvert u^\prime\rvert\ge1$, with a fixed orientation on each bracket. An oriented monotonicity argument then gives a unique time for the crossing. The two signs describe the same time at a corner, so the conclusion is uniqueness of **time**, rather than uniqueness of a signed pair.
 
-Equality of slopes requires additional care: the paper treats finite tangencies through analytic continuation and local order. The formal counting theorem assumes the needed finiteness of tangencies; it does not silently replace that hypothesis by a strict slope inequality everywhere.
+The lift can have unit slope at a tangency. The concrete counting theorem handles these contacts and proves uniqueness for every admissible modulus and phase. Its statement requires no separate finiteness assumption on tangencies.
 
 </div>
 
@@ -98,9 +98,22 @@ $$J_2(K+2nK+\sigma,2nK+\sigma,k_0)
 
 This scalar order does not itself identify the singularity of the full exponential map. That belongs to the conjugate-locus article.
 
+## How the two times separate
+
+Fix a later cell $n\ge1$ and keep $\psi\equiv K(k)\pmod{2K(k)}$. Write $h=p-2nK(k)$ and $\delta=K-2E$. One root has $h=0$ for every modulus. Near the exceptional modulus the second root solves
+
+$$I_k(h)=-2n\delta,\qquad I_k(h)=\int_0^h
+\left(\frac{\operatorname{sn}v\,\operatorname{dn}v}{\operatorname{cn}v}\right)^2\,dv.$$
+
+The integrand is positive on either side of zero close to the center. Thus $I_k$ is strictly increasing there, and the sign of the second displacement is opposite to that of $\delta$. Its leading term is $h^3/3$. More precisely, with $x=\sqrt[3]{-6n\delta}$ the signed real cube root,
+
+$$h=x+\frac{4k^2-2}{15}x^3+O(\lvert x\rvert^5).$$
+
+One can verify the correction by substituting $h=x+(4k^2-2)x^3/15$ into $3I_k(h)=x^3$. The terms of degree five cancel. Adding and subtracting a sufficiently large multiple of $\lvert x\rvert^5$ gives two trial offsets with opposite residuals. Continuity puts a root between them and strict increase identifies it uniquely. The derivative of $K-2E$ at $k_0$ is $E/[k_0(1-k_0^2)]>0$, so the separation is proportional to $\lvert k-k_0\rvert^{1/3}$ at fixed $n$. Physical time separation is $2k\lvert h\rvert$.
+
 ## Periodic velocity, spatial drift, late times
 
-The body velocity has period $T=4kK$, while the endpoint satisfies $g(t+nT)=h^n g(t)$ for a period translation $h$. Differentiating with respect to the source parameters gives a determinant that is exactly quadratic in the integer $n$.
+The body velocity has period $T=4kK$, while the endpoint satisfies $g(t+nT)=h^n g(t)$ for a period translation $h$. Differentiating with respect to the source parameters gives a determinant that is a polynomial of degree at most two in the integer $n$.
 
 For each fixed modulus and phase representatives in $(-K,K)$, away from $\psi\equiv K$, the manuscript derives
 
@@ -110,13 +123,13 @@ The estimate is uniform on compact phase subsets away from the excluded phase. I
 
 ## The formal proof boundary
 
-The current Lean reduction constructs `JacobiFull` from a 13-hypothesis `JacobiCore`: the modulus range, four derivative rules, four initial values, and the first-zero data for $\operatorname{cn}$ and $K$. It derives the algebraic relations, positivity, reflection and periodic identities, inverse phase map and phase congruence characterization.
+The November development constructs the Jacobi functions by inverting the elliptic integral and proves the first-time and noncritical counting theorems for these concrete functions. It also identifies the signed determinant of the actual rectified endpoint map and proves that this determinant has degree at most two in the period index.
 
-The remaining formal assumptions include existence of functions with that core and finiteness of the relevant tangencies. The formal development covers the bracket counting chain under its hypotheses. The large-index theorem, identification with the concrete geometric exponential map, scalar zero orders and caustic recognition are separately argued; they are not all Lean consequences.
+For the exceptional phase, Lean verifies the unique critical modulus, the scalar fourth-order coefficient and the fixed-cell splitting formula above, including its fifth-order error bound and local uniqueness. The large-index root asymptotics, the full variational index theorem and the geometric classification of the caustic have further analytic steps.
 
 ## Status and sources
 
-This manuscript is an author publication candidate. Its original September review repaired signed-corner uniqueness, unqualified distinct counts and numerical provenance. The latest September reduction narrows the formal assumption base. This editorial pass reads those records and reruns the browser numerical fixtures; it does not claim a fresh Lean or Mathlib rebuild.
+The downloadable PDF is the October manuscript snapshot. This companion was updated on 21 November 2026 after checking the combined Lean build and the axiom dependencies of the splitting result. The [proof sources and verification record](/public/research/se2/fixed-cell-splitting.zip) reproduce that check. Peer review remains open.
 
 Foundational sources are Moiseev–Sachkov's [Maxwell-strata paper](https://doi.org/10.1051/cocv/2009004) and Sachkov's [conjugate/cut-time paper](https://doi.org/10.1051/cocv/2009031). Complete citations and statement locators are in the PDF. The project-local literature catalogue preserves its reading and edition limits.
 

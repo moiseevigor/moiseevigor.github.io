@@ -99,22 +99,15 @@ $$0.02\le m\le0.98,\qquad 0\le\mu\le\pi/2,
 
 The original interval certificate was withdrawn after two enclosure defects were found: incomplete integrals at negative amplitudes and varying quadratic square roots incorrectly tightened as constants. The current calculation uses repaired primitives and source-bound, resumable proof records.
 
-The saved full-grid audit records **38,400 validated cell checkpoints**, with no semantic validation failures. Under the original exclusions, 304 boxes in 32 cells remain unresolved. The current manuscript declares those cells as a fifth excluded set $\mathcal C_4$, in addition to the bisector slab, two corners and double-flip tube.
+The initial replay validated 38,400 grid cells and retained 304 unresolved boxes in 32 cells. Six of those boxes lay outside the rounded exclusion quoted in the October PDF. The subsequent audit withdrew that volume estimate and used the exact union of grid cells.
 
-The largest part of $\mathcal C_4$ is a low-modulus wedge,
-
-$$0.02\le m\le0.06,\quad0.94\le\mu\le\pi/2,
-\quad0.41\le\Delta\varphi\le0.80,$$
-
-plus one further cell near $m\in[0.78,0.82]$. The five declared sets occupy approximately 2.56% of the ambient endpoint-coordinate volume. All boxes outside those sets close in the recorded computation. The predicate inside the excluded regions remains an analytical task.
-
-The fifth exclusion is a change of certified domain. It does not prove the residual wedge, nor convert numerical small-modulus asymptotics into a remainder-bounded theorem. Applying the conditional count globally to a target component requires its critical points to meet the certified domain or to have separate proofs on the excluded portions.
+Later interval certificates closed all 304 residual boxes. The last 16 closed with 6,029 new interval leaves. This establishes the predicate across the grid outside the bisector slab, two corner regions and the double-flip tube. Separate arguments cover the two corners and, on compact modulus sets, a neighborhood of the double flip. Its proved width has yet to reach the boundary of the full tube. The remaining slab and relevant regimes outside the grid also affect the global count.
 
 ## Status and reproducibility
 
 This is a **research draft**. Exact local certificates, geometric recognition and selected independent differential checks support their scoped statements. The global incidence/count conjecture, excluded-domain arguments and publication checks remain open.
 
-This web pass snapshots the current manuscript and reads the latest grid audit. It does not rerun the multi-million-leaf interval calculation or formalize the caustic in Lean. The [snapshot manifest](/public/research/se2/se2-provenance.json) preserves the PDF and TeX hashes and identifies the audit totals used.
+The [snapshot manifest](/public/research/se2/se2-provenance.json) records the October PDF, TeX and original audit totals. The November update above follows the subsequent certificate-domain and short-arc closure reviews. The full interval computation was last run by the research project.
 
 Read the complete 31-page manuscript above for all charts, seam hypotheses and proof details. Continue to [Article C](/articles/se2-geodesic-counts/) for the exact inverse map and its count statements, or return to [the unified program](/mathematics/2026/10/07/se2-geodesics-research-program/).
 

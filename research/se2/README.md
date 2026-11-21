@@ -27,15 +27,8 @@ and equality qualifications. They do not constitute interval or formal certifica
 The camera uses equal spatial-axis scales. Playback is user initiated and stops
 when the figure or page is hidden; expensive figures initialize near the viewport.
 
-The full-grid audit records 38,400 validated checkpoints and 304 residual boxes in
-32 cells under its original exclusions. The current manuscript adds those cells
-as a fifth excluded set. This domain change does not prove them. The explorer's
-summary counters were stale; the snapshot manifest uses the actual audit JSON.
-The current PDFs have 16, 31 and 75 pages, superseding older registry descriptions.
+## November 2026 research update
 
-No manuscript proof is changed by this web adaptation. The browser kernel now
-includes reviewed corrections for phase-aware source identity, seam reconstruction
-and critical endpoint detection; origin and current hashes are in the manifest. The 13-hypothesis Lean
-reduction is reported from the current source record, not freshly rebuilt here.
-Literature reading/edition limits and manuscript submission gates remain in force.
-Web publication does not imply journal peer review or submission readiness.
+The conjugate-times companion reports the verified local fixed-cell splitting and signed modulus limit. The downloadable proof package contains pinned dependencies, the project imports and a theorem audit. The October PDF, TeX, figure hashes and numerical checks remain a historical snapshot.
+
+The October interval audit retained 304 residual boxes in 32 cells. Later reviews repaired the domain description and closed all of those boxes. Analytic arguments cover both corners and a local double-flip neighborhood. The finite tube, the remaining slab and regimes outside the grid still limit the global incidence count. The former total exclusion-volume estimate was withdrawn.
