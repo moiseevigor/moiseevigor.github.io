@@ -2,7 +2,7 @@
 const fs=require('node:fs'),z=require('node:zlib'),crypto=require('node:crypto'),assert=require('node:assert/strict');
 const A=require('../../../public/js/proof-atlas-library-data');
 const {spine}=require('../../../public/js/proof-atlas-elimination');
-const {derivationInputs,binderArgument,statementOrigin,boundPremise,zeroDifference,logicalInference,arithmeticInference,numeralComparison}=require('../../../public/js/proof-atlas-arithmetic');
+const {equalityChain,congruenceCall,transportCall,derivationInputs,binderArgument,statementOrigin,boundPremise,zeroDifference,logicalInference,arithmeticInference,numeralComparison}=require('../../../public/js/proof-atlas-arithmetic');
 global.window={};require('../../../public/data/proof-atlas/goedel-sample-manifest');
 const edition=window.PROOF_ATLAS_AI_SAMPLE.edition;
 const report=fs.readFileSync(0,'utf8').trim().split('\n').map(line=>JSON.parse(line)).find(x=>x.edition===edition.id);
@@ -20,6 +20,8 @@ const folded=process.argv.includes('--fold-zero');
 let foldedBranches=0;const zeroProducts={};
 const scopes={visits:0,variableRows:0,binderOccurrences:0,ambiguousVariableRows:0,ambiguousInferenceRows:0,examples:[],inferenceExamples:[]};
 const endpoints={statement:0,localLambda:0,letValue:0,otherBinder:0,closedAtStatement:0,closedInScope:0,scopeClosures:[],localCalls:{},callExamples:{},examples:{}};
+const skipTransport=arithmeticOnly||process.argv.includes('--without-transport');
+const transportEvidence={},transportExamples={},congruenceExamples={};
 let fullyRead=0;const summaries=[];
 let steps=0,leaves=0,maxDepth=0,longest;
 for(const d of edition.declarations){
@@ -153,7 +155,23 @@ for(const d of edition.declarations){
      logicalExamples[name]={proof:d.name,site,links:displayed.map(i=>ports[i])};
     }
    }
-   const rule=logical||arithmeticInference(g,site);
+   const cast=skipTransport?null:transportCall(g,site);
+   if(cast){
+    const reverse=name==='Eq.mpr';
+    assert.equal(cast.reverse,reverse);
+    assert.deepEqual([cast.source,cast.target,...cast.proofs].map(x=>A.walk(g,x.route)),[s.args[reverse?1:0],s.args[reverse?0:1],...s.args.slice(2)]);
+    const heads=cast.proofs.map(x=>{const h=spine(g,x.node).head;return g.payloads[h]?.name||A.kinds[g.kind[h]];});
+    const key=name+' / '+heads.join(' / ');transportEvidence[key]=(transportEvidence[key]||0)+1;
+    transportExamples[key]??={proof:d.name,site,links:[cast.source,cast.target,...cast.proofs]};
+   }
+   const congruence=skipTransport?null:congruenceCall(g,site);
+   if(congruence){
+    const links=[congruence.functions[0],congruence.operands[0],congruence.functions[1],congruence.operands[1],...congruence.proofs];
+    const indices=name==='congrArg'?[4,2,4,3,5]:[2,4,3,5,6,7];
+    links.forEach((x,i)=>assert.equal(A.walk(g,x.route),s.args[indices[i]]));
+    congruenceExamples[name]??={proof:d.name,site,links};
+   }
+   const rule=logical||arithmeticInference(g,site)||cast||congruence||(!skipTransport&&equalityChain(g,site));
    if(!rule || (arithmeticOnly && Object.hasOwn(theoremSlots,name)) || (arithmeticOnly && ['Mathlib.Tactic.Linarith.mul_zero_eq','Mathlib.Tactic.Linarith.zero_mul_eq'].includes(name)) || (arithmeticOnly && name==='sub_eq_zero_of_eq') || (linarithOnly && Object.hasOwn(signSlots,name)) || (baseline && added.has(rule.name.split('.').at(-1)))){frontier[name]=(frontier[name]||0)+1;leaves++;boundaryRows.add(site.node);
     if(!cert)unresolved++;
     recordPath(item,depth);
@@ -187,7 +205,7 @@ for(const d of edition.declarations){
     todo.push({site:child,depth:depth+1,parent:item});
    });
   }
-  if(!arithmeticOnly && !folded){
+  if(!skipTransport && !folded){
    const r=derivationInputs(g,premise);
    assert(!r.limited);
    assert.deepEqual(new Map(r.theorems.map(x=>[x.name,x.uses])),theoremCounts);
@@ -217,4 +235,4 @@ for(const d of edition.declarations){
 assert.equal(longest.depth,maxDepth);
 assert.equal(certificateVisits,frontier['Mathlib.Meta.NormNum.isNat_lt_true']);
 if(linarithOnly && !baseline)assert.equal(certificates.length,272);
-console.log(JSON.stringify({summaries,endpoints,scopes,uniqueLeaves,foldedBranches,zeroProducts,zeroVisits,zeroExamples,fullyRead,equivalenceUses,logicalExamples,logicalProofs:logicalProofs.size,signExamples,certificateVisits,certificates,inequalities,uniqueSteps,roots:roots.length,steps,leaves,maxDepth,rules,frontier,longest},null,2));
+console.log(JSON.stringify({congruenceExamples,transportEvidence,transportExamples,summaries,endpoints,scopes,uniqueLeaves,foldedBranches,zeroProducts,zeroVisits,zeroExamples,fullyRead,equivalenceUses,logicalExamples,logicalProofs:logicalProofs.size,signExamples,certificateVisits,certificates,inequalities,uniqueSteps,roots:roots.length,steps,leaves,maxDepth,rules,frontier,longest},null,2));

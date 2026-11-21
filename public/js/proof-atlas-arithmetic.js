@@ -188,12 +188,24 @@
   }
   return null;
  }
- function formulaTransport(data,at){
+ function transportCall(data,at){
   const forward=namedArguments(data,at,'Eq.mp',4);
-  const cast=forward||namedArguments(data,at,'Eq.mpr',4);
-  if(!cast)return null;
-  const reverse=!forward;
-  const before=formula(data,cast[reverse?1:0]),after=formula(data,cast[reverse?0:1]);
+  const args=forward||namedArguments(data,at,'Eq.mpr',4);
+  if(!args)return null;
+  return {name:forward?'Eq.mp':'Eq.mpr',reverse:!forward,args,source:args[forward?0:1],
+   target:args[forward?1:0],proofs:args.slice(2)};
+ }
+ function congruenceCall(data,at){
+  const a=namedArguments(data,at,'congrArg',6);
+  if(a)return {name:'congrArg',functions:[a[4],a[4]],operands:a.slice(2,4),proofs:[a[5]]};
+  const c=namedArguments(data,at,'congr',8);
+  return c?{name:'congr',functions:c.slice(2,4),operands:c.slice(4,6),proofs:c.slice(6)}:null;
+ }
+ function formulaTransport(data,at){
+  const call=transportCall(data,at);
+  if(!call)return null;
+  const {args:cast,reverse}=call;
+  const before=formula(data,call.source),after=formula(data,call.target);
   if(!before || !after)return null;
   return {before,after,equality:cast[2],premise:cast[3],reverse,change:rewriteSide(data,cast,before,after,reverse)};
  }
@@ -373,7 +385,7 @@
   const [type,start,middle,end,first,second]=args;
   if(expected && (expected.name!=='Eq' || expected.parameters[0].node!==type.node ||
      expected.left.site.node!==start.node || expected.right.site.node!==end.node))return null;
-  return {start,middle,end,first,second};
+  return {name:'Eq.trans',start,middle,end,first,second,proofs:[first,second]};
  }
  function rewriteSequence(data,at,selected){
   const steps=[{at,term:selected}];
@@ -452,7 +464,7 @@
     inputs.get(key).uses++;continue;
    }
    if(numeralComparison(data,site)){certificates++;continue;}
-   const rule=logicalInference(data,site)||arithmeticInference(data,site);
+   const rule=logicalInference(data,site)||arithmeticInference(data,site)||transportCall(data,site)||congruenceCall(data,site)||equalityChain(data,site);
    if(!rule){unread++;firstUnread??=site;continue;}
    steps++;
    if(!rule.proofs.length){
@@ -556,6 +568,29 @@
    panel.append(details);container.append(panel);
   }
   const selected=formulaTransport(data,at);
+  const congruence=congruenceCall(data,at);
+  if(congruence){
+   const panel=el('section'),line=el('p'),evidence=el('p');panel.dataset.congruence=congruence.name;
+   panel.append(el('h4','Equality of function applications'));
+   const term=site=>link(caption(formula(data,site,3,true)),site);
+   for(let i=0;i<2;i++){
+    if(i)line.append(' = ');
+    line.append(term(congruence.functions[i]),'(',term(congruence.operands[i]),')');
+   }
+   if(congruence.proofs.length===2)evidence.append(link('Function equality',congruence.proofs[0]),' · ');
+   evidence.append(link('Argument equality',congruence.proofs.at(-1)));
+   panel.append(line,evidence);container.append(panel);
+  }
+  const transport=transportCall(data,at);
+  if(transport){
+   const panel=el('details'),line=el('p');
+   panel.dataset.transportInputs='';
+   panel.append(el('summary',transport.reverse?'Transport by equality in reverse':'Transport by equality'));
+   const term=site=>link(caption(formula(data,site,3,true)),site);
+   line.append(term(transport.source),' → ',term(transport.target));
+   panel.append(line,link('Equality used',transport.proofs[0]),' · ',link('Input term',transport.proofs[1]));
+   container.append(panel);
+  }
   const chainAt=selected?.change?selected.premise:at;
   const bound=selected?.change && boundPremise(data,chainAt);
   if(bound){
@@ -824,5 +859,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={derivationInputs,binderArgument,statementOrigin,binderCopies,zeroDifference,logicalInference,numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
+ if(common)module.exports={congruenceCall,transportCall,derivationInputs,binderArgument,statementOrigin,binderCopies,zeroDifference,logicalInference,numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
 })(typeof window==='undefined'?globalThis:window);
