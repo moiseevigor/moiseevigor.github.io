@@ -8,6 +8,15 @@ global.window={};require('../../../public/data/proof-atlas/goedel-sample-manifes
 const arities={'HPow.hPow':6,'HMul.hMul':6,'HSub.hSub':6,'HAdd.hAdd':6,'HDiv.hDiv':6,Eq:3,'LE.le':4,'LT.lt':4,'Real.sqrt':1,abs:4},counts={},examples={};
   function check(g,t){
    assert.equal(A.walk(g,t.site.route),t.site.node);
+   if(t.variables){
+    const s=spine(g,t.site.node);
+    assert.equal(g.payloads[s.head].name,t.label);
+    t.variables.forEach((v,i)=>{
+     assert.equal(A.walk(g,v.site.route),s.args[i]);
+     const b=A.binding(g,v.site.route);assert(b);
+     const p=g.payloads[b.node];assert.equal(v.label,p.binderName||p.declName||'e'+v.site.node);
+    });
+   }
    if(!t.symbol)return;
    const s=spine(g,t.site.node);
    assert.equal(A.walk(g,t.head.route),s.head);
@@ -30,7 +39,7 @@ for(const d of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations.filter(d=>d.kin
   const tree=formula(g,at),s=spine(g,at.node),name=g.payloads[s.head].name;
   if(s.args.length!==arities[name]){assert.equal(tree,null);absent++;continue;}
   counts[name]=(counts[name]||0)+1;
-  check(g,tree);
+  check(g,tree);check(g,formula(g,at,6));
   if(tree.left.symbol||tree.right?.symbol)nested++;
   const type=tree.right?.label?.startsWith('Nat.rawCast(')?'cast':tree.right?.label?.startsWith('OfNat.ofNat(')?'ofNat':
    (tree.left.symbol||tree.right?.symbol)?'nested':name;
@@ -48,6 +57,11 @@ for(const edition of window.PROOF_ATLAS_LIBRARY.editions){
  while(g.kind[node]===7){slots.push(1);node=g.children[node][1];}
  const at={node,route:{root:0,slots}},t=formula(g,at);
  check(g,t);
+ const expanded=formula(g,at,6);check(g,expanded);
+ const names=[];
+ function inspect(t){if(t.variables)names.push(t.label);if(t.left)inspect(t.left);if(t.right)inspect(t.right);}
+ inspect(expanded);
+ assert.deepEqual(names,['z','z','Dz','T1','T2','d','s'].map(n=>'JacobiData.'+n));
  assert.deepEqual([t.name,t.left.name,t.left.right.name,t.right.name,t.right.left.name],
   ['LE.le','HMul.hMul','Real.sqrt','abs','HDiv.hDiv']);
  riccati.push({edition:edition.id,proof:d.name,at});

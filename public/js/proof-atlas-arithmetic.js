@@ -13,7 +13,8 @@
   ['Real.sqrt',{symbol:'√',parameters:[],unary:true}],
   ['abs',{symbol:'abs',parameters:['type','lattice instance','group instance'],unary:true}]
  ]);
- function formula(data,at){
+ function formula(data,at,maxDepth=3){
+  if(![3,6].includes(maxDepth))throw RangeError('Unsupported formula depth');
   function child(site,slot){
    return {node:data.children[site.node][slot],route:{root:site.route.root,slots:site.route.slots.concat(slot)}};
   }
@@ -25,7 +26,8 @@
    }
    const name=data.kind[head.node]===4?data.payloads[head.node].name:null;
    const op=operators.get(name);
-   if(depth<3 && op && args.length===op.parameters.length+(op.unary?1:2)){
+   const recognized=op && args.length===op.parameters.length+(op.unary?1:2);
+   if(depth<maxDepth && recognized){
     return {site,name,head,symbol:op.symbol,relation:op.relation,parameterNames:op.parameters,
      parameters:args.slice(0,op.parameters.length),left:read(args[op.parameters.length],depth+1),
      right:op.unary?null:read(args.at(-1),depth+1)};
@@ -42,7 +44,14 @@
     const literal=args[name==='Nat.rawCast'?2:1],lp=data.payloads[literal.node];
     if(data.kind[literal.node]===9 && lp.literalKind==='natVal')label=name+'('+lp.value+')';
    }
-   return {site,label};
+   else if(name && args.length>0 && args.length<=3 && args.every(a=>data.kind[a.node]===0)){
+    const variables=args.map(a=>{
+     const bound=A.binding(data,a.route),p=bound && data.payloads[bound.node];
+     return {site:a,label:p?.binderName||p?.declName||'e'+a.node};
+    });
+    return {site,label:name,variables};
+   }
+   return {site,label,expandable:Boolean(recognized)};
   }
   return read(at,0);
  }
@@ -58,8 +67,15 @@
   const el=(tag,text)=>{const e=document.createElement(tag);if(text)e.textContent=text;return e;};
   const panel=el('section'),line=el('p'),detail=el('details'),list=el('ul');
   panel.dataset.arithmeticFormula='';line.className='pl-arithmetic-expression';
+  let truncated=false;
   function draw(t,level){
-   if(!t.symbol)return link(t.label,t.site);
+   if(!t.symbol){
+    if(t.expandable)truncated=true;
+    if(!t.variables)return link(t.label,t.site);
+    const call=el('span');call.append(link(t.label,t.site),'(');
+    t.variables.forEach((v,i)=>{if(i)call.append(', ');call.append(link(v.label,v.site));});
+    call.append(')');return call;
+   }
    const span=el('span'),item=el('li');
    item.append(link(t.name,t.head));
    t.parameterNames.forEach((label,i)=>item.append(' · ',link(label,t.parameters[i])));
@@ -74,7 +90,18 @@
   line.append(draw(tree,0));detail.append(el('summary','Types and instances'),list);
   panel.append(el('h4',binders?'Conclusion':tree.relation?'Relation':'Arithmetic expression'));
   if(binders)panel.append(link('Under '+binders+' binders',focus));
-  panel.append(line,detail);container.append(panel);
+  panel.append(line);
+  if(truncated){
+   const toggle=el('button','Expand formula');toggle.type='button';toggle.setAttribute('aria-expanded','false');
+   let expanded=false;
+   toggle.onclick=()=>{
+    expanded=!expanded;list.replaceChildren();truncated=false;
+    line.replaceChildren(draw(expanded?formula(data,focus,6):tree,0));
+    toggle.textContent=expanded?'Collapse formula':'Expand formula';toggle.setAttribute('aria-expanded',String(expanded));
+   };
+   panel.append(toggle);
+  }
+  panel.append(detail);container.append(panel);
  }
  if(common)module.exports={formula};else host.ProofAtlasArithmetic={mount};
 })(typeof window==='undefined'?globalThis:window);
