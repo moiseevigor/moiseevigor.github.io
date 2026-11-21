@@ -57,8 +57,17 @@ const {chromium}=require('playwright');
      const paths=[];
      for(let i=1;i<=n;i++){
       el('sharing-number').value=String(i);el('sharing-form').requestSubmit();
-      paths.push({path:[...el('sharing-path').querySelectorAll('a')].map(a=>a.href),
-       domain:[...el('sharing-domain').querySelectorAll('a')].map(a=>({url:a.href,text:a.textContent}))});
+      const box=el('sharing-domain'),buttons=[...box.querySelectorAll('.formula button')];
+      const domain=[...box.querySelectorAll('p:not(.formula) a')].map(a=>({url:a.href,text:a.textContent}));
+      const symbols=buttons.map(button=>{
+       button.click();
+       return {name:button.textContent,pressed:buttons.filter(b=>b.getAttribute('aria-pressed')==='true').map(b=>buttons.indexOf(b)),
+        highlighted:buttons.filter(b=>b.hasAttribute('data-same-binder')).map(b=>buttons.indexOf(b)),
+        introduced:[...box.querySelectorAll('.formula a[data-same-binder]')].map(a=>a.href),
+        dest:[...box.querySelectorAll('p:last-child a')].map(a=>a.href)};
+      });
+      paths.push({symbols,formula:box.querySelector('.formula').textContent,path:[...el('sharing-path').querySelectorAll('a')].map(a=>a.href),
+       domain});
      }
      return paths;
     },routes.length);
@@ -78,18 +87,30 @@ const {chromium}=require('playwright');
       assert.equal(atlas.walk(data,route),atlas.walk(data,domain));
      }
      const domainNode=atlas.walk(data,domain);
-     if(data.kind[domainNode]===4)assert.equal(links[0].text,data.payloads[domainNode].name);
-     if(first.source.name==='lean_workbook_4274' && domainNode===95){
-      assert(links[0].text.includes('b(n·2) ='));assert.equal(links.length,4);
+     const symbols=actual[i].symbols;
+     if(data.kind[domainNode]===4)assert.equal(actual[i].formula,data.payloads[domainNode].name);
+     if(first.source.name==='lean_workbook_4274' && domainNode===95)assert(actual[i].formula.includes('b(n·2) ='));
+     const expectedUses=new Set();
+     function walkDomain(node,slots){
+      if(data.kind[node]===0)expectedUses.add(slots.join('.'));
+      data.children[node].forEach((child,slot)=>walkDomain(child,slots.concat(slot)));
      }
-     for(let j=2;j<links.length;j+=2){
-      const use=new URL(links[j].url),target=new URL(links[j+1].url);
+     walkDomain(domainNode,domain.slots);
+     for(const [j,sym] of symbols.entries()){
+      const [use,target]=sym.dest.map(u=>new URL(u));
       const slots=use.searchParams.get('route').split(':')[1].split('.').map(Number);
-      assert.deepEqual(slots.slice(0,domain.slots.length),domain.slots);
+      assert(expectedUses.delete(slots.join('.')));
+      assert.equal(use.hash,'#expr-'+atlas.walk(data,{root:1,slots}));
       const resolved=atlas.binding(data,{root:1,slots});
       assert.equal(target.searchParams.get('route'),'1:'+resolved.route.slots.join('.'));
       assert.equal(target.hash,'#expr-'+resolved.node);
+      const local=resolved.route.slots.length>=domain.slots.length && domain.slots.every((v,i)=>resolved.route.slots[i]===v);
+      assert.deepEqual(sym.introduced,local?[target.href]:[]);
+      assert.deepEqual(sym.pressed,[j]);
+      assert.deepEqual(sym.highlighted,symbols.flatMap((other,k)=>other.dest[1]===sym.dest[1]?[k]:[]));
      }
+     assert.equal(expectedUses.size,0);
+
     }
     await page.reload();
     await page.locator('#sharing-number').waitFor({state:'visible'});

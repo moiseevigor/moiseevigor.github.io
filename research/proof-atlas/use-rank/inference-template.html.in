@@ -9,6 +9,9 @@
 #sharing-path{display:flex;align-items:center;gap:.5em;flex-wrap:wrap}
 #sharing-path a{border:1px solid GrayText;border-radius:.25rem;padding:.25rem .5rem}
 @media(max-width:36rem){#sharing-path{align-items:flex-start;flex-direction:column}#sharing-path span{margin-inline-start:.7rem;border-inline-start:1px solid GrayText;padding-inline-start:.6rem}}
+#sharing-domain .formula button{font:inherit;color:LinkText;background:transparent;border:0;padding:0 .08em;text-decoration:underline;cursor:pointer}
+#sharing-domain .formula [data-same-binder]{background:Mark;color:MarkText}
+#sharing-domain .formula [aria-pressed=true]{outline:1px solid currentColor}
 </style></head><body><main><h1>Reading a Lean inference</h1><label>Compiled application <select id="proof"></select></label>
 <p id="intro"></p><details id="final-application"><summary>Read backward from the theorem result</summary><div id="final-body"></div></details><details id="statement-flow"><summary>Trace a theorem parameter or hypothesis</summary><label>Statement binder <select id="clause"></select></label><div id="flow"></div></details><section aria-labelledby="map-heading"><h2 id="map-heading">Which arguments occur in each type?</h2>
 <p class="matrix-key">Columns are proof inputs and the conclusion. Select a dot to trace its reference. A dash means the formal argument is absent from that type. A blank falls outside its scope.</p>
@@ -70,16 +73,35 @@ function showSharedPath(ordinal){
    relation('contains'),link('variable #'+site.index,site.variable),relation('bound by'),
    link(site.name+' (binder '+site.binder.node+')',site.binder));
  const declared=table.domains[site.binder.route.slots.join('.')],box=el('sharing-domain');
- box.replaceChildren('Declared type of '+site.name+' · ',link(declared.formula,declared.domain));
- if(declared.statement)box.append(' · ',link('In the theorem statement',declared.statement));
- if(declared.references?.length){
-  const list=document.createElement('ul');
-  for(const ref of declared.references){
-   const item=document.createElement('li');
-   item.append(link(ref.name,ref.use),' in this type refers to ',link('binder '+ref.name,ref.binder));list.append(item);
+ const expr=document.createElement('p'),source=document.createElement('p'),trace=document.createElement('p');
+ expr.className='formula';trace.setAttribute('aria-live','polite');trace.hidden=true;
+ source.append(link('Compiled type',declared.domain));
+ if(declared.statement)source.append(' · ',link('In the theorem statement',declared.statement));
+ const symbols=[],introductions=[];
+ for(const token of declared.formula){
+  if(typeof token==='string'){expr.append(token);continue;}
+  if(token.introduction){
+   const anchor=link(token.label,token.introduction);
+   anchor.setAttribute('aria-label','Introduction of '+token.label);
+   introductions.push(anchor);expr.append(anchor);continue;
   }
-  box.append(list);
+  const button=document.createElement('button');button.type='button';button.textContent=token.label;
+  button.setAttribute('aria-pressed','false');
+  button.setAttribute('aria-label','Trace '+token.label+', variable use '+(symbols.length+1));
+  symbols.push({button,token});expr.append(button);
+  button.onclick=()=>{
+   for(const anchor of introductions)anchor.toggleAttribute('data-same-binder',anchor.href===address(token.binder));
+   for(const other of symbols){
+    const same=address(other.token.binder)===address(token.binder);
+    other.button.toggleAttribute('data-same-binder',same);
+    other.button.setAttribute('aria-pressed',String(other.button===button));
+   }
+   trace.replaceChildren(link('Selected '+token.label,token.use),' refers to ',link('binder '+token.label,token.binder),'.');
+   trace.hidden=false;
+  };
  }
+ box.replaceChildren('Declared type of '+site.name,expr,source,trace);
+
 
 }
 el('sharing-form').onsubmit=e=>{
