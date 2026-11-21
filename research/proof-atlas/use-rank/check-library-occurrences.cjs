@@ -747,6 +747,25 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
    await page.waitForFunction(()=>window.ProofAtlasLibrary?.getSnapshot()?.selected===950);
    const premiseSelection=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
    assert.deepEqual(premiseSelection.route.slots,productCall.route.slots.concat(1));
+   for(const [node,forward] of [[3221,true],[3238,false]]){
+    const route=atlas.routes(body).route(node),at={node,route};
+    await page.goto('http://localhost/projects/proof-atlas/library/?loading=paged&edition=published-15&proof='+riccati.name+'&route='+route.root+':'+route.slots.join('.')+'#expr-'+node);
+    const transport=page.getByRole('region',{name:'Transport across equality'});
+    const diagram=transport.locator('p').first();
+    await diagram.waitFor();
+    const urls=await diagram.getByRole('link').evaluateAll(links=>links.map(a=>a.href));
+    assert.equal(urls.length,5);
+    assert.equal((await diagram.innerText()).replace(/\s+/g,' '),forward?'A = B · t : A ↦ result : B':'A = B · t : B ↦ result : A');
+    for(const [index,slot] of [1,2,4,forward?1:2,forward?2:1].entries()){
+     const expected=sourceSlot(body,at,slot),url=new URL(urls[index]);
+     assert.equal(url.hash,'#expr-'+expected.node);
+     assert.equal(url.searchParams.get('route'),expected.route.root+':'+expected.route.slots.join('.'));
+    }
+    const eq=sourceSlot(body,at,3);
+    await transport.getByRole('link',{name:'Proof of A = B'}).click();
+    await page.waitForFunction(id=>window.ProofAtlasLibrary?.getSnapshot()?.selected===id,eq.node);
+    assert.deepEqual(await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot().route),eq.route);
+   }
    await page.goto('http://localhost/projects/proof-atlas/library/?loading=paged&edition=published-15&proof=CrossingData.crossing');
    await finder.click();
    await page.getByText('No fully applied congrArg occurs in this proof body.').waitFor();

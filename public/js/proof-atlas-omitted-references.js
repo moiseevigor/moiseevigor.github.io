@@ -30,7 +30,7 @@
   return {prefix:{node,route:{root,slots}},args:args.reverse(),folded:data.kind[node]===5};
  }
  // Read each application row independently so crossing pages never restarts the spine.
- async function pagedSubstitution(cursor,route,options={}){
+ async function pagedEqualityRule(cursor,route,options={}){
   const selected=await cursor.resolveRoute(route,options);
   if(selected.kind!==5)return null;
   const root=route.root;
@@ -48,9 +48,23 @@
    return {prefix:{node,route:{root,slots}},head,args:args.reverse()};
   }
   const call=await peel({node:selected.node,route},6);
-  if(call.args.length!==6 || call.head.kind!==4 || call.head.name!=='congrArg')return null;
+  if(call.head.kind!==4)return null;
+  const rule=call.head.name;
+  if(call.args.length===4 && (rule==='Eq.mp'||rule==='Eq.mpr')){
+   const parts=await cursor.run(()=>cursor.data.payloads[call.prefix.node].nameParts,options);
+   if(parts?.length!==2 || parts[0].str!=='Eq' || parts[1].str!==rule.slice(3))return null;
+   const [left,right,equality,term]=call.args;
+   return {rule,left,right,equality,term,from:rule==='Eq.mp'?left:right,to:rule==='Eq.mp'?right:left};
+  }
+  if(call.args.length!==6 || rule!=='congrArg')return null;
   const [, ,left,right,fn,premise]=call.args;
   const fixed=await peel(fn,6);
+  return {rule,left,right,fn,premise,fixed};
+ }
+ async function pagedSubstitution(cursor,route,options={}){
+  const result=await pagedEqualityRule(cursor,route,options);
+  if(result?.rule!=='congrArg')return null;
+  const {left,right,fn,premise,fixed}=result;
   return {left,right,fn,premise,fixed};
  }
  // Expand only directly supplied transitivity proofs with literal endpoint agreement.
@@ -354,6 +368,6 @@
   };
   return panel;
  }
- const api={inspect,control,parameterContext,exactCallInputs,fixedArguments,pagedSubstitution,equalitySegments,firstStructuralDifference,applicationAtUse,resultDestination};
+ const api={inspect,control,parameterContext,exactCallInputs,fixedArguments,pagedSubstitution,pagedEqualityRule,equalitySegments,firstStructuralDifference,applicationAtUse,resultDestination};
  if(local)module.exports=api;else host.ProofAtlasOmittedReferences=api;
 })(typeof window==='undefined'?globalThis:window);

@@ -639,3 +639,18 @@ flowchart LR
 ```
 
 Numbers in the middle column identify definition **values**. Each outgoing edge follows a bound-variable occurrence to its lexical binder, checks the binder's value route, and recovers the same occurrence from the receiver's numbered argument. The two congrArg nodes consume equalities. At Eq.mp row 3221, argument 3 is exactly the congrArg occurrence at row 3219 and argument 4 is the reference to amgm. Thus the product-derived equality supplies the change of proposition applied to the AM–GM inequality. For the two substitutions the finder links both the complete definition value and the exact reviewed call within it. The containment edge establishes where the call occurs in the value; any intermediate reasoning within that value still requires inspection.
+
+### Direction of equality transport
+
+Selecting a fully applied Eq.mp or Eq.mpr in the paged reader shows the supplied equality A = B, the input term, its source type and the result type. Eq.mp carries a term of A to B. Eq.mpr carries a term of B to A using the same orientation of the supplied equality. Each type link points to its original compiled argument. In the Riccati proof the equality link at row 3221 opens the congrArg that uses hprod, and the input term links to the reference to amgm.
+
+Run `node research/proof-atlas/use-rank/check-paged-transport.cjs`. The complete-index oracle searches each proof body and counts repeated occurrences of shared rows. The paged check takes one proof-root route per distinct matching row and reconstructs the four arguments with one cached source page. The checker compares the six displayed roles (two equality endpoints, equality proof, input term, input type and result type) with an independent function-spine lookup. At each selected call it also drops the final argument and verifies that the incomplete application yields no transport.
+
+| Paged edition | Entries with transport / inspected | Distinct Eq.mp / Eq.mpr rows | Expanded Eq.mp / Eq.mpr occurrences |
+| --- | ---: | ---: | ---: |
+| Published SE(2) | 2 / 4 | 8 / 27 | 8 / 41 |
+| Working SE(2) | 2 / 2 | 7 / 61 | 7 / 3,281 |
+| AI sample | 17 / 20 | 67 / 101 | 112 / 2,564 |
+| Recursion controls | 0 / 9 | 0 / 0 | 0 / 0 |
+
+Edition totals include repeated declarations across editions. The census covers the two named constants in fully applied form. Other eliminators and definitionally equivalent encodings require their own visual rules. These checks recover compiled argument addresses and direction, without a new kernel replay or comprehension measurement.

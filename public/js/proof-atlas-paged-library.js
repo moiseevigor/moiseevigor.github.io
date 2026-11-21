@@ -129,10 +129,10 @@
   substitutionSection.hidden=true;
   substitutionSection.setAttribute('aria-label','Equality under a function');
   workspace.insertBefore(substitutionSection,cache);
-  async function showSubstitution(owner,route,epoch,signal){
+  async function showEqualityRule(owner,route,epoch,signal){
    const active=()=>owner===cursor && epoch===sourceEpoch && !signal.aborted;
    try{
-    const result=await host.ProofAtlasOmittedReferences.pagedSubstitution(owner,route,{signal});
+    const result=await host.ProofAtlasOmittedReferences.pagedEqualityRule(owner,route,{signal});
     if(!active()||!result)return;
     function anchor(label,at){
      const u=new URL(full.href);
@@ -141,6 +141,19 @@
      u.hash='expr-'+at.node;
      const a=el('a',label);a.href=u.href;return a;
     }
+    if(result.rule!=='congrArg'){
+     const forward=result.rule==='Eq.mp',from=forward?'A':'B',to=forward?'B':'A';
+     const rule=el('p');
+     rule.append(anchor('A',result.left),' = ',anchor('B',result.right),'  ·  ',
+      anchor('t',result.term),' : ',anchor(from,result.from),'  ↦  result : ',anchor(to,result.to));
+     substitutionSection.hidden=false;
+     substitutionSection.setAttribute('aria-label','Transport across equality');
+     substitutionSection.append(el('h3','Transport across equality'),rule,
+      el('p',result.rule+' carries a term of '+from+' to a term of '+to+'.'),
+      anchor('Proof of A = B',result.equality),' · ',anchor('Term of '+from,result.term));
+     return;
+    }
+    substitutionSection.setAttribute('aria-label','Equality under a function');
     const {left,right,fn,premise,fixed}=result;
     const rule=el('p');
     rule.append(anchor('a',left),' = ',anchor('b',right),'  ⇒  ',anchor('f',fn),'(',anchor('a',left),
@@ -155,7 +168,7 @@
      substitutionSection.append(context);
      if(fixed.head.kind===5)substitutionSection.append(el('p','Earlier arguments are included in g.'));
     }
-   }catch(error){if(active()){substitutionSection.hidden=false;substitutionSection.append(el('p','Substitution lookup unavailable · '+error.message));}}
+   }catch(error){if(active()){substitutionSection.hidden=false;substitutionSection.append(el('p','Equality rule unavailable · '+error.message));}}
   }
   async function selectOccurrence(node,write=true,focus=true,route){
    if(!cursor||!route)throw Error('An exact source route is required in paged mode');corridorControl?.dispose();corridorControl=null;useInputControl?.dispose();useInputControl=null;useNavigation?.dispose();useNavigation=null;clearModuleView();clearMethod();const owner=cursor,nativeOwner=nativeCursor,scopeOwner=scopeCursor,ownerScopeReason=scopeReason,ownerRecord=record,typing=resolve,epoch=++sourceEpoch;view?.dispose();view=null;hostView.replaceChildren();snapshot=null;status('Processing selected source region…',true);
@@ -164,7 +177,7 @@
    const at=await owner.resolveRoute(route,{signal:proofController.signal});if(owner!==cursor||epoch!==sourceEpoch)return false;if(node!==undefined&&node!==at.node)throw Error('Source node and route disagree');
    const selectedRoute={root:route.root,slots:[...route.slots]};snapshot={edition:edition.id,name:record.name,selected:at.node,root:at.node,mode:'paged-judgments',occurrences:record.occurrences,uniqueNodes:record.uniqueNodes,path:at.path,route:selectedRoute,sourceSha256:record.sourceSha256,indexSha256:record.indexSha256};completeLink(record.name,selectedRoute,at.node);
    tools.querySelector('[data-occurrence-window-link]')?.remove();if(host.ProofAtlasPackedRoutes&&ownerRecord.uniqueNodes<=host.ProofAtlasPackedRoutes.limits.sourceNodes){const packed=host.ProofAtlasPackedRoutes.encode(selectedRoute.root,selectedRoute.slots),u=new URL(full.href);u.searchParams.set('view','occurrence');u.searchParams.delete('loading');u.searchParams.delete('route');u.hash='occurrence='+ownerRecord.indexSha256+'.'+packed.root+'.'+packed.depth+'.'+packed.slots;const a=el('a','Open occurrence geometry');a.href=u.pathname+u.search+u.hash;a.dataset.occurrenceWindowLink='';tools.append(a);}
-   if(at.kind===5)void showSubstitution(owner,selectedRoute,epoch,proofController.signal);
+   if(at.kind===5)void showEqualityRule(owner,selectedRoute,epoch,proofController.signal);
    void showClauseLink(owner,selectedRoute,epoch,proofController.signal);
    methodControl(owner,nativeOwner,ownerRecord,typing,selectedRoute,epoch);equalityControl(owner,ownerRecord,selectedRoute,epoch);if(at.kind===5)applicationControl(owner,ownerRecord,selectedRoute,epoch);moduleControl(owner,ownerRecord,selectedRoute,epoch);if(write){const u=new URL(full.href);u.searchParams.set('loading','paged');history.replaceState(null,'',u.pathname+u.search+u.hash);}
    const attachScope=async(base,{signal})=>{if(!I)return base;if(!scopeOwner)return I.unavailable(base,ownerScopeReason||'Scope evidence unavailable.');try{return await owner.run(()=>scopeOwner.run(()=>I.attach(base,owner.data,ownerRecord,id=>scopeOwner.get(id)),{signal}),{signal});}catch(error){if(error instanceof Q.ScopePageError||error instanceof I.ScopeInterfaceError)return I.unavailable(base,error.message);throw error;}};
