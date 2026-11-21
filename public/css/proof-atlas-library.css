@@ -189,3 +189,8 @@
 .pl-receiving-ports { display: flex; align-items: center; flex-wrap: wrap; gap: .35rem; margin-top: .5rem; }
 .pl-receiving-ports a { display: inline-grid; place-items: center; min-width: 2rem; min-height: 2rem; padding-inline: .25rem; border: 1px solid currentColor; border-radius: .2rem; font-variant-numeric: tabular-nums; }
 .pl-receiving-ports a[aria-current="true"] { font-weight: bold; outline: 2px solid currentColor; outline-offset: 1px; }
+
+.pl-reference-tree { list-style: none; margin: .6rem 0 .8rem .35rem; padding-inline-start: .9rem; border-inline-start: 1px solid currentColor; }
+.pl-reference-tree li { position: relative; padding: .25rem 0; overflow-wrap: anywhere; }
+.pl-reference-tree li::before { content: ""; position: absolute; inset-inline-start: -.9rem; top: 1em; width: .6rem; border-top: 1px solid currentColor; }
+.pl-reference-tree a { display: inline-block; min-width: 1.5rem; text-align: center; }

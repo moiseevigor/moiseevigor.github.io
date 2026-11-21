@@ -13,7 +13,7 @@ for(const e of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAM
  const counts={zero:0,one:0,multiple:0,unavailable:0};
  const destinations={argument:0,fn:0,field:0};
  const overflow=[];
- let totalUses=0,different=0,maxUses=0;
+ let totalUses=0,different=0,maxUses=0,groupedRows=0,repeatedReferences=0;
  let peakEntries=0,peakWork=0;
  for(const d of e.declarations.filter(x=>x.kind==='theorem'&&x.bodyAvailable)){
   const raw=gunzipSync(fs.readFileSync('.'+d.indexFile));
@@ -63,7 +63,7 @@ for(const e of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAM
       assert.equal(BigInt(result.occurrences),n);
       counts[n===0n?'zero':n===1n?'one':'multiple']++;
       assert.deepEqual(result.witness,references[0]);
-      const roles=new Set();
+      const roles=new Set(),diagramRoles=new Set();
       totalUses+=references.length;maxUses=Math.max(maxUses,references.length);
       for(const [rank,expected] of references.entries()){
        const located=rank===0?result:countReferences(g,body,index,{...bounded,firstIfPresent:false,ordinal:BigInt(rank+1)});
@@ -83,15 +83,20 @@ for(const e of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAM
         assert.equal(A.walk(g,call.route),call.node);
         assert.equal(g.kind[parentNode],5);
         if(rank===0)destinations[slot?'argument':'fn']++;
+        const h=receiver.head,kind=g.kind[h.node];
+        const identity=kind===0?A.binding(g,h.route).route:kind===4?h.node:h.route;
+        diagramRoles.add(JSON.stringify([kind,identity,slot,arity]));
         roles.add(JSON.stringify([g.kind[receiver.head.node],receiver.label,slot,arity]));
        }else{
         assert.notEqual(g.kind[parentNode],5);
         assert(A.fields[A.kinds[g.kind[parentNode]]][route.slots.at(-1)]);
         if(rank===0)destinations.field++;
+        diagramRoles.add(JSON.stringify([g.kind[parentNode],route.slots.at(-1)]));
         roles.add(JSON.stringify([g.kind[parentNode],route.slots.at(-1)]));
        }
       }
       if(roles.size>1)different++;
+      if(n>1n){groupedRows+=diagramRoles.size;repeatedReferences+=references.length;}
      }
     }
    }
@@ -101,5 +106,5 @@ for(const e of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAM
  }
  assert.equal(counts.unavailable,0);
  assert(peakEntries<=8192 && peakWork<=16384);
- console.log(e.id,counts,destinations,{totalUses,different,maxUses,recovered:overflow,peakWork,peakEntries});
+ console.log(e.id,counts,destinations,{totalUses,different,maxUses,groupedRows,repeatedReferences,recovered:overflow,peakWork,peakEntries});
 }

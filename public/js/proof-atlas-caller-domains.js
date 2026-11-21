@@ -145,6 +145,7 @@
       for(let k=0;k<arity;k++){
        const index=arity-1-k;
        const result=host.ProofAtlasRecursiveInputs.countReferences(data,body,index,budget);
+       let overview;
        const line=el('p'),label=arity===1?'Assumption':k===0?'Left assumption':'Right assumption';
        const binderRoute={root:branch.route.root,slots:branch.route.slots.concat(Array(k).fill(1))};
        line.append(sourceLink(label,{node:A.walk(data,binderRoute),route:binderRoute}));
@@ -155,26 +156,39 @@
          const destination=el('span');
          destination.setAttribute('aria-live','polite');
          line.append(' · ',destination);
-         function drawReference(located,rank){
+         function locate(rank){
+          return rank===1n?result:host.ProofAtlasRecursiveInputs.countReferences(data,body,index,
+           {...budget,firstIfPresent:false,ordinal:rank});
+         }
+         function describeUse(located){
           if(located.status!=='counted'){
-           destination.textContent='Reference unavailable within the traversal limit';
-           return;
+           return null;
           }
           const {witness}=located;
           const route={root:branch.route.root,slots:bodySlots.concat(witness.slots)};
           const binding=A.binding(data,route);
           if(!binding || String(binding.route.slots)!==String(binderRoute.slots))throw Error('Branch reference scope mismatch');
           const use={node:witness.node,route};
-          destination.replaceChildren(sourceLink(rank===1n?'First reference':'Reference '+rank,use));
           const receiver=host.ProofAtlasOmittedReferences.applicationAtUse(data,use,{includePeers:false});
           if(receiver){
            const role=receiver.slot?'argument '+receiver.slot+' of '+receiver.arity:'function position';
-           destination.append(' → ',sourceLink(receiver.label+' · '+role,receiver.call));
+           const head=receiver.head;
+           const binder=data.kind[head.node]===0?A.binding(data,head.route):null;
+           const identity=binder?['binder',binder.route.root,binder.route.slots]:data.kind[head.node]===4?
+            ['constant',head.node]:['occurrence',head.route.root,head.route.slots];
+           return {use,target:receiver.call,label:receiver.label+' · '+role,key:JSON.stringify([identity,receiver.slot,receiver.arity])};
           }else{
            const parent={root:route.root,slots:route.slots.slice(0,-1)};
            const node=A.walk(data,parent),kind=A.kinds[data.kind[node]];
-           destination.append(' → ',sourceLink(kind+'.'+A.fields[kind][route.slots.at(-1)],{node,route:parent}));
+           const field=kind+'.'+A.fields[kind][route.slots.at(-1)];
+           return {use,target:{node,route:parent},label:field,key:field};
           }
+         }
+         function drawReference(located,rank){
+          const port=describeUse(located);
+          if(!port){destination.textContent='Reference unavailable within the traversal limit';return;}
+          destination.replaceChildren(sourceLink(rank===1n?'First reference':'Reference '+rank,port.use),
+           ' → ',sourceLink(port.label,port.target));
          }
          drawReference(result,1n);
          if(BigInt(n)>1n){
@@ -188,17 +202,45 @@
            }
            input.setCustomValidity('');
            const rank=BigInt(value);
-           const located=rank===1n?result:host.ProofAtlasRecursiveInputs.countReferences(data,body,index,
-            {...budget,firstIfPresent:false,ordinal:rank});
-           drawReference(located,rank);
+           drawReference(locate(rank),rank);
           }
           input.oninput=()=>input.setCustomValidity('');
           input.onkeydown=event=>{if(event.key==='Enter'){event.preventDefault();select();}};
           go.onclick=select;
+          const diagram=el('details'),tree=el('ul');
+          tree.className='pl-reference-tree';
+          diagram.append(el('summary','Group references by receiving role'),tree);overview=diagram;
+          let start=1n;
+          function page(){
+           tree.replaceChildren();
+           const groups=new Map(),end=start+11n<BigInt(n)?start+11n:BigInt(n);
+           for(let rank=start;rank<=end;rank++){
+            const port=describeUse(locate(rank)),key=port?.key??null;
+            let item=groups.get(key);
+            if(!item){
+             item=el('li');item.append(el('span',port?.label??'Reference unavailable'));
+             tree.append(item);groups.set(key,item);
+            }
+            if(port){
+             const a=sourceLink(String(rank),port.use);
+             a.setAttribute('aria-label','Reference '+rank+' · '+port.label);
+             item.append(' ',a);
+            }else item.append(' '+rank);
+           }
+           if(BigInt(n)>12n){
+            const nav=el('li');
+            for(const [label,step,disabled] of [['Previous',-12n,start===1n],['Next',12n,end===BigInt(n)]]){
+             const b=el('button',label);b.type='button';b.disabled=disabled;
+             b.onclick=()=>{start+=step;page();};nav.append(b);
+            }
+            tree.append(nav);
+           }
+          }
+          diagram.ontoggle=()=>{if(diagram.open && !tree.children.length)page();};
          }
         }
        }else line.append(' · reference count unavailable within the traversal limit');
-       uses.append(line);
+       uses.append(line);if(overview)uses.append(overview);
       }
      };
      row.append(uses);
