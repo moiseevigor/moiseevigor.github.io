@@ -220,6 +220,27 @@
   const actions=el('div',undefined,'pl-actions');cs.forEach((c,j)=>{const b=el('button',A.fields[current.kind(i)][j]+' · #'+c+' · '+current.kind(c));b.type='button';b.onclick=()=>selectOccurrence(c,true,true,{root:selectedRoute.root,slots:[...selectedRoute.slots,j]});actions.append(b);});
   if(binder!==undefined){const b=el('button','Enclosing binder #'+binder+' · '+label(binder));b.type='button';b.onclick=()=>selectOccurrence(binder,true,true,binding.route);actions.append(b);}
   const sourceLink=(label,at)=>link(label,url(owner.record.name,at.node,at.route));
+  if(binding && owner.kind(binder)==='letE'){
+   const route={root:binding.route.root,slots:binding.route.slots.concat(1)};
+   const value=owner.children(binder)[1];
+   let head=value,width=0;
+   while(width<32 && owner.kind(head)==='app'){
+    head=owner.children(head)[0];width++;
+   }
+   const named=owner.kind(head)==='const';
+   if(named)await owner.payloads([head]);
+   if(owner!==current || selectionToken!==selectionSerial)return;
+   const panel=el('section'),line=el('p');
+   panel.dataset.localValue='';
+   const name=owner.payload(binder).declName || 'Local definition';
+   line.append(sourceLink(name,{node:binder,route:binding.route}),' ← ',sourceLink('Defining value',{node:value,route}));
+   if(named){
+    const callee=owner.payload(head).name;
+    line.append(' · ',sourceLink(callee,{node:head,route:{root:route.root,slots:route.slots.concat(Array(width).fill(0))}}));
+    if(edition.declarations.some(d=>d.name===callee))line.append(' · ',link('Open declaration',url(callee)));
+   }
+   panel.append(el('h4','Origin of this local value'),line);target.append(panel);
+  }
   window.ProofAtlasCallerDomains?.mount(target,owner.record,{edition:edition.id,node:i,route:nextRoute},owner.data,sourceLink);
   const sides=equalitySides(owner.data,{node:i,route:nextRoute});
    function termLabel(at){
