@@ -5,12 +5,15 @@ const assert = require('node:assert/strict');
 const {createHash} = require('node:crypto');
 const A = require('../../../public/js/proof-atlas-library-data');
 const {applicationAtUse} = require('../../../public/js/proof-atlas-omitted-references');
+const {sourceInput} = require('../../../public/js/proof-atlas-application-ports');
 const E = require('../../../public/js/proof-atlas-elimination');
 const {countReferences} = require('../../../public/js/proof-atlas-recursive-inputs');
 const prior = require('./ai-local-flow.json');
 const window = {};
 vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/goedel-sample-manifest.js','utf8'),{window});
-const edition = window.PROOF_ATLAS_AI_SAMPLE.edition;
+const published=process.argv.includes('--published');
+if (published) vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/library-manifest.js','utf8'),{window});
+const edition=published ? window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id==='published-15') : window.PROOF_ATLAS_AI_SAMPLE.edition;
 function audit(record) {
   const bytes=zlib.gunzipSync(fs.readFileSync('.'+record.indexFile));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),record.indexSha256);
@@ -35,6 +38,7 @@ function audit(record) {
         assert.equal(actual.call.node,call);
         assert.deepEqual(actual.call.route.slots,slots.slice(0,depth));
         assert.equal(actual.head.node,head);assert.equal(actual.slot,slot);
+        assert.deepEqual(sourceInput(data,actual.call,slot),{node,route:{root:1,slots}});
       }
     } else {
       const kind=A.kinds[data.kind[parent]];
@@ -79,14 +83,15 @@ function audit(record) {
     assert.equal([...input.groups.values()].reduce((sum,g)=>sum+g.count,0),input.count);
   }
   const total=inputs.reduce((n,i)=>n+i.count,0);
-  assert.equal(total,prior.find(r=>r.indexSha256===record.indexSha256).lambdaUses.leading);
+  if (!published) assert.equal(total,prior.find(r=>r.indexSha256===record.indexSha256).lambdaUses.leading);
   return {record,inputs,total};
 }
-const reports=edition.declarations.map(audit);
+const reports=edition.declarations.filter(r=>r.kind==='theorem').map(audit);
 if (process.argv.includes('--write-packets')) {
   const dir='public/data/proof-atlas/input-roles';
   fs.mkdirSync(dir,{recursive:true});
   for (const {record,inputs} of reports) {
+    if (!inputs.length) continue;
     const entries=inputs.map(input=>({
       node:input.node,depth:input.route.slots.length,count:input.count,
       groups:[...input.groups].sort((a,b)=>b[1].count-a[1].count).map(([label,g])=>({
@@ -97,6 +102,15 @@ if (process.argv.includes('--write-packets')) {
   }
 }
 const groups=reports.flatMap(r=>r.inputs.map(i=>i.groups.size));
+if (published) {
+  const inputs=reports.flatMap(r=>r.inputs);
+  const result={edition:edition.id,theorems:reports.length,withLeadingInputs:reports.filter(r=>r.inputs.length).length,
+    inputs:inputs.length,usedInputs:inputs.filter(i=>i.count>0).length,references:reports.reduce((n,r)=>n+r.total,0),
+    groups:groups.reduce((n,k)=>n+k,0),largestInputGroups:Math.max(...groups),
+    riccati:reports.find(r=>r.record.name==='JacobiData.slope_bound_abs').inputs.map(i=>({name:i.name,count:i.count,groups:i.groups.size}))};
+  console.log(JSON.stringify(result,null,2));
+  return;
+}
 const lines=['# Receiving calls for leading proof inputs','',
   'Each group belongs to one binder in one compiled proof. A literal constant is grouped by its declaration name, argument position and arity. Other function heads are grouped by constructor kind. Direct structural uses are grouped by parent field. Each link opens the first reference in its group. Counts include implicit arguments and repeated subtrees.','',
   reports.reduce((n,r)=>n+r.total,0)+' references across '+reports.length+' proofs give '+groups.reduce((a,b)=>a+b,0)+' groups. The largest input has '+Math.max(...groups)+' groups.',''];

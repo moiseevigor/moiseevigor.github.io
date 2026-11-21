@@ -182,7 +182,7 @@
   const actions=el('div',undefined,'pl-actions');cs.forEach((c,j)=>{const b=el('button',A.fields[current.kind(i)][j]+' · #'+c+' · '+current.kind(c));b.type='button';b.onclick=()=>selectOccurrence(c,true,true,{root:selectedRoute.root,slots:[...selectedRoute.slots,j]});actions.append(b);});
   if(binder!==undefined){const b=el('button','Enclosing binder #'+binder+' · '+label(binder));b.type='button';b.onclick=()=>selectOccurrence(binder,true,true,binding.route);actions.append(b);}
   if(current.kind(i)==='const'){const local=edition.declarations.find(d=>d.name===p.name);target.append(local?link('Open the referenced '+local.kind+' and its entire proof ↗',url(local.name)):el('p','External Lean/Mathlib reference; its body is outside the project corpus.'));}
-  if(edition.id===window.PROOF_ATLAS_AI_SAMPLE?.edition.id && current.kind(i)==='lam' && nextRoute.root===1 &&
+  if((edition.id===window.PROOF_ATLAS_AI_SAMPLE?.edition.id || edition.id==='published-15') && owner.record.kind==='theorem' && current.kind(i)==='lam' && nextRoute.root===1 &&
      nextRoute.slots.every(slot=>slot===1)){
    let ancestor=owner.data.roots[1];
    const leading=nextRoute.slots.every(()=>{
@@ -204,6 +204,19 @@
       if(!panel.isConnected)return;
       const entry=packet.entries.find(r=>r.node===i && r.depth===nextRoute.slots.length);
       if(packet.indexSha256!==digest || !entry)throw Error('Input mismatch');
+      if(packet.entries.length>1 && !nextRoute.slots.length){
+       const label=el('label','Proof input '),picker=el('select'),go=el('button','Inspect input');
+       for(const r of packet.entries){
+        const name=owner.data.payloads[r.node].binderName || '_';
+        const option=el('option',(r.depth+1)+'. '+name+' · '+number(r.count)+' uses');
+        option.value=String(r.depth);picker.append(option);
+       }
+       go.type='button';go.onclick=()=>{
+        const choice=packet.entries.find(r=>r.depth===Number(picker.value));
+        safely(selectOccurrence(choice.node,true,true,{root:1,slots:Array(choice.depth).fill(1)}));
+       };
+       label.append(picker);panel.append(label,' ',go);
+      }
       const list=el('ol');
       for(const group of entry.groups){
        const route={root:1,slots:group.slots.split('.').map(Number)};
