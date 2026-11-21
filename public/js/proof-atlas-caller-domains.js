@@ -88,6 +88,32 @@
    }
    box.append(table);container.append(box);
   }
+  function existentialIntroduction(){
+   // A saturated constructor has exactly four application nodes, even in a shared term.
+   const inputs=[];
+   let head=call.node;
+   while(inputs.length<4 && data.kind[head]===5){
+    inputs.unshift(data.children[head][1]);
+    head=data.children[head][0];
+   }
+   if(inputs.length!==4 || data.kind[head]!==4 || data.payloads?.[head]?.name!=='Exists.intro')return;
+   const checked=(host.PROOF_ATLAS_EXISTENTIAL_INTRODUCTIONS||[]).find(r=>
+    r.edition===call.edition && r.indexSha256===record.indexSha256 && r.declaration===record.name &&
+    r.node===call.node && r.root===call.route.root && String(r.slots)===String(call.route.slots));
+   if(checked && String(checked.inputs)!==String(inputs))throw Error('Existential input mismatch');
+   const box=el('section');box.dataset.existentialIntroduction='';
+   box.append(el('h4','Existence proof'));
+   if(checked)box.append(el('p',checked.goal));
+   for(const [index,label,value] of [[2,'Witness',checked?.witness],[3,'Proof for this witness',checked?.obligation]]){
+    const route={root:call.route.root,slots:call.route.slots.concat(Array(3-index).fill(0),1)};
+    if(A.walk(data,route)!==inputs[index])throw Error('Existential argument address mismatch');
+    const row=el('p');row.append(sourceLink(label,{node:inputs[index],route}));
+    if(value)row.append(' · ',el('code',value));
+    box.append(row);
+   }
+   container.append(box);
+  }
+  existentialIntroduction();
   terminalCases();
   caseEvidence();
   function mountOutline(target){

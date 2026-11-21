@@ -49,6 +49,14 @@ elab_rules : command
             ("inferredRoot",toJson a),("expectedRoot",toJson b),("structurallyIdentical",toJson (actual==expected))]
         let mut extra := []
         if let .const name _ := term.getAppFn then
+          if name == ``Exists.intro && term.getAppNumArgs == 4 then
+            let args := term.getAppArgs
+            let obligation := mkApp args[1]! args[2]!
+            kernelAs args[3]! obligation
+            extra := [("existentialIntroduction", Json.mkObj [
+              ("witness", toJson (← ppExpr args[2]!).pretty),
+              ("obligation", toJson (← ppExpr (← whnf obligation)).pretty),
+              ("goal", toJson (← ppExpr (← kernelType term)).pretty)])]
           let mut declared := (← getConstInfo name).type
           let mut declaredCount := 0
           while let .forallE _ _ body _ := declared do
