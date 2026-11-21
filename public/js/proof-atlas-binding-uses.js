@@ -22,6 +22,35 @@
   function draw(){const width=Math.max(260,svg.clientWidth||600);svg.replaceChildren();svg.setAttribute('viewBox',`0 0 ${width} 108`);shape('rect',{x:24,y:34,width:75,height:36,rx:3,fill:scene.selection.kind==='letE'?'#e3a381':'#e9bf76'});shape('text',{x:61,y:57,'text-anchor':'middle',class:'pl-binding-glyph'},scene.selection.kind==='lam'?'λ':scene.selection.kind==='forallE'?'∀':'let');shape('rect',{x:width-118,y:28,width:100,height:48,rx:4,fill:'none',stroke:'#b6cbd1','stroke-width':2});shape('text',{x:width-68,y:57,'text-anchor':'middle',class:'pl-binding-body-label'},'body region');if(counted&&BigInt(count)>0n)shape('path',{d:`M ${width-120} 52 L 105 52 l 6 -4 m -6 4 l 6 4`,class:'pl-binding-wire'});shape('text',{x:width/2,y:96,'text-anchor':'middle',class:'pl-binding-body-label'},counted?(count==='0'?'No body reference to this binder':'References point back to the binder'):'No reference relation asserted');}
   const observer=new ResizeObserver(draw);observer.observe(svg);draw();
   const actions=el('div');actions.className='pl-actions';actions.append(button('Open body region',scene.body));for(const h of scene.headers)actions.append(button('Open '+h.field+' · before binder',h));container.append(actions,el('p','The body is collapsed. Each button opens its exact source region. Counts include references in type annotations.'));
+  if(counted && count!=='0' && config.sourceLink){
+   const form=el('form'),label=el('label','Reference number '),input=el('input');
+   const find=el('button','Locate reference'),result=el('p');
+   input.type='text';input.inputMode='numeric';input.pattern='[1-9][0-9]*';
+   input.required=true;input.value='1';input.maxLength=count.length;input.size=Math.min(count.length+1,12);
+   find.type='submit';result.setAttribute('aria-live','polite');label.append(input);
+   form.append(label,' of '+count+' ',find);container.append(form,result);
+   input.oninput=()=>{input.setCustomValidity('');result.replaceChildren();};
+   form.onsubmit=event=>{
+    event.preventDefault();
+    if(!/^[1-9][0-9]*$/.test(input.value)||BigInt(input.value)>BigInt(count)){
+     input.setCustomValidity('Enter a reference number from 1 to '+count+'.');input.reportValidity();return;
+    }
+    const found=R.countReferences(config.data,scene.body.node,0,{...scene.budget,ordinal:BigInt(input.value)});
+    if(found.status!=='counted'){result.textContent=found.reason;return;}
+    const route={root:scene.body.route.root,slots:scene.body.route.slots.concat(found.witness.slots)};
+    const use={node:found.witness.node,route};
+    result.replaceChildren(config.sourceLink('Reference '+input.value+' · e'+use.node,use));
+    const receiver=host.ProofAtlasOmittedReferences?.applicationAtUse(config.data,use,{includePeers:false});
+    if(receiver){
+     result.append(receiver.slot?' · argument '+receiver.slot+' of ':' · function in ',
+      config.sourceLink(receiver.label,receiver.call));
+    }else{
+     const parent={root:route.root,slots:route.slots.slice(0,-1)};
+     const node=A.walk(config.data,parent),kind=A.kinds[config.data.kind[node]];
+     result.append(' · ',config.sourceLink(kind+'.'+A.fields[kind][route.slots.at(-1)],{node,route:parent}));
+    }
+   };
+  }
   let navigation=null,inputControl=null;if(host.ProofAtlasUseNavigation&&host.ProofAtlasPackedRoutes){
    const panel=el('div'),U=host.ProofAtlasUseNavigation,P=host.ProofAtlasPackedRoutes;container.append(panel);
    const openSource=at=>{const bytes=P.parse(at.route),slots=Array.from({length:at.route.depth},(_,i)=>(bytes[i>>2]>>((i%4)*2))&3);if(slots.length<=512)config.onProofOccurrence(at.node,{root:at.route.root,slots});else{const u=new URL(location.href);u.searchParams.set('view','occurrence');u.searchParams.delete('loading');u.searchParams.delete('route');u.hash='occurrence='+config.record.indexSha256+'.'+at.route.root+'.'+at.route.depth+'.'+at.route.slots;location.assign(u.href);}};

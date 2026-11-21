@@ -171,7 +171,7 @@
   }
   return {status:'identical'};
  }
- function applicationAtUse(data,use){
+ function applicationAtUse(data,use,{includePeers=true}={}){
   const {root,slots}=use.route,nodes=[data.roots[root]];
   for(const slot of slots)nodes.push(data.children[nodes.at(-1)][slot]);
   if(nodes.at(-1)!==use.node)throw Error('Variable occurrence mismatch');
@@ -187,7 +187,7 @@
   const p=binder?data.payloads[binder.node]:data.payloads[head];
   const label=kind==='const'?p.name:binder?(p.binderName??p.declName):kind;
   const peers=[];
-  args.forEach((node,i)=>{
+  if(includePeers)args.forEach((node,i)=>{
    if(i+1===slot||data.kind[node]!==0)return;
    const route={root,slots:call.route.slots.concat(Array(arity-i-1).fill(0),1)};
    const binder=A.binding(data,route),p=data.payloads[binder.node];
