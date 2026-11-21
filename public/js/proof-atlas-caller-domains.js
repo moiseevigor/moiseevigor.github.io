@@ -45,14 +45,14 @@
    if(A.walk(data,route)!==node)throw Error('Case evidence address mismatch');
    return sourceLink(label,{node,route});
   }
-  const flow=host.PROOF_ATLAS_CLAUSE_USES;
+  const flow=host.PROOF_ATLAS_CLAUSE_USES?.find?.(item=>item.indexSha256===record.indexSha256);
   if(flow && flow.edition===call.edition && flow.declaration===record.name && flow.indexSha256===record.indexSha256 &&
      call.route.root===1 && (!call.route.slots.length || call.route.slots.join('')===flow.binder.path)){
    const box=el('section'),list=el('ul');
    box.dataset.clauseUses='';
    box.append(el('h4','How the proof uses nonnegativity'));
    const origin=el('p');origin.append(addressLink(flow.binder.name,flow.binder.node,flow.binder.path),
-    ' supplies all three inequalities. Each row links one checked example.');
+    ' states the three inequalities. Each row links one checked example.');
    box.append(origin,list);list.className='pl-reference-tree';
    for(const item of flow.groups){
     const row=el('li');

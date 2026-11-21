@@ -1,0 +1,158 @@
+{
+  "edition": "goedel-sample-4331",
+  "theorems": 20,
+  "parameters": 93,
+  "identicalTypes": true,
+  "records": [
+    {
+      "declaration": "lean_workbook_20418",
+      "indexSha256": "8892b0884f374abfa704f50ac89a3c31872a9d3f1aef369b1ae84e44891bde8d",
+      "binder": {
+        "node": 86583,
+        "path": "111"
+      },
+      "name": "h₀",
+      "total": 43,
+      "groups": [
+        {
+          "steps": "RR",
+          "receiver": "Mathlib.Tactic.Linarith.sub_nonpos_of_le · argument 7 of 7",
+          "clause": {
+            "node": 23,
+            "path": "111011"
+          },
+          "target": {
+            "node": 15061,
+            "path": "1111111111101111101010101010101010101010101010101010110111"
+          },
+          "slot": 7,
+          "use": {
+            "node": 15060,
+            "path": "11111111111011111010101010101010101010101010101010101101111"
+          },
+          "count": 9
+        },
+        {
+          "steps": "L",
+          "receiver": "Mathlib.Tactic.Linarith.sub_nonpos_of_le · argument 7 of 7",
+          "clause": {
+            "node": 17,
+            "path": "111001"
+          },
+          "target": {
+            "node": 15200,
+            "path": "111111111110111110101010101010101010101010110111"
+          },
+          "slot": 7,
+          "use": {
+            "node": 15199,
+            "path": "1111111111101111101010101010101010101010101101111"
+          },
+          "count": 21
+        },
+        {
+          "steps": "RL",
+          "receiver": "Mathlib.Tactic.Linarith.sub_nonpos_of_le · argument 7 of 7",
+          "clause": {
+            "node": 20,
+            "path": "1110101"
+          },
+          "target": {
+            "node": 15492,
+            "path": "1111111111101111101101101"
+          },
+          "slot": 7,
+          "use": {
+            "node": 15491,
+            "path": "11111111111011111011011011"
+          },
+          "count": 11
+        },
+        {
+          "steps": "",
+          "receiver": "Eq.ndrec · argument 7 of 10",
+          "clause": {
+            "node": 25,
+            "path": "1110"
+          },
+          "target": {
+            "node": 86242,
+            "path": "1111111222011"
+          },
+          "slot": 7,
+          "use": {
+            "node": 159,
+            "path": "11111112220110001"
+          },
+          "count": 2
+        }
+      ]
+    },
+    {
+      "declaration": "lean_workbook_plus_6206",
+      "indexSha256": "2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6",
+      "binder": {
+        "node": 91420,
+        "path": "111"
+      },
+      "name": "h₀",
+      "total": 41,
+      "groups": [
+        {
+          "steps": "RL",
+          "receiver": "Mathlib.Tactic.Linarith.sub_nonpos_of_le · argument 7 of 7",
+          "clause": {
+            "node": 20,
+            "path": "1110101"
+          },
+          "target": {
+            "node": 14777,
+            "path": "111111111110111110101010101010101010101010101010110111"
+          },
+          "slot": 7,
+          "use": {
+            "node": 14776,
+            "path": "1111111111101111101010101010101010101010101010101101111"
+          },
+          "count": 12
+        },
+        {
+          "steps": "RR",
+          "receiver": "Mathlib.Tactic.Linarith.sub_nonpos_of_le · argument 7 of 7",
+          "clause": {
+            "node": 23,
+            "path": "111011"
+          },
+          "target": {
+            "node": 14806,
+            "path": "1111111111101111101010101010101010101010101010110111"
+          },
+          "slot": 7,
+          "use": {
+            "node": 14805,
+            "path": "11111111111011111010101010101010101010101010101101111"
+          },
+          "count": 8
+        },
+        {
+          "steps": "L",
+          "receiver": "Mathlib.Tactic.Linarith.sub_nonpos_of_le · argument 7 of 7",
+          "clause": {
+            "node": 17,
+            "path": "111001"
+          },
+          "target": {
+            "node": 15135,
+            "path": "1111111111101111101011011101"
+          },
+          "slot": 7,
+          "use": {
+            "node": 15134,
+            "path": "11111111111011111010110111011"
+          },
+          "count": 21
+        }
+      ]
+    }
+  ]
+}
