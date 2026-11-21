@@ -29,6 +29,6 @@ when the figure or page is hidden; expensive figures initialize near the viewpor
 
 ## November 2026 research update
 
-The conjugate-times companion reports the verified local fixed-cell splitting and signed modulus limit. The downloadable proof package contains pinned dependencies, the project imports and a theorem audit. The October PDF, TeX, figure hashes and numerical checks remain a historical snapshot.
+The conjugate-times companion reports the verified local fixed-cell splitting and signed modulus limit. The downloadable proof package contains pinned dependencies, the project imports and a theorem audit. The November large-index proof archive, updated manuscript and claim coverage ledger accompany the current companion. The October PDF, TeX, figure hashes and numerical checks remain a historical snapshot.
 
 The October interval audit retained 304 residual boxes in 32 cells. Later reviews repaired the domain description and closed all of those boxes. Analytic arguments cover both corners and a local double-flip neighborhood. The finite tube, the remaining slab and regimes outside the grid still limit the global incidence count. The former total exclusion-volume estimate was withdrawn.

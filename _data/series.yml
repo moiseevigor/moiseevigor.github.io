@@ -252,7 +252,7 @@
   code: research/se2/
   overview: /mathematics/2026/10/07/se2-geodesics-research-program/
   verdicts:
-    - { h: "Times", v: confirmed, label: "concrete Lean count and fixed-cell cube-root splitting" }
+    - { h: "Times", v: confirmed, label: "Lean root counts, fixed-cell splitting and ranked large-index law" }
     - { h: "Caustic", v: partial, label: "local geometry; global incidence open" }
     - { h: "Inverse", v: confirmed, label: "exact scalar reconstruction in its stated chart" }
     - { h: "Global count", v: pending, label: "excluded-domain arguments remain open" }

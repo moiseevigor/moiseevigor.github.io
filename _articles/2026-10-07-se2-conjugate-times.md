@@ -119,17 +119,23 @@ For each fixed modulus and phase representatives in $(-K,K)$, away from $\psi\eq
 
 $$p_{(j)}=(j+\tfrac12)K-\tfrac12\psi+O(1/j).$$
 
-The estimate is uniform on compact phase subsets away from the excluded phase. It describes late conjugate times; it does not assert that the entire geodesic closes after a pendulum period, or supply a uniform estimate up to the exceptional phase.
+Fix a compact range of interior moduli and keep the normalized phase a positive distance from the ends of $(-1,1)$. One error constant then works for every index. At $K=2E$ the error improves to $O(j^{-2})$ on the same phase range.
+
+Write $p=2nK+s$. At a root, the determinant gives a quadratic weight multiplying $\operatorname{cn}\psi\,\operatorname{cn}(\psi+2s)$. The remainder grows at most linearly in $n$, and stays bounded when $K=2E$. Thus the terminal angular speed tends to zero at the corresponding rate. The left bracket picks the simple zero at $-K$ and the right bracket picks $K$. Solving for $s$ gives the two offsets and the cell count gives their ranks.
+
+The [November manuscript](/public/research/se2/conjugate-times-nov21.pdf) gives the proof. The [Lean source and axiom record](/public/research/se2/large-index-law.zip) reproduce the formal check.
+
+The [whole-paper statement review and Lean coverage ledger](/public/research/se2/conjugate-times-review.zip) lists all eleven numbered results and the evidence for 34 claim groups. Of 33 mathematical groups, 15 have full Lean coverage, 11 have partial coverage and seven retain analytic or external steps. The numerical group is reported separately.
 
 ## The formal proof boundary
 
 The November development constructs the Jacobi functions by inverting the elliptic integral and proves the first-time and noncritical counting theorems for these concrete functions. It also identifies the signed determinant of the actual rectified endpoint map and proves that this determinant has degree at most two in the period index.
 
-For the exceptional phase, Lean verifies the unique critical modulus, the scalar fourth-order coefficient and the fixed-cell splitting formula above, including its fifth-order error bound and local uniqueness. The large-index root asymptotics, the full variational index theorem and the geometric classification of the caustic have further analytic steps.
+For the exceptional phase, Lean verifies the unique critical modulus, the scalar fourth-order coefficient and the fixed-cell splitting formula above, including its fifth-order error bound and local uniqueness. Lean also verifies the ordered-root estimate, joint compact uniformity and the improved rate at the critical modulus. The bracket endpoint expansions, the variational index theorem and geometric fold recognition retain analytic steps.
 
 ## Status and sources
 
-The downloadable PDF is the October manuscript snapshot. This companion was updated on 21 November 2026 after checking the combined Lean build and the axiom dependencies of the splitting result. The [proof sources and verification record](/public/research/se2/fixed-cell-splitting.zip) reproduce that check. Peer review remains open.
+The original 16-page PDF is the October snapshot. The November manuscript linked above contains the revised proof. This companion was updated on 21 November 2026 after checking the combined Lean build and the axiom dependencies of the splitting result. The [proof sources and verification record](/public/research/se2/fixed-cell-splitting.zip) reproduce that check. Peer review remains open.
 
 Foundational sources are Moiseev–Sachkov's [Maxwell-strata paper](https://doi.org/10.1051/cocv/2009004) and Sachkov's [conjugate/cut-time paper](https://doi.org/10.1051/cocv/2009031). Complete citations and statement locators are in the PDF. The project-local literature catalogue preserves its reading and edition limits.
 
