@@ -39,7 +39,7 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
       assert.match(await ports.first().innerText(),/Earlier application/);
       await checkRoute(0,packed.append(root,[0,0,0]));
       for (const [i,input] of call.inputs.slice(-3).entries()) {
-        assert.match(await ports.nth(i+1).innerText(),new RegExp("^Argument "+input.slot+" "));
+        assert.match(await ports.nth(i+1).innerText(),new RegExp("^Argument "+input.slot+" · "+["x","y","hx","hy"][input.slot-1]+" · "));
         await checkRoute(i+1,packed.encode(input.route.root,input.route.slots));
       }
       const stages = group.locator('details[data-construction-stages]');
@@ -58,7 +58,7 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
       assert.equal(new URL(page.url()).searchParams.get('arguments'),'all');
       await checkRoute(0,packed.append(root,[0,0,0,0]));
       for (const [i,input] of call.inputs.entries()) {
-        assert.match(await ports.nth(i+1).innerText(),new RegExp("^Argument "+input.slot+" "));
+        assert.match(await ports.nth(i+1).innerText(),new RegExp("^Argument "+input.slot+" · "+["x","y","hx","hy"][input.slot-1]+" · "));
         await checkRoute(i+1,packed.encode(input.route.root,input.route.slots));
       }
       await selected();
@@ -70,7 +70,7 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
       await page.getByLabel('Diagram levels',{exact:true}).selectOption('2');
       await group.getByText('Showing arguments 2–4 of 4.',{exact:true}).waitFor();
       for (const [i,input] of call.inputs.slice(-3).entries()) {
-        assert.match(await ports.nth(i+1).innerText(),new RegExp("^Argument "+input.slot+" "));
+        assert.match(await ports.nth(i+1).innerText(),new RegExp("^Argument "+input.slot+" · "+["x","y","hx","hy"][input.slot-1]+" · "));
         await checkRoute(i+1,packed.encode(input.route.root,input.route.slots));
       }
       await page.close();

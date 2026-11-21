@@ -57,6 +57,16 @@ function open(nativeCase){
   demand(group||frontier,'point identity');const member=group?(memberId?group.members.find(m=>m.id===memberId):group.members.at(-1)):(!memberId?frontier:null);
   demand(member,'member identity');return {primitive:scenes.get(scene),member};
  }
+ function parameterFor(scene,groupId,memberId){
+  const o=origin(scene,groupId,memberId),route=model.routeFor(o.primitive,o.member.id);
+  const record=T.construction(nativeCase.get(route),nativeCase.data);
+  if(record?.rule!=='Pi-application')return null;
+  const pi=record.components.pi,types=record.entry.typeData;
+  if(types.kind[pi]!==7)return null;
+  const payload=types.payloads[pi],parts=payload.binderNameParts;
+  if(parts?.length!==1||parts[0].str!==payload.binderName||!payload.binderName||payload.binderName==='_')return null;
+  return payload.binderName;
+ }
  function stageFor(scene,groupId,memberId){
   const o=origin(scene,groupId,memberId),route=model.routeFor(o.primitive,o.member.id),c=T.construction(nativeCase.get(route),nativeCase.data);
   demand(c?.rule==='Pi-application','application member');
@@ -73,7 +83,7 @@ function open(nativeCase){
     ...(c.premises[1].alternateTypeRoot!==undefined?{metaArgument:ref(c.premises[1].alternateTypeRoot)}:{})},
    texts:{before:c.premises[0].typeText,argument:c.premises[1].typeText,after:entry.typeText},checks:c.checks});
  }
- return Object.freeze({create,validate,unfold,stageFor,source:model.source,memberTypeFor:async(scene,groupId,memberId,field,observation='kernel')=>{const o=origin(scene,groupId,memberId),route=model.routeFor(o.primitive,o.member.id);return T.constructionType(nativeCase.get(route),nativeCase.data,field,observation);},routeFor:(scene,groupId,memberId)=>{const o=origin(scene,groupId,memberId);return model.routeFor(o.primitive,o.member.id);},typeFor:(scene,groupId,memberOrObservation='kernel')=>{const observation=['kernel','meta'].includes(memberOrObservation)?memberOrObservation:'kernel',o=origin(scene,groupId,observation===memberOrObservation?null:memberOrObservation);return model.typeFor(o.primitive,o.member.id,observation);},resolve:(scene,address)=>{demand(scenes.has(scene),'foreign folded scene');return C.resolveAddress(scene.root.route,address,scene.format.endsWith('/2')?2:1);}});
+ return Object.freeze({create,validate,unfold,stageFor,parameterFor,source:model.source,memberTypeFor:async(scene,groupId,memberId,field,observation='kernel')=>{const o=origin(scene,groupId,memberId),route=model.routeFor(o.primitive,o.member.id);return T.constructionType(nativeCase.get(route),nativeCase.data,field,observation);},routeFor:(scene,groupId,memberId)=>{const o=origin(scene,groupId,memberId);return model.routeFor(o.primitive,o.member.id);},typeFor:(scene,groupId,memberOrObservation='kernel')=>{const observation=['kernel','meta'].includes(memberOrObservation)?memberOrObservation:'kernel',o=origin(scene,groupId,observation===memberOrObservation?null:memberOrObservation);return model.typeFor(o.primitive,o.member.id,observation);},resolve:(scene,address)=>{demand(scenes.has(scene),'foreign folded scene');return C.resolveAddress(scene.root.route,address,scene.format.endsWith('/2')?2:1);}});
 }
 const api={fold,unfold,open,canonical};if(node)module.exports=api;else host.ProofAtlasOccurrenceApplicationFold=api;
 })(typeof window==='undefined'?globalThis:window);

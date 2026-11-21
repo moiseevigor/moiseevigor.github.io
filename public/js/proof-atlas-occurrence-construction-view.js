@@ -61,7 +61,14 @@
     card.append(el('p',context,'poc-context'));
    }
    if(!p.rule)card.append(el('p',p.expanded+' source occurrence'+(p.expanded==='1'?'':'s')+' inside this boundary.','poc-context'));
-   const ports=new Map();for(const edge of scene.edges.filter(e=>e.from===p.id)){const child=points.find(p=>p.id===edge.to),field=edge.field==='head'?(p.headIsApplication?'Earlier application':'Head'):/^arg\d+$/.test(edge.field)?'Argument '+(earlierArguments+Number(edge.field.slice(3))):edge.field,b=button(field+' · '+child.role+' · Γ'+child.contextLength,()=>pick(child));b.className='pow-port';b.dataset.constructionField=edge.field;card.append(b);ports.set(edge.field,b);}
+   const parameterLabels=new Map();
+   if(folded&&p.kind==='app'&&p.members){
+    for(const [index,member] of p.members.entries()){
+     const name=model.parameterFor(scene,p.id,member.id);
+     if(name)parameterLabels.set('arg'+(index+1),' · '+name);
+    }
+   }
+   const ports=new Map();for(const edge of scene.edges.filter(e=>e.from===p.id)){const child=points.find(p=>p.id===edge.to),field=edge.field==='head'?(p.headIsApplication?'Earlier application':'Head'):/^arg\d+$/.test(edge.field)?'Argument '+(earlierArguments+Number(edge.field.slice(3))):edge.field,b=button(field+(parameterLabels.get(edge.field)||'')+' · '+child.role+' · Γ'+child.contextLength,()=>pick(child));b.className='pow-port';b.dataset.constructionField=edge.field;card.append(b);ports.set(edge.field,b);}
    if(p.typeReference){
     const b=button('Recorded type · Γ'+p.contextLength,async()=>{const epoch=++action;b.disabled=true;try{callbacks.onTypeStart?.();const type=await model.typeFor(scene,p.id);if(!disposed&&epoch===action){pick(p,false);callbacks.onType(model.routeFor(scene,p.id),type);}}catch(error){status.textContent=error.message;}finally{b.disabled=false;}});b.dataset.constructionType=p.id;card.append(b);
    }
