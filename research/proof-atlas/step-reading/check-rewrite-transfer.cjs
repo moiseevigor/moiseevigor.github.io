@@ -2,7 +2,7 @@
 const fs=require('node:fs'), z=require('node:zlib'), crypto=require('node:crypto'), assert=require('node:assert/strict');
 const A=require('../../../public/js/proof-atlas-library-data');
 const {spine}=require('../../../public/js/proof-atlas-elimination');
-const {boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport}=require('../../../public/js/proof-atlas-arithmetic');
+const {logicalInference,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport}=require('../../../public/js/proof-atlas-arithmetic');
 global.window={};
 require('../../../public/data/proof-atlas/library-manifest');
 require('../../../public/data/proof-atlas/goedel-sample-manifest');
@@ -12,6 +12,7 @@ function scan(d,allBoundRoutes){
  assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),d.indexSha256);
  const g=A.validateIndex(JSON.parse(raw),d), root=g.roots[1];
  assert(Number.isInteger(root));
+ const logic={},logicExamples={};
  const examples=[],premises={},chains=[],arithmetic=[],bound=[];let nested=0,transitive=0;const lengths={};
  const visited=new Set(), stack=[{node:root,parent:null}];
  const counts={mp:0,mpr:0,left:0,right:0,reverseLeft:0,reverseRight:0}, operators={};
@@ -20,6 +21,21 @@ function scan(d,allBoundRoutes){
   if(visited.has(node))continue;
   visited.add(node);
   const call=spine(g,node),name=g.payloads[call.head]?.name;
+  if(['Iff.mp','Iff.mpr','And.left','And.right'].includes(name) && call.args.length===(name.startsWith('Iff.')?4:3)){
+   const slots=[];
+   for(let p=item;p.parent;p=p.parent)slots.push(p.slot);
+   const route={root:1,slots:slots.reverse()},rule=logicalInference(g,{node,route});
+   assert.equal(rule.name,name);
+   const output=['Iff.mp','And.right'].includes(name)?1:0;
+   assert.equal(rule.output,output);
+   const ports=[...rule.propositions,...rule.proofs];
+   assert.deepEqual(ports.map(p=>A.walk(g,p.route)),call.args);
+   logic[name]=(logic[name]||0)+1;
+   if(!logicExamples[name]){
+    const order=rule.conjunction?[0,1,output,2]:[1-output,output,2,3];
+    logicExamples[name]={proof:d.name,site:{node,route},links:order.map(i=>ports[i])};
+   }
+  }
   if(name==='Eq.trans' && call.args.length===6){
    const slots=[];
    for(let p=item;p.parent;p=p.parent)slots.push(p.slot);
@@ -172,16 +188,18 @@ function scan(d,allBoundRoutes){
    assert.equal(BigInt(example.occurrences.length),ways[root]);
   }
  }
- return {counts,operators,examples,nested,lengths,premises,chains,arithmetic,bound,transitive};
+ return {logic,logicExamples,counts,operators,examples,nested,lengths,premises,chains,arithmetic,bound,transitive};
 }
 
 for(const edition of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAMPLE.edition]){
  const rows=edition.declarations.filter(d=>d.kind==='theorem'&&d.bodyAvailable);
+ const logic={},logicExamples={};
  const totals={mp:0,mpr:0,left:0,right:0,reverseLeft:0,reverseRight:0},operators={};
  const lengths={},premises={},chains=[],arithmetic=[],bound=[];let transitive=0;
  let matchedProofs=0,nested=0,riccati,examples;
  for(const d of rows){
   const result=scan(d,edition===window.PROOF_ATLAS_AI_SAMPLE.edition);nested+=result.nested;transitive+=result.transitive;chains.push(...result.chains);arithmetic.push(...result.arithmetic);bound.push(...result.bound);
+  for(const [k,n] of Object.entries(result.logic)){logic[k]=(logic[k]||0)+n;logicExamples[k]??=result.logicExamples[k];}
   for(const [k,n] of Object.entries(result.premises))premises[k]=(premises[k]||0)+n;
   for(const [k,n] of Object.entries(result.lengths))lengths[k]=(lengths[k]||0)+n;
   for(const [k,n] of Object.entries(result.counts))totals[k]+=n;
@@ -195,5 +213,5 @@ for(const edition of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_
   assert.equal(new Set(arithmetic.map(x=>x.proof)).size,15);
  }
  if(edition!==window.PROOF_ATLAS_AI_SAMPLE.edition)assert.deepEqual(riccati,{mp:7,mpr:27,left:7,right:0,reverseLeft:2,reverseRight:4});
- console.log(JSON.stringify({edition:edition.id,theorems:rows.length,totals,matchedProofs,nested,lengths,operators,riccati,examples,premises,transitive,joined:chains.length,boundInputs:bound.length,localInputs:bound.filter(x=>x.local).length,aiBound:edition===window.PROOF_ATLAS_AI_SAMPLE.edition?bound:undefined,arithmeticInputs:arithmetic.length,aiArithmetic:edition===window.PROOF_ATLAS_AI_SAMPLE.edition?arithmetic:undefined,aiChains:edition===window.PROOF_ATLAS_AI_SAMPLE.edition?chains:undefined}));
+ console.log(JSON.stringify({edition:edition.id,theorems:rows.length,logic,logicExamples,totals,matchedProofs,nested,lengths,operators,riccati,examples,premises,transitive,joined:chains.length,boundInputs:bound.length,localInputs:bound.filter(x=>x.local).length,aiBound:edition===window.PROOF_ATLAS_AI_SAMPLE.edition?bound:undefined,arithmeticInputs:arithmetic.length,aiArithmetic:edition===window.PROOF_ATLAS_AI_SAMPLE.edition?arithmetic:undefined,aiChains:edition===window.PROOF_ATLAS_AI_SAMPLE.edition?chains:undefined}));
 }

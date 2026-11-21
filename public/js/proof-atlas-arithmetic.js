@@ -252,6 +252,16 @@
      BigInt(values[0].text)>=BigInt(values[1].text))return null;
   return {values,comparison,carrier:args[0]};
  }
+ function logicalInference(data,at){
+  let head=at.node,arity=0;
+  while(data.kind[head]===5 && arity<4){head=data.children[head][0];arity++;}
+  if(data.kind[head]!==4)return null;
+  const name=data.payloads[head].name,conjunction=name==='And.left'||name==='And.right';
+  if(conjunction?arity!==3:arity!==4 || (name!=='Iff.mp' && name!=='Iff.mpr'))return null;
+  const args=namedArguments(data,at,name,arity);
+  const output=name==='And.left'||name==='Iff.mpr'?0:1;
+  return {name,conjunction,propositions:args.slice(0,2),output,proofs:args.slice(2)};
+ }
  function boundPremise(data,site){
   if(data.kind[site.node]!==0)return null;
   const binder=A.binding(data,site.route);
@@ -343,6 +353,23 @@
     link(label(t.before[c.side],c.from),c.from),c.path.length?' with ':' to ',link(label(t.after[c.side],c.to),c.to),
     '. ',link(t.reverse?'Operand equality (used in reverse)':'Operand equality',c.certificate),' · ',link('Function applied to both sides',c.context));
    return p;
+  }
+  const logical=logicalInference(data,at);
+  if(logical){
+   const panel=el('section'),line=el('p'),evidence=el('p');
+   panel.dataset.logicalInference=logical.name;
+   const expression=site=>link(caption(formula(data,site,3,true)),site);
+   const [p,q]=logical.propositions;
+   if(logical.conjunction){
+    panel.append(el('h4',logical.output?'Take the right conjunct':'Take the left conjunct'));
+    line.append(expression(p),' ∧ ',expression(q),' ⇒ ',expression(logical.propositions[logical.output]));
+    evidence.append(link('Proof of the conjunction',logical.proofs[0]));
+   }else{
+    panel.append(el('h4',logical.output?'Use the forward implication':'Use the reverse implication'));
+    line.append(expression(logical.propositions[1-logical.output]),' ⇒ ',expression(logical.propositions[logical.output]));
+    evidence.append(link('Proof of the equivalence',logical.proofs[0]),' · ',link('Proof of the premise',logical.proofs[1]));
+   }
+   panel.append(line,evidence);container.append(panel);
   }
   const numeral=numeralComparison(data,at);
   if(numeral){
@@ -592,5 +619,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
+ if(common)module.exports={logicalInference,numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
 })(typeof window==='undefined'?globalThis:window);

@@ -2,7 +2,7 @@
 const fs=require('node:fs'),z=require('node:zlib'),crypto=require('node:crypto'),assert=require('node:assert/strict');
 const A=require('../../../public/js/proof-atlas-library-data');
 const {spine}=require('../../../public/js/proof-atlas-elimination');
-const {arithmeticInference,numeralComparison}=require('../../../public/js/proof-atlas-arithmetic');
+const {logicalInference,arithmeticInference,numeralComparison}=require('../../../public/js/proof-atlas-arithmetic');
 global.window={};require('../../../public/data/proof-atlas/goedel-sample-manifest');
 const edition=window.PROOF_ATLAS_AI_SAMPLE.edition;
 const report=fs.readFileSync(0,'utf8').trim().split('\n').map(line=>JSON.parse(line)).find(x=>x.edition===edition.id);
@@ -12,6 +12,8 @@ const baseline=process.argv.includes('--baseline');
 let uniqueSteps=0,certificateVisits=0;const certificates=[],inequalities={};
 const signExamples={},signSlots={mul_nonneg_of_nonpos_of_nonpos:[3,4],mul_pos_of_neg_of_neg:[7,8],sq_nonneg:[6]};
 const linarithOnly=baseline||process.argv.includes('--linarith-only');
+const arithmeticOnly=linarithOnly||process.argv.includes('--arithmetic-only');
+const equivalenceUses={},logicalExamples={},logicalProofs=new Set();
 let fullyRead=0;
 let steps=0,leaves=0,maxDepth=0,longest;
 for(const d of edition.declarations){
@@ -53,7 +55,32 @@ for(const d of edition.declarations){
      assert.equal(numeralComparison({...g,payloads},site),null);
     }
    }
-   const rule=arithmeticInference(g,site);
+   const logical=arithmeticOnly?null:logicalInference(g,site);
+   if(logical){
+    logicalProofs.add(d.name);
+    if(!logical.conjunction){
+     const sources=logical.proofs.map(p=>{
+      const head=spine(g,p.node).head;
+      return g.payloads[head]?.name||A.kinds[g.kind[head]];
+     }).join(' / ');
+     equivalenceUses[sources]=(equivalenceUses[sources]||0)+1;
+    }
+    const output={ 'Iff.mp':1,'Iff.mpr':0,'And.right':1,'And.left':0 }[name];
+    assert.equal(logical.output,output);
+    assert.equal(logical.conjunction,s.args.length===3);
+    const ports=[...logical.propositions,...logical.proofs];
+    assert.equal(ports.length,s.args.length);
+    ports.forEach((p,i)=>{
+     assert.equal(A.walk(g,p.route),s.args[i]);assert.deepEqual(p.route.slots,site.route.slots.concat(Array(s.args.length-i-1).fill(0),1));
+    });
+    const partial={node:g.children[site.node][0],route:{root:1,slots:site.route.slots.concat(0)}};
+    assert.equal(logicalInference(g,partial),null);
+    if(!logicalExamples[name]){
+     const displayed=logical.conjunction?[0,1,output,2]:[1-output,output,2,3];
+     logicalExamples[name]={proof:d.name,site,links:displayed.map(i=>ports[i])};
+    }
+   }
+   const rule=logical||arithmeticInference(g,site);
    if(!rule || (linarithOnly && Object.hasOwn(signSlots,name)) || (baseline && added.has(rule.name.split('.').at(-1)))){frontier[name]=(frontier[name]||0)+1;leaves++;
     if(!cert)unresolved++;
     recordPath(item,depth);
@@ -84,4 +111,4 @@ for(const d of edition.declarations){
 assert.equal(longest.depth,maxDepth);
 assert.equal(certificateVisits,frontier['Mathlib.Meta.NormNum.isNat_lt_true']);
 if(linarithOnly && !baseline)assert.equal(certificates.length,272);
-console.log(JSON.stringify({fullyRead,signExamples,certificateVisits,certificates,inequalities,uniqueSteps,roots:roots.length,steps,leaves,maxDepth,rules,frontier,longest},null,2));
+console.log(JSON.stringify({fullyRead,equivalenceUses,logicalExamples,logicalProofs:logicalProofs.size,signExamples,certificateVisits,certificates,inequalities,uniqueSteps,roots:roots.length,steps,leaves,maxDepth,rules,frontier,longest},null,2));
