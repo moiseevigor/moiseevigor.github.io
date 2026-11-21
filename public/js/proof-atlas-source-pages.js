@@ -29,7 +29,22 @@
    data[field]=new Proxy([],{get(target,key,receiver){if(key==='length')return n;if(typeof key==='string'&&/^(0|[1-9]\d*)$/.test(key))return read(Number(key));return Reflect.get(target,key,receiver);},has(target,key){return typeof key==='string'&&/^(0|[1-9]\d*)$/.test(key)?Number(key)<n:Reflect.has(target,key);},set(){throw Error('Source pages: read-only source');},ownKeys(){throw Error('Source pages: whole-source enumeration is unavailable');}});
   }
   function run(fn,runOptions={}){const task=async()=>{live(runOptions.signal);for(let attempt=0;attempt<64;attempt++)try{const value=await fn();live(runOptions.signal);return value;}catch(error){live(runOptions.signal);if(!(error instanceof MissingPage))throw error;await load(error.page,runOptions.signal||signal);}throw Error('Source pages: retry limit reached; the complete view remains available.');};const result=queue.then(task,task);queue=result.catch(()=>{});return result;}
-  Object.freeze(data);const cursor={data,manifest:m,record,run,state:()=>({...stats,cachedPages:pages.size,cachedNodes:[...pages.values()].reduce((sum,p)=>sum+p.nodes.length,0),indexPages:indices.size,pageLimit,indexLimit,nodeLimit:pageLimit*256,originalIndexSha256:record.indexSha256,manifestSha256:descriptor.sha256,validation:'full-source producer attestation; fetched pages checked by hash and local shape'}),dispose:()=>{disposed=true;pages.clear();indices.clear();}};
+  async function resolveRoute(route,options={}){
+   let node=data.roots[route.root];
+   demand(Number.isInteger(route.root)&&node!==undefined&&Array.isArray(route.slots),'occurrence route');
+   const names=[data.declaration.rootPaths[route.root]];
+   for(const slot of route.slots){
+    const step=await run(()=>{
+     const kind=data.kind[node],child=data.children[node][slot];
+     demand(Number.isInteger(slot)&&slot>=0&&child!==undefined,'occurrence field');
+     return {name:A.fields[A.kinds[kind]][slot],child};
+    },options);
+    names.push(step.name);
+    node=step.child;
+   }
+   return {node,path:names.join('.'),kind:await run(()=>data.kind[node],options)};
+  }
+  Object.freeze(data);const cursor={data,manifest:m,record,run,resolveRoute,state:()=>({...stats,cachedPages:pages.size,cachedNodes:[...pages.values()].reduce((sum,p)=>sum+p.nodes.length,0),indexPages:indices.size,pageLimit,indexLimit,nodeLimit:pageLimit*256,originalIndexSha256:record.indexSha256,manifestSha256:descriptor.sha256,validation:'full-source producer attestation; fetched pages checked by hash and local shape'}),dispose:()=>{disposed=true;pages.clear();indices.clear();}};
   cursors.set(cursor,{live,identity:Object.freeze({name:record.name,indexSha256:record.indexSha256,sourceSha256:record.sourceSha256,manifestSha256:descriptor.sha256})});return Object.freeze(cursor);
  }
  const api={open,fields,MissingPage,identity:cursor=>{const c=cursors.get(cursor);demand(c,'foreign source cursor');c.live();return c.identity;}};if(typeof module!=='undefined'&&module.exports)module.exports=api;else host.ProofAtlasSourcePages=api;

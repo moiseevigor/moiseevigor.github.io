@@ -676,6 +676,15 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
    await panel.locator('section').last().locator('[aria-live] a').first().click();
    await page.waitForFunction(id=>document.querySelector('#pl-expression h3')?.textContent.endsWith(' · e'+id),use.node);
    assert.equal(new URL(page.url()).searchParams.get('route'),'1:'+use.route.slots.join('.'));
+   const largeProof=aiEdition.declarations.find(r=>r.name==='lean_workbook_20418');
+   const largeData=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+largeProof.indexFile)));
+   const deep=atlas.routes(largeData).route(30288);
+   await page.goto('http://localhost/projects/proof-atlas/library/?loading=paged&edition='+aiEdition.id+'&proof='+largeProof.name+'&route=1:'+deep.slots.join('.')+'#expr-30288');
+   await page.waitForFunction(()=>window.ProofAtlasLibrary?.getSnapshot()?.selected===30288);
+   const loaded=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
+   assert.equal(loaded.mode,'paged-judgments');
+   assert.deepEqual(loaded.route,deep);
+   assert.equal(loaded.path,atlas.path(largeData,deep));
    await page.close();
   }
   console.log('Occurrence switching and all 24 omitted references passed at 320 and 1280 pixels.');
