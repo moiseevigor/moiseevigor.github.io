@@ -1,0 +1,214 @@
+[
+  {
+    "edition": "published-15",
+    "theoremBodies": 561,
+    "bodiesCallingAvailableBody": 376,
+    "endpoints": "9800418",
+    "all": {
+      "counts": {
+        "outsideEdition": "9355139",
+        "bodyAvailable": "444072",
+        "nonconstant": "936",
+        "declarationOnly": "230",
+        "indexedBody": "41"
+      },
+      "distinctExternalNames": 898,
+      "leadingExternalNames": [
+        [
+          "CommSemiring.toSemiring",
+          "1398328"
+        ],
+        [
+          "Nat.rawCast",
+          "550668"
+        ],
+        [
+          "AddCommMonoidWithOne.toAddMonoidWithOne",
+          "549797"
+        ],
+        [
+          "NonAssocSemiring.toAddCommMonoidWithOne",
+          "549797"
+        ],
+        [
+          "Semiring.toNonAssocSemiring",
+          "549797"
+        ],
+        [
+          "instDistribOfSemiring",
+          "455375"
+        ],
+        [
+          "HMul.hMul",
+          "391394"
+        ],
+        [
+          "instHMul",
+          "391394"
+        ],
+        [
+          "HPow.hPow",
+          "328790"
+        ],
+        [
+          "instHPow",
+          "328790"
+        ]
+      ]
+    },
+    "recordedProofResults": {
+      "counts": {
+        "outsideEdition": "219",
+        "bodyAvailable": "69",
+        "indexedBody": "10"
+      },
+      "distinctExternalNames": 16,
+      "leadingExternalNames": [
+        [
+          "And.casesOn",
+          "50"
+        ],
+        [
+          "Exists.casesOn",
+          "25"
+        ],
+        [
+          "LT.lt.le",
+          "25"
+        ],
+        [
+          "congrArg",
+          "24"
+        ],
+        [
+          "Mathlib.Tactic.Linarith.sub_nonpos_of_le",
+          "14"
+        ],
+        [
+          "abs_of_nonneg",
+          "12"
+        ],
+        [
+          "Eq.mpr",
+          "12"
+        ],
+        [
+          "Eq.mp",
+          "8"
+        ],
+        [
+          "le_div_iff₀",
+          "8"
+        ],
+        [
+          "mul_pos",
+          "8"
+        ]
+      ]
+    }
+  },
+  {
+    "edition": "goedel-sample-4331",
+    "theoremBodies": 20,
+    "bodiesCallingAvailableBody": 0,
+    "endpoints": "16240679",
+    "all": {
+      "counts": {
+        "outsideEdition": "16240202",
+        "nonconstant": "477"
+      },
+      "distinctExternalNames": 386,
+      "leadingExternalNames": [
+        [
+          "CommSemiring.toSemiring",
+          "2447623"
+        ],
+        [
+          "instDistribOfSemiring",
+          "958547"
+        ],
+        [
+          "Nat.rawCast",
+          "911813"
+        ],
+        [
+          "AddCommMonoidWithOne.toAddMonoidWithOne",
+          "834423"
+        ],
+        [
+          "NonAssocSemiring.toAddCommMonoidWithOne",
+          "834423"
+        ],
+        [
+          "Semiring.toNonAssocSemiring",
+          "834423"
+        ],
+        [
+          "HMul.hMul",
+          "659514"
+        ],
+        [
+          "instHMul",
+          "659514"
+        ],
+        [
+          "Distrib.toMul",
+          "646904"
+        ],
+        [
+          "HPow.hPow",
+          "610264"
+        ]
+      ]
+    },
+    "recordedProofResults": {
+      "counts": {
+        "outsideEdition": "747",
+        "nonconstant": "13"
+      },
+      "distinctExternalNames": 34,
+      "leadingExternalNames": [
+        [
+          "sub_eq_zero_of_eq",
+          "100"
+        ],
+        [
+          "Mathlib.Tactic.Linarith.sub_nonpos_of_le",
+          "84"
+        ],
+        [
+          "Or.casesOn",
+          "71"
+        ],
+        [
+          "Iff.mpr",
+          "68"
+        ],
+        [
+          "Mathlib.Tactic.Linarith.sub_neg_of_lt",
+          "68"
+        ],
+        [
+          "Eq.mp",
+          "48"
+        ],
+        [
+          "le_of_not_gt",
+          "40"
+        ],
+        [
+          "mul_pos",
+          "39"
+        ],
+        [
+          "Mathlib.Tactic.Linarith.eq_of_not_lt_of_not_gt",
+          "36"
+        ],
+        [
+          "add_pos'",
+          "28"
+        ]
+      ]
+    }
+  }
+]
