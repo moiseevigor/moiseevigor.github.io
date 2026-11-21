@@ -272,6 +272,18 @@ async function main() {
         assert.deepEqual(selection.route,{root:1,slots});
       }
     }
+    const lambdaCall=[1,1,1,1,0,1,1];
+    example.searchParams.set('proof','lean_workbook_plus_68616');
+    example.searchParams.set('route','1:'+lambdaCall.join('.'));example.hash='expr-102';
+    for(const [label,node,suffix] of [['Applied function · λ i',84,[0,1,0]],['Lambda body',7,[0,1,0,1]]]){
+      await page.goto(example.href);
+      const panel=page.locator('#pl-application-headers details').first();
+      await panel.locator('summary').click();
+      await panel.locator('ol > li').nth(2).getByRole('button',{name:label,exact:true}).click();
+      const snapshot=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
+      assert.equal(snapshot.selected,node);
+      assert.deepEqual(snapshot.route,{root:1,slots:lambdaCall.concat(suffix)});
+    }
     assert.deepEqual(errors,[]);
     console.log('Four inspector paths and four folded canvas paths passed at both widths.');
   } finally {await browser.close();}

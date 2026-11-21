@@ -954,7 +954,7 @@
   await geometryLoad;
  }
  // Follow only the original function fields; a longer spine has no local caption.
- function namedInputHead(arg){
+ function inputFunction(arg){
   if(current.kind(arg.node)!=='app')return null;
   let node=arg.node,depth=0;
   while(depth<32 && current.kind(node)==='app'){
@@ -962,6 +962,10 @@
   }
   const route={root:arg.route.root,slots:arg.route.slots.concat(Array(depth).fill(0))};
   if(current.kind(node)==='const')return {node,route,name:current.payload(node).name};
+  if(current.kind(node)==='lam'){
+   const body={node:current.children(node)[1],route:{root:route.root,slots:route.slots.concat(1)}};
+   return {node,route,name:'λ '+(current.payload(node).binderName||'_'),body};
+  }
   if(current.kind(node)!=='bvar')return null;
   const binder=A.binding(current.data,route);
   if(!binder)return null;
@@ -1017,7 +1021,7 @@
   }
   const inputHeads=new Map();
   for(const arg of ports){
-   const head=namedInputHead(arg);
+   const head=inputFunction(arg);
    if(head)inputHeads.set(arg.path,head);
   }
   const byPath=new Map(),groups=new Map(),max=Math.max(1,...scene.nodes.map(n=>n.depth));
@@ -1045,6 +1049,12 @@
      headButton.type='button';headButton.title=A.path(current.data,producer.route);
      headButton.onclick=()=>selectOccurrence(producer.node,true,true,producer.route);
      row.append(headButton);
+     if(producer.body){
+      const open=el('button','Lambda body');
+      open.type='button';open.title=A.path(current.data,producer.body.route);
+      open.onclick=()=>selectOccurrence(producer.body.node,true,true,producer.body.route);
+      row.append(open);
+     }
      if(producer.binder){
       const source=el('button','Binder · '+producer.name);
       source.type='button';source.title=A.path(current.data,producer.binder.route);
