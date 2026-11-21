@@ -2,7 +2,7 @@
 const fs=require('node:fs'),z=require('node:zlib'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 const A=require('../../../public/js/proof-atlas-library-data');
 const {spine}=require('../../../public/js/proof-atlas-elimination');
-const {formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses}=require('../../../public/js/proof-atlas-arithmetic');
+const {formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses,contraryJoins}=require('../../../public/js/proof-atlas-arithmetic');
 const ports=require('./distinct-call-ports.cjs');
 global.window={};require('../../../public/data/proof-atlas/goedel-sample-manifest');
 const arities={'HPow.hPow':6,'HMul.hMul':6,'HSub.hSub':6,'HAdd.hAdd':6,'HDiv.hDiv':6,Or:2,And:2,Eq:3,Ne:3,'LE.le':4,'GE.ge':4,'LT.lt':4,'Real.sqrt':1,abs:4},counts={},examples={};
@@ -97,7 +97,20 @@ for(const d of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations.filter(d=>d.kin
   });
   const children=g.children.slice();children[order.goal.node]=[children[order.goal.node][0],g.roots[0]===order.goal.node?order.operand.node:spine(g,order.goal.node).head];
   assert.equal(closingOrderArgument({...g,children}),null);
-  orderProofs.push({proof:d.name,order,paths:trace.uses.map(u=>u.chain.map(c=>c.call)),assumptionReferences:String(refs.total)});
+  const meetings=contraryJoins(trace.uses), pairMeetings=new Set();
+  for(let i=0;i<trace.uses.length;i++)for(let j=i+1;j<trace.uses.length;j++){
+   const b=trace.uses[j].chain;
+   const first=trace.uses[i].chain.find(s=>b.some(t=>String(t.call.route.slots)===String(s.call.route.slots)));
+   assert(first);
+   const join=meetings.find(m=>String(m.call.route.slots)===String(first.call.route.slots));
+   assert(join);
+   const left=join.inputs.find(input=>input.references.includes(i+1));
+   const right=join.inputs.find(input=>input.references.includes(j+1));
+   assert(left && right && left.slot!==right.slot);
+   pairMeetings.add(String(first.call.route.slots));
+  }
+  assert.equal(pairMeetings.size,meetings.length);
+  orderProofs.push({proof:d.name,order,meetings,paths:trace.uses.map(u=>u.chain.map(c=>c.call)),assumptionReferences:String(refs.total)});
  }
  for(const p of ports(g,Infinity).routes){
   if(seen.has(p.callNode))continue;

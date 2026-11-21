@@ -245,6 +245,21 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
         const selected=await page.evaluate(()=>window.ProofAtlasOccurrenceView.getSnapshot().route);
         assert.deepEqual(selected,packed.encode(1,[...callSlots,...Array(8-index).fill(0),1]));
       }
+      const joinURL=new URL('/projects/proof-atlas/library/',url);
+      joinURL.search=new URLSearchParams({edition:'goedel-sample-4331',proof:'lean_workbook_plus_68077',route:'1:'});
+      await page.goto(joinURL.href);
+      await page.locator('#pl-roots [data-proof-root]').last().click();
+      const details=page.locator('[data-contrary-uses]').first();
+      await details.locator('summary').first().click();
+      const joins=details.locator('[data-contrary-joins] li');
+      await joins.last().waitFor();
+      assert.equal(await joins.count(),3);
+      assert.match(await joins.last().innerText(),/References 1, 2, 3 → argument 8/);
+      await joins.last().getByRole('link').click();
+      await page.waitForFunction(()=>{
+        const selected=window.ProofAtlasLibrary?.getSnapshot();
+        return selected?.selected===7666 && selected.route.root===1 && selected.route.slots.join('.')==='1.1.1.1.1.1.1.1.1.1.1';
+      });
       await page.close();
     }
     console.log('Verified complete and paged Riccati and AI premise selections at 360 and 1280 pixels.');

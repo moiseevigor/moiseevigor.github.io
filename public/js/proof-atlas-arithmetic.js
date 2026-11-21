@@ -707,6 +707,22 @@
   }
   return {uses,total:String(total),limited:BigInt(uses.length)<total};
  }
+ // Paths meet where distinct argument positions reach the same call occurrence.
+ function contraryJoins(uses){
+  const calls=new Map();
+  for(const [index,use] of uses.entries()){
+   for(const step of use.chain){
+    const key=step.call.route.root+':'+step.call.route.slots.join('.');
+    if(!calls.has(key))calls.set(key,{call:step.call,label:step.label,arity:step.arity,ports:new Map()});
+    const ports=calls.get(key).ports;
+    if(!ports.has(step.slot))ports.set(step.slot,[]);
+    ports.get(step.slot).push(index+1);
+   }
+  }
+  return [...calls.values()].filter(row=>row.ports.size>1)
+   .sort((a,b)=>b.call.route.slots.length-a.call.route.slots.length)
+   .map(({call,label,arity,ports})=>({call,label,arity,inputs:[...ports].map(([slot,references])=>({slot,references}))}));
+ }
  function derivationInputs(data,root,limit=1024){
   const todo=[root],inputs=new Map(),theorems=new Map(),unexplained=new Map();
   let visits=0,steps=0,certificates=0,unread=0,firstUnread=null;
@@ -1172,6 +1188,21 @@
       }
       list.append(row);
      }
+     const meetings=contraryJoins(result.uses);
+     if(meetings.length){
+      const joins=el('ol');joins.dataset.contraryJoins='';
+      for(const meeting of meetings){
+       const row=el('li'),inference=arithmeticInference(data,meeting.call);
+       row.append(link(inference?.conclusion||meeting.label,meeting.call));
+       for(const input of meeting.inputs){
+        const refs=input.references;
+        const premise=inference?.premises[input.slot-meeting.arity+inference.premises.length-1];
+        row.append(el('p','Reference'+(refs.length===1?' ':'s ')+refs.join(', ')+' → '+(input.slot?'argument '+input.slot:'function')+(premise?' · '+premise:'')));
+       }
+       joins.append(row);
+      }
+      trail.append(el('h5','Where the reference paths meet'),joins);
+     }
      if(result.uses.length)trail.append(list);
      if(result.limited)trail.append('Further references outside the display or traversal limit.');
     };
@@ -1315,5 +1346,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={differentCopyRank,matchingCopies,firstBindingBody,nearestReference,rowCopies,outerReference,congruenceCall,transportCall,derivationInputs,binderArgument,statementOrigin,binderCopies,zeroDifference,logicalInference,numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
+ if(common)module.exports={differentCopyRank,matchingCopies,firstBindingBody,nearestReference,rowCopies,outerReference,congruenceCall,transportCall,derivationInputs,binderArgument,statementOrigin,binderCopies,zeroDifference,logicalInference,numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses,contraryJoins};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
 })(typeof window==='undefined'?globalThis:window);
