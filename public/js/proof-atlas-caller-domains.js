@@ -45,6 +45,42 @@
    if(A.walk(data,route)!==node)throw Error('Case evidence address mismatch');
    return sourceLink(label,{node,route});
   }
+  function showProjectionHelper(){
+   if(data.kind[call.node]!==5)return;
+   const entries=host.PROOF_ATLAS_PROJECTION_HELPERS;
+   if(!entries?.length)return;
+   const args=[];
+   let head=call.node;
+   const limit=Math.max(...entries.map(entry=>entry.arity));
+   while(data.kind[head]===5 && args.length<limit){
+    args.unshift(data.children[head][1]);head=data.children[head][0];
+   }
+   if(data.kind[head]!==4)return;
+   const helper=entries.find(entry=>entry.edition===call.edition && entry.arity===args.length &&
+    entry.name===data.payloads[head].name);
+   if(!helper)return;
+   const edition=host.PROOF_ATLAS_LIBRARY.editions.find(item=>item.id===call.edition);
+   if(!edition?.declarations.some(d=>d.name===helper.name && d.indexSha256===helper.digest))return;
+   const route={root:call.route.root,slots:call.route.slots.concat(Array(args.length-helper.slot).fill(0),1)};
+   const input=args[helper.slot-1];
+   const binder=A.binding(data,route);
+   const inputName=binder?data.payloads[binder.node].binderName:null;
+   function helperLink(text,node,depth){
+    const link=el('a',text),url=new URL(location.pathname,location.href);
+    url.search=new URLSearchParams({edition:call.edition,proof:helper.name,route:'1:'+Array(depth).fill(1).join('.')});
+    url.hash='expr-'+node;link.href=url.href;return link;
+   }
+   const clause=Array.from(helper.clause,c=>c==='L'?'left':'right').join(' → ');
+   const panel=el('section'),line=el('p'),detail=el('details');
+   panel.dataset.projectionHelper='';
+   panel.append(el('h4','Clause returned by this call'));
+   line.append(sourceLink(inputName||'Argument '+helper.slot,{node:input,route}),' → ',
+    helperLink(clause+' clause',helper.result,helper.arity));
+   detail.append(el('summary','Inside the helper proof'),el('code',helper.name),' · ',
+    helperLink('Receiving parameter',helper.parameter,helper.slot-1));
+   panel.append(line,detail);container.append(panel);
+  }
+  showProjectionHelper();
   const flow=host.PROOF_ATLAS_CLAUSE_USES?.find?.(item=>item.indexSha256===record.indexSha256);
   if(flow && flow.edition===call.edition && flow.declaration===record.name && flow.indexSha256===record.indexSha256 &&
      call.route.root===1 && (!call.route.slots.length || call.route.slots.join('')===flow.binder.path)){
