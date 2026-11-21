@@ -86,7 +86,7 @@
     const message=el('p','Loading substitution routes…');
     panel.replaceChildren(summary,message);
     try{
-     substitutionCatalog??=fetch('/public/data/proof-atlas/substitution-routes.json?v=1').then(async response=>{
+     substitutionCatalog??=fetch('/public/data/proof-atlas/substitution-routes.json?v=2').then(async response=>{
       if(!response.ok)throw Error('Route index unavailable');
       const catalog=await response.json();
       if(catalog.format!=='ProofAtlasSubstitutionRoutes/1')throw Error('Unknown route index format');

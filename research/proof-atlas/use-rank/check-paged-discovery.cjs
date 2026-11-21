@@ -76,6 +76,8 @@ async function main(){
  const window={};
  require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/source-pages-manifest.js','utf8'),{window});
  require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/type-notation-catalog.js','utf8'),{window});
+ require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/article-proof-steps.js','utf8'),{window});
+ const article=window.PROOF_ATLAS_PROOF_STEPS;
  const items=inventory();
  const args=process.argv.slice(2);
  const output='public/data/proof-atlas/substitution-routes.json';
@@ -118,6 +120,14 @@ async function main(){
     }
     stack.push(...data.children[id]);
    }
+   const reviewed=new Map();
+   if(descriptor.edition===article.edition && article.packets.some(p=>p.name===record.name &&
+    p.indexSha256===record.indexSha256 && p.sourceSha256===record.sourceSha256)){
+    for(const a of article.anchors.filter(a=>a.declaration===record.name && a.scope==='proof' && a.role==='call')){
+     const group=reviewed.get(a.path)??[];
+     group.push(a);reviewed.set(a.path,group);
+    }
+   }
    const entries=[];
    let count=0;
    for(const {node,route} of matches(db,stats.root)){
@@ -134,7 +144,15 @@ async function main(){
     const rawName=data.kind[head]===4?payload.name:atlas.kinds[data.kind[head]];
     const name=op && op.glyph!==rawName?op.glyph+' ('+rawName+')':rawName;
     const label=kind==='lam'?'Lambda body headed by '+name:kind==='app'?'Partial application of '+name:'Function '+name;
-    entries.push([node,route.slots.join(''),label]);
+    const annotations=reviewed.get(atlas.path(data,route)+'.arg')??[];
+    const notes=annotations.map(a=>{
+     assert.equal(a.node,data.children[node][1]);
+     assert.equal(data.payloads[spine(data,a.node).head].name,a.callee);
+     const passage=article.passages.find(p=>p.id===a.step);
+     assert(passage);
+     return 'Premise '+a.callee+' · '+passage.title;
+    });
+    entries.push([node,route.slots.join(''),notes.concat(label).join(' · ')]);
     count++;
    }
    catalog.push({edition:descriptor.edition,name:record.name,indexSha256:record.indexSha256,sourceSha256:record.sourceSha256,entries});
