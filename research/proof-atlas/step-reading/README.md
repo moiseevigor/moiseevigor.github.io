@@ -503,3 +503,16 @@ Following each of the twelve references outward through the argument slots of it
 At an Eq.mp occurrence, compare the two proposition arguments as bounded operator trees. For two recognized binary operators with the same head and identical implicit argument rows, check whether exactly one explicit operand differs. Require the proposition equality to be a six-argument congrArg whose two input rows are the differing operands in that order. These comparisons occur in the same binder context. The links retain separate occurrence paths for the source and target, the congruence function and the operand equality. The rule uses compiled identities and makes no attempt to recognize further conversions.
 
 An exhaustive walk of the 20 AI theorem bodies, counting each reachable row once per declaration, found 67 fully applied Eq.mp rows. The rule recognized 46 left and four right rewrites across 15 proofs. The seven terminal contradiction rewrites are all left rewrites with an operand equality headed by Mathlib.Tactic.Ring.of_eq. Among the 17 other casts, 13 have False as their target. None received an operand-change diagram. Local Chrome inspected one exact occurrence per cast, checked whether the diagram appeared on the correct side and verified 300 link routes in the 50 recognized cases. Run `node research/proof-atlas/step-reading/check-arithmetic-formulas.cjs` for the corpus walk and all example routes.
+
+### Transfer to SE(2) and reverse rewrites
+
+The cast can run in either direction. Eq.mpr uses the second proposition as its premise and returns the first. In the reader the arrow follows that proof flow. For a congrArg proof wrapped in id, the reader first verifies the two endpoints in the explicit equality type of id. It then links through the wrapper to the actual congruence function and operand equality. A reversed use is labeled on the operand-equality link.
+
+Run `node research/proof-atlas/step-reading/check-rewrite-transfer.cjs` for both editions. The scan verifies each theorem index checksum, walks the rows reachable from the proof root, and checks the exact operator head, fixed arguments, direction and link targets for every match. Counts are distinct compiled rows per theorem, with the editions measured separately.
+
+| Edition | Theorem bodies | Forward matches / Eq.mp | Reverse matches / Eq.mpr | Theorems with matches |
+|---|---:|---:|---:|---:|
+| Published, 15 modules | 561 | 472 / 631 | 187 / 1,921 | 184 |
+| Working, 26 modules | 1,083 | 625 / 829 | 506 / 3,462 | 284 |
+
+In each edition of the Riccati lemma, six of the 34 casts match (four forward and two reverse). Local Chrome checked all six selections in both editions, including the direction labels and 72 occurrence links. The denominator counts only fully applied Eq.mp and Eq.mpr. Other equality eliminators, changes below a displayed operand, and mathematical proof-step boundaries require separate evidence.

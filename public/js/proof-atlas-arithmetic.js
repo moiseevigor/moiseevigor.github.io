@@ -158,25 +158,34 @@
   }
   return data.kind[site.node]===4 && data.payloads[site.node].name===name?args:null;
  }
- function rewriteSide(data,cast,before,after){
-  if(!before?.right || !after?.right || before.name!==after.name ||
+ function rewriteSide(data,cast,before,after,reverse){
+  if(!before?.right || !after?.right || before.head.node!==after.head.node ||
      before.parameters.some((p,i)=>p.node!==after.parameters[i].node))return null;
-  const equality=namedArguments(data,cast[2],'congrArg',6);
+  let witness=cast[2];
+  const identity=namedArguments(data,witness,'id',2);
+  if(identity){
+   const proposition=namedArguments(data,identity[0],'Eq',3);
+   if(!proposition || proposition[1].node!==cast[0].node || proposition[2].node!==cast[1].node)return null;
+   witness=identity[1];
+  }
+  const equality=namedArguments(data,witness,'congrArg',6);
   if(!equality)return null;
   for(const [side,other] of [['left','right'],['right','left']]){
    const from=before[side].site,to=after[side].site;
    if(from.node!==to.node && before[other].site.node===after[other].site.node &&
-      equality[2].node===from.node && equality[3].node===to.node)
-    return {side,from,to,context:equality[4],certificate:equality[5]};
+      equality[reverse?3:2].node===from.node && equality[reverse?2:3].node===to.node)
+    return {side,from,to,witness,context:equality[4],certificate:equality[5]};
   }
   return null;
  }
  function formulaTransport(data,at){
-  const cast=namedArguments(data,at,'Eq.mp',4);
+  const forward=namedArguments(data,at,'Eq.mp',4);
+  const cast=forward||namedArguments(data,at,'Eq.mpr',4);
   if(!cast)return null;
-  const before=formula(data,cast[0]),after=formula(data,cast[1]);
+  const reverse=!forward;
+  const before=formula(data,cast[reverse?1:0]),after=formula(data,cast[reverse?0:1]);
   if(!before || !after)return null;
-  return {before,after,equality:cast[2],premise:cast[3],change:rewriteSide(data,cast,before,after)};
+  return {before,after,equality:cast[2],premise:cast[3],reverse,change:rewriteSide(data,cast,before,after,reverse)};
  }
  function closingOrderArgument(data){
   if(data.roots[1]==null)return null;
@@ -237,7 +246,7 @@
   function operandChange(t){
    const c=t.change,p=el('p');p.dataset.rewriteSide=c.side;
    p.append('The '+c.side+' operand changes from ',link(caption(t.before[c.side]),c.from),' to ',link(caption(t.after[c.side]),c.to),
-    '. ',link('Operand equality',c.certificate),' · ',link('Function applied to both sides',c.context));
+    '. ',link(t.reverse?'Operand equality (used in reverse)':'Operand equality',c.certificate),' · ',link('Function applied to both sides',c.context));
    return p;
   }
   const selected=formulaTransport(data,at);
