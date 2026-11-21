@@ -141,7 +141,7 @@
      uses.ontoggle=()=>{
       if(!uses.open || counted)return;
       counted=true;
-      const budget={maxStates:8192,maxDepth:512,useSupport:false};
+      const budget={maxStates:8192,maxWork:16384,maxDepth:512,useSupport:false,firstIfPresent:true};
       for(let k=0;k<arity;k++){
        const index=arity-1-k;
        const result=host.ProofAtlasRecursiveInputs.countReferences(data,body,index,budget);
@@ -152,7 +152,7 @@
         const n=result.occurrences;
         line.append(' · '+n+' syntactic reference'+(n==='1'?'':'s')+' in the branch body');
         if(n!=='0'){
-         const {witness}=host.ProofAtlasRecursiveInputs.countReferences(data,body,index,{...budget,ordinal:1n});
+         const {witness}=result;
          const route={root:branch.route.root,slots:bodySlots.concat(witness.slots)};
          const binding=A.binding(data,route);
          if(!binding || String(binding.route.slots)!==String(binderRoute.slots))throw Error('Branch reference scope mismatch');

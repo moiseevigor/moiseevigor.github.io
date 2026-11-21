@@ -11,6 +11,7 @@ const budget={maxStates:8192,maxDepth:512,useSupport:false};
 for(const e of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAMPLE.edition]){
  const counts={zero:0,one:0,multiple:0,unavailable:0};
  const overflow=[];
+ let peakEntries=0,peakWork=0;
  for(const d of e.declarations.filter(x=>x.kind==='theorem'&&x.bodyAvailable)){
   const raw=gunzipSync(fs.readFileSync('.'+d.indexFile));
   assert.equal(createHash('sha256').update(raw).digest('hex'),d.indexSha256);
@@ -29,21 +30,38 @@ for(const e of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAM
       binders.push(bodyPath);body=g.children[body][1];bodyPath=bodyPath.concat(1);
      }
      for(const [k,binder] of binders.entries()){
-      const index=binders.length-1-k,result=countReferences(g,body,index,budget);
+      const index=binders.length-1-k;
+      const baseline=countReferences(g,body,index,budget);
+      const bounded={...budget,maxWork:16384,firstIfPresent:true};
+      const result=countReferences(g,body,index,bounded);
+      peakEntries=Math.max(peakEntries,result.peakEntries);
+      peakWork=Math.max(peakWork,result.states);
       // Independent expanded traversal comparing lexical indices at each leaf.
+      let first;
+      const relative=[];
       function tally(id,depth){
-       if(g.kind[id]===0)return BigInt(g.payloads[id].index===index+depth);
-       return g.children[id].reduce((sum,c,s)=>sum+tally(c,depth+Number(
-        (g.kind[id]===6||g.kind[id]===7)&&s===1||g.kind[id]===8&&s===2)),0n);
+       if(g.kind[id]===0){
+        const hit=g.payloads[id].index===index+depth;
+        if(hit && !first)first={node:id,slots:relative.slice()};
+        return BigInt(hit);
+       }
+       let total=0n;
+       for(const [slot,child] of g.children[id].entries()){
+        const binds=(g.kind[id]===6||g.kind[id]===7)&&slot===1||g.kind[id]===8&&slot===2;
+        relative.push(slot);total+=tally(child,depth+Number(binds));relative.pop();
+       }
+       return total;
       }
       const n=tally(body,0);
       if(result.status!=='counted'){
-       counts.unavailable++;overflow.push(n.toString());continue;
+       counts.unavailable++;continue;
       }
+      if(baseline.status!=='counted')overflow.push([d.name,i,path.join(''),n.toString()]);
       assert.equal(BigInt(result.occurrences),n);
       counts[n===0n?'zero':n===1n?'one':'multiple']++;
+      assert.deepEqual(result.witness,first);
       if(n){
-       const {witness}=countReferences(g,body,index,{...budget,ordinal:1n});
+       const {witness}=result;
        const route={root:1,slots:bodyPath.concat(witness.slots)};
        assert.deepEqual(A.binding(g,route).route.slots,binder);
       }
@@ -54,5 +72,7 @@ for(const e of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAM
   }
   walk(g.roots[1],[]);
  }
- console.log(e.id,counts,{offlineCountsForUnavailable:overflow});
+ assert.equal(counts.unavailable,0);
+ assert(peakEntries<=8192 && peakWork<=16384);
+ console.log(e.id,counts,{recovered:overflow,peakWork,peakEntries});
 }

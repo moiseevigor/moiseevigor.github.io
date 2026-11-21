@@ -294,12 +294,12 @@ In the working edition, 25 distinct And.intro rows in `JacobiConcrete.AmplitudeC
 
 ### Case assumptions and actual references
 
-For each distinct saturated Or.casesOn or And.casesOn row in an available theorem body, count each introduced assumption in the body after opening all branch lambdas. This includes nested type and value expressions. The reader counts on demand, with at most 8,192 scoped states per traversal and a depth limit of 512. A positive count links to a specific occurrence and checks the enclosing binder route. A traversal limit leaves the count unavailable.
+For each distinct saturated Or.casesOn or And.casesOn row in an available theorem body, count each introduced assumption in the body after opening all branch lambdas. This includes nested type and value expressions. The reader counts on demand, with at most 8,192 cached counts, 16,384 state visits per query and a depth limit of 512. A positive count links to a specific occurrence and checks the enclosing binder route. A traversal limit leaves the count unavailable.
 
 | Edition | Zero | One | Multiple | Outside reader limit |
 | --- | ---: | ---: | ---: | ---: |
-| Published SE(2) | 30 | 243 | 79 | 6 |
-| Working SE(2) | 32 | 269 | 81 | 10 |
+| Published SE(2) | 30 | 247 | 81 | 0 |
+| Working SE(2) | 32 | 277 | 83 | 0 |
 | Gödel sample | 0 | 19 | 11 | 0 |
 
-Run `node research/proof-atlas/step-reading/case-assumptions.cjs` from the site root. The independent expanded traversal found one or three references in every limit-exceeding case. Counts measure lexical references. They do not establish that a hypothesis can be removed from the mathematical argument.
+Run `node research/proof-atlas/step-reading/case-assumptions.cjs` from the site root. The previous traversal stopped after 8,192 state visits, leaving six published and ten working-edition counts unavailable. Recycling cache entries recovered all sixteen with a peak of 11,388 visits per query, including locating the first reference. The independent expanded traversal checks both the total and the first occurrence path. Counts measure lexical references. They do not establish that a hypothesis can be removed from the mathematical argument.

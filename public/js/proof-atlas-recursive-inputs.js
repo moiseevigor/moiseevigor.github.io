@@ -66,13 +66,13 @@
    return n;
   }
   const method=recycle?'scoped-dag-reference-count/3':useSupport?'scoped-dag-reference-count/2':'scoped-dag-reference-count/1',supportInfo=useSupport?{supportAvailable:support?.[root]!==undefined,supportWidth,supportCacheLimit}:{};
-  const ordinal=options.ordinal;
+  const ordinal=options.firstIfPresent?1n:options.ordinal;
   demand(ordinal===undefined || (typeof ordinal==='bigint' && ordinal>=1n),'reference ordinal');
   function stats(){return recycle?{peakEntries:memo.size,evictions,maxWork}:{};}
   try{
    const total=visit(root,0,0);
    const result={status:'counted',occurrences:total.toString(),states,method,...supportInfo,...stats()};
-   if(ordinal===undefined)return result;
+   if(ordinal===undefined || (options.firstIfPresent && total===0n))return result;
    demand(ordinal<=total,'reference outside body');
    let remaining=ordinal,node=root,depth=0;
    const slots=[];
