@@ -1,6 +1,7 @@
 // Count binder occurrences for a fixed bound input of a shared call in the entire proof body.
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),crypto=require('node:crypto'),z=require('node:zlib');
+const {binderCopies}=require('../../../public/js/proof-atlas-arithmetic');
 const A=require('../../../public/js/proof-atlas-library-data');
 global.window={};require('../../../public/data/proof-atlas/goedel-sample-manifest');
 const edition=window.PROOF_ATLAS_AI_SAMPLE.edition;
@@ -55,12 +56,26 @@ function enumerate(g,target,relative){
  while(stack.length){
   const {node,slots}=stack.pop();
   if(node===target){
-   const binder=A.binding(g,{root:1,slots:slots.concat(relative)});
+   const refRoute={root:1,slots:slots.concat(relative)},binder=A.binding(g,refRoute);
    assert(binder);
-   if(!owners.has(binder.node))owners.set(binder.node,{routes:new Set(),uses:0n});
+   if(!owners.has(binder.node))owners.set(binder.node,{reference:{node:A.walk(g,refRoute),route:refRoute},routes:new Set(),uses:0n});
    const entry=owners.get(binder.node);entry.uses++;entry.routes.add(binder.route.slots.join('.'));
   }else g.children[node].forEach((child,slot)=>{
    if(reachable[child])stack.push({node:child,slots:slots.concat(slot)});
+  });
+ }
+ for(const [row,v] of owners){
+  const model=binderCopies(g,v.reference);
+  assert.deepEqual(model.select(model.rank).reference,v.reference);
+  assert.throws(()=>model.select(model.total),RangeError);
+  // DFS above visits the higher child first. Reverse the insertion order for lower-child-first rank.
+  const routes=[...v.routes].reverse();
+  assert.equal(model.total,BigInt(routes.length));
+  routes.forEach((slots,i)=>{
+   const hit=model.select(BigInt(i));
+   assert.equal(hit.binder.node,row);assert.equal(hit.binder.route.slots.join('.'),slots);
+   assert.equal(A.walk(g,hit.reference.route),v.reference.node);
+   assert.deepEqual(A.binding(g,hit.reference.route),hit.binder);
   });
  }
  return [...owners].sort(([a],[b])=>a-b).map(([row,v])=>({row,occurrences:BigInt(v.routes.size),uses:v.uses}));
@@ -79,3 +94,15 @@ for(const w of witnesses){
 }
 assert(results.length>0);
 console.log(JSON.stringify(results,(_,v)=>typeof v==='bigint'?String(v):v,2));
+
+// A single lambda row is reached by 2^128 distinct paths in this small compiled-shaped DAG.
+const stress={roots:[null,130],kind:[0,3,6],children:[[],[],[1,0]],payloads:[{index:0},{},{binderName:'x'}]};
+for(let n=3;n<=130;n++){stress.kind[n]=5;stress.children[n]=[n-1,n-1];stress.payloads[n]={};}
+const last={node:0,route:{root:1,slots:Array(129).fill(1)}};
+const model=binderCopies(stress,last);
+assert.equal(model.total,2n**128n);assert.equal(model.rank,model.total-1n);
+for(const rank of [0n,1n,2n**97n+13n,model.rank]){
+ const hit=model.select(rank);
+ assert.deepEqual(hit.binder.route.slots,[...rank.toString(2).padStart(128,'0')].map(Number));
+ assert.deepEqual(A.binding(stress,hit.reference.route),hit.binder);
+}

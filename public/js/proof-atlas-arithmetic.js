@@ -296,6 +296,43 @@
   return {site,binder,name:payload.binderName||payload.declName||'Bound variable',domain:field(0),
    value:data.kind[binder.node]===8?field(1):null};
  }
+ // Number the occurrences of this binder row under the same root in child order.
+ function binderCopies(data,site){
+  const bound=boundPremise(data,site);
+  if(!bound)return null;
+  const target=bound.binder.node,root=data.roots[site.route.root];
+  if(root-target>200000)return null;
+  const ways=new Map([[target,1n]]);
+  for(let n=target+1;n<=root;n++){
+   let count=0n;
+   for(const c of data.children[n])count+=ways.get(c)||0n;
+   if(count)ways.set(n,count);
+  }
+  const total=ways.get(root),suffix=site.route.slots.slice(bound.binder.route.slots.length);
+  let node=root,rank=0n;
+  for(const k of bound.binder.route.slots){
+   for(let i=0;i<k;i++)rank+=ways.get(data.children[node][i])||0n;
+   node=data.children[node][k];
+  }
+  function select(index){
+   if(typeof index!=='bigint'||index<0n||index>=total)throw RangeError('Invalid binder occurrence');
+   let n=root;
+   const slots=[];
+   while(n!==target){
+    const children=data.children[n];let k=0;
+    for(;k<children.length;k++){
+     const size=ways.get(children[k])||0n;
+     if(index<size)break;
+     index-=size;
+    }
+    if(k===children.length)throw Error('Inconsistent binder occurrence count');
+    slots.push(k);n=children[k];
+   }
+   return {binder:{node:target,route:{root:site.route.root,slots}},
+    reference:{node:site.node,route:{root:site.route.root,slots:slots.concat(suffix)}}};
+  }
+  return {total,rank,select};
+ }
  function equalityChain(data,at,expected){
   const args=namedArguments(data,at,'Eq.trans',6);
   if(!args)return null;
@@ -385,6 +422,28 @@
     link(label(t.before[c.side],c.from),c.from),c.path.length?' with ':' to ',link(label(t.after[c.side],c.to),c.to),
     '. ',link(t.reverse?'Operand equality (used in reverse)':'Operand equality',c.certificate),' · ',link('Function applied to both sides',c.context));
    return p;
+  }
+  if(data.kind[at.node]===0){
+   const copies=el('details');copies.dataset.binderCopies='';
+   copies.append(el('summary','Occurrences of this binder'));
+   copies.ontoggle=()=>{
+    if(!copies.open||copies.childElementCount>1)return;
+    const model=binderCopies(data,at);
+    if(!model){copies.append(el('p','Occurrence counts are unavailable for this selection.'));return;}
+    copies.append(el('p','This introduction is '+(model.rank+1n)+' of '+model.total+' under this root.'));
+    if(model.total===1n)return;
+    const input=el('input'),label=el('label','Introduction number '),links=el('p');
+    input.type='text';input.inputMode='numeric';input.value=String(model.rank+1n);label.append(input);
+    function update(){
+     links.replaceChildren();
+     const raw=input.value.trim(),index=/^[1-9][0-9]*$/.test(raw)&&raw.length<=String(model.total).length?BigInt(raw):0n;
+     if(!index||index>model.total){links.textContent='Enter a number from 1 to '+model.total+'.';return;}
+     const hit=model.select(index-1n);
+     links.append(link('Open introduction',hit.binder),' · ',link('Open corresponding reference',hit.reference));
+    }
+    input.oninput=update;update();copies.append(label,links);
+   };
+   container.append(copies);
   }
   const logical=logicalInference(data,at);
   if(logical){
@@ -665,5 +724,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={zeroDifference,logicalInference,numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
+ if(common)module.exports={binderCopies,zeroDifference,logicalInference,numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
 })(typeof window==='undefined'?globalThis:window);
