@@ -788,6 +788,40 @@
      line.append(link(title,site),' · ',link('Variable',hit.reference),' → ',link(p.binderName||p.declName||'Binder',hit.binder));
      return line;
     }
+    function pathReader(other,path){
+     const details=el('details');
+     details.dataset.bindingPath='';
+     details.append(el('summary','Follow the two paths'));
+     details.ontoggle=()=>{
+      if(!details.open||details.childElementCount>1)return;
+      const slots=path.slots.concat(path.useSlots),nodes=[at.node],fields=[];
+      for(const slot of slots){
+       const node=nodes.at(-1);
+       fields.push(A.fields[A.kinds[data.kind[node]]][slot]);
+       nodes.push(data.children[node][slot]);
+      }
+      const slider=el('input'),label=el('label','Path depth '),step=el('p'),links=el('div');
+      links.className='pl-binding-path-copies';
+      slider.type='range';slider.min='0';slider.max=String(slots.length);slider.value=String(path.slots.length);
+      label.append(slider);
+      function move(){
+       const depth=Number(slider.value),node=nodes[depth],prefix=slots.slice(0,depth);
+       const field=depth?fields[depth-1]:'selected expression';
+       const state=depth>=path.slots.length?'Different binder targets':'Same external binder targets';
+       // Once below the first differing body a subterm can again be closed. Only
+       // the chosen reference path is guaranteed to keep using this introduction.
+       step.textContent='Step '+depth+' of '+slots.length+' · '+field+' · '+state;
+       slider.setAttribute('aria-valuetext',step.textContent);
+       links.replaceChildren();
+       for(const [site,title] of [[at,'Selected copy'],[other,'Comparison copy']]){
+        links.append(link(title+' · '+A.kinds[data.kind[node]]+' '+node,
+         {node,route:{root:site.route.root,slots:site.route.slots.concat(prefix)}}));
+       }
+      }
+      slider.oninput=move;move();details.append(label,step,links);
+     };
+     return details;
+    }
     function update(){
      output.replaceChildren();
      const raw=input.value.trim();
@@ -813,6 +847,7 @@
        link('Its binder',{node:bodyPath.binder,route:{root,slots:slots.slice(0,-1)}}));
       output.append(line);
      }
+     output.append(pathReader(other,bodyPath));
      const shorter=bodyPath.shorterUse;
      if(shorter){
       const hops=shorter.slots.length+shorter.useSlots.length;

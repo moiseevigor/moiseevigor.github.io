@@ -201,3 +201,7 @@
 .pl-local-layer { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr)); gap: .75rem; }
 .pl-local-result { border-inline-start: 2px solid currentColor; padding-inline-start: .65rem; min-width: 0; overflow-wrap: anywhere; }
 .pl-local-result > a:first-child { font-weight: 650; }
+
+.pl-library [data-binding-path] input[type=range]{display:block;width:100%;max-width:32rem;box-sizing:border-box;margin:.4em 0;padding:0}
+.pl-binding-path-copies{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,10rem),1fr));gap:.5em;margin:.5em 0}
+.pl-binding-path-copies a{overflow-wrap:anywhere}
