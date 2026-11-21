@@ -109,6 +109,13 @@
    if(frames.length>=16)return null;
    const step=resultDestination(data,at);
    if(step.kind==='mdata'){at=step.at;continue;}
+   if(step.kind==='lam' || step.kind==='forallE'){
+    const selected=step.field==='body'?1:0;
+    const operands=data.children[step.at.node].map((node,slot)=>slot===selected?null:{
+     node,route:{root:step.at.route.root,slots:step.at.route.slots.concat(slot)}});
+    frames.push({form:'binder',glyph:step.kind==='lam'?'λ':'∀',call:step.at,field:step.field,operands});
+    at=step.at;continue;
+   }
    if(step.kind!=='argument')return null;
    const c=step.call,p=data.payloads[c.head.node];
    if(data.kind[c.head.node]===0 && c.arity<=6){

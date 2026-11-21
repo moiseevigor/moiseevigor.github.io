@@ -278,7 +278,26 @@
       if(refs.occurrences==='1' && window.PROOF_ATLAS_TYPE_NOTATION){
        const frames=window.ProofAtlasOmittedReferences.parameterContext(owner.data,window.PROOF_ATLAS_TYPE_NOTATION,
         {node:body,route:{root:fn.route.root,slots:fn.route.slots.concat(1)}},site);
-       if(frames?.length){
+       if(frames?.some(frame=>frame.form==='binder')){
+        const trace=el('details'),list=el('ol');
+        trace.append(el('summary','Trace parameter through binders'));
+        for(const frame of frames.slice().reverse()){
+         const row=el('li'),slot=frame.operands.indexOf(null);
+         if(frame.form==='binder'){
+          const inBody=frame.field==='body',other=frame.operands[inBody?0:1];
+          row.append(sourceLink(frame.glyph+' '+(owner.payload(frame.call.node).binderName||'_'),frame.call),
+           inBody?' · Enter body within binder scope · ':' · Enter domain outside binder scope · ',
+           sourceLink(inBody?'Open domain':'Open body',other));
+         }else{
+          row.append(sourceLink(frame.glyph,frame.call),' · ',
+           frame.form==='localCall'?(slot?'Argument '+slot:'Function position'):
+            (frame.raw?'Compiled argument ':'Displayed operand ')+(slot+1));
+         }
+         list.append(row);
+        }
+        const terminal=el('li');terminal.append(sourceLink('Parameter occurrence',site),' · ',sourceLink('Original parameter binder',fn));
+        list.append(terminal);trace.append(list);panel.append(trace);
+       }else if(frames?.length){
         const formula=el('p'),fixed=el('ul');let expression=[sourceLink('x',site)],count=0;
         for(const frame of frames){
          const op=sourceLink(frame.glyph,frame.call);

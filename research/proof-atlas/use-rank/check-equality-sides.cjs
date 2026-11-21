@@ -12,8 +12,9 @@ const {parameterContext,exactCallInputs,equalitySegments,firstStructuralDifferen
 require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/type-notation-catalog.js','utf8'),{window});
 const contextShapes=new Map();
 const localPositions=new Map();
+let binderContexts=0n;
 let rawContexts=0n,namedContexts=0n;
-const contexts={operators:0n,identity:0n,unsupported:0n};
+const contexts={operators:0n,binders:0n,identity:0n,unsupported:0n};
 const differences = {constructor:0n,payload:0n,identical:0n,limit:0n};
 let belowRoot = 0n, maxDepth = 0;
 function reference(data,left,right) {
@@ -129,7 +130,7 @@ for (const record of records) {
           const at={node:body,route:{root:fn.route.root,slots:fn.route.slots.concat(1)}};
           if(refs.occurrences==='1'){
             const frames=parameterContext(data,window.PROOF_ATLAS_TYPE_NOTATION,at,{node:use.node,route});
-            const category=frames?(frames.length?'operators':'identity'):'unsupported';
+            const category=!frames?'unsupported':frames.some(f=>f.form==='binder')?'binders':frames.length?'operators':'identity';
             if(published && category!=='operators' && !contexts[category])
               console.log(category+' example:',record.name,row);
             contexts[category]+=count;
@@ -146,6 +147,10 @@ for (const record of records) {
               missing.set(name,(missing.get(name)??0n)+count);
             }
             if(frames){
+              if(frames.some(f=>f.form==='binder')){
+                if(!binderContexts)console.log('Binder trace example:',record.name,congrRow);
+                binderContexts+=count;
+              }
               if(frames.some(f=>f.raw))rawContexts+=count;
               else if(frames.some(f=>f.form==='application'))namedContexts+=count;
               const shape=frames.map(f=>f.glyph+'['+(f.operands.indexOf(null)+1)+']').join(' → ');
@@ -154,6 +159,14 @@ for (const record of records) {
               for(const f of frames.slice().reverse()){
                 while(data.kind[row]===10){row=data.children[row][0];path.push(0);}
                 assert.deepEqual(f.call,{node:row,route:{root:route.root,slots:path}});
+                if(f.form==='binder'){
+                  assert([6,7].includes(data.kind[row]));
+                  const slot=f.operands.indexOf(null);
+                  assert.equal(f.field,['domain','body'][slot]);
+                  const other=1-slot;
+                  assert.deepEqual(f.operands[other],{node:data.children[row][other],route:{root:route.root,slots:path.concat(other)}});
+                  path=path.concat(slot);row=data.children[row][slot];continue;
+                }
                 const {head,args}=spine(data,row);
                 if(f.form==='localCall'){
                   assert.equal(data.kind[head],0);
@@ -286,3 +299,4 @@ console.log('Context shapes:',Object.fromEntries(contextShapes));
 console.log('Unsupported paths:',Object.fromEntries(missing));
 console.log('Including raw calls:',String(rawContexts),'catalogue applications only among new cases:',String(namedContexts));
 console.log('Local function positions:',Object.fromEntries(localPositions));
+console.log('Including scope crossings:',String(binderContexts));

@@ -444,10 +444,31 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
     }
     await page.getByRole('region',{name:'Equality under a function'}).getByText(expected,{exact:false}).waitFor();
    }
-   const unsupported=published.declarations.find(r=>r.name==='JacobiFull.c_strictAntiOn');
+   const quantified=published.declarations.find(r=>r.name==='JacobiFull.c_strictAntiOn');
+   const quant=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+quantified.indexFile)));
+   const quantAt=atlas.routes(quant).route(465);
+   await page.goto('http://localhost/projects/proof-atlas/library/?edition=published-15&proof='+quantified.name+'&route='+quantAt.root+':'+quantAt.slots.join('.')+'#expr-465');
+   const summary=page.getByText('Trace parameter through binders',{exact:true});
+   await summary.click();
+   const traceBinder=summary.locator('..');
+   const readAnchor=async link=>{
+    const u=new URL(await link.evaluate(a=>a.href)),[root,path]=u.searchParams.get('route').split(':');
+    const at={node:Number(u.hash.slice(6)),route:{root:Number(root),slots:path.split('.').map(Number)}};
+    assert.equal(atlas.walk(quant,at.route),at.node);
+    return at;
+   };
+   for(const [field,slot] of [['Open domain',0],['Open body',1]]){
+    const sibling=traceBinder.getByRole('link',{name:field,exact:true});
+    const at=await readAnchor(sibling);
+    const binder=await readAnchor(sibling.locator('..').getByRole('link').first());
+    assert.deepEqual(at.route.slots,binder.route.slots.concat(slot));
+   }
+   const occurrence=await readAnchor(traceBinder.getByRole('link',{name:'Parameter occurrence'}));
+   assert.deepEqual(atlas.binding(quant,occurrence.route),await readAnchor(traceBinder.getByRole('link',{name:'Original parameter binder'})));
+   const unsupported=published.declarations.find(r=>r.name==='JacobiFull.signed_β1_neg_odd');
    const raw=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+unsupported.indexFile)));
-   const unsupportedAt=atlas.routes(raw).route(465);
-   await page.goto('http://localhost/projects/proof-atlas/library/?edition=published-15&proof='+unsupported.name+'&route='+unsupportedAt.root+':'+unsupportedAt.slots.join('.')+'#expr-465');
+   const unsupportedAt=atlas.routes(raw).route(892);
+   await page.goto('http://localhost/projects/proof-atlas/library/?edition=published-15&proof='+unsupported.name+'&route='+unsupportedAt.root+':'+unsupportedAt.slots.join('.')+'#expr-892');
    await page.getByText('The operator context is unavailable for this path.',{exact:false}).waitFor();
    const periodic=published.declarations.find(r=>r.name==='JacobiPeriodic.exists_unique_f1_zero');
    const periodicData=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+periodic.indexFile)));
