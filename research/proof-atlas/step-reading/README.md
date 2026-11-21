@@ -371,3 +371,9 @@ Run `node research/proof-atlas/step-reading/check-profile-corpus.cjs` from the s
 | Packed index and paged source, cache bypassed | 1,800,417 | 6 of 20 |
 
 The first lookup alone used fewer bytes than the full index in 16 proofs. By the end of each sequence this fell to nine with HTTP reuse. The two largest declarations contributed 466,619 of the aggregate 504,724 bytes saved. These measurements support paging for selective access to some large packets. They give no universal size cutoff: for example the 2,677-row proof saved bytes while the 3,083-row proof cost more. The workload is synthetic navigation over real compiled proofs. It excludes protocol overhead, app assets, timing and reader behavior.
+
+### Nonnegativity in the largest AI proof
+
+The first hypothesis of lean_workbook_plus_6206 states that a, b and c are nonnegative. All 41 syntactic references pass their selected conjunct to Mathlib.Tactic.Linarith.sub_nonpos_of_le. The left projection supplies a (21 occurrences); right then left supplies b (12); right then right supplies c (8). The library shows one representative per clause both at the proof root and at the hypothesis. The first link selects the projection and the second selects the arithmetic call. Lean replayed one arithmetic call and its immediate consumer per row, yielding the displayed input and output types. The counts describe occurrence paths and do not measure necessity or distinct mathematical ideas.
+
+Run `node research/proof-atlas/step-reading/nonnegative-uses.cjs` from the site root. For each group in order, pass the slots of example.receiver and example.next (concatenated field digits) to replay-call.py in two batches for this declaration. Pass the two replay JSON files, in that order, to publish-clause-uses.py to regenerate the displayed asset.
