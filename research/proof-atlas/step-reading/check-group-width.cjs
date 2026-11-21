@@ -312,6 +312,18 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
         },{node,suffix});
         await page.goto(remainderURL);
       }
+      const subtraction=new URL(joinURL);
+      const sharedParent='1.1.1.1.2.0.1.1.1';
+      subtraction.searchParams.set('proof','lean_workbook_4274');
+      subtraction.searchParams.set('route','1:'+sharedParent);subtraction.hash='expr-169';
+      for(const [role,suffix] of [['Minuend','0.1'],['Subtrahend','1']]){
+        await page.goto(subtraction.href);
+        await page.locator('[data-arithmetic-formula]').getByRole('link',{name:role,exact:true}).click();
+        await page.waitForFunction(expected=>{
+          const s=window.ProofAtlasLibrary?.getSnapshot();
+          return s?.selected===65 && s.route.root===1 && s.route.slots.join('.')===expected;
+        },sharedParent+'.'+suffix);
+      }
       await page.close();
     }
     console.log('Verified complete and paged Riccati and AI premise selections at 360 and 1280 pixels.');

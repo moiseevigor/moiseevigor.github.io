@@ -28,24 +28,32 @@ const arities={'HPow.hPow':6,'HMul.hMul':6,'HSub.hSub':6,'HAdd.hAdd':6,'HDiv.hDi
    check(g,t.left);if(t.right)check(g,t.right);
   }
 let absent=0,nested=0;
-const joins=[],orderProofs=[],rewriteCoverage=[],remainderCoverage=[];
+const joins=[],orderProofs=[],rewriteCoverage=[],operandCoverage=[];
 for(const d of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations.filter(d=>d.kind==='theorem'&&d.bodyAvailable)){
  const raw=z.gunzipSync(fs.readFileSync('.'+d.indexFile));
  assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),d.indexSha256);
  const g=A.validateIndex(JSON.parse(raw),d),seen=new Set();
- let remainders=0;
+ const operandCounts={};
  const visited=new Set(),stack=[{node:g.roots[1],parent:null}],coverage={proof:d.name,casts:0,left:0,right:0,examples:[]};
  while(stack.length){
   const item=stack.pop(),node=item.node;
   if(visited.has(node))continue;
   visited.add(node);
   const spineAtNode=spine(g,node);
-  if(spineAtNode.args.length===6 && g.payloads[spineAtNode.head]?.name==='HMod.hMod'){
+  const headName=g.payloads[spineAtNode.head]?.name;
+  if(spineAtNode.args.length===6 && ['HPow.hPow','HSub.hSub','HDiv.hDiv','HMod.hMod'].includes(headName)){
    const slots=[];
    for(let pos=item;pos.parent;pos=pos.parent)slots.push(pos.slot);
    const t=formula(g,{node,route:{root:1,slots:slots.reverse()}});
-   assert.equal(t.name,'HMod.hMod');check(g,t);
-   remainders++;
+   assert.equal(t.name,headName);check(g,t);
+   const count=operandCounts[headName] ||= {rows:0,coincident:0};
+   count.rows++;
+   if(t.left.site.node===t.right.site.node){
+    assert.notDeepEqual(t.left.site.route,t.right.site.route);
+    count.coincident++;
+    if(!count.example || t.site.route.slots.length<count.example.route.slots.length)
+     count.example={...t.site,operand:t.left.site.node};
+   }
   }
   if(spineAtNode.args.length===4 && g.payloads[spineAtNode.head]?.name==='Eq.mp'){
    coverage.casts++;
@@ -65,7 +73,7 @@ for(const d of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations.filter(d=>d.kin
   g.children[node].forEach((child,slot)=>stack.push({node:child,parent:item,slot}));
  }
  rewriteCoverage.push(coverage);
- remainderCoverage.push({proof:d.name,rows:remainders});
+ operandCoverage.push({proof:d.name,counts:operandCounts});
  if(d.name==='lean_workbook_plus_39831'){
   const route={root:0,slots:[1,1,1,1,0]},site={node:A.walk(g,route),route};
   const equation=formula(g,site,6);
@@ -221,4 +229,4 @@ for(const edition of window.PROOF_ATLAS_LIBRARY.editions){
   ['LE.le','HMul.hMul','Real.sqrt','abs','HDiv.hDiv']);
  riccati.push({edition:edition.id,proof:d.name,at,call});
 }
-console.log(JSON.stringify({remainderCoverage,rewriteCoverage,counts,absent,nested,examples,riccati,joins,orderProofs},null,2));
+console.log(JSON.stringify({operandCoverage,rewriteCoverage,counts,absent,nested,examples,riccati,joins,orderProofs},null,2));

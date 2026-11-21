@@ -4,6 +4,10 @@
  const common=typeof module!=='undefined' && module.exports;
  const A=common?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData;
  const binaryTypes=['left type','right type','result type','instance'];
+ const operandLabels=new Map([
+  ['HPow.hPow',['Base','Exponent']],['HSub.hSub',['Minuend','Subtrahend']],
+  ['HDiv.hDiv',['Dividend','Divisor']],['HMod.hMod',['Dividend','Modulus']]
+ ]);
  const operators=new Map([
   ...[['HPow.hPow','^'],['HAdd.hAdd','+'],['HSub.hSub','−'],['HMul.hMul','×'],['HDiv.hDiv','/'],['HMod.hMod','%']]
    .map(([name,symbol])=>[name,{symbol,parameters:binaryTypes}]),
@@ -1362,9 +1366,10 @@
    panel.append(context);
   }
   panel.append(line);
-  if(tree.name==='HMod.hMod'){
+  const labels=operandLabels.get(tree.name);
+  if(labels){
    const operands=el('p');
-   operands.append(link('Dividend',tree.left.site),' · ',link('Modulus',tree.right.site));
+   operands.append(link(labels[0],tree.left.site),' · ',link(labels[1],tree.right.site));
    panel.append(operands);
   }
   if(truncated){
