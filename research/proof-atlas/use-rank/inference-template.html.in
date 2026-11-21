@@ -234,6 +234,20 @@ function showFinal(){
    const title=document.createElement('h3');title.textContent=branch.constructor;box.prepend(title);
    for(const d of branch.domains)box.append(link('Assumption',d),' · ');
    box.append(link('Branch body',branch.body),' · head ',link(branch.head.label,branch.head));
+   for(const uses of branch.assumptionUses){
+    const group=document.createElement('div');group.className='case-uses';
+    group.append(link('Case binder',uses.binder),' · '+uses.total+(uses.total==='1'?' reference':' references')+' in this body');
+    const list=document.createElement('ul');
+    for(const part of uses.parts.filter(p=>p.first)){
+     const row=document.createElement('li');
+     row.append(link(part.slot?'Input '+part.slot:'Function',part.anchor),' · '+part.count+' · ',link('First reference',part.first));
+     list.append(row);
+    }
+    group.append(list);box.append(group);
+   }
+   if(branch.head.label==='Or.casesOn' && !branch.bodyEliminationChecked){
+    const note=document.createElement('p');note.textContent='Nested call shown in source argument order. No checked constructor mapping at this occurrence.';box.append(note);
+   }
   }
   function callList(calls){
    const list=document.createElement('ul');

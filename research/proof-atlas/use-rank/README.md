@@ -314,3 +314,18 @@ The reader groups the branches using the validated constructor map. In both proo
 | [lean_workbook_plus_6206](inferences.html#2e5bbcebb8129c823d4640a7c17f06b1a073c8a2df20889e65f4efc61f213bd6-0/final) | Or.casesOn | Or.casesOn |
 
 The third final application with an elimination packet, False.elim, has an unavailable constructor projection in that packet. Its independently recorded application arguments remain visible. The [adapter](final-cases.cjs) uses the existing elimination validator, checks that the mapped argument routes agree with the primary application record and follows the lambda fields directly in the compiled term. The [browser check](check-final-application-browser.cjs) verifies both branch layouts and their links. These examples do not measure reader comprehension.
+
+## Where the branch assumptions enter the next construction
+
+For each outer case binder, the reader partitions its direct bound-variable references among the function head and ordered arguments of the branch body. A positive count links to the original argument and its first reference in source field order. Counts include references inside types and nested expressions. They measure occurrences of the particular binder, not the number of mathematical applications of the assumption.
+
+| AI proof | Outer case | Branch body head | Source arguments containing the assumption |
+|---|---|---|---|
+| lean_workbook_20418 | Or.inl | Eq.ndrec | input 6 (1) |
+| lean_workbook_20418 | Or.inr | Eq.ndrec | input 6 (1) |
+| lean_workbook_plus_6206 | Or.inl | Or.casesOn | input 5 (4), input 6 (3) |
+| lean_workbook_plus_6206 | Or.inr | Or.casesOn | input 5 (3), input 6 (3) |
+
+Both outer splits test the same two equalities. In the first proof each branch body contains its own assumption once. In the second proof each outer assumption occurs in two arguments of the next call. The two inner Or.casesOn occurrences have no checked elimination projection in the loaded records. Their argument numbers retain source order, without assigning constructor identities from the outer call.
+
+The [ordinal traversal](branch-assumption.cjs) uses the shared term and verifies that the partition sums to the body total. The [independent finite check](check-case-uses.cjs) expands the four bodies in source order, resolves each reference to its original binder, and verifies all field counts and first witnesses. The browser check verifies the displayed binder, argument and witness links in both layouts.

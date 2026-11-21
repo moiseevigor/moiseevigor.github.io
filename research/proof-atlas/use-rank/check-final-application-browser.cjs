@@ -39,6 +39,17 @@ const {chromium}=require('playwright');
       await verify(row.getByRole('link',{name:'Assumption',exact:true}),branch.domains[0]);
       await verify(row.getByRole('link',{name:'Branch body',exact:true}),branch.body);
       await verify(row.getByRole('link',{name:branch.head.label,exact:true}),branch.head);
+      for(const [k,u] of branch.assumptionUses.entries()){
+       const group=row.locator('.case-uses').nth(k);
+       await verify(group.locator(':scope > a'),u.binder);
+       const positive=u.parts.filter(p=>p.first);
+       assert.equal(await group.locator('li').count(),positive.length);
+       for(const [j,p] of positive.entries()){
+        const li=group.locator('li').nth(j);
+        await verify(li.locator('a').first(),p.anchor);
+        await verify(li.locator('a').last(),p.first);
+       }
+      }
       bounds.push(await row.boundingBox());
      }
      if(width===320)assert(bounds[1].y>=bounds[0].y+bounds[0].height-1);
@@ -46,7 +57,7 @@ const {chromium}=require('playwright');
     }else assert.equal(await panel.locator('.case-branches').count(),0);
     for(const arg of f.args){
      const row=panel.locator('[data-final-slot="'+arg.slot+'"]');
-     const url=new URL(await row.locator('p a').getAttribute('href'));
+     const url=new URL(await row.locator(':scope > p').first().locator('a').getAttribute('href'));
      assert.equal(url.searchParams.get('proof'),first.source.name);
      assert.equal(url.searchParams.get('route'),arg.anchor.route.root+':'+arg.anchor.route.slots.join('.'));
      assert.equal(url.hash,'#expr-'+arg.anchor.node);

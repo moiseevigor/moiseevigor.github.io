@@ -24,13 +24,16 @@ module.exports = function finalCases(data,record,provider,application) {
   const branches=scene.branches.map(b=>{
     const port=sourceArgument(b.argument);
     let body=port.anchor;
-    const domains=[];
+    const domains=[],binders=[];
     // Keep original lambda fields visible even when a separate lambda typing query is absent.
     while(domains.length<b.inputCount && data.kind[body.node]===6){
+      binders.push(body);
       domains.push({node:data.children[body.node][0],route:{root:route.root,slots:body.route.slots.concat(0)}});
       body={node:data.children[body.node][1],route:{root:route.root,slots:body.route.slots.concat(1)}};
     }
-    return {constructor:b.constructor,slot:port.slot,domains,body,head:inputHead(data,body)};
+    return {constructor:b.constructor,slot:port.slot,domains,body,head:inputHead(data,body),
+      assumptionUses:binders.map(binder=>require('./branch-assumption.cjs')(data,binder,body)),
+      bodyEliminationChecked:provider.get(body.route)?.eliminationJudgment?.status==='checked'};
   });
   return {checked:true,owner:provider.sha256,recursor:scene.recursor,major:major.slot,origin,branches};
 };
