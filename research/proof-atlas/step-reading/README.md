@@ -76,3 +76,18 @@ Fix a declaration and a shared application row. Restrict its candidate occurrenc
 The 20 Goedel proofs have a substantial tail of repeated contexts. Even the exact immediate parent and slot identify only 143,472 occurrences uniquely. A compact reader can display a short context for orientation while carrying the full occurrence route through every interaction. Resolving the route from the visible labels alone would require arbitrarily choosing among candidates in many of these cases. These numbers apply to compiled expression occurrences, including type and instance terms. They measure uniqueness under this particular suffix rule; a human may recognize a mathematical step with less information.
 
 [Per-proof depth curves](ai-context-depth.json) · [Reproduction script](context-depth.cjs). A fixed field suffix beneath a particular ancestor repeats once per occurrence of that ancestor. The calculation weights suffix counts by these multiplicities and retains two successive depth layers for one declaration at a time. Direct enumeration on a bounded subtree of each proof reproduces its entire depth curve. Depth is counted in kernel fields, including the function fields inside curried applications.
+
+### Grouping an application changes how many enclosing steps a reader needs
+
+Treat a complete application as one call with a function port and an ordered port for every argument, including implicit ones. Keep the original fields for all other constructors. On the same 16,240,679 endpoints, the following number of enclosing steps identifies each indicated fraction uniquely. Each step supplies the exact enclosing row and occupied port.
+
+| Fraction identified | Kernel fields | Grouped call ports and other fields |
+|---|---:|---:|
+| 50% | 13 | 9 |
+| 90% | 25 | 16 |
+| 99% | 40 | 25 |
+| 100% | 70 | 40 |
+
+The change helps most at greater depth. One whole-call port still leaves 16,069,418 occurrences ambiguous. Grouping shortens an exact navigation path while retaining the need to carry the selected occurrence. These are logical steps in a representation. The experiment does not compare screen area, reading time, or comprehension.
+
+[Per-proof grouped curves](ai-whole-call-depth.json). Reproduce with `node research/proof-atlas/step-reading/context-depth.cjs --whole-calls`. For each proof the checker compares endpoint multiplicities row by row before and after grouping, replays every argument and head against the original function spine, and compares the grouped depth curve with explicit enumeration for a bounded subterm. The ungrouped command still reproduces the earlier report byte for byte.

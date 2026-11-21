@@ -8,7 +8,26 @@ const {createHash} = require('node:crypto');
 const atlas = require('../../../public/js/proof-atlas-library-data');
 const baseline = require('./ai-call-destinations.json');
 
-function unresolved(term, root) {
+const grouped = process.argv.includes('--whole-calls');
+const {spine} = require('../../../public/js/proof-atlas-elimination');
+
+function wholeCallGraph(term) {
+  const children = term.children.map((fields, id) => {
+    if (atlas.kinds[term.kind[id]] !== 'app') return fields;
+    const {head,args} = spine(term,id);
+    // Rebuild this exact source spine from outside in, verifying every port.
+    let source = id;
+    for (let position = args.length - 1; position >= 0; position--) {
+      assert.equal(term.children[source][1],args[position]);
+      source = term.children[source][0];
+    }
+    assert.equal(source,head);
+    return [head,...args];
+  });
+  return {children,kind:term.kind};
+}
+
+function unresolved(term, root, expectedCalls) {
   const isApp = id => atlas.kinds[term.kind[id]] === 'app';
   const visits = Array(root + 1).fill(0n);
   const calls = Array(root + 1).fill(0n);
@@ -22,6 +41,7 @@ function unresolved(term, root) {
       if (isApp(child) && !(isApp(id) && slot === 0)) calls[child] += visits[id];
     });
   }
+  if (expectedCalls) assert.deepEqual(calls,expectedCalls);
   // Depth zero already restricts the search to endpoints of complete function spines.
   const curve = [calls.reduce((sum,n) => sum + (n > 1n ? n : 0n), 0n)];
   let descendants = visits.map((weight, id) => weight > 1n ?
@@ -36,7 +56,7 @@ function unresolved(term, root) {
     descendants = descendants.map((_, id) => visits[id] > 1n ?
       term.children[id].reduce((sum,c) => sum + descendants[c], 0n) : 0n);
   }
-  return curve;
+  return {curve,calls};
 }
 
 function enumerate(term,root) {
@@ -75,12 +95,20 @@ for (const owner of edition.declarations.filter(r => r.kind === 'theorem' && r.b
   while (BigInt(term.expanded[sample]) > 2000n) {
     sample = term.children[sample].reduce((a,b) => BigInt(term.expanded[a]) >= BigInt(term.expanded[b]) ? a : b);
   }
-  assert.deepEqual(unresolved(term,sample),enumerate(term,sample));
-  const counts = unresolved(term,root);
+  const raw = unresolved(term,root);
+  const graph = grouped ? wholeCallGraph(term) : term;
+  const counts = grouped ? unresolved(graph,root,raw.calls).curve : raw.curve;
+  assert.deepEqual(unresolved(graph,sample).curve,enumerate(graph,sample));
+  // A grouped function port always leads to a non-application head. Thus the
+  // same slot-zero exclusion works in both representations.
+  if (grouped) {
+    assert(counts.length <= raw.curve.length);
+    counts.forEach((n,i) => assert(n <= raw.curve[i]));
+  }
   const prior = baseline.proofs.find(p => p.name === owner.name);
   assert.equal(prior.indexSha256,owner.indexSha256);
   assert(counts[0] <= BigInt(prior.maximal));
   counts.forEach((n,i) => { totals[i] = (totals[i] || 0n) + n; });
   proofs.push({name:owner.name,indexSha256:owner.indexSha256,endpoints:prior.maximal,unresolved:counts});
 }
-console.log(JSON.stringify({edition:edition.id,totals,proofs},(_,v) => typeof v === 'bigint' ? v.toString() : v,2));
+console.log(JSON.stringify({edition:edition.id,...(grouped ? {unit:'whole-call port or non-application field'} : {}),totals,proofs},(_,v) => typeof v === 'bigint' ? v.toString() : v,2));
