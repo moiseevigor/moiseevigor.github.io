@@ -821,6 +821,9 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
     assert.equal(href.hash,'#expr-'+original.node);
     await summary.click();
     const raw=summary.locator('..');
+    const branch=g.children[node][0],branchLink=raw.getByRole('link',{name:'Folded application branch'});
+    assert.equal(new URL(await branchLink.evaluate(a=>a.href)).searchParams.get('route'),route.root+':'+route.slots.concat(0).join('.'));
+    assert((await transport.innerText()).includes(BigInt(g.expanded[branch]).toLocaleString()+' compiled expression occurrences'));
     for(const [label,slot] of [['A',1],['B',2],['Proof of A = B',3],['Term of B',4]]){
      const expected=sourceSlot(g,at,slot),link=raw.getByRole('link',{name:label,exact:true}).first();
      const href=new URL(await link.evaluate(a=>a.href));

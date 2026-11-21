@@ -171,8 +171,13 @@
       const identity=el('p');
       identity.append('The endpoint types share a compiled row. The transported term is definitionally equal to its ',
        anchor('input term',result.term),'.');
+      const prefix=await owner.resolveRoute({root:route.root,slots:route.slots.concat(0)},{signal});
+      const hidden=await owner.run(()=>owner.data.expanded[prefix.node],{signal});
+      if(!active())return;
+      identity.append(' This fold hides '+BigInt(hidden).toLocaleString()+' compiled expression occurrences.');
       sourceView=el('details');
-      sourceView.append(el('summary','Show '+result.rule+' and its arguments'));
+      sourceView.append(el('summary','Show '+result.rule+' and its arguments'),
+       anchor('Folded application branch',{node:prefix.node,route:{root:route.root,slots:route.slots.concat(0)}}));
       substitutionSection.append(identity,sourceView);
      }
      sourceView.append(rule,

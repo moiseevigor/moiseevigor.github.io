@@ -699,3 +699,17 @@ The paged view selects this fold only for an exactly recognized, fully applied t
 | All 561 available published SE(2) theorem bodies | 1,246 / 2,552 | 4,072 / 5,501 |
 
 Run `node research/proof-atlas/use-rank/check-paged-transport.cjs` for the first two rows and add `--published-identities` for the last. Scopes overlap. Every foldable occurrence observed was Eq.mpr. The published census includes 687 forward occurrences, none with a shared endpoint row. This is a distribution in the compiled samples; the Lean result applies in either direction. Counts concern transport operations and do not measure a reduction in total proof size or reading time.
+
+### Whole-body size after folding same-type transports
+
+Run `node research/proof-atlas/use-rank/check-transport-fold-size.cjs`. The projection keeps each visible eligible transport as a selectable marker and retains its input (the final application argument). It hides the other child, the function already applied to the endpoint types and equality proof. All other constructor fields remain visible. This models applying the fold throughout the proof body; the paged reader shows the local count on selection.
+
+| Scope | Proofs affected | Expanded occurrences before → after | Fewer occurrences | Reachable distinct rows before → after |
+| --- | ---: | ---: | ---: | ---: |
+| Published SE(2) | 190 / 561 | 49,287,630 → 43,883,878 | 10.96% | 507,968 → 482,099 (5.09% fewer) |
+| AI sample | 16 / 20 | 82,340,980 → 79,270,226 | 3.73% | 268,137 → 266,465 (0.62% fewer) |
+| Riccati bound, included in SE(2) | 1 / 1 | 165,594 → 133,490 | 19.39% | 3,219 → 3,022 (6.12% fewer) |
+
+The median SE(2) proof retained its entire body; the median AI proof retained 95.46% of its expanded occurrences. Thus 2,514 eligible AI transport occurrences can be folded, but most of the shared graph is still needed elsewhere. The 24 Riccati markers hide 32,104 expanded occurrences in total. These are structural counts, with reachable rows summed per declaration. They do not measure rendering speed, file size or comprehension.
+
+The checker verifies each packet hash and the original expanded size. It independently computes retained size by summing retained children bottom-up and by propagating visible occurrence weights top-down. The difference must equal the sum of hidden function-branch sizes weighted by **visible** folds. A synthetic shared and nested control has three original eligible occurrences, two visible markers and one visible input leaf. The reader exposes each selected marker's hidden branch size and exact function-field route.
