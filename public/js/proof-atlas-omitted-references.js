@@ -99,6 +99,29 @@
   return {kind,field:A.fields[kind][slots.at(-1)],at:{node,route},
    name:data.payloads[node].declName??data.payloads[node].binderName};
  }
+ // Recover a single parameter's visible operator context, leaving siblings as source links.
+ function parameterContext(data,catalog,body,site){
+  let at=site;
+  const frames=[];
+  if(at.route.root!==body.route.root || !body.route.slots.every((slot,i)=>at.route.slots[i]===slot))
+   throw Error('Parameter site outside the function body');
+  while(at.route.slots.length>body.route.slots.length){
+   if(frames.length>=16)return null;
+   const step=resultDestination(data,at);
+   if(step.kind==='mdata'){at=step.at;continue;}
+   if(step.kind!=='argument')return null;
+   const c=step.call,p=data.payloads[c.head.node];
+   const op=catalog.entries.find(e=>data.kind[c.head.node]===4 && e.name===p.name &&
+    JSON.stringify(e.nameParts)===JSON.stringify(p.nameParts) && e.arity===c.arity &&
+    e.levelParams.length===p.levels.length && ['binary','absolute','prefix'].includes(e.form));
+   if(!op || !op.visibleSlots.includes(c.slot-1))return null;
+   const args=exactCallInputs(data,c.call,p.name,c.arity);
+   frames.push({glyph:op.glyph,form:op.form,call:c.call,
+    operands:op.visibleSlots.map(slot=>slot===c.slot-1?null:args[slot])});
+   at=c.call;
+  }
+  return at.node===body.node && at.route.slots.length===body.route.slots.length?frames:null;
+ }
  function inspect(data,catalog,rootIndex=0){
   const root=data.roots[rootIndex],counts=[],groups=[];
   for(let row=0;row<=root;row++)
@@ -268,6 +291,6 @@
   };
   return panel;
  }
- const api={inspect,control,exactCallInputs,equalitySegments,firstStructuralDifference,applicationAtUse,resultDestination};
+ const api={inspect,control,parameterContext,exactCallInputs,equalitySegments,firstStructuralDifference,applicationAtUse,resultDestination};
  if(local)module.exports=api;else host.ProofAtlasOmittedReferences=api;
 })(typeof window==='undefined'?globalThis:window);

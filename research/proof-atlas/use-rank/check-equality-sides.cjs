@@ -8,7 +8,10 @@ const atlas = require('../../../public/js/proof-atlas-library-data');
 const {spine} = require('../../../public/js/proof-atlas-elimination');
 const window = {};
 require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/goedel-sample-manifest.js','utf8'),{window});
-const {exactCallInputs,equalitySegments,firstStructuralDifference} = require('../../../public/js/proof-atlas-omitted-references');
+const {parameterContext,exactCallInputs,equalitySegments,firstStructuralDifference} = require('../../../public/js/proof-atlas-omitted-references');
+require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/type-notation-catalog.js','utf8'),{window});
+const contextShapes=new Map();
+const contexts={operators:0n,identity:0n,unsupported:0n};
 const differences = {constructor:0n,payload:0n,identical:0n,limit:0n};
 let belowRoot = 0n, maxDepth = 0;
 function reference(data,left,right) {
@@ -100,6 +103,29 @@ for (const record of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations) {
           const route={root:fn.route.root,slots:fn.route.slots.concat(1,use.slots)};
           assert.equal(atlas.walk(data,route),use.node);
           assert.deepEqual(atlas.binding(data,route),fn);
+          const at={node:body,route:{root:fn.route.root,slots:fn.route.slots.concat(1)}};
+          const frames=parameterContext(data,window.PROOF_ATLAS_TYPE_NOTATION,at,{node:use.node,route});
+          contexts[frames?(frames.length?'operators':'identity'):'unsupported']+=count;
+          if(frames){
+            const shape=frames.map(f=>f.glyph+'['+(f.operands.indexOf(null)+1)+']').join(' → ');
+            contextShapes.set(shape,(contextShapes.get(shape)??0n)+count);
+            let path=at.route.slots.slice(),row=body;
+            for(const f of frames.slice().reverse()){
+              while(data.kind[row]===10){row=data.children[row][0];path.push(0);}
+              assert.deepEqual(f.call,{node:row,route:{root:route.root,slots:path}});
+              const {head,args}=spine(data,row);
+              const op=window.PROOF_ATLAS_TYPE_NOTATION.entries.find(e=>e.name===data.payloads[head].name);
+              assert.equal(f.operands.filter(a=>a===null).length,1);
+              for(const [i,slot] of op.visibleSlots.entries()){
+                const childPath=path.concat(Array(args.length-1-slot).fill(0),1);
+                if(f.operands[i])assert.deepEqual(f.operands[i],{node:args[slot],route:{root:route.root,slots:childPath}});
+              }
+              const slot=op.visibleSlots[f.operands.indexOf(null)];
+              row=args[slot];path=path.concat(Array(args.length-1-slot).fill(0),1);
+            }
+            while(data.kind[row]===10){row=data.children[row][0];path.push(0);}
+            assert.equal(row,use.node);assert.deepEqual(path,route.slots);
+          }
         }
       }
       congrFunctions.set(key,(congrFunctions.get(key)??0n)+count);
@@ -189,3 +215,5 @@ console.log('Expanded chains:',String(nested),'maximum steps:',maximum,'calls wi
 for(const [pair,count] of mismatchLabels) console.log(pair,String(count));
 if(process.argv[2]==='--conversion-requests') fs.writeFileSync(process.argv[3],JSON.stringify(requests));
 console.log('congrArg calls:',String(congrCalls),'proofs:',congrProofs,'function forms:',Object.fromEntries(congrFunctions));
+console.log('Single-use lambda contexts:',contexts);
+console.log('Context shapes:',Object.fromEntries(contextShapes));

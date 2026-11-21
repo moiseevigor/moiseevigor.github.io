@@ -252,6 +252,27 @@
       const receiver=window.ProofAtlasOmittedReferences.applicationAtUse(owner.data,site);
       if(receiver)note.append(receiver.slot?' · Argument '+receiver.slot+' of '+receiver.arity+' to ':' · Function in ',
        sourceLink(receiver.label,receiver.call));
+      if(refs.occurrences==='1' && window.PROOF_ATLAS_TYPE_NOTATION){
+       const frames=window.ProofAtlasOmittedReferences.parameterContext(owner.data,window.PROOF_ATLAS_TYPE_NOTATION,
+        {node:body,route:{root:fn.route.root,slots:fn.route.slots.concat(1)}},site);
+       if(frames?.length){
+        const formula=el('p'),fixed=el('ul');let expression=[sourceLink('x',site)],count=0;
+        for(const frame of frames){
+         const op=sourceLink(frame.glyph,frame.call);
+         const args=frame.operands.map(at=>{
+          if(!at)return expression;
+          const symbol='s'+(++count),row=el('li');
+          row.append(sourceLink(symbol+' · '+termLabel(at),at));fixed.append(row);
+          return [sourceLink(symbol,at)];
+         });
+         expression=frame.form==='binary'?['(',...args[0],' ',op,' ',...args[1],')']:
+          [op,'(',...args[0],')'];
+        }
+        formula.append('Function context: x ↦ ',...expression);
+        panel.append(formula);
+        if(count)panel.append(fixed);
+       }
+      }
      }
     }else note.append('Parameter reference count unavailable.');
     panel.append(note);

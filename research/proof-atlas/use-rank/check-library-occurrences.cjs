@@ -415,6 +415,11 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
      const url=new URL(await use.evaluate(a=>a.href)),slots=url.searchParams.get('route').split(':')[1].split('.').map(Number);
      assert.deepEqual(atlas.binding(g,{root:at.root,slots}),fn);
      if(edition==='published-15'){
+      const formula=panel.locator('p').filter({hasText:'Function context'});
+      assert.equal(await formula.innerText(),id===2358?'Function context: x ↦ (s2 ≤ (x / s1))':
+       'Function context: x ↦ ((s1 · √(x)) ≤ s2)');
+      verify(await formula.getByRole('link',{name:'x',exact:true}).evaluate(a=>a.href),
+       {node:atlas.walk(g,{root:at.root,slots}),route:{root:at.root,slots}});
       const call=panel.getByRole('link',{name:id===2358?'HDiv.hDiv':'Real.sqrt',exact:true});
       const receiver=require('../../../public/js/proof-atlas-omitted-references').applicationAtUse(g,
        {node:atlas.walk(g,{root:at.root,slots}),route:{root:at.root,slots}});
