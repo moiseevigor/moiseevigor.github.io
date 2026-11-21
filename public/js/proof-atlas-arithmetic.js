@@ -460,14 +460,18 @@
   const free=new Map(),distance=new Map(),choice=new Map();
   let entries=0;
   for(const n of [...rows].sort((a,b)=>a-b)){
-   const used=new Set(),fields=A.fields[A.kinds[data.kind[n]]];
-   if(data.kind[n]===0)used.add(data.payloads[n].index);
+   const used=new Map(),fields=A.fields[A.kinds[data.kind[n]]];
+   if(data.kind[n]===0)used.set(data.payloads[n].index,{length:0});
    let shortest=Infinity;
    data.children[n].forEach((child,k)=>{
     const body=fields[k]==='body',indices=free.get(child);
     const depth=body && indices.has(0)?1:1+distance.get(child);
     if(depth<shortest){shortest=depth;choice.set(n,k);}
-    for(const index of indices)if(!body||index>0)used.add(index-Number(body));
+    for(const [index,witness] of indices){
+     if(body && index===0)continue;
+     const outer=index-Number(body),length=witness.length+1;
+     if(length<(used.get(outer)?.length??Infinity))used.set(outer,{length,slot:k,index});
+    }
    });
    entries+=used.size;
    if(entries>4*limit)return {limited:true};
@@ -478,7 +482,16 @@
   while(choice.has(n)){
    const k=choice.get(n);
    slots.push(k);fields.push(A.fields[A.kinds[data.kind[n]]][k]);
-   if(distance.get(n)===1)return {slots,fields,binder:n,body:data.children[n][k]};
+   if(distance.get(n)===1){
+    const body=data.children[n][k],useSlots=[];
+    let reference=body,index=0;
+    while(data.kind[reference]!==0){
+     const step=free.get(reference).get(index);
+     useSlots.push(step.slot);index=step.index;
+     reference=data.children[reference][step.slot];
+    }
+    return {slots,fields,binder:n,body,useSlots,reference};
+   }
    n=data.children[n][k];
   }
   return {slots:null};
@@ -684,6 +697,7 @@
       const slots=site.route.slots.concat(bodyPath.slots),root=site.route.root;
       const line=el('p');
       line.append(link(title,{node:bodyPath.body,route:{root,slots}}),' → ',
+       link('Variable use',{node:bodyPath.reference,route:{root,slots:slots.concat(bodyPath.useSlots)}}),' → ',
        link('Its binder',{node:bodyPath.binder,route:{root,slots:slots.slice(0,-1)}}));
       output.append(line);
      }

@@ -102,20 +102,26 @@ function conflicts(g) {
 // owning route to the corresponding relative reference path within that row.
 function enumerate(g) {
   const first = new Map(), ambiguous = new Set(), outerChanges = new Set(), ancestors = [], scope = [], scopeDepth = [];
-  const signatures = new Map(), destinations = new Map(), firstBodyDepth = new Map();
+  const firstUseDepth = new Map();
+  const signatures = new Map(), destinations = new Map(), firstBodyDepth = new Map(), nearestUse = new Map(), firstRoute = new Map();
   // Intern the actual row, lexical signature and ordered child groups at each horizon.
   const partitions = Array.from({length:unboundedLevel + 1}, () => new Map());
   let example = null;
   function walk(n, route) {
+    if (!firstRoute.has(n)) firstRoute.set(n, route);
     const external = new Set();
     if (g.kind[n] === 0) {
       const ownerIndex = scope.length - 1 - g.payloads[n].index;
       const owner = scope[ownerIndex];
       assert(owner);
       external.add(owner.route);
+      const introduction = ancestors[owner.depth];
+      const useDepth = route.length - owner.depth - 1;
+      nearestUse.set(introduction, Math.min(nearestUse.get(introduction) ?? Infinity, useDepth));
       for (let j = 0; j <= owner.depth; j++) {
         const ancestor = ancestors[j], depth = owner.depth + 1 - j;
         firstBodyDepth.set(ancestor, Math.min(firstBodyDepth.get(ancestor) ?? Infinity, depth));
+        firstUseDepth.set(ancestor, Math.min(firstUseDepth.get(ancestor) ?? Infinity, route.length-j));
       }
       for (let j = owner.depth + 1; j <= ancestors.length; j++) {
         const row = j === ancestors.length ? n : ancestors[j];
@@ -169,7 +175,7 @@ function enumerate(g) {
     if (targets.size > 1) splitSlots++;
     extraDestinations += BigInt(targets.size - 1);
   }
-  return {example, firstBodyDepth, navigable: depths.map(d => BigInt(partitions[Number.isFinite(d) ? d : unboundedLevel].size)), childSlots:BigInt(destinations.size), splitSlots, extraDestinations, ambiguous, classes: new Map([...signatures].map(([n,s]) => [n, BigInt(s.size)])), outerMiss: new Set([...ambiguous].filter(n => !outerChanges.has(n)))};
+  return {example, firstBodyDepth, firstUseDepth, nearestUse, firstRoute, navigable: depths.map(d => BigInt(partitions[Number.isFinite(d) ? d : unboundedLevel].size)), childSlots:BigInt(destinations.size), splitSlots, extraDestinations, ambiguous, classes: new Map([...signatures].map(([n,s]) => [n, BigInt(s.size)])), outerMiss: new Set([...ambiguous].filter(n => !outerChanges.has(n)))};
 }
 
 for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_SAMPLE.edition]) {
@@ -177,7 +183,7 @@ for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_S
   const totals = {edition:e.id, proofs:0, exhaustiveChecks:0, affectedProofs:0, proofsWithConflictingApplication:0, rows:0, conflictingRows:0, conflictingApplications:0, outerMissApplications:0, proofsWithOuterMiss:0};
   let childSlots = 0n, splitSlots = 0n, extraDestinations = 0n, affectedProofBodies = 0;
   let example = null, deepest = null;
-  let testedRows = 0, foundBodies = 0;
+  let testedRows = 0, foundBodies = 0, shorterUseElsewhere = 0;
   let visits = 0n, affected = 0n, scopedRows = 0n, largestIncrease = null;
   for (const d of e.declarations.filter(x => x.kind === 'theorem' && x.bodyAvailable)) {
     const raw = zlib.gunzipSync(fs.readFileSync('.' + d.indexFile));
@@ -210,6 +216,15 @@ for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_S
             assert.equal(observed.firstBodyDepth.get(hit.binder), 1);
             assert.equal(n, hit.body);
             assert.equal(hit.fields.at(-1), 'body');
+            const slots = [...observed.firstRoute.get(row)].map(Number).concat(hit.slots);
+            const use = {root:1, slots:slots.concat(hit.useSlots)};
+            assert.equal(hit.useSlots.length, observed.nearestUse.get(hit.binder));
+            assert.equal(A.walk(g, use), hit.reference);
+            assert.deepEqual(A.binding(g, use), {node:hit.binder,route:{root:1,slots:slots.slice(0,-1)}});
+            const depthViaBody = hit.slots.length + hit.useSlots.length;
+            const globalDepth = observed.firstUseDepth.get(row);
+            assert(depthViaBody >= globalDepth);
+            if (depthViaBody > globalDepth) shorterUseElsewhere++;
             foundBodies++;
           }
           testedRows++;
@@ -242,5 +257,5 @@ for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_S
     if (!largestIncrease || groups * BigInt(largestIncrease.rows) > BigInt(largestIncrease.groups) * BigInt(r.rows))
       largestIncrease = {name:d.name, rows:r.rows, groups:String(groups), occurrences:String(r.visits)};
   }
-  console.log(JSON.stringify({...totals, testedRows, foundBodies, deepest, groupsByDepth:Object.fromEntries(depths.map((d,i)=>[String(d),String(navigable[i])])), example, childSlots:String(childSlots), splitSlots:String(splitSlots), extraDestinations:String(extraDestinations), affectedProofBodies, largestIncrease, scopedRows:String(scopedRows), occurrences:String(visits), occurrencesInConflictingRows:String(affected)}));
+  console.log(JSON.stringify({...totals, testedRows, foundBodies, shorterUseElsewhere, deepest, groupsByDepth:Object.fromEntries(depths.map((d,i)=>[String(d),String(navigable[i])])), example, childSlots:String(childSlots), splitSlots:String(splitSlots), extraDestinations:String(extraDestinations), affectedProofBodies, largestIncrease, scopedRows:String(scopedRows), occurrences:String(visits), occurrencesInConflictingRows:String(affected)}));
 }
