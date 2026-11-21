@@ -6,7 +6,7 @@ const {createHash}=require('node:crypto');
 const {gunzipSync}=require('node:zlib');
 const atlas=require('../../../public/js/proof-atlas-library-data');
 const pages=require('../../../public/js/proof-atlas-source-pages');
-const {pagedEqualityRule,pagedTransportChain,firstStructuralDifference}=require('../../../public/js/proof-atlas-omitted-references');
+const {pagedEqualityRule,pagedTransportChain,pagedTypeDifferences,firstStructuralDifference}=require('../../../public/js/proof-atlas-omitted-references');
 const {sourceInput}=require('../../../public/js/proof-atlas-application-ports');
 const {spine}=require('../../../public/js/proof-atlas-elimination');
 const {inventory}=require('../../../scripts/proof-atlas-judgment-fixtures.cjs');
@@ -18,7 +18,7 @@ async function check(descriptor,record){
  const data=atlas.validateIndex(JSON.parse(raw),record),root=data.roots[1];
  const visits=Array(root+1).fill(0n),parents=new Map();
  visits[root]=1n;
- const counts={mp:0,mpr:0,forward:0n,reverse:0n,partial:0,joined:0,different:0,capped:0};
+ const counts={mp:0,mpr:0,forward:0n,reverse:0n,partial:0,joined:0,different:0,capped:0,single:0,several:0,limited:0,identical:0,rootOnly:0,rawLimited:0};
  const cursor=await pages.open(descriptor,record,{pageLimit:1,indexLimit:1,fetcher:async file=>{
   assert(file.startsWith(descriptor.file.slice(0,descriptor.file.lastIndexOf('/')+1)));
   return new Response(fs.readFileSync('.'+file));
@@ -43,6 +43,53 @@ async function check(descriptor,record){
    const [left,right,equality,term]=[1,2,3,4].map(slot=>sourceInput(data,call,slot));
    const forward=name==='Eq.mp';
    assert.deepEqual(result,{rule:name,left,right,equality,term,from:forward?left:right,to:forward?right:left});
+   const diff=await pagedTypeDifferences(cursor,result.from,result.to);
+   const expected=[];
+   function collect(l,r,path){
+    if(l===r)return;
+    const a=spine(data,l),b=spine(data,r);
+    const differentCall=data.kind[l]===5 && data.kind[r]===5 && a.args.length<=12 && b.args.length<=12 &&
+     (a.head!==b.head || a.args.length!==b.args.length);
+    if(differentCall || data.kind[l]!==data.kind[r] || atlas.payloadKey(data.kind[l],data.payloads[l])!==atlas.payloadKey(data.kind[r],data.payloads[r])){
+     expected.push([l,r,path]);return;
+    }
+    data.children[l].forEach((child,i)=>collect(child,data.children[r][i],path.concat(i)));
+   }
+   collect(result.from.node,result.to.node,[]);
+   if(expected.length===1 && expected[0][2].length===0)counts.rootOnly++;
+   const rawPending=[[result.from.node,result.to.node]];
+   let inspected=0,rawDifferences=0;
+   while(rawPending.length && inspected<128 && rawDifferences<8){
+    const [l,r]=rawPending.pop();
+    if(l===r)continue;
+    inspected++;
+    if(data.kind[l]!==data.kind[r] || atlas.payloadKey(data.kind[l],data.payloads[l])!==atlas.payloadKey(data.kind[r],data.payloads[r])){
+     rawDifferences++;continue;
+    }
+    for(let i=data.children[l].length-1;i>=0;i--){
+     if(data.children[l][i]!==data.children[r][i])rawPending.push([data.children[l][i],data.children[r][i]]);
+    }
+   }
+   if(rawPending.length)counts.rawLimited++;
+
+   if(diff.complete)assert.equal(diff.changes.length,expected.length);
+   for(const [i,change] of diff.changes.entries()){
+    const [l,r,path]=expected[i];
+    if(change.context){
+     const outer=spine(data,result.from.node);
+     const slot=outer.args.findIndex((_,j)=>{
+      const arg=sourceInput(data,result.from,j+1);
+      return arg.route.slots.every((s,k)=>change.from.route.slots[k]===s);
+     });
+     assert(slot>=0);
+     assert.equal(change.context,'Argument '+(slot+1)+' of '+(data.payloads[outer.head].name??atlas.kinds[data.kind[outer.head]]));
+    }
+    for(const [at,base,node] of [[change.from,result.from,l],[change.to,result.to,r]]){
+     assert.deepEqual(at.route,{root:base.route.root,slots:base.route.slots.concat(path)});
+     assert.equal(at.node,node);assert.equal(atlas.walk(data,at.route),node);
+    }
+   }
+   counts[!diff.complete?'limited':expected.length===0?'identical':expected.length===1?'single':'several']++;
    const chain=await pagedTransportChain(cursor,result);
    let current=call,boundary=null;
    for(let i=0;i<8;i++){
@@ -114,6 +161,18 @@ async function checkDisplayLimit(){
  const rest=await pagedTransportChain(cursor,next);
  assert.equal(rest.steps.length,2);
  assert.equal(rest.boundary,null);
+ // Shared subtrees can have several distinct occurrences under the same context.
+ let l=add(0,[],{index:0}),r=add(0,[],{index:1});
+ for(let i=0;i<4;i++){
+  l=add(5,[add(5,[mp,l]),l]);r=add(5,[add(5,[mp,r]),r]);
+ }
+ const at=node=>({node,route:{root:0,slots:[]}});
+ const many=await pagedTypeDifferences(cursor,at(l),at(r));
+ assert.equal(many.complete,false);assert.equal(many.changes.length,8);
+ assert.equal(new Set(many.changes.map(c=>c.from.route.slots.join('.'))).size,8);
+ for(let i=0;i<129;i++){l=add(10,[l]);r=add(10,[r]);}
+ const deep=await pagedTypeDifferences(cursor,at(l),at(r));
+ assert.deepEqual(deep,{changes:[],complete:false});
 }
 (async()=>{
  await checkDisplayLimit();
@@ -123,7 +182,7 @@ async function checkDisplayLimit(){
  for(const d of window.PROOF_ATLAS_SOURCE_PAGES.records){
   const {record}=items.find(i=>i.edition===d.edition&&i.record.indexSha256===d.indexSha256);
   const c=await check(d,record);
-  const s=totals[d.edition]??={packets:0,matching:0,mp:0,mpr:0,forward:0n,reverse:0n,partial:0,joined:0,different:0,capped:0};
+  const s=totals[d.edition]??={packets:0,matching:0,mp:0,mpr:0,forward:0n,reverse:0n,partial:0,joined:0,different:0,capped:0,single:0,several:0,limited:0,identical:0,rootOnly:0,rawLimited:0};
   s.packets++;if(c.mp+c.mpr)s.matching++;
   for(const key of Object.keys(c))s[key]+=c[key];
  }

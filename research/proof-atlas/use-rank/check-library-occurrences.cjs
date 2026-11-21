@@ -786,6 +786,23 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
      assert.equal(await transport.getByRole('listitem').count(),3);
      assert.equal(await transport.getByRole('link',{name:'Kernel replay record'}).count(),2);
     }
+    const compare=transport.getByText('Compare input and result types',{exact:true});
+    await compare.click();
+    const differences=compare.locator('..').getByRole('link');
+    const changed=node===3238?[2238,2215]:node===3221?[1327,3139,1329,2258]:node===3222?[3171,3178]:null;
+    if(changed){
+     await differences.nth(changed.length-1).waitFor();
+     assert.deepEqual(await differences.evaluateAll(ns=>ns.map(a=>Number(new URL(a.href).hash.slice(6)))),changed);
+     const pair=await differences.evaluateAll(ns=>ns.map(a=>new URL(a.href).searchParams.get('route')));
+     const base=[sourceSlot(body,at,forward?1:2),sourceSlot(body,at,forward?2:1)];
+     for(let i=0;i<pair.length;i+=2){
+      const rel=pair.slice(i,i+2).map((s,j)=>{
+       const prefix=base[j].route.root+':'+base[j].route.slots.join('.');
+       assert(s.startsWith(prefix+'.'));return s.slice(prefix.length);
+      });
+      assert.equal(rel[0],rel[1]);
+     }
+    }
     const eq=sourceSlot(body,at,3);
     await transport.getByRole('link',{name:'Proof of A = B'}).click();
     await page.waitForFunction(id=>window.ProofAtlasLibrary?.getSnapshot()?.selected===id,eq.node);

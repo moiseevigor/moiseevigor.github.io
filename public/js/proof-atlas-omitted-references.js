@@ -61,6 +61,43 @@
   const fixed=await peel(fn,6);
   return {rule,left,right,fn,premise,fixed};
  }
+ async function pagedTypeDifferences(cursor,from,to,options={}){
+  const pending=[{left:from.node,right:to.node,slots:[]}],changes=[];
+  let inspected=0;
+  const read=node=>cursor.run(()=>({kind:cursor.data.kind[node],payload:cursor.data.payloads[node],
+   children:cursor.data.children[node]}),options);
+  async function applicationHead(node){
+   for(let arity=0;arity<=12;arity++){
+    const row=await read(node);
+    if(row.kind!==5)return {node,arity,label:row.payload.name??A.kinds[row.kind]};
+    node=row.children[0];
+   }
+   return null;
+  }
+  let enclosingCall=null;
+  while(pending.length && inspected<128 && changes.length<8){
+   const {left,right,slots}=pending.pop();
+   if(left===right)continue;
+   inspected++;
+   const a=await read(left),b=await read(right);
+   const ah=a.kind===5?await applicationHead(left):null,bh=b.kind===5?await applicationHead(right):null;
+   const differentCall=ah && bh && (ah.node!==bh.node || ah.arity!==bh.arity);
+   if(!slots.length && ah && bh && !differentCall)enclosingCall=ah;
+   if(differentCall || a.kind!==b.kind || A.payloadKey(a.kind,a.payload)!==A.payloadKey(b.kind,b.payload)){
+    const at=(root,node)=>({node,route:{root:root.route.root,slots:root.route.slots.concat(slots)}});
+    const label=async(node,head)=>head?'application of '+head.label:cursor.run(()=>A.describe(cursor.data,node),options);
+    const branch=slots.findIndex(slot=>slot!==0);
+    const context=enclosingCall && branch>=0 && branch<enclosingCall.arity && slots[branch]===1
+     ? 'Argument '+(enclosingCall.arity-branch)+' of '+enclosingCall.label : null;
+    changes.push({from:at(from,left),to:at(to,right),context,fromLabel:await label(left,ah),toLabel:await label(right,bh)});
+   }else{
+    for(let i=a.children.length-1;i>=0;i--){
+     if(a.children[i]!==b.children[i])pending.push({left:a.children[i],right:b.children[i],slots:slots.concat(i)});
+    }
+   }
+  }
+  return {changes,complete:pending.length===0};
+ }
  async function pagedTransportChain(cursor,outer,options={}){
   const steps=[outer];
   while(steps.length<8){
@@ -386,6 +423,6 @@
   };
   return panel;
  }
- const api={inspect,control,parameterContext,exactCallInputs,fixedArguments,pagedSubstitution,pagedEqualityRule,pagedTransportChain,equalitySegments,firstStructuralDifference,applicationAtUse,resultDestination};
+ const api={inspect,control,parameterContext,exactCallInputs,fixedArguments,pagedSubstitution,pagedEqualityRule,pagedTypeDifferences,pagedTransportChain,equalitySegments,firstStructuralDifference,applicationAtUse,resultDestination};
  if(local)module.exports=api;else host.ProofAtlasOmittedReferences=api;
 })(typeof window==='undefined'?globalThis:window);

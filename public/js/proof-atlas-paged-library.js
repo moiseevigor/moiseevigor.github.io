@@ -168,6 +168,30 @@
      substitutionSection.append(el('h3','Transport across equality'),rule,
       el('p',result.rule+' carries a term of '+from+' to a term of '+to+'.'),
       anchor('Proof of A = B',result.equality),' · ',anchor('Term of '+from,result.term));
+     const comparison=el('details'),summary=el('summary','Compare input and result types');
+     comparison.append(summary);substitutionSection.append(comparison);
+     comparison.ontoggle=async()=>{
+      if(!comparison.open)return;
+      comparison.ontoggle=null;
+      const content=el('div','Comparing compiled terms…');comparison.append(content);
+      try{
+       const diff=await host.ProofAtlasOmittedReferences.pagedTypeDifferences(owner,result.from,result.to,{signal});
+       if(!active())return;
+       content.replaceChildren();
+       for(const change of diff.changes){
+        const row=el('p');
+        if(change.context)row.append(change.context+' · ');
+        for(const [index,at] of [change.from,change.to].entries()){
+         const label=index?change.toLabel:change.fromLabel;
+         if(index)row.append(' → ');
+         row.append(anchor(label,at));
+        }
+        content.append(row);
+       }
+       if(!diff.complete)content.append(el('p','Partial comparison. The display stops after eight differences or 128 differing row pairs.'));
+       else if(!diff.changes.length)content.append(el('p','The compiled type expressions match.'));
+      }catch(error){if(active())content.textContent='Type comparison unavailable · '+error.message;}
+     };
      const verified=[];
      const chain=await host.ProofAtlasOmittedReferences.pagedTransportChain(owner,result,{signal,verifyJoin:async(call,boundary)=>{
       const checked=await verifiedTransportJoin(owner.record,edition.id,call,boundary);
