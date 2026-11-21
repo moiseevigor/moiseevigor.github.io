@@ -7,9 +7,11 @@ const {countReferences}=require('../../../public/js/proof-atlas-recursive-inputs
 global.window={};
 require('../../../public/data/proof-atlas/library-manifest');
 require('../../../public/data/proof-atlas/goedel-sample-manifest');
+const {applicationAtUse}=require('../../../public/js/proof-atlas-omitted-references');
 const budget={maxStates:8192,maxDepth:512,useSupport:false};
 for(const e of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAMPLE.edition]){
  const counts={zero:0,one:0,multiple:0,unavailable:0};
+ const destinations={argument:0,fn:0,field:0};
  const overflow=[];
  let peakEntries=0,peakWork=0;
  for(const d of e.declarations.filter(x=>x.kind==='theorem'&&x.bodyAvailable)){
@@ -64,6 +66,22 @@ for(const e of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAM
        const {witness}=result;
        const route={root:1,slots:bodyPath.concat(witness.slots)};
        assert.deepEqual(A.binding(g,route).route.slots,binder);
+       const use={node:witness.node,route},receiver=applicationAtUse(g,use,{includePeers:false});
+       const parent={root:1,slots:route.slots.slice(0,-1)};
+       const parentNode=A.walk(g,parent);
+       if(receiver){
+        const {call,slot,arity}=receiver;
+        const suffix=Array(arity-slot).fill(0);
+        if(slot)suffix.push(1);
+        assert.deepEqual(call.route.slots.concat(suffix),route.slots);
+        assert.equal(A.walk(g,call.route),call.node);
+        assert.equal(g.kind[parentNode],5);
+        destinations[slot?'argument':'fn']++;
+       }else{
+        assert.notEqual(g.kind[parentNode],5);
+        assert(A.fields[A.kinds[g.kind[parentNode]]][route.slots.at(-1)]);
+        destinations.field++;
+       }
       }
      }
     }
@@ -74,5 +92,5 @@ for(const e of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAM
  }
  assert.equal(counts.unavailable,0);
  assert(peakEntries<=8192 && peakWork<=16384);
- console.log(e.id,counts,{recovered:overflow,peakWork,peakEntries});
+ console.log(e.id,counts,destinations,{recovered:overflow,peakWork,peakEntries});
 }

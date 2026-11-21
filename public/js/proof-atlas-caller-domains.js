@@ -156,7 +156,17 @@
          const route={root:branch.route.root,slots:bodySlots.concat(witness.slots)};
          const binding=A.binding(data,route);
          if(!binding || String(binding.route.slots)!==String(binderRoute.slots))throw Error('Branch reference scope mismatch');
-         line.append(' · ',sourceLink('First reference',{node:witness.node,route}));
+         const use={node:witness.node,route};
+         line.append(' · ',sourceLink('First reference',use));
+         const receiver=host.ProofAtlasOmittedReferences.applicationAtUse(data,use,{includePeers:false});
+         if(receiver){
+          const role=receiver.slot?'argument '+receiver.slot+' of '+receiver.arity:'function position';
+          line.append(' → ',sourceLink(receiver.label+' · '+role,receiver.call));
+         }else{
+          const parent={root:route.root,slots:route.slots.slice(0,-1)};
+          const node=A.walk(data,parent),kind=A.kinds[data.kind[node]];
+          line.append(' → ',sourceLink(kind+'.'+A.fields[kind][route.slots.at(-1)],{node,route:parent}));
+         }
         }
        }else line.append(' · reference count unavailable within the traversal limit');
        uses.append(line);
