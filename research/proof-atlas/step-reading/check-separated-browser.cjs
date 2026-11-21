@@ -81,6 +81,40 @@ async function main() {
       return route.fulfill({status:404});
     });
     const body='http://localhost'+libraryPath+'?edition=browser-control&proof='+name+'&route=1%3A#expr-'+graph.roots[1];
+    if(name==='annotatedFunction'){
+      const call=[1,1,1,1],url=new URL(body);
+      url.searchParams.set('geometry','scoped');url.searchParams.set('fold','applications');
+      url.searchParams.set('route','1:'+call.join('.'));url.hash='';
+      const wrappers=[],children=[];
+      for(const [index,value] of [17,23].entries()){
+        const head=call.concat(index===0?[0,1,0]:[1,0]);
+        for(const wrapped of [false,true]){
+          await page.goto(url.href);
+          const panel=page.locator('#pl-application-headers details').first();
+          await panel.locator('summary').click();
+          const action=wrapped?'Wrapped expression':'Applied function · mdata';
+          await panel.locator('ol > li').nth(index+2).getByRole('button',{name:action,exact:true}).click();
+          const at=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
+          assert.deepEqual(at.route,{root:1,slots:wrapped?head.concat(0):head});
+          if(wrapped){
+            children.push(at.selected);
+            await page.getByRole('button',{name:/^Enclosing binder/}).click();
+            assert.deepEqual((await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot())).route,{root:1,slots:[1,1]});
+          }else{
+            wrappers.push(at.selected);
+            const details=page.locator('#pl-expression details').filter({has:page.getByText('Constructor fields',{exact:true})}).first();
+            await details.locator('summary').click();
+            const payload=JSON.parse(await details.locator('pre').innerText());
+            assert.equal(payload.metadata[0].key,'atlas.example');
+            assert.deepEqual(payload.metadata[0].value,{kind:'ofNat',repr:'Lean.DataValue.ofNat '+value});
+          }
+        }
+      }
+      assert.notEqual(wrappers[0],wrappers[1]);assert.equal(children[0],children[1]);
+      assert.deepEqual(errors,[]);
+      console.log('Both metadata payloads, wrapped occurrence routes and binder destinations passed.');
+      return;
+    }
     if(name==='letFunction'){
       const call=[1,1,1,1],head=call.concat(0,1,0);
       const url=new URL(body);

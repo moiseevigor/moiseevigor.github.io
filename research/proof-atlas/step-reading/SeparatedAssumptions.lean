@@ -17,11 +17,20 @@ theorem projectedFunctions (P Q : Prop) (rules : (P → Q) ∧ (P → Q)) (p : P
 theorem letFunction (P Q : Prop) (f : P → Q) (p : P) : Q ∧ P :=
   And.intro ((let f := f; f) p) p
 
+open Lean Elab Term in
+elab "markedFunction" i:num t:term:max : term => do
+  let tag := KVMap.empty.setNat `atlas.example i.getNat
+  return .mdata tag (← elabTerm t none)
+
+theorem annotatedFunction (P Q : Prop) (f : P → Q) (p : P) : Q ∧ Q :=
+  And.intro ((markedFunction 17 f) p) ((markedFunction 23 f) p)
+
 open Lean Elab Command AtlasLibrary in
 run_cmd do
   let env ← getEnv
   let name := match ← IO.getEnv "ATLAS_BINDER_CONTROL" with
     | some "distinct" => ``distinctPremises
+    | some "annotated" => ``annotatedFunction
     | some "let" => ``letFunction
     | some "projected" => ``projectedFunctions
     | _ => ``separatedAssumptions

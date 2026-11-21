@@ -1117,3 +1117,11 @@ In `(let f := f; f) p`, the two occurrences on opposite sides of the semicolon h
 A folded input with a `letE` function head exposes the original declared type, defining value and body. The local browser test opened the head and all three fields, then followed each same-named reference to its own binder. Selecting the value led to the outer lambda; selecting the body led back to the let head itself. The control establishes that an applied let expression is possible beyond the three head forms counted in the AI and SE(2) inventories.
 
 Reproduce with `build-shared-case.py --let-function --output /tmp/let-function.json` and pass the packet to `check-separated-browser.cjs` on standard input.
+
+#### Two annotations on the same applied function
+
+The `annotatedFunction` control proves `Q ∧ Q` from `f : P → Q` and `p : P`. A term elaborator puts `Expr.mdata` directly around each occurrence of `f`, with the same metadata key and different natural-number values (17 and 23). Lean 4.33.1 kernel-checked the resulting body and its declared type before export. The exporter retained two wrapper rows with a single shared underlying bound-variable row. Dropping the wrappers would discard the distinction between the two recorded payloads.
+
+The focused application lists the metadata node as the function head. Its constructor fields expose the annotation, and **Wrapped expression** goes to its original child. In Chrome, all four selections (two wrappers, two wrapped occurrences) matched the compiled paths. The metadata values remained distinct and both variable occurrences led to the original binder for `f`. The synthetic tags test provenance only. The existing census found no metadata-headed applied arguments in the three measured inventories.
+
+Run `build-shared-case.py --annotated-function --output /tmp/annotated.json` with Lean 4.33.1 and pass the packet to `check-separated-browser.cjs` on standard input.

@@ -966,6 +966,7 @@
   function field(label,slot){
    return {label,node:current.children(node)[slot],route:{root:route.root,slots:route.slots.concat(slot)}};
   }
+  if(kind==='mdata')return {node,route,name:'mdata',fields:[field('Wrapped expression',0)]};
   if(kind==='proj')return {node,route,name:payload.typeName+'['+payload.index+']',fields:[field('Projected structure',0)]};
   if(kind==='lam')return {node,route,name:'λ '+(payload.binderName||'_'),fields:[field('Lambda body',1)]};
   if(kind==='letE')return {node,route,name:'let '+(payload.declName||'_'),

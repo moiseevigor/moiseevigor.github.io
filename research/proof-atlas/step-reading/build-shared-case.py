@@ -12,7 +12,8 @@ parser.add_argument('--output', type=Path, required=True)
 parser.add_argument('--tagged-depth', type=int, choices=range(19))
 controls = parser.add_mutually_exclusive_group()
 for flag, value in [('--separated-assumptions', 'separated'), ('--distinct-premises', 'distinct'),
-                    ('--projected-functions', 'projected'), ('--let-function', 'let')]:
+                    ('--projected-functions', 'projected'), ('--let-function', 'let'),
+                    ('--annotated-function', 'annotated')]:
     controls.add_argument(flag, dest='control', action='store_const', const=value)
 args = parser.parse_args()
 binder_control = args.control
