@@ -29,7 +29,7 @@ const files=['public/js/proof-atlas-scope-comparison.js','public/js/proof-atlas-
   assert((await page.locator('body').innerText()).includes('Uniform context extension shifts external variable references'));
   assert(await page.locator('script[src="/public/js/proof-atlas-application-port-view.js?v=7"]').count());
   await page.goto(origin+'/projects/proof-atlas/library/',{waitUntil:'domcontentloaded'});
-  assert(await page.locator('script[src="/public/js/proof-atlas-library.js?v=145"]').count());
+  assert(await page.locator('script[src="/public/js/proof-atlas-library.js?v=146"]').count());
   assert.deepEqual(errors,[]);report.status='PASS';report.publicDeployment=false;report.scope='Real built assets and complete/paged gate wiring; illustration is syntax data. Native-reader selections and accessibility are checked in the separate bridge browser report.';
   report.checkerSha256=sha(fs.readFileSync(__filename));fs.writeFileSync(path.join(folder,'browser.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
  }finally{await browser.close();}

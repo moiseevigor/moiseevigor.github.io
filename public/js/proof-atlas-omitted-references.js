@@ -29,6 +29,30 @@
   }
   return {prefix:{node,route:{root,slots}},args:args.reverse(),folded:data.kind[node]===5};
  }
+ // Read each application row independently so crossing pages never restarts the spine.
+ async function pagedSubstitution(cursor,route,options={}){
+  const selected=await cursor.resolveRoute(route,options);
+  if(selected.kind!==5)return null;
+  const root=route.root;
+  async function peel(start,limit){
+   let node=start.node,slots=start.route.slots;
+   const args=[];
+   while(args.length<limit){
+    const children=await cursor.run(()=>cursor.data.kind[node]===5?cursor.data.children[node]:null,options);
+    if(!children)break;
+    args.push({node:children[1],route:{root,slots:slots.concat(1)}});
+    node=children[0];
+    slots=slots.concat(0);
+   }
+   const head=await cursor.run(()=>({kind:cursor.data.kind[node],name:cursor.data.payloads[node].name}),options);
+   return {prefix:{node,route:{root,slots}},head,args:args.reverse()};
+  }
+  const call=await peel({node:selected.node,route},6);
+  if(call.args.length!==6 || call.head.kind!==4 || call.head.name!=='congrArg')return null;
+  const [, ,left,right,fn,premise]=call.args;
+  const fixed=await peel(fn,6);
+  return {left,right,fn,premise,fixed};
+ }
  // Expand only directly supplied transitivity proofs with literal endpoint agreement.
  function equalitySegments(data,inputs,limit=16){
   const [carrier,start,middle,end,first,second]=inputs;
@@ -330,6 +354,6 @@
   };
   return panel;
  }
- const api={inspect,control,parameterContext,exactCallInputs,fixedArguments,equalitySegments,firstStructuralDifference,applicationAtUse,resultDestination};
+ const api={inspect,control,parameterContext,exactCallInputs,fixedArguments,pagedSubstitution,equalitySegments,firstStructuralDifference,applicationAtUse,resultDestination};
  if(local)module.exports=api;else host.ProofAtlasOmittedReferences=api;
 })(typeof window==='undefined'?globalThis:window);

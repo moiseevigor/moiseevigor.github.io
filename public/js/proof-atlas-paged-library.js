@@ -73,12 +73,46 @@
     }
    }
   }
+  const substitutionSection=el('section');
+  substitutionSection.hidden=true;
+  substitutionSection.setAttribute('aria-label','Equality under a function');
+  workspace.insertBefore(substitutionSection,cache);
+  async function showSubstitution(owner,route,epoch,signal){
+   const active=()=>owner===cursor && epoch===sourceEpoch && !signal.aborted;
+   try{
+    const result=await host.ProofAtlasOmittedReferences.pagedSubstitution(owner,route,{signal});
+    if(!active()||!result)return;
+    function anchor(label,at){
+     const u=new URL(full.href);
+     u.searchParams.set('loading','paged');
+     u.searchParams.set('route',at.route.root+':'+at.route.slots.join('.'));
+     u.hash='expr-'+at.node;
+     const a=el('a',label);a.href=u.href;return a;
+    }
+    const {left,right,fn,premise,fixed}=result;
+    const rule=el('p');
+    rule.append(anchor('a',left),' = ',anchor('b',right),'  ⇒  ',anchor('f',fn),'(',anchor('a',left),
+     ') = ',anchor('f',fn),'(',anchor('b',right),')');
+    substitutionSection.hidden=false;
+    substitutionSection.append(el('h3','Equality under a function'),rule,anchor('Proof of a = b',premise));
+    if(fixed.args.length){
+     const context=el('p');
+     context.append('Function context: x ↦ ',anchor(fixed.head.name??'g',fixed.prefix),'(');
+     for(const [i,arg] of fixed.args.entries())context.append(anchor('s'+(i+1),arg),', ');
+     context.append('x)');
+     substitutionSection.append(context);
+     if(fixed.head.kind===5)substitutionSection.append(el('p','Earlier arguments are included in g.'));
+    }
+   }catch(error){if(active()){substitutionSection.hidden=false;substitutionSection.append(el('p','Substitution lookup unavailable · '+error.message));}}
+  }
   async function selectOccurrence(node,write=true,focus=true,route){
    if(!cursor||!route)throw Error('An exact source route is required in paged mode');corridorControl?.dispose();corridorControl=null;useInputControl?.dispose();useInputControl=null;useNavigation?.dispose();useNavigation=null;clearModuleView();clearMethod();const owner=cursor,nativeOwner=nativeCursor,scopeOwner=scopeCursor,ownerScopeReason=scopeReason,ownerRecord=record,typing=resolve,epoch=++sourceEpoch;view?.dispose();view=null;hostView.replaceChildren();snapshot=null;status('Processing selected source region…',true);
+   substitutionSection.hidden=true;substitutionSection.replaceChildren();
    tools.querySelector('[data-clause-navigation]')?.remove();
    const at=await owner.resolveRoute(route,{signal:proofController.signal});if(owner!==cursor||epoch!==sourceEpoch)return false;if(node!==undefined&&node!==at.node)throw Error('Source node and route disagree');
    const selectedRoute={root:route.root,slots:[...route.slots]};snapshot={edition:edition.id,name:record.name,selected:at.node,root:at.node,mode:'paged-judgments',occurrences:record.occurrences,uniqueNodes:record.uniqueNodes,path:at.path,route:selectedRoute,sourceSha256:record.sourceSha256,indexSha256:record.indexSha256};completeLink(record.name,selectedRoute,at.node);
    tools.querySelector('[data-occurrence-window-link]')?.remove();if(host.ProofAtlasPackedRoutes&&ownerRecord.uniqueNodes<=host.ProofAtlasPackedRoutes.limits.sourceNodes){const packed=host.ProofAtlasPackedRoutes.encode(selectedRoute.root,selectedRoute.slots),u=new URL(full.href);u.searchParams.set('view','occurrence');u.searchParams.delete('loading');u.searchParams.delete('route');u.hash='occurrence='+ownerRecord.indexSha256+'.'+packed.root+'.'+packed.depth+'.'+packed.slots;const a=el('a','Open occurrence geometry');a.href=u.pathname+u.search+u.hash;a.dataset.occurrenceWindowLink='';tools.append(a);}
+   if(at.kind===5)void showSubstitution(owner,selectedRoute,epoch,proofController.signal);
    void showClauseLink(owner,selectedRoute,epoch,proofController.signal);
    methodControl(owner,nativeOwner,ownerRecord,typing,selectedRoute,epoch);equalityControl(owner,ownerRecord,selectedRoute,epoch);if(at.kind===5)applicationControl(owner,ownerRecord,selectedRoute,epoch);moduleControl(owner,ownerRecord,selectedRoute,epoch);if(write){const u=new URL(full.href);u.searchParams.set('loading','paged');history.replaceState(null,'',u.pathname+u.search+u.hash);}
    const attachScope=async(base,{signal})=>{if(!I)return base;if(!scopeOwner)return I.unavailable(base,ownerScopeReason||'Scope evidence unavailable.');try{return await owner.run(()=>scopeOwner.run(()=>I.attach(base,owner.data,ownerRecord,id=>scopeOwner.get(id)),{signal}),{signal});}catch(error){if(error instanceof Q.ScopePageError||error instanceof I.ScopeInterfaceError)return I.unavailable(base,error.message);throw error;}};
@@ -90,6 +124,7 @@
    },{signal}),{signal});return attachScope(base,{signal});},runSource:(work,{signal})=>owner.run(work,{signal}),finishRefinementScene:attachScope,onSceneReady:(scene,local)=>{if(owner===cursor&&epoch===sourceEpoch){const keep=new Set(scene.nodes.map(n=>n.id));for(const path of presentations.keys())if(!keep.has(path))presentations.delete(path);if(host.ProofAtlasBoundaryLedger)host.ProofAtlasBoundaryLedger.mount(hostView,{scene,prepare:(scene,{signal})=>owner.run(()=>host.ProofAtlasBoundaryLedger.create(scene,owner.data),{signal}),onExpand:local?.expand,expansionCapacity:local?.capacity||0,onFocus:r=>view?.focus(r),onSource:(node,r)=>{if(owner===cursor&&epoch===sourceEpoch)selectOccurrence(node,true,true,r).catch(error=>status(error.message));}});else if(boundaryFailure)hostView.append(el('p','Hidden-region list unavailable. The source and proof diagram remain available.'));if(localFailure)hostView.append(el('p','Local expansion unavailable. Source navigation remains available.'));cacheText();status('Paged geometry · '+record.name+(scopeFailure?' · Scope evidence unavailable: '+scopeFailure:''));}},onSceneError:error=>{if(owner===cursor&&epoch===sourceEpoch){cacheText();status('Paged geometry unavailable: '+error.message);}},onProofOccurrence:(id,r)=>{if(owner===cursor&&nativeOwner===nativeCursor&&epoch===sourceEpoch)selectOccurrence(id,true,true,r).catch(error=>status(error.message));}});if(host.ProofAtlasSourceCorridor&&selectedRoute.slots.length){const panel=el('div'),Q=host.ProofAtlasSourceCorridor;hostView.append(panel);corridorControl=Q.control(panel,{prepare:signal=>Q.create(Q.paged(owner),{root:selectedRoute.root,slots:[]},selectedRoute,{signal}),onSource:(node,r)=>selectOccurrence(node,true,true,r).catch(error=>status(error.message)),isCurrent:()=>owner===cursor&&epoch===sourceEpoch});}if(host.ProofAtlasUseNavigation&&[6,7,8].includes(at.kind)){const panel=el('div'),U=host.ProofAtlasUseNavigation,P=host.ProofAtlasPackedRoutes;hostView.append(panel);const openUseSource=at=>{if(owner!==cursor||epoch!==sourceEpoch)return;const bytes=P.parse(at.route),slots=Array.from({length:at.route.depth},(_,i)=>(bytes[i>>2]>>((i%4)*2))&3);if(slots.length<=512)selectOccurrence(at.node,true,true,{root:at.route.root,slots}).catch(error=>status(error.message));else{const u=new URL(full.href);u.searchParams.set('view','occurrence');u.searchParams.delete('loading');u.searchParams.delete('route');u.hash='occurrence='+ownerRecord.indexSha256+'.'+at.route.root+'.'+at.route.depth+'.'+at.route.slots;location.assign(u.href);}};useNavigation=U.mount(panel,{owner:U.paged(owner,{scope:scopeOwner}),route:P.encode(selectedRoute.root,selectedRoute.slots),onSource:openUseSource});if(host.ProofAtlasUseInputs){const target=el('div'),I=host.ProofAtlasUseInputs;hostView.append(target);useInputControl=I.control(target,{navigation:panel,getUse:()=>useNavigation?.getWitness()||null,prepare:async(receipt,signal)=>{const proof=I.paged(owner,nativeOwner);try{return await I.find(proof,I.sourceUse(receipt),{signal});}finally{I.dispose(proof);}},onSource:openUseSource});}}cacheText();return true;
   }
   async function selectDeclaration(name,node,write=true,route){
+   substitutionSection.hidden=true;substitutionSection.replaceChildren();
    const epoch=++selectionEpoch;sourceEpoch++;useInputControl?.dispose();useInputControl=null;useNavigation?.dispose();useNavigation=null;resetModules();proofController?.abort();proofController=new AbortController();const signal=proofController.signal;view?.dispose();view=null;cursor?.dispose();cursor=null;nativeCursor?.dispose();nativeCursor=null;scopeCursor?.dispose();scopeCursor=null;scopeReason=null;resolve=null;snapshot=null;record=edition.declarations.find(r=>r.name===name);hostView.replaceChildren();cache.textContent='';title.textContent=name;tools.replaceChildren(full);const replay=compiledReplayLink(record);if(replay)tools.append(replay);completeLink(name,route,node);status('Loading source and native query indexes…',true);
    const descriptor=inventory.records.find(d=>d.edition===edition.id&&d.name===name);if(!record||!descriptor){status('Paged geometry is unavailable for this declaration. Use the complete view.');return false;}
    try{const opened=await P.open(descriptor,record,{signal});if(signal.aborted||epoch!==selectionEpoch){opened.dispose();return false;}cursor=opened;const nd=host.PROOF_ATLAS_NATIVE_PAGES?.records.find(d=>d.edition===edition.id&&d.name===name);if(!nd)throw Error('Native query index unavailable for this declaration');const native=await N.open(nd,opened.data,record,{signal,expectedDescriptors:opened.manifest.descriptors,useSiteQueryDescriptor:host.PROOF_ATLAS_USE_SITE_PAGES?.records.find(d=>d.edition===edition.id&&d.name===name),packetTypingDescriptor:host.PROOF_ATLAS_PACKET_TYPES?.records.find(d=>d.edition===edition.id&&d.name===name),packetQueryDescriptor:host.PROOF_ATLAS_PACKET_QUERY_PAGES?.records.find(d=>d.edition===edition.id&&d.name===name)});

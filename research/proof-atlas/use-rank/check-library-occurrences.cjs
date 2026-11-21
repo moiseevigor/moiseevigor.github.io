@@ -685,6 +685,21 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
    assert.equal(loaded.mode,'paged-judgments');
    assert.deepEqual(loaded.route,deep);
    assert.equal(loaded.path,atlas.path(largeData,deep));
+   const pagedRule=page.getByRole('region',{name:'Equality under a function'});
+   const sourceSlot=require('../../../public/js/proof-atlas-application-ports').sourceInput;
+   const callAnchor={node:30288,route:deep},fnAnchor=sourceSlot(largeData,callAnchor,5);
+   for(const [role,expected] of [['Proof of a = b',sourceSlot(largeData,callAnchor,6)],
+    ['s1',sourceSlot(largeData,fnAnchor,1)]]){
+    const link=pagedRule.getByRole('link',{name:role,exact:true});
+    const href=new URL(await link.evaluate(a=>a.href));
+    assert.equal(href.searchParams.get('loading'),'paged');
+    assert.equal(href.searchParams.get('route'),expected.route.root+':'+expected.route.slots.join('.'));
+    assert.equal(href.hash,'#expr-'+expected.node);
+   }
+   const destinationAnchor=sourceSlot(largeData,fnAnchor,1);
+   await pagedRule.getByRole('link',{name:'s1',exact:true}).click();
+   await page.waitForFunction(id=>window.ProofAtlasLibrary?.getSnapshot()?.selected===id,destinationAnchor.node);
+   assert.deepEqual(await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot().route),destinationAnchor.route);
    await page.close();
   }
   console.log('Occurrence switching and all 24 omitted references passed at 320 and 1280 pixels.');

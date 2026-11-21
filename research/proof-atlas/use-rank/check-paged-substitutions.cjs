@@ -17,12 +17,15 @@ async function check(d){
  assert.equal(createHash('sha256').update(raw).digest('hex'),d.indexSha256);
  const data=A.validateIndex(JSON.parse(raw),record),routes=A.routes(data);
  let chosen;
+ const calls=[];
  for(let row=0;row<data.kind.length;row++){
   if(data.kind[row]!==5)continue;
   const {head,args}=spine(data,row);
-  if(data.payloads[head].name!=='congrArg'||args.length!==6||data.kind[args[4]]!==5)continue;
+  if(data.payloads[head].name!=='congrArg'||args.length!==6)continue;
   const route=routes.route(row);
-  if(route.root===1 && (!chosen || route.slots.length>chosen.route.slots.length))chosen={node:row,route};
+  if(route.root!==1)continue;
+  calls.push({node:row,route});
+  if(data.kind[args[4]]===5 && (!chosen || route.slots.length>chosen.route.slots.length))chosen={node:row,route};
  }
  if(!chosen){console.log(d.name,'no eligible substitution on canonical proof routes');return false;}
  const fetcher=async file=>{
@@ -47,6 +50,32 @@ async function check(d){
   console.log(d.name,{stored:d.nodes,row:chosen.node,depth:chosen.route.slots.length,anchors:anchors.length,
    peakSourceRows:state.peakCachedNodes,pageLoads:state.pageLoads});
  }finally{cursor.dispose();}
+ const local=await P.open(d,record,{pageLimit:1,indexLimit:1,fetcher});
+ try{
+  const {pagedSubstitution}=require('../../../public/js/proof-atlas-omitted-references');
+  const result=await pagedSubstitution(local,chosen.route);
+  assert.deepEqual([result.left,result.right,result.fn,result.premise,result.fixed.prefix,...result.fixed.args],anchors.slice(1));
+  const state=local.state();
+  assert(state.peakCachedNodes<=256 && state.indexPages===1);
+  console.log('Derived from the call route:',state.pageLoads,'source page loads');
+  assert.equal(await pagedSubstitution(local,result.fixed.prefix.route),null);
+  assert.equal(await pagedSubstitution(local,result.fn.route),null);
+  const forms=new Map();
+  for(const at of calls){
+   const view=await pagedSubstitution(local,at.route);
+   const expected=[3,4,5,6].map(slot=>sourceInput(data,at,slot));
+   assert.deepEqual([view.left,view.right,view.fn,view.premise],expected);
+   const fn=expected[2],args=spine(data,fn.node).args;
+   const visible=Math.min(6,args.length);
+   const prefixRoute={root:fn.route.root,slots:fn.route.slots.concat(Array(visible).fill(0))};
+   assert.deepEqual(view.fixed.prefix,{node:A.walk(data,prefixRoute),route:prefixRoute});
+   assert.deepEqual(view.fixed.args,args.slice(args.length-visible).map((_,i)=>sourceInput(data,fn,args.length-visible+i+1)));
+   const kind=A.kinds[data.kind[fn.node]];
+   forms.set(kind,(forms.get(kind)??0)+1);
+  }
+  assert(local.state().peakCachedNodes<=256);
+  console.log('Distinct calls on canonical proof routes:',calls.length,Object.fromEntries(forms));
+ }finally{local.dispose();}
  const ordinary=await P.open(d,record,{fetcher});
  try{
   assert.equal(await ordinary.run(()=>A.walk(ordinary.data,chosen.route)),chosen.node);
