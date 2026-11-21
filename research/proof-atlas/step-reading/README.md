@@ -700,3 +700,17 @@ For two occurrences of the same compiled row under one root, compare the *neares
 The farthest-used binder can agree even when a nearer one changes. Of the application rows with conflicts, the farthest binder was constant across every occurrence in 4,530 of 7,239 published rows, 7,487 of 14,452 working rows and 204 of 6,122 AI rows. These counts are rows on which the former comparison missed every conflict. The census checked that the nearest target varied on every conflicting row. The small-proof oracle independently recovered the rows whose farthest target stayed constant.
 
 The interactive comparison now searches for one reference at the minimum free index. It skips closed branches and visits each row at each relevant nesting depth once, stopping early at index zero. After 8,192 inspected states it reports an unavailable comparison if the minimum has not been established. The same relative path is applied to both occurrence routes. The boundary study checked the witness against a full free-index inventory on its 443 visits. Chrome followed all 18 links across examples in CrossingData.crossing, CrossingData.mk.injEq and JacobiCore.Finv_mem in which the farthest target agreed and the nearest differed.
+
+### How many groups preserve the external binders?
+
+For a fixed proof root, group occurrences by compiled row and by the identities of all enclosing binders referenced by that row. The count is exact for this grouping criterion. A closed row contributes one group. For an open row, take its nearest used external index. For every binder row that can supply that index, count all occurrences of that binder under the proof root. Sum those counts over distinct supplying rows. Every occurrence of a supplying binder admits the same downward path to the expression. Different binder occurrences give different groups, and the nearest-binder result accounts for all farther references.
+
+| Edition | Expanded occurrences | Distinct rows | Groups retaining binder targets | Occurrences per group |
+|---|---:|---:|---:|---:|
+| Published SE(2) | 49,287,630 | 507,968 | 542,307 | 90.9 |
+| Working SE(2) | 669,273,380 | 1,210,547 | 1,332,413 | 502.3 |
+| Gödel AI sample | 82,340,980 | 268,137 | 286,759 | 287.1 |
+
+The two SE(2) editions overlap. Corpus totals conceal variation: in the published edition, CrossingData.crossing has the largest proportional increase, from 662 proof rows to 1,223 groups for 7,085 proof occurrences. In the working edition, JacobiConcrete.hamiltonianField_smooth rises from 1,788 rows to 5,817 groups. Counts concern the identity of external variables at the selected row. A reader must still retain occurrence routes to expand binders introduced inside the group. The ratios measure logical objects, not bytes or readability.
+
+The census command above now propagates possible supplying binder rows and their multiplicities. On every proof with at most 10,000 occurrences an independent expansion collected the complete set of external binder routes at each occurrence, grouped these signatures per row, and matched every row's group count.
