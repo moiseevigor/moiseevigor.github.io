@@ -224,6 +224,22 @@
   const premises=rule.slice(1,-1),n=premises.length;
   return {name,terms:args.slice(-n-count,-n),proofs:args.slice(-n),premises,conclusion:rule.at(-1)};
  }
+ function numeralComparison(data,at){
+  const args=namedArguments(data,at,'Mathlib.Meta.NormNum.isNat_lt_true',12);
+  if(!args)return null;
+  const values=[];
+  for(const i of [0,1]){
+   const term=args[5+i],literal=args[7+i],proof=args[9+i];
+   const payload=data.payloads[literal.node],w=namedArguments(data,proof,'Mathlib.Meta.NormNum.isNat_ofNat',5);
+   if(data.kind[literal.node]!==9 || payload.literalKind!=='natVal' || !w ||
+      w[0].node!==args[0].node || w[2].node!==term.node || w[3].node!==literal.node)return null;
+   values.push({term,literal,proof,text:String(payload.value)});
+  }
+  const comparison=args[11],refl=namedArguments(data,comparison,'Eq.refl',2);
+  if(!refl || !['Bool','Bool.false'].every((name,i)=>data.kind[refl[i].node]===4 && data.payloads[refl[i].node].name===name) ||
+     BigInt(values[0].text)>=BigInt(values[1].text))return null;
+  return {values,comparison,carrier:args[0]};
+ }
  function boundPremise(data,site){
   if(data.kind[site.node]!==0)return null;
   const binder=A.binding(data,site.route);
@@ -316,6 +332,18 @@
     '. ',link(t.reverse?'Operand equality (used in reverse)':'Operand equality',c.certificate),' · ',link('Function applied to both sides',c.context));
    return p;
   }
+  const numeral=numeralComparison(data,at);
+  if(numeral){
+   const panel=el('section'),details=el('details'),list=el('ul');
+   panel.dataset.numeralComparison='';
+   panel.append(el('h4',numeral.values.map(v=>v.text).join(' < ')));
+   details.append(el('summary','Numeral comparison evidence'));
+   for(const v of numeral.values){
+    const row=el('li');row.append(link(v.text,v.literal),' · ',link('Term',v.term),' · ',link('Numeral witness',v.proof));list.append(row);
+   }
+   details.append(list,link('Boolean comparison proof',numeral.comparison),' · ',link('Ordered type',numeral.carrier));
+   panel.append(details);container.append(panel);
+  }
   const selected=formulaTransport(data,at);
   const chainAt=selected?.change?selected.premise:at;
   const bound=selected?.change && boundPremise(data,chainAt);
@@ -334,7 +362,9 @@
    panel.append(el('h4',selected?.change?'Arithmetic before the rewrite':'Arithmetic inference'));
    inference.proofs.forEach((proof,i)=>{
     if(i)inputs.append(' and ');
-    inputs.append(link(inference.premises[i],proof));
+    const cert=numeralComparison(data,proof);
+    const label=cert?inference.premises[i]+' ('+cert.values.map(v=>v.text).join(' < ')+')':inference.premises[i];
+    inputs.append(link(label,proof));
    });
    inputs.append(' ⇒ '+inference.conclusion);
    if(inference.name==='Mathlib.Tactic.Linarith.mul_eq')
@@ -550,5 +580,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
+ if(common)module.exports={numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
 })(typeof window==='undefined'?globalThis:window);
