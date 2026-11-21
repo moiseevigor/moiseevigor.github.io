@@ -64,6 +64,23 @@ for(const edition of window.PROOF_ATLAS_LIBRARY.editions){
   assert.equal(A.walk(g,b.site.route),b.site.node);assert.equal(A.walk(g,b.domain.route),g.children[b.site.node][0]);
   const t=formula(g,b.domain);if(t){check(g,t);assert(caption(t).includes(t.symbol));}
  }
+ const sameSign=new Set();
+ for(const [k,b] of context.binders.slice(2).entries()){
+  assert.equal(A.walk(g,b.proofBinder.route),b.proofBinder.node);
+  const refs=require('./ranked-binder-uses.cjs')(g,b.proofBinder.route);
+  assert.equal(refs.total,[2n,2n,3n,2n][k]);
+  let hits=0;
+  for(let i=0n;i<refs.total;i++){
+   const site=refs.select(i);
+   assert.deepEqual(A.binding(g,site.route).route,b.proofBinder.route);
+   const c=require('../../../public/js/proof-atlas-omitted-references').applicationAtUse(g,site,{includePeers:false});
+   if(c?.label==='JacobiData.T1_T2_same_sign'){
+    assert.equal(c.slot,k+3);sameSign.add(JSON.stringify(c.call.route));hits++;
+   }
+  }
+  assert.equal(hits,1);
+ }
+ assert.equal(sameSign.size,1);
  const expanded=formula(g,at,6);check(g,expanded);
  const names=[];
  function inspect(t){if(t.variables)names.push(t.label);if(t.left)inspect(t.left);if(t.right)inspect(t.right);}

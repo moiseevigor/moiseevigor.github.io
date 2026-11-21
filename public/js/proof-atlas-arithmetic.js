@@ -58,11 +58,15 @@
  }
  function statement(data,at){
   const binders=[];
-  let focus=at;
+  let focus=at,proof=data.roots[1];
   if(at.route.root===0 && !at.route.slots.length){
    while(data.kind[focus.node]===7 && binders.length<128){
     const [domain,body]=data.children[focus.node],slots=focus.route.slots;
-    binders.push({site:focus,name:data.payloads[focus.node].binderName||'_',
+    const matched=proof!=null && data.kind[proof]===6 && data.children[proof][0]===domain &&
+     data.payloads[proof].binderInfo===data.payloads[focus.node].binderInfo;
+    const proofBinder=matched?{node:proof,route:{root:1,slots}}:null;
+    proof=matched?data.children[proof][1]:null;
+    binders.push({proofBinder,site:focus,name:data.payloads[focus.node].binderName||'_',
      domain:{node:domain,route:{root:0,slots:slots.concat(0)}}});
     focus={node:body,route:{root:0,slots:slots.concat(1)}};
    }
@@ -115,6 +119,40 @@
      const t=formula(data,b.domain);
      const name=t?caption(t):data.kind[b.domain.node]===4?data.payloads[b.domain.node].name:'e'+b.domain.node;
      const row=el('li');row.append(link(b.name,b.site),' : ',link(name,b.domain));rows.append(row);
+     if(!t?.relation || !b.proofBinder)continue;
+     const uses=el('details'),content=el('div');
+     uses.dataset.hypothesisUses=b.name;
+     uses.append(el('summary','Uses of '+b.name+' in the proof'),content);row.append(uses);
+     uses.ontoggle=()=>{
+      if(!uses.open || content.childNodes.length)return;
+      const binder=b.proofBinder,body=data.children[binder.node][1];
+      const budget={maxStates:8192,maxWork:16384,useSupport:false};
+      const count=(options)=>host.ProofAtlasRecursiveInputs.countReferences(data,body,0,{...budget,...options});
+      const first=count({firstIfPresent:true});
+      content.append(link('Proof binder',binder));
+      if(first.status!=='counted'){content.append(' · Count unavailable within the traversal limit');return;}
+      const total=BigInt(first.occurrences);
+      content.append(' · '+total+' compiled reference'+(total===1n?'':'s'));
+      const list=el('ol');
+      for(let n=1n;n<=total && n<=8n;n++){
+       const result=n===1n?first:count({ordinal:n});
+       if(result.status!=='counted'){content.append(' · Further references unavailable within the traversal limit');break;}
+       const w=result.witness,route={root:1,slots:binder.route.slots.concat(1,w.slots)},site={node:w.node,route};
+       const binding=A.binding(data,route);
+       if(!binding || binding.node!==binder.node || String(binding.route.slots)!==String(binder.route.slots))
+        throw Error('Hypothesis reference scope mismatch');
+       const call=host.ProofAtlasOmittedReferences.applicationAtUse(data,site,{includePeers:false}),entry=el('li');
+       entry.append(link(b.name,site),' → ');
+       if(call)entry.append(link(call.label+' · '+(call.slot?'argument '+call.slot+' of '+call.arity:'function position'),call.call));
+       else{
+        const parent={root:1,slots:route.slots.slice(0,-1)},node=A.walk(data,parent),kind=A.kinds[data.kind[node]];
+        entry.append(link(kind+'.'+A.fields[kind][route.slots.at(-1)],{node,route:parent}));
+       }
+       list.append(entry);
+      }
+      if(list.childElementCount)content.append(list);
+      if(total>8n)content.append('First eight shown. Open the proof binder for all references.');
+     };
     }
    };
    panel.append(context);
