@@ -5,7 +5,7 @@
  const A=common?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData;
  const binaryTypes=['left type','right type','result type','instance'];
  const operators=new Map([
-  ...[['HPow.hPow','^'],['HAdd.hAdd','+'],['HSub.hSub','−'],['HMul.hMul','×'],['HDiv.hDiv','/']]
+  ...[['HPow.hPow','^'],['HAdd.hAdd','+'],['HSub.hSub','−'],['HMul.hMul','×'],['HDiv.hDiv','/'],['HMod.hMod','%']]
    .map(([name,symbol])=>[name,{symbol,parameters:binaryTypes}]),
   ['Or',{symbol:'∨',parameters:[],logical:true}],
   ['And',{symbol:'∧',parameters:[],logical:true}],
@@ -1362,6 +1362,11 @@
    panel.append(context);
   }
   panel.append(line);
+  if(tree.name==='HMod.hMod'){
+   const operands=el('p');
+   operands.append(link('Dividend',tree.left.site),' · ',link('Modulus',tree.right.site));
+   panel.append(operands);
+  }
   if(truncated){
    const toggle=el('button','Expand formula');toggle.type='button';toggle.setAttribute('aria-expanded','false');
    let expanded=false;

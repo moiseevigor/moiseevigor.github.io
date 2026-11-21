@@ -5,7 +5,7 @@ const {spine}=require('../../../public/js/proof-atlas-elimination');
 const {formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses,contraryJoins}=require('../../../public/js/proof-atlas-arithmetic');
 const ports=require('./distinct-call-ports.cjs');
 global.window={};require('../../../public/data/proof-atlas/goedel-sample-manifest');
-const arities={'HPow.hPow':6,'HMul.hMul':6,'HSub.hSub':6,'HAdd.hAdd':6,'HDiv.hDiv':6,Or:2,And:2,Eq:3,Ne:3,'LE.le':4,'GE.ge':4,'LT.lt':4,'Real.sqrt':1,abs:4},counts={},examples={};
+const arities={'HPow.hPow':6,'HMul.hMul':6,'HSub.hSub':6,'HAdd.hAdd':6,'HDiv.hDiv':6,'HMod.hMod':6,Or:2,And:2,Eq:3,Ne:3,'LE.le':4,'GE.ge':4,'LT.lt':4,'Real.sqrt':1,abs:4},counts={},examples={};
   function check(g,t){
    assert.equal(A.walk(g,t.site.route),t.site.node);
    if(t.variables){
@@ -28,17 +28,25 @@ const arities={'HPow.hPow':6,'HMul.hMul':6,'HSub.hSub':6,'HAdd.hAdd':6,'HDiv.hDi
    check(g,t.left);if(t.right)check(g,t.right);
   }
 let absent=0,nested=0;
-const joins=[],orderProofs=[],rewriteCoverage=[];
+const joins=[],orderProofs=[],rewriteCoverage=[],remainderCoverage=[];
 for(const d of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations.filter(d=>d.kind==='theorem'&&d.bodyAvailable)){
  const raw=z.gunzipSync(fs.readFileSync('.'+d.indexFile));
  assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),d.indexSha256);
  const g=A.validateIndex(JSON.parse(raw),d),seen=new Set();
+ let remainders=0;
  const visited=new Set(),stack=[{node:g.roots[1],parent:null}],coverage={proof:d.name,casts:0,left:0,right:0,examples:[]};
  while(stack.length){
   const item=stack.pop(),node=item.node;
   if(visited.has(node))continue;
   visited.add(node);
   const spineAtNode=spine(g,node);
+  if(spineAtNode.args.length===6 && g.payloads[spineAtNode.head]?.name==='HMod.hMod'){
+   const slots=[];
+   for(let pos=item;pos.parent;pos=pos.parent)slots.push(pos.slot);
+   const t=formula(g,{node,route:{root:1,slots:slots.reverse()}});
+   assert.equal(t.name,'HMod.hMod');check(g,t);
+   remainders++;
+  }
   if(spineAtNode.args.length===4 && g.payloads[spineAtNode.head]?.name==='Eq.mp'){
    coverage.casts++;
    const slots=[];
@@ -57,6 +65,21 @@ for(const d of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations.filter(d=>d.kin
   g.children[node].forEach((child,slot)=>stack.push({node:child,parent:item,slot}));
  }
  rewriteCoverage.push(coverage);
+ remainderCoverage.push({proof:d.name,rows:remainders});
+ if(d.name==='lean_workbook_plus_39831'){
+  const route={root:0,slots:[1,1,1,1,0]},site={node:A.walk(g,route),route};
+  const equation=formula(g,site,6);
+  check(g,equation);
+  assert.equal(equation.name,'Eq');
+  assert.equal(equation.left.name,'HAdd.hAdd');
+  const remainder=equation.left.right;
+  assert.equal(remainder.name,'HMod.hMod');
+  assert.equal(remainder.left.label,'OfNat.ofNat(1)');
+  assert.equal(remainder.right.name,'HAdd.hAdd');
+  assert.equal(remainder.parameters.length,4);
+  const incomplete={node:g.children[remainder.site.node][0],route:{root:0,slots:remainder.site.route.slots.concat(0)}};
+  assert.equal(formula(g,incomplete),null);
+ }
  const order=closingOrderArgument(g);
  if(order){
   for(const key of ['goal','proof','domain','close','operand','evidence'])assert.equal(A.walk(g,order[key].route),order[key].node);
@@ -198,4 +221,4 @@ for(const edition of window.PROOF_ATLAS_LIBRARY.editions){
   ['LE.le','HMul.hMul','Real.sqrt','abs','HDiv.hDiv']);
  riccati.push({edition:edition.id,proof:d.name,at,call});
 }
-console.log(JSON.stringify({rewriteCoverage,counts,absent,nested,examples,riccati,joins,orderProofs},null,2));
+console.log(JSON.stringify({remainderCoverage,rewriteCoverage,counts,absent,nested,examples,riccati,joins,orderProofs},null,2));

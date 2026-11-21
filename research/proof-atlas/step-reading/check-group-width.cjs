@@ -295,6 +295,23 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
           },dest.searchParams.get('route'));
         }
       }
+      const modURL=new URL(joinURL);
+      modURL.searchParams.set('proof','lean_workbook_plus_39831');
+      modURL.searchParams.set('route','0:1.1.1.1.0');modURL.hash='expr-90';
+      await page.goto(modURL.href);
+      const formula=page.locator('[data-arithmetic-formula] .pl-arithmetic-expression');
+      await formula.getByRole('link',{name:'HMod.hMod application',exact:true}).click();
+      await page.waitForFunction(()=>window.ProofAtlasLibrary?.getSnapshot()?.selected===87);
+      const remainderURL=page.url();
+      for(const [node,suffix] of [[79,'0.1'],[86,'1']]){
+        const operand=page.locator('[data-arithmetic-formula]').getByRole('link',{name:node===79?'Dividend':'Modulus',exact:true});
+        await operand.click();
+        await page.waitForFunction(({node,suffix})=>{
+          const s=window.ProofAtlasLibrary?.getSnapshot();
+          return s?.selected===node && s.route.root===0 && s.route.slots.join('.')==='1.1.1.1.0.0.1.1.'+suffix;
+        },{node,suffix});
+        await page.goto(remainderURL);
+      }
       await page.close();
     }
     console.log('Verified complete and paged Riccati and AI premise selections at 360 and 1280 pixels.');
