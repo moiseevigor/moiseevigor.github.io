@@ -48,6 +48,7 @@ function count(g,target,relative){
  return {uses,introductions:owners.reduce((s,x)=>s+x.occurrences,0n),owners};
 }
 // Independent control: skip branches without a target, resolve each retained route directly.
+const work=[];
 function enumerate(g,target,relative){
  const root=g.roots[1],reachable=new Uint8Array(root+1);
  reachable[target]=1;
@@ -66,6 +67,16 @@ function enumerate(g,target,relative){
  }
  for(const [row,v] of owners){
   const model=binderCopies(g,v.reference);
+  if(process.argv.includes('--profile')){
+   const reached=new Set(),pending=[root];
+   while(pending.length){
+    const n=pending.pop();
+    if(n<=row||reached.has(n))continue;
+    reached.add(n);
+    for(const child of g.children[n])pending.push(child);
+   }
+   work.push({span:root-row,visited:reached.size});
+  }
   assert.deepEqual(model.select(model.rank).reference,v.reference);
   assert.throws(()=>model.select(model.total),RangeError);
   // DFS above visits the higher child first. Reverse the insertion order for lower-child-first rank.
@@ -93,7 +104,7 @@ for(const w of witnesses){
  results.push({proof:d.name,row:target,relative,...stats});
 }
 assert(results.length>0);
-console.log(JSON.stringify(results,(_,v)=>typeof v==='bigint'?String(v):v,2));
+
 
 // A single lambda row is reached by 2^128 distinct paths in this small compiled-shaped DAG.
 const stress={roots:[null,130],kind:[0,3,6],children:[[],[],[1,0]],payloads:[{index:0},{},{binderName:'x'}]};
@@ -106,3 +117,34 @@ for(const rank of [0n,1n,2n**97n+13n,model.rank]){
  assert.deepEqual(hit.binder.route.slots,[...rank.toString(2).padStart(128,'0')].map(Number));
  assert.deepEqual(A.binding(stress,hit.reference.route),hit.binder);
 }
+
+// Place a large disjoint tree between the shared proof and its new root in topological order.
+const sparse={kind:stress.kind.slice(),children:stress.children.slice(),payloads:stress.payloads.slice()};
+let layer=[];
+for(let i=0;i<100002;i++){
+ layer.push(sparse.kind.length);sparse.kind.push(9);sparse.children.push([]);sparse.payloads.push({literalKind:'natVal',value:String(i)});
+}
+while(layer.length>1){
+ const next=[];
+ for(let i=0;i<layer.length;i+=2){
+  if(i+1===layer.length){next.push(layer[i]);continue;}
+  next.push(sparse.kind.length);sparse.kind.push(5);sparse.children.push([layer[i],layer[i+1]]);sparse.payloads.push({});
+ }
+ layer=next;
+}
+const root=sparse.kind.length;sparse.roots=[layer[0],root];
+sparse.kind.push(5);sparse.children.push([130,130]);sparse.payloads.push({});
+const sparseSite={node:0,route:{root:1,slots:[1,...last.route.slots]}};
+const large=binderCopies(sparse,sparseSite);
+assert.equal(large.visited,129);assert.equal(large.total,2n**129n);
+assert.deepEqual(large.select(large.rank).reference,sparseSite);
+for(const rank of [0n,(1n<<128n)+137n,large.total-1n]){
+ const hit=large.select(rank);
+ assert.deepEqual(hit.binder.route.slots,[...rank.toString(2).padStart(129,'0')].map(Number));
+ assert.deepEqual(A.binding(sparse,hit.reference.route),hit.binder);
+}
+sparse.children[root]=[layer[0],130];
+assert.equal(binderCopies(sparse,sparseSite),null);
+const span=work.reduce((a,x)=>a+x.span,0),visited=work.reduce((a,x)=>a+x.visited,0);
+const profile={results,work:{queries:work.length,span,visited},synthetic:{span:root-2,visited:large.visited,total:large.total}};
+console.log(JSON.stringify(process.argv.includes('--profile')?profile:results,(_,v)=>typeof v==='bigint'?String(v):v,2));

@@ -301,12 +301,28 @@
   const bound=boundPremise(data,site);
   if(!bound)return null;
   const target=bound.binder.node,root=data.roots[site.route.root];
-  if(root-target>200000)return null;
+  const limit=200000,span=root-target;
   const ways=new Map([[target,1n]]);
-  for(let n=target+1;n<=root;n++){
+  function countRow(n){
    let count=0n;
    for(const c of data.children[n])count+=ways.get(c)||0n;
    if(count)ways.set(n,count);
+  }
+  let visited=span;
+  if(span<=limit){
+   for(let n=target+1;n<=root;n++)countRow(n);
+  }else{
+   // Child row numbers strictly decrease. Rows below the binder cannot reach it.
+   const pending=[root],above=new Set();
+   while(pending.length){
+    const n=pending.pop();
+    if(n<=target || above.has(n))continue;
+    if(above.size===limit)return null;
+    above.add(n);
+    for(const child of data.children[n])if(child>target)pending.push(child);
+   }
+   visited=above.size;
+   for(const n of [...above].sort((a,b)=>a-b))countRow(n);
   }
   const total=ways.get(root),suffix=site.route.slots.slice(bound.binder.route.slots.length);
   let node=root,rank=0n;
@@ -331,7 +347,7 @@
    return {binder:{node:target,route:{root:site.route.root,slots}},
     reference:{node:site.node,route:{root:site.route.root,slots:slots.concat(suffix)}}};
   }
-  return {total,rank,select};
+  return {total,rank,select,visited};
  }
  function equalityChain(data,at,expected){
   const args=namedArguments(data,at,'Eq.trans',6);
