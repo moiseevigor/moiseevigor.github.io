@@ -2,7 +2,7 @@
 const fs=require('node:fs'),z=require('node:zlib'),crypto=require('node:crypto'),assert=require('node:assert/strict');
 const A=require('../../../public/js/proof-atlas-library-data');
 const {spine}=require('../../../public/js/proof-atlas-elimination');
-const {boundPremise,zeroDifference,logicalInference,arithmeticInference,numeralComparison}=require('../../../public/js/proof-atlas-arithmetic');
+const {binderArgument,statementOrigin,boundPremise,zeroDifference,logicalInference,arithmeticInference,numeralComparison}=require('../../../public/js/proof-atlas-arithmetic');
 global.window={};require('../../../public/data/proof-atlas/goedel-sample-manifest');
 const edition=window.PROOF_ATLAS_AI_SAMPLE.edition;
 const report=fs.readFileSync(0,'utf8').trim().split('\n').map(line=>JSON.parse(line)).find(x=>x.edition===edition.id);
@@ -18,6 +18,7 @@ const equivalenceUses={},logicalExamples={},logicalProofs=new Set();
 const folded=process.argv.includes('--fold-zero');
 let foldedBranches=0;const zeroProducts={};
 const scopes={visits:0,variableRows:0,binderOccurrences:0,ambiguousVariableRows:0,ambiguousInferenceRows:0,examples:[],inferenceExamples:[]};
+const endpoints={statement:0,localLambda:0,letValue:0,otherBinder:0,closedAtStatement:0,closedInScope:0,scopeClosures:[],localCalls:{},callExamples:{},examples:{}};
 let fullyRead=0;
 let steps=0,leaves=0,maxDepth=0,longest;
 for(const d of edition.declarations){
@@ -35,7 +36,8 @@ for(const d of edition.declarations){
   longest={proof:d.name,depth,path:path.reverse()};
  }
  for(const {premise} of selected){
-  let unresolved=0;
+  let unresolved=0,statementInputs=0,scopeInputs=0;
+  const localInputs=new Map();
   const todo=[{site:premise,depth:0,parent:null}];
   while(todo.length){
    const item=todo.pop(),{site,depth}=item;
@@ -50,6 +52,25 @@ for(const d of edition.declarations){
      if(((kind===6||kind===7)&&slot===1 || kind===8&&slot===2) && index--===0){owner={node:binderNode,route:{root,slots}};break;}
     }
     assert.deepEqual(owner,b.binder);
+    const origin=statementOrigin(g,b);
+    const kind=origin?'statement':b.value?'letValue':g.kind[b.binder.node]===6?'localLambda':'otherBinder';
+    endpoints[kind]++;
+    if(origin){
+     assert.deepEqual(origin.site.route,{root:0,slots:b.binder.route.slots});
+     assert.equal(A.walk(g,origin.domain.route),b.domain.node);
+     assert.equal(A.walk(g,origin.site.route),origin.site.node);
+     statementInputs++;
+    }
+    const call=kind==='localLambda'?binderArgument(g,b):null;
+    if(call){
+     assert.equal(spine(g,call.call.node).args[call.slot-1],b.binder.node);
+     assert.deepEqual(call.call.route.slots.concat(Array(call.arity-call.slot).fill(0),1),b.binder.route.slots);
+     endpoints.callExamples[call.label]??={proof:d.name,site,links:[b.binder,b.domain,call.call]};
+     endpoints.localCalls[call.label]=(endpoints.localCalls[call.label]||0)+1;
+    }
+    if(kind==='localLambda')localInputs.set(b.binder.route.slots.join('.'),{binder:b.binder,name:b.name});
+    if(origin || kind==='localLambda')scopeInputs++;
+    if(!endpoints.examples[kind])endpoints.examples[kind]={proof:d.name,at:site,name:b.name,origin,call,binder:b.binder,domain:b.domain};
     const key=b.binder.route.slots.join('.');
     introductions.add(key);scopes.visits++;
     if(!variableRows.has(site.node))variableRows.set(site.node,new Map());
@@ -161,6 +182,10 @@ for(const d of edition.declarations){
    });
   }
   if(!unresolved)fullyRead++;
+  if(unresolved===statementInputs)endpoints.closedAtStatement++;
+  if(unresolved===scopeInputs){
+   endpoints.closedInScope++;endpoints.scopeClosures.push({proof:d.name,premise,statementInputs,local:[...localInputs.values()]});
+  }
  }
  scopes.binderOccurrences+=introductions.size;scopes.variableRows+=variableRows.size;
  scopes.ambiguousInferenceRows+=conflicts.size;
@@ -174,4 +199,4 @@ for(const d of edition.declarations){
 assert.equal(longest.depth,maxDepth);
 assert.equal(certificateVisits,frontier['Mathlib.Meta.NormNum.isNat_lt_true']);
 if(linarithOnly && !baseline)assert.equal(certificates.length,272);
-console.log(JSON.stringify({scopes,uniqueLeaves,foldedBranches,zeroProducts,zeroVisits,zeroExamples,fullyRead,equivalenceUses,logicalExamples,logicalProofs:logicalProofs.size,signExamples,certificateVisits,certificates,inequalities,uniqueSteps,roots:roots.length,steps,leaves,maxDepth,rules,frontier,longest},null,2));
+console.log(JSON.stringify({endpoints,scopes,uniqueLeaves,foldedBranches,zeroProducts,zeroVisits,zeroExamples,fullyRead,equivalenceUses,logicalExamples,logicalProofs:logicalProofs.size,signExamples,certificateVisits,certificates,inequalities,uniqueSteps,roots:roots.length,steps,leaves,maxDepth,rules,frontier,longest},null,2));

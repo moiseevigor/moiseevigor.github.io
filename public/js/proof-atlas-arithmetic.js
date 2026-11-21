@@ -296,6 +296,18 @@
   return {site,binder,name:payload.binderName||payload.declName||'Bound variable',domain:field(0),
    value:data.kind[binder.node]===8?field(1):null};
  }
+ function statementOrigin(data,bound){
+  if(bound.binder.route.root!==1 || !bound.binder.route.slots.every(k=>k===1))return null;
+  const {binders}=statement(data,{node:data.roots[0],route:{root:0,slots:[]}});
+  const b=binders[bound.binder.route.slots.length];
+  return b?.proofBinder?.node===bound.binder.node?b:null;
+ }
+ function binderArgument(data,bound){
+  if(data.kind[bound.binder.node]!==6||bound.binder.route.slots.at(-1)!==1)return null;
+  const calls=common?require('./proof-atlas-omitted-references'):host.ProofAtlasOmittedReferences;
+  const call=calls.applicationAtUse(data,bound.binder,{includePeers:false});
+  return call?.slot>0?call:null;
+ }
  // Number the occurrences of this binder row under the same root in child order.
  function binderCopies(data,site){
   const bound=boundPremise(data,site);
@@ -440,6 +452,21 @@
    return p;
   }
   if(data.kind[at.node]===0){
+   const binding=boundPremise(data,at),origin=binding && statementOrigin(data,binding);
+   if(origin){
+    const panel=el('section');panel.dataset.statementOrigin='';
+    panel.append(el('h4','Introduced in the theorem statement'),link(origin.name,origin.site),' · ',
+     link(caption(formula(data,origin.domain,3,true)),origin.domain));container.append(panel);
+   }
+   if(binding && !origin && at.route.root===1){
+    const call=binderArgument(data,binding);
+    if(call){
+     const panel=el('section');panel.dataset.localArgumentOrigin='';
+     panel.append(el('h4','Introduced inside a proof argument'),link(binding.name,binding.binder),' has type ',
+      link(caption(formula(data,binding.domain,3,true)),binding.domain),'. Its function is argument '+call.slot+' of '+call.arity+' to ',link(call.label,call.call),'.');
+     container.append(panel);
+    }
+   }
    const copies=el('details');copies.dataset.binderCopies='';
    copies.append(el('summary','Occurrences of this binder'));
    copies.ontoggle=()=>{
@@ -740,5 +767,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={binderCopies,zeroDifference,logicalInference,numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
+ if(common)module.exports={binderArgument,statementOrigin,binderCopies,zeroDifference,logicalInference,numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
 })(typeof window==='undefined'?globalThis:window);
