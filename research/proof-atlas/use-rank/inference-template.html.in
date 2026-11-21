@@ -19,7 +19,7 @@
 <math display="block" aria-label="one over a plus one, plus one over b plus one, plus one over a plus b, equals three halves"><mrow><mfrac><mn>1</mn><mrow><mi>a</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mi>b</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>+</mo><mfrac><mn>1</mn><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></mfrac><mo>=</mo><mfrac><mn>3</mn><mn>2</mn></mfrac></mrow></math>
 <p>into the polynomial equation below. The call establishes equality of the two propositions.</p></div><p id="result" class="formula"></p><div id="result-inputs"></div><h3>Recorded uses of this result</h3><div id="consumers"></div></section>
 <details id="details"><summary>Function, types and values</summary><div id="other"></div></details>
-<section id="trace"><h2>Inspect a variable use</h2><p id="context"></p><form class="choice"><label>Use <input id="ordinal" required type="number" min="1" step="1"></label><button>Locate</button></form><p aria-live="polite"><a id="occurrence">Open compiled occurrence</a></p></section>
+<section id="trace"><h2>Inspect a variable use</h2><p id="context"></p><form class="choice"><label>Use <input id="ordinal" required type="number" min="1" step="1"></label><button>Locate</button></form><p id="destination" aria-live="polite"></p></section>
 <details id="sharing"><summary>Compare occurrences of a shared application in this theorem</summary>
 <label>Example <select id="sharing-position"></select></label>
 <form id="sharing-form" class="choice"><label>Occurrence <input id="sharing-number" required inputmode="numeric" pattern="[1-9][0-9]*"></label><span id="sharing-total"></span><button>Trace</button></form>
@@ -120,8 +120,9 @@ el('sharing-position').onchange=()=>{
 };
 function locate(n){
  const hit=selectBranch(active.table,BigInt(port.offset)+n);
- const a=el('occurrence');a.href=address({node:hit.node,route:{root:active.call.route.root,slots:hit.slots}});
- a.textContent='Open use '+n+' of '+port.count+' in input '+port.slot+' · expression '+hit.node;
+ const a=link('Open use '+n+' of '+port.count+' in input '+port.slot+' · expression '+hit.node,
+  {node:hit.node,route:{root:active.call.route.root,slots:hit.slots}});
+ a.id='occurrence';el('destination').replaceChildren(a);
 }
 function choose(p){
  el('trace').hidden=false;port=p;el('context').textContent='Input '+p.slot+' contains '+p.count+' direct uses of '+active.variable+'.';
@@ -463,7 +464,7 @@ function show(i){
  const first=active.ports.find(p=>p.role==='proof' && BigInt(p.count))||active.ports.find(p=>BigInt(p.count));
  el('trace').hidden=!first;
  if(first)choose(first);
- else{port=null;el('intro').append(' This application contains no direct uses of '+active.variable+'.');el('occurrence').removeAttribute('href');}
+ else{port=null;el('intro').append(' This application contains no direct uses of '+active.variable+'.');el('destination').replaceChildren();}
  if(!active.ports.some(p=>p.role==='proof'))el('premises').textContent='This application takes no proof-valued argument.';
 }
 const groups=new Map();
@@ -499,7 +500,7 @@ function follow(){
   const box=document.querySelector('.premise[data-slot="'+slot+'"]');
   box.dataset.selected='';box.tabIndex=-1;box.focus();
   if(BigInt(target.count))choose(target);
-  else{port=null;el('trace').hidden=true;el('occurrence').removeAttribute('href');}
+  else{port=null;el('trace').hidden=true;el('destination').replaceChildren();}
  }
 }
 el('proof').onchange=e=>{const x=examples[Number(e.target.value)];location.hash=x.source.indexSha256+'-'+x.callId;};

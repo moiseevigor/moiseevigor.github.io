@@ -4,7 +4,7 @@
 </style><main><h1>Tracing <i>J</i> in the Riccati bound</h1><p>The compiled proof of Lemma 3.2 refers to its Jacobi data 2,204 times. Choose a use to follow it through the proof.</p>
 <section aria-labelledby="estimate"><h2 id="estimate">How is the AM–GM estimate proved and used?</h2><div class="inference" id="inference"></div><p class="note">Each numbered use opens the corresponding occurrence below. Counts refer to the compiled arguments of this application.</p></section><section aria-labelledby="flow-title"><h2 id="flow-title">Which local results feed the conclusion?</h2><p>Select a local result to trace its own inputs. Each count is the number of direct references in the selected proof expression.</p><div id="proof-flow" aria-live="polite"></div></section><details id="definitions"><summary>Which hypotheses build the six local steps?</summary>
 <p>Each row links a local statement to its proof. The inputs shown are enclosing variables used directly in the proof that are absent from the statement.</p><div id="local-steps"></div></details><form><label>Use <input required type="number" min="1" max="2204" value="1102" id="number"></label><button>Trace</button><button type="button" id="prev">Previous</button><button type="button" id="next">Next</button></form>
-<h2 id="title" aria-live="polite"></h2><p class="note">Each bar spans all 2,204 uses in Lean field order. The highlighted interval contains the selected use. Below one pixel its mark is enlarged for visibility.</p><div id="plot"></div><p><a id="link">Open this occurrence in the compiled proof</a></p><details><summary>Full field path and packet identity</summary><code id="address"></code></details></main>
+<h2 id="title" aria-live="polite"></h2><p class="note">Each bar spans all 2,204 uses in Lean field order. The highlighted interval contains the selected use. Below one pixel its mark is enlarged for visibility.</p><div id="plot"></div><p id="destination"></p><details><summary>Full field path and packet identity</summary><code id="address"></code></details></main>
 <script>/* INSERT SELECTOR */
 const packet=/* INSERT PACKET */;
 const el=id=>document.getElementById(id),input=el('number'),total=BigInt(packet.table.total);
@@ -27,7 +27,9 @@ function show(n){
  }
  const url=new URL('https://moiseevigor.github.io/projects/proof-atlas/library/');
  url.search=new URLSearchParams({edition:packet.edition,proof:packet.name,route:packet.root+':'+hit.slots.join('.')});url.hash='expr-'+hit.node;
- el('link').href=url.href;el('address').textContent='root.value.'+labels.join('.')+' · #'+hit.node+' · SHA-256 '+packet.hash;
+ const anchor=document.createElement('a');anchor.id='link';anchor.href=url.href;
+ anchor.textContent='Open this occurrence in the compiled proof';el('destination').replaceChildren(anchor);
+ el('address').textContent='root.value.'+labels.join('.')+' · #'+hit.node+' · SHA-256 '+packet.hash;
 }
 document.querySelector('form').onsubmit=e=>{e.preventDefault();if(!/^\d+$/.test(input.value)){input.setCustomValidity('Enter a whole use number.');input.reportValidity();return;}show(BigInt(input.value));};
 input.oninput=()=>input.setCustomValidity('');el('prev').onclick=()=>show(active-1n);el('next').onclick=()=>show(active+1n);const proofLink=({route,node},label)=>{
