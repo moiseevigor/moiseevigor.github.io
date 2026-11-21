@@ -86,30 +86,47 @@
    for(const fork of host.PROOF_ATLAS_CLAUSE_FORKS||[]){
     if(fork.edition!==call.edition || fork.digest!==record.indexSha256 || fork.declaration!==record.name)continue;
     const selected=fork.groups.find(g=>g.use.path===path || g.target.path===path || g.clause.path===path);
-    if(path && path!==fork.binder.path && !selected)continue;
+    const domain=fork.binder.path+'0';
+    const clausePath=steps=>domain+Array.from(steps,side=>side==='L'?'01':'1').join('');
+    const prefixes=new Set();
+    for(const g of fork.groups)for(let n=1;n<=g.steps.length;n++)prefixes.add(g.steps.slice(0,n));
+    if(path && path!==fork.binder.path && !selected && ![...prefixes].some(p=>clausePath(p)===path))continue;
     const panel=el('section'),tree=el('ul');
     panel.dataset.clauseFork=fork.binder.path;tree.className='pl-reference-tree';
     panel.append(el('h4','Where the two clauses are used'),addressLink(fork.name,fork.binder.node,fork.binder.path),tree);
-    for(const step of ['L','R']){
-     const groups=fork.groups.filter(g=>g.steps===step),clause=groups[0].clause;
-     let head=clause.node;
-     while(data.kind[head]===5)head=data.children[head][0];
-     const name=data.kind[head]===4?data.payloads[head].name:null;
-     const label=(step==='L'?'Left':'Right')+' clause'+(name?' · '+name:'');
-     const row=el('li'),children=el('ul');
-     row.append(addressLink(label,clause.node,clause.path),children);tree.append(row);
-     for(const g of groups){
+    function drawUses(parent,steps){
+     for(const g of fork.groups.filter(g=>g.steps===steps)){
+      if(g.clause.path!==clausePath(steps) || A.walk(data,{root:1,slots:Array.from(g.clause.path,Number)})!==g.clause.node)
+       throw Error('Clause fork domain mismatch');
       const item=el('li');
-      item.append(addressLink('Projection',g.use.node,g.use.path),' → ',addressLink(g.receiver,g.target.node,g.target.path));
+      item.append(addressLink(steps?'Projection':'Whole hypothesis',g.use.node,g.use.path),' → ',
+       addressLink(g.receiver,g.target.node,g.target.path));
       if(g.count>1)item.append(' · '+g.count+' uses (first shown)');
-      children.append(item);
+      parent.append(item);
+     }
+     for(const side of ['L','R']){
+      const next=steps+side;
+      if(!prefixes.has(next))continue;
+      const path=clausePath(next),node=A.walk(data,{root:1,slots:Array.from(path,Number)});
+      let head=node;
+      while(data.kind[head]===5)head=data.children[head][0];
+      const name=data.kind[head]===4?data.payloads[head].name:null;
+      const label=(side==='L'?'Left':'Right')+' clause'+(name?' · '+name:'');
+      const row=el('li'),children=el('ul');
+      row.append(addressLink(label,node,path),children);parent.append(row);
+      drawUses(children,next);
      }
     }
+    drawUses(tree,'');
     for(const link of panel.querySelectorAll('a')){
      const target=new URL(link.href);
      if(target.searchParams.get('route')==='1:'+call.route.slots.join('.'))link.setAttribute('aria-current','location');
     }
-    container.append(panel);
+    if(host.PROOF_ATLAS_CLAUSE_USES?.some(f=>f.indexSha256===record.indexSha256) && (!path || path===fork.binder.path)){
+     const details=el('details');details.open=path===fork.binder.path;
+     details.append(el('summary','Trace the conjunction through the compiled proof'),panel);
+     container.append(details);
+    }else container.append(panel);
    }
   }
   const flow=host.PROOF_ATLAS_CLAUSE_USES?.find?.(item=>item.indexSha256===record.indexSha256);
