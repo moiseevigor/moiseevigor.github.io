@@ -343,3 +343,17 @@ The extractor selects at most the first eight references per branch-body input i
 Two of the 15 consumer occurrences match a complete application in the six-proof port inventory at their full original routes. The join also requires the assumption reference to match the precise proof input at its original slot. In lean_workbook_20418, Eq.symm uses the branch assumption a = 1 / 2 and returns 1 / 2 = a. In lean_workbook_plus_6206, Eq.mp takes the same assumption at slot 4. Slot 3 supplies equality of the propositions (a = 1 / 2) = (a = 2⁻¹), and the result is a = 2⁻¹. The reader links that additional proof input as well as the full recorded inference.
 
 The other Eq.mp use in the same branch shares application row 91274 and all 13 enclosing binder occurrences in order. Its link opens the recording at the original call. The two application routes remain distinct, and only the recorded route counts toward direct coverage. This comparison requires the same declaration index, root, expression row, proof input slot, input row and ordered binder routes. Exactly one of the 13 uses without a direct recording qualifies. The coverage label counts the displayed uses matched by this port inventory; other native evidence collections were not exhaustively audited. The [source join](case-use-judgments.cjs) and [independent checker](check-case-uses.cjs) respectively match against the rendered inference records and the checksum-verified native port entries. No new Lean build was required.
+
+### When a shared application changes its binder target
+
+Across the six compiled proof bodies, 79,431 application rows occur at least twice (rows counted within each declaration). Comparing the first and last occurrence in expression-field order gives:
+
+| Endpoint comparison | Application rows |
+| --- | ---: |
+| Identical ordered enclosing binder occurrences | 52,375 |
+| Different enclosing context, same directly referenced outer binder occurrences | 21,616 |
+| At least one variable refers to a different outer binder occurrence | 5,440 |
+
+The last count is a lower bound on rows exhibiting a change anywhere among their occurrences. Equal endpoints can hide an intermediate change. Different binder identities establish a difference in provenance; this test does not compare the mathematical values of the binders. A folded diagram can reuse the expression shape, but a variable link must resolve at the selected occurrence.
+
+The [checker](check-shared-application-contexts.cjs) traverses the stored graph in forward and reverse child order, retaining one parent per row per traversal. A bottom-up set of free indices determines which outer binders each row references. The checker also expands the two smallest proof bodies (6,994 and 66,609 occurrences) and reproduces all three categories by independent variable lookup. The [results](shared-application-contexts.json) include one pair per proof with a relative variable route verified against both binder targets.
