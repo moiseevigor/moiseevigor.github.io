@@ -218,6 +218,15 @@
   const args=namedArguments(data,at,name,arity),count=arity===9?3:2;
   return {name,terms:args.slice(-2-count,-2),proofs:args.slice(-2),premises:rule.slice(1,3),conclusion:rule[3]};
  }
+ function boundPremise(data,site){
+  if(data.kind[site.node]!==0)return null;
+  const binder=A.binding(data,site.route);
+  if(!binder)return null;
+  const field=slot=>({node:data.children[binder.node][slot],route:{root:binder.route.root,slots:binder.route.slots.concat(slot)}});
+  const payload=data.payloads[binder.node];
+  return {site,binder,name:payload.binderName||payload.declName||'Bound variable',domain:field(0),
+   value:data.kind[binder.node]===8?field(1):null};
+ }
  function equalityChain(data,at,expected){
   const args=namedArguments(data,at,'Eq.trans',6);
   if(!args)return null;
@@ -303,6 +312,15 @@
   }
   const selected=formulaTransport(data,at);
   const chainAt=selected?.change?selected.premise:at;
+  const bound=selected?.change && boundPremise(data,chainAt);
+  if(bound){
+   const panel=el('section'),line=el('p');panel.dataset.boundRewritePremise='';
+   panel.append(el('h4',bound.value?'Local proof before the rewrite':'Bound premise before the rewrite'));
+   line.append(link(bound.name,bound.site),' is bound at ',link('the introduction',bound.binder),
+    ' with type ',link(caption(formula(data,bound.domain,3,true)),bound.domain),'.');
+   if(bound.value)line.append(' ',link('Defining proof',bound.value));
+   panel.append(line);container.append(panel);
+  }
   const inference=arithmeticInference(data,chainAt);
   if(inference){
    const panel=el('section'),inputs=el('p'),terms=el('dl');
@@ -520,5 +538,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
+ if(common)module.exports={boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
 })(typeof window==='undefined'?globalThis:window);
