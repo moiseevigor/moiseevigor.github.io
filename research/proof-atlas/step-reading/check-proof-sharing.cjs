@@ -29,7 +29,7 @@ function conflicts(g) {
     owners.push(new Map());
   }
   counts[root] = 1n;
-  const ambiguous = new Set();
+  const ambiguous = new Set(), outerMiss = new Set();
   let rows = 0, visits = 0n, ambiguousVisits = 0n;
   for (let n = root; n >= 0; n--) {
     if (!counts[n]) continue;
@@ -37,6 +37,8 @@ function conflicts(g) {
     visits += counts[n];
     assert.equal(owners[n].size, uses[n].size);
     if ([...owners[n].values()].includes(MANY)) {
+      assert.equal(owners[n].get(Math.min(...uses[n])), MANY);
+      if (owners[n].get(g.neededScope[n]-1) !== MANY) outerMiss.add(n);
       ambiguous.add(n);
       ambiguousVisits += counts[n];
     }
@@ -52,25 +54,31 @@ function conflicts(g) {
     });
   }
   assert.equal(visits, BigInt(g.expanded[root]));
-  return {ambiguous, rows, visits, ambiguousVisits};
+  return {ambiguous, outerMiss, rows, visits, ambiguousVisits};
 }
 
 // Independent oracle. Every external binder use below a row contributes its actual
 // owning route to the corresponding relative reference path within that row.
 function enumerate(g) {
-  const first = new Map(), ambiguous = new Set(), ancestors = [], scope = [];
+  const first = new Map(), ambiguous = new Set(), outerChanges = new Set(), ancestors = [], scope = [], scopeDepth = [];
   function walk(n, route) {
     if (g.kind[n] === 0) {
-      const owner = scope.at(-1-g.payloads[n].index);
+      const ownerIndex = scope.length - 1 - g.payloads[n].index;
+      const owner = scope[ownerIndex];
       assert(owner);
       for (let j = owner.depth + 1; j <= ancestors.length; j++) {
         const row = j === ancestors.length ? n : ancestors[j];
         const key = row + ':' + route.slice(j);
         if (!first.has(key)) first.set(key, owner.route);
-        else if (first.get(key) !== owner.route) ambiguous.add(row);
+        else if (first.get(key) !== owner.route) {
+          ambiguous.add(row);
+          const scopeSize = j === ancestors.length ? scope.length : scopeDepth[j];
+          if (scopeSize - 1 - ownerIndex === g.neededScope[row] - 1) outerChanges.add(row);
+        }
       }
     }
     ancestors.push(n);
+    scopeDepth.push(scope.length);
     g.children[n].forEach((c, slot) => {
       const k = g.kind[n], bind = ((k === 6 || k === 7) && slot === 1) || (k === 8 && slot === 2);
       if (bind) scope.push({route, depth: route.length});
@@ -78,13 +86,14 @@ function enumerate(g) {
       if (bind) scope.pop();
     });
     ancestors.pop();
+    scopeDepth.pop();
   }
   walk(g.roots[1], '');
-  return ambiguous;
+  return {ambiguous, outerMiss: new Set([...ambiguous].filter(n => !outerChanges.has(n)))};
 }
 
 for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_SAMPLE.edition]) {
-  const totals = {edition:e.id, proofs:0, exhaustiveChecks:0, affectedProofs:0, proofsWithConflictingApplication:0, rows:0, conflictingRows:0, conflictingApplications:0};
+  const totals = {edition:e.id, proofs:0, exhaustiveChecks:0, affectedProofs:0, proofsWithConflictingApplication:0, rows:0, conflictingRows:0, conflictingApplications:0, outerMissApplications:0, proofsWithOuterMiss:0};
   let visits = 0n, affected = 0n;
   for (const d of e.declarations.filter(x => x.kind === 'theorem' && x.bodyAvailable)) {
     const raw = zlib.gunzipSync(fs.readFileSync('.' + d.indexFile));
@@ -93,7 +102,9 @@ for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_S
     const r = conflicts(g);
     assert.equal(r.visits, BigInt(d.proofOccurrences));
     if (r.visits <= 10000n) {
-      assert.deepEqual(r.ambiguous, enumerate(g));
+      const observed = enumerate(g);
+      assert.deepEqual(r.ambiguous, observed.ambiguous);
+      assert.deepEqual(r.outerMiss, observed.outerMiss);
       totals.exhaustiveChecks++;
     }
     totals.proofs++;
@@ -103,6 +114,9 @@ for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_S
     const applications = [...r.ambiguous].filter(n => g.kind[n] === 5).length;
     totals.conflictingApplications += applications;
     if (applications) totals.proofsWithConflictingApplication++;
+    const outerMiss = [...r.outerMiss].filter(n => g.kind[n] === 5).length;
+    totals.outerMissApplications += outerMiss;
+    if (outerMiss) totals.proofsWithOuterMiss++;
     visits += r.visits;
     affected += r.ambiguousVisits;
   }

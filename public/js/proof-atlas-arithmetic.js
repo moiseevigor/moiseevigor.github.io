@@ -420,6 +420,33 @@
   const reference={node,route:{root:site.route.root,slots}};
   return {reference,binder:A.binding(data,reference.route)};
  }
+ // The closest used external binder determines the path to every farther one.
+ function nearestReference(data,site,limit=8192){
+  if(!data.neededScope[site.node])return null;
+  const todo=[{node:site.node,depth:0,parent:null}],seen=new Set();
+  let best=null,index=Infinity;
+  while(todo.length){
+   const item=todo.pop(),{node,depth}=item;
+   if(data.neededScope[node]<=depth)continue;
+   const key=node+':'+depth;
+   if(seen.has(key))continue;
+   if(seen.size>=limit)return null;
+   seen.add(key);
+   if(data.kind[node]===0){
+    const free=data.payloads[node].index-depth;
+    if(free<index){best=item;index=free;}
+    if(index===0)break;
+    continue;
+   }
+   const children=data.children[node],fields=A.fields[A.kinds[data.kind[node]]];
+   for(let k=children.length-1;k>=0;k--)todo.push({node:children[k],depth:depth+Number(fields[k]==='body'),parent:item,slot:k});
+  }
+  if(!best)return null;
+  const suffix=[];
+  for(let p=best;p.parent;p=p.parent)suffix.push(p.slot);
+  const reference={node:best.node,route:{root:site.route.root,slots:site.route.slots.concat(suffix.reverse())}};
+  return {reference,binder:A.binding(data,reference.route)};
+ }
  function equalityChain(data,at,expected){
   const args=namedArguments(data,at,'Eq.trans',6);
   if(!args)return null;
@@ -580,13 +607,15 @@
   }
   if(data.kind[at.node]===5 && data.neededScope[at.node]>0){
    const panel=el('details');panel.dataset.compareScope='';
-   panel.append(el('summary','Compare an outer variable across occurrences'));
+   panel.append(el('summary','Compare enclosing binders across occurrences'));
    panel.ontoggle=()=>{
     if(!panel.open||panel.childElementCount>1)return;
     const copies=rowCopies(data,at);
     if(!copies){panel.append(el('p','Occurrence comparison exceeds the row limit.'));return;}
     if(copies.total===1n){panel.append(el('p','This application occurs once under this root.'));return;}
-    const selected=outerReference(data,at),output=el('div');
+    const selected=nearestReference(data,at);
+    if(!selected){panel.append(el('p','The binder search reached its inspection limit.'));return;}
+    const suffix=selected.reference.route.slots.slice(at.route.slots.length),output=el('div');
     output.setAttribute('aria-live','polite');
     const label=el('label','Compare with occurrence '),input=el('input');
     input.type='text';input.inputMode='numeric';input.value=String(copies.rank===0n?2n:1n);label.append(input);
@@ -601,12 +630,14 @@
      if(!/^[1-9][0-9]*$/.test(raw)||raw.length>String(copies.total).length||BigInt(raw)>copies.total){
       output.textContent='Enter a number from 1 to '+copies.total+'.';return;
      }
-     const other=copies.select(BigInt(raw)-1n),hit=outerReference(data,other);
+     const other=copies.select(BigInt(raw)-1n);
+     const reference={node:selected.reference.node,route:{root:other.route.root,slots:other.route.slots.concat(suffix)}};
+     const hit={reference,binder:A.binding(data,reference.route)};
      const same=String(selected.binder.route.slots)===String(hit.binder.route.slots);
-     output.append(show('Occurrence '+raw,other,hit),el('p',same?'This variable has the same binder.':'This variable has a different binder.'));
+     output.append(show('Occurrence '+raw,other,hit),el('p',same?'All external variables refer to the same binders at both occurrences.':'The selected variable refers to a different binder.'));
     }
     input.oninput=update;update();
-    panel.append(el('p','Following one reference to the outermost binder used by this application.'),
+    panel.append(el('p','The links follow the nearest enclosing binder used by this application. Its location also fixes every farther enclosing binder.'),
      show('Selected occurrence '+(copies.rank+1n)+' of '+copies.total,at,selected),label,output);
    };
    container.append(panel);
@@ -976,5 +1007,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={rowCopies,outerReference,congruenceCall,transportCall,derivationInputs,binderArgument,statementOrigin,binderCopies,zeroDifference,logicalInference,numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
+ if(common)module.exports={nearestReference,rowCopies,outerReference,congruenceCall,transportCall,derivationInputs,binderArgument,statementOrigin,binderCopies,zeroDifference,logicalInference,numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
 })(typeof window==='undefined'?globalThis:window);

@@ -6,7 +6,7 @@ const crypto = require('node:crypto');
 const fs = require('node:fs');
 const zlib = require('node:zlib');
 const A = require('../../../public/js/proof-atlas-library-data');
-const {rowCopies, outerReference} = require('../../../public/js/proof-atlas-arithmetic');
+const {rowCopies, outerReference, nearestReference} = require('../../../public/js/proof-atlas-arithmetic');
 global.window = {};
 require('../../../public/data/proof-atlas/goedel-sample-manifest');
 
@@ -91,6 +91,12 @@ for (const name of new Set(summaries.map(s => s.proof))) {
       assert.equal(g.kind[witness.reference.node], 0);
       assert.deepEqual(witness.binder, A.binding(g, witness.reference.route));
     } else assert.equal(witness, null);
+    const nearest = nearestReference(g, site);
+    if (needed) {
+      assert.deepEqual(nearest.binder, scope.at(-1-Math.min(...refs[node].keys())));
+      assert.deepEqual(nearest.binder, A.binding(g, nearest.reference.route));
+      assert.equal(nearestReference(g, site, 0), null);
+    } else assert.equal(nearest, null);
     const owners = [];
     for (const [index, path] of refs[node]) {
       const binder = scope.at(-1-index);
