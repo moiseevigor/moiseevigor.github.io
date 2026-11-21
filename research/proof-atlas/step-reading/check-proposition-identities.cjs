@@ -2,6 +2,7 @@
 'use strict';
 const assert = require('node:assert/strict');
 const atlas = require('../../../public/js/proof-atlas-library-data');
+const inputHead = require('./input-head.cjs');
 const {inventory} = require('../recorded-union.cjs');
 const {measure} = require('./ai-inference-traces.cjs');
 const normalize = text=>text.normalize('NFC').replace(/\s+/g,' ').trim().toLowerCase();
@@ -10,7 +11,7 @@ async function main() {
   const editions={};
   for (const item of inventory()) {
     const stats=editions[item.edition]??={calls:0, proofSlots:0, directBound:0, withText:0, ambiguous:0,
-      identical:0, differentTerm:0, binderKinds:{}, letChains:{}, distinctDefinitions:0, definitionsUsedMoreThanOnce:0, letExamples:[], examples:[]};
+      argumentKinds:{},appHeads:{},appMaxArity:0,appExamples:{},identical:0, differentTerm:0, binderKinds:{}, letChains:{}, distinctDefinitions:0, definitionsUsedMoreThanOnce:0, letExamples:[], examples:[]};
     const definitions=new Map();
     await measure(item,null,(inputs,n,args,graph)=>{
       stats.calls++;
@@ -19,6 +20,16 @@ async function main() {
       stats.proofSlots+=proof.length;
       for(const input of proof){
         const id=args[input.position-1];
+        const kindName=atlas.kinds[graph.kind[id]];
+        stats.argumentKinds[kindName]=(stats.argumentKinds[kindName]||0)+1;
+        if(kindName==='app'){
+          const route={root:1,slots:input.route};
+          const head=inputHead(graph,{node:id,route});
+          assert.equal(atlas.walk(graph,head.route),head.node);
+          stats.appHeads[head.kind]=(stats.appHeads[head.kind]||0)+1;
+          stats.appMaxArity=Math.max(stats.appMaxArity,head.route.slots.length-route.slots.length);
+          if(!stats.appExamples[head.kind])stats.appExamples[head.kind]={proof:item.record.name,slot:input.position,n,route,head};
+        }
         if(atlas.kinds[graph.kind[id]]!=='bvar')continue;
         const route={root:1,slots:input.route};
         assert.equal(atlas.walk(graph,route),id);

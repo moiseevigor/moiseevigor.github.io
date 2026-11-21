@@ -953,6 +953,16 @@
   if(!geometryLoad)geometryLoad=new Promise((resolve,reject)=>{const s=document.createElement('script');s.src='/public/js/proof-atlas-geometry-core.js?v=11';s.onload=resolve;s.onerror=()=>{geometryLoad=null;s.remove();reject(Error('Geometric language core is unavailable'));};document.head.append(s);});
   await geometryLoad;
  }
+ // Follow only the original function fields; a longer spine has no local caption.
+ function namedInputHead(arg){
+  if(current.kind(arg.node)!=='app')return null;
+  let node=arg.node,depth=0;
+  while(depth<32 && current.kind(node)==='app'){
+   node=current.children(node)[0];depth++;
+  }
+  if(current.kind(node)!=='const')return null;
+  return {node,name:current.payload(node).name,route:{root:arg.route.root,slots:arg.route.slots.concat(Array(depth).fill(0))}};
+ }
  let windowRoot=null,windowPacket=null,argumentOffset='last';
  function scopedLayout(){
   const route=rootRoute||current.route(root);
@@ -1000,9 +1010,14 @@
    earlier.onclick=()=>{argumentOffset=Math.max(0,offset-shown);safely(layout());};
    later.onclick=()=>{argumentOffset=Math.min(ports.length-shown,offset+shown);safely(layout());};
   }
+  const inputHeads=new Map();
+  for(const arg of ports){
+   const head=namedInputHead(arg);
+   if(head)inputHeads.set(arg.path,head);
+  }
   const byPath=new Map(),groups=new Map(),max=Math.max(1,...scene.nodes.map(n=>n.depth));
   for(const n of scene.nodes){if(!groups.has(n.depth))groups.set(n.depth,[]);groups.get(n.depth).push(n);}
-  for(const n of scene.nodes){const group=groups.get(n.depth),t=n.abstraction==='binder-telescope',a=n.abstraction==='application-spine',p={id:n.node,path:n.id,route:n.route,x:n.depth/(max+1),y:(group.indexOf(n)+.5)/group.length,kind:current.data.kind[n.node],glyph:n.members?(t?'T':'@')+n.members.length:n.glyph,caption:n.kind==='const'?n.payload.name.split('.').slice(-2).join('.'):null,name:(t?n.members.length+'-entry telescope · ':a?n.members.length+'-argument spine · ':'')+label(n.node)+' · '+n.id+' · '+n.hidden+' hidden occurrences',collapsed:n.frontier};world.push(p);byPath.set(n.id,p);}
+  for(const n of scene.nodes){const group=groups.get(n.depth),t=n.abstraction==='binder-telescope',a=n.abstraction==='application-spine',p={id:n.node,path:n.id,route:n.route,x:n.depth/(max+1),y:(group.indexOf(n)+.5)/group.length,kind:current.data.kind[n.node],glyph:n.members?(t?'T':'@')+n.members.length:n.glyph,caption:(n.kind==='const'?n.payload.name:inputHeads.get(n.id)?.name)?.split('.').slice(-2).join('.')||null,name:(t?n.members.length+'-entry telescope · ':a?n.members.length+'-argument spine · ':'')+label(n.node)+' · '+n.id+' · '+n.hidden+' hidden occurrences',collapsed:n.frontier};world.push(p);byPath.set(n.id,p);}
   for(const edge of scene.edges){const from=byPath.get(edge.from),to=byPath.get(edge.to),arg=edge.relation==='application-argument'?chooseTyping(from.route)?.argument?.(from.route,to.route):null;edges.push([from,to,'child',edge.field+(arg?' · '+arg.role:'')]);}
   const contexts=new Map(),boundaries=scene.links.filter(l=>l.relation==='bound-to'&&l.boundary),unique=[...new Set(boundaries.map(l=>l.target))];
   for(const l of boundaries)if(!contexts.has(l.target)){const p={id:l.node,path:l.target,route:l.route,x:1,y:(unique.indexOf(l.target)+.5)/unique.length,kind:current.data.kind[l.node],glyph:'↑',context:true,name:'Context binder · '+l.target};contexts.set(l.target,p);world.push(p);}
@@ -1019,6 +1034,13 @@
    const h=el('button',n.truncated?'Open remaining function spine':'Open head · '+headName);h.type='button';h.dataset.applicationHead=n.head.path;h.onclick=()=>selectOccurrence(n.head.node,true,true,n.head.route);details.append(h);const list=el('ol');
    const firstUse=new Map(),statements=[];
    n.arguments.forEach((a,j)=>{const row=el('li'),checked=chooseTyping(n.route)?.argument?.(n.route,a.route),q=el('button',(a.position===null?'Trailing slot ':'Argument ')+a.slot+' · '+current.kind(a.node)+' · '+(checked?'checked '+checked.role+' / '+checked.binderInfo:'role unavailable')+' · '+number(a.expanded)+' occurrences · '+(n.regions[j+1].displayed?'drawn':'collapsed'));q.type='button';q.dataset.applicationArgument=a.path;q.dataset.argumentRole=checked?.role||'unavailable';q.title=a.path;q.onclick=()=>selectOccurrence(a.node,true,true,a.route);const m=n.members[j],b=el('button','Original application '+a.slot);b.type='button';b.dataset.applicationMember=m.path;b.title=m.path;b.onclick=()=>selectOccurrence(m.node,true,true,m.route);row.append(q,b);
+    const producer=n===call && inputHeads.get(a.path);
+    if(producer){
+     const headButton=el('button','Applied function · '+producer.name);
+     headButton.type='button';headButton.title=A.path(current.data,producer.route);
+     headButton.onclick=()=>selectOccurrence(producer.node,true,true,producer.route);
+     row.append(headButton);
+    }
     if(n===call && current.kind(a.node)==='bvar'){
      const binder=A.binding(current.data,a.route);
      if(binder){

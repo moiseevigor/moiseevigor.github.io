@@ -248,6 +248,14 @@ async function main() {
     const producer=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
     assert.equal(producer.selected,1227);
     assert.deepEqual(producer.route,{root:1,slots:[1,1,1,1,1,1,2,2,2,2,1]});
+    rewrite.searchParams.set('proof','JacobiCore.E_pos');
+    rewrite.searchParams.set('route','1:1.1');rewrite.hash='';
+    await page.goto(rewrite.href);
+    const positive=page.locator('#pl-application-headers details').first();
+    await positive.locator('summary').click();
+    await positive.locator('ol > li').nth(3).getByRole('button',{name:'Applied function · JacobiCore.K_pos',exact:true}).click();
+    const fn=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
+    assert.deepEqual(fn.route,{root:1,slots:[1,1,1,0]});
     assert.deepEqual(errors,[]);
     console.log('Four inspector paths and four folded canvas paths passed at both widths.');
   } finally {await browser.close();}
