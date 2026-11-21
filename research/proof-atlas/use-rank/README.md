@@ -555,3 +555,5 @@ python3 research/proof-atlas/use-rank/replay-endpoints.py \
 ```
 
 The reader matches the report digest, declaration index, enclosing call and both endpoint routes before displaying the result.
+
+For each of these five recorded joins the reader can expand the nested transitivity proof into its two equalities. Each equality links its two operands and its proof at their own occurrence paths. The enclosing endpoints remain visible for comparison. The check requires a recorded conversion for every mismatched field of that step. An altered report leaves only the structural comparison available.

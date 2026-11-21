@@ -191,6 +191,7 @@
     same(e.nested,mismatch.nested) && e.kernelReflexivity==='PASS');
    if(match)detail.append(el('br'),'Lean checked that these terms are definitionally equal. ',
     link('Kernel replay record',file));
+   return Boolean(match);
   }catch{ /* The structural comparison remains available without the replay record. */ }
  }
  // Eq has three compiled arguments: the carrier, the left side and the right side.
@@ -248,6 +249,7 @@
      row.append(sourceLink(termLabel(step.start),step.start),' = ',sourceLink(termLabel(step.end),step.end),
       ' · ',sourceLink('Proof '+(index+1),step.proof));
      if(step.mismatches){
+      const checks=[];
       for(const m of step.mismatches){
        const detail=el('p');
        detail.append('Different compiled '+m.field+' · ',sourceLink('Enclosing term',m.outer),' / ',sourceLink('Nested term',m.nested));
@@ -255,8 +257,20 @@
         ' / ',sourceLink(termLabel(m.nestedSite),m.nestedSite));
        else detail.append(m.difference==='limit'?' · Comparison limit reached':' · Matching expression structure');
        row.append(detail);
-       if(edition.id==='goedel-sample-4331')showChainConversion(detail,owner.record,{node:i,route:nextRoute},m);
+       if(edition.id==='goedel-sample-4331')checks.push(showChainConversion(detail,owner.record,{node:i,route:nextRoute},m));
       }
+      if(checks.length===step.mismatches.length)Promise.all(checks).then(matches=>{
+       if(!matches.every(Boolean) || owner!==current || selectionToken!==selectionSerial)return;
+       const nested=window.ProofAtlasOmittedReferences.exactCallInputs(owner.data,step.proof,'Eq.trans',6);
+       const trace=el('details'),parts=el('ol');
+       trace.append(el('summary','Inspect the two joined equalities'));
+       for(const [offset,proof] of nested.slice(4).entries()){
+        const part=el('li'),left=nested[1+offset],right=nested[2+offset];
+        part.append(sourceLink(termLabel(left),left),' = ',sourceLink(termLabel(right),right),' · ',
+         sourceLink('Open subproof '+(offset+1),proof));parts.append(part);
+       }
+       trace.append(parts);row.append(trace);
+      });
      }else if(step.boundary)row.append(' · '+step.boundary);
      list.append(row);
     }

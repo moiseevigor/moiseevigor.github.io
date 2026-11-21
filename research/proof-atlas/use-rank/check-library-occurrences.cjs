@@ -114,8 +114,8 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
     const data=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+record.indexFile)));
     const at=atlas.routes(data).route(row);
     await page.goto('http://localhost/projects/proof-atlas/library/?edition='+aiEdition.id+'&proof='+proofName+'&route='+at.root+':'+at.slots.join('.')+'#expr-'+row);
-    const trace=page.getByRole('region',{name:'Equality chain'}).locator('details');
-    await trace.locator('summary').click();
+    const trace=page.getByRole('region',{name:'Equality chain'}).locator(':scope > details');
+    await trace.locator(':scope > summary').click();
     const links=trace.getByRole('link',{name:/^Proof /});
     assert.equal(await links.count(),expected.length);
     assert.equal((await trace.innerText()).includes('Different compiled start'),boundary);
@@ -138,6 +138,39 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
     }
     await links.last().click();
     await page.locator('#pl-expression h3').filter({hasText:' · e'+expected.at(-1)}).waitFor();
+   }
+   const certificates=JSON.parse(fs.readFileSync('public/data/proof-atlas/chain-endpoint-conversions.json'));
+   const evidenceUrl='**/public/data/proof-atlas/chain-endpoint-conversions.json';
+   for(const entry of certificates.entries){
+    const record=aiEdition.declarations.find(r=>r.indexSha256===entry.indexSha256);
+    const g=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+record.indexFile)));
+    const slots=entry.call.route.slots;
+    const location='http://localhost/projects/proof-atlas/library/?edition='+aiEdition.id+'&proof='+entry.name+'&route=1:'+slots.join('.')+'#expr-'+entry.call.node;
+    await page.goto(location);
+    const region=page.getByRole('region',{name:'Equality chain'});
+    await region.locator(':scope > details > summary').click();
+    await region.getByText('Inspect the two joined equalities',{exact:true}).click();
+    const items=region.locator('details details ol li');
+    assert.equal(await items.count(),2);
+    // The nested start is argument 2 of a six-argument Eq.trans.
+    const nested=entry.nested.route.slots.slice(0,-5);
+    for(const [i,fields] of [[1,2,4],[2,3,5]].entries()){
+     const hrefs=await items.nth(i).getByRole('link').evaluateAll(ns=>ns.map(n=>n.href));
+     for(const [j,arg] of fields.entries()){
+      const suffix=nested.concat(Array(5-arg).fill(0),1),href=new URL(hrefs[j]);
+      assert.equal(href.searchParams.get('route'),'1:'+suffix.join('.'));
+      assert.equal(href.hash,'#expr-'+atlas.walk(g,{root:1,slots:suffix}));
+     }
+    }
+    if(entry===certificates.entries[0]){
+     await page.route(evidenceUrl,r=>r.fulfill({contentType:'application/json',body:'{}'}));
+     const rejected=page.waitForResponse(r=>r.url().endsWith('chain-endpoint-conversions.json'));
+     await page.reload();await rejected;
+     await region.locator(':scope > details > summary').click();
+     assert.equal(await region.getByText('Inspect the two joined equalities',{exact:true}).count(),0);
+     assert.equal(await region.getByText('Enclosing term',{exact:true}).count(),1);
+     await page.unroute(evidenceUrl);
+    }
    }
    const nestedEq=atlas.routes(eqData).route(14452);
    for(const [side,prefix,node] of [['Left',[0,1],330],['Right',[1],6]]){
