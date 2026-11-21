@@ -447,6 +447,42 @@
   const reference={node:best.node,route:{root:site.route.root,slots:site.route.slots.concat(suffix.reverse())}};
   return {reference,binder:A.binding(data,reference.route)};
  }
+ // Find the first body field on which an introduced binder is used.
+ function firstBindingBody(data,root,limit=8192){
+  const pending=[root],rows=new Set();
+  while(pending.length){
+   const n=pending.pop();
+   if(rows.has(n))continue;
+   if(rows.size>=limit)return {limited:true};
+   rows.add(n);
+   for(const child of data.children[n])pending.push(child);
+  }
+  const free=new Map(),distance=new Map(),choice=new Map();
+  let entries=0;
+  for(const n of [...rows].sort((a,b)=>a-b)){
+   const used=new Set(),fields=A.fields[A.kinds[data.kind[n]]];
+   if(data.kind[n]===0)used.add(data.payloads[n].index);
+   let shortest=Infinity;
+   data.children[n].forEach((child,k)=>{
+    const body=fields[k]==='body',indices=free.get(child);
+    const depth=body && indices.has(0)?1:1+distance.get(child);
+    if(depth<shortest){shortest=depth;choice.set(n,k);}
+    for(const index of indices)if(!body||index>0)used.add(index-Number(body));
+   });
+   entries+=used.size;
+   if(entries>4*limit)return {limited:true};
+   free.set(n,used);distance.set(n,shortest);
+  }
+  const slots=[],fields=[];
+  let n=root;
+  while(choice.has(n)){
+   const k=choice.get(n);
+   slots.push(k);fields.push(A.fields[A.kinds[data.kind[n]]][k]);
+   if(distance.get(n)===1)return {slots,fields,binder:n,body:data.children[n][k]};
+   n=data.children[n][k];
+  }
+  return {slots:null};
+ }
  function equalityChain(data,at,expected){
   const args=namedArguments(data,at,'Eq.trans',6);
   if(!args)return null;
@@ -605,22 +641,25 @@
    };
    container.append(copies);
   }
-  if(data.kind[at.node]===5 && data.neededScope[at.node]>0){
+  if([5,6,7,8].includes(data.kind[at.node])){
    const panel=el('details');panel.dataset.compareScope='';
-   panel.append(el('summary','Compare enclosing binders across occurrences'));
+   panel.append(el('summary','Compare bindings across occurrences'));
    panel.ontoggle=()=>{
     if(!panel.open||panel.childElementCount>1)return;
     const copies=rowCopies(data,at);
     if(!copies){panel.append(el('p','Occurrence comparison exceeds the row limit.'));return;}
-    if(copies.total===1n){panel.append(el('p','This application occurs once under this root.'));return;}
+    if(copies.total===1n){panel.append(el('p','This expression occurs once under this root.'));return;}
     const selected=nearestReference(data,at);
-    if(!selected){panel.append(el('p','The binder search reached its inspection limit.'));return;}
-    const suffix=selected.reference.route.slots.slice(at.route.slots.length),output=el('div');
+    if(!selected && data.neededScope[at.node]){panel.append(el('p','The binder search reached its inspection limit.'));return;}
+    const suffix=selected?.reference.route.slots.slice(at.route.slots.length),output=el('div');
+    let bodyPath;
     output.setAttribute('aria-live','polite');
     const label=el('label','Compare with occurrence '),input=el('input');
     input.type='text';input.inputMode='numeric';input.value=String(copies.rank===0n?2n:1n);label.append(input);
     function show(title,site,hit){
-     const line=el('p'),p=data.payloads[hit.binder.node];
+     const line=el('p');
+     if(!hit){line.append(link(title,site));return line;}
+     const p=data.payloads[hit.binder.node];
      line.append(link(title,site),' · ',link('Variable',hit.reference),' → ',link(p.binderName||p.declName||'Binder',hit.binder));
      return line;
     }
@@ -631,13 +670,26 @@
       output.textContent='Enter a number from 1 to '+copies.total+'.';return;
      }
      const other=copies.select(BigInt(raw)-1n);
-     const reference={node:selected.reference.node,route:{root:other.route.root,slots:other.route.slots.concat(suffix)}};
-     const hit={reference,binder:A.binding(data,reference.route)};
-     const same=String(selected.binder.route.slots)===String(hit.binder.route.slots);
-     output.append(show('Occurrence '+raw,other,hit),el('p',same?'All external variables refer to the same binders at both occurrences.':'The selected variable refers to a different binder.'));
+     const reference=selected && {node:selected.reference.node,route:{root:other.route.root,slots:other.route.slots.concat(suffix)}};
+     const hit=reference && {reference,binder:A.binding(data,reference.route)};
+     const same=!selected || String(selected.binder.route.slots)===String(hit.binder.route.slots);
+     output.append(show('Occurrence '+raw,other,hit));
+     if(selected)output.append(el('p',same?'All external variables refer to the same binders at both occurrences.':'The selected variable refers to a different binder.'));
+     if(!same || BigInt(raw)===copies.rank+1n)return;
+     bodyPath??=firstBindingBody(data,at.node);
+     if(bodyPath.limited){output.append(el('p','Descendant comparison reached the inspection limit.'));return;}
+     if(!bodyPath.slots){output.append(el('p','Binder targets agree along every child path.'));return;}
+     output.append(el('p','First change after '+bodyPath.slots.length+' child '+(bodyPath.slots.length===1?'link':'links')+' · '+bodyPath.fields.join(' → ')));
+     for(const [site,title] of [[at,'Selected body'],[other,'Comparison body']]){
+      const slots=site.route.slots.concat(bodyPath.slots),root=site.route.root;
+      const line=el('p');
+      line.append(link(title,{node:bodyPath.body,route:{root,slots}}),' → ',
+       link('Its binder',{node:bodyPath.binder,route:{root,slots:slots.slice(0,-1)}}));
+      output.append(line);
+     }
     }
     input.oninput=update;update();
-    panel.append(el('p','The links follow the nearest enclosing binder used by this application. Its location also fixes every farther enclosing binder.'),
+    panel.append(el('p',selected?'The links follow the nearest enclosing binder used by this expression. Its location also fixes every farther enclosing binder.':'This expression uses no external variables.'),
      show('Selected occurrence '+(copies.rank+1n)+' of '+copies.total,at,selected),label,output);
    };
    container.append(panel);
@@ -1007,5 +1059,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={nearestReference,rowCopies,outerReference,congruenceCall,transportCall,derivationInputs,binderArgument,statementOrigin,binderCopies,zeroDifference,logicalInference,numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
+ if(common)module.exports={firstBindingBody,nearestReference,rowCopies,outerReference,congruenceCall,transportCall,derivationInputs,binderArgument,statementOrigin,binderCopies,zeroDifference,logicalInference,numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
 })(typeof window==='undefined'?globalThis:window);
