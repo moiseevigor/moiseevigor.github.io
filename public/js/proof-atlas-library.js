@@ -225,7 +225,7 @@
           binding.route.slots.join('.')!==nextRoute.slots.join('.'))throw Error('Witness mismatch');
        const row=el('li');
        row.append(link(group.label,url(owner.record.name,group.node,route)),' · '+number(group.count));
-       if(group.count>1 && group.offsets){
+       if(group.count>1 && (group.offsets || group.role)){
         const more=el('details'),form=el('form'),label=el('label','Use number '),input=el('input'),go=el('button','Open use');
         input.type='number';input.min='1';input.max=String(group.count);input.required=true;input.value='1';
         label.append(input);go.type='submit';form.append(label,' ',go);
@@ -233,7 +233,13 @@
          event.preventDefault();
          if(!form.reportValidity())return;
          safely((async()=>{
-          const hit=window.ProofAtlasRoleOccurrences.select(owner.data,group,input.valueAsNumber);
+          const roles=window.ProofAtlasRoleOccurrences;
+          let hit;
+          if(group.role){
+           const index=roles.constantArgumentIndex(owner.data,{node:i,route:nextRoute},group.role);
+           if(index.total!==BigInt(group.count))throw Error('Role count mismatch');
+           hit=index.occurrence(BigInt(input.valueAsNumber));
+          }else hit=roles.select(owner.data,group,input.valueAsNumber);
           const binder=A.binding(owner.data,hit.route);
           if(binder?.node!==i || binder.route.slots.join('.')!==nextRoute.slots.join('.'))throw Error('Use belongs to a different binder');
           await selectOccurrence(hit.node,true,true,hit.route);

@@ -88,8 +88,24 @@ function audit(record) {
   }
   for(const input of inputs)for(const [label,g] of input.groups){
     g.offsets=Buffer.from(g.bytes).toString('base64');
-    for(const ordinal of new Set([1,Math.ceil(g.count/2),g.count])){
+    let index=null;
+    if(g.bytes.length>=4096){
+      const app=applicationAtUse(data,{node:g.node,route:g.route});
+      if(app && app.slot>0 && data.kind[app.head.node]===4){
+        g.role={name:data.payloads[app.head.node].name,arity:app.arity,slot:app.slot};
+        try { index=roles.constantArgumentIndex(data,input,g.role); }
+        catch(error){
+          if(!(error instanceof RangeError) || !['Role count state limit','Application spine limit'].includes(error.message))throw error;
+          delete g.role;
+        }
+        if(index)assert.equal(index.total,BigInt(g.count));
+      }
+    }
+    const ordinals=new Set([1,Math.ceil(g.count/2),g.count]);
+    if(index)for(let j=1;j<32;j++)ordinals.add(Math.ceil(g.count*j/32));
+    for(const ordinal of ordinals){
       const hit=roles.select(data,g,ordinal);
+      if(index)assert.deepEqual(index.occurrence(BigInt(ordinal)),hit);
       if(ordinal===1)assert.deepEqual(hit,{node:g.node,route:g.route});
       assert.deepEqual(A.binding(data,hit.route),{node:input.node,route:input.route});
       const app=applicationAtUse(data,hit);
@@ -117,7 +133,7 @@ if (process.argv.includes('--write-packets')) {
     const entries=inputs.map(input=>({
       node:input.node,depth:input.route.slots.length,count:input.count,
       groups:[...input.groups].sort((a,b)=>b[1].count-a[1].count).map(([label,g])=>({
-        label,count:g.count,node:g.node,slots:g.route.slots.join('.'),...(g.count>1?{offsets:g.offsets}:{})
+        label,count:g.count,node:g.node,slots:g.route.slots.join('.'),...(g.role?{role:g.role}:g.count>1?{offsets:g.offsets}:{})
       }))
     }));
     fs.writeFileSync(dir+'/'+record.indexSha256+'.json',JSON.stringify({indexSha256:record.indexSha256,entries})+'\n');

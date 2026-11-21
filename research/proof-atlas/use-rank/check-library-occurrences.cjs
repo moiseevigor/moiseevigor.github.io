@@ -90,7 +90,10 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
     assert.equal(await ordinal.evaluate(input=>input.checkValidity()),false);
     await ordinal.fill(String(first.count));
     const source=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+record.indexFile)));
-    const last=require('../../../public/js/proof-atlas-role-occurrences').select(source,first,first.count);
+    assert(first.role && !first.offsets);
+    const roleIndex=require('../../../public/js/proof-atlas-role-occurrences').constantArgumentIndex(source,
+     {node:entry.node,route:{root:1,slots:Array(entry.depth).fill(1)}},first.role);
+    const last=roleIndex.occurrence(BigInt(first.count));
     assert.notEqual(last.route.slots.join('.'),first.slots);
     await firstRow.getByRole('button',{name:'Open use',exact:true}).click();
     await page.waitForFunction(r=>new URL(location.href).searchParams.get('route')===r,'1:'+last.route.slots.join('.'));
