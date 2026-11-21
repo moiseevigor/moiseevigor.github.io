@@ -112,6 +112,16 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
         return s?.name==='JacobiCore.eps' && s.edition==='published-15' && s.selected===2 &&
           s.route.root===0 && s.route.slots.join('.')==='1';
       });
+      signatureExample.hash='occurrence=42c5264d2680fe256ee4bfc588ed1ed3d648f38eeb56916d2e1ce02e11ae0c33.1.2.BQ';
+      await page.goto(signatureExample.href);
+      const monotone=group.locator('[data-callee-uses="JacobiCore.eps_strictMono"]');
+      await monotone.locator('summary').click();
+      await monotone.getByRole('link',{name:'Declared result · StrictMono',exact:true}).click();
+      await page.waitForFunction(()=>{
+        const s=window.ProofAtlasLibrary?.getSnapshot();
+        return s?.name==='JacobiCore.eps_strictMono' && s.edition==='published-15' && s.selected===11 &&
+          s.route.root===0 && s.route.slots.join('.')==='1';
+      });
       const paged=new URL(url);
       paged.searchParams.delete('group');paged.searchParams.set('loading','paged');
       const requested=[];

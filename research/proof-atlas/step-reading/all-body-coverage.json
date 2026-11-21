@@ -25,6 +25,12 @@
         "JacobiInit.Γ_strictMono": "3",
         "JacobiPeriodic.f1_div_c_strictAntiOn_I": "15"
       },
+      "resultHeads": {
+        "StrictMonoOn": "15",
+        "StrictMono": "9",
+        "StrictAntiOn": "20",
+        "Monotone": "9"
+      },
       "distinctExternalNames": 898,
       "leadingExternalNames": [
         [
@@ -80,6 +86,9 @@
       "signatureOnly": "0",
       "beyondPrefixes": {
         "JacobiCore.eps_strictMono": "6"
+      },
+      "resultHeads": {
+        "StrictMono": "6"
       },
       "distinctExternalNames": 16,
       "leadingExternalNames": [
@@ -141,6 +150,7 @@
       "usedSlots": "0",
       "signatureOnly": "0",
       "beyondPrefixes": {},
+      "resultHeads": {},
       "distinctExternalNames": 386,
       "leadingExternalNames": [
         [
@@ -195,6 +205,7 @@
       "usedSlots": "0",
       "signatureOnly": "0",
       "beyondPrefixes": {},
+      "resultHeads": {},
       "distinctExternalNames": 34,
       "leadingExternalNames": [
         [

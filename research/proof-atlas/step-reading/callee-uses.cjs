@@ -165,8 +165,11 @@ if(process.argv.includes('--all-bodies')){
       signature.push(type);
       type=term.children[type][1];
     }
+    assert.equal(atlas.walk(term,{root:0,slots:Array(signature.length).fill(1)}),type);
+    const {head}=spine(term,type);
+    const result={node:type,head:atlas.kinds[term.kind[head]]==='const'?term.payloads[head].name:null};
     const parameters=params.map(({node,slots,first,count})=>({node,slots,first,count}));
-    shards[parseInt(owner.indexSha256[0],16)].push({name:owner.name,indexSha256:owner.indexSha256,parameters,signature});
+    shards[parseInt(owner.indexSha256[0],16)].push({name:owner.name,indexSha256:owner.indexSha256,parameters,signature,result});
   }
   const dir='public/data/proof-atlas/callee-uses';
   fs.mkdirSync(dir,{recursive:true});

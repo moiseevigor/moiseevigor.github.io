@@ -18,7 +18,7 @@ function census(edition){
   const owners=new Map(edition.declarations.map(r=>[r.name,r]));
   const indexed=new Map(reader.records.map(r=>[r.name,r.indexSha256]));
   const counts={}, outside=new Map();
-  const parameters=new Map(),beyondPrefixes=new Map();
+  const parameters=new Map(),beyondPrefixes=new Map(),resultHeads=new Map();
   if(expandedIndex && edition.id===reader.edition){
     for(let i=0;i<16;i++){
       const shard=require('../../../public/data/proof-atlas/callee-uses/'+i.toString(16)+'.json');
@@ -47,7 +47,12 @@ function census(edition){
           const bound=target.parameters.slice(0,args.length);
           signatureOnly+=BigInt(Math.max(0,Math.min(args.length,target.signature.length)-bound.length))*weight;
           const excess=args.length-Math.max(target.signature.length,bound.length);
-          if(excess>0)beyondPrefixes.set(name,(beyondPrefixes.get(name)||0n)+BigInt(excess)*weight);
+          if(excess>0){
+            const slots=BigInt(excess)*weight;
+            beyondPrefixes.set(name,(beyondPrefixes.get(name)||0n)+slots);
+            const resultHead=target.result.head??'(nonconstant)';
+            resultHeads.set(resultHead,(resultHeads.get(resultHead)||0n)+slots);
+          }
           localInputSlots+=BigInt(args.length)*weight;
           matchedSlots+=BigInt(bound.length)*weight;
           usedSlots+=BigInt(bound.filter(p=>p.count>0).length)*weight;
@@ -60,7 +65,7 @@ function census(edition){
     }
     counts[category]=(counts[category]||0n)+weight;
   }
-  return {record,localCount:()=>(counts.bodyAvailable||0n)+(counts.indexedBody||0n),report:()=>({counts,...(expandedIndex?{localInputSlots,matchedSlots,usedSlots,signatureOnly,beyondPrefixes:Object.fromEntries(beyondPrefixes)}:{}),distinctExternalNames:outside.size,
+  return {record,localCount:()=>(counts.bodyAvailable||0n)+(counts.indexedBody||0n),report:()=>({counts,...(expandedIndex?{localInputSlots,matchedSlots,usedSlots,signatureOnly,beyondPrefixes:Object.fromEntries(beyondPrefixes),resultHeads:Object.fromEntries(resultHeads)}:{}),distinctExternalNames:outside.size,
     leadingExternalNames:[...outside].sort((a,b)=>a[1]===b[1]?a[0].localeCompare(b[0]):a[1]>b[1]?-1:1).slice(0,10)})};
 }
 

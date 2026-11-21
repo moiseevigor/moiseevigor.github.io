@@ -15,7 +15,7 @@
  };
  async function loadCalleeIndex(owner){
   const shard=owner.indexSha256[0];
-  const response=await fetch('/public/data/proof-atlas/callee-uses/'+shard+'.json?v=2');
+  const response=await fetch('/public/data/proof-atlas/callee-uses/'+shard+'.json?v=3');
   if(!response.ok)throw Error('Parameter index unavailable');
   return response.json();
  }
@@ -52,7 +52,12 @@
      }
      list.append(item);
     }
-    body.replaceChildren(list);state='done';
+    body.replaceChildren(list);
+    if(end>Math.max(record.parameters.length,record.signature.length)){
+     const resultName=record.result.head?'Declared result · '+record.result.head:'Declared result';
+     body.append(link(resultName,{node:record.result.node,slots:Array(record.signature.length).fill(1)},0));
+    }
+    state='done';
    }catch{body.textContent='Parameter index unavailable. Close and reopen to retry.';state='idle';}
   };
  }
