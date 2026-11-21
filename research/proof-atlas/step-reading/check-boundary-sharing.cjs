@@ -94,6 +94,9 @@ for (const name of new Set(summaries.map(s => s.proof))) {
     const nearest = nearestReference(g, site);
     if (needed) {
       assert.deepEqual(nearest.binder, scope.at(-1-Math.min(...refs[node].keys())));
+      const indexed = nearestReference(g,site,1);
+      assert.deepEqual(indexed.binder,nearest.binder);
+      assert.deepEqual(A.binding(g,indexed.reference.route),nearest.binder);
       assert.deepEqual(nearest.binder, A.binding(g, nearest.reference.route));
       assert.equal(nearestReference(g, site, 0), null);
     } else assert.equal(nearest, null);

@@ -5,7 +5,7 @@ const fs = require('node:fs');
 const crypto = require('node:crypto');
 const zlib = require('node:zlib');
 const A = require('../../../public/js/proof-atlas-library-data');
-const {firstBindingBody} = require('../../../public/js/proof-atlas-arithmetic');
+const {firstBindingBody, nearestReference} = require('../../../public/js/proof-atlas-arithmetic');
 global.window = {};
 require('../../../public/data/proof-atlas/library-manifest');
 require('../../../public/data/proof-atlas/goedel-sample-manifest');
@@ -186,7 +186,7 @@ for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_S
   const totals = {edition:e.id, proofs:0, exhaustiveChecks:0, affectedProofs:0, proofsWithConflictingApplication:0, rows:0, conflictingRows:0, conflictingApplications:0, outerMissApplications:0, proofsWithOuterMiss:0};
   let childSlots = 0n, splitSlots = 0n, extraDestinations = 0n, affectedProofBodies = 0;
   let example = null, deepest = null;
-  const shortcuts = {eligible:0, limited:0, shorter:0, largestSaving:0};
+  const shortcuts = {eligible:0, limited:0, shallow:0, shorter:0, largestSaving:0};
   let testedRows = 0, foundBodies = 0, shorterUseElsewhere = 0;
   let visits = 0n, affected = 0n, scopedRows = 0n, largestIncrease = null;
   for (const d of e.declarations.filter(x => x.kind === 'theorem' && x.bodyAvailable)) {
@@ -244,11 +244,38 @@ for (const e of [...window.PROOF_ATLAS_LIBRARY.editions, window.PROOF_ATLAS_AI_S
       }
       totals.exhaustiveChecks++;
     }
+    let routes;
     for (const row of r.comparable) {
       shortcuts.eligible++;
       const hit = firstBindingBody(g,row);
       if (hit.limited) { shortcuts.limited++; continue; }
       assert(hit.slots);
+      if (hit.shallow) {
+        shortcuts.shallow++;
+        const full = firstBindingBody(g,row,200000);
+        assert(!full.limited && !full.shallow);
+        const total = path => path.slots.length + path.useSlots.length;
+        assert.equal(hit.slots.length, full.slots.length);
+        assert.equal(total(hit), total(full));
+        assert.equal(total(hit.shorterUse || hit), total(full.shorterUse || full));
+        routes ??= A.routes(g);
+        const base = routes.route(row);
+        if (g.neededScope[row]) {
+          const site = {node:row, route:base};
+          const near = nearestReference(g,site);
+          assert(near);
+          const control = nearestReference(g,site,200000);
+          assert.deepEqual(near.binder,control.binder);
+          assert.deepEqual(A.binding(g,near.reference.route),control.binder);
+        }
+        for (const path of [hit, hit.shorterUse].filter(Boolean)) {
+          const slots = base.slots.concat(path.slots);
+          const use = {root:base.root, slots:slots.concat(path.useSlots)};
+          assert.equal(A.walk(g,use),path.reference);
+          assert.deepEqual(A.binding(g,use),{node:path.binder,route:{root:base.root,slots:slots.slice(0,-1)}});
+        }
+        shortcuts.example ??= {name:d.name,row,base};
+      }
       if (!hit.shorterUse) continue;
       const shorter = hit.shorterUse;
       const saving = hit.slots.length + hit.useSlots.length - shorter.slots.length - shorter.useSlots.length;

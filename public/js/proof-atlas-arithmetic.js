@@ -421,6 +421,34 @@
   return {reference,binder:A.binding(data,reference.route)};
  }
  // The closest used external binder determines the path to every farther one.
+ const freeMaskCache=new WeakMap();
+ // A packed set of external indices avoids expanding repeated paths to find a binder.
+ function indexedNearestReference(data,site){
+  if(site.node>=200000)return null;
+  let masks=freeMaskCache.get(data);
+  if(!masks){masks=[];freeMaskCache.set(data,masks);}
+  for(let n=masks.length;n<=site.node;n++){
+   if(data.neededScope[n]>256)return null;
+   let mask=0n;
+   if(data.kind[n]===0)mask=1n<<BigInt(data.payloads[n].index);
+   else data.children[n].forEach((child,k)=>{
+    const body=A.fields[A.kinds[data.kind[n]]][k]==='body';
+    mask|=body?masks[child]>>1n:masks[child];
+   });
+   masks.push(mask);
+  }
+  let n=site.node,bit=masks[n]&-masks[n];
+  const slots=site.route.slots.slice();
+  while(data.kind[n]!==0){
+   const fields=A.fields[A.kinds[data.kind[n]]];
+   const k=data.children[n].findIndex((child,i)=>(masks[child]&(fields[i]==='body'?bit<<1n:bit))!==0n);
+   if(k<0)throw Error('Missing indexed binder reference');
+   if(fields[k]==='body')bit<<=1n;
+   slots.push(k);n=data.children[n][k];
+  }
+  const reference={node:n,route:{root:site.route.root,slots}};
+  return {reference,binder:A.binding(data,reference.route)};
+ }
  function nearestReference(data,site,limit=8192){
   if(!data.neededScope[site.node])return null;
   const todo=[{node:site.node,depth:0,parent:null}],seen=new Set();
@@ -430,7 +458,7 @@
    if(data.neededScope[node]<=depth)continue;
    const key=node+':'+depth;
    if(seen.has(key))continue;
-   if(seen.size>=limit)return null;
+   if(seen.size>=limit)return limit>0?indexedNearestReference(data,site):null;
    seen.add(key);
    if(data.kind[node]===0){
     const free=data.payloads[node].index-depth;
@@ -447,8 +475,82 @@
   const reference={node:best.node,route:{root:site.route.root,slots:site.route.slots.concat(suffix.reverse())}};
   return {reference,binder:A.binding(data,reference.route)};
  }
- // Find the first body field on which an introduced binder is used.
+ const variablePresence=new WeakMap();
+ // Retry a large query with one presence byte per row of the compiled prefix.
  function firstBindingBody(data,root,limit=8192){
+  const result=searchBindingBody(data,root,limit);
+  if(!result.limited || root>=200000 || limit<=0)return result;
+  const cached=variablePresence.get(data);
+  if(cached && root<cached.length)return shallowBindingBody(data,root,limit,cached);
+  const presence=new Uint8Array(root+1);
+  if(cached)presence.set(cached);
+  for(let n=cached?.length||0;n<=root;n++)
+   presence[n]=Number(data.kind[n]===0 || data.children[n].some(child=>presence[child]));
+  variablePresence.set(data,presence);
+  return shallowBindingBody(data,root,limit,presence);
+ }
+ // Breadth-first search can certify a shallow witness before visiting a large tail.
+ function shallowBindingBody(data,root,limit,presence){
+  let remaining=limit;
+  const field=(n,k)=>A.fields[A.kinds[data.kind[n]]][k];
+  function path(item){
+   const slots=[];
+   for(;item.parent;item=item.parent)slots.push(item.slot);
+   return slots.reverse();
+  }
+  // exact selects a use of the binder immediately outside start. Otherwise seek
+  // any variable introduced within start, recording how deeply it is nested.
+  function variable(start,exact){
+   const queue=[{node:start,depth:0}],seen=new Set();
+   for(let i=0;i<queue.length;i++){
+    const item=queue[i],{node,depth}=item,key=node+':'+depth;
+    if(seen.has(key)||!presence[node]||(exact&&data.neededScope[node]<=depth))continue;
+    if(remaining--<=0)return {limited:true};
+    seen.add(key);
+    if(data.kind[node]===0 && (exact?data.payloads[node].index===depth:data.payloads[node].index<depth))return item;
+    data.children[node].forEach((child,slot)=>queue.push({node:child,depth:depth+Number(field(node,slot)==='body'),parent:item,slot}));
+   }
+   return null;
+  }
+  function witness(slots,useSlots){
+   let n=root,binder;
+   const fields=slots.map(k=>{binder=n;n=data.children[n][k];return field(binder,k);});
+   const reference=useSlots.reduce((row,k)=>data.children[row][k],n);
+   return {slots,fields,binder,body:n,useSlots,reference};
+  }
+  const queue=[{node:root}],seen=new Set();
+  let first;
+  for(let i=0;i<queue.length&&!first;i++){
+   const item=queue[i],n=item.node;
+   if(seen.has(n)||!presence[n])continue;
+   if(remaining--<=0)return {limited:true};
+   seen.add(n);
+   for(const [slot,child] of data.children[n].entries()){
+    if(field(n,slot)==='body'){
+     const use=variable(child,true);
+     if(use?.limited)return use;
+     if(use){first=witness(path(item).concat(slot),path(use));break;}
+    }
+    queue.push({node:child,parent:item,slot});
+   }
+  }
+  if(!first)return {slots:null,shallow:true};
+  const use=variable(root,false);
+  if(use?.limited)return use;
+  const slots=path(use);
+  if(slots.length<first.slots.length+first.useSlots.length){
+   let cursor=use,index=data.payloads[use.node].index;
+   while(cursor.parent){
+    if(field(cursor.parent.node,cursor.slot)==='body' && index--===0)break;
+    cursor=cursor.parent;
+   }
+   const body=path(cursor);
+   first.shorterUse=witness(body,slots.slice(body.length));
+  }
+  first.shallow=true;
+  return first;
+ }
+ function searchBindingBody(data,root,limit){
   const pending=[root],rows=new Set();
   while(pending.length){
    const n=pending.pop();
