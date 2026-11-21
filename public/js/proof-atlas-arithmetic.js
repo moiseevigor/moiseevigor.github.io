@@ -212,11 +212,23 @@
   sub_nonpos_of_le:[7,'a ≤ b','a − b ≤ 0'],
   sub_neg_of_lt:[7,'a < b','a − b < 0']
  };
+ const signRules=new Map([
+  ['mul_nonneg_of_nonpos_of_nonpos',{arity:11,terms:[3,4],premises:['a ≤ 0','b ≤ 0'],conclusion:'0 ≤ a × b'}],
+  ['mul_pos_of_neg_of_neg',{arity:11,terms:[7,8],premises:['a < 0','b < 0'],conclusion:'0 < a × b'}],
+  ['sq_nonneg',{arity:7,terms:[6],premises:[],conclusion:'0 ≤ a²'}]
+ ]);
  function arithmeticInference(data,at){
   let head=at.node,arity=0;
-  while(data.kind[head]===5 && arity<10){head=data.children[head][0];arity++;}
+  while(data.kind[head]===5 && arity<11){head=data.children[head][0];arity++;}
   if(data.kind[head]!==4)return null;
   const name=data.payloads[head].name,prefix='Mathlib.Tactic.Linarith.';
+  const sign=signRules.get(name);
+  if(sign){
+   if(arity!==sign.arity)return null;
+   const args=namedArguments(data,at,name,arity);
+   return {name,terms:sign.terms.map(i=>args[i]),proofs:args.slice(arity-sign.premises.length),
+    premises:sign.premises,conclusion:sign.conclusion};
+  }
   if(!name.startsWith(prefix))return null;
   const rule=arithmeticRules[name.slice(prefix.length)];
   if(!Array.isArray(rule)||arity!==rule[0])return null;
@@ -366,7 +378,7 @@
     const label=cert?inference.premises[i]+' ('+cert.values.map(v=>v.text).join(' < ')+')':inference.premises[i];
     inputs.append(link(label,proof));
    });
-   inputs.append(' ⇒ '+inference.conclusion);
+   inputs.append((inference.proofs.length?' ⇒ ':'')+inference.conclusion);
    if(inference.name==='Mathlib.Tactic.Linarith.mul_eq')
     inputs.append(' (the helper accepts the positivity premise and proves the equality from the zero factor alone)');
    for(const [i,site] of inference.terms.entries()){

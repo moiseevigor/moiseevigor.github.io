@@ -65,8 +65,9 @@ function scan(d,allBoundRoutes){
      const partial={node:g.children[t.premise.node][0],route:{root:1,slots:t.premise.route.slots.concat(0)}};
      assert.equal(arithmeticInference(g,partial),null);
      sites.forEach((s,i)=>{
-      assert.equal(A.walk(g,s.route),producer.args.at(i-sites.length));
-      assert.deepEqual(s.route.slots,t.premise.route.slots.concat(Array(sites.length-i-1).fill(0),1));
+      const k=head==='mul_nonneg_of_nonpos_of_nonpos'?[3,4,9,10][i]:producer.args.length-sites.length+i;
+      assert.equal(A.walk(g,s.route),producer.args[k]);
+      assert.deepEqual(s.route.slots,t.premise.route.slots.concat(Array(producer.args.length-k-1).fill(0),1));
      });
      arithmetic.push({proof:d.name,at:{node,route},premise:t.premise,sites:[...inference.proofs,...inference.terms],labels:inference.premises,conclusion:inference.conclusion});
     }
