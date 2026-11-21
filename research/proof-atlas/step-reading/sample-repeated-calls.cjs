@@ -5,6 +5,8 @@ const A=require('../../../public/js/proof-atlas-library-data');
 const repeated=require('../../../public/js/proof-atlas-repeated-receiver');
 const {applicationAtUse}=require('../../../public/js/proof-atlas-omitted-references');
 global.window={};require('../../../public/data/proof-atlas/goedel-sample-manifest');
+const exhaustive=process.argv.includes('--all-distinct-ports');
+const distinct=exhaustive || process.argv.includes('--distinct-ports');
 const results=[];
 for(const d of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations.filter(d=>d.kind==='theorem' && d.bodyAvailable)){
  const raw=z.gunzipSync(fs.readFileSync('.'+d.indexFile));
@@ -13,17 +15,33 @@ for(const d of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations.filter(d=>d.kin
  for(const [node,kind] of g.kind.entries()){
   weights.push(g.children[node].reduce((n,c)=>n+weights[c],BigInt(kind===0)));
  }
- const root=g.roots[1],total=weights[root],samples=Number(total<12n?total:12n);
+ const root=g.roots[1],total=weights[root];
+ const census=distinct?require('./distinct-call-ports.cjs')(g,exhaustive?Infinity:12):null;
+ const samples=census?census.routes.length:Number(total<12n?total:12n);
  const row={proof:d.name,samples,outsideCall:0,single:0,repeated:0,limited:0,checked:0,maxMatches:'0',maxStates:0};
+ if(census){
+  // Count bvar children at application edges bottom-up, independently of call spines.
+  const direct=[];
+  for(const [id,kind] of g.kind.entries()){
+   direct.push(g.children[id].reduce((sum,c)=>sum+direct[c]+BigInt(kind===5 && g.kind[c]===0),0n));
+  }
+  assert.equal(String(direct[root]),census.expanded);
+ }
+ if(census)row.population={distinct:census.distinct,globallySingle:census.globallySingle,expanded:census.expanded};
  for(let i=0;i<samples;i++){
   let n=root,rank=BigInt(2*i+1)*total/BigInt(2*samples);
-  const slots=[];
-  while(g.kind[n]!==0){
+  const slots=census?census.routes[i].slots:[];
+  if(census)n=A.walk(g,{root:1,slots});
+  while(!census && g.kind[n]!==0){
    const field=g.children[n].findIndex(c=>{if(rank<weights[c])return true;rank-=weights[c];return false;});
    assert(field>=0);slots.push(field);n=g.children[n][field];
   }
   const route={root:1,slots},binder=A.binding(g,route).route;
   const port=applicationAtUse(g,{node:n,route},{includePeers:false});
+  if(census){
+   assert.equal(port?.call.node,census.routes[i].callNode);
+   assert.equal(port.call.route.slots.length,census.routes[i].callLength);
+  }
   if(!port){row.outsideCall++;continue;}
   const suffix=slots.slice(port.call.route.slots.length);
   let q;
@@ -31,6 +49,7 @@ for(const d of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations.filter(d=>d.kin
    if(!(e instanceof RangeError)||!/^Receiver query (state|depth) limit$/.test(e.message))throw e;
    row.limited++;continue;
   }
+  if(census)assert(q.total<=census.routes[i].upper);
   const selected=q.rankOf(port.call.route);
   assert(selected!==null);assert.deepEqual(q.select(selected),port.call.route);
   if(q.total>1n)row.repeated++;else row.single++;
