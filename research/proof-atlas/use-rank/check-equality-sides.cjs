@@ -32,6 +32,25 @@ for (let i=2;i<1028;i++) {
 }
 assert.deepEqual(firstStructuralDifference(chains,1026,1027),{status:'limit'});
 assert.deepEqual(firstStructuralDifference(chains,1026,1026),{status:'identical'});
+// Independent slot control with differences in all three fields of the nested call.
+{
+  const data={kind:[4],payloads:[{name:'Eq.trans'}],children:[[]],roots:[]};
+  for(let i=1;i<=8;i++){data.kind.push(9);data.payloads.push({value:String(i)});data.children.push([]);}
+  function apply(args){
+    let fn=0;
+    for(const arg of args){
+      data.kind.push(5);data.payloads.push({});data.children.push([fn,arg]);fn=data.kind.length-1;
+    }
+    return fn;
+  }
+  const inner=apply([2,3,4,5,7,8]);
+  const outer=apply([1,2,3,4,inner,8]);data.roots.push(outer);
+  const parts=exactCallInputs(data,{node:outer,route:{root:0,slots:[]}},'Eq.trans',6);
+  const {mismatches}=equalitySegments(data,parts)[0];
+  assert.deepEqual(mismatches.map(m=>[m.field,atlas.walk(data,m.outerSite.route),atlas.walk(data,m.nestedSite.route)]),
+    [['carrier',1,2],['start',2,3],['end',3,5]]);
+}
+const mismatchLabels=new Map();
 let nested=0n,maximum=0,boundaries=0n;
 let transCalls=0n, transRows=0, transProofs=0;
 let equalities = 0n, shared = 0n, affected = 0;
@@ -75,6 +94,18 @@ for (const record of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations) {
           assert(folded.some(s=>s.boundary==='display limit'));
         }
         if(segments.some(s=>s.boundary))boundaries+=count;
+        for(const segment of segments){
+          for(const m of segment.mismatches??[]){
+            const actual=reference(data,m.outer.node,m.nested.node);
+            for(const [base,site,node] of [[m.outer,m.outerSite,actual.left],[m.nested,m.nestedSite,actual.right]]){
+              assert.deepEqual(site.route,{root:base.route.root,slots:base.route.slots.concat(actual.slots)});
+              assert.equal(atlas.walk(data,site.route),node);
+            }
+            const names=[actual.left,actual.right].map(id=>data.payloads[spine(data,id).head].name);
+            const key=[m.field,...names].join(' / ');
+            mismatchLabels.set(key,(mismatchLabels.get(key)??0n)+count);
+          }
+        }
         maximum=Math.max(maximum,segments.length);
         chainsHere+=count;
         transRows++;
@@ -106,3 +137,4 @@ console.log('Equality occurrences:',String(equalities),'with identical operand r
 console.log('Different operand rows:',differences,'below root:',String(belowRoot),'maximum field depth:',maxDepth);
 console.log('Eq.trans calls:',String(transCalls),'distinct rows:',transRows,'proofs:',transProofs);
 console.log('Expanded chains:',String(nested),'maximum steps:',maximum,'calls with boundaries:',String(boundaries));
+for(const [pair,count] of mismatchLabels) console.log(pair,String(count));

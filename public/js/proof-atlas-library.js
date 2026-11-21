@@ -224,7 +224,16 @@
      const row=el('li');
      row.append(sourceLink(termLabel(step.start),step.start),' = ',sourceLink(termLabel(step.end),step.end),
       ' · ',sourceLink('Proof '+(index+1),step.proof));
-     if(step.boundary)row.append(' · '+step.boundary);
+     if(step.mismatches){
+      for(const m of step.mismatches){
+       const detail=el('p');
+       detail.append('Different compiled '+m.field+' · ',sourceLink('Enclosing term',m.outer),' / ',sourceLink('Nested term',m.nested));
+       if(m.outerSite)detail.append(' · First difference: ',sourceLink(termLabel(m.outerSite),m.outerSite),
+        ' / ',sourceLink(termLabel(m.nestedSite),m.nestedSite));
+       else detail.append(m.difference==='limit'?' · Comparison limit reached':' · Matching expression structure');
+       row.append(detail);
+      }
+     }else if(step.boundary)row.append(' · '+step.boundary);
      list.append(row);
     }
     detail.append(list);section.append(detail);

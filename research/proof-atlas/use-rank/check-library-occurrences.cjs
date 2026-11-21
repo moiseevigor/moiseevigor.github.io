@@ -118,7 +118,16 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
     await trace.locator('summary').click();
     const links=trace.getByRole('link',{name:/^Proof /});
     assert.equal(await links.count(),expected.length);
-    assert.equal((await trace.innerText()).includes('different compiled endpoints or carrier'),boundary);
+    assert.equal((await trace.innerText()).includes('Different compiled start'),boundary);
+    if(boundary){
+     const reason=trace.locator('p').filter({hasText:'Different compiled start'});
+     for(const [index,node] of [85996,86092,85974,86082].entries()){
+      const link=reason.getByRole('link').nth(index);
+      const u=new URL(await link.evaluate(a=>a.href)),path=u.searchParams.get('route').split(':');
+      assert.equal(atlas.walk(data,{root:Number(path[0]),slots:path[1].split('.').map(Number)}),node);
+      assert.equal(u.hash,'#expr-'+node);
+     }
+    }
     for(const [i,node] of expected.entries()){
      const url=new URL(await links.nth(i).evaluate(a=>a.href));
      const route=url.searchParams.get('route').split(':');

@@ -25,8 +25,16 @@
    const step=pending.pop();
    const inner=exactCallInputs(data,step.proof,'Eq.trans',6);
    if(!inner){segments.push(step);continue;}
-   if(inner[0].node!==carrier.node || inner[1].node!==step.start.node || inner[3].node!==step.end.node){
-    segments.push({...step,boundary:'different compiled endpoints or carrier'});continue;
+   const mismatches=[];
+   for(const [field,outer,nested] of [['carrier',carrier,inner[0]],['start',step.start,inner[1]],['end',step.end,inner[3]]]){
+    if(outer.node===nested.node)continue;
+    const difference=firstStructuralDifference(data,outer.node,nested.node);
+    const locate=(at,node)=>({node,route:{root:at.route.root,slots:at.route.slots.concat(difference.slots)}});
+    mismatches.push({field,outer,nested,difference:difference.status,...(difference.slots?{
+     outerSite:locate(outer,difference.left),nestedSite:locate(nested,difference.right)}:{})});
+   }
+   if(mismatches.length){
+    segments.push({...step,boundary:'different compiled endpoints or carrier',mismatches});continue;
    }
    if(segments.length+pending.length+2>limit){
     segments.push({...step,boundary:'display limit'});continue;
