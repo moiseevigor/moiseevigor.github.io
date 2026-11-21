@@ -61,6 +61,33 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
    const window={};
    for(const manifest of ['library-manifest','type-notation-catalog'])
     require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/'+manifest+'.js','utf8'),{window});
+   require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/goedel-sample-manifest.js','utf8'),{window});
+   const aiEdition=window.PROOF_ATLAS_AI_SAMPLE.edition;
+   const inputs=aiEdition.declarations.flatMap(record=>{
+    const packet=JSON.parse(fs.readFileSync('public/data/proof-atlas/input-roles/'+record.indexSha256+'.json'));
+    return packet.entries.map(entry=>({entry,record}));
+   });
+   for(const {entry,record} of [inputs.find(x=>x.entry.count===90194),inputs.find(x=>!x.entry.count)]){
+    const prefix=Array(entry.depth).fill(1).join('.');
+    const path='http://localhost/projects/proof-atlas/library/?edition='+aiEdition.id+'&proof='+record.name;
+    await page.goto(path+'&route=1:'+prefix+'#expr-'+entry.node);
+    const title=page.getByText('Where this input is used',{exact:true});
+    await title.click();
+    const roles=title.locator('..');
+    if(!entry.count){
+     await roles.getByText('This proof body has no reference to this input.').waitFor();
+     assert.equal(await roles.getByRole('link').count(),0);
+     continue;
+    }
+    const first=entry.groups[0];
+    await roles.getByText(first.label,{exact:true}).waitFor();
+    assert.equal(await roles.getByRole('link').count(),31);
+    assert((await roles.innerText()).includes('78,671'));
+    await roles.getByRole('link',{name:first.label,exact:true}).click();
+    await page.waitForFunction(r=>new URL(location.href).searchParams.get('route')===r,'1:'+first.slots);
+    await page.locator('#pl-expression').getByRole('button',{name:new RegExp('^Enclosing binder #'+entry.node+' ')}).click();
+    await page.waitForFunction(r=>new URL(location.href).searchParams.get('route')===r,'1:'+prefix);
+   }
    const example=window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id==='published-15').declarations.find(r=>r.name==='JacobiData.a_deriv_form._simp_1_5');
    const compiled=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+example.indexFile)));
    const groups=require('../../../public/js/proof-atlas-omitted-references').inspect(compiled,window.PROOF_ATLAS_TYPE_NOTATION);

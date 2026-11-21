@@ -182,6 +182,44 @@
   const actions=el('div',undefined,'pl-actions');cs.forEach((c,j)=>{const b=el('button',A.fields[current.kind(i)][j]+' · #'+c+' · '+current.kind(c));b.type='button';b.onclick=()=>selectOccurrence(c,true,true,{root:selectedRoute.root,slots:[...selectedRoute.slots,j]});actions.append(b);});
   if(binder!==undefined){const b=el('button','Enclosing binder #'+binder+' · '+label(binder));b.type='button';b.onclick=()=>selectOccurrence(binder,true,true,binding.route);actions.append(b);}
   if(current.kind(i)==='const'){const local=edition.declarations.find(d=>d.name===p.name);target.append(local?link('Open the referenced '+local.kind+' and its entire proof ↗',url(local.name)):el('p','External Lean/Mathlib reference; its body is outside the project corpus.'));}
+  if(edition.id===window.PROOF_ATLAS_AI_SAMPLE?.edition.id && current.kind(i)==='lam' && nextRoute.root===1 &&
+     nextRoute.slots.every(slot=>slot===1)){
+   let ancestor=owner.data.roots[1];
+   const leading=nextRoute.slots.every(()=>{
+    if(owner.data.kind[ancestor]!==6)return false;
+    ancestor=owner.data.children[ancestor][1];return true;
+   });
+   if(leading){
+    const panel=el('details'),note=el('p');note.setAttribute('role','status');
+    panel.append(el('summary','Where this input is used'),note);target.append(panel);
+    let loaded=false;
+    panel.ontoggle=async()=>{
+     if(!panel.open || loaded)return;
+     loaded=true;note.textContent='Loading receiving roles…';
+     try{
+      const digest=owner.record.indexSha256;
+      const response=await fetch('/public/data/proof-atlas/input-roles/'+digest+'.json');
+      if(!response.ok)throw Error('Missing role data');
+      const packet=await response.json();
+      if(!panel.isConnected)return;
+      const entry=packet.entries.find(r=>r.node===i && r.depth===nextRoute.slots.length);
+      if(packet.indexSha256!==digest || !entry)throw Error('Input mismatch');
+      const list=el('ol');
+      for(const group of entry.groups){
+       const route={root:1,slots:group.slots.split('.').map(Number)};
+       const binding=A.binding(owner.data,route);
+       if(A.walk(owner.data,route)!==group.node || binding?.node!==i ||
+          binding.route.slots.join('.')!==nextRoute.slots.join('.'))throw Error('Witness mismatch');
+       const row=el('li');
+       row.append(link(group.label,url(owner.record.name,group.node,route)),' · '+number(group.count));
+       list.append(row);
+      }
+      note.textContent=entry.count?number(entry.count)+' references in '+number(entry.groups.length)+' receiving roles. Each link opens the first use.':'This proof body has no reference to this input.';
+      if(list.children.length)panel.append(list);
+     }catch(error){loaded=false;note.textContent='Receiving roles unavailable. Close and reopen to retry.';}
+    };
+   }
+  }
   if([6,7,8].includes(owner.data.kind[i])&&window.ProofAtlasBindingUses&&window.ProofAtlasRecursiveInputs){const toggle=el('button','Show binding references'),host=el('div'),at={root:selectedRoute.root,slots:[...selectedRoute.slots]};toggle.type='button';toggle.id='pl-binding-toggle';toggle.setAttribute('aria-expanded','false');host.hidden=true;host.id='pl-binding-uses';toggle.setAttribute('aria-controls',host.id);target.append(toggle,host);toggle.onclick=()=>safely((async()=>{if(!host.hidden){bindingView?.dispose();bindingView=null;host.hidden=true;toggle.setAttribute('aria-expanded','false');toggle.textContent='Show binding references';return;}toggle.disabled=true;toggle.textContent='Counting binding references…';host.setAttribute('aria-busy','true');try{await new Promise(resolve=>requestAnimationFrame(resolve));if(owner!==current||selectionToken!==selectionSerial)return;host.hidden=false;bindingView=window.ProofAtlasBindingUses.mount(host,{data:owner.data,record:owner.record,route:at,getNativeProviders:()=>[typing,caseTyping,betaTyping,letTyping].filter(Boolean),prepareNative:signal=>prepareUseSiteInputs(owner,signal),onProofOccurrence:(node,route)=>safely(selectOccurrence(node,true,true,route))});toggle.setAttribute('aria-expanded','true');toggle.textContent='Hide binding references';}catch(error){if(owner===current&&selectionToken===selectionSerial){host.hidden=false;host.textContent='Binding references unavailable: '+error.message;toggle.setAttribute('aria-expanded','true');toggle.textContent='Hide binding references';}}finally{toggle.disabled=false;host.setAttribute('aria-busy','false');}})());}
   if(window.ProofAtlasPackedRoutes&&owner.record.uniqueNodes<=window.ProofAtlasPackedRoutes.limits.sourceNodes){const packed=window.ProofAtlasPackedRoutes.encode(selectedRoute.root,selectedRoute.slots),u=new URL('/projects/proof-atlas/library/',location.origin);u.searchParams.set('view','occurrence');u.searchParams.set('edition',edition.id);u.searchParams.set('proof',owner.record.name);u.hash='occurrence='+owner.record.indexSha256+'.'+packed.root+'.'+packed.depth+'.'+packed.slots;const a=link('Open occurrence geometry',u.pathname+u.search+u.hash);a.dataset.occurrenceWindowLink='';actions.append(a);}
   if(window.ProofAtlasSourceCorridor&&selectedRoute.slots.length){const host=el('div'),at={root:selectedRoute.root,slots:[...selectedRoute.slots]},Q=window.ProofAtlasSourceCorridor;target.append(host);corridorControl=Q.control(host,{prepare:signal=>Q.create(Q.open(owner.data,owner.record),{root:at.root,slots:[]},at,{signal}),onSource:(node,route)=>safely(selectOccurrence(node,true,true,route)),isCurrent:()=>owner===current&&selectionToken===selectionSerial});}

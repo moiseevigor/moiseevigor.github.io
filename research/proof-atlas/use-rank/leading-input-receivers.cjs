@@ -83,6 +83,19 @@ function audit(record) {
   return {record,inputs,total};
 }
 const reports=edition.declarations.map(audit);
+if (process.argv.includes('--write-packets')) {
+  const dir='public/data/proof-atlas/input-roles';
+  fs.mkdirSync(dir,{recursive:true});
+  for (const {record,inputs} of reports) {
+    const entries=inputs.map(input=>({
+      node:input.node,depth:input.route.slots.length,count:input.count,
+      groups:[...input.groups].sort((a,b)=>b[1].count-a[1].count).map(([label,g])=>({
+        label,count:g.count,node:g.node,slots:g.route.slots.join('.')
+      }))
+    }));
+    fs.writeFileSync(dir+'/'+record.indexSha256+'.json',JSON.stringify({indexSha256:record.indexSha256,entries})+'\n');
+  }
+}
 const groups=reports.flatMap(r=>r.inputs.map(i=>i.groups.size));
 const lines=['# Receiving calls for leading proof inputs','',
   'Each group belongs to one binder in one compiled proof. A literal constant is grouped by its declaration name, argument position and arity. Other function heads are grouped by constructor kind. Direct structural uses are grouped by parent field. Each link opens the first reference in its group. Counts include implicit arguments and repeated subtrees.','',
