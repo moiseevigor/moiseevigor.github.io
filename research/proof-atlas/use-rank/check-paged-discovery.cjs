@@ -152,7 +152,31 @@ async function main(){
      assert(passage);
      return 'Premise '+a.callee+' · '+passage.title;
     });
-    entries.push([node,route.slots.join(''),notes.concat(label).join(' · ')]);
+    const links=[];
+    const premise={root:route.root,slots:route.slots.concat(1)};
+    const binder=atlas.binding(data,premise);
+    if(binder && data.kind[binder.node]===8){
+     const value={root:binder.route.root,slots:binder.route.slots.concat(1)};
+     const valuePath=atlas.path(data,value),local=data.payloads[binder.node].declName;
+     for(const [path,anchors] of reviewed){
+      if(path!==valuePath && !path.startsWith(valuePath+'.'))continue;
+      let id=atlas.walk(data,value);
+      const slots=value.slots.slice();
+      for(const field of path.slice(valuePath.length).split('.').filter(Boolean)){
+       const slot=atlas.fields[atlas.kinds[data.kind[id]]].indexOf(field);
+       assert(slot>=0);slots.push(slot);id=data.children[id][slot];
+      }
+      for(const a of anchors){
+       assert.equal(id,a.node);assert.equal(data.payloads[spine(data,id).head].name,a.callee);
+       notes.push('Premise '+local+' · definition contains '+a.callee);
+       if(!links.length)links.push(['Definition of '+local,atlas.walk(data,value),value.slots.join('')]);
+       links.push([a.callee,id,slots.join('')]);
+      }
+     }
+    }
+    const entry=[node,route.slots.join(''),notes.concat(label).join(' · ')];
+    if(links.length)entry.push(links);
+    entries.push(entry);
     count++;
    }
    catalog.push({edition:descriptor.edition,name:record.name,indexSha256:record.indexSha256,sourceSha256:record.sourceSha256,entries});

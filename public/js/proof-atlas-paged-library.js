@@ -86,7 +86,7 @@
     const message=el('p','Loading substitution routes…');
     panel.replaceChildren(summary,message);
     try{
-     substitutionCatalog??=fetch('/public/data/proof-atlas/substitution-routes.json?v=2').then(async response=>{
+     substitutionCatalog??=fetch('/public/data/proof-atlas/substitution-routes.json?v=3').then(async response=>{
       if(!response.ok)throw Error('Route index unavailable');
       const catalog=await response.json();
       if(catalog.format!=='ProofAtlasSubstitutionRoutes/1')throw Error('Unknown route index format');
@@ -102,12 +102,22 @@
      const label=el('label','Substitution '),picker=el('select'),open=el('a','Open substitution');
      picker.id='pl-substitution-picker';label.htmlFor=picker.id;
      for(const [node,,description] of entry.entries)picker.append(el('option',description+' · #'+node));
+     const trail=el('p');
      function destination(){
       const [node,slots]=entry.entries[picker.selectedIndex],u=new URL(full.href);
       u.searchParams.set('loading','paged');u.searchParams.set('route','1:'+Array.from(slots).join('.'));
       u.hash='expr-'+node;open.href=u.href;
+      trail.replaceChildren();
+      const links=entry.entries[picker.selectedIndex][3]??[];
+      trail.hidden=!links.length;
+      for(const [i,[label,target,fields]] of links.entries()){
+       u.searchParams.set('route','1:'+Array.from(fields).join('.'));u.hash='expr-'+target;
+       const link=el('a',label);link.href=u.href;
+       if(i)trail.append(i===1?' contains ':', ');
+       trail.append(link);
+      }
      }
-     picker.onchange=destination;destination();panel.append(label,picker,' ',open);
+     picker.onchange=destination;destination();panel.append(label,picker,' ',open,trail);
     }catch(error){
      message.textContent='Substitution routes unavailable · '+error.message;
      loaded=false;

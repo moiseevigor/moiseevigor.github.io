@@ -720,6 +720,21 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
    assert.equal(pickedCall.selected,id);
    await page.goto('http://localhost/projects/proof-atlas/library/?loading=paged&edition=published-15&proof=JacobiData.slope_bound_abs');
    await finder.click();
+   for(const [local,callee,value,node] of [['hprod','JacobiData.T1_mul_T2',1193,950],['hsum','JacobiData.T1_T2_same_sign',2194,1299]]){
+    const choice=picker.getByRole('option',{name:new RegExp('^Premise '+local+' ·')});
+    await choice.waitFor({state:'attached'});
+    await picker.selectOption({label:await choice.textContent()});
+    const definition=page.getByRole('link',{name:'Definition of '+local,exact:true});
+    const source=new URL(await definition.evaluate(a=>a.href));
+    assert.equal(source.hash,'#expr-'+value);
+    const reviewed=page.getByRole('link',{name:callee,exact:true});
+    const reviewedUrl=new URL(await reviewed.evaluate(a=>a.href));
+    assert(reviewedUrl.searchParams.get('route').startsWith(source.searchParams.get('route')+'.'));
+    await reviewed.click();
+    await page.waitForFunction(id=>window.ProofAtlasLibrary?.getSnapshot()?.selected===id,node);
+    assert.equal('1:'+(await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot().route.slots)).join('.'),reviewedUrl.searchParams.get('route'));
+    await finder.click();
+   }
    const product=picker.getByRole('option',{name:/^Premise JacobiData\.T1_mul_T2/});
    await product.waitFor({state:'attached'});
    await picker.selectOption({label:await product.textContent()});

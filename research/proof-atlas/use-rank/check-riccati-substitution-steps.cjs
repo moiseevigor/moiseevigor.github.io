@@ -90,3 +90,41 @@ for(const c of product.enclosingCalls.filter(c=>c.field==='direct equality premi
 }
 console.table(anchors.map(a=>({step:a.step,anchor:a.node,subtree:Number(data.expanded[a.node]),inside:a.inside,nearest:a.nearest,witnesses:a.witnesses,
  enclosing:a.enclosingCalls.map(c=>c.node+' '+c.field).join(', ')})));
+
+const locals=require('./riccati-local-inputs.cjs')(data);
+const {applicationAtUse}=require('../../../public/js/proof-atlas-omitted-references');
+const {sourceInput}=require('../../../public/js/proof-atlas-application-ports');
+const observed=[],receivers=new Map();
+for(const a of anchors.filter(a=>a.role==='call')){
+ const at={node:a.node,route:{root:1,slots:[...a.slots].map(Number)}};
+ const inputs=require('./lexical-inputs.cjs')(data,at);
+ assert(inputs);
+ assert(inputs.every(input=>data.kind[input.binder.node]!==8));
+ const producers=locals.localSteps.filter(s=>a.slots.startsWith(s.value.route.slots.join('')));
+ assert.equal(producers.length,1);
+ const producer=producers[0];
+ const refs=locals.finalBody.uses.filter(u=>locals.localSteps[u.producer]===producer);
+ assert.equal(refs.length,1);assert.equal(BigInt(refs[0].count),1n);
+ const use=refs[0].use,binder=atlas.binding(data,use.route);
+ assert.equal(data.children[binder.node][1],producer.value.node);
+ assert.deepEqual(binder.route.slots.concat(1),producer.value.route.slots);
+ const receiver=applicationAtUse(data,use);
+ assert.deepEqual(sourceInput(data,receiver.call,receiver.slot),use);
+ if(receiver.label==='congrArg'){
+  const entry=catalog.entries.find(e=>e[0]===receiver.call.node && e[1]===receiver.call.route.slots.join(''));
+  assert.deepEqual(entry[3],[
+   ['Definition of '+producer.name,producer.value.node,producer.value.route.slots.join('')],
+   [a.callee,at.node,a.slots]
+  ]);
+ }
+ receivers.set(producer.name,receiver.call);
+ observed.push([a.node,producer.name,producer.value.node,receiver.label,receiver.call.node,receiver.slot]);
+}
+assert.deepEqual(observed,[
+ [950,'hprod',1193,'congrArg',3219,6],
+ [1299,'hsum',2194,'congrArg',2358,6],
+ [1227,'amgm',1227,'Eq.mp',3221,4]
+]);
+console.table(observed.map(([anchor,local,value,receiver,call,slot])=>({anchor,local,value,receiver,call,slot})));
+
+assert.deepEqual(sourceInput(data,receivers.get('amgm'),3),receivers.get('hprod'));

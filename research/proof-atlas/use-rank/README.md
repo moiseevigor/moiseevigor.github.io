@@ -615,10 +615,27 @@ Across 35 edition/declaration entries, the checker found 376 matching rows in 29
 
 In the paged reader, **Find equality substitutions** opens the precomputed index for the selected edition and compiled proof. Each option gives the function form, its head and the compiled row number. For lambda bodies the head label looks through leading metadata wrappers. Catalogue symbols retain the Lean constant name. Opening an option follows the proof-root route, and the ordinary paged substitution reader derives the premise and endpoints again from compiled rows.
 
-The route catalogue occupies 40,197 uncompressed bytes for the 35 checked entries. It loads when the finder is first opened. Missing catalogue coverage, an unavailable fetch and a checked zero-match result have separate displays. Run the discovery check with `--build` to regenerate the catalogue. Running without arguments compares the checked-in catalogue byte for byte with the regenerated routes and labels.
+The route catalogue occupies 40,515 uncompressed bytes for the 35 checked entries. It loads when the finder is first opened. Missing catalogue coverage, an unavailable fetch and a checked zero-match result have separate displays. Run the discovery check with `--build` to regenerate the catalogue. Running without arguments compares the checked-in catalogue byte for byte with the regenerated routes and labels.
 
 ### Does substitution location distinguish the Riccati proof steps?
 
 Run `node research/proof-atlas/use-rank/check-riccati-substitution-steps.cjs`. For the published compiled body of `JacobiData.slope_bound_abs`, the audit expands all 165,594 occurrence paths, checks the article and catalogue packet identities, resolves the four reviewed proof anchors, and compares their paths with every fully applied congrArg. The 34 distinct substitution rows occur at 48 addresses. None coincides with a reviewed anchor. All 48 have the same nearest enclosing annotation, the broad AM–GM proof region at row 3244. That region alone covers 165,476 occurrences. None of the three more specific annotated calls (product, common sign, AM–GM helper) encloses a substitution.
 
 The reverse relation recovers one exact dependency. The sixth argument of congrArg at row 951 is row 950, the reviewed call to `JacobiData.T1_mul_T2`. Its address is exactly the substitution address followed by the argument field. The published finder labels this particular witness with the product passage and the supplied lemma. Labels require the reviewed call to occupy that exact premise address in the same edition and packet. The broad enclosing annotation supplies no such label. Common-sign and AM–GM helper calls remain accessible by their own article anchors. This comparison measures structural relations to existing annotations in one proof; mathematical idea boundaries and reader comprehension were not independently assessed.
+
+### Following the local value into the final inequality
+
+The same Riccati checker joins the three reviewed calls to the [local-definition use diagram](riccati-local-flow.md). None of the three calls takes a free reference to a let-bound variable in its own arguments. Each occurs in the value of a different outer local definition. All three definitions have exactly one reference in the final proof body. The receiver and the compiled argument number identify what the final proof does with each value.
+
+```mermaid
+flowchart LR
+  product["T1_mul_T2 · 950"] -->|occurs inside value| hp["hprod · 1193"]
+  sign["T1_T2_same_sign · 1299"] -->|occurs inside value| hs["hsum · 2194"]
+  inequality["two_sqrt_mul_le_add · 1227"] -->|is the value| am["amgm · 1227"]
+  hp -->|argument 6| cp["congrArg · 3219"]
+  hs -->|argument 6| cs["congrArg · 2358"]
+  am -->|argument 4| transport["Eq.mp · 3221"]
+  cp -->|argument 3| transport
+```
+
+Numbers in the middle column identify definition **values**. Each outgoing edge follows a bound-variable occurrence to its lexical binder, checks the binder's value route, and recovers the same occurrence from the receiver's numbered argument. The two congrArg nodes consume equalities. At Eq.mp row 3221, argument 3 is exactly the congrArg occurrence at row 3219 and argument 4 is the reference to amgm. Thus the product-derived equality supplies the change of proposition applied to the AM–GM inequality. For the two substitutions the finder links both the complete definition value and the exact reviewed call within it. The containment edge establishes where the call occurs in the value; any intermediate reasoning within that value still requires inspection.
