@@ -213,6 +213,7 @@
   sub_neg_of_lt:[7,'a < b','a − b < 0']
  };
  const signRules=new Map([
+  ['sub_eq_zero_of_eq',{arity:5,terms:[2,3],premises:['a = b'],conclusion:'a − b = 0'}],
   ['mul_nonneg_of_nonpos_of_nonpos',{arity:11,terms:[3,4],premises:['a ≤ 0','b ≤ 0'],conclusion:'0 ≤ a × b'}],
   ['mul_pos_of_neg_of_neg',{arity:11,terms:[7,8],premises:['a < 0','b < 0'],conclusion:'0 < a × b'}],
   ['sq_nonneg',{arity:7,terms:[6],premises:[],conclusion:'0 ≤ a²'}]
@@ -261,6 +262,25 @@
   const args=namedArguments(data,at,name,arity);
   const output=name==='And.left'||name==='Iff.mpr'?0:1;
   return {name,conjunction,propositions:args.slice(0,2),output,proofs:args.slice(2)};
+ }
+ function zeroDifference(data,logical){
+  if(logical?.name!=='Iff.mpr')return null;
+  const subtract=namedArguments(data,logical.proofs[1],'sub_eq_zero_of_eq',5);
+  const negate=namedArguments(data,logical.proofs[0],'neg_eq_zero',3);
+  if(!subtract||!negate)return null;
+  const source=namedArguments(data,logical.propositions[1],'Eq',3);
+  const target=namedArguments(data,logical.propositions[0],'Eq',3);
+  if(!source||!target||source[2].node!==target[2].node)return null;
+  const diff=namedArguments(data,source[1],'HSub.hSub',6);
+  const neg=namedArguments(data,target[1],'Neg.neg',3);
+  const zero=namedArguments(data,source[2],'OfNat.ofNat',3);
+  if(!diff||!neg||!zero)return null;
+  const carrier=source[0].node;
+  if([target[0],subtract[0],negate[0],neg[0],zero[0],...diff.slice(0,3)].some(site=>site.node!==carrier))return null;
+  if(data.kind[zero[1].node]!==9||data.payloads[zero[1].node].literalKind!=='natVal'||String(data.payloads[zero[1].node].value)!=='0')return null;
+  if(diff[4].node!==subtract[2].node||diff[5].node!==subtract[3].node||
+     neg[2].node!==source[1].node||negate[2].node!==source[1].node)return null;
+  return {left:subtract[2],right:subtract[3],equality:subtract[4],difference:logical.proofs[1],equivalence:logical.proofs[0]};
  }
  function boundPremise(data,site){
   if(data.kind[site.node]!==0)return null;
@@ -356,14 +376,23 @@
   }
   const logical=logicalInference(data,at);
   if(logical){
-   const panel=el('section'),line=el('p'),evidence=el('p');
+   const panel=el('section'),line=el('p'),evidence=el('div');
    panel.dataset.logicalInference=logical.name;
    const expression=site=>link(caption(formula(data,site,3,true)),site);
-   const [p,q]=logical.propositions;
+   const [p,q]=logical.propositions,step=zeroDifference(data,logical);
    if(logical.conjunction){
     panel.append(el('h4',logical.output?'Take the right conjunct':'Take the left conjunct'));
     line.append(expression(p),' ∧ ',expression(q),' ⇒ ',expression(logical.propositions[logical.output]));
     evidence.append(link('Proof of the conjunction',logical.proofs[0]));
+   }else if(step){
+    panel.dataset.zeroDifference='';
+    panel.append(el('h4','Equal terms have zero difference'));
+    line.append('Let a = ',expression(step.left),' and b = ',expression(step.right),'.');
+    const steps=el('ol');
+    for(const [text,proof] of [['a = b',step.equality],['a − b = 0',step.difference],['−(a − b) = 0',p]]){
+     const row=el('li');row.append(link(text,proof));steps.append(row);
+    }
+    evidence.append(steps,link('Equivalence used in reverse',step.equivalence));
    }else{
     panel.append(el('h4',logical.output?'Use the forward implication':'Use the reverse implication'));
     line.append(expression(logical.propositions[1-logical.output]),' ⇒ ',expression(logical.propositions[logical.output]));
@@ -619,5 +648,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={logicalInference,numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
+ if(common)module.exports={zeroDifference,logicalInference,numeralComparison,boundPremise,arithmeticInference,equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
 })(typeof window==='undefined'?globalThis:window);

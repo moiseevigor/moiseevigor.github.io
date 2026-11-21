@@ -2,7 +2,7 @@
 const fs=require('node:fs'),z=require('node:zlib'),crypto=require('node:crypto'),assert=require('node:assert/strict');
 const A=require('../../../public/js/proof-atlas-library-data');
 const {spine}=require('../../../public/js/proof-atlas-elimination');
-const {logicalInference,arithmeticInference,numeralComparison}=require('../../../public/js/proof-atlas-arithmetic');
+const {zeroDifference,logicalInference,arithmeticInference,numeralComparison}=require('../../../public/js/proof-atlas-arithmetic');
 global.window={};require('../../../public/data/proof-atlas/goedel-sample-manifest');
 const edition=window.PROOF_ATLAS_AI_SAMPLE.edition;
 const report=fs.readFileSync(0,'utf8').trim().split('\n').map(line=>JSON.parse(line)).find(x=>x.edition===edition.id);
@@ -10,9 +10,10 @@ const frontier={},rules={},roots=report.aiArithmetic;
 const added=new Set(['mul_eq','add_nonpos','le_of_le_of_eq','sub_nonpos_of_le','sub_neg_of_lt']);
 const baseline=process.argv.includes('--baseline');
 let uniqueSteps=0,certificateVisits=0;const certificates=[],inequalities={};
-const signExamples={},signSlots={mul_nonneg_of_nonpos_of_nonpos:[3,4],mul_pos_of_neg_of_neg:[7,8],sq_nonneg:[6]};
+const signExamples={},signSlots={sub_eq_zero_of_eq:[2,3],mul_nonneg_of_nonpos_of_nonpos:[3,4],mul_pos_of_neg_of_neg:[7,8],sq_nonneg:[6]};
 const linarithOnly=baseline||process.argv.includes('--linarith-only');
 const arithmeticOnly=linarithOnly||process.argv.includes('--arithmetic-only');
+const zeroExamples=[],zeroRows=new Set();let zeroVisits=0;
 const equivalenceUses={},logicalExamples={},logicalProofs=new Set();
 let fullyRead=0;
 let steps=0,leaves=0,maxDepth=0,longest;
@@ -57,6 +58,21 @@ for(const d of edition.declarations){
    }
    const logical=arithmeticOnly?null:logicalInference(g,site);
    if(logical){
+    const zero=zeroDifference(g,logical);
+    if(zero){
+     zeroVisits++;
+     const args=spine(g,logical.proofs[1].node).args;
+     const sites=[zero.left,zero.right,zero.equality,zero.difference,logical.propositions[0],zero.equivalence];
+     assert.deepEqual(sites.map(x=>A.walk(g,x.route)),[...args.slice(2),s.args[3],s.args[0],s.args[2]]);
+     const key=d.name+'/'+site.node;
+     if(!zeroRows.has(key)){
+      zeroRows.add(key);zeroExamples.push({proof:d.name,site,links:sites});
+      assert.equal(zeroDifference(g,{...logical,propositions:logical.propositions.slice().reverse()}),null);
+      const parent=A.walk(g,{root:1,slots:zero.left.route.slots.slice(0,-1)});
+      const children=g.children.slice();children[parent]=[children[parent][0],s.head];
+      assert.equal(zeroDifference({...g,children},logical),null);
+     }
+    }
     logicalProofs.add(d.name);
     if(!logical.conjunction){
      const sources=logical.proofs.map(p=>{
@@ -81,7 +97,7 @@ for(const d of edition.declarations){
     }
    }
    const rule=logical||arithmeticInference(g,site);
-   if(!rule || (linarithOnly && Object.hasOwn(signSlots,name)) || (baseline && added.has(rule.name.split('.').at(-1)))){frontier[name]=(frontier[name]||0)+1;leaves++;
+   if(!rule || (arithmeticOnly && name==='sub_eq_zero_of_eq') || (linarithOnly && Object.hasOwn(signSlots,name)) || (baseline && added.has(rule.name.split('.').at(-1)))){frontier[name]=(frontier[name]||0)+1;leaves++;
     if(!cert)unresolved++;
     recordPath(item,depth);
     continue;}
@@ -111,4 +127,4 @@ for(const d of edition.declarations){
 assert.equal(longest.depth,maxDepth);
 assert.equal(certificateVisits,frontier['Mathlib.Meta.NormNum.isNat_lt_true']);
 if(linarithOnly && !baseline)assert.equal(certificates.length,272);
-console.log(JSON.stringify({fullyRead,equivalenceUses,logicalExamples,logicalProofs:logicalProofs.size,signExamples,certificateVisits,certificates,inequalities,uniqueSteps,roots:roots.length,steps,leaves,maxDepth,rules,frontier,longest},null,2));
+console.log(JSON.stringify({zeroVisits,zeroExamples,fullyRead,equivalenceUses,logicalExamples,logicalProofs:logicalProofs.size,signExamples,certificateVisits,certificates,inequalities,uniqueSteps,roots:roots.length,steps,leaves,maxDepth,rules,frontier,longest},null,2));
