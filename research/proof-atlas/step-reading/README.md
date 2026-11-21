@@ -756,3 +756,15 @@ Each body link in the occurrence comparison now has a corresponding variable-use
 The exhaustive small-proof check compared the witness length with the minimum over actual bound-variable occurrences and resolved each returned path back to the displayed binder. This covered 1,245 rows containing a used introduction in the published SE(2) edition, 2,850 in the working edition and six in the AI sample, restricted to proof bodies of at most 1,000 occurrences. Choosing the first differing body and then its nearest use need not minimize the total path to a differing variable: a shorter use existed elsewhere on 271, 678 and one of those rows respectively. The SE(2) editions overlap.
 
 In the depth-five Riccati example the witness is three child links inside the body. In local Chrome, 48 link destinations were checked across both copies of five examples, using a separate breadth-first search for the expected variable occurrences.
+
+### The nearest differing variable across the entire expression
+
+When the two selected copies agree on their external bindings, the reader can minimize the full distance to a differing variable. At each child it compares two distances: a reference to a binder introduced on this edge, and the shortest witness below the child. It retains the shorter path. If the result improves on the path through the first differing body, both copies gain a direct link to the variable and its exact binder.
+
+| Edition | Eligible expression rows | Search reached limit | Rows with a strictly shorter path | Largest observed saving in child links |
+|---|---:|---:|---:|---:|
+| Published SE(2) | 13,447 | 0 | 332 | 4 |
+| Working SE(2) | 31,449 | 266 | 1,220 | 4 |
+| Gödel AI sample | 2,566 | 0 | 287 | 2 |
+
+An eligible row has a constructor supported by the comparison, at least two occurrences with identical external binder targets, and a descendant that uses a binder introduced inside the expression. The limit column measures the descendant search only. Counts are declaration-local rows, not pairs or reader interactions. The two SE(2) editions overlap. For the small-proof oracle the complete path length was checked against the minimum over all actual internally bound variable uses, and each shorter link was resolved to its binder. Local Chrome followed 16 new links for four occurrence pairs across the published and AI editions. The manual gives an AI example in which the two routes take seven and five child links.

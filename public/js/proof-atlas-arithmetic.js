@@ -457,7 +457,7 @@
    rows.add(n);
    for(const child of data.children[n])pending.push(child);
   }
-  const free=new Map(),distance=new Map(),choice=new Map();
+  const free=new Map(),distance=new Map(),choice=new Map(),nearestUse=new Map();
   let entries=0;
   for(const n of [...rows].sort((a,b)=>a-b)){
    const used=new Map(),fields=A.fields[A.kinds[data.kind[n]]];
@@ -467,6 +467,10 @@
     const body=fields[k]==='body',indices=free.get(child);
     const depth=body && indices.has(0)?1:1+distance.get(child);
     if(depth<shortest){shortest=depth;choice.set(n,k);}
+    const direct=body && indices.has(0)?1+indices.get(0).length:Infinity;
+    const nested=1+(nearestUse.get(child)?.length??Infinity);
+    const length=Math.min(direct,nested);
+    if(length<(nearestUse.get(n)?.length??Infinity))nearestUse.set(n,{slot:k,length,binds:direct<=nested});
     for(const [index,witness] of indices){
      if(body && index===0)continue;
      const outer=index-Number(body),length=witness.length+1;
@@ -477,24 +481,30 @@
    if(entries>4*limit)return {limited:true};
    free.set(n,used);distance.set(n,shortest);
   }
-  const slots=[],fields=[];
-  let n=root;
-  while(choice.has(n)){
-   const k=choice.get(n);
-   slots.push(k);fields.push(A.fields[A.kinds[data.kind[n]]][k]);
-   if(distance.get(n)===1){
-    const body=data.children[n][k],useSlots=[];
-    let reference=body,index=0;
-    while(data.kind[reference]!==0){
-     const step=free.get(reference).get(index);
-     useSlots.push(step.slot);index=step.index;
-     reference=data.children[reference][step.slot];
+  function pathToUse(minimizeUse){
+   const slots=[],fields=[];
+   let n=root;
+   while(choice.has(n)){
+    const step=nearestUse.get(n),k=minimizeUse?step.slot:choice.get(n);
+    slots.push(k);fields.push(A.fields[A.kinds[data.kind[n]]][k]);
+    if(minimizeUse?step.binds:distance.get(n)===1){
+     const body=data.children[n][k],useSlots=[];
+     let reference=body,index=0;
+     while(data.kind[reference]!==0){
+      const next=free.get(reference).get(index);
+      useSlots.push(next.slot);index=next.index;
+      reference=data.children[reference][next.slot];
+     }
+     return {slots,fields,binder:n,body,useSlots,reference};
     }
-    return {slots,fields,binder:n,body,useSlots,reference};
+    n=data.children[n][k];
    }
-   n=data.children[n][k];
+   return {slots:null};
   }
-  return {slots:null};
+  const first=pathToUse(false);
+  if(first.slots && nearestUse.get(root).length<first.slots.length+first.useSlots.length)
+   first.shorterUse=pathToUse(true);
+  return first;
  }
  function equalityChain(data,at,expected){
   const args=namedArguments(data,at,'Eq.trans',6);
@@ -700,6 +710,18 @@
        link('Variable use',{node:bodyPath.reference,route:{root,slots:slots.concat(bodyPath.useSlots)}}),' → ',
        link('Its binder',{node:bodyPath.binder,route:{root,slots:slots.slice(0,-1)}}));
       output.append(line);
+     }
+     const shorter=bodyPath.shorterUse;
+     if(shorter){
+      const hops=shorter.slots.length+shorter.useSlots.length;
+      output.append(el('p','A shorter path reaches a differing variable in '+hops+' child links.'));
+      for(const [site,title] of [[at,'Use in selected copy'],[other,'Use in comparison copy']]){
+       const root=site.route.root,slots=site.route.slots.concat(shorter.slots);
+       const line=el('p');
+       line.append(link(title,{node:shorter.reference,route:{root,slots:slots.concat(shorter.useSlots)}}),' → ',
+        link('Its binder',{node:shorter.binder,route:{root,slots:slots.slice(0,-1)}}));
+       output.append(line);
+      }
      }
     }
     input.oninput=update;update();
