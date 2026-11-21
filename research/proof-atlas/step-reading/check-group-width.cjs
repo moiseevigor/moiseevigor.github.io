@@ -23,13 +23,7 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
       await page.route('http://localhost/**',route=>{
         const pathname = new URL(route.request().url()).pathname;
         if (pathname === '/projects/proof-atlas/library/') {
-          const query=new URL(route.request().url()).searchParams;
-          const isolated=process.env.ATLAS_ISOLATE_AI_INVENTORY==='1' && query.get('view')==='occurrence' &&
-            query.get('edition')==='goedel-sample-4331' && query.get('loading')==='paged';
-          // Counterfactual HTML fixture: keep the original AI registration and all proof assets.
-          const body=isolated ? html.replace('<script src="/public/data/proof-atlas/library-manifest.js" defer></script>',
-            '<script>window.PROOF_ATLAS_LIBRARY={editions:[]}</script>') : html;
-          return route.fulfill({contentType:'text/html; charset=utf-8',body});
+          return route.fulfill({contentType:'text/html; charset=utf-8',body:html});
         }
         return pathname.startsWith('/public/') ? route.fulfill({path:path.resolve('.'+pathname)}) : route.fulfill({status:404,body:''});
       });
@@ -226,13 +220,17 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
       assert.deepEqual(selectedBody.route,packed.append(largeArgument,[1]));
       const assets=[...new Set(requested.slice(start).filter(file=>file.startsWith('/public/data/')))];
       assert(!assets.some(file=>file.startsWith('/public/data/proof-atlas/goedel-sample/') && file.endsWith('.json.gz')));
-      const isolated=process.env.ATLAS_ISOLATE_AI_INVENTORY==='1';
-      assert.equal(assets.includes('/public/data/proof-atlas/library-manifest.js'),!isolated);
+      assert(!assets.includes('/public/data/proof-atlas/library-manifest.js'));
       assert.equal(await page.evaluate(()=>window.ProofAtlasAISample.error),null);
       const bytes=assets.reduce((sum,file)=>sum+fs.statSync(path.resolve('.'+file)).size,0);
       const newFiles=assets.filter(file=>!callerAssets.has(file));
       const addedBytes=newFiles.reduce((sum,file)=>sum+fs.statSync(path.resolve('.'+file)).size,0);
       console.log(JSON.stringify({width,retained:stats.retained,hidden:stats.hidden,distinctDataFiles:assets.length,bytes,newFiles:newFiles.length,addedBytes}));
+      await page.getByRole('link',{name:'Declaration library',exact:true}).click();
+      await page.waitForFunction(()=>window.PROOF_ATLAS_LIBRARY?.editions.some(e=>e.id==='published-15') &&
+        window.PROOF_ATLAS_LIBRARY.editions.some(e=>e.id==='working-26'));
+      await page.waitForFunction(()=>window.ProofAtlasLibrary?.getSnapshot()?.name==='lean_workbook_plus_6206');
+      assert.equal(new URL(page.url()).searchParams.get('view'),null);
       const positivity=new URL(url);
       positivity.searchParams.set('edition','goedel-sample-4331');
       positivity.searchParams.set('proof','lean_workbook_3485');

@@ -9,7 +9,8 @@ description: Every declaration, proof body and kernel occurrence in the publishe
  {% include proof-atlas-compiled-workspace.html %}
  <section class="pl-evidence"><h2>What the inventory proves</h2><p>For the two research snapshots, module ownership is the denominator: every project declaration, every complete type, every available theorem or definition body, and recursor reduction rules are included. Every compiled type, proof body and elaborated child link remains available. Original source projects and tactic scripts remain private. Shared subterms are stored once; exact expanded occurrence counts are computed without unfolding the graph. Large branches are collapsed visually and can be opened by their node number.</p><p>Article links identify a reviewed proof or supporting-module context. They do not certify that every article sentence follows from Lean. Lean/Mathlib dependencies outside this project remain named external boundaries. Surface syntax, tactics, macros and elaborator state are distinct from the twelve kernel expression constructors; the kernel diagram represents elaborated terms.</p></section>
 </main>
-<script src="/public/data/proof-atlas/library-manifest.js" defer></script>
+<template id="proof-library-scripts">
+<script data-project-inventory src="/public/data/proof-atlas/library-manifest.js" defer></script>
 <script src="/public/data/proof-atlas/lean-expr-grammar.js" defer></script>
 <script src="/public/js/proof-atlas-library-data.js?v=3" defer></script>
 <script src="/public/js/proof-atlas-source-corridor.js?v=1" defer></script>
@@ -77,3 +78,5 @@ description: Every declaration, proof body and kernel occurrence in the publishe
 <script src="/public/js/proof-atlas-omitted-references.js?v=21" defer></script>
 <script src="/public/js/proof-atlas-repeated-receiver.js?v=2" defer></script>
 <script src="/public/js/proof-atlas-library.js?v=172" defer></script>
+</template>
+<script src="/public/js/proof-atlas-library-start.js" defer></script>
