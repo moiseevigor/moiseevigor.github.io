@@ -747,7 +747,7 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
    await page.waitForFunction(()=>window.ProofAtlasLibrary?.getSnapshot()?.selected===950);
    const premiseSelection=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
    assert.deepEqual(premiseSelection.route.slots,productCall.route.slots.concat(1));
-   for(const [node,forward] of [[3221,true],[3238,false]]){
+   for(const [node,forward] of [[3221,true],[3238,false],[3222,true]]){
     const route=atlas.routes(body).route(node),at={node,route};
     await page.goto('http://localhost/projects/proof-atlas/library/?loading=paged&edition=published-15&proof='+riccati.name+'&route='+route.root+':'+route.slots.join('.')+'#expr-'+node);
     const transport=page.getByRole('region',{name:'Transport across equality'});
@@ -760,6 +760,19 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
      const expected=sourceSlot(body,at,slot),url=new URL(urls[index]);
      assert.equal(url.hash,'#expr-'+expected.node);
      assert.equal(url.searchParams.get('route'),expected.route.root+':'+expected.route.slots.join('.'));
+    }
+    if(node===3238){
+     const list=transport.getByRole('list');
+     await list.waitFor();
+     assert.equal(await list.getByRole('listitem').count(),5);
+     const types=await list.getByRole('link',{name:/^T[0-9]+$/}).evaluateAll(ns=>ns.map(n=>Number(new URL(n.href).hash.slice(6))));
+     assert.deepEqual(types,[2390,2341,2341,2309,2309,2283,2283,2240,2240,2217]);
+    }
+    if(node===3222){
+     const inner=transport.getByRole('link',{name:'inner result type'}),outer=transport.getByRole('link',{name:'outer input type'});
+     assert.equal(new URL(await inner.evaluate(a=>a.href)).hash,'#expr-3209');
+     assert.equal(new URL(await outer.evaluate(a=>a.href)).hash,'#expr-3174');
+     assert.equal(await transport.getByRole('list').count(),0);
     }
     const eq=sourceSlot(body,at,3);
     await transport.getByRole('link',{name:'Proof of A = B'}).click();

@@ -61,6 +61,18 @@
   const fixed=await peel(fn,6);
   return {rule,left,right,fn,premise,fixed};
  }
+ async function pagedTransportChain(cursor,outer,options={}){
+  const steps=[outer];
+  while(steps.length<8){
+   const current=steps.at(-1);
+   const inner=await pagedEqualityRule(cursor,current.term.route,options);
+   if(!inner || inner.rule==='congrArg')return {steps,boundary:null};
+   // Both addresses descend only through application fields in the same lexical context.
+   if(inner.to.node!==current.from.node)return {steps,boundary:{kind:'different rows',inner:inner.to,outer:current.from}};
+   steps.push(inner);
+  }
+  return {steps,boundary:{kind:'display limit',term:steps.at(-1).term}};
+ }
  async function pagedSubstitution(cursor,route,options={}){
   const result=await pagedEqualityRule(cursor,route,options);
   if(result?.rule!=='congrArg')return null;
@@ -368,6 +380,6 @@
   };
   return panel;
  }
- const api={inspect,control,parameterContext,exactCallInputs,fixedArguments,pagedSubstitution,pagedEqualityRule,equalitySegments,firstStructuralDifference,applicationAtUse,resultDestination};
+ const api={inspect,control,parameterContext,exactCallInputs,fixedArguments,pagedSubstitution,pagedEqualityRule,pagedTransportChain,equalitySegments,firstStructuralDifference,applicationAtUse,resultDestination};
  if(local)module.exports=api;else host.ProofAtlasOmittedReferences=api;
 })(typeof window==='undefined'?globalThis:window);

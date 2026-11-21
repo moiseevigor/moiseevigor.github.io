@@ -151,6 +151,24 @@
      substitutionSection.append(el('h3','Transport across equality'),rule,
       el('p',result.rule+' carries a term of '+from+' to a term of '+to+'.'),
       anchor('Proof of A = B',result.equality),' · ',anchor('Term of '+from,result.term));
+     const chain=await host.ProofAtlasOmittedReferences.pagedTransportChain(owner,result,{signal});
+     if(!active())return;
+     if(chain.steps.length>1){
+      const list=el('ol');
+      for(const [i,step] of chain.steps.slice().reverse().entries()){
+       const row=el('li');
+       row.append(anchor('T'+i,step.from),' → ',anchor('T'+(i+1),step.to),' · ',anchor(step.rule+' equality',step.equality));
+       list.append(row);
+      }
+      substitutionSection.append(el('h4','From the input term to the result'),anchor('Input term of T0',chain.steps.at(-1).term),list);
+     }
+     if(chain.boundary?.kind==='different rows'){
+      const seam=el('p');
+      seam.append('The ',anchor('inner result type',chain.boundary.inner),' and ',anchor('outer input type',chain.boundary.outer),
+       ' have different compiled rows. Their conversion has not been checked here. ',anchor('Inspect inner transport',chain.steps.at(-1).term));
+      substitutionSection.append(seam);
+     }
+     if(chain.boundary?.kind==='display limit')substitutionSection.append(anchor('Inspect the input after eight steps',chain.boundary.term));
      return;
     }
     substitutionSection.setAttribute('aria-label','Equality under a function');

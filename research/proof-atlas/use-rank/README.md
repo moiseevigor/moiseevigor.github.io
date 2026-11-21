@@ -654,3 +654,11 @@ Run `node research/proof-atlas/use-rank/check-paged-transport.cjs`. The complete
 | Recursion controls | 0 / 9 | 0 / 0 | 0 / 0 |
 
 Edition totals include repeated declarations across editions. The census covers the two named constants in fully applied form. Other eliminators and definitionally equivalent encodings require their own visual rules. These checks recover compiled argument addresses and direction, without a new kernel replay or comprehension measurement.
+
+### Joining consecutive transports
+
+When the term supplied to a transport is another fully applied transport, the reader compares the inner result type with the outer input type. A shared compiled row is sufficient here because walking between these argument positions crosses only application fields and preserves lexical scope. Each occurrence retains its own selectable route. The list starts at the innermost displayed input and follows each equality to the outer result.
+
+Of the 271 transport rows in the paged census, 31 have a transport directly in their term field. The published and working editions each contribute 13 matching intermediate rows and two different-row boundaries. The AI sample contributes one matching pair. In the published Riccati proof, row 3238 contains five consecutive reverse transports. Their six types, in the direction of transport, are rows 2390, 2341, 2309, 2283, 2240 and 2217. At rows 3222 and 3223, the first structural difference in the intermediate types is between the constant Real.instMonoid and an application of Semiring.toMonoid. The reader preserves both addresses. A difference of representation leaves definitional conversion open.
+
+The transport checker above recomputes the nested calls, directions, type addresses and boundaries from the complete source. It tests one proof-root route per distinct outer row under a one-page source cache. The reader shows at most eight transports per selection. A synthetic ten-call structural control checks the continuation after eight and the remaining two steps. None of the 35 compiled entries reached that limit. The UI check at 320 and 1280 pixels covers the five-step chain and both endpoint links at the row-3222 boundary.
