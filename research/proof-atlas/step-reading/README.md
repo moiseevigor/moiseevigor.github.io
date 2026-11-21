@@ -277,3 +277,17 @@ The [leaf check](transport-leaves.cjs) follows the fourth argument of each termi
 For example, the branch (0, 0, ½) uses the first equation, specialized to `0 ^ 2 + 0 * 0 = 1 / 2`. The branch (½, ½, 0) uses the third equation. Although all three equations fail in that last branch, it is the third that the trace identifies. Kernel replay checked all 40 argument stages of the eight closing calls and six equality casts. The reader’s proof-root table links each row to its closing rule and each contradiction to the cast that consumes the equation. This evidence identifies the proof of the mixed cases without attributing semantic labels to unrelated subterms.
 
 Regenerate [the eight routes](transport-leaves.json) with `node research/proof-atlas/step-reading/transport-leaves.cjs`. Replay each row's `closing` and optional `cast` routes in that order as repeated arguments to `replay-call.py`, and package the output with `publish-leaves.py BATCH.json`.
+
+### Conjunctions inside proofs and at theorem conclusions
+
+Run `node research/proof-atlas/step-reading/conjunction-census.cjs` from the site root to reproduce `conjunction-census.json`. A row is one distinct compiled expression within a declaration. Occurrences count its paths from the proof root, including paths through types embedded in the body. The two SE(2) snapshots overlap.
+
+| Edition | Available theorem bodies | And.intro rows / occurrences | Conjunction-to-True rewrite rows / occurrences | Recognized at literal conjunction conclusions |
+| --- | ---: | ---: | ---: | ---: |
+| Published SE(2) | 561 | 213 / 214 | 1 / 1 | 3 / 17 |
+| Working SE(2) | 1,083 | 270 / 1,117 | 5 / 8 | 5 / 23 |
+| Gödel sample | 20 | 0 / 0 | 1 / 1 | 0 / 0 |
+
+The last column follows outer forall binders in the theorem type and requires a literal binary And. In the proof it follows leading lambda and let bodies. It counts generated theorems too. A case split, forwarded hypothesis or named lemma may prove both conjuncts without exposing a pair at that location. The JSON records each such conclusion and its actual proof head.
+
+In the working edition, 25 distinct And.intro rows in `JacobiConcrete.AmplitudeChart.source_inverse` account for 479 paths. A multiscale diagram can group these by compiled row while retaining occurrence routes for binder lookup. Row and path counts measure structure; neither estimates the number of mathematical ideas. The census validates each index digest, reconciles expanded body sizes against the manifest and cross-checks positive occurrence counts by summing in both directions through the shared graph.

@@ -1,0 +1,400 @@
+[
+  {
+    "edition": "published-15",
+    "theorems": 561,
+    "rules": {
+      "introduction": {
+        "owners": 84,
+        "rows": 213,
+        "occurrences": "214",
+        "largest": {
+          "name": "JacobiFull.cell_roots",
+          "occurrences": "13",
+          "rows": 13
+        }
+      },
+      "rewrite": {
+        "owners": 1,
+        "rows": 1,
+        "occurrences": "1",
+        "largest": {
+          "name": "JacobiFull.roots_ncard",
+          "occurrences": "1",
+          "rows": 1
+        }
+      }
+    },
+    "literalConjunctionConclusions": [
+      {
+        "name": "CrossingData.branch_range",
+        "indexSha256": "08ce18c599668f141b3f072f1cc29b5916a9bb2ba4b1ccd5becd6c8bc7475e54",
+        "node": 2110,
+        "slots": "1111122",
+        "rule": null,
+        "head": "Or.casesOn"
+      },
+      {
+        "name": "CrossingData.mk.inj",
+        "indexSha256": "9a3563fa5735dfbd744d05dc2d0ab6f830aaba0350910d58562d69050f8ee027",
+        "node": 237,
+        "slots": "11111111111111111111111",
+        "rule": null,
+        "head": "CrossingData.mk.noConfusion"
+      },
+      {
+        "name": "CrossingData.psiM_range",
+        "indexSha256": "673ec244c8b6fae8ddbdf924b4681ff7d1ef1888d2bf3b5b0d0cc29f25622ca2",
+        "node": 197,
+        "slots": "111222",
+        "rule": "introduction",
+        "head": "And.intro"
+      },
+      {
+        "name": "CrossingData.psiP_range",
+        "indexSha256": "ca3587f00f3ec6e82030d901f486a69c5bfbc0fc223b37d27db60164e904c57d",
+        "node": 195,
+        "slots": "111222",
+        "rule": "introduction",
+        "head": "And.intro"
+      },
+      {
+        "name": "JacobiCore.Sol.eq_of_eq_at",
+        "indexSha256": "a3a0df19b7874861da71f24fef6298ebdf5e1176fc3b7f084782126f213cf2d0",
+        "node": 2670,
+        "slots": "11111111112",
+        "rule": null,
+        "head": "Or.casesOn"
+      },
+      {
+        "name": "JacobiCore.Sol.mk.inj",
+        "indexSha256": "8ab9b7bb7cd03bbc772fef2a11b38217a62ae40efd0a25e7d2ba44f73a372651",
+        "node": 349,
+        "slots": "11111111111111111111",
+        "rule": null,
+        "head": "JacobiCore.Sol.mk.noConfusion"
+      },
+      {
+        "name": "JacobiCore.eq_of_Φ_eq_zero",
+        "indexSha256": "c0429ac0481f4840ead721007fce34506f6f7a9198c77f9bf0d4a724ec9d7e5f",
+        "node": 6975,
+        "slots": "11111222",
+        "rule": "introduction",
+        "head": "And.intro"
+      },
+      {
+        "name": "JacobiCore.mk.inj",
+        "indexSha256": "4830f641c583b0ef651ea37eed5145066e496f6cc4afb8394d5c235d92dc6439",
+        "node": 492,
+        "slots": "111111111111111111111111111111111111111",
+        "rule": null,
+        "head": "JacobiCore.mk.noConfusion"
+      },
+      {
+        "name": "JacobiCore.reflect",
+        "indexSha256": "ff41d16c4b693ff396931b47d8d24ccd8bd2b47295563b78a61cd127a78d930e",
+        "node": 58,
+        "slots": "112",
+        "rule": null,
+        "head": "bvar"
+      },
+      {
+        "name": "JacobiCore.shift",
+        "indexSha256": "f0fddeebf5421f00d1a78ec66226d95d760a2669c020d143f9cb6cc055ed5d0d",
+        "node": 21,
+        "slots": "112",
+        "rule": null,
+        "head": "bvar"
+      },
+      {
+        "name": "JacobiData.mk.inj",
+        "indexSha256": "3b77cf38bac3133c9d848c1712a541639e1be92e3c53099e6f43bde00963f900",
+        "node": 441,
+        "slots": "111111111111111111111111111",
+        "rule": null,
+        "head": "JacobiData.mk.noConfusion"
+      },
+      {
+        "name": "JacobiFull.bR_spec",
+        "indexSha256": "0354556081725b662d6cffe9fd675da6129b46c0583028d6012ac90ec5e35188",
+        "node": 386,
+        "slots": "11",
+        "rule": null,
+        "head": "And.casesOn"
+      },
+      {
+        "name": "JacobiFull.mk.inj",
+        "indexSha256": "4d9e95dfbbf0db9af3adbfb86d619d6b18d6bdaa329eb8ede7545c3b71e9fa25",
+        "node": 451,
+        "slots": "11111111111111111",
+        "rule": null,
+        "head": "JacobiFull.mk.noConfusion"
+      },
+      {
+        "name": "JacobiFull.roots_ncard",
+        "indexSha256": "6def609f71f4d867b9d2a6d666876f1ba193c543667cdaa26ba1fe342ded9425",
+        "node": 2063,
+        "slots": "111111",
+        "rule": null,
+        "head": "Nat.recAux"
+      },
+      {
+        "name": "JacobiPeriodic.mk.inj",
+        "indexSha256": "6936b1010ef98dbbd32d476934bf1ac337f76d49bcb8f64b68405b3f39d16ddb",
+        "node": 417,
+        "slots": "1111111111111111111111111111111",
+        "rule": null,
+        "head": "JacobiPeriodic.mk.noConfusion"
+      },
+      {
+        "name": "JacobiPeriodic.pM_spec",
+        "indexSha256": "1a64c523be8514d69fbb9ddefc71f761ff5f1b79b9c11744303dcf1f93c4f90d",
+        "node": 146,
+        "slots": "11",
+        "rule": null,
+        "head": "Classical.choose_spec"
+      },
+      {
+        "name": "SBracket.mk.inj",
+        "indexSha256": "39dbe3b524a288ceb58009e86becc10331d8bbd3e230306d727649e9da8c6d76",
+        "node": 917,
+        "slots": "111111111111111111111111111111111111111111111111111111111",
+        "rule": null,
+        "head": "SBracket.mk.noConfusion"
+      }
+    ]
+  },
+  {
+    "edition": "working-26",
+    "theorems": 1083,
+    "rules": {
+      "introduction": {
+        "owners": 104,
+        "rows": 270,
+        "occurrences": "1117",
+        "largest": {
+          "name": "JacobiConcrete.AmplitudeChart.source_inverse",
+          "occurrences": "479",
+          "rows": 25
+        }
+      },
+      "rewrite": {
+        "owners": 4,
+        "rows": 5,
+        "occurrences": "8",
+        "largest": {
+          "name": "JacobiConcrete.AmplitudeChart.inverse_source_modulus",
+          "occurrences": "4",
+          "rows": 1
+        }
+      }
+    },
+    "literalConjunctionConclusions": [
+      {
+        "name": "CrossingData.branch_range",
+        "indexSha256": "17bd8310414a1f2c441507802e37f118a939ba170bf1eb696b91c96d7017180c",
+        "node": 2110,
+        "slots": "1111122",
+        "rule": null,
+        "head": "Or.casesOn"
+      },
+      {
+        "name": "CrossingData.mk.inj",
+        "indexSha256": "4fcd885bee734b66f336067ef31b5f9065204154d437eec40799db16ac39cbbc",
+        "node": 237,
+        "slots": "11111111111111111111111",
+        "rule": null,
+        "head": "CrossingData.mk.noConfusion"
+      },
+      {
+        "name": "CrossingData.psiM_range",
+        "indexSha256": "925979446ef23ff576437bdeef265fc589f7a54abaeb5062e692a3aa70611f84",
+        "node": 197,
+        "slots": "111222",
+        "rule": "introduction",
+        "head": "And.intro"
+      },
+      {
+        "name": "CrossingData.psiP_range",
+        "indexSha256": "b248e2295b6dd591006efdac622b5a8103b5aaa8c52037fb848a5b3d7cfde2ee",
+        "node": 195,
+        "slots": "111222",
+        "rule": "introduction",
+        "head": "And.intro"
+      },
+      {
+        "name": "JacobiConcrete.modulus_numerator_le",
+        "indexSha256": "5ebd7d94b2be0776c1893a5750c8027c2645ce377ed88128e9df2ef3313081d4",
+        "node": 1315,
+        "slots": "1111",
+        "rule": "introduction",
+        "head": "And.intro"
+      },
+      {
+        "name": "JacobiConcrete.pendulum_controls",
+        "indexSha256": "f16bf9ec19711f357dfd43376eb4b8923fdd364fae57c1c599d9e9ae62c631e5",
+        "node": 1143,
+        "slots": "1111111",
+        "rule": null,
+        "head": "id"
+      },
+      {
+        "name": "JacobiConcrete.roots_ncard",
+        "indexSha256": "72a13a4263a823e6ebe531c110fc48951b1c7b41424924483c2af4512030c626",
+        "node": 202,
+        "slots": "111111",
+        "rule": null,
+        "head": "JacobiFull.roots_ncard"
+      },
+      {
+        "name": "JacobiCore.Addition.addition",
+        "indexSha256": "ea5068c6f31562d42c4e9119da304a57cd810499b717309127866c5b06f4cef9",
+        "node": 817,
+        "slots": "111",
+        "rule": null,
+        "head": "JacobiCore.Sol.eq_of_eq_at"
+      },
+      {
+        "name": "JacobiCore.Addition.even_cd",
+        "indexSha256": "76561d42d8db202ce0fe21a6b41d5371dbe421b3331081470a246d7e3a98e5ed",
+        "node": 338,
+        "slots": "112",
+        "rule": null,
+        "head": "And.right"
+      },
+      {
+        "name": "JacobiCore.Sol.eq_of_eq_at",
+        "indexSha256": "feddaaf8a46fa17d21a122371f28a790d4b141a1105fd82c7d790c2261328972",
+        "node": 2670,
+        "slots": "11111111112",
+        "rule": null,
+        "head": "Or.casesOn"
+      },
+      {
+        "name": "JacobiCore.Sol.mk.inj",
+        "indexSha256": "62e7ca9cf3f9f3dcc751b7b2ee7697f821c25dfae9ea353c39b8247178c3d5b8",
+        "node": 349,
+        "slots": "11111111111111111111",
+        "rule": null,
+        "head": "JacobiCore.Sol.mk.noConfusion"
+      },
+      {
+        "name": "JacobiCore.eq_of_Φ_eq_zero",
+        "indexSha256": "4824909d6459018b4e7961fa986020a0d18b1de12d1e444800717abaec082717",
+        "node": 6975,
+        "slots": "11111222",
+        "rule": "introduction",
+        "head": "And.intro"
+      },
+      {
+        "name": "JacobiCore.mk.inj",
+        "indexSha256": "64a1b5a8036657adb9faf0e552643d992077108e0bd0aa9805e04a5286f4f852",
+        "node": 492,
+        "slots": "111111111111111111111111111111111111111",
+        "rule": null,
+        "head": "JacobiCore.mk.noConfusion"
+      },
+      {
+        "name": "JacobiCore.reflect",
+        "indexSha256": "8aa980bb821a33619cc45770e04876756abcd36e6bee0ab82bd81c110c1da533",
+        "node": 58,
+        "slots": "112",
+        "rule": null,
+        "head": "bvar"
+      },
+      {
+        "name": "JacobiCore.shift",
+        "indexSha256": "1d5064f985a629b008240d52522e4e1bad86605ca318513fc3546e5be67e2a97",
+        "node": 21,
+        "slots": "112",
+        "rule": null,
+        "head": "bvar"
+      },
+      {
+        "name": "JacobiData.mk.inj",
+        "indexSha256": "98b75cd62097a2b39adae69ca5c98c3a72116721ef4bac86e4b2ea06f2c8697a",
+        "node": 441,
+        "slots": "111111111111111111111111111",
+        "rule": null,
+        "head": "JacobiData.mk.noConfusion"
+      },
+      {
+        "name": "JacobiFull.bR_spec",
+        "indexSha256": "03d283e822a78f63f857dd879508ee625658e9390c01b7df2749e024cd8e0c22",
+        "node": 386,
+        "slots": "11",
+        "rule": null,
+        "head": "And.casesOn"
+      },
+      {
+        "name": "JacobiFull.endpoint_at_zero",
+        "indexSha256": "4fff21456e9dcb46661d43731672466422ca39de5d9804c916522c35fa37b127",
+        "node": 517,
+        "slots": "111",
+        "rule": "rewrite",
+        "head": "of_eq_true"
+      },
+      {
+        "name": "JacobiFull.mk.inj",
+        "indexSha256": "feee1aa2cfb1e1a2664b16c9060f1290d93ff6157a9cd7e9975cd4a2c5a06e1b",
+        "node": 451,
+        "slots": "11111111111111111",
+        "rule": null,
+        "head": "JacobiFull.mk.noConfusion"
+      },
+      {
+        "name": "JacobiFull.roots_ncard",
+        "indexSha256": "db4168182b7fb53be2687f9d5cee720fb88d2817c680c8a88e82d33c9178e57a",
+        "node": 2038,
+        "slots": "1111",
+        "rule": null,
+        "head": "Nat.recAux"
+      },
+      {
+        "name": "JacobiPeriodic.mk.inj",
+        "indexSha256": "e4fd0588d86e86800b5cd2011390d8704693ff465e5772acbceb8d392206ec81",
+        "node": 417,
+        "slots": "1111111111111111111111111111111",
+        "rule": null,
+        "head": "JacobiPeriodic.mk.noConfusion"
+      },
+      {
+        "name": "JacobiPeriodic.pM_spec",
+        "indexSha256": "230940116f9ed89e6e28dbbd6ae55f7878dfb864bcd02e4b973bdd2202cbd038",
+        "node": 146,
+        "slots": "11",
+        "rule": null,
+        "head": "Classical.choose_spec"
+      },
+      {
+        "name": "SBracket.mk.inj",
+        "indexSha256": "3f902b32fda38aa414fda6bf48d3e341f48a6cd93cd785aecb95eba86d14c29c",
+        "node": 917,
+        "slots": "111111111111111111111111111111111111111111111111111111111",
+        "rule": null,
+        "head": "SBracket.mk.noConfusion"
+      }
+    ]
+  },
+  {
+    "edition": "goedel-sample-4331",
+    "theorems": 20,
+    "rules": {
+      "introduction": {
+        "owners": 0,
+        "rows": 0,
+        "occurrences": "0"
+      },
+      "rewrite": {
+        "owners": 1,
+        "rows": 1,
+        "occurrences": "1",
+        "largest": {
+          "name": "lean_workbook_plus_68616",
+          "occurrences": "1",
+          "rows": 1
+        }
+      }
+    },
+    "literalConjunctionConclusions": []
+  }
+]
