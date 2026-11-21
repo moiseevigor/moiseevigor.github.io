@@ -141,6 +141,20 @@
   }
   return {route,branches,...(call?{call}:{})};
  }
- const api={addOffset,select,constantArgumentIndex,partition};
+ // Read only the literal forall prefix of a declaration or binder's declared type.
+ function formalParameters(data,typeRoute,arity){
+  const local=typeof module!=='undefined'&&module.exports;
+  const A=local?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData;
+  let route=typeRoute,node=A.walk(data,route);
+  const parameters=[];
+  while(parameters.length<arity && data.kind[node]===7){
+   const p=data.payloads[node];
+   parameters.push({node,route,name:p.binderName,info:p.binderInfo});
+   route={root:route.root,slots:route.slots.concat(1)};
+   node=data.children[node][1];
+  }
+  return parameters;
+ }
+ const api={addOffset,select,constantArgumentIndex,partition,formalParameters};
  if(typeof module!=='undefined'&&module.exports)module.exports=api;else host.ProofAtlasRoleOccurrences=api;
 })(typeof window==='undefined'?globalThis:window);

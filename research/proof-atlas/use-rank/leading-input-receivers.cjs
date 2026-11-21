@@ -15,7 +15,8 @@ vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/goedel-sample-manife
 const published=process.argv.includes('--published');
 if (published) vm.runInNewContext(fs.readFileSync('public/data/proof-atlas/library-manifest.js','utf8'),{window});
 const edition=published ? window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id==='published-15') : window.PROOF_ATLAS_AI_SAMPLE.edition;
-const splitStats={groups:0,twoChildren:0,threeChildren:0,nineTenthsInOneChild:0,applicationSplits:0,threeOrMoreOccupiedPorts:0,maxOccupiedPorts:0};
+const formalCache=new Map();
+const splitStats={groups:0,twoChildren:0,threeChildren:0,nineTenthsInOneChild:0,applicationSplits:0,threeOrMoreOccupiedPorts:0,maxOccupiedPorts:0,occupiedArguments:0,formalSlots:0,formalSplits:0,externalConstantArguments:0,otherHeadArguments:0,beyondLiteralPrefix:0};
 function audit(record) {
   const bytes=zlib.gunzipSync(fs.readFileSync('.'+record.indexFile));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),record.indexSha256);
@@ -140,8 +141,39 @@ function audit(record) {
         splitStats.applicationSplits++;
         if(flat.branches.length>=3)splitStats.threeOrMoreOccupiedPorts++;
         splitStats.maxOccupiedPorts=Math.max(splitStats.maxOccupiedPorts,flat.branches.length);
-        let next=1n,previous=-1;
+        const head=flat.call.head;
+        const callee=data.kind[head]===4 && edition.declarations.find(d=>d.name===data.payloads[head].name);
+        let params=[],formalData;
+        if(callee){
+          if(!formalCache.has(callee.indexSha256)){
+            const bytes=zlib.gunzipSync(fs.readFileSync('.'+callee.indexFile));
+            assert.equal(createHash('sha256').update(bytes).digest('hex'),callee.indexSha256);
+            formalCache.set(callee.indexSha256,A.validateIndex(JSON.parse(bytes),callee));
+          }
+          formalData=formalCache.get(callee.indexSha256);
+          params=roles.formalParameters(formalData,{root:0,slots:[]},flat.call.arity);
+        }else if(data.kind[head]===0){
+          const headRoute=sourceInput(data,{node:flat.call.node,route:flat.route},0).route;
+          const bound=A.binding(data,headRoute);
+          formalData=data;
+          params=roles.formalParameters(data,{root:1,slots:bound.route.slots.concat(0)},flat.call.arity);
+        }
+        let next=1n,previous=-1,hasFormal=false;
         for(const b of flat.branches){
+          if(b.slot){
+            splitStats.occupiedArguments++;
+            const f=params[b.slot-1];
+            if(f){
+              assert.equal(A.walk(formalData,f.route),f.node);
+              assert.equal(formalData.kind[f.node],7);
+              splitStats.formalSlots++;hasFormal=true;
+              if(process.env.ATLAS_FORMAL_EXAMPLE && !splitStats.example && f.name && f.name!=='_'){
+                splitStats.example={proof:record.name,binder:input.name,depth:input.route.slots.length,label,callee:callee?.name??'bound function',slot:b.slot,formal:f};
+              }
+            }else if(formalData)splitStats.beyondLiteralPrefix++;
+            else if(data.kind[head]===4)splitStats.externalConstantArguments++;
+            else splitStats.otherHeadArguments++;
+          }
           assert.equal(b.first,next);assert(b.slot>previous);
           previous=b.slot;next=b.last+1n;
           const operand=sourceInput(data,{node:flat.call.node,route:flat.route},b.slot);
@@ -152,6 +184,7 @@ function audit(record) {
           }
         }
         assert.equal(next,BigInt(g.count)+1n);
+        if(hasFormal)splitStats.formalSplits++;
       }
       splitStats.groups++;
       if(part.branches.length===2)splitStats.twoChildren++;else splitStats.threeChildren++;

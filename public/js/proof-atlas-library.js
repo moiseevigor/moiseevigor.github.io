@@ -270,6 +270,32 @@
           }
           list.append(item);
          }
+         if(part.call){
+          const callee=owner.data.kind[head]===4 && edition.declarations.find(d=>d.name===name);
+          const headRoute={root:part.route.root,slots:part.route.slots.concat(Array(part.call.arity).fill(0))};
+          const bound=owner.data.kind[head]===0 && A.binding(owner.data,headRoute);
+          if(callee || bound){
+           const show=el('button','Show declared parameters'),status=el('p');
+           show.type='button';status.setAttribute('role','status');display.append(show,status);
+           show.onclick=async()=>{
+            show.disabled=true;status.textContent='Reading the declared type…';
+            try{
+             const source=callee && callee.name!==owner.record.name ? await A.open(callee) : owner;
+             if(!list.isConnected)return;
+             const typeRoute=callee?{root:0,slots:[]}:{root:bound.route.root,slots:bound.route.slots.concat(0)};
+             const params=roles.formalParameters(source.data,typeRoute,part.call.arity);
+             let shown=0;
+             part.branches.forEach((b,j)=>{
+              const f=params[b.slot-1];
+              if(!f)return;
+              const text=(f.name || '_')+' · '+(f.info==='default'?'explicit':f.info);
+              list.children[j].append(' ',link(text,url(source.record.name,f.node,f.route)));shown++;
+             });
+             status.textContent=shown?'Parameter links open their binders in the declared type.':'The declared type exposes no parameter at these positions.';
+            }catch(error){show.disabled=false;status.textContent='Could not read the declared type. Select again to retry.';}
+           };
+          }
+         }
          if(history.length){
           const back=el('button','Previous branch');back.type='button';
           back.onclick=()=>{drawBranches(...history.pop());display.querySelector('a').focus();};display.append(back);
