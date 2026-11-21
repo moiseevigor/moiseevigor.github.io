@@ -25,6 +25,33 @@ async function check(page,proof,edition,node,route,examples) {
     assert(await output.evaluate(e=>e.scrollWidth<=e.clientWidth+1));
   }
 }
+async function checkWideCall(page) {
+  const proof='lean_workbook_20418',edition='goedel-sample-4331';
+  await page.goto(origin+'/projects/proof-atlas/library/?'+new URLSearchParams({edition,proof,route:'1:1.1'})+'#expr-86584');
+  await page.locator('#pl-binding-toggle').click();
+  const form=page.locator('#pl-binding-uses form').first();
+  await form.getByRole('textbox').fill('49479');
+  await form.getByRole('button').click();
+  const output=page.locator('.pl-located-use'),ports=output.getByRole('group');
+  const call=new URL(await output.getByRole('link',{name:'Mathlib.Tactic.Ring.Common.mul_pow_mul',exact:true}).getAttribute('href'),origin);
+  const route=call.searchParams.get('route'),selected=await ports.locator('[aria-current]').getAttribute('href');
+  const nodes=[0,839,1932,1932,877,904,904,159,1936,1936,2111,2124,2143,2180],seen=new Set();
+  for(const range of [null,'Show arguments 2–5','Show arguments 9–13']){
+    if(range)await ports.getByRole('button',{name:range,exact:true}).click();
+    const links=ports.getByRole('link');
+    assert(await links.count()<=9);
+    assert.equal(await ports.locator('[aria-current]').getAttribute('href'),selected);
+    for(const a of await links.all()){
+      const slot=await a.textContent();
+      if(slot==='fn')continue;
+      const u=new URL(await a.getAttribute('href'),origin),index=Number(slot);
+      assert.equal(u.hash,'#expr-'+nodes[index-1]);
+      assert.equal(u.searchParams.get('route'),route+'.0'.repeat(14-index)+'.1');
+      seen.add(index);
+    }
+  }
+  assert.equal(seen.size,14);
+}
 (async()=>{
   const browser=await chromium.launch({executablePath:process.env.ATLAS_CHROMIUM_PATH});
   try{
@@ -33,5 +60,6 @@ async function check(page,proof,edition,node,route,examples) {
       [1,'letE.value',null],[2,'Eq.mp',4,4],[3,'Mathlib.Tactic.Linarith.sub_neg_of_lt',7,7],
       [4,'Mathlib.Tactic.Linarith.sub_neg_of_lt',7,7],[5,'Mathlib.Tactic.Linarith.sub_neg_of_lt',7,7]]);
     await check(page,'lean_workbook_plus_6206','goedel-sample-4331',91421,'1:1.1',[[48463,'HPow.hPow',5,6]]);
+    await checkWideCall(page);
   }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});

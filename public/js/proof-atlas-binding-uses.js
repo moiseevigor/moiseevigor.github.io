@@ -57,27 +57,39 @@
       config.sourceLink(receiver.label,receiver.call));
      const ports=el('div');ports.className='pl-receiving-ports';
      ports.setAttribute('role','group');ports.setAttribute('aria-label','Compiled application inputs');
-     // Keep the head, endpoints and a small neighbourhood of the selected input.
-     const positions=new Set([0,1,receiver.arity]);
+     function drawPorts(first,last,focusPosition){
+      ports.replaceChildren();
+      const positions=new Set([0,1,receiver.slot,receiver.arity]);
+      for(let j=first;j<=last;j++)positions.add(j);
+      let previous=-1;
+      for(const position of [...positions].sort((a,b)=>a-b)){
+       if(position>previous+1){
+        const lo=previous+1,hi=position-1;
+        const start=hi<first?Math.max(lo,hi-4):lo,end=Math.min(hi,start+4);
+        const range=lo===hi?String(lo):lo+'–'+hi;
+        const gap=el('button',range);
+        gap.type='button';
+        gap.setAttribute('aria-label','Show '+(start===end?'argument '+start:'arguments '+start+'–'+end));
+        gap.onclick=()=>drawPorts(start,end,start);
+        ports.append(gap);
+       }
+       const slots=receiver.call.route.slots.concat(Array(receiver.arity-position).fill(0));
+       if(position)slots.push(1);
+       const portRoute={root:receiver.call.route.root,slots};
+       const port=config.sourceLink(position?String(position):'fn',{node:A.walk(config.data,portRoute),route:portRoute});
+       port.setAttribute('aria-label',position?'Argument '+position:'Function');
+       if(position===receiver.slot){
+        demand(portRoute.root===route.root && String(slots)===String(route.slots),'selected input address');
+        port.setAttribute('aria-current','true');
+       }
+       ports.append(port);
+       if(position===focusPosition)port.focus();
+       previous=position;
+      }
+     }
      const first=receiver.arity<=7?1:Math.max(1,receiver.slot-2);
      const last=receiver.arity<=7?receiver.arity:Math.min(receiver.arity,receiver.slot+2);
-     for(let j=first;j<=last;j++)positions.add(j);
-     let previous=-1;
-     for(const position of [...positions].sort((a,b)=>a-b)){
-      if(position>previous+1){
-       const gap=el('span','…');gap.title='Arguments '+(previous+1)+'–'+(position-1);ports.append(gap);
-      }
-      const slots=receiver.call.route.slots.concat(Array(receiver.arity-position).fill(0));
-      if(position)slots.push(1);
-      const portRoute={root:receiver.call.route.root,slots};
-      const port=config.sourceLink(position?String(position):'fn',{node:A.walk(config.data,portRoute),route:portRoute});
-      port.setAttribute('aria-label',position?'Argument '+position:'Function');
-      if(position===receiver.slot){
-       demand(portRoute.root===route.root && String(slots)===String(route.slots),'selected input address');
-       port.setAttribute('aria-current','true');
-      }
-      ports.append(port);previous=position;
-     }
+     drawPorts(first,last);
      receiving.append(ports);
     }else{
      const parent={root:route.root,slots:route.slots.slice(0,-1)};
