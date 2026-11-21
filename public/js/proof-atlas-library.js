@@ -1019,6 +1019,17 @@
    const h=el('button',n.truncated?'Open remaining function spine':'Open head · '+headName);h.type='button';h.dataset.applicationHead=n.head.path;h.onclick=()=>selectOccurrence(n.head.node,true,true,n.head.route);details.append(h);const list=el('ol');
    const firstUse=new Map(),statements=[];
    n.arguments.forEach((a,j)=>{const row=el('li'),checked=chooseTyping(n.route)?.argument?.(n.route,a.route),q=el('button',(a.position===null?'Trailing slot ':'Argument ')+a.slot+' · '+current.kind(a.node)+' · '+(checked?'checked '+checked.role+' / '+checked.binderInfo:'role unavailable')+' · '+number(a.expanded)+' occurrences · '+(n.regions[j+1].displayed?'drawn':'collapsed'));q.type='button';q.dataset.applicationArgument=a.path;q.dataset.argumentRole=checked?.role||'unavailable';q.title=a.path;q.onclick=()=>selectOccurrence(a.node,true,true,a.route);const m=n.members[j],b=el('button','Original application '+a.slot);b.type='button';b.dataset.applicationMember=m.path;b.title=m.path;b.onclick=()=>selectOccurrence(m.node,true,true,m.route);row.append(q,b);
+    if(n===call && current.kind(a.node)==='bvar'){
+     const binder=A.binding(current.data,a.route);
+     if(binder){
+      const payload=current.payload(binder.node);
+      const link=el('button','Binder · '+(payload.binderName||payload.declName||'_'));
+      link.type='button';link.dataset.argumentBinder=A.path(current.data,binder.route);
+      link.title=link.dataset.argumentBinder;
+      link.onclick=()=>selectOccurrence(binder.node,true,true,binder.route);
+      row.append(link);
+     }
+    }
     if(n===call && checked?.role==='proof'){
      const observed=chooseTyping(a.route)?.get(a.route);
      if(observed?.status==='checked' && observed.node===a.node && observed.role==='proof' && observed.typeText){

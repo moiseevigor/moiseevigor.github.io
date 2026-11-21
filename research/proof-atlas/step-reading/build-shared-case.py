@@ -10,11 +10,15 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--lean', default='lean')
 parser.add_argument('--output', type=Path, required=True)
 parser.add_argument('--tagged-depth', type=int, choices=range(19))
-parser.add_argument('--separated-assumptions', action='store_true')
+controls = parser.add_mutually_exclusive_group()
+controls.add_argument('--separated-assumptions', action='store_true')
+controls.add_argument('--distinct-premises', action='store_true')
 args = parser.parse_args()
-if args.separated_assumptions and args.tagged_depth is not None:
+binder_control = args.separated_assumptions or args.distinct_premises
+if binder_control and args.tagged_depth is not None:
     parser.error('--tagged-depth applies only to the shared case tree')
 env = os.environ.copy()
+env['ATLAS_DISTINCT_PREMISES'] = '1' if args.distinct_premises else '0'
 env.pop('ATLAS_TAGGED_TREE_DEPTH', None)
 if args.tagged_depth is not None:
     env['ATLAS_TAGGED_TREE_DEPTH'] = str(args.tagged_depth)
@@ -22,6 +26,6 @@ exporter = (here.parent / 'ExportLibrary.lean').read_text().split('def kind : Co
 source = exporter.replace('import SE2Conjugate\n', '') + '\nend AtlasLibrary\n'
 with tempfile.TemporaryDirectory() as work:
     folder = Path(work)
-    (folder / 'Stress.lean').write_text(source + (here / ('SeparatedAssumptions.lean' if args.separated_assumptions else 'SharedCaseStress.lean')).read_text())
+    (folder / 'Stress.lean').write_text(source + (here / ('SeparatedAssumptions.lean' if binder_control else 'SharedCaseStress.lean')).read_text())
     subprocess.run([args.lean, 'Stress.lean'], check=True, cwd=folder, timeout=180, env=env)
     args.output.write_bytes((folder / 'shared-case.json').read_bytes())

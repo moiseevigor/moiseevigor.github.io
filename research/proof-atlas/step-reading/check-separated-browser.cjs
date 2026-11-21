@@ -9,7 +9,7 @@ const {chromium} = require('playwright');
 const A = require('../../../public/js/proof-atlas-library-data');
 const repo = path.resolve(__dirname,'../../..');
 const graph = JSON.parse(fs.readFileSync(0,'utf8'));
-const name = 'separatedAssumptions';
+const name = graph.name || 'separatedAssumptions';
 const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 const expanded = [];
 for (const children of graph.children) expanded.push(1+children.reduce((n,c)=>n+expanded[c],0));
@@ -81,6 +81,29 @@ async function main() {
       return route.fulfill({status:404});
     });
     const body='http://localhost'+libraryPath+'?edition=browser-control&proof='+name+'&route=1%3A#expr-'+graph.roots[1];
+    if(name==='distinctPremises'){
+      const url=new URL(body);
+      url.searchParams.set('geometry','scoped');url.searchParams.set('fold','applications');
+      const call=[1,1,1];
+      url.searchParams.set('route','1:'+call.join('.'));url.hash='';
+      for(const [index,binderName] of ['first','second'].entries()){
+        await page.goto(url.href);
+        const panel=page.locator('#pl-application-headers details').first();
+        await panel.locator('summary').click();
+        const row=panel.locator('ol > li').nth(2+index);
+        const binderSlots=Array(index+1).fill(1);
+        const use=call.concat(index===0?[0,1]:[1]);
+        assert.deepEqual(A.binding(graph,{root:1,slots:use}).route.slots,binderSlots);
+        assert.deepEqual(A.binding(graph,{root:1,slots:binderSlots.concat(0)}).route.slots,[]);
+        await row.getByRole('button',{name:'Binder · '+binderName,exact:true}).click();
+        const selected=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
+        assert.deepEqual(selected.route,{root:1,slots:binderSlots});
+        assert.equal(graph.payloads[selected.selected].binderName,binderName);
+      }
+      assert.deepEqual(errors,[]);
+      console.log('Both P premises opened their separate introducing binders.');
+      return;
+    }
     for (const width of [1280,390]) {
       await page.setViewportSize({width,height:850});
       for (const branch of [[1,0,1],[1,1]]) for (const premise of [[1,0,1],[1,1]]) {

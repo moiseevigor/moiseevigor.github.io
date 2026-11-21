@@ -1,6 +1,7 @@
 // Test full-statement queries under the reader's case-insensitive substring search.
 'use strict';
 const assert = require('node:assert/strict');
+const atlas = require('../../../public/js/proof-atlas-library-data');
 const {inventory} = require('../recorded-union.cjs');
 const {measure} = require('./ai-inference-traces.cjs');
 const normalize = text=>text.normalize('NFC').replace(/\s+/g,' ').trim().toLowerCase();
@@ -8,13 +9,23 @@ const normalize = text=>text.normalize('NFC').replace(/\s+/g,' ').trim().toLower
 async function main() {
   const editions={};
   for (const item of inventory()) {
-    const stats=editions[item.edition]??={calls:0, proofSlots:0, withText:0, ambiguous:0,
+    const stats=editions[item.edition]??={calls:0, proofSlots:0, directBound:0, withText:0, ambiguous:0,
       identical:0, differentTerm:0, examples:[]};
-    await measure(item,null,(inputs,n,args)=>{
+    await measure(item,null,(inputs,n,args,graph)=>{
       stats.calls++;
       const proof=inputs.filter(p=>p.role==='proof');
       const searchable=proof.filter(p=>typeof p.statement==='string' && normalize(p.statement));
       stats.proofSlots+=proof.length;
+      for(const input of proof){
+        const id=args[input.position-1];
+        if(atlas.kinds[graph.kind[id]]!=='bvar')continue;
+        const route={root:1,slots:input.route};
+        assert.equal(atlas.walk(graph,route),id);
+        const binder=atlas.binding(graph,route);
+        assert(binder);
+        assert.equal(atlas.walk(graph,binder.route),binder.node);
+        stats.directBound++;
+      }
       stats.withText+=searchable.length;
       for(const input of searchable){
         const query=normalize(input.statement);

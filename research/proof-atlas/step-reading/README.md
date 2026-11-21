@@ -1051,3 +1051,11 @@ The [text retrieval checker](check-proposition-identities.cjs) queried each reco
 Each ambiguous substring query included at least one different compiled argument row. The counts describe slots in calls with complete native role records; the SE(2) editions overlap. Other calls can use the same proposition twice. The reader keeps every matching slot in either mode and opens its original route.
 
 **Whole statement** restricts the filter to normalized equality of the displayed text. The local browser regression repeats the Riccati inequality query, compares the two substring matches with the single whole-statement match, and follows it to the original fourth argument. This measures text retrieval, without checking logical equivalence between different renderings. Reproduce the counts with `node research/proof-atlas/step-reading/check-proposition-identities.cjs`.
+
+#### Which assumption supplied this proposition?
+
+For a direct bound-variable argument, the focused application list now includes a button leading to its introducing binder at the original occurrence. This structural link works even if the call has no recorded argument type. Applied lemmas and other composite inputs keep their existing term links.
+
+The Lean control `distinctPremises (P : Prop) (first second : P) : P ∧ P := And.intro first second` gives the two premises exactly the same proposition. Lean 4.33.1 kernel-checked the body and its type. In the browser test, the third argument opens the binder for `first`, and the fourth opens the binder for `second`. Replaying the domain reference at both binder occurrences leads back to the same outer parameter `P`. This is a source distinction even though the propositions coincide. Build the packet with `build-shared-case.py --distinct-premises --output /tmp/distinct.json` and pass it on standard input to `check-separated-browser.cjs`.
+
+Among proof positions of maximal calls with complete recorded argument roles, the direct-binder rule applies to 97/224 in the AI edition, 79/126 in published SE(2), 15/28 in working SE(2) and 0/16 in the recursion controls. The proposition checker replays both the argument and binder route for each count. These figures describe recorded argument positions, not the fraction of whole proofs explained.
