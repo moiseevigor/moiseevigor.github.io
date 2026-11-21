@@ -13,6 +13,45 @@
   'typed-source-boundary':'Recorded type · construction outside this profile',
   'unrecorded-source':'No recorded native type or construction'
  };
+ let calleeIndex;
+ function loadCalleeIndex(){
+  if(!calleeIndex)calleeIndex=fetch('/public/data/proof-atlas/callee-parameter-uses.json?v=1').then(response=>{
+   if(!response.ok)throw Error('Parameter index unavailable');
+   return response.json();
+  }).catch(error=>{calleeIndex=null;throw error;});
+  return calleeIndex;
+ }
+ function calleeUses(card,owner,edition,start,end){
+  const details=el('details'),body=el('div');
+  details.dataset.calleeUses=owner.name;
+  details.append(el('summary','Follow arguments into '+owner.name),body);card.append(details);
+  let state='idle';
+  details.ontoggle=async()=>{
+   if(!details.open||state!=='idle')return;
+   state='loading';body.textContent='Loading parameter uses…';
+   try{
+    const index=await loadCalleeIndex(),record=index.records.find(r=>r.name===owner.name);
+    if(!record||index.edition!==edition.id||record.indexSha256!==owner.indexSha256){
+     body.textContent='No parameter-use index for this compiled declaration.';state='done';return;
+    }
+    function link(text,position){
+     const a=el('a',text),query=new URLSearchParams({edition:edition.id,proof:owner.name,route:'1:'+position.slots.join('.')});
+     a.href='/projects/proof-atlas/library/?'+query+'#expr-'+position.node;return a;
+    }
+    const list=el('ul');
+    for(let slot=start;slot<=end;slot++){
+     const item=el('li'),p=record.parameters[slot-1];
+     if(p){
+      item.append(link('Parameter '+slot,p));
+      if(p.first)item.append(' · ',link('First of '+p.count+' uses',p.first));
+      else item.append(' · 0 uses');
+     }else item.textContent='Argument '+slot+' lies beyond the recorded leading parameters.';
+     list.append(item);
+    }
+    body.replaceChildren(list);state='done';
+   }catch{body.textContent='Parameter index unavailable. Close and reopen to retry.';state='idle';}
+  };
+ }
  function mount(parent,model,data,scene,callbacks,presentation=null){
   const A=host.ProofAtlasLibraryData,P=host.ProofAtlasPackedRoutes;
   let disposed=false,scale=1,selected=null,action=0,hasCaptions=false;const captionItems=new Map(),pagedProofPorts=new Map();
@@ -59,6 +98,14 @@
     const last=earlierArguments+p.members.length;
     const context=earlierArguments?'Showing arguments '+(earlierArguments+1)+'–'+last+' of '+last+'.':'All '+last+' compiled argument'+(last===1?'':'s')+'.';
     card.append(el('p',context,'poc-context'));
+    const edition=callbacks.calleeEdition;
+    if(edition?.id==='published-15'&&data.kind[prefix]===4){
+     const head=data.payloads[prefix];
+     const owner=edition.declarations.find(r=>r.name===head.name);
+     const parts=owner?.name.split('.');
+     if(owner?.bodyAvailable&&head.nameParts?.length===parts.length&&
+        head.nameParts.every((part,i)=>part.str===parts[i]))calleeUses(card,owner,edition,earlierArguments+1,last);
+    }
    }
    if(!p.rule)card.append(el('p',p.expanded+' source occurrence'+(p.expanded==='1'?'':'s')+' inside this boundary.','poc-context'));
    const parameterLabels=new Map(),proofInputs=new Map();

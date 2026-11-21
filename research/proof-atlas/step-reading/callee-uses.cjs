@@ -152,7 +152,11 @@ for (const anchor of article.anchors.filter(a=>a.kind==='app' && a.callee)) {
   rows.push('| '+anchor.declaration+' | '+anchor.callee+' | '+entries.join('<br>')+' |');
   calls++;
 }
-if(showConsumers){
+if(process.argv.includes('--reader-index')){
+  const records=[...cache].map(([name,parameters])=>({name,indexSha256:owners.get(name).indexSha256,
+    parameters:parameters.map(({node,slots,first,count})=>({node,slots,first,count}))}));
+  console.log(JSON.stringify({edition:edition.id,records}));
+}else if(showConsumers){
   console.log('# Where parameters are used inside the called lemma\n');
   console.log('Each row covers one leading parameter in a called declaration. Receiving positions are grouped by constant name and compiled argument number, by head constructor for unnamed calls, or by the immediate constructor field outside a call. Each group links its first receiving occurrence and the precise bound-variable use inside it. Counts include later binder domains and repeated occurrences of shared expressions.\n');
   console.log('| Declaration | Parameter | Receiving positions and occurrence counts |\n|---|---|---|');

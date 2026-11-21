@@ -79,6 +79,25 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
         assert.deepEqual(await statement.allTextContents(),input.role==='proof'?[input.type]:[]);
         await checkRoute(i+1,packed.encode(input.route.root,input.route.slots));
       }
+      const disclosure=group.locator('[data-callee-uses="JacobiData.two_sqrt_mul_le_add"]');
+      await disclosure.locator('summary').click();
+      const hx=disclosure.locator('li').filter({has:page.getByRole('link',{name:'Parameter 3',exact:true})});
+      const binderURL=new URL(await hx.getByRole('link',{name:'Parameter 3'}).getAttribute('href'),url);
+      assert.equal(binderURL.hash,'#expr-1945');
+      const use=hx.getByRole('link',{name:'First of 2 uses'});
+      const useURL=new URL(await use.getAttribute('href'),url);
+      await use.click();
+      await page.waitForFunction(expected=>{
+        const s=window.ProofAtlasLibrary?.getSnapshot();
+        return s?.name==='JacobiData.two_sqrt_mul_le_add' && s.edition==='published-15' &&
+          s.selected===expected.node && s.route.root+':'+s.route.slots.join('.')===expected.route;
+      },{node:Number(useURL.hash.slice(6)),route:useURL.searchParams.get('route')});
+      await page.goto(url);
+      await page.route('**/callee-parameter-uses.json*',r=>r.fulfill({json:{edition:'published-15',records:[]}}));
+      await disclosure.locator('summary').click();
+      await disclosure.getByText('No parameter-use index for this compiled declaration.').waitFor();
+      assert.equal(await disclosure.locator('a').count(),0);
+      await page.unroute('**/callee-parameter-uses.json*');
       const paged=new URL(url);
       paged.searchParams.delete('group');paged.searchParams.set('loading','paged');
       const requested=[];
