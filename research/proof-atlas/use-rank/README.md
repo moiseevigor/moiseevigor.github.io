@@ -685,3 +685,17 @@ The import uses an existing build of SE2Conjugate.Riccati. The runner checks the
 The paged transport checker compares each returned address with a complete-index traversal, including the relative field path on both sides. Across 271 transport rows, 149 pairs had identical compiled syntax, 112 had one displayed difference, and ten had several. Of the 112 single pairs, 15 covered the whole type and 97 located a difference below the root. All 271 finished within eight displayed pairs and 128 inspected unequal pairs. Using just corresponding constructor fields under the same limits left 38 comparisons incomplete. Grouping by applied function deliberately changes the granularity. No improvement in reader comprehension was measured.
 
 At Riccati row 3222 the changed region goes from a square-root application (row 3171) to a multiplication (3178). At row 3238 the direction is from division (2238) to absolute value (2215). The browser check verifies these links and both changes at row 3221. Synthetic repeated-subtree and deep-wrapper controls exercise both limits and require explicit partial status. Edition counts include the two copies of the Riccati proof.
+
+### Folding transport back to its input term
+
+For an arbitrary type A : Sort u, equality proof e : A = A and input x : A, Lean 4.33.1 accepts reflexivity at both Eq.mp e x = x and Eq.mpr e x = x. The proof uses a variable e; recognition does not require its syntax to be Eq.refl. Check the two universe-polymorphic theorems with `lean research/proof-atlas/use-rank/TransportIdentity.lean`. Two controls use independent type variables A and B: heterogeneous reflexivity alone fails, and eliminating e then proves the propositional result. This is a direct kernel check of an existing Lean behavior, not a new theorem about the Riccati bound.
+
+The paged view selects this fold only for an exactly recognized, fully applied transport whose two endpoint arguments share a compiled row. The routes to the arguments cross only application fields and preserve lexical context. The default presentation links to the original input term; expanding it restores the compiled rule, equality proof and both distinct endpoint addresses. Definitionally equal endpoints stored in different rows are outside this selection rule.
+
+| Scope | Foldable / total distinct transport rows | Foldable / total expanded transport occurrences |
+| --- | ---: | ---: |
+| 35 paged edition/declaration entries | 149 / 271 | 5,802 / 6,013 |
+| 20 AI proofs within that inventory | 95 / 168 | 2,514 / 2,676 |
+| All 561 available published SE(2) theorem bodies | 1,246 / 2,552 | 4,072 / 5,501 |
+
+Run `node research/proof-atlas/use-rank/check-paged-transport.cjs` for the first two rows and add `--published-identities` for the last. Scopes overlap. Every foldable occurrence observed was Eq.mpr. The published census includes 687 forward occurrences, none with a shared endpoint row. This is a distribution in the compiled samples; the Lean result applies in either direction. Counts concern transport operations and do not measure a reduction in total proof size or reading time.

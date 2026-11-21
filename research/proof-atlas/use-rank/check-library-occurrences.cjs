@@ -808,6 +808,29 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
     await page.waitForFunction(id=>window.ProofAtlasLibrary?.getSnapshot()?.selected===id,eq.node);
     assert.deepEqual(await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot().route),eq.route);
    }
+   for(const [g,editionId,proof,node] of [[body,'published-15',riccati,2899],[largeData,aiEdition.id,largeProof,60409]]){
+    const route=atlas.routes(g).route(node),at={node,route};
+    await page.goto('http://localhost/projects/proof-atlas/library/?loading=paged&edition='+editionId+'&proof='+proof.name+'&route='+route.root+':'+route.slots.join('.')+'#expr-'+node);
+    const transport=page.getByRole('region',{name:'Transport across equality'});
+    const summary=transport.getByText('Show Eq.mpr and its arguments',{exact:true});
+    await summary.waitFor();
+    assert.equal(await summary.locator('..').getAttribute('open'),null);
+    const original=sourceSlot(g,at,4);
+    const input=transport.getByRole('link',{name:'input term',exact:true});
+    const href=new URL(await input.evaluate(a=>a.href));
+    assert.equal(href.hash,'#expr-'+original.node);
+    await summary.click();
+    const raw=summary.locator('..');
+    for(const [label,slot] of [['A',1],['B',2],['Proof of A = B',3],['Term of B',4]]){
+     const expected=sourceSlot(g,at,slot),link=raw.getByRole('link',{name:label,exact:true}).first();
+     const href=new URL(await link.evaluate(a=>a.href));
+     assert.equal(href.hash,'#expr-'+expected.node);
+     assert.equal(href.searchParams.get('route'),expected.route.root+':'+expected.route.slots.join('.'));
+    }
+    await summary.click();await input.click();
+    await page.waitForFunction(id=>window.ProofAtlasLibrary?.getSnapshot()?.selected===id,original.node);
+    assert.deepEqual(await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot().route),original.route);
+   }
    await page.goto('http://localhost/projects/proof-atlas/library/?loading=paged&edition=published-15&proof=CrossingData.crossing');
    await finder.click();
    await page.getByText('No fully applied congrArg occurs in this proof body.').waitFor();

@@ -18,7 +18,7 @@ async function check(descriptor,record){
  const data=atlas.validateIndex(JSON.parse(raw),record),root=data.roots[1];
  const visits=Array(root+1).fill(0n),parents=new Map();
  visits[root]=1n;
- const counts={mp:0,mpr:0,forward:0n,reverse:0n,partial:0,joined:0,different:0,capped:0,single:0,several:0,limited:0,identical:0,rootOnly:0,rawLimited:0};
+ const counts={mp:0,mpr:0,forward:0n,reverse:0n,partial:0,joined:0,different:0,capped:0,single:0,several:0,limited:0,identical:0,rootOnly:0,rawLimited:0,folded:0,foldedForward:0,expandedFolded:0n};
  const cursor=await pages.open(descriptor,record,{pageLimit:1,indexLimit:1,fetcher:async file=>{
   assert(file.startsWith(descriptor.file.slice(0,descriptor.file.lastIndexOf('/')+1)));
   return new Response(fs.readFileSync('.'+file));
@@ -43,6 +43,11 @@ async function check(descriptor,record){
    const [left,right,equality,term]=[1,2,3,4].map(slot=>sourceInput(data,call,slot));
    const forward=name==='Eq.mp';
    assert.deepEqual(result,{rule:name,left,right,equality,term,from:forward?left:right,to:forward?right:left});
+   if(left.node===right.node){
+    counts.folded++;if(forward)counts.foldedForward++;counts.expandedFolded+=visits[id];
+    assert.deepEqual(atlas.binding(data,left.route),atlas.binding(data,right.route));
+    assert.notDeepEqual(left.route,right.route);
+   }
    const diff=await pagedTypeDifferences(cursor,result.from,result.to);
    const expected=[];
    function collect(l,r,path){
@@ -178,11 +183,34 @@ async function checkDisplayLimit(){
  await checkDisplayLimit();
  const window={};
  require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/source-pages-manifest.js','utf8'),{window});
+ if(process.argv.includes('--published-identities')){
+  require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/library-manifest.js','utf8'),{window});
+  const records=window.PROOF_ATLAS_LIBRARY.editions.find(e=>e.id==='published-15').declarations.filter(r=>r.kind==='theorem'&&r.bodyAvailable);
+  const counts={'Eq.mp':{rows:0,shared:0,visits:0n,foldable:0n},'Eq.mpr':{rows:0,shared:0,visits:0n,foldable:0n}};
+  for(const record of records){
+   const raw=gunzipSync(fs.readFileSync('.'+record.indexFile));
+   assert.equal(createHash('sha256').update(raw).digest('hex'),record.indexSha256);
+   const data=atlas.validateIndex(JSON.parse(raw),record),root=data.roots[1];
+   const visits=Array(root+1).fill(0n);visits[root]=1n;
+   for(let id=root;id>=0;id--){
+    if(!visits[id])continue;
+    for(const child of data.children[id])visits[child]+=visits[id];
+    if(data.kind[id]!==5)continue;
+    const {head,args}=spine(data,id),p=data.payloads[head];
+    if(data.kind[head]!==4 || !Object.hasOwn(counts,p.name) || args.length!==4)continue;
+    assert.deepEqual(p.nameParts,[{str:'Eq'},{str:p.name.slice(3)}]);
+    const c=counts[p.name];c.rows++;c.visits+=visits[id];
+    if(args[0]===args[1]){c.shared++;c.foldable+=visits[id];}
+   }
+   assert.equal(visits.reduce((a,b)=>a+b,0n),BigInt(data.expanded[root]));
+  }
+  console.log('Published theorem bodies:',records.length);console.table(counts);return;
+ }
  const items=inventory(),totals={};
  for(const d of window.PROOF_ATLAS_SOURCE_PAGES.records){
   const {record}=items.find(i=>i.edition===d.edition&&i.record.indexSha256===d.indexSha256);
   const c=await check(d,record);
-  const s=totals[d.edition]??={packets:0,matching:0,mp:0,mpr:0,forward:0n,reverse:0n,partial:0,joined:0,different:0,capped:0,single:0,several:0,limited:0,identical:0,rootOnly:0,rawLimited:0};
+  const s=totals[d.edition]??={packets:0,matching:0,mp:0,mpr:0,forward:0n,reverse:0n,partial:0,joined:0,different:0,capped:0,single:0,several:0,limited:0,identical:0,rootOnly:0,rawLimited:0,folded:0,foldedForward:0,expandedFolded:0n};
   s.packets++;if(c.mp+c.mpr)s.matching++;
   for(const key of Object.keys(c))s[key]+=c[key];
  }

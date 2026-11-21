@@ -165,11 +165,21 @@
       anchor('t',result.term),' : ',anchor(from,result.from),'  ↦  result : ',anchor(to,result.to));
      substitutionSection.hidden=false;
      substitutionSection.setAttribute('aria-label','Transport across equality');
-     substitutionSection.append(el('h3','Transport across equality'),rule,
+     substitutionSection.append(el('h3','Transport across equality'));
+     let sourceView=substitutionSection;
+     if(result.left.node===result.right.node){
+      const identity=el('p');
+      identity.append('The endpoint types share a compiled row. The transported term is definitionally equal to its ',
+       anchor('input term',result.term),'.');
+      sourceView=el('details');
+      sourceView.append(el('summary','Show '+result.rule+' and its arguments'));
+      substitutionSection.append(identity,sourceView);
+     }
+     sourceView.append(rule,
       el('p',result.rule+' carries a term of '+from+' to a term of '+to+'.'),
       anchor('Proof of A = B',result.equality),' · ',anchor('Term of '+from,result.term));
      const comparison=el('details'),summary=el('summary','Compare input and result types');
-     comparison.append(summary);substitutionSection.append(comparison);
+     comparison.append(summary);sourceView.append(comparison);
      comparison.ontoggle=async()=>{
       if(!comparison.open)return;
       comparison.ontoggle=null;
@@ -206,21 +216,21 @@
        row.append(anchor('T'+i,step.from),' → ',anchor('T'+(i+1),step.to),' · ',anchor(step.rule+' equality',step.equality));
        list.append(row);
       }
-      substitutionSection.append(el('h4','From the input term to the result'),anchor('Input term of T0',chain.steps.at(-1).term),list);
+      sourceView.append(el('h4','From the input term to the result'),anchor('Input term of T0',chain.steps.at(-1).term),list);
      }
      for(const join of verified){
       const note=el('p'),report=el('a','Kernel replay record');report.href=transportFile;
       note.append('Lean checked conversion between the ',anchor('inner result type',join.inner),' and ',
        anchor('outer input type',join.outer),'. ',report);
-      substitutionSection.append(note);
+      sourceView.append(note);
      }
      if(chain.boundary?.kind==='different rows'){
       const seam=el('p');
       seam.append('The ',anchor('inner result type',chain.boundary.inner),' and ',anchor('outer input type',chain.boundary.outer),
        ' have different compiled rows. Their conversion has not been checked here. ',anchor('Inspect inner transport',chain.steps.at(-1).term));
-      substitutionSection.append(seam);
+      sourceView.append(seam);
      }
-     if(chain.boundary?.kind==='display limit')substitutionSection.append(anchor('Inspect the input after eight steps',chain.boundary.term));
+     if(chain.boundary?.kind==='display limit')sourceView.append(anchor('Inspect the input after eight steps',chain.boundary.term));
      return;
     }
     substitutionSection.setAttribute('aria-label','Equality under a function');
