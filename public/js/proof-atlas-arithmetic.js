@@ -197,6 +197,14 @@
   if(!before || !after)return null;
   return {before,after,equality:cast[2],premise:cast[3],reverse,change:rewriteSide(data,cast,before,after,reverse)};
  }
+ function equalityChain(data,at,expected){
+  const args=namedArguments(data,at,'Eq.trans',6);
+  if(!args)return null;
+  const [type,start,middle,end,first,second]=args;
+  if(expected && (expected.name!=='Eq' || expected.parameters[0].node!==type.node ||
+     expected.left.site.node!==start.node || expected.right.site.node!==end.node))return null;
+  return {start,middle,end,first,second};
+ }
  function rewriteSequence(data,at,selected){
   const steps=[{at,term:selected}];
   let current=selected;
@@ -273,6 +281,18 @@
    return p;
   }
   const selected=formulaTransport(data,at);
+  const chainAt=selected?.change?selected.premise:at;
+  const chain=equalityChain(data,chainAt,selected?.change?selected.before:null);
+  if(chain){
+   const panel=el('section'),line=el('p'),proofs=el('p');panel.dataset.equalityChain='';
+   panel.append(el('h4',selected?.change?'Equality before the rewrite':'Equality by transitivity'));
+   for(const [i,site] of [chain.start,chain.middle,chain.end].entries()){
+    if(i)line.append(' = ');
+    line.append(link(caption(formula(data,site,3,true)),site));
+   }
+   proofs.append(link('First equality',chain.first),' · ',link('Second equality',chain.second));
+   panel.append(line,proofs);container.append(panel);
+  }
   if(selected?.change){
    const panel=el('section');panel.dataset.selectedRewrite='';
    panel.append(el('h4','Rewrite an operand'),link(caption(selected.before),selected.before.site),' → ',
@@ -467,5 +487,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
+ if(common)module.exports={equalityChain,rewriteSequence,formulaTransport,formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument,contraryUses};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
 })(typeof window==='undefined'?globalThis:window);
