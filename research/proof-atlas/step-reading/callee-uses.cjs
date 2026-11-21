@@ -152,7 +152,19 @@ for (const anchor of article.anchors.filter(a=>a.kind==='app' && a.callee)) {
   rows.push('| '+anchor.declaration+' | '+anchor.callee+' | '+entries.join('<br>')+' |');
   calls++;
 }
-if(process.argv.includes('--reader-index')){
+if(process.argv.includes('--all-bodies')){
+  const shards=Array.from({length:16},()=>[]);
+  for(const owner of edition.declarations.filter(r=>r.bodyAvailable)){
+    const params=cache.get(owner.name)||leadingParameters(load(owner));
+    const parameters=params.map(({node,slots,first,count})=>({node,slots,first,count}));
+    shards[parseInt(owner.indexSha256[0],16)].push({name:owner.name,indexSha256:owner.indexSha256,parameters});
+  }
+  const dir='public/data/proof-atlas/callee-uses';
+  fs.mkdirSync(dir,{recursive:true});
+  for(const [i,records] of shards.entries()){
+    fs.writeFileSync(dir+'/'+i.toString(16)+'.json',JSON.stringify({edition:edition.id,records})+'\n');
+  }
+}else if(process.argv.includes('--reader-index')){
   const records=[...cache].map(([name,parameters])=>({name,indexSha256:owners.get(name).indexSha256,
     parameters:parameters.map(({node,slots,first,count})=>({node,slots,first,count}))}));
   console.log(JSON.stringify({edition:edition.id,records}));

@@ -93,11 +93,11 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
           s.selected===expected.node && s.route.root+':'+s.route.slots.join('.')===expected.route;
       },{node:Number(useURL.hash.slice(6)),route:useURL.searchParams.get('route')});
       await page.goto(url);
-      await page.route('**/callee-parameter-uses.json*',r=>r.fulfill({json:{edition:'published-15',records:[]}}));
+      await page.route('**/callee-uses/*.json*',r=>r.fulfill({json:{edition:'published-15',records:[]}}));
       await disclosure.locator('summary').click();
       await disclosure.getByText('No parameter-use index for this compiled declaration.').waitFor();
       assert.equal(await disclosure.locator('a').count(),0);
-      await page.unroute('**/callee-parameter-uses.json*');
+      await page.unroute('**/callee-uses/*.json*');
       const paged=new URL(url);
       paged.searchParams.delete('group');paged.searchParams.set('loading','paged');
       const requested=[];

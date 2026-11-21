@@ -11,20 +11,43 @@ const typing = require('../../../public/js/proof-atlas-deep-context');
 global.window={};
 require('../../../public/data/proof-atlas/library-manifest');
 require('../../../public/data/proof-atlas/goedel-sample-manifest');
+const expandedIndex=process.argv.includes('--all-bodies');
 const reader=require('../../../public/data/proof-atlas/callee-parameter-uses.json');
 
 function census(edition){
   const owners=new Map(edition.declarations.map(r=>[r.name,r]));
   const indexed=new Map(reader.records.map(r=>[r.name,r.indexSha256]));
   const counts={}, outside=new Map();
+  const parameters=new Map();
+  if(expandedIndex && edition.id===reader.edition){
+    for(let i=0;i<16;i++){
+      const shard=require('../../../public/data/proof-atlas/callee-uses/'+i.toString(16)+'.json');
+      assert.equal(shard.edition,edition.id);
+      for(const record of shard.records){
+        assert.equal(record.indexSha256[0],i.toString(16));
+        assert.equal(record.indexSha256,owners.get(record.name).indexSha256);
+        assert(!parameters.has(record.name));
+        parameters.set(record.name,record.parameters);
+      }
+    }
+    assert.equal(parameters.size,edition.declarations.filter(r=>r.bodyAvailable).length);
+  }
+  let localInputSlots=0n,matchedSlots=0n,usedSlots=0n;
   function record(term,id,weight){
-    const {head}=spine(term,id);
+    const {head,args}=spine(term,id);
     let category='nonconstant';
     if(atlas.kinds[term.kind[head]]==='const'){
       const name=term.payloads[head].name, owner=owners.get(name);
       if(owner){
         assert.deepEqual(term.payloads[head].nameParts,name.split('.').map(str=>({str})));
         category=owner.bodyAvailable?'bodyAvailable':'declarationOnly';
+        if(parameters.has(name)){
+          category='indexedBody';
+          const bound=parameters.get(name).slice(0,args.length);
+          localInputSlots+=BigInt(args.length)*weight;
+          matchedSlots+=BigInt(bound.length)*weight;
+          usedSlots+=BigInt(bound.filter(p=>p.count>0).length)*weight;
+        }
         if(reader.edition===edition.id && owner.indexSha256===indexed.get(name))category='indexedBody';
       }else{
         category='outsideEdition';
@@ -33,7 +56,7 @@ function census(edition){
     }
     counts[category]=(counts[category]||0n)+weight;
   }
-  return {record,localCount:()=>(counts.bodyAvailable||0n)+(counts.indexedBody||0n),report:()=>({counts,distinctExternalNames:outside.size,
+  return {record,localCount:()=>(counts.bodyAvailable||0n)+(counts.indexedBody||0n),report:()=>({counts,...(expandedIndex?{localInputSlots,matchedSlots,usedSlots}:{}),distinctExternalNames:outside.size,
     leadingExternalNames:[...outside].sort((a,b)=>a[1]===b[1]?a[0].localeCompare(b[0]):a[1]>b[1]?-1:1).slice(0,10)})};
 }
 

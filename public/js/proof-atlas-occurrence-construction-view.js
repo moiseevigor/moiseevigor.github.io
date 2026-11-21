@@ -13,13 +13,11 @@
   'typed-source-boundary':'Recorded type · construction outside this profile',
   'unrecorded-source':'No recorded native type or construction'
  };
- let calleeIndex;
- function loadCalleeIndex(){
-  if(!calleeIndex)calleeIndex=fetch('/public/data/proof-atlas/callee-parameter-uses.json?v=1').then(response=>{
-   if(!response.ok)throw Error('Parameter index unavailable');
-   return response.json();
-  }).catch(error=>{calleeIndex=null;throw error;});
-  return calleeIndex;
+ async function loadCalleeIndex(owner){
+  const shard=owner.indexSha256[0];
+  const response=await fetch('/public/data/proof-atlas/callee-uses/'+shard+'.json?v=1');
+  if(!response.ok)throw Error('Parameter index unavailable');
+  return response.json();
  }
  function calleeUses(card,owner,edition,start,end){
   const details=el('details'),body=el('div');
@@ -30,7 +28,7 @@
    if(!details.open||state!=='idle')return;
    state='loading';body.textContent='Loading parameter uses…';
    try{
-    const index=await loadCalleeIndex(),record=index.records.find(r=>r.name===owner.name);
+    const index=await loadCalleeIndex(owner),record=index.records.find(r=>r.name===owner.name);
     if(!record||index.edition!==edition.id||record.indexSha256!==owner.indexSha256){
      body.textContent='No parameter-use index for this compiled declaration.';state='done';return;
     }
