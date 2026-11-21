@@ -44,33 +44,55 @@
  function countReferences(data,root,index,options={}){
   const limit=options.maxStates??65536,maxDepth=options.maxDepth??512;
   demand(Number.isInteger(index)&&index>=0&&Number.isInteger(limit)&&limit>=1&&limit<=65536&&Number.isInteger(maxDepth)&&maxDepth>=0&&maxDepth<=512,'usage bounds');
+  const maxWork=options.maxWork??limit;
+  demand(Number.isInteger(maxWork)&&maxWork>=limit&&maxWork<=262144,'work bound');
+  const recycle=maxWork>limit;
+  const insertionOrder=[];
+  let oldest=0,evictions=0;
+  const budgetExceeded=Symbol('budget exceeded');
   let states=0;const memo=new Map(),useSupport=options.useSupport!==false,support=useSupport?supportIndex(data):null;
-  function visit(id,depth,distance){const key=id+':'+depth;if(memo.has(key))return memo.get(key);if(distance>maxDepth||++states>limit)throw Error('count budget');
+  function visit(id,depth,distance){const key=id+':'+depth;if(memo.has(key))return memo.get(key);if(distance>maxDepth||++states>maxWork)throw budgetExceeded;
    let n=0n;const target=index+depth,known=support?.[id];
-   if(data.neededScope[id]>target&&(known===undefined||((known>>BigInt(target))&1n)!==0n)){const kind=data.kind[id];if(kind===0)n=data.payloads[id].index===target?1n:0n;else data.children[id].forEach((c,j)=>{n+=visit(c,depth+(binds(kind,j)?1:0),distance+1);});}memo.set(key,n);return n;
+   if(data.neededScope[id]>target&&(known===undefined||((known>>BigInt(target))&1n)!==0n)){const kind=data.kind[id];if(kind===0)n=data.payloads[id].index===target?1n:0n;else data.children[id].forEach((c,j)=>{n+=visit(c,depth+(binds(kind,j)?1:0),distance+1);});}
+   if(recycle){
+    if(memo.size===limit){
+     memo.delete(insertionOrder[oldest]);
+     insertionOrder[oldest]=key;
+     oldest=(oldest+1)%limit;
+     evictions++;
+    }else insertionOrder.push(key);
+   }
+   memo.set(key,n);
+   return n;
   }
-  const method=useSupport?'scoped-dag-reference-count/2':'scoped-dag-reference-count/1',supportInfo=useSupport?{supportAvailable:support?.[root]!==undefined,supportWidth,supportCacheLimit}:{};
+  const method=recycle?'scoped-dag-reference-count/3':useSupport?'scoped-dag-reference-count/2':'scoped-dag-reference-count/1',supportInfo=useSupport?{supportAvailable:support?.[root]!==undefined,supportWidth,supportCacheLimit}:{};
   const ordinal=options.ordinal;
   demand(ordinal===undefined || (typeof ordinal==='bigint' && ordinal>=1n),'reference ordinal');
-  let total;
-  try{total=visit(root,0,0);}catch(_){return{status:'unavailable',reason:'Scoped reference-count budget exceeded',states,method,...supportInfo};}
-  const result={status:'counted',occurrences:total.toString(),states,method,...supportInfo};
-  if(ordinal===undefined)return result;
-  demand(ordinal<=total,'reference outside body');
-  let remaining=ordinal,node=root,depth=0;
-  const slots=[];
-  while(data.kind[node]!==0){
-   const kind=data.kind[node],slot=data.children[node].findIndex((child,j)=>{
-    const weight=memo.get(child+':'+(depth+Number(binds(kind,j))));
-    demand(weight!==undefined,'missing reference count');
-    if(remaining<=weight)return true;
-    remaining-=weight;return false;
-   });
-   demand(slot>=0,'reference partition');
-   slots.push(slot);depth+=Number(binds(kind,slot));node=data.children[node][slot];
+  function stats(){return recycle?{peakEntries:memo.size,evictions,maxWork}:{};}
+  try{
+   const total=visit(root,0,0);
+   const result={status:'counted',occurrences:total.toString(),states,method,...supportInfo,...stats()};
+   if(ordinal===undefined)return result;
+   demand(ordinal<=total,'reference outside body');
+   let remaining=ordinal,node=root,depth=0;
+   const slots=[];
+   while(data.kind[node]!==0){
+    const kind=data.kind[node],slot=data.children[node].findIndex((child,j)=>{
+     const next=depth+Number(binds(kind,j));
+     const weight=recycle?visit(child,next,slots.length+1):memo.get(child+':'+next);
+     demand(weight!==undefined,'missing reference count');
+     if(remaining<=weight)return true;
+     remaining-=weight;return false;
+    });
+    demand(slot>=0,'reference partition');
+    slots.push(slot);depth+=Number(binds(kind,slot));node=data.children[node][slot];
+   }
+   demand(data.payloads[node].index===index+depth,'reference binder depth');
+   return {...result,states,...stats(),witness:{node,slots}};
+  }catch(error){
+   if(error!==budgetExceeded)throw error;
+   return{status:'unavailable',reason:'Scoped reference-count budget exceeded',states,method,...supportInfo,...stats()};
   }
-  demand(data.payloads[node].index===index+depth,'reference binder depth');
-  return {...result,witness:{node,slots}};
 
  }
  // Split a unary motive's body along its literal forall prefix.

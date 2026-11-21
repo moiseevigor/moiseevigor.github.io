@@ -80,7 +80,7 @@ function checkOrdinals(term, samples, totals) {
 function census(edition) {
   const result = {edition:edition.id,bodies:0,withoutLeadingLambda:0,parameters:0,unused:0,
     uses:0n,verifiedRoutes:0,sharedIndexAtSampledRanks:0,largestUseCount:0n};
-  const reader = {counted:0,largestStates:0,verifiedRoutes:0,unavailable:[]};
+  const reader = {budget:bindingUses.readerBudget,maxPeakEntries:0,maxRankWork:0,counted:0,largestStates:0,verifiedRoutes:0,unavailable:[]};
   result.reader = reader;
   for (const owner of edition.declarations.filter(r=>r.bodyAvailable && r.kind==='theorem')) {
     const bytes = gunzipSync(fs.readFileSync(path.join(__dirname,'../../..',owner.indexFile)));
@@ -102,7 +102,7 @@ function census(edition) {
       const route = {root:1,slots:Array(i).fill(1)};
       const index = ranked(term,route);
       assert.equal(index.total,expected);
-      const scene = bindingUses.describe(term,owner,route);
+      const scene = bindingUses.describe(term,owner,route,bindingUses.readerBudget);
       const coverage = scene.references;
       if (coverage.status === 'counted') {
         assert.equal(BigInt(coverage.occurrences),expected);
@@ -128,6 +128,9 @@ function census(edition) {
         if (coverage.status === 'counted') {
           const selection = countReferences(term,scene.body.node,0,{...scene.budget,ordinal:rank+1n});
           assert.equal(selection.status,'counted');
+          reader.maxPeakEntries = Math.max(reader.maxPeakEntries,selection.peakEntries);
+          reader.maxRankWork = Math.max(reader.maxRankWork,selection.states);
+          assert(selection.peakEntries <= scene.budget.maxStates && selection.states <= scene.budget.maxWork);
           assert.equal(selection.witness.node,entry.node);
           assert.deepEqual(scene.body.route.slots.concat(selection.witness.slots),entry.route.slots);
           reader.verifiedRoutes++;
@@ -149,5 +152,21 @@ function census(edition) {
   }
   return result;
 }
+// A count can succeed just before selection exhausts the remaining work.
+function checkRecomputationLimit() {
+  const term = {kind:[0,5,5,5],children:[[],[0,0],[1,1],[2,2]],
+    neededScope:[1,1,1,1],payloads:[{index:0},{},{},{}]};
+  const budget = {maxStates:2,maxWork:4};
+  assert.equal(countReferences(term,3,0,budget).occurrences,'8');
+  const limited = countReferences(term,3,0,{...budget,ordinal:8n});
+  assert.equal(limited.status,'unavailable');
+  assert.equal(limited.witness,undefined);
+  for (let i=0;i<8;i++) {
+    const selected = countReferences(term,3,0,{...budget,maxWork:16,ordinal:BigInt(i+1)});
+    assert.deepEqual(selected.witness.slots,[(i>>2)&1,(i>>1)&1,i&1]);
+    assert.equal(selected.peakEntries,2);
+  }
+}
+checkRecomputationLimit();
 const editions = [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAMPLE.edition];
 console.log(JSON.stringify(editions.map(census),(_,v)=>typeof v==='bigint'?String(v):v,2));

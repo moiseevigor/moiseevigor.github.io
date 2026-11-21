@@ -10,6 +10,13 @@
     "sharedIndexAtSampledRanks": 826,
     "largestUseCount": "77687",
     "reader": {
+      "budget": {
+        "maxStates": 65536,
+        "maxDepth": 512,
+        "maxWork": 262144
+      },
+      "maxPeakEntries": 18756,
+      "maxRankWork": 18756,
       "counted": 2076,
       "largestStates": 18756,
       "verifiedRoutes": 4958,
@@ -27,67 +34,17 @@
     "sharedIndexAtSampledRanks": 1886,
     "largestUseCount": "989476",
     "reader": {
-      "counted": 4015,
-      "largestStates": 63254,
-      "verifiedRoutes": 9461,
-      "unavailable": [
-        {
-          "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
-          "indexSha256": "2d55fcee4c570869eacb882d5c131deb173cfd82c941af68aa2b561943627f7b",
-          "parameter": 1,
-          "uses": "819939",
-          "reason": "Scoped reference-count budget exceeded",
-          "states": 65537
-        },
-        {
-          "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
-          "indexSha256": "2d55fcee4c570869eacb882d5c131deb173cfd82c941af68aa2b561943627f7b",
-          "parameter": 2,
-          "uses": "989476",
-          "reason": "Scoped reference-count budget exceeded",
-          "states": 65537
-        },
-        {
-          "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
-          "indexSha256": "2d55fcee4c570869eacb882d5c131deb173cfd82c941af68aa2b561943627f7b",
-          "parameter": 3,
-          "uses": "489700",
-          "reason": "Scoped reference-count budget exceeded",
-          "states": 65537
-        },
-        {
-          "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
-          "indexSha256": "2d55fcee4c570869eacb882d5c131deb173cfd82c941af68aa2b561943627f7b",
-          "parameter": 4,
-          "uses": "349899",
-          "reason": "Scoped reference-count budget exceeded",
-          "states": 65537
-        },
-        {
-          "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
-          "indexSha256": "2d55fcee4c570869eacb882d5c131deb173cfd82c941af68aa2b561943627f7b",
-          "parameter": 5,
-          "uses": "944725",
-          "reason": "Scoped reference-count budget exceeded",
-          "states": 65537
-        },
-        {
-          "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
-          "indexSha256": "2d55fcee4c570869eacb882d5c131deb173cfd82c941af68aa2b561943627f7b",
-          "parameter": 6,
-          "uses": "354641",
-          "reason": "Scoped reference-count budget exceeded",
-          "states": 65537
-        },
-        {
-          "name": "JacobiConcrete.AmplitudeChart.midpoint_polynomial",
-          "indexSha256": "2d55fcee4c570869eacb882d5c131deb173cfd82c941af68aa2b561943627f7b",
-          "parameter": 9,
-          "uses": "332482",
-          "reason": "Scoped reference-count budget exceeded",
-          "states": 65537
-        }
-      ]
+      "budget": {
+        "maxStates": 65536,
+        "maxDepth": 512,
+        "maxWork": 262144
+      },
+      "maxPeakEntries": 65536,
+      "maxRankWork": 98458,
+      "counted": 4022,
+      "largestStates": 97058,
+      "verifiedRoutes": 9482,
+      "unavailable": []
     }
   },
   {
@@ -101,6 +58,13 @@
     "sharedIndexAtSampledRanks": 58,
     "largestUseCount": "96925",
     "reader": {
+      "budget": {
+        "maxStates": 65536,
+        "maxDepth": 512,
+        "maxWork": 262144
+      },
+      "maxPeakEntries": 61512,
+      "maxRankWork": 61512,
       "counted": 93,
       "largestStates": 61512,
       "verifiedRoutes": 250,

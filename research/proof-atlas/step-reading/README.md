@@ -199,9 +199,9 @@ In the AI sample, 58 parameters returned the same expression number at two or mo
 
 The library reader exposes direct ordinal selection under **Show binding references** when the bounded source count succeeds. Enter a one-based reference number to open either the variable occurrence or the expression receiving it. The existing sequential navigation remains available. In the [AI example](https://moiseevigor.github.io/projects/proof-atlas/library/?edition=goedel-sample-4331&proof=lean_workbook_plus_6206&route=1%3A1.1#expr-91421), reference 48,463 of 96,925 is e159 in argument 5 of `HPow.hPow`. The local browser check also followed reference 5 in the Riccati example to its own occurrence of e382.
 
-#### Coverage under the interactive reader’s limits
+#### Baseline with a single 65,536-state work and storage limit
 
-Running the reader’s binding panel model on the same theorem bodies gives two different coverage measures. Counting parameters measures how often a selected binder can be inspected. Weighting each parameter by its number of uses measures how much of the expanded proof remains accessible by reference number.
+The [original reader audit](https://github.com/moiseevigor/moiseevigor.github.io/blob/137bbe5f5beedafd0cec2da85d4a16359e08b5fc/research/proof-atlas/step-reading/ranked-corpus.json) on the same theorem bodies gives two different coverage measures. Counting parameters measures how often a selected binder can be inspected. Weighting each parameter by its number of uses measures how much of the expanded proof remains accessible by reference number.
 
 | Edition | Parameters counted | Uses under counted parameters | Sampled reader paths matched |
 |---|---:|---:|---:|
@@ -209,4 +209,10 @@ Running the reader’s binding panel model on the same theorem bodies gives two 
 | Working SE(2) | 4,015 / 4,022 | 2,813,605 / 7,094,467 | 9,461 / 9,482 |
 | Goedel AI sample | 93 / 93 | 692,587 / 692,587 | 250 / 250 |
 
-Seven parameters in `JacobiConcrete.AmplitudeChart.midpoint_polynomial` exhaust the 65,536-state counting budget. They account for 60.34% of the working snapshot's leading-parameter uses. These references remain in the compiled term. The numbered lookup is unavailable for their binders. Each available first, middle and last address was checked against the expanded traversal. Counts cover literal leading parameters of theorem bodies, including references inside later parameter domains. The test invokes the reader model in Node and does not measure browser latency.
+Under that policy, seven parameters in `JacobiConcrete.AmplitudeChart.midpoint_polynomial` exhaust the 65,536-state counting budget. They account for 60.34% of the working snapshot's leading-parameter uses. These references remain in the compiled term. The original numbered lookup was unavailable for their binders. Each available first, middle and last address was checked against the expanded traversal. Counts cover literal leading parameters of theorem bodies, including references inside later parameter domains. The test invokes the reader model in Node and does not measure browser latency.
+
+#### Numbered lookup with bounded cache replacement
+
+The binding panel now retains at most 65,536 scoped counts. When a new count needs space, it evicts the oldest entry. During ordinal selection, a missing count is recomputed under the same per-query work allowance as the initial count. The reader permits at most 262,144 computed states per query. Repeated computations consume that allowance. If selection exhausts it, the reader returns an unavailable result without an occurrence link. The entry bound applies to the count cache. The compiled declaration, support masks, eviction queue, and traversal stack also occupy memory.
+
+The seven midpoint parameters now have independently verified counts covering 4,280,862 uses. The first, middle and last distinct ranks matched the expanded traversal for each parameter. Across the three editions, those sampled ranks matched for every used leading parameter. This verifies sampled navigation and exact totals. Other ordinal choices can have different recomputation costs. [Updated measurements](ranked-corpus.json).
