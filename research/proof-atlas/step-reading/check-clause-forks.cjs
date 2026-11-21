@@ -81,3 +81,10 @@ for(const binder of [outer,inner]){
 }
 assert.throws(()=>repeated(dag,outer,2,[1],{maxStates:8}),/state limit/);
 console.log('Recovered five ranks under each of two binders sharing 2^64 receiver occurrences apiece.');
+
+// f x occurs twice. One occurrence supplies the function in (f x) a.
+const applied=add(5,[2,1]),pair=add(5,[applied,2]);
+dag.roots=[add(6,[1,pair])];
+const all=repeated(dag,outer,2,[1]),complete=repeated(dag,outer,2,[1],{completeCall:true});
+assert.equal(all.total,2n);assert.equal(complete.total,1n);
+assert.deepEqual(complete.select(0n).slots,[1,1]);assert.equal(complete.rankOf({root:0,slots:[1,0,0]}),null);

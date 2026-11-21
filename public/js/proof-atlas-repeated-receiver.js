@@ -3,7 +3,7 @@
 (function(host){
 const common=typeof module!=='undefined' && module.exports;
 const A=common?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData;
-function repeatedReceiver(data,binderRoute,receiver,operandSlots,{maxStates=200000,maxDepth=512}={}){
+function repeatedReceiver(data,binderRoute,receiver,operandSlots,{maxStates=200000,maxDepth=512,completeCall=false}={}){
  const bodySlot=(id)=>[6,7].includes(data.kind[id])?1:data.kind[id]===8?2:-1;
  const binder=A.walk(data,binderRoute),slot=bodySlot(binder);
  if(slot<0)throw Error('Expected a binder');
@@ -25,10 +25,15 @@ function repeatedReceiver(data,binderRoute,receiver,operandSlots,{maxStates=2000
   if(cache.size>=maxStates)throw RangeError('Receiver query state limit');
   cache.set(key,0n);
   let n=0n;
-  for(const [k,child] of data.children[node].entries()){
-   n+=count(child,depth+Number(k===bodySlot(node)),level+1);
+  for(const k of data.children[node].keys()){
+   n+=childCount(node,k,depth,level);
   }
   cache.set(key,n);return n;
+ }
+ function childCount(node,k,depth,level){
+  const child=data.children[node][k];
+  if(completeCall && child===receiver && data.kind[node]===5 && k===0)return 0n;
+  return count(child,depth+Number(k===bodySlot(node)),level+1);
  }
  const total=count(body,0,0);
  function select(rank){
@@ -39,7 +44,7 @@ function repeatedReceiver(data,binderRoute,receiver,operandSlots,{maxStates=2000
    let found=false;
    for(const [k,child] of data.children[node].entries()){
     const childDepth=depth+Number(k===bodySlot(node));
-    const size=count(child,childDepth,level+1);
+    const size=childCount(node,k,depth,level);
     if(rank<size){slots.push(k);node=child;depth=childDepth;level++;found=true;break;}
     rank-=size;
    }
@@ -54,9 +59,9 @@ function repeatedReceiver(data,binderRoute,receiver,operandSlots,{maxStates=2000
   for(const field of route.slots.slice(prefix.length)){
    const children=data.children[node];
    if(!Number.isInteger(field) || field<0 || field>=children.length)return null;
-   for(let k=0;k<field;k++)rank+=count(children[k],depth+Number(k===bodySlot(node)),level+1);
+   for(let k=0;k<field;k++)rank+=childCount(node,k,depth,level);
+   if(!childCount(node,field,depth,level))return null;
    depth+=Number(field===bodySlot(node));node=children[field];level++;
-   if(!count(node,depth,level))return null;
   }
   return node===receiver && depth===depthAtReceiver?rank:null;
  }

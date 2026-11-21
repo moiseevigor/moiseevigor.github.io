@@ -506,7 +506,7 @@
       loaded=true;
       const suffix=nextRoute.slots.slice(c.call.route.slots.length);
       try{
-       const query=window.ProofAtlasRepeatedReceiver(owner.data,binding.route,c.call.node,suffix);
+       const query=window.ProofAtlasRepeatedReceiver(owner.data,binding.route,c.call.node,suffix,{completeCall:true});
        const currentRank=query.rankOf(c.call.route);
        if(currentRank===null)throw Error('Selected call outside binder scope');
        const input=el('input'),label=el('label','Occurrence '),result=el('p');
