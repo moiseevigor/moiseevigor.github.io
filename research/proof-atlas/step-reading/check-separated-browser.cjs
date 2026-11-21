@@ -81,6 +81,31 @@ async function main() {
       return route.fulfill({status:404});
     });
     const body='http://localhost'+libraryPath+'?edition=browser-control&proof='+name+'&route=1%3A#expr-'+graph.roots[1];
+    if(name==='projectedFunctions'){
+      const url=new URL(body),call=[1,1,1,1];
+      url.searchParams.set('geometry','scoped');url.searchParams.set('fold','applications');
+      url.searchParams.set('route','1:'+call.join('.'));url.hash='';
+      for(const index of [0,1]){
+        const head=call.concat(index===0?[0,1,0]:[1,0]);
+        const node=A.walk(graph,{root:1,slots:head});
+        assert.equal(A.kinds[graph.kind[node]],'proj');
+        assert.deepEqual([graph.payloads[node].typeName,graph.payloads[node].index],['And',index]);
+        for(const structure of [false,true]){
+          await page.goto(url.href);
+          const panel=page.locator('#pl-application-headers details').first();
+          await panel.locator('summary').click();
+          const label=structure?'Projected structure':'Applied function · And['+index+']';
+          await panel.locator('ol > li').nth(2+index).getByRole('button',{name:label,exact:true}).click();
+          const at=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
+          assert.deepEqual(at.route,{root:1,slots:structure?head.concat(0):head});
+          assert.equal(at.selected,structure?graph.children[node][0]:node);
+          if(structure)assert.deepEqual(A.binding(graph,at.route).route,{root:1,slots:[1,1]});
+        }
+      }
+      assert.deepEqual(errors,[]);
+      console.log('Both projection indices and both structure occurrences passed.');
+      return;
+    }
     if(name==='distinctPremises'){
       const url=new URL(body);
       url.searchParams.set('geometry','scoped');url.searchParams.set('fold','applications');

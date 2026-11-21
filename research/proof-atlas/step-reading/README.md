@@ -1101,3 +1101,11 @@ The same classification was run on every compiled theorem with an available body
 Every position in these three inventories had one of these three head forms. The former 32-field lookup missed two constant heads in each SE(2) edition: the 38-argument `JacobiCore.mk.inj` and the 56-argument `SBracket.mk.inj`, inside their respective `mk.injEq` proofs. Focused argument labels now use the same limit as the folded application spine (64 by default). Chrome tests on the published edition opened both constants and checked every field of the selected route. Longer heads in other corpora can still exceed the bound.
 
 Run `count-local-call-inputs.cjs --published` or `--working --counts-only` with Node from the repository root. Each packet digest and the expanded argument-position denominator are checked. Counts-only skips individual lambda-body route replay. This measures structural coverage of the lookup on these packets, not a comprehensive account of proof semantics.
+
+#### A fourth function head outside the measured corpora
+
+The control `projectedFunctions` assumes `rules : (P → Q) ∧ (P → Q)` and `p : P`. It proves `Q ∧ Q` by projecting each function from `rules` and applying it to `p`. Its elaborator explicitly emits primitive `Expr.proj` nodes. Lean 4.33.1 kernel-checked the resulting theorem body and its type before export. This establishes a valid function-head form absent from the three measured inventories. It gives no prevalence estimate for other proofs.
+
+The argument list identifies `And[0]` and `And[1]` by structure name and zero-based kernel field index. For each input the reader can open the projection itself or the structure expression supplying its fields. The browser test selected all four occurrence paths. The two structure occurrences resolve to the same binder for `rules`, while the chosen fields are distinct despite having identical function types. The diagram retains the original application to `p` without reducing the projection.
+
+To reproduce, run `build-shared-case.py --projected-functions --output /tmp/projected.json` with Lean 4.33.1 and pass that packet to `check-separated-browser.cjs` on standard input.

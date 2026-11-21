@@ -13,12 +13,13 @@ parser.add_argument('--tagged-depth', type=int, choices=range(19))
 controls = parser.add_mutually_exclusive_group()
 controls.add_argument('--separated-assumptions', action='store_true')
 controls.add_argument('--distinct-premises', action='store_true')
+controls.add_argument('--projected-functions', action='store_true')
 args = parser.parse_args()
-binder_control = args.separated_assumptions or args.distinct_premises
+binder_control = args.separated_assumptions or args.distinct_premises or args.projected_functions
 if binder_control and args.tagged_depth is not None:
     parser.error('--tagged-depth applies only to the shared case tree')
 env = os.environ.copy()
-env['ATLAS_DISTINCT_PREMISES'] = '1' if args.distinct_premises else '0'
+env['ATLAS_BINDER_CONTROL'] = 'projected' if args.projected_functions else 'distinct' if args.distinct_premises else 'separated'
 env.pop('ATLAS_TAGGED_TREE_DEPTH', None)
 if args.tagged_depth is not None:
     env['ATLAS_TAGGED_TREE_DEPTH'] = str(args.tagged_depth)

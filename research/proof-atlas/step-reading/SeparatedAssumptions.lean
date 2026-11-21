@@ -5,10 +5,22 @@ theorem separatedAssumptions (P : Prop) : (P → P ∧ P) ∧ (P → P ∧ P) :=
 theorem distinctPremises (P : Prop) (first second : P) : P ∧ P :=
   And.intro first second
 
+-- Request primitive projections explicitly so the control tests Expr.proj, even
+-- when surface field notation would elaborate to a named projection function.
+open Lean Elab Term in
+elab "primitiveAndField" i:num t:term:max : term => do
+  return .proj ``And i.getNat (← elabTerm t none)
+
+theorem projectedFunctions (P Q : Prop) (rules : (P → Q) ∧ (P → Q)) (p : P) : Q ∧ Q :=
+  And.intro ((primitiveAndField 0 rules) p) ((primitiveAndField 1 rules) p)
+
 open Lean Elab Command AtlasLibrary in
 run_cmd do
   let env ← getEnv
-  let name := if (← IO.getEnv "ATLAS_DISTINCT_PREMISES") == some "1" then ``distinctPremises else ``separatedAssumptions
+  let name := match ← IO.getEnv "ATLAS_BINDER_CONTROL" with
+    | some "distinct" => ``distinctPremises
+    | some "projected" => ``projectedFunctions
+    | _ => ``separatedAssumptions
   let some (.thmInfo decl) := env.find? name | throwError "Missing theorem"
   let .ok inferred := Kernel.check env {} decl.value | throwError "Invalid proof"
   let .ok true := Kernel.isDefEq env {} inferred decl.type | throwError "Unexpected type"

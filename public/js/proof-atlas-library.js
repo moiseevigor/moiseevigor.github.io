@@ -962,6 +962,11 @@
   }
   const route={root:arg.route.root,slots:arg.route.slots.concat(Array(depth).fill(0))};
   if(current.kind(node)==='const')return {node,route,name:current.payload(node).name};
+  if(current.kind(node)==='proj'){
+   const payload=current.payload(node);
+   const structure={node:current.children(node)[0],route:{root:route.root,slots:route.slots.concat(0)}};
+   return {node,route,name:payload.typeName+'['+payload.index+']',structure};
+  }
   if(current.kind(node)==='lam'){
    const body={node:current.children(node)[1],route:{root:route.root,slots:route.slots.concat(1)}};
    return {node,route,name:'λ '+(current.payload(node).binderName||'_'),body};
@@ -1049,10 +1054,11 @@
      headButton.type='button';headButton.title=A.path(current.data,producer.route);
      headButton.onclick=()=>selectOccurrence(producer.node,true,true,producer.route);
      row.append(headButton);
-     if(producer.body){
-      const open=el('button','Lambda body');
-      open.type='button';open.title=A.path(current.data,producer.body.route);
-      open.onclick=()=>selectOccurrence(producer.body.node,true,true,producer.body.route);
+     const child=producer.body||producer.structure;
+     if(child){
+      const open=el('button',producer.body?'Lambda body':'Projected structure');
+      open.type='button';open.title=A.path(current.data,child.route);
+      open.onclick=()=>selectOccurrence(child.node,true,true,child.route);
       row.append(open);
      }
      if(producer.binder){
