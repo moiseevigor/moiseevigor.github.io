@@ -13,6 +13,7 @@ for(const e of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAM
  const counts={zero:0,one:0,multiple:0,unavailable:0};
  const destinations={argument:0,fn:0,field:0};
  const overflow=[];
+ let totalUses=0,different=0,maxUses=0;
  let peakEntries=0,peakWork=0;
  for(const d of e.declarations.filter(x=>x.kind==='theorem'&&x.bodyAvailable)){
   const raw=gunzipSync(fs.readFileSync('.'+d.indexFile));
@@ -39,12 +40,12 @@ for(const e of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAM
       peakEntries=Math.max(peakEntries,result.peakEntries);
       peakWork=Math.max(peakWork,result.states);
       // Independent expanded traversal comparing lexical indices at each leaf.
-      let first;
+      const references=[];
       const relative=[];
       function tally(id,depth){
        if(g.kind[id]===0){
         const hit=g.payloads[id].index===index+depth;
-        if(hit && !first)first={node:id,slots:relative.slice()};
+        if(hit)references.push({node:id,slots:relative.slice()});
         return BigInt(hit);
        }
        let total=0n;
@@ -61,9 +62,14 @@ for(const e of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAM
       if(baseline.status!=='counted')overflow.push([d.name,i,path.join(''),n.toString()]);
       assert.equal(BigInt(result.occurrences),n);
       counts[n===0n?'zero':n===1n?'one':'multiple']++;
-      assert.deepEqual(result.witness,first);
-      if(n){
-       const {witness}=result;
+      assert.deepEqual(result.witness,references[0]);
+      const roles=new Set();
+      totalUses+=references.length;maxUses=Math.max(maxUses,references.length);
+      for(const [rank,expected] of references.entries()){
+       const located=rank===0?result:countReferences(g,body,index,{...bounded,firstIfPresent:false,ordinal:BigInt(rank+1)});
+       assert.deepEqual(located.witness,expected);
+       peakWork=Math.max(peakWork,located.states);
+       const {witness}=located;
        const route={root:1,slots:bodyPath.concat(witness.slots)};
        assert.deepEqual(A.binding(g,route).route.slots,binder);
        const use={node:witness.node,route},receiver=applicationAtUse(g,use,{includePeers:false});
@@ -76,13 +82,16 @@ for(const e of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAM
         assert.deepEqual(call.route.slots.concat(suffix),route.slots);
         assert.equal(A.walk(g,call.route),call.node);
         assert.equal(g.kind[parentNode],5);
-        destinations[slot?'argument':'fn']++;
+        if(rank===0)destinations[slot?'argument':'fn']++;
+        roles.add(JSON.stringify([g.kind[receiver.head.node],receiver.label,slot,arity]));
        }else{
         assert.notEqual(g.kind[parentNode],5);
         assert(A.fields[A.kinds[g.kind[parentNode]]][route.slots.at(-1)]);
-        destinations.field++;
+        if(rank===0)destinations.field++;
+        roles.add(JSON.stringify([g.kind[parentNode],route.slots.at(-1)]));
        }
       }
+      if(roles.size>1)different++;
      }
     }
    }
@@ -92,5 +101,5 @@ for(const e of [...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAM
  }
  assert.equal(counts.unavailable,0);
  assert(peakEntries<=8192 && peakWork<=16384);
- console.log(e.id,counts,destinations,{recovered:overflow,peakWork,peakEntries});
+ console.log(e.id,counts,destinations,{totalUses,different,maxUses,recovered:overflow,peakWork,peakEntries});
 }

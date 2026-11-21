@@ -152,20 +152,49 @@
         const n=result.occurrences;
         line.append(' · '+n+' syntactic reference'+(n==='1'?'':'s')+' in the branch body');
         if(n!=='0'){
-         const {witness}=result;
-         const route={root:branch.route.root,slots:bodySlots.concat(witness.slots)};
-         const binding=A.binding(data,route);
-         if(!binding || String(binding.route.slots)!==String(binderRoute.slots))throw Error('Branch reference scope mismatch');
-         const use={node:witness.node,route};
-         line.append(' · ',sourceLink('First reference',use));
-         const receiver=host.ProofAtlasOmittedReferences.applicationAtUse(data,use,{includePeers:false});
-         if(receiver){
-          const role=receiver.slot?'argument '+receiver.slot+' of '+receiver.arity:'function position';
-          line.append(' → ',sourceLink(receiver.label+' · '+role,receiver.call));
-         }else{
-          const parent={root:route.root,slots:route.slots.slice(0,-1)};
-          const node=A.walk(data,parent),kind=A.kinds[data.kind[node]];
-          line.append(' → ',sourceLink(kind+'.'+A.fields[kind][route.slots.at(-1)],{node,route:parent}));
+         const destination=el('span');
+         destination.setAttribute('aria-live','polite');
+         line.append(' · ',destination);
+         function drawReference(located,rank){
+          if(located.status!=='counted'){
+           destination.textContent='Reference unavailable within the traversal limit';
+           return;
+          }
+          const {witness}=located;
+          const route={root:branch.route.root,slots:bodySlots.concat(witness.slots)};
+          const binding=A.binding(data,route);
+          if(!binding || String(binding.route.slots)!==String(binderRoute.slots))throw Error('Branch reference scope mismatch');
+          const use={node:witness.node,route};
+          destination.replaceChildren(sourceLink(rank===1n?'First reference':'Reference '+rank,use));
+          const receiver=host.ProofAtlasOmittedReferences.applicationAtUse(data,use,{includePeers:false});
+          if(receiver){
+           const role=receiver.slot?'argument '+receiver.slot+' of '+receiver.arity:'function position';
+           destination.append(' → ',sourceLink(receiver.label+' · '+role,receiver.call));
+          }else{
+           const parent={root:route.root,slots:route.slots.slice(0,-1)};
+           const node=A.walk(data,parent),kind=A.kinds[data.kind[node]];
+           destination.append(' → ',sourceLink(kind+'.'+A.fields[kind][route.slots.at(-1)],{node,route:parent}));
+          }
+         }
+         drawReference(result,1n);
+         if(BigInt(n)>1n){
+          const label=el('label','Reference number '),input=el('input'),go=el('button','Show');
+          input.type='text';input.inputMode='numeric';input.size=5;input.value='1';
+          label.append(input);go.type='button';line.append(el('br'),label,' ',go);
+          function select(){
+           const value=input.value.trim();
+           if(!/^[1-9][0-9]*$/.test(value)||value.length>n.length||BigInt(value)>BigInt(n)){
+            input.setCustomValidity('Enter a reference number from 1 to '+n);input.reportValidity();return;
+           }
+           input.setCustomValidity('');
+           const rank=BigInt(value);
+           const located=rank===1n?result:host.ProofAtlasRecursiveInputs.countReferences(data,body,index,
+            {...budget,firstIfPresent:false,ordinal:rank});
+           drawReference(located,rank);
+          }
+          input.oninput=()=>input.setCustomValidity('');
+          input.onkeydown=event=>{if(event.key==='Enter'){event.preventDefault();select();}};
+          go.onclick=select;
          }
         }
        }else line.append(' · reference count unavailable within the traversal limit');
