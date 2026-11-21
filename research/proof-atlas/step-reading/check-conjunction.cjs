@@ -50,3 +50,30 @@ for(const snapshot of window.PROOF_ATLAS_LIBRARY.editions){
   assert.equal(term.payloads[value].name,'JacobiCore.Sol.eq_of_eq_at');
  }
 }
+
+// Count saturated subexpressions once per declaration, including prefixes of larger calls.
+const {spine}=require('../../../public/js/proof-atlas-elimination');
+const samples=[...window.PROOF_ATLAS_LIBRARY.editions,window.PROOF_ATLAS_AI_SAMPLE.edition];
+const expected={'published-15':[97,82],'working-26':[102,94],'goedel-sample-4331':[15,0]};
+for(const edition of samples){
+ const counts=[0,0];
+ for(const d of edition.declarations.filter(d=>d.kind==='theorem'&&d.bodyAvailable)){
+  const g=read(d),stack=[g.roots[1]],seen=new Set();
+  while(stack.length){
+   const node=stack.pop();
+   if(seen.has(node))continue;
+   seen.add(node);stack.push(...g.children[node]);
+   if(g.kind[node]!==5)continue;
+   const {head,args}=spine(g,node),name=g.payloads[head]?.name;
+   if(!(name==='Or.casesOn'&&args.length===6 || name==='And.casesOn'&&args.length===5))continue;
+   const disjunction=name==='Or.casesOn';
+   counts[disjunction?0:1]++;
+   for(const branch of args.slice(4)){
+    assert.equal(g.kind[branch],6);
+    if(!disjunction)assert.equal(g.kind[g.children[branch][1]],6);
+   }
+  }
+ }
+ assert.deepEqual(counts,expected[edition.id]);
+ console.log(edition.id,counts,'disjunction and conjunction calls with explicit branch binders');
+}

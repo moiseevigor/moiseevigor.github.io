@@ -113,6 +113,41 @@
    }
    container.append(box);
   }
+  function showLogicalCases(){
+   const exact=host.ProofAtlasOmittedReferences?.exactCallInputs;
+   if(!exact)return;
+   const either=exact(data,call,'Or.casesOn',6);
+   const inputs=either||exact(data,call,'And.casesOn',5);
+   if(!inputs)return;
+   const box=el('section'),list=el('ol');
+   box.dataset.logicalCases=either?'or':'and';
+   box.append(el('h4',either?'Two cases':'Use both conjuncts'),
+    sourceLink(either?'Disjunction used for the split':'Conjunction being unpacked',inputs[3]),list);
+   const branches=inputs.slice(4);
+   for(const [index,branch] of branches.entries()){
+    const row=el('li'),side=index?'Right':'Left';
+    row.append(sourceLink(either?side+' case':'Joint branch',branch),' · ');
+    if(either)row.append(sourceLink('Assumption',inputs[index]));
+    else row.append(sourceLink('Left assumption',inputs[0]),' and ',sourceLink('Right assumption',inputs[1]));
+    let node=branch.node;
+    const slots=branch.route.slots.slice();
+    const arity=either?1:2;
+    let opened=0;
+    while(opened<arity && data.kind[node]===6){slots.push(1);node=data.children[node][1];opened++;}
+    if(opened===arity){
+     let lets=0;
+     while(lets<8 && data.kind[node]===8){slots.push(2);node=data.children[node][2];lets++;}
+     let head=node;
+     for(let j=0;j<32 && data.kind[head]===5;j++)head=data.children[head][0];
+     const name=data.kind[head]===4?data.payloads?.[head]?.name:null;
+     const label=(lets?'Body after '+lets+' local definition'+(lets===1?'':'s'):'Branch body')+(name?' · '+name:'');
+     row.append(el('br'),sourceLink(label,{node,route:{root:branch.route.root,slots}}));
+    }
+    list.append(row);
+   }
+   container.append(box);
+  }
+  showLogicalCases();
   const conjunction=host.ProofAtlasConjunction?.(data,call.node);
   if(conjunction){
    const box=el('section');box.dataset.conjunction=conjunction.kind;
