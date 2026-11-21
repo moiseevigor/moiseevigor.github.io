@@ -49,6 +49,17 @@ for(const item of require('./port-results.json')) {
       application:{node:witness.row,route},variable:{node,route:variableRoute},
       index:data.payloads[node].index,binder,name:payload.binderName ?? payload.declName};
   });
+  const table=sharingTables[source.indexSha256];
+  const index=require('../../../public/js/proof-atlas-row-occurrences').index(data,witness.row,sharing[source.indexSha256][0].application.route);
+  assert.equal(String(index.total),table.total);
+  table.domains={};
+  // This offline example inventory contains 124 routes across six declarations.
+  for(let n=1n;n<=index.total;n++){
+    const route=index.select(n);
+    const binder=atlas.binding(data,{root:route.root,slots:route.slots.concat(table.relative)});
+    const key=binder.route.slots.join('.');
+    if(!Object.hasOwn(table.domains,key))table.domains[key]=require('./shared-domain.cjs')(data,binder);
+  }
   const native=packet('public/data/proof-atlas/application-ports/'+nativeOwner+'.json.gz',nativeOwner);
   assert.deepEqual(native.source,source);
   const binder=example?.binder ?? {root:1,slots:[]};

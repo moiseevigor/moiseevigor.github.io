@@ -57,16 +57,38 @@ const {chromium}=require('playwright');
      const paths=[];
      for(let i=1;i<=n;i++){
       el('sharing-number').value=String(i);el('sharing-form').requestSubmit();
-      paths.push([...el('sharing-path').querySelectorAll('a')].map(a=>a.href));
+      paths.push({path:[...el('sharing-path').querySelectorAll('a')].map(a=>a.href),
+       domain:[...el('sharing-domain').querySelectorAll('a')].map(a=>({url:a.href,text:a.textContent}))});
      }
      return paths;
     },routes.length);
     for(const [i,slots] of routes.entries()){
      const variable={root:1,slots:slots.concat(w.relative ?? w.relativeReference)};
      for(const [j,route] of [{root:1,slots},variable,atlas.binding(data,variable).route].entries()){
-      const url=new URL(actual[i][j]);
+      const url=new URL(actual[i].path[j]);
       assert.equal(url.searchParams.get('route'),'1:'+route.slots.join('.'));
       assert.equal(url.hash,'#expr-'+atlas.walk(data,route));
+     }
+     const bound=atlas.binding(data,variable),domain={root:1,slots:bound.route.slots.concat(0)};
+     const links=actual[i].domain;
+     for(const [j,route] of [domain,{root:0,slots:domain.slots}].entries()){
+      const url=new URL(links[j].url);
+      assert.equal(url.searchParams.get('route'),route.root+':'+route.slots.join('.'));
+      assert.equal(url.hash,'#expr-'+atlas.walk(data,route));
+      assert.equal(atlas.walk(data,route),atlas.walk(data,domain));
+     }
+     const domainNode=atlas.walk(data,domain);
+     if(data.kind[domainNode]===4)assert.equal(links[0].text,data.payloads[domainNode].name);
+     if(first.source.name==='lean_workbook_4274' && domainNode===95){
+      assert(links[0].text.includes('b(n·2) ='));assert.equal(links.length,4);
+     }
+     for(let j=2;j<links.length;j+=2){
+      const use=new URL(links[j].url),target=new URL(links[j+1].url);
+      const slots=use.searchParams.get('route').split(':')[1].split('.').map(Number);
+      assert.deepEqual(slots.slice(0,domain.slots.length),domain.slots);
+      const resolved=atlas.binding(data,{root:1,slots});
+      assert.equal(target.searchParams.get('route'),'1:'+resolved.route.slots.join('.'));
+      assert.equal(target.hash,'#expr-'+resolved.node);
      }
     }
     await page.reload();

@@ -20,7 +20,7 @@
 <details id="sharing"><summary>Compare occurrences of a shared application in this theorem</summary>
 <label>Example <select id="sharing-position"></select></label>
 <form id="sharing-form" class="choice"><label>Occurrence <input id="sharing-number" required inputmode="numeric" pattern="[1-9][0-9]*"></label><span id="sharing-total"></span><button>Trace</button></form>
-<p id="sharing-path" aria-live="polite"></p></details>
+<div aria-live="polite"><p id="sharing-path"></p><div id="sharing-domain"></div></div></details>
 <details><summary>Compiled provenance</summary><p id="identity" class="meta"></p></details></main>
 <script>/* SELECTOR */
 const examples=/* EXAMPLES */;
@@ -69,6 +69,18 @@ function showSharedPath(ordinal){
  el('sharing-path').replaceChildren(link('Application '+site.application.node,site.application),
    relation('contains'),link('variable #'+site.index,site.variable),relation('bound by'),
    link(site.name+' (binder '+site.binder.node+')',site.binder));
+ const declared=table.domains[site.binder.route.slots.join('.')],box=el('sharing-domain');
+ box.replaceChildren('Declared type of '+site.name+' · ',link(declared.formula,declared.domain));
+ if(declared.statement)box.append(' · ',link('In the theorem statement',declared.statement));
+ if(declared.references?.length){
+  const list=document.createElement('ul');
+  for(const ref of declared.references){
+   const item=document.createElement('li');
+   item.append(link(ref.name,ref.use),' in this type refers to ',link('binder '+ref.name,ref.binder));list.append(item);
+  }
+  box.append(list);
+ }
+
 }
 el('sharing-form').onsubmit=e=>{
  e.preventDefault();
