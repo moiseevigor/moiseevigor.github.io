@@ -670,3 +670,19 @@ At research branch revision 952c9d001 the 46 arithmetic starts contained 443 une
 Keeping the row and the routes of all externally referenced binders gives 61 groups. Keeping the entire enclosing binder prefix up to the largest referenced index gives 63. None of the four conflicts occurs within a single starting derivation in this sample. They matter when sharing across derivations. These counts classify lexical references. Each occurrence still needs its own expansion route for internal binders, and distinct lexical references need not have different mathematical meanings.
 
 Pipe the full output of check-arithmetic-depth.cjs into check-boundary-sharing.cjs. It checks term-index hashes, computes free indices bottom-up across shared rows, checks their inventory independently by descending from each selected row, and resolves a witness reference for each index at each occurrence. The output includes pairs of routes exhibiting the conflicts.
+
+### When a folded row changes binder target within a complete theorem
+
+Run `node research/proof-atlas/step-reading/check-proof-sharing.cjs` from the repository root. The census includes every theorem with a compiled proof body in each manifest. It starts at the proof root and counts a row once per declaration. A conflict means that two occurrences of the same row refer to different enclosing binder occurrences at the same free variable position. Universes, mathematical equivalence and human judgments are outside this test.
+
+| Edition | Proof bodies | Expanded proof occurrences | Rows with conflicts / proof rows | Proofs with a conflict | Proofs with an application conflict |
+|---|---:|---:|---:|---:|---:|
+| Published SE(2) | 561 | 49,287,630 | 10,386 / 507,968 | 424 | 246 |
+| Working SE(2) | 1,083 | 669,273,380 | 20,253 / 1,210,547 | 818 | 421 |
+| Gödel AI sample | 20 | 82,340,980 | 6,359 / 268,137 | 20 | 19 |
+
+The two SE(2) editions overlap. In the AI sample, 6,122 conflicting rows are applications. A single binder link attached to one of those folded applications can give a wrong destination when another occurrence is selected.
+
+The first pass computes free indices of each row from its children. The second propagates occurrence counts and binder owners from parent to child. For each used index it retains a unique owner or records that at least two owners were reached. Introducing a variable in a repeated parent immediately gives it multiple owner occurrences. A shared outer binder propagates unchanged through repeated inner paths. This measures whether a conflict exists without enumerating all distinct assignments or expanding the large proof trees.
+
+An independent traversal enumerated every occurrence for each proof with at most 10,000 occurrences (357 published, 734 working, four AI) and recovered the identical sets of conflicting rows. Every proof's occurrence total also matched its compiled manifest. Peak process memory in one local Node run was 345,952 KiB including the small-proof checks. Memory depends on the largest declaration and its free indices.
