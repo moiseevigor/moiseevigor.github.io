@@ -83,7 +83,7 @@ function scan(d,allBoundRoutes){
      const partial={node:g.children[t.premise.node][0],route:{root:1,slots:t.premise.route.slots.concat(0)}};
      assert.equal(arithmeticInference(g,partial),null);
      sites.forEach((s,i)=>{
-      const k=head==='mul_nonneg_of_nonpos_of_nonpos'?[3,4,9,10][i]:producer.args.length-sites.length+i;
+      const k=head==='Mathlib.Tactic.Linarith.zero_lt_one'?0:head==='mul_nonneg_of_nonpos_of_nonpos'?[3,4,9,10][i]:producer.args.length-sites.length+i;
       assert.equal(A.walk(g,s.route),producer.args[k]);
       assert.deepEqual(s.route.slots,t.premise.route.slots.concat(Array(producer.args.length-k-1).fill(0),1));
      });

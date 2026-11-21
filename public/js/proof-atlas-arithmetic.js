@@ -215,6 +215,12 @@
   sub_neg_of_lt:[7,'a < b','a − b < 0']
  };
  const signRules=new Map([
+  ['Mathlib.Tactic.Linarith.zero_lt_one',{arity:4,terms:[0],labels:['Ordered type'],premises:[],conclusion:'0 < 1'}],
+  ['neg_eq_zero',{arity:3,terms:[2],premises:[],conclusion:'−a = 0 ↔ a = 0'}],
+  ['Int.add_one_le_iff',{arity:2,terms:[0,1],premises:[],conclusion:'a + 1 ≤ b ↔ a < b'}],
+  ['le_of_lt',{arity:5,terms:[2,3],premises:['a < b'],conclusion:'a ≤ b'}],
+  ['neg_neg_of_pos',{arity:6,terms:[4],premises:['0 < a'],conclusion:'−a < 0'}],
+  ['Real.sq_sqrt',{arity:2,terms:[0],premises:['0 ≤ a'],conclusion:'(√a)² = a'}],
   ['sub_eq_zero_of_eq',{arity:5,terms:[2,3],premises:['a = b'],conclusion:'a − b = 0'}],
   ['mul_nonneg_of_nonpos_of_nonpos',{arity:11,terms:[3,4],premises:['a ≤ 0','b ≤ 0'],conclusion:'0 ≤ a × b'}],
   ['mul_pos_of_neg_of_neg',{arity:11,terms:[7,8],premises:['a < 0','b < 0'],conclusion:'0 < a × b'}],
@@ -229,7 +235,7 @@
   if(sign){
    if(arity!==sign.arity)return null;
    const args=namedArguments(data,at,name,arity);
-   return {name,terms:sign.terms.map(i=>args[i]),proofs:args.slice(arity-sign.premises.length),
+   return {name,labels:sign.labels,terms:sign.terms.map(i=>args[i]),proofs:args.slice(arity-sign.premises.length),
     premises:sign.premises,conclusion:sign.conclusion};
   }
   if(!name.startsWith(prefix))return null;
@@ -435,7 +441,7 @@
   return {uses,total:String(total),limited:BigInt(uses.length)<total};
  }
  function derivationInputs(data,root,limit=1024){
-  const todo=[root],inputs=new Map();
+  const todo=[root],inputs=new Map(),theorems=new Map();
   let visits=0,steps=0,certificates=0,unread=0,firstUnread=null;
   while(todo.length && visits<limit){
    const site=todo.pop();visits++;
@@ -449,9 +455,13 @@
    const rule=logicalInference(data,site)||arithmeticInference(data,site);
    if(!rule){unread++;firstUnread??=site;continue;}
    steps++;
+   if(!rule.proofs.length){
+    if(!theorems.has(rule.name))theorems.set(rule.name,{name:rule.name,site,uses:0});
+    theorems.get(rule.name).uses++;
+   }
    for(let i=rule.proofs.length-1;i>=0;i--)todo.push(rule.proofs[i]);
   }
-  return {inputs:[...inputs.values()],visits,steps,certificates,unread,firstUnread,limited:todo.length>0};
+  return {inputs:[...inputs.values()],theorems:[...theorems.values()],visits,steps,certificates,unread,firstUnread,limited:todo.length>0};
  }
  function mount(container,data,at,link){
   const el=(tag,text)=>{const e=document.createElement(tag);if(text)e.textContent=text;return e;};
@@ -577,7 +587,7 @@
    inputs.append((shown?' ⇒ ':'')+inference.conclusion);
    for(const [i,site] of inference.terms.entries()){
     const value=el('dd');value.append(link(caption(formula(data,site,3,true)),site));
-    terms.append(el('dt',['a','b','c'][i]),value);
+    terms.append(el('dt',inference.labels?.[i]||['a','b','c'][i]),value);
    }
    panel.append(inputs,terms);if(fold)panel.append(fold);container.append(panel);
    const overview=el('details');overview.dataset.derivationInputs='';
@@ -596,6 +606,14 @@
     }
     if(list.childNodes.length)overview.append(list);
     if(r.inputs.length>8)overview.append(el('p','Showing 8 of '+r.inputs.length+' observed inputs.'));
+    if(r.theorems.length){
+     const leaves=el('details'),items=el('ul');leaves.dataset.theoremLeaves='';
+     leaves.append(el('summary','Theorems used without a proof premise'),items);
+     for(const t of r.theorems){
+      const row=el('li');row.append(link(t.name,t.site),' · '+t.uses+(t.uses===1?' use':' uses'));items.append(row);
+     }
+     overview.append(leaves);
+    }
     if(r.unread)overview.append(link('First of '+r.unread+' unexplained premise visits',r.firstUnread));
     if(r.limited)overview.append(el('p','Only the first '+r.visits+' visits were inspected.'));
    };

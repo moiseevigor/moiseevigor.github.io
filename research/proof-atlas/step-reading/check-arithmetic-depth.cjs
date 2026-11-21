@@ -10,7 +10,8 @@ const frontier={},rules={},roots=report.aiArithmetic;
 const added=new Set(['mul_eq','add_nonpos','le_of_le_of_eq','sub_nonpos_of_le','sub_neg_of_lt']);
 const baseline=process.argv.includes('--baseline');
 let uniqueLeaves=0,uniqueSteps=0,certificateVisits=0;const certificates=[],inequalities={};
-const signExamples={},signSlots={sub_eq_zero_of_eq:[2,3],mul_nonneg_of_nonpos_of_nonpos:[3,4],mul_pos_of_neg_of_neg:[7,8],sq_nonneg:[6]};
+const theoremSlots={'Mathlib.Tactic.Linarith.zero_lt_one':[0],neg_eq_zero:[2],'Int.add_one_le_iff':[0,1],le_of_lt:[2,3],neg_neg_of_pos:[4],'Real.sq_sqrt':[0]};
+const signExamples={},signSlots={...theoremSlots,sub_eq_zero_of_eq:[2,3],mul_nonneg_of_nonpos_of_nonpos:[3,4],mul_pos_of_neg_of_neg:[7,8],sq_nonneg:[6]};
 const linarithOnly=baseline||process.argv.includes('--linarith-only');
 const arithmeticOnly=linarithOnly||process.argv.includes('--arithmetic-only');
 const zeroExamples=[],zeroRows=new Set();let zeroVisits=0;
@@ -38,7 +39,7 @@ for(const d of edition.declarations){
  for(const {premise} of selected){
   let unresolved=0,statementInputs=0,scopeInputs=0;
   const localInputs=new Map(),inputCounts=new Map();
-  let inputSteps=0,inputCerts=0;
+  const theoremCounts=new Map();let inputSteps=0,inputCerts=0;
   const todo=[{site:premise,depth:0,parent:null}];
   while(todo.length){
    const item=todo.pop(),{site,depth}=item;
@@ -153,7 +154,7 @@ for(const d of edition.declarations){
     }
    }
    const rule=logical||arithmeticInference(g,site);
-   if(!rule || (arithmeticOnly && ['Mathlib.Tactic.Linarith.mul_zero_eq','Mathlib.Tactic.Linarith.zero_mul_eq'].includes(name)) || (arithmeticOnly && name==='sub_eq_zero_of_eq') || (linarithOnly && Object.hasOwn(signSlots,name)) || (baseline && added.has(rule.name.split('.').at(-1)))){frontier[name]=(frontier[name]||0)+1;leaves++;boundaryRows.add(site.node);
+   if(!rule || (arithmeticOnly && Object.hasOwn(theoremSlots,name)) || (arithmeticOnly && ['Mathlib.Tactic.Linarith.mul_zero_eq','Mathlib.Tactic.Linarith.zero_mul_eq'].includes(name)) || (arithmeticOnly && name==='sub_eq_zero_of_eq') || (linarithOnly && Object.hasOwn(signSlots,name)) || (baseline && added.has(rule.name.split('.').at(-1)))){frontier[name]=(frontier[name]||0)+1;leaves++;boundaryRows.add(site.node);
     if(!cert)unresolved++;
     recordPath(item,depth);
     continue;}
@@ -175,7 +176,7 @@ for(const d of edition.declarations){
     }
     if(!zeroProducts[name])zeroProducts[name]={proof:d.name,site,primary:rule.proofs[1-k],terms:rule.terms,extra:rule.proofs[k],relation:rule.relation};
    }
-   if(!rule.proofs.length)recordPath(item,depth+1);
+   if(!rule.proofs.length){recordPath(item,depth+1);theoremCounts.set(name,(theoremCounts.get(name)||0)+1); }
    distinct.add(site.node);inputSteps++;
    rules[name]=(rules[name]||0)+1;steps++;maxDepth=Math.max(maxDepth,depth+1);
    rule.proofs.forEach((child,i)=>{
@@ -189,12 +190,14 @@ for(const d of edition.declarations){
   if(!arithmeticOnly && !folded){
    const r=derivationInputs(g,premise);
    assert(!r.limited);
+   assert.deepEqual(new Map(r.theorems.map(x=>[x.name,x.uses])),theoremCounts);
+   for(const t of r.theorems)assert.equal(g.payloads[spine(g,A.walk(g,t.site.route)).head].name,t.name);
    assert.equal(r.steps,inputSteps);assert.equal(r.certificates,inputCerts);
    assert.equal(r.unread,unresolved-scopeInputs);
    assert.deepEqual(new Map(r.inputs.map(x=>[x.binding.binder.route.slots.join('.'),x.uses])),inputCounts);
    assert(derivationInputs(g,premise,1).limited||inputSteps===1);
    summaries.push({proof:d.name,premise,steps:r.steps,visits:r.visits,unread:r.unread,
-    inputs:r.inputs.map(x=>[x.binding.binder,x.binding.domain,x.binding.site]),firstUnread:r.firstUnread});
+    theorems:r.theorems,inputs:r.inputs.map(x=>[x.binding.binder,x.binding.domain,x.binding.site]),firstUnread:r.firstUnread});
   }
   if(!unresolved)fullyRead++;
   if(unresolved===statementInputs)endpoints.closedAtStatement++;
