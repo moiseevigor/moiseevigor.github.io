@@ -747,7 +747,8 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
    await page.waitForFunction(()=>window.ProofAtlasLibrary?.getSnapshot()?.selected===950);
    const premiseSelection=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
    assert.deepEqual(premiseSelection.route.slots,productCall.route.slots.concat(1));
-   for(const [node,forward] of [[3221,true],[3238,false],[3222,true]]){
+   for(const [node,forward,corrupt] of [[3221,true],[3238,false],[3222,true,true],[3222,true,false],[3223,true,false]]){
+    if(corrupt)await page.route('**/transport-endpoint-conversions.json',r=>r.fulfill({contentType:'application/json',body:'{"entries":[]}'}),{times:1});
     const route=atlas.routes(body).route(node),at={node,route};
     await page.goto('http://localhost/projects/proof-atlas/library/?loading=paged&edition=published-15&proof='+riccati.name+'&route='+route.root+':'+route.slots.join('.')+'#expr-'+node);
     const transport=page.getByRole('region',{name:'Transport across equality'});
@@ -772,7 +773,18 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
      const inner=transport.getByRole('link',{name:'inner result type'}),outer=transport.getByRole('link',{name:'outer input type'});
      assert.equal(new URL(await inner.evaluate(a=>a.href)).hash,'#expr-3209');
      assert.equal(new URL(await outer.evaluate(a=>a.href)).hash,'#expr-3174');
-     assert.equal(await transport.getByRole('list').count(),0);
+     if(corrupt){
+      assert.equal(await transport.getByRole('list').count(),0);
+      assert.equal(await transport.getByRole('link',{name:'Kernel replay record'}).count(),0);
+     }else{
+      assert.equal(await transport.getByRole('listitem').count(),2);
+      assert.equal(await transport.getByRole('link',{name:'Kernel replay record'}).count(),1);
+     }
+    }
+    if(node===3223){
+     await transport.getByRole('list').waitFor();
+     assert.equal(await transport.getByRole('listitem').count(),3);
+     assert.equal(await transport.getByRole('link',{name:'Kernel replay record'}).count(),2);
     }
     const eq=sourceSlot(body,at,3);
     await transport.getByRole('link',{name:'Proof of A = B'}).click();

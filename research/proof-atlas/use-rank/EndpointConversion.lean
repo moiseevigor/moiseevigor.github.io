@@ -25,11 +25,19 @@ def endpoint (original term : Expr) (base : Array Nat) (shared : Shared) (anchor
 
 def checkPair (query : Json) (raw term : Expr) (_ : Array Expr) (ctx : Array Json)
     (shared : Shared) (_ : Nat) (slots : Array Nat) (_ : String) : MetaM Json := do
- unless raw.getAppFn.isConstOf ``Eq.trans && raw.getAppNumArgs == 6 do throwError "Expected Eq.trans"
+ let transport := (← getKey query "field") == toJson "transport input"
+ if transport then
+  unless raw.getAppFn.isConstOf ``Eq.mp && raw.getAppNumArgs == 4 &&
+      raw.appArg!.getAppFn.isConstOf ``Eq.mp && raw.appArg!.getAppNumArgs == 4 do throwError "Expected nested forward transports"
+ else
+  unless raw.getAppFn.isConstOf ``Eq.trans && raw.getAppNumArgs == 6 do throwError "Expected Eq.trans"
  let call ← getKey query "call"
  unless toJson (← sourceId shared raw) == (← getKey call "node") do throwError "Wrong call row"
  let left ← endpoint raw term slots shared (← getKey query "outer")
  let right ← endpoint raw term slots shared (← getKey query "nested")
+ if transport then
+  unless (⟨left⟩ : ExprStructEq) == ⟨term.getAppArgs[0]!⟩ &&
+      (⟨right⟩ : ExprStructEq) == ⟨term.appArg!.getAppArgs[1]!⟩ do throwError "Wrong intermediate types"
  unless (⟨left⟩ : ExprStructEq) != ⟨right⟩ do throwError "Expected distinct syntax"
  let _ ← kernelType left
  let _ ← kernelType right

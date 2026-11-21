@@ -15,6 +15,7 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--lean', type=Path, required=True)
 parser.add_argument('--project', type=Path, required=True, help='Existing Lake project with the pinned compiled dependencies')
 parser.add_argument('--output', type=Path, required=True)
+parser.add_argument('--riccati-transport', action='store_true', help='Check differing intermediate types in both Riccati packets')
 args = parser.parse_args()
 manifest = json.loads((root / 'public/data/proof-atlas/goedel-sample-manifest.js').read_text().split('=', 1)[1].strip().rstrip(';'))
 environment = manifest['provenance']['environment']
@@ -31,15 +32,23 @@ spec = importlib.util.spec_from_file_location('packet_runtime', base.parent / 'p
 module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
 runtime = module.runtime() + '\n' + (base / 'EndpointConversion.lean').read_text()
+records = manifest['edition']['declarations']
+if args.riccati_transport:
+    library = json.loads((root / 'public/data/proof-atlas/library-manifest.js').read_text().split('=', 1)[1].strip().rstrip(';'))
+    records = [r for edition in library['editions'] for r in edition['declarations'] if r['name'] == 'JacobiData.slope_bound_abs']
+    assert records and all(r['sourceSha256'] == digest((args.project / 'SE2Conjugate/Riccati.lean').read_bytes()) for r in records)
+    runtime = runtime.replace('import Mathlib', 'import SE2Conjugate.Riccati\nimport Mathlib', 1)
+    paths.append(str((args.project / '.lake/build/lib/lean').resolve()))
 with tempfile.TemporaryDirectory() as workdir:
     work = Path(workdir)
     requests = work / 'requests.json'
-    subprocess.run(['node', str(base / 'check-equality-sides.cjs'), '--conversion-requests', requests], cwd=root, check=True)
+    checker, flag = ('check-paged-transport.cjs', '--transport-requests') if args.riccati_transport else ('check-equality-sides.cjs', '--conversion-requests')
+    subprocess.run(['node', str(base / checker), flag, requests], cwd=root, check=True)
     queries = json.loads(requests.read_bytes())
     assert queries
     results = []
-    for record in manifest['edition']['declarations']:
-        group = [q for q in queries if q['name'] == record['name']]
+    for record in records:
+        group = [q for q in queries if q['name'] == record['name'] and q['indexSha256'] == record['indexSha256']]
         if not group:
             continue
         raw = gzip.decompress((root / record['indexFile'].lstrip('/')).read_bytes())

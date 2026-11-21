@@ -662,3 +662,18 @@ When the term supplied to a transport is another fully applied transport, the re
 Of the 271 transport rows in the paged census, 31 have a transport directly in their term field. The published and working editions each contribute 13 matching intermediate rows and two different-row boundaries. The AI sample contributes one matching pair. In the published Riccati proof, row 3238 contains five consecutive reverse transports. Their six types, in the direction of transport, are rows 2390, 2341, 2309, 2283, 2240 and 2217. At rows 3222 and 3223, the first structural difference in the intermediate types is between the constant Real.instMonoid and an application of Semiring.toMonoid. The reader preserves both addresses. A difference of representation leaves definitional conversion open.
 
 The transport checker above recomputes the nested calls, directions, type addresses and boundaries from the complete source. It tests one proof-root route per distinct outer row under a one-page source cache. The reader shows at most eight transports per selection. A synthetic ten-call structural control checks the continuation after eight and the remaining two steps. None of the 35 compiled entries reached that limit. The UI check at 320 and 1280 pixels covers the five-step chain and both endpoint links at the row-3222 boundary.
+
+### Checking conversion at the two Riccati transport boundaries
+
+Lean 4.33.1 accepted reflexivity at the equality of the **complete intermediate types** for the nested forward transports at rows 3222 and 3223. Row 3222 joins inner output 3209 to outer input 3174. Row 3223 joins inner output 3181 to outer input 3145. The same two comparisons passed in the separately hashed published-15 and working-26 packets. Each occurrence had a reconstructed local context of size 13. The checker first kernel-checks the reconstructed closed proof against its type, reopens the call at its exact proof-root route, checks that the endpoints are the specified forward-transport arguments, and forces the kernel to type a reflexivity proof at the claimed equality. The negative control requires the kernel to reject reflexivity at 0 = 1.
+
+Reproduce with the pinned compiler and an existing SE2Conjugate Lake project containing the compiled Riccati module and its dependencies:
+
+```sh
+python3 research/proof-atlas/use-rank/replay-endpoints.py --riccati-transport \
+  --lean "$LEAN_4331" --project "$SE2_LAKE_PROJECT" \
+  --output /tmp/transport-endpoint-conversions.json
+cmp public/data/proof-atlas/transport-endpoint-conversions.json /tmp/transport-endpoint-conversions.json
+```
+
+The import uses an existing build of SE2Conjugate.Riccati. The runner checks the source-file hash, dependency revisions, Lake manifest and packet checksums. This run did not independently rebuild mathlib or the original project. Only the comparison results and occurrence addresses are included in the public report. The UI verifies the report digest, edition, declaration, packet and source hashes and both endpoint routes before joining a pair of differing rows. Selecting row 3223 now exposes three consecutive forward transports, starting at the AM–GM proof. Each checked join retains separate links to the original type occurrences. A missing or changed report leaves the structural boundary visible.

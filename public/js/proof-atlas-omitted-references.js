@@ -68,7 +68,13 @@
    const inner=await pagedEqualityRule(cursor,current.term.route,options);
    if(!inner || inner.rule==='congrArg')return {steps,boundary:null};
    // Both addresses descend only through application fields in the same lexical context.
-   if(inner.to.node!==current.from.node)return {steps,boundary:{kind:'different rows',inner:inner.to,outer:current.from}};
+   if(inner.to.node!==current.from.node){
+    const boundary={kind:'different rows',inner:inner.to,outer:current.from};
+    if(!options.verifyJoin)return {steps,boundary};
+    const route={root:current.term.route.root,slots:current.term.route.slots.slice(0,-1)};
+    const at=await cursor.resolveRoute(route,options);
+    if(!await options.verifyJoin({node:at.node,route},boundary))return {steps,boundary};
+   }
    steps.push(inner);
   }
   return {steps,boundary:{kind:'display limit',term:steps.at(-1).term}};

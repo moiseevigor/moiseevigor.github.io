@@ -11,6 +11,7 @@ const {sourceInput}=require('../../../public/js/proof-atlas-application-ports');
 const {spine}=require('../../../public/js/proof-atlas-elimination');
 const {inventory}=require('../../../scripts/proof-atlas-judgment-fixtures.cjs');
 
+const requests=[];
 async function check(descriptor,record){
  const raw=gunzipSync(fs.readFileSync('.'+record.indexFile));
  assert.equal(createHash('sha256').update(raw).digest('hex'),descriptor.indexSha256);
@@ -63,6 +64,8 @@ async function check(descriptor,record){
      if(i===0){
       counts.different++;
       if(record.name==='JacobiData.slope_bound_abs'){
+       requests.push({name:record.name,indexSha256:record.indexSha256,edition:descriptor.edition,
+        sourceSha256:record.sourceSha256,call,outer:step.from,nested:inner,field:'transport input'});
        const diff=firstStructuralDifference(data,inner.node,step.from.node);
        assert.equal(diff.status,'constructor');
        const heads=[diff.left,diff.right].map(row=>data.payloads[spine(data,row).head].name);
@@ -125,4 +128,5 @@ async function checkDisplayLimit(){
   for(const key of Object.keys(c))s[key]+=c[key];
  }
  console.table(totals);
+ if(process.argv[2]==='--transport-requests')fs.writeFileSync(process.argv[3],JSON.stringify(requests));
 })().catch(e=>{console.error(e);process.exitCode=1;});

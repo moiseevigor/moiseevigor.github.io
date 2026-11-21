@@ -129,6 +129,23 @@
   substitutionSection.hidden=true;
   substitutionSection.setAttribute('aria-label','Equality under a function');
   workspace.insertBefore(substitutionSection,cache);
+  const transportFile='/public/data/proof-atlas/transport-endpoint-conversions.json';
+  let transportReport;
+  async function verifiedTransportJoin(record,editionId,call,boundary){
+   try{
+    transportReport??=(async()=>{
+     const response=await fetch(transportFile);
+     if(!response.ok)throw Error('Transport evidence unavailable');
+     const bytes=await response.arrayBuffer();
+     if(await A.digest(bytes)!=='7445cc7cf3dcf5e97d0c3ab0dbc379c2a2046aa3f7fbe603114392821f1468e5')throw Error('Transport evidence changed');
+     return JSON.parse(new TextDecoder().decode(bytes)).entries;
+    })().catch(error=>{transportReport=null;throw error;});
+    const same=(a,b)=>a.node===b.node && a.route.root===b.route.root && a.route.slots.join('.')===b.route.slots.join('.');
+    return (await transportReport).some(e=>e.name===record.name && e.edition===editionId &&
+     e.indexSha256===record.indexSha256 && e.sourceSha256===record.sourceSha256 && e.field==='transport input' &&
+     e.kernelReflexivity==='PASS' && same(e.call,call) && same(e.outer,boundary.outer) && same(e.nested,boundary.inner));
+   }catch{return false;}
+  }
   async function showEqualityRule(owner,route,epoch,signal){
    const active=()=>owner===cursor && epoch===sourceEpoch && !signal.aborted;
    try{
@@ -151,7 +168,12 @@
      substitutionSection.append(el('h3','Transport across equality'),rule,
       el('p',result.rule+' carries a term of '+from+' to a term of '+to+'.'),
       anchor('Proof of A = B',result.equality),' · ',anchor('Term of '+from,result.term));
-     const chain=await host.ProofAtlasOmittedReferences.pagedTransportChain(owner,result,{signal});
+     const verified=[];
+     const chain=await host.ProofAtlasOmittedReferences.pagedTransportChain(owner,result,{signal,verifyJoin:async(call,boundary)=>{
+      const checked=await verifiedTransportJoin(owner.record,edition.id,call,boundary);
+      if(checked)verified.push(boundary);
+      return checked;
+     }});
      if(!active())return;
      if(chain.steps.length>1){
       const list=el('ol');
@@ -161,6 +183,12 @@
        list.append(row);
       }
       substitutionSection.append(el('h4','From the input term to the result'),anchor('Input term of T0',chain.steps.at(-1).term),list);
+     }
+     for(const join of verified){
+      const note=el('p'),report=el('a','Kernel replay record');report.href=transportFile;
+      note.append('Lean checked conversion between the ',anchor('inner result type',join.inner),' and ',
+       anchor('outer input type',join.outer),'. ',report);
+      substitutionSection.append(note);
      }
      if(chain.boundary?.kind==='different rows'){
       const seam=el('p');
