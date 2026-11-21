@@ -81,6 +81,37 @@
    panel.append(line,detail);container.append(panel);
   }
   showProjectionHelper();
+  if(call.route.root===1){
+   const path=call.route.slots.join('');
+   for(const fork of host.PROOF_ATLAS_CLAUSE_FORKS||[]){
+    if(fork.edition!==call.edition || fork.digest!==record.indexSha256 || fork.declaration!==record.name)continue;
+    const selected=fork.groups.find(g=>g.use.path===path || g.target.path===path || g.clause.path===path);
+    if(path && path!==fork.binder.path && !selected)continue;
+    const panel=el('section'),tree=el('ul');
+    panel.dataset.clauseFork=fork.binder.path;tree.className='pl-reference-tree';
+    panel.append(el('h4','Where the two clauses are used'),addressLink(fork.name,fork.binder.node,fork.binder.path),tree);
+    for(const step of ['L','R']){
+     const groups=fork.groups.filter(g=>g.steps===step),clause=groups[0].clause;
+     let head=clause.node;
+     while(data.kind[head]===5)head=data.children[head][0];
+     const name=data.kind[head]===4?data.payloads[head].name:null;
+     const label=(step==='L'?'Left':'Right')+' clause'+(name?' · '+name:'');
+     const row=el('li'),children=el('ul');
+     row.append(addressLink(label,clause.node,clause.path),children);tree.append(row);
+     for(const g of groups){
+      const item=el('li');
+      item.append(addressLink('Projection',g.use.node,g.use.path),' → ',addressLink(g.receiver,g.target.node,g.target.path));
+      if(g.count>1)item.append(' · '+g.count+' uses (first shown)');
+      children.append(item);
+     }
+    }
+    for(const link of panel.querySelectorAll('a')){
+     const target=new URL(link.href);
+     if(target.searchParams.get('route')==='1:'+call.route.slots.join('.'))link.setAttribute('aria-current','location');
+    }
+    container.append(panel);
+   }
+  }
   const flow=host.PROOF_ATLAS_CLAUSE_USES?.find?.(item=>item.indexSha256===record.indexSha256);
   if(flow && flow.edition===call.edition && flow.declaration===record.name && flow.indexSha256===record.indexSha256 &&
      call.route.root===1 && (!call.route.slots.length || call.route.slots.join('')===flow.binder.path)){
