@@ -1017,8 +1017,15 @@
   for(const n of scene.nodes)if(n.abstraction==='application-spine'){
    const details=el('details'),head=current.data.payloads[n.head.node],headName=n.spineComplete&&(head.name||current.kind(n.head.node)),summary=el('summary',n.arguments.length+' '+(n.truncated?'trailing slots · function spine continues': 'arguments · '+headName)+' · '+n.id);details.dataset.applicationPath=n.id;details.append(summary,el('p','@n groups n original Expr.app occurrences. head/arg links follow the original left-associated call order and keep the same lexical context. All arguments remain available below; at most six ports are drawn per group. Argument roles are shown only where a matching native type check is available. Application saturation is not inferred.'));
    const h=el('button',n.truncated?'Open remaining function spine':'Open head · '+headName);h.type='button';h.dataset.applicationHead=n.head.path;h.onclick=()=>selectOccurrence(n.head.node,true,true,n.head.route);details.append(h);const list=el('ol');
-   const firstUse=new Map();
+   const firstUse=new Map(),statements=[];
    n.arguments.forEach((a,j)=>{const row=el('li'),checked=chooseTyping(n.route)?.argument?.(n.route,a.route),q=el('button',(a.position===null?'Trailing slot ':'Argument ')+a.slot+' · '+current.kind(a.node)+' · '+(checked?'checked '+checked.role+' / '+checked.binderInfo:'role unavailable')+' · '+number(a.expanded)+' occurrences · '+(n.regions[j+1].displayed?'drawn':'collapsed'));q.type='button';q.dataset.applicationArgument=a.path;q.dataset.argumentRole=checked?.role||'unavailable';q.title=a.path;q.onclick=()=>selectOccurrence(a.node,true,true,a.route);const m=n.members[j],b=el('button','Original application '+a.slot);b.type='button';b.dataset.applicationMember=m.path;b.title=m.path;b.onclick=()=>selectOccurrence(m.node,true,true,m.route);row.append(q,b);
+    if(n===call && checked?.role==='proof'){
+     const observed=chooseTyping(a.route)?.get(a.route);
+     if(observed?.status==='checked' && observed.node===a.node && observed.role==='proof' && observed.typeText){
+      const proposition=el('p',observed.typeText,'pl-argument-statement');
+      row.append(proposition);statements.push({row,text:observed.typeText});
+     }
+    }
     const earlier=firstUse.get(a.node);
     if(earlier!==undefined){
      const slotLabel=n.truncated?'trailing slot ':'argument ';
@@ -1026,7 +1033,21 @@
      same.dataset.sharedArgument=earlier;
      row.append(same);
     }else firstUse.set(a.node,a.slot);
-    list.append(row);});details.append(list);$('pl-application-headers').append(details);
+    list.append(row);});
+   if(statements.length>1){
+    const label=el('label','Find a checked proposition '),input=el('input'),status=el('span');
+    input.type='search';status.setAttribute('role','status');
+    const normalize=text=>text.normalize('NFC').replace(/\s+/g,' ').trim().toLowerCase();
+    input.oninput=()=>{
+     const query=normalize(input.value);
+     for(const row of list.children)row.hidden=!!query;
+     let matches=0;
+     for(const entry of statements)if(normalize(entry.text).includes(query)){entry.row.hidden=false;matches++;}
+     status.textContent=query?matches+' of '+statements.length+' checked propositions':'';
+    };
+    label.append(input);details.append(label,status);
+   }
+   details.append(list);$('pl-application-headers').append(details);
   }
   const s=scene.stats;$('pl-graph-note').textContent='Scoped geometry prototype · '+s.displayed+' vertices'+(foldBinders||foldApplications?' retaining '+number(s.retainedOccurrences)+' kernel occurrences':' visible occurrences')+' + '+number(s.hidden)+' hidden = '+number(s.represented)+' represented. '+s.frontiers+' vertices with collapsed regions; '+s.scopeBoundaries+' links to enclosing context.'+(foldBinders?' Tn is an ordered binder telescope; dashed scope arrows name its slots.':'')+(foldApplications?' @n groups an application spine; head/argN are ordered abstract ports. Any proof/type/value labels come from separate native checks; arrows do not assert logical implication. Compact labels N:P/T/V mean argument N: proof/type/value.':'')+' Solid links retain constructor fields or the stated abstraction ports; dashed links are lexical binding. Layout positions are not a mathematical invariant.';
  }

@@ -166,11 +166,13 @@ async function main() {
     const union=require('../recorded-union.cjs');
     const {measure}=require('./ai-inference-traces.cjs');
     const wideItem=union.inventory().find(i=>i.edition==='published-15' && i.record.name==='SBracket.mk.inj');
-    let proofSlots;
+    let proofSlots,proofStatements;
     await measure(wideItem,null,(inputs,n)=>{
       const last=inputs.find(input=>input.position===n);
-      if(n===59 && JSON.stringify(last.route)===JSON.stringify(wideRoute.concat(1)))
-        proofSlots=inputs.filter(input=>input.role==='proof').map(input=>input.position);
+      if(n===59 && JSON.stringify(last.route)===JSON.stringify(wideRoute.concat(1))){
+        proofStatements=inputs.filter(input=>input.role==='proof').sort((a,b)=>a.position-b.position);
+        proofSlots=proofStatements.map(input=>input.position);
+      }
     });
     assert.equal(proofSlots.length,44);
     const choices=await page.locator('#pl-window-choice option').evaluateAll(nodes=>nodes.map(n=>[Number(n.value),n.textContent]));
@@ -184,6 +186,20 @@ async function main() {
     await page.getByText('Arguments 1–5 of 59',{exact:true}).waitFor();
     assert.equal(await page.locator('#pl-window-outside').innerText(),'43 checked proof inputs outside view');
     await clickDrawnOccurrence(page,wideRoute.concat(Array(55).fill(0),1));
+    await page.goto(wide.href);
+    const wideDetails=page.locator('#pl-application-headers details').first();
+    await wideDetails.locator('summary').click();
+    const search=wideDetails.getByLabel('Find a checked proposition');
+    assert.deepEqual(await wideDetails.locator('.pl-argument-statement').allTextContents(),proofStatements.map(p=>p.statement));
+    await search.fill('absent-test-string');
+    assert.equal(await wideDetails.locator('li:visible').count(),0);
+    await search.fill('');
+    assert.equal(await wideDetails.locator('li:visible').count(),59);
+    await search.fill('0 < K✝');
+    const positivity=wideDetails.locator('li:visible').filter({has:page.getByText('0 < K✝',{exact:true})});
+    await positivity.locator('[data-application-argument]').click();
+    const picked=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
+    assert.deepEqual(picked.route.slots,wideRoute.concat(Array(55).fill(0),1));
     assert.deepEqual(errors,[]);
     console.log('Four inspector paths and four folded canvas paths passed at both widths.');
   } finally {await browser.close();}
