@@ -2,10 +2,10 @@
 const fs=require('node:fs'),z=require('node:zlib'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 const A=require('../../../public/js/proof-atlas-library-data');
 const {spine}=require('../../../public/js/proof-atlas-elimination');
-const {formula,statement,caption,hypothesisInputs,resultFlow}=require('../../../public/js/proof-atlas-arithmetic');
+const {formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument}=require('../../../public/js/proof-atlas-arithmetic');
 const ports=require('./distinct-call-ports.cjs');
 global.window={};require('../../../public/data/proof-atlas/goedel-sample-manifest');
-const arities={'HPow.hPow':6,'HMul.hMul':6,'HSub.hSub':6,'HAdd.hAdd':6,'HDiv.hDiv':6,Or:2,And:2,Eq:3,Ne:3,'LE.le':4,'LT.lt':4,'Real.sqrt':1,abs:4},counts={},examples={};
+const arities={'HPow.hPow':6,'HMul.hMul':6,'HSub.hSub':6,'HAdd.hAdd':6,'HDiv.hDiv':6,Or:2,And:2,Eq:3,Ne:3,'LE.le':4,'GE.ge':4,'LT.lt':4,'Real.sqrt':1,abs:4},counts={},examples={};
   function check(g,t){
    assert.equal(A.walk(g,t.site.route),t.site.node);
    if(t.variables){
@@ -28,11 +28,22 @@ const arities={'HPow.hPow':6,'HMul.hMul':6,'HSub.hSub':6,'HAdd.hAdd':6,'HDiv.hDi
    check(g,t.left);if(t.right)check(g,t.right);
   }
 let absent=0,nested=0;
-const joins=[];
+const joins=[],orderProofs=[];
 for(const d of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations.filter(d=>d.kind==='theorem'&&d.bodyAvailable)){
  const raw=z.gunzipSync(fs.readFileSync('.'+d.indexFile));
  assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),d.indexSha256);
  const g=A.validateIndex(JSON.parse(raw),d),seen=new Set();
+ const order=closingOrderArgument(g);
+ if(order){
+  for(const key of ['goal','proof','domain','close','operand','evidence'])assert.equal(A.walk(g,order[key].route),order[key].node);
+  assert.equal(spine(g,order.close.node).args[3],order.evidence.node);
+  const binder={root:1,slots:order.close.route.slots.slice(0,-1)};
+  const refs=require('./ranked-binder-uses.cjs')(g,binder);
+  assert(refs.total>0n);assert.deepEqual(A.binding(g,refs.select(0n).route).route,binder);
+  const children=g.children.slice();children[order.goal.node]=[children[order.goal.node][0],g.roots[0]===order.goal.node?order.operand.node:spine(g,order.goal.node).head];
+  assert.equal(closingOrderArgument({...g,children}),null);
+  orderProofs.push({proof:d.name,order,assumptionReferences:String(refs.total)});
+ }
  for(const p of ports(g,Infinity).routes){
   if(seen.has(p.callNode))continue;
   seen.add(p.callNode);
@@ -119,4 +130,4 @@ for(const edition of window.PROOF_ATLAS_LIBRARY.editions){
   ['LE.le','HMul.hMul','Real.sqrt','abs','HDiv.hDiv']);
  riccati.push({edition:edition.id,proof:d.name,at,call});
 }
-console.log(JSON.stringify({counts,absent,nested,examples,riccati,joins},null,2));
+console.log(JSON.stringify({counts,absent,nested,examples,riccati,joins,orderProofs},null,2));

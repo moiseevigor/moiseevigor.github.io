@@ -12,6 +12,7 @@
   ['Eq',{symbol:'=',parameters:['type'],relation:true}],
   ['Ne',{symbol:'≠',parameters:['type'],relation:true}],
   ['LE.le',{symbol:'≤',parameters:['type','order instance'],relation:true}],
+  ['GE.ge',{symbol:'≥',parameters:['type','order instance'],relation:true}],
   ['LT.lt',{symbol:'<',parameters:['type','order instance'],relation:true}],
   ['Real.sqrt',{symbol:'√',parameters:[],unary:true}],
   ['abs',{symbol:'abs',parameters:['type','lattice instance','group instance'],unary:true}]
@@ -148,8 +149,52 @@
   }
   return result;
  }
+ function closingOrderArgument(data){
+  if(data.roots[1]==null)return null;
+  const child=(site,slot)=>({node:data.children[site.node][slot],route:{root:site.route.root,slots:site.route.slots.concat(slot)}});
+  function application(site,name,arity){
+   const args=[];
+   for(let i=0;i<arity;i++){
+    if(data.kind[site.node]!==5)return null;
+    args.unshift(child(site,1));site=child(site,0);
+   }
+   return data.kind[site.node]===4 && data.payloads[site.node].name===name?args:null;
+  }
+  let goal={node:data.roots[0],route:{root:0,slots:[]}},proof={node:data.roots[1],route:{root:1,slots:[]}};
+  while(data.kind[goal.node]===7 && goal.route.slots.length<128){
+   if(data.kind[proof.node]!==6 || data.children[proof.node][0]!==data.children[goal.node][0] ||
+      data.payloads[proof.node].binderInfo!==data.payloads[goal.node].binderInfo)return null;
+   goal=child(goal,1);proof=child(proof,1);
+  }
+  const args=application(proof,'le_of_not_gt',5);
+  if(!args||data.kind[args[4].node]!==6)return null;
+  const statement=formula(data,goal),domain=child(args[4],0),contrary=formula(data,domain);
+  const [a,b]=args.slice(2,4);
+  if(!statement || !['LE.le','GE.ge'].includes(statement.name) || contrary?.name!=='LT.lt')return null;
+  const [left,right]=statement.name==='LE.le'?[a,b]:[b,a];
+  if(statement.parameters[0].node!==args[0].node || contrary.parameters[0].node!==args[0].node ||
+     statement.left.site.node!==left.node || statement.right.site.node!==right.node ||
+     contrary.left.site.node!==b.node || contrary.right.site.node!==a.node)return null;
+  const close=child(args[4],1),end=application(close,'Mathlib.Tactic.Linarith.lt_irrefl',4);
+  if(!end)return null;
+  const numeral=application(end[2],'OfNat.ofNat',3);
+  const literal=numeral && data.kind[numeral[1].node]===9?data.payloads[numeral[1].node]:null;
+  const operandLabel=literal?.literalKind==='natVal'?'OfNat.ofNat('+literal.value+')':'e'+end[2].node;
+  return {goal,statement,proof,domain,contrary,close,operand:end[2],operandLabel,evidence:end[3]};
+ }
  function mount(container,data,at,link){
   const el=(tag,text)=>{const e=document.createElement(tag);if(text)e.textContent=text;return e;};
+  if(!at.route.slots.length){
+   const o=closingOrderArgument(data);
+   if(o){
+    const panel=el('section'),steps=el('ol');panel.dataset.orderContradiction='';
+    panel.append(el('h4','Proof by contradiction'),steps);
+    const assumption=el('li');assumption.append('Assume ',link(caption(o.contrary),o.domain),'.');
+    const end=el('li');end.append(link('Derive',o.evidence),' ',link(o.operandLabel,o.operand),' < ',o.operandLabel,'. ',link('Irreflexivity',o.close),' rules this out.');
+    const conclusion=el('li');conclusion.append(link('le_of_not_gt',o.proof),' gives ',link(caption(o.statement),o.goal),'.');
+    steps.append(assumption,end,conclusion);container.append(panel);
+   }
+  }
   const receiving=hypothesisInputs(data,at);
   if(receiving){
    const panel=el('section'),branches=el('ul');panel.dataset.hypothesisInputs='';
@@ -277,5 +322,5 @@
   }
   panel.append(detail);container.append(panel);
  }
- if(common)module.exports={formula,statement,caption,hypothesisInputs,resultFlow};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
+ if(common)module.exports={formula,statement,caption,hypothesisInputs,resultFlow,closingOrderArgument};else host.ProofAtlasArithmetic={mount,formula,caption,statement};
 })(typeof window==='undefined'?globalThis:window);
