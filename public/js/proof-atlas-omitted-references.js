@@ -17,6 +17,25 @@
   return args.reverse().map((node,slot)=>({node,route:{root:at.route.root,
    slots:at.route.slots.concat(Array(arity-slot-1).fill(0),1)}}));
  }
+ // Expand only directly supplied transitivity proofs with literal endpoint agreement.
+ function equalitySegments(data,inputs,limit=16){
+  const [carrier,start,middle,end,first,second]=inputs;
+  const pending=[{start:middle,end,proof:second},{start,end:middle,proof:first}],segments=[];
+  while(pending.length){
+   const step=pending.pop();
+   const inner=exactCallInputs(data,step.proof,'Eq.trans',6);
+   if(!inner){segments.push(step);continue;}
+   if(inner[0].node!==carrier.node || inner[1].node!==step.start.node || inner[3].node!==step.end.node){
+    segments.push({...step,boundary:'different compiled endpoints or carrier'});continue;
+   }
+   if(segments.length+pending.length+2>limit){
+    segments.push({...step,boundary:'display limit'});continue;
+   }
+   pending.push({start:inner[2],end:inner[3],proof:inner[5]},
+    {start:inner[1],end:inner[2],proof:inner[4]});
+  }
+  return segments;
+ }
  // Compare literal expression records in field order, skipping shared subtrees.
  function firstStructuralDifference(data,left,right){
   const pending=[{left,right,slots:[]}],seen=new Set();
@@ -241,6 +260,6 @@
   };
   return panel;
  }
- const api={inspect,control,exactCallInputs,firstStructuralDifference,applicationAtUse,resultDestination};
+ const api={inspect,control,exactCallInputs,equalitySegments,firstStructuralDifference,applicationAtUse,resultDestination};
  if(local)module.exports=api;else host.ProofAtlasOmittedReferences=api;
 })(typeof window==='undefined'?globalThis:window);

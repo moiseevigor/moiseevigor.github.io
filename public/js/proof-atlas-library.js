@@ -215,7 +215,21 @@
     const row=el('li');
     row.append(sourceLink(text,proof),' · '+termLabel(proof));steps.append(row);
    }
-   section.append(el('h4','Equality by transitivity'),terms,steps);target.append(section);
+   section.append(el('h4','Equality by transitivity'),terms,steps);
+   const segments=window.ProofAtlasOmittedReferences.equalitySegments(owner.data,chain);
+   if(segments.length>2 || segments.some(s=>s.boundary)){
+    const detail=el('details'),list=el('ol');
+    detail.append(el('summary','Trace '+segments.length+' equality steps'));
+    for(const [index,step] of segments.entries()){
+     const row=el('li');
+     row.append(sourceLink(termLabel(step.start),step.start),' = ',sourceLink(termLabel(step.end),step.end),
+      ' · ',sourceLink('Proof '+(index+1),step.proof));
+     if(step.boundary)row.append(' · '+step.boundary);
+     list.append(row);
+    }
+    detail.append(list);section.append(detail);
+   }
+   target.append(section);
   }
   if(sides){
    const comparison=el('p');

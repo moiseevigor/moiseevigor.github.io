@@ -8,7 +8,7 @@ const atlas = require('../../../public/js/proof-atlas-library-data');
 const {spine} = require('../../../public/js/proof-atlas-elimination');
 const window = {};
 require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/goedel-sample-manifest.js','utf8'),{window});
-const {exactCallInputs,firstStructuralDifference} = require('../../../public/js/proof-atlas-omitted-references');
+const {exactCallInputs,equalitySegments,firstStructuralDifference} = require('../../../public/js/proof-atlas-omitted-references');
 const differences = {constructor:0n,payload:0n,identical:0n,limit:0n};
 let belowRoot = 0n, maxDepth = 0;
 function reference(data,left,right) {
@@ -32,6 +32,7 @@ for (let i=2;i<1028;i++) {
 }
 assert.deepEqual(firstStructuralDifference(chains,1026,1027),{status:'limit'});
 assert.deepEqual(firstStructuralDifference(chains,1026,1026),{status:'identical'});
+let nested=0n,maximum=0,boundaries=0n;
 let transCalls=0n, transRows=0, transProofs=0;
 let equalities = 0n, shared = 0n, affected = 0;
 for (const record of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations) {
@@ -56,6 +57,25 @@ for (const record of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations) {
       if(args.length===6){
         assert.deepEqual(inputs.map(input=>atlas.walk(data,input.route)),args);
         assert.deepEqual(inputs.map(input=>input.node),args);
+        const segments=equalitySegments(data,inputs);
+        function checkSegment(start,end,proof){
+          const inner=spine(data,proof);
+          if(data.payloads[inner.head].name==='Eq.trans' && inner.args.length===6 &&
+            inner.args[0]===args[0] && inner.args[1]===start && inner.args[3]===end){
+            return [...checkSegment(start,inner.args[2],inner.args[4]),...checkSegment(inner.args[2],end,inner.args[5])];
+          }
+          return [[start,end,proof]];
+        }
+        const expected=[...checkSegment(args[1],args[2],args[4]),...checkSegment(args[2],args[3],args[5])];
+        assert.deepEqual(segments.map(s=>[s.start,s.end,s.proof].map(a=>atlas.walk(data,a.route))),expected);
+        if(segments.length>2){
+          nested+=count;
+          const folded=equalitySegments(data,inputs,2);
+          assert.deepEqual(folded.map(s=>s.proof),inputs.slice(4));
+          assert(folded.some(s=>s.boundary==='display limit'));
+        }
+        if(segments.some(s=>s.boundary))boundaries+=count;
+        maximum=Math.max(maximum,segments.length);
         chainsHere+=count;
         transRows++;
       }else assert.equal(inputs,null);
@@ -85,3 +105,4 @@ for (const record of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations) {
 console.log('Equality occurrences:',String(equalities),'with identical operand rows:',String(shared),'in proofs:',affected);
 console.log('Different operand rows:',differences,'below root:',String(belowRoot),'maximum field depth:',maxDepth);
 console.log('Eq.trans calls:',String(transCalls),'distinct rows:',transRows,'proofs:',transProofs);
+console.log('Expanded chains:',String(nested),'maximum steps:',maximum,'calls with boundaries:',String(boundaries));

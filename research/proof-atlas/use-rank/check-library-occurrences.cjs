@@ -106,6 +106,28 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
     await page.locator('#pl-expression h3').filter({hasText:' · e'+node}).waitFor();
     assert.equal(new URL(page.url()).searchParams.get('route'),trans.root+':'+slots.join('.'));
    }
+   for(const [proofName,row,expected,boundary] of [
+    ['lean_workbook_plus_15068',16553,[16369,16379,16389,16399,16409,16419,16429,16543,16545],false],
+    ['lean_workbook_20418',86121,[86074,86079,86120],true]
+   ]){
+    const record=aiEdition.declarations.find(r=>r.name===proofName);
+    const data=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+record.indexFile)));
+    const at=atlas.routes(data).route(row);
+    await page.goto('http://localhost/projects/proof-atlas/library/?edition='+aiEdition.id+'&proof='+proofName+'&route='+at.root+':'+at.slots.join('.')+'#expr-'+row);
+    const trace=page.getByRole('region',{name:'Equality chain'}).locator('details');
+    await trace.locator('summary').click();
+    const links=trace.getByRole('link',{name:/^Proof /});
+    assert.equal(await links.count(),expected.length);
+    assert.equal((await trace.innerText()).includes('different compiled endpoints or carrier'),boundary);
+    for(const [i,node] of expected.entries()){
+     const url=new URL(await links.nth(i).evaluate(a=>a.href));
+     const route=url.searchParams.get('route').split(':');
+     assert.equal(atlas.walk(data,{root:Number(route[0]),slots:route[1].split('.').map(Number)}),node);
+     assert.equal(url.hash,'#expr-'+node);
+    }
+    await links.last().click();
+    await page.locator('#pl-expression h3').filter({hasText:' · e'+expected.at(-1)}).waitFor();
+   }
    const nestedEq=atlas.routes(eqData).route(14452);
    for(const [side,prefix,node] of [['Left',[0,1],330],['Right',[1],6]]){
     await page.goto('http://localhost/projects/proof-atlas/library/?edition='+aiEdition.id+'&proof='+eqProof.name+'&route='+nestedEq.root+':'+nestedEq.slots.join('.')+'#expr-14452');
