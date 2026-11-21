@@ -5,6 +5,18 @@
  const A=local?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData;
  const notation=local?require('./proof-atlas-type-notation'):host.ProofAtlasTypeNotation;
  const E=local?require('./proof-atlas-elimination'):host.ProofAtlasElimination;
+ function exactCallInputs(data,at,name,arity){
+  let fn=at.node;
+  const args=[];
+  for(let n=0;n<arity;n++){
+   if(data.kind[fn]!==5)return null;
+   args.push(data.children[fn][1]);
+   fn=data.children[fn][0];
+  }
+  if(data.kind[fn]!==4 || data.payloads[fn].name!==name)return null;
+  return args.reverse().map((node,slot)=>({node,route:{root:at.route.root,
+   slots:at.route.slots.concat(Array(arity-slot-1).fill(0),1)}}));
+ }
  // Compare literal expression records in field order, skipping shared subtrees.
  function firstStructuralDifference(data,left,right){
   const pending=[{left,right,slots:[]}],seen=new Set();
@@ -229,6 +241,6 @@
   };
   return panel;
  }
- const api={inspect,control,firstStructuralDifference,applicationAtUse,resultDestination};
+ const api={inspect,control,exactCallInputs,firstStructuralDifference,applicationAtUse,resultDestination};
  if(local)module.exports=api;else host.ProofAtlasOmittedReferences=api;
 })(typeof window==='undefined'?globalThis:window);

@@ -93,6 +93,19 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
     await page.locator('#pl-expression h3').filter({hasText:' · e1968'}).waitFor();
     assert.equal(new URL(page.url()).searchParams.get('route'),eqRoute.root+':'+path.join('.'));
    }
+   const trans=atlas.routes(eqData).route(14700);
+   const chainUrl='http://localhost/projects/proof-atlas/library/?edition='+aiEdition.id+'&proof='+eqProof.name+'&route='+trans.root+':'+trans.slots.join('.')+'#expr-14700';
+   const expected=[14516,14549,14549,14655,14699];
+   for(const [index,node] of expected.entries()){
+    await page.goto(chainUrl);
+    const panel=page.getByRole('region',{name:'Equality chain'});
+    const link=panel.getByRole('link').nth(index);
+    const slots=trans.slots.concat(Array(4-index).fill(0),1);
+    assert.equal(atlas.walk(eqData,{root:trans.root,slots}),node);
+    await link.click();
+    await page.locator('#pl-expression h3').filter({hasText:' · e'+node}).waitFor();
+    assert.equal(new URL(page.url()).searchParams.get('route'),trans.root+':'+slots.join('.'));
+   }
    const nestedEq=atlas.routes(eqData).route(14452);
    for(const [side,prefix,node] of [['Left',[0,1],330],['Right',[1],6]]){
     await page.goto('http://localhost/projects/proof-atlas/library/?edition='+aiEdition.id+'&proof='+eqProof.name+'&route='+nestedEq.root+':'+nestedEq.slots.join('.')+'#expr-14452');

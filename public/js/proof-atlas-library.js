@@ -197,6 +197,26 @@
   if(binder!==undefined){const b=el('button','Enclosing binder #'+binder+' · '+label(binder));b.type='button';b.onclick=()=>selectOccurrence(binder,true,true,binding.route);actions.append(b);}
   const sourceLink=(label,at)=>link(label,url(owner.record.name,at.node,at.route));
   const sides=equalitySides(owner.data,{node:i,route:nextRoute});
+  const chain=window.ProofAtlasOmittedReferences?.exactCallInputs?.(owner.data,{node:i,route:nextRoute},'Eq.trans',6);
+  if(chain){
+   const [,start,middle,end,first,second]=chain;
+   const section=el('section'),terms=el('p'),steps=el('ol');
+   section.setAttribute('aria-label','Equality chain');
+   function termLabel(at){
+    const spine=window.ProofAtlasElimination.spine(owner.data,at.node);
+    const headRoute={root:at.route.root,slots:at.route.slots.concat(Array(spine.args.length).fill(0))};
+    const binder=A.binding(owner.data,headRoute);
+    const name=binder?(owner.payload(binder.node).binderName??owner.payload(binder.node).declName):null;
+    return (spine.args.length?'application of ':'')+(name??label(spine.head));
+   }
+   terms.append(sourceLink('Start · '+termLabel(start),start),' = ',
+    sourceLink('Intermediate term · '+termLabel(middle),middle),' = ',sourceLink('End · '+termLabel(end),end));
+   for(const [text,proof] of [['Start equals intermediate term',first],['Intermediate term equals end',second]]){
+    const row=el('li');
+    row.append(sourceLink(text,proof),' · '+termLabel(proof));steps.append(row);
+   }
+   section.append(el('h4','Equality by transitivity'),terms,steps);target.append(section);
+  }
   if(sides){
    const comparison=el('p');
    comparison.append(sourceLink('Left side · '+label(sides[0].node),sides[0]),' = ',

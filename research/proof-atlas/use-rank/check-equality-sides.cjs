@@ -8,7 +8,7 @@ const atlas = require('../../../public/js/proof-atlas-library-data');
 const {spine} = require('../../../public/js/proof-atlas-elimination');
 const window = {};
 require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/goedel-sample-manifest.js','utf8'),{window});
-const {firstStructuralDifference} = require('../../../public/js/proof-atlas-omitted-references');
+const {exactCallInputs,firstStructuralDifference} = require('../../../public/js/proof-atlas-omitted-references');
 const differences = {constructor:0n,payload:0n,identical:0n,limit:0n};
 let belowRoot = 0n, maxDepth = 0;
 function reference(data,left,right) {
@@ -32,11 +32,14 @@ for (let i=2;i<1028;i++) {
 }
 assert.deepEqual(firstStructuralDifference(chains,1026,1027),{status:'limit'});
 assert.deepEqual(firstStructuralDifference(chains,1026,1026),{status:'identical'});
+let transCalls=0n, transRows=0, transProofs=0;
 let equalities = 0n, shared = 0n, affected = 0;
 for (const record of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations) {
   const bytes = gunzipSync(fs.readFileSync('.'+record.indexFile));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),record.indexSha256);
   const data = atlas.validateIndex(JSON.parse(bytes),record);
+  const routes=atlas.routes(data);
+  let chainsHere=0n;
   const visits = Array(data.kind.length).fill(0n);
   visits[data.roots[1]] = 1n;
   let total = 0n, pairs = 0n, same = 0n;
@@ -47,6 +50,16 @@ for (const record of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations) {
     for (const child of data.children[row]) visits[child] += count;
     if (data.kind[row] !== 5) continue;
     const {head,args} = spine(data,row);
+    if (data.kind[head]===4 && data.payloads[head].name==='Eq.trans') {
+      const at={node:row,route:routes.route(row)};
+      const inputs=exactCallInputs(data,at,'Eq.trans',6);
+      if(args.length===6){
+        assert.deepEqual(inputs.map(input=>atlas.walk(data,input.route)),args);
+        assert.deepEqual(inputs.map(input=>input.node),args);
+        chainsHere+=count;
+        transRows++;
+      }else assert.equal(inputs,null);
+    }
     if (args.length !== 3 || data.kind[head] !== 4 || data.payloads[head].name !== 'Eq') continue;
     pairs += count;
     if (args[1] === args[2]) same += count;
@@ -62,6 +75,8 @@ for (const record of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations) {
     }
   }
   assert.equal(total,BigInt(data.expanded[data.roots[1]]));
+  transCalls+=chainsHere;
+  if(chainsHere)transProofs++;
   equalities += pairs;
   shared += same;
   if (same) affected++;
@@ -69,3 +84,4 @@ for (const record of window.PROOF_ATLAS_AI_SAMPLE.edition.declarations) {
 }
 console.log('Equality occurrences:',String(equalities),'with identical operand rows:',String(shared),'in proofs:',affected);
 console.log('Different operand rows:',differences,'below root:',String(belowRoot),'maximum field depth:',maxDepth);
+console.log('Eq.trans calls:',String(transCalls),'distinct rows:',transRows,'proofs:',transProofs);
