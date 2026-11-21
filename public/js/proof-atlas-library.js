@@ -170,6 +170,20 @@
   }catch(e){if(token===serial){declarationLoading=false;setStatus(e.message);}throw e;}
  }
  function label(i){const k=current.kind(i),p=current.payload(i)||{};return k+(p.name?' '+p.name:p.binderName?' '+p.binderName:p.declName?' '+p.declName:k==='bvar'?' '+p.index:k==='lit'?' '+(p.value??p.repr):k==='proj'?' '+p.typeName+'['+p.index+']':'');}
+ // Eq has three compiled arguments: the carrier, the left side and the right side.
+ function equalitySides(data,at){
+  let fn=at.node;
+  for(let n=0;n<3;n++){
+   if(data.kind[fn]!==5)return null;
+   fn=data.children[fn][0];
+  }
+  if(data.kind[fn]!==4 || data.payloads[fn].name!=='Eq')return null;
+  function side(path){
+   const route={root:at.route.root,slots:at.route.slots.concat(path)};
+   return {node:A.walk(data,route),route};
+  }
+  return [side([0,1]),side([1])];
+ }
  async function selectOccurrence(i,focus=false,write=true,route){
   if(declarationLoading)throw Error('Proof declaration is still loading');
   if(!current||!Number.isInteger(i)||i<0||i>=current.record.uniqueNodes)throw Error('Invalid occurrence');
@@ -181,20 +195,32 @@
   const p=current.payload(i),pre=el('pre',JSON.stringify(p,null,2));const metadata=el('details'),summary=el('summary','Constructor fields');metadata.append(summary,pre);target.append(metadata);
   const actions=el('div',undefined,'pl-actions');cs.forEach((c,j)=>{const b=el('button',A.fields[current.kind(i)][j]+' · #'+c+' · '+current.kind(c));b.type='button';b.onclick=()=>selectOccurrence(c,true,true,{root:selectedRoute.root,slots:[...selectedRoute.slots,j]});actions.append(b);});
   if(binder!==undefined){const b=el('button','Enclosing binder #'+binder+' · '+label(binder));b.type='button';b.onclick=()=>selectOccurrence(binder,true,true,binding.route);actions.append(b);}
+  const sourceLink=(label,at)=>link(label,url(owner.record.name,at.node,at.route));
+  const sides=equalitySides(owner.data,{node:i,route:nextRoute});
+  if(sides){
+   const comparison=el('p');
+   comparison.append(sourceLink('Left side · '+label(sides[0].node),sides[0]),' = ',
+    sourceLink('Right side · '+label(sides[1].node),sides[1]));
+   target.append(comparison);
+  }
   if(binding && window.ProofAtlasOmittedReferences){
    const destination=window.ProofAtlasOmittedReferences.resultDestination(owner.data,{node:i,route:nextRoute});
-   const line=el('p'),jump=(label,at)=>link(label,url(owner.record.name,at.node,at.route));
-   line.append('Use of ',jump(owner.payload(binder).binderName??owner.payload(binder).declName??'bound variable',binding),' · ');
+   const line=el('p');
+   line.append('Use of ',sourceLink(owner.payload(binder).binderName??owner.payload(binder).declName??'bound variable',binding),' · ');
    if(destination.kind==='argument'){
     const c=destination.call;
     const equality=c.arity===3 && owner.kind(c.head.node)==='const' && c.label==='Eq';
     const role=equality && c.slot===2?'Left side of equality':equality && c.slot===3?'Right side of equality':
      c.slot===0?'Function applied to '+c.arity+' arguments':'Argument '+c.slot+' of '+c.arity;
-    line.append(role+' · ',jump(c.label,c.call));
+    line.append(role+' · ',sourceLink(c.label,c.call));
+    if(equality && (c.slot===2 || c.slot===3)){
+     const opposite=equalitySides(owner.data,c.call)[c.slot===2?1:0];
+     line.append(' · ',sourceLink(c.slot===2?'Open right side':'Open left side',opposite));
+    }
    }else if(destination.kind==='root'){
     line.append('Expression root');
    }else{
-    line.append(destination.field+' of ',jump(destination.kind+(destination.name?' '+destination.name:''),destination.at));
+    line.append(destination.field+' of ',sourceLink(destination.kind+(destination.name?' '+destination.name:''),destination.at));
    }
    target.append(line);
   }

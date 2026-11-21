@@ -74,8 +74,24 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
     const u=new URL(await destination.evaluate(a=>a.href));
     assert.equal(u.searchParams.get('route'),'1:'+receiverSlots);
     assert.equal(u.hash,'#expr-'+receiver);
+    if(receiver===1626){
+     const opposite=new URL(await row.getByRole('link',{name:'Open right side'}).evaluate(a=>a.href));
+     assert.equal(opposite.searchParams.get('route'),'1:'+receiverSlots+'.1');
+    }
     await destination.click();
     await page.locator('#pl-expression h3').filter({hasText:' · e'+receiver}).waitFor();
+   }
+   // Both sides share row 1968. Clicking each must retain its distinct source occurrence.
+   const eqProof=aiEdition.declarations.find(r=>r.name==='lean_workbook_20418');
+   const eqData=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+eqProof.indexFile)));
+   const eqRoute=atlas.routes(eqData).route(2002);
+   for(const [side,suffix] of [['Left',[0,1]],['Right',[1]]]){
+    const path=eqRoute.slots.concat(suffix);
+    assert.equal(atlas.walk(eqData,{root:eqRoute.root,slots:path}),1968);
+    await page.goto('http://localhost/projects/proof-atlas/library/?edition='+aiEdition.id+'&proof='+eqProof.name+'&route='+eqRoute.root+':'+eqRoute.slots.join('.')+'#expr-2002');
+    await page.locator('#pl-expression').getByRole('link',{name:new RegExp('^'+side+' side · ')}).click();
+    await page.locator('#pl-expression h3').filter({hasText:' · e1968'}).waitFor();
+    assert.equal(new URL(page.url()).searchParams.get('route'),eqRoute.root+':'+path.join('.'));
    }
    const inputs=aiEdition.declarations.flatMap(record=>{
     const packet=JSON.parse(fs.readFileSync('public/data/proof-atlas/input-roles/'+record.indexSha256+'.json'));
