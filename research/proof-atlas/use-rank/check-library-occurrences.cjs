@@ -99,7 +99,16 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
     await recursor.getByText('Explore proof branches',{exact:true}).click();
     await recursor.getByRole('button',{name:'Show declared parameters'}).click();
     await recursor.getByText('inl · explicit',{exact:true}).click();
-    await recursor.getByText(/^Or.casesOn · signature binder e27/).waitFor();
+    const handler=recursor.getByText(/^Or.casesOn · signature binder e27/).locator('..');
+    await handler.getByText('Earlier arguments in this parameter type',{exact:true}).click();
+    const callAddr=new URL(await recursor.getByRole('link',{name:/Or.casesOn · subtree/}).evaluate(a=>a.href));
+    const call={node:Number(callAddr.hash.slice(6)),route:{root:1,slots:callAddr.searchParams.get('route').slice(2).split('.').map(Number)}};
+    const term=JSON.parse(require('node:zlib').gunzipSync(fs.readFileSync('.'+record.indexFile)));
+    for(const [j,name] of ['a','b','motive'].entries()){
+     const u=new URL(await handler.getByRole('link',{name:name+' · argument '+(j+1),exact:true}).evaluate(a=>a.href));
+     const expected=require('../../../public/js/proof-atlas-application-ports').sourceInput(term,call,j+1);
+     assert.equal(u.searchParams.get('route'),'1:'+expected.route.slots.join('.'));assert.equal(u.hash,'#expr-'+expected.node);
+    }
     await recursor.getByText('Explore proof branches',{exact:true}).click();
     const first=entry.groups[0];
     await roles.getByText(first.label,{exact:true}).waitFor();

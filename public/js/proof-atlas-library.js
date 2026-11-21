@@ -290,12 +290,29 @@
               const f=params[b.slot-1];
               if(!f)return;
               const text=(f.name || '_')+' · '+(f.info==='default'?'explicit':f.info);
+              let evidence=list.children[j];
               if(signature){
                const details=el('details'),domain=signature.graph.children[f.node][0];
                details.append(el('summary',text),el('p',name+' · signature binder e'+f.node+' · domain e'+domain),
                 el('pre',A.termLines(signature.graph,domain).join('\n')),el('p','Signature SHA-256 '+signature.signatureSha256));
-               list.children[j].append(details);
-              }else list.children[j].append(' ',link(text,url(source.record.name,f.node,f.route)));
+               evidence.append(details);evidence=details;
+              }else evidence.append(' ',link(text,url(source.record.name,f.node,f.route)));
+              const refs=roles.domainReferences(signature?signature.graph:source.data,params,b.slot);
+              if(refs.length){
+               const dependencies=el('details'),items=el('ul');
+               dependencies.append(el('summary','Earlier arguments in this parameter type'),items);
+               for(const ref of refs){
+                const earlier=params[ref.slot-1];
+                const slots=part.route.slots.concat(Array(part.call.arity-ref.slot).fill(0),1);
+                const at={root:part.route.root,slots},node=A.walk(owner.data,at);
+                const row=el('li'),label=(earlier.name||'_')+' · argument '+ref.slot;
+                row.append(link(label,url(owner.record.name,node,at)));
+                if(signature)row.append(' · signature reference e'+ref.node+' at '+ref.route.root+':'+ref.route.slots.join('.'));
+                else row.append(' · ',link('Reference in declared type',url(source.record.name,ref.node,ref.route)));
+                items.append(row);
+               }
+               evidence.append(dependencies);
+              }
               shown++;
              });
              status.textContent=shown?(signature?'Parameter details show the recorded imported signature and its domain.':'Parameter links open their binders in the declared type.'):'The declared type exposes no parameter at these positions.';

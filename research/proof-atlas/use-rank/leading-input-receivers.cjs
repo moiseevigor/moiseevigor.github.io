@@ -25,7 +25,7 @@ for(const s of window.PROOF_ATLAS_CORE_SIGNATURES.entries){
 const native=JSON.parse(zlib.gunzipSync(fs.readFileSync('research/proof-atlas/type-notation/native.json.gz')));
 assert.deepEqual(catalog.entries.filter(e=>roles.importedSignature(catalog,'goedel-sample-4331',e.name,catalog.compiler)).map(e=>e.name).sort().join('|'),native.signatures.map(s=>s.name).sort().join('|'));
 const formalCache=new Map(),missingSignatures=new Map();
-const splitStats={groups:0,twoChildren:0,threeChildren:0,nineTenthsInOneChild:0,applicationSplits:0,threeOrMoreOccupiedPorts:0,maxOccupiedPorts:0,occupiedArguments:0,formalSlots:0,formalSplits:0,importedSlots:0,externalConstantArguments:0,otherHeadArguments:0,beyondLiteralPrefix:0};
+const splitStats={groups:0,twoChildren:0,threeChildren:0,nineTenthsInOneChild:0,applicationSplits:0,threeOrMoreOccupiedPorts:0,maxOccupiedPorts:0,occupiedArguments:0,formalSlots:0,dependentSlots:0,parameterEdges:0,formalSplits:0,importedSlots:0,externalConstantArguments:0,otherHeadArguments:0,beyondLiteralPrefix:0};
 function audit(record) {
   const bytes=zlib.gunzipSync(fs.readFileSync('.'+record.indexFile));
   assert.equal(createHash('sha256').update(bytes).digest('hex'),record.indexSha256);
@@ -179,6 +179,18 @@ function audit(record) {
             if(f){
               assert.equal(A.walk(formalData,f.route),f.node);
               assert.equal(formalData.kind[f.node],7);
+              const deps=roles.domainReferences(formalData,params,b.slot);
+              const oracle=require('../../../public/js/proof-atlas-application-ports').dependencies;
+              const domain=formalData.children[f.node][0];
+              assert.deepEqual(deps.map(d=>d.slot),oracle(formalData,domain,b.slot-1));
+              for(const d of deps){
+                const prev=params[d.slot-1];
+                assert.deepEqual(A.binding(formalData,d.route),{node:prev.node,route:prev.route});
+                const actual=sourceInput(data,{node:flat.call.node,route:flat.route},d.slot);
+                assert.equal(A.walk(data,actual.route),actual.node);
+              }
+              if(deps.length)splitStats.dependentSlots++;
+              splitStats.parameterEdges+=deps.length;
               splitStats.formalSlots++;hasFormal=true;
               if(imported){
                 splitStats.importedSlots++;

@@ -155,6 +155,31 @@
   }
   return parameters;
  }
+ // Keep one lexical witness for each earlier parameter mentioned in this domain.
+ function domainReferences(data,parameters,slot){
+  const formal=parameters[slot-1],seen=new Set(),found=new Map();
+  const slots=formal.route.slots.concat(0);
+  function visit(node,depth){
+   if(found.size===slot-1 || data.neededScope[node]<=depth)return;
+   const key=node+':'+depth;
+   if(seen.has(key))return;
+   if(seen.size>=65536)throw RangeError('Formal domain traversal limit');
+   seen.add(key);
+   const kind=data.kind[node];
+   if(kind===0){
+    const input=slot-1-(data.payloads[node].index-depth);
+    if(input>=1 && input<slot && !found.has(input))
+     found.set(input,{slot:input,node,route:{root:formal.route.root,slots:[...slots]}});
+    return;
+   }
+   data.children[node].forEach((child,i)=>{
+    const binds=((kind===6||kind===7)&&i===1)||(kind===8&&i===2);
+    slots.push(i);visit(child,depth+Number(binds));slots.pop();
+   });
+  }
+  visit(data.children[formal.node][0],0);
+  return [...found.values()].sort((a,b)=>a.slot-b.slot);
+ }
  // Names present in the Lean-only 4.33.1 signature export.
  const coreNames=new Set('Eq HEq And Or Iff Not LE.le LT.lt HAdd.hAdd HMul.hMul HSub.hSub HDiv.hDiv HMod.hMod HPow.hPow Sub.sub Neg.neg OfNat.ofNat Nat.cast Int.cast Exists'.split(' '));
  function importedSignature(catalog,edition,name,compiler,core){
@@ -166,6 +191,6 @@
   if(!catalog || (edition!=='published-15' && (edition!=='goedel-sample-4331' || !coreNames.has(name) || compiler!==catalog.compiler)))return null;
   return catalog.entries.find(e=>e.name===name && e.kernelSignature==='PASS') || null;
  }
- const api={addOffset,select,constantArgumentIndex,partition,formalParameters,importedSignature};
+ const api={addOffset,select,constantArgumentIndex,partition,formalParameters,domainReferences,importedSignature};
  if(typeof module!=='undefined'&&module.exports)module.exports=api;else host.ProofAtlasRoleOccurrences=api;
 })(typeof window==='undefined'?globalThis:window);
