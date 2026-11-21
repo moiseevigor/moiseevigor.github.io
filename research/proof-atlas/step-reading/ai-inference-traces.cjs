@@ -7,6 +7,8 @@ const atlas = require('../../../public/js/proof-atlas-library-data');
 const packed = require('../../../public/js/proof-atlas-packed-routes');
 const {spine} = require('../../../public/js/proof-atlas-elimination');
 
+const {measure:countDestinations} = require('./call-destinations.cjs');
+
 async function measure(item) {
   const profile = (await union.open(item)).case;
   const graph = profile.data;
@@ -26,11 +28,13 @@ async function measure(item) {
     stages.set(key, {slots, node:entry.node, binderInfo, premise:construction.premises[1]});
   }
   let maximal = 0, complete = 0, twoPremises = 0, twoExplicit = 0, example;
+  const recordedRows = new Set();
   for (const stage of stages.values()) {
     const route = stage.slots;
     const parent = route.length ? walk(route.slice(0,-1)) : null;
     if (parent !== null && graph.kind[parent] === 5 && route.at(-1) === 0) continue;
     maximal++;
+    recordedRows.add(stage.node);
     const call = spine(graph,stage.node);
     const inputs = [];
     let address = route.slice();
@@ -53,7 +57,21 @@ async function measure(item) {
     if (!example && parent !== null) example = {node:stage.node,route,head:graph.payloads[call.head],premises,
       destination:{node:parent,route:route.slice(0,-1),field:atlas.fields[atlas.kinds[graph.kind[parent]]][route.at(-1)]}};
   }
-  return {declaration:item.record.name,indexSha256:item.record.indexSha256,maximal,complete,twoPremises,twoExplicit,example};
+  const population = countDestinations(graph,graph.roots[1],recordedRows);
+  // Independent bottom-up count: a matching function child is a partial call here.
+  const copies = [];
+  for (let id=0; id<=graph.roots[1]; id++) {
+    let total = recordedRows.has(id) ? 1n : 0n;
+    for (const child of graph.children[id]) total += copies[child];
+    if (graph.kind[id]===5 && recordedRows.has(graph.children[id][0])) total--;
+    copies.push(total);
+  }
+  const matchingRoutes = copies[graph.roots[1]];
+  assert.equal(matchingRoutes,population.copiesOfRecordedRows ?? 0n);
+  assert(BigInt(maximal) <= matchingRoutes);
+  const coverage = {allRoutes:String(population.maximal), allRows:population.rows,
+    recordedRows:recordedRows.size, routesWithRecordedRow:String(matchingRoutes)};
+  return {coverage,declaration:item.record.name,indexSha256:item.record.indexSha256,maximal,complete,twoPremises,twoExplicit,example};
 }
 (async()=>{
   const rows=[];
