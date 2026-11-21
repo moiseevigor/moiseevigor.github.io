@@ -256,6 +256,22 @@ async function main() {
     await positive.locator('ol > li').nth(3).getByRole('button',{name:'Applied function · JacobiCore.K_pos',exact:true}).click();
     const fn=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
     assert.deepEqual(fn.route,{root:1,slots:[1,1,1,0]});
+    const countRoute=[1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,1,1,1,1,0,1,1,1];
+    rewrite.searchParams.set('proof','JacobiFull.roots_ncard');
+    rewrite.searchParams.set('route','1:'+countRoute.join('.'));rewrite.hash='expr-1780';
+    for(const [slot,name,ref,binder] of [[3,'hL',760,2068],[4,'hR',754,2067]]){
+      for(const target of ['Applied function','Binder']){
+        await page.goto(rewrite.href);
+        const list=page.locator('#pl-application-headers details').first();
+        await list.locator('summary').click();
+        await list.locator('ol > li').nth(slot-1).getByRole('button',{name:target+' · '+name,exact:true}).click();
+        const selection=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
+        const isBinder=target==='Binder';
+        assert.equal(selection.selected,isBinder?binder:ref);
+        const slots=isBinder?Array(slot-2).fill(1):countRoute.concat(Array(6-slot).fill(0),1,0);
+        assert.deepEqual(selection.route,{root:1,slots});
+      }
+    }
     assert.deepEqual(errors,[]);
     console.log('Four inspector paths and four folded canvas paths passed at both widths.');
   } finally {await browser.close();}

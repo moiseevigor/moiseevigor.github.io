@@ -960,8 +960,13 @@
   while(depth<32 && current.kind(node)==='app'){
    node=current.children(node)[0];depth++;
   }
-  if(current.kind(node)!=='const')return null;
-  return {node,name:current.payload(node).name,route:{root:arg.route.root,slots:arg.route.slots.concat(Array(depth).fill(0))}};
+  const route={root:arg.route.root,slots:arg.route.slots.concat(Array(depth).fill(0))};
+  if(current.kind(node)==='const')return {node,route,name:current.payload(node).name};
+  if(current.kind(node)!=='bvar')return null;
+  const binder=A.binding(current.data,route);
+  if(!binder)return null;
+  const payload=current.payload(binder.node);
+  return {node,route,name:payload.binderName||payload.declName||'_',binder};
  }
  let windowRoot=null,windowPacket=null,argumentOffset='last';
  function scopedLayout(){
@@ -1040,6 +1045,12 @@
      headButton.type='button';headButton.title=A.path(current.data,producer.route);
      headButton.onclick=()=>selectOccurrence(producer.node,true,true,producer.route);
      row.append(headButton);
+     if(producer.binder){
+      const source=el('button','Binder · '+producer.name);
+      source.type='button';source.title=A.path(current.data,producer.binder.route);
+      source.onclick=()=>selectOccurrence(producer.binder.node,true,true,producer.binder.route);
+      row.append(source);
+     }
     }
     if(n===call && current.kind(a.node)==='bvar'){
      const binder=A.binding(current.data,a.route);
