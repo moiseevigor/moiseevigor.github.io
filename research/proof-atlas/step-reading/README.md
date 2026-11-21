@@ -1036,3 +1036,18 @@ The argument window reports the number of checked proof inputs outside the curre
 Open the focused application's argument list to read the recorded Lean type of each proof input for which the exact argument occurrence has a checked observation. When at least two such statements are available, **Find a checked proposition** filters the list by a substring of the recorded text. The search normalizes whitespace and letter case. Matching rows keep their original argument buttons and occurrence paths. Clearing the field restores every slot, including those with unavailable roles or statements. Search covers the displayed application spine and its observed proof statements.
 
 In `SBracket.mk.noConfusion`, the browser checker compares the 44 displayed statements in slot order against the independently decoded application observations. Searching for `0 < K✝` and selecting the matching positivity statement reaches the original fourth argument in the 59-argument call, without moving the graph window. This check measures exact retrieval of recorded text; it does not evaluate paraphrase retrieval or reader comprehension.
+
+#### Does the written proposition identify the input?
+
+The [text retrieval checker](check-proposition-identities.cjs) queried each recorded proof input with its entire displayed proposition. Search was restricted to the same call, with the reader's case and whitespace normalization. A full statement can also occur inside a longer proposition. In the published Riccati proof, the inequality supplied at argument 4 is part of the proposition equality supplied at argument 3. Both are genuine matches to a substring search and lead to different proof terms.
+
+| Edition | Proof input queries with text | Queries returning multiple slots by substring | Queries returning multiple slots by whole statement |
+|---|---:|---:|---:|
+| Published SE(2) | 126 | 9 | 0 |
+| Working SE(2) | 28 | 1 | 0 |
+| Gödel AI sample | 224 | 24 | 0 |
+| Recursion controls | 16 | 1 | 0 |
+
+Each ambiguous substring query included at least one different compiled argument row. The counts describe slots in calls with complete native role records; the SE(2) editions overlap. Other calls can use the same proposition twice. The reader keeps every matching slot in either mode and opens its original route.
+
+**Whole statement** restricts the filter to normalized equality of the displayed text. The local browser regression repeats the Riccati inequality query, compares the two substring matches with the single whole-statement match, and follows it to the original fourth argument. This measures text retrieval, without checking logical equivalence between different renderings. Reproduce the counts with `node research/proof-atlas/step-reading/check-proposition-identities.cjs`.

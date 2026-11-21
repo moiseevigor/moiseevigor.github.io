@@ -200,6 +200,19 @@ async function main() {
     await positivity.locator('[data-application-argument]').click();
     const picked=await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot());
     assert.deepEqual(picked.route.slots,wideRoute.concat(Array(55).fill(0),1));
+    const rewrite=new URL(wide.href), rewriteRoute=[1,1,1,1,1,1,2,2,2,2,2,2];
+    rewrite.searchParams.set('proof','JacobiData.slope_bound_abs');
+    rewrite.searchParams.set('route','1:'+rewriteRoute.join('.'));
+    await page.goto(rewrite.href);
+    const rewriteList=page.locator('#pl-application-headers details').first();
+    await rewriteList.locator('summary').click();
+    await rewriteList.getByLabel('Find a checked proposition').fill('2 * √(J.z p * (1 - J.z p) * J.Dz p) ≤ |J.T1 p + J.T2 p| / |J.d p * J.s p|');
+    assert.equal(await rewriteList.locator('li:visible').count(),2);
+    await rewriteList.getByLabel('Whole statement').check();
+    const unique=rewriteList.locator('li:visible');
+    assert.equal(await unique.count(),1);
+    await unique.locator('[data-application-argument]').click();
+    assert.deepEqual((await page.evaluate(()=>window.ProofAtlasLibrary.getSnapshot())).route,{root:1,slots:rewriteRoute.concat(1)});
     assert.deepEqual(errors,[]);
     console.log('Four inspector paths and four folded canvas paths passed at both widths.');
   } finally {await browser.close();}

@@ -1038,14 +1038,20 @@
     const label=el('label','Find a checked proposition '),input=el('input'),status=el('span');
     input.type='search';status.setAttribute('role','status');
     const normalize=text=>text.normalize('NFC').replace(/\s+/g,' ').trim().toLowerCase();
-    input.oninput=()=>{
+    const whole=el('input'),wholeLabel=el('label');
+    whole.type='checkbox';wholeLabel.append(whole,' Whole statement');
+    function filterStatements(){
      const query=normalize(input.value);
      for(const row of list.children)row.hidden=!!query;
      let matches=0;
-     for(const entry of statements)if(normalize(entry.text).includes(query)){entry.row.hidden=false;matches++;}
+     for(const entry of statements){
+      const text=normalize(entry.text);
+      if(whole.checked?text===query:text.includes(query)){entry.row.hidden=false;matches++;}
+     }
      status.textContent=query?matches+' of '+statements.length+' checked propositions':'';
-    };
-    label.append(input);details.append(label,status);
+    }
+    input.oninput=filterStatements;whole.onchange=filterStatements;
+    label.append(input);details.append(label,wholeLabel,status);
    }
    details.append(list);$('pl-application-headers').append(details);
   }

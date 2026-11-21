@@ -97,7 +97,7 @@ async function measure(item, uncovered, onComplete) {
     }
     if (inputs.length !== call.args.length) continue;
     complete++;
-    onComplete?.(inputs,call.args.length);
+    onComplete?.(inputs,call.args.length,call.args);
     if(new Set(call.args).size < call.args.length) recordedRepeated++;
     const repeatedProofs=new Set(), repeatedExplicitProofs=new Set();
     for(const [i,first] of inputs.entries()){
