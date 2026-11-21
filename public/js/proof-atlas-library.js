@@ -969,12 +969,28 @@
    const earlier=$('pl-earlier-arguments'),later=$('pl-later-arguments');
    const jump=$('pl-jump-window'),choice=$('pl-window-choice');
    jump.hidden=ports.length<=2*shown;
+   const provider=chooseTyping(call.route);
+   const roles=ports.map(port=>provider?.argument?.(call.route,port.route)?.role);
+   const outside=roles.filter((role,i)=>i<offset || i>=offset+shown);
+   const checked=outside.filter(role=>role==='proof').length;
+   const missing=outside.filter(role=>!role).length;
+   $('pl-window-outside').textContent=missing===outside.length?'Other slots: roles unavailable':
+    checked+' checked proof '+(checked===1?'input':'inputs')+' outside view'+(missing?' · '+missing+' unclassified':'');
    if(!jump.hidden){
     const starts=new Set([offset]);
     for(let i=0;i<ports.length;i+=shown)starts.add(Math.min(i,ports.length-shown));
     choice.replaceChildren();
     for(const i of [...starts].sort((a,b)=>a-b)){
-     const option=el('option',(i+1)+'–'+(i+shown));
+     const range=roles.slice(i,i+shown);
+     const proofs=range.filter(role=>role==='proof').length;
+     const unknown=range.filter(role=>!role).length;
+     let label=(i+1)+'–'+(i+shown);
+     if(unknown===shown)label+=' · roles unavailable';
+     else{
+      label+=' · '+proofs+' checked proof '+(proofs===1?'input':'inputs');
+      if(unknown)label+=' · '+unknown+' unclassified';
+     }
+     const option=el('option',label);
      option.value=String(i);choice.append(option);
     }
     choice.value=String(offset);

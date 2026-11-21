@@ -140,6 +140,7 @@ async function main() {
       await page.goto(example.href);
       const range=page.locator('#pl-window-range');
       await page.getByText('Arguments 7–11 of 11',{exact:true}).waitFor();
+      assert.equal(await page.locator('#pl-window-outside').innerText(),'Other slots: roles unavailable');
       if (slot<=6) await page.locator('#pl-earlier-arguments').click();
       if (slot===1) await page.locator('#pl-earlier-arguments').click();
       if (slot===11) {
@@ -162,8 +163,26 @@ async function main() {
     wide.hash='';
     await page.goto(wide.href);
     await page.getByText('Arguments 55–59 of 59',{exact:true}).waitFor();
+    const union=require('../recorded-union.cjs');
+    const {measure}=require('./ai-inference-traces.cjs');
+    const wideItem=union.inventory().find(i=>i.edition==='published-15' && i.record.name==='SBracket.mk.inj');
+    let proofSlots;
+    await measure(wideItem,null,(inputs,n)=>{
+      const last=inputs.find(input=>input.position===n);
+      if(n===59 && JSON.stringify(last.route)===JSON.stringify(wideRoute.concat(1)))
+        proofSlots=inputs.filter(input=>input.role==='proof').map(input=>input.position);
+    });
+    assert.equal(proofSlots.length,44);
+    const choices=await page.locator('#pl-window-choice option').evaluateAll(nodes=>nodes.map(n=>[Number(n.value),n.textContent]));
+    assert.equal(choices.length,12);
+    for(const [offset,label] of choices){
+      const count=proofSlots.filter(i=>i>offset && i<=offset+5).length;
+      assert.equal(label,(offset+1)+'–'+(offset+5)+' · '+count+' checked proof '+(count===1?'input':'inputs'));
+    }
+    assert.equal(await page.locator('#pl-window-outside').innerText(),'39 checked proof inputs outside view');
     await page.getByLabel('Jump to slots').selectOption('0');
     await page.getByText('Arguments 1–5 of 59',{exact:true}).waitFor();
+    assert.equal(await page.locator('#pl-window-outside').innerText(),'43 checked proof inputs outside view');
     await clickDrawnOccurrence(page,wideRoute.concat(Array(55).fill(0),1));
     assert.deepEqual(errors,[]);
     console.log('Four inspector paths and four folded canvas paths passed at both widths.');
