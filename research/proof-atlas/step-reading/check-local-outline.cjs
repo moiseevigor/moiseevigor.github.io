@@ -7,7 +7,7 @@ global.window={};require('../../../public/data/proof-atlas/library-manifest');re
 const ai=window.PROOF_ATLAS_AI_SAMPLE.edition;
 for(const edition of [...window.PROOF_ATLAS_LIBRARY.editions,ai]){
  const rows=edition.declarations.filter(d=>edition===ai?d.kind==='theorem'&&d.bodyAvailable:d.name==='JacobiData.slope_bound_abs');
- let matched=0,edges=0,limited=0,unknown=0;
+ let matched=0,edges=0,limited=0,unknown=0,pairs=0;
  for(const d of rows){
   const raw=z.gunzipSync(fs.readFileSync('.'+d.indexFile));
   assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),d.indexSha256);
@@ -21,14 +21,14 @@ for(const edition of [...window.PROOF_ATLAS_LIBRARY.editions,ai]){
     assert.equal(A.walk(g,edge.use.route),edge.use.node);
     assert.deepEqual(A.binding(g,edge.use.route),edge.source.binder);
    }
-   if(edition!==ai){
-    for(const step of m.steps.slice(0,i)){
+   for(const step of m.steps.slice(0,i)){
+     pairs++;
      const all=ranked(g,step.binder.route),prefix=here.route.slots.join('');let count=0;
      for(let k=0n;k<all.total;k++)if(all.select(k).route.slots.join('').startsWith(prefix))count++;
-     assert.equal(Number(found.find(e=>e.source===step)?.count||0),count);
-    }
+     const edge=found.find(e=>e.source===step);
+     assert(!edge?.unavailable);assert.equal(Number(edge?.count||0),count);
    }
   }
  }
- console.log(edition.id,{declarations:rows.length,matched,edges,limited,unknown});
+ console.log(edition.id,{declarations:rows.length,matched,pairs,edges,limited,unknown});
 }

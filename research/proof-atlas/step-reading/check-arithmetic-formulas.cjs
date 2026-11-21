@@ -5,7 +5,7 @@ const {spine}=require('../../../public/js/proof-atlas-elimination');
 const {formula,statement,caption,hypothesisInputs,resultFlow}=require('../../../public/js/proof-atlas-arithmetic');
 const ports=require('./distinct-call-ports.cjs');
 global.window={};require('../../../public/data/proof-atlas/goedel-sample-manifest');
-const arities={'HPow.hPow':6,'HMul.hMul':6,'HSub.hSub':6,'HAdd.hAdd':6,'HDiv.hDiv':6,Eq:3,Ne:3,'LE.le':4,'LT.lt':4,'Real.sqrt':1,abs:4},counts={},examples={};
+const arities={'HPow.hPow':6,'HMul.hMul':6,'HSub.hSub':6,'HAdd.hAdd':6,'HDiv.hDiv':6,Or:2,And:2,Eq:3,Ne:3,'LE.le':4,'LT.lt':4,'Real.sqrt':1,abs:4},counts={},examples={};
   function check(g,t){
    assert.equal(A.walk(g,t.site.route),t.site.node);
    if(t.variables){

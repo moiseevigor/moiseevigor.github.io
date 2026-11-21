@@ -7,6 +7,8 @@
  const operators=new Map([
   ...[['HPow.hPow','^'],['HAdd.hAdd','+'],['HSub.hSub','−'],['HMul.hMul','×'],['HDiv.hDiv','/']]
    .map(([name,symbol])=>[name,{symbol,parameters:binaryTypes}]),
+  ['Or',{symbol:'∨',parameters:[],logical:true}],
+  ['And',{symbol:'∧',parameters:[],logical:true}],
   ['Eq',{symbol:'=',parameters:['type'],relation:true}],
   ['Ne',{symbol:'≠',parameters:['type'],relation:true}],
   ['LE.le',{symbol:'≤',parameters:['type','order instance'],relation:true}],
@@ -29,7 +31,7 @@
    const op=operators.get(name);
    const recognized=op && args.length===op.parameters.length+(op.unary?1:2);
    if(depth<maxDepth && recognized){
-    return {site,name,head,symbol:op.symbol,relation:op.relation,parameterNames:op.parameters,
+    return {site,name,head,symbol:op.symbol,relation:op.relation,logical:op.logical,parameterNames:op.parameters,
      parameters:args.slice(0,op.parameters.length),left:read(args[op.parameters.length],depth+1),
      right:op.unary?null:read(args.at(-1),depth+1)};
    }
@@ -188,7 +190,7 @@
    container.append(panel);
   }
   const {focus,binders}=statement(data,at);
-  const tree=formula(data,focus);if(!tree || (binders.length && !tree.relation))return;
+  const tree=formula(data,focus);if(!tree || (binders.length && !tree.relation && !tree.logical))return;
   const panel=el('section'),line=el('p'),detail=el('details'),list=el('ul');
   panel.dataset.arithmeticFormula='';line.className='pl-arithmetic-expression';
   let truncated=false;
@@ -212,7 +214,7 @@
    return span;
   }
   line.append(draw(tree,0));detail.append(el('summary','Types and instances'),list);
-  panel.append(el('h4',binders.length?'Conclusion':tree.relation?'Relation':'Arithmetic expression'));
+  panel.append(el('h4',binders.length?'Conclusion':tree.relation?'Relation':tree.logical?'Proposition':'Arithmetic expression'));
   if(binders.length){
    panel.append(link('Open conclusion',focus));
    const context=el('details'),rows=el('ol');

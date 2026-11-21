@@ -23,7 +23,7 @@
   const target=outline.steps[i]?.value||outline.end,edges=[];
   for(let j=0;j<i;j++){
    const source=outline.steps[j],r=refs.countReferences(data,target.node,i-1-j,
-    {maxStates:8192,maxWork:16384,firstIfPresent:true,useSupport:false});
+    {maxStates:8192,maxWork:16384,firstIfPresent:true,useSupport:true});
    if(r.status!=='counted'){edges.push({source,unavailable:true});continue;}
    if(!r.witness)continue;
    const use={node:r.witness.node,route:{root:1,slots:target.route.slots.concat(r.witness.slots)}};
