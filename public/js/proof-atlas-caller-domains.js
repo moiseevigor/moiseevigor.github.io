@@ -12,7 +12,9 @@
   const index=host.PROOF_ATLAS_TRANSPORT_DOMAINS;
   const available=index?.indexSha256===record.indexSha256?packets.concat(index.records):packets;
   const cases=(host.PROOF_ATLAS_TRANSPORT_CASES||[]).filter(c=>c.indexSha256===record.indexSha256);
-  return available.concat(cases).find(p=>p.node===call.node && p.path.split('').join('.')===call.route.slots.join('.'));
+  const leaves=host.PROOF_ATLAS_TRANSPORT_LEAVES;
+  const endings=leaves?.indexSha256===record.indexSha256?leaves.records:[];
+  return available.concat(cases,endings).find(p=>p.node===call.node && p.path.split('').join('.')===call.route.slots.join('.'));
  }
  async function load(record,call){
   const packet=packetFor(record,call);
@@ -67,6 +69,26 @@
     container.append(box);
    }
   }
+  function terminalCases(){
+   const evidence=host.PROOF_ATLAS_TRANSPORT_LEAVES;
+   if(evidence?.indexSha256!==record.indexSha256 || call.route.root!==1 || call.route.slots.length)return;
+   const box=el('details'),table=el('table'),head=table.createTHead().insertRow(),body=table.createTBody();
+   box.append(el('summary','How the eight cases close'));
+   for(const title of ['(a, b, c)','Closing rule','Premise used for contradiction']){
+    const th=el('th',title);th.scope='col';head.append(th);
+   }
+   for(const leaf of evidence.leaves){
+    const row=body.insertRow(),th=el('th','('+leaf.triple.map(x=>x?'½':'0').join(', ')+')');
+    th.scope='row';row.append(th);
+    row.insertCell().append(addressLink(leaf.rule,leaf.node,leaf.closing));
+    const reason=row.insertCell();
+    if(leaf.cast){
+     reason.append(addressLink(leaf.equation,leaf.castNode,leaf.cast));
+    }else reason.textContent='—';
+   }
+   box.append(table);container.append(box);
+  }
+  terminalCases();
   caseEvidence();
   function mountOutline(target){
     const index=host.PROOF_ATLAS_TRANSPORT_DOMAINS;

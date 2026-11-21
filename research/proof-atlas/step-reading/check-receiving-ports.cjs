@@ -74,6 +74,12 @@ async function checkReturnedFunction(page){
   const query=new URLSearchParams({edition:'goedel-sample-4331',proof:'lean_workbook_20418',route:'1:1.1.1'});
   const rootQuery=new URLSearchParams(query);rootQuery.set('route','1:');
   await page.goto(origin+'/projects/proof-atlas/library/?'+rootQuery+'#expr-86586');
+  const endings=page.locator('#pl-expression details').filter({has:page.getByText('How the eight cases close',{exact:true})}).first();
+  await endings.locator('summary').click();
+  assert.equal(await endings.locator('tbody tr').count(),8);
+  assert.equal(await endings.getByRole('link',{name:'False.elim',exact:true}).count(),6);
+  assert.equal(await endings.getByRole('link',{name:'of_eq_true',exact:true}).count(),2);
+  assert.equal(await endings.getByRole('link').count(),14);
   const facts=page.locator('#pl-expression details').filter({has:page.getByText('Disjunctions used in the proof',{exact:true})}).first();
   await facts.locator('summary').click();
   const factRows=facts.locator('li');
