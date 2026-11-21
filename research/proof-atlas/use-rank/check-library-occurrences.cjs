@@ -63,6 +63,20 @@ const html=fs.readFileSync('projects/proof-atlas/library/index.html','utf8').rep
     require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/'+manifest+'.js','utf8'),{window});
    require('node:vm').runInNewContext(fs.readFileSync('public/data/proof-atlas/goedel-sample-manifest.js','utf8'),{window});
    const aiEdition=window.PROOF_ATLAS_AI_SAMPLE.edition;
+   // One shared variable row occurs in an equality operand; another returns a let body.
+   for(const [proof,slots,node,description,receiver,receiverSlots] of [
+    ['lean_workbook_plus_62755','1.1.2.2.0.0.0.0.1.1.0.0.1',104,'Left side of equality',1626,'1.1.2.2.0.0.0.0.1.1.0'],
+    ['lean_workbook_plus_54159','1.1.1.1.2',7,'body of',6474,'1.1.1.1']
+   ]){
+    await page.goto('http://localhost/projects/proof-atlas/library/?edition='+aiEdition.id+'&proof='+proof+'&route=1:'+slots+'#expr-'+node);
+    const row=page.locator('#pl-expression p').filter({hasText:'Use of '}).filter({hasText:description});
+    const destination=row.getByRole('link').nth(1);
+    const u=new URL(await destination.evaluate(a=>a.href));
+    assert.equal(u.searchParams.get('route'),'1:'+receiverSlots);
+    assert.equal(u.hash,'#expr-'+receiver);
+    await destination.click();
+    await page.locator('#pl-expression h3').filter({hasText:' · e'+receiver}).waitFor();
+   }
    const inputs=aiEdition.declarations.flatMap(record=>{
     const packet=JSON.parse(fs.readFileSync('public/data/proof-atlas/input-roles/'+record.indexSha256+'.json'));
     return packet.entries.map(entry=>({entry,record}));

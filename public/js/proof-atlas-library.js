@@ -181,6 +181,23 @@
   const p=current.payload(i),pre=el('pre',JSON.stringify(p,null,2));const metadata=el('details'),summary=el('summary','Constructor fields');metadata.append(summary,pre);target.append(metadata);
   const actions=el('div',undefined,'pl-actions');cs.forEach((c,j)=>{const b=el('button',A.fields[current.kind(i)][j]+' · #'+c+' · '+current.kind(c));b.type='button';b.onclick=()=>selectOccurrence(c,true,true,{root:selectedRoute.root,slots:[...selectedRoute.slots,j]});actions.append(b);});
   if(binder!==undefined){const b=el('button','Enclosing binder #'+binder+' · '+label(binder));b.type='button';b.onclick=()=>selectOccurrence(binder,true,true,binding.route);actions.append(b);}
+  if(binding && window.ProofAtlasOmittedReferences){
+   const destination=window.ProofAtlasOmittedReferences.resultDestination(owner.data,{node:i,route:nextRoute});
+   const line=el('p'),jump=(label,at)=>link(label,url(owner.record.name,at.node,at.route));
+   line.append('Use of ',jump(owner.payload(binder).binderName??owner.payload(binder).declName??'bound variable',binding),' · ');
+   if(destination.kind==='argument'){
+    const c=destination.call;
+    const equality=c.arity===3 && owner.kind(c.head.node)==='const' && c.label==='Eq';
+    const role=equality && c.slot===2?'Left side of equality':equality && c.slot===3?'Right side of equality':
+     c.slot===0?'Function applied to '+c.arity+' arguments':'Argument '+c.slot+' of '+c.arity;
+    line.append(role+' · ',jump(c.label,c.call));
+   }else if(destination.kind==='root'){
+    line.append('Expression root');
+   }else{
+    line.append(destination.field+' of ',jump(destination.kind+(destination.name?' '+destination.name:''),destination.at));
+   }
+   target.append(line);
+  }
   if(current.kind(i)==='const'){const local=edition.declarations.find(d=>d.name===p.name);target.append(local?link('Open the referenced '+local.kind+' and its entire proof ↗',url(local.name)):el('p','External Lean/Mathlib reference; its body is outside the project corpus.'));}
   if((edition.id===window.PROOF_ATLAS_AI_SAMPLE?.edition.id || edition.id==='published-15') && owner.record.kind==='theorem' && current.kind(i)==='lam' && nextRoute.root===1 &&
      nextRoute.slots.every(slot=>slot===1)){
