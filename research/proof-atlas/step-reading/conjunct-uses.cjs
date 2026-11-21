@@ -12,6 +12,7 @@ const {countReferences}=require('../../../public/js/proof-atlas-recursive-inputs
 const cases={leftOnly:0,rightOnly:0,both:0,neither:0,unavailable:0};
 const edition=[ai,...window.PROOF_ATLAS_LIBRARY.editions].find(e=>e.id===(process.argv[2]||ai.id));
 const nested=process.argv.includes('--all-lambdas');
+const occurrences=process.argv.includes('--occurrences');
 const follow=process.argv.includes('--follow-helpers');
 assert(!follow||nested,'Following helper bodies requires --all-lambdas');
 assert(edition,'Unknown edition');
@@ -78,7 +79,11 @@ for(const d of edition.declarations.filter(x=>x.kind==='theorem'&&x.bodyAvailabl
      A.binding(g,c.head.route).route.slots:c.head.route.slots):null;
     const key=JSON.stringify([steps,identity,receiver]);
     if(!groups.has(key))groups.set(key,{steps,receiver,clause:addr(clause,clauseSlots),target,slot:c?.slot,use:addr(at.node,at.route.slots),count:0});
-    if(follow && !steps && c?.slot>0 && g.kind[c.head.node]===4){
+    const group=groups.get(key);
+    if(occurrences && group.count){
+     (group.additional??=[]).push({use:addr(at.node,at.route.slots),target});
+    }
+    if(follow && !group.count && !steps && c?.slot>0 && g.kind[c.head.node]===4){
      Object.assign(groups.get(key),{callee:g.payloads[c.head.node].name,arity:c.arity,head:addr(c.head.node,c.head.route.slots)});
     }
     groups.get(key).count++;

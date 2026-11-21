@@ -85,7 +85,8 @@
    const path=call.route.slots.join('');
    for(const fork of host.PROOF_ATLAS_CLAUSE_FORKS||[]){
     if(fork.edition!==call.edition || fork.digest!==record.indexSha256 || fork.declaration!==record.name)continue;
-    const selected=fork.groups.find(g=>g.use.path===path || g.target.path===path || g.clause.path===path);
+    const matches=occurrence=>occurrence.use.path===path || occurrence.target.path===path;
+    const selected=fork.groups.some(g=>g.clause.path===path || matches(g) || g.additional?.some(matches));
     const domain=fork.binder.path+'0';
     const clausePath=steps=>domain+Array.from(steps,side=>side==='L'?'01':'1').join('');
     const prefixes=new Set();
@@ -99,9 +100,24 @@
       if(g.clause.path!==clausePath(steps) || A.walk(data,{root:1,slots:Array.from(g.clause.path,Number)})!==g.clause.node)
        throw Error('Clause fork domain mismatch');
       const item=el('li');
-      item.append(addressLink(steps?'Projection':'Whole hypothesis',g.use.node,g.use.path),' → ',
-       addressLink(g.receiver,g.target.node,g.target.path));
-      if(g.count>1)item.append(' · '+g.count+' uses (first shown)');
+      const edge=el('span');
+      function drawEdge(occurrence){
+       const origin=addressLink(steps?'Projection':'Whole hypothesis',occurrence.use.node,occurrence.use.path);
+       const receiver=addressLink(g.receiver,occurrence.target.node,occurrence.target.path);
+       if(path===occurrence.use.path)origin.setAttribute('aria-current','location');
+       if(path===occurrence.target.path)receiver.setAttribute('aria-current','location');
+       edge.replaceChildren(origin,' → ',receiver);
+      }
+      item.append(edge);
+      if(g.additional?.length){
+       const choices=[g,...g.additional],select=el('select'),label=el('label',' Use ');
+       select.setAttribute('aria-label',fork.name+' · '+(steps||'whole hypothesis')+' · '+g.receiver+' · use number');
+       choices.forEach((_,i)=>select.append(el('option',String(i+1))));
+       select.selectedIndex=Math.max(0,choices.findIndex(matches));
+       select.onchange=()=>drawEdge(choices[select.selectedIndex]);
+       label.append(select,' of '+choices.length);item.append(label);
+       drawEdge(choices[select.selectedIndex]);
+      }else drawEdge(g);
       parent.append(item);
      }
      for(const side of ['L','R']){
