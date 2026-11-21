@@ -63,6 +63,7 @@ function contraryClosure(graph,route,node) {
   }
   return {basis:'compiled structure',lambda,close,operand,evidence,
     transportTarget:[rewrite.after.left.site,rewrite.after.right.site].map(s=>({...s,numeral:numeral(s)})),
+    meetings:arithmetic.contraryJoins(references.uses),
     uses:references.total??null,witnesses:references.uses.map(trace),
     limited:references.limited};
 }
@@ -130,4 +131,5 @@ async function main() {
   if (!source) throw Error('No recorded observation at starting route');
   console.log(JSON.stringify({edition,name,indexSha256:item.record.indexSha256,outline:visit(start,source.node,0)},null,2));
 }
-main().catch(error=>{console.error(error);process.exitCode=1;});
+module.exports={contraryClosure};
+if (require.main===module) main().catch(error=>{console.error(error);process.exitCode=1;});
