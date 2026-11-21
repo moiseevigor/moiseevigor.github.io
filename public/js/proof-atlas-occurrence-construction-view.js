@@ -49,9 +49,19 @@
    if(p.typeComponents){const d=el('details'),a=el('a','Compiled native record ↓'),pre=el('pre',JSON.stringify({context:p.contextExtension,conversionChecks:p.checks,typeExpressions:p.typeComponents},null,2),'poc-stage-types');pre.tabIndex=0;a.href=p.evidenceFile;d.append(el('summary','Native rule record'),pre,a);card.append(d);}
    if(p.rule==='Pi-introduction')card.append(el('p','Domain in Γ'+p.contextLength+'; body in Γ'+(p.contextLength+1)+'.','poc-context'));
    if(p.recording?.stage)card.append(el('p','Recorded application stage '+p.recording.stage,'poc-context'));
-   if(p.members&&p.kind==='app'){card.dataset.applicationGroup=p.id;card.append(el('p',p.headIsApplication?'Partial spine: argument slots are relative to this retained suffix.':'Complete source spine: argument slots follow call order.','poc-context'));}
+   let earlierArguments=0;
+   if(p.members&&p.kind==='app'){
+    card.dataset.applicationGroup=p.id;
+    // The innermost retained stage applies the earlier function to its next input.
+    // Count that function's supplied arguments in the original compiled expression.
+    let prefix=data.children[p.members[0].node][0];
+    while(data.kind[prefix]===5){earlierArguments++;prefix=data.children[prefix][0];}
+    const last=earlierArguments+p.members.length;
+    const context=earlierArguments?'Showing arguments '+(earlierArguments+1)+'–'+last+' of '+last+'.':'All '+last+' compiled argument'+(last===1?'':'s')+'.';
+    card.append(el('p',context,'poc-context'));
+   }
    if(!p.rule)card.append(el('p',p.expanded+' source occurrence'+(p.expanded==='1'?'':'s')+' inside this boundary.','poc-context'));
-   const ports=new Map();for(const edge of scene.edges.filter(e=>e.from===p.id)){const child=points.find(p=>p.id===edge.to),field=edge.field==='head'?(p.headIsApplication?'Earlier application':'Head'):/^arg\d+$/.test(edge.field)?(p.headIsApplication?'Trailing argument ':'Argument ')+edge.field.slice(3):edge.field,b=button(field+' · '+child.role+' · Γ'+child.contextLength,()=>pick(child));b.className='pow-port';b.dataset.constructionField=edge.field;card.append(b);ports.set(edge.field,b);}
+   const ports=new Map();for(const edge of scene.edges.filter(e=>e.from===p.id)){const child=points.find(p=>p.id===edge.to),field=edge.field==='head'?(p.headIsApplication?'Earlier application':'Head'):/^arg\d+$/.test(edge.field)?'Argument '+(earlierArguments+Number(edge.field.slice(3))):edge.field,b=button(field+' · '+child.role+' · Γ'+child.contextLength,()=>pick(child));b.className='pow-port';b.dataset.constructionField=edge.field;card.append(b);ports.set(edge.field,b);}
    if(p.typeReference){
     const b=button('Recorded type · Γ'+p.contextLength,async()=>{const epoch=++action;b.disabled=true;try{callbacks.onTypeStart?.();const type=await model.typeFor(scene,p.id);if(!disposed&&epoch===action){pick(p,false);callbacks.onType(model.routeFor(scene,p.id),type);}}catch(error){status.textContent=error.message;}finally{b.disabled=false;}});b.dataset.constructionType=p.id;card.append(b);
    }
@@ -59,7 +69,7 @@
    if(p.members&&p.kind==='app'){
     const details=el('details'),content=el('ol');details.dataset.constructionStages=p.id;details.append(el('summary','Retained stages · '+p.members.length),content);let populated=false;
     details.ontoggle=()=>{if(populated||!details.open)return;populated=true;for(const [i,m]of p.members.entries()){
-     const native=model.stageFor(scene,p.id,m.id),item=el('li'),b=button((p.headIsApplication?'Trailing stage ':'Stage ')+(i+1)+' · e'+m.node+' · '+m.role,()=>pickMember(p,m));b.dataset.constructionMember=p.id+':'+m.id;b.setAttribute('aria-pressed','false');item.append(b,el('p','Γ'+native.contextLength+' · '+({default:'explicit',implicit:'implicit',strictImplicit:'strict implicit',instImplicit:'instance implicit'}[native.binderInfo]||native.binderInfo)+' binder · function '+native.roles.function+' / argument '+native.roles.argument+' / result '+native.roles.result,'poc-context'));
+     const native=model.stageFor(scene,p.id,m.id),item=el('li'),b=button('Stage '+(earlierArguments+i+1)+' · e'+m.node+' · '+m.role,()=>pickMember(p,m));b.dataset.constructionMember=p.id+':'+m.id;b.setAttribute('aria-pressed','false');item.append(b,el('p','Γ'+native.contextLength+' · '+({default:'explicit',implicit:'implicit',strictImplicit:'strict implicit',instImplicit:'instance implicit'}[native.binderInfo]||native.binderInfo)+' binder · function '+native.roles.function+' / argument '+native.roles.argument+' / result '+native.roles.result,'poc-context'));
      const text=Object.entries(native.texts).filter(([,s])=>s).map(([label,s])=>label+': '+(s.length<=1600?s:s.slice(0,1600)+'… [text clipped; exact type graph available]')).join('\n');if(text){const pre=el('pre',text,'poc-stage-types');pre.tabIndex=0;item.append(pre);}
      for(const [field,label]of [['fn','Before type'],['arg','Argument type'],['conclusion','After type']]){const typeButton=button(label,()=>memberType(p,m,field,typeButton));typeButton.dataset.constructionMemberType=p.id+':'+m.id+':'+field;item.append(typeButton);}
      item.append(button('Focus source stage',()=>callbacks.onSource(model.routeFor(scene,p.id,m.id))));content.append(item);

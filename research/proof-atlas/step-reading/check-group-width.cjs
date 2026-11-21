@@ -22,7 +22,7 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
       const page = await browser.newPage({viewport:{width,height:900}});
       await page.route('http://localhost/**',route=>{
         const pathname = new URL(route.request().url()).pathname;
-        if (pathname === '/projects/proof-atlas/library/') return route.fulfill({contentType:'text/html',body:html});
+        if (pathname === '/projects/proof-atlas/library/') return route.fulfill({contentType:'text/html; charset=utf-8',body:html});
         return pathname.startsWith('/public/') ? route.fulfill({path:path.resolve('.'+pathname)}) : route.fulfill({status:404,body:''});
       });
       await page.goto(url);
@@ -39,8 +39,13 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
       assert.match(await ports.first().innerText(),/Earlier application/);
       await checkRoute(0,packed.append(root,[0,0,0]));
       for (const [i,input] of call.inputs.slice(-3).entries()) {
+        assert.match(await ports.nth(i+1).innerText(),new RegExp("^Argument "+input.slot+" "));
         await checkRoute(i+1,packed.encode(input.route.root,input.route.slots));
       }
+      const stages = group.locator('details[data-construction-stages]');
+      await stages.locator('summary').click();
+      await stages.locator('[data-construction-member]').first().waitFor();
+      assert.deepEqual((await stages.locator('[data-construction-member]').allTextContents()).map(s=>s.split(' · ')[0]),['Stage 2','Stage 3','Stage 4']);
       const selected = () => page.waitForFunction(expected=>{
         const s = window.ProofAtlasOccurrenceView.getSnapshot();
         return s.node === expected.node && s.route.root === expected.route.root &&
@@ -53,6 +58,7 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
       assert.equal(new URL(page.url()).searchParams.get('arguments'),'all');
       await checkRoute(0,packed.append(root,[0,0,0,0]));
       for (const [i,input] of call.inputs.entries()) {
+        assert.match(await ports.nth(i+1).innerText(),new RegExp("^Argument "+input.slot+" "));
         await checkRoute(i+1,packed.encode(input.route.root,input.route.slots));
       }
       await selected();
@@ -60,6 +66,13 @@ const html = fs.readFileSync('projects/proof-atlas/library/index.html','utf8').r
       assert.equal(await ports.count(),4);
       await selected();
       assert.equal(new URL(page.url()).searchParams.has('arguments'),false);
+      await toggle.check();
+      await page.getByLabel('Diagram levels',{exact:true}).selectOption('2');
+      await group.getByText('Showing arguments 2–4 of 4.',{exact:true}).waitFor();
+      for (const [i,input] of call.inputs.slice(-3).entries()) {
+        assert.match(await ports.nth(i+1).innerText(),new RegExp("^Argument "+input.slot+" "));
+        await checkRoute(i+1,packed.encode(input.route.root,input.route.slots));
+      }
       await page.close();
     }
     console.log('Verified compact/full Riccati argument routes at 360 and 1280 pixels.');
