@@ -371,6 +371,13 @@
  }
  function mount(container,data,at,link){
   const el=(tag,text)=>{const e=document.createElement(tag);if(text)e.textContent=text;return e;};
+  function premiseLink(label,site){
+   const binding=boundPremise(data,site);
+   if(!binding)return link(label,site);
+   const a=link(label+' ('+binding.name+', binder e'+binding.binder.node+')',site);
+   a.dataset.premiseBinder=String(binding.binder.node);
+   return a;
+  }
   function operandChange(t){
    const c=t.change,p=el('p');p.dataset.rewriteSide=c.side;
    const label=(tree,site)=>tree.site.node===site.node?caption(tree):caption(formula(data,site,3,true));
@@ -388,7 +395,7 @@
    if(logical.conjunction){
     panel.append(el('h4',logical.output?'Take the right conjunct':'Take the left conjunct'));
     line.append(expression(p),' ∧ ',expression(q),' ⇒ ',expression(logical.propositions[logical.output]));
-    evidence.append(link('Proof of the conjunction',logical.proofs[0]));
+    evidence.append(premiseLink('Proof of the conjunction',logical.proofs[0]));
    }else if(step){
     panel.dataset.zeroDifference='';
     panel.append(el('h4','Equal terms have zero difference'));
@@ -401,7 +408,7 @@
    }else{
     panel.append(el('h4',logical.output?'Use the forward implication':'Use the reverse implication'));
     line.append(expression(logical.propositions[1-logical.output]),' ⇒ ',expression(logical.propositions[logical.output]));
-    evidence.append(link('Proof of the equivalence',logical.proofs[0]),' · ',link('Proof of the premise',logical.proofs[1]));
+    evidence.append(premiseLink('Proof of the equivalence',logical.proofs[0]),' · ',premiseLink('Proof of the premise',logical.proofs[1]));
    }
    panel.append(line,evidence);container.append(panel);
   }
@@ -439,12 +446,12 @@
     const label=cert?inference.premises[i]+' ('+cert.values.map(v=>v.text).join(' < ')+')':inference.premises[i];
     if(i===inference.extra){
      fold=el('details');fold.dataset.extraPremise='';
-     fold.append(el('summary','Additional supplied premise'),link(label,proof));
+     fold.append(el('summary','Additional supplied premise'),premiseLink(label,proof));
      if(inference.relation)fold.append(' · ',link('Relation R',inference.relation));
      return;
     }
     if(shown++)inputs.append(' and ');
-    inputs.append(link(label,proof));
+    inputs.append(premiseLink(label,proof));
    });
    inputs.append((shown?' ⇒ ':'')+inference.conclusion);
    for(const [i,site] of inference.terms.entries()){
