@@ -228,6 +228,9 @@
  };
  const signRules=new Map([
   ['Mathlib.Tactic.Linarith.zero_lt_one',{arity:4,terms:[0],labels:['Ordered type'],premises:[],conclusion:'0 < 1'}],
+  ['Mathlib.Tactic.RingNF.add_assoc_rev',{arity:5,terms:[2,3,4],premises:[],conclusion:'a + (b + c) = (a + b) + c'}],
+  ['Mathlib.Tactic.CancelDenoms.derive_trans',{arity:8,terms:[2,3,4,5],labels:['a','b','c','d'],premises:['a = b','c × b = d'],conclusion:'c × a = d'}],
+  ['Mathlib.Tactic.CancelDenoms.sub_subst',{arity:9,terms:[2,3,4,5,6],labels:['n','x','y','u','v'],premises:['n × x = u','n × y = v'],conclusion:'n × (x − y) = u − v'}],
   ['neg_eq_zero',{arity:3,terms:[2],premises:[],conclusion:'−a = 0 ↔ a = 0'}],
   ['Int.add_one_le_iff',{arity:2,terms:[0,1],premises:[],conclusion:'a + 1 ≤ b ↔ a < b'}],
   ['le_of_lt',{arity:5,terms:[2,3],premises:['a < b'],conclusion:'a ≤ b'}],
@@ -625,6 +628,18 @@
     terms.append(el('dt',inference.labels?.[i]||['a','b','c'][i]),value);
    }
    panel.append(inputs,terms);if(fold)panel.append(fold);container.append(panel);
+   if(inference.name==='Mathlib.Tactic.RingNF.add_assoc_rev'){
+    const grouping=el('details'),equation=el('p');
+    grouping.dataset.addGrouping='';
+    grouping.append(el('summary','Show the regrouped sum'));
+    const operand=i=>{
+     const site=inference.terms[i];
+     const operandTree=formula(data,site,3,true),label=caption(operandTree);
+     return link(operandTree.right?'('+label+')':label,site);
+    };
+    equation.append(operand(0),' + (',operand(1),' + ',operand(2),') = (',operand(0),' + ',operand(1),') + ',operand(2));
+    grouping.append(equation);panel.append(grouping);
+   }
    const overview=el('details');overview.dataset.derivationInputs='';
    overview.append(el('summary','Trace this derivation to its inputs'));
    overview.ontoggle=()=>{
