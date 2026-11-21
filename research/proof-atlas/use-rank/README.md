@@ -376,3 +376,18 @@ The [corpus check](check-sharing-corpus.cjs) classifies every repeated applicati
 | Recursion controls | 23 | 11 | 782 | 34 | 20 |
 
 The verifier hashes each compiled index and checks its proof-body occurrence count before classifying its compressed graph. For every body with at most 2,000 expanded occurrences, it also visits every variable and compares the classification row by row. All theorems in these manifests had a body. Definitions and other declaration kinds are outside the denominator. The 14 Goedel proofs complete the available 20-proof sample alongside the six development examples. These are finite corpus measurements; their frequencies do not estimate prevalence in the parent AI dataset. [Per-edition counts and result digests](sharing-corpus.json).
+
+### How often a shared application with changing targets occurs
+
+A repeated application row contributes once for each path to it from the proof root. Counting duplicate child slots separately gives the following exact expanded counts. The percentage uses all application occurrences in the edition as its denominator.
+
+| Edition | Occurrences of applications with changing outer targets | All application occurrences | Share |
+| --- | ---: | ---: | ---: |
+| Published SE(2) | 61,038 | 24,610,408 | 0.248% |
+| Working SE(2) | 12,302,955 | 333,543,830 | 3.689% |
+| Remaining Goedel sample | 184,266 | 6,577,966 | 2.801% |
+| Recursion controls | 2,508,757,194,025,438,550,053 | 6,308,786,473,211,049,034,590 | 39.766% |
+
+Concentration matters. In the working SE(2) edition, `JacobiConcrete.AmplitudeChart.midpoint_polynomial` accounts for 10,781,305 of the 12,302,955 affected occurrences (87.63%). The synthetic `AtlasExamples.shared_induction_64` accounts for over 99.99% of the affected recursion-control occurrences. These totals count possible selections in an expanded tree. Reader behavior and the number of incorrect links under any particular default binder assignment require separate measurements.
+
+The checker propagates exact integer path counts through each compiled graph. It independently sums marked descendants from the leaves to the root for every theorem and explicitly enumerates the small-proof controls. Per-edition results include the largest contributor and its exact source index hash.
