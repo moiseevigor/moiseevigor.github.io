@@ -4,6 +4,13 @@
  const node=typeof module!=='undefined'&&module.exports,A=node?require('./proof-atlas-library-data'):host.ProofAtlasLibraryData,R=node?require('./proof-atlas-recursive-inputs'):host.ProofAtlasRecursiveInputs;
  const demand=(ok,message)=>{if(!ok)throw Error('Binding uses: '+message);};
  const readerBudget=Object.freeze({maxStates:65536,maxDepth:512,maxWork:262144});
+ let wideSignatures;
+ function loadWideSignatures(){
+  if(!wideSignatures)wideSignatures=A.compressed('/public/data/proof-atlas/ai-wide-signatures.json.gz',
+   'ce0ae64b90b1c6b08848bf64c3298d63f62622658c7d8bd5bdb138166bd46c18',{maxBytes:68919,expectedBytes:68919})
+   .catch(error=>{wideSignatures=null;throw error;});
+  return wideSignatures;
+ }
  function describe(data,record,route,options={}){
   demand(data.declaration?.name===record.name&&(data.declaration.sourceSha256===undefined||data.declaration.sourceSha256===record.sourceSha256)&&data.kind.length===record.uniqueNodes&&JSON.stringify(data.declaration.rootPaths)===JSON.stringify(record.rootPaths)&&/^[a-f0-9]{64}$/.test(record.indexSha256)&&/^[a-f0-9]{64}$/.test(record.sourceSha256),'source packet identity');
   const id=A.walk(data,route),kind=A.kinds[data.kind[id]];demand(['lam','forallE','letE'].includes(kind),'selection is not a source binder');
@@ -57,6 +64,12 @@
       config.sourceLink(receiver.label,receiver.call));
      const ports=el('div');ports.className='pl-receiving-ports';
      ports.setAttribute('role','group');ports.setAttribute('aria-label','Compiled application inputs');
+     function inputAt(position){
+      const slots=receiver.call.route.slots.concat(Array(receiver.arity-position).fill(0));
+      if(position)slots.push(1);
+      const route={root:receiver.call.route.root,slots};
+      return {node:A.walk(config.data,route),route};
+     }
      function drawPorts(first,last,focusPosition){
       ports.replaceChildren();
       const positions=new Set([0,1,receiver.slot,receiver.arity]);
@@ -73,13 +86,11 @@
         gap.onclick=()=>drawPorts(start,end,start);
         ports.append(gap);
        }
-       const slots=receiver.call.route.slots.concat(Array(receiver.arity-position).fill(0));
-       if(position)slots.push(1);
-       const portRoute={root:receiver.call.route.root,slots};
-       const port=config.sourceLink(position?String(position):'fn',{node:A.walk(config.data,portRoute),route:portRoute});
+       const target=inputAt(position);
+       const port=config.sourceLink(position?String(position):'fn',target);
        port.setAttribute('aria-label',position?'Argument '+position:'Function');
        if(position===receiver.slot){
-        demand(portRoute.root===route.root && String(slots)===String(route.slots),'selected input address');
+        demand(target.route.root===route.root && String(target.route.slots)===String(route.slots),'selected input address');
         port.setAttribute('aria-current','true');
        }
        ports.append(port);
@@ -91,6 +102,34 @@
      const last=receiver.arity<=7?receiver.arity:Math.min(receiver.arity,receiver.slot+2);
      drawPorts(first,last);
      receiving.append(ports);
+     const ai=host.PROOF_ATLAS_AI_SAMPLE,head=config.data.payloads[receiver.head.node];
+     if(receiver.slot && receiver.arity>=8 && config.data.kind[receiver.head.node]===4 &&
+       ai?.edition.id==='goedel-sample-4331' && ai.edition.declarations.includes(config.record) &&
+       ai.provenance.compiler.includes('819816b2e0a3bf405af45ae5c7af2491d8f5bee6') &&
+       ai.provenance.environment.dependencyRevisions.mathlib==='0df444a360eaa60ab8c11dca51a86af692955474'){
+      const details=el('details'),content=el('div');
+      details.append(el('summary','Declared type of argument '+receiver.slot),content);
+      receiving.append(details);
+      details.ontoggle=async()=>{
+       if(!details.open || content.childNodes.length)return;
+       content.textContent='Loading declaration…';
+       try{
+        const rows=await loadWideSignatures();
+        const signature=rows.find(r=>r.name===head.name && r.levelCount===head.levels.length);
+        const parameters=signature?.parameters;
+        const parameter=parameters?.[receiver.slot-1];
+        if(!parameter){content.textContent='This position has no recorded binder in the declared signature.';return;}
+        const generated=parameter.name.includes('._@.') || parameter.name==='_';
+        content.replaceChildren(el('code',(generated?'':parameter.name+' : ')+parameter.domain));
+        for(let i=receiver.slot;i<Math.min(parameters.length,receiver.arity);i++){
+         if(!parameters[i].dependsOn.includes(receiver.slot))continue;
+         const line=el('p');
+         line.append(config.sourceLink('Argument '+(i+1),inputAt(i+1)),' has declared type ',el('code',parameters[i].domain));
+         content.append(line);
+        }
+       }catch{content.textContent='Declaration unavailable. Close and reopen to retry.';details.addEventListener('toggle',()=>content.replaceChildren(),{once:true});}
+      };
+     }
     }else{
      const parent={root:route.root,slots:route.slots.slice(0,-1)};
      const node=A.walk(config.data,parent),kind=A.kinds[config.data.kind[node]];

@@ -51,6 +51,12 @@ async function checkWideCall(page) {
     }
   }
   assert.equal(seen.size,14);
+  await output.getByText('Declared type of argument 8',{exact:true}).click();
+  const signature=output.locator('details');
+  await signature.getByText('xa₁ : R',{exact:true}).waitFor();
+  const dependent=signature.getByRole('link',{name:'Argument 13',exact:true});
+  assert.match(await dependent.getAttribute('href'),/#expr-2143$/);
+  assert.equal(await signature.locator('p code').textContent(),'xa₁ ^ c₁ * Nat.rawCast 1 = c₃');
 }
 (async()=>{
   const browser=await chromium.launch({executablePath:process.env.ATLAS_CHROMIUM_PATH});
