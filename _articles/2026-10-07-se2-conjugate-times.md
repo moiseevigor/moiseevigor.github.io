@@ -125,7 +125,7 @@ Write $p=2nK+s$. At a root, the determinant gives a quadratic weight multiplying
 
 The [November manuscript](/public/research/se2/conjugate-times-nov22.pdf) gives the proof. The [Lean source and axiom record](/public/research/se2/large-index-law.zip) reproduce the formal check.
 
-The [whole-paper statement review and Lean coverage ledger](/public/research/se2/conjugate-times-review.zip) lists all eleven numbered results and the evidence for 34 claim groups. Of 33 mathematical groups, 20 have full Lean coverage, seven have partial coverage and six retain analytic or external steps. The numerical group is reported separately.
+The [whole-paper statement review and Lean coverage ledger](/public/research/se2/conjugate-times-review.zip) lists all eleven numbered results and the evidence for 34 claim groups. Of 33 mathematical groups, 21 have full Lean coverage, six have partial coverage and six retain analytic or external steps. The numerical group is reported separately.
 
 ### The three bracket endpoints
 
@@ -158,6 +158,12 @@ The interior factor $\alpha-\beta$ is positive, so the reduced Jacobian has the 
 Write $r=\operatorname{sn}^2 u$. At a corner the line term has zero derivative because either $\operatorname{sn}$ or $\operatorname{cn}$ vanishes. At height zero the linear coefficient of the crossing is the negative one-sided derivative of $r$. At height $K$ it is the one-sided derivative of $1-r$. A nonzero coefficient gives a simple crossing in either orientation.
 
 Infinitely many tangencies would have an accumulation point on the closed bracket. Diverging slope excludes that point at a divergent end. In the interior, or through an analytic extension at the other end, accumulation would force the squared slope to equal one throughout the interior. This contradicts the slope hypothesis. The finite set of parameters therefore gives finitely many signed phase classes modulo $2K$. The [Lean sources and whole-paper audit](/public/research/se2/corner-finiteness.zip) include both endpoint alternatives and the ordinary corner limits.
+
+### Why the ordinary cell endpoints are simple
+
+Put $H=\alpha-\beta$. On each closed bracket $H>0$, so $r=-\beta/H$ and $1-r=\alpha/H$. At the Maxwell endpoint and at $b_n$, a different factor of $\beta=f_1\beta_1$ vanishes simply while the other stays nonzero. At the two distinct inner endpoints, exactly one factor of $\operatorname{sn}(p)\alpha_1(p)$ vanishes. The Jacobi derivative gives simplicity at $2nK$, and the indexed alpha-zero derivative gives simplicity at $p_n^\alpha$.
+
+Lemma 3.3 now gives a nonzero one-sided derivative of the scalar crossing. Multiplication by $H$ preserves it, and the reduced Jacobian is differentiable across the endpoint. Its ordinary derivative is therefore nonzero. The outer endpoints stay simple even at the critical modulus. There the two inner endpoints coincide, and the shared root at the matching phase has order four. The [Lean source and declaration audit](/public/research/se2/ordinary-cell-endpoints.zip) cover every indexed cell.
 
 ## The formal proof boundary
 
