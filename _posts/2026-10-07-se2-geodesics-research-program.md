@@ -89,7 +89,7 @@ At one modulus, $k_0\approx0.90890856$, the complete elliptic integrals satisfy 
 
 <div class="l-body" markdown="1">
 
-The paper also derives an exact Floquet form: after an integer number of pendulum periods, the Jacobian is quadratic in that integer. Away from the exceptional phase, this gives an arithmetic-progression law for late conjugate times. It explains regular spacing without assuming the entire endpoint map is periodic: each pendulum period also produces a spatial drift.
+Lean also verifies the [Floquet determinant and its limiting curves](/articles/se2-conjugate-times/#the-floquet-determinant-and-its-limiting-curves): after an integer number of pendulum periods, the Jacobian is quadratic in that integer. Away from the exceptional phase, this gives an arithmetic-progression law for late conjugate times. It explains regular spacing without assuming the entire endpoint map is periodic: each pendulum period also produces a spatial drift.
 
 ## From times to a caustic
 
@@ -163,7 +163,7 @@ For incidence counts, the remaining tasks include controlling the width of the b
 ## The three articles
 
 <div class="se2-articles">
-<section class="se2-article"><small>Article A · manuscript candidate · 16-page snapshot</small><h3><a href="/articles/se2-conjugate-times/">All Conjugate Times of Rotating Geodesics</a></h3><p>The bracket mechanism, the critical exception, the Floquet form and the formal proof of the splitting. Includes the full manuscript PDF.</p></section>
+<section class="se2-article"><small>Article A · manuscript candidate · 30-page manuscript</small><h3><a href="/articles/se2-conjugate-times/">All Conjugate Times of Rotating Geodesics</a></h3><p>The bracket mechanism, the critical exception, the Floquet form and the formal proof of the splitting. Includes the full manuscript PDF.</p></section>
 <section class="se2-article"><small>Article B · research draft · 31-page snapshot</small><h3><a href="/articles/se2-conjugate-locus/">The Conjugate Locus: Folds, Cusps and Incidence</a></h3><p>The image of the singular set, geometric recognition and the exact scope of the count certificate. Includes the full manuscript PDF.</p></section>
 <section class="se2-article"><small>Article C · manuscript candidate · 75-page snapshot</small><h3><a href="/articles/se2-geodesic-counts/">Inverting the Exponential Map and Counting Geodesics</a></h3><p>The scalar inverse, winding classes, exact ray counts and the stated asymptotic regimes. Includes the full manuscript PDF.</p></section>
 </div>
