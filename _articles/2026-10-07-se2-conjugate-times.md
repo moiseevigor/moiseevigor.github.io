@@ -125,7 +125,7 @@ Write $p=2nK+s$. At a root, the determinant gives a quadratic weight multiplying
 
 The [November manuscript](/public/research/se2/conjugate-times-nov22.pdf) gives the proof. The [Lean source and axiom record](/public/research/se2/large-index-law.zip) reproduce the formal check.
 
-The [whole-paper statement review and Lean coverage ledger](/public/research/se2/conjugate-times-review.zip) lists all eleven numbered results and the evidence for 34 claim groups. Of 33 mathematical groups, 19 have full Lean coverage, eight have partial coverage and six retain analytic or external steps. The numerical group is reported separately.
+The [whole-paper statement review and Lean coverage ledger](/public/research/se2/conjugate-times-review.zip) lists all eleven numbered results and the evidence for 34 claim groups. Of 33 mathematical groups, 20 have full Lean coverage, seven have partial coverage and six retain analytic or external steps. The numerical group is reported separately.
 
 ### The three bracket endpoints
 
@@ -151,7 +151,13 @@ This proves the slope bound and identifies every equality point. At each such po
 
 At an interior crossing, the line has slope one and the signed phase difference has derivative $\sigma u^{\prime}-1$. Thus only the sign with $\sigma u^{\prime}=1$ can be tangent. For a general analytic lift the first nonzero term of that phase difference has odd order at least three. On the rotating SE(2) brackets, Riccati equality gives the exact order. At equality $H=T_1-T_2$ has a simple zero. The slope deficit is $H^2$ times a continuous positive factor, so integrating it gives a cubic term with nonzero coefficient. The opposite signed branch has derivative $-2$ at the same parameter, for its own crossing phase.
 
-The interior factor $\alpha-\beta$ is positive, so the reduced Jacobian has the same simple or cubic order as the scalar crossing equation. The [Lean proof and whole-paper audit](/public/research/se2/signed-crossing-order.zip) cover both branches and every phase representative modulo $2K$. The ordinary corner cases and the general finiteness assertion at the endpoints retain their written proofs.
+The interior factor $\alpha-\beta$ is positive, so the reduced Jacobian has the same simple or cubic order as the scalar crossing equation. The [Lean proof and whole-paper audit](/public/research/se2/signed-crossing-order.zip) cover both branches and every phase representative modulo $2K$.
+
+### Ordinary corners and finite tangency phases
+
+Write $r=\operatorname{sn}^2 u$. At a corner the line term has zero derivative because either $\operatorname{sn}$ or $\operatorname{cn}$ vanishes. At height zero the linear coefficient of the crossing is the negative one-sided derivative of $r$. At height $K$ it is the one-sided derivative of $1-r$. A nonzero coefficient gives a simple crossing in either orientation.
+
+Infinitely many tangencies would have an accumulation point on the closed bracket. Diverging slope excludes that point at a divergent end. In the interior, or through an analytic extension at the other end, accumulation would force the squared slope to equal one throughout the interior. This contradicts the slope hypothesis. The finite set of parameters therefore gives finitely many signed phase classes modulo $2K$. The [Lean sources and whole-paper audit](/public/research/se2/corner-finiteness.zip) include both endpoint alternatives and the ordinary corner limits.
 
 ## The formal proof boundary
 
