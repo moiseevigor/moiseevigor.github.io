@@ -125,7 +125,7 @@ Write $p=2nK+s$. At a root, the determinant gives a quadratic weight multiplying
 
 The [November manuscript](/public/research/se2/conjugate-times-nov22.pdf) gives the proof. The [Lean source and axiom record](/public/research/se2/large-index-law.zip) reproduce the formal check.
 
-The [whole-paper statement review and Lean coverage ledger](/public/research/se2/conjugate-times-review.zip) lists all eleven numbered results and the evidence for 34 claim groups. Of 33 mathematical groups, 22 have full Lean coverage, five have partial coverage and six retain analytic or external steps. The numerical group is reported separately.
+The [whole-paper statement review and Lean coverage ledger](/public/research/se2/conjugate-times-review.zip) lists all eleven numbered results and the evidence for 34 claim groups. Of 33 mathematical groups, 23 have full Lean coverage, four have partial coverage and six retain analytic or external steps. The numerical group is reported separately.
 
 ### The three bracket endpoints
 
@@ -170,6 +170,12 @@ Lemma 3.3 now gives a nonzero one-sided derivative of the scalar crossing. Multi
 Each closed bracket contains a unique root. A common root must belong to their intersection, which is empty unless $K=2E$. At that modulus the brackets meet only at $P=2nK$. There the reduced Jacobian is $\beta(P)\operatorname{cn}^2(\psi+P)$ with $\beta(P)<0$. Since $P$ is a multiple of $2K$, the center is a root precisely when $\psi\equiv K\pmod{2K}$.
 
 At that phase, uniqueness on each bracket identifies both roots with $P$. The half-open cell therefore contains one distinct time, of order four. Every other modulus–phase pair gives two distinct times, including every other phase at the critical modulus. The [Lean proof and whole-paper audit](/public/research/se2/exact-cell-count.zip) include the exact cardinality and the exceptional singleton.
+
+### Counting interior tangencies
+
+An interior tangency occurs where the lift has unit slope in absolute value. To count these points, put $s=\operatorname{sn}(p)$, $d=\operatorname{dn}(p)$ and $P=2nK$. The Riccati equality expression $H=T_1-T_2$ vanishes at interior tangencies. The function $G=H\ell^2/(sd^5)$ extends continuously through $P$. Its derivative has the sign of $-as$, so $G$ strictly decreases to $P$ and strictly increases after it.
+
+The minimum is $G(P)=2n(2E-K)\ell(P)/d(P)^2$. Below the critical modulus the minimum is positive. At the critical modulus it is zero only at the shared endpoint. Neither case has an interior tangency. Above the critical modulus, $G$ is positive at the two outer endpoints and negative at the two inner endpoints. Each open bracket therefore contains exactly one tangency. The matching phase is $u(p_t)-p_t$ on the left and $-u(p_t)-p_t$ on the right, modulo $2K$. Both contacts are cubic. The [Lean source and declaration audit](/public/research/se2/interior-tangencies.zip) cover every indexed cell.
 
 ## The formal proof boundary
 
