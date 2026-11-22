@@ -26,7 +26,7 @@ description: >
 
 <div class="l-body" markdown="1">
 
-<div class="se2-review"><strong>Conjugate-times update · 22 November 2026.</strong> This guide accompanies three author manuscripts on rotating geodesics. The linked PDFs preserve the October web edition. The conjugate-times section also reports subsequent results checked in Lean.</div>
+<div class="se2-review"><strong>Conjugate-times proofread · 23 November 2026.</strong> This guide accompanies three author manuscripts on rotating geodesics. The linked PDFs preserve the October web edition. The conjugate-times section also reports subsequent results checked in Lean.</div>
 
 A point in the plane is not enough to describe a moving vehicle. We also need its heading. Write its state as $(x,y,\theta)$: a position and an angle. Together these states form **SE(2), the group of plane motions**.
 
@@ -89,7 +89,7 @@ At one modulus, $k_0\approx0.90890856$, the complete elliptic integrals satisfy 
 
 <div class="l-body" markdown="1">
 
-Lean also verifies the [Floquet determinant and its limiting curves](/articles/se2-conjugate-times/#the-floquet-determinant-and-its-limiting-curves): after an integer number of pendulum periods, the Jacobian is quadratic in that integer. Away from the exceptional phase, this gives an arithmetic-progression law for late conjugate times. It explains regular spacing without assuming the entire endpoint map is periodic: each pendulum period also produces a spatial drift. At the [exceptional phase](/articles/se2-conjugate-times/#ordering-the-exceptional-phase-roots), Lean verifies which root comes first on either side of the critical modulus and why the two coincide at criticality.
+Lean also verifies the [Floquet determinant and its limiting curves](/articles/se2-conjugate-times/#the-floquet-determinant-and-its-limiting-curves): after an integer number of pendulum periods, the Jacobian is a polynomial of degree at most two in that integer. Away from the exceptional phase, this gives an arithmetic-progression law for late conjugate times. It explains regular spacing without assuming the entire endpoint map is periodic: each pendulum period also produces a spatial drift. At the [exceptional phase](/articles/se2-conjugate-times/#ordering-the-exceptional-phase-roots), Lean verifies which root comes first on either side of the critical modulus and why the two coincide at criticality.
 
 ## From times to a caustic
 

@@ -20,7 +20,7 @@ manuscript_status: "manuscript candidate; final review open"
 
 <div class="se2-review"><strong>Author manuscript · manuscript candidate; final review open.</strong> This web companion states the principal results and explains their arguments. The complete hypotheses, detailed proofs, figures and bibliography are in the full manuscript linked below. The November updates cover the fixed-cell splitting, the bracket endpoints, coefficient sign chart and exact Riccati slope deficit.</div>
 
-<div class="se2-manuscript"><a href="/public/research/se2/conjugate_times_se2.pdf">Read the full manuscript · 16 pages</a><a href="/public/research/se2/conjugate_times_se2.tex">TeX snapshot</a><a href="/mathematics/2026/10/07/se2-geodesics-research-program/">The SE(2) program</a></div>
+<div class="se2-manuscript"><a href="/public/research/se2/conjugate-times-nov23.pdf">Read the proofread manuscript · 30 pages</a><a href="/public/research/se2/conjugate_times_se2.tex">October TeX snapshot</a><a href="/mathematics/2026/10/07/se2-geodesics-research-program/">The SE(2) program</a></div>
 
 
 ## The problem and its normalization
@@ -123,9 +123,9 @@ Fix a compact range of interior moduli and keep the normalized phase a positive 
 
 Write $p=2nK+s$. At a root, the determinant gives a quadratic weight multiplying $\operatorname{cn}\psi\,\operatorname{cn}(\psi+2s)$. The remainder grows at most linearly in $n$, and stays bounded when $K=2E$. Thus the terminal angular speed tends to zero at the corresponding rate. The left bracket picks the simple zero at $-K$ and the right bracket picks $K$. Solving for $s$ gives the two offsets and the cell count gives their ranks.
 
-The [November manuscript](/public/research/se2/conjugate-times-nov22.pdf) gives the proof. The [Lean source and axiom record](/public/research/se2/large-index-law.zip) reproduce the formal check.
+The [November manuscript](/public/research/se2/conjugate-times-nov23.pdf) gives the proof. The [Lean source and axiom record](/public/research/se2/large-index-law.zip) reproduce the formal check.
 
-The [whole-paper statement review and Lean coverage ledger](/public/research/se2/conjugate-times-review.zip) lists all eleven numbered results and the evidence for 34 claim groups. Of 33 mathematical groups, 27 have full Lean coverage, one has partial coverage and five retain analytic or external steps. The numerical group is reported separately.
+The 23 November proofread covers all eleven numbered results. The Floquet determinant has degree at most two in the period index, and the late scaled times approach an arithmetic progression. The [whole-paper statement review and Lean coverage ledger](/public/research/se2/conjugate-times-review.zip) lists all eleven numbered results and the evidence for 34 claim groups. Of 33 mathematical groups, 27 have full Lean coverage, one has partial coverage and five retain analytic or external steps. The numerical group is reported separately.
 
 ### The three bracket endpoints
 
@@ -149,7 +149,7 @@ This proves the slope bound and identifies every equality point. At each such po
 
 ### Which branch has a cubic crossing?
 
-At an interior crossing, the line has slope one and the signed phase difference has derivative $\sigma u^{\prime}-1$. Thus only the sign with $\sigma u^{\prime}=1$ can be tangent. For a general analytic lift the first nonzero term of that phase difference has odd order at least three. On the rotating SE(2) brackets, Riccati equality gives the exact order. At equality $H=T_1-T_2$ has a simple zero. The slope deficit is $H^2$ times a continuous positive factor, so integrating it gives a cubic term with nonzero coefficient. The opposite signed branch has derivative $-2$ at the same parameter, for its own crossing phase.
+At an interior crossing, the line has slope one and the signed phase difference has derivative $\sigma u^{\prime}-1$. Thus only the sign with $\sigma u^{\prime}=1$ can be tangent. At such a tangency of a general analytic lift, the first nonzero term of that phase difference has odd order at least three. On the rotating SE(2) brackets, Riccati equality gives the exact order. At equality $H=T_1-T_2$ has a simple zero. The slope deficit is $H^2$ times a continuous positive factor, so integrating it gives a cubic term with nonzero coefficient. The opposite signed branch has derivative $-2$ at the same parameter, for its own crossing phase.
 
 The interior factor $\alpha-\beta$ is positive, so the reduced Jacobian has the same simple or cubic order as the scalar crossing equation. The [Lean proof and whole-paper audit](/public/research/se2/signed-crossing-order.zip) cover both branches and every phase representative modulo $2K$.
 
@@ -161,9 +161,9 @@ Infinitely many tangencies would have an accumulation point on the closed bracke
 
 ### Why the ordinary cell endpoints are simple
 
-Put $H=\alpha-\beta$. On each closed bracket $H>0$, so $r=-\beta/H$ and $1-r=\alpha/H$. At the Maxwell endpoint and at $b_n$, a different factor of $\beta=f_1\beta_1$ vanishes simply while the other stays nonzero. At the two distinct inner endpoints, exactly one factor of $\operatorname{sn}(p)\alpha_1(p)$ vanishes. The Jacobi derivative gives simplicity at $2nK$, and the indexed alpha-zero derivative gives simplicity at $p_n^\alpha$.
+On each closed bracket $\ell\mathsf D=\alpha-\beta>0$, so $r=-\beta/(\ell\mathsf D)$ and $1-r=\alpha/(\ell\mathsf D)$. At the Maxwell endpoint and at $b_n$, a different factor of $\beta=f_1\beta_1$ vanishes simply while the other stays nonzero. At the two distinct inner endpoints, exactly one factor of $\operatorname{sn}(p)\alpha_1(p)$ vanishes. The Jacobi derivative gives simplicity at $2nK$, and the indexed alpha-zero derivative gives simplicity at $p_n^\alpha$.
 
-Lemma 3.3 now gives a nonzero one-sided derivative of the scalar crossing. Multiplication by $H$ preserves it, and the reduced Jacobian is differentiable across the endpoint. Its ordinary derivative is therefore nonzero. The outer endpoints stay simple even at the critical modulus. There the two inner endpoints coincide, and the shared root at the matching phase has order four. The [Lean source and declaration audit](/public/research/se2/ordinary-cell-endpoints.zip) cover every indexed cell.
+Lemma 3.3 now gives a nonzero one-sided derivative of the scalar crossing. Multiplication by $\ell\mathsf D$ preserves it, and the reduced Jacobian is differentiable across the endpoint. Its ordinary derivative is therefore nonzero. The outer endpoints stay simple even at the critical modulus. There the two inner endpoints coincide, and the shared root at the matching phase has order four. The [Lean source and declaration audit](/public/research/se2/ordinary-cell-endpoints.zip) cover every indexed cell.
 
 ### When the two bracket roots coincide
 
@@ -201,7 +201,7 @@ For the exceptional phase, Lean verifies the unique critical modulus, the scalar
 
 ## Status and sources
 
-The original 16-page PDF is the October snapshot. The November manuscript linked above contains the revised proof. The 22 November 2026 update includes the full coefficient sign chart and the nonzero derivative of the indexed alpha endpoint. The [coefficient sign chart sources](/public/research/se2/coefficient-sign-chart.zip) reproduce the endpoint check. The [Riccati proof sources](/public/research/se2/riccati-deficit.zip) reproduce Lemma 3.2. Peer review remains open.
+The [original 16-page PDF](/public/research/se2/conjugate_times_se2.pdf) is the October snapshot. The November manuscript linked above contains the revised proof. The 22 November 2026 update includes the full coefficient sign chart and the nonzero derivative of the indexed alpha endpoint. The [coefficient sign chart sources](/public/research/se2/coefficient-sign-chart.zip) reproduce the endpoint check. The [Riccati proof sources](/public/research/se2/riccati-deficit.zip) reproduce Lemma 3.2. Peer review remains open.
 
 Foundational sources are Moiseev–Sachkov's [Maxwell-strata paper](https://doi.org/10.1051/cocv/2009004) and Sachkov's [conjugate/cut-time paper](https://doi.org/10.1051/cocv/2009031). Complete citations and statement locators are in the PDF. The project-local literature catalogue preserves its reading and edition limits.
 
