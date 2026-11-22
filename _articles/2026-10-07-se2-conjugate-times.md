@@ -18,7 +18,7 @@ manuscript_status: "manuscript candidate; final review open"
 
 <div class="l-body" markdown="1">
 
-<div class="se2-review"><strong>Author manuscript · manuscript candidate; final review open.</strong> This web companion states the principal results and explains their arguments. The complete hypotheses, detailed proofs, figures and bibliography are in the full manuscript linked below. The November update below includes the subsequent formal proof of the fixed-cell splitting.</div>
+<div class="se2-review"><strong>Author manuscript · manuscript candidate; final review open.</strong> This web companion states the principal results and explains their arguments. The complete hypotheses, detailed proofs, figures and bibliography are in the full manuscript linked below. The November updates cover the fixed-cell splitting, the bracket endpoints and the coefficient sign chart.</div>
 
 <div class="se2-manuscript"><a href="/public/research/se2/conjugate_times_se2.pdf">Read the full manuscript · 16 pages</a><a href="/public/research/se2/conjugate_times_se2.tex">TeX snapshot</a><a href="/mathematics/2026/10/07/se2-geodesics-research-program/">The SE(2) program</a></div>
 
@@ -123,9 +123,9 @@ Fix a compact range of interior moduli and keep the normalized phase a positive 
 
 Write $p=2nK+s$. At a root, the determinant gives a quadratic weight multiplying $\operatorname{cn}\psi\,\operatorname{cn}(\psi+2s)$. The remainder grows at most linearly in $n$, and stays bounded when $K=2E$. Thus the terminal angular speed tends to zero at the corresponding rate. The left bracket picks the simple zero at $-K$ and the right bracket picks $K$. Solving for $s$ gives the two offsets and the cell count gives their ranks.
 
-The [November manuscript](/public/research/se2/conjugate-times-nov21.pdf) gives the proof. The [Lean source and axiom record](/public/research/se2/large-index-law.zip) reproduce the formal check.
+The [November manuscript](/public/research/se2/conjugate-times-nov22.pdf) gives the proof. The [Lean source and axiom record](/public/research/se2/large-index-law.zip) reproduce the formal check.
 
-The [whole-paper statement review and Lean coverage ledger](/public/research/se2/conjugate-times-review.zip) lists all eleven numbered results and the evidence for 34 claim groups. Of 33 mathematical groups, 16 have full Lean coverage, 11 have partial coverage and six retain analytic or external steps. The numerical group is reported separately.
+The [whole-paper statement review and Lean coverage ledger](/public/research/se2/conjugate-times-review.zip) lists all eleven numbered results and the evidence for 34 claim groups. Of 33 mathematical groups, 17 have full Lean coverage, 10 have partial coverage and six retain analytic or external steps. The numerical group is reported separately.
 
 ### The three bracket endpoints
 
@@ -135,6 +135,12 @@ $$\frac{1}{2n(K-E)},\qquad -\frac{1}{2nE},\qquad \frac{2E-K}{2nE(K-E)}.$$
 
 The errors are bounded by $C/n^2$ with one constant for all three endpoints on each compact interior modulus set. The alpha correction changes sign at $K=2E$, where that endpoint is exactly the center. After shifting by a half-period multiple, each endpoint equation first places the root within order $1/n$ of a simple Jacobi zero. One Taylor expansion then gives the coefficient and the quadratic error. The [proof and its axiom audit](/public/research/se2/bracket-endpoints.zip) include the identification of the indexed alpha root.
 
+### Why the alpha endpoint is simple
+
+The indexed zero $a=p_n^\alpha$ lies strictly between the Maxwell and beta zeros. At $a$, differentiating $\alpha_1=\operatorname{dn}(\alpha_1/\operatorname{dn})$ gives
+$$\alpha_1'(a)=-\frac{\epsilon(a) f_1(a)}{\operatorname{dn}(a)}.$$
+Both $\epsilon(a)$ and $\operatorname{dn}(a)$ are positive, and $f_1$ has a fixed nonzero sign inside its cell. Thus the derivative is nonzero even at the critical modulus. The signed quotient $(-1)^{n+1}\alpha_1/\operatorname{dn}$ decreases through zero, which gives the signs on both sides. The [Lean proof and whole-paper axiom audit](/public/research/se2/coefficient-sign-chart.zip) include the initial interval and all modulus regimes.
+
 ## The formal proof boundary
 
 The November development constructs the Jacobi functions by inverting the elliptic integral and proves the first-time and noncritical counting theorems for these concrete functions. It also identifies the signed determinant of the actual rectified endpoint map and proves that this determinant has degree at most two in the period index.
@@ -143,7 +149,7 @@ For the exceptional phase, Lean verifies the unique critical modulus, the scalar
 
 ## Status and sources
 
-The original 16-page PDF is the October snapshot. The November manuscript linked above contains the revised proof. This companion was updated on 21 November 2026 after checking the combined Lean build and the axiom dependencies of the splitting result. The [proof sources and verification record](/public/research/se2/fixed-cell-splitting.zip) reproduce that check. Peer review remains open.
+The original 16-page PDF is the October snapshot. The November manuscript linked above contains the revised proof. The 22 November 2026 update includes the full coefficient sign chart and the nonzero derivative of the indexed alpha endpoint. The [proof sources and verification record](/public/research/se2/fixed-cell-splitting.zip) reproduce that check. Peer review remains open.
 
 Foundational sources are Moiseev–Sachkov's [Maxwell-strata paper](https://doi.org/10.1051/cocv/2009004) and Sachkov's [conjugate/cut-time paper](https://doi.org/10.1051/cocv/2009031). Complete citations and statement locators are in the PDF. The project-local literature catalogue preserves its reading and edition limits.
 
