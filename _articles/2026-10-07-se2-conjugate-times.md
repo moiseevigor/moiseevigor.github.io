@@ -125,7 +125,7 @@ Write $p=2nK+s$. At a root, the determinant gives a quadratic weight multiplying
 
 The [November manuscript](/public/research/se2/conjugate-times-nov22.pdf) gives the proof. The [Lean source and axiom record](/public/research/se2/large-index-law.zip) reproduce the formal check.
 
-The [whole-paper statement review and Lean coverage ledger](/public/research/se2/conjugate-times-review.zip) lists all eleven numbered results and the evidence for 34 claim groups. Of 33 mathematical groups, 21 have full Lean coverage, six have partial coverage and six retain analytic or external steps. The numerical group is reported separately.
+The [whole-paper statement review and Lean coverage ledger](/public/research/se2/conjugate-times-review.zip) lists all eleven numbered results and the evidence for 34 claim groups. Of 33 mathematical groups, 22 have full Lean coverage, five have partial coverage and six retain analytic or external steps. The numerical group is reported separately.
 
 ### The three bracket endpoints
 
@@ -165,9 +165,15 @@ Put $H=\alpha-\beta$. On each closed bracket $H>0$, so $r=-\beta/H$ and $1-r=\al
 
 Lemma 3.3 now gives a nonzero one-sided derivative of the scalar crossing. Multiplication by $H$ preserves it, and the reduced Jacobian is differentiable across the endpoint. Its ordinary derivative is therefore nonzero. The outer endpoints stay simple even at the critical modulus. There the two inner endpoints coincide, and the shared root at the matching phase has order four. The [Lean source and declaration audit](/public/research/se2/ordinary-cell-endpoints.zip) cover every indexed cell.
 
+### When the two bracket roots coincide
+
+Each closed bracket contains a unique root. A common root must belong to their intersection, which is empty unless $K=2E$. At that modulus the brackets meet only at $P=2nK$. There the reduced Jacobian is $\beta(P)\operatorname{cn}^2(\psi+P)$ with $\beta(P)<0$. Since $P$ is a multiple of $2K$, the center is a root precisely when $\psi\equiv K\pmod{2K}$.
+
+At that phase, uniqueness on each bracket identifies both roots with $P$. The half-open cell therefore contains one distinct time, of order four. Every other modulus–phase pair gives two distinct times, including every other phase at the critical modulus. The [Lean proof and whole-paper audit](/public/research/se2/exact-cell-count.zip) include the exact cardinality and the exceptional singleton.
+
 ## The formal proof boundary
 
-The November development constructs the Jacobi functions by inverting the elliptic integral and proves the first-time and noncritical counting theorems for these concrete functions. It also identifies the signed determinant of the actual rectified endpoint map and proves that this determinant has degree at most two in the period index.
+The November development constructs the Jacobi functions by inverting the elliptic integral and proves the first-time and exact cell-count theorems for these concrete functions. It also identifies the signed determinant of the actual rectified endpoint map and proves that this determinant has degree at most two in the period index.
 
 For the exceptional phase, Lean verifies the unique critical modulus, the scalar fourth-order coefficient and the fixed-cell splitting formula above, including its fifth-order error bound and local uniqueness. Lean also verifies the ordered-root estimate, joint compact uniformity and the improved rate at the critical modulus. Lean now verifies the bracket endpoint expansions as well. The variational index theorem and geometric fold recognition retain analytic steps.
 
