@@ -147,6 +147,12 @@ On the open interval of Lemma 3.2, the Riccati terms have the same sign and thei
 $$|u'|=\frac{x^2+v^2}{2xv},\qquad |u'|-1=\frac{(x-v)^2}{2xv}.$$
 This proves the slope bound and identifies every equality point. At each such point the derivative of $H=T_1-T_2$ is nonzero. The [Lean sources and verification record](/public/research/se2/riccati-deficit.zip) cover the original open domain. The whole-paper review includes a checker that flags a changed statement or proof for a fresh elegance assessment.
 
+### Which branch has a cubic crossing?
+
+At an interior crossing, the line has slope one and the signed phase difference has derivative $\sigma u^{\prime}-1$. Thus only the sign with $\sigma u^{\prime}=1$ can be tangent. For a general analytic lift the first nonzero term of that phase difference has odd order at least three. On the rotating SE(2) brackets, Riccati equality gives the exact order. At equality $H=T_1-T_2$ has a simple zero. The slope deficit is $H^2$ times a continuous positive factor, so integrating it gives a cubic term with nonzero coefficient. The opposite signed branch has derivative $-2$ at the same parameter, for its own crossing phase.
+
+The interior factor $\alpha-\beta$ is positive, so the reduced Jacobian has the same simple or cubic order as the scalar crossing equation. The [Lean proof and whole-paper audit](/public/research/se2/signed-crossing-order.zip) cover both branches and every phase representative modulo $2K$. The ordinary corner cases and the general finiteness assertion at the endpoints retain their written proofs.
+
 ## The formal proof boundary
 
 The November development constructs the Jacobi functions by inverting the elliptic integral and proves the first-time and noncritical counting theorems for these concrete functions. It also identifies the signed determinant of the actual rectified endpoint map and proves that this determinant has degree at most two in the period index.
