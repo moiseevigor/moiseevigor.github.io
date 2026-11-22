@@ -18,7 +18,7 @@ manuscript_status: "manuscript candidate; final review open"
 
 <div class="l-body" markdown="1">
 
-<div class="se2-review"><strong>Author manuscript · manuscript candidate; final review open.</strong> This web companion states the principal results and explains their arguments. The complete hypotheses, detailed proofs, figures and bibliography are in the full manuscript linked below. The November updates cover the fixed-cell splitting, the bracket endpoints and the coefficient sign chart.</div>
+<div class="se2-review"><strong>Author manuscript · manuscript candidate; final review open.</strong> This web companion states the principal results and explains their arguments. The complete hypotheses, detailed proofs, figures and bibliography are in the full manuscript linked below. The November updates cover the fixed-cell splitting, the bracket endpoints, coefficient sign chart and exact Riccati slope deficit.</div>
 
 <div class="se2-manuscript"><a href="/public/research/se2/conjugate_times_se2.pdf">Read the full manuscript · 16 pages</a><a href="/public/research/se2/conjugate_times_se2.tex">TeX snapshot</a><a href="/mathematics/2026/10/07/se2-geodesics-research-program/">The SE(2) program</a></div>
 
@@ -125,7 +125,7 @@ Write $p=2nK+s$. At a root, the determinant gives a quadratic weight multiplying
 
 The [November manuscript](/public/research/se2/conjugate-times-nov22.pdf) gives the proof. The [Lean source and axiom record](/public/research/se2/large-index-law.zip) reproduce the formal check.
 
-The [whole-paper statement review and Lean coverage ledger](/public/research/se2/conjugate-times-review.zip) lists all eleven numbered results and the evidence for 34 claim groups. Of 33 mathematical groups, 17 have full Lean coverage, 10 have partial coverage and six retain analytic or external steps. The numerical group is reported separately.
+The [whole-paper statement review and Lean coverage ledger](/public/research/se2/conjugate-times-review.zip) lists all eleven numbered results and the evidence for 34 claim groups. Of 33 mathematical groups, 19 have full Lean coverage, eight have partial coverage and six retain analytic or external steps. The numerical group is reported separately.
 
 ### The three bracket endpoints
 
@@ -141,6 +141,12 @@ The indexed zero $a=p_n^\alpha$ lies strictly between the Maxwell and beta zeros
 $$\alpha_1'(a)=-\frac{\epsilon(a) f_1(a)}{\operatorname{dn}(a)}.$$
 Both $\epsilon(a)$ and $\operatorname{dn}(a)$ are positive, and $f_1$ has a fixed nonzero sign inside its cell. Thus the derivative is nonzero even at the critical modulus. The signed quotient $(-1)^{n+1}\alpha_1/\operatorname{dn}$ decreases through zero, which gives the signs on both sides. The [Lean proof and whole-paper axiom audit](/public/research/se2/coefficient-sign-chart.zip) include the initial interval and all modulus regimes.
 
+### Equality in the Riccati slope bound
+
+On the open interval of Lemma 3.2, the Riccati terms have the same sign and their product is positive. Write $x=\sqrt{|T_1|}$ and $v=\sqrt{|T_2|}$. The derivative of the phase lift then satisfies
+$$|u'|=\frac{x^2+v^2}{2xv},\qquad |u'|-1=\frac{(x-v)^2}{2xv}.$$
+This proves the slope bound and identifies every equality point. At each such point the derivative of $H=T_1-T_2$ is nonzero. The [Lean sources and verification record](/public/research/se2/riccati-deficit.zip) cover the original open domain. The whole-paper review includes a checker that flags a changed statement or proof for a fresh elegance assessment.
+
 ## The formal proof boundary
 
 The November development constructs the Jacobi functions by inverting the elliptic integral and proves the first-time and noncritical counting theorems for these concrete functions. It also identifies the signed determinant of the actual rectified endpoint map and proves that this determinant has degree at most two in the period index.
@@ -149,7 +155,7 @@ For the exceptional phase, Lean verifies the unique critical modulus, the scalar
 
 ## Status and sources
 
-The original 16-page PDF is the October snapshot. The November manuscript linked above contains the revised proof. The 22 November 2026 update includes the full coefficient sign chart and the nonzero derivative of the indexed alpha endpoint. The [proof sources and verification record](/public/research/se2/fixed-cell-splitting.zip) reproduce that check. Peer review remains open.
+The original 16-page PDF is the October snapshot. The November manuscript linked above contains the revised proof. The 22 November 2026 update includes the full coefficient sign chart and the nonzero derivative of the indexed alpha endpoint. The [coefficient sign chart sources](/public/research/se2/coefficient-sign-chart.zip) reproduce the endpoint check. The [Riccati proof sources](/public/research/se2/riccati-deficit.zip) reproduce Lemma 3.2. Peer review remains open.
 
 Foundational sources are Moiseev–Sachkov's [Maxwell-strata paper](https://doi.org/10.1051/cocv/2009004) and Sachkov's [conjugate/cut-time paper](https://doi.org/10.1051/cocv/2009031). Complete citations and statement locators are in the PDF. The project-local literature catalogue preserves its reading and edition limits.
 
