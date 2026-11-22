@@ -89,7 +89,7 @@ At one modulus, $k_0\approx0.90890856$, the complete elliptic integrals satisfy 
 
 <div class="l-body" markdown="1">
 
-Lean also verifies the [Floquet determinant and its limiting curves](/articles/se2-conjugate-times/#the-floquet-determinant-and-its-limiting-curves): after an integer number of pendulum periods, the Jacobian is quadratic in that integer. Away from the exceptional phase, this gives an arithmetic-progression law for late conjugate times. It explains regular spacing without assuming the entire endpoint map is periodic: each pendulum period also produces a spatial drift.
+Lean also verifies the [Floquet determinant and its limiting curves](/articles/se2-conjugate-times/#the-floquet-determinant-and-its-limiting-curves): after an integer number of pendulum periods, the Jacobian is quadratic in that integer. Away from the exceptional phase, this gives an arithmetic-progression law for late conjugate times. It explains regular spacing without assuming the entire endpoint map is periodic: each pendulum period also produces a spatial drift. At the [exceptional phase](/articles/se2-conjugate-times/#ordering-the-exceptional-phase-roots), Lean verifies which root comes first on either side of the critical modulus and why the two coincide at criticality.
 
 ## From times to a caustic
 

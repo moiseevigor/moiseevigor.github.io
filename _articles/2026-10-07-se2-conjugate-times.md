@@ -125,7 +125,7 @@ Write $p=2nK+s$. At a root, the determinant gives a quadratic weight multiplying
 
 The [November manuscript](/public/research/se2/conjugate-times-nov22.pdf) gives the proof. The [Lean source and axiom record](/public/research/se2/large-index-law.zip) reproduce the formal check.
 
-The [whole-paper statement review and Lean coverage ledger](/public/research/se2/conjugate-times-review.zip) lists all eleven numbered results and the evidence for 34 claim groups. Of 33 mathematical groups, 25 have full Lean coverage, two have partial coverage and six retain analytic or external steps. The numerical group is reported separately.
+The [whole-paper statement review and Lean coverage ledger](/public/research/se2/conjugate-times-review.zip) lists all eleven numbered results and the evidence for 34 claim groups. Of 33 mathematical groups, 27 have full Lean coverage, one has partial coverage and five retain analytic or external steps. The numerical group is reported separately.
 
 ### The three bracket endpoints
 
@@ -170,6 +170,16 @@ Lemma 3.3 now gives a nonzero one-sided derivative of the scalar crossing. Multi
 Each closed bracket contains a unique root. A common root must belong to their intersection, which is empty unless $K=2E$. At that modulus the brackets meet only at $P=2nK$. There the reduced Jacobian is $\beta(P)\operatorname{cn}^2(\psi+P)$ with $\beta(P)<0$. Since $P$ is a multiple of $2K$, the center is a root precisely when $\psi\equiv K\pmod{2K}$.
 
 At that phase, uniqueness on each bracket identifies both roots with $P$. The half-open cell therefore contains one distinct time, of order four. Every other modulus–phase pair gives two distinct times, including every other phase at the critical modulus. The [Lean proof and whole-paper audit](/public/research/se2/exact-cell-count.zip) include the exact cardinality and the exceptional singleton.
+
+### Ordering the exceptional-phase roots
+
+At the exceptional phase $\psi\equiv K\pmod{2K}$, every cell $n\ge 1$ has the center root $P=2nK$. The other bracket root is $P+h_n$, where the signed offset is the unique solution in $(-K,K)$ of
+$$
+\int_0^{h_n}\frac{\operatorname{sn}^2 v\,\operatorname{dn}^2 v}{\operatorname{cn}^2 v}\,dv=2n(2E-K).
+$$
+The integral is odd and strictly increasing. Below the critical modulus the offset is positive, so the center has rank $2n-1$. Above it the offset is negative, so the center has rank $2n$. In both noncritical cases the roots are simple. At the critical modulus the brackets share the center, which has rank $n$ among distinct positive roots.
+
+The magnitude of the offset also has a single estimate on either side. Set $x=\lvert h_n\rvert$ and $D=2\lvert 2E-K\rvert$. Multiplying the integral equation by $\operatorname{cn}x$ removes its pole. The resulting equation gives $K-x=1/(nD)+O(n^{-2})$, uniformly on compact modulus sets avoiding $0$, $k_0$ and $1$. The [Lean proof and declaration audit](/public/research/se2/exceptional-phase.zip) reproduce both parts of Remark 5.2.
 
 ### The Floquet determinant and its limiting curves
 
